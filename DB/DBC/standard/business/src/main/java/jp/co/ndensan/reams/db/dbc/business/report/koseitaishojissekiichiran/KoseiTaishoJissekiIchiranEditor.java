@@ -88,7 +88,7 @@ public class KoseiTaishoJissekiIchiranEditor implements
         }
 
         source.listKyufuJisseki_3 = entity.get氏名();
-        if (entity.get年度().wareki() != null) {
+        if (entity.get年度() != null) {
             source.listKyufuJisseki_4 = entity.get年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
                     fillType(FillType.BLANK).toDateString();
         }

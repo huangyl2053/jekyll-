@@ -97,18 +97,10 @@ public class OutputJokenHyo {
     }
 
     private void set今回抽出なし(List<RString> 出力条件, IdoChushutsuDaichoProcessParameter parameter) {
-        if (parameter.get今回抽出開始年月日() != null) {
-            出力条件.add(new RString("【今回抽出開始年月日】　").concat(なし));
-        }
-        if (parameter.get今回抽出開始時分秒() != null) {
-            出力条件.add(new RString("【今回抽出開始時分秒】　").concat(なし));
-        }
-        if (parameter.get今回抽出終了年月日() != null) {
-            出力条件.add(new RString("【今回抽出終了年月日】　").concat(なし));
-        }
-        if (parameter.get今回抽出終了時分秒() != null) {
-            出力条件.add(new RString("【今回抽出終了時分秒】　").concat(なし));
-        }
+        出力条件.add(new RString("【今回抽出開始年月日】　").concat(なし));
+        出力条件.add(new RString("【今回抽出開始時分秒】　").concat(なし));
+        出力条件.add(new RString("【今回抽出終了年月日】　").concat(なし));
+        出力条件.add(new RString("【今回抽出終了時分秒】　").concat(なし));
     }
 
     private List<RString> set異動抽出対象(IdoChushutsuDaichoProcessParameter parameter) {
@@ -127,7 +119,7 @@ public class OutputJokenHyo {
             } else if (異動抽出対象.equals(new RString("資格"))) {
                 builder.append(new RString("資格"));
                 builder.append(改行);
-            } else if (異動抽出対象.equals(new RString("訪問介護（特別対策減免）"))) {
+            } else if (異動抽出対象.equals(new RString("訪問介護(特別対策減免)"))) {
                 builder.append(new RString("訪問介護（特別対策減免）"));
                 builder.append(改行);
             } else if (異動抽出対象.equals(new RString("居宅サービス計画"))) {

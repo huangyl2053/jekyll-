@@ -91,11 +91,11 @@
         収納情報."j_jikoKisanYMDKubun" AS 時効_時効起算日区分,
         収納情報."j_logicalDeletedFlag" AS 時効_論理削除フラグ,
         収入."shunyuId" AS 収入_収入ID,
-        収入."shunoId" AS 収入_収納ID
-        <!-- 収入."shunyugaku" AS 収入_収入額,
+        収入."shunoId" AS 収入_収納ID,
+        収入."shunyugaku" AS 収入_収入額,
         収入."shunyuYMD" AS 収入_収入年月日,
         CaT1018_督促状発行履歴."shunoId" AS 督促状発行履歴_収納ID,
-        CaT1018_督促状発行履歴."tokusokujoHakkoYMD" AS 督促状発行履歴_督促状発行年月日-->
+        CaT1018_督促状発行履歴."tokusokujoHakkoYMD" AS 督促状発行履歴_督促状発行年月日
         FROM
         "ShiharaiHohoHenkoTainoTempTable" AS 対象者情報一時テーブル
         INNER JOIN (
@@ -620,8 +620,8 @@
         <id property="対象者情報_被保険者番号" column="対象者情報_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <collection property="収納情報リスト" resultMap="resultMap_収納情報リスト"/>
     </resultMap>
-    <resultMap id="resultMap_収納情報リスト" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShunoJohoEntity" autoMapping="true">
-        <id property="賦課_被保険者番号" column="賦課_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+    <resultMap id="resultMap_収納情報リスト" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShunoJohoEntity">
+        <result property="賦課_被保険者番号" column="賦課_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="賦課_調定年度" column="賦課_調定年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="賦課_賦課年度" column="賦課_賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="賦課_通知書番号" column="賦課_通知書番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
@@ -706,7 +706,7 @@
         <result property="時効_時効起算日区分" column="時効_時効起算日区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="時効_論理削除フラグ" column="時効_論理削除フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="督促状発行履歴_収納ID" column="督促状発行履歴_収納ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="督促状発行履歴_督促状発行年月日" column="督促状発行履歴_督促状発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="督促状発行履歴_督促状発行年月日" column="督促状発行履歴_督促状発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
         <collection property="収入情報リスト" resultMap="resultMap_収入情報リスト"/>
     </resultMap>
  
@@ -714,7 +714,7 @@
         <id property="収納ID" column="収入_収納ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="収入ID" column="収入_収入ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="収納ID" column="収入_収納ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="収入額" column="収入_収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="収入日" column="収入_収入年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="収入額" column="収入_収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="収入日" column="収入_収入年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
      </resultMap>
 </mapper>

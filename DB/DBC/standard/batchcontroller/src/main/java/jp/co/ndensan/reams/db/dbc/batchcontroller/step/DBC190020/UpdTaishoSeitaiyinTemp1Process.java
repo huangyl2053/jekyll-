@@ -65,7 +65,7 @@ public class UpdTaishoSeitaiyinTemp1Process extends BatchProcessBase<UpdTaishoSe
         DbV1001HihokenshaDaichoEntity 被保険者台帳管理 = entity.get被保険者台帳管理Newest();
         if (null != 被保険者台帳管理) {
             if ((RSTRING_10.equals(対象世帯員.getAtenaDateDhubetsu_kijunDay())
-                    || RSTRING_20.equals(対象世帯員.getAtenaDateDhubetsu_kijunDay())) && RSTRING_1.equals(被保険者台帳管理.getJushochiTokureiFlag())) {
+                    || RSTRING_20.equals(対象世帯員.getAtenaDateDhubetsu_kijunDay())) || RSTRING_1.equals(被保険者台帳管理.getJushochiTokureiFlag())) {
                 対象世帯員.setJukyuKubun(RSTRING_3);
                 対象世帯員.setShichosonCode(被保険者台帳管理.getShichosonCode().getColumnValue());
                 対象世帯員.setJushochiTokureiFlag(被保険者台帳管理.getJushochiTokureiFlag());

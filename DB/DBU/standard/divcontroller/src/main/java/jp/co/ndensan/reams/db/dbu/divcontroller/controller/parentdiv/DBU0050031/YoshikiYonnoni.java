@@ -389,13 +389,6 @@ public class YoshikiYonnoni {
 
     private ResponseData<YoshikiYonnoniDiv> get追加ResponseData(YoshikiYonnoniDiv div,
             InsuranceInformation insuranceInf, KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager) {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        ValidationHandler validationHandler = new ValidationHandler(div);
-        validationHandler.合計値チェック_合計１(validationMessages);
-        validationHandler.合計値チェック_合計２(validationMessages);
-        if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
         Map<RString, Decimal> 詳細データエリア = new HashMap<>();
 
         this.put詳細データエリア(詳細データエリア, div);
@@ -425,6 +418,16 @@ public class YoshikiYonnoni {
      * @return ResponseData<YoshikiYonnoniDiv>
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnSave(YoshikiYonnoniDiv div) {
+
+        if (!内部処理モード_削除.equals(div.getShoriMode())) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            ValidationHandler validationHandler = new ValidationHandler(div);
+            validationHandler.合計値チェック_合計１(validationMessages);
+            validationHandler.合計値チェック_合計２(validationMessages);
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+        }
 
         InsuranceInformation insuranceInf = get引き継ぎデータ(div);
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
@@ -1230,5 +1233,29 @@ public class YoshikiYonnoni {
         div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().setValue(詳細データエリア.get(座標19_2));
         div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().setValue(詳細データエリア.get(座標20_1));
         div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().setValue(詳細データエリア.get(座標21_1));
+    }
+
+    /**
+     * 歳入歳出差引残額自動計算します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<YoshikiYonnoniDiv>
+     */
+    public ResponseData<YoshikiYonnoniDiv> onBlur_calculation(YoshikiYonnoniDiv div) {
+        Decimal 合計1 = div.getYoshikiYonnoniMeisai().getTxtsainyugokei().getValue();
+        Decimal 合計2 = div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue();
+        if (null == 合計1 && null == 合計2) {
+            div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().clearValue();
+        } else {
+            div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().setValue(get額(合計1).subtract(get額(合計2)));
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private Decimal get額(Decimal 額) {
+        if (null == 額) {
+            return Decimal.ZERO;
+        }
+        return 額;
     }
 }

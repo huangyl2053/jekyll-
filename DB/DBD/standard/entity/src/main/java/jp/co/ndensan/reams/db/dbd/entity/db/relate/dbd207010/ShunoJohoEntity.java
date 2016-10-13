@@ -124,5 +124,5 @@ public class ShunoJohoEntity {
 
     //督促状発行履歴
     private RString 督促状発行履歴_収納ID;
-    private FlexibleDate 督促状発行履歴_督促状発行年月日;
+    private RDate 督促状発行履歴_督促状発行年月日;
 }

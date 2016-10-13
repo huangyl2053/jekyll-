@@ -101,7 +101,7 @@
             fetchSize="500">
         SELECT 
             <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.allColumns_TeikyoKihonJoho" />
-         FROM "TeikyoKihonJoho" AS teikyoKihonJoho
+         FROM "TeikyoKihonJohoNNTemp" AS teikyoKihonJoho
             <!--TODO  INNER　JOIN			個人番号-->
         <if test = "is異動">    
             WHERE NOT EXISTS(SELECT 1

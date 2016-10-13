@@ -127,6 +127,11 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranReportSource implements IRepor
     public RString listLower_11;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
+    public RString choikiCode;
+    public RString setaiCode;
+    public RString shikibetsuCode;
+    public RString kanaShimei;
+    public RString shichosonCode;
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。

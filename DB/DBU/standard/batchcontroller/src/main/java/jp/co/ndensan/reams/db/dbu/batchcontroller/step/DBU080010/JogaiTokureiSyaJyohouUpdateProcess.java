@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TeikyoYohi;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.TeikyoKihonJohoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -27,7 +26,7 @@ public class JogaiTokureiSyaJyohouUpdateProcess extends BatchProcessBase<TeikyoK
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo."
             + "IJogaiTokureiSyaJyohouMapper.get提供対象者");
-    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJoho");
+    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
 //    private SougouJigyouJyohouProcessParameter processParameter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 中間DB提供基本情報;
@@ -42,7 +41,7 @@ public class JogaiTokureiSyaJyohouUpdateProcess extends BatchProcessBase<TeikyoK
     @Override
     protected void createWriter() {
         中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(TABLE_中間DB提供基本情報,
-                TeikyoKihonJohoEntity.class);
+                TeikyoKihonJohoNNTempEntity.class);
     }
 
     @Override

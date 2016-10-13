@@ -61,6 +61,7 @@ public class ShiharaiHohoHenkoHaakuTainouTaisakuProcess extends BatchProcessBase
     private TainoCountermeasureTempTableEntity create滞納者対策情報一時テーブル情報(ShiharaiHohoHenkoHaakuFourEntity t) {
         TainoCountermeasureTempTableEntity result = new TainoCountermeasureTempTableEntity();
 
+        result.setHihokenshaNo(t.get支払方法変更Entity().getHihokenshaNo());
         result.setTekiyoKaishiYMD(t.get支払方法変更Entity().getTekiyoKaishiYMD());
         result.setTekiyoShuryoYMD(t.get支払方法変更Entity().getTekiyoShuryoYMD());
         result.setShuryoUketsukeYMD(t.get支払方法変更Entity().getShuryoShinsei_UketsukeYMD());

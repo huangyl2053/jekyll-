@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-4960-030 dengwei-->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc180050.IKoseiTaishoKyufuJissekiIchiranMapper">
+    <select resultOrdered="true" id="get利用者負担割合情報" resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.SelRiyoushaHutanwariaitorigaDataResultEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180050.SelRiyoushaHutanwariaitorigaDataMybatisParameter" fetchSize="500">
+        SELECT DISTINCT
+        D1."hihokenshaNo" AS 被保険者番号,
+        D1."nendo" AS 年度
+        FROM
+        rgdb."DbT3113RiyoshaFutanWariai" AS D1
+        WHERE
+        D1."insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+        D1."insertTimestamp" <![CDATA[<]]> #{抽出期間終了日時} AND
+        D1."hanteiKubun" <![CDATA[<>]]> '1' AND
+        D1."logicalDeletedFlag" <![CDATA[<>]]> TRUE
+    </select> 
+    
+    <select resultOrdered="true" id="get給付実績基本" resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.SelKyuhuzissekiKihonTorigaDataResultEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180050.SelRiyoushaHutanwariaitorigaDataMybatisParameter" fetchSize="500">
+        SELECT DISTINCT
+        D2."hiHokenshaNo" AS 被保険者番号,
+        D2."serviceTeikyoYM" AS サービス提供年月
+        FROM
+        rgdb."DbT3017KyufujissekiKihon" AS D2
+        WHERE
+        D2."insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+        D2."insertTimestamp" <![CDATA[<]]> #{抽出期間終了日時} AND
+        D2."serviceTeikyoYM" <![CDATA[>=]]> '201508' AND
+        SUBSTRING(D2."inputShikibetsuNo" FROM 1 FOR 3) NOT IN ('21B','812','817')
+    </select>
+    
+    <select resultOrdered="true" id="getトリガデータTemp" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.TorigaDataTempEntity" fetchSize="500">
+        SELECT
+        *
+        FROM
+        "torigaDataTemp"
+    </select>
+    
+    <select resultOrdered="true" id="get利用者負担割合明細Newest" resultMap="利用者負担割合明細最新_resultMap" fetchSize="500">
+        WITH master AS(
+        SELECT DISTINCT
+        "被保険者番号",
+        "年度"
+        FROM
+        "torigaDataTemp"
+        )
+        
+        SELECT
+        master.*,
+        <include refid="allColumns_DbT3114RiyoshaFutanWariaiMeisai" />
+        FROM
+        master AS master
+        LEFT OUTER JOIN
+        rgdb."DbV3114RiyoshaFutanWariaiMeisai" AS "DbT3114RiyoshaFutanWariaiMeisai"
+        ON master."被保険者番号" = "DbT3114RiyoshaFutanWariaiMeisai"."hihokenshaNo" AND
+        master."年度" = "DbT3114RiyoshaFutanWariaiMeisai"."nendo"
+        ORDER BY
+        master."被保険者番号",
+        master."年度" ASC
+    </select>
+    
+    <select resultOrdered="true" id="利用者負担減額情報の取得" resultMap="利用者負担減額情報の取得_resultMap" fetchSize="500">
+        SELECT
+        F1."年度",
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.allColumns_DbT4014RiyoshaFutangakuGengaku" />
+        FROM
+        "futanWariaiTemp" F1
+        LEFT OUTER JOIN
+        rgdb."DbT4014RiyoshaFutangakuGengaku" AS "DbT4014RiyoshaFutangakuGengaku"
+        ON "DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" = F1."被保険者番号" AND
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiYMD" IS NOT NULL AND
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiYMD" <![CDATA[<>]]> '' AND
+        "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = '1' AND
+        ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[>=]]> '20150801' OR
+        "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD" <![CDATA[>=]]> '20150801') AND
+        "DbT4014RiyoshaFutangakuGengaku"."isDeleted" <![CDATA[<>]]> TRUE
+        ORDER BY
+        F1."被保険者番号",
+        F1."年度" ASC
+    </select>
+    
+    <select resultOrdered="true" id="get支払方法変更" resultMap="支払方法変更_resultMap" fetchSize="500">
+        SELECT
+        F1."年度",
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.allColumns_DbT4021ShiharaiHohoHenko" />
+        FROM
+        "futanWariaiTemp" F1
+        LEFT OUTER JOIN
+        rgdb."DbT4021ShiharaiHohoHenko" AS "DbT4021ShiharaiHohoHenko"
+        ON "DbT4021ShiharaiHohoHenko"."hihokenshaNo" = F1."被保険者番号" AND
+        "DbT4021ShiharaiHohoHenko"."kanriKubun" = '3' AND
+        "DbT4021ShiharaiHohoHenko"."mukoKubun" = '0' AND
+        ("DbT4021ShiharaiHohoHenko"."tekiyoKaishiYMD" <![CDATA[>=]]> '20150801' OR
+        "DbT4021ShiharaiHohoHenko"."tekiyoShuryoYMD" <![CDATA[>=]]> '20150801') AND
+        "DbT4021ShiharaiHohoHenko"."isDeleted" <![CDATA[<>]]> TRUE
+        ORDER BY
+        F1."被保険者番号",
+        F1."年度" ASC
+    </select>
+    
+    <select resultOrdered="true" id="get給付実績情報作成用データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.KyuhuzissekiJohoSakuseiYoResultEntity" fetchSize="500">
+        SELECT 
+        T1."被保険者番号" AS 被保険者番号,
+        T1."年度" AS 年度,
+        T1."年月" AS 年月,
+        D1."inputShikibetsuNo" AS 入力識別番号,
+        D1."kyufuSakuseiKubunCode" AS 給付実績情報作成区分コード,
+        D1."shokisaiHokenshaNo" AS 証記載保険者番号,
+        D1."serviceTeikyoYM" AS サービス提供年月,
+        D1."jigyoshoNo" AS 事業所番号,
+        D1."seiriNo" AS 整理番号,
+        D1."hokenKyufuritsu" AS 保険給付率,
+        D1."shinsaYM" AS 審査年月,
+        D1."toshiNo"  AS 通し番号
+        FROM
+        "torigaDataTemp" AS T1 
+        INNER JOIN 
+        rgdb."DbT3017KyufujissekiKihon" AS D1
+        ON T1."被保険者番号" = D1."hiHokenshaNo" AND
+        T1."年月" = D1."serviceTeikyoYM" AND
+        D1."serviceTeikyoYM" <![CDATA[>]]> '201508' AND
+        SUBSTRING(D1."inputShikibetsuNo" FROM 1 FOR 3) NOT IN ('21B','812','817')
+        ORDER BY
+        被保険者番号, サービス提供年月, 入力識別番号, 事業所番号, 通し番号
+    </select>
+    
+    <select resultOrdered="true" id="get給付実績情報作成データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.KyuhuzissekiJohoSakuseiResultEntity" fetchSize="500">
+        SELECT 
+        K1."年度" AS 年度,
+        K1."給付実績情報作成区分コード" AS 給付実績情報作成区分コード,
+        K1."保険給付率" AS 保険給付率,
+        K1."入力識別番号" AS 入力識別番号,
+        K1."被保険者番号" AS 被保険者番号,
+        K1."サービス提供年月" AS サービス提供年月,
+        K1."事業所番号" AS 事業所番号,
+        K1."整理番号" AS 整理番号,
+        D3."serviceSyuruiCode" AS サービス種類コード,
+        D3."hokenRiyoshaFutangaku" AS 利用者負担額,
+        D3."atoHokenSeikyugaku"  AS 後保険請求分請求額,
+        D4."keigenritsu" AS 軽減率,
+        D4."atoRiyoshaFutanTotal" AS 後受領すべき利用者負担の総額,
+        D4."atoKeigengaku" AS 後軽減額,
+        D4."atoKeigengoRiyoshaFutangaku" AS 後軽減後利用者負担額,
+        D4."shinsaYM" AS 審査年月,
+        D5."rirekiNo" AS 履歴番号,
+        D5."riyoshaFutanGakuGokei" AS 利用者負担額合計,
+        D5."santeiKijunGaku" AS 算定基準額,
+        D5."shiharaiSumiKingakuGokei" AS 支払済金額合計,
+        D5."KogakuShikyuGaku" AS 高額支給額
+        FROM
+        "kyuhuzissekiJohoSakuseiYoTemp" AS K1 
+        INNER JOIN
+        rgdb."DbT3033KyufujissekiShukei" AS D3
+        ON D3."hiHokenshaNo" = K1."被保険者番号" AND
+        D3."serviceTeikyoYM" = K1."サービス提供年月" AND
+        D3."inputShikibetsuNo" = K1."入力識別番号" AND
+        D3."jigyoshoNo" = K1."事業所番号" AND
+        D3."seiriNo" = K1."整理番号"
+        LEFT OUTER JOIN
+        rgdb."DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" AS D4
+        ON D4."hiHokenshaNo" = K1."被保険者番号" AND
+        D4."serviceTeikyoYM" = K1."サービス提供年月" AND
+        D4."inputShikibetsuNo" = K1."入力識別番号" AND
+        D4."jigyoshoNo" = K1."事業所番号" AND
+        D4."seiriNo" = K1."整理番号" AND
+        D4."serviceSyuruiCode" = D3."serviceSyuruiCode"
+        LEFT OUTER JOIN
+        rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS D5
+        ON D5."hihokenshaNo" = K1."被保険者番号" AND
+        D5."serviceTeikyoYM" = K1."サービス提供年月"
+        ORDER BY
+        被保険者番号, サービス提供年月, 入力識別番号, 事業所番号, 整理番号, サービス種類コード, 履歴番号
+    </select>
+    
+    <select resultOrdered="true" id="get負担割合情報Temp" resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.FutanWariaiTempEntity" fetchSize="500">
+        SELECT
+        *
+        FROM
+        "futanWariaiTemp"
+    </select>
+    
+    <select resultOrdered="true" id="get更正対象給付実績情報作成データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.KoseiTaishoKyuhuzissekiJohouSakuseiResultEntity" fetchSize="500">
+        WITH master AS(
+        SELECT
+        負担割合情報年月Temp."給付率" AS 給付率,
+        負担割合情報年月Temp."被保険者番号" AS 被保険者番号,
+        負担割合情報年月Temp."年度" AS 年度,
+        給付実績情報Temp."入力識別番号" AS 入力識別番号,
+        給付実績情報Temp."サービス提供年月" AS サービス提供年月,
+        給付実績情報Temp."事業所番号" AS 事業所番号,
+        給付実績情報Temp."整理番号" AS 整理番号,
+        給付実績情報Temp."サービス種類コード" AS サービス種類コード,
+        給付実績情報Temp."給付実績情報作成区分コード" AS 給付実績情報作成区分コード,
+        給付実績情報Temp."保険給付率" AS 保険給付率,
+        給付実績情報Temp."後保険請求分請求額" AS 後保険請求分請求額,
+        給付実績情報Temp."利用者負担額" AS 利用者負担額,
+        給付実績情報Temp."軽減率" AS 軽減率,
+        給付実績情報Temp."軽減後自己負担額" AS 軽減後自己負担額,
+        給付実績情報Temp."高額サービス費用額" AS 高額サービス費用額,
+        被保台帳Newest."shikibetsuCode" AS 識別コード,
+        介護サービス種類."serviceShuruiRyakusho" AS サービス種類略称
+        FROM
+        (<include refid="temp負担割合情報年月_集約"/>) AS 負担割合情報年月Temp
+        INNER JOIN
+        "kyuhuzissekiJohoTemp" AS 給付実績情報Temp
+        ON 負担割合情報年月Temp."被保険者番号" = 給付実績情報Temp."被保険者番号" AND
+        給付実績情報Temp."サービス提供年月" = 負担割合情報年月Temp."年月"
+        INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS 被保台帳Newest
+        ON 給付実績情報Temp."被保険者番号" = 被保台帳Newest."hihokenshaNo"
+        LEFT OUTER JOIN
+        rgdb."DbT7130KaigoServiceShurui" AS 介護サービス種類
+        ON 給付実績情報Temp."サービス種類コード" = 介護サービス種類."serviceShuruiCd"
+        WHERE
+        給付実績情報Temp."サービス種類コード" = 介護サービス種類."serviceShuruiCd" AND
+        給付実績情報Temp."サービス提供年月" <![CDATA[<=]]> 介護サービス種類."teikyoKaishiYM" AND
+        給付実績情報Temp."サービス提供年月" <![CDATA[<=]]> 介護サービス種類."teikyoshuryoYM" AND
+        負担割合情報年月Temp."被保険者番号" = 給付実績情報Temp."被保険者番号" AND
+        給付実績情報Temp."サービス提供年月" = 負担割合情報年月Temp."年月")
+        
+        SELECT
+        master."給付率" AS 給付率,
+        master."被保険者番号" AS 被保険者番号,
+        master."年度" AS 年度,
+        master."入力識別番号" AS 入力識別番号,
+        master."サービス提供年月" AS サービス提供年月,
+        master."事業所番号" AS 事業所番号,
+        master."整理番号" AS 整理番号,
+        master."サービス種類コード" AS サービス種類コード,
+        master."給付実績情報作成区分コード" AS 給付実績情報作成区分コード,
+        master."保険給付率" AS 保険給付率,
+        master."後保険請求分請求額" AS 後保険請求分請求額,
+        master."利用者負担額" AS 利用者負担額,
+        master."軽減率" AS 軽減率,
+        master."軽減後自己負担額" AS 軽減後自己負担額,
+        master."高額サービス費用額" AS 高額サービス費用額,
+        master."識別コード" AS 識別コード,
+        宛名."kanjiShimei" AS 漢字氏名,
+        master."サービス種類略称" AS サービス種類略称
+        FROM
+        master AS master
+        INNER JOIN
+        rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+         (
+         SELECT
+         ARRAY_AGG(CAST (master."識別コード" AS TEXT))
+         FROM
+         master
+         )) AS 宛名
+        ON master."識別コード" = 宛名."shikibetsuCode"
+        ORDER BY
+        master."被保険者番号", master."サービス提供年月", master."入力識別番号", master."事業所番号"
+    </select>
+    
+    <sql id="temp負担割合情報年月_集約">
+        SELECT
+        *
+        FROM
+        "futanWariaiYMTemp" AS futanWariaiYMTemp
+        ORDER BY
+        futanWariaiYMTemp."被保険者番号", futanWariaiYMTemp."年度"
+    </sql>
+    
+    <select resultOrdered="true" id="get更正対象給付実績情報" resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.KoseitaishoKyuhuzissekiJohoTempEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180050.KoseiTaishoKyuhuzissekiItiranhyoShuturyokuMybatisParameter" fetchSize="500">
+        SELECT
+        *
+        FROM
+        "koseitaishoKyuhuzissekiJohoTemp" AS K1
+        <if test="出力順 == '1'" >
+            ORDER BY
+            K1."年度", K1."被保険者番号", K1."サービス提供年月", K1."事業所番号", K1."整理番号", K1."サービス種類コード"
+        </if>
+        
+        <if test="出力順 == '2'" >
+            ORDER BY
+            K1."被保険者番号", K1."年度", K1."サービス提供年月", K1."事業所番号", K1."整理番号", K1."サービス種類コード"
+        </if>
+    </select>
+    
+    <select resultOrdered="true" id="get処理日付管理マスタ" 
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" 
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+        *
+        FROM
+        rgdb."DbT7022ShoriDateKanri" AS D1
+        WHERE
+        D1."shoriName" = #{処理名}
+    </select>
+    
+    <select resultOrdered="true" id="get処理結果確認リスト" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.DbWT1801ShoriKekkaKakuninListEntity" fetchSize="500">
+        SELECT
+        *
+        FROM
+        "DbWT1801ShoriKekkaKakuninList" AS D1
+        ORDER BY
+        D1."errorKubun" ASC,
+        D1."hihokenshaNo" ASC,
+        D1."key1" ASC,
+        D1."key2" ASC,
+        D1."key3" ASC,
+        D1."key4" ASC,
+        D1."key5" ASC
+    </select>
+    
+    <sql id="allColumns_DbT3114RiyoshaFutanWariaiMeisai">
+        "DbT3114RiyoshaFutanWariaiMeisai"."nendo" as "dbT3114RiyoshaFutanWariaiMeisai_nendo",
+        "DbT3114RiyoshaFutanWariaiMeisai"."hihokenshaNo" as "dbT3114RiyoshaFutanWariaiMeisai_hihokenshaNo",
+        "DbT3114RiyoshaFutanWariaiMeisai"."rirekiNo" as "dbT3114RiyoshaFutanWariaiMeisai_rirekiNo",
+        "DbT3114RiyoshaFutanWariaiMeisai"."edaNo" as "dbT3114RiyoshaFutanWariaiMeisai_edaNo",
+        "DbT3114RiyoshaFutanWariaiMeisai"."shikakuKubun" as "dbT3114RiyoshaFutanWariaiMeisai_shikakuKubun",
+        "DbT3114RiyoshaFutanWariaiMeisai"."futanWariaiKubun" as "dbT3114RiyoshaFutanWariaiMeisai_futanWariaiKubun",
+        "DbT3114RiyoshaFutanWariaiMeisai"."yukoKaishiYMD" as "dbT3114RiyoshaFutanWariaiMeisai_yukoKaishiYMD",
+        "DbT3114RiyoshaFutanWariaiMeisai"."yukoShuryoYMD" as "dbT3114RiyoshaFutanWariaiMeisai_yukoShuryoYMD",
+        "DbT3114RiyoshaFutanWariaiMeisai"."honninGoukeiShotokuGaku" as "dbT3114RiyoshaFutanWariaiMeisai_honninGoukeiShotokuGaku",
+        "DbT3114RiyoshaFutanWariaiMeisai"."setaiIchigouHihokenshaSu" as "dbT3114RiyoshaFutanWariaiMeisai_setaiIchigouHihokenshaSu",
+        "DbT3114RiyoshaFutanWariaiMeisai"."nenkinShunyuGoukei" as "dbT3114RiyoshaFutanWariaiMeisai_nenkinShunyuGoukei",
+        "DbT3114RiyoshaFutanWariaiMeisai"."sonotanoGoukeiShotokuKingakuGoukei" as "dbT3114RiyoshaFutanWariaiMeisai_sonotanoGoukeiShotokuKingakuGoukei",
+        "DbT3114RiyoshaFutanWariaiMeisai"."koseiRiyu" as "dbT3114RiyoshaFutanWariaiMeisai_koseiRiyu",
+        "DbT3114RiyoshaFutanWariaiMeisai"."setaiCd" as "dbT3114RiyoshaFutanWariaiMeisai_setaiCd",
+        "DbT3114RiyoshaFutanWariaiMeisai"."logicalDeletedFlag" as "dbT3114RiyoshaFutanWariaiMeisai_logicalDeletedFlag"
+    </sql>
+    
+    <resultMap  id="支払方法変更_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.UpdShiharaihohoHenkoTempResultEntity" autoMapping="true">
+        <result property="年度" column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <association property="支払方法変更" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity"/>
+    </resultMap>
+    
+    <resultMap  id="利用者負担減額情報の取得_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.UpdRiyoshaFutangengakuTempResultEntity" autoMapping="true">
+        <result property="年度" column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <association property="利用者負担減額" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.ResultMap_DbT4014RiyoshaFutangakuGengakuEntity"/>
+    </resultMap>
+    
+    <resultMap  id="利用者負担割合明細最新_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.InsFutanwariaiJohoTempResultEntity" autoMapping="true">
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="年度" column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <association property="利用者負担割合明細最新Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3114RiyoshaFutanWariaiMeisaiMapper.ResultMap_DbT3114RiyoshaFutanWariaiMeisaiEntity"/>
+    </resultMap>
+</mapper>

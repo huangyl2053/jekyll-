@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSet
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -54,10 +55,11 @@ public class DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter extends Batc
     /**
      * 利用者負担額減免認定者リスト発行の引数を返します。。
      *
+     * @param 帳票作成日時 RDate
      * @return 利用者負担額減免認定者リスト発行の引数
      */
-    public NinteishaListSakuseiProcessParameter toNinteishaListSakuseiProcessParameter() {
+    public NinteishaListSakuseiProcessParameter toNinteishaListSakuseiProcessParameter(RDate 帳票作成日時) {
         return new NinteishaListSakuseiProcessParameter(対象リスト, 基準日, 所得年度,
-                旧措置区分, 世帯表示, 受給者区分, 世帯非課税等, csv出力設定, 改頁出力順ID, 帳票ID);
+                旧措置区分, 世帯表示, 受給者区分, 世帯非課税等, csv出力設定, 改頁出力順ID, 帳票ID, 帳票作成日時);
     }
 }

@@ -444,7 +444,7 @@ public class TokuchoTaishoshaIchiran {
      */
     public ResponseData<TokuchoTaishoshaIchiranDiv> onClick_btnHihokensha(TokuchoTaishoshaIchiranDiv div) {
         RString fukaNendo = div.getHiddenFukaNendo();
-        if (fukaNendo == null) {
+        if (fukaNendo == null || fukaNendo.isEmpty()) {
             div.getTorokuZumiNenkinInfo().setDisplayNone(true);
         } else {
             div.getTorokuZumiNenkinInfo().setDisplayNone(false);
