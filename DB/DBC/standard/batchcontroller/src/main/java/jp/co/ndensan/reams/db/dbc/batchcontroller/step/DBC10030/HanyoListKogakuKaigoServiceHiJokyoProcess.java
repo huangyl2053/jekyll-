@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC10030;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagoketteiin.SogojigyohiKagoKetteInOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.KokuhorenFuicchi;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.SanteiKijun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShiharaiSaki;
@@ -19,6 +18,8 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.H
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.HanyouRisutoSyuturyokuEntity;
+import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.DBC701003BreakerFieldsEnum;
+import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.DBC701019BreakerFieldsEnum;
 import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.HanyoListKogakuKaigoEucCsvEntityEditor;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
@@ -143,7 +144,6 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private FlexibleDate システム日付;
     private boolean modoFlag = true;
     private IOutputOrder 並び順;
-    private List<RString> pageBreakKeys;
     private ReportId 帳票ID;
 
     @BatchWriter
@@ -151,13 +151,24 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
 
     @Override
     protected void initialize() {
+
+        RString 出力順 = null;
         if (1 == parameter.getModo()) {
             readDataId = データ読み込みID1;
             eucEntityId = new EucEntityId(DBC701003);
             eucId = new ReportId(DBC701003);
             日本語ファイル名 = 高額介護サービス費状況CSV;
             英数字ファイル名 = 英数字ファイル名_高額介護サービス費状況CSV;
-            帳票ID = ReportIdDBC.DBC200096.getReportId();
+            帳票ID = ReportIdDBC.DBC701003.getReportId();
+            IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            並び順 = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID,
+                    parameter.getShutsuryokuju()
+            );
+            if (null == 並び順) {
+                throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
+                        .replace(実行不可MESSAGE.toString()).toString());
+            }
+            出力順 = MyBatisOrderByClauseCreator.create(DBC701003BreakerFieldsEnum.class, 並び順);
         } else if (2 == parameter.getModo()) {
             readDataId = データ読み込みID2;
             eucEntityId = new EucEntityId(DBC701019);
@@ -165,18 +176,18 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
             日本語ファイル名 = 事業高額サービス費状況CSV;
             英数字ファイル名 = 英数字ファイル名_事業高額サービス費状況CSV;
             this.modoFlag = false;
+            帳票ID = ReportIdDBC.DBC701019.getReportId();
+            IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            並び順 = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID,
+                    parameter.getShutsuryokuju()
+            );
+            if (null == 並び順) {
+                throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
+                        .replace(実行不可MESSAGE.toString()).toString());
+            }
+            出力順 = MyBatisOrderByClauseCreator.create(DBC701019BreakerFieldsEnum.class, 並び順);
         }
-        pageBreakKeys = new ArrayList<>();
-        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        並び順 = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID,
-                parameter.getShutsuryokuju()
-        );
-        if (null == 並び順) {
-            throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
-                    .replace(実行不可MESSAGE.toString()).toString());
-        }
-        RString 出力順 = MyBatisOrderByClauseCreator
-                .create(SogojigyohiKagoKetteInOutPutOrder.class, 並び順);
+        parameter.set出力順(出力順);
     }
 
     @Override
