@@ -49,7 +49,7 @@ public class SeikyumeisaiKyufukanrihyoHenreiHoryuIchiranEditor implements ISeiky
 
     private SeikyumeisaiKyufukanrihyoHenreiHoryuIchiranReportSource editSource(SeikyumeisaiKyufukanrihyoHenreiHoryuIchiranReportSource source) {
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), entity.get被保険者番号());
+        source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), entity.get登録被保険者番号());
         source.printTimeStamp = get印刷日時(entity.get作成日時());
         if (!RString.isNullOrEmpty(entity.get審査年月())) {
             source.shinsaYM = new FlexibleDate(entity.get審査年月()).wareki().eraType(EraType.KANJI_RYAKU)
@@ -67,8 +67,8 @@ public class SeikyumeisaiKyufukanrihyoHenreiHoryuIchiranEditor implements ISeiky
                     .wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).getYearMonth();
         }
         source.listUpper_6 = entity.getサービス種類コード();
-        if (entity.get単位数() > 0) {
-            source.listUpper_7 = DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単位数()), 0);
+        if (entity.get単位数().compareTo(Decimal.ZERO) == 1) {
+            source.listUpper_7 = DecimalFormatter.toコンマ区切りRString(entity.get単位数(), 0);
         }
         source.listUpper_8 = entity.get事由();
         source.listUpper_9 = entity.get内容();
