@@ -63,7 +63,7 @@ public class UpdShafukuTempProcess extends BatchProcessBase<IdouTempEntity> {
             return;
         }
         社福減免KeyList.add(社福減免Key);
-        RString 全項目 = 支払方法変更全項目(entity.get社福減免());
+        RString 全項目 = 社福減免全項目(entity.get社福減免());
         Decimal 連番 = 連番Map.get(entity.get社福減免().get被保険者番号());
         if (連番 == null) {
             連番Map.put(entity.get社福減免().get被保険者番号(), Decimal.ONE);
@@ -111,11 +111,11 @@ public class UpdShafukuTempProcess extends BatchProcessBase<IdouTempEntity> {
                 .concat(社福減免.get被保険者番号().getColumnValue()).concat(SPLIT).concat(new RString(社福減免.get履歴番号()));
     }
 
-    private RString 支払方法変更全項目(ShafukugemmenEntity 社福減免) {
+    private RString 社福減免全項目(ShafukugemmenEntity 社福減免) {
         RString 全項目 = RString.EMPTY;
-        全項目.concat(社福減免.get減免_減額種類()).concat(SPLIT)
-                .concat(社福減免.get適用開始日().toString()).concat(SPLIT)
+        全項目 = 全項目.concat(社福減免.get適用開始日().toString()).concat(SPLIT)
                 .concat(社福減免.get適用終了日().toString()).concat(SPLIT)
+                .concat(社福減免.get減免_減額種類()).concat(SPLIT)
                 .concat(社福減免.get軽減率());
         return 全項目;
     }

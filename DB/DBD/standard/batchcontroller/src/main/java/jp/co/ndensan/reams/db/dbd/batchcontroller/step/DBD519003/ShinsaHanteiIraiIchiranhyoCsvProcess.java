@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -95,7 +94,7 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcess extends BatchProcessBase<Chohy
         ShinsaHanteiIraiIchiranhyoCsvEntity csvEntity = core.toCsvEntity(entity);
         csvWriter.writeLine(csvEntity);
         if (entity.get申請書管理番号() != null) {
-            PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
+            PersonalData personalData = PersonalData.of(entity.get識別コード(),
                     new ExpandedInformation(new Code("0001"), 申請書管理番号, entity.get申請書管理番号().value()));
             AccessLogger.log(AccessLogType.照会, personalData);
         }

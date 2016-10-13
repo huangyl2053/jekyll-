@@ -39,6 +39,57 @@
         "B"."shoriYM" DESC
     </select>
 
+    <select id="logicalDelete高額合算給付実績"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter">
+        UPDATE
+        rgdb."DbT3075KogakuGassanKyufuJisseki"
+        SET
+        "isDeleted" ='true',
+        "updateCount" = "updateCount" + 1,
+        "lastUpdateTimestamp" = now()
+        WHERE
+        "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" = #{交換情報識別番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" = #{被保険者番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = #{支給申請書整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = #{整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shoKisaiHokenshaNo" = #{証記載保険者番号}
+    </select>
+
+    <select id="physicalDelete高額合算給付実績"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter">
+        DELETE
+        FROM
+        rgdb."DbT3075KogakuGassanKyufuJisseki"
+        WHERE
+        "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" = #{交換情報識別番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" = #{被保険者番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = #{支給申請書整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = #{整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shoKisaiHokenshaNo" = #{証記載保険者番号}
+    </select>
+
+    <select id="update高額合算給付実績"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter">
+        UPDATE
+        rgdb."DbT3075KogakuGassanKyufuJisseki"
+        SET
+        "jikoFutanSeiriNo" = #{自己負担額証明書整理番号},
+        "kyufuJissekiSakuseiKubunCode" ='2',
+        "shoKisaiHokenshaNo" = #{証記載保険者番号},
+        "shinseiYMD" = #{申請年月日},
+        "ketteiYMD" = #{決定年月日},
+        "jikoFutanSogaku" = #{自己負担総額},
+        "shikyuGaku" = #{支給額},
+        "dataKubun" = #{データ区分},
+        "updateCount" = "updateCount" + 1,
+        "lastUpdateTimestamp" = now()
+        WHERE
+        "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" = #{交換情報識別番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" = #{被保険者番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = #{支給申請書整理番号}
+        AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = #{整理番号}
+    </select>
+
     <select resultOrdered="true" id="get高額合算支給額計算結果"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaParameter"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity"

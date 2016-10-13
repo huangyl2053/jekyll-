@@ -193,7 +193,7 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
                     totime.getHour(), totime.getMinute(), totime.getSecond());
             parameter.set今回開始期間FROM(konkaikaishiFrom);
             parameter.set今回開始期間TO(konkaikaishiTo);
-            parameter.set被保険者番号(null);
+            parameter.set被保険者番号(RString.EMPTY);
         }
         if (被保険者番号.equals(radChushutsu)) {
             parameter.set今回開始期間FROM(null);

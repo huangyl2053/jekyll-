@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0110011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,6 +21,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 
 /**
  * KyotakuSabisuKeikakuIraiTodokedeJohoToroku のクラスファイル
@@ -34,8 +40,6 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("KihonJoho")
-    private KihonJohoDiv KihonJoho;
     @JsonProperty("Rireki")
     private RirekiDiv Rireki;
     @JsonProperty("ServiceAddAndServicePlanCreate")
@@ -44,6 +48,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv extends Panel {
     private KanryoDiv Kanryo;
     @JsonProperty("ccdKaigoShikakuKihon")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
+    @JsonProperty("ccdKaigoAtenaInfo")
+    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
     @JsonProperty("mode")
     private RString mode;
     @JsonProperty("keikakuTekiyoStartYM")
@@ -59,24 +65,6 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getKihonJoho
-     * @return KihonJoho
-     */
-    @JsonProperty("KihonJoho")
-    public KihonJohoDiv getKihonJoho() {
-        return KihonJoho;
-    }
-
-    /*
-     * setKihonJoho
-     * @param KihonJoho KihonJoho
-     */
-    @JsonProperty("KihonJoho")
-    public void setKihonJoho(KihonJohoDiv KihonJoho) {
-        this.KihonJoho = KihonJoho;
-    }
-
     /*
      * getRireki
      * @return Rireki
@@ -138,6 +126,15 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv extends Panel {
     @JsonProperty("ccdKaigoShikakuKihon")
     public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
         return ccdKaigoShikakuKihon;
+    }
+
+    /*
+     * getccdKaigoAtenaInfo
+     * @return ccdKaigoAtenaInfo
+     */
+    @JsonProperty("ccdKaigoAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return ccdKaigoAtenaInfo;
     }
 
     /*
@@ -276,16 +273,6 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public RadioButton getRadKeikakuKubun() {
-        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getRadKeikakuKubun();
-    }
-
-    @JsonIgnore
-    public void setRadKeikakuKubun(RadioButton radKeikakuKubun) {
-        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setRadKeikakuKubun(radKeikakuKubun);
-    }
-
-    @JsonIgnore
     public RadioButton getRadTodokedeKubun() {
         return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getRadTodokedeKubun();
     }
@@ -296,13 +283,23 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtTodokedeYMD() {
-        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTxtTodokedeYMD();
+    public TextBoxDate getTxtTodokedeYM() {
+        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTxtTodokedeYM();
     }
 
     @JsonIgnore
-    public void setTxtTodokedeYMD(TextBoxDate txtTodokedeYMD) {
-        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setTxtTodokedeYMD(txtTodokedeYMD);
+    public void setTxtTodokedeYM(TextBoxDate txtTodokedeYM) {
+        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setTxtTodokedeYM(txtTodokedeYM);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadKeikakuKubun() {
+        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getRadKeikakuKubun();
+    }
+
+    @JsonIgnore
+    public void setRadKeikakuKubun(RadioButton radKeikakuKubun) {
+        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setRadKeikakuKubun(radKeikakuKubun);
     }
 
     @JsonIgnore
@@ -326,63 +323,73 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtTodokedeshaName() {
-        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTxtTodokedeshaName();
+    public TodokedeshaDiv getTodokedesha() {
+        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha();
     }
 
     @JsonIgnore
-    public void setTxtTodokedeshaName(TextBox txtTodokedeshaName) {
-        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setTxtTodokedeshaName(txtTodokedeshaName);
+    public void setTodokedesha(TodokedeshaDiv Todokedesha) {
+        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setTodokedesha(Todokedesha);
     }
 
     @JsonIgnore
-    public TextBox getTxtTodokedeshaNameKana() {
-        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTxtTodokedeshaNameKana();
+    public TextBoxAtenaMeisho getTxtTodokedeshaShimei() {
+        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().getTxtTodokedeshaShimei();
     }
 
     @JsonIgnore
-    public void setTxtTodokedeshaNameKana(TextBox txtTodokedeshaNameKana) {
-        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setTxtTodokedeshaNameKana(txtTodokedeshaNameKana);
+    public void setTxtTodokedeshaShimei(TextBoxAtenaMeisho txtTodokedeshaShimei) {
+        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().setTxtTodokedeshaShimei(txtTodokedeshaShimei);
     }
 
     @JsonIgnore
-    public TextBox getTxtTodokedeshaYubinNo() {
-        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTxtTodokedeshaYubinNo();
+    public TextBoxAtenaKanaMeisho getTxtTodokedeshaShimeiKana() {
+        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().getTxtTodokedeshaShimeiKana();
     }
 
     @JsonIgnore
-    public void setTxtTodokedeshaYubinNo(TextBox txtTodokedeshaYubinNo) {
-        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setTxtTodokedeshaYubinNo(txtTodokedeshaYubinNo);
+    public void setTxtTodokedeshaShimeiKana(TextBoxAtenaKanaMeisho txtTodokedeshaShimeiKana) {
+        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().setTxtTodokedeshaShimeiKana(txtTodokedeshaShimeiKana);
+    }
+
+    @JsonIgnore
+    public TextBoxYubinNo getTxtTodokedeshaYubinNo() {
+        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().getTxtTodokedeshaYubinNo();
+    }
+
+    @JsonIgnore
+    public void setTxtTodokedeshaYubinNo(TextBoxYubinNo txtTodokedeshaYubinNo) {
+        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().setTxtTodokedeshaYubinNo(txtTodokedeshaYubinNo);
     }
 
     @JsonIgnore
     public TextBox getTxtTodokedeshaJusho() {
-        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTxtTodokedeshaJusho();
+        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().getTxtTodokedeshaJusho();
     }
 
     @JsonIgnore
     public void setTxtTodokedeshaJusho(TextBox txtTodokedeshaJusho) {
-        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setTxtTodokedeshaJusho(txtTodokedeshaJusho);
+        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().setTxtTodokedeshaJusho(txtTodokedeshaJusho);
     }
 
     @JsonIgnore
-    public TextBox getTxtTodokedeshaTelNo() {
-        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTxtTodokedeshaTelNo();
+    public TextBoxTelNo getTxtTodokedeshaTelNo() {
+        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().getTxtTodokedeshaTelNo();
     }
 
     @JsonIgnore
-    public void setTxtTodokedeshaTelNo(TextBox txtTodokedeshaTelNo) {
-        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setTxtTodokedeshaTelNo(txtTodokedeshaTelNo);
+    public void setTxtTodokedeshaTelNo(TextBoxTelNo txtTodokedeshaTelNo) {
+        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().setTxtTodokedeshaTelNo(txtTodokedeshaTelNo);
     }
 
     @JsonIgnore
     public DropDownList getDdlTodokedeshaKankeiKubun() {
-        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getDdlTodokedeshaKankeiKubun();
+        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().getDdlTodokedeshaKankeiKubun();
     }
 
     @JsonIgnore
     public void setDdlTodokedeshaKankeiKubun(DropDownList ddlTodokedeshaKankeiKubun) {
-        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setDdlTodokedeshaKankeiKubun(ddlTodokedeshaKankeiKubun);
+        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().setDdlTodokedeshaKankeiKubun(ddlTodokedeshaKankeiKubun);
     }
 
     @JsonIgnore
@@ -446,42 +453,42 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtJigyoshaYubinNo() {
+    public TextBoxYubinNo getTxtJigyoshaYubinNo() {
         return this.getServiceAddAndServicePlanCreate().getJigyoshaJoho().getTxtJigyoshaYubinNo();
     }
 
     @JsonIgnore
-    public void setTxtJigyoshaYubinNo(TextBox txtJigyoshaYubinNo) {
+    public void setTxtJigyoshaYubinNo(TextBoxYubinNo txtJigyoshaYubinNo) {
         this.getServiceAddAndServicePlanCreate().getJigyoshaJoho().setTxtJigyoshaYubinNo(txtJigyoshaYubinNo);
     }
 
     @JsonIgnore
-    public TextBoxMultiLine getTxtJigyoshaJusho() {
+    public TextBox getTxtJigyoshaJusho() {
         return this.getServiceAddAndServicePlanCreate().getJigyoshaJoho().getTxtJigyoshaJusho();
     }
 
     @JsonIgnore
-    public void setTxtJigyoshaJusho(TextBoxMultiLine txtJigyoshaJusho) {
+    public void setTxtJigyoshaJusho(TextBox txtJigyoshaJusho) {
         this.getServiceAddAndServicePlanCreate().getJigyoshaJoho().setTxtJigyoshaJusho(txtJigyoshaJusho);
     }
 
     @JsonIgnore
-    public TextBox getTxtJigyoshaTelNo() {
+    public TextBoxTelNo getTxtJigyoshaTelNo() {
         return this.getServiceAddAndServicePlanCreate().getJigyoshaJoho().getTxtJigyoshaTelNo();
     }
 
     @JsonIgnore
-    public void setTxtJigyoshaTelNo(TextBox txtJigyoshaTelNo) {
+    public void setTxtJigyoshaTelNo(TextBoxTelNo txtJigyoshaTelNo) {
         this.getServiceAddAndServicePlanCreate().getJigyoshaJoho().setTxtJigyoshaTelNo(txtJigyoshaTelNo);
     }
 
     @JsonIgnore
-    public TextBox getTxtJigyoshaKanrishaName() {
+    public TextBoxAtenaMeisho getTxtJigyoshaKanrishaName() {
         return this.getServiceAddAndServicePlanCreate().getJigyoshaJoho().getTxtJigyoshaKanrishaName();
     }
 
     @JsonIgnore
-    public void setTxtJigyoshaKanrishaName(TextBox txtJigyoshaKanrishaName) {
+    public void setTxtJigyoshaKanrishaName(TextBoxAtenaMeisho txtJigyoshaKanrishaName) {
         this.getServiceAddAndServicePlanCreate().getJigyoshaJoho().setTxtJigyoshaKanrishaName(txtJigyoshaKanrishaName);
     }
 

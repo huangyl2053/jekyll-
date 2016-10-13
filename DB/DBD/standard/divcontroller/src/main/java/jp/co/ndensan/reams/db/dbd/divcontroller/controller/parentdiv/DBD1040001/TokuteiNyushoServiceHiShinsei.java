@@ -229,7 +229,8 @@ public class TokuteiNyushoServiceHiShinsei {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
-        if (ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             dgShinseiList_Row row = div.getShinsei().getShinseiList().getDgShinseiList().getActiveRow();
             List<TokubetsuchiikiKasanGemmen> 特別地域加算減免申請の情報List = ViewStateHolder.get(ViewStateKeys.特別地域加算減免申請の情報List, ArrayList.class);
             RString 元決定区分 = RString.EMPTY;
@@ -237,7 +238,7 @@ public class TokuteiNyushoServiceHiShinsei {
             if (特別地域加算減免申請の情報 != null && 特別地域加算減免申請の情報.get決定区分() != null) {
                 元決定区分 = 特別地域加算減免申請の情報.get決定区分();
             }
-            if (!ResponseHolder.isReRequest() && !追加.equals(row.getJotai()) && !元決定区分.isEmpty()) {
+            if (!追加.equals(row.getJotai()) && !元決定区分.isEmpty()) {
                 InformationMessage message = new InformationMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().getCode(),
                         DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
@@ -600,10 +601,9 @@ public class TokuteiNyushoServiceHiShinsei {
 //                    new HihokenshaNo(new RString("2190000001")),
 //                    new ShikibetsuCode(new RString("000000000000010")),
 //                    new SetaiCode(new RString("000000000000100")));
+            保存処理();
             PersonalData personalData = getHandler(div).toPersonalData(taishoshaKey);
             AccessLogger.log(AccessLogType.更新, personalData);
-
-            保存処理();
             前排他キーの解除();
             div.getLin1().setDisplayNone(true);
             div.getCcdKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));

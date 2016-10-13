@@ -44,7 +44,7 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
 
     @Override
     protected void initialize() {
-        後期高齢者情報インポート用Entity = new TorikomiKokiKoreshaJyohoImportEntity();
+        後期高齢者情報インポート用Entity = null;
     }
 
     @Override
@@ -60,10 +60,6 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
 
     @Override
     protected void process(KokiKoreshaJyohoResultEntity entity) {
-        if (エラー区分_正常データ.equals(entity.get取込後期高齢者情報Entity().getエラー区分())) {
-            後期高齢者情報インポート用Entityリストの編集_取込形式_全件(entity);
-            後期高齢者情報インポート用Entityリストの編集_取込形式_差分(entity);
-        }
         if (entity.get取込後期高齢者情報Entity() != null
                 && entity.get現在後期高齢者情報() != null
                 && 登録区分_画面登録.equals(entity.get現在後期高齢者情報().getTorokuKubun())) {
@@ -76,6 +72,10 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
                 entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_82);
                 entity.get取込後期高齢者情報Entity().setエラー文言(エラーコード文言);
                 entity.get取込後期高齢者情報Entity().setエラー区分(エラー区分);
+            }
+            if (エラー区分_正常データ.equals(entity.get取込後期高齢者情報Entity().getエラー区分())) {
+                後期高齢者情報インポート用Entityリストの編集_取込形式_全件(entity);
+                後期高齢者情報インポート用Entityリストの編集_取込形式_差分(entity);
             }
         }
         if (後期高齢者情報インポート用Entity != null) {

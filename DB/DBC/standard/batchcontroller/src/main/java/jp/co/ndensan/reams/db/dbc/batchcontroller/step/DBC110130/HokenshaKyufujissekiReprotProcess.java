@@ -174,8 +174,17 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
                 report.writeBy(reportSourceWriter);
             }
         }
-        HokenshaKyufujissekiReprotCsvEntity csvEntity = getCsvMeisaiEntity(entity);
-        eucCsvWriter.writeLine(csvEntity);
+        if (index == INT_1) {
+            HokenshaKyufujissekiReprotCsvEntity csvEntity = getCsvMeisaiEntity(entity);
+            RString 処理年月 = processParameter.getShoriYM().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            csvEntity.set送付年月(処理年月);
+            csvEntity.set作成日時(getSakuseiYmhm(processParameter.getNow().getRDateTime()));
+            eucCsvWriter.writeLine(csvEntity);
+        } else {
+            HokenshaKyufujissekiReprotCsvEntity csvEntity = getCsvMeisaiEntity(entity);
+            eucCsvWriter.writeLine(csvEntity);
+        }
         アクセスログ対象追加(entity);
         index = index + INT_1;
         一覧表entity = entity;
@@ -218,10 +227,8 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
 
     private HokenshaKyufujissekiReprotCsvEntity getCsvMeisaiEntity(KyuufuJisekiKoshinnKekkaEntity entity) {
         HokenshaKyufujissekiReprotCsvEntity csvEntity = new HokenshaKyufujissekiReprotCsvEntity();
-        RString 処理年月 = processParameter.getShoriYM().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        csvEntity.set送付年月(処理年月);
-        csvEntity.set作成日時(getSakuseiYmhm(processParameter.getNow().getRDateTime()));
+        csvEntity.set送付年月(RString.EMPTY);
+        csvEntity.set作成日時(RString.EMPTY);
         DbWT1001HihokenshaTempEntity 被保険者一時Entity = entity.get被保険者一時Entity();
         DbWT1111KyufuJissekiTempEntity 給付実績一時Entity = entity.get給付実績一時Entity();
         csvEntity.set保険者番号(給付実績一時Entity.getコントロールレコード保険者番号() == null
@@ -285,10 +292,8 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
 
     private HokenshaKyufujissekiReprotCsvEntity getCsvGoukiiEntity(HokenshaNo 保険者番号) {
         HokenshaKyufujissekiReprotCsvEntity csvEntity = new HokenshaKyufujissekiReprotCsvEntity();
-        RString 処理年月 = processParameter.getShoriYM().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        csvEntity.set送付年月(処理年月);
-        csvEntity.set作成日時(getSakuseiYmhm(processParameter.getNow().getRDateTime()));
+        csvEntity.set送付年月(RString.EMPTY);
+        csvEntity.set作成日時(RString.EMPTY);
         csvEntity.set保険者番号(保険者番号.getColumnValue());
         csvEntity.set保険者名(RString.EMPTY);
         csvEntity.setNo(RString.EMPTY);

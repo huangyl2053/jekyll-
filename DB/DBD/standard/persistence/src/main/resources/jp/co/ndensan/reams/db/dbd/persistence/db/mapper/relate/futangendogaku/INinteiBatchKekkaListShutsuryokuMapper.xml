@@ -91,6 +91,7 @@
             受給者台帳."yokaigoJotaiKubunCode" AS 要介護状態区分コード,
             受給者台帳.koroshoIfShikibetsuCode AS 厚労省IF識別コード,
             受給者台帳."kyuSochishaFlag" AS 旧措置者フラグ,
+            受給者台帳."shichosonCode" AS 市町村コード,
             利用減額.is申請 AS 利用減額申請,
             訪問減額.is申請 AS 訪問減額申請,
             社福軽減.is申請 AS 社福軽減申請,

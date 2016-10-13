@@ -364,6 +364,17 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     }
 
     /**
+     * 「「完了する」ボタン」ボタンです。
+     *
+     * @param div KogakuGassanShikyuKetteiHoseiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onClick_btnComplete(
+            KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC1230011TransitionEventName.完了).respond();
+    }
+
+    /**
      * 「決定情報一覧に戻する」ボタンです。
      *
      * @param div KogakuGassanShikyuKetteiHoseiPanelDiv
@@ -422,7 +433,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     }
 
     /**
-     * 「決定情報一覧に戻する」ボタンです。
+     * 「決定情報を保存する」ボタンです。
      *
      * @param div KogakuGassanShikyuKetteiHoseiPanelDiv
      * @return ResponseData
@@ -430,26 +441,38 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onClick_btnSave(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        if (削除.equals(画面モード) || 照会.equals(画面モード)) {
-            return save決定情報登録(div, 画面モード);
-        }
         KogakuGassanShikyuKetteiHoseiDetailParameter para = ViewStateHolder.get(
                 ViewStateKeys.詳細データ, KogakuGassanShikyuKetteiHoseiDetailParameter.class);
+        if (削除.equals(画面モード)) {
+            return save決定情報登録(div, 画面モード, para);
+        }
         boolean flag = getHandler(div).is決定情報内容変更状態(para);
         ValidationMessageControlPairs validPairs = getCheckHandler(div).check決定情報保存();
         if (flag) {
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             } else {
-                return save決定情報登録(div, 画面モード);
+                return save決定情報登録(div, 画面モード, para);
             }
         } else {
             return notChanges(div);
         }
     }
 
+    /**
+     * 「実行する」ボタンを設定する。
+     *
+     * @param div KarisanteiIdoFukaPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onStateTransition(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+        getHandler(div).set保存ボタン();
+        return ResponseData.of(div).respond();
+    }
+
     private ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> save決定情報登録(
-            KogakuGassanShikyuKetteiHoseiPanelDiv div, RString 画面モード) {
+            KogakuGassanShikyuKetteiHoseiPanelDiv div, RString 画面モード,
+            KogakuGassanShikyuKetteiHoseiDetailParameter para) {
         try {
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
@@ -473,7 +496,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                             getHandler(div).toPersonalData(識別コード,
                                     被保険者番号.getColumnValue()));
                     getHandler(div).save決定情報(被保険者番号, 対象年度, 保険者番号,
-                            支給申請書整理番号, 画面モード, 決定情報list);
+                            支給申請書整理番号, 画面モード, 決定情報list, para);
                     getHandler(div).前排他キーの解除(被保険者番号);
                     getHandler(div).clear決定情報();
                     getHandler(div).set画面tap();
@@ -501,7 +524,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                             getHandler(div).toPersonalData(識別コード,
                                     被保険者番号.getColumnValue()));
                     getHandler(div).save決定情報(被保険者番号, 対象年度, 保険者番号,
-                            支給申請書整理番号, 画面モード, 決定情報list);
+                            支給申請書整理番号, 画面モード, 決定情報list, para);
                     getHandler(div).clear決定情報();
                     getHandler(div).set画面tap();
                     getHandler(div).前排他キーの解除(被保険者番号);

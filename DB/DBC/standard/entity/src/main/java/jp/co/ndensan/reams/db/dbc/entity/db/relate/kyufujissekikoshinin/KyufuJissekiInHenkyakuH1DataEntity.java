@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin;
 
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001HihokenshaIchijiEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +21,6 @@ import lombok.Setter;
 public class KyufuJissekiInHenkyakuH1DataEntity {
 
     private DbWT111AKyufuJissekiH1Entity 給付実績H1;
-    private DbWT0001HihokenshaIchijiEntity 被保険者一時;
+    private DbWT0001HihokenshaTempEntity 被保険者一時;
     private DbT3017KyufujissekiKihonEntity 給付実績基本;
 }

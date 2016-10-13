@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110020;
 
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110020.JukyushaIdoRenrakuhyoOutMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
@@ -41,5 +42,19 @@ public class JukyushaIdoRenrakuhyoOutProcessParameter implements IBatchProcessPa
         this.再処理区分 = 再処理区分;
         this.抽出条件 = 抽出条件;
         this.ファイル名 = ファイル名;
+    }
+
+    /**
+     * toMybatisParameterのメソッドです。
+     *
+     * @return JukyushaIdoRenrakuhyoOutMybatisParameter
+     */
+    public JukyushaIdoRenrakuhyoOutMybatisParameter toMybatisParameter() {
+        JukyushaIdoRenrakuhyoOutMybatisParameter parameter = new JukyushaIdoRenrakuhyoOutMybatisParameter();
+        parameter.set再処理区分(再処理区分);
+        parameter.set処理年月(処理年月);
+        parameter.set抽出条件(抽出条件);
+        parameter.setファイル名(ファイル名);
+        return parameter;
     }
 }

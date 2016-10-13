@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0110011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -24,6 +25,8 @@ public class RirekiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("lin01")
+    private HorizontalLine lin01;
     @JsonProperty("btnAdd")
     private Button btnAdd;
     @JsonProperty("dgKyotakuServiceIchiran")
@@ -35,6 +38,24 @@ public class RirekiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getlin01
+     * @return lin01
+     */
+    @JsonProperty("lin01")
+    public HorizontalLine getLin01() {
+        return lin01;
+    }
+
+    /*
+     * setlin01
+     * @param lin01 lin01
+     */
+    @JsonProperty("lin01")
+    public void setLin01(HorizontalLine lin01) {
+        this.lin01 = lin01;
+    }
+
     /*
      * getbtnAdd
      * @return btnAdd

@@ -11,9 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.Souf
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -21,23 +19,29 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 送付エラーリストの帳票とCSVを出力を実行する。
  *
  * @reamsid_L DBC-2720-070 chenhui
  */
-public class SoufuErrorOutProcess extends BatchProcessBase<SoufuErrorTblEntity> {
+public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select送付エラー一時");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC110020");
-    private final RString csvFileName = new RString("SofuDataErroriList.csv");
-    private final int COUNT_0 = 0;
+    private static final RString CSV_FILENAME = new RString("SofuDataErroriList.csv");
+    private static final int COUNT_0 = 0;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString CSV_市町村コード = new RString("市町村コード");
@@ -76,8 +80,9 @@ public class SoufuErrorOutProcess extends BatchProcessBase<SoufuErrorTblEntity> 
     private int 連番;
     private RString 市町村コード = RString.EMPTY;
     private RString 市町村名称 = RString.EMPTY;
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter 異動一時tableWriter;
+    private RString 作成年月日 = RString.EMPTY;
+//    @BatchWriter
+//    BatchEntityCreatedTempTableWriter 異動一時tableWriter;
 
     private FileSpoolManager spoolManager;
     private CsvListWriter csvListWriter;
@@ -86,7 +91,13 @@ public class SoufuErrorOutProcess extends BatchProcessBase<SoufuErrorTblEntity> 
     protected void initialize() {
         市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value();
         市町村名称 = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records().get(COUNT_0).get市町村名称();
+        RDateTime sysDate = RDate.getNowDateTime();
+        RString 年月日 = sysDate.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
+        RTime 時刻 = sysDate.getTime();
+        作成年月日 = new RString(年月日.toString()
+                + 時刻.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
         連番 = 0;
+        super.initialize();
     }
 
     @Override
@@ -99,7 +110,7 @@ public class SoufuErrorOutProcess extends BatchProcessBase<SoufuErrorTblEntity> 
         spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
-                csvFileName);
+                CSV_FILENAME);
         csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -107,12 +118,6 @@ public class SoufuErrorOutProcess extends BatchProcessBase<SoufuErrorTblEntity> 
                 .hasHeader(true)
                 .setHeader(getHeaderList())
                 .build();
-    }
-
-    @Override
-    protected void process(SoufuErrorTblEntity entity) {
-        連番++;
-        csvListWriter.writeLine(getBodyList(entity, 連番));
     }
 
     @Override
@@ -154,7 +159,7 @@ public class SoufuErrorOutProcess extends BatchProcessBase<SoufuErrorTblEntity> 
         headerList.add(CSV_標準開始日);
         headerList.add(CSV_標準終了日);
         headerList.add(CSV_被下開始日);
-        headerList.add(CSV_ページ数);
+//        headerList.add(CSV_ページ数);
         headerList.add(CSV_作成年月日);
         headerList.add(CSV_処理年月);
         return headerList;
@@ -169,38 +174,50 @@ public class SoufuErrorOutProcess extends BatchProcessBase<SoufuErrorTblEntity> 
      * @return {@link List<RString>}
      */
     public List<RString> getBodyList(SoufuErrorTblEntity entity, int 連番) {
-        List<RString> headerList = new ArrayList<>();
-        headerList.add(市町村コード);
-        headerList.add(市町村名称);
-        headerList.add(new RString(連番));
-        headerList.add(entity.get被保険者番号().getColumnValue());
-        headerList.add(entity.get氏名カナ());
-        headerList.add(entity.get氏名());
-        headerList.add(dateChangeToRString(entity.get資格取得日()));
-        headerList.add(entity.get要介護状態区分コード().getColumnValue());
-        headerList.add(dateChangeToRString(entity.get要介護認定申請日()));
-        headerList.add(entity.get居宅事業者番号().getColumnValue());
-        headerList.add(dateChangeToRString(entity.get特定申請日()));
-        headerList.add(dateChangeToRString(entity.get特定適用開始日()));
-        headerList.add(dateChangeToRString(entity.get特定適用終了日()));
-        headerList.add(dateChangeToRString(entity.get社会福祉適用開始日()));
-        headerList.add(dateChangeToRString(entity.get社会福祉適用終了日()));
-        headerList.add(dateChangeToRString(entity.get償還払化開始日()));
-        headerList.add(entity.getエラーコード());
-        headerList.add(entity.getエラー内容());
-        headerList.add(dateChangeToRString(entity.get資格喪失日()));
-        headerList.add(dateChangeToRString(entity.get認定開始日()));
-        headerList.add(dateChangeToRString(entity.get認定終了日()));
-        headerList.add(dateChangeToRString(entity.get居宅適用開始日()));
-        headerList.add(dateChangeToRString(entity.get利用者負担申請日()));
-        headerList.add(dateChangeToRString(entity.get利用者負担適用開始日()));
-        headerList.add(dateChangeToRString(entity.get利用者負担適用終了日()));
-        headerList.add(dateChangeToRString(entity.get標準負担適用開始日()));
-        headerList.add(dateChangeToRString(entity.get標準負担適用終了日()));
-        headerList.add(dateChangeToRString(entity.get給付率引下げ開始日()));
-        headerList.add(dateChangeToRString(entity.get作成年月日()));
-        headerList.add(entity.get処理年月().toDateString());
-        return headerList;
+        List<RString> bodyList = new ArrayList<>();
+        bodyList.add(市町村コード);
+        bodyList.add(市町村名称);
+        bodyList.add(new RString(連番));
+        bodyList.add(entity.get被保険者番号().getColumnValue());
+        bodyList.add(entity.get氏名カナ());
+        bodyList.add(entity.get氏名());
+        bodyList.add(dateChangeToRString(entity.get資格取得日()));
+        if (entity.get要介護状態区分コード() != null) {
+            bodyList.add(entity.get要介護状態区分コード().getColumnValue());
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        bodyList.add(dateChangeToRString(entity.get要介護認定申請日()));
+        if (entity.get居宅事業者番号() != null) {
+            bodyList.add(entity.get居宅事業者番号().getColumnValue());
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        bodyList.add(dateChangeToRString(entity.get特定申請日()));
+        bodyList.add(dateChangeToRString(entity.get特定適用開始日()));
+        bodyList.add(dateChangeToRString(entity.get特定適用終了日()));
+        bodyList.add(dateChangeToRString(entity.get社会福祉適用開始日()));
+        bodyList.add(dateChangeToRString(entity.get社会福祉適用終了日()));
+        bodyList.add(dateChangeToRString(entity.get償還払化開始日()));
+        bodyList.add(entity.getエラーコード());
+        bodyList.add(entity.getエラー内容());
+        bodyList.add(dateChangeToRString(entity.get資格喪失日()));
+        bodyList.add(dateChangeToRString(entity.get認定開始日()));
+        bodyList.add(dateChangeToRString(entity.get認定終了日()));
+        bodyList.add(dateChangeToRString(entity.get居宅適用開始日()));
+        bodyList.add(dateChangeToRString(entity.get利用者負担申請日()));
+        bodyList.add(dateChangeToRString(entity.get利用者負担適用開始日()));
+        bodyList.add(dateChangeToRString(entity.get利用者負担適用終了日()));
+        bodyList.add(dateChangeToRString(entity.get標準負担適用開始日()));
+        bodyList.add(dateChangeToRString(entity.get標準負担適用終了日()));
+        bodyList.add(dateChangeToRString(entity.get給付率引下げ開始日()));
+        bodyList.add(作成年月日);
+        if (entity.get処理年月() != null) {
+            bodyList.add(entity.get処理年月().toDateString());
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        return bodyList;
     }
 
     private RString dateChangeToRString(FlexibleDate date) {
@@ -208,6 +225,16 @@ public class SoufuErrorOutProcess extends BatchProcessBase<SoufuErrorTblEntity> 
             return RString.EMPTY;
         }
         return new RString(date.toString());
+    }
+
+    @Override
+    protected void keyBreakProcess(SoufuErrorTblEntity t) {
+    }
+
+    @Override
+    protected void usualProcess(SoufuErrorTblEntity entity) {
+        連番++;
+        csvListWriter.writeLine(getBodyList(entity, 連番));
     }
 
 }
