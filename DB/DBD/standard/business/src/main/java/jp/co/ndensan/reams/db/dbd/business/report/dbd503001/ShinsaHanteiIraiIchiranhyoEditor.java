@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.entity.report.dbd503001.ShinsaHanteiIraiIchira
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -75,6 +76,8 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
                 被保険者区分名称 = HihokenshaKubunCode.toValue(被保険者区分コード).get略称();
             }
             source.listIraiichiranhyo2_4 = 被保険者区分名称;
+            get前回要介護状態区分(source);
+
         }
         source.reportId = 帳票ID;
     }
@@ -116,9 +119,6 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
         if (null != this.帳票出力用申請情報Entityリスト.get認定申請年月日()) {
             source.listIraiichiranhyo2_5 = this.帳票出力用申請情報Entityリスト.get認定申請年月日().wareki().toDateString();
         }
-        if (null != this.帳票出力用申請情報Entityリスト.get前回要介護状態区分コード()) {
-            source.listIraiichiranhyo2_6 = this.帳票出力用申請情報Entityリスト.get前回要介護状態区分コード().value();
-        }
         if (null != this.帳票出力用申請情報Entityリスト.get前回認定有効期間開始()) {
             source.listIraiichiranhyo2_7 = this.帳票出力用申請情報Entityリスト.get前回認定有効期間開始().wareki().toDateString();
         }
@@ -130,4 +130,15 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
         }
     }
 
+    private void get前回要介護状態区分(ShinsaHanteiIraiIchiranhyoReportSource source) {
+        //QAがある、作成した帳票の前回判定結果はコードです.YokaigoJotaiKubun09は今自分が勝手に編集しています。
+        if (null != this.帳票出力用申請情報Entityリスト.get前回要介護状態区分コード()) {
+            RString 前回要介護状態区分コード = this.帳票出力用申請情報Entityリスト.get前回要介護状態区分コード().value();
+            RString 前回要介護状態区分名称 = RString.EMPTY;
+            if (null != 前回要介護状態区分コード && !前回要介護状態区分コード.isEmpty()) {
+                前回要介護状態区分名称 = YokaigoJotaiKubun09.toValue(前回要介護状態区分コード).get名称();
+            }
+            source.listIraiichiranhyo2_6 = 前回要介護状態区分名称;
+        }
+    }
 }
