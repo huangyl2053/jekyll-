@@ -54,8 +54,8 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuMainHandler {
      * 初期化状態設定のメソッドです。
      */
     public void click条件をクリア() {
-        div.getTxtSearchHihokenshaNo().clearValue();
-        div.getTxtHihokenshaMei().clearDomain();
+        div.getTxtSearchHihokenshaNo().setValue(RString.EMPTY);
+        div.getTxtHihokenshaMei().setDomain(AtenaMeisho.EMPTY);
         div.getTxtSearchIdoYMD().clearFromValue();
         div.getTxtSearchIdoYMD().clearToValue();
         List<RString> keyList = new ArrayList<>();
