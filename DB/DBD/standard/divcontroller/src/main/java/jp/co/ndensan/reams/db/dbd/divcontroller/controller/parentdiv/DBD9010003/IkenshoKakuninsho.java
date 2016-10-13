@@ -134,18 +134,6 @@ public class IkenshoKakuninsho {
     }
 
     /**
-     * 主治医意見書確認書画面にて「終了するボタン押下時(onClick)のイベントハンドラです。
-     *
-     * @param div IkenshoKakuninshoDiv
-     * @return ResponseData<IkenshoKakuninshoDiv>
-     */
-    public ResponseData<IkenshoKakuninshoDiv> onClick_btnshuryo(IkenshoKakuninshoDiv div) {
-        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        RealInitialLocker.release(create排他キー(taishoshaKey));
-        return ResponseData.of(div).forwardWithEventName(DBD9010003TransitionEventName.終了).respond();
-    }
-
-    /**
      * 主治医意見書確認書画面にて発行するボタン押下時(onClick)のチェックです。
      *
      * @param div IkenshoKakuninshoDiv
