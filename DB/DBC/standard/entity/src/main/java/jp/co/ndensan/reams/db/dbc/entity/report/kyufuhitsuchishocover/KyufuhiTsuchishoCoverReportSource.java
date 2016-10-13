@@ -1,7 +1,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.kyufuhitsuchishocover;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
@@ -9,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  *
  * @reamsid_L DBC-2280-040 lizhuoxuan
  */
-public class KyufuhiTsuchishoCoverReportSource implements IReportSource {
+public class KyufuhiTsuchishoCoverReportSource extends IKyufuhiTsuchishoCoverDetailReport {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "bunshoNo", length = 36, order = 1)
@@ -142,6 +141,38 @@ public class KyufuhiTsuchishoCoverReportSource implements IReportSource {
     public RString naisenLabel;
     @ReportItem(name = "naisenNo", length = 20, order = 65)
     public RString naisenNo;
+//    @ReportItem(name = "hihokenshaName", length = 22, order = 101)
+//    public RString key_hihokenshaName;
+//    @ReportItem(name = "hokenshaNo", length = 10, order = 102)
+//    public RString key_hokenshaNo;
+//    @ReportItem(name = "shukeiserviceSTYM", length = 8, order = 103)
+//    public RString key_shukeiserviceSTYM;
+//    @ReportItem(name = "shukeiserviceEDYM", length = 8, order = 104)
+//    public RString key_shukeiserviceEDYM;
+//    @ReportItem(name = "listServiceIchiranUpper_1", length = 8, order = 105)
+//    public RString key_listServiceIchiranUpper_1;
+//    @ReportItem(name = "listServiceIchiranUpper_2", length = 15, order = 106)
+//    public RString key_listServiceIchiranUpper_2;
+//    @ReportItem(name = "listServiceIchiranUpper_3", length = 16, order = 107)
+//    public RString key_listServiceIchiranUpper_3;
+//    @ReportItem(name = "listServiceIchiranUpper_4", length = 3, order = 108)
+//    public RString key_listServiceIchiranUpper_4;
+//    @ReportItem(name = "listServiceIchiranUpper_5", length = 11, order = 109)
+//    public RString key_listServiceIchiranUpper_5;
+//    @ReportItem(name = "listServiceIchiranUpper_6", length = 11, order = 110)
+//    public RString key_listServiceIchiranUpper_6;
+//    @ReportItem(name = "listServiceIchiranLower_1", length = 15, order = 111)
+//    public RString key_listServiceIchiranLower_1;
+//    @ReportItem(name = "listServiceIchiranLower_2", length = 16, order = 112)
+//    public RString key_listServiceIchiranLower_2;
+//    @ReportItem(name = "tsuchibun1", length = 110, order = 113)
+//    public RString key_tsuchibun1;
+//    @ReportItem(name = "tsuchibun2", length = 110, order = 114)
+//    public RString key_tsuchibun2;
+//    @ReportItem(name = "pageBunshi", length = 3, order = 115)
+//    public RString key_pageBunshi;
+//    @ReportItem(name = "pageBunbo", length = 3, order = 116)
+//    public RString key_pageBunbo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

@@ -120,9 +120,9 @@ public class KyufuhiTsuchishoReportDBC100042Process extends BatchProcessBase<Kyu
         coverEntity.setTsuchibun1(通知文);
         coverEntity.setPageBunshi(分子);
         coverEntity.setPageBunbo(entity.getCount());
-        boolean isBreak = isBreak(被保険者番号, サービス年月, entity);
-        if (isBreak || index % 数値_15 == 0) {
-            coverEntity.setListServiceIchiran_1(サービス年月);
+        boolean isBreak = isBreak(entity);
+        if (!isBreak || index % 数値_15 == 0) {
+            coverEntity.setListServiceIchiran_1(entity.getサービス提供年月());
         } else if (!isBreak) {
             coverEntity.setListServiceIchiran_1(RString.EMPTY);
         }
@@ -133,7 +133,7 @@ public class KyufuhiTsuchishoReportDBC100042Process extends BatchProcessBase<Kyu
         report.writeBy(reportSourceWriter);
     }
 
-    private boolean isBreak(RString 被保険者番号, RString サービス年月, KyufuhiTuchiHakkoEntity entity) {
+    private boolean isBreak(KyufuhiTuchiHakkoEntity entity) {
         return 被保険者番号.equals(entity.get被保険者番号()) && サービス年月.equals(entity.getサービス提供年月());
     }
 }
