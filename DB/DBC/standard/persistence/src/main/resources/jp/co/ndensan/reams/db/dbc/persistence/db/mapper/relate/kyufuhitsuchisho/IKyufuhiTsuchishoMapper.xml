@@ -71,7 +71,7 @@
                 WHERE
                   給付実績基本データ."row_num" = '1' 
                    AND 給付実績基本データ."kyufuSakuseiKubunCode" <![CDATA[<>]]> '3' 
-                  AND #{サービス年月開始} <![CDATA[<=]]> 給付実績基本データ."serviceTeikyoYM" 
+                   AND #{サービス年月開始} <![CDATA[<=]]> 給付実績基本データ."serviceTeikyoYM" 
                   AND 給付実績基本データ."serviceTeikyoYM" <![CDATA[<=]]> #{サービス年月終了} 
                   AND 給付実績基本データ."yoKaigoJotaiKubunCode" IN (#{要介護度}) 
                   AND 給付実績基本データ."shokisaiHokenshaNo" = #{証記載保険者番号}
@@ -162,14 +162,15 @@
                     rgdb."DbT7063KaigoJigyoshaShiteiService" AS B
                 ) 
               LEFT JOIN rgdb."DbT7131KaigoServiceNaiyou" AS 介護サービス内容 
-                ON 介護サービス内容."serviceKoumokuCd" = 給付実績明細."jigyoshoNo" 
+                ON 介護サービス内容."serviceKoumokuCd" = 給付実績明細."serviceKomokuCode" 
                 AND 介護サービス内容."serviceShuruiCd" = 給付実績明細."serviceShuruiCode" 
                 AND 介護サービス内容."teikyoKaishiYM" = ( 
                   SELECT
                     MAX(A."teikyoKaishiYM")
                   FROM
                     rgdb."DbT7131KaigoServiceNaiyou" AS A
-                ) <if test = "福祉用具貸与ページ出力区分フラグ" >
+                ) 
+              <if test = "福祉用具貸与ページ出力区分フラグ" > 
               LEFT JOIN "KaigoKyufuHiFukushiYouguTemp" AS 介護給付費福祉用具貸与品目一時TBL 
                 ON 介護給付費福祉用具貸与品目一時TBL."shokisaiHokenshaNo" = 給付実績基本抽出データ."shokisaiHokenshaNo" 
                    AND 介護給付費福祉用具貸与品目一時TBL."hiHokenshaNo" = 給付実績基本抽出データ."hiHokenshaNo" 
@@ -270,14 +271,14 @@
                 AND 給付実績基本抽出データ."kyufuJissekiKubunCode" <![CDATA[<>]]> '2' 
                 </if >
             </where>)
-                SELECT E.* ,F.count
+                SELECT E.* ,M.count
                     FROM 連番 AS E
-                    LEFT JOIN (
-                    SELECT "被保険者番号"
+                    LEFT JOIN (SELECT count(F.count) AS count
+              FROM(SELECT "被保険者番号"
                             ,COUNT("被保険者番号") AS count
                     FROM 連番
-                    GROUP BY "被保険者番号") AS F
-                    ON E."被保険者番号" = F."被保険者番号"
+                    GROUP BY "被保険者番号") AS F) AS M
+                    ON 1=1
     </select>
     <!--一時テーブルの介護給付費福祉用具貸与品目の取得-->
     <resultMap id="resultMap_getHokenKousei" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoIchiranRelateEntity" autoMapping="true">
@@ -356,124 +357,149 @@
         <result property="todoufukenTanisuHani10Dosu" column="todoufukenTanisuHani10Dosu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <sql id="selectKetteiTsuchiShoMeisai">
-        KaigoKyufuHiFukushiYouguTemp."rekodoShubetsu"
-        ,KaigoKyufuHiFukushiYouguTemp."rekodoNo"
-        ,KaigoKyufuHiFukushiYouguTemp."koukanJouhouSikibetuNo"
-        ,KaigoKyufuHiFukushiYouguTemp."tyouhyouRekodoShubetsu"
-        ,KaigoKyufuHiFukushiYouguTemp."hokenShaNo"
-        ,KaigoKyufuHiFukushiYouguTemp."shokisaiHokenshaNo"
-        ,KaigoKyufuHiFukushiYouguTemp."serviceTeikyoYM"
-        ,KaigoKyufuHiFukushiYouguTemp."jigyoshoNo"
-        ,KaigoKyufuHiFukushiYouguTemp."jigyoshoKanji"
-        ,KaigoKyufuHiFukushiYouguTemp."serviceShuruiCode"
-        ,KaigoKyufuHiFukushiYouguTemp."serviceKomokuCode"
-        ,KaigoKyufuHiFukushiYouguTemp."serviceRyakushou"
-        ,KaigoKyufuHiFukushiYouguTemp."cctaCode"
-        ,KaigoKyufuHiFukushiYouguTemp."fukushiYouguKaHinmokuCode"
-        ,KaigoKyufuHiFukushiYouguTemp."fukushiYouguShouhin"
-        ,KaigoKyufuHiFukushiYouguTemp."hiyouGaku"
-        ,KaigoKyufuHiFukushiYouguTemp."kibouKouriKakaku"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuSeikyuKensu"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuSaiteiHiyouGaku"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuShikiHiyouGaku"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuSaikouHiyouGaku"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuHeikinHiyouGaku"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenSeikyuKensu"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenSaiteiHiyouGaku"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenShikiHiyouGaku"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenSaikouHiyouGaku"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenHeikinHiyouGaku"
-        ,KaigoKyufuHiFukushiYouguTemp."hokenShaSeikyuKensu"
-        ,KaigoKyufuHiFukushiYouguTemp."hokenShaSaiteiHiyouGaku"
-        ,KaigoKyufuHiFukushiYouguTemp."hokenShaShikiHiyouGaku"
-        ,KaigoKyufuHiFukushiYouguTemp."hokenShaSaikouHiyouGaku"
-        ,KaigoKyufuHiFukushiYouguTemp."hokenShaHeikinHiyouGaku"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani1"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani2"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani3"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani4"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani5"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani6"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani7"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani8"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani9"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani10"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani1Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani2Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani3Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani4Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani5Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani6Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani7Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani8Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani9Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."zenkokuTanisuHani10Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani1"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani2"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani3"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani4"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani5"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani6"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani7"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani8"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani9"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani10"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani1Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani2Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani3Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani4Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani5Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani6Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani7Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani8Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani9Dosu"
-        ,KaigoKyufuHiFukushiYouguTemp."todoufukenTanisuHani10Dosu"
+        介護給付費福祉用具貸与品目一時TBL."rekodoShubetsu"
+        ,介護給付費福祉用具貸与品目一時TBL."rekodoNo"
+        ,介護給付費福祉用具貸与品目一時TBL."koukanJouhouSikibetuNo"
+        ,介護給付費福祉用具貸与品目一時TBL."tyouhyouRekodoShubetsu"
+        ,介護給付費福祉用具貸与品目一時TBL."hokenShaNo"
+        ,介護給付費福祉用具貸与品目一時TBL."shokisaiHokenshaNo"
+        ,介護給付費福祉用具貸与品目一時TBL."serviceTeikyoYM"
+        ,介護給付費福祉用具貸与品目一時TBL."jigyoshoNo"
+        ,介護給付費福祉用具貸与品目一時TBL."jigyoshoKanji"
+        ,介護給付費福祉用具貸与品目一時TBL."serviceShuruiCode"
+        ,介護給付費福祉用具貸与品目一時TBL."serviceKomokuCode"
+        ,介護給付費福祉用具貸与品目一時TBL."serviceRyakushou"
+        ,介護給付費福祉用具貸与品目一時TBL."cctaCode"
+        ,介護給付費福祉用具貸与品目一時TBL."fukushiYouguKaHinmokuCode"
+        ,介護給付費福祉用具貸与品目一時TBL."fukushiYouguShouhin"
+        ,介護給付費福祉用具貸与品目一時TBL."hiyouGaku"
+        ,介護給付費福祉用具貸与品目一時TBL."kibouKouriKakaku"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuSeikyuKensu"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuSaiteiHiyouGaku"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuShikiHiyouGaku"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuSaikouHiyouGaku"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuHeikinHiyouGaku"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenSeikyuKensu"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenSaiteiHiyouGaku"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenShikiHiyouGaku"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenSaikouHiyouGaku"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenHeikinHiyouGaku"
+        ,介護給付費福祉用具貸与品目一時TBL."hokenShaSeikyuKensu"
+        ,介護給付費福祉用具貸与品目一時TBL."hokenShaSaiteiHiyouGaku"
+        ,介護給付費福祉用具貸与品目一時TBL."hokenShaShikiHiyouGaku"
+        ,介護給付費福祉用具貸与品目一時TBL."hokenShaSaikouHiyouGaku"
+        ,介護給付費福祉用具貸与品目一時TBL."hokenShaHeikinHiyouGaku"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani1"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani2"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani3"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani4"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani5"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani6"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani7"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani8"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani9"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani10"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani1Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani2Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani3Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani4Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani5Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani6Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani7Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani8Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani9Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."zenkokuTanisuHani10Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani1"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani2"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani3"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani4"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani5"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani6"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani7"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani8"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani9"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani10"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani1Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani2Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani3Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani4Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani5Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani6Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani7Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani8Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani9Dosu"
+        ,介護給付費福祉用具貸与品目一時TBL."todoufukenTanisuHani10Dosu"
     </sql>
      <select resultOrdered="true" id="get単一の場合" resultMap="resultMap_getHokenKousei" fetchSize="500">
         SELECT
           <include refid="selectKetteiTsuchiShoMeisai" />
-          ,新旧被保険者番号変換テーブル."shinNo" AS hokenShaNo
+          ,新旧被保険者番号変換テーブル."shinNo" AS "hokenShaNo"
         FROM
-          (SELECT 
+          (SELECT
            <include refid="selectKetteiTsuchiShoMeisai" />
-           ,合併."kyuShichosonCode"
-           , KaigoKyufuHiFukushiYouguTemp."hiHokenshaNo" AS "temp_hiHokenshaNo"
+           ,合併."合併市町村TBL_kyuShichosonCode"
+           , 介護給付費福祉用具貸与品目一時TBL."hiHokenshaNo" AS "temp_hiHokenshaNo"
         FROM
-          rgdb."KaigoKyufuHiFukushiYouguTemp" AS KaigoKyufuHiFukushiYouguTemp
+          "KaigoKyufuHiFukushiYouguTemp" AS 介護給付費福祉用具貸与品目一時TBL
         INNER JOIN (SELECT
-          rgdb."DbT7055GappeiJoho"."kokuhorenDataFromYMD" AS 連携開始年月
-        ,<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper.allColumns_DbT7056GappeiShichoson" />
+          合併情報TBL."kokuhorenDataFromYMD" AS "連携開始年月"
+        ,<include refid="allColumns_DbT7056GappeiShichoson" />
         FROM
-          rgdb."DbT7055GappeiJoho" 
-            INNER　JOIN rgdb."DbT7056GappeiShichoson"
-            ON 合併情報TBL."gappeiYMD" = 合併市町村TBL."gappeiYMD"
-            AND 合併情報TBL."chiikiNo" = 合併市町村TBL."chiikiNo") AS 合併
-            ON KaigoKyufuHiFukushiYouguTemp."shokisaiHokenshaNo" = 合併."dbT7056GappeiShichoson_kyuHokenshaNo"
-            AND KaigoKyufuHiFukushiYouguTemp."serviceTeikyoYM" <![CDATA[<]]> substring(合併."kokuhorenDataFromYMD",1,6)) AS KaigoKyufuHiFukushiYouguTemp
+          rgdb."DbT7055GappeiJoho" AS 合併情報TBL
+            INNER JOIN rgdb."DbT7056GappeiShichoson" AS "合併市町村TBL"
+            ON 合併情報TBL."gappeiYMD" = "合併市町村TBL"."gappeiYMD"
+            AND 合併情報TBL."chiikiNo" = "合併市町村TBL"."chiikiNo") AS 合併
+            ON 介護給付費福祉用具貸与品目一時TBL."shokisaiHokenshaNo" = 合併."合併市町村TBL_kyuHokenshaNo"
+            AND 介護給付費福祉用具貸与品目一時TBL."serviceTeikyoYM" <![CDATA[<]]> substring(合併."連携開始年月",1,6)) AS 介護給付費福祉用具貸与品目一時TBL
        INNER JOIN
-      rgdb."DbT7026ShinKyuHihokenshaNoHenkan" AS 新旧被保険者番号変換テーブル 
-       ON KaigoKyufuHiFukushiYouguTemp."shichosonCode" = 新旧被保険者番号変換テーブル."shichosonCode"
-       AND KaigoKyufuHiFukushiYouguTemp."temp_hiHokenshaNo" = 新旧被保険者番号変換テーブル."kyuNo"
+      rgdb."DbT7026ShinKyuHihokenshaNoHenkan" AS 新旧被保険者番号変換テーブル
+       ON 介護給付費福祉用具貸与品目一時TBL."合併市町村TBL_kyuShichosonCode" = 新旧被保険者番号変換テーブル."shichosonCode"
+       AND 介護給付費福祉用具貸与品目一時TBL."temp_hiHokenshaNo" = 新旧被保険者番号変換テーブル."kyuNo"
      </select>
          
          <select resultOrdered="true" id="get広域の場合" resultMap="resultMap_getHokenKousei" fetchSize="500">
         SELECT
           <include refid="selectKetteiTsuchiShoMeisai" />
-          ,新旧被保険者番号変換テーブル."shinNo" AS hokenShaNo
+          ,新旧被保険者番号変換テーブル."shinNo" AS "hokenShaNo"
         FROM
-          (SELECT 
+          (SELECT
            <include refid="selectKetteiTsuchiShoMeisai" />
            ,構成市町村マスタTBL."shichosonCode"
-           , KaigoKyufuHiFukushiYouguTemp."hiHokenshaNo" AS "temp_hiHokenshaNo"
+           , 介護給付費福祉用具貸与品目一時TBL."hiHokenshaNo" AS "temp_hiHokenshaNo"
         FROM
-           "KaigoKyufuHiFukushiYouguTemp" AS KaigoKyufuHiFukushiYouguTemp
-        INNER JOIN 
-           rgdb."DbT7051KoseiShichosonMaster" AS 構成市町村マスタTBL
-           ON KaigoKyufuHiFukushiYouguTemp."shokisaiHokenshaNo" = 構成市町村マスタTBL."shoKisaiHokenshaNo"
-           AND KaigoKyufuHiFukushiYouguTemp."serviceTeikyoYM" <![CDATA[<=]]> substring(構成市町村マスタTBL."kanyuYMD",1,6)) AS KaigoKyufuHiFukushiYouguTemp
+           "KaigoKyufuHiFukushiYouguTemp" AS 介護給付費福祉用具貸与品目一時TBL
         INNER JOIN
-            rgdb."DbT7026ShinKyuHihokenshaNoHenkan" AS 新旧被保険者番号変換テーブル 
-            ON KaigoKyufuHiFukushiYouguTemp."shichosonCode" = 新旧被保険者番号変換テーブル."shichosonCode"
-            AND KaigoKyufuHiFukushiYouguTemp."temp_hiHokenshaNo" = 新旧被保険者番号変換テーブル."kyuNo"
+           rgdb."DbT7051KoseiShichosonMaster" AS 構成市町村マスタTBL
+           ON 介護給付費福祉用具貸与品目一時TBL."shokisaiHokenshaNo" = 構成市町村マスタTBL."shoKisaiHokenshaNo"
+           AND 介護給付費福祉用具貸与品目一時TBL."serviceTeikyoYM" <![CDATA[<=]]> substring(構成市町村マスタTBL."kanyuYMD",1,6)) AS 介護給付費福祉用具貸与品目一時TBL
+        INNER JOIN
+            rgdb."DbT7026ShinKyuHihokenshaNoHenkan" AS 新旧被保険者番号変換テーブル
+            ON 介護給付費福祉用具貸与品目一時TBL."shichosonCode" = 新旧被保険者番号変換テーブル."shichosonCode"
+            AND 介護給付費福祉用具貸与品目一時TBL."temp_hiHokenshaNo" = 新旧被保険者番号変換テーブル."kyuNo"
          </select>
+         
+         <sql id="allColumns_DbT7056GappeiShichoson">
+        "合併市町村TBL"."gappeiYMD" as "合併市町村TBL_gappeiYMD",
+        "合併市町村TBL"."chiikiNo" as "合併市町村TBL_chiikiNo",
+        "合併市町村TBL"."kyuShichosonCode" as "合併市町村TBL_kyuShichosonCode",
+        "合併市町村TBL"."insertDantaiCd" as "合併市町村TBL_insertDantaiCd",
+        "合併市町村TBL"."insertTimestamp" as "合併市町村TBL_insertTimestamp",
+        "合併市町村TBL"."insertReamsLoginId" as "合併市町村TBL_insertReamsLoginId",
+        "合併市町村TBL"."insertContextId" as "合併市町村TBL_insertContextId",
+        "合併市町村TBL"."isDeleted" as "合併市町村TBL_isDeleted",
+        "合併市町村TBL"."updateCount" as "合併市町村TBL_updateCount",
+        "合併市町村TBL"."lastUpdateTimestamp" as "合併市町村TBL_lastUpdateTimestamp",
+        "合併市町村TBL"."lastUpdateReamsLoginId" as "合併市町村TBL_lastUpdateReamsLoginId",
+        "合併市町村TBL"."unyoKaishiYMD" as "合併市町村TBL_unyoKaishiYMD",
+        "合併市町村TBL"."unyoShuryoYMD" as "合併市町村TBL_unyoShuryoYMD",
+        "合併市町村TBL"."kyuHokenshaNo" as "合併市町村TBL_kyuHokenshaNo",
+        "合併市町村TBL"."kyuShichosonMeisho" as "合併市町村TBL_kyuShichosonMeisho",
+        "合併市町村TBL"."todofukenMeisho" as "合併市町村TBL_todofukenMeisho",
+        "合併市町村TBL"."gunMeisho" as "合併市町村TBL_gunMeisho",
+        "合併市町村TBL"."yubinNo" as "合併市町村TBL_yubinNo",
+        "合併市町村TBL"."telNo" as "合併市町村TBL_telNo",
+        "合併市町村TBL"."rojinhokenShichosonNo" as "合併市町村TBL_rojinhokenShichosonNo",
+        "合併市町村TBL"."rokenJukyushaNoTaikei" as "合併市町村TBL_rokenJukyushaNoTaikei",
+        "合併市町村TBL"."hyojiUmu" as "合併市町村TBL_hyojiUmu"
+    </sql>
 </mapper>
