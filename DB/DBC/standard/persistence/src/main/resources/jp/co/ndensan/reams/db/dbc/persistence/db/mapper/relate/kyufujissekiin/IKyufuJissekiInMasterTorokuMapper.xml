@@ -1312,7 +1312,7 @@
         <association property="給付実績基本" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
     </resultMap>
 
-    <resultMap id="ResultMap_DbWT111AKyufuJissekiH1Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT111AKyufuJissekiH1TempEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbWT111AKyufuJissekiH1Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT111AKyufuJissekiH1Entity" autoMapping="true">
         <id property="renban" column="dbWT3017_renban"/>
         <id property="recordNo" column="dbWT3017_recordNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kokanShikibetsuNo" column="dbWT3017_kokanShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
@@ -1363,7 +1363,7 @@
         <result property="maeHokenRiyoshaFutangaku" column="dbWT3017_maeHokenRiyoshaFutangaku" />
         <result property="maeHokenKinkyuShisetsuRyoyoSeikyugaku" column="dbWT3017_maeHokenKinkyuShisetsuRyoyoSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="maeHokenTokuteiShinryohiSeikyugaku" column="dbWT3017_maeHokenTokuteiShinryohiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" column="dbWT3017_maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" />
+        <result property="maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" column="dbWT3017_maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="maeKohi1ServiceTanisu" column="dbWT3017_maeKohi1ServiceTanisu" />
         <result property="maeKohi1Seikyugaku" column="dbWT3017_maeKohi1Seikyugaku" />
         <result property="maeKohi1RiyoshaFutangaku" column="dbWT3017_maeKohi1RiyoshaFutangaku" />
