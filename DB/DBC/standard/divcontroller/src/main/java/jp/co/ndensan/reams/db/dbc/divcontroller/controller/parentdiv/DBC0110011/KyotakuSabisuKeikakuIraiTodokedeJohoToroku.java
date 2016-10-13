@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0110011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
@@ -17,9 +18,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0110011.dgKy
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0110011.KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0110011.KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kyotakukeika.kyotakukeikakutodokede.KyotakuKeikakuTodokedeManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.definition.core.servicechushutsukbn.ServiceChushutsuKbn;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -165,6 +169,45 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
     }
 
     /**
+     * 「事業者検索DIV」onBeforeOpenDialog時のメソッドです。
+     *
+     * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
+     * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
+     */
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onBeforeOpen_btnJigyoshaKensaku(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        JigyoshaMode mode = new JigyoshaMode();
+        mode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
+        mode.setサービス種類抽出区分(ServiceChushutsuKbn.種類指定.getコード());
+        List<RString> サービス種類 = new ArrayList<>();
+        サービス種類.add(ServiceCategoryShurui.居宅支援.getコード());
+        サービス種類.add(ServiceCategoryShurui.地小短外.getコード());
+        mode.setサービス種類(サービス種類);
+        div.setJigyoshaMode(DataPassingConverter.serialize(mode));
+        return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
+    }
+
+    /**
+     * 「委託先事業者検索DIV」onBeforeOpenDialog時のメソッドです。
+     *
+     * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
+     * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
+     */
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onBeforeOpen_btnItakuSakiJigyoshaKensaku(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        JigyoshaMode mode = new JigyoshaMode();
+        mode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
+        mode.setサービス種類抽出区分(ServiceChushutsuKbn.種類指定.getコード());
+        List<RString> サービス種類 = new ArrayList<>();
+        サービス種類.add(ServiceCategoryShurui.居宅支援.getコード());
+        サービス種類.add(ServiceCategoryShurui.予防支援.getコード());
+        サービス種類.add(ServiceCategoryShurui.地予小外.getコード());
+        mode.setサービス種類(サービス種類);
+        div.setJigyoshaMode(DataPassingConverter.serialize(mode));
+        return ResponseData.of(div).setState(DBC0110011StateName.追加状態);
+    }
+
+    /**
      * 「事業者検索DIV」onOkClose時のメソッドです。
      *
      * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
@@ -274,7 +317,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         manager.saveByForDeletePhysical(居宅給付計画届出);
         AccessLogger.log(AccessLogType.更新, handler.toPersonalData(識別コード, 被保険者番号.getColumnValue()));
         div.getKanryo().getCcdKaigoKanryoMessage().setMessage(get完了メッセージ(), 被保険者番号.getColumnValue(),
-                div.getKihonJoho().getCcdKaigoAtenaInfo().get氏名漢字(), true);
+                div.getCcdKaigoAtenaInfo().get氏名漢字(), true);
         return ResponseData.of(div).setState(DBC0110011StateName.完了状態);
     }
 
@@ -298,6 +341,30 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoToroku {
         }
         if (!is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.再検索).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「検索結果一覧へ」ボタン押下時のメソッドです。
+     *
+     * @param div KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv
+     * @return ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv>
+     */
+    public ResponseData<KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv> onClick_btnSearchResult(
+            KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv div) {
+        KyotakuKeikakuTodokede 居宅給付計画届出 = ViewStateHolder.get(ViewStateKeys.居宅給付計画届出,
+                KyotakuKeikakuTodokede.class);
+        KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler handler = getHandler(div);
+        boolean is項目が変更 = Boolean.FALSE;
+        if (居宅給付計画届出 != null) {
+            is項目が変更 = handler.is項目が変更(居宅給付計画届出);
+        }
+        if (is項目が変更 && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbcQuestionMessages.居宅サービス変更.getMessage()).respond();
+        }
+        if (!is項目が変更 || ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).forwardWithEventName(DBC0110011TransitionEventName.検索結果一覧).respond();
         }
         return ResponseData.of(div).respond();
     }

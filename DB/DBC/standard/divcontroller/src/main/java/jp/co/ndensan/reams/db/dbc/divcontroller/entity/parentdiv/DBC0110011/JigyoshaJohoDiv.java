@@ -14,6 +14,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 
 /**
  * JigyoshaJoho のクラスファイル
@@ -40,13 +43,13 @@ public class JigyoshaJohoDiv extends Panel {
     @JsonProperty("radServiceShurui")
     private RadioButton radServiceShurui;
     @JsonProperty("txtJigyoshaYubinNo")
-    private TextBox txtJigyoshaYubinNo;
+    private TextBoxYubinNo txtJigyoshaYubinNo;
     @JsonProperty("txtJigyoshaJusho")
-    private TextBoxMultiLine txtJigyoshaJusho;
+    private TextBox txtJigyoshaJusho;
     @JsonProperty("txtJigyoshaTelNo")
-    private TextBox txtJigyoshaTelNo;
+    private TextBoxTelNo txtJigyoshaTelNo;
     @JsonProperty("txtJigyoshaKanrishaName")
-    private TextBox txtJigyoshaKanrishaName;
+    private TextBoxAtenaMeisho txtJigyoshaKanrishaName;
     @JsonProperty("txtItakusakiJigyoshaNo")
     private TextBox txtItakusakiJigyoshaNo;
     @JsonProperty("btnItakuSakiJigyoshaKensaku")
@@ -161,7 +164,7 @@ public class JigyoshaJohoDiv extends Panel {
      * @return txtJigyoshaYubinNo
      */
     @JsonProperty("txtJigyoshaYubinNo")
-    public TextBox getTxtJigyoshaYubinNo() {
+    public TextBoxYubinNo getTxtJigyoshaYubinNo() {
         return txtJigyoshaYubinNo;
     }
 
@@ -170,7 +173,7 @@ public class JigyoshaJohoDiv extends Panel {
      * @param txtJigyoshaYubinNo txtJigyoshaYubinNo
      */
     @JsonProperty("txtJigyoshaYubinNo")
-    public void setTxtJigyoshaYubinNo(TextBox txtJigyoshaYubinNo) {
+    public void setTxtJigyoshaYubinNo(TextBoxYubinNo txtJigyoshaYubinNo) {
         this.txtJigyoshaYubinNo = txtJigyoshaYubinNo;
     }
 
@@ -179,7 +182,7 @@ public class JigyoshaJohoDiv extends Panel {
      * @return txtJigyoshaJusho
      */
     @JsonProperty("txtJigyoshaJusho")
-    public TextBoxMultiLine getTxtJigyoshaJusho() {
+    public TextBox getTxtJigyoshaJusho() {
         return txtJigyoshaJusho;
     }
 
@@ -188,7 +191,7 @@ public class JigyoshaJohoDiv extends Panel {
      * @param txtJigyoshaJusho txtJigyoshaJusho
      */
     @JsonProperty("txtJigyoshaJusho")
-    public void setTxtJigyoshaJusho(TextBoxMultiLine txtJigyoshaJusho) {
+    public void setTxtJigyoshaJusho(TextBox txtJigyoshaJusho) {
         this.txtJigyoshaJusho = txtJigyoshaJusho;
     }
 
@@ -197,7 +200,7 @@ public class JigyoshaJohoDiv extends Panel {
      * @return txtJigyoshaTelNo
      */
     @JsonProperty("txtJigyoshaTelNo")
-    public TextBox getTxtJigyoshaTelNo() {
+    public TextBoxTelNo getTxtJigyoshaTelNo() {
         return txtJigyoshaTelNo;
     }
 
@@ -206,7 +209,7 @@ public class JigyoshaJohoDiv extends Panel {
      * @param txtJigyoshaTelNo txtJigyoshaTelNo
      */
     @JsonProperty("txtJigyoshaTelNo")
-    public void setTxtJigyoshaTelNo(TextBox txtJigyoshaTelNo) {
+    public void setTxtJigyoshaTelNo(TextBoxTelNo txtJigyoshaTelNo) {
         this.txtJigyoshaTelNo = txtJigyoshaTelNo;
     }
 
@@ -215,7 +218,7 @@ public class JigyoshaJohoDiv extends Panel {
      * @return txtJigyoshaKanrishaName
      */
     @JsonProperty("txtJigyoshaKanrishaName")
-    public TextBox getTxtJigyoshaKanrishaName() {
+    public TextBoxAtenaMeisho getTxtJigyoshaKanrishaName() {
         return txtJigyoshaKanrishaName;
     }
 
@@ -224,7 +227,7 @@ public class JigyoshaJohoDiv extends Panel {
      * @param txtJigyoshaKanrishaName txtJigyoshaKanrishaName
      */
     @JsonProperty("txtJigyoshaKanrishaName")
-    public void setTxtJigyoshaKanrishaName(TextBox txtJigyoshaKanrishaName) {
+    public void setTxtJigyoshaKanrishaName(TextBoxAtenaMeisho txtJigyoshaKanrishaName) {
         this.txtJigyoshaKanrishaName = txtJigyoshaKanrishaName;
     }
 
