@@ -132,7 +132,7 @@
                 INNER JOIN
                     rgdb."DbT1004ShisetsuNyutaisho"  AS  施設入退所
                     ON    施設入退所."shikibetsuCode"  =  処理対象.処理対象_識別コード
-                    AND    施設入退所."daichoShubetsu"  =  '3'
+                    AND   施設入退所."daichoShubetsu"  =  '2'
                 WHERE
                         (    施設入退所."taishoYMD" IS NULL
                             OR    施設入退所."taishoYMD"  =  ''
