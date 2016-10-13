@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoyoshiki1.JigyohokokuGeppoYoshiki1Change;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoyoshiki1.JigyohokokuGeppoYoshiki1Data;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokugeppoyoshiki1.JigyohokokuGeppoYoshiki1ReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -75,6 +76,54 @@ public class JigyohokokuGeppoYoshiki1Report extends Report<JigyohokokuGeppoYoshi
                 data.get外国人申請国籍喪失_2(),
                 data.get帰化_2(),
                 data.get左記以外_2()));
+        list.add(new JigyohokokuGeppoYoshiki1Change(data.get前月末現在_3(),
+                data.get当月中増_計_3(),
+                data.get当月中減_計_3(),
+                data.get当月末現在_3(),
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY));
+        list.add(new JigyohokokuGeppoYoshiki1Change(data.get前月末現在_4(),
+                data.get当月中増_計_4(),
+                data.get当月中減_計_4(),
+                data.get当月末現在_4(),
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY));
+        list.add(new JigyohokokuGeppoYoshiki1Change(data.get前月末現在_5(),
+                data.get当月中増_計_5(),
+                data.get当月中減_計_5(),
+                data.get当月末現在_5(),
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY));
         return list;
     }
 }
