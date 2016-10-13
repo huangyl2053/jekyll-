@@ -136,10 +136,7 @@ public class HonsanteiIdoHandler {
      */
     public boolean initialize(FlexibleYear 調定年度) {
 
-        // TODO TEST
-//        RDate date = RDate.getNowDate();
-        RString testDate = DbBusinessConfig.get(ConfigNameDBB.収納状況照会_速報取込区分, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        RDate date = new RDate(testDate.toString());
+        RDate date = RDate.getNowDate();
         int 境界日付 = date.getLastDay() - Integer.valueOf(DbBusinessConfig.get(
                 ConfigNameDBB.日付関連_更正月判定日数, date, SubGyomuCode.DBB介護賦課).toString());
         int 日 = date.getDayValue();
