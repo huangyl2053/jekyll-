@@ -22,6 +22,7 @@ import lombok.Setter;
 public class ShisetsuNyutaishoEntity {
 
     private ShikibetsuCode 施設入退所_識別コード;
+    private int 施設入退所_履歴番号;
     private FlexibleDate 施設入退所_入所年月日;
     private FlexibleDate 施設入退所_退所年月日;
     private RString 施設入退所_入所施設コード;

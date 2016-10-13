@@ -26,6 +26,7 @@ public class ShiharaiHohoHenkoEntity {
     private ShoKisaiHokenshaNo 支払方法変更_証記載保険者番号;
     private HihokenshaNo 支払方法変更_被保険者番号;
     private RString 支払方法変更_管理区分;
+    private int 支払方法変更_履歴番号;
     private RString 支払方法変更_登録区分;
     private FlexibleDate 支払方法変更_適用開始年月日;
     private FlexibleDate 支払方法変更_適用終了年月日;
