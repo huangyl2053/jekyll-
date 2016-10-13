@@ -149,13 +149,12 @@ public class IkenshoKakuninshoHandler {
             return false;
         } else if (div.getTxtNinteiKikan().getToValue() == null) {
             return false;
-        } else if (get日常生活自立度(div.getTxtZiritudo().getValue()).isEmpty()) {
+        } else if (!check日常生活自立度(div.getTxtZiritudo().getValue())) {
             return false;
         } else if (なし.equals(div.getTxtNyoushikkin().getValue())) {
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     private RString get日常生活自立度(RString 日常生活自立度) {
@@ -169,6 +168,19 @@ public class IkenshoKakuninshoHandler {
             return NichijoSeikatsuJiritsudo.Ｃ２.get名称();
         }
         return RString.EMPTY;
+    }
+
+    private boolean check日常生活自立度(RString 日常生活自立度) {
+        if (NichijoSeikatsuJiritsudo.Ｂ１.get名称().equals(日常生活自立度)) {
+            return false;
+        } else if (NichijoSeikatsuJiritsudo.Ｂ２.get名称().equals(日常生活自立度)) {
+            return false;
+        } else if (NichijoSeikatsuJiritsudo.Ｃ１.get名称().equals(日常生活自立度)) {
+            return false;
+        } else if (NichijoSeikatsuJiritsudo.Ｃ２.get名称().equals(日常生活自立度)) {
+            return false;
+        }
+        return true;
     }
 
 }
