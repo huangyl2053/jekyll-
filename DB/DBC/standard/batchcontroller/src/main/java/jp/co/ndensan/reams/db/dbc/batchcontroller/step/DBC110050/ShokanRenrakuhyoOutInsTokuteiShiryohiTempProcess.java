@@ -88,6 +88,7 @@ public class ShokanRenrakuhyoOutInsTokuteiShiryohiTempProcess extends BatchProce
         tempEntity.setTekiyo6(entity.getTekiyo6());
         tempEntity.setTekiyo7(entity.getTekiyo7());
         tempEntity.setTekiyo8(entity.getTekiyo8());
+        tempEntity.setTekiyo9(entity.getTekiyo9());
         tempEntity.setTekiyo10(entity.getTekiyo10());
         tempEntity.setTekiyo11(entity.getTekiyo11());
         tempEntity.setTekiyo12(entity.getTekiyo12());
