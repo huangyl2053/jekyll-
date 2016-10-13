@@ -39,12 +39,10 @@
         LEFT OUTER JOIN
         (
         SELECT
-        COUNT (D2.*) AS データ件数
+        COUNT (D2."shikibetsuCode") AS データ件数
         ,D2. "shikibetsuCode"
         FROM
-        "tempTorikomiKokuhoJyoho" AS T1,
         rgdb. "DbT7123KokuhoShikakuInfo" AS D2
-        WHERE D2. "shikibetsuCode" = T1. "iN住民コード"
         GROUP BY D2. "shikibetsuCode"
         ) AS D3
         ON D3. "shikibetsuCode" = T1. "iN住民コード"
