@@ -120,7 +120,7 @@ public class FutanWariaiShoRenchoYokoOutputProcess extends BatchProcessBase<Riyo
     protected void process(RiyoshaFutanwariaishoTempEntity entity) {
         csv出力Flag = 定数_あり;
         csvファイル名 = 定数_負担割合証発行一覧;
-        FutanWariaiShoKattokamiEntity futanWariaiShoEntity = service.getFutanWariaiSourceData(帳票制御共通, batchReportWriter.getImageFolderPath(),
+        FutanWariaiShoKattokamiEntity futanWariaiShoEntity = service.getFutanWariaiSourceData(帳票制御共通, batchReportWriter,
                 entity, parameter.get交付年月日(), new RString(連番));
         FutanWariaiShoRenchoYokoReport report = new FutanWariaiShoRenchoYokoReport(futanWariaiShoEntity);
         report.writeBy(reportSourceWriter);
