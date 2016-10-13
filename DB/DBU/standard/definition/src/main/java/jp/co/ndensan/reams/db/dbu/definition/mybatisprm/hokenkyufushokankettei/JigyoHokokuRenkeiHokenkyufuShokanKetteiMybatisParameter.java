@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.PrintControlKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNoyoshiki2;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.Syorimei;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
@@ -27,7 +26,7 @@ import lombok.Getter;
 public final class JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter implements IMyBatisParameter {
 
     private static final RString 市町村コード区分 = new RString("1");
-    private static final int INDEX8 = 8;
+    private static final int INDEX4 = 4;
     private final RString プリントコントロール区分;
     private final RString 審査年月;
     private final RString 集計年月;
@@ -184,21 +183,12 @@ public final class JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter imple
             YMDHMS 処理日時,
             RString プリントコントロール区分) {
         List<RString> 市町村コードList = new ArrayList<>();
-        RString 基準年月日 = RString.EMPTY;
-        RString 基準日時 = RString.EMPTY;
-        市町村コードList.add(市町村コード);
         if (市町村コード区分.equals(構成市町村区分)) {
             市町村コードList.addAll(構成市町村コードリスト);
         } else if (市町村コード区分.equals(旧市町村区分)) {
             市町村コードList.addAll(旧市町村コードリスト);
-        }
-        if (PrintControlKubun.集計のみ.getコード().equals(プリントコントロール区分)
-                || PrintControlKubun.集計後印刷.getコード().equals(プリントコントロール区分)) {
-            基準年月日 = 処理日時.getDate().toDateString();
-            基準日時 = new RString(処理日時.toString());
-        } else if (PrintControlKubun.過去分の印刷.getコード().equals(プリントコントロール区分)) {
-            基準年月日 = 作成日付.substring(0, INDEX8);
-            基準日時 = 作成日付;
+        } else {
+            市町村コードList.add(市町村コード);
         }
         return new JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter(
                 RString.EMPTY,
@@ -215,10 +205,10 @@ public final class JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter imple
                 YMDHMS.now(),
                 new RString("DBU"),
                 Syorimei.月報報告保険給付決定償還分決定.get名称(),
-                new RString("0099"),
+                new RString("00").concat(集計年月.substring(INDEX4)),
                 new FlexibleYearMonth(集計年月).getNendo().toDateString(),
-                基準年月日,
-                基準日時,
+                処理日時.getDate().toDateString(),
+                作成日付,
                 null,
                 RString.EMPTY,
                 RString.EMPTY,
