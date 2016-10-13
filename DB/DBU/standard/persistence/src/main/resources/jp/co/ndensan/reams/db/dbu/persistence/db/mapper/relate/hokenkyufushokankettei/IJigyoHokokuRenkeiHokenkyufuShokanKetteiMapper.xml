@@ -471,12 +471,10 @@
                 AND A."jigyoshoNo" = C."jigyoshoNo" 
                 AND A."seiriNo" = C."seiriNo" 
             WHERE
-                A."inputShikibetsuNo" NOT LIKE '8%' 
-                AND A."inputShikibetsuNo" NOT LIKE '1%' 
-                AND A."inputShikibetsuNo" NOT LIKE '6%' 
-                AND A."inputShikibetsuNo" NOT LIKE '7%' 
-                AND A."inputShikibetsuNo" NOT LIKE 'P%' 
-                AND A."inputShikibetsuNo" NOT LIKE 'R%' 
+                A."inputShikibetsuNo" NOT LIKE '816%' 
+                AND A."inputShikibetsuNo" NOT LIKE '71P%' 
+                AND A."inputShikibetsuNo" NOT LIKE '817%' 
+                AND A."inputShikibetsuNo" NOT LIKE '71R%' 
                 AND A."kyufuJissekiKubunCode" = '2' 
                 AND ( 
                   ( 
@@ -603,12 +601,10 @@
                 AND A."jigyoshoNo" = C."jigyoshoNo" 
                 AND A."seiriNo" = C."seiriNo" 
             WHERE
-                A."inputShikibetsuNo" NOT LIKE '8%' 
-                AND A."inputShikibetsuNo" NOT LIKE '1%' 
-                AND A."inputShikibetsuNo" NOT LIKE '6%' 
-                AND A."inputShikibetsuNo" NOT LIKE '7%' 
-                AND A."inputShikibetsuNo" NOT LIKE 'P%' 
-                AND A."inputShikibetsuNo" NOT LIKE 'R%' 
+                A."inputShikibetsuNo" NOT LIKE '816%' 
+                AND A."inputShikibetsuNo" NOT LIKE '71P%' 
+                AND A."inputShikibetsuNo" NOT LIKE '817%' 
+                AND A."inputShikibetsuNo" NOT LIKE '71R%'  
                 AND A."kyufuJissekiKubunCode" = '2' 
                 AND (B."hiHokenshaNo" IS NOT NULL 
                      OR (C."hiHokenshaNo" IS NOT NULL 
