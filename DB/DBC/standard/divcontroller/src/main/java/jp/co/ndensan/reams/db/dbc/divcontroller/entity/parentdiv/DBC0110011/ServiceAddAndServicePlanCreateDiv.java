@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0110011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120011.TodokedeshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -275,16 +275,15 @@ public class ServiceAddAndServicePlanCreateDiv extends Panel {
         this.getTodokedeshaJoho().getTodokedesha().setTxtTodokedeshaTelNo(txtTodokedeshaTelNo);
     }
 
-    @JsonIgnore
-    public DropDownList getDdlTodokedeshaKankeiKubun() {
-        return this.getTodokedeshaJoho().getTodokedesha().getDdlTodokedeshaKankeiKubun();
-    }
-
-    @JsonIgnore
-    public void setDdlTodokedeshaKankeiKubun(DropDownList ddlTodokedeshaKankeiKubun) {
-        this.getTodokedeshaJoho().getTodokedesha().setDdlTodokedeshaKankeiKubun(ddlTodokedeshaKankeiKubun);
-    }
-
+//    @JsonIgnore
+//    public DropDownList getDdlTodokedeshaKankeiKubun() {
+////        return this.getTodokedeshaJoho().getTodokedesha().getDdlTodokedeshaKankeiKubun();
+//    }
+//
+//    @JsonIgnore
+//    public void setDdlTodokedeshaKankeiKubun(DropDownList ddlTodokedeshaKankeiKubun) {
+////        this.getTodokedeshaJoho().getTodokedesha().setDdlTodokedeshaKankeiKubun(ddlTodokedeshaKankeiKubun);
+//    }
     @JsonIgnore
     public RadioButton getRadKeikakuSakuseiKubun() {
         return this.getTodokedeshaJoho().getRadKeikakuSakuseiKubun();
