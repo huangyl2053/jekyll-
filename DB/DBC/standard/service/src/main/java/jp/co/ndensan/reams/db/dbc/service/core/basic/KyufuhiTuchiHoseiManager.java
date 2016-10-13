@@ -126,4 +126,19 @@ public class KyufuhiTuchiHoseiManager {
         }
         return 1 == dac.save(給付費通知補正.toEntity());
     }
+
+    /**
+     * 給付費通知補正{@link KyufuhiTuchiHosei}を保存します。
+     *
+     * @param 給付費通知補正 {@link KyufuhiTuchiHosei}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean saveOrdelete給付費通知補正(KyufuhiTuchiHosei 給付費通知補正) {
+        requireNonNull(給付費通知補正, UrSystemErrorMessages.値がnull.getReplacedMessage("給付費通知補正"));
+        if (!給付費通知補正.hasChanged()) {
+            return false;
+        }
+        return 1 == dac.saveOrDelete(給付費通知補正.toEntity());
+    }
 }
