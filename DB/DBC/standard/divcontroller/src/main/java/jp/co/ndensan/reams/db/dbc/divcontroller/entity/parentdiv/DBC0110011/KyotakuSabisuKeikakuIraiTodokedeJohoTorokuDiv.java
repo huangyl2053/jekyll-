@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshika
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -321,15 +322,16 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv extends Panel {
         this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setTxtKeikakuTekiyoEndYMD(txtKeikakuTekiyoEndYMD);
     }
 
-//    @JsonIgnore
-//    public TodokedeshaDiv getTodokedesha() {
-//        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha();
-//    }
-//
-//    @JsonIgnore
-//    public void setTodokedesha(TodokedeshaDiv Todokedesha) {
-//        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setTodokedesha(Todokedesha);
-//    }
+    @JsonIgnore
+    public TodokedeshaDiv getTodokedesha() {
+        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha();
+    }
+
+    @JsonIgnore
+    public void setTodokedesha(TodokedeshaDiv Todokedesha) {
+        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().setTodokedesha(Todokedesha);
+    }
+
     @JsonIgnore
     public TextBoxAtenaMeisho getTxtTodokedeshaShimei() {
         return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().getTxtTodokedeshaShimei();
@@ -380,15 +382,16 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuDiv extends Panel {
         this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().setTxtTodokedeshaTelNo(txtTodokedeshaTelNo);
     }
 
-//    @JsonIgnore
-//    public DropDownList getDdlTodokedeshaKankeiKubun() {
-//        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().getDdlTodokedeshaKankeiKubun();
-//    }
-//
-//    @JsonIgnore
-//    public void setDdlTodokedeshaKankeiKubun(DropDownList ddlTodokedeshaKankeiKubun) {
-//        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().setDdlTodokedeshaKankeiKubun(ddlTodokedeshaKankeiKubun);
-//    }
+    @JsonIgnore
+    public DropDownList getDdlTodokedeshaKankeiKubun() {
+        return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().getDdlTodokedeshaKankeiKubun();
+    }
+
+    @JsonIgnore
+    public void setDdlTodokedeshaKankeiKubun(DropDownList ddlTodokedeshaKankeiKubun) {
+        this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getTodokedesha().setDdlTodokedeshaKankeiKubun(ddlTodokedeshaKankeiKubun);
+    }
+
     @JsonIgnore
     public RadioButton getRadKeikakuSakuseiKubun() {
         return this.getServiceAddAndServicePlanCreate().getTodokedeshaJoho().getRadKeikakuSakuseiKubun();
