@@ -45,8 +45,6 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
     private RString 帳票ID;
     private boolean is認定者リスト = false;
     private boolean is該当者リスト = false;
-    private static final RString 一 = new RString("1");
-    private static final RString 二 = new RString("2");
     private RDate 帳票作成日時;
 
     /**
@@ -89,9 +87,9 @@ public class NinteishaListSakuseiProcessParameter implements IBatchProcessParame
     public NinteishaListSakuseiProcessParameter(TargetList 対象リスト) {
 
         if (対象リスト != null) {
-            if (一.equals(対象リスト.getコード())) {
+            if (TargetList.認定者リスト.equals(対象リスト)) {
                 is認定者リスト = true;
-            } else if (二.equals(対象リスト.getコード())) {
+            } else if (TargetList.該当者リスト.equals(対象リスト)) {
                 is該当者リスト = true;
             }
         }

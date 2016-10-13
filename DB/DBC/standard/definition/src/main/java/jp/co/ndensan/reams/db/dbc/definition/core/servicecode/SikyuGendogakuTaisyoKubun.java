@@ -18,7 +18,7 @@ public enum SikyuGendogakuTaisyoKubun {
     /**
      * コード:3 名称:区分支給限度額管理対照 略称:定義なし
      */
-    区分支給限度額管理対照("0", "区分支給限度額管理対照");
+    区分支給限度額管理対照("3", "区分支給限度額管理対照");
     private final RString code;
     private final RString fullName;
 

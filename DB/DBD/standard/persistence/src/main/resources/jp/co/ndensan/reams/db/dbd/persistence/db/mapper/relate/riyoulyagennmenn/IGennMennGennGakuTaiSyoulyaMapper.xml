@@ -48,9 +48,9 @@
                AND DbT4001JukyushaDaicho."kyuSochishaFlag" = true
         </if>
         <if test="is旧措置者以外">
-                AND NOT EXIST (
-                    SELECT COUNT(1)
-                    FROM DbT4001JukyushaDaicho AS J
+                AND NOT EXISTS (
+                    SELECT 1
+                    FROM rgdb."DbT4001JukyushaDaicho" AS J
                     WHERE A."hihokenshaNo" = J."hihokenshaNo"
                     AND J."logicalDeletedFlag" = false
                     AND J."kyuSochishaFlag" = true
@@ -198,19 +198,19 @@
 		)
                 <if test="is該当者リスト">
                     <if test="is市町村民税非課税世帯">
-                        A."世帯課税区分" = '2'
+                        AND A."世帯課税区分" = '2'
                     </if>
                     <if test="is所得税非課税世帯">
-                        A."is所得税課税世帯" = false
+                        AND A."is所得税課税世帯" = false
                     </if>
                     <if test="is市町村民税本人非課税者">
-                        A."本人課税区分" = '1'
+                        AND A."本人課税区分" = '1'
                     </if>
                     <if test="is老齢福祉年金受給者">
-                        A."is老齢福祉年金受給者" = true
+                        AND A."is老齢福祉年金受給者" = true
                     </if>
                     <if test="is生活保護受給者">
-                        A."is生活保護受給者" = true
+                        AND A."is生活保護受給者" = true
                     </if>
                 </if>
         )

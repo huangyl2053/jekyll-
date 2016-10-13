@@ -60,7 +60,7 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     private static final String 総合事業対象者の情報の抽出 = "updSogoJigyoTemp";
     private static final String 被保険者台帳の情報の抽出 = "updHihokenshaTemp";
     private static final String 異動一時１テーブルの作成 = "insShiharaihohoTemp1";
-    private static final String 送付エラー一時出力 = "soufuErrorOut";
+    private static final String 送付エラー一時出力 = "soufuErrorOutTemp";
     private static final String 受給者異動送付削除産 = "delJukyushaIdoRenrakuhyo";
     private static final String 受給者異動の抽出 = "insJukyushaIdoRenrakuhyoTemp";
 
@@ -227,7 +227,7 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     }
 
     @Step(送付エラー一時出力)
-    IBatchFlowCommand soufuErrorOut() {
+    IBatchFlowCommand soufuErrorOutTemp() {
         return loopBatch(SoufuErrorOutProcess.class).arguments(getParameter().
                 toProcessParameter())
                 .define();

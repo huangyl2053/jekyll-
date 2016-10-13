@@ -30,6 +30,7 @@ public class ShinseishoHakkoValidationHandler {
     private static final FlexibleYear 年度 = new FlexibleYear("2015");
     private static final int NUM_0 = 0;
     private static final int NUM_4 = 4;
+    private static final RString ZERO = new RString("0");
 
     /**
      * コンストラクタです。
@@ -49,7 +50,7 @@ public class ShinseishoHakkoValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         FlexibleDate 年度Date = div.getTxtShoriNendo().getValue();
         FlexibleYear year = new FlexibleYear(年度Date.toString().substring(NUM_0, NUM_4));
-        if (year.isBefore(年度)) {
+        if (ZERO.equals(div.getRadChushutsuJoken().getSelectedKey()) && year.isBefore(年度)) {
             validPairs.add(new ValidationMessageControlPair(
                     new ShinseishoHakkoValidationHandler.ShinseishoHakkoValidationMessages(
                             UrErrorMessages.項目に対する制約, 処理年度.toString(), 平成27年度以降.toString()),

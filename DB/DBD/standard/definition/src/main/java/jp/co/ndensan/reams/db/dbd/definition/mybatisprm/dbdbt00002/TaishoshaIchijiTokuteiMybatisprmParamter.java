@@ -32,9 +32,6 @@ public class TaishoshaIchijiTokuteiMybatisprmParamter implements IMyBatisParamet
     private boolean is事業対象者 = false;
     private boolean is旧措置者 = false;
     private boolean is旧措置者以外 = false;
-    private final RString 一 = new RString("1");
-    private final RString 二 = new RString("2");
-    private final RString 三 = new RString("3");
     private RString 有効;
 
     /**
@@ -58,9 +55,9 @@ public class TaishoshaIchijiTokuteiMybatisprmParamter implements IMyBatisParamet
     private void edit対象リスト(TargetList 対象リスト) {
 
         if (対象リスト != null) {
-            if (一.equals(対象リスト.getコード())) {
+            if (TargetList.認定者リスト.equals(対象リスト)) {
                 is認定者リスト = true;
-            } else if (二.equals(対象リスト.getコード())) {
+            } else if (TargetList.該当者リスト.equals(対象リスト)) {
                 is該当者リスト = true;
             }
         }
@@ -68,9 +65,9 @@ public class TaishoshaIchijiTokuteiMybatisprmParamter implements IMyBatisParamet
 
     private void edit受給者区分(JukyushaKubun2 受給者区分) {
         if (受給者区分 != null) {
-            if (二.equals(受給者区分.getコード())) {
+            if (JukyushaKubun2.受給者.equals(受給者区分)) {
                 is受給者 = true;
-            } else if (三.equals(受給者区分.getコード())) {
+            } else if (JukyushaKubun2.事業対象者.equals(受給者区分)) {
                 is事業対象者 = true;
             }
         }
@@ -78,9 +75,9 @@ public class TaishoshaIchijiTokuteiMybatisprmParamter implements IMyBatisParamet
 
     private void edit旧措置区分(KyusochishaJukyushaKubun 旧措置区分) {
         if (旧措置区分 != null) {
-            if (一.equals(旧措置区分.getコード())) {
+            if (KyusochishaJukyushaKubun.旧措置者以外.equals(旧措置区分)) {
                 is旧措置者以外 = true;
-            } else if (三.equals(旧措置区分.getコード())) {
+            } else if (KyusochishaJukyushaKubun.旧措置者のみ.equals(旧措置区分)) {
                 is旧措置者 = true;
             }
         }

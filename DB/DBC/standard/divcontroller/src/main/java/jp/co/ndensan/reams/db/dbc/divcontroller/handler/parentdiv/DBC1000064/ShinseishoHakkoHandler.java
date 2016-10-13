@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -38,8 +39,6 @@ public class ShinseishoHakkoHandler {
     private static final int INDEX_1231 = 1231;
     private static final RString 日 = new RString("0801");
     private static final RString 本年７月中 = new RString("本年７月中");
-    private static final RString ZERO = new RString("0");
-    private static final RString ONE = new RString("1");
 
     /**
      * コンストラクタです。
@@ -141,11 +140,14 @@ public class ShinseishoHakkoHandler {
      * @return boolean
      */
     public boolean is異動処理が実施済みか判定() {
-        if (ZERO == div.getRadChushutsuJoken().getSelectedKey()) {
-            return TekiyoShinseishoManager.createInstance().isIdoExecute(div.getTxtShoriNendo().getValue().getYear());
+        if (ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(
+                div.getRadChushutsuJoken().getSelectedKey())) {
+            return TekiyoShinseishoManager.createInstance().isIdoExecute(
+                    new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4)));
         }
-        if (ONE == div.getRadChushutsuJoken().getSelectedKey()) {
-            return TekiyoShinseishoManager.createInstance().isIdoExecute(div.getTxtSetaiinHaakuKijunYMD().getValue().getYear());
+        if (ShinseishoHakkoChushutsuJoken.被保険者番号.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())) {
+            return TekiyoShinseishoManager.createInstance().isIdoExecute(
+                    new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4)));
         } else {
             return false;
         }
