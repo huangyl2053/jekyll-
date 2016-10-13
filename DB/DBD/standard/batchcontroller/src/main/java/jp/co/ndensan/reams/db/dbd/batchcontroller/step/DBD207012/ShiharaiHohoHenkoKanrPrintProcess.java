@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207012;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200007.ShiharaiHohoHenkoKanriIchiranReport;
 import jp.co.ndensan.reams.db.dbd.definition.core.common.TainoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoHenkoKanrFiveProcessParameter;
@@ -66,7 +68,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
 
     private ShiharaiHohoHenkoKanrFiveProcessParameter parameter;
 
-    private static final ReportIdDBD REPORT_DBD200006 = ReportIdDBD.DBD200006;
+    private static final ReportIdDBD REPORT_DBD200007 = ReportIdDBD.DBD200007;
 
     private static final RString 選択あり = new RString("0");
     private static final RString SELECTED_VALUE_0 = new RString("0");
@@ -123,14 +125,13 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
 
     @Override
     protected void createWriter() {
-        batchReportWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBD200006.getReportId().value(),
+        batchReportWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBD200007.getReportId().value(),
                 SubGyomuCode.DBD介護受給).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
     }
 
     int count = 0;
     ShiharaiHohoHenkoEntity reportData;
-    ShiharaiHohoHenkoEntity reportData1;
 
     @Override
     protected void process(ShiharaiHohoHenkoHaakuFiveEntity t) {
@@ -138,13 +139,17 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         if (count == 1) {
             reportData = new ShiharaiHohoHenkoEntity();
             createShiharaiHohoHenkoEntity(t);
+            ShiharaiHohoHenkoKanriIchiranReport finder = new ShiharaiHohoHenkoKanriIchiranReport(RDateTime.now(),
+                    new HokenshaNo(association.get地方公共団体コード().value()), association.get市町村名(),
+                    outputOrder, reportData, new ShiharaiHohoHenkoEntity());
+            finder.writeBy(reportSourceWriter);
         }
         if (count == 2) {
-            reportData1 = new ShiharaiHohoHenkoEntity();
             createShiharaiHohoHenkoEntity(t);
 
             ShiharaiHohoHenkoKanriIchiranReport finder = new ShiharaiHohoHenkoKanriIchiranReport(RDateTime.now(),
-                    HokenshaNo.EMPTY, RString.EMPTY, outputOrder, reportData, reportData1);
+                    new HokenshaNo(association.get地方公共団体コード().value()), association.get市町村名(),
+                    outputOrder, new ShiharaiHohoHenkoEntity(), reportData);
 
             finder.writeBy(reportSourceWriter);
             count = 0;
@@ -177,8 +182,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         if (t.get資格情報_被保険者区分コード() != null && !t.get資格情報_被保険者区分コード().isEmpty()) {
             reportData.set資格区分(ShikakuKubun.toValue(t.get資格情報_被保険者区分コード()));
         }
-        //t.is資格情報_住所地特例フラグ()
-        reportData.set住特フラグ(new RString(""));
+        reportData.set住特フラグ(t.get資格情報_住所地特例フラグ());
         if (t.get生活保護受給者_識別コード() != null && ShikibetsuCode.EMPTY.equals(t.get生活保護受給者_識別コード())) {
             reportData.set生保(true);
         } else {
@@ -246,50 +250,11 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         reportData.set行17(RString.EMPTY);
 
         List<ShunoStatusJohoEntity> 収納状況情報List = t.get収納状況情報リスト();
-        List<ShunoNendoEntity> 帳票用収納状況情報List = new ArrayList<>();
-
-        List<ShunoKibetsuEntity> 期別情報List = new ArrayList<>();
-        List<ShunoKibetsuEntity> 過年度期別情報List = new ArrayList<>();
-
-        ShunoNendoEntity 過年度帳票用収納状況情報 = new ShunoNendoEntity();
-        ShunoNendoEntity 帳票用収納状況情報 = new ShunoNendoEntity();
-
-        if (収納状況情報List != null && 収納状況情報List.isEmpty()) {
-
-            for (ShunoStatusJohoEntity 収納状況情報Data : 収納状況情報List) {
-                ShunoKibetsuEntity 期別情報 = new ShunoKibetsuEntity();
-                if (収納状況情報Data.is収納状況_過年度フラグ()) {
-                    過年度帳票用収納状況情報.set過年度フラグ(true);
-                    期別情報.set期別(new RString(収納状況情報Data.get収納状況_期()));
-                    期別情報.set保険料金(収納状況情報Data.get収納状況_調定額());
-                    期別情報.set納期限(edit日期(収納状況情報Data.get収納状況_納期限()));
-                    期別情報.set滞納額(収納状況情報Data.get収納状況_未納額());
-                    期別情報.set滞納区分(TainoKubun.toValue(収納状況情報Data.get収納状況_滞納区分()));
-                    期別情報.set時効起算日(収納状況情報Data.get収納状況_時効起算日());
-                    期別情報.set時効起算事由(収納状況情報Data.get収納状況_時効起算事由());
-                    過年度期別情報List.add(期別情報);
-
-                } else {
-                    帳票用収納状況情報.set過年度フラグ(false);
-                    期別情報.set期別(new RString(収納状況情報Data.get収納状況_期()));
-                    期別情報.set保険料金(収納状況情報Data.get収納状況_調定額());
-                    期別情報.set納期限(edit日期(収納状況情報Data.get収納状況_納期限()));
-                    期別情報.set滞納額(収納状況情報Data.get収納状況_未納額());
-                    期別情報.set滞納区分(TainoKubun.toValue(収納状況情報Data.get収納状況_滞納区分()));
-                    期別情報.set時効起算日(収納状況情報Data.get収納状況_時効起算日());
-                    期別情報.set時効起算事由(収納状況情報Data.get収納状況_時効起算事由());
-                    期別情報List.add(期別情報);
-                }
-            }
-            過年度帳票用収納状況情報.set期別情報(過年度期別情報List);
-            帳票用収納状況情報.set期別情報(期別情報List);
-
-            帳票用収納状況情報List.add(帳票用収納状況情報);
-            帳票用収納状況情報List.add(過年度帳票用収納状況情報);
+        if (収納状況情報List != null && !収納状況情報List.isEmpty()) {
+            reportData.set収納情報List(edit収納情報List(収納状況情報List));
+        } else {
+            reportData.set収納情報なし(new RString("1"));
         }
-        reportData.set収納情報List(帳票用収納状況情報List);
-        reportData.set収納情報なし(edit収納収納情報なし(FlexibleYear.EMPTY));
-
         return reportData;
     }
 
@@ -306,10 +271,10 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         RString csv出力有無 = new RString("無し");
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         RString 出力ページ数 = new RString(String.valueOf(batchReportWrite.getPageCount()));
-        RString 日本語ファイル名 = REPORT_DBD200006.getReportName();
+        RString 日本語ファイル名 = REPORT_DBD200007.getReportName();
 
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                REPORT_DBD200006.getReportId().value(),
+                REPORT_DBD200007.getReportId().value(),
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
@@ -329,11 +294,57 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         return FlexibleDate.EMPTY;
     }
 
-    private RString edit収納収納情報なし(FlexibleYear 賦課年度) {
-        if (賦課年度 == null || FlexibleYear.EMPTY.equals(賦課年度)) {
-            return new RString("1");
+    private List<ShunoNendoEntity> edit収納情報List(List<ShunoStatusJohoEntity> 収納状況情報List) {
+
+        List<ShunoNendoEntity> 帳票用収納状況情報List = new ArrayList<>();
+
+        Map<FlexibleYear, List<ShunoStatusJohoEntity>> 収納状況情報Map = new HashMap<>();
+        for (ShunoStatusJohoEntity 収納状況情報Data : 収納状況情報List) {
+            if (収納状況情報Map.containsKey(収納状況情報Data.get収納状況_賦課年度())) {
+                収納状況情報Map.get(収納状況情報Data.get収納状況_賦課年度()).add(収納状況情報Data);
+            } else {
+                List<ShunoStatusJohoEntity> new収納状況情報List = new ArrayList<>();
+                new収納状況情報List.add(収納状況情報Data);
+                収納状況情報Map.put(収納状況情報Data.get収納状況_賦課年度(), new収納状況情報List);
+            }
         }
-        return RString.EMPTY;
+        for (FlexibleYear 賦課年度 : 収納状況情報Map.keySet()) {
+            List<ShunoStatusJohoEntity> 賦課収納状況情報List = 収納状況情報Map.get(賦課年度);
+            List<ShunoKibetsuEntity> 期別情報List = new ArrayList<>();
+            ShunoNendoEntity 帳票用収納状況情報 = new ShunoNendoEntity();
+            for (ShunoStatusJohoEntity 収納状況情報Data : 賦課収納状況情報List) {
+                if (収納状況情報Data.is収納状況_過年度フラグ()) {
+                    帳票用収納状況情報.set過年度フラグ(true);
+                    ShunoKibetsuEntity 過年度期別情報 = new ShunoKibetsuEntity();
+                    過年度期別情報.set滞納額(収納状況情報Data.get収納状況_調定額());
+                    過年度期別情報.set時効起算日(収納状況情報Data.get収納状況_時効起算日());
+                    過年度期別情報.set時効起算事由(収納状況情報Data.get収納状況_時効起算事由());
+                    過年度期別情報.set納期限(edit日期(収納状況情報Data.get収納状況_納期限()));
+                    帳票用収納状況情報.set過年度期別情報(過年度期別情報);
+                    帳票用収納状況情報.set過年度フラグ(true);
+                } else {
+                    帳票用収納状況情報.set過年度フラグ(false);
+                    ShunoKibetsuEntity 期別情報 = new ShunoKibetsuEntity();
+                    期別情報.set期別(new RString(収納状況情報Data.get収納状況_期()));
+                    期別情報.set保険料金(収納状況情報Data.get収納状況_調定額());
+                    期別情報.set納期限(edit日期(収納状況情報Data.get収納状況_納期限()));
+                    期別情報.set滞納額(収納状況情報Data.get収納状況_未納額());
+                    if (収納状況情報Data.get収納状況_滞納区分() != null) {
+                        期別情報.set滞納区分(TainoKubun.toValue(収納状況情報Data.get収納状況_滞納区分()));
+                    }
+
+                    期別情報.set時効起算日(収納状況情報Data.get収納状況_時効起算日());
+                    期別情報.set時効起算事由(収納状況情報Data.get収納状況_時効起算事由());
+                    期別情報List.add(期別情報);
+                    帳票用収納状況情報.set期別情報(期別情報List);
+                }
+            }
+            while (期別情報List.size() < 3) {
+                期別情報List.add(new ShunoKibetsuEntity());
+            }
+            帳票用収納状況情報List.add(帳票用収納状況情報);
+        }
+        return 帳票用収納状況情報List;
     }
 
     private List<RString> get出力条件内容() {

@@ -48,8 +48,8 @@ public class JigyohokokuGeppoYoshiki2120161Report extends Report<JigyohokokuGepp
     private static final RString 十四行目 = new RString("25");
     private static final RString 十五行目 = new RString("03");
     private static final RString 十六行目 = new RString("22");
-    private static final RString 十七行目 = new RString("17");
-    private static final RString 十八行目 = new RString("18");
+    private static final RString 十七行目 = new RString("04");
+    private static final RString 十八行目 = new RString("05");
     private static final RString 十九行目 = new RString("28");
     private static final RString 二十一行目 = new RString("31");
     private static final RString 二十二行目 = new RString("37");

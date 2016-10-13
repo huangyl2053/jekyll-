@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuCsvFileReadProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakkoichiran.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoIchiranRelateEntity;
@@ -42,10 +41,10 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
     private KokuhorenkyotsuCsvFileReadProcessParameter parameter;
 
     static {
-        PARAMETER_OUT_FLOWENTITY = new RString("flowEntity");
+        PARAMETER_OUT_FLOWENTITY = new RString("flag");
     }
-    OutputParameter<FlowEntity> flowEntity;
-    Boolean flag;
+    private OutputParameter<Boolean> flag;
+    private boolean tempFlag;
     private final RString 区切り文字 = new RString(",");
     private KyufuhiTuchiHakkoCsvEntity hakkoCsvEntity;
     @BatchWriter
@@ -55,7 +54,8 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
 
     @Override
     protected void initialize() {
-        flag = false;
+        flag = new OutputParameter<>();
+        tempFlag = false;
         hakkoCsvEntity = new KyufuhiTuchiHakkoCsvEntity();
     }
 
@@ -76,18 +76,19 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
 
     @Override
     protected void process(RString line) {
-        flag = true;
         List<RString> data = line.split(区切り文字.toString());
         hakkoCsvEntity = ListToObjectMappingHelper.
                 toObject(KyufuhiTuchiHakkoCsvEntity.class, data);
         if (new RString("2").equals(hakkoCsvEntity.getレコード種別()) && (種別).equals(hakkoCsvEntity.get帳票レコード種別())) {
+            tempFlag = true;
+            flag.setValue(tempFlag);
             前データを一時TBLに登録する(hakkoCsvEntity);
         }
     }
 
     @Override
     protected void afterExecute() {
-        if (!flag) {
+        if (!tempFlag) {
             DbWT0002KokuhorenTorikomiErrorEntity errorEntity = new DbWT0002KokuhorenTorikomiErrorEntity();
             errorEntity.setエラー区分(new RString("99"));
             errorEntity.set証記載保険者番号(RString.EMPTY);

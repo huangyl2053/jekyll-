@@ -7,7 +7,14 @@ package jp.co.ndensan.reams.db.dbc.business.report.kyufuhitsuchishosealer;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhitsuchishosealer.KyufuhiTsuchishoSealerEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhitsuchishosealer.KyufuhiTsuchishoSealerReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBC100042_介護保険給付費通知書(ｼｰﾗﾀｲﾌﾟ)のEditorです。
@@ -18,18 +25,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyufuhiTsuchishoSealerEditor implements IKyufuhiTsuchishoSealerEditor {
 
     private final KyufuhiTsuchishoSealerEntity item;
-    private int index;
-    private static final int PAGECOUNT = 25;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link KyufuhiTsuchishoSealerEntity}
-     * @param index int
      */
-    protected KyufuhiTsuchishoSealerEditor(KyufuhiTsuchishoSealerEntity item, int index) {
+    protected KyufuhiTsuchishoSealerEditor(KyufuhiTsuchishoSealerEntity item) {
         this.item = item;
-        this.index = index;
     }
 
     @Override
@@ -48,16 +51,23 @@ public class KyufuhiTsuchishoSealerEditor implements IKyufuhiTsuchishoSealerEdit
         source.yubinNo7 = item.getYubinNo7();
         source.hihokenshaNo = item.getHihokenshaNo();
         source.hihokenshaName = item.getHihokenshaName();
-        source.shukeiserviceSTYM = item.getShukeiserviceSTYM();
-        source.shukeiserviceEDYM = item.getShukeiserviceEDYM();
-        source.listServiceIchiran_1 = item.getListServiceIchiran_1();
+        source.shukeiserviceSTYM = new FlexibleYearMonth(item.getShukeiserviceSTYM()).
+                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK)
+                .toDateString();
+        source.shukeiserviceEDYM = new FlexibleYearMonth(item.getShukeiserviceEDYM()).
+                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK)
+                .toDateString();
+        source.listServiceIchiran_1 = new FlexibleYearMonth(item.getListServiceIchiran_1()).
+                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK)
+                .toDateString();
         source.listServiceIchiran_2 = item.getListServiceIchiran_2();
         source.listServiceIchiran_3 = item.getListServiceIchiran_3();
         source.listServiceIchiran_4 = item.getListServiceIchiran_4();
-        source.listServiceIchiran_5 = item.getListServiceIchiran_5();
-        source.listServiceIchiran_6 = item.getListServiceIchiran_6();
+        source.listServiceIchiran_5
+                = DecimalFormatter.toコンマ区切りRString(new Decimal(item.getListServiceIchiran_5().toString()), 0).concat("円");
+        source.listServiceIchiran_6
+                = DecimalFormatter.toコンマ区切りRString(new Decimal(item.getListServiceIchiran_6().toString()), 0).concat("円");
         source.toiawasesakiTitle = item.getToiawasesakiTitle();
-        getイメージ03(item);
         source.pageBunshi = new RString(item.getPageBunshi());
         source.pageBunbo = new RString(item.getPageBunbo());
         source.tsuchibun1 = item.getTsuchibun1();
@@ -110,19 +120,5 @@ public class KyufuhiTsuchishoSealerEditor implements IKyufuhiTsuchishoSealerEdit
         source.naisenLabel = item.getNaisenLabel();
         source.naisenNo = item.getNaisenNo();
         return source;
-    }
-
-    private void getイメージ03(KyufuhiTsuchishoSealerEntity item) {
-        index = index + 1;
-        if (index % PAGECOUNT > 0) {
-            item.setPageBunshi((index - (index % PAGECOUNT)) / PAGECOUNT + 1);
-        } else {
-            item.setPageBunshi(index / PAGECOUNT);
-        }
-        if (item.getCount() % PAGECOUNT > 0) {
-            item.setPageBunbo((item.getCount() - (item.getCount() % PAGECOUNT)) / PAGECOUNT + 1);
-        } else {
-            item.setPageBunbo(item.getCount() / PAGECOUNT);
-        }
     }
 }

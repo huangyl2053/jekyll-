@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -39,8 +40,22 @@ public class UpdTorikomiKokuhoJyohoTemp3Process extends BatchProcessBase<KokuhoK
     private static final RString コード文言_宛名なし = new RString("住民情報がありません");
     private static final RString エラー区分 = new RString("1");
 
+    /**
+     * プロセス戻り値：対象月データありなしフラグ
+     */
+    public static final RString OUT_HAS_TARGET_DATA;
+
+    private OutputParameter<Boolean> 文言_設定_FLAG;
+    private boolean 文言設定flag;
+
+    static {
+        OUT_HAS_TARGET_DATA = new RString("文言_設定_FLAG");
+    }
+
     @Override
     protected void initialize() {
+        文言_設定_FLAG = new OutputParameter<>();
+        文言設定flag = processParameter.is文言設定flag();
     }
 
     @Override
@@ -56,34 +71,47 @@ public class UpdTorikomiKokuhoJyohoTemp3Process extends BatchProcessBase<KokuhoK
 
     @Override
     protected void process(KokuhoKannriDataYoEntity entity) {
-        if (entity.getデータ件数() != null && entity.getデータ件数() > 1) {
-            if (ＩＦ種類_電算.equals(processParameter.getIf種類())) {
-                entity.get取込国保情報Entity().setエラーコード(エラーコード_31);
+        if (entity.getデータ件数() != null && entity.getデータ件数() > 1 && ＩＦ種類_電算.equals(processParameter.getIf種類())) {
+            entity.get取込国保情報Entity().setエラーコード(エラーコード_31);
+            if (文言設定flag) {
                 entity.get取込国保情報Entity().setエラー文言(コード文言_住民コード);
-                entity.get取込国保情報Entity().setエラー区分(エラー区分);
+                文言設定flag = false;
             }
-
-            if (ＩＦ種類_電算２.equals(processParameter.getIf種類())) {
-                entity.get取込国保情報Entity().setエラーコード(エラーコード_81);
-                entity.get取込国保情報Entity().setエラー文言(コード文言_住民コード);
-                entity.get取込国保情報Entity().setエラー区分(エラー区分);
-            }
+            entity.get取込国保情報Entity().setエラー区分(エラー区分);
         }
 
-        if (entity.get宛名識別対象Entity() == null) {
-            if (ＩＦ種類_電算.equals(processParameter.getIf種類())) {
-                entity.get取込国保情報Entity().setエラーコード(エラーコード_13);
-                entity.get取込国保情報Entity().setエラー文言(コード文言_宛名なし);
-                entity.get取込国保情報Entity().setエラー区分(エラー区分);
+        if (entity.getデータ件数() != null && entity.getデータ件数() > 1 && ＩＦ種類_電算２.equals(processParameter.getIf種類())) {
+            entity.get取込国保情報Entity().setエラーコード(エラーコード_81);
+            if (文言設定flag) {
+                entity.get取込国保情報Entity().setエラー文言(コード文言_住民コード);
+                文言設定flag = false;
             }
+            entity.get取込国保情報Entity().setエラー区分(エラー区分);
+        }
 
-            if (ＩＦ種類_電算２.equals(processParameter.getIf種類())) {
-                entity.get取込国保情報Entity().setエラーコード(エラーコード_69);
+        if (entity.get宛名識別対象Entity() == null && ＩＦ種類_電算.equals(processParameter.getIf種類())) {
+            entity.get取込国保情報Entity().setエラーコード(エラーコード_13);
+            if (文言設定flag) {
                 entity.get取込国保情報Entity().setエラー文言(コード文言_宛名なし);
-                entity.get取込国保情報Entity().setエラー区分(エラー区分);
+                文言設定flag = false;
             }
+            entity.get取込国保情報Entity().setエラー区分(エラー区分);
+        }
+
+        if (entity.get宛名識別対象Entity() == null && ＩＦ種類_電算２.equals(processParameter.getIf種類())) {
+            entity.get取込国保情報Entity().setエラーコード(エラーコード_69);
+            if (文言設定flag) {
+                entity.get取込国保情報Entity().setエラー文言(コード文言_宛名なし);
+                文言設定flag = false;
+            }
+            entity.get取込国保情報Entity().setエラー区分(エラー区分);
         }
 
         torikomiKokuhoJyohoWriter.update(entity.get取込国保情報Entity());
+    }
+
+    @Override
+    protected void afterExecute() {
+        文言_設定_FLAG.setValue(文言設定flag);
     }
 }

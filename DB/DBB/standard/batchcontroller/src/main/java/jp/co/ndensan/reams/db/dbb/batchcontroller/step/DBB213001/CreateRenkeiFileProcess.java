@@ -313,8 +313,8 @@ public class CreateRenkeiFileProcess extends BatchProcessBase<TokuchoSofuJohoRen
                                 各種金額欄合計二.get(特徴送付情報連携情報.get構成市町村コード()),
                                 レコード件数 - INT_TWO));
             }
+            レコード件数OutputMap.put(特徴送付情報連携情報.get構成市町村コード(), レコード件数 - INT_TWO);
         }
-        レコード件数OutputMap.put(特徴送付情報連携情報.get構成市町村コード(), レコード件数 - INT_TWO);
         FlowEntity flowEntity = new FlowEntity();
         flowEntity.setレコード件数(レコード件数OutputMap);
         flowEntity.setファイル(ファイルOutputMap);

@@ -34,9 +34,11 @@ public class KyufuhiTuchiHakkoEntity {
     private Decimal サービス費用合計額;
     private RString 資格喪失年月日;
     private RString 資格喪失事由コード;
+    private RString 名称;
     private RString 郵便番号;
     private RString 住所;
-    private RString 整理番号;
+    private RString 番地;
+    private RString 識別コード;
     private int count;
     private KyufuhiTuchiHakkoIchiranRelateEntity relateEntity;
     private UaFt250FindAtesakiEntity atesakiEntity;
