@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1050021;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
@@ -118,7 +117,6 @@ public class HihokenshaShisakuPanal {
     private void 資格異動訂正の確定処理(HihokenshaShisakuPanalDiv div) {
         施設入退所履歴期間重複チェック処理(div);
         List<HihokenshaDaicho> 資格訂正情報 = create被保険者入力情報統合リスト(div);
-        outputList(資格訂正情報);
 
         HihokenshaDaichoList 降順List = new HihokenshaDaichoList(ItemList.of(資格訂正情報));
         manager.checkShikakuTorukuList(降順List.to昇順List().toList(), get当該識別対象の生年月日(div));
@@ -142,45 +140,6 @@ public class HihokenshaShisakuPanal {
 
         serial修正後データ.addAll(shuseimaeExclusion);
         ViewStateHolder.put(ViewStateKeys.対象者_被保険者台帳情報_修正後, serial修正後データ);
-        outputList(資格訂正情報);
-    }
-
-    private void outputList(Collection<HihokenshaDaicho> collection) {
-        int num = 0;
-        for (HihokenshaDaicho hiho : collection) {
-            System.out.print(num + "番目のデータ--------------,");
-            System.out.print(hiho.get被保険者番号().getColumnValue() + ",");
-            System.out.print(hiho.get異動日() + ",");
-            System.out.print(hiho.get枝番() + ",");
-            System.out.print(hiho.get異動事由コード() + ",");
-            System.out.print(hiho.get市町村コード() + ",");
-            System.out.print(hiho.get識別コード() + ",");
-            System.out.print(hiho.get資格取得事由コード() + ",");
-            System.out.print(hiho.get資格取得年月日() + ",");
-            System.out.print(hiho.get資格取得届出年月日() + ",");
-            System.out.print(hiho.get第1号資格取得年月日() + ",");
-            System.out.print(hiho.get被保険者区分コード() + ",");
-            System.out.print(hiho.get資格喪失事由コード() + ",");
-            System.out.print(hiho.get資格喪失年月日() + ",");
-            System.out.print(hiho.get資格喪失届出年月日() + ",");
-            System.out.print(hiho.get資格変更事由コード() + ",");
-            System.out.print(hiho.get資格変更年月日() + ",");
-            System.out.print(hiho.get資格変更届出年月日() + ",");
-            System.out.print(hiho.get住所地特例適用事由コード() + ",");
-            System.out.print(hiho.get適用年月日() + ",");
-            System.out.print(hiho.get適用届出年月日() + ",");
-            System.out.print(hiho.get住所地特例解除事由コード() + ",");
-            System.out.print(hiho.get解除年月日() + ",");
-            System.out.print(hiho.get解除届出年月日() + ",");
-            System.out.print(hiho.get住所地特例フラグ() + ",");
-            System.out.print(hiho.get広域内住所地特例フラグ() + ",");
-            System.out.print(hiho.get広住特措置元市町村コード() + ",");
-            System.out.print(hiho.get旧市町村コード() + ",");
-            System.out.print(hiho.is論理削除フラグ() + ",");
-            System.out.print(hiho.toEntity().getState().name() + ",");
-            System.out.println();
-            num++;
-        }
     }
 
     private ValidationMessageControlPairs is暦上日(HihokenshaShisakuPanalDiv div) {
@@ -220,17 +179,12 @@ public class HihokenshaShisakuPanal {
         HihokenshaDaichoList hihoList = new HihokenshaDaichoList(ItemList.of(入力内容反映前));
         IItemList<HihokenshaDaicho> oneSeasonList = hihoList.toOneSeasonList(shikakuShutokuDate);
         入力内容反映前 = oneSeasonList.toList();
-        outputList(入力内容反映前);
 
         List<HihokenshaDaicho> 住所地特例情報
                 = div.getCcdJutokuDialogButton().get修正後被保険者データ().toList();
-        System.out.println("住所地特例データ");
-        outputList(住所地特例情報);
 
         List<HihokenshaDaicho> 資格変更履歴情報
                 = div.getCcdShikakuHenkoDialogButton().get修正後被保険者データ().toList();
-        System.out.println("資格変更履歴データ");
-        outputList(資格変更履歴情報);
 
         List<HihokenshaDaicho> 資格訂正登録リスト = new ArrayList<>();
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
@@ -242,12 +196,9 @@ public class HihokenshaShisakuPanal {
         }
         if (状態_修正.equals(初期_状態)) {
             資格訂正登録リスト = getHandler(div).create住所地特例データ統合リスト(入力内容反映前, 住所地特例情報);
-            outputList(資格訂正登録リスト);
             資格訂正登録リスト = getHandler(div).create資格変更データ統合リスト(資格訂正登録リスト, 資格変更履歴情報);
-            outputList(資格訂正登録リスト);
         }
         資格訂正登録リスト = getHandler(div).create引継情報反映リスト(資格訂正登録リスト);
-        outputList(資格訂正登録リスト);
         return 資格訂正登録リスト;
     }
 

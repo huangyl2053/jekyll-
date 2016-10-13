@@ -394,7 +394,7 @@ public class JushochiTokureiRirekiListHandler {
     }
 
     /**
-     * 共有子Divの状態を初期化します。
+     * 共有子Divに設定された住所地特例の情報をListで返します。
      *
      * @return List<HihokenshaDaicho>
      */
@@ -429,6 +429,7 @@ public class JushochiTokureiRirekiListHandler {
                     HihokenshaDaicho kariDaicho = new HihokenshaDaicho(builder.build().toEntity());
                     HihokenshaDaichoBuilder kariBuilder = kariDaicho.createBuilderForEdit();
                     kariBuilder.set異動日(解除年月日);
+                    kariBuilder.set枝番(new RString("0001"));
                     kaijoHihokenshaDaicho = kariBuilder.build().createNewCopyData();
                 }
                 HihokenshaDaichoBuilder kaijoBuilder = kaijoHihokenshaDaicho.createBuilderForEdit();
@@ -440,9 +441,6 @@ public class JushochiTokureiRirekiListHandler {
                 returnList.add(kaijoBuilder.build());
             }
 
-        }
-        for (HihokenshaDaicho daicho : returnList) {
-            System.out.println("idoDate have return List is " + daicho.get異動日());
         }
         return returnList;
     }

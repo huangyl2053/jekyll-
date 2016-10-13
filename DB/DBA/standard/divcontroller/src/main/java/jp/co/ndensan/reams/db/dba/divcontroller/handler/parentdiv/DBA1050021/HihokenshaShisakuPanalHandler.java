@@ -124,7 +124,6 @@ public class HihokenshaShisakuPanalHandler {
     public List<HihokenshaDaicho> createNewRirekiData(HihokenshaNo 被保番号, ShikibetsuCode 識別コード) {
         List<HihokenshaDaicho> hihoList = new ArrayList<>();
 
-        System.out.println("Create new Shikaku Shutoku Data !!");
         ShikakuRirekiJoho inputData = get資格詳細情報();
         HihokenshaDaicho daicho = new HihokenshaDaicho(被保番号, inputData.getShutokuDate(), new RString("0001"));
         HihokenshaDaichoBuilder builder = daicho.createBuilderForEdit();
@@ -140,7 +139,6 @@ public class HihokenshaShisakuPanalHandler {
         hihoList.add(builder.build());
 
         if (inputData.getSoshitsuDate() != null && !inputData.getSoshitsuDate().isEmpty()) {
-            System.out.println("Create new Shikaku Soshitsu Data !!");
             HihokenshaDaicho soshitsuDaicho = new HihokenshaDaicho(被保番号, inputData.getSoshitsuDate(), new RString("0001"));
             HihokenshaDaichoBuilder soshitsuBuilder = soshitsuDaicho.createBuilderForEdit();
             builder.set識別コード(識別コード);
@@ -611,9 +609,20 @@ public class HihokenshaShisakuPanalHandler {
             if (!isAdded) {
                 integrateList.add(daicho);
             }
-
         }
+        integrateList.addAll(extractAddData(住所地特例情報));
+
         return integrateList;
+    }
+
+    private List<HihokenshaDaicho> extractAddData(List<HihokenshaDaicho> 反映対象データ) {
+        List<HihokenshaDaicho> extractionData = new ArrayList<>();
+        for (HihokenshaDaicho daicho : 反映対象データ) {
+            if (EntityDataState.Added.equals(daicho.toEntity().getState())) {
+                extractionData.add(daicho);
+            }
+        }
+        return extractionData;
     }
 
     private boolean integrateJutoku(List<HihokenshaDaicho> 住所地特例情報, HihokenshaDaicho daicho, List<HihokenshaDaicho> integrateList) {
@@ -671,16 +680,14 @@ public class HihokenshaShisakuPanalHandler {
     public List<HihokenshaDaicho> create資格変更データ統合リスト(List<HihokenshaDaicho> 入力内容反映前, List<HihokenshaDaicho> 資格変更履歴情報) {
         List<HihokenshaDaicho> integrateList = new ArrayList<>();
         boolean isAdded;
-        int n = 0;
         for (HihokenshaDaicho daicho : 入力内容反映前) {
 
-            System.out.println("反映前データ--- " + n);
             isAdded = integrateHenko(資格変更履歴情報, daicho, integrateList);
             if (!isAdded) {
                 integrateList.add(daicho);
             }
-            n++;
         }
+        integrateList.addAll(extractAddData(資格変更履歴情報));
         return integrateList;
     }
 
@@ -690,26 +697,20 @@ public class HihokenshaShisakuPanalHandler {
             return isAdded;
         }
 
-        int n = 0;
         for (HihokenshaDaicho henkoDaicho : 資格変更履歴情報) {
             if (henkoDaicho.is論理削除フラグ()) {
                 continue;
             }
 
-            System.out.println("反映対象データ--- " + n);
             if (!is主キー一致(daicho, henkoDaicho)) {
-                System.out.println("主キー一致 = 変更なし");
                 continue;
             }
             if (!isUpdate資格変更(daicho, henkoDaicho)) {
-                System.out.println("資格更新無し = 変更なし");
                 continue;
             }
-            System.out.println("更新あり = 修正 And 追加");
             integrateList.add(setIdoDate(henkoDaicho, henkoDaicho.get資格変更年月日(), henkoDaicho.get資格変更事由コード()));
             integrateList.add(setLogicalDelete(daicho));
             isAdded = true;
-            n++;
         }
         return isAdded;
     }
@@ -935,23 +936,6 @@ public class HihokenshaShisakuPanalHandler {
         LasdecCode 旧市町村コード = daicho.get旧市町村コード() == null ? LasdecCode.EMPTY : daicho.get旧市町村コード();
         LasdecCode 広住特措置元市町村コード = daicho.get広住特措置元市町村コード() == null ? LasdecCode.EMPTY : daicho.get広住特措置元市町村コード();
 
-        System.out.println("isUpdate資格変更 is "
-                + ((!資格変更年月日.equals(henkoDaicho.get資格変更年月日()))
-                || (!資格変更届出年月日.equals(henkoDaicho.get資格変更届出年月日()))
-                || (!資格変更事由コード.equals(henkoDaicho.get資格変更事由コード()))
-                || (!旧市町村コード.equals(henkoDaicho.get旧市町村コード()))
-                || (!広住特措置元市町村コード.equals(henkoDaicho.get広住特措置元市町村コード()))));
-        System.out.println("isUpdate資格変更A is "
-                + (!資格変更年月日.equals(henkoDaicho.get資格変更年月日())));
-        System.out.println("isUpdate資格変更B is "
-                + (!資格変更届出年月日.equals(henkoDaicho.get資格変更届出年月日())));
-        System.out.println("isUpdate資格変更C is "
-                + (!資格変更事由コード.equals(henkoDaicho.get資格変更事由コード())));
-        System.out.println("isUpdate資格変更D is "
-                + (!旧市町村コード.equals(henkoDaicho.get旧市町村コード())));
-        System.out.println("isUpdate資格変更E is "
-                + (!広住特措置元市町村コード.equals(henkoDaicho.get広住特措置元市町村コード())));
-
         return (!資格変更年月日.equals(henkoDaicho.get資格変更年月日()))
                 || (!資格変更届出年月日.equals(henkoDaicho.get資格変更届出年月日()))
                 || (!資格変更事由コード.equals(henkoDaicho.get資格変更事由コード()))
@@ -967,7 +951,7 @@ public class HihokenshaShisakuPanalHandler {
     }
 
     private HihokenshaDaicho setIdoDate(HihokenshaDaicho daicho, FlexibleDate idoDate, RString idoJiyuCode) {
-        return daicho.createBuilderForEdit().set異動日(idoDate).set異動事由コード(idoJiyuCode).build();
+        return daicho.createBuilderForEdit().set異動日(idoDate).set異動事由コード(idoJiyuCode).build().createNewCopyData();
     }
 
     private boolean isUpdate資格取得(HihokenshaDaicho daicho, ShikakuRirekiJoho 資格詳細情報) {
