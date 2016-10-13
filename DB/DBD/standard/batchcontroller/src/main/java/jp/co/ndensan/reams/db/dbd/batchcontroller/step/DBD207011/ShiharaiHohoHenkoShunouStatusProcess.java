@@ -321,7 +321,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
                         時効成立日 = 収納状況_時効起算日.plusYear(2);
                     }
 
-                    if (processParamter.get基準日().isBefore(時効成立日)) {
+                    if (!FlexibleDate.EMPTY.equals(時効成立日) && processParamter.get基準日().isBefore(時効成立日)) {
                         if (未納あり.equals(完納_未納区分)) {
                             if (納期限 == null || FlexibleDate.EMPTY.equals(納期限)) {
                                 時効起算日 = 収納状況_時効起算日;
