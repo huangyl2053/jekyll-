@@ -36,8 +36,8 @@ public class SoufuErrorOutProcess extends BatchProcessBase<SoufuErrorTblEntity> 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select送付エラー一時");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC110020");
-    private final RString csvFileName = new RString("SofuDataErroriList.csv");
-    private final int COUNT_0 = 0;
+    private static final RString CSV_FILENAME = new RString("SofuDataErroriList.csv");
+    private static final int COUNT_0 = 0;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString CSV_市町村コード = new RString("市町村コード");
@@ -87,6 +87,7 @@ public class SoufuErrorOutProcess extends BatchProcessBase<SoufuErrorTblEntity> 
         市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value();
         市町村名称 = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records().get(COUNT_0).get市町村名称();
         連番 = 0;
+        super.initialize();
     }
 
     @Override
@@ -99,7 +100,7 @@ public class SoufuErrorOutProcess extends BatchProcessBase<SoufuErrorTblEntity> 
         spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
-                csvFileName);
+                CSV_FILENAME);
         csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
