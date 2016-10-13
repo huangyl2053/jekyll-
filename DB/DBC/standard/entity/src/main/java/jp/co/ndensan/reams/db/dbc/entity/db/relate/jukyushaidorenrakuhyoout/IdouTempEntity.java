@@ -36,6 +36,7 @@ public class IdouTempEntity {
     private DbT7124KokiKoreishaInfoEntity 後期高齢者情報;
     private DbT7123KokuhoShikakuInfoEntity 国保資格情報;
     private UrT0508SeikatsuHogoJukyushaEntity 生活保護受給者;
+    private TokuteiNyusyoshaInfoEntity 特定入所者;
     private ShafukugemmenEntity 社福減免;
     private DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 利用者負担;
     private HyojunFutanEntity 標準負担;

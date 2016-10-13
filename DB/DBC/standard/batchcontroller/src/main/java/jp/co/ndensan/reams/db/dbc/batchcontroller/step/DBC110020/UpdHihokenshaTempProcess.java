@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -34,7 +35,7 @@ public class UpdHihokenshaTempProcess extends BatchProcessBase<IdouTempEntity> {
     private static final RString SPLIT = new RString(",");
 
     private Map<HihokenshaNo, Decimal> 連番Map;
-    private List<RString> 被保険者台帳List;
+    private List<RString> 被保険者台帳KeyList;
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter 異動一時tableWriter;
@@ -42,7 +43,7 @@ public class UpdHihokenshaTempProcess extends BatchProcessBase<IdouTempEntity> {
     @Override
     protected void initialize() {
         連番Map = new HashMap<>();
-        被保険者台帳List = new ArrayList<>();
+        被保険者台帳KeyList = new ArrayList<>();
         super.initialize();
     }
 
@@ -59,11 +60,12 @@ public class UpdHihokenshaTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     @Override
     protected void process(IdouTempEntity entity) {
-        RString 被保険者台帳 = 被保険者台帳全項目(entity.get被保険者台帳());
-        if (被保険者台帳List.contains(被保険者台帳)) {
+        RString 被保険者台帳Key = 被保険者台帳Key(entity.get被保険者台帳());
+        if (被保険者台帳KeyList.contains(被保険者台帳Key)) {
             return;
         }
-        被保険者台帳List.add(被保険者台帳);
+        被保険者台帳KeyList.add(被保険者台帳Key);
+        RString 被保険者台帳 = 被保険者台帳全項目(entity.get被保険者台帳());
         Decimal 連番 = 連番Map.get(entity.get被保険者台帳().getHihokenshaNo());
         if (連番 == null) {
             連番Map.put(entity.get被保険者台帳().getHihokenshaNo(), Decimal.ONE);
@@ -108,10 +110,31 @@ public class UpdHihokenshaTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     private RString 被保険者台帳全項目(DbT1001HihokenshaDaichoEntity 被保険者台帳) {
         RString 全項目 = RString.EMPTY;
-        //TODO
+        全項目 = concatDate(全項目, 被保険者台帳.getShikakuShutokuYMD());
+        全項目 = concatDate(全項目, 被保険者台帳.getShikakuSoshitsuYMD());
+        if (RString.isNullOrEmpty(被保険者台帳.getJushochiTokureiFlag())) {
+            全項目 = 全項目.concat(RString.EMPTY);
+        } else {
+            全項目 = 全項目.concat(被保険者台帳.getJushochiTokureiFlag());
+        }
+        return 全項目;
+    }
+
+    private RString 被保険者台帳Key(DbT1001HihokenshaDaichoEntity 被保険者台帳) {
+        RString 全項目 = RString.EMPTY;
         全項目 = 全項目
                 .concat(被保険者台帳.getHihokenshaNo().getColumnValue()).concat(SPLIT)
-                .concat(被保険者台帳.getInsertDantaiCd()).concat(SPLIT);
+                .concat(被保険者台帳.getIdoYMD().toString()).concat(SPLIT)
+                .concat(被保険者台帳.getEdaNo());
+        return 全項目;
+    }
+
+    private RString concatDate(RString 全項目, FlexibleDate date) {
+        if (date == null) {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(date.toString()).concat(SPLIT);
+        }
         return 全項目;
     }
 

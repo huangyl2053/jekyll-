@@ -35,12 +35,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class PntNinteiShinsaHanteiListProcess extends BatchProcessBase<PntNinteiShinsaHanteiListEntity> {
 
-    private static final RString 認定申請IF種類 = new RString("【認定申請IF種類】");
-    private static final RString 証記載保険者番号 = new RString("【証記載保険者番号】");
-    private static final RString 市町村コード = new RString("【市町村コード】");
-    private static final RString 被保険者番号 = new RString("【被保険者番号】");
-    private static final RString 抽出開始日時 = new RString("【抽出開始日時】");
-    private static final RString 抽出終了日時 = new RString("【抽出終了日時】: ");
     private static final RString MYBATIS_MAPPER_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper."
             + "relate.ninteishinseiinfoif.IPntNinteiShinsaHanteiListMapper.select介護認定審査判定データ");
     private PntNinteiShinsaHanteiListProcessParameter parameter;
@@ -56,11 +50,16 @@ public class PntNinteiShinsaHanteiListProcess extends BatchProcessBase<PntNintei
     protected void initialize() {
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         mapper = getMapper(IPntNinteiShinsaHanteiListMapper.class);
-        List<DbT7051KoseiShichosonMasterEntity> 構成市町村マスタ = mapper.select市町村名(parameter.toMybatisParameter());
-        if (!構成市町村マスタ.isEmpty()) {
-            市町村名 = 構成市町村マスタ.get(0).getShichosonMeisho();
+        if (parameter.get市町村コード() == null || parameter.get市町村コード().isEmpty()
+                || parameter.get証記載保険者番号() == null || parameter.get証記載保険者番号().isEmpty()) {
+            市町村名 = new RString("全市町村");
         } else {
-            市町村名 = RString.EMPTY;
+            List<DbT7051KoseiShichosonMasterEntity> 構成市町村マスタ = mapper.select市町村名(parameter.toMybatisParameter());
+            if (!構成市町村マスタ.isEmpty()) {
+                市町村名 = 構成市町村マスタ.get(0).getShichosonMeisho();
+            } else {
+                市町村名 = RString.EMPTY;
+            }
         }
     }
 

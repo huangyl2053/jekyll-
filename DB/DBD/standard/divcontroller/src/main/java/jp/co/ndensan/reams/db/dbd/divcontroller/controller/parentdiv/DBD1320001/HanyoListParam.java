@@ -136,10 +136,6 @@ public class HanyoListParam {
             if (帳票出力項目MessagePairs.existsError()) {
                 return ResponseData.of(div).addValidationMessages(帳票出力項目MessagePairs).respond();
             }
-            ValidationMessageControlPairs 実行するボタンMessagePairs = getValidationHandler(div).validate実行するボタンクリック();
-            if (実行するボタンMessagePairs.existsError()) {
-                return ResponseData.of(div).addValidationMessages(実行するボタンMessagePairs).respond();
-            }
             ValidationMessageControlPairs warningMessagePairs = getValidationHandler(div).validate表題();
             if (warningMessagePairs.existsError()) {
                 return ResponseData.of(div).addValidationMessages(warningMessagePairs).respond();

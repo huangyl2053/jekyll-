@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteishaListSakuseiResultEntity extends DbTableEntityBase<TaishoshaJohoTempTableEntity> implements IDbAccessable {
     private HihokenshaNo 被保険者番号;
+    private RString 本人識別コード;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
     private RString 本人課税区分;
     private boolean is老齢福祉年金受給者;

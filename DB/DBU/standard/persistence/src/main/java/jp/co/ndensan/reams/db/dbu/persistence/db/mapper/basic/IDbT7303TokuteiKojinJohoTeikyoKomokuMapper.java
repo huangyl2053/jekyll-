@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic;
 /**
  * {@link jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7303TokuteiKojinJohoTeikyoKomokuEntity}のマッパーIFです。
  *
- * @author @reamsid_L DBU- 9999-021 sunhaidi
+ * @reamsid_L DBU-9999-021 sunhaidi
  */
 public interface IDbT7303TokuteiKojinJohoTeikyoKomokuMapper {
 

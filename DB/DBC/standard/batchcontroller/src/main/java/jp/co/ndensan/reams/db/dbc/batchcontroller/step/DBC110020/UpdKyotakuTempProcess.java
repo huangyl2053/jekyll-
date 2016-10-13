@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -108,16 +109,36 @@ public class UpdKyotakuTempProcess extends BatchProcessBase<IdouTempEntity> {
 
     private RString 居宅計画全項目(KyotakuEntity 居宅計画) {
         RString 全項目 = RString.EMPTY;
-        全項目.concat(居宅計画.get居宅計画種類()).concat(SPLIT)
-                .concat(居宅計画.get被保険者番号().getColumnValue()).concat(SPLIT)
-                .concat(居宅計画.get適用開始日().toString()).concat(SPLIT)
-                .concat(居宅計画.get適用終了日().toString()).concat(SPLIT)
-                .concat(居宅計画.get計画事業者番号().getColumnValue()).concat(SPLIT)
-                .concat(居宅計画.get委託先事業者番号().getColumnValue()).concat(SPLIT)
-                .concat(居宅計画.get居宅サービス計画作成区分コード()).concat(SPLIT)
-                .concat(居宅計画.get暫定区分()).concat(SPLIT)
-                .concat(居宅計画.get届出年月日().toString()).concat(SPLIT);
+        全項目 = concatDate(全項目, 居宅計画.get適用開始日());
+        全項目 = 全項目
+                .concat(居宅計画.get計画事業者番号().getColumnValue()).concat(SPLIT);
+        全項目 = concatRString(全項目, 居宅計画.get居宅サービス計画作成区分コード());
+        全項目 = concatRString(全項目, 居宅計画.getサービス種類コード());
+        全項目 = concatDate(全項目, 居宅計画.get有効終了日());
+        全項目 = concatRString(全項目, 居宅計画.get居宅計画種類());
+        全項目 = concatDate(全項目, 居宅計画.get適用終了日());
+        全項目 = 全項目.concat(居宅計画.get被保険者番号().getColumnValue()).concat(SPLIT);
+        全項目 = 全項目.concat(居宅計画.get委託先事業者番号().getColumnValue()).concat(SPLIT);
+        全項目 = concatRString(全項目, 居宅計画.get暫定区分());
+        全項目 = concatDate(全項目, 居宅計画.get届出年月日());
         return 全項目;
     }
 
+    private RString concatRString(RString 全項目, RString data) {
+        if (RString.isNullOrEmpty(data)) {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(data).concat(SPLIT);
+        }
+        return 全項目;
+    }
+
+    private RString concatDate(RString 全項目, FlexibleDate data) {
+        if (data == null) {
+            全項目 = 全項目.concat(RString.EMPTY).concat(SPLIT);
+        } else {
+            全項目 = 全項目.concat(data.toString()).concat(SPLIT);
+        }
+        return 全項目;
+    }
 }

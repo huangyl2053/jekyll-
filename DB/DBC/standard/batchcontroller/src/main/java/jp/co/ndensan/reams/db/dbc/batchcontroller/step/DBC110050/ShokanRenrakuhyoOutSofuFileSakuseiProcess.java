@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -77,6 +76,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
     private static final RString STR_200904 = new RString("200904");
     private static final RString RSTRING_0000 = new RString("0000");
     private static final int INT_100 = 100;
+    private static final int INT_10 = 10;
     private static final int INT_2 = 2;
     private static final int INT_4 = 4;
 
@@ -257,9 +257,9 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             総出力件数 = 総出力件数 + INDEX_1;
         } else if (データ区分_09.equals(entity.getDataKubun())) {
             レコード番号 = レコード番号 + INDEX_1;
-            if (STR_200604.compareTo(entity.getServiceTeikyoYM().toDateString()) < 0) {
+            if (entity.getServiceTeikyoYM().toDateString().compareTo(STR_200604) < 0) {
                 csvWriter.writeLine(get計画200004(entity));
-            } else if (STR_200904.compareTo(entity.getServiceTeikyoYM().toDateString()) < 0) {
+            } else if (entity.getServiceTeikyoYM().toDateString().compareTo(STR_200904) < 0) {
                 csvWriter.writeLine(get計画200604(entity));
             } else {
                 csvWriter.writeLine(get計画200904(entity, lastFlag));
@@ -366,7 +366,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(RString.EMPTY);
         tempList.add(RString.EMPTY);
         tempList.add(trimRString(entity.getKyuSochiNyushoshaTokureiCode()));
-        tempList.add(entity.getKyotakuServiceSakuseiKubunCode());
+        tempList.add(trimRString(entity.getKyotakuServiceSakuseiKubunCode()));
         tempList.add(entity.getKyotakuserviceJigyoshaNo() == null || entity.getKyotakuserviceJigyoshaNo().isEmpty()
                 ? RString.EMPTY : entity.getKyotakuserviceJigyoshaNo().getColumnValue().trim());
         tempList.add(trimDate(entity.getKaishiYMD()));
@@ -384,7 +384,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(new RString(entity.getServiceTanisu()));
         tempList.add(trimDecimal(entity.getHokenSeikyugaku()));
         tempList.add(new RString(entity.getRiyoshaFutangaku()));
-        tempList.add(new RString(entity.getKinkyuShisetsuRyoyohiTotalTanisu()));
+        tempList.add(trimDecimal(entity.getKinkyuShisetsuRyoyoSeikyugaku()));
         tempList.add(trimDecimal(entity.getTokuteiShinryoSeikyugaku()));
         tempList.add(new RString(entity.getTokuteiNyushoshaKaigoServiceSeikyugaku()));
         tempList.add(RString.EMPTY);
@@ -850,7 +850,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(entity.getSofuHihokenshaNo().getColumnValue().trim());
         tempList.add(trimRString(entity.getSeiriNo()));
         tempList.add(trimRString(entity.getShiteiKijunGaitoJigyoshaKubunCode()));
-        tempList.add(trimRString(entity.getKyotakuServiceSakuseiKubunCode()));
+        tempList.add(trimDate(entity.getKyotakuServiceSakuseiIraiYMD()));
         tempList.add(entity.getServiceCode() == null || entity.getServiceCode().isEmpty()
                 ? RString.EMPTY : entity.getServiceCode().getColumnValue().trim());
         tempList.add(new RString(entity.getTanisu()));
@@ -879,7 +879,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(entity.getSofuHihokenshaNo().getColumnValue().trim());
         tempList.add(trimRString(entity.getSeiriNo()));
         tempList.add(trimRString(entity.getShiteiKijunGaitoJigyoshaKubunCode()));
-        tempList.add(trimRString(entity.getKyotakuServiceSakuseiKubunCode()));
+        tempList.add(trimDate(entity.getKyotakuServiceSakuseiIraiYMD()));
         tempList.add(entity.getServiceCode() == null || entity.getServiceCode().isEmpty()
                 ? RString.EMPTY : entity.getServiceCode().getColumnValue().trim());
         tempList.add(new RString(entity.getTanisu()));
@@ -909,13 +909,13 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(entity.getShoKisaiHokenshaNo().getColumnValue().trim());
         tempList.add(entity.getSofuHihokenshaNo().getColumnValue().trim());
         tempList.add(trimRString(entity.getSeiriNo()));
+        tempList.add(trimRString(entity.getShiteiKijunGaitoJigyoshaKubunCode()));
+        tempList.add(trimDate(entity.getKyotakuServiceSakuseiIraiYMD()));
         if (lastFlag) {
             tempList.add(レコード順次番号_99);
         } else {
             tempList.add(new RString(レコード順次番号).padZeroToLeft(INT_2));
         }
-        tempList.add(trimRString(entity.getShiteiKijunGaitoJigyoshaKubunCode()));
-        tempList.add(trimRString(entity.getKyotakuServiceSakuseiKubunCode()));
         tempList.add(entity.getServiceCode() == null || entity.getServiceCode().isEmpty()
                 ? RString.EMPTY : entity.getServiceCode().getColumnValue().trim());
         tempList.add(new RString(entity.getTanisu()));
@@ -955,7 +955,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(RecordShubetsu.データレコード.getコード());
         tempList.add(new RString(レコード番号));
         tempList.add(trimRString(entity.getYoshikiNo()));
-        tempList.add(ShokanRenrakuhyoRecordShubetsu.住宅改修費情報レコード.getコード());
+        tempList.add(ShokanRenrakuhyoRecordShubetsu.福祉用具販売費情報レコード.getコード());
         tempList.add(trimYearMonth(entity.getServiceTeikyoYM()));
         tempList.add(entity.getJigyoshaNo().getColumnValue().trim());
         tempList.add(entity.getShoKisaiHokenshaNo().getColumnValue().trim());
@@ -980,7 +980,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(RecordShubetsu.データレコード.getコード());
         tempList.add(new RString(レコード番号));
         tempList.add(trimRString(entity.getYoshikiNo()));
-        tempList.add(ShokanRenrakuhyoRecordShubetsu.福祉用具販売費情報レコード.getコード());
+        tempList.add(ShokanRenrakuhyoRecordShubetsu.住宅改修費情報レコード.getコード());
         tempList.add(trimYearMonth(entity.getServiceTeikyoYM()));
         tempList.add(entity.getJigyoshaNo().getColumnValue().trim());
         tempList.add(entity.getShoKisaiHokenshaNo().getColumnValue().trim());
@@ -1001,7 +1001,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(RecordShubetsu.データレコード.getコード());
         tempList.add(new RString(レコード番号));
         tempList.add(trimRString(entity.getYoshikiNo()));
-        tempList.add(ShokanRenrakuhyoRecordShubetsu.福祉用具販売費情報レコード.getコード());
+        tempList.add(ShokanRenrakuhyoRecordShubetsu.集計情報レコード.getコード());
         tempList.add(trimYearMonth(entity.getServiceTeikyoYM()));
         tempList.add(entity.getJigyoshaNo().getColumnValue().trim());
         tempList.add(entity.getShoKisaiHokenshaNo().getColumnValue().trim());
@@ -1056,7 +1056,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(RecordShubetsu.データレコード.getコード());
         tempList.add(new RString(レコード番号));
         tempList.add(trimRString(entity.getYoshikiNo()));
-        tempList.add(ShokanRenrakuhyoRecordShubetsu.福祉用具販売費情報レコード.getコード());
+        tempList.add(ShokanRenrakuhyoRecordShubetsu.特定入所者介護サービス費用情報レコード.getコード());
         tempList.add(trimYearMonth(entity.getServiceTeikyoYM()));
         tempList.add(entity.getJigyoshaNo().getColumnValue().trim());
         tempList.add(entity.getShoKisaiHokenshaNo().getColumnValue().trim());
@@ -1118,7 +1118,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         tempList.add(RecordShubetsu.データレコード.getコード());
         tempList.add(new RString(レコード番号));
         tempList.add(trimRString(entity.getYoshikiNo()));
-        tempList.add(ShokanRenrakuhyoRecordShubetsu.福祉用具販売費情報レコード.getコード());
+        tempList.add(ShokanRenrakuhyoRecordShubetsu.社会福祉法人軽減額情報レコード.getコード());
         tempList.add(trimYearMonth(entity.getServiceTeikyoYM()));
         tempList.add(entity.getJigyoshaNo().getColumnValue().trim());
         tempList.add(entity.getShoKisaiHokenshaNo().getColumnValue().trim());
@@ -1129,7 +1129,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             軽減率 = RString.EMPTY;
         } else {
             軽減率 = entity.getKeigenritsu().compareTo(Decimal.ZERO) == 0 ? RSTRING_0000
-                    : trimDecimal(entity.getKeigenritsu().multiply(INT_100)).padZeroToLeft(INT_4);
+                    : trimDecimal(entity.getKeigenritsu().multiply(INT_10)).padZeroToLeft(INT_4);
         }
         tempList.add(軽減率);
         tempList.add(entity.getServiceShuruiCode() == null || entity.getServiceShuruiCode().isEmpty()
@@ -1171,14 +1171,14 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }
-        return date.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+        return date.toDateString();
     }
 
     private RString trimDate(FlexibleDate date) {
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }
-        return date.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+        return date.seireki().separator(Separator.NONE).toDateString();
     }
 
     private RString trimRString(RString str) {

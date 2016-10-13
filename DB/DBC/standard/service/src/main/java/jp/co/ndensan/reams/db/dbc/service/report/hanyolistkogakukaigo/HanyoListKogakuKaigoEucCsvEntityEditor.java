@@ -480,6 +480,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
                 && (entity.get口座情報().getUrT0700ShunoKanriEntity() != null || !entity.get口座情報()
                 .getUrT0700ShunoKanriEntity().isEmpty())) {
             KozaRelateEntity releteEntity = entity.get口座情報();
+
             IKoza 口座 = new Koza(releteEntity);
             if (口座.isゆうちょ銀行()) {
                 csvEntity.set銀行郵便区分(RST_2);
@@ -760,7 +761,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             return RString.EMPTY;
         }
         if (!parameter.isHizukeHeshu()) {
-            return 生年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+            return new RString(生年月日.toString());
         } else {
             return 生年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
@@ -792,10 +793,9 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         if (高額給付根拠 == null || 高額給付根拠.trim().isEmpty()) {
             return RString.EMPTY;
         } else {
-            List<RString> list = 高額給付根拠.toRStringList();
-
+            List<RString> list = 高額給付根拠.split("、");
             if (list.size() >= INDEX_1 && (list.get(INDEX_0).equals(RST_月)
-                    || list.get(INDEX_0).equals(RString.EMPTY))) {
+                    || list.get(INDEX_0).equals(RString.HALF_SPACE))) {
                 世帯の所得区分コード = list.size() >= INDEX_2
                         ? list.get(INDEX_1)
                         : RString.EMPTY;

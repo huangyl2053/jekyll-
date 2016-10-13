@@ -464,8 +464,7 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
         RString 年齢基準日 = new RString("　　（年齢基準日：");
         if (NenreiSoChushutsuHoho.年齢範囲.equals(parameter.get宛名抽出条件().getAgeSelectKijun())) {
             if (parameter.get宛名抽出条件().getNenreiRange().getFrom() != null && parameter.get宛名抽出条件().getNenreiRange().getTo() != null) {
-                builder.append(年齢.concat(new RString(
-                        parameter.get宛名抽出条件().getNenreiRange().getFrom().intValue()))
+                builder.append(年齢.concat(new RString(parameter.get宛名抽出条件().getNenreiRange().getFrom().intValue()))
                         .concat(歳).concat(波線).concat(歳).concat(new RString(parameter.get宛名抽出条件().getNenreiRange().getTo().intValue()))
                         .concat(年齢基準日).concat(parameter.get宛名抽出条件().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
                                 .firstYear(FirstYear.GAN_NEN)
@@ -474,8 +473,7 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
                                 .toDateString()));
             }
             if (parameter.get宛名抽出条件().getNenreiRange().getFrom() != null && parameter.get宛名抽出条件().getNenreiRange().getTo() == null) {
-                builder.append(年齢.concat(new RString(
-                        parameter.get宛名抽出条件().getNenreiRange().getFrom().intValue()))
+                builder.append(年齢.concat(new RString(parameter.get宛名抽出条件().getNenreiRange().getFrom().intValue()))
                         .concat(歳).concat(波線)
                         .concat(年齢基準日).concat(parameter.get宛名抽出条件().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
                                 .firstYear(FirstYear.GAN_NEN)

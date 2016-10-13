@@ -20,5 +20,5 @@ public class ShiharaiHohoHenkoHaakuThreeEntity {
     private RString 証記載保険者番号;
     private RString 被保険者番号;
     private RString 管理区分;
-    private RString 履歴番号;
+    private int 履歴番号;
 }

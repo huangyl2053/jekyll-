@@ -99,15 +99,15 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
         source.listList7_10 = 受給者情報.get保険者番号_後期_();
         source.listList7_11 = 受給者情報.get保険者番号_国保_();
         source.listList7_12 = 受給者情報.get宛名番号();
-        source.listList8_11 = 受給者情報.get被保険者番号_後期_();
-        source.listList8_12 = 受給者情報.get被保険者証番号_国保_();
+        source.listList8_12 = 受給者情報.get被保険者番号_後期_();
+        source.listList8_13 = 受給者情報.get被保険者証番号_国保_();
         source.yubinNo = 被保険者情報.get郵便番号();
         source.choikiCode = 被保険者情報.get町域コード();
         source.gyoseikuCode = 被保険者情報.get行政区コード();
         source.shimei50onKana = 被保険者情報.get氏名50音カナ();
         source.shichosonCode = 被保険者情報.get市町村コード();
-        source.listList8_11 = 受給者情報.get被保険者番号_後期_();
-        source.listList8_12 = 受給者情報.get被保険者証番号_国保_();
+        source.listList8_12 = 受給者情報.get被保険者番号_後期_();
+        source.listList8_13 = 受給者情報.get被保険者証番号_国保_();
         source.yubinNo = getNotNull(被保険者情報.get郵便番号());
         source.choikiCode = getNotNull(被保険者情報.get町域コード());
         source.gyoseikuCode = getNotNull(被保険者情報.get行政区コード());
@@ -275,8 +275,8 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
         source.listList7_8 = date_to_string(受給者情報.get二割負担適用開始年月日());
         source.listList7_9 = date_to_string(受給者情報.get軽減率適用開始年月日());
         source.listList8_2 = date_to_string(受給者情報.get負担限度額適用終了年月日());
-        source.listList8_8 = date_to_string(受給者情報.get二割負担適用終了年月日());
-        source.listList8_10 = date_to_string(受給者情報.get軽減率適用終了年月日());
+        source.listList8_9 = date_to_string(受給者情報.get二割負担適用終了年月日());
+        source.listList8_11 = date_to_string(受給者情報.get軽減率適用終了年月日());
     }
 
     /**
@@ -299,7 +299,8 @@ public class JukyushaKoshinKekkaIchiranBodyEditor implements IJukyushaKoshinKekk
         source.listList8_5 = decimal_to_string(受給者情報.get居住費_従来型個室_老健_療養等_負担限度額());
         source.listList8_6 = decimal_to_string(受給者情報.get居住費_新１_負担限度額());
         source.listList8_7 = decimal_to_string(受給者情報.get居住費_新３_負担限度額());
-        source.listList8_9 = decimal_to_percentStr(受給者情報.get軽減率());
+        source.listList8_8 = RString.EMPTY;
+        source.listList8_10 = decimal_to_percentStr(受給者情報.get軽減率());
     }
 
     /**

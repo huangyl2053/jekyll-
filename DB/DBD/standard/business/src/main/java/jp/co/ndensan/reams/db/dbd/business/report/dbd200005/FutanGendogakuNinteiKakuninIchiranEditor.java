@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200005;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.HaigushaKazeiKubun;
@@ -13,6 +15,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakuni
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogaku.ikkatsunintei.FutanGengaokuNintteiKakuninListEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200005.FutanGendogakuNinteiKakuninIchiranReportSource;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
@@ -45,6 +48,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
     private static final int LISTINDEX_2 = 2;
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
+    private static final int LISTINDEX_5 = 5;
     private static final RString 負担限度額認定一括確認リスト = new RString("負担限度額認定（一括）確認リスト");
     private static final RString 作成 = new RString("作成");
     private static final RString 星 = new RString("*");
@@ -101,9 +105,8 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         source.printTimeStamp = new RStringBuilder()
                 .append(作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString())
-                .append(RString.HALF_SPACE)
                 .append(作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒))
-                .append(RString.HALF_SPACE)
+                .append(RString.FULL_SPACE)
                 .append(作成).toRString();
         source.title = 負担限度額認定一括確認リスト;
         if (null != this.導入団体) {
@@ -114,9 +117,9 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
                 source.hokenshaName = this.導入団体.get市町村名();
             }
         }
-        if (null != this.帳票出力順 && null != this.帳票出力順.get設定項目リスト()) {
-            List<ISetSortItem> 設定項目リスト = this.帳票出力順.get設定項目リスト();
-            source = set出力順改頁(source, 設定項目リスト);
+        if (null != 帳票出力順) {
+            setiOutputOrder(source);
+            setBreakIoutputOrder(source);
         }
         source.hdrGekihenKanwa = RString.EMPTY;
     }
@@ -199,13 +202,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             if (null != 今回認定結果.getKyusochishaKubun()) {
                 source.list3_5 = 今回認定結果.getKyusochishaKubun();
             }
-            RString 利用者負担段階今回 = 今回認定結果.getRiyoshaFutanDankai();
-            DbT4018KaigoHokenFutanGendogakuNinteiEntity 前回認定結果 = this.負担限度額認定確認リスト.get前回認定結果();
-            if (利用者負担段階今回 != null
-                    && 前回認定結果.getRiyoshaFutanDankai() != null
-                    && 利用者負担段階今回 != 前回認定結果.getRiyoshaFutanDankai()) {
-                source.list1_8 = 星;
-            }
+            get前回との比較(source, 今回認定結果);
         }
     }
 
@@ -327,40 +324,61 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         return YokaigoJotaiKubunSupport.toValue(厚労省IF識別コード, 要介護認定状態区分コード).getName();
     }
 
-    private FutanGendogakuNinteiKakuninIchiranReportSource set出力順改頁(FutanGendogakuNinteiKakuninIchiranReportSource source,
-            List<ISetSortItem> 設定項目リスト) {
+    private void get前回との比較(FutanGendogakuNinteiKakuninIchiranReportSource source, DbT4018KaigoHokenFutanGendogakuNinteiEntity 今回認定結果) {
+        RString 利用者負担段階今回 = 今回認定結果.getRiyoshaFutanDankai();
+        DbT4018KaigoHokenFutanGendogakuNinteiEntity 前回認定結果 = this.負担限度額認定確認リスト.get前回認定結果();
+        if (前回認定結果 != null) {
+            RString riyoshaFutanDankai = 前回認定結果.getRiyoshaFutanDankai();
+            if (利用者負担段階今回 != null && !利用者負担段階今回.isEmpty()
+                    && riyoshaFutanDankai != null && !riyoshaFutanDankai.isEmpty()
+                    && 利用者負担段階今回 != riyoshaFutanDankai) {
+                source.list1_8 = 星;
+            }
+        }
+    }
 
-        if (設定項目リスト.size() > LISTINDEX_0) {
-            source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-            if (設定項目リスト.get(LISTINDEX_0).is改頁項目()) {
-                source.kaiPege1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+    private void setiOutputOrder(FutanGendogakuNinteiKakuninIchiranReportSource source) {
+
+        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(帳票出力順);
+        if (出力順Map.get(LISTINDEX_1) != null) {
+            source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_1).get項目名();
+
+        }
+        if (出力順Map.get(LISTINDEX_2) != null) {
+            source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_2).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_3) != null) {
+            source.shutsuryokujun3 = 出力順Map.get(LISTINDEX_3).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_4) != null) {
+            source.shutsuryokujun4 = 出力順Map.get(LISTINDEX_4).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_5) != null) {
+            source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_5).get項目名();
+        }
+    }
+
+    private void setBreakIoutputOrder(FutanGendogakuNinteiKakuninIchiranReportSource source) {
+        int index1 = 0;
+        List<RString> 改頁list = new ArrayList<>();
+        List<ISetSortItem> list = 帳票出力順.get設定項目リスト();
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        for (int i = 0; i < LISTINDEX_5; i++) {
+            if (list.size() > i && list.get(i).is改頁項目()) {
+                改頁list.add(list.get(i).get項目名());
+                index1++;
             }
         }
-        if (設定項目リスト.size() > LISTINDEX_1) {
-            source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-            if (設定項目リスト.get(LISTINDEX_1).is改頁項目()) {
-                source.kaiPege2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-            }
+        for (int i = index1; i < LISTINDEX_5; i++) {
+            改頁list.add(RString.EMPTY);
         }
-        if (設定項目リスト.size() > LISTINDEX_2) {
-            source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-            if (設定項目リスト.get(LISTINDEX_2).is改頁項目()) {
-                source.kaiPege3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-            }
-        }
-        if (設定項目リスト.size() > LISTINDEX_3) {
-            source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            if (設定項目リスト.get(LISTINDEX_3).is改頁項目()) {
-                source.kaiPege4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            }
-        }
-        if (設定項目リスト.size() > LISTINDEX_4) {
-            source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            if (設定項目リスト.get(LISTINDEX_4).is改頁項目()) {
-                source.kaiPege5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            }
-        }
-        return source;
+        source.kaiPege1 = 改頁list.get(LISTINDEX_0);
+        source.kaiPege2 = 改頁list.get(LISTINDEX_1);
+        source.kaiPege3 = 改頁list.get(LISTINDEX_2);
+        source.kaiPege4 = 改頁list.get(LISTINDEX_3);
+        source.kaiPege5 = 改頁list.get(LISTINDEX_4);
     }
 
     private void get預貯金等合計(FutanGendogakuNinteiKakuninIchiranReportSource source,

@@ -15,8 +15,11 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShinseiKu
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.Taishosha;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.HanyouRisutoSyuturyokuEntity;
+import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.DBC701003BreakerFieldsEnum;
+import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.DBC701019BreakerFieldsEnum;
 import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.HanyoListKogakuKaigoEucCsvEntityEditor;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
@@ -30,10 +33,16 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0301YokinShubetsuPatternEnt
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.kinyukikan.KinyuKikanEntity;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -113,6 +122,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private static final RString 区分_2 = new RString("2");
     private static final RString DBC701003 = new RString("DBC701003");
     private static final RString DBC701019 = new RString("DBC701019");
+    private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString 高額介護サービス費状況CSV = new RString("汎用リスト　高額介護サービス費状況CSV");
     private static final RString 英数字ファイル名_高額介護サービス費状況CSV = new RString("HanyoList_KogakuKaigoServiceHiJokyo.csv");
     private static final RString 事業高額サービス費状況CSV = new RString("汎用リスト　事業高額サービス費状況CSV");
@@ -133,18 +143,32 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private List<KinyuKikanEntity> lstKinyuKikanEntity;
     private FlexibleDate システム日付;
     private boolean modoFlag = true;
+    private IOutputOrder 並び順;
+    private ReportId 帳票ID;
 
     @BatchWriter
     private EucCsvWriter<HanyouRisutoSyuturyokuEucCsvEntity> eucCsvWriter;
 
     @Override
     protected void initialize() {
+
+        RString 出力順 = null;
         if (1 == parameter.getModo()) {
             readDataId = データ読み込みID1;
             eucEntityId = new EucEntityId(DBC701003);
             eucId = new ReportId(DBC701003);
             日本語ファイル名 = 高額介護サービス費状況CSV;
             英数字ファイル名 = 英数字ファイル名_高額介護サービス費状況CSV;
+            帳票ID = ReportIdDBC.DBC701003.getReportId();
+            IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            並び順 = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID,
+                    parameter.getShutsuryokuju()
+            );
+            if (null == 並び順) {
+                throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
+                        .replace(実行不可MESSAGE.toString()).toString());
+            }
+            出力順 = MyBatisOrderByClauseCreator.create(DBC701003BreakerFieldsEnum.class, 並び順);
         } else if (2 == parameter.getModo()) {
             readDataId = データ読み込みID2;
             eucEntityId = new EucEntityId(DBC701019);
@@ -152,7 +176,18 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
             日本語ファイル名 = 事業高額サービス費状況CSV;
             英数字ファイル名 = 英数字ファイル名_事業高額サービス費状況CSV;
             this.modoFlag = false;
+            帳票ID = ReportIdDBC.DBC701019.getReportId();
+            IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            並び順 = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID,
+                    parameter.getShutsuryokuju()
+            );
+            if (null == 並び順) {
+                throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
+                        .replace(実行不可MESSAGE.toString()).toString());
+            }
+            出力順 = MyBatisOrderByClauseCreator.create(DBC701019BreakerFieldsEnum.class, 並び順);
         }
+        parameter.set出力順(出力順);
     }
 
     @Override
@@ -407,7 +442,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
         }
         builder.append(parameter.getKiyuKikanCode() == null || parameter.getKiyuKikanCode().isEmpty()
                 ? RString.EMPTY : 左記号.concat(parameter.getKiyuKikanCode())
-                .concat(右記号).concat(parameter.getKiyuKikanCode()));
+                .concat(右記号).concat(parameter.getKiyuKikanName()));
         return builder;
     }
 

@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -39,6 +40,7 @@ public class ShinseishoHakko {
     private static final RString 出力順を = new RString("出力順を");
     private static final RString 異動処理が実施済みの = new RString("異動処理が実施済みの");
     private static final RString 実行 = new RString("実行");
+    private static final int INDEX_4 = 4;
 
     /**
      * onLoadです。
@@ -137,7 +139,7 @@ public class ShinseishoHakko {
         FlexibleDate 世帯員把握基準日2 = new FlexibleDate(div.getTxtSetaiinHaakuKijunYMD()
                 .getValue().getYear().minusYear(1).toString().concat(十二月三十一.toString()));
         parameter.set抽出条件(div.getRadChushutsuJoken().getSelectedKey());
-        parameter.set処理年度(div.getTxtShoriNendo().getValue().getYear());
+        parameter.set処理年度(new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4)));
         if (div.getTxtHihokenshaNo().getValue() != null) {
             parameter.set被保険者番号(new HihokenshaNo(div.getTxtHihokenshaNo().getValue().toString()));
         }

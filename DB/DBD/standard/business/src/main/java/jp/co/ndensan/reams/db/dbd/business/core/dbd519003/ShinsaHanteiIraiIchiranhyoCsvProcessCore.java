@@ -21,23 +21,12 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiT
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJokenhyoFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 
 /**
  * 資格喪失（死亡）データの業務処理クラスです。
@@ -48,7 +37,6 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcessCore {
 
     private static final RString ファイル名_日本語 = new RString("資格喪失（死亡）データ送信ファイル");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBD519003"));
-    private static final RString 申請書管理番号 = new RString("申請書管理番号");
     private static final RString 今回開始日時 = new RString("【今回開始日時】");
     private static final RString 今回終了日時 = new RString("【今回終了日時】");
     private static final ReportId REPORT_DBD503001 = ReportIdDBD.DBD503001.getReportId();
@@ -69,19 +57,19 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcessCore {
         FlexibleDate newdate = new FlexibleDate(date.getYearValue(), date.getMonthValue(), 1);
         csvEntity.set認定申請日(newdate.wareki().toDateString());
         csvEntity.set枝番(entity.get枝番());
-        csvEntity.set申請区分法令コード(new RString(NinteiShinseiKubunShinsei.職権.toString()));
-        csvEntity.set申請区分申請時コード(new RString(NinteiShinseiKubunShinsei.資格喪失_死亡.toString()));
-        csvEntity.set取下区分コード(new RString(NinteiShinseiYukoKubunCode.有効.toString()));
-        csvEntity.set被保険者区分コード(HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get名称());
-        csvEntity.set申請代行区分コード(ShinseiTodokedeDaikoKubunCode.toValue(entity.get申請届出代行区分コード().value()).get名称());
+        csvEntity.set申請区分法令コード(new RString(NinteiShinseiKubunShinsei.職権.コード()));
+        csvEntity.set申請区分申請時コード(new RString(NinteiShinseiKubunShinsei.資格喪失_死亡.コード()));
+        csvEntity.set取下区分コード(NinteiShinseiYukoKubunCode.有効.getコード());
+        csvEntity.set被保険者区分コード(HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).getコード());
+        csvEntity.set申請代行区分コード(ShinseiTodokedeDaikoKubunCode.toValue(entity.get申請届出代行区分コード().value()).getCode());
         if (entity.get生年月日() != null) {
             csvEntity.set生年月日(entity.get生年月日().wareki().toDateString());
         }
         if (entity.get性別() != null) {
-            csvEntity.set性別コード(Seibetsu.toValue(entity.get性別()).get名称());
+            csvEntity.set性別コード(Seibetsu.toValue(entity.get性別()).getコード());
         }
         if (entity.get前回要介護状態区分コード() != null) {
-            csvEntity.set前回の認定審査会結果(YokaigoJotaiKubun09.toValue(entity.get前回要介護状態区分コード().value()).get名称());
+            csvEntity.set前回の認定審査会結果(YokaigoJotaiKubun09.toValue(entity.get前回要介護状態区分コード().value()).getコード());
         }
         return csvEntity;
     }
@@ -91,10 +79,11 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcessCore {
      *
      * @param batchReportWriter BatchReportWriter<ShinsaHanteiIraiIchiranhyoReportSource>
      * @param para RenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter
+     * @param association Association
+     * @return ReportOutputJokenhyoItem
      */
-    public void 資格喪失帳票出力(BatchReportWriter<ShinsaHanteiIraiIchiranhyoReportSource> batchReportWriter,
-            RenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter para) {
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
+    public ReportOutputJokenhyoItem 資格喪失帳票出力(BatchReportWriter<ShinsaHanteiIraiIchiranhyoReportSource> batchReportWriter,
+            RenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter para, Association association) {
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 REPORT_DBD503001.getColumnValue().substring(0, 先頭9桁),
                 association.getLasdecCode_().getColumnValue(),
@@ -105,20 +94,19 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcessCore {
                 new RString("なし"),
                 new RString("なし"),
                 contribute(para));
-        OutputJokenhyoFactory.createInstance(item).print();
+        return item;
     }
 
     /**
      * 資格喪失（死亡）データCSVを出力する。
      *
      * @param 连番 int
-     * @param manager FileSpoolManager
-     * @param filepath RString
      * @param para RenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter
+     * @param association Association
+     * @return EucFileOutputJokenhyoItem
      */
-    public void 資格喪失CSV出力(int 连番, FileSpoolManager manager, RString filepath,
-            RenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter para) {
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
+    public EucFileOutputJokenhyoItem 資格喪失CSV出力(int 连番, RenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter para,
+            Association association) {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 ファイル名_日本語,
                 association.getLasdecCode_().getColumnValue(),
@@ -128,12 +116,7 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcessCore {
                 EUC_ENTITY_ID.toRString(),
                 new RString(连番),
                 contribute(para));
-        EucFileOutputJokenhyoFactory.createInstance(item).print();
-        ExpandedInformation expandedInformations
-                = new ExpandedInformation(new Code("0001"), 申請書管理番号, 申請書管理番号);
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, expandedInformations);
-        AccessLogger.log(AccessLogType.照会, personalData);
-        manager.spool(SubGyomuCode.DBD介護受給, filepath);
+        return item;
     }
 
     private List<RString> contribute(RenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter para) {

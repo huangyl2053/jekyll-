@@ -366,7 +366,7 @@
                        DbT5201."ninteichosaIraiYMD" AS "調査依頼日",
                        DbT5202."ninteichosaJisshiYMD" AS "実施年月日",
                        DbT5910."jigyoshaNo" AS "事業者番号",
-                       DbT5910."ninteichosaItakusakiCode" AS "委託区分",
+                       DbT5910."chosaItakuKubun" AS "委託区分",
                        DbT5913."ninteiChosainCode" AS "認定調査員コード",
                        DbT5913."chosainShikaku" AS "調査員資格",
                        DbT5116."ichijiHanteiYMD" AS "一次判定日",

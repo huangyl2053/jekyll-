@@ -332,8 +332,8 @@ public class HokenshaSofuListHandler {
             throws NumberFormatException, ApplicationException {
         HokenshaSofuResult entity = HokenshaSofuFinder.createInstance().get国保連管理(データ種別, 処理年月);
         for (KokuhorenInterfaceKanri faceKanri : entity.getKokuhorenInterfaceKanriList()) {
-            if (!myBatisParameter.get同月過誤取下分フラグ()
-                    && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
+            if (myBatisParameter.get同月過誤取下分フラグ() != null && !myBatisParameter.get同月過誤取下分フラグ()
+                    && faceKanri.getコントロール上処理年月() != null && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
                 if (コントロールレコード.get(三) != null && !コントロールレコード.get(三).isEmpty()
                         && faceKanri.getコントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())
                         && !ResponseHolder.isReRequest()) {
@@ -395,7 +395,7 @@ public class HokenshaSofuListHandler {
         if (DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告).equals(ゼロゼロ)) {
             保険者番号 = コントロールレコード.get(六);
         } else if (DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告).equals(一)) {
-            保険者番号取得(データレコード, データ種別, コントロールレコード);
+            保険者番号取得(データレコード, データ種別);
         }
 
         if (保険者番号 != null && !保険者番号.equals(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
@@ -412,23 +412,23 @@ public class HokenshaSofuListHandler {
         }
     }
 
-    private void 保険者番号取得(List<RString> データレコード, RString データ種別, List<RString> コントロールレコード) {
+    private void 保険者番号取得(List<RString> データレコード, RString データ種別) {
         if (データレコード.get(ゼロ).equals(二)) {
             if (データ種別.equals(給付実績情報111) || データ種別.equals(データ種別112) || データ種別.equals(データ種別114)) {
-                保険者番号 = コントロールレコード.get(六);
+                保険者番号 = データレコード.get(六);
             }
             if (データ種別.equals(データ種別151) || データ種別.equals(データ種別161) || データ種別.equals(データ種別221)
                     || データ種別.equals(データ種別222) || データ種別.equals(データ種別331) || データ種別.equals(データ種別351)) {
-                保険者番号 = コントロールレコード.get(四);
+                保険者番号 = データレコード.get(四);
             }
             if (データ種別.equals(データ種別171) || データ種別.equals(データ種別172)) {
-                保険者番号 = コントロールレコード.get(五);
+                保険者番号 = データレコード.get(五);
             }
             if (データ種別.equals(データ種別534) || データ種別.equals(データ種別5C4)) {
-                保険者番号 = コントロールレコード.get(七);
+                保険者番号 = データレコード.get(七);
             }
             if (データ種別.equals(データ種別537) || データ種別.equals(データ種別5C3) || データ種別.equals(データ種別533)) {
-                保険者番号 = コントロールレコード.get(八);
+                保険者番号 = データレコード.get(八);
             }
 
             //TODO QA1672

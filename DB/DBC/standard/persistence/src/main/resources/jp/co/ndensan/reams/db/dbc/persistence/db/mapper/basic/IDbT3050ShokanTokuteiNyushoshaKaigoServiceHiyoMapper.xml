@@ -38,11 +38,11 @@
          "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."futanGendogaku" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_futanGendogaku",
          "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."nissu" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_nissu",
          "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."hiyogaku" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiyogaku",
-         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."hokenbunSeikyugaku" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hokenbunSeikyugaku",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."hokenbunSeikyugaku" as "dbT3050ShokanTokuteiNyushoshaKaigo_hokenbunSeikyugaku",
          "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."riyoshaFutangaku" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_riyoshaFutangaku",
          "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."hiyogakuTotal" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiyogakuTotal",
-         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."hokenbunSeikyugakuTotal" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hokenbunSeikyugakuTotal",
-         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."riyoshaFutangakuTotal" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_riyoshaFutangakuTotal",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."hokenbunSeikyugakuTotal" as "dbT3050ShokanTokuteiNyushoshaKaigo_hokenbunSeikyugakuTotal",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."riyoshaFutangakuTotal" as "dbT3050ShokanTokuteiNyushoshaKaigo_riyoshaFutangakuTotal",
          "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."shikyuKubunCode" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_shikyuKubunCode",
          "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."tensuKingaku" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_tensuKingaku",
          "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."shikyuKingaku" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_shikyuKingaku",
@@ -74,11 +74,11 @@
         <result property="futanGendogaku" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_futanGendogaku" />
         <result property="nissu" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_nissu" />
         <result property="hiyogaku" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiyogaku" />
-        <result property="hokenbunSeikyugaku" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hokenbunSeikyugaku" />
+        <result property="hokenbunSeikyugaku" column="dbT3050ShokanTokuteiNyushoshaKaigo_hokenbunSeikyugaku" />
         <result property="riyoshaFutangaku" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_riyoshaFutangaku" />
         <result property="hiyogakuTotal" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiyogakuTotal" />
-        <result property="hokenbunSeikyugakuTotal" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hokenbunSeikyugakuTotal" />
-        <result property="riyoshaFutangakuTotal" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_riyoshaFutangakuTotal" />
+        <result property="hokenbunSeikyugakuTotal" column="dbT3050ShokanTokuteiNyushoshaKaigo_hokenbunSeikyugakuTotal" />
+        <result property="riyoshaFutangakuTotal" column="dbT3050ShokanTokuteiNyushoshaKaigo_riyoshaFutangakuTotal" />
         <result property="shikyuKubunCode" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_shikyuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tensuKingaku" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_tensuKingaku" />
         <result property="shikyuKingaku" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_shikyuKingaku" />

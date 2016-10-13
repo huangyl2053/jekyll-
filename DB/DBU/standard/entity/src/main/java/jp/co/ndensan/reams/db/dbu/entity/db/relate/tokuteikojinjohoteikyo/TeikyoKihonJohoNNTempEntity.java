@@ -38,7 +38,7 @@ public class TeikyoKihonJohoNNTempEntity extends DbTableEntityBase<TeikyoKihonJo
     private ShikibetsuCode shikibetsuCode;
     @TempTableColumnOrder(30)
     private RString kojinNo;
-    @PrimaryKey
+    @TempTableColumnOrder(40)
     private RString tokuteiKojinJohoMeiCode;
     @TempTableColumnOrder(50)
     private RString hanNo;

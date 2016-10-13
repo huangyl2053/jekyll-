@@ -119,5 +119,20 @@ public enum JyukyushaDaichoDivSpec implements IPredicate<JyukyushaDaichoDiv> {
                     RString 出力順 = new RString(((ChohyoShutsuryokujunDiv) div.getShutsuryokuSort()).getSelected出力順().get出力順ID().toString());
                     return !出力順.isEmpty();
                 }
+            },
+    異動抽出対象一つでも選択していない場合チェック {
+                /**
+                 * 異動抽出対象一つでも選択していない場合チェックを行います。
+                 *
+                 * @param pairs バリデーションコントロール
+                 * @param div JyukyushaDaichoDiv
+                 * @return true:異動抽出対象があります、false:異動抽出対象一つでも選択していない場合。
+                 */
+                @Override
+                public boolean apply(JyukyushaDaichoDiv div) {
+                    return !div.getTaishouKikan().getChkIdouChushutsuTaishou().getSelectedKeys().isEmpty()
+                    && div.getTaishouKikan().getChkIdouChushutsuTaishou().getSelectedKeys() != null;
+                }
+
             }
 }

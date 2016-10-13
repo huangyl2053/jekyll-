@@ -78,7 +78,6 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
-import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -511,10 +510,10 @@ public class IryoHiKojoKakuninSinsei {
         ReportManager reportManager = new ReportManager();
         ShujiiIkenshoKakuninshoProperty proerty = new ShujiiIkenshoKakuninshoProperty();
         ReportAssembler<ShujiiIkenshoKakuninshoReportSource> assembler = createAssembler(proerty, reportManager);
-        ReportSourceWriter<ShujiiIkenshoKakuninshoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+        //ReportSourceWriter<ShujiiIkenshoKakuninshoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
         return NinshoshaSourceBuilderFactory.createInstance(帳票認証者情報,
                 地方公共団体,
-                reportSourceWriter.getImageFolderPath(),
+                assembler.getImageFolderPath(),
                 作成日,
                 R_STRING1.equals(帳票制御共通.getShuchoMeiInjiIchi()),
                 !帳票制御共通.getDenshiKoinInjiUmu(),

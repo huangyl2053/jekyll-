@@ -980,4 +980,18 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
         }
         return 額;
     }
+
+    /**
+     * 歳入歳出差引残額自動計算処理です。
+     *
+     */
+    public void 歳入歳出差引残額自動計算() {
+        Decimal 合計1 = div.getTxtsainyugokei().getValue();
+        Decimal 合計2 = div.getTxtsaishutsugoukei().getValue();
+        if (null == 合計1 && null == 合計2) {
+            div.getTxtsainyushutsusa().clearValue();
+        } else {
+            div.getTxtsainyushutsusa().setValue(get額(合計1).subtract(get額(合計2)));
+        }
+    }
 }

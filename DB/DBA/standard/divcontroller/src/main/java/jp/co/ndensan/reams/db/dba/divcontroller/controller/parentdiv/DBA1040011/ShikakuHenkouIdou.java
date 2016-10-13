@@ -141,14 +141,25 @@ public class ShikakuHenkouIdou {
      */
     public ResponseData<ShikakuHenkouIdouDiv> onClick_btnReSearch(ShikakuHenkouIdouDiv div) {
 //<<<<<<< HEAD
-        RealInitialLocker.release(create排他キー());
+        if (isSavable(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+            }
+            if (ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+                RealInitialLocker.release(create排他キー());
+                return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).respond();
+            }
+        } else {
+            RealInitialLocker.release(create排他キー());
+            return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).respond();
+        }
 //=======
 //        RealInitialLocker.release(前排他ロックキー);
 //        if (new RString("DBAMN61002").equals(ResponseHolder.getMenuID())) {
 //            return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).parameter(new RString("広域内転居"));
 //        }
 //>>>>>>> origin/sync
-        return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**

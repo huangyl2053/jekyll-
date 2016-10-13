@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KogakuHantei_RiyoshafutanDai2dankai {
 
     /**
-     * コード:1 名称:利用者負担第２段階該当あり 略称:定義なし 表示名称:２
+     * コード:1 名称:利用者負担第２段階該当あり 略称:２
      */
     利用者負担第２段階該当あり("1", "利用者負担第２段階該当あり", "２"),
     /**
-     * コード:2 名称:利用者負担第２段階該当なし 略称:定義なし 表示名称:"　"
+     * コード:2 名称:利用者負担第２段階該当なし 略称:"　"
      */
     利用者負担第２段階該当なし("2", "利用者負担第２段階該当なし", "　");
 
@@ -48,11 +48,11 @@ public enum KogakuHantei_RiyoshafutanDai2dankai {
     }
 
     /**
-     * 高額判定根拠_利用者負担第２段階の表示名称を返します。
+     * 高額判定根拠_利用者負担第２段階の略称を返します。
      *
-     * @return 高額判定根拠_利用者負担第２段階の表示名称
+     * @return 高額判定根拠_利用者負担第２段階の略称
      */
-    public RString get表示名称() {
+    public RString get略称() {
         return hyojiName;
     }
 

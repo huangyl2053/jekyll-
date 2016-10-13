@@ -78,12 +78,11 @@ public enum ShakfukusRiysFutKeigTaisKakuninshoOrderKey implements IReportItems {
     /**
      * 決定区分
      */
-    決定区分(new RString("0111"), new RString("決定区分"), new RString("A.\"ketteiKubun\""));
-    //TODO 計画事業者番号は検索関連のテープルから取得できません。QA:446
+    決定区分(new RString("0111"), new RString("決定区分"), new RString("A.\"ketteiKubun\"")),
     /**
      * 計画事業者番号
      */
-    //計画事業者番号(new RString("0311"), new RString("計画事業者番号"), new RString(""));
+    計画事業者番号(new RString("0311"), new RString("計画事業者番号"), new RString("計画事業者番号"));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

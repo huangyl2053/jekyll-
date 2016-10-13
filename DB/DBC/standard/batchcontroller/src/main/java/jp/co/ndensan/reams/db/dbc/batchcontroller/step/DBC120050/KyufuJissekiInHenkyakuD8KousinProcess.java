@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001HihokenshaIchijiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT111JKyufuJissekiD8Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.KyufuJissekiInHenkyakuD8DataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
@@ -61,7 +61,7 @@ public class KyufuJissekiInHenkyakuD8KousinProcess extends BatchProcessBase<Kyuf
     protected void process(KyufuJissekiInHenkyakuD8DataEntity entity) {
         DbWT111JKyufuJissekiD8Entity 給付実績D8 = entity.get給付実績D8();
         DbT3028KyufujissekiKogakuKaigoServicehiEntity 給付実績高額 = entity.get給付実績高額介護サービス費();
-        DbWT0001HihokenshaIchijiEntity 被保険者一時 = entity.get被保険者一時();
+        DbWT0001HihokenshaTempEntity 被保険者一時 = entity.get被保険者一時();
         if (給付実績D8.getShikyugaku() == 給付実績高額.getShikyugaku()) {
             給付実績高額.setState(EntityDataState.Deleted);
             給付実績高額tableWriter.delete(給付実績高額);
@@ -74,19 +74,19 @@ public class KyufuJissekiInHenkyakuD8KousinProcess extends BatchProcessBase<Kyuf
         }
     }
 
-    private void do削除対象なし(DbWT111JKyufuJissekiD8Entity 給付実績D8, DbWT0001HihokenshaIchijiEntity 被保険者一時) {
+    private void do削除対象なし(DbWT111JKyufuJissekiD8Entity 給付実績D8, DbWT0001HihokenshaTempEntity 被保険者一時) {
         DbWT0002KokuhorenTorikomiErrorEntity 処理結果 = new DbWT0002KokuhorenTorikomiErrorEntity();
         処理結果.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.給付実績情報内容不一致.getコード());
         処理結果.setShoHokanehshaNo(new ShoKisaiHokenshaNo(給付実績D8.getShokisaiHokenshaNo().getColumnValue()));
-        処理結果.setHihokenshaNo(被保険者一時.getHihokenshaNo());
+        処理結果.setHihokenshaNo(被保険者一時.get登録被保険者番号());
         処理結果.setKey1(給付実績D8.getKokanJohoShikibetsuNo().getColumnValue());
         処理結果.setKey2(給付実績D8.getInputShikibetsuNo().getColumnValue());
         RString サービス提供年月 = 給付実績D8.getServiceTeikyoYM().wareki().firstYear(FirstYear.ICHI_NEN).toDateString();
         処理結果.setKey3(サービス提供年月);
         処理結果.setKey4(RString.EMPTY);
         処理結果.setKey5(RString.EMPTY);
-        処理結果.setHihokenshaKanaShimei(被保険者一時.getKanaMeisho());
-        処理結果.setHihokenshaShimei(被保険者一時.getMeisho());
+        処理結果.setHihokenshaKanaShimei(被保険者一時.get宛名カナ名称());
+        処理結果.setHihokenshaShimei(被保険者一時.get宛名名称());
         処理結果.setBiko(RString.EMPTY);
         処理結果リスト一時tableWriter.insert(処理結果);
     }

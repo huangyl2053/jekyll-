@@ -31,9 +31,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.KyotakuservicekeikakuSakuseikubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.JukyushaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -56,7 +54,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 画面設計_DBC0110011_居宅サービス計画作成依頼届出情報登録のHandler
@@ -131,12 +128,9 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     public void initialize(HihokenshaNo 被保険者番号,
             ShikibetsuCode 識別コード,
             List<KyotakuKeikakuTodokede> 居宅給付計画届出履歴一覧) {
-        div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         set履歴一覧エリ(居宅給付計画届出履歴一覧);
-        JigyoshaMode mode = new JigyoshaMode();
-        mode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
-        div.setJigyoshaMode(DataPassingConverter.serialize(mode));
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号.getColumnValue()));
     }
 
@@ -254,12 +248,12 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         }
         div.getTxtKeikakuTekiyoStartYMD().clearValue();
         div.getTxtKeikakuTekiyoEndYMD().clearValue();
-        div.getTxtTodokedeYMD().clearValue();
-        div.getTxtTodokedeshaName().clearValue();
-        div.getTxtTodokedeshaNameKana().clearValue();
+        div.getTxtTodokedeYM().clearValue();
+        div.getTxtTodokedeshaShimei().clearDomain();
+        div.getTxtTodokedeshaShimei().clearDomain();
         div.getTxtTodokedeshaYubinNo().clearValue();
         div.getTxtTodokedeshaJusho().clearValue();
-        div.getTxtTodokedeshaTelNo().clearValue();
+        div.getTxtTodokedeshaTelNo().clearDomain();
         div.getDdlTodokedeshaKankeiKubun().setDataSource(get届出者関係区分DataSource());
         div.getServiceAddAndServicePlanCreate().setReadOnly(false);
     }
@@ -427,12 +421,12 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
     private KyotakuKeikakuTodokede set入力項目(KyotakuKeikakuTodokede 居宅給付計画届出) {
         居宅給付計画届出 = 居宅給付計画届出.createBuilderForEdit().
                 set届出区分(KEY_0.equals(div.getRadTodokedeKubun().getSelectedKey()) ? 届出区分_新規 : 届出区分_変更).
-                set届出年月日(new FlexibleDate(div.getTxtTodokedeYMD().getValue().toDateString())).
-                set届出者氏名(new AtenaMeisho(div.getTxtTodokedeshaName().getValue())).
-                set届出者氏名カナ(new AtenaKanaMeisho(div.getTxtTodokedeshaNameKana().getValue())).
-                set届出者郵便番号(new YubinNo(div.getTxtTodokedeshaYubinNo().getValue())).
+                set届出年月日(new FlexibleDate(div.getTxtTodokedeYM().getValue().toDateString())).
+                set届出者氏名(div.getTxtTodokedeshaShimei().getDomain()).
+                set届出者氏名カナ(div.getTxtTodokedeshaShimeiKana().getDomain()).
+                set届出者郵便番号(div.getTxtTodokedeshaYubinNo().getValue()).
                 set届出者住所(div.getTxtTodokedeshaJusho().getValue()).
-                set届出者電話番号(new TelNo(div.getTxtTodokedeshaTelNo().getValue())).
+                set届出者電話番号(div.getTxtTodokedeshaTelNo().getDomain()).
                 set届出者関係区分(div.getDdlTodokedeshaKankeiKubun().getSelectedKey()).build();
         if (is事業者作成の場合()) {
             KyotakuKeikakuJigyoshaSakuseiIdentifier identifier = new KyotakuKeikakuJigyoshaSakuseiIdentifier(
@@ -477,8 +471,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         div.getRadServiceShurui().clearSelectedItem();
         div.getTxtJigyoshaYubinNo().clearValue();
         div.getTxtJigyoshaJusho().clearValue();
-        div.getTxtJigyoshaTelNo().clearValue();
-        div.getTxtJigyoshaKanrishaName().clearValue();
+        div.getTxtJigyoshaTelNo().clearDomain();
+        div.getTxtJigyoshaKanrishaName().clearDomain();
         div.getTxtItakusakiJigyoshaNo().clearValue();
         div.getTxtItakusakiJigyoshaName().clearValue();
         div.getTxtJigyoshaHenkoYMD().clearValue();
@@ -547,17 +541,17 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
             div.getRadKeikakuSakuseiKubun().setDataSource(get自己作成DataSource());
             div.getRadKeikakuSakuseiKubun().setSelectedKey(居宅給付計画自己作成.get作成区分コード());
         }
-        div.getTxtTodokedeYMD().setValue(new RDate(居宅給付計画届出.get届出年月日().toString()));
-        div.getTxtTodokedeshaName().setValue(居宅給付計画届出.get届出者氏名() == null ? RString.EMPTY
-                : 居宅給付計画届出.get届出者氏名().getColumnValue());
-        div.getTxtTodokedeshaNameKana().setValue(居宅給付計画届出.get届出者氏名カナ() == null ? RString.EMPTY
-                : 居宅給付計画届出.get届出者氏名カナ().getColumnValue());
-        div.getTxtTodokedeshaYubinNo().setValue(居宅給付計画届出.get届出者郵便番号() == null ? RString.EMPTY
-                : 居宅給付計画届出.get届出者郵便番号().getColumnValue());
+        div.getTxtTodokedeYM().setValue(new RDate(居宅給付計画届出.get届出年月日().toString()));
+        div.getTxtTodokedeshaShimei().setDomain(居宅給付計画届出.get届出者氏名() == null ? AtenaMeisho.EMPTY
+                : 居宅給付計画届出.get届出者氏名());
+        div.getTxtTodokedeshaShimeiKana().setDomain(居宅給付計画届出.get届出者氏名カナ() == null ? AtenaKanaMeisho.EMPTY
+                : 居宅給付計画届出.get届出者氏名カナ());
+        div.getTxtTodokedeshaYubinNo().setValue(居宅給付計画届出.get届出者郵便番号() == null ? YubinNo.EMPTY
+                : 居宅給付計画届出.get届出者郵便番号());
         div.getTxtTodokedeshaJusho().setValue(居宅給付計画届出.get届出者住所() == null ? RString.EMPTY
                 : 居宅給付計画届出.get届出者住所());
-        div.getTxtTodokedeshaTelNo().setValue(居宅給付計画届出.get届出者電話番号() == null ? RString.EMPTY
-                : 居宅給付計画届出.get届出者電話番号().getColumnValue());
+        div.getTxtTodokedeshaTelNo().setDomain(居宅給付計画届出.get届出者電話番号() == null ? TelNo.EMPTY
+                : 居宅給付計画届出.get届出者電話番号());
         div.getDdlTodokedeshaKankeiKubun().setDataSource(get届出者関係区分DataSource());
         div.getDdlTodokedeshaKankeiKubun().setSelectedKey(居宅給付計画届出.get届出者関係区分());
     }
@@ -578,14 +572,14 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                 居宅給付計画届出.get対象年月(),
                 new Decimal(居宅給付計画届出.get履歴番号()));
         KaigoJigyoshaResult result = manager.select事業者の情報(parameter);
-        div.getTxtJigyoshaYubinNo().setValue(result.get郵便番号() == null ? RString.EMPTY
-                : result.get郵便番号());
+        div.getTxtTodokedeshaYubinNo().setValue(result.get郵便番号() == null ? YubinNo.EMPTY
+                : new YubinNo(result.get郵便番号()));
         div.getTxtJigyoshaJusho().setValue(result.get住所() == null ? RString.EMPTY
                 : result.get住所());
-        div.getTxtJigyoshaTelNo().setValue(result.get電話番号() == null ? RString.EMPTY
-                : result.get電話番号());
-        div.getTxtJigyoshaKanrishaName().setValue(result.get管理者名() == null ? RString.EMPTY
-                : result.get管理者名());
+        div.getTxtTodokedeshaTelNo().setDomain(result.get電話番号() == null ? TelNo.EMPTY
+                : new TelNo(result.get電話番号()));
+        div.getTxtJigyoshaKanrishaName().setDomain(result.get管理者名() == null ? AtenaMeisho.EMPTY
+                : new AtenaMeisho(result.get管理者名()));
         div.getTxtItakusakiJigyoshaNo().setValue(居宅給付計画事業者.get委託先事業者番号() == null ? RString.EMPTY
                 : 居宅給付計画事業者.get委託先事業者番号().getColumnValue());
         div.getTxtItakusakiJigyoshaName().setValue(result.get委託先事業者名() == null ? RString.EMPTY

@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.DelJukyushaIdoRenrakuhyoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsIdoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsJukyushaIdoRenrakuhyoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsShiharaihohoTemp1Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsShiharaihohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.SoufuErrorOutProcess;
@@ -29,6 +31,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110020.DBC110020_Jukyus
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 受給者異動連絡票作成のFLOWです。
@@ -37,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  */
 public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_JukyushaIdoRenrakuhyoOutParameter> {
 
+    private static final RString 再処理 = new RString("1");
     private static final String 異動対象の抽出 = "insIdoTemp";
     private static final String 支払方法変更の抽出 = "insShiharaihohoTemp";
     private static final String 給付額減額の抽出 = "updGengakuTemp";
@@ -56,7 +60,9 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     private static final String 総合事業対象者の情報の抽出 = "updSogoJigyoTemp";
     private static final String 被保険者台帳の情報の抽出 = "updHihokenshaTemp";
     private static final String 異動一時１テーブルの作成 = "insShiharaihohoTemp1";
-    private static final String 送付エラー一時出力 = "soufuErrorOut";
+    private static final String 送付エラー一時出力 = "soufuErrorOutTemp";
+    private static final String 受給者異動送付削除産 = "delJukyushaIdoRenrakuhyo";
+    private static final String 受給者異動の抽出 = "insJukyushaIdoRenrakuhyoTemp";
 
     @Override
     protected void defineFlow() {
@@ -80,6 +86,11 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
         executeStep(被保険者台帳の情報の抽出);
         executeStep(異動一時１テーブルの作成);
         executeStep(送付エラー一時出力);
+        if (再処理.equals(getParameter().get再処理区分())) {
+            executeStep(受給者異動送付削除産);
+        }
+        executeStep(受給者異動の抽出);
+
     }
 
     @Step(異動対象の抽出)
@@ -216,10 +227,23 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     }
 
     @Step(送付エラー一時出力)
-    IBatchFlowCommand soufuErrorOut() {
+    IBatchFlowCommand soufuErrorOutTemp() {
         return loopBatch(SoufuErrorOutProcess.class).arguments(getParameter().
                 toProcessParameter())
                 .define();
     }
 
+    @Step(受給者異動送付削除産)
+    IBatchFlowCommand delJukyushaIdoRenrakuhyo() {
+        return simpleBatch(DelJukyushaIdoRenrakuhyoProcess.class).arguments(getParameter().
+                toProcessParameter())
+                .define();
+    }
+
+    @Step(受給者異動の抽出)
+    IBatchFlowCommand insJukyushaIdoRenrakuhyoTemp() {
+        return loopBatch(InsJukyushaIdoRenrakuhyoTempProcess.class).arguments(getParameter().
+                toProcessParameter())
+                .define();
+    }
 }

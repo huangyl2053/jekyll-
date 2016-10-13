@@ -102,6 +102,8 @@ public class KanendoKoseiKeisan {
     private static final int INT_12 = 12;
     private static final int INT_13 = 13;
     private static final int INT_31 = 31;
+    private static final int INT_100 = 100;
+    private static final int INT_1000 = 1000;
 
     /**
      * 該当クラスの対象を返しメソッドです。
@@ -489,9 +491,9 @@ public class KanendoKoseiKeisan {
             業務コンフィグ情報.set併徴現年減額区分(定数_0);
         }
         RString 特別徴収_期別端数 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別端数, 適用基準日, SubGyomuCode.DBB介護賦課);
-        業務コンフィグ情報.set端数区分特徴期別額(Integer.parseInt(特別徴収_期別端数.toString()));
+        業務コンフィグ情報.set端数区分特徴期別額(get期別端数区分(特別徴収_期別端数));
         RString 普通徴収_期別端数 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数, 適用基準日, SubGyomuCode.DBB介護賦課);
-        業務コンフィグ情報.set端数区分普徴期別額(Integer.parseInt(普通徴収_期別端数.toString()));
+        業務コンフィグ情報.set端数区分普徴期別額(get期別端数区分(普通徴収_期別端数));
         業務コンフィグ情報.set減免処理区分(INT_2);
         業務コンフィグ情報.set特徴依頼送付状況区分_10月(INT_1);
         業務コンフィグ情報.set特徴依頼送付状況区分_12月(INT_1);
@@ -516,6 +518,23 @@ public class KanendoKoseiKeisan {
         kiwariKeisanInput.set期別徴収方法区分(get期別徴収方法区分(徴収方法の情報));
 
         return kiwariKeisanInput;
+    }
+
+    private int get期別端数区分(RString 期別端数) {
+
+        switch (Integer.parseInt(期別端数.toString())) {
+            case INT_1:
+                return INT_1;
+            case INT_10:
+                return INT_2;
+            case INT_100:
+                return INT_3;
+            case INT_1000:
+                return INT_4;
+            default:
+                return 0;
+        }
+
     }
 
     private RString get現在月(Kitsuki 過年度期月) {
@@ -581,10 +600,6 @@ public class KanendoKoseiKeisan {
         調定年度期別クラス.add(get調定年度期別クラス(賦課の情報4));
         調定年度期別クラス.add(get調定年度期別クラス(賦課の情報5));
         調定年度期別クラス.add(get調定年度期別クラス(賦課の情報6));
-        //TODO qa1101確認
-        //調定年度期別クラス.add(new ChoteiNendoKibetsuClass());
-        //調定年度期別クラス.add(new ChoteiNendoKibetsuClass());
-        //調定年度期別クラス.add(new ChoteiNendoKibetsuClass());
 
         賦課更正情報.set調定年度期別クラス(調定年度期別クラス);
         return 賦課更正情報;
@@ -669,10 +684,6 @@ public class KanendoKoseiKeisan {
         普徴月クラス.add(get普徴月クラス(調定年度, INT_2));
         普徴月クラス.add(get普徴月クラス(調定年度, INT_1));
         普徴月クラス.add(get普徴月クラス(調定年度, 0));
-        //TODO qa1101確認
-        //普徴月クラス.add(new FuchoTsukiClass());
-        //普徴月クラス.add(new FuchoTsukiClass());
-        //普徴月クラス.add(new FuchoTsukiClass());
         return 普徴月クラス;
     }
 

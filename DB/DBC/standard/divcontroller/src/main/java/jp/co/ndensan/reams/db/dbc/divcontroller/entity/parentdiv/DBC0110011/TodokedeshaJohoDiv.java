@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0110011;
  * 不正な動作の原因になります。
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
@@ -12,6 +13,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 
 /**
  * TodokedeshaJoho のクラスファイル
@@ -29,28 +34,18 @@ public class TodokedeshaJohoDiv extends Panel {
      */
     @JsonProperty("lin1")
     private HorizontalLine lin1;
-    @JsonProperty("radKeikakuKubun")
-    private RadioButton radKeikakuKubun;
     @JsonProperty("radTodokedeKubun")
     private RadioButton radTodokedeKubun;
-    @JsonProperty("txtTodokedeYMD")
-    private TextBoxDate txtTodokedeYMD;
+    @JsonProperty("txtTodokedeYM")
+    private TextBoxDate txtTodokedeYM;
+    @JsonProperty("radKeikakuKubun")
+    private RadioButton radKeikakuKubun;
     @JsonProperty("txtKeikakuTekiyoStartYMD")
     private TextBoxDate txtKeikakuTekiyoStartYMD;
     @JsonProperty("txtKeikakuTekiyoEndYMD")
     private TextBoxDate txtKeikakuTekiyoEndYMD;
-    @JsonProperty("txtTodokedeshaName")
-    private TextBox txtTodokedeshaName;
-    @JsonProperty("txtTodokedeshaNameKana")
-    private TextBox txtTodokedeshaNameKana;
-    @JsonProperty("txtTodokedeshaYubinNo")
-    private TextBox txtTodokedeshaYubinNo;
-    @JsonProperty("txtTodokedeshaJusho")
-    private TextBox txtTodokedeshaJusho;
-    @JsonProperty("txtTodokedeshaTelNo")
-    private TextBox txtTodokedeshaTelNo;
-    @JsonProperty("ddlTodokedeshaKankeiKubun")
-    private DropDownList ddlTodokedeshaKankeiKubun;
+    @JsonProperty("Todokedesha")
+    private TodokedeshaDiv Todokedesha;
     @JsonProperty("radKeikakuSakuseiKubun")
     private RadioButton radKeikakuSakuseiKubun;
 
@@ -79,24 +74,6 @@ public class TodokedeshaJohoDiv extends Panel {
     }
 
     /*
-     * getradKeikakuKubun
-     * @return radKeikakuKubun
-     */
-    @JsonProperty("radKeikakuKubun")
-    public RadioButton getRadKeikakuKubun() {
-        return radKeikakuKubun;
-    }
-
-    /*
-     * setradKeikakuKubun
-     * @param radKeikakuKubun radKeikakuKubun
-     */
-    @JsonProperty("radKeikakuKubun")
-    public void setRadKeikakuKubun(RadioButton radKeikakuKubun) {
-        this.radKeikakuKubun = radKeikakuKubun;
-    }
-
-    /*
      * getradTodokedeKubun
      * @return radTodokedeKubun
      */
@@ -115,21 +92,39 @@ public class TodokedeshaJohoDiv extends Panel {
     }
 
     /*
-     * gettxtTodokedeYMD
-     * @return txtTodokedeYMD
+     * gettxtTodokedeYM
+     * @return txtTodokedeYM
      */
-    @JsonProperty("txtTodokedeYMD")
-    public TextBoxDate getTxtTodokedeYMD() {
-        return txtTodokedeYMD;
+    @JsonProperty("txtTodokedeYM")
+    public TextBoxDate getTxtTodokedeYM() {
+        return txtTodokedeYM;
     }
 
     /*
-     * settxtTodokedeYMD
-     * @param txtTodokedeYMD txtTodokedeYMD
+     * settxtTodokedeYM
+     * @param txtTodokedeYM txtTodokedeYM
      */
-    @JsonProperty("txtTodokedeYMD")
-    public void setTxtTodokedeYMD(TextBoxDate txtTodokedeYMD) {
-        this.txtTodokedeYMD = txtTodokedeYMD;
+    @JsonProperty("txtTodokedeYM")
+    public void setTxtTodokedeYM(TextBoxDate txtTodokedeYM) {
+        this.txtTodokedeYM = txtTodokedeYM;
+    }
+
+    /*
+     * getradKeikakuKubun
+     * @return radKeikakuKubun
+     */
+    @JsonProperty("radKeikakuKubun")
+    public RadioButton getRadKeikakuKubun() {
+        return radKeikakuKubun;
+    }
+
+    /*
+     * setradKeikakuKubun
+     * @param radKeikakuKubun radKeikakuKubun
+     */
+    @JsonProperty("radKeikakuKubun")
+    public void setRadKeikakuKubun(RadioButton radKeikakuKubun) {
+        this.radKeikakuKubun = radKeikakuKubun;
     }
 
     /*
@@ -169,111 +164,21 @@ public class TodokedeshaJohoDiv extends Panel {
     }
 
     /*
-     * gettxtTodokedeshaName
-     * @return txtTodokedeshaName
+     * getTodokedesha
+     * @return Todokedesha
      */
-    @JsonProperty("txtTodokedeshaName")
-    public TextBox getTxtTodokedeshaName() {
-        return txtTodokedeshaName;
+    @JsonProperty("Todokedesha")
+    public TodokedeshaDiv getTodokedesha() {
+        return Todokedesha;
     }
 
     /*
-     * settxtTodokedeshaName
-     * @param txtTodokedeshaName txtTodokedeshaName
+     * setTodokedesha
+     * @param Todokedesha Todokedesha
      */
-    @JsonProperty("txtTodokedeshaName")
-    public void setTxtTodokedeshaName(TextBox txtTodokedeshaName) {
-        this.txtTodokedeshaName = txtTodokedeshaName;
-    }
-
-    /*
-     * gettxtTodokedeshaNameKana
-     * @return txtTodokedeshaNameKana
-     */
-    @JsonProperty("txtTodokedeshaNameKana")
-    public TextBox getTxtTodokedeshaNameKana() {
-        return txtTodokedeshaNameKana;
-    }
-
-    /*
-     * settxtTodokedeshaNameKana
-     * @param txtTodokedeshaNameKana txtTodokedeshaNameKana
-     */
-    @JsonProperty("txtTodokedeshaNameKana")
-    public void setTxtTodokedeshaNameKana(TextBox txtTodokedeshaNameKana) {
-        this.txtTodokedeshaNameKana = txtTodokedeshaNameKana;
-    }
-
-    /*
-     * gettxtTodokedeshaYubinNo
-     * @return txtTodokedeshaYubinNo
-     */
-    @JsonProperty("txtTodokedeshaYubinNo")
-    public TextBox getTxtTodokedeshaYubinNo() {
-        return txtTodokedeshaYubinNo;
-    }
-
-    /*
-     * settxtTodokedeshaYubinNo
-     * @param txtTodokedeshaYubinNo txtTodokedeshaYubinNo
-     */
-    @JsonProperty("txtTodokedeshaYubinNo")
-    public void setTxtTodokedeshaYubinNo(TextBox txtTodokedeshaYubinNo) {
-        this.txtTodokedeshaYubinNo = txtTodokedeshaYubinNo;
-    }
-
-    /*
-     * gettxtTodokedeshaJusho
-     * @return txtTodokedeshaJusho
-     */
-    @JsonProperty("txtTodokedeshaJusho")
-    public TextBox getTxtTodokedeshaJusho() {
-        return txtTodokedeshaJusho;
-    }
-
-    /*
-     * settxtTodokedeshaJusho
-     * @param txtTodokedeshaJusho txtTodokedeshaJusho
-     */
-    @JsonProperty("txtTodokedeshaJusho")
-    public void setTxtTodokedeshaJusho(TextBox txtTodokedeshaJusho) {
-        this.txtTodokedeshaJusho = txtTodokedeshaJusho;
-    }
-
-    /*
-     * gettxtTodokedeshaTelNo
-     * @return txtTodokedeshaTelNo
-     */
-    @JsonProperty("txtTodokedeshaTelNo")
-    public TextBox getTxtTodokedeshaTelNo() {
-        return txtTodokedeshaTelNo;
-    }
-
-    /*
-     * settxtTodokedeshaTelNo
-     * @param txtTodokedeshaTelNo txtTodokedeshaTelNo
-     */
-    @JsonProperty("txtTodokedeshaTelNo")
-    public void setTxtTodokedeshaTelNo(TextBox txtTodokedeshaTelNo) {
-        this.txtTodokedeshaTelNo = txtTodokedeshaTelNo;
-    }
-
-    /*
-     * getddlTodokedeshaKankeiKubun
-     * @return ddlTodokedeshaKankeiKubun
-     */
-    @JsonProperty("ddlTodokedeshaKankeiKubun")
-    public DropDownList getDdlTodokedeshaKankeiKubun() {
-        return ddlTodokedeshaKankeiKubun;
-    }
-
-    /*
-     * setddlTodokedeshaKankeiKubun
-     * @param ddlTodokedeshaKankeiKubun ddlTodokedeshaKankeiKubun
-     */
-    @JsonProperty("ddlTodokedeshaKankeiKubun")
-    public void setDdlTodokedeshaKankeiKubun(DropDownList ddlTodokedeshaKankeiKubun) {
-        this.ddlTodokedeshaKankeiKubun = ddlTodokedeshaKankeiKubun;
+    @JsonProperty("Todokedesha")
+    public void setTodokedesha(TodokedeshaDiv Todokedesha) {
+        this.Todokedesha = Todokedesha;
     }
 
     /*
@@ -292,6 +197,69 @@ public class TodokedeshaJohoDiv extends Panel {
     @JsonProperty("radKeikakuSakuseiKubun")
     public void setRadKeikakuSakuseiKubun(RadioButton radKeikakuSakuseiKubun) {
         this.radKeikakuSakuseiKubun = radKeikakuSakuseiKubun;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public TextBoxAtenaMeisho getTxtTodokedeshaShimei() {
+        return this.getTodokedesha().getTxtTodokedeshaShimei();
+    }
+
+    @JsonIgnore
+    public void setTxtTodokedeshaShimei(TextBoxAtenaMeisho txtTodokedeshaShimei) {
+        this.getTodokedesha().setTxtTodokedeshaShimei(txtTodokedeshaShimei);
+    }
+
+    @JsonIgnore
+    public TextBoxAtenaKanaMeisho getTxtTodokedeshaShimeiKana() {
+        return this.getTodokedesha().getTxtTodokedeshaShimeiKana();
+    }
+
+    @JsonIgnore
+    public void setTxtTodokedeshaShimeiKana(TextBoxAtenaKanaMeisho txtTodokedeshaShimeiKana) {
+        this.getTodokedesha().setTxtTodokedeshaShimeiKana(txtTodokedeshaShimeiKana);
+    }
+
+    @JsonIgnore
+    public TextBoxYubinNo getTxtTodokedeshaYubinNo() {
+        return this.getTodokedesha().getTxtTodokedeshaYubinNo();
+    }
+
+    @JsonIgnore
+    public void setTxtTodokedeshaYubinNo(TextBoxYubinNo txtTodokedeshaYubinNo) {
+        this.getTodokedesha().setTxtTodokedeshaYubinNo(txtTodokedeshaYubinNo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtTodokedeshaJusho() {
+        return this.getTodokedesha().getTxtTodokedeshaJusho();
+    }
+
+    @JsonIgnore
+    public void setTxtTodokedeshaJusho(TextBox txtTodokedeshaJusho) {
+        this.getTodokedesha().setTxtTodokedeshaJusho(txtTodokedeshaJusho);
+    }
+
+    @JsonIgnore
+    public TextBoxTelNo getTxtTodokedeshaTelNo() {
+        return this.getTodokedesha().getTxtTodokedeshaTelNo();
+    }
+
+    @JsonIgnore
+    public void setTxtTodokedeshaTelNo(TextBoxTelNo txtTodokedeshaTelNo) {
+        this.getTodokedesha().setTxtTodokedeshaTelNo(txtTodokedeshaTelNo);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlTodokedeshaKankeiKubun() {
+        return this.getTodokedesha().getDdlTodokedeshaKankeiKubun();
+    }
+
+    @JsonIgnore
+    public void setDdlTodokedeshaKankeiKubun(DropDownList ddlTodokedeshaKankeiKubun) {
+        this.getTodokedesha().setDdlTodokedeshaKankeiKubun(ddlTodokedeshaKankeiKubun);
     }
 
     // </editor-fold>

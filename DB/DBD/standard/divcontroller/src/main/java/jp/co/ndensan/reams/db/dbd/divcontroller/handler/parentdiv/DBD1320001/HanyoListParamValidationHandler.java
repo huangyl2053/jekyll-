@@ -50,6 +50,7 @@ public class HanyoListParamValidationHandler {
         ValidationMessageControlPairs validateResult = new ValidationMessageControlPairs();
         _HanyoListParamValidator validator = new _HanyoListParamValidator(div);
         validateResult.add(createDictionary帳票出力項目チェック().check(validator.validate帳票出力項目チェック()));
+        validateResult.add(createDictionary実行するボタンクリック().check(validator.validate()));
         return validateResult;
 
     }

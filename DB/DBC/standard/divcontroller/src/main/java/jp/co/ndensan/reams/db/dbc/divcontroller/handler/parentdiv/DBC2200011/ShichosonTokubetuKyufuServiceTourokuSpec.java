@@ -62,7 +62,7 @@ public enum ShichosonTokubetuKyufuServiceTourokuSpec implements IPredicate<Shich
                         }
                     }
                     if (直近データ != null && 直近データ.getServiceYukoKikanShuryoYMD().isNullOrEmpty()) {
-                        return 直近データ.getServiceYukoKikanKaishiYMDSeireki().getValue().isBeforeOrEquals(有効期間開始年月日);
+                        return 直近データ.getServiceYukoKikanKaishiYMDSeireki().getValue().isBefore(有効期間開始年月日);
                     }
                     return true;
                 }

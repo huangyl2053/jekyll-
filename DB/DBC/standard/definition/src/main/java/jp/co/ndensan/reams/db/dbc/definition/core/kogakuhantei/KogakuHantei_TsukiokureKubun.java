@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KogakuHantei_TsukiokureKubun {
 
     /**
-     * コード:1 名称:月遅れあり 略称:定義なし 表示名称:月
+     * コード:1 名称:月遅れあり 略称:月
      */
     月遅れあり("1", "月遅れあり", "月"),
     /**
-     * コード:2 名称:月遅れなし 略称:定義なし 表示名称:"　"
+     * コード:2 名称:月遅れなし 略称:"　"
      */
     月遅れなし("2", "月遅れなし", "　");
 
@@ -48,11 +48,11 @@ public enum KogakuHantei_TsukiokureKubun {
     }
 
     /**
-     * 高額判定根拠_月遅れ区分の表示名称を返します。
+     * 高額判定根拠_月遅れ区分の略称を返します。
      *
-     * @return 高額判定根拠_月遅れ区分の表示名称
+     * @return 高額判定根拠_月遅れ区分の略称
      */
-    public RString get表示名称() {
+    public RString get略称() {
         return hyojiName;
     }
 

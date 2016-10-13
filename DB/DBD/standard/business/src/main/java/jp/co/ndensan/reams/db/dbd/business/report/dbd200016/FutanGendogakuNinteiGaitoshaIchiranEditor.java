@@ -267,8 +267,7 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
     }
 
     private RString editTime(FlexibleDate tempTime) {
-        return tempTime.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        return tempTime.wareki().toDateString();
     }
 
     private RString get要介護度() {
@@ -450,8 +449,7 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
     private FutanGendogakuNinteiGaitoshaIchiranReportSource get申請日(
             FutanGendogakuNinteiGaitoshaIchiranReportSource source, FlexibleDate shinseiYMD) {
         if (null != shinseiYMD) {
-            source.listUpper_8 = shinseiYMD.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.listUpper_8 = shinseiYMD.wareki().toDateString();
         }
         return source;
     }
@@ -459,8 +457,7 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
     private FutanGendogakuNinteiGaitoshaIchiranReportSource get決定日(
             FutanGendogakuNinteiGaitoshaIchiranReportSource source, FlexibleDate ketteiYMD) {
         if (null != ketteiYMD) {
-            source.listUpper_5 = ketteiYMD.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.listUpper_5 = ketteiYMD.wareki().toDateString();
         }
         return source;
     }

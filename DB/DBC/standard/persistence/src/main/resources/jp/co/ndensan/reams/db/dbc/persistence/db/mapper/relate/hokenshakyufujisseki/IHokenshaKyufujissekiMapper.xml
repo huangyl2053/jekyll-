@@ -609,10 +609,9 @@
             ORDER BY "DbWT1111KyufuJissekiTemp"."inputShikibetsuNo",
                      "DbWT1111KyufuJissekiTemp"."hiHokenshaNo",
                      "DbWT1111KyufuJissekiTemp"."serviceTeikyoYM",
-                     "DbWT1111KyufuJissekiTemp"."jigyoshoNo",
                      "DbWT1111KyufuJissekiTemp"."toshiNo",
-                     "DbWT1111KyufuJissekiTemp"."dataKunbun",
                      "DbWT1111KyufuJissekiTemp"."renban1",
+                     "DbWT1111KyufuJissekiTemp"."dataKunbun",
                      "DbWT1111KyufuJissekiTemp"."renban2") AS A
         UNION
         SELECT B.*
@@ -1445,6 +1444,14 @@
     <resultMap id="ResultMap_DbWT1111KyufuJissekiTempTempEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujisseki.DbWT1111KyufuJissekiTempTempEntity"
                autoMapping="true">
+        <id property="inputShikibetsuNo" column="dbWT1131KyufujissekiKihon_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+        <id property="hiHokenshaNo" column="dbWT1131KyufujissekiKihon_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="dbWT1131KyufujissekiKihon_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="jigyoshoNo" column="dbWT1131KyufujissekiKihon_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="toshiNo" column="dbWT1131KyufujissekiKihon_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="DbWT1111_dataKunbun"/>
+        <id property="renban1" column="dbWT1131KyufujissekiKihon_renban" />
+        <id column="DbWT1111_renban2" />
         <result property="dbWT1131_kokanShikibetsuNo" column="dbWT1131KyufujissekiKihon_kokanShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbWT1131_recodeShubetsuCode" column="dbWT1131KyufujissekiKihon_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbWT1131_shokisaiHokenshaNo" column="dbWT1131KyufujissekiKihon_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -1555,6 +1562,7 @@
         <result property="dbWT1131_shoteiShikkanSetteiKubun" column="dbWT1131KyufujissekiKihon_shoteiShikkanSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbWT1131_meisaiJushochitokureiSetteiKubun" column="dbWT1131KyufujissekiKihon_meisaiJushochitokureiSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbWT1131_shukeiSetteiKubun" column="dbWT1131KyufujissekiKihon_shukeiSetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dbT3018_hiHokenshaNo" column="dbT3018KyufujissekiMeisai_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbT3018_kokanJohoShikibetsuNo" column="dbT3018KyufujissekiMeisai_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbT3018_recodeShubetsuCode" column="dbT3018KyufujissekiMeisai_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3018_shokisaiHokenshaNo" column="dbT3018KyufujissekiMeisai_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -1584,6 +1592,7 @@
         <result property="dbT3018_shinsaYM" column="dbT3018KyufujissekiMeisai_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="dbT3018_seiriNo" column="dbT3018KyufujissekiMeisai_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3018_torikomiYM" column="dbT3018KyufujissekiMeisai_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="dbT3019_hiHokenshaNo" column="dbT3019KyufujissekiKinkyuShisetsuRyoyo_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbT3019_kokanJohoShikibetsuNo" column="dbT3019KyufujissekiKinkyuShisetsuRyoyo_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbT3019_recodeShubetsuCode" column="dbT3019KyufujissekiKinkyuShisetsuRyoyo_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3019_shokisaiHokenshaNo" column="dbT3019KyufujissekiKinkyuShisetsuRyoyo_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -1641,6 +1650,7 @@
         <result property="dbT3019_shinsaYM" column="dbT3019KyufujissekiKinkyuShisetsuRyoyo_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="dbT3019_seiriNo" column="dbT3019KyufujissekiKinkyuShisetsuRyoyo_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3019_torikomiYM" column="dbT3019KyufujissekiKinkyuShisetsuRyoyo_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="dbT3032_hiHokenshaNo" column="dbT3032KyufujissekiShoteiShikkanShisetsuRyoyo_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbT3032_kokanJohoShikibetsuNo" column="dbT3032KyufujissekiShoteiShikkanShisetsuRyoyo_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbT3032_recodeShubetsuCode" column="dbT3032KyufujissekiShoteiShikkanShisetsuRyoyo_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3032_shokisaiHokenshaNo" column="dbT3032KyufujissekiShoteiShikkanShisetsuRyoyo_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -1709,6 +1719,7 @@
         <result property="dbT3032_shinsaYM" column="dbT3032KyufujissekiShoteiShikkanShisetsuRyoyo_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="dbT3032_seiriNo" column="dbT3032KyufujissekiShoteiShikkanShisetsuRyoyo_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3032_torikomiYM" column="dbT3032KyufujissekiShoteiShikkanShisetsuRyoyo_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="dbT3020_hiHokenshaNo" column="dbT3020KyufujissekiTokuteiSinryohi_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbT3020_kokanJohoShikibetsuNo" column="dbT3020KyufujissekiTokuteiSinryohi_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbT3020_recodeShubetsuCode" column="dbT3020KyufujissekiTokuteiSinryohi_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3020_shokisaiHokenshaNo" column="dbT3020KyufujissekiTokuteiSinryohi_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -1775,6 +1786,7 @@
         <result property="dbT3020_shinsaYM" column="dbT3020KyufujissekiTokuteiSinryohi_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="dbT3020_seiriNo" column="dbT3020KyufujissekiTokuteiSinryohi_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3020_torikomiYM" column="dbT3020KyufujissekiTokuteiSinryohi_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="dbT3021_hiHokenshaNo" column="dbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbT3021_kokanJohoShikibetsuNo" column="dbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbT3021_recodeShubetsuCode" column="dbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3021_shokisaiHokenshaNo" column="dbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -1813,6 +1825,7 @@
         <result property="dbT3021_shinsaYM" column="dbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="dbT3021_seiriNo" column="dbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3021_torikomiYM" column="dbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="dbT3022_hiHokenshaNo" column="dbT3022KyufujissekiShokujiHiyo_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbT3022_kokanJohoShikibetsuNo" column="dbT3022KyufujissekiShokujiHiyo_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbT3022_recodeShubetsuCode" column="dbT3022KyufujissekiShokujiHiyo_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3022_shokisaiHokenshaNo" column="dbT3022KyufujissekiShokujiHiyo_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -1841,6 +1854,7 @@
         <result property="dbT3022_shinsaYM" column="dbT3022KyufujissekiShokujiHiyo_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="dbT3022_seiriNo" column="dbT3022KyufujissekiShokujiHiyo_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3022_torikomiYM" column="dbT3022KyufujissekiShokujiHiyo_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="dbT3025_hiHokenshaNo" column="dbT3025KyufujissekiKyotakuService_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbT3025_kokanJohoShikibetsuNo" column="dbT3025KyufujissekiKyotakuService_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbT3025_recodeShubetsuCode" column="dbT3025KyufujissekiKyotakuService_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3025_shokisaiHokenshaNo" column="dbT3025KyufujissekiKyotakuService_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -1866,6 +1880,7 @@
         <result property="dbT3025_shinsaYM" column="dbT3025KyufujissekiKyotakuService_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="dbT3025_seiriNo" column="dbT3025KyufujissekiKyotakuService_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3025_torikomiYM" column="dbT3025KyufujissekiKyotakuService_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="dbT3026_hiHokenshaNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbT3026_kokanJohoShikibetsuNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbT3026_recodeShubetsuCode" column="dbT3026KyufujissekiFukushiYoguHanbaihi_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3026_shokisaiHokenshaNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -1881,6 +1896,7 @@
         <result property="dbT3026_shinsaYM" column="dbT3026KyufujissekiFukushiYoguHanbaihi_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="dbT3026_seiriNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3026_torikomiYM" column="dbT3026KyufujissekiFukushiYoguHanbaihi_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="dbT3027_hiHokenshaNo" column="dbT3027KyufujissekiJutakuKaishuhi_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbT3027_kokanJohoShikibetsuNo" column="dbT3027KyufujissekiJutakuKaishuhi_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbT3027_recodeShubetsuCode" column="dbT3027KyufujissekiJutakuKaishuhi_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3027_shokisaiHokenshaNo" column="dbT3027KyufujissekiJutakuKaishuhi_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -1893,6 +1909,7 @@
         <result property="dbT3027_shinsaYM" column="dbT3027KyufujissekiJutakuKaishuhi_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="dbT3027_seiriNo" column="dbT3027KyufujissekiJutakuKaishuhi_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3027_torikomiYM" column="dbT3027KyufujissekiJutakuKaishuhi_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="dbT3033_hiHokenshaNo" column="dbT3033KyufujissekiShukei_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbT3033_kokanJohoShikibetsuNo" column="dbT3033KyufujissekiShukei_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbT3033_recodeShubetsuCode" column="dbT3033KyufujissekiShukei_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3033_shokisaiHokenshaNo" column="dbT3033KyufujissekiShukei_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -1950,6 +1967,7 @@
         <result property="dbT3033_shinsaYM" column="dbT3033KyufujissekiShukei_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="dbT3033_seiriNo" column="dbT3033KyufujissekiShukei_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3033_torikomiYM" column="dbT3033KyufujissekiShukei_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="dbT3029_hiHokenshaNo" column="dbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
          <result property="dbT3029_kokanJohoShikibetsuNo" column="dbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbT3029_recodeShubetsuCode" column="dbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3029_shokisaiHokenshaNo" column="dbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -2008,6 +2026,7 @@
         <result property="dbT3029_shinsaYM" column="dbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="dbT3029_seiriNo" column="dbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3029_torikomiYM" column="dbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="dbT3030_hiHokenshaNo" column="dbT3030KyufuJissekiShakaiFukushiHojinKeigengaku_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbT3030_kokanJohoShikibetsuNo" column="dbT3030KyufuJissekiShakaiFukushiHojinKeigengaku_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbT3030_recodeShubetsuCode" column="dbT3030KyufuJissekiShakaiFukushiHojinKeigengaku_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3030_shokisaiHokenshaNo" column="dbT3030KyufuJissekiShakaiFukushiHojinKeigengaku_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -2025,6 +2044,7 @@
         <result property="dbT3030_shinsaYM" column="dbT3030KyufuJissekiShakaiFukushiHojinKeigengaku_shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="dbT3030_seiriNo" column="dbT3030KyufuJissekiShakaiFukushiHojinKeigengaku_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3030_torikomiYM" column="dbT3030KyufuJissekiShakaiFukushiHojinKeigengaku_torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="dbT3106_hiHokenshaNo" column="dbT3106KyufujissekiMeisaiJushochiTokurei_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbT3106_kokanJohoShikibetsuNo" column="dbT3106KyufujissekiMeisaiJushochiTokurei_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="dbT3106_recodeShubetsuCode" column="dbT3106KyufujissekiMeisaiJushochiTokurei_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT3106_shokisaiHokenshaNo" column="dbT3106KyufujissekiMeisaiJushochiTokurei_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>

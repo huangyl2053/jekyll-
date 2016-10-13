@@ -33,9 +33,11 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
     private static final RString RSTRING_20 = new RString("20");
     private static final RString RSTRING_01 = new RString("01");
     private static final Decimal DECIMAL_38 = new Decimal(380000);
+    private static final Decimal DECIMAL_33 = new Decimal(330000);
     private static final Decimal DECIMAL_12 = new Decimal(120000);
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji."
             + "IKijunsyunyunenjiMapper.対象世帯員クラスTempに更新4");
+    private static final RString コンマ = new RString(",");
     private UpdTaishoSeitaiyinTemp4Entity exEntity;
     private static final int INT_0 = 0;
     private int index = 0;
@@ -120,7 +122,7 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
 
     private void getAge(UpdTaishoSeitaiyinTemp4Entity entity) {
         TaishoSetaiinEntity 対象世帯員2 = entity.get対象世帯員2();
-        RString 対象世帯員重複 = 対象世帯員2.getShotaiCode().concat(対象世帯員2.getHihokenshaNo().getColumnValue())
+        RString 対象世帯員重複 = 対象世帯員2.getShotaiCode().concat(コンマ).concat(対象世帯員2.getHihokenshaNo().getColumnValue()).concat(コンマ)
                 .concat(対象世帯員2.getShikibetsuCode().getColumnValue());
         if (!対象世帯員重複Set.contains(対象世帯員重複)) {
             if ((null != 対象世帯員2.getAge() && 対象世帯員2.getAge().compareTo(RSTRING_16) < 0)
@@ -154,14 +156,13 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
     private void get課税所得_控除後(TaishoSetaiinEntity 対象世帯員1) {
         Decimal 控除後;
         if (識別コードFlgSet.contains(対象世帯員1.getShikibetsuCode().getColumnValue())) {
-            控除後 = 対象世帯員1.getKazeiShotokuGaku().divide(DECIMAL_38.multiply(this.ageLess16).add(DECIMAL_12.multiply(this.age16_18)));
+            控除後 = getDecimal(対象世帯員1.getKazeiShotokuGaku()).subtract(DECIMAL_33.multiply(this.ageLess16).add(DECIMAL_12.multiply(this.age16_18)));
             if (控除後.compareTo(Decimal.ZERO) < 0) {
                 控除後 = Decimal.ZERO;
             }
-        } else {
-            控除後 = 対象世帯員1.getKazeiShotokuGaku();
+            対象世帯員1.setKazeiShotokuGakuAfter(控除後);
         }
-        対象世帯員1.setKazeiShotokuGakuAfter(控除後);
+
     }
 
     private Decimal getDecimal(Decimal decimal) {

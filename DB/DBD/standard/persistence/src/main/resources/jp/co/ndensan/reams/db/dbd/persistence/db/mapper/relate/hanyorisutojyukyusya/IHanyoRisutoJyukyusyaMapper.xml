@@ -942,7 +942,6 @@ WHERE 受給者台帳."logicalDeletedFlag" = false
              AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3" <![CDATA[<=]]> #{tiiki_To}
          </if>
     </if>
-    ORDER BY
-        #{出力順}
+        ${出力順}
     </select>
 </mapper>

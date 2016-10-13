@@ -41,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private static final int NOCOUNT_5 = 5;
-    private static final RString 半角スペース = new RString(" ");
     private static final RString 作成 = new RString("作成");
 
     private final TyohyoShutuRyokuYoJukyushaDaichoEntity 帳票出力用受給者台帳;
@@ -91,14 +90,13 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private void setSentoStep1(JukyushaDaichoReportSource source) {
         source.printTimeStamp = get印刷日時();
-        if (this.帳票出力用受給者台帳.get要介護認定情報EntityList() != null
-                && !this.帳票出力用受給者台帳.get要介護認定情報EntityList().isEmpty()) {
-            List<YokaigoNinteiJohoEntity> 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
-            if (要介護認定情報EntityList.size() - 1 >= index && 要介護認定情報EntityList.get(index).get先頭Entity() != null) {
-                SentoEntity 先頭Entity = 要介護認定情報EntityList.get(index).get先頭Entity();
-                get先頭1(source, 先頭Entity);
-                get先頭2(source, 先頭Entity);
-            }
+        List<YokaigoNinteiJohoEntity> 要介護認定情報EntityList = this.帳票出力用受給者台帳.get要介護認定情報EntityList();
+        if (要介護認定情報EntityList != null && !要介護認定情報EntityList.isEmpty()
+                && 要介護認定情報EntityList.get(0).get先頭Entity() != null) {
+            SentoEntity 先頭Entity = 要介護認定情報EntityList.get(0).get先頭Entity();
+            get先頭1(source, 先頭Entity);
+            get先頭2(source, 先頭Entity);
+
         }
     }
 
@@ -601,7 +599,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        return 年月日.concat(半角スペース).concat(時分秒).concat(半角スペース).concat(作成);
+        return 年月日.concat(時分秒).concat(RString.FULL_SPACE).concat(作成);
     }
 
     private JukyushaDaichoReportSource get先頭1(JukyushaDaichoReportSource source, SentoEntity 先頭Entity) {
