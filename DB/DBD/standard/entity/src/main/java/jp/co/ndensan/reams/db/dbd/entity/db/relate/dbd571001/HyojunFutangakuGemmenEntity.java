@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,9 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HyojunFutangakuGemmenEntity {
 
+    private RString 標準負担減額_証記載保険者番号;
     private HihokenshaNo 標準負担減額_被保険者番号;
+    private int 標準負担減額_履歴番号;
     private FlexibleDate 標準負担減額_申請年月日;
     private FlexibleDate 標準負担減額_決定年月日;
     private FlexibleDate 標準負担減額_適用開始年月日;
