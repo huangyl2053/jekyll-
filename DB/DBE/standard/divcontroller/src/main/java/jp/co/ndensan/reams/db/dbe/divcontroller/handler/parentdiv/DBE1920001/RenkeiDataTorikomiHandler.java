@@ -130,12 +130,13 @@ public class RenkeiDataTorikomiHandler {
      * 取込みファイルデータを取得します。
      */
     public void getFileData() {
+        RString path = Directory.createTmpDirectory();
         SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                RDateTime.parse(div.getHiddenFileId().toString())), new FilesystemPath(Directory.createTmpDirectory()));
-        RString filePath = Path.combinePath(Directory.createTmpDirectory(), 要介護認定申請連携データ取込みファイル名);
+                RDateTime.parse(div.getHiddenFileId().toString())), new FilesystemPath(path));
+        RString filePath = Path.combinePath(path, 要介護認定申請連携データ取込みファイル名);
         File file = new File(filePath.toString());
         if (file.exists() && !なし.equals(div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource().get(0).getTotal())) {
-            setRowFileData(set文字コード(), Directory.createTmpDirectory(), filePath);
+            setRowFileData(set文字コード(), path, filePath);
         }
     }
 
