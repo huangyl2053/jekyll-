@@ -7,14 +7,6 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -50,83 +42,39 @@ public class ShunoTainoJokyoTempTableEntity extends DbTableEntityBase<ShunoTaino
     @TempTableColumnOrder(1)
     private HihokenshaNo tmp_hihokenshaNo;
     @TempTableColumnOrder(2)
-    private ShikibetsuCode tmp_shikibetsuCode;
-    @TempTableColumnOrder(3)
-    private RString tmp_hihokenshaShimeiKana;
-    @TempTableColumnOrder(4)
-    private AtenaMeisho tmp_hihokenshaShimei;
-    @TempTableColumnOrder(5)
-    private SetaiCode tmp_setaiCode;
-    @TempTableColumnOrder(6)
-    private GyoseikuCode tmp_gyoseikuCode;
-    @TempTableColumnOrder(7)
-    private RString tmp_gyoseikuName;
-    @TempTableColumnOrder(8)
-    private ZenkokuJushoCode tmp_jushoCode;
-    @TempTableColumnOrder(9)
-    private YubinNo tmp_yubinNo;
-    @TempTableColumnOrder(10)
-    private AtenaJusho tmp_jusho;
-    @TempTableColumnOrder(11)
-    private FlexibleDate tmp_shikakuShutokuYMD;
-    @TempTableColumnOrder(12)
-    private FlexibleDate tmp_shikakuSoshitsuYMD;
-    @TempTableColumnOrder(13)
-    private RString tmp_shikakuSoshitsuJiyuCode;
-    @TempTableColumnOrder(14)
-    private RString tmp_shikakuKubunCode;
-    @TempTableColumnOrder(15)
-    private RString tmp_koikinaiJushochiTokureiFlag;
-    @TempTableColumnOrder(16)
-    private boolean tmp_seihoFlag;
-    @TempTableColumnOrder(17)
-    private Code tmp_koroshoIfShikibetsuCode;
-    @TempTableColumnOrder(18)
-    private Code tmp_yokaigoJotaiKubunCode;
-    @TempTableColumnOrder(19)
-    private FlexibleDate tmp_ninteiYukoKikanKaishiYMD;
-    @TempTableColumnOrder(20)
-    private FlexibleDate tmp_ninteiYukoKikanShuryoYMD;
-    @TempTableColumnOrder(21)
-    private FlexibleDate tmp_ninteiYMD;
-    @TempTableColumnOrder(22)
-    private boolean tmp_shiseityuFlag;
-    @TempTableColumnOrder(23)
-    private FlexibleDate tmp_jukyuShinseiYMD;
-    @TempTableColumnOrder(24)
     @PrimaryKey
     private FlexibleYear tmp_choteiNendo;
-    @TempTableColumnOrder(25)
+    @TempTableColumnOrder(3)
     @PrimaryKey
     private FlexibleYear tmp_fukaNendo;
-    @TempTableColumnOrder(26)
-    private RString tmp_tokucho_FuchoKubun;
-    @TempTableColumnOrder(27)
+    @TempTableColumnOrder(4)
+    private RString tmp_tokucho_fuchoKubun;
+    @TempTableColumnOrder(5)
     @PrimaryKey
     private TsuchishoNo tmp_tsuchishoNo;
-    @TempTableColumnOrder(28)
+    @TempTableColumnOrder(6)
     @PrimaryKey
     private int tmp_kibetsu;
-    @TempTableColumnOrder(29)
+    @TempTableColumnOrder(7)
     private Decimal tmp_choteigaku;
-    @TempTableColumnOrder(30)
+    @TempTableColumnOrder(8)
     private Decimal tmp_shunyugaku;
-    @TempTableColumnOrder(31)
+    @TempTableColumnOrder(9)
     private Decimal tmp_minogaku;
-    @TempTableColumnOrder(32)
+    @TempTableColumnOrder(10)
     private RDate tmp_nokigen;
-    @TempTableColumnOrder(33)
+    @TempTableColumnOrder(11)
     private RDate tmp_shunyuYMD;
-    @TempTableColumnOrder(34)
+    @TempTableColumnOrder(12)
     private RDate tmp_tokusokujoHakkoYMD;
-    @TempTableColumnOrder(35)
+    @TempTableColumnOrder(13)
     private FlexibleDate tmp_jikoKisanYMD;
-    @TempTableColumnOrder(36)
+    @TempTableColumnOrder(14)
     private RString tmp_jikoKisanJiyu;
-    @TempTableColumnOrder(37)
+    @TempTableColumnOrder(15)
     private RString tmp_minoKannoKubun;
-    @TempTableColumnOrder(38)
+    @TempTableColumnOrder(16)
     private RString tmp_jikoKubun;
-    @TempTableColumnOrder(39)
+    @TempTableColumnOrder(17)
     private RString tmp_tainoKubun;
 }

@@ -21,8 +21,15 @@ import jp.co.ndensan.reams.db.dbd.service.core.dbd209011.KyufuGengakuHaakuListSa
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -31,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -57,6 +65,8 @@ public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufuG
     private KyufuGengakuHaakuListSakuseiService service;
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyufugengakulist."
             + "IKyufuGengakuHaakuListSakuseiMapper.get給付額減額滞納者把握情報");
+    HokenshaNo 保険者番号;
+    RString 保険者名称;
 
     private static final int NUM5 = 5;
     private HihokenshaNo 当該被保険者番号;
@@ -72,6 +82,13 @@ public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufuG
 
     @Override
     protected void initialize() {
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        if (association != null) {
+            if (association.get地方公共団体コード() != null) {
+                保険者番号 = new HokenshaNo(association.get地方公共団体コード().getColumnValue());
+            }
+            保険者名称 = association.get市町村名();
+        }
         service = KyufuGengakuHaakuListSakuseiService.createInstance();
         調定額Map = new HashMap<>();
         収入額Map = new HashMap<>();
@@ -95,7 +112,18 @@ public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufuG
             出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.
                     create(KyufuGengakuHaakuIchiranProerty.DBD200008ShutsuryokujunEnum.class, outputOrder), NUM5);
         }
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toKyufuGengakuHaakuListSakuseiMybatisParameter(出力順));
+        if (出力順 != null && !出力順.isEmpty()) {
+            出力順 = (new RString("order by \"tmp_hihokenshaNo\",")).concat(出力順.replace("order by", ""));
+        } else {
+            出力順 = new RString("tmp_hihokenshaNo");
+        }
+
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        key.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
+        key.set基準日(parameter.get基準日());
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toKyufuGengakuHaakuListSakuseiMybatisParameter(出力順, uaFt200Psm));
     }
 
     @Override
@@ -124,8 +152,8 @@ public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufuG
         if (当該被保険者番号 != null) {
             KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity = service.edit給付額減額把握リストEntity(
                     把握情報Map, 調定額Map, 収入額Map, 未納額Map, 徴収権消滅期間Map, 納付済み期間Map, 把握情報List, 支払方法変更減額List);
-            KyufuGengakuHaakuIchiranReport report = new KyufuGengakuHaakuIchiranReport(RDateTime.now(), HokenshaNo.EMPTY,
-                    RString.EMPTY, 給付額減額把握リストEntity, outputOrder);  // QA 保険者番号
+            KyufuGengakuHaakuIchiranReport report = new KyufuGengakuHaakuIchiranReport(RDateTime.now(),
+                    保険者番号, 保険者名称, 給付額減額把握リストEntity, outputOrder);
             report.writeBy(reportSourceWriter);
         }
 
@@ -140,10 +168,9 @@ public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufuG
             if (当該被保険者番号 != null) {
                 KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity = service.edit給付額減額把握リストEntity(
                         把握情報Map, 調定額Map, 収入額Map, 未納額Map, 徴収権消滅期間Map, 納付済み期間Map, 把握情報List, 支払方法変更減額List);
-                KyufuGengakuHaakuIchiranReport report = new KyufuGengakuHaakuIchiranReport(RDateTime.now(), HokenshaNo.EMPTY,
-                        RString.EMPTY, 給付額減額把握リストEntity, outputOrder);  // QA 保険者番号
+                KyufuGengakuHaakuIchiranReport report = new KyufuGengakuHaakuIchiranReport(RDateTime.now(),
+                        保険者番号, 保険者名称, 給付額減額把握リストEntity, outputOrder);
                 report.writeBy(reportSourceWriter);
-
             }
             当該被保険者番号 = entity.get対象者TmpTblEntity().getHihokenshaNo2();
             支払方法変更減額List = new ArrayList<>();
