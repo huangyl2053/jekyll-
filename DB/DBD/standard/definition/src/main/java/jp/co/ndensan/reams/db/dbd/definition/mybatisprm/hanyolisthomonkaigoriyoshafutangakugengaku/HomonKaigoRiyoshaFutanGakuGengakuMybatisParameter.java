@@ -95,6 +95,7 @@ public class HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter implements IMyBat
     private boolean has地区3To;
     private final IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho;
     private final RString psmAtesaki;
+    private final RString 出力順;
     private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
@@ -125,7 +126,8 @@ public class HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter implements IMyBat
             RString kyakasha,
             AtenaSelectBatchParameter atenacyusyutsujyoken,
             IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
-            RString psmAtesaki) {
+            RString psmAtesaki,
+            RString 出力順) {
         this.cyusyutsuhohokubun = cyusyutsuhohokubun;
         this.cyusyutsukomokukubun = cyusyutsukomokukubun;
         this.kizyunnichi = kizyunnichi;
@@ -141,6 +143,7 @@ public class HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter implements IMyBat
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(psmShikibetsuTaisho);
         this.psmAtesaki = psmAtesaki;
+        this.出力順 = 出力順;
         set抽出方法区分();
         set年齢層抽出方法();
         set地区区分();
