@@ -102,8 +102,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
         振込単位 = DbBusinessConfig.get(ConfigNameDBC.振込単位, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         DBC050010_FurikomimeisaiFurikomiDataParameter parameter = getParameter();
 
-        if (Furikomi_ShoriTaisho.償還高額.equals(parameter.get処理対象())
-                && (振込単位 == null || 振込単位.isEmpty())) {
+        if (Furikomi_ShoriTaisho.償還高額.equals(parameter.get処理対象())) {
             振込業務内区分 = FurikomiGyomunaiKubun.償還高額;
             処理名 = ShoriName.給付振込データ作成_償還高額;
         }
