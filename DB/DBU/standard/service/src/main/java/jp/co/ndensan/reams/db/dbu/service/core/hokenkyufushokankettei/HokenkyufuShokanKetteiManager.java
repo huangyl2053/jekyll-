@@ -496,8 +496,6 @@ public class HokenkyufuShokanKetteiManager {
         } else {
             表番号 = 償還;
         }
-        予防給付より追加事業報告統計データ(processParameter.get市町村コード(), RString.EMPTY, 表番号, 保険者分, processParameter, mapper);
-        特定入所者より追加事業報告統計データ(processParameter.get市町村コード(), RString.EMPTY, 表番号, 保険者分, processParameter, mapper);
         if (市町村区分.equals(processParameter.get構成市町村区分())) {
             for (RString 市町村コード : processParameter.get構成市町村コードリスト()) {
                 予防給付より追加事業報告統計データ(市町村コード, RString.EMPTY, 表番号, 構成市町村分, processParameter, mapper);
@@ -508,6 +506,9 @@ public class HokenkyufuShokanKetteiManager {
                 予防給付より追加事業報告統計データ(RString.EMPTY, 市町村コード, 表番号, 旧市町村分, processParameter, mapper);
                 特定入所者より追加事業報告統計データ(RString.EMPTY, 市町村コード, 表番号, 旧市町村分, processParameter, mapper);
             }
+        } else {
+            予防給付より追加事業報告統計データ(processParameter.get市町村コード(), RString.EMPTY, 表番号, 保険者分, processParameter, mapper);
+            特定入所者より追加事業報告統計データ(processParameter.get市町村コード(), RString.EMPTY, 表番号, 保険者分, processParameter, mapper);
         }
     }
 
@@ -710,8 +711,14 @@ public class HokenkyufuShokanKetteiManager {
                     } else {
                         集計結果値 = sub予防給付より追加事業報告統計データ(集計番号, 市町村コード, 旧市町村コード, i, j, processParameter, mapper);
                     }
+                    RString true市町村コード;
+                    if (RString.isNullOrEmpty(市町村コード)) {
+                        true市町村コード = 旧市町村コード;
+                    } else {
+                        true市町村コード = 市町村コード;
+                    }
                     mapper.insert事業報告統計データ(processParameter.createInsert事業報告統計データMybitisParamter(
-                            市町村コード, 表番号, 集計番号, i, j, 集計結果値, 統計対象区分));
+                            true市町村コード, 表番号, 集計番号, i, j, 集計結果値, 統計対象区分));
                 }
             }
         }
