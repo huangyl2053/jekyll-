@@ -139,16 +139,16 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
     private void set負担限度額認定エリア(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div, FutanGendogakuNintei futanGendogakuNintei) {
         div.getHihokenshashoHakkoTaishoshaJoho().getTxtKeqteiKubunn().setValue(
                 futanGendogakuNintei.get決定区分() == null || futanGendogakuNintei.get決定区分().isEmpty()
-                ? RString.EMPTY : KetteiKubun.toValue(futanGendogakuNintei.get決定区分()).get名称());
+                        ? RString.EMPTY : KetteiKubun.toValue(futanGendogakuNintei.get決定区分()).get名称());
         div.getHihokenshashoHakkoTaishoshaJoho().getTxtSinnseiRiyuu().setValue(
                 futanGendogakuNintei.get申請理由区分() == null || futanGendogakuNintei.get申請理由区分().isEmpty()
-                ? RString.EMPTY : ShinseiRiyuKubun.toValue(futanGendogakuNintei.get申請理由区分()).get名称());
+                        ? RString.EMPTY : ShinseiRiyuKubun.toValue(futanGendogakuNintei.get申請理由区分()).get名称());
         div.getHihokenshashoHakkoTaishoshaJoho().getTxtFutanDankai().setValue(
                 futanGendogakuNintei.get利用者負担段階() == null || futanGendogakuNintei.get利用者負担段階().isEmpty()
-                ? RString.EMPTY : RiyoshaFutanDankai.toValue(futanGendogakuNintei.get利用者負担段階()).get名称());
+                        ? RString.EMPTY : RiyoshaFutanDankai.toValue(futanGendogakuNintei.get利用者負担段階()).get名称());
         div.getHihokenshashoHakkoTaishoshaJoho().getTxtKyusoti().setValue(
                 futanGendogakuNintei.get旧措置者区分() == null || futanGendogakuNintei.get旧措置者区分().isEmpty()
-                ? RString.EMPTY : KyuSochishaKubun.toValue(futanGendogakuNintei.get旧措置者区分()).get名称());
+                        ? RString.EMPTY : KyuSochishaKubun.toValue(futanGendogakuNintei.get旧措置者区分()).get略称());
         if (futanGendogakuNintei.is境界層該当者区分()) {
             div.getHihokenshashoHakkoTaishoshaJoho().getTxtKyoukaiso().setValue(new RString("該当"));
         } else {

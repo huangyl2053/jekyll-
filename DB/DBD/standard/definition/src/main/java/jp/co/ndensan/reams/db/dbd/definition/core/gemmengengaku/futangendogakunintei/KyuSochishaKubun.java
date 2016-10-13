@@ -11,24 +11,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KyuSochishaKubun {
 
     /**
-     * コード: 名称:非該当 略称:定義なし
+     * コード: 名称:非該当 略称:""
      */
-    非該当("", "非該当"),
+    非該当("", "非該当", ""),
     /**
-     * コード:1 名称:旧措置 略称:定義なし
+     * コード:1 名称:旧措置 略称:旧措置者
      */
-    旧措置者("1", "旧措置者"),
+    旧措置者("1", "旧措置者", "旧措置者"),
     /**
      * コード:2 名称:負担段階 略称:定義なし
      */
-    旧措置者実質的負担軽減者("2", "負担軽減者");
+    旧措置者実質的負担軽減者("2", "旧措置者実質的負担軽減者", "負担軽減者");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private KyuSochishaKubun(String code, String fullname) {
+    private KyuSochishaKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -47,6 +49,15 @@ public enum KyuSochishaKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 旧措置者区分の略称を返します。
+     *
+     * @return 旧措置者区分の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**
