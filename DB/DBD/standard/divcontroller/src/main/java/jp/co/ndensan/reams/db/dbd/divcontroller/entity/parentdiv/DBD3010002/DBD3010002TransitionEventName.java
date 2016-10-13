@@ -16,7 +16,8 @@ public enum DBD3010002TransitionEventName implements IContainerEvents {
 
     検索に戻る("検索に戻る"),
     完了("完了"),
-    検索結果一覧に戻る("検索結果一覧に戻る");
+    検索結果一覧に戻る("検索結果一覧に戻る"),
+    総合照会受給者情報("総合照会受給者情報");
 
     private final RString name;
 
