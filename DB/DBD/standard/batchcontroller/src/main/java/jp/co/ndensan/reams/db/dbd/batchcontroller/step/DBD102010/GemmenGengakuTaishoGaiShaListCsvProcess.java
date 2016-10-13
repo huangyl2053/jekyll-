@@ -121,7 +121,7 @@ public class GemmenGengakuTaishoGaiShaListCsvProcess extends BatchProcessBase<Ge
             csvWriter.writeLine(setEmptyGemmenGengakuTaishoGaiShaListCsvEntity());
         }
         csvWriter.close();
-        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         manager.spool(eucFilePath, accessLogUUID);
     }
 
