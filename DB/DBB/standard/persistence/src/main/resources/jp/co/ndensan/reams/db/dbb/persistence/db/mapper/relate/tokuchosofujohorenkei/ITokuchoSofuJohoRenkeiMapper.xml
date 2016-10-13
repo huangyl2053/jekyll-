@@ -72,10 +72,10 @@
         FROM rgdb."DbT7051KoseiShichosonMaster" as DbT7051KoseiShichosonMaster
         WHERE 
          NOT EXISTS(
-        SELECT 'X' FROM rgfa."DbT7051KoseiShichosonMaster" AS "slv"
+        SELECT 'X' FROM rgdb."DbT7051KoseiShichosonMaster" AS "slv"
         WHERE "slv"."isDeleted" = FALSE
-        AND "DbT7051KoseiShichosonMaster"."shichosonCode"    = "slv"."shichosonCode"
-        AND "DbT7051KoseiShichosonMaster"."kanyuYMD"                  <![CDATA[<]]> "slv"."kanyuYMD"
+        AND DbT7051KoseiShichosonMaster."shichosonCode"    = "slv"."shichosonCode"
+        AND DbT7051KoseiShichosonMaster."kanyuYMD"                  <![CDATA[<]]> "slv"."kanyuYMD"
         )
        AND  DbT7051KoseiShichosonMaster."gappeiKyuShichosonKubun" = '0'
         ORDER BY
