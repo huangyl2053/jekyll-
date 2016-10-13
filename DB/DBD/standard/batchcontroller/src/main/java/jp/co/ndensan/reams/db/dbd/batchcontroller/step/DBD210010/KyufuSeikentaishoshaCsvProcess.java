@@ -116,7 +116,7 @@ public class KyufuSeikentaishoshaCsvProcess extends BatchProcessBase<KyufuSeiken
     protected void afterExecute() {
         csvWriter.close();
         AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-        manager.spool(csvFilePath, id);
+        manager.spool(fileName, id);
     }
 
 }
