@@ -273,6 +273,5 @@
                 AND 収納情報."choteigaku" <![CDATA[>=]]> 収入.収入額
             </if>
         </if>
-        <!--ORDER BY #{出力順}-->
     </select>
 </mapper>

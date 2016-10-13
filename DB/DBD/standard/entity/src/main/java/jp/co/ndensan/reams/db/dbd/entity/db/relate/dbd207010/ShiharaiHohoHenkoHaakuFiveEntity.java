@@ -72,7 +72,7 @@ public class ShiharaiHohoHenkoHaakuFiveEntity {
     private FlexibleDate 資格情報_資格喪失年月日;
     private RString 資格情報_資格喪失事由コード;
     private RString 資格情報_被保険者区分コード;
-    private boolean 資格情報_住所地特例フラグ;
+    private RString 資格情報_住所地特例フラグ;
 
     private HihokenshaNo 申請中認定情報_被保険者番号;
 
