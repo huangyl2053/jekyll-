@@ -8,10 +8,9 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD9010003;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
-import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.ShugiiIkenshoKakuninshoEntity;
+import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.KenshoKakuninshoinfo;
 import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.NichijoSeikatsuJiritsudo;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010003.IkenshoKakuninshoDiv;
-import jp.co.ndensan.reams.db.dbd.service.core.iryohikojokakuninsinsei.IryoHiKojoKakuninSinsei;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -120,21 +119,20 @@ public class IkenshoKakuninshoHandler {
      * @param taishoshaKey TaishoshaKey
      * @return ShugiiIkenshoKakuninshoEntity
      */
-    public ShugiiIkenshoKakuninshoEntity create主治医意見書確認書Entity(TaishoshaKey taishoshaKey) {
-        ShugiiIkenshoKakuninshoEntity 主治医意見書確認書Entity = IryoHiKojoKakuninSinsei.createIntance().editsyujiikensho_Kakunisho(
-                taishoshaKey.get識別コード(),
-                taishoshaKey.get被保険者番号().getColumnValue(),
-                帳票分類ID,
-                div.getTxtSakuseiBi().getValue(),
-                div.getCcdBunshoBangoInput().get文書番号(),
-                div.getDdlTaishonen().getSelectedValue(),
-                div.getTxtShinseiBi().getValue(),
-                div.getTxtDateIkensyoSakuseiBi().getValue(),
-                div.getTxtNinteiKikan().getFromValue(),
-                div.getTxtNinteiKikan().getToValue(),
-                div.getTxtZiritudo().getValue(),
-                div.getTxtNyoushikkin().getValue()
-        );
+    public KenshoKakuninshoinfo create主治医意見書確認書Entity(TaishoshaKey taishoshaKey) {
+        KenshoKakuninshoinfo 主治医意見書確認書Entity = new KenshoKakuninshoinfo();
+        主治医意見書確認書Entity.set識別コード(taishoshaKey.get識別コード());
+        主治医意見書確認書Entity.set被保険者番号(taishoshaKey.get被保険者番号().getColumnValue());
+        主治医意見書確認書Entity.set帳票分類ID(帳票分類ID);
+        主治医意見書確認書Entity.set作成日(div.getTxtSakuseiBi().getValue());
+        主治医意見書確認書Entity.set文書番号(div.getCcdBunshoBangoInput().get文書番号());
+        主治医意見書確認書Entity.set対象年(div.getDdlTaishonen().getSelectedValue());
+        主治医意見書確認書Entity.set申請日(div.getTxtShinseiBi().getValue());
+        主治医意見書確認書Entity.set主治医意見書作成日(div.getTxtDateIkensyoSakuseiBi().getValue());
+        主治医意見書確認書Entity.set認定期間開始日(div.getTxtNinteiKikan().getFromValue());
+        主治医意見書確認書Entity.set認定期間終了日(div.getTxtNinteiKikan().getToValue());
+        主治医意見書確認書Entity.set日常生活自立度(div.getTxtZiritudo().getValue());
+        主治医意見書確認書Entity.set尿失禁の有無(div.getTxtNyoushikkin().getValue());
         return 主治医意見書確認書Entity;
     }
 
