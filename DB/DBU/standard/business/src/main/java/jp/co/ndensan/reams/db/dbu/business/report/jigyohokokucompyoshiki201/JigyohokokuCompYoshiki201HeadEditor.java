@@ -7,8 +7,13 @@ package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki201;
 
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokucompyoshiki201.JigyohokokuCompYoshiki201Business;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki201.JigyohokokuCompYoshiki201ReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 事業報告月報様式_01のHeadEditorです。
@@ -43,6 +48,9 @@ public class JigyohokokuCompYoshiki201HeadEditor implements IJigyohokokuCompYosh
     private static final RString 様式内容２の２ = new RString("（様式２の２）");
     private static final RString 様式内容２の３ = new RString("（様式２の３）");
     private static final RString 様式内容２の４ = new RString("（様式２の４）");
+    private static final RString DATE_時 = new RString("時");
+    private static final RString DATE_分 = new RString("分");
+    private static final RString DATE_秒 = new RString("秒");
     private final RString title3;
     private final RString 集計番号;
     private final RString 給付実績区分コード;
@@ -70,7 +78,7 @@ public class JigyohokokuCompYoshiki201HeadEditor implements IJigyohokokuCompYosh
     }
 
     private JigyohokokuCompYoshiki201ReportSource editSource(JigyohokokuCompYoshiki201ReportSource source) {
-        //source.sakuseinichiji = business.get処理日時();
+        source.sakuseinichiji = set処理日時(business.get処理日時());
         source.shorikbn = business.get年報月報区分();
         source.shukeihani = business.get集計年月();
         source.hokenjano = business.get保険者コード();
@@ -146,5 +154,20 @@ public class JigyohokokuCompYoshiki201HeadEditor implements IJigyohokokuCompYosh
             yoshiki = RString.EMPTY;
         }
         return yoshiki;
+    }
+
+    private RString set処理日時(RDateTime date) {
+        RStringBuilder printTimeStampSb = new RStringBuilder();
+        printTimeStampSb.append(date.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(String.format("%02d", date.getHour()));
+        printTimeStampSb.append(DATE_時);
+        printTimeStampSb.append(String.format("%02d", date.getMinute()));
+        printTimeStampSb.append(DATE_分);
+        printTimeStampSb.append(String.format("%02d", date.getSecond()));
+        printTimeStampSb.append(DATE_秒);
+        return printTimeStampSb.toRString();
     }
 }
