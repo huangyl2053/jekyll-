@@ -70,7 +70,7 @@ public class JigyohokokuCompYoshiki201HeadEditor implements IJigyohokokuCompYosh
     }
 
     private JigyohokokuCompYoshiki201ReportSource editSource(JigyohokokuCompYoshiki201ReportSource source) {
-        source.sakuseinichiji = business.get処理日時();
+        //source.sakuseinichiji = business.get処理日時();
         source.shorikbn = business.get年報月報区分();
         source.shukeihani = business.get集計年月();
         source.hokenjano = business.get保険者コード();
