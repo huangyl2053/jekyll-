@@ -109,7 +109,6 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
     private static final RString KIZYUNNICHI = new RString("基準日：");
     private static final RString CHOKINNOMI = new RString("対象データ：直近のみ");
     private static final RString SHIKIBETSUCODE = new RString("二次予防事業対象者_識別コード");
-    private static final RString RIREKIBANGO = new RString("二次予防事業対象者_履歴番号");
     private static final RString CHIKI_1 = new RString("地区１");
     private static final RString CHIKI_2 = new RString("地区２");
     private static final RString CHIKI_3 = new RString("地区３");
@@ -138,7 +137,6 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
     private CsvListWriter eucCsvWriter1;
     private Association association;
     private List<PersonalData> personalDataList;
-    private int i = 0;
     private boolean is帳票出力;
     private boolean isCSV出力;
     private RString csvFilePath1;
@@ -199,8 +197,8 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
     @Override
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_KokiKoreisha.csv"));
-        csvFilePath1 = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_Kokuho.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBD_JigyoTaishosha_Temp.csv"));
+        csvFilePath1 = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_JigyoTaishosha.csv"));
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -347,13 +345,10 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
                     true, true, PageBreakType.設定なし, 0, 0));
         }
         RString 出力順 = MyBatisOrderByClauseCreator.create(HanyoListJigyoTaishoshaOrderby.class, order);
-        return 出力順.concat(",後期高齢者情報_履歴番号");
+        return 出力順.concat(",二次予防事業対象者_履歴番号");
     }
 
     private void setEucCsvEntity(HanyoRisutoJigyoTaishoshaEucCsvEntity eucCsvEntity, HanyoRisutoJigyoTaishoshaEntity entity) {
-        if (processParamter.isCsvrenbanfuka()) {
-            eucCsvEntity.set連番(new RString(String.valueOf(++i)));
-        }
         if (entity.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
             eucCsvEntity.set識別コード(kojin.get識別コード().value());

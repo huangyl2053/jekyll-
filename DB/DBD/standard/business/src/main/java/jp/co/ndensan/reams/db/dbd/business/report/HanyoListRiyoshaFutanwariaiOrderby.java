@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 汎用リスト出力(利用者負担割合)のOrderbyクラスです。
  *
- * @author x_wangtt2
+ * @reamsid_L DBD-5810-030 mawy
  */
 public enum HanyoListRiyoshaFutanwariaiOrderby implements IReportItems {
 
@@ -81,24 +82,14 @@ public enum HanyoListRiyoshaFutanwariaiOrderby implements IReportItems {
     /**
      * 項目ID:0107 フォームフィールド名:資格区分(1･2) MyBatis項目名:定義なし
      */
-    資格区分("0107", "資格区分(1･2)", "被保険者台帳管理_被保険者区分コード"),
-    /**
-     * 項目ID:0403 フォームフィールド名:要介護度 MyBatis項目名:定義なし
-     */
-    要介護度("0403", "要介護度", "初回受給情報_みなし要介護区分コード"),
-    /**
-     * 項目ID:0404 フォームフィールド名:受給申請区分 MyBatis項目名:定義なし
-     */
-    受給申請区分("0404", "受給申請区分", "初回申請_要支援者認定申請区分"),
+    資格区分("0107", "資格区分(1･2)", "利用者負担割合明細_資格区分"),
     /**
      * 項目ID:0411 フォームフィールド名:認定開始日 MyBatis項目名:定義なし
      */
-    認定開始日("0411", "認定開始日", "受給者台帳_認定年月日"),
-    /**
-     * 項目ID:0405 フォームフィールド名:受給申請日 MyBatis項目名:定義なし
-     */
-    受給申請日("0405", "受給申請日", "受給者台帳_受給申請年月日");
+    認定開始日("0411", "認定開始日", "利用者負担割合明細_有効開始日");
+
     private final RString 項目ID;
+
     private final RString フォームフィールド名;
     private final RString 項目名;
 

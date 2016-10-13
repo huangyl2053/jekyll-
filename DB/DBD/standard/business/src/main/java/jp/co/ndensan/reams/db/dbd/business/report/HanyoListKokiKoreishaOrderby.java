@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 汎用リスト出力(後期高齢者)のOrderby処理クラスです。
  *
- * @author x_wangtt2
+ * @reamsid_L DBD-5520-030 panxiaobo
  */
 public enum HanyoListKokiKoreishaOrderby implements IReportItems {
 
@@ -45,7 +46,7 @@ public enum HanyoListKokiKoreishaOrderby implements IReportItems {
     /**
      * 項目ID:0009 フォームフィールド名:識別コード MyBatis項目名:定義なし
      */
-    識別コード("0009", "識別コード", "\"ShikibetsuTaisho\".\"shikibetsuCode\""),
+    識別コード("0009", "識別コード", "後期高齢者情報_識別コード"),
     /**
      * 項目ID:0010 フォームフィールド名:氏名５０音カナ MyBatis項目名:定義なし
      */
@@ -63,13 +64,9 @@ public enum HanyoListKokiKoreishaOrderby implements IReportItems {
      */
     市町村コード("0016", "市町村コード", "被保険者台帳管理_市町村コード"),
     /**
-     * 項目ID:0103 フォームフィールド名:証記載保険者番号 MyBatis項目名:定義なし
-     */
-    証記載保険者番号("0103", "証記載保険者番号", "利用者負担額減額_証記載保険者番号"),
-    /**
      * 項目ID:0104 フォームフィールド名:被保険者番号 MyBatis項目名:定義なし
      */
-    被保険者番号("0104", "被保険者番号", "利用者負担額減額_被保険者番号"),
+    被保険者番号("0104", "被保険者番号", "後期高齢者情報_被保険者番号"),
     /**
      * 項目ID:0105 フォームフィールド名:資格取得日 MyBatis項目名:定義なし
      */

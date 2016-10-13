@@ -163,7 +163,6 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
     private Association association;
     private HokenshaList hokenshaList;
     private List<PersonalData> personalDataList;
-    private int i = 0;
     private boolean is帳票出力;
     private boolean isCSV出力;
     private RString csvFilePath1;
@@ -225,8 +224,8 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
     @Override
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_RiyoshaFutanWariai.csv"));
-        csvFilePath1 = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_Kokuho.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBD_RiyoshaFutanWariai_Temp.csv"));
+        csvFilePath1 = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_RiyoshaFutanWariai.csv"));
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -376,9 +375,9 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
     }
 
     private void setEucCsvEntity(HanyoRisutoRiyoshaFutanWariaiEucCsvEntity eucCsvEntity, HanyoRisutoRiyoshaFutanWariaiEntity entity) {
-        if (processParamter.isCsvrenbanfuka()) {
-            eucCsvEntity.set連番(new RString(String.valueOf(++i)));
-        }
+//        if (processParamter.isCsvrenbanfuka()) {
+//            eucCsvEntity.set連番(new RString(String.valueOf(++i)));
+//        }
         if (entity.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
             eucCsvEntity.set識別コード(kojin.get識別コード().value());

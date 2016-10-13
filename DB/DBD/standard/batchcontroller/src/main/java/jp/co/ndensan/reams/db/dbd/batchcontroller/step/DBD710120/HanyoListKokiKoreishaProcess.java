@@ -57,15 +57,9 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder._SetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.definition.core.reportoutputorder.PageBreakType;
-import jp.co.ndensan.reams.ur.urz.definition.core.reportoutputorder.SortOrder;
-import jp.co.ndensan.reams.ur.urz.definition.core.reportyamawake.NewpageType;
-import jp.co.ndensan.reams.ur.urz.definition.core.reportyamawake.YamawakeType;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -85,7 +79,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -170,8 +163,6 @@ public class HanyoListKokiKoreishaProcess extends BatchProcessBase<HanyoRisutoKo
     private static final RString KIZYUNNICHI = new RString("基準日：");
     private static final RString NENLEIKIZYUNNICHI = new RString("年齢基準日:");
     private static final RString SOSHITSUKUBEN = new RString("喪失区分：");
-    private static final RString SHIKIBETSUCODE = new RString("後期高齢者情報_識別コード");
-    private static final RString RIREKIBANGO = new RString("後期高齢者情報_履歴番号");
     private static final RString CHIKI_1 = new RString("地区１");
     private static final RString CHIKI_2 = new RString("地区２");
     private static final RString CHIKI_3 = new RString("地区３");
@@ -199,7 +190,6 @@ public class HanyoListKokiKoreishaProcess extends BatchProcessBase<HanyoRisutoKo
     private Association association;
     private HokenshaList hokenshaList;
     private List<PersonalData> personalDataList;
-    private int i = 0;
     private boolean is帳票出力;
     private boolean isCSV出力;
     private RString csvFilePath1;
@@ -260,8 +250,8 @@ public class HanyoListKokiKoreishaProcess extends BatchProcessBase<HanyoRisutoKo
     @Override
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_KokiKoreisha.csv"));
-        csvFilePath1 = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_Kokuho.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBD_KokiKoreisha_Temp.csv"));
+        csvFilePath1 = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_KokiKoreisha.csv"));
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -397,18 +387,8 @@ public class HanyoListKokiKoreishaProcess extends BatchProcessBase<HanyoRisutoKo
     }
 
     private RString get出力順(IOutputOrder order) {
-        List<RString> 出力DB項目名 = new ArrayList();
-        List<ISetSortItem> 設定項目リスト = order.get設定項目リスト();
-        for (ISetSortItem item : 設定項目リスト) {
-            出力DB項目名.add(item.getDB項目名());
-        }
-        if (!出力DB項目名.contains(SHIKIBETSUCODE)) {
-            order.get設定項目リスト().add(new _SetSortItem(GyomuCode.DB介護保険, new RString("0009"), SHIKIBETSUCODE, NewpageType.選択不可,
-                    0, YamawakeType.設定不可, SubGyomuCode.DBD介護受給, CodeShubetsu.EMPTY, 0, SortOrder.ASCENDING,
-                    true, true, PageBreakType.設定なし, 0, 0));
-        }
         RString 出力順 = MyBatisOrderByClauseCreator.create(HanyoListKokiKoreishaOrderby.class, order);
-        return 出力順.concat(",後期高齢者情報_履歴番号");
+        return 出力順.concat(",後期高齢者情報_識別コード，後期高齢者情報_履歴番号");
     }
 
     private HanyoRisutoKokiKoreishaEucCsvEntity setBlank() {
@@ -632,9 +612,9 @@ public class HanyoListKokiKoreishaProcess extends BatchProcessBase<HanyoRisutoKo
     }
 
     private void setEucCsvEntity(HanyoRisutoKokiKoreishaEucCsvEntity eucCsvEntity, HanyoRisutoKokiKoreishaEntity entity) {
-        if (processParamter.isCsvrenbanfuka()) {
-            eucCsvEntity.set連番(new RString(String.valueOf(++i)));
-        }
+//        if (processParamter.isCsvrenbanfuka()) {
+//            eucCsvEntity.set連番(new RString(String.valueOf(++i)));
+//        }
         if (entity.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
             eucCsvEntity.set識別コード(kojin.get識別コード().value());
