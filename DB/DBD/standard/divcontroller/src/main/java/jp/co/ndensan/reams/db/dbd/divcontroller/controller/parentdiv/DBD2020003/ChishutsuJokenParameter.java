@@ -37,6 +37,8 @@ public class ChishutsuJokenParameter {
         div.getChkNinteiYukoShuryobiChushutsu().setDisabled(true);
         div.getTxtJukyuNinteibiKaishi().setDisabled(true);
         div.getTxtJukyuNinteibiShuryo().setDisabled(true);
+        div.getTxtNinteiYukoShuryobiKaishi().setDisabled(true);
+        div.getTxtNinteiYukoShuryobiShuryo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -80,6 +82,8 @@ public class ChishutsuJokenParameter {
         div.getChkNinteiYukoShuryobiChushutsu().setDisabled(true);
         div.getTxtJukyuNinteibiKaishi().setDisabled(true);
         div.getTxtJukyuNinteibiShuryo().setDisabled(true);
+        div.getTxtNinteiYukoShuryobiKaishi().setDisabled(true);
+        div.getTxtNinteiYukoShuryobiShuryo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -97,6 +101,8 @@ public class ChishutsuJokenParameter {
         div.getChkNinteiYukoShuryobiChushutsu().setDisabled(false);
         div.getTxtJukyuNinteibiKaishi().setDisabled(false);
         div.getTxtJukyuNinteibiShuryo().setDisabled(false);
+        div.getTxtNinteiYukoShuryobiKaishi().setDisabled(false);
+        div.getTxtNinteiYukoShuryobiShuryo().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
