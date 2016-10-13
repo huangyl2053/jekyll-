@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130020.TorikomiKokiKoreshaJyohoTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.TorikomiKokiKoreshaJyohoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130020.IKokikoreishaShikakuIdoInMapper;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -433,23 +435,27 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     }
 
     private void エラーチェック処理_電算２用部分1() {
-        RString 資格取得事由 = 取込後期高齢者情報Entity.get資格取得事由コード();
-        if (資格取得事由.isEmpty() || !Pattern.compile(正則表現.toString()).matcher(資格取得事由).matches()) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_56);
-            if (文言設定flag) {
-                取込後期高齢者情報Entity.setエラー文言(コード文言_資格取得事由);
-                文言設定flag = false;
+        RString 資格取得事由 = 取込後期高齢者情報Entity.get資格取得事由コード().substring(INDEX_0, INDEX_1);
+        for (ShikakuShutokuJiyu cod : ShikakuShutokuJiyu.values()) {
+            if (資格取得事由.isEmpty() && !cod.getコード().equals(資格取得事由)) {
+                取込後期高齢者情報Entity.setエラーコード(エラーコード_56);
+                if (文言設定flag) {
+                    取込後期高齢者情報Entity.setエラー文言(コード文言_資格取得事由);
+                    文言設定flag = false;
+                }
+                取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
             }
-            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
-        RString 資格喪失事由 = 取込後期高齢者情報Entity.get資格喪失事由コード();
-        if (資格取得事由.isEmpty() || !Pattern.compile(正則表現.toString()).matcher(資格喪失事由).matches()) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_58);
-            if (文言設定flag) {
-                取込後期高齢者情報Entity.setエラー文言(コード文言_資格喪失事由);
-                文言設定flag = false;
+        RString 資格喪失事由 = 取込後期高齢者情報Entity.get資格喪失事由コード().substring(INDEX_0, INDEX_1);
+        for (ShikakuSoshitsuJiyu cod : ShikakuSoshitsuJiyu.values()) {
+            if (資格喪失事由.isEmpty() && !cod.getコード().equals(資格喪失事由)) {
+                取込後期高齢者情報Entity.setエラーコード(エラーコード_58);
+                if (文言設定flag) {
+                    取込後期高齢者情報Entity.setエラー文言(コード文言_資格喪失事由);
+                    文言設定flag = false;
+                }
+                取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
             }
-            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
         RString 性別コード = 取込後期高齢者情報Entity.get性別コード();
         if (!性別コード_1.equals(性別コード) && !性別コード_2.equals(性別コード) && !性別コード_3.equals(性別コード)) {
@@ -537,15 +543,20 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         取込後期高齢者情報Entity.set資格取得事由コード(get指定位置な文字列(指定な文字列, INDEX_25, INDEX_3));
         取込後期高齢者情報Entity.set資格取得年月日(get指定位置な文字列(指定な文字列, INDEX_28, INDEX_8));
         取込後期高齢者情報Entity.set資格喪失事由コード(get指定位置な文字列(指定な文字列, INDEX_36, INDEX_3));
-        取込後期高齢者情報Entity.set資格喪失年月日(get指定位置な文字列(指定な文字列, INDEX_39, INDEX_8));
+        RString 資格喪失年月日 = get指定位置な文字列(指定な文字列, INDEX_39, INDEX_8);
+        if (is空白(資格喪失年月日)) {
+            取込後期高齢者情報Entity.set資格喪失年月日(日付_99999999);
+        } else {
+            取込後期高齢者情報Entity.set資格喪失年月日(資格喪失年月日);
+        }
         取込後期高齢者情報Entity.set保険者適用開始年月日(get指定位置な文字列(指定な文字列, INDEX_47, INDEX_8));
-        取込後期高齢者情報Entity.set保険者適用終了年月日(get指定位置な文字列(指定な文字列, INDEX_55, INDEX_62));
+        取込後期高齢者情報Entity.set保険者適用終了年月日(get指定位置な文字列(指定な文字列, INDEX_55, INDEX_8));
         取込後期高齢者情報Entity.setカナ氏名(get指定位置な文字列(指定な文字列, INDEX_63, INDEX_40));
-        取込後期高齢者情報Entity.set生年月日(get指定位置な文字列(指定な文字列, INDEX_103, INDEX_110));
+        取込後期高齢者情報Entity.set生年月日(get指定位置な文字列(指定な文字列, INDEX_103, INDEX_8));
         取込後期高齢者情報Entity.set性別コード(get指定位置な文字列(指定な文字列, INDEX_111, INDEX_1));
         取込後期高齢者情報Entity.set住所(get指定位置な文字列(指定な文字列, INDEX_128, INDEX_100));
         取込後期高齢者情報Entity.set市町村コード(get指定位置な文字列(指定な文字列, INDEX_322, INDEX_6));
-        取込後期高齢者情報Entity.set後期高齢保険者番号_市町村(get指定位置な文字列(指定な文字列, INDEX_328, INDEX_335));
+        取込後期高齢者情報Entity.set後期高齢保険者番号_市町村(get指定位置な文字列(指定な文字列, INDEX_328, INDEX_8));
     }
 
     private boolean is空白(RString value) {

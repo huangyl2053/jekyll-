@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogak
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt22006.IsShinseiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -33,6 +34,7 @@ public class FutanGengaokuNintteiKakuninListEntity {
     private RString 要介護状態区分コード;
     private RString 厚労省IF識別コード;
     private boolean 旧措置;
+    private LasdecCode 市町村コード;
     private UaFt200FindShikibetsuTaishoEntity atesakiEntity;
     private List<IsShinseiEntity> 利用軽減;
     private List<IsShinseiEntity> 訪問減額;

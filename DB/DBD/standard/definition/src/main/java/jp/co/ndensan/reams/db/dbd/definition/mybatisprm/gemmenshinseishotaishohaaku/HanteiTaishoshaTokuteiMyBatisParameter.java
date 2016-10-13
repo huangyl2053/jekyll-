@@ -25,14 +25,15 @@ public class HanteiTaishoshaTokuteiMyBatisParameter implements IMyBatisParameter
     private boolean is新規更新区分_更新;
     private boolean is施設入所区分_入所者のみ;
     private boolean is施設入所区分_入所者以外;
+    private boolean is施設入所区分_両方;
 
-    private FlexibleDate 基準日;
+    private final FlexibleDate 基準日;
     private RString 旧措置区分;
     private RString 新規更新区分;
     private RString 施設入所区分;
     private GemmenGengakuShurui 減免減額種類;
-    private FlexibleDate 前年度の開始日;
-    private FlexibleDate 前年度の終了日;
+    private final FlexibleDate 前年度の開始日;
+    private final FlexibleDate 前年度の終了日;
 
     /**
      *
@@ -86,16 +87,8 @@ public class HanteiTaishoshaTokuteiMyBatisParameter implements IMyBatisParameter
             is旧措置区分_旧措置者 = false;
             is旧措置区分_旧措置者以外 = false;
         } else {
-            if (旧措置区分_旧措置者.equals(旧措置区分)) {
-                is旧措置区分_旧措置者 = true;
-            } else {
-                is旧措置区分_旧措置者 = false;
-            }
-            if (旧措置区分_旧措置者以外.equals(旧措置区分)) {
-                is旧措置区分_旧措置者以外 = true;
-            } else {
-                is旧措置区分_旧措置者以外 = false;
-            }
+            is旧措置区分_旧措置者 = 旧措置区分_旧措置者.equals(旧措置区分);
+            is旧措置区分_旧措置者以外 = 旧措置区分_旧措置者以外.equals(旧措置区分);
         }
 
     }
@@ -103,31 +96,17 @@ public class HanteiTaishoshaTokuteiMyBatisParameter implements IMyBatisParameter
     private void set新規更新区分について(RString 新規更新区分) {
         RString 新規更新区分_新規 = new RString("新規");
         RString 新規更新区分_更新 = new RString("更新");
-        if (新規更新区分_新規.equals(新規更新区分)) {
-            is新規更新区分_新規 = true;
-        } else {
-            is新規更新区分_新規 = false;
-        }
-        if (新規更新区分_更新.equals(新規更新区分)) {
-            is新規更新区分_更新 = true;
-        } else {
-            is新規更新区分_更新 = false;
-        }
+        is新規更新区分_新規 = 新規更新区分_新規.equals(新規更新区分);
+        is新規更新区分_更新 = 新規更新区分_更新.equals(新規更新区分);
     }
 
     private void set施設入所区分について(RString 施設入所区分) {
         RString 施設入所区分_入所者のみ = new RString("入所者のみ");
         RString 施設入所区分_入所者以外 = new RString("入所者以外");
-        if (施設入所区分_入所者のみ.equals(施設入所区分)) {
-            is施設入所区分_入所者のみ = true;
-        } else {
-            is施設入所区分_入所者のみ = false;
-        }
-        if (施設入所区分_入所者以外.equals(施設入所区分)) {
-            is施設入所区分_入所者以外 = true;
-        } else {
-            is施設入所区分_入所者以外 = false;
-        }
+        RString 施設入所区分_両方 = new RString("両方");
+        is施設入所区分_入所者のみ = 施設入所区分_入所者のみ.equals(施設入所区分);
+        is施設入所区分_入所者以外 = 施設入所区分_入所者以外.equals(施設入所区分);
+        is施設入所区分_両方 = 施設入所区分_両方.equals(施設入所区分);
     }
 
 }

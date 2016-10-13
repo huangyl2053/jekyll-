@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -67,6 +68,7 @@ public class KokuhoCsvFyiiruSyutuRyokuProcess extends BatchProcessBase<TorikomiK
     @Override
     protected void afterExecute() {
         csvWriter.close();
+        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
     }
 
     private KokuhoJyohoTorikomiKakuNinCsvEntity getCsvEntity(TorikomiKokuhoJyohoEntity entity) {

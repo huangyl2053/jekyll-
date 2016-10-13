@@ -21,5 +21,4 @@ public class Shoriku {
 
     private RString 特徴同定区分;
     private RString 計算処理区分;
-
 }

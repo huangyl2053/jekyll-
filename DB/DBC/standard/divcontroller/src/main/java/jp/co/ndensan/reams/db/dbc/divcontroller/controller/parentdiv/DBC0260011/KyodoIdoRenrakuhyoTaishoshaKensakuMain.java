@@ -52,6 +52,7 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuMain {
     public ResponseData<KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv> onLoad(
             KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv div) {
         RString イベント名 = ResponseHolder.getBeforeEvent();
+        getHandler(div).click条件をクリア();
         if (イベント_対象者特定.equals(イベント名) || イベント_終了.equals(イベント名)) {
             TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             HihokenshaNo 被保番号 = 資格対象者.get被保険者番号();

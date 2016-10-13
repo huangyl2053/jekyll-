@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosofujohor
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiMybitisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 
 /**
  * 特徴送付情報連携（バッチ）のMapperクラスです。
@@ -23,5 +24,12 @@ public interface ITokuchoSofuJohoRenkeiMapper {
      * @return TokuchoSofuJohoRenkeiEntity
      */
     List<TokuchoSofuJohoRenkeiEntity> select特徴送付情報連携のデータ(TokuchoSofuJohoRenkeiMybitisParameter parameter);
+
+    /**
+     * 広域市町村情報を抽出
+     *
+     * @return DbT7051KoseiShichosonMasterEntity
+     */
+    List<DbT7051KoseiShichosonMasterEntity> select広域市町村情報();
 
 }

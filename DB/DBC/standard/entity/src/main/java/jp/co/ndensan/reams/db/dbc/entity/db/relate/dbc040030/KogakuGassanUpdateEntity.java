@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3071KogakuGassanJikoFutanGa
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuGassanUpdateEntity {
 
-    private KogakugassanJikofutangakuInfoHoseiTempEntity 中間ＤＢ自己負担額データ;
+    private KogakugassanJikofutangakuInfoHoseiTempEntity 中間DBEntity;
     private DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 高額合算自己負担額明細;
     private DbT3070KogakuGassanJikoFutanGakuEntity 高額合算自己負担額;
 

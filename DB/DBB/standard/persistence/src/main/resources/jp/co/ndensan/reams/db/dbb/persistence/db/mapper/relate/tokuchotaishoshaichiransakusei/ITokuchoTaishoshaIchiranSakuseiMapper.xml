@@ -212,6 +212,7 @@
         LEFT JOIN rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
         ON "DbT1001HihokenshaDaicho"."hihokenshaNo" = "DbT2001ChoshuHoho"."hihokenshaNo"
         AND "DbT2001ChoshuHoho"."fukaNendo" = #{処理年度}
+        AND "DbT2001ChoshuHoho"."hihokenshaNo" = #{被保険者番号}
     </select>
 
     <resultMap id="resultMap_getHihokenshaJoho" autoMapping="true"

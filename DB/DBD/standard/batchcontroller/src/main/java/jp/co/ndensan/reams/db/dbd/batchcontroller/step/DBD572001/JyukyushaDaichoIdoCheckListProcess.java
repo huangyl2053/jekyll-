@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -67,6 +66,7 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushaidochecklist."
             + "IJukyushaIdoCheckListMapper.get帳票出力対象データ");
     private IOutputOrder order = null;
+    private List<PersonalData> personalDataList;
     private RString 出力順 = RString.EMPTY;
     private static final int NUM5 = 5;
     private static final RString 申請書管理番号 = new RString("申請書管理番号");
@@ -83,6 +83,7 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
 
     @Override
     protected void initialize() {
+        personalDataList = new ArrayList<>();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         if (parameter.get出力順ID() != null) {
             order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD200037, parameter.get出力順ID());
@@ -128,15 +129,19 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
         LowerEntity lowerEntity = business.getLowerEntity(entity);
         JukyushaIdoCheckListReport report = new JukyushaIdoCheckListReport(upperEntity, lowerEntity, order);
         report.writeBy(reportSourceWriter);
+        if (entity.get申請書管理番号() != null && !entity.get申請書管理番号().isEmpty()) {
+            PersonalData personalData = PersonalData.of(entity.get識別コード(),
+                    new ExpandedInformation(new Code("0001"), 申請書管理番号, entity.get申請書管理番号().value()));
+            personalDataList.add(personalData);
+        }
     }
 
     @Override
     protected void afterExecute() {
         OutputJokenhyoFactory outputJokenhyo = new OutputJokenhyoFactory();
         outputJokenhyo.outputJokenhyoFactory(reportSourceWriter, parameter);
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
-                new ExpandedInformation(new Code("0001"), 申請書管理番号, 申請書管理番号));
-        AccessLogger.log(AccessLogType.照会, personalData);
+        AccessLogger.log(AccessLogType.照会, personalDataList);
+
     }
 
     private RString get出力順(IOutputOrder order) {

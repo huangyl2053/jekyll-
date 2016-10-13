@@ -7,7 +7,12 @@ package jp.co.ndensan.reams.db.dbc.business.report.kyufuhitsuchishofukushiyoguta
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhitsuchishofukushiyogutaiyohinmoku.KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhitsuchishofukushiyogutaiyohinmoku.KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 帳票設計_DBC100043_介護保険給付費通知書（福祉用具貸与品目）のEditorです。
@@ -18,8 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor implements IKyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor {
 
     private final KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity item;
-    private int index;
-    private static final int PAGECOUNT = 25;
 
     /**
      * インスタンスを生成します。
@@ -29,7 +32,6 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor implements IKyufuhiTs
      */
     protected KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor(KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity item, int index) {
         this.item = item;
-        this.index = index;
     }
 
     @Override
@@ -40,10 +42,13 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor implements IKyufuhiTs
     private KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource editSource(KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource source) {
         source.hihokenshaName = item.get被保険者氏名();
         source.hokenshaNo = item.get被保険者番号();
-        source.shukeiserviceSTYM = item.getサービス集計開始年月();
-        source.shukeiserviceEDYM = item.getサービス集計終了年月();
+        source.shukeiserviceSTYM = new FlexibleDate(item.getサービス集計開始年月()).wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.shukeiserviceEDYM = new FlexibleDate(item.getサービス集計終了年月()).wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.tsuchibun1 = item.get通知文1();
-        source.listRiyoFukushiyogu_1 = item.getサービス年月();
+        source.listRiyoFukushiyogu_1 = new FlexibleDate(item.getサービス年月()).wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.listRiyoFukushiyogu_2 = item.getサービス事業所();
         source.listRiyoFukushiyogu_3 = item.getタイコード();
         source.listRiyoFukushiyogu_4 = item.get福祉用具商品名();
@@ -73,23 +78,8 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor implements IKyufuhiTs
         source.listSankouShiryoKokyoDantaiBetsuIchiran3_2 = item.get都道府県3();
         source.listSankouShiryoKokyoDantaiBetsuIchiran3_3 = item.get保険者3();
         source.tsuchibun3 = item.get通知文3();
-        getイメージ03(item);
         source.pageBunshi = new RString(item.getページ分子());
         source.pageBunbo = new RString(item.getページ分母());
         return source;
-    }
-
-    private void getイメージ03(KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity item) {
-        index = index + 1;
-        if (index % PAGECOUNT > 0) {
-            item.setページ分子((index - (index % PAGECOUNT)) / PAGECOUNT + 1);
-        } else {
-            item.setページ分子(index / PAGECOUNT);
-        }
-        if (item.getCount() % PAGECOUNT > 0) {
-            item.setページ分母((item.getCount() - (item.getCount() % PAGECOUNT)) / PAGECOUNT + 1);
-        } else {
-            item.setページ分母(item.getCount() / PAGECOUNT);
-        }
     }
 }

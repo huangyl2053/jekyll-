@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -41,7 +42,17 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
     private InsTorikomiKokuhoJyohoTempProcessParameter processParameter;
     @BatchWriter
     private IBatchTableWriter<TorikomiKokuhoJyohoEntity> torikomiKokuhoJyohoWriter;
+    /**
+     * プロセス戻り値：対象月データありなしフラグ
+     */
+    public static final RString OUT_HAS_TARGET_DATA;
+
+    private OutputParameter<Boolean> 文言_設定_FLAG;
     private boolean 文言設定flag;
+
+    static {
+        OUT_HAS_TARGET_DATA = new RString("文言_設定_FLAG");
+    }
     private TorikomiKokuhoJyohoEntity 取込国保情報Entity;
     private List<LasdecCode> 市町村コードリスト;
     private static final int 四 = 4;
@@ -164,6 +175,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
         FilesystemPath filesystemPath = new FilesystemPath(tmpPath);
         filePath = new RString(filesystemPath.getCanonicalPath()).concat(ファイル名称);
         市町村コードリスト = getMapper(IKokuhoShikakuIdoInMapper.class).get構成市町村マスタ();
+        文言_設定_FLAG = new OutputParameter<>();
     }
 
     @Override
@@ -216,6 +228,11 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
             エラーチェック処理_電算２();
         }
         torikomiKokuhoJyohoWriter.insert(取込国保情報Entity);
+    }
+
+    @Override
+    protected void afterExecute() {
+        文言_設定_FLAG.setValue(文言設定flag);
     }
 
     private RString get指定バイト数な文字列(int 指定バイト数, RString 判断文字列) {

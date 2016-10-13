@@ -138,6 +138,7 @@ public class HanyoListParamHandler {
     private static final RString 申請者データ抽出KEY = new RString(0);
     private static final RString 事業対象者負担１割KEY = new RString("key0");
     private static final RString 事業対象者負担２割KEY = new RString("key1");
+    private static final RString 空白行KEY = new RString("key0");
     private static final boolean 非表示 = true;
     private static final boolean 表示 = false;
     private static final RString 汎用リスト_施設入退所_基準日TEXT = new RString("時点での施設入所者");
@@ -221,7 +222,9 @@ public class HanyoListParamHandler {
                 年度選択肢.add(new KeyValueDataSource(開始年度.toDateString(), 開始年度.wareki().eraType(EraType.KANJI).toDateString()));
                 開始年度 = 開始年度.plusYear(年度_1);
             }
+            年度選択肢.add(new KeyValueDataSource(空白行KEY, RString.EMPTY));
             div.getDdlKijunNendo().setDataSource(年度選択肢);
+            div.getDdlKijunNendo().setSelectedKey(NendoUtil.getNendo(RDate.getNowDate()).toDateString());
         } else {
             div.getDdlKijunNendo().setIsBlankLine(true);
         }
@@ -506,6 +509,8 @@ public class HanyoListParamHandler {
         if (!div.getTxtChushutsuHani().isDisplayNone()) {
             div.getTxtChushutsuHani().setDisabled(is基準日RbSelected);
         }
+        div.getTxtChushutsuHani().clearFromValue();
+        div.getTxtChushutsuHani().clearToValue();
     }
 
     /**

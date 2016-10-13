@@ -33,6 +33,7 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
     private static final RString RSTRING_20 = new RString("20");
     private static final RString RSTRING_01 = new RString("01");
     private static final Decimal DECIMAL_38 = new Decimal(380000);
+    private static final Decimal DECIMAL_33 = new Decimal(330000);
     private static final Decimal DECIMAL_12 = new Decimal(120000);
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji."
             + "IKijunsyunyunenjiMapper.対象世帯員クラスTempに更新4");
@@ -131,7 +132,7 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
                 ageLess16++;
             }
 
-            if ((RSTRING_16.compareTo(対象世帯員2.getAge()) <= 0 && 対象世帯員2.getAge().compareTo(RSTRING_18) <= 0)
+            if (null != 対象世帯員2.getAge() && (RSTRING_16.compareTo(対象世帯員2.getAge()) <= 0 && 対象世帯員2.getAge().compareTo(RSTRING_18) <= 0)
                     && (this.getDecimal(対象世帯員2.getNenkinShunyuGaku())
                     .add(this.getDecimal(対象世帯員2.getSonotanoGoukeiShotokuKingakuGoukei())).compareTo(DECIMAL_38) <= 0)
                     && (対象世帯員2.getAtenaDateDhubetsu_1231().equals(RSTRING_10) || 対象世帯員2.getAtenaDateDhubetsu_1231().equals(RSTRING_20))) {
@@ -155,7 +156,7 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
     private void get課税所得_控除後(TaishoSetaiinEntity 対象世帯員1) {
         Decimal 控除後;
         if (識別コードFlgSet.contains(対象世帯員1.getShikibetsuCode().getColumnValue())) {
-            控除後 = getDecimal(対象世帯員1.getKazeiShotokuGaku()).subtract(DECIMAL_38.multiply(this.ageLess16).add(DECIMAL_12.multiply(this.age16_18)));
+            控除後 = getDecimal(対象世帯員1.getKazeiShotokuGaku()).subtract(DECIMAL_33.multiply(this.ageLess16).add(DECIMAL_12.multiply(this.age16_18)));
             if (控除後.compareTo(Decimal.ZERO) < 0) {
                 控除後 = Decimal.ZERO;
             }

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhituchihakkoichiran.Kyufuhi
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -90,14 +91,15 @@ public class KyufuhiTuchiHakkoIchiranEditor implements IKyufuhiTuchiHakkoIchiran
         source.listCenter_10 = item.get日数_回数();
         if (item.get利用者負担額_円() != null) {
             source.listCenter_11 = DecimalFormatter.
-                    toコンマ区切りRString(new Decimal(item.get利用者負担額_円().toString()), 0);
+                    toコンマ区切りRString(new Decimal(item.get利用者負担額_円().toString()), 0).concat("円");
         }
         if (item.getサービス費用_円() != null) {
             source.listCenter_12 = DecimalFormatter.
-                    toコンマ区切りRString(new Decimal(item.getサービス費用_円().toString()), 0);
+                    toコンマ区切りRString(new Decimal(item.getサービス費用_円().toString()), 0).concat("円");
         }
         source.listCenter_13 = item.get要介護度();
-        source.listCenter_14 = item.get資格喪失日();
+        source.listCenter_14 = new FlexibleDate(item.get資格喪失日()).wareki()
+                .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         source.listCenter_15 = item.get喪失事由();
         source.listCenter_16 = item.get補正有無();
         source.listHihokenshaNo_1 = item.get被保険者氏名();

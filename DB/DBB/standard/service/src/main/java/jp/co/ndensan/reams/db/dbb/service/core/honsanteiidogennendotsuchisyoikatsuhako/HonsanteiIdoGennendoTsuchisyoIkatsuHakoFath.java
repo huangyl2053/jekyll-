@@ -14,16 +14,13 @@ import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempResult;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.CharacteristicsPhase;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.ShunyuJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NotsuKozaShutsuryokuTaisho;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2017TsuchishoHakkogoIdoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
@@ -32,9 +29,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidogennendotsuchisyo
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2017TsuchishoHakkogoIdoshaDac;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoIkkatsuHakkoFath;
-import jp.co.ndensan.reams.db.dbb.service.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoPrintService;
-import jp.co.ndensan.reams.db.dbb.service.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoPrintService;
-import jp.co.ndensan.reams.db.dbb.service.report.nonyutsuchishocvskigoto.NonyuTsuchishoCVSKigotoPrintService;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
@@ -72,7 +66,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -146,8 +139,6 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
     private static final RString タイトル_本徴収額_2月 = new RString("本徴収額（2月）");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200001");
     private static final RString 特別徴収_EUCファイル名 = new RString("TokubetsuChoshuKaishiTsuchishoKairiHakkoIchiranData.csv");
-    private static final EucEntityId 特別徴収依頼金額明細_EUC_ENTITY_ID = new EucEntityId("DBB200023");
-    private static final RString 特別徴収依頼金額明細_EUCファイル名 = new RString("TokubetsuChoshuIraikingakuMeisaiIchiran.csv");
     private static final RString カンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString FORMAT_LEFT = new RString("【");
@@ -171,19 +162,6 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
     private static final RString タイトル_仮徴収額_4月 = new RString("仮徴収額（4月）");
     private static final RString タイトル_仮徴収額_6月 = new RString("仮徴収額（6月）");
     private static final RString タイトル_仮徴収額_8月 = new RString("仮徴収額（8月）");
-    private static final RString タイトル_保険者コード = new RString("保険者コード");
-    private static final RString タイトル_保険者名 = new RString("保険者名");
-    private static final RString タイトル_識別コード = new RString("識別コード");
-    private static final RString タイトル_年金コード = new RString("年金コード");
-    private static final RString タイトル_住所コード = new RString("住所コード");
-    private static final RString タイトル_年金番号 = new RString("年金番号");
-    private static final RString タイトル_取得段階 = new RString("取得段階");
-    private static final RString タイトル_基準年度保険料率 = new RString("基準年度保険料率");
-    private static final RString タイトル_基準年度最終期標準額 = new RString("基準年度最終期標準額");
-    private static final RString タイトル_特徴捕捉月 = new RString("特徴捕捉月");
-    private static final RString タイトル_特徴開始月 = new RString("特徴開始月");
-    private static final RString タイトル_依頼金額 = new RString("依頼金額");
-    private static final RString タイトル_備考 = new RString("備考");
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString 定値_半角ハイフン = new RString("-");
     private static final RString 定値区分_0 = new RString("0");
@@ -210,44 +188,6 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
      */
     public static HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath createInstance() {
         return InstanceProvider.create(HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath.class);
-    }
-
-    /**
-     * 納入通知書の発行するメソッドです。
-     *
-     * @param 帳票ID ReportId
-     * @param 本算定納入通知書情報 HonSanteiNonyuTsuchiShoJoho
-     * @param reportManager ReportManager
-     */
-    public void publish納入通知書本算定(ReportId 帳票ID, HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, ReportManager reportManager) {
-
-        if (ReportIdDBB.DBB100045.getReportId().equals(帳票ID) || ReportIdDBB.DBB100046.getReportId().equals(帳票ID)) {
-            new HokenryoNonyuTsuchishoKigotoPrintService().print(本算定納入通知書情報, reportManager);
-//        } else if (ReportIdDBB.DBB100053.getReportId().equals(帳票ID)) {
-//            // return ReportIdDBB.DBB100053.getReportName();
-//        } else if (ReportIdDBB.DBB100054.getReportId().equals(帳票ID)) {
-//            // return ReportIdDBB.DBB100054.getReportName();
-//        } else if (ReportIdDBB.DBB100051.getReportId().equals(帳票ID)) {
-//            //  return ReportIdDBB.DBB100051.getReportName();
-//        } else if (ReportIdDBB.DBB100052.getReportId().equals(帳票ID)) {
-//            //  return ReportIdDBB.DBB100052.getReportName();
-//        } else if (ReportIdDBB.DBB100056.getReportId().equals(帳票ID)) {
-//            //  return ReportIdDBB.DBB100056.getReportName();
-//        } else if (ReportIdDBB.DBB100058.getReportId().equals(帳票ID)) {
-//            // return ReportIdDBB.DBB100058.getReportName();
-//        } else if (ReportIdDBB.DBB100055.getReportId().equals(帳票ID)) {
-//            // return ReportIdDBB.DBB100055.getReportName();
-//        } else if (ReportIdDBB.DBB100057.getReportId().equals(帳票ID)) {
-//            // return ReportIdDBB.DBB100057.getReportName();
-//        } else if (ReportIdDBB.DBB100061.getReportId().equals(帳票ID)) {
-//            new NonyuTsuchishoCVSMultiPrintService().print(本算定納入通知書情報, reportManager);
-//        } else if (ReportIdDBB.DBB100062.getReportId().equals(帳票ID)) {
-//            //  return ReportIdDBB.DBB100062.getReportName();
-        } else if (ReportIdDBB.DBB100059.getReportId().equals(帳票ID) || ReportIdDBB.DBB100060.getReportId().equals(帳票ID)) {
-            new NonyuTsuchishoCVSKakukoPrintService().print(本算定納入通知書情報, reportManager);
-        } else if (ReportIdDBB.DBB100063.getReportId().equals(帳票ID) || ReportIdDBB.DBB100064.getReportId().equals(帳票ID)) {
-            new NonyuTsuchishoCVSKigotoPrintService().print(本算定納入通知書情報, reportManager);
-        }
     }
 
     /**
@@ -505,160 +445,6 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
     }
 
     /**
-     * 特別徴収依頼金額明細一覧表CSVの出力メソッドです。
-     *
-     * @param 調定年度 FlexibleYear
-     * @param 帳票作成日時 RDateTime
-     * @param 地方公共団体 Association
-     * @param 仮算定特徴開始通知書情報List List<KariTokuchoKaishiTsuchisyoJoho>
-     */
-    public void publish特別徴収依頼金額明細一覧表(FlexibleYear 調定年度, RDateTime 帳票作成日時, Association 地方公共団体,
-            List<KariTokuchoKaishiTsuchisyoJoho> 仮算定特徴開始通知書情報List) {
-
-        List<RString> headerList = new ArrayList<>();
-        headerList.add(タイトル_作成年月日);
-        headerList.add(タイトル_作成時刻);
-        headerList.add(タイトル_賦課年度);
-        headerList.add(タイトル_保険者コード);
-        headerList.add(タイトル_保険者名);
-        headerList.add(タイトル_通知書番号);
-        headerList.add(タイトル_識別コード);
-        headerList.add(タイトル_行政区コード);
-        headerList.add(タイトル_年金コード);
-        headerList.add(タイトル_住所);
-        headerList.add(タイトル_町域_管内_管外住所);
-        headerList.add(タイトル_番地);
-        headerList.add(タイトル_特別徴収業務者コード);
-        headerList.add(タイトル_特別徴収業務者);
-        headerList.add(タイトル_被保険者番号);
-        headerList.add(タイトル_世帯コード);
-        headerList.add(タイトル_住所コード);
-        headerList.add(タイトル_年金番号);
-        headerList.add(タイトル_被保険者氏名);
-        headerList.add(タイトル_特別徴収対象年金);
-        headerList.add(タイトル_取得段階);
-        headerList.add(タイトル_基準年度保険料率);
-        headerList.add(タイトル_基準年度最終期標準額);
-        headerList.add(タイトル_特徴捕捉月);
-        headerList.add(タイトル_特徴開始月);
-        headerList.add(タイトル_依頼金額);
-        headerList.add(タイトル_備考);
-
-        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
-                特別徴収依頼金額明細_EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, 特別徴収依頼金額明細_EUCファイル名);
-        try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
-                .setDelimiter(カンマ)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setEncode(Encode.UTF_8withBOM)
-                .hasHeader(true).setHeader(headerList)
-                .build()) {
-            for (KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報 : 仮算定特徴開始通知書情報List) {
-                List<RString> bodyList = new ArrayList<>();
-                bodyList.add(帳票作成日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
-                bodyList.add(帳票作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
-                bodyList.add(調定年度.toDateString());
-                bodyList.add(地方公共団体.get地方公共団体コード().getColumnValue());
-                bodyList.add(地方公共団体.get市町村名());
-
-                EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報();
-                bodyList.add(isNull(編集後仮算定通知書共通情報.get通知書番号())
-                        ? RString.EMPTY : 編集後仮算定通知書共通情報.get通知書番号().getColumnValue());
-                bodyList.add(isNull(編集後仮算定通知書共通情報.get識別コード())
-                        ? RString.EMPTY : 編集後仮算定通知書共通情報.get識別コード().getColumnValue());
-                if (isNull(編集後仮算定通知書共通情報.get編集後宛先())) {
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(isNull(編集後仮算定通知書共通情報.get編集後宛先().get行政区コード())
-                            ? RString.EMPTY : 編集後仮算定通知書共通情報.get編集後宛先().get行政区コード().getColumnValue());
-                }
-                if (isNull(編集後仮算定通知書共通情報.get更正後())) {
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(編集後仮算定通知書共通情報.get更正後().get更正後特別徴収対象年金コード());
-                }
-                if (isNull(編集後仮算定通知書共通情報.get編集後宛先())) {
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(編集後仮算定通知書共通情報.get編集後宛先().get編集後住所());
-                    bodyList.add(編集後仮算定通知書共通情報.get編集後宛先().get町域());
-                    bodyList.add(編集後仮算定通知書共通情報.get編集後宛先().get番地());
-                }
-                if (isNull(編集後仮算定通知書共通情報.get更正後())) {
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(編集後仮算定通知書共通情報.get更正後().get更正後特別徴収義務者コード());
-                    bodyList.add(編集後仮算定通知書共通情報.get更正後().get更正後特別徴収義務者());
-                }
-                bodyList.add(isNull(編集後仮算定通知書共通情報.get被保険者番号())
-                        ? RString.EMPTY : 編集後仮算定通知書共通情報.get被保険者番号().getColumnValue());
-                if (isNull(編集後仮算定通知書共通情報.get編集後個人())) {
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(isNull(編集後仮算定通知書共通情報.get編集後個人().get世帯コード())
-                            ? RString.EMPTY : 編集後仮算定通知書共通情報.get編集後個人().get世帯コード().getColumnValue());
-                }
-                if (isNull(編集後仮算定通知書共通情報.get編集後宛先()) || isNull(編集後仮算定通知書共通情報.get編集後宛先().get住所コード())) {
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(編集後仮算定通知書共通情報.get編集後宛先().get住所コード().getColumnValue());
-                }
-                set特別徴収依頼金額明細一覧表(編集後仮算定通知書共通情報, bodyList);
-                bodyList.add(仮算定特徴開始通知書情報.get特徴捕捉月());
-                bodyList.add(特徴開始月);
-                if (isNull(編集後仮算定通知書共通情報.get更正後())) {
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(isNull(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額01()) ? RString.EMPTY
-                            : DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額01(), 0));
-                }
-                bodyList.add(RString.EMPTY);
-                toBodyList(bodyList);
-                csvListWriter.writeLine(bodyList);
-            }
-            csvListWriter.close();
-            manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
-        }
-    }
-
-    private void set特別徴収依頼金額明細一覧表(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報, List<RString> bodyList) {
-
-        if (isNull(編集後仮算定通知書共通情報.get更正後())) {
-            bodyList.add(RString.EMPTY);
-        } else {
-            bodyList.add(編集後仮算定通知書共通情報.get更正後().get更正後特別徴収対象年金コード());
-        }
-        if (isNull(編集後仮算定通知書共通情報.get編集後個人())) {
-            bodyList.add(RString.EMPTY);
-        } else {
-            bodyList.add(isNull(編集後仮算定通知書共通情報.get編集後個人().get名称())
-                    ? RString.EMPTY : 編集後仮算定通知書共通情報.get編集後個人().get名称().getName().getColumnValue());
-        }
-        if (isNull(編集後仮算定通知書共通情報.get更正後())) {
-            bodyList.add(RString.EMPTY);
-            bodyList.add(RString.EMPTY);
-        } else {
-            bodyList.add(編集後仮算定通知書共通情報.get更正後().get更正後特別徴収対象年金());
-            bodyList.add(RString.isNullOrEmpty(編集後仮算定通知書共通情報.get更正後().get保険料段階()) ? RString.EMPTY
-                    : DecimalFormatter.toコンマ区切りRString(new Decimal(編集後仮算定通知書共通情報.get更正後().get保険料段階().toString()), 0));
-        }
-        if (isNull(編集後仮算定通知書共通情報.get前年度情報())) {
-            bodyList.add(RString.EMPTY);
-            bodyList.add(RString.EMPTY);
-        } else {
-            bodyList.add(isNull(編集後仮算定通知書共通情報.get前年度情報().get前年度保険料率()) ? RString.EMPTY
-                    : DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get前年度情報().get前年度保険料率(), 0));
-            bodyList.add(isNull(編集後仮算定通知書共通情報.get前年度情報().get前年度最終期特徴期別介護保険料()) ? RString.EMPTY
-                    : DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get前年度情報().get前年度最終期特徴期別介護保険料(), 0));
-        }
-
-    }
-
-    /**
      * 決定変更通知書発行一覧表ＣＳＶの出力メソッドです。
      *
      * @param 帳票作成日時 RDateTime
@@ -812,18 +598,11 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
     }
 
     /**
-     * 納入通知書発行一覧表ＣＳＶの出力メソッドです。
+     * 納入通知書発行一覧表タイトルList取得するメソッドです。
      *
-     * @param 帳票作成日時 RDateTime
-     * @param 賦課年度 FlexibleYear
-     * @param 出力期 RString
-     * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
-     * @param eucEntityId EucEntityId
-     * @param eucFileName RString
+     * @return List<RString> 納入通知書発行一覧表タイトルList
      */
-    public void publish納入通知書発行一覧表(RDateTime 帳票作成日時, FlexibleYear 賦課年度, RString 出力期,
-            List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, EucEntityId eucEntityId, RString eucFileName) {
-
+    public List<RString> get納入通知書発行一覧表タイトルList() {
         List<RString> headerList = new ArrayList<>();
         headerList.add(タイトル_作成日時);
         headerList.add(タイトル_作成時刻);
@@ -853,108 +632,106 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
         headerList.add(タイトル_今後納付すべき額);
         headerList.add(タイトル_次期以降);
         headerList.add(タイトル_口座情報);
+        return headerList;
+    }
 
-        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
-                eucEntityId, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, eucFileName);
-        try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
-                .setDelimiter(カンマ)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setEncode(Encode.UTF_8withBOM)
-                .hasHeader(true).setHeader(headerList)
-                .build()) {
-            for (EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
-                List<RString> bodyList = new ArrayList<>();
-                bodyList.add(帳票作成日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
-                bodyList.add(帳票作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
-                bodyList.add(賦課年度.toDateString());
-                bodyList.add(isNull(編集後本算定通知書共通情報.get通知書番号())
-                        ? RString.EMPTY : 編集後本算定通知書共通情報.get通知書番号().getColumnValue());
-                bodyList.add(isNull(編集後本算定通知書共通情報.get被保険者番号())
-                        ? RString.EMPTY : 編集後本算定通知書共通情報.get被保険者番号().getColumnValue());
-                if (isNull(編集後本算定通知書共通情報.get編集後個人())) {
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(isNull(編集後本算定通知書共通情報.get編集後個人().get世帯コード())
-                            ? RString.EMPTY : 編集後本算定通知書共通情報.get編集後個人().get世帯コード().getColumnValue());
-                }
-                if (isNull(編集後本算定通知書共通情報.get表示コード())) {
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(編集後本算定通知書共通情報.get表示コード().get表示コード名１());
-                    bodyList.add(編集後本算定通知書共通情報.get表示コード().get表示コード名２());
-                    bodyList.add(編集後本算定通知書共通情報.get表示コード().get表示コード名３());
-                    bodyList.add(編集後本算定通知書共通情報.get表示コード().get表示コード１());
-                    bodyList.add(編集後本算定通知書共通情報.get表示コード().get表示コード２());
-                    bodyList.add(編集後本算定通知書共通情報.get表示コード().get表示コード３());
-                }
-                if (isNull(編集後本算定通知書共通情報.get編集後宛先())) {
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(isNull(編集後本算定通知書共通情報.get編集後宛先().get行政区コード())
-                            ? RString.EMPTY : 編集後本算定通知書共通情報.get編集後宛先().get行政区コード().getColumnValue());
-                    bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get行政区名());
-                }
-                if (isNull(編集後本算定通知書共通情報.get更正後())) {
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(isNull(編集後本算定通知書共通情報.get更正後().get確定保険料_年額())
-                            ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額().toString()));
-                }
-                set当期(編集後本算定通知書共通情報, 出力期, bodyList);
-                set納付人_送付先(編集後本算定通知書共通情報, bodyList);
-
-                if (isNull(編集後本算定通知書共通情報.get更正後())) {
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(編集後本算定通知書共通情報.get更正後().get生保開始日_西暦());
-                }
-                if (isNull(編集後本算定通知書共通情報.get更正後())
-                        || RString.isNullOrEmpty(編集後本算定通知書共通情報.get更正後().get生活保護扶助種類())) {
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    RString 生活保護扶助名称 = CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系,
-                            URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
-                            new Code(編集後本算定通知書共通情報.get更正後().get生活保護扶助種類()));
-                    bodyList.add(生活保護扶助名称);
-                }
-
-                if (isNull(編集後本算定通知書共通情報.get編集後宛先())) {
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(isNull(編集後本算定通知書共通情報.get編集後宛先().get本人名称())
-                            ? RString.EMPTY : 編集後本算定通知書共通情報.get編集後宛先().get本人名称().getName().getColumnValue());
-                    bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get郵便番号());
-                    bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get編集後住所());
-                    bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get町域());
-                    bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get番地());
-                }
-                if (isNull(編集後本算定通知書共通情報.get更正後())) {
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(編集後本算定通知書共通情報.get更正後().get保険料段階());
-                }
-                bodyList.add(isNull(編集後本算定通知書共通情報.get今後納付すべき額())
-                        ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString()));
-                set次期以降(編集後本算定通知書共通情報, 出力期, bodyList);
-                bodyList.add(get口座情報(編集後本算定通知書共通情報));
-                toBodyList(bodyList);
-                csvListWriter.writeLine(bodyList);
-            }
-            csvListWriter.close();
-            manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
+    /**
+     * 納入通知書発行一覧表bodyList取得するメソッドです。
+     *
+     * @param 賦課年度 FlexibleYear
+     * @param 出力期 RString
+     * @param 帳票作成日時 RDateTime
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
+     * @return List<RString> 納入通知書発行一覧表bodyList
+     */
+    public List<RString> get納入通知書発行一覧表bodyList(FlexibleYear 賦課年度, RString 出力期, RDateTime 帳票作成日時,
+            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
+        List<RString> bodyList = new ArrayList<>();
+        bodyList.add(帳票作成日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
+        bodyList.add(帳票作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
+        bodyList.add(賦課年度.toDateString());
+        bodyList.add(isNull(編集後本算定通知書共通情報.get通知書番号())
+                ? RString.EMPTY : 編集後本算定通知書共通情報.get通知書番号().getColumnValue());
+        bodyList.add(isNull(編集後本算定通知書共通情報.get被保険者番号())
+                ? RString.EMPTY : 編集後本算定通知書共通情報.get被保険者番号().getColumnValue());
+        if (isNull(編集後本算定通知書共通情報.get編集後個人())) {
+            bodyList.add(RString.EMPTY);
+        } else {
+            bodyList.add(isNull(編集後本算定通知書共通情報.get編集後個人().get世帯コード())
+                    ? RString.EMPTY : 編集後本算定通知書共通情報.get編集後個人().get世帯コード().getColumnValue());
         }
+        if (isNull(編集後本算定通知書共通情報.get表示コード())) {
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+        } else {
+            bodyList.add(編集後本算定通知書共通情報.get表示コード().get表示コード名１());
+            bodyList.add(編集後本算定通知書共通情報.get表示コード().get表示コード名２());
+            bodyList.add(編集後本算定通知書共通情報.get表示コード().get表示コード名３());
+            bodyList.add(編集後本算定通知書共通情報.get表示コード().get表示コード１());
+            bodyList.add(編集後本算定通知書共通情報.get表示コード().get表示コード２());
+            bodyList.add(編集後本算定通知書共通情報.get表示コード().get表示コード３());
+        }
+        if (isNull(編集後本算定通知書共通情報.get編集後宛先())) {
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+        } else {
+            bodyList.add(isNull(編集後本算定通知書共通情報.get編集後宛先().get行政区コード())
+                    ? RString.EMPTY : 編集後本算定通知書共通情報.get編集後宛先().get行政区コード().getColumnValue());
+            bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get行政区名());
+        }
+        if (isNull(編集後本算定通知書共通情報.get更正後())) {
+            bodyList.add(RString.EMPTY);
+        } else {
+            bodyList.add(isNull(編集後本算定通知書共通情報.get更正後().get確定保険料_年額())
+                    ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額().toString()));
+        }
+        set当期(編集後本算定通知書共通情報, 出力期, bodyList);
+        set納付人_送付先(編集後本算定通知書共通情報, bodyList);
+
+        if (isNull(編集後本算定通知書共通情報.get更正後())) {
+            bodyList.add(RString.EMPTY);
+        } else {
+            bodyList.add(編集後本算定通知書共通情報.get更正後().get生保開始日_西暦());
+        }
+        if (isNull(編集後本算定通知書共通情報.get更正後())
+                || RString.isNullOrEmpty(編集後本算定通知書共通情報.get更正後().get生活保護扶助種類())) {
+            bodyList.add(RString.EMPTY);
+        } else {
+            RString 生活保護扶助名称 = CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系,
+                    URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
+                    new Code(編集後本算定通知書共通情報.get更正後().get生活保護扶助種類()));
+            bodyList.add(生活保護扶助名称);
+        }
+
+        if (isNull(編集後本算定通知書共通情報.get編集後宛先())) {
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+        } else {
+            bodyList.add(isNull(編集後本算定通知書共通情報.get編集後宛先().get本人名称())
+                    ? RString.EMPTY : 編集後本算定通知書共通情報.get編集後宛先().get本人名称().getName().getColumnValue());
+            bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get郵便番号());
+            bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get編集後住所());
+            bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get町域());
+            bodyList.add(編集後本算定通知書共通情報.get編集後宛先().get番地());
+        }
+        if (isNull(編集後本算定通知書共通情報.get更正後())) {
+            bodyList.add(RString.EMPTY);
+        } else {
+            bodyList.add(編集後本算定通知書共通情報.get更正後().get保険料段階());
+        }
+        bodyList.add(isNull(編集後本算定通知書共通情報.get今後納付すべき額())
+                ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString()));
+        set次期以降(編集後本算定通知書共通情報, 出力期, bodyList);
+        bodyList.add(get口座情報(編集後本算定通知書共通情報));
+        toBodyList(bodyList);
+        return bodyList;
     }
 
     private void set納付人_送付先(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報, List<RString> bodyList) {
@@ -1178,6 +955,41 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFath {
             通知書発行後異動者Dac.save(dbt2017entity);
             連番 = 連番 + INT_1;
         }
+    }
+
+    /**
+     * 賦課情報を取得するメソッドです。
+     *
+     * @param entity HonsanteiTsuchishoTempEntity
+     * @return HonsanteiTsuchishoTempResult 賦課情報
+     * @throws java.lang.reflect.InvocationTargetException 賦課の情報_更正前後が取得できない場合、Exception
+     */
+    public HonsanteiTsuchishoTempResult get賦課情報(HonsanteiTsuchishoTempEntity entity) throws InvocationTargetException {
+
+        HonsanteiTsuchishoTempResult result = new HonsanteiTsuchishoTempResult();
+        result.set計算後情報_更正後(entity.get計算後情報_更正後());
+        result.set計算後情報_更正前(entity.get計算後情報_更正前());
+        result.set賦課の情報_更正前(get賦課の情報_更正前後(entity, false));
+        result.set賦課の情報_更正後(get賦課の情報_更正前後(entity, true));
+        result.set納組情報(entity.get納組());
+        if (entity.get宛先() != null && entity.get宛先().getShikibetsuCode() != null) {
+            IAtesaki 宛先 = AtesakiFactory.createInstance(entity.get宛先());
+            result.set宛先情報(宛先);
+        }
+        if (entity.get口座() != null && entity.get口座().getUaT0310KozaEntity().getKozaId() != 0) {
+            result.set口座情報(new Koza(entity.get口座()));
+        }
+
+        result.set徴収方法情報_更正前(get徴収方法情報_更正前後(entity, false));
+        result.set徴収方法情報_更正後(get徴収方法情報_更正前後(entity, true));
+        if (entity.get対象者_追加含む_情報_更正前() != null) {
+            result.set対象者_追加含む_情報_更正前(new NenkinTokuchoKaifuJoho(entity.get対象者_追加含む_情報_更正前()));
+        }
+        if (entity.get対象者_追加含む_情報_更正後() != null) {
+            result.set対象者_追加含む_情報_更正後(new NenkinTokuchoKaifuJoho(entity.get対象者_追加含む_情報_更正後()));
+        }
+        result.set収入情報(get収入情報(entity));
+        return result;
     }
 
     /**

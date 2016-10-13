@@ -95,6 +95,14 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
             = new RString("DBC200034_GassanJikofutangakuShomeishoTorikomiIchiran.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString コンマ = new RString(",");
+    private static final RString 固定改頁項目ID1 = new RString("0103");
+    private static final RString 固定改頁項目ID2 = new RString("0372");
+    private List<RString> 出力順リスト;
+    private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
+    private static final int INT_6 = 6;
 
     @Override
     protected void initialize() {
@@ -107,17 +115,32 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
         識別コードset = new HashSet<>();
         改頁項目リスト = new ArrayList<>();
         改頁リスト = new ArrayList<>();
+        改頁リスト.add(固定改頁項目ID1);
+        改頁リスト.add(固定改頁項目ID2);
         並び順 = get並び順();
 
         if (null == 並び順) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
         } else {
+            int i = 0;
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
                     改頁項目リスト.add(item.get項目名());
                     改頁リスト.add(item.get項目ID());
                 }
+                if (i == INT_2) {
+                    出力順リスト.add(item.get項目名());
+                } else if (i == INT_3) {
+                    出力順リスト.add(item.get項目名());
+                } else if (i == INT_4) {
+                    出力順リスト.add(item.get項目名());
+                } else if (i == INT_5) {
+                    出力順リスト.add(item.get項目名());
+                } else if (i == INT_6) {
+                    出力順リスト.add(item.get項目名());
+                }
+                i = i + 1;
             }
         }
         出力順 = get出力順();
@@ -163,6 +186,7 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
                             parameter.get処理年月(),
                             beforeEntity,
                             改頁項目リスト,
+                            出力順リスト,
                             parameter.getシステム日付(),
                             連番_NO,
                             保険者番号,
@@ -189,6 +213,7 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
                             parameter.get処理年月(),
                             lastEntity,
                             改頁項目リスト,
+                            出力順リスト,
                             parameter.getシステム日付(),
                             連番_NO,
                             保険者番号,

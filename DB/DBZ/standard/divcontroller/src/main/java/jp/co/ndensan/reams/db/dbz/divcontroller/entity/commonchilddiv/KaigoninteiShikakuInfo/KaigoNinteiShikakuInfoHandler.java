@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.kaigoninteishikakuinfo.KaigoNint
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.JushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigoninteishikakuinfo.KaigoNinteiShikakuInfoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KaigoNinteiShikakuInfoHandler {
 
     private final KaigoninteiShikakuInfoDiv div;
+    private static final RString BANGO = new RString("000000");
 
     /**
      * コンストラクタです。
@@ -98,6 +99,10 @@ public class KaigoNinteiShikakuInfoHandler {
         }
         if (ninteiShikakuInfoBusiness.get認定有効期間終了年月日() != null) {
             div.getTxtNinteiShuryoYmd().setValue(new RDate(ninteiShikakuInfoBusiness.get認定有効期間終了年月日().toString()));
+        }
+        if (hdnShinchsonCode.equals(BANGO)) {
+            div.getTxtHookenshaCode().setValue(BANGO);
+            div.getTxtHokensha().setValue(new RString("全市町村"));
         }
         if (codeYoriShichoson != null && !codeYoriShichoson.isEmpty()) {
             div.getTxtHookenshaCode().setValue(codeYoriShichoson.get(0).get証記載保険者番号().getColumnValue());

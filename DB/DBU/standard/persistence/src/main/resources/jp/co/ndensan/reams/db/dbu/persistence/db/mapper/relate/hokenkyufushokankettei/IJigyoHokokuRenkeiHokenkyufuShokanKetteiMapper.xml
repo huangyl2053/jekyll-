@@ -390,9 +390,9 @@
                 , A."serviceTeikyoYM"
                 , A."kyufuJissekiKubunCode"
                 , A."jigyoshoNo" AS jigyoshaNo
-                , A."toshiNo"
+                , A."toshiNo" AS seiriNo
                 , '' AS meisaiNo
-                , A."seiriNo"
+                , A."seiriNo" AS motoSeiriNo
                 , '' AS shinseiKanrisikyuKubunCode
                 , A."umareYMD"
                 , A."yoKaigoJotaiKubunCode"
@@ -407,7 +407,7 @@
                 , 0 AS tokubetsuTeikyoTanka
                 , 0 AS atoShokujiTeikyoSeikyuGaku
                 , '' AS shokujiHiyosikyuKubunCode
-                , 0 AS shokujiHiyosikyuKubun
+                , 0 AS shokujiHiyosikyuGaku
                 , CASE 
                     WHEN B."hiHokenshaNo" IS NOT NULL 
                     THEN B."serviceSyuruiCode" 
@@ -415,13 +415,13 @@
                     THEN SUBSTRING(C."serviceCode", 0, 2) 
                     ELSE NULL 
                     END AS serviceSyuruiCode
-                , B."hokenTanisuTani"
-                , B."hokenSeikyugaku"
-                , B."hokenRiyoshaFutangaku"
-                , B."atoHokenTanisuTotal"
-                , B."atoHokenSeikyugaku"
-                , B."atoHokenDekidakaTanisuTotal"
-                , B."atoHokenDekidakaSeikyugaku"
+                , B."hokenTanisuTani" AS seikyuTensuTanka
+                , B."hokenSeikyugaku" AS seikyugaku
+                , B."hokenRiyoshaFutangaku" AS riyoshaFutangaku
+                , B."atoHokenTanisuTotal" AS atoTensuGokei
+                , B."atoHokenSeikyugaku" AS atoHokenSeikyugaku
+                , B."atoHokenDekidakaTanisuTotal" AS atoDekidakaTensuGokei
+                , B."atoHokenDekidakaSeikyugaku" AS atoDekidakaSeikyuGaku
                 , '' AS shukeiShikyukubunCode
                 , 0 AS shukeiShikyuKingaku
                 , 0 AS zougenten
@@ -516,9 +516,9 @@
                 , A."serviceTeikyoYM"
                 , A."kyufuJissekiKubunCode"
                 , A."jigyoshoNo" AS jigyoshaNo
-                , A."toshiNo"
+                , A."toshiNo" AS seiriNo
                 , '' AS meisaiNo
-                , A."seiriNo"
+                , A."seiriNo" AS motoSeiriNo
                 , '' AS shinseiKanrisikyuKubunCode
                 , A."umareYMD"
                 , A."yoKaigoJotaiKubunCode"
@@ -533,7 +533,7 @@
                 , 0 AS tokubetsuTeikyoTanka
                 , 0 AS atoShokujiTeikyoSeikyuGaku
                 , '' AS shokujiHiyosikyuKubunCode
-                , 0 AS shokujiHiyosikyuKubun
+                , 0 AS shokujiHiyosikyuGaku
                 , CASE 
                     WHEN B."hiHokenshaNo" IS NOT NULL 
                     THEN B."serviceSyuruiCode" 
@@ -541,13 +541,13 @@
                     THEN SUBSTRING(C."serviceCode", 0, 2) 
                     ELSE NULL 
                     END AS serviceSyuruiCode
-                , B."hokenTanisuTani"
-                , B."hokenSeikyugaku"
-                , B."hokenRiyoshaFutangaku"
-                , B."atoHokenTanisuTotal"
-                , B."atoHokenSeikyugaku"
-                , B."atoHokenDekidakaTanisuTotal"
-                , B."atoHokenDekidakaSeikyugaku"
+                , B."hokenTanisuTani" AS seikyuTensuTanka
+                , B."hokenSeikyugaku" AS seikyugaku
+                , B."hokenRiyoshaFutangaku" AS riyoshaFutangaku
+                , B."atoHokenTanisuTotal" AS atoTensuGokei
+                , B."atoHokenSeikyugaku" AS atoHokenSeikyugaku
+                , B."atoHokenDekidakaTanisuTotal" AS atoDekidakaTensuGokei
+                , B."atoHokenDekidakaSeikyugaku" AS atoDekidakaSeikyuGaku
                 , '' AS shukeiShikyukubunCode
                 , 0 AS shukeiShikyuKingaku
                 , 0 AS zougenten

@@ -261,6 +261,5 @@ public class TodokedeshaJohoDiv extends Panel {
     public void setDdlTodokedeshaKankeiKubun(DropDownList ddlTodokedeshaKankeiKubun) {
         this.getTodokedesha().setDdlTodokedeshaKankeiKubun(ddlTodokedeshaKankeiKubun);
     }
-
     // </editor-fold>
 }

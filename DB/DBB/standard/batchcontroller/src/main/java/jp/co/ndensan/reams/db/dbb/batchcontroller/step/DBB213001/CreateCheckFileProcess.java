@@ -12,10 +12,10 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.csv.CheckFileCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosofujohorenkei.ITokuchoSofuJohoRenkeiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
-import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -88,13 +88,12 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
         市町村IDMap = new HashMap<>();
         ファイル出力Z12Map = new HashMap<>();
         ファイル出力Z1AMap = new HashMap<>();
-        KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
-        List<KoseiShichoson> 広域市町村情報 = finder.getKoseiShichosonList().records();
+        List<DbT7051KoseiShichosonMasterEntity> 広域市町村情報 = getMapper(ITokuchoSofuJohoRenkeiMapper.class).select広域市町村情報();
         if (!広域市町村情報.isEmpty()) {
-            for (KoseiShichoson item : 広域市町村情報) {
-                市町村コードリスト.add(item.get市町村コード().value().substring(INT_ZERO, INT_FIVE));
-                市町村コードリスト全.put(item.get市町村コード().value().substring(INT_ZERO, INT_FIVE), item.get市町村コード().value());
-                市町村IDMap.put(item.get市町村コード().value().substring(INT_ZERO, INT_FIVE), item.get市町村識別ID());
+            for (DbT7051KoseiShichosonMasterEntity item : 広域市町村情報) {
+                市町村コードリスト.add(item.getShichosonCode().value().substring(INT_ZERO, INT_FIVE));
+                市町村IDMap.put(item.getShichosonCode().value().substring(INT_ZERO, INT_FIVE), item.getShichosonShokibetsuID());
+                市町村コードリスト全.put(item.getShichosonCode().value().substring(INT_ZERO, INT_FIVE), item.getShichosonCode().value());
             }
         }
         proParameter.set処理年度(処理年度);

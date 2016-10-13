@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDank
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.HaigushaKazeiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.ShinseiRiyuKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNinteiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt22006.IsShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogaku.ikkatsunintei.FutanGengaokuNintteiKakuninListEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200005.FutanGendogakuNinteiKakuninIchiranReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
@@ -21,9 +22,15 @@ import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -59,7 +66,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
     private static final RString 却下 = new RString("却下");
     private static final RString 非該当 = new RString("非該当");
     private static final RString 世帯非課税８０万以下 = new RString("世帯非課税８０万以下");
-    private static final RString 世帯非課税８０万超 = new RString("世帯非課税８０万超");
+    private static final RString 世帯非課税８０万超 = new RString("世帯非課税８０万超　");
     private static final RString 生保 = new RString("生保");
     private static final RString 世帯非課税 = new RString("世帯非課税");
     private static final RString 老齢 = new RString("老齢");
@@ -98,6 +105,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         setKonkai1(source);
         setKonkai2(source);
         setZenkai(source);
+        setKaiPage(source);
         return source;
     }
 
@@ -280,6 +288,35 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         }
     }
 
+    private void setKaiPage(FutanGendogakuNinteiKakuninIchiranReportSource source) {
+        if (null != this.負担限度額認定確認リスト && null != this.負担限度額認定確認リスト.getAtesakiEntity()) {
+            UaFt200FindShikibetsuTaishoEntity atesakiEntity = this.負担限度額認定確認リスト.getAtesakiEntity();
+            YubinNo yubinNo = atesakiEntity.getYubinNo();
+            if (null != yubinNo) {
+                source.yubinNo = yubinNo.value();
+            }
+            ChoikiCode choikiCode = atesakiEntity.getChoikiCode();
+            if (null != choikiCode) {
+                source.choikiCode = choikiCode.value();
+            }
+            GyoseikuCode gyoseikuCode = atesakiEntity.getGyoseikuCode();
+            if (null != gyoseikuCode) {
+                source.gyoseikuCode = gyoseikuCode.value();
+            }
+            SetaiCode setaiCode = atesakiEntity.getSetaiCode();
+            if (null != setaiCode) {
+                source.setaiCode = setaiCode.value();
+            }
+            AtenaKanaMeisho gaikokujinKanaShimei = atesakiEntity.getGaikokujinKanaShimei();
+            if (null != gaikokujinKanaShimei) {
+                source.gaikokujinKanaShimei = gaikokujinKanaShimei.value();
+            }
+        }
+        if (null != this.負担限度額認定確認リスト && null != this.負担限度額認定確認リスト.get市町村コード()) {
+            source.shichosonCode = this.負担限度額認定確認リスト.get市町村コード().value();
+        }
+    }
+
     private void get前回認定(FutanGendogakuNinteiKakuninIchiranReportSource source,
             DbT4018KaigoHokenFutanGendogakuNinteiEntity 前回認定結果) {
         if (null != 前回認定結果.getKyusochishaKubun()) {
@@ -444,9 +481,8 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
     }
 
     private void get被保険者2(FutanGendogakuNinteiKakuninIchiranReportSource source) {
-
         if (null != this.負担限度額認定確認リスト.get利用軽減()
-                && Boolean.valueOf(this.負担限度額認定確認リスト.get利用軽減().toString())) {
+                && booleanListValue(this.負担限度額認定確認リスト.get利用軽減())) {
             source.list4_1 = 申;
         } else if (null != this.負担限度額認定確認リスト.get利用軽減()
                 && this.負担限度額認定確認リスト.get利用軽減().isEmpty()) {
@@ -454,8 +490,9 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         } else {
             source.list4_1 = 認;
         }
+
         if (null != this.負担限度額認定確認リスト.get社福軽減()
-                && Boolean.valueOf(this.負担限度額認定確認リスト.get社福軽減().toString())) {
+                && booleanListValue(this.負担限度額認定確認リスト.get社福軽減())) {
             source.list4_2 = 申;
         } else if (null != this.負担限度額認定確認リスト.get社福軽減()
                 && this.負担限度額認定確認リスト.get社福軽減().isEmpty()) {
@@ -463,8 +500,9 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         } else {
             source.list4_2 = 認;
         }
+
         if (null != this.負担限度額認定確認リスト.get訪問減額()
-                && Boolean.valueOf(this.負担限度額認定確認リスト.get訪問減額().toString())) {
+                && booleanListValue(this.負担限度額認定確認リスト.get訪問減額())) {
             source.list4_3 = 申;
         } else if (null != this.負担限度額認定確認リスト.get訪問減額()
                 && this.負担限度額認定確認リスト.get訪問減額().isEmpty()) {
@@ -472,8 +510,9 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         } else {
             source.list4_3 = 認;
         }
+
         if (null != this.負担限度額認定確認リスト.get特地減免()
-                && Boolean.valueOf(this.負担限度額認定確認リスト.get特地減免().toString())) {
+                && booleanListValue(this.負担限度額認定確認リスト.get特地減免())) {
             source.list4_4 = 申;
         } else if (null != this.負担限度額認定確認リスト.get特地減免()
                 && this.負担限度額認定確認リスト.get特地減免().isEmpty()) {
@@ -482,6 +521,17 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             source.list4_4 = 認;
         }
 
+    }
+
+    private Boolean booleanListValue(List<IsShinseiEntity> list) {
+        if (!list.isEmpty()) {
+            for (IsShinseiEntity entity : list) {
+                if (entity.is申請()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

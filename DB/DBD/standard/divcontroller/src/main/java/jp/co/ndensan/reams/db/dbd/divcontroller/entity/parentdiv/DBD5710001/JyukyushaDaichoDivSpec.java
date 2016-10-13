@@ -63,7 +63,7 @@ public enum JyukyushaDaichoDivSpec implements IPredicate<JyukyushaDaichoDiv> {
                     YMDHMS konkaitoYMDHMS = new YMDHMS(Konkaitodate, Konkaitotime);
                     boolean konkaidate = false;
                     if (Konkaifromdate.equals(Konkaitodate)) {
-                        konkaidate = Konkaifromtime.isBefore(Konkaitotime) && Konkaifromtime.equals(Konkaitotime);
+                        konkaidate = Konkaifromtime.isBefore(Konkaitotime) || Konkaifromtime.equals(Konkaitotime);
                     } else {
                         konkaidate = konkaifromYMDHMS.isBeforeOrEquals(konkaitoYMDHMS);
                     }

@@ -196,6 +196,7 @@ public class IryouhiKoujyoHandler {
                     return row2.getHiddentaisyouYY().getValue().compareTo(row1.getHiddentaisyouYY().getValue());
                 }
             });
+            addEmptyRow(dataSource);
         } else if (状態.equals(修正)) {
             IryohiKojyoItiranDataGrid_Row row = dataSource.get(div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().getActiveRowId());
             setGridRow(row);
@@ -410,7 +411,6 @@ public class IryouhiKoujyoHandler {
         for (IryohiKojyoItiranDataGrid_Row row : dataSource) {
             if (row.getHiddensinseiDD().getValue() == null) {
                 dataSource.remove(row);
-                return;
             }
         }
     }
