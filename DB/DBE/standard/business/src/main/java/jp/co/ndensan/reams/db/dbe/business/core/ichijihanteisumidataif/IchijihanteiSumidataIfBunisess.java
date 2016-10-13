@@ -1046,7 +1046,6 @@ public class IchijihanteiSumidataIfBunisess {
     public List<RString> get出力条件(IchijihanteiSumidataIftProcessParamter paramter) {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
-        jokenBuilder.append(paramter.get日付指定());
         if (項目.equals(paramter.get日付指定())) {
             jokenBuilder.append(new RString("【日付指定】　申請日"));
             出力条件List.add(jokenBuilder.toRString());
