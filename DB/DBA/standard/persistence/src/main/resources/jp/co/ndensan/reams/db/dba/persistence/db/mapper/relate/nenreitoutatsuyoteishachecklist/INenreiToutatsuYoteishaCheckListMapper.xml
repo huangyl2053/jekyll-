@@ -53,6 +53,8 @@
         )
         AND
         DbT1001Hiho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
+        ORDER BY
+        #{shutsuryokuSort}
     </select>
 
     <select resultOrdered="true" id="getTorokuNenreiToutatsuYoteishaCheckList2"
@@ -87,6 +89,8 @@
         DbT1001Hiho."shikakuSoshitsuYMD" IS NULL
         AND
         DbT1001Hiho."hihokennshaKubunCode" = '2'
+        ORDER BY
+        #{shutsuryokuSort}
     </select>
 
     <select resultOrdered="true" id="getZenbuNenreiToutatsuYoteishaCheckList"
@@ -123,6 +127,8 @@
         FROM
         rgua.${psmShikibetsuTaisho2}
         )
+        ORDER BY
+        #{shutsuryokuSort}
     </select>
 
     <select resultOrdered="true" id="getZenbuNenreiToutatsuYoteishaCheckList2"
@@ -154,6 +160,8 @@
         DbT1001Hiho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
         AND
         DbT1001Hiho."hihokennshaKubunCode" = '2'
+        ORDER BY
+        #{shutsuryokuSort}
         UNION
         SELECT
         PSM."shikibetsuCode" AS "PSM_shikibetsuCode",
@@ -182,6 +190,8 @@
         DbT1001Hiho."jushochiTokureiFlag" = '1'
         AND
         DbT1001Hiho."hihokennshaKubunCode" = '2'
+        ORDER BY
+        #{shutsuryokuSort}
         UNION
         SELECT
         PSM."shikibetsuCode" AS "PSM_shikibetsuCode",
@@ -208,6 +218,8 @@
         DbT1001Hiho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
         AND
         PSM."seinengappiYMD" IS NOT NULL
+        ORDER BY
+        #{shutsuryokuSort}
 
     </select>
 

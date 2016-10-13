@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class NenreiTotatsushaTorokuListBatch {
 
     private static final RString 被保険者氏名 = new RString("該当データがありません");
+    private static final RString 号 = new RString(" 号");
 
     /**
      * 帳票データを作成します。
@@ -38,6 +39,8 @@ public class NenreiTotatsushaTorokuListBatch {
     public List<NenreitotatsuKakuninListItem> getNenreiTotatsushaTorokuChohyoData(
             NenreiTotatsuTorokushaListEntity entity) {
         List<NenreitotatsuKakuninListItem> list = new ArrayList();
+        RStringBuilder リスト上_区分Builder = new RStringBuilder();
+        RStringBuilder リスト下_区分Builder = new RStringBuilder();
         for (NenreiTotatsushaJouhouEntity nenreiTotatsushaJouhouEntity : entity.get年齢到達者情報()) {
             NenreiTotatsuTorokushaListTyouHyouListEntity tyouHyouListEntity
                     = new NenreiTotatsuTorokushaListTyouHyouListEntity();
@@ -54,6 +57,8 @@ public class NenreiTotatsushaTorokuListBatch {
             tyouHyouListEntity.set改頁３(entity.get改頁３());
             tyouHyouListEntity.set改頁４(entity.get改頁４());
             tyouHyouListEntity.set改頁５(entity.get改頁５());
+            tyouHyouListEntity.set抽出期間From(entity.get抽出期間From());
+            tyouHyouListEntity.set抽出期間To(entity.get抽出期間To());
             if (nenreiTotatsushaJouhouEntity.get識別コード() == null) {
                 set帳票データ作成用Entityの部分項目(tyouHyouListEntity, nenreiTotatsushaJouhouEntity);
                 tyouHyouListEntity.setリスト下_被保険者氏名(被保険者氏名);
@@ -63,6 +68,23 @@ public class NenreiTotatsushaTorokuListBatch {
                     tyouHyouListEntity.setリスト下_被保険者氏名(nenreiTotatsushaJouhouEntity.get被保険者氏名().value());
                 }
             }
+            リスト上_区分Builder.delete(0, リスト上_区分Builder.length());
+            リスト下_区分Builder.delete(0, リスト下_区分Builder.length());
+            if (RString.isNullOrEmpty(tyouHyouListEntity.getリスト上_区分())) {
+                リスト上_区分Builder.append(RString.EMPTY);
+            } else {
+                リスト上_区分Builder.append(tyouHyouListEntity.getリスト上_区分());
+                リスト上_区分Builder.append(号);
+            }
+            if (RString.isNullOrEmpty(tyouHyouListEntity.getリスト下_区分())) {
+                リスト下_区分Builder.append(RString.EMPTY);
+            } else {
+                リスト下_区分Builder.append(tyouHyouListEntity.getリスト下_区分());
+                リスト下_区分Builder.append(号);
+            }
+            tyouHyouListEntity.setリスト上_区分(リスト上_区分Builder.toRString());
+            tyouHyouListEntity.setリスト下_区分(リスト下_区分Builder.toRString());
+
             NenreitotatsuKakuninListItem nenreitotatsuKakuninListItem = new NenreitotatsuKakuninListItem(
                     tyouHyouListEntity.get印刷日時(),
                     tyouHyouListEntity.get対象情報タイトル(),
@@ -78,6 +100,8 @@ public class NenreiTotatsushaTorokuListBatch {
                     tyouHyouListEntity.get改頁３(),
                     tyouHyouListEntity.get改頁４(),
                     tyouHyouListEntity.get改頁５(),
+                    tyouHyouListEntity.get抽出期間From(),
+                    tyouHyouListEntity.get抽出期間To(),
                     tyouHyouListEntity.get開始タイトル(),
                     tyouHyouListEntity.get終了タイトル(),
                     tyouHyouListEntity.get区分タイトル(),

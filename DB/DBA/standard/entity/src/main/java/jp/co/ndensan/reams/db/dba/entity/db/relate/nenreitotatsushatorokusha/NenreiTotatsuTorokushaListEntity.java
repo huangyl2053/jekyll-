@@ -32,4 +32,6 @@ public class NenreiTotatsuTorokushaListEntity {
     private RString 改頁４;
     private RString 改頁５;
     private List<NenreiTotatsushaJouhouEntity> 年齢到達者情報;
+    private RString 抽出期間From;
+    private RString 抽出期間To;
 }

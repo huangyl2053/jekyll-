@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushatorokusha;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -65,4 +66,5 @@ public class NenreiTotatsushaJouhouEntity {
     private FlexibleDate 取得情報_後_届出年月日;
     private RString 区分_前_資格;
     private RString 区分_後_資格;
+    private UaFt200FindShikibetsuTaishoEntity 宛名対象者;
 }

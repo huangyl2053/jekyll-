@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  */
 public class NenreiTotatsuTorokushaBusiness {
 
-    private static final RString データ種別_被保険者台帳 = new RString("データ種別：被保険者台帳");
+    private static final RString 対象情報タイトル = new RString("対象台帳：被保険者台帳");
     private static final RString 取得情報 = new RString("取得情報");
     private static final RString 喪失情報 = new RString("喪失情報");
     private static final RString 資格 = new RString("資格");
@@ -77,7 +77,7 @@ public class NenreiTotatsuTorokushaBusiness {
     public List<NenreiTotatsushaJouhouEntity> setPrintTitleData(List<NenreiTotatsushaJouhouEntity> nenreiTotatsushaJouhoulist) {
         if (nenreiTotatsushaJouhoulist.isEmpty()) {
             NenreiTotatsushaJouhouEntity nenreiTotatsushaJouhouEntity = new NenreiTotatsushaJouhouEntity();
-            nenreiTotatsushaJouhouEntity.set対象情報タイトル(データ種別_被保険者台帳);
+            nenreiTotatsushaJouhouEntity.set対象情報タイトル(対象情報タイトル);
             nenreiTotatsushaJouhouEntity.set対象情報(対象情報);
             nenreiTotatsushaJouhouEntity.set開始タイトル(取得情報);
             nenreiTotatsushaJouhouEntity.set終了タイトル(喪失情報);

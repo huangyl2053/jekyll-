@@ -27,7 +27,9 @@ public class INenreiToutatsuYoteishaCheckListMybatisParameter implements IMyBati
     private final RString juminShubetsu;
     private final FlexibleDate konkaikaishi;
     private final FlexibleDate konkaisyuryo;
-    private final Long shutsuryokujunId;
+    private final RString shutsuryokuSort;
+
+    private final Boolean userShutsuryokuSort;
 
     /**
      * コンストラクタです。<br/>
@@ -39,11 +41,15 @@ public class INenreiToutatsuYoteishaCheckListMybatisParameter implements IMyBati
      * @param juminShubetsu 住民種別
      * @param konkaikaishi 今回開始日
      * @param konkaisyuryo 今回終了日
-     * @param shutsuryokujunId 出力順ID
+     * @param shutsuryokuSort 出力順
+     * @param userShutsuryokuSort 出力順有無
      */
     public INenreiToutatsuYoteishaCheckListMybatisParameter(RString syutsuryokutaisyo, boolean koumokumeiflg,
             boolean renbanfukaflg, boolean nichihensyuflg, RString juminShubetsu, FlexibleDate konkaikaishi,
-            FlexibleDate konkaisyuryo, Long shutsuryokujunId) {
+            FlexibleDate konkaisyuryo, RString shutsuryokuSort, Boolean userShutsuryokuSort) {
+        if (Boolean.FALSE.equals(userShutsuryokuSort)) {
+            shutsuryokuSort = new RString("");
+        }
         this.syutsuryokutaisyo = syutsuryokutaisyo;
         this.koumokumeiflg = koumokumeiflg;
         this.renbanfukaflg = renbanfukaflg;
@@ -51,6 +57,8 @@ public class INenreiToutatsuYoteishaCheckListMybatisParameter implements IMyBati
         this.juminShubetsu = juminShubetsu;
         this.konkaikaishi = konkaikaishi;
         this.konkaisyuryo = konkaisyuryo;
-        this.shutsuryokujunId = shutsuryokujunId;
+        this.shutsuryokuSort = shutsuryokuSort;
+
+        this.userShutsuryokuSort = userShutsuryokuSort;
     }
 }
