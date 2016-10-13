@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufujissekiin;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc120050.KyufuJissekiInMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3018KyufujissekiMeisaiEntity;
@@ -163,9 +164,9 @@ public interface IKyufuJissekiInMasterTorokuMapper {
     /**
      * 付実績H1の新規、修正データを物理削除する。
      *
-     * @return KyufuJissekiInHenkyakuH1DataEntity
+     * @return List<KyufuJissekiInHenkyakuH1DataEntity>
      */
-    KyufuJissekiInHenkyakuH1DataEntity select給付実績H1の新規修正データ();
+    List<KyufuJissekiInHenkyakuH1DataEntity> select給付実績H1の新規修正データ();
 
     /**
      * 付実績H1の新規、修正関連データを物理削除する。
@@ -178,9 +179,9 @@ public interface IKyufuJissekiInMasterTorokuMapper {
     /**
      * 付実績H1の取消データを物理削除する。
      *
-     * @return KyufuJissekiInHenkyakuH1DataEntity
+     * @return List<KyufuJissekiInHenkyakuH1DataEntity>
      */
-    KyufuJissekiInHenkyakuH1DataEntity select給付実績H1の取消データ();
+    List<KyufuJissekiInHenkyakuH1DataEntity> select給付実績H1の取消データ();
 
     /**
      * 付実績H1の取消関連データを物理削除する。
@@ -193,16 +194,16 @@ public interface IKyufuJissekiInMasterTorokuMapper {
     /**
      * 付実績D8の新規、修正データを物理削除する。
      *
-     * @return KyufuJissekiInHenkyakuD8DataEntity
+     * @return List<KyufuJissekiInHenkyakuD8DataEntity>
      */
-    KyufuJissekiInHenkyakuD8DataEntity select給付実績D8の新規修正データ();
+    List<KyufuJissekiInHenkyakuD8DataEntity> select給付実績D8の新規修正データ();
 
     /**
      * 付実績D8の取消データを物理削除する。
      *
-     * @return KyufuJissekiInHenkyakuD8DataEntity
+     * @return List<KyufuJissekiInHenkyakuD8DataEntity>
      */
-    KyufuJissekiInHenkyakuD8DataEntity select給付実績D8の取消データ();
+    List<KyufuJissekiInHenkyakuD8DataEntity> select給付実績D8の取消データ();
 
     /**
      * 給付実績一時TBLの最大連番を取ります。
