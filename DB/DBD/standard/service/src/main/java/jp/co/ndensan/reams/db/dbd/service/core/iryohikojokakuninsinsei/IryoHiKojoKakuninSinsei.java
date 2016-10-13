@@ -9,15 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.Chohyokoyujoho;
+import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.KenshoKakuninshoinfo;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.OmutsusiyoSyomeishoEntity;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.ShugiiIkenshoKakuninshoEntity;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100030.ShujiiIkenshoKakuninshoProperty;
 import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.NichijoSeikatsuJiritsudo;
 import jp.co.ndensan.reams.db.dbd.definition.core.meishofuyo.MeishoFuyoTypeEnum;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4401IryohiKojoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.SogoJigyouTaisyouSyaJyohoJoho;
-import jp.co.ndensan.reams.db.dbd.entity.report.dbd100030.ShujiiIkenshoKakuninshoReportSource;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4401IryohiKojoDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei.IIryoHiKojoKakuninSinseiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.JushoHenshuChoikiHenshuHoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
@@ -51,16 +49,10 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
-import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -68,7 +60,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -280,41 +271,18 @@ public class IryoHiKojoKakuninSinsei {
     /**
      * 主治医意見書確認書
      *
-     * @param 識別コード ShikibetsuCode
-     * @param 被保険者番号 RString
-     * @param 帳票分類ID RString
-     * @param 作成日 RDate
-     * @param 文書番号 RString
-     * @param 対象年 RString
-     * @param 申請日 RDate
-     * @param 主治医意見書作成日 RDate
-     * @param 認定期間開始日 RDate
-     * @param 認定期間終了日 RDate
-     * @param 日常生活自立度 RString
-     * @param 尿失禁の有無 RString
+     * @param 主治医意見書確認書情報 KenshoKakuninshoinfo
      * @return ShugiiIkenshoKakuninshoEntity
      */
-    public ShugiiIkenshoKakuninshoEntity editsyujiikensho_Kakunisho(ShikibetsuCode 識別コード,
-            RString 被保険者番号,
-            RString 帳票分類ID,
-            RDate 作成日,
-            RString 文書番号,
-            RString 対象年,
-            RDate 申請日,
-            RDate 主治医意見書作成日,
-            RDate 認定期間開始日,
-            RDate 認定期間終了日,
-            RString 日常生活自立度,
-            RString 尿失禁の有無) {
+    public ShugiiIkenshoKakuninshoEntity editsyujiikensho_Kakunisho(KenshoKakuninshoinfo 主治医意見書確認書情報) {
         ShugiiIkenshoKakuninshoEntity 主治医意見書確認書Entity = new ShugiiIkenshoKakuninshoEntity();
-        DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = 帳票制御共通Dac.selectByKey(SubGyomuCode.DBD介護受給, new ReportId(帳票分類ID));
+        DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = 帳票制御共通Dac.selectByKey(SubGyomuCode.DBD介護受給, new ReportId(主治医意見書確認書情報.get帳票分類ID()));
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         List<RString> コンフィグ情報 = getコンフィグ情報(帳票制御共通);
-        NinshoshaSource 認証者 = 認証者編集(地方公共団体, RDate.getNowDate(), 帳票制御共通);
-        IKojin 宛名情報 = getAtena_Iryohikojyo(識別コード);
+        IKojin 宛名情報 = getAtena_Iryohikojyo(主治医意見書確認書情報.get識別コード());
         Chohyokoyujoho 帳票固有情報 = new Chohyokoyujoho();
         if (!JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(コンフィグ情報.get(INT_3))) {
-            SofubutsuAtesakiSource 送付物宛先 = 窓空き住所編集(地方公共団体, 識別コード, コンフィグ情報);
+            SofubutsuAtesakiSource 送付物宛先 = 窓空き住所編集(地方公共団体, 主治医意見書確認書情報.get識別コード(), コンフィグ情報);
             主治医意見書確認書Entity.set送付物宛先(送付物宛先);
             RString 編集後住所 = 住所編集(地方公共団体, 宛名情報, コンフィグ情報);
             帳票固有情報.set住所(編集後住所);
@@ -325,13 +293,12 @@ public class IryoHiKojoKakuninSinsei {
                 帳票固有情報.set住所１(編集後住所.substring(0, サーティ));
                 帳票固有情報.set住所２(編集後住所.substring(サーティ));
             }
-            帳票固有情報.set文書番号(文書番号);
-            帳票固有情報.set文書番号(文書番号);
+            帳票固有情報.set文書番号(主治医意見書確認書情報.get文書番号());
+            帳票固有情報.set文書番号(主治医意見書確認書情報.get文書番号());
         }
-        主治医意見書確認書Entity.set認証者(認証者);
-        帳票固有情報.set文書番号(文書番号);
-        帳票固有情報.set発行日(作成日.toDateString());
-        帳票固有情報.set申請日(申請日.toDateString());
+        帳票固有情報.set文書番号(主治医意見書確認書情報.get文書番号());
+        帳票固有情報.set発行日(主治医意見書確認書情報.get作成日().toDateString());
+        帳票固有情報.set申請日(主治医意見書確認書情報.get申請日().toDateString());
         RString 氏名 = RString.EMPTY;
         if (宛名情報 != null) {
             if (JuminShubetsu.日本人.getCode().equals(宛名情報.get住民種別().getCode())) {
@@ -349,20 +316,20 @@ public class IryoHiKojoKakuninSinsei {
             帳票固有情報.set氏名１(氏名.substring(0, サーティ));
             帳票固有情報.set氏名２(氏名.substring(サーティ));
         }
-        帳票固有情報.set被保険者番号(被保険者番号);
-        帳票固有情報.set主治医意見書作成日(主治医意見書作成日.toDateString());
-        帳票固有情報.set要介護認定の有効期間開始(認定期間開始日.toDateString());
-        帳票固有情報.set要介護認定の有効期間終了(認定期間終了日.toDateString());
-        帳票固有情報.set寝たきり度_B1(NichijoSeikatsuJiritsudo.Ｂ１.getコード().equals(日常生活自立度)
+        帳票固有情報.set被保険者番号(主治医意見書確認書情報.get被保険者番号());
+        帳票固有情報.set主治医意見書作成日(主治医意見書確認書情報.get主治医意見書作成日().toDateString());
+        帳票固有情報.set要介護認定の有効期間開始(主治医意見書確認書情報.get認定期間開始日().toDateString());
+        帳票固有情報.set要介護認定の有効期間終了(主治医意見書確認書情報.get認定期間終了日().toDateString());
+        帳票固有情報.set寝たきり度_B1(NichijoSeikatsuJiritsudo.Ｂ１.getコード().equals(主治医意見書確認書情報.get日常生活自立度())
                 ? 選択する : RString.EMPTY);
-        帳票固有情報.set寝たきり度_B2(NichijoSeikatsuJiritsudo.Ｂ２.getコード().equals(日常生活自立度)
+        帳票固有情報.set寝たきり度_B2(NichijoSeikatsuJiritsudo.Ｂ２.getコード().equals(主治医意見書確認書情報.get日常生活自立度())
                 ? 選択する : RString.EMPTY);
-        帳票固有情報.set寝たきり度_C1(NichijoSeikatsuJiritsudo.Ｃ１.getコード().equals(日常生活自立度)
+        帳票固有情報.set寝たきり度_C1(NichijoSeikatsuJiritsudo.Ｃ１.getコード().equals(主治医意見書確認書情報.get日常生活自立度())
                 ? 選択する : RString.EMPTY);
-        帳票固有情報.set寝たきり度_C2(NichijoSeikatsuJiritsudo.Ｃ２.getコード().equals(日常生活自立度)
+        帳票固有情報.set寝たきり度_C2(NichijoSeikatsuJiritsudo.Ｃ２.getコード().equals(主治医意見書確認書情報.get日常生活自立度())
                 ? 選択する : RString.EMPTY);
-        帳票固有情報.set尿失禁の発生可能性(new RString("はい").equals(尿失禁の有無) ? あり : なし);
-        帳票固有情報.set年(対象年);
+        帳票固有情報.set尿失禁の発生可能性(new RString("はい").equals(主治医意見書確認書情報.get尿失禁の有無()) ? あり : なし);
+        帳票固有情報.set年(主治医意見書確認書情報.get対象年());
         主治医意見書確認書Entity.set帳票固有情報(帳票固有情報);
         return 主治医意見書確認書Entity;
     }
@@ -501,23 +468,6 @@ public class IryoHiKojoKakuninSinsei {
         atesakiEditorBuilder.set管内住所編集パターン(get管内住所編集パターン(コンフィグ情報));
         ReportAtesakiEditor atesakiEditor = new ReportAtesakiEditor(atesakiEditorBuilder);
         return new SofubutsuAtesakiSourceBuilder(atesakiEditor).buildSource();
-    }
-
-    private NinshoshaSource 認証者編集(Association 地方公共団体, RDate 作成日, DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通) {
-        INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
-        Ninshosha 帳票認証者情報 = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険,
-                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), new FlexibleDate(作成日.toDateString()));
-        ReportManager reportManager = new ReportManager();
-        ShujiiIkenshoKakuninshoProperty proerty = new ShujiiIkenshoKakuninshoProperty();
-        ReportAssembler<ShujiiIkenshoKakuninshoReportSource> assembler = createAssembler(proerty, reportManager);
-        //ReportSourceWriter<ShujiiIkenshoKakuninshoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-        return NinshoshaSourceBuilderFactory.createInstance(帳票認証者情報,
-                地方公共団体,
-                assembler.getImageFolderPath(),
-                作成日,
-                R_STRING1.equals(帳票制御共通.getShuchoMeiInjiIchi()),
-                !帳票制御共通.getDenshiKoinInjiUmu(),
-                KenmeiFuyoKubunType.付与なし).buildSource();
     }
 
     private RString 住所編集(Association 地方公共団体, IKojin 宛名情報, List<RString> コンフィグ情報) {
