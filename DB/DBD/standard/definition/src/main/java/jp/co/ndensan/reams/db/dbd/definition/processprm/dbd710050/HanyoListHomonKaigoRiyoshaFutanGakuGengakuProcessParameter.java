@@ -100,11 +100,13 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcessParameter implemen
      *
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛先PSM
+     * @param 出力順 出力順
      * @return HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter
      */
     public HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter toTokubetsuChiikiKasanGemmenMybatisParameter(
             IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
-            RString psmAtesaki) {
+            RString psmAtesaki,
+            RString 出力順) {
         return new HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter(
                 cyusyutsuhohokubun,
                 cyusyutsukomokukubun,
@@ -117,6 +119,7 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcessParameter implemen
                 kyakasha,
                 atenacyusyutsujyoken,
                 psmShikibetsuTaisho,
-                psmAtesaki);
+                psmAtesaki,
+                出力順);
     }
 }
