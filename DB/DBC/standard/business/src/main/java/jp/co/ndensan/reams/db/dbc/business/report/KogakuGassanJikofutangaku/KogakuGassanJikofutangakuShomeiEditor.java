@@ -87,7 +87,8 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
         source.shoKisaiHokenshaName = entity.get高額合算自己負担額_保険者名();
         set出力順And改ページ(source);
         source.list_1 = new RString(連番);
-        source.list_2 = entity.get高額合算自己負担額_対象年度().toDateString();
+        source.list_2 = entity.get高額合算自己負担額_対象年度().wareki().firstYear(FirstYear.ICHI_NEN)
+                .fillType(FillType.BLANK).toDateString();
         source.list_3 = entity.get被保険者_登録被保険者番号();
         source.list_4 = entity.get被保険者_宛名名称();
         source.list_5 = entity.get高額合算自己負担額_支給申請書整理番号();
@@ -122,7 +123,7 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
         if (null != 改頁項目List && !改頁項目List.isEmpty()) {
             source.shutsuryokujun1 = get改頁And並び順(NUM_0);
             source.kaipage1 = get改頁And並び順(NUM_0);
-            source.shutsuryokujun2 = get改頁And並び順(NUM_0);
+            source.shutsuryokujun2 = get改頁And並び順(NUM_1);
             source.kaipage2 = get改頁And並び順(NUM_1);
             source.shutsuryokujun3 = get改頁And並び順(NUM_1);
             source.kaipage3 = get改頁And並び順(NUM_2);

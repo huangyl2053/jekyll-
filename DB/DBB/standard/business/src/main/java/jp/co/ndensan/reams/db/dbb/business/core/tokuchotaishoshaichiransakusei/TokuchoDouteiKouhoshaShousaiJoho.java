@@ -72,6 +72,7 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
     private RString 登録済年金情報_年金コード;
     private RString 登録済年金情報_捕捉月;
     private RString 登録済年金情報_特別徴収義務者コード;
+    private RString 登録済年金情報_識別コード;
 
     /**
      * コンストラクタです。

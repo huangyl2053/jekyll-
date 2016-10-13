@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -57,5 +58,6 @@ public class JyukyushaDaichoIdoCheckListEntity {
     private AtenaJusho 住所;
     private GyoseikuCode 行政区コード;
     private RString 行政区名;
+    private ShinseishoKanriNo 申請書管理番号;
 
 }

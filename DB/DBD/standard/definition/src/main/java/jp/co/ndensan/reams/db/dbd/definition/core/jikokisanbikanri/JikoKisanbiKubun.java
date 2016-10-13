@@ -89,7 +89,7 @@ public enum JikoKisanbiKubun {
      * @return 時効起算日区分の記号
      */
     public RString get記号() {
-        return fullName;
+        return kigou;
     }
 
     /**

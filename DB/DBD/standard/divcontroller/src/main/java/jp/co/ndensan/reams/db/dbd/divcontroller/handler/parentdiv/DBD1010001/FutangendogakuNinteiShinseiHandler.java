@@ -741,7 +741,7 @@ public class FutangendogakuNinteiShinseiHandler {
         for (KyuSochishaKubun kubun : KyuSochishaKubun.values()) {
             KeyValueDataSource source = new KeyValueDataSource();
             source.setKey(kubun.getコード());
-            source.setValue(kubun.get名称());
+            source.setValue(kubun.get略称());
             dataSource.add(source);
         }
         div.getDdlKyusochisha().setDataSource(dataSource);

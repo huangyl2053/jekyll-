@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmenshokai.GemmenShokai;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.business.core.common.NursingCareInformationBusiness;
 import jp.co.ndensan.reams.db.dbd.business.core.common.VariousReductionInformation;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengaku;
@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHe
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.homonkaigogemmen.HobetsuKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbd.service.core.common.GemmenJokyoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
@@ -226,7 +226,7 @@ public class GemmenShokaiHandler {
             div.getTxtRiyoshaFutanDankai().setValue(介護保険負担限度額認定の情報.get利用者負担段階());
             RString 旧措置者区分 = 介護保険負担限度額認定の情報.get旧措置者区分();
             if (旧措置者区分 != null && !旧措置者区分.isEmpty()) {
-                div.getTxtFutanGendoGakuKyuSochi().setValue(KyuSochishaKubun.toValue(旧措置者区分).get名称());
+                div.getTxtFutanGendoGakuKyuSochi().setValue(KyuSochishaKubun.toValue(旧措置者区分).get略称());
             }
             div.getTxtFutanGendoGakuShinseiJokyo().setValue(get申請状況(介護保険負担限度額認定の情報.get決定年月日()));
             div.getTxtFutanGendoGakuShinseiYMD().setValue(介護保険負担限度額認定の情報.get申請年月日());

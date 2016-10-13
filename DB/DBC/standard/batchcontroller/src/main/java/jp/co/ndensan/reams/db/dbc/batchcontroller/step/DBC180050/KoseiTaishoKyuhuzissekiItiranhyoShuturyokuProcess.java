@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -263,6 +264,10 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         OutputJokenhyoFactory.createInstance(給付実績取消一覧表item).print();
 
         AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, hojinShikibetsuCodeList);
+        給付実績一覧表csvWriter.close();
+        給付実績取消一覧表csvWriter.close();
+        manager.spool(SubGyomuCode.DBC介護給付, 給付実績一覧表eucFilePath);
+        給付実績取消一覧manager.spool(SubGyomuCode.DBC介護給付, 給付実績取消一覧eucFilePath);
     }
 
     private List<RString> get出力条件() {

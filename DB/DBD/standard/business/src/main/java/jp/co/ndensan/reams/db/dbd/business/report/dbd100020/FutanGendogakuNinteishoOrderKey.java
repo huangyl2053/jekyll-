@@ -70,11 +70,11 @@ public enum FutanGendogakuNinteishoOrderKey implements IReportItems {
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("被保険者番号"));
-//    /** QA:445
-//     * 入所施設コード
-//     */
-//    入所施設コード(new RString("0108"), new RString("入所施設コード"), new RString("入所施設コード"));
+    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("被保険者番号")),
+    /**
+     * 入所施設コード
+     */
+    入所施設コード(new RString("0108"), new RString("入所施設コード"), new RString("入所施設コード"));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

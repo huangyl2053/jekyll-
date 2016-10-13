@@ -102,7 +102,6 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -265,16 +264,6 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         key.set地区コード2終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_To()));
         key.set地区コード3開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku3_From()));
         key.set地区コード3終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku3_To()));
-        key.set町域コード開始値(ChoikiCode.EMPTY);
-        key.set町域コード終了値(ChoikiCode.EMPTY);
-        key.set行政区コード開始値(GyoseikuCode.EMPTY);
-        key.set行政区コード終了値(GyoseikuCode.EMPTY);
-        key.set地区コード1開始値(ChikuCode.EMPTY);
-        key.set地区コード1終了値(ChikuCode.EMPTY);
-        key.set地区コード2開始値(ChikuCode.EMPTY);
-        key.set地区コード2終了値(ChikuCode.EMPTY);
-        key.set地区コード3開始値(ChikuCode.EMPTY);
-        key.set地区コード3終了値(ChikuCode.EMPTY);
         IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho = key.build();
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
@@ -1628,11 +1617,5 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
             項目見出し.concat(RString.HALF_SPACE);
         }
         return 項目見出し;
-    }
-
-    private CsvReader<TokubetsuChiikiKasanGemmenEucCsvEntity> createCsvReader() {
-        return new CsvReader.InstanceBuilder(csvFilePath1, TokubetsuChiikiKasanGemmenEucCsvEntity.class)
-                .setDelimiter(new RString(",")).setEnclosure(new RString("\""))
-                .hasHeader(false).setEncode(Encode.UTF_8withBOM).build();
     }
 }

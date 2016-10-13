@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710070.HanyoListTokubetsuChiikiKasanGemmenProcess;
 import jp.co.ndensan.reams.db.dbd.business.report.HanyoListFutanGendoGakuNinteiOrderby;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Kyakasha;
@@ -337,7 +336,7 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
                                                 .get(i).get出力項目順位()))).get名称().toString());
                 項目内容new = (RString) getMethod.invoke(eucCsvEntity);
             } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                Logger.getLogger(HanyoListTokubetsuChiikiKasanGemmenProcess.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HanyoListFutanGendoGakuNinteiProcess.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (is帳票出力) {
                 RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();

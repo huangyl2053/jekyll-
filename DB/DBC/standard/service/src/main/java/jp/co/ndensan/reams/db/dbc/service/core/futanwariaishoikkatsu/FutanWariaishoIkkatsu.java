@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.FutanwariaiShoHakkoIchiranCSVEntity
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishohakkoichiran.FutanWariaiShoHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishokattokami.FutanWariaiShoKattokamiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaishorenchoyoko.FutanWariaiShoRenchoYokoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -42,6 +43,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -114,16 +116,17 @@ public class FutanWariaishoIkkatsu {
      * 負担割合証ソースデータ取得です。
      *
      * @param 帳票制御共通 帳票制御共通
-     * @param imageFolderPath 帳票イメージフォルダパス
+     * @param batchReportWriter BatchReportWriter<FutanWariaiShoRenchoYokoSource>
      * @param 利用者負担割合証Temp 利用者負担割合証Temp
      * @param 交付年月日 交付年月日
      * @param 連番 連番
      * @return {@link FutanWariaiShoKattokamiEntity}
      */
-    public FutanWariaiShoKattokamiEntity getFutanWariaiSourceData(ChohyoSeigyoKyotsu 帳票制御共通, RString imageFolderPath,
+    public FutanWariaiShoKattokamiEntity getFutanWariaiSourceData(ChohyoSeigyoKyotsu 帳票制御共通,
+            BatchReportWriter<FutanWariaiShoRenchoYokoSource> batchReportWriter,
             RiyoshaFutanwariaishoTempEntity 利用者負担割合証Temp, RDate 交付年月日, RString 連番) {
         requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_帳票制御共通.toString()));
-        requireNonNull(imageFolderPath, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_帳票イメージフォルダパス.toString()));
+        requireNonNull(batchReportWriter, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_帳票イメージフォルダパス.toString()));
         requireNonNull(利用者負担割合証Temp, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_利用者負担割合証.toString()));
         requireNonNull(交付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_交付年月日.toString()));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_連番.toString()));
@@ -133,7 +136,7 @@ public class FutanWariaishoIkkatsu {
                 get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), FlexibleDate.getNowDate());
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         NinshoshaSource compNinshosha = NinshoshaSourceBuilderFactory.
-                createInstance(認証者, 地方公共団体, imageFolderPath, RDate.getNowDate(), 0, false, false, KenmeiFuyoKubunType.付与なし).
+                createInstance(認証者, 地方公共団体, batchReportWriter.getImageFolderPath(), RDate.getNowDate(), 0, false, false, KenmeiFuyoKubunType.付与なし).
                 buildSource();
         EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(宛先, 地方公共団体, 帳票制御共通);
         SofubutsuAtesakiSource 送付物宛先ソースデータ = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();

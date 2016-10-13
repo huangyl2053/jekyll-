@@ -37,6 +37,8 @@ public class ChishutsuJokenParameter {
         div.getChkNinteiYukoShuryobiChushutsu().setDisabled(true);
         div.getTxtJukyuNinteibiKaishi().setDisabled(true);
         div.getTxtJukyuNinteibiShuryo().setDisabled(true);
+        div.getTxtNinteiYukoShuryobiKaishi().setDisabled(true);
+        div.getTxtNinteiYukoShuryobiShuryo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -48,7 +50,7 @@ public class ChishutsuJokenParameter {
      */
     public ResponseData<ChishutsuJokenParameterDiv> onClick_radJikoKisanbiTorokushaNomi(ChishutsuJokenParameterDiv div) {
         div.getRadJikoKisanbiTorokushaIgai().clearSelectedItem();
-        div.getRadHihokenshaZenin().setSelectedKey(CHECKED);
+        div.getRadJikoKisanbiTorokushaNomi().setSelectedKey(CHECKED);
         return ResponseData.of(div).respond();
     }
 
@@ -60,7 +62,7 @@ public class ChishutsuJokenParameter {
      */
     public ResponseData<ChishutsuJokenParameterDiv> onClick_radJikoKisanbiTorokushaIgai(ChishutsuJokenParameterDiv div) {
         div.getRadJikoKisanbiTorokushaNomi().clearSelectedItem();
-        div.getRadHihokenshaZenin().setSelectedKey(CHECKED);
+        div.getRadJikoKisanbiTorokushaIgai().setSelectedKey(CHECKED);
         div.getRadHihokenshaZenin().setDisabled(false);
         div.getRadHihokenshaIgai().setDisabled(false);
         return ResponseData.of(div).respond();
@@ -80,6 +82,8 @@ public class ChishutsuJokenParameter {
         div.getChkNinteiYukoShuryobiChushutsu().setDisabled(true);
         div.getTxtJukyuNinteibiKaishi().setDisabled(true);
         div.getTxtJukyuNinteibiShuryo().setDisabled(true);
+        div.getTxtNinteiYukoShuryobiKaishi().setDisabled(true);
+        div.getTxtNinteiYukoShuryobiShuryo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -95,8 +99,21 @@ public class ChishutsuJokenParameter {
         div.getChkJukyuNinteiShinseityusha().setDisabled(false);
         div.getChkJukyuNinteibiChushutsu().setDisabled(false);
         div.getChkNinteiYukoShuryobiChushutsu().setDisabled(false);
-        div.getTxtJukyuNinteibiKaishi().setDisabled(false);
-        div.getTxtJukyuNinteibiShuryo().setDisabled(false);
+
+        if (div.getChkJukyuNinteibiChushutsu().getSelectedKeys() != null && !div.getChkJukyuNinteibiChushutsu().getSelectedKeys().isEmpty()) {
+            div.getTxtJukyuNinteibiKaishi().setDisabled(false);
+            div.getTxtJukyuNinteibiShuryo().setDisabled(false);
+        } else {
+            div.getTxtJukyuNinteibiKaishi().setDisabled(true);
+            div.getTxtJukyuNinteibiShuryo().setDisabled(true);
+        }
+        if (div.getChkNinteiYukoShuryobiChushutsu().getSelectedKeys() != null && !div.getChkNinteiYukoShuryobiChushutsu().getSelectedKeys().isEmpty()) {
+            div.getTxtNinteiYukoShuryobiKaishi().setDisabled(false);
+            div.getTxtNinteiYukoShuryobiShuryo().setDisabled(false);
+        } else {
+            div.getTxtNinteiYukoShuryobiKaishi().setDisabled(true);
+            div.getTxtNinteiYukoShuryobiShuryo().setDisabled(true);
+        }
         return ResponseData.of(div).respond();
     }
 

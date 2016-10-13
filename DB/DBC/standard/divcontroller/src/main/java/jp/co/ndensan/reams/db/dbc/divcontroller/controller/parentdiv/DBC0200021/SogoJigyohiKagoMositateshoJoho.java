@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0200021;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110140.DBC110140_SogojigyohiKagoMoshitateshoOutParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110100.DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOutParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200021.SogoJigyohiKagoMositateshoJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0200021.SogoJigyohiKagoMositateshoJohoHandler;
@@ -58,7 +58,7 @@ public class SogoJigyohiKagoMositateshoJoho {
      * @param div SogoJigyohiKagoMositateshoJohoDiv
      * @return ResponseData
      */
-    public ResponseData<DBC110140_SogojigyohiKagoMoshitateshoOutParameter> onClick_Execute(SogoJigyohiKagoMositateshoJohoDiv div) {
+    public ResponseData<DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOutParameter> onClick_Execute(SogoJigyohiKagoMositateshoJohoDiv div) {
         KokuhorenDataSofuViewState parmater = ViewStateHolder.get(ViewStateHolderName.国保連送付情報,
                 KokuhorenDataSofuViewState.class);
         再処理区分 = parmater.get再処理区分();
@@ -66,7 +66,7 @@ public class SogoJigyohiKagoMositateshoJoho {
         if (getHandler(div).setBatchParameter(再処理区分, 処理年月) != null) {
             return ResponseData.of(getHandler(div).setBatchParameter(再処理区分, 処理年月)).respond();
         }
-        return ResponseData.of(new DBC110140_SogojigyohiKagoMoshitateshoOutParameter()).respond();
+        return ResponseData.of(new DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOutParameter()).respond();
     }
 
     private SogoJigyohiKagoMositateshoJohoHandler getHandler(SogoJigyohiKagoMositateshoJohoDiv div) {

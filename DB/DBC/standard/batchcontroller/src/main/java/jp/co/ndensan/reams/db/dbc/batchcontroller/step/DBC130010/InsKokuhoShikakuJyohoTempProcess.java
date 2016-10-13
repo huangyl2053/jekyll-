@@ -55,11 +55,6 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
 
     @Override
     protected void process(KokuhoShikakuJyohoYoResultEntity entity) {
-        if (entity.get取込国保情報Entity() == null || エラー区分_正常データ.equals(entity.get取込国保情報Entity().getエラー区分())) {
-            国保資格情報インポート用Entityリストの編集_取込形式_全件(entity);
-            国保資格情報インポート用Entityリストの編集_取込形式_差分(entity);
-        }
-
         if (entity.get現在国保資格情報Entity() != null
                 && entity.get取込国保情報Entity() != null
                 && 登録区分_画面登録.equals(entity.get現在国保資格情報Entity().getTorokuKubun())) {
@@ -74,6 +69,11 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
                 entity.get取込国保情報Entity().setエラー文言(エラーコード文言);
                 entity.get取込国保情報Entity().setエラー区分(エラー区分);
             }
+        }
+
+        if (entity.get取込国保情報Entity() == null || エラー区分_正常データ.equals(entity.get取込国保情報Entity().getエラー区分())) {
+            国保資格情報インポート用Entityリストの編集_取込形式_全件(entity);
+            国保資格情報インポート用Entityリストの編集_取込形式_差分(entity);
         }
 
         if (国保資格情報インポート用Entitｙ != null) {

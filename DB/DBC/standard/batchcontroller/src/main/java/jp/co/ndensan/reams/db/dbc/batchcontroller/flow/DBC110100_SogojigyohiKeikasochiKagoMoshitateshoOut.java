@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090.KaigokyufuhiKagoMoshitateshoGetKagoMoshitateListProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090.KaigokyufuhiKagoMoshitateshoOutDoBillOutProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090.KaigokyufuhiKagoMoshitateshoSoufuFairuSakuseiProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110110.DBC110110_KogakugassanKyufujissekiOutParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110100.DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOutParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhoreninterface.ConfigKeysKokuhorenSofu;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaNoProcessParameter;
@@ -62,7 +62,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2530-031 jiangwenkai
  */
-public class DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOut extends BatchFlowBase<DBC110110_KogakugassanKyufujissekiOutParameter> {
+public class DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOut extends BatchFlowBase<DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOutParameter> {
 
     private static final String 送付対象データ取得 = "getKagoMoshitateList";
     private static final String 保険者番号取込 = "getHihokenshaNo";

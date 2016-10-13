@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -128,15 +127,18 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
         LowerEntity lowerEntity = business.getLowerEntity(entity);
         JukyushaIdoCheckListReport report = new JukyushaIdoCheckListReport(upperEntity, lowerEntity, order);
         report.writeBy(reportSourceWriter);
+        if (entity.get申請書管理番号() != null && !entity.get申請書管理番号().isEmpty()) {
+            PersonalData personalData = PersonalData.of(entity.get識別コード(),
+                    new ExpandedInformation(new Code("0001"), 申請書管理番号, entity.get申請書管理番号().value()));
+            AccessLogger.log(AccessLogType.照会, personalData);
+        }
     }
 
     @Override
     protected void afterExecute() {
         OutputJokenhyoFactory outputJokenhyo = new OutputJokenhyoFactory();
         outputJokenhyo.outputJokenhyoFactory(reportSourceWriter, parameter);
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
-                new ExpandedInformation(new Code("0001"), 申請書管理番号, 申請書管理番号));
-        AccessLogger.log(AccessLogType.照会, personalData);
+
     }
 
     private RString get出力順(IOutputOrder order) {

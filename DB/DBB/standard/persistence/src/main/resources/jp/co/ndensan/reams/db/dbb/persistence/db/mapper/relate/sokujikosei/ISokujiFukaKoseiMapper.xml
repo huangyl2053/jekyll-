@@ -26,14 +26,14 @@
         ON
         "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
         WHERE
-        "DbT2002Fuka"."choteiNendo" = #{fukaNendo}
-        AND "DbT2002Fuka"."fukaNendo" = #{fukaNendo}
+           "DbT2002Fuka"."fukaNendo" = #{fukaNendo}
         AND "DbT2002Fuka"."tsuchishoNo" = #{tsuchishoNo}
         ORDER BY
-            "DbT2002Fuka"."choteiNendo",
+            "DbT2002Fuka"."choteiNendo" DESC,
             "DbT2002Fuka"."fukaNendo",
             "DbT2002Fuka"."tsuchishoNo",
             "DbT2002Fuka"."rirekiNo"
+        LIMIT 1
     </select>
     
     <!--2.1　賦課の情報の取得--> 

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -32,4 +33,6 @@ public class TokuchoTaishoshaIchiranSakuseiMybatisParameter implements IMyBatisP
     private RString 通知内容コード;
     private List<RString> 捕捉月リスト;
     private List<RString> 確認状況区分リスト;
+    private HihokenshaNo 被保険者番号;
+
 }

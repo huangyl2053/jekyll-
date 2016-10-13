@@ -809,6 +809,20 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "59",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410011",
+     "layoutTitle": "国保連情報取込",
+     "eventName": "戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC3500011",
+     "toLayoutTitle": "国保連情報媒体取込",
+     "toState": "default"
     }
    ]
   }
