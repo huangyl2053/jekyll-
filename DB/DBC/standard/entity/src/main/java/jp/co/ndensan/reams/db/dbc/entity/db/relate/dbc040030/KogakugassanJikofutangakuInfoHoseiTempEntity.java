@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -41,7 +40,7 @@ public class KogakugassanJikofutangakuInfoHoseiTempEntity implements IDbAccessab
 
     private RString seiriNo;
     private int rirekiNo1;
-    private RDateTime jikoFutan_KeisanYM;
+    private FlexibleYearMonth jikoFutan_KeisanYM;
 
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
