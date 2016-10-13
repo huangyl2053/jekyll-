@@ -28,10 +28,13 @@ public class ChishutsuJokenParameter {
      * @return ResponseData<ChishutsuJokenParameterDiv>
      */
     public ResponseData<ChishutsuJokenParameterDiv> onLoad(ChishutsuJokenParameterDiv div) {
-        div.getChishutsuJoken().getShosaiJoken().setDisabled(true);
         div.getRadHihokenshaZenin().setSelectedKey(CHECKED);
         div.getRadHihokenshaZenin().setDisabled(false);
         div.getRadHihokenshaIgai().setDisabled(false);
+        div.getChkJukyushaZenin().setDisabled(true);
+        div.getChkJukyuNinteiShinseityusha().setDisabled(true);
+        div.getChkJukyuNinteibiChushutsu().setDisabled(true);
+        div.getChkNinteiYukoShuryobiChushutsu().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -56,7 +59,6 @@ public class ChishutsuJokenParameter {
     public ResponseData<ChishutsuJokenParameterDiv> onClick_radJikoKisanbiTorokushaIgai(ChishutsuJokenParameterDiv div) {
         div.getRadJikoKisanbiTorokushaNomi().clearSelectedItem();
         div.getRadHihokenshaZenin().setSelectedKey(CHECKED);
-        div.getJukyushaJoken().setDisabled(true);
         div.getRadHihokenshaZenin().setDisabled(false);
         div.getRadHihokenshaIgai().setDisabled(false);
         return ResponseData.of(div).respond();

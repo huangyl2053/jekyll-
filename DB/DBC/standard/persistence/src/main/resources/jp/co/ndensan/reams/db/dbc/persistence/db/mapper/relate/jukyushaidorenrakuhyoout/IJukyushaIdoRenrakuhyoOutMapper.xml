@@ -627,7 +627,7 @@
         "SoufuError"."標準負担適用開始日" as "標準負担適用開始日",
         "SoufuError"."標準負担適用終了日" as "標準負担適用終了日",
         "SoufuError"."償還払化開始日" as "償還払化開始日",
-        "SoufuError"."給付率引下" as "給付率引下",
+        "SoufuError"."給付率引下げ開始日" as "給付率引下げ開始日",
         "SoufuError"."エラーコード" as "エラーコード",
         "SoufuError"."エラー内容" as "エラー内容"
     </sql>

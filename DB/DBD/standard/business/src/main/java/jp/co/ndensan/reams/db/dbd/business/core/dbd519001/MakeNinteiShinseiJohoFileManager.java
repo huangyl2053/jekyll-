@@ -271,8 +271,16 @@ public class MakeNinteiShinseiJohoFileManager {
             出力条件.add(市町村コード.concat(RString.HALF_SPACE));
         }
         出力条件.add(被保険者番号.concat(parameter.get被保険者番号().value()));
-        出力条件.add(抽出開始日時.concat(parameter.get抽出開始日時().toString()));
-        出力条件.add(抽出終了日時.concat(parameter.get抽出終了日時().toString()));
+        if (parameter.get抽出開始日時() != null) {
+            出力条件.add(抽出開始日時.concat(parameter.get抽出開始日時().toString()));
+        } else {
+            出力条件.add(抽出開始日時.concat(RString.HALF_SPACE));
+        }
+        if (parameter.get抽出終了日時() != null) {
+            出力条件.add(抽出終了日時.concat(parameter.get抽出終了日時().toString()));
+        } else {
+            出力条件.add(抽出終了日時.concat(RString.HALF_SPACE));
+        }
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 ファイル名,
                 導入団体コード,
