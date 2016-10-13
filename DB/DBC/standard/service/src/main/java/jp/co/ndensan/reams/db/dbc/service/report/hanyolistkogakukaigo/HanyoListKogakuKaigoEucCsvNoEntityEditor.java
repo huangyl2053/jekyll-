@@ -83,6 +83,8 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
     private static final RString 全角_2 = new RString("２");
     private static final RString RST_緩１ = new RString("緩１");
     private static final RString RST_緩２ = new RString("緩２");
+    private static final RString 第３_緩 = new RString("第３・緩");
+    private static final RString 第２_緩 = new RString("第２・緩");
     private static final RString RST_般 = new RString("般");
     private static final RString RST_現 = new RString("現");
     private static final RString RST_第１ = new RString("第１");
@@ -855,9 +857,9 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
     private RString get低(RString 老齢福祉年金受給の有無) {
 
         if (RST_緩１.equals(老齢福祉年金受給の有無)) {
-            return RST_第２;
+            return 第２_緩;
         } else if (RST_緩２.equals(老齢福祉年金受給の有無)) {
-            return RST_第３;
+            return 第３_緩;
         } else {
             return RST_第４;
         }
