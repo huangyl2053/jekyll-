@@ -372,7 +372,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
             resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity" fetchSize="500">
         SELECT 
-               "KogakugassanJikofutangakuInfoHoseiTemp".*
+               <include refid="allColumns_KogakugassanJikofutangakuInfoHoseiTemp" />
         FROM   
                "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
         <if test="改頁出力順 != null">
@@ -462,7 +462,12 @@
     </select>
     
      <resultMap id="resultMap_高額合算自己負担額" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakuGassanUpdateEntity" autoMapping="true">
-        <association property="中間DBEntity" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
+         <id column="hihokenshaNo"/>
+         <id column="taishoNendo"/>
+         <id column="hokenshaNo"/>
+         <id column="shikyuShinseishoSeiriNo"/>
+         <id column="rirekiNo2"/>
+         <association property="中間DBEntity" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
         <association property="高額合算自己負担額" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"/>
     </resultMap>
     
@@ -485,6 +490,11 @@
     </select>
     
     <resultMap id="resultMap_高額合算自己負担額明細" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakuGassanUpdateEntity" autoMapping="true">
+          <id column="hihokenshaNo"/>
+         <id column="taishoNendo"/>
+         <id column="hokenshaNo"/>
+         <id column="shikyuShinseishoSeiriNo"/>
+         <id column="rirekiNo2"/>
         <association property="中間DBEntity" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
         <association property="高額合算自己負担額明細" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity"/>
     </resultMap>
