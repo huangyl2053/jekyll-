@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogaku.ikkatsunintei.FutanGengaokuNintteiKakuninListCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogaku.ikkatsunintei.FutanGengaokuNintteiKakuninListEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200005.FutanGendogakuNinteiKakuninIchiranReportSource;
-import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
@@ -29,7 +28,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -55,10 +53,12 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -83,14 +83,11 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
     private RString csvFilePath;
     private RString fileName;
     private IOutputOrder outputOrder;
-    private static final int NUM5 = 5;
-    private static final int NUM8 = 8;
     private static final int NO_0 = 0;
     private static final int NO_1 = 1;
     private static final int NO_2 = 2;
     private static final int NO_3 = 3;
     private static final int NO_4 = 4;
-    private RString orderBy = null;
     private static final RString 作成年度 = new RString("【作成年度】");
     private static final RString 認定期間_開始日 = new RString("【認定期間_開始日】");
     private static final RString 認定期間_終了日 = new RString("【認定期間_終了日】");
@@ -138,17 +135,13 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
     @Override
     protected void initialize() {
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, new ReportId(parameter.get帳票ID()),
-                UrControlDataFactory.createInstance().getLoginInfo().getUserId(), Long.valueOf(parameter.get改頁出力順ID().toString()));
+                Long.valueOf(parameter.get改頁出力順ID().toString()));
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(FutangakuNinteiHakkoIchiranOrderKey.class, outputOrder);
         } else {
             出力順 = RString.EMPTY;
         }
         導入団体 = AssociationFinderFactory.createInstance().getAssociation();
-        if (null != outputOrder) {
-            orderBy = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(FutanGendogakuOrderKey.class,
-                    outputOrder).substring(NUM8), NUM5);
-        }
     }
 
     @Override
@@ -156,8 +149,7 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
         ShikibetsuTaishoPSMSearchKeyBuilder build
                 = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         build.setデータ取得区分(DataShutokuKubun.直近レコード);
-        //TODO 基準年月日 <-パラメータの基準日
-//        build.set基準日(parameter.get決定日());
+        build.set基準日(FlexibleDate.getNowDate());
         IShikibetsuTaishoPSMSearchKey key = build.build();
         return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toNinteiBatchKekkaListShutsuryokuMybatisParameter(key, 出力順));
     }
@@ -166,8 +158,15 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
     protected void createWriter() {
         List<RString> pageBreakKeys = new ArrayList<>();
         set改頁Key(outputOrder, pageBreakKeys);
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID())
-                .create();
+        if (!pageBreakKeys.isEmpty()) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID())
+                    .addBreak(
+                            new BreakerCatalog<FutanGendogakuNinteiKakuninIchiranReportSource>().simplePageBreaker(pageBreakKeys))
+                    .create();
+        } else {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID())
+                    .create();
+        }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         csvFilePath = Path.getTmpDirectoryPath();
         fileName = fileName = Path.combinePath(csvFilePath, CSVファイル名);
@@ -467,8 +466,20 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
     private RString to帳票物理名(RString 項目ID) {
 
         RString 帳票物理名 = RString.EMPTY;
-        if (FutanGendogakuOrderKey.市町村コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("hokenshaNo");
+        if (FutanGendogakuOrderKey.郵便番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("yubinNo");
+        } else if (FutanGendogakuOrderKey.町域コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("choikiCode");
+        } else if (FutanGendogakuOrderKey.行政区コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("gyoseikuCode");
+        } else if (FutanGendogakuOrderKey.世帯コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("setaiCode");
+        } else if (FutanGendogakuOrderKey.識別コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shikibetsuCode");
+        } else if (FutanGendogakuOrderKey.氏名５０音カナ.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("gaikokujinKanaShimei");
+        } else if (FutanGendogakuOrderKey.市町村コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shichosonCode");
         } else if (FutanGendogakuOrderKey.被保険者番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("list1_1");
         }
