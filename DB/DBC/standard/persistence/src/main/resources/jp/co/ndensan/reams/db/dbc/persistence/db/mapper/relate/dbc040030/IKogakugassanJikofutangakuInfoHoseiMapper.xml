@@ -10,6 +10,10 @@
                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.allColumns_DbT3070KogakuGassanJikoFutanGaku" />,
                "DbV1001HihokenshaDaicho"."shichosonCode" AS "DbV1001_shichosonCode",
                "DbV1001HihokenshaDaicho"."shikibetsuCode" AS "DbV1001_shikibetsuCode",
+               "ShikibetsuTaisho"."kanjiShimei" AS "DbV1001_kanjiShimei",
+               "ShikibetsuTaisho"."kanaShimei" AS "DbV1001_kanaShimei",
+               "ShikibetsuTaisho"."seinengappiYMD" AS "DbV1001_seinengappiYMD",
+               "ShikibetsuTaisho"."seibetsuCode" AS "DbV1001_seibetsuCode",
                "ShikibetsuTaisho"."yubinNo" AS "DbV1001_yubinNo",
                "ShikibetsuTaisho"."zenkokuJushoCode" AS "DbV1001_zenkokuJushoCode",
                "ShikibetsuTaisho"."gyoseikuCode" AS "DbV1001_gyoseikuCode",
@@ -56,6 +60,10 @@
         <id property="shikyuShinseishoSeiriNo" column="3070KogakuGassanJikoFutanGaku_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="rirekiNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_rirekiNo" />
         <id property="taishoM" column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kanjiShimei" column="DbV1001_kanjiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="kanaShimei" column="DbV1001_kanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="seinengappiYMD" column="DbV1001_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="seibetsuCode" column="DbV1001_seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="juminShubetsuCode" column="DbV1001_juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonCode" column="DbV1001_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="yubinNo" column="DbV1001_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
