@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120041.IchiTmpTableTor
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120830.KokuhorenKyodoJukyushaInProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120830.DBC120830_Kokuho
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyodojukyushain.KokuhorenKyodoJukyushaInGetIdProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -31,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -45,7 +43,6 @@ public class DBC120830_KokuhorenKyodoJukyushaIn
 
     private static final String ファイル取得 = "getFile";
     private static final String 被保険者関連処理 = "doHihokenshaKanren";
-    private static final String 国保連インタフェース管理更新 = "doInterfaceKanriKousin";
     private static final String 一覧表作成 = "doIchiranhyoSakusei";
     private static final String 処理結果リスト作成 = "doShoriKekkaListSakusei";
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
@@ -91,11 +88,9 @@ public class DBC120830_KokuhorenKyodoJukyushaIn
             executeStep(一時TBLの登録);
             int 登録件数 = getResult(Integer.class, new RString(一時TBLの登録), IchiTmpTableTorokuProcess.登録件数);
             if (登録件数 == 0) {
-                executeStep(国保連インタフェース管理更新);
                 executeStep(処理結果リスト作成);
             } else {
                 executeStep(被保険者関連処理);
-                executeStep(国保連インタフェース管理更新);
                 executeStep(一覧表作成);
                 executeStep(処理結果リスト作成);
             }
@@ -151,24 +146,6 @@ public class DBC120830_KokuhorenKyodoJukyushaIn
     }
 
     /**
-     * 国保連インタフェース管理更新です。
-     *
-     * @return バッチコマンド
-     *
-     */
-    @Step(国保連インタフェース管理更新)
-    protected IBatchFlowCommand callDoInterfaceKanriKousinProcess() {
-        KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter parameter
-                = new KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter();
-        parameter.set処理年月(getParameter().getShoriYM());
-        parameter.set交換情報識別番号(交換情報識別番号);
-        parameter.set処理対象年月(処理対象年月CheckNull(処理対象年月));
-        parameter.setレコード件数合計(レコード総件数);
-        parameter.setFileNameList(ファイル名List);
-        return simpleBatch(KokuhorenkyoutsuDoInterfaceKanriKousinProcess.class).arguments(parameter).define();
-    }
-
-    /**
      * 一覧表作成です。
      *
      * @return バッチコマンド
@@ -208,7 +185,7 @@ public class DBC120830_KokuhorenKyodoJukyushaIn
     protected IBatchFlowCommand callDeleteReveicedFileProcess() {
         KokuhorenkyotsuDeleteReveicedFileProcessParameter parameter
                 = new KokuhorenkyotsuDeleteReveicedFileProcessParameter();
-        parameter.set処理年月(getParameter().getShoriYM());
+        parameter.set処理年月(FlexibleDate.getNowDate().getYearMonth());
         parameter.set保存先フォルダ(保存先フォルダのパス);
         parameter.setエントリ情報List(entityList);
         return simpleBatch(KokuhorenkyoutsuDeleteReveicedFileProcess.class).arguments(parameter).define();
@@ -221,10 +198,4 @@ public class DBC120830_KokuhorenKyodoJukyushaIn
         return 0;
     }
 
-    private FlexibleYearMonth 処理対象年月CheckNull(RString 処理対象年月) {
-        if (!RString.isNullOrEmpty(処理対象年月)) {
-            return new FlexibleYearMonth(処理対象年月);
-        }
-        return FlexibleYearMonth.EMPTY;
-    }
 }

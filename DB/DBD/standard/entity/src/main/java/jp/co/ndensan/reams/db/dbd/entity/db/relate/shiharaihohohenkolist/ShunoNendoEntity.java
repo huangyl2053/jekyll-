@@ -17,5 +17,7 @@ public class ShunoNendoEntity {
 
     private List<ShunoKibetsuEntity> 期別情報;
     private FlexibleYear 賦課年度;
+
     private boolean 過年度フラグ;
+    private ShunoKibetsuEntity 過年度期別情報;
 }

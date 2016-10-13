@@ -109,6 +109,8 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
                 source.list2_5 = new RString(計算後情報_宛名_口座_更正前Entity.get減免額().toString());
             }
             set月別取得段階(計算後情報_宛名_口座_更正前Entity, source);
+            set特徴期別金額_更正前(source);
+            set普徴期別金額_更正前1(source);
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額()) {
             source.list2_18 = new RString(計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額().toString());
@@ -134,9 +136,6 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         }
 
         source.list4_1 = 調定日時.getDate().wareki().toDateString();
-        set特徴期別金額_更正前(source);
-        set普徴期別金額_更正前1(source);
-
         source.list5_1 = 調定日時.getDate().wareki().toDateString();
         set特徴期別金額_更正後(source);
         set普徴期別金額_更正後1(source);

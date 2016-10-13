@@ -717,6 +717,7 @@
             AND "DbWT2111ShokanShinsei"."seiriNo" = servicePlan."seiriNo"
             WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
             AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+            AND servicePlan."serviceTeikyoYM" <![CDATA[<]]> '200604'
            UNION(
                 SELECT
                     <include refid="allColumns_DbWT2111ShokanShinsei" />,
@@ -736,6 +737,8 @@
                 AND "DbWT2111ShokanShinsei"."seiriNo" = servicePlan."seiriNo"
                 WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
                 AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+                AND servicePlan."serviceTeikyoYM" <![CDATA[>=]]> '200604'
+                AND servicePlan."serviceTeikyoYM" <![CDATA[<]]> '200904'
                 )
            UNION(
                 SELECT
@@ -755,7 +758,8 @@
                 AND "DbWT2111ShokanShinsei"."serviceTeikyoYM" = servicePlan."serviceTeikyoYM"
                 AND "DbWT2111ShokanShinsei"."seiriNo" = servicePlan."seiriNo"
                 WHERE "DbWT2111ShokanShinsei"."hokenshaNo" = #{保険者番号}
-                AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false )) AS allService
+                AND "DbWT2111ShokanShinsei"."sofuJogaiFlag" = false
+                AND servicePlan."serviceTeikyoYM" <![CDATA[>=]]> '200904')) AS allService
            ORDER BY
                 allService."hiHokenshaNo" ASC,
                 allService."serviceTeikyoYM" ASC,
@@ -936,6 +940,7 @@
         servicePlan."renban" AS "servicePlan_renban",
         servicePlan."shiteiKijunGaitoJigyoshaKubunCode" AS "servicePlan_shiteiKijunGaitoJigyoshaKubunCode",
         servicePlan."kyotakuServiceSakuseiIraiYMD" AS "servicePlan_kyotakuServiceSakuseiIraiYMD",
+        servicePlan."serviceCode" AS "servicePlan_serviceCode",
         servicePlan."tanisu" AS "servicePlan_tanisu",
         servicePlan."tanisuTanka" AS "servicePlan_tanisuTanka",
         servicePlan."seikyuKingaku" AS "servicePlan_seikyuKingaku",
