@@ -1246,7 +1246,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         List<RString> 被保険者台帳Info = 被保険者台帳.split(SPLIT.toString());
         entity.setShikakuShutokuYMD(new FlexibleDate(被保険者台帳Info.get(ORDER_0)));
         entity.setShikakuSoshitsuYMD(new FlexibleDate(被保険者台帳Info.get(ORDER_1)));
-        entity.setJushochiTokureiFlag(被保険者台帳Info.get(ORDER_3));
+        entity.setJushochiTokureiFlag(被保険者台帳Info.get(ORDER_2));
         return entity;
     }
 
@@ -1336,10 +1336,11 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             return null;
         }
         DbT3105SogoJigyoTaishoshaEntity entity = new DbT3105SogoJigyoTaishoshaEntity();
-        entity.setTekiyoKaishiYMD(new FlexibleDate(総合事業対象者));
+        List<RString> 総合事業対象者Info = 総合事業対象者.split(SPLIT.toString());
+        entity.setTekiyoKaishiYMD(new FlexibleDate(総合事業対象者Info.get(ORDER_0)));
         return entity;
     }
-
+    
     private JushochitokureiInfoEntity get住所地特例entity(RString 住所地特例) {
         if (RString.isNullOrEmpty(住所地特例)) {
             return null;
@@ -1710,7 +1711,9 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         if (資格喪失年月日 != null) {
             idoTblTmpEntity.set資格喪失年月日(new RString(資格喪失年月日.toString()));
         }
-        idoTblTmpEntity.set市町村コード(被保険者台帳List.get(ORDER_0).getShichosonCode().getColumnValue());
+        if (被保険者台帳.getShichosonCode() != null) {
+            idoTblTmpEntity.set市町村コード(被保険者台帳.getShichosonCode().getColumnValue());
+        }
     }
 
     private void set居宅計画(IdoTblTmpEntity idoTblTmpEntity, List<KyotakuEntity> 居宅計画List) {
@@ -1727,7 +1730,9 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             idoTblTmpEntity.set居宅サービス計画適用終了年月日(new RString(居宅サービス計画適用終了年月日.toString()));
         }
         idoTblTmpEntity.set居宅サービス計画作成区分コード(居宅計画.get居宅サービス計画作成区分コード());
-        idoTblTmpEntity.set居宅介護支援事業所番号(居宅計画.get委託先事業者番号().getColumnValue());
+        if (居宅計画.get委託先事業者番号() != null) {
+            idoTblTmpEntity.set居宅介護支援事業所番号(居宅計画.get委託先事業者番号().getColumnValue());
+        }
     }
 
     private void set支払方法変更(IdoTblTmpEntity idoTblTmpEntity, List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更List) {

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushaidorenrakuhyoout;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110020.JukyushaIdoRenrakuhyoOutMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.HihoNoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity;
 
@@ -43,5 +44,7 @@ public interface IJukyushaIdoRenrakuhyoOutMapper {
      * @return List<IdouTempEntity>
      */
     List<IdouTempEntity> selectTestData();
+
+    void delete受給者異動送付(JukyushaIdoRenrakuhyoOutMybatisParameter myBatisParameter);
 
 }

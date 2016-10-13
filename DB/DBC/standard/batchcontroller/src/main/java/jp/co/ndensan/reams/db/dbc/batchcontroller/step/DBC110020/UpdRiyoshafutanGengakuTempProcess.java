@@ -113,15 +113,15 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
 
     private RString 利用者負担全項目(DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 利用者負担) {
         RString 全項目 = RString.EMPTY;
+        全項目 = cancatYMD(利用者負担.getTekiyoKaishiYMD(), 全項目);
+        全項目 = cancatYMD(利用者負担.getTekiyoShuryoYMD(), 全項目);
+        全項目 = cancatYMD(利用者負担.getShinseiYMD(), 全項目);
+        全項目 = cancatYMD(利用者負担.getKetteiYMD(), 全項目);
         全項目 = 全項目.concat(利用者負担.getShoKisaiHokenshaNo().getColumnValue()).concat(SPLIT)
                 .concat(利用者負担.getHihokenshaNo().getColumnValue()).concat(SPLIT)
                 .concat(new RString(利用者負担.getRirekiNo())).concat(SPLIT)
                 .concat(利用者負担.getInsertDantaiCd()).concat(SPLIT)
                 .concat(利用者負担.getIsDeleted() ? RST_TRUE : RST_FALSE).concat(SPLIT);
-        全項目 = cancatYMD(利用者負担.getShinseiYMD(), 全項目);
-        全項目 = cancatYMD(利用者負担.getKetteiYMD(), 全項目);
-        全項目 = cancatYMD(利用者負担.getTekiyoKaishiYMD(), 全項目);
-        全項目 = cancatYMD(利用者負担.getTekiyoShuryoYMD(), 全項目);
         全項目 = 全項目.concat(利用者負担.getKetteiKubun()).concat(SPLIT)
                 .concat(利用者負担.getHiShoninRiyu()).concat(SPLIT)
                 .concat(利用者負担.getShogaishaTechoUmu() ? RST_TRUE : RST_FALSE).concat(SPLIT)
