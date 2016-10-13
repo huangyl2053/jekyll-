@@ -4,6 +4,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 訪問介護利用者負担額減額認定者リスト
@@ -42,7 +43,6 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource imple
     @ReportItem(name = "kaiPege5", length = 20, order = 14)
     public RString kaiPege5;
     @ReportItem(name = "listUpper_1", length = 10, order = 15)
-    @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
     public RString listUpper_1;
     @ReportItem(name = "listUpper_2", length = 8, order = 16)
     public RString listUpper_2;
@@ -139,5 +139,9 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource imple
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportPerson(id = "001")
+    public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
+    public RString hihokenshaNo;
 // </editor-fold>
 }

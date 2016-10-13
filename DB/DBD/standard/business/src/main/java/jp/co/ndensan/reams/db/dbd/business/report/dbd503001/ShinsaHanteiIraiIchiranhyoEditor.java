@@ -94,10 +94,12 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
         }
         if (null != this.帳票出力用申請情報Entityリスト.get証記載保険者番号()) {
             source.hokenshaNo = this.帳票出力用申請情報Entityリスト.get証記載保険者番号().value();
+            source.hokenShaNo = this.帳票出力用申請情報Entityリスト.get証記載保険者番号().value();
         }
         source.listIraiichiranhyo1_1 = new RString(String.valueOf(this.帳票出力用申請情報Entityリスト.getIndex()));
         if (null != this.帳票出力用申請情報Entityリスト.get被保険者番号()) {
             source.listIraiichiranhyo1_2 = this.帳票出力用申請情報Entityリスト.get被保険者番号().value();
+            source.hihokenshaNo = this.帳票出力用申請情報Entityリスト.get被保険者番号().value();
         }
         if (null != this.帳票出力用申請情報Entityリスト.get被保険者氏名()) {
             source.listIraiichiranhyo3_1 = this.帳票出力用申請情報Entityリスト.get被保険者氏名().value();

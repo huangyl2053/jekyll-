@@ -131,6 +131,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
 
         if (null != this.訪問介護利用者負担額減額認定者Entity.get被保険者番号()) {
             source.listUpper_1 = this.訪問介護利用者負担額減額認定者Entity.get被保険者番号().value();
+            source.hihokenshaNo = this.訪問介護利用者負担額減額認定者Entity.get被保険者番号().value();
         }
         if (null != this.訪問介護利用者負担額減額認定者Entity.getPsmEntity()) {
             UaFt200FindShikibetsuTaishoEntity 宛名 = this.訪問介護利用者負担額減額認定者Entity.getPsmEntity();
