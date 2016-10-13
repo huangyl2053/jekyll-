@@ -99,10 +99,21 @@ public class ChishutsuJokenParameter {
         div.getChkJukyuNinteiShinseityusha().setDisabled(false);
         div.getChkJukyuNinteibiChushutsu().setDisabled(false);
         div.getChkNinteiYukoShuryobiChushutsu().setDisabled(false);
-        div.getTxtJukyuNinteibiKaishi().setDisabled(false);
-        div.getTxtJukyuNinteibiShuryo().setDisabled(false);
-        div.getTxtNinteiYukoShuryobiKaishi().setDisabled(false);
-        div.getTxtNinteiYukoShuryobiShuryo().setDisabled(false);
+
+        if (div.getChkJukyuNinteibiChushutsu().getSelectedKeys() != null && !div.getChkJukyuNinteibiChushutsu().getSelectedKeys().isEmpty()) {
+            div.getTxtJukyuNinteibiKaishi().setDisabled(false);
+            div.getTxtJukyuNinteibiShuryo().setDisabled(false);
+        } else {
+            div.getTxtJukyuNinteibiKaishi().setDisabled(true);
+            div.getTxtJukyuNinteibiShuryo().setDisabled(true);
+        }
+        if (div.getChkNinteiYukoShuryobiChushutsu().getSelectedKeys() != null && !div.getChkNinteiYukoShuryobiChushutsu().getSelectedKeys().isEmpty()) {
+            div.getTxtNinteiYukoShuryobiKaishi().setDisabled(false);
+            div.getTxtNinteiYukoShuryobiShuryo().setDisabled(false);
+        } else {
+            div.getTxtNinteiYukoShuryobiKaishi().setDisabled(true);
+            div.getTxtNinteiYukoShuryobiShuryo().setDisabled(true);
+        }
         return ResponseData.of(div).respond();
     }
 
