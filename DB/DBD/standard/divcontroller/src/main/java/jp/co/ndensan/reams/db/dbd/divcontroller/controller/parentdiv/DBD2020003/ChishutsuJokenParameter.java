@@ -59,7 +59,6 @@ public class ChishutsuJokenParameter {
     public ResponseData<ChishutsuJokenParameterDiv> onClick_radJikoKisanbiTorokushaIgai(ChishutsuJokenParameterDiv div) {
         div.getRadJikoKisanbiTorokushaNomi().clearSelectedItem();
         div.getRadHihokenshaZenin().setSelectedKey(CHECKED);
-        div.getJukyushaJoken().setDisabled(true);
         div.getRadHihokenshaZenin().setDisabled(false);
         div.getRadHihokenshaIgai().setDisabled(false);
         return ResponseData.of(div).respond();
