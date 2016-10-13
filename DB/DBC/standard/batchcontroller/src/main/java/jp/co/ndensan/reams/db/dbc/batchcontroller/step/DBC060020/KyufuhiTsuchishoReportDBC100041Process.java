@@ -60,6 +60,8 @@ public class KyufuhiTsuchishoReportDBC100041Process extends BatchProcessBase<Kyu
     private RString サービス年月;
     private RString 文書番号;
     private RString 通知文;
+    private RString 通知文1;
+    private RString 通知文2;
     private int index;
     private int 分子;
     private static final int 数値_15 = 15;
@@ -99,9 +101,14 @@ public class KyufuhiTsuchishoReportDBC100041Process extends BatchProcessBase<Kyu
         atesakiSource
                 = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先).build()).buildSource();
         IToiawasesakiSourceBuilderCreator aa = ReportSourceBuilders.toiawaseSourceBuilder();
+
         sourceBuilder = aa.create(GyomuCode.DB介護保険, ReportIdDBC.DBC100041.getReportId(), BushoCode.EMPTY,
                 new RDate(processParameter.get処理年月日().toString()));
         通知文 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                ReportIdDBC.DBC100041.getReportId(), KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate());
+        通知文1 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                ReportIdDBC.DBC100041.getReportId(), KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate());
+        通知文2 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC100041.getReportId(), KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate());
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(宛先builder.build());
         KyufuhiTsuchishoBatchMybitisParameter mybatisParam = processParameter.
@@ -118,11 +125,13 @@ public class KyufuhiTsuchishoReportDBC100041Process extends BatchProcessBase<Kyu
         KyufuhiTsuchishoCoverEntity coverEntity = tsuchisho.帳票データ作成(entity, processParameter, ninshoshaSource, atesakiSource, sourceBuilder);
         coverEntity.setBunshoNo(文書番号);
         coverEntity.setTsuchibun1(通知文);
+        coverEntity.setTsuchibun1(通知文1);
+        coverEntity.setTsuchibun1(通知文2);
         coverEntity.setPageBunshi(分子);
         coverEntity.setPageBunbo(entity.getCount());
-        boolean isBreak = isBreak(被保険者番号, サービス年月, entity);
-        if (isBreak || index % 数値_15 == 0) {
-            coverEntity.setListServiceIchiranUpper_1(サービス年月);
+        boolean isBreak = isBreak(entity);
+        if (!isBreak || index % 数値_15 == 0) {
+            coverEntity.setListServiceIchiranUpper_1(entity.getサービス提供年月());
         } else if (!isBreak) {
             coverEntity.setListServiceIchiranUpper_1(RString.EMPTY);
         }
@@ -133,7 +142,7 @@ public class KyufuhiTsuchishoReportDBC100041Process extends BatchProcessBase<Kyu
         report.writeBy(reportSourceWriter);
     }
 
-    private boolean isBreak(RString 被保険者番号, RString サービス年月, KyufuhiTuchiHakkoEntity entity) {
+    private boolean isBreak(KyufuhiTuchiHakkoEntity entity) {
         return 被保険者番号.equals(entity.get被保険者番号()) && サービス年月.equals(entity.getサービス提供年月());
     }
 }
