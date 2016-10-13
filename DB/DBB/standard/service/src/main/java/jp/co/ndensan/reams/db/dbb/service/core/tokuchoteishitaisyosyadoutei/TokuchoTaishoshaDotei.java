@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBB-1850-030 sunhui
  */
-public class TokuchoTeishiTaisyosyaDoutei {
+public class TokuchoTaishoshaDotei {
 
     private final RString 単一保険者 = new RString("1");
     private final RString 広域保険者 = new RString("2");
@@ -71,7 +71,7 @@ public class TokuchoTeishiTaisyosyaDoutei {
     /**
      * コンストラクタです。
      */
-    public TokuchoTeishiTaisyosyaDoutei() {
+    public TokuchoTaishoshaDotei() {
         shoriDateKanriDac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
@@ -79,10 +79,10 @@ public class TokuchoTeishiTaisyosyaDoutei {
     /**
      * 初期化メソッドです。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TokuchoTeishiTaisyosyaDoutei}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TokuchoTaishoshaDotei}のインスタンス
      */
-    public static TokuchoTeishiTaisyosyaDoutei createInstance() {
-        return InstanceProvider.create(TokuchoTeishiTaisyosyaDoutei.class);
+    public static TokuchoTaishoshaDotei createInstance() {
+        return InstanceProvider.create(TokuchoTaishoshaDotei.class);
     }
 
     /**

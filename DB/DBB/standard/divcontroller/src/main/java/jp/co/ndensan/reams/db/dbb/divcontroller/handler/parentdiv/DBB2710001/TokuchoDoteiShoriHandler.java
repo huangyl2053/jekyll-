@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710001.Konk
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710001.TokuchoDoteiShoriDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710001.dgTokuchoTaishoshaDoteiShoriKakuninKoiki_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710001.dgTokuchoTaishoshaDoteiShoriKakuninTanitsu_Row;
-import jp.co.ndensan.reams.db.dbb.service.core.tokuchoteishitaisyosyadoutei.TokuchoTeishiTaisyosyaDoutei;
+import jp.co.ndensan.reams.db.dbb.service.core.tokuchoteishitaisyosyadoutei.TokuchoTaishoshaDotei;
 import jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -97,7 +97,7 @@ public final class TokuchoDoteiShoriHandler {
         }
         FlexibleYear 日付関連_調定年度 = new FlexibleYear(DbBusinessConfig.get(
                 ConfigKeysHizuke.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
-        TokuchoTeishiTaisyosyaDoutei tokuchoTeishiTaisyosyaDoutei = TokuchoTeishiTaisyosyaDoutei.createInstance();
+        TokuchoTaishoshaDotei tokuchoTeishiTaisyosyaDoutei = TokuchoTaishoshaDotei.createInstance();
         List<ShoriDateKanriResult> 特徴対象者同定情報リスト = tokuchoTeishiTaisyosyaDoutei.getTokuchoTaishoJoho(日付関連_調定年度, 保険者モード);
         if (null == 特徴対象者同定情報リスト || 特徴対象者同定情報リスト.isEmpty()) {
             can実行 = false;
@@ -212,7 +212,7 @@ public final class TokuchoDoteiShoriHandler {
      * @return TokuchoTeishiTaisyosyaDouteiBatchParameter
      */
     public TokuchoTeishiTaisyosyaDouteiBatchParameter doバッチパラメータの設定() {
-        TokuchoTeishiTaisyosyaDoutei tokuchoTeishiTaisyosyaDoutei = TokuchoTeishiTaisyosyaDoutei.createInstance();
+        TokuchoTaishoshaDotei tokuchoTeishiTaisyosyaDoutei = TokuchoTaishoshaDotei.createInstance();
         int 捕捉月1 = div.getTxtHosokuM1().getValue().getMonthValue();
         List<RString> 捕捉月 = new ArrayList<>();
         捕捉月.add(new RString(捕捉月1).padZeroToLeft(月字数));
