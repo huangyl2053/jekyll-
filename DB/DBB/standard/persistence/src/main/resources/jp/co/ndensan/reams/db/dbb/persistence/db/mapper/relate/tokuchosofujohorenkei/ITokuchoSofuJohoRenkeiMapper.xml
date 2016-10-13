@@ -65,6 +65,22 @@
         年金特徴回付情報."dtKisoNenkinNo",
         年金特徴回付情報."dtNenkinCode"
     </select>
+    <select resultOrdered="true" id="select広域市町村情報" 
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity" >
+        SELECT 
+         DbT7051KoseiShichosonMaster.*
+        FROM rgdb."DbT7051KoseiShichosonMaster" as DbT7051KoseiShichosonMaster
+        WHERE 
+         NOT EXISTS(
+        SELECT 'X' FROM rgfa."DbT7051KoseiShichosonMaster" AS "slv"
+        WHERE "slv"."isDeleted" = FALSE
+        AND "DbT7051KoseiShichosonMaster"."shichosonCode"    = "slv"."shichosonCode"
+        AND "DbT7051KoseiShichosonMaster"."kanyuYMD"                  <![CDATA[<]]> "slv"."kanyuYMD"
+        )
+       AND  DbT7051KoseiShichosonMaster."gappeiKyuShichosonKubun" = '0'
+        ORDER BY
+         DbT7051KoseiShichosonMaster."shichosonCode"
+    </select>
 </mapper>
 
 

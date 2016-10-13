@@ -129,8 +129,8 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
         param.set市町村コード(市町村コード);
         param.set市町村名称(市町村名称);
         GassanJikofutangakuHoseiIchiranEntity tmpEntity = new GassanJikofutangakuHoseiIchiranEntity();
-        tmpEntity.set被保険者番号(entity.getHokenshaNo());
-        tmpEntity.set被保険者氏名(entity.getHokenshaMei());
+        tmpEntity.set被保険者番号(entity.getHihokenshaNo());
+        tmpEntity.set被保険者氏名(entity.getHihokenshaShimei().value());
         tmpEntity.set生年月日(entity.getUmareYMD());
         tmpEntity.set性別(entity.getSeibetsuCode().getColumnValue());
         tmpEntity.set申請書整理番号(entity.getShikyuShinseishoSeiriNo());
