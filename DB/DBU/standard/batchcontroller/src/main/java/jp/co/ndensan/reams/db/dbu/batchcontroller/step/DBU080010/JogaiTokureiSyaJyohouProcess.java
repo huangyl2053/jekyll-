@@ -24,7 +24,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -41,10 +43,21 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo."
             + "IJogaiTokureiSyaJyohouMapper.get当初_版改定_異動分データ");
     private static final int 翌日 = 1;
+    private static final RString 該当項目 = new RString("NotAcceptable");
+    private static final RString 保有 = new RString("NotCovered");
     private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
     private JogaiTokureiSyaJyohouProcessParameter processParameter;
     private JogaiTokureiSyaJyohouMybatisParameter mybatisParameter;
     private List<TokuteiKojinJohoHanKanri> 特定個人版管理特定情報;
+    /**
+     * 版番号です。
+     */
+    public static final RString 版番号;
+
+    static {
+        版番号 = new RString("hanNo");
+    }
+    private OutputParameter<RString> hanNo;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 中間DB提供基本情報;
 
@@ -53,6 +66,7 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
         // TODO 凌護行　パラメータの設定が不明、QA回答まち、2016/10/20
         // 2.1　画面起動時（ワークフローID = xxxxxx）、画面指定内容のチェック
         特定個人版管理特定情報 = new ArrayList<>();
+        hanNo = new OutputParameter();
         RString 新規異動区分 = processParameter.get新規異動区分();
         RDateTime 対象開始日時 = processParameter.get対象開始日時();
         FlexibleDate システム日付 = new FlexibleDate(RDate.getNowDate().toDateString());
@@ -61,6 +75,7 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
         // TODO 凌護行　パラメータの設定が不明、QA回答まち、2016/10/20
         特定個人版管理特定情報 = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(新規異動区分,
                 processParameter.get提供要否List().get(0), DataSetNo._0102住所地特例情報.getコード(), システム日付);
+        hanNo.setValue(特定個人版管理特定情報.get(0).get版番号());
         if ((ShinkiIdoKubun.当初.getコード().equals(新規異動区分)
                 || ShinkiIdoKubun.版改定.getコード().equals(新規異動区分))
                 && 特定個人版管理特定情報 != null && !特定個人版管理特定情報.isEmpty()
@@ -88,7 +103,8 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
                 processParameter.get対象開始日時(), processParameter.get対象終了日時(),
                 processParameter.get個人番号付替対象者被保険者番号(),
                 特定個人版管理特定情報.get(0).get版番号(),
-                新規異動区分);
+                新規異動区分,
+                RString.EMPTY);
     }
 
     @Override
@@ -117,18 +133,19 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
         entity.setTokuteiKojinJohoMeiCode(TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード());
         entity.setHanNo(特定個人版管理特定情報.get(0).get版番号());
         entity.setTeikyoNaiyo01(relateEntity.getJigyoshaJusho());
-        // TODO 凌護行　パラメータの設定が不明、QA回答まち、2016/10/20
-        entity.setMisetteiJiyu01(RString.EMPTY);
+        entity.setMisetteiJiyu01(get未設定事由(relateEntity.getJigyoshaJusho()));
         entity.setTeikyoNaiyo02(get事業者名称(relateEntity.getJigyoshaMeisho()));
-        entity.setMisetteiJiyu02(RString.EMPTY);
+        entity.setMisetteiJiyu02(get未設定事由(get事業者名称(
+                relateEntity.getJigyoshaMeisho())));
         entity.setTeikyoNaiyo03(get日期(relateEntity.getNyushoYMD()));
-        entity.setMisetteiJiyu03(RString.EMPTY);
+        entity.setMisetteiJiyu03(get未設定事由(get日期(relateEntity.getNyushoYMD())));
         entity.setTeikyoNaiyo04(RString.EMPTY);
-        entity.setMisetteiJiyu04(RString.EMPTY);
+        entity.setMisetteiJiyu04(保有);
         entity.setTeikyoNaiyo05(get日期(relateEntity.getTaishoYMD()));
-        entity.setMisetteiJiyu05(RString.EMPTY);
-        entity.setTeikyoNaiyo06(RString.EMPTY);
-        entity.setMisetteiJiyu06(RString.EMPTY);
+        entity.setMisetteiJiyu05(get未設定事由(get日期(relateEntity.getTaishoYMD())));
+        entity.setTeikyoNaiyo06(get施設電話番号(relateEntity.getTelNo()));
+        entity.setMisetteiJiyu06(get未設定事由(
+                get施設電話番号(relateEntity.getTelNo())));
         entity.setTeikyoNaiyo07(RString.EMPTY);
         entity.setMisetteiJiyu07(RString.EMPTY);
         entity.setTeikyoNaiyo08(RString.EMPTY);
@@ -163,6 +180,20 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
     private RString get事業者名称(AtenaMeisho 事業者名称) {
         if (事業者名称 != null && !事業者名称.isEmpty()) {
             return 事業者名称.value();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get施設電話番号(TelNo 施設電話番号) {
+        if (施設電話番号 != null && !施設電話番号.isEmpty()) {
+            return 施設電話番号.value();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get未設定事由(RString 提供内容) {
+        if (RString.isNullOrEmpty(提供内容)) {
+            return 該当項目;
         }
         return RString.EMPTY;
     }
