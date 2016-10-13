@@ -42,11 +42,11 @@
             A."hihokenshaNo"
         </select>
         <select resultOrdered="true" id="select市町村名"  
-              resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity"
+              resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
               parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.PntNinteiShinsaHanteiListMybatisParameter"
               fetchSize="500">
          SELECT 
-         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster"/>
+         rgdb."DbT7051KoseiShichosonMaster"."shichosonMeisho"
          FROM
          rgdb."DbT7051KoseiShichosonMaster"
          WHERE
