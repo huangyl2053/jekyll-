@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000011;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuParamter;
-import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihohokinokubun.ShiharaiHohoKinoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufubunruikubun.ShiharaiHohoKinoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000011.PanelnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraishikyu.ShokanbaraiShikyuFinder;
 import jp.co.ndensan.reams.db.dbc.service.report.shoukanbaraisuuchishoikkatsusakusei.ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei;
