@@ -190,8 +190,7 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
             List<RString> csvList = getコントロールlist();
             csvListWriter.writeLine(csvList);
         }
-        出力件数 = 出力件数 + INT_1;
-        総出力件数 = 総出力件数 + INT_1;
+
         if (データ区分_00.equals(entity.getDataKunbun()) && 給付実績 != null) {
             DbWT1111KyufuJissekiEntity 給付実績一時entity = get給付実績一時_基本entity(給付実績);
             給付実績一時tableWriter.insert(給付実績一時entity);
@@ -241,6 +240,7 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
 
     private void write送付ファイル_基本(DbWT1111KyufuJissekiTempTempEntity entity) {
         if (データ区分_00.equals(entity.getDataKunbun())) {
+            countUp();
             cnt01 = cnt01 + INT_1;
             件数カウンター初期化();
             if (entity.getDbWT1131_kokanShikibetsuNo().getColumnValue()
@@ -252,66 +252,84 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
                 csvListWriter.writeLine(csvList);
             }
         } else if (データ区分_01.equals(entity.getDataKunbun()) && entity.getDbT3018_hiHokenshaNo() != null) {
+            countUp();
             エラー処理(entity, entity.getDbWT1131_meisaiSetteiKubun());
             cnt02 = cnt02 + INT_1;
             List<RString> csvList = get明細list(entity);
             csvListWriter.writeLine(csvList);
         } else if (データ区分_02.equals(entity.getDataKunbun()) && entity.getDbT3019_hiHokenshaNo() != null) {
+            countUp();
             エラー処理(entity, entity.getDbWT1131_kinkyuShisetsuRyoyoSetteiKubun());
             cnt03 = cnt03 + INT_1;
             List<RString> csvList = get施設list(entity);
             csvListWriter.writeLine(csvList);
         } else if (データ区分_03.equals(entity.getDataKunbun()) && entity.getDbT3032_hiHokenshaNo() != null) {
+            countUp();
             エラー処理(entity, entity.getDbWT1131_kinkyuShisetsuRyoyoSetteiKubun());
             cnt13 = cnt13 + INT_1;
             List<RString> csvList = get所定list(entity);
             csvListWriter.writeLine(csvList);
         } else if (データ区分_04.equals(entity.getDataKunbun()) && entity.getDbT3020_hiHokenshaNo() != null) {
+            countUp();
             エラー処理(entity, entity.getDbWT1131_tokuteiShinryoSetteiKubun());
             cnt04 = cnt04 + INT_1;
             List<RString> csvList = get特定診療list(entity);
             csvListWriter.writeLine(csvList);
         } else if (データ区分_05.equals(entity.getDataKunbun()) && entity.getDbT3021_hiHokenshaNo() != null) {
+            countUp();
             エラー処理(entity, entity.getDbWT1131_tokuteishinryoTokubetsuryoyoSetteiKubun());
             cnt04 = cnt04 + INT_1;
             List<RString> csvList = get特別療養list(entity);
             csvListWriter.writeLine(csvList);
         } else if (データ区分_06.equals(entity.getDataKunbun()) && entity.getDbT3022_hiHokenshaNo() != null) {
+            countUp();
             エラー処理(entity, entity.getDbWT1131_shokujiHiyosetteiKubun());
             cnt05 = cnt05 + INT_1;
             List<RString> csvList = get食事list(entity);
             csvListWriter.writeLine(csvList);
-        } else if (データ区分_07.equals(entity.getDataKunbun()) && entity.getDbT3025_hiHokenshaNo() != null) {
+        }
+        write送付ファイル_基本1(entity);
+    }
+
+    private void write送付ファイル_基本1(DbWT1111KyufuJissekiTempTempEntity entity) {
+        if (データ区分_07.equals(entity.getDataKunbun()) && entity.getDbT3025_hiHokenshaNo() != null) {
+            countUp();
             エラー処理(entity, entity.getDbWT1131_kyotakuKeikakuSetteiKubun());
             cnt06 = cnt06 + INT_1;
             List<RString> csvList = get居宅list(entity);
             csvListWriter.writeLine(csvList);
         } else if (データ区分_08.equals(entity.getDataKunbun()) && entity.getDbT3026_hiHokenshaNo() != null) {
+            countUp();
             エラー処理(entity, entity.getDbWT1131_fukushoyouguKonyuSetteiKubun());
             cnt07 = cnt07 + INT_1;
             List<RString> csvList = get福祉list(entity);
             csvListWriter.writeLine(csvList);
         } else if (データ区分_09.equals(entity.getDataKunbun()) && entity.getDbT3027_hiHokenshaNo() != null) {
+            countUp();
             エラー処理(entity, entity.getDbWT1131_jutakukaishuSetteiKubun());
             cnt08 = cnt08 + INT_1;
             List<RString> csvList = get住宅list(entity);
             csvListWriter.writeLine(csvList);
         } else if (データ区分_10.equals(entity.getDataKunbun()) && entity.getDbT3033_hiHokenshaNo() != null) {
+            countUp();
             エラー処理(entity, entity.getDbWT1131_shukeiSetteiKubun());
             cnt10 = cnt10 + INT_1;
             List<RString> csvList = get集計list(entity);
             csvListWriter.writeLine(csvList);
         } else if (データ区分_11.equals(entity.getDataKunbun()) && entity.getDbT3029_hiHokenshaNo() != null) {
+            countUp();
             エラー処理(entity, entity.getDbWT1131_tokuteinyushoshaSetteiKubun());
             cnt11 = cnt11 + INT_1;
             List<RString> csvList = get入所list(entity);
             csvListWriter.writeLine(csvList);
         } else if (データ区分_12.equals(entity.getDataKunbun()) && entity.getDbT3030_hiHokenshaNo() != null) {
+            countUp();
             エラー処理(entity, entity.getDbWT1131_shakaifukushiKeigenSetteiKubun());
             cnt12 = cnt12 + INT_1;
             List<RString> csvList = get社福list(entity);
             csvListWriter.writeLine(csvList);
         } else if (データ区分_13.equals(entity.getDataKunbun()) && entity.getDbT3106_hiHokenshaNo() != null) {
+            countUp();
             エラー処理(entity, entity.getDbWT1131_meisaiJushochitokureiSetteiKubun());
             cnt14 = cnt14 + INT_1;
             List<RString> csvList = get住特list(entity);
@@ -420,6 +438,7 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
     }
 
     private List<RString> get高額list(DbWT1111KyufuJissekiTempTempEntity entity) {
+        countUp();
         List<RString> list = new ArrayList<>();
         list.add(RecordShubetsu.データレコード.getコード());
         list.add(new RString(出力件数));
@@ -1417,5 +1436,10 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
         cnt11 = INT_0;
         cnt12 = INT_0;
         cnt14 = INT_0;
+    }
+
+    private void countUp() {
+        出力件数 = 出力件数 + INT_1;
+        総出力件数 = 総出力件数 + INT_1;
     }
 }
