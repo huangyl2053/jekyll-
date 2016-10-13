@@ -118,7 +118,6 @@ public class PrtIdoTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchPr
         }
         KariSanteiTsuchiShoKyotsuKomokuHenshu 仮算定共通情報作成 = InstanceProvider.create(KariSanteiTsuchiShoKyotsuKomokuHenshu.class);
         List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報List = new ArrayList<>();
-        List<KariTokuchoKaishiTsuchisyoJoho> 仮算定特徴開始通知書情報List = new ArrayList<>();
         int 総ページ数 = 0;
         for (TmpIdoGennendoKarisanteiEntity tmpResult : result.get特徴開始通知書ResultList()) {
             KariSanteiTsuchiShoKyotsu 仮算定通知書情報 = new KariSanteiTsuchiShoKyotsu();
@@ -160,9 +159,8 @@ public class PrtIdoTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchPr
             }
             総ページ数 = 総ページ数 + publish特徴開始通知書(出力帳票一覧, 仮算定特徴開始通知書情報, result, 仮算定通知書情報);
             編集後仮算定通知書共通情報List.add(編集後仮算定通知書共通情報);
-            仮算定特徴開始通知書情報List.add(仮算定特徴開始通知書情報);
         }
-        manager.publish特徴開始通知仮算定(result, 編集後仮算定通知書共通情報List, 地方公共団体, 仮算定特徴開始通知書情報List, 総ページ数);
+        manager.publish特徴開始通知仮算定(result, 編集後仮算定通知書共通情報List, 総ページ数);
     }
 
     private int publish特徴開始通知書(ChohyoResult 出力帳票一覧, KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
