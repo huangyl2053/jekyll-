@@ -50,7 +50,7 @@ public class ChishutsuJokenParameter {
      */
     public ResponseData<ChishutsuJokenParameterDiv> onClick_radJikoKisanbiTorokushaNomi(ChishutsuJokenParameterDiv div) {
         div.getRadJikoKisanbiTorokushaIgai().clearSelectedItem();
-        div.getRadHihokenshaZenin().setSelectedKey(CHECKED);
+        div.getRadJikoKisanbiTorokushaNomi().setSelectedKey(CHECKED);
         return ResponseData.of(div).respond();
     }
 
@@ -62,7 +62,7 @@ public class ChishutsuJokenParameter {
      */
     public ResponseData<ChishutsuJokenParameterDiv> onClick_radJikoKisanbiTorokushaIgai(ChishutsuJokenParameterDiv div) {
         div.getRadJikoKisanbiTorokushaNomi().clearSelectedItem();
-        div.getRadHihokenshaZenin().setSelectedKey(CHECKED);
+        div.getRadJikoKisanbiTorokushaIgai().setSelectedKey(CHECKED);
         div.getRadHihokenshaZenin().setDisabled(false);
         div.getRadHihokenshaIgai().setDisabled(false);
         return ResponseData.of(div).respond();
