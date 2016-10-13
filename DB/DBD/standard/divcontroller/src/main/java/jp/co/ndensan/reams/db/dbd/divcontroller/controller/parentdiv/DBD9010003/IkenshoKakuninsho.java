@@ -101,9 +101,6 @@ public class IkenshoKakuninsho {
         getHandler(div).initialize(taishoshaKey, 医療費控除情報リスト);
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号).concat(new RString("IryohiKojyoSyomeisho")));
-//        if (!RealInitialLocker.tryGetLock(排他キー)) {
-//            throw new PessimisticLockingException();
-//        }
         RealInitialLocker.lock(排他キー);
         AccessLogger.log(AccessLogType.照会, createpersonalData(taishoshaKey));
         return ResponseData.of(div).respond();
