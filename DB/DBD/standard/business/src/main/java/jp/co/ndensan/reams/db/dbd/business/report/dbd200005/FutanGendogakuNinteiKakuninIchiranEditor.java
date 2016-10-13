@@ -21,9 +21,15 @@ import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -98,6 +104,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         setKonkai1(source);
         setKonkai2(source);
         setZenkai(source);
+        setKaiPage(source);
         return source;
     }
 
@@ -129,6 +136,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             if (null != this.負担限度額認定確認リスト.getAtesakiEntity()) {
                 IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(this.負担限度額認定確認リスト.getAtesakiEntity());
                 get名称と登録異動年月日(source, 宛名);
+
             }
             if (null != this.負担限度額認定確認リスト.get被保険者番号()) {
                 source.list1_1 = this.負担限度額認定確認リスト.get被保険者番号().value();
@@ -277,6 +285,35 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             } else {
                 source.list2_17 = 非該当;
             }
+        }
+    }
+
+    private void setKaiPage(FutanGendogakuNinteiKakuninIchiranReportSource source) {
+        if (null != this.負担限度額認定確認リスト && null != this.負担限度額認定確認リスト.getAtesakiEntity()) {
+            UaFt200FindShikibetsuTaishoEntity atesakiEntity = this.負担限度額認定確認リスト.getAtesakiEntity();
+            YubinNo yubinNo = atesakiEntity.getYubinNo();
+            if (null != yubinNo) {
+                source.yubinNo = yubinNo.value();
+            }
+            ChoikiCode choikiCode = atesakiEntity.getChoikiCode();
+            if (null != choikiCode) {
+                source.choikiCode = choikiCode.value();
+            }
+            GyoseikuCode gyoseikuCode = atesakiEntity.getGyoseikuCode();
+            if (null != gyoseikuCode) {
+                source.gyoseikuCode = gyoseikuCode.value();
+            }
+            SetaiCode setaiCode = atesakiEntity.getSetaiCode();
+            if (null != setaiCode) {
+                source.setaiCode = setaiCode.value();
+            }
+            AtenaKanaMeisho gaikokujinKanaShimei = atesakiEntity.getGaikokujinKanaShimei();
+            if (null != gaikokujinKanaShimei) {
+                source.gaikokujinKanaShimei = gaikokujinKanaShimei.value();
+            }
+        }
+        if (null != this.負担限度額認定確認リスト && null != this.負担限度額認定確認リスト.get市町村コード()) {
+            source.shichosonCode = this.負担限度額認定確認リスト.get市町村コード().value();
         }
     }
 

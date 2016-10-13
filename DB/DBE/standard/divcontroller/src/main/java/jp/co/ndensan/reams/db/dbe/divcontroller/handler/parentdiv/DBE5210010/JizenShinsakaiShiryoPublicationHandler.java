@@ -73,9 +73,11 @@ public class JizenShinsakaiShiryoPublicationHandler {
     private void set出力条件の設定() {
         List<RString> 印刷帳票chk = new ArrayList<>();
         List<RString> 印刷審査会資料chk = new ArrayList<>();
+        RString 出力順 = DbBusinessConfig.get(ConfigNameDBE.NCI101ファイル名称, 日期, SubGyomuCode.DBE認定支援);
         RString 出力スタイル_印刷サイズddl = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料出力スタイル, 日期, SubGyomuCode.DBE認定支援);
         RString 出力スタイル_両面_片面印刷rad = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷タイプ, 日期, SubGyomuCode.DBE認定支援);
         RString 部数 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料部数_委員, 日期, SubGyomuCode.DBE認定支援);
+        div.getPublishingCondition().getTxtShutsuryokuJun().setValue(出力順);
         div.getPublishingCondition().getRadShutsuryokuStyleZenken().setSelectedKey(出力スタイル_両面_片面印刷rad);
         div.getPublishingCondition().getDdlShutsuryokuStyleZenken().setSelectedKey(出力スタイル_印刷サイズddl);
         div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getTxtCopyNumForShinsakaiIin1().setValue(new Decimal(部数.toString()));
@@ -206,6 +208,9 @@ public class JizenShinsakaiShiryoPublicationHandler {
         }
         if (div.getPublicationTargetShinsakai().getTxtYoteiTeiin().getValue() != null) {
             batchParameter.setSyuturyokuJun(new RString(div.getPublicationTargetShinsakai().getTxtYoteiTeiin().getValue().toString()));
+        }
+        if (div.getPublishingCondition().getTxtShutsuryokuJun().getValue() != null) {
+            batchParameter.setSyuturyokuJun(new RString(div.getPublishingCondition().getTxtShutsuryokuJun().getValue().toString()));
         }
         if (!div.getPublishingCondition().getDdlShutsuryokuStyleZenken().getSelectedKey().isEmpty()) {
             if (div.getPublishingCondition().getDdlShutsuryokuStyleZenken().getSelectedKey().equals(すべて選択_印刷一次判定_A4_両面_1)) {
