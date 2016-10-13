@@ -301,32 +301,48 @@ public class IryoHiKojoKakuninSinsei {
         帳票固有情報.set申請日(主治医意見書確認書情報.get申請日().toDateString());
         RString 氏名 = RString.EMPTY;
         if (宛名情報 != null) {
-            if (JuminShubetsu.日本人.getCode().equals(宛名情報.get住民種別().getCode())) {
+            if (JuminShubetsu.日本人 == 宛名情報.get住民種別()
+                    || 宛名情報.get住民種別() == JuminShubetsu.住登外個人_日本人) {
                 氏名 = 宛名情報.get日本人氏名().getName().value();
                 帳票固有情報.set氏名(氏名);
-            } else if (JuminShubetsu.外国人.getCode().equals(宛名情報.get住民種別().getCode())) {
+            } else if (JuminShubetsu.外国人 == 宛名情報.get住民種別()
+                    || 宛名情報.get住民種別() == JuminShubetsu.住登外個人_外国人) {
                 氏名 = 宛名情報.get外国人氏名().getName().value();
                 帳票固有情報.set氏名(氏名);
             }
         }
+
         if (氏名.length() <= サーティ) {
+            帳票固有情報.set氏名(氏名);
             帳票固有情報.set氏名１(RString.EMPTY);
             帳票固有情報.set氏名２(RString.EMPTY);
-        } else {
+        } else if (氏名.length() <= シックスティ) {
+            帳票固有情報.set氏名(RString.EMPTY);
             帳票固有情報.set氏名１(氏名.substring(0, サーティ));
             帳票固有情報.set氏名２(氏名.substring(サーティ));
+        } else {
+            帳票固有情報.set氏名(RString.EMPTY);
+            帳票固有情報.set氏名１(氏名.substring(0, サーティ));
+            帳票固有情報.set氏名２(氏名.substring(サーティ, シックスティ));
         }
+
         帳票固有情報.set被保険者番号(主治医意見書確認書情報.get被保険者番号());
-        帳票固有情報.set主治医意見書作成日(主治医意見書確認書情報.get主治医意見書作成日().toDateString());
-        帳票固有情報.set要介護認定の有効期間開始(主治医意見書確認書情報.get認定期間開始日().toDateString());
-        帳票固有情報.set要介護認定の有効期間終了(主治医意見書確認書情報.get認定期間終了日().toDateString());
-        帳票固有情報.set寝たきり度_B1(NichijoSeikatsuJiritsudo.Ｂ１.getコード().equals(主治医意見書確認書情報.get日常生活自立度())
+        帳票固有情報.set主治医意見書作成日(主治医意見書確認書情報.get主治医意見書作成日().wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        帳票固有情報.set要介護認定の有効期間開始(主治医意見書確認書情報.get認定期間開始日().wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        帳票固有情報.set要介護認定の有効期間終了(主治医意見書確認書情報.get認定期間終了日().wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        帳票固有情報.set寝たきり度_B1(NichijoSeikatsuJiritsudo.Ｂ１.get名称().equals(主治医意見書確認書情報.get日常生活自立度())
                 ? 選択する : RString.EMPTY);
-        帳票固有情報.set寝たきり度_B2(NichijoSeikatsuJiritsudo.Ｂ２.getコード().equals(主治医意見書確認書情報.get日常生活自立度())
+        帳票固有情報.set寝たきり度_B2(NichijoSeikatsuJiritsudo.Ｂ２.get名称().equals(主治医意見書確認書情報.get日常生活自立度())
                 ? 選択する : RString.EMPTY);
-        帳票固有情報.set寝たきり度_C1(NichijoSeikatsuJiritsudo.Ｃ１.getコード().equals(主治医意見書確認書情報.get日常生活自立度())
+        帳票固有情報.set寝たきり度_C1(NichijoSeikatsuJiritsudo.Ｃ１.get名称().equals(主治医意見書確認書情報.get日常生活自立度())
                 ? 選択する : RString.EMPTY);
-        帳票固有情報.set寝たきり度_C2(NichijoSeikatsuJiritsudo.Ｃ２.getコード().equals(主治医意見書確認書情報.get日常生活自立度())
+        帳票固有情報.set寝たきり度_C2(NichijoSeikatsuJiritsudo.Ｃ２.get名称().equals(主治医意見書確認書情報.get日常生活自立度())
                 ? 選択する : RString.EMPTY);
         帳票固有情報.set尿失禁の発生可能性(new RString("はい").equals(主治医意見書確認書情報.get尿失禁の有無()) ? あり : なし);
         帳票固有情報.set年(主治医意見書確認書情報.get対象年());
@@ -532,8 +548,8 @@ public class IryoHiKojoKakuninSinsei {
             おむつ使用証明書Entity.set氏名２(RString.EMPTY);
         } else if (氏名.length() <= シックスティ) {
             おむつ使用証明書Entity.set氏名(RString.EMPTY);
-            おむつ使用証明書Entity.set氏名１(編集後住所.substring(0, サーティ));
-            おむつ使用証明書Entity.set氏名２(編集後住所.substring(サーティ));
+            おむつ使用証明書Entity.set氏名１(氏名.substring(0, サーティ));
+            おむつ使用証明書Entity.set氏名２(氏名.substring(サーティ));
         } else {
             おむつ使用証明書Entity.set氏名(RString.EMPTY);
             おむつ使用証明書Entity.set氏名１(氏名.substring(0, サーティ));
