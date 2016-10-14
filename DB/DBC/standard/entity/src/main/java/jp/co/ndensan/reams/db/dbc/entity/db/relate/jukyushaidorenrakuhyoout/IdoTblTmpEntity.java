@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -24,7 +25,7 @@ public class IdoTblTmpEntity extends DbTableEntityBase<IdoTblTmpEntity> implemen
 
     private static final RString パイプ = new RString("|");
 
-    private RString 被保険者番号;
+    private HihokenshaNo 被保険者番号;
     private RString 異動年月日;
     private RString 履歴番号;
     private RString 異動区分コード;
@@ -117,7 +118,7 @@ public class IdoTblTmpEntity extends DbTableEntityBase<IdoTblTmpEntity> implemen
      */
     public RString toRString() {
         RStringBuilder rsb = new RStringBuilder();
-        rsb.append(getValue(被保険者番号)).append(パイプ)
+        rsb.append(getValue(被保険者番号.getColumnValue())).append(パイプ)
                 .append(getValue(異動年月日)).append(パイプ)
                 .append(getValue(履歴番号)).append(パイプ)
                 .append(getValue(異動区分コード)).append(パイプ)
