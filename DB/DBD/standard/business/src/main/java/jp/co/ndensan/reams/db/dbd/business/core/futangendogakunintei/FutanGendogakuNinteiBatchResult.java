@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 @lombok.Setter
 public class FutanGendogakuNinteiBatchResult implements Serializable {
 
-    //private final FutanGendogakuNinteiBatchResultEntity 介護保険負担限度額認定の情報;
     private final FutanGendogakuNintei 介護保険負担限度額認定の情報;
     private final IKojin 個人;
 

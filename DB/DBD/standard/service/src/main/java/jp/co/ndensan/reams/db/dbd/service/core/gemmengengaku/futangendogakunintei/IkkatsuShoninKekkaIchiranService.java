@@ -10,13 +10,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.FutanyikkatsuShoninList;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.KaigoHokenFutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.business.core.futangendogakunintei.FutanGendogakuNinteiBatchResult;
+import jp.co.ndensan.reams.db.dbd.business.core.futangendogakuyikkatsushonin.FutangendogakuyikkatsuShoninEntity;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futanyikkatsulist.FutanyikkatsuShoninListMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4010GemmenGengakuShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4035FutanGendogakuNinteiBatchEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakunintei.FutanGendogakuNinteiBatchResultEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakunintei.FutangendogakuyikkatsuShoninEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4010GemmenGengakuShinseiDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4018FutanGendogakuNinteiDac;
@@ -106,13 +106,13 @@ public class IkkatsuShoninKekkaIchiranService {
      * @return List<負担限度額一括認定情報>
      */
     @Transaction
-    public FutangendogakuyikkatsuShoninEntity load負担限度額一括認定情報(RString 一括認定バッチ処理日時) {
+    public FutangendogakuyikkatsuShoninEntity load負担限度額一括認定情報(YMDHMS 一括認定バッチ処理日時) {
+        DbT4035FutanGendogakuNinteiBatchEntity dbd4035ENtity = DbT4035dac.select負担限度額一括認定情報(一括認定バッチ処理日時);
         FutangendogakuyikkatsuShoninEntity 負担限度額一括認定情報entity = new FutangendogakuyikkatsuShoninEntity();
-        DbT4035FutanGendogakuNinteiBatchEntity ENtity = DbT4035dac.select負担限度額一括認定情報(一括認定バッチ処理日時);
-        if (ENtity != null) {
-            負担限度額一括認定情報entity.set作成年度(ENtity.getSakuseiNendo());
-            負担限度額一括認定情報entity.set承認済みフラグ(ENtity.getHadApproved());
-            負担限度額一括認定情報entity.set決定日(ENtity.getKetteiYmd());
+        if (dbd4035ENtity != null) {
+            負担限度額一括認定情報entity.set作成年度(dbd4035ENtity.getSakuseiNendo());
+            負担限度額一括認定情報entity.set承認済みフラグ(dbd4035ENtity.getHadApproved());
+            負担限度額一括認定情報entity.set決定日(dbd4035ENtity.getKetteiYmd());
         }
         return 負担限度額一括認定情報entity;
     }
@@ -125,16 +125,14 @@ public class IkkatsuShoninKekkaIchiranService {
      * @return List<FutanGendogakuNinteiBatchResult>
      */
     @Transaction
-    public List<FutanGendogakuNinteiBatchResult> load一括承認結果取得(RString 一括認定バッチ処理日時, Boolean 承認済みフラグ) {
-        RString 承認済みフラグtrue = new RString("true");
+    public List<FutanGendogakuNinteiBatchResult> load一括承認結果取得(YMDHMS 一括認定バッチ処理日時, Boolean 承認済みフラグ) {
         RString 減免減額種類_負担限度額認定 = GemmenGengakuShurui.負担限度額認定.getコード();
         FutanyikkatsuShoninListMapperParameter 検索条件 = new FutanyikkatsuShoninListMapperParameter(一括認定バッチ処理日時, 減免減額種類_負担限度額認定);
         List<FutanGendogakuNinteiBatchResult> 負担限度額認定バッチ結果 = new ArrayList<>();
         IFutanyikkatsuShoninkekkaListMapper mapper = mapperProvider.create(IFutanyikkatsuShoninkekkaListMapper.class);
         IFutanyikkatsuShoninkekkaListFalseMapper mapperfalse = mapperProvider.create(IFutanyikkatsuShoninkekkaListFalseMapper.class);
-        if (承認済みフラグtrue.equals(new RString(承認済みフラグ.toString()))) {
+        if (承認済みフラグ) {
             List<FutanGendogakuNinteiBatchResultEntity> EntityList = mapper.get一括承認結果情報を取得_承認済みフラグTRUE(検索条件);
-
             if (EntityList != null && !EntityList.isEmpty()) {
                 for (FutanGendogakuNinteiBatchResultEntity entity : EntityList) {
                     FutanGendogakuNinteiEntity futanentity = new FutanGendogakuNinteiEntity();
@@ -184,7 +182,6 @@ public class IkkatsuShoninKekkaIchiranService {
     public GemmenGengakuShinsei get減免減額申請情報(ShoKisaiHokenshaNo shokisaihokenno, HihokenshaNo hihokenshano,
             RString 減免減額種類,
             int 履歴番号) {
-        // List<GemmenGengakuShinsei> 減免減額申請情報 = new ArrayList<>();
         DbT4010GemmenGengakuShinseiEntity dbt4010entity = DbT4010dac.selectByKey(shokisaihokenno, hihokenshano, 減免減額種類, 履歴番号);
         dbt4010entity.initializeMd5();
         GemmenGengakuShinsei gemmengengaku = new GemmenGengakuShinsei(dbt4010entity);
@@ -198,7 +195,7 @@ public class IkkatsuShoninKekkaIchiranService {
      * @return FutanyikkatsuShoninList
      */
     @Transaction
-    public FutanyikkatsuShoninList get負担限度額一括認定情報(RString 一括認定バッチ処理日時) {
+    public FutanyikkatsuShoninList get負担限度額一括認定情報(YMDHMS 一括認定バッチ処理日時) {
         DbT4035FutanGendogakuNinteiBatchEntity DbT4035entity = DbT4035dac.select負担限度額一括認定情報(一括認定バッチ処理日時);
         DbT4035entity.initializeMd5();
         FutanyikkatsuShoninList futanlist = new FutanyikkatsuShoninList(DbT4035entity);

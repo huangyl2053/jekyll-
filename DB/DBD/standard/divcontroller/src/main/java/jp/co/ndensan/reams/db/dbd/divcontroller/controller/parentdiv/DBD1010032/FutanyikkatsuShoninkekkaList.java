@@ -8,18 +8,18 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1010032
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.futangendogakunintei.FutanGendogakuNinteiBatchResult;
+import jp.co.ndensan.reams.db.dbd.business.core.futangendogakuyikkatsushonin.FutangendogakuyikkatsuShoninEntity;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010032.DBD1010032StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010032.FutanyikkatsuShoninkekkaListDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010032.FutanyikkatsuShoninkekkaListHandler;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010032.FutanyikkatsuShoninkekkaListHandler.DbInformationMessage;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010032.FutanyikkatsuShoninkekkaListValidationHandler;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakunintei.FutangendogakuyikkatsuShoninEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.IkkatsuShoninKekkaIchiranService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -39,7 +39,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class FutanyikkatsuShoninkekkaList {
 
-    private static final RString 承認済みフラグfalse = new RString("false");
+    private static final RString 保存処理完了 = new RString("承認内容の保存処理が完了しました.");
+    private static List<YMDHMS> 一括処理日時list;
 
     /**
      * 画面初期化処理です。
@@ -48,7 +49,8 @@ public class FutanyikkatsuShoninkekkaList {
      * @return ResponseData<FutanyikkatsuShoninkekkaListDiv>
      */
     public ResponseData<FutanyikkatsuShoninkekkaListDiv> onLoad(FutanyikkatsuShoninkekkaListDiv div) {
-        createhandler(div).onLoad();
+        一括処理日時list = IkkatsuShoninKekkaIchiranService.createInstance().load一括処理日時();
+        createhandler(div).onLoad(一括処理日時list);
         return ResponseData.of(div).respond();
     }
 
@@ -59,23 +61,18 @@ public class FutanyikkatsuShoninkekkaList {
      * @return ResponseData<FutanyikkatsuShoninkekkaListDiv>
      */
     public ResponseData<FutanyikkatsuShoninkekkaListDiv> onClick_selectbutton(FutanyikkatsuShoninkekkaListDiv div) {
-        RString 一括認定バッチ処理日時 = div.getHyojiTaisho().getDdlBatchShoriNichiji().getSelectedValue();
         Boolean 承認済みフラグ = false;
         FutangendogakuyikkatsuShoninEntity 負担限度額一括認定情報 = IkkatsuShoninKekkaIchiranService.createInstance()
-                .load負担限度額一括認定情報(一括認定バッチ処理日時);
-        if (負担限度額一括認定情報 != null) {
+                .load負担限度額一括認定情報(一括処理日時list.get(0));
+        if (負担限度額一括認定情報.get承認済みフラグ() != null) {
             承認済みフラグ = 負担限度額一括認定情報.get承認済みフラグ();
-            div.getTxtSakuseiNendo().setDomain(負担限度額一括認定情報.get作成年度());
-            div.getTxtKettaiYMD().setValue(負担限度額一括認定情報.get決定日());
-            if (承認済みフラグfalse.equals(new RString(負担限度額一括認定情報.get承認済みフラグ().toString()))) {
-                div.getChkTestKubun().setIsAllSelectable(true);
-            } else {
-                div.getChkTestKubun().setIsAllSelectable(false);
-            }
         }
+        RString 一括処理日時 = div.getHyojiTaisho().getDdlBatchShoriNichiji().getSelectedKey().trim();
+        int ddlBatchShoriNichiji_index = Integer.parseInt(一括処理日時.replace(new RString("key"), RString.EMPTY).toString());
         List<FutanGendogakuNinteiBatchResult> 負担限度額認定バッチ結果 = IkkatsuShoninKekkaIchiranService.createInstance()
-                .load一括承認結果取得(一括認定バッチ処理日時, 承認済みフラグ);
+                .load一括承認結果取得(一括処理日時list.get(ddlBatchShoriNichiji_index), 承認済みフラグ);
         ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, new ArrayList<>(負担限度額認定バッチ結果));
+        createhandler(div).onClick_selectbutton(負担限度額一括認定情報);
         createhandler(div).setDgShinseiIchiran_Row(負担限度額認定バッチ結果);
         return ResponseData.of(div).respond();
     }
@@ -100,10 +97,9 @@ public class FutanyikkatsuShoninkekkaList {
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            createhandler(div).ＤＢ処理更新(画面更新用情報);
+            createhandler(div).ＤＢ処理更新(画面更新用情報, 一括処理日時list);
         }
-        div.getCcdKaigoKanryoMessage().setMessage(new RString(DbInformationMessage.保存処理完了.toString()),
-                RString.EMPTY, RString.EMPTY, true);
+        div.getCcdKaigoKanryoMessage().setMessage(保存処理完了, RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBD1010032StateName.完了);
     }
 
@@ -141,7 +137,7 @@ public class FutanyikkatsuShoninkekkaList {
             createhandler(div).ＤＢ更新(画面更新用情報);
         }
         RealInitialLocker.release(new LockingKey(前排他ロックキー));
-        div.getCcdKaigoKanryoMessage().setMessage(new RString(DbInformationMessage.保存処理完了.toString()), RString.EMPTY, RString.EMPTY, true);
+        div.getCcdKaigoKanryoMessage().setMessage(保存処理完了, RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBD1010032StateName.完了);
     }
 

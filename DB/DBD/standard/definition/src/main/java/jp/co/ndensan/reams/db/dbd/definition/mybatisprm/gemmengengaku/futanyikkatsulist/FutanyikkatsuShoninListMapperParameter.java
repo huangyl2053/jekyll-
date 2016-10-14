@@ -23,7 +23,7 @@ public class FutanyikkatsuShoninListMapperParameter implements IMyBatisParameter
 
     private YMDHMS システム日時;
     private YMDHMS システム日時の1年前;
-    private RString 一括認定バッチ処理日時;
+    private YMDHMS 一括認定バッチ処理日時;
     private RString 減免減額種類_負担限度額認定;
 
     /**
@@ -43,7 +43,7 @@ public class FutanyikkatsuShoninListMapperParameter implements IMyBatisParameter
      * @param 一括認定バッチ処理日時 YMDHMS
      * @param 減免減額種類_負担限度額認定 RString
      */
-    public FutanyikkatsuShoninListMapperParameter(RString 一括認定バッチ処理日時, RString 減免減額種類_負担限度額認定) {
+    public FutanyikkatsuShoninListMapperParameter(YMDHMS 一括認定バッチ処理日時, RString 減免減額種類_負担限度額認定) {
         this.一括認定バッチ処理日時 = 一括認定バッチ処理日時;
         this.減免減額種類_負担限度額認定 = 減免減額種類_負担限度額認定;
     }

@@ -9,21 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.FutanyikkatsuShoninList;
 import jp.co.ndensan.reams.db.dbd.business.core.futangendogakunintei.FutanGendogakuNinteiBatchResult;
+import jp.co.ndensan.reams.db.dbd.business.core.futangendogakuyikkatsushonin.FutangendogakuyikkatsuShoninEntity;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010032.FutanyikkatsuShoninkekkaListDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010032.dgNinteiIchiran_Row;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakunintei.FutangendogakuyikkatsuShoninEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.IkkatsuShoninKekkaIchiranService;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -37,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class FutanyikkatsuShoninkekkaListHandler {
 
     private final FutanyikkatsuShoninkekkaListDiv div;
-    private static final RString 承認済みフラグtrue = new RString("TRUE");
     private static final RString 承認を確定する = new RString("Element2");
     private static final RString 修正を保存する = new RString("btnExecute");
     private static final RString 全件 = new RString("0");
@@ -54,23 +48,33 @@ public class FutanyikkatsuShoninkekkaListHandler {
     /**
      * 画面初期化処理です。
      *
+     * @param 一括処理日時list
      */
-    public void onLoad() {
-        List<YMDHMS> 一括処理日時list = IkkatsuShoninKekkaIchiranService.createInstance().load一括処理日時();
+    public void onLoad(List<YMDHMS> 一括処理日時list) {
         div.getHyojiTaisho().getDdlBatchShoriNichiji().setDataSource(onLoad_ddlServiceYMDHMS(一括処理日時list));
         if (div.getHyojiTaisho().getDdlBatchShoriNichiji().getDataSource() != null
                 && !div.getHyojiTaisho().getDdlBatchShoriNichiji().getDataSource().isEmpty()) {
             div.getHyojiTaisho().getDdlBatchShoriNichiji().setSelectedKey(div.getHyojiTaisho().getDdlBatchShoriNichiji()
-                    .getDataSource().get(0).getValue());
+                    .getDataSource().get(0).getKey());
         }
-        RString 一括認定バッチ処理日時 = div.getHyojiTaisho().getDdlBatchShoriNichiji().getSelectedKey();
-        FutangendogakuyikkatsuShoninEntity 負担限度額一括認定情報 = IkkatsuShoninKekkaIchiranService.createInstance()
-                .load負担限度額一括認定情報(一括認定バッチ処理日時);
-        if (負担限度額一括認定情報 != null) {
-            if (承認済みフラグtrue.equals(new RString(負担限度額一括認定情報.get承認済みフラグ().toString()))) {
+    }
+
+    /**
+     * 「選択する」ボタンをクリックする
+     *
+     * @param 負担限度額一括認定情報
+     */
+    public void onClick_selectbutton(FutangendogakuyikkatsuShoninEntity 負担限度額一括認定情報) {
+        if (負担限度額一括認定情報.get承認済みフラグ() != null && 負担限度額一括認定情報.get作成年度() != null
+                && 負担限度額一括認定情報.get決定日() != null) {
+            div.getDatagridhojipanel().getTxtSakuseiNendo().setDomain(負担限度額一括認定情報.get作成年度());
+            div.getDatagridhojipanel().getTxtKettaiYMD().setValue(負担限度額一括認定情報.get決定日());
+            if (負担限度額一括認定情報.get承認済みフラグ()) {
+                div.getDatagridhojipanel().getChkTestKubun().setIsAllSelectable(false);
                 CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(承認を確定する, true);
                 CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(修正を保存する, false);
             } else {
+                div.getDatagridhojipanel().getChkTestKubun().setIsAllSelectable(true);
                 CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(承認を確定する, false);
                 CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(修正を保存する, true);
             }
@@ -81,21 +85,23 @@ public class FutanyikkatsuShoninkekkaListHandler {
      * 介護保険負担限度額認定の情報を更新する。
      *
      * @param 画面更新用情報 List<FutanGendogakuNinteiBatchResult>
+     * @param 一括処理日時list
      */
-    public void ＤＢ処理更新(List<FutanGendogakuNinteiBatchResult> 画面更新用情報) {
+    public void ＤＢ処理更新(List<FutanGendogakuNinteiBatchResult> 画面更新用情報, List<YMDHMS> 一括処理日時list) {
         IkkatsuShoninKekkaIchiranService ikkatsuservice = IkkatsuShoninKekkaIchiranService.createInstance();
-        RString 一括認定バッチ処理日時 = div.getHyojiTaisho().getDdlBatchShoriNichiji().getSelectedKey();
+        RString 一括認定バッチ処理日時 = div.getHyojiTaisho().getDdlBatchShoriNichiji().getSelectedKey().trim();
         ikkatsuservice.ＤＢ処理_updata介護保険負担限度額認定(画面更新用情報);
         ikkatsuservice.ＤＢ処理_減免減額申請(画面更新用情報);
-        ＤＢ処理_負担限度額一括認定(一括認定バッチ処理日時);
+        int ddlBatchShoriNichiji_index = Integer.parseInt(一括認定バッチ処理日時.replace(new RString("key"), RString.EMPTY).toString());
+        ＤＢ処理_負担限度額一括認定(一括処理日時list.get(ddlBatchShoriNichiji_index));
     }
 
     /**
      * ＤＢ負担限度額一括認定の情報を更新する。
      *
-     * @param 一括認定バッチ処理日時
+     * @param 一括認定バッチ処理日時 RString
      */
-    public void ＤＢ処理_負担限度額一括認定(RString 一括認定バッチ処理日時) {
+    public void ＤＢ処理_負担限度額一括認定(YMDHMS 一括認定バッチ処理日時) {
         IkkatsuShoninKekkaIchiranService ikkatsuservice = IkkatsuShoninKekkaIchiranService.createInstance();
         FutanyikkatsuShoninList 更新futanlist = ikkatsuservice.get負担限度額一括認定情報(一括認定バッチ処理日時);
         if (更新futanlist != null) {
@@ -126,13 +132,15 @@ public class FutanyikkatsuShoninkekkaListHandler {
      */
     private List<KeyValueDataSource> onLoad_ddlServiceYMDHMS(List<YMDHMS> 一括処理日時list) {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        for (YMDHMS ymdhms : 一括処理日時list) {
+        for (int i = 0; i < 一括処理日時list.size(); i++) {
+
             KeyValueDataSource dataSource = new KeyValueDataSource();
-            RTime システムtime = RTime.now();
-            RString 年月日 = ymdhms.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+            RString 年月日 = 一括処理日時list.get(i).getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
-            RString 時分秒 = システムtime.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-            dataSource.setValue(年月日.concat("　").concat(時分秒));
+            RString 時分秒 = 一括処理日時list.get(i).getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+            RString KeyValueDataSource_key = new RString("key");
+            dataSource.setKey(KeyValueDataSource_key.concat(new RString(i)));
+            dataSource.setValue(年月日.concat(" ").concat(時分秒));
             dataSourceList.add(dataSource);
         }
         return dataSourceList;
@@ -146,24 +154,22 @@ public class FutanyikkatsuShoninkekkaListHandler {
      */
     public ArrayList<dgNinteiIchiran_Row> setDgShinseiIchiran_Row(List<FutanGendogakuNinteiBatchResult> 負担限度額認定バッチ結果) {
         ArrayList<dgNinteiIchiran_Row> 一括承認結果一覧 = new ArrayList<>();
-        if (負担限度額認定バッチ結果 != null) {
+        if (負担限度額認定バッチ結果 != null && !負担限度額認定バッチ結果.isEmpty()) {
             for (FutanGendogakuNinteiBatchResult futangenresult : 負担限度額認定バッチ結果) {
                 dgNinteiIchiran_Row futangendogakunintei = new dgNinteiIchiran_Row();
-                if (futangenresult != null) {
-                    if (futangenresult.get介護保険負担限度額認定の情報().getState().equals(EntityDataState.Modified)) {
-                        futangendogakunintei.setJotai(new RString("修正"));
-                    }
-                    futangendogakunintei.setHihoNo(futangenresult.get介護保険負担限度額認定の情報().get被保険者番号().value());
-                    futangendogakunintei.setShikibetsuCode(futangenresult.get個人().get識別コード().value());
-                    futangendogakunintei.getTxtSeinengappiYMD().setValue(futangenresult.get個人().get生年月日().toFlexibleDate());
-                    futangendogakunintei.setNenrei(futangenresult.get個人().get年齢算出().get年齢());
-                    futangendogakunintei.setKetteiKubun(futangenresult.get介護保険負担限度額認定の情報().get決定区分());
-                    futangendogakunintei.getTxtKetteiYMD().setValue(futangenresult.get介護保険負担限度額認定の情報().get決定年月日());
-                    futangendogakunintei.getTxtTekiyoYMD().setValue(futangenresult.get介護保険負担限度額認定の情報().get適用開始年月日());
-                    futangendogakunintei.getTxtYukoKigenYMD().setValue(futangenresult.get介護保険負担限度額認定の情報().get適用終了年月日());
-                    futangendogakunintei.setFutanDankai(futangenresult.get介護保険負担限度額認定の情報().get利用者負担段階());
+                if (futangenresult.get介護保険負担限度額認定の情報().getState().equals(EntityDataState.Modified)) {
+                    futangendogakunintei.setJotai(new RString("修正"));
                 }
-                if (div.getRadHyojiNaiyo().getSelectedKey().equals(全件)) {
+                futangendogakunintei.setHihoNo(futangenresult.get介護保険負担限度額認定の情報().get被保険者番号().value());
+                futangendogakunintei.setShikibetsuCode(futangenresult.get個人().get識別コード().value());
+                futangendogakunintei.getTxtSeinengappiYMD().setValue(futangenresult.get個人().get生年月日().toFlexibleDate());
+                futangendogakunintei.setNenrei(futangenresult.get個人().get年齢算出().get年齢());
+                futangendogakunintei.setKetteiKubun(futangenresult.get介護保険負担限度額認定の情報().get決定区分());
+                futangendogakunintei.getTxtKetteiYMD().setValue(futangenresult.get介護保険負担限度額認定の情報().get決定年月日());
+                futangendogakunintei.getTxtTekiyoYMD().setValue(futangenresult.get介護保険負担限度額認定の情報().get適用開始年月日());
+                futangendogakunintei.getTxtYukoKigenYMD().setValue(futangenresult.get介護保険負担限度額認定の情報().get適用終了年月日());
+                futangendogakunintei.setFutanDankai(futangenresult.get介護保険負担限度額認定の情報().get利用者負担段階());
+                if (div.getDatagridhojipanel().getRadHyojiNaiyo().getSelectedKey().equals(全件)) {
                     一括承認結果一覧.add(futangendogakunintei);
 
                 } else if (futangendogakunintei.getKetteiKubun().isEmpty() && futangendogakunintei.getKetteiKubun() == null) {
@@ -172,24 +178,5 @@ public class FutanyikkatsuShoninkekkaListHandler {
             }
         }
         return 一括承認結果一覧;
-    }
-
-    /**
-     * 確認ダイアログDbInformationMessageを表示する
-     */
-    public enum DbInformationMessage implements IValidationMessage {
-
-        保存処理完了(DbzInformationMessages.保存処理完了, "修正内容");
-
-        private final Message message;
-
-        private DbInformationMessage(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
     }
 }

@@ -38,7 +38,7 @@ public class FutanyikkatsuShoninkekkaListValidationHandler {
                 .ifNot(FutanyikkatsuShoninkekkaListDivSpec.承認確定対象存在チェック)
                 .thenAdd(Messagescheck.承認確定対象存在チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder()
-                .add(Messagescheck.承認確定対象存在チェック, div.getDgNinteiIchiran()).build().check(messages));
+                .add(Messagescheck.承認確定対象存在チェック, div.getDatagridhojipanel().getDgNinteiIchiran()).build().check(messages));
         return pairs;
     }
 
@@ -56,7 +56,7 @@ public class FutanyikkatsuShoninkekkaListValidationHandler {
                 .ifNot(FutanyikkatsuShoninkekkaListDivSpec.修正保存対象存在チェック)
                 .thenAdd(Messagescheck.修正保存対象存在チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder()
-                .add(Messagescheck.修正保存対象存在チェック, div.getDgNinteiIchiran()).build().check(messages));
+                .add(Messagescheck.修正保存対象存在チェック, div.getDatagridhojipanel().getDgNinteiIchiran()).build().check(messages));
         return pairs;
     }
 
