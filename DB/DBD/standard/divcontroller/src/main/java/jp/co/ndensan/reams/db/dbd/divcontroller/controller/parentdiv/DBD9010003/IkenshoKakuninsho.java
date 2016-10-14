@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojoBuilder;
-import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
 import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.IryoHiKojoNaiyo;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
@@ -101,9 +100,6 @@ public class IkenshoKakuninsho {
         getHandler(div).initialize(taishoshaKey, 医療費控除情報リスト);
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号).concat(new RString("IryohiKojyoSyomeisho")));
-//        if (!RealInitialLocker.tryGetLock(排他キー)) {
-//            throw new PessimisticLockingException();
-//        }
         RealInitialLocker.lock(排他キー);
         AccessLogger.log(AccessLogType.照会, createpersonalData(taishoshaKey));
         return ResponseData.of(div).respond();
@@ -116,7 +112,7 @@ public class IkenshoKakuninsho {
      * @return ResponseData<IkenshoKakuninshoDiv>
      */
     public ResponseData<IkenshoKakuninshoDiv> onChange_ddlTaishonen(IkenshoKakuninshoDiv div) {
-        List<IryohiKojoEntityResult> 医療費控除情報リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
+        List<IryohiKojo> 医療費控除情報リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
         getHandler(div).onChange対象年(医療費控除情報リスト);
         return ResponseData.of(div).respond();
     }

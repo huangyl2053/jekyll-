@@ -83,7 +83,6 @@ public class SyoriTaisyoShichoson {
         jutogaiIdoJiyu.add(JutogaiIdoJiyu.新規追加);
         jutogaiIdoJiyu.add(JutogaiIdoJiyu.物理削除);
         jutogaiIdoJiyu.add(JutogaiIdoJiyu.誤謬修正);
-        // TODO  現全国地方公共団体コードと住登外異動事由使用有無と住基異動事由使用有無があります。QA:1258
         keyBuilder.set個人のみ取得区分(true);
         keyBuilder.set住基異動事由コードList(juminShubetsu);
         keyBuilder.set住登外異動事由コードList(jutogaiIdoJiyu);

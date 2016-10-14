@@ -101,19 +101,8 @@ public class SeikyuShinsaShuseiTorokuHandler {
     public void get請求合計() {
         Decimal 請求単価 = div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiTanka().getValue();
         Decimal 請求件数 = div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiKensu().getValue();
-        if (請求単価 == null && 請求件数 == null) {
-            div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiTanka().setValue(Decimal.ZERO);
-            div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiKensu().setValue(Decimal.ZERO);
-            Decimal 請求単価Null = div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiTanka().getValue();
-            Decimal 請求件数Null = div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiKensu().getValue();
-            Decimal 請求合計 = 請求件数Null.multiply(請求単価Null);
-            div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiSeikyuKingaku().setValue(請求合計);
-        }
-        if (請求単価 == null && 請求件数 != null) {
-            div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiTanka().setValue(Decimal.ZERO);
-            Decimal 請求単価Null = div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiTanka().getValue();
-            Decimal 請求合計 = 請求件数.multiply(請求単価Null);
-            div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiSeikyuKingaku().setValue(請求合計);
+        if (請求単価 == null) {
+            div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiSeikyuKingaku().setValue(Decimal.ZERO);
         }
         if (請求単価 != null && 請求件数 == null) {
             div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiKensu().setValue(Decimal.ZERO);
@@ -201,7 +190,6 @@ public class SeikyuShinsaShuseiTorokuHandler {
         this.set画面一覧(row, 住宅改修理由書事業者情報);
         if (照会.equals(div.getSearchJutakuTesuryoSeikyuJohoPanel().getExecutionStatus())) {
             div.getDgSeikyuMeisai().getGridSetting().getColumns().get(1).setVisible(false);
-            this.審査画面一覧(住宅改修理由書事業者情報);
         }
         if (修正.equals(div.getSearchJutakuTesuryoSeikyuJohoPanel().getExecutionStatus())) {
             div.getDgSeikyuMeisai().getGridSetting().getColumns().get(1).setVisible(true);
@@ -209,6 +197,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
         if (削除.equals(div.getSearchJutakuTesuryoSeikyuJohoPanel().getExecutionStatus())) {
             div.getDgSeikyuMeisai().getGridSetting().getColumns().get(1).setVisible(true);
         }
+        this.審査画面一覧(住宅改修理由書事業者情報);
     }
 
     /**
@@ -348,7 +337,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
      */
     public void 入力チェック() {
         div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiTanka().getValue();
-        if (div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiTanka().getValue().toString().isEmpty()) {
+        if (div.getJutakuTesuryoSeikyuShukeiPanel().getTxtRiyushoSakuseiTanka().getValue() == null) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(請求単位.toString()));
         }
         if (DBCMNE_1005.equals(ResponseHolder.getMenuID())) {
@@ -375,17 +364,18 @@ public class SeikyuShinsaShuseiTorokuHandler {
 
         Decimal 請求単価New = div.getTxtRiyushoSakuseiTanka().getValue();
         Decimal 請求単価Old = business.getDbT3096().get介護住宅改修理由書作成単価();
-        if (請求単価New == null) {
-            div.getTxtRiyushoSakuseiTanka().setValue(Decimal.ZERO);
-            Decimal 請求単価Null = div.getTxtRiyushoSakuseiTanka().getValue();
-            if (!請求単価Null.equals(請求単価Old)) {
-                return true;
-            }
-        }
-        if (請求単価New != null && !請求単価New.equals(請求単価Old)) {
+        if (請求単価New == null && 請求単価Old != null) {
+            this.入力チェック();
             return true;
         }
-        this.入力チェック();
+        if (請求単価New != null && 請求単価Old == null) {
+            this.入力チェック();
+            return true;
+        }
+        if (請求単価New != null && !請求単価New.equals(請求単価Old)) {
+            this.入力チェック();
+            return true;
+        }
         return false;
     }
 
@@ -402,10 +392,9 @@ public class SeikyuShinsaShuseiTorokuHandler {
         JutakuKaishuRiyushoTesuryoMeisai 出力明細 = 住宅改修理由書事業者情報.getDbT3095();
         JutakuKaishuRiyushoTesuryoMeisaiManager 出力明細MANAGER = new JutakuKaishuRiyushoTesuryoMeisaiManager();
         JutakuKaishuRiyushoTesuryoKetteiManager 出力決定MANAGER = new JutakuKaishuRiyushoTesuryoKetteiManager();
-        if (DBCMNE_1004.equals(ResponseHolder.getMenuID())) {
+        if (DBCMNE_1004.equals(ResponseHolder.getMenuID()) && div.getDgSeikyuMeisai().getActiveRow() != null) {
             出力明細 = 出力明細.createBuilderForEdit().set対象外フラグ(div.getDgSeikyuMeisai().getActiveRow().
                     getDefaultDataName0().booleanValue()).build();
-            出力明細MANAGER.save住宅改修理由書作成手数料請求明細(出力明細);
         }
         if (div.getDgSeikyuMeisai().getActiveRow() != null) {
             出力明細 = 出力明細.createBuilderForEdit().set対象外フラグ(div.getDgSeikyuMeisai().getActiveRow().getDefaultDataName0()

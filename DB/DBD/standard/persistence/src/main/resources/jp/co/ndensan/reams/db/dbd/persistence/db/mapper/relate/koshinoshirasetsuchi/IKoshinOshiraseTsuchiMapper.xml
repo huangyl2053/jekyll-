@@ -25,6 +25,7 @@
         <association property="dbT4910NinteichosaItakusakiJoho" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.ResultMap_DbT4910NinteichosaItakusakiJohoEntity" />
         <association property="dbT7060KaigoJigyosha" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity" />
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get帳票出力用情報取得"  
             resultMap="resultMap_get帳票出力用情報取得" 
@@ -33,7 +34,9 @@
           SELECT
           DbT4101NinteiShinseiJoho.*,
           受給者台帳Newest.*,
-          構成市町村マスタ.*
+          構成市町村マスタ.*,
+          認定調査委託先情報.*,
+          介護事業者.*
           FROM
           (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.noDeleted_DbT4101NinteiShinseiJoho" />) AS DbT4101NinteiShinseiJoho
           INNER JOIN 
@@ -47,6 +50,21 @@
            rgdb."DbV4001JukyushaDaicho") AS 受給者台帳Newest
           ON 
           DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_shinseishoKanriNo" = 受給者台帳Newest."dbV4001JukyushaDaicho_shinseishoKanriNo"
+          LEFT JOIN 
+          (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.noDeleted_DbT4910NinteichosaItakusakiJoho" />) AS 認定調査委託先情報
+          ON 
+          DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_ninteiChosaItakusakiCode" = 認定調査委託先情報."dbT4910NinteichosaItakusakiJoho_ninteichosaItakusakiCode"
+          AND 構成市町村マスタ."dbT7051KoseiShichosonMaster_shichosonCode" = 認定調査委託先情報."dbT4910NinteichosaItakusakiJoho_shichosonCode"
+          AND 認定調査委託先情報."dbT4910NinteichosaItakusakiJoho_jokyoFlag" = True
+          LEFT JOIN 
+          (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.noDeleted_DbT7060KaigoJigyosha" />) AS 介護事業者
+          ON 
+          DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_nyushoShisetsuCode" = 介護事業者."dbT7060KaigoJigyosha_jigyoshaNo"
+          AND NOT EXISTS (SELECT 1
+            FROM rgdb."DbT7060KaigoJigyosha" AS A
+            WHERE 介護事業者."dbT7060KaigoJigyosha_jigyoshaNo" = A."jigyoshaNo"
+            AND 介護事業者."dbT7060KaigoJigyosha_yukoKaishiYMD" &lt; A."yukoKaishiYMD"
+          )
           WHERE
           DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_shinseishoKanriNo" IN
           <foreach item="申請書管理番号リスト" index="index" collection="申請書管理番号リスト" open="(" separator="," close=")">
@@ -58,26 +76,9 @@
         )
         SELECT
         master.*,
-        認定調査委託先情報.*,
-        介護事業者.*,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
           master
-        LEFT JOIN 
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.noDeleted_DbT4910NinteichosaItakusakiJoho" />) AS 認定調査委託先情報
-        ON 
-        master."dbT4101NinteiShinseiJoho_ninteiChosaItakusakiCode" = 認定調査委託先情報."dbT4910NinteichosaItakusakiJoho_ninteichosaItakusakiCode"
-        AND master."dbT7051KoseiShichosonMaster_shichosonCode" = 認定調査委託先情報."dbT4910NinteichosaItakusakiJoho_shichosonCode"
-        AND 認定調査委託先情報."dbT4910NinteichosaItakusakiJoho_jokyoFlag" = True
-        LEFT JOIN 
-        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.noDeleted_DbT7060KaigoJigyosha" />) AS 介護事業者
-        ON 
-        master."dbT4101NinteiShinseiJoho_nyushoShisetsuCode" = 介護事業者."dbT7060KaigoJigyosha_jigyoshaNo"
-        AND NOT EXISTS (SELECT 1
-            FROM rgdb."DbT7060KaigoJigyosha" AS A
-            WHERE 介護事業者."dbT7060KaigoJigyosha_jigyoshaNo" = A."jigyoshaNo"
-            AND 介護事業者."dbT7060KaigoJigyosha_yukoKaishiYMD" &lt; A."yukoKaishiYMD"
-        )
         LEFT OUTER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
         true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
@@ -88,7 +89,9 @@
              master
            ) 
          ) AS "ShikibetsuTaisho"							
-         ON master."dbT4101NinteiShinseiJoho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"							
+         ON master."dbT4101NinteiShinseiJoho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+         LEFT JOIN rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','true','true','') AS "Atesaki"
+         ON "Atesaki"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"					
         <if test="出力順 != null and !出力順.isEmpty()">
             ${出力順}
         </if>

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -23,11 +23,11 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KoikiZenShichosonJohoParameter {
+public class KoikiZenShichosonJohoParameter implements Serializable {
 
     private RString shichosonShokibetsuID;
     private LasdecCode shichosonCode;
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private RString shoKisaiHokenshaNo;
     private RString kokuhorenKoikiShichosonNo;
     private RString shichosonMeisho;
     private RString todofukenMeisho;
@@ -53,7 +53,7 @@ public class KoikiZenShichosonJohoParameter {
     private RString gappeiKyuShichosonKubun;
     private RString gappeiKyuShichosonHyojiUmu;
     private RString gappeiChiikiNo;
-    private ShoKisaiHokenshaNo unyoHokenshaNo;
+    private RString unyoHokenshaNo;
     private FlexibleDate unyoKaishiYMD;
     private FlexibleDate unyoShuryoYMD;
     private RString unyoKeitaiKubun;

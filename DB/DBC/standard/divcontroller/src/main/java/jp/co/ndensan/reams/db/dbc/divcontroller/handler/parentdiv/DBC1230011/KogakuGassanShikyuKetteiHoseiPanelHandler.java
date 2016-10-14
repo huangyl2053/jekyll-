@@ -461,7 +461,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             RStringBuilder rowBuilder = new RStringBuilder();
             rowBuilder.append(row.getHihokenshaNo());
             rowBuilder.append(アンダーライン);
-            rowBuilder.append(row.getTxtTaishoNendo().getValue().toString());
+            rowBuilder.append(row.getTxtTaishoNendo().getValue().getYear().toString());
             rowBuilder.append(アンダーライン);
             rowBuilder.append(row.getTxtShokisaiNo());
             rowBuilder.append(アンダーライン);

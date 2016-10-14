@@ -216,7 +216,7 @@ public class JukyushaTeiseiRenrakuhyoToroku {
      *
      * @return DbT1001HihokenshaDaichoEntity
      */
-    private DbT1001HihokenshaDaichoEntity get市町村コードと広住例措置元市町村コード(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+    public DbT1001HihokenshaDaichoEntity get市町村コードと広住例措置元市町村コード(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
         DbT1001HihokenshaDaichoEntity maxEntity
                 = dbt1001Dac.selectMax異動日(被保険者番号, 異動日.getYearMonth());
         if (maxEntity != null && maxEntity.getIdoYMD().isBeforeOrEquals(異動日)) {

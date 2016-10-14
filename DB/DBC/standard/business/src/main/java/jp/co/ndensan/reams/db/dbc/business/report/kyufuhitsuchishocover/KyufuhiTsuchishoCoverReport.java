@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KyufuhiTsuchishoCoverReport extends Report<KyufuhiTsuchishoCoverReportSource> {
 
     private final KyufuhiTsuchishoCoverEntity entity;
-    private int index;
 
     /**
      * インスタンスを生成します。
@@ -37,8 +36,7 @@ public class KyufuhiTsuchishoCoverReport extends Report<KyufuhiTsuchishoCoverRep
      */
     @Override
     public void writeBy(ReportSourceWriter<KyufuhiTsuchishoCoverReportSource> reportSourceWriter) {
-        index = index + 1;
-        IKyufuhiTsuchishoCoverEditor editor = new KyufuhiTsuchishoCoverEditor(entity, index);
+        IKyufuhiTsuchishoCoverEditor editor = new KyufuhiTsuchishoCoverEditor(entity);
         IKyufuhiTsuchishoCoverBuilder builder = new KyufuhiTsuchishoCoverBuilder(editor);
         reportSourceWriter.writeLine(builder);
     }

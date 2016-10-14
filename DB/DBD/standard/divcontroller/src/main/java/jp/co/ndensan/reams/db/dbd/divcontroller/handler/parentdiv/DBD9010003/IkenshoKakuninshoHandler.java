@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD9010003;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
-import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.KenshoKakuninshoinfo;
 import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.NichijoSeikatsuJiritsudo;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010003.IkenshoKakuninshoDiv;
@@ -87,12 +86,12 @@ public class IkenshoKakuninshoHandler {
      *
      * @param 医療費控除情報リスト List<IryohiKojoEntity>
      */
-    public void onChange対象年(List<IryohiKojoEntityResult> 医療費控除情報リスト) {
+    public void onChange対象年(List<IryohiKojo> 医療費控除情報リスト) {
         RString 控除対象年 = div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey();
-        IryohiKojoEntityResult 表示対象データ = null;
+        IryohiKojo 表示対象データ = null;
         RString 表示対象のデータ区分 = RString.EMPTY;
-        for (IryohiKojoEntityResult 医療費控除 : 医療費控除情報リスト) {
-            if (控除対象年.equals(医療費控除.get控除対象年())) {
+        for (IryohiKojo 医療費控除 : 医療費控除情報リスト) {
+            if (控除対象年.equals(医療費控除.get控除対象年().toDateString())) {
                 表示対象データ = 医療費控除;
                 表示対象のデータ区分 = 医療費控除.getデータ区分();
                 break;
@@ -149,13 +148,12 @@ public class IkenshoKakuninshoHandler {
             return false;
         } else if (div.getTxtNinteiKikan().getToValue() == null) {
             return false;
-        } else if (get日常生活自立度(div.getTxtZiritudo().getValue()).isEmpty()) {
+        } else if (check日常生活自立度(div.getTxtZiritudo().getValue())) {
             return false;
         } else if (なし.equals(div.getTxtNyoushikkin().getValue())) {
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     private RString get日常生活自立度(RString 日常生活自立度) {
@@ -169,6 +167,19 @@ public class IkenshoKakuninshoHandler {
             return NichijoSeikatsuJiritsudo.Ｃ２.get名称();
         }
         return RString.EMPTY;
+    }
+
+    private boolean check日常生活自立度(RString 日常生活自立度) {
+        if (NichijoSeikatsuJiritsudo.Ｂ１.get名称().equals(日常生活自立度)) {
+            return false;
+        } else if (NichijoSeikatsuJiritsudo.Ｂ２.get名称().equals(日常生活自立度)) {
+            return false;
+        } else if (NichijoSeikatsuJiritsudo.Ｃ１.get名称().equals(日常生活自立度)) {
+            return false;
+        } else if (NichijoSeikatsuJiritsudo.Ｃ２.get名称().equals(日常生活自立度)) {
+            return false;
+        }
+        return true;
     }
 
 }

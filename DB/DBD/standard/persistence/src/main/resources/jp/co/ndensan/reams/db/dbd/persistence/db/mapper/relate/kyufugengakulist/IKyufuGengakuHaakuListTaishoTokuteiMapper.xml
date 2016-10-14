@@ -14,6 +14,8 @@
         "ShunoJokyoTemp"."tmp_hihokenshaNo" AS "hihokenshaNo"
         FROM
         "ShunoJokyoTemp"
+        INNER JOIN rgdb."DbV4001JukyushaDaicho" AS "DbV4001JukyushaDaicho"
+        ON "ShunoJokyoTemp"."tmp_hihokenshaNo" = "DbV4001JukyushaDaicho"."hihokenshaNo"
         WHERE
         #{基準日} <![CDATA[<]]> TO_DATE("ShunoJokyoTemp"."tmp_jikoKisanYMD", 'YYYYMMDD') + interval '2 year'
         AND "ShunoJokyoTemp"."tmp_minoKannoKubun" = '3'
@@ -46,7 +48,7 @@
             AND A."tmp_choteiNendo" = 時効起算日管理."choteiNendo"
             AND A."tmp_fukaNendo" = 時効起算日管理."fukaNendo"
             AND A."tmp_tsuchishoNo" = 時効起算日管理."tsuchishoNo"
-            AND A."tmp_kibetsu" = 時効起算日管理."shuno_Ki_Tsuki"
+            AND cast(A."tmp_kibetsu" AS "char") = 時効起算日管理."shuno_Ki_Tsuki"
             AND A."tmp_tokucho_fuchoKubun" = 時効起算日管理."tokucho_FuchoKubun"
             )
         </if>
@@ -108,8 +110,8 @@
             WHERE NOT EXISTS(
             SELECT 1
             FROM "ShunoJokyoTemp" AS B
-            WHERE B."hihokenshaNo" = A."tmp_hihokenshaNo"
-            AND B."minoKannoKubun" = '3'
+            WHERE B."tmp_hihokenshaNo" = A."tmp_hihokenshaNo"
+            AND B."tmp_minoKannoKubun" = '3'
             )	   
         </if>
     </select>

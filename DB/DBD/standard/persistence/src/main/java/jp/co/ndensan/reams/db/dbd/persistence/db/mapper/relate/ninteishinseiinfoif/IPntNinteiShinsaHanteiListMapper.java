@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinseiinf
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.PntNinteiShinsaHanteiListMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519001.PntNinteiShinsaHanteiListEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定審査判定データを取得します。
@@ -30,5 +30,5 @@ public interface IPntNinteiShinsaHanteiListMapper {
      * @param parameter PntNinteiShinsaHanteiListMybatisParameter
      * @return List<DbT7051KoseiShichosonMasterEntity>
      */
-    List<DbT7051KoseiShichosonMasterEntity> select市町村名(PntNinteiShinsaHanteiListMybatisParameter parameter);
+    List<RString> select市町村名(PntNinteiShinsaHanteiListMybatisParameter parameter);
 }

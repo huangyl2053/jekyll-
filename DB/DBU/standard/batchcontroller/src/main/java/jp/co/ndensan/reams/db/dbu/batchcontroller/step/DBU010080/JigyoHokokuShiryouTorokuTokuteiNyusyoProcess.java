@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.Tokute
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hokenkyufushokankettei.IJigyoHokokuRenkeiHokenkyufuShokanKetteiMapper;
 import jp.co.ndensan.reams.db.dbu.service.core.hokenkyufushokankettei.HokenkyufuShokanKetteiManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -38,6 +39,7 @@ public class JigyoHokokuShiryouTorokuTokuteiNyusyoProcess extends BatchProcessBa
     private static final RString FILENAME_0106 = new RString("DBU060106.CSV");
     private static final RString FILENAME_0205 = new RString("DBU060205.CSV");
     private static final RString FILENAME_0206 = new RString("DBU060206.CSV");
+    private static final RString 特定入所者集計根拠テーブル = new RString("tempDwbTKyufujissekiShukeiKonkyo2");
     private JigyoHokokuRenkeiHokenkyufuShokanKetteiProcessParameter processParameter;
     private IJigyoHokokuRenkeiHokenkyufuShokanKetteiMapper mapper;
     private HokenkyufuShokanKetteiManager business;
@@ -45,6 +47,8 @@ public class JigyoHokokuShiryouTorokuTokuteiNyusyoProcess extends BatchProcessBa
     private RString filePath_0106;
     private RString filePath_0205;
     private RString filePath_0206;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter<TempDwbTKyufujissekiShukeiKonkyo2Entity> tempEntityWriter;
     @BatchWriter
     private CsvWriter<TokuteiNyushosyaHokenKyufusuJohoKonkyoCsvEntity> 特定入所者保険給付数情報根拠_0105csvWriter;
     @BatchWriter
@@ -57,6 +61,7 @@ public class JigyoHokokuShiryouTorokuTokuteiNyusyoProcess extends BatchProcessBa
     @Override
     protected void initialize() {
         business = new HokenkyufuShokanKetteiManager();
+        tempEntityWriter = new BatchEntityCreatedTempTableWriter(特定入所者集計根拠テーブル, TempDwbTKyufujissekiShukeiKonkyo2Entity.class);
         filePath_0105 = Path.combinePath(processParameter.getCsvFilePath(), FILENAME_0105);
         filePath_0106 = Path.combinePath(processParameter.getCsvFilePath(), FILENAME_0106);
         filePath_0205 = Path.combinePath(processParameter.getCsvFilePath(), FILENAME_0205);
@@ -80,6 +85,7 @@ public class JigyoHokokuShiryouTorokuTokuteiNyusyoProcess extends BatchProcessBa
 
     @Override
     protected void process(TempDwbTKyufujissekiShukeiKonkyo2Entity entity) {
+        tempEntityWriter.update(business.update特定入所者一時テーブル(entity));
         特定入所者保険給付数情報根拠_0105csvWriter.writeLine(business.set特定入所者保険給付数情報根拠CSVData(entity,
                 ShukeiNoyoshiki2._2_特定入所者介護_介護予防_サービス費1総数_件数.getコード(), processParameter.get旧市町村区分()));
         特定入所者保険給付数情報根拠_0106csvWriter.writeLine(business.set特定入所者保険給付数情報根拠CSVData(entity,

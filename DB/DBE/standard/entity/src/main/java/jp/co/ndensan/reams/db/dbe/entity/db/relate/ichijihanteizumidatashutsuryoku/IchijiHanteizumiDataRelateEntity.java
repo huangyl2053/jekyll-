@@ -102,4 +102,5 @@ public class IchijiHanteizumiDataRelateEntity {
     private RString 認知症自立度Ⅱ以上の蓋然性;
     private RString 状態の安定性;
     private RString 給付区分;
+    private RString 前々回認定有効期間;
 }

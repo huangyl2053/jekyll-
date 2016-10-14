@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020001;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJohoBuilder;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseishaKankeiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -32,7 +34,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoO
 import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoServiceShuri;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputNaiyo;
-import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -42,6 +43,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibe
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv.InputType;
@@ -52,16 +54,26 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitaku
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -80,11 +92,13 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
     private static int index = 0;
     private static final int INT_4 = 4;
     private static final int 年の月数 = 12;
+    private static final RString SELECT_KEY0 = new RString("key0");
+    private static final RString SELECT_KEY1 = new RString("key1");
 
     /**
-     * 画面タイトルのenum
+     * gamenタイトルのenum
      */
-    private enum 画面タイトル {
+    private enum gamenタイトル {
 
         /**
          * 要介護認定
@@ -109,7 +123,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
         private final RString title;
 
-        画面タイトル(RString title) {
+        gamenタイトル(RString title) {
             this.title = title;
         }
 
@@ -124,9 +138,9 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
     }
 
     /**
-     * 画面表示エリアのenum
+     * gamen表示エリアのenum
      */
-    private enum 画面表示エリア {
+    private enum gamen表示エリア {
 
         /**
          * 調査委託先と調査員コード
@@ -173,8 +187,8 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         認定申請情報初期化(今回情報, 市町村セキュリティ情報.get導入形態コード());
         認定情報初期化(今回情報, 前回情報, 市町村セキュリティ情報.get導入形態コード());
 
-        set画面タイトル(今回情報);
-        set子Divモード(div.getTitle().equals(画面タイトル.要介護認定.getTitle()));
+        setgamenタイトル(今回情報);
+        set子Divモード(div.getTitle().equals(gamenタイトル.要介護認定.getTitle()));
 
         ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報 = new ShokkenTorikeshiIchibuSoshituGamenJoho();
         画面更新用情報.set導入形態コード(市町村セキュリティ情報.get導入形態コード());
@@ -324,23 +338,59 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
         介護認定申請基本情報入力Div.setInputMode(new RString(InputType.NinteiMode.toString()));
 
-        INinteiShinseiTodokedeshaDiv 申請届出者Div = div.getCcdShinseiTodokedesha();
-        NinteiShinseiTodokedeshaDataPassModel model = new NinteiShinseiTodokedeshaDataPassModel();
-        model.set申請書管理番号(申請書管理番号);
+        INinteiShinseiTodokedeshaDiv iNinteiShinseiTodokedeshaDiv
+                = div.getCcdShinseiTodokedesha();
+        List<RString> 申請届出代行区分List = new ArrayList<>();
+        for (ShinseiTodokedeDaikoKubunCode code : ShinseiTodokedeDaikoKubunCode.values()) {
+            申請届出代行区分List.add(code.getCode());
+        }
+        iNinteiShinseiTodokedeshaDiv.getDdlTodokledeDaikoKubun().setDataSource(setDataSource(申請届出代行区分List, true));
+        if (今回情報.get申請届出代行区分コード() != null) {
+            iNinteiShinseiTodokedeshaDiv.getDdlTodokledeDaikoKubun().setSelectedKey(今回情報.get申請届出代行区分コード().getColumnValue());
+        }
+        if (今回情報.get事業者番号() != null) {
+            RString 事業者番号 = 今回情報.get事業者番号().getColumnValue();
+            iNinteiShinseiTodokedeshaDiv.getTxtJigyoshaCode().setValue(事業者番号);
+        }
+        List<RString> shinseiKankeishaCodeList = new ArrayList<>();
+        for (ShinseishaKankeiCode code : ShinseishaKankeiCode.values()) {
+            shinseiKankeishaCodeList.add(code.getコード());
+        }
+        iNinteiShinseiTodokedeshaDiv.getDdlShinseiKankeisha().setDataSource(setDataSource(shinseiKankeishaCodeList, false));
+        iNinteiShinseiTodokedeshaDiv.getDdlShinseiKankeisha().setSelectedKey(今回情報.get申請者関係コード().getColumnValue());
 
-        // TODO. for test
-        model.set電話番号(new RString("02552141527"));
-        model.set郵便番号(new RString("012-1234"));
-        model.set住所(new RString("testtest"));
-        model.set申請届出代行区分コード(new RString("1"));
-        model.set事業者区分(new RString("10"));
+        RString 氏名 = 今回情報.get申請届出者氏名();
+        iNinteiShinseiTodokedeshaDiv.getTxtShimei().setValue(氏名);
+        RString カナ氏名 = 今回情報.get申請届出者氏名カナ();
+        iNinteiShinseiTodokedeshaDiv.getTxtKanaShimei().setValue(カナ氏名);
+        RString 本人との関係性 = 今回情報.get本人との関係();
+        iNinteiShinseiTodokedeshaDiv.getTxtHonninKankeisei().setValue(本人との関係性);
+        if (new RString("0").equals(今回情報.get管内管外区分())) {
+            iNinteiShinseiTodokedeshaDiv.getRadKannaiKangai().setSelectedKey(SELECT_KEY0);
+            iNinteiShinseiTodokedeshaDiv.set状態(new RString(NinteiShinseiTodokedeshaDiv.DisplayType.管内.toString()));
 
-        申請届出者Div.initialize(model);
-        申請届出者Div.set状態(new RString(NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode.toString()));
+            TelNo 電話番号 = 今回情報.get申請届出者電話番号();
+            iNinteiShinseiTodokedeshaDiv.getTxtTelNo().setDomain(電話番号);
+
+            YubinNo 郵便番号 = 今回情報.get申請届出者郵便番号();
+            iNinteiShinseiTodokedeshaDiv.getTxtYubinNo().setValue(郵便番号);
+
+            iNinteiShinseiTodokedeshaDiv.getCcdChoikiInput().load(new ChoikiCode(今回情報.get申請届出者住所()));
+        } else if (new RString("1").equals(今回情報.get管内管外区分())) {
+            iNinteiShinseiTodokedeshaDiv.getRadKannaiKangai().setSelectedKey(SELECT_KEY1);
+            iNinteiShinseiTodokedeshaDiv.set状態(new RString(NinteiShinseiTodokedeshaDiv.DisplayType.管外.toString()));
+
+            TelNo 電話番号 = 今回情報.get申請届出者電話番号();
+            iNinteiShinseiTodokedeshaDiv.getTxtTelNo().setDomain(電話番号);
+
+            YubinNo 郵便番号 = 今回情報.get申請届出者郵便番号();
+            iNinteiShinseiTodokedeshaDiv.getCcdZenkokuJushoInput().load(new ZenkokuJushoCode(今回情報.get申請届出者住所()), 郵便番号);
+        }
+        iNinteiShinseiTodokedeshaDiv.set状態(new RString(NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode.toString()));
 
         IShujiiIryokikanAndShujiiInputDiv 主治医Div = div.getShujiiIryokikanAndShujii().getCcdShujiiIryokikanAndShujiiInput();
         主治医Div.setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);
-        if (is表示(画面表示エリア.主治医と医療機関, 導入形態コード)) {
+        if (is表示(gamen表示エリア.主治医と医療機関, 導入形態コード)) {
             主治医Div.initialize(
                     association.get地方公共団体コード(),
                     new ShinseishoKanriNo(申請書管理番号),
@@ -356,7 +406,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
         IChosaItakusakiAndChosainInputDiv 調査Div = div.getChosaItakusakiAndChosain().getCcdChosaItakusakiAndChosainInput();
         調査Div.setMode_ShoriType(ChosaItakusakiAndChosainInputDiv.ShoriType.ShokaiMode);
-        if (is表示(画面表示エリア.調査委託先と調査員, 導入形態コード)) {
+        if (is表示(gamen表示エリア.調査委託先と調査員, 導入形態コード)) {
             調査Div.initialize(
                     new RString(ChosaItakusakiAndChosainInputDiv.ShoriType.ShokaiMode.toString()),
                     null == 今回情報.get認定調査委託先コード受給() ? RString.EMPTY : 今回情報.get認定調査委託先コード受給().value(),
@@ -412,7 +462,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         }
     }
 
-    private boolean is表示(画面表示エリア shurui, Code 導入形態コード) {
+    private boolean is表示(gamen表示エリア shurui, Code 導入形態コード) {
         if (!DonyuKeitaiCode.認定広域.getCode().equals(convertCodeToRString(導入形態コード))) {
             return true;
         }
@@ -431,9 +481,9 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
             if (YokaigoInterfaceIchoTorikomi.両方取込む.getコード().equals(要介護ＩＦ医調取込み)) {
                 return true;
             } else if (YokaigoInterfaceIchoTorikomi.主治医のみ.getコード().equals(要介護ＩＦ医調取込み)) {
-                return shurui.equals(画面表示エリア.主治医と医療機関);
+                return shurui.equals(gamen表示エリア.主治医と医療機関);
             } else if (YokaigoInterfaceIchoTorikomi.調査員のみ.getコード().equals(要介護ＩＦ医調取込み)) {
-                return shurui.equals(画面表示エリア.調査委託先と調査員);
+                return shurui.equals(gamen表示エリア.調査委託先と調査員);
             } else if (YokaigoInterfaceIchoTorikomi.両方取込まない.getコード().equals(要介護ＩＦ医調取込み)) {
                 return false;
             }
@@ -442,21 +492,21 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         return false;
     }
 
-    private void set画面タイトル(YokaigoNinteiJoho 今回情報) {
+    private void setgamenタイトル(YokaigoNinteiJoho 今回情報) {
         RString 認定申請区分申請時コード = convertCodeToRString(今回情報.get認定申請区分申請時コード受給());
         RString 取下区分コード = convertCodeToRString(今回情報.get取下区分コード受給());
-        RString タイトル = 画面タイトル.要介護認定.getTitle();
+        RString タイトル = gamenタイトル.要介護認定.getTitle();
         if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(認定申請区分申請時コード)) {
             if (TorisageKubunCode.認定申請有効.getコード().equals(取下区分コード)) {
-                タイトル = 画面タイトル.要介護認定新規認定.getTitle();
+                タイトル = gamenタイトル.要介護認定新規認定.getTitle();
             } else if (TorisageKubunCode.却下.getコード().equals(取下区分コード)) {
-                タイトル = 画面タイトル.要介護認定新規却下.getTitle();
+                タイトル = gamenタイトル.要介護認定新規却下.getTitle();
             }
         } else if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(認定申請区分申請時コード)) {
             if (TorisageKubunCode.認定申請有効.getコード().equals(取下区分コード)) {
-                タイトル = 画面タイトル.要介護認定更新認定.getTitle();
+                タイトル = gamenタイトル.要介護認定更新認定.getTitle();
             } else if (TorisageKubunCode.却下.getコード().equals(取下区分コード)) {
-                タイトル = 画面タイトル.要介護認定更新却下.getTitle();
+                タイトル = gamenタイトル.要介護認定更新却下.getTitle();
             }
         }
         div.setTitle(タイトル);
@@ -472,8 +522,14 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
     }
 
     private YokaigoNinteiJoho get今回情報(Code 導入形態コード, RString 申請書管理番号) {
+
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+
         return YokaigoNinteiJohoManager.createInstance().get今回認定情報(申請書管理番号,
-                DonyuKeitaiCode.認定広域.getCode().equals(convertCodeToRString(導入形態コード)));
+                DonyuKeitaiCode.認定広域.getCode().equals(convertCodeToRString(導入形態コード)),
+                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
     }
 
     private YokaigoNinteiJoho get前回情報(RString 申請書管理番号) {
@@ -549,12 +605,12 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
     private boolean is履歴番号更新要() {
 
-        if (div.getTitle().equals(画面タイトル.要介護認定新規認定.getTitle())
+        if (div.getTitle().equals(gamenタイトル.要介護認定新規認定.getTitle())
                 && null != div.getHdnZenkaiRirekiNo() && !div.getHdnZenkaiRirekiNo().isEmpty()) {
             return false;
         }
 
-        if (div.getTitle().equals(画面タイトル.要介護認定更新認定.getTitle())
+        if (div.getTitle().equals(gamenタイトル.要介護認定更新認定.getTitle())
                 && !div.getHdnKonkaiRirekiNo().equals(new RString("0000"))) {
             return false;
         }
@@ -749,5 +805,25 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
     private RString convertCodeToRString(Code target) {
         return null == target || target.isEmpty() ? RString.EMPTY : target.value();
+    }
+
+    private List<KeyValueDataSource> setDataSource(List<RString> codeList, boolean kubun) {
+        Collections.sort(codeList);
+        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        KeyValueDataSource data = new KeyValueDataSource();
+        data.setKey(RString.EMPTY);
+        data.setValue(RString.EMPTY);
+        dataSourceList.add(data);
+        for (RString code : codeList) {
+            KeyValueDataSource keyValue = new KeyValueDataSource();
+            keyValue.setKey(code);
+            if (kubun) {
+                keyValue.setValue(new RString(ShinseiTodokedeDaikoKubunCode.toValue(code).name()));
+            } else {
+                keyValue.setValue(new RString(ShinseishaKankeiCode.toValue(code).name()));
+            }
+            dataSourceList.add(keyValue);
+        }
+        return dataSourceList;
     }
 }

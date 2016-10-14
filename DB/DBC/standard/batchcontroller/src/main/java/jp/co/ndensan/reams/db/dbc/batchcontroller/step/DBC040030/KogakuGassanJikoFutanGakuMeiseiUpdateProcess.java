@@ -58,116 +58,116 @@ public class KogakuGassanJikoFutanGakuMeiseiUpdateProcess extends BatchProcessBa
     protected void process(KogakuGassanUpdateEntity entity) {
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 高額合算自己負担額明細 = entity.get高額合算自己負担額明細();
         if (当年4月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_04_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_04_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_04_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_04_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getTounen_04_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getTounen_04_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getTounen_04_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getTounen_04_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getTounen_04_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getTounen_04_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (当年5月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_05_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_05_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_05_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_05_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getTounen_05_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getTounen_05_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getTounen_05_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getTounen_05_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getTounen_05_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getTounen_05_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (当年6月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_06_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_06_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_06_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_06_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getTounen_06_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getTounen_06_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getTounen_06_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getTounen_06_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getTounen_06_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getTounen_06_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (当年7月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_07_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_07_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_07_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_07_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getTounen_07_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getTounen_07_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getTounen_07_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getTounen_07_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getTounen_07_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getTounen_07_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (当年8月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_08_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_08_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_08_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_08_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getTounen_08_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getTounen_08_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getTounen_08_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getTounen_08_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getTounen_08_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getTounen_08_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (当年9月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_09_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_09_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_09_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_09_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getTounen_09_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getTounen_09_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getTounen_09_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getTounen_09_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getTounen_09_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getTounen_09_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (当年10月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_10_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_10_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_10_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_10_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getTounen_10_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getTounen_10_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getTounen_10_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getTounen_10_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getTounen_10_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getTounen_10_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (当年11月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_11_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_11_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_11_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_11_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getTounen_11_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getTounen_11_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getTounen_11_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getTounen_11_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getTounen_11_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getTounen_11_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (当年12月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_12_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getTounen_12_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_12_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getTounen_12_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getTounen_12_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getTounen_12_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getTounen_12_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getTounen_12_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getTounen_12_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getTounen_12_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (翌年1月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_01_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_01_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_01_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_01_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getYokunen_01_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getYokunen_01_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getYokunen_01_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_01_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_01_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getYokunen_01_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (翌年2月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_02_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_02_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_02_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_02_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getYokunen_02_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getYokunen_02_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getYokunen_02_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_02_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_02_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getYokunen_02_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (翌年3月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_03_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_03_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_03_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_03_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getYokunen_03_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getYokunen_03_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getYokunen_03_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_03_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_03_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getYokunen_03_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (翌年4月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_04_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_04_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_04_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_04_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getYokunen_04_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getYokunen_04_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getYokunen_04_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_04_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_04_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getYokunen_04_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (翌年5月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_05_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_05_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_05_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_05_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getYokunen_05_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getYokunen_05_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getYokunen_05_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_05_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_05_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getYokunen_05_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (翌年6月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_06_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_06_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_06_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_06_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getYokunen_06_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getYokunen_06_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getYokunen_06_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_06_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_06_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getYokunen_06_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         } else if (翌年7月.equals(高額合算自己負担額明細.getTaishoM())) {
-            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_07_sumi_JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_07_sumi_70_74JikoFutanGaku());
-            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_07_sumi_70_74KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getYokunen_07_sumi_under_70KogakuShikyuGaku());
-            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間ＤＢ自己負担額データ().getYokunen_07_sumi_Tekiyo());
+            高額合算自己負担額明細.setSumi_JikoFutanGaku(entity.get中間DBEntity().getYokunen_07_sumi_JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74JikoFutanGaku(entity.get中間DBEntity().getYokunen_07_sumi_70_74JikoFutanGaku());
+            高額合算自己負担額明細.setSumi_70_74KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_07_sumi_70_74KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_under_70KogakuShikyuGaku(entity.get中間DBEntity().getYokunen_07_sumi_under_70KogakuShikyuGaku());
+            高額合算自己負担額明細.setSumi_Tekiyo(entity.get中間DBEntity().getYokunen_07_sumi_Tekiyo());
             tableWrite.update(高額合算自己負担額明細);
         }
     }

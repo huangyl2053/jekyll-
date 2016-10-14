@@ -55,6 +55,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     private static final RString 削除照会モード = new RString("削除照会モード");
     private static final RString 口座修正モード = new RString("口座修正モード");
     private static final RString フォーカスを = new RString("txtKensakuTaishoNendo");
+    private static final RString 排他 = new RString("他のユーザーによって更新が実施されました。お手数をおかけ致しますが、再度更新処理を実施してください。");
     private static final RString 照会 = new RString("照会");
     private static final RString 処理不可 = new RString("処理不可");
     private static final int NUM_THREE = 3;
@@ -541,6 +542,9 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             return ResponseData.of(div).respond();
         } catch (Exception e) {
             e.toString();
+            if (排他.toString().equals(e.getMessage())) {
+                throw new ApplicationException(排他.toString());
+            }
             div.getCcdKanryoMessage().setMessage(
                     UrErrorMessages.異常終了,
                     div.getCcdKaigoShikakuKihon().get被保険者番号(),

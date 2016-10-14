@@ -66,6 +66,7 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushaidochecklist."
             + "IJukyushaIdoCheckListMapper.get帳票出力対象データ");
     private IOutputOrder order = null;
+    private List<PersonalData> personalDataList;
     private RString 出力順 = RString.EMPTY;
     private static final int NUM5 = 5;
     private static final RString 申請書管理番号 = new RString("申請書管理番号");
@@ -82,6 +83,7 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
 
     @Override
     protected void initialize() {
+        personalDataList = new ArrayList<>();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         if (parameter.get出力順ID() != null) {
             order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD200037, parameter.get出力順ID());
@@ -130,7 +132,7 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
         if (entity.get申請書管理番号() != null && !entity.get申請書管理番号().isEmpty()) {
             PersonalData personalData = PersonalData.of(entity.get識別コード(),
                     new ExpandedInformation(new Code("0001"), 申請書管理番号, entity.get申請書管理番号().value()));
-            AccessLogger.log(AccessLogType.照会, personalData);
+            personalDataList.add(personalData);
         }
     }
 
@@ -138,6 +140,7 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
     protected void afterExecute() {
         OutputJokenhyoFactory outputJokenhyo = new OutputJokenhyoFactory();
         outputJokenhyo.outputJokenhyoFactory(reportSourceWriter, parameter);
+        AccessLogger.log(AccessLogType.照会, personalDataList);
 
     }
 

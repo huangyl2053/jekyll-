@@ -56,6 +56,7 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
 
     @Override
     protected void initialize() {
+        hanNo = new OutputParameter();
         特定個人版管理特定情報List = new ArrayList<>();
         特定個人版管理特定情報List = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(processParameter.get新規異動区分(),
                 RString.EMPTY, DataSetNo._0400総合事業.getコード(), FlexibleDate.getNowDate());
@@ -110,7 +111,7 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
         entity.setMisetteiJiyu04(RString.EMPTY);
         entity.setTeikyoNaiyo05(toRString(relateEntity.getHihokenshaShuryoYMD()));
         if (relateEntity.getHihokenshaShuryoYMD() != null && !relateEntity.getHihokenshaShuryoYMD().isEmpty()) {
-            entity.setMisetteiJiyu05(RString.EMPTY);
+            entity.setMisetteiJiyu05(new RString("NotAcceptable"));
         } else {
             entity.setMisetteiJiyu05(RString.EMPTY);
         }
@@ -118,7 +119,7 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
         entity.setMisetteiJiyu06(RString.EMPTY);
         entity.setTeikyoNaiyo07(relateEntity.getSumi_Gokei_70_74JikoFutanGaku());
         if (relateEntity.getSumi_Gokei_70_74JikoFutanGaku() != null && !relateEntity.getSumi_Gokei_70_74JikoFutanGaku().isEmpty()) {
-            entity.setMisetteiJiyu07(RString.EMPTY);
+            entity.setMisetteiJiyu07(new RString("NotAcceptable"));
         } else {
             entity.setMisetteiJiyu07(RString.EMPTY);
         }

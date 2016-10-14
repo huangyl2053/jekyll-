@@ -86,7 +86,8 @@ public class SyoriTaisyoShichosonProcess extends BatchProcessBase<DbT7022ShoriDa
         List<ShikibetsuTaishoIdoJoho> 宛名累積マスタデータリスト = finder.get宛名識別対象異動(keyBuilder.build());
         JuminIdoRendoShikakuToroku juminidorendoshikakutoroku = new JuminIdoRendoShikakuToroku();
         for (ShikibetsuTaishoIdoJoho 宛名識別対象 : 宛名累積マスタデータリスト) {
-            if (異動後.equals(宛名識別対象.get異動前後区分())) {
+            if (異動後.equals(宛名識別対象.get異動前後区分())
+                    && processParameter.getShichosonCode().equals(宛名識別対象.get現地方公共団体コード().value())) {
                 juminidorendoshikakutoroku.to住民異動情報((宛名識別対象), csvWriter);
             }
         }

@@ -31,6 +31,7 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
     private final FlexibleYearMonth 処理年月;
     private final KogakuGassanJikofutangakuShomeishoDateEntity entity;
     private final List<RString> 改頁項目List;
+    private final List<RString> 出力順リスト;
     private final RDateTime システム日時;
     private final int 連番;
     private static final int NUM_0 = 0;
@@ -50,6 +51,7 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
      * @param 処理年月 FlexibleYearMonth
      * @param entity ChohyoShutsuryokuTaishoDateEntity
      * @param 改頁項目List List<RString>
+     * @param 出力順リスト List<RString>
      * @param システム日時 RDateTime
      * @param 連番 int
      * @param 保険者番号 RString
@@ -59,6 +61,7 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
             FlexibleYearMonth 処理年月,
             KogakuGassanJikofutangakuShomeishoDateEntity entity,
             List<RString> 改頁項目List,
+            List<RString> 出力順リスト,
             RDateTime システム日時,
             int 連番,
             RString 保険者番号,
@@ -66,6 +69,7 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
         this.処理年月 = 処理年月;
         this.entity = entity;
         this.改頁項目List = 改頁項目List;
+        this.出力順リスト = 出力順リスト;
         this.システム日時 = システム日時;
         this.連番 = 連番;
         this.保険者番号 = 保険者番号;
@@ -120,21 +124,29 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
 
     private void set出力順And改ページ(GassanJikofutangakuShomeishoTorikomiIchiranSource source) {
 
-        if (null != 改頁項目List && !改頁項目List.isEmpty()) {
-            source.shutsuryokujun1 = get改頁And並び順(NUM_0);
-            source.kaipage1 = get改頁And並び順(NUM_0);
-            source.shutsuryokujun2 = get改頁And並び順(NUM_1);
-            source.kaipage2 = get改頁And並び順(NUM_1);
-            source.shutsuryokujun3 = get改頁And並び順(NUM_1);
-            source.kaipage3 = get改頁And並び順(NUM_2);
-            source.shutsuryokujun4 = get改頁And並び順(NUM_2);
-            source.kaipage4 = get改頁And並び順(NUM_3);
-            source.shutsuryokujun5 = get改頁And並び順(NUM_3);
-            source.kaipage5 = get改頁And並び順(NUM_4);
+        if (出力順リスト != null && !出力順リスト.isEmpty()) {
+            source.shutsuryokujun1 = get出力順(NUM_0);
+            source.shutsuryokujun2 = get出力順(NUM_1);
+            source.shutsuryokujun3 = get出力順(NUM_2);
+            source.shutsuryokujun4 = get出力順(NUM_3);
+            source.shutsuryokujun5 = get出力順(NUM_4);
         }
+
+        if (null != 改頁項目List && !改頁項目List.isEmpty()) {
+            source.kaipage1 = get改頁順(NUM_0);
+            source.kaipage2 = get改頁順(NUM_1);
+            source.kaipage3 = get改頁順(NUM_2);
+            source.kaipage4 = get改頁順(NUM_3);
+            source.kaipage5 = get改頁順(NUM_4);
+        }
+
     }
 
-    private RString get改頁And並び順(int index) {
+    private RString get出力順(int index) {
+        return index < 出力順リスト.size() ? 出力順リスト.get(index) : RString.EMPTY;
+    }
+
+    private RString get改頁順(int index) {
         return index < 改頁項目List.size() ? 改頁項目List.get(index) : RString.EMPTY;
     }
 

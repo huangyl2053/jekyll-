@@ -378,12 +378,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
         if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtTaishoNendo().getValue() != null
                 && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getFromValue() != null
                 && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getToValue() != null) {
-            boolean flag1 = !(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().
-                    getFromValue().isBeforeOrEquals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                            getTxtTaishoNendo().getValue()) && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                    getTxtTaishoNendo().getValue().isBeforeOrEquals(
-                            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getToValue()));
-            boolean flag2 = 定値_年度年度1.getYear().equals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+            boolean flag1 = 定値_年度年度1.getYear().equals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtTaishoNendo().getValue().getYear()) && 定値_開始計算対象期間1.isBeforeOrEquals(
                             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getFromValue())
                     && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
@@ -392,12 +387,12 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
                     getTxtTaishoNendo().getValue().getYear().toDateString().concat(定値_日付2).toString());
             RDate 翌対象年度日付 = new RDate(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtTaishoNendo().getValue().getYear().plusYear(1).toDateString().concat(定値_日付3).toString());
-            boolean flag3 = 定値_年度年度2.getYear().isBeforeOrEquals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+            boolean flag2 = 定値_年度年度2.getYear().isBeforeOrEquals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtTaishoNendo().getValue().getYear()) && 対象年度日付.isBeforeOrEquals(div.
                             getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().
                             getFromValue()) && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                     getTxtKeisanYMD().getToValue().isBeforeOrEquals(翌対象年度日付);
-            if (flag1 || flag2 || flag3) {
+            if (flag1 || flag2) {
                 validPairs.add(new ValidationMessageControlPair(
                         new KogakuGassanShikyuKetteiHoseiPanelValidationHandler.IdocheckMessages(
                                 UrErrorMessages.項目に対する制約, 計算期間.toString(), 対象年度内.toString())));

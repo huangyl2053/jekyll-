@@ -127,8 +127,8 @@ public class ShujiiIkenshoKakuninshoReportSource implements IReportSource {
     public RString jiritsudoC1;
     @ReportItem(name = "jiritsudoC2", length = 2, order = 55)
     public RString jiritsudoC2;
-    @ReportItem(name = "chohyoNo", length = 4, order = 56)
-    public RString chohyoNo;
+    @ReportItem(name = "pageCount", length = 4, order = 56)
+    public RString pageCount;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

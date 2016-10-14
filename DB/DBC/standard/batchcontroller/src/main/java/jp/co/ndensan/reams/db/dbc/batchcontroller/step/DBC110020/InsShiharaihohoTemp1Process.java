@@ -50,7 +50,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select異動一時");
-    private static final RString 異動一時1_TABLE_NAME = new RString("IdoTblTmp");
+    private static final RString 異動一時1_TABLE_NAME = new RString("IdoTblTmp1");
     private static final RString 送付エラー一時_TABLE_NAME = new RString("SoufuError");
     private static final RString SPLIT = new RString(",");
     private static final RString 支払方法変更 = new RString("支払方法変更");
@@ -1340,7 +1340,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         entity.setTekiyoKaishiYMD(new FlexibleDate(総合事業対象者Info.get(ORDER_0)));
         return entity;
     }
-    
+
     private JushochitokureiInfoEntity get住所地特例entity(RString 住所地特例) {
         if (RString.isNullOrEmpty(住所地特例)) {
             return null;
@@ -1695,7 +1695,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         if (短期入所サービス上限管理適用期間終了年月日 != null) {
             idoTblTmpEntity.set短期入所サービス上限管理適用期間終了年月日(new RString(短期入所サービス上限管理適用期間終了年月日.toString()));
         }
-        idoTblTmpEntity.set被保険者番号(受給者台帳.getHihokenshaNo().getColumnValue());
+        idoTblTmpEntity.set被保険者番号(受給者台帳.getHihokenshaNo());
     }
 
     private void set被保険者台帳(IdoTblTmpEntity idoTblTmpEntity, List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List) {

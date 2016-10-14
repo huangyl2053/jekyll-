@@ -24,7 +24,7 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
                 @Override
                 public boolean apply(HanyoListParamDiv div) {
                     if (SpecHelper.is年度Rbが選択されている(div)) {
-                        return !RString.isNullOrEmpty(div.getDdlKijunNendo().getSelectedValue());
+                        return !SpecHelper.空白行KEY.equals(div.getDdlKijunNendo().getSelectedKey());
                     }
                     return true;
                 }
@@ -60,7 +60,7 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
                 @Override
                 public boolean apply(HanyoListParamDiv div) {
                     if (div.getTxtChushutsuHani().getFromValue() != null && div.getTxtChushutsuHani().getToValue() != null) {
-                        return div.getTxtChushutsuHani().getFromValue().isBefore(div.getTxtChushutsuHani().getToValue());
+                        return div.getTxtChushutsuHani().getFromValue().isBeforeOrEquals(div.getTxtChushutsuHani().getToValue());
                     }
                     return true;
                 }
@@ -127,12 +127,13 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
         static final RString 年度基準日RB_KEY = new RString("key1");
         static final RString 基準日RB_KEY = new RString("key0");
         static final RString 帳票_CSV出力_KEY = new RString("key0");
-        static final RString 帳票のみ出力_KEY = new RString("key0");
+        static final RString 帳票のみ出力_KEY = new RString("key1");
+        static final RString 空白行KEY = new RString("key0");
 
         static boolean 表題入力チェック(HanyoListParamDiv div) {
             if (帳票_CSV出力_KEY.equals(div.getRadShuturyokuHoho().getSelectedKey())
                     || 帳票のみ出力_KEY.equals(div.getRadShuturyokuHoho().getSelectedKey())) {
-                return RString.isNullOrEmpty(div.getTxtHyodaiMeisho().getValue());
+                return !RString.isNullOrEmpty(div.getTxtHyodaiMeisho().getValue());
             }
             return true;
         }

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.Taisho
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.homon.HobetsuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
@@ -86,6 +87,7 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     private ReportId 帳票ID;
     private RDateTime 帳票作成日時;
 
+    private RString 課税区分_非課税;
     private RString psmShikibetsuTaisho;
     private RString 出力順;
 
@@ -131,6 +133,7 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
             RDateTime 帳票作成日時,
             RString psmShikibetsuTaisho,
             RString 出力順) {
+        課税区分_非課税 = KazeiKubun.非課税.getコード();
         法別区分障害時 = HobetsuKubun.障害時ホームヘルプ.getコード();
         法別区分施行時 = HobetsuKubun.施行時ホームヘルプ.getコード();
         法別区分障害全額免除 = HobetsuKubun.障害ヘルプ全額免除.getコード();

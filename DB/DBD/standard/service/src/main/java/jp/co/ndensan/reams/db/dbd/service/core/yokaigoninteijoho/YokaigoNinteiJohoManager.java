@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -89,13 +90,14 @@ public class YokaigoNinteiJohoManager {
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 認定広域フラグ 認定広域フラグ
+     * @param psm情報 RString
      * @return 今回認定情報 YokaigoNinteiJoho
      */
-    public YokaigoNinteiJoho get今回認定情報(RString 申請書管理番号, boolean 認定広域フラグ) {
+    public YokaigoNinteiJoho get今回認定情報(RString 申請書管理番号, boolean 認定広域フラグ, RString psm情報) {
         IYokaigoNinteiJohoMapper mapper = mapperProvider.create(IYokaigoNinteiJohoMapper.class);
         List<YokaigoNinteiJohoEntity> entities = 認定広域フラグ
-                ? mapper.get今回認定情報WITHOUT結果情報(申請書管理番号)
-                : mapper.get今回認定情報WITH結果情報(申請書管理番号);
+                ? mapper.get今回認定情報WITHOUT結果情報(申請書管理番号, psm情報, FlexibleDate.getNowDate())
+                : mapper.get今回認定情報WITH結果情報(申請書管理番号, psm情報, FlexibleDate.getNowDate());
         if (null != entities && !entities.isEmpty()) {
             YokaigoNinteiJohoEntity entity = entities.get(0);
             entity.initializeMd5ToEntitiesWithoutJukyusha();

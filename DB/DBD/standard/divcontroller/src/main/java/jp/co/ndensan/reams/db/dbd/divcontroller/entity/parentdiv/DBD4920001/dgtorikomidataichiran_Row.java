@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4920001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Sep 05 15:19:40 CST 2016 
+ * Thu Oct 13 17:43:56 CST 2016 
  */
 
 
@@ -21,12 +21,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgtorikomidataichiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-21_20-30-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     private RString hokenshano;
     private RString hokensha;
     private RString hihono;
     private TextBoxDate ninteishinseiymd;
+    private RString shinseikubunshinseijiCode;
     private RString shinseikubunshinseiji;
     private RString hihokubun;
     private RString shimei;
@@ -34,6 +35,7 @@ public class dgtorikomidataichiran_Row extends DataRow {
     private TextBoxNum nenrei;
     private RString seibetsu;
     private RString jyosho;
+    private RString shikibetsuCode;
 
     public dgtorikomidataichiran_Row() {
         super();
@@ -41,6 +43,7 @@ public class dgtorikomidataichiran_Row extends DataRow {
         this.hokensha = RString.EMPTY;
         this.hihono = RString.EMPTY;
         this.ninteishinseiymd = new TextBoxDate();
+        this.shinseikubunshinseijiCode = RString.EMPTY;
         this.shinseikubunshinseiji = RString.EMPTY;
         this.hihokubun = RString.EMPTY;
         this.shimei = RString.EMPTY;
@@ -48,10 +51,12 @@ public class dgtorikomidataichiran_Row extends DataRow {
         this.nenrei = new TextBoxNum();
         this.seibetsu = RString.EMPTY;
         this.jyosho = RString.EMPTY;
+        this.shikibetsuCode = RString.EMPTY;
         this.setOriginalData("hokenshano", hokenshano);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihono", hihono);
         this.setOriginalData("ninteishinseiymd", ninteishinseiymd);
+        this.setOriginalData("shinseikubunshinseijiCode", shinseikubunshinseijiCode);
         this.setOriginalData("shinseikubunshinseiji", shinseikubunshinseiji);
         this.setOriginalData("hihokubun", hihokubun);
         this.setOriginalData("shimei", shimei);
@@ -59,14 +64,16 @@ public class dgtorikomidataichiran_Row extends DataRow {
         this.setOriginalData("nenrei", nenrei);
         this.setOriginalData("seibetsu", seibetsu);
         this.setOriginalData("jyosho", jyosho);
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
     }
 
-    public dgtorikomidataichiran_Row(RString hokenshano, RString hokensha, RString hihono, TextBoxDate ninteishinseiymd, RString shinseikubunshinseiji, RString hihokubun, RString shimei, TextBoxDate seinengappi, TextBoxNum nenrei, RString seibetsu, RString jyosho) {
+    public dgtorikomidataichiran_Row(RString hokenshano, RString hokensha, RString hihono, TextBoxDate ninteishinseiymd, RString shinseikubunshinseijiCode, RString shinseikubunshinseiji, RString hihokubun, RString shimei, TextBoxDate seinengappi, TextBoxNum nenrei, RString seibetsu, RString jyosho, RString shikibetsuCode) {
         super();
         this.setOriginalData("hokenshano", hokenshano);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihono", hihono);
         this.setOriginalData("ninteishinseiymd", ninteishinseiymd);
+        this.setOriginalData("shinseikubunshinseijiCode", shinseikubunshinseijiCode);
         this.setOriginalData("shinseikubunshinseiji", shinseikubunshinseiji);
         this.setOriginalData("hihokubun", hihokubun);
         this.setOriginalData("shimei", shimei);
@@ -74,10 +81,12 @@ public class dgtorikomidataichiran_Row extends DataRow {
         this.setOriginalData("nenrei", nenrei);
         this.setOriginalData("seibetsu", seibetsu);
         this.setOriginalData("jyosho", jyosho);
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
         this.hokenshano = hokenshano;
         this.hokensha = hokensha;
         this.hihono = hihono;
         this.ninteishinseiymd = ninteishinseiymd;
+        this.shinseikubunshinseijiCode = shinseikubunshinseijiCode;
         this.shinseikubunshinseiji = shinseikubunshinseiji;
         this.hihokubun = hihokubun;
         this.shimei = shimei;
@@ -85,6 +94,7 @@ public class dgtorikomidataichiran_Row extends DataRow {
         this.nenrei = nenrei;
         this.seibetsu = seibetsu;
         this.jyosho = jyosho;
+        this.shikibetsuCode = shikibetsuCode;
     }
 
     public RString getHokenshano() {
@@ -101,6 +111,10 @@ public class dgtorikomidataichiran_Row extends DataRow {
 
     public TextBoxDate getNinteishinseiymd() {
         return ninteishinseiymd;
+    }
+
+    public RString getShinseikubunshinseijiCode() {
+        return shinseikubunshinseijiCode;
     }
 
     public RString getShinseikubunshinseiji() {
@@ -131,6 +145,10 @@ public class dgtorikomidataichiran_Row extends DataRow {
         return jyosho;
     }
 
+    public RString getShikibetsuCode() {
+        return shikibetsuCode;
+    }
+
     public void setHokenshano(RString hokenshano) {
         this.setOriginalData("hokenshano", hokenshano);
         this.hokenshano = hokenshano;
@@ -149,6 +167,11 @@ public class dgtorikomidataichiran_Row extends DataRow {
     public void setNinteishinseiymd(TextBoxDate ninteishinseiymd) {
         this.setOriginalData("ninteishinseiymd", ninteishinseiymd);
         this.ninteishinseiymd = ninteishinseiymd;
+    }
+
+    public void setShinseikubunshinseijiCode(RString shinseikubunshinseijiCode) {
+        this.setOriginalData("shinseikubunshinseijiCode", shinseikubunshinseijiCode);
+        this.shinseikubunshinseijiCode = shinseikubunshinseijiCode;
     }
 
     public void setShinseikubunshinseiji(RString shinseikubunshinseiji) {
@@ -184,6 +207,11 @@ public class dgtorikomidataichiran_Row extends DataRow {
     public void setJyosho(RString jyosho) {
         this.setOriginalData("jyosho", jyosho);
         this.jyosho = jyosho;
+    }
+
+    public void setShikibetsuCode(RString shikibetsuCode) {
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
+        this.shikibetsuCode = shikibetsuCode;
     }
 
     // </editor-fold>
