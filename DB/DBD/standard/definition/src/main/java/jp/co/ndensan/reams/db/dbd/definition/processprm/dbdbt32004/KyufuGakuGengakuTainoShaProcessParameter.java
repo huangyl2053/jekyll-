@@ -85,7 +85,7 @@ public class KyufuGakuGengakuTainoShaProcessParameter implements IBatchProcessPa
      * @return ＳＱＬ使用された情報を作成します．
      */
     public KyufuGengakuHaakuListSakuseiMybatisParameter toTaishoShaKanriJohoMybatisParameter(RString 出力順) {
-        return new KyufuGengakuHaakuListSakuseiMybatisParameter(出力順);
+        return new KyufuGengakuHaakuListSakuseiMybatisParameter(基準日, 出力順, null); // TODO
     }
 
 }

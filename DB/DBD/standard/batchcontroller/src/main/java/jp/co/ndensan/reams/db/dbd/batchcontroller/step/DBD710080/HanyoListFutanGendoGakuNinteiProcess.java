@@ -1030,7 +1030,7 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
 
     private RString set決定区分(RString 決定区分) {
         RString 決定区分new = RString.EMPTY;
-        if (決定区分.isNullOrEmpty()) {
+        if (決定区分 == null || 決定区分.isEmpty()) {
             return 決定区分new;
         } else if (決定区分.equals(区分_0)) {
             決定区分new = 却下;

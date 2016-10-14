@@ -57,6 +57,8 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
     private boolean is納期限の翌日;
     private boolean is収入年月日;
 
+    private boolean is行削除;
+
     private Decimal 収入額 = Decimal.ZERO;
     private FlexibleDate 最大の収入年月日;
 
@@ -86,9 +88,12 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
     }
 
     @Override
-    protected void process(ShiharaiHohoHenkoHaakuOneEntity t) {;
+    protected void process(ShiharaiHohoHenkoHaakuOneEntity t) {
         ShunoStatusTempTableEntity tempTableEntity = create収納状況一時テーブル(t);
-        tmpTableWriter.insert(tempTableEntity);
+
+        if (!is行削除) {
+            tmpTableWriter.insert(tempTableEntity);
+        }
     }
 
     private ShunoStatusTempTableEntity create収納状況一時テーブル(ShiharaiHohoHenkoHaakuOneEntity t) {
@@ -282,10 +287,8 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
 
     private void edit以降未納情報(RString 完納_未納区分, ShunoStatusTempTableEntity data, List<ShunoJohoEntity> 収納情報List) {
 
-        Decimal 調定額 = data.getChoteigaku();
         FlexibleDate 納期限 = edit日期(data.getNokigenYMD());
         FlexibleDate 収納状況_納期限 = edit日期(data.getNokigenYMD());
-        Decimal 未納額 = Decimal.ZERO;
         FlexibleDate 収納状況_時効起算日 = data.getJikoKisambiYMD();
         RString 収納状況_時効起算事由 = data.getJikoKisambiJiyu();
         FlexibleYear 賦課年度 = data.getFukaNendo();
@@ -293,20 +296,11 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
         RString 時効区分 = data.getJikoKubun();
 
         boolean 過年度フラグ = false;
-        Decimal 調定額合計 = Decimal.ZERO;
         Decimal 滞納額合計 = Decimal.ZERO;
         FlexibleDate 時効起算日 = FlexibleDate.EMPTY;
         RString 時効起算事由 = RString.EMPTY;
 
-        if (賦課年度.equals(調定年度)) {
-            if (調定額 != null) {
-                調定額合計 = 調定額合計.add(調定額);
-            }
-
-            if (未納額 != null) {
-                滞納額合計 = 滞納額合計.add(未納額);
-            }
-        } else {
+        if (!賦課年度.equals(調定年度)) {
             過年度フラグ = true;
             調定年度 = FlexibleYear.EMPTY;
 
@@ -334,18 +328,18 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
                             }
                         }
                     }
-
-                    if (時効到来.equals(時効区分) && 完納_未納区分.equals(未納あり)) {
-                        if (未納額 != null) {
-                            滞納額合計 = 滞納額合計.add(未納額);
-                        }
-                    }
                 }
             }
+            if (時効到来.equals(時効区分) && 完納_未納区分.equals(未納あり)) {
+                if (data.getMiNoGaku() != null) {
+                    滞納額合計 = 滞納額合計.add(data.getMiNoGaku());
+                }
+            }
+            data.setJikoKisambiYMD(時効起算日);
+            data.setJikoKisambiJiyu(時効起算事由);
+            data.setPastYearflag(過年度フラグ);
+            data.setMiNoGaku(滞納額合計);
         }
-        data.setJikoKisambiYMD(時効起算日);
-        data.setJikoKisambiJiyu(時効起算事由);
-        data.setPastYearflag(過年度フラグ);
     }
 
     private RString edit滞納区分(FlexibleDate 納期限, FlexibleDate 時効起算日, Decimal 未納額) {
@@ -382,11 +376,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
             data.setJikoKisambiJiyu(RString.EMPTY);
             data.setBeforeTainoGaku(Decimal.ZERO);
         }
-
-        if (Decimal.ZERO.equals(調定額) && Decimal.ZERO.equals(滞納額)) {
-            // 行クリア TODO
-            clear行データ(data);
-        }
+        is行削除 = Decimal.ZERO.equals(調定額) && Decimal.ZERO.equals(滞納額);
     }
 
     private void edit以前滞納区分と当該期の滞納区分(FlexibleDate 仮の最古滞納期, FlexibleDate 以前納期限, Decimal 以前滞納額,
@@ -424,10 +414,6 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
             最長滞納期間 = 最古滞納期Date.compareTo(processParamter.get基準日());
             data.setLongestTainoPeriod(最長滞納期間);
         }
-    }
-
-    private void clear行データ(ShunoStatusTempTableEntity data) {
-        // この該当はQAですが、行空白の場合、この行データ該当は一時テーブルに追加しませんが
     }
 
     private FlexibleDate get以前未納情報_以前納期限(ShiharaiHohoHenkoHaakuOneEntity entity) {

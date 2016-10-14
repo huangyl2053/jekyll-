@@ -149,7 +149,7 @@ public class IkenshoKakuninshoHandler {
             return false;
         } else if (div.getTxtNinteiKikan().getToValue() == null) {
             return false;
-        } else if (!check日常生活自立度(div.getTxtZiritudo().getValue())) {
+        } else if (check日常生活自立度(div.getTxtZiritudo().getValue())) {
             return false;
         } else if (なし.equals(div.getTxtNyoushikkin().getValue())) {
             return false;

@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakusho
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBC200034_高額合算自己負担額証明書情報取込一覧表のReportSourceクラスです。
@@ -54,6 +56,7 @@ public class GassanJikofutangakuShomeishoTorikomiIchiranSource implements IRepor
     @ReportItem(name = "list_2", length = 3, order = 18)
     public RString list_2;
     @ReportItem(name = "list_3", length = 10, order = 19)
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     public RString list_3;
     @ReportItem(name = "list_4", length = 18, order = 20)
     public RString list_4;
@@ -85,6 +88,7 @@ public class GassanJikofutangakuShomeishoTorikomiIchiranSource implements IRepor
     public RString gyoseikuCode;
     @ReportItem(name = "shimei50onKana", length = 4, order = 34)
     public RString shimei50onKana;
+    @ReportPerson(id = "A")
     @ReportItem(name = "shichosonCode", length = 4, order = 35)
     public RString shichosonCode;
 // </editor-fold>

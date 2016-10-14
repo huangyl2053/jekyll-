@@ -207,10 +207,10 @@ public class KagoKetteiHokenshaInKouhiFutann {
             shukeiTempentity.set介護給付費単位数(new Decimal(dataEntity.getCsvGokeiEntity()
                     .get介護給付費総合事業費単位数().toString()));
         }
-        if (dataEntity.getCsvGokeiEntity().get介護給付費総合事業費保険者負担額() != null
-                && !dataEntity.getCsvGokeiEntity().get介護給付費総合事業費保険者負担額().isEmpty()) {
+        if (dataEntity.getCsvGokeiEntity().get介護給付費総合事業費公費負担額() != null
+                && !dataEntity.getCsvGokeiEntity().get介護給付費総合事業費公費負担額().isEmpty()) {
             shukeiTempentity.set介護給付費保険者負担額(new Decimal(dataEntity.getCsvGokeiEntity()
-                    .get介護給付費総合事業費保険者負担額().toString()));
+                    .get介護給付費総合事業費公費負担額().toString()));
         }
         shukeiTempentity.set高額介護サービス費件数(INDEX_0);
         shukeiTempentity.set高額介護サービス費単位数(Decimal.ZERO);
@@ -229,10 +229,10 @@ public class KagoKetteiHokenshaInKouhiFutann {
         } else {
             shukeiTempentity.set特定入所者介護サービス費等費用額(Decimal.ZERO);
         }
-        if (dataEntity.getCsvGokeiEntity().get特定入所者介護サービス費等保険者負担額() != null
-                && !dataEntity.getCsvGokeiEntity().get特定入所者介護サービス費等保険者負担額().isEmpty()) {
+        if (dataEntity.getCsvGokeiEntity().get特定入所者介護サービス費等公費負担額() != null
+                && !dataEntity.getCsvGokeiEntity().get特定入所者介護サービス費等公費負担額().isEmpty()) {
             shukeiTempentity.set特定入所者介護サービス費等保険者負担額(new Decimal(dataEntity.getCsvGokeiEntity()
-                    .get特定入所者介護サービス費等保険者負担額().toString()));
+                    .get特定入所者介護サービス費等公費負担額().toString()));
         } else {
             shukeiTempentity.set特定入所者介護サービス費等保険者負担額(Decimal.ZERO);
         }

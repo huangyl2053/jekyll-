@@ -93,6 +93,7 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
             for (DbT7051KoseiShichosonMasterEntity item : 広域市町村情報) {
                 市町村コードリスト.add(item.getShichosonCode().value().substring(INT_ZERO, INT_FIVE));
                 市町村IDMap.put(item.getShichosonCode().value().substring(INT_ZERO, INT_FIVE), item.getShichosonShokibetsuID());
+                市町村コードリスト全.put(item.getShichosonCode().value().substring(INT_ZERO, INT_FIVE), item.getShichosonCode().value());
             }
         }
         proParameter.set処理年度(処理年度);

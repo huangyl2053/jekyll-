@@ -41,14 +41,14 @@ public class TokuteiPanelValidationHandler {
     public ValidationMessageControlPairs validateForUpdate() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         List<grdTokuteiJoho_Row> listRow = div.getGrdTokuteiJoho().getDataSource();
-        boolean is選択 = true;
+        boolean is選択されていない = true;
         for (grdTokuteiJoho_Row row : listRow) {
             if (row.getChkSeiGyo().isValue()) {
-                is選択 = false;
+                is選択されていない = false;
                 break;
             }
         }
-        if (is選択) {
+        if (is選択されていない) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.選択されていない));
         }
         return validPairs;

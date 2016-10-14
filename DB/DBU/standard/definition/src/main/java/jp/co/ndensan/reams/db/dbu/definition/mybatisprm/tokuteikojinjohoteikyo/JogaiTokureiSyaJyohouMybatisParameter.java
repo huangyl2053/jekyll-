@@ -46,6 +46,7 @@ public final class JogaiTokureiSyaJyohouMybatisParameter implements IMyBatisPara
     private final boolean is当初または版改定;
     private final boolean is再登録;
     private final boolean is異動;
+    private final RString psmShikibetsuTaisho;
 
     private JogaiTokureiSyaJyohouMybatisParameter(RString 自特例適用,
             RString 自特例転入,
@@ -64,7 +65,8 @@ public final class JogaiTokureiSyaJyohouMybatisParameter implements IMyBatisPara
             RString 台帳種別,
             boolean is当初または版改定,
             boolean is再登録,
-            boolean is異動) {
+            boolean is異動,
+            RString psmShikibetsuTaisho) {
         this.自特例適用 = 自特例適用;
         this.自特例転入 = 自特例転入;
         this.自特例解除 = 自特例解除;
@@ -83,6 +85,7 @@ public final class JogaiTokureiSyaJyohouMybatisParameter implements IMyBatisPara
         this.is当初または版改定 = is当初または版改定;
         this.is再登録 = is再登録;
         this.is異動 = is異動;
+        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
     /**
@@ -95,6 +98,7 @@ public final class JogaiTokureiSyaJyohouMybatisParameter implements IMyBatisPara
      * @param 被保険者番号 被保険者番号
      * @param 版番号 版番号
      * @param 新規異動区分 新規異動区分
+     * @param psmShikibetsuTaisho psmShikibetsuTaisho
      *
      * @return 当初/版改定／異動分データ抽出のParamter
      */
@@ -105,7 +109,8 @@ public final class JogaiTokureiSyaJyohouMybatisParameter implements IMyBatisPara
             RDateTime 対象終了日時,
             HihokenshaNo 被保険者番号,
             RString 版番号,
-            RString 新規異動区分) {
+            RString 新規異動区分,
+            RString psmShikibetsuTaisho) {
         boolean is当初または版改定 = false;
         boolean is再登録 = false;
         boolean is異動 = false;
@@ -137,6 +142,7 @@ public final class JogaiTokureiSyaJyohouMybatisParameter implements IMyBatisPara
                 DaichoType.被保険者.getコード(),
                 is当初または版改定,
                 is再登録,
-                is異動);
+                is異動,
+                psmShikibetsuTaisho);
     }
 }

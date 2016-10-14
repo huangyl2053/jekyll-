@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020003;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209011.DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020003.ChishutsuJokenParameterDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020003.DBD2020003ValidationHandler;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -39,6 +41,7 @@ public class ChishutsuJokenParameter {
         div.getTxtJukyuNinteibiShuryo().setDisabled(true);
         div.getTxtNinteiYukoShuryobiKaishi().setDisabled(true);
         div.getTxtNinteiYukoShuryobiShuryo().setDisabled(true);
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200008.getReportId());
         return ResponseData.of(div).respond();
     }
 

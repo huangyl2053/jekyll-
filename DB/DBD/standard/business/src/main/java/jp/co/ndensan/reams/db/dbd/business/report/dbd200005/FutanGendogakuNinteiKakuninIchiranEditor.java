@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDank
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.HaigushaKazeiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.ShinseiRiyuKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNinteiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt22006.IsShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogaku.ikkatsunintei.FutanGengaokuNintteiKakuninListEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200005.FutanGendogakuNinteiKakuninIchiranReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
@@ -65,7 +66,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
     private static final RString 却下 = new RString("却下");
     private static final RString 非該当 = new RString("非該当");
     private static final RString 世帯非課税８０万以下 = new RString("世帯非課税８０万以下");
-    private static final RString 世帯非課税８０万超 = new RString("世帯非課税８０万超");
+    private static final RString 世帯非課税８０万超 = new RString("世帯非課税８０万超　");
     private static final RString 生保 = new RString("生保");
     private static final RString 世帯非課税 = new RString("世帯非課税");
     private static final RString 老齢 = new RString("老齢");
@@ -136,7 +137,6 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             if (null != this.負担限度額認定確認リスト.getAtesakiEntity()) {
                 IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(this.負担限度額認定確認リスト.getAtesakiEntity());
                 get名称と登録異動年月日(source, 宛名);
-
             }
             if (null != this.負担限度額認定確認リスト.get被保険者番号()) {
                 source.list1_1 = this.負担限度額認定確認リスト.get被保険者番号().value();
@@ -481,9 +481,8 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
     }
 
     private void get被保険者2(FutanGendogakuNinteiKakuninIchiranReportSource source) {
-
         if (null != this.負担限度額認定確認リスト.get利用軽減()
-                && Boolean.valueOf(this.負担限度額認定確認リスト.get利用軽減().toString())) {
+                && booleanListValue(this.負担限度額認定確認リスト.get利用軽減())) {
             source.list4_1 = 申;
         } else if (null != this.負担限度額認定確認リスト.get利用軽減()
                 && this.負担限度額認定確認リスト.get利用軽減().isEmpty()) {
@@ -491,8 +490,9 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         } else {
             source.list4_1 = 認;
         }
+
         if (null != this.負担限度額認定確認リスト.get社福軽減()
-                && Boolean.valueOf(this.負担限度額認定確認リスト.get社福軽減().toString())) {
+                && booleanListValue(this.負担限度額認定確認リスト.get社福軽減())) {
             source.list4_2 = 申;
         } else if (null != this.負担限度額認定確認リスト.get社福軽減()
                 && this.負担限度額認定確認リスト.get社福軽減().isEmpty()) {
@@ -500,8 +500,9 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         } else {
             source.list4_2 = 認;
         }
+
         if (null != this.負担限度額認定確認リスト.get訪問減額()
-                && Boolean.valueOf(this.負担限度額認定確認リスト.get訪問減額().toString())) {
+                && booleanListValue(this.負担限度額認定確認リスト.get訪問減額())) {
             source.list4_3 = 申;
         } else if (null != this.負担限度額認定確認リスト.get訪問減額()
                 && this.負担限度額認定確認リスト.get訪問減額().isEmpty()) {
@@ -509,8 +510,9 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         } else {
             source.list4_3 = 認;
         }
+
         if (null != this.負担限度額認定確認リスト.get特地減免()
-                && Boolean.valueOf(this.負担限度額認定確認リスト.get特地減免().toString())) {
+                && booleanListValue(this.負担限度額認定確認リスト.get特地減免())) {
             source.list4_4 = 申;
         } else if (null != this.負担限度額認定確認リスト.get特地減免()
                 && this.負担限度額認定確認リスト.get特地減免().isEmpty()) {
@@ -519,6 +521,17 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             source.list4_4 = 認;
         }
 
+    }
+
+    private Boolean booleanListValue(List<IsShinseiEntity> list) {
+        if (!list.isEmpty()) {
+            for (IsShinseiEntity entity : list) {
+                if (entity.is申請()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
