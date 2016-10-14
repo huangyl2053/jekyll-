@@ -80,17 +80,7 @@ public class ShiharaiHohoHenkoHaakuTainouTaisakuProcess extends BatchProcessBase
                         支払方法変更差止Data.getSashitomeKojoJotaiKubun())) {
                     差止中件数 = 差止中件数 + 1;
                 }
-
-                if (t.get償還情報リスト() != null && !t.get償還情報リスト().isEmpty()) {
-                    for (ShokanShinseiHanteiKekkaJohoEntity 償還Data : t.get償還情報リスト()) {
-                        if (支払方法変更差止Data.getSashitome_ServiceTeikyoYM() != null && FlexibleYearMonth.EMPTY.equals(支払方法変更差止Data.getSashitome_ServiceTeikyoYM())
-                                && 償還Data.get償還払支給申請_サービス提供年月() != null && FlexibleYearMonth.EMPTY.equals(償還Data.get償還払支給申請_サービス提供年月())
-                                && 支払方法変更差止Data.getSashitome_ServiceTeikyoYM().equals(償還Data.get償還払支給申請_サービス提供年月())) {
-
-                            差止中金額 = 差止中金額.add(償還Data.get償還払支給判定結果_支払金額().subtract(償還Data.get償還払支給判定結果_差額金額合計()));
-                        }
-                    }
-                }
+                edit差止中金額(t, 支払方法変更差止Data);
                 最大差止納付期日 = get最大の差止納付期限(最大差止納付期日, 支払方法変更差止Data.getSashitome_NofuYMD());
                 最大の控除被保険者証提出期限 = get最大の差止納付期限(最大の控除被保険者証提出期限, 支払方法変更差止Data.getKojo_ShoTeishutsuYMD());
                 edit控除件数と控除証期限(支払方法変更差止Data.getJohoBunruiKubun());
@@ -108,6 +98,25 @@ public class ShiharaiHohoHenkoHaakuTainouTaisakuProcess extends BatchProcessBase
         return result;
     }
 
+    private void edit差止中金額(ShiharaiHohoHenkoHaakuFourEntity t, DbT4024ShiharaiHohoHenkoSashitomeEntity 支払方法変更差止Data) {
+        if (t.get償還情報リスト() != null && !t.get償還情報リスト().isEmpty()) {
+            for (ShokanShinseiHanteiKekkaJohoEntity 償還Data : t.get償還情報リスト()) {
+                FlexibleYearMonth 差止提供年月 = 支払方法変更差止Data.getSashitome_ServiceTeikyoYM();
+                FlexibleYearMonth 償還払支給申請_サービス提供年月 = 償還Data.get償還払支給申請_サービス提供年月();
+
+                if (差止提供年月 != null
+                        && !FlexibleYearMonth.EMPTY.equals(差止提供年月)
+                        && 償還払支給申請_サービス提供年月 != null
+                        && !FlexibleYearMonth.EMPTY.equals(償還払支給申請_サービス提供年月)
+                        && 差止提供年月.equals(償還払支給申請_サービス提供年月)) {
+
+                    差止中金額 = 差止中金額.add(償還Data.get償還払支給判定結果_支払金額().subtract(償還Data.get償還払支給判定結果_差額金額合計()));
+                }
+            }
+        }
+
+    }
+
     private boolean is情報分類区分_差止控除状態区分が登録(RString 情報分類区分, RString 差止控除状態区分) {
         return 差止情報コード.equals(情報分類区分) && 差止控除状態区分_登録.equals(差止控除状態区分);
     }
@@ -122,21 +131,6 @@ public class ShiharaiHohoHenkoHaakuTainouTaisakuProcess extends BatchProcessBase
             return 該当行差止納付期日;
         }
         return 最大差止納付期日;
-    }
-
-    private Decimal edit差止中金額(FlexibleYearMonth 差止サービス提供年月, FlexibleYearMonth 還払支給申請年月,
-            RString 差止償還整理番号, RString 償還払支給申請_整理番号,
-            Decimal 支給金額, Decimal 差額金額合計) {
-
-        if (差止サービス提供年月 != null && 還払支給申請年月 != null
-                && !差止償還整理番号.isNullOrEmpty()
-                && !償還払支給申請_整理番号.isNullOrEmpty()
-                && 差止サービス提供年月.equals(還払支給申請年月)
-                && 差止償還整理番号.equals(償還払支給申請_整理番号)) {
-
-            差止中金額 = 差止中金額.add(支給金額.multiply(差額金額合計));
-        }
-        return Decimal.ZERO;
     }
 
     private void edit控除件数と控除証期限(RString 情報分類区分) {
