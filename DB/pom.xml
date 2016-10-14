@@ -248,6 +248,7 @@
             <plugin>
                 <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
                 <artifactId>myBatis-maven-plugin</artifactId>
+                <version>1.11.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -260,6 +261,7 @@
             <plugin>
                 <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
                 <artifactId>myBatisValidator-maven-plugin</artifactId>
+                <version>1.10.0</version>
                 <executions>
                     <execution>
                         <goals>
