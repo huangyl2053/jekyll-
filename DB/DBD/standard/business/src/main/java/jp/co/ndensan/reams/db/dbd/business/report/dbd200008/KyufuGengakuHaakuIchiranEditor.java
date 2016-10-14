@@ -932,10 +932,13 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
     private RString get要介護度() {
         if (this.給付額減額把握リストEntity.get被保険者情報Entity() != null) {
             HihokenshaJohoEntity 被保険者情報Entity = this.給付額減額把握リストEntity.get被保険者情報Entity();
-            RString 要介護状態区分コード = 被保険者情報Entity.get要介護状態区分コード();
-            KoroshoInterfaceShikibetsuCode 厚労省IF識別コード = KoroshoInterfaceShikibetsuCode.
-                    toValue(被保険者情報Entity.get厚労省IF識別コード());
-            return YokaigoJotaiKubunSupport.toValue(厚労省IF識別コード, 要介護状態区分コード).getName();
+            if (!RString.isNullOrEmpty(被保険者情報Entity.get要介護状態区分コード())
+                    && !RString.isNullOrEmpty(被保険者情報Entity.get厚労省IF識別コード())) {
+                RString 要介護状態区分コード = 被保険者情報Entity.get要介護状態区分コード();
+                KoroshoInterfaceShikibetsuCode 厚労省IF識別コード = KoroshoInterfaceShikibetsuCode.
+                        toValue(被保険者情報Entity.get厚労省IF識別コード());
+                return YokaigoJotaiKubunSupport.toValue(厚労省IF識別コード, 要介護状態区分コード).getName();
+            }
         }
         return RString.EMPTY;
     }
