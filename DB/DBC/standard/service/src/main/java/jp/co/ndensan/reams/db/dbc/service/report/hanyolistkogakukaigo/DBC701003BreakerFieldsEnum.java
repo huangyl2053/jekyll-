@@ -18,59 +18,59 @@ public enum DBC701003BreakerFieldsEnum implements IReportItems {
     /**
      * 行政区コード
      */
-    行政区コード(new RString("0004"), new RString(""), new RString("\"ShikibetsuTaisho\".\"gyoseikuCode\"")),
+    行政区コード(new RString("0004"), new RString(""), new RString("A.\".\"Atesaki_gyoseikuCode\"")),
     /**
      * 世帯コード
      */
-    世帯コード(new RString("0008"), new RString(""), new RString("\"ShikibetsuTaisho\".\"setaiCode\"")),
+    世帯コード(new RString("0008"), new RString(""), new RString("A.\"Atesaki_honninSetaiCode\"")),
     /**
      * 識別コード
      */
-    識別コード(new RString("0009"), new RString(""), new RString("\"Atesaki\".\"shikibetsuCode\"")),
+    識別コード(new RString("0009"), new RString(""), new RString("A.\"Atesaki_shikibetsuCode\"")),
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"ShikibetsuTaisho\".\"kanaShimei\"")),
+    氏名５０音カナ(new RString("0010"), new RString(""), new RString("A.\"kanaShimei\"")),
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString(""), new RString("DbV1001.\"shichosonCode\"")),
+    市町村コード(new RString("0016"), new RString(""), new RString("A.\"市町村コード\"")),
     /**
      * 証記載保険者番号
      */
-    証記載保険者番号(new RString("0103"), new RString(""), new RString("DbT3056.\"dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo\"")),
+    証記載保険者番号(new RString("0103"), new RString(""), new RString("A.\"証記載保険者番号\"")),
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString(""), new RString("DbV1001.\"hihokenshaNo\"")),
+    被保険者番号(new RString("0104"), new RString(""), new RString("A.\"被保険者番号\"")),
     /**
      * 要介護度
      */
-    要介護度(new RString("0403"), new RString(""), new RString("DbT4001.\"要介護認定状態区分コード\"")),
+    要介護度(new RString("0403"), new RString(""), new RString("A.\"要介護認定状態区分コード\"")),
     /**
      * 認定開始日
      */
-    認定開始日(new RString("0411"), new RString(""), new RString("DbT4001.\"認定有効期間開始日\"")),
+    認定開始日(new RString("0411"), new RString(""), new RString("A.\"認定有効期間開始日\"")),
     /**
      * サービス年月
      */
-    サービス年月(new RString("0301"), new RString(""), new RString("DbT3056.\"dbT3056KogakuShikyuShinsei_serviceTeikyoYM\"")),
+    サービス年月(new RString("0301"), new RString(""), new RString("A.\"サービス提供年月\"")),
     /**
      * 指定事業者番号
      */
-    指定事業者番号(new RString("0303"), new RString(""), new RString("DbV1004.\"nyushoShisetsuCode\"")),
+    指定事業者番号(new RString("0303"), new RString(""), new RString("A.\"入所施設コード\"")),
     /**
      * 通知書作成日
      */
-    通知書作成日(new RString("0410"), new RString(""), new RString("DbT3057.\"dbT3057KogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD\"")),
+    通知書作成日(new RString("0410"), new RString(""), new RString("A.\"決定通知書作成年月日\"")),
     /**
      * 負担段階
      */
-    負担段階(new RString("0320"), new RString(""), new RString("DbT3054.\"dbT3054KogakuKyufuTaishoshaMeisai_kogakuKyufuKonkyo\"")),
+    負担段階(new RString("0320"), new RString(""), new RString("A.\"高額給付根拠\"")),
     /**
      * 高額自動償還
      */
-    高額自動償還(new RString("0321"), new RString(""), new RString("DbT3055.\"dbT3055KogakuKyufuTaishoshaGokei_jidoShokanTaishoFlag\""));
+    高額自動償還(new RString("0321"), new RString(""), new RString("A.\"自動償還対象フラグ\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

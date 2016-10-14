@@ -5,6 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.JukyushaKihonJohoMybatisParameter;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.JukyushaTeikyoJohoKohoEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.JukyushaTeikyoKihonJohoNNTempEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -21,12 +25,20 @@ public interface ITokuteiKojinJohoTeikyoMapper {
      * @return COUNT(版番号)
      */
     int getTokuteiKojinJohoHanKanriCount(RString shokaiTeikyoKubun);
-//
-//    /**
-//     * 受給者基本情報の提供情報(候補)を取得します。
-//     *
-//     * @param shokaiTeikyoKubun 初回提供区分
-//     * @return COUNT(版番号)
-//     */
-//    int getJukyushaDaichoTeikyoJohoKoho(RString shokaiTeikyoKubun);
+
+    /**
+     * 受給者基本情報の提供情報(候補)を取得します。
+     *
+     * @param parameter JukyushaKihonJohoMybatisParameter
+     * @return 提供情報(候補)
+     */
+    List<JukyushaTeikyoJohoKohoEntity> getJukyushaDaichoTeikyoJohoKoho(JukyushaKihonJohoMybatisParameter parameter);
+
+    /**
+     * 受給者基本情報の提供情報(候補)を取得します。
+     *
+     * @param tempTableName 中間DB（提供基本情報nn）
+     * @return 提供情報(候補)
+     */
+    List<JukyushaTeikyoKihonJohoNNTempEntity> getJukyushaTeikyoKihonJohoNNTempData(JukyushaKihonJohoMybatisParameter tempTableName);
 }

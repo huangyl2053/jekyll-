@@ -20,6 +20,9 @@
         <association property="調査員情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4913ChosainJohoMapper.ResultMap_DbT4913ChosainJohoEntity"/>
         <association property="要介護認定インターフェース情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.ResultMap_DbT4003YokaigoNinteiInterfaceEntity"/>
         <association property="構成市町村マスタEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity"/>
+        <association property="申請届出情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4120ShinseitodokedeJohoMapper.ResultMap_DbT4120ShinseitodokedeJohoEntity"/>
+        <association property="介護事業者Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
+        <association property="識別対象取得PSMEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
 
     <resultMap id="ResultMap_NowYokaigoNinteiJohoEntityWithKekka" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity" autoMapping="true">
@@ -38,6 +41,9 @@
         <association property="要介護認定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
         <association property="要介護認定インターフェース情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.ResultMap_DbT4003YokaigoNinteiInterfaceEntity"/>
         <association property="構成市町村マスタEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity"/>
+        <association property="申請届出情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4120ShinseitodokedeJohoMapper.ResultMap_DbT4120ShinseitodokedeJohoEntity"/>
+        <association property="介護事業者Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
+        <association property="識別対象取得PSMEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
 
     <resultMap id="ResultMap_OldYokaigoNinteiJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity" autoMapping="true">
@@ -62,6 +68,9 @@
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4912ShujiiJohoMapper.allColumns_DbT4912ShujiiJoho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4913ChosainJohoMapper.allColumns_DbT4913ChosainJoho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4120ShinseitodokedeJohoMapper.allColumns_DbT4120ShinseitodokedeJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.allColumns_DbT7060KaigoJigyosha"/>
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         rgdb."DbT4101NinteiShinseiJoho" AS "DbT4101NinteiShinseiJoho"
 
@@ -108,6 +117,16 @@
         ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4003YokaigoNinteiInterface"."shinseishoKanriNo"
         AND "DbT4003YokaigoNinteiInterface"."keshikomiFlag" = '0'
 
+        LEFT OUTER JOIN rgdb."DbT4120ShinseitodokedeJoho" T4120
+        ON T4120."shinseishoKanriNo" = "DbV4001JukyushaDaicho"."shinseishoKanriNo"
+        LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha" T7060
+        ON T7060."jigyoshaNo" = T4120."shinseiTodokedeDaikoJigyoshaNo"
+        AND T7060."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付}
+        AND T7060."yukoShuryoYMD" >= #{システム日付}
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS PSM
+        ON PSM."shikibetsuCode" = "DbV4001JukyushaDaicho"."shikibetsuCode"
         WHERE
         "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = #{申請書管理番号}
     </select>
@@ -122,6 +141,9 @@
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4913ChosainJohoMapper.allColumns_DbT4913ChosainJoho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.allColumns_DbT4102NinteiKekkaJoho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4120ShinseitodokedeJohoMapper.allColumns_DbT4120ShinseitodokedeJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.allColumns_DbT7060KaigoJigyosha"/>
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         rgdb."DbT4101NinteiShinseiJoho" AS "DbT4101NinteiShinseiJoho"
 
@@ -163,9 +185,16 @@
         AND "DbT4101NinteiShinseiJoho"."ninteiChosaItakusakiCode" = "DbT4913ChosainJoho"."ninteiChosaItakusakiCode"
         AND "DbT4101NinteiShinseiJoho"."ninteiChosainCode" = "DbT4913ChosainJoho"."ninteiChosainCode"
 
-        LEFT OUTER JOIN
-        rgdb."DbT4102NinteiKekkaJoho" AS "DbT4102NinteiKekkaJoho"
-        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4102NinteiKekkaJoho"."shinseishoKanriNo"
+        LEFT OUTER JOIN rgdb."DbT4120ShinseitodokedeJoho" T4120
+        ON T4120."shinseishoKanriNo" = V4001."shinseishoKanriNo"
+        LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha" T7060
+        ON T7060."jigyoshaNo" = T4120."shinseiTodokedeDaikoJigyoshaNo"
+        AND T7060."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付}
+        AND T7060."yukoShuryoYMD" >= #{システム日付}
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS PSM
+        ON PSM."shikibetsuCode" = "DbV4001JukyushaDaicho"."shikibetsuCode"
 
         WHERE
         "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = #{申請書管理番号WITH結果情報}

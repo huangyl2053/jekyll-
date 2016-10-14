@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
@@ -17,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4912ShujiiJohoEntity;
@@ -24,8 +27,11 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -52,10 +58,12 @@ public class YokaigoNinteiJoho implements Serializable {
     private final DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity;
     private DbT4001JukyushaDaichoEntity 登録用受給者台帳Entity;
     private DbT7051KoseiShichosonMasterEntity 構成市町村マスタEntity;
+    private DbT4120ShinseitodokedeJohoEntity 申請届出情報Entity;
+    private DbT7060KaigoJigyoshaEntity 介護事業者Entity;
+    private UaFt200FindShikibetsuTaishoEntity 識別対象取得PSMEntity;
 
     /**
-     * コンストラクタです。<br/>
-     * 介護認定処理情報に使用します。
+     * コンストラクタです。 介護認定処理情報に使用します。
      *
      * @param 要介護認定申請情報認定Entity DbT5101NinteiShinseiJohoEntity
      * @param 主治医医療機関情報認定Entity DbT5911ShujiiIryoKikanJohoEntity
@@ -70,6 +78,9 @@ public class YokaigoNinteiJoho implements Serializable {
      * @param 要介護認定インターフェース情報Entity DbT4003YokaigoNinteiInterfaceEntity
      * @param 登録用受給者台帳Entity DbT4001JukyushaDaichoEntity
      * @param 構成市町村マスタEntity DbT7051KoseiShichosonMasterEntity
+     * @param 申請届出情報Entity DbT4120ShinseitodokedeJohoEntity
+     * @param 介護事業者Entity DbT7060KaigoJigyoshaEntity
+     * @param 識別対象取得PSMEntity UaFt200FindShikibetsuTaishoEntity
      */
     public YokaigoNinteiJoho(
             DbT5101NinteiShinseiJohoEntity 要介護認定申請情報認定Entity,
@@ -84,7 +95,10 @@ public class YokaigoNinteiJoho implements Serializable {
             DbT4102NinteiKekkaJohoEntity 要介護認定結果情報Entity,
             DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity,
             DbT4001JukyushaDaichoEntity 登録用受給者台帳Entity,
-            DbT7051KoseiShichosonMasterEntity 構成市町村マスタEntity
+            DbT7051KoseiShichosonMasterEntity 構成市町村マスタEntity,
+            DbT4120ShinseitodokedeJohoEntity 申請届出情報Entity,
+            DbT7060KaigoJigyoshaEntity 介護事業者Entity,
+            UaFt200FindShikibetsuTaishoEntity 識別対象取得PSMEntity
     ) {
 
         this.要介護認定申請情報認定Entity = 要介護認定申請情報認定Entity;
@@ -100,11 +114,13 @@ public class YokaigoNinteiJoho implements Serializable {
         this.要介護認定インターフェース情報Entity = 要介護認定インターフェース情報Entity;
         this.登録用受給者台帳Entity = 登録用受給者台帳Entity;
         this.構成市町村マスタEntity = 構成市町村マスタEntity;
+        this.申請届出情報Entity = 申請届出情報Entity;
+        this.介護事業者Entity = 介護事業者Entity;
+        this.識別対象取得PSMEntity = 識別対象取得PSMEntity;
     }
 
     /**
-     * コンストラクタです。<br/>
-     * 介護認定処理情報に使用します。
+     * コンストラクタです。 介護認定処理情報に使用します。
      *
      * @param 介護認定処理情報 YokaigoNinteiJohoEntity
      */
@@ -122,6 +138,9 @@ public class YokaigoNinteiJoho implements Serializable {
         this.要介護認定インターフェース情報Entity = 介護認定処理情報.get要介護認定インターフェース情報Entity();
         this.登録用受給者台帳Entity = new DbT4001JukyushaDaichoEntity();
         this.構成市町村マスタEntity = 介護認定処理情報.get構成市町村マスタEntity();
+        this.申請届出情報Entity = 介護認定処理情報.get申請届出情報Entity();
+        this.介護事業者Entity = 介護認定処理情報.get介護事業者Entity();
+        this.識別対象取得PSMEntity = 介護認定処理情報.get識別対象取得PSMEntity();
     }
 
     /**
@@ -1171,6 +1190,106 @@ public class YokaigoNinteiJoho implements Serializable {
     }
 
     /**
+     * 申請届出代行区分コードを返します。
+     *
+     * @return 申請届出代行区分コード
+     */
+    public Code get申請届出代行区分コード() {
+        return null == 申請届出情報Entity
+                ? Code.EMPTY : 申請届出情報Entity.getShinseiTodokedeDaikoKubunCode();
+    }
+
+    /**
+     * 事業者番号を返します。
+     *
+     * @return 事業者番号
+     */
+    public JigyoshaNo get事業者番号() {
+        return null == 介護事業者Entity
+                ? JigyoshaNo.EMPTY : 介護事業者Entity.getJigyoshaNo();
+    }
+
+    /**
+     * 申請者関係コードを返します。
+     *
+     * @return 申請者関係コード
+     */
+    public Code get申請者関係コード() {
+        return null == 受給者台帳Entity
+                ? Code.EMPTY : 受給者台帳Entity.getShinseishaKankeiCode();
+    }
+
+    /**
+     * 申請届出者氏名を返します。
+     *
+     * @return 申請届出者氏名
+     */
+    public RString get申請届出者氏名() {
+        return null == 申請届出情報Entity
+                ? RString.EMPTY : 申請届出情報Entity.getShinseiTodokedeshaShimei();
+    }
+
+    /**
+     * 申請届出者氏名カナを返します。
+     *
+     * @return 申請届出者氏名カナ
+     */
+    public RString get申請届出者氏名カナ() {
+        return null == 申請届出情報Entity
+                ? RString.EMPTY : 申請届出情報Entity.getShinseiTodokedeshaKanaShimei();
+    }
+
+    /**
+     * 本人との関係を返します。
+     *
+     * @return 本人との関係
+     */
+    public RString get本人との関係() {
+        return null == 受給者台帳Entity
+                ? RString.EMPTY : 受給者台帳Entity.getHomninKankei();
+    }
+
+    /**
+     * 管内管外区分を返します。
+     *
+     * @return 管内管外区分
+     */
+    public RString get管内管外区分() {
+        return null == 識別対象取得PSMEntity
+                ? RString.EMPTY : 識別対象取得PSMEntity.getKannaiKangaiKubun();
+    }
+
+    /**
+     * 申請届出者電話番号を返します。
+     *
+     * @return 申請届出者電話番号
+     */
+    public TelNo get申請届出者電話番号() {
+        return null == 申請届出情報Entity
+                ? TelNo.EMPTY : 申請届出情報Entity.getShinseiTodokedeshaTelNo();
+    }
+
+    /**
+     * 申請届出者郵便番号を返します。
+     *
+     * @return 申請届出者郵便番号
+     */
+    public YubinNo get申請届出者郵便番号() {
+        return null == 申請届出情報Entity
+                ? YubinNo.EMPTY : 申請届出情報Entity.getShinseiTodokedeshaYubinNo();
+    }
+
+    /**
+     * 申請届出者住所を返します。
+     *
+     * @return 申請届出者住所
+     */
+    public RString get申請届出者住所() {
+        return null == 申請届出情報Entity
+                ? RString.EMPTY : 申請届出情報Entity.getShinseiTodokedeshaJusho();
+    }
+
+    /**
      * 介護認定処理情報MD5値変更かどうか。
      *
      * @return 変更かどうか boolean
@@ -1284,8 +1403,7 @@ public class YokaigoNinteiJoho implements Serializable {
     }
 
     /**
-     * このクラスの編集を行うBuilderを取得します。<br/>
-     * 編集後のインスタンスを取得する場合は{@link YokaigoNinteiJoho.createBuilderForEdit#build()}を使用してください。
+     * このクラスの編集を行うBuilderを取得します。 編集後のインスタンスを取得する場合は{@link YokaigoNinteiJoho.createBuilderForEdit#build()}を使用してください。
      *
      * @return Builder YokaigoNinteiJohoBuilder
      */
@@ -1303,12 +1421,15 @@ public class YokaigoNinteiJoho implements Serializable {
                 要介護認定結果情報Entity,
                 要介護認定インターフェース情報Entity,
                 登録用受給者台帳Entity,
-                構成市町村マスタEntity);
+                構成市町村マスタEntity,
+                申請届出情報Entity,
+                介護事業者Entity,
+                識別対象取得PSMEntity
+        );
     }
 
     /**
-     * このクラスの編集を行うBuilderを取得します。<br/>
-     * 編集後のインスタンスを取得する場合は{@link YokaigoNinteiJoho.createBuilderForEdit#build()}を使用してください。
+     * このクラスの編集を行うBuilderを取得します。 編集後のインスタンスを取得する場合は{@link YokaigoNinteiJoho.createBuilderForEdit#build()}を使用してください。
      *
      * @return Builder YokaigoNinteiJohoBuilder
      */
@@ -1327,12 +1448,14 @@ public class YokaigoNinteiJoho implements Serializable {
                 要介護認定結果情報Entity,
                 要介護認定インターフェース情報Entity,
                 登録用受給者台帳Entity,
-                構成市町村マスタEntity);
+                構成市町村マスタEntity,
+                申請届出情報Entity,
+                介護事業者Entity,
+                識別対象取得PSMEntity);
     }
 
     /**
-     * このクラスの編集を行うBuilderを取得します。<br/>
-     * 編集後のインスタンスを取得する場合は{@link YokaigoNinteiJoho.createBuilderForEdit#build()}を使用してください。
+     * このクラスの編集を行うBuilderを取得します。 編集後のインスタンスを取得する場合は{@link YokaigoNinteiJoho.createBuilderForEdit#build()}を使用してください。
      *
      * @return Builder YokaigoNinteiJohoBuilder
      */
@@ -1352,12 +1475,14 @@ public class YokaigoNinteiJoho implements Serializable {
                 要介護認定結果情報Entity,
                 要介護認定インターフェース情報Entity,
                 登録用受給者台帳Entity,
-                構成市町村マスタEntity);
+                構成市町村マスタEntity,
+                申請届出情報Entity,
+                介護事業者Entity,
+                識別対象取得PSMEntity);
     }
 
     /**
-     * このクラスの編集を行うBuilderを取得します。<br/>
-     * 編集後のインスタンスを取得する場合は{@link YokaigoNinteiJoho.createBuilderForEdit#build()}を使用してください。
+     * このクラスの編集を行うBuilderを取得します。 編集後のインスタンスを取得する場合は{@link YokaigoNinteiJoho.createBuilderForEdit#build()}を使用してください。
      *
      * @return Builder YokaigoNinteiJohoBuilder
      */
@@ -1379,6 +1504,9 @@ public class YokaigoNinteiJoho implements Serializable {
                 要介護認定結果情報Entity,
                 要介護認定インターフェース情報Entity,
                 登録用受給者台帳Entity,
-                構成市町村マスタEntity);
+                構成市町村マスタEntity,
+                申請届出情報Entity,
+                介護事業者Entity,
+                識別対象取得PSMEntity);
     }
 }

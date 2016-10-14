@@ -42,7 +42,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.GenzainoJokyoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.KariIchijiHanteiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku04;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku05;
@@ -517,14 +519,14 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             a4Data.set現在の状況(GenzainoJokyoCode.toValue(business.get一次判定結果情報().get施設利用()).get名称());
             a4Data.set前々回要介護度(shutsuryoku.set要介護状態区分コード(business.get一次判定結果情報().get厚労省IF識別コード(),
                     business.get一次判定結果情報().get前々回要介護度()));
-            a4Data.set前々回認定有効期間(business.get一次判定結果情報().get前々回認定有効期間開始());
+            a4Data.set前々回認定有効期間(business.get一次判定結果情報().get前々回認定有効期間());
             a4Data.set前々回認定有効期間開始年月日(business.get一次判定結果情報().get前々回認定有効期間開始());
             a4Data.set前々回認定有効期間終了年月日(business.get一次判定結果情報().get前々回認定有効期間終了());
             a4Data.set前回要介護度(shutsuryoku.set要介護状態区分コード(business.get一次判定結果情報().get厚労省IF識別コード(),
                     business.get一次判定結果情報().get前回認定結果()));
             a4Data.set前回認定有効期間(business.get一次判定結果情報().get二次判定認定有効期間());
-            a4Data.set前回認定有効期間開始年月日(business.get一次判定結果情報().get前々回認定有効期間開始());
-            a4Data.set前回認定有効期間終了年月日(business.get一次判定結果情報().get前々回認定有効期間終了());
+            a4Data.set前回認定有効期間開始年月日(business.get一次判定結果情報().get前回認定有効期間開始年月日());
+            a4Data.set前回認定有効期間終了年月日(business.get一次判定結果情報().get前回認定有効期間終了年月日());
             a4Data.set前回認定日(business.get一次判定結果情報().get二次判定年月日());
             if (business.get一次判定結果情報().get前回状態像() != null) {
                 a4Data.set前回状態像(YokaigoJotaizoReiCode.toValue(business.get一次判定結果情報().get前回状態像()).get名称());
@@ -579,9 +581,13 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             高齢者自立度リスト.add(RString.isNullOrEmpty(business.get一次判定結果情報().get認知症高齢者自立度日常生活自立度()) ? RString.EMPTY
                     : NinchishoNichijoSeikatsuJiritsudoCode.toValue(business.get一次判定結果情報().get認知症高齢者自立度日常生活自立度()).get名称());
             a4Data.set高齢者自立度リスト(高齢者自立度リスト);
+            a4Data.set状態の安定性(RString.isNullOrEmpty(business.get一次判定結果情報().get状態の安定性()) ? RString.EMPTY
+                    : JotaiAnteiseiCode.toValue(business.get一次判定結果情報().get状態の安定性()).get名称());
+            a4Data.set給付区分(RString.isNullOrEmpty(business.get一次判定結果情報().get給付区分()) ? RString.EMPTY
+                    : SuiteiKyufuKubunCode.toValue(business.get一次判定結果情報().get給付区分()).get名称());
             a4Data.set意見書認知症高齢者自立度(business.get一次判定結果情報().get障害高齢者自立度日常生活自立度());
-            //a4Data.set現在のサービス利用状況名(business.get一次判定結果情報().getサービス区分コード());
-            a4Data.set現在のサービス状況(shutsuryoku.setサービス状況(business, 認定調査票概況調査リスト, 認定調査票フラグリスト));
+            a4Data.set現在のサービス利用状況名(business.get一次判定結果情報().getサービス区分コード());
+            //a4Data.set現在のサービス状況(shutsuryoku.setサービス状況(business, 認定調査票概況調査リスト, 認定調査票フラグリスト));
             set帳票印刷(a4Data, business, shutsuryoku, 認定調査票調査項目リスト, 前回調査項目リスト,
                     dbt5304Entity, 前回dbt5304Entity, 認定調査特記事項番号リスト);
             printService.print(a4Data);
@@ -636,7 +642,6 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
         } else {
             return obj;
         }
-
     }
 
     private List<RString> set特別な医療4_2リスト(IchijiHanteizumiDataBusiness business, List<NinteichosahyoChosaItem> 調査項目,
@@ -789,9 +794,7 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             RString 番号, IchijiHanteizumiDataBusiness business) {
         List<RString> list = new ArrayList<>();
         for (NinteichosahyoTokkijiko tokkijiko : 認定調査特記事項番号リスト) {
-
             if (business.get一次判定結果情報().get申請書管理番号().equals(tokkijiko.get申請書管理番号().value())) {
-
                 list.add(tokkijiko.get認定調査特記事項番号());
             }
         }

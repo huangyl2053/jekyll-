@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataCSVEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -361,7 +362,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
             DbT7051KoseiShichosonMasterEntity entity = new DbT7051KoseiShichosonMasterEntity();
             entity.setShichosonShokibetsuID(param.getShichosonShokibetsuID());
             entity.setShichosonCode(param.getShichosonCode());
-            entity.setShoKisaiHokenshaNo(param.getShoKisaiHokenshaNo());
+            entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(param.getShoKisaiHokenshaNo()));
             entity.setKokuhorenKoikiShichosonNo(param.getKokuhorenKoikiShichosonNo());
             entity.setShichosonMeisho(param.getShichosonMeisho());
             entity.setTodofukenMeisho(param.getTodofukenMeisho());
@@ -387,7 +388,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
             entity.setGappeiKyuShichosonKubun(param.getGappeiKyuShichosonKubun());
             entity.setGappeiKyuShichosonHyojiUmu(param.getGappeiKyuShichosonHyojiUmu());
             entity.setGappeiChiikiNo(param.getGappeiChiikiNo());
-            entity.setUnyoHokenshaNo(param.getUnyoHokenshaNo());
+            entity.setUnyoHokenshaNo(new ShoKisaiHokenshaNo(param.getUnyoHokenshaNo()));
             entity.setUnyoKaishiYMD(param.getUnyoKaishiYMD());
             entity.setUnyoShuryoYMD(param.getUnyoShuryoYMD());
             entity.setUnyoKeitaiKubun(param.getUnyoKeitaiKubun());

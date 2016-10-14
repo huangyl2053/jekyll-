@@ -67,7 +67,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class JutakukaishuSikyuShinseiManager {
 
     private static final RString キー = new RString("hiHokenshaNo");
-    private static final RString モード_審査 = new RString("審査モード");
     private static final RString モード_取消 = new RString("取消モード");
     private static final RString 住宅改修_削除 = new RString("削除");
     private static final RString 区分_コード1 = new RString("1");

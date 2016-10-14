@@ -455,7 +455,7 @@ public class DBC8010001MainHandler {
 
         }
         if (null != div.getTxtKetteishaUketoriYmRange().getFromValue()) {
-            parameter.set開始受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getFromValue().toDateString()));
+            parameter.set開始受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getFromValue().toDateString().substring(0, 6)));
         }
         if (null != div.getTxtKonkaiTaishoYmdRange().getFromValue()) {
             parameter.set開始年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getFromValue().toDateString()));

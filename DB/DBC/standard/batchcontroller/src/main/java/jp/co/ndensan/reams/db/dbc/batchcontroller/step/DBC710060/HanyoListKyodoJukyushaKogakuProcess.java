@@ -76,8 +76,6 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
     private static final RString RSTRING_0 = new RString("000000");
     private static final RString 全市町村 = new RString("全市町村");
     private static final RString すべて = new RString("すべて");
-    private static final RString 直近のみ = new RString("直近のみ");
-    private static final RString 範囲指定 = new RString("範囲指定");
     private static final RString 受給なし = new RString("受給なし");
     private static final RString 受給あり = new RString("受給あり");
     private static final RString 該当なし = new RString("該当なし");

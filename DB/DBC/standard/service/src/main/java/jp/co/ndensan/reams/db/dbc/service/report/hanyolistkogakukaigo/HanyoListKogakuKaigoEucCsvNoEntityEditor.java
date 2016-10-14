@@ -779,7 +779,7 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
             return RString.EMPTY;
         }
         if (!parameter.isHizukeHeshu()) {
-            return 年月.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+            return new RString(年月.toString());
         } else {
             return 年月.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }

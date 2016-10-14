@@ -18,14 +18,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyoListShutsuryokuKomokuList {
 
-    private long 項目ID;
+    private RString 項目ID;
     private int 出力項目順位;
     private RString 省略区分;
     private int 出力項目文字数;
     private ShutsuryokuKomoku 出力項目日付区分;
     private RString 項目名称;
     private int 項目桁数;
-    private RString 項目位置;
+    private int 項目位置;
     private RString 編集方法;
     private RString 金額編集;
 

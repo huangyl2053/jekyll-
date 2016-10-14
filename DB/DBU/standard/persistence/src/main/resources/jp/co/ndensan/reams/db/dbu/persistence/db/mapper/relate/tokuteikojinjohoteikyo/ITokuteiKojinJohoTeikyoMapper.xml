@@ -14,4 +14,182 @@
         FROM rgdb."DbT7301TokuteiKojinJohoHanKanri"
     </select>
 
+    <select id="getJukyushaDaichoTeikyoJohoKoho"
+            resultOrdered="true"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.JukyushaTeikyoJohoKohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.JukyushaKihonJohoMybatisParameter"
+            fetchSize="500">
+        SELECT
+        dbT4001."hihokenshaNo"
+        , dbT4001."shinseishoKanriNo"
+        , dbT4001."shinseiJokyoKubun"
+        , dbT4001."shikibetsuCode"
+        , dbT4001."jukyuShinseiYMD"
+        , dbT4001."yokaigoJotaiKubunCode"
+        , dbT4001."ninteiYukoKikanKaishiYMD"
+        , dbT4001."ninteiYukoKikanShuryoYMD"
+        , dbT4001."ninteiYMD"
+        , dbT4001."yukoMukoKubun"
+        , dbT4001."shikyuGendoTanisu"
+        , dbT4001."lastUpdateTimestamp"
+        , dbT4001."logicalDeletedFlag"
+        , dbT4102."shinseishoKanriNo" AS ninteiShinseishoKanriNo
+        , dbT4102."ninteishinsakaiIkenShurui"
+        , dbT4102."lastUpdateTimestamp"　AS ninteiLastUpdateTimestamp
+        , dbT4102."isDeleted"　AS ninteiLogicalDeletedFlag
+        FROM rgdb."DbT4001JukyushaDaicho" dbT4001
+        LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" dbT4102
+        ON dbT4102."shinseishoKanriNo" = dbT4001."shinseishoKanriNo"
+        WHERE
+        (#{taishoKaishiTimestamp} <![CDATA[<]]> dbT4001."lastUpdateTimestamp"
+        AND dbT4001."lastUpdateTimestamp" <![CDATA[<=]]> #{taishoShuryoTimestamp}
+        AND dbT4001."yukoMukoKubun" <![CDATA[<>]]> #{yukoMukoKubun}
+        AND dbT4001."logicalDeletedFlag" = FALSE)
+        OR (#{taishoKaishiTimestamp} <![CDATA[<]]> dbT4102."lastUpdateTimestamp"
+        AND dbT4102."lastUpdateTimestamp" <![CDATA[<=]]> #{taishoShuryoTimestamp}
+        AND dbT4102."isDeleted" = FALSE)
+        <if test="isShinkiIdo">
+            UNION
+            SELECT
+            dbT4001."hihokenshaNo"
+            , dbT4001."shinseishoKanriNo"
+            , dbT4001."shinseiJokyoKubun"
+            , dbT4001."shikibetsuCode"
+            , dbT4001."jukyuShinseiYMD"
+            , dbT4001."yokaigoJotaiKubunCode"
+            , dbT4001."ninteiYukoKikanKaishiYMD"
+            , dbT4001."ninteiYukoKikanShuryoYMD"
+            , dbT4001."ninteiYMD"
+            , dbT4001."yukoMukoKubun"
+            , dbT4001."shikyuGendoTanisu"
+            , dbT4001."lastUpdateTimestamp"
+            , dbT4001."logicalDeletedFlag"
+            , dbT4102."shinseishoKanriNo" AS ninteiShinseishoKanriNo
+            , dbT4102."ninteishinsakaiIkenShurui"
+            , dbT4102."lastUpdateTimestamp"　AS ninteiLastUpdateTimestamp
+            , dbT4102."isDeleted"　AS ninteiLogicalDeletedFlag
+            FROM rgdb."DbT4001JukyushaDaicho" dbT4001
+            LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" dbT4102
+            ON dbT4102."shinseishoKanriNo" = dbT4001."shinseishoKanriNo"
+            INNER JOIN ( SELECT dbT7304."hihokenshaNo"
+            , dbT7304."tokuteiKojinJohoMeiCode"
+            , dbT7304."dataSetRecordKey"
+            , dbT7304."hanNo"
+            , dbT7304."teikyoNichiji"
+            FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" dbT7304
+            WHERE dbT7304."tokuteiKojinJohoMeiCode" = (#{tokuteiKojinJohoMeiCode})
+            AND dbT7304."dataSetRecordKey" = (#{dataSetRecordKey})
+            AND dbT7304."hanNo" = (#{hanNo})
+            AND (dbT7304."teikyoKubun" = #{teikyoKubun_SonotaError} OR dbT7304."teikyoKubun" = #{teikyoKubun_KojinBango})
+            AND NOT EXISTS (
+            SELECT 1 FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" dbT7304_2
+            WHERE dbT7304_2."hihokenshaNo" = dbT7304_2."hihokenshaNo"
+            AND dbT7304_2."tokuteiKojinJohoMeiCode" = dbT7304."tokuteiKojinJohoMeiCode"
+            AND dbT7304_2."dataSetRecordKey" = dbT7304."dataSetRecordKey"
+            AND dbT7304_2."hanNo" = dbT7304."hanNo"
+            AND dbT7304."teikyoNichiji" <![CDATA[<]]> dbT7304_2."teikyoNichiji")) teikyoJoho
+            ON teikyoJoho."hihokenshaNo" = dbT4001."hihokenshaNo"
+        </if>
+    </select>
+
+    <select id="getJukyushaTeikyoKihonJohoNNTempData"
+            resultOrdered="true"
+            resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ITokuteiKojinJohoTeikyoMapper.resultMap_getJukyushaTeikyoKihonJohoNNTempData"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.JukyushaKihonJohoMybatisParameter"
+            fetchSize="500">
+        SELECT PSM."kojinNo" AS kojinNoPSM
+        , teiKyoKihonJoho."hihokenshaNo"
+        , teiKyoKihonJoho."dataSetKey"
+        , teiKyoKihonJoho."teikyoKubun"
+        , teiKyoKihonJoho."shikibetsuCode"
+        , teiKyoKihonJoho."kojinNo"
+        , teiKyoKihonJoho."tokuteiKojinJohoMeiCode"
+        , teiKyoKihonJoho."hanNo"
+        , teiKyoKihonJoho."teikyoNaiyo01"
+        , teiKyoKihonJoho."misetteiJiyu01"
+        , teiKyoKihonJoho."teikyoNaiyo02"
+        , teiKyoKihonJoho."misetteiJiyu02"
+        , teiKyoKihonJoho."teikyoNaiyo03"
+        , teiKyoKihonJoho."misetteiJiyu03"
+        , teiKyoKihonJoho."teikyoNaiyo04"
+        , teiKyoKihonJoho."misetteiJiyu04"
+        , teiKyoKihonJoho."teikyoNaiyo05"
+        , teiKyoKihonJoho."misetteiJiyu05"
+        , teiKyoKihonJoho."teikyoNaiyo06"
+        , teiKyoKihonJoho."misetteiJiyu06"
+        , teiKyoKihonJoho."teikyoNaiyo07"
+        , teiKyoKihonJoho."misetteiJiyu07"
+        , teiKyoKihonJoho."teikyoNaiyo08"
+        , teiKyoKihonJoho."misetteiJiyu08"
+        , teiKyoKihonJoho."teikyoNaiyo09"
+        , teiKyoKihonJoho."misetteiJiyu09"
+        , teiKyoKihonJoho."teikyoNaiyo10"
+        , teiKyoKihonJoho."misetteiJiyu10"
+        , teiKyoKihonJoho."kokaiYMD"
+        FROM #{tempTableName} teiKyoKihonJoho
+        INNER JOIN rgua.${psmShikibetsuTaisho} AS PSM
+        ON teiKyoKihonJoho."shikibetsuCode" = PSM."shikibetsuCode"
+        <if test="isShinkiIdo">
+            WHERE NOT EXISTS (SELECT 1
+            FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" dbT7304
+            dbT7304."hihokenshaNo" = teiKyoKihonJoho."hihokenshaNo"
+            AND dbT7304."dataSetNo" = teiKyoKihonJoho."dataSetKey"
+            AND dbT7304."tokuteiKojinJohoMeiCode" = teiKyoKihonJoho."tokuteiKojinJohoMeiCode"
+            AND dbT7304."hanNo" = teiKyoKihonJoho."hanNo"
+            AND dbT7304."teikyoNaiyo01" = teiKyoKihonJoho."soshinNaiyo01"
+            AND dbT7304."teikyoNaiyo02" = teiKyoKihonJoho."soshinNaiyo02"
+            AND dbT7304."teikyoNaiyo03" = teiKyoKihonJoho."soshinNaiyo03"
+            AND dbT7304."teikyoNaiyo04" = teiKyoKihonJoho."soshinNaiyo04"
+            AND dbT7304."teikyoNaiyo05" = teiKyoKihonJoho."soshinNaiyo05"
+            AND dbT7304."teikyoNaiyo06" = teiKyoKihonJoho."soshinNaiyo06"
+            AND dbT7304."teikyoNaiyo07" = teiKyoKihonJoho."soshinNaiyo07"
+            AND dbT7304."teikyoNaiyo08" = teiKyoKihonJoho."soshinNaiyo08"
+            AND dbT7304."teikyoNaiyo09" = teiKyoKihonJoho."soshinNaiyo09"
+            AND dbT7304."teikyoNaiyo10" = teiKyoKihonJoho."soshinNaiyo10")
+        </if>
+    </select>
+
+    <resultMap id="resultMap_getJukyushaTeikyoKihonJohoNNTempData"
+               type="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.JukyushaTeikyoKihonJohoNNTempEntity"
+               autoMapping="true">
+        <id property="teikyoJohoKohoEntity.hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="teikyoJohoKohoEntity.dataSetKey" column="dataSetKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kojinNoPSM" column="kojinNoPSM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KojinNoTypeHandler" />
+        <association
+            property="teikyoJohoKohoEntity"
+            resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ITokuteiKojinJohoTeikyoMapper.resultMap_TeikyoKihonJohoNNTemp"/>
+    </resultMap>
+
+    <resultMap id="resultMap_TeikyoKihonJohoNNTemp"
+               type="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity"
+               autoMapping="true">
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="dataSetKey" column="dataSetKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="teikyoKubun" column="teikyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="kojinNo" column="kojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tokuteiKojinJohoMeiCode" column="tokuteiKojinJohoMeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hanNo" column="hanNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="teikyoNaiyo01" column="teikyoNaiyo01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="misetteiJiyu01" column="misetteiJiyu01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="teikyoNaiyo02" column="teikyoNaiyo02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="misetteiJiyu02" column="misetteiJiyu02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="teikyoNaiyo03" column="teikyoNaiyo03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="misetteiJiyu03" column="misetteiJiyu03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="teikyoNaiyo04" column="teikyoNaiyo04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="misetteiJiyu04" column="misetteiJiyu04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="teikyoNaiyo05" column="teikyoNaiyo05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="misetteiJiyu05" column="misetteiJiyu05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="teikyoNaiyo06" column="teikyoNaiyo06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="misetteiJiyu06" column="misetteiJiyu06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="teikyoNaiyo07" column="teikyoNaiyo07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="misetteiJiyu07" column="misetteiJiyu07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="teikyoNaiyo08" column="teikyoNaiyo08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="misetteiJiyu08" column="misetteiJiyu08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="teikyoNaiyo09" column="teikyoNaiyo09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="misetteiJiyu09" column="misetteiJiyu09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="teikyoNaiyo10" column="teikyoNaiyo10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="misetteiJiyu10" column="misetteiJiyu10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+
 </mapper>

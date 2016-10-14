@@ -84,6 +84,28 @@ public class KanendoNonyuTsuchishoCVSMultiPrintService {
     }
 
     /**
+     * 保険料納入通知書（本算定過年度）【コンビニマルチ収納タイプ】 printメソッド
+     *
+     * @param 本算定納入通知書情報List List<HonSanteiNonyuTsuchiShoJoho>
+     * @param reportManager ReportManager
+     */
+    public void print_修正(List<HonSanteiNonyuTsuchiShoJoho> 本算定納入通知書情報List, ReportManager reportManager) {
+        KanendoNonyuTsuchishoCVSMultiProperty property = new KanendoNonyuTsuchishoCVSMultiProperty();
+        try (ReportAssembler<KanendoNonyuTsuchishoCVSMultiSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KanendoNonyuTsuchishoCVSMultiSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+            for (HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 : 本算定納入通知書情報List) {
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
+                        new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+                KanendoNonyuTsuchishoCVSMultiReport report
+                        = new KanendoNonyuTsuchishoCVSMultiReport(本算定納入通知書情報, ninshoshaSource);
+                report.writeBy(reportSourceWriter);
+            }
+        }
+    }
+
+    /**
      * 帳票を出力します。
      *
      * @param 本算定納入通知書情報 HonSanteiNonyuTsuchiShoJoho
@@ -105,6 +127,30 @@ public class KanendoNonyuTsuchishoCVSMultiPrintService {
                 }
             }
             return reportManager.publish();
+        }
+    }
+
+    /**
+     * 帳票を出力します。
+     *
+     * @param 本算定納入通知書情報List List<HonSanteiNonyuTsuchiShoJoho>
+     * @param reportManager ReportManager
+     */
+    public void devidedByPage_修正(
+            List<HonSanteiNonyuTsuchiShoJoho> 本算定納入通知書情報List, ReportManager reportManager) {
+        KanendoNonyuTsuchishoCVSMultiProperty property = new KanendoNonyuTsuchishoCVSMultiProperty();
+        try (ReportAssembler<KanendoNonyuTsuchishoCVSMultiSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KanendoNonyuTsuchishoCVSMultiSource> reportSourceWriterCover = new ReportSourceWriter(assembler);
+            ReportSourceWriter<KanendoNonyuTsuchishoCVSMultiSource> reportSourceWriterDetail = new ReportSourceWriter(assembler);
+            for (HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 : 本算定納入通知書情報List) {
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
+                        new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriterCover);
+                List<NonyuTsuchisho<KanendoNonyuTsuchishoCVSMultiSource>> reportList
+                        = new KanendoNonyuTsuchishoCVSMultiReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
+                reportList.get(0).writeBy(reportSourceWriterCover);
+                reportList.get(1).writeBy(reportSourceWriterDetail);
+            }
         }
     }
 

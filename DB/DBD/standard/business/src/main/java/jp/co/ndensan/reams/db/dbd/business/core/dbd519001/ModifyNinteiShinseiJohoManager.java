@@ -185,7 +185,7 @@ public class ModifyNinteiShinseiJohoManager {
             KouikiyoukaigoNinteishinseiJouhouTempEntity tempEntity) {
         List<RString> 前回データ情報リスト = new ArrayList<>();
         if (entity.get一次判定内容() != null) {
-            前回データ情報リスト = entity.get一次判定内容().split("|");
+            前回データ情報リスト = entity.get一次判定内容().split(("\\|"));
         }
         RString シーケンシャル番号 = new RString(String.format("%06d", i));
         creatTempEntity(entity, シーケンシャル番号, tempEntity);

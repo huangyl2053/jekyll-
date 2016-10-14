@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1300011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
@@ -23,12 +22,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KyufuTsuchiGenmenHoseiToroku のクラスファイル
- *
+ * KyufuTsuchiGenmenHoseiToroku のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -42,12 +40,12 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     private KyufuTsuchiGenmenHoseiTorokuListDiv KyufuTsuchiGenmenHoseiTorokuList;
     @JsonProperty("KyufuTsuchiGenmenHoseiTorokuDetail")
     private KyufuTsuchiGenmenHoseiTorokuDetailDiv KyufuTsuchiGenmenHoseiTorokuDetail;
-    @JsonProperty("KyufuTsuchiGenmenHoseiTorokuKihon")
-    private KaigoAtenaInfoDiv KyufuTsuchiGenmenHoseiTorokuKihon;
     @JsonProperty("KyufuTsuchiGenmenHoseiTorokuKaigoKihon")
     private KaigoShikakuKihonDiv KyufuTsuchiGenmenHoseiTorokuKaigoKihon;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("KyufuTsuchiGenmenHoseiTorokuKihon")
+    private KaigoAtenaInfoDiv KyufuTsuchiGenmenHoseiTorokuKihon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -110,15 +108,6 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     /*
-     * getKyufuTsuchiGenmenHoseiTorokuKihon
-     * @return KyufuTsuchiGenmenHoseiTorokuKihon
-     */
-    @JsonProperty("KyufuTsuchiGenmenHoseiTorokuKihon")
-    public IKaigoAtenaInfoDiv getKyufuTsuchiGenmenHoseiTorokuKihon() {
-        return KyufuTsuchiGenmenHoseiTorokuKihon;
-    }
-
-    /*
      * getKyufuTsuchiGenmenHoseiTorokuKaigoKihon
      * @return KyufuTsuchiGenmenHoseiTorokuKaigoKihon
      */
@@ -137,6 +126,15 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     /*
+     * getKyufuTsuchiGenmenHoseiTorokuKihon
+     * @return KyufuTsuchiGenmenHoseiTorokuKihon
+     */
+    @JsonProperty("KyufuTsuchiGenmenHoseiTorokuKihon")
+    public IKaigoAtenaInfoDiv getKyufuTsuchiGenmenHoseiTorokuKihon() {
+        return KyufuTsuchiGenmenHoseiTorokuKihon;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -145,7 +143,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setHorizontalLineUe2(HorizontalLine HorizontalLineUe2) {
+    public void  setHorizontalLineUe2(HorizontalLine HorizontalLineUe2) {
         this.getKyufuTsuchiGenmenHoseiTorokuSearch().setHorizontalLineUe2(HorizontalLineUe2);
     }
 
@@ -155,7 +153,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLabelSaabisuNengetu(Label LabelSaabisuNengetu) {
+    public void  setLabelSaabisuNengetu(Label LabelSaabisuNengetu) {
         this.getKyufuTsuchiGenmenHoseiTorokuSearch().setLabelSaabisuNengetu(LabelSaabisuNengetu);
     }
 
@@ -165,7 +163,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTextBoxDateService(TextBoxDateRange TextBoxDateService) {
+    public void  setTextBoxDateService(TextBoxDateRange TextBoxDateService) {
         this.getKyufuTsuchiGenmenHoseiTorokuSearch().setTextBoxDateService(TextBoxDateService);
     }
 
@@ -175,7 +173,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setButtonSearch(Button ButtonSearch) {
+    public void  setButtonSearch(Button ButtonSearch) {
         this.getKyufuTsuchiGenmenHoseiTorokuSearch().setButtonSearch(ButtonSearch);
     }
 
@@ -185,7 +183,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTextBoxNumKensuu(TextBoxNum TextBoxNumKensuu) {
+    public void  setTextBoxNumKensuu(TextBoxNum TextBoxNumKensuu) {
         this.getKyufuTsuchiGenmenHoseiTorokuSearch().setTextBoxNumKensuu(TextBoxNumKensuu);
     }
 
@@ -195,7 +193,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setButtonHyouji(Button ButtonHyouji) {
+    public void  setButtonHyouji(Button ButtonHyouji) {
         this.getKyufuTsuchiGenmenHoseiTorokuSearch().setButtonHyouji(ButtonHyouji);
     }
 
@@ -205,7 +203,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setHorizontalLineUe(HorizontalLine HorizontalLineUe) {
+    public void  setHorizontalLineUe(HorizontalLine HorizontalLineUe) {
         this.getKyufuTsuchiGenmenHoseiTorokuSearch().setHorizontalLineUe(HorizontalLineUe);
     }
 
@@ -215,7 +213,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setButtonTuika(Button ButtonTuika) {
+    public void  setButtonTuika(Button ButtonTuika) {
         this.getKyufuTsuchiGenmenHoseiTorokuList().setButtonTuika(ButtonTuika);
     }
 
@@ -225,7 +223,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDataGridItiran(DataGrid<DataGridItiran_Row> DataGridItiran) {
+    public void  setDataGridItiran(DataGrid<DataGridItiran_Row> DataGridItiran) {
         this.getKyufuTsuchiGenmenHoseiTorokuList().setDataGridItiran(DataGridItiran);
     }
 
@@ -235,7 +233,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTextBoxDateSaabisu(TextBoxDate TextBoxDateSaabisu) {
+    public void  setTextBoxDateSaabisu(TextBoxDate TextBoxDateSaabisu) {
         this.getKyufuTsuchiGenmenHoseiTorokuDetail().setTextBoxDateSaabisu(TextBoxDateSaabisu);
     }
 
@@ -245,7 +243,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTextBoxFudangoukei(TextBoxNum TextBoxFudangoukei) {
+    public void  setTextBoxFudangoukei(TextBoxNum TextBoxFudangoukei) {
         this.getKyufuTsuchiGenmenHoseiTorokuDetail().setTextBoxFudangoukei(TextBoxFudangoukei);
     }
 
@@ -255,7 +253,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTextBoxNumHiyouGoukei(TextBoxNum TextBoxNumHiyouGoukei) {
+    public void  setTextBoxNumHiyouGoukei(TextBoxNum TextBoxNumHiyouGoukei) {
         this.getKyufuTsuchiGenmenHoseiTorokuDetail().setTextBoxNumHiyouGoukei(TextBoxNumHiyouGoukei);
     }
 
@@ -265,7 +263,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setHorizontalLineSita(HorizontalLine HorizontalLineSita) {
+    public void  setHorizontalLineSita(HorizontalLine HorizontalLineSita) {
         this.getKyufuTsuchiGenmenHoseiTorokuDetail().setHorizontalLineSita(HorizontalLineSita);
     }
 
@@ -275,7 +273,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setButtonYes(Button ButtonYes) {
+    public void  setButtonYes(Button ButtonYes) {
         this.getKyufuTsuchiGenmenHoseiTorokuDetail().setButtonYes(ButtonYes);
     }
 
@@ -285,7 +283,7 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setButtonBack(Button ButtonBack) {
+    public void  setButtonBack(Button ButtonBack) {
         this.getKyufuTsuchiGenmenHoseiTorokuDetail().setButtonBack(ButtonBack);
     }
 

@@ -41,8 +41,8 @@ public class GemmenGengakuShinsei {
      * @return スポンスデータ
      */
     public ResponseData<GemmenGengakuShinseiDiv> onOkClose_btnOpenJigyoshaGuide(GemmenGengakuShinseiDiv div) {
-        div.getTxtJigyoshaCode().setValue(div.getJigyoshaCode());
-        div.getTxtJigyoshaName().setValue(div.getJigyoshaMeisho());
+        div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(div.getJigyoshaCode());
+        div.getCcdShisetsuJoho().setShisetsuMeisho(div.getJigyoshaMeisho());
         return ResponseData.of(div).respond();
     }
 
