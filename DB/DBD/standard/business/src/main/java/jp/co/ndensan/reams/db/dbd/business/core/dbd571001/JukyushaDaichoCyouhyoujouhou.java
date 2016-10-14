@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDank
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.ShinseiRiyuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.homonkaigogemmen.HobetsuKubun;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd571001.IdoChushutsuDaichoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoNewEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.FutanGendogakuNinteiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.HomonKaigoGenmenJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.HyojunFutanGengakuJohoEntity;
@@ -31,6 +33,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadai
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyusochisha.KyusochishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoShuryoKubun;
@@ -53,9 +56,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.SeikatsuHogoFujoShuruiCodeType;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -565,6 +573,29 @@ public class JukyushaDaichoCyouhyoujouhou {
             listEntity.add(生活保護情報);
         }
         return listEntity;
+    }
+
+    /**
+     * update処理日付管理マスタ
+     *
+     * @param parameter 受給者台帳
+     * @return dbT7022entity dbT7022entity
+     */
+    public ShoriDateKanriEntity update処理日付管理マスタ(IdoChushutsuDaichoProcessParameter parameter) {
+        ShoriDateKanriEntity dbT7022entity = new ShoriDateKanriEntity();
+        dbT7022entity.setSubGyomuCode(SubGyomuCode.DBD介護受給);
+        dbT7022entity.setShoriName(ShoriName.受給者台帳.get名称());
+        dbT7022entity.setShichosonCode(new LasdecCode(parameter.get市町村コード().toString()));
+        dbT7022entity.setNendoNaiRenban(new RString("0001"));
+        if (parameter.get今回抽出開始年月日() != null && parameter.get今回抽出開始時分秒() != null) {
+            dbT7022entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get今回抽出開始年月日(), parameter.get今回抽出開始時分秒()));
+        }
+        if (parameter.get今回抽出終了年月日() != null && parameter.get今回抽出終了時分秒() != null) {
+            dbT7022entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.get今回抽出終了年月日(), parameter.get今回抽出終了時分秒()));
+        }
+        dbT7022entity.setLastUpdateTimestamp(RDate.getNowDateTime());
+        dbT7022entity.setLastUpdateReamsLoginId(ControlDataHolder.getUserId());
+        return dbT7022entity;
     }
 
     private void set先頭Entity(SentoEntity 先頭Entity, IdoChushutsuDaichoNewEntity t,

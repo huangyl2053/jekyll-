@@ -445,11 +445,11 @@ public class DvKogakuServiceJuryoIninHandler {
 
     private RString get契約番号(KogakuJuryoininKeiyakuJigyoshaHolder holder) {
         int year = div.getDvHaraiKetteiShusei().getBtnShoninDate().getFromValue().getYearValue();
-        List<KogakuJuryoininKeiyakuJigyosha> businessList = new ArrayList<>();
         if (null == holder || null == holder.getKogakuJuryoininKeiyakuJigyoshaList()
                 || holder.getKogakuJuryoininKeiyakuJigyoshaList().isEmpty()) {
             return new RString(year).concat(ONE_契約番号下四桁);
         }
+        List<KogakuJuryoininKeiyakuJigyosha> businessList = holder.getKogakuJuryoininKeiyakuJigyoshaList();
         RString 契約番号下四桁 = ZERO_契約番号下四桁;
         if (!RString.isNullOrEmpty(businessList.get(0).get契約番号())) {
             契約番号下四桁 = businessList.get(0).get契約番号().substring(LENGTH_契約番号西暦年度, LENGTH_契約番号);

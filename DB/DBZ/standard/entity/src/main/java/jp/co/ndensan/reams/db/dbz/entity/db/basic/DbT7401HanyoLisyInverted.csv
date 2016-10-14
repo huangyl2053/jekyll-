@@ -1,0 +1,6 @@
+﻿reportId,UDD032ReportId,ReportId,,,,,帳票ID,A
+komokuId,bpchar,RString,,,,,項目ID,A
+komokuIchi,int4,int,,,,,項目位置,A
+chohyoHyojiIchi,varchar,RString,,,,,帳票表示位置,A
+kingakuHenshuHoho,varchar,RString,,,,,金額編集,A
+logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A

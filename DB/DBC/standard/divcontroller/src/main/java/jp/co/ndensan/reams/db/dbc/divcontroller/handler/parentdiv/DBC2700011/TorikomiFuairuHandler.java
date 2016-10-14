@@ -56,7 +56,7 @@ public class TorikomiFuairuHandler {
         List<RString> 項目数;
         try (CsvListReader reader = new CsvListReader.InstanceBuilder(csvFilePath).
                 setDelimiter(new RString(",")).setEnclosure(new RString("\""))
-                .hasHeader(false).setEncode(Encode.JIS).setNewLine(NewLine.CRLF).build()) {
+                .hasHeader(false).setEncode(Encode.SJIS).setNewLine(NewLine.CRLF).build()) {
             while ((項目数 = reader.readLine()) != null) {
                 size = size + 項目数.size();
             }

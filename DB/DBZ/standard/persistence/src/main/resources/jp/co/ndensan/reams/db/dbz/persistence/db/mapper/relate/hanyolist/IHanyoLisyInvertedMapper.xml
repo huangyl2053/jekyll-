@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 汎用リスト一時テーブルのXMLです。 -->
+<!-- @reamsid_L DBZ-4570-010 jinge -->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hanyolist.IHanyoLisyInvertedMapper">
+    <resultMap id="resultMap_HanyoListTempEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoListTempEntity" autoMapping="true">
+        <result property="項目ID" column="項目ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="項目位置" column="項目位置"/>
+        <result property="帳票表示位置" column="帳票表示位置" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="金額編集" column="金額編集" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="select汎用リスト項目変換テーブル" resultMap="resultMap_HanyoListTempEntity" fetchSize="500"
+                 parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hanyolist.HanyoLisyInvertedParameter">
+       SELECT
+         "komokuId" AS 項目ID,   
+         "komokuIchi" AS 項目位置,
+         "chohyoHyojiIchi" AS 帳票表示位置,
+         "kingakuHenshuHoho" AS 金額編集
+       FROM 
+          rgdb."DbT7401HanyoLisyInverted"
+       WHERE 
+          "reportId" = #{帳票ID} AND
+          "logicalDeletedFlag" = false
+    </select>
+</mapper>

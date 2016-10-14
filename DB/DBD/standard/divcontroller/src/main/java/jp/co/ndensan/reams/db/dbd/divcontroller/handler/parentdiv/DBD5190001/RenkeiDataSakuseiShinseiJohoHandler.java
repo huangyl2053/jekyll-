@@ -330,9 +330,13 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
                 row.setHihokenshaNo(joho.get被保険者番号());
                 row.setHihokenshaKanaShimei(joho.get被保険者カナ().value());
                 row.setHihokenshaShimei(joho.get被保険者名前().value());
-                row.getBirthYMD().setValue(new RDate(joho.get生年月日().toString()));
+                if (joho.get生年月日() != null && !joho.get生年月日().isEmpty()) {
+                    row.getBirthYMD().setValue(new RDate(joho.get生年月日().toString()));
+                }
                 row.setSeibetsu(Seibetsu.toValue(joho.get性別().value()).get名称());
-                row.getShinseiDay().setValue(new RDate(joho.get認定申請年月日().toString()));
+                if (joho.get認定申請年月日() != null && !joho.get認定申請年月日().isEmpty()) {
+                    row.getShinseiDay().setValue(new RDate(joho.get認定申請年月日().toString()));
+                }
                 row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(joho.get認定申請区分申請時コード()
                         .value()).get名称());
                 rowList.add(row);

@@ -38,7 +38,8 @@
         "torigaDataTemp"
     </select>
     
-    <select resultOrdered="true" id="get利用者負担割合明細Newest" resultMap="利用者負担割合明細最新_resultMap" fetchSize="500">
+    <select resultOrdered="true" id="get利用者負担割合明細Newest" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.InsFutanwariaiJohoTempResultEntity" fetchSize="500">
         WITH master AS(
         SELECT DISTINCT
         "被保険者番号",
@@ -48,14 +49,36 @@
         )
         
         SELECT
-        master.*,
-        <include refid="allColumns_DbT3114RiyoshaFutanWariaiMeisai" />
+        master."被保険者番号" AS 被保険者番号,
+        master."年度" AS 年度,
+        利用者負担割合明細Newest."rirekiNo" AS rirekiNo,
+        利用者負担割合明細Newest."hakoFuyoFlag" AS hakoFuyoFlag,
+        利用者負担割合明細Newest."shokenFlag" AS shokenFlag,
+        利用者負担割合明細Newest."hanteiYMD" AS hanteiYMD,
+        利用者負担割合明細Newest."hanteiKubun" AS hanteiKubun,
+        利用者負担割合明細Newest."koseiJiyu" AS koseiJiyu,
+        利用者負担割合明細Newest."hakoKubun" AS hakoKubun,
+        利用者負担割合明細Newest."hakoYMD" AS hakoYMD,
+        利用者負担割合明細Newest."kofuYMD" AS kofuYMD,
+        利用者負担割合明細Newest."logicalDeletedFlag" AS logicalDeletedFlag,
+        利用者負担割合明細Newest."edaNo" AS edaNo,
+        利用者負担割合明細Newest."shikakuKubun" AS shikakuKubun,
+        利用者負担割合明細Newest."futanWariaiKubun" AS futanWariaiKubun,
+        利用者負担割合明細Newest."yukoKaishiYMD" AS yukoKaishiYMD,
+        利用者負担割合明細Newest."yukoShuryoYMD" AS yukoShuryoYMD,
+        利用者負担割合明細Newest."honninGoukeiShotokuGaku" AS honninGoukeiShotokuGaku,
+        利用者負担割合明細Newest."setaiIchigouHihokenshaSu" AS setaiIchigouHihokenshaSu,
+        利用者負担割合明細Newest."nenkinShunyuGoukei" AS nenkinShunyuGoukei,
+        利用者負担割合明細Newest."sonotanoGoukeiShotokuKingakuGoukei" AS sonotanoGoukeiShotokuKingakuGoukei,
+        利用者負担割合明細Newest."koseiRiyu" AS koseiRiyu,
+        利用者負担割合明細Newest."setaiCd" AS setaiCd,
+        利用者負担割合明細Newest."meisailogicalDeletedFlag" AS 論理削除フラグ
         FROM
         master AS master
         LEFT OUTER JOIN
-        rgdb."DbV3114RiyoshaFutanWariaiMeisai" AS "DbT3114RiyoshaFutanWariaiMeisai"
-        ON master."被保険者番号" = "DbT3114RiyoshaFutanWariaiMeisai"."hihokenshaNo" AND
-        master."年度" = "DbT3114RiyoshaFutanWariaiMeisai"."nendo"
+        rgdb."DbV3114RiyoshaFutanWariaiMeisai" AS 利用者負担割合明細Newest
+        ON master."被保険者番号" = 利用者負担割合明細Newest."hihokenshaNo" AND
+        master."年度" = 利用者負担割合明細Newest."nendo"
         ORDER BY
         master."被保険者番号",
         master."年度" ASC
@@ -244,12 +267,12 @@
         rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
         true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
-         (
-         SELECT
-         ARRAY_AGG(CAST (master."識別コード" AS TEXT))
-         FROM
-         master
-         )) AS 宛名
+        (
+        SELECT
+        ARRAY_AGG(CAST (master."識別コード" AS TEXT))
+        FROM
+        master
+        )) AS 宛名
         ON master."識別コード" = 宛名."shikibetsuCode"
         ORDER BY
         master."被保険者番号", master."サービス提供年月", master."入力識別番号", master."事業所番号"
@@ -334,11 +357,5 @@
     <resultMap  id="利用者負担減額情報の取得_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.UpdRiyoshaFutangengakuTempResultEntity" autoMapping="true">
         <result property="年度" column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <association property="利用者負担減額" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.ResultMap_DbT4014RiyoshaFutangakuGengakuEntity"/>
-    </resultMap>
-    
-    <resultMap  id="利用者負担割合明細最新_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.InsFutanwariaiJohoTempResultEntity" autoMapping="true">
-        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="年度" column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <association property="利用者負担割合明細最新Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3114RiyoshaFutanWariaiMeisaiMapper.ResultMap_DbT3114RiyoshaFutanWariaiMeisaiEntity"/>
     </resultMap>
 </mapper>

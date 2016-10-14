@@ -24,17 +24,10 @@
         rgdb."DbT7204YokaigoNinteiGaibuDataOutputHistory"
         WHERE rgdb."DbT7204YokaigoNinteiGaibuDataOutputHistory"."dataKubun" = #{出力データ区分}
     </select>
-    <insert id="insertその他情報登録" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.InsNinteiGaibuDataOutputHistoryMybitsParameter">
-        INSERT INTO 
-        rgdb."DbT7211GaibuRenkeiDataoutputJoho"
-        ("shinseishoKanriNo","ninteiShinseiJohoChushutsuYMD","ninteiChosaKekkaJohoChushutsuYMD","ninteiChosaIkenshoKekkaJohoChushutsuYMD","ichijihanteiChushutsuYMD","shinsakaiKekkaJohoChushutsuYMD")
-        SELECT 
-        "NinteiShinseiJohoTemp"."shinseishoKanriNo",
-        #{システム日付},
-        null,
-        null,
-        null,
-        null
-        FROM "NinteiShinseiJohoTemp"
-    </insert>
+    <update id="updateその他情報登録" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.InsNinteiGaibuDataOutputHistoryMybitsParameter">
+        UPDATE  rgdb."DbT7211GaibuRenkeiDataoutputJoho"
+        SET "ninteiShinseiJohoChushutsuYMD" =#{システム日付}
+        WHERE "shinseishoKanriNo" IN
+        (SELECT "shinseishoKanriNo" from rgdb."NinteiShinseiJohoTemp")
+    </update>
 </mapper>

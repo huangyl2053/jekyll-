@@ -7,14 +7,6 @@ var DBD;
             Events.onclick_txtCopyHonnin = function () {
                 return "onclick_txtCopyHonnin";
             };
-
-            Events.onOkClose_btnOpenJigyoshaGuide = function () {
-                return "onOkClose_btnOpenJigyoshaGuide";
-            };
-
-            Events.onBeforeOpenDialog_btnOpenJigyoshaGuide = function () {
-                return "onBeforeOpenDialog_btnOpenJigyoshaGuide";
-            };
             return Events;
         })();
         GemmenGengakuShinsei.Events = Events;
@@ -81,18 +73,6 @@ var DBD;
 
             Controls.prototype.ShinseiDaikoJigyosha = function () {
                 return new UZA.Panel(this.convFiledName("ShinseiDaikoJigyosha"));
-            };
-
-            Controls.prototype.txtJigyoshaCode = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtJigyoshaCode"));
-            };
-
-            Controls.prototype.btnOpenJigyoshaGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnOpenJigyoshaGuide"));
-            };
-
-            Controls.prototype.txtJigyoshaName = function () {
-                return new UZA.TextBox(this.convFiledName("txtJigyoshaName"));
             };
 
             Controls.prototype.ddlJigyoshaKubun = function () {

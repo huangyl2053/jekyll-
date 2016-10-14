@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgen
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,19 +16,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinseiDaikoJigyoshaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtJigyoshaCode")
-    private TextBoxCode txtJigyoshaCode;
-    @JsonProperty("btnOpenJigyoshaGuide")
-    private ButtonDialog btnOpenJigyoshaGuide;
-    @JsonProperty("txtJigyoshaName")
-    private TextBox txtJigyoshaName;
+    @JsonProperty("ccdShisetsuJoho")
+    private ShisetsuJohoCommonChildDivDiv ccdShisetsuJoho;
     @JsonProperty("ddlJigyoshaKubun")
     private DropDownList ddlJigyoshaKubun;
 
@@ -37,57 +35,12 @@ public class ShinseiDaikoJigyoshaDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtJigyoshaCode
-     * @return txtJigyoshaCode
+     * getccdShisetsuJoho
+     * @return ccdShisetsuJoho
      */
-    @JsonProperty("txtJigyoshaCode")
-    public TextBoxCode getTxtJigyoshaCode() {
-        return txtJigyoshaCode;
-    }
-
-    /*
-     * settxtJigyoshaCode
-     * @param txtJigyoshaCode txtJigyoshaCode
-     */
-    @JsonProperty("txtJigyoshaCode")
-    public void setTxtJigyoshaCode(TextBoxCode txtJigyoshaCode) {
-        this.txtJigyoshaCode = txtJigyoshaCode;
-    }
-
-    /*
-     * getbtnOpenJigyoshaGuide
-     * @return btnOpenJigyoshaGuide
-     */
-    @JsonProperty("btnOpenJigyoshaGuide")
-    public ButtonDialog getBtnOpenJigyoshaGuide() {
-        return btnOpenJigyoshaGuide;
-    }
-
-    /*
-     * setbtnOpenJigyoshaGuide
-     * @param btnOpenJigyoshaGuide btnOpenJigyoshaGuide
-     */
-    @JsonProperty("btnOpenJigyoshaGuide")
-    public void setBtnOpenJigyoshaGuide(ButtonDialog btnOpenJigyoshaGuide) {
-        this.btnOpenJigyoshaGuide = btnOpenJigyoshaGuide;
-    }
-
-    /*
-     * gettxtJigyoshaName
-     * @return txtJigyoshaName
-     */
-    @JsonProperty("txtJigyoshaName")
-    public TextBox getTxtJigyoshaName() {
-        return txtJigyoshaName;
-    }
-
-    /*
-     * settxtJigyoshaName
-     * @param txtJigyoshaName txtJigyoshaName
-     */
-    @JsonProperty("txtJigyoshaName")
-    public void setTxtJigyoshaName(TextBox txtJigyoshaName) {
-        this.txtJigyoshaName = txtJigyoshaName;
+    @JsonProperty("ccdShisetsuJoho")
+    public IShisetsuJohoCommonChildDiv getCcdShisetsuJoho() {
+        return ccdShisetsuJoho;
     }
 
     /*

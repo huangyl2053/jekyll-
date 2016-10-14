@@ -28,5 +28,5 @@ public interface IInsNinteiGaibuDataOutputHistoryMapper {
      *
      * @param parameter InsNinteiGaibuDataOutputHistoryMybitsParameter
      */
-    void insertその他情報登録(InsNinteiGaibuDataOutputHistoryMybitsParameter parameter);
+    void updateその他情報登録(InsNinteiGaibuDataOutputHistoryMybitsParameter parameter);
 }

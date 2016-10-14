@@ -235,14 +235,10 @@ public class GemmenGengakuShoIkkatsuMainHandler {
                 .getFutanGendogakuKetteiTsuchisho().getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().getValue();
         RString 通知書の文書番号 = div.getFutanGendogaku()
                 .getFutanGendogakuKetteiTsuchisho().getCcdFutanGendogakuKetteiTsuchishoBunshoNo().get文書番号();
-        RString 改頁出力順ID = new RString("");
         DBD103010_FutanGendoGakuNinteiIkkatsuHakkoParameter futanParameter = new DBD103010_FutanGendoGakuNinteiIkkatsuHakkoParameter();
         futanParameter.set単票発行区分(TanpyoHakkoKubun.出力しない);
         futanParameter.set旧措置者区分(KyusochishaKubun.旧措置者以外);
-        Long 改頁ID = Long.valueOf("0");
-        if (div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().isSelected()) {
-            改頁出力順ID = div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().getSelected出力順().get改頁項目ID();
-        }
+        Long 改頁ID = div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().get出力順ID();
         if (単票発行区分.equals(TanpyoHakkoKubun.出力する.get名称())) {
             futanParameter.set単票発行区分(TanpyoHakkoKubun.出力する);
         }
@@ -254,9 +250,6 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         }
         if (対象区分.equals(TaishoKubun.申請日.get名称())) {
             futanParameter.set対象区分(TaishoKubun.申請日);
-        }
-        if (!改頁出力順ID.isEmpty()) {
-            改頁ID = Long.valueOf(改頁出力順ID.toString());
         }
         futanParameter.set年度開始日(nendoYMDFrom);
         futanParameter.set年度終了日(nendoYMDTo);
@@ -288,18 +281,12 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         FlexibleDate tsuchishoHakkoYMD = div.getShafukuKeigen()
                 .getShafukuKeigenKetteiTsuchisho().getTxtShafukuKeigenKetteiTsuchishoHakkoYmd().getValue();
         RString 通知書の文書番号 = div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().getCcdShafukuKeigenKetteiTsuchishoBunshoNo().get文書番号();
-        RString 改頁出力順ID = new RString("");
-        Long 改頁ID = Long.valueOf("0");
+        Long 改頁ID = div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().get出力順ID();
         DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakkoParameter shaParameter = new DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakkoParameter();
         shaParameter.set単票発行区分(TanpyoHakkoKubun.出力しない);
-        if (div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().isSelected()) {
-            改頁出力順ID = div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().getSelected出力順().get改頁項目ID();
-        }
+
         if (単票発行区分.equals(TanpyoHakkoKubun.出力する.get名称())) {
             shaParameter.set単票発行区分(TanpyoHakkoKubun.出力する);
-        }
-        if (!改頁出力順ID.isEmpty()) {
-            改頁ID = Long.valueOf(改頁出力順ID.toString());
         }
         shaParameter.set年度開始日(nendoYMDFrom);
         shaParameter.set年度終了日(nendoYMDTo);
