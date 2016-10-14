@@ -144,6 +144,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
     private NinshoshaSource ninshoshaSource1;
     private NinshoshaSource ninshoshaSource2;
     private RString 帳票ID;
+    private JigyoKogakuShikyuFushikyuKetteTsuchiEntity lastReportEntity;
 
     BatchReportWriter<JigyoKogakuKetteiTsuchishoYijiNashiSource> batchReportWriter1;
     ReportSourceWriter<JigyoKogakuKetteiTsuchishoYijiNashiSource> reportSourceWriter1;
@@ -236,6 +237,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         }
         dataFlag = false;
         JigyoKogakuShikyuFushikyuKetteTsuchiEntity fushikyuReportEntity = getFushikyuReportEntity(entity, 宛名情報, 住所);
+        lastReportEntity = fushikyuReportEntity;
         JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(fushikyuReportEntity, 連番, false);
         report.writeBy(reportSourceWriter3);
         本人支給額合計 = 本人支給額合計.add(entity.get一時Entity().getRiyoshaFutanGaku());
@@ -252,7 +254,10 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
             JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(afterEntity, 連番, false);
             report.writeBy(reportSourceWriter3);
         } else {
-            JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(getLastEntity(), 連番, true);
+            lastReportEntity.set支給総件数(new RString(連番));
+            lastReportEntity.set本人支給額合計(doカンマ編集(本人支給額合計));
+            lastReportEntity.set支給額給額合計(doカンマ編集(支給額給額合計));
+            JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(lastReportEntity, 連番, true);
             report.writeBy(reportSourceWriter3);
         }
         if (ReportIdDBC.DBC100061.getReportId().getColumnValue().equals(帳票ID)) {
@@ -350,16 +355,10 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
             reportEntity.set支払予定日(new FlexibleDate(parameter.get振込予定日().toDateString()));
         }
         reportEntity.set決定通知書番号(entity.getTsuchishoNo());
-        set口座情報(reportEntity, 口座情報);
+        if (口座情報 != null) {
+            set口座情報(reportEntity, 口座情報);
+        }
         return reportEntity;
-    }
-
-    private JigyoKogakuShikyuFushikyuKetteTsuchiEntity getLastEntity() {
-        JigyoKogakuShikyuFushikyuKetteTsuchiEntity lastEntity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
-        lastEntity.set支給総件数(new RString(連番));
-        lastEntity.set本人支給額合計(doカンマ編集(本人支給額合計));
-        lastEntity.set支給額給額合計(doカンマ編集(支給額給額合計));
-        return lastEntity;
     }
 
     private JigyoKogakuShikyuFushikyuKetteTsuchiEntity getFushikyuReportEntity(KogakuServiceReportEntity entity,
@@ -367,7 +366,6 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         JigyoKogakuShikyuFushikyuKetteTsuchiEntity returnEntity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
         set出力順と改頁(returnEntity);
         KetteiTsuchishoInfoTempEntity 一時Entity = entity.get一時Entity();
-        returnEntity.setテスト出力フラグ(parameter.getテスト出力フラグ());
         returnEntity.set決定通知No(一時Entity.getTsuchishoNo());
         if (null != 一時Entity.getHihokenshaNo()) {
             returnEntity.set被保険者番号(一時Entity.getHihokenshaNo().getColumnValue());
@@ -414,6 +412,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
 
     private void set出力順と改頁(JigyoKogakuShikyuFushikyuKetteTsuchiEntity returnEntity) {
 
+        returnEntity.setテスト出力フラグ(parameter.getテスト出力フラグ());
         returnEntity.set帳票タイトル(帳票タイトル);
         if (導入団体情報.getLasdecCode_() != null) {
             returnEntity.set市町村コード(導入団体情報.getLasdecCode_().getColumnValue());
