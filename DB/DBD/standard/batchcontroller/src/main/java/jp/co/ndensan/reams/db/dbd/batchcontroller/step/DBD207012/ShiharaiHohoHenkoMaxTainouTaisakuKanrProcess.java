@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207012;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuThreeEntity;
@@ -70,7 +71,11 @@ public class ShiharaiHohoHenkoMaxTainouTaisakuKanrProcess extends BatchProcessBa
     }
 
     private void 滞納者対策最大履歴番号一時テーブル情報追加(Map<RString, List<ShiharaiHohoHenkoHaakuThreeEntity>> resultMap) {
-        for (RString key : resultMap.keySet()) {
+
+        Iterator i = resultMap.entrySet().iterator();
+        while (i.hasNext()) {
+            Object o = i.next();
+            RString key = new RString(o.toString());
             List<ShiharaiHohoHenkoHaakuThreeEntity> dataList = resultMap.get(key);
 
             boolean 管理区分_差止 = false;

@@ -86,6 +86,8 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
     private static final RString 償還申請中者 = new RString("【抽出対象】 償還申請中者");
     private static final RString 償還支給決定日抽出 = new RString("【抽出方法】 償還支給決定日抽出");
 
+    private static final int 帳票期別リストSIZE = 3;
+
     private Association association;
     private IOutputOrder outputOrder;
 
@@ -171,6 +173,23 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
     private ShiharaiHohoHenkoEntity createShiharaiHohoHenkoEntity(ShiharaiHohoHenkoHaakuFiveEntity t) {
 
         reportData.set被保険者番号(t.get対象者情報_被保険者番号());
+        edit宛名情報について(t);
+        edit資格情報について(t);
+        edit生活保護受給者について(t);
+        edit認定情報について(t);
+        edit償還情報について(t);
+        edit滞納者対策情報について(t);
+        List<ShunoStatusJohoEntity> 収納状況情報List = t.get収納状況情報リスト();
+        if (収納状況情報List != null && !収納状況情報List.isEmpty()) {
+            reportData.set収納情報List(edit収納情報List(収納状況情報List));
+        } else {
+            reportData.set収納情報なし(new RString("1"));
+        }
+
+        return reportData;
+    }
+
+    private void edit宛名情報について(ShiharaiHohoHenkoHaakuFiveEntity t) {
         if (t.get宛名情報() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get宛名情報());
 
@@ -187,7 +206,9 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
             reportData.set郵便番号(kojin.get住所().get郵便番号());
             reportData.set住所(kojin.get住所().get住所());
         }
+    }
 
+    private void edit資格情報について(ShiharaiHohoHenkoHaakuFiveEntity t) {
         reportData.set資格取得日(t.get資格情報_資格取得年月日());
         reportData.set資格喪失日(t.get資格情報_資格喪失年月日());
         reportData.set喪失事由(ShikakuSoshitsuJiyu.toValue(t.get資格情報_資格喪失事由コード()));
@@ -195,11 +216,17 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
             reportData.set資格区分(ShikakuKubun.toValue(t.get資格情報_被保険者区分コード()));
         }
         reportData.set住特フラグ(t.get資格情報_住所地特例フラグ());
-        if (t.get生活保護受給者_識別コード() != null && ShikibetsuCode.EMPTY.equals(t.get生活保護受給者_識別コード())) {
+    }
+
+    private void edit生活保護受給者について(ShiharaiHohoHenkoHaakuFiveEntity t) {
+        if (t.get生活保護受給者_識別コード() != null && !ShikibetsuCode.EMPTY.equals(t.get生活保護受給者_識別コード())) {
             reportData.set生保(true);
         } else {
             reportData.set生保(false);
         }
+    }
+
+    private void edit認定情報について(ShiharaiHohoHenkoHaakuFiveEntity t) {
 
         if (t.get認定情報_要介護認定状態区分コード() != null && Code.EMPTY.equals(t.get認定情報_要介護認定状態区分コード())) {
             reportData.set要介護度(t.get認定情報_要介護認定状態区分コード().getColumnValue());
@@ -215,6 +242,9 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
         } else {
             reportData.set認定情報_申請中(RString.EMPTY);
         }
+    }
+
+    private void edit償還情報について(ShiharaiHohoHenkoHaakuFiveEntity t) {
         reportData.set申請日(t.get償還未払い_申請日());
 
         reportData.set償還未払い情報_申請中(t.get償還未払い_申請中());
@@ -228,7 +258,13 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
         }
         reportData.set未通知件数(new RString(t.get償還未払い_未通知件数()));
 
-        reportData.set滞納管理状況(ShiharaiHenkoTorokuKubun._空);
+    }
+
+    private void edit滞納者対策情報について(ShiharaiHohoHenkoHaakuFiveEntity t) {
+        if (t.get滞納者対策情報_登録区分() != null && !RString.EMPTY.equals(t.get滞納者対策情報_登録区分())) {
+            reportData.set滞納管理状況(ShiharaiHenkoTorokuKubun.toValue(t.get滞納者対策情報_登録区分()));
+        }
+
         if (t.get収納状況情報リスト() != null && !t.get収納状況情報リスト().isEmpty()) {
             ShunoStatusJohoEntity 収納状況情報 = t.get収納状況情報リスト().get(0);
             reportData.set最長滞納期間(new RString(String.valueOf(収納状況情報.get収納状況_最長滞納期間())));
@@ -237,8 +273,9 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                 reportData.set以前滞納区分(TainoKubun.toValue(収納状況情報.get収納状況_以前滞納区分()));
             }
         }
-        reportData.set終了状況(ShiharaiHenkoShuryoKubun.その他);
-
+        if (t.get滞納者対策情報_終了区分() != null && !RString.EMPTY.equals(t.get滞納者対策情報_終了区分())) {
+            reportData.set終了状況(ShiharaiHenkoShuryoKubun.toValue(t.get滞納者対策情報_終了区分()));
+        }
         reportData.set適用終了日_2行目(t.get滞納者対策情報_適用終了日());
         reportData.set終了受付日_3行目(t.get滞納者対策情報_終了受付日());
         reportData.set予告発行日_4行目(t.get滞納者対策情報_予告発行日());
@@ -261,14 +298,6 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
         reportData.set行16(RString.EMPTY);
         reportData.set行17(RString.EMPTY);
 
-        List<ShunoStatusJohoEntity> 収納状況情報List = t.get収納状況情報リスト();
-        if (収納状況情報List != null && !収納状況情報List.isEmpty()) {
-            reportData.set収納情報List(edit収納情報List(収納状況情報List));
-        } else {
-            reportData.set収納情報なし(new RString("1"));
-        }
-
-        return reportData;
     }
 
     private FlexibleDate edit日期(RDate 納期限) {
@@ -278,6 +307,8 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
         return FlexibleDate.EMPTY;
     }
 
+    List<FlexibleYear> 賦課年度List = new ArrayList<>();
+
     private List<ShunoNendoEntity> edit収納情報List(List<ShunoStatusJohoEntity> 収納状況情報List) {
 
         List<ShunoNendoEntity> 帳票用収納状況情報List = new ArrayList<>();
@@ -285,13 +316,15 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
         for (ShunoStatusJohoEntity 収納状況情報Data : 収納状況情報List) {
             if (収納状況情報Map.containsKey(収納状況情報Data.get収納状況_賦課年度())) {
                 収納状況情報Map.get(収納状況情報Data.get収納状況_賦課年度()).add(収納状況情報Data);
+                賦課年度List.add(収納状況情報Data.get収納状況_賦課年度());
             } else {
                 List<ShunoStatusJohoEntity> new収納状況情報List = new ArrayList<>();
                 new収納状況情報List.add(収納状況情報Data);
                 収納状況情報Map.put(収納状況情報Data.get収納状況_賦課年度(), new収納状況情報List);
             }
         }
-        for (FlexibleYear 賦課年度 : 収納状況情報Map.keySet()) {
+
+        for (FlexibleYear 賦課年度 : 賦課年度List) {
             List<ShunoStatusJohoEntity> 賦課収納状況情報List = 収納状況情報Map.get(賦課年度);
             List<ShunoKibetsuEntity> 期別情報List = new ArrayList<>();
             ShunoNendoEntity 帳票用収納状況情報 = new ShunoNendoEntity();
@@ -322,7 +355,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                     帳票用収納状況情報.set期別情報(期別情報List);
                 }
             }
-            while (期別情報List.size() < 3) {
+            while (期別情報List.size() < 帳票期別リストSIZE) {
                 期別情報List.add(new ShunoKibetsuEntity());
             }
             帳票用収納状況情報List.add(帳票用収納状況情報);

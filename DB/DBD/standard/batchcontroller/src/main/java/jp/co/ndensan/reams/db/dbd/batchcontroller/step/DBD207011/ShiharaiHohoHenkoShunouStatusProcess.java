@@ -52,6 +52,8 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
     private static final RString 納期限未到来 = new RString("納期限未到来");
     private static final RString 最古滞納期 = new RString("最古滞納期");
 
+    private static final int 年_3 = 3;
+
     private boolean is時効起算日;
     private boolean is督促状発行年月日;
     private boolean is納期限の翌日;
@@ -130,7 +132,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
                 data.setMiNoGaku(未納額);
                 data.setJikoKisambiJiyu(edit時効起算事由(entity));
 
-                if (edit日期(data.getNokigenYMD()).isBefore(processParamter.get基準日().minusYear(3))) {
+                if (edit日期(data.getNokigenYMD()).isBefore(processParamter.get基準日().minusYear(年_3))) {
                     edit以前未納情報(完納_未納区分, data.getJikoKubun(), data.getMiNoGaku(), data.getJikoKisambiYMD(), processParamter.get基準日(), data);
                 } else {
                     edit以降未納情報(完納_未納区分, data, 収納情報List);
@@ -182,7 +184,12 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
             is納期限の翌日 = true;
             仮の時効起算日 = 督促状発行年月日;
         }
+        収入情報について再設定(収納情報, 仮の時効起算日, 時効起算日);
 
+        return 仮の時効起算日;
+    }
+
+    private void 収入情報について再設定(ShunoJohoEntity 収納情報, FlexibleDate 仮の時効起算日, FlexibleDate 時効起算日) {
         if (収納情報.get収入情報リスト() != null && !収納情報.get収入情報リスト().isEmpty()) {
             for (ShunyuJohoEntity 収入情報 : 収納情報.get収入情報リスト()) {
                 if (収入情報.get収入額() != null) {
@@ -197,7 +204,6 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
                 }
             }
         }
-        return 仮の時効起算日;
     }
 
     private RString edit時効起算事由(ShunoJohoEntity entity) {
@@ -302,7 +308,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
 
         if (!賦課年度.equals(調定年度)) {
             過年度フラグ = true;
-            調定年度 = FlexibleYear.EMPTY;
+            data.setChoteiNendo(FlexibleYear.EMPTY);
 
             for (ShunoJohoEntity 収納情報 : 収納情報List) {
                 if (収納情報.get賦課_調定年度() != null && !FlexibleYear.EMPTY.equals(収納情報.get賦課_調定年度())
@@ -310,36 +316,61 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
                         && !収納情報.get賦課_賦課年度().equals(収納情報.get賦課_調定年度())
                         && 賦課年度.equals(収納情報.get賦課_賦課年度())) {
 
-                    FlexibleDate 時効成立日 = FlexibleDate.EMPTY;
-                    if (収納状況_時効起算日 != null && !FlexibleDate.EMPTY.equals(収納状況_時効起算日)) {
-                        時効成立日 = 収納状況_時効起算日.plusYear(2);
-                    }
+                    FlexibleDate 時効成立日 = edit以降未納情報_収納情報(収納状況_時効起算日);
 
-                    if (!FlexibleDate.EMPTY.equals(時効成立日) && processParamter.get基準日().isBefore(時効成立日)) {
-                        if (未納あり.equals(完納_未納区分)) {
-                            if (納期限 == null || FlexibleDate.EMPTY.equals(納期限)) {
-                                時効起算日 = 収納状況_時効起算日;
-                                時効起算事由 = 収納状況_時効起算事由;
-                                納期限 = 収納状況_納期限;
-                            } else if (収納状況_納期限.isBefore(納期限)) {
-                                時効起算日 = 収納状況_時効起算日;
-                                時効起算事由 = 収納状況_時効起算事由;
-                                納期限 = 収納状況_納期限;
-                            }
-                        }
-                    }
+                    時効起算日 = edit以降未納情報_時効起算日(完納_未納区分, 時効成立日, 時効起算日, 収納状況_時効起算日);
+                    時効起算事由 = edit以降未納情報_時効起算事由(完納_未納区分, 時効成立日, 時効起算事由, 収納状況_時効起算事由);
+                    納期限 = edit以降未納情報_納期限(完納_未納区分, 時効成立日, 納期限, 収納状況_納期限);
                 }
             }
-            if (時効到来.equals(時効区分) && 完納_未納区分.equals(未納あり)) {
-                if (data.getMiNoGaku() != null) {
-                    滞納額合計 = 滞納額合計.add(data.getMiNoGaku());
-                }
-            }
+            滞納額合計 = edit以降未納情報_滞納額合計(data, 完納_未納区分, 時効区分, 滞納額合計);
             data.setJikoKisambiYMD(時効起算日);
             data.setJikoKisambiJiyu(時効起算事由);
             data.setPastYearflag(過年度フラグ);
             data.setMiNoGaku(滞納額合計);
         }
+    }
+
+    private FlexibleDate edit以降未納情報_時効起算日(RString 完納_未納区分, FlexibleDate 時効成立日, FlexibleDate 時効起算日,
+            FlexibleDate 収納状況_時効起算日) {
+        if ((!FlexibleDate.EMPTY.equals(時効成立日) && processParamter.get基準日().isBefore(時効成立日))
+                && 未納あり.equals(完納_未納区分)) {
+            時効起算日 = 収納状況_時効起算日;
+        }
+        return 時効起算日;
+    }
+
+    private RString edit以降未納情報_時効起算事由(RString 完納_未納区分, FlexibleDate 時効成立日, RString 時効起算事由, RString 収納状況_時効起算事由) {
+        if ((!FlexibleDate.EMPTY.equals(時効成立日) && processParamter.get基準日().isBefore(時効成立日))
+                && 未納あり.equals(完納_未納区分)) {
+            時効起算事由 = 収納状況_時効起算事由;
+        }
+        return 時効起算事由;
+    }
+
+    private FlexibleDate edit以降未納情報_納期限(RString 完納_未納区分, FlexibleDate 時効成立日, FlexibleDate 納期限, FlexibleDate 収納状況_納期限) {
+        if ((!FlexibleDate.EMPTY.equals(時効成立日) && processParamter.get基準日().isBefore(時効成立日))
+                && 未納あり.equals(完納_未納区分)) {
+            納期限 = 収納状況_納期限;
+        }
+        return 納期限;
+    }
+
+    private Decimal edit以降未納情報_滞納額合計(ShunoStatusTempTableEntity data, RString 完納_未納区分, RString 時効区分, Decimal 滞納額合計) {
+        if (時効到来.equals(時効区分) && 完納_未納区分.equals(未納あり)) {
+            if (data.getMiNoGaku() != null) {
+                滞納額合計 = 滞納額合計.add(data.getMiNoGaku());
+            }
+        }
+        return 滞納額合計;
+    }
+
+    private FlexibleDate edit以降未納情報_収納情報(FlexibleDate 収納状況_時効起算日) {
+        FlexibleDate 時効成立日 = FlexibleDate.EMPTY;
+        if (収納状況_時効起算日 != null && !FlexibleDate.EMPTY.equals(収納状況_時効起算日)) {
+            時効成立日 = 収納状況_時効起算日.plusYear(2);
+        }
+        return 時効成立日;
     }
 
     private RString edit滞納区分(FlexibleDate 納期限, FlexibleDate 時効起算日, Decimal 未納額) {
@@ -348,14 +379,19 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
             if (processParamter.get基準日().isBeforeOrEquals(納期限)) {
                 滞納区分 = 納期限未到来;
             } else {
-                滞納区分 = 滞納期;
-                if (時効起算日 != null && !FlexibleDate.EMPTY.equals(時効起算日)) {
-                    FlexibleDate 時効成立日 = FlexibleDate.EMPTY;
-                    時効成立日 = 時効起算日.plusYear(2);
-                    if (時効成立日.isBeforeOrEquals(processParamter.get基準日())) {
-                        滞納区分 = 時効成立;
-                    }
-                }
+                滞納区分 = edit基準日AFTER納期限の滞納区分(滞納区分, 時効起算日);
+            }
+        }
+        return 滞納区分;
+    }
+
+    private RString edit基準日AFTER納期限の滞納区分(RString 滞納区分, FlexibleDate 時効起算日) {
+        滞納区分 = 滞納期;
+        if (時効起算日 != null && !FlexibleDate.EMPTY.equals(時効起算日)) {
+            FlexibleDate 時効成立日 = FlexibleDate.EMPTY;
+            時効成立日 = 時効起算日.plusYear(2);
+            if (時効成立日.isBeforeOrEquals(processParamter.get基準日())) {
+                滞納区分 = 時効成立;
             }
         }
         return 滞納区分;
@@ -423,16 +459,20 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
         if (収納情報リスト != null && !収納情報リスト.isEmpty()) {
             for (ShunoJohoEntity 収納情報 : 収納情報リスト) {
                 FlexibleDate 納期限Date = edit日期(収納情報.get調定共通_介護継承_納期限());
-                if (納期限Date != null && !納期限Date.isEmpty() && 納期限Date.isBefore(processParamter.get基準日().minusYear(3))) {
-
-                    if (以前納期限 == null || FlexibleDate.EMPTY.equals(以前納期限)) {
-                        以前納期限 = 納期限Date;
-                    } else {
-                        if (以前納期限.isBefore(納期限Date)) {
-                            以前納期限 = 納期限Date;
-                        }
-                    }
+                if (納期限Date != null && !納期限Date.isEmpty() && 納期限Date.isBefore(processParamter.get基準日().minusYear(年_3))) {
+                    以前納期限 = edit以前納期限(以前納期限);
                 }
+            }
+        }
+        return 以前納期限;
+    }
+
+    private FlexibleDate edit以前納期限(FlexibleDate 以前納期限) {
+        if (以前納期限 == null || FlexibleDate.EMPTY.equals(以前納期限)) {
+            以前納期限 = 納期限Date;
+        } else {
+            if (以前納期限.isBefore(納期限Date)) {
+                以前納期限 = 納期限Date;
             }
         }
         return 以前納期限;
@@ -446,26 +486,36 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
 
         if (収納情報リスト != null && !収納情報リスト.isEmpty()) {
             for (ShunoJohoEntity 収納情報 : 収納情報リスト) {
-                if (収納情報.get収入情報リスト() != null && !収納情報.get収入情報リスト().isEmpty()) {
-                    for (ShunyuJohoEntity 収入情報 : 収納情報.get収入情報リスト()) {
-                        if (収入情報.get収入額() != null) {
-                            仮の最古滞納期用_収入額 = 仮の最古滞納期用_収入額.add(収入情報.get収入額());
-                        }
-                    }
-                }
+                仮の最古滞納期用_収入額 = edit仮の最古滞納期用_収入額(収納情報, 仮の最古滞納期用_収入額);
                 Decimal 未納額 = edit未納額(収納情報.get調定共通_介護継承_調定額(), 仮の最古滞納期用_収入額);
                 FlexibleDate 時効起算日 = edit仮の時効起算日(収納情報);
                 RString 滞納区分 = edit滞納区分(edit日期(収納情報.get調定共通_介護継承_納期限()), 時効起算日, 未納額);
 
                 if (滞納期.equals(滞納区分)) {
-                    if (仮の最古滞納期 == null || 仮の最古滞納期.isEmpty()) {
-                        仮の最古滞納期 = edit日期(収納情報.get調定共通_介護継承_納期限());
-                    } else {
-                        if (収納情報.get調定共通_介護継承_納期限() != null && 仮の最古滞納期.isBefore(edit日期(収納情報.get調定共通_介護継承_納期限()))) {
-                            仮の最古滞納期 = edit日期(収納情報.get調定共通_介護継承_納期限());
-                        }
-                    }
+                    仮の最古滞納期 = edit滞納区分が滞納期の仮の最古滞納期(収納情報, 仮の最古滞納期);
                 }
+            }
+        }
+        return 仮の最古滞納期;
+    }
+
+    private Decimal edit仮の最古滞納期用_収入額(ShunoJohoEntity 収納情報, Decimal 仮の最古滞納期用_収入額) {
+        if (収納情報.get収入情報リスト() != null && !収納情報.get収入情報リスト().isEmpty()) {
+            for (ShunyuJohoEntity 収入情報 : 収納情報.get収入情報リスト()) {
+                if (収入情報.get収入額() != null) {
+                    仮の最古滞納期用_収入額 = 仮の最古滞納期用_収入額.add(収入情報.get収入額());
+                }
+            }
+        }
+        return 仮の最古滞納期用_収入額;
+    }
+
+    private FlexibleDate edit滞納区分が滞納期の仮の最古滞納期(ShunoJohoEntity 収納情報, FlexibleDate 仮の最古滞納期) {
+        if (仮の最古滞納期 == null || 仮の最古滞納期.isEmpty()) {
+            仮の最古滞納期 = edit日期(収納情報.get調定共通_介護継承_納期限());
+        } else {
+            if (収納情報.get調定共通_介護継承_納期限() != null && 仮の最古滞納期.isBefore(edit日期(収納情報.get調定共通_介護継承_納期限()))) {
+                仮の最古滞納期 = edit日期(収納情報.get調定共通_介護継承_納期限());
             }
         }
         return 仮の最古滞納期;
