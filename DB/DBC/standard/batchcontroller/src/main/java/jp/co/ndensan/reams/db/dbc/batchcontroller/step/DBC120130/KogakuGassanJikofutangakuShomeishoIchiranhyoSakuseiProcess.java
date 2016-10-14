@@ -114,6 +114,7 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
         識別コードset = new HashSet<>();
         改頁項目リスト = new ArrayList<>();
+        出力順リスト = new ArrayList<>();
         改頁リスト = new ArrayList<>();
         改頁リスト.add(固定改頁項目ID1);
         改頁リスト.add(固定改頁項目ID2);
