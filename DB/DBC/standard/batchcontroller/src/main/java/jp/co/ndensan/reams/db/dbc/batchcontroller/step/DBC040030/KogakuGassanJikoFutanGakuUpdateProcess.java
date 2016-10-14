@@ -54,10 +54,10 @@ public class KogakuGassanJikoFutanGakuUpdateProcess extends BatchProcessBase<Kog
     @Override
     protected void process(KogakuGassanUpdateEntity entity) {
         DbT3070KogakuGassanJikoFutanGakuEntity 高額合算自己負担額 = entity.get高額合算自己負担額();
-        高額合算自己負担額.setSumi_Gokei_JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getSumi_Gokei_JikoFutanGaku());
-        高額合算自己負担額.setSumi_Gokei_70_74JikoFutanGaku(entity.get中間ＤＢ自己負担額データ().getSumi_Gokei_Under70KogakuShikyuGaku());
-        高額合算自己負担額.setSumi_Gokei_Under70KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getSumi_Gokei_Under70KogakuShikyuGaku());
-        高額合算自己負担額.setSumi_Gokei_70_74KogakuShikyuGaku(entity.get中間ＤＢ自己負担額データ().getSumi_Gokei_70_74KogakuShikyuGaku());
+        高額合算自己負担額.setSumi_Gokei_JikoFutanGaku(entity.get中間DBEntity().getSumi_Gokei_JikoFutanGaku());
+        高額合算自己負担額.setSumi_Gokei_70_74JikoFutanGaku(entity.get中間DBEntity().getSumi_Gokei_Under70KogakuShikyuGaku());
+        高額合算自己負担額.setSumi_Gokei_Under70KogakuShikyuGaku(entity.get中間DBEntity().getSumi_Gokei_Under70KogakuShikyuGaku());
+        高額合算自己負担額.setSumi_Gokei_70_74KogakuShikyuGaku(entity.get中間DBEntity().getSumi_Gokei_70_74KogakuShikyuGaku());
         高額合算自己負担額.setShiharaiBasho(edit支払場所(entity));
         高額合算自己負担額.setShikaraiKaishiYMD(edit支払期間開始年月日(entity));
         高額合算自己負担額.setShiharaiShuryoYMD(edit支払期間終了年月日(entity));
@@ -69,42 +69,42 @@ public class KogakuGassanJikoFutanGakuUpdateProcess extends BatchProcessBase<Kog
     }
 
     private RString edit支払場所(KogakuGassanUpdateEntity entity) {
-        if (STRINGTWO.equals(entity.get中間ＤＢ自己負担額データ().getMadoguchi_TaishoshaHanteiCode())) {
+        if (STRINGTWO.equals(entity.get中間DBEntity().getMadoguchi_TaishoshaHanteiCode())) {
             return 高額合算自己負担額補正_支払場所;
         } else {
-            return entity.get中間ＤＢ自己負担額データ().getShiharaiBasho();
+            return entity.get中間DBEntity().getShiharaiBasho();
         }
     }
 
     private FlexibleDate edit支払期間開始年月日(KogakuGassanUpdateEntity entity) {
-        if (STRINGTWO.equals(entity.get中間ＤＢ自己負担額データ().getMadoguchi_TaishoshaHanteiCode())) {
+        if (STRINGTWO.equals(entity.get中間DBEntity().getMadoguchi_TaishoshaHanteiCode())) {
             return new FlexibleDate(processParameter.get開始年月日());
         } else {
-            return new FlexibleDate(entity.get中間ＤＢ自己負担額データ().getShikaraiKaishiYMD().toString());
+            return new FlexibleDate(entity.get中間DBEntity().getShikaraiKaishiYMD().toString());
         }
     }
 
     private FlexibleDate edit支払期間終了年月日(KogakuGassanUpdateEntity entity) {
-        if (STRINGTWO.equals(entity.get中間ＤＢ自己負担額データ().getMadoguchi_TaishoshaHanteiCode())) {
+        if (STRINGTWO.equals(entity.get中間DBEntity().getMadoguchi_TaishoshaHanteiCode())) {
             return new FlexibleDate(processParameter.get終了年月日());
         } else {
-            return new FlexibleDate(entity.get中間ＤＢ自己負担額データ().getShiharaiShuryoYMD().toString());
+            return new FlexibleDate(entity.get中間DBEntity().getShiharaiShuryoYMD().toString());
         }
     }
 
     private RString edit支払期間開始時間(KogakuGassanUpdateEntity entity) {
-        if (STRINGTWO.equals(entity.get中間ＤＢ自己負担額データ().getMadoguchi_TaishoshaHanteiCode())) {
+        if (STRINGTWO.equals(entity.get中間DBEntity().getMadoguchi_TaishoshaHanteiCode())) {
             return processParameter.get開始時間();
         } else {
-            return entity.get中間ＤＢ自己負担額データ().getShiharaiKaishiTime();
+            return entity.get中間DBEntity().getShiharaiKaishiTime();
         }
     }
 
     private RString edit支払期間終了時間(KogakuGassanUpdateEntity entity) {
-        if (STRINGTWO.equals(entity.get中間ＤＢ自己負担額データ().getMadoguchi_TaishoshaHanteiCode())) {
+        if (STRINGTWO.equals(entity.get中間DBEntity().getMadoguchi_TaishoshaHanteiCode())) {
             return processParameter.get終了時間();
         } else {
-            return entity.get中間ＤＢ自己負担額データ().getShiharaiShuryoTime();
+            return entity.get中間DBEntity().getShiharaiShuryoTime();
         }
     }
 

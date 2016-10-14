@@ -151,9 +151,22 @@ public class FutanGendogakuNinteiKakuninIchiranReportSource implements IReportSo
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportItem(name = "title", order = 66)
     public RString title;
+    @ReportItem(name = "yubinNo", order = 67)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", order = 68)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", order = 69)
+    public RString gyoseikuCode;
+    @ReportItem(name = "setaiCode", order = 70)
+    public RString setaiCode;
+    @ReportItem(name = "gaikokujinKanaShimei", order = 71)
+    public RString gaikokujinKanaShimei;
+    @ReportItem(name = "shichosonCode", order = 72)
+    public RString shichosonCode;
     @ReportExpandedInfo(id = "001", code = "0003", name = "被保険者番号")
     public RString hihokenshaNo;
     @ReportPerson(id = "001")
     public RString shikibetsuCode;
+
 // </editor-fold>
 }

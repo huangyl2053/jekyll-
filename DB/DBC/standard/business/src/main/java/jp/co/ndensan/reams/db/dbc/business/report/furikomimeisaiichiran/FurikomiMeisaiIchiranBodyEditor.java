@@ -104,24 +104,20 @@ public class FurikomiMeisaiIchiranBodyEditor implements IFurikomiMeisaiIchiranEd
             source.list5_1 = RString.EMPTY;
         }
 
-        source.ninzu_shokei = doカンマ編集(振込明細一覧Entity.get頁計人数());
-        source.shikyu_shokei = doカンマ編集(振込明細一覧Entity.get振込金額合算());
-
-        if (!振込明細一覧Entity.get要介護認定状態区分コード().isEmpty()) {
+        if (振込明細一覧Entity.is頁計フラグ()) {
+            source.ninzu_shokei = doカンマ編集(振込明細一覧Entity.get頁計人数());
+            source.shikyu_shokei = doカンマ編集(振込明細一覧Entity.get頁計金額());
+        }
+        if (振込明細一覧Entity.is総合計フラグ()) {
             source.yoshien_ninzu_gokei = doカンマ編集(振込明細一覧Entity.get総合計要支援人数());
-            source.yoshien_kingaku_gokei = doカンマ編集(振込明細一覧Entity.get振込金額合算());
-        }
-        if (振込明細一覧Entity.get要介護認定状態区分コード().isEmpty() && 振込明細一覧Entity.is総合事業フラグ()) {
+            source.yoshien_kingaku_gokei = doカンマ編集(振込明細一覧Entity.get総合計要支援金額());
             source.jigyotaisho_ninzu_gokei = doカンマ編集(振込明細一覧Entity.get総合計事業対象人数());
-            source.jigyotaisho_kingaku_gokei = doカンマ編集(振込明細一覧Entity.get振込金額合算());
-        }
-        if (振込明細一覧Entity.get要介護認定状態区分コード().isEmpty() && !振込明細一覧Entity.is総合事業フラグ()) {
+            source.jigyotaisho_kingaku_gokei = doカンマ編集(振込明細一覧Entity.get総合計事業対象金額());
             source.fumei_ninzu_gokei = doカンマ編集(振込明細一覧Entity.get総合計不明人数());
-            source.fumei_kingaku_gokei = doカンマ編集(振込明細一覧Entity.get振込金額合算());
+            source.fumei_kingaku_gokei = doカンマ編集(振込明細一覧Entity.get総合計不明金額());
+            source.ninzu_gokei = doカンマ編集(振込明細一覧Entity.get総合計人数());
+            source.shikyu_gokei = doカンマ編集(振込明細一覧Entity.get総合計金額());
         }
-
-        source.ninzu_gokei = doカンマ編集(振込明細一覧Entity.get総合計人数());
-        source.shikyu_gokei = doカンマ編集(振込明細一覧Entity.get振込金額合算());
 
         return source;
     }

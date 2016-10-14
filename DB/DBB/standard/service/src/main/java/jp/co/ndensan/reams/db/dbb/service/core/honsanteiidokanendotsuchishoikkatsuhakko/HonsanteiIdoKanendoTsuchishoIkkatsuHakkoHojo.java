@@ -146,8 +146,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
      */
     public static HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo createInstance() {
         return InstanceProvider.create(HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo.class);
@@ -158,8 +157,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
      *
      * @param entityList List<HonsanteiTsuchishoTempEntity>
      * @return List<HonsanteiTsuchishoTempResult> 賦課情報リスト
-     * @throws java.lang.reflect.InvocationTargetException
-     * 賦課の情報_更正前後が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException 賦課の情報_更正前後が取得できない場合、Exception
      */
     public List<HonsanteiTsuchishoTempResult> get賦課情報(List<HonsanteiTsuchishoTempEntity> entityList) throws InvocationTargetException {
 
@@ -523,22 +521,49 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
      * 納入通知書の発行するメソッドです。
      *
      * @param 帳票ID ReportId
-     * @param 本算定納入通知書情報 HonSanteiNonyuTsuchiShoJoho
+     * @param 本算定納入通知書情報List List<HonSanteiNonyuTsuchiShoJoho>
      * @param reportManager ReportManager
      */
-    public void publish納入通知書本算定(ReportId 帳票ID, HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, ReportManager reportManager) {
+    public void publish納入通知書本算定(ReportId 帳票ID,
+            List<HonSanteiNonyuTsuchiShoJoho> 本算定納入通知書情報List, ReportManager reportManager) {
         if (ReportIdDBB.DBB100066.getReportId().equals(帳票ID)) {
-            new KanendoHokenryoNonyuTsuchishoKigotoPrintService().print(本算定納入通知書情報, reportManager);
-        } else if (ReportIdDBB.DBB100069.getReportId().equals(帳票ID) || ReportIdDBB.DBB100070.getReportId().equals(帳票ID)) {
-            new KanendoHokenryoNonyuTsuchishoGinfuriPrintService().print(本算定納入通知書情報, reportManager);
-        } else if (ReportIdDBB.DBB100071.getReportId().equals(帳票ID) || ReportIdDBB.DBB100072.getReportId().equals(帳票ID)) {
-            new KanendoNonyuTsuchishoBookFuriKaePrintService().print(本算定納入通知書情報, reportManager);
+            new KanendoHokenryoNonyuTsuchishoKigotoPrintService().print_修正(本算定納入通知書情報List, reportManager);
+        } else if (ReportIdDBB.DBB100069.getReportId().equals(帳票ID)) {
+            new KanendoHokenryoNonyuTsuchishoGinfuriPrintService().print全てページDBB100069_修正(本算定納入通知書情報List, reportManager);
+        } else if (ReportIdDBB.DBB100070.getReportId().equals(帳票ID)) {
+            new KanendoHokenryoNonyuTsuchishoGinfuriPrintService().print全てページDBB100070_修正(本算定納入通知書情報List, reportManager);
+        } else if (ReportIdDBB.DBB100071.getReportId().equals(帳票ID)) {
+            new KanendoNonyuTsuchishoBookFuriKaePrintService().print全てページDBB100071_修正(本算定納入通知書情報List, reportManager);
+        } else if (ReportIdDBB.DBB100072.getReportId().equals(帳票ID)) {
+            new KanendoNonyuTsuchishoBookFuriKaePrintService().print全てページDBB100072_修正(本算定納入通知書情報List, reportManager);
         } else if (ReportIdDBB.DBB100073.getReportId().equals(帳票ID)) {
-            new KanendoNonyuTsuchishoCVSKakukoPrintService().print(本算定納入通知書情報, reportManager);
+            new KanendoNonyuTsuchishoCVSKakukoPrintService().print_修正(本算定納入通知書情報List, reportManager);
         } else if (ReportIdDBB.DBB100075.getReportId().equals(帳票ID)) {
-            new KanendoNonyuTsuchishoCVSMultiPrintService().print(本算定納入通知書情報, reportManager);
+            new KanendoNonyuTsuchishoCVSMultiPrintService().print_修正(本算定納入通知書情報List, reportManager);
         } else if (ReportIdDBB.DBB100076.getReportId().equals(帳票ID)) {
-            new KanendoNonyuTsuchishoCVSKigotoPrintService().print(本算定納入通知書情報, reportManager);
+            new KanendoNonyuTsuchishoCVSKigotoPrintService().print_修正(本算定納入通知書情報List, reportManager);
+        }
+    }
+
+    /**
+     * 納入通知書の発行するメソッドです。
+     *
+     * @param 帳票ID ReportId
+     * @param 本算定納入通知書情報List List<HonSanteiNonyuTsuchiShoJoho>
+     * @param reportManager ReportManager
+     */
+    public void publish納入通知書本算定_山分けする(ReportId 帳票ID,
+            List<HonSanteiNonyuTsuchiShoJoho> 本算定納入通知書情報List, ReportManager reportManager) {
+        if (ReportIdDBB.DBB100071.getReportId().equals(帳票ID)) {
+            new KanendoNonyuTsuchishoBookFuriKaePrintService()
+                    .print全てページDBB100071printDevidedByPage_修正(本算定納入通知書情報List, reportManager);
+        } else if (ReportIdDBB.DBB100072.getReportId().equals(帳票ID)) {
+            new KanendoNonyuTsuchishoBookFuriKaePrintService()
+                    .print全てページDBB100072printDevidedByPage_修正(本算定納入通知書情報List, reportManager);
+        } else if (ReportIdDBB.DBB100073.getReportId().equals(帳票ID)) {
+            new KanendoNonyuTsuchishoCVSKakukoPrintService().devidedByPage_修正(本算定納入通知書情報List, reportManager);
+        } else if (ReportIdDBB.DBB100075.getReportId().equals(帳票ID)) {
+            new KanendoNonyuTsuchishoCVSMultiPrintService().devidedByPage_修正(本算定納入通知書情報List, reportManager);
         }
     }
 

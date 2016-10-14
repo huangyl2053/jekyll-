@@ -7,12 +7,19 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.report.dbc200095.KokuhorenSofuDataErrorIchiranReport;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200095.KokuhorenSofuDataErrorIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.SoufuErrorTblEntity;
+import jp.co.ndensan.reams.db.dbc.entity.report.dbc200095.KokuhorenSofuDataErrorIchiranSource;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -21,11 +28,13 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -39,7 +48,7 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select送付エラー一時");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC110020");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200095");
     private static final RString CSV_FILENAME = new RString("SofuDataErroriList.csv");
     private static final int COUNT_0 = 0;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
@@ -81,11 +90,10 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
     private RString 市町村コード = RString.EMPTY;
     private RString 市町村名称 = RString.EMPTY;
     private RString 作成年月日 = RString.EMPTY;
-//    @BatchWriter
-//    BatchEntityCreatedTempTableWriter 異動一時tableWriter;
-
     private FileSpoolManager spoolManager;
     private CsvListWriter csvListWriter;
+    private BatchReportWriter<KokuhorenSofuDataErrorIchiranSource> batchReportWriter_一覧表;
+    private ReportSourceWriter<KokuhorenSofuDataErrorIchiranSource> reportSourceWriter_一覧表;
 
     @Override
     protected void initialize() {
@@ -97,6 +105,10 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
         作成年月日 = new RString(年月日.toString()
                 + 時刻.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
         連番 = 0;
+        spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
+                UzUDE0831EucAccesslogFileType.Csv);
+        eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
+                CSV_FILENAME);
         super.initialize();
     }
 
@@ -107,10 +119,9 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
 
     @Override
     protected void createWriter() {
-        spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
-                UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
-                CSV_FILENAME);
+        batchReportWriter_一覧表 = BatchReportFactory.createBatchReportWriter(
+                ReportIdDBC.DBC200095.getReportId().value(), SubGyomuCode.DBC介護給付).create();
+        reportSourceWriter_一覧表 = new ReportSourceWriter<>(batchReportWriter_一覧表);
         csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -122,6 +133,9 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
 
     @Override
     protected void afterExecute() {
+        csvListWriter.close();
+        spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+        batchReportWriter_一覧表.close();
     }
 
     /**
@@ -235,6 +249,47 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
     protected void usualProcess(SoufuErrorTblEntity entity) {
         連番++;
         csvListWriter.writeLine(getBodyList(entity, 連番));
+        KokuhorenSofuDataErrorIchiranEntity reportEntity = getReportEntity(entity);
+        KokuhorenSofuDataErrorIchiranReport reprot = new KokuhorenSofuDataErrorIchiranReport(reportEntity, 市町村コード, 市町村名称, 連番);
+        reprot.writeBy(reportSourceWriter_一覧表);
+    }
+
+    private KokuhorenSofuDataErrorIchiranEntity getReportEntity(SoufuErrorTblEntity soufuErrorTblEntity) {
+        KokuhorenSofuDataErrorIchiranEntity entity = new KokuhorenSofuDataErrorIchiranEntity();
+        entity.set被保険者番号(soufuErrorTblEntity.get被保険者番号());
+        entity.set氏名カナ(soufuErrorTblEntity.get氏名カナ());
+        entity.set氏名(soufuErrorTblEntity.get氏名());
+        entity.set資格取得日(soufuErrorTblEntity.get資格取得日());
+        if (soufuErrorTblEntity.get要介護状態区分コード() != null) {
+            entity.set認定要介護度(soufuErrorTblEntity.get要介護状態区分コード().getColumnValue());
+        }
+        entity.set認定申請日(soufuErrorTblEntity.get要介護認定申請日());
+        if (soufuErrorTblEntity.get居宅事業者番号() != null) {
+            entity.set居宅事業者番号(soufuErrorTblEntity.get居宅事業者番号().getColumnValue());
+        }
+        entity.set特定申請日(soufuErrorTblEntity.get特定申請日());
+        entity.set特定開始日(soufuErrorTblEntity.get特定適用開始日());
+        entity.set特定終了日(soufuErrorTblEntity.get特定適用終了日());
+        entity.set社福開始日(soufuErrorTblEntity.get社会福祉適用開始日());
+        entity.set社福終了日(soufuErrorTblEntity.get社会福祉適用終了日());
+        entity.set償還開始日(soufuErrorTblEntity.get償還払化開始日());
+        entity.setエラー情報コード(soufuErrorTblEntity.getエラーコード());
+        entity.setエラー情報内容(soufuErrorTblEntity.getエラー内容());
+        entity.set資格喪失日(soufuErrorTblEntity.get資格喪失日());
+        entity.set認定開始日(soufuErrorTblEntity.get認定開始日());
+        entity.set認定終了日(soufuErrorTblEntity.get認定終了日());
+        entity.set居宅開始日(soufuErrorTblEntity.get居宅適用開始日());
+        entity.set利用申請日(soufuErrorTblEntity.get利用者負担申請日());
+        entity.set利用開始日(soufuErrorTblEntity.get利用者負担適用開始日());
+        entity.set利用終了日(soufuErrorTblEntity.get利用者負担適用終了日());
+        entity.set標準開始日(soufuErrorTblEntity.get標準負担適用開始日());
+        entity.set標準終了日(soufuErrorTblEntity.get標準負担適用終了日());
+        entity.set引下開始日(soufuErrorTblEntity.get給付率引下げ開始日());
+        entity.set作成年月日(soufuErrorTblEntity.get作成年月日());
+        if (soufuErrorTblEntity.get処理年月() != null) {
+            entity.set処理年月(new FlexibleYearMonth(soufuErrorTblEntity.get処理年月().toDateString()));
+        }
+        return entity;
     }
 
 }

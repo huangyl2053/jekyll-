@@ -42,6 +42,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
 
     private static final int NOCOUNT_5 = 5;
     private static final RString 作成 = new RString("作成");
+    private static final RString スラッシュ = new RString("/");
 
     private final TyohyoShutuRyokuYoJukyushaDaichoEntity 帳票出力用受給者台帳;
     private final int index;
@@ -615,8 +616,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
         if (先頭Entity.get証記載保険者名() != null) {
             source.shoHokenshaName = 先頭Entity.get証記載保険者名();
         }
-        source.hihokenshaPage = new RString(String.valueOf(this.page));
-        source.totalPage = new RString(String.valueOf(this.pageMax));
+        source.hihokenshaPage = new RString(String.valueOf(this.page)).concat(スラッシュ).concat(new RString(String.valueOf(this.pageMax)));
         if (先頭Entity.get被保険者番号() != null) {
             source.hihokenshaNo = 先頭Entity.get被保険者番号();
         }

@@ -144,6 +144,7 @@
         "NinteiShinseiJohoTemp"."shoKisaiHokenshaNo" AS 証記載保険者番号,
         "NinteiShinseiJohoTemp"."hihokenshaNo" AS 被保険者番号,
         "NinteiShinseiJohoTemp"."ninteiShinseiYMD" AS 認定申請年月日,
+        "NinteiShinseiJohoTemp"."ninteiShinseiHoreiKubunCode" AS 認定申請区分法令コード,
         "NinteiShinseiJohoTemp"."ninteiShinseiShinseijiKubunCode" AS 認定申請区分申請時コード,
         "NinteiShinseiJohoTemp"."torisageKubunCode" AS 取下区分コード,
         "NinteiShinseiJohoTemp"."hihokenshaKubunCode" AS 被保険者区分コード,

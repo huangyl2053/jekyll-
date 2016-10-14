@@ -664,7 +664,7 @@ public class RiyoshaFutangakuGengakuHandler {
     private List<KeyValueDataSource> getDdlKyusochiKubun() {
         List<KeyValueDataSource> syuSochishaKubun = new ArrayList<>();
         for (KyuSochishaKubun code : KyuSochishaKubun.values()) {
-            KeyValueDataSource data = new KeyValueDataSource(code.getコード(), code.get名称());
+            KeyValueDataSource data = new KeyValueDataSource(code.getコード(), code.get略称());
             syuSochishaKubun.add(data);
         }
         return syuSochishaKubun;
@@ -775,7 +775,7 @@ public class RiyoshaFutangakuGengakuHandler {
             決定区分コード = KetteiKubun.承認しない.getコード();
         }
         boolean is旧措置者有無 = false;
-        if (div.getDdlKyusochiKubun().getSelectedValue().equals(KyuSochishaKubun.旧措置者.get名称())) {
+        if (div.getDdlKyusochiKubun().getSelectedValue().equals(KyuSochishaKubun.旧措置者.get略称())) {
             is旧措置者有無 = true;
         }
 

@@ -3,14 +3,13 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4920001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Sep 05 15:19:40 CST 2016 
+ * Thu Oct 13 17:43:56 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 
 
 /**
@@ -20,13 +19,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
  */
 
 public class DataGridFile_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-21_20-30-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     private RString fileFormat;
     private RString meisho;
     private RString total;
     private RString fileName;
-    private Button sansho;
 
     public DataGridFile_Row() {
         super();
@@ -34,26 +32,22 @@ public class DataGridFile_Row extends DataRow {
         this.meisho = RString.EMPTY;
         this.total = RString.EMPTY;
         this.fileName = RString.EMPTY;
-        this.sansho = new Button();
         this.setOriginalData("fileFormat", fileFormat);
         this.setOriginalData("meisho", meisho);
         this.setOriginalData("total", total);
         this.setOriginalData("fileName", fileName);
-        this.setOriginalData("sansho", sansho);
     }
 
-    public DataGridFile_Row(RString fileFormat, RString meisho, RString total, RString fileName, Button sansho) {
+    public DataGridFile_Row(RString fileFormat, RString meisho, RString total, RString fileName) {
         super();
         this.setOriginalData("fileFormat", fileFormat);
         this.setOriginalData("meisho", meisho);
         this.setOriginalData("total", total);
         this.setOriginalData("fileName", fileName);
-        this.setOriginalData("sansho", sansho);
         this.fileFormat = fileFormat;
         this.meisho = meisho;
         this.total = total;
         this.fileName = fileName;
-        this.sansho = sansho;
     }
 
     public RString getFileFormat() {
@@ -70,10 +64,6 @@ public class DataGridFile_Row extends DataRow {
 
     public RString getFileName() {
         return fileName;
-    }
-
-    public Button getSansho() {
-        return sansho;
     }
 
     public void setFileFormat(RString fileFormat) {
@@ -94,11 +84,6 @@ public class DataGridFile_Row extends DataRow {
     public void setFileName(RString fileName) {
         this.setOriginalData("fileName", fileName);
         this.fileName = fileName;
-    }
-
-    public void setSansho(Button sansho) {
-        this.setOriginalData("sansho", sansho);
-        this.sansho = sansho;
     }
 
     // </editor-fold>

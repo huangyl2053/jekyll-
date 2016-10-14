@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd209011;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd209011.KyufuGengakuHaakuListSakuseiMybatisParameter;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -92,9 +93,11 @@ public class KyufuGengakuHaakuListSakuseiProcessParameter implements IBatchProce
      * ＳＱＬ使用された情報を作成します．
      *
      * @param 出力順 出力順
+     * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoFunction
      * @return ＳＱＬ使用されたパラメター
      */
-    public KyufuGengakuHaakuListSakuseiMybatisParameter toKyufuGengakuHaakuListSakuseiMybatisParameter(RString 出力順) {
-        return new KyufuGengakuHaakuListSakuseiMybatisParameter(出力順);
+    public KyufuGengakuHaakuListSakuseiMybatisParameter toKyufuGengakuHaakuListSakuseiMybatisParameter(RString 出力順,
+            UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam) {
+        return new KyufuGengakuHaakuListSakuseiMybatisParameter(基準日, 出力順, shikibetsutaishoParam);
     }
 }

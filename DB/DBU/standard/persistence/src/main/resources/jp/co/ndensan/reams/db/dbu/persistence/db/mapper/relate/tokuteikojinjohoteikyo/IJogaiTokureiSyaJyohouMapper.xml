@@ -96,13 +96,15 @@
         </if>
     </select>
     
-    <select resultOrdered="true" id="get提供対象者" resultMap="ResultMap_TeikyoKihonJohoEntity"
+    <select resultOrdered="true" id="get提供対象者" resultMap="ResultMap_TeyikyouTayisyousyaJyohouRelateEntity"
     parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.JogaiTokureiSyaJyohouMybatisParameter"
             fetchSize="500">
         SELECT 
+            psm."kojinNo",
             <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.allColumns_TeikyoKihonJoho" />
          FROM "TeikyoKihonJohoNNTemp" AS teikyoKihonJoho
-            <!--TODO  INNER　JOIN			個人番号-->
+        INNER JOIN rgua.${psmShikibetsuTaisho} AS psm
+            ON psm."shikibetsuCode" = teikyoKihonJoho.shikibetsuCode
         <if test = "is異動">    
             WHERE NOT EXISTS(SELECT 1
                               FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" AS dbT7304
@@ -153,7 +155,14 @@
             teikyoKihonJoho."misetteiJiyu10" AS misetteiJiyu10,
             teikyoKihonJoho."kokaiYMD" AS kokaiYMD 
     </sql>
-
+    
+    <resultMap id="ResultMap_TeyikyouTayisyousyaJyohouRelateEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.TeyikyouTayisyousyaJyohouRelateEntity" autoMapping="true">
+        <id property="teikyoKihonJohoNNTempEntity.hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="teikyoKihonJohoNNTempEntity.inputShikibetsuNo" column="dataSetKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kojinNo" column="kojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KojinNoTypeHandler"/>
+        <association property="teikyoKihonJohoNNTempEntity" resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.ResultMap_TeikyoKihonJohoNNTempEntity"/>
+    </resultMap>
+    
     <resultMap id="ResultMap_TeikyoKihonJohoEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity" autoMapping="true">
         <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="dataSetKey" column="dataSetKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

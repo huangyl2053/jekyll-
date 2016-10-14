@@ -159,71 +159,106 @@ public class GemmenJisshiJokyoMainHandler {
     }
 
     private void 宛名抽出条件復元(BatchParameterMap restoreBatchParameterMap) {
-        RString 年齢層抽出方法 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChushutsu_Kubun"));
-        div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set年齢層抽出方法(年齢層抽出方法);
-        Decimal 宛名抽出年齢開始 = restoreBatchParameterMap.getParameterValue(Decimal.class, new RString("psmChushutsuAge_Start"));
-        if (宛名抽出年齢開始 != null) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set年齢開始(宛名抽出年齢開始);
-        }
-        Decimal 宛名抽出年齢終了 = restoreBatchParameterMap.getParameterValue(Decimal.class, new RString("psmChushutsuAge_End"));
-        if (宛名抽出年齢終了 != null) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set年齢終了(宛名抽出年齢終了);
-        }
-        RDate 宛名抽出生年月日開始 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("psmSeinengappiYMD_Start"));
-        if (宛名抽出生年月日開始 != null) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set生年月日開始(宛名抽出生年月日開始);
-        }
-        RDate 宛名抽出生年月日終了 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("psmSeinengappiYMD_End"));
-        if (宛名抽出生年月日終了 != null) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set生年月日終了(宛名抽出生年月日終了);
-        }
-        RDate 年齢基準日 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("psmAgeKijunni"));
-        if (年齢基準日 != null) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set年齢基準日(年齢基準日);
-        }
-        div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set保険者();
-        RString 地区区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku_Kubun"));
-        div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区(地区区分);
+        AtenaSelectBatchParameter 宛名抽出条件 = restoreBatchParameterMap.getParameterValue(AtenaSelectBatchParameter.class, new RString("宛名抽出条件"));
+        if (宛名抽出条件 != null) {
+            if (宛名抽出条件.getAgeSelectKijun() != null) {
+                RString 年齢層抽出方法 = 宛名抽出条件.getAgeSelectKijun().getコード();
+                div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set年齢層抽出方法(年齢層抽出方法);
+            }
+            if (宛名抽出条件.getNenreiRange() != null) {
+                if (宛名抽出条件.getNenreiRange().getFrom() != null) {
+                    Decimal 宛名抽出年齢開始 = 宛名抽出条件.getNenreiRange().getFrom();
+                    div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set年齢開始(宛名抽出年齢開始);
+                }
+                if (宛名抽出条件.getNenreiRange().getTo() != null) {
+                    Decimal 宛名抽出年齢終了 = 宛名抽出条件.getNenreiRange().getTo();
+                    div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set年齢終了(宛名抽出年齢終了);
+                }
+            }
+            if (宛名抽出条件.getSeinengappiRange() != null) {
+                if (宛名抽出条件.getSeinengappiRange().getFrom() != null) {
+                    RDate 宛名抽出生年月日開始 = 宛名抽出条件.getSeinengappiRange().getFrom();
+                    div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set生年月日開始(宛名抽出生年月日開始);
+                }
+                if (宛名抽出条件.getSeinengappiRange().getTo() != null) {
+                    RDate 宛名抽出生年月日終了 = 宛名抽出条件.getSeinengappiRange().getTo();
+                    div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set生年月日終了(宛名抽出生年月日終了);
+                }
+            }
+            if (宛名抽出条件.getNenreiKijunbi() != null) {
+                div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set年齢基準日(宛名抽出条件.getNenreiKijunbi());
+            }
+            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set保険者();
+            if (宛名抽出条件.getChiku_Kubun() != null) {
+                RString 地区区分 = 宛名抽出条件.getChiku_Kubun().getコード();
+                div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区(地区区分);
+            }
 
-        RString 町域From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmJusho_From"));
-        if (!RString.isNullOrEmpty(町域From)) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set住所開始(new ChoikiCode(町域From));
+            RString 町域From = 宛名抽出条件.getJusho_From();
+            if (!RString.isNullOrEmpty(町域From)) {
+                div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set住所開始(new ChoikiCode(町域From));
+            }
+            RString 町域To = 宛名抽出条件.getJusho_To();
+            if (!RString.isNullOrEmpty(町域To)) {
+                div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set住所終了(new ChoikiCode(町域To));
+            }
+            RString 行政区From = 宛名抽出条件.getGyoseiku_From();
+            if (!RString.isNullOrEmpty(行政区From)) {
+                div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set行政区開始(new GyoseikuCode(行政区From));
+            }
+            RString 行政区To = 宛名抽出条件.getGyoseiku_To();
+            if (!RString.isNullOrEmpty(行政区To)) {
+                div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set行政区終了(new GyoseikuCode(行政区To));
+            }
+            RString 地区１From = 宛名抽出条件.getChiku1_From();
+            if (!RString.isNullOrEmpty(地区１From)) {
+                div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区１開始(new ChikuCode(地区１From));
+            }
+            RString 地区１To = 宛名抽出条件.getChiku1_To();
+            if (!RString.isNullOrEmpty(地区１To)) {
+                div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区１終了(new ChikuCode(地区１To));
+            }
+            RString 地区２From = 宛名抽出条件.getChiku2_From();
+            if (!RString.isNullOrEmpty(地区２From)) {
+                div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区２開始(new ChikuCode(地区２From));
+            }
+            RString 地区２To = 宛名抽出条件.getChiku2_To();
+            if (!RString.isNullOrEmpty(地区２To)) {
+                div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区２終了(new ChikuCode(地区２To));
+            }
+            RString 地区３From = 宛名抽出条件.getChiku3_From();
+            if (!RString.isNullOrEmpty(地区３From)) {
+                div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区３開始(new ChikuCode(地区３From));
+            }
+            RString 地区３To = 宛名抽出条件.getChiku3_To();
+            if (!RString.isNullOrEmpty(地区３To)) {
+                div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区３終了(new ChikuCode(地区３To));
+            }
         }
-        RString 町域To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmJusho_To"));
-        if (!RString.isNullOrEmpty(町域To)) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set住所終了(new ChoikiCode(町域To));
-        }
-        RString 行政区From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmGyoseiku_From"));
-        if (!RString.isNullOrEmpty(行政区From)) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set行政区開始(new GyoseikuCode(行政区From));
-        }
-        RString 行政区To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmGyoseiku_To"));
-        if (!RString.isNullOrEmpty(行政区To)) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set行政区終了(new GyoseikuCode(行政区To));
-        }
-        RString 地区１From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku1_From"));
-        if (!RString.isNullOrEmpty(地区１From)) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区１開始(new ChikuCode(地区１From));
-        }
-        RString 地区１To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku1_To"));
-        if (!RString.isNullOrEmpty(地区１To)) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区１終了(new ChikuCode(地区１To));
-        }
-        RString 地区２From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku2_From"));
-        if (!RString.isNullOrEmpty(地区２From)) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区２開始(new ChikuCode(地区２From));
-        }
-        RString 地区２To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku2_To"));
-        if (!RString.isNullOrEmpty(地区２To)) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区２終了(new ChikuCode(地区２To));
-        }
-        RString 地区３From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku3_From"));
-        if (!RString.isNullOrEmpty(地区３From)) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区３開始(new ChikuCode(地区３From));
-        }
-        RString 地区３To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku3_To"));
-        if (!RString.isNullOrEmpty(地区３To)) {
-            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set地区３終了(new ChikuCode(地区３To));
-        }
+
+//        RString 年齢層抽出方法 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChushutsu_Kubun"));
+//        if (年齢層抽出方法 != null) {
+//            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set年齢層抽出方法(年齢層抽出方法);
+//        }
+//        Decimal 宛名抽出年齢開始 = restoreBatchParameterMap.getParameterValue(Decimal.class, new RString("psmChushutsuAge_Start"));
+//        if (宛名抽出年齢開始 != null) {
+//            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set年齢開始(宛名抽出年齢開始);
+//        }
+//        Decimal 宛名抽出年齢終了 = restoreBatchParameterMap.getParameterValue(Decimal.class, new RString("psmChushutsuAge_End"));
+//        if (宛名抽出年齢終了 != null) {
+//            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set年齢終了(宛名抽出年齢終了);
+//        }
+//        RDate 宛名抽出生年月日開始 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("psmSeinengappiYMD_Start"));
+//        if (宛名抽出生年月日開始 != null) {
+//            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set生年月日開始(宛名抽出生年月日開始);
+//        }
+//        RDate 宛名抽出生年月日終了 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("psmSeinengappiYMD_End"));
+//        if (宛名抽出生年月日終了 != null) {
+//            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set生年月日終了(宛名抽出生年月日終了);
+//        }
+//        RDate 年齢基準日 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("psmAgeKijunni"));
+//        if (年齢基準日 != null) {
+//            div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().set年齢基準日(年齢基準日);
+//        }
     }
 }

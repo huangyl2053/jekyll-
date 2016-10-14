@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020003;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209011.DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020003.ChishutsuJokenParameterDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020003.DBD2020003ValidationHandler;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -35,6 +37,11 @@ public class ChishutsuJokenParameter {
         div.getChkJukyuNinteiShinseityusha().setDisabled(true);
         div.getChkJukyuNinteibiChushutsu().setDisabled(true);
         div.getChkNinteiYukoShuryobiChushutsu().setDisabled(true);
+        div.getTxtJukyuNinteibiKaishi().setDisabled(true);
+        div.getTxtJukyuNinteibiShuryo().setDisabled(true);
+        div.getTxtNinteiYukoShuryobiKaishi().setDisabled(true);
+        div.getTxtNinteiYukoShuryobiShuryo().setDisabled(true);
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200008.getReportId());
         return ResponseData.of(div).respond();
     }
 
@@ -46,7 +53,7 @@ public class ChishutsuJokenParameter {
      */
     public ResponseData<ChishutsuJokenParameterDiv> onClick_radJikoKisanbiTorokushaNomi(ChishutsuJokenParameterDiv div) {
         div.getRadJikoKisanbiTorokushaIgai().clearSelectedItem();
-        div.getRadHihokenshaZenin().setSelectedKey(CHECKED);
+        div.getRadJikoKisanbiTorokushaNomi().setSelectedKey(CHECKED);
         return ResponseData.of(div).respond();
     }
 
@@ -58,7 +65,7 @@ public class ChishutsuJokenParameter {
      */
     public ResponseData<ChishutsuJokenParameterDiv> onClick_radJikoKisanbiTorokushaIgai(ChishutsuJokenParameterDiv div) {
         div.getRadJikoKisanbiTorokushaNomi().clearSelectedItem();
-        div.getRadHihokenshaZenin().setSelectedKey(CHECKED);
+        div.getRadJikoKisanbiTorokushaIgai().setSelectedKey(CHECKED);
         div.getRadHihokenshaZenin().setDisabled(false);
         div.getRadHihokenshaIgai().setDisabled(false);
         return ResponseData.of(div).respond();
@@ -76,7 +83,10 @@ public class ChishutsuJokenParameter {
         div.getChkJukyuNinteiShinseityusha().setDisabled(true);
         div.getChkJukyuNinteibiChushutsu().setDisabled(true);
         div.getChkNinteiYukoShuryobiChushutsu().setDisabled(true);
-
+        div.getTxtJukyuNinteibiKaishi().setDisabled(true);
+        div.getTxtJukyuNinteibiShuryo().setDisabled(true);
+        div.getTxtNinteiYukoShuryobiKaishi().setDisabled(true);
+        div.getTxtNinteiYukoShuryobiShuryo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -92,6 +102,21 @@ public class ChishutsuJokenParameter {
         div.getChkJukyuNinteiShinseityusha().setDisabled(false);
         div.getChkJukyuNinteibiChushutsu().setDisabled(false);
         div.getChkNinteiYukoShuryobiChushutsu().setDisabled(false);
+
+        if (div.getChkJukyuNinteibiChushutsu().getSelectedKeys() != null && !div.getChkJukyuNinteibiChushutsu().getSelectedKeys().isEmpty()) {
+            div.getTxtJukyuNinteibiKaishi().setDisabled(false);
+            div.getTxtJukyuNinteibiShuryo().setDisabled(false);
+        } else {
+            div.getTxtJukyuNinteibiKaishi().setDisabled(true);
+            div.getTxtJukyuNinteibiShuryo().setDisabled(true);
+        }
+        if (div.getChkNinteiYukoShuryobiChushutsu().getSelectedKeys() != null && !div.getChkNinteiYukoShuryobiChushutsu().getSelectedKeys().isEmpty()) {
+            div.getTxtNinteiYukoShuryobiKaishi().setDisabled(false);
+            div.getTxtNinteiYukoShuryobiShuryo().setDisabled(false);
+        } else {
+            div.getTxtNinteiYukoShuryobiKaishi().setDisabled(true);
+            div.getTxtNinteiYukoShuryobiShuryo().setDisabled(true);
+        }
         return ResponseData.of(div).respond();
     }
 

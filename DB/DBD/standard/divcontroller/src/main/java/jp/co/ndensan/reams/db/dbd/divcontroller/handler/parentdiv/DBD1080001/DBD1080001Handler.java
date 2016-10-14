@@ -113,11 +113,17 @@ public class DBD1080001Handler {
             RString 旧措置区分2 = taishoshaHaakuMainDiv.getParameters().getDdlKyushochishaKubun2().getSelectedValue();
             parameter.set旧措置区分(旧措置区分2);
         }
+        RString 施設入所区分;
+        if (減免減額種類.get名称().equals(new RString("負担限度額認定"))) {
+            施設入所区分 = taishoshaHaakuMainDiv.getParameters().getRadShisetsuNyushoKubun1().getSelectedValue();
+        } else {
+            施設入所区分 = taishoshaHaakuMainDiv.getParameters().getDdlShinsetsuNyushoKubun2().getSelectedValue();
+        }
         boolean 市町村民税非課税世帯 = taishoshaHaakuMainDiv.getParameters().getChkIsHikazeiSetai().getSelectedValues().contains(new RString("市町村民税非課税世帯"));
         boolean 市町村民税本人非課税者 = taishoshaHaakuMainDiv.getParameters().getChkIsHikazei().getSelectedValues().contains(new RString("市町村民税本人非課税者"));
         boolean 老齢福祉年金受給者 = taishoshaHaakuMainDiv.getParameters().getChkIsRoreiJukyusha().getSelectedValues().contains(new RString("老齢福祉年金受給者"));
         boolean 生活保護受給者 = taishoshaHaakuMainDiv.getParameters().getChkIsSeihoJukyusha().getSelectedValues().contains(new RString("生活保護受給者"));
-        RString 施設入所区分 = taishoshaHaakuMainDiv.getParameters().getDdlKyushochishaKubun1().getSelectedValue();
+
         RString 利用者負担段階 = RiyoshaFutanDankaiHanni.nameToValue(taishoshaHaakuMainDiv.getParameters().getDdlRiyoshaFutanDankai().getSelectedValue()).getコード();
         FlexibleDate 基準日 = taishoshaHaakuMainDiv.getParameters().getTxtKijunYMD().getValue();
         FlexibleYear 所得年度 = taishoshaHaakuMainDiv.getParameters().getTxtShotokuNendo().getDomain();

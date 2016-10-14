@@ -38,6 +38,7 @@ public class NinteiShinseiTorokuHandler {
 
     private final NinteiShinseiTorokuDiv div;
     private static final int ZERO_10 = 10;
+    private static final RString ZERO_6 = new RString("000000");
 
     /**
      * コンストラクタです。
@@ -101,8 +102,11 @@ public class NinteiShinseiTorokuHandler {
             div.getCcdAtenaInfo().setShoriType(new RString("2"));
             div.getCcdAtenaInfo().initialize();
         }
-        div.getCcdShikakuInfo().initialize(市町村コード.value(), business.get被保険者番号().value().padZeroToLeft(ZERO_10));
-
+        if (市町村コード.isEmpty()) {
+            div.getCcdShikakuInfo().initialize(ZERO_6, business.get被保険者番号().value().padZeroToLeft(ZERO_10));
+        } else {
+            div.getCcdShikakuInfo().initialize(市町村コード.value(), business.get被保険者番号().value().padZeroToLeft(ZERO_10));
+        }
         div.getCcdKaigoNinteiShinseiKihon().initialize();
         if (!RString.isNullOrEmpty(business.get支所コード())) {
             div.getCcdKaigoNinteiShinseiKihon().setShisho(new ShishoCode(business.get支所コード()));

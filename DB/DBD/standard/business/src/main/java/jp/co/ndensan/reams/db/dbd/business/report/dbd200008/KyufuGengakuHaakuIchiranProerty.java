@@ -34,31 +34,31 @@ public class KyufuGengakuHaakuIchiranProerty extends ReportPropertyBase<KyufuGen
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString(""), new RString("\"tmp_yubinNo\"")),
+        郵便番号(new RString("0001"), new RString(""), new RString("\"ShikibetsuTaisho_yubinNo\"")),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString(""), new RString("\"\"")), //QA 103476
+        町域コード(new RString("0002"), new RString(""), new RString("\"ShikibetsuTaisho_choikiCode\"")),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString(""), new RString("\"tmp_gyoseikuCode\"")),
+        行政区コード(new RString("0004"), new RString(""), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
         /**
          * 世帯コード
          */
-        世帯コード(new RString("0008"), new RString(""), new RString("\"tmp_setaiCode\"")),
+        世帯コード(new RString("0008"), new RString(""), new RString("\"ShikibetsuTaisho_setaiCode\"")),
         /**
          * 識別コード
          */
-        識別コード(new RString("0009"), new RString(""), new RString("\"tmp_shikibetsuCode\"")),
+        識別コード(new RString("0009"), new RString(""), new RString("\"ShikibetsuTaisho_shikibetsuCode\"")),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"tmp_hihokenshaShimeiKana\"")),
+        氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"ShikibetsuTaisho_kanaMeisho\"")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString(""), new RString("\"\"")), //QA 103476
+        市町村コード(new RString("0016"), new RString(""), new RString("\"dbT1001HihokenshaDaicho_shichosonCode\"")),
         /**
          * 被保険者番号
          */

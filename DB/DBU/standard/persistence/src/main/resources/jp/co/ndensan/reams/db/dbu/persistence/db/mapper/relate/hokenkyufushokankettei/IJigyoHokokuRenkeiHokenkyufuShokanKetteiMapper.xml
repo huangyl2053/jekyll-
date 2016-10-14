@@ -390,9 +390,9 @@
                 , A."serviceTeikyoYM"
                 , A."kyufuJissekiKubunCode"
                 , A."jigyoshoNo" AS jigyoshaNo
-                , A."toshiNo"
+                , A."toshiNo" AS seiriNo
                 , '' AS meisaiNo
-                , A."seiriNo"
+                , A."seiriNo" AS motoSeiriNo
                 , '' AS shinseiKanrisikyuKubunCode
                 , A."umareYMD"
                 , A."yoKaigoJotaiKubunCode"
@@ -407,7 +407,7 @@
                 , 0 AS tokubetsuTeikyoTanka
                 , 0 AS atoShokujiTeikyoSeikyuGaku
                 , '' AS shokujiHiyosikyuKubunCode
-                , 0 AS shokujiHiyosikyuKubun
+                , 0 AS shokujiHiyosikyuGaku
                 , CASE 
                     WHEN B."hiHokenshaNo" IS NOT NULL 
                     THEN B."serviceSyuruiCode" 
@@ -415,13 +415,13 @@
                     THEN SUBSTRING(C."serviceCode", 0, 2) 
                     ELSE NULL 
                     END AS serviceSyuruiCode
-                , B."hokenTanisuTani"
-                , B."hokenSeikyugaku"
-                , B."hokenRiyoshaFutangaku"
-                , B."atoHokenTanisuTotal"
-                , B."atoHokenSeikyugaku"
-                , B."atoHokenDekidakaTanisuTotal"
-                , B."atoHokenDekidakaSeikyugaku"
+                , B."hokenTanisuTani" AS seikyuTensuTanka
+                , B."hokenSeikyugaku" AS seikyugaku
+                , B."hokenRiyoshaFutangaku" AS riyoshaFutangaku
+                , B."atoHokenTanisuTotal" AS atoTensuGokei
+                , B."atoHokenSeikyugaku" AS atoHokenSeikyugaku
+                , B."atoHokenDekidakaTanisuTotal" AS atoDekidakaTensuGokei
+                , B."atoHokenDekidakaSeikyugaku" AS atoDekidakaSeikyuGaku
                 , '' AS shukeiShikyukubunCode
                 , 0 AS shukeiShikyuKingaku
                 , 0 AS zougenten
@@ -471,12 +471,10 @@
                 AND A."jigyoshoNo" = C."jigyoshoNo" 
                 AND A."seiriNo" = C."seiriNo" 
             WHERE
-                A."inputShikibetsuNo" NOT LIKE '8%' 
-                AND A."inputShikibetsuNo" NOT LIKE '1%' 
-                AND A."inputShikibetsuNo" NOT LIKE '6%' 
-                AND A."inputShikibetsuNo" NOT LIKE '7%' 
-                AND A."inputShikibetsuNo" NOT LIKE 'P%' 
-                AND A."inputShikibetsuNo" NOT LIKE 'R%' 
+                A."inputShikibetsuNo" NOT LIKE '816%' 
+                AND A."inputShikibetsuNo" NOT LIKE '71P%' 
+                AND A."inputShikibetsuNo" NOT LIKE '817%' 
+                AND A."inputShikibetsuNo" NOT LIKE '71R%' 
                 AND A."kyufuJissekiKubunCode" = '2' 
                 AND ( 
                   ( 
@@ -516,9 +514,9 @@
                 , A."serviceTeikyoYM"
                 , A."kyufuJissekiKubunCode"
                 , A."jigyoshoNo" AS jigyoshaNo
-                , A."toshiNo"
+                , A."toshiNo" AS seiriNo
                 , '' AS meisaiNo
-                , A."seiriNo"
+                , A."seiriNo" AS motoSeiriNo
                 , '' AS shinseiKanrisikyuKubunCode
                 , A."umareYMD"
                 , A."yoKaigoJotaiKubunCode"
@@ -533,7 +531,7 @@
                 , 0 AS tokubetsuTeikyoTanka
                 , 0 AS atoShokujiTeikyoSeikyuGaku
                 , '' AS shokujiHiyosikyuKubunCode
-                , 0 AS shokujiHiyosikyuKubun
+                , 0 AS shokujiHiyosikyuGaku
                 , CASE 
                     WHEN B."hiHokenshaNo" IS NOT NULL 
                     THEN B."serviceSyuruiCode" 
@@ -541,13 +539,13 @@
                     THEN SUBSTRING(C."serviceCode", 0, 2) 
                     ELSE NULL 
                     END AS serviceSyuruiCode
-                , B."hokenTanisuTani"
-                , B."hokenSeikyugaku"
-                , B."hokenRiyoshaFutangaku"
-                , B."atoHokenTanisuTotal"
-                , B."atoHokenSeikyugaku"
-                , B."atoHokenDekidakaTanisuTotal"
-                , B."atoHokenDekidakaSeikyugaku"
+                , B."hokenTanisuTani" AS seikyuTensuTanka
+                , B."hokenSeikyugaku" AS seikyugaku
+                , B."hokenRiyoshaFutangaku" AS riyoshaFutangaku
+                , B."atoHokenTanisuTotal" AS atoTensuGokei
+                , B."atoHokenSeikyugaku" AS atoHokenSeikyugaku
+                , B."atoHokenDekidakaTanisuTotal" AS atoDekidakaTensuGokei
+                , B."atoHokenDekidakaSeikyugaku" AS atoDekidakaSeikyuGaku
                 , '' AS shukeiShikyukubunCode
                 , 0 AS shukeiShikyuKingaku
                 , 0 AS zougenten
@@ -603,12 +601,10 @@
                 AND A."jigyoshoNo" = C."jigyoshoNo" 
                 AND A."seiriNo" = C."seiriNo" 
             WHERE
-                A."inputShikibetsuNo" NOT LIKE '8%' 
-                AND A."inputShikibetsuNo" NOT LIKE '1%' 
-                AND A."inputShikibetsuNo" NOT LIKE '6%' 
-                AND A."inputShikibetsuNo" NOT LIKE '7%' 
-                AND A."inputShikibetsuNo" NOT LIKE 'P%' 
-                AND A."inputShikibetsuNo" NOT LIKE 'R%' 
+                A."inputShikibetsuNo" NOT LIKE '816%' 
+                AND A."inputShikibetsuNo" NOT LIKE '71P%' 
+                AND A."inputShikibetsuNo" NOT LIKE '817%' 
+                AND A."inputShikibetsuNo" NOT LIKE '71R%'  
                 AND A."kyufuJissekiKubunCode" = '2' 
                 AND (B."hiHokenshaNo" IS NOT NULL 
                      OR (C."hiHokenshaNo" IS NOT NULL 

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020.KyufuhiTsuchishoInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020.KyufuhiTsuchishoKouikiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020.KyufuhiTsuchishoReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020.KyufuhiTsuchishoReportDBC100041Process;
@@ -44,7 +43,6 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
     private static final String CSVファイル取込 = "readCsvFile";
     private static final String 処理結果リスト作成 = "doShoriKekkaListSakusei";
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
-    private static final String 介護給付費福祉用具貸与品目一時TBL作成 = "doShoriKekkaListSakusei";
     private static final String 介護保険給付費通知書作成 = "dbc100041";
     private static final String 被保険者番号変換単一 = "hiHokenshaNoHenkan";
     private static final String 被保険者番号変換広域 = "hiHokenshaNoKouiki";
@@ -53,6 +51,7 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
     private static final String 給付費通知発行一覧表 = "dbc200044";
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
+    private boolean flag = true;
     private RString csvFullPath;
     private boolean isFirst;
     private boolean isLast;
@@ -73,24 +72,23 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
             isFirst = (0 == i);
             isLast = ((returnEntity.getFileNameList().size() - 1) == i);
             executeStep(CSVファイル取込);
-        }
-        if (!getResult(Boolean.class, new RString(CSVファイル取込), KyufuhiTsuchishoReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY)) {
-            executeStep(処理結果リスト作成);
-        } else {
-            if (new RString("1").equals(DbBusinessConfig
-                    .get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
-                保険者構成();
+            if (flag) {
+                flag = getResult(Boolean.class, new RString(CSVファイル取込),
+                        KyufuhiTsuchishoReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
+            } else {
+                executeStep(処理結果リスト作成);
+                executeStep(取込済ファイル削除);
             }
-            executeStep(処理結果リスト作成);
-            executeStep(介護給付費福祉用具貸与品目一時TBL作成);
-            executeStep(介護保険給付費通知書作成);
-            executeStep(介護保険給付費通知書_ｼｰﾗﾀｲﾌﾟ);
-            executeStep(介護保険給付費通知書_福祉用具貸与品目);
-            executeStep(給付費通知発行一覧表);
         }
-        if (null != returnEntity) {
-            executeStep(取込済ファイル削除);
+        RDate now = RDate.getNowDate();
+        if (new RString("1").equals(DbBusinessConfig
+                .get(ConfigNameDBU.合併情報管理_合併情報区分, now, SubGyomuCode.DBU介護統計報告))) {
+            保険者構成();
         }
+        executeStep(介護保険給付費通知書作成);
+        executeStep(介護保険給付費通知書_ｼｰﾗﾀｲﾌﾟ);
+        executeStep(介護保険給付費通知書_福祉用具貸与品目);
+        executeStep(給付費通知発行一覧表);
     }
 
     private void 保険者構成() {
@@ -117,7 +115,7 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
     /**
      * CSVファイル取込です。
      *
-     * @return KyufuhiTsuchishoReadCsvFileProcess
+     * @return KyufukanrihyoReadCsvFileProcess
      */
     @Step(CSVファイル取込)
     protected IBatchFlowCommand callReadCsvFileProcess() {
@@ -168,21 +166,11 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
     /**
      * 被保険者番号変換です。
      *
-     * @return KyufuhiTsuchishoTanitsuProcess
+     * @return KyufuhiTsuchishoKouikiProcess
      */
     @Step(被保険者番号変換広域)
     protected IBatchFlowCommand call広域Process() {
         return loopBatch(KyufuhiTsuchishoKouikiProcess.class).define();
-    }
-
-    /**
-     * 介護給付費福祉用具貸与品目一時TBL作成です。
-     *
-     * @return KyufuhiTsuchishoInsertProcess
-     */
-    @Step(介護給付費福祉用具貸与品目一時TBL作成)
-    protected IBatchFlowCommand 一時TBLProcess() {
-        return loopBatch(KyufuhiTsuchishoInsertProcess.class).define();
     }
 
     /**

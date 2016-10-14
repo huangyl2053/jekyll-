@@ -177,7 +177,7 @@ public class DbWT111AKyufuJissekiH11CsvEntity {
     private int 後_公費１_緊急時施設療養費請求額;
     @CsvField(order = 750, name = "後_公費１_特定診療費請求額")
     private int 後_公費１_特定診療費請求額;
-    @CsvField(order = 750, name = "後_公費１_特定入所者介護サービス費等請求額")
+    @CsvField(order = 760, name = "後_公費１_特定入所者介護サービス費等請求額")
     private int 後_公費１_特定入所者介護サービス費等請求額;
     @CsvField(order = 770, name = "後_公費２_サービス単位数")
     private int 後_公費２_サービス単位数;

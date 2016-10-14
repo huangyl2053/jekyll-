@@ -5,15 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1230011;
 
-import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.AuthorityItemResult;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011.KogakuGassanShikyuKetteiHoseiPanelDiv;
-import jp.co.ndensan.reams.db.dbc.service.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHosei;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
@@ -37,8 +32,6 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
 
     private final KogakuGassanShikyuKetteiHoseiPanelDiv div;
     private static final int NUM_TWENTY = 20;
-    private static final RString ONE = new RString("1");
-    private static final RString TWO = new RString("2");
     private static final RString TWENTY = new RString("20");
     private static final RString 年度 = new RString("年度");
     private static final RString 対象年度 = new RString("対象年度");
@@ -60,13 +53,10 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
     private static final RString 平成20年度以降の年度 = new RString("平成20年度以降の年度");
     private static final RDate 定値_年度年度1 = new RDate("2008");
     private static final RDate 定値_年度年度2 = new RDate("2009");
+    private static final RString 定値_日付2 = new RString("0801");
+    private static final RString 定値_日付3 = new RString("0731");
     private static final RDate 定値_開始計算対象期間1 = new RDate("20080401");
     private static final RDate 定値_終了計算対象期間1 = new RDate("20090731");
-    private static final RDate 定値_開始計算対象期間2 = new RDate("20090801");
-    private static final RDate 定値_終了計算対象期間2 = new RDate("20100731");
-    private static final RString 定値導入形態コード1 = new RString("111");
-    private static final RString 定値導入形態コード2 = new RString("112");
-    private static final RString 定値導入形態コード3 = new RString("120");
 
     /**
      * 初期化
@@ -388,22 +378,21 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
         if (div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtTaishoNendo().getValue() != null
                 && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getFromValue() != null
                 && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getToValue() != null) {
-            boolean flag1 = !div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().
-                    getFromValue().isBeforeOrEquals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                            getTxtTaishoNendo().getValue()) || !div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                    getTxtTaishoNendo().getValue().isBeforeOrEquals(
-                            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getToValue());
-            boolean flag2 = 定値_年度年度1.getYear().equals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                    getTxtTaishoNendo().getValue().getYear()) && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                    getTxtKeisanYMD().getFromValue().isBefore(定値_開始計算対象期間1)
-                    && 定値_終了計算対象期間1.isBefore(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                            getTxtKeisanYMD().getToValue());
-            boolean flag3 = 定値_年度年度2.getYear().equals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
-                    getTxtTaishoNendo().getValue().getYear()) && div.
-                    getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().
-                    getFromValue().isBefore(定値_開始計算対象期間2) && 定値_終了計算対象期間2.isBefore(
-                            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getToValue());
-            if (flag1 || flag2 || flag3) {
+            boolean flag1 = 定値_年度年度1.getYear().equals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtTaishoNendo().getValue().getYear()) && 定値_開始計算対象期間1.isBeforeOrEquals(
+                            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().getFromValue())
+                    && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtKeisanYMD().getToValue().isBeforeOrEquals(定値_終了計算対象期間1);
+            RDate 対象年度日付 = new RDate(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtTaishoNendo().getValue().getYear().toDateString().concat(定値_日付2).toString());
+            RDate 翌対象年度日付 = new RDate(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtTaishoNendo().getValue().getYear().plusYear(1).toDateString().concat(定値_日付3).toString());
+            boolean flag2 = 定値_年度年度2.getYear().isBeforeOrEquals(div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtTaishoNendo().getValue().getYear()) && 対象年度日付.isBeforeOrEquals(div.
+                            getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKeisanYMD().
+                            getFromValue()) && div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
+                    getTxtKeisanYMD().getToValue().isBeforeOrEquals(翌対象年度日付);
+            if (flag1 || flag2) {
                 validPairs.add(new ValidationMessageControlPair(
                         new KogakuGassanShikyuKetteiHoseiPanelValidationHandler.IdocheckMessages(
                                 UrErrorMessages.項目に対する制約, 計算期間.toString(), 対象年度内.toString())));
@@ -448,32 +437,6 @@ public class KogakuGassanShikyuKetteiHoseiPanelValidationHandler {
                             UrErrorMessages.入力値が不正_追加メッセージあり, 日付の指定に誤りがあります.toString())));
         }
         return validPairs;
-    }
-
-    private boolean isCheck証記載保険者番号() {
-        boolean flag = false;
-        RString wk保険者構成 = RString.EMPTY;
-        ShichosonSecurityJoho shseJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (shseJoho != null && (定値導入形態コード2.equals(shseJoho.get導入形態コード().value())
-                || 定値導入形態コード3.equals(shseJoho.get導入形態コード().value()))) {
-            wk保険者構成 = ONE;
-        } else if (shseJoho != null && 定値導入形態コード1.equals(shseJoho.get導入形態コード().value())) {
-            wk保険者構成 = TWO;
-        }
-        RString ログインユーザID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
-        AuthorityItemResult 市町村情報 = KogakuGassanShikyuKetteiHosei.createInstance().
-                get市町村セキュリティ情報(ログインユーザID, wk保険者構成);
-        if (ONE.equals(wk保険者構成)) {
-            if (div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue() != null
-                    && !div.getShinkiPanel().getTxtShinkiHihokenshaNo().getValue().
-                    equals(市町村情報.getWk保険者番号().value())) {
-                flag = true;
-            }
-        } else if (TWO.equals(wk保険者構成) && (市町村情報.getWk構成市町村情報() == null
-                || 市町村情報.getWk構成市町村情報().isEmpty())) {
-            flag = true;
-        }
-        return flag;
     }
 
     private static class IdocheckMessages implements IValidationMessage {

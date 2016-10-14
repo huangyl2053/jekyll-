@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.ChohyoMeter;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.SanteiIdoGennen;
-import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.Shoriku;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.tsuchisho.notsu.ShutsuryokuKiKoho;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
@@ -98,8 +97,8 @@ public class HonsanteiIdoHandler {
     private static final RString 納入通知書_63 = new RString("DBB100063_NonyuTsuchishoCVSKigoto");
     private static final RString 納入通知書_64 = new RString("DBB100064_NonyuTsuchishoCVSKigotoRencho");
     private static final RString 特徴同定未完了 = new RString("0");
-    private static final RString 計算未完了 = new RString("0");
-    private static final RString 計算完了 = new RString("1");
+    private static final RString 計算未完了 = new RString("1");
+    private static final RString 計算完了 = new RString("2");
     private static final RString 処理月10月 = new RString("10");
     private static final RString 処理月12月 = new RString("12");
     private static final RString 処理月2月 = new RString("02");
@@ -137,10 +136,7 @@ public class HonsanteiIdoHandler {
      */
     public boolean initialize(FlexibleYear 調定年度) {
 
-        // TODO TEST
-//        RDate date = RDate.getNowDate();
-        RString testDate = DbBusinessConfig.get(ConfigNameDBB.収納状況照会_速報取込区分, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        RDate date = new RDate(testDate.toString());
+        RDate date = RDate.getNowDate();
         int 境界日付 = date.getLastDay() - Integer.valueOf(DbBusinessConfig.get(
                 ConfigNameDBB.日付関連_更正月判定日数, date, SubGyomuCode.DBB介護賦課).toString());
         int 日 = date.getDayValue();
@@ -165,13 +161,13 @@ public class HonsanteiIdoHandler {
         return flag;
     }
 
-    private void set対象補足月テキストボックス(Shoriku 処理区分, RDate date) {
-        if (特徴同定未完了.equals(処理区分.get特徴同定区分())) {
+    private void set対象補足月テキストボックス(RString 処理区分, RDate date) {
+        if (特徴同定未完了.equals(処理区分)) {
             throw new ApplicationException(DbbErrorMessages.特徴対象者同定処理未完了.getMessage());
         }
-        if (計算未完了.equals(処理区分.get計算処理区分())) {
+        if (計算未完了.equals(処理区分)) {
             set対象特徴開始月テキストボックス(date);
-        } else if (計算完了.equals(処理区分.get計算処理区分())) {
+        } else if (計算完了.equals(処理区分)) {
             div.getXtTaishoTokuchoKaishiTsuki().setVisible(false);
             div.getRadTokuchoHosokuIraiKingakuKeisan().setDisabled(false);
         }
@@ -363,7 +359,7 @@ public class HonsanteiIdoHandler {
                         SubGyomuCode.DBB介護賦課, 本算定異動現年度_通常月);
             }
             RString 算定月 = div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey();
-            Shoriku 処理区分 = HonsanteiIdoGennendo.createInstance().setShorikubun(
+            RString 処理区分 = HonsanteiIdoGennendo.createInstance().setShorikubun(
                     new RString(Integer.valueOf(算定月.toString())), new FlexibleYear(調定年度.toString()));
             if (処理区分 != null) {
                 set対象補足月テキストボックス(処理区分, date);

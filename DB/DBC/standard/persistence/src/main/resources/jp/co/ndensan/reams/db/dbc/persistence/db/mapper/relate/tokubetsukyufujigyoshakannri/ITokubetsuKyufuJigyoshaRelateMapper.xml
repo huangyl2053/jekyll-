@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3430-010 miaojin -->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.tokubetsukyufujigyoshakannri.ITokubetsuKyufuJigyoshaRelateMapper">
+    <select resultOrdered="true" id="get事業者情報" resultMap="resultMap_TokubetsuKyufuJigyoshaRelateEntity" fetchSize="500">
+        SELECT
+            事業者データ.*,
+            サービスデータ.*,
+            事業者データ."dbT3065ShichosonTokubetsuKyufuJigyosha_idoKubun",
+            事業者データ."dbT3065ShichosonTokubetsuKyufuJigyosha_idoYMD",
+            事業者データ."dbT3065ShichosonTokubetsuKyufuJigyosha_jigyoshaNo",
+            事業者データ."dbT3065ShichosonTokubetsuKyufuJigyosha_shinseishaNameKanji",
+            事業者データ."dbT3065ShichosonTokubetsuKyufuJigyosha_shinseishaAddressKanji",
+            サービスデータ."dbT3066ShichosonTokubetuKyufuService_serviceRyakushoName"
+        FROM(
+            SELECT
+                *
+            FROM
+                (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3065ShichosonTokubetsuKyufuJigyoshaMapper.noDeleted_DbT3065ShichosonTokubetsuKyufuJigyosha" />) AS 市町村特別給付サービス事業者Entity
+            WHERE
+                市町村特別給付サービス事業者Entity."dbT3065ShichosonTokubetsuKyufuJigyosha_jigyoshaNo" LIKE '%${事業者番号}%'
+            ) AS 事業者データ
+            INNER JOIN
+                (SELECT
+                    *
+                 FROM
+                    (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3066ShichosonTokubetuKyufuServiceMapper.noDeleted_DbT3066ShichosonTokubetuKyufuService" />) AS 市町村特別給付サービス内容Entity
+                ) AS サービスデータ
+            ON
+              サービスデータ."dbT3066ShichosonTokubetuKyufuService_serviceCode" = 事業者データ."dbT3065ShichosonTokubetsuKyufuJigyosha_serviceCode"
+            WHERE
+              サービスデータ."dbT3066ShichosonTokubetuKyufuService_serviceCode" = (SELECT
+                                                                                    MIN(市町村特別給付サービス内容Entity2."dbT3066ShichosonTokubetuKyufuService_serviceCode")
+                                                                                FROM
+                                                                                    (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3066ShichosonTokubetuKyufuServiceMapper.noDeleted_DbT3066ShichosonTokubetuKyufuService" />) AS 市町村特別給付サービス内容Entity2
+                                                                                )
+        
+    </select>
+    
+     <resultMap id="resultMap_TokubetsuKyufuJigyoshaRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc2210011.TokubetsuKyufuJigyoshaRelateEntity" autoMapping="true">
+         <id property="市町村特別給付サービス事業者Entity.jigyoshaNo" column="dbT3065ShichosonTokubetsuKyufuJigyosha_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+         <id property="市町村特別給付サービス事業者Entity.serviceCode" column="dbT3065ShichosonTokubetsuKyufuJigyosha_serviceCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceCodeTypeHandler" />
+         <id property="市町村特別給付サービス事業者Entity.rirekiNo" column="dbT3065ShichosonTokubetsuKyufuJigyosha_rirekiNo"/>
+         <result property="介護国保連ＩＦ異動区分" column="dbT3065ShichosonTokubetsuKyufuJigyosha_idoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <result property="介護国保連ＩＦ異動年月日" column="dbT3065ShichosonTokubetsuKyufuJigyosha_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+         <result property="申請者氏名_漢字" column="dbT3065ShichosonTokubetsuKyufuJigyosha_shinseishaNameKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <result property="申請者住所" column="dbT3065ShichosonTokubetsuKyufuJigyosha_shinseishaAddressKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <result property="市町村特別給付用サービス名_略称" column="dbT3066ShichosonTokubetuKyufuService_serviceRyakushoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <association property="市町村特別給付サービス事業者Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3065ShichosonTokubetsuKyufuJigyoshaMapper.ResultMap_DbT3065ShichosonTokubetsuKyufuJigyoshaEntity"/>
+         <collection property="市町村特別給付サービス内容Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3066ShichosonTokubetuKyufuServiceMapper.ResultMap_DbT3066ShichosonTokubetuKyufuServiceEntity"/>
+     </resultMap>
+</mapper>

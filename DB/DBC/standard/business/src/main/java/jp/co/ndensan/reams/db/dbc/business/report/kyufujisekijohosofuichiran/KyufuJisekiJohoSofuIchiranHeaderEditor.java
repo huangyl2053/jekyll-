@@ -27,11 +27,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class KyufuJisekiJohoSofuIchiranHeaderEditor implements IKyufuJisekiJohoSofuIchiranEditor {
 
     private static final RString 日時作成 = new RString("作成");
-    private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
     private final KyuufuJisekiKoshinnKekkaEntity 給付実績更新結果一覧表データ;
     private final List<RString> 出力順リスト;
     private final List<RString> 改頁リスト;
@@ -82,19 +82,19 @@ public class KyufuJisekiJohoSofuIchiranHeaderEditor implements IKyufuJisekiJohoS
     }
 
     private void set並び順(KyufuJisekiJohoSofuIchiranSource source) {
-        source.shutsuryokujun1 = get並び順(INDEX_0);
-        source.shutsuryokujun2 = get並び順(INDEX_1);
-        source.shutsuryokujun3 = get並び順(INDEX_2);
-        source.shutsuryokujun4 = get並び順(INDEX_3);
-        source.shutsuryokujun5 = get並び順(INDEX_4);
+        source.shutsuryokujun1 = get並び順(INDEX_1);
+        source.shutsuryokujun2 = get並び順(INDEX_2);
+        source.shutsuryokujun3 = get並び順(INDEX_3);
+        source.shutsuryokujun4 = get並び順(INDEX_4);
+        source.shutsuryokujun5 = get並び順(INDEX_5);
     }
 
     private void set改頁(KyufuJisekiJohoSofuIchiranSource source) {
-        source.kaipage1 = get改頁(INDEX_0);
-        source.kaipage2 = get改頁(INDEX_1);
-        source.kaipage3 = get改頁(INDEX_2);
-        source.kaipage4 = get改頁(INDEX_3);
-        source.kaipage5 = get改頁(INDEX_4);
+        source.kaipage1 = get改頁(INDEX_1);
+        source.kaipage2 = get改頁(INDEX_2);
+        source.kaipage3 = get改頁(INDEX_3);
+        source.kaipage4 = get改頁(INDEX_4);
+        source.kaipage5 = get改頁(INDEX_5);
     }
 
     private RString get並び順(int index) {

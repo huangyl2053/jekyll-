@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.riyoshafutanlist.RiyoshaFutanGak
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200002.NinteishaListSakuseiBusiness;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200002.RiyoshaFutangakuGemmenGaitoshaIchiranReport;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.NinteishaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultCsvEntity;
@@ -130,7 +131,9 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
                 REPORT_DBD200002.getReportId(),
                 reamsLoginID,
                 parameter.get改頁出力順ID());
-        出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(DBD200002_ResultListEnum.class, outputOrder), NUM5);
+        if (outputOrder != null) {
+            出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(DBD200002_ResultListEnum.class, outputOrder), NUM5);
+        }
         導入団体 = AssociationFinderFactory.createInstance().getAssociation();
         帳票ID = parameter.get帳票ID();
         edit初期化();
@@ -273,7 +276,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         出力条件.add(new RString("【所得年度】 " + 所得年度));
         出力条件.add(new RString("【旧措置者区分】 " + parameter.get旧措置区分().get名称()));
         出力条件.add(new RString("【世帯表示】 " + parameter.get世帯表示().get名称()));
-        if (ONE.equals(parameter.get対象リスト().getコード())) {
+        if (TargetList.該当者リスト.equals(parameter.get対象リスト())) {
             出力条件.add(new RString("【受給者区分】 " + parameter.get受給者区分().get名称()));
             RString 世帯非課税等 = new RString("");
             if (null == parameter.get世帯非課税等() || parameter.get世帯非課税等().isEmpty()) {

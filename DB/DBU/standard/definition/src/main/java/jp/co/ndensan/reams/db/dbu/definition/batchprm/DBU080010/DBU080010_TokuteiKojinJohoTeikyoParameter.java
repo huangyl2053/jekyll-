@@ -5,12 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU080010;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.RenkeisakiDantainaiTogoAtena;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShinkiIdoKubun;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.JukyushaKihonJohoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 特定個人情報提供のバッチフ処理parameterクラスです。
@@ -44,5 +47,27 @@ public class DBU080010_TokuteiKojinJohoTeikyoParameter extends BatchParameterBas
      */
     public DBU080010_TokuteiKojinJohoTeikyoParameter() {
 
+    }
+
+    /**
+     * JukyushaKihonJohoProcessParameterに転換します。
+     *
+     * @return JukyushaKihonJohoProcessParameter
+     */
+    public JukyushaKihonJohoProcessParameter toJukyushaKihonJohoProcessParameter() {
+        JukyushaKihonJohoProcessParameter parameter = new JukyushaKihonJohoProcessParameter();
+        parameter.set対象開始日時(対象開始日時);
+        parameter.set対象終了日時(対象終了日時);
+        parameter.set新規異動区分(新規異動区分);
+        parameter.set特定個人情報名コードList(get特定個人情報名コードList());
+        return parameter;
+    }
+
+    private List<RString> get特定個人情報名コードList() {
+        List<RString> 特定個人情報名コードList = new ArrayList<>();
+        for (DBU080010_TokuteiKojinJohoTeikyoParameterHandler parameterHandler : 特定個人情報) {
+            特定個人情報名コードList.add(parameterHandler.get特定個人情報名コード());
+        }
+        return 特定個人情報名コードList;
     }
 }

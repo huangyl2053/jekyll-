@@ -37,9 +37,11 @@ public class KyufuhiTsuchisho {
             NinshoshaSource ninshoshaSource, SofubutsuAtesakiSource atesakiSource, IToiawasesakiSourceBuilder sourceBuilder) {
         KyufuhiTsuchishoCoverEntity coverEntity = new KyufuhiTsuchishoCoverEntity();
         coverEntity.setHokenshaNo(hakkoEntity.get被保険者番号());
-        AtenaMeisho meisho = hakkoEntity.getAtesakiEntity().getKanjiShimei();
-        if (meisho != null && !meisho.isEmpty()) {
-            coverEntity.setHihokenshaName(meisho.value());
+        if (hakkoEntity.getAtesakiEntity() != null && hakkoEntity.getAtesakiEntity().getKanjiShimei() != null) {
+            AtenaMeisho meisho = hakkoEntity.getAtesakiEntity().getKanjiShimei();
+            if (meisho != null && !meisho.isEmpty()) {
+                coverEntity.setHihokenshaName(meisho.value());
+            }
         }
         coverEntity.setShukeiserviceSTYM(processParameter.getサービス年月開始());
         coverEntity.setShukeiserviceEDYM(processParameter.getサービス年月終了());
@@ -48,13 +50,17 @@ public class KyufuhiTsuchisho {
         coverEntity.setListServiceIchiranUpper_2(hakkoEntity.get事業者名称());
         coverEntity.setListServiceIchiranUpper_3(hakkoEntity.getサービス名称());
         coverEntity.setListServiceIchiranUpper_4(hakkoEntity.get日数_回数());
-        coverEntity.setListServiceIchiranUpper_5(new RString(hakkoEntity.get利用者負担額().toString()));
-        coverEntity.setListServiceIchiranUpper_6(new RString(hakkoEntity.getサービス費用合計額().toString()));
+        if (hakkoEntity.get利用者負担額() != null) {
+            coverEntity.setListServiceIchiranUpper_5(new RString(hakkoEntity.get利用者負担額().toString()));
+        }
+        if (hakkoEntity.getサービス費用合計額() != null) {
+            coverEntity.setListServiceIchiranUpper_6(new RString(hakkoEntity.getサービス費用合計額().toString()));
+        }
         coverEntity.setListServiceIchiranLower_1(hakkoEntity.get事業者名称());
         coverEntity.setListServiceIchiranLower_2(hakkoEntity.getサービス名称());
         if (ninshoshaSource != null) {
-            coverEntity.setDenshiKoin(ninshoshaSource.hakkoYMD);
-            coverEntity.setHakkoYMD(ninshoshaSource.denshiKoin);
+            coverEntity.setDenshiKoin(ninshoshaSource.denshiKoin);
+            coverEntity.setHakkoYMD(ninshoshaSource.hakkoYMD);
             coverEntity.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
             coverEntity.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
             coverEntity.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
@@ -94,7 +100,15 @@ public class KyufuhiTsuchisho {
             coverEntity.setSamaBun1(atesakiSource.samaBun1);
             coverEntity.setSamabunShimeiSmall1(atesakiSource.samabunShimeiSmall1);
         }
-        coverEntity.setCustomerBarCode(ReportUtil.getCustomerBarCode(hakkoEntity.get住所(), hakkoEntity.get郵便番号()));
+        RString 住所 = hakkoEntity.get住所();
+        if (RString.isNullOrEmpty(住所)) {
+            住所 = RString.EMPTY;
+        }
+        RString 郵便番号 = hakkoEntity.get郵便番号();
+        if (RString.isNullOrEmpty(郵便番号)) {
+            郵便番号 = RString.EMPTY;
+        }
+        coverEntity.setCustomerBarCode(ReportUtil.getCustomerBarCode(住所, 郵便番号));
         if (sourceBuilder != null) {
             coverEntity.setYubinBango(sourceBuilder.buildSource().yubinBango);
             coverEntity.setShozaichi(sourceBuilder.buildSource().shozaichi);

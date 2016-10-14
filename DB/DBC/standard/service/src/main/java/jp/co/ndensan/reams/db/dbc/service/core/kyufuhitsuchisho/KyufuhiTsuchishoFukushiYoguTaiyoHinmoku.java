@@ -28,8 +28,8 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
     public KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity 帳票データ作成(KyufuhiTuchiHakkoEntity hakkoEntity,
             KyufuhiTsuchishoProcessParameter processParameter) {
         KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity coverEntity = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity();
-        coverEntity.set被保険者氏名(hakkoEntity.get被保険者番号());
-        coverEntity.set被保険者氏名(hakkoEntity.get被保険者番号());
+        coverEntity.set被保険者氏名(hakkoEntity.get名称());
+        coverEntity.set被保険者番号(hakkoEntity.get被保険者番号());
         coverEntity.setサービス集計開始年月(processParameter.getサービス年月開始());
         coverEntity.setサービス集計終了年月(processParameter.getサービス年月終了());
         if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getServiceTeikyoYM() != null) {
@@ -57,10 +57,7 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
         }
         builderイトル1.append(new RString("】"));
         coverEntity.set参考資料タイトル1(builderイトル1.toRString());
-        if (hakkoEntity.getRelateEntity().getZenkokuTanisuHani1().longValue() <= hakkoEntity.getRelateEntity().getHiyouGaku().longValue()
-                || hakkoEntity.getRelateEntity().getHiyouGaku().longValue() <= hakkoEntity.getRelateEntity().getZenkokuTanisuHani10().longValue()) {
-            coverEntity.setあなたの位置1(new RString("◆"));
-        }
+        // 実装方式は検討中「費用額(円)、件数(件)、割合(%)、あなたの位置、全国、都道府県、保険者」
         RStringBuilder builderイトル2 = new RStringBuilder();
         if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getServiceTeikyoYM() != null) {
             builderイトル2.append(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
@@ -71,10 +68,6 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
         }
         builderイトル2.append(new RString("】"));
         coverEntity.set参考資料タイトル2(builderイトル2.toRString());
-        if (hakkoEntity.getRelateEntity().getZenkokuTanisuHani1().longValue() <= hakkoEntity.getRelateEntity().getHiyouGaku().longValue()
-                || hakkoEntity.getRelateEntity().getHiyouGaku().longValue() <= hakkoEntity.getRelateEntity().getZenkokuTanisuHani10().longValue()) {
-            coverEntity.setあなたの位置2(new RString("◆"));
-        }
         RStringBuilder builderイトル3 = new RStringBuilder();
         if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getServiceTeikyoYM() != null) {
             builderイトル3.append(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
@@ -85,10 +78,6 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
         }
         builderイトル3.append(new RString("】"));
         coverEntity.set参考資料タイトル3(builderイトル3.toRString());
-        if (hakkoEntity.getRelateEntity().getZenkokuTanisuHani1().longValue() <= hakkoEntity.getRelateEntity().getHiyouGaku().longValue()
-                || hakkoEntity.getRelateEntity().getHiyouGaku().longValue() <= hakkoEntity.getRelateEntity().getZenkokuTanisuHani10().longValue()) {
-            coverEntity.setあなたの位置3(new RString("◆"));
-        }
         return coverEntity;
     }
 }

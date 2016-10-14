@@ -6,19 +6,19 @@
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core;
 
 import java.util.ArrayList;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 第4期というクラスです。
+ * 第5期というクラスです。
  *
  */
 class Dai5Ki extends HokenryoDankaiHanteiHohoHozon {
 
     /**
-     * 第4期
+     * 第5期
      *
      * @param hokenryoDankaiHanteiParameter
      */

@@ -240,7 +240,12 @@ public class IchijiHanteizumiDataShutsuryoku {
             return IchijiHanteiKekkaCode06.経過的要介護.get名称();
         } else if (IchijiHanteiKekkaCode06.非該当.getコード().equals(一次判定結果コード)) {
             return IchijiHanteiKekkaCode06.非該当.get名称();
+        } else if (IchijiHanteiKekkaCode06.要支援1.getコード().equals(一次判定結果コード)) {
+            return IchijiHanteiKekkaCode06.要支援1.get名称();
+        } else if (IchijiHanteiKekkaCode06.要支援2.getコード().equals(一次判定結果コード)) {
+            return IchijiHanteiKekkaCode06.要支援2.get名称();
         }
+
         return RString.EMPTY;
     }
 
@@ -257,6 +262,8 @@ public class IchijiHanteizumiDataShutsuryoku {
             return IchijiHanteiKekkaCode09.要介護5.get名称();
         } else if (IchijiHanteiKekkaCode09.非該当.getコード().equals(一次判定結果コード)) {
             return IchijiHanteiKekkaCode09.非該当.get名称();
+        } else if (IchijiHanteiKekkaCode09.要支援1.getコード().equals(一次判定結果コード)) {
+            return IchijiHanteiKekkaCode09.要支援1.get名称();
         } else if (IchijiHanteiKekkaCode09.要支援2.getコード().equals(一次判定結果コード)) {
             return IchijiHanteiKekkaCode09.要支援2.get名称();
         }

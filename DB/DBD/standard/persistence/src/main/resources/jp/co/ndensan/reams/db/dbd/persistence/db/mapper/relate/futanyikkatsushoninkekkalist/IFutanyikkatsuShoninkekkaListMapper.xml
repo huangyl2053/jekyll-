@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanyikkatsushoninkekkalist.IFutanyikkatsuShoninkekkaListMapper">
+    <select resultOrdered="true" 
+            id="get一括処理日時取得" 
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4035FutanGendogakuNinteiBatchEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futanyikkatsulist.FutanyikkatsuShoninListMapperParameter"
+            fetchSize="500">
+        SELECT 
+           負担限度額一括認定.*
+        FROM  
+           rgdb."DbT4035FutanGendogakuNinteiBatch" AS 負担限度額一括認定
+        WHERE 
+             負担限度額一括認定."ninteiBatchExecutedTimestamp" <![CDATA[<=]]> #{システム日時}
+        AND #{システム日時の1年前} <![CDATA[<=]]> 負担限度額一括認定."ninteiBatchExecutedTimestamp"
+        AND 負担限度額一括認定."hadApproved" IS TRUE
+        UNION ALL 
+        ( 
+        SELECT 
+            A.*
+        FROM
+            rgdb."DbT4035FutanGendogakuNinteiBatch" AS A
+        WHERE
+            A."ninteiBatchExecutedTimestamp" = ( 
+            SELECT
+                MAX(負担限度額一括認定."ninteiBatchExecutedTimestamp")
+            FROM
+                rgdb."DbT4035FutanGendogakuNinteiBatch" AS 負担限度額一括認定
+            WHERE
+               負担限度額一括認定."ninteiBatchExecutedTimestamp" <![CDATA[<=]]> #{システム日時}
+            AND #{システム日時の1年前} <![CDATA[<=]]> 負担限度額一括認定."ninteiBatchExecutedTimestamp"
+            AND 負担限度額一括認定."hadApproved"IS FALSE )
+        AND EXISTS
+        (
+            SELECT *
+            FROM rgdb."DbT4036FutanGendogakuNinteiBatchTestResults" AS B
+            WHERE
+                B."ninteiBatchExecutedTimestamp" = A."ninteiBatchExecutedTimestamp"
+        )
+        ORDER BY
+            A."ninteiBatchExecutedTimestamp" DESC
+            )
+    </select> 
+    
+<resultMap id="resultMap_FutanGendogakuNinteiBatchResultEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakunintei.FutanGendogakuNinteiBatchResultEntity" autoMapping="true">
+    <association property="負担限度額認定" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />
+    <association property="個人" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" />
+    <collection property="減免減額申請" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity" />
+</resultMap>
+    <select resultOrdered="true" 
+    id="get一括承認結果情報を取得_承認済みフラグTRUE"
+    resultMap="resultMap_FutanGendogakuNinteiBatchResultEntity"
+    parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futanyikkatsulist.FutanyikkatsuShoninListMapperParameter"
+    fetchSize="500">
+        SELECT
+           DbT4018KaigoHokenFutanGendogakuNintei.*,
+           DbT4010GemmenGengakuShinsei.*,        
+           <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+             (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.noDeleted_DbT4018KaigoHokenFutanGendogakuNintei" />) AS DbT4018KaigoHokenFutanGendogakuNintei 
+        LEFT JOIN 
+             (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS DbT4010GemmenGengakuShinsei 
+            ON DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigohFutanGengkNint_shoKisaiHokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"
+            AND DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigohFutanGengkNint_hihokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_hihokenshaNo"
+            AND DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigohFutanGengkNint_rirekiNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
+            AND DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = #{減免減額種類_負担限度額認定}   
+        INNER JOIN 
+            rgdb."DbV1001HihokenshaDaicho" AS C
+            ON C."hihokenshaNo" = dbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigohFutanGengkNint_hihokenshaNo"
+            AND C."logicalDeletedFlag" IS FALSE
+        INNER JOIN  
+            rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"    
+            ON "ShikibetsuTaisho"."shikibetsuCode" = C."shikibetsuCode"    
+        WHERE
+            dbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigohFutanGengkNint_ninteiBatchExecutedTimestamp" = #{一括認定バッチ処理日時}
+    </select>
+</mapper>
+  

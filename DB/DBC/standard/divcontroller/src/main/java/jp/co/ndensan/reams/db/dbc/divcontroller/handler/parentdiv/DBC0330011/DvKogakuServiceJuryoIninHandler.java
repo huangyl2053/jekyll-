@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuJuryoininKeiyakuJigy
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuJuryoininKeiyakuJigyoshaIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakujuryoininkeiyakujigyosha.KogakuJuryoininKeiyakuJigyoshaResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.juryoininbarai.SanteiKijungaku;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.santeikijungaku.SanteiKijungaku;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0330011.DBC0330011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0330011.DvKogakuServiceJuryoIninDiv;
@@ -56,6 +56,7 @@ public class DvKogakuServiceJuryoIninHandler {
     private static final int LENGTH_契約番号西暦年度 = 4;
     private static final int LENGTH_契約番号下四桁 = 4;
     private static final RString ZERO_契約番号下四桁 = new RString("0000");
+    private static final RString ONE_契約番号下四桁 = new RString("0001");
     private static final RString ZERO = new RString("0");
     private static final RString 円単位 = new RString("円");
     private final DvKogakuServiceJuryoIninDiv div;
@@ -403,9 +404,13 @@ public class DvKogakuServiceJuryoIninHandler {
     }
 
     private KogakuJuryoininKeiyakuJigyosha getBusinessBy追加(KogakuJuryoininKeiyakuJigyoshaHolder holder) {
-        List<KogakuJuryoininKeiyakuJigyosha> businessList = holder.getKogakuJuryoininKeiyakuJigyoshaList();
         int 履歴番号MAX = 0;
-        if (null != businessList && (!businessList.isEmpty())) {
+        List<KogakuJuryoininKeiyakuJigyosha> businessList = new ArrayList<>();
+        if (null != holder && null != holder.getKogakuJuryoininKeiyakuJigyoshaList()
+                && (!holder.getKogakuJuryoininKeiyakuJigyoshaList().isEmpty())) {
+            businessList = holder.getKogakuJuryoininKeiyakuJigyoshaList();
+        }
+        if (!businessList.isEmpty()) {
             for (KogakuJuryoininKeiyakuJigyosha business : businessList) {
                 if (履歴番号MAX < business.get履歴番号()) {
                     履歴番号MAX = business.get履歴番号();
@@ -439,9 +444,16 @@ public class DvKogakuServiceJuryoIninHandler {
     }
 
     private RString get契約番号(KogakuJuryoininKeiyakuJigyoshaHolder holder) {
-        List<KogakuJuryoininKeiyakuJigyosha> businessList = holder.getKogakuJuryoininKeiyakuJigyoshaList();
-        RString 契約番号下四桁 = RString.isNullOrEmpty(businessList.get(0).get契約番号()) ? ZERO_契約番号下四桁
-                : businessList.get(0).get契約番号().substring(LENGTH_契約番号西暦年度, LENGTH_契約番号);
+        int year = div.getDvHaraiKetteiShusei().getBtnShoninDate().getFromValue().getYearValue();
+        List<KogakuJuryoininKeiyakuJigyosha> businessList = new ArrayList<>();
+        if (null == holder || null == holder.getKogakuJuryoininKeiyakuJigyoshaList()
+                || holder.getKogakuJuryoininKeiyakuJigyoshaList().isEmpty()) {
+            return new RString(year).concat(ONE_契約番号下四桁);
+        }
+        RString 契約番号下四桁 = ZERO_契約番号下四桁;
+        if (!RString.isNullOrEmpty(businessList.get(0).get契約番号())) {
+            契約番号下四桁 = businessList.get(0).get契約番号().substring(LENGTH_契約番号西暦年度, LENGTH_契約番号);
+        }
         for (KogakuJuryoininKeiyakuJigyosha business : businessList) {
             if (!RString.isNullOrEmpty(business.get契約番号())) {
                 RString temp契約番号下四桁 = business.get契約番号().substring(LENGTH_契約番号西暦年度, LENGTH_契約番号);
@@ -455,7 +467,6 @@ public class DvKogakuServiceJuryoIninHandler {
         for (; i < LENGTH_契約番号下四桁; i++) {
             new契約番号下四桁 = ZERO.concat(new契約番号下四桁);
         }
-        int year = div.getDvHaraiKetteiShusei().getBtnShoninDate().getFromValue().getYearValue();
         return new RString(year).concat(new契約番号下四桁);
     }
 

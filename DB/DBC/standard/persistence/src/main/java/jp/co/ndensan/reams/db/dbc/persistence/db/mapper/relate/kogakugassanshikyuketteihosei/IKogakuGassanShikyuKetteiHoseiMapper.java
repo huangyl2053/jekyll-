@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshik
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.ShoriModeHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
@@ -35,5 +36,26 @@ public interface IKogakuGassanShikyuKetteiHoseiMapper {
      */
     DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity get高額合算支給額計算結果(
             KogakuGassanShikyuGakuKeisanKekkaParameter 高額合算支給額計算結果);
+
+    /**
+     *
+     * 高額合算給付実績論理削除
+     *
+     */
+    void logicalDelete高額合算給付実績();
+
+    /**
+     * 高額合算給付実績物理削除
+     *
+     * @param 高額合算給付実績 KogakuGassanShikyuGakuKeisanKekkaUpdateParameter
+     */
+    void physicalDelete高額合算給付実績(KogakuGassanShikyuGakuKeisanKekkaUpdateParameter 高額合算給付実績);
+
+    /**
+     * 高額合算給付実績更新
+     *
+     * @param 高額合算給付実績 KogakuGassanShikyuGakuKeisanKekkaUpdateParameter
+     */
+    void update高額合算給付実績(KogakuGassanShikyuGakuKeisanKekkaUpdateParameter 高額合算給付実績);
 
 }

@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyufuhiTsuchishoTanitsuProcess extends BatchProcessBase<KyufuhiTuchiHakkoIchiranRelateEntity> {
 
     private static final RString 介護給付費福祉用具貸与品目情報取得SQL = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "kyufuhitsuchisho.IKyufuhiTsuchishoMapper.get広域の場合");
+            + "kyufuhitsuchisho.IKyufuhiTsuchishoMapper.get単一の場合");
 
     private static final RString TABLE_介護給付費福祉用具貸与品目情報 = new RString("KaigoKyufuHiFukushiYouguTemp");
     @BatchWriter

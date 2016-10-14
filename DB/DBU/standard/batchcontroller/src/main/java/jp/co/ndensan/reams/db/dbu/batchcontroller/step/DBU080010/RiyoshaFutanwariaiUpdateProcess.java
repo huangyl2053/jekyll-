@@ -68,7 +68,8 @@ public class RiyoshaFutanwariaiUpdateProcess extends BatchProcessBase<TeikyoKiho
     private RString getMybitisParamter() {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先));
-        //TODO 氏名検索条件（履歴を含む）名称について、履歴を含み検索するか否かを指定する。
+        //TODO パラメータの設定が不明です、QA回答まち、
+        //氏名検索条件（履歴を含む）名称について、履歴を含み検索するか否かを指定する。
         //履歴を含んで検索する
         //履歴を含めず検索する【初期値】
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
@@ -82,23 +83,17 @@ public class RiyoshaFutanwariaiUpdateProcess extends BatchProcessBase<TeikyoKiho
 
     @Override
     protected void afterExecute() {
-        List<TokuteiKojinJohoHanKanri> businessList = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(
-                processParameter.get新規異動区分(), TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
-                DataSetNo._0202負担割合.getコード(), FlexibleDate.getNowDate());
         TokuteiKojinJohoTeikyoManager.createInstance().update特定個人情報提供(TABLE_中間DB提供基本情報,
                 processParameter.get新規異動区分(), TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
-                DataSetNo._0202負担割合.getコード(), businessList.get(0).get版番号());
+                DataSetNo._0202負担割合.getコード(), processParameter.get版番号());
         if (TeikyoYohi.提供要.getコード().equals(processParameter.get提供要否List().get(0))) {
-            List<TokuteiKojinJohoHanKanri> entityList = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(RString.EMPTY,
-                    TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
+            List<TokuteiKojinJohoHanKanri> entityList = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(
+                    processParameter.get新規異動区分(), TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
                     DataSetNo._0202負担割合.getコード(), FlexibleDate.EMPTY);
-            for (TokuteiKojinJohoHanKanri entity : entityList) {
-                DbT7301TokuteiKojinJohoHanKanriEntity relateEntity = new DbT7301TokuteiKojinJohoHanKanriEntity();
-                relateEntity.setTokuteiKojinJohoMeiCode(entity.get特定個人情報名コード());
-                relateEntity.setDataSetNo(entity.getデータセット番号());
-                relateEntity.setHanNo(entity.get初回提供区分());
-                relateEntity.setShokaiTeikyoKubun(ShokaiTeikyoKubun.初回提供済み.getコード());
-                dbT7301EntityWriter.update(relateEntity);
+            for (TokuteiKojinJohoHanKanri business : entityList) {
+                DbT7301TokuteiKojinJohoHanKanriEntity entity = business.toEntity();
+                entity.setShokaiTeikyoKubun(ShokaiTeikyoKubun.初回提供済み.getコード());
+                dbT7301EntityWriter.update(entity);
             }
         }
     }
