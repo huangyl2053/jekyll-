@@ -118,8 +118,8 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (null != this.導入団体.get地方公共団体コード()) {
             source.hokenshaNo = this.導入団体.get地方公共団体コード().value();
         }
-        if (null != this.導入団体.getShichosonName_()) {
-            source.hokenshaName = this.導入団体.getShichosonName_();
+        if (null != this.導入団体.get市町村名()) {
+            source.hokenshaName = this.導入団体.get市町村名();
         }
         if (null != 出力順) {
             setiOutputOrder(source);

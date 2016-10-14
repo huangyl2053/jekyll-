@@ -217,8 +217,9 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
     private void setKonkai2(FutanGendogakuNinteiKakuninIchiranReportSource source) {
         DbT4018KaigoHokenFutanGendogakuNinteiEntity 今回認定結果 = this.負担限度額認定確認リスト.get今回認定結果();
         if (null != 今回認定結果) {
-            if (null != 今回認定結果.getRiyoshaFutanDankai()) {
-                source.list1_9 = 今回認定結果.getRiyoshaFutanDankai();
+            RString riyoshaFutanDankai = 今回認定結果.getRiyoshaFutanDankai();
+            if (null != riyoshaFutanDankai) {
+                source.list1_9 = RiyoshaFutanDankai.toValue(riyoshaFutanDankai).get名称();
             }
             if (null != 今回認定結果.getShokuhiFutanGendogaku()) {
                 source.list2_10 = DecimalFormatter.toコンマ区切りRString(今回認定結果.getShokuhiFutanGendogaku(), 0);
@@ -322,8 +323,9 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
         if (null != 前回認定結果.getKyusochishaKubun()) {
             source.list3_9 = 前回認定結果.getKyusochishaKubun();
         }
-        if (null != 前回認定結果.getRiyoshaFutanDankai()) {
-            source.list1_14 = 前回認定結果.getRiyoshaFutanDankai();
+        RString riyoshaFutanDankai = 前回認定結果.getRiyoshaFutanDankai();
+        if (null != riyoshaFutanDankai) {
+            source.list1_14 = RiyoshaFutanDankai.toValue(riyoshaFutanDankai).get名称();
         }
         if (null != 前回認定結果.getShokuhiFutanGendogaku()) {
             source.list2_15 = DecimalFormatter.toコンマ区切りRString(前回認定結果.getShokuhiFutanGendogaku(), 0);
