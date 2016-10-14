@@ -232,7 +232,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         set認定申請中状況を活性制御(被保険者番号);
         div.getRadTodokedeKubun().setSelectedKey(is届出区分新規() ? KEY_0 : KEY_1);
         if (is事業者作成の場合()) {
-            div.getRadKeikakuKubun().setDisplayNone(true);
+            div.getRadKeikakuKubun().setVisible(false);
             div.getRadServiceShurui().setDataSource(getサービス種類DataSource());
             div.getRadKeikakuSakuseiKubun().setDataSource(get事業者作成計画作成区分DataSource());
             div.getRadKeikakuSakuseiKubun().setSelectedKey(get計画作成区分(被保険者番号));
@@ -240,7 +240,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
             set追加計画事業者エリア();
         }
         if (is自己作成の場合()) {
-            div.getRadKeikakuKubun().setDisplayNone(false);
+            div.getRadKeikakuKubun().setVisible(true);
             div.getRadKeikakuKubun().setSelectedKey(KEY_0);
             div.getRadKeikakuSakuseiKubun().setDataSource(get自己作成DataSource());
             div.getRadKeikakuSakuseiKubun().setSelectedIndex(0);
@@ -436,7 +436,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
                     = 居宅給付計画届出.getKyotakuKeikakuJigyoshaSakusei(identifier);
             KyotakuKeikakuJigyoshaSakuseiBuilder builder = 居宅給付計画事業者作成.createBuilderForEdit().
                     set適用開始年月日(new FlexibleDate(div.getTxtKeikakuTekiyoStartYMD().getValue().toDateString())).
-                    set適用終了年月日(new FlexibleDate(div.getTxtKeikakuTekiyoEndYMD().getValue().toDateString()));
+                    set適用終了年月日(div.getTxtKeikakuTekiyoEndYMD().getValue() == null ? null
+                            : new FlexibleDate(div.getTxtKeikakuTekiyoEndYMD().getValue().toDateString()));
             builder.set作成区分コード(div.getRadKeikakuSakuseiKubun().getSelectedKey()).
                     set計画事業者番号(new JigyoshaNo(div.getTxtJigyoshaNo().getValue())).
                     set委託先事業者番号(RString.isNullOrEmpty(div.getTxtItakusakiJigyoshaNo().getValue()) ? null
@@ -458,7 +459,8 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
             KyotakuKeikakuJikoSakuseiBuilder builder = 居宅給付計画自己作成.createBuilderForEdit().
                     set居宅_総合事業区分(KEY_0.equals(div.getRadTodokedeKubun().getSelectedKey()) ? 居宅 : 総合事業).
                     set適用開始年月日(new FlexibleDate(div.getTxtKeikakuTekiyoStartYMD().getValue().toDateString())).
-                    set適用終了年月日(new FlexibleDate(div.getTxtKeikakuTekiyoEndYMD().getValue().toDateString())).
+                    set適用終了年月日(div.getTxtKeikakuTekiyoEndYMD().getValue() == null ? null
+                            : new FlexibleDate(div.getTxtKeikakuTekiyoEndYMD().getValue().toDateString())).
                     set作成区分コード(div.getRadKeikakuSakuseiKubun().getSelectedKey());
             居宅給付計画届出 = 居宅給付計画届出.createBuilderForEdit().
                     setKyotakuKeikakuJikoSakusei(builder.build()).build();
@@ -730,7 +732,6 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
      * 前排他を解除のンメソッドです。
      *
      * @param 被保険者番号 被保険者番号
-     * @return boolean
      */
     public void get前排他を解除(RString 被保険者番号) {
         LockingKey 排他キー = new LockingKey(DBCHIHOKENSHANO.concat(被保険者番号));
