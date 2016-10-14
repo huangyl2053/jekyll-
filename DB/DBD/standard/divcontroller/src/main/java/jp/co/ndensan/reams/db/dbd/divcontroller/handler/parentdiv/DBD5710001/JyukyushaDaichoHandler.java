@@ -88,20 +88,8 @@ public class JyukyushaDaichoHandler {
             div.getTaishouKikan().getTxtZenkaiymdtime().setFromTimeValue(shoriDateKanri.get対象開始日時().getRDateTime().getTime());
             div.getTaishouKikan().getTxtZenkaiymdtime().setToDateValue(shoriDateKanri.get対象終了日時().getDate());
             div.getTaishouKikan().getTxtZenkaiymdtime().setToTimeValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime());
-            if (対象期間.equals(div.getRadChushutsuJyouken().getSelectedKey())) {
-                set今回抽出日付();
-                if (div.getTaishouSha().getHihokenshanoFrom() != null && div.getTaishouSha().getHihokenshanoTo() != null) {
-                    div.getTaishouSha().getHihokenshanoFrom().clearValue();
-                    div.getTaishouSha().getHihokenshanoTo().clearValue();
-                }
-            } else {
-                div.getTaishouKikan().getTxtKonkaiymdtime().clearFromValue();
-                div.getTaishouKikan().getTxtKonkaiymdtime().clearToValue();
-                div.getTaishouSha().getHihokenshanoFrom().setDisabled(false);
-                div.getTaishouSha().getHihokenshanoTo().setDisabled(false);
-                div.getTaishouKikan().getTxtKonkaiymdtime().setDisabled(true);
-            }
         }
+        select抽出条件設定();
         List<RString> chkIdouChushutsuTaishou = new ArrayList();
         RString value = DbBusinessConfig.get(ConfigNameDBD.受給者台帳初期値_抽出条件, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
         if (value.substring(0, NOCOUNT_1).equals(抽出条件_1)) {
@@ -224,11 +212,9 @@ public class JyukyushaDaichoHandler {
 
     private void set今回抽出日付() {
         get画面初期();
-        if (shoriDateKanri != null) {
-            if (shoriDateKanri.get対象終了日時() != null) {
-                div.getTaishouKikan().getTxtKonkaiymdtime().setFromDateValue(shoriDateKanri.get対象終了日時().getDate());
-                div.getTaishouKikan().getTxtKonkaiymdtime().setFromTimeValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime().plusSeconds(1));
-            }
+        if (shoriDateKanri != null && shoriDateKanri.get対象終了日時() != null) {
+            div.getTaishouKikan().getTxtKonkaiymdtime().setFromDateValue(shoriDateKanri.get対象終了日時().getDate());
+            div.getTaishouKikan().getTxtKonkaiymdtime().setFromTimeValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime().plusSeconds(1));
         }
         div.getTaishouKikan().getTxtKonkaiymdtime().setToDateValue(RDate.getNowDate());
         div.getTaishouKikan().getTxtKonkaiymdtime().setToTimeValue(RDate.getNowDateTime().getTime());
@@ -244,5 +230,21 @@ public class JyukyushaDaichoHandler {
             list異動.add(list抽出.trim());
         }
         return list異動;
+    }
+
+    private void select抽出条件設定() {
+        if (対象期間.equals(div.getRadChushutsuJyouken().getSelectedKey())) {
+            set今回抽出日付();
+            if (div.getTaishouSha().getHihokenshanoFrom() != null && div.getTaishouSha().getHihokenshanoTo() != null) {
+                div.getTaishouSha().getHihokenshanoFrom().clearValue();
+                div.getTaishouSha().getHihokenshanoTo().clearValue();
+            }
+        } else {
+            div.getTaishouKikan().getTxtKonkaiymdtime().clearFromValue();
+            div.getTaishouKikan().getTxtKonkaiymdtime().clearToValue();
+            div.getTaishouSha().getHihokenshanoFrom().setDisabled(false);
+            div.getTaishouSha().getHihokenshanoTo().setDisabled(false);
+            div.getTaishouKikan().getTxtKonkaiymdtime().setDisabled(true);
+        }
     }
 }
