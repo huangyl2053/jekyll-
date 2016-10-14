@@ -47,6 +47,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private List<LasdecCode> 市町村コードリスト;
     private static final int INDEX_492 = 492;
     private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
     private static final int INDEX_16 = 16;
     private static final int INDEX_17 = 17;
     private static final int INDEX_25 = 25;
@@ -91,6 +92,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString 保険者区分_広域保険者 = new RString("2");
     private static final RString アンダーバー = new RString("_");
     private static final RString ファイル名称の拡張子 = new RString(".txt");
+    private static final RString エラーコード_0 = new RString("0");
     private static final RString エラーコード_01 = new RString("01");
     private static final RString エラーコード_02 = new RString("02");
     private static final RString エラーコード_03 = new RString("03");
@@ -167,6 +169,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         FilesystemPath filesystemPath = new FilesystemPath(tmpPath);
         filePath = new RString(filesystemPath.getCanonicalPath()).concat(ファイル名称);
         市町村コードリスト = getMapper(IKokikoreishaShikakuIdoInMapper.class).get構成市町村マスタ();
+        取込後期高齢者情報Entity.setエラーコード(エラーコード_0);
     }
 
     @Override
@@ -435,7 +438,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     }
 
     private void エラーチェック処理_電算２用部分1() {
-        RString 資格取得事由 = 取込後期高齢者情報Entity.get資格取得事由コード().substring(INDEX_0, INDEX_1);
+        RString 資格取得事由 = 取込後期高齢者情報Entity.get資格取得事由コード().substring(INDEX_0, INDEX_2);
         for (ShikakuShutokuJiyu cod : ShikakuShutokuJiyu.values()) {
             if (資格取得事由.isEmpty() && !cod.getコード().equals(資格取得事由)) {
                 取込後期高齢者情報Entity.setエラーコード(エラーコード_56);
@@ -446,7 +449,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
                 取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
             }
         }
-        RString 資格喪失事由 = 取込後期高齢者情報Entity.get資格喪失事由コード().substring(INDEX_0, INDEX_1);
+        RString 資格喪失事由 = 取込後期高齢者情報Entity.get資格喪失事由コード().substring(INDEX_0, INDEX_2);
         for (ShikakuSoshitsuJiyu cod : ShikakuSoshitsuJiyu.values()) {
             if (資格喪失事由.isEmpty() && !cod.getコード().equals(資格喪失事由)) {
                 取込後期高齢者情報Entity.setエラーコード(エラーコード_58);
