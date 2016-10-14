@@ -105,7 +105,6 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
         source.printTimeStamp = new RStringBuilder()
                 .append(作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString())
-                .append(RString.FULL_SPACE)
                 .append(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒))
                 .append(RString.FULL_SPACE)
                 .append(new RString("作成")).toRString();
@@ -118,7 +117,7 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
 
         if (null != 導入団体) {
             source.hokenshaNo = 導入団体.get地方公共団体コード().value();
-            source.hokenshaName = 導入団体.getShichosonName_();
+            source.hokenshaName = 導入団体.get市町村名();
         }
         if (null != 出力順) {
             set出力順改頁(source);
