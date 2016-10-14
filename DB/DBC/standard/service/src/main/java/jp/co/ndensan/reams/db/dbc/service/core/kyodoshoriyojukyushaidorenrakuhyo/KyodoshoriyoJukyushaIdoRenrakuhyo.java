@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3002KyodoShoriyoJukyus
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuDac;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbc.service.core.jukyushateiseirenrakuhyotoroku.JukyushaTeiseiRenrakuhyoToroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAl
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -66,7 +68,6 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
     private final DbT3004KyodoShoriyoJukyushaIdoKogakuSofuDac dbT3004dac;
     private final MapperProvider mapperProvider;
     private static final RString 新規モード = new RString("新規");
-    private static final LasdecCode 市町村 = new LasdecCode("209007");
 
     /**
      * コンストラクタです。
@@ -137,7 +138,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
             if (result != null && !result.isEmpty()) {
                 宛名 = ShikibetsuTaishoFactory.createKojin(result.get(0));
             }
-            return get証記載保険者番号と保険者番号(被保険者番号, 宛名);
+            return get証記載保険者番号と保険者番号(被保険者番号, 宛名, 異動日);
         } else {
             DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity dbT3002Entity = dbT3002dac.get基本送付(被保険者番号, 異動日, 対象年月, 論理削除);
             DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity dbT3003Entity = dbT3003dac.get償還送付(被保険者番号, 異動日, 対象年月, 論理削除);
@@ -150,7 +151,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
     }
 
     private KyodoshoriyoJukyushaIdoRenrakuhyoParam get証記載保険者番号と保険者番号(
-            HihokenshaNo 被保険者番号, IKojin 宛名) {
+            HihokenshaNo 被保険者番号, IKojin 宛名, FlexibleDate 異動日) {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
         KyoutuuEntity 共通項目Entity = new KyoutuuEntity();
@@ -166,10 +167,13 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
             }
             共通項目Entity.set証記載保険者番号(result.records().get(0).get証記載保険者番号());
         } else {
-            //TODO 「ビジネス設計_DBCKD00007_(共有子Div)受給者異動連絡票.xlsx」の
-            //「市町村コードと広住例措置元市町村コード取得」機能未開発
-            LasdecCode 市町村コード = 市町村;
-            LasdecCode 広住特措置元市町村コード = get();
+            DbT1001HihokenshaDaichoEntity entity = JukyushaTeiseiRenrakuhyoToroku.createInstance().
+                    get市町村コードと広住例措置元市町村コード(被保険者番号, 異動日);
+            LasdecCode 市町村コード = entity.getShichosonCode();
+            LasdecCode 広住特措置元市町村コード = null;
+            if (entity.getKoikinaiTokureiSochimotoShichosonCode() != null) {
+                広住特措置元市町村コード = entity.getKoikinaiTokureiSochimotoShichosonCode();
+            }
             SearchResult<ShichosonCodeYoriShichoson> result;
             if (広住特措置元市町村コード != null && !広住特措置元市町村コード.isEmpty()) {
                 result = finder.shichosonCodeYoriShichosonJoho(広住特措置元市町村コード);
@@ -182,10 +186,6 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
             共通項目Entity.set証記載保険者番号(result.records().get(0).get証記載保険者番号());
         }
         return set共同処理用受給者異動情報_新規(被保険者番号, 共通項目Entity, 宛名);
-    }
-
-    private LasdecCode get() {
-        return null;
     }
 
     private KyodoshoriyoJukyushaIdoRenrakuhyoParam set共同処理用受給者異動情報_新規(
