@@ -19,8 +19,17 @@ import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.Nin
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KekkaShosaiJoho.KekkaShosaiJoho.KekkaShosaiJohoDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -68,6 +77,16 @@ public class ShokkenTorikeshiIchibuSoshitu {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+
+        PersonalData personalData = PersonalData.of(new ShikibetsuCode(RString.EMPTY), new ExpandedInformation(new Code("0001"),
+                new RString("申請書管理番号"), 申請書管理番号));
+        AccessLogger.log(AccessLogType.照会, personalData);
+
+        boolean gotLock = 前排他キーのセット();
+        if (!gotLock) {
+            throw new PessimisticLockingException();
+        }
+
         //TODO sync-24 マージ 暫定
         return ResponseData.of(div).setState(DBD5020001StateName.要介護認定);
     }
@@ -251,6 +270,7 @@ public class ShokkenTorikeshiIchibuSoshitu {
         } else {
             return ResponseData.of(div).respond();
         }
+        前排他キーの解除();
         if (div.getTitle().contains("却下")) {
             div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString("却下処理が正常に終了しました。"));
             div.setTitle(new RString("要介護認定却下完了"));
@@ -289,5 +309,17 @@ public class ShokkenTorikeshiIchibuSoshitu {
 
     private ShokkenTorikeshiIchibuSoshituValidationHandler getValidationHandler(ShokkenTorikeshiIchibuSoshituDiv div) {
         return new ShokkenTorikeshiIchibuSoshituValidationHandler(div);
+    }
+
+    private boolean 前排他キーのセット() {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        LockingKey 排他キー = new LockingKey(申請書管理番号);
+        return RealInitialLocker.tryGetLock(排他キー);
+    }
+
+    private void 前排他キーの解除() {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        LockingKey 排他キー = new LockingKey(申請書管理番号);
+        RealInitialLocker.release(排他キー);
     }
 }
