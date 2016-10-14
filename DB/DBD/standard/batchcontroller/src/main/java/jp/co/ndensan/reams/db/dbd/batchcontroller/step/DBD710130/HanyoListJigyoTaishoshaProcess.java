@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.dbd710130.HanyoListJigyoTaishosha
 import jp.co.ndensan.reams.db.dbz.business.core.hanyolist.HanyoListShutsuryokuKomoku;
 import jp.co.ndensan.reams.db.dbz.business.report.hanyolist.HanyoListReport;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.Outputs;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.ShutsuryokuKomokuPosition;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
@@ -229,7 +230,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
             try {
                 Method getMethod = clazz.getDeclaredMethod(JigyoTaishoshaCsvEnumEntity
                         .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
-                                                .get(i).get出力項目順位()))).get名称().toString());
+                                                .get(i).get項目位置()))).get名称().toString());
                 項目内容new = (RString) getMethod.invoke(eucCsvEntity);
             } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                 Logger.getLogger(HanyoListJigyoTaishoshaProcess.class.getName()).log(Level.SEVERE, null, ex);
@@ -240,11 +241,11 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
                 if (get項目名称.length()
                         > get項目桁数) {
                     get項目名称 = get項目名称.substring(0, get項目桁数);
-                } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目位置().equals(new RString("左詰め(0)"))) {
+                } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.左詰め.getコード())) {
                     for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
                         get項目名称 = RString.HALF_SPACE.concat(get項目名称);
                     }
-                } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目位置().equals(new RString("右詰め(1)"))) {
+                } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.右詰め.getコード())) {
                     for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
                         get項目名称 = get項目名称.concat(RString.HALF_SPACE);
                     }

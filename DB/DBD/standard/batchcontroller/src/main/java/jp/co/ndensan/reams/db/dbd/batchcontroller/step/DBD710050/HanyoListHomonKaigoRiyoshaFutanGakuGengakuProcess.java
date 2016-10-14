@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.business.core.hanyolist.HanyoListShutsuryokuKomoku;
 import jp.co.ndensan.reams.db.dbz.business.report.hanyolist.HanyoListReport;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.Outputs;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.ShutsuryokuKomokuPosition;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
@@ -242,7 +243,7 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess extends BatchProc
             try {
                 Method getMethod = clazz.getDeclaredMethod(HomonKaigoRiyoshaFutanGakuGengakuCsvEnumEntity
                         .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
-                                                .get(i).get出力項目順位()))).get名称().toString());
+                                                .get(i).get項目位置()))).get名称().toString());
                 項目内容new = (RString) getMethod.invoke(eucCsvEntity);
             } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                 Logger.getLogger(HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess.class.getName()).log(Level.SEVERE, null, ex);
@@ -253,11 +254,11 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess extends BatchProc
                 if (get項目名称.length()
                         > get項目桁数) {
                     get項目名称 = get項目名称.substring(0, get項目桁数);
-                } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目位置().equals(new RString("左詰め(0)"))) {
+                } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.左詰め.getコード())) {
                     for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
                         get項目名称 = RString.HALF_SPACE.concat(get項目名称);
                     }
-                } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目位置().equals(new RString("右詰め(1)"))) {
+                } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.右詰め.getコード())) {
                     for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
                         get項目名称 = get項目名称.concat(RString.HALF_SPACE);
                     }
@@ -394,7 +395,7 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess extends BatchProc
             builder.append(COMMA);
         }
         builder = get日付範囲(builder);
-        if (!builder.toRString().isNullOrEmpty()) {
+        if (builder.toRString() != null && !builder.toRString().isEmpty()) {
             List<RString> builderList = builder.toRString().substring(0, builder.toRString().length() - 1).split(COMMA.toString());
             for (RString build : builderList) {
                 出力条件.add(build);
@@ -404,25 +405,25 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess extends BatchProc
         if (null != processParamter.getAtenacyusyutsujyoken()
                 && null != processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun()) {
             RString get宛名抽出区分情報 = get宛名抽出区分情報();
-            if (!get宛名抽出区分情報.isNullOrEmpty()) {
+            if (get宛名抽出区分情報 != null && !get宛名抽出区分情報.isEmpty()) {
                 出力条件.add(get宛名抽出区分情報());
             }
         }
         if (null != processParamter.getAtenacyusyutsujyoken()
                 && null != processParamter.getAtenacyusyutsujyoken().getChiku_Kubun()) {
             RString get地区区分情報 = get地区選択区分情報();
-            if (!get地区区分情報.isNullOrEmpty()) {
+            if (get地区区分情報 != null && !get地区区分情報.isEmpty()) {
                 List<RString> 地区区分情報 = get地区区分情報.substring(0, get地区区分情報.length() - 1).split(COMMA.toString());
                 for (RString 情報 : 地区区分情報) {
                     出力条件.add(情報);
                 }
             }
         }
-        if (!get対象データ().isNullOrEmpty()) {
+        if (get対象データ() != null && !get対象データ().isEmpty()) {
             出力条件.add(get対象データ());
         }
         RString get特定対象データ = get特定対象データ(builder);
-        if (!get特定対象データ.isNullOrEmpty()) {
+        if (get特定対象データ != null && !get特定対象データ.isEmpty()) {
             List<RString> builderList = get特定対象データ.substring(0, get特定対象データ.length() - 1).split(COMMA.toString());
             for (RString build : builderList) {
                 出力条件.add(build);
