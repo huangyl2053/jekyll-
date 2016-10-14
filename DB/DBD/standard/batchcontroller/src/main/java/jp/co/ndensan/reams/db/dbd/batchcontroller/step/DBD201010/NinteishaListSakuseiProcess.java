@@ -131,7 +131,9 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
                 REPORT_DBD200002.getReportId(),
                 reamsLoginID,
                 parameter.get改頁出力順ID());
-        出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(DBD200002_ResultListEnum.class, outputOrder), NUM5);
+        if (outputOrder != null) {
+            出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(DBD200002_ResultListEnum.class, outputOrder), NUM5);
+        }
         導入団体 = AssociationFinderFactory.createInstance().getAssociation();
         帳票ID = parameter.get帳票ID();
         edit初期化();
