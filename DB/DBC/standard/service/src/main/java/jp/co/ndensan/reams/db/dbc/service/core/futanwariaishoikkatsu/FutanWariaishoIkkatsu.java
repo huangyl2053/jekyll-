@@ -114,7 +114,7 @@ public class FutanWariaishoIkkatsu {
      * 負担割合証ソースデータ取得です。
      *
      * @param 帳票制御共通 帳票制御共通
-     * @param imageFolderPath 帳票イメージフォルダパス
+     * @param imageFolderPath RString
      * @param 利用者負担割合証Temp 利用者負担割合証Temp
      * @param 交付年月日 交付年月日
      * @param 連番 連番

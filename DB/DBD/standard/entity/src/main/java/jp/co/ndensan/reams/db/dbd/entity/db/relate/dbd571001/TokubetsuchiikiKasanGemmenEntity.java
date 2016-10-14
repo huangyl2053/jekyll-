@@ -22,7 +22,9 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokubetsuchiikiKasanGemmenEntity {
 
+    private RString 特別地域加算_証記載保険者番号;
     private HihokenshaNo 特別地域加算_被保険者番号;
+    private int 特別地域加算_履歴番号;
     private FlexibleDate 特別地域加算_申請年月日;
     private FlexibleDate 特別地域加算_決定年月日;
     private FlexibleDate 特別地域加算_適用開始年月日;

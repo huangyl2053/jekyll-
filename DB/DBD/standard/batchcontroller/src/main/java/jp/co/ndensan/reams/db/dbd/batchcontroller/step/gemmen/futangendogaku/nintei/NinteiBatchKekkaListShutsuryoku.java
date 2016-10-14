@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDank
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.HaigushaKazeiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt22006.NinteiBatchKekkaListShutsuryokuProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt22006.IsShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogaku.ikkatsunintei.FutanGengaokuNintteiKakuninListCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogaku.ikkatsunintei.FutanGengaokuNintteiKakuninListEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200005.FutanGendogakuNinteiKakuninIchiranReportSource;
@@ -246,28 +247,28 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
         } else {
             csvEntity.set旧措置(RString.EMPTY);
         }
-        if (Boolean.valueOf(entity.get利用軽減().toString())) {
+        if (booleanListValue(entity.get利用軽減())) {
             csvEntity.set利(申);
         } else if (entity.get利用軽減().isEmpty()) {
             csvEntity.set利(RString.EMPTY);
         } else {
             csvEntity.set利(認);
         }
-        if (Boolean.valueOf(entity.get社福軽減().toString())) {
+        if (booleanListValue(entity.get社福軽減())) {
             csvEntity.set社(申);
         } else if (entity.get社福軽減().isEmpty()) {
             csvEntity.set社(RString.EMPTY);
         } else {
             csvEntity.set社(認);
         }
-        if (Boolean.valueOf(entity.get訪問減額().toString())) {
+        if (booleanListValue(entity.get訪問減額())) {
             csvEntity.set対(申);
         } else if (entity.get訪問減額().isEmpty()) {
             csvEntity.set対(RString.EMPTY);
         } else {
             csvEntity.set対(認);
         }
-        if (Boolean.valueOf(entity.get特地減免().toString())) {
+        if (booleanListValue(entity.get特地減免())) {
             csvEntity.set地(申);
         } else if (entity.get特地減免().isEmpty()) {
             csvEntity.set地(RString.EMPTY);
@@ -333,6 +334,17 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
         }
         csvEntity.set激変緩和(RString.EMPTY);
 
+    }
+
+    private Boolean booleanListValue(List<IsShinseiEntity> list) {
+        if (!list.isEmpty()) {
+            for (IsShinseiEntity entity : list) {
+                if (entity.is申請()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void 今回と前回情報設定(FutanGengaokuNintteiKakuninListCsvEntity csvEntity,
@@ -540,8 +552,21 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
         出力条件.add(発行日.concat(parameter.get発行日().wareki().toDateString()));
         出力条件.add(改頁出力順ID.concat(parameter.get改頁出力順ID()));
         出力条件.add(帳票ID.concat(parameter.get帳票ID()));
-        出力条件.add(負担限度額認定申請承認一括.concat(出力順));
+        出力条件.add(負担限度額認定申請承認一括.concat(出力順リスト(outputOrder)));
         return 出力条件;
+    }
+
+    private RString 出力順リスト(IOutputOrder outputOrder) {
+        RString 出力順項目 = RString.EMPTY;
+        if (outputOrder != null) {
+            List<ISetSortItem> list = outputOrder.get設定項目リスト();
+            if (!list.isEmpty()) {
+                for (ISetSortItem item : list) {
+                    出力順項目 = 出力順項目.concat(item.get項目名()).concat(" ");
+                }
+            }
+        }
+        return 出力順項目;
     }
 
     private Decimal nullToZero(Decimal 金額) {

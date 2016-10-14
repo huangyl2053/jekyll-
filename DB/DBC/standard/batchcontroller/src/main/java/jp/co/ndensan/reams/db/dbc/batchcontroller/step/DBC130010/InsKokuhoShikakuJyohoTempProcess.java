@@ -41,6 +41,12 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
     private static final RString エラーコード文言 = new RString("画面登録されたデータです");
     private static final RString エラー区分 = new RString("1");
     private static final RString TEMP_TABLE = new RString("tempKokuhoShikakuJyohoInpotoyo");
+    private boolean 文言設定flag;
+
+    @Override
+    protected void initialize() {
+        文言設定flag = processParameter.is文言設定flag();
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -57,18 +63,26 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
     protected void process(KokuhoShikakuJyohoYoResultEntity entity) {
         if (entity.get現在国保資格情報Entity() != null
                 && entity.get取込国保情報Entity() != null
-                && 登録区分_画面登録.equals(entity.get現在国保資格情報Entity().getTorokuKubun())) {
-            if (ＩＦ種類_電算.equals(processParameter.getIf種類())) {
-                entity.get取込国保情報Entity().setエラーコード(エラーコード_32);
+                && 登録区分_画面登録.equals(entity.get現在国保資格情報Entity().getTorokuKubun())
+                && ＩＦ種類_電算.equals(processParameter.getIf種類())) {
+            entity.get取込国保情報Entity().setエラーコード(エラーコード_32);
+            if (文言設定flag) {
                 entity.get取込国保情報Entity().setエラー文言(エラーコード文言);
-                entity.get取込国保情報Entity().setエラー区分(エラー区分);
+                文言設定flag = false;
             }
+            entity.get取込国保情報Entity().setエラー区分(エラー区分);
+        }
 
-            if (ＩＦ種類_電算２.equals(processParameter.getIf種類())) {
-                entity.get取込国保情報Entity().setエラーコード(エラーコード_82);
+        if (entity.get現在国保資格情報Entity() != null
+                && entity.get取込国保情報Entity() != null
+                && 登録区分_画面登録.equals(entity.get現在国保資格情報Entity().getTorokuKubun())
+                && ＩＦ種類_電算２.equals(processParameter.getIf種類())) {
+            entity.get取込国保情報Entity().setエラーコード(エラーコード_82);
+            if (文言設定flag) {
                 entity.get取込国保情報Entity().setエラー文言(エラーコード文言);
-                entity.get取込国保情報Entity().setエラー区分(エラー区分);
+                文言設定flag = false;
             }
+            entity.get取込国保情報Entity().setエラー区分(エラー区分);
         }
 
         if (entity.get取込国保情報Entity() == null || エラー区分_正常データ.equals(entity.get取込国保情報Entity().getエラー区分())) {

@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519001.PntNinteiShinsaHanteiListEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd503001.ShinsaHanteiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinseiinfoif.IPntNinteiShinsaHanteiListMapper;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
@@ -54,9 +53,9 @@ public class PntNinteiShinsaHanteiListProcess extends BatchProcessBase<PntNintei
                 || parameter.get証記載保険者番号() == null || parameter.get証記載保険者番号().isEmpty()) {
             市町村名 = new RString("全市町村");
         } else {
-            List<DbT7051KoseiShichosonMasterEntity> 構成市町村マスタ = mapper.select市町村名(parameter.toMybatisParameter());
-            if (!構成市町村マスタ.isEmpty()) {
-                市町村名 = 構成市町村マスタ.get(0).getShichosonMeisho();
+            List<RString> 市町村名List = mapper.select市町村名(parameter.toMybatisParameter());
+            if (!市町村名List.isEmpty()) {
+                市町村名 = 市町村名List.get(0);
             } else {
                 市町村名 = RString.EMPTY;
             }

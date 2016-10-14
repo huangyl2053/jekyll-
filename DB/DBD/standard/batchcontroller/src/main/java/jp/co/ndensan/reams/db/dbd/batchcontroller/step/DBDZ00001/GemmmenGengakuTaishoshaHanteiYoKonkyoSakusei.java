@@ -102,8 +102,10 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
 
     @Override
     protected void afterExecute() {
-        TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable = editorTaishouJohoEntity(被保険者番号list, 課税区分list, 金額list);
-        youkonkyoItokiTemp.insert(tempTable);
+        if (!被保険者番号list.isEmpty() || !課税区分list.isEmpty() || !金額list.isEmpty()) {
+            TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable = editorTaishouJohoEntity(被保険者番号list, 課税区分list, 金額list);
+            youkonkyoItokiTemp.insert(tempTable);
+        }
     }
 
     private TaishoShaHanteiYoukonkyoItokiTempTableEntity editorTaishouJohoEntity(List<TaishouJohoEntity> recordList,

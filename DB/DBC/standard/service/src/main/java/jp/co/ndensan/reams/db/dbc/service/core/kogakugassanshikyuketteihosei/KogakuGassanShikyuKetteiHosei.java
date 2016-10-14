@@ -252,12 +252,14 @@ public class KogakuGassanShikyuKetteiHosei {
                 被保険者番号, 証記載保険者番号, 支給申請書整理番号);
         KogakuGassanShikyuGakuKeisanKekka 高額合算支給額情報 = getshoriModeHantei_Three(
                 被保険者番号, 対象年度, 証記載保険者番号, 支給申請書整理番号);
-        boolean flag = ((高額合算決定情報 != null && !高額合算決定情報.isEmpty())
+        boolean flag1 = ((高額合算決定情報 != null && !高額合算決定情報.isEmpty())
                 && ((高額合算決定情報.get(0).get受取年月() != null && !高額合算決定情報.get(0).get受取年月().isEmpty())
                 || ((高額合算決定情報.get(0).get受取年月() == null || 高額合算決定情報.get(0).get受取年月().isEmpty())
                 && ONE.equals(高額合算決定情報.get(0).get支給区分コード()))));
+        boolean flag2 = (受取年月 != null && !受取年月.isEmpty() || ((受取年月 == null || 受取年月.isEmpty())
+                && ONE.equals(支給区分)));
         if (給付実績基本情報 == null) {
-            get給付実績基本情報のデータが存在しない場合(処理区分, 高額合算支給額情報, 高額合算決定情報, result, flag);
+            get給付実績基本情報のデータが存在しない場合(処理区分, 高額合算支給額情報, 高額合算決定情報, result, flag1, flag2);
             return result;
         }
         boolean 支給額フラグ = get支給額フラグ(高額合算決定情報, 給付実績基本情報);
@@ -457,20 +459,21 @@ public class KogakuGassanShikyuKetteiHosei {
             KogakuGassanShikyuGakuKeisanKekka 高額合算支給額情報,
             List<KogakuGassanShikyuFushikyuKettei> 高額合算決定情報,
             ShoriModeHanteiResult result,
-            boolean flag) {
+            boolean flag1,
+            boolean flag2) {
         if (ONE.equals(処理区分) && (高額合算決定情報 == null
                 || 高額合算決定情報.isEmpty()) && 高額合算支給額情報 != null) {
             result.setWkモード(処理不可);
             result.setWkメッセージ(支給決定情報補正判定MSG1);
 
         } else if (ONE.equals(処理区分) && (高額合算決定情報 != null && !高額合算決定情報.isEmpty())
-                && flag) {
+                && flag1) {
             result.setWkモード(処理不可);
             result.setWkメッセージ(支給決定情報補正判定MSG1);
-        } else if (TWO.equals(処理区分) && (高額合算決定情報 != null && !高額合算決定情報.isEmpty()) && flag) {
+        } else if (TWO.equals(処理区分) && flag2) {
             result.setWkモード(口座修正モード);
             result.setWkメッセージ(支給決定情報補正判定MSG2);
-        } else if (THREE.equals(処理区分) && (高額合算決定情報 != null && !高額合算決定情報.isEmpty()) && flag) {
+        } else if (THREE.equals(処理区分) && flag2) {
             result.setWkモード(削除照会モード);
             result.setWkメッセージ(支給決定情報補正判定MSG3);
         }

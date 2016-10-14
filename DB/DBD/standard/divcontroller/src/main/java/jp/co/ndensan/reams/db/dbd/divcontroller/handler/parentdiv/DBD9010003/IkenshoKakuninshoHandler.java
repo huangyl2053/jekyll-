@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD9010003;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
-import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
 import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.KenshoKakuninshoinfo;
 import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.NichijoSeikatsuJiritsudo;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010003.IkenshoKakuninshoDiv;
@@ -51,27 +50,27 @@ public class IkenshoKakuninshoHandler {
         div.getPanelShosaiEria().getCcdBunshoBangoInput().initialize(new ReportId(帳票分類ID));
         div.getPanelShosaiEria().getTxtCyouhyou().setValue(帳票);
         div.getPanelShosaiEria().getTxtSakuseiBi().setValue(new RDate(RDate.getNowDate().wareki().toDateString().toString()));
-        if (医療費控除情報リスト.get(NOM_0).get控除対象年() != null) {
+        if (医療費控除情報リスト.get(NOM_0).get控除対象年() != null && !医療費控除情報リスト.get(NOM_0).get控除対象年().isEmpty()) {
             RYear 控除対象年 = new RYear(医療費控除情報リスト.get(NOM_0).get控除対象年().toDateString());
             div.getPanelShosaiEria().getDdlTaishonen().setSelectedKey(控除対象年.toDateString());
         }
-        if (医療費控除情報リスト.get(NOM_0).get発行年月日() != null) {
+        if (医療費控除情報リスト.get(NOM_0).get発行年月日() != null && !医療費控除情報リスト.get(NOM_0).get発行年月日().isEmpty()) {
             div.getPanelShosaiEria().getTxtZenkaiHakkouBi().setValue(new RDate(医療費控除情報リスト.get(NOM_0).get発行年月日().
                     wareki().toDateString().toString()));
         }
-        if (医療費控除情報リスト.get(NOM_0).get申請年月日() != null) {
+        if (医療費控除情報リスト.get(NOM_0).get申請年月日() != null && !医療費控除情報リスト.get(NOM_0).get申請年月日().isEmpty()) {
             div.getPanelShosaiEria().getTxtShinseiBi().setValue(new RDate(医療費控除情報リスト.get(NOM_0).get申請年月日().
                     wareki().toDateString().toString()));
         }
-        if (医療費控除情報リスト.get(NOM_0).get主治医意見書受領年月日() != null) {
+        if (医療費控除情報リスト.get(NOM_0).get主治医意見書受領年月日() != null && !医療費控除情報リスト.get(NOM_0).get主治医意見書受領年月日().isEmpty()) {
             div.getPanelShosaiEria().getTxtDateIkensyoSakuseiBi().setValue(new RDate(医療費控除情報リスト.get(NOM_0).get主治医意見書受領年月日()
                     .wareki().toDateString().toString()));
         }
-        if (医療費控除情報リスト.get(NOM_0).get認定有効期間開始年月日() != null) {
+        if (医療費控除情報リスト.get(NOM_0).get認定有効期間開始年月日() != null && !医療費控除情報リスト.get(NOM_0).get認定有効期間開始年月日().isEmpty()) {
             div.getPanelShosaiEria().getTxtNinteiKikan().setFromValue(new RDate(医療費控除情報リスト.get(NOM_0).get認定有効期間開始年月日().
                     wareki().toDateString().toString()));
         }
-        if (医療費控除情報リスト.get(NOM_0).get認定有効期間終了年月日() != null) {
+        if (医療費控除情報リスト.get(NOM_0).get認定有効期間終了年月日() != null && !医療費控除情報リスト.get(NOM_0).get認定有効期間終了年月日().isEmpty()) {
             div.getPanelShosaiEria().getTxtNinteiKikan().setToValue(new RDate(医療費控除情報リスト.get(NOM_0).get認定有効期間終了年月日().
                     wareki().toDateString().toString()));
         }
@@ -87,12 +86,12 @@ public class IkenshoKakuninshoHandler {
      *
      * @param 医療費控除情報リスト List<IryohiKojoEntity>
      */
-    public void onChange対象年(List<IryohiKojoEntityResult> 医療費控除情報リスト) {
+    public void onChange対象年(List<IryohiKojo> 医療費控除情報リスト) {
         RString 控除対象年 = div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey();
-        IryohiKojoEntityResult 表示対象データ = null;
+        IryohiKojo 表示対象データ = null;
         RString 表示対象のデータ区分 = RString.EMPTY;
-        for (IryohiKojoEntityResult 医療費控除 : 医療費控除情報リスト) {
-            if (控除対象年.equals(医療費控除.get控除対象年())) {
+        for (IryohiKojo 医療費控除 : 医療費控除情報リスト) {
+            if (控除対象年.equals(医療費控除.get控除対象年().toDateString())) {
                 表示対象データ = 医療費控除;
                 表示対象のデータ区分 = 医療費控除.getデータ区分();
                 break;
@@ -136,6 +135,27 @@ public class IkenshoKakuninshoHandler {
         return 主治医意見書確認書Entity;
     }
 
+    /**
+     * 主治医意見書確認書画面にて発行するボタン押下時(onClick)
+     *
+     * @param div IkenshoKakuninshoDiv
+     * @return boolean
+     */
+    public boolean btnReportPublishnoCheck(IkenshoKakuninshoDiv div) {
+        if (div.getTxtDateIkensyoSakuseiBi().getValue() == null) {
+            return false;
+        } else if (div.getTxtNinteiKikan().getFromValue() == null) {
+            return false;
+        } else if (div.getTxtNinteiKikan().getToValue() == null) {
+            return false;
+        } else if (check日常生活自立度(div.getTxtZiritudo().getValue())) {
+            return false;
+        } else if (なし.equals(div.getTxtNyoushikkin().getValue())) {
+            return false;
+        }
+        return true;
+    }
+
     private RString get日常生活自立度(RString 日常生活自立度) {
         if (NichijoSeikatsuJiritsudo.Ｂ１.getコード().equals(日常生活自立度)) {
             return NichijoSeikatsuJiritsudo.Ｂ１.get名称();
@@ -147,6 +167,19 @@ public class IkenshoKakuninshoHandler {
             return NichijoSeikatsuJiritsudo.Ｃ２.get名称();
         }
         return RString.EMPTY;
+    }
+
+    private boolean check日常生活自立度(RString 日常生活自立度) {
+        if (NichijoSeikatsuJiritsudo.Ｂ１.get名称().equals(日常生活自立度)) {
+            return false;
+        } else if (NichijoSeikatsuJiritsudo.Ｂ２.get名称().equals(日常生活自立度)) {
+            return false;
+        } else if (NichijoSeikatsuJiritsudo.Ｃ１.get名称().equals(日常生活自立度)) {
+            return false;
+        } else if (NichijoSeikatsuJiritsudo.Ｃ２.get名称().equals(日常生活自立度)) {
+            return false;
+        }
+        return true;
     }
 
 }

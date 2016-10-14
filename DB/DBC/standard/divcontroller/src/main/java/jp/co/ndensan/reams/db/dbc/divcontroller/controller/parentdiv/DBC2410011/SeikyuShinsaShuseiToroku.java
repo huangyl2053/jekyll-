@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -44,6 +45,7 @@ public class SeikyuShinsaShuseiToroku {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 保存 = new RString("保存は正常に終了しました。");
+    private static final RString 前排他キー = new RString("JutakuKaishuRiyushoSakuseiTesuryo");
 
     /**
      * 画面初期化処理です。
@@ -54,8 +56,8 @@ public class SeikyuShinsaShuseiToroku {
     public ResponseData<SeikyuShinsaShuseiTorokuDiv> onLoad(SeikyuShinsaShuseiTorokuDiv div) {
 
         RString menuID = ResponseHolder.getMenuID();
-        get前排他(menuID);
-        if (!get前排他(menuID)) {
+        get前排他(前排他キー);
+        if (!get前排他(前排他キー)) {
             throw new PessimisticLockingException();
         }
         div.setDisabled(false);
@@ -201,6 +203,11 @@ public class SeikyuShinsaShuseiToroku {
     public ResponseData<SeikyuShinsaShuseiTorokuDiv> onClick_btnHozon(SeikyuShinsaShuseiTorokuDiv div) {
         SeikyuShinsaShuseiTorokuBusiness business = ViewStateHolder
                 .get(ViewStateKeys.住宅改修理由書事業者情報, SeikyuShinsaShuseiTorokuCollect.class).get事業者情報List().get(div.getDgSeikyu().getClickedRowId());
+        if (div.getDgSeikyuMeisai().getActiveRow() == null && !ResponseHolder.isReRequest()) {
+            InformationMessage message = new InformationMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
+                    DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
         if (getHandler(div).is内容変更状態(business) && 修正.equals(div.getSearchJutakuTesuryoSeikyuJohoPanel().getExecutionStatus())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
@@ -246,20 +253,20 @@ public class SeikyuShinsaShuseiToroku {
      * 前排他を取得します
      *
      *
-     * @param メニューID メニューID
+     * @param 前排他キー 前排他キー
      * @return boolean
      */
-    public boolean get前排他(RString メニューID) {
-        LockingKey 排他キー = new LockingKey(メニューID);
+    public boolean get前排他(RString 前排他キー) {
+        LockingKey 排他キー = new LockingKey(前排他キー);
         return RealInitialLocker.tryGetLock(排他キー);
     }
 
     /**
      * 前排他キーを解除します
      *
-     * @param メニューID メニューID
+     * @param 前排他キー 前排他キー
      */
-    public void 前排他キーの解除(RString メニューID) {
+    public void 前排他キーの解除(RString 前排他キー) {
         LockingKey 排他キー = new LockingKey();
         RealInitialLocker.release(排他キー);
     }

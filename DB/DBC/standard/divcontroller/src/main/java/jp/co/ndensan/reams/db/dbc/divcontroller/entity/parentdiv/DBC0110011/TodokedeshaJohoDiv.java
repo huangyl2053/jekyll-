@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0110011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120011.TodokedeshaDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
@@ -252,14 +252,14 @@ public class TodokedeshaJohoDiv extends Panel {
         this.getTodokedesha().setTxtTodokedeshaTelNo(txtTodokedeshaTelNo);
     }
 
-//    @JsonIgnore
-//    public DropDownList getDdlTodokedeshaKankeiKubun() {
-////        return this.getTodokedesha().getDdlTodokedeshaKankeiKubun();
-//    }
-//
-//    @JsonIgnore
-//    public void setDdlTodokedeshaKankeiKubun(DropDownList ddlTodokedeshaKankeiKubun) {
-////        this.getTodokedesha().setDdlTodokedeshaKankeiKubun(ddlTodokedeshaKankeiKubun);
-//    }
+    @JsonIgnore
+    public DropDownList getDdlTodokedeshaKankeiKubun() {
+        return this.getTodokedesha().getDdlTodokedeshaKankeiKubun();
+    }
+
+    @JsonIgnore
+    public void setDdlTodokedeshaKankeiKubun(DropDownList ddlTodokedeshaKankeiKubun) {
+        this.getTodokedesha().setDdlTodokedeshaKankeiKubun(ddlTodokedeshaKankeiKubun);
+    }
     // </editor-fold>
 }

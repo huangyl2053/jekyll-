@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki12.JigyohokokuCompYoshiki12Change;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki300103.JigyohokokuCompYoshiki300103Data;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki300103.JigyohokokuCompYoshiki300103ReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -136,10 +137,10 @@ public class JigyohokokuCompYoshiki300104Report extends Report<JigyohokokuCompYo
                 data.getその他_居住費_6(),
                 data.get合計_食費_6(),
                 data.get合計_居住費_6(),
-                data.get利用者負担減額_免除認定表の利用者負担_6(),
+                RString.EMPTY,
                 data.get減免認定表の特定負担限度額_食費_6(),
                 data.get減免認定表の特定負担限度額_居住費_6(),
-                data.get免除認定表の利用者負担_6()));
+                RString.EMPTY));
         return dataBodyList;
     }
 }

@@ -24,6 +24,7 @@ public class KyotakuKeikakuTodokedeEntity {
 
     private HihokenshaNo 居宅計画届出_被保険者番号;
     private FlexibleYearMonth 居宅計画届出_対象年月;
+    private int 居宅計画届出_履歴番号;
     private RString 居宅計画届出_届出区分;
     private RString 居宅計画届出_作成区分コード;
     private FlexibleDate 居宅計画届出_届出年月日;

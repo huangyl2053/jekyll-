@@ -26,6 +26,8 @@ public class FurikaeGoMeisaiEntity {
 
     private RString 支払方法区分;
     private boolean 総合事業フラグ;
+    private boolean 頁計フラグ;
+    private boolean 総合計フラグ;
     private RString 帳票タイトル;
     private RString 金融機関名称;
     private RString 支店名称;
@@ -55,13 +57,17 @@ public class FurikaeGoMeisaiEntity {
     private RString 支払場所;
     private FlexibleDate 決定年月日;
     private Decimal 振込金額;
-    private Decimal 振込金額合算;
     private int 名寄せ件数;
     private Decimal 頁計人数;
+    private Decimal 頁計金額;
     private Decimal 総合計要支援人数;
+    private Decimal 総合計要支援金額;
     private Decimal 総合計事業対象人数;
+    private Decimal 総合計事業対象金額;
     private Decimal 総合計不明人数;
+    private Decimal 総合計不明金額;
     private Decimal 総合計人数;
+    private Decimal 総合計金額;
     private ShikibetsuCode 識別コード;
 
 }

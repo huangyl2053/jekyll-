@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB114001;
 
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.KoikiZenShichosonJohoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.SaiHakkoParameter;
@@ -22,7 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBB114001_ShotokuShokaihyoHakkoParameter extends BatchParameterBase {
+public class DBB114001_ShotokuShokaihyoHakkoParameter
+        extends BatchParameterBase implements Serializable {
 
     private static final String NAME_処理年度 = "処理年度";
     private static final String KEY_処理年度 = "shorinendo";

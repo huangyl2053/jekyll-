@@ -43,6 +43,7 @@ public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProces
     private static final RString 処理枝番 = new RString("0000");
     private static final FlexibleYear 年度_固定 = new FlexibleYear("0000");
     private static final RString 読点 = new RString("、");
+    private static final RString FIRST_DAY = new RString("01");
 
     private KogakuKaigoServiceProcessParameter parameter;
     private IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper mapper;
@@ -120,7 +121,7 @@ public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProces
             tempEntity.setTaishoKaishiYMD(new FlexibleDate(parameter.get抽出条件日付From().toDateString()));
             tempEntity.setTaishoShuryoYMD(new FlexibleDate(parameter.get抽出条件日付To().toDateString()));
         } else if (抽出モード_決定者受付年月.equals(parameter.get抽出モード())) {
-            RString 月初日 = parameter.get決定者受付年月().toDateString().concat(new RString(1));
+            RString 月初日 = parameter.get決定者受付年月().toDateString().concat(FIRST_DAY);
             RString 月末日 = parameter.get決定者受付年月().toDateString()
                     .concat(new RString(parameter.get決定者受付年月().getLastDay()));
             tempEntity.setTaishoKaishiYMD(new FlexibleDate(月初日));

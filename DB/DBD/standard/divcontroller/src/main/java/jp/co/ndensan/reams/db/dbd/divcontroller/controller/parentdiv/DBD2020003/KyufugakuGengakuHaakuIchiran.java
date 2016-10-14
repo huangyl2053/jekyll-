@@ -66,8 +66,8 @@ public class KyufugakuGengakuHaakuIchiran {
 
     private RString isRadCheckedValue(RString selectedValue) {
         if (!selectedValue.isNullOrEmpty()) {
-            return SELECTED_VALUE;
+            return UN_SELECTED_VALUE;
         }
-        return UN_SELECTED_VALUE;
+        return SELECTED_VALUE;
     }
 }

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojoBuilder;
-import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
 import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.IryoHiKojoNaiyo;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
@@ -59,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class IkenshoKakuninsho {
 
     private static final RString 完了メッセージメイン = new RString("主治医意見書確認書の作成を完了しました。");
+    private static final RString 主治医意見書確認書 = new RString("主治医意見書確認書。");
 
     /**
      * 画面初期化処理です。
@@ -85,7 +85,7 @@ public class IkenshoKakuninsho {
         List<IryohiKojo> 医療費控除情報リスト = iryoHiKojoKakuninSinsei.getIryohikojyo_Chohyo(new HihokenshaNo(被保険者番号),
                 IryoHiKojoNaiyo.主治医意見書確認書.getコード());
         if (医療費控除情報リスト.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("主治医意見書確認書"));
+            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(主治医意見書確認書.toString()));
         }
         ViewStateHolder.put(ViewStateKeys.医療費控除情報, new ArrayList<>(医療費控除情報リスト));
         List<KeyValueDataSource> 年度DDLデータ = new ArrayList<>();
@@ -100,9 +100,6 @@ public class IkenshoKakuninsho {
         getHandler(div).initialize(taishoshaKey, 医療費控除情報リスト);
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号).concat(new RString("IryohiKojyoSyomeisho")));
-//        if (!RealInitialLocker.tryGetLock(排他キー)) {
-//            throw new PessimisticLockingException();
-//        }
         RealInitialLocker.lock(排他キー);
         AccessLogger.log(AccessLogType.照会, createpersonalData(taishoshaKey));
         return ResponseData.of(div).respond();
@@ -115,7 +112,7 @@ public class IkenshoKakuninsho {
      * @return ResponseData<IkenshoKakuninshoDiv>
      */
     public ResponseData<IkenshoKakuninshoDiv> onChange_ddlTaishonen(IkenshoKakuninshoDiv div) {
-        List<IryohiKojoEntityResult> 医療費控除情報リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
+        List<IryohiKojo> 医療費控除情報リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
         getHandler(div).onChange対象年(医療費控除情報リスト);
         return ResponseData.of(div).respond();
     }
@@ -133,24 +130,15 @@ public class IkenshoKakuninsho {
     }
 
     /**
-     * 主治医意見書確認書画面にて「終了するボタン押下時(onClick)のイベントハンドラです。
-     *
-     * @param div IkenshoKakuninshoDiv
-     * @return ResponseData<IkenshoKakuninshoDiv>
-     */
-    public ResponseData<IkenshoKakuninshoDiv> onClick_btnshuryo(IkenshoKakuninshoDiv div) {
-        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        RealInitialLocker.release(create排他キー(taishoshaKey));
-        return ResponseData.of(div).forwardWithEventName(DBD9010003TransitionEventName.終了).respond();
-    }
-
-    /**
      * 主治医意見書確認書画面にて発行するボタン押下時(onClick)のチェックです。
      *
      * @param div IkenshoKakuninshoDiv
      * @return ResponseData<IkenshoKakuninshoDiv>
      */
     public ResponseData<IkenshoKakuninshoDiv> onCheck_btnReportPublish(IkenshoKakuninshoDiv div) {
+        if (!getHandler(div).btnReportPublishnoCheck(div)) {
+            throw new ApplicationException(DbdErrorMessages.確認書_証明書発行不可.getMessage().replace(主治医意見書確認書.toString()));
+        }
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidateHandler(div).発行確認チェック(pairs);
         if (pairs.iterator().hasNext()) {

@@ -166,6 +166,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     private FileSpoolManager manager;
     private RString eucFilePath;
     private int 通番 = 1;
+    private NinshoshaSource 確認書認証者情報;
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter taiShoTableWriter;
@@ -199,6 +200,8 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100063.getReportId());
+        is公印に掛ける = false;
+        is公印を省略 = false;
         if (首長名印字位置_1.equals(帳票制御共通.get首長名印字位置())) {
             is公印に掛ける = true;
         }
@@ -281,6 +284,12 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).
                 build();
+
+        Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
+                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), this.parameter.get作成日());
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        確認書認証者情報 = NinshoshaSourceBuilderFactory.createInstance(認証者, 地方公共団体, dBC100063SourceWriter1.getImageFolderPath(),
+                new RDate(this.parameter.get作成日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし).buildSource();
 
     }
 
@@ -407,14 +416,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             ReportAtesakiEditor editor = new SofubutsuAtesakiEditorBuilder(宛先).build();
             SofubutsuAtesakiSource compSofubutsuAtesakiソース = new SofubutsuAtesakiSourceBuilder(editor).buildSource();
             kijunEntity.setAtesakiSource(compSofubutsuAtesakiソース);
-
-            Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
-                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), this.parameter.get作成日());
-            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            NinshoshaSource 確認書認証者情報 = NinshoshaSourceBuilderFactory.createInstance(認証者, 地方公共団体, dBC100063SourceWriter1.getImageFolderPath(),
-                    new RDate(this.parameter.get作成日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし).buildSource();
             kijunEntity.setNinshoshaSource(確認書認証者情報);
-
             kijunEntity.set文書番号(this.parameter.get文書番号());
             kijunEntity.setタイトル(MESSAGE);
             kijunEntity.set被保険者番号１(getColumnValue(exEntity.get対象世帯員().getHihokenshaNo()));
@@ -721,12 +723,14 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     }
 
     private Decimal 合計(Decimal a, Decimal b) {
-        if (a == null && b == null) {
-            return null;
-        } else if (a != null) {
+        if (a != null && b != null) {
+            return a.add(b);
+        } else if (b == null) {
             return a;
-        } else {
+        } else if (a == null) {
             return b;
+        } else {
+            return null;
         }
 
     }

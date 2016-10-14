@@ -101,11 +101,13 @@ public class HanyoListShakaiFukushiHojinKeigenProcessParameter implements IBatch
      *
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛先PSM
+     * @param 出力順 出力順
      * @return HanyoRisutoRiyoshaFutanWariaiMybatisParameter
      */
     public ShakaiFukushiHojinKeigenMybatisParameter toHanyoRisutoShakaiFukushiHoujinKeigenMybatisParameter(
             IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
-            RString psmAtesaki) {
+            RString psmAtesaki,
+            RString 出力順) {
         return new ShakaiFukushiHojinKeigenMybatisParameter(
                 cyusyutsuhohokubun,
                 cyusyutsukomokukubun,
@@ -117,6 +119,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcessParameter implements IBatch
                 kyakasha,
                 atenacyusyutsujyoken,
                 psmShikibetsuTaisho,
-                psmAtesaki);
+                psmAtesaki,
+                出力順);
     }
 }

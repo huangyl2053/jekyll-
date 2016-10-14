@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class YogaigoNinteiKekkaRenkeiDataTorikomiBatchParameterDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-21_20-30-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,10 +27,10 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiBatchParameterDiv extends Panel
     private RadioButton radDataSelect;
     @JsonProperty("radIfType")
     private RadioButton radIfType;
+    @JsonProperty("hdNum")
+    private TextBox hdNum;
     @JsonProperty("DataGridFile")
     private DataGrid<DataGridFile_Row> DataGridFile;
-    @JsonProperty("BtnDataInput")
-    private Button BtnDataInput;
     @JsonProperty("HokenshaList")
     private HokenshaListDiv HokenshaList;
 
@@ -77,6 +77,24 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiBatchParameterDiv extends Panel
     }
 
     /*
+     * gethdNum
+     * @return hdNum
+     */
+    @JsonProperty("hdNum")
+    public TextBox getHdNum() {
+        return hdNum;
+    }
+
+    /*
+     * sethdNum
+     * @param hdNum hdNum
+     */
+    @JsonProperty("hdNum")
+    public void setHdNum(TextBox hdNum) {
+        this.hdNum = hdNum;
+    }
+
+    /*
      * getDataGridFile
      * @return DataGridFile
      */
@@ -92,24 +110,6 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiBatchParameterDiv extends Panel
     @JsonProperty("DataGridFile")
     public void setDataGridFile(DataGrid<DataGridFile_Row> DataGridFile) {
         this.DataGridFile = DataGridFile;
-    }
-
-    /*
-     * getBtnDataInput
-     * @return BtnDataInput
-     */
-    @JsonProperty("BtnDataInput")
-    public Button getBtnDataInput() {
-        return BtnDataInput;
-    }
-
-    /*
-     * setBtnDataInput
-     * @param BtnDataInput BtnDataInput
-     */
-    @JsonProperty("BtnDataInput")
-    public void setBtnDataInput(Button BtnDataInput) {
-        this.BtnDataInput = BtnDataInput;
     }
 
     /*

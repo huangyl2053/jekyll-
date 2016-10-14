@@ -51,10 +51,6 @@ public enum ShokkenTorikeshiIchibuSoshituValidationMessage implements IValidatio
      */
     前回有効終了日と今回有効開始日の関連チェック(UrErrorMessages.期間が不正_追加メッセージあり２, "前回有効終了日", "今回有効開始日"),
     /**
-     * 新予防給付適用の60日前のみなし更新チェック。
-     */
-    新予防給付適用の60日前のみなし更新チェック(UrErrorMessages.更新不可, "新予防給付適用の60日前の「みなし更新」"),
-    /**
      * 受給申請中かの確認チェック。
      */
     受給申請中かの確認チェック(UrErrorMessages.更新不可_汎用, "受給申請中のデータが存在しない");

@@ -227,7 +227,9 @@ public class ShotokushokaihyoIkkatuHandler {
             KoikiZenShichosonJohoParameter 構成市町村情報param = new KoikiZenShichosonJohoParameter();
             構成市町村情報param.setShichosonShokibetsuID(joho.get市町村識別ID());
             構成市町村情報param.setShichosonCode(joho.get市町村コード());
-            構成市町村情報param.setShoKisaiHokenshaNo(joho.get証記載保険者番号());
+            if (joho.get証記載保険者番号() != null) {
+                構成市町村情報param.setShoKisaiHokenshaNo(joho.get証記載保険者番号().getColumnValue());
+            }
             構成市町村情報param.setKokuhorenKoikiShichosonNo(joho.get国保連広域内市町村番号());
             構成市町村情報param.setShichosonMeisho(joho.get市町村名称());
             構成市町村情報param.setTodofukenMeisho(joho.get都道府県名称());
@@ -251,7 +253,9 @@ public class ShotokushokaihyoIkkatuHandler {
             構成市町村情報param.setGappeiKyuShichosonKubun(joho.get合併旧市町村区分());
             構成市町村情報param.setGappeiKyuShichosonHyojiUmu(joho.get合併旧市町村表示有無());
             構成市町村情報param.setGappeiChiikiNo(joho.get合併情報地域番号());
-            構成市町村情報param.setUnyoHokenshaNo(joho.get運用保険者番号());
+            if (joho.get運用保険者番号() != null) {
+                構成市町村情報param.setUnyoHokenshaNo(joho.get運用保険者番号().getColumnValue());
+            }
             構成市町村情報param.setUnyoKaishiYMD(joho.get運用開始日());
             構成市町村情報param.setUnyoShuryoYMD(joho.get運用終了日());
             構成市町村情報param.setUnyoKeitaiKubun(joho.get運用形態区分());

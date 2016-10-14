@@ -85,7 +85,7 @@
         <result property="tyushutuTaishouKubun" column="tyushutuTaishouKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="rirekiNo1" column="rirekiNo1"/>
-        <result property="jikoFutan_KeisanYM" column="jikoFutan_KeisanYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="jikoFutan_KeisanYM" column="jikoFutan_KeisanYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="hokenSeidoCode" column="hokenSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenshaMei" column="hokenshaMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kokuho_HihokenshaShoKigo" column="kokuho_HihokenshaShoKigo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -372,7 +372,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
             resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity" fetchSize="500">
         SELECT 
-               "KogakugassanJikofutangakuInfoHoseiTemp".*
+               <include refid="allColumns_KogakugassanJikofutangakuInfoHoseiTemp" />
         FROM   
                "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
         <if test="改頁出力順 != null">
@@ -449,7 +449,7 @@
     
      <select id="select高額合算自己負担額データ" resultOrdered="true"
             resultMap="resultMap_高額合算自己負担額" fetchSize="500">
-        SELECT "KogakugassanJikofutangakuInfoHoseiTemp".*,
+        SELECT  <include refid="allColumns_KogakugassanJikofutangakuInfoHoseiTemp" />,
                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.allColumns_DbT3070KogakuGassanJikoFutanGaku" />
         FROM   "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
         LEFT JOIN rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070KogakuGassanJikoFutanGaku"
@@ -462,14 +462,19 @@
     </select>
     
      <resultMap id="resultMap_高額合算自己負担額" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakuGassanUpdateEntity" autoMapping="true">
-        <association property="中間ＤＢ自己負担額データ" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
+         <id column="hihokenshaNo"/>
+         <id column="taishoNendo"/>
+         <id column="hokenshaNo"/>
+         <id column="shikyuShinseishoSeiriNo"/>
+         <id column="rirekiNo2"/>
+         <association property="中間DBEntity" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
         <association property="高額合算自己負担額" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"/>
     </resultMap>
     
   <select id="select高額合算自己負担額明細データ" resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
             resultMap="resultMap_高額合算自己負担額明細" fetchSize="500">
-        SELECT "KogakugassanJikofutangakuInfoHoseiTemp".*,
+        SELECT  <include refid="allColumns_KogakugassanJikofutangakuInfoHoseiTemp" />,
                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
         FROM   "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
         LEFT JOIN ( SELECT * FROM rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai"
@@ -485,7 +490,250 @@
     </select>
     
     <resultMap id="resultMap_高額合算自己負担額明細" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakuGassanUpdateEntity" autoMapping="true">
-        <association property="中間ＤＢ自己負担額データ" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
+          <id column="hihokenshaNo"/>
+         <id column="taishoNendo"/>
+         <id column="hokenshaNo"/>
+         <id column="shikyuShinseishoSeiriNo"/>
+         <id column="rirekiNo2"/>
+        <association property="中間DBEntity" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
         <association property="高額合算自己負担額明細" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity"/>
     </resultMap>
+    <sql id="allColumns_KogakugassanJikofutangakuInfoHoseiTemp">
+         "KogakugassanJikofutangakuInfoHoseiTemp"."sourceArea" as "sourceArea",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kaipejiArea" as "kaipejiArea",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shinseiYMDShiteiMikeisanKubun" as "shinseiYMDShiteiMikeisanKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tyushutuTaishouKubun" as "tyushutuTaishouKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."seiriNo" as "seiriNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo1" as "rirekiNo1",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."jikoFutan_KeisanYM" as "jikoFutan_KeisanYM",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo" as "hihokenshaNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo" as "taishoNendo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo" as "hokenshaNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shikyuShinseishoSeiriNo" as "shikyuShinseishoSeiriNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2" as "rirekiNo2",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hokenSeidoCode" as "hokenSeidoCode",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaMei" as "hokenshaMei",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kokuho_HihokenshaShoKigo" as "kokuho_HihokenshaShoKigo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaShimeiKana" as "hihokenshaShimeiKana",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaShimei" as "hihokenshaShimei",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."umareYMD" as "umareYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."seibetsuCode" as "seibetsuCode",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shotokuKubun" as "shotokuKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."over70_ShotokuKubun" as "over70_ShotokuKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."jikoFutanSeiriNo" as "jikoFutanSeiriNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."koki_HokenshaNo" as "koki_HokenshaNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."koki_HihokenshaNo" as "koki_HihokenshaNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kokuho_HokenshaNo" as "kokuho_HokenshaNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kokuho_HihokenshaShoNo" as "kokuho_HihokenshaShoNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kokuho_KojinNo" as "kokuho_KojinNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."idoKubun" as "idoKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hoseiZumiSofuKubun" as "hoseiZumiSofuKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."taishoKeisanKaishiYMD" as "taishoKeisanKaishiYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."taishoKeisanShuryoYMD" as "taishoKeisanShuryoYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaKaishiYMD" as "hihokenshaKaishiYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaShuryoYMD" as "hihokenshaShuryoYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shinseiYMD" as "shinseiYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_JikoFutanGaku" as "tounen_04_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_Uchisu_70_74JikoFutanGaku" as "tounen_04_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_Under_70KogakuShikyuGaku" as "tounen_04_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_Over_70_74KogakuShikyuGaku" as "tounen_04_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_Tekiyo" as "tounen_04_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_JikoFutanGaku" as "tounen_05_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_Uchisu_70_74JikoFutanGaku" as "tounen_05_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_Under_70KogakuShikyuGaku" as "tounen_05_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_Over_70_74KogakuShikyuGaku" as "tounen_05_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_Tekiyo" as "tounen_05_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_JikoFutanGaku" as "tounen_06_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_Uchisu_70_74JikoFutanGaku" as "tounen_06_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_Under_70KogakuShikyuGaku" as "tounen_06_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_Over_70_74KogakuShikyuGaku" as "tounen_06_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_Tekiyo" as "tounen_06_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_JikoFutanGaku" as "tounen_07_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_Uchisu_70_74JikoFutanGaku" as "tounen_07_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_Under_70KogakuShikyuGaku" as "tounen_07_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_Over_70_74KogakuShikyuGaku" as "tounen_07_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_Tekiyo" as "tounen_07_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_JikoFutanGaku" as "tounen_08_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_Uchisu_70_74JikoFutanGaku" as "tounen_08_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_Under_70KogakuShikyuGaku" as "tounen_08_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_Over_70_74KogakuShikyuGaku" as "tounen_08_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_Tekiyo" as "tounen_08_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_JikoFutanGaku" as "tounen_09_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_Uchisu_70_74JikoFutanGaku" as "tounen_09_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_Under_70KogakuShikyuGaku" as "tounen_09_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_Over_70_74KogakuShikyuGaku" as "tounen_09_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_Tekiyo" as "tounen_09_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_JikoFutanGaku" as "tounen_10_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_Uchisu_70_74JikoFutanGaku" as "tounen_10_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_Under_70KogakuShikyuGaku" as "tounen_10_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_Over_70_74KogakuShikyuGaku" as "tounen_10_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_Tekiyo" as "tounen_10_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_JikoFutanGaku" as "tounen_11_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_Uchisu_70_74JikoFutanGaku" as "tounen_11_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_Under_70KogakuShikyuGaku" as "tounen_11_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_Over_70_74KogakuShikyuGaku" as "tounen_11_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_Tekiyo" as "tounen_11_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_JikoFutanGaku" as "tounen_12_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_Uchisu_70_74JikoFutanGaku" as "tounen_12_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_Under_70KogakuShikyuGaku" as "tounen_12_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_Over_70_74KogakuShikyuGaku" as "tounen_12_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_Tekiyo" as "tounen_12_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_Uchisu_70_74JikoFutanGaku" as "yokunen_01_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_JikoFutanGaku" as "yokunen_01_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_Under_70KogakuShikyuGaku" as "yokunen_01_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_Over_70_74KogakuShikyuGaku" as "tounen_07_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_Tekiyo" as "yokunen_01_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_JikoFutanGaku" as "yokunen_02_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_Uchisu_70_74JikoFutanGaku" as "yokunen_02_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_Under_70KogakuShikyuGaku" as "yokunen_02_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_Over_70_74KogakuShikyuGaku" as "yokunen_02_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_Tekiyo" as "yokunen_02_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_JikoFutanGaku" as "yokunen_03_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_Uchisu_70_74JikoFutanGaku" as "yokunen_03_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_Under_70KogakuShikyuGaku" as "yokunen_03_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_Over_70_74KogakuShikyuGaku" as "yokunen_03_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_Tekiyo" as "yokunen_03_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_JikoFutanGaku" as "yokunen_04_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_Uchisu_70_74JikoFutanGaku" as "yokunen_04_Uchisu_70_74JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_Under_70KogakuShikyuGaku" as "yokunen_04_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_Over_70_74KogakuShikyuGaku" as "yokunen_04_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_Tekiyo" as "yokunen_04_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_JikoFutanGaku" as "yokunen_05_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_Uchisu_70_74JikoFutanGaku" as "yokunen_05_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_Under_70KogakuShikyuGaku" as "yokunen_05_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_Over_70_74KogakuShikyuGaku" as "yokunen_05_Over_70_74KogakuShikyuGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_Tekiyo" as "yokunen_05_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_JikoFutanGaku" as "yokunen_06_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_Uchisu_70_74JikoFutanGaku" as "yokunen_06_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_Under_70KogakuShikyuGaku" as "yokunen_06_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_Over_70_74KogakuShikyuGaku" as "yokunen_06_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_Tekiyo" as "yokunen_06_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_JikoFutanGaku" as "yokunen_07_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_Uchisu_70_74JikoFutanGaku" as "yokunen_07_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_Under_70KogakuShikyuGaku" as "yokunen_07_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_Over_70_74KogakuShikyuGaku" as "yokunen_07_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_Tekiyo" as "yokunen_07_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."gokei_JikoFutanGaku" as "gokei_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."gokei_70_74JikoFutanGaku" as "gokei_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."gokei_Under70KogakuShikyuGaku" as "gokei_Under70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."gokei_70_74KogakuShikyuGaku" as "gokei_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_sumi_JikoFutanGaku" as "tounen_04_sumi_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_sumi_70_74JikoFutanGaku" as "tounen_04_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_sumi_under_70KogakuShikyuGaku" as "tounen_04_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_sumi_70_74KogakuShikyuGaku" as "tounen_04_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_sumi_Tekiyo" as "tounen_04_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_sumi_JikoFutanGaku" as "tounen_05_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_sumi_70_74JikoFutanGaku" as "tounen_05_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_sumi_under_70KogakuShikyuGaku" as "tounen_05_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_sumi_70_74KogakuShikyuGaku" as "tounen_05_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_sumi_Tekiyo" as "tounen_05_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_sumi_JikoFutanGaku" as "tounen_06_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_sumi_70_74JikoFutanGaku" as "tounen_06_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_sumi_under_70KogakuShikyuGaku" as "tounen_06_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_sumi_70_74KogakuShikyuGaku" as "tounen_06_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_sumi_Tekiyo" as "tounen_06_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_sumi_JikoFutanGaku" as "tounen_07_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_sumi_70_74JikoFutanGaku" as "tounen_07_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_sumi_under_70KogakuShikyuGaku" as "tounen_07_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_sumi_70_74KogakuShikyuGaku" as "tounen_07_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_sumi_Tekiyo" as "tounen_07_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_sumi_JikoFutanGaku" as "tounen_08_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_sumi_70_74JikoFutanGaku" as "tounen_08_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_sumi_under_70KogakuShikyuGaku" as "tounen_08_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_sumi_70_74KogakuShikyuGaku" as "tounen_08_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_sumi_Tekiyo" as "tounen_08_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_sumi_JikoFutanGaku" as "tounen_09_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_sumi_70_74JikoFutanGaku" as "tounen_09_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_sumi_under_70KogakuShikyuGaku" as "tounen_09_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_sumi_70_74KogakuShikyuGaku" as "tounen_09_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_sumi_Tekiyo" as "tounen_09_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_sumi_JikoFutanGaku" as "tounen_10_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_sumi_70_74JikoFutanGaku" as "tounen_10_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_sumi_under_70KogakuShikyuGaku" as "tounen_10_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_sumi_70_74KogakuShikyuGaku" as "tounen_10_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_sumi_Tekiyo" as "tounen_10_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_sumi_JikoFutanGaku" as "tounen_11_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_sumi_70_74JikoFutanGaku" as "tounen_11_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_sumi_under_70KogakuShikyuGaku" as "tounen_11_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_sumi_70_74KogakuShikyuGaku" as "tounen_11_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_sumi_Tekiyo" as "tounen_11_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_sumi_JikoFutanGaku" as "tounen_12_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_sumi_70_74JikoFutanGaku" as "tounen_12_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_sumi_under_70KogakuShikyuGaku" as "tounen_12_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_sumi_70_74KogakuShikyuGaku" as "tounen_12_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_sumi_Tekiyo" as "tounen_12_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_sumi_JikoFutanGaku" as "yokunen_01_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_sumi_70_74JikoFutanGaku" as "yokunen_01_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_sumi_under_70KogakuShikyuGaku" as "yokunen_01_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_sumi_70_74KogakuShikyuGaku" as "yokunen_01_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_sumi_Tekiyo" as "yokunen_01_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_sumi_JikoFutanGaku" as "yokunen_02_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_sumi_70_74JikoFutanGaku" as "yokunen_02_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_sumi_under_70KogakuShikyuGaku" as "yokunen_02_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_sumi_70_74KogakuShikyuGaku" as "yokunen_02_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_sumi_Tekiyo" as "yokunen_02_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_sumi_JikoFutanGaku" as "yokunen_03_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_sumi_70_74JikoFutanGaku" as "yokunen_03_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_sumi_under_70KogakuShikyuGaku" as "yokunen_03_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_sumi_70_74KogakuShikyuGaku" as "yokunen_03_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_sumi_Tekiyo" as "yokunen_03_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_sumi_JikoFutanGaku" as "yokunen_04_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_sumi_70_74JikoFutanGaku" as "yokunen_04_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_sumi_under_70KogakuShikyuGaku" as "yokunen_04_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_sumi_70_74KogakuShikyuGaku" as "yokunen_04_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_sumi_Tekiyo" as "yokunen_04_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_sumi_JikoFutanGaku" as "yokunen_05_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_sumi_70_74JikoFutanGaku" as "yokunen_05_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_sumi_under_70KogakuShikyuGaku" as "yokunen_05_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_sumi_70_74KogakuShikyuGaku" as "yokunen_05_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_sumi_Tekiyo" as "yokunen_05_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_sumi_JikoFutanGaku" as "yokunen_06_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_sumi_70_74JikoFutanGaku" as "yokunen_06_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_sumi_under_70KogakuShikyuGaku" as "yokunen_06_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_sumi_70_74KogakuShikyuGaku" as "yokunen_06_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_sumi_Tekiyo" as "yokunen_06_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_sumi_JikoFutanGaku" as "yokunen_07_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_sumi_70_74JikoFutanGaku" as "yokunen_07_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_sumi_under_70KogakuShikyuGaku" as "yokunen_07_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_sumi_70_74KogakuShikyuGaku" as "yokunen_07_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_sumi_Tekiyo" as "yokunen_07_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."sumi_Gokei_JikoFutanGaku" as "sumi_Gokei_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."sumi_Gokei_70_74JikoFutanGaku" as "sumi_Gokei_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."sumi_Gokei_Under70KogakuShikyuGaku" as "sumi_Gokei_Under70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."sumi_Gokei_70_74KogakuShikyuGaku" as "sumi_Gokei_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."atesakiShimei" as "atesakiShimei",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."atesakiYubinNo" as "atesakiYubinNo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."atesakiJusho" as "atesakiJusho",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."madoguchi_TaishoshaHanteiCode" as "madoguchi_TaishoshaHanteiCode",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shiharaiBasho" as "shiharaiBasho",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shikaraiKaishiYMD" as "shikaraiKaishiYMD",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."shiharaiShuryoYMD" as "shiharaiShuryoYMD",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."shikaraiKaishiYMD_Yoobi" as "shikaraiKaishiYMD_Yoobi",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shiharaiShuryoYMD_Yoobi" as "shiharaiShuryoYMD_Yoobi",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shiharaiKaishiTime" as "shiharaiKaishiTime",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shiharaiShuryoTime" as "shiharaiShuryoTime",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."biko" as "biko",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."dataSakuseiKubun" as "dataSakuseiKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kakunin_UketoriYM" as "kakunin_UketoriYM",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hoseiZumi_SofuYM" as "hoseiZumi_SofuYM",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shomeisho_UketoriYM" as "shomeisho_UketoriYM",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."saisoFlag" as "saisoFlag",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."sofuTaishoGaiFlag" as "sofuTaishoGaiFlag",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."jikoFutanKeisanYMD" as "jikoFutanKeisanYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shomeiShoSakuseiYMD" as "shomeiShoSakuseiYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."koki_KokuhoShoriKubun" as "koki_KokuhoShoriKubun",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."jikoFutangakuShomeishoRealHakkoFlag" as "jikoFutangakuShomeishoRealHakkoFlag",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."batchHoseiJissiYMD" as "batchHoseiJissiYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."realHoseiJissiYMD" as "realHoseiJissiYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."juminShubetsuCode" as "juminShubetsuCode",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shichosonCode" as "shichosonCode",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yubinNo" as "yubinNo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."zenkokuJushoCode" as "zenkokuJushoCode",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."gyoseikuCode" as "gyoseikuCode",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."jikoFutanGakuHoseiJissi" as "jikoFutanGakuHoseiJissi",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kogakuShikyuGakuGakuHoseiJissi" as "kogakuShikyuGakuGakuHoseiJissi",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."ichiranKakuninKubun" as "ichiranKakuninKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."ichiranKakuninKubun2" as "ichiranKakuninKubun2"
+        
+    </sql>
 </mapper>

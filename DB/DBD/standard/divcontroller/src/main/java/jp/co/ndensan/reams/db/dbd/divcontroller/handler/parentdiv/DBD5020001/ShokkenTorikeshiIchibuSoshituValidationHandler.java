@@ -69,7 +69,6 @@ public class ShokkenTorikeshiIchibuSoshituValidationHandler {
                 .add(ShokkenTorikeshiIchibuSoshituValidationMessage.有効終了日が未入力, get有効終了日())
                 .add(ShokkenTorikeshiIchibuSoshituValidationMessage.有効開始日と有効終了日の関連チェック, get有効開始日と有効終了日())
                 .add(ShokkenTorikeshiIchibuSoshituValidationMessage.前回有効終了日と今回有効開始日の関連チェック, get前回有効終了日と今回有効開始日())
-                .add(ShokkenTorikeshiIchibuSoshituValidationMessage.新予防給付適用の60日前のみなし更新チェック, getみなし更新())
                 .add(ShokkenTorikeshiIchibuSoshituValidationMessage.受給申請中かの確認チェック, new ArrayList<ViewControl>())
                 .build();
 

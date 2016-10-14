@@ -20,10 +20,15 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran.Shun
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran.ShunoKibetsuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.KyufuGengakuHaakuListSakuseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.KyufuGengakuHaakuListTaishoTokuteiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.NinteiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.ShunoTainoJokyoTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.TaishoshaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200008.KyufuGengakuHaakuIchiranReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -32,10 +37,22 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -48,8 +65,9 @@ public class KyufuGengakuHaakuListSakuseiService {
 
     private final RString 収納情報なし = new RString("収　納　情　報　な　し");
     private static final RString 出力条件_基準日 = new RString("【基準日】");
+    private static final RString 出力条件_抽出対象 = new RString("【抽出対象】");
     private static final RString 出力条件_時効起算日登録者の選択 = new RString("【時効起算日登録者の選択】");
-    private static final RString 出力条件_被保険者選択 = new RString("【被保険者選択】");
+    private static final RString 出力条件_被保険者選択 = new RString("【被保険者】");
     private static final RString 出力条件_受給者全員 = new RString("【受給者全員】");
     private static final RString 出力条件_受給認定申請中者 = new RString("【受給認定申請中者】");
     private static final RString 出力条件_受給認定日抽出 = new RString("【受給認定日抽出】");
@@ -65,12 +83,18 @@ public class KyufuGengakuHaakuListSakuseiService {
     private static final RString 出力条件_帳票作成日時 = new RString("【帳票作成日時】");
     private static final RString 出力条件_出力順 = new RString("【出力順】");
 
+    private static final RString チェックオン = new RString("0");
+    private static final RString チェックオフ = new RString("1");
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
     private static final int NUM_5 = 5;
+    private static final int NUM_6 = 6;
+    private static final int NUM_7 = 7;
+    private static final int NUM_8 = 8;
+    private static final int NUM_9 = 9;
     private static final int NUM_12 = 12;
     private static final RString SIGN = new RString(" ＞ ");
 
@@ -166,7 +190,6 @@ public class KyufuGengakuHaakuListSakuseiService {
 
         Decimal 徴収権消滅期間_すべて合計 = Decimal.ZERO;
         Decimal 納付済み期間の合計_すべて合計 = Decimal.ZERO;
-        Decimal 給付額減額期間 = Decimal.ZERO;
 
         Iterator<Map.Entry<FlexibleYear, Decimal>> it = 調定額Map.entrySet().iterator();
         Map.Entry<FlexibleYear, Decimal> entry;
@@ -191,17 +214,115 @@ public class KyufuGengakuHaakuListSakuseiService {
             }
         }
 
-        if (!Decimal.ZERO.equals(徴収権消滅期間_すべて合計)) {
-            給付額減額期間 = 徴収権消滅期間_すべて合計.multiply(徴収権消滅期間_すべて合計.divide(
-                    徴収権消滅期間_すべて合計.add(納付済み期間の合計_すべて合計))).divide(2).multiply(NUM_12);
-        }
-
         KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity = new KyufuGengakuHaakuIchiranEntity();
-        set被保険者情報Entity(給付額減額把握リストEntity, 把握情報List.get(0), 徴収権消滅期間_すべて合計, 納付済み期間の合計_すべて合計, 給付額減額期間);
-        set被保険者ごとの収納情報(給付額減額把握リストEntity, 把握情報Map);  // 一人のデータ
+        set給付額減額情報(給付額減額把握リストEntity, 把握情報List.get(0), 徴収権消滅期間_すべて合計, 納付済み期間の合計_すべて合計);
+        set被保険者ごとの収納情報(給付額減額把握リストEntity, 把握情報Map);
         set減額対象情報(給付額減額把握リストEntity, 支払方法変更減額List);
+        edit収納情報なし(給付額減額把握リストEntity);
 
         return 給付額減額把握リストEntity;
+    }
+
+    private void edit収納情報なし(KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity) {
+        RString 日付関連_調定年度コンフィング = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        FlexibleYear 日付関連_調定年度 = new FlexibleYear(日付関連_調定年度コンフィング);
+        boolean is調定年度コンフィングminus9収納存在 = false;
+        boolean is調定年度コンフィングminus8収納存在 = false;
+        boolean is調定年度コンフィングminus7収納存在 = false;
+        boolean is調定年度コンフィングminus6収納存在 = false;
+        boolean is調定年度コンフィングminus5収納存在 = false;
+        boolean is調定年度コンフィングminus4収納存在 = false;
+        boolean is調定年度コンフィングminus3収納存在 = false;
+        boolean is調定年度コンフィングminus2収納存在 = false;
+        boolean is調定年度コンフィングminus1収納存在 = false;
+        boolean is調定年度コンフィングequal収納存在 = false;
+
+        List<ShunoJohoEntity> 収納情報リスト = 給付額減額把握リストEntity.get収納情報リスト();
+        for (ShunoJohoEntity 収納情報 : 収納情報リスト) {
+            if (日付関連_調定年度.minusYear(NUM_9).equals(収納情報.get賦課年度())) {
+                is調定年度コンフィングminus9収納存在 = true;
+            } else if (日付関連_調定年度.minusYear(NUM_8).equals(収納情報.get賦課年度())) {
+                is調定年度コンフィングminus8収納存在 = true;
+            } else if (日付関連_調定年度.minusYear(NUM_7).equals(収納情報.get賦課年度())) {
+                is調定年度コンフィングminus7収納存在 = true;
+            } else if (日付関連_調定年度.minusYear(NUM_6).equals(収納情報.get賦課年度())) {
+                is調定年度コンフィングminus6収納存在 = true;
+            } else if (日付関連_調定年度.minusYear(NUM_5).equals(収納情報.get賦課年度())) {
+                is調定年度コンフィングminus5収納存在 = true;
+            } else if (日付関連_調定年度.minusYear(NUM_4).equals(収納情報.get賦課年度())) {
+                is調定年度コンフィングminus4収納存在 = true;
+            } else if (日付関連_調定年度.minusYear(NUM_3).equals(収納情報.get賦課年度())) {
+                is調定年度コンフィングminus3収納存在 = true;
+            } else if (日付関連_調定年度.minusYear(NUM_2).equals(収納情報.get賦課年度())) {
+                is調定年度コンフィングminus2収納存在 = true;
+            } else if (日付関連_調定年度.minusYear(NUM_1).equals(収納情報.get賦課年度())) {
+                is調定年度コンフィングminus1収納存在 = true;
+            } else if (日付関連_調定年度.equals(収納情報.get賦課年度())) {
+                is調定年度コンフィングequal収納存在 = true;
+            }
+        }
+
+        if (!is調定年度コンフィングminus9収納存在) {
+            ShunoJohoEntity shunoJohoEntity = new ShunoJohoEntity();
+            shunoJohoEntity.set賦課年度(日付関連_調定年度.minusYear(NUM_9));
+            shunoJohoEntity.set収納情報なし(収納情報なし);
+            収納情報リスト.add(shunoJohoEntity);
+        }
+        if (!is調定年度コンフィングminus8収納存在) {
+            ShunoJohoEntity shunoJohoEntity = new ShunoJohoEntity();
+            shunoJohoEntity.set賦課年度(日付関連_調定年度.minusYear(NUM_8));
+            shunoJohoEntity.set収納情報なし(収納情報なし);
+            収納情報リスト.add(shunoJohoEntity);
+        }
+        if (!is調定年度コンフィングminus7収納存在) {
+            ShunoJohoEntity shunoJohoEntity = new ShunoJohoEntity();
+            shunoJohoEntity.set賦課年度(日付関連_調定年度.minusYear(NUM_7));
+            shunoJohoEntity.set収納情報なし(収納情報なし);
+            収納情報リスト.add(shunoJohoEntity);
+        }
+        if (!is調定年度コンフィングminus6収納存在) {
+            ShunoJohoEntity shunoJohoEntity = new ShunoJohoEntity();
+            shunoJohoEntity.set賦課年度(日付関連_調定年度.minusYear(NUM_6));
+            shunoJohoEntity.set収納情報なし(収納情報なし);
+            収納情報リスト.add(shunoJohoEntity);
+        }
+        if (!is調定年度コンフィングminus5収納存在) {
+            ShunoJohoEntity shunoJohoEntity = new ShunoJohoEntity();
+            shunoJohoEntity.set賦課年度(日付関連_調定年度.minusYear(NUM_5));
+            shunoJohoEntity.set収納情報なし(収納情報なし);
+            収納情報リスト.add(shunoJohoEntity);
+        }
+        if (!is調定年度コンフィングminus4収納存在) {
+            ShunoJohoEntity shunoJohoEntity = new ShunoJohoEntity();
+            shunoJohoEntity.set賦課年度(日付関連_調定年度.minusYear(NUM_4));
+            shunoJohoEntity.set収納情報なし(収納情報なし);
+            収納情報リスト.add(shunoJohoEntity);
+        }
+        if (!is調定年度コンフィングminus3収納存在) {
+            ShunoJohoEntity shunoJohoEntity = new ShunoJohoEntity();
+            shunoJohoEntity.set賦課年度(日付関連_調定年度.minusYear(NUM_3));
+            shunoJohoEntity.set収納情報なし(収納情報なし);
+            収納情報リスト.add(shunoJohoEntity);
+        }
+        if (!is調定年度コンフィングminus2収納存在) {
+            ShunoJohoEntity shunoJohoEntity = new ShunoJohoEntity();
+            shunoJohoEntity.set賦課年度(日付関連_調定年度.minusYear(NUM_2));
+            shunoJohoEntity.set収納情報なし(収納情報なし);
+            収納情報リスト.add(shunoJohoEntity);
+        }
+        if (!is調定年度コンフィングminus1収納存在) {
+            ShunoJohoEntity shunoJohoEntity = new ShunoJohoEntity();
+            shunoJohoEntity.set賦課年度(日付関連_調定年度.minusYear(NUM_1));
+            shunoJohoEntity.set収納情報なし(収納情報なし);
+            収納情報リスト.add(shunoJohoEntity);
+        }
+        if (!is調定年度コンフィングequal収納存在) {
+            ShunoJohoEntity shunoJohoEntity = new ShunoJohoEntity();
+            shunoJohoEntity.set賦課年度(日付関連_調定年度);
+            shunoJohoEntity.set収納情報なし(収納情報なし);
+            収納情報リスト.add(shunoJohoEntity);
+        }
+        給付額減額把握リストEntity.set収納情報リスト(収納情報リスト);
     }
 
     /**
@@ -221,68 +342,87 @@ public class KyufuGengakuHaakuListSakuseiService {
         RStringBuilder 受給者全員builder = new RStringBuilder();
         RStringBuilder 受給認定申請中者builder = new RStringBuilder();
         RStringBuilder 受給認定日抽出builder = new RStringBuilder();
-        RStringBuilder 受給認定日抽出の開始builder = new RStringBuilder();
-        RStringBuilder 受給認定日抽出の終了builder = new RStringBuilder();
+        RStringBuilder 受給認定日抽出日付builder = new RStringBuilder();
         RStringBuilder 認定有効終了日抽出builder = new RStringBuilder();
-        RStringBuilder 認定有効終了日抽出の開始builder = new RStringBuilder();
-        RStringBuilder 認定有効終了日抽出の終了builder = new RStringBuilder();
+        RStringBuilder 認定有効終了日日付builder = new RStringBuilder();
         RStringBuilder 保険料完納者も出力builder = new RStringBuilder();
-        RStringBuilder 改頁出力順IDbuilder = new RStringBuilder();
-//        RStringBuilder 帳票分類IDbuilder = new RStringBuilder(); QA#102231
-        RStringBuilder 帳票IDbuilder = new RStringBuilder();
         RStringBuilder 帳票作成日時builder = new RStringBuilder();
 
-        基準日builder.append(出力条件_基準日).append(parameter.get基準日());
-        時効起算日登録者の選択builder.append(出力条件_時効起算日登録者の選択).append(parameter.get時効起算日登録者の選択());
-        被保険者選択builder.append(出力条件_被保険者選択).append(parameter.get被保険者選択());
-        受給者全員builder.append(出力条件_受給者全員).append(parameter.get受給者全員());
-        受給認定申請中者builder.append(出力条件_受給認定申請中者).append(parameter.get受給認定申請中者());
-        受給認定日抽出builder.append(出力条件_受給認定日抽出).append(parameter.get受給認定日抽出());
-        if (parameter.get受給認定日抽出の開始() == null) {
-            受給認定日抽出の開始builder.append(出力条件_受給認定日抽出の開始);
-        } else {
-            受給認定日抽出の開始builder.append(出力条件_受給認定日抽出の開始).append(parameter.get受給認定日抽出の開始());
+        基準日builder.append(出力条件_基準日).append(RString.HALF_SPACE).append(parameter.get基準日().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        if (チェックオン.equals(parameter.get時効起算日登録者の選択())) {
+            時効起算日登録者の選択builder.append(出力条件_抽出対象).append(RString.HALF_SPACE).append(new RString("時効起算日登録者のみ出力"));
+        } else if (チェックオフ.equals(parameter.get時効起算日登録者の選択())) {
+            時効起算日登録者の選択builder.append(出力条件_抽出対象).append(RString.HALF_SPACE).append(new RString("時効起算日登録者以外出力"));
         }
-        if (parameter.get受給認定日抽出の終了() == null) {
-            受給認定日抽出の終了builder.append(出力条件_受給認定日抽出の終了);
-        } else {
-            受給認定日抽出の終了builder.append(出力条件_受給認定日抽出の終了).append(parameter.get受給認定日抽出の終了());
+
+        if (チェックオン.equals(parameter.get被保険者選択())) {
+            被保険者選択builder.append(出力条件_被保険者選択).append(RString.HALF_SPACE).append(new RString("被保険者全員"));
+        } else if (チェックオフ.equals(parameter.get被保険者選択())) {
+            被保険者選択builder.append(出力条件_被保険者選択).append(RString.HALF_SPACE).append(new RString("被保険者全員以外"));
         }
-        認定有効終了日抽出builder.append(出力条件_認定有効終了日抽出).append(parameter.get認定有効終日抽出());
-        if (parameter.get認定有効終日抽出の開始() == null) {
-            認定有効終了日抽出の開始builder.append(出力条件_認定有効終了日抽出の開始);
-        } else {
-            認定有効終了日抽出の開始builder.append(出力条件_認定有効終了日抽出の開始).append(parameter.get認定有効終日抽出の開始());
+
+        if (チェックオン.equals(parameter.get受給者全員())) {
+            受給者全員builder.append("　　　　・受給者全員");
         }
-        if (parameter.get認定有効終日抽出の終了() == null) {
-            認定有効終了日抽出の終了builder.append(出力条件_認定有効終了日抽出の終了);
-        } else {
-            認定有効終了日抽出の終了builder.append(出力条件_認定有効終了日抽出の終了).append(parameter.get認定有効終日抽出の終了());
+        if (チェックオン.equals(parameter.get受給認定申請中者())) {
+            受給認定申請中者builder.append("　　　　・受給認定申請中者");
         }
-        保険料完納者も出力builder.append(出力条件_保険料完納者も出力).append(parameter.get保険料完納者も出力());
-        if (parameter.get改頁出力順ID() == null) {
-            改頁出力順IDbuilder.append(出力条件_改頁出力順ID);
-        } else {
-            改頁出力順IDbuilder.append(出力条件_改頁出力順ID).append(parameter.get改頁出力順ID());
+        if (チェックオン.equals(parameter.get受給認定日抽出())) {
+            受給認定日抽出builder.append("　　　　・受給認定日抽出");
         }
-//        帳票分類IDbuilder.append(出力条件_帳票分類ID).append(parameter.get時効起算日登録者の選択());
-        帳票IDbuilder.append(出力条件_帳票ID).append(parameter.get帳票ID());
-        帳票作成日時builder.append(出力条件_帳票作成日時).append(parameter.get帳票作成日時());
+        RString 受給認定日抽出の開始 = RString.EMPTY;
+        if (parameter.get受給認定日抽出の開始() != null) {
+            受給認定日抽出の開始 = parameter.get受給認定日抽出の開始().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        RString 受給認定日抽出の終了 = RString.EMPTY;
+        if (parameter.get受給認定日抽出の終了() != null) {
+            受給認定日抽出の終了 = parameter.get受給認定日抽出の終了().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        受給認定日抽出日付builder.append("　　　　　開始：").append(受給認定日抽出の開始).append(" ～ ").append(受給認定日抽出の終了);
+
+        if (チェックオン.equals(parameter.get認定有効終日抽出())) {
+            認定有効終了日抽出builder.append("　　　　・認定有効終日抽出");
+        }
+        RString 認定有効終日抽出の開始 = RString.EMPTY;
+        if (parameter.get受給認定日抽出の開始() != null) {
+            認定有効終日抽出の開始 = parameter.get認定有効終日抽出の開始().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        RString 認定有効終日抽出の終了 = RString.EMPTY;
+        if (parameter.get認定有効終日抽出の終了() != null) {
+            認定有効終日抽出の終了 = parameter.get認定有効終日抽出の終了().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        認定有効終了日日付builder.append("　　　　　開始：").append(認定有効終日抽出の開始).append(" ～ ").append(認定有効終日抽出の終了);
+
+        if (チェックオン.equals(parameter.get保険料完納者も出力())) {
+            保険料完納者も出力builder.append("　　　　・保険料完納者も出力");
+        }
+        帳票作成日時builder.append(出力条件_帳票作成日時).append(RString.HALF_SPACE).append(parameter.get帳票作成日時());
 
         出力条件.add(基準日builder.toRString());
         出力条件.add(時効起算日登録者の選択builder.toRString());
         出力条件.add(被保険者選択builder.toRString());
-        出力条件.add(受給者全員builder.toRString());
-        出力条件.add(受給認定申請中者builder.toRString());
-        出力条件.add(受給認定日抽出builder.toRString());
-        出力条件.add(受給認定日抽出の開始builder.toRString());
-        出力条件.add(受給認定日抽出の終了builder.toRString());
-        出力条件.add(認定有効終了日抽出builder.toRString());
-        出力条件.add(認定有効終了日抽出の開始builder.toRString());
-        出力条件.add(認定有効終了日抽出の終了builder.toRString());
-        出力条件.add(保険料完納者も出力builder.toRString());
-        出力条件.add(改頁出力順IDbuilder.toRString());
-        出力条件.add(帳票IDbuilder.toRString());
+        if (受給者全員builder.length() != 0) {
+            出力条件.add(受給者全員builder.toRString());
+        }
+        if (受給認定申請中者builder.length() != 0) {
+            出力条件.add(受給認定申請中者builder.toRString());
+        }
+        if (受給認定日抽出builder.length() != 0) {
+            出力条件.add(受給認定日抽出builder.toRString());
+            出力条件.add(受給認定日抽出日付builder.toRString());
+        }
+        if (認定有効終了日抽出builder.length() != 0) {
+            出力条件.add(認定有効終了日抽出builder.toRString());
+            出力条件.add(認定有効終了日日付builder.toRString());
+        }
+        if (保険料完納者も出力builder.length() != 0) {
+            出力条件.add(保険料完納者も出力builder.toRString());
+        }
         出力条件.add(帳票作成日時builder.toRString());
         出力条件.add(get出力順RStr(outputOrder));
 
@@ -377,7 +517,7 @@ public class KyufuGengakuHaakuListSakuseiService {
 
     private RString get出力順RStr(IOutputOrder outputOrder) {
         RStringBuilder 出力順builder = new RStringBuilder();
-        出力順builder.append(出力条件_出力順);
+        出力順builder.append(出力条件_出力順).append(RString.HALF_SPACE);
 
         List<ISetSortItem> list = new ArrayList<>();
         if (outputOrder != null) {
@@ -405,64 +545,106 @@ public class KyufuGengakuHaakuListSakuseiService {
         return 出力順RStr;
     }
 
-    private void set被保険者情報Entity(KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity, KyufuGengakuHaakuListSakuseiEntity entity,
-            Decimal 徴収権消滅期間_すべて合計, Decimal 納付済み期間の合計_すべて合計, Decimal 給付額減額期間) {
+    private void set給付額減額情報(KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity, KyufuGengakuHaakuListSakuseiEntity entity,
+            Decimal 徴収権消滅期間_すべて合計, Decimal 納付済み期間の合計_すべて合計) {
 
         HihokenshaJohoEntity 被保険者情報Entity = new HihokenshaJohoEntity();
+        edit宛名情報(entity, 被保険者情報Entity);
+        edit資格情報(entity, 被保険者情報Entity);
+        edit認定情報(entity, 被保険者情報Entity);
 
-        ShunoTainoJokyoTempTableEntity 収納滞納状況TmpTblEntity = entity.get収納滞納状況TmpTblEntity();
-        if (収納滞納状況TmpTblEntity == null) {
-            収納滞納状況TmpTblEntity = new ShunoTainoJokyoTempTableEntity();
+        Decimal 給付額減額期間 = Decimal.ZERO;
+        if (!Decimal.ZERO.equals(徴収権消滅期間_すべて合計)) {
+            給付額減額期間 = 徴収権消滅期間_すべて合計.multiply(徴収権消滅期間_すべて合計.divide(
+                    徴収権消滅期間_すべて合計.add(納付済み期間の合計_すべて合計))).divide(2).multiply(NUM_12);
         }
-
-        if (収納滞納状況TmpTblEntity.getTmp_setaiCode() != null) {
-            被保険者情報Entity.set世帯番号(収納滞納状況TmpTblEntity.getTmp_setaiCode().getColumnValue());
-        }
-        if (収納滞納状況TmpTblEntity.getTmp_jusho() != null) {
-            被保険者情報Entity.set住所(収納滞納状況TmpTblEntity.getTmp_jusho().getColumnValue());
-        }
-        if (収納滞納状況TmpTblEntity.getTmp_jushoCode() != null) {
-            被保険者情報Entity.set住所コード(収納滞納状況TmpTblEntity.getTmp_jushoCode().getColumnValue());
-        }
-        被保険者情報Entity.set住特フラグ(収納滞納状況TmpTblEntity.getTmp_koikinaiJushochiTokureiFlag());
-        if (収納滞納状況TmpTblEntity.getTmp_koroshoIfShikibetsuCode() != null) {
-            被保険者情報Entity.set厚労省IF識別コード(収納滞納状況TmpTblEntity.getTmp_koroshoIfShikibetsuCode().getColumnValue());
-        }
-        被保険者情報Entity.set喪失事由(収納滞納状況TmpTblEntity.getTmp_shikakuSoshitsuJiyuCode());
-        被保険者情報Entity.set徴収権消滅期間(new RString(徴収権消滅期間_すべて合計.toString()));  // # 102231
-        被保険者情報Entity.set生保フラグ(収納滞納状況TmpTblEntity.isTmp_seihoFlag());
-        被保険者情報Entity.set申請中フラグ(収納滞納状況TmpTblEntity.isTmp_shiseityuFlag());
-        被保険者情報Entity.set申請日(収納滞納状況TmpTblEntity.getTmp_jukyuShinseiYMD());
+        被保険者情報Entity.set徴収権消滅期間(new RString(徴収権消滅期間_すべて合計.toString()));
         被保険者情報Entity.set納付済み期間(new RString(納付済み期間の合計_すべて合計.toString()));
         被保険者情報Entity.set給付額減額期間(new RString(給付額減額期間.toString()));
-        被保険者情報Entity.set行政区(収納滞納状況TmpTblEntity.getTmp_gyoseikuName());
-        if (収納滞納状況TmpTblEntity.getTmp_gyoseikuCode() != null) {
-            被保険者情報Entity.set行政区ｺｰﾄﾞ(収納滞納状況TmpTblEntity.getTmp_gyoseikuCode().getColumnValue());
-        }
-        if (収納滞納状況TmpTblEntity.getTmp_hihokenshaShimei() != null) {
-            被保険者情報Entity.set被保険者氏名(収納滞納状況TmpTblEntity.getTmp_hihokenshaShimei().getColumnValue());
-        }
-        被保険者情報Entity.set被保険者氏名カナ(収納滞納状況TmpTblEntity.getTmp_hihokenshaShimeiKana());
-        if (収納滞納状況TmpTblEntity.getTmp_hihokenshaNo() != null) {
-            被保険者情報Entity.set被保険者番号(収納滞納状況TmpTblEntity.getTmp_hihokenshaNo().getColumnValue());
-        }
-        if (収納滞納状況TmpTblEntity.getTmp_yokaigoJotaiKubunCode() != null) {
-            被保険者情報Entity.set要介護状態区分コード(収納滞納状況TmpTblEntity.getTmp_yokaigoJotaiKubunCode().getColumnValue());
-        }
-        被保険者情報Entity.set認定日(収納滞納状況TmpTblEntity.getTmp_ninteiYMD());
-        被保険者情報Entity.set認定有効期間終了年月日(収納滞納状況TmpTblEntity.getTmp_ninteiYukoKikanShuryoYMD());
-        被保険者情報Entity.set認定有効期間開始年月日(収納滞納状況TmpTblEntity.getTmp_ninteiYukoKikanKaishiYMD());
-        if (収納滞納状況TmpTblEntity.getTmp_shikibetsuCode() != null) {
-            被保険者情報Entity.set識別コード(収納滞納状況TmpTblEntity.getTmp_shikibetsuCode().getColumnValue());
-        }
-        被保険者情報Entity.set資格区分(収納滞納状況TmpTblEntity.getTmp_shikakuKubunCode());
-        被保険者情報Entity.set資格取得日(収納滞納状況TmpTblEntity.getTmp_shikakuShutokuYMD());
-        被保険者情報Entity.set資格喪失日(収納滞納状況TmpTblEntity.getTmp_shikakuSoshitsuYMD());
-        if (収納滞納状況TmpTblEntity.getTmp_yubinNo() != null) {
-            被保険者情報Entity.set郵便番号(収納滞納状況TmpTblEntity.getTmp_yubinNo().getColumnValue());
-        }
 
         給付額減額把握リストEntity.set被保険者情報Entity(被保険者情報Entity);
+    }
+
+    private void edit宛名情報(KyufuGengakuHaakuListSakuseiEntity entity, HihokenshaJohoEntity 被保険者情報Entity) {
+        UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
+        if (宛名Entity == null) {
+            宛名Entity = new UaFt200FindShikibetsuTaishoEntity();
+        }
+        ShikibetsuCode 識別コード = 宛名Entity.getShikibetsuCode();
+        AtenaMeisho 被保険者氏名 = 宛名Entity.getKanjiShimei();
+        GyoseikuCode 行政区ｺｰﾄﾞ = 宛名Entity.getGyoseikuCode();
+        AtenaJusho 住所 = 宛名Entity.getJusho();
+        ZenkokuJushoCode 住所コード = 宛名Entity.getZenkokuJushoCode();
+        YubinNo 郵便番号 = 宛名Entity.getYubinNo();
+
+        if (識別コード != null) {
+            被保険者情報Entity.set識別コード(識別コード.getColumnValue());
+        }
+        if (被保険者氏名 != null) {
+            被保険者情報Entity.set被保険者氏名(被保険者氏名.getColumnValue());
+        }
+        被保険者情報Entity.set被保険者氏名カナ(宛名Entity.getKanaName());
+        被保険者情報Entity.set世帯番号(宛名Entity.getSeibetsuCode());
+        被保険者情報Entity.set行政区(宛名Entity.getGyoseikuName());
+        if (行政区ｺｰﾄﾞ != null) {
+            被保険者情報Entity.set行政区ｺｰﾄﾞ(行政区ｺｰﾄﾞ.getColumnValue());
+        }
+        if (住所 != null) {
+            被保険者情報Entity.set住所(住所.getColumnValue());
+        }
+        if (住所コード != null) {
+            被保険者情報Entity.set住所コード(住所コード.getColumnValue());
+        }
+        if (郵便番号 != null) {
+            被保険者情報Entity.set郵便番号(郵便番号.getColumnValue());
+        }
+    }
+
+    private void edit資格情報(KyufuGengakuHaakuListSakuseiEntity entity, HihokenshaJohoEntity 被保険者情報Entity) {
+        DbT1001HihokenshaDaichoEntity 資格情報Entity = entity.get資格情報Entity();
+        if (資格情報Entity == null) {
+            資格情報Entity = new DbT1001HihokenshaDaichoEntity();
+        }
+        if (資格情報Entity.getHihokenshaNo() != null) {
+            被保険者情報Entity.set被保険者番号(資格情報Entity.getHihokenshaNo().getColumnValue());
+        }
+        被保険者情報Entity.set資格取得日(資格情報Entity.getShikakuShutokuYMD());
+        被保険者情報Entity.set資格喪失日(資格情報Entity.getShikakuSoshitsuYMD());
+        被保険者情報Entity.set喪失事由(資格情報Entity.getShikakuSoshitsuJiyuCode());
+        被保険者情報Entity.set資格区分(資格情報Entity.getHihokennshaKubunCode());
+        被保険者情報Entity.set住特フラグ(資格情報Entity.getJushochiTokureiFlag());
+        boolean 生保フラグ = false;
+        if (entity.get生保情報Entity() != null && entity.get生保情報Entity().getJukyuKaishiYMD() != null
+                && !entity.get生保情報Entity().getJukyuKaishiYMD().isEmpty()) {
+            生保フラグ = true;
+        }
+        被保険者情報Entity.set生保フラグ(生保フラグ);
+    }
+
+    private void edit認定情報(KyufuGengakuHaakuListSakuseiEntity entity, HihokenshaJohoEntity 被保険者情報Entity) {
+        NinteiJohoEntity 認定情報 = entity.get認定情報();
+        if (認定情報 == null) {
+            認定情報 = new NinteiJohoEntity();
+        }
+        if (認定情報.get要介護認定申請Entity() != null) {
+            if (認定情報.get要介護認定申請Entity().getKoroshoIfShikibetsuCode() != null) {
+                被保険者情報Entity.set厚労省IF識別コード(認定情報.get要介護認定申請Entity().getKoroshoIfShikibetsuCode().getColumnValue());
+            }
+            被保険者情報Entity.set認定有効期間開始年月日(認定情報.get要介護認定申請Entity().getZenkaiYukoKikanEnd());
+            被保険者情報Entity.set認定有効期間終了年月日(認定情報.get要介護認定申請Entity().getZenkaiYukoKikanStart());
+            被保険者情報Entity.set申請日(認定情報.get要介護認定申請Entity().getNinteiShinseiYMD());
+        }
+        if (認定情報.get受給者Entity() != null) {
+            if (認定情報.get受給者Entity().getYokaigoJotaiKubunCode() != null) {
+                被保険者情報Entity.set要介護状態区分コード(認定情報.get受給者Entity().getYokaigoJotaiKubunCode().getColumnValue());
+            }
+            被保険者情報Entity.set認定日(認定情報.get受給者Entity().getNinteiYMD());
+        }
+        boolean 申請中フラグ = false;
+        if (entity.get申請中被保険者() != null && !entity.get申請中被保険者().isEmpty()) {
+            申請中フラグ = true;
+        }
+        被保険者情報Entity.set申請中フラグ(申請中フラグ);
     }
 
     private void set被保険者ごとの収納情報(KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity,
@@ -472,7 +654,7 @@ public class KyufuGengakuHaakuListSakuseiService {
         ShunoJohoEntity shunoEntity;
         List<ShunoKibetsuEntity> 期別情報List;
         ShunoKibetsuEntity 期別情報;
-//        shunoEntity.set特徴普徴区分(); 帳票がミス、期別の項目
+
         Iterator<Map.Entry<FlexibleYear, List<KyufuGengakuHaakuListSakuseiEntity>>> it = 把握情報Map.entrySet().iterator();
         Map.Entry<FlexibleYear, List<KyufuGengakuHaakuListSakuseiEntity>> entry;
         List<KyufuGengakuHaakuListSakuseiEntity> 年度の把握情報List;
@@ -482,6 +664,7 @@ public class KyufuGengakuHaakuListSakuseiService {
 
             entry = it.next();
             年度の把握情報List = entry.getValue();
+            shunoEntity.set特徴普徴区分(年度の把握情報List.get(0).get収納滞納状況TmpTblEntity().getTmp_tokucho_fuchoKubun());
             shunoEntity.set調定年度(年度の把握情報List.get(0).get収納滞納状況TmpTblEntity().getTmp_choteiNendo());
             shunoEntity.set賦課年度(年度の把握情報List.get(0).get収納滞納状況TmpTblEntity().getTmp_fukaNendo());
 
@@ -498,9 +681,9 @@ public class KyufuGengakuHaakuListSakuseiService {
                 }
                 期別情報List.add(期別情報);
             }
-            if (年度の把握情報List.isEmpty()) {
-                shunoEntity.set収納情報なし(収納情報なし);
-            }
+//            if (年度の把握情報List.isEmpty()) {
+//                shunoEntity.set収納情報なし(収納情報なし);
+//            }
             shunoEntity.set期別情報(期別情報List);
             収納情報リスト.add(shunoEntity);
         }

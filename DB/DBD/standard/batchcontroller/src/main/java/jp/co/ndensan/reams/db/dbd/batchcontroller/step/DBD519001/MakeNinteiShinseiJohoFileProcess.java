@@ -104,7 +104,7 @@ public class MakeNinteiShinseiJohoFileProcess extends BatchProcessBase<Kouikiyou
         IEucFileOutputJokenhyoPrinter printer = EucFileOutputJokenhyoFactory.createInstance(manager.バッチ出力条件リストの出力(parameter, 地方公共団体));
         printer.print();
         densanWriter.close();
-        if (isPublished && 文字コード.equals(new RString("1"))) {
+        if (isPublished && 要介護ＩＦ_類似変換.equals(new RString("1"))) {
             PublishExternalCharacterErrorList.publish(eucFilePath);
         }
     }

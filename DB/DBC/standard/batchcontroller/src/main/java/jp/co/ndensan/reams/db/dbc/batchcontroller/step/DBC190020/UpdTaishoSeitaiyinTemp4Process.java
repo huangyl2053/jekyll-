@@ -132,7 +132,7 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
                 ageLess16++;
             }
 
-            if ((RSTRING_16.compareTo(対象世帯員2.getAge()) <= 0 && 対象世帯員2.getAge().compareTo(RSTRING_18) <= 0)
+            if (null != 対象世帯員2.getAge() && (RSTRING_16.compareTo(対象世帯員2.getAge()) <= 0 && 対象世帯員2.getAge().compareTo(RSTRING_18) <= 0)
                     && (this.getDecimal(対象世帯員2.getNenkinShunyuGaku())
                     .add(this.getDecimal(対象世帯員2.getSonotanoGoukeiShotokuKingakuGoukei())).compareTo(DECIMAL_38) <= 0)
                     && (対象世帯員2.getAtenaDateDhubetsu_1231().equals(RSTRING_10) || 対象世帯員2.getAtenaDateDhubetsu_1231().equals(RSTRING_20))) {

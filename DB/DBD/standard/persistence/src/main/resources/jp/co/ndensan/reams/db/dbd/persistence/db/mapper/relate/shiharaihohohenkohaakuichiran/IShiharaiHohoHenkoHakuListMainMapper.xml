@@ -98,208 +98,165 @@
         CaT1018_督促状発行履歴."tokusokujoHakkoYMD" AS 督促状発行履歴_督促状発行年月日
         FROM
         "ShiharaiHohoHenkoTainoTempTable" AS 対象者情報一時テーブル
-        INNER JOIN (
-        SELECT  被保険者台帳管理."hihokenshaNo" AS 被保険者番号,
-        被保険者台帳管理."hihokenshaNo",
-        被保険者台帳管理."idoYMD",
-        被保険者台帳管理."edaNo",
-        被保険者台帳管理."idoJiyuCode",
-        被保険者台帳管理."shichosonCode",
-        被保険者台帳管理."shikibetsuCode",
-        被保険者台帳管理."shikakuShutokuJiyuCode",
-        被保険者台帳管理."shikakuShutokuYMD",
-        被保険者台帳管理."shikakuShutokuTodokedeYMD",
-        被保険者台帳管理."ichigoShikakuShutokuYMD",
-        被保険者台帳管理."hihokennshaKubunCode",
-        被保険者台帳管理."shikakuSoshitsuJiyuCode",
-        被保険者台帳管理."shikakuSoshitsuYMD",
-        被保険者台帳管理."shikakuSoshitsuTodokedeYMD",
-        被保険者台帳管理."shikakuHenkoJiyuCode",
-        被保険者台帳管理."shikakuHenkoYMD",
-        被保険者台帳管理."shikakuHenkoTodokedeYMD",
-        被保険者台帳管理."jushochitokureiTekiyoJiyuCode",
-        被保険者台帳管理."jushochitokureiTekiyoYMD",
-        被保険者台帳管理."jushochitokureiTekiyoTodokedeYMD",
-        被保険者台帳管理."jushochitokureiKaijoJiyuCode",
-        被保険者台帳管理."jushochitokureiKaijoYMD",
-        被保険者台帳管理."jushochitokureiKaijoTodokedeYMD",
-        被保険者台帳管理."jushochiTokureiFlag",
-        被保険者台帳管理."koikinaiJushochiTokureiFlag",
-        被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode",
-        被保険者台帳管理."kyuShichosonCode",
-        被保険者台帳管理."logicalDeletedFlag",
-        生活保護受給者."shikibetsuCode" AS 生保
-        FROM
-        rgdb."DbT1001HihokenshaDaicho" AS 被保険者台帳管理
-        LEFT JOIN  rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
-        ON   被保険者台帳管理."shikibetsuCode" = 生活保護受給者."shikibetsuCode"
-        WHERE
-        生活保護受給者."gyomuCode" = 'DB'
-        AND 生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> #{基準日}
-        AND #{基準日} <![CDATA[<=]]> 生活保護受給者."jukyuHaishiYMD"
-        ) AS 資格情報
-        ON   対象者情報一時テーブル."hihokenshaNo" = 資格情報.被保険者番号
-        INNER JOIN  rgdb."DbV4001JukyushaDaicho" AS 認定情報
-        ON   対象者情報一時テーブル."hihokenshaNo" = 認定情報."hihokenshaNo"
         LEFT JOIN (
-        SELECT
-        賦課Newest."hihokenshaNo" AS 被保険者番号,
-        調定共通_介護継承."shunoId" AS 収納ID,
-        賦課Newest."choteiNendo" AS 調定年度,
-        賦課Newest."choteiNendo",
-        賦課Newest."fukaNendo",
-        賦課Newest."tsuchishoNo",
-        賦課Newest."rirekiNo",
-        賦課Newest."hihokenshaNo",
-        賦課Newest."shikibetsuCode",
-        賦課Newest."setaiCode",
-        賦課Newest."setaiInsu",
-        賦課Newest."shikakuShutokuYMD",
-        賦課Newest."shikakuShutokuJiyu",
-        賦課Newest."shikakuSoshitsuYMD",
-        賦課Newest."shikakuSoshitsuJiyu",
-        賦課Newest."seihofujoShurui",
-        賦課Newest."seihoKaishiYMD",
-        賦課Newest."seihoHaishiYMD",
-        賦課Newest."ronenKaishiYMD",
-        賦課Newest."ronenHaishiYMD",
-        賦課Newest."fukaYMD",
-        賦課Newest."kazeiKubun",
-        賦課Newest."setaikazeiKubun",
-        賦課Newest."gokeiShotokuGaku",
-        賦課Newest."nenkinShunyuGaku",
-        賦課Newest."hokenryoDankai",
-        賦課Newest."hokenryoDankai1",
-        賦課Newest."nengakuHokenryo1",
-        賦課Newest."tsukiwariStartYM1",
-        賦課Newest."tsukiwariEndYM1",
-        賦課Newest."hokenryoDankai2",
-        賦課Newest."nengakuHokenryo2",
-        賦課Newest."tsukiwariStartYM2",
-        賦課Newest."tsukiwariEndYM2",
-        賦課Newest."choteiNichiji",
-        賦課Newest."choteiJiyu1",
-        賦課Newest."choteiJiyu2",
-        賦課Newest."choteiJiyu3",
-        賦課Newest."choteiJiyu4",
-        賦課Newest."koseiM",
-        賦課Newest."gemmenMaeHokenryo",
-        賦課Newest."gemmenGaku",
-        賦課Newest."kakuteiHokenryo",
-        賦課Newest."hokenryoDankaiKarisanntei",
-        賦課Newest."choshuHohoRirekiNo",
-        賦課Newest."idoKijunNichiji",
-        賦課Newest."kozaKubun",
-        賦課Newest."kyokaisoKubun",
-        賦課Newest."shokkenKubun",
-        賦課Newest."fukaShichosonCode",
-        賦課Newest."tkSaishutsuKampuGaku",
-        賦課Newest."fuSaishutsuKampuGaku",
-        介護期別."choteiNendo" AS "k_choteiNendo",
-        介護期別."fukaNendo" AS "k_fukaNendo",
-        介護期別."tsuchishoNo" AS "k_tsuchishoNo",
-        介護期別."rirekiNo" AS "k_rirekiNo",
-        介護期別."choshuHouhou" AS "k_choshuHouhou",
-        介護期別."ki" AS "k_ki",
-        介護期別."choteiId" AS "k_choteiId",
-        調定共通_介護継承."choteiId" AS "c_choteiId",
-        調定共通_介護継承."rirekiNo" AS "c_rirekiNo",
-        調定共通_介護継承."shunoId" AS "c_shunoId",
-        調定共通_介護継承."kaikeiNendo" AS "c_kaikeiNendo",
-        調定共通_介護継承."shoriNendo" AS "c_shoriNendo",
-        調定共通_介護継承."shoriNo" AS "c_shoriNo",
-        調定共通_介護継承."koseiKaisu" AS "c_koseiKaisu",
-        調定共通_介護継承."choteiJiyuCode" AS "c_choteiJiyuCode",
-        調定共通_介護継承."choteiYMD" AS "c_choteiYMD",
-        調定共通_介護継承."choteigaku" AS "c_choteigaku",
-        調定共通_介護継承."shohizei" AS "c_shohizei",
-        調定共通_介護継承."nokigenYMD" AS "c_nokigenYMD",
-        調定共通_介護継承."hoteiNokigenToYMD" AS "c_hoteiNokigenToYMD",
-        調定共通_介護継承."fukaShoriJokyo" AS "c_fukaShoriJokyo",
-        時効起算日管理."shoKisaiHokenshaNo" AS "j_shoKisaiHokenshaNo",
-        時効起算日管理."hihokenshaNo" AS "j_hihokenshaNo",
-        時効起算日管理."choteiNendo" AS "j_choteiNendo",
-        時効起算日管理."fukaNendo" AS "j_fukaNendo",
-        時効起算日管理."tokucho_FuchoKubun" AS "j_tokucho_FuchoKubun",
-        時効起算日管理."tsuchishoNo" AS "j_tsuchishoNo",
-        時効起算日管理."shuno_Ki_Tsuki" AS "j_shuno_Ki_Tsuki",
-        時効起算日管理."rirekiNo" AS "j_rirekiNo",
-        時効起算日管理."jikoKisanYMD" AS "j_jikoKisanYMD",
-        時効起算日管理."jikoKisanYMDKubun" AS "j_jikoKisanYMDKubun",
-        時効起算日管理."logicalDeletedFlag" AS "j_logicalDeletedFlag"
+            SELECT
+                賦課Newest."hihokenshaNo" AS 被保険者番号,
+                調定共通_介護継承."shunoId" AS 収納ID,
+                賦課Newest."choteiNendo" AS 調定年度,
+                賦課Newest."choteiNendo",
+                賦課Newest."fukaNendo",
+                賦課Newest."tsuchishoNo",
+                賦課Newest."rirekiNo",
+                賦課Newest."hihokenshaNo",
+                賦課Newest."shikibetsuCode",
+                賦課Newest."setaiCode",
+                賦課Newest."setaiInsu",
+                賦課Newest."shikakuShutokuYMD",
+                賦課Newest."shikakuShutokuJiyu",
+                賦課Newest."shikakuSoshitsuYMD",
+                賦課Newest."shikakuSoshitsuJiyu",
+                賦課Newest."seihofujoShurui",
+                賦課Newest."seihoKaishiYMD",
+                賦課Newest."seihoHaishiYMD",
+                賦課Newest."ronenKaishiYMD",
+                賦課Newest."ronenHaishiYMD",
+                賦課Newest."fukaYMD",
+                賦課Newest."kazeiKubun",
+                賦課Newest."setaikazeiKubun",
+                賦課Newest."gokeiShotokuGaku",
+                賦課Newest."nenkinShunyuGaku",
+                賦課Newest."hokenryoDankai",
+                賦課Newest."hokenryoDankai1",
+                賦課Newest."nengakuHokenryo1",
+                賦課Newest."tsukiwariStartYM1",
+                賦課Newest."tsukiwariEndYM1",
+                賦課Newest."hokenryoDankai2",
+                賦課Newest."nengakuHokenryo2",
+                賦課Newest."tsukiwariStartYM2",
+                賦課Newest."tsukiwariEndYM2",
+                賦課Newest."choteiNichiji",
+                賦課Newest."choteiJiyu1",
+                賦課Newest."choteiJiyu2",
+                賦課Newest."choteiJiyu3",
+                賦課Newest."choteiJiyu4",
+                賦課Newest."koseiM",
+                賦課Newest."gemmenMaeHokenryo",
+                賦課Newest."gemmenGaku",
+                賦課Newest."kakuteiHokenryo",
+                賦課Newest."hokenryoDankaiKarisanntei",
+                賦課Newest."choshuHohoRirekiNo",
+                賦課Newest."idoKijunNichiji",
+                賦課Newest."kozaKubun",
+                賦課Newest."kyokaisoKubun",
+                賦課Newest."shokkenKubun",
+                賦課Newest."fukaShichosonCode",
+                賦課Newest."tkSaishutsuKampuGaku",
+                賦課Newest."fuSaishutsuKampuGaku",
+                介護期別."choteiNendo" AS "k_choteiNendo",
+                介護期別."fukaNendo" AS "k_fukaNendo",
+                介護期別."tsuchishoNo" AS "k_tsuchishoNo",
+                介護期別."rirekiNo" AS "k_rirekiNo",
+                介護期別."choshuHouhou" AS "k_choshuHouhou",
+                介護期別."ki" AS "k_ki",
+                介護期別."choteiId" AS "k_choteiId",
+                調定共通_介護継承."choteiId" AS "c_choteiId",
+                調定共通_介護継承."rirekiNo" AS "c_rirekiNo",
+                調定共通_介護継承."shunoId" AS "c_shunoId",
+                調定共通_介護継承."kaikeiNendo" AS "c_kaikeiNendo",
+                調定共通_介護継承."shoriNendo" AS "c_shoriNendo",
+                調定共通_介護継承."shoriNo" AS "c_shoriNo",
+                調定共通_介護継承."koseiKaisu" AS "c_koseiKaisu",
+                調定共通_介護継承."choteiJiyuCode" AS "c_choteiJiyuCode",
+                調定共通_介護継承."choteiYMD" AS "c_choteiYMD",
+                調定共通_介護継承."choteigaku" AS "c_choteigaku",
+                調定共通_介護継承."shohizei" AS "c_shohizei",
+                調定共通_介護継承."nokigenYMD" AS "c_nokigenYMD",
+                調定共通_介護継承."hoteiNokigenToYMD" AS "c_hoteiNokigenToYMD",
+                調定共通_介護継承."fukaShoriJokyo" AS "c_fukaShoriJokyo",
+                時効起算日管理."shoKisaiHokenshaNo" AS "j_shoKisaiHokenshaNo",
+                時効起算日管理."hihokenshaNo" AS "j_hihokenshaNo",
+                時効起算日管理."choteiNendo" AS "j_choteiNendo",
+                時効起算日管理."fukaNendo" AS "j_fukaNendo",
+                時効起算日管理."tokucho_FuchoKubun" AS "j_tokucho_FuchoKubun",
+                時効起算日管理."tsuchishoNo" AS "j_tsuchishoNo",
+                時効起算日管理."shuno_Ki_Tsuki" AS "j_shuno_Ki_Tsuki",
+                時効起算日管理."rirekiNo" AS "j_rirekiNo",
+                時効起算日管理."jikoKisanYMD" AS "j_jikoKisanYMD",
+                時効起算日管理."jikoKisanYMDKubun" AS "j_jikoKisanYMDKubun",
+                時効起算日管理."logicalDeletedFlag" AS "j_logicalDeletedFlag"
         FROM
         rgdb."DbV2002Fuka" AS 賦課Newest
         INNER JOIN  rgdb."DbT2003Kibetsu" AS 介護期別
         ON
-        賦課Newest."choteiNendo" = 介護期別."choteiNendo" AND
-        賦課Newest."fukaNendo" = 介護期別."fukaNendo" AND
-        賦課Newest."tsuchishoNo" = 介護期別."tsuchishoNo" AND
-        賦課Newest."rirekiNo" = 介護期別."rirekiNo"
+            賦課Newest."choteiNendo" = 介護期別."choteiNendo" AND
+            賦課Newest."fukaNendo" = 介護期別."fukaNendo" AND
+            賦課Newest."tsuchishoNo" = 介護期別."tsuchishoNo" AND
+            賦課Newest."rirekiNo" = 介護期別."rirekiNo"
         INNER JOIN  rgdb."UrT0705ChoteiKyotsu" AS 調定共通_介護継承
         ON	介護期別."choteiId" = 調定共通_介護継承."choteiId"
         LEFT JOIN
         (
         SELECT
-        時効起算日管理_明細."shoKisaiHokenshaNo",
-        時効起算日管理_明細."hihokenshaNo",
-        時効起算日管理_明細."choteiNendo",
-        時効起算日管理_明細."fukaNendo",
-        時効起算日管理_明細."tokucho_FuchoKubun",
-        時効起算日管理_明細."tsuchishoNo",
-        時効起算日管理_明細."shuno_Ki_Tsuki",
-        時効起算日管理_明細."rirekiNo",
-        時効起算日管理_明細."jikoKisanYMD",
-        時効起算日管理_明細."jikoKisanYMDKubun",
-        時効起算日管理_明細."logicalDeletedFlag"
+            時効起算日管理_明細."shoKisaiHokenshaNo",
+            時効起算日管理_明細."hihokenshaNo",
+            時効起算日管理_明細."choteiNendo",
+            時効起算日管理_明細."fukaNendo",
+            時効起算日管理_明細."tokucho_FuchoKubun",
+            時効起算日管理_明細."tsuchishoNo",
+            時効起算日管理_明細."shuno_Ki_Tsuki",
+            時効起算日管理_明細."rirekiNo",
+            時効起算日管理_明細."jikoKisanYMD",
+            時効起算日管理_明細."jikoKisanYMDKubun",
+            時効起算日管理_明細."logicalDeletedFlag"
         FROM
-        rgdb."DbT4023JikoKisambiKanri" AS 時効起算日管理_明細
+             rgdb."DbT4023JikoKisambiKanri" AS 時効起算日管理_明細
         INNER JOIN
         (
         SELECT
-        "hihokenshaNo", "choteiNendo", "fukaNendo", "tokucho_FuchoKubun", "tsuchishoNo",
-        "shuno_Ki_Tsuki", max("jikoKisanYMD") AS 時効起算年月日
+            "hihokenshaNo", "choteiNendo", "fukaNendo", "tokucho_FuchoKubun", "tsuchishoNo",
+            "shuno_Ki_Tsuki", max("jikoKisanYMD") AS 時効起算年月日
         FROM
-        rgdb."DbT4023JikoKisambiKanri" AS 時効起算日管理temp
+            rgdb."DbT4023JikoKisambiKanri" AS 時効起算日管理temp
         WHERE
-        時効起算日管理temp."tokucho_FuchoKubun" = '2'
+            時効起算日管理temp."tokucho_FuchoKubun" = '2'
         GROUP BY
-        "hihokenshaNo", "choteiNendo", "fukaNendo", "tokucho_FuchoKubun", "tsuchishoNo", "shuno_Ki_Tsuki"
+            "hihokenshaNo", "choteiNendo", "fukaNendo", "tokucho_FuchoKubun", "tsuchishoNo", "shuno_Ki_Tsuki"
         ) 時効起算日管理_最大情報
         ON	時効起算日管理_最大情報."hihokenshaNo" = 時効起算日管理_明細."hihokenshaNo" AND
-        時効起算日管理_最大情報."choteiNendo" = 時効起算日管理_明細."choteiNendo" AND
-        時効起算日管理_最大情報."fukaNendo" = 時効起算日管理_明細."fukaNendo" AND
-        時効起算日管理_最大情報."tsuchishoNo" = 時効起算日管理_明細."tsuchishoNo" AND
-        時効起算日管理_最大情報."shuno_Ki_Tsuki" = 時効起算日管理_明細."shuno_Ki_Tsuki" AND
-        時効起算日管理_最大情報."tokucho_FuchoKubun" = 時効起算日管理_明細."tokucho_FuchoKubun" AND
-        時効起算日管理_最大情報.時効起算年月日 = 時効起算日管理_明細."jikoKisanYMD"
+            時効起算日管理_最大情報."choteiNendo" = 時効起算日管理_明細."choteiNendo" AND
+            時効起算日管理_最大情報."fukaNendo" = 時効起算日管理_明細."fukaNendo" AND
+            時効起算日管理_最大情報."tsuchishoNo" = 時効起算日管理_明細."tsuchishoNo" AND
+            時効起算日管理_最大情報."shuno_Ki_Tsuki" = 時効起算日管理_明細."shuno_Ki_Tsuki" AND
+            時効起算日管理_最大情報."tokucho_FuchoKubun" = 時効起算日管理_明細."tokucho_FuchoKubun" AND
+            時効起算日管理_最大情報.時効起算年月日 = 時効起算日管理_明細."jikoKisanYMD"
         )AS 時効起算日管理
         ON	賦課Newest."hihokenshaNo" = 時効起算日管理."hihokenshaNo" AND
-        賦課Newest."choteiNendo" = 時効起算日管理."choteiNendo" AND
-        賦課Newest."fukaNendo" = 時効起算日管理."fukaNendo" AND
-        賦課Newest."tsuchishoNo" = 時効起算日管理."tsuchishoNo" AND
-        <!--介護期別."ki" = 時効起算日管理."shuno_Ki_Tsuki" AND-->
-        介護期別."choshuHouhou" = 時効起算日管理."tokucho_FuchoKubun"
-        WHERE
-        介護期別."choshuHouhou" = '2'
+            賦課Newest."choteiNendo" = 時効起算日管理."choteiNendo" AND
+            賦課Newest."fukaNendo" = 時効起算日管理."fukaNendo" AND
+            賦課Newest."tsuchishoNo" = 時効起算日管理."tsuchishoNo" AND
+            cast(介護期別."ki" as varchar(3)) = 時効起算日管理."shuno_Ki_Tsuki" AND-->
+            介護期別."choshuHouhou" = 時効起算日管理."tokucho_FuchoKubun"
+            WHERE
+            介護期別."choshuHouhou" = '2'
         )AS 収納情報
         ON	対象者情報一時テーブル."hihokenshaNo" = 収納情報.被保険者番号
         LEFT JOIN
         (
         SELECT
-        CaT1018_督促状発行履歴_明細."shunoId",
-        CaT1018_督促状発行履歴_明細."tokusokujoHakkoYMD"
+            CaT1018_督促状発行履歴_明細."shunoId",
+            CaT1018_督促状発行履歴_明細."tokusokujoHakkoYMD"
         FROM
-        rgca."CaT1018TokusokuHakkoRireki" AS CaT1018_督促状発行履歴_明細
+            rgca."CaT1018TokusokuHakkoRireki" AS CaT1018_督促状発行履歴_明細
         INNER JOIN
         (
-        SELECT
-        "shunoId", max("tokusokujoHakkoYMD") AS 督促状発行年月日
-        FROM
-        rgca."CaT1018TokusokuHakkoRireki" AS CaT1018_督促状発行履歴temp
-        WHERE
-        CaT1018_督促状発行履歴temp."tokusokujoHakkoYMD" <![CDATA[<=]]> #{基準日RDate}
-        GROUP BY
-        "shunoId"
+            SELECT
+                "shunoId", max("tokusokujoHakkoYMD") AS 督促状発行年月日
+            FROM
+                rgca."CaT1018TokusokuHakkoRireki" AS CaT1018_督促状発行履歴temp
+            WHERE
+                CaT1018_督促状発行履歴temp."tokusokujoHakkoYMD" <![CDATA[<=]]> #{基準日RDate}
+            GROUP BY
+            "shunoId"
         ) CaT1018_督促状発行履歴_最大
         ON   CaT1018_督促状発行履歴_明細."shunoId"  =  CaT1018_督促状発行履歴_最大."shunoId" AND
         CaT1018_督促状発行履歴_明細."tokusokujoHakkoYMD"  =  CaT1018_督促状発行履歴_最大.督促状発行年月日
@@ -308,23 +265,23 @@
         LEFT JOIN
         (
         SELECT
-        "shunyuId",
-        "shunoId",
-        "shunyugaku",
-        "shunyuYMD"
+            "shunyuId",
+            "shunoId",
+            "shunyugaku",
+            "shunyuYMD"
         FROM
-        rgca."CaT0701Shunyu" AS CaT0701_収入_明細
+            rgca."CaT0701Shunyu" AS CaT0701_収入_明細
         WHERE
-        CaT0701_収入_明細."shunyuYMD" <![CDATA[<=]]> #{基準日RDate}
-        AND CaT0701_収入_明細."sokuhoKubun"  =  false
+            CaT0701_収入_明細."shunyuYMD" <![CDATA[<=]]> #{基準日RDate}
+            AND CaT0701_収入_明細."sokuhoKubun"  =  false
         ) AS 収入
-        ON   収納情報."c_shunoId"  =  収入."shunoId"
-         ORDER BY
-        対象者情報一時テーブル."hihokenshaNo",
-        収納情報.調定年度,
-        収納情報."fukaNendo",
-        収納情報."tsuchishoNo",
-        収納情報."k_ki" ASC
+            ON   収納情報."c_shunoId"  =  収入."shunoId"
+            ORDER BY
+           対象者情報一時テーブル."hihokenshaNo",
+           収納情報.調定年度,
+           収納情報."fukaNendo",
+           収納情報."tsuchishoNo",
+           収納情報."k_ki" ASC
     </select>
 
     <!--償還未払い情報を取得して、償還未払い情報一時テーブルに登録する-->
@@ -591,8 +548,9 @@
         <result property="資格情報_資格喪失年月日" column="資格情報_資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="資格情報_資格喪失事由コード" column="資格情報_資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="資格情報_被保険者区分コード" column="資格情報_被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="資格情報_住所地特例フラグ" column="資格情報_住所地特例フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="資格情報_住所地特例フラグ" column="資格情報_住所地特例フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="申請中認定情報_被保険者番号" column="申請中認定情報_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+         <association property="宛名情報" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <collection property="収納状況情報リスト" resultMap="resultMap_収納状況情報リスト"/>
     </resultMap>
     <resultMap id="resultMap_収納状況情報リスト" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShunoStatusJohoEntity" >

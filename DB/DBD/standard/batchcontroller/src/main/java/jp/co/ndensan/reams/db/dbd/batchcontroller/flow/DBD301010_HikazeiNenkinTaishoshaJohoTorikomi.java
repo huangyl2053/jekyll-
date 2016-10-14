@@ -35,7 +35,7 @@ public class DBD301010_HikazeiNenkinTaishoshaJohoTorikomi extends BatchFlowBase<
     /**
      * 非課税年金対象者同定フロー
      */
-    private static final RString HIKAIFLOW = new RString("HikazeNenkinTaishoshaDouteiFlow");
+    private static final RString HIKAIFLOW = new RString("DBD301030_HikazeiNenkinTaishoshaDotei");
 
     private static final RString 処理区_1 = new RString("1");
     private static final RString 処理区_9 = new RString("9");
