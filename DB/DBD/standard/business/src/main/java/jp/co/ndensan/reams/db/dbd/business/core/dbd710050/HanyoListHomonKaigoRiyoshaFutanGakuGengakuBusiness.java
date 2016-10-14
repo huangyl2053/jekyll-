@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.core.dbd710040;
+package jp.co.ndensan.reams.db.dbd.business.core.dbd710050;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolistriyoshafutangakugengaku.RiyoshaFutanGakuGengakuEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolistriyoshafutangakugengaku.RiyoshaFutanGakuGengakuEucCsvEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolisthomonkaigoriyoshafutangakugengaku.HomonKaigoRiyoshaFutanGakuGengakuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolisthomonkaigoriyoshafutangakugengaku.HomonKaigoRiyoshaFutanGakuGengakuEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
@@ -47,11 +47,11 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  *
- * 汎用リスト出力(利用者負担額減免)ビジネスクラスです。
+ * 汎用リスト出力(訪問介護利用者負担額減額)_Businessクラスです．
  *
- * @reamsid_L DBD-3950-030 panxiaobo
+ * @reamsid_L DBD-3940-030 panxiaobo
  */
-public class HanyoListRiyoshaFutanGakuGengakuBusiness {
+public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuBusiness {
 
     private static final RString 住所地特例 = new RString("住特");
     private static final RString 区分_1 = new RString("1");
@@ -87,9 +87,6 @@ public class HanyoListRiyoshaFutanGakuGengakuBusiness {
     private static final RString 履歴修正 = new RString("履歴修正　　　");
     private static final RString SHIKAKUSYUTOKU = new RString("資格取得前申請");
     private static final RString SHITEII = new RString("指定医");
-    private static final RString 介護保険施設 = new RString("11");
-    private static final RString 住所地特例対象施設 = new RString("12");
-    private static final RString 適用除外施設 = new RString("21");
     private static final RString SHINKI = new RString("新規");
     private static final RString HENKO = new RString("変更");
     private static final RString ZATEI = new RString("暫定");
@@ -105,7 +102,7 @@ public class HanyoListRiyoshaFutanGakuGengakuBusiness {
      * @param Csvhitsukesurasyuhensyu 日付スラッシュ付加
      */
     public void setEucCsvEntity(Association association, boolean Csvhitsukesurasyuhensyu,
-            RiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity, RiyoshaFutanGakuGengakuEntity entity, HokenshaList hokenshaList) {
+            HomonKaigoRiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity, HomonKaigoRiyoshaFutanGakuGengakuEntity entity, HokenshaList hokenshaList) {
         isCsvhitsukesurasyuhensyu = Csvhitsukesurasyuhensyu;
         if (entity.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
@@ -257,10 +254,10 @@ public class HanyoListRiyoshaFutanGakuGengakuBusiness {
     /**
      * ＣＳＶ情報
      *
-     * @return RiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity
+     * @return HomonKaigoRiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity
      */
-    public RiyoshaFutanGakuGengakuEucCsvEntity setNewBlank() {
-        RiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity = new RiyoshaFutanGakuGengakuEucCsvEntity();
+    public HomonKaigoRiyoshaFutanGakuGengakuEucCsvEntity setNewBlank() {
+        HomonKaigoRiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity = new HomonKaigoRiyoshaFutanGakuGengakuEucCsvEntity();
         eucCsvEntity.set識別コード(RString.EMPTY);
         eucCsvEntity.set住民種別(RString.EMPTY);
         eucCsvEntity.set氏名(RString.EMPTY);
@@ -401,7 +398,7 @@ public class HanyoListRiyoshaFutanGakuGengakuBusiness {
         return eucCsvEntity;
     }
 
-    private void setBlank2(RiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity) {
+    private void setBlank2(HomonKaigoRiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity) {
         eucCsvEntity.set受給状況(RString.EMPTY);
         eucCsvEntity.set異動事由コード(RString.EMPTY);
         eucCsvEntity.set異動事由追加文(RString.EMPTY);
@@ -462,30 +459,17 @@ public class HanyoListRiyoshaFutanGakuGengakuBusiness {
         eucCsvEntity.set訪問調査先住所(RString.EMPTY);
         eucCsvEntity.set訪問調査先名称(RString.EMPTY);
         eucCsvEntity.set訪問調査先電話番号(RString.EMPTY);
-        eucCsvEntity.set指定事業者コード(RString.EMPTY);
-        eucCsvEntity.set施設入所日(RString.EMPTY);
-        eucCsvEntity.set施設退所日(RString.EMPTY);
-        eucCsvEntity.set指定事業者名(RString.EMPTY);
-        eucCsvEntity.set指定事業者名カナ(RString.EMPTY);
-        eucCsvEntity.set指定事業者郵便番号(RString.EMPTY);
-        eucCsvEntity.set指定事業者住所(RString.EMPTY);
-        eucCsvEntity.set指定事業者代表者名(RString.EMPTY);
-        eucCsvEntity.set指定事業者代表者名カナ(RString.EMPTY);
-        eucCsvEntity.set指定事業者代表者役職(RString.EMPTY);
-        eucCsvEntity.set指定事業者電話番号(RString.EMPTY);
-        eucCsvEntity.set指定事業者ＦＡＸ番号(RString.EMPTY);
-        eucCsvEntity.set指定事業者ケアマネ数(RString.EMPTY);
-        eucCsvEntity.set指定事業者利用者数(RString.EMPTY);
-        eucCsvEntity.set指定事業者認定日(RString.EMPTY);
-        eucCsvEntity.set指定事業者取消日(RString.EMPTY);
-        eucCsvEntity.set指定事業者実施地域(RString.EMPTY);
-        eucCsvEntity.set転出先保険者番号(RString.EMPTY);
-        eucCsvEntity.set利用者負担減免申請日(RString.EMPTY);
-        eucCsvEntity.set利用者負担減免決定日(RString.EMPTY);
-        eucCsvEntity.set利用者負担減免承認区分(RString.EMPTY);
-        eucCsvEntity.set利用者負担減免開始日(RString.EMPTY);
-        eucCsvEntity.set利用者負担減免終了日(RString.EMPTY);
-        eucCsvEntity.set利用者負担減免給付率(RString.EMPTY);
+        eucCsvEntity.set特別対策減免申請日(RString.EMPTY);
+        eucCsvEntity.set特別対策減免決定日(RString.EMPTY);
+        eucCsvEntity.set特別対策減免承認区分(RString.EMPTY);
+        eucCsvEntity.set特別対策減免開始日(RString.EMPTY);
+        eucCsvEntity.set特別対策減免終了日(RString.EMPTY);
+        eucCsvEntity.set特別対策給付率(RString.EMPTY);
+        eucCsvEntity.set公費法別番号(RString.EMPTY);
+        eucCsvEntity.set公費受給者番号(RString.EMPTY);
+        eucCsvEntity.set障害者手帳有無(RString.EMPTY);
+        eucCsvEntity.set障害者等級(RString.EMPTY);
+        eucCsvEntity.set障害者手帳番号(RString.EMPTY);
         eucCsvEntity.set被保険者番号_総合事業対象者(RString.EMPTY);
         eucCsvEntity.set履歴番号(RString.EMPTY);
         eucCsvEntity.set事業適用開始日(RString.EMPTY);
@@ -507,7 +491,7 @@ public class HanyoListRiyoshaFutanGakuGengakuBusiness {
         eucCsvEntity.set変更理由(RString.EMPTY);
     }
 
-    private void setEucCsvEntity2(RiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity, RiyoshaFutanGakuGengakuEntity entity) {
+    private void setEucCsvEntity2(HomonKaigoRiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity, HomonKaigoRiyoshaFutanGakuGengakuEntity entity) {
         eucCsvEntity.set意見依頼日(set年月日(entity.get今回意見書作成依頼_主治医意見書作成依頼()));
         eucCsvEntity.set意見予定日(set年月日(entity.get今回計画情報_主治医意見書登録予定年月日()));
         eucCsvEntity.set意見取寄日(set年月日(entity.get今回意見書情報_主治医意見書受領年月日()));
@@ -598,23 +582,23 @@ public class HanyoListRiyoshaFutanGakuGengakuBusiness {
         eucCsvEntity.set訪問調査先住所(entity.get今回調査委託先_住所());
         eucCsvEntity.set訪問調査先名称(entity.get今回調査委託先_事業者名称());
         eucCsvEntity.set訪問調査先電話番号(entity.get今回調査委託先_電話番号());
-        eucCsvEntity.set指定事業者コード(entity.get施設入所_入所施設コード());
-        eucCsvEntity.set施設入所日(set年月日(entity.get施設入所_入所年月日()));
-        eucCsvEntity.set施設退所日(set年月日(entity.get施設入所_退所年月日()));
-        set指定事業者(eucCsvEntity, entity);
-        eucCsvEntity.set利用者負担減免申請日(set年月日(entity.get利用者負担額減額_申請年月日()));
-        eucCsvEntity.set利用者負担減免決定日(set年月日(entity.get利用者負担額減額_決定年月日()));
-        eucCsvEntity.set利用者負担減免承認区分(entity.get利用者負担額減額_決定区分());
-        eucCsvEntity.set利用者負担減免開始日(set年月日(entity.get利用者負担額減額_適用開始年月日()));
-        eucCsvEntity.set利用者負担減免終了日(set年月日(entity.get利用者負担額減額_適用終了年月日()));
-        eucCsvEntity.set利用者負担減免給付率(entity.get利用者負担額減額_給付率());
+        eucCsvEntity.set特別対策減免申請日(set年月日(entity.get訪問介護利用者負担額減額_申請年月日()));
+        eucCsvEntity.set特別対策減免決定日(set年月日(entity.get訪問介護利用者負担額減額_決定年月日()));
+        eucCsvEntity.set特別対策減免承認区分(entity.get訪問介護利用者負担額減額_決定区分());
+        eucCsvEntity.set特別対策減免開始日(set年月日(entity.get訪問介護利用者負担額減額_適用開始年月日()));
+        eucCsvEntity.set特別対策減免終了日(set年月日(entity.get訪問介護利用者負担額減額_適用終了年月日()));
+        eucCsvEntity.set特別対策給付率(entity.get訪問介護利用者負担額減額_給付率());
+        eucCsvEntity.set公費法別番号(entity.get訪問介護利用者負担額減額_法別区分());
+        eucCsvEntity.set公費受給者番号(entity.get訪問介護利用者負担額減額_公費受給者番号());
+        eucCsvEntity.set障害者手帳有無(entity.get訪問介護利用者負担額減額_障害者手帳有無());
+        eucCsvEntity.set障害者等級(entity.get訪問介護利用者負担額減額_障害者手帳等級());
+        eucCsvEntity.set障害者手帳番号(entity.get訪問介護利用者負担額減額_障害者手帳番号());
         eucCsvEntity.set被保険者番号_総合事業対象者(entity.get総合事業対象者_被保険者番号());
         eucCsvEntity.set履歴番号(entity.get総合事業対象者_履歴番号());
         eucCsvEntity.set事業適用開始日(set年月日(entity.get総合事業対象者_適用開始年月日()));
         eucCsvEntity.set事業適用終了日(set年月日(entity.get総合事業対象者_適用終了年月日()));
         eucCsvEntity.set事業チェック実施日(set年月日(entity.get総合事業対象者_チェックリスト実施日()));
         eucCsvEntity.set事業決定日(set年月日(entity.get総合事業対象者_決定年月日()));
-        eucCsvEntity.set転出先保険者番号(RString.EMPTY);
         eucCsvEntity.set届出区分(set届出区分(entity.get居宅届出_届出区分()));
         eucCsvEntity.set居宅計画作成区分(set居宅計画作成区分(entity.get事業者作成_作成区分コード()));
         eucCsvEntity.set計画事業者番号(entity.get事業者作成_計画事業者番号());
@@ -837,40 +821,6 @@ public class HanyoListRiyoshaFutanGakuGengakuBusiness {
             return RString.EMPTY;
         }
         return NinchishoNichijoSeikatsuJiritsudoCode.toValue(認知症高齢者の日常生活自立度コード).get名称();
-    }
-
-    private void set指定事業者(RiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity, RiyoshaFutanGakuGengakuEntity entity) {
-        if (介護保険施設.equals(entity.get施設入所_入所施設種類())) {
-            eucCsvEntity.set指定事業者名(entity.get指定事業者_事業者名称());
-            eucCsvEntity.set指定事業者名カナ(entity.get指定事業者_事業者名称カナ());
-            eucCsvEntity.set指定事業者郵便番号(set郵便番号(entity.get指定事業者_郵便番号()));
-            eucCsvEntity.set指定事業者住所(entity.get指定事業者_事業者住所());
-            eucCsvEntity.set指定事業者代表者名(entity.get指定事業者代表者_代表者名());
-            eucCsvEntity.set指定事業者代表者名カナ(entity.get指定事業者代表者_代表者名カナ());
-            eucCsvEntity.set指定事業者代表者役職(entity.get指定事業者代表者_代表者役職名());
-            eucCsvEntity.set指定事業者電話番号(entity.get指定事業者_電話番号());
-            eucCsvEntity.set指定事業者ＦＡＸ番号(entity.get指定事業者_ＦＡＸ番号());
-            eucCsvEntity.set指定事業者ケアマネ数(entity.get指定事業者_所属人数());
-            eucCsvEntity.set指定事業者利用者数(entity.get指定事業者_利用者数());
-            eucCsvEntity.set指定事業者認定日(set年月日(entity.get指定事業者_有効開始日()));
-            eucCsvEntity.set指定事業者取消日(set年月日(entity.get指定事業者_有効終了日()));
-            eucCsvEntity.set指定事業者実施地域(entity.get指定事業者_サービス実施地域());
-        } else if (住所地特例対象施設.equals(entity.get施設入所_入所施設種類()) || 適用除外施設.equals(entity.get施設入所_入所施設種類())) {
-            eucCsvEntity.set指定事業者名(entity.get除外他特適用施設_事業者名称());
-            eucCsvEntity.set指定事業者名カナ(entity.get除外他特適用施設_事業者名称カナ());
-            eucCsvEntity.set指定事業者郵便番号(set郵便番号(entity.get除外他特適用施設_郵便番号()));
-            eucCsvEntity.set指定事業者住所(entity.get除外他特適用施設_事業者住所());
-            eucCsvEntity.set指定事業者代表者名(entity.get除外他特適用施設_代表者名称());
-            eucCsvEntity.set指定事業者代表者名カナ(entity.get除外他特適用施設_代表者名称カナ());
-            eucCsvEntity.set指定事業者代表者役職(entity.get除外他特適用施設_役職());
-            eucCsvEntity.set指定事業者電話番号(entity.get除外他特適用施設_電話番号());
-            eucCsvEntity.set指定事業者ＦＡＸ番号(entity.get除外他特適用施設_ＦＡＸ番号());
-            eucCsvEntity.set指定事業者ケアマネ数(RString.EMPTY);
-            eucCsvEntity.set指定事業者利用者数(RString.EMPTY);
-            eucCsvEntity.set指定事業者認定日(set年月日(entity.get除外他特適用施設_有効開始年月日()));
-            eucCsvEntity.set指定事業者取消日(set年月日(entity.get除外他特適用施設_有効終了年月日()));
-            eucCsvEntity.set指定事業者実施地域(RString.EMPTY);
-        }
     }
 
     private RString set届出区分(RString 届出区分) {
