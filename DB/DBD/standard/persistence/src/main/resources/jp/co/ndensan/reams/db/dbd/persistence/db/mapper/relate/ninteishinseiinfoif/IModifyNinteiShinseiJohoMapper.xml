@@ -113,8 +113,13 @@
                           )
         LEFT JOIN rgdb."DbT4003YokaigoNinteiInterface"
         ON "NinteiShinseiJohoTemp"."shinseishoKanriNo" = rgdb."DbT4003YokaigoNinteiInterface"."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT4150RenrakusakiJoho"
-        ON rgdb."DbT4150RenrakusakiJoho"."shinseishoKanriNo" = "NinteiShinseiJohoTemp"."shinseishoKanriNo"
+        LEFT JOIN (SELECT *
+        FROM
+        rgdb."DbT4150RenrakusakiJoho"
+        ORDER BY
+        rgdb."DbT4150RenrakusakiJoho"."priority"
+        ) AS DbT4150
+        ON DbT4150."shinseishoKanriNo" = "NinteiShinseiJohoTemp"."shinseishoKanriNo"
         )
         SELECT 
         master.*,

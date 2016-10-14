@@ -66,10 +66,10 @@ public class TorikomiDataIchijiSakusei extends BatchProcessBase<KaigoServiceNaiy
         RString maeSharedName = RString.EMPTY;
         RString atoSharedName = RString.EMPTY;
         for (UzT0885SharedFileEntryEntity sharedfile : sharedFiles) {
-            atoSharedName = sharedfile.getSharedFileName();
+            atoSharedName = sharedfile.getLocalFileName();
             if (atoSharedName.compareTo(maeSharedName) != 0) {
-                SharedFile.copyToLocal(FilesystemName.fromString(atoSharedName), FilesystemPath.fromString(Path.getTmpDirectoryPath()));
-                maeSharedName = atoSharedName;
+                SharedFile.copyToLocal(FilesystemName.fromString(CSVファイル名), FilesystemPath.fromString(Path.getTmpDirectoryPath()));
+                break;
             }
         }
         csvFilePath = Path.combinePath(Path.getTmpDirectoryPath(), atoSharedName);
@@ -111,7 +111,7 @@ public class TorikomiDataIchijiSakusei extends BatchProcessBase<KaigoServiceNaiy
     private CsvReader<KaigoServiceNaiyouCsvEntity> createCsvReader() {
         return new CsvReader.InstanceBuilder(csvFilePath, KaigoServiceNaiyouCsvEntity.class)
                 .setDelimiter(new RString(",")).setEnclosure(new RString("\""))
-                .hasHeader(false).setEncode(Encode.JIS).setNewLine(NewLine.CRLF).build();
+                .hasHeader(false).setEncode(Encode.SJIS).setNewLine(NewLine.CRLF).build();
     }
 
     private void 取込データ一時作成(TorikomiDataTempEntity tblEntity, FlexibleYearMonth 適用開始年月日, KaigoServiceNaiyouCsvEntity csvEntity) {
