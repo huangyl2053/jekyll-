@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuhiTuchiHosei;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufuhigenmenjyouhouregister.KyufuhigenmenjyouhouRegisterResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1300011.DataGridItiran_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1300011.KyufuTsuchiGenmenHoseiTorokuDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1300011.KyufuTsuchiGenmenHoseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -202,6 +204,7 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
             }
             div.getDataGridItiran().getDataSource().set(index, row);
         }
+        back();
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BTN_HOZON, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_HOZON, false);
     }
@@ -269,4 +272,34 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
         return row;
     }
 
+    /**
+     * 補正情報入力エリアを編集します。
+     *
+     * @return 編集結果
+     */
+    public RString getInputDiv() {
+        RStringBuilder inputDiv = new RStringBuilder();
+        KyufuTsuchiGenmenHoseiTorokuDetailDiv johoInputDiv = div.getKyufuTsuchiGenmenHoseiTorokuDetail();
+        if (null == johoInputDiv.getTextBoxDateSaabisu().getValue()) {
+            inputDiv.append(RString.EMPTY);
+        } else {
+            inputDiv.append(johoInputDiv.getTextBoxDateSaabisu().getValue().toDateString());
+        }
+        inputDiv.append(johoInputDiv.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue());
+        inputDiv.append(johoInputDiv.getCcdJigyoshaInput().getNyuryokuShisetsuKodo());
+        inputDiv.append(johoInputDiv.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho());
+        inputDiv.append(johoInputDiv.getCcdServiceTypeInput().getサービス種類コード());
+        inputDiv.append(johoInputDiv.getCcdServiceTypeInput().getサービス種類名称());
+        if (null == johoInputDiv.getTextBoxFudangoukei().getValue()) {
+            inputDiv.append(RString.EMPTY);
+        } else {
+            inputDiv.append(new RString(johoInputDiv.getTextBoxFudangoukei().getValue().toString()));
+        }
+        if (null == johoInputDiv.getTextBoxNumHiyouGoukei().getValue()) {
+            inputDiv.append(RString.EMPTY);
+        } else {
+            inputDiv.append(new RString(johoInputDiv.getTextBoxNumHiyouGoukei().getValue().toString()));
+        }
+        return inputDiv.toRString();
+    }
 }
