@@ -48,6 +48,7 @@
         <result property="取得情報_後_届出年月日" column="shutokujyohou_go_todokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="区分_前_資格" column="kubun_zen_shikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="区分_後_資格" column="kubun_go_shikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="宛名対象者" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" />
     </resultMap>
     <select resultOrdered="true" id="getHiHokenshaDaichoList" resultMap="resultMap_getHiHokenshaDaichoList"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListMybatisParameter"
@@ -317,8 +318,13 @@
         ELSE
         NULL
         END AS "kubun_go_shikaku"
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         rgdb."DbT1001HihokenshaDaicho" AS dbT1001
+        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />  
+        AS        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        ON        dbT1001."shikibetsuCode"  =
+                  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         WHERE
         TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> dbT1001."lastUpdateTimestamp"
         AND dbT1001."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
@@ -326,6 +332,8 @@
         dbT1001."idoJiyuCode" = #{shutokuJiyu_Hihokensha}
         OR dbT1001."idoJiyuCode" = #{henkoJiyu_Hihokensha}
         )
+        ORDER BY
+        #{shutsuryokuSort}
     </select>
 
     <update id="updateShoriDateKanri" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" >

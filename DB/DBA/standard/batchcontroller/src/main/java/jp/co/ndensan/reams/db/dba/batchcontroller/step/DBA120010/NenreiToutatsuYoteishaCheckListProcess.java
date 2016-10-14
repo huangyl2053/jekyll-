@@ -6,11 +6,13 @@
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA120010;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.nenreitoutatsuyoteishacheck.NenreiTotatsuYoteishaCheckListChohyo;
 import jp.co.ndensan.reams.db.dba.business.core.nenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListCsv;
 import jp.co.ndensan.reams.db.dba.business.report.nenreitotatsuyoteishaichiranhyo.NenreitotatsuYoteishaIchiranhyoItem;
 import jp.co.ndensan.reams.db.dba.business.report.nenreitotatsuyoteishaichiranhyo.NenreitotatsuYoteishaIchiranhyoReport;
+import jp.co.ndensan.reams.db.dba.definition.core.nenreitoutatsuyoteisha.BreakPageRelateItem;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba120010.INenreiToutatsuYoteishaCheckListProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
@@ -19,6 +21,8 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitoutatsuyoteishacheckli
 import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitoutatsuyoteishachecklist.NenreiToutatsuYoteishaCheckListJyohoEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsuyoteishaichiranhyo.NenreitotatsuYoteishaIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitoutatsuyoteishachecklist.INenreiToutatsuYoteishaCheckListMapper;
+import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.BreakPageCreator;
+import jp.co.ndensan.reams.db.dbz.business.report.reportitem.KaigoReportItems;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
@@ -35,9 +39,14 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -45,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -62,6 +72,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -99,7 +110,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
     private static final RString 状態_他市町村住所地特例者 = new RString("他市町村住所地特例者");
     private static final RString 生活 = new RString("●");
     private static final RString PSMYO = new RString("psmShikibetsuTaisho");
-    private static final int INDEX = 5;
+    private static final int MAX_OUTPUTCOUNT = 6;
+    private static final int MAX_OUTPUT_BREAKKEYLIST = 5;
     @edu.umd.cs.findbugs.annotations.SuppressWarnings("NP_UNWRITTEN_FIELD")
     private INenreiToutatsuYoteishaCheckListProcessParameter processParameter;
     private INenreiToutatsuYoteishaCheckListMapper nenreiCheckListMapper;
@@ -113,6 +125,12 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
     private final List<NenreiToutatsuYoteishaCheckListEntity> removeListEntity = new ArrayList<>();
     private FileSpoolManager manager;
     private RString eucFilePath;
+    private IOutputOrder chohyoShuturyokujun;
+    private RString 出力順;
+    List<RString> 出力順リスト;
+    List<RString> 改頁リスト;
+    private static List<RString> pageBreakKeys;
+
     @BatchWriter
     private BatchReportWriter<NenreitotatsuYoteishaIchiranhyoReportSource> batchReportWriter;
     private ReportSourceWriter<NenreitotatsuYoteishaIchiranhyoReportSource> reportSourceWriter;
@@ -123,43 +141,33 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         super.beforeExecute();
         nenreiCheckListJyohoEntity = new NenreiToutatsuYoteishaCheckListJyohoEntity();
         nenreiCheckListMapper = getMapper(INenreiToutatsuYoteishaCheckListMapper.class);
+        出力順リスト = new ArrayList<>();
+        改頁リスト = new ArrayList<>();
+
+        IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        if (processParameter.getShutsuryokujunId() != null) {
+            chohyoShuturyokujun = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBA介護資格,
+                    ReportIdDBA.DBA200001.getReportId(), processParameter.getShutsuryokujunId());
+            if (chohyoShuturyokujun != null) {
+                出力順 = MyBatisOrderByClauseCreator.create(
+                        KaigoReportItems.class, chohyoShuturyokujun).replace(
+                                new RString("order by"), RString.EMPTY);
+                get出力順項目();
+            }
+        }
+        while (出力順リスト.size() < MAX_OUTPUT_BREAKKEYLIST) {
+            出力順リスト.add(RString.EMPTY);
+        }
+        while (改頁リスト.size() < MAX_OUTPUT_BREAKKEYLIST) {
+            改頁リスト.add(RString.EMPTY);
+        }
+        createWriter();
         if (出力対象者_登録対象者.equals(processParameter.getSyutsuryokutaisyo())) {
             getTorokuSya();
         } else if (出力対象者_全ての対象者.equals(processParameter.getSyutsuryokutaisyo())) {
             getZenbuSya();
         }
-        if (nenreiCheckListEntity.isEmpty()) {
-            nenreiCheckListJyohoEntity
-                    .set年齢到達予定者チェックリスト(nenreiCheckListEntity);
-        } else {
-            mainsyori();
-            nenreiCheckListJyohoEntity.set年齢到達予定者チェックリスト(nenreiCheckListEntity2);
-        }
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        nenreiCheckListJyohoEntity.set市町村コード(new RString(
-                association.get地方公共団体コード().toString()));
-        nenreiCheckListJyohoEntity.set市町村名(association.get市町村名());
-        // TODO　QA476
-        List<RString> 並び順改頁 = new ArrayList<>();
-        for (int i = 0; i < INDEX; i++) {
-            並び順改頁.add(RString.EMPTY);
-        }
-        nenreiCheckListJyohoEntity.set並び順(並び順改頁);
-        nenreiCheckListJyohoEntity.set改頁(並び順改頁);
-//        ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBA介護資格, ID);
-        nenreiCheckListJyohoEntity.set項目名付加フラグ(processParameter.isKoumokumeiflg());
-        nenreiCheckListJyohoEntity.set連番付加フラグ(processParameter.isRenbanfukaflg());
-        nenreiCheckListJyohoEntity.set日付編集フラグ(processParameter.isNichihensyuflg());
-        nenreiCheckListJyohoEntity.set抽出期間From(processParameter.getKonkaikaishi().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString());
-        nenreiCheckListJyohoEntity.set抽出期間To(processParameter.getKonkaisyuryo().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString());
-        nenreiCheckListJyohoEntity.set住民種別(processParameter.getJuminShubetsu());
-        nenreiCheckListJyohoEntity.set出力対象(processParameter.getSyutsuryokutaisyo());
+        set年齢到達予定者リスト();
     }
 
     @Override
@@ -169,40 +177,19 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
                 nenreiCheckListJyohoEntity);
         NenreiToutatsuYoteishaCheckListCsv checkListCsv = new NenreiToutatsuYoteishaCheckListCsv();
         List<NenreiToutatsuYoteishaCheckListEucCsvEntity> eucCsvEntityList;
-        if (processParameter.isRenbanfukaflg()) {
-            eucCsvEntityList = checkListCsv.createNenreiToutatsuYoteishaCheckListRenbanCSV(
-                    nenreiCheckListJyohoEntity);
+        if (Boolean.TRUE.equals(processParameter.isRenbanfukaflg())) {
+            eucCsvEntityList = checkListCsv.createNenreiToutatsuYoteishaCheckListRenbanCSV(nenreiCheckListJyohoEntity);
         } else {
-            eucCsvEntityList = checkListCsv.createNenreiToutatsuYoteishaCheckListCSV(
-                    nenreiCheckListJyohoEntity);
+            eucCsvEntityList = checkListCsv.createNenreiToutatsuYoteishaCheckListCSV(nenreiCheckListJyohoEntity);
         }
-        if (!eucCsvEntityList.isEmpty()) {
-            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-            RString spoolWorkPath = manager.getEucOutputDirectry();
-            eucFilePath = Path.combinePath(spoolWorkPath, new RString("NenreiToutatsuYoteishaCheckListEucCsvEntity.csv"));
-            eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(nenreiCheckListJyohoEntity.is項目名付加フラグ()).
-                    build();
-
-            for (NenreiToutatsuYoteishaCheckListEucCsvEntity eucCsvEntity : eucCsvEntityList) {
-                eucCsvWriter.writeLine(eucCsvEntity);
-            }
+        for (NenreiToutatsuYoteishaCheckListEucCsvEntity eucCsvEntity : eucCsvEntityList) {
+            eucCsvWriter.writeLine(eucCsvEntity);
         }
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200001.getReportId().value()).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         NenreitotatsuYoteishaIchiranhyoReport report = NenreitotatsuYoteishaIchiranhyoReport
                 .createFrom(item.getHeadItem(), item.getBodyItem());
         report.writeBy(reportSourceWriter);
         batchReportWriter.close();
-        DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanri = new DbT7022ShoriDateKanriEntity();
-        dbT7022ShoriDateKanri.setTaishoKaishiYMD(processParameter.getKonkaikaishi());
-        dbT7022ShoriDateKanri.setTaishoShuryoYMD(processParameter.getKonkaisyuryo());
-        dbT7022ShoriDateKanri.setShoriName(ShoriName.年齢到達予定者チェックリスト.get名称());
-        nenreiCheckListMapper.getInsert(dbT7022ShoriDateKanri);
+        処理日付管理マスタ更新();
     }
 
     @Override
@@ -214,6 +201,79 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         if (eucFilePath != null) {
             manager.spool(eucFilePath);
         }
+    }
+
+    private void get出力順項目() {
+        List<ISetSortItem> 出力改頁リスト = chohyoShuturyokujun.get設定項目リスト();
+        for (ISetSortItem 出力改頁 : 出力改頁リスト) {
+            if (出力改頁.get出力順位() < MAX_OUTPUTCOUNT) {
+                出力順リスト.add(出力改頁.get出力順位(), 出力改頁.get項目名());
+            }
+            if (Boolean.TRUE.equals(出力改頁.is改頁項目())) {
+                改頁リスト.add(出力改頁.get項目名());
+            }
+        }
+        getPageBreakKeys(改頁リスト);
+    }
+
+    private void getPageBreakKeys(List<RString> 改頁リスト) {
+        List<RString> pageBreakKeyList = new ArrayList<>();
+        for (RString 改頁項目 : 改頁リスト) {
+            if (!(RString.isNullOrEmpty(改頁項目))) {
+                pageBreakKeyList.add(BreakPageCreator.getBreakPageName(BreakPageRelateItem.class, 改頁項目));
+            }
+        }
+        pageBreakKeys = Collections.unmodifiableList(pageBreakKeyList);
+    }
+
+    private void createWriter() {
+        if (pageBreakKeys != null && !pageBreakKeys.isEmpty() && !pageBreakKeys.contains(null) && !pageBreakKeys.contains(RString.EMPTY)) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200001.getReportId().value())
+                    .addBreak(new BreakerCatalog<NenreitotatsuYoteishaIchiranhyoReportSource>().simplePageBreaker(pageBreakKeys)).create();
+        } else {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200001.getReportId().value()).create();
+        }
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
+        eucFilePath = Path.combinePath(spoolWorkPath, new RString("NenreiToutatsuYoteishaCheckListEucCsvEntity.csv"));
+        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8).
+                setNewLine(NewLine.CRLF).
+                hasHeader(nenreiCheckListJyohoEntity.is項目名付加フラグ()).
+                build();
+    }
+
+    private void set年齢到達予定者リスト() {
+        if (nenreiCheckListEntity.isEmpty()) {
+            nenreiCheckListJyohoEntity
+                    .set年齢到達予定者チェックリスト(nenreiCheckListEntity);
+        } else {
+            mainsyori();
+            nenreiCheckListJyohoEntity.set年齢到達予定者チェックリスト(nenreiCheckListEntity2);
+        }
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        nenreiCheckListJyohoEntity.set市町村コード(new RString(
+                association.get地方公共団体コード().toString()));
+        nenreiCheckListJyohoEntity.set市町村名(association.get市町村名());
+        nenreiCheckListJyohoEntity.set並び順(出力順リスト);
+        nenreiCheckListJyohoEntity.set改頁(改頁リスト);
+        nenreiCheckListJyohoEntity.set項目名付加フラグ(processParameter.isKoumokumeiflg());
+        nenreiCheckListJyohoEntity.set連番付加フラグ(processParameter.isRenbanfukaflg());
+        nenreiCheckListJyohoEntity.set日付編集フラグ(processParameter.isNichihensyuflg());
+        nenreiCheckListJyohoEntity.set抽出期間From(toWarekiFormat(processParameter.getKonkaikaishi()));
+        nenreiCheckListJyohoEntity.set抽出期間To(toWarekiFormat(processParameter.getKonkaisyuryo()));
+        nenreiCheckListJyohoEntity.set住民種別(processParameter.getJuminShubetsu());
+        nenreiCheckListJyohoEntity.set出力対象(processParameter.getSyutsuryokutaisyo());
+    }
+
+    private RString toWarekiFormat(FlexibleDate date) {
+        return date.wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString();
     }
 
     private void mainsyori() {
@@ -235,11 +295,11 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         for (NenreiToutatsuYoteishaCheckListEntity entity : nenreiCheckListEntity2) {
             RString juminShubetsuCode = entity.getJuminShubetsuCode();
             if (住民種別_日本人のみ.equals(juminShubetsu) && !住登内日本人.equals(juminShubetsuCode)
-                && !住登外日本人.equals(juminShubetsuCode)) {
+                    && !住登外日本人.equals(juminShubetsuCode)) {
                 removeListEntity.add(entity);
             } else if (住民種別_外国人のみ.equals(juminShubetsu) && !住登内外国人
                     .equals(juminShubetsuCode)
-                       && !住登外外国人.equals(juminShubetsuCode)) {
+                    && !住登外外国人.equals(juminShubetsuCode)) {
                 removeListEntity.add(entity);
             }
         }
@@ -265,8 +325,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
             for (UrT0508SeikatsuHogoJukyushaEntity urT0508Sei : urT0508Seika) {
                 if (urT0508Sei.getJukyuKaishiYMD()
                         .isBeforeOrEquals(entity.getNenreiyotainichi())
-                    && entity.getNenreiyotainichi().isBeforeOrEquals(
-                        urT0508Sei.getJukyuHaishiYMD())) {
+                        && entity.getNenreiyotainichi().isBeforeOrEquals(
+                                urT0508Sei.getJukyuHaishiYMD())) {
                     entity.setSeikatsu(生活);
                     break;
                 }
@@ -291,7 +351,7 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         FlexibleDate 年齢到達日 = ageCalculator.get年齢到達日(NENREI_TOUTATSU);
         entity.setNenreiyotainichi(年齢到達日);
         if (processParameter.getKonkaisyuryo().isBefore(年齢到達日)
-            || (年齢到達日.isBefore(processParameter.getKonkaikaishi()))) {
+                || (年齢到達日.isBefore(processParameter.getKonkaikaishi()))) {
             removeListEntity.add(entity);
         }
     }
@@ -300,8 +360,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         getTekiyoJogaiList();
         for (DbT1002TekiyoJogaishaEntity dbT1002entity : dbT1002TekiyoJogaishaEntity) {
             if (dbT1002entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
-                && dbT1002entity.getTekiyoYMD().isBeforeOrEquals(entity.getNenreiyotainichi())
-                && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1002entity.getKaijoYMD())) {
+                    && dbT1002entity.getTekiyoYMD().isBeforeOrEquals(entity.getNenreiyotainichi())
+                    && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1002entity.getKaijoYMD())) {
                 entity.setJyotei(状態_適用除外者);
                 break;
             }
@@ -309,8 +369,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         getTashichosonJushochi();
         for (DbT1003TashichosonJushochiTokureiEntity dbT1003entity : dbT1003Entity) {
             if (dbT1003entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
-                && dbT1003entity.getTekiyoYMD().isBeforeOrEquals(entity.getNenreiyotainichi())
-                && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1003entity.getKaijoYMD())) {
+                    && dbT1003entity.getTekiyoYMD().isBeforeOrEquals(entity.getNenreiyotainichi())
+                    && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1003entity.getKaijoYMD())) {
                 entity.setJyotei(状態_他市町村住所地特例者);
                 break;
             }
@@ -318,8 +378,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         getTennyushutsuHoryuTaishosha();
         for (DbT1010TennyushutsuHoryuTaishoshaEntity dbT1010entity : dbT1010Entity) {
             if (dbT1010entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
-                && entity.getNenreiyotainichi() != null && dbT1010entity.getTorokuIdoYMD() != null
-                && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1010entity.getTorokuIdoYMD())) {
+                    && entity.getNenreiyotainichi() != null && dbT1010entity.getTorokuIdoYMD() != null
+                    && entity.getNenreiyotainichi().isBeforeOrEquals(dbT1010entity.getTorokuIdoYMD())) {
                 entity.setJyotei(状態_転入保留対象者);
                 break;
             }
@@ -344,7 +404,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
                 = new NenreiToutatsuYoteishaCheckListMybatisParameter(
                         new RString(uaFt200Psm.getParameterMap().get(PSMYO.toString()).toString()),
                         new RString(uaFt200Psm2.getParameterMap().get(PSMYO.toString()).toString()),
-                        RString.EMPTY);
+                        RString.EMPTY,
+                        出力順);
         nenreiCheckListEntity = nenreiCheckListMapper.
                 getTorokuNenreiToutatsuYoteishaCheckList(torokuParameter);
         if (!nenreiCheckListEntity.isEmpty()) {
@@ -396,7 +457,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         torokuParameter = new NenreiToutatsuYoteishaCheckListMybatisParameter(
                 new RString(uaFt200Psm.getParameterMap().get(PSMYO.toString()).toString()),
                 RString.EMPTY,
-                RString.EMPTY);
+                RString.EMPTY,
+                出力順);
         nenreiCheckListEntity2 = nenreiCheckListMapper.
                 getTorokuNenreiToutatsuYoteishaCheckList2(torokuParameter);
         List<NenreiToutatsuYoteishaCheckListEntity> temp = new ArrayList<>();
@@ -429,7 +491,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
                 = new NenreiToutatsuYoteishaCheckListMybatisParameter(
                         new RString(uaFt200Psm.getParameterMap().get(PSMYO.toString()).toString()),
                         new RString(uaFt200Psm2.getParameterMap().get(PSMYO.toString()).toString()),
-                        RString.EMPTY);
+                        RString.EMPTY,
+                        出力順);
         nenreiCheckListEntity = nenreiCheckListMapper.
                 getZenbuNenreiToutatsuYoteishaCheckList(zenbuParameter);
         if (!nenreiCheckListEntity.isEmpty()) {
@@ -462,7 +525,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         NenreiToutatsuYoteishaCheckListMybatisParameter zenbuParameter2 = new NenreiToutatsuYoteishaCheckListMybatisParameter(
                 new RString(uaFt200Psm.getParameterMap().get(PSMYO.toString()).toString()),
                 new RString(uaFt200Psm2.getParameterMap().get(PSMYO.toString()).toString()),
-                new RString(uaFt200Psm3.getParameterMap().get(PSMYO.toString()).toString()));
+                new RString(uaFt200Psm3.getParameterMap().get(PSMYO.toString()).toString()),
+                出力順);
         nenreiCheckListEntity2 = nenreiCheckListMapper.
                 getZenbuNenreiToutatsuYoteishaCheckList2(zenbuParameter2);
         List<NenreiToutatsuYoteishaCheckListEntity> temp = new ArrayList<>();
@@ -534,5 +598,13 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
                 entityList.isEmpty() ? RString.EMPTY : entityList.get(0).getHihokenshaNo().value());
         return PersonalData.of(entityList.isEmpty() ? ShikibetsuCode.EMPTY : entityList.get(0).getShikibetsuCode(), expandedInfo);
+    }
+
+    private void 処理日付管理マスタ更新() {
+        DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanri = new DbT7022ShoriDateKanriEntity();
+        dbT7022ShoriDateKanri.setTaishoKaishiYMD(processParameter.getKonkaikaishi());
+        dbT7022ShoriDateKanri.setTaishoShuryoYMD(processParameter.getKonkaisyuryo());
+        dbT7022ShoriDateKanri.setShoriName(ShoriName.年齢到達予定者チェックリスト.get名称());
+        nenreiCheckListMapper.getInsert(dbT7022ShoriDateKanri);
     }
 }

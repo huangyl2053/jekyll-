@@ -28,7 +28,7 @@ public class DBA150010_NenreitotatsuTorokuListParameter extends BatchParameterBa
     private static final String KEY_ZENKAISHURYO_YMDHMS = "zenkaishuryoYMDHMS";
     private static final String KEY_KONKAIKAISHI_YMDHMS = "konkaikaishiYMDHMS";
     private static final String KEY_KONKAISHURYO_YMDHMS = "konkaishuryoYMDHMS";
-    private static final String KEY_SHUTURYOKUJUN_ID = "shuturyokujunID";
+    private static final String KEY_SHUTSURYOKUJUN_ID = "shutsuryokujunID";
 
     @BatchParameter(key = KEY_ZENKAIKAISHI_YMDHMS, name = "前回開始日時")
     private RString zenkaikaishiYMDHMS;
@@ -38,8 +38,8 @@ public class DBA150010_NenreitotatsuTorokuListParameter extends BatchParameterBa
     private RString konkaikaishiYMDHMS;
     @BatchParameter(key = KEY_KONKAISHURYO_YMDHMS, name = "今回終了日時")
     private RString konkaishuryoYMDHMS;
-    @BatchParameter(key = KEY_SHUTURYOKUJUN_ID, name = "出力順ID")
-    private Long shuturyokujunID;
+    @BatchParameter(key = KEY_SHUTSURYOKUJUN_ID, name = "出力順ID")
+    private Long shutsuryokujunID;
 
     /**
      * バーチのパラメータを作成します。
@@ -52,6 +52,6 @@ public class DBA150010_NenreitotatsuTorokuListParameter extends BatchParameterBa
                 zenkaishuryoYMDHMS,
                 konkaikaishiYMDHMS,
                 konkaishuryoYMDHMS,
-                shuturyokujunID);
+                shutsuryokujunID);
     }
 }

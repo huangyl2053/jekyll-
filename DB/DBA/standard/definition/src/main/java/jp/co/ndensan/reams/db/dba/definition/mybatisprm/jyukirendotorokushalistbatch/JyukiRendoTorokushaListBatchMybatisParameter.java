@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch;
 
 import java.util.List;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,7 +20,8 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisParameter {
+public class JyukiRendoTorokushaListBatchMybatisParameter
+        extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
     private final RString konkaikaishiYMDHMS;
     private final RString konkaishuryoYMDHMS;
@@ -36,6 +39,9 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
     private final Code idouJiyu_tensyutu;
     private final Code idouJiyu_sibou;
     private final Code idouJiyu_tenkyo;
+    private final RString shutsuryokuSort;
+
+    private final Boolean userShutsuryokuSort;
 
     /**
      * コンストラクタ。
@@ -56,6 +62,9 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
      * @param idouJiyu_tensyutu 異動事由（転出）
      * @param idouJiyu_sibou 異動事由（死亡）
      * @param idouJiyu_tenkyo 異動事由（転居）
+     * @param shutsuryokuSort 出力順
+     * @param userShutsuryokuSort uses出力順
+     * @param key 宛名キー
      */
     public JyukiRendoTorokushaListBatchMybatisParameter(
             RString konkaikaishiYMDHMS,
@@ -73,8 +82,14 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
             Code idouJiyu_tennyu,
             Code idouJiyu_tensyutu,
             Code idouJiyu_sibou,
-            Code idouJiyu_tenkyo) {
-
+            Code idouJiyu_tenkyo,
+            RString shutsuryokuSort,
+            Boolean userShutsuryokuSort,
+            IShikibetsuTaishoPSMSearchKey key) {
+        super(key);
+        if (Boolean.FALSE.equals(userShutsuryokuSort)) {
+            shutsuryokuSort = new RString("");
+        }
         this.konkaikaishiYMDHMS = konkaikaishiYMDHMS;
         this.konkaishuryoYMDHMS = konkaishuryoYMDHMS;
         this.loginId = loginId;
@@ -91,5 +106,8 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
         this.idouJiyu_tensyutu = idouJiyu_tensyutu;
         this.idouJiyu_sibou = idouJiyu_sibou;
         this.idouJiyu_tenkyo = idouJiyu_tenkyo;
+        this.shutsuryokuSort = shutsuryokuSort;
+
+        this.userShutsuryokuSort = userShutsuryokuSort;
     }
 }

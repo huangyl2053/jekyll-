@@ -15,7 +15,12 @@ public enum DBU0600021TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     完了("完了"),
-    検索に戻る("検索に戻る");
+    対象者検索に戻る("対象者検索に戻る"),
+    総合照会資格得喪情報("総合照会資格得喪情報"),
+    総合照会給付情報("総合照会給付情報"),
+    総合照会賦課情報("総合照会賦課情報"),
+    総合照会住民固有情報("総合照会住民固有情報"),
+    受給情報("受給情報");
 
     private final RString name;
 
