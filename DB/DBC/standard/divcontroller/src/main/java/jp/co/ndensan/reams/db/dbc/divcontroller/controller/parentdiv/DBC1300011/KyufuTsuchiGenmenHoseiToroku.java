@@ -125,6 +125,7 @@ public class KyufuTsuchiGenmenHoseiToroku {
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().setShisetsuMeisho(RString.EMPTY);
         div.getCcdServiceTypeInput().clear();
         getHandler(div).tuika();
+        div.getKyufuTsuchiGenmenHoseiTorokuDetail().setHiddenInputDiv(getHandler(div).getInputDiv());
         return ResponseData.of(div).respond();
     }
 
@@ -143,6 +144,7 @@ public class KyufuTsuchiGenmenHoseiToroku {
         div.getTextBoxFudangoukei().setDisabled(false);
         div.getTextBoxNumHiyouGoukei().setDisabled(false);
         getHandler(div).modify();
+        div.getKyufuTsuchiGenmenHoseiTorokuDetail().setHiddenInputDiv(getHandler(div).getInputDiv());
         return ResponseData.of(div).respond();
     }
 
@@ -245,6 +247,9 @@ public class KyufuTsuchiGenmenHoseiToroku {
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonKakutei(KyufuTsuchiGenmenHoseiTorokuDiv div) {
 
+        if (changeCheck(div)) {
+            return ResponseData.of(div).respond();
+        }
         if (kakutei(div)) {
             addDataGrid(div);
         } else {
@@ -376,5 +381,17 @@ public class KyufuTsuchiGenmenHoseiToroku {
 
     private KyufuTsuchiGenmenHoseiTorokuHandler getHandler(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         return new KyufuTsuchiGenmenHoseiTorokuHandler(div);
+    }
+
+    private boolean changeCheck(KyufuTsuchiGenmenHoseiTorokuDiv div) {
+        RString state = div.getKyufuTsuchiGenmenHoseiTorokuDetail().getState();
+        if ((状態_追加.equals(state) || 状態_修正.equals(state)) && (状態_修正.equals(state) && !isUpdate(div))) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isUpdate(KyufuTsuchiGenmenHoseiTorokuDiv div) {
+        return !getHandler(div).getInputDiv().equals(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getHiddenInputDiv());
     }
 }
