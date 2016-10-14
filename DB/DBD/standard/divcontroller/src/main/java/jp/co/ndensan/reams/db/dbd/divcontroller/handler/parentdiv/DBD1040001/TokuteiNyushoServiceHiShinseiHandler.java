@@ -59,8 +59,6 @@ public class TokuteiNyushoServiceHiShinseiHandler {
 
     private final TokuteiNyushoServiceHiShinseiDiv div;
     private final RString 申請メニュー = new RString("DBDMN21005");
-    //private final RString 申請メニュー = new RString("menu1");
-    //private final RString 承認メニュー = new RString("menu1");
     private final RString 承認メニュー = new RString("DBDMN22005");
     private final RString 申請情報を追加する = new RString("申請情報を追加する");
     private static final RString 承認情報を追加する = new RString("承認情報を追加する");
@@ -455,9 +453,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             決定日 = div.getShinseiDetail().getTxtKettaiYMD().getValue();
             非承認理由 = div.getShinseiDetail().getTxtHiShoninRiyu().getText();
         }
-        if (!軽減率.equals(HokenKyufuRitsu.ZERO)) {
-            builder.set減額率(軽減率);
-        }
+        builder.set減額率(軽減率);
         builder.set確認番号(確認番号);
         builder.set決定区分(決定区分);
         builder.set決定年月日(決定日);
@@ -495,9 +491,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
                 row.getTxtKetteiYMD().setValue(決定日);
                 row.getTxtTekiyoYMD().setValue(適用日);
                 row.getTxtYukoKigenYMD().setValue(有効期限);
-                if (!軽減率.equals(HokenKyufuRitsu.ZERO)) {
-                    row.setKeigenritsu(new RString(軽減率.value().toString()));
-                }
+                row.setKeigenritsu(new RString(軽減率.value().toString()));
                 row.setKakuninNo(確認番号);
                 row.setShoninShinaiRiyu(非承認理由);
                 is新規 = false;
@@ -513,9 +507,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             row.getTxtKetteiYMD().setValue(決定日);
             row.getTxtTekiyoYMD().setValue(適用日);
             row.getTxtYukoKigenYMD().setValue(有効期限);
-            if (!軽減率.equals(HokenKyufuRitsu.ZERO)) {
-                row.setKeigenritsu(new RString(軽減率.value().toString()));
-            }
+            row.setKeigenritsu(new RString(軽減率.value().toString()));
             row.setKakuninNo(確認番号);
             row.setShoninShinaiRiyu(非承認理由);
             row.setHiddenShoKisaiHokenshaNo(証記載保険者番号.value());
