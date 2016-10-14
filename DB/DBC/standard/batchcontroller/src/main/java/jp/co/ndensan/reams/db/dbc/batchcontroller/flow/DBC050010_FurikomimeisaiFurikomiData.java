@@ -420,7 +420,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
     private UXX000A10_KozaFurikomiRegisterParameter createKozaFurikomiRegisterParameter() {
         UXX000A10_KozaFurikomiRegisterParameter parameter = new UXX000A10_KozaFurikomiRegisterParameter();
         parameter.setTempTableName(口座振込一時名称);
-        parameter.setDaihyoKinyukikanCode(getParameter().get代表金融機関コード());
+//        parameter.setDaihyoKinyukikanCode(getParameter().get代表金融機関コード()); TODO
         parameter.setFurikomiGroupCode(getParameter().get振込グループコード());
         parameter.setFurikomiYMD(getParameter().get振込指定年月日());
         if (getParameter().is再処理フラグ()) {

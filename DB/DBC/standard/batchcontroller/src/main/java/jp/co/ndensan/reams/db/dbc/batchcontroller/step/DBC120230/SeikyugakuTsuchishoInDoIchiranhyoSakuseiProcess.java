@@ -91,7 +91,7 @@ public class SeikyugakuTsuchishoInDoIchiranhyoSakuseiProcess extends BatchKeyBre
         PageBreaker<SeikyugakuTsuchishoSource> breaker = new SeikyugakuTsuchishoInPageBreak(改頁項目リスト);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC120230.getReportId().value()).addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-        seikyugakuTsuchishoInManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
+        seikyugakuTsuchishoInManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
         seikyugEucFilePath = Path.combinePath(seikyugakuTsuchishoInManager.getEucOutputDirectry(),
                 出力ファイル名);

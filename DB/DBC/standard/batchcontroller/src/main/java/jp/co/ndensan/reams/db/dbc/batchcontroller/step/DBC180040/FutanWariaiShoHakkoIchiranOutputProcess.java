@@ -149,7 +149,7 @@ public class FutanWariaiShoHakkoIchiranOutputProcess extends BatchProcessBase<Ri
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         riyoshaFutanWariaiWriter = new BatchPermanentTableWriter(DbT3113RiyoshaFutanWariaiEntity.class);
 
-        futanwariaiShoHakkoIchiranManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, FUATANWARIAI_EUC_ENTITY_ID,
+        futanwariaiShoHakkoIchiranManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, FUATANWARIAI_EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
         futanwariaiShoHakkoIchiranEucFilePath = Path.combinePath(futanwariaiShoHakkoIchiranManager.getEucOutputDirectry(),
                 futanwariaiShoHakkoIchiranFileName);

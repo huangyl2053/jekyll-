@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.business.core.hanyolist.HanyoListShutsuryokuKomoku;
 import jp.co.ndensan.reams.db.dbz.business.report.hanyolist.HanyoListReport;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.Outputs;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
@@ -335,12 +336,12 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
     }
 
     private void set帳表CSV出力() {
-        if (processParamter.getSyutsuryoku().equals(new RString("帳表・CSV出力"))
-                || processParamter.getSyutsuryoku().equals(new RString("CSVのみ出力"))) {
+        if (processParamter.getSyutsuryoku().equals(Outputs.帳票_CSV出力.getコード())
+                || processParamter.getSyutsuryoku().equals(Outputs.CSVのみ出力.getコード())) {
             isCSV出力 = true;
         }
-        if (processParamter.getSyutsuryoku().equals(new RString("帳表・CSV出力"))
-                || processParamter.getSyutsuryoku().equals(new RString("帳票のみ出力"))) {
+        if (processParamter.getSyutsuryoku().equals(Outputs.帳票_CSV出力.getコード())
+                || processParamter.getSyutsuryoku().equals(Outputs.帳票のみ出力.getコード())) {
             is帳票出力 = true;
         }
 
@@ -435,7 +436,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         if (is帳票出力) {
             RString csv出力有無;
             RString csvファイル名;
-            if (processParamter.getSyutsuryoku().equals(new RString("帳表・CSV出力"))) {
+            if (processParamter.getSyutsuryoku().equals(Outputs.帳票_CSV出力.getコード())) {
                 csv出力有無 = new RString("あり");
                 csvファイル名 = 英数字ファイル名;
             } else {
@@ -454,7 +455,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
                     出力条件);
             IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
             printer.print();
-        } else if (processParamter.getSyutsuryoku().equals(new RString("CSVのみ出力"))) {
+        } else if (processParamter.getSyutsuryoku().equals(Outputs.CSVのみ出力.getコード())) {
             EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                     日本語ファイル名,
                     導入団体コード,
