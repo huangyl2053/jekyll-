@@ -115,7 +115,7 @@ public class ChikuShichosonSelectHandler {
                     RString 市町村名称 = item.get市町村名称();
                     if (!keyList.contains(市町村Code)) {
                         dataSource.add(new KeyValueDataSource(市町村Code, 市町村Code.concat(全角空白).concat(市町村名称)));
-                        keyList.add(item.get市町村コード().getColumnValue());
+                        keyList.add(市町村Code);
                     }
                 }
             }
@@ -264,9 +264,14 @@ public class ChikuShichosonSelectHandler {
                 if (旧市町村コード情報List != null && !旧市町村コード情報List.isEmpty()) {
                     List<KeyValueDataSource> dataSource = new ArrayList<>();
                     dataSource.add(new KeyValueDataSource(KEY, 文字_全市町村));
+                    List<RString> keyList = new ArrayList<>();
                     for (KyuShichosonCode item : 旧市町村コード情報List) {
-                        dataSource.add(new KeyValueDataSource(item.get旧市町村コード().getColumnValue(),
-                                item.get旧市町村名称()));
+                        RString 旧市町村Code = item.get旧市町村コード().getColumnValue();
+                        RString 旧市町村名称 = item.get旧市町村名称();
+                        if (!keyList.contains(旧市町村Code)) {
+                            dataSource.add(new KeyValueDataSource(旧市町村Code, 旧市町村名称));
+                            keyList.add(旧市町村Code);
+                        }
                     }
                     div.getDdlKyushichosonKoiki().setDataSource(setDdlDataSource昇順ByKey(dataSource));
                     div.getDdlKyushichosonKoiki().setSelectedIndex(0);
