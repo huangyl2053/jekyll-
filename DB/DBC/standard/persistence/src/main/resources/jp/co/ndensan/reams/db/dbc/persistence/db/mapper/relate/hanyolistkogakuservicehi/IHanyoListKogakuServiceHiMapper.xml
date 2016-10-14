@@ -29,6 +29,10 @@
         DbV1001."jushochiTokureiFlag" as 住所地特例フラグ,
         DbV1001."koikinaiJushochiTokureiFlag" as 広域内住所地特例フラグ,
         DbV1001."koikinaiTokureiSochimotoShichosonCode" as 広住特措置元市町村コード,
+        (CASE WHEN DbV1001."koikinaiJushochiTokureiFlag" = '1'
+                THEN DbV1001."koikinaiTokureiSochimotoShichosonCode" 
+                ELSE DbV1001."shichosonCode" 
+            END) AS 被保険者市町村コード,
         DbV1004."nyushoShisetsuCode" as 入所施設コード,
         DbV1004."nyushoYMD" as 入所年月日,
         DbV1004."taishoYMD" as 退所年月日,
@@ -391,8 +395,11 @@
         <if test="kiyuKikanCode != null and !kiyuKikanCode.isEmpty()">
             AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}
         </if>
-        ${出力順}
-        ) as A
+        <if test="kouseiShichosonCode != null and !kouseiShichosonCode.isEmpty() and kouseiShichosonCode != '000000'">
+            AND ((DbV1001."koikinaiJushochiTokureiFlag" = '1' AND DbV1001."koikinaiTokureiSochimotoShichosonCode"  = #{kouseiShichosonCode})
+			OR (DbV1001."koikinaiJushochiTokureiFlag" != '1' AND DbV1001."shichosonCode"  = #{kouseiShichosonCode}))
+        </if>
+        ) as A ${出力順}
     </sql>
 
     <resultMap id="resultMap_HanyouRisutoSyuturyokuEntity" autoMapping="true"
@@ -687,6 +694,10 @@
         DbV1001."jushochiTokureiFlag" as 住所地特例フラグ,
         DbV1001."koikinaiJushochiTokureiFlag" as 広域内住所地特例フラグ,
         DbV1001."koikinaiTokureiSochimotoShichosonCode" as 広住特措置元市町村コード,
+            (CASE WHEN DbV1001."koikinaiJushochiTokureiFlag" = '1'
+                THEN DbV1001."koikinaiTokureiSochimotoShichosonCode" 
+                ELSE DbV1001."shichosonCode" 
+            END) AS 被保険者市町村コード,
         DbV1004."nyushoShisetsuCode" as 入所施設コード,
         DbV1004."nyushoYMD" as 入所年月日,
         DbV1004."taishoYMD" as 退所年月日,
@@ -1049,8 +1060,11 @@
         <if test="kiyuKikanCode != null and !kiyuKikanCode.isEmpty()">
             AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}
         </if>
-        ${出力順}
-        ) as A 
+        <if test="kouseiShichosonCode != null and !kouseiShichosonCode.isEmpty() and kouseiShichosonCode != '000000'">
+            AND ((DbV1001."koikinaiJushochiTokureiFlag" = '1' AND DbV1001."koikinaiTokureiSochimotoShichosonCode"  = #{kouseiShichosonCode})
+			OR (DbV1001."koikinaiJushochiTokureiFlag" != '1' AND DbV1001."shichosonCode"  = #{kouseiShichosonCode}))
+        </if>
+        ) as A ${出力順}
     </sql>
 
     <sql id="kozaSearchModeResult">
