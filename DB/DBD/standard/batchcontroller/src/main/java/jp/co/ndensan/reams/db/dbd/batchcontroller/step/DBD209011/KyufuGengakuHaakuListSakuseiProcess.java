@@ -115,7 +115,7 @@ public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufuG
         if (出力順 != null && !出力順.isEmpty()) {
             出力順 = (new RString("order by \"tmp_hihokenshaNo\",")).concat(出力順.replace("order by", ""));
         } else {
-            出力順 = new RString("tmp_hihokenshaNo");
+            出力順 = new RString("order by \"tmp_hihokenshaNo\"");
         }
 
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(

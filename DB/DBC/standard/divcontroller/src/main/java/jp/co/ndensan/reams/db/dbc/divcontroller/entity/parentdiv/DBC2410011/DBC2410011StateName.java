@@ -21,8 +21,7 @@ public enum DBC2410011StateName implements IStateEnumerations {
     情報修正登録("情報修正登録"),
     審査結果登録("審査結果登録"),
     確認用請求情報明細詳細1("確認用請求情報明細詳細1"),
-    確認用請求情報明細詳細2("確認用請求情報明細詳細2"),
-    処理完了("処理完了");
+    確認用請求情報明細詳細2("確認用請求情報明細詳細2");
 
     private final RString name;
 

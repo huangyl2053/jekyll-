@@ -26,27 +26,34 @@ public class DBD492001_NinteiKekkaInfoUploadParameter extends BatchParameterBase
     private static final String TORIKOMIDETAKUBUN = "torikomidetakubun";
     private static final String GAIBUBAITAIKAKUNOPASU = "gaibubaitaikakunopasu";
     private static final String DETARISUTO = "detarisuto";
-    private static final String HOKENSHA = "hokensha";
 
     @BatchParameter(key = TORIKOMIDETAKUBUN, name = "取込みデータ区分")
     private RString 取込みデータ区分;
-    @BatchParameter(key = GAIBUBAITAIKAKUNOPASU, name = "外部媒体格納パス")
-    private RString 外部媒体格納パス;
-    @BatchParameter(key = DETARISUTO, name = "データリスト")
-    private List<RString> データリスト;
-    @BatchParameter(key = HOKENSHA, name = "保険者")
-    private RString 保険者;
+    @BatchParameter(key = GAIBUBAITAIKAKUNOPASU, name = "格納パス")
+    private RString 格納パス;
+    @BatchParameter(key = DETARISUTO, name = "保険者番号リスト")
+    private List<RString> 保険者番号リスト;
+    @BatchParameter(key = "被保番号リスト", name = "被保番号リスト")
+    private List<RString> 被保番号リスト;
+    @BatchParameter(key = "認定申請日リスト", name = "認定申請日リスト")
+    private List<RString> 認定申請日リスト;
+    @BatchParameter(key = "申請区分_申請時_コードリスト", name = "申請区分_申請時_コードリスト")
+    private List<RString> 申請区分_申請時_コードリスト;
+    @BatchParameter(key = "市町村コード", name = "市町村コード")
+    private RString 市町村コード;
+    @BatchParameter(key = "市町村名称", name = "市町村名称")
+    private RString 市町村名称;
+    @BatchParameter(key = "証記載保険者番号", name = "証記載保険者番号")
+    private RString 証記載保険者番号;
+    @BatchParameter(key = "保険者区分", name = "保険者区分")
+    private RString 保険者区分;
 
     /**
-     * 対象者管理情報登録_process処理のパラメターを取得します。
+     * toProcessバッチパラメータ。
      *
-     * @return TaishoShaKanriJohoProcessParameter
+     * @return RendingJieguoLianxieProcessParameter
      */
     public RendingJieguoLianxieProcessParameter toRendingJieguoLianxieProcessParameter() {
-        return new RendingJieguoLianxieProcessParameter(
-                取込みデータ区分,
-                外部媒体格納パス,
-                データリスト,
-                保険者);
+        return new RendingJieguoLianxieProcessParameter(取込みデータ区分, 格納パス, 被保番号リスト, 保険者区分);
     }
 }

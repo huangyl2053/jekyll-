@@ -34,6 +34,7 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_修正 = new RString("修正");
+    private static final RString ADDED = new RString("Added");
     private static final RString BTN_RESEARCH = new RString("btnResearch");
     private static final RString BTN_RESEARCH_RESULT = new RString("btnSearchResult");
     private static final RString BTN_HOZON = new RString("btnHozon");
@@ -189,9 +190,9 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
         if (状態_追加.equals(eventJotai)) {
             row.setRowState(RowState.Added);
             div.getDataGridItiran().getDataSource().add(row);
-        } else if (状態_削除.equals(eventJotai) && 状態_追加.equals(new RString(row.getRowState().toString()))) {
+        } else if (状態_削除.equals(eventJotai) && ADDED.equals(new RString(row.getRowState().toString()))) {
             div.getDataGridItiran().getDataSource().remove(index);
-        } else if (状態_修正.equals(eventJotai) && 状態_追加.equals(new RString(row.getRowState().toString()))) {
+        } else if (状態_修正.equals(eventJotai) && ADDED.equals(new RString(row.getRowState().toString()))) {
             div.getDataGridItiran().getDataSource().set(index, row);
         } else {
             if (状態_修正.equals(eventJotai)) {
@@ -210,7 +211,8 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
         row.setTxtServiceNengetsu(div.getTextBoxDateSaabisu().getValue().toDateString().substring(NUM_0, NUM_6));
         row.setTxtJigyoshaNo(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo());
         row.setTxtJigyoshaName(div.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho());
-        row.setTxtServiceShurui(div.getCcdServiceTypeInput().getサービス種類コード());
+        row.setTxtServiceShurui(div.getCcdServiceTypeInput().getサービス種類コード().concat(RString.HALF_SPACE)
+                .concat(div.getCcdServiceTypeInput().getサービス種類名称()));
         row.setTxtFutangakuGokei(new RString(div.getTextBoxFudangoukei().getValue().toString()));
         row.setTxtServicehiGokei(new RString(div.getTextBoxNumHiyouGoukei().getValue().toString()));
     }

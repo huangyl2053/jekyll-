@@ -59,7 +59,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends KozaSearchParameter
     private final boolean hizukeHeshu;
     private final RString 国保連IFなし区分;
     private final RString 事業高額分;
-    private RString 出力順;
+    private final RString 出力順;
     private final List<KamokuCode> kamokuCodelist;
 
     /**

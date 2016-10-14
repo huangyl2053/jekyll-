@@ -157,6 +157,7 @@
     <result property="認知症自立度Ⅱ以上の蓋然性" column="認知症自立度Ⅱ以上の蓋然性" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="状態の安定性" column="状態の安定性" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="給付区分" column="給付区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前々回認定有効期間" column="前々回認定有効期間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select resultOrdered="true"  id="get一次判定結果票"
             resultMap="resultMap_IchijiHanteizumiDataRelateEntity"
@@ -219,6 +220,7 @@
                         O."gogitaiNo" AS "合議体番号",
                         E."shinsakaiOrder" AS "審査会審査順",
                         D1."nijiHanteiYokaigoJotaiKubunCode" AS "前回認定結果",
+                        D2."nijiHanteiNinteiYukoKikan" AS "前々回認定有効期間",
                         D2."nijiHanteiYokaigoJotaiKubunCode"  AS "前々回要介護度",
                         D2."nijiHanteiNinteiYukoKaishiYMD"  AS "前々回認定有効期間開始",
                         D2."nijiHanteiNinteiYukoShuryoYMD" AS "前々回認定有効期間終了",

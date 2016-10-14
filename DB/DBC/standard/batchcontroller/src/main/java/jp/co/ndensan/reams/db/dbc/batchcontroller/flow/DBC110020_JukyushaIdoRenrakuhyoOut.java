@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.DataCompareShoriProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.DelJukyushaIdoRenrakuhyoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsIdoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsJukyushaIdoRenrakuhyoTempProcess;
@@ -63,6 +64,7 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     private static final String 送付エラー一時出力 = "soufuErrorOutTemp";
     private static final String 受給者異動送付削除産 = "delJukyushaIdoRenrakuhyo";
     private static final String 受給者異動の抽出 = "insJukyushaIdoRenrakuhyoTemp";
+    private static final String データ比較処理 = "dataCompareShori";
 
     @Override
     protected void defineFlow() {
@@ -90,6 +92,7 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
             executeStep(受給者異動送付削除産);
         }
         executeStep(受給者異動の抽出);
+        executeStep(データ比較処理);
 
     }
 
@@ -243,6 +246,13 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     @Step(受給者異動の抽出)
     IBatchFlowCommand insJukyushaIdoRenrakuhyoTemp() {
         return loopBatch(InsJukyushaIdoRenrakuhyoTempProcess.class).arguments(getParameter().
+                toProcessParameter())
+                .define();
+    }
+
+    @Step(データ比較処理)
+    IBatchFlowCommand dataCompareShori() {
+        return loopBatch(DataCompareShoriProcess.class).arguments(getParameter().
                 toProcessParameter())
                 .define();
     }

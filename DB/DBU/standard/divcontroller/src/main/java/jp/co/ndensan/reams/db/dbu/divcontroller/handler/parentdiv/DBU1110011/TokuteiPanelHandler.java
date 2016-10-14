@@ -71,7 +71,8 @@ public class TokuteiPanelHandler {
         for (TokuteiKojinJohoMeisho tokuteiKojin : TokuteiKojinJohoMeisho.values()) {
             grdTokuteiJoho_Row row = new grdTokuteiJoho_Row();
             if (版番号カウント == 版番号カウント件数) {
-                row.getChkSeiGyo().setDisabled(true);
+                row.getChkSeiGyo().setDisabled(false);
+                row.getChkSeiGyo().setValue(true);
             }
             row.setTokuteiKojinJohoNo(tokuteiKojin.getコード());
             row.setTokuteiKojinJoho(tokuteiKojin.get名称());
