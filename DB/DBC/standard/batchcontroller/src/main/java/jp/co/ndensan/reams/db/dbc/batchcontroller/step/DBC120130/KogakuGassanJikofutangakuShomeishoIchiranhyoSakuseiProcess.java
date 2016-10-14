@@ -128,21 +128,27 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
                     改頁リスト.add(item.get項目ID());
+                    if (i == INT_2) {
+                        改頁項目リスト.add(item.get項目名());
+                    } else if (i == INT_3) {
+                        改頁項目リスト.add(item.get項目名());
+                    } else if (i == INT_4) {
+                        改頁項目リスト.add(item.get項目名());
+                    } else if (i == INT_5) {
+                        改頁項目リスト.add(item.get項目名());
+                    } else if (i == INT_6) {
+                        改頁項目リスト.add(item.get項目名());
+                    }
                 }
                 if (i == INT_2) {
-                    改頁項目リスト.add(item.get項目名());
                     出力順リスト.add(item.get項目名());
                 } else if (i == INT_3) {
-                    改頁項目リスト.add(item.get項目名());
                     出力順リスト.add(item.get項目名());
                 } else if (i == INT_4) {
-                    改頁項目リスト.add(item.get項目名());
                     出力順リスト.add(item.get項目名());
                 } else if (i == INT_5) {
-                    改頁項目リスト.add(item.get項目名());
                     出力順リスト.add(item.get項目名());
                 } else if (i == INT_6) {
-                    改頁項目リスト.add(item.get項目名());
                     出力順リスト.add(item.get項目名());
                 }
                 i = i + 1;
