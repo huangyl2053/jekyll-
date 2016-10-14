@@ -50,7 +50,6 @@ public class IryoHokenRirekiDialog {
 
         if (isSaveDataEmpty(div)) {
             div.getCcdIryoHokenRireki().initialize(mode, shikibetsuCode, hihokenshaNo, lasdecCode);
-            return ResponseData.of(div).respond();
         } else {
             ArrayList<IryohokenKanyuJokyo> iryoHokenList = DataPassingConverter.deserialize(div.getSaveData(), ArrayList.class);
 
@@ -60,9 +59,9 @@ public class IryoHokenRirekiDialog {
                 dataSource.add(row);
             }
             div.getCcdIryoHokenRireki().initialize(mode, shikibetsuCode, hihokenshaNo, lasdecCode, dataSource);
-            return ResponseData.of(div).respond();
         }
 
+        return ResponseData.of(div).respond();
     }
 
     private boolean isHiddenInputEmpty(IryoHokenRirekiDialogDiv div) {
@@ -90,25 +89,22 @@ public class IryoHokenRirekiDialog {
      */
     public ResponseData<IryoHokenRirekiDialogDiv> onClick_btnClose(IryoHokenRirekiDialogDiv div) {
         ArrayList<IryohokenKanyuJokyo> saveDataList = div.getCcdIryoHokenRireki().getSaveData();
-        System.out.println("saveData is empty ? -> : " + saveDataList.isEmpty());
-        if (!saveDataList.isEmpty()) {
-            RString serialSaveDataList = DataPassingConverter.serialize(saveDataList);
-            div.setSaveData(serialSaveDataList);
-        }
+        RString serialSaveDataList = DataPassingConverter.serialize(saveDataList);
+        div.setSaveData(serialSaveDataList);
         return ResponseData.of(div).respond();
     }
 
     private dgIryohokenIchiran_Row toRow(IryohokenKanyuJokyo iryoHoken) {
         dgIryohokenIchiran_Row row = new dgIryohokenIchiran_Row();
         row.setShikibetsuCode(iryoHoken.get識別コード() == null
-                              ? RString.EMPTY
-                              : iryoHoken.get識別コード().getColumnValue());
+                ? RString.EMPTY
+                : iryoHoken.get識別コード().getColumnValue());
         row.setShichosonCode(iryoHoken.get市町村コード() == null
-                             ? RString.EMPTY
-                             : iryoHoken.get市町村コード().getColumnValue());
+                ? RString.EMPTY
+                : iryoHoken.get市町村コード().getColumnValue());
         ViewExecutionStatus status = iryoHoken.toEntity() == null
-                                     ? ViewExecutionStatus.None
-                                     : ViewExecutionStatus.toValue(new RString(iryoHoken.toEntity().getState().name()));
+                ? ViewExecutionStatus.None
+                : ViewExecutionStatus.toValue(new RString(iryoHoken.toEntity().getState().name()));
         row.setState(status.get名称());
         row.getKanyuDate().setValue(iryoHoken.get医療保険加入年月日());
         row.getDattaiDate().setValue(iryoHoken.get医療保険脱退年月日());

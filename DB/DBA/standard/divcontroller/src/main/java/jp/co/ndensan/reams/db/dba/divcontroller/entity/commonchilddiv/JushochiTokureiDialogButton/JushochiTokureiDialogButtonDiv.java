@@ -163,7 +163,6 @@ public class JushochiTokureiDialogButtonDiv extends Panel implements IJushochiTo
     //--------------- この行より下にコードを追加してください -------------------
     @Override
     public void initialize(IItemList<HihokenshaDaicho> hihoData, HihokenshaNo hihoNo, FlexibleDate shutokuDate, JushochiTokureiState state) {
-        System.out.println(state.getStateValue());
         this.setMode(state.getStateValue());
         this.setHihokenshaNo(hihoNo.getColumnValue());
 

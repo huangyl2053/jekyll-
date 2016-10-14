@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -32,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 資格異動訂正の画面処理クラスです。
@@ -64,7 +67,6 @@ public class SikakuIdouTeisei {
     private LockingKey create排他キー() {
         TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
-        System.out.println(DbaExclusiveKey.create被保険者番号排他キー(hihokenshaNo));
         return new LockingKey(DbaExclusiveKey.create被保険者番号排他キー(hihokenshaNo));
     }
 
@@ -79,7 +81,6 @@ public class SikakuIdouTeisei {
     public ResponseData<SikakuIdouTeiseiDiv> onActive(SikakuIdouTeiseiDiv div) {
         if (ResponseHolder.getBeforeEvent().equals(new RString("DBA1050021_資格異動の訂正を保存する"))) {
             ArrayList<HihokenshaDaicho> hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報_修正後, ArrayList.class);
-            System.out.println("hihoDaichoSize is " + hihoDaicho.size());
             getHandler(div).initialize資格得喪失履歴(hihoDaicho);
             getHandler(div).setButtonDisable();
         }
@@ -154,7 +155,10 @@ public class SikakuIdouTeisei {
                 hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報, ArrayList.class);
             }
             isSaveDataExists(hihoDaicho);
-            getHandler(div).save(getKey().get識別コード(), hihoDaicho);
+
+            Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> models = ViewStateHolder.get(ViewStateKeys.対象者_施設入退所, Models.class);
+
+            getHandler(div).save(getKey().get識別コード(), hihoDaicho, models);
             RealInitialLocker.release(create排他キー());
             div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA1050011StateName.完了状態);

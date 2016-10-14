@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
@@ -47,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -87,9 +90,10 @@ public class HihokenshaShisakuPanalHandler {
      * @param 識別コード 識別コード
      * @param 被保険者番号 被保険者番号
      * @param 資格取得日 資格取得日
+     * @param 施設入退所情報Models 施設入退所情報Models
      */
     public void initialize(RString viewState, List<HihokenshaDaicho> 被保険者台帳情報, ShikibetsuCode 識別コード,
-            HihokenshaNo 被保険者番号, FlexibleDate 資格取得日) {
+            HihokenshaNo 被保険者番号, FlexibleDate 資格取得日, Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Models) {
 
         HihokenshaDaicho 資格得喪情報 = get最新資格得喪データ(被保険者台帳情報, 資格取得日);
         setドロップダウンリストの設定(viewState, 資格得喪情報);
@@ -101,10 +105,10 @@ public class HihokenshaShisakuPanalHandler {
 
         if (状態_追加.equals(viewState)) {
             get画面初期の追加モードの表示制御();
-            set登録モードOfDialog(被保険者台帳情報, 被保険者番号, 識別コード, 資格取得日);
+            set登録モードOfDialog(被保険者台帳情報, 被保険者番号, 識別コード, 資格取得日, 施設入退所情報Models);
         } else if (状態_修正.equals(viewState)) {
             get画面初期の更新モードの表示制御();
-            set登録モードOfDialog(被保険者台帳情報, 被保険者番号, 識別コード, 資格取得日);
+            set登録モードOfDialog(被保険者台帳情報, 被保険者番号, 識別コード, 資格取得日, 施設入退所情報Models);
         } else if (状態_削除.equals(viewState)) {
             get画面初期の削除照会モードの表示制御();
             set照会モードOfDialog(被保険者台帳情報, 被保険者番号, 識別コード, 資格取得日);
@@ -169,6 +173,17 @@ public class HihokenshaShisakuPanalHandler {
         panelDiv.getCcdJutokuDialogButton().initialize(ItemList.of(被保険者台帳情報), 被保険者番号, 資格取得日, JushochiTokureiState.登録);
         panelDiv.getCcdShikakuHenkoDialogButton().initialize(ItemList.of(被保険者台帳情報), 被保険者番号, 識別コード, 資格取得日, ShikakuHenkoState.登録);
         panelDiv.getCcdShisetsuNyutaishoDialogButton().initialize(識別コード, DaichoType.被保険者.getコード(), ShisetsuNyutaishoState.登録);
+    }
+
+    private void set登録モードOfDialog(List<HihokenshaDaicho> 被保険者台帳情報, HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード,
+            FlexibleDate 資格取得日, Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> shisetsuNyutaisho) {
+        if (shisetsuNyutaisho == null || shisetsuNyutaisho.values().isEmpty()) {
+            set登録モードOfDialog(被保険者台帳情報, 被保険者番号, 識別コード, 資格取得日);
+            return;
+        }
+        panelDiv.getCcdJutokuDialogButton().initialize(ItemList.of(被保険者台帳情報), 被保険者番号, 資格取得日, JushochiTokureiState.登録);
+        panelDiv.getCcdShikakuHenkoDialogButton().initialize(ItemList.of(被保険者台帳情報), 被保険者番号, 識別コード, 資格取得日, ShikakuHenkoState.登録);
+        panelDiv.getCcdShisetsuNyutaishoDialogButton().initialize(識別コード, DaichoType.被保険者.getコード(), ShisetsuNyutaishoState.登録, shisetsuNyutaisho);
     }
 
     /**
@@ -639,6 +654,9 @@ public class HihokenshaShisakuPanalHandler {
 
     private boolean setJutokuDataAndCheckAdded(List<HihokenshaDaicho> integrateList, HihokenshaDaicho daicho,
             HihokenshaDaicho jutokuDaicho, boolean isAdded) {
+        if (EntityDataState.Unchanged.equals(jutokuDaicho.toEntity().getState())) {
+            return isAdded;
+        }
         if (jutokuDaicho.is論理削除フラグ()) {
             return isAdded;
         }
@@ -699,6 +717,9 @@ public class HihokenshaShisakuPanalHandler {
 
         for (HihokenshaDaicho henkoDaicho : 資格変更履歴情報) {
             if (henkoDaicho.is論理削除フラグ()) {
+                continue;
+            }
+            if (EntityDataState.Unchanged.equals(henkoDaicho.toEntity().getState())) {
                 continue;
             }
 
@@ -796,7 +817,9 @@ public class HihokenshaShisakuPanalHandler {
             builder.set住所地特例適用事由コード(RString.EMPTY);
             is修正 = true;
         }
-        if (nullOrEmpty(beforeData.get解除年月日()) && nullOrEmpty(daicho.get適用年月日()) && !nullOrEmpty(beforeData.get適用年月日())) {
+        if (nullOrEmpty(beforeData.get解除年月日()) && !nullOrEmpty(beforeData.get適用年月日())
+                && ((nullOrEmpty(daicho.get適用年月日()))
+                || (!daicho.get適用年月日().equals(beforeData.get適用年月日())))) {
             builder.set適用年月日(beforeData.get適用年月日());
             builder.set適用届出年月日(beforeData.get適用届出年月日());
             builder.set住所地特例適用事由コード(beforeData.get住所地特例適用事由コード());

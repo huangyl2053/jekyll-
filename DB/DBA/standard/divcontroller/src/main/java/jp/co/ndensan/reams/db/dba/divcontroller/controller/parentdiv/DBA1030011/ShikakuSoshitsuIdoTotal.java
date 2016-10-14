@@ -110,7 +110,6 @@ public class ShikakuSoshitsuIdoTotal {
     private LockingKey create排他キー() {
         TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
-        System.out.println(DbaExclusiveKey.create被保険者番号排他キー(hihokenshaNo));
         return new LockingKey(DbaExclusiveKey.create被保険者番号排他キー(hihokenshaNo));
     }
 

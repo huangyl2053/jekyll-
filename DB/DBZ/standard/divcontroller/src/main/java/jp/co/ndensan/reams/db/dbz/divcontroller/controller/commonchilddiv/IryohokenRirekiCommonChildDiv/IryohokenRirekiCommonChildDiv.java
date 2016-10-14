@@ -42,7 +42,9 @@ public class IryohokenRirekiCommonChildDiv {
     private static final RString 状態_選択 = new RString("選択");
 
     /**
-     * 初期化します。
+     * 初期化します。 TODO n8178 城間篤人
+     * 本共有子Divをダイアログ化するなかで、ダイアログ内のOnLoadと同時に共有子Div自身のOnLoadが起動されると
+     * 動作が不安定になることが分かりました。そのため、RequestSettingを修正してこのOnLoadが呼ばれないようにしています。
      *
      * @param requestDiv IryohokenRirekiCommonChildDivDiv
      * @return ResponseData<IryohokenRirekiCommonChildDivDiv>

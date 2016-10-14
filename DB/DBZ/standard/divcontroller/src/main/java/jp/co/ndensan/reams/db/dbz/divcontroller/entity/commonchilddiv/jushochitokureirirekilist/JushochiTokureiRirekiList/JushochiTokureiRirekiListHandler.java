@@ -404,9 +404,10 @@ public class JushochiTokureiRirekiListHandler {
 
         for (dgJutoku_Row row : dgJutokuList) {
             HihokenshaDaichoManager manager = new HihokenshaDaichoManager();
+            FlexibleDate 適用異動日 = row.getIdoYMD() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getIdoYMD().getText());
 
             HihokenshaDaicho hihokenshaDaicho = manager.get被保険者台帳管理(
-                    new HihokenshaNo(row.getHihokenshaNo()), new FlexibleDate(row.getIdoYMD().getText()), row.getEdaNo());
+                    new HihokenshaNo(row.getHihokenshaNo()), 適用異動日, row.getEdaNo());
             if (hihokenshaDaicho == null) {
                 hihokenshaDaicho = new HihokenshaDaicho(new HihokenshaNo(row.getHihokenshaNo()),
                         new FlexibleDate(row.getTekiyoDate().getText()), new RString("0001"));

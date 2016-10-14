@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigohohenshisetsu.KaigoHohenShisetsuBusiness;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigohohenshisetsunyutaishoshakanri.KaigoHohenShisetsuNyutaishoshaKanriManager;
@@ -129,7 +130,6 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     /**
      * 施設入退所履歴に初期化を設定します。外部からグリッドに設定するデータと、保存対象のデータを受け取ります。
      *
-     * @param データソース グリッドに設定するデータソース
      * @param 施設入退所情報Model 施設入退所情報Model
      */
     public void initialize(Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model) {
@@ -413,6 +413,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             }
 
             dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row();
+            row.setState(ViewExecutionStatus.toValue(new RString(施設入退所.toEntity().getState().name())).get名称());
             row.getNyushoDate().setValue(施設入退所.get入所年月日());
             row.getTaishoDate().setValue(施設入退所.get退所年月日());
             row.setShisetsu(get事業者名称(kaigoJigyoshaList, settingJigyoshaNo));

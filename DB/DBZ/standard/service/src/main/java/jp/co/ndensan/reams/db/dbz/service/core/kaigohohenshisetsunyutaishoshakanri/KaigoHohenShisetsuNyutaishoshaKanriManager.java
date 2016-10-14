@@ -11,6 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigohohenshisetsu.KaigoHohenShisetsuBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -200,5 +202,45 @@ public class KaigoHohenShisetsuNyutaishoshaKanriManager {
             return 被保険者台帳管理データ.get(0).getJushochiTokureiFlag();
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * 引数から受け取った施設入退所情報Modelsが持つ要素を一括で保存します。
+     *
+     * @param 施設入退所情報Models 保存対象の施設入退所情報
+     * @param 識別コード 保存対象者の識別コード
+     * @return 更新件数
+     */
+    @Transaction
+    public int save(Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Models, ShikibetsuCode 識別コード) {
+
+        int saveNum = 0;
+        for (ShisetsuNyutaisho row : 施設入退所情報Models) {
+            if (EntityDataState.Unchanged.equals(row.toEntity().getState())) {
+                continue;
+            }
+            ShisetsuNyutaishoIdentifier 介護保険施設入退所の識別子 = new ShisetsuNyutaishoIdentifier(識別コード, row.get履歴番号());
+            if (EntityDataState.Added.equals(row.toEntity().getState())) {
+                boolean isAdded = KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().
+                        施設入退所履歴一覧情報の追加(施設入退所情報Models.get(介護保険施設入退所の識別子));
+                if (isAdded) {
+                    saveNum++;
+                }
+            } else if (EntityDataState.Modified.equals(row.toEntity().getState())) {
+                boolean isModified = KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().
+                        介護認定審査会開催場所情報の更新(施設入退所情報Models.get(介護保険施設入退所の識別子));
+                if (isModified) {
+                    saveNum++;
+                }
+            } else if (EntityDataState.Deleted.equals(row.toEntity().getState())) {
+                boolean isDeleted = KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().
+                        施設入退所履歴一覧情報の削除(施設入退所情報Models.get(介護保険施設入退所の識別子));
+                if (isDeleted) {
+                    saveNum++;
+                }
+            }
+        }
+
+        return saveNum;
     }
 }

@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011.Sika
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
@@ -22,12 +24,14 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenR
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RofukuNenkinState;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigohohenshisetsunyutaishoshakanri.KaigoHohenShisetsuNyutaishoshaKanriManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 資格異動訂正の画面処理Handlerクラスです。
@@ -210,10 +214,11 @@ public class SikakuIdouTeiseiHandler {
      *
      * @param 識別コード 識別コード
      * @param joho 初期化時の医療保険情報
+     * @param models 施設入退所情報Models
      */
-    public void save(ShikibetsuCode 識別コード, List<HihokenshaDaicho> joho) {
-        HihokenshaDaichoManager manager = HihokenshaDaichoManager.createInstance();
-        manager.save被保険者台List(joho);
+    public void save(ShikibetsuCode 識別コード, List<HihokenshaDaicho> joho, Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> models) {
+        HihokenshaDaichoManager.createInstance().save被保険者台List(joho);
+        KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().save(models, 識別コード);
         div.getCcdIryoHokenDialogButton().save();
         div.getCcdRofukuNenkinDialogButton().save();
     }

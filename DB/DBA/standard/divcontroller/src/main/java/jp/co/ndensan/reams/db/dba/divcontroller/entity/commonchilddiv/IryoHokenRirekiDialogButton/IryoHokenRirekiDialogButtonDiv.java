@@ -39,8 +39,6 @@ public class IryoHokenRirekiDialogButtonDiv extends Panel implements IIryoHokenR
     private RString shikibetsuCode;
     @JsonProperty("mode")
     private RString mode;
-    @JsonProperty("gridData")
-    private RString gridData;
     @JsonProperty("lasdecCode")
     private RString lasdecCode;
     @JsonProperty("saveData")
@@ -125,24 +123,6 @@ public class IryoHokenRirekiDialogButtonDiv extends Panel implements IIryoHokenR
     }
 
     /*
-     * getgridData
-     * @return gridData
-     */
-    @JsonProperty("gridData")
-    public RString getGridData() {
-        return gridData;
-    }
-
-    /*
-     * setgridData
-     * @param gridData gridData
-     */
-    @JsonProperty("gridData")
-    public void setGridData(RString gridData) {
-        this.gridData = gridData;
-    }
-
-    /*
      * getlasdecCode
      * @return lasdecCode
      */
@@ -192,7 +172,7 @@ public class IryoHokenRirekiDialogButtonDiv extends Panel implements IIryoHokenR
 
     @Override
     public int save() {
-        if (this.getGridData() == null || this.getGridData().isEmpty()) {
+        if (this.getSaveData() == null || this.getSaveData().isEmpty()) {
             return 0;
         }
 

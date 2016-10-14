@@ -137,9 +137,7 @@ public class ShikakuHenkoRirekiDialog {
     private ArrayList<HihokenshaDaicho> setHihokenshaNoAsList(HihokenshaNo hihoNo, ArrayList<HihokenshaDaicho> daichoList) {
         ArrayList<HihokenshaDaicho> retList = new ArrayList<>();
         for (HihokenshaDaicho daicho : daichoList) {
-            System.out.println("被保険者番号 " + daicho.get被保険者番号());
             if (daicho.get被保険者番号() == null || daicho.get被保険者番号().isEmpty()) {
-                System.out.println("被保険者番号 is Empty ?" + daicho.get被保険者番号().isEmpty());
                 retList.add(daicho.createBuilderForEdit().set被保険者番号(hihoNo).build());
             } else {
                 retList.add(daicho);

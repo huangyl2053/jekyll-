@@ -23,6 +23,17 @@ public interface IShisetsuNyutaishoDialogButtonDiv extends ICommonChildDivBasePr
     void initialize(ShikibetsuCode shikibetsuCode, RString daichoShubetsu, ShisetsuNyutaishoState state);
 
     /**
+     * 施設入退所ダイアログBTNの初期化を行います。
+     *
+     * @param shikibetsuCode 対象の識別コード
+     * @param daichoShubetsu 台帳種別
+     * @param state ダイアログで開いた共有子Divの状態
+     * @param 施設入退所情報Models 施設入退所情報Models
+     */
+    void initialize(ShikibetsuCode shikibetsuCode, RString daichoShubetsu, ShisetsuNyutaishoState state,
+            Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Models);
+
+    /**
      * ダイアログで設定したデータを保存します。
      *
      * @return 保存した件数

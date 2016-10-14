@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNy
 import jp.co.ndensan.reams.db.dbz.service.core.kaigohohenshisetsunyutaishoshakanri.KaigoHohenShisetsuNyutaishoshaKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.Models;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -170,6 +169,13 @@ public class ShisetsuNyutaishoDialogButtonDiv extends Panel implements IShisetsu
     }
 
     @Override
+    public void initialize(ShikibetsuCode shikibetsuCode, RString daichoShubetsu, ShisetsuNyutaishoState state,
+            Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Models) {
+        initialize(shikibetsuCode, daichoShubetsu, state);
+        this.setSaveData(DataPassingConverter.serialize(施設入退所情報Models));
+    }
+
+    @Override
     public int save() {
         if (this.getSaveData() == null || this.getSaveData().isEmpty()) {
             return 0;
@@ -178,34 +184,7 @@ public class ShisetsuNyutaishoDialogButtonDiv extends Panel implements IShisetsu
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model = DataPassingConverter.deserialize(this.getSaveData(), Models.class);
         ShikibetsuCode 識別コード = new ShikibetsuCode(this.getShikibetsuCode());
 
-        int saveNum = 0;
-        for (ShisetsuNyutaisho row : 施設入退所情報Model) {
-            if (EntityDataState.Unchanged.equals(row.toEntity().getState())) {
-                continue;
-            }
-            ShisetsuNyutaishoIdentifier 介護保険施設入退所の識別子 = new ShisetsuNyutaishoIdentifier(識別コード, row.get履歴番号());
-            if (EntityDataState.Added.equals(row.toEntity().getState())) {
-                boolean isAdded = KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().
-                        施設入退所履歴一覧情報の追加(施設入退所情報Model.get(介護保険施設入退所の識別子));
-                if (isAdded) {
-                    saveNum++;
-                }
-            } else if (EntityDataState.Modified.equals(row.toEntity().getState())) {
-                boolean isModified = KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().
-                        介護認定審査会開催場所情報の更新(施設入退所情報Model.get(介護保険施設入退所の識別子));
-                if (isModified) {
-                    saveNum++;
-                }
-            } else if (EntityDataState.Deleted.equals(row.toEntity().getState())) {
-                boolean isDeleted = KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().
-                        施設入退所履歴一覧情報の削除(施設入退所情報Model.get(介護保険施設入退所の識別子));
-                if (isDeleted) {
-                    saveNum++;
-                }
-            }
-        }
-
-        return saveNum;
+        return KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().save(施設入退所情報Model, 識別コード);
     }
 
     @Override

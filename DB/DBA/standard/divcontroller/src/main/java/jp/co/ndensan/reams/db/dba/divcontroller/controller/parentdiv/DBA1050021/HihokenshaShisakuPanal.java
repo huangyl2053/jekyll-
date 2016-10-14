@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1050021;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
@@ -83,7 +84,9 @@ public class HihokenshaShisakuPanal {
             hihoDaicho = ViewStateHolder.get(ViewStateKeys.対象者_被保険者台帳情報, ArrayList.class);
         }
         FlexibleDate shikakuShutokuDate = ViewStateHolder.get(ViewStateKeys.対象者_資格取得日, FlexibleDate.class);
-        getHandler(div).initialize(初期_状態, hihoDaicho, 識別コード, 被保番号, shikakuShutokuDate);
+
+        Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> shisetsuNyutaisho = ViewStateHolder.get(ViewStateKeys.対象者_施設入退所, Models.class);
+        getHandler(div).initialize(初期_状態, hihoDaicho, 識別コード, 被保番号, shikakuShutokuDate, shisetsuNyutaisho);
 
         if (状態_追加.equals(初期_状態)) {
             return ResponseData.of(div).setState(DBA1050021StateName.追加状態);
@@ -110,6 +113,7 @@ public class HihokenshaShisakuPanal {
         }
 
         資格異動訂正の確定処理(div);
+        ViewStateHolder.put(ViewStateKeys.対象者_施設入退所, div.getCcdShisetsuNyutaishoDialogButton().get施設入退所データ());
         return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.資格異動の訂正を保存する).respond();
 
     }
@@ -188,7 +192,6 @@ public class HihokenshaShisakuPanal {
 
         List<HihokenshaDaicho> 資格訂正登録リスト = new ArrayList<>();
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-        System.out.println(初期_状態);
         if (状態_追加.equals(初期_状態)) {
             資格訂正登録リスト.addAll(入力内容反映前);
             資格訂正登録リスト.addAll(住所地特例情報);

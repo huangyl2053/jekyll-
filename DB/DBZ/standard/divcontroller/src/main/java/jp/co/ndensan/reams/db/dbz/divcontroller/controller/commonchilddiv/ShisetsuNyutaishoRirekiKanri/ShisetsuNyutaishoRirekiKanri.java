@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShisetsuNyutaishoRirekiKanri {
 
     /**
-     * 画面初期化を表示する。
+     * 画面初期化を表示する。Dialog化の際に、画面から呼ばれないように修正している。
      *
      * @param requestDiv 施設入退所履歴Div
      * @return ResponseData<ShisetsuNyutaishoRirekiKanriDiv>
