@@ -28,6 +28,6 @@
         UPDATE  rgdb."DbT7211GaibuRenkeiDataoutputJoho"
         SET "ninteiShinseiJohoChushutsuYMD" =#{システム日付}
         WHERE "shinseishoKanriNo" IN
-        (SELECT "shinseishoKanriNo" from rgdb."NinteiShinseiJohoTemp")
+        (SELECT "shinseishoKanriNo" from "NinteiShinseiJohoTemp")
     </update>
 </mapper>
