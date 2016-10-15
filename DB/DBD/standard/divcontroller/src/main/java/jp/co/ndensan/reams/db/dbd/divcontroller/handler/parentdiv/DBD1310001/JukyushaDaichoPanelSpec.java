@@ -36,7 +36,9 @@ public enum JukyushaDaichoPanelSpec implements IPredicate<JukyushaDaichoDiv> {
                 @Override
                 public boolean apply(JukyushaDaichoDiv div) {
                     if (SpecHelper.is範囲Rbが選択されている(div)) {
-                        return div.getTxtNinteiYmdHani().getFromValue() != null || div.getTxtNinteiYmdHani().getToValue() != null;
+                        return div.getTxtNinteiYmdHani().getFromValue() != null
+                        || div.getTxtNinteiYmdHani().getToValue() != null
+                        || (div.getTxtNinteiYmdHani().getFromValue() == null && div.getTxtNinteiYmdHani().getToValue() == null);
                     }
                     return true;
                 }
@@ -60,7 +62,8 @@ public enum JukyushaDaichoPanelSpec implements IPredicate<JukyushaDaichoDiv> {
                 @Override
                 public boolean apply(JukyushaDaichoDiv div) {
                     if (SpecHelper.is年齢が選択されている(div)) {
-                        return SpecHelper.is年齢From入力(div) || SpecHelper.is年齢To入力(div);
+                        return SpecHelper.is年齢From入力(div) || SpecHelper.is年齢To入力(div)
+                        || (!SpecHelper.is年齢From入力(div) && !SpecHelper.is年齢To入力(div));
                     }
                     return true;
                 }
