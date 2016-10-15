@@ -34,13 +34,13 @@ public class DBA110010_HihokenshashoHakkoKanribo extends BatchFlowBase<DBA110010
      */
     @Step(REPORT_PROCESS)
     protected IBatchFlowCommand reportProcess() {
-        HihokenshashoHakkoKanriboProcessParameter processParameter = getParameter().toAkasiHakouKanriProcessParameter();
+        HihokenshashoHakkoKanriboProcessParameter processParameter = getParameter().toAkasiHakouKanriProcessParameter(getJobId());
         if (processParameter.isRenbanfukaflg()) {
             return simpleBatch(HihokenshashoHakkoKanriboProcess.class)
-                    .arguments(getParameter().toAkasiHakouKanriProcessParameter()).define();
+                    .arguments(getParameter().toAkasiHakouKanriProcessParameter(getJobId())).define();
         } else {
             return simpleBatch(HihokenshashoHakkoKanriboNoRenbanProcess.class)
-                    .arguments(getParameter().toAkasiHakouKanriProcessParameter()).define();
+                    .arguments(getParameter().toAkasiHakouKanriProcessParameter(getJobId())).define();
         }
     }
 }

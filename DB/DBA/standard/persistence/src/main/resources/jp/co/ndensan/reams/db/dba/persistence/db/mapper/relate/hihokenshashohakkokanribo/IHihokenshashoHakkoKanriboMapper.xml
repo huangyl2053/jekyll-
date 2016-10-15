@@ -22,52 +22,29 @@
     <select resultOrdered="true" id="get証発行管理リスト情報"
             resultMap="resultMap_get証発行管理リスト情報"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboMybatisParameter" fetchSize="500">
-        SELECT
-        ShoKofuKaishu."hihokenshaNo" AS "shoKofuKaishu_hihokenshaNo",
-        ShoKofuKaishu."shichosonCode" AS "shoKofuKaishu_shichosonCode",
-        ShoKofuKaishu."shikibetsuCode" AS "shoKofuKaishu_shikibetsuCode",
-        ShoKofuKaishu."kofuYMD" AS "shoKofuKaishu_kofuYMD",
-        ShoKofuKaishu."yukoKigenYMD" AS "shoKofuKaishu_yukoKigenYMD",
-        ShoKofuKaishu."kofuJiyu" AS "shoKofuKaishu_kofuJiyu",
-        ShoKofuKaishu."kaishuYMD" AS "shoKofuKaishu_kaishuYMD",
-        ShoKofuKaishu."kaishuJiyu" AS "shoKofuKaishu_kaishuJiyu",
-        ShoKofuKaishu."shoYoshikiKubunCode" AS "shoKofuKaishu_shoYoshikiKubunCode",
-        PSM."meisho" AS "psm_meisho",
-        PSM."yubinNo" AS "psm_yubinNo",
-        PSM."jusho" AS "psm_jusho"
-        FROM
-        rgdb."DbT7037ShoKofuKaishu" AS ShoKofuKaishu
-        LEFT JOIN
-        rgua.${psmShikibetsuTaisho} AS PSM
-        ON ShoKofuKaishu."shikibetsuCode" = PSM."shikibetsuCode"
-        WHERE
-        ShoKofuKaishu."logicalDeletedFlag" = 'false'
-        <if test="kofuJiyulist.size() > 0">
+        SELECT 
+            *, 
+            PSM."meisho" AS "psm_meisho",
+            PSM."yubinNo" AS "psm_yubinNo",
+            PSM."jusho" || PSM."banchi" || '('||PSM."gyoseikuName"||')' AS "psm_jusho"              
+        FROM (
+            SELECT
+            ShoKofuKaishu."hihokenshaNo" AS "shoKofuKaishu_hihokenshaNo",
+            ShoKofuKaishu."shichosonCode" AS "shoKofuKaishu_shichosonCode",
+            ShoKofuKaishu."shikibetsuCode" AS "shoKofuKaishu_shikibetsuCode",
+            ShoKofuKaishu."kofuYMD" AS "shoKofuKaishu_kofuYMD",
+            ShoKofuKaishu."yukoKigenYMD" AS "shoKofuKaishu_yukoKigenYMD",
+            ShoKofuKaishu."kofuJiyu" AS "shoKofuKaishu_kofuJiyu",
+            ShoKofuKaishu."kaishuYMD" AS "shoKofuKaishu_kaishuYMD",
+            ShoKofuKaishu."kaishuJiyu" AS "shoKofuKaishu_kaishuJiyu",
+            ShoKofuKaishu."shoYoshikiKubunCode" AS "shoKofuKaishu_shoYoshikiKubunCode",
+            row_number() over(partition by "hihokenshaNo" order by "kofuYMD" desc) as rank_number
+            FROM
+            rgdb."DbT7037ShoKofuKaishu" AS ShoKofuKaishu
+            WHERE
+            ShoKofuKaishu."logicalDeletedFlag" = 'false'
             AND
-            ShoKofuKaishu."kofuJiyu" IN
-            <foreach
-                collection="kofuJiyulist"
-                item="code"
-                open="("
-                separator=","
-                close=")">
-                #{code}
-            </foreach>
-        </if>
-        <if test="kaishuJiyulist.size() > 0">
-            AND
-            ShoKofuKaishu."kaishuJiyu" IN
-            <foreach
-                collection="kaishuJiyulist"
-                item="code"
-                open="("
-                separator=","
-                close=")">
-                #{code}
-            </foreach>
-        </if>
-        AND
-        ShoKofuKaishu."kofuShoShurui" = #{akasihakouMod}
+            ShoKofuKaishu."kofuShoShurui" = #{akasihakouMod}
         <if test="iskoufukayisihi">
             AND ShoKofuKaishu."kofuYMD" <![CDATA[>=]]> #{koufukayisihi}
         </if>
@@ -80,6 +57,41 @@
         <if test="iskaisyuShuryouhi">
             AND ShoKofuKaishu."kaishuYMD" <![CDATA[<=]]> #{kasyuusiuryouhi}
         </if>
-        ORDER BY ShoKofuKaishu."hihokenshaNo", ShoKofuKaishu."kofuYMD" DESC, ShoKofuKaishu."hakkoShoriTimestamp" DESC
+            ) AS 処理対象
+        LEFT JOIN
+            rgua.${psmShikibetsuTaisho} AS PSM
+            ON "shoKofuKaishu_shikibetsuCode" = PSM."shikibetsuCode"
+        WHERE '1'='1'
+        <if test="isSaisinJohoFlg">
+            AND "rank_number" = '1'
+        </if>
+        <if test="kofuJiyulist.size() > 0">
+            AND
+            "shoKofuKaishu_kofuJiyu" IN
+            <foreach
+                collection="kofuJiyulist"
+                item="code"
+                open="("
+                separator=","
+                close=")">
+                #{code}
+            </foreach>
+        </if>
+        <if test="kaishuJiyulist.size() > 0">
+            AND
+            "shoKofuKaishu_kaishuJiyu" IN
+            <foreach
+                collection="kaishuJiyulist"
+                item="code"
+                open="("
+                separator=","
+                close=")">
+                #{code}
+            </foreach>
+        </if>
+        <if test="isMikaisyushaList">
+            AND 
+            "shoKofuKaishu_kaishuYMD" = ''
+        </if>
     </select>
 </mapper>

@@ -65,13 +65,13 @@ public final class DBA110010_HihokenshashoHakkoKanriboParameter extends BatchPar
     private List<RString> kasyuujiyuulist;
     @BatchParameter(key = SYUTURYOKUJUN_ID, name = "出力順ID")
     private RString syuturyokujunid;
-
+  
     /**
      * 被保険者証発行管理簿_バッチ用のパラメータラス作成
-     *
+     * @param jobId ジョブID
      * @return 被保険者証発行管理簿_バッチ用のパラメータラス
      */
-    public HihokenshashoHakkoKanriboProcessParameter toAkasiHakouKanriProcessParameter() {
+    public HihokenshashoHakkoKanriboProcessParameter toAkasiHakouKanriProcessParameter(long jobId) {
         return HihokenshashoHakkoKanriboProcessParameter.processParameter(
                 this.akasihakoumod,
                 this.siyuturiyokudaysyou,
@@ -85,6 +85,8 @@ public final class DBA110010_HihokenshashoHakkoKanriboParameter extends BatchPar
                 this.hizikehensyuuflg,
                 this.kayuujiyuulist,
                 this.kasyuujiyuulist,
-                this.syuturyokujunid);
+                this.syuturyokujunid,
+                jobId
+        );
     }
 }

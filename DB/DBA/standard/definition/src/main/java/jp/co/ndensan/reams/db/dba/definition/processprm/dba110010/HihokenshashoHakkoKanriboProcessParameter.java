@@ -34,6 +34,7 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
     private final List<RString> kofuJiyulist;
     private final List<RString> kaishuJiyulist;
     private final RString syuturyokujunid;
+    private final long jobId;
 
     /**
      * 非公開コンストラクタです。
@@ -51,6 +52,7 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
      * @param 回収事由 List<RString>
      * @param 出力順ID RString
      * @param 出力対象 RString
+     * @param jobId ジョブID
      */
     private HihokenshashoHakkoKanriboProcessParameter(
             RString 証発行モード,
@@ -65,7 +67,8 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
             boolean 日付編集フラグ,
             List<RString> 交付事由,
             List<RString> 回収事由,
-            RString 出力順ID
+            RString 出力順ID,
+            long jobId
     ) {
         this.akasihakoumod = 証発行モード;
         this.siyuturiyokudaysyou = 出力対象;
@@ -80,6 +83,7 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
         this.kofuJiyulist = 交付事由;
         this.kaishuJiyulist = 回収事由;
         this.syuturyokujunid = 出力順ID;
+        this.jobId = jobId;
     }
 
     /**
@@ -98,6 +102,7 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
      * @param 回収事由 List<RString>
      * @param 出力順ID RString
      * @param 出力対象 RString
+     * @param jobId long
      * @return 被保険者証発行管理簿バッチ処理パラメータークラス
      */
     public static HihokenshashoHakkoKanriboProcessParameter processParameter(
@@ -113,8 +118,9 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
             boolean 日付編集フラグ,
             List<RString> 交付事由,
             List<RString> 回収事由,
-            RString 出力順ID) {
-
+            RString 出力順ID,
+            long jobId) {
+        
         return new HihokenshashoHakkoKanriboProcessParameter(
                 証発行モード,
                 出力対象,
@@ -128,6 +134,8 @@ public final class HihokenshashoHakkoKanriboProcessParameter implements IBatchPr
                 日付編集フラグ,
                 交付事由,
                 回収事由,
-                出力順ID);
+                出力順ID,
+                jobId
+                );
     }
 }

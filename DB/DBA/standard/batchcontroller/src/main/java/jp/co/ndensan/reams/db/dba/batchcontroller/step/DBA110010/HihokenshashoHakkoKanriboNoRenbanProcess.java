@@ -27,8 +27,10 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -44,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
@@ -76,6 +79,14 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
     private IHihokenshashoHakkoKanriboMapper mapper;
     private AkasiHakouKanriRelateEntity relateEntityList;
     private FileSpoolManager manager;
+    private static final RString 抽出条件 = new RString("【抽出条件】");
+    private static final RString 出力対象 = new RString("出力対象：");
+    private static final RString 交付年月日 = new RString("交付年月日：");
+    private static final RString 回収年月日 = new RString("回収年月日：");
+    private static final RString 交付事由 = new RString("交付事由：");
+    private static final RString 回収事由 = new RString("回収事由：");
+    private static final RString カラ = new RString("　～　");
+    private static final RString コンマ = new RString("、");
 
     @BatchWriter
     private EucCsvWriter<HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity> eucCsvWriter;
@@ -123,7 +134,9 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
                 processParameter.getKasyuusiuryouhi(),
                 processParameter.getKofuJiyulist(),
                 processParameter.getKaishuJiyulist(),
-                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
+                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()), 
+                processParameter.isSeyisinjyohoflg(),
+                processParameter.getSiyuturiyokudaysyou());
         List<AkasiHakouKanriEntity> akaEntityList = mapper.get証発行管理リスト情報(mybatisParameter);
         List<AkasiHakouKanriEntity> 最新情報リスト = new ArrayList<>();
         RString 被保険者番号 = RString.EMPTY;
@@ -177,6 +190,7 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
                 PersonalData personalData = PersonalData.of(new ShikibetsuCode(csvEntity.getShikibetsuCode()), expandedInformations);
                 personalDataList.add(personalData);
             }
+            outputJokenhyoFactory(association,csvName);
             eucCsvWriter.close();
             AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
             manager.spool(eucFilePath, id);
@@ -206,6 +220,71 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
             report.writeBy(reportSourceWriter);
             batchReportWriter.close();
         }
+    }
+    
+    private void outputJokenhyoFactory(Association association, RString csvName) {
+        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+                EUC_ENTITY_ID.toRString(),
+                association.get地方公共団体コード().value(),
+                association.get市町村名(),
+                new RString(String.valueOf(processParameter.getJobId())),
+                relateEntityList.getChouhouTitle(),
+                csvName,
+                new RString(String.valueOf(eucCsvWriter.getCount())),
+                contribute());
+        OutputJokenhyoFactory.createInstance(item).print();
+    }
+    
+    private List<RString> contribute() {
+        RStringBuilder jokenBuilder = new RStringBuilder();
+        List<RString> 出力条件List = new ArrayList<>();
+        jokenBuilder.append(抽出条件);
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(出力対象);
+        jokenBuilder.append(processParameter.getSiyuturiyokudaysyou());
+        出力条件List.add(jokenBuilder.toRString());
+        
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(交付年月日);
+        jokenBuilder.append(processParameter.getKoufukayisihi());
+        jokenBuilder.append(カラ);
+        jokenBuilder.append(processParameter.getKoufusiuryouhi());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(回収年月日);
+        if (processParameter.getKasyuukayisihi().isEmpty()) {
+            jokenBuilder.append("");
+        } else {
+            jokenBuilder.append(processParameter.getKasyuukayisihi());
+            jokenBuilder.append(カラ);
+            jokenBuilder.append(processParameter.getKasyuusiuryouhi());
+        }
+        
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(交付事由);
+        if (processParameter.getKofuJiyulist().size() > 0) {
+            for (RString jiyu : processParameter.getKofuJiyulist()) {
+                jokenBuilder.append(jiyu).append(コンマ);
+            }
+            jokenBuilder.deleteCharAt(jokenBuilder.lastIndexOf(コンマ));
+        } else {
+            jokenBuilder.append("交付事由なし");
+        }
+        出力条件List.add(jokenBuilder.toRString());
+        
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(回収事由);
+        if (processParameter.getKofuJiyulist().size() > 0) {
+            for (RString jiyu : processParameter.getKaishuJiyulist()) {
+                jokenBuilder.append(jiyu).append(コンマ);
+            }
+            jokenBuilder.deleteCharAt(jokenBuilder.lastIndexOf(コンマ));
+        } else {
+            jokenBuilder.append("回収事由なし");
+        }
+        出力条件List.add(jokenBuilder.toRString());
+        return 出力条件List;
     }
 
 }
