@@ -57,6 +57,9 @@ public class FutanyikkatsuShoninkekkaListHandler {
             div.getHyojiTaisho().getDdlBatchShoriNichiji().setSelectedKey(div.getHyojiTaisho().getDdlBatchShoriNichiji()
                     .getDataSource().get(0).getKey());
         }
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(承認を確定する, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(修正を保存する, true);
+
     }
 
     /**

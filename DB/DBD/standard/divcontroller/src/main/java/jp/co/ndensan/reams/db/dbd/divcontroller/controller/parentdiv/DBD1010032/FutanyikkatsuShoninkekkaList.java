@@ -41,6 +41,7 @@ public class FutanyikkatsuShoninkekkaList {
 
     private static final RString 保存処理完了 = new RString("承認内容の保存処理が完了しました.");
     private static List<YMDHMS> 一括処理日時list;
+    private static int ddlBatchShoriNichiji_index = 0;
 
     /**
      * 画面初期化処理です。
@@ -62,18 +63,23 @@ public class FutanyikkatsuShoninkekkaList {
      */
     public ResponseData<FutanyikkatsuShoninkekkaListDiv> onClick_selectbutton(FutanyikkatsuShoninkekkaListDiv div) {
         Boolean 承認済みフラグ = false;
-        FutangendogakuyikkatsuShoninEntity 負担限度額一括認定情報 = IkkatsuShoninKekkaIchiranService.createInstance()
-                .load負担限度額一括認定情報(一括処理日時list.get(0));
-        if (負担限度額一括認定情報.get承認済みフラグ() != null) {
-            承認済みフラグ = 負担限度額一括認定情報.get承認済みフラグ();
+        if (一括処理日時list != null && !一括処理日時list.isEmpty()) {
+            FutangendogakuyikkatsuShoninEntity 負担限度額一括認定情報 = IkkatsuShoninKekkaIchiranService.createInstance()
+                    .load負担限度額一括認定情報(一括処理日時list.get(0));
+            createhandler(div).onClick_selectbutton(負担限度額一括認定情報);
+
+            RString 一括処理日時 = div.getHyojiTaisho().getDdlBatchShoriNichiji().getSelectedKey();
+            if (一括処理日時 != null && !一括処理日時.isEmpty()) {
+                ddlBatchShoriNichiji_index = Integer.parseInt(一括処理日時.replace(new RString("key"), RString.EMPTY).toString());
+            }
+            if (負担限度額一括認定情報.get承認済みフラグ() != null) {
+                承認済みフラグ = 負担限度額一括認定情報.get承認済みフラグ();
+            }
+            List<FutanGendogakuNinteiBatchResult> 負担限度額認定バッチ結果 = IkkatsuShoninKekkaIchiranService.createInstance()
+                    .load一括承認結果取得(一括処理日時list.get(ddlBatchShoriNichiji_index), 承認済みフラグ);
+            ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, new ArrayList<>(負担限度額認定バッチ結果));
+            createhandler(div).setDgShinseiIchiran_Row(負担限度額認定バッチ結果);
         }
-        RString 一括処理日時 = div.getHyojiTaisho().getDdlBatchShoriNichiji().getSelectedKey().trim();
-        int ddlBatchShoriNichiji_index = Integer.parseInt(一括処理日時.replace(new RString("key"), RString.EMPTY).toString());
-        List<FutanGendogakuNinteiBatchResult> 負担限度額認定バッチ結果 = IkkatsuShoninKekkaIchiranService.createInstance()
-                .load一括承認結果取得(一括処理日時list.get(ddlBatchShoriNichiji_index), 承認済みフラグ);
-        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, new ArrayList<>(負担限度額認定バッチ結果));
-        createhandler(div).onClick_selectbutton(負担限度額一括認定情報);
-        createhandler(div).setDgShinseiIchiran_Row(負担限度額認定バッチ結果);
         return ResponseData.of(div).respond();
     }
 
