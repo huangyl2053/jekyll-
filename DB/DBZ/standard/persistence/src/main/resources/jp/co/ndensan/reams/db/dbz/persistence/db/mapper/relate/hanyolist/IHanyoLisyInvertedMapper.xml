@@ -5,7 +5,7 @@
 
 
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hanyolist.IHanyoLisyInvertedMapper">
-    <resultMap id="resultMap_HanyoListTempEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoListTempEntity" autoMapping="true">
+    <resultMap id="resultMap_HanyoListTempEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoLisyInvertedEntity" autoMapping="true">
         <result property="項目ID" column="項目ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="項目位置" column="項目位置"/>
         <result property="帳票表示位置" column="帳票表示位置" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
