@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD492001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd492001.RendingJieguoLianxieProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -51,9 +52,18 @@ public class DBD492001_NinteiKekkaInfoUploadParameter extends BatchParameterBase
     /**
      * toProcessバッチパラメータ。
      *
+     * @param index int
+     * @param islist boolean
      * @return RendingJieguoLianxieProcessParameter
      */
-    public RendingJieguoLianxieProcessParameter toRendingJieguoLianxieProcessParameter() {
-        return new RendingJieguoLianxieProcessParameter(取込みデータ区分, 格納パス, 被保番号リスト, 保険者区分);
+    public RendingJieguoLianxieProcessParameter toRendingJieguoLianxieProcessParameter(int index, boolean islist) {
+        ArrayList<RString> リスト = new ArrayList<>();
+        if (islist) {
+            リスト.add(保険者番号リスト.get(index));
+            リスト.add(被保番号リスト.get(index));
+            リスト.add(認定申請日リスト.get(index));
+            リスト.add(申請区分_申請時_コードリスト.get(index));
+        }
+        return new RendingJieguoLianxieProcessParameter(取込みデータ区分, 格納パス, リスト, 市町村コード, 市町村名称, 証記載保険者番号, 保険者区分);
     }
 }

@@ -23,7 +23,10 @@ public class RendingJieguoLianxieProcessParameter implements IBatchProcessParame
     private RString 取込みデータ区分;
     private RString 外部媒体格納パス;
     private List<RString> データリスト;
-    private RString 保険者;
+    private RString 市町村コード;
+    private RString 市町村名称;
+    private RString 証記載保険者番号;
+    private RString 保険者区分;
 
     /**
      * コンストラクタです。
@@ -31,28 +34,34 @@ public class RendingJieguoLianxieProcessParameter implements IBatchProcessParame
      * @param 取込みデータ区分 取込みデータ区分
      * @param 外部媒体格納パス 外部媒体格納パス
      * @param データリスト データリスト
-     * @param 保険者 保険者
+     * @param 市町村コード 市町村コード
+     * @param 市町村名称 市町村名称
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 保険者区分 保険者区分
      */
     public RendingJieguoLianxieProcessParameter(RString 取込みデータ区分,
             RString 外部媒体格納パス,
             List<RString> データリスト,
-            RString 保険者) {
+            RString 市町村コード,
+            RString 市町村名称,
+            RString 証記載保険者番号,
+            RString 保険者区分) {
         this.取込みデータ区分 = 取込みデータ区分;
         this.外部媒体格納パス = 外部媒体格納パス;
         this.データリスト = データリスト;
-        this.保険者 = 保険者;
+        this.市町村コード = 市町村コード;
+        this.市町村名称 = 市町村名称;
+        this.証記載保険者番号 = 証記載保険者番号;
+        this.保険者区分 = 保険者区分;
     }
 
     /**
      * ＳＱＬ使用された情報を作成します．
      *
-     * @param 一時デーブル 一時デーブル
      * @return ＳＱＬ使用された情報を作成します．
      */
-    public RendingJieguoLianxieMybatisParameter toRendingJieguoLianxieMybatisParameter(RString 一時デーブル) {
-        return new RendingJieguoLianxieMybatisParameter(
-                データリスト,
-                一時デーブル);
+    public RendingJieguoLianxieMybatisParameter toRendingJieguoLianxieMybatisParameter() {
+        return new RendingJieguoLianxieMybatisParameter(データリスト);
     }
 
 }

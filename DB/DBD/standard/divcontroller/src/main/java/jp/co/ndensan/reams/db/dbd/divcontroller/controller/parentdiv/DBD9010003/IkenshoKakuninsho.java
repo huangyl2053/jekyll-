@@ -169,7 +169,7 @@ public class IkenshoKakuninsho {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShujiiIkenshoKakuninshoPrintService service = new ShujiiIkenshoKakuninshoPrintService();
         SourceDataCollection source = service.printSingle(getHandler(div).create主治医意見書確認書Entity(taishoshaKey));
-        AccessLogger.log(AccessLogType.照会, createpersonalData(taishoshaKey));
+        AccessLogger.log(AccessLogType.更新, createpersonalData(taishoshaKey));
         List<IryohiKojo> 医療費控除情報リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
         for (IryohiKojo result : 医療費控除情報リスト) {
             if (div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey().equals(result.get控除対象年().toDateString())) {
