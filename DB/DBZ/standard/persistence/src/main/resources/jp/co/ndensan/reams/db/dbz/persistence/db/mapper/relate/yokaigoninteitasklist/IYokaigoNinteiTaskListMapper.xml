@@ -1112,6 +1112,7 @@
             AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
             AND DbT5105."maskingKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
             AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
             AND DbT5105."centerSoshinYMD" IS NULL
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
@@ -1242,7 +1243,7 @@
             AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
             AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-            AND DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
             AND DbT5105."maskingKanryoYMD" IS NOT NULL
             AND DbT5105."centerSoshinYMD" IS NULL
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
@@ -1354,7 +1355,7 @@
             LEFT JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
                 ON  DbT5105."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
         WHERE                                                                                
-                DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NULL
+                DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ninteichosaIraiKanryoYMD" IS NULL
             AND DbT5105."ninteichosaKanryoYMD" IS NULL
             AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NULL

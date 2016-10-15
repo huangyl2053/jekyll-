@@ -347,7 +347,11 @@ public class YokaigoNinteiTaskListHandler {
                 ShinSaKaiBusiness 前審査受付Model = YokaigoNinteiTaskListFinder.createInstance().
                         get前審査受付(YokaigoNinteiTaskListParameter.
                                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
-                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前審査受付Model.get要介護認定完了情報Lsit()));
+                if (前審査受付Model.get要介護認定完了情報Lsit() == null) {
+                    ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+                } else {
+                    ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前審査受付Model.get要介護認定完了情報Lsit()));
+                }
             } else {
                 ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
             }
