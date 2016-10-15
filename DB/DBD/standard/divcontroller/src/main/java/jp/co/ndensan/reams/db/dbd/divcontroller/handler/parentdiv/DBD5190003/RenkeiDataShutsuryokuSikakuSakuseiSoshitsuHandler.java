@@ -38,6 +38,7 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
     private static final int SECOND_ONE = 1;
     private static final RString IF種別_新 = new RString("0");
     private static final RString IF種別_旧 = new RString("1");
+    private static final int INDEX_新 = 1;
     private static final RString 印刷する = new RString("1");
     private static final RString 資格喪失_死亡_データ送信ファイル名_新 = new RString("Z8NCI252.CSV");
     private static final RString 資格喪失_死亡_データ送信ファイル名_旧 = new RString("Z7NCI252.CSV");
@@ -152,7 +153,7 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
     }
 
     private HokaiseiShikoYMDToKoroshoIfShikibetsuCode get法改正施行年月日と厚労省IF識別コード() {
-        return RenekeiDataSakuseiFourMasterManager.createInstance().get法改正施行年月日と厚労省IF識別コード();
+        return RenekeiDataSakuseiFourMasterManager.createInstance().get法改正施行年月日と厚労省IF識別コード().get(INDEX_新);
     }
 
     private void iF種別新画面表示() {
