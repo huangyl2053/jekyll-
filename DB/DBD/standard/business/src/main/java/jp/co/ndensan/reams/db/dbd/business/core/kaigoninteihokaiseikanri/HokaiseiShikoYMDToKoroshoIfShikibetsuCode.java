@@ -20,7 +20,13 @@ public class HokaiseiShikoYMDToKoroshoIfShikibetsuCode {
     private RString koroshoIfShikibetsuCode;
 
     /**
-     * 法改正施行年月日と厚労省IF識別コードを生成します。
+     * コンストラクタです
+     */
+    public HokaiseiShikoYMDToKoroshoIfShikibetsuCode() {
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param hokaiseiShikoYMD 法改正施行年月日
      * @param koroshoIfShikibetsuCode 厚労省IF識別コード
@@ -46,5 +52,23 @@ public class HokaiseiShikoYMDToKoroshoIfShikibetsuCode {
      */
     public RString get厚労省IF識別コード() {
         return koroshoIfShikibetsuCode;
+    }
+
+    /**
+     * 法改正施行年月日値を設定
+     *
+     * @param date 法改正施行年月日
+     */
+    public void set法改正施行年月日(FlexibleDate date) {
+        hokaiseiShikoYMD = date;
+    }
+
+    /**
+     * 厚労省IF識別コード値を設定
+     *
+     * @param code 厚労省IF識別コード値
+     */
+    public void set厚労省IF識別コード(RString code) {
+        koroshoIfShikibetsuCode = code;
     }
 }
