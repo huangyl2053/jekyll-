@@ -431,7 +431,7 @@ public class JukyushagenmenninteiDateManager {
 
     private void set出力条件_年齢(DBD104010ProcessParameter processParameter, List<RString> 出力条件) {
         if (年齢層抽出方法_年齢.equals(processParameter.get宛名抽出条件().getAgeSelectKijun().getコード())
-                && processParameter.get宛名抽出条件().getNenreiKijunbi() != null) {
+                && processParameter.get宛名抽出条件().getNenreiKijunbi() != null && processParameter.get宛名抽出条件().getNenreiRange() != null) {
             if (processParameter.get宛名抽出条件().getNenreiRange().getFrom() != null
                     && processParameter.get宛名抽出条件().getNenreiRange().getTo() != null) {
                 出力条件.add(new RString("年齢：").concat(new RString(processParameter.get宛名抽出条件().getNenreiRange().getFrom()
@@ -453,7 +453,8 @@ public class JukyushagenmenninteiDateManager {
     }
 
     private void set出力条件_生年月日(DBD104010ProcessParameter processParameter, List<RString> 出力条件) {
-        if (年齢層抽出方法_生年月日.equals(processParameter.get宛名抽出条件().getAgeSelectKijun().getコード())) {
+        if (年齢層抽出方法_生年月日.equals(processParameter.get宛名抽出条件().getAgeSelectKijun().getコード())
+                && processParameter.get宛名抽出条件().getSeinengappiRange() != null) {
             if (processParameter.get宛名抽出条件().getSeinengappiRange().getFrom() != null
                     && processParameter.get宛名抽出条件().getSeinengappiRange().getTo() != null) {
                 出力条件.add(new RString("生年月日：").concat(processParameter.get宛名抽出条件().getSeinengappiRange().getFrom().toDateString())
