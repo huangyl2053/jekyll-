@@ -86,12 +86,12 @@ public class IkkatsuShoninKekkaIchiranService {
     @Transaction
     public List<YMDHMS> load一括処理日時() {
         YMDHMS システム日時 = YMDHMS.now();
-        YMDHMS システム日時の1年前 = YMDHMS.now().minusYear(1);
+        YMDHMS システム日時の1年前 = システム日時.minusYear(1);
         List<YMDHMS> 一括処理日時情報List = new ArrayList<>();
         FutanyikkatsuShoninListMapperParameter 検索条件 = new FutanyikkatsuShoninListMapperParameter(システム日時, システム日時の1年前);
         IFutanyikkatsuShoninkekkaListMapper mapper = mapperProvider.create(IFutanyikkatsuShoninkekkaListMapper.class);
         List<DbT4035FutanGendogakuNinteiBatchEntity> entityList = mapper.get一括処理日時取得(検索条件);
-        if (entityList != null) {
+        if (entityList != null && !entityList.isEmpty()) {
             for (DbT4035FutanGendogakuNinteiBatchEntity entity : entityList) {
                 一括処理日時情報List.add(entity.getNinteiBatchExecutedTimestamp());
             }
