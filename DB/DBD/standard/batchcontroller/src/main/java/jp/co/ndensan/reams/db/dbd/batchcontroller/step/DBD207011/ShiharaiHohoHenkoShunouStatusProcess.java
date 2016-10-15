@@ -468,13 +468,13 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
     }
 
     private FlexibleDate edit以前納期限(FlexibleDate 以前納期限) {
-        if (以前納期限 == null || FlexibleDate.EMPTY.equals(以前納期限)) {
-            以前納期限 = 納期限Date;
-        } else {
-            if (以前納期限.isBefore(納期限Date)) {
-                以前納期限 = 納期限Date;
-            }
-        }
+//        if (以前納期限 == null || FlexibleDate.EMPTY.equals(以前納期限)) { TODO
+//            以前納期限 = 納期限Date;
+//        } else {
+//            if (以前納期限.isBefore(納期限Date)) {
+//                以前納期限 = 納期限Date;
+//            }
+//        }
         return 以前納期限;
     }
 
