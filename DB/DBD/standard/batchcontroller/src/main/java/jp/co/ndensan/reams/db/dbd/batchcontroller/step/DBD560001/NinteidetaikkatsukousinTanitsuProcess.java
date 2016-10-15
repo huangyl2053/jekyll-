@@ -9,13 +9,11 @@ import jp.co.ndensan.reams.db.dbd.business.core.dbd560001.NinteiTanitsuProcessDa
 import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.YokaigoInterfaceShurui;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd560001.DBD560001ProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd560001.NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteidetaikatsukousin.INinteidetaikkatsukousinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -39,18 +37,16 @@ public class NinteidetaikkatsukousinTanitsuProcess extends BatchProcessBase<Nint
     private RString 今回の要介護度;
     private RString 前回の要介護度;
     private final RString 富士通2 = YokaigoInterfaceShurui.富士通２.getコード();
+    private INinteidetaikkatsukousinMapper mapper;
 
-    @BatchWriter
-    private BatchPermanentTableWriter<DbT4001JukyushaDaichoEntity> dbt4001tableWriter;
+    @Override
+    protected void initialize() {
+        mapper = getMapper(INinteidetaikkatsukousinMapper.class);
+    }
 
     @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID_要介護認定結果情報);
-    }
-
-    @Override
-    protected void createWriter() {
-        dbt4001tableWriter = new BatchPermanentTableWriter<>(DbT4001JukyushaDaichoEntity.class);
     }
 
     @Override
@@ -84,8 +80,7 @@ public class NinteidetaikkatsukousinTanitsuProcess extends BatchProcessBase<Nint
     }
 
     private void upDate受給者台帳Detial(NinteiKekkaJohoEntity entity, NinteiTanitsuProcessDataManager manager) {
-        dbt4001tableWriter.delete(entity.get受給者台帳Entity());
-        dbt4001tableWriter.insert(manager.set受給者台帳Detail(entity, 認定日));
+        mapper.upDate受給者台帳(manager.set受給者台帳Detail(entity, 認定日));
     }
 
     private boolean get要介護認定更新比較結果(NinteiKekkaJohoEntity entity, NinteiTanitsuProcessDataManager manager) {
