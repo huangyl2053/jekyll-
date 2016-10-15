@@ -101,7 +101,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
      */
     public void onChange_type() {
         div.getDataGridFile().setDataSource(getFileSource());
-        div.getDataGridFile().setSelectedItems(getFileSource().get(0));
+        div.getDataGridFile().setSelectedItems(getFileSource());
     }
 
     /**
