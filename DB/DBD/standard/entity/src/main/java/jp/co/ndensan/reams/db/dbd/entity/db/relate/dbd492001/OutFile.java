@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001;
 
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -35,9 +33,9 @@ public class OutFile {
     private RString 性別コード;
     private RString 被保険者ｶﾅ氏名;
     private RString 被保険者漢字氏名;
-    private YubinNo 郵便番号;
+    private RString 郵便番号;
     private RString 住所;
-    private TelNo 電話番号;
+    private RString 電話番号;
     private RString 病院施設等の名称;
     private RString 病院施設等の所在地;
     private RString 前回の認定審査会結果;

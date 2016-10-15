@@ -3,87 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD492001;
+package jp.co.ndensan.reams.db.dbd.business.core.dbd492001;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ErrorRecord;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.HenKouData;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ShinseiKubunItchiChekkuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.FairudetaIchijiTeburuEntity;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriterBuilders;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 申請区分一致チェック_process処理クラスです。
+ * DB出力(ファイルデータ一時テーブル)のデータの編集ビジネスクラスです。
  *
- * @reamsid_L DBD-1510-020 x_xuliang
+ * @reamsid_L DBD-1510-030 x_xuliang
  */
-public class ShinseiKubunItchiChekkuProcess extends BatchProcessBase<ShinseiKubunItchiChekkuEntity> {
+public class FairuYishiteburubusiness {
 
-    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate."
-            + "yokaigoninteikekkarenkeidetatorikomi.IShinseiKubunItchiChekkuMapper.get申請区分一致");
-
-    private List<ErrorRecord> errorRecordList;
-    @BatchWriter
-    private BatchEntityCreatedTempTableWriter tmpTableWriter;
-
-    @Override
-    protected IBatchReader createReader() {
-        return new BatchDbReader(MAPPERPATH);
-    }
-
-    @Override
-    protected void createWriter() {
-        tmpTableWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(FairudetaIchijiTeburuEntity.class)
-                .tempTableName(FairudetaIchijiTeburuEntity.TABLE_NAME)
-                .build();
-    }
-
-    @Override
-    protected void initialize() {
-        errorRecordList = new ArrayList<>();
-    }
-
-    @Override
-    protected void process(ShinseiKubunItchiChekkuEntity t) {
-        ErrorRecord error = new ErrorRecord();
-        HenKouData entity = new HenKouData();
-//TODO        if (!t.getNinteiShinseiShinseijiKubunCode().equals(読み込んだレコードの申請区分(申請時)コード)) {
-        error.setShikibetsukodo(entity.get識別コード());
-        error.setHokenshabango(entity.get保険者番号());
-        error.setHihokenjabango(entity.get被保険者番号());
-        error.setNinteishinseibi(entity.get認定申請日());
-        error.setEdaban(entity.get枝番());
-        error.setShinseikubunhorei(entity.get申請区分_法令コード());
-        error.setShinseikubunshinseiji(entity.get申請区分_申請時コード());
-        error.setTorisakubunkodo(entity.get取下区分コード());
-        error.setHihokenjakubun(entity.get被保険者区分コード());
-        error.setShinseidaikokubun(entity.get申請代行区分コード());
-        error.setSeinengappi(entity.get生年月日());
-        error.setNenrei(entity.get年齢());
-        error.setSeibetsukodo(entity.get性別コード());
-        error.setHihokenjakanashimei(entity.get被保険者ｶﾅ氏名());
-        error.setHihokenjakanjishimei(entity.get被保険者漢字氏名());
-        error.setYubenbango(entity.get郵便番号());
-        error.setJusho(entity.get住所());
-        error.setTenwabango(entity.get電話番号());
-        error.setByoinshisetsutonomeisho(entity.get病院施設等の名称());
-        error.setByoinshisetsutonoshozaichi(entity.get病院施設等の所在地());
-        errorRecordList.add(error);
-//    } else {
-        FairudetaIchijiTeburuEntity fairEntity = createファイルデータ一時テーブル(entity);
-        tmpTableWriter.insert(fairEntity);
-//    }
-    }
-
-    private FairudetaIchijiTeburuEntity createファイルデータ一時テーブル(HenKouData data) {
-        FairudetaIchijiTeburuEntity entity = new FairudetaIchijiTeburuEntity();
+    /**
+     * ファイルデータ一時テーブルをセット
+     *
+     * @param data HenKouData
+     * @param entity FairudetaIchijiTeburuEntity
+     */
+    public void editteburu(HenKouData data, FairudetaIchijiTeburuEntity entity) {
         entity.setKoban(data.get項番());
         entity.setSutetasu(data.getステータス());
         entity.setShikibetsukodo(data.get識別コード());
@@ -184,17 +122,11 @@ public class ShinseiKubunItchiChekkuProcess extends BatchProcessBase<ShinseiKubu
         entity.setKaigoyobohomonkango(data.get介護予防訪問看護());
         entity.setKaigoyobohomonrihabiriteshon(data.get介護予防訪問リハビリテーション());
         entity.setKaigoyobokyotakuryoyokanrishido(data.get介護予防居宅療養管理指導());
-        return entity;
-
+        createファイルデータ一時テ(data, entity);
+        createファイルデータ一時(data, entity);
     }
 
-    /**
-     * createファイルデータ一時テ
-     *
-     * @param data data
-     * @param entity entity
-     */
-    public void createファイルデータ一時テ(HenKouData data, FairudetaIchijiTeburuEntity entity) {
+    private void createファイルデータ一時テ(HenKouData data, FairudetaIchijiTeburuEntity entity) {
         entity.setKaigoyobotsushokaigo_deisabisu(data.get介護予防通所介護_デイサービス());
         entity.setKaigoyobotsushorihabiriteshon(data.get介護予防通所リハビリテーション());
         entity.setKaigoyobotankiseikatsukaigo(data.get介護予防短期入所生活介護_ショートステイ());
@@ -274,13 +206,13 @@ public class ShinseiKubunItchiChekkuProcess extends BatchProcessBase<ShinseiKubu
         entity.setSutomanoshochi(data.getストーマの処置());
         entity.setSansoryoho(data.get酸素療法());
         entity.setResupireta(data.getレスピレーター());
-        entity.setKikansekkainoshochitotsunokango(data.get気管切開の処置());
-        entity.setKeikaneiyo(data.get疼痛の看護());
-        entity.setMonitasokutei(data.get経管栄養());
-        entity.setJiyokusounoshochi(data.getモニター測定());
-        entity.setKateteru(data.getじょくそうの処置());
-        entity.setShogaikorei(data.getカテーテル());
-        entity.setShajiritsudo(data.get障害高齢者自立度());
+        entity.setKikansekkainoshochi(data.get気管切開の処置());
+        entity.setTotsunokango(data.get疼痛の看護());
+        entity.setKeikaneiyo(data.get経管栄養());
+        entity.setMonitasokutei(data.getモニター測定());
+        entity.setJiyokusounoshochi(data.getじょくそうの処置());
+        entity.setKateteru(data.getカテーテル());
+        entity.setShogaikoreishajiritsudo(data.get障害高齢者自立度());
         entity.setNinshishokoreishajiritsudo(data.get認知症高齢者自立度());
         entity.setZenkaikekka_mahi_hidari_joshi01(data.get前_01麻痺_左上肢());
         entity.setZenkaikekka_mahi_migi_joshi01(data.get前_01麻痺_右上肢());
@@ -297,13 +229,7 @@ public class ShinseiKubunItchiChekkuProcess extends BatchProcessBase<ShinseiKubu
         entity.setZenkaikekka_ryoashidenotagu01(data.get前_01両足での立位());
     }
 
-    /**
-     * createファイルデータ一時
-     *
-     * @param data data
-     * @param entity entity
-     */
-    public void createファイルデータ一時(HenKouData data, FairudetaIchijiTeburuEntity entity) {
+    private void createファイルデータ一時(HenKouData data, FairudetaIchijiTeburuEntity entity) {
         entity.setZenkaikekka_hoko01(data.get前_01歩行());
         entity.setZenkaikekka_tachiagari01(data.get前_01立ち上がり());
         entity.setZenkaikekka_kataashidenotagu01(data.get前_01片足での立位());
@@ -359,13 +285,15 @@ public class ShinseiKubunItchiChekkuProcess extends BatchProcessBase<ShinseiKubu
         entity.setZenkaikekka_sutomanoshochi(data.get前_ストーマの処置());
         entity.setZenkaikekka_sansoryoho(data.get前_酸素療法());
         entity.setZenkaikekka_resupireta(data.get前_レスピレーター());
+
         entity.setZenkaikekka_kikansekkainoshochitotsunokango(data.get前_気管切開の処置());
-        entity.setZenkaikekka_keikaneiyo(data.get前_疼痛の看護());
-        entity.setZenkaikekka_monitasokutei(data.get前_経管栄養());
-        entity.setZenkaikekka_jiyokusounoshochi(data.get前_モニター測定());
-        entity.setZenkaikekka_kateteru(data.get前_じょくそうの処置());
-        entity.setZenkaikekka_shogaikorei(data.get前_カテーテル());
-        entity.setZenkaikekka_shajiritsudo(data.get前_障害高齢者自立度());
+        entity.setZenkaikekka_totsunokango(data.get前_疼痛の看護());
+        entity.setZenkaikekka_keikaneiyo(data.get前_経管栄養());
+        entity.setZenkaikekka_monitasokutei(data.get前_モニター測定());
+        entity.setZenkaikekka_jiyokusounoshochi(data.get前_じょくそうの処置());
+        entity.setZenkaikekka_kateteru(data.get前_カテーテル());
+        entity.setZenkaikekka_shogaikoreishajiritsudo(data.get前_障害高齢者自立度());
+
         entity.setZenkaikekka_ninshishokoreishajiritsudo(data.get前_認知症高齢者自立度());
         entity.setZenkaikekka_ichijihanteikekka(data.get前_一次判定結果());
         entity.setZenkaikekka_ichijihanteikekka_ninshishokasan(data.get前_一次判定結果_認知症加算());
@@ -432,5 +360,6 @@ public class ShinseiKubunItchiChekkuProcess extends BatchProcessBase<ShinseiKubu
         entity.setZenkaishikibetsukodo(data.get前回識別コード());
         entity.setNinteishinsakaiikento(data.get認定審査会意見等());
         entity.setKomentoto(data.getコメント等());
+        entity.setShinseishoKanriNo(data.get申請情報_申請書管理番号());
     }
 }
