@@ -157,6 +157,29 @@ public class GemmenJisshiJokyoMainHandler {
 
     private void 宛名抽出条件保存(DBD104010_JukyushaGemmenJisshiJokyoParameter parameter) {
         AtenaSelectBatchParameter 宛名抽出条件 = div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().get宛名抽出条件();
+
+        宛名抽出条件.setChiku1_From(宛名抽出条件.getChiku1_From() != null ? 宛名抽出条件.getChiku1_From() : RString.EMPTY);
+        宛名抽出条件.setChiku1_FromMesho(宛名抽出条件.getChiku1_FromMesho() != null ? 宛名抽出条件.getChiku1_FromMesho() : RString.EMPTY);
+        宛名抽出条件.setChiku1_To(宛名抽出条件.getChiku1_To() != null ? 宛名抽出条件.getChiku1_To() : RString.EMPTY);
+        宛名抽出条件.setChiku1_ToMesho(宛名抽出条件.getChiku1_ToMesho() != null ? 宛名抽出条件.getChiku1_ToMesho() : RString.EMPTY);
+        宛名抽出条件.setChiku2_From(宛名抽出条件.getChiku2_From() != null ? 宛名抽出条件.getChiku2_From() : RString.EMPTY);
+        宛名抽出条件.setChiku2_FromMesho(宛名抽出条件.getChiku2_FromMesho() != null ? 宛名抽出条件.getChiku2_FromMesho() : RString.EMPTY);
+        宛名抽出条件.setChiku2_To(宛名抽出条件.getChiku2_To() != null ? 宛名抽出条件.getChiku2_To() : RString.EMPTY);
+        宛名抽出条件.setChiku2_ToMesho(宛名抽出条件.getChiku2_ToMesho() != null ? 宛名抽出条件.getChiku2_ToMesho() : RString.EMPTY);
+        宛名抽出条件.setChiku3_From(宛名抽出条件.getChiku3_From() != null ? 宛名抽出条件.getChiku3_From() : RString.EMPTY);
+        宛名抽出条件.setChiku3_FromMesho(宛名抽出条件.getChiku3_FromMesho() != null ? 宛名抽出条件.getChiku3_FromMesho() : RString.EMPTY);
+        宛名抽出条件.setChiku3_To(宛名抽出条件.getChiku3_To() != null ? 宛名抽出条件.getChiku3_To() : RString.EMPTY);
+        宛名抽出条件.setChiku3_ToMesho(宛名抽出条件.getChiku3_ToMesho() != null ? 宛名抽出条件.getChiku3_ToMesho() : RString.EMPTY);
+        宛名抽出条件.setGyoseiku_From(宛名抽出条件.getGyoseiku_From() != null ? 宛名抽出条件.getGyoseiku_From() : RString.EMPTY);
+        宛名抽出条件.setGyoseiku_FromMesho(宛名抽出条件.getGyoseiku_FromMesho() != null ? 宛名抽出条件.getGyoseiku_FromMesho() : RString.EMPTY);
+        宛名抽出条件.setGyoseiku_To(宛名抽出条件.getGyoseiku_To() != null ? 宛名抽出条件.getGyoseiku_To() : RString.EMPTY);
+        宛名抽出条件.setGyoseiku_ToMesho(宛名抽出条件.getGyoseiku_ToMesho() != null ? 宛名抽出条件.getGyoseiku_ToMesho() : RString.EMPTY);
+        宛名抽出条件.setJusho_From(宛名抽出条件.getJusho_From() != null ? 宛名抽出条件.getChiku1_From() : RString.EMPTY);
+        宛名抽出条件.setJusho_FromMesho(宛名抽出条件.getJusho_FromMesho() != null ? 宛名抽出条件.getJusho_FromMesho() : RString.EMPTY);
+        宛名抽出条件.setJusho_To(宛名抽出条件.getJusho_To() != null ? 宛名抽出条件.getJusho_To() : RString.EMPTY);
+        宛名抽出条件.setJusho_ToMesho(宛名抽出条件.getJusho_ToMesho() != null ? 宛名抽出条件.getJusho_ToMesho() : RString.EMPTY);
+        宛名抽出条件.setShichoson_Mesho(宛名抽出条件.getShichoson_Mesho() != null ? 宛名抽出条件.getShichoson_Mesho() : RString.EMPTY);
+
         parameter.set宛名抽出条件(宛名抽出条件);
     }
 
