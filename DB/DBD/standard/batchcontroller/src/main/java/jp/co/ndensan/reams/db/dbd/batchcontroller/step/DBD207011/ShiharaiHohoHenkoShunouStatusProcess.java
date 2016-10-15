@@ -460,21 +460,21 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
             for (ShunoJohoEntity 収納情報 : 収納情報リスト) {
                 FlexibleDate 納期限Date = edit日期(収納情報.get調定共通_介護継承_納期限());
                 if (納期限Date != null && !納期限Date.isEmpty() && 納期限Date.isBefore(processParamter.get基準日().minusYear(年_3))) {
-                    以前納期限 = edit以前納期限(以前納期限);
+                    以前納期限 = edit以前納期限(以前納期限, 納期限Date);
                 }
             }
         }
         return 以前納期限;
     }
 
-    private FlexibleDate edit以前納期限(FlexibleDate 以前納期限) {
-//        if (以前納期限 == null || FlexibleDate.EMPTY.equals(以前納期限)) { TODO
-//            以前納期限 = 納期限Date;
-//        } else {
-//            if (以前納期限.isBefore(納期限Date)) {
-//                以前納期限 = 納期限Date;
-//            }
-//        }
+    private FlexibleDate edit以前納期限(FlexibleDate 以前納期限, FlexibleDate 納期限Date) {
+        if (以前納期限 == null || FlexibleDate.EMPTY.equals(以前納期限)) {
+            以前納期限 = 納期限Date;
+        } else {
+            if (以前納期限.isBefore(納期限Date)) {
+                以前納期限 = 納期限Date;
+            }
+        }
         return 以前納期限;
     }
 
