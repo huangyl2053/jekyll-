@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.Target
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.NinteishaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.TaishoshaIchijiTokuteiProcessParamter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
+import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -32,15 +33,36 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter extends BatchParameterBase {
 
+    private static final String TAISHOLIST = "taishoList";
+    private static final String KIJUNYMD = "kijunYMD";
+    private static final String SHOTOKUNENDO = "shotokunendo";
+    private static final String KYUSOCHISHAKUBUN = "kyusochishakubun";
+    private static final String SETAIHYOJI = "setaihyoji";
+    private static final String JUKYUSHAKUBUN = "jukyushakubun";
+    private static final String SETAIHIKAZEINADO = "setaihikazeinado";
+    private static final String CSVSHUTSURYOKUSETEI = "csvshutsuryokusetei";
+    private static final String CHANGEPAGEID = "changePageID";
+    private static final String REPORTID = "reportId";
+
+    @BatchParameter(key = TAISHOLIST, name = "対象リスト")
     private TargetList 対象リスト;
+    @BatchParameter(key = KIJUNYMD, name = "基準日")
     private FlexibleDate 基準日;
+    @BatchParameter(key = SHOTOKUNENDO, name = "所得年度")
     private FlexibleYear 所得年度;
+    @BatchParameter(key = KYUSOCHISHAKUBUN, name = "旧措置区分")
     private KyusochishaJukyushaKubun 旧措置区分;
+    @BatchParameter(key = SETAIHYOJI, name = "世帯表示")
     private SetaiHyoji 世帯表示;
+    @BatchParameter(key = JUKYUSHAKUBUN, name = "受給者区分")
     private JukyushaKubun2 受給者区分;
+    @BatchParameter(key = SETAIHIKAZEINADO, name = "世帯非課税等")
     private List<HihokenshaKeizaiJokyo> 世帯非課税等;
+    @BatchParameter(key = CSVSHUTSURYOKUSETEI, name = "CSV出力設定")
     private List<CSVSettings> csv出力設定;
+    @BatchParameter(key = CHANGEPAGEID, name = "改頁出力順ID")
     private Long 改頁出力順ID;
+    @BatchParameter(key = REPORTID, name = "帳票ID")
     private RString 帳票ID;
 
     /**
