@@ -53,7 +53,7 @@ public class GemmenJisshiJokyoMainHandler {
             div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setValue(new Decimal(RDate.getNowDate().getDayValue()));
             div.getGemmenJisshiJokyoJoken().getRadKijunBi().setDisabled(false);
             div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().setDisabled(false);
-            div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(false);
+            div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(true);
         }
     }
 
@@ -138,10 +138,12 @@ public class GemmenJisshiJokyoMainHandler {
                 div.getGemmenJisshiJokyoJoken().getRadKijunBi().setSelectedKey(new RString("1"));
                 div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().clearSelectedItem();
                 div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setValue(new Decimal(基準日.toString()));
+                div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(false);
             } else {
                 div.getGemmenJisshiJokyoJoken().getRadKijunBi().clearSelectedItem();
                 div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().setSelectedKey(new RString("2"));
                 div.getGemmenJisshiJokyoJoken().getTxtKijunBi().clearValue();
+                div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(true);
             }
 
         }
