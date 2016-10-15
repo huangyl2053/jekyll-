@@ -101,9 +101,9 @@ public class GemmenJisshiJokyoMainHandler {
             }
         }
         if ("1".equals(div.getGemmenJisshiJokyoJoken().getRadShutsuryokuChohyo().getSelectedKey().toString())) {
-            parameter.set帳票ID(new ReportId("DBD300001_JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoCover"));
+            parameter.set帳票ID(new ReportId("DBD300001_JukyushaGemmenTsukibetsuShinseiNinteiJokyohyo"));
         } else {
-            parameter.set帳票ID(new ReportId("DBD300002_JukyushaGemmenTsukibetsuNinteishasuJokyohyo"));
+            parameter.set帳票ID(new ReportId("DBD300002_JukyushaGemmenTsukibetsuNinteishaJokyohyo"));
         }
 
         宛名抽出条件保存(parameter);
