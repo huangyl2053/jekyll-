@@ -118,8 +118,8 @@
         rgdb."DbT4150RenrakusakiJoho"
         ORDER BY
         rgdb."DbT4150RenrakusakiJoho"."priority"
-        ) AS DbT4150
-        ON DbT4150."shinseishoKanriNo" = "NinteiShinseiJohoTemp"."shinseishoKanriNo"
+        ) AS "DbT4150RenrakusakiJoho"
+        ON "DbT4150RenrakusakiJoho"."shinseishoKanriNo" = "NinteiShinseiJohoTemp"."shinseishoKanriNo"
         )
         SELECT 
         master.*,
