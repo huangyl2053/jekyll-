@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescript
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -120,7 +119,6 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
             SharedFileDescriptor sfd = SharedFile.defineSharedFile(filesystemName);
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts();
             SharedFile.copyToSharedFile(sfd, path, opts);
-            SharedFile.copyToLocal(filesystemName, new FilesystemPath(Path.getTmpDirectoryPath()));
         }
         for (dgtorikomidataichiran_Row row : div.getDgtorikomidataichiran().getDataSource()) {
             ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("'被保険者番号"),

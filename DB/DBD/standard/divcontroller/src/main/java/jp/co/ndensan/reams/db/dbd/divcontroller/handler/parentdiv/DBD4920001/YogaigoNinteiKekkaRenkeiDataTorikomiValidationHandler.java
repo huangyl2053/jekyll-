@@ -78,7 +78,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiValidationHandler {
                 .thenAdd(NoInputMessages.保険者一致チェック_識別コード).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 YogaigoNinteiKekkaRenkeiDataTorikomiValidationHandler.NoInputMessages.保険者一致チェック_識別コード,
-                div.getDgtorikomidataichiran()).build().check(messages));
+                div.getUploadTool()).build().check(messages));
         return pairs;
     }
 

@@ -290,34 +290,34 @@ public class ModifyNinteiShinseiJohoManager {
             tempEntity.setShinseiKubunShinseijiCode(new RString("申請区分が不正です"));
             編集状況フラグ = new RString("1");
         }
-        if (tempEntity.getNinteiShinseiYMD().isEmpty() || tempEntity.getNinteiShinseiYMD().equals(new RString("00000000"))) {
+        if (entity.get認定申請年月日() == null || entity.get認定申請年月日().isEmpty()
+                || tempEntity.getNinteiShinseiYMD().equals(new RString("00000000"))) {
             tempEntity.setNinteiShinseiYMD(new RString("申請日の入力がありません"));
+            編集状況フラグ = new RString("1");
+        } else if (!entity.get認定申請年月日().isValid()) {
+            tempEntity.setNinteiShinseiYMD(new RString("申請日のデータが不正です"));
             編集状況フラグ = new RString("1");
         }
         if (tempEntity.getHihokenshaNo().isEmpty() || tempEntity.getHihokenshaNo().equals(new RString("0000000000"))) {
             tempEntity.setHihokenshaNo(new RString("被保険者番号の入力がありません"));
             編集状況フラグ = new RString("1");
         }
-        if (tempEntity.getSeinengappiYMD().isEmpty() || tempEntity.getSeinengappiYMD().equals(new RString("00000000"))) {
+        if (entity.get生年月日() == null || tempEntity.getSeinengappiYMD().isEmpty()
+                || tempEntity.getSeinengappiYMD().equals(new RString("00000000"))) {
             tempEntity.setSeinengappiYMD(new RString("生年月日の入力がありません"));
+            編集状況フラグ = new RString("1");
+        } else if (!entity.get生年月日().isValid()) {
+            tempEntity.setSeinengappiYMD(new RString("生年月日のデータが不正です"));
             編集状況フラグ = new RString("1");
         }
         AgeCalculator ageCalculator = new AgeCalculator(DateOfBirthFactory.createInstance(
                 entity.get生年月日()),
                 JuminJotai.住民,
                 FlexibleDate.MAX);
-        if (ageCalculator.get年齢() == null || ageCalculator.get年齢().isEmpty()
+        if (ageCalculator.get年齢() == null || entity.get生年月日() == null || ageCalculator.get年齢().isEmpty()
                 || entity.get生年月日().isEmpty() || tempEntity.getSeinengappiYMD().equals(new RString("00000000"))
                 || !entity.get生年月日().isValid()) {
             tempEntity.setAge(new RString("年齢の算出が出来ませんでした"));
-            編集状況フラグ = new RString("1");
-        }
-        if (!entity.get認定申請年月日().isValid()) {
-            tempEntity.setNinteiShinseiYMD(new RString("申請日のデータが不正です"));
-            編集状況フラグ = new RString("1");
-        }
-        if (!entity.get生年月日().isValid()) {
-            tempEntity.setSeinengappiYMD(new RString("生年月日のデータが不正です"));
             編集状況フラグ = new RString("1");
         }
         List<RString> 性別コード = new ArrayList<>();
