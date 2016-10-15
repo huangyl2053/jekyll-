@@ -141,33 +141,35 @@ public class ShinshinIkenHandler {
     /**
      * 心身の意見入力の初期化処理です。
      *
-     * @return ShujiiIkenshoJoho
+     * @return NinteiShinseiJoho
      */
-    public ShujiiIkenshoJoho onLoad() {
+    public void onLoad() {
         ShujiiIkenshoIraiJohoIdentifier 主治医意見書作成依頼情報Key = new ShujiiIkenshoIraiJohoIdentifier(new ShinseishoKanriNo(管理番号),
                 Integer.valueOf(履歴番号.toString()));
         ShujiiIkenshoJohoIdentifier 要介護認定主治医意見書情報Key = new ShujiiIkenshoJohoIdentifier(new ShinseishoKanriNo(管理番号),
                 Integer.valueOf(履歴番号.toString()));
-        if (要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
-                getShujiiIkenshoJohoList().isEmpty()) {
-            要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).createBuilderForEdit().
-                    setShujiiIkenshoJoho(new ShujiiIkenshoJoho(new ShinseishoKanriNo(管理番号), Integer.parseInt(履歴番号.toString())));
-        }
-        ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
-                getSeishinTechoNini(要介護認定主治医意見書情報Key);
-        if (要介護認定主治医意見書情報 != null) {
-            List<ShujiiIkenshoKinyuItem> 記入項目List = 要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList();
-            List<ShujiiIkenshoIkenItem> 意見項目List = 要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList();
-            set意見項目(意見項目List);
-            set記入項目(記入項目List);
-            for (ShujiiIkenshoIkenItem 意見項目 : 意見項目List) {
-                要介護認定主治医意見書情報 = 要介護認定主治医意見書情報.createBuilderForEdit().setShujiiIkenshoIkenItem(意見項目).build();
+        
+        if (要介護認定申請情報 != null) {
+            if (要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                    getShujiiIkenshoJohoList().isEmpty()) {
+                要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).createBuilderForEdit().
+                        setShujiiIkenshoJoho(new ShujiiIkenshoJoho(new ShinseishoKanriNo(管理番号), Integer.parseInt(履歴番号.toString())));
             }
-            for (ShujiiIkenshoKinyuItem 記入項目 : 記入項目List) {
-                要介護認定主治医意見書情報 = 要介護認定主治医意見書情報.createBuilderForEdit().setShujiiIkenshoKinyuItem(記入項目).build();
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                    getSeishinTechoNini(要介護認定主治医意見書情報Key);
+            if (要介護認定主治医意見書情報 != null) {
+                List<ShujiiIkenshoKinyuItem> 記入項目List = 要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList();
+                List<ShujiiIkenshoIkenItem> 意見項目List = 要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList();
+                set意見項目(意見項目List);
+                set記入項目(記入項目List);
+                for (ShujiiIkenshoIkenItem 意見項目 : 意見項目List) {
+                    要介護認定主治医意見書情報 = 要介護認定主治医意見書情報.createBuilderForEdit().setShujiiIkenshoIkenItem(意見項目).build();
+                }
+                for (ShujiiIkenshoKinyuItem 記入項目 : 記入項目List) {
+                    要介護認定主治医意見書情報 = 要介護認定主治医意見書情報.createBuilderForEdit().setShujiiIkenshoKinyuItem(記入項目).build();
+                }
             }
-        }
-        return 要介護認定主治医意見書情報;
+        } 
     }
 
     /**

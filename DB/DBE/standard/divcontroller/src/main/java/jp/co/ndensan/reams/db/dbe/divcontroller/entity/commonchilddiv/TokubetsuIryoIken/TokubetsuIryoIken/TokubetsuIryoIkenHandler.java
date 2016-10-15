@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItem;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItemIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJoho;
@@ -78,15 +79,18 @@ public class TokubetsuIryoIkenHandler {
                 ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
         ShujiiIkenshoIraiJohoIdentifier 依頼情報Key = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
         ShujiiIkenshoJohoIdentifier 主治医意見書情報Key = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);
-        if (shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報Key).
-                getShujiiIkenshoJohoList().isEmpty()) {
-            shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報Key).createBuilderForEdit().
-                    setShujiiIkenshoJoho(new ShujiiIkenshoJoho(管理番号, 履歴番号));
+
+        if (shinseiJohoModels != null) {
+            if (shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報Key).
+                    getShujiiIkenshoJohoList().isEmpty()) {
+                shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報Key).createBuilderForEdit().
+                        setShujiiIkenshoJoho(new ShujiiIkenshoJoho(管理番号, 履歴番号));
+            }
+            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報Key).
+                    getSeishinTechoNini(主治医意見書情報Key);
+            List<ShujiiIkenshoIkenItem> 主治医意見書登録意見書情報 = 要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList();
+            モード判断(主治医意見書登録意見書情報, 管理番号, 履歴番号, shinseiJohoModels, 依頼情報Key, 主治医意見書情報Key);
         }
-        ShujiiIkenshoJoho 要介護認定主治医意見書情報 = shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報Key).
-                getSeishinTechoNini(主治医意見書情報Key);
-        List<ShujiiIkenshoIkenItem> 主治医意見書登録意見書情報 = 要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList();
-        モード判断(主治医意見書登録意見書情報, 管理番号, 履歴番号, shinseiJohoModels, 依頼情報Key, 主治医意見書情報Key);
     }
 
     /**
@@ -105,38 +109,68 @@ public class TokubetsuIryoIkenHandler {
         ShujiiIkenshoIraiJohoIdentifier 依頼情報の識別子 = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
         ShujiiIkenshoJohoIdentifier 意見書情報の識別子 = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);
 
-        for (KeyValueDataSource keyValue : 処置内容) {
-            ShujiiIkenshoIkenItemIdentifier 意見書意見項目の識別子
-                    = new ShujiiIkenshoIkenItemIdentifier(管理番号, 履歴番号, Integer.parseInt(keyValue.getKey().toString()));
-            データクリア(shinseiJohoModels, 依頼情報の識別子, 意見書情報の識別子, 意見書意見項目の識別子);
-        }
-        for (KeyValueDataSource keyValue : 特別な対応) {
-            ShujiiIkenshoIkenItemIdentifier 意見書意見項目の識別子
-                    = new ShujiiIkenshoIkenItemIdentifier(管理番号, 履歴番号, Integer.parseInt(keyValue.getKey().toString()));
-            データクリア(shinseiJohoModels, 依頼情報の識別子, 意見書情報の識別子, 意見書意見項目の識別子);
-        }
-        for (KeyValueDataSource keyValue : 失禁への対応) {
-            ShujiiIkenshoIkenItemIdentifier 意見書意見項目の識別子
-                    = new ShujiiIkenshoIkenItemIdentifier(管理番号, 履歴番号, Integer.parseInt(keyValue.getKey().toString()));
-            データクリア(shinseiJohoModels, 依頼情報の識別子, 意見書情報の識別子, 意見書意見項目の識別子);
+        if (shinseiJohoModels != null) {
+            for (KeyValueDataSource keyValue : 処置内容) {
+                ShujiiIkenshoIkenItemIdentifier 意見書意見項目の識別子
+                        = new ShujiiIkenshoIkenItemIdentifier(管理番号, 履歴番号, Integer.parseInt(keyValue.getKey().toString()));
+                データクリア(shinseiJohoModels, 依頼情報の識別子, 意見書情報の識別子, 意見書意見項目の識別子);
+            }
+            for (KeyValueDataSource keyValue : 特別な対応) {
+                ShujiiIkenshoIkenItemIdentifier 意見書意見項目の識別子
+                        = new ShujiiIkenshoIkenItemIdentifier(管理番号, 履歴番号, Integer.parseInt(keyValue.getKey().toString()));
+                データクリア(shinseiJohoModels, 依頼情報の識別子, 意見書情報の識別子, 意見書意見項目の識別子);
+            }
+            for (KeyValueDataSource keyValue : 失禁への対応) {
+                ShujiiIkenshoIkenItemIdentifier 意見書意見項目の識別子
+                        = new ShujiiIkenshoIkenItemIdentifier(管理番号, 履歴番号, Integer.parseInt(keyValue.getKey().toString()));
+                データクリア(shinseiJohoModels, 依頼情報の識別子, 意見書情報の識別子, 意見書意見項目の識別子);
+            }
         }
         List<RString> 処置内容KEYList = div.getChkTokubetsuIryo().getSelectedKeys();
         List<RString> 特別な対応KEYList = div.getChkTokubetsuTaiou().getSelectedKeys();
         List<RString> 失禁への対応KEYList = div.getChkShikkinTaio().getSelectedKeys();
-        for (RString 処置内容KEY : 処置内容KEYList) {
-            ShujiiIkenshoIkenItemIdentifier 意見書意見項目の識別子
-                    = new ShujiiIkenshoIkenItemIdentifier(管理番号, 履歴番号, Integer.parseInt(処置内容KEY.toString()));
-            データ編集(shinseiJohoModels, 依頼情報の識別子, 意見書情報の識別子, true, 意見書意見項目の識別子);
-        }
-        for (RString 特別な対応KEY : 特別な対応KEYList) {
-            ShujiiIkenshoIkenItemIdentifier 意見書意見項目の識別子
-                    = new ShujiiIkenshoIkenItemIdentifier(管理番号, 履歴番号, Integer.parseInt(特別な対応KEY.toString()));
-            データ編集(shinseiJohoModels, 依頼情報の識別子, 意見書情報の識別子, true, 意見書意見項目の識別子);
-        }
-        for (RString 失禁への対応KEY : 失禁への対応KEYList) {
-            ShujiiIkenshoIkenItemIdentifier 意見書意見項目の識別子
-                    = new ShujiiIkenshoIkenItemIdentifier(管理番号, 履歴番号, Integer.parseInt(失禁への対応KEY.toString()));
-            データ編集(shinseiJohoModels, 依頼情報の識別子, 意見書情報の識別子, true, 意見書意見項目の識別子);
+        
+        if (shinseiJohoModels == null) {
+            shinseiJohoModels = new NinteiShinseiJoho(管理番号);
+            ShujiiIkenshoJoho shujiiIkenshoJoho = new ShujiiIkenshoJoho(管理番号, 履歴番号);
+
+            for (RString 処置内容KEY : 処置内容KEYList) {
+                ShujiiIkenshoIkenItem shujiiIkenshoIkenItem = new ShujiiIkenshoIkenItem(管理番号, 履歴番号, Integer.parseInt(処置内容KEY.toString()));
+                shujiiIkenshoIkenItem.createBuilderForEdit().set意見項目(意見項目の変更(true));
+                shujiiIkenshoJoho.createBuilderForEdit().setShujiiIkenshoIkenItem(shujiiIkenshoIkenItem);
+            }
+            for (RString 特別な対応KEY : 特別な対応KEYList) {
+                ShujiiIkenshoIkenItem shujiiIkenshoIkenItem = new ShujiiIkenshoIkenItem(管理番号, 履歴番号, Integer.parseInt(特別な対応KEY.toString()));
+                shujiiIkenshoIkenItem.createBuilderForEdit().set意見項目(意見項目の変更(true));
+                shujiiIkenshoJoho.createBuilderForEdit().setShujiiIkenshoIkenItem(shujiiIkenshoIkenItem);
+            }
+            for (RString 失禁への対応KEY : 失禁への対応KEYList) {
+                ShujiiIkenshoIkenItem shujiiIkenshoIkenItem = new ShujiiIkenshoIkenItem(管理番号, 履歴番号, Integer.parseInt(失禁への対応KEY.toString()));
+                shujiiIkenshoIkenItem.createBuilderForEdit().set意見項目(意見項目の変更(true));
+                shujiiIkenshoJoho.createBuilderForEdit().setShujiiIkenshoIkenItem(shujiiIkenshoIkenItem);
+            }
+            
+            ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = new ShujiiIkenshoIraiJoho(管理番号, 履歴番号);
+            shujiiIkenshoIraiJoho.createBuilderForEdit().setShujiiIkenshoJoho(shujiiIkenshoJoho);
+            shinseiJohoModels.createBuilderForEdit().setShujiiIkenshoIraiJoho(shujiiIkenshoIraiJoho);
+            
+        } else {
+      
+            for (RString 処置内容KEY : 処置内容KEYList) {
+                ShujiiIkenshoIkenItemIdentifier 意見書意見項目の識別子
+                        = new ShujiiIkenshoIkenItemIdentifier(管理番号, 履歴番号, Integer.parseInt(処置内容KEY.toString()));
+                データ編集(shinseiJohoModels, 依頼情報の識別子, 意見書情報の識別子, true, 意見書意見項目の識別子);
+            }
+            for (RString 特別な対応KEY : 特別な対応KEYList) {
+                ShujiiIkenshoIkenItemIdentifier 意見書意見項目の識別子
+                        = new ShujiiIkenshoIkenItemIdentifier(管理番号, 履歴番号, Integer.parseInt(特別な対応KEY.toString()));
+                データ編集(shinseiJohoModels, 依頼情報の識別子, 意見書情報の識別子, true, 意見書意見項目の識別子);
+            }
+            for (RString 失禁への対応KEY : 失禁への対応KEYList) {
+                ShujiiIkenshoIkenItemIdentifier 意見書意見項目の識別子
+                        = new ShujiiIkenshoIkenItemIdentifier(管理番号, 履歴番号, Integer.parseInt(失禁への対応KEY.toString()));
+                データ編集(shinseiJohoModels, 依頼情報の識別子, 意見書情報の識別子, true, 意見書意見項目の識別子);
+            }
         }
         ViewStateHolder.put(ViewStateKeys.意見書情報, shinseiJohoModels);
     }
@@ -163,9 +197,7 @@ public class TokubetsuIryoIkenHandler {
         boolean モニター測定 = false;
         boolean 褥瘡の処置 = false;
         boolean カテーテル = false;
-        if (!主治医意見書登録意見書情報.isEmpty()
-                && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(
-                        主治医意見書登録意見書情報.get(0).get厚労省IF識別コード().getColumnValue())) {
+        if (!主治医意見書登録意見書情報.isEmpty()) {
             for (ShujiiIkenshoIkenItem 意見書情報 : 主治医意見書登録意見書情報) {
                 switch (意見書情報.get連番()) {
                     case 処置内容_点滴の管理:
