@@ -105,7 +105,11 @@ public class HomonChosaItakuNyuryokuHandler {
                 dgchosain_Row.setNinteiChosainCode(nullToEmpty(business.get認定調査員コード()));
                 dgchosain_Row.setChosainShimei(nullToEmpty(business.get調査員氏名()));
                 dgchosain_Row.setChosainKanaShimei(nullToEmpty(business.get調査員氏名カナ()));
-                dgchosain_Row.setChosainShikaku(Sikaku.toValue(nullToEmpty(business.get調査員資格())).get名称());
+                if (RString.isNullOrEmpty(business.get調査員資格())) {
+                    dgchosain_Row.setChosainShikaku(nullToEmpty(business.get調査員資格()));
+                }else{
+                    dgchosain_Row.setChosainShikaku(Sikaku.toValue(nullToEmpty(business.get調査員資格())).get名称());
+                }
                 dgchosain_Row.setShozokuKikanName(nullToEmpty(business.get所属機関名称()));
                 if (business.is状況フラグ()) {
                     RString 状況フラグ = 有効;
