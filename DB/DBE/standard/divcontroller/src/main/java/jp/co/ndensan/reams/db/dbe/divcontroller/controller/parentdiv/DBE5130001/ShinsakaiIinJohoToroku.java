@@ -664,4 +664,23 @@ public class ShinsakaiIinJohoToroku {
     private ShinsakaiIinJohoTorokuHandler createHandOf(ShinsakaiIinJohoTorokuDiv div) {
         return new ShinsakaiIinJohoTorokuHandler(div);
     }
+
+    /**
+     * 審査会委員開始日・終了日の大小チェック。
+     *
+     * @param div ShinsakaiIinJohoTorokuDiv
+     * @return ResponseData<ShinsakaiIinJohoTorokuDiv>
+     */
+    public ResponseData<ShinsakaiIinJohoTorokuDiv> onBlur_TxtShinsaIinYMD(ShinsakaiIinJohoTorokuDiv div) {
+        
+        if (!RString.isNullOrEmpty(div.getTxtShinsaIinYMDTo().getText()) && !RString.isNullOrEmpty(div.getTxtShinsaIinYMDFrom().getText())) {
+            ValidationMessageControlPairs validationMessages
+                    = new ShinsakaiIinJohoTorokuValidationHandler(div).審査会委員開始日終了日の大小チェック();
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+    
 }
