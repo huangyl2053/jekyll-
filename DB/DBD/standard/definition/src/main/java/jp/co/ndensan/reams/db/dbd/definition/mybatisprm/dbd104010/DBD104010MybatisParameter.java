@@ -126,35 +126,44 @@ public class DBD104010MybatisParameter extends UaFt200FindShikibetsuTaishoParam 
         宛名生年月日2 = false;
         宛名生年月日3 = false;
         宛名生年月日4 = false;
-        if (年齢.equals(宛名抽出条件.getAgeSelectKijun().get名称()) && !宛名抽出条件.getNenreiKijunbi().toDateString().isEmpty()) {
-            if (!宛名抽出条件.getNenreiRange().getFrom().toString().isEmpty()) {
+        if (宛名抽出条件.getAgeSelectKijun() != null && 宛名抽出条件.getNenreiKijunbi() != null
+                && 年齢.equals(宛名抽出条件.getAgeSelectKijun().get名称()) && !宛名抽出条件.getNenreiKijunbi().toDateString().isEmpty()) {
+
+            if (宛名抽出条件.getNenreiRange() != null && !宛名抽出条件.getNenreiRange().getFrom().toString().isEmpty()) {
                 宛名生年月日1 = true;
-            }
-            if (!宛名抽出条件.getNenreiRange().getTo().toString().isEmpty()) {
+            } else if (宛名抽出条件.getNenreiRange() != null && !宛名抽出条件.getNenreiRange().getTo().toString().isEmpty()) {
                 宛名生年月日2 = true;
             }
-        } else if (生年月日.equals(宛名抽出条件.getAgeSelectKijun().get名称())) {
-            if (!宛名抽出条件.getSeinengappiRange().getFrom().toDateString().isEmpty()) {
+
+        } else if (宛名抽出条件.getAgeSelectKijun() != null && 生年月日.equals(宛名抽出条件.getAgeSelectKijun().get名称())) {
+            if (宛名抽出条件.getSeinengappiRange() != null && !宛名抽出条件.getSeinengappiRange().getFrom().toDateString().isEmpty()) {
                 宛名生年月日3 = true;
             }
-            if (!宛名抽出条件.getSeinengappiRange().getTo().toDateString().isEmpty()) {
+            if (宛名抽出条件.getSeinengappiRange() != null && !宛名抽出条件.getSeinengappiRange().getTo().toDateString().isEmpty()) {
                 宛名生年月日4 = true;
             }
         }
     }
 
     private void set直近被保(AtenaSelectBatchParameter 宛名抽出条件) {
-        直近被保 = !全て.equals(宛名抽出条件.getShichoson_Code().value()) && !宛名抽出条件.getShichoson_Code().isEmpty();
+        直近被保 = false;
+        if (宛名抽出条件.getShichoson_Code() != null) {
+            直近被保 = !全て.equals(宛名抽出条件.getShichoson_Code().value()) && !宛名抽出条件.getShichoson_Code().isEmpty();
+        }
     }
 
     private void set年齢基準日の対応日(AtenaSelectBatchParameter 宛名抽出条件) {
-        年齢基準日from = new FlexibleDate(宛名抽出条件.getNenreiKijunbi().minusYear(宛名抽出条件.getNenreiRange().getFrom().intValue()).toDateString());
-        年齢基準日to = new FlexibleDate(宛名抽出条件.getNenreiKijunbi().minusYear(宛名抽出条件.getNenreiRange().getTo().intValue()).toDateString());
+        if (宛名生年月日1 || 宛名生年月日2) {
+            年齢基準日from = new FlexibleDate(宛名抽出条件.getNenreiKijunbi().minusYear(宛名抽出条件.getNenreiRange().getFrom().intValue()).toDateString());
+            年齢基準日to = new FlexibleDate(宛名抽出条件.getNenreiKijunbi().minusYear(宛名抽出条件.getNenreiRange().getTo().intValue()).toDateString());
+        }
     }
 
     private void set生年月日の対応日(AtenaSelectBatchParameter 宛名抽出条件) {
-        生年月日from = new FlexibleDate(宛名抽出条件.getSeinengappiRange().getFrom().toDateString());
-        生年月日to = new FlexibleDate(宛名抽出条件.getSeinengappiRange().getTo().toDateString());
+        if (宛名生年月日3 || 宛名生年月日4) {
+            生年月日from = new FlexibleDate(宛名抽出条件.getSeinengappiRange().getFrom().toDateString());
+            生年月日to = new FlexibleDate(宛名抽出条件.getSeinengappiRange().getTo().toDateString());
+        }
     }
 
     private void set基準日付(FlexibleYear 対象年度, RString 基準日) {

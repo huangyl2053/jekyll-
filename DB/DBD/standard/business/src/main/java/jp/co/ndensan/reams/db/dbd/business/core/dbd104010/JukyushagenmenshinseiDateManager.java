@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd104010.DBD104010Proce
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd104010.NinteijkouTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd104010.NinteijyotaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushagemmenjisshijokyo.JukyushaGemmenJisshiJokyoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -265,16 +266,73 @@ public class JukyushagenmenshinseiDateManager {
         build.setデータ取得区分(DataShutokuKubun.直近レコード);
         build.set住民種別(get住民種別(住民種別List));
         build.set住民状態(get住民状態(住民状態List));
-        build.set地区コード1開始値(new ChikuCode(processParameter.get宛名抽出条件().getChiku1_From()));
-        build.set地区コード1終了値(new ChikuCode(processParameter.get宛名抽出条件().getChiku1_To()));
-        build.set地区コード2開始値(new ChikuCode(processParameter.get宛名抽出条件().getChiku2_From()));
-        build.set地区コード2終了値(new ChikuCode(processParameter.get宛名抽出条件().getChiku2_To()));
-        build.set地区コード3開始値(new ChikuCode(processParameter.get宛名抽出条件().getChiku3_From()));
-        build.set地区コード3終了値(new ChikuCode(processParameter.get宛名抽出条件().getChiku3_To()));
-        build.set行政区コード開始値(new GyoseikuCode(processParameter.get宛名抽出条件().getGyoseiku_From()));
-        build.set行政区コード終了値(new GyoseikuCode(processParameter.get宛名抽出条件().getGyoseiku_To()));
-        build.set町域コード開始値(new ChoikiCode(processParameter.get宛名抽出条件().getJusho_From()));
-        build.set町域コード終了値(new ChoikiCode(processParameter.get宛名抽出条件().getJusho_To()));
+
+        build.set地区コード1開始値(ChikuCode.EMPTY);
+        build.set地区コード1終了値(ChikuCode.EMPTY);
+        build.set地区コード2開始値(ChikuCode.EMPTY);
+        build.set地区コード2終了値(ChikuCode.EMPTY);
+        build.set地区コード3開始値(ChikuCode.EMPTY);
+        build.set地区コード3終了値(ChikuCode.EMPTY);
+        build.set町域コード開始値(ChoikiCode.EMPTY);
+        build.set町域コード終了値(ChoikiCode.EMPTY);
+        build.set行政区コード開始値(GyoseikuCode.EMPTY);
+        build.set行政区コード終了値(GyoseikuCode.EMPTY);
+        if (Chiku.行政区.equals(processParameter.get宛名抽出条件().getChiku_Kubun())) {
+            if (processParameter.get宛名抽出条件().getGyoseiku_From() == null) {
+                build.set行政区コード開始値(GyoseikuCode.EMPTY);
+            } else {
+                build.set行政区コード開始値(new GyoseikuCode(processParameter.get宛名抽出条件().getGyoseiku_From()));
+            }
+            if (processParameter.get宛名抽出条件().getGyoseiku_To() == null) {
+                build.set行政区コード終了値(GyoseikuCode.EMPTY);
+            } else {
+                build.set行政区コード終了値(new GyoseikuCode(processParameter.get宛名抽出条件().getGyoseiku_To()));
+            }
+        }
+        if (Chiku.地区.equals(processParameter.get宛名抽出条件().getChiku_Kubun())) {
+            if (processParameter.get宛名抽出条件().getChiku1_From() == null) {
+                build.set地区コード1開始値(ChikuCode.EMPTY);
+            } else {
+                build.set地区コード1開始値(new ChikuCode(processParameter.get宛名抽出条件().getChiku1_From()));
+            }
+            if (processParameter.get宛名抽出条件().getChiku1_To() == null) {
+                build.set地区コード1終了値(ChikuCode.EMPTY);
+            } else {
+                build.set地区コード1終了値(new ChikuCode(processParameter.get宛名抽出条件().getChiku1_To()));
+            }
+            if (processParameter.get宛名抽出条件().getChiku2_From() == null) {
+                build.set地区コード2開始値(ChikuCode.EMPTY);
+            } else {
+                build.set地区コード2開始値(new ChikuCode(processParameter.get宛名抽出条件().getChiku2_From()));
+            }
+            if (processParameter.get宛名抽出条件().getChiku2_To() == null) {
+                build.set地区コード2終了値(ChikuCode.EMPTY);
+            } else {
+                build.set地区コード2終了値(new ChikuCode(processParameter.get宛名抽出条件().getChiku2_To()));
+            }
+            if (processParameter.get宛名抽出条件().getChiku3_From() == null) {
+                build.set地区コード3開始値(ChikuCode.EMPTY);
+            } else {
+                build.set地区コード3開始値(new ChikuCode(processParameter.get宛名抽出条件().getChiku3_From()));
+            }
+            if (processParameter.get宛名抽出条件().getChiku3_To() == null) {
+                build.set地区コード3終了値(ChikuCode.EMPTY);
+            } else {
+                build.set地区コード3終了値(new ChikuCode(processParameter.get宛名抽出条件().getChiku3_To()));
+            }
+        }
+        if (Chiku.住所.equals(processParameter.get宛名抽出条件().getChiku_Kubun())) {
+            if (processParameter.get宛名抽出条件().getJusho_From() == null) {
+                build.set町域コード開始値(ChoikiCode.EMPTY);
+            } else {
+                build.set町域コード開始値(new ChoikiCode(processParameter.get宛名抽出条件().getJusho_From()));
+            }
+            if (processParameter.get宛名抽出条件().getJusho_To() == null) {
+                build.set町域コード終了値(ChoikiCode.EMPTY);
+            } else {
+                build.set町域コード終了値(new ChoikiCode(processParameter.get宛名抽出条件().getJusho_To()));
+            }
+        }
         return build;
     }
 
