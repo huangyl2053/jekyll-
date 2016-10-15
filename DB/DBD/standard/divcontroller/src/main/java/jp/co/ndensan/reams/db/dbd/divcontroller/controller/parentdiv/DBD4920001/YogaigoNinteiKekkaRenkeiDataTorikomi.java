@@ -79,6 +79,16 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomi {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 画面の取込ファイル内容一覧に設定する。
+     *
+     * @param div YogaigoNinteiKekkaRenkeiDataTorikomiDiv
+     * @return ResponseData<YogaigoNinteiKekkaRenkeiDataTorikomiDiv>
+     */
+    public ResponseData<YogaigoNinteiKekkaRenkeiDataTorikomiDiv> after_onClick(YogaigoNinteiKekkaRenkeiDataTorikomiDiv div) {
         return ResponseData.of(div).setState(DBD4920001StateName.一覧表示);
     }
 

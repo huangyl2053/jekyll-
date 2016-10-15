@@ -85,6 +85,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
         div.getHokenshaList().loadHokenshaList();
         div.getRadDataSelect().setSelectedKey(KEY0);
         div.getDataGridFile().setDataSource(getFileSource());
+        div.getDataGridFile().setSelectedItems(getFileSource().get(0));
     }
 
     /**
@@ -92,6 +93,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
      */
     public void onChange_data() {
         div.getDataGridFile().setDataSource(getFileSource());
+        div.getDataGridFile().setSelectedItems(getFileSource().get(0));
     }
 
     /**
@@ -99,6 +101,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
      */
     public void onChange_type() {
         div.getDataGridFile().setDataSource(getFileSource());
+        div.getDataGridFile().setSelectedItems(getFileSource().get(0));
     }
 
     /**
