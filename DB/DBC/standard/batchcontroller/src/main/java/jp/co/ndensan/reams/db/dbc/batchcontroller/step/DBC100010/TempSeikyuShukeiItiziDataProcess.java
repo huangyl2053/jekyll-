@@ -32,7 +32,7 @@ public class TempSeikyuShukeiItiziDataProcess extends BatchProcessBase<SeikyuShu
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc100010."
-            + "IKaishuriyushoSeikyushoShinseishoMapper.get請求集計一時データ");
+            + "IKaishuriyushoSeikyushoShinseishoMapper.get請求集計一時用データ");
     private KaishuriyushoSeikyushoShinseishoProcessParameter processParameter;
     IKaishuriyushoSeikyushoShinseishoMapper mapper;
     @BatchWriter

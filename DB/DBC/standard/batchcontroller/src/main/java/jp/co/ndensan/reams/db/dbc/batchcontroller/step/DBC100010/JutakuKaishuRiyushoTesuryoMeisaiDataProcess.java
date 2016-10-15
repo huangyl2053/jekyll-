@@ -48,14 +48,14 @@ public class JutakuKaishuRiyushoTesuryoMeisaiDataProcess extends BatchProcessBas
         dbt3095Entity.setHihokenshaNo(entity.get被保険者番号());
         dbt3095Entity.setRirekiNo(entity.get履歴番号());
         dbt3095Entity.setServiceCode(entity.getサービスコード());
-        dbt3095Entity.setJutakuKaishuJigyoshaMeisho(new AtenaMeisho(entity.get介護住宅改修事業者名称()));
+        dbt3095Entity.setJutakuKaishuJigyoshaMeisho(new AtenaMeisho(isNullOrEmpty(entity.get介護住宅改修事業者名称())));
         dbt3095Entity.setJutakuKaishuChakkoYMD(entity.get介護住宅改修着工年月日());
-        dbt3095Entity.setJutakuKaishuJushoShozaisha(new AtenaMeisho(entity.get介護住宅改修住宅所有者()));
+        dbt3095Entity.setJutakuKaishuJushoShozaisha(new AtenaMeisho(isNullOrEmpty(entity.get介護住宅改修住宅所有者())));
         dbt3095Entity.setKaishuTaishoJutakuJusho(entity.get改修対象住宅住所());
         dbt3095Entity.setKaishuNaiyo_kasho_Kibo(entity.get改修内容箇所及び規模());
         dbt3095Entity.setRiyushoSakuseiYMD(entity.get介護住宅改修理由書作成年月日());
         dbt3095Entity.setRiyushoSakuseiJigyoshaNo(entity.get介護住宅改修理由書作成事業者番号());
-        dbt3095Entity.setRiyushoSakuseishaMei(new AtenaMeisho(entity.get介護住宅改修理由書作成者名()));
+        dbt3095Entity.setRiyushoSakuseishaMei(new AtenaMeisho(isNullOrEmpty(entity.get介護住宅改修理由書作成者名())));
         dbt3095Entity.setRiyushoSakuseishaMeiKana(entity.get介護住宅改修理由書作成者名カナ());
         dbt3095Entity.setRiyushoSakuseiShinseiYMD(entity.get介護住宅改修理由書作成申請年月日());
         dbt3095Entity.setRiyushoSakuseiUketsukeYMD(entity.get介護住宅改修理由書作成受付年月日());
@@ -69,5 +69,12 @@ public class JutakuKaishuRiyushoTesuryoMeisaiDataProcess extends BatchProcessBas
             return HokenshaNo.EMPTY;
         }
         return new HokenshaNo(date.value());
+    }
+
+    private RString isNullOrEmpty(RString date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return date;
     }
 }

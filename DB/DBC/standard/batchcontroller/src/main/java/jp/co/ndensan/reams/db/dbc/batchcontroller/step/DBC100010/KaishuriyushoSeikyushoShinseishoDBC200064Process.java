@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC100010;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -55,25 +56,24 @@ public class KaishuriyushoSeikyushoShinseishoDBC200064Process extends BatchKeyBr
     private ReportSourceWriter<JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReportSource> reportSourceWriter;
 
     @Override
-    protected void beforeExecute() {
-        super.beforeExecute();
-    }
-
-    @Override
     protected IBatchReader createReader() {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
-        key.getPSM検索キー().get住民種別().add(JuminShubetsu.日本人);
-        key.getPSM検索キー().get住民種別().add(JuminShubetsu.外国人);
-        key.getPSM検索キー().get住民種別().add(JuminShubetsu.住登外個人_日本人);
-        key.getPSM検索キー().get住民種別().add(JuminShubetsu.住登外個人_外国人);
-        key.getPSM検索キー().get住民種別().add(JuminShubetsu.法人);
-        key.getPSM検索キー().get住民種別().add(JuminShubetsu.共有者);
-        key.getPSM検索キー().get住民状態().add(JuminJotai.住民);
-        key.getPSM検索キー().get住民状態().add(JuminJotai.住登外);
-        key.getPSM検索キー().get住民状態().add(JuminJotai.消除者);
-        key.getPSM検索キー().get住民状態().add(JuminJotai.転出者);
-        key.getPSM検索キー().get住民状態().add(JuminJotai.死亡者);
+        List<JuminShubetsu> 住民種別 = new ArrayList<>();
+        List<JuminJotai> 住民状態 = new ArrayList<>();
+        住民種別.add(JuminShubetsu.日本人);
+        住民種別.add(JuminShubetsu.外国人);
+        住民種別.add(JuminShubetsu.住登外個人_日本人);
+        住民種別.add(JuminShubetsu.住登外個人_外国人);
+        住民種別.add(JuminShubetsu.法人);
+        住民種別.add(JuminShubetsu.共有者);
+        住民状態.add(JuminJotai.住民);
+        住民状態.add(JuminJotai.住登外);
+        住民状態.add(JuminJotai.消除者);
+        住民状態.add(JuminJotai.転出者);
+        住民状態.add(JuminJotai.死亡者);
+        key.set住民種別(住民種別);
+        key.set住民状態(住民状態);
         key.set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         processParameter.setPsmShikibetsuTaisho(new RString(uaFt200Psm.getParameterMap().

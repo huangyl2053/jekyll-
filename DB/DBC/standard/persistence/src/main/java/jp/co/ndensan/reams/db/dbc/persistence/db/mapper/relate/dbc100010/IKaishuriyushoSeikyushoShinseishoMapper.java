@@ -76,7 +76,8 @@ public interface IKaishuriyushoSeikyushoShinseishoMapper {
     /**
      * 処理日付管理マスタを取得する。
      *
+     * @param parameter 処理日付管理マスタデータ
      * @return List<DbT7022ShoriDateKanriEntity>
      */
-    List<DbT7022ShoriDateKanriEntity> get処理日付管理マスタデータ();
+    List<DbT7022ShoriDateKanriEntity> get処理日付管理マスタデータ(KaishuriyushoSeikyushoShinseishoMybatisParameter parameter);
 }

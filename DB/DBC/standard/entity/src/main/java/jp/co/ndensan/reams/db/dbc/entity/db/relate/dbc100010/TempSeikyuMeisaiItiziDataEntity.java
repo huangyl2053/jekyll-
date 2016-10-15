@@ -41,4 +41,6 @@ public class TempSeikyuMeisaiItiziDataEntity {
     private FlexibleDate 介護住宅改修理由書作成受付年月日;
     private RString 集計関連付け番号;
     private boolean 対象外フラグ;
+    private int 基準履歴番号;
+    private int rowNum;
 }

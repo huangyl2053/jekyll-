@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,13 +27,19 @@ public class DBC100010_KaishuriyushoSeikyushoShinseishoParameter extends BatchPa
     @BatchParameter(key = "shichosonMeisho", name = "市町村名")
     private RString 市町村名;
     @BatchParameter(key = "riyushoSakuseiShinseiYMDFrom", name = "作成申請年月日開始")
-    private RDate 作成申請年月日開始;
+    private FlexibleDate 作成申請年月日開始;
     @BatchParameter(key = "riyushoSakuseiShinseiYMDTo", name = "作成申請年月日終了")
-    private RDate 作成申請年月日終了;
+    private FlexibleDate 作成申請年月日終了;
     @BatchParameter(key = "sakuseibi", name = "作成日")
     private FlexibleDate 作成日;
     @BatchParameter(key = "shoritaishoukbn", name = "処理対象区分")
     private RString 処理対象区分;
+
+    /**
+     * コンストラクタです。
+     */
+    public DBC100010_KaishuriyushoSeikyushoShinseishoParameter() {
+    }
 
     /**
      * 住宅改修理由書作成手数料請求書兼申請書作成のProcessParameterを作成する。
