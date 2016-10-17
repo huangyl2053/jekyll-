@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbddt13011;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuHohoKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
@@ -36,7 +37,8 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
     private boolean is日付範囲To;
     private boolean is抽出項目区分_退所日;
     private boolean is直近データ抽出_True;
-    private boolean is資格区分;
+    private boolean is喪失区分_取得者のみ;
+    private boolean is喪失区分_喪失者のみ;
     private boolean is宛名抽出区分_年齢;
     private boolean is宛名抽出区分_年齢From;
     private boolean is宛名抽出区分_年齢To;
@@ -92,6 +94,7 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
      * @param 日付範囲To 日付範囲To
      * @param 直近データ抽出 直近データ抽出
      * @param 宛名抽出条件 宛名抽出条件
+     * @param 喪失区分 喪失区分
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛名識別対象PSM
      */
@@ -102,6 +105,7 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
             FlexibleDate 日付範囲To,
             boolean 直近データ抽出,
             AtenaSelectBatchParameter 宛名抽出条件,
+            SoshitsuKubun 喪失区分,
             RString psmShikibetsuTaisho,
             RString psmAtesaki) {
 
@@ -109,6 +113,7 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
         kijunYMD = 基準日;
         set抽出方法区分について(抽出方法区分, 抽出項目区分, 直近データ抽出,
                 日付範囲From, 日付範囲To, psmShikibetsuTaisho, psmAtesaki);
+        set喪失区分について(喪失区分);
         set宛名抽出区分について(宛名抽出条件);
     }
 
@@ -144,6 +149,18 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
 
             if (直近データ抽出) {
                 is直近データ抽出 = true;
+            }
+        }
+    }
+
+    private void set喪失区分について(SoshitsuKubun 喪失区分) {
+        if (喪失区分 != null) {
+
+            if (SoshitsuKubun.資格取得者のみ.equals(喪失区分)) {
+                is喪失区分_取得者のみ = true;
+            }
+            if (SoshitsuKubun.資格喪失者のみ.equals(喪失区分)) {
+                is喪失区分_喪失者のみ = true;
             }
         }
     }
@@ -213,49 +230,49 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
     private void set地区選択区分について(AtenaSelectBatchParameter 宛名抽出条件) {
         Chiku 地区選択区分 = 宛名抽出条件.getChiku_Kubun();
         if (!Chiku.全て.equals(地区選択区分)) {
-            if (!宛名抽出条件.getJusho_From().isNullOrEmpty()) {
+            if (宛名抽出条件.getJusho_From() != null && !宛名抽出条件.getJusho_From().isEmpty()) {
                 is住所From = true;
                 jusho_From = 宛名抽出条件.getJusho_From();
             }
-            if (!宛名抽出条件.getJusho_To().isNullOrEmpty()) {
+            if (宛名抽出条件.getJusho_To() != null && !宛名抽出条件.getJusho_To().isEmpty()) {
                 is住所To = true;
                 jusho_To = 宛名抽出条件.getJusho_To();
             }
 
-            if (!宛名抽出条件.getGyoseiku_From().isNullOrEmpty()) {
+            if (宛名抽出条件.getGyoseiku_From() != null && !宛名抽出条件.getGyoseiku_From().isEmpty()) {
                 is行政区From = true;
                 gyoseiku_From = 宛名抽出条件.getGyoseiku_From();
             }
 
-            if (!宛名抽出条件.getGyoseiku_To().isNullOrEmpty()) {
+            if (宛名抽出条件.getGyoseiku_To() != null && !宛名抽出条件.getGyoseiku_To().isEmpty()) {
                 is行政区To = true;
                 gyoseiku_To = 宛名抽出条件.getGyoseiku_To();
             }
 
-            if (!宛名抽出条件.getChiku1_From().isNullOrEmpty()) {
+            if (宛名抽出条件.getChiku1_From() != null && !宛名抽出条件.getChiku1_From().isEmpty()) {
                 is地区1From = true;
                 chiku1_From = 宛名抽出条件.getChiku1_From();
             }
 
-            if (!宛名抽出条件.getChiku1_To().isNullOrEmpty()) {
+            if (宛名抽出条件.getChiku1_To() != null && !宛名抽出条件.getChiku1_To().isEmpty()) {
                 is地区1To = true;
                 chiku1_To = 宛名抽出条件.getChiku1_To();
             }
 
-            if (!宛名抽出条件.getChiku2_From().isNullOrEmpty()) {
+            if (宛名抽出条件.getChiku2_From() != null && 宛名抽出条件.getChiku2_From().isEmpty()) {
                 is地区2From = true;
                 chiku2_From = 宛名抽出条件.getChiku2_From();
             }
-            if (!宛名抽出条件.getChiku2_To().isNullOrEmpty()) {
+            if (宛名抽出条件.getChiku2_To() != null && !宛名抽出条件.getChiku2_To().isEmpty()) {
                 is地区2To = true;
                 chiku2_To = 宛名抽出条件.getChiku2_To();
             }
 
-            if (!宛名抽出条件.getChiku3_From().isNullOrEmpty()) {
+            if (宛名抽出条件.getChiku3_From() != null && !宛名抽出条件.getChiku3_From().isEmpty()) {
                 is地区3From = true;
                 chiku3_From = 宛名抽出条件.getChiku3_From();
             }
-            if (!宛名抽出条件.getChiku3_To().isNullOrEmpty()) {
+            if (宛名抽出条件.getChiku3_To() != null && !宛名抽出条件.getChiku3_To().isEmpty()) {
                 is地区3To = true;
                 chiku3_To = 宛名抽出条件.getChiku3_To();
             }
