@@ -1507,10 +1507,8 @@ public class HanyoListParamHandler {
         get宛名抽出条件子Div().getTxtNenrei().setDisabled(非表示);
         get宛名抽出条件子Div().getTxtNenreiKijunbi().setDisabled(非表示);
         get宛名抽出条件子Div().getTxtNenreiKijunbi().setDisplayNone(非表示);
-        get宛名抽出条件子Div().getTxtSeinengappi().setDisabled(表示);
-        get宛名抽出条件子Div().getTxtSeinengappi().setDisplayNone(表示);
-        get宛名抽出条件子Div().getTxtSeinengappi().clearFromValue();
-        get宛名抽出条件子Div().getTxtSeinengappi().clearToValue();
+        get宛名抽出条件子Div().getTxtSeinengappi().setDisabled(非表示);
+        get宛名抽出条件子Div().getTxtSeinengappi().setDisplayNone(非表示);
         set宛名抽出条件共有パネル();
         setCSV編集条件パネル();
         set出力項目選択(表示);
