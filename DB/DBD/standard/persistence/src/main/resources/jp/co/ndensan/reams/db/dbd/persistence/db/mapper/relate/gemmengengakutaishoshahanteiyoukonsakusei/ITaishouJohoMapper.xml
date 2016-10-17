@@ -20,8 +20,8 @@ and open the template in the editor.
         B."gokeiShotokuGaku",
         B."kazeiShotokuGaku",
         E."hikazeinenkinkannangaku",
-        C."shikibetsuCode" AS "shikibetsuCode_RoreiFukushiNenkinJukyusha",
-        D."shikibetsuCode" AS "shikibetsuCode_SeikatsuHogoJukyusha",
+        C."shikibetsuCode" AS "shikibetsuCode_SeikatsuHogoJukyusha",
+        D."shikibetsuCode" AS "shikibetsuCode_RoreiFukushiNenkinJukyusha",
         A."kijunYMD"
         FROM  "gemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTemp" A
         INNER JOIN "TmpSetaiShotoku" B
