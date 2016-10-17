@@ -63,7 +63,7 @@ public interface IKogakugassanJikofutangakuInfoHoseiMapper {
      * @param parameter KogakugassanJikofutangakuMybatisParameter
      * @return KogakugassanJikofutangakuInfoHoseiTempEntity
      */
-    KogakugassanJikofutangakuInfoHoseiTempEntity get中間DB(KogakugassanJikofutangakuMybatisParameter parameter);
+    List<KogakugassanJikofutangakuInfoHoseiTempEntity> get中間DB(KogakugassanJikofutangakuMybatisParameter parameter);
 
     /**
      * get負担額補正対象者データを取得する。

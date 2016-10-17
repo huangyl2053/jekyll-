@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei;
 
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3058KogakuShikyuShinsaKetteiTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3511KogakuShikyuShinsaKetteiTempEntity;
 
 /**
  * 帳票出力対象データです。
@@ -18,6 +18,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3058Kogaku
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuKyufuKetteiChohyoDataEntity {
 
-    private DbWT3058KogakuShikyuShinsaKetteiTempEntity ketteiTemp;
+    private DbWT3511KogakuShikyuShinsaKetteiTempEntity ketteiTemp;
     private DbWT0001HihokenshaTempEntity hihokenshaTemp;
 }
