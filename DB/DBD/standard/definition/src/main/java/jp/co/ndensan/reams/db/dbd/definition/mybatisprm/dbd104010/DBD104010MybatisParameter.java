@@ -208,7 +208,7 @@ public class DBD104010MybatisParameter extends UaFt200FindShikibetsuTaishoParam 
         if (date11.isValid()) {
             基準日付11 = new RString(date11.getDayValue());
         } else {
-            FlexibleYearMonth 年度11 = new FlexibleYearMonth(対象年度.toDateString().concat(月9));
+            FlexibleYearMonth 年度11 = new FlexibleYearMonth(対象年度.toDateString().concat(月11));
             基準日付11 = new RString(年度11.getLastDay());
         }
 
