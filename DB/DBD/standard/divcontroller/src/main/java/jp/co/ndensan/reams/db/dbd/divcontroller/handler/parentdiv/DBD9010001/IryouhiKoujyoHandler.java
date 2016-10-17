@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD9010001;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojoBuilder;
@@ -255,7 +256,9 @@ public class IryouhiKoujyoHandler {
     public void save(TaishoshaKey 引き継ぎEntity, List<IryohiKojo> 医療費控除リスト) {
         HihokenshaNo 被保険者番号 = 引き継ぎEntity.get被保険者番号();
         IryohiKojoManager manager = new IryohiKojoManager();
-        for (IryohiKojyoItiranDataGrid_Row row : div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().getDataSource()) {
+        List<IryohiKojyoItiranDataGrid_Row> dataSource = div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().getDataSource();
+        removeEmptyRow(dataSource);
+        for (IryohiKojyoItiranDataGrid_Row row : dataSource) {
             if (追加.equals(row.getJyoutai())) {
                 FlexibleYear 控除対象年 = new FlexibleYear(row.getHiddentaisyouYY().getValue().getYear().toDateString());
                 IryohiKojo 医療費控除 = new IryohiKojo(被保険者番号, 控除対象年, row.getHiddenCodeKubun());
@@ -408,9 +411,11 @@ public class IryouhiKoujyoHandler {
     }
 
     private void removeEmptyRow(List<IryohiKojyoItiranDataGrid_Row> dataSource) {
-        for (IryohiKojyoItiranDataGrid_Row row : dataSource) {
+        Iterator<IryohiKojyoItiranDataGrid_Row> iterator = dataSource.iterator();
+        while (iterator.hasNext()) {
+            IryohiKojyoItiranDataGrid_Row row = iterator.next();
             if (row.getHiddensinseiDD().getValue() == null) {
-                dataSource.remove(row);
+                iterator.remove();
             }
         }
     }
