@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021011.DBB021011_Tsukib
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiParameterDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiParameterHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiParameterValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -28,7 +30,8 @@ public class TsukibetsuSuiihyoSakuseiParameter {
      * @return ResponseData<TsukibetsuSuiihyoSakuseiParameterDiv>
      */
     public ResponseData<TsukibetsuSuiihyoSakuseiParameterDiv> onLoad(TsukibetsuSuiihyoSakuseiParameterDiv div) {
-        getHandler(div).onload();
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        getHandler(div).onload(市町村セキュリティ情報);
         return ResponseData.of(div).respond();
     }
 

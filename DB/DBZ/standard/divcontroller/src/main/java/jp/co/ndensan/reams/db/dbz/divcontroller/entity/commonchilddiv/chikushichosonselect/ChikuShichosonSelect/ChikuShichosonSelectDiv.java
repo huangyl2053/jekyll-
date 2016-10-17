@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -280,6 +281,12 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
     @JsonIgnore
     public void initialize() {
         ChikuShichosonSelectHandler.of(this).init();
+    }
+
+    @Override
+    @JsonIgnore
+    public void initialize(Code 導入形態コード) {
+        ChikuShichosonSelectHandler.of(this).initialize(導入形態コード);
     }
 
     @Override

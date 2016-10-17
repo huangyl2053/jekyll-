@@ -9,12 +9,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021011.DBB021011_TsukibetsuSuiihyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiParameterDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -50,25 +55,17 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
     /**
      * 画面初期化処理です。
      *
+     * @param 市町村セキュリティ情報 市町村セキュリティ情報
      */
-    public void onload() {
+    public void onload(ShichosonSecurityJoho 市町村セキュリティ情報) {
         set調定年度();
         setヘッダエリア();
         set抽出条件エリア();
-        // TODO 子DIVを実装しない
-//        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
-//        if (市町村セキュリティ情報 != null) {
-//            DonyuKeitaiCode 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
-//            if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getCode())) {
-//                // 状態１　初期化状態（広域保険者）
-//                // 市町村==全市町村
-//            } else if (DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード.getCode())
-//                    || DonyuKeitaiCode.認定単一.getCode().equals(導入形態コード.getCode())) {
-//                // 状態２　初期化状態（単一保険者）
-////            div.getCcdChikuShichosonSelect().
-//                // 選択対象==全て
-//            }
-//        }
+        if (市町村セキュリティ情報 != null) {
+            Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
+            div.getCcdChikuShichosonSelect().initialize(導入形態コード);
+            div.setHdnDonyuKeitaiCode(導入形態コード.value());
+        }
     }
 
     /**
@@ -116,16 +113,31 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
         if (!RString.isNullOrEmpty(生年月日終了)) {
             div.getTxtUmareEd().setValue(new RDate(生年月日終了.toString()));
         }
-        // TODO 介護地区・市町村選択DIVを実装無し、この項目設定無し、
+        RString 選択対象 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("sentakuTaisho"));
+        if (!RString.isNullOrEmpty(選択対象)) {
+            div.getCcdChikuShichosonSelect().set選択対象(選択対象);
+        }
+        RString 市町村コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("shichosonCode"));
+        if (!RString.isNullOrEmpty(市町村コード)) {
+            div.getCcdChikuShichosonSelect().set市町村コード(市町村コード);
+        }
+        RString 旧市町村コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kyuShichosonCode"));
+        if (!RString.isNullOrEmpty(市町村コード)) {
+            div.getCcdChikuShichosonSelect().set旧市町村コード(旧市町村コード);
+        }
+        Map<RString, RString> 選択結果 = restoreBatchParameterMap.getParameterValue(Map.class, new RString("sentakuKekkaList"));
+        if (選択結果 != null && !選択結果.isEmpty()) {
+            div.getCcdChikuShichosonSelect().set選択結果(選択結果);
+        }
     }
 
     /**
      * バッチパラメータを作成します。
      *
-     * @return CreateTsukibetsuSuiihyoBatchParameter 月別推移表作成_バッチ用のパラメータ
+     * @return DBB021011_TsukibetsuSuiihyoSakuseiParameter 月別推移表作成_バッチ用のパラメータ
      */
     public DBB021011_TsukibetsuSuiihyoSakuseiParameter batchParameter() {
-
+        RString 導入形態コード = div.getHdnDonyuKeitaiCode();
         FlexibleYear 調定年度 = new FlexibleYear(div.getDdlChoteiNendo().getSelectedValue());
         RStringBuilder 調定基準日 = new RStringBuilder();
         調定基準日.append(div.getTxtChoteiKijunYMD().getValue());
@@ -138,11 +150,28 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
         if (生年月日.equals(div.getRadUmareYMD().getSelectedKey())) {
             is生年月日 = true;
         }
-        // TODO 介護地区・市町村選択共有子Divを呼び出す
-        return new DBB021011_TsukibetsuSuiihyoSakuseiParameter(調定年度, 調定基準日.toRString(), div.getDdShikakuKijunD().getSelectedKey(), is年齢, nullToEmpty(div.getTxtNenreiSt().getValue()),
+        RString 選択対象 = RString.EMPTY;
+        RString 市町村コード = RString.EMPTY;
+        RString 市町村名称 = RString.EMPTY;
+        RString 旧市町村コード = RString.EMPTY;
+        RString 旧市町村名称 = RString.EMPTY;
+        Map<RString, RString> 選択結果 = new HashMap<>();
+        if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード)) {
+            選択対象 = div.getCcdChikuShichosonSelect().get選択対象();
+            選択結果 = div.getCcdChikuShichosonSelect().get選択結果();
+        } else if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)
+                || DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード)) {
+            市町村コード = div.getCcdChikuShichosonSelect().get市町村コード();
+            市町村名称 = div.getCcdChikuShichosonSelect().get市町村名称();
+            旧市町村コード = div.getCcdChikuShichosonSelect().get旧市町村コード();
+            旧市町村名称 = div.getCcdChikuShichosonSelect().get旧市町村名称();
+        }
+        return new DBB021011_TsukibetsuSuiihyoSakuseiParameter(調定年度, 調定基準日.toRString(),
+                div.getDdShikakuKijunD().getSelectedKey(),
+                is年齢, nullToEmpty(div.getTxtNenreiSt().getValue()),
                 nullToEmpty(div.getTxtNenreiEd().getValue()), nullToEmpty(div.getTxtNenreiKijunYMD().getValue()), is生年月日,
                 nullToEmpt(div.getTxtUmareSt().getValue()), nullToEmpt(div.getTxtUmareEd().getValue()),
-                RString.EMPTY, null, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+                選択対象, 選択結果, 市町村コード, 市町村名称, 旧市町村コード, 旧市町村名称);
     }
 
     private RString nullToEmpty(Decimal 年齢) {
