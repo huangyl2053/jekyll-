@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -51,6 +53,7 @@ public class TorikomiFuairu {
         }
         RString filename = RString.EMPTY;
         RString filePath = RString.EMPTY;
+        List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(共有ファイル名);
         for (FileData sharedfile : files) {
             File inFile = new File(sharedfile.getFilePath().toString());
             RString localFilePath = new RString(inFile.getPath());
@@ -58,7 +61,11 @@ public class TorikomiFuairu {
             FilesystemName filesystemName = new FilesystemName(共有ファイル名);
             SharedFileDescriptor sfd = SharedFile.defineSharedFile(filesystemName);
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts();
-            SharedFile.deleteOldestEntry(sfd);
+            for (UzT0885SharedFileEntryEntity sharedFile : sharedFiles) {
+                SharedFileEntryDescriptor sfed = new ReadOnlySharedFileEntryDescriptor(filesystemName, sharedFile.getSharedFileId());
+                SharedFile.deleteEntry(sfed);
+            }
+
             SharedFile.copyToSharedFile(sfd, path, opts);
             filename = new RString(inFile.getName());
             filePath = sharedfile.getFilePath();
