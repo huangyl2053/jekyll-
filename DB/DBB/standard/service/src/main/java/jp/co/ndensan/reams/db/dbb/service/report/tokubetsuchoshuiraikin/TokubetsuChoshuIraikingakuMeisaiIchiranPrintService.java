@@ -7,10 +7,15 @@ package jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshuiraikin;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranReport;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranSource;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -19,9 +24,9 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -40,26 +45,30 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 public class TokubetsuChoshuIraikingakuMeisaiIchiranPrintService {
 
     private static final ReportId 特別徴収開始通知書仮算定_帳票分類ID = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
-    private static final int INDEX_0 = 0;
-    private static final int INDEX_1 = 1;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
 
     /**
      * printメソッド(単一帳票出力用)
      *
-     * @param 通知書情報List List<KariTokuchoKaishiTsuchisyoJoho>
+     * @param 賦課の情報一時Entity DbT2002FukaJohoTempTableEntity
+     * @param 宛名 IKojin
+     * @param 年金特徴回付情報 NenkinTokuchoKaifuJoho
+     * @param 徴収方法 ChoshuHoho
      * @param 出力順ID RString
-     * @param 調定年度 RYear
-     * @param 帳票作成日時 YMDHMS
+     * @param 賦課年度 FlexibleYear
+     * @param 調定日時 RDateTime
+     * @param 保険料段階 HokenryoDankai
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
+     * @param 本算定Flag boolean
      * @return SourceDataCollection
      */
-    public SourceDataCollection printTaitsu(List<KariTokuchoKaishiTsuchisyoJoho> 通知書情報List,
-            RString 出力順ID, RYear 調定年度, YMDHMS 帳票作成日時) {
+    public SourceDataCollection printTaitsu(DbT2002FukaJohoTempTableEntity 賦課の情報一時Entity,
+            IKojin 宛名, NenkinTokuchoKaifuJoho 年金特徴回付情報, ChoshuHoho 徴収方法,
+            RString 出力順ID, FlexibleYear 賦課年度, RDateTime 調定日時,
+            HokenryoDankai 保険料段階, ChohyoSeigyoKyotsu 帳票制御共通, boolean 本算定Flag) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            printFukusu(通知書情報List, 出力順ID, 調定年度, 帳票作成日時, reportManager);
+            printFukusu(賦課の情報一時Entity, 宛名, 年金特徴回付情報, 徴収方法,
+                    出力順ID, 賦課年度, 調定日時, 保険料段階, 帳票制御共通, 本算定Flag, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -68,14 +77,22 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranPrintService {
     /**
      * 本算定異動（過年度）結果一覧表 printメソッド(複数帳票出力用)
      *
-     * @param 通知書情報List List<KariTokuchoKaishiTsuchisyoJoho>
+     * @param 賦課の情報一時Entity DbT2002FukaJohoTempTableEntity
+     * @param 宛名 IKojin
+     * @param 年金特徴回付情報 NenkinTokuchoKaifuJoho
+     * @param 徴収方法 ChoshuHoho
      * @param 出力順ID RString
-     * @param 調定年度 RYear
-     * @param 帳票作成日時 YMDHMS
+     * @param 賦課年度 FlexibleYear
+     * @param 調定日時 RDateTime
+     * @param 保険料段階 HokenryoDankai
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
+     * @param 本算定Flag boolean
      * @param reportManager ReportManager
      */
-    public void printFukusu(List<KariTokuchoKaishiTsuchisyoJoho> 通知書情報List,
-            RString 出力順ID, RYear 調定年度, YMDHMS 帳票作成日時, ReportManager reportManager) {
+    public void printFukusu(DbT2002FukaJohoTempTableEntity 賦課の情報一時Entity,
+            IKojin 宛名, NenkinTokuchoKaifuJoho 年金特徴回付情報, ChoshuHoho 徴収方法,
+            RString 出力順ID, FlexibleYear 賦課年度, RDateTime 調定日時,
+            HokenryoDankai 保険料段階, ChohyoSeigyoKyotsu 帳票制御共通, boolean 本算定Flag, ReportManager reportManager) {
         IOutputOrder 並び順 = null;
         if (!RString.isNullOrEmpty(出力順ID)) {
             並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
@@ -83,38 +100,24 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranPrintService {
         }
         TokubetsuChoshuIraikingakuMeisaiIchiranProperty property = new TokubetsuChoshuIraikingakuMeisaiIchiranProperty(並び順);
         IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
-        Association association = associationFinder.getAssociation();
+        Association 地方公共団体 = associationFinder.getAssociation();
         try (ReportAssembler<TokubetsuChoshuIraikingakuMeisaiIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<TokubetsuChoshuIraikingakuMeisaiIchiranSource> reportSourceWriter = new ReportSourceWriter(assembler);
             int i = 0;
-            List<RString> 改頁項目List = new ArrayList<>();
-            RString 並び順の１件目 = RString.EMPTY;
-            RString 並び順の２件目 = RString.EMPTY;
-            RString 並び順の３件目 = RString.EMPTY;
-            RString 並び順の４件目 = RString.EMPTY;
-            RString 並び順の５件目 = RString.EMPTY;
+            List<RString> 改頁項目リスト = new ArrayList<>();
+            List<RString> 出力項目リスト = new ArrayList<>();
             if (並び順 != null) {
                 for (ISetSortItem item : 並び順.get設定項目リスト()) {
                     if (item.is改頁項目()) {
-                        改頁項目List.add(item.get項目名());
+                        改頁項目リスト.add(item.get項目名());
                     }
-                    if (i == INDEX_0) {
-                        並び順の１件目 = item.get項目名();
-                    } else if (i == INDEX_1) {
-                        並び順の２件目 = item.get項目名();
-                    } else if (i == INDEX_2) {
-                        並び順の３件目 = item.get項目名();
-                    } else if (i == INDEX_3) {
-                        並び順の４件目 = item.get項目名();
-                    } else if (i == INDEX_4) {
-                        並び順の５件目 = item.get項目名();
-                    }
+                    出力項目リスト.add(item.get項目名());
                     i = i + 1;
                 }
             }
-            new TokubetsuChoshuIraikingakuMeisaiIchiranReport(通知書情報List,
-                    調定年度, 帳票作成日時, 並び順の１件目, 並び順の２件目, 並び順の３件目,
-                    並び順の４件目, 並び順の５件目, 改頁項目List, association)
+            new TokubetsuChoshuIraikingakuMeisaiIchiranReport(賦課の情報一時Entity,
+                    宛名, 年金特徴回付情報, 徴収方法, 出力項目リスト, 改頁項目リスト,
+                    賦課年度, 調定日時, 地方公共団体, 保険料段階, 帳票制御共通, 本算定Flag)
                     .writeBy(reportSourceWriter);
         }
     }
