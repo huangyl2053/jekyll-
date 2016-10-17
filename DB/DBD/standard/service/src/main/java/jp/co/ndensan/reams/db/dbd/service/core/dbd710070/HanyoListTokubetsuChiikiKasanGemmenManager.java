@@ -50,7 +50,6 @@ public class HanyoListTokubetsuChiikiKasanGemmenManager {
      */
     public TokubetsuChiikiKasanGemmenEucCsvEntity setBlank() {
         HanyoListTokubetsuChiikiKasanBusiness bus = new HanyoListTokubetsuChiikiKasanBusiness();
-        TokubetsuChiikiKasanGemmenEucCsvEntity eucCsvEntity = bus.setNewBlank();
-        return eucCsvEntity;
+        return bus.setNewBlank();
     }
 }
