@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -20,6 +21,7 @@ public class InsNinteiGaibuDataOutputHistoryMybitsParameter implements IMyBatisP
 
     private final RString 出力データ区分;
     private final FlexibleDate システム日付;
+    private final RDateTime updateTime;
 
     /**
      * コンストラクタ。
@@ -29,6 +31,7 @@ public class InsNinteiGaibuDataOutputHistoryMybitsParameter implements IMyBatisP
     public InsNinteiGaibuDataOutputHistoryMybitsParameter(RString 出力データ区分) {
         this.出力データ区分 = 出力データ区分;
         this.システム日付 = FlexibleDate.getNowDate();
+        this.updateTime = RDateTime.now();
     }
 
 }

@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -215,7 +214,7 @@ public class TokuteiNyushoServiceHiShinsei {
             if (特別地域加算減免申請の情報 != null && 特別地域加算減免申請の情報.get決定区分() != null) {
                 元決定区分 = 特別地域加算減免申請の情報.get決定区分();
             }
-            if (!追加.equals(row.getJotai()) && !元決定区分.isEmpty()) {
+            if (!追加.equals(row.getJotai()) && 元決定区分.equals(承認する_KEY)) {
                 InformationMessage message = new InformationMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().getCode(),
                         DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
@@ -255,7 +254,7 @@ public class TokuteiNyushoServiceHiShinsei {
      * @return レスポンスデータ
      */
     public ResponseData<TokuteiNyushoServiceHiShinseiDiv> onBeforeOpenDialog_btnHiShoninRiyu(TokuteiNyushoServiceHiShinseiDiv div) {
-        div.getShinsei().setSubGyomuCode(SubGyomuCode.DBD介護受給.value());
+        div.getShinsei().setSubGyomuCode(GyomuCode.DB介護保険.value());
         div.getShinsei().setSampleBunshoGroupCode(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
         return ResponseData.of(div).respond();
     }
