@@ -72,6 +72,8 @@ public class TokuteiNyushoServiceHiShinseiHandler {
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
+    private static final RString 承認する = new RString("承認する");
+    private static final RString 承認しない = new RString("承認しない");
 
     /**
      * コンストラクタです。
@@ -126,7 +128,11 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             row.setKakuninNo(特別地域加算減免申請情報.get確認番号());
             row.getTxtShinseiYMD().setValue(特別地域加算減免申請情報.get申請年月日());
             row.setShinseiRiyu(特別地域加算減免申請情報.get申請事由());
-            row.setKetteiKubun(特別地域加算減免申請情報.get決定区分());
+            if (特別地域加算減免申請情報.get決定区分() != null && 特別地域加算減免申請情報.get決定区分().equals(承認する_KEY)) {
+                row.setKetteiKubun(承認する);
+            } else if (特別地域加算減免申請情報.get決定区分() != null && 特別地域加算減免申請情報.get決定区分().equals(承認しない_KEY)) {
+                row.setKetteiKubun(承認しない);
+            }
             row.getTxtKetteiYMD().setValue(特別地域加算減免申請情報.get決定年月日());
             row.getTxtTekiyoYMD().setValue(特別地域加算減免申請情報.get適用開始年月日());
             row.getTxtYukoKigenYMD().setValue(特別地域加算減免申請情報.get適用終了年月日());
@@ -487,7 +493,11 @@ public class TokuteiNyushoServiceHiShinseiHandler {
                 row.getTxtShinseiYMD().setValue(div.getShinseiDetail().getTxtShinseiYMD().getValue());
                 row.setShinseiRiyu(div.getShinseiDetail().getTxtShinseiRiyu().getValue());
                 row.setJotai(状態);
-                row.setKetteiKubun(決定区分);
+                if (決定区分.equals(承認する_KEY)) {
+                    row.setKetteiKubun(承認する);
+                } else if (決定区分.equals(承認しない_KEY)) {
+                    row.setKetteiKubun(承認しない);
+                }
                 row.getTxtKetteiYMD().setValue(決定日);
                 row.getTxtTekiyoYMD().setValue(適用日);
                 row.getTxtYukoKigenYMD().setValue(有効期限);
@@ -503,6 +513,11 @@ public class TokuteiNyushoServiceHiShinseiHandler {
             row.getTxtShinseiYMD().setValue(div.getShinseiDetail().getTxtShinseiYMD().getValue());
             row.setShinseiRiyu(div.getShinseiDetail().getTxtShinseiRiyu().getValue());
             row.setJotai(追加);
+            if (決定区分.equals(承認する_KEY)) {
+                row.setKetteiKubun(承認する);
+            } else if (決定区分.equals(承認しない_KEY)) {
+                row.setKetteiKubun(承認しない);
+            }
             row.setKetteiKubun(決定区分);
             row.getTxtKetteiYMD().setValue(決定日);
             row.getTxtTekiyoYMD().setValue(適用日);
@@ -789,7 +804,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         div.getShinsei().getShinseiDetail().getTxtShinseiYMD().setValue(row.getTxtShinseiYMD().getValue());
         div.getShinsei().getShinseiDetail().getTxtShinseiRiyu().setValue(row.getShinseiRiyu());
         if (row.getKetteiKubun() != null && !row.getKetteiKubun().isEmpty()) {
-            div.getShinsei().getShinseiDetail().getRadKettaiKubun().setSelectedKey(row.getKetteiKubun());
+            div.getShinsei().getShinseiDetail().getRadKettaiKubun().setSelectedValue(row.getKetteiKubun());
         }
         if (row.getTxtKetteiYMD() != null && row.getTxtKetteiYMD().getValue() != null) {
             div.getShinsei().getShinseiDetail().getTxtKettaiYMD().setValue(row.getTxtKetteiYMD().getValue());
