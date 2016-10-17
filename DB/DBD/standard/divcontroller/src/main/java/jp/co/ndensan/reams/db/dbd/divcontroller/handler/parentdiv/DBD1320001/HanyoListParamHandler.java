@@ -1243,6 +1243,8 @@ public class HanyoListParamHandler {
         get宛名抽出条件div().set地区３開始(new ChikuCode(宛名抽出条件.getChiku3_From()));
         get宛名抽出条件div().set地区３終了(new ChikuCode(宛名抽出条件.getChiku2_To()));
         get宛名抽出条件div().set保険者(宛名抽出条件.getShichoson_Code());
+        get宛名抽出条件div().onChange_SelectKijun();
+        get宛名抽出条件div().onChange_SelectChiku();
     }
 
     private void restore出力順_帳票ID_出力項目(BatchParameterMap map, RString 出力順fieldName, RString 帳票IDfieldName, RString 出力項目fieldName) {

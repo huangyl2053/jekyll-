@@ -309,6 +309,8 @@ public class JukyushaDaichoPanelHandler {
         get宛名抽出条件div().set地区３開始(new ChikuCode(宛名抽出条件.getChiku3_From()));
         get宛名抽出条件div().set地区３終了(new ChikuCode(宛名抽出条件.getChiku2_To()));
         get宛名抽出条件div().set保険者(宛名抽出条件.getShichoson_Code());
+        get宛名抽出条件div().onChange_SelectChiku();
+        get宛名抽出条件div().onChange_SelectKijun();
     }
 
     private IHanyoListAtenaSelectDiv get宛名抽出条件div() {
