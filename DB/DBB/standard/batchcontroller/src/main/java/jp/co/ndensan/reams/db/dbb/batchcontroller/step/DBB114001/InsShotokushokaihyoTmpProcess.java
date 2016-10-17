@@ -173,8 +173,12 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
             }
             KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho
                     .getKouseiShichosonJoho(市町村識別ID);
-            RString 都道府県名_構成 = 構成市町村情報.get都道府県名称();
-            RString 郡名_構成 = 構成市町村情報.get郡名称();
+            RString 都道府県名_構成 = RString.EMPTY;
+            RString 郡名_構成 = RString.EMPTY;
+            if (構成市町村情報 != null) {
+                都道府県名_構成 = 構成市町村情報.get都道府県名称();
+                郡名_構成 = 構成市町村情報.get郡名称();
+            }
             RString 現住所 = 都道府県名_構成.concat(郡名_構成).concat(所得照会票データ.getGenjusho());
             所得照会票データ.setGenjusho(現住所);
         }
@@ -195,9 +199,13 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
                 市町村識別ID = 所得照会票データ.getGenLasdecCode().getColumnValue().substring(INT_0, INT_2);
 
             }
+            RString 都道府県名_構成 = RString.EMPTY;
+            RString 郡名_構成 = RString.EMPTY;
             KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID);
-            RString 都道府県名_構成 = 構成市町村情報.get都道府県名称();
-            RString 郡名_構成 = 構成市町村情報.get郡名称();
+            if (構成市町村情報 != null) {
+                都道府県名_構成 = 構成市町村情報.get都道府県名称();
+                郡名_構成 = 構成市町村情報.get郡名称();
+            }
             RString 被保険者住所 = 都道府県名_構成.concat(郡名_構成).concat(所得照会票データ.getHihokenshajusho());
             所得照会票データ.setHihokenshajusho(被保険者住所);
         }
