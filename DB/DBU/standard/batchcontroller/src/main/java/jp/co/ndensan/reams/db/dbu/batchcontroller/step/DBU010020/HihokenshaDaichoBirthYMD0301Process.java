@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020;
 
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.YokaigoNinteishaJohoSyoriMybatisParameter;
-import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.YokaigoNinteishaJohoSyoriProcessParameter;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.YokaigoNinteishaJohoKonkyoCSVEntity;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.HihokenshaDaichoBirthYMDMybatisParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.HihokenshaDaichoBirthYMDProcessParameter;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.IchigoHihokenshaJohoKonkyoCSVEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokugeppoippan.IJigyoHokokuGeppoIppanMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -27,34 +27,33 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 
 /**
- * 受給者台帳情報処理クラスです。
+ * 被保台帳生年月日情報処理のバッチ処理クラスです。
  *
  * @reamsid_L DBU-5530-030 wangxiaodong
  */
-public class YokaigoNinteishaJohoSyoriProcess extends BatchProcessBase<YokaigoNinteishaJohoKonkyoCSVEntity> {
+public class HihokenshaDaichoBirthYMD0301Process extends BatchProcessBase<IchigoHihokenshaJohoKonkyoCSVEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence."
-            + "db.mapper.relate.jigyohokokugeppoippan.IJigyoHokokuGeppoIppanMapper.getYokaigoNinteishaJohoKonkyoCSV");
+            + "db.mapper.relate.jigyohokokugeppoippan.IJigyoHokokuGeppoIppanMapper.getIchigoHihokenshaJohoKonkyoCSV");
     private static final RString 拡張子 = new RString(".CSV");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
 
-    private YokaigoNinteishaJohoSyoriProcessParameter processParameter;
-    private YokaigoNinteishaJohoSyoriMybatisParameter mybatisParameter;
+    private HihokenshaDaichoBirthYMDProcessParameter processParameter;
+    private HihokenshaDaichoBirthYMDMybatisParameter mybatisParameter;
     private IJigyoHokokuGeppoIppanMapper mapper;
     private RString 集計番号;
 
     @BatchWriter
-    private CsvWriter<YokaigoNinteishaJohoKonkyoCSVEntity> csvWriter;
+    private CsvWriter<IchigoHihokenshaJohoKonkyoCSVEntity> csvWriter;
 
     @Override
     protected void initialize() {
-        集計番号 = ShukeiNo.一般状況_11_要介護_要支援_認定者数.getコード();
-        mybatisParameter = processParameter.toYokaigoNinteishaJohoSyoriMybatisParameter();
-        mybatisParameter.setShukeiNo(new Code(集計番号));
+        集計番号 = ShukeiNo.一般状況_2_第1号被保険者増減内訳_当月中増.getコード();
         mapper = getMapper(IJigyoHokokuGeppoIppanMapper.class);
-        RString filename = Path.combinePath(processParameter.get出力ファイルPATH(), 集計番号.concat(拡張子));
-        csvWriter = new CsvWriter.InstanceBuilder(filename).
+        mybatisParameter = processParameter.toHihokenshaDaichoBirthYMDMybatisParameter();
+        mybatisParameter.setShukeiNo(new Code(集計番号));
+        csvWriter = new CsvWriter.InstanceBuilder(Path.combinePath(processParameter.get出力ファイルPATH(), 集計番号.concat(拡張子))).
                 setEncode(Encode.UTF_8withBOM)
                 .canAppend(true)
                 .setDelimiter(EUC_WRITER_DELIMITER)
@@ -70,19 +69,19 @@ public class YokaigoNinteishaJohoSyoriProcess extends BatchProcessBase<YokaigoNi
 
     @Override
     protected void beforeExecute() {
-        mapper.exeYokaigoNinteishaDataInsert(mybatisParameter);
+        mapper.exeIchigoHihokenshaDataInsert(mybatisParameter);
     }
 
     @Override
-    protected void process(YokaigoNinteishaJohoKonkyoCSVEntity entity) {
+    protected void process(IchigoHihokenshaJohoKonkyoCSVEntity entity) {
         if (集計番号.equals(entity.get集計番号())) {
             csvWriter.writeLine(entity);
-            AccessLogger.log(AccessLogType.照会, toPersonalData(entity.get被保険者番号()));
+            AccessLogger.log(AccessLogType.照会, toPersonalData(entity.get識別コード(), entity.get被保険者番号()));
         }
     }
 
-    private PersonalData toPersonalData(RString 被保険者番号) {
+    private PersonalData toPersonalData(RString 識別コード, RString 被保険者番号) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
+        return PersonalData.of(new ShikibetsuCode(識別コード), expandedInfo);
     }
 }
