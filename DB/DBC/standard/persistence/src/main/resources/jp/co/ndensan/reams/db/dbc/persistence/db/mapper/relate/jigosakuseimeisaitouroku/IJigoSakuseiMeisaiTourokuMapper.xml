@@ -17,7 +17,8 @@
         B."serviceShuruiRyakusho" AS サービス種類略称,
         (CASE 
         WHEN 
-        C."shikyuGendoTaniSu" IS NULL
+        (C."shikyuGendoTaniSu" IS NULL
+        OR C."shikyuGendoTaniSu" = '')
         THEN A."shikyuGendoTaniSu"
         ELSE C."shikyuGendoTaniSu" 
         END ) AS 支給限度単位数,
