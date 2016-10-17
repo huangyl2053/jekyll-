@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020004;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209012.DBD209012_KyufuGakuGengakuKanriListParameter;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020004.DBD2020004StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020004.KyufugakuGengakuKanriListDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020004.KyufugakuGengakuKanriListHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020004.KyufugakuGengakuKanriListValidationHandler;
@@ -93,7 +92,7 @@ public class KyufugakuGengakuKanriList {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
 
-        return ResponseData.of(div).setState(DBD2020004StateName.Default);
+        return ResponseData.of(div).respond();
     }
 
     private KyufugakuGengakuKanriListValidationHandler getValidationHandler() {
