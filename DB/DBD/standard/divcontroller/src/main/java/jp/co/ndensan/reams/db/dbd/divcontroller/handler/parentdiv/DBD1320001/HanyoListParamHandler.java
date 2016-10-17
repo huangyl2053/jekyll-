@@ -820,8 +820,8 @@ public class HanyoListParamHandler {
         } else {
             div.getRadChushutsuJokenB1().setSelectedKey(範囲KEY);
         }
-        RString 喪失区分 = batchParameterMap.getParameterValue(RString.class, 喪失区分パラメータ名称2);
-        div.getDdlSoshitsuKubun().setSelectedKey(喪失区分);
+        SoshitsuKubun 喪失区分 = batchParameterMap.getParameterValue(SoshitsuKubun.class, 喪失区分パラメータ名称2);
+        div.getDdlSoshitsuKubun().setSelectedKey(喪失区分.getコード());
         restore抽出項目区分(batchParameterMap, 抽出項目区分パラメータ名称2);
         restore基準日(batchParameterMap, 基準日パラメータ名称2);
         restore日付範囲From(batchParameterMap, 日付範囲開始パラメータ名称2);
