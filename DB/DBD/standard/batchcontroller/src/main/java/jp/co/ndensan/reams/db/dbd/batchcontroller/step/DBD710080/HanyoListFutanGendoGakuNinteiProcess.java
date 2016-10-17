@@ -146,6 +146,7 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
     private final List<RString> csvHeader = new ArrayList<>();
     private List<RString> csvContent;
     private FileSpoolManager manager;
+    private FileSpoolManager manager1;
     private RString eucFilePath;
     private HanyoListFutanGendoGakuNinteiProcessParameter processParamter;
     private CsvWriter<FutanGendoGakuNinteiEucCsvEntity> eucCsvWriter;
@@ -206,6 +207,7 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
     @Override
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager1 = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBD_FutanGendogakuNintei_Temp.csv"));
         csvFilePath1 = Path.combinePath(manager.getEucOutputDirectry(), new RString("HanyoList_FutanGendogakuNintei.csv"));
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
@@ -267,8 +269,7 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
         eucCsvWriter1.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         if (isCSV出力) {
-            manager.spool(eucFilePath, log);
-            manager.spool(csvFilePath1);
+            manager.spool(csvFilePath1, log);
         }
         バッチ出力条件リストの出力();
     }
