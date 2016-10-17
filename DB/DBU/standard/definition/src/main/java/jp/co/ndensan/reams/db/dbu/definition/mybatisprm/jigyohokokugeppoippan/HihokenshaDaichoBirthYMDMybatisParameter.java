@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class HihokenshaDaichoBirthYMDMybatisParameter implements IMyBatisParameter {
+public class HihokenshaDaichoBirthYMDMybatisParameter implements IMyBatisParameter {
 
     private YMDHMS syoriNitiji;
     private FlexibleYearMonth syukeiYM;
