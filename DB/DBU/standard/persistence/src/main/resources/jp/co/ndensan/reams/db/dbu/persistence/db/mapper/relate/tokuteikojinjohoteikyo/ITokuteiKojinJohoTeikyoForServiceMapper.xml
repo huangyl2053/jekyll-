@@ -112,7 +112,7 @@
             TeikyoKomoku."tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
         AND  TeikyoKomoku."dataSetNo" = #{データセット番号}
         AND  TeikyoKomoku."hanNo" = #{版番号}
-        ORBER BY TeikyoKomoku."tokuteiKojinJohoKomokuCode"
+        ORDER BY TeikyoKomoku."tokuteiKojinJohoKomokuCode"
     </select>
     
     <select id="get中間DB提供基本情報"
