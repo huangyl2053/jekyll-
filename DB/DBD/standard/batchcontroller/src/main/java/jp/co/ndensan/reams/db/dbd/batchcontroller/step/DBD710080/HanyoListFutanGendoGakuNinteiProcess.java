@@ -67,12 +67,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -196,26 +193,7 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         key.set住民種別(get住民種別(住民種別List));
         key.set住民状態(get住民状態(住民状態List));
-        key.set町域コード開始値(new ChoikiCode(processParamter.getAtenacyusyutsujyoken().getJusho_From()));
-        key.set町域コード終了値(new ChoikiCode(processParamter.getAtenacyusyutsujyoken().getJusho_To()));
-        key.set行政区コード開始値(new GyoseikuCode(processParamter.getAtenacyusyutsujyoken().getGyoseiku_From()));
-        key.set行政区コード終了値(new GyoseikuCode(processParamter.getAtenacyusyutsujyoken().getGyoseiku_To()));
-        key.set地区コード1開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku1_From()));
-        key.set地区コード1終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku1_To()));
-        key.set地区コード2開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_From()));
-        key.set地区コード2終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_To()));
-        key.set地区コード3開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku3_From()));
-        key.set地区コード3終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku3_To()));
-        key.set町域コード開始値(ChoikiCode.EMPTY);
-        key.set町域コード終了値(ChoikiCode.EMPTY);
-        key.set行政区コード開始値(GyoseikuCode.EMPTY);
-        key.set行政区コード終了値(GyoseikuCode.EMPTY);
-        key.set地区コード1開始値(ChikuCode.EMPTY);
-        key.set地区コード1終了値(ChikuCode.EMPTY);
-        key.set地区コード2開始値(ChikuCode.EMPTY);
-        key.set地区コード2終了値(ChikuCode.EMPTY);
-        key.set地区コード3開始値(ChikuCode.EMPTY);
-        key.set地区コード3終了値(ChikuCode.EMPTY);
+        HanyoListManager.createInstance().地区区分編集(processParamter.getAtenacyusyutsujyoken(), key);
         IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho = key.build();
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
@@ -394,6 +372,11 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
         }
         出力条件.add(get旧措置者());
         出力条件.add(get利用者負担段階());
+        バッチ出力条件表出力(導入団体コード, 市町村名, 出力ページ数, 日本語ファイル名, 英数字ファイル名, ジョブ番号, 出力条件);
+    }
+
+    private void バッチ出力条件表出力(RString 導入団体コード, RString 市町村名, RString 出力ページ数, RString 日本語ファイル名,
+            RString 英数字ファイル名, RString ジョブ番号, List<RString> 出力条件) {
         if (is帳票出力) {
             RString csv出力有無;
             RString csvファイル名;
