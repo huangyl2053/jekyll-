@@ -59,6 +59,16 @@ public interface IJigyoHokokuRenkeiHokenkyufuShokanKetteiMapper {
     void update後_点数();
 
     /**
+     * 一時テーブルより、負担割合年度の更新です。
+     */
+    void update負担割合年度_1();
+
+    /**
+     * 一時テーブルより、負担割合年度の更新です。
+     */
+    void update負担割合年度_2();
+
+    /**
      * 一時テーブルより、市町村コードと旧市町村コードの更新です。
      */
     void update市町村コードと旧市町村コード();
