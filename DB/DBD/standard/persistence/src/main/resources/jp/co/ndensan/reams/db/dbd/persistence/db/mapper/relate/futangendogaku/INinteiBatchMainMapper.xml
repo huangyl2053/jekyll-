@@ -30,6 +30,7 @@
             rgdb."DbT4018KaigoHokenFutanGendogakuNintei" AS "DbT4018KaigoHokenFutanGendogakuNintei"
         INNER JOIN  "shoriTaishoTempEntity" AS B
             ON  B."hihokenshaNo" = "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+            AND B."rirekiNo" = "DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo"
         INNER JOIN  "taishoShaHanteiYoukonkyoItokiTemp" AS C
             ON  C."被保険者番号" = "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
             
