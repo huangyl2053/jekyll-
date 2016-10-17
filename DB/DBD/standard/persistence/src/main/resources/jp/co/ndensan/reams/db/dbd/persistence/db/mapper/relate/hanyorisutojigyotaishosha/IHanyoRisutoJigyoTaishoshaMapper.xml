@@ -60,8 +60,8 @@ WITH master AS (
 	     WHERE 二次予防事業対象者."isDeleted" = false	
             <if test="is基準日">
                 AND ((二次予防事業対象者."tekiyoShuryoYMD" IS NOT NULL
-                AND #{kizyunnichi} <![CDATA[<=]]> 二次予防事業対象者."tekiyoKaishiYMD"
-                AND 二次予防事業対象者."tekiyoShuryoYMD" <![CDATA[<=]]> #{kizyunnichi})
+                AND  二次予防事業対象者."tekiyoKaishiYMD"<![CDATA[<=]]> #{kizyunnichi}
+                AND  #{kizyunnichi} <![CDATA[<=]]>二次予防事業対象者."tekiyoShuryoYMD")
                 OR (二次予防事業対象者."tekiyoShuryoYMD" IS NULL
                 AND #{kizyunnichi} <![CDATA[<=]]> 二次予防事業対象者."tekiyoKaishiYMD"))
             </if>
