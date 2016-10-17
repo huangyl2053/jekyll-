@@ -268,6 +268,7 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         if (isCSV出力) {
             manager.spool(eucFilePath, log);
+            manager.spool(csvFilePath1);
         }
         バッチ出力条件リストの出力();
     }
