@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC3500011;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.hokenshasofulist.HokenshaSofuResult;
@@ -20,7 +22,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.hokenshasofu.HokenshaSofuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -52,7 +53,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  */
 public class HokenshaSofuListHandler {
 
-    private JyusinDataBaitaiTorikomuDiv div;
+    private final JyusinDataBaitaiTorikomuDiv div;
     private final RString searchSharedFile = new RString("1\\_%");
     private static final int ゼロ = 0;
     private static final int 一1 = 1;
@@ -92,6 +93,30 @@ public class HokenshaSofuListHandler {
     private static final RString データ種別537 = new RString("537");
     private static final RString データ種別5C3 = new RString("5C3");
     private static final RString データ種別5C4 = new RString("5C4");
+    private static final RString データ種別121 = new RString("121");
+    private static final RString データ種別122 = new RString("122");
+    private static final RString データ種別123 = new RString("123");
+    private static final RString データ種別152 = new RString("152");
+    private static final RString データ種別153 = new RString("153");
+    private static final RString データ種別162 = new RString("162");
+    private static final RString データ種別163 = new RString("163");
+    private static final RString データ種別175 = new RString("175");
+    private static final RString データ種別177 = new RString("177");
+    private static final RString データ種別178 = new RString("178");
+    private static final RString データ種別386 = new RString("386");
+    private static final RString データ種別38B = new RString("38B");
+    private static final RString データ種別38H = new RString("38H");
+    private static final RString データ種別38J = new RString("38J");
+    private static final RString データ種別38P = new RString("38P");
+    private static final RString データ種別631 = new RString("631");
+    private static final RString データ種別632 = new RString("632");
+    private static final RString データ種別641 = new RString("641");
+    private static final RString データ種別642 = new RString("642");
+    private static final RString データ種別651 = new RString("651");
+    private static final RString データ種別652 = new RString("652");
+    private static final RString データ種別661 = new RString("661");
+    private static final RString データ種別662 = new RString("662");
+    private static final RString データ種別741 = new RString("741");
     private static final RString 識別番号011 = new RString("011");
     private static final RString 取消3 = new RString("3");
     private static final RString 新規1 = new RString("1");
@@ -128,28 +153,27 @@ public class HokenshaSofuListHandler {
 
     private void setDatasource(List<UzT0885SharedFileEntryEntity> uzt0805EntityList) {
         List<HokenshaSofuResult> hokenshaSofuList1 = new ArrayList();
-        List<HokenshaSofuResult> hokenshaSofuList2 = new ArrayList();
         if (uzt0805EntityList != null && !uzt0805EntityList.isEmpty()) {
             for (UzT0885SharedFileEntryEntity uzt0805Entity : uzt0805EntityList) {
                 hokenshaSofuList1.add(getHokenshaSofuList(uzt0805Entity));
             }
-            for (int i = 0; i < hokenshaSofuList1.size(); i++) {
-                for (int j = i; j < hokenshaSofuList1.size(); j++) {
-                    if (hokenshaSofuList1.get(i).getH一覧表示順().compareTo(hokenshaSofuList1.get(j).getH一覧表示順()) > ゼロ) {
-                        hokenshaSofuList2.add(hokenshaSofuList1.get(j));
-                        hokenshaSofuList2.add(hokenshaSofuList1.get(i));
-                    } else if (i == j) {
-                        hokenshaSofuList2.add(hokenshaSofuList1.get(i));
-                    } else {
-                        hokenshaSofuList2.add(hokenshaSofuList1.get(i));
-                        hokenshaSofuList2.add(hokenshaSofuList1.get(j));
+            Collections.sort(hokenshaSofuList1, new Comparator<HokenshaSofuResult>() {
+                @Override
+                public int compare(HokenshaSofuResult o1, HokenshaSofuResult o2) {
+                    RString 一覧表示順1 = o1.getH一覧表示順();
+                    RString 一覧表示順2 = o2.getH一覧表示順();
+                    int flag = 0;
+                    if (一覧表示順1 != null && 一覧表示順2 != null) {
+                        flag = 一覧表示順2.compareTo(一覧表示順1);
                     }
+                    return flag;
                 }
-            }
-            JyusinDataList_Row row = new JyusinDataList_Row();
+            });
             List<JyusinDataList_Row> rowList = div.getJyusinDataList().getDataSource();
-            for (HokenshaSofuResult entity : hokenshaSofuList2) {
-                row.setTxtShoriTaishoNengetsu(entity.get取込情報名称());
+            div.getJyusinDataList().getDataSource().clear();
+            for (HokenshaSofuResult entity : hokenshaSofuList1) {
+                JyusinDataList_Row row = new JyusinDataList_Row();
+                row.setTxtTorikomiJohoMeisho(entity.get取込情報名称());
                 row.setTxtFile(entity.getファイル());
                 row.setTxtHokenshaNo(entity.get被保険者番号().getColumnValue());
                 row.setTxtShoriTaishoNengetsu(entity.get対象年月().toDateString());
@@ -332,8 +356,10 @@ public class HokenshaSofuListHandler {
             throws NumberFormatException, ApplicationException {
         HokenshaSofuResult entity = HokenshaSofuFinder.createInstance().get国保連管理(データ種別, 処理年月);
         for (KokuhorenInterfaceKanri faceKanri : entity.getKokuhorenInterfaceKanriList()) {
-            if (myBatisParameter.get同月過誤取下分フラグ() != null && !myBatisParameter.get同月過誤取下分フラグ()
-                    && faceKanri.getコントロール上処理年月() != null && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
+            if (myBatisParameter.get同月過誤取下分フラグ() != null
+                    && !myBatisParameter.get同月過誤取下分フラグ()
+                    && faceKanri.getコントロール上処理年月() != null
+                    && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
                 if (コントロールレコード.get(三) != null && !コントロールレコード.get(三).isEmpty()
                         && faceKanri.getコントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())
                         && !ResponseHolder.isReRequest()) {
@@ -345,7 +371,9 @@ public class HokenshaSofuListHandler {
                     deleteEntitys(file);
                     return ResponseData.of(div).respond();
                 }
-            } else if (myBatisParameter.get同月過誤取下分フラグ()
+            } else if (myBatisParameter.get同月過誤取下分フラグ() != null
+                    && myBatisParameter.get同月過誤取下分フラグ()
+                    && faceKanri.getコントロール上処理年月() != null
                     && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
                 if (!コントロールレコード.get(三).isEmpty()
                         && faceKanri.getコントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())
@@ -392,20 +420,25 @@ public class HokenshaSofuListHandler {
         }
 
         RDate nowDate = RDate.getNowDate();
+        if (コントロールレコード.get(六) != null && !コントロールレコード.get(六).equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分,
+                nowDate, SubGyomuCode.DBU介護統計報告))) {
+            deleteEntitys(file);
+            throw new ApplicationException(DbcErrorMessages.国保連保険者番号不正.getMessage());
+        }
+
         if (DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告).equals(ゼロゼロ)) {
             保険者番号 = コントロールレコード.get(六);
         } else if (DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告).equals(一)) {
             保険者番号取得(データレコード, データ種別);
         }
 
-        if (保険者番号 != null && !保険者番号.equals(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
-                nowDate, SubGyomuCode.DBU介護統計報告))) {
-            if (!保険者番号.equals(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().getColumnValue())) {
-                deleteEntitys(file);
-                throw new ApplicationException(DbcErrorMessages.国保連保険者番号不正.getMessage());
-            }
-        }
-
+//        if (保険者番号 != null && !保険者番号.equals(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
+//                nowDate, SubGyomuCode.DBU介護統計報告))) {
+//            if (!保険者番号.equals(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().getColumnValue())) {
+//                deleteEntitys(file);
+//                throw new ApplicationException(DbcErrorMessages.国保連保険者番号不正.getMessage());
+//            }
+//        }
         if (コントロールレコード.get(二2).compareTo(一) > 0) {
             deleteEntitys(file);
             throw new ApplicationException(DbcErrorMessages.国保連ボリューム連番不正.getMessage());
@@ -414,24 +447,39 @@ public class HokenshaSofuListHandler {
 
     private void 保険者番号取得(List<RString> データレコード, RString データ種別) {
         if (データレコード.get(ゼロ).equals(二)) {
-            if (データ種別.equals(給付実績情報111) || データ種別.equals(データ種別112) || データ種別.equals(データ種別114)) {
+            if (データ種別.equals(給付実績情報111) || データ種別.equals(データ種別112) || データ種別.equals(データ種別114)
+                    || データ種別.equals(データ種別386) || データ種別.equals(データ種別38B) || データ種別.equals(データ種別38H)
+                    || データ種別.equals(データ種別38J) || データ種別.equals(データ種別38P) || データ種別.equals(データ種別741)) {
                 保険者番号 = データレコード.get(六);
             }
-            if (データ種別.equals(データ種別151) || データ種別.equals(データ種別161) || データ種別.equals(データ種別221)
-                    || データ種別.equals(データ種別222) || データ種別.equals(データ種別331) || データ種別.equals(データ種別351)) {
-                保険者番号 = データレコード.get(四);
-            }
-            if (データ種別.equals(データ種別171) || データ種別.equals(データ種別172)) {
-                保険者番号 = データレコード.get(五);
-            }
-            if (データ種別.equals(データ種別534) || データ種別.equals(データ種別5C4)) {
-                保険者番号 = データレコード.get(七);
-            }
-            if (データ種別.equals(データ種別537) || データ種別.equals(データ種別5C3) || データ種別.equals(データ種別533)) {
-                保険者番号 = データレコード.get(八);
-            }
+            保険者番号取得四(データレコード, データ種別);
+            保険者番号取得五(データレコード, データ種別);
+        }
+    }
 
-            //TODO QA1672
+    private void 保険者番号取得四(List<RString> データレコード, RString データ種別) {
+        if (データ種別.equals(データ種別151) || データ種別.equals(データ種別161) || データ種別.equals(データ種別221)
+                || データ種別.equals(データ種別222) || データ種別.equals(データ種別331) || データ種別.equals(データ種別351)
+                || データ種別.equals(データ種別121) || データ種別.equals(データ種別122) || データ種別.equals(データ種別123)
+                || データ種別.equals(データ種別152) || データ種別.equals(データ種別153) || データ種別.equals(データ種別162)
+                || データ種別.equals(データ種別163) || データ種別.equals(データ種別631) || データ種別.equals(データ種別632)
+                || データ種別.equals(データ種別641) || データ種別.equals(データ種別642)) {
+            保険者番号 = データレコード.get(四);
+        }
+    }
+
+    private void 保険者番号取得五(List<RString> データレコード, RString データ種別) {
+        保険者番号取得四(データレコード, データ種別);
+        if (データ種別.equals(データ種別171) || データ種別.equals(データ種別172) || データ種別.equals(データ種別175)
+                || データ種別.equals(データ種別177) || データ種別.equals(データ種別178) || データ種別.equals(データ種別651)
+                || データ種別.equals(データ種別652) || データ種別.equals(データ種別661) || データ種別.equals(データ種別662)) {
+            保険者番号 = データレコード.get(五);
+        }
+        if (データ種別.equals(データ種別534) || データ種別.equals(データ種別5C4)) {
+            保険者番号 = データレコード.get(七);
+        }
+        if (データ種別.equals(データ種別537) || データ種別.equals(データ種別5C3) || データ種別.equals(データ種別533)) {
+            保険者番号 = データレコード.get(八);
         }
     }
 
