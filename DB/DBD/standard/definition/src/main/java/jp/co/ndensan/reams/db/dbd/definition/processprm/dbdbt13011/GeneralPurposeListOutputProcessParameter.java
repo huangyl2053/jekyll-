@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Chus
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbddt13011.GeneralPurposeListOutputMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -85,11 +86,12 @@ public class GeneralPurposeListOutputProcessParameter implements IBatchProcessPa
     /**
      * ＳＱＬ使用された情報を作成します．
      *
-     * @param psmShikibetsuTaisho 宛名識別対象PSM
+     * @param shikibetsutaishoParam 宛名識別対象PSM
      * @param psmAtesaki 宛先PSM
      * @return ＳＱＬ使用されたパラメター情報
      */
-    public GeneralPurposeListOutputMybatisParameter toGeneralPurposeListOutputMybatisParameter(RString psmShikibetsuTaisho, RString psmAtesaki) {
+    public GeneralPurposeListOutputMybatisParameter toGeneralPurposeListOutputMybatisParameter(UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam,
+            RString psmAtesaki) {
 
         return new GeneralPurposeListOutputMybatisParameter(抽出方法区分,
                 抽出項目区分,
@@ -99,7 +101,7 @@ public class GeneralPurposeListOutputProcessParameter implements IBatchProcessPa
                 直近データ抽出,
                 宛名抽出条件,
                 喪失区分,
-                psmShikibetsuTaisho,
+                shikibetsutaishoParam,
                 psmAtesaki);
     }
 }
