@@ -50,7 +50,6 @@ public class HanyoListKokiKoreishaManager {
      */
     public HanyoRisutoKokiKoreishaEucCsvEntity setBlank() {
         HanyoListKokiKoreishaBusiness bus = new HanyoListKokiKoreishaBusiness();
-        HanyoRisutoKokiKoreishaEucCsvEntity eucCsvEntity = bus.setNewBlank();
-        return eucCsvEntity;
+        return bus.setNewBlank();
     }
 }

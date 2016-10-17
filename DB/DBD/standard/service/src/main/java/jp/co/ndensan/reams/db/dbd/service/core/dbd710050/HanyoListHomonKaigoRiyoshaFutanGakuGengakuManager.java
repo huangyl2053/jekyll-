@@ -51,7 +51,6 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuManager {
      */
     public HomonKaigoRiyoshaFutanGakuGengakuEucCsvEntity setBlank() {
         HanyoListHomonKaigoRiyoshaFutanGakuGengakuBusiness bus = new HanyoListHomonKaigoRiyoshaFutanGakuGengakuBusiness();
-        HomonKaigoRiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity = bus.setNewBlank();
-        return eucCsvEntity;
+        return bus.setNewBlank();
     }
 }

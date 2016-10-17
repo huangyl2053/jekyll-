@@ -239,8 +239,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
                             .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
                                                     .get(i).get項目位置()))).get名称().toString());
                     項目内容new = (RString) getMethod.invoke(eucCsvEntity);
-                } catch (NoSuchMethodException | SecurityException |
-                        IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                     Logger.getLogger(HanyoListRiyoshaFutanGakuGengakuProcess.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (is帳票出力) {
@@ -692,11 +691,13 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
                 > get項目桁数) {
             get項目名称 = get項目名称.substring(0, get項目桁数);
         } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.左詰め.getコード())) {
-            for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
+            int 桁数 = get項目桁数 - get項目名称.length();
+            for (int j = 0; j < 桁数; j++) {
                 get項目名称 = RString.HALF_SPACE.concat(get項目名称);
             }
         } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.右詰め.getコード())) {
-            for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
+            int 桁数 = get項目桁数 - get項目名称.length();
+            for (int j = 0; j < 桁数; j++) {
                 get項目名称 = get項目名称.concat(RString.HALF_SPACE);
             }
         }

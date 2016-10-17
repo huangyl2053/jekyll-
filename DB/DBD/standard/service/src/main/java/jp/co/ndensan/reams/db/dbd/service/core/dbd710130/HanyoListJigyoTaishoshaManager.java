@@ -48,7 +48,6 @@ public class HanyoListJigyoTaishoshaManager {
      */
     public HanyoRisutoJigyoTaishoshaEucCsvEntity setBlank() {
         HanyoListJigyoTaishoshaBusiness bus = new HanyoListJigyoTaishoshaBusiness();
-        HanyoRisutoJigyoTaishoshaEucCsvEntity eucCsvEntity = bus.setNewBlank();
-        return eucCsvEntity;
+        return bus.setNewBlank();
     }
 }

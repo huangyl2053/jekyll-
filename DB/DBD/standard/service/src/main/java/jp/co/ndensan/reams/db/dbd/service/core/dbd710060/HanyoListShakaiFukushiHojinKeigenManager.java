@@ -50,7 +50,6 @@ public class HanyoListShakaiFukushiHojinKeigenManager {
      */
     public ShakaiFukushiHojinKeigenEucCsvEntity setBlank() {
         HanyoListShakaiFukushiHojinKeigenBusiness bus = new HanyoListShakaiFukushiHojinKeigenBusiness();
-        ShakaiFukushiHojinKeigenEucCsvEntity eucCsvEntity = bus.setNewBlank();
-        return eucCsvEntity;
+        return bus.setNewBlank();
     }
 }

@@ -103,8 +103,6 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBD701014");
     private static final RString HIHOKENSHANO = new RString("利用者負担割合_被保険者番号");
-    private static final RString RIREKIBANGO = new RString("利用者負担割合_履歴番号");
-    private static final RString EDANO = new RString("利用者負担割合_枝番号");
     private static final RString CYUSYUTSUTAISYOSHA = new RString("【抽出対象者】");
     private static final RString HOKENSHA = new RString("保険者：");
     private static final RString NENDO = new RString("年度：");
@@ -607,11 +605,13 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
                 > get項目桁数) {
             get項目名称 = get項目名称.substring(0, get項目桁数);
         } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.左詰め.getコード())) {
-            for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
+            int 桁数 = get項目桁数 - get項目名称.length();
+            for (int j = 0; j < 桁数; j++) {
                 get項目名称 = RString.HALF_SPACE.concat(get項目名称);
             }
         } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.右詰め.getコード())) {
-            for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
+            int 桁数 = get項目桁数 - get項目名称.length();
+            for (int j = 0; j < 桁数; j++) {
                 get項目名称 = get項目名称.concat(RString.HALF_SPACE);
             }
         }

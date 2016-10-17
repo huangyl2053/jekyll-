@@ -612,11 +612,13 @@ public class HanyoListKokiKoreishaProcess extends BatchProcessBase<HanyoRisutoKo
                 > get項目桁数) {
             get項目名称 = get項目名称.substring(0, get項目桁数);
         } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.左詰め.getコード())) {
-            for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
+            int 桁数 = get項目桁数 - get項目名称.length();
+            for (int j = 0; j < 桁数; j++) {
                 get項目名称 = RString.HALF_SPACE.concat(get項目名称);
             }
         } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.右詰め.getコード())) {
-            for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
+            int 桁数 = get項目桁数 - get項目名称.length();
+            for (int j = 0; j < 桁数; j++) {
                 get項目名称 = get項目名称.concat(RString.HALF_SPACE);
             }
         }
