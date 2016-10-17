@@ -27,6 +27,29 @@ public class SFKTishoshaIchiranPanelBatchParameter {
      */
     public ResponseData<SFKTishoshaIchiranPanelBatchParameterDiv> onLoad(SFKTishoshaIchiranPanelBatchParameterDiv div) {
         getHandler(div).onLoad();
+        div.getChutsutsuJoken().getCcdShisetsuJohoCommonChildDiv().initialize();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「事業者検索ボタン」を押下する処理です。
+     *
+     * @param div コントロールdiv
+     * @return スポンスデータ
+     */
+    public ResponseData<SFKTishoshaIchiranPanelBatchParameterDiv> onBeforeOpenDialog_btnOpenJigyoshaGuide(SFKTishoshaIchiranPanelBatchParameterDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * ダイアログで選択された事業者情報を当該項目の値を反映します。
+     *
+     * @param div コントロールdiv
+     * @return スポンスデータ
+     */
+    public ResponseData<SFKTishoshaIchiranPanelBatchParameterDiv> onOkClose_btnOpenJigyoshaGuide(SFKTishoshaIchiranPanelBatchParameterDiv div) {
+        div.getChutsutsuJoken().getCcdShisetsuJohoCommonChildDiv().setNyuryokuShisetsuKodo(div.getJigyoshaCode());
+        div.getChutsutsuJoken().getCcdShisetsuJohoCommonChildDiv().setShisetsuMeisho(div.getJigyoshaMeisho());
         return ResponseData.of(div).respond();
     }
 
