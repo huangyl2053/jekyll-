@@ -461,10 +461,10 @@ public class ShukihyoHakkouProcess extends BatchKeyBreakBase<YokaigoNinteiTsukib
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(new RString("【対象年度】 " + parameter.get対象年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()));
-        if (parameter.get基準年月日04() == null) {
-            出力条件.add(new RString("【基準日】 "));
-        } else {
+        if (parameter.get基準年月日04() != null && !parameter.get基準年月日04().isEmpty()) {
             出力条件.add(new RString("【基準日】 ").concat(parameter.get基準年月日04().wareki().toDateString().substring(INDEX_7)));
+        } else {
+            出力条件.add(new RString("【基準日】 "));
         }
         出力条件.add(new RString("【集計単位】 " + parameter.get集計単位()));
         出力条件.add(new RString("【年齢From】 " + parameter.get年齢From()));
