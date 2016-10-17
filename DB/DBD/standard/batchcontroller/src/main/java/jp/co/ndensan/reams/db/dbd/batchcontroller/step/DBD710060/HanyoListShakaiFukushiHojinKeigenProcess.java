@@ -129,7 +129,6 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyorisutoshakaifukushihojinkeigen."
             + "IHanyoRisutoShakaiFukushiHojinKeigenMapper.get汎用リスト");
     private static final RString SPACE = new RString(" ");
-    private static final RString POINT = new RString("・");
     private static final RString COLON = new RString(":");
     private static final RString COMMA = new RString(",");
     private static final RString カラ = new RString("～");
@@ -674,11 +673,13 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
                 > get項目桁数) {
             get項目名称 = get項目名称.substring(0, get項目桁数);
         } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.左詰め.getコード())) {
-            for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
+            int 桁数 = get項目桁数 - get項目名称.length();
+            for (int j = 0; j < 桁数; j++) {
                 get項目名称 = RString.HALF_SPACE.concat(get項目名称);
             }
         } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.右詰め.getコード())) {
-            for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
+            int 桁数 = get項目桁数 - get項目名称.length();
+            for (int j = 0; j < 桁数; j++) {
                 get項目名称 = get項目名称.concat(RString.HALF_SPACE);
             }
         }
