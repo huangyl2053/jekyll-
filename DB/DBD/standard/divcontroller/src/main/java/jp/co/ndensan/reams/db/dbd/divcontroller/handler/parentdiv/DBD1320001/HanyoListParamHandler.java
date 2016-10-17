@@ -179,7 +179,6 @@ public class HanyoListParamHandler {
     private static final RString 宛名抽出条件パラメータ名称1 = new RString("atenacyusyutsujyoken");
     private static final RString 宛名抽出条件パラメータ名称2 = new RString("宛名抽出条件");
     private static final RString 帳票IDパラメータ名称1 = new RString("cyohyoid");
-    private static final RString 帳票IDパラメータ名称2 = new RString("帳票ID");
     private static final RString 出力順パラメータ名称1 = new RString("syutsuryokujunparameter");
     private static final RString 出力順パラメータ名称2 = new RString("出力順");
     private static final RString 出力順パラメータ名称3 = new RString("syutsuryokujun");
@@ -830,10 +829,9 @@ public class HanyoListParamHandler {
         restoreCSV編集方法(batchParameterMap, 項目名付加パラメータ名称2, 連番付加パラメータ名称2, 日付スラッシュ付加パラメータ名称2);
         restore宛名抽出条件(batchParameterMap, 宛名抽出条件パラメータ名称2);
         Long 出力順 = batchParameterMap.getParameterValue(Long.class, 出力順パラメータ名称2);
-        RString 帳票ID = batchParameterMap.getParameterValue(RString.class, 帳票IDパラメータ名称2);
         RString 出力項目 = batchParameterMap.getParameterValue(RString.class, 出力項目パラメータ名称2);
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(帳票ID), Long.valueOf(出力順.toString()));
-        div.getCcdShutsuryokuKomoku().load(帳票ID, SubGyomuCode.DBD介護受給, 出力項目);
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_施設入退所帳票ID), Long.valueOf(出力順.toString()));
+        div.getCcdShutsuryokuKomoku().load(汎用リスト_施設入退所帳票ID, SubGyomuCode.DBD介護受給, 出力項目);
     }
 
     private void restore汎用リスト_利用者負担額減免BatchParameter(BatchParameterMap batchParameterMap) {
