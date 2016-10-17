@@ -435,17 +435,6 @@ public class JukyushaIdoRenrakuhyoDiv extends Panel implements IJukyushaIdoRenra
     }
 
     /**
-     * 出力用受給者訂正情報Entity取得のメソッドです。
-     *
-     * @return JukyushaIdoRenrakuhyoTorokuEntity
-     */
-    @JsonIgnore
-    @Override
-    public JukyushaIdoRenrakuhyoTorokuEntity get受給者訂正連絡票Entity(FlexibleDate 作成年月日, RString 氏名性別生年月日を印字する) {
-        return JukyushaIdoRenrakuhyoHandler.of(this).get受給者訂正連絡票Entity(作成年月日, 氏名性別生年月日を印字する);
-    }
-
-    /**
      * 出力用受給者異動連絡票Entity取得のメソッドです。
      *
      * @return JukyushaIdoRenrakuhyoTorokuEntity

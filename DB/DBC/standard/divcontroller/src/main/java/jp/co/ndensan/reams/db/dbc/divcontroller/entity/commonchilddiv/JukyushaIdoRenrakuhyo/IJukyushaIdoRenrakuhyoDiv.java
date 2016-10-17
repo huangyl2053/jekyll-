@@ -44,15 +44,6 @@ public interface IJukyushaIdoRenrakuhyoDiv extends ICommonChildDivBaseProperties
     public JukyushaIdoRenrakuhyo get受給者異動送付();
 
     /**
-     * 出力用受給者訂正情報Entityをを取得のメソッドです。
-     *
-     * @param 作成年月日 FlexibleDate
-     * @param 氏名性別生年月日を印字する RString
-     * @return JukyushaIdoRenrakuhyoTorokuEntity
-     */
-    public JukyushaIdoRenrakuhyoTorokuEntity get受給者訂正連絡票Entity(FlexibleDate 作成年月日, RString 氏名性別生年月日を印字する);
-
-    /**
      * 出力用受給者異動連絡票Entityをを取得のメソッドです。
      *
      * @return JukyushaIdoRenrakuhyoTorokuEntity
