@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenshotokujohoichiran;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBBPR51003_介護保険所得情報一覧表のSource
@@ -51,6 +52,7 @@ public class KaigoHokenShotokuJohoIchiranSource implements IReportSource {
     public RString kazeiKubunGemmenGo;
     @ReportItem(name = "listIchiranhyoUpper_1", length = 6, order = 17)
     public RString listIchiranhyoUpper_1;
+    @ReportPerson
     @ReportItem(name = "listIchiranhyoUpper_2", length = 15, order = 18)
     public RString listIchiranhyoUpper_2;
     @ReportItem(name = "listIchiranhyoUpper_3", length = 25, order = 19)

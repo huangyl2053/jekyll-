@@ -135,6 +135,7 @@ public class SaishinsaKetteiHokenshaInEditor implements ISaishinsaKetteiHokensha
         source.listLower_6 = doカンマ編集(帳票出力対象データ.get原審単位数());
         source.listLower_7 = doカンマ編集(帳票出力対象データ.get決定単位数());
         source.listLower_8 = doカンマ編集(帳票出力対象データ.get保険者負担額());
+        source.shikibetsuCode = new RString(帳票出力対象データ.get識別コード().toString());
         if (集計Flag) {
             source.seikyuTitle = 申立タイトル;
             source.seikyuKensuTitle = 申立件数タイトル;

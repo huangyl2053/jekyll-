@@ -76,6 +76,7 @@ public class SogojigyohiSaishinsaKetteiHokenshaInEditor implements ISogojigyohiS
         source.sogojigyohiChoseiKensu = item.get総合事業費_調整_件数();
         source.sogojigyohiChoseiTanisu = item.get総合事業費_調整_単位数();
         source.sogojigyohiChoseiFutangaku = item.get総合事業費_調整_負担額();
+        source.shikibetuCode = item.get識別コード();
         return source;
     }
 
