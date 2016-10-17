@@ -40,6 +40,8 @@ public class RiyoshaFutangakuGemmenNinteishaList {
     private static final RString 項目名付加 = new RString("komokuMeiFuka");
     private static final RString 連番付加 = new RString("renbanFuka");
     private static final RString 日付編集 = new RString("hizukeHenshu");
+    private static final int NO_0 = 0;
+    private static final int NO_4 = 4;
 
     /**
      * 利用者負担額減免認定者リストコンストラクタです。
@@ -70,7 +72,7 @@ public class RiyoshaFutangakuGemmenNinteishaList {
         FlexibleDate kijunymd = div.getTxtKijunYMD().getValue();
         batchparameter.set基準日(kijunymd);
 
-        FlexibleYear shotokunendo = div.getTxtShotokuNendo().getValue().getNendo();
+        FlexibleYear shotokunendo = new FlexibleYear(div.getTxtShotokuNendo().getValue().toString().substring(NO_0, NO_4));
         batchparameter.set所得年度(shotokunendo);
 
         if (div.getRadKyusochishaKubun().getSelectedKey().equals(両方)) {
