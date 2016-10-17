@@ -56,7 +56,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
     private static final int NUM_14 = 14;
     private static final int NUM_19 = 19;
     private static final int NUM_20 = 20;
-    private static final RString ホシ = new RString("*");
+    private static final RString ホシ = new RString("有");
     private static final RString 作成 = new RString("作成");
     private static final RString タイトル = new RString("給付額減額把握リスト");
     private static final RString 申請中 = new RString("申請中");
@@ -714,7 +714,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
         if (収納情報リスト.size() > index) {
             return 収納情報リスト.get(index);
         }
-        return new ShunoJohoEntity();
+        return null;
     }
 
     private void get合計1(KyufuGengakuHaakuIchiranReportSource source, int ページ) {

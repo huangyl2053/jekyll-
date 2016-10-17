@@ -88,32 +88,24 @@ public class TokubetsuPanel {
     }
 
     /**
-     * onBeforeOpenDialog_btnJigyosyano事件です。
+     * 「事業者検索ボタン」を押下する処理です。
      *
      * @param div TokubetsuPanelDiv
      * @return ResponseData
      */
-    public ResponseData<TokubetsuPanelDiv> onBeforeOpenDialog_btnJigyosyano(TokubetsuPanelDiv div) {
-
-        //TODO QA80375  DBZ．JigyoshaInputGuideを表示
-//        JigyoshaMode mode = new JigyoshaMode();
-//        mode.setJigyoshaShubetsu(ShisetsuType.住所地特例対象施設.getコード());
-//        div.setHiddenJigyoshaMode(DataPassingConverter.serialize(mode));
+    public ResponseData<TokubetsuPanelDiv> onBeforeOpenDialog_btnOpenJigyoshaGuide(TokubetsuPanelDiv div) {
         return createResponse(div);
     }
 
     /**
-     * onOkClose_btnSienJigyosyano事件です。
+     * ダイアログで選択された事業者情報を当該項目の値を反映します。
      *
      * @param div TokubetsuPanelDiv
      * @return ResponseData
      */
-    public ResponseData<TokubetsuPanelDiv> onOkClose_btnJigyosyano(TokubetsuPanelDiv div) {
-        //TODO QA80375  DBZ．JigyoshaInputGuideを表示
-//        JigyoshaMode mode = DataPassingConverter.deserialize(
-//                div.getHiddenJigyoshaMode(), JigyoshaMode.class);
-//        div.getTxtJigyoshaName().setValue(new RString(mode.getJigyoshaName().toString()));
-//        div.getTxtJigyoshaNo().setValue(new RString(mode.getJigyoshaNo().toString()));
+    public ResponseData<TokubetsuPanelDiv> onOkClose_btnOpenJigyoshaGuide(TokubetsuPanelDiv div) {
+        div.getCcdShisetsuJohoCommonChildDiv().setNyuryokuShisetsuKodo(div.getJigyoshaCode());
+        div.getCcdShisetsuJohoCommonChildDiv().setShisetsuMeisho(div.getJigyoshaMeisho());
         return createResponse(div);
     }
 

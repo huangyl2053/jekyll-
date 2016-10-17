@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TokubetsuPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,34 +40,14 @@ public class TokubetsuPanelDiv extends Panel {
     private TokubetsuTiikiKasannKeigennJiqsekiKannriRisutoDiv TokubetsuTiikiKasannKeigennJiqsekiKannriRisuto;
     @JsonProperty("ccdChohyoShutsuryokujun")
     private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
-    @JsonProperty("hiddenJigyoshaMode")
-    private RString hiddenJigyoshaMode;
-    @JsonProperty("HdnChikuShubetsuName")
-    private RString HdnChikuShubetsuName;
-    @JsonProperty("HdnIsMultiSelected")
-    private RString HdnIsMultiSelected;
-    @JsonProperty("HdnTitle")
-    private RString HdnTitle;
-    @JsonProperty("HdnInputCode")
-    private RString HdnInputCode;
-    @JsonProperty("HdnLasdecCode")
-    private RString HdnLasdecCode;
-    @JsonProperty("HdnRenban")
-    private RString HdnRenban;
-    @JsonProperty("HdnOutputCode")
-    private RString HdnOutputCode;
-    @JsonProperty("HdnName")
-    private RString HdnName;
-    @JsonProperty("HdnKanaName")
-    private RString HdnKanaName;
-    @JsonProperty("HdnYubinNo")
-    private RString HdnYubinNo;
-    @JsonProperty("HdnShogakkokuCode")
-    private RString HdnShogakkokuCode;
-    @JsonProperty("HdnChugakkokuCode")
-    private RString HdnChugakkokuCode;
-    @JsonProperty("HdnTohyokuCode")
-    private RString HdnTohyokuCode;
+    @JsonProperty("shikibetsuCode")
+    private RString shikibetsuCode;
+    @JsonProperty("jigyoshaCode")
+    private RString jigyoshaCode;
+    @JsonProperty("jigyoshaMeisho")
+    private RString jigyoshaMeisho;
+    @JsonProperty("jigyoshaCodeMeisho")
+    private RString jigyoshaCodeMeisho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -103,255 +83,75 @@ public class TokubetsuPanelDiv extends Panel {
     }
 
     /*
-     * gethiddenJigyoshaMode
-     * @return hiddenJigyoshaMode
+     * getshikibetsuCode
+     * @return shikibetsuCode
      */
-    @JsonProperty("hiddenJigyoshaMode")
-    public RString getHiddenJigyoshaMode() {
-        return hiddenJigyoshaMode;
+    @JsonProperty("shikibetsuCode")
+    public RString getShikibetsuCode() {
+        return shikibetsuCode;
     }
 
     /*
-     * sethiddenJigyoshaMode
-     * @param hiddenJigyoshaMode hiddenJigyoshaMode
+     * setshikibetsuCode
+     * @param shikibetsuCode shikibetsuCode
      */
-    @JsonProperty("hiddenJigyoshaMode")
-    public void setHiddenJigyoshaMode(RString hiddenJigyoshaMode) {
-        this.hiddenJigyoshaMode = hiddenJigyoshaMode;
+    @JsonProperty("shikibetsuCode")
+    public void setShikibetsuCode(RString shikibetsuCode) {
+        this.shikibetsuCode = shikibetsuCode;
     }
 
     /*
-     * getHdnChikuShubetsuName
-     * @return HdnChikuShubetsuName
+     * getjigyoshaCode
+     * @return jigyoshaCode
      */
-    @JsonProperty("HdnChikuShubetsuName")
-    public RString getHdnChikuShubetsuName() {
-        return HdnChikuShubetsuName;
+    @JsonProperty("jigyoshaCode")
+    public RString getJigyoshaCode() {
+        return jigyoshaCode;
     }
 
     /*
-     * setHdnChikuShubetsuName
-     * @param HdnChikuShubetsuName HdnChikuShubetsuName
+     * setjigyoshaCode
+     * @param jigyoshaCode jigyoshaCode
      */
-    @JsonProperty("HdnChikuShubetsuName")
-    public void setHdnChikuShubetsuName(RString HdnChikuShubetsuName) {
-        this.HdnChikuShubetsuName = HdnChikuShubetsuName;
+    @JsonProperty("jigyoshaCode")
+    public void setJigyoshaCode(RString jigyoshaCode) {
+        this.jigyoshaCode = jigyoshaCode;
     }
 
     /*
-     * getHdnIsMultiSelected
-     * @return HdnIsMultiSelected
+     * getjigyoshaMeisho
+     * @return jigyoshaMeisho
      */
-    @JsonProperty("HdnIsMultiSelected")
-    public RString getHdnIsMultiSelected() {
-        return HdnIsMultiSelected;
+    @JsonProperty("jigyoshaMeisho")
+    public RString getJigyoshaMeisho() {
+        return jigyoshaMeisho;
     }
 
     /*
-     * setHdnIsMultiSelected
-     * @param HdnIsMultiSelected HdnIsMultiSelected
+     * setjigyoshaMeisho
+     * @param jigyoshaMeisho jigyoshaMeisho
      */
-    @JsonProperty("HdnIsMultiSelected")
-    public void setHdnIsMultiSelected(RString HdnIsMultiSelected) {
-        this.HdnIsMultiSelected = HdnIsMultiSelected;
+    @JsonProperty("jigyoshaMeisho")
+    public void setJigyoshaMeisho(RString jigyoshaMeisho) {
+        this.jigyoshaMeisho = jigyoshaMeisho;
     }
 
     /*
-     * getHdnTitle
-     * @return HdnTitle
+     * getjigyoshaCodeMeisho
+     * @return jigyoshaCodeMeisho
      */
-    @JsonProperty("HdnTitle")
-    public RString getHdnTitle() {
-        return HdnTitle;
+    @JsonProperty("jigyoshaCodeMeisho")
+    public RString getJigyoshaCodeMeisho() {
+        return jigyoshaCodeMeisho;
     }
 
     /*
-     * setHdnTitle
-     * @param HdnTitle HdnTitle
+     * setjigyoshaCodeMeisho
+     * @param jigyoshaCodeMeisho jigyoshaCodeMeisho
      */
-    @JsonProperty("HdnTitle")
-    public void setHdnTitle(RString HdnTitle) {
-        this.HdnTitle = HdnTitle;
-    }
-
-    /*
-     * getHdnInputCode
-     * @return HdnInputCode
-     */
-    @JsonProperty("HdnInputCode")
-    public RString getHdnInputCode() {
-        return HdnInputCode;
-    }
-
-    /*
-     * setHdnInputCode
-     * @param HdnInputCode HdnInputCode
-     */
-    @JsonProperty("HdnInputCode")
-    public void setHdnInputCode(RString HdnInputCode) {
-        this.HdnInputCode = HdnInputCode;
-    }
-
-    /*
-     * getHdnLasdecCode
-     * @return HdnLasdecCode
-     */
-    @JsonProperty("HdnLasdecCode")
-    public RString getHdnLasdecCode() {
-        return HdnLasdecCode;
-    }
-
-    /*
-     * setHdnLasdecCode
-     * @param HdnLasdecCode HdnLasdecCode
-     */
-    @JsonProperty("HdnLasdecCode")
-    public void setHdnLasdecCode(RString HdnLasdecCode) {
-        this.HdnLasdecCode = HdnLasdecCode;
-    }
-
-    /*
-     * getHdnRenban
-     * @return HdnRenban
-     */
-    @JsonProperty("HdnRenban")
-    public RString getHdnRenban() {
-        return HdnRenban;
-    }
-
-    /*
-     * setHdnRenban
-     * @param HdnRenban HdnRenban
-     */
-    @JsonProperty("HdnRenban")
-    public void setHdnRenban(RString HdnRenban) {
-        this.HdnRenban = HdnRenban;
-    }
-
-    /*
-     * getHdnOutputCode
-     * @return HdnOutputCode
-     */
-    @JsonProperty("HdnOutputCode")
-    public RString getHdnOutputCode() {
-        return HdnOutputCode;
-    }
-
-    /*
-     * setHdnOutputCode
-     * @param HdnOutputCode HdnOutputCode
-     */
-    @JsonProperty("HdnOutputCode")
-    public void setHdnOutputCode(RString HdnOutputCode) {
-        this.HdnOutputCode = HdnOutputCode;
-    }
-
-    /*
-     * getHdnName
-     * @return HdnName
-     */
-    @JsonProperty("HdnName")
-    public RString getHdnName() {
-        return HdnName;
-    }
-
-    /*
-     * setHdnName
-     * @param HdnName HdnName
-     */
-    @JsonProperty("HdnName")
-    public void setHdnName(RString HdnName) {
-        this.HdnName = HdnName;
-    }
-
-    /*
-     * getHdnKanaName
-     * @return HdnKanaName
-     */
-    @JsonProperty("HdnKanaName")
-    public RString getHdnKanaName() {
-        return HdnKanaName;
-    }
-
-    /*
-     * setHdnKanaName
-     * @param HdnKanaName HdnKanaName
-     */
-    @JsonProperty("HdnKanaName")
-    public void setHdnKanaName(RString HdnKanaName) {
-        this.HdnKanaName = HdnKanaName;
-    }
-
-    /*
-     * getHdnYubinNo
-     * @return HdnYubinNo
-     */
-    @JsonProperty("HdnYubinNo")
-    public RString getHdnYubinNo() {
-        return HdnYubinNo;
-    }
-
-    /*
-     * setHdnYubinNo
-     * @param HdnYubinNo HdnYubinNo
-     */
-    @JsonProperty("HdnYubinNo")
-    public void setHdnYubinNo(RString HdnYubinNo) {
-        this.HdnYubinNo = HdnYubinNo;
-    }
-
-    /*
-     * getHdnShogakkokuCode
-     * @return HdnShogakkokuCode
-     */
-    @JsonProperty("HdnShogakkokuCode")
-    public RString getHdnShogakkokuCode() {
-        return HdnShogakkokuCode;
-    }
-
-    /*
-     * setHdnShogakkokuCode
-     * @param HdnShogakkokuCode HdnShogakkokuCode
-     */
-    @JsonProperty("HdnShogakkokuCode")
-    public void setHdnShogakkokuCode(RString HdnShogakkokuCode) {
-        this.HdnShogakkokuCode = HdnShogakkokuCode;
-    }
-
-    /*
-     * getHdnChugakkokuCode
-     * @return HdnChugakkokuCode
-     */
-    @JsonProperty("HdnChugakkokuCode")
-    public RString getHdnChugakkokuCode() {
-        return HdnChugakkokuCode;
-    }
-
-    /*
-     * setHdnChugakkokuCode
-     * @param HdnChugakkokuCode HdnChugakkokuCode
-     */
-    @JsonProperty("HdnChugakkokuCode")
-    public void setHdnChugakkokuCode(RString HdnChugakkokuCode) {
-        this.HdnChugakkokuCode = HdnChugakkokuCode;
-    }
-
-    /*
-     * getHdnTohyokuCode
-     * @return HdnTohyokuCode
-     */
-    @JsonProperty("HdnTohyokuCode")
-    public RString getHdnTohyokuCode() {
-        return HdnTohyokuCode;
-    }
-
-    /*
-     * setHdnTohyokuCode
-     * @param HdnTohyokuCode HdnTohyokuCode
-     */
-    @JsonProperty("HdnTohyokuCode")
-    public void setHdnTohyokuCode(RString HdnTohyokuCode) {
-        this.HdnTohyokuCode = HdnTohyokuCode;
+    @JsonProperty("jigyoshaCodeMeisho")
+    public void setJigyoshaCodeMeisho(RString jigyoshaCodeMeisho) {
+        this.jigyoshaCodeMeisho = jigyoshaCodeMeisho;
     }
 
     /*
@@ -385,11 +185,6 @@ public class TokubetsuPanelDiv extends Panel {
     @JsonIgnore
     public void  setTxtRangeYM(TextBoxDateRange txtRangeYM) {
         this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().setTxtRangeYM(txtRangeYM);
-    }
-
-    @JsonIgnore
-    public IShisetsuJohoCommonChildDiv getCcdShisetsuJohoCommonChildDiv() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getCcdShisetsuJohoCommonChildDiv();
     }
 
     @JsonIgnore
@@ -478,8 +273,8 @@ public class TokubetsuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public IChiku2InputDiv getCcdChikuEnd() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getCcdChikuEnd();
+    public IGyoseikuInputDiv getCcdGyouseiStart() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getCcdGyouseiStart();
     }
 
     @JsonIgnore
@@ -498,8 +293,8 @@ public class TokubetsuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public IGyoseikuInputDiv getCcdGyouseiStart() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getCcdGyouseiStart();
+    public IChiku2InputDiv getCcdChikuEnd() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getCcdChikuEnd();
     }
 
     @JsonIgnore
@@ -535,6 +330,11 @@ public class TokubetsuPanelDiv extends Panel {
     @JsonIgnore
     public IHokenshaListDiv getCcdHokenshaList() {
         return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getShichosonPanel().getCcdHokenshaList();
+    }
+
+    @JsonIgnore
+    public IShisetsuJohoCommonChildDiv getCcdShisetsuJohoCommonChildDiv() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getCcdShisetsuJohoCommonChildDiv();
     }
 
     // </editor-fold>

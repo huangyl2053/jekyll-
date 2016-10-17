@@ -71,6 +71,7 @@ public class HikazeiNennkinTaishouSyaJohoCsvCreateProcess extends BatchProcessBa
     @Override
     protected void afterExecute() {
         csvWriter.close();
+        manager.spool(spoolFilePath);
     }
 
     private void setEucCsvEntity(HikazeiNennkinTaishouSyaJohoListCsvOutEntity eucCsvEntity,

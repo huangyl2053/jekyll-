@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNoyoshiki2;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hokenkyufushokankettei.JigyoHokokuRenkeiHokenkyufuShokanKetteiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.JigyoHokokuShiryouRelateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki201.JigyohokokuCompYoshiki201Entity;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokugeppoyoshiki2220161.JigyohokokuGeppoYoshiki2220161ReportSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -91,7 +92,14 @@ public class JigyoHokokuShiryouReportDBU300022Process extends BatchProcessBase<J
             business.set保険者コード(processParameter.get過去集計分市町村コードリスト().get(0));
         }
         business.set保険者名(AssociationFinderFactory.createInstance().getAssociation().get市町村名());
-        business.set事業報告資料(null);
+        // TODO 内部QA：1874 Redmine# 「集計区分」は事業報告資料に存在しません。
+        List<JigyohokokuCompYoshiki201Entity> list = new ArrayList<>();
+        JigyohokokuCompYoshiki201Entity 帳票entity = new JigyohokokuCompYoshiki201Entity();
+        帳票entity.set集計番号(entity.getSyukeiNo());
+        帳票entity.set縦番号(entity.getHyoNo());
+        帳票entity.set横番号(entity.getYokoNo());
+        list.add(帳票entity);
+        business.set事業報告資料(list);
         business.set集計年月(processParameter.get集計年月());
         if (ShukeiNoyoshiki2._1_介護給付_予防給付2二割負担被保険者分_再掲_単位数.getコード().equals(entity.getSyukeiNo())) {
             JigyohokokuGeppoYoshiki2220161Report 様式_04report = new JigyohokokuGeppoYoshiki2220161Report(business);
