@@ -144,8 +144,6 @@ public class HokenkyufuShokanKetteiManager {
     private static final int 保険給付率_89 = 89;
     private static final int 保険給付率_80 = 80;
     private static final int 保険給付率_79 = 79;
-    private static final int 月 = 8;
-    private static final int 前年 = 2;
     private static final RString エラーフラグ_0 = new RString("0");
     private static final RString エラーフラグ_1 = new RString("1");
     private static final RString 負担割合区分_10 = new RString("10");
@@ -279,12 +277,6 @@ public class HokenkyufuShokanKetteiManager {
             tempEntity.setShikakuKubun(new RString("1号"));
         } else {
             tempEntity.setShikakuKubun(new RString("2号"));
-        }
-        FlexibleDate サービス提供年月 = new FlexibleDate(tempEntity.getServiceTeikyoYM());
-        if (サービス提供年月.getMonthValue() < 月) {
-            tempEntity.setFutanWariaiNendo(new RString(サービス提供年月.getYearValue() - 前年));
-        } else {
-            tempEntity.setFutanWariaiNendo(new RString(サービス提供年月.getYearValue()));
         }
         if (tempEntity.getHokenKyufuritsu() != null) {
             set負担割合区分_再編集と作成区分エラーフラグ(tempEntity);

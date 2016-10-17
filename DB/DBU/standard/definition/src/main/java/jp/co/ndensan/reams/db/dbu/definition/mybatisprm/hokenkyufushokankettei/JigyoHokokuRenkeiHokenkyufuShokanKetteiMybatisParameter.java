@@ -384,7 +384,7 @@ public final class JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter imple
         return new JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter(
                 RString.EMPTY,
                 RString.EMPTY,
-                new RString(new FlexibleYearMonth(集計年月).getMonthValue()),
+                集計年月.substring(INDEX4),
                 市町村コード,
                 旧町村コード,
                 構成市町村区分,
@@ -401,7 +401,7 @@ public final class JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter imple
                 RString.EMPTY,
                 RString.EMPTY,
                 null,
-                new RString(new FlexibleYearMonth(報告年月).getMonthValue()),
+                報告年月.substring(INDEX4),
                 表番号,
                 集計番号,
                 縦軸index,

@@ -117,12 +117,12 @@
         ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4003YokaigoNinteiInterface"."shinseishoKanriNo"
         AND "DbT4003YokaigoNinteiInterface"."keshikomiFlag" = '0'
 
-        LEFT OUTER JOIN rgdb."DbT4120ShinseitodokedeJoho" T4120
-        ON T4120."shinseishoKanriNo" = "DbV4001JukyushaDaicho"."shinseishoKanriNo"
-        LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha" T7060
-        ON T7060."jigyoshaNo" = T4120."shinseiTodokedeDaikoJigyoshaNo"
-        AND T7060."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付}
-        AND T7060."yukoShuryoYMD" >= #{システム日付}
+        LEFT OUTER JOIN rgdb."DbT4120ShinseitodokedeJoho" AS "DbT4120ShinseitodokedeJoho"
+        ON "DbT4120ShinseitodokedeJoho"."shinseishoKanriNo" = "DbV4001JukyushaDaicho"."shinseishoKanriNo"
+        LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha" AS "DbT7060KaigoJigyosha"
+        ON "DbT7060KaigoJigyosha"."jigyoshaNo" = "DbT4120ShinseitodokedeJoho"."shinseiTodokedeDaikoJigyoshaNo"
+        AND "DbT7060KaigoJigyosha"."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付}
+        AND "DbT7060KaigoJigyosha"."yukoShuryoYMD" >= #{システム日付}
         INNER JOIN
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
         AS PSM
@@ -185,12 +185,12 @@
         AND "DbT4101NinteiShinseiJoho"."ninteiChosaItakusakiCode" = "DbT4913ChosainJoho"."ninteiChosaItakusakiCode"
         AND "DbT4101NinteiShinseiJoho"."ninteiChosainCode" = "DbT4913ChosainJoho"."ninteiChosainCode"
 
-        LEFT OUTER JOIN rgdb."DbT4120ShinseitodokedeJoho" T4120
-        ON T4120."shinseishoKanriNo" = V4001."shinseishoKanriNo"
-        LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha" T7060
-        ON T7060."jigyoshaNo" = T4120."shinseiTodokedeDaikoJigyoshaNo"
-        AND T7060."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付}
-        AND T7060."yukoShuryoYMD" >= #{システム日付}
+        LEFT OUTER JOIN rgdb."DbT4120ShinseitodokedeJoho" AS "DbT4120ShinseitodokedeJoho"
+        ON "DbT4120ShinseitodokedeJoho"."shinseishoKanriNo" = "DbV4001JukyushaDaicho"."shinseishoKanriNo"
+        LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha" "DbT7060KaigoJigyosha"
+        ON "DbT7060KaigoJigyosha"."jigyoshaNo" = "DbT4120ShinseitodokedeJoho"."shinseiTodokedeDaikoJigyoshaNo"
+        AND "DbT7060KaigoJigyosha"."yukoKaishiYMD" <![CDATA[<=]]> #{システム日付}
+        AND "DbT7060KaigoJigyosha"."yukoShuryoYMD" >= #{システム日付}
         INNER JOIN
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
         AS PSM

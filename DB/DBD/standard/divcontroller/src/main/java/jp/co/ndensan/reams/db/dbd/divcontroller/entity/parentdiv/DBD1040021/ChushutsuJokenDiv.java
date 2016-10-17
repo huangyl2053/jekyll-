@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChushutsuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,16 +42,16 @@ public class ChushutsuJokenDiv extends Panel {
     private Space ShichosonSpace1;
     @JsonProperty("ccdJyuusyoStart")
     private ChoikiInputDiv ccdJyuusyoStart;
-    @JsonProperty("ccdChikuEnd")
-    private Chiku2InputDiv ccdChikuEnd;
+    @JsonProperty("ccdGyouseiStart")
+    private GyoseikuInputDiv ccdGyouseiStart;
     @JsonProperty("ccdJyuusyoEnd")
     private ChoikiInputDiv ccdJyuusyoEnd;
     @JsonProperty("ccdChikuStart")
     private Chiku2InputDiv ccdChikuStart;
     @JsonProperty("ccdGyouseiEnd")
     private GyoseikuInputDiv ccdGyouseiEnd;
-    @JsonProperty("ccdGyouseiStart")
-    private GyoseikuInputDiv ccdGyouseiStart;
+    @JsonProperty("ccdChikuEnd")
+    private Chiku2InputDiv ccdChikuEnd;
     @JsonProperty("InputMode")
     private RString InputMode;
     @JsonProperty("SearchLevel")
@@ -181,12 +181,12 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     /*
-     * getccdChikuEnd
-     * @return ccdChikuEnd
+     * getccdGyouseiStart
+     * @return ccdGyouseiStart
      */
-    @JsonProperty("ccdChikuEnd")
-    public IChiku2InputDiv getCcdChikuEnd() {
-        return ccdChikuEnd;
+    @JsonProperty("ccdGyouseiStart")
+    public IGyoseikuInputDiv getCcdGyouseiStart() {
+        return ccdGyouseiStart;
     }
 
     /*
@@ -217,12 +217,12 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     /*
-     * getccdGyouseiStart
-     * @return ccdGyouseiStart
+     * getccdChikuEnd
+     * @return ccdChikuEnd
      */
-    @JsonProperty("ccdGyouseiStart")
-    public IGyoseikuInputDiv getCcdGyouseiStart() {
-        return ccdGyouseiStart;
+    @JsonProperty("ccdChikuEnd")
+    public IChiku2InputDiv getCcdChikuEnd() {
+        return ccdChikuEnd;
     }
 
     /*

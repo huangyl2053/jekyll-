@@ -98,6 +98,7 @@ public class MakeNinteiShinseiJohoFileManager {
         csvEntity.setTorisageKubunCode(entity.getTorisageKubunCode());
         csvEntity.setYuubinNo(entity.getYuubinNo());
         csvEntity.setZaihoji(entity.getZaihoji());
+        csvEntity.setZenkaiKekkaKoushukuShitsukansetsu(entity.getZenkaiKekkaKoushukuShitsukansetsu());
         setCsvDensanEntity(csvEntity, entity);
         return csvEntity;
     }

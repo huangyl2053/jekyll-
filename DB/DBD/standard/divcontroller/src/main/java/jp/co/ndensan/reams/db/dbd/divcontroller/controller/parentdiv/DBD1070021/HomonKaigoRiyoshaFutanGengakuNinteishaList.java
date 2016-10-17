@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1070021;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD202010.DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaListParameter;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1070021.DBD1070021StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1070021.HomonKaigoRiyoshaFutanGengakuNinteishaListDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1070021.HomonKaigoRiyoshaFutanGengakuNinteishaListHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1070021.HomonKaigoRiyoshaFutanGengakuNinteishaListValidationHandler;
@@ -84,7 +83,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaList {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        return ResponseData.of(div).setState(DBD1070021StateName.バッチ実行);
+        return ResponseData.of(div).respond();
     }
 
     /**

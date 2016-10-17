@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TokubetsuTiikiKasannKeigennJiqsekiKannriRisutoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,10 +39,10 @@ public class TokubetsuTiikiKasannKeigennJiqsekiKannriRisutoDiv extends Panel {
     private RadioButton radTaishoYM;
     @JsonProperty("txtRangeYM")
     private TextBoxDateRange txtRangeYM;
-    @JsonProperty("ccdShisetsuJohoCommonChildDiv")
-    private ShisetsuJohoCommonChildDivDiv ccdShisetsuJohoCommonChildDiv;
     @JsonProperty("ChushutsuJoken4")
     private ChushutsuJoken4Div ChushutsuJoken4;
+    @JsonProperty("ccdShisetsuJohoCommonChildDiv")
+    private ShisetsuJohoCommonChildDivDiv ccdShisetsuJohoCommonChildDiv;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -105,15 +105,6 @@ public class TokubetsuTiikiKasannKeigennJiqsekiKannriRisutoDiv extends Panel {
     }
 
     /*
-     * getccdShisetsuJohoCommonChildDiv
-     * @return ccdShisetsuJohoCommonChildDiv
-     */
-    @JsonProperty("ccdShisetsuJohoCommonChildDiv")
-    public IShisetsuJohoCommonChildDiv getCcdShisetsuJohoCommonChildDiv() {
-        return ccdShisetsuJohoCommonChildDiv;
-    }
-
-    /*
      * getChushutsuJoken4
      * @return ChushutsuJoken4
      */
@@ -129,6 +120,15 @@ public class TokubetsuTiikiKasannKeigennJiqsekiKannriRisutoDiv extends Panel {
     @JsonProperty("ChushutsuJoken4")
     public void setChushutsuJoken4(ChushutsuJoken4Div ChushutsuJoken4) {
         this.ChushutsuJoken4 = ChushutsuJoken4;
+    }
+
+    /*
+     * getccdShisetsuJohoCommonChildDiv
+     * @return ccdShisetsuJohoCommonChildDiv
+     */
+    @JsonProperty("ccdShisetsuJohoCommonChildDiv")
+    public IShisetsuJohoCommonChildDiv getCcdShisetsuJohoCommonChildDiv() {
+        return ccdShisetsuJohoCommonChildDiv;
     }
 
     /*
@@ -210,8 +210,8 @@ public class TokubetsuTiikiKasannKeigennJiqsekiKannriRisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public IChiku2InputDiv getCcdChikuEnd() {
-        return this.getChushutsuJoken4().getChushutsuJoken().getCcdChikuEnd();
+    public IGyoseikuInputDiv getCcdGyouseiStart() {
+        return this.getChushutsuJoken4().getChushutsuJoken().getCcdGyouseiStart();
     }
 
     @JsonIgnore
@@ -230,8 +230,8 @@ public class TokubetsuTiikiKasannKeigennJiqsekiKannriRisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public IGyoseikuInputDiv getCcdGyouseiStart() {
-        return this.getChushutsuJoken4().getChushutsuJoken().getCcdGyouseiStart();
+    public IChiku2InputDiv getCcdChikuEnd() {
+        return this.getChushutsuJoken4().getChushutsuJoken().getCcdChikuEnd();
     }
 
     @JsonIgnore

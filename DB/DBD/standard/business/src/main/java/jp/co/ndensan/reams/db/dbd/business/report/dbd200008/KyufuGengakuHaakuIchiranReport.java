@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd200008;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.core.common.TokuchoFuchoKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran.KyufuGengakuHaakuIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran.ShunoJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200008.KyufuGengakuHaakuIchiranReportSource;
@@ -31,7 +30,6 @@ public final class KyufuGengakuHaakuIchiranReport extends Report<KyufuGengakuHaa
     private final RString 保険者名称;
     private final KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity;
     private final IOutputOrder iOutputOrder;
-    private final RString 収納情報なし = new RString("収　納　情　報　な　し");
 
     private static final int INT_10 = 10;
     private static final int 行数14 = 14;
@@ -77,8 +75,7 @@ public final class KyufuGengakuHaakuIchiranReport extends Report<KyufuGengakuHaa
 
     private void 収納情報の出力設定() {
         List<ShunoJohoEntity> 収納情報リスト = 給付額減額把握リストEntity.get収納情報リスト();
-        List<ShunoJohoEntity> 特徴_収納情報リスト = new ArrayList<>();
-        List<ShunoJohoEntity> 普徴_収納情報リスト = new ArrayList<>();
+        List<ShunoJohoEntity> 出力_収納情報リスト = new ArrayList<>();
         List<FlexibleYear> 賦課年度List = new ArrayList<>();
         for (ShunoJohoEntity 収納情報 : 収納情報リスト) {
             if (!賦課年度List.contains(収納情報.get賦課年度())) {
@@ -87,20 +84,9 @@ public final class KyufuGengakuHaakuIchiranReport extends Report<KyufuGengakuHaa
         }
         for (FlexibleYear 賦課年度 : 賦課年度List) {
             List<ShunoJohoEntity> 賦課年度_収納情報リスト = get収納情報リストBy賦課年度(収納情報リスト, 賦課年度);
-            for (ShunoJohoEntity 賦課年度_収納情報 : 賦課年度_収納情報リスト) {
-                if (!収納情報なし.equals(賦課年度_収納情報.get収納情報なし())) {
-                    if (TokuchoFuchoKubun.普通徴収.getコード().equals(賦課年度_収納情報.get特徴普徴区分())) {
-                        普徴_収納情報リスト.add(賦課年度_収納情報);
-                    } else {
-                        特徴_収納情報リスト.add(賦課年度_収納情報);
-                    }
-                }
-            }
+            出力_収納情報リスト.addAll(賦課年度_収納情報リスト);
         }
-        List<ShunoJohoEntity> new収納情報リスト = new ArrayList<>();
-        new収納情報リスト.addAll(特徴_収納情報リスト);
-        new収納情報リスト.addAll(普徴_収納情報リスト);
-        給付額減額把握リストEntity.set収納情報リスト(new収納情報リスト);
+        給付額減額把握リストEntity.set収納情報リスト(出力_収納情報リスト);
     }
 
     private List<ShunoJohoEntity> get収納情報リストBy賦課年度(List<ShunoJohoEntity> 収納情報リスト, FlexibleYear 賦課年度) {

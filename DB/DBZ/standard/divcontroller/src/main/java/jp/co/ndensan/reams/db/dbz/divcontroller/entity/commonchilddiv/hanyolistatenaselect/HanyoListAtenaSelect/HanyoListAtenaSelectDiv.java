@@ -539,6 +539,16 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
         return getHandler().get宛名抽出条件子Div();
     }
 
+    @Override
+    public void onChange_SelectKijun() {
+        getHandler().onChange_SelectKijun();
+    }
+
+    @Override
+    public void onChange_SelectChiku() {
+        getHandler().onChange_SelectChiku();
+    }
+
     private HanyoListAtenaSelectHandler getHandler() {
         return new HanyoListAtenaSelectHandler(this);
     }

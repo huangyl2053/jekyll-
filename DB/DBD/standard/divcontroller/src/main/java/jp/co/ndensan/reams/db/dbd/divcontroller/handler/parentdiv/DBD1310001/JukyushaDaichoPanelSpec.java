@@ -44,18 +44,6 @@ public enum JukyushaDaichoPanelSpec implements IPredicate<JukyushaDaichoDiv> {
                 }
             },
     /**
-     * 基準日RbGr・範囲Rbが選択されている場合、範囲From、範囲Toが共に入力されている場合、From-Toの大小関係をチェックする。 範囲From > 範囲Toの場合、エラーとする。
-     */
-    実行するボタンクリック3 {
-                @Override
-                public boolean apply(JukyushaDaichoDiv div) {
-                    if (SpecHelper.is範囲Rbが選択されている(div) && SpecHelper.is範囲From_範囲Toが共に入力(div)) {
-                        return div.getTxtNinteiYmdHani().getFromValue().isBeforeOrEquals(div.getTxtNinteiYmdHani().getToValue());
-                    }
-                    return true;
-                }
-            },
-    /**
      * 宛名抽出項目区分RDB・年齢が選択されている場合、年齢From、年齢Toが共に入力されていなければエラーとする。
      */
     実行するボタンクリック4 {
@@ -103,18 +91,6 @@ public enum JukyushaDaichoPanelSpec implements IPredicate<JukyushaDaichoDiv> {
                     }
                     return true;
                 }
-            },
-    /**
-     * 宛名抽出項目区分RDB・生年月日が選択されている場合、生年月日From、生年月日Toが共に入力されている場合、From-Toの大小関係をチェックする。 生年月日From > 生年月日Toの場合、エラーとする。
-     */
-    実行するボタンクリック8 {
-                @Override
-                public boolean apply(JukyushaDaichoDiv div) {
-                    if (SpecHelper.is生年月日が選択されている(div) && SpecHelper.is生年月日From_生年月日Toが共に入力(div)) {
-                        return div.getCcdAtenaJoken().get生年月日開始().isBeforeOrEquals(div.getCcdAtenaJoken().get生年月日終了());
-                    }
-                    return true;
-                }
             };
 
     private static class SpecHelper {
@@ -125,10 +101,6 @@ public enum JukyushaDaichoPanelSpec implements IPredicate<JukyushaDaichoDiv> {
 
         static boolean is範囲Rbが選択されている(JukyushaDaichoDiv div) {
             return div.getRadChushutsuTaisho().getSelectedKey().equals(ChushutsuHohoKubun.範囲.getコード());
-        }
-
-        static boolean is範囲From_範囲Toが共に入力(JukyushaDaichoDiv div) {
-            return div.getTxtNinteiYmdHani().getFromValue() != null && div.getTxtNinteiYmdHani().getToValue() != null;
         }
 
         static boolean is年齢が選択されている(JukyushaDaichoDiv div) {
@@ -147,8 +119,5 @@ public enum JukyushaDaichoPanelSpec implements IPredicate<JukyushaDaichoDiv> {
             return div.getCcdAtenaJoken().get年齢層抽出方法().equals(NenreiSoChushutsuHoho.生年月日範囲);
         }
 
-        static boolean is生年月日From_生年月日Toが共に入力(JukyushaDaichoDiv div) {
-            return div.getCcdAtenaJoken().get生年月日開始() != null && div.getCcdAtenaJoken().get生年月日終了() != null;
-        }
     }
 }

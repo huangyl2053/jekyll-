@@ -820,8 +820,8 @@ public class HanyoListParamHandler {
         } else {
             div.getRadChushutsuJokenB1().setSelectedKey(範囲KEY);
         }
-        RString 喪失区分 = batchParameterMap.getParameterValue(RString.class, 喪失区分パラメータ名称2);
-        div.getDdlSoshitsuKubun().setSelectedKey(喪失区分);
+        SoshitsuKubun 喪失区分 = batchParameterMap.getParameterValue(SoshitsuKubun.class, 喪失区分パラメータ名称2);
+        div.getDdlSoshitsuKubun().setSelectedKey(喪失区分.getコード());
         restore抽出項目区分(batchParameterMap, 抽出項目区分パラメータ名称2);
         restore基準日(batchParameterMap, 基準日パラメータ名称2);
         restore日付範囲From(batchParameterMap, 日付範囲開始パラメータ名称2);
@@ -1226,12 +1226,15 @@ public class HanyoListParamHandler {
     private void restore宛名抽出条件(BatchParameterMap map, RString fieldName) {
         AtenaSelectBatchParameter 宛名抽出条件 = map.getParameterValue(AtenaSelectBatchParameter.class, fieldName);
         get宛名抽出条件div().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().getコード());
+        get宛名抽出条件div().onChange_SelectKijun();
         get宛名抽出条件div().set年齢開始(宛名抽出条件.getNenreiRange().getFrom());
         get宛名抽出条件div().set年齢終了(宛名抽出条件.getNenreiRange().getTo());
         get宛名抽出条件div().set年齢基準日(宛名抽出条件.getNenreiKijunbi());
         get宛名抽出条件div().set生年月日開始(宛名抽出条件.getSeinengappiRange().getFrom());
         get宛名抽出条件div().set生年月日終了(宛名抽出条件.getSeinengappiRange().getTo());
         get宛名抽出条件div().set地区(宛名抽出条件.getChiku_Kubun().getコード());
+        get宛名抽出条件div().set保険者(宛名抽出条件.getShichoson_Code());
+        get宛名抽出条件div().onChange_SelectChiku();
         get宛名抽出条件div().set住所開始(new ChoikiCode(宛名抽出条件.getJusho_From()));
         get宛名抽出条件div().set住所終了(new ChoikiCode(宛名抽出条件.getJusho_To()));
         get宛名抽出条件div().set行政区開始(new GyoseikuCode(宛名抽出条件.getGyoseiku_From()));
@@ -1242,7 +1245,6 @@ public class HanyoListParamHandler {
         get宛名抽出条件div().set地区２終了(new ChikuCode(宛名抽出条件.getChiku2_To()));
         get宛名抽出条件div().set地区３開始(new ChikuCode(宛名抽出条件.getChiku3_From()));
         get宛名抽出条件div().set地区３終了(new ChikuCode(宛名抽出条件.getChiku2_To()));
-        get宛名抽出条件div().set保険者(宛名抽出条件.getShichoson_Code());
     }
 
     private void restore出力順_帳票ID_出力項目(BatchParameterMap map, RString 出力順fieldName, RString 帳票IDfieldName, RString 出力項目fieldName) {

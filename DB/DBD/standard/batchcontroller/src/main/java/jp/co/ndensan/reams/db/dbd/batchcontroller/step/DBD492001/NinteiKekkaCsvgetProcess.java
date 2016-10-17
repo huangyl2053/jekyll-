@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.Errord
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.NichijiShinchokuIchijiTeburuEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.dbd492001.NinteiKekkaRenkeiDataTorikomiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
@@ -67,7 +68,7 @@ public class NinteiKekkaCsvgetProcess extends BatchProcessBase<List<RString>> {
             throw new ApplicationException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace(csvファイル名.toString()).evaluate());
         }
         return new BatchCsvListReader(new CsvListReader.InstanceBuilder(filePath)
-                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).hasHeader(false).setNewLine(NewLine.CRLF).build());
+                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(getEncode()).hasHeader(false).setNewLine(NewLine.CRLF).build());
     }
 
     @Override
@@ -95,6 +96,15 @@ public class NinteiKekkaCsvgetProcess extends BatchProcessBase<List<RString>> {
 
     @Override
     protected void afterExecute() {
+    }
+
+    private Encode getEncode() {
+        RString 連携文字コード = DbBusinessConfig.get(ConfigNameDBE.連携文字コード, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        if (new RString("1").equals(連携文字コード)) {
+            return Encode.SJIS;
+        } else {
+            return Encode.UTF_8;
+        }
     }
 
 }

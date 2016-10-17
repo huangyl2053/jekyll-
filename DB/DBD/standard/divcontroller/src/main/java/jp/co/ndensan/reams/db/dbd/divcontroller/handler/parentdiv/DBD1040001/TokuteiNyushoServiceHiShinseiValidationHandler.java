@@ -269,12 +269,12 @@ public class TokuteiNyushoServiceHiShinseiValidationHandler {
 
     private static enum TokuteiNyushoServiceHiShinseiMessages implements IValidationMessage {
 
-        申請日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "申請日"),
-        決定区分の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "決定区分"),
-        決定日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "決定日"),
-        適用日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "適用日"),
-        有効期限の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "有効期限"),
-        軽減率の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "給付率"),
+        申請日の必須入力(UrErrorMessages.必須, "申請日"),
+        決定区分の必須入力(UrErrorMessages.必須, "決定区分"),
+        決定日の必須入力(UrErrorMessages.必須, "決定日"),
+        適用日の必須入力(UrErrorMessages.必須, "適用日"),
+        有効期限の必須入力(UrErrorMessages.必須, "有効期限"),
+        軽減率の必須入力(UrErrorMessages.必須, "給付率"),
         特別地域加算減免_軽減率範囲81外(DbdErrorMessages.特別地域加算減免_軽減率範囲外, "81"),
         特別地域加算減免_軽減率範囲91外(DbdErrorMessages.特別地域加算減免_軽減率範囲外, "91"),
         減免減額_適用日が法施行前(DbdErrorMessages.減免減額_適用日が法施行前),

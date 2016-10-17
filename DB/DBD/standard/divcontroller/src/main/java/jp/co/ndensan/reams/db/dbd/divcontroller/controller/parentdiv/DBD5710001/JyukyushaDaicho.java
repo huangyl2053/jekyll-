@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5710001
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD571001.DBD571001_JukyushaDaichoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5710001.DBD5710001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5710001.JyukyushaDaichoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5710001.JyukyushaDaichoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5710001.JyukyushaDaichoValidationHandler;
@@ -68,7 +67,7 @@ public class JyukyushaDaicho {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        return ResponseData.of(div).setState(DBD5710001StateName.初期表示);
+        return ResponseData.of(div).respond();
     }
 
     /**

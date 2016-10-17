@@ -226,7 +226,7 @@ public class HanyoListAtenaSelectHandler {
      * @return 年齢開始の設定値
      */
     public Decimal get年齢開始() {
-        return div.getTxtNenrei().getFromValue();
+        return div.getTxtNenrei().getFromValue() == null ? Decimal.ZERO : div.getTxtNenrei().getFromValue();
     }
 
     /**
@@ -244,7 +244,7 @@ public class HanyoListAtenaSelectHandler {
      * @return 年齢終了の設定値
      */
     public Decimal get年齢終了() {
-        return div.getTxtNenrei().getToValue();
+        return div.getTxtNenrei().getToValue() == null ? new Decimal("999") : div.getTxtNenrei().getToValue();
     }
 
     /**

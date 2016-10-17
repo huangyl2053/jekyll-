@@ -55,18 +55,6 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
                 }
             },
     /**
-     * 基準日RbG・範囲Rbが選択されている場合、範囲条件・範囲From、範囲条件・範囲Toが共に入力されている場合、From-Toの大小関係をチェックする。 範囲From > 範囲Toの場合、エラーとする。
-     */
-    実行するボタンクリック5 {
-                @Override
-                public boolean apply(HanyoListParamDiv div) {
-                    if (div.getTxtChushutsuHani().getFromValue() != null && div.getTxtChushutsuHani().getToValue() != null) {
-                        return div.getTxtChushutsuHani().getFromValue().isBeforeOrEquals(div.getTxtChushutsuHani().getToValue());
-                    }
-                    return true;
-                }
-            },
-    /**
      * 宛名抽出項目区分RDB・年齢が選択されている場合、年齢From、年齢Toが共に入力されている場合、From-Toの大小関係をチェックする。 年齢From > 年齢Toの場合、エラーとする。
      */
     実行するボタンクリック7 {
@@ -74,18 +62,6 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
                 public boolean apply(HanyoListParamDiv div) {
                     if (SpecHelper.is年齢が選択されている(div)) {
                         return div.getCcdHanyoListAtenaSelect().get年齢開始().compareTo(div.getCcdHanyoListAtenaSelect().get年齢終了()) <= 0;
-                    }
-                    return true;
-                }
-            },
-    /**
-     * 宛名抽出項目区分RDB・生年月日が選択されている場合、生年月日From、生年月日Toが共に入力されている場合、From-Toの大小関係をチェックする。 生年月日From > 生年月日Toの場合、エラーとする。
-     */
-    実行するボタンクリック10 {
-                @Override
-                public boolean apply(HanyoListParamDiv div) {
-                    if (SpecHelper.is生年月日が選択されている(div)) {
-                        return div.getCcdHanyoListAtenaSelect().get生年月日開始().isBeforeOrEquals(div.getCcdHanyoListAtenaSelect().get生年月日終了());
                     }
                     return true;
                 }
@@ -153,12 +129,6 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
             return div.getCcdHanyoListAtenaSelect().get年齢層抽出方法().getコード().equals(NenreiSoChushutsuHoho.年齢範囲.getコード())
                     && div.getCcdHanyoListAtenaSelect().get年齢開始() != null
                     && div.getCcdHanyoListAtenaSelect().get年齢終了() != null;
-        }
-
-        static boolean is生年月日が選択されている(HanyoListParamDiv div) {
-            return div.getCcdHanyoListAtenaSelect().get年齢層抽出方法().getコード().equals(NenreiSoChushutsuHoho.生年月日範囲.getコード())
-                    && div.getCcdHanyoListAtenaSelect().get生年月日開始() != null
-                    && div.getCcdHanyoListAtenaSelect().get生年月日終了() != null;
         }
     }
 }
