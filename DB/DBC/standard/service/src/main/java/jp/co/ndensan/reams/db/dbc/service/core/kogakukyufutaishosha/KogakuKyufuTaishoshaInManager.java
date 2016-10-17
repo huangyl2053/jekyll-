@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001Hihoke
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.KagoKetteiHokenshaInControlCsvEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3054KogakuKyufuTaishoshaTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3311KogakuKyufuTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.KogakuKyufuTaishoshaCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.KogakuKyufuTaishoshaDataCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.KogakuKyufuTaishoshaGokeiCsvEntity;
@@ -207,7 +207,7 @@ public class KogakuKyufuTaishoshaInManager {
     private void 高額介護サービス費給付対象者一時TBLに集計保存(FlexibleYearMonth サービス提供年月,
             KogakuKyufuTaishoshaGokeiCsvEntity 集計, KogakuKyufuTaishoshaHeadCsvEntity ヘッダー,
             IKogakuKyufuTaishoshaMapper mapper) {
-        DbWT3054KogakuKyufuTaishoshaTempEntity 集計Entity = new DbWT3054KogakuKyufuTaishoshaTempEntity();
+        DbWT3311KogakuKyufuTaishoshaTempEntity 集計Entity = new DbWT3311KogakuKyufuTaishoshaTempEntity();
         集計Entity.set連番(連番);
         集計Entity.setレコード番号(レコード番号);
         集計Entity.set帳票レコード種別(帳票レコード種別_T1);
@@ -238,7 +238,7 @@ public class KogakuKyufuTaishoshaInManager {
     private void 高額介護サービス費給付対象者一時TBLに明細保存(FlexibleYearMonth サービス提供年月,
             KogakuKyufuTaishoshaMeisaiCsvEntity 明細, KogakuKyufuTaishoshaHeadCsvEntity ヘッダー,
             IKogakuKyufuTaishoshaMapper mapper) {
-        DbWT3054KogakuKyufuTaishoshaTempEntity 明細Entity = new DbWT3054KogakuKyufuTaishoshaTempEntity();
+        DbWT3311KogakuKyufuTaishoshaTempEntity 明細Entity = new DbWT3311KogakuKyufuTaishoshaTempEntity();
         明細Entity.set連番(連番);
         明細Entity.setレコード番号(レコード番号);
         明細Entity.set帳票レコード種別(帳票レコード種別_D1);
@@ -513,7 +513,7 @@ public class KogakuKyufuTaishoshaInManager {
         parameter.put(パラメターキー.toString(), 帳票レコード種別_D1);
         List<KyuufuTaishoshaHihokenshaEntity> マスタ登録用明細リスト = mapper.selectマスタ登録用データ(parameter);
         for (KyuufuTaishoshaHihokenshaEntity マスタ登録用明細 : マスタ登録用明細リスト) {
-            DbWT3054KogakuKyufuTaishoshaTempEntity 対象者 = マスタ登録用明細.get対象者();
+            DbWT3311KogakuKyufuTaishoshaTempEntity 対象者 = マスタ登録用明細.get対象者();
             int 履歴番号 = get履歴番号(マスタ登録用明細, 履歴番号Map);
             DbT3054KogakuKyufuTaishoshaMeisaiEntity 明細 = new DbT3054KogakuKyufuTaishoshaMeisaiEntity();
             明細.setHihokenshaNo(マスタ登録用明細.get被保険者一時().get登録被保険者番号());
@@ -532,7 +532,7 @@ public class KogakuKyufuTaishoshaInManager {
         parameter.put(パラメターキー.toString(), 帳票レコード種別_T1);
         List<KyuufuTaishoshaHihokenshaEntity> マスタ登録用合計リスト = mapper.selectマスタ登録用データ(parameter);
         for (KyuufuTaishoshaHihokenshaEntity マスタ登録用合計 : マスタ登録用合計リスト) {
-            DbWT3054KogakuKyufuTaishoshaTempEntity 対象者 = マスタ登録用合計.get対象者();
+            DbWT3311KogakuKyufuTaishoshaTempEntity 対象者 = マスタ登録用合計.get対象者();
             DbT3055KogakuKyufuTaishoshaGokeiEntity 合計 = new DbT3055KogakuKyufuTaishoshaGokeiEntity();
             int 履歴番号 = get履歴番号(マスタ登録用合計, 履歴番号Map);
             合計.setHihokenshaNo(マスタ登録用合計.get被保険者一時().get登録被保険者番号());

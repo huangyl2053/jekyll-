@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DbWT3058KogakuShikyuShinsaKetteiTempEntity {
+public class DbWT3511KogakuShikyuShinsaKetteiTempEntity {
 
     private int 連番;
     private ShoKisaiHokenshaNo 証記載保険者番号;

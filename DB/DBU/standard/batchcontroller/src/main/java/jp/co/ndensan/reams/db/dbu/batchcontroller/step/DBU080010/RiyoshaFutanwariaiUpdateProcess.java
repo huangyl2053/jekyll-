@@ -86,7 +86,7 @@ public class RiyoshaFutanwariaiUpdateProcess extends BatchProcessBase<TeikyoKiho
         TokuteiKojinJohoTeikyoManager.createInstance().update特定個人情報提供(TABLE_中間DB提供基本情報,
                 processParameter.get新規異動区分(), TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
                 DataSetNo._0202負担割合.getコード(), processParameter.get版番号());
-        if (TeikyoYohi.提供要.getコード().equals(processParameter.get提供要否List().get(0))) {
+        if (TeikyoYohi.提供要.getコード().equals(processParameter.get特定個人情報名コード())) {
             List<TokuteiKojinJohoHanKanri> entityList = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(
                     processParameter.get新規異動区分(), TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
                     DataSetNo._0202負担割合.getコード(), FlexibleDate.EMPTY);

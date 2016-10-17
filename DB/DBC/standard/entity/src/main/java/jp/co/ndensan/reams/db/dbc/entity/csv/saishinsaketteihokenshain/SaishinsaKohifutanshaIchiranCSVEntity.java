@@ -38,14 +38,10 @@ public class SaishinsaKohifutanshaIchiranCSVEntity {
     private RString 事業者番号;
     @CsvField(order = 90, name = "事業者名")
     private RString 事業者名;
-    @CsvField(order = 100, name = "公費受給者番号")
-    private RString 公費受給者番号;
-    @CsvField(order = 110, name = "公費受給者名")
-    private RString 公費受給者名;
-    @CsvField(order = 120, name = "証記載保険者番号")
-    private RString 証記載保険者番号;
     @CsvField(order = 130, name = "被保険者番号")
     private RString 被保険者番号;
+    @CsvField(order = 135, name = "被保険者番号")
+    private RString 被保険者氏名;
     @CsvField(order = 140, name = "サービス提供年月")
     private RString サービス提供年月;
     @CsvField(order = 150, name = "サービス種類コード")

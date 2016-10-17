@@ -5,11 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.flow;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.JogaiTokureiSyaJyohouProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.JogaiTokureiSyaJyohouUpdateProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.JukyushaKihonJohoKadouKahinoHanteiProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.JukyushaKihonJohoTeikyoJohoSyutokuProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.JukyushaKihonJohoTeikyoKihonJohoNNTempUpdateProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.KyuufuJyohouProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.KyuufuJyohouUpdateProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.RiyoshaFutanwariaiProcess;
@@ -17,17 +18,17 @@ import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.RiyoshaFutanwar
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.SougouJigyouJyohouProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.SougouJigyouJyohouUpdateProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.TokuteiKojinJohoTeikyoSetParameterProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.TokuteiKojinKadouKahiHanteiProcess;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.TokuteiKojinJohoHanKanri;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU080010.DBU080010_TokuteiKojinJohoTeikyoParameter;
-import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.RenkeisakiDantainaiTogoAtena;
-import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShinkiIdoKubun;
+import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.DataSetNo;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.sougoujigyoujyohou.SougouJigyouJyohouProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.JogaiTokureiSyaJyohouProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.JukyushaKihonJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.RiyoshaFutanwariaiProcessParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinKadouKahiHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -43,7 +44,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_TokuteiKojinJohoTeikyoParameter> {
 
     private static final String バッチパラメータの取得 = "TokuteiKojinJohoTeikyoSetParameter";
-    private static final String 受給者基本情報_稼働可否の判定 = "JukyushaKihonJohoKadouKahinoHantei";
+    private static final String 稼働可否の判定 = "TokuteiKojinKadouKahiHantei";
     private static final String 受給者基本情報_提供情報取得 = "JukyushaKihonJohoTeikyoJohoSyutoku";
     private static final String 受給者基本情報_中間DB更新 = "JukyushaKihonJohoNNTempUpdate";
     private static final String 住所地特例者情報 = "JogaiTokureiSyaJyohou";
@@ -59,9 +60,12 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
     private static final RString 文字列_特定個人情報 = new RString("TeikyoKihonJoho");
     private static final RString 文字列_TEMP = new RString("Temp");
     private DBU080010_TokuteiKojinJohoTeikyoParameter parameter;
+    private TokuteiKojinKadouKahiHanteiProcessParameter hanteiProcessParameter;
     private List<TokuteiKojinJohoHanKanri> 具合版番号情報List;
-    private RString 特定個人情報名コード;
+    private List<RString> 特定個人情報名コードList;
     private RString 提供基本情報中間テーブル名;
+    private RString 特定個人情報名コード;
+    private RString 版番号;
 
     @Override
     protected void defineFlow() {
@@ -72,26 +76,12 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
             parameter = getParameter();
             executeStep(バッチパラメータの取得);
             setバッチパラメータ();
-            executeStep(受給者基本情報_稼働可否の判定);
-            具合版番号情報List = getResult(List.class, 受給者基本情報_稼働可否の判定, JukyushaKihonJohoKadouKahinoHanteiProcess.HANNOJOHOLIST);
-            if (具合版番号情報List != null && !具合版番号情報List.isEmpty()) {
-                for (TokuteiKojinJohoHanKanri hanKanri : 具合版番号情報List) {
-                    特定個人情報名コード = hanKanri.get特定個人情報名コード();
-                    提供基本情報中間テーブル名 = 文字列_特定個人情報.concat(
-                            特定個人情報名コード.substring(特定個人情報名コード.length() - 2).concat(文字列_TEMP));
-                    executeStep(受給者基本情報_提供情報取得);
-                    executeStep(受給者基本情報_中間DB更新);
-                }
-            }
-            executeStep(住所地特例者情報);
-            executeStep(住所地特例者情報_更新用);
-            executeStep(負担割合);
-            executeStep(負担割合_更新用);
-            executeStep(総合事業情報);
-            executeStep(総合事業情報_更新用);
-            executeStep(給付情報);
-            executeStep(給付情報_更新用);
-
+            特定個人情報名コードList = new ArrayList<>();
+            exe住所地特例者情報();
+            exe負担割合();
+            exe給付情報();
+            exe総合事業情報();
+            exe受給者基本情報();
         }
     }
 
@@ -110,10 +100,58 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
      *
      * @return IBatchFlowCommand
      */
-    @Step(受給者基本情報_稼働可否の判定)
+    @Step(稼働可否の判定)
     protected IBatchFlowCommand exeJukyushaKihonJohoKadouKahinoHantei() {
-        JukyushaKihonJohoProcessParameter processParameter = parameter.toJukyushaKihonJohoProcessParameter();
-        return simpleBatch(JukyushaKihonJohoKadouKahinoHanteiProcess.class).arguments(processParameter).define();
+        return simpleBatch(TokuteiKojinKadouKahiHanteiProcess.class).arguments(hanteiProcessParameter).define();
+    }
+
+    private void exe住所地特例者情報() {
+        hanteiProcessParameter = parameter.toTokuteiKojinKadouKahiHanteiProcessParameter();
+        hanteiProcessParameter.setデータセット番号(DataSetNo._0102住所地特例情報.getコード());
+        特定個人情報名コードList.add(parameter.get特定個人情報().get(0).get特定個人情報名コード());
+        特定個人情報名コード = parameter.get特定個人情報().get(0).get特定個人情報名コード();
+        executeStep(稼働可否の判定);
+        exe特定個人情報提供By稼働可否(住所地特例者情報, 住所地特例者情報_更新用);
+        特定個人情報名コードList.clear();
+    }
+
+    private void exe給付情報() {
+        hanteiProcessParameter = parameter.toTokuteiKojinKadouKahiHanteiProcessParameter();
+        hanteiProcessParameter.setデータセット番号(DataSetNo._0300給付情報.getコード());
+        特定個人情報名コードList.add(parameter.get特定個人情報().get(0).get特定個人情報名コード());
+        特定個人情報名コード = parameter.get特定個人情報().get(0).get特定個人情報名コード();
+        executeStep(稼働可否の判定);
+        exe特定個人情報提供By稼働可否(給付情報, 給付情報_更新用);
+        特定個人情報名コードList.clear();
+    }
+
+    private void exe負担割合() {
+        hanteiProcessParameter = parameter.toTokuteiKojinKadouKahiHanteiProcessParameter();
+        hanteiProcessParameter.setデータセット番号(DataSetNo._0202負担割合.getコード());
+        特定個人情報名コードList.add(parameter.get特定個人情報().get(0).get特定個人情報名コード());
+        特定個人情報名コード = parameter.get特定個人情報().get(0).get特定個人情報名コード();
+        executeStep(稼働可否の判定);
+        exe特定個人情報提供By稼働可否(負担割合, 負担割合_更新用);
+        特定個人情報名コードList.clear();
+    }
+
+    private void exe総合事業情報() {
+        hanteiProcessParameter = parameter.toTokuteiKojinKadouKahiHanteiProcessParameter();
+        hanteiProcessParameter.setデータセット番号(DataSetNo._0400総合事業.getコード());
+        特定個人情報名コードList.add(parameter.get特定個人情報().get(0).get特定個人情報名コード());
+        特定個人情報名コード = parameter.get特定個人情報().get(0).get特定個人情報名コード();
+        executeStep(稼働可否の判定);
+        exe特定個人情報提供By稼働可否(総合事業情報, 総合事業情報_更新用);
+        特定個人情報名コードList.clear();
+    }
+
+    private void exe受給者基本情報() {
+        hanteiProcessParameter = parameter.toTokuteiKojinKadouKahiHanteiProcessParameter();
+        hanteiProcessParameter.setデータセット番号(DataSetNo._0201受給者基本情報.getコード());
+        特定個人情報名コードList.add(parameter.get特定個人情報().get(0).get特定個人情報名コード());
+        executeStep(稼働可否の判定);
+        exe特定個人情報提供By稼働可否(受給者基本情報_提供情報取得, 受給者基本情報_中間DB更新);
+        特定個人情報名コードList.clear();
     }
 
     /**
@@ -139,55 +177,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
         JukyushaKihonJohoProcessParameter processParameter = parameter.toJukyushaKihonJohoProcessParameter();
         processParameter.set特定個人情報名コード(特定個人情報名コード);
         processParameter.set提供基本情報中間テーブル名(提供基本情報中間テーブル名);
-        return loopBatch(JukyushaKihonJohoTeikyoJohoSyutokuProcess.class).arguments(processParameter).define();
-    }
-
-    /**
-     * 住所地特例者情報を行います。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(住所地特例者情報)
-    protected IBatchFlowCommand exeJogaiTokureiSyaJyohou() {
-        JogaiTokureiSyaJyohouProcessParameter processParameter = new JogaiTokureiSyaJyohouProcessParameter(
-                使用する, RDateTime.MAX, RDateTime.MAX, 文字列_TEMP, null, HihokenshaNo.EMPTY, 稼働);
-        return loopBatch(JogaiTokureiSyaJyohouProcess.class).arguments(processParameter).define();
-    }
-
-    /**
-     * 住所地特例者情報_更新用を行います。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(住所地特例者情報_更新用)
-    protected IBatchFlowCommand exeJogaiTokureiSyaJyohouUpdate() {
-        JogaiTokureiSyaJyohouProcessParameter processParameter = new JogaiTokureiSyaJyohouProcessParameter(
-                使用する, RDateTime.MAX, RDateTime.MAX, 文字列_TEMP, null, HihokenshaNo.EMPTY, 稼働);
-        return loopBatch(JogaiTokureiSyaJyohouUpdateProcess.class).arguments(processParameter).define();
-    }
-
-    /**
-     * 負担割合を行います。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(負担割合)
-    protected IBatchFlowCommand exeRiyoshaFutanwariai() {
-        RiyoshaFutanwariaiProcessParameter processParameter = new RiyoshaFutanwariaiProcessParameter(
-                使用する, RDate.MAX, RDateTime.MAX, RDateTime.MAX, 文字列_TEMP, null, 使用する, 稼働);
-        return loopBatch(RiyoshaFutanwariaiProcess.class).arguments(processParameter).define();
-    }
-
-    /**
-     * 負担割合_更新用を行います。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(負担割合_更新用)
-    protected IBatchFlowCommand exeRiyoshaFutanwariaiUpdate() {
-        RiyoshaFutanwariaiProcessParameter processParameter = new RiyoshaFutanwariaiProcessParameter(
-                使用する, RDate.MAX, RDateTime.MAX, RDateTime.MAX, 文字列_TEMP, null, 使用する, 稼働);
-        return loopBatch(RiyoshaFutanwariaiUpdateProcess.class).arguments(processParameter).define();
+        return loopBatch(JukyushaKihonJohoTeikyoKihonJohoNNTempUpdateProcess.class).arguments(processParameter).define();
     }
 
     /**
@@ -197,8 +187,9 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
      */
     @Step(総合事業情報)
     protected IBatchFlowCommand exeSougouJigyouJyohou() {
-        SougouJigyouJyohouProcessParameter processParameter = new SougouJigyouJyohouProcessParameter(
-                使用する, RDateTime.MAX, RDateTime.MAX, 文字列_TEMP, null, 使用する, 稼働);
+        SougouJigyouJyohouProcessParameter processParameter = parameter.toSougouJigyouJyohouProcessParameter();
+        processParameter.set版番号(版番号);
+        processParameter.set特定個人情報名コード(特定個人情報名コード);
         return loopBatch(SougouJigyouJyohouProcess.class).arguments(processParameter).define();
     }
 
@@ -209,9 +200,36 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
      */
     @Step(総合事業情報_更新用)
     protected IBatchFlowCommand exeSougouJigyouJyohouUpdate() {
-        SougouJigyouJyohouProcessParameter processParameter = new SougouJigyouJyohouProcessParameter(
-                使用する, RDateTime.MAX, RDateTime.MAX, 文字列_TEMP, null, 使用する, 稼働);
+        SougouJigyouJyohouProcessParameter processParameter = parameter.toSougouJigyouJyohouProcessParameter();
+        processParameter.set版番号(版番号);
+        processParameter.set特定個人情報名コード(特定個人情報名コード);
         return loopBatch(SougouJigyouJyohouUpdateProcess.class).arguments(processParameter).define();
+    }
+
+    /**
+     * 負担割合を行います。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(負担割合)
+    protected IBatchFlowCommand exeRiyoshaFutanwariai() {
+        RiyoshaFutanwariaiProcessParameter processParameter = parameter.toRiyoshaFutanwariaiProcessParameter();
+        processParameter.set版番号(版番号);
+        processParameter.set特定個人情報名コード(特定個人情報名コード);
+        return loopBatch(RiyoshaFutanwariaiProcess.class).arguments(processParameter).define();
+    }
+
+    /**
+     * 負担割合_更新用を行います。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(負担割合_更新用)
+    protected IBatchFlowCommand exeRiyoshaFutanwariaiUpdate() {
+        RiyoshaFutanwariaiProcessParameter processParameter = parameter.toRiyoshaFutanwariaiProcessParameter();
+        processParameter.set版番号(版番号);
+        processParameter.set特定個人情報名コード(特定個人情報名コード);
+        return loopBatch(RiyoshaFutanwariaiUpdateProcess.class).arguments(processParameter).define();
     }
 
     /**
@@ -221,8 +239,9 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
      */
     @Step(給付情報)
     protected IBatchFlowCommand exeKyuufuJyohou() {
-        SougouJigyouJyohouProcessParameter processParameter = new SougouJigyouJyohouProcessParameter(
-                使用する, RDateTime.MAX, RDateTime.MAX, 文字列_TEMP, null, 使用する, 稼働);
+        SougouJigyouJyohouProcessParameter processParameter = parameter.toSougouJigyouJyohouProcessParameter();
+        processParameter.set版番号(版番号);
+        processParameter.set特定個人情報名コード(特定個人情報名コード);
         return loopBatch(KyuufuJyohouProcess.class).arguments(processParameter).define();
     }
 
@@ -233,19 +252,60 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
      */
     @Step(給付情報_更新用)
     protected IBatchFlowCommand exeKyuufuJyohouUpdate() {
-        SougouJigyouJyohouProcessParameter processParameter = new SougouJigyouJyohouProcessParameter(
-                使用する, RDateTime.MAX, RDateTime.MAX, 文字列_TEMP, null, 使用する, 稼働);
+        SougouJigyouJyohouProcessParameter processParameter = parameter.toSougouJigyouJyohouProcessParameter();
+        processParameter.set版番号(版番号);
+        processParameter.set特定個人情報名コード(特定個人情報名コード);
         return loopBatch(KyuufuJyohouUpdateProcess.class).arguments(processParameter).define();
     }
 
+    /**
+     * 住所地特例者情報を行います。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(住所地特例者情報)
+    protected IBatchFlowCommand exeJogaiTokureiSyaJyohou() {
+        JogaiTokureiSyaJyohouProcessParameter processParameter = parameter.toJogaiTokureiSyaJyohouProcessParameter();
+        processParameter.set版番号(版番号);
+        processParameter.set特定個人情報名コード(特定個人情報名コード);
+        return loopBatch(JogaiTokureiSyaJyohouProcess.class).arguments(processParameter).define();
+    }
+
+    /**
+     * 住所地特例者情報_更新用を行います。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(住所地特例者情報_更新用)
+    protected IBatchFlowCommand exeJogaiTokureiSyaJyohouUpdate() {
+        JogaiTokureiSyaJyohouProcessParameter processParameter = parameter.toJogaiTokureiSyaJyohouProcessParameter();
+        processParameter.set版番号(版番号);
+        processParameter.set特定個人情報名コード(特定個人情報名コード);
+        return loopBatch(JogaiTokureiSyaJyohouUpdateProcess.class).arguments(processParameter).define();
+    }
+
+    private void exe特定個人情報提供By稼働可否(String stepName1, String stepName2) {
+        具合版番号情報List = getResult(List.class, 稼働可否の判定, TokuteiKojinKadouKahiHanteiProcess.HANNOJOHOLIST);
+        if (具合版番号情報List != null && !具合版番号情報List.isEmpty()) {
+            for (TokuteiKojinJohoHanKanri hanKanri : 具合版番号情報List) {
+                特定個人情報名コード = hanKanri.get特定個人情報名コード();
+                提供基本情報中間テーブル名 = 文字列_特定個人情報.concat(
+                        特定個人情報名コード.substring(特定個人情報名コード.length() - 2).concat(文字列_TEMP));
+                版番号 = hanKanri.get版番号();
+                executeStep(stepName1);
+                executeStep(stepName2);
+            }
+        }
+    }
+
     private void setバッチパラメータ() {
-        parameter.set新規異動区分(getResult(ShinkiIdoKubun.class, バッチパラメータの取得,
+        parameter.set新規異動区分(getResult(RString.class, バッチパラメータの取得,
                 TokuteiKojinJohoTeikyoSetParameterProcess.SHINKIIDOKUBUN));
         parameter.set対象開始日時(getResult(RDateTime.class, バッチパラメータの取得,
                 TokuteiKojinJohoTeikyoSetParameterProcess.TAISHOKAISHITIMESTAMP));
         parameter.set対象終了日時(getResult(RDateTime.class, バッチパラメータの取得,
                 TokuteiKojinJohoTeikyoSetParameterProcess.TAISHOSHURYOTIMESTAMP));
-        parameter.set連携先団体内統合宛名_連携方式(getResult(RenkeisakiDantainaiTogoAtena.class, バッチパラメータの取得,
+        parameter.set連携先団体内統合宛名_連携方式(getResult(RString.class, バッチパラメータの取得,
                 TokuteiKojinJohoTeikyoSetParameterProcess.RENKEISAKIDANTAINAITOGOATENA));
     }
 }

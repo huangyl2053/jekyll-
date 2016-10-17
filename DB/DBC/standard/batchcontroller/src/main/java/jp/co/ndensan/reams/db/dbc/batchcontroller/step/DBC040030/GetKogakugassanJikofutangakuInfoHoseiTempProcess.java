@@ -90,6 +90,7 @@ public class GetKogakugassanJikofutangakuInfoHoseiTempProcess extends BatchProce
         tmpEntity.setTaishoNendo(entity.getTaishoNendo());
         tmpEntity.setHokenshaNo(entity.getHokenshaNo());
         tmpEntity.setShikyuShinseishoSeiriNo(entity.getShikyuShinseishoSeiriNo());
+        //tmpEntity.setRirekiNo1(null);
         tmpEntity.setRirekiNo2(entity.getRirekiNo());
         tmpEntity.setHokenSeidoCode(entity.getHokenSeidoCode());
         tmpEntity.setHokenshaMei(entity.getHokenshaMei());
@@ -113,6 +114,10 @@ public class GetKogakugassanJikofutangakuInfoHoseiTempProcess extends BatchProce
         tmpEntity.setHihokenshaKaishiYMD(entity.getHihokenshaKaishiYMD());
         tmpEntity.setHihokenshaShuryoYMD(entity.getHihokenshaShuryoYMD());
         tmpEntity.setShinseiYMD(entity.getShinseiYMD());
+        tmpEntity.setGokei_70_74JikoFutanGaku(entity.getGokei_70_74JikoFutanGaku());
+        tmpEntity.setGokei_JikoFutanGaku(entity.getGokei_JikoFutanGaku());
+        tmpEntity.setGokei_70_74KogakuShikyuGaku(entity.getGokei_70_74KogakuShikyuGaku());
+        tmpEntity.setGokei_Under70KogakuShikyuGaku(entity.getGokei_Under70KogakuShikyuGaku());
         tmpEntity.setSumi_Gokei_JikoFutanGaku(entity.getSumi_Gokei_JikoFutanGaku());
         tmpEntity.setSumi_Gokei_70_74JikoFutanGaku(entity.getSumi_Gokei_70_74JikoFutanGaku());
         tmpEntity.setSumi_Gokei_Under70KogakuShikyuGaku(entity.getSumi_Gokei_Under70KogakuShikyuGaku());

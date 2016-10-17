@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelec
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -60,6 +61,7 @@ public class HanyoRisutoRiyoshaFutanWariaiMybatisParameter implements IMyBatisPa
     private boolean has地区3To;
     private final IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho;
     private final RString psmAtesaki;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタです。
@@ -95,6 +97,7 @@ public class HanyoRisutoRiyoshaFutanWariaiMybatisParameter implements IMyBatisPa
         this.syutsuryokujun = syutsuryokujun;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
+        shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(psmShikibetsuTaisho);
         this.負担割合区分_１割 = FutanwariaiKubun._１割.getコード();
         this.負担割合区分_２割 = FutanwariaiKubun._２割.getコード();
         set抽出方法区分();

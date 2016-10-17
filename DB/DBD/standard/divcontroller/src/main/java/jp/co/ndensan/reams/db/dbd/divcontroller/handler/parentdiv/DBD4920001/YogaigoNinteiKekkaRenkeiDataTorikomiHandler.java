@@ -56,7 +56,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
     private static final RString ゼロ = new RString("0");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
-    private static final RString 共有ファイル名 = new RString("共有ファイル名");
+    private static final RString 共有ファイル名 = new RString("要介護認定結果連携データ取込");
     private static final int NO_328 = 328;
     private final YogaigoNinteiKekkaRenkeiDataTorikomiDiv div;
 

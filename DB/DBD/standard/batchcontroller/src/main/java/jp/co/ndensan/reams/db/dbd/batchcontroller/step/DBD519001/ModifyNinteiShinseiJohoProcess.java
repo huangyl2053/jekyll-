@@ -67,7 +67,7 @@ public class ModifyNinteiShinseiJohoProcess extends BatchProcessBase<ModifyNinte
     protected void process(ModifyNinteiShinseiJohoEntity entity) {
         KouikiyoukaigoNinteishinseiJouhouTempEntity tempEntity = new KouikiyoukaigoNinteishinseiJouhouTempEntity();
         ModifyNinteiShinseiJohoManager manager = new ModifyNinteiShinseiJohoManager();
-        編集状況フラグ = manager.申請情報IF編集(entity, i, parameter.get認定申請IF種類(), parameter.get市町村コード(), tempEntity);
+        編集状況フラグ = manager.申請情報IF編集(entity, i, parameter.get認定申請IF種類(), tempEntity);
         tableWriter.insert(tempEntity);
         i++;
     }

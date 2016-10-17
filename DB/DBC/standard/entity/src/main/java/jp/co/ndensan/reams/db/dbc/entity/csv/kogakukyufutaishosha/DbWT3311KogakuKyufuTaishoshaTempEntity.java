@@ -23,12 +23,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DbWT3054KogakuKyufuTaishoshaTempEntity {
+public class DbWT3311KogakuKyufuTaishoshaTempEntity {
 
     /**
      * コンストラクタです。
      */
-    public DbWT3054KogakuKyufuTaishoshaTempEntity() {
+    public DbWT3311KogakuKyufuTaishoshaTempEntity() {
         this.連番 = 0;
         this.レコード番号 = 0;
         this.帳票レコード種別 = RString.EMPTY;

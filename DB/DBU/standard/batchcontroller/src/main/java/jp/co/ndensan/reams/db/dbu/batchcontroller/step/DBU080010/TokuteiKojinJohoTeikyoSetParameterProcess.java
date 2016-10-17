@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 
-import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.RenkeisakiDantainaiTogoAtena;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShinkiIdoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ITokuteiKojinJohoTeikyoMapper;
@@ -40,7 +39,7 @@ public class TokuteiKojinJohoTeikyoSetParameterProcess extends SimpleBatchProces
     static {
         SHINKIIDOKUBUN = new RString("shinkiIdoKubun");
     }
-    private OutputParameter<ShinkiIdoKubun> shinkiIdoKubun;
+    private OutputParameter<RString> shinkiIdoKubun;
 
     /**
      * 対象開始日時の判定です。
@@ -70,7 +69,7 @@ public class TokuteiKojinJohoTeikyoSetParameterProcess extends SimpleBatchProces
     static {
         RENKEISAKIDANTAINAITOGOATENA = new RString("renkeisakiDantainaiTogoAtena");
     }
-    private OutputParameter<RenkeisakiDantainaiTogoAtena> renkeisakiDantainaiTogoAtena;
+    private OutputParameter<RString> renkeisakiDantainaiTogoAtena;
 
     @Override
     protected void process() {
@@ -87,9 +86,9 @@ public class TokuteiKojinJohoTeikyoSetParameterProcess extends SimpleBatchProces
         int count_版番号 = getMapper(ITokuteiKojinJohoTeikyoMapper.class)
                 .getTokuteiKojinJohoHanKanriCount(ShokaiTeikyoKubun.初回提供済み.getコード());
         if (count_版番号 == 0) {
-            shinkiIdoKubun.setValue(ShinkiIdoKubun.当初);
+            shinkiIdoKubun.setValue(ShinkiIdoKubun.当初.getコード());
         } else {
-            shinkiIdoKubun.setValue(ShinkiIdoKubun.版改定);
+            shinkiIdoKubun.setValue(ShinkiIdoKubun.版改定.getコード());
         }
     }
 
@@ -118,8 +117,8 @@ public class TokuteiKojinJohoTeikyoSetParameterProcess extends SimpleBatchProces
 
     private void setParameter_連携先団体内統合宛名(RDate システム日付) {
         renkeisakiDantainaiTogoAtena = new OutputParameter<>();
-        renkeisakiDantainaiTogoAtena.setValue(RenkeisakiDantainaiTogoAtena.toValue(
-                DbBusinessConfig.get(ConfigNameDBU.番号制度_連携先団体内統合宛名_連携方式, システム日付)));
+        renkeisakiDantainaiTogoAtena.setValue(
+                DbBusinessConfig.get(ConfigNameDBU.番号制度_連携先団体内統合宛名_連携方式, システム日付));
     }
 
 }
