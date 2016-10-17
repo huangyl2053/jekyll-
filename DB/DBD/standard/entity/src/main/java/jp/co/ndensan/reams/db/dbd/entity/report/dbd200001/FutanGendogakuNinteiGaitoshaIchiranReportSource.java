@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.entity.report.dbd200001;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -48,7 +49,6 @@ public class FutanGendogakuNinteiGaitoshaIchiranReportSource implements IReportS
     @ReportItem(name = "kaiPege5", length = 20, order = 14)
     public RString kaiPege5;
     @ReportItem(name = "listUpper_1", length = 10, order = 15)
-    @ReportExpandedInfo(id = "001", code = "0003", name = "被保険者番号")
     public RString listUpper_1;
     @ReportItem(name = "listUpper_2", length = 20, order = 16)
     public RString listUpper_2;
@@ -173,5 +173,7 @@ public class FutanGendogakuNinteiGaitoshaIchiranReportSource implements IReportS
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportPerson(id = "001")
     public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "001", code = "0003", name = "被保険者番号")
+    public ExpandedInformation hihokenshaNo;
 // </editor-fold>
 }
