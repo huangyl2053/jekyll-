@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1020021;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD201010.DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020021.DBD1020021StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020021.RiyoshaFutanGenmenListDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020021.RiyoshaFutanGenmenListHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020021.RiyoshaFutanGenmenListValidationHandler;
@@ -54,7 +53,7 @@ public class RiyoshaFutanGenmenList {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        return ResponseData.of(div).setState(DBD1020021StateName.バッチ実行);
+        return ResponseData.of(div).respond();
     }
 
     /**
