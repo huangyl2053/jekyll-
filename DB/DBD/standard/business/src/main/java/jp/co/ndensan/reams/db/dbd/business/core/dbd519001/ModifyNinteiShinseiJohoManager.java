@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -177,11 +176,10 @@ public class ModifyNinteiShinseiJohoManager {
      * @param entity ModifyNinteiShinseiJohoEntity
      * @param i int
      * @param 認定申請IF種類 RString
-     * @param 市町村コード LasdecCode
      * @param tempEntity KouikiyoukaigoNinteishinseiJouhouTempEntity
      * @return 編集状況フラグ
      */
-    public RString 申請情報IF編集(ModifyNinteiShinseiJohoEntity entity, long i, RString 認定申請IF種類, LasdecCode 市町村コード,
+    public RString 申請情報IF編集(ModifyNinteiShinseiJohoEntity entity, long i, RString 認定申請IF種類,
             KouikiyoukaigoNinteishinseiJouhouTempEntity tempEntity) {
         List<RString> 前回データ情報リスト = new ArrayList<>();
         if (entity.get一次判定内容() != null) {
@@ -203,7 +201,7 @@ public class ModifyNinteiShinseiJohoManager {
             介護連絡先情報List = entity.get連絡先情報();
         }
         if (!認定申請IF種類.equals(new RString("4"))) {
-            setTempEntity電算標準版(entity, tempEntity, 市町村コード);
+            setTempEntity電算標準版(entity, tempEntity);
             setTempEntity(tempEntity, 介護連絡先情報List);
             checkTempEntity(tempEntity, entity);
         }
@@ -278,18 +276,6 @@ public class ModifyNinteiShinseiJohoManager {
     }
 
     private void checkTempEntity1(KouikiyoukaigoNinteishinseiJouhouTempEntity tempEntity, ModifyNinteiShinseiJohoEntity entity) {
-        if (entity.get認定申請区分申請時コード().isEmpty()) {
-            tempEntity.setShinseiKubunShinseijiCode(new RString("申請区分の入力がありません"));
-            編集状況フラグ = new RString("1");
-        }
-        List<RString> codes = new ArrayList<>();
-        for (NinteiShinseiShinseijiKubunCode code : NinteiShinseiShinseijiKubunCode.values()) {
-            codes.add(code.getコード());
-        }
-        if (!codes.contains(tempEntity.getShinseiKubunShinseijiCode())) {
-            tempEntity.setShinseiKubunShinseijiCode(new RString("申請区分が不正です"));
-            編集状況フラグ = new RString("1");
-        }
         if (entity.get認定申請年月日() == null || entity.get認定申請年月日().isEmpty()
                 || tempEntity.getNinteiShinseiYMD().equals(new RString("00000000"))) {
             tempEntity.setNinteiShinseiYMD(new RString("申請日の入力がありません"));
@@ -331,6 +317,18 @@ public class ModifyNinteiShinseiJohoManager {
     }
 
     private void checkTempEntity2(KouikiyoukaigoNinteishinseiJouhouTempEntity tempEntity, ModifyNinteiShinseiJohoEntity entity) {
+        if (entity.get認定申請区分申請時コード().isEmpty()) {
+            tempEntity.setShinseiKubunShinseijiCode(new RString("申請区分の入力がありません"));
+            編集状況フラグ = new RString("1");
+        }
+        List<RString> codes = new ArrayList<>();
+        for (NinteiShinseiShinseijiKubunCode code : NinteiShinseiShinseijiKubunCode.values()) {
+            codes.add(code.getコード());
+        }
+        if (!codes.contains(tempEntity.getShinseiKubunShinseijiCode())) {
+            tempEntity.setShinseiKubunShinseijiCode(new RString("申請区分が不正です"));
+            編集状況フラグ = new RString("1");
+        }
         if (tempEntity.getSeibetsu().isEmpty()) {
             tempEntity.setSeibetsu(new RString("性別の入力がありません"));
             編集状況フラグ = new RString("1");
@@ -882,9 +880,9 @@ public class ModifyNinteiShinseiJohoManager {
     }
 
     private void setTempEntity電算標準版(ModifyNinteiShinseiJohoEntity entity,
-            KouikiyoukaigoNinteishinseiJouhouTempEntity tempEntity, LasdecCode 市町村コード) {
-        if (市町村コード != null) {
-            tempEntity.setShichousonCode(市町村コード.value());
+            KouikiyoukaigoNinteishinseiJouhouTempEntity tempEntity) {
+        if (entity.get市町村コード() != null) {
+            tempEntity.setShichousonCode(entity.get市町村コード().value());
         } else {
             tempEntity.setShichousonCode(RString.EMPTY);
         }
