@@ -53,7 +53,7 @@ public class GemmenJisshiJokyoMainHandler {
             div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setValue(new Decimal(RDate.getNowDate().getDayValue()));
             div.getGemmenJisshiJokyoJoken().getRadKijunBi().setDisabled(false);
             div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().setDisabled(false);
-            div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(true);
+            div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(false);
         }
     }
 
