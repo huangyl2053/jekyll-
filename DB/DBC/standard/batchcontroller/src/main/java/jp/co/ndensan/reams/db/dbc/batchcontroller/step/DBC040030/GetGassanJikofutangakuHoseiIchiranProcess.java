@@ -147,6 +147,7 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
         tmpEntity.set支給額補正有無(entity.getKogakuShikyuGakuGakuHoseiJissi());
         tmpEntity.set警告(entity.getIchiranKakuninKubun());
         tmpEntity.set警告2(entity.getIchiranKakuninKubun2());
+        tmpEntity.set宛名ﾃﾞｰﾀ種別(entity.getJuminShubetsuCode());
         param.set高額合算自己負担額補正一覧表(tmpEntity);
         GassanJikofutangakuHoseiIchiranReport report = new GassanJikofutangakuHoseiIchiranReport(param);
         report.writeBy(reportSourceWriter);

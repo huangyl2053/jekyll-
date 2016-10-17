@@ -95,7 +95,6 @@ public class DBU010010_JigyoHokokuGeppo_Main extends BatchFlowBase<DBU010010_Jig
         parameter.setKyuShichosonList(codeList(getParameter().getOldShichosonCode()));
         parameter.setKakoShukeiShichosonList(getParameter().getShuukeibunShichosonCode());
         parameter.setKakoShukeiKyuShichosonKbn(getParameter().getShuukeibunShichosonKubun());
-        parameter.setSakuseiCSVFileID(getParameter().getCsvID().get(0));
         parameter.setBatchID(getParameter().getBatchID().get(0));
         return otherBatchFlow(事業報告月報_一般状況_FLOWID, SubGyomuCode.DBU介護統計報告, parameter).define();
     }

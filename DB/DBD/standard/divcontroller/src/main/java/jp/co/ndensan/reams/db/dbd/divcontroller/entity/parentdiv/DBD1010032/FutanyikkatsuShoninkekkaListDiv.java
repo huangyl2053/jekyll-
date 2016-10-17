@@ -4,13 +4,10 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010032;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * FutanyikkatsuShoninkekkaList のクラスファイル 
@@ -81,59 +78,6 @@ public class FutanyikkatsuShoninkekkaListDiv extends Panel {
     @JsonProperty("ccdKaigoKanryoMessage")
     public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
         return ccdKaigoKanryoMessage;
-    }
-
-    /*
-     * [ ショートカットの作成 ]
-     */
-    @JsonIgnore
-    public TextBoxFlexibleYear getTxtSakuseiNendo() {
-        return this.getDatagridhojipanel().getTxtSakuseiNendo();
-    }
-
-    @JsonIgnore
-    public void  setTxtSakuseiNendo(TextBoxFlexibleYear txtSakuseiNendo) {
-        this.getDatagridhojipanel().setTxtSakuseiNendo(txtSakuseiNendo);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtKettaiYMD() {
-        return this.getDatagridhojipanel().getTxtKettaiYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtKettaiYMD(TextBoxFlexibleDate txtKettaiYMD) {
-        this.getDatagridhojipanel().setTxtKettaiYMD(txtKettaiYMD);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkTestKubun() {
-        return this.getDatagridhojipanel().getChkTestKubun();
-    }
-
-    @JsonIgnore
-    public void  setChkTestKubun(CheckBoxList chkTestKubun) {
-        this.getDatagridhojipanel().setChkTestKubun(chkTestKubun);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadHyojiNaiyo() {
-        return this.getDatagridhojipanel().getRadHyojiNaiyo();
-    }
-
-    @JsonIgnore
-    public void  setRadHyojiNaiyo(RadioButton radHyojiNaiyo) {
-        this.getDatagridhojipanel().setRadHyojiNaiyo(radHyojiNaiyo);
-    }
-
-    @JsonIgnore
-    public DataGrid<dgNinteiIchiran_Row> getDgNinteiIchiran() {
-        return this.getDatagridhojipanel().getDgNinteiIchiran();
-    }
-
-    @JsonIgnore
-    public void  setDgNinteiIchiran(DataGrid<dgNinteiIchiran_Row> dgNinteiIchiran) {
-        this.getDatagridhojipanel().setDgNinteiIchiran(dgNinteiIchiran);
     }
 
     // </editor-fold>

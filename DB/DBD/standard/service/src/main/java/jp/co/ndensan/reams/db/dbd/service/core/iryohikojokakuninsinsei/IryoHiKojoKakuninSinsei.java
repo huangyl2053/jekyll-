@@ -90,6 +90,8 @@ public class IryoHiKojoKakuninSinsei {
     private static final int シックスティ = 60;
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
+    private static final int INT_20 = 20;
+    private static final int INT_40 = 40;
     private final MapperProvider mapperProvider;
     private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
     private final DbT4401IryohiKojoDac dac;
@@ -285,45 +287,44 @@ public class IryoHiKojoKakuninSinsei {
             SofubutsuAtesakiSource 送付物宛先 = 窓空き住所編集(地方公共団体, 主治医意見書確認書情報.get識別コード(), コンフィグ情報);
             主治医意見書確認書Entity.set送付物宛先(送付物宛先);
             RString 編集後住所 = 住所編集(地方公共団体, 宛名情報, コンフィグ情報);
-            帳票固有情報.set住所(編集後住所);
-            if (編集後住所.length() <= サーティ) {
-                帳票固有情報.set住所１(RString.EMPTY);
+            if (編集後住所.length() <= INT_20) {
+                帳票固有情報.set住所１(編集後住所);
                 帳票固有情報.set住所２(RString.EMPTY);
+            } else if (編集後住所.length() <= INT_40) {
+                帳票固有情報.set住所１(編集後住所.substring(0, INT_20));
+                帳票固有情報.set住所２(編集後住所.substring(INT_20));
             } else {
-                帳票固有情報.set住所１(編集後住所.substring(0, サーティ));
-                帳票固有情報.set住所２(編集後住所.substring(サーティ));
+                帳票固有情報.set住所１(編集後住所.substring(0, INT_20));
+                帳票固有情報.set住所２(編集後住所.substring(INT_20, INT_40));
             }
-            帳票固有情報.set文書番号(主治医意見書確認書情報.get文書番号());
-            帳票固有情報.set文書番号(主治医意見書確認書情報.get文書番号());
         }
         帳票固有情報.set文書番号(主治医意見書確認書情報.get文書番号());
-        帳票固有情報.set発行日(主治医意見書確認書情報.get作成日().toDateString());
-        帳票固有情報.set申請日(主治医意見書確認書情報.get申請日().toDateString());
+        帳票固有情報.set発行日(主治医意見書確認書情報.get作成日().wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        帳票固有情報.set申請日(主治医意見書確認書情報.get申請日().wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         RString 氏名 = RString.EMPTY;
         if (宛名情報 != null) {
             if (JuminShubetsu.日本人 == 宛名情報.get住民種別()
                     || 宛名情報.get住民種別() == JuminShubetsu.住登外個人_日本人) {
                 氏名 = 宛名情報.get日本人氏名().getName().value();
-                帳票固有情報.set氏名(氏名);
             } else if (JuminShubetsu.外国人 == 宛名情報.get住民種別()
                     || 宛名情報.get住民種別() == JuminShubetsu.住登外個人_外国人) {
                 氏名 = 宛名情報.get外国人氏名().getName().value();
-                帳票固有情報.set氏名(氏名);
             }
         }
 
-        if (氏名.length() <= サーティ) {
-            帳票固有情報.set氏名(氏名);
-            帳票固有情報.set氏名１(RString.EMPTY);
+        if (氏名.length() <= INT_20) {
+            帳票固有情報.set氏名１(氏名);
             帳票固有情報.set氏名２(RString.EMPTY);
-        } else if (氏名.length() <= シックスティ) {
-            帳票固有情報.set氏名(RString.EMPTY);
-            帳票固有情報.set氏名１(氏名.substring(0, サーティ));
-            帳票固有情報.set氏名２(氏名.substring(サーティ));
+        } else if (氏名.length() <= INT_40) {
+            帳票固有情報.set氏名１(氏名.substring(0, INT_20));
+            帳票固有情報.set氏名２(氏名.substring(INT_20));
         } else {
-            帳票固有情報.set氏名(RString.EMPTY);
-            帳票固有情報.set氏名１(氏名.substring(0, サーティ));
-            帳票固有情報.set氏名２(氏名.substring(サーティ, シックスティ));
+            帳票固有情報.set氏名１(氏名.substring(0, INT_20));
+            帳票固有情報.set氏名２(氏名.substring(INT_20, INT_40));
         }
 
         帳票固有情報.set被保険者番号(主治医意見書確認書情報.get被保険者番号());

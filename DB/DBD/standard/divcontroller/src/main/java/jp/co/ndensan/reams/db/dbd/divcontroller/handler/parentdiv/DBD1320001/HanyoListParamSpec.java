@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1320001;
 
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1320001.HanyoListParamDiv;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.Outputs;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -126,13 +127,11 @@ public enum HanyoListParamSpec implements IPredicate<HanyoListParamDiv> {
         static final RString 年度RB_KEY = new RString("key0");
         static final RString 年度基準日RB_KEY = new RString("key1");
         static final RString 基準日RB_KEY = new RString("key0");
-        static final RString 帳票_CSV出力_KEY = new RString("key0");
-        static final RString 帳票のみ出力_KEY = new RString("key1");
         static final RString 空白行KEY = new RString("key0");
 
         static boolean 表題入力チェック(HanyoListParamDiv div) {
-            if (帳票_CSV出力_KEY.equals(div.getRadShuturyokuHoho().getSelectedKey())
-                    || 帳票のみ出力_KEY.equals(div.getRadShuturyokuHoho().getSelectedKey())) {
+            if (Outputs.帳票_CSV出力.getコード().equals(div.getRadShuturyokuHoho().getSelectedKey())
+                    || Outputs.帳票のみ出力.getコード().equals(div.getRadShuturyokuHoho().getSelectedKey())) {
                 return !RString.isNullOrEmpty(div.getTxtHyodaiMeisho().getValue());
             }
             return true;

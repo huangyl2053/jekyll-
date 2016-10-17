@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-1570-030 x_lilh
  */
-public class DBD710090_HanyoListShiharaiHohoHenko extends BatchFlowBase<DBD710150_HanyoListShisetsuNyutaishoParameter> {
+public class DBD710150_HanyoListShisetsuNyutaisho extends BatchFlowBase<DBD710150_HanyoListShisetsuNyutaishoParameter> {
 
     private static final String BATCH_PROCESS = "batchProcess";
 

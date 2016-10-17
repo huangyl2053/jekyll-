@@ -37,4 +37,12 @@ public interface INinteidetaikkatsukousinMapper {
      * @return List<DbT4001JukyushaDaichoEntity>
      */
     List<DbT4001JukyushaDaichoEntity> get受給者台帳更新対象データ();
+
+    /**
+     * 受給者台帳更新処理。
+     *
+     * @param entity DbT4001JukyushaDaichoEntity
+     * @return int
+     */
+    int upDate受給者台帳(DbT4001JukyushaDaichoEntity entity);
 }

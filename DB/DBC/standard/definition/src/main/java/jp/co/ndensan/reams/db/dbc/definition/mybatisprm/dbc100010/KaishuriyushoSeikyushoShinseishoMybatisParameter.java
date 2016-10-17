@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100010;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,8 +24,8 @@ public class KaishuriyushoSeikyushoShinseishoMybatisParameter implements IMyBati
 
     private LasdecCode 市町村コード;
     private RString 市町村名;
-    private RDate 作成申請年月日開始;
-    private RDate 作成申請年月日終了;
+    private FlexibleDate 作成申請年月日開始;
+    private FlexibleDate 作成申請年月日終了;
     private FlexibleDate 作成日;
     private RString 処理対象区分;
     private RString サブ業務コード;
@@ -36,6 +35,7 @@ public class KaishuriyushoSeikyushoShinseishoMybatisParameter implements IMyBati
     private RString 年度内連番;
     private final RString psmShikibetsuTaisho;
     private final RString 住宅改修費申請情報 = new RString("21D");
+    private final RString 有効終了日 = RString.EMPTY;
 
     /**
      * コンストラクタです。
@@ -55,8 +55,8 @@ public class KaishuriyushoSeikyushoShinseishoMybatisParameter implements IMyBati
      */
     public KaishuriyushoSeikyushoShinseishoMybatisParameter(LasdecCode 市町村コード,
             RString 市町村名,
-            RDate 作成申請年月日開始,
-            RDate 作成申請年月日終了,
+            FlexibleDate 作成申請年月日開始,
+            FlexibleDate 作成申請年月日終了,
             FlexibleDate 作成日,
             RString 処理対象区分,
             RString サブ業務コード,

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteishaichiran;
 
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3058KogakuShikyuShinsaKetteiTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3511KogakuShikyuShinsaKetteiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiChohyoDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufukettei.KogakuShikyuFushikyuKetteishaIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
@@ -55,7 +55,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranBodyEditor implements IKogakuSh
     @Override
     public KogakuShikyuFushikyuKetteishaIchiranSource edit(KogakuShikyuFushikyuKetteishaIchiranSource source) {
         DbWT0001HihokenshaTempEntity 被保険者 = 帳票出力対象データ.getHihokenshaTemp();
-        DbWT3058KogakuShikyuShinsaKetteiTempEntity 審査決定 = 帳票出力対象データ.getKetteiTemp();
+        DbWT3511KogakuShikyuShinsaKetteiTempEntity 審査決定 = 帳票出力対象データ.getKetteiTemp();
         source.listUpper_1 = 審査決定.getNo();
         if (null != 被保険者.get宛名カナ名称()) {
             source.listUpper_2 = 被保険者.get宛名カナ名称().substringReturnAsPossible(0, 文字40);

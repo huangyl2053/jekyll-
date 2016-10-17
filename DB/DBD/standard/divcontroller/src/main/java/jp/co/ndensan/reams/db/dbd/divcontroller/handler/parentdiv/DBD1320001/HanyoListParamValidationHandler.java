@@ -6,8 +6,12 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1320001;
 
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1320001.HanyoListParamDiv;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -37,6 +41,11 @@ public class HanyoListParamValidationHandler {
         ValidationMessageControlPairs validateResult = new ValidationMessageControlPairs();
         _HanyoListParamValidator validator = new _HanyoListParamValidator(div);
         validateResult.add(createDictionary実行するボタンクリック().check(validator.validate()));
+        if (!check範囲()) {
+            validateResult.add(new ValidationMessageControlPair(new HanyoListParamReplaceErrorMessage(
+                    div.getTxtChushutsuHani().getToValue().toDateString().toString(),
+                    div.getTxtChushutsuHani().getFromValue().toDateString().toString()), div.getTxtChushutsuHani()));
+        }
         return validateResult;
 
     }
@@ -86,4 +95,26 @@ public class HanyoListParamValidationHandler {
                 .add(HanyoListParamValidationMessage.帳票出力項目チェック３, div)
                 .build();
     }
+
+    private boolean check範囲() {
+        if (div.getTxtChushutsuHani().getFromValue() != null && div.getTxtChushutsuHani().getToValue() != null) {
+            return div.getTxtChushutsuHani().getFromValue().isBeforeOrEquals(div.getTxtChushutsuHani().getToValue());
+        }
+        return true;
+    }
+
+    private static class HanyoListParamReplaceErrorMessage implements IValidationMessage {
+
+        private final Message message;
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+
+        public HanyoListParamReplaceErrorMessage(String... replacements) {
+            this.message = UrErrorMessages.期間が不正_追加メッセージあり１.getMessage().replace(replacements);
+        }
+    }
+
 }

@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.TokuteiKojinJohoHanKanri;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.DataSetNo;
-import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShinkiIdoKubun;
-import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TokuteiKojinJohomeiCode;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.RiyoshaFutanwariaiMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.RiyoshaFutanwariaiProcessParameter;
@@ -18,7 +16,6 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.Riyosh
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -64,19 +61,13 @@ public class RiyoshaFutanwariaiProcess extends BatchProcessBase<RiyoshaFutanwari
                 TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(), DataSetNo._0202負担割合.getコード(),
                 FlexibleDate.getNowDate());
         hanNo.setValue(特定個人版管理特定情報.get(0).get版番号());
-        if ((ShinkiIdoKubun.当初.getコード().equals(processParameter.get新規異動区分())
-                || ShinkiIdoKubun.版改定.getコード().equals(processParameter.get新規異動区分()))
-                && ShokaiTeikyoKubun.初回提供済み.getコード().equals(特定個人版管理特定情報.get(0).get初回提供区分())) {
-            throw new BatchInterruptedException("");
-        }
-        if ((ShinkiIdoKubun.再登録.getコード().equals(processParameter.get新規異動区分())
-                || ShinkiIdoKubun.異動.getコード().equals(processParameter.get新規異動区分()))
-                && ShokaiTeikyoKubun.未提供.getコード().equals(特定個人版管理特定情報.get(0).get初回提供区分())) {
-            throw new BatchInterruptedException("");
+        HihokenshaNo 個人番号付替対象者被保険者番号 = processParameter.get個人番号付替対象者被保険者番号();
+        if (個人番号付替対象者被保険者番号 == null) {
+            個人番号付替対象者被保険者番号 = HihokenshaNo.EMPTY;
         }
         mybatisParameter = RiyoshaFutanwariaiMybatisParameter.createParamter提供情報_候補(新規異動区分,
                 processParameter.get対象開始日時(), processParameter.get対象終了日時(),
-                processParameter.get個人番号付替対象者被保険者番号());
+                個人番号付替対象者被保険者番号.value());
     }
 
     @Override

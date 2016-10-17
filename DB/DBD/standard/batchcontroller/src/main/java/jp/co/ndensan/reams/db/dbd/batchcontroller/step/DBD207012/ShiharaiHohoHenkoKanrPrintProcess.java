@@ -68,7 +68,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
 
     private ShiharaiHohoHenkoKanrFiveProcessParameter parameter;
 
-    private static final ReportIdDBD REPORT_DBD200007 = ReportIdDBD.DBD200007;
+    private static final ReportIdDBD REPORT_DBD200007 = ReportIdDBD.DBD200006;
 
     private static final RString 選択あり = new RString("0");
     private static final RString SELECTED_VALUE_0 = new RString("0");
@@ -99,6 +99,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
     private static final RString 滞納保険料なしのみ = new RString("滞納保険料なしのみ");
 
     private static final RString 出力順 = new RString("出力順:");
+    private static final int 帳票期別リストSIZE = 3;
 
     private Association association;
     private IOutputOrder outputOrder;
@@ -159,96 +160,13 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
     private ShiharaiHohoHenkoEntity createShiharaiHohoHenkoEntity(ShiharaiHohoHenkoHaakuFiveEntity t) {
 
         reportData.set被保険者番号(t.get対象者情報_被保険者番号());
-        if (t.get宛名情報() != null) {
-            IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get宛名情報());
 
-            reportData.set識別コード(kojin.get識別コード());
-            reportData.set被保険者氏名カナ(kojin.get名称().getKana().value());
-            reportData.set被保険者氏名(kojin.get名称().getName().value());
-
-            if (kojin.get世帯コード() != null && !kojin.get世帯コード().isEmpty()) {
-                reportData.set世帯番号(new Code(kojin.get世帯コード().getColumnValue()));
-            }
-            reportData.set行政区ｺｰﾄﾞ(kojin.get行政区画().getGyoseiku().getコード().value());
-            reportData.set行政区(kojin.get行政区画().getGyoseiku().get名称());
-            reportData.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
-            reportData.set郵便番号(kojin.get住所().get郵便番号());
-            reportData.set住所(kojin.get住所().get住所());
-        }
-
-        reportData.set資格取得日(t.get資格情報_資格取得年月日());
-        reportData.set資格喪失日(t.get資格情報_資格喪失年月日());
-        reportData.set喪失事由(ShikakuSoshitsuJiyu.toValue(t.get資格情報_資格喪失事由コード()));
-        if (t.get資格情報_被保険者区分コード() != null && !t.get資格情報_被保険者区分コード().isEmpty()) {
-            reportData.set資格区分(ShikakuKubun.toValue(t.get資格情報_被保険者区分コード()));
-        }
-        reportData.set住特フラグ(t.get資格情報_住所地特例フラグ());
-        if (t.get生活保護受給者_識別コード() != null && ShikibetsuCode.EMPTY.equals(t.get生活保護受給者_識別コード())) {
-            reportData.set生保(true);
-        } else {
-            reportData.set生保(false);
-        }
-
-        if (t.get認定情報_要介護認定状態区分コード() != null && Code.EMPTY.equals(t.get認定情報_要介護認定状態区分コード())) {
-            reportData.set要介護度(t.get認定情報_要介護認定状態区分コード().getColumnValue());
-        }
-
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(t.get認定情報_認定有効期間開始年月日()).append("～").append(t.get認定情報_認定有効期間終了年月日());
-        reportData.set認定有効期間(builder.toRString());
-        reportData.set認定日(t.get償還未払い_申請日());
-
-        if (t.get申請中認定情報_被保険者番号() != null) {
-            reportData.set認定情報_申請中(申請中);
-        } else {
-            reportData.set認定情報_申請中(RString.EMPTY);
-        }
-        reportData.set申請日(t.get償還未払い_申請日());
-
-        reportData.set償還未払い情報_申請中(t.get償還未払い_申請中());
-        reportData.set償還未払い情報_申請日(t.get償還未払い_申請日());
-        reportData.set申請中件数(new RString(t.get償還未払い_申請中件数()));
-        if (t.get償還未払い_整理番号() != null && !t.get償還未払い_整理番号().isEmpty()) {
-            reportData.set整理番号(new Code(t.get償還未払い_整理番号()));
-        }
-        if (t.get償還未払い_提供年月() != null && !t.get償還未払い_提供年月().isEmpty()) {
-            reportData.set提供年月(new FlexibleYearMonth(t.get償還未払い_提供年月().toDateString()));
-        }
-        reportData.set未通知件数(new RString(t.get償還未払い_未通知件数()));
-
-        reportData.set滞納管理状況(ShiharaiHenkoTorokuKubun._空);
-        if (t.get収納状況情報リスト() != null && !t.get収納状況情報リスト().isEmpty()) {
-            ShunoStatusJohoEntity 収納状況情報 = t.get収納状況情報リスト().get(0);
-            reportData.set最長滞納期間(new RString(String.valueOf(収納状況情報.get収納状況_最長滞納期間())));
-            reportData.set以前滞納額(収納状況情報.get収納状況_以前滞納額());
-            if (収納状況情報.get収納状況_以前滞納区分() != null && !収納状況情報.get収納状況_以前滞納区分().isEmpty()) {
-                reportData.set以前滞納区分(TainoKubun.toValue(収納状況情報.get収納状況_以前滞納区分()));
-            }
-        }
-        reportData.set終了状況(ShiharaiHenkoShuryoKubun.その他);
-
-        reportData.set適用終了日_2行目(t.get滞納者対策情報_適用終了日());
-        reportData.set終了受付日_3行目(t.get滞納者対策情報_終了受付日());
-        reportData.set予告発行日_4行目(t.get滞納者対策情報_予告発行日());
-        reportData.set弁明期限_5行目(t.get滞納者対策情報_弁明期限());
-        reportData.set弁明受付日_6行目(t.get滞納者対策情報_弁明受付日());
-        reportData.set償還発行日_7行目(t.get滞納者対策情報_償還発行日());
-
-        if (0 != t.get滞納者対策情報_償還証期限()) {
-            reportData.set償還証期限_8行目(new FlexibleDate(String.valueOf(t.get滞納者対策情報_償還証期限())));
-        }
-
-        reportData.set差止中件数_9行目(new RString(t.get滞納者対策情報_差止中件数()));
-        reportData.set差止中金額_10行目((t.get滞納者対策情報_差止中金額()));
-
-        reportData.set差止納付期日_11行目((t.get滞納者対策情報_差止納付期日()));
-        reportData.set控除件数_12行目(new RString(t.get滞納者対策情報_控除件数()));
-        reportData.set控除証期限_13行目((t.get滞納者対策情報_控除証期限()));
-        reportData.set行14(RString.EMPTY);
-        reportData.set行15(RString.EMPTY);
-        reportData.set行16(RString.EMPTY);
-        reportData.set行17(RString.EMPTY);
-
+        edit宛名情報について(t);
+        edit資格情報について(t);
+        edit生活保護受給者について(t);
+        edit認定情報について(t);
+        edit償還情報について(t);
+        edit滞納者対策情報について(t);
         List<ShunoStatusJohoEntity> 収納状況情報List = t.get収納状況情報リスト();
         if (収納状況情報List != null && !収納状況情報List.isEmpty()) {
             reportData.set収納情報List(edit収納情報List(収納状況情報List));
@@ -287,6 +205,116 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         printer.print();
     }
 
+    private void edit宛名情報について(ShiharaiHohoHenkoHaakuFiveEntity t) {
+        if (t.get宛名情報() != null) {
+            IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get宛名情報());
+
+            reportData.set識別コード(kojin.get識別コード());
+            reportData.set被保険者氏名カナ(kojin.get名称().getKana().value());
+            reportData.set被保険者氏名(kojin.get名称().getName().value());
+
+            if (kojin.get世帯コード() != null && !kojin.get世帯コード().isEmpty()) {
+                reportData.set世帯番号(new Code(kojin.get世帯コード().getColumnValue()));
+            }
+            reportData.set行政区ｺｰﾄﾞ(kojin.get行政区画().getGyoseiku().getコード().value());
+            reportData.set行政区(kojin.get行政区画().getGyoseiku().get名称());
+            reportData.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
+            reportData.set郵便番号(kojin.get住所().get郵便番号());
+            reportData.set住所(kojin.get住所().get住所());
+        }
+    }
+
+    private void edit資格情報について(ShiharaiHohoHenkoHaakuFiveEntity t) {
+        reportData.set資格取得日(t.get資格情報_資格取得年月日());
+        reportData.set資格喪失日(t.get資格情報_資格喪失年月日());
+        reportData.set喪失事由(ShikakuSoshitsuJiyu.toValue(t.get資格情報_資格喪失事由コード()));
+        if (t.get資格情報_被保険者区分コード() != null && !t.get資格情報_被保険者区分コード().isEmpty()) {
+            reportData.set資格区分(ShikakuKubun.toValue(t.get資格情報_被保険者区分コード()));
+        }
+        reportData.set住特フラグ(t.get資格情報_住所地特例フラグ());
+    }
+
+    private void edit生活保護受給者について(ShiharaiHohoHenkoHaakuFiveEntity t) {
+        if (t.get生活保護受給者_識別コード() != null && ShikibetsuCode.EMPTY.equals(t.get生活保護受給者_識別コード())) {
+            reportData.set生保(true);
+        } else {
+            reportData.set生保(false);
+        }
+    }
+
+    private void edit認定情報について(ShiharaiHohoHenkoHaakuFiveEntity t) {
+
+        if (t.get認定情報_要介護認定状態区分コード() != null && Code.EMPTY.equals(t.get認定情報_要介護認定状態区分コード())) {
+            reportData.set要介護度(t.get認定情報_要介護認定状態区分コード().getColumnValue());
+        }
+
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(t.get認定情報_認定有効期間開始年月日()).append("～").append(t.get認定情報_認定有効期間終了年月日());
+        reportData.set認定有効期間(builder.toRString());
+        reportData.set認定日(t.get償還未払い_申請日());
+
+        if (t.get申請中認定情報_被保険者番号() != null) {
+            reportData.set認定情報_申請中(申請中);
+        } else {
+            reportData.set認定情報_申請中(RString.EMPTY);
+        }
+    }
+
+    private void edit償還情報について(ShiharaiHohoHenkoHaakuFiveEntity t) {
+        reportData.set申請日(t.get償還未払い_申請日());
+        reportData.set償還未払い情報_申請中(t.get償還未払い_申請中());
+        reportData.set償還未払い情報_申請日(t.get償還未払い_申請日());
+        reportData.set申請中件数(new RString(t.get償還未払い_申請中件数()));
+        if (t.get償還未払い_整理番号() != null && !t.get償還未払い_整理番号().isEmpty()) {
+            reportData.set整理番号(new Code(t.get償還未払い_整理番号()));
+        }
+        if (t.get償還未払い_提供年月() != null && !t.get償還未払い_提供年月().isEmpty()) {
+            reportData.set提供年月(new FlexibleYearMonth(t.get償還未払い_提供年月().toDateString()));
+        }
+        reportData.set未通知件数(new RString(t.get償還未払い_未通知件数()));
+    }
+
+    private void edit滞納者対策情報について(ShiharaiHohoHenkoHaakuFiveEntity t) {
+        if (t.get滞納者対策情報_登録区分() != null && !RString.EMPTY.equals(t.get滞納者対策情報_登録区分())) {
+            reportData.set滞納管理状況(ShiharaiHenkoTorokuKubun.toValue(t.get滞納者対策情報_登録区分()));
+        }
+
+        if (t.get収納状況情報リスト() != null && !t.get収納状況情報リスト().isEmpty()) {
+            ShunoStatusJohoEntity 収納状況情報 = t.get収納状況情報リスト().get(0);
+            reportData.set最長滞納期間(new RString(String.valueOf(収納状況情報.get収納状況_最長滞納期間())));
+            reportData.set以前滞納額(収納状況情報.get収納状況_以前滞納額());
+            if (収納状況情報.get収納状況_以前滞納区分() != null && !収納状況情報.get収納状況_以前滞納区分().isEmpty()) {
+                reportData.set以前滞納区分(TainoKubun.toValue(収納状況情報.get収納状況_以前滞納区分()));
+            }
+        }
+        if (t.get滞納者対策情報_終了区分() != null && !RString.EMPTY.equals(t.get滞納者対策情報_終了区分())) {
+            reportData.set終了状況(ShiharaiHenkoShuryoKubun.toValue(t.get滞納者対策情報_終了区分()));
+        }
+
+        reportData.set適用終了日_2行目(t.get滞納者対策情報_適用終了日());
+        reportData.set終了受付日_3行目(t.get滞納者対策情報_終了受付日());
+        reportData.set予告発行日_4行目(t.get滞納者対策情報_予告発行日());
+        reportData.set弁明期限_5行目(t.get滞納者対策情報_弁明期限());
+        reportData.set弁明受付日_6行目(t.get滞納者対策情報_弁明受付日());
+        reportData.set償還発行日_7行目(t.get滞納者対策情報_償還発行日());
+
+        if (0 != t.get滞納者対策情報_償還証期限()) {
+            reportData.set償還証期限_8行目(new FlexibleDate(String.valueOf(t.get滞納者対策情報_償還証期限())));
+        }
+
+        reportData.set差止中件数_9行目(new RString(t.get滞納者対策情報_差止中件数()));
+        reportData.set差止中金額_10行目((t.get滞納者対策情報_差止中金額()));
+
+        reportData.set差止納付期日_11行目((t.get滞納者対策情報_差止納付期日()));
+        reportData.set控除件数_12行目(new RString(t.get滞納者対策情報_控除件数()));
+        reportData.set控除証期限_13行目((t.get滞納者対策情報_控除証期限()));
+        reportData.set行14(RString.EMPTY);
+        reportData.set行15(RString.EMPTY);
+        reportData.set行16(RString.EMPTY);
+        reportData.set行17(RString.EMPTY);
+
+    }
+
     private FlexibleDate edit日期(RDate 納期限) {
         if (納期限 != null) {
             return new FlexibleDate(納期限.toDateString());
@@ -296,19 +324,20 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
 
     private List<ShunoNendoEntity> edit収納情報List(List<ShunoStatusJohoEntity> 収納状況情報List) {
 
+        List<FlexibleYear> 賦課年度List = new ArrayList<>();
         List<ShunoNendoEntity> 帳票用収納状況情報List = new ArrayList<>();
-
         Map<FlexibleYear, List<ShunoStatusJohoEntity>> 収納状況情報Map = new HashMap<>();
         for (ShunoStatusJohoEntity 収納状況情報Data : 収納状況情報List) {
             if (収納状況情報Map.containsKey(収納状況情報Data.get収納状況_賦課年度())) {
                 収納状況情報Map.get(収納状況情報Data.get収納状況_賦課年度()).add(収納状況情報Data);
+                賦課年度List.add(収納状況情報Data.get収納状況_賦課年度());
             } else {
                 List<ShunoStatusJohoEntity> new収納状況情報List = new ArrayList<>();
                 new収納状況情報List.add(収納状況情報Data);
                 収納状況情報Map.put(収納状況情報Data.get収納状況_賦課年度(), new収納状況情報List);
             }
         }
-        for (FlexibleYear 賦課年度 : 収納状況情報Map.keySet()) {
+        for (FlexibleYear 賦課年度 : 賦課年度List) {
             List<ShunoStatusJohoEntity> 賦課収納状況情報List = 収納状況情報Map.get(賦課年度);
             List<ShunoKibetsuEntity> 期別情報List = new ArrayList<>();
             ShunoNendoEntity 帳票用収納状況情報 = new ShunoNendoEntity();
@@ -339,7 +368,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
                     帳票用収納状況情報.set期別情報(期別情報List);
                 }
             }
-            while (期別情報List.size() < 3) {
+            while (期別情報List.size() < 帳票期別リストSIZE) {
                 期別情報List.add(new ShunoKibetsuEntity());
             }
             帳票用収納状況情報List.add(帳票用収納状況情報);
@@ -353,67 +382,18 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         if (選択あり.equals(parameter.get登録者選択())) {
             result.add(登録者選択);
         } else {
-
             if (SELECTED_VALUE_1.equals(parameter.get登録者選択())) {
-                if (SELECTED_VALUE_0.equals(parameter.get差止予告登録者２号の選択())) {
-                    result.add(抽出対象.concat(差止予告登録者２号の選択).concat(RString.FULL_SPACE).concat(全て));
-                } else if (SELECTED_VALUE_1.equals(parameter.get差止予告登録者２号の選択())) {
-                    result.add(抽出対象.concat(差止予告登録者２号の選択).concat(RString.FULL_SPACE).concat(通知書未発行のみ));
-                } else if (SELECTED_VALUE_2.equals(parameter.get差止予告登録者２号の選択())) {
-                    result.add(抽出対象.concat(差止予告登録者２号の選択).concat(RString.FULL_SPACE).concat(適用中者のみ));
-                } else if (SELECTED_VALUE_3.equals(parameter.get差止予告登録者２号の選択())) {
-                    result.add(抽出対象.concat(差止予告登録者２号の選択).concat(RString.FULL_SPACE).concat(適用終了者のみ));
-                }
+                出力条件_差止予告登録者２号の選択(result);
             } else if (SELECTED_VALUE_2.equals(parameter.get登録者選択())) {
-                if (SELECTED_VALUE_0.equals(parameter.get差止登録者２号の選択())) {
-                    result.add(抽出対象.concat(差止登録者２号の選択).concat(RString.FULL_SPACE).concat(全て));
-                } else if (SELECTED_VALUE_1.equals(parameter.get差止登録者２号の選択())) {
-                    result.add(抽出対象.concat(差止登録者２号の選択).concat(RString.FULL_SPACE).concat(通知書未発行のみ));
-                } else if (SELECTED_VALUE_2.equals(parameter.get差止登録者２号の選択())) {
-                    result.add(抽出対象.concat(差止登録者２号の選択).concat(RString.FULL_SPACE).concat(適用中者のみ));
-                } else if (SELECTED_VALUE_3.equals(parameter.get差止登録者２号の選択())) {
-                    result.add(抽出対象.concat(差止登録者２号の選択).concat(RString.FULL_SPACE).concat(適用終了者のみ));
-                }
+                出力条件_差止登録者２号の選択(result);
             } else if (SELECTED_VALUE_3.equals(parameter.get登録者選択())) {
-                if (SELECTED_VALUE_0.equals(parameter.get償還予告登録者１号の選択())) {
-                    result.add(抽出対象.concat(償還予告登録者１号の選択).concat(RString.FULL_SPACE).concat(全て));
-                } else if (SELECTED_VALUE_1.equals(parameter.get償還予告登録者１号の選択())) {
-                    result.add(抽出対象.concat(償還予告登録者１号の選択).concat(RString.FULL_SPACE).concat(通知書未発行のみ));
-                } else if (SELECTED_VALUE_2.equals(parameter.get償還予告登録者１号の選択())) {
-                    result.add(抽出対象.concat(償還予告登録者１号の選択).concat(RString.FULL_SPACE).concat(適用中者のみ));
-                } else if (SELECTED_VALUE_3.equals(parameter.get償還予告登録者１号の選択())) {
-                    result.add(抽出対象.concat(償還予告登録者１号の選択).concat(RString.FULL_SPACE).concat(適用中者滞納保険料なしのみ));
-                } else if (SELECTED_VALUE_4.equals(parameter.get償還予告登録者１号の選択())) {
-                    result.add(抽出対象.concat(償還予告登録者１号の選択).concat(RString.FULL_SPACE).concat(適用終了者のみ));
-                }
+                出力条件_償還予告登録者１号の選択(result);
             } else if (SELECTED_VALUE_4.equals(parameter.get登録者選択())) {
-                if (SELECTED_VALUE_0.equals(parameter.get償還決定登録者１号の選択())) {
-                    result.add(抽出対象.concat(償還決定登録者１号の選択).concat(RString.FULL_SPACE).concat(全て));
-                } else if (SELECTED_VALUE_1.equals(parameter.get償還決定登録者１号の選択())) {
-                    result.add(抽出対象.concat(償還決定登録者１号の選択).concat(RString.FULL_SPACE).concat(通知書未発行のみ));
-                } else if (SELECTED_VALUE_2.equals(parameter.get償還決定登録者１号の選択())) {
-                    result.add(抽出対象.concat(償還決定登録者１号の選択).concat(RString.FULL_SPACE).concat(適用中者のみ));
-                } else if (SELECTED_VALUE_3.equals(parameter.get償還決定登録者１号の選択())) {
-                    result.add(抽出対象.concat(償還決定登録者１号の選択).concat(RString.FULL_SPACE).concat(適用中者滞納保険料なしのみ));
-                } else if (SELECTED_VALUE_4.equals(parameter.get償還決定登録者１号の選択())) {
-                    result.add(抽出対象.concat(償還決定登録者１号の選択).concat(RString.FULL_SPACE).concat(適用終了者のみ));
-                }
+                出力条件_償還決定登録者１号の選択(result);
             } else if (SELECTED_VALUE_5.equals(parameter.get登録者選択())) {
-                if (SELECTED_VALUE_0.equals(parameter.get差止中あり者のみの選択())) {
-                    result.add(抽出対象.concat(償還決定登録者_差止中あり者のみ１号の選択).concat(RString.FULL_SPACE).concat(全て));
-                } else if (SELECTED_VALUE_1.equals(parameter.get差止中あり者のみの選択())) {
-                    result.add(抽出対象.concat(償還決定登録者_差止中あり者のみ１号の選択).concat(RString.FULL_SPACE).concat(通知書未発行のみ));
-                } else if (SELECTED_VALUE_2.equals(parameter.get差止中あり者のみの選択())) {
-                    result.add(抽出対象.concat(償還決定登録者_差止中あり者のみ１号の選択).concat(RString.FULL_SPACE).concat(適用中者滞納保険料なしのみ));
-                }
+                出力条件_差止中あり者のみ１号の選択(result);
             } else if (SELECTED_VALUE_6.equals(parameter.get登録者選択())) {
-                if (SELECTED_VALUE_0.equals(parameter.get保険料控除あり者のみの選択())) {
-                    result.add(抽出対象.concat(償還決定登録者_保険料控除あり者のみ１号の選択).concat(RString.FULL_SPACE).concat(全て));
-                } else if (SELECTED_VALUE_1.equals(parameter.get保険料控除あり者のみの選択())) {
-                    result.add(抽出対象.concat(償還決定登録者_保険料控除あり者のみ１号の選択).concat(RString.FULL_SPACE).concat(通知書未発行のみ));
-                } else if (SELECTED_VALUE_2.equals(parameter.get保険料控除あり者のみの選択())) {
-                    result.add(抽出対象.concat(償還決定登録者_保険料控除あり者のみ１号の選択).concat(RString.FULL_SPACE).concat(滞納保険料なしのみ));
-                }
+                出力条件_保険料控除あり者のみ１号の選択(result);
             }
         }
 
@@ -428,5 +408,77 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         }
         result.add(出力順.concat(設定項目));
         return result;
+    }
+
+    private void 出力条件_差止予告登録者２号の選択(List<RString> result) {
+        if (SELECTED_VALUE_0.equals(parameter.get差止予告登録者２号の選択())) {
+            result.add(抽出対象.concat(差止予告登録者２号の選択).concat(RString.FULL_SPACE).concat(全て));
+        } else if (SELECTED_VALUE_1.equals(parameter.get差止予告登録者２号の選択())) {
+            result.add(抽出対象.concat(差止予告登録者２号の選択).concat(RString.FULL_SPACE).concat(通知書未発行のみ));
+        } else if (SELECTED_VALUE_2.equals(parameter.get差止予告登録者２号の選択())) {
+            result.add(抽出対象.concat(差止予告登録者２号の選択).concat(RString.FULL_SPACE).concat(適用中者のみ));
+        } else if (SELECTED_VALUE_3.equals(parameter.get差止予告登録者２号の選択())) {
+            result.add(抽出対象.concat(差止予告登録者２号の選択).concat(RString.FULL_SPACE).concat(適用終了者のみ));
+        }
+    }
+
+    private void 出力条件_差止登録者２号の選択(List<RString> result) {
+        if (SELECTED_VALUE_0.equals(parameter.get差止登録者２号の選択())) {
+            result.add(抽出対象.concat(差止登録者２号の選択).concat(RString.FULL_SPACE).concat(全て));
+        } else if (SELECTED_VALUE_1.equals(parameter.get差止登録者２号の選択())) {
+            result.add(抽出対象.concat(差止登録者２号の選択).concat(RString.FULL_SPACE).concat(通知書未発行のみ));
+        } else if (SELECTED_VALUE_2.equals(parameter.get差止登録者２号の選択())) {
+            result.add(抽出対象.concat(差止登録者２号の選択).concat(RString.FULL_SPACE).concat(適用中者のみ));
+        } else if (SELECTED_VALUE_3.equals(parameter.get差止登録者２号の選択())) {
+            result.add(抽出対象.concat(差止登録者２号の選択).concat(RString.FULL_SPACE).concat(適用終了者のみ));
+        }
+    }
+
+    private void 出力条件_償還予告登録者１号の選択(List<RString> result) {
+        if (SELECTED_VALUE_0.equals(parameter.get償還予告登録者１号の選択())) {
+            result.add(抽出対象.concat(償還予告登録者１号の選択).concat(RString.FULL_SPACE).concat(全て));
+        } else if (SELECTED_VALUE_1.equals(parameter.get償還予告登録者１号の選択())) {
+            result.add(抽出対象.concat(償還予告登録者１号の選択).concat(RString.FULL_SPACE).concat(通知書未発行のみ));
+        } else if (SELECTED_VALUE_2.equals(parameter.get償還予告登録者１号の選択())) {
+            result.add(抽出対象.concat(償還予告登録者１号の選択).concat(RString.FULL_SPACE).concat(適用中者のみ));
+        } else if (SELECTED_VALUE_3.equals(parameter.get償還予告登録者１号の選択())) {
+            result.add(抽出対象.concat(償還予告登録者１号の選択).concat(RString.FULL_SPACE).concat(適用中者滞納保険料なしのみ));
+        } else if (SELECTED_VALUE_4.equals(parameter.get償還予告登録者１号の選択())) {
+            result.add(抽出対象.concat(償還予告登録者１号の選択).concat(RString.FULL_SPACE).concat(適用終了者のみ));
+        }
+    }
+
+    private void 出力条件_償還決定登録者１号の選択(List<RString> result) {
+        if (SELECTED_VALUE_0.equals(parameter.get償還決定登録者１号の選択())) {
+            result.add(抽出対象.concat(償還決定登録者１号の選択).concat(RString.FULL_SPACE).concat(全て));
+        } else if (SELECTED_VALUE_1.equals(parameter.get償還決定登録者１号の選択())) {
+            result.add(抽出対象.concat(償還決定登録者１号の選択).concat(RString.FULL_SPACE).concat(通知書未発行のみ));
+        } else if (SELECTED_VALUE_2.equals(parameter.get償還決定登録者１号の選択())) {
+            result.add(抽出対象.concat(償還決定登録者１号の選択).concat(RString.FULL_SPACE).concat(適用中者のみ));
+        } else if (SELECTED_VALUE_3.equals(parameter.get償還決定登録者１号の選択())) {
+            result.add(抽出対象.concat(償還決定登録者１号の選択).concat(RString.FULL_SPACE).concat(適用中者滞納保険料なしのみ));
+        } else if (SELECTED_VALUE_4.equals(parameter.get償還決定登録者１号の選択())) {
+            result.add(抽出対象.concat(償還決定登録者１号の選択).concat(RString.FULL_SPACE).concat(適用終了者のみ));
+        }
+    }
+
+    private void 出力条件_差止中あり者のみ１号の選択(List<RString> result) {
+        if (SELECTED_VALUE_0.equals(parameter.get差止中あり者のみの選択())) {
+            result.add(抽出対象.concat(償還決定登録者_差止中あり者のみ１号の選択).concat(RString.FULL_SPACE).concat(全て));
+        } else if (SELECTED_VALUE_1.equals(parameter.get差止中あり者のみの選択())) {
+            result.add(抽出対象.concat(償還決定登録者_差止中あり者のみ１号の選択).concat(RString.FULL_SPACE).concat(通知書未発行のみ));
+        } else if (SELECTED_VALUE_2.equals(parameter.get差止中あり者のみの選択())) {
+            result.add(抽出対象.concat(償還決定登録者_差止中あり者のみ１号の選択).concat(RString.FULL_SPACE).concat(適用中者滞納保険料なしのみ));
+        }
+    }
+
+    private void 出力条件_保険料控除あり者のみ１号の選択(List<RString> result) {
+        if (SELECTED_VALUE_0.equals(parameter.get保険料控除あり者のみの選択())) {
+            result.add(抽出対象.concat(償還決定登録者_保険料控除あり者のみ１号の選択).concat(RString.FULL_SPACE).concat(全て));
+        } else if (SELECTED_VALUE_1.equals(parameter.get保険料控除あり者のみの選択())) {
+            result.add(抽出対象.concat(償還決定登録者_保険料控除あり者のみ１号の選択).concat(RString.FULL_SPACE).concat(通知書未発行のみ));
+        } else if (SELECTED_VALUE_2.equals(parameter.get保険料控除あり者のみの選択())) {
+            result.add(抽出対象.concat(償還決定登録者_保険料控除あり者のみ１号の選択).concat(RString.FULL_SPACE).concat(滞納保険料なしのみ));
+        }
     }
 }

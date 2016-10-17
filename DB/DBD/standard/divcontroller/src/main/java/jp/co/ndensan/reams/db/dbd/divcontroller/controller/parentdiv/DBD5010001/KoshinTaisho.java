@@ -180,6 +180,7 @@ public class KoshinTaisho {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         KoshinTaishoValidationHandler validationHandler = new KoshinTaishoValidationHandler();
         validationHandler.更新管理完了対象者一覧データの存在チェック(pairs, div);
+        validationHandler.抽出対象期間大小関係チェック(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }

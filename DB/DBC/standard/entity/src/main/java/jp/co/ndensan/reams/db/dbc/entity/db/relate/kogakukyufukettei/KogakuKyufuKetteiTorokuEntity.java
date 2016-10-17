@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei;
 
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3058KogakuShikyuShinsaKetteiTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3511KogakuShikyuShinsaKetteiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
 
@@ -22,6 +22,6 @@ public class KogakuKyufuKetteiTorokuEntity {
 
     private DbT3058KogakuShikyuShinsaKetteiEntity shinsaKettei;
     private DbT3057KogakuShikyuHanteiKekkaEntity hanteiKekka;
-    private DbWT3058KogakuShikyuShinsaKetteiTempEntity ketteiTemp;
+    private DbWT3511KogakuShikyuShinsaKetteiTempEntity ketteiTemp;
     private DbWT0001HihokenshaTempEntity hihokenshaTemp;
 }

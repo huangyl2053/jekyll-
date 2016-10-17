@@ -50,7 +50,8 @@ public class JukyushaNinteishasuJokyohyoOutputProcess extends BatchProcessBase<N
     protected void initialize() {
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
-        if (全て.equals(processParameter.get宛名抽出条件().getShichoson_Code().value()) || processParameter.get宛名抽出条件().getShichoson_Code().isEmpty()) {
+        if (processParameter.get宛名抽出条件().getShichoson_Code() == null || 全て.equals(processParameter.get宛名抽出条件().getShichoson_Code().value())
+                || processParameter.get宛名抽出条件().getShichoson_Code().isEmpty()) {
             市町村コード = 地方公共団体.getLasdecCode_();
             市町村名称 = 地方公共団体.get市町村名();
         } else {
@@ -93,7 +94,7 @@ public class JukyushaNinteishasuJokyohyoOutputProcess extends BatchProcessBase<N
 
     private void outputJokenhyoFactory() {
         JukyushagenmenninteiDateManager manager = new JukyushagenmenninteiDateManager();
-        Association association = AssociationFinderFactory.createInstance().getAssociation(processParameter.get宛名抽出条件().getShichoson_Code());
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
         RString 市町村名 = association.get市町村名();
 
         RString ページ数 = new RString(reportSourceWriter.pageCount().value());

@@ -6,8 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2400011;
 
 import jp.co.ndensan.reams.db.dbc.business.core.tesuryoseikyukenshinseishosakusei.TesuryoSeikyuKenShinseishoSakuseiBusiness;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC100010.DBC100010_KaishuriyushoSeikyushoShinseishoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2400011.TesuryoSeikyuKenShinseishoSakuseiParameterDiv;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 住宅改修理由書作成手数料請求書兼申請書作成 ハンドラクラスです。
@@ -41,5 +45,32 @@ public class TesuryoSeikyuKenShinseishoSakuseiParameterHandler {
             div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().setFromValue(new RDate(""));
         }
         div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().setToValue(RDate.getNowDate());
+    }
+
+    /**
+     * 実行ボタン処理です
+     *
+     * @param div 様式別連携情報Div
+     * @param 市町村コード 市町村コード
+     * @param 市町村名 市町村名
+     * @return HoshuShiharaiJunbiBatchParameter
+     */
+    public DBC100010_KaishuriyushoSeikyushoShinseishoParameter onClick_btnJikko(TesuryoSeikyuKenShinseishoSakuseiParameterDiv div,
+            RString 市町村コード, RString 市町村名) {
+        DBC100010_KaishuriyushoSeikyushoShinseishoParameter batchParameter = new DBC100010_KaishuriyushoSeikyushoShinseishoParameter();
+        batchParameter.set市町村コード(new LasdecCode(市町村コード));
+        batchParameter.set市町村名(市町村名);
+        batchParameter.set作成申請年月日開始(rDateToFlexibleDate(div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getFromValue()));
+        batchParameter.set作成申請年月日終了(rDateToFlexibleDate(div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getToValue()));
+        batchParameter.set作成日(FlexibleDate.getNowDate());
+        batchParameter.set処理対象区分(RString.EMPTY);
+        return batchParameter;
+    }
+
+    private FlexibleDate rDateToFlexibleDate(RDate date) {
+        if (date != null) {
+            return new FlexibleDate(date.toDateString());
+        }
+        return FlexibleDate.EMPTY;
     }
 }

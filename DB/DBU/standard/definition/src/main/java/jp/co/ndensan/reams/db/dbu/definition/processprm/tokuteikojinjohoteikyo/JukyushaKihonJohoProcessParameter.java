@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShinkiIdoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.JukyushaKihonJohoMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -23,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JukyushaKihonJohoProcessParameter implements IBatchProcessParameter {
 
     private RString 提供基本情報中間テーブル名;
-    private ShinkiIdoKubun 新規異動区分;
+    private RString 新規異動区分;
     private RDateTime 対象開始日時;
     private RDateTime 対象終了日時;
     private RString 特定個人情報名コード;

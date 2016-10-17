@@ -24,8 +24,8 @@ public enum FutanyikkatsuShoninkekkaListDivSpec implements IPredicate<Futanyikka
                  */
                 @Override
                 public boolean apply(FutanyikkatsuShoninkekkaListDiv div) {
-                    return div.getDgNinteiIchiran().getDataSource() != null
-                    && !div.getDgNinteiIchiran().getDataSource().isEmpty();
+                    return div.getDatagridhojipanel().getDgNinteiIchiran().getDataSource() != null
+                    && !div.getDatagridhojipanel().getDgNinteiIchiran().getDataSource().isEmpty();
                 }
             },
     修正保存対象存在チェック {
@@ -39,8 +39,8 @@ public enum FutanyikkatsuShoninkekkaListDivSpec implements IPredicate<Futanyikka
                 @Override
                 public boolean apply(FutanyikkatsuShoninkekkaListDiv div) {
                     boolean dgninteiichiran_jotai = false;
-                    if (div.getDgNinteiIchiran().getActiveRow().getJotai() != null) {
-                        dgninteiichiran_jotai = div.getDgNinteiIchiran().getActiveRow().getJotai().equals(new RString("修正"));
+                    if (div.getDatagridhojipanel().getDgNinteiIchiran().getActiveRow().getJotai() != null) {
+                        dgninteiichiran_jotai = div.getDatagridhojipanel().getDgNinteiIchiran().getActiveRow().getJotai().equals(new RString("修正"));
                     }
                     return dgninteiichiran_jotai;
                 }

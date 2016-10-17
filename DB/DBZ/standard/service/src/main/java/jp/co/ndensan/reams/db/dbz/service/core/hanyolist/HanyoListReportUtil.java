@@ -11,14 +11,14 @@ import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.hanyolist.HanyoListShutsuryokuKomoku;
 import jp.co.ndensan.reams.db.dbz.business.core.hanyolist.HanyoListShutsuryokuKomokuList;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hanyolist.HanyoLisyInvertedParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoLisyInvertedEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hanyolist.IHanyoLisyInvertedMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.entity.db.basic.reportoutputitem.UrT0072ShutsuryokuKomokuKanriEntity;
-import jp.co.ndensan.reams.ur.urz.entity.db.basic.reportoutputitem.UrT0073ShutsuryokuKomokuSetteiEntity;
-import jp.co.ndensan.reams.ur.urz.entity.db.basic.reportoutputitemkanri.UrT0171ChohyoShutsuryokuKomokuKanriEntity;
-import jp.co.ndensan.reams.ur.urz.persistence.db.basic.reportoutputitem.UrT0072ShutsuryokuKomokuKanriDac;
-import jp.co.ndensan.reams.ur.urz.persistence.db.basic.reportoutputitem.UrT0073ShutsuryokuKomokuSetteiDac;
-import jp.co.ndensan.reams.ur.urz.persistence.db.basic.reportoutputitemkanri.UrT0171ChohyoShutsuryokuKomokuKanriDac;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputitem.ShutsuryokuKomokuDetailModel;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputitem.relate.ChohyoShutsuryokuKomokuModel;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputitem.relate.SelectedShutsuryokuKomokuModel;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputitem.ShutsuryokuKomokuFinder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -32,79 +32,85 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class HanyoListReportUtil {
 
-    private final UrT0072ShutsuryokuKomokuKanriDac urT0072dac;
-    private final UrT0073ShutsuryokuKomokuSetteiDac urT0073dac;
-    private final UrT0171ChohyoShutsuryokuKomokuKanriDac urT0171dac;
     private final MapperProvider mapperProvider;
-    private IOutputOrder outputOrder;
-    private static final int NUM5 = 5;
-    private static final int INDEX_1 = 1;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
-    private static final int INDEX_5 = 5;
-    private static final RString QUOTES = new RString("\"");
 
     /**
      * コンストラクタです。
      */
     HanyoListReportUtil() {
-        this.urT0072dac = InstanceProvider.create(UrT0072ShutsuryokuKomokuKanriDac.class);
-        this.urT0073dac = InstanceProvider.create(UrT0073ShutsuryokuKomokuSetteiDac.class);
-        this.urT0171dac = InstanceProvider.create(UrT0171ChohyoShutsuryokuKomokuKanriDac.class);
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link HanyoListReportUtil}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link HanyoListReportUtil}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HanyoListReportUtil}のインスタンス
      */
     public static HanyoListReportUtil createInstance() {
         return InstanceProvider.create(HanyoListReportUtil.class);
     }
 
+    /**
+     * 汎用リスト出力項目を取得します。
+     *
+     * @param 業務コード 業務コード
+     * @param サブ業務コード サブ業務コード
+     * @param 帳票ID 帳票ID
+     * @param 出力項目ID 出力項目ID
+     * @return HanyoListShutsuryokuKomoku 汎用リスト出力項目
+     */
     public HanyoListShutsuryokuKomoku get汎用リスト出力項目(GyomuCode 業務コード, SubGyomuCode サブ業務コード, ReportId 帳票ID, long 出力項目ID) throws NullPointerException {
         HanyoListShutsuryokuKomoku hanyoList = new HanyoListShutsuryokuKomoku();
-        UrT0072ShutsuryokuKomokuKanriEntity urT0072Entity = urT0072dac.selectByKey(サブ業務コード, 帳票ID, 出力項目ID);
-        if (urT0072Entity != null) {
-            hanyoList.set項目間スペース数(urT0072Entity.getKomokukanSpace());
-        } else {
+        IHanyoLisyInvertedMapper hanyoLisyInverted = this.mapperProvider.create(IHanyoLisyInvertedMapper.class);
+        HanyoLisyInvertedParameter parameter = new HanyoLisyInvertedParameter(帳票ID);
+        List<HanyoLisyInvertedEntity> hanyoLisyInvertedEntitys = hanyoLisyInverted.select汎用リスト項目変換テーブル(parameter);
+        if (hanyoLisyInvertedEntitys == null || hanyoLisyInvertedEntitys.isEmpty()) {
             return null;
         }
-        List<UrT0073ShutsuryokuKomokuSetteiEntity> urT0073Entity = urT0073dac.selectByKey(サブ業務コード, 帳票ID, 出力項目ID, 業務コード);
-        List<RString> 項目ID = new ArrayList();
-        if (urT0073Entity != null && !urT0073Entity.isEmpty()) {
-            List<HanyoListShutsuryokuKomokuList> 汎用リスト出力項目リスト = new ArrayList();
-            for (int index = 0; index < urT0073Entity.size(); index++) {
-                HanyoListShutsuryokuKomokuList 汎用リスト出力項目 = new HanyoListShutsuryokuKomokuList();
-
-                汎用リスト出力項目.set項目ID(urT0073Entity.get(index).getShutsuryokuKomokuId());
-                汎用リスト出力項目.set出力項目順位(urT0073Entity.get(index).getShutsuryokuKomokuJuni());
-                汎用リスト出力項目.set省略区分(urT0073Entity.get(index).getShoryakuKubun());
-                汎用リスト出力項目.set出力項目文字数(urT0073Entity.get(index).getShutsuryokuKomokuMojisu());
-                汎用リスト出力項目.set出力項目日付区分(urT0073Entity.get(index).getShutsuryokuKomokuHizukeKubun());
-                項目ID.add(new RString(urT0073Entity.get(index).getShutsuryokuKomokuId()));
-                汎用リスト出力項目リスト.add(汎用リスト出力項目);
-            }
-            hanyoList.set汎用リスト出力項目リスト(汎用リスト出力項目リスト);
-        } else {
+        ShutsuryokuKomokuFinder finder = new ShutsuryokuKomokuFinder();
+        ChohyoShutsuryokuKomokuModel chohyoModel = finder.get帳票出力項目(サブ業務コード, 帳票ID);
+        if (chohyoModel == null) {
             return null;
         }
-        if (!項目ID.isEmpty()) {
-            for (int index = 0; index < 項目ID.size(); index++) {
-                UrT0171ChohyoShutsuryokuKomokuKanriEntity urT0171Entity = urT0171dac.selectByKey(業務コード, 項目ID.get(index));
-                if (urT0171Entity != null) {
-                    hanyoList.get汎用リスト出力項目リスト().get(index).set項目名称(urT0171Entity.getKomokuMei());
-                    hanyoList.get汎用リスト出力項目リスト().get(index).set項目桁数(urT0171Entity.getKaiPeijiKetasu());
-                } else {
-                    return null;
+        ArrayList<ShutsuryokuKomokuDetailModel> detailModel = chohyoModel.get出力項目詳細モデルList();
+        ShutsuryokuKomokuDetailModel shutsuryokuKomokuModel = new ShutsuryokuKomokuDetailModel();
+        if (detailModel == null || detailModel.isEmpty()) {
+            return null;
+        } else {
+            for (int index = 0; index < detailModel.size(); index++) {
+                if (detailModel.get(index).get出力項目管理モデル().get出力項目ID() == 出力項目ID) {
+                    shutsuryokuKomokuModel = detailModel.get(index);
                 }
             }
-        } else {
+        }
+        if (shutsuryokuKomokuModel == null) {
             return null;
         }
+        ArrayList<SelectedShutsuryokuKomokuModel> selectedModel = shutsuryokuKomokuModel.get選択済み出力項目List();
+        if (selectedModel == null || selectedModel.isEmpty()) {
+            return null;
+        }
+        List<HanyoListShutsuryokuKomokuList> 汎用リスト出力項目リスト = new ArrayList();
+        for (int index = 0; index < selectedModel.size(); index++) {
+            HanyoListShutsuryokuKomokuList 汎用リスト出力項目 = new HanyoListShutsuryokuKomokuList();
+            汎用リスト出力項目.set項目ID(selectedModel.get(index).get出力項目モデル().get項目ID());
+            汎用リスト出力項目.set出力項目順位(selectedModel.get(index).get出力項目モデル().get出力項目順位());
+            汎用リスト出力項目.set省略区分(selectedModel.get(index).get出力項目モデル().get省略区分());
+            汎用リスト出力項目.set出力項目文字数(selectedModel.get(index).get出力項目モデル().get出力項目文字数());
+            汎用リスト出力項目.set出力項目日付区分(selectedModel.get(index).get出力項目モデル().get出力項目日付区分());
+            汎用リスト出力項目.set項目名称(selectedModel.get(index).get帳票出力項目管理モデル().get項目名());
+            汎用リスト出力項目.set項目桁数(selectedModel.get(index).get帳票出力項目管理モデル().get項目桁数());
+            for (int index2 = 0; index2 < hanyoLisyInvertedEntitys.size(); index2++) {
+                if (hanyoLisyInvertedEntitys.get(index2).get項目ID() == selectedModel.get(index).get出力項目モデル().get項目ID()) {
+                    汎用リスト出力項目.set項目位置(hanyoLisyInvertedEntitys.get(index2).get項目位置());
+                    汎用リスト出力項目.set編集方法(hanyoLisyInvertedEntitys.get(index2).get帳票表示位置());
+                    汎用リスト出力項目.set金額編集(hanyoLisyInvertedEntitys.get(index2).get金額編集());
+                }
+            }
+            汎用リスト出力項目リスト.add(汎用リスト出力項目);
+        }
+        hanyoList.set汎用リスト出力項目リスト(汎用リスト出力項目リスト);
+        hanyoList.set項目間スペース数(shutsuryokuKomokuModel.get出力項目管理モデル().get項目間スペース数());
         Collections.sort(hanyoList.get汎用リスト出力項目リスト(), new Comparator<HanyoListShutsuryokuKomokuList>() {
             @Override
             public int compare(HanyoListShutsuryokuKomokuList result1, HanyoListShutsuryokuKomokuList result2) {
@@ -113,7 +119,7 @@ public class HanyoListReportUtil {
                 } else if (result1.get出力項目順位() > result2.get出力項目順位()) {
                     return 1;
                 } else {
-                    return result1.get項目ID() < result2.get項目ID() ? -1 : 1;
+                    return Long.parseLong(result1.get項目ID().toString()) < Long.parseLong(result2.get項目ID().toString()) ? -1 : 1;
                 }
             }
         });
@@ -183,7 +189,7 @@ public class HanyoListReportUtil {
      }
      }*/
 
-    /*private RString to帳票物理名(ISetSortItem item) {
+ /*private RString to帳票物理名(ISetSortItem item) {
 
      RString 帳票物理名 = RString.EMPTY;
 

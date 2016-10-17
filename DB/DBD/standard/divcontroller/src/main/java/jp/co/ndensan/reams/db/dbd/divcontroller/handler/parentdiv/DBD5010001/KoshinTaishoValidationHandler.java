@@ -76,4 +76,19 @@ public class KoshinTaishoValidationHandler {
         }
         return pairs;
     }
+
+    /**
+     * 抽出対象期間大小関係チェック。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div KoshinTaishoDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 抽出対象期間大小関係チェック(
+            ValidationMessageControlPairs pairs, KoshinTaishoDiv div) {
+        if (div.getTxtKikan().getFromValue().compareTo(div.getTxtKikan().getToValue()) > 0) {
+            pairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.終了日が開始日以前)));
+        }
+        return pairs;
+    }
 }

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelec
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -78,6 +79,7 @@ public class HanyoRisutoJigyoTaishoshaMybatisParameter implements IMyBatisParame
     private boolean has地区3To;
     private final IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho;
     private final RString psmAtesaki;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタです。
@@ -117,6 +119,7 @@ public class HanyoRisutoJigyoTaishoshaMybatisParameter implements IMyBatisParame
         this.syutsuryokukomoku = syutsuryokukomoku;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
+        shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(psmShikibetsuTaisho);
         set抽出方法区分(cyusyutsuhohokubun);
         set年齢層抽出方法(atenacyusyutsujyoken);
         set地区区分(atenacyusyutsujyoken);

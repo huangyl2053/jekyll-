@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -51,6 +50,7 @@ public class TorikomiFuairu {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         RString filename = RString.EMPTY;
+        RString filePath = RString.EMPTY;
         for (FileData sharedfile : files) {
             File inFile = new File(sharedfile.getFilePath().toString());
             RString localFilePath = new RString(inFile.getPath());
@@ -60,11 +60,10 @@ public class TorikomiFuairu {
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts();
             SharedFile.deleteOldestEntry(sfd);
             SharedFile.copyToSharedFile(sfd, path, opts);
-            SharedFile.copyToLocal(filesystemName, new FilesystemPath(Path.getTmpDirectoryPath()));
             filename = new RString(inFile.getName());
+            filePath = sharedfile.getFilePath();
         }
-        RString csvFilePath = Path.combinePath(Path.getTmpDirectoryPath(), filename);
-        int size = getHandler(div).upload(csvFilePath, filename);
+        int size = getHandler(div).upload(filePath, filename);
         div.getHdNumber().setValue(new RString(size % NO_300));
         getValidationHandler(div).validateForアップロードファイル項目数(pairs);
         if (pairs.iterator().hasNext()) {

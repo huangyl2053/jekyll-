@@ -12,8 +12,6 @@ import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.chohyoshuchiryokuyoshiseijyoho.ChohyoShuchiryokuyoShiseiJyohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519001.PntNinteiShinsaHanteiListEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd503001.ShinsaHanteiIraiIchiranhyoReportSource;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -22,8 +20,6 @@ import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -115,11 +111,11 @@ public class PntNinteiShinsaHanteiListManager {
             出力条件.add(抽出終了日時.concat(RString.HALF_SPACE));
         }
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                ReportIdDBD.DBD503001.getReportName(),
+                ReportIdDBD.DBD503001.getReportId().value(),
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
-                DbBusinessConfig.get(ConfigNameDBE.要介護認定取消通知書, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
+                ReportIdDBD.DBD503001.getReportName(),
                 出力ページ数,
                 出力有無,
                 ファイル名,

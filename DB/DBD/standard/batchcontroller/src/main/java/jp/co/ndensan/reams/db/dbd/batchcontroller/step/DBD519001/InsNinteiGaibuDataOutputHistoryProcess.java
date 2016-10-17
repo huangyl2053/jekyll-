@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD519001;
 import jp.co.ndensan.reams.db.dbd.business.core.dbd519001.InsNinteiGaibuDataOutputHistoryManager;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd519001.InsNinteiGaibuDataOutputHistoryProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5190001.DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteishinseiinfoif.IInsNinteiGaibuDataOutputHistoryMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -26,8 +27,14 @@ public class InsNinteiGaibuDataOutputHistoryProcess extends BatchProcessBase<DbT
             + "relate.ninteishinseiinfoif.IInsNinteiGaibuDataOutputHistoryMapper.select出力履歴");
     private InsNinteiGaibuDataOutputHistoryProcessParameter parameter;
     private boolean isUpdate = false;
+    private IInsNinteiGaibuDataOutputHistoryMapper mapper;
     @BatchWriter
     private BatchPermanentTableWriter<DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity> tableWriter;
+
+    @Override
+    protected void initialize() {
+        mapper = getMapper(IInsNinteiGaibuDataOutputHistoryMapper.class);
+    }
 
     @Override
     protected void createWriter() {
@@ -53,5 +60,6 @@ public class InsNinteiGaibuDataOutputHistoryProcess extends BatchProcessBase<DbT
             InsNinteiGaibuDataOutputHistoryManager manager = new InsNinteiGaibuDataOutputHistoryManager();
             tableWriter.insert(manager.get出力履歴(parameter));
         }
+        mapper.updateその他情報登録(parameter.toMybitsParameter());
     }
 }

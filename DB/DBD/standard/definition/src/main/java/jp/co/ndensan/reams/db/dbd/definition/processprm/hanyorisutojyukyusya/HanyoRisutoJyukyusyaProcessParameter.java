@@ -352,7 +352,7 @@ public class HanyoRisutoJyukyusyaProcessParameter implements IBatchProcessParame
                 is宛名抽出区分_生年月日From = true;
             }
             if (宛名抽出条件.getSeinengappiRange() != null && 宛名抽出条件.getSeinengappiRange().getTo() != null) {
-                seinengappiYMDFrom = 宛名抽出条件.getSeinengappiRange().getTo().toFlexibleDate();
+                seinengappiYMDTo = 宛名抽出条件.getSeinengappiRange().getTo().toFlexibleDate();
                 is宛名抽出区分_生年月日To = true;
             }
         }

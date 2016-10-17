@@ -29,6 +29,7 @@ public class JutakuKaishuRiyushoTesuryoShukeiDataProcess extends BatchProcessBas
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc100010."
             + "IKaishuriyushoSeikyushoShinseishoMapper.get請求集計一時出力データ");
+    private static final int INDEX = 6;
     @BatchWriter
     private BatchPermanentTableWriter<DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity> dbT3096EntityWriter;
 
@@ -47,10 +48,10 @@ public class JutakuKaishuRiyushoTesuryoShukeiDataProcess extends BatchProcessBas
         DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity dbt3096Entity = new DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity();
         dbt3096Entity.setShoKisaiHokenshaNo(shoKisaiHokenshaNoTohokenshaNo(entity.get証記載保険者番号()));
         dbt3096Entity.setRiyushoSakuseiJigyoshaNo(entity.get介護住宅改修理由書作成事業者番号());
-        dbt3096Entity.setShukeiNo(entity.get集計関連付け番号());
+        dbt3096Entity.setShukeiNo(entity.get集計関連番号());
         dbt3096Entity.setRirekiNo(entity.get履歴番号());
-        dbt3096Entity.setShukeiKaishiYM(new FlexibleYearMonth(entity.get集計開始年月().toDateString()));
-        dbt3096Entity.setShukeiShuryoYM(new FlexibleYearMonth(entity.get集計終了年月().toDateString()));
+        dbt3096Entity.setShukeiKaishiYM(new FlexibleYearMonth(entity.get集計開始年月().toString().substring(0, INDEX)));
+        dbt3096Entity.setShukeiShuryoYM(new FlexibleYearMonth(entity.get集計終了年月().toString().substring(0, INDEX)));
         dbt3096Entity.setRiyushoSakuseiKensu(new Decimal(entity.get介護住宅改修理由書作成件数()));
         dbt3096Entity.setRiyushoSakuseiTanka(entity.get介護住宅改修理由書作成単価());
         dbt3096Entity.setRiyushoSakuseiSeikyuKingaku(entity.get介護住宅改修理由書作成請求金額());

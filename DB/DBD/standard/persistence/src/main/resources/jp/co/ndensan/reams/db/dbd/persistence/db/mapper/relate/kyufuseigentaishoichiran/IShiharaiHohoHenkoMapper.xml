@@ -235,15 +235,15 @@ and open the template in the editor.-->
             AND 1=1
         </if>
         <if test="is終了区分_空白">
-            AND  T4021."shuryoKubun" IS NULL
+            AND  (T4021."shuryoKubun" IS NULL OR T4021."shuryoKubun" = '')
         </if>
         <if test="is終了区分_空白以外">
-            AND  T4021."shuryoKubun" IS  NOT NULL
+            AND ( T4021."shuryoKubun" IS  NOT NULL OR T4021."shuryoKubun" != '')
         </if>
         <if test="is終了区分_二重">
-            AND ((  T4021."shuryoKubun" IS NULL AND (#{システム日付} <![CDATA[<]]> T4021."tekiyoKaishiYMD"
+            AND (( (T4021."shuryoKubun" IS NULL OR T4021."shuryoKubun" = '') AND (#{システム日付} <![CDATA[<]]> T4021."tekiyoKaishiYMD"
             OR  T4021."tekiyoShuryoYMD"  <![CDATA[<]]> #{システム日付}))
-            OR ( T4021."shuryoKubun" IS  NOT NULL)
+            OR ( T4021."shuryoKubun" IS  NOT NULL OR T4021."shuryoKubun" != '')
             )
         </if>
 

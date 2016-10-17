@@ -10,8 +10,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -74,11 +72,11 @@ public class NinteiKekkaIchijiTeburuEntity extends DbTableEntityBase<NinteiKekka
     @TempTableColumnOrder(17)
     private AtenaMeisho hihokenjakanjishimei;
     @TempTableColumnOrder(18)
-    private YubinNo yubenbango;
+    private RString yubenbango;
     @TempTableColumnOrder(19)
     private AtenaJusho jusho;
     @TempTableColumnOrder(20)
-    private TelNo tenwabango;
+    private RString tenwabango;
     @TempTableColumnOrder(21)
     private RString byoinshisetsutonomeisho;
     @TempTableColumnOrder(22)

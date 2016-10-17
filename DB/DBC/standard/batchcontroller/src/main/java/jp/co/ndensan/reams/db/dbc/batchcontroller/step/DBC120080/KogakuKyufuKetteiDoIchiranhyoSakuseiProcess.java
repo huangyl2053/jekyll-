@@ -14,7 +14,7 @@ import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteishaichiran.KogakuShikyuFushikyuKetteishaIchiranProperty;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukyufuketteiin.KogakuKyufuKetteiDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3058KogakuShikyuShinsaKetteiTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3511KogakuShikyuShinsaKetteiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufukettei.KogakuKyufuKetteiIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiChohyoDataEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukyufukettei.KogakuKyufuKetteiJohoManager;
@@ -73,11 +73,10 @@ public class KogakuKyufuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchProc
     private static final RString 支払方法区分コード_窓口 = new RString("1");
     private static final RString 支払方法区分_窓口 = new RString("窓口");
     private static final RString 支払方法区分_口座 = new RString("口座");
-
+    private static final RString 作成 = new RString("作成");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString キー_出力順 = new RString("出力順");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY SHINSAKETTEITEMP.\"shokisaiHokenshaNo\" ASC ");
-    private static final RString 漢字_分 = new RString("分");
+    private static final RString デフォルト出力順 = new RString(" ORDER BY SHINSAKETTEITEMP.\"shoKisaiHokenshaNo\" ASC ");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 出力ファイル名
@@ -139,13 +138,13 @@ public class KogakuKyufuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchProc
             KogakuKyufuKetteiIchiranCSVEntity output = createOutput(list.get(index));
             if (index == 0) {
                 output.set処理年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(漢字_分));
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
                 RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString();
                 RString 作成時 = 作成日時.getTime()
                         .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
-                output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
+                output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(作成));
                 output.set国保連合会名(list.get(index).getKetteiTemp().get国保連合会名());
             } else {
                 output.set処理年月(RString.EMPTY);
@@ -184,7 +183,7 @@ public class KogakuKyufuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchProc
     private KogakuKyufuKetteiIchiranCSVEntity createOutput(KogakuKyufuKetteiChohyoDataEntity entity) {
         KogakuKyufuKetteiIchiranCSVEntity csvEntity = new KogakuKyufuKetteiIchiranCSVEntity();
         DbWT0001HihokenshaTempEntity 被保険者 = entity.getHihokenshaTemp();
-        DbWT3058KogakuShikyuShinsaKetteiTempEntity 審査決定 = entity.getKetteiTemp();
+        DbWT3511KogakuShikyuShinsaKetteiTempEntity 審査決定 = entity.getKetteiTemp();
         csvEntity.set証記載保険者番号(審査決定.get証記載保険者番号().getColumnValue());
         csvEntity.set証記載保険者名(審査決定.get証記載保険者名());
         csvEntity.set通知書番号(審査決定.getNo());

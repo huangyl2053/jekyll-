@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd571001.IdoChushutsuDa
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoNewEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.FutanGendogakuNinteiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.HomonKaigoGenmenJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho.HyojunFutanGengakuJohoEntity;
@@ -41,9 +40,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -52,11 +49,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -253,25 +248,9 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         OutputJokenHyo outputJokenhyo = new OutputJokenHyo();
         outputJokenhyo.outputJokenhyoFactory(processParamter, ページ数);
         if (processParamter.get出力オプション区分().equals(区分_0)) {
-            mapper.updDbt7022ShoriDateKanri(update処理日付管理マスタ(processParamter));
+            JukyushaDaichoCyouhyoujouhou 帳票出力用受給者台帳 = new JukyushaDaichoCyouhyoujouhou();
+            mapper.updDbt7022ShoriDateKanri(帳票出力用受給者台帳.update処理日付管理マスタ(processParamter));
         }
-    }
-
-    private ShoriDateKanriEntity update処理日付管理マスタ(IdoChushutsuDaichoProcessParameter parameter) {
-        ShoriDateKanriEntity dbT7022entity = new ShoriDateKanriEntity();
-        dbT7022entity.setSubGyomuCode(SubGyomuCode.DBD介護受給);
-        dbT7022entity.setShoriName(ShoriName.受給者台帳.get名称());
-        dbT7022entity.setShichosonCode(new LasdecCode(parameter.get市町村コード().toString()));
-        dbT7022entity.setNendoNaiRenban(new RString("0001"));
-        if (parameter.get今回抽出開始年月日() != null && parameter.get今回抽出開始時分秒() != null) {
-            dbT7022entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.get今回抽出開始年月日(), parameter.get今回抽出開始時分秒()));
-        }
-        if (parameter.get今回抽出終了年月日() != null && parameter.get今回抽出終了時分秒() != null) {
-            dbT7022entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.get今回抽出終了年月日(), parameter.get今回抽出終了時分秒()));
-        }
-        dbT7022entity.setLastUpdateTimestamp(RDate.getNowDateTime());
-        dbT7022entity.setLastUpdateReamsLoginId(ControlDataHolder.getUserId());
-        return dbT7022entity;
     }
 
     private void set帳票出力用受給者台帳Entity(IdoChushutsuDaichoNewEntity t) {

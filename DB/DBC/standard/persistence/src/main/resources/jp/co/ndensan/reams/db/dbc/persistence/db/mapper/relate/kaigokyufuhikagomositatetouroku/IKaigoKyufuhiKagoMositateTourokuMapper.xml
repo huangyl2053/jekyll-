@@ -57,7 +57,7 @@
                   rgdb."DbT3017KyufujissekiKihon" AS 基本
                   , rgdb."DbT3118ShikibetsuNoKanri" AS 識別番号 
                 WHERE
-                  基本."kokanShikibetsuNo" = 識別番号."shikibetsuNo" 
+                  基本."inputShikibetsuNo" = 識別番号."shikibetsuNo" 
                   AND 識別番号."shikibetsuNoKubon" = '2' 
                   AND 識別番号."tekiyoKaishiYM" <![CDATA[<=]]> 基本."serviceTeikyoYM" 
                   AND 基本."serviceTeikyoYM" <![CDATA[<]]>   識別番号."tekiyoShuryoYM"

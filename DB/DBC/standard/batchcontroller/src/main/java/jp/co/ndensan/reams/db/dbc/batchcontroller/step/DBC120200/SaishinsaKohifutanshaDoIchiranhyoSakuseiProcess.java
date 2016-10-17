@@ -249,12 +249,10 @@ public class SaishinsaKohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatch
             csvEntity.set事業者番号(entity.get事業者番号().getColumnValue());
         }
         csvEntity.set事業者名(entity.get事業者名());
-        csvEntity.set公費受給者番号(entity.get公費受給者番号());
-        csvEntity.set公費受給者名(entity.get公費受給者名());
-        csvEntity.set証記載保険者番号(entity.get公費証記載保険者番号());
         if (null != entity.get被保険者番号()) {
             csvEntity.set被保険者番号(entity.get被保険者番号().getColumnValue());
         }
+        csvEntity.set被保険者氏名(entity.get公費受給者名());
         if (null != entity.getサービス提供年月()) {
             csvEntity.setサービス提供年月(entity.getサービス提供年月().wareki().separator(Separator.PERIOD)
                     .fillType(FillType.BLANK).toDateString());

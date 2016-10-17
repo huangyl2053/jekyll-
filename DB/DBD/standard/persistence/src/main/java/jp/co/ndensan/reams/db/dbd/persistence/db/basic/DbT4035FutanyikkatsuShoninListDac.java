@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -79,7 +78,7 @@ public class DbT4035FutanyikkatsuShoninListDac {
      * @return DbT4035FutanGendogakuNinteiBatchEntity
      */
     @Transaction
-    public DbT4035FutanGendogakuNinteiBatchEntity select負担限度額一括認定情報(RString 一括認定バッチ処理日時) {
+    public DbT4035FutanGendogakuNinteiBatchEntity select負担限度額一括認定情報(YMDHMS 一括認定バッチ処理日時) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().

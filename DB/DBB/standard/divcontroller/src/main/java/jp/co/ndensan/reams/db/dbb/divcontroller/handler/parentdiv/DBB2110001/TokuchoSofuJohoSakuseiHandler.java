@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2110001.Toku
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchosofu.TokuChoSoufuJohoSakusei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.dgOutputChohyoIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -37,18 +38,6 @@ public final class TokuchoSofuJohoSakuseiHandler {
 
     private final TokuchoSofuJohoSakuseiDiv div;
 
-    private static final RString 対象月_1月 = new RString("1月");
-    private static final RString 対象月_2月 = new RString("2月");
-    private static final RString 対象月_3月 = new RString("3月");
-    private static final RString 対象月_4月 = new RString("4月");
-    private static final RString 対象月_5月 = new RString("5月");
-    private static final RString 対象月_6月 = new RString("6月");
-    private static final RString 対象月_7月 = new RString("7月");
-    private static final RString 対象月_8月 = new RString("8月");
-    private static final RString 対象月_9月 = new RString("9月");
-    private static final RString 対象月_10月 = new RString("10月");
-    private static final RString 対象月_11月 = new RString("11月");
-    private static final RString 対象月_12月 = new RString("12月");
     private static final RString 特徴開始月_4月 = new RString("04");
     private static final RString 漢字_月 = new RString("月");
     private static final RString 実行する = new RString("btnSakusei");
@@ -216,7 +205,7 @@ public final class TokuchoSofuJohoSakuseiHandler {
                 }
             }
         }
-        if (対象月_7月.equals(entry.getKey())) {
+        if (Tsuki._7月.getコード().equals(entry.getKey())) {
             特別徴収依頼情報一覧表row.setSelected(Boolean.TRUE);
             特別徴収異動情報一覧表row.setSelected(Boolean.FALSE);
         } else {
@@ -407,41 +396,41 @@ public final class TokuchoSofuJohoSakuseiHandler {
     }
 
     private void set処理日時(Map<RString, YMDHMS> 処理日時Map) {
-        if (null != 処理日時Map.get(対象月_1月)) {
-            div.getLblShoriNichiji01().setText(get処理日時Str(処理日時Map.get(対象月_1月)));
+        if (null != 処理日時Map.get(Tsuki._1月.getコード())) {
+            div.getLblShoriNichiji01().setText(get処理日時Str(処理日時Map.get(Tsuki._1月.getコード())));
         }
-        if (null != 処理日時Map.get(対象月_2月)) {
-            div.getLblShoriNichiji02().setText(get処理日時Str(処理日時Map.get(対象月_2月)));
+        if (null != 処理日時Map.get(Tsuki._2月.getコード())) {
+            div.getLblShoriNichiji02().setText(get処理日時Str(処理日時Map.get(Tsuki._2月.getコード())));
         }
-        if (null != 処理日時Map.get(対象月_3月)) {
-            div.getLblShoriNichiji03().setText(get処理日時Str(処理日時Map.get(対象月_3月)));
+        if (null != 処理日時Map.get(Tsuki._3月.getコード())) {
+            div.getLblShoriNichiji03().setText(get処理日時Str(処理日時Map.get(Tsuki._3月.getコード())));
         }
-        if (null != 処理日時Map.get(対象月_4月)) {
-            div.getLblShoriNichiji04().setText(get処理日時Str(処理日時Map.get(対象月_4月)));
+        if (null != 処理日時Map.get(Tsuki._4月.getコード())) {
+            div.getLblShoriNichiji04().setText(get処理日時Str(処理日時Map.get(Tsuki._4月.getコード())));
         }
-        if (null != 処理日時Map.get(対象月_5月)) {
-            div.getLblShoriNichiji05().setText(get処理日時Str(処理日時Map.get(対象月_5月)));
+        if (null != 処理日時Map.get(Tsuki._5月.getコード())) {
+            div.getLblShoriNichiji05().setText(get処理日時Str(処理日時Map.get(Tsuki._5月.getコード())));
         }
-        if (null != 処理日時Map.get(対象月_6月)) {
-            div.getLblShoriNichiji06().setText(get処理日時Str(処理日時Map.get(対象月_6月)));
+        if (null != 処理日時Map.get(Tsuki._6月.getコード())) {
+            div.getLblShoriNichiji06().setText(get処理日時Str(処理日時Map.get(Tsuki._6月.getコード())));
         }
-        if (null != 処理日時Map.get(対象月_7月)) {
-            div.getLblShoriNichiji07().setText(get処理日時Str(処理日時Map.get(対象月_7月)));
+        if (null != 処理日時Map.get(Tsuki._7月.getコード())) {
+            div.getLblShoriNichiji07().setText(get処理日時Str(処理日時Map.get(Tsuki._7月.getコード())));
         }
-        if (null != 処理日時Map.get(対象月_8月)) {
-            div.getLblShoriNichiji08().setText(get処理日時Str(処理日時Map.get(対象月_8月)));
+        if (null != 処理日時Map.get(Tsuki._8月.getコード())) {
+            div.getLblShoriNichiji08().setText(get処理日時Str(処理日時Map.get(Tsuki._8月.getコード())));
         }
-        if (null != 処理日時Map.get(対象月_9月)) {
-            div.getLblShoriNichiji09().setText(get処理日時Str(処理日時Map.get(対象月_9月)));
+        if (null != 処理日時Map.get(Tsuki._9月.getコード())) {
+            div.getLblShoriNichiji09().setText(get処理日時Str(処理日時Map.get(Tsuki._9月.getコード())));
         }
-        if (null != 処理日時Map.get(対象月_10月)) {
-            div.getLblShoriNichiji10().setText(get処理日時Str(処理日時Map.get(対象月_10月)));
+        if (null != 処理日時Map.get(Tsuki._10月.getコード())) {
+            div.getLblShoriNichiji10().setText(get処理日時Str(処理日時Map.get(Tsuki._10月.getコード())));
         }
-        if (null != 処理日時Map.get(対象月_11月)) {
-            div.getLblShoriNichiji11().setText(get処理日時Str(処理日時Map.get(対象月_11月)));
+        if (null != 処理日時Map.get(Tsuki._11月.getコード())) {
+            div.getLblShoriNichiji11().setText(get処理日時Str(処理日時Map.get(Tsuki._11月.getコード())));
         }
-        if (null != 処理日時Map.get(対象月_12月)) {
-            div.getLblShoriNichiji12().setText(get処理日時Str(処理日時Map.get(対象月_12月)));
+        if (null != 処理日時Map.get(Tsuki._12月.getコード())) {
+            div.getLblShoriNichiji12().setText(get処理日時Str(処理日時Map.get(Tsuki._12月.getコード())));
         }
     }
 
@@ -491,51 +480,51 @@ public final class TokuchoSofuJohoSakuseiHandler {
         RString 処理対象月 = RString.EMPTY;
         Boolean flag = false;
         if (div.getTbldgTokuchoIdoJoho().getChkSentaku01().isAllSelected()) {
-            処理対象月 = 対象月_1月;
+            処理対象月 = Tsuki._1月.getコード();
             flag = !div.getLblShoriNichiji02().getText().isNullOrEmpty();
         }
         if (div.getTbldgTokuchoIdoJoho().getChkSentaku02().isAllSelected()) {
-            処理対象月 = 対象月_2月;
+            処理対象月 = Tsuki._2月.getコード();
             flag = !div.getLblShoriNichiji03().getText().isNullOrEmpty();
         }
         if (div.getTbldgTokuchoIdoJoho().getChkSentaku03().isAllSelected()) {
-            処理対象月 = 対象月_3月;
+            処理対象月 = Tsuki._3月.getコード();
             flag = !div.getLblShoriNichiji04().getText().isNullOrEmpty();
         }
         if (div.getTbldgTokuchoIdoJoho().getChkSentaku04().isAllSelected()) {
-            処理対象月 = 対象月_4月;
+            処理対象月 = Tsuki._4月.getコード();
             flag = !div.getLblShoriNichiji05().getText().isNullOrEmpty();
         }
         if (div.getTbldgTokuchoIdoJoho().getChkSentaku05().isAllSelected()) {
-            処理対象月 = 対象月_5月;
+            処理対象月 = Tsuki._5月.getコード();
             flag = !div.getLblShoriNichiji06().getText().isNullOrEmpty();
         }
         if (div.getTbldgTokuchoIdoJoho().getChkSentaku06().isAllSelected()) {
-            処理対象月 = 対象月_6月;
+            処理対象月 = Tsuki._6月.getコード();
             flag = !div.getLblShoriNichiji07().getText().isNullOrEmpty();
         }
         if (div.getTbldgTokuchoIdoJoho().getChkSentaku07().isAllSelected()) {
-            処理対象月 = 対象月_7月;
+            処理対象月 = Tsuki._7月.getコード();
             flag = !div.getLblShoriNichiji08().getText().isNullOrEmpty();
         }
         if (div.getTbldgTokuchoIdoJoho().getChkSentaku08().isAllSelected()) {
-            処理対象月 = 対象月_8月;
+            処理対象月 = Tsuki._8月.getコード();
             flag = !div.getLblShoriNichiji09().getText().isNullOrEmpty();
         }
         if (div.getTbldgTokuchoIdoJoho().getChkSentaku09().isAllSelected()) {
-            処理対象月 = 対象月_9月;
+            処理対象月 = Tsuki._9月.getコード();
             flag = !div.getLblShoriNichiji10().getText().isNullOrEmpty();
         }
         if (div.getTbldgTokuchoIdoJoho().getChkSentaku10().isAllSelected()) {
-            処理対象月 = 対象月_10月;
+            処理対象月 = Tsuki._10月.getコード();
             flag = !div.getLblShoriNichiji11().getText().isNullOrEmpty();
         }
         if (div.getTbldgTokuchoIdoJoho().getChkSentaku11().isAllSelected()) {
-            処理対象月 = 対象月_11月;
+            処理対象月 = Tsuki._11月.getコード();
             flag = !div.getLblShoriNichiji12().getText().isNullOrEmpty();
         }
         if (div.getTbldgTokuchoIdoJoho().getChkSentaku12().isAllSelected()) {
-            処理対象月 = 対象月_12月;
+            処理対象月 = Tsuki._12月.getコード();
             flag = !div.getLblShoriNichiji01().getText().isNullOrEmpty();
         }
         return new SimpleEntry(処理対象月, flag);

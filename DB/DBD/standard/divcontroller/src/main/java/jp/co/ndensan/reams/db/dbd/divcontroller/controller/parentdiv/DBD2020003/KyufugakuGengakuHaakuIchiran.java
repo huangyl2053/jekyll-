@@ -50,7 +50,7 @@ public class KyufugakuGengakuHaakuIchiran {
         parameter.set認定有効終了日抽出(isCheckedValue(div.getChkNinteiYukoShuryobiChushutsu().getSelectedValues()));
         parameter.set認定有効終了日抽出の開始(div.getTxtNinteiYukoShuryobiKaishi().getValue());
         parameter.set認定有効終了日抽出の終了(div.getTxtNinteiYukoShuryobiShuryo().getValue());
-        parameter.set保険料完納者も出力(isCheckedValue(div.getChishutsuJoken().getChkHokenKannoshaShutsuryoku().getSelectedValues()));
+        parameter.set保険料完納者も出力(isChecked保険料完納者も出力Value(div.getChishutsuJoken().getChkHokenKannoshaShutsuryoku().getSelectedValues()));
         parameter.set改頁出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
         parameter.set帳票ID(REPORTID);
 
@@ -64,10 +64,17 @@ public class KyufugakuGengakuHaakuIchiran {
         return UN_SELECTED_VALUE;
     }
 
-    private RString isRadCheckedValue(RString selectedValue) {
-        if (!selectedValue.isNullOrEmpty()) {
+    private RString isChecked保険料完納者も出力Value(List<RString> isSelectedList) {
+        if (isSelectedList != null && !isSelectedList.isEmpty()) {
             return UN_SELECTED_VALUE;
         }
         return SELECTED_VALUE;
+    }
+
+    private RString isRadCheckedValue(RString selectedValue) {
+        if (!selectedValue.isNullOrEmpty()) {
+            return SELECTED_VALUE;
+        }
+        return UN_SELECTED_VALUE;
     }
 }
