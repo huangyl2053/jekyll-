@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou;
+package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.sougoujigyoujyohou.SougouJigyouJyohouMybatisParameter;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.SougouJigyouJyohouRelateEntity;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.SougouJigyouJyohouMybatisParameter;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.SougouJigyouJyohouRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity;
 
 /**
