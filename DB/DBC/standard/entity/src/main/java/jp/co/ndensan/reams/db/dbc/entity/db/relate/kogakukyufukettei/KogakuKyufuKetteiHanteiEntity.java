@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3058KogakuShikyuShinsaKetteiTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3511KogakuShikyuShinsaKetteiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 
 /**
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekka
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuKyufuKetteiHanteiEntity {
 
-    private DbWT3058KogakuShikyuShinsaKetteiTempEntity ketteiTemp;
+    private DbWT3511KogakuShikyuShinsaKetteiTempEntity ketteiTemp;
     private DbWT0001HihokenshaTempEntity hihokenshaTemp;
     private List<DbT3057KogakuShikyuHanteiKekkaEntity> kekkaList;
 }
