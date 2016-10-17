@@ -247,6 +247,7 @@ public class SogojigyohiSaishinsaService {
         outItem.set申立事由(entity.get申立事由());
         outItem.set原審単位数(doカンマ編集(entity.get原審単位数()));
         outItem.set調整単位数(doカンマ編集(entity.get調整単位数()));
+        outItem.set識別コード(new RString(entity.get識別コード().toString()));
 
         if (集計flg) {
             outItem.set決定タイトル(決定タイトル);

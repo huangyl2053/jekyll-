@@ -2,7 +2,9 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohisaishinsaoken
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 総合事業費再審査決定通知書情報取込一覧表帳票Source
@@ -48,6 +50,7 @@ public class SogojigyohiSaishinsaKetteiHokenshaInSource implements IReportSource
     public RString kaipage4;
     @ReportItem(name = "kaipage5", length = 20, order = 18)
     public RString kaipage5;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listLower_1", length = 10, order = 19)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 20, order = 20)
@@ -110,13 +113,15 @@ public class SogojigyohiSaishinsaKetteiHokenshaInSource implements IReportSource
     public RString sogojigyohiChoseiTanisu;
     @ReportItem(name = "sogojigyohiChoseiFutangaku", length = 17, order = 49)
     public RString sogojigyohiChoseiFutangaku;
+    @ReportPerson(id = "X")
+    public RString shikibetuCode;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
-
     /**
      * SogojigyohiKagoKetteiInSourceのENUM
      */
