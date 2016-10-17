@@ -752,7 +752,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
     private void 賦課の情報登録(FukaJoho 更新後, CalculateFukaEntity 賦課計算の情報, CalculateFukaParameter param) {
         IHonSanteiIdoKanendoFukaMapper mapper = mapperProvider.create(IHonSanteiIdoKanendoFukaMapper.class);
         DbT2002FukaJohoTempTableEntity entity = new DbT2002FukaJohoTempTableEntity();
-        entity.setChoteiNendo(param.get調定年度());
+        entity.setChoteiNendo(更新後.get調定年度());
         entity.setFukaNendo(賦課計算の情報.get賦課年度());
         entity.setTsuchishoNo(賦課計算の情報.get通知書番号());
         entity.setRirekiNo(0);

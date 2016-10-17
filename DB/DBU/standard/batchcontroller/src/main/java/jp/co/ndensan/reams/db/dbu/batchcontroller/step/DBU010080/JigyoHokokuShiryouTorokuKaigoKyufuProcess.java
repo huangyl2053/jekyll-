@@ -189,6 +189,8 @@ public class JigyoHokokuShiryouTorokuKaigoKyufuProcess extends BatchProcessBase<
         mapper = getMapper(IJigyoHokokuRenkeiHokenkyufuShokanKetteiMapper.class);
         mapper.update後_点数();
         mapper.update市町村コードと旧市町村コード();
+        mapper.update負担割合年度_1();
+        mapper.update負担割合年度_2();
         mapper.update負担割合区分と負担割合エラーフラグ_一回目();
         mapper.update負担割合区分と負担割合エラーフラグ_二回目();
         // TODO 内部QA:1725 Redmine#101525 テーブル「利用者負担減免マスタ」はデータベースに存在しません。

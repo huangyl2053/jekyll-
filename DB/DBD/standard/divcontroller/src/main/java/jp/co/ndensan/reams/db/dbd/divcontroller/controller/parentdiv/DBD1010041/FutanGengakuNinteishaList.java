@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1010041;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD205010.DBD205010_FutanGendoGakuNinteishaListParameter;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010041.DBD1010041StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010041.FutanGengakuNinteishaListDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010041.FutanGengakuNinteishaListHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010041.FutanGengakuNinteishaListValidationHandler;
@@ -90,7 +89,7 @@ public class FutanGengakuNinteishaList {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        return ResponseData.of(div).setState(DBD1010041StateName.バッチ実行);
+        return ResponseData.of(div).respond();
 
     }
 

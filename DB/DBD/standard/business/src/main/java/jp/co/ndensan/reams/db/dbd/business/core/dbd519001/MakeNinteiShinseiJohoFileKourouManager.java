@@ -74,6 +74,7 @@ public class MakeNinteiShinseiJohoFileKourouManager {
         csvEntity.setTorisageKubunCode(entity.getTorisageKubunCode());
         csvEntity.setYuubinNo(entity.getYuubinNo());
         csvEntity.setZaihoji(entity.getZaihoji());
+        csvEntity.setZenkaiKekkaKoushukuShitsukansetsu(entity.getZenkaiKekkaKoushukuShitsukansetsu());
         setCsvKourouEntity(csvEntity, entity);
         return csvEntity;
     }

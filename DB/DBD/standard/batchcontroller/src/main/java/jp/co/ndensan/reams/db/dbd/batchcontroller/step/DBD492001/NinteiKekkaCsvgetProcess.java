@@ -12,14 +12,21 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.Errord
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.NichijiShinchokuIchijiTeburuEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.dbd492001.NinteiKekkaRenkeiDataTorikomiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -60,14 +67,29 @@ public class NinteiKekkaCsvgetProcess extends BatchProcessBase<List<RString>> {
         if (認定結果.equals(processParameter.get取込みデータ区分())) {
             csvファイル名 = DbBusinessConfig.get(ConfigNameDBD.要介護認定結果連携データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
         }
-        RString csvReaderPath = Path.combinePath(processParameter.get外部媒体格納パス(), csvファイル名);
-        RString filePath = Path.combinePath(csvReaderPath);
+
+        List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(csvファイル名);
+        if (sharedFiles == null || sharedFiles.isEmpty()) {
+            throw new BatchInterruptedException(DbzErrorMessages.アップロードファイル無し.getMessage().toString());
+        }
+
+        RString maeSharedName = RString.EMPTY;
+        RString atoSharedName = RString.EMPTY;
+        for (UzT0885SharedFileEntryEntity sharedfile : sharedFiles) {
+            atoSharedName = sharedfile.getLocalFileName();
+            if (atoSharedName.compareTo(maeSharedName) != 0) {
+                SharedFile.copyToLocal(FilesystemName.fromString(csvファイル名), FilesystemPath.fromString(Path.getTmpDirectoryPath()));
+                break;
+            }
+        }
+        //RString csvReaderPath = Path.combinePath(processParameter.get外部媒体格納パス(), csvファイル名);
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), atoSharedName);
         File file = new File(filePath.toString());
         if (!file.exists()) {
             throw new ApplicationException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace(csvファイル名.toString()).evaluate());
         }
         return new BatchCsvListReader(new CsvListReader.InstanceBuilder(filePath)
-                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).hasHeader(false).setNewLine(NewLine.CRLF).build());
+                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(getEncode()).hasHeader(false).setNewLine(NewLine.CRLF).build());
     }
 
     @Override
@@ -95,6 +117,15 @@ public class NinteiKekkaCsvgetProcess extends BatchProcessBase<List<RString>> {
 
     @Override
     protected void afterExecute() {
+    }
+
+    private Encode getEncode() {
+        RString 連携文字コード = DbBusinessConfig.get(ConfigNameDBE.連携文字コード, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        if (new RString("1").equals(連携文字コード)) {
+            return Encode.SJIS;
+        } else {
+            return Encode.UTF_8;
+        }
     }
 
 }

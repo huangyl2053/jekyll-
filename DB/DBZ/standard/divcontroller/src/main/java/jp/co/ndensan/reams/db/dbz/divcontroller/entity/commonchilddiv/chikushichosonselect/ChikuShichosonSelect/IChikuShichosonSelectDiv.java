@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushichosonselect.ChikuShichosonSelect;
 
 import java.util.Map;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
@@ -34,4 +35,6 @@ public interface IChikuShichosonSelectDiv extends ICommonChildDivBaseProperties 
     void set市町村コード(RString 市町村コード);
 
     void set旧市町村コード(RString 旧市町村コード);
+
+    void initialize(Code 導入形態コード);
 }

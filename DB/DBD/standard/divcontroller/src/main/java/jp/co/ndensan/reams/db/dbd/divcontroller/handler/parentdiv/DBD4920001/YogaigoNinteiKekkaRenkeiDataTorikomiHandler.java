@@ -84,7 +84,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
         div.getHokenshaList().loadHokenshaList();
         div.getRadDataSelect().setSelectedKey(KEY0);
         div.getDataGridFile().setDataSource(getFileSource());
-        div.getDataGridFile().setSelectedItems(getFileSource());
+
     }
 
     /**
@@ -92,7 +92,6 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
      */
     public void onChange_data() {
         div.getDataGridFile().setDataSource(getFileSource());
-        div.getDataGridFile().setSelectedItems(getFileSource());
     }
 
     /**
@@ -100,7 +99,6 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
      */
     public void onChange_type() {
         div.getDataGridFile().setDataSource(getFileSource());
-        div.getDataGridFile().setSelectedItems(getFileSource());
     }
 
     /**
@@ -152,8 +150,12 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
         FilesystemName filesystemName = new FilesystemName(共有ファイル名);
         SharedFileEntryDescriptor sfed = new SharedFileEntryDescriptor(filesystemName, sharedFileId);
         DBD492001_NinteiKekkaInfoUploadParameter parameter = new DBD492001_NinteiKekkaInfoUploadParameter();
-        parameter.set取込みデータ区分(div.getRadDataSelect().getSelectedValue());
-        parameter.set格納パス(SharedFile.getDirectAccessPath(sfed));
+        if (div.getRadDataSelect().getSelectedKey().equals(new RString("key0"))) {
+            parameter.set取込みデータ区分(new RString("1"));
+        } else {
+            parameter.set取込みデータ区分(new RString("2"));
+        }
+        parameter.set格納パス(SharedFile.getDirectAccessPath(sfed).substring(0, SharedFile.getDirectAccessPath(sfed).length()));
         if (div.getHokenshaList().getSelectedItem().get保険者区分() != null) {
             parameter.set保険者区分(div.getHokenshaList().getSelectedItem().get保険者区分().getコード());
         } else {
@@ -169,7 +171,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
         for (dgtorikomidataichiran_Row row : div.getDgtorikomidataichiran().getSelectedItems()) {
             保険者番号リスト.add(row.getHokenshano());
             被保番号リスト.add(row.getHihono());
-            認定申請日リスト.add(row.getShinseikubunshinseiji());
+            認定申請日リスト.add(row.getNinteishinseiymd().getValue().toDateString());
             申請区分_申請時_コードリスト.add(row.getShinseikubunshinseijiCode());
         }
         parameter.set保険者番号リスト(保険者番号リスト);
@@ -211,6 +213,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
             }
         }
         div.getHdNum().setValue(new RString(size % NO_328));
+        div.setNum(new RString(size));
     }
 
     private List<DataGridFile_Row> getFileSource() {
@@ -218,6 +221,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
         data.setFileFormat(new RString("NCI242"));
         data.setFileName(getファイル名称());
         data.setTotal(RString.EMPTY);
+        data.setSelected(Boolean.TRUE);
         data.setMeisho(DbBusinessConfig.get(ConfigNameDBE.NCI242ファイル名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         List<DataGridFile_Row> dataSource = new ArrayList<>();
         dataSource.add(data);
@@ -242,6 +246,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
             row.setShimei(business.get被保険者漢字氏名());
             row.setShinseikubunshinseijiCode(business.get申請区分申請時コード());
             row.setShinseikubunshinseiji(NinteiShinseiShinseijiKubunCode.toValue(business.get申請区分申請時コード()).get名称());
+            row.setSelected(Boolean.TRUE);
             dataSources.add(row);
         }
         return dataSources;

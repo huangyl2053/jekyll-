@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -30,6 +31,8 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiDiv extends Panel {
     private uploadAreaDiv uploadArea;
     @JsonProperty("torikomiichiran")
     private torikomiichiranDiv torikomiichiran;
+    @JsonProperty("num")
+    private RString num;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -89,6 +92,24 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiDiv extends Panel {
     @JsonProperty("torikomiichiran")
     public void setTorikomiichiran(torikomiichiranDiv torikomiichiran) {
         this.torikomiichiran = torikomiichiran;
+    }
+
+    /*
+     * getnum
+     * @return num
+     */
+    @JsonProperty("num")
+    public RString getNum() {
+        return num;
+    }
+
+    /*
+     * setnum
+     * @param num num
+     */
+    @JsonProperty("num")
+    public void setNum(RString num) {
+        this.num = num;
     }
 
     /*

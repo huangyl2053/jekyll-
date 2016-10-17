@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0120001;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0120001;
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001.DBB012001_TokuchoHeinjunka6GatsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.serialization.Base64Serializer;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
@@ -105,7 +104,7 @@ public class HeijunkaKeisan {
         fp.add(new RString("通知書一括発行"), 通知書一括発行);
         fp.add(new RString("調定年度"), parameter.get調定年度());
         fp.add(new RString("賦課年度"), parameter.get賦課年度());
-        fp.add(new RString("出力帳票一覧List"), Base64Serializer.serialize(parameter.get出力帳票entity()));
+        fp.add(new RString("出力帳票一覧List"), parameter.get出力帳票entity());
         fp.add(new RString("発行日"), parameter.get発行日());
         fp.add(new RString("出力対象"), parameter.get出力対象指示フラグ());
         fp.add(new RString("一括発行フラグ"), parameter.is一括発行フラグ());

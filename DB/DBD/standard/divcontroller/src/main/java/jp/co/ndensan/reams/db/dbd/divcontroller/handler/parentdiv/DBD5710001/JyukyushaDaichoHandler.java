@@ -66,7 +66,7 @@ public class JyukyushaDaichoHandler {
     private static final RString KEY1 = new RString("1");
     private RString 出力順;
     private LasdecCode 市町村コード;
-    private ShoriDateKanri shoriDateKanri;
+    private static ShoriDateKanri shoriDateKanri;
     private JyukyushaDaichoshoridatekanriService jyukyushoriDateKanriService;
 
     /**
@@ -81,7 +81,12 @@ public class JyukyushaDaichoHandler {
      * 画面初期化処理です。
      */
     public void onLoad() {
-        get画面初期();
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (shichosonSecurityJoho != null) {
+            市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
+            jyukyushoriDateKanriService = JyukyushaDaichoshoridatekanriService.createInstance();
+            shoriDateKanri = jyukyushoriDateKanriService.get一件取得(市町村コード);
+        }
         if (shoriDateKanri != null && shoriDateKanri.get対象開始日時() != null
                 && shoriDateKanri.get対象終了日時() != null) {
             div.getTaishouKikan().getTxtZenkaiymdtime().setFromDateValue(shoriDateKanri.get対象開始日時().getDate());
@@ -157,7 +162,6 @@ public class JyukyushaDaichoHandler {
             div.getTaishouKikan().getTxtKonkaiymdtime().clearFromValue();
             div.getTaishouKikan().getTxtKonkaiymdtime().clearToValue();
         } else if (対象期間.equals(div.getChushutsuJyouken().getRadChushutsuJyouken().getSelectedKey())) {
-            get画面初期();
             set今回抽出日付();
             if (div.getTaishouSha().getHihokenshanoFrom() != null && div.getTaishouSha().getHihokenshanoTo() != null) {
                 div.getTaishouSha().getHihokenshanoFrom().clearValue();
@@ -194,24 +198,12 @@ public class JyukyushaDaichoHandler {
             parameter.set出力オプション区分(KEY1);
         }
         parameter.set出力順設定リスト(get画面出力順());
-        get画面初期();
         if (shoriDateKanri != null) {
             parameter.set市町村コード(shoriDateKanri.get市町村コード().value());
         }
     }
 
-    private ShoriDateKanri get画面初期() {
-        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (shichosonSecurityJoho != null) {
-            市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
-            jyukyushoriDateKanriService = JyukyushaDaichoshoridatekanriService.createInstance();
-            shoriDateKanri = jyukyushoriDateKanriService.get一件取得(市町村コード);
-        }
-        return shoriDateKanri;
-    }
-
     private void set今回抽出日付() {
-        get画面初期();
         if (shoriDateKanri != null && shoriDateKanri.get対象終了日時() != null) {
             div.getTaishouKikan().getTxtKonkaiymdtime().setFromDateValue(shoriDateKanri.get対象終了日時().getDate());
             div.getTaishouKikan().getTxtKonkaiymdtime().setFromTimeValue(shoriDateKanri.get対象終了日時().getRDateTime().getTime().plusSeconds(1));

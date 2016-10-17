@@ -7,7 +7,7 @@
 
     <select id="get有効な版番号"
             resultOrdered="true"
-            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity"
+            resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7301TokuteiKojinJohoHanKanriMapper.ResultMap_DbT7301TokuteiKojinJohoHanKanriEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoParamater"
             fetchSize="500">
         SELECT
@@ -21,14 +21,14 @@
         AND
             "DbT7301TokuteiKojinJohoHanKanri"."hanStYMD" <![CDATA[<=]]> #{基準日}
         AND
-            (DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD" IS NULL 
+            ("DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD" IS NULL 
             OR  ("DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD" IS NOT NULL 
                 AND #{基準日} <![CDATA[<=]]> "DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD"))
     </select>
     
     <select id="get初回提供済である直近の版番号"
             resultOrdered="true"
-            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity"
+            resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7301TokuteiKojinJohoHanKanriMapper.ResultMap_DbT7301TokuteiKojinJohoHanKanriEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoParamater"
             fetchSize="500">
         SELECT
@@ -49,7 +49,7 @@
     
     <select id="get直近の版番号"
             resultOrdered="true"
-            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity"
+            resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7301TokuteiKojinJohoHanKanriMapper.ResultMap_DbT7301TokuteiKojinJohoHanKanriEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoParamater"
             fetchSize="500">
         SELECT
@@ -112,7 +112,7 @@
             TeikyoKomoku."tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
         AND  TeikyoKomoku."dataSetNo" = #{データセット番号}
         AND  TeikyoKomoku."hanNo" = #{版番号}
-        ORBER BY TeikyoKomoku."tokuteiKojinJohoKomokuCode"
+        ORDER BY TeikyoKomoku."tokuteiKojinJohoKomokuCode"
     </select>
     
     <select id="get中間DB提供基本情報"

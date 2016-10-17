@@ -69,24 +69,9 @@ public class _HanyoListParamValidator implements IValidatable {
                 .thenAdd(HanyoListParamValidationMessage.実行するボタンクリック2)
                 .ifNot(HanyoListParamSpec.実行するボタンクリック3)
                 .thenAdd(HanyoListParamValidationMessage.実行するボタンクリック3)
-                //                .ifNot(HanyoListParamSpec.実行するボタンクリック5)
-                //                .thenAdd(new HanyoListParamReplaceErrorMessage(
-                //                                rDateIsNull(div.getTxtChushutsuHani().getToValue()),
-                //                                rDateIsNull(div.getTxtChushutsuHani().getFromValue())))
                 .ifNot(HanyoListParamSpec.実行するボタンクリック7)
                 .thenAdd(HanyoListParamValidationMessage.実行するボタンクリック7)
-                //                .ifNot(HanyoListParamSpec.実行するボタンクリック10)
-                //                .thenAdd(new HanyoListParamReplaceErrorMessage(
-                //                                rDateIsNull(div.getCcdHanyoListAtenaSelect().get生年月日開始()),
-                //                                rDateIsNull(div.getCcdHanyoListAtenaSelect().get生年月日終了())))
                 .messages());
         return messages;
     }
-
-//    private String rDateIsNull(RDate rdate) {
-//        if (rdate == null) {
-//            return RString.EMPTY.toString();
-//        }
-//        return rdate.toDateString().toString();
-//    }
 }
