@@ -761,7 +761,7 @@ public class HanyoListParamHandler {
         para.setCsvrenbanfuka(get連番付加());
         para.setCsvhitsukesurasyuhensyu(get日付スラッシュ付加());
         para.setAtenacyusyutsujyoken(get宛名抽出条件());
-        para.setCyohyoid(汎用リスト_後期高齢者帳票ID);
+        para.setCyohyoid(汎用リスト_事業対象者帳票ID);
         para.setSyutsuryokujun(div.getCcdShutsuryokujun().get出力順ID());
         para.setSyutsuryokukomoku(get出力項目());
         return para;
@@ -806,7 +806,7 @@ public class HanyoListParamHandler {
         para.setCsvrenbanfuka(get連番付加());
         para.setCsvhitsukesurasyuhensyu(get日付スラッシュ付加());
         para.setAtenacyusyutsujyoken(get宛名抽出条件());
-        para.setCyohyoid(汎用リスト_後期高齢者帳票ID);
+        para.setCyohyoid(汎用リスト_利用者負担割合帳票ID);
         para.setSyutsuryokujun(div.getCcdShutsuryokujun().get出力順ID());
         para.setSyutsuryokukomoku(get出力項目());
         return para;
