@@ -63,23 +63,27 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomi {
      * @return ResponseData<YogaigoNinteiKekkaRenkeiDataTorikomiDiv>
      */
     public ResponseData<YogaigoNinteiKekkaRenkeiDataTorikomiDiv> onClick_appurodo(YogaigoNinteiKekkaRenkeiDataTorikomiDiv div, FileData... files) {
-        getHandler(div).before_onClick(files);
-        YogaigoNinteiKekkaRenkeiDataTorikomiValidationHandler validationHandler = new YogaigoNinteiKekkaRenkeiDataTorikomiValidationHandler(div);
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        if (div.getRadDataSelect().getSelectedKey().equals(new RString("key0"))) {
-            validationHandler.日次進捗情報ファイルチェック(pairs);
-        } else {
-            validationHandler.認定結果情報ファイルチェック(pairs);
+        if (files.length > 0) {
+            getHandler(div).before_onClick(files);
+            YogaigoNinteiKekkaRenkeiDataTorikomiValidationHandler validationHandler = new YogaigoNinteiKekkaRenkeiDataTorikomiValidationHandler(div);
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            if (div.getRadDataSelect().getSelectedKey().equals(new RString("key0"))) {
+                validationHandler.日次進捗情報ファイルチェック(pairs);
+            } else {
+                validationHandler.認定結果情報ファイルチェック(pairs);
+            }
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+            getHandler(div).onClick_appurodo(files);
+            div.getDataGridFile().getDataSource().get(0).setTotal(div.getNum());
+            validationHandler.保険者一致チェック_識別コード(pairs);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
         }
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
-        getHandler(div).onClick_appurodo(files);
-        validationHandler.保険者一致チェック_識別コード(pairs);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBD4920001StateName.一覧表示);
+
     }
 
     /**

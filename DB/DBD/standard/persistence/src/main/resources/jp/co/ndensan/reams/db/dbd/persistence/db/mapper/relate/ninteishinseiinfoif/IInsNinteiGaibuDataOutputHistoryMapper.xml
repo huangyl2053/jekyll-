@@ -26,7 +26,8 @@
     </select>
     <update id="updateその他情報登録" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.InsNinteiGaibuDataOutputHistoryMybitsParameter">
         UPDATE  rgdb."DbT7211GaibuRenkeiDataoutputJoho"
-        SET "ninteiShinseiJohoChushutsuYMD" =#{システム日付}
+        SET "ninteiShinseiJohoChushutsuYMD" =#{システム日付},
+        "lastUpdateTimestamp" = #{updateTime}
         WHERE "shinseishoKanriNo" IN
         (SELECT "shinseishoKanriNo" from "NinteiShinseiJohoTemp")
     </update>
