@@ -304,14 +304,22 @@ public class JigyoJokyoHokokuGeppoHandler {
                 div.getCblHokenKyufuShokan().setSelectedItemsByKey(決定状況合算_償還分);
             }
         } else {
-            一般状況10.clear();
-            div.getCblIppan1to10().setSelectedItemsByKey(一般状況10);
-            一般状況_合算.clear();
-            div.getCblGassan1().setSelectedItemsByKey(一般状況_合算);
-            一般状況14_現物分.clear();
-            div.getCblIppanGembutsu().setSelectedItemsByKey(一般状況14_現物分);
-            一般状況14_償還分.clear();
-            div.getCblIppanShokan().setSelectedItemsByKey(一般状況14_償還分);
+             if (!div.getCblIppan1to10().isDisabled()) {
+                一般状況10.clear();
+                div.getCblIppan1to10().setSelectedItemsByKey(一般状況10);
+             }
+             if (!div.getCblGassan1().isDisabled()) {
+                一般状況_合算.clear();
+                div.getCblGassan1().setSelectedItemsByKey(一般状況_合算);
+             }
+             if (!div.getCblIppanGembutsu().isDisabled()) {
+                一般状況14_現物分.clear();
+                div.getCblIppanGembutsu().setSelectedItemsByKey(一般状況14_現物分);
+             }
+             if (!div.getCblIppanShokan().isDisabled()) {
+                一般状況14_償還分.clear();
+                div.getCblIppanShokan().setSelectedItemsByKey(一般状況14_償還分);
+             }
             if (!div.getCblGassan2().isDisabled()) {
                 決定状況合算.clear();
                 div.getCblGassan2().setSelectedItemsByKey(決定状況合算);
@@ -320,8 +328,10 @@ public class JigyoJokyoHokokuGeppoHandler {
                 保険給付決定状況_現物分.clear();
                 div.getCblHokenKyufuGembutsu().setSelectedItemsByKey(保険給付決定状況_現物分);
             }
-            決定状況合算_償還分.clear();
-            div.getCblHokenKyufuShokan().setSelectedItemsByKey(決定状況合算_償還分);
+            if (!div.getCblHokenKyufuShokan().isDisabled()) {
+                決定状況合算_償還分.clear();
+                div.getCblHokenKyufuShokan().setSelectedItemsByKey(決定状況合算_償還分);
+            }
         }
     }
 
