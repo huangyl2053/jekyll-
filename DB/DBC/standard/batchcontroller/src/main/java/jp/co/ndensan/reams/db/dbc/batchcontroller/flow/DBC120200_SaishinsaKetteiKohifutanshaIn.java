@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120200.DBC120200_SaishinsaKetteiKohifutanshaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
+import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoMasterTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaReadCsvFileProcessParameter;
@@ -138,7 +139,11 @@ public class DBC120200_SaishinsaKetteiKohifutanshaIn
     protected IBatchFlowCommand callDoMasterTorokuProcess() {
         KohifutanshaDoMasterTorokuProcessParameter parameter = new KohifutanshaDoMasterTorokuProcessParameter();
         parameter.set処理年月(getParameter().getShoriYM());
-        parameter.set再処理区分(getParameter().getSaishoriKubun());
+        if (null != getParameter().getSaishoriKubun()) {
+            parameter.set再処理区分(getParameter().getSaishoriKubun());
+        } else {
+            parameter.set再処理区分(SaiShoriKubun.空白);
+        }
         parameter.set交換情報識別番号(交換情報識別番号);
         return simpleBatch(SaishinsaKohifutanshaDoDBTorokuProcess.class).arguments(parameter).define();
     }
