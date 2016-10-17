@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.kogakukyufutaishoshaichiran;
 
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3054KogakuKyufuTaishoshaTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3311KogakuKyufuTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.KyuufuTaishoshaHihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufutaishoshaichiran.KogakuKyufuTaishoshaIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -64,7 +64,7 @@ public class KogakuKyufuTaishoshaIchiranHeaderEditor implements IKogakuKyufuTais
     @Override
     public KogakuKyufuTaishoshaIchiranSource edit(
             KogakuKyufuTaishoshaIchiranSource source) {
-        DbWT3054KogakuKyufuTaishoshaTempEntity 対象者 = 帳票出力対象データ.get対象者();
+        DbWT3311KogakuKyufuTaishoshaTempEntity 対象者 = 帳票出力対象データ.get対象者();
         RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = 作成日時.getTime()

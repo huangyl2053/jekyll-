@@ -14,7 +14,7 @@ import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakukyufutaishoshaichiran.KogakuKyufuTaishoshaIchiranProperty;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3054KogakuKyufuTaishoshaTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3311KogakuKyufuTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.KogakuKyufuTaishoshaIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.KyuufuTaishoshaHihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukyufutaishosha.KogakuKyufuTaishoshaInManager;
@@ -74,11 +74,11 @@ public class KogakuKyufuTaishoshaInDoIchiranhyoSakuseiProcess extends SimpleBatc
             = new RString("DBC200014_KogakuKyufuTaishoshaIchiran.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString キー_出力順 = new RString("出力順");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY 対象者TBL.\"renban\",対象者TBL.\"shokisaiHokenshaNo\","
-            + "DbWT0001.\"hihokenshaNo\" ASC, 対象者TBL.\"serviceTeikyoYm\" ASC,  対象者TBL.\"recordShubetsu\" ASC");
+    private static final RString デフォルト出力順 = new RString(" ORDER BY 対象者TBL.\"renban\",対象者TBL.\"shoKisaiHokenshaNo\","
+            + "DbWT0001.\"hihokenshaNo\" ASC, 対象者TBL.\"serviceTeikyoYM\" ASC,  対象者TBL.\"recordShubetsu\" ASC");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
-    private static final RString 漢字_分 = new RString("分");
+    private static final RString 作成 = new RString("作成");
     private final RString 帳票レコード種別_T1 = new RString("T1");
 
     @Override
@@ -138,17 +138,17 @@ public class KogakuKyufuTaishoshaInDoIchiranhyoSakuseiProcess extends SimpleBatc
             }
             KogakuKyufuTaishoshaIchiranCsvEntity output = new KogakuKyufuTaishoshaIchiranCsvEntity();
             KyuufuTaishoshaHihokenshaEntity 出力対象 = list.get(index);
-            DbWT3054KogakuKyufuTaishoshaTempEntity 対象者 = 出力対象.get対象者();
+            DbWT3311KogakuKyufuTaishoshaTempEntity 対象者 = 出力対象.get対象者();
             DbWT0001HihokenshaTempEntity 被保険者 = 出力対象.get被保険者一時();
             if (index == 0) {
                 output.set処理年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(漢字_分));
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
                 RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString();
                 RString 作成時 = 作成日時.getTime()
                         .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
-                output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
+                output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時).concat(作成));
             } else {
                 output.set処理年月(RString.EMPTY);
                 output.set作成日時(RString.EMPTY);

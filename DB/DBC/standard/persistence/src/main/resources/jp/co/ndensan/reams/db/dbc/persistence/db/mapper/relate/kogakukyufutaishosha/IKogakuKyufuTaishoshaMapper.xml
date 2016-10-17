@@ -4,21 +4,21 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukyufutaishosha.IKogakuKyufuTaishoshaMapper">
     <!--高額介護サービス費給付対象者一時テーブルを作成する -->
     <insert id="create高額介護サービス費給付対象者一時TBL">
-        CREATE TEMP TABLE "DbWT3054KogakuKyufuTaishosha"
+        CREATE TEMP TABLE "DbWT3311KogakuKyufuTaishosha"
         (
             "renban" smallint,
             "recordNo" smallint,
             "recordShubetsu" character varying(2),
-            "shokisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
-            "shokisaiHokenshaMei" character varying(50),
-            "sakuseiYmd" rshare."UDD015YMD",
-            "kokuhoRengokaiMei" character varying(50),
+            "shoKisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
+            "shoKisaiHokenshaName" character varying(50),
+            "sakuseiYMD" rshare."UDD015YMD",
+            "kokuhorenName" character varying(50),
             "tsuchishoNo" character varying(6),
-            "serviceTeikyoYm" rshare."UDD014YM",
+            "serviceTeikyoYM" rshare."UDD014YM",
             "jigyoshoNo" rgdb."DbUDD004JigyoshaNo",
-            "jigyoshoMei" character varying(40),
+            "jigyoshoName" character varying(40),
             "serviceShuruiCode" rgdb."DbUDD005ServiceShuruiCode",
-            "serviceShuruiName" character varying(40),
+            "serviceShuruiMei" character varying(40),
             "serviceHiyoGokeigaku" numeric(13,0),
             "riyoshaFutangaku" numeric(13,0),
             "biko" character varying(20),
@@ -32,8 +32,8 @@
     </insert>
     
     <!--過高額介護サービス費給付対象者一時テーブルに登録します-->
-    <insert id="高額介護サービス費給付対象者一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3054KogakuKyufuTaishoshaTempEntity" >
-        INSERT INTO "DbWT3054KogakuKyufuTaishosha"
+    <insert id="高額介護サービス費給付対象者一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3311KogakuKyufuTaishoshaTempEntity" >
+        INSERT INTO "DbWT3311KogakuKyufuTaishosha"
         VALUES 
         (
             #{連番},
@@ -116,8 +116,8 @@
     </insert>
     
         <!--高額介護サービス費給付対象者一時TBLを更新済にする。更新済フラグFALSE->TRUE-->
-    <update id="高額介護サービス費給付対象者一時TBLに再処理不可登録"  parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3054KogakuKyufuTaishoshaTempEntity" >
-        UPDATE "DbWT3054KogakuKyufuTaishosha"
+    <update id="高額介護サービス費給付対象者一時TBLに再処理不可登録"  parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3311KogakuKyufuTaishoshaTempEntity" >
+        UPDATE "DbWT3311KogakuKyufuTaishosha"
         SET    "shinseizumiFlag" = true
         WHERE "recordNo" = #{連番}
     </update>
@@ -133,7 +133,7 @@
     
     <select id="select高額介護サービス費給付対象者一時TBLの全件" 
         resultType="java.util.Map" resultOrdered="true">
-        SELECT * FROM "DbWT3054KogakuKyufuTaishosha" 
+        SELECT * FROM "DbWT3311KogakuKyufuTaishosha" 
     </select>
     
     <select id="select世帯集約番号関連リスト" 
@@ -197,17 +197,17 @@
     
     <select id="再処理不可データの取得"  parameterType="java.util.Map" resultMap="resultMap_SaishoriFukaEntity" resultOrdered="true">
         SELECT  <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.allColumns_DbT3055KogakuKyufuTaishoshaGokei" />, 
-                <include refid="allColumns_DbWT3054DbWT0001" />, 
+                <include refid="allColumns_dbWT3311DbWT0001" />, 
                 <include refid="allColumns_DbV1001HihokenshaDaicho" />, 
                 <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
         FROM  rgdb."DbT3055KogakuKyufuTaishoshaGokei"
         LEFT JOIN (
-        SELECT <include refid="allColumns_DbWT3054KogakuKyufuTaishoshaTempEntity"/>,
+        SELECT <include refid="allColumns_DbWT3311KogakuKyufuTaishoshaTempEntity"/>,
         <include refid="allColumns_DbWT0001Hihokensha"/>
-        FROM "DbWT3054KogakuKyufuTaishosha" AS 対象者TBL
+        FROM "DbWT3311KogakuKyufuTaishosha" AS 対象者TBL
         INNER JOIN "DbWT0001Hihokensha" AS DbWT0001 ON 対象者TBL."renban" = DbWT0001."meisaiRenban" ) AS 一時TBL 
         ON "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo" = 一時TBL."dbWT0001HihokenshaTemp_hihokenshaNo"
-        AND "DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM" = 一時TBL."dbWT3054_サービス提供年月"
+        AND "DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM" = 一時TBL."dbWT3311_サービス提供年月"
         LEFT JOIN "rgdb"."DbV1001HihokenshaDaicho" AS HIHOKENSHA ON "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo" = HIHOKENSHA."hihokenshaNo"
         LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',TRUE,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,false,false,true,true,true,true,
@@ -223,23 +223,23 @@
     <select id="select履歴番号確認データ" resultMap="resultMap_RirikiNoKanrenEntity" resultOrdered="true">
         SELECT 合計TBL."hihokenshaNo",合計TBL."serviceTeikyoYM",MAX(合計TBL."rirekiNo") AS rirekiNo
         FROM 
-        "DbWT3054KogakuKyufuTaishosha" AS 一時TBL 
+        "DbWT3311KogakuKyufuTaishosha" AS 一時TBL 
         INNER JOIN 
         "DbWT0001Hihokensha"  AS 被保険者一時TBL
         ON 一時TBL."renban" = 被保険者一時TBL."meisaiRenban"
         INNER JOIN rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS 合計TBL
         ON 被保険者一時TBL."hihokenshaNo" = 合計TBL."hihokenshaNo"
-        AND 一時TBL."serviceTeikyoYm"  = 合計TBL."serviceTeikyoYM"
+        AND 一時TBL."serviceTeikyoYM"  = 合計TBL."serviceTeikyoYM"
         AND 一時TBL."shinseizumiFlag"= false
         GROUP BY 合計TBL."hihokenshaNo", 合計TBL."serviceTeikyoYM"
     </select>
     
     <select id="selectマスタ登録用データ" parameterType="java.util.Map" resultMap="resultMap_KyuufuTaishoshaHihokenshaEntity" 
             resultOrdered="true">
-        SELECT <include refid="allColumns_DbWT3054KogakuKyufuTaishoshaTempEntity"/>,
+        SELECT <include refid="allColumns_DbWT3311KogakuKyufuTaishoshaTempEntity"/>,
         <include refid="allColumns_DbWT0001Hihokensha"/>
         FROM
-        "DbWT3054KogakuKyufuTaishosha" AS 対象者TBL
+        "DbWT3311KogakuKyufuTaishosha" AS 対象者TBL
         INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON 対象者TBL."renban" = DbWT0001."meisaiRenban"
         WHERE 対象者TBL."shinseizumiFlag" = false
@@ -248,10 +248,10 @@
     
    <select id="select帳票出力対象データ" resultMap="resultMap_KyuufuTaishoshaHihokenshaEntity" parameterType="java.util.Map"
             resultOrdered="true">
-        SELECT <include refid="allColumns_DbWT3054KogakuKyufuTaishoshaTempEntity"/>,
+        SELECT <include refid="allColumns_DbWT3311KogakuKyufuTaishoshaTempEntity"/>,
         <include refid="allColumns_DbWT0001Hihokensha"/>
         FROM
-        "DbWT3054KogakuKyufuTaishosha" AS 対象者TBL
+        "DbWT3311KogakuKyufuTaishosha" AS 対象者TBL
         INNER JOIN "DbWT0001Hihokensha" AS DbWT0001
         ON 対象者TBL."renban" = DbWT0001."meisaiRenban"
         WHERE 対象者TBL."shinseizumiFlag" = false
@@ -301,34 +301,34 @@
     
     <resultMap id="resultMap_KyuufuTaishoshaHihokenshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.KyuufuTaishoshaHihokenshaEntity" autoMapping="true">
         <id column="dbWT0001HihokenshaTemp_meisaiRenban" />
-        <id column="dbWT3054_レコード番号" />
-        <association property="対象者" resultMap="resultMap_DbWT3054KogakuKyufuTaishoshaTempEntity"/>
+        <id column="dbWT3311_レコード番号" />
+        <association property="対象者" resultMap="resultMap_DbWT3311KogakuKyufuTaishoshaTempEntity"/>
         <association property="被保険者一時" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
     </resultMap>
     
-    <resultMap id="resultMap_DbWT3054KogakuKyufuTaishoshaTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3054KogakuKyufuTaishoshaTempEntity" autoMapping="true">
-        <result property="連番"          column="dbWT3054_連番"      />
-        <result property="レコード番号"          column="dbWT3054_レコード番号"  />
-        <result property="帳票レコード種別"          column="dbWT3054_帳票レコード種別"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="証記載保険者番号"          column="dbWT3054_証記載保険者番号"         typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
-        <result property="証記載保険者名"          column="dbWT3054_証記載保険者名"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="作成年月日"          column="dbWT3054_作成年月日"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="国保連合会名"          column="dbWT3054_国保連合会名"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="no"          column="dbWT3054_no"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="サービス提供年月"          column="dbWT3054_サービス提供年月"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
-        <result property="事業所番号"          column="dbWT3054_事業所番号"         typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
-        <result property="事業所名"          column="dbWT3054_事業所名"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="サービス種類コード"          column="dbWT3054_サービス種類コード"         typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler" />
-        <result property="サービス種類名"          column="dbWT3054_サービス種類名"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="サービス費用合計額"          column="dbWT3054_サービス費用合計額"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-        <result property="利用者負担額"          column="dbWT3054_利用者負担額"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-        <result property="備考"          column="dbWT3054_備考"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="サービス費用合計額合計"          column="dbWT3054_サービス費用合計額合計"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-        <result property="利用者負担額合計"          column="dbWT3054_利用者負担額合計"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-        <result property="算定基準額"          column="dbWT3054_算定基準額"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-        <result property="支払済金額合計"          column="dbWT3054_支払済金額合計"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-        <result property="高額支給額"          column="dbWT3054_高額支給額"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-        <result property="再処理不可フラグ"          column="dbWT3054_再処理不可フラグ"      />
+    <resultMap id="resultMap_DbWT3311KogakuKyufuTaishoshaTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3311KogakuKyufuTaishoshaTempEntity" autoMapping="true">
+        <result property="連番"          column="dbWT3311_連番"      />
+        <result property="レコード番号"          column="dbWT3311_レコード番号"  />
+        <result property="帳票レコード種別"          column="dbWT3311_帳票レコード種別"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="証記載保険者番号"          column="dbWT3311_証記載保険者番号"         typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+        <result property="証記載保険者名"          column="dbWT3311_証記載保険者名"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="作成年月日"          column="dbWT3311_作成年月日"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="国保連合会名"          column="dbWT3311_国保連合会名"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="no"          column="dbWT3311_no"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービス提供年月"          column="dbWT3311_サービス提供年月"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <result property="事業所番号"          column="dbWT3311_事業所番号"         typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
+        <result property="事業所名"          column="dbWT3311_事業所名"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービス種類コード"          column="dbWT3311_サービス種類コード"         typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler" />
+        <result property="サービス種類名"          column="dbWT3311_サービス種類名"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービス費用合計額"          column="dbWT3311_サービス費用合計額"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="利用者負担額"          column="dbWT3311_利用者負担額"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="備考"          column="dbWT3311_備考"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービス費用合計額合計"          column="dbWT3311_サービス費用合計額合計"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="利用者負担額合計"          column="dbWT3311_利用者負担額合計"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="算定基準額"          column="dbWT3311_算定基準額"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="支払済金額合計"          column="dbWT3311_支払済金額合計"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="高額支給額"          column="dbWT3311_高額支給額"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="再処理不可フラグ"          column="dbWT3311_再処理不可フラグ"      />
     </resultMap>
     
     <resultMap id="resultMap_SedaiShuuyakuBangoKanrenEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.SedaiShuuyakuBangoKanrenEntity" autoMapping="true">
@@ -374,54 +374,54 @@
         DbWT0001."shikibetsuCode" AS "dbWT0001HihokenshaTemp_shikibetsuCode"
     </sql>
     
-    <sql id="allColumns_DbWT3054KogakuKyufuTaishoshaTempEntity">
-        対象者TBL."renban" AS "dbWT3054_連番",
-        対象者TBL."recordNo" AS "dbWT3054_レコード番号",
-        対象者TBL."recordShubetsu" AS "dbWT3054_帳票レコード種別",
-        対象者TBL."shokisaiHokenshaNo" AS "dbWT3054_証記載保険者番号",
-        対象者TBL."shokisaiHokenshaMei" AS "dbWT3054_証記載保険者名",
-        対象者TBL."sakuseiYmd" AS "dbWT3054_作成年月日",
-        対象者TBL."kokuhoRengokaiMei" AS "dbWT3054_国保連合会名",
-        対象者TBL."tsuchishoNo" AS "dbWT3054_no",
-        対象者TBL."serviceTeikyoYm" AS "dbWT3054_サービス提供年月",
-        対象者TBL."jigyoshoNo" AS "dbWT3054_事業所番号",
-        対象者TBL."jigyoshoMei" AS "dbWT3054_事業所名",
-        対象者TBL."serviceShuruiCode" AS "dbWT3054_サービス種類コード",
-        対象者TBL."serviceShuruiName" AS "dbWT3054_サービス種類名",
-        対象者TBL."serviceHiyoGokeigaku" AS "dbWT3054_サービス費用合計額",
-        対象者TBL."riyoshaFutangaku" AS "dbWT3054_利用者負担額",
-        対象者TBL."biko" AS "dbWT3054_備考",
-        対象者TBL."serviceHiyoGokeigakuGokei" AS "dbWT3054_サービス費用合計額合計",
-        対象者TBL."riyoshaFutangakuGokei" AS "dbWT3054_利用者負担額合計",
-        対象者TBL."santeiKijungaku" AS "dbWT3054_算定基準額",
-        対象者TBL."shiharaizumigakuGokei" AS "dbWT3054_支払済金額合計",
-        対象者TBL."kogakuShiharaigaku" AS "dbWT3054_高額支給額",
-        対象者TBL."shinseizumiFlag" AS "dbWT3054_再処理不可フラグ"
+    <sql id="allColumns_DbWT3311KogakuKyufuTaishoshaTempEntity">
+        対象者TBL."renban" AS "dbWT3311_連番",
+        対象者TBL."recordNo" AS "dbWT3311_レコード番号",
+        対象者TBL."recordShubetsu" AS "dbWT3311_帳票レコード種別",
+        対象者TBL."shoKisaiHokenshaNo" AS "dbWT3311_証記載保険者番号",
+        対象者TBL."shoKisaiHokenshaName" AS "dbWT3311_証記載保険者名",
+        対象者TBL."sakuseiYMD" AS "dbWT3311_作成年月日",
+        対象者TBL."kokuhorenName" AS "dbWT3311_国保連合会名",
+        対象者TBL."tsuchishoNo" AS "dbWT3311_no",
+        対象者TBL."serviceTeikyoYM" AS "dbWT3311_サービス提供年月",
+        対象者TBL."jigyoshoNo" AS "dbWT3311_事業所番号",
+        対象者TBL."jigyoshoName" AS "dbWT3311_事業所名",
+        対象者TBL."serviceShuruiCode" AS "dbWT3311_サービス種類コード",
+        対象者TBL."serviceShuruiMei" AS "dbWT3311_サービス種類名",
+        対象者TBL."serviceHiyoGokeigaku" AS "dbWT3311_サービス費用合計額",
+        対象者TBL."riyoshaFutangaku" AS "dbWT3311_利用者負担額",
+        対象者TBL."biko" AS "dbWT3311_備考",
+        対象者TBL."serviceHiyoGokeigakuGokei" AS "dbWT3311_サービス費用合計額合計",
+        対象者TBL."riyoshaFutangakuGokei" AS "dbWT3311_利用者負担額合計",
+        対象者TBL."santeiKijungaku" AS "dbWT3311_算定基準額",
+        対象者TBL."shiharaizumigakuGokei" AS "dbWT3311_支払済金額合計",
+        対象者TBL."kogakuShiharaigaku" AS "dbWT3311_高額支給額",
+        対象者TBL."shinseizumiFlag" AS "dbWT3311_再処理不可フラグ"
     </sql>
     
-    <sql id="allColumns_DbWT3054DbWT0001">
-        "dbWT3054_連番",
-        "dbWT3054_レコード番号",
-        "dbWT3054_帳票レコード種別",
-        "dbWT3054_証記載保険者番号",
-        "dbWT3054_証記載保険者名",
-        "dbWT3054_作成年月日",
-        "dbWT3054_国保連合会名",
-        "dbWT3054_no",
-        "dbWT3054_サービス提供年月",
-        "dbWT3054_事業所番号",
-        "dbWT3054_事業所名",
-        "dbWT3054_サービス種類コード",
-        "dbWT3054_サービス種類名",
-        "dbWT3054_サービス費用合計額",
-        "dbWT3054_利用者負担額",
-        "dbWT3054_備考",
-        "dbWT3054_サービス費用合計額合計",
-        "dbWT3054_利用者負担額合計",
-        "dbWT3054_算定基準額",
-        "dbWT3054_支払済金額合計",
-        "dbWT3054_高額支給額",
-        "dbWT3054_再処理不可フラグ",
+    <sql id="allColumns_dbWT3311DbWT0001">
+        "dbWT3311_連番",
+        "dbWT3311_レコード番号",
+        "dbWT3311_帳票レコード種別",
+        "dbWT3311_証記載保険者番号",
+        "dbWT3311_証記載保険者名",
+        "dbWT3311_作成年月日",
+        "dbWT3311_国保連合会名",
+        "dbWT3311_no",
+        "dbWT3311_サービス提供年月",
+        "dbWT3311_事業所番号",
+        "dbWT3311_事業所名",
+        "dbWT3311_サービス種類コード",
+        "dbWT3311_サービス種類名",
+        "dbWT3311_サービス費用合計額",
+        "dbWT3311_利用者負担額",
+        "dbWT3311_備考",
+        "dbWT3311_サービス費用合計額合計",
+        "dbWT3311_利用者負担額合計",
+        "dbWT3311_算定基準額",
+        "dbWT3311_支払済金額合計",
+        "dbWT3311_高額支給額",
+        "dbWT3311_再処理不可フラグ",
         "dbWT0001HihokenshaTemp_meisaiRenban",
         "dbWT0001HihokenshaTemp_shoHokenshaNo",
         "dbWT0001HihokenshaTemp_orgHihokenshaNo",
