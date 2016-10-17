@@ -71,8 +71,12 @@ public class KyuufuJyohouProcess extends BatchProcessBase<SougouJigyouJyohouRela
                 && ShokaiTeikyoKubun.未提供.getコード().equals(特定個人版管理特定情報.get(0).get初回提供区分())) {
             throw new BatchInterruptedException("");
         }
+        HihokenshaNo 個人番号付替対象者被保険者番号 = processParameter.get個人番号付替対象者被保険者番号();
+        if (個人番号付替対象者被保険者番号 == null) {
+            個人番号付替対象者被保険者番号 = HihokenshaNo.EMPTY;
+        }
         mybatisParameter = SougouJigyouJyohouMybatisParameter.create_Parameter(processParameter.get新規異動区分(),
-                processParameter.get個人番号付替対象者被保険者番号(), processParameter.get対象開始日時(), processParameter.get対象終了日時(),
+                個人番号付替対象者被保険者番号.value(), processParameter.get対象開始日時(), processParameter.get対象終了日時(),
                 特定個人版管理特定情報.get(0).get版番号(), RString.EMPTY);
     }
 

@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class JukyushaKihonJohoTeikyoJohoSyutokuProcess extends BatchProcessBase<JukyushaTeikyoJohoKohoEntity> {
 
     private static final RString GET_JUKYUSHATEIKYOJOHOKOHO = new RString("jp.co.ndensan.reams"
-            + ".db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.getJukyushaDaichoTeikyoJohoKoho");
+            + ".db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ITokuteiKojinJohoTeikyoMapper.getJukyushaDaichoTeikyoJohoKoho");
     private static final RString 未設定事由 = new RString("NotAcceptable");
     private static final RString 未設定事由８ = new RString("NotConvered");
     private JukyushaKihonJohoProcessParameter processParameter;
@@ -51,11 +51,11 @@ public class JukyushaKihonJohoTeikyoJohoSyutokuProcess extends BatchProcessBase<
     protected void initialize() {
         特定個人情報名コード = processParameter.get特定個人情報名コード();
         版番号 = TokuteiKojinJohoTeikyoManager.createInstance()
-                .get版番号(processParameter.get新規異動区分().getコード(), 特定個人情報名コード,
+                .get版番号(processParameter.get新規異動区分(), 特定個人情報名コード,
                         DataSetNo._0201受給者基本情報.getコード(), FlexibleDate.getNowDate()).get(0).get版番号();
         mybitisParamter = processParameter.toJukyushaKihonJohoMybatisParameter();
         mybitisParamter.setYukoMukoKubun(YukoMukoKubun.無効.getコード());
-        if (processParameter.get新規異動区分() == ShinkiIdoKubun.異動) {
+        if (ShinkiIdoKubun.異動.getコード().equals(processParameter.get新規異動区分())) {
             mybitisParamter.setShinkiIdo(true);
         } else {
             mybitisParamter.setShinkiIdo(false);

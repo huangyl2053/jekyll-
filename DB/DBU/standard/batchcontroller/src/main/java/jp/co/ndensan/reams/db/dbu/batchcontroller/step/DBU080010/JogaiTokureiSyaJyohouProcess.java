@@ -74,7 +74,7 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
         FlexibleDate 事業所抽出終了年月日 = FlexibleDate.EMPTY;
         // TODO 凌護行　パラメータの設定が不明、QA回答まち、2016/10/20
         特定個人版管理特定情報 = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(新規異動区分,
-                processParameter.get提供要否List().get(0), DataSetNo._0102住所地特例情報.getコード(), システム日付);
+                processParameter.get特定個人情報名コード(), DataSetNo._0102住所地特例情報.getコード(), システム日付);
         hanNo.setValue(特定個人版管理特定情報.get(0).get版番号());
         if ((ShinkiIdoKubun.当初.getコード().equals(新規異動区分)
                 || ShinkiIdoKubun.版改定.getコード().equals(新規異動区分))

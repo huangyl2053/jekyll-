@@ -5,16 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 
+import jp.co.ndensan.reams.db.dbu.business.core.basic.TokuteiKojinJohoHanKanri;
+import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.DataSetNo;
+import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TeikyoYohi;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.JukyushaKihonJohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.JukyushaKihonJohoProcessParameter;
+import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.JukyushaTeikyoKihonJohoNNTempEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity;
+import jp.co.ndensan.reams.db.dbu.service.core.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JukyushaKihonJohoTeikyoKihonJohoNNTempUpdateProcess extends BatchProcessBase<JukyushaTeikyoKihonJohoNNTempEntity> {
 
     private static final RString GET_JUKYUSHATEIKYOJOHOTEMP = new RString("jp.co.ndensan.reams"
-            + ".db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.getJukyushaTeikyoKihonJohoNNTempData");
+            + ".db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ITokuteiKojinJohoTeikyoMapper.getJukyushaTeikyoKihonJohoNNTempData");
     private JukyushaKihonJohoProcessParameter processParameter;
     private JukyushaKihonJohoMybatisParameter mybitisParamter;
 
@@ -57,4 +63,19 @@ public class JukyushaKihonJohoTeikyoKihonJohoNNTempUpdateProcess extends BatchPr
         teikyoKihonJohoNNTemp.update(tempEntity);
     }
 
+    @Override
+    protected void afterExecute() {
+        TokuteiKojinJohoTeikyoManager 特定個人情報提供Manager = TokuteiKojinJohoTeikyoManager.createInstance();
+        特定個人情報提供Manager.update特定個人情報提供(
+                mybitisParamter.getTempTableName(),
+                processParameter.get新規異動区分(),
+                processParameter.get特定個人情報名コード(),
+                DataSetNo._0201受給者基本情報.getコード(),
+                processParameter.get版番号());
+        for (TokuteiKojinJohoHanKanri 個人情報提供 : 特定個人情報提供Manager.get版番号(
+                RString.EMPTY, processParameter.get特定個人情報名コード(), DataSetNo._0201受給者基本情報.getコード(), FlexibleDate.EMPTY)) {
+            DbT7301TokuteiKojinJohoHanKanriEntity entity = 個人情報提供.toEntity();
+            entity.setShokaiTeikyoKubun(ShokaiTeikyoKubun.初回提供済み.getコード());
+        }
+    }
 }
