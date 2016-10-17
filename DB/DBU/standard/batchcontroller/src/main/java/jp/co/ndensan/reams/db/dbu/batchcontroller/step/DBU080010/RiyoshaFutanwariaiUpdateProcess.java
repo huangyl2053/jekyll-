@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.TokuteiKojinJohoHanKanri;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.DataSetNo;
@@ -20,6 +21,9 @@ import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoF
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DoitsuninDaihyoshaYusenKubun;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -67,11 +71,21 @@ public class RiyoshaFutanwariaiUpdateProcess extends BatchProcessBase<TeikyoKiho
 
     private RString getMybitisParamter() {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先));
-        //TODO パラメータの設定が不明です、QA回答まち、
-        //氏名検索条件（履歴を含む）名称について、履歴を含み検索するか否かを指定する。
-        //履歴を含んで検索する
-        //履歴を含めず検索する【初期値】
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
+        List<JuminShubetsu> 住民種別リスト = new ArrayList<>();
+        住民種別リスト.add(JuminShubetsu.住登外個人_外国人);
+        住民種別リスト.add(JuminShubetsu.住登外個人_日本人);
+        住民種別リスト.add(JuminShubetsu.外国人);
+        住民種別リスト.add(JuminShubetsu.日本人);
+        key.set住民種別(住民種別リスト);
+        List<JuminJotai> 住民状態リスト = new ArrayList<>();
+        住民状態リスト.add(JuminJotai.住民);
+        住民状態リスト.add(JuminJotai.住登外);
+        住民状態リスト.add(JuminJotai.消除者);
+        住民状態リスト.add(JuminJotai.転出者);
+        住民状態リスト.add(JuminJotai.死亡者);
+        key.set住民状態(住民状態リスト);
+        key.set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         return new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
     }
