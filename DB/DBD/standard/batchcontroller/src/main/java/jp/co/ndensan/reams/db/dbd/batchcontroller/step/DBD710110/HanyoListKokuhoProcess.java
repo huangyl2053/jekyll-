@@ -387,7 +387,7 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
             builder.append(SoshitsuKubun.toValue(processParamter.getSoshitsukubun()));
             builder.append(COMMA);
         }
-        if (!builder.toRString().isNullOrEmpty()) {
+        if (builder.toRString() != null && !builder.toRString().isEmpty()) {
             List<RString> builderList = builder.toRString().substring(0, builder.toRString().length() - 1).split(COMMA.toString());
             for (RString build : builderList) {
                 出力条件.add(build);
@@ -396,14 +396,14 @@ public class HanyoListKokuhoProcess extends BatchProcessBase<HanyoRisutoKokuhoEn
         if (null != processParamter.getAtenacyusyutsujyoken()
                 && null != processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun()) {
             RString get宛名抽出区分情報 = get宛名抽出区分情報();
-            if (!get宛名抽出区分情報.isNullOrEmpty()) {
+            if (get宛名抽出区分情報 != null && !get宛名抽出区分情報.isEmpty()) {
                 出力条件.add(get宛名抽出区分情報());
             }
         }
         if (null != processParamter.getAtenacyusyutsujyoken()
                 && null != processParamter.getAtenacyusyutsujyoken().getChiku_Kubun()) {
             RString get地区区分情報 = get地区選択区分情報();
-            if (!get地区区分情報.isNullOrEmpty()) {
+            if (get地区区分情報 != null && !get地区区分情報.isEmpty()) {
                 List<RString> 地区区分情報 = get地区区分情報.substring(0, get地区区分情報.length() - 1).split(COMMA.toString());
                 for (RString 情報 : 地区区分情報) {
                     出力条件.add(情報);
