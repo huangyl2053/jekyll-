@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2400011;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2400011.TesuryoSeikyuKenShinseishoSakuseiParameterDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -42,7 +41,6 @@ public class TesuryoSeikyuKenShinseishoSakuseiParameterValidationHandler {
     public ValidationMessageControlPairs 作成申請年月日空白チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getFromValue() == null
-                || new RDate("").equals(div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getFromValue())
                 || div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getToValue() == null) {
             validPairs.add(new ValidationMessageControlPair(new TesuryoSeikyuKenShinseishoSakuseiParameterValidationHandler.IdocheckMessages(
                     UrErrorMessages.必須, "作成申請年月日"), div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD()));
