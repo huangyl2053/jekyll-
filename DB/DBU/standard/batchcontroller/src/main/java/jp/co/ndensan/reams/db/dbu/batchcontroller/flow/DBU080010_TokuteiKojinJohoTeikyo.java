@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -70,9 +71,10 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
     @Override
     protected void defineFlow() {
         RDate システム日付 = RDate.getNowDate();
-        if (使用する.equals(DbBusinessConfig.get(ConfigNameDBU.番号制度_使用制御, システム日付))
-                && 稼働.equals(DbBusinessConfig.get(ConfigNameDBU.番号制度_提供機能使用制御, システム日付))
-                && new RDate(DbBusinessConfig.get(ConfigNameDBU.番号制度_利用開始日, システム日付).toString()).isBeforeOrEquals(システム日付)) {
+        if (使用する.equals(DbBusinessConfig.get(ConfigNameDBU.番号制度_使用制御, システム日付, SubGyomuCode.DBU介護統計報告))
+                && 稼働.equals(DbBusinessConfig.get(ConfigNameDBU.番号制度_提供機能使用制御, システム日付, SubGyomuCode.DBU介護統計報告))
+                && new RDate(DbBusinessConfig.get(ConfigNameDBU.番号制度_利用開始日,
+                                システム日付, SubGyomuCode.DBU介護統計報告).toString()).isBeforeOrEquals(システム日付)) {
             parameter = getParameter();
             executeStep(バッチパラメータの取得);
             setバッチパラメータ();

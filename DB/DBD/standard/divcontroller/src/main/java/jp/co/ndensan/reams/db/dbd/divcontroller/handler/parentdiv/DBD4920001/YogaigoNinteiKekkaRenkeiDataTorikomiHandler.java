@@ -213,7 +213,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
             }
         }
         div.getHdNum().setValue(new RString(size % NO_328));
-        div.setNum(new RString(size));
+        div.setNum(new RString(size / NO_328));
     }
 
     private List<DataGridFile_Row> getFileSource() {
