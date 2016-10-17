@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.Soshit
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -57,8 +58,8 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
     private boolean is地区3From;
     private boolean is地区3To;
 
-    private RString psmShikibetsuTaisho;
-    private RString psmAtesaki;
+    private final UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam;
+    private final RString psmAtesaki;
 
     private FlexibleDate kijunYMD;
     private FlexibleDate startYMD;
@@ -95,7 +96,7 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
      * @param 直近データ抽出 直近データ抽出
      * @param 宛名抽出条件 宛名抽出条件
      * @param 喪失区分 喪失区分
-     * @param psmShikibetsuTaisho 宛名識別対象PSM
+     * @param shikibetsutaishoParam 宛名識別対象PSM
      * @param psmAtesaki 宛名識別対象PSM
      */
     public GeneralPurposeListOutputMybatisParameter(ChushutsuHohoKubun 抽出方法区分,
@@ -106,25 +107,21 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
             boolean 直近データ抽出,
             AtenaSelectBatchParameter 宛名抽出条件,
             SoshitsuKubun 喪失区分,
-            RString psmShikibetsuTaisho,
+            UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam,
             RString psmAtesaki) {
-
+        this.psmAtesaki = psmAtesaki;
+        this.shikibetsutaishoParam = shikibetsutaishoParam;
         is直近データ抽出 = 直近データ抽出;
         kijunYMD = 基準日;
         set抽出方法区分について(抽出方法区分, 抽出項目区分, 直近データ抽出,
-                日付範囲From, 日付範囲To, psmShikibetsuTaisho, psmAtesaki);
+                日付範囲From, 日付範囲To);
         set喪失区分について(喪失区分);
         set宛名抽出区分について(宛名抽出条件);
     }
 
     private void set抽出方法区分について(ChushutsuHohoKubun 抽出方法区分, RString 抽出項目区分, boolean 直近データ抽出,
             FlexibleDate 日付範囲From,
-            FlexibleDate 日付範囲To,
-            RString psmShikibetsuTaisho,
-            RString psmAtesaki) {
-
-        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
-        this.psmAtesaki = psmAtesaki;
+            FlexibleDate 日付範囲To) {
 
         RString 抽出方法区分_基準日 = new RString("基準日");
         RString 抽出方法区分_範囲 = new RString("範囲");

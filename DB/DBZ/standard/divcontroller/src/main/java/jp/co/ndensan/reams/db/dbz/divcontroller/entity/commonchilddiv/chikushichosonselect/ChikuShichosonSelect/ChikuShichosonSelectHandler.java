@@ -102,6 +102,36 @@ public class ChikuShichosonSelectHandler {
         div.setHdnTxtTitle(RString.EMPTY);
     }
 
+    /**
+     * 共有子Div画面の初期表示です。
+     *
+     * @param 導入形態コード 導入形態コード
+     */
+    public void initialize(Code 導入形態コード) {
+        RDate 適用基準日 = RDate.getNowDate();
+        if (導入形態コード != null && !導入形態コード.isEmpty() && !導入形態コード.value().isNullOrEmpty()) {
+            div.setHdnTxtDonyuKeitaiCode(導入形態コード.value());
+            if (コード_事務単一.equals(導入形態コード.value())) {
+                div.getTanitsuShichoson().setDisplayNone(false);
+                div.getBtnChoikiGuide().setDisplayNone(true);
+                div.getBtnChikuNyuryokuGuide().setDisplayNone(true);
+                div.getDdlCodeList().init();
+                div.getKoikiShichoson().setDisplayNone(true);
+                set選択対象DDL(適用基準日);
+            }
+            if (コード_事務広域.equals(導入形態コード.value()) || コード_事務構成市町村.equals(導入形態コード.value())) {
+                div.getTanitsuShichoson().setDisplayNone(true);
+                div.getKoikiShichoson().setDisplayNone(false);
+                div.getDdlKyushichosonKoiki().setDisplayNone(true);
+                set市町村DDL(導入形態コード);
+            }
+        }
+        div.setHdnTxtIsMultiSelected(文字_TRUE);
+        div.setHdnTxtChikuShubetsu(RString.EMPTY);
+        div.setHdnMapMultiSelect(RString.EMPTY);
+        div.setHdnTxtTitle(RString.EMPTY);
+    }
+
     private void set市町村DDL(Code 導入形態Code) {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();

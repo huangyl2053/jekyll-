@@ -63,6 +63,7 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
     private static final int NUM_5 = 5;
+    private static final int NUM_6 = 6;
     private static final int NUM_8 = 8;
     private static final int NUM_10 = 10;
     private static final int NUM_12 = 12;
@@ -265,8 +266,12 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private boolean is広域() {
         RString 市町村コード = RString.EMPTY;
         RString 構成市町村情報_市町村コード = RString.EMPTY;
-        if (所得照会票発行一覧.getZenkokuJushoCode() != null) {
-            市町村コード = new RString(所得照会票発行一覧.getZenkokuJushoCode().toString().substring(NUM_0, NUM_5));
+        if (所得照会票発行一覧.getZenkokuJushoCode() != null && !所得照会票発行一覧.getZenkokuJushoCode().isEmpty()) {
+            if (NUM_6 <= 所得照会票発行一覧.getZenkokuJushoCode().toString().length()) {
+                市町村コード = new RString(所得照会票発行一覧.getZenkokuJushoCode().toString().substring(NUM_0, NUM_5));
+            } else {
+                市町村コード = new RString(所得照会票発行一覧.getZenkokuJushoCode().toString());
+            }
         }
         List<RString> 市町村コードリスト = new ArrayList<>();
         for (KoikiZenShichosonJoho 構成市町村情報 : 構成市町村情報リスト) {

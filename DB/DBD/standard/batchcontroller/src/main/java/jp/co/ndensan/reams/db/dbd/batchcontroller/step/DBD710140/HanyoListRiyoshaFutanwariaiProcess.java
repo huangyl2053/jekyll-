@@ -225,8 +225,9 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
         personalDataList.add(toPersonalData(entity));
         Class clazz = eucCsvEntity.getClass();
         RString 項目内容new = RString.EMPTY;
-        HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku = HanyoListReportUtil.createInstance().get汎用リスト出力項目(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給,
-                new ReportId(processParamter.getCyohyoid()), Long.parseLong(processParamter.getSyutsuryokukomoku().toString()));
+        HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku = HanyoListReportUtil.createInstance()
+                .get汎用リスト出力項目(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給,
+                        new ReportId(processParamter.getCyohyoid()), Long.parseLong(processParamter.getSyutsuryokukomoku().toString()));
         if (hanyoListShutsuryokuKomoku != null) {
             for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
                 try {
@@ -234,7 +235,8 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
                             .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
                                                     .get(i).get項目位置()))).get名称().toString());
                     項目内容new = (RString) getMethod.invoke(eucCsvEntity);
-                } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                } catch (NoSuchMethodException | SecurityException | IllegalAccessException |
+                        IllegalArgumentException | InvocationTargetException ex) {
                     Logger.getLogger(HanyoListRiyoshaFutanwariaiProcess.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (is帳票出力) {
@@ -242,7 +244,7 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
 
                 }
                 if (isCSV出力) {
-                    CSV出力編集(i, hanyoListShutsuryokuKomoku, 項目内容new);
+                    出力編集(i, hanyoListShutsuryokuKomoku, 項目内容new);
                 }
             }
         }
@@ -257,8 +259,7 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
         eucCsvWriter1.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         if (isCSV出力) {
-            manager.spool(eucFilePath, log);
-            manager.spool(csvFilePath1);
+            manager.spool(csvFilePath1, log);
         }
         バッチ出力条件リストの出力();
     }
@@ -489,34 +490,6 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
         return builder.toRString();
     }
 
-    private List<RString> edit出力DB項目(List<RString> 出力DB項目名, List<RString> 出力DB項目) {
-        if (出力DB項目名.contains(HIHOKENSHANO) && 出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
-            for (int index = 0; index < 出力DB項目.size(); index++) {
-                if (出力DB項目.get(index).startsWith(RIREKIBANGO)) {
-                    出力DB項目.add(index + 1, EDANO);
-                }
-            }
-        } else if (出力DB項目名.contains(HIHOKENSHANO) && !出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
-            for (int index = 0; index < 出力DB項目.size(); index++) {
-                if (出力DB項目.get(index).startsWith(HIHOKENSHANO)) {
-                    出力DB項目.add(index + 1, RIREKIBANGO);
-                    出力DB項目.add(index + 2, EDANO);
-                }
-            }
-        } else if (!出力DB項目名.contains(HIHOKENSHANO) && 出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
-            for (int index = 0; index < 出力DB項目.size(); index++) {
-                if (出力DB項目.get(index).startsWith(RIREKIBANGO)) {
-                    出力DB項目.add(index + 1, EDANO);
-                }
-            }
-        } else if (!出力DB項目名.contains(HIHOKENSHANO) && !出力DB項目名.contains(RIREKIBANGO) && !出力DB項目名.contains(EDANO)) {
-            出力DB項目.add(HIHOKENSHANO);
-            出力DB項目.add(RIREKIBANGO);
-            出力DB項目.add(EDANO);
-        }
-        return 出力DB項目;
-    }
-
     private RStringBuilder get年齢() {
         RStringBuilder builder = new RStringBuilder();
         if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
@@ -662,13 +635,14 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
             項目内容 = 項目内容.concat(項目内容new);
             出力桁数 = 出力文字の開始位置 + get項目桁数;
         }
-        HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(), processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
+        HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(),
+                processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
         report.writeBy(reportSourceWriter);
         項目見出し = RString.EMPTY;
         項目内容 = RString.EMPTY;
     }
 
-    private void CSV出力編集(int i, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku, RString 項目内容new) {
+    private void 出力編集(int i, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku, RString 項目内容new) {
         if (processParamter.isCsvrenbanfuka()) {
             連番あり(i, hanyoListShutsuryokuKomoku, 項目内容new);
         } else {

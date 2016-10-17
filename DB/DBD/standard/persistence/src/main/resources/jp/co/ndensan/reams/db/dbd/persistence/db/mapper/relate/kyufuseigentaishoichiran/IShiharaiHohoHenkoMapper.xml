@@ -104,6 +104,7 @@ and open the template in the editor.-->
         V1001."shikakuShutokuYMD",
         V1001."shikakuSoshitsuYMD",
         V1001."koikinaiTokureiSochimotoShichosonCode",
+        V1001."koikinaiJushochiTokureiFlag",
 
         V4001."ninteiYMD",
         V4001."yokaigoJotaiKubunCode",

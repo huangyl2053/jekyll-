@@ -140,12 +140,11 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toGeneralPurposeListOutputMybatisParameter(psmShikibetsuTaisho, psmAtesaki));
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toGeneralPurposeListOutputMybatisParameter(uaFt200Psm, psmAtesaki));
     }
 
     int csvcount = 0;

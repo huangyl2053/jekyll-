@@ -64,8 +64,8 @@ public class DBD519001_NinteishinseiInfoIf extends BatchFlowBase<DBD519001_Ninte
             } else {
                 executeStep(申請情報IFファイル厚労省作成);
             }
+            executeStep(各テーブルへの登録);
         }
-        executeStep(各テーブルへの登録);
     }
 
     /**

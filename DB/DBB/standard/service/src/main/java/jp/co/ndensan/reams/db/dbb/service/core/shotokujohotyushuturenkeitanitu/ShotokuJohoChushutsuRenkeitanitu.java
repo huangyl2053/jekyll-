@@ -56,8 +56,7 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShotokuJohoChushutsuRenkeitanitu}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShotokuJohoChushutsuRenkeitanitu}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShotokuJohoChushutsuRenkeitanitu}のインスタンス
      */
     public static ShotokuJohoChushutsuRenkeitanitu createInstance() {
         return InstanceProvider.create(ShotokuJohoChushutsuRenkeitanitu.class);
@@ -97,7 +96,7 @@ public class ShotokuJohoChushutsuRenkeitanitu {
             DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity
                     = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課, ShoriName.所得引出.get名称(), 枝番, 年度);
             if (処理日付管理異動情報Entity == null) {
-                処理区分 = 不可;
+                処理区分 = 可;
             } else {
                 処理区分 = 可;
             }

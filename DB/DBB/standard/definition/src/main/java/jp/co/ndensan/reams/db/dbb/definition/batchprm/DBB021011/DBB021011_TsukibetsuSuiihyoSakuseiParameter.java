@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021011;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -66,7 +68,7 @@ public class DBB021011_TsukibetsuSuiihyoSakuseiParameter extends BatchParameterB
     @BatchParameter(key = KEY_SENTAKUTAISHO, name = "選択対象")
     private RString sentakuTaisho;
     @BatchParameter(key = KEY_LIST_SENTAKUKEKKA, name = "List<SentakuKekka>")
-    private List<RString> sentakuKekkaList;
+    private Map<RString, RString> sentakuKekkaList;
     @BatchParameter(key = KEY_SHICHOSONCODE, name = "市町村コード")
     private RString shichosonCode;
     @BatchParameter(key = KEY_SHICHOSONMEISHO, name = "市町村名称")
@@ -114,7 +116,7 @@ public class DBB021011_TsukibetsuSuiihyoSakuseiParameter extends BatchParameterB
             RString seinengappiYMDStart,
             RString seinengappiYMDEnd,
             RString sentakuTaisho,
-            List<RString> sentakuKekkaList,
+            Map<RString, RString> sentakuKekkaList,
             RString shichosonCode,
             RString shichosonMeisho,
             RString kyuShichosonCode,
@@ -155,11 +157,20 @@ public class DBB021011_TsukibetsuSuiihyoSakuseiParameter extends BatchParameterB
                 seinengappiYMDStart,
                 seinengappiYMDEnd,
                 sentakuTaisho,
-                sentakuKekkaList,
+                getCode(),
                 shichosonCode,
                 shichosonMeisho,
                 kyuShichosonCode,
                 kyuShichosonMeisho);
     }
 
+    private List<RString> getCode() {
+        List<RString> codeList = new ArrayList<>();
+        if (sentakuKekkaList != null && !sentakuKekkaList.isEmpty()) {
+            for (Map.Entry<RString, RString> entry : sentakuKekkaList.entrySet()) {
+                codeList.add(entry.getKey());
+            }
+        }
+        return codeList;
+    }
 }

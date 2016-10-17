@@ -23,10 +23,12 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB114001.DBB114001_Shotok
 import jp.co.ndensan.reams.db.dbb.definition.processprm.shotokushokaihyohakko.ShotokuShokaihyoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -105,6 +107,7 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
             }
             executeStep(所得照会票一覧の出力);
         } else if (出力対象_0.equals(出力対象)) {
+            processParameter.set再発行対象リスト(batchParameter.get再発行対象リスト());
             executeStep(所得照会候補者TEMPテーブルに登録);
             executeStep(対象外の住民情報を更新);
             executeStep(再発行対象者TEMPテーブルに登録);
@@ -120,6 +123,10 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      */
     @Step(所得照会候補者TEMPテーブルに登録)
     protected IBatchFlowCommand insJuminJohoTmpProcess() {
+        if (processParameter.get処理年度() == null || processParameter.get出力対象() == null) {
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り
+                    .getMessage().evaluate());
+        }
         return loopBatch(InsJuminJohoTmpProcess.class).arguments(processParameter).define();
     }
 
@@ -130,6 +137,10 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      */
     @Step(対象外の住民情報を更新)
     protected IBatchFlowCommand delTaisyogaiJuminJohoTmpProcess() {
+        if (processParameter.get処理年度() == null) {
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り
+                    .getMessage().evaluate());
+        }
         return simpleBatch(DelTaisyogaiJuminJohoTmpProcess.class).arguments(processParameter).define();
     }
 
@@ -140,6 +151,10 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      */
     @Step(年度内有資格者TEMPテーブルに登録)
     protected IBatchFlowCommand insNendoNaiYuSikakushaTmpProcess() {
+        if (processParameter.get処理年度() == null) {
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り
+                    .getMessage().evaluate());
+        }
         return loopBatch(InsNendoNaiYuSikakushaTmpProcess.class).arguments(processParameter).define();
     }
 
@@ -182,6 +197,10 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      */
     @Step(受給者TEMPテーブルに登録)
     protected IBatchFlowCommand insJyukyushaTmpProcess() {
+        if (processParameter.get処理年度() == null) {
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り
+                    .getMessage().evaluate());
+        }
         return loopBatch(InsJyukyushaTmpProcess.class).arguments(processParameter).define();
     }
 
@@ -224,6 +243,11 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      */
     @Step(所得照会票データTEMPテーブルに登録)
     protected IBatchFlowCommand insShotokushokaihyoTmpProcess() {
+        if (processParameter.get処理年度() == null || processParameter.get出力対象() == null
+                || processParameter.get導入形態コード() == null) {
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り
+                    .getMessage().evaluate());
+        }
         return loopBatch(InsShotokushokaihyoTmpProcess.class).arguments(processParameter).define();
     }
 
@@ -244,6 +268,10 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      */
     @Step(所得照会票発行履歴介護所得管理マスタに登録)
     protected IBatchFlowCommand insHakouRirekiAndKanriMstProcess() {
+        if (processParameter.get処理年度() == null || processParameter.get照会年月日() == null) {
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り
+                    .getMessage().evaluate());
+        }
         return loopBatch(InsHakouRirekiAndKanriMstProcess.class).arguments(processParameter).define();
     }
 
@@ -264,6 +292,11 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      */
     @Step(再発行対象者TEMPテーブルに登録)
     protected IBatchFlowCommand insReHakouTaisyoshaTmpProcess() {
+        if (processParameter.get処理年度() == null || processParameter.get出力対象() == null
+                || processParameter.get再発行対象リスト() == null) {
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り
+                    .getMessage().evaluate());
+        }
         return loopBatch(InsReHakouTaisyoshaTmpProcess.class).arguments(processParameter).define();
     }
 
@@ -274,6 +307,11 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      */
     @Step(再発行所得照会票データTEMPテーブルに登録)
     protected IBatchFlowCommand insReHakouShotokushokaihyoTmpProcess() {
+        if (processParameter.get処理年度() == null || processParameter.get出力対象() == null
+                || processParameter.get再発行対象リスト() == null) {
+            throw new ApplicationException(UrErrorMessages.検索キーの誤り
+                    .getMessage().evaluate());
+        }
         return loopBatch(InsReHakouShotokushokaihyoTmpProcess.class).arguments(processParameter).define();
     }
 
@@ -284,7 +322,6 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
         parameter.set照会年月日(batchParameter.get照会年月日());
         parameter.set出力対象(batchParameter.get出力対象());
         parameter.setテストプリント(batchParameter.isテストプリント());
-        parameter.set再発行対象リスト(batchParameter.get再発行対象リスト());
         parameter.set出力順ID(batchParameter.get出力順ID());
         parameter.set導入形態コード(batchParameter.get導入形態コード());
         parameter.set構成市町村情報リスト(batchParameter.get構成市町村情報リスト());

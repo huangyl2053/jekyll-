@@ -14,10 +14,15 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuCSVEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -43,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -60,6 +66,8 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
      * OutputParameter用キー REPORT_FLAG
      */
     public static final RString REPORT_FLAG;
+    private static final RString 表示する = new RString("1");
+    private static final RString 表示しない = new RString("0");
     private static final int INDEX_1 = 1;
     private static final RString INDEX_111 = new RString("111");
     private static final RString INDEX_112 = new RString("112");
@@ -108,6 +116,7 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
     private YMDHMS 終了日時;
     private FlexibleYear 処理年度;
     private int 連番;
+    private RString 表示場合;
 
     @BatchParameter
     ShotokujohoIchiranhyoSakuseiProcessParameter parameter;
@@ -144,6 +153,8 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
         reportWriter = BatchReportFactory.createBatchReportWriter(
                 ReportIdDBB.DBB200008.getReportId().value(), SubGyomuCode.DBB介護賦課).create();
         hokenShotokuJohoIchiranSourceWriter = new ReportSourceWriter<>(reportWriter);
+        表示場合 = DbBusinessConfig.get(ConfigNameDBB.所得引出_住民税減免前後表示区分,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
     }
 
     @Override
@@ -300,25 +311,97 @@ public class PrtKaigoHokenShotokuJohoIchiranProcess extends BatchProcessBase<Kai
     }
 
     private void publish所得情報一覧表(KaigoHokenShotokuTempEntity item) {
-        eucCsvWriter.writeLine(new KaigoHokenShotokuCSVEntity(
-                item.getShikibetsuCode(),
-                item.getKanaMeisho(),
-                item.getShotokuNendo(),
-                item.getSeinengappiYMD(),
-                item.getSeibetsuCode(),
-                item.getKazeiKubun(),
-                item.getKazeiKubunGemmenGo(),
-                item.getKazeiKubun(),
-                item.getGokeiShotokuGaku(),
-                item.getKazeiShotokuGaku(),
-                item.getTorokuGyomu(),
-                item.getHihokenshaNo(),
-                item.getMeisho(),
-                item.getAge(),
-                item.getJuminShubetsuCode(),
-                item.getNenkiniShunyuGaku(),
-                item.getNenkiniShotokuGaku()
-        ));
+        KaigoHokenShotokuCSVEntity entity = new KaigoHokenShotokuCSVEntity();
+        entity.set識別コード(item.getShikibetsuCode());
+        entity.set氏名カナ(item.getKanaMeisho());
+        entity.set所得年度(item.getShotokuNendo());
+        entity.set生年月日(item.getSeinengappiYMD());
+        RString 性別コード = set性別コード(item.getSeibetsuCode());
+        entity.set性別(性別コード);
+        if (表示する.equals(表示場合)) {
+            RString 課税区分減免前 = set課税区分減免前(item.getKazeiKubun());
+            entity.set住民税課税区分減免前(課税区分減免前);
+            RString 課税区分減免後 = set課税区分減免後(item.getKazeiKubunGemmenGo());
+            entity.set住民税課税区分減免後(課税区分減免後);
+            entity.set住民税(RString.EMPTY);
+        } else if (表示しない.equals(表示場合)) {
+            entity.set住民税課税区分減免前(RString.EMPTY);
+            entity.set住民税課税区分減免後(RString.EMPTY);
+            RString 住民税 = set課税区分減免前(item.getKazeiKubun());
+            entity.set住民税(住民税);
+        }
+        entity.set住民税(item.getKazeiKubun());
+        entity.set合計所得金額(item.getGokeiShotokuGaku());
+        entity.set課税標準額(item.getKazeiShotokuGaku());
+        entity.set登録業務(item.getTorokuGyomu());
+        entity.set被保険者番号(item.getHihokenshaNo());
+        entity.set氏名(item.getMeisho());
+        entity.set年齢(item.getAge());
+        RString 住民種別 = set住民種別(item.getJuminShubetsuCode());
+        entity.set種別(住民種別);
+        entity.set年金収入額(item.getNenkiniShunyuGaku());
+        entity.set年金所得額(item.getNenkiniShotokuGaku());
+        eucCsvWriter.writeLine(entity);
+    }
+
+    private RString set性別コード(RString 性別コード) {
+        if (Seibetsu.男.getコード().equals(性別コード)) {
+            return Seibetsu.男.get名称();
+        } else if (Seibetsu.女.getコード().equals(性別コード)) {
+            return Seibetsu.女.get名称();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString set住民種別(RString juminShubetsuCode) {
+        if (JuminShubetsu.住登外個人_外国人.getCode().equals(juminShubetsuCode)) {
+            return JuminShubetsu.住登外個人_外国人.toRString();
+        } else if (JuminShubetsu.住登外個人_日本人.getCode().equals(juminShubetsuCode)) {
+            return JuminShubetsu.住登外個人_日本人.toRString();
+        } else if (JuminShubetsu.共有者.getCode().equals(juminShubetsuCode)) {
+            return JuminShubetsu.共有者.toRString();
+        } else if (JuminShubetsu.外国人.getCode().equals(juminShubetsuCode)) {
+            return JuminShubetsu.外国人.toRString();
+        } else if (JuminShubetsu.日本人.getCode().equals(juminShubetsuCode)) {
+            return JuminShubetsu.日本人.toRString();
+        } else if (JuminShubetsu.法人.getCode().equals(juminShubetsuCode)) {
+            return JuminShubetsu.法人.toRString();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString set課税区分減免後(RString 課税区分減免後) {
+        if (KazeiKubun.課税.getコード().equals(課税区分減免後)) {
+            return KazeiKubun.課税.get名称();
+        } else if (KazeiKubun.所得調査中.getコード().equals(課税区分減免後)) {
+            return KazeiKubun.所得調査中.get名称();
+        } else if (KazeiKubun.未申告.getコード().equals(課税区分減免後)) {
+            return KazeiKubun.未申告.get名称();
+        } else if (KazeiKubun.課税取消.getコード().equals(課税区分減免後)) {
+            return KazeiKubun.課税取消.get名称();
+        } else if (KazeiKubun.非課税.getコード().equals(課税区分減免後)) {
+            return KazeiKubun.非課税.get名称();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString set課税区分減免前(RString 課税区分減免前) {
+        if (KazeiKubun.課税.getコード().equals(課税区分減免前)) {
+            return KazeiKubun.課税.get名称();
+        } else if (KazeiKubun.所得調査中.getコード().equals(課税区分減免前)) {
+            return KazeiKubun.所得調査中.get名称();
+        } else if (KazeiKubun.未申告.getコード().equals(課税区分減免前)) {
+            return KazeiKubun.未申告.get名称();
+        } else if (KazeiKubun.課税取消.getコード().equals(課税区分減免前)) {
+            return KazeiKubun.課税取消.get名称();
+        } else if (KazeiKubun.非課税.getコード().equals(課税区分減免前)) {
+            return KazeiKubun.非課税.get名称();
+        } else {
+            return RString.EMPTY;
+        }
     }
 
 }

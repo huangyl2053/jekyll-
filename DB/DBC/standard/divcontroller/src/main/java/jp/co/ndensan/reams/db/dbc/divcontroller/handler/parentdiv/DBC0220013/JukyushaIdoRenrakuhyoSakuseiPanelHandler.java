@@ -36,20 +36,6 @@ public class JukyushaIdoRenrakuhyoSakuseiPanelHandler {
     }
 
     /**
-     * 受給者訂正連絡票Entityです
-     *
-     * @param 作成年月日 FlexibleDate
-     * @param 氏名性別生年月日を印字する RString
-     * @return JukyushaIdoRenrakuhyoTorokuEntity
-     */
-    public JukyushaIdoRenrakuhyoTorokuEntity get受給者訂正連絡票Entity(
-            FlexibleDate 作成年月日, RString 氏名性別生年月日を印字する) {
-        JukyushaIdoRenrakuhyoTorokuEntity entity = div.getCcdJukyushaIdoRenrakuhyo().
-                get受給者訂正連絡票Entity(作成年月日, 氏名性別生年月日を印字する);
-        return entity;
-    }
-
-    /**
      * 受給者異動連絡票Entityです
      *
      * @param 作成年月日 FlexibleDate
