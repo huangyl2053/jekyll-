@@ -114,7 +114,7 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
                 .setNewLine(NewLine.CRLF)
-                .hasHeader(true).
+                .hasHeader(false).
                 build();
     }
 
@@ -143,7 +143,9 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
             }
             get様式１の４のCSV出力(保険者番号);
         }
-        eucCsvWriter.close();
+        if (eucCsvWriter != null) {
+            eucCsvWriter.close();   
+        }
     }
 
     private boolean tempCsv(boolean flag) {
@@ -566,7 +568,7 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
             return RString.EMPTY;
         }
         FlexibleDate flexibleDate = new FlexibleDate(date);
-        return flexibleDate.wareki().toDateString().substring(0, 桁_3);
+        return flexibleDate.wareki().toDateString().substring(1, 桁_3);
     }
 
     private RString get旧保険者番号(HokenshaNo date) {

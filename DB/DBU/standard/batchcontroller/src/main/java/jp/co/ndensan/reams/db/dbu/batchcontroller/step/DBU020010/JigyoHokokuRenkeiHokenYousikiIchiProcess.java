@@ -32,10 +32,12 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -114,7 +116,7 @@ public class JigyoHokokuRenkeiHokenYousikiIchiProcess extends BatchProcessBase<D
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
                 .setNewLine(NewLine.CRLF)
-                .hasHeader(true).
+                .hasHeader(false).
                 build();
     }
 
@@ -143,7 +145,9 @@ public class JigyoHokokuRenkeiHokenYousikiIchiProcess extends BatchProcessBase<D
             }
             get様式1のCSV出力(保険者番号);
         }
-        eucCsvWriter.close();
+        if (eucCsvWriter != null) {
+            eucCsvWriter.close();   
+        }
     }
 
     private boolean tempCsv(boolean flag) {
@@ -353,7 +357,7 @@ public class JigyoHokokuRenkeiHokenYousikiIchiProcess extends BatchProcessBase<D
             return RString.EMPTY;
         }
         FlexibleDate flexibleDate = new FlexibleDate(date);
-        return flexibleDate.wareki().toDateString().substring(0, 桁_3);
+        return flexibleDate.wareki().toDateString().substring(1, 桁_3);
     }
 
     private RString get旧保険者番号(HokenshaNo date) {
