@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC100010;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc100010.KaishuriyushoSeikyushoShinseishoProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc100010.IKaishuriyushoSeikyushoShinseishoMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -17,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -41,7 +39,7 @@ public class ShoriDateKanriDataProcess extends BatchProcessBase<DbT7022ShoriDate
     @Override
     protected void initialize() {
         mapper = getMapper(IKaishuriyushoSeikyushoShinseishoMapper.class);
-        dbT7022EntityList = mapper.get処理日付管理マスタデータ();
+        dbT7022EntityList = mapper.get処理日付管理マスタデータ(processParameter.toKaishuriyushoSeikyushoShinseishoMybatisParameter());
     }
 
     @Override
@@ -51,13 +49,13 @@ public class ShoriDateKanriDataProcess extends BatchProcessBase<DbT7022ShoriDate
 
     @Override
     protected void createWriter() {
-        dbT7022EntityWriter = new BatchPermanentTableWriter(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity.class);
+        dbT7022EntityWriter = new BatchPermanentTableWriter(DbT7022ShoriDateKanriEntity.class);
     }
 
     @Override
     protected void process(DbT7022ShoriDateKanriEntity entity) {
-        entity.setTaishoKaishiYMD(new FlexibleDate(processParameter.get作成申請年月日開始().toDateString()));
-        entity.setTaishoShuryoYMD(new FlexibleDate(processParameter.get作成申請年月日終了().toDateString()));
+        entity.setTaishoKaishiYMD(processParameter.get作成申請年月日開始());
+        entity.setTaishoShuryoYMD(processParameter.get作成申請年月日終了());
         dbT7022EntityWriter.update(entity);
     }
 
@@ -71,8 +69,8 @@ public class ShoriDateKanriDataProcess extends BatchProcessBase<DbT7022ShoriDate
             dbt7022Entity.setShoriEdaban(new RString("0000"));
             dbt7022Entity.setNendo(new FlexibleYear("0000"));
             dbt7022Entity.setNendoNaiRenban(new RString("0001"));
-            dbt7022Entity.setTaishoKaishiYMD(new FlexibleDate(processParameter.get作成申請年月日開始().toDateString()));
-            dbt7022Entity.setTaishoShuryoYMD(new FlexibleDate(processParameter.get作成申請年月日終了().toDateString()));
+            dbt7022Entity.setTaishoKaishiYMD(processParameter.get作成申請年月日開始());
+            dbt7022Entity.setTaishoShuryoYMD(processParameter.get作成申請年月日終了());
             dbT7022EntityWriter.insert(dbt7022Entity);
         }
     }

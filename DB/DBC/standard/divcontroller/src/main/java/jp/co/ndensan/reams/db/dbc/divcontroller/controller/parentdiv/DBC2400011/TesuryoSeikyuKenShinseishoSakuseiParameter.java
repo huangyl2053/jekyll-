@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC2400011
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.tesuryoseikyukenshinseishosakusei.TesuryoSeikyuKenShinseishoSakuseiBusiness;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC100010.DBC100010_KaishuriyushoSeikyushoShinseishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.tesuryoseikyukenshinseishosakusei.TesuryoSeikyuKenShinseishoSakuseiMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2400011.TesuryoSeikyuKenShinseishoSakuseiParameterDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2400011.TesuryoSeikyuKenShinseishoSakuseiParameterHandler;
@@ -39,6 +40,18 @@ public class TesuryoSeikyuKenShinseishoSakuseiParameter {
             gethHandler(div).onLoad(businessList.get(0));
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * バッチの実行の処理です。
+     *
+     * @param div 様式別連携情報Div
+     * @return ResponseData<DBC100010_KaishuriyushoSeikyushoShinseishoParameter>
+     */
+    public ResponseData<DBC100010_KaishuriyushoSeikyushoShinseishoParameter> onClick_btnJikko(TesuryoSeikyuKenShinseishoSakuseiParameterDiv div) {
+        RString 市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value();
+        RString 市町村名 = AssociationFinderFactory.createInstance().getAssociation().get市町村名();
+        return ResponseData.of(gethHandler(div).onClick_btnJikko(div, 市町村コード, 市町村名)).respond();
     }
 
     /**

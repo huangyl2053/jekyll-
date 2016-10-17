@@ -297,8 +297,12 @@ public class IryoHiKojoKakuninSinsei {
             帳票固有情報.set文書番号(主治医意見書確認書情報.get文書番号());
         }
         帳票固有情報.set文書番号(主治医意見書確認書情報.get文書番号());
-        帳票固有情報.set発行日(主治医意見書確認書情報.get作成日().toDateString());
-        帳票固有情報.set申請日(主治医意見書確認書情報.get申請日().toDateString());
+        帳票固有情報.set発行日(主治医意見書確認書情報.get作成日().wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        帳票固有情報.set申請日(主治医意見書確認書情報.get申請日().wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         RString 氏名 = RString.EMPTY;
         if (宛名情報 != null) {
             if (JuminShubetsu.日本人 == 宛名情報.get住民種別()

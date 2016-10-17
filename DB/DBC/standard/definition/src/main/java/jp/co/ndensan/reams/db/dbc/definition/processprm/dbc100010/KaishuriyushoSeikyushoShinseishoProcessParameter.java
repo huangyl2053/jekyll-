@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100010.KaishuriyushoS
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,8 +25,8 @@ public class KaishuriyushoSeikyushoShinseishoProcessParameter implements IBatchP
 
     private LasdecCode 市町村コード;
     private RString 市町村名;
-    private RDate 作成申請年月日開始;
-    private RDate 作成申請年月日終了;
+    private FlexibleDate 作成申請年月日開始;
+    private FlexibleDate 作成申請年月日終了;
     private FlexibleDate 作成日;
     private RString 処理対象区分;
     private RString psmShikibetsuTaisho;
@@ -44,8 +43,8 @@ public class KaishuriyushoSeikyushoShinseishoProcessParameter implements IBatchP
      */
     public KaishuriyushoSeikyushoShinseishoProcessParameter(LasdecCode 市町村コード,
             RString 市町村名,
-            RDate 作成申請年月日開始,
-            RDate 作成申請年月日終了,
+            FlexibleDate 作成申請年月日開始,
+            FlexibleDate 作成申請年月日終了,
             FlexibleDate 作成日,
             RString 処理対象区分) {
         this.市町村コード = 市町村コード;

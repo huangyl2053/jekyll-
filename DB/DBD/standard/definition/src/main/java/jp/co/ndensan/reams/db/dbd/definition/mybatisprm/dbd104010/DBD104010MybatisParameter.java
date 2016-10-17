@@ -190,22 +190,26 @@ public class DBD104010MybatisParameter extends UaFt200FindShikibetsuTaishoParam 
         if (date4.isValid()) {
             基準日付4 = new RString(date4.getDayValue());
         } else {
-            基準日付4 = new RString(date4.getYearMonth().getLastDay());
+            FlexibleYearMonth 年度4 = new FlexibleYearMonth(対象年度.toDateString().concat(月4));
+            基準日付4 = new RString(年度4.getLastDay());
         }
         if (date6.isValid()) {
             基準日付6 = new RString(date6.getDayValue());
         } else {
-            基準日付6 = new RString(date6.getYearMonth().getLastDay());
+            FlexibleYearMonth 年度6 = new FlexibleYearMonth(対象年度.toDateString().concat(月6));
+            基準日付6 = new RString(年度6.getLastDay());
         }
         if (date9.isValid()) {
             基準日付9 = new RString(date9.getDayValue());
         } else {
-            基準日付9 = new RString(date9.getYearMonth().getLastDay());
+            FlexibleYearMonth 年度9 = new FlexibleYearMonth(対象年度.toDateString().concat(月9));
+            基準日付9 = new RString(年度9.getLastDay());
         }
         if (date11.isValid()) {
             基準日付11 = new RString(date11.getDayValue());
         } else {
-            基準日付11 = new RString(date11.getYearMonth().getLastDay());
+            FlexibleYearMonth 年度11 = new FlexibleYearMonth(対象年度.toDateString().concat(月11));
+            基準日付11 = new RString(年度11.getLastDay());
         }
 
     }

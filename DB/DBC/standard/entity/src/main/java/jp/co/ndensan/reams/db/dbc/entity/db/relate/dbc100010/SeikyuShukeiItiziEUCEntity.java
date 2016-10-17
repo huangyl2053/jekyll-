@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -45,9 +45,9 @@ public class SeikyuShukeiItiziEUCEntity extends DbTableEntityBase<SeikyuShukeiIt
     @TempTableColumnOrder(4)
     private int 履歴番号;
     @TempTableColumnOrder(5)
-    private RDate 集計開始年月;
+    private FlexibleDate 集計開始年月;
     @TempTableColumnOrder(6)
-    private RDate 集計終了年月;
+    private FlexibleDate 集計終了年月;
     @TempTableColumnOrder(7)
     private int 介護住宅改修理由書作成件数;
     @TempTableColumnOrder(8)
