@@ -21,7 +21,7 @@
         AND
             "DbT7301TokuteiKojinJohoHanKanri"."hanStYMD" <![CDATA[<=]]> #{基準日}
         AND
-            (DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD" IS NULL 
+            ("DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD" IS NULL 
             OR  ("DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD" IS NOT NULL 
                 AND #{基準日} <![CDATA[<=]]> "DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD"))
     </select>
