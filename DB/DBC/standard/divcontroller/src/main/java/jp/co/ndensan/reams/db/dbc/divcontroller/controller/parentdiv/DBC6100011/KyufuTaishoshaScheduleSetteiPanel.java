@@ -19,10 +19,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -158,13 +158,22 @@ public class KyufuTaishoshaScheduleSetteiPanel {
      * 処理状況変更のイベント処理です。
      *
      * @param div 画面Div
-     * @return ResponseData
+     * @return ResponseData KyufuTaishoshaScheduleSetteiPanelDiv
      */
     public ResponseData<KyufuTaishoshaScheduleSetteiPanelDiv> onChange_ddlShoriJokyo(
             KyufuTaishoshaScheduleSetteiPanelDiv div) {
         Map<Integer, RString> map = ViewStateHolder.get(ViewStateKeys.変更前処理状況, Map.class);
         if (getHandler(div).to処理状況変更チェック(map)) {
-            throw new ApplicationException(DbcErrorMessages.設定不能状態への変更.getMessage().evaluate());
+            if (!ResponseHolder.isReRequest()) {
+                WarningMessage message = new WarningMessage(DbcErrorMessages.設定不能状態への変更.getMessage().getCode(),
+                        DbcErrorMessages.設定不能状態への変更.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return ResponseData.of(div).respond();
+            }
         }
         ViewStateHolder.put(ViewStateKeys.変更前処理状況, (Serializable) getHandler(div).get変更前処理状況());
         return ResponseData.of(div).respond();
