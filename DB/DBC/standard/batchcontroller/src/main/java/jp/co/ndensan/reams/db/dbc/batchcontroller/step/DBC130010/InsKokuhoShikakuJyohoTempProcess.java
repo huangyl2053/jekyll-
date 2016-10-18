@@ -91,7 +91,7 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
             国保資格情報インポート用Entityリストの編集_取込形式_差分(entity);
         }
 
-        if (国保資格情報インポート用Entitｙ != null) {
+        if (isデータ存在()) {
             torikomiKokuhoJyohoEntityWriter.insert(国保資格情報インポート用Entitｙ);
             国保資格情報インポート用Entitｙ = new KokuhoShikakuJyohoInpotoyoEntity();
         }
@@ -174,5 +174,20 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
         国保資格情報インポート用Entitｙ.set資格喪失日(entity.get現在国保資格情報Entity().getShikakuSoshitsuYMD());
         国保資格情報インポート用Entitｙ.set退職該当日(entity.get現在国保資格情報Entity().getTaishokuGaitoYMD());
         国保資格情報インポート用Entitｙ.set退職非該当日(entity.get現在国保資格情報Entity().getTaishokuHigaitoYMD());
+    }
+
+    private boolean isデータ存在() {
+        return 国保資格情報インポート用Entitｙ.get個人区分コード() != null
+                || 国保資格情報インポート用Entitｙ.get国保保険者番号() != null
+                || 国保資格情報インポート用Entitｙ.get国保保険証番号() != null
+                || 国保資格情報インポート用Entitｙ.get国保個人番号() != null
+                || 国保資格情報インポート用Entitｙ.get国保番号() != null
+                || 国保資格情報インポート用Entitｙ.get履歴番号() != null
+                || 国保資格情報インポート用Entitｙ.get登録区分() != null
+                || 国保資格情報インポート用Entitｙ.get識別コード() != null
+                || 国保資格情報インポート用Entitｙ.get資格取得日() != null
+                || 国保資格情報インポート用Entitｙ.get資格喪失日() != null
+                || 国保資格情報インポート用Entitｙ.get退職該当日() != null
+                || 国保資格情報インポート用Entitｙ.get退職非該当日() != null;
     }
 }
