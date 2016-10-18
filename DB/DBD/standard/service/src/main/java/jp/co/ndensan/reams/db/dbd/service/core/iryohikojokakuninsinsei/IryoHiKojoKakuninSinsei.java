@@ -81,6 +81,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class IryoHiKojoKakuninSinsei {
 
     private static final RString 表示する = new RString("1");
+    private static final RString 表示しない = new RString("");
     private static final RString 性別男 = new RString("1");
     private static final RString 選択する = new RString("○");
     private static final RString R_STRING1 = new RString("1");
@@ -219,16 +220,24 @@ public class IryoHiKojoKakuninSinsei {
         if (帳票制御共通 != null) {
             if (帳票制御共通.getJushoHenshuTodoufukenMeiHyojiUmu()) {
                 管内住所編集_都道府県名付与有無 = 表示する;
+            } else {
+                管内住所編集_都道府県名付与有無 = 表示しない;
             }
             if (帳票制御共通.getJushoHenshuGunMeiHyojiUmu()) {
                 管内住所編集_郡名付与有無 = 表示する;
+            } else {
+                管内住所編集_郡名付与有無 = 表示しない;
             }
             if (帳票制御共通.getJushoHenshuShichosonMeiHyojiUmu()) {
                 管内住所編集_市町村名付与有無 = 表示する;
+            } else {
+                管内住所編集_市町村名付与有無 = 表示しない;
             }
             管内住所編集_編集方法 = 帳票制御共通.getJushoHenshuChoikiHenshuHoho();
             if (帳票制御共通.getJushoHenshuKatagakiHyojiUmu()) {
                 住所編集_方書表示有無 = 表示する;
+            } else {
+                住所編集_方書表示有無 = 表示しない;
             }
         }
 
@@ -455,16 +464,24 @@ public class IryoHiKojoKakuninSinsei {
         if (帳票制御共通 != null) {
             if (帳票制御共通.getJushoHenshuTodoufukenMeiHyojiUmu()) {
                 管内住所編集_都道府県名付与有無 = 表示する;
+            } else {
+                管内住所編集_都道府県名付与有無 = 表示しない;
             }
             if (帳票制御共通.getJushoHenshuGunMeiHyojiUmu()) {
                 管内住所編集_郡名付与有無 = 表示する;
+            } else {
+                管内住所編集_郡名付与有無 = 表示しない;
             }
             if (帳票制御共通.getJushoHenshuShichosonMeiHyojiUmu()) {
                 管内住所編集_市町村名付与有無 = 表示する;
+            } else {
+                管内住所編集_市町村名付与有無 = 表示しない;
             }
             管内住所編集_編集方法 = 帳票制御共通.getJushoHenshuChoikiHenshuHoho();
             if (帳票制御共通.getJushoHenshuKatagakiHyojiUmu()) {
                 住所編集_方書表示有無 = 表示する;
+            } else {
+                住所編集_方書表示有無 = 表示しない;
             }
         }
         コンフィグ情報.add(管内住所編集_都道府県名付与有無);
