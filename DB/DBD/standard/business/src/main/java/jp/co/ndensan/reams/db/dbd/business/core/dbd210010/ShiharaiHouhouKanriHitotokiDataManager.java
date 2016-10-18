@@ -45,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class ShiharaiHouhouKanriHitotokiDataManager {
 
     private static final RString NUM1 = new RString(1);
-    private static final String NINE = new String("99999999");
+    private static final RString NINE = new RString("99999999");
 
     /**
      * コンストラクタです。
@@ -185,7 +185,7 @@ public class ShiharaiHouhouKanriHitotokiDataManager {
         tempTable.set世帯コード(entity.get世帯コード());
         tempTable.set住所(entity.get住所());
         tempTable.set資格取得日(new RString(entity.get資格取得日().toString()));
-        if (NINE.equals(entity.get資格喪失日().toString())) {
+        if (NINE.toString().equals(entity.get資格喪失日().toString())) {
             tempTable.set資格喪失日(RString.EMPTY);
         } else {
             tempTable.set資格喪失日(new RString(entity.get資格取得日().toString()));
