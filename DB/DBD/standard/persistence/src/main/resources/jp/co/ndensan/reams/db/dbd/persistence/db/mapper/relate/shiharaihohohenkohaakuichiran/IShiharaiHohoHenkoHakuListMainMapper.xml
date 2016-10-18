@@ -276,12 +276,14 @@
             AND CaT0701_収入_明細."sokuhoKubun"  =  false
         ) AS 収入
             ON   収納情報."c_shunoId"  =  収入."shunoId"
-            ORDER BY
+        ORDER BY
            対象者情報一時テーブル."hihokenshaNo",
            収納情報.調定年度,
            収納情報."fukaNendo",
            収納情報."tsuchishoNo",
-           収納情報."k_ki" ASC
+           収納情報."k_ki" ASC,
+           収納情報.収納ID ASC,
+           収入."shunoId" ASC
     </select>
 
     <!--償還未払い情報を取得して、償還未払い情報一時テーブルに登録する-->

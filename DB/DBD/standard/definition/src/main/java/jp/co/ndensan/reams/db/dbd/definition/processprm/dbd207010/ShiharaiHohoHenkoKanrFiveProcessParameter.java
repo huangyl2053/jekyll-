@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd207010.ShiharaiHohoHenkoHaakuFiveMybatisParameter;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -86,9 +87,11 @@ public class ShiharaiHohoHenkoKanrFiveProcessParameter implements IBatchProcessP
     /**
      * DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス5SQL用パラメターを取得します．
      *
+     * @param shikibetsutaishoParam 宛名識別対象PSM
      * @return DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス5
      */
-    public ShiharaiHohoHenkoHaakuFiveMybatisParameter toShiharaiHohoHenkoHaakuFiveMybatisParameter() {
-        return new ShiharaiHohoHenkoHaakuFiveMybatisParameter(基準日);
+    public ShiharaiHohoHenkoHaakuFiveMybatisParameter toShiharaiHohoHenkoHaakuFiveMybatisParameter(
+            UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam) {
+        return new ShiharaiHohoHenkoHaakuFiveMybatisParameter(shikibetsutaishoParam, 基準日);
     }
 }
