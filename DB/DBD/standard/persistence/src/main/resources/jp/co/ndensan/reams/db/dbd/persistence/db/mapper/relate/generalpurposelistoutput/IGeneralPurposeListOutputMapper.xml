@@ -781,7 +781,7 @@ WITH master AS (
         INNER JOIN
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
             (
-                 SELECT ARRAY_AGG(CAST "被保険者台帳管理_識別コード" AS TEXT))
+                 SELECT ARRAY_AGG(CAST ("被保険者台帳管理_識別コード" AS TEXT))
                  FROM master
             )
            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
