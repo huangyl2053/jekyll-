@@ -62,10 +62,10 @@ public class DbT4010GemmenGengakuShinseiDac implements ISaveable<DbT4010GemmenGe
         return accessor.select().
                 table(DbT4010GemmenGengakuShinsei.class).
                 where(and(
-                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(gemmenGengakuShurui, 減免減額種類),
-                                eq(shinseiRirekiNo, 履歴番号))).
+                        eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(gemmenGengakuShurui, 減免減額種類),
+                        eq(shinseiRirekiNo, 履歴番号))).
                 toObject(DbT4010GemmenGengakuShinseiEntity.class);
     }
 
@@ -95,9 +95,9 @@ public class DbT4010GemmenGengakuShinseiDac implements ISaveable<DbT4010GemmenGe
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額申請エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        if (entity.getLastUpdateTimestamp() != null && !EntityDataState.Deleted.equals(entity.getState())) {
-            entity.setState(EntityDataState.Modified);
-        }
+//        if (entity.getLastUpdateTimestamp() != null && !EntityDataState.Deleted.equals(entity.getState())) {
+//            entity.setState(EntityDataState.Modified);
+//        }
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
