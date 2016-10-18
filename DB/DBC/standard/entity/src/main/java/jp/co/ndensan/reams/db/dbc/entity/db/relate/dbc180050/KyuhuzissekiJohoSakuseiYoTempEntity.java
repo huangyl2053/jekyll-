@@ -37,4 +37,5 @@ public class KyuhuzissekiJohoSakuseiYoTempEntity extends DbTableEntityBase<Kyuhu
     private RString 整理番号;
     private HokenKyufuRitsu 保険給付率;
     private FlexibleYearMonth 審査年月;
+    private RString 通し番号;
 }

@@ -65,6 +65,7 @@ public class KyuhuzissekiJohoSakuseiProcess extends BatchProcessBase<Kyuhuzissek
                 && entity.get高額支給額() != null) {
             tempEntity.set高額サービス費用額(entity.get支払済金額合計().add(entity.get高額支給額()));
         }
+        tempEntity.set通し番号(entity.get通し番号());
 
         tempTableWriter.insert(tempEntity);
     }

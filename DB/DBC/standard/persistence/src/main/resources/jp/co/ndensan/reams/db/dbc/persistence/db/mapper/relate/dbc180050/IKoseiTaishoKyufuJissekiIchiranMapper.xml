@@ -38,8 +38,7 @@
         "torigaDataTemp"
     </select>
     
-    <select resultOrdered="true" id="get利用者負担割合明細Newest" 
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.InsFutanwariaiJohoTempResultEntity" fetchSize="500">
+    <select resultOrdered="true" id="get利用者負担割合明細Newest" resultMap="利用者負担割合明細最新_resultMap" fetchSize="500">
         WITH master AS(
         SELECT DISTINCT
         "被保険者番号",
@@ -72,7 +71,7 @@
         利用者負担割合明細Newest."sonotanoGoukeiShotokuKingakuGoukei" AS sonotanoGoukeiShotokuKingakuGoukei,
         利用者負担割合明細Newest."koseiRiyu" AS koseiRiyu,
         利用者負担割合明細Newest."setaiCd" AS setaiCd,
-        利用者負担割合明細Newest."meisailogicalDeletedFlag" AS 論理削除フラグ
+        利用者負担割合明細Newest."meisailogicalDeletedFlag" AS meisailogicalDeletedFlag
         FROM
         master AS master
         LEFT OUTER JOIN
@@ -159,6 +158,7 @@
         K1."サービス提供年月" AS サービス提供年月,
         K1."事業所番号" AS 事業所番号,
         K1."整理番号" AS 整理番号,
+        K1."通し番号" AS 通し番号,
         D3."serviceSyuruiCode" AS サービス種類コード,
         D3."hokenRiyoshaFutangaku" AS 利用者負担額,
         D3."atoHokenSeikyugaku"  AS 後保険請求分請求額,
@@ -222,6 +222,7 @@
         給付実績情報Temp."軽減率" AS 軽減率,
         給付実績情報Temp."軽減後自己負担額" AS 軽減後自己負担額,
         給付実績情報Temp."高額サービス費用額" AS 高額サービス費用額,
+        給付実績情報Temp."通し番号" AS 通し番号,
         被保台帳Newest."shikibetsuCode" AS 識別コード,
         介護サービス種類."serviceShuruiRyakusho" AS サービス種類略称
         FROM
@@ -275,7 +276,7 @@
         )) AS 宛名
         ON master."識別コード" = 宛名."shikibetsuCode"
         ORDER BY
-        master."被保険者番号", master."サービス提供年月", master."入力識別番号", master."事業所番号"
+        master."被保険者番号", master."サービス提供年月", master."入力識別番号", master."事業所番号", master."通し番号"
     </select>
     
     <sql id="temp負担割合情報年月_集約">
@@ -357,5 +358,38 @@
     <resultMap  id="利用者負担減額情報の取得_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.UpdRiyoshaFutangengakuTempResultEntity" autoMapping="true">
         <result property="年度" column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <association property="利用者負担減額" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.ResultMap_DbT4014RiyoshaFutangakuGengakuEntity"/>
+    </resultMap>
+    
+    <resultMap  id="利用者負担割合明細最新_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.InsFutanwariaiJohoTempResultEntity" autoMapping="true">
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="年度" column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <association property="利用者負担割合明細最新Entity" resultMap="利用者負担割合Newest_resultMap"/>
+    </resultMap>
+    
+    <resultMap id="利用者負担割合Newest_resultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV3114RiyoshaFutanWariaiMeisaiEntity" autoMapping="true">
+        <id property="nendo" column="nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="rirekiNo" />
+        <id property="edaNo" column="edaNo" />
+        <result property="hakoFuyoFlag" column="hakoFuyoFlag" />
+        <result property="shokenFlag" column="shokenFlag" />
+        <result property="hanteiYMD" column="hanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hanteiKubun" column="hanteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koseiJiyu" column="koseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="hakoKubun" column="hakoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hakoYMD" column="hakoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kofuYMD" column="kofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="logicalDeletedFlag" column="logicalDeletedFlag" />
+        <result property="shikakuKubun" column="shikakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanWariaiKubun" column="futanWariaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yukoKaishiYMD" column="yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="yukoShuryoYMD" column="yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="honninGoukeiShotokuGaku" column="honninGoukeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="setaiIchigouHihokenshaSu" column="setaiIchigouHihokenshaSu" />
+        <result property="nenkinShunyuGoukei" column="nenkinShunyuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sonotanoGoukeiShotokuKingakuGoukei" column="sonotanoGoukeiShotokuKingakuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="koseiRiyu" column="koseiRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiCd" column="setaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="meisailogicalDeletedFlag" column="meisailogicalDeletedFlag" />
     </resultMap>
 </mapper>

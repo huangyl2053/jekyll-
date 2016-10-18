@@ -33,6 +33,7 @@ public class KyuhuzissekiJohoSakuseiResultEntity {
     private FlexibleYearMonth サービス提供年月;
     private JigyoshaNo 事業所番号;
     private RString 整理番号;
+    private RString 通し番号;
     private ServiceShuruiCode サービス種類コード;
     private Decimal 利用者負担額;
     private Decimal 後保険請求分請求額;
