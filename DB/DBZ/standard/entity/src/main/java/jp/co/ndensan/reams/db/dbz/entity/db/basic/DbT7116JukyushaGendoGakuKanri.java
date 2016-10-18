@@ -1,11 +1,11 @@
-package jp.co.ndensan.reams.db.dbc.entity.db.basic;
+package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 短期入所系支給限度額テーブルの項目定義クラスです。
+ * 受給者限度額管理テーブルの項目定義クラスです。
  */
-public enum DbT7110TankiNyushoShikyuGendoGaku implements IColumnDefinition {
+public enum DbT7116JukyushaGendoGakuKanri implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     /**
      * insertDantaiCd
@@ -40,30 +40,62 @@ public enum DbT7110TankiNyushoShikyuGendoGaku implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 要介護状態区分
+     * 被保険者番号
      */
-    yoKaigoJotaiKubun(2, 0),
+    hihokenshaNo(2147483647, 0),
     /**
-     * 適用開始年月
+     * 識別区分
      */
-    tekiyoKaishiYM(2147483647, 0),
+    shikibetsuKubun(1, 0),
+    /**
+     * 有効開始年月
+     */
+    yukoKaishiYM(2147483647, 0),
     /**
      * 履歴番号
      */
     rirekiNo(5, 0),
     /**
-     * 適用終了年月
+     * 有効終了年月
      */
-    tekiyoShuryoYM(2147483647, 0),
+    yukoShuryoYM(2147483647, 0),
     /**
-     * 支給限度日数
+     * 要介護状態区分
      */
-    shikyuGendoNissu(5, 0);
+    yoKaigoJotaiKubun(2, 0),
+    /**
+     * 拡大倍数
+     */
+    kakudaiBaisu(3, 0),
+    /**
+     * 切り分け単位数
+     */
+    kiriwakeTaniSu(10, 0),
+    /**
+     * 登録年月日
+     */
+    torokuYMD(2147483647, 0),
+    /**
+     * 変更年月日
+     */
+    henkoYMD(2147483647, 0),
+    /**
+     * 限度額管理期間数
+     */
+    gendoGakuKanriKikanSu(2, 0),
+    /**
+     * 新体系管理区分
+     */
+    shinTaikeiKanriKubun(1, 0),
+    /**
+     * 新体系拡大適用有無
+     */
+    shinTaikeiKakudaiTekiyoUmu(1, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT7110TankiNyushoShikyuGendoGaku(int maxLength, int scale) {
+    private DbT7116JukyushaGendoGakuKanri(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

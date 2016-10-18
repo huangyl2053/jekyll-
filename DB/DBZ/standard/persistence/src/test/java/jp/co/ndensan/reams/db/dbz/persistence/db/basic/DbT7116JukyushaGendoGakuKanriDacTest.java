@@ -2,16 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7116JukyushaGendoGakuKanriDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7116JukyushaGendoGakuKanriDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_履歴番号;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_有効開始年月;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_被保険者番号;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_識別区分;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7116JukyushaGendoGakuKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_有効開始年月;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_被保険者番号;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_識別区分;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;

@@ -2,17 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3083DaisanshaKoiKyushoMeisai.hihokenshaNo;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanri;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanri.rirekiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanri.shikibetsuKubun;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanri.yukoKaishiYM;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanriEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7116JukyushaGendoGakuKanri;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7116JukyushaGendoGakuKanri.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7116JukyushaGendoGakuKanri.rirekiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7116JukyushaGendoGakuKanri.shikibetsuKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7116JukyushaGendoGakuKanri.yukoKaishiYM;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7116JukyushaGendoGakuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;

@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.core.basic;
+package jp.co.ndensan.reams.db.dbz.service.core.basic;
 
+import jp.co.ndensan.reams.db.dbz.service.core.basic.TankiNyushoShikyuGendoGakuManager;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.TankiNyushoShikyuGendoGaku;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7110TankiNyushoShikyuGendoGakuEntityGenerator;
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7110TankiNyushoShikyuGendoGakuDac;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.TankiNyushoShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7110TankiNyushoShikyuGendoGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7110TankiNyushoShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

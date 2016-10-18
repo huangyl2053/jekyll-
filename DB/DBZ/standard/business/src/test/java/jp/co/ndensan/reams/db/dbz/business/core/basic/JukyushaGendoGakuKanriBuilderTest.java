@@ -2,10 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaGendoGakuKanri;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaGendoGakuKanriBuilder;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7116JukyushaGendoGakuKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -35,10 +37,10 @@ public class JukyushaGendoGakuKanriBuilderTest extends DbcTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_被保険者番号;
-        主キー名2 = jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_識別区分;
-        主キー名3 = jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_有効開始年月;
-        主キー名4 = jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_履歴番号;
+        主キー名1 = jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_識別区分;
+        主キー名3 = jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_有効開始年月;
+        主キー名4 = jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class getterSetterTest extends DbcTestBase {

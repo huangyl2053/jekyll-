@@ -2,10 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7116JukyushaGendoGakuKanriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaGendoGakuKanri;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7116JukyushaGendoGakuKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7116JukyushaGendoGakuKanriEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
