@@ -508,11 +508,6 @@ public class TokuchoTaishoshaIchiranSakusei {
                 result.set登録済年金情報_特別徴収義務者コード(
                         nenkintokuchokaifujoho.getDT特別徴収義務者コード().value().value());
             }
-            if (nenkintokuchokaifujoho.get識別コード() != null && !nenkintokuchokaifujoho.get識別コード().isEmpty()) {
-                result.set登録済年金情報_識別コード(nenkintokuchokaifujoho.get識別コード().getColumnValue());
-            } else {
-                result.set登録済年金情報_識別コード(RString.EMPTY);
-            }
             result.set登録済年金情報_基礎年金番号(nenkintokuchokaifujoho.get基礎年金番号());
             result.set登録済年金情報_年金コード(nenkintokuchokaifujoho.get年金コード());
             result.set登録済年金情報_捕捉月(nenkintokuchokaifujoho.get捕捉月());
