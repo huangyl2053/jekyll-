@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 介護保険特別会計経理状況登録_様式４の３のチェッククラスです。
+ *
+ * @reamsid_L DBU-1130-040 wangjie2
  */
 public class YoshikiYonnosanValidationHandler {
 
