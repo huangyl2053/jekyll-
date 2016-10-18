@@ -51,7 +51,6 @@ public class HanyoListFutanGendoGakuNinteiManager {
      */
     public FutanGendoGakuNinteiEucCsvEntity setBlank() {
         HanyoListFutanGendoGakuNinteiBusiness bus = new HanyoListFutanGendoGakuNinteiBusiness();
-        FutanGendoGakuNinteiEucCsvEntity eucCsvEntity = bus.setNewBlank();
-        return eucCsvEntity;
+        return bus.setNewBlank();
     }
 }

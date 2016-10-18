@@ -35,7 +35,7 @@ public class KaishuriyushoSeikyushoShinseishoMybatisParameter implements IMyBati
     private RString 年度内連番;
     private final RString psmShikibetsuTaisho;
     private final RString 住宅改修費申請情報 = new RString("21D");
-    private final RString 有効終了日 = RString.EMPTY;
+    private final RString empty = RString.EMPTY;
 
     /**
      * コンストラクタです。

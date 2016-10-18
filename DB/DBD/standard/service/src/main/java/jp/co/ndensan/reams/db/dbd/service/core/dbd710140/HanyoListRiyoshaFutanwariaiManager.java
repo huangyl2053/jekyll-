@@ -50,7 +50,6 @@ public class HanyoListRiyoshaFutanwariaiManager {
      */
     public HanyoRisutoRiyoshaFutanWariaiEucCsvEntity setBlank() {
         HanyoListRiyoshaFutanwariaiBusiness bus = new HanyoListRiyoshaFutanwariaiBusiness();
-        HanyoRisutoRiyoshaFutanWariaiEucCsvEntity eucCsvEntity = bus.setNewBlank();
-        return eucCsvEntity;
+        return bus.setNewBlank();
     }
 }

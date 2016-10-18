@@ -21,17 +21,19 @@ import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.TokuteiKojinJoh
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.TokuteiKojinKadouKahiHanteiProcess;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.TokuteiKojinJohoHanKanri;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU080010.DBU080010_TokuteiKojinJohoTeikyoParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU080010.DBU080010_TokuteiKojinJohoTeikyoParameterHandler;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.DataSetNo;
-import jp.co.ndensan.reams.db.dbu.definition.processprm.sougoujigyoujyohou.SougouJigyouJyohouProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.JogaiTokureiSyaJyohouProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.JukyushaKihonJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.RiyoshaFutanwariaiProcessParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.SougouJigyouJyohouProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinKadouKahiHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -70,9 +72,10 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
     @Override
     protected void defineFlow() {
         RDate システム日付 = RDate.getNowDate();
-        if (使用する.equals(DbBusinessConfig.get(ConfigNameDBU.番号制度_使用制御, システム日付))
-                && 稼働.equals(DbBusinessConfig.get(ConfigNameDBU.番号制度_提供機能使用制御, システム日付))
-                && new RDate(DbBusinessConfig.get(ConfigNameDBU.番号制度_利用開始日, システム日付).toString()).isBeforeOrEquals(システム日付)) {
+        if (使用する.equals(DbBusinessConfig.get(ConfigNameDBU.番号制度_使用制御, システム日付, SubGyomuCode.DBU介護統計報告))
+                && 稼働.equals(DbBusinessConfig.get(ConfigNameDBU.番号制度_提供機能使用制御, システム日付, SubGyomuCode.DBU介護統計報告))
+                && new RDate(DbBusinessConfig.get(ConfigNameDBU.番号制度_利用開始日,
+                                システム日付, SubGyomuCode.DBU介護統計報告).toString()).isBeforeOrEquals(システム日付)) {
             parameter = getParameter();
             executeStep(バッチパラメータの取得);
             setバッチパラメータ();
@@ -109,6 +112,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
         hanteiProcessParameter = parameter.toTokuteiKojinKadouKahiHanteiProcessParameter();
         hanteiProcessParameter.setデータセット番号(DataSetNo._0102住所地特例情報.getコード());
         特定個人情報名コードList.add(parameter.get特定個人情報().get(0).get特定個人情報名コード());
+        hanteiProcessParameter.set特定個人情報名コードList(特定個人情報名コードList);
         特定個人情報名コード = parameter.get特定個人情報().get(0).get特定個人情報名コード();
         executeStep(稼働可否の判定);
         exe特定個人情報提供By稼働可否(住所地特例者情報, 住所地特例者情報_更新用);
@@ -119,6 +123,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
         hanteiProcessParameter = parameter.toTokuteiKojinKadouKahiHanteiProcessParameter();
         hanteiProcessParameter.setデータセット番号(DataSetNo._0300給付情報.getコード());
         特定個人情報名コードList.add(parameter.get特定個人情報().get(0).get特定個人情報名コード());
+        hanteiProcessParameter.set特定個人情報名コードList(特定個人情報名コードList);
         特定個人情報名コード = parameter.get特定個人情報().get(0).get特定個人情報名コード();
         executeStep(稼働可否の判定);
         exe特定個人情報提供By稼働可否(給付情報, 給付情報_更新用);
@@ -129,6 +134,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
         hanteiProcessParameter = parameter.toTokuteiKojinKadouKahiHanteiProcessParameter();
         hanteiProcessParameter.setデータセット番号(DataSetNo._0202負担割合.getコード());
         特定個人情報名コードList.add(parameter.get特定個人情報().get(0).get特定個人情報名コード());
+        hanteiProcessParameter.set特定個人情報名コードList(特定個人情報名コードList);
         特定個人情報名コード = parameter.get特定個人情報().get(0).get特定個人情報名コード();
         executeStep(稼働可否の判定);
         exe特定個人情報提供By稼働可否(負担割合, 負担割合_更新用);
@@ -139,6 +145,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
         hanteiProcessParameter = parameter.toTokuteiKojinKadouKahiHanteiProcessParameter();
         hanteiProcessParameter.setデータセット番号(DataSetNo._0400総合事業.getコード());
         特定個人情報名コードList.add(parameter.get特定個人情報().get(0).get特定個人情報名コード());
+        hanteiProcessParameter.set特定個人情報名コードList(特定個人情報名コードList);
         特定個人情報名コード = parameter.get特定個人情報().get(0).get特定個人情報名コード();
         executeStep(稼働可否の判定);
         exe特定個人情報提供By稼働可否(総合事業情報, 総合事業情報_更新用);
@@ -148,7 +155,10 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
     private void exe受給者基本情報() {
         hanteiProcessParameter = parameter.toTokuteiKojinKadouKahiHanteiProcessParameter();
         hanteiProcessParameter.setデータセット番号(DataSetNo._0201受給者基本情報.getコード());
-        特定個人情報名コードList.add(parameter.get特定個人情報().get(0).get特定個人情報名コード());
+        for (DBU080010_TokuteiKojinJohoTeikyoParameterHandler handler : parameter.get特定個人情報()) {
+            特定個人情報名コードList.add(handler.get特定個人情報名コード());
+        }
+        hanteiProcessParameter.set特定個人情報名コードList(特定個人情報名コードList);
         executeStep(稼働可否の判定);
         exe特定個人情報提供By稼働可否(受給者基本情報_提供情報取得, 受給者基本情報_中間DB更新);
         特定個人情報名コードList.clear();

@@ -44,7 +44,7 @@ public class TempSeikyuShukeiItiziDataProcess extends BatchProcessBase<SeikyuShu
     protected void initialize() {
         mapper = getMapper(IKaishuriyushoSeikyushoShinseishoMapper.class);
         採番件数 = mapper.select採番件数();
-        集計関連付け番号 = Saiban.get(SubGyomuCode.DBC介護給付, RString.EMPTY, 採番件数).nextString();
+        集計関連付け番号 = Saiban.get(SubGyomuCode.DBC介護給付, new RString("53"), 採番件数).nextString();
     }
 
     @Override

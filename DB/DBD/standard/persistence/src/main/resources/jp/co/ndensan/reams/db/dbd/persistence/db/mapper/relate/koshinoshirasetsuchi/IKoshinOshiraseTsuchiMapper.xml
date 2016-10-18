@@ -19,6 +19,7 @@
         <id column="keisangoJohoTemp_tsuchishoNo" />
         <id column="ShikibetsuTaisho_shikibetsuCode" />
         <id column="ShikibetsuTaisho_rirekiNo" />
+        <result property="入所施設コード" column="入所施設コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <association property="dbt4101Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity" />
         <association property="dbV4001JukyushaDaicho" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbV4001JukyushaDaichoMapper.ResultMap_DbV4001JukyushaDaichoEntity" />
         <association property="dbT7051KoseiShichosonMaster" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity" />
@@ -36,7 +37,8 @@
           受給者台帳Newest.*,
           構成市町村マスタ.*,
           認定調査委託先情報.*,
-          介護事業者.*
+          介護事業者.*,
+          介護保険施設入退所Newest."nyushoShisetsuCode" AS 入所施設コード
           FROM
           (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.noDeleted_DbT4101NinteiShinseiJoho" />) AS DbT4101NinteiShinseiJoho
           INNER JOIN 
@@ -65,6 +67,24 @@
             WHERE 介護事業者."dbT7060KaigoJigyosha_jigyoshaNo" = A."jigyoshaNo"
             AND 介護事業者."dbT7060KaigoJigyosha_yukoKaishiYMD" &lt; A."yukoKaishiYMD"
           )
+          LEFT JOIN rgdb."DbV1004ShisetsuNyutaisho" AS 介護保険施設入退所Newest
+            ON DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_shikibetsuCode" = 介護保険施設入退所Newest."shikibetsuCode"
+          LEFT JOIN rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS 居宅給付計画事業者作成
+            ON DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_hihokenshaNo" = 居宅給付計画事業者作成."hihokenshaNo" <!--  TODO QA:639-->
+          LEFT JOIN 
+            (
+            SELECT 被保険者番号,計画事業者番号
+            FROM ( SELECT
+                    居宅給付計画作成."hihokenshaNo" AS 被保険者番号,
+                    居宅給付計画作成."keikakuJigyoshaNo" AS 計画事業者番号,
+                    居宅給付計画作成."taishoYM" AS 対象年月,
+                    居宅給付計画作成."rirekiNo" AS 履歴番号,
+                    row_number() OVER (PARTITION BY "hihokenshaNo" ORDER BY "taishoYM" DESC, "rirekiNo" DESC) AS rrkno
+                   FROM rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" 居宅給付計画作成
+            ) AS T3006
+            WHERE rrkno=1
+            ) AS D
+          ON D."被保険者番号" = DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_hihokenshaNo"
           WHERE
           DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_shinseishoKanriNo" IN
           <foreach item="申請書管理番号リスト" index="index" collection="申請書管理番号リスト" open="(" separator="," close=")">

@@ -65,6 +65,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
 
     private static final int NUM_0 = 0;
     private static final int NUM_5 = 5;
+    private static final int NUM_6 = 6;
     private static final RString 被保険者区分コード_EMPTY = new RString("");
     private static final RString 被保険者区分コード_NUM1 = new RString("1");
     private static final RString 被保険者区分コード_NUM2 = new RString("2");
@@ -304,8 +305,12 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
             ShotokuShoukaiDataTempEntity tempEntity) {
         RString 市町村コード = RString.EMPTY;
         RString 構成市町村情報_市町村コード = RString.EMPTY;
-        if (tempEntity.getZenkokuJushoCode() != null) {
-            市町村コード = new RString(tempEntity.getZenkokuJushoCode().toString().substring(NUM_0, NUM_5));
+        if (tempEntity.getZenkokuJushoCode() != null && !tempEntity.getZenkokuJushoCode().isEmpty()) {
+            if (NUM_6 <= tempEntity.getZenkokuJushoCode().toString().length()) {
+                市町村コード = new RString(tempEntity.getZenkokuJushoCode().toString().substring(NUM_0, NUM_5));
+            } else {
+                市町村コード = new RString(tempEntity.getZenkokuJushoCode().toString());
+            }
         }
         List<RString> 市町村コードリスト = new ArrayList<>();
         for (KoikiZenShichosonJoho 構成市町村情報 : 構成市町村情報リスト) {

@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.report.nenreikeikyubetsuriyojyokyo;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikeikyubetsuriyojyokyo.NenreiKeikyuBetsuRiyoJyokyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.nenreikeikyubetsuriyojyokyo.NenreiKeikyuBetsuRiyoJyokyoReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -48,9 +51,8 @@ public class NenreiKeikyuBetsuRiyoJyokyoEditor implements INenreiKeikyuBetsuRiyo
     @Override
     public NenreiKeikyuBetsuRiyoJyokyoReportSource edit(NenreiKeikyuBetsuRiyoJyokyoReportSource source) {
         source.printTimeStamp = get印刷日時(data.get印刷日時());
-        source.hokenshaNo = data.get保険者番号();
-        source.hokenshaName = data.get保険者名();
-        source.pageCount1 = data.getページ数();
+        source.hokenshaNo = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        source.hokenshaName = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         source.joken1 = dateFormat(data.get条件1());
         source.joken2 = data.get条件2();
         source.serviceMei1 = data.getサービス種類名称1();

@@ -389,8 +389,6 @@ public class TokuteiNyushoServiceHiShinsei {
             getValidationHandler().validateFor申請日の必須入力(pairs, div);
             getValidationHandler().validateFor決定区分の必須入力(pairs, div);
             getValidationHandler().validateFor決定日の必須入力(pairs, div);
-            getValidationHandler().validateFor適用日の必須入力(pairs, div);
-            getValidationHandler().validateFor有効期限の必須入力(pairs, div);
             setCheck(div, pairs);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -411,6 +409,8 @@ public class TokuteiNyushoServiceHiShinsei {
     }
 
     private void set承認check(TokuteiNyushoServiceHiShinseiDiv div, ValidationMessageControlPairs pairs) {
+        getValidationHandler().validateFor適用日の必須入力(pairs, div);
+        getValidationHandler().validateFor有効期限の必須入力(pairs, div);
         getValidationHandler().validateFor軽減率の必須入力(pairs, div);
         if (div.getShinseiDetail().getTxtTekiyoYMD().getValue() != null && !div.getShinseiDetail().getTxtTekiyoYMD().getValue().isEmpty()) {
             getValidationHandler().validateFor特別地域加算減免_適用開始日が法施行以前(pairs, div);

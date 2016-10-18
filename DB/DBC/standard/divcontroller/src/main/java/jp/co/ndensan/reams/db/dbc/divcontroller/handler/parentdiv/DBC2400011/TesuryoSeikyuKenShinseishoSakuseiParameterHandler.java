@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class TesuryoSeikyuKenShinseishoSakuseiParameterHandler {
 
+    private final RString 処理対象区分Check = new RString("1");
     private final TesuryoSeikyuKenShinseishoSakuseiParameterDiv div;
 
     /**
@@ -42,7 +43,7 @@ public class TesuryoSeikyuKenShinseishoSakuseiParameterHandler {
         if (business.get対象終了日時() != null && !business.get対象終了日時().isEmpty()) {
             div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().setFromValue(business.get対象終了日時().plusDay(1).getDate());
         } else {
-            div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().setFromValue(new RDate(""));
+            div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().setFromValue(new RDate(RString.EMPTY.toString()));
         }
         div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().setToValue(RDate.getNowDate());
     }
@@ -63,7 +64,7 @@ public class TesuryoSeikyuKenShinseishoSakuseiParameterHandler {
         batchParameter.set作成申請年月日開始(rDateToFlexibleDate(div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getFromValue()));
         batchParameter.set作成申請年月日終了(rDateToFlexibleDate(div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getToValue()));
         batchParameter.set作成日(FlexibleDate.getNowDate());
-        batchParameter.set処理対象区分(RString.EMPTY);
+        batchParameter.set処理対象区分(get処理対象区分(div));
         return batchParameter;
     }
 
@@ -72,5 +73,12 @@ public class TesuryoSeikyuKenShinseishoSakuseiParameterHandler {
             return new FlexibleDate(date.toDateString());
         }
         return FlexibleDate.EMPTY;
+    }
+
+    private RString get処理対象区分(TesuryoSeikyuKenShinseishoSakuseiParameterDiv div) {
+        if (div.getChushutsuJokenPanel().getChkShoriTaishoKubun().getSelectedKeys().contains(処理対象区分Check)) {
+            return 処理対象区分Check;
+        }
+        return RString.EMPTY;
     }
 }

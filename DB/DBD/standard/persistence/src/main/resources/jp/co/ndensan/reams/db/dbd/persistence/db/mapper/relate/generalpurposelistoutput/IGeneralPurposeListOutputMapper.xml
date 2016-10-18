@@ -247,6 +247,7 @@ WITH master AS (
             ) 
 
     SELECT
+        被保険者台帳管理."shikibetsuCode" AS 被保険者台帳管理_識別コード, 
         被保険者台帳管理."shichosonCode" AS 被保険者台帳管理_市町村コード, 
         被保険者台帳管理."hihokenshaNo" AS 被保険者台帳管理_被保険者番号,
         被保険者台帳管理."shikakuShutokuJiyuCode" AS 被保険者台帳管理_資格取得事由コード, 
@@ -780,12 +781,12 @@ WITH master AS (
         INNER JOIN
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
             (
-                 SELECT ARRAY_AGG(CAST (被保険者台帳管理."shikibetsuCode" AS TEXT))
+                 SELECT ARRAY_AGG(CAST ("被保険者台帳管理_識別コード" AS TEXT))
                  FROM master
             )
            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
            AS "ShikibetsuTaisho"
-           ON 被保険者台帳管理."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"    
+           ON 被保険者台帳管理_識別コード = "ShikibetsuTaisho"."shikibetsuCode"    
        
         <if test="is宛名抽出区分_年齢">
             <if test="is宛名抽出区分_年齢From">

@@ -156,6 +156,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
     private RString 項目内容;
     private IOutputOrder outputOrder;
     private int 連番;
+    private HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku;
     @BatchWriter
     private BatchReportWriter<HanyoListReportSource> batchReportWrite;
     private ReportSourceWriter<HanyoListReportSource> reportSourceWriter;
@@ -171,6 +172,9 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
         出力文字の開始位置 = 0;
         出力桁数 = 0;
         csvContent = new ArrayList<>();
+        hanyoListShutsuryokuKomoku = HanyoListReportUtil.createInstance()
+                .get汎用リスト出力項目(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給,
+                        new ReportId(processParamter.getCyohyoid()), Long.parseLong(processParamter.getSyutsuryokukomoku().toString()));
         set帳表CSV出力();
     }
 
@@ -229,9 +233,6 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
         personalDataList.add(toPersonalData(entity));
         Class clazz = eucCsvEntity.getClass();
         RString 項目内容new = RString.EMPTY;
-        HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku = HanyoListReportUtil.createInstance()
-                .get汎用リスト出力項目(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給,
-                        new ReportId(processParamter.getCyohyoid()), Long.parseLong(processParamter.getSyutsuryokukomoku().toString()));
         if (hanyoListShutsuryokuKomoku != null) {
             for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
                 try {
@@ -246,7 +247,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
                     帳票出力編集(i, hanyoListShutsuryokuKomoku, 項目内容new);
                 }
                 if (isCSV出力) {
-                    CSV出力編集(i, hanyoListShutsuryokuKomoku, 項目内容new);
+                    出力編集(i, hanyoListShutsuryokuKomoku, 項目内容new);
                 }
             }
         }
@@ -261,8 +262,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
         eucCsvWriter1.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         if (isCSV出力) {
-            manager.spool(eucFilePath, log);
-            manager.spool(csvFilePath1);
+            manager.spool(csvFilePath1, log);
         }
         バッチ出力条件リストの出力();
     }
@@ -692,11 +692,13 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
                 > get項目桁数) {
             get項目名称 = get項目名称.substring(0, get項目桁数);
         } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.左詰め.getコード())) {
-            for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
+            int 桁数 = get項目桁数 - get項目名称.length();
+            for (int j = 0; j < 桁数; j++) {
                 get項目名称 = RString.HALF_SPACE.concat(get項目名称);
             }
         } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.右詰め.getコード())) {
-            for (int j = 0; j < get項目桁数 - get項目桁数; j++) {
+            int 桁数 = get項目桁数 - get項目名称.length();
+            for (int j = 0; j < 桁数; j++) {
                 get項目名称 = get項目名称.concat(RString.HALF_SPACE);
             }
         }
@@ -720,13 +722,14 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
             項目内容 = 項目内容.concat(項目内容new);
             出力桁数 = 出力文字の開始位置 + get項目桁数;
         }
-        HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(), processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
+        HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(),
+                processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
         report.writeBy(reportSourceWriter);
         項目見出し = RString.EMPTY;
         項目内容 = RString.EMPTY;
     }
 
-    private void CSV出力編集(int i, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku, RString 項目内容new) {
+    private void 出力編集(int i, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku, RString 項目内容new) {
         if (processParamter.isCsvrenbanfuka()) {
             連番あり(i, hanyoListShutsuryokuKomoku, 項目内容new);
         } else {

@@ -122,10 +122,12 @@ and open the template in the editor.-->
         AND   "DbT1001HihokenshaDaicho"."edaNo" <![CDATA[<]]> 被保2."edaNo"))
         )
         ) AS 被保
+
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL OR 被保."shikakuSoshitsuYMD" IS NULL))
+
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -254,9 +256,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -389,9 +391,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -522,9 +524,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -654,9 +656,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -787,9 +789,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -921,9 +923,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -1056,9 +1058,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -1194,9 +1196,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -1334,9 +1336,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -1469,9 +1471,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -1608,9 +1610,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -1747,9 +1749,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -1884,9 +1886,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -2033,9 +2035,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -2168,9 +2170,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -2301,9 +2303,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3
@@ -2437,9 +2439,9 @@ and open the template in the editor.-->
         )
         ) AS 被保
         ON 被保."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
-        AND (被保."shikakuShutokuYMD" = "DbT4001JukyushaDaicho"."ninteiYMD"
+        AND (被保."shikakuShutokuYMD" <![CDATA[<=]]> "DbT4001JukyushaDaicho"."ninteiYMD"
         AND ("DbT4001JukyushaDaicho"."ninteiYMD"  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR  被保."shikakuSoshitsuYMD" = ''))
+        OR  被保."shikakuSoshitsuYMD" = '' OR 被保."shikakuSoshitsuYMD" IS NULL))
         WHERE NOT EXISTS(
         SELECT 1
         FROM rgdb."DbT4001JukyushaDaicho" AS 受給3

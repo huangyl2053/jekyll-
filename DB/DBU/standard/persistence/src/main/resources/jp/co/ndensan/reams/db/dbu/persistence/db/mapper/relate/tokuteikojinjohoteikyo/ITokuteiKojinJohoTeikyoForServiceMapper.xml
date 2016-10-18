@@ -92,8 +92,8 @@
                            HanKanri1."mukokaFlag"
                     FROM   rgdb."DbT7302TokuteiKojinJohoKoumokuHanKanri" AS HanKanri1
                     WHERE  HanKanri1."tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
-                    AND    HanKanri1."yukoStNichiji" <![CDATA[<=]]> #{基準日}
-                    AND    #{基準日} <![CDATA[<=]]> HanKanri1."yukoEdNichiji") AS HanKanri
+                    AND    HanKanri1."yukoStNichiji" <![CDATA[<=]]> #{基準日} :: TIMESTAMP
+                    AND    #{基準日} :: TIMESTAMP <![CDATA[<=]]> HanKanri1."yukoEdNichiji") AS HanKanri
                     WHERE  NOT EXISTS (SELECT 1 
                                         FROM (SELECT HanKanri2."tokuteiKojinJohoKomokuCode",
                                                      HanKanri2."tokuteiKojinJohoMeiCode",
@@ -101,8 +101,8 @@
                                                      HanKanri2."mukokaFlag"
                                               FROM   rgdb."DbT7302TokuteiKojinJohoKoumokuHanKanri" AS HanKanri2
                                               WHERE  HanKanri2."tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
-                                              AND    HanKanri2."yukoStNichiji" <![CDATA[<=]]> #{基準日}
-                                              AND    #{基準日} <![CDATA[<=]]> HanKanri2."yukoEdNichiji") AS HanKanri3
+                                              AND    HanKanri2."yukoStNichiji" <![CDATA[<=]]> #{基準日} :: TIMESTAMP
+                                              AND    #{基準日} :: TIMESTAMP <![CDATA[<=]]> HanKanri2."yukoEdNichiji") AS HanKanri3
                                         WHERE HanKanri3."tokuteiKojinJohoMeiCode" = HanKanri."tokuteiKojinJohoMeiCode"
                                         AND   HanKanri3."tokuteiKojinJohoKomokuCode" = HanKanri."tokuteiKojinJohoKomokuCode"
                                         AND   HanKanri3."versionJoho" = HanKanri."versionJoho")) AS HanKanri4
@@ -120,37 +120,37 @@
             resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoParamater"
             fetchSize="500">
-        SELECT
-            hihokenshaNo,
-            dataSetNo,
-            teikyoKubun,
-            shikibetsuCode,
-            kojinNo,
-            tokuteiKojinJohoMeiCode,
-            hanNo,
-            teikyoNaiyo01,
-            misetteiJiyu01,
-            teikyoNaiyo02,
-            misetteiJiyu02,
-            teikyoNaiyo03,
-            misetteiJiyu03,
-            teikyoNaiyo04,
-            misetteiJiyu04,
-            teikyoNaiyo05,
-            misetteiJiyu05,
-            teikyoNaiyo06,
-            misetteiJiyu06,
-            teikyoNaiyo07,
-            misetteiJiyu07,
-            teikyoNaiyo08,
-            misetteiJiyu08,
-            teikyoNaiyo09,
-            misetteiJiyu09,
-            teikyoNaiyo10,
-            misetteiJiyu10,
-            kokaiYMD
+         SELECT
+            "hihokenshaNo",
+            "dataSetKey",
+            "teikyoKubun",
+            "shikibetsuCode",
+            "kojinNo",
+            "tokuteiKojinJohoMeiCode",
+            "hanNo",
+            "teikyoNaiyo01",
+            "misetteiJiyu01",
+            "teikyoNaiyo02",
+            "misetteiJiyu02",
+            "teikyoNaiyo03",
+            "misetteiJiyu03",
+            "teikyoNaiyo04",
+            "misetteiJiyu04",
+            "teikyoNaiyo05",
+            "misetteiJiyu05",
+            "teikyoNaiyo06",
+            "misetteiJiyu06",
+            "teikyoNaiyo07",
+            "misetteiJiyu07",
+            "teikyoNaiyo08",
+            "misetteiJiyu08",
+            "teikyoNaiyo09",
+            "misetteiJiyu09",
+            "teikyoNaiyo10",
+            "misetteiJiyu10",
+            "kokaiYMD"
         FROM
-            #{中間DBのテーブル名}
+            ${中間DBのテーブル名}
     </select>
     
     <resultMap id="ResultMap_get特定個人情報項目版管理" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TokuteiKojinJohoKoumokuHanKanriRelateEntity" autoMapping="true">

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -118,7 +119,7 @@ public class TokuteiKojinJohoTeikyoSetParameterProcess extends SimpleBatchProces
     private void setParameter_連携先団体内統合宛名(RDate システム日付) {
         renkeisakiDantainaiTogoAtena = new OutputParameter<>();
         renkeisakiDantainaiTogoAtena.setValue(
-                DbBusinessConfig.get(ConfigNameDBU.番号制度_連携先団体内統合宛名_連携方式, システム日付));
+                DbBusinessConfig.get(ConfigNameDBU.番号制度_連携先団体内統合宛名_連携方式, システム日付, SubGyomuCode.DBU介護統計報告));
     }
 
 }

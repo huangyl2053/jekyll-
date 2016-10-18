@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC6100011.KyufuTaishoshaScheduleSetteiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC6100011.dgScheduleList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiKyufuTaishoshaScheduleSettei;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -26,9 +28,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 高額介護サービス費給付対象者-スケジュール設定のハンドラクラスです。
@@ -269,14 +274,26 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
 
     /**
      * 起動中チェックのメソッドです。
+     *
+     * @return ResponseData KyufuTaishoshaScheduleSetteiPanelDiv
      */
-    public void to起動中チェック() {
+    public ResponseData<KyufuTaishoshaScheduleSetteiPanelDiv> to起動中チェック() {
         List<dgScheduleList_Row> rowList = div.getDgScheduleList().getDataSource();
         for (dgScheduleList_Row row : rowList) {
             if (ShoriJotaiKubun.起動.getコード().equals(row.getDdlShoriJokyo().getSelectedKey())) {
-                throw new ApplicationException(DbcErrorMessages.高額対象者抽出処理中.getMessage());
+                if (!ResponseHolder.isReRequest()) {
+                    WarningMessage message = new WarningMessage(DbcErrorMessages.設定不能状態への変更.getMessage().getCode(),
+                            DbcErrorMessages.設定不能状態への変更.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                }
+                if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                        .equals(ResponseHolder.getMessageCode())
+                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    return ResponseData.of(div).respond();
+                }
             }
         }
+        return ResponseData.of(div).respond();
     }
 
     /**

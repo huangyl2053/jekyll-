@@ -1377,4 +1377,69 @@
                 AND R."idoYMD" = DbT1001."idoYMD"
                 AND R."edaNo" = DbT1001."edaNo"
     </sql>
+    
+     <!-- 保険者台帳管理と賦課の情報として取得 -->
+    <select resultOrdered="true" id="select被保険者台帳管理と賦課" resultMap="resultMap_DbT1001AndFukaJohoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KanendoFukaParameter" fetchSize="500">
+        SELECT 
+        資格.*,
+        "DbT2002Fuka".*
+        FROM
+        ( <include refid="maxHihokenshaNo_DbT1001HihokenshaDaicho" /> ) AS 資格
+        INNER JOIN
+        ( <include refid="distinct_IdoTmp" /> ) AS B
+        ON
+        資格."hihokenshaNo" = B."hihokenshaNo"
+        LEFT JOIN
+        ( <include refid="select賦課情報sql" /> )  AS "DbT2002Fuka" 
+        ON
+        資格."hihokenshaNo" = "DbT2002Fuka"."dbT2002Fuka_hihokenshaNo"
+        WHERE
+        資格."hihokennshaKubunCode" = '1'
+        AND 資格."isDeleted" = FALSE
+        AND (資格."shikakuSoshitsuYMD" IS NULL OR 資格."shikakuSoshitsuYMD" = ''
+        OR #{ 賦課年度 } || '0401' <![CDATA[<]]> 資格."shikakuSoshitsuYMD")
+        AND #{ 抽出開始日時 } <![CDATA[<=]]> 資格."lastUpdateTimestamp"
+        AND 資格."lastUpdateTimestamp" <![CDATA[<=]]> #{ 抽出終了日時 }
+        AND "DbT2002Fuka"."dbT2002Fuka_fukaNendo" = #{ 賦課年度 }
+    </select>
+    
+      <resultMap id="resultMap_DbT1001AndFukaJohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.DbT1001AndFukaJohoEntity" autoMapping="true">
+        <id column="hihokenshaNo" />
+        <id column="idoYMD" />
+        <id column="edaNo" />
+        <id column="dbT2002Fuka_choteiNendo" />
+        <id column="dbT2002Fuka_fukaNendo" />
+        <id column="dbT2002Fuka_tsuchishoNo" />
+        <id column="dbT2002Fuka_rirekiNo" />
+        <association property="被保険者台帳管理" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
+        <association property="賦課Newest" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo"/>
+    </resultMap>
+    
+   <sql id="select賦課情報sql">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
+        FROM
+        rgdb."DbV2002Fuka" AS "DbT2002Fuka"
+        INNER JOIN
+        rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
+        ON
+        "DbT2003Kibetsu"."choteiNendo" = "DbT2002Fuka"."choteiNendo" and
+        "DbT2003Kibetsu"."fukaNendo" = "DbT2002Fuka"."fukaNendo" and
+        "DbT2003Kibetsu"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo" and
+        "DbT2003Kibetsu"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
+        INNER JOIN
+        rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
+        ON
+        "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
+        ORDER BY "DbT2002Fuka"."choteiNendo",
+        "DbT2002Fuka"."fukaNendo",
+        "DbT2002Fuka"."tsuchishoNo",
+        "DbT2002Fuka"."rirekiNo"
+    </sql>
+   
+   
+    
 </mapper>
