@@ -723,21 +723,17 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
                 builder.set要介護認定結果情報二次判定要介護状態区分コード(new Code());
                 builder.set要介護認定結果情報二次判定認定有効期間(0);
             }
-            if (!div.getTitle().contains("却下")) {
-                builder.set要介護認定結果情報二次判定要介護状態区分コード(new Code(div.getHdnYokaigodoCodeKonkai()));
-                FlexibleDate 有効開始年月日 = div.getTxtYukoKaishibiKonkai().getValue();
-                FlexibleDate 有効終了年月日 = div.getTxtYukoShuryobiKonkai().getValue();
-                builder.set要介護認定結果情報二次判定認定有効期間(get有効期間月数(有効開始年月日, 有効終了年月日));
-                builder.set要介護認定結果情報二次判定認定有効開始年月日(有効開始年月日);
-                builder.set要介護認定結果情報二次判定認定有効終了年月日(有効終了年月日);
-            }
+            builder.set要介護認定結果情報二次判定要介護状態区分コード(new Code(div.getHdnYokaigodoCodeKonkai()));
+            FlexibleDate 有効開始年月日 = div.getTxtYukoKaishibiKonkai().getValue();
+            FlexibleDate 有効終了年月日 = div.getTxtYukoShuryobiKonkai().getValue();
+            builder.set要介護認定結果情報二次判定認定有効期間(get有効期間月数(有効開始年月日, 有効終了年月日));
+            builder.set要介護認定結果情報二次判定認定有効開始年月日(有効開始年月日);
+            builder.set要介護認定結果情報二次判定認定有効終了年月日(有効終了年月日);
         } else {
             builder = 認定情報.createBuilderForEdit();
         }
 
-        if (!div.getTitle().contains("却下")) {
-            builder.set要介護認定結果情報介護認定審査会意見(div.getTxtShinsakaiIkenKonkai().getValue());
-        }
+        builder.set要介護認定結果情報介護認定審査会意見(div.getTxtShinsakaiIkenKonkai().getValue());
 
         return builder.build();
     }
