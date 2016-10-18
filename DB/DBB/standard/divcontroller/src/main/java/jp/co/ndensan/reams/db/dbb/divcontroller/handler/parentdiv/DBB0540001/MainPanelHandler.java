@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuhoho.ChoshuHohoResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.choshuHouhou_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -53,6 +53,7 @@ public class MainPanelHandler {
     private static final int 整数_9 = 9;
     private static final int 整数_10 = 10;
     private static final int 整数_11 = 11;
+    private static final int 整数_12 = 12;
     private static final int 現在の月_1 = 1;
     private static final int 現在の月_2 = 2;
     private static final int 現在の月_3 = 3;
@@ -706,38 +707,40 @@ public class MainPanelHandler {
         int j = 0;
         for (int i = 0; i <= 整数_11; i++) {
             if (現在の月 == 現在月list.get(i)) {
-                j = i;
+                j = i + 1;
                 break;
             }
         }
         List<RString> 現在徴収方法list = new ArrayList<>();
-        現在徴収方法list.add(0, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt4Gatsu());
-        現在徴収方法list.add(整数_1, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt5Gatsu());
-        現在徴収方法list.add(整数_2, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt6Gatsu());
-        現在徴収方法list.add(整数_3, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt7Gatsu());
-        現在徴収方法list.add(整数_4, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt8Gatsu());
-        現在徴収方法list.add(整数_5, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt9Gatsu());
-        現在徴収方法list.add(整数_6, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt10Gatsu());
-        現在徴収方法list.add(整数_7, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt11Gatsu());
-        現在徴収方法list.add(整数_8, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt12Gatsu());
-        現在徴収方法list.add(整数_9, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt1Gatsu());
-        現在徴収方法list.add(整数_10, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt2Gatsu());
-        現在徴収方法list.add(整数_11, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt3Gatsu());
+        現在徴収方法list.add(0, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxtZen3Gatsu());
+        現在徴収方法list.add(整数_1, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt4Gatsu());
+        現在徴収方法list.add(整数_2, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt5Gatsu());
+        現在徴収方法list.add(整数_3, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt6Gatsu());
+        現在徴収方法list.add(整数_4, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt7Gatsu());
+        現在徴収方法list.add(整数_5, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt8Gatsu());
+        現在徴収方法list.add(整数_6, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt9Gatsu());
+        現在徴収方法list.add(整数_7, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt10Gatsu());
+        現在徴収方法list.add(整数_8, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt11Gatsu());
+        現在徴収方法list.add(整数_9, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt12Gatsu());
+        現在徴収方法list.add(整数_10, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt1Gatsu());
+        現在徴収方法list.add(整数_11, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt2Gatsu());
+        現在徴収方法list.add(整数_12, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt3Gatsu());
         List<RString> 変更後list = new ArrayList<>();
-        変更後list.add(0, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt4Gatsu());
-        変更後list.add(整数_1, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt5Gatsu());
-        変更後list.add(整数_2, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu());
-        変更後list.add(整数_3, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu());
-        変更後list.add(整数_4, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu());
-        変更後list.add(整数_5, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu());
-        変更後list.add(整数_6, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt10Gatsu());
-        変更後list.add(整数_7, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu());
-        変更後list.add(整数_8, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu());
-        変更後list.add(整数_9, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu());
-        変更後list.add(整数_10, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu());
-        変更後list.add(整数_11, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu());
-        for (; j <= 整数_11; j++) {
-            if (現在徴収方法list.get(j).equals(特) && (変更後list.get(j).equals(普)
+        変更後list.add(0, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxtZen3Gatsu());
+        変更後list.add(整数_1, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt4Gatsu());
+        変更後list.add(整数_2, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt5Gatsu());
+        変更後list.add(整数_3, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu());
+        変更後list.add(整数_4, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu());
+        変更後list.add(整数_5, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu());
+        変更後list.add(整数_6, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu());
+        変更後list.add(整数_7, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt10Gatsu());
+        変更後list.add(整数_8, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu());
+        変更後list.add(整数_9, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu());
+        変更後list.add(整数_10, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu());
+        変更後list.add(整数_11, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu());
+        変更後list.add(整数_12, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu());
+        for (int k = 0; k <= j; k++) {
+            if (現在徴収方法list.get(k).equals(特) && (変更後list.get(k).equals(普)
                     || 変更後list.get(j).equals(RString.EMPTY))) {
                 特別徴収停止日時 = YMDHMS.now();
                 特別徴収停止事由コード = ChoteiJiyuCode.徴収方法修正.getコード();
@@ -746,7 +749,6 @@ public class MainPanelHandler {
                 特別徴収停止日時 = 停止日時;
                 特別徴収停止事由コード = 停止事由コード;
             }
-
         }
         徴収方法_変更後 = 徴収方法_変更後.createBuilderForEdit().
                 set徴収方法4月(get徴収方法のコード(徴収方法データ.get徴収方法4月(),
