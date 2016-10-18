@@ -38,7 +38,6 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
     private static final RString 開始月 = new RString("08");
     private static final RString TEMP_TABLE = new RString("futanWariaiTemp");
     private static final RString 確認リスト_TEMP_TABLE = new RString("DbWT1801ShoriKekkaKakuninList");
-    private static final RString 零壱 = new RString("01");
     private static final RString 壱零 = new RString("10");
     private static final RString 弐零 = new RString("20");
     private static final RString 九零 = new RString("90");
@@ -262,11 +261,10 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
     }
 
     private boolean is期間中(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 年月) {
-        FlexibleDate 年月の月末日 = new FlexibleDate(年月.plusMonth(1).toDateString().concat(零壱)).minusDay(1);
         FlexibleDate 有効開始日 = entity.get利用者負担割合明細最新Entity().getYukoKaishiYMD();
         FlexibleDate 有効終了日 = entity.get利用者負担割合明細最新Entity().getYukoShuryoYMD();
         if (有効開始日 != null && 有効終了日 != null) {
-            return 年月の月末日.isBeforeOrEquals(有効終了日) && 有効開始日.isBeforeOrEquals(年月の月末日);
+            return 年月.isBeforeOrEquals(有効終了日.getYearMonth()) && 有効開始日.getYearMonth().isBeforeOrEquals(年月);
         }
         return false;
     }
