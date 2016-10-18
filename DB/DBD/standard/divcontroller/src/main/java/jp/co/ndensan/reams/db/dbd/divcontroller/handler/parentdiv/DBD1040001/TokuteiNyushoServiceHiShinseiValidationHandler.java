@@ -29,9 +29,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class TokuteiNyushoServiceHiShinseiValidationHandler {
 
-    private final Decimal 給付率_81 = new Decimal(81);
-    private final Decimal 給付率_100 = new Decimal(100);
-
     /**
      * 申請日の必須入力チェックを行います。
      *
