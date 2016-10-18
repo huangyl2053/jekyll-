@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kogakuservicehijuryoininkeiyakukakuninsho;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -16,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuServiceHiJuryoininKeiyakuKakuninshoResult {
+
+    private FlexibleDate 決定日;
 
     private RString 文書番号;
     private RString 通知文1;
