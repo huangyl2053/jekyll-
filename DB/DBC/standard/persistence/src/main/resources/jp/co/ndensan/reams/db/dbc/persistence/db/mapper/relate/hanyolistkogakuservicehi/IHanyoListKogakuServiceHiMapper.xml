@@ -10,6 +10,7 @@
         <include refid="selectHanyouRisutoSyuturyokuEntity" />
     </select>
     <sql id="selectHanyouRisutoSyuturyokuEntity">
+        WITH master AS(
         SELECT ROW_NUMBER() over(order by A."区分" , A."被保険者番号key" , A."サービス提供年月key" , A."履歴番号key")as row ,* FROM
         ( 
         SELECT
@@ -30,9 +31,9 @@
         DbV1001."koikinaiJushochiTokureiFlag" as 広域内住所地特例フラグ,
         DbV1001."koikinaiTokureiSochimotoShichosonCode" as 広住特措置元市町村コード,
         (CASE WHEN DbV1001."koikinaiJushochiTokureiFlag" = '1'
-                THEN DbV1001."koikinaiTokureiSochimotoShichosonCode" 
-                ELSE DbV1001."shichosonCode" 
-            END) AS 被保険者市町村コード,
+        THEN DbV1001."koikinaiTokureiSochimotoShichosonCode" 
+        ELSE DbV1001."shichosonCode" 
+        END) AS 被保険者市町村コード,
         DbV1004."nyushoShisetsuCode" as 入所施設コード,
         DbV1004."nyushoYMD" as 入所年月日,
         DbV1004."taishoYMD" as 退所年月日,
@@ -112,7 +113,6 @@
         DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM" as 決定者受取年月,
         DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_kogakuKyufuKonkyo" as 高額給付根拠,
         koza.*,
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
         From
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.noDeleted_DbT3055KogakuKyufuTaishoshaGokei" />
@@ -196,35 +196,35 @@
         AND DbT7062."yukoKaishiYMD"=(select MAX("yukoKaishiYMD") from
         rgdb."DbT7062KaigoJigyoshaDaihyosha" where  "jigyoshaNo"=DbV1004."nyushoShisetsuCode")
         LEFT OUTER JOIN (
-                SELECT
-                        *
-                FROM (
-                        SELECT
-                        DbT3055_all."hihokenshaNo" as 被保険者番号,
-                        DbT3055_all."serviceTeikyoYM" as サービス提供年月,
-                        DbT3055_all."rirekiNo" as 履歴番号,
-                        DbT4001."jukyuShinseiJiyu" as 受給申請事由,
-                        DbT4001."jukyuShinseiYMD" as 受給申請年月日,
-                        DbT4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
-                        DbT4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,	
-                        DbT4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,	
-                        DbT4001."ninteiYMD" as 受給認定日,
-                        DbT4001."kyuSochishaFlag" as 旧措置フラグ,
-                        DbT4001."minashiCode" as みなし要介護区分コード,
-                        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード
-                        <!--ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号-->
-                        FROM
-                                rgdb."DbT3055KogakuKyufuTaishoshaGokei" As DbT3055_all
-                        INNER JOIN
-                                rgdb."DbT4001JukyushaDaicho" As DbT4001
-                                ON	DbT4001."hihokenshaNo" = DbT3055_all."hihokenshaNo"
-                                AND	DbT4001."logicalDeletedFlag" = false
-                                AND	DbT4001."yukoMukoKubun" = '1'
-                                AND	DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3055_all."serviceTeikyoYM" || '31')
-                                AND	(DbT3055_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
-                ) AS DbT4001_corresponding
-<!--                WHERE
-                        DbT4001_corresponding.番号 = 1-->
+        SELECT
+        *
+        FROM (
+        SELECT
+        DbT3055_all."hihokenshaNo" as 被保険者番号,
+        DbT3055_all."serviceTeikyoYM" as サービス提供年月,
+        DbT3055_all."rirekiNo" as 履歴番号,
+        DbT4001."jukyuShinseiJiyu" as 受給申請事由,
+        DbT4001."jukyuShinseiYMD" as 受給申請年月日,
+        DbT4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
+        DbT4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,	
+        DbT4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,	
+        DbT4001."ninteiYMD" as 受給認定日,
+        DbT4001."kyuSochishaFlag" as 旧措置フラグ,
+        DbT4001."minashiCode" as みなし要介護区分コード,
+        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード
+        <!--ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号-->
+        FROM
+        rgdb."DbT3055KogakuKyufuTaishoshaGokei" As DbT3055_all
+        INNER JOIN
+        rgdb."DbT4001JukyushaDaicho" As DbT4001
+        ON	DbT4001."hihokenshaNo" = DbT3055_all."hihokenshaNo"
+        AND	DbT4001."logicalDeletedFlag" = false
+        AND	DbT4001."yukoMukoKubun" = '1'
+        AND	DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3055_all."serviceTeikyoYM" || '31')
+        AND	(DbT3055_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
+        ) AS DbT4001_corresponding
+        <!--                WHERE
+        DbT4001_corresponding.番号 = 1-->
         ) As DbT4001
         ON	DbT4001."被保険者番号" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"
         AND	DbT4001."サービス提供年月" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM"
@@ -232,11 +232,6 @@
         LEFT OUTER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper.tokuteiKozaSearch" />) AS koza
         ON DbT3056."dbT3056KogakuShikyuShinsei_kozaID" = koza."uaT0310Koza_kozaId"
-        INNER JOIN
-        rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
-        '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
-        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }')AS "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode"=DbV1001."shikibetsuCode"
         LEFT JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode"=DbV1001."shikibetsuCode"
 
@@ -397,9 +392,25 @@
         </if>
         <if test="kouseiShichosonCode != null and !kouseiShichosonCode.isEmpty() and kouseiShichosonCode != '000000'">
             AND ((DbV1001."koikinaiJushochiTokureiFlag" = '1' AND DbV1001."koikinaiTokureiSochimotoShichosonCode"  = #{kouseiShichosonCode})
-			OR (DbV1001."koikinaiJushochiTokureiFlag" != '1' AND DbV1001."shichosonCode"  = #{kouseiShichosonCode}))
+            OR (DbV1001."koikinaiJushochiTokureiFlag" != '1' AND DbV1001."shichosonCode"  = #{kouseiShichosonCode}))
         </if>
-        ) as A ${出力順}
+        ) as A ${出力順})
+        
+        SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+        FROM
+        master AS master
+        INNER JOIN
+        rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
+        '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
+        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', (
+        SELECT
+        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+        FROM
+        master
+        ))AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode"=DbV1001."shikibetsuCode"
     </sql>
 
     <resultMap id="resultMap_HanyouRisutoSyuturyokuEntity" autoMapping="true"
@@ -675,7 +686,8 @@
     </select>
     
     
-        <sql id="selectHanyouRisutoSyuturyokuModeEntity">
+    <sql id="selectHanyouRisutoSyuturyokuModeEntity">
+        WITH master AS(
         SELECT ROW_NUMBER() over(order by A."区分" , A."被保険者番号key" , A."サービス提供年月key" , A."履歴番号key")as row ,* FROM
         ( SELECT
         2 as 区分,
@@ -694,10 +706,10 @@
         DbV1001."jushochiTokureiFlag" as 住所地特例フラグ,
         DbV1001."koikinaiJushochiTokureiFlag" as 広域内住所地特例フラグ,
         DbV1001."koikinaiTokureiSochimotoShichosonCode" as 広住特措置元市町村コード,
-            (CASE WHEN DbV1001."koikinaiJushochiTokureiFlag" = '1'
-                THEN DbV1001."koikinaiTokureiSochimotoShichosonCode" 
-                ELSE DbV1001."shichosonCode" 
-            END) AS 被保険者市町村コード,
+        (CASE WHEN DbV1001."koikinaiJushochiTokureiFlag" = '1'
+        THEN DbV1001."koikinaiTokureiSochimotoShichosonCode" 
+        ELSE DbV1001."shichosonCode" 
+        END) AS 被保険者市町村コード,
         DbV1004."nyushoShisetsuCode" as 入所施設コード,
         DbV1004."nyushoYMD" as 入所年月日,
         DbV1004."taishoYMD" as 退所年月日,
@@ -777,7 +789,6 @@
         DbT3112."dbT3112KogakuShikyuShinsaKettei_ketteishaUketoriYM" as 決定者受取年月,
         DbT3108."dbT3108JigyoKogakuKyufuTaishoshaMeisai_jigyoKogakuKyufuKonkyo" as 高額給付根拠,
         koza.*,
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
         From
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3109JigyoKogakuKyufuTaishoshaGokeiMapper.noDeleted_DbT3109JigyoKogakuKyufuTaishoshaGokei" />
@@ -861,47 +872,42 @@
         AND DbT7062."yukoKaishiYMD"=(select MAX("yukoKaishiYMD") from
         rgdb."DbT7062KaigoJigyoshaDaihyosha" where  "jigyoshaNo"=DbV1004."nyushoShisetsuCode")
         LEFT OUTER JOIN (
-                SELECT
-                        *
-                FROM (
-                        SELECT
-                        DbT3109_all."hihokenshaNo" as 被保険者番号,
-                        DbT3109_all."serviceTeikyoYM" as サービス提供年月,
-                        DbT3109_all."rirekiNo" as 履歴番号,
-                        DbT4001."jukyuShinseiJiyu" as 受給申請事由,
-                        DbT4001."jukyuShinseiYMD" as 受給申請年月日,
-                        DbT4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
-                        DbT4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,	
-                        DbT4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,	
-                        DbT4001."ninteiYMD" as 受給認定日,
-                        DbT4001."kyuSochishaFlag" as 旧措置フラグ,
-                        DbT4001."minashiCode" as みなし要介護区分コード,
-                        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード,
-                        ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
-                        FROM
-                                rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei" As DbT3109_all
-                        INNER JOIN
-                                rgdb."DbT4001JukyushaDaicho" As DbT4001
-                                ON	DbT4001."hihokenshaNo" = DbT3109_all."hihokenshaNo"
-                                AND	DbT4001."logicalDeletedFlag" = false
-                                AND	DbT4001."yukoMukoKubun" = '1'
-                                AND	DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3109_all."serviceTeikyoYM" || '31')
-                                AND	(DbT3109_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
-                ) AS DbT4001_corresponding
-                WHERE
-                        DbT4001_corresponding.番号 = 1
+        SELECT
+        *
+        FROM (
+        SELECT
+        DbT3109_all."hihokenshaNo" as 被保険者番号,
+        DbT3109_all."serviceTeikyoYM" as サービス提供年月,
+        DbT3109_all."rirekiNo" as 履歴番号,
+        DbT4001."jukyuShinseiJiyu" as 受給申請事由,
+        DbT4001."jukyuShinseiYMD" as 受給申請年月日,
+        DbT4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
+        DbT4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,	
+        DbT4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,	
+        DbT4001."ninteiYMD" as 受給認定日,
+        DbT4001."kyuSochishaFlag" as 旧措置フラグ,
+        DbT4001."minashiCode" as みなし要介護区分コード,
+        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード,
+        ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
+        FROM
+        rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei" As DbT3109_all
+        INNER JOIN
+        rgdb."DbT4001JukyushaDaicho" As DbT4001
+        ON	DbT4001."hihokenshaNo" = DbT3109_all."hihokenshaNo"
+        AND	DbT4001."logicalDeletedFlag" = false
+        AND	DbT4001."yukoMukoKubun" = '1'
+        AND	DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3109_all."serviceTeikyoYM" || '31')
+        AND	(DbT3109_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
+        ) AS DbT4001_corresponding
+        WHERE
+        DbT4001_corresponding.番号 = 1
         ) As DbT4001
         ON DbT4001. 被保険者番号 = DbT3109. "dbT3109JigyoKogakuKyufuTaishoshaGokei_hihokenshaNo"
-            AND DbT4001. "サービス提供年月" = DbT3109. "dbT3109JigyoKogakuKyufuTaishoshaGokei_serviceTeikyoYM"
-            AND DbT4001. "履歴番号" = DbT3109. "dbT3109JigyoKogakuKyufuTaishoshaGokei_rirekiNo"
+        AND DbT4001. "サービス提供年月" = DbT3109. "dbT3109JigyoKogakuKyufuTaishoshaGokei_serviceTeikyoYM"
+        AND DbT4001. "履歴番号" = DbT3109. "dbT3109JigyoKogakuKyufuTaishoshaGokei_rirekiNo"
         LEFT OUTER JOIN
         (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON DbT3110."dbT3110JigyoKogakuShikyuShinsei_kozaID" = koza."uaT0310Koza_kozaId"
-        INNER JOIN
-        rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
-        '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
-        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }')AS "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode"=DbV1001."shikibetsuCode"
         LEFT JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode"=DbV1001."shikibetsuCode"
 
@@ -1062,9 +1068,25 @@
         </if>
         <if test="kouseiShichosonCode != null and !kouseiShichosonCode.isEmpty() and kouseiShichosonCode != '000000'">
             AND ((DbV1001."koikinaiJushochiTokureiFlag" = '1' AND DbV1001."koikinaiTokureiSochimotoShichosonCode"  = #{kouseiShichosonCode})
-			OR (DbV1001."koikinaiJushochiTokureiFlag" != '1' AND DbV1001."shichosonCode"  = #{kouseiShichosonCode}))
+            OR (DbV1001."koikinaiJushochiTokureiFlag" != '1' AND DbV1001."shichosonCode"  = #{kouseiShichosonCode}))
         </if>
-        ) as A ${出力順}
+        ) as A ${出力順})
+        
+        SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+        FROM
+        master AS master
+        INNER JOIN
+        rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
+        '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
+        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', (
+        SELECT
+        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+        FROM
+        master
+        ))AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode"=DbV1001."shikibetsuCode"
     </sql>
 
     <sql id="kozaSearchModeResult">

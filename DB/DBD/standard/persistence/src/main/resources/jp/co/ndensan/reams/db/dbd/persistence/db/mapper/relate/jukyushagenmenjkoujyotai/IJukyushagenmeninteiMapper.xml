@@ -3300,7 +3300,7 @@ and open the template in the editor.-->
         </if>
         <if test="!基準日flag" >
             受給."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2})
-            AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2}') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
+            AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
         WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
@@ -4829,7 +4829,7 @@ and open the template in the editor.-->
         </if>
         <if test="!基準日flag" >
             受給."ninteiYukoKikanKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2})
-            AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2}') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
+            AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
         WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}

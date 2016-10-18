@@ -56,12 +56,12 @@
         LEFT OUTER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',(
         SELECT
         ARRAY_AGG(CAST (master."iN住民コード" AS TEXT))
         FROM
         master
-        }') AS "ShikibetsuTaisho"
+        )) AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode" = master."iN住民コード"
     </select>
     
@@ -176,5 +176,6 @@
         <result property="エラーコード" column="エラーコード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="エラー文言" column="エラー文言" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="エラー区分" column="エラー区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="文言設定flag" column="文言設定flag"/>
     </resultMap>
 </mapper>
