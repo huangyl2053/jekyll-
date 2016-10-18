@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.R
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.RiyoshaFutanwariaiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeyikyouTayisyousyaJyohouRelateEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoManager;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -39,11 +40,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBU-4880-060 zhaoyao
  */
-public class RiyoshaFutanwariaiUpdateProcess extends BatchProcessBase<TeikyoKihonJohoNNTempEntity> {
+public class RiyoshaFutanwariaiUpdateProcess extends BatchProcessBase<TeyikyouTayisyousyaJyohouRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate."
             + "tokuteikojinjohoteikyo.IRiyoshaFutanwariaiMapper.get提供対象者");
-    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJoho");
+    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
     private RiyoshaFutanwariaiProcessParameter processParameter;
     private RiyoshaFutanwariaiMybatisParameter mybatisParameter;
 
@@ -60,12 +61,13 @@ public class RiyoshaFutanwariaiUpdateProcess extends BatchProcessBase<TeikyoKiho
 
     @Override
     protected void createWriter() {
+        dbT7301EntityWriter = new BatchPermanentTableWriter(DbT7301TokuteiKojinJohoHanKanriEntity.class);
         中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(TABLE_中間DB提供基本情報,
                 TeikyoKihonJohoNNTempEntity.class);
     }
 
     @Override
-    protected void process(TeikyoKihonJohoNNTempEntity entity) {
+    protected void process(TeyikyouTayisyousyaJyohouRelateEntity entity) {
         中間DB提供基本情報.update(getTeikyoKihonJohoEntity(entity));
     }
 
@@ -90,14 +92,19 @@ public class RiyoshaFutanwariaiUpdateProcess extends BatchProcessBase<TeikyoKiho
         return new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
     }
 
-    private TeikyoKihonJohoNNTempEntity getTeikyoKihonJohoEntity(TeikyoKihonJohoNNTempEntity entity) {
-        entity.setTeikyoKubun(TeikyoYohi.提供要.getコード());
-        return entity;
+    private TeikyoKihonJohoNNTempEntity getTeikyoKihonJohoEntity(TeyikyouTayisyousyaJyohouRelateEntity entity) {
+        TeikyoKihonJohoNNTempEntity tempEntity = entity.getTeikyoKihonJohoNNTempEntity();
+        tempEntity.setTeikyoKubun(TeikyoYohi.提供要.getコード());
+        if (entity.getKojinNo() != null && !entity.getKojinNo().isEmpty()) {
+            tempEntity.setKojinNo(entity.getKojinNo().value());
+        }
+        return tempEntity;
     }
 
     @Override
     protected void afterExecute() {
-        TokuteiKojinJohoTeikyoManager.createInstance().update特定個人情報提供(TABLE_中間DB提供基本情報,
+        TokuteiKojinJohoTeikyoManager.createInstance().update特定個人情報提供(
+                new RString("\"").concat(TABLE_中間DB提供基本情報).concat("\""),
                 processParameter.get新規異動区分(), TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
                 DataSetNo._0202負担割合.getコード(), processParameter.get版番号());
         if (TeikyoYohi.提供要.getコード().equals(processParameter.get特定個人情報名コード())) {
