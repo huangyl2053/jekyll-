@@ -45,6 +45,9 @@ public class SeikyuShinsaShuseiToroku {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 保存 = new RString("保存は正常に終了しました。");
+    private static final RString 検索結果一覧へ = new RString("btnBackSearchResult_TorokuGamen");
+    private static final RString 保存ボタン = new RString("btnShuseiUpdate");
+    private static final RString メニューへ = new RString("btnBackMenu1");
     private static final RString 前排他キー = new RString("JutakuKaishuRiyushoSakuseiTesuryo");
 
     /**
@@ -56,10 +59,7 @@ public class SeikyuShinsaShuseiToroku {
     public ResponseData<SeikyuShinsaShuseiTorokuDiv> onLoad(SeikyuShinsaShuseiTorokuDiv div) {
 
         RString menuID = ResponseHolder.getMenuID();
-        get前排他(前排他キー);
-        if (!get前排他(前排他キー)) {
-            throw new PessimisticLockingException();
-        }
+        this.get前排他(前排他キー);
         div.setDisabled(false);
         getHandler(div).onLoad(menuID);
         return ResponseData.of(div).respond();
@@ -236,11 +236,12 @@ public class SeikyuShinsaShuseiToroku {
                 getHandler(div).削除更新(business);
             }
         }
-        if (!ResponseHolder.isReRequest()) {
+        if (new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(
                     UrInformationMessages.正常終了.getMessage().replace(保存.toString())).respond();
         }
-        this.前排他キーの解除(ResponseHolder.getMenuID());
+        this.前排他キーの解除(前排他キー);
         this.onClick_Kensaku(div);
         return 画面リロード(div);
     }
@@ -252,13 +253,13 @@ public class SeikyuShinsaShuseiToroku {
     /**
      * 前排他を取得します
      *
-     *
      * @param 前排他キー 前排他キー
-     * @return boolean
      */
-    public boolean get前排他(RString 前排他キー) {
+    public void get前排他(RString 前排他キー) {
         LockingKey 排他キー = new LockingKey(前排他キー);
-        return RealInitialLocker.tryGetLock(排他キー);
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
+            throw new PessimisticLockingException();
+        }
     }
 
     /**
@@ -291,10 +292,10 @@ public class SeikyuShinsaShuseiToroku {
 
         getHandler(div).クリアデータ();
         if (DBC2410011StateName.情報修正登録.getName().equals(ResponseHolder.getState())) {
-            return ResponseData.of(div).setState(DBC2410011StateName.情報修正登録検索);
+            return ResponseData.of(div).setState(DBC2410011StateName.情報修正登録検索1);
         }
         if (DBC2410011StateName.審査結果登録.getName().equals(ResponseHolder.getState())) {
-            return ResponseData.of(div).setState(DBC2410011StateName.審査結果登録検索);
+            return ResponseData.of(div).setState(DBC2410011StateName.審査結果登録検索1);
         }
         return ResponseData.of(div).respond();
     }

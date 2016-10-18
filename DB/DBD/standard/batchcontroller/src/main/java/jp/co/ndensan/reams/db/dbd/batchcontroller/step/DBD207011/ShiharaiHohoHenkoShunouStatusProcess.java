@@ -211,7 +211,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
         if (Decimal.ZERO == 調定額 && Decimal.ZERO == 収入額) {
             return MinoKannoKubun._0円.getコード();
         }
-        if (Decimal.ZERO != 調定額 && Decimal.ZERO == 収入額) {
+        if (Decimal.ZERO != 調定額 && 調定額.equals(収入額)) {
             return MinoKannoKubun.完納.getコード();
         }
 

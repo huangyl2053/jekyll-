@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd200016;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.NinteishaListSakus
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.SetaiInRisutoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200001.FutanGendogakuNinteiGaitoshaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -126,6 +128,7 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
             source.hokenshaName = 導入団体.get市町村名();
         }
         if (null != 出力順) {
+            setiOutputOrder(source);
             set出力順改頁(source);
         }
     }
@@ -465,6 +468,27 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
             source.listUpper_5 = ketteiYMD.wareki().toDateString();
         }
         return source;
+    }
+
+    private void setiOutputOrder(FutanGendogakuNinteiGaitoshaIchiranReportSource source) {
+
+        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(出力順);
+        if (出力順Map.get(LISTINDEX_1) != null) {
+            source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_1).get項目名();
+
+        }
+        if (出力順Map.get(LISTINDEX_2) != null) {
+            source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_2).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_3) != null) {
+            source.shutsuryokujun3 = 出力順Map.get(LISTINDEX_3).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_4) != null) {
+            source.shutsuryokujun4 = 出力順Map.get(LISTINDEX_4).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_5) != null) {
+            source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_5).get項目名();
+        }
     }
 
     private void set出力順改頁(FutanGendogakuNinteiGaitoshaIchiranReportSource source) {
