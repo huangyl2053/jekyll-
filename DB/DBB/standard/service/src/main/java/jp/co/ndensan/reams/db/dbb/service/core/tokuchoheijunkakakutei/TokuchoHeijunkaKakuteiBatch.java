@@ -15,12 +15,10 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.HeinjunkaAfterParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiItirannParameter;
 import jp.co.ndensan.reams.db.dbb.entity.csv.TokubetsuChoshuHeijunkaKakuteiCSVEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.FukaTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiItirannEntity;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunkakakutei.ITokuchoHeinjunkaKakuteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho.FukaJohoManager;
@@ -29,10 +27,11 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
-import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -672,10 +671,11 @@ public class TokuchoHeijunkaKakuteiBatch {
             RString 今年度保険料率 = DecimalFormatter.toコンマ区切りRString(保険料段階.get保険料率(), 整数_ZREO);
             entity.set今年度保険料率(今年度保険料率);
         }
-        TokubetsuChoshuGimushaCode 特別徴収業務者コード = 特徴平準化確定一覧.get年金特徴回付情報_介護継承().getDtTokubetsuChoshuGimushaCode();
+        Code 特別徴収業務者コード = 特徴平準化確定一覧.get年金特徴回付情報_介護継承().getDtTokubetsuChoshuGimushaCode();
         if (特別徴収業務者コード != null) {
-            entity.set特別徴収業務者コード(特別徴収業務者コード.toRString());
-            RString 特別徴収業務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), 特別徴収業務者コード.value());
+            entity.set特別徴収業務者コード(特別徴収業務者コード.getColumnValue());
+            RString 特別徴収業務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                    UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), 特別徴収業務者コード);
             entity.set特別徴収業務者(特別徴収業務者);
         }
         RString 特別徴収対象年金コード = 特徴平準化確定一覧.get徴収方法Newest().getKariNenkinCode();

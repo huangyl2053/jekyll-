@@ -128,7 +128,7 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
 
     @Step(処理日付管理テーブル更新)
     IBatchFlowCommand updShoriDateKanriProcess() {
-        return loopBatch(UpdShoriDateKanriProcess.class)
+        return simpleBatch(UpdShoriDateKanriProcess.class)
                 .arguments(getProcessParameter())
                 .define();
     }
