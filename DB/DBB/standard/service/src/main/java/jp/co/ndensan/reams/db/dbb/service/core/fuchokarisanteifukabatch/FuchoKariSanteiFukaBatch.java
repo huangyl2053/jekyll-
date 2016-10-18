@@ -13,8 +13,10 @@ import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
@@ -38,12 +40,14 @@ public class FuchoKariSanteiFukaBatch {
     private static final RString 区分_新規 = new RString("1");
     private static final RString 仮算定端数調整有無_あり = new RString("1");
     private static final RString 仮算定端数調整有無_なし = new RString("2");
+    private static final RString 仮算定賦課方法_01 = new RString("01");
     private static final RString 仮算定賦課方法_02 = new RString("02");
     private static final RString 仮算定賦課方法_03 = new RString("03");
     private static final RString 仮算定賦課方法_04 = new RString("04");
     private static final RString 仮算定賦課方法_05 = new RString("05");
     private static final RString 仮算定賦課方法_10 = new RString("10");
     private static final RString 仮算定賦課方法_11 = new RString("11");
+    private static final RString 境界層区分_非該当 = new RString("0");
     private static final int NUM_1 = 1;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
@@ -80,7 +84,7 @@ public class FuchoKariSanteiFukaBatch {
     public FukaJohoTempEntity 賦課通情報編集(FlexibleYear 調定年度, HihokenshaDaicho 資格情報, DbT2001ChoshuHohoEntity 徴収方法,
             List<SeikatsuHogoJukyusha> 生保の情報, List<RoreiFukushiNenkinJukyusha> 老齢の情報, Decimal 計算用保険料,
             RString 区分, FukaJohoTempEntity 更正前賦課情報, FukaJohoTempEntity 前年度賦課情報, RString 保険料段階_段階区分,
-            TokuteiKozaRelateEntity 口座Entity) {
+            TokuteiKozaRelateEntity 口座Entity, TsuchishoNo 通知書番号) {
         FukaJohoTempEntity 賦課情報 = new FukaJohoTempEntity();
         賦課情報.setShikakuShutokuYMD(資格情報.get第1号資格取得年月日());
         賦課情報.setShikakuShutokuJiyu(資格情報.get資格取得事由コード());
@@ -88,18 +92,36 @@ public class FuchoKariSanteiFukaBatch {
         賦課情報.setShikakuSoshitsuJiyu(資格情報.get資格喪失事由コード());
         FlexibleDate 賦課年度開始日 = new FlexibleDate(調定年度.getYearValue(), NUM_4, NUM_1);
         FlexibleDate 賦課年度終了日 = new FlexibleDate(調定年度.getYearValue() + NUM_1, NUM_3, NUM_31);
+        FlexibleDate 生保情報_受給開始日;
+        FlexibleDate 生保情報_受給廃止日;
+        FlexibleDate 最も新生保情報_受給開始日 = FlexibleDate.MIN;
         for (SeikatsuHogoJukyusha seikatsuHogoJukyusha : 生保の情報) {
-            if (!賦課年度開始日.isBefore(seikatsuHogoJukyusha.get受給開始日()) && 賦課年度終了日.isBefore(seikatsuHogoJukyusha.get受給廃止日())) {
-                賦課情報.setSeihofujoShurui(seikatsuHogoJukyusha.get受給者番号()); ///
+            生保情報_受給開始日 = seikatsuHogoJukyusha.get受給開始日();
+            生保情報_受給廃止日 = seikatsuHogoJukyusha.get受給廃止日() != null ? seikatsuHogoJukyusha.get受給廃止日() : FlexibleDate.MAX;
+            if (((賦課年度開始日.isBefore(生保情報_受給開始日) && !賦課年度終了日.isBefore(生保情報_受給開始日))
+                    || (賦課年度開始日.isBefore(生保情報_受給廃止日) && !賦課年度終了日.isBefore(生保情報_受給廃止日))
+                    || (!賦課年度開始日.isBefore(生保情報_受給開始日) && 賦課年度終了日.isBefore(生保情報_受給廃止日)))
+                    && 最も新生保情報_受給開始日.isBefore(生保情報_受給開始日)) {
+                賦課情報.setSeihofujoShurui(seikatsuHogoJukyusha.get受給者番号());
                 賦課情報.setSeihoKaishiYMD(seikatsuHogoJukyusha.get受給開始日());
                 賦課情報.setSeihoHaishiYMD(seikatsuHogoJukyusha.get受給廃止日());
+                最も新生保情報_受給開始日 = 生保情報_受給開始日;
             }
         }
+        FlexibleDate 老齢情報_受給開始日;
+        FlexibleDate 老齢情報_受給廃止日;
+        FlexibleDate 最も新老齢情報_受給開始日 = FlexibleDate.MIN;
         for (RoreiFukushiNenkinJukyusha roreiFukushiNenkinJukyusha : 老齢の情報) {
-            if (!賦課年度開始日.isBefore(roreiFukushiNenkinJukyusha.get受給開始年月日())
-                    && 賦課年度終了日.isBefore(roreiFukushiNenkinJukyusha.get受給終了年月日())) {
+            老齢情報_受給開始日 = roreiFukushiNenkinJukyusha.get受給開始年月日();
+            老齢情報_受給廃止日 = roreiFukushiNenkinJukyusha.get受給終了年月日() != null ? roreiFukushiNenkinJukyusha.get受給終了年月日()
+                    : FlexibleDate.MAX;
+            if (((賦課年度開始日.isBefore(老齢情報_受給開始日) && !賦課年度終了日.isBefore(老齢情報_受給開始日))
+                    || (賦課年度開始日.isBefore(老齢情報_受給廃止日) && !賦課年度終了日.isBefore(老齢情報_受給廃止日))
+                    || (!賦課年度開始日.isBefore(老齢情報_受給開始日) && 賦課年度終了日.isBefore(老齢情報_受給廃止日)))
+                    && 最も新老齢情報_受給開始日.isBefore(老齢情報_受給開始日)) {
                 賦課情報.setRonenKaishiYMD(roreiFukushiNenkinJukyusha.get受給開始年月日());
                 賦課情報.setRonenHaishiYMD(roreiFukushiNenkinJukyusha.get受給終了年月日());
+                最も新老齢情報_受給開始日 = 老齢情報_受給開始日;
             }
         }
         KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
@@ -107,7 +129,6 @@ public class FuchoKariSanteiFukaBatch {
         賦課情報.setKoseiM(期月.get月().getコード());
         FukaKeisan 賦課の計算 = FukaKeisan.createInstance();
         賦課情報.setFukaYMD(賦課の計算.findOut賦課基準日(調定年度, 資格情報));
-
         賦課情報.setHokenryoDankai(保険料段階_段階区分);
         if (資格情報.get旧市町村コード() != null && !資格情報.get旧市町村コード().isEmpty()) {
             賦課情報.setFukaShichosonCode(資格情報.get旧市町村コード());
@@ -117,11 +138,58 @@ public class FuchoKariSanteiFukaBatch {
         } else {
             賦課情報.setFukaShichosonCode(資格情報.get市町村コード());
         }
-
+        賦課情報.setFukaYMD(FukaKeisan.createInstance().findOut賦課基準日(調定年度, 資格情報));
         List<Decimal> 普徴期別金額リスト = 調定計算(更正前賦課情報, 計算用保険料, 区分);
+        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(調定年度);
+        KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
+        期月リスト.filtered仮算定期間().toList().get(NUM_1);
         賦課情報.setFuKibetsuGaku01(普徴期別金額リスト.get(0));
         賦課情報.setFuKibetsuGaku02(普徴期別金額リスト.get(1));
         賦課情報.setFuKibetsuGaku03(普徴期別金額リスト.get(2));
+        //１．１０．口座区分を編集する。
+        if (更正前賦課情報 != null) {
+            賦課情報.setChoteiNendo(更正前賦課情報.getChoteiNendo());
+            賦課情報.setFukaNendo(更正前賦課情報.getFukaNendo());
+            賦課情報.setRirekiNo(更正前賦課情報.getRirekiNo() + NUM_1);
+            賦課情報.setHihokenshaNo(更正前賦課情報.getHihokenshaNo());
+            賦課情報.setShikibetsuCode(更正前賦課情報.getShikibetsuCode());
+            賦課情報.setSetaiCode(更正前賦課情報.getSetaiCode());
+            賦課情報.setHokenryoDankai(更正前賦課情報.getHokenryoDankai());
+            賦課情報.setTkKibetsuGaku01(更正前賦課情報.getTkKibetsuGaku01());
+            賦課情報.setTkKibetsuGaku02(更正前賦課情報.getTkKibetsuGaku02());
+            賦課情報.setTkKibetsuGaku03(更正前賦課情報.getTkKibetsuGaku03());
+            賦課情報.setTkKibetsuGaku04(更正前賦課情報.getTkKibetsuGaku04());
+            賦課情報.setTkKibetsuGaku05(更正前賦課情報.getTkKibetsuGaku05());
+            賦課情報.setTkKibetsuGaku06(更正前賦課情報.getTkKibetsuGaku06());
+        } else {
+            賦課情報.setChoteiNendo(調定年度);
+            賦課情報.setFukaNendo(調定年度);
+            賦課情報.setRirekiNo(0);
+            賦課情報.setHihokenshaNo(資格情報.get被保険者番号());
+            賦課情報.setShikibetsuCode(資格情報.get識別コード());
+            賦課情報.setTkKibetsuGaku01(Decimal.ZERO);
+            賦課情報.setTkKibetsuGaku02(Decimal.ZERO);
+            賦課情報.setTkKibetsuGaku03(Decimal.ZERO);
+            賦課情報.setTkKibetsuGaku04(Decimal.ZERO);
+            賦課情報.setTkKibetsuGaku05(Decimal.ZERO);
+            賦課情報.setTkKibetsuGaku06(Decimal.ZERO);
+        }
+        // 通知書番号,調定日時,異動基準日時
+        賦課情報.setTsuchishoNo(通知書番号);
+        賦課情報.setChoteiJiyu1(ChoteiJiyuCode.仮算定賦課.getコード());
+        賦課情報.setChoshuHohoRirekiNo(徴収方法.getRirekiNo());
+        賦課情報.setKyokaisoKubun(境界層区分_非該当);
+        賦課情報.setFuKibetsuGaku04(Decimal.ZERO);
+        賦課情報.setFuKibetsuGaku05(Decimal.ZERO);
+        賦課情報.setFuKibetsuGaku06(Decimal.ZERO);
+        賦課情報.setFuKibetsuGaku07(Decimal.ZERO);
+        賦課情報.setFuKibetsuGaku08(Decimal.ZERO);
+        賦課情報.setFuKibetsuGaku09(Decimal.ZERO);
+        賦課情報.setFuKibetsuGaku10(Decimal.ZERO);
+        賦課情報.setFuKibetsuGaku11(Decimal.ZERO);
+        賦課情報.setFuKibetsuGaku12(Decimal.ZERO);
+        賦課情報.setFuKibetsuGaku13(Decimal.ZERO);
+        賦課情報.setFuKibetsuGaku14(Decimal.ZERO);
         return 賦課情報;
     }
 
@@ -130,14 +198,15 @@ public class FuchoKariSanteiFukaBatch {
         Decimal 金額リスト0 = Decimal.ZERO;
         Decimal 金額リスト1 = Decimal.ZERO;
         FlexibleYear 調定年度 = 更正前賦課情報.getChoteiNendo();
-        RString 仮算定端数調整有無 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定端数調整有無, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        RDate 調定年度開始日 = new RDate(調定年度.getYearValue(), NUM_4, NUM_1);
+        RString 仮算定端数調整有無 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定端数調整有無, 調定年度開始日, SubGyomuCode.DBB介護賦課);
         if (区分_新規.equals(区分)) {
             FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(調定年度);
             KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
             int 期 = 期月リスト.filtered仮算定期間().toList().size();
             int 納期数 = 0;
-            RString 仮算定賦課 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-            RString 仮算定賦課方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+            RString 仮算定賦課 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
+            RString 仮算定賦課方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
 
             if (仮算定賦課方法_02.equals(仮算定賦課方法) || 仮算定賦課方法_04.equals(仮算定賦課方法)
                     || 仮算定賦課方法_10.equals(仮算定賦課方法) || 仮算定賦課方法_11.equals(仮算定賦課方法)) {
@@ -146,17 +215,23 @@ public class FuchoKariSanteiFukaBatch {
                 月期対応取得_普徴 = new FuchoKiUtil(調定年度.minusYear(1));
                 期月リスト = 月期対応取得_普徴.get期月リスト();
                 納期数 = 期月リスト.get最終法定納期().get期AsInt();
+            } else {
+                納期数 = 期月リスト.get最終法定納期().get期AsInt();
+//                int 最終法定納期の期 = 期月リスト.get最終法定納期().get期AsInt();
+//                for (int i = NUM_1; i <= 最終法定納期の期; i++) {
+//                    int 普徴期別金額
+//                    if(期月リスト.get期の最初月(期).)
+//                }
             }
-
-            if (仮算定賦課方法_02.equals(仮算定賦課方法)) {
-                Decimal 期別端数 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数, RDate.getNowDate(),
+            if (仮算定賦課方法_01.equals(仮算定賦課方法)) {
+                Decimal 期別端数 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数, 調定年度開始日,
                         SubGyomuCode.DBB介護賦課).toString());
                 Decimal 期別納付額_端数調整 = 計算用保険料.divide(期別端数).roundDownTo(0).multiply(期別端数);
                 金額リスト0 = 仮算定端数調整有無_あり.equals(仮算定端数調整有無) ? 計算用保険料.roundDownTo(0) : 期別納付額_端数調整;
                 金額リスト1 = 期別納付額_端数調整;
             } else {
-                Decimal 納付額 = 計算用保険料.multiply(期).divide(納期数);
-                Decimal 期別納付額 = 納付額.divide(期);
+                Decimal 納付額 = 計算用保険料.multiply(期).divide(納期数).roundDownTo(0);
+                Decimal 期別納付額 = 納付額.divide(期).roundDownTo(0);
                 Decimal 期別納付額_端数調整 = 期別納付額;
                 金額リスト0 = 仮算定端数調整有無_あり.equals(仮算定端数調整有無)
                         ? 期別納付額_端数調整.add(納付額).subtract(期別納付額_端数調整.multiply(期)) : 期別納付額_端数調整;
@@ -177,9 +252,9 @@ public class FuchoKariSanteiFukaBatch {
                 }
             }
             Decimal 期別納付額 = 六月より前の普徴仮算定金額.divide(六月より前仮期数);
-            Decimal 期別端数 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数, RDate.getNowDate(),
+            Decimal 期別端数 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数, 調定年度開始日,
                     SubGyomuCode.DBB介護賦課).toString());
-            Decimal 期別納付額_端数調整 = 計算用保険料.divide(期別端数).roundDownTo(0).multiply(期別端数);
+            Decimal 期別納付額_端数調整 = 期別納付額.divide(期別端数).roundDownTo(0).multiply(期別端数);
             if (仮算定端数調整有無_あり.equals(仮算定端数調整有無)) {
                 金額リスト0 = 期別納付額_端数調整.add(六月より前の普徴仮算定金額).subtract(期別納付額_端数調整.multiply(六月より前仮期数));
                 金額リスト1 = 期別納付額_端数調整;
@@ -195,7 +270,7 @@ public class FuchoKariSanteiFukaBatch {
             普徴期別金額リスト.add(金額リスト0);
             普徴期別金額リスト.add(金額リスト1);
             普徴期別金額リスト.add(金額リスト1);
-        } else if (期月.get(0).get月AsInt() == NUM_5) {
+        } else {
             普徴期別金額リスト.add(金額リスト0);
             普徴期別金額リスト.add(金額リスト1);
             普徴期別金額リスト.add(Decimal.ZERO);

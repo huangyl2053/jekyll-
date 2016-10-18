@@ -14,9 +14,6 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.csv.TokubetsuChoshuDoteiIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiIchiranEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshudoteiichiran.TokubetsuChoshuDoteiIchiranSource;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
@@ -31,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -93,16 +89,13 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
             通知内容コード = TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード();
         }
         parameter.set通知内容コード(通知内容コード);
-        IShikibetsuTaishoPSMSearchKey atenaKey = new ShikibetsuTaishoPSMSearchKeyBuilder(
-                GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).build();
-        parameter.setAtenaKey(atenaKey);
     }
 
     @Override
     protected void createWriter() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200031.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), csvファイル名);
         eucCsvWriter = BatchWriters.csvWriter(TokubetsuChoshuDoteiIchiranCSVEntity.class).

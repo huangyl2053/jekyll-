@@ -29,15 +29,12 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -146,13 +143,6 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
      * @return DBD492001_NinteiKekkaInfoUploadParameter
      */
     public DBD492001_NinteiKekkaInfoUploadParameter toParameter() {
-        List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(共有ファイル名);
-        RDateTime sharedFileId = RDateTime.now();
-        for (UzT0885SharedFileEntryEntity sharedFile : sharedFiles) {
-            sharedFileId = sharedFile.getSharedFileId();
-        }
-        FilesystemName filesystemName = new FilesystemName(共有ファイル名);
-        SharedFileEntryDescriptor sfed = new SharedFileEntryDescriptor(filesystemName, sharedFileId);
         DBD492001_NinteiKekkaInfoUploadParameter parameter = new DBD492001_NinteiKekkaInfoUploadParameter();
         if (div.getRadDataSelect().getSelectedKey().equals(new RString("key0"))) {
             parameter.set取込みデータ区分(new RString("1"));

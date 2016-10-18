@@ -294,7 +294,7 @@
         <result property="juminShubetsuCode" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
-        <result property="zenkokuJushoCode" column="zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
+        <result property="choikiCode" column="choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
         <result property="gyoseikuCode" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
         <result property="ichiranBiko" column="ichiranBiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jikoFutanGakuHoseiJissi" column="jikoFutanGakuHoseiJissi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -532,7 +532,7 @@
          "KogakugassanJikofutangakuInfoHoseiTemp"."juminShubetsuCode" as "juminShubetsuCode",
          "KogakugassanJikofutangakuInfoHoseiTemp"."shichosonCode" as "shichosonCode",
         "KogakugassanJikofutangakuInfoHoseiTemp"."yubinNo" as "yubinNo",
-        "KogakugassanJikofutangakuInfoHoseiTemp"."zenkokuJushoCode" as "zenkokuJushoCode",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."choikiCode" as "choikiCode",
          "KogakugassanJikofutangakuInfoHoseiTemp"."gyoseikuCode" as "gyoseikuCode",
          "KogakugassanJikofutangakuInfoHoseiTemp"."jikoFutanGakuHoseiJissi" as "jikoFutanGakuHoseiJissi",
          "KogakugassanJikofutangakuInfoHoseiTemp"."kogakuShikyuGakuGakuHoseiJissi" as "kogakuShikyuGakuGakuHoseiJissi",

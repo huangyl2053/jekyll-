@@ -395,9 +395,9 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
             if (entity.get前回認定結果().getKetteiYMD() != null && !entity.get前回認定結果().getKetteiYMD().isEmpty()) {
                 csvEntity.set前回_決定年月日(entity.get前回認定結果().getKetteiYMD().seireki().toDateString());
             }
-            if (KetteiKubun.承認する.getコード().endsWith(entity.get前回認定結果().getKetteiKubun())) {
+            if (KetteiKubun.承認する.getコード().equals(entity.get前回認定結果().getKetteiKubun())) {
                 csvEntity.set前回_決定区分(決定区分_承認);
-            } else if (KetteiKubun.承認しない.getコード().endsWith(entity.get前回認定結果().getKetteiKubun())) {
+            } else if (KetteiKubun.承認しない.getコード().equals(entity.get前回認定結果().getKetteiKubun())) {
                 csvEntity.set前回_決定区分(決定区分_却下);
             } else {
                 csvEntity.set前回_決定区分(RString.EMPTY);

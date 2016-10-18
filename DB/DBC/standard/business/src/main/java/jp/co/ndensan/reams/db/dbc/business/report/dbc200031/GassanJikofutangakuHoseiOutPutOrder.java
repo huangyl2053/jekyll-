@@ -20,6 +20,10 @@ public enum GassanJikofutangakuHoseiOutPutOrder implements IReportItems {
      */
     被保険者番号("0104", "被保険者番号", "\"FutangakuTaishoshaTemp\".\"hihokenshaNo\""),
     /**
+     * 申請年月日
+     */
+    申請年月日("0333", "申請年月日", "\"FutangakuTaishoshaTemp\".\"shinseiYMD\""),
+    /**
      * 対象年度
      */
     対象年度("0334", "対象年度", "\"FutangakuTaishoshaTemp\".\"taishoNendo\""),
@@ -35,6 +39,14 @@ public enum GassanJikofutangakuHoseiOutPutOrder implements IReportItems {
      * 市町村コード
      */
     市町村コード("0016", "市町村コード", "\"FutangakuTaishoshaTemp\".\"shichosonCode\""),
+    /**
+     * 氏名５０音カナ
+     */
+    氏名５０音カナ("0010", "氏名５０音カナ", "\"FutangakuTaishoshaTemp\".\"hihokenshaShimeiKana\""),
+    /**
+     * 町域コード
+     */
+    町域コード("0002", "町域コード", "\"FutangakuTaishoshaTemp\".\"choikiCode\""),
     /**
      * 行政区コード
      */

@@ -87,18 +87,15 @@
         </if>
         <if test="is被保険者全員以外">
             <if test="is受給認定申請中者チェックオン">
-                INNER JOIN rgdb."DbV4001JukyushaDaicho"
-                ON "shinseiJokyoKubun" = '0'
+                AND  "DbV4001JukyushaDaicho"."shinseiJokyoKubun" = '0'
             </if>
             <if test="is受給認定日抽出チェックオン">
-                INNER JOIN rgdb."DbV4001JukyushaDaicho"
-                ON #{受給認定日抽出の開始} <![CDATA[<=]]> "ninteiYMD"
-                AND "ninteiYMD" <![CDATA[<=]]>#{受給認定日抽出の終了}
+                AND #{受給認定日抽出の開始} <![CDATA[<=]]> "DbV4001JukyushaDaicho"."ninteiYMD"
+                AND "DbV4001JukyushaDaicho"."ninteiYMD" <![CDATA[<=]]>#{受給認定日抽出の終了}
             </if>
             <if test="is認定有効終了日抽出チェックオン">
-                INNER JOIN rgdb."DbV4001JukyushaDaicho"
-                ON #{認定有効終了日抽出の開始} <![CDATA[<=]]> "ninteiYukoKikanShuryoYMD"
-                AND "ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> #{認定有効終日抽出の終了} 	
+                AND #{認定有効終了日抽出の開始} <![CDATA[<=]]> "DbV4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD"
+                AND "DbV4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> #{認定有効終日抽出の終了} 	
             </if>
         </if>
         <if test="is保険料完納者も出力チェックオン">
