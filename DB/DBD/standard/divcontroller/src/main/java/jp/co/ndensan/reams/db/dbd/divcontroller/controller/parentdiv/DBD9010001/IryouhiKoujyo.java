@@ -155,22 +155,23 @@ public class IryouhiKoujyo {
         ViewStateHolder.put(ViewStateKeys.状態, 追加);
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().setSelectedKey(IryoHiKojoNaiyo.主治医意見書確認書.getコード());
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getTorokuYYMMDD().setValue(RDate.getNowDate());
+        div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().setReadOnly(false);
         return ResponseData.of(div).setState(DBD9010001StateName.主治医意見書確認書);
     }
 
     /**
-     * 対象年フォーカスアウトイベント。
+     * 対象年onChangeイベント。
      *
      * @param div IryouhiKoujyoDiv
      * @return ResponseData<IryouhiKoujyoDiv>
      */
-    public ResponseData<IryouhiKoujyoDiv> onBlur_TaisyoYY(IryouhiKoujyoDiv div) {
-        if (div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().getValue() == null) {
+    public ResponseData<IryouhiKoujyoDiv> onChange_TaisyoYY(IryouhiKoujyoDiv div) {
+        if (div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().getSelectedKey().isEmpty()) {
             return ResponseData.of(div).respond();
         }
         TaishoshaKey 引き継ぎEntity = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         RString 被保険者番号 = 引き継ぎEntity.get被保険者番号().value();
-        RString 対象年 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().getValue().toDateString();
+        RString 対象年 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().getSelectedKey();
         IryoHiKojoKakuninSinsei iryoHiKojoKakuninSinsei = IryoHiKojoKakuninSinsei.createIntance();
         FlexibleDate 治医意見書受領年月日 = iryoHiKojoKakuninSinsei.getJukyusha(被保険者番号, 対象年).get主治医意見書受領年月日();
         FlexibleDate 認定有効期間終了年月日 = iryoHiKojoKakuninSinsei.getJukyusha(被保険者番号, 対象年).get認定有効期間終了年月日();
@@ -239,7 +240,7 @@ public class IryouhiKoujyo {
         }
         if (!div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().getReadOnly()) {
             List<IryohiKojyoItiranDataGrid_Row> dataSource = div.getIryohiKojyoItiran().getIryohiKojyoItiranDataGrid().getDataSource();
-            RDate 対象年 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().getValue();
+            RDate 対象年 = new RDate(div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().getSelectedKey().toString());
             RString データ区分 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().getSelectedKey();
             for (IryohiKojyoItiranDataGrid_Row row : dataSource) {
                 if (row.getHiddenCodeKubun().equals(データ区分) && row.getHiddentaisyouYY().getValue().equals(対象年)) {

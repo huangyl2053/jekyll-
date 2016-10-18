@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsu
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV4001JukyushaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
+import jp.co.ndensan.reams.ua.uax.business.core.jusho.EditedJusho;
 import jp.co.ndensan.reams.ua.uax.business.core.jusho.JushoEditorBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -233,7 +234,8 @@ public class IryoHiKojoKakuninSinsei {
 
         IKojin 宛名情報 = getAtena_Iryohikojyo(識別コード);
         if (宛名情報 == null || JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(管内住所編集_編集方法)) {
-            return null;
+            EditedJusho 編集後住所 = null;
+            return setおむつ使用証明書Entity(宛名情報, 編集後住所);
         }
         JushoEditorBuilder jushoEditorBuilder = new JushoEditorBuilder(宛名情報.get住所());
         if (表示する.equals(管内住所編集_都道府県名付与有無)) {
@@ -266,8 +268,9 @@ public class IryoHiKojoKakuninSinsei {
             }
         }
         jushoEditorBuilder.set行政区(宛名情報.get行政区画().getGyoseiku());
+        EditedJusho 編集後住所 = jushoEditorBuilder.build().editJusho();
 
-        return setおむつ使用証明書Entity(宛名情報, jushoEditorBuilder);
+        return setおむつ使用証明書Entity(宛名情報, 編集後住所);
     }
 
     /**
@@ -516,21 +519,26 @@ public class IryoHiKojoKakuninSinsei {
         return builder.<T>create();
     }
 
-    private OmutsusiyoSyomeishoEntity setおむつ使用証明書Entity(IKojin 宛名情報, JushoEditorBuilder jushoEditorBuilder) {
+    private OmutsusiyoSyomeishoEntity setおむつ使用証明書Entity(IKojin 宛名情報, EditedJusho 編集後住所) {
         OmutsusiyoSyomeishoEntity おむつ使用証明書Entity = new OmutsusiyoSyomeishoEntity();
-        RString 編集後住所 = jushoEditorBuilder.build().editJusho().get編集後住所All();
-        if (編集後住所.length() <= サーティ) {
-            おむつ使用証明書Entity.set住所(編集後住所);
-            おむつ使用証明書Entity.set住所１(RString.EMPTY);
-            おむつ使用証明書Entity.set住所２(RString.EMPTY);
-        } else if (編集後住所.length() <= シックスティ) {
-            おむつ使用証明書Entity.set住所(RString.EMPTY);
-            おむつ使用証明書Entity.set住所１(編集後住所.substring(0, サーティ));
-            おむつ使用証明書Entity.set住所２(編集後住所.substring(サーティ));
-        } else {
-            おむつ使用証明書Entity.set住所(RString.EMPTY);
-            おむつ使用証明書Entity.set住所１(編集後住所.substring(0, サーティ));
-            おむつ使用証明書Entity.set住所２(編集後住所.substring(サーティ, シックスティ));
+        if (編集後住所 != null) {
+            RString 完全な住所 = 編集後住所.get編集後住所All();
+            RString 方書より前までの住所 = 編集後住所.get編集後住所方書前();
+            RString 方書以降の住所 = 編集後住所.get編集後住所方書前();
+            if (完全な住所.length() <= サーティ) {
+                おむつ使用証明書Entity.set住所(完全な住所);
+                おむつ使用証明書Entity.set住所１(RString.EMPTY);
+                おむつ使用証明書Entity.set住所２(RString.EMPTY);
+            } else if (方書より前までの住所.length() <= サーティ
+                    && 方書以降の住所.length() <= サーティ) {
+                おむつ使用証明書Entity.set住所(RString.EMPTY);
+                おむつ使用証明書Entity.set住所１(方書より前までの住所);
+                おむつ使用証明書Entity.set住所２(方書以降の住所);
+            } else {
+                おむつ使用証明書Entity.set住所(RString.EMPTY);
+                おむつ使用証明書Entity.set住所１(完全な住所.substring(0, サーティ));
+                おむつ使用証明書Entity.set住所２(完全な住所.substring(サーティ, 完全な住所.length() < シックスティ ? 完全な住所.length() : シックスティ));
+            }
         }
         RString 氏名 = RString.EMPTY;
         if (宛名情報.get住民種別().equals(JuminShubetsu.日本人) || 宛名情報.get住民種別().equals(JuminShubetsu.住登外個人_日本人)) {

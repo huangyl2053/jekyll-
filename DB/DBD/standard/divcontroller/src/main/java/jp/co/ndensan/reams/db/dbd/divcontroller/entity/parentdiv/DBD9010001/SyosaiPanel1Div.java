@@ -28,7 +28,7 @@ public class SyosaiPanel1Div extends Panel {
     @JsonProperty("torokuYYMMDD")
     private TextBoxDate torokuYYMMDD;
     @JsonProperty("TaisyoYY")
-    private TextBoxDate TaisyoYY;
+    private DropDownList TaisyoYY;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -95,7 +95,7 @@ public class SyosaiPanel1Div extends Panel {
      * @return TaisyoYY
      */
     @JsonProperty("TaisyoYY")
-    public TextBoxDate getTaisyoYY() {
+    public DropDownList getTaisyoYY() {
         return TaisyoYY;
     }
 
@@ -104,7 +104,7 @@ public class SyosaiPanel1Div extends Panel {
      * @param TaisyoYY TaisyoYY
      */
     @JsonProperty("TaisyoYY")
-    public void setTaisyoYY(TextBoxDate TaisyoYY) {
+    public void setTaisyoYY(DropDownList TaisyoYY) {
         this.TaisyoYY = TaisyoYY;
     }
 

@@ -19,9 +19,12 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010001.Iryo
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010001.IryouhiKoujyoDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.basic.IryohiKojoManager;
 import jp.co.ndensan.reams.db.dbd.service.core.iryohikojokakuninsinsei.IryoHiKojoKakuninSinsei;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -34,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
@@ -81,6 +85,30 @@ public class IryouhiKoujyoHandler {
         div.getIryohiKojyoToroku().getKaigoShikakuKihonChildDiv().initialize(引き継ぎEntity.get被保険者番号());
         initGrid(医療費控除リスト);
 
+        RDate 基準日 = RDate.getNowDate();
+        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, 基準日, SubGyomuCode.DBB介護賦課);
+        RString 当初年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, 基準日, SubGyomuCode.DBB介護賦課);
+        FlexibleYear 最小対象年 = new FlexibleYear(当初年度);
+        FlexibleYear 調定年度の翌年 = new FlexibleYear(調定年度).plusYear(1);
+        if (!医療費控除リスト.isEmpty()) {
+            FlexibleYear 医療費控除データの最小対象年 = 医療費控除リスト.get(医療費控除リスト.size() - 1).get控除対象年();
+            if (医療費控除データの最小対象年.isBefore(最小対象年)) {
+                最小対象年 = 医療費控除データの最小対象年;
+            }
+        }
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        KeyValueDataSource emptyData = new KeyValueDataSource();
+        emptyData.setKey(RString.EMPTY);
+        emptyData.setValue(RString.EMPTY);
+        dataSource.add(emptyData);
+        for (int i = 最小対象年.getYearValue(); i <= 調定年度の翌年.getYearValue(); i++) {
+            KeyValueDataSource data = new KeyValueDataSource();
+            data.setKey(new RString(i));
+            data.setValue(new FlexibleYear(new RString(i)).wareki().toDateString());
+            dataSource.add(data);
+        }
+        div.getIryohiKojyoSyosai().getTaisyoYY().setDataSource(dataSource);
+
         RealInitialLocker.lock(new LockingKey(DB.concat(被保険者番号.value()).concat(医療費控除登録)));
         AccessLogger.log(AccessLogType.照会, PersonalData.of(引き継ぎEntity.get識別コード(),
                 ExpandedInformation.newBuilder().code(new Code("003")).name(new RString("被保険者番号")).value(被保険者番号).build()));
@@ -95,7 +123,7 @@ public class IryouhiKoujyoHandler {
         RString データ区分 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().getSelectedKey();
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getSinseYYMMDD().clearValue();
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getTorokuYYMMDD().clearValue();
-        div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().clearValue();
+        div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().setSelectedKey(RString.EMPTY);
 
         if (IryoHiKojoNaiyo.主治医意見書確認書.getコード().equals(データ区分)) {
             div.getIryohiKojyoSyosai().getSyosaiPanel2().getSakuseYYMMDD().clearValue();
@@ -119,7 +147,7 @@ public class IryouhiKoujyoHandler {
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().setSelectedKey(データ区分);
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getSinseYYMMDD().setValue(申請日);
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getTorokuYYMMDD().setValue(登録日);
-        div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().setValue(対象年);
+        div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().setSelectedKey(対象年.getYear().toDateString());
     }
 
     /**
@@ -140,7 +168,7 @@ public class IryouhiKoujyoHandler {
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().setSelectedKey(データ区分);
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getSinseYYMMDD().setValue(申請日);
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getTorokuYYMMDD().setValue(登録日);
-        div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().setValue(対象年);
+        div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().setSelectedKey(対象年.getYear().toDateString());
         div.getIryohiKojyoSyosai().getSyosaiPanel2().getSakuseYYMMDD().setValue(主治医意見書作成日);
         div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD().setValue(認定期間_開始日);
         div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteEndYYMMDD().setValue(認定期間_終了日);
@@ -155,7 +183,7 @@ public class IryouhiKoujyoHandler {
     public void init詳細エリア() {
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getSinseYYMMDD().clearValue();
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getTorokuYYMMDD().clearValue();
-        div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().clearValue();
+        div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().setSelectedKey(RString.EMPTY);
         div.getIryohiKojyoSyosai().getSyosaiPanel2().getSakuseYYMMDD().clearValue();
         div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD().clearValue();
         div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteEndYYMMDD().clearValue();
@@ -165,7 +193,7 @@ public class IryouhiKoujyoHandler {
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().setReadOnly(false);
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getSinseYYMMDD().setReadOnly(false);
         div.getIryohiKojyoSyosai().getSyosaiPanel1().getTorokuYYMMDD().setReadOnly(false);
-        div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().setReadOnly(false);
+        div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().setReadOnly(true);
         div.getIryohiKojyoSyosai().getSyosaiPanel2().getSakuseYYMMDD().setReadOnly(false);
         div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteFromYYMMDD().setReadOnly(false);
         div.getIryohiKojyoSyosai().getSyosaiPanel2().getNinteEndYYMMDD().setReadOnly(false);
@@ -343,7 +371,7 @@ public class IryouhiKoujyoHandler {
         RString データ区分 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getKubunRadioButton().getSelectedKey();
         RDate 申請日 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getSinseYYMMDD().getValue();
         RDate 登録日 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getTorokuYYMMDD().getValue();
-        RDate 対象年 = div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().getValue();
+        RDate 対象年 = new RDate(div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().getSelectedKey().toString());
         row.setNaiyou(IryoHiKojoNaiyo.toValue(データ区分).get名称());
         row.setHiddenCodeKubun(データ区分);
         row.setSinseiDD(申請日.wareki().toDateString());
