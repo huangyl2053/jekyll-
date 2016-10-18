@@ -246,7 +246,7 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
             if (BunshoNoHatsubanHoho.自動採番.getCode().equals(bunshoNo.get文書番号発番方法())) {
                 countedItem = Saiban.get(SubGyomuCode.DBD介護受給, GENERICKEY, FlexibleDate.getNowDate().getNendo(), 非旧措置者人数);
                 文書番号 = new RString(String.valueOf(countedItem.next()));
-            } else if (BunshoNoHatsubanHoho.手入力.getCode().equals(bunshoNo27.get文書番号発番方法())) {
+            } else if (BunshoNoHatsubanHoho.手入力.getCode().equals(bunshoNo.get文書番号発番方法())) {
                 throw new SystemException("文書番号の採番方法は手入力、採番できないので処理中止。");
             }
         } else {
