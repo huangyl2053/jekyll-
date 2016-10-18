@@ -171,20 +171,18 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     @BatchWriter
     private BatchEntityCreatedTempTableWriter taiShoTableWriter;
 
-    @BatchWriter
     private IBatchReportWriterWithCheckList<KijunShunyugakuTekiyoOshiraseTsuchishoSource> dBC100063ReportWriter1;
     private ReportSourceWriter<KijunShunyugakuTekiyoOshiraseTsuchishoSource> dBC100063SourceWriter1;
-    @BatchWriter
+
     private BatchReportWriter<KijunShunyugakuTekiyoShinseishoSource> dBC100064ReportWriter1;
     private ReportSourceWriter<KijunShunyugakuTekiyoShinseishoSource> dBC100064SourceWriter1;
-    @BatchWriter
+
     private IBatchReportWriterWithCheckList<KijunShunyugakuTekiyoOshiraseTsuchishoSource> dBC100063ReportWriter0;
     private ReportSourceWriter<KijunShunyugakuTekiyoOshiraseTsuchishoSource> dBC100063SourceWriter0;
-    @BatchWriter
+
     private BatchReportWriter<KijunShunyugakuTekiyoShinseishoSource> dBC100064ReportWriter0;
     private ReportSourceWriter<KijunShunyugakuTekiyoShinseishoSource> dBC100064SourceWriter0;
 
-    @BatchWriter
     private BatchReportWriter<KijunShunyugakuTekiyoShinseishoHakkoIchiranSource> dBC200088ReportWriter;
     private ReportSourceWriter<KijunShunyugakuTekiyoShinseishoHakkoIchiranSource> dBC200088SourceWriter;
 
@@ -242,31 +240,33 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     protected void createWriter() {
         this.taiShoTableWriter = new BatchEntityCreatedTempTableWriter(TABLE_NAME, TaishoSetaiinEntity.class);
 
-        ICheckListInfo info = CheckListInfoFactory.createInstance(SubGyomuCode.DBC介護給付,
-                parameter.get市町村コード(), parameter.get市町村名());
-        CheckListLineItemSet pairs = CheckListLineItemSet.of(特定項目.class, チェック項目.class);
+        if (ShinseishoHakkoChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())) {
+            ICheckListInfo info = CheckListInfoFactory.createInstance(SubGyomuCode.DBC介護給付,
+                    parameter.get市町村コード(), parameter.get市町村名());
+            CheckListLineItemSet pairs = CheckListLineItemSet.of(特定項目.class, チェック項目.class);
+            dBC100063ReportWriter1 = BatchWriters
+                    .batchReportWriterWithCheckList(KijunShunyugakuTekiyoOshiraseTsuchishoSource.class)
+                    .checkListInfo(info)
+                    .checkListLineItemSet(pairs)
+                    .reportId(ReportIdDBC.DBC100063.getReportId().value())
+                    .build();
 
-        dBC100063ReportWriter1 = BatchWriters
-                .batchReportWriterWithCheckList(KijunShunyugakuTekiyoOshiraseTsuchishoSource.class)
-                .checkListInfo(info)
-                .checkListLineItemSet(pairs)
-                .reportId(ReportIdDBC.DBC100063.getReportId().value())
-                .build();
+            dBC100063SourceWriter1 = new ReportSourceWriter<>(dBC100063ReportWriter1);
+            dBC100064ReportWriter1 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
+            dBC100064SourceWriter1 = new ReportSourceWriter<>(dBC100064ReportWriter1);
 
-        dBC100063SourceWriter1 = new ReportSourceWriter<>(dBC100063ReportWriter1);
-        dBC100064ReportWriter1 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
-        dBC100064SourceWriter1 = new ReportSourceWriter<>(dBC100064ReportWriter1);
+            dBC100063ReportWriter0 = BatchWriters
+                    .batchReportWriterWithCheckList(KijunShunyugakuTekiyoOshiraseTsuchishoSource.class)
+                    .checkListInfo(info)
+                    .checkListLineItemSet(pairs)
+                    .reportId(ReportIdDBC.DBC100063.getReportId().value())
+                    .build();
+            dBC100063SourceWriter0 = new ReportSourceWriter<>(dBC100063ReportWriter0);
 
-        dBC100063ReportWriter0 = BatchWriters
-                .batchReportWriterWithCheckList(KijunShunyugakuTekiyoOshiraseTsuchishoSource.class)
-                .checkListInfo(info)
-                .checkListLineItemSet(pairs)
-                .reportId(ReportIdDBC.DBC100063.getReportId().value())
-                .build();
-        dBC100063SourceWriter0 = new ReportSourceWriter<>(dBC100063ReportWriter0);
+            dBC100064ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
+            dBC100064SourceWriter0 = new ReportSourceWriter<>(dBC100064ReportWriter0);
 
-        dBC100064ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
-        dBC100064SourceWriter0 = new ReportSourceWriter<>(dBC100064ReportWriter0);
+        }
 
         PageBreaker<KijunShunyugakuTekiyoShinseishoHakkoIchiranSource> breaker = new KijunShunyugakuTekiyoShinseishoHakkoIchiranPageBreak(改頁項目リスト);
         dBC200088ReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200088.getReportId().value()).addBreak(breaker).create();
@@ -284,17 +284,47 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).
                 build();
-
-        Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
-                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), this.parameter.get作成日());
-        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        確認書認証者情報 = NinshoshaSourceBuilderFactory.createInstance(認証者, 地方公共団体, dBC100063SourceWriter1.getImageFolderPath(),
-                new RDate(this.parameter.get作成日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし).buildSource();
-
     }
 
     @Override
     protected void process(CreateTaishoSetaiyinEntity entity) {
+        if (!ShinseishoHakkoChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())
+                && (null == dBC100063SourceWriter1 && null == dBC100064SourceWriter1)
+                && RSTRING_1.equals(entity.get対象世帯員().getShuturyokuUmu())) {
+            ICheckListInfo info = CheckListInfoFactory.createInstance(SubGyomuCode.DBC介護給付,
+                    parameter.get市町村コード(), parameter.get市町村名());
+            CheckListLineItemSet pairs = CheckListLineItemSet.of(特定項目.class, チェック項目.class);
+
+            dBC100063ReportWriter1 = BatchWriters
+                    .batchReportWriterWithCheckList(KijunShunyugakuTekiyoOshiraseTsuchishoSource.class)
+                    .checkListInfo(info)
+                    .checkListLineItemSet(pairs)
+                    .reportId(ReportIdDBC.DBC100063.getReportId().value())
+                    .build();
+
+            dBC100063SourceWriter1 = new ReportSourceWriter<>(dBC100063ReportWriter1);
+            dBC100064ReportWriter1 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
+            dBC100064SourceWriter1 = new ReportSourceWriter<>(dBC100064ReportWriter1);
+
+            dBC100063ReportWriter0 = BatchWriters
+                    .batchReportWriterWithCheckList(KijunShunyugakuTekiyoOshiraseTsuchishoSource.class)
+                    .checkListInfo(info)
+                    .checkListLineItemSet(pairs)
+                    .reportId(ReportIdDBC.DBC100063.getReportId().value())
+                    .build();
+            dBC100063SourceWriter0 = new ReportSourceWriter<>(dBC100063ReportWriter0);
+
+            dBC100064ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
+            dBC100064SourceWriter0 = new ReportSourceWriter<>(dBC100064ReportWriter0);
+
+            Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
+                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), this.parameter.get作成日());
+            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+            確認書認証者情報 = NinshoshaSourceBuilderFactory.createInstance(認証者, 地方公共団体, dBC100063SourceWriter1.getImageFolderPath(),
+                    new RDate(this.parameter.get作成日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし).buildSource();
+
+        }
+
         KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 申請一覧Entity;
         if (0 == index) {
             this.exEntity = entity;
@@ -381,6 +411,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 dbc64Report.writeBy(dBC100064SourceWriter1);
                 index164++;
             }
+
         } else {
             対象世帯員.setInnjiGirisiamojiKubun(false);
             if (this.parameter.getお知らせ通知書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {

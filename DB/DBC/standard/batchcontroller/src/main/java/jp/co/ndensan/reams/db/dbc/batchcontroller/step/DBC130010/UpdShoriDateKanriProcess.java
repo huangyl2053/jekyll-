@@ -22,14 +22,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class UpdShoriDateKanriProcess extends SimpleBatchProcessBase {
 
     private UpdShoriDateKanriProcessParameter processParameter;
-    private static final RString 処理名 = new RString("後期高齢者情報取り込み");
     private static final RString 零零 = new RString("00");
 
     @Override
     protected void process() {
         for (RString 市町村識別ID : processParameter.get処理対象市町村()) {
             UpdShoriDateKanriMybatisParameter mybatisParameter = new UpdShoriDateKanriMybatisParameter();
-            mybatisParameter.set処理名(処理名);
+            mybatisParameter.set処理名(processParameter.get処理名());
             mybatisParameter.set処理枝番(零零.concat(市町村識別ID));
             RDateTime 処理日時 = RDateTime.parse(processParameter.get処理日時().toString());
             mybatisParameter.set基準年月日(処理日時.getDate().toDateString());

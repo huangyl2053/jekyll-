@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_KokuhoShikakuIdoInParameter> {
 
     private RString 市町村識別ID;
-    private boolean 文言_設定_FLAG;
+    private static final RString 処理名 = new RString("国保情報取り込み");
 
     private static final String INS_TORIKOMIKOKUHOJYOHOTEMP = "InsTorikomiKokuhoJyohoTempProcess";
     private static final String UPD_TORIKOMIKOKUHOJYOHOTEMP2 = "UpdTorikomiKokuhoJyohoTemp2Process";
@@ -53,14 +53,8 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
             市町村識別ID = value;
             executeStep(INS_TORIKOMIKOKUHOJYOHOTEMP);
         }
-        文言_設定_FLAG = getResult(Boolean.class, new RString(INS_TORIKOMIKOKUHOJYOHOTEMP),
-                InsTorikomiKokuhoJyohoTempProcess.OUT_HAS_TARGET_DATA);
         executeStep(UPD_TORIKOMIKOKUHOJYOHOTEMP2);
-        文言_設定_FLAG = getResult(Boolean.class, new RString(UPD_TORIKOMIKOKUHOJYOHOTEMP2),
-                UpdTorikomiKokuhoJyohoTemp2Process.OUT_HAS_TARGET_DATA);
         executeStep(UPD_TORIKOMIKOKUHOJYOHOTEMP3);
-        文言_設定_FLAG = getResult(Boolean.class, new RString(UPD_TORIKOMIKOKUHOJYOHOTEMP3),
-                UpdTorikomiKokuhoJyohoTemp3Process.OUT_HAS_TARGET_DATA);
         executeStep(INS_KOKUHOSHIKAKUJYOHOTEMP);
         executeStep(INS_KOKUHOSHIKAKUJYOHO);
         executeStep(UPD_SHORIDATEKANRI);
@@ -163,8 +157,7 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
                 getParameter().getShoriShichoson(),
                 getParameter().getIfType(),
                 getParameter().getTorikomiKeishiki(),
-                getParameter().getShoriTimestamp(),
-                文言_設定_FLAG);
+                getParameter().getShoriTimestamp());
     }
 
     private UpdTorikomiKokuhoJyohoTemp3ProcessParameter getUpdTorikomiKokuhoJyohoTemp3ProcessParameter() {
@@ -173,8 +166,7 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
                 getParameter().getShoriShichoson(),
                 getParameter().getIfType(),
                 getParameter().getTorikomiKeishiki(),
-                getParameter().getShoriTimestamp(),
-                文言_設定_FLAG);
+                getParameter().getShoriTimestamp());
     }
 
     private InsKokuhoShikakuJyohoTempProcessParameter getInsKokuhoShikakuJyohoTempProcessParameter() {
@@ -183,8 +175,7 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
                 getParameter().getShoriShichoson(),
                 getParameter().getIfType(),
                 getParameter().getTorikomiKeishiki(),
-                getParameter().getShoriTimestamp(),
-                文言_設定_FLAG);
+                getParameter().getShoriTimestamp());
     }
 
     private InsKokuhoShikakuJyohoProcessParameter getInsKokuhoShikakuJyohoProcessParameter() {
@@ -202,6 +193,7 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
                 getParameter().getShoriShichoson(),
                 getParameter().getIfType(),
                 getParameter().getTorikomiKeishiki(),
-                getParameter().getShoriTimestamp());
+                getParameter().getShoriTimestamp(),
+                処理名);
     }
 }

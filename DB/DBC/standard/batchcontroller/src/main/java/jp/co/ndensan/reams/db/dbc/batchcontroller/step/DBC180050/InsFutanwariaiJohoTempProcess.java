@@ -81,8 +81,8 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     @Override
     protected void process(InsFutanwariaiJohoTempResultEntity entity) {
-        if (entity != null) {
-            if (entity.is論理削除フラグ()) {
+        if (entity.get利用者負担割合明細最新Entity() != null) {
+            if (entity.get利用者負担割合明細最新Entity().getMeisailogicalDeletedFlag()) {
                 DbWT1801ShoriKekkaKakuninListEntity 処理結果確認リストEntity = new DbWT1801ShoriKekkaKakuninListEntity();
                 処理結果確認リストEntity.setErrorKubun(エラー区分_負担割合_削除);
                 処理結果確認リストEntity.setHihokenshaNo(entity.get被保険者番号().value());
@@ -100,7 +100,9 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     @Override
     protected void afterExecute() {
-        負担割合情報一時表Writer.insert(負担割合情報一時表);
+        if (isデータ存在()) {
+            負担割合情報一時表Writer.insert(負担割合情報一時表);
+        }
     }
 
     private void get負担割合情報一時表(InsFutanwariaiJohoTempResultEntity entity) {
@@ -121,8 +123,8 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
         負担割合情報一時表.set被保険者番号(entity.get被保険者番号());
         負担割合情報一時表.set年度(年度);
 
-        if (entity.getYukoKaishiYMD() != null
-                && entity.getYukoShuryoYMD() != null) {
+        if (entity.get利用者負担割合明細最新Entity().getYukoKaishiYMD() != null
+                && entity.get利用者負担割合明細最新Entity().getYukoShuryoYMD() != null) {
             FlexibleYearMonth 開始年月 = new FlexibleYearMonth(年度.toDateString().concat(開始月));
             set給付率01(entity, 開始年月);
             set給付率02(entity, 開始年月);
@@ -141,9 +143,9 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     private void set給付率01(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 開始年月) {
         if (is期間中(entity, 開始年月)) {
-            if (壱零.equals(entity.getFutanWariaiKubun())) {
+            if (壱零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率01(九零);
-            } else if (弐零.equals(entity.getFutanWariaiKubun())) {
+            } else if (弐零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率01(八零);
             }
         }
@@ -151,9 +153,9 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     private void set給付率02(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 開始年月) {
         if (is期間中(entity, 開始年月.plusMonth(1))) {
-            if (壱零.equals(entity.getFutanWariaiKubun())) {
+            if (壱零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率02(九零);
-            } else if (弐零.equals(entity.getFutanWariaiKubun())) {
+            } else if (弐零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率02(八零);
             }
         }
@@ -161,9 +163,9 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     private void set給付率03(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 開始年月) {
         if (is期間中(entity, 開始年月.plusMonth(二))) {
-            if (壱零.equals(entity.getFutanWariaiKubun())) {
+            if (壱零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率03(九零);
-            } else if (弐零.equals(entity.getFutanWariaiKubun())) {
+            } else if (弐零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率03(八零);
             }
         }
@@ -171,9 +173,9 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     private void set給付率04(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 開始年月) {
         if (is期間中(entity, 開始年月.plusMonth(三))) {
-            if (壱零.equals(entity.getFutanWariaiKubun())) {
+            if (壱零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率04(九零);
-            } else if (弐零.equals(entity.getFutanWariaiKubun())) {
+            } else if (弐零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率04(八零);
             }
         }
@@ -181,9 +183,9 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     private void set給付率05(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 開始年月) {
         if (is期間中(entity, 開始年月.plusMonth(四))) {
-            if (壱零.equals(entity.getFutanWariaiKubun())) {
+            if (壱零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率05(九零);
-            } else if (弐零.equals(entity.getFutanWariaiKubun())) {
+            } else if (弐零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率05(八零);
             }
         }
@@ -191,9 +193,9 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     private void set給付率06(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 開始年月) {
         if (is期間中(entity, 開始年月.plusMonth(五))) {
-            if (壱零.equals(entity.getFutanWariaiKubun())) {
+            if (壱零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率06(九零);
-            } else if (弐零.equals(entity.getFutanWariaiKubun())) {
+            } else if (弐零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率06(八零);
             }
         }
@@ -201,9 +203,9 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     private void set給付率07(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 開始年月) {
         if (is期間中(entity, 開始年月.plusMonth(六))) {
-            if (壱零.equals(entity.getFutanWariaiKubun())) {
+            if (壱零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率07(九零);
-            } else if (弐零.equals(entity.getFutanWariaiKubun())) {
+            } else if (弐零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率07(八零);
             }
         }
@@ -211,9 +213,9 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     private void set給付率08(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 開始年月) {
         if (is期間中(entity, 開始年月.plusMonth(七))) {
-            if (壱零.equals(entity.getFutanWariaiKubun())) {
+            if (壱零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率08(九零);
-            } else if (弐零.equals(entity.getFutanWariaiKubun())) {
+            } else if (弐零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率08(八零);
             }
         }
@@ -221,9 +223,9 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     private void set給付率09(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 開始年月) {
         if (is期間中(entity, 開始年月.plusMonth(八))) {
-            if (壱零.equals(entity.getFutanWariaiKubun())) {
+            if (壱零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率09(九零);
-            } else if (弐零.equals(entity.getFutanWariaiKubun())) {
+            } else if (弐零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率09(八零);
             }
         }
@@ -231,9 +233,9 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     private void set給付率10(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 開始年月) {
         if (is期間中(entity, 開始年月.plusMonth(九))) {
-            if (壱零.equals(entity.getFutanWariaiKubun())) {
+            if (壱零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率10(九零);
-            } else if (弐零.equals(entity.getFutanWariaiKubun())) {
+            } else if (弐零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率10(八零);
             }
         }
@@ -241,9 +243,9 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     private void set給付率11(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 開始年月) {
         if (is期間中(entity, 開始年月.plusMonth(十))) {
-            if (壱零.equals(entity.getFutanWariaiKubun())) {
+            if (壱零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率11(九零);
-            } else if (弐零.equals(entity.getFutanWariaiKubun())) {
+            } else if (弐零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率11(八零);
             }
         }
@@ -251,9 +253,9 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     private void set給付率12(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 開始年月) {
         if (is期間中(entity, 開始年月.plusMonth(十一))) {
-            if (壱零.equals(entity.getFutanWariaiKubun())) {
+            if (壱零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率12(九零);
-            } else if (弐零.equals(entity.getFutanWariaiKubun())) {
+            } else if (弐零.equals(entity.get利用者負担割合明細最新Entity().getFutanWariaiKubun())) {
                 負担割合情報一時表.set給付率12(八零);
             }
         }
@@ -261,11 +263,15 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
 
     private boolean is期間中(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 年月) {
         FlexibleDate 年月の月末日 = new FlexibleDate(年月.plusMonth(1).toDateString().concat(零壱)).minusDay(1);
-        FlexibleDate 有効開始日 = entity.getYukoKaishiYMD();
-        FlexibleDate 有効終了日 = entity.getYukoShuryoYMD();
+        FlexibleDate 有効開始日 = entity.get利用者負担割合明細最新Entity().getYukoKaishiYMD();
+        FlexibleDate 有効終了日 = entity.get利用者負担割合明細最新Entity().getYukoShuryoYMD();
         if (有効開始日 != null && 有効終了日 != null) {
             return 年月の月末日.isBeforeOrEquals(有効終了日) && 有効開始日.isBeforeOrEquals(年月の月末日);
         }
         return false;
+    }
+
+    private boolean isデータ存在() {
+        return 負担割合情報一時表.get年度() != null && 負担割合情報一時表.get年度() != null;
     }
 }

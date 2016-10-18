@@ -124,6 +124,7 @@ public class KyuhuzissekiJohoSakuseiYoProcess extends BatchProcessBase<Kyuhuziss
         tempTable.set給付実績情報作成区分コード(entity.get給付実績情報作成区分コード());
         tempTable.set被保険者番号(entity.get被保険者番号());
         tempTable.set証記載保険者番号(entity.get証記載保険者番号());
+        tempTable.set通し番号(entity.get通し番号());
         tempTableWriter.insert(tempTable);
     }
 

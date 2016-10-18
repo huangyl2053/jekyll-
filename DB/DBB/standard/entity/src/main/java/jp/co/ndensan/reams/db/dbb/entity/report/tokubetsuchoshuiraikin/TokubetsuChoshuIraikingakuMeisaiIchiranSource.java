@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuiraikin;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
@@ -45,7 +46,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranSource implements IReportSou
     public RString nendoTitle;
     @ReportItem(name = "listUpper_1", length = 20, order = 16)
     public RString listUpper_1;
-    @ReportPerson
+    @ReportPerson(id = "X")
     @ReportItem(name = "listUpper_2", length = 15, order = 17)
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 9, order = 18)
@@ -70,6 +71,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranSource implements IReportSou
     public RString listCenter_6;
     @ReportItem(name = "listCenter_7", length = 15, order = 28)
     public RString listCenter_7;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listLower_1", length = 10, order = 29)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 15, order = 30)

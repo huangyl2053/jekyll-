@@ -41,4 +41,5 @@ public class KyuhuzissekiJohoTempEntity extends DbTableEntityBase<KyuhuzissekiJo
     private Decimal 軽減率;
     private Decimal 軽減後自己負担額;
     private Decimal 高額サービス費用額;
+    private RString 通し番号;
 }

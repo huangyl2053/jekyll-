@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000064.DBC1
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000064.ShinseishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000064.ShinseishoHakkoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000064.ShinseishoHakkoValidationHandler;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -141,7 +140,7 @@ public class ShinseishoHakko {
         parameter.set抽出条件(div.getRadChushutsuJoken().getSelectedKey());
         parameter.set処理年度(new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4)));
         if (div.getTxtHihokenshaNo().getValue() != null) {
-            parameter.set被保険者番号(new HihokenshaNo(div.getTxtHihokenshaNo().getValue().toString()));
+            parameter.set被保険者番号(new RString(div.getTxtHihokenshaNo().getValue().toString()));
         }
         parameter.set世帯員把握基準日(div.getTxtSetaiinHaakuKijunYMD().getValue());
         parameter.set世帯員把握基準日2(世帯員把握基準日2);

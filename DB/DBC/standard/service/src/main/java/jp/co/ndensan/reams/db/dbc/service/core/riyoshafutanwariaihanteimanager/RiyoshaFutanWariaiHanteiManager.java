@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.FutanWa
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihanteimanager.RiyoshaFutanWariaiHanteiManagerResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.riyoshafutanwariaihanteimanager.RiyoshaFutanWariaiHanteiManagerParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiHanteiResult;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.RiyoshaFutanWariaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.RiyoshaFutanWariaiKonkyoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.RiyoshaFutanWariaiMeisaiTempEntity;
@@ -78,7 +79,8 @@ public class RiyoshaFutanWariaiHanteiManager {
     /**
      * 初期化メソッドです。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link RiyoshaFutanWariaiHanteiManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link RiyoshaFutanWariaiHanteiManager}のインスタンス
      */
     public static RiyoshaFutanWariaiHanteiManager createInstance() {
         return InstanceProvider.create(RiyoshaFutanWariaiHanteiManager.class);
@@ -175,9 +177,10 @@ public class RiyoshaFutanWariaiHanteiManager {
                 利用者負担割合割合Tempのマージデータ.add(利用者負担割合根拠Temp);
             }
             set用者負担割合明細Tempのソート(利用者負担割合明細Tempのマージデータ);
-            List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報 = RiyoshaFutanWariaiHantei.
-                    createInstance().futanWariaiHanteiMerge(利用者負担割合明細Tempのマージデータ, 年度);
+            RiyoshaFutanWariaiTempEntity マージResult = RiyoshaFutanWariaiHantei.
+                    createInstance().futanWariaiHanteiMerge(利用者負担割合明細Tempのマージデータ, 利用者負担割合割合Tempのマージデータ, 年度);
             DbT3113RiyoshaFutanWariaiEntity 利用者負担割合entity = new DbT3113RiyoshaFutanWariaiEntity();
+            List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報 = マージResult.get利用者負担割合明細情報();
             if (利用者負担割合明細情報 != null && !利用者負担割合明細情報.isEmpty()) {
                 get利用者負担割合entity(年度, 被保険者番号, 利用者負担割合entity, 利用者負担割合明細情報.get(0));
             }

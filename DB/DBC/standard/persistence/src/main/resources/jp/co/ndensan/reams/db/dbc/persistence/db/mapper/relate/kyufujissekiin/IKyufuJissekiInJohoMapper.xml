@@ -84,6 +84,7 @@
         <result property="給付実績_入力識別名称" column="dbWT1111_入力識別名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="給付実績_情報作成区分コード" column="dbWT1111_情報作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="給付実績_サービス提供年月" column="dbWT1111_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="給付実績_情報作成区分コード" column="dbWT1111_給付実績情報作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="給付実績_給付実績区分" column="dbWT1111_給付実績区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="給付実績_事業所番号" column="dbWT1111_事業所番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="給付実績_整理番号" column="dbWT1111_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

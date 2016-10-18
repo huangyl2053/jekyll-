@@ -125,17 +125,17 @@ public class UpdTaishoSeitaiyinTemp4Process extends BatchProcessBase<UpdTaishoSe
         RString 対象世帯員重複 = 対象世帯員2.getShotaiCode().concat(コンマ).concat(対象世帯員2.getHihokenshaNo().getColumnValue()).concat(コンマ)
                 .concat(対象世帯員2.getShikibetsuCode().getColumnValue());
         if (!対象世帯員重複Set.contains(対象世帯員重複)) {
-            if ((null != 対象世帯員2.getAge() && 対象世帯員2.getAge().compareTo(RSTRING_16) < 0)
+            if ((!RString.isNullOrEmpty(対象世帯員2.getAge()) && 対象世帯員2.getAge().compareTo(RSTRING_16) < 0)
                     && (this.getDecimal(対象世帯員2.getNenkinShunyuGaku())
                     .add(this.getDecimal(対象世帯員2.getSonotanoGoukeiShotokuKingakuGoukei())).compareTo(DECIMAL_38) <= 0)
-                    && (対象世帯員2.getAtenaDateDhubetsu_1231().equals(RSTRING_10) || 対象世帯員2.getAtenaDateDhubetsu_1231().equals(RSTRING_20))) {
+                    && (RSTRING_10.equals(対象世帯員2.getAtenaDateDhubetsu_1231()) || RSTRING_20.equals(対象世帯員2.getAtenaDateDhubetsu_1231()))) {
                 ageLess16++;
             }
 
-            if (null != 対象世帯員2.getAge() && (RSTRING_16.compareTo(対象世帯員2.getAge()) <= 0 && 対象世帯員2.getAge().compareTo(RSTRING_18) <= 0)
+            if (!RString.isNullOrEmpty(対象世帯員2.getAge()) && (RSTRING_16.compareTo(対象世帯員2.getAge()) <= 0 && 対象世帯員2.getAge().compareTo(RSTRING_18) <= 0)
                     && (this.getDecimal(対象世帯員2.getNenkinShunyuGaku())
                     .add(this.getDecimal(対象世帯員2.getSonotanoGoukeiShotokuKingakuGoukei())).compareTo(DECIMAL_38) <= 0)
-                    && (対象世帯員2.getAtenaDateDhubetsu_1231().equals(RSTRING_10) || 対象世帯員2.getAtenaDateDhubetsu_1231().equals(RSTRING_20))) {
+                    && (RSTRING_10.equals(対象世帯員2.getAtenaDateDhubetsu_1231()) || RSTRING_20.equals(対象世帯員2.getAtenaDateDhubetsu_1231()))) {
                 age16_18++;
             }
             対象世帯員重複Set.add(対象世帯員重複);

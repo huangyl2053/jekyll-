@@ -73,7 +73,7 @@ public class JizenShinsakaiShiryoPublicationHandler {
     private void set出力条件の設定() {
         List<RString> 印刷帳票chk = new ArrayList<>();
         List<RString> 印刷審査会資料chk = new ArrayList<>();
-        RString 出力順 = DbBusinessConfig.get(ConfigNameDBE.NCI101ファイル名称, 日期, SubGyomuCode.DBE認定支援);
+        RString 出力順 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料出力順, 日期, SubGyomuCode.DBE認定支援);
         RString 出力スタイル_印刷サイズddl = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料出力スタイル, 日期, SubGyomuCode.DBE認定支援);
         RString 出力スタイル_両面_片面印刷rad = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷タイプ, 日期, SubGyomuCode.DBE認定支援);
         RString 部数 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料部数_委員, 日期, SubGyomuCode.DBE認定支援);

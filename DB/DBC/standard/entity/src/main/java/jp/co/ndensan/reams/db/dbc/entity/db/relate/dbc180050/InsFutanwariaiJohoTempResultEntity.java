@@ -6,12 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,26 +23,5 @@ public class InsFutanwariaiJohoTempResultEntity {
 
     private HihokenshaNo 被保険者番号;
     private FlexibleYear 年度;
-    private int rirekiNo;
-    private boolean hakoFuyoFlag;
-    private boolean shokenFlag;
-    private FlexibleDate hanteiYMD;
-    private RString hanteiKubun;
-    private Code koseiJiyu;
-    private RString hakoKubun;
-    private FlexibleDate hakoYMD;
-    private FlexibleDate kofuYMD;
-    private boolean logicalDeletedFlag;
-    private int edaNo;
-    private RString shikakuKubun;
-    private RString futanWariaiKubun;
-    private FlexibleDate yukoKaishiYMD;
-    private FlexibleDate yukoShuryoYMD;
-    private Decimal honninGoukeiShotokuGaku;
-    private int setaiIchigouHihokenshaSu;
-    private Decimal nenkinShunyuGoukei;
-    private Decimal sonotanoGoukeiShotokuKingakuGoukei;
-    private RString koseiRiyu;
-    private SetaiCode setaiCd;
-    private boolean 論理削除フラグ;
+    private DbV3114RiyoshaFutanWariaiMeisaiEntity 利用者負担割合明細最新Entity;
 }

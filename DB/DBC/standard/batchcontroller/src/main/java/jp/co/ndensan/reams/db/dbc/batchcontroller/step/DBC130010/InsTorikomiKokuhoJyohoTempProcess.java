@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -42,19 +41,10 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
     private InsTorikomiKokuhoJyohoTempProcessParameter processParameter;
     @BatchWriter
     private IBatchTableWriter<TorikomiKokuhoJyohoEntity> torikomiKokuhoJyohoWriter;
-    /**
-     * プロセス戻り値：対象月データありなしフラグ
-     */
-    public static final RString OUT_HAS_TARGET_DATA;
-
-    private OutputParameter<Boolean> 文言_設定_FLAG;
     private boolean 文言設定flag;
-
-    static {
-        OUT_HAS_TARGET_DATA = new RString("文言_設定_FLAG");
-    }
     private TorikomiKokuhoJyohoEntity 取込国保情報Entity;
     private List<LasdecCode> 市町村コードリスト;
+    private static final int 二 = 2;
     private static final int 四 = 4;
     private static final int 五 = 5;
     private static final int 六 = 6;
@@ -62,6 +52,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
     private static final int 十 = 10;
     private static final int 十二 = 12;
     private static final int 十四 = 14;
+    private static final int 十五 = 15;
     private static final int 十六 = 16;
     private static final int 十八 = 18;
     private static final int 二十 = 20;
@@ -140,6 +131,8 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
     private static final RString コード文言_国保世帯離脱日 = new RString("項目設定エラー：国保世帯離脱日");
     private static final RString 文言_資格取得日資格喪失日 = new RString("項目設定エラー：資格取得日＞資格喪失日");
     private static final RString エラー区分_1 = new RString("1");
+    private static final RString エラー区分_0 = new RString("0");
+    private static final RString LONG_RSTRING_ZERO = new RString("000000000000000");
     private static final RString エラーコード_51 = new RString("51");
     private static final RString 履歴番号_0001 = new RString("0001");
     private static final RString 日付_99999999 = new RString("99999999");
@@ -175,7 +168,6 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
         FilesystemPath filesystemPath = new FilesystemPath(tmpPath);
         filePath = new RString(filesystemPath.getCanonicalPath()).concat(ファイル名称);
         市町村コードリスト = getMapper(IKokuhoShikakuIdoInMapper.class).get構成市町村マスタ();
-        文言_設定_FLAG = new OutputParameter<>();
     }
 
     @Override
@@ -192,6 +184,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
     @Override
     protected void process(RString result) {
         取込国保情報Entity = new TorikomiKokuhoJyohoEntity();
+        取込国保情報Entity.setエラー区分(エラー区分_0);
         if (ＩＦ種類_電算.equals(processParameter.getIf種類())) {
             int バイト数 = 0;
             try {
@@ -227,12 +220,8 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
 
             エラーチェック処理_電算２();
         }
+        取込国保情報Entity.set文言設定flag(文言設定flag);
         torikomiKokuhoJyohoWriter.insert(取込国保情報Entity);
-    }
-
-    @Override
-    protected void afterExecute() {
-        文言_設定_FLAG.setValue(文言設定flag);
     }
 
     private RString get指定バイト数な文字列(int 指定バイト数, RString 判断文字列) {
@@ -587,7 +576,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
         取込国保情報Entity.set国保個人番号(get指定位置な文字列(指定な文字列, 二十八, 十));
         取込国保情報Entity.set市町村コード(get指定位置な文字列(指定な文字列, 三十八, 五));
         取込国保情報Entity.set個人区分コード(get指定位置な文字列(指定な文字列, 四十三, 1));
-        取込国保情報Entity.setIN住民コード(get指定位置な文字列(指定な文字列, 四十四, 十六));
+        取込国保情報Entity.setIN住民コード(住民コード取得(get指定位置な文字列(指定な文字列, 四十四, 十六)));
         取込国保情報Entity.set国保資格取得年月日(get指定位置な文字列(指定な文字列, 六十, 八));
         RString 国保資格喪失年月日 = get指定位置な文字列(指定な文字列, 六十八, 八);
         if (is空白(国保資格喪失年月日)) {
@@ -631,5 +620,10 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
         }
 
         return false;
+    }
+
+    private RString 住民コード取得(RString 住民コード) {
+        RString code = 住民コード.substring(二, 十).trim();
+        return LONG_RSTRING_ZERO.substring(code.length(), 十五).concat(code);
     }
 }

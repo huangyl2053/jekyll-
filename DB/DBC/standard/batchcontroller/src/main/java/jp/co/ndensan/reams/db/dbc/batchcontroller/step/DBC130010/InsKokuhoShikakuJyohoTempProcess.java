@@ -44,11 +44,6 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
     private boolean 文言設定flag;
 
     @Override
-    protected void initialize() {
-        文言設定flag = processParameter.is文言設定flag();
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID);
     }
@@ -61,6 +56,7 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
 
     @Override
     protected void process(KokuhoShikakuJyohoYoResultEntity entity) {
+        文言設定flag = entity.get取込国保情報Entity().is文言設定flag();
         if (entity.get現在国保資格情報Entity() != null
                 && entity.get取込国保情報Entity() != null
                 && 登録区分_画面登録.equals(entity.get現在国保資格情報Entity().getTorokuKubun())
