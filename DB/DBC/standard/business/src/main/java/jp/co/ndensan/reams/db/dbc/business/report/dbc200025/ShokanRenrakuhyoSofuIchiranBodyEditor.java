@@ -84,7 +84,7 @@ public class ShokanRenrakuhyoSofuIchiranBodyEditor
         if (null == 償還払支給申請Entity) {
             return;
         }
-        source.list_1 = new RString(償還払支給申請Entity.getRenban());
+        source.list_1 = new RString(parameter.get連番());
         source.list_2 = 償還払支給申請Entity.getSeiriNo();
         source.list_3 = doパターン54(償還払支給申請Entity.getServiceTeikyoYM());
         source.list_4 = getColumnValue(償還払支給申請Entity.getShoKisaiHokenshaNo());
