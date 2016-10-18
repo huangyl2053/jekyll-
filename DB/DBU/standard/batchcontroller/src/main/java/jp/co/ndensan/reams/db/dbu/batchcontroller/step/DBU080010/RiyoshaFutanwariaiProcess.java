@@ -35,7 +35,7 @@ public class RiyoshaFutanwariaiProcess extends BatchProcessBase<RiyoshaFutanwari
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate."
             + "tokuteikojinjohoteikyo.IRiyoshaFutanwariaiMapper.get提供情報_候補");
-    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJoho");
+    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
     private RiyoshaFutanwariaiProcessParameter processParameter;
     private RiyoshaFutanwariaiMybatisParameter mybatisParameter;
     private List<TokuteiKojinJohoHanKanri> 特定個人版管理特定情報;
@@ -113,7 +113,7 @@ public class RiyoshaFutanwariaiProcess extends BatchProcessBase<RiyoshaFutanwari
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             データセットキー.append(被保険者番号);
         }
-        データセットキー.append(DataSetNo._0102住所地特例情報.getコード());
+        データセットキー.append(DataSetNo._0202負担割合.getコード());
         データセットキー.append(枝番号);
         return データセットキー.toRString();
     }

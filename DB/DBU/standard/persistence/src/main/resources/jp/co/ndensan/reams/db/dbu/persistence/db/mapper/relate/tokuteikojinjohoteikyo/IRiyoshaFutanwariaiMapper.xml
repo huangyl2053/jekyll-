@@ -59,7 +59,7 @@
         </if>
         ORDER BY
         DbV3114."hihokenshaNo" DESC,
-        DbV3114."nendo",
+        DbV3114."nendo" DESC,
         DbV3114."rirekiNo" DESC,
         DbV3114."edaNo" DESC
     </select>
@@ -131,7 +131,6 @@
         <association property="teikyoKihonJohoNNTempEntity" resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IRiyoshaFutanwariaiMapper.ResultMap_TeikyoKihonJohoNNTempEntity"/>
     </resultMap>
 
-    <!--テーブルTeikyoKihonJohoNNTempの項目をTeikyoKihonJohoNNTempEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_TeikyoKihonJohoNNTempEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity" autoMapping="true">
         <id property="hihokenshaNo" column="teikyoKihonJoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="dataSetKey" column="teikyoKihonJoho_dataSetKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

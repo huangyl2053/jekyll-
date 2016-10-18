@@ -131,7 +131,8 @@ public class DBD104010MybatisParameter extends UaFt200FindShikibetsuTaishoParam 
 
             if (宛名抽出条件.getNenreiRange() != null && !宛名抽出条件.getNenreiRange().getFrom().toString().isEmpty()) {
                 宛名生年月日1 = true;
-            } else if (宛名抽出条件.getNenreiRange() != null && !宛名抽出条件.getNenreiRange().getTo().toString().isEmpty()) {
+            }
+            if (宛名抽出条件.getNenreiRange() != null && !宛名抽出条件.getNenreiRange().getTo().toString().isEmpty()) {
                 宛名生年月日2 = true;
             }
 

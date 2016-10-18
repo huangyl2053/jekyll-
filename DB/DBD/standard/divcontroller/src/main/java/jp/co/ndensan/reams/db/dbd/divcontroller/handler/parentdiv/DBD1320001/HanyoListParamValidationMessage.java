@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 /**
  * 汎用リスト出力(介護受給共通)の入力チェックのメッセージクラスです。
  *
- * @reamsid_L DBD-3930-011 liwul
+ * @reamsid_L DBD-3930-010 liwul
  */
 public enum HanyoListParamValidationMessage implements IValidationMessage {
 

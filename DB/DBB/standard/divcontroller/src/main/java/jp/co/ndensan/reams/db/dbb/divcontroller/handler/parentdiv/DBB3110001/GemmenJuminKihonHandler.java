@@ -647,7 +647,7 @@ public class GemmenJuminKihonHandler {
 
     private RString get期(RString 期) {
         if (期 != null && !期.isEmpty()) {
-            return 期.padZeroToLeft(二_定値).concat(期R);
+            return 期.trimStart(定値_ゼロ.toString().charAt(ゼロ_定値)).concat(期R);
         }
         return null;
     }
@@ -1467,7 +1467,6 @@ public class GemmenJuminKihonHandler {
         通知書発行パラメータ.set納入_出力方法(発行パネル.getPritPublish3().getRadShutsuryokuHoho().getSelectedKey());
         通知書発行パラメータ.set納入_出力形式(発行パネル.getPritPublish3().getRadShutsuryokuKeishiki().getSelectedKey());
         通知書発行パラメータ.set賦課台帳_出力有無(is賦課台帳checked);
-        // TODO 「イベント定義」シート、「発行する」ボタン押下後は(初期化状態の)画面に戻ると追記。
         onClick_btnUpt(年度分賦課減免リスト);
         return KaigoHokenryoGemmen.createInstance().publish(通知書発行パラメータ);
     }

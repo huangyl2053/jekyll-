@@ -22,6 +22,7 @@ public class FurikomiMeisaiIchiranJigyoKogakuParameter {
 
     private int 連番;
     private YMDHMS システム日付;
+    private int 名寄せ件数;
     private DbWT0510FurikomiMeisaiTempEntity 振込明細一時;
     private RString 帳票タイトル;
     private RString 並び順１;

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoCh
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 汎用リスト出力(介護受給共通)のバリデーションハンドラークラスです。
  *
- * @reamsid_L DBD-3930-011 liwul
+ * @reamsid_L DBD-3930-010 liwul
  */
 public class HanyoListParamValidationHandler {
 
@@ -76,6 +77,17 @@ public class HanyoListParamValidationHandler {
 
     }
 
+    /**
+     * 復元のバリデーション
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validate復元() {
+        ValidationMessageControlPairs validateResult = new ValidationMessageControlPairs();
+        validateResult.add(new ValidationMessageControlPair(new ReplaceErrorMessage(UrErrorMessages.実行不可, "復元"), div.getBtnParamRestore()));
+        return validateResult;
+    }
+
     private ValidationMessageControlDictionary createDictionary実行するボタンクリック() {
         return new ValidationMessageControlDictionaryBuilder()
                 .add(HanyoListParamValidationMessage.実行するボタンクリック1, div.getDdlKijunNendo())
@@ -94,13 +106,13 @@ public class HanyoListParamValidationHandler {
 
     private ValidationMessageControlPairs 範囲From_Toの大小Check(ValidationMessageControlPairs validateResult) {
         if (!check範囲()) {
-            validateResult.add(new ValidationMessageControlPair(new ReplaceErrorMessage(
+            validateResult.add(new ValidationMessageControlPair(new ReplaceErrorMessage(UrErrorMessages.期間が不正_追加メッセージあり１,
                     div.getTxtChushutsuHani().getToValue().toDateString().toString(),
                     div.getTxtChushutsuHani().getFromValue().toDateString().toString()),
                     div.getTxtChushutsuHani()));
         }
         if (!check生年月日()) {
-            validateResult.add(new ValidationMessageControlPair(new ReplaceErrorMessage(
+            validateResult.add(new ValidationMessageControlPair(new ReplaceErrorMessage(UrErrorMessages.期間が不正_追加メッセージあり１,
                     div.getCcdHanyoListAtenaSelect().get生年月日開始().toDateString().toString(),
                     div.getCcdHanyoListAtenaSelect().get生年月日終了().toDateString().toString()),
                     div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getTxtSeinengappi()));
@@ -133,8 +145,8 @@ public class HanyoListParamValidationHandler {
             return message;
         }
 
-        public ReplaceErrorMessage(String... replacements) {
-            this.message = UrErrorMessages.期間が不正_追加メッセージあり１.getMessage().replace(replacements);
+        public ReplaceErrorMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
         }
     }
 

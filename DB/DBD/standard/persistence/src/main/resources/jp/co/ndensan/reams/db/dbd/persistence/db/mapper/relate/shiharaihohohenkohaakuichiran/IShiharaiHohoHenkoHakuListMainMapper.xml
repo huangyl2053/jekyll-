@@ -234,7 +234,7 @@
             賦課Newest."choteiNendo" = 時効起算日管理."choteiNendo" AND
             賦課Newest."fukaNendo" = 時効起算日管理."fukaNendo" AND
             賦課Newest."tsuchishoNo" = 時効起算日管理."tsuchishoNo" AND
-            cast(介護期別."ki" as varchar(3)) = 時効起算日管理."shuno_Ki_Tsuki" AND-->
+            cast(介護期別."ki" as varchar(3)) = 時効起算日管理."shuno_Ki_Tsuki" AND
             介護期別."choshuHouhou" = 時効起算日管理."tokucho_FuchoKubun"
             WHERE
             介護期別."choshuHouhou" = '2'
@@ -483,12 +483,12 @@
         LEFT OUTER JOIN
               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
                (
-                    SELECT ARRAY_AGG(CAST (資格情報."資格情報_識別コード" AS TEXT))
+                    SELECT ARRAY_AGG(CAST ("資格情報_識別コード" AS TEXT))
                     FROM master
                )
               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
               AS "ShikibetsuTaisho"
-              ON 資格情報."資格情報_識別コード" = "ShikibetsuTaisho"."shikibetsuCode"
+              ON 資格情報_識別コード = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
     <resultMap id="resultMap_find最大の履歴番号レコードの情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuFourEntity" autoMapping="true">
         <collection property="支払方法変更Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity"/>
@@ -647,13 +647,13 @@
         <result property="介護期別_徴収方法" column="介護期別_徴収方法" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護期別_期" column="介護期別_期" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="介護期別_調定ID" column="介護期別_調定ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        
+       
         <result property="調定共通_介護継承_調定ID" column="調定共通_介護継承_調定ID"/>
-        <result property="調定共通_介護継承_履歴番号" column="調定共通_介護継承_履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="調定共通_介護継承_履歴番号" column="調定共通_介護継承_履歴番号"/>
         <result property="調定共通_介護継承_収納ID" column="調定共通_介護継承_収納ID"/>
         <result property="調定共通_介護継承_会計年度" column="調定共通_介護継承_会計年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RYearTypeHandler"/>
         <result property="調定共通_介護継承_処理年度" column="調定共通_介護継承_処理年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RYearTypeHandler"/>
-        <result property="調定共通_介護継承_処理番号" column="調定共通_介護継承_処理番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+         <result property="調定共通_介護継承_処理番号" column="調定共通_介護継承_処理番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="調定共通_介護継承_更正回数" column="調定共通_介護継承_更正回数" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="調定共通_介護継承_調定事由コード" column="調定共通_介護継承_調定事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調定共通_介護継承_調定年月日" column="調定共通_介護継承_調定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>

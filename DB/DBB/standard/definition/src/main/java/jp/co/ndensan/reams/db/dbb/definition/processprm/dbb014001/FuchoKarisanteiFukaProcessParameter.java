@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.definition.processprm.dbb014001;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb014001.FuchoKarisanteiFukaMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -55,6 +56,7 @@ public class FuchoKarisanteiFukaProcessParameter implements IBatchProcessParamet
             param.set処理日付区分(定数_2);
         }
         param.set作成処理名(ShoriName.普徴仮算定賦課.get名称());
+        param.set処理日付(new YMDHMS(バッチ起動日時));
         return param;
     }
 }

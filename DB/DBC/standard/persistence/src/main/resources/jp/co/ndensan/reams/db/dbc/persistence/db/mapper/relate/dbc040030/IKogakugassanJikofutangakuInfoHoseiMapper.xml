@@ -15,7 +15,7 @@
                "ShikibetsuTaisho"."seinengappiYMD" AS "DbV1001_seinengappiYMD",
                "ShikibetsuTaisho"."seibetsuCode" AS "DbV1001_seibetsuCode",
                "ShikibetsuTaisho"."yubinNo" AS "DbV1001_yubinNo",
-               "ShikibetsuTaisho"."zenkokuJushoCode" AS "DbV1001_zenkokuJushoCode",
+               "ShikibetsuTaisho"."choikiCode" AS "DbV1001_choikiCode",
                "ShikibetsuTaisho"."gyoseikuCode" AS "DbV1001_gyoseikuCode",
                "ShikibetsuTaisho"."juminShubetsuCode" AS "DbV1001_juminShubetsuCode",
                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
@@ -67,7 +67,7 @@
         <result property="juminShubetsuCode" column="DbV1001_juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonCode" column="DbV1001_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="yubinNo" column="DbV1001_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
-        <result property="zenkokuJushoCode" column="DbV1001_zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
+        <result property="choikiCode" column="DbV1001_choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
         <result property="gyoseikuCode" column="DbV1001_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
         <association property="dbt3070Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"/>
         <association property="dbt3071Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity"/>
@@ -303,7 +303,7 @@
         <result property="juminShubetsuCode" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
-        <result property="zenkokuJushoCode" column="zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
+        <result property="choikiCode" column="choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
         <result property="gyoseikuCode" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
         <result property="ichiranBiko" column="ichiranBiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jikoFutanGakuHoseiJissi" column="jikoFutanGakuHoseiJissi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -438,7 +438,7 @@
         <result property="juminShubetsuCode" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
-        <result property="zenkokuJushoCode" column="zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
+        <result property="choikiCode" column="choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
         <result property="gyoseikuCode" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
         <result property="ichiranBiko" column="ichiranBiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jikoFutanGakuHoseiJissi" column="jikoFutanGakuHoseiJissi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -728,7 +728,7 @@
          "KogakugassanJikofutangakuInfoHoseiTemp"."juminShubetsuCode" as "juminShubetsuCode",
          "KogakugassanJikofutangakuInfoHoseiTemp"."shichosonCode" as "shichosonCode",
         "KogakugassanJikofutangakuInfoHoseiTemp"."yubinNo" as "yubinNo",
-        "KogakugassanJikofutangakuInfoHoseiTemp"."zenkokuJushoCode" as "zenkokuJushoCode",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."choikiCode" as "choikiCode",
          "KogakugassanJikofutangakuInfoHoseiTemp"."gyoseikuCode" as "gyoseikuCode",
          "KogakugassanJikofutangakuInfoHoseiTemp"."jikoFutanGakuHoseiJissi" as "jikoFutanGakuHoseiJissi",
          "KogakugassanJikofutangakuInfoHoseiTemp"."kogakuShikyuGakuGakuHoseiJissi" as "kogakuShikyuGakuGakuHoseiJissi",

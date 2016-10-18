@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei;
 
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 
 /**
  * 特徴平準化確定一覧entity

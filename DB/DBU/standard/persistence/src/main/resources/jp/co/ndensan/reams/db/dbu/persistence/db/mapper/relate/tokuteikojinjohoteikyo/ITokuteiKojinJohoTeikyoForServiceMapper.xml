@@ -105,7 +105,7 @@
                                               AND    #{基準日} :: TIMESTAMP <![CDATA[<=]]> HanKanri2."yukoEdNichiji") AS HanKanri3
                                         WHERE HanKanri3."tokuteiKojinJohoMeiCode" = HanKanri."tokuteiKojinJohoMeiCode"
                                         AND   HanKanri3."tokuteiKojinJohoKomokuCode" = HanKanri."tokuteiKojinJohoKomokuCode"
-                                        AND   HanKanri3."versionJoho" = HanKanri."versionJoho")) AS HanKanri4
+                                        AND   HanKanri."versionJoho" <![CDATA[<]]> HanKanri3."versionJoho")) AS HanKanri4
         ON  HanKanri4."tokuteiKojinJohoMeiCode" = TeikyoKomoku."tokuteiKojinJohoMeiCode"
         AND HanKanri4."tokuteiKojinJohoKomokuCode" = TeikyoKomoku."tokuteiKojinJohoKomokuCode"
         WHERE 

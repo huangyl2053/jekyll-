@@ -152,9 +152,9 @@ public class FutanGendogakuNinteiNinteishaIchiran {
      * @return batchparameter
      */
     public DBD205010_FutanGendoGakuNinteishaListParameter set旧措置区分の設定(FutanGengakuNinteishaListDiv div) {
-        if (div.getRadKyusochishaKubun().getSelectedValue().equals(両方)) {
+        if (div.getRadKyusochishaKubun().getSelectedKey().equals(両方)) {
             batchparameter.set旧措置区分(KyusochishaJukyushaKubun.両方);
-        } else if (div.getRadKyusochishaKubun().getSelectedValue().equals(旧措置者のみ)) {
+        } else if (div.getRadKyusochishaKubun().getSelectedKey().equals(旧措置者のみ)) {
             batchparameter.set旧措置区分(KyusochishaJukyushaKubun.旧措置者のみ);
         } else {
             batchparameter.set旧措置区分(KyusochishaJukyushaKubun.旧措置者以外);

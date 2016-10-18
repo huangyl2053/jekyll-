@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.core.hihokenshashisaku;
+package jp.co.ndensan.reams.db.dbz.business.core.hihokenshashisaku;
 
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashisaku.HihokenshaShisakuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshashisaku.HihokenshaShisakuRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**

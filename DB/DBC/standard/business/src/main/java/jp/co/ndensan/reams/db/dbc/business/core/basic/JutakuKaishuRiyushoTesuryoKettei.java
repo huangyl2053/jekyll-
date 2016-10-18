@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 住宅改修理由書作成手数料請求決定を管理するクラスです。
+ *
+ * @reamsid_L DBC-2870-010 zhangruitao
  */
 public class JutakuKaishuRiyushoTesuryoKettei
         extends ModelBase<JutakuKaishuRiyushoTesuryoKetteiIdentifier, DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity, JutakuKaishuRiyushoTesuryoKettei>

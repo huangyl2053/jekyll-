@@ -48,7 +48,7 @@ public class CollectSetaiinProcess extends BatchProcessBase<FuchoKarisanteiTempE
         item.setShikibetsuCode(entity.getShikibetsuCode());
         item.setKijunYMD(entity.getFukaYMD());
         item.setShotokuNendo(entity.getChoteiNendo().minusYear(NUM_1));
-        item.setJushochiTokureiFlag(entity.getKoikinaiJushochiTokureiFlag());
+        item.setJushochiTokureiFlag(entity.getJushochiTokureiFlag());
         tableWriter.insert(item);
     }
 

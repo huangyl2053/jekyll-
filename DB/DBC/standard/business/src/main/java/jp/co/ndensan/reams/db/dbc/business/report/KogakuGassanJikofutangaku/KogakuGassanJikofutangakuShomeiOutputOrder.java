@@ -58,11 +58,11 @@ public enum KogakuGassanJikofutangakuShomeiOutputOrder implements IReportItems {
     /**
      * 申請書整理番号
      */
-    申請書整理番号(new RString("'0337"), new RString("shinseiYMD"), new RString("\"DbWT37H1\".\"shikyuShinseishoSeiriNo\"")),
+    申請書整理番号(new RString("0337"), new RString("shikyuShinseishoSeiriNo"), new RString("\"DbWT37H1\".\"shikyuShinseishoSeiriNo\"")),
     /**
      * 証明書整理番号
      */
-    証明書整理番号(new RString("'0338"), new RString("shinseiYMD"), new RString("\"DbWT37H1\".\"jikoFutanSeiriNo\""));
+    証明書整理番号(new RString("0338"), new RString("jikoFutanSeiriNo"), new RString("\"DbWT37H1\".\"jikoFutanSeiriNo\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

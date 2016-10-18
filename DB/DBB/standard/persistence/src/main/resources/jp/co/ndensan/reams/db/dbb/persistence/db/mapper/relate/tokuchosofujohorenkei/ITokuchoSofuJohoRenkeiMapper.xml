@@ -46,7 +46,7 @@
         介護保険年金特徴対象者情報."taikiFlag" as "待機フラグ",
         介護保険年金特徴対象者情報."yobi" as "予備"
        FROM
-           rgue."UeT0511NenkinTokuchoKaifuJoho" 年金特徴回付情報
+           rgdb."UeT0511NenkinTokuchoKaifuJoho" 年金特徴回付情報
         INNER JOIN 
            rgue."UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550" 介護保険年金特徴対象者情報 
         ON
