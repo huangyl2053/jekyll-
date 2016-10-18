@@ -98,7 +98,7 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
             source.telNo = 社福減免対象者情報.get電話番号() == null ? RString.EMPTY : 社福減免対象者情報.get電話番号().value();
             source.listHihokenshaNameKana_1 = 社福減免対象者情報.getカナ名称() == null ? RString.EMPTY : 社福減免対象者情報.getカナ名称().value();
             source.listHihokenshaName_1 = 社福減免対象者情報.get名称() == null ? RString.EMPTY : 社福減免対象者情報.get名称().value();
-            source.listMeisai_1 = new RString(index);
+            source.listMeisai_1 = new RString(index).padLeft("0", LISTINDEX_4);
             source.listMeisai_2 = 社福減免対象者情報.get被保険者番号() == null ? RString.EMPTY : 社福減免対象者情報.get被保険者番号().value();
             if (JuminShubetsu.日本人.getCode().equals(社福減免対象者情報.get住民種別コード())
                     || JuminShubetsu.住登外個人_日本人.getCode().equals(社福減免対象者情報.get住民種別コード())) {
