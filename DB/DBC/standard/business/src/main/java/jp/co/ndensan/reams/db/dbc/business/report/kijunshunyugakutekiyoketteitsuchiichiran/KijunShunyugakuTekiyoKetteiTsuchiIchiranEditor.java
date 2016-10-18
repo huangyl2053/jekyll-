@@ -80,6 +80,11 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranEditor implements IKijunShu
         if (基準収入額決定通知一覧表パラメータ.get識別コード() != null) {
             source.listHakkoTaishosha_11 = 基準収入額決定通知一覧表パラメータ.get識別コード().value();
         }
+        source.yubinNo = 基準収入額決定通知一覧表パラメータ.get郵便番号();
+        source.choikiCode = 基準収入額決定通知一覧表パラメータ.get町域コード();
+        source.gyoseikuCode = 基準収入額決定通知一覧表パラメータ.get行政区コード();
+        source.shichosonCode = 基準収入額決定通知一覧表パラメータ.get市町村コード();
+
         return source;
     }
 
