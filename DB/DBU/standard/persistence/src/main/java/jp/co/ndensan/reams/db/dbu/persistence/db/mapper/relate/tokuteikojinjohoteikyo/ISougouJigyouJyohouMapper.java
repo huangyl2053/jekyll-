@@ -26,6 +26,14 @@ public interface ISougouJigyouJyohouMapper {
     List<SougouJigyouJyohouRelateEntity> get当初_版改定_異動分データ(SougouJigyouJyohouMybatisParameter parameter);
 
     /**
+     * 高額合算_当初_版改定_異動分データの取得処理です。
+     *
+     * @param parameter 総合事業情報のMybatisParameterクラス
+     * @return List<SougouJigyouJyohouRelateEntity>
+     */
+    List<SougouJigyouJyohouRelateEntity> get高額合算_当初_版改定_異動分データ(SougouJigyouJyohouMybatisParameter parameter);
+
+    /**
      * 提供対象者の取得処理です。
      *
      * @param parameter 総合事業情報のMybatisParameterクラス
