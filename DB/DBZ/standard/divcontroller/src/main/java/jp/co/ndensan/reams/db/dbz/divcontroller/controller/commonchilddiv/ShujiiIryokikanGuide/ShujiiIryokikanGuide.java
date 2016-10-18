@@ -81,7 +81,7 @@ public class ShujiiIryokikanGuide {
                         div.getTxtIryoKikanKanaMeisho().getValue(),
                         new RString(""),
                         new RString(""),
-                        false,
+                        true,
                         new RString(""),
                         new RString(""),
                         //                        div.getTxtShuijiiCodeFrom().getValue(),
