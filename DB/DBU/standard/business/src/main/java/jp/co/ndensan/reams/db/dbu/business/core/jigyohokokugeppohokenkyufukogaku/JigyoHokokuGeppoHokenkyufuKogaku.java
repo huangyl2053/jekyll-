@@ -53,7 +53,7 @@ public class JigyoHokokuGeppoHokenkyufuKogaku {
             eucEntity.set集計区分(new RString("減算"));
         }
         eucEntity.set表番号(RString.EMPTY);
-        eucEntity.set集計番号(entity.getShukeiNo());
+        eucEntity.set集計番号(entity.getSyukeiNo());
         eucEntity.set集計単位(entity.getSyukeTani());
         eucEntity.set縦番号(entity.getTateNo());
         eucEntity.set横番号(entity.getYokoNo());
