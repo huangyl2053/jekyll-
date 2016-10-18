@@ -52,6 +52,9 @@ public class ShikakuFuseigoShuseiMain {
     private final ShikakuSeigoseiCheckJohoManager manager;
     private final ShikakuFuseigoShuseiService serivce;
 
+    private static final RString STRING_被保険者番号 = new RString("被保険者番号");
+    private static final RString CODE_0003 = new RString("0003");
+
     /**
      * コンストラクタです。
      *
@@ -242,10 +245,11 @@ public class ShikakuFuseigoShuseiMain {
         HihokenshaDaicho 修正後の資格の情報 = ViewStateHolder.get(ViewStateKeys.修正後の資格の情報, HihokenshaDaicho.class);
         TekiyoJogaisha 修正後の除外の情報 = ViewStateHolder.get(ViewStateKeys.修正後の除外の情報, TekiyoJogaisha.class);
         TashichosonJushochiTokurei 修正後の他特の情報 = ViewStateHolder.get(ViewStateKeys.修正後の他特の情報, TashichosonJushochiTokurei.class);
+        setアクセスログ(shikakuFusei.get整合性チェック情報().get被保険者番号(),
+                shikakuFusei.get整合性チェック情報().get識別コード(), AccessLogType.更新);
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && div.getChkToTaishoGai().isAllSelected()) {
             manager.saveAs対象外(shikakuFusei.get整合性チェック情報());
             div.getShikakuFuseigoIchiran().setDisabled(false);
-            setアクセスログ(shikakuFusei.get整合性チェック情報().get識別コード());
             return onLoad(div);
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
@@ -263,7 +267,6 @@ public class ShikakuFuseigoShuseiMain {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             save修正後の情報By被保険者(shikakuFusei, div, 修正後の資格の情報, 取得除外の情報);
-            setアクセスログ(修正後の資格の情報.get識別コード());
         }
         if (台帳種別.equals(DaichoType.適用除外者.getコード())) {
             修正後の除外の情報 = getHandler(div).set除外の情報(不整合理由, 修正後の除外の情報);
@@ -276,7 +279,6 @@ public class ShikakuFuseigoShuseiMain {
                     ViewStateHolder.get(ViewStateKeys.現在の除外の情報, TekiyoJogaisha.class),
                     修正後の除外の情報,
                     shikakuFusei.get整合性チェック情報());
-            setアクセスログ(修正後の除外の情報.get識別コード());
         }
         if (台帳種別.equals(DaichoType.他市町村住所地特例者.getコード())) {
             修正後の他特の情報 = getHandler(div).set他特の情報(不整合理由, 修正後の他特の情報);
@@ -289,7 +291,6 @@ public class ShikakuFuseigoShuseiMain {
                     ViewStateHolder.get(ViewStateKeys.現在の他特の情報, TashichosonJushochiTokurei.class),
                     修正後の他特の情報,
                     shikakuFusei.get整合性チェック情報());
-            setアクセスログ(修正後の他特の情報.get識別コード());
         }
         div.getShikakuFuseigoIchiran().setDisabled(false);
         return onLoad(div);
@@ -304,7 +305,7 @@ public class ShikakuFuseigoShuseiMain {
             manager.save資格情報(
                     ViewStateHolder.get(ViewStateKeys.現在の資格の情報, HihokenshaDaicho.class),
                     修正後の資格の情報,
-                    shikakuFusei.get整合性チェック情報());
+                    shikakuFusei.get整合性チェック情報(), shikakuFusei.get個人情報().get生年月日());
         }
     }
 
@@ -382,8 +383,8 @@ public class ShikakuFuseigoShuseiMain {
         return false;
     }
 
-    private void setアクセスログ(ShikibetsuCode 識別コード) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("識別コード"), 識別コード.value());
-        AccessLogger.log(AccessLogType.更新, PersonalData.of(識別コード, expandedInfo));
+    private void setアクセスログ(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, AccessLogType type) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_0003), STRING_被保険者番号, 被保険者番号.value());
+        AccessLogger.log(type, PersonalData.of(識別コード, expandedInfo));
     }
 }
