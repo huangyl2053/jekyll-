@@ -187,9 +187,9 @@ public class TokuteiKojinJohoTeikyoManager {
         for (TeikyoKihonJohoNNTempEntity entity : 中間DB提供基本情報) {
             DbT7304TokuteiKojinJohoTeikyoKanriEntity 提供基本情報 = 特定個人情報提供管理dac.selectByKey(
                     entity.getHihokenshaNo(), entity.getDataSetKey());
-            set提供基本情報(entity, システム日時, 新規異動区分, 特定個人情報名コード, データセット番号, 版番号, 提供基本情報);
+            特定個人情報提供管理dac.save(set提供基本情報(
+                    entity, システム日時, 新規異動区分, 特定個人情報名コード, データセット番号, 版番号, 提供基本情報));
         }
-
     }
 
     /**
