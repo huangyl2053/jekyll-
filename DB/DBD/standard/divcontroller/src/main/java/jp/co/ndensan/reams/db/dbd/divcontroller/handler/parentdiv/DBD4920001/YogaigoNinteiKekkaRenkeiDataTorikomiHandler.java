@@ -103,6 +103,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
      * 連携データを取込みするを押下。
      *
      * @param files FileData[]
+     * @return RString
      */
     public RString onClick_appurodo(FileData... files) {
         RString tempPath = RString.EMPTY;
