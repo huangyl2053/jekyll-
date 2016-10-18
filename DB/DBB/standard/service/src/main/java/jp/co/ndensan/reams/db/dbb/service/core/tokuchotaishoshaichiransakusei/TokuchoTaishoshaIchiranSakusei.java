@@ -93,6 +93,7 @@ public class TokuchoTaishoshaIchiranSakusei {
     private static final RString 開始月_翌6月 = new RString("06");
     private static final int NUM0 = 0;
     private static final int NUM1 = 1;
+    private static final int NUM2 = 2;
     private static final int NUM4 = 4;
     private static final int NUM6 = 6;
 
@@ -439,6 +440,9 @@ public class TokuchoTaishoshaIchiranSakusei {
             分配集約_基礎年金番号 = entity.getDbt2001entity().getKariNenkinNo();
             分配集約_年金コード = entity.getDbt2001entity().getKariNenkinCode();
             分配集約_捕捉月 = entity.getDbt2001entity().getKariHosokuM();
+            if (分配集約_捕捉月 != null && !分配集約_捕捉月.isEmpty() && Integer.valueOf(分配集約_捕捉月.toString()) == NUM2) {
+                分配集約_処理年度 = 分配集約_処理年度.minusYear(NUM1);
+            }
             if (分配集約_処理年度 != null && !分配集約_処理年度.isEmpty()
                     && 分配集約_基礎年金番号 != null && !分配集約_基礎年金番号.isEmpty()
                     && 分配集約_年金コード != null && !分配集約_年金コード.isEmpty()
@@ -464,6 +468,9 @@ public class TokuchoTaishoshaIchiranSakusei {
             分配集約_基礎年金番号 = entity.getDbt2001entity().getHonNenkinNo();
             分配集約_年金コード = entity.getDbt2001entity().getHonNenkinCode();
             分配集約_捕捉月 = entity.getDbt2001entity().getHonHosokuM();
+            if (分配集約_捕捉月 != null && !分配集約_捕捉月.isEmpty() && Integer.valueOf(分配集約_捕捉月.toString()) == NUM2) {
+                分配集約_処理年度 = 分配集約_処理年度.minusYear(NUM1);
+            }
             if (分配集約_処理年度 != null && !分配集約_処理年度.isEmpty()
                     && 分配集約_基礎年金番号 != null && !分配集約_基礎年金番号.isEmpty()
                     && 分配集約_年金コード != null && !分配集約_年金コード.isEmpty()
@@ -489,6 +496,9 @@ public class TokuchoTaishoshaIchiranSakusei {
             分配集約_基礎年金番号 = entity.getDbt2001entity().getYokunendoKariNenkinNo();
             分配集約_年金コード = entity.getDbt2001entity().getYokunendoKariNenkinCode();
             分配集約_捕捉月 = entity.getDbt2001entity().getYokunendoKariHosokuM();
+            if (分配集約_捕捉月 != null && !分配集約_捕捉月.isEmpty() && Integer.valueOf(分配集約_捕捉月.toString()) == NUM2) {
+                分配集約_処理年度 = 分配集約_処理年度.minusYear(NUM1);
+            }
             if (分配集約_処理年度 != null && !分配集約_処理年度.isEmpty()
                     && 分配集約_基礎年金番号 != null && !分配集約_基礎年金番号.isEmpty()
                     && 分配集約_年金コード != null && !分配集約_年金コード.isEmpty()
@@ -898,6 +908,9 @@ public class TokuchoTaishoshaIchiranSakusei {
             ue基礎年金番号 = entity.getDbt2001entity().getKariNenkinNo();
             ue年金コード = entity.getDbt2001entity().getKariNenkinCode();
             ue捕捉月 = entity.getDbt2001entity().getKariHosokuM();
+            if (ue捕捉月 != null && !ue捕捉月.isEmpty() && Integer.valueOf(ue捕捉月.toString()) == NUM2) {
+                ue処理年度 = ue処理年度.minusYear(NUM1);
+            }
             if (ue処理年度 != null && !ue処理年度.isEmpty()
                     && ue基礎年金番号 != null && !ue基礎年金番号.isEmpty()
                     && ue年金コード != null && !ue年金コード.isEmpty()
@@ -922,6 +935,9 @@ public class TokuchoTaishoshaIchiranSakusei {
             ue基礎年金番号 = entity.getDbt2001entity().getHonNenkinNo();
             ue年金コード = entity.getDbt2001entity().getHonNenkinCode();
             ue捕捉月 = entity.getDbt2001entity().getHonHosokuM();
+            if (ue捕捉月 != null && !ue捕捉月.isEmpty() && Integer.valueOf(ue捕捉月.toString()) == NUM2) {
+                ue処理年度 = ue処理年度.minusYear(NUM1);
+            }
             if (ue処理年度 != null && !ue処理年度.isEmpty()
                     && ue基礎年金番号 != null && !ue基礎年金番号.isEmpty()
                     && ue年金コード != null && !ue年金コード.isEmpty()
@@ -946,6 +962,9 @@ public class TokuchoTaishoshaIchiranSakusei {
             ue基礎年金番号 = entity.getDbt2001entity().getYokunendoKariNenkinNo();
             ue年金コード = entity.getDbt2001entity().getYokunendoKariNenkinCode();
             ue捕捉月 = entity.getDbt2001entity().getYokunendoKariHosokuM();
+            if (ue捕捉月 != null && !ue捕捉月.isEmpty() && Integer.valueOf(ue捕捉月.toString()) == NUM2) {
+                ue処理年度 = ue処理年度.minusYear(NUM1);
+            }
             if (ue処理年度 != null && !ue処理年度.isEmpty()
                     && ue基礎年金番号 != null && !ue基礎年金番号.isEmpty()
                     && ue年金コード != null && !ue年金コード.isEmpty()
