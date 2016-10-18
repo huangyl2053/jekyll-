@@ -92,8 +92,6 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private static final RString 出力条件表_抽出対象者 = new RString("【抽出対象者】");
 
     private static final RString 資格判定なし = new RString("資格判定なし");
-    private static final RString 年齢 = new RString("年齢");
-    private static final RString 生年月日 = new RString("生年月日");
     private static final RString 全て = new RString("全て");
     private static final RString すべて = new RString("すべて");
 
@@ -325,7 +323,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private void set出力条件表_年齢(AtenaSelectBatchParameter atenaSelectBatchParameter,
             NenreiSoChushutsuHoho nenreiSoChushutsuHoho,
             List<RString> list) {
-        if (年齢.equals(nenreiSoChushutsuHoho.get名称())) {
+        if (NenreiSoChushutsuHoho.年齢範囲.equals(nenreiSoChushutsuHoho)) {
             Range<Decimal> ageRange = atenaSelectBatchParameter.getNenreiRange();
             Decimal startAge = ageRange.getFrom();
             Decimal endAge = ageRange.getTo();
@@ -375,7 +373,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private void set出力条件表_生年月日(AtenaSelectBatchParameter atenaSelectBatchParameter,
             NenreiSoChushutsuHoho nenreiSoChushutsuHoho,
             List<RString> list) {
-        if (生年月日.equals(nenreiSoChushutsuHoho.get名称())) {
+        if (NenreiSoChushutsuHoho.生年月日範囲.equals(nenreiSoChushutsuHoho)) {
             Range<RDate> seinengappiRange = atenaSelectBatchParameter.getSeinengappiRange();
             RDate startSeinengappiRange = seinengappiRange.getFrom();
             RDate endSeinengappiRange = seinengappiRange.getTo();

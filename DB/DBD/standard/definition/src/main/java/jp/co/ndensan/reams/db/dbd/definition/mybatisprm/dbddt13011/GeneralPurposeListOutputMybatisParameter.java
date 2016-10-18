@@ -218,7 +218,7 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
     }
 
     private void set市町村コードについて(AtenaSelectBatchParameter 宛名抽出条件) {
-        if (new RString("すべて").equals(宛名抽出条件.getShichoson_Code().getColumnValue())) {
+        if (宛名抽出条件.getShichoson_Code() != null && !宛名抽出条件.getShichoson_Code().isEmpty()) {
             is宛名抽出条件_市町村コード_非全部 = true;
             shichosonCode = 宛名抽出条件.getShichoson_Code().getColumnValue();
         }

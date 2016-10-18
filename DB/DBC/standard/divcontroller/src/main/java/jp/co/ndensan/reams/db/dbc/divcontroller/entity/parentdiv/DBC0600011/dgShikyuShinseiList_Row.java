@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Feb 26 16:38:11 JST 2016
+ * Mon Oct 17 14:39:23 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -12,11 +12,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgShikyuShinseiList_Row のクラスファイル
  *
- * @author 自動生成
  * @reamsid_L DBC-1020-020 yangchenbing
  */
 public class dgShikyuShinseiList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     private RString txtTeikyoYM;
     private RString txtShinseiYMD;
@@ -28,6 +27,7 @@ public class dgShikyuShinseiList_Row extends DataRow {
     private RString txtJigyosyaNo;
     private RString txtYoshikiNo;
     private RString txtMeisaiNo;
+    private RString serviceDate;
 
     public dgShikyuShinseiList_Row() {
         super();
@@ -41,6 +41,7 @@ public class dgShikyuShinseiList_Row extends DataRow {
         this.txtJigyosyaNo = RString.EMPTY;
         this.txtYoshikiNo = RString.EMPTY;
         this.txtMeisaiNo = RString.EMPTY;
+        this.serviceDate = RString.EMPTY;
         this.setOriginalData("txtTeikyoYM", txtTeikyoYM);
         this.setOriginalData("txtShinseiYMD", txtShinseiYMD);
         this.setOriginalData("txtShikyuKubun", txtShikyuKubun);
@@ -51,9 +52,10 @@ public class dgShikyuShinseiList_Row extends DataRow {
         this.setOriginalData("txtJigyosyaNo", txtJigyosyaNo);
         this.setOriginalData("txtYoshikiNo", txtYoshikiNo);
         this.setOriginalData("txtMeisaiNo", txtMeisaiNo);
+        this.setOriginalData("serviceDate", serviceDate);
     }
 
-    public dgShikyuShinseiList_Row(RString txtTeikyoYM, RString txtShinseiYMD, RString txtShikyuKubun, RString txtKetteiYMD, RString txtSerialNo, RString txtShohinmei, RString txtKonyuKingaku, RString txtJigyosyaNo, RString txtYoshikiNo, RString txtMeisaiNo) {
+    public dgShikyuShinseiList_Row(RString txtTeikyoYM, RString txtShinseiYMD, RString txtShikyuKubun, RString txtKetteiYMD, RString txtSerialNo, RString txtShohinmei, RString txtKonyuKingaku, RString txtJigyosyaNo, RString txtYoshikiNo, RString txtMeisaiNo, RString serviceDate) {
         super();
         this.setOriginalData("txtTeikyoYM", txtTeikyoYM);
         this.setOriginalData("txtShinseiYMD", txtShinseiYMD);
@@ -65,6 +67,7 @@ public class dgShikyuShinseiList_Row extends DataRow {
         this.setOriginalData("txtJigyosyaNo", txtJigyosyaNo);
         this.setOriginalData("txtYoshikiNo", txtYoshikiNo);
         this.setOriginalData("txtMeisaiNo", txtMeisaiNo);
+        this.setOriginalData("serviceDate", serviceDate);
         this.txtTeikyoYM = txtTeikyoYM;
         this.txtShinseiYMD = txtShinseiYMD;
         this.txtShikyuKubun = txtShikyuKubun;
@@ -75,6 +78,7 @@ public class dgShikyuShinseiList_Row extends DataRow {
         this.txtJigyosyaNo = txtJigyosyaNo;
         this.txtYoshikiNo = txtYoshikiNo;
         this.txtMeisaiNo = txtMeisaiNo;
+        this.serviceDate = serviceDate;
     }
 
     public RString getTxtTeikyoYM() {
@@ -115,6 +119,10 @@ public class dgShikyuShinseiList_Row extends DataRow {
 
     public RString getTxtMeisaiNo() {
         return txtMeisaiNo;
+    }
+
+    public RString getServiceDate() {
+        return serviceDate;
     }
 
     public void setTxtTeikyoYM(RString txtTeikyoYM) {
@@ -165,6 +173,11 @@ public class dgShikyuShinseiList_Row extends DataRow {
     public void setTxtMeisaiNo(RString txtMeisaiNo) {
         this.setOriginalData("txtMeisaiNo", txtMeisaiNo);
         this.txtMeisaiNo = txtMeisaiNo;
+    }
+
+    public void setServiceDate(RString serviceDate) {
+        this.setOriginalData("serviceDate", serviceDate);
+        this.serviceDate = serviceDate;
     }
 
     // </editor-fold>
