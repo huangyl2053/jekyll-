@@ -79,7 +79,7 @@
             SELECT
                 *
             FROM
-                rgue."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
+                rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
             WHERE
                     年金特徴回付情報."gyomuCode" = 'DB'
                 AND 年金特徴回付情報."tsuchiNaiyoCode" IN ('00', '30')
@@ -201,11 +201,6 @@
                             AND #{システム日付} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanShuryoYMD"
                     )
             </if>
-<!--        ORDER BY 
-                "dbT2002Fuka_choteiNendo", 
-                "dbT2002Fuka_fukaNendo", 
-                "dbT2002Fuka_tsuchishoNo", 
-                "dbT2002Fuka_rirekiNo",-->
             <if test="出力順 != null and !出力順.isEmpty()">
                 ${出力順}
             </if>
@@ -501,7 +496,8 @@
         "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku8" as "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku8",
         "UeT0511NenkinTokuchoKaifuJoho"."dtTeishiYM" as "ueT0511NenkinTokuchoKaifuJoho_dtTeishiYM",
         "UeT0511NenkinTokuchoKaifuJoho"."dtYobi4Juminzei" as "ueT0511NenkinTokuchoKaifuJoho_dtYobi4Juminzei",
-        "UeT0511NenkinTokuchoKaifuJoho"."dtKojinNo" as "ueT0511NenkinTokuchoKaifuJoho_dtKojinNo"
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKojinNo" as "ueT0511NenkinTokuchoKaifuJoho_dtKojinNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."kokuhoYoteiSoshitsuKubun" as "ueT0511NenkinTokuchoKaifuJoho_kokuhoYoteiSoshitsuKubun"
     </sql>
     
     <sql id="allColumns_DbV4001JukyushaDaicho">
@@ -525,7 +521,6 @@
          "DbV4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" as "dbV4001JukyushaDaicho_ninteiYukoKikanKaishiYMD",
          "DbV4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" as "dbV4001JukyushaDaicho_ninteiYukoKikanShuryoYMD",
          "DbV4001JukyushaDaicho"."ninteiYMD" as "dbV4001JukyushaDaicho_ninteiYMD",
-         <!--"DbV4001JukyushaDaicho"."minashiCode" as "dbV4001JukyushaDaicho_minashiCode",-->
          "DbV4001JukyushaDaicho"."shiteiServiceShurui01" as "dbV4001JukyushaDaicho_shiteiServiceShurui01",
          "DbV4001JukyushaDaicho"."shiteiServiceShurui02" as "dbV4001JukyushaDaicho_shiteiServiceShurui02",
          "DbV4001JukyushaDaicho"."shiteiServiceShurui03" as "dbV4001JukyushaDaicho_shiteiServiceShurui03",

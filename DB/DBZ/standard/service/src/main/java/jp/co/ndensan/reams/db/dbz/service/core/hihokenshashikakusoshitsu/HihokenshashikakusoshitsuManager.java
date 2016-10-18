@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakusoshitsu;
+package jp.co.ndensan.reams.db.dbz.service.core.hihokenshashikakusoshitsu;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
-import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.SikakuKikan;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.sikakuidocheck.SikakuIdoCheckManager;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
@@ -27,6 +27,9 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -109,7 +112,7 @@ public class HihokenshashikakusoshitsuManager {
             年齢到達取得異動未登録Check(識別コード, 喪失年月日, 当該識別対象の生年月日,
                     hihokenshaShutokuJyoho, tokusoRirekiList, sikakuKikanList);
         } else {
-            throw new ApplicationException(DbaErrorMessages.資格喪失登録不可.getMessage());
+            throw new ApplicationException(RRErrorMessages.資格喪失登録不可.getMessage());
         }
     }
 
@@ -139,7 +142,7 @@ public class HihokenshashikakusoshitsuManager {
             解除期間情報の再判定(hihokenshaShutokuJyoho, 適用年月日);
         }
         if ((資格取得年月日 != null && !資格取得年月日.isEmpty()) && (資格喪失年月日 != null && !資格喪失年月日.isEmpty())) {
-            throw new ApplicationException(DbaErrorMessages.資格喪失登録不可.getMessage());
+            throw new ApplicationException(RRErrorMessages.資格喪失登録不可.getMessage());
         }
         return (true);
     }
@@ -170,7 +173,7 @@ public class HihokenshashikakusoshitsuManager {
             AgeCalculator agecalculator = new AgeCalculator(当該識別対象の生年月日,
                     JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日, 喪失年月日);
             if (Integer.valueOf(agecalculator.get年齢().toString()) >= 年齢_65) {
-                throw new ApplicationException(DbaErrorMessages.年齢到達取得異動未登録.getMessage());
+                throw new ApplicationException(RRErrorMessages.年齢到達取得異動未登録.getMessage());
             }
         }
 
@@ -187,6 +190,29 @@ public class HihokenshashikakusoshitsuManager {
     private static class TekiyoYMD {
 
         public TekiyoYMD() {
+        }
+    }
+
+    private static enum RRErrorMessages implements IMessageGettable {
+
+        資格喪失登録不可(30, "資格取得者ではないため資格喪失登録はできません。"),
+        年齢到達取得異動未登録(9, "年齢到達による異動登録が行われていません。");
+
+        private final Message message;
+
+        /**
+         * コンストラクタです。
+         *
+         * @param no 番号
+         * @param message メッセージ
+         */
+        private RRErrorMessages(int no, String message) {
+            this.message = new ErrorMessage(toCode("DBAE", no), message);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
         }
     }
 }

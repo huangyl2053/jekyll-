@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBA-0520-010 lishengli -->
 <!--SelectMethod : getHihokenshaShutokuJyoho-->
 <!--ParentResultMap : resultMap_getHihokenshaShutokuJyoho-->
-<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaicho.IHihokenshaShikakuShutokuMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshadaicho.IHihokenshaShikakuShutokuMapper">
 
     <resultMap id="resultMap_getHihokenshaShutokuJyoho" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity" autoMapping="true">
         <id property="hihokenshaNo"          column="hihokenshaDaicho_hihokenshaNo"         typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
@@ -39,7 +39,7 @@
 
     <select resultOrdered="true" id="getHihokenshaShutokuJyoho"
             resultMap="resultMap_getHihokenshaShutokuJyoho"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter" fetchSize="500">
         SELECT
         HihokenshaDaicho."hihokenshaNo" AS "hihokenshaDaicho_hihokenshaNo",
         HihokenshaDaicho."idoYMD" AS "hihokenshaDaicho_idoYMD",
@@ -91,7 +91,7 @@
 
     <select resultOrdered="true" id="getSaishinDeta"
             resultMap="resultMap_getHihokenshaShutokuJyoho"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter" fetchSize="500">
         SELECT
         HihokenshaDaicho."hihokenshaNo" AS "hihokenshaDaicho_hihokenshaNo",
         HihokenshaDaicho."idoYMD" AS "hihokenshaDaicho_idoYMD",
@@ -139,7 +139,7 @@
 
     <select resultOrdered="true" id="getSaidaiEdaban"
             resultMap="resultMap_getHihokenshaShutokuJyoho"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter" fetchSize="500">
         SELECT
         MAX(HihokenshaDaicho."edaNo") AS "hihokenshaDaicho_edaNo"
         FROM
