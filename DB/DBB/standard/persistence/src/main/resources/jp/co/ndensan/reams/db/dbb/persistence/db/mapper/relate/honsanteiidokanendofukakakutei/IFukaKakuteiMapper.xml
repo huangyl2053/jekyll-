@@ -35,7 +35,7 @@ and open the template in the editor.
         AND Fuka."tsuchishoNo"=Kibetsu."tsuchishoNo"
         AND Fuka."rirekiNo"=Kibetsu."rirekiNo"
         AND Kibetsu."ki"=#{ki}
-        LEFT JOIN 
+        INNER JOIN
         rgdb."UrT0705ChoteiKyotsu" AS ChoteiKyotsu
         ON Kibetsu."choteiId"=ChoteiKyotsu."choteiId"
         WHERE
