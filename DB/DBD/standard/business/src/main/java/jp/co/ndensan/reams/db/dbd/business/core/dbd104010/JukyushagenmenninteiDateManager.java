@@ -497,31 +497,33 @@ public class JukyushagenmenninteiDateManager {
         if (Chiku.住所.equals(processParameter.get宛名抽出条件().getChiku_Kubun())) {
             if (!processParameter.get宛名抽出条件().getJusho_From().isEmpty() && !processParameter.get宛名抽出条件().getJusho_To().isEmpty()) {
                 出力条件.add(new RString("町域：（").concat(processParameter.get宛名抽出条件().getJusho_From())
-                        .concat(new RString("）　～　（")).concat(processParameter.get宛名抽出条件().getJusho_To())
-                        .concat(new RString("）")));
+                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getJusho_FromMesho()).concat(new RString("　～　（"))
+                        .concat(processParameter.get宛名抽出条件().getJusho_To())
+                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getJusho_ToMesho()));
             }
             if (!processParameter.get宛名抽出条件().getJusho_From().isEmpty() && processParameter.get宛名抽出条件().getJusho_To().isEmpty()) {
                 出力条件.add(new RString("町域：（").concat(processParameter.get宛名抽出条件().getJusho_From())
-                        .concat(new RString("）　～")));
+                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getJusho_FromMesho()).concat(new RString("　～")));
             }
             if (processParameter.get宛名抽出条件().getJusho_From().isEmpty() && !processParameter.get宛名抽出条件().getJusho_To().isEmpty()) {
                 出力条件.add(new RString("町域：～　（").concat(processParameter.get宛名抽出条件().getJusho_To())
-                        .concat(new RString("）")));
+                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getJusho_ToMesho()));
             }
         }
         if (Chiku.行政区.equals(processParameter.get宛名抽出条件().getChiku_Kubun())) {
             if (!processParameter.get宛名抽出条件().getGyoseiku_From().isEmpty() && !processParameter.get宛名抽出条件().getGyoseiku_To().isEmpty()) {
                 出力条件.add(new RString("行政区：（").concat(processParameter.get宛名抽出条件().getGyoseiku_From())
-                        .concat(new RString("）　～　（")).concat(processParameter.get宛名抽出条件().getGyoseiku_To())
-                        .concat(new RString("）")));
+                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getGyoseiku_FromMesho()).concat(new RString("　～　（"))
+                        .concat(processParameter.get宛名抽出条件().getGyoseiku_To())
+                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getGyoseiku_ToMesho()));
             }
             if (!processParameter.get宛名抽出条件().getGyoseiku_From().isEmpty() && processParameter.get宛名抽出条件().getGyoseiku_To().isEmpty()) {
                 出力条件.add(new RString("行政区：（").concat(processParameter.get宛名抽出条件().getGyoseiku_From())
-                        .concat(new RString("）　～")));
+                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getGyoseiku_FromMesho()).concat(new RString("　～")));
             }
             if (processParameter.get宛名抽出条件().getGyoseiku_From().isEmpty() && !processParameter.get宛名抽出条件().getGyoseiku_To().isEmpty()) {
                 出力条件.add(new RString("行政区：～　（").concat(processParameter.get宛名抽出条件().getGyoseiku_To())
-                        .concat(new RString("）　～")));
+                        .concat(new RString("）　～")).concat(processParameter.get宛名抽出条件().getGyoseiku_ToMesho()));
             }
         }
 

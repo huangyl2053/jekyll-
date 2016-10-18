@@ -88,7 +88,7 @@ public class JukyushaNinteishasuJokyohyoOutputProcess extends BatchProcessBase<N
     }
 
     @Override
-    protected void beforeExecute() {
+    protected void afterExecute() {
         outputJokenhyoFactory();
     }
 
