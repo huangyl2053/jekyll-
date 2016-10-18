@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 要介護認定結果連携データ取込のコントローラです。
  *
- * @reamsid_L DBD_1510-010 miaojin
+ * @reamsid_L DBD-1510-010 liuyl
  */
 public class YogaigoNinteiKekkaRenkeiDataTorikomi {
 

@@ -49,7 +49,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 /**
  * 要介護認定申請連携データ取込のHandlerクラスです。
  *
- * @reamsid_L DBD_1510-010 miaojin
+ * @reamsid_L DBD-1510-010 miaojin
  */
 public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
 
