@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temp
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class RiyoshaFutanWariaiTempEntity {
 
-    List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報;
+    private List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報;
 
-    List<RiyoshaFutanWariaiKonkyoTempEntity> 利用者負担割合根拠情報;
+    private List<RiyoshaFutanWariaiKonkyoTempEntity> 利用者負担割合根拠情報;
 }
