@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -284,7 +283,11 @@ public class JutakuKaishuJizenShinseiToroku {
         handler.住宅改修内容のチェック();
         HihokenshaNo hihokenshaNo = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShiharaiKekkaResult 前回までの支払結果 = ViewStateHolder.get(ViewStateKeys.前回までの支払結果, ShiharaiKekkaResult.class);
-        ViewStateHolder.put(ViewStateKeys.住宅改修データ, handler.過去の住宅改修費取得(hihokenshaNo, 前回までの支払結果));
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
+        ViewStateHolder.put(ViewStateKeys.住宅改修データ, handler.過去の住宅改修費取得(hihokenshaNo, 前回までの支払結果,
+                画面モード, 整理番号, サービス提供年月));
         ViewStateHolder.put(ViewStateKeys.一覧データ, (Serializable) handler.to住宅改修データを画面メモリに保存());
         return ResponseData.of(div).respond();
     }
@@ -528,15 +531,10 @@ public class JutakuKaishuJizenShinseiToroku {
                 ShokanJutakuKaishuJizenShinsei.class);
         Models<ShokanJutakuKaishuIdentifier, ShokanJutakuKaishu> data = ViewStateHolder
                 .get(ViewStateKeys.住宅改修内容一覧_検索結果, Models.class);
-        boolean 保存結果 = 申請内容の保存(handler, state, hihokenshaNo, サービス提供年月, 整理番号, 様式番号, deleteData, data);
+        申請内容の保存(handler, state, hihokenshaNo, サービス提供年月, 整理番号, 様式番号, deleteData, data);
         RString 氏名漢字 = div.getKaigoShikakuKihonShaPanel().getCcdKaigoAtenaInfo().get氏名漢字();
-        if (保存結果) {
-            div.getJutakuJizenKanryo().getCcdKanryoMessage().setMessage(UrInformationMessages.保存終了,
-                    hihokenshaNo.value(), 氏名漢字, true);
-        } else {
-            div.getJutakuJizenKanryo().getCcdKanryoMessage().setMessage(UrErrorMessages.異常終了,
-                    hihokenshaNo.value(), 氏名漢字, false);
-        }
+        div.getJutakuJizenKanryo().getCcdKanryoMessage().setMessage(UrInformationMessages.保存終了,
+                hihokenshaNo.value(), 氏名漢字, true);
         ShokanJutakuKaishuJizenShinsei 償還払支給住宅改修事前申請情報 = ViewStateHolder.get(
                 ViewStateKeys.償還払支給住宅改修事前申請情報, ShokanJutakuKaishuJizenShinsei.class);
         handler.承認結果通知書作成(hihokenshaNo, 識別コード, seiriNo, state, 償還払支給住宅改修事前申請情報);
