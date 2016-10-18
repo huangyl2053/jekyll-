@@ -256,6 +256,7 @@ public class TokuteiNyushoServiceHiShinsei {
     public ResponseData<TokuteiNyushoServiceHiShinseiDiv> onBeforeOpenDialog_btnHiShoninRiyu(TokuteiNyushoServiceHiShinseiDiv div) {
         div.getShinsei().setSubGyomuCode(GyomuCode.DB介護保険.value());
         div.getShinsei().setSampleBunshoGroupCode(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
+        div.getShinsei().setSubBunsho(RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 
