@@ -586,6 +586,20 @@
                 *
             FROM "DbWT1111KyufuJissekiTemp"
             WHERE "DbWT1111KyufuJissekiTemp"."dataKunbun" <![CDATA[<>]]> '14'
+            AND   ("DbWT1111KyufuJissekiTemp"."dataKunbun" = '00'
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3018_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3018_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3019_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3019_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3032_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3032_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3020_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3020_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3021_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3021_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3022_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3022_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3025_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3025_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3026_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3026_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3027_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3027_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3033_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3033_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3029_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3029_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3030_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3030_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3106_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3106_hiHokenshaNo" IS NOT NULL))
     </select>
 
     <select resultOrdered="true" id="get給付実績高額Temp"
@@ -606,6 +620,20 @@
                 *
             FROM "DbWT1111KyufuJissekiTemp"
             WHERE "DbWT1111KyufuJissekiTemp"."dataKunbun" <![CDATA[<>]]> '14'
+            AND   ("DbWT1111KyufuJissekiTemp"."dataKunbun" = '00'
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3018_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3018_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3019_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3019_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3032_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3032_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3020_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3020_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3021_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3021_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3022_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3022_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3025_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3025_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3026_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3026_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3027_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3027_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3033_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3033_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3029_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3029_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3030_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3030_hiHokenshaNo" IS NOT NULL)
+               OR ("DbWT1111KyufuJissekiTemp"."dbT3106_hiHokenshaNo" != '' AND "DbWT1111KyufuJissekiTemp"."dbT3106_hiHokenshaNo" IS NOT NULL))
             ORDER BY "DbWT1111KyufuJissekiTemp"."inputShikibetsuNo",
                      "DbWT1111KyufuJissekiTemp"."hiHokenshaNo",
                      "DbWT1111KyufuJissekiTemp"."serviceTeikyoYM",

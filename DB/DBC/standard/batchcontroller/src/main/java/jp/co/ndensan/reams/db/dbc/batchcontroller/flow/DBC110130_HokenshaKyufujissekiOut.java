@@ -218,7 +218,9 @@ public class DBC110130_HokenshaKyufujissekiOut extends BatchFlowBase<DBC110130_H
                     Integer.class, new RString(送付ファイル作成), InsDataRecordTempProcess.PARAMETER_OUT_OUTPUTCOUNT);
             List<SharedFileDescriptor> エントリ情報 = (ArrayList<SharedFileDescriptor>) getResult(
                     List.class, new RString(送付ファイル作成), InsDataRecordTempProcess.PARAMETER_OUT_OUTPUTENTRY);
-            エントリ情報List.add(エントリ情報.get(INT_0));
+            if (!エントリ情報.isEmpty()) {
+                エントリ情報List.add(エントリ情報.get(INT_0));
+            }
             総出力件数 = 総出力件数 + 件数;
         }
     }

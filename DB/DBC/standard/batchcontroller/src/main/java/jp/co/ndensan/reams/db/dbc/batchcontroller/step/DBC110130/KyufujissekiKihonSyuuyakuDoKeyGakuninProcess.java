@@ -62,7 +62,7 @@ public class KyufujissekiKihonSyuuyakuDoKeyGakuninProcess extends BatchProcessBa
                 ? RString.EMPTY : dbWT1131ErrorEntity.getJigyoshoNo().getColumnValue();
         message = message.concat(同一キーMESSAGE)
                 .concat(RString.FULL_SPACE)
-                .concat(dbWT1131ErrorEntity.getSeiriNo()).concat(コロン)
+                .concat(dbWT1131ErrorEntity.getSeiriNo() == null ? RString.EMPTY : dbWT1131ErrorEntity.getSeiriNo()).concat(コロン)
                 .concat(入力識別番号).concat(コロン)
                 .concat(被保険者番号).concat(コロン)
                 .concat(サービス提供年月).concat(コロン)
