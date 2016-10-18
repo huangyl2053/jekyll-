@@ -42,6 +42,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査委託先マスタ画面でのバリデーションを管理するハンドラークラスです。
@@ -304,7 +306,7 @@ public class NinteichosaItakusakiMasterHandler {
      * 入力明細エリアの入力内容を調査委託先一覧に反映させる。
      *
      */
-    public void onClick_btnKakutei() {
+    public void onClick_btnKakutei(boolean 処理状態) {
         RString 状態 = RString.EMPTY;
         int selectID = -1;
         if (!RString.isNullOrEmpty(div.getHdnSelectID())) {
@@ -313,10 +315,15 @@ public class NinteichosaItakusakiMasterHandler {
         if (追加状態コード.equals(div.get状態())) {
             状態 = 追加状態コード;
         } else if (修正状態コード.equals(div.get状態())) {
-            if (div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().get(selectID).getJotai().equals(追加状態コード)) {
-                状態 = 追加状態コード;
+            if (処理状態) {
+                if (div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().get(selectID).getJotai().equals(追加状態コード)) {
+                    状態 = 追加状態コード;
+                } else {
+                    状態 = 修正状態コード;
+                }
             } else {
-                状態 = 修正状態コード;
+                状態 = RString.EMPTY;
+                ViewStateHolder.put(ViewStateKeys.状態, true);
             }
         } else if (削除状態コード.equals(div.get状態())) {
             if (div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().get(selectID).getJotai().equals(追加状態コード)) {
@@ -352,12 +359,14 @@ public class NinteichosaItakusakiMasterHandler {
                 div.getChosaitakusakiJohoInput().getRadautowatitsuke().getSelectedValue(),
                 div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedValue(),
                 div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue());
-        if (selectID == -1) {
-            div.setHdnShichosonCodeList(div.getHdnShichosonCodeList().concat(
-                    div.getChosaitakusakiJohoInput().getTxtShichoson().getValue()).concat(CSV_WRITER_DELIMITER));
-            div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().add(row);
-        } else {
-            div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().set(selectID, row);
+        if (処理状態) {
+            if (selectID == -1) {
+                div.setHdnShichosonCodeList(div.getHdnShichosonCodeList().concat(
+                        div.getChosaitakusakiJohoInput().getTxtShichoson().getValue()).concat(CSV_WRITER_DELIMITER));
+                div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().add(row);
+            } else {
+                div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().set(selectID, row);
+            }
         }
     }
 
