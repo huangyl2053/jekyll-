@@ -52,6 +52,7 @@ public final class PnlTotalHandler {
             dgShikyuShinseiList_Row row = new dgShikyuShinseiList_Row();
             if (shinsei.getサービス提供年月() != null) {
                 row.setTxtTeikyoYM(shinsei.getサービス提供年月().wareki().toDateString());
+                row.setServiceDate(shinsei.getサービス提供年月().toDateString());
             }
             if (shinsei.get申請年月日() != null) {
                 row.setTxtShinseiYMD(shinsei.get申請年月日().wareki().toDateString());
