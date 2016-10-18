@@ -1086,44 +1086,59 @@ public class FukaKeisan {
         FukaJohoRelateEntity 賦課RelateEntity = new FukaJohoRelateEntity();
         賦課RelateEntity.set介護賦課Entity(賦課の情報.toEntity());
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
-        for (int i = 0; i < INT_6; i++) {
-            KibetsuEntity entity = new KibetsuEntity();
-            Kibetsu kibetsu = new Kibetsu(
-                    賦課の情報.get調定年度(),
-                    賦課の情報.get賦課年度(),
-                    賦課の情報.get通知書番号(),
-                    賦課の情報.get履歴番号(),
-                    ChoshuHohoKibetsu.特別徴収.getコード(),
-                    i + 1);
-            kibetsu = kibetsu.createBuilderForEdit().set調定ID(Decimal.ZERO).build();
-            List<UrT0705ChoteiKyotsuEntity> choteiEntity = new ArrayList<>();
-            ChoteiKyotsu 調定共通 = new ChoteiKyotsu(Long.valueOf("0"));
-            調定共通 = 調定共通.createBuilderForEdit().set調定額(Decimal.ZERO).build();
-            choteiEntity.add(調定共通.toEntity());
-            entity.set調定共通Entity(choteiEntity);
-            entity.set介護期別Entity(kibetsu.toEntity());
-            介護期別RelateEntity.add(entity);
-        }
-        for (int i = 0; i < INT_14; i++) {
-            KibetsuEntity entity = new KibetsuEntity();
-            Kibetsu kibetsu = new Kibetsu(
-                    賦課の情報.get調定年度(),
-                    賦課の情報.get賦課年度(),
-                    賦課の情報.get通知書番号(),
-                    賦課の情報.get履歴番号(),
-                    ChoshuHohoKibetsu.普通徴収.getコード(),
-                    i + 1);
-            kibetsu = kibetsu.createBuilderForEdit().set調定ID(Decimal.ZERO).build();
-            List<UrT0705ChoteiKyotsuEntity> choteiEntity = new ArrayList<>();
-            ChoteiKyotsu 調定共通 = new ChoteiKyotsu(Long.valueOf("0"));
-            調定共通 = 調定共通.createBuilderForEdit().set調定額(Decimal.ZERO).build();
-            choteiEntity.add(調定共通.toEntity());
-            entity.set調定共通Entity(choteiEntity);
-            entity.set介護期別Entity(kibetsu.toEntity());
-            介護期別RelateEntity.add(entity);
+
+        if (!賦課の情報.getKibetsuList().isEmpty()) {
+            for (Kibetsu kibetsu : 賦課の情報.getKibetsuList()) {
+                KibetsuEntity entity = new KibetsuEntity();
+                List<UrT0705ChoteiKyotsuEntity> 調定共通Entity = new ArrayList<>();
+                for (ChoteiKyotsu choteiKyotsu : kibetsu.getChoteiKyotsuList()) {
+                    調定共通Entity.add(choteiKyotsu.toEntity());
+                }
+                entity.set介護期別Entity(kibetsu.toEntity());
+                entity.set調定共通Entity(調定共通Entity);
+                介護期別RelateEntity.add(entity);
+            }
+            賦課RelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
+        } else {
+            for (int i = 0; i < INT_6; i++) {
+                KibetsuEntity entity = new KibetsuEntity();
+                Kibetsu kibetsu = new Kibetsu(
+                        賦課の情報.get調定年度(),
+                        賦課の情報.get賦課年度(),
+                        賦課の情報.get通知書番号(),
+                        賦課の情報.get履歴番号(),
+                        ChoshuHohoKibetsu.特別徴収.getコード(),
+                        i + 1);
+                kibetsu = kibetsu.createBuilderForEdit().set調定ID(Decimal.ZERO).build();
+                List<UrT0705ChoteiKyotsuEntity> choteiEntity = new ArrayList<>();
+                ChoteiKyotsu 調定共通 = new ChoteiKyotsu(Long.valueOf("0"));
+                調定共通 = 調定共通.createBuilderForEdit().set調定額(Decimal.ZERO).build();
+                choteiEntity.add(調定共通.toEntity());
+                entity.set調定共通Entity(choteiEntity);
+                entity.set介護期別Entity(kibetsu.toEntity());
+                介護期別RelateEntity.add(entity);
+            }
+            for (int i = 0; i < INT_14; i++) {
+                KibetsuEntity entity = new KibetsuEntity();
+                Kibetsu kibetsu = new Kibetsu(
+                        賦課の情報.get調定年度(),
+                        賦課の情報.get賦課年度(),
+                        賦課の情報.get通知書番号(),
+                        賦課の情報.get履歴番号(),
+                        ChoshuHohoKibetsu.普通徴収.getコード(),
+                        i + 1);
+                kibetsu = kibetsu.createBuilderForEdit().set調定ID(Decimal.ZERO).build();
+                List<UrT0705ChoteiKyotsuEntity> choteiEntity = new ArrayList<>();
+                ChoteiKyotsu 調定共通 = new ChoteiKyotsu(Long.valueOf("0"));
+                調定共通 = 調定共通.createBuilderForEdit().set調定額(Decimal.ZERO).build();
+                choteiEntity.add(調定共通.toEntity());
+                entity.set調定共通Entity(choteiEntity);
+                entity.set介護期別Entity(kibetsu.toEntity());
+                介護期別RelateEntity.add(entity);
+            }
+            賦課RelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
         }
 
-        賦課RelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
         return new FukaJoho(賦課RelateEntity);
     }
 

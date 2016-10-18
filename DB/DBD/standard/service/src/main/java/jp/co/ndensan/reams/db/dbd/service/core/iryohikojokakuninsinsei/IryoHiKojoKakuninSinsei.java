@@ -81,6 +81,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class IryoHiKojoKakuninSinsei {
 
     private static final RString 表示する = new RString("1");
+    private static final RString 表示しない = new RString("");
     private static final RString 性別男 = new RString("1");
     private static final RString 選択する = new RString("○");
     private static final RString R_STRING1 = new RString("1");
@@ -219,16 +220,24 @@ public class IryoHiKojoKakuninSinsei {
         if (帳票制御共通 != null) {
             if (帳票制御共通.getJushoHenshuTodoufukenMeiHyojiUmu()) {
                 管内住所編集_都道府県名付与有無 = 表示する;
+            } else {
+                管内住所編集_都道府県名付与有無 = 表示しない;
             }
             if (帳票制御共通.getJushoHenshuGunMeiHyojiUmu()) {
                 管内住所編集_郡名付与有無 = 表示する;
+            } else {
+                管内住所編集_郡名付与有無 = 表示しない;
             }
             if (帳票制御共通.getJushoHenshuShichosonMeiHyojiUmu()) {
                 管内住所編集_市町村名付与有無 = 表示する;
+            } else {
+                管内住所編集_市町村名付与有無 = 表示しない;
             }
             管内住所編集_編集方法 = 帳票制御共通.getJushoHenshuChoikiHenshuHoho();
             if (帳票制御共通.getJushoHenshuKatagakiHyojiUmu()) {
                 住所編集_方書表示有無 = 表示する;
+            } else {
+                住所編集_方書表示有無 = 表示しない;
             }
         }
 
@@ -262,9 +271,9 @@ public class IryoHiKojoKakuninSinsei {
             }
         } else {
             if (表示する.equals(住所編集_方書表示有無)) {
-                jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.行政区番地space方書);
+                jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.町域番地space方書);
             } else {
-                jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.行政区番地);
+                jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.町域番地);
             }
         }
         jushoEditorBuilder.set行政区(宛名情報.get行政区画().getGyoseiku());
@@ -424,9 +433,9 @@ public class IryoHiKojoKakuninSinsei {
                 return JushoKannaiEditPattern.町域番地カッコ行政区;
             }
         } else if (表示する.equals(コンフィグ情報.get(INT_4))) {
-            return JushoKannaiEditPattern.行政区番地space方書;
+            return JushoKannaiEditPattern.町域番地space方書;
         } else {
-            return JushoKannaiEditPattern.行政区番地;
+            return JushoKannaiEditPattern.町域番地;
         }
     }
 
@@ -455,16 +464,24 @@ public class IryoHiKojoKakuninSinsei {
         if (帳票制御共通 != null) {
             if (帳票制御共通.getJushoHenshuTodoufukenMeiHyojiUmu()) {
                 管内住所編集_都道府県名付与有無 = 表示する;
+            } else {
+                管内住所編集_都道府県名付与有無 = 表示しない;
             }
             if (帳票制御共通.getJushoHenshuGunMeiHyojiUmu()) {
                 管内住所編集_郡名付与有無 = 表示する;
+            } else {
+                管内住所編集_郡名付与有無 = 表示しない;
             }
             if (帳票制御共通.getJushoHenshuShichosonMeiHyojiUmu()) {
                 管内住所編集_市町村名付与有無 = 表示する;
+            } else {
+                管内住所編集_市町村名付与有無 = 表示しない;
             }
             管内住所編集_編集方法 = 帳票制御共通.getJushoHenshuChoikiHenshuHoho();
             if (帳票制御共通.getJushoHenshuKatagakiHyojiUmu()) {
                 住所編集_方書表示有無 = 表示する;
+            } else {
+                住所編集_方書表示有無 = 表示しない;
             }
         }
         コンフィグ情報.add(管内住所編集_都道府県名付与有無);

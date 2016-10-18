@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.core.shikakuhenkouidou;
+package jp.co.ndensan.reams.db.dbz.service.core.shikakuhenkouidou;
 
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
-import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
@@ -21,6 +21,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -155,40 +158,67 @@ public class HihokenshaShikakuHenkoManager {
      * @param 生年月日 生年月日
      * @return DbaErrorMessages エラーコード
      */
-    public DbaErrorMessages shikakuHenkoTorokuCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
+    public Message shikakuHenkoTorokuCheck(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
             FlexibleDate 変更日, ShikakuHenkoJiyu 変更事由コード, FlexibleDate 生年月日) {
         HihokenshaShutokuJyoho hihokensha = manager.getSaishinDeta(
                 識別コード, 被保険者番号);
         if (!hihokensha.get異動日().isBeforeOrEquals(変更日)) {
-            return DbaErrorMessages.変更日移行新資格異動有り;
+            return RRErrorMessages.変更日移行新資格異動有り.getMessage();
         }
         AgeCalculator ageCalculator = new AgeCalculator(
                 DateOfBirthFactory.createInstance(生年月日), JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日, 変更日);
         RString 年齢 = ageCalculator.get年齢();
         if (FIRST_HIHOKENNSHA.equals(hihokensha.get被保険者区分コード())) {
             if (AGE_65 <= Integer.parseInt(年齢.toString()) && ShikakuHenkoJiyu._１号到達 == 変更事由コード) {
-                return DbaErrorMessages._１号被保険者対象外資格変更事由;
+                return RRErrorMessages._１号被保険者対象外資格変更事由.getMessage();
             }
             if (AGE_65 == Integer.parseInt(年齢.toString())) {
-                return DbaErrorMessages.変更日１号年齢到達日以前;
+                return RRErrorMessages.変更日１号年齢到達日以前.getMessage();
             }
         }
         if (SEC_HIHOKENNSHA.equals(hihokensha.get被保険者区分コード())) {
             FlexibleDate age = ageCalculator.get年齢到達日(AGE_65);
             if (AGE_65 < Integer.parseInt(年齢.toString()) && ShikakuHenkoJiyu._１号到達 != 変更事由コード) {
-                return DbaErrorMessages.年齢到達変更異動未登録;
+                return RRErrorMessages.年齢到達変更異動未登録.getMessage();
             }
             if (AGE_65 < Integer.parseInt(年齢.toString()) && ShikakuHenkoJiyu._１号到達 == 変更事由コード && !変更日.equals(age)) {
-                return DbaErrorMessages.変更日１号年齢到達日不一致;
+                return RRErrorMessages.変更日１号年齢到達日不一致.getMessage();
             }
             if (AGE_65 == Integer.parseInt(年齢.toString()) && ShikakuHenkoJiyu._１号到達 == 変更事由コード) {
-                return DbaErrorMessages.変更日１号年齢到達日不一致;
+                return RRErrorMessages.変更日１号年齢到達日不一致.getMessage();
             }
         }
         if (ShikakuHenkoJiyu.広住特転入 == 変更事由コード || ShikakuHenkoJiyu.広住特居住 == 変更事由コード
                 && !KOIKINAI_JUSHOCHI_FLAG_ARI.equals(hihokensha.get広域内住所地特例フラグ())) {
-            return DbaErrorMessages.広域内住所地特例者でない;
+            return RRErrorMessages.広域内住所地特例者でない.getMessage();
         }
         return null;
+    }
+
+    private static enum RRErrorMessages implements IMessageGettable {
+
+        変更日移行新資格異動有り(10, "変更日より新しい資格異動情報が存在します。"),
+        _１号被保険者対象外資格変更事由(11, "1号被保険者であるため該当の資格変更事由での登録はできません。"),
+        変更日１号年齢到達日以前(12, "変更日が1号年齢到達日より前であるため、登録できません。"),
+        年齢到達変更異動未登録(13, "1号被保険者到達による異動登録が行われていません。"),
+        変更日１号年齢到達日不一致(14, "変更日が1号年齢到達日ではありません。"),
+        広域内住所地特例者でない(15, "広域内住所地特例者ではないため、該当の資格変更事由は登録できません。");
+
+        private final Message message;
+
+        /**
+         * コンストラクタです。
+         *
+         * @param no 番号
+         * @param message メッセージ
+         */
+        private RRErrorMessages(int no, String message) {
+            this.message = new ErrorMessage(toCode("DBAE", no), message);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }

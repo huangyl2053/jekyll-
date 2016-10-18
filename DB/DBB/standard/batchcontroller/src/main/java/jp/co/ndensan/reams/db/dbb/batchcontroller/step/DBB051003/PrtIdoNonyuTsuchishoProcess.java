@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.HonsanteiTsuchi
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoInfo;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempResult;
 import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.gennendoidohakkoichiran.HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport;
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.HokenryoNonyuTsuchishoBookFuriKaeAriRenchoCoverReport;
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport;
@@ -33,7 +34,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskigoto.NonyuT
 import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskigoto.NonyuTsuchishoCVSKigotoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiRenchoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiReport;
-import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsu;
@@ -100,13 +100,18 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -143,10 +148,21 @@ public class PrtIdoNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuch
     private static final RString 全件異動分区分_全件 = new RString("全件");
     private static final RString 全件対象 = new RString("1");
     private static final RString 全件異動分区分_異動分 = new RString("異動分");
+    private static final RString 漢字_作成 = new RString("作成");
     private int 当初出力_中期開始期 = 0;
     private int 当初出力_後期開始期 = 0;
     private final RString 項目名１ = new RString("当初出力_中期開始期");
     private final RString 項目名２ = new RString("当初出力_後期開始期");
+    private RString 並び順の1件目 = RString.EMPTY;
+    private RString 並び順の2件目 = RString.EMPTY;
+    private RString 並び順の3件目 = RString.EMPTY;
+    private RString 並び順の4件目 = RString.EMPTY;
+    private RString 並び順の5件目 = RString.EMPTY;
+    private static final int NUM0 = 0;
+    private static final int NUM1 = 1;
+    private static final int NUM2 = 2;
+    private static final int NUM3 = 3;
+    private static final int NUM4 = 4;
 
     private HonsanteiIdoProcessParameter processParameter;
     private HonsanteiIdoGennendoTsuchisyoIkatsuHako manager;
@@ -251,6 +267,8 @@ public class PrtIdoNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuch
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
         get出力条件リスト();
+
+        出力帳票entity();
 
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
@@ -381,8 +399,14 @@ public class PrtIdoNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuch
                 編集後本算定通知書共通情報.get編集後本算定通知書共通情報());
         csvListWriter.writeLine(bodyList);
 
-        NonyuTsuchIchiranReport nonyuTsuchIchiranReport = new NonyuTsuchIchiranReport(編集後本算定通知書共通情報.get編集後本算定通知書共通情報(),
-                出力期AsInt, processParameter.get帳票作成日時().getRDateTime(), 地方公共団体, 出力項目リスト, 連番);
+        RString 年月日 = processParameter.get帳票作成日時().getRDateTime().getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        RString 時刻 = processParameter.get帳票作成日時().getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+        RString 作成日時 = new RString(年月日.concat(RString.HALF_SPACE).concat(時刻).concat(RString.HALF_SPACE).concat(漢字_作成).toString());
+        HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport nonyuTsuchIchiranReport
+                = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport(編集後本算定通知書共通情報.get編集後本算定通知書共通情報(),
+                        processParameter.get賦課年度().toDateString(), processParameter.get納入_出力期(), 作成日時, 地方公共団体.get地方公共団体コード().value(),
+                        地方公共団体.get市町村名(), 並び順の1件目, 並び順の2件目, 並び順の3件目, 並び順の4件目, 並び順の5件目, 連番.intValue());
         nonyuTsuchIchiranReport.writeBy(一覧表ReportSourceWriter);
 
         permanentTableWriter.insert(honsanteiSyori.insert通知書発行後異動者(processParameter.get帳票作成日時(),
@@ -412,6 +436,14 @@ public class PrtIdoNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuch
         一覧表reportWriter.close();
         csvListWriter.close();
         fileSpoolManager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
+    }
+
+    private void 出力帳票entity() {
+        並び順の1件目 = 出力項目リスト.size() <= NUM0 ? RString.EMPTY : 出力項目リスト.get(NUM0);
+        並び順の2件目 = 出力項目リスト.size() <= NUM1 ? RString.EMPTY : 出力項目リスト.get(NUM1);
+        並び順の3件目 = 出力項目リスト.size() <= NUM2 ? RString.EMPTY : 出力項目リスト.get(NUM2);
+        並び順の4件目 = 出力項目リスト.size() <= NUM3 ? RString.EMPTY : 出力項目リスト.get(NUM3);
+        並び順の5件目 = 出力項目リスト.size() <= NUM4 ? RString.EMPTY : 出力項目リスト.get(NUM4);
     }
 
     private void initializ納入通知書() {

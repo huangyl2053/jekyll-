@@ -155,7 +155,7 @@ public class GetKogakugassanJikofutangakuInfoHoseiTempProcess extends BatchProce
         tmpEntity.setJuminShubetsuCode(entity.getJuminShubetsuCode());
         tmpEntity.setShichosonCode(entity.getShichosonCode());
         tmpEntity.setYubinNo(entity.getYubinNo());
-        tmpEntity.setZenkokuJushoCode(entity.getZenkokuJushoCode());
+        tmpEntity.setChoikiCode(entity.getChoikiCode());
         tmpEntity.setGyoseikuCode(entity.getGyoseikuCode());
     }
 

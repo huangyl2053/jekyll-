@@ -27,7 +27,6 @@ public class SFKTishoshaIchiranPanelBatchParameter {
      */
     public ResponseData<SFKTishoshaIchiranPanelBatchParameterDiv> onLoad(SFKTishoshaIchiranPanelBatchParameterDiv div) {
         getHandler(div).onLoad();
-        div.getChutsutsuJoken().getCcdShisetsuJohoCommonChildDiv().initialize();
         return ResponseData.of(div).respond();
     }
 

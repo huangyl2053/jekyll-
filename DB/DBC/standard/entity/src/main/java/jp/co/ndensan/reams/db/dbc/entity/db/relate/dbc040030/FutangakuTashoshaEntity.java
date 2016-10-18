@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -81,7 +81,7 @@ public class FutangakuTashoshaEntity implements IDbAccessable, Serializable {
     private RString juminShubetsuCode;
     private LasdecCode shichosonCode;
     private YubinNo yubinNo;
-    private ZenkokuJushoCode zenkokuJushoCode;
+    private ChoikiCode choikiCode;
     private GyoseikuCode gyoseikuCode;
     private RString ichiranBiko;
     private RString jikoFutanGakuHoseiJissi;

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaicho;
+package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshadaicho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 
 /**

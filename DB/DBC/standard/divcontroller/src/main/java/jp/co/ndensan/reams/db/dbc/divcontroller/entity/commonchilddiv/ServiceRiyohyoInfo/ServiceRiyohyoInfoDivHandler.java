@@ -49,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -133,6 +134,7 @@ public class ServiceRiyohyoInfoDivHandler {
     private static final RString RSTRING_Ⅱ = new RString("Ⅱ");
     private static final RString RSTRING_17 = new RString("17");
     private static final RString RSTRING_67 = new RString("67");
+    private static final RString SERVICETANI = new RString("serviceTani");
 
     private static final RString 種類限度単位指定エラー = new RString(
             "種類限度単位指定エラー：【サービス単位＝種類超過＋種類限度内】になっていません。");
@@ -252,7 +254,7 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCalcGokei().setDisabled(true);
         div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnBeppyoGokeiKakutei().setDisabled(true);
         div.getServiceRiyohyoBeppyoList().getBtnBeppyoMeisaiNew().setDisabled(false);
-        div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(true);
+        div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(false);
         div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(true);
 
         if (追加.equals(表示モード)) {
@@ -561,6 +563,10 @@ public class ServiceRiyohyoInfoDivHandler {
                 : result.get割引適用後率().getColumnValue());
         row.getWaribikigoTani().setValue(result.get割引適用後単位());
         row.getKaisu().setValue(result.get回数());
+        if ((row.getTani().getValue() == null || Decimal.ZERO.equals(row.getTani().getValue()))
+                && !Decimal.ZERO.equals(row.getServiceTani().getValue())) {
+            row.setCellBgColor(SERVICETANI.toString(), DataGridCellBgColor.bgColorLightBlue);
+        }
         row.getServiceTani().setValue(result.getサービス単位());
         row.getShuruiGendoChokaTani().setValue(result.get種類限度超過単位());
         row.getShuruiGendonaiTani().setValue(result.get種類限度内単位());
@@ -900,17 +906,24 @@ public class ServiceRiyohyoInfoDivHandler {
         if (!選択有无) {
             row = new dgServiceRiyohyoBeppyoList_Row();
             row.setRowState(RowState.Added);
+            setRowInButtonMeisaiKakutei(row);
             rowList.add(row);
             div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
         } else {
             選択データありの場合(row, 状態);
+            setRowInButtonMeisaiKakutei(row);
         }
+        List<dgServiceRiyohyoBeppyoList_Row> rowListNew
+                = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
+        rowListNew = ソードGrid(rowListNew);
+        div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowListNew);
+
     }
 
     private void 選択データありの場合(dgServiceRiyohyoBeppyoList_Row row, RString 状態) throws ApplicationException {
         boolean サービスコードフラグ
-                = !row.getHdnServiceShuruiCode().equals(div.getCcdServiceCodeInput().getサービスコード1())
-                && !row.getHdnServiceKomokuCode().equals(div.getCcdServiceCodeInput().getサービスコード2());
+                = row.getHdnServiceShuruiCode().equals(div.getCcdServiceCodeInput().getサービスコード1())
+                && row.getHdnServiceKomokuCode().equals(div.getCcdServiceCodeInput().getサービスコード2());
         if (row.getHdnJigyoshaCode().equals(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo()) && サービスコードフラグ) {
             if (row.getServiceTani().equals(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani())) {
                 throw new ApplicationException(DbcErrorMessages.重複データサービス.getMessage());
@@ -934,6 +947,41 @@ public class ServiceRiyohyoInfoDivHandler {
 
     private void 明細パネルを初期化() {
         div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
+    }
+
+    private void setRowInButtonMeisaiKakutei(dgServiceRiyohyoBeppyoList_Row row) {
+        RString サービス種類コードTmp;
+        RString サービス項目コードTmp;
+        RString サービスTmp;
+        if (!div.getCcdServiceCodeInput().isDisplayNone()) {
+            サービス種類コードTmp = div.getCcdServiceCodeInput().getサービスコード1();
+            サービス項目コードTmp = div.getCcdServiceCodeInput().getサービスコード2();
+            サービスTmp = div.getCcdServiceCodeInput().getサービス名称();
+        } else {
+            サービス種類コードTmp = div.getCcdServiceTypeInput().getサービス種類コード();
+            サービス項目コードTmp = RSTRING_ZERO;
+            サービスTmp = div.getCcdServiceTypeInput().getサービス種類名称();
+        }
+        row.setJigyosha(div.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho());
+        row.setService(サービスTmp);
+        row.getTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtTani().getValue());
+        row.getWaribikigoRitsu().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoRitsu().getValue());
+        row.getWaribikigoTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().getValue());
+        row.getKaisu().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue() == null ? Decimal.ZERO
+                : div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue());
+        if ((row.getTani().getValue() == null || Decimal.ZERO.equals(row.getTani().getValue()))
+                && !Decimal.ZERO.equals(row.getServiceTani().getValue())) {
+            row.setCellBgColor(SERVICETANI.toString(), DataGridCellBgColor.bgColorLightBlue);
+        }
+        row.getServiceTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue());
+        row.setHdnJigyoshaCode(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo());
+        row.setHdnServiceShuruiCode(サービス種類コードTmp);
+        row.setHdnGendogakuTaishogaiFlag(div.getServiceRiyohyoBeppyoMeisai().getTxtHdnGendogakuTaishogaiFlg().getValue());
+        row.setHdnRiyoshaFutanTeiritsuTeigakuKbn(
+                div.getServiceRiyohyoBeppyoMeisai().getTxtHdnRiyoshaFutanTeiritsuTeigakuKbn().getValue());
+        row.setHdnServiceKomokuCode(サービス項目コードTmp);
+        row.setHdnGokeiFlag(合計なし);
+        row.setHdnGokeiGyoFlag(RSTRING_ZERO);
     }
 
     private List<dgServiceRiyohyoBeppyoList_Row> ソードGrid(List<dgServiceRiyohyoBeppyoList_Row> rowList) {
@@ -1069,14 +1117,26 @@ public class ServiceRiyohyoInfoDivHandler {
     }
 
     private void 合計反映() {
+        RString 状態 = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         boolean 選択有无 = ViewStateHolder.get(ViewStateKeys.選択有无, Boolean.class);
-        List<dgServiceRiyohyoBeppyoList_Row> rowList = div.getServiceRiyohyoBeppyoList()
-                .getDgServiceRiyohyoBeppyoList().getDataSource();
-        dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
+        List<dgServiceRiyohyoBeppyoList_Row> rowList
+                = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
+        dgServiceRiyohyoBeppyoList_Row row
+                = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
         if (!選択有无) {
-            row = rowList.get(rowList.size() - 1);
+            row = new dgServiceRiyohyoBeppyoList_Row();
+            row.setRowState(RowState.Added);
+            setRowInButtonKakutei(row);
+            rowList.add(row);
+            div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowList);
+        } else {
+            選択データありの場合(row, 状態);
+            setRowInButtonKakutei(row);
         }
-        setRowInButtonKakutei(row);
+        List<dgServiceRiyohyoBeppyoList_Row> rowListNew
+                = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
+        rowListNew = ソードGrid(rowListNew);
+        div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().setDataSource(rowListNew);
     }
 
     private void setRowInButtonKakutei(dgServiceRiyohyoBeppyoList_Row row) {
@@ -1089,7 +1149,7 @@ public class ServiceRiyohyoInfoDivHandler {
             サービスTmp = div.getCcdServiceCodeInput().getサービス名称();
         } else {
             サービス種類コードTmp = div.getCcdServiceTypeInput().getサービス種類コード();
-            サービス項目コードTmp = div.getCcdServiceCodeInput().getサービスコード2();
+            サービス項目コードTmp = RSTRING_ZERO;
             サービスTmp = div.getCcdServiceTypeInput().getサービス種類名称();
         }
         row.setJigyosha(div.getCcdJigyoshaInput().getNyuryokuShisetsuMeisho());
@@ -1099,6 +1159,10 @@ public class ServiceRiyohyoInfoDivHandler {
         row.getWaribikigoTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtWaribikigoTani().getValue());
         row.getKaisu().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue() == null ? Decimal.ZERO
                 : div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu().getValue());
+        if ((row.getTani().getValue() == null || Decimal.ZERO.equals(row.getTani().getValue()))
+                && !Decimal.ZERO.equals(row.getServiceTani().getValue())) {
+            row.setCellBgColor(SERVICETANI.toString(), DataGridCellBgColor.bgColorLightBlue);
+        }
         row.getServiceTani().setValue(div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue());
         row.getShuruiGendoChokaTani().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendoChokaTani().getValue());
         row.getShuruiGendonaiTani().setValue(div.getServiceRiyohyoBeppyoGokei().getTxtShuruiGendonaiTani().getValue());
@@ -1164,12 +1228,12 @@ public class ServiceRiyohyoInfoDivHandler {
     }
 
     /**
-     * 合計情報追加初期化します。
+     * 合計確定のイベントです。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 利用年月 FlexibleYearMonth
      */
-    public void init合計情報追加(HihokenshaNo 被保険者番号, FlexibleYearMonth 利用年月) {
+    public void onClick_btnKakutei(HihokenshaNo 被保険者番号, FlexibleYearMonth 利用年月) {
         JigoSakuseiMeisaiTouroku jigoSakusei = JigoSakuseiMeisaiTouroku.createInstance();
         RiyoshaFutanWariaiMeisai 合計情報 = jigoSakusei.get給付率(被保険者番号, 利用年月);
         Decimal 給付率 = 給付率_90;
@@ -1183,8 +1247,6 @@ public class ServiceRiyohyoInfoDivHandler {
         ViewStateHolder.put(ViewStateKeys.給付率, 給付率);
         div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setValue(給付率);
 
-        div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
-        div.getServiceRiyohyoBeppyoMeisai().setDisabled(false);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisplayNone(true);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoMeisai().getTxtTani().setDisabled(true);
@@ -1194,9 +1256,9 @@ public class ServiceRiyohyoInfoDivHandler {
         div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setDisabled(true);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setVisible(false);
         div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnBeppyoMeisaiKakutei().setVisible(false);
-
         div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
         div.getServiceRiyohyoBeppyoGokei().setDisabled(false);
+
     }
 
     /**
@@ -1484,7 +1546,8 @@ public class ServiceRiyohyoInfoDivHandler {
                     YoboKeikakuJikoSakuseiKanriBuilder builder = 予防給付計画自己作成管理.createBuilderForEdit();
                     builder.setサービス提供事業者番号(new JigyoshaNo(row.getHdnJigyoshaCode()))
                             .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
-                            .setサービス項目コード(new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
+                            .setサービス項目コード(RSTRING_ZERO.equals(row.getHdnServiceKomokuCode())
+                                    ? ServiceKomokuCode.EMPTY : new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
                             .set単位数(row.getTani().getValue())
                             .set回数_日数(row.getKaisu().getValue())
                             .set割引後適用率(new HokenKyufuRitsu(row.getWaribikigoRitsu().getValue()))
@@ -1505,7 +1568,8 @@ public class ServiceRiyohyoInfoDivHandler {
                     YoboKeikakuJikoSakuseiKanriBuilder builder = 予防給付計画自己作成管理.createBuilderForEdit();
                     builder.setサービス提供事業者番号(new JigyoshaNo(row.getHdnJigyoshaCode()))
                             .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
-                            .setサービス項目コード(new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
+                            .setサービス項目コード(RSTRING_ZERO.equals(row.getHdnServiceKomokuCode())
+                                    ? ServiceKomokuCode.EMPTY : new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
                             .set単位数(row.getTani().getValue())
                             .set回数_日数(row.getKaisu().getValue())
                             .set割引後適用率(new HokenKyufuRitsu(row.getWaribikigoRitsu().getValue()))
@@ -1533,7 +1597,8 @@ public class ServiceRiyohyoInfoDivHandler {
                     KyotakuKeikakuJikosakuseiKanriBuilder builder = 居宅給付計画自己作成管理.createBuilderForEdit();
                     builder.setサービス提供事業者番号(new JigyoshaNo(row.getHdnJigyoshaCode()))
                             .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
-                            .setサービス項目コード(new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
+                            .setサービス項目コード(RSTRING_ZERO.equals(row.getHdnServiceKomokuCode())
+                                    ? ServiceKomokuCode.EMPTY : new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
                             .set単位数(row.getTani().getValue())
                             .set回数_日数(row.getKaisu().getValue())
                             .set割引後適用率(new HokenKyufuRitsu(row.getWaribikigoRitsu().getValue()))
@@ -1553,7 +1618,8 @@ public class ServiceRiyohyoInfoDivHandler {
                     KyotakuKeikakuJikosakuseiKanriBuilder builder = 居宅給付計画自己作成管理.createBuilderForEdit();
                     builder.setサービス提供事業者番号(new JigyoshaNo(row.getHdnJigyoshaCode()))
                             .setサービス種類コード(new ServiceShuruiCode(row.getHdnServiceShuruiCode()))
-                            .setサービス項目コード(new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
+                            .setサービス項目コード(RSTRING_ZERO.equals(row.getHdnServiceKomokuCode())
+                                    ? ServiceKomokuCode.EMPTY : new ServiceKomokuCode(row.getHdnServiceKomokuCode()))
                             .set単位数(row.getTani().getValue())
                             .set回数_日数(row.getKaisu().getValue())
                             .set割引後適用率(new HokenKyufuRitsu(row.getWaribikigoRitsu().getValue()))

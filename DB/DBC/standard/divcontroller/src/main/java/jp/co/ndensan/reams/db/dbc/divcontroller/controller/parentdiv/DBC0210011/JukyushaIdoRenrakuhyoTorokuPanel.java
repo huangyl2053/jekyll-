@@ -140,7 +140,7 @@ public class JukyushaIdoRenrakuhyoTorokuPanel {
         JukyushaIdoRenrakuhyo entity = manager.get受給者異動連絡票情報(被保険者番号, 異動日);
         JukyushaIdoRenrakuhyo result = div.getJukyushaIdoRenrakuhyoShinkiTorokuPanel().getJukyushaIdoRenrakuhyo().get受給者異動送付();
         if (entity != null) {
-            result = handler.editResult(result);
+            result = handler.editResult(result, entity);
         }
         return result;
     }

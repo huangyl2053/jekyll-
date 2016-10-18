@@ -111,7 +111,7 @@ public class FutangakuTashoshaInsertProcess extends BatchProcessBase<Kogakugassa
         futangakuTashoshaEntity.setShichosonCode(entity.getShichosonCode());
         futangakuTashoshaEntity.setJuminShubetsuCode(entity.getJuminShubetsuCode());
         futangakuTashoshaEntity.setYubinNo(entity.getYubinNo());
-        futangakuTashoshaEntity.setZenkokuJushoCode(entity.getZenkokuJushoCode());
+        futangakuTashoshaEntity.setChoikiCode(entity.getChoikiCode());
         futangakuTashoshaEntity.setGyoseikuCode(entity.getGyoseikuCode());
         futangakuTashoshaEntity.setIchiranBiko(entity.getIchiranBiko());
         futangakuTashoshaEntity.setJikoFutanGakuHoseiJissi(entity.getJikoFutanGakuHoseiJissi());

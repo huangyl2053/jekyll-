@@ -147,18 +147,16 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     }
 
     private RString 基準日時2(YMDHMS 基準日時, FlexibleYear 年度) {
-        RString 処理区分;
         if (基準日時 != null && !基準日時.isEmpty()) {
             DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity
                     = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課, ShoriName.所得引出.get名称(), 枝番, 年度);
             if (処理日付管理異動情報Entity != null) {
-                処理区分 = 可;
+                return 可;
             } else {
-                処理区分 = 可;
+                return 可;
             }
         } else {
-            処理区分 = 不可;
+            return 不可;
         }
-        return 処理区分;
     }
 }

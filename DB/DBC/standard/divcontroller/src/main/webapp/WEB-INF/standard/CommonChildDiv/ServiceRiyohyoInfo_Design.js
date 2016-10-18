@@ -44,16 +44,8 @@ var DBC;
                 return "onClick_btnDelete";
             };
 
-            Events.onBlur_txtTani = function () {
-                return "onBlur_txtTani";
-            };
-
-            Events.onBlur_txtWaribikigoRitsu = function () {
-                return "onBlur_txtWaribikigoRitsu";
-            };
-
-            Events.onBlur_txtKaisu = function () {
-                return "onBlur_txtKaisu";
+            Events.onClick_btnKakutei = function () {
+                return "onClick_btnKakutei";
             };
 
             Events.onClick_btnBeppyoMeisaiKakutei = function () {
@@ -70,30 +62,6 @@ var DBC;
 
             Events.onClick_btnCalcMeisai = function () {
                 return "onClick_btnCalcMeisai";
-            };
-
-            Events.onBlur_txtShuruiGendoChokaTani = function () {
-                return "onBlur_txtShuruiGendoChokaTani";
-            };
-
-            Events.onBlur_txtShuruiGendonaiTani = function () {
-                return "onBlur_txtShuruiGendonaiTani";
-            };
-
-            Events.onBlur_txtTanisuTanka = function () {
-                return "onBlur_txtTanisuTanka";
-            };
-
-            Events.onBlur_txtKubunGendoChokaTani = function () {
-                return "onBlur_txtKubunGendoChokaTani";
-            };
-
-            Events.onBlur_txtKubunGendonaiTani = function () {
-                return "onBlur_txtKubunGendonaiTani";
-            };
-
-            Events.onBlur_txtKyufuritsu = function () {
-                return "onBlur_txtKyufuritsu";
             };
 
             Events.onClick_btnBeppyoGokeiKakutei = function () {
@@ -217,6 +185,10 @@ var DBC;
 
             Controls.prototype.ServiceRiyohyoBeppyoJigyoshaServiceInput = function () {
                 return new UZA.Panel(this.convFiledName("ServiceRiyohyoBeppyoJigyoshaServiceInput"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
 
             Controls.prototype.ServiceRiyohyoBeppyoMeisai = function () {
