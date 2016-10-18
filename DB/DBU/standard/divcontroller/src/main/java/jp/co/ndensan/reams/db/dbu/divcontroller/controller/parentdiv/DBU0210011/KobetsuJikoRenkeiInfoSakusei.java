@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -60,13 +59,18 @@ public class KobetsuJikoRenkeiInfoSakusei {
             div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setReadOnly(true);
         } else {
             ChushutsuKikanJohoData chushutsuKikanJohoData = ViewStateHolder.get(ViewStateKeys.退避用データ, ChushutsuKikanJohoData.class);
-            YMDHMS 対象終了日時 = chushutsuKikanJohoData.get対象終了日時();
-            if (対象終了日時 != null && !対象終了日時.isEmpty()) {
-
+            if (chushutsuKikanJohoData != null && chushutsuKikanJohoData.get対象終了日時() != null && !chushutsuKikanJohoData.get対象終了日時().isEmpty()) {
                 div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(
                         chushutsuKikanJohoData.get対象終了日時().getDate());
                 div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(
                         chushutsuKikanJohoData.get対象終了日時().getRDateTime().getTime());
+            } else {
+                div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().clearValue();
+                div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().clearValue();
+                div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(RDate.getNowDate());
+                div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().setValue(RDate.getNowTime());
+                div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(RDate.getNowDate());
+                div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(RDate.getNowTime());
             }
             div.getKobetsuJikoRenkeiInfoSakuseiBP().getChkKikanHenko().setDisabled(false);
         }
