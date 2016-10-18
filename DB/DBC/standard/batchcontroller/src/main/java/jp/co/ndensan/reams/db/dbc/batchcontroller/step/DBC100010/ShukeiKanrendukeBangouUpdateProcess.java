@@ -74,7 +74,6 @@ public class ShukeiKanrendukeBangouUpdateProcess extends BatchProcessBase<TempSe
                 eucEntity.set介護住宅改修理由書作成受付年月日(entity.get介護住宅改修理由書作成受付年月日());
                 eucEntity.set集計関連付け番号(tempEntity.get集計関連番号());
                 eucEntity.set対象外フラグ(entity.is対象外フラグ());
-                eucEntity.set集計関連付け番号(tempEntity.get集計関連番号());
                 請求明細一時ファイルB.update(eucEntity);
             }
         }

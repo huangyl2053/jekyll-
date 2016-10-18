@@ -20,6 +20,7 @@ public class KyoudouShoriRelateEntity {
     private RString 集約保険者番号;
     private RString 集約保険者名;
     private RString 集約被保険者番号;
+    private RString 集約証記載保険者番号;
     private RString 集約異動年月日;
     private RString 基_保険者番号;
     private RString 基_保険者名;

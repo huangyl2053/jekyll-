@@ -276,12 +276,14 @@
             AND CaT0701_収入_明細."sokuhoKubun"  =  false
         ) AS 収入
             ON   収納情報."c_shunoId"  =  収入."shunoId"
-            ORDER BY
+        ORDER BY
            対象者情報一時テーブル."hihokenshaNo",
            収納情報.調定年度,
            収納情報."fukaNendo",
            収納情報."tsuchishoNo",
-           収納情報."k_ki" ASC
+           収納情報."k_ki" ASC,
+           収納情報.収納ID ASC,
+           収入."shunoId" ASC
     </select>
 
     <!--償還未払い情報を取得して、償還未払い情報一時テーブルに登録する-->
@@ -367,6 +369,7 @@
     <!--5.帳票印字用データを取得して、支払方法変更リストEntityに設定する-->
     <select resultOrdered="true" id="find帳票印字用データ" resultMap="resultMap_find帳票印字用データ"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd207010.ShiharaiHohoHenkoHaakuFiveMybatisParameter" fetchSize="500">
+ WITH master AS (
         SELECT
             対象者情報一時テーブル."hihokenshaNo" AS 対象者情報_被保険者番号,
         
@@ -420,7 +423,6 @@
             認定情報."ninteiYukoKikanKaishiYMD" AS 認定情報_認定有効期間開始年月日,
             認定情報."ninteiYukoKikanShuryoYMD" AS 認定情報_認定有効期間終了年月日,
             認定情報."ninteiYMD" AS 認定情報_認定年月日,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
             資格情報.*,
             申請中認定情報."受給者台帳_被保険者番号" AS 申請中認定情報_被保険者番号
         FROM
@@ -457,11 +459,6 @@
                   ON 資格情報."資格情報_識別コード" = 生活保護受給者.生活保護受給者_識別コード
         INNER JOIN rgdb."DbV4001JukyushaDaicho" AS 認定情報
             ON 対象者情報一時テーブル."hihokenshaNo" = 認定情報."hihokenshaNo"
-        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho" 
-          ON "ShikibetsuTaisho"."shikibetsuCode" = 資格情報."資格情報_識別コード"
-      
       LEFT JOIN (
                 SELECT Distinct(rgdb."DbT4001JukyushaDaicho"."hihokenshaNo") AS 受給者台帳_被保険者番号
                 FROM rgdb."DbT4001JukyushaDaicho"
@@ -478,6 +475,20 @@
             収納状況一時テーブル."fukaNendo",
             収納状況一時テーブル."tsuchishoNo",
             収納状況一時テーブル."ki" ASC
+     )
+       SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM master
+        LEFT OUTER JOIN
+              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+               (
+                    SELECT ARRAY_AGG(CAST (資格情報."資格情報_識別コード" AS TEXT))
+                    FROM master
+               )
+              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+              AS "ShikibetsuTaisho"
+              ON 資格情報."資格情報_識別コード" = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
     <resultMap id="resultMap_find最大の履歴番号レコードの情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuFourEntity" autoMapping="true">
         <collection property="支払方法変更Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity"/>

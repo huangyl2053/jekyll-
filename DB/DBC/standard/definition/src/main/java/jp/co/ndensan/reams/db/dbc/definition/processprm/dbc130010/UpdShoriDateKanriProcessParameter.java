@@ -28,6 +28,7 @@ public class UpdShoriDateKanriProcessParameter implements IBatchProcessParameter
     private RString if種類;
     private RString 取込形式;
     private RString 処理日時;
+    private RString 処理名;
 
     /**
      *
@@ -37,9 +38,10 @@ public class UpdShoriDateKanriProcessParameter implements IBatchProcessParameter
      * @param if種類 RString
      * @param 取込形式 RString
      * @param 処理日時 RString
+     * @param 処理名 RString
      */
     public UpdShoriDateKanriProcessParameter(RString 保険者区分, RString 表題,
-            List<RString> 処理対象市町村, RString if種類, RString 取込形式, RString 処理日時) {
+            List<RString> 処理対象市町村, RString if種類, RString 取込形式, RString 処理日時, RString 処理名) {
 
         this.保険者区分 = 保険者区分;
         this.表題 = 表題;
@@ -47,6 +49,7 @@ public class UpdShoriDateKanriProcessParameter implements IBatchProcessParameter
         this.if種類 = if種類;
         this.取込形式 = 取込形式;
         this.処理日時 = 処理日時;
+        this.処理名 = 処理名;
     }
 
     /**

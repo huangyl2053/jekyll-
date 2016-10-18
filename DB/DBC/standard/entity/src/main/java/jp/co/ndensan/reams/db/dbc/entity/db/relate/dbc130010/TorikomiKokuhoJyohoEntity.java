@@ -47,4 +47,5 @@ public class TorikomiKokuhoJyohoEntity extends DbTableEntityBase<TorikomiKokuhoJ
     private RString エラーコード;
     private RString エラー文言;
     private RString エラー区分;
+    private boolean 文言設定flag;
 }

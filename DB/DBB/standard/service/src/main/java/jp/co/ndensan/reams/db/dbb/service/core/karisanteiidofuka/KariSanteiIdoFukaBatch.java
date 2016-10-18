@@ -71,6 +71,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
@@ -79,9 +80,11 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.KozaYotoKubunType;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
@@ -106,14 +109,15 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -142,6 +146,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     private final DbT1001HihokenshaDaichoDac 被保険者台帳管理dac;
     private final DbV2001ChoshuHohoAliveDac 徴収方法dac;
     private final DbT2010FukaErrorListDac 賦課エラーdac;
+    private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
     private final IKariSanteiIdoFukaBatchMapper mapper;
     private static final RString RSTRING_0 = new RString("0");
     private static final RString RSTRING_1 = new RString("1");
@@ -191,7 +196,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
 
     private FileSpoolManager manager;
     private RString eucFilePath;
-    private EucCsvWriter<KarisanteiIdoKekkaIchiranCSVEntity> eucCsvWriter;
+    private CsvWriter<KarisanteiIdoKekkaIchiranCSVEntity> eucCsvWriter;
 
     /**
      * コンストラクタ
@@ -201,6 +206,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         被保険者台帳管理dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
         徴収方法dac = InstanceProvider.create(DbV2001ChoshuHohoAliveDac.class);
         賦課エラーdac = InstanceProvider.create(DbT2010FukaErrorListDac.class);
+        帳票制御共通Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
         mapper = mapperProvider.create(IKariSanteiIdoFukaBatchMapper.class);
     }
 
@@ -475,7 +481,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             int 普徴仮算定の最終期 = 月期対応取得_普徴.get期月リスト().filtered仮算定期間().getLast().get期AsInt();
             HihokenshaDaicho 資格情報 = new HihokenshaDaicho(資格喪失情報Entity.get資格喪失Entity());
             int 資格喪失月 = 0;
-            if (資格情報 != null && 資格情報.get資格喪失年月日() != null) {
+            if (資格情報.get資格喪失年月日() != null) {
                 資格喪失月 = 資格情報.get資格喪失年月日().getMonthValue();
             }
             FukaJoho 更正後賦課情報 = new FukaJoho(資格喪失情報Entity.get賦課情報Entity());
@@ -1063,13 +1069,13 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID_仮算定異動一括結果一覧表CSV, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名称);
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID_仮算定異動一括結果一覧表CSV)
-                .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setEncode(Encode.UTF_8withBOM)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(true)
-                .build();
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build();
         List<Integer> 月List = set普徴期();
         for (KeisanjohoAtenaKozaKouseizengoEntity 更正前後Entity : 更正前後EntityList) {
             eucCsvWriter.writeLine(setCSVEntity(更正前後Entity, 調定日時, 賦課年度, 月List));
@@ -1641,6 +1647,21 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         dbT7022Entity.setTaishoShuryoTimestamp(new YMDHMS(抽出終了日時));
         dbT7022Entity.setState(EntityDataState.Added);
         処理日付管理Dac.save(dbT7022Entity);
+    }
+
+    /**
+     * 帳票制御共通情報取得メソッドです。
+     *
+     * @param 帳票分類ID ReportId
+     * @return ChohyoSeigyoKyotsu 帳票制御共通情報
+     */
+    public ChohyoSeigyoKyotsu load帳票制御共通(ReportId 帳票分類ID) {
+
+        DbT7065ChohyoSeigyoKyotsuEntity entity = 帳票制御共通Dac.selectByKey(SubGyomuCode.DBB介護賦課, 帳票分類ID);
+        if (entity == null) {
+            return null;
+        }
+        return new ChohyoSeigyoKyotsu(entity);
     }
 
     /**

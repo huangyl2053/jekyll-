@@ -420,7 +420,7 @@ public class HokenshaSofuListHandler {
         }
 
         RDate nowDate = RDate.getNowDate();
-        if (コントロールレコード.get(六) != null && !コントロールレコード.get(六).equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分,
+        if (コントロールレコード.get(六) != null && !コントロールレコード.get(六).equals(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 nowDate, SubGyomuCode.DBU介護統計報告))) {
             deleteEntitys(file);
             throw new ApplicationException(DbcErrorMessages.国保連保険者番号不正.getMessage());
@@ -449,7 +449,7 @@ public class HokenshaSofuListHandler {
         if (データレコード.get(ゼロ).equals(二)) {
             if (データ種別.equals(給付実績情報111) || データ種別.equals(データ種別112) || データ種別.equals(データ種別114)
                     || データ種別.equals(データ種別386) || データ種別.equals(データ種別38B) || データ種別.equals(データ種別38H)
-                    || データ種別.equals(データ種別38J) || データ種別.equals(データ種別38P) || データ種別.equals(データ種別741)) {
+                    || データ種別.equals(データ種別38J) || データ種別.equals(データ種別38P)) {
                 保険者番号 = データレコード.get(六);
             }
             保険者番号取得四(データレコード, データ種別);
@@ -480,6 +480,9 @@ public class HokenshaSofuListHandler {
         }
         if (データ種別.equals(データ種別537) || データ種別.equals(データ種別5C3) || データ種別.equals(データ種別533)) {
             保険者番号 = データレコード.get(八);
+        }
+        if (データ種別.equals(データ種別741)) {
+            保険者番号 = データレコード.get(二2);
         }
     }
 

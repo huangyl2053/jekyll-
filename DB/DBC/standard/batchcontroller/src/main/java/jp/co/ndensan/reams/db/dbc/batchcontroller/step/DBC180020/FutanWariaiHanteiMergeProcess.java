@@ -78,7 +78,8 @@ public class FutanWariaiHanteiMergeProcess extends BatchKeyBreakBase<RiyoshaFuta
     }
 
     private void insertHandle() {
-        List<RiyoshaFutanWariaiMeisaiTempEntity> results = service.futanWariaiHanteiMerge(entities, nendo);
+        List<RiyoshaFutanWariaiMeisaiTempEntity> results
+                = service.futanWariaiHanteiMerge(entities, null, nendo).get利用者負担割合明細情報();
         for (RiyoshaFutanWariaiMeisaiTempEntity result : results) {
             利用者負担割合明細Temp.insert(result);
         }

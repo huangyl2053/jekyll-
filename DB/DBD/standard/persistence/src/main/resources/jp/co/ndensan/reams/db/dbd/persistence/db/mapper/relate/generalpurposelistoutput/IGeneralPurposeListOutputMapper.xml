@@ -773,21 +773,25 @@ WITH master AS (
             AND  (被保険者台帳管理."shikakuSoshitsuYMD" IS NOT NULL 
                 AND 被保険者台帳管理."shikakuSoshitsuYMD" != '')
         </if>
+       <if test="is宛名抽出条件_市町村コード_非全部">
+             AND (受給者台帳."shichosonCode"= #{shichosonCode}
+               OR 受給者台帳."shichosonCode"= #{shichosonCode})
+         </if>
         )
         SELECT 
-         master.*,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+         master.*
+           ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM master
         INNER JOIN
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
             (
-                 SELECT ARRAY_AGG(CAST "被保険者台帳管理_識別コード" AS TEXT))
+                 SELECT ARRAY_AGG(CAST ("被保険者台帳管理_識別コード" AS TEXT))
                  FROM master
             )
            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
            AS "ShikibetsuTaisho"
            ON 被保険者台帳管理_識別コード = "ShikibetsuTaisho"."shikibetsuCode"    
-       
+       WHERE 1=1
         <if test="is宛名抽出区分_年齢">
             <if test="is宛名抽出区分_年齢From">
                 AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{年齢Fromから逆算した生年月日}
@@ -804,41 +808,36 @@ WITH master AS (
                    AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{seinengappiYMDTo}
             </if>
         </if>
-         <if test="is宛名抽出条件_市町村コード_非全部">
-             AND (受給者台帳."shichosonCode"= #{shichosonCode}
-               OR (受給者台帳."shichosonCode"= #{shichosonCode})
-         </if>
-
-             <if test="is住所From">
-                 AND #{jusho_From} <![CDATA[<=]]> "ShikibetsuTaisho"."tennyumaeZenkokuJushoCode"
-             </if>
-              <if test="is住所To">
-                 AND "ShikibetsuTaisho"."tennyumaeZenkokuJushoCode" <![CDATA[<=]]> #{jusho_To}
-             </if>
-             <if test="is行政区From">
-                AND #{gyoseiku_From} <![CDATA[<=]]> "ShikibetsuTaisho"."gyoseikuCode"
-             </if>
-              <if test="is行政区To">
-                 AND "ShikibetsuTaisho"."gyoseikuCode" <![CDATA[<=]]> #{gyoseiku_To}
-             </if>
-             <if test="is地区1From">
-                 AND #{chiku1_From} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode1"
-             </if>
-              <if test="is地区1To">
-                 AND "ShikibetsuTaisho"."chikuCode1" <![CDATA[<=]]> #{chiku1_To}
-             </if>
-             <if test="is地区2From">
-                 AND #{chiku2_From} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode2"
-             </if>
-              <if test="is地区2To">
-                 AND "ShikibetsuTaisho"."chikuCode2" <![CDATA[<=]]> #{chiku2_To}
-             </if>
-             <if test="is地区3From">
-                 AND #{chiku3_From} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode3"
-             </if>
-              <if test="is地区3To">
-                 AND "ShikibetsuTaisho"."chikuCode3" <![CDATA[<=]]> #{chiku3_To}
-             </if>
+        <if test="is住所From">
+            AND #{jusho_From} <![CDATA[<=]]> "ShikibetsuTaisho"."tennyumaeZenkokuJushoCode"
+        </if>
+         <if test="is住所To">
+            AND "ShikibetsuTaisho"."tennyumaeZenkokuJushoCode" <![CDATA[<=]]> #{jusho_To}
+        </if>
+        <if test="is行政区From">
+           AND #{gyoseiku_From} <![CDATA[<=]]> "ShikibetsuTaisho"."gyoseikuCode"
+        </if>
+         <if test="is行政区To">
+            AND "ShikibetsuTaisho"."gyoseikuCode" <![CDATA[<=]]> #{gyoseiku_To}
+        </if>
+        <if test="is地区1From">
+            AND #{chiku1_From} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode1"
+        </if>
+         <if test="is地区1To">
+            AND "ShikibetsuTaisho"."chikuCode1" <![CDATA[<=]]> #{chiku1_To}
+        </if>
+        <if test="is地区2From">
+            AND #{chiku2_From} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode2"
+        </if>
+         <if test="is地区2To">
+            AND "ShikibetsuTaisho"."chikuCode2" <![CDATA[<=]]> #{chiku2_To}
+        </if>
+        <if test="is地区3From">
+            AND #{chiku3_From} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode3"
+        </if>
+         <if test="is地区3To">
+            AND "ShikibetsuTaisho"."chikuCode3" <![CDATA[<=]]> #{chiku3_To}
+        </if>
 
     </select>
 </mapper>

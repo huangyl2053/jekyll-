@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010032;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -24,8 +26,11 @@ public enum FutanyikkatsuShoninkekkaListDivSpec implements IPredicate<Futanyikka
                  */
                 @Override
                 public boolean apply(FutanyikkatsuShoninkekkaListDiv div) {
-                    return div.getDatagridhojipanel().getDgNinteiIchiran().getDataSource() != null
-                    && !div.getDatagridhojipanel().getDgNinteiIchiran().getDataSource().isEmpty();
+                    List<dgNinteiIchiran_Row> dgNinteiIchiransize = null;
+                    if (div.getDatagridhojipanel().getDgNinteiIchiran() != null) {
+                        dgNinteiIchiransize = div.getDatagridhojipanel().getDgNinteiIchiran().getDataSource();
+                    }
+                    return dgNinteiIchiransize != null && !dgNinteiIchiransize.isEmpty();
                 }
             },
     修正保存対象存在チェック {
@@ -38,11 +43,16 @@ public enum FutanyikkatsuShoninkekkaListDivSpec implements IPredicate<Futanyikka
                  */
                 @Override
                 public boolean apply(FutanyikkatsuShoninkekkaListDiv div) {
-                    boolean dgninteiichiran_jotai = false;
-                    if (div.getDatagridhojipanel().getDgNinteiIchiran().getActiveRow().getJotai() != null) {
-                        dgninteiichiran_jotai = div.getDatagridhojipanel().getDgNinteiIchiran().getActiveRow().getJotai().equals(new RString("修正"));
+                    List<RString> KEYS = new ArrayList<>();
+                    if (div.getDatagridhojipanel().getDgNinteiIchiran() != null) {
+                        for (int i = 0; i < div.getDatagridhojipanel().getDgNinteiIchiran().getDataSource().size(); i++) {
+                            if (div.getDatagridhojipanel().getDgNinteiIchiran().getDataSource().get(i)
+                            .getJotai().equals(new RString("修正"))) {
+                                KEYS.add(new RString(i));
+                            }
+                        }
                     }
-                    return dgninteiichiran_jotai;
+                    return !KEYS.isEmpty();
                 }
             };
 }

@@ -85,14 +85,22 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSource implements IReportSource
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+    @ReportItem(name = "yubinNo")
+    public RString yubinNo;
     @ReportItem(name = "choikiCode")
     public RString choikiCode;
     @ReportItem(name = "gyoseikuCode")
     public RString gyoseikuCode;
     @ReportItem(name = "kanaMeisho")
     public RString kanaMeisho;
+    @ReportItem(name = "shichosonCode")
+    public RString shichosonCode;
     @ReportItem(name = "shoKisaiHokenshaNo")
     public RString shoKisaiHokenshaNo;
+    @ReportItem(name = "hihokenshaNo")
+    public RString hihokenshaNo;
+    @ReportItem(name = "tsuchishoNo")
+    public RString tsuchishoNo;
     @ReportItem(name = "shikakuJyotaiKubun")
     public RString shikakuJyotaiKubun;
 }

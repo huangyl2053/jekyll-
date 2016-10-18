@@ -27,7 +27,6 @@ public class InsKokuhoShikakuJyohoTempProcessParameter implements IBatchProcessP
     private RString if種類;
     private RString 取込形式;
     private RString 処理日時;
-    private boolean 文言設定flag;
 
     /**
      *
@@ -37,10 +36,9 @@ public class InsKokuhoShikakuJyohoTempProcessParameter implements IBatchProcessP
      * @param if種類 RString
      * @param 取込形式 RString
      * @param 処理日時 RString
-     * @param 文言設定flag boolean
      */
     public InsKokuhoShikakuJyohoTempProcessParameter(RString 保険者区分, RString 表題,
-            List<RString> 処理対象市町村, RString if種類, RString 取込形式, RString 処理日時, boolean 文言設定flag) {
+            List<RString> 処理対象市町村, RString if種類, RString 取込形式, RString 処理日時) {
 
         this.保険者区分 = 保険者区分;
         this.表題 = 表題;
@@ -48,6 +46,5 @@ public class InsKokuhoShikakuJyohoTempProcessParameter implements IBatchProcessP
         this.if種類 = if種類;
         this.取込形式 = 取込形式;
         this.処理日時 = 処理日時;
-        this.文言設定flag = 文言設定flag;
     }
 }

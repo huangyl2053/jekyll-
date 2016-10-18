@@ -176,7 +176,7 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0710021",
      "layoutTitle": "住宅改修費支給申請登録",
-     "eventName": "償還払決定情報",
+     "eventName": "to償還払決定情報",
      "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",

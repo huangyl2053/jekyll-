@@ -44,7 +44,7 @@
     
     
     <resultMap id="ResultMap_HihokenshaDaichoTempSixColumnEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.HihokenshaDaichoTempSixColumnEntity" autoMapping="true">
-        <result property="hihokenshaNo" column="TEMP_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+         <result property="hihokenshaNo" column="TEMP_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
          <result property="shikibetsuCode" column="TEMP_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
          <result property="jushochiTokureiFlag" column="TEMP_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
          <result property="shichosonCode" column="TEMP_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
@@ -65,7 +65,7 @@
         AND  
              #{世帯員把握基準日} <![CDATA[<]]>   A."shikakuSoshitsuYMD"
          <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
-        AND   A."hihokenshaNo" =  ${被保険者番号}  
+        AND   A."hihokenshaNo" =  #{被保険者番号}  
          </if> 
          ORDER BY
                 A."hihokenshaNo"
@@ -174,8 +174,9 @@
      </select>
     
     <resultMap id="ResultMap_UpdTaishoSeitaiyinTemp1Entity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.UpdTaishoSeitaiyinTemp1Entity" autoMapping="true">
-        <id column="T1.hihokenshaNo" />
-        <id column="T1.shikibetsuCode" />
+        <id column="shotaiCode" />
+        <id column="hihokenshaNo" />
+        <id column="shikibetsuCode" />
         <association property="対象世帯員" resultMap="resultMap_TaishoSetaiinEntity"/>
         <association property="被保険者台帳管理Newest" resultMap="resultMap_DbV1001HihokenshaDaichoEntity1"/>
     </resultMap>
@@ -254,8 +255,9 @@
      </select>
     
     <resultMap id="ResultMap_UpdTaishoSeitaiyinTemp2Entity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.UpdTaishoSeitaiyinTemp2Entity" autoMapping="true">
-        <id column="T1.hihokenshaNo" />
-        <id column="T1.shikibetsuCode" />
+        <id column="shotaiCode" />
+        <id column="hihokenshaNo" />
+        <id column="shikibetsuCode" />
         <association property="対象世帯員" resultMap="resultMap_TaishoSetaiinEntity"/>
         <association property="事業対象者" resultMap="ResultMap_DbT3100Entity"/>
     </resultMap>
@@ -295,8 +297,9 @@
      </select>
     
     <resultMap id="ResultMap_UpdTaishoSeitaiyinTemp3Entity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.UpdTaishoSeitaiyinTemp3Entity" autoMapping="true">
-        <id column="T1.hihokenshaNo" />
-        <id column="T1.shikibetsuCode" />
+        <id column="shotaiCode" />
+        <id column="hihokenshaNo" />
+        <id column="shikibetsuCode" />
         <association property="対象世帯員" resultMap="resultMap_TaishoSetaiinEntity"/>
         <association property="受給者台帳" resultMap="ResultMap_DbT4001Entity"/>
     </resultMap>
@@ -370,7 +373,7 @@
         AND  
              A."shikakuSoshitsuYMD" <![CDATA[<=]]>  #{世帯員把握基準日2} 
          <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
-        AND   A."hihokenshaNo" =  ${被保険者番号}  
+        AND   A."hihokenshaNo" =  #{被保険者番号}  
          </if> 
          ORDER BY
                 A."hihokenshaNo"
@@ -388,8 +391,6 @@
                 "TaishoSetaiin1"  AS "TaishoSetaiin1"
          ON    
                "TaishoSetaiin1"."shotaiCode"  =  T1."shotaiCode"  
-         ORDER BY
-               T1."shotaiCode"
      </select>
     
     <resultMap id="ResultMap_UpdTaishoSeitaiyinTemp4Entity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.UpdTaishoSeitaiyinTemp4Entity" autoMapping="true">

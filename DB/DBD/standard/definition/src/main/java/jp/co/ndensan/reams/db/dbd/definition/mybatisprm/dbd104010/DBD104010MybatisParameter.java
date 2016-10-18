@@ -154,8 +154,8 @@ public class DBD104010MybatisParameter extends UaFt200FindShikibetsuTaishoParam 
 
     private void set年齢基準日の対応日(AtenaSelectBatchParameter 宛名抽出条件) {
         if (宛名生年月日1 || 宛名生年月日2) {
-            年齢基準日from = new FlexibleDate(宛名抽出条件.getNenreiKijunbi().minusYear(宛名抽出条件.getNenreiRange().getFrom().intValue()).toDateString());
-            年齢基準日to = new FlexibleDate(宛名抽出条件.getNenreiKijunbi().minusYear(宛名抽出条件.getNenreiRange().getTo().intValue()).toDateString());
+            年齢基準日from = new FlexibleDate(宛名抽出条件.getNenreiKijunbi().minusYear(宛名抽出条件.getNenreiRange().getTo().intValue()).toDateString());
+            年齢基準日to = new FlexibleDate(宛名抽出条件.getNenreiKijunbi().minusYear(宛名抽出条件.getNenreiRange().getFrom().intValue()).toDateString());
         }
     }
 
@@ -168,7 +168,7 @@ public class DBD104010MybatisParameter extends UaFt200FindShikibetsuTaishoParam 
 
     private void set基準日付(FlexibleYear 対象年度, RString 基準日) {
 
-        if (基準日 != null) {
+        if (基準日 != null && !基準日.isEmpty()) {
             date2 = new FlexibleDate(対象年度.plusYear(1).toDateString().concat(月2).concat(基準日));
             date4 = new FlexibleDate(対象年度.plusYear(1).toDateString().concat(月4).concat(基準日));
             date6 = new FlexibleDate(対象年度.toDateString().concat(月6).concat(基準日));

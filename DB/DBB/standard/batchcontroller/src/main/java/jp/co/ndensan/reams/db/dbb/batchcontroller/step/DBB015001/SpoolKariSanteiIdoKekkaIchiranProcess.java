@@ -26,10 +26,10 @@ public class SpoolKariSanteiIdoKekkaIchiranProcess extends SimpleBatchProcessBas
     @Override
     protected void process() {
         KariSanteiIdoFukaBatch manager = KariSanteiIdoFukaBatch.createInstance();
-        if (processParameter.get出力帳票List() != null && !processParameter.get出力帳票List().isEmpty()) {
+        if (processParameter.get出力帳票Entity() != null) {
             manager.spoolKariSanteiIdoKekkaIchiran(processParameter.get調定年度(),
                     processParameter.get賦課年度(), new YMDHMS(processParameter.get調定日時()),
-                    Long.parseLong(processParameter.get出力帳票List().get(0).get出力順ID().toString()));
+                    Long.parseLong(processParameter.get出力帳票Entity().get出力順ID().toString()));
         }
     }
 

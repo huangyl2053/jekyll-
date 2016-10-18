@@ -143,12 +143,12 @@ public class IryohiKojyoSyosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTaisyoYY() {
+    public DropDownList getTaisyoYY() {
         return this.getSyosaiPanel1().getTaisyoYY();
     }
 
     @JsonIgnore
-    public void  setTaisyoYY(TextBoxDate TaisyoYY) {
+    public void  setTaisyoYY(DropDownList TaisyoYY) {
         this.getSyosaiPanel1().setTaisyoYY(TaisyoYY);
     }
 

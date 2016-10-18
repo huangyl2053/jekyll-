@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
@@ -38,10 +39,13 @@ public class SeikyuMeisaiItiziEUCEntity extends DbTableEntityBase<SeikyuMeisaiIt
         TABLE_NAME = (new RString("tempSeikyuMeisaiItiziData"));
     }
     @TempTableColumnOrder(1)
+    @PrimaryKey
     private ShoKisaiHokenshaNo 証記載保険者番号;
     @TempTableColumnOrder(2)
+    @PrimaryKey
     private HihokenshaNo 被保険者番号;
     @TempTableColumnOrder(3)
+    @PrimaryKey
     private int 履歴番号;
     @TempTableColumnOrder(4)
     private ServiceCode サービスコード;

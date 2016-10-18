@@ -2,9 +2,9 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 総合事業情報の用XMLです。 -->
 <!-- @reamsid_L DBU-4880-080 lishengli -->
-<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou.ISougouJigyouJyohouMapper">
-    <select resultOrdered="true" id="get当初_版改定_異動分データ" resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.SougouJigyouJyohouRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.sougoujigyoujyohou.SougouJigyouJyohouMybatisParameter" fetchSize="500">
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ISougouJigyouJyohouMapper">
+    <select resultOrdered="true" id="get当初_版改定_異動分データ" resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.SougouJigyouJyohouRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.SougouJigyouJyohouMybatisParameter" fetchSize="500">
         SELECT
             futanGaku."hihokenshaNo",
             futanGaku."shikibetsuCode",
@@ -17,7 +17,7 @@
             futanGaku."sumi_Gokei_JikoFutanGaku",
             futanGaku."sumi_Gokei_70_74JikoFutanGaku",
             futanGaku."lastUpdateTimestamp"
-        FROM <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou.ISougouJigyouJyohouMapper.総合事業" /> AS futanGaku
+        FROM <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ISougouJigyouJyohouMapper.総合事業" /> AS futanGaku
         <if test = "is当初または版改定">
             WHERE
                #{対象開始日時} <![CDATA[<]]> futanGaku."lastUpdateTimestamp"
@@ -43,7 +43,7 @@
                 futanGaku1."sumi_Gokei_JikoFutanGaku",
                 futanGaku1."sumi_Gokei_70_74JikoFutanGaku",
                 futanGaku1."lastUpdateTimestamp"
-            FROM <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou.ISougouJigyouJyohouMapper.総合事業" /> AS futanGaku1
+            FROM <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ISougouJigyouJyohouMapper.総合事業" /> AS futanGaku1
             INNER JOIN (SELECT 
                             dbT7304."hihokenshaNo",
                             dbT7304."tokuteiKojinJohoMeiCode",
@@ -67,10 +67,10 @@
     </select>
     
     <select resultOrdered="true" id="get提供対象者" resultMap="ResultMap_TeyikyouTayisyousyaJyohouRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.sougoujigyoujyohou.SougouJigyouJyohouMybatisParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.SougouJigyouJyohouMybatisParameter" fetchSize="500">
         SELECT 
             psm."kojinNo",
-            <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou.ISougouJigyouJyohouMapper.allColumns_TeikyoKihonJoho" />
+            <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ISougouJigyouJyohouMapper.allColumns_TeikyoKihonJoho" />
          FROM "TeikyoKihonJohoNNTemp" AS teikyoKihonJoho
         INNER JOIN rgua.${psmShikibetsuTaisho} AS psm
             ON psm."shikibetsuCode" = teikyoKihonJoho."shikibetsuCode"
@@ -126,11 +126,11 @@
     </sql>
 
 
-    <resultMap id="ResultMap_TeyikyouTayisyousyaJyohouRelateEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.TeyikyouTayisyousyaJyohouRelateEntity" autoMapping="true">
+    <resultMap id="ResultMap_TeyikyouTayisyousyaJyohouRelateEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeyikyouTayisyousyaJyohouRelateEntity" autoMapping="true">
         <id property="teikyoKihonJohoNNTempEntity.hihokenshaNo" column="teikyoKihonJoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="teikyoKihonJohoNNTempEntity.inputShikibetsuNo" column="teikyoKihonJoho_dataSetKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="teikyoKihonJohoNNTempEntity.dataSetKey" column="teikyoKihonJoho_dataSetKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kojinNo" column="kojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KojinNoTypeHandler"/>
-        <association property="teikyoKihonJohoNNTempEntity" resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou.ISougouJigyouJyohouMapper.ResultMap_TeikyoKihonJohoNNTempEntity"/>
+        <association property="teikyoKihonJohoNNTempEntity" resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ISougouJigyouJyohouMapper.ResultMap_TeikyoKihonJohoNNTempEntity"/>
     </resultMap>
 
     <!--テーブルTeikyoKihonJohoNNTempの項目をTeikyoKihonJohoNNTempEntityの項目にマッピングします。-->

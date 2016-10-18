@@ -207,19 +207,19 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
             entity.set老齢福祉年金受給者(Boolean.FALSE);
         }
 
-        if (entity.get合計所得金額() == null) {
+        if (item.get合計所得金額() == null) {
             entity.set合計所得金額(Decimal.ZERO);
         } else {
             entity.set合計所得金額(item.get合計所得金額());
         }
 
-        if (entity.get年金収入額() == null) {
+        if (item.get年金収入額() == null) {
             entity.set年金収入額(Decimal.ZERO);
         } else {
             entity.set年金収入額(item.get年金収入額());
         }
 
-        if (entity.get非課税年金勘案額() == null) {
+        if (item.get非課税年金勘案額() == null) {
             entity.set非課税年金勘案額(Decimal.ZERO);
         } else {
             entity.set非課税年金勘案額(item.get非課税年金勘案額());
@@ -232,7 +232,7 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
             set識別コードValue(entity, item);
         }
         setis高齢者複数世帯(entity, item.get識別コード(), item.get基準日());
-        if (entity.get課税所得額() == null) {
+        if (item.get課税所得額() == null) {
             entity.set課税所得額(Decimal.ZERO);
         } else {
             entity.set課税所得額(item.get課税所得額());

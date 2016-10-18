@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 高額サービス費支給（不支給）決定者一覧表帳票Source
@@ -66,6 +67,8 @@ public class KogakuShikyuFushikyuKetteishaIchiranSource implements IReportSource
     public RString listUpper_9;
     @ReportItem(name = "listUpper_10", length = 10, order = 24)
     public RString listUpper_10;
+    @ReportPerson(id = "X")
+    public RString shikibetuCode;
     @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listLower_1", length = 10, order = 25)
     public RString listLower_1;

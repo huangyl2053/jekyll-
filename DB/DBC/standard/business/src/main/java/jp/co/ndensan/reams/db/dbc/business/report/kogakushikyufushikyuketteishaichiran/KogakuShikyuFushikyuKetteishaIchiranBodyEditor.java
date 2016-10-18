@@ -104,6 +104,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranBodyEditor implements IKogakuSh
             source.listLower_6 = 被保険者.get資格喪失日().wareki().eraType(EraType.KANJI_RYAKU)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         }
+        source.shikibetuCode = 被保険者.get識別コード() == null ? RString.EMPTY : 被保険者.get識別コード();
         source.listLower_7 = 被保険者.get行政区コード();
         source.listLower_9 = RString.EMPTY;
         return source;

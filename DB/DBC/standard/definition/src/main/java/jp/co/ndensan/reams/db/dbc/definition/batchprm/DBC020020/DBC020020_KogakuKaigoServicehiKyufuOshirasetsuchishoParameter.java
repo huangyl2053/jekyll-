@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020020;
 
-import jp.co.ndensan.reams.db.dbc.definition.core.shunyugaku.ShutsuryokuJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.kogakukyufu.KogakuKyufu_OshiraseTsuchi_ChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -51,7 +51,7 @@ public class DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter exten
     @BatchParameter(key = "shinseishoTeishutsuKigen", name = "申請書提出期限")
     private FlexibleDate shinseishoTeishutsuKigen;
     @BatchParameter(key = "chushutsuJoken", name = "抽出条件")
-    private ShutsuryokuJoken chushutsuJoken;
+    private KogakuKyufu_OshiraseTsuchi_ChushutsuJoken chushutsuJoken;
     @BatchParameter(key = "menuId", name = "メニューID")
     private RString menuId;
     @BatchParameter(key = "bunshoMojiretsu", name = "文書番号文字列")

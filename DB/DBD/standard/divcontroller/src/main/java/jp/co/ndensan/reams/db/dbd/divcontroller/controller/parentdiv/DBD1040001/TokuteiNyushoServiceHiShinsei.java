@@ -256,6 +256,7 @@ public class TokuteiNyushoServiceHiShinsei {
     public ResponseData<TokuteiNyushoServiceHiShinseiDiv> onBeforeOpenDialog_btnHiShoninRiyu(TokuteiNyushoServiceHiShinseiDiv div) {
         div.getShinsei().setSubGyomuCode(GyomuCode.DB介護保険.value());
         div.getShinsei().setSampleBunshoGroupCode(SampleBunshoGroupCodes.減免減額_承認しない理由.getコード());
+        div.getShinsei().setSubBunsho(RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 
@@ -277,18 +278,29 @@ public class TokuteiNyushoServiceHiShinsei {
      * @return レスポンスデータ
      */
     public ResponseData<TokuteiNyushoServiceHiShinseiDiv> onClick_btnBackToShinseiList(TokuteiNyushoServiceHiShinseiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+        TokubetsuchiikiKasanGemmen 特別地域加算減免申請の情報 = ViewStateHolder.get(ViewStateKeys.特別地域加算減免申請の情報, TokubetsuchiikiKasanGemmen.class);
+        boolean 変更あり = false;
+        RString menuID = ResponseHolder.getMenuID();
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        if (特別地域加算減免申請の情報 != null) {
+            変更あり = getHandler(div).申請情報_変更あり(特別地域加算減免申請の情報, menuID);
         }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-            RString menuID = ResponseHolder.getMenuID();
+        if (変更あり) {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+                getHandler(div).set申請一覧に戻る(資格対象者, menuID);
+                return ResponseData.of(div).setState(DBD1040001StateName.一覧);
+            } else {
+                return ResponseData.of(div).respond();
+            }
+        } else {
             getHandler(div).set申請一覧に戻る(資格対象者, menuID);
             return ResponseData.of(div).setState(DBD1040001StateName.一覧);
-        } else {
-            return ResponseData.of(div).respond();
         }
+
     }
 
     /**

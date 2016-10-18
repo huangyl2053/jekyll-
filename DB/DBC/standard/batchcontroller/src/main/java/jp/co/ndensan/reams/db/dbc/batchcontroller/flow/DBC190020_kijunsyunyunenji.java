@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoHakk
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsSetaiyinShotokuJyohoTemp1ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunsyunyunenji.InsTaishoSeitaiyinTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -63,29 +64,30 @@ public class DBC190020_kijunsyunyunenji extends BatchFlowBase<DBC190020_kijunsyu
 
     @Override
     protected void defineFlow() {
-        if (!ShinseishoHakkoChushutsuJoken.白紙印刷.getコード().equals(getParameter().get抽出条件())) {
-            executeStep(世帯員所得情報一時テーブルに登録1);
-            executeStep(世帯員把握_TEMP_2);
-            executeStep(世帯員所得情報一時テーブルに更新);
-            executeStep(世帯員所得情報一時テーブルに重複削除);
-            executeStep(対象世帯員クラスに登録);
-            executeStep(対象世帯員クラスに更新1);
-            executeStep(対象世帯員クラスに更新2);
-            executeStep(対象世帯員クラスに更新3);
-            executeStep(対象世帯員クラスに削除);
 
-            executeStep(世帯員所得情報一時テーブルに登録2);
-            executeStep(世帯員把握_TEMP_2);
-            executeStep(世帯員所得情報一時テーブルに更新);
-            executeStep(世帯員所得情報一時テーブルに重複削除);
-            executeStep(対象世帯員クラスに登録2);
+        executeStep(世帯員所得情報一時テーブルに登録1);
+        executeStep(世帯員把握_TEMP_2);
+        executeStep(世帯員所得情報一時テーブルに更新);
+        executeStep(世帯員所得情報一時テーブルに重複削除);
+        executeStep(対象世帯員クラスに登録);
+        executeStep(対象世帯員クラスに更新1);
+        executeStep(対象世帯員クラスに更新2);
+        executeStep(対象世帯員クラスに更新3);
+        executeStep(対象世帯員クラスに削除);
+
+        executeStep(世帯員所得情報一時テーブルに登録2);
+        executeStep(世帯員把握_TEMP_2);
+        executeStep(世帯員所得情報一時テーブルに更新);
+        executeStep(世帯員所得情報一時テーブルに重複削除);
+        executeStep(対象世帯員クラスに登録2);
+        if (!ShinseishoHakkoChushutsuJoken.白紙印刷.getコード().equals(getParameter().get抽出条件())) {
             executeStep(対象世帯員クラスに更新4);
             executeStep(対象世帯員クラスに更新5);
-            executeStep(帳票出力_CSV作成);
-            executeStep(基準収入額管理マスタに登録);
-            executeStep(処理日付管理マスタに更新);
-
         }
+        executeStep(帳票出力_CSV作成);
+        executeStep(基準収入額管理マスタに登録);
+        executeStep(処理日付管理マスタに更新);
+
     }
 
     /**
@@ -100,7 +102,7 @@ public class DBC190020_kijunsyunyunenji extends BatchFlowBase<DBC190020_kijunsyu
         parameter.set帳票ID(ReportIdDBC.DBC100064.getReportId());
         parameter.set抽出条件(getParameter().get抽出条件());
         parameter.set世帯員把握基準日(getParameter().get世帯員把握基準日());
-        parameter.set被保険者番号(getParameter().get被保険者番号());
+        parameter.set被保険者番号(new HihokenshaNo(getParameter().get被保険者番号()));
         return loopBatch(InsSetaiyinShotokuJyohoTemp1Process.class).arguments(parameter).define();
     }
 
@@ -205,7 +207,7 @@ public class DBC190020_kijunsyunyunenji extends BatchFlowBase<DBC190020_kijunsyu
         parameter.set帳票ID(ReportIdDBC.DBC100064.getReportId());
         parameter.set抽出条件(getParameter().get抽出条件());
         parameter.set世帯員把握基準日2(getParameter().get世帯員把握基準日2());
-        parameter.set被保険者番号(getParameter().get被保険者番号());
+        parameter.set被保険者番号(new HihokenshaNo(getParameter().get被保険者番号()));
         return loopBatch(InsSetaiyinShotokuJyohoTemp2Process.class).arguments(parameter).define();
     }
 
