@@ -275,7 +275,7 @@ public class TokuteiNyushoServiceHiShinseiValidationHandler {
         決定日の必須入力(UrErrorMessages.必須, "決定日"),
         適用日の必須入力(UrErrorMessages.必須, "適用日"),
         有効期限の必須入力(UrErrorMessages.必須, "有効期限"),
-        軽減率の必須入力(UrErrorMessages.必須, "給付率"),
+        軽減率の必須入力(UrErrorMessages.必須, "軽減率"),
         特別地域加算減免_軽減率範囲81外(DbdErrorMessages.特別地域加算減免_軽減率範囲外, "81"),
         特別地域加算減免_軽減率範囲91外(DbdErrorMessages.特別地域加算減免_軽減率範囲外, "91"),
         減免減額_適用日が法施行前(DbdErrorMessages.減免減額_適用日が法施行前),
