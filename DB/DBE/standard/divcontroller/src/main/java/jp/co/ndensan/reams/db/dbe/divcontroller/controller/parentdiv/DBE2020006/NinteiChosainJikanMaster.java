@@ -72,6 +72,7 @@ public class NinteiChosainJikanMaster {
     private static final int 時間枠_10 = 10;
     private static final int 時間枠数 = 11;
     private final RString 予約フラグ_可 = new RString("key0");
+    private final RString 予約フラグ_不可 = new RString("key1");
     private final RString 処理区分_未処理 = new RString("0");
     private final RString 処理区分_削除 = new RString("3");
     private final RString 処理区分_新規 = new RString("1");
@@ -726,20 +727,49 @@ public class NinteiChosainJikanMaster {
             NinteiChosainJikanMasterDiv div,
             dgTimeScheduleList_Row 編集データ,
             RString 調査時間枠,
-            RString 時間枠) {
+            RString 時間枠) { 
         if (編集状態_既存.equals(編集状態の設定(調査時間枠))) {
-            NinteiChosainBusiness 編集元 = 時間枠設定の編集元取得(
-                    div,
-                    編集データ,
-                    時間の処理(調査時間枠.split("-").get(0)),
-                    時間の処理(調査時間枠.split("-").get(1)),
-                    時間枠);
-            div.getMainPanel().getSettingDetail().setHensyuTajyo(編集状態_既存);
-            getHandler(div).btnHennsyu(編集元, 時間枠, 編集データ);
+            Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+            RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
+            RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
+            LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
+            Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
+                    = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール情報, Models.class);
+            NinteichosaScheduleIdentifier 情報PK = new NinteichosaScheduleIdentifier(
+                    new FlexibleDate(div.getTxtSetteiYMD().getValue().toDateString()),
+                    時間の処理(div.getTxtKaishiJikan().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm)),
+                    時間の処理(div.getTxtShuryoJikan().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm)),
+                    new Code(div.getTxtJikanWaku().getValue()),
+                    調査地区コード,
+                    認定調査委託先コード,
+                    認定調査員コード,
+                    市町村コード);
+            if (ninteichosaModels.contains(情報PK)) {
+                div.getTxtBiko().setValue( ninteichosaModels.get(情報PK).get備考());
+                div.getRadYoyaku().setSelectedKey(予約可否設定(ninteichosaModels.get(情報PK).is予約可能フラグ()));
+                div.getDdlTaishoChiku().setDisabled(true);
+                div.getTxtSettingMonth().setDisabled(true);
+                div.getBtnPrevious().setDisabled(true);
+                div.getBtnNext().setDisabled(true);
+                div.getBtnSearch().setDisabled(true);
+                div.getDgTimeScheduleList().setReadOnly(true);
+                div.getMainPanel().getBtnNinteiChosaIkkatsuInput().setDisabled(true);
+                div.getMainPanel().getSettingDetail().setDisplayNone(false);
+                div.getMainPanel().getSettingDetail().setHensyuTajyo(編集状態_既存);
+            } else {
+                NinteiChosainBusiness 編集元 = 時間枠設定の編集元取得(
+                        div,
+                        編集データ,
+                        時間の処理(調査時間枠.split("-").get(0)),
+                        時間の処理(調査時間枠.split("-").get(1)),
+                        時間枠);
+                div.getMainPanel().getSettingDetail().setHensyuTajyo(編集状態_既存);
+                getHandler(div).btnHennsyu(編集元, 時間枠, 編集データ);
+            }
         } else {
             div.getMainPanel().getSettingDetail().setHensyuTajyo(編集状態_未指定);
             getHandler(div).btnHennsyu(編集データ, 時間枠);
-        }
+        }   
     }
 
     private boolean 未来日の確認(NinteiChosainJikanMasterDiv div) {
@@ -778,14 +808,14 @@ public class NinteiChosainJikanMaster {
     }
 
     private RString 編集状態の設定(RString 時間枠) {
-        if (時間枠 == null || 時間枠.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠)) {
             return 編集状態_未指定;
         }
         return 編集状態_既存;
     }
 
     private RString nullToEmpty(RString 時間枠) {
-        if (時間枠 == null || 時間枠.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠)) {
             return RString.EMPTY;
         }
         return 時間枠;
@@ -818,10 +848,18 @@ public class NinteiChosainJikanMaster {
         }
     }
 
-    private boolean is予約可能フラグ(RString 予約可能フラグ) {
-        return 予約フラグ_可.equals(予約可能フラグ);
+    private RString 予約可否設定(boolean 予約可能フラグ) {
+        if (予約可能フラグ) {
+            return 予約フラグ_可;
+        } else {
+            return 予約フラグ_不可;
+        }
     }
 
+        private boolean is予約可能フラグ(RString 予約可能フラグ) {
+        return 予約フラグ_可.equals(予約可能フラグ);
+    }
+    
     private void 保存の処理(dgTimeScheduleList_Row row, FlexibleDate 予定年月日, Code 調査地区コード,
             RString 認定調査委託先コード,
             RString 認定調査員コード,
