@@ -215,12 +215,15 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     @Override
     protected void afterExecute() {
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+
         if (parameter.get出力設定().contains(CSVSettings.連番付加)) {
             eucCsvWriter.close();
         } else {
             eucNoRenbanCsvWriter.close();
         }
         manager.spool(eucFilePath, log);
+        AccessLogUUID reportLog = AccessLogger.logReport(personalDataList);
+        batchReportWrite.addPrivacy(reportLog);
         バッチ出力条件リストの出力を行う();
     }
 

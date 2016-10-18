@@ -638,35 +638,11 @@ public class FukushiyoguKonyuhiShikyuShinsei {
         DbT3034ShokanShinseiEntity dbT3034Entity = 福祉用具購入費支給申請明細登録画面.get償還払支給申請().toEntity();
         dbT3034Entity.setState(EntityDataState.Modified);
         償還払支給申請Dac.save(dbT3034Entity);
-        ShokanHanteiKekka 償還払支給判定結果 = 福祉用具購入費支給申請明細登録画面.get償還払支給判定結果();
-        if (null != 償還払支給判定結果) {
-            DbT3036ShokanHanteiKekkaEntity dbT3036Entity = 償還払支給判定結果.toEntity();
-            int データ数 = 償還払支給判定結果Dac.getCountByKey(
-                    償還払支給判定結果.get被保険者番号(),
-                    償還払支給判定結果.getサービス提供年月(),
-                    償還払支給判定結果.get整理番号());
-            if (0 == データ数) {
-                dbT3036Entity.setState(EntityDataState.Added);
-            } else {
-                dbT3036Entity.setState(EntityDataState.Modified);
-            }
-            償還払支給判定結果Dac.save(dbT3036Entity);
-        }
 
         DbT3053ShokanShukeiEntity dbT3053Entity = 福祉用具購入費支給申請明細登録画面.get償還払集計().toEntity();
         dbT3053Entity.setState(EntityDataState.Modified);
         償還払請求集計Dac.save(dbT3053Entity);
-        if (null != 償還払支給判定結果) {
-            福祉用具購入費支給決定給付実績編集Mgr.dealKyufujisseki(
-                    状態_登録,
-                    福祉用具購入費支給申請明細登録画面.get識別コード(),
-                    dbT3038Entity,
-                    dbT3048EntityList,
-                    dbT3034Entity,
-                    償還払支給判定結果.toEntity(),
-                    dbT3053Entity,
-                    null);
-        }
+
     }
 
     /**
