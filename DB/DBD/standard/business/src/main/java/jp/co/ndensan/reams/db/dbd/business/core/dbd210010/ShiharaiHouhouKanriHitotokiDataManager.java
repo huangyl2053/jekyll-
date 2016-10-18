@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class ShiharaiHouhouKanriHitotokiDataManager {
 
     private static final RString NUM1 = new RString(1);
+    private static final String NINE = new String("99999999");
 
     /**
      * コンストラクタです。
@@ -184,7 +185,11 @@ public class ShiharaiHouhouKanriHitotokiDataManager {
         tempTable.set世帯コード(entity.get世帯コード());
         tempTable.set住所(entity.get住所());
         tempTable.set資格取得日(new RString(entity.get資格取得日().toString()));
-        tempTable.set資格喪失日(new RString(entity.get資格喪失日().toString()));
+        if (NINE.equals(entity.get資格喪失日().toString())) {
+            tempTable.set資格喪失日(RString.EMPTY);
+        } else {
+            tempTable.set資格喪失日(new RString(entity.get資格取得日().toString()));
+        }
         tempTable.set認定申請日(new RString(entity.get認定申請日().toString()));
         tempTable.set要介護状態区分(entity.get要介護状態区分().value());
         if (entity.get要介護状態区分() == null || entity.get要介護状態区分().isEmpty()) {
@@ -202,7 +207,7 @@ public class ShiharaiHouhouKanriHitotokiDataManager {
         } else {
             tempTable.set管理区分名称(ShiharaiHenkoKanriKubun.toValue(new RString(Integer.valueOf(entity.get管理区分().toString()))).get名称());
         }
-        tempTable.set登録区分(entity.get管理区分());
+        tempTable.set登録区分(entity.get登録区分());
 
         if (entity.get登録区分() == null || entity.get登録区分().isEmpty()) {
             tempTable.set登録区分名称(RString.EMPTY);
