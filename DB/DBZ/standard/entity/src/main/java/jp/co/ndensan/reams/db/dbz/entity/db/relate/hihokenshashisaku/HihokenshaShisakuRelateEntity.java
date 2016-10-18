@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashisaku;
+package jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshashisaku;
 
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
