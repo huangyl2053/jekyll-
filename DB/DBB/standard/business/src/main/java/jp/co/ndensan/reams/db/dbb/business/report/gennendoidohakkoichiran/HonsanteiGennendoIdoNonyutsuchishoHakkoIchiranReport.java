@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.gennendoidohakkoichiran;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport extends Report<NonyuTsuchIchiranSource> {
 
-    private final List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
+    private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final RString 賦課年度;
     private final RString 出力期;
     private final RString 帳票作成日時;
@@ -32,11 +31,12 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport extends Report
     private final RString 並び順の３件目;
     private final RString 並び順の４件目;
     private final RString 並び順の５件目;
+    private final int 連番;
 
     /**
      * コンストラクタです。
      *
-     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsuのListです
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
      * @param 賦課年度 RString
      * @param 帳票作成日時 RString
      * @param 出力期 RString
@@ -47,12 +47,13 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport extends Report
      * @param 並び順の３件目 RString
      * @param 並び順の４件目 RString
      * @param 並び順の５件目 RString
+     * @param 連番 int
      */
     public HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport(
-            List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
+            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             RString 賦課年度, RString 出力期, RString 帳票作成日時,
             RString 地方公共団体コード, RString 市町村名, RString 並び順の１件目, RString 並び順の２件目,
-            RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目) {
+            RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目, int 連番) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
         this.賦課年度 = 賦課年度;
         this.出力期 = 出力期;
@@ -64,27 +65,22 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport extends Report
         this.並び順の３件目 = 並び順の３件目;
         this.並び順の４件目 = 並び順の４件目;
         this.並び順の５件目 = 並び順の５件目;
+        this.連番 = 連番;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<NonyuTsuchIchiranSource> writer) {
-        int index = 0;
-        for (EditedHonSanteiTsuchiShoKyotsu target : 編集後本算定通知書共通情報) {
-            index++;
-            int 連番 = index;
-            HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity inputEntity
-                    = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity(target,
-                            賦課年度, 出力期, 帳票作成日時, 地方公共団体コード, 市町村名, 連番,
-                            並び順の１件目, 並び順の２件目, 並び順の３件目, 並び順の４件目, 並び順の５件目);
-            IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranEditor headerEditor
-                    = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranHeaderEditor(inputEntity);
-            IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranEditor bodyEditor
-                    = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBodyEditor(inputEntity);
-            IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBuilder builder
-                    = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBuilder(headerEditor, bodyEditor);
-            writer.writeLine(builder);
-        }
-
+        HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity inputEntity
+                = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity(編集後本算定通知書共通情報,
+                        賦課年度, 出力期, 帳票作成日時, 地方公共団体コード, 市町村名, 連番,
+                        並び順の１件目, 並び順の２件目, 並び順の３件目, 並び順の４件目, 並び順の５件目);
+        IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranEditor headerEditor
+                = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranHeaderEditor(inputEntity);
+        IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranEditor bodyEditor
+                = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBodyEditor(inputEntity);
+        IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBuilder builder
+                = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBuilder(headerEditor, bodyEditor);
+        writer.writeLine(builder);
     }
 
 }
