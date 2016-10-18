@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.dbc8010001.DBC8010001;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC050010.DBC050010_FurikomimeisaiFurikomiDataParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiGyomunaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_MeisaiIchiranChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_SaishoriShitei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
@@ -21,6 +22,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ux.uxx.definition.mybatisprm.kozafurikomi.furikomiitakushakosei.FurikomiItakushaKoseiMapperParameter;
+import jp.co.ndensan.reams.ux.uxx.entity.db.relate.kozafurikomi.furikomigroup.FurikomiGroupItakushaRelateEntity;
+import jp.co.ndensan.reams.ux.uxx.service.core.kozafurikomi.furikomi.FurikomiGroupItakushaItakushaKoseiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -38,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -51,6 +56,8 @@ public class DBC8010001MainHandler {
     private final DBC8010001MainDiv div;
     private KinyuKikanCode 代表金融機関コード;
     private RString 振込グループコード;
+    private int indexstart = 0;
+    private int indexend = 6;
 
     /**
      * コンストラクターです。
@@ -79,34 +86,32 @@ public class DBC8010001MainHandler {
                 .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage,
                 div.getItakusha()).build().check(messages));
-        //TODO メソードFurikomiGroupItakushaItakushaKoseiFinder.getFurikomiGroupItakushItakushKosei利用できるなら、コメントを解除する。
-//        if (pairs.iterator().hasNext()) {
-//            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBatchRegister"), true);
-//            return pairs;
-//        }
+        if (pairs.iterator().hasNext()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBatchRegister"), true);
+            return pairs;
+        }
 
         RString 処理名 = prepare処理名(メニューID, 振込単位);
         DBC8010001MainManager manager = new DBC8010001MainManager();
         DBC8010001 dbc;
         dbc = manager.get前回処理情報(SubGyomuCode.DBC介護給付, new LasdecCode("000000"), 処理名, new RString("0000"), new FlexibleYear("0000"), new RString("0001"));
 
-        init画面表示内容(dbc);
+        init画面表示内容(メニューID, 振込単位, dbc);
         init表示制御(メニューID, 振込単位, dbc);
         return pairs;
     }
 
-    private void init画面表示内容(DBC8010001 dbc) {
-        //TODO 1.13.0 ※委託者情報が取得できなかった場合、委託者情報の各項目にはEMPTYセット
-        //        List<FurikomiGroupItakushaRelateEntity> list = getFurikomiGroupItakushaRelateEntityList();
-        //        FurikomiGroupItakushaRelateEntity fentity = list.get(0);
-        this.代表金融機関コード = new KinyuKikanCode("2323");
-        this.振込グループコード = new RString("54321");
-        div.getItakusha().getTxtItakushaCode().setValue(new RString("1234567890"));
-        div.getItakusha().getTxtItakushamei().setValue(new RString("劉偉"));
-        div.getItakusha().setItakushaId(new RString("0987654321"));
-        div.getItakusha().getTxtFurikomiGroupCode().setValue(new RString("9439239239no233242"));
-        div.getItakusha().getTxtFurikomiGroupMeisho().setValue(new RString("abcd"));
-
+    private void init画面表示内容(RString メニューID, RString 振込単位, DBC8010001 dbc) {
+        List<FurikomiGroupItakushaRelateEntity> list = getFurikomiGroupItakushaRelateEntityList(メニューID, 振込単位);
+        FurikomiGroupItakushaRelateEntity fentity = list.get(0);
+        fentity.get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode();
+        this.代表金融機関コード = fentity.get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode();
+        this.振込グループコード = fentity.get振込グループEntity().getFurikomiGroupCode();
+        div.getItakusha().getTxtItakushaCode().setValue(fentity.get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaCode());
+        div.getItakusha().getTxtItakushamei().setValue(fentity.get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushamei());
+        div.getItakusha().setItakushaId(new RString(fentity.get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaId().toString()));
+        div.getItakusha().getTxtFurikomiGroupCode().setValue(fentity.get振込グループEntity().getFurikomiGroupCode());
+        div.getItakusha().getTxtFurikomiGroupMeisho().setValue(fentity.get振込グループEntity().getFurikomiGroupMeisho());
         List<KeyValueDataSource> list1 = new ArrayList<>();
         KeyValueDataSource source1 = new KeyValueDataSource();
         source1.setKey(Furikomi_ShoriTaisho.償還高額.getコード());
@@ -281,40 +286,42 @@ public class DBC8010001MainHandler {
     /**
      * 委託者情報の取得。
      *
+     * @param メニューID
+     * @param 振込単位
      * @return List<FurikomiGroupItakushaRelateEntity>
      */
-    //TODO メソードFurikomiGroupItakushaItakushaKoseiFinder.getFurikomiGroupItakushItakushKosei利用できるなら、コメントを解除する。
-//    public List<FurikomiGroupItakushaRelateEntity> getFurikomiGroupItakushaRelateEntityList(RString メニューID,RString 振込単位) {
-//        List<FurikomiGroupItakushaRelateEntity> list = new ArrayList<FurikomiGroupItakushaRelateEntity>();
-//        RString 業務内区分 = new RString("");
-//        switch (メニューID.toString()) {
-//            case "DBCMN43003":
-//                switch (振込単位.toString()) {
-//                    case "1":
-//                        業務内区分 = FurikomiGyomunaiKubun.償還高額.getコード();
-//                        break;
-//                    case "2":
-//                        業務内区分 = FurikomiGyomunaiKubun.高額.getコード();
-//                        break;
-//                }
-//                break;
-//            case "DBCMN54002":
-//                switch (振込単位.toString()) {
-//                    case "1":
-//                        業務内区分 = FurikomiGyomunaiKubun.償還高額.getコード();
-//                        break;
-//                    case "2":
-//                        業務内区分 = FurikomiGyomunaiKubun.償還.getコード();
-//                        break;
-//                }
-//                break;
-//        }
-//        FurikomiItakushaKoseiMapperParameter parameter;
-//        parameter = FurikomiItakushaKoseiMapperParameter.createSelectByKeyParam(null,SubGyomuCode.DBC介護給付,業務内区分,null,null,null);
-//
-//        list = FurikomiGroupItakushaItakushaKoseiFinder.getFurikomiGroupItakushItakushKosei(parameter);
-//        return list;
-//    }
+    public List<FurikomiGroupItakushaRelateEntity> getFurikomiGroupItakushaRelateEntityList(RString メニューID, RString 振込単位) {
+        List<FurikomiGroupItakushaRelateEntity> list;
+        RString 業務内区分 = new RString("");
+        switch (メニューID.toString()) {
+            case "DBCMN43003":
+                switch (振込単位.toString()) {
+                    case "1":
+                        業務内区分 = FurikomiGyomunaiKubun.償還高額.getコード();
+                        break;
+                    case "2":
+                        業務内区分 = FurikomiGyomunaiKubun.高額.getコード();
+                        break;
+                }
+                break;
+            case "DBCMN54002":
+                switch (振込単位.toString()) {
+                    case "1":
+                        業務内区分 = FurikomiGyomunaiKubun.償還高額.getコード();
+                        break;
+                    case "2":
+                        業務内区分 = FurikomiGyomunaiKubun.償還.getコード();
+                        break;
+                }
+                break;
+        }
+        FurikomiItakushaKoseiMapperParameter parameter;
+        parameter = FurikomiItakushaKoseiMapperParameter.createSelectByKeyParam(null, SubGyomuCode.DBC介護給付, 業務内区分, null, null, null);
+        FurikomiGroupItakushaItakushaKoseiFinder finder = FurikomiGroupItakushaItakushaKoseiFinder.createInstance();
+        list = finder.getFurikomiGroupItakushItakushKosei(parameter);
+        return list;
+    }
+
     /**
      * 処理選択ラジオボタンonChange。
      */
@@ -448,14 +455,14 @@ public class DBC8010001MainHandler {
 
         parameter.set支払方法(Furikomi_ShihraiHohoShitei.toValue(div.getRadSiharaihohou().getSelectedKey()));
         if (null != div.getTxtKetteishaUketoriYmRange().getToValue()) {
-            parameter.set終了受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getToValue().toDateString().substring(0, 6)));
+            parameter.set終了受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getToValue().toDateString().substring(indexstart, indexend)));
         }
         if (null != div.getTxtWrongFurikomiShiteiYMD().getValue()) {
             parameter.set誤振込指定年月日(div.getTxtWrongFurikomiShiteiYMD().getValue());
 
         }
         if (null != div.getTxtKetteishaUketoriYmRange().getFromValue()) {
-            parameter.set開始受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getFromValue().toDateString().substring(0, 6)));
+            parameter.set開始受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getFromValue().toDateString().substring(indexstart, indexend)));
         }
         if (null != div.getTxtKonkaiTaishoYmdRange().getFromValue()) {
             parameter.set開始年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getFromValue().toDateString()));

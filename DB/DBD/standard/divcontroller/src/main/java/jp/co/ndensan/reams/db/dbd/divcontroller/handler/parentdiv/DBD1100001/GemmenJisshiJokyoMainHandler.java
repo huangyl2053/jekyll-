@@ -49,11 +49,15 @@ public class GemmenJisshiJokyoMainHandler {
             div.getGemmenJisshiJokyoJoken().getRadKijunBi().setDisabled(true);
             div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().setDisabled(true);
             div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(true);
+            div.getRadKijunBi().setSelectedKey(new RString("1"));
+            div.getRadKijunNengetsu().clearSelectedItem();
         } else {
             div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setValue(new Decimal(RDate.getNowDate().getDayValue()));
             div.getGemmenJisshiJokyoJoken().getRadKijunBi().setDisabled(false);
             div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().setDisabled(false);
             div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(false);
+            div.getRadKijunBi().setSelectedKey(new RString("1"));
+            div.getRadKijunNengetsu().clearSelectedItem();
         }
     }
 

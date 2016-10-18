@@ -5,13 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8010001;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8010001.DBC8010001MainHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ux.uxx.definition.mybatisprm.kozafurikomi.kozafurikomi.KozaFurikomiMapperParameter;
+import jp.co.ndensan.reams.ux.uxx.entity.db.relate.kozafurikomi.furikomigroup.FurikomiGroupItakushaRelateEntity;
 import jp.co.ndensan.reams.ux.uxx.service.core.kozafurikomi.kozafurikomi.KozaFurikomiManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 振込明細・振込みデータ作成のバリデーションクラスです。
@@ -26,12 +32,11 @@ public enum DBC8010001MainDivSpec implements IPredicate<DBC8010001MainDiv> {
     実行不可 {
                 @Override
                 public boolean apply(DBC8010001MainDiv div) {
-                    //TODO メソードFurikomiGroupItakushaItakushaKoseiFinder.getFurikomiGroupItakushItakushKosei利用できるなら、コメントを解除する。
-//                    DBC8010001MainHandler handler = new DBC8010001MainHandler(div);
-//                    List list = new ArrayList();
-//                    List<FurikomiGroupItakushaRelateEntity> list = handler.getFurikomiGroupItakushaRelateEntity();
-//                    return 0 != list.size();
-                    return true;
+                    DBC8010001MainHandler handler = new DBC8010001MainHandler(div);
+                    RString メニューID = ResponseHolder.getMenuID();
+                    RString 振込単位 = DbBusinessConfig.get(ConfigNameDBC.振込単位, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                    List<FurikomiGroupItakushaRelateEntity> list = handler.getFurikomiGroupItakushaRelateEntityList(メニューID, 振込単位);
+                    return 0 != list.size();
                 }
             },
     /**
@@ -79,8 +84,7 @@ public enum DBC8010001MainDivSpec implements IPredicate<DBC8010001MainDiv> {
                     RString 委託者ID = div.getTxtItakushaCode().getValue();
                     div.getTxtFurikomiShiteiYMD().getValue();
                     KozaFurikomiMapperParameter parameter;
-                    //TODO Code in the next line is incorrect,not final, need to be modified!
-                    parameter = KozaFurikomiMapperParameter.createSelectParameter(0l, new Decimal(委託者ID.toString()), div.getTxtFurikomiShiteiYMD().getValue(), Decimal.ZERO, SubGyomuCode.DBC介護給付);
+                    parameter = KozaFurikomiMapperParameter.createSelectParameter(new Decimal(委託者ID.toString()), div.getTxtFurikomiShiteiYMD().getValue(), SubGyomuCode.DBC介護給付);
                     KozaFurikomiManager manager = KozaFurikomiManager.createInstance();
                     int size = manager.get口座振込リストBy検索条件(parameter).records().size();
                     return 0 != size;
@@ -94,8 +98,7 @@ public enum DBC8010001MainDivSpec implements IPredicate<DBC8010001MainDiv> {
                 public boolean apply(DBC8010001MainDiv div) {
                     RString 委託者ID = div.getTxtItakushaCode().getValue();
                     KozaFurikomiMapperParameter parameter;
-                    //TODO Need to be sure!
-                    parameter = KozaFurikomiMapperParameter.createSelectParameter(0l, new Decimal(委託者ID.toString()), div.getTxtWrongFurikomiShiteiYMD().getValue(), Decimal.ZERO, SubGyomuCode.DBC介護給付);
+                    parameter = KozaFurikomiMapperParameter.createSelectParameter(new Decimal(委託者ID.toString()), div.getTxtFurikomiShiteiYMD().getValue(), SubGyomuCode.DBC介護給付);
                     KozaFurikomiManager manager = KozaFurikomiManager.createInstance();
                     int size = manager.get口座振込リストBy検索条件(parameter).records().size();
                     return 0 != size;

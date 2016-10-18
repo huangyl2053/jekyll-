@@ -156,6 +156,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
     private RString 項目内容;
     private IOutputOrder outputOrder;
     private int 連番;
+    private HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku;
     @BatchWriter
     private BatchReportWriter<HanyoListReportSource> batchReportWrite;
     private ReportSourceWriter<HanyoListReportSource> reportSourceWriter;
@@ -171,15 +172,15 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         出力文字の開始位置 = 0;
         出力桁数 = 0;
         csvContent = new ArrayList<>();
+        hanyoListShutsuryokuKomoku = HanyoListReportUtil.createInstance()
+                .get汎用リスト出力項目(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給,
+                        new ReportId(processParamter.getCyohyoid()), Long.parseLong(processParamter.getSyutsuryokukomoku().toString()));
         set帳表CSV出力();
 
     }
 
     @Override
     protected IBatchReader createReader() {
-//        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-//        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
-//                Long.valueOf(processParamter.getSyutsuryokujunparameter().toString()));
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         outputOrder = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
                 Long.valueOf(processParamter.getSyutsuryokujunparameter().toString()));
@@ -243,9 +244,6 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         personalDataList.add(toPersonalData(entity));
         Class clazz = eucCsvEntity.getClass();
         RString 項目内容new = RString.EMPTY;
-        HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku = HanyoListReportUtil.createInstance()
-                .get汎用リスト出力項目(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給,
-                        new ReportId(processParamter.getCyohyoid()), Long.parseLong(processParamter.getSyutsuryokukomoku().toString()));
         if (hanyoListShutsuryokuKomoku != null) {
             for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
                 try {

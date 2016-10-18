@@ -28,7 +28,8 @@ public interface IRiyoshaFutanwariaiMapper {
     /**
      * 提供対象者の取得処理です。
      *
+     * @param parameter RiyoshaFutanwariaiMybatisParameter
      * @return List<TeikyoKihonJohoEntity>
      */
-    List<TeikyoKihonJohoNNTempEntity> get提供対象者();
+    List<TeikyoKihonJohoNNTempEntity> get提供対象者(RiyoshaFutanwariaiMybatisParameter parameter);
 }

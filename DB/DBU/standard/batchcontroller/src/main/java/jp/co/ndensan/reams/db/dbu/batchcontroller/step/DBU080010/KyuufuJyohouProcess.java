@@ -5,26 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbu.business.core.basic.TokuteiKojinJohoHanKanri;
-import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.DataSetNo;
-import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShinkiIdoKubun;
-import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TokuteiKojinJohomeiCode;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.sougoujigyoujyohou.SougouJigyouJyohouMybatisParameter;
-import jp.co.ndensan.reams.db.dbu.definition.processprm.sougoujigyoujyohou.SougouJigyouJyohouProcessParameter;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.sougoujigyoujyohou.SougouJigyouJyohouRelateEntity;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.SougouJigyouJyohouMybatisParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.SougouJigyouJyohouProcessParameter;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.SougouJigyouJyohouRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity;
-import jp.co.ndensan.reams.db.dbu.service.core.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -36,48 +27,23 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class KyuufuJyohouProcess extends BatchProcessBase<SougouJigyouJyohouRelateEntity> {
 
-    private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.sougoujigyoujyohou."
+    private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo."
             + "ISougouJigyouJyohouMapper.get当初_版改定_異動分データ");
     private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
-    private List<TokuteiKojinJohoHanKanri> 特定個人版管理特定情報;
     private SougouJigyouJyohouProcessParameter processParameter;
     private SougouJigyouJyohouMybatisParameter mybatisParameter;
-    /**
-     * 版番号です。
-     */
-    public static final RString 版番号;
-
-    static {
-        版番号 = new RString("hanNo");
-    }
-    private OutputParameter<RString> hanNo;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 中間DB提供基本情報;
 
     @Override
     protected void initialize() {
-        hanNo = new OutputParameter();
-        特定個人版管理特定情報 = new ArrayList<>();
-        特定個人版管理特定情報 = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(processParameter.get新規異動区分(),
-                RString.EMPTY, DataSetNo._0300給付情報.getコード(), FlexibleDate.getNowDate());
-        hanNo.setValue(特定個人版管理特定情報.get(0).get版番号());
-        if ((ShinkiIdoKubun.当初.getコード().equals(processParameter.get新規異動区分())
-                || ShinkiIdoKubun.版改定.getコード().equals(processParameter.get新規異動区分()))
-                && ShokaiTeikyoKubun.初回提供済み.getコード().equals(特定個人版管理特定情報.get(0).get初回提供区分())) {
-            throw new BatchInterruptedException("");
-        }
-        if ((ShinkiIdoKubun.再登録.getコード().equals(processParameter.get新規異動区分())
-                || ShinkiIdoKubun.異動.getコード().equals(processParameter.get新規異動区分()))
-                && ShokaiTeikyoKubun.未提供.getコード().equals(特定個人版管理特定情報.get(0).get初回提供区分())) {
-            throw new BatchInterruptedException("");
-        }
         HihokenshaNo 個人番号付替対象者被保険者番号 = processParameter.get個人番号付替対象者被保険者番号();
         if (個人番号付替対象者被保険者番号 == null) {
             個人番号付替対象者被保険者番号 = HihokenshaNo.EMPTY;
         }
         mybatisParameter = SougouJigyouJyohouMybatisParameter.create_Parameter(processParameter.get新規異動区分(),
                 個人番号付替対象者被保険者番号.value(), processParameter.get対象開始日時(), processParameter.get対象終了日時(),
-                特定個人版管理特定情報.get(0).get版番号(), RString.EMPTY);
+                processParameter.get版番号(), RString.EMPTY);
     }
 
     @Override
@@ -104,7 +70,7 @@ public class KyuufuJyohouProcess extends BatchProcessBase<SougouJigyouJyohouRela
         entity.setShikibetsuCode(relateEntity.getShikibetsuCode());
         entity.setKojinNo(RString.EMPTY);
         entity.setTokuteiKojinJohoMeiCode(TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード());
-        entity.setHanNo(特定個人版管理特定情報.get(0).get版番号());
+        entity.setHanNo(processParameter.get版番号());
         entity.setTeikyoNaiyo01(relateEntity.getTaishoNendo().toDateString());
         entity.setMisetteiJiyu01(RString.EMPTY);
         entity.setTeikyoNaiyo02(toRString(relateEntity.getTaishoKeisanKaishiYMD()));

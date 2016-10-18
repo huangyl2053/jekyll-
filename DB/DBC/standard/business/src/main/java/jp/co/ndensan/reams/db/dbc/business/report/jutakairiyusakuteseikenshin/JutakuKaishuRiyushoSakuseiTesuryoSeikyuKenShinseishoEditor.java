@@ -7,13 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.jutakairiyusakuteseikenshin;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakairiyusakuteseikenshin.JutakuKaishuRiyushoSakuseiTesuryoSeikyuKenShinseishoData;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jutakairiyusakuteseikenshin.JutakuKaishuRSTSKSReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 住宅改修理由書作成手数料請求書兼申請書作成 のEditorです。
@@ -49,15 +43,8 @@ public class JutakuKaishuRiyushoSakuseiTesuryoSeikyuKenShinseishoEditor implemen
         source.seikyuGaku = new RString(data.get請求金額().toString());
         source.tanka = data.get単価();
         source.kensu = data.get件数();
-        source.hakkoYMD = set平成年月日(new FlexibleDate(data.get発行日()));
+        source.hakkoYMD = data.get発行日();
         source.ninshoshaYakushokuMei = data.get認証者役職名();
         return source;
-    }
-
-    private RString set平成年月日(FlexibleDate dateTime) {
-        RStringBuilder hakkoYMD = new RStringBuilder();
-        hakkoYMD.append(dateTime.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        return hakkoYMD.toRString();
     }
 }

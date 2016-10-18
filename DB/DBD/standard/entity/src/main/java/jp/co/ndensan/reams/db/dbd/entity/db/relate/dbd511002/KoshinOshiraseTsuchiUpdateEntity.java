@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,4 +31,5 @@ public class KoshinOshiraseTsuchiUpdateEntity {
     private DbT4910NinteichosaItakusakiJohoEntity dbT4910NinteichosaItakusakiJoho;
     private DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
+    private RString 入所施設コード;
 }

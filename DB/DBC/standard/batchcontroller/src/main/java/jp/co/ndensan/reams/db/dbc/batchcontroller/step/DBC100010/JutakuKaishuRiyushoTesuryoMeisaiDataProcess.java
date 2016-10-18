@@ -46,7 +46,7 @@ public class JutakuKaishuRiyushoTesuryoMeisaiDataProcess extends BatchProcessBas
         DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity dbt3095Entity = new DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity();
         dbt3095Entity.setShoKisaiHokenshaNo(shoKisaiHokenshaNoTohokenshaNo(entity.get証記載保険者番号()));
         dbt3095Entity.setHihokenshaNo(entity.get被保険者番号());
-        dbt3095Entity.setRirekiNo(entity.get履歴番号());
+        dbt3095Entity.setRirekiNo(entity.get基準履歴番号() + entity.getRowNum());
         dbt3095Entity.setServiceCode(entity.getサービスコード());
         dbt3095Entity.setJutakuKaishuJigyoshaMeisho(new AtenaMeisho(isNullOrEmpty(entity.get介護住宅改修事業者名称())));
         dbt3095Entity.setJutakuKaishuChakkoYMD(entity.get介護住宅改修着工年月日());
