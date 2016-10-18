@@ -32,7 +32,7 @@ public class DelTaisyogaiJuminJohoTmpProcess extends SimpleBatchProcessBase {
     @Override
     protected void process() {
         mapper.delete所得照会候補者1(myBaticParameter);
-        if (processParameter.get再発行対象リスト() != null || !processParameter.get再発行対象リスト().isEmpty()) {
+        if (processParameter.get再発行対象リスト() != null && !processParameter.get再発行対象リスト().isEmpty()) {
             mapper.delete所得照会候補者(processParameter.get処理年度());
         }
     }
