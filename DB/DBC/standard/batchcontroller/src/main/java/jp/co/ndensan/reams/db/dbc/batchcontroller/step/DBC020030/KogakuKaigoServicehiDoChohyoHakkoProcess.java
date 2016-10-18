@@ -280,8 +280,10 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         lastReportEntity = fushikyuReportEntity;
         KogakuShikyuFushikyuKetteiTsuchiHakkoReport report = new KogakuShikyuFushikyuKetteiTsuchiHakkoReport(fushikyuReportEntity, 連番, false);
         report.writeBy(reportSourceWriter5);
-        本人支給額合計 = 本人支給額合計.add(entity.get一時Entity().getRiyoshaFutanGaku());
-        支給額給額合計 = 支給額給額合計.add(entity.get一時Entity().getKogakuShikyuGaku());
+        本人支給額合計 = 本人支給額合計.add(entity.get一時Entity().getRiyoshaFutanGaku() == null ? Decimal.ZERO
+                : entity.get一時Entity().getRiyoshaFutanGaku());
+        支給額給額合計 = 支給額給額合計.add(entity.get一時Entity().getKogakuShikyuGaku() == null ? Decimal.ZERO
+                : entity.get一時Entity().getKogakuShikyuGaku());
 
     }
 
@@ -550,7 +552,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         set出力順と改頁(returnEntity);
         returnEntity.setテスト印刷(帳票タイトル);
         KetteiTsuchishoInfoTempEntity 一時Entity = entity.get一時Entity();
-        returnEntity.set決定通知No(一時Entity.getTsuchishoNo());
+        returnEntity.set決定通知No(一時Entity.getTsuchishoNo() == null ? RString.EMPTY : 一時Entity.getTsuchishoNo());
         if (null != 一時Entity.getHihokenshaNo()) {
             returnEntity.set被保険者番号(一時Entity.getHihokenshaNo().getColumnValue());
         }
@@ -574,12 +576,16 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         returnEntity.set決定年月日(formatDate(一時Entity.getKetteiYMD()));
         returnEntity.set本人支払額(doカンマ編集(一時Entity.getRiyoshaFutanGaku()));
         returnEntity.set支給額(doカンマ編集(一時Entity.getKogakuShikyuGaku()));
-        ShikyuKubun 支給不支給決定区分 = ShikyuKubun.toValue(一時Entity.getKetteiShikyuKubunCode());
-        returnEntity.set支給_不支給_決定区分(支給不支給決定区分.get名称());
+        if (null != 一時Entity.getKetteiShikyuKubunCode() || !一時Entity.getKetteiShikyuKubunCode().isEmpty()) {
+            ShikyuKubun 支給不支給決定区分 = ShikyuKubun.toValue(一時Entity.getKetteiShikyuKubunCode());
+            returnEntity.set支給_不支給_決定区分(支給不支給決定区分.get名称());
+        }
         returnEntity.set資格喪失日(formatDate(一時Entity.getShikakuSoshitsuYMD()));
-        RString 喪失事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
-                new Code(一時Entity.getShikakuSoshitsuJiyuCode()), FlexibleDate.getNowDate());
-        returnEntity.set喪失事由(喪失事由);
+        if (一時Entity.getShikakuSoshitsuJiyuCode() != null && !一時Entity.getShikakuSoshitsuJiyuCode().isEmpty()) {
+            RString 喪失事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
+                    new Code(一時Entity.getShikakuSoshitsuJiyuCode()), FlexibleDate.getNowDate());
+            returnEntity.set喪失事由(喪失事由);
+        }
         if (一時Entity.isJidoShokanTaishoFlag()) {
             returnEntity.set自動償還(自動償還フラグ_TRUE);
         } else {
@@ -590,7 +596,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         returnEntity.set氏名５０音カナ(entity.getカナ名称() == null ? RString.EMPTY : entity.getカナ名称().getColumnValue());
         returnEntity.set証記載保険者番号(一時Entity.getShoKisaiHokenshaNo() == null ? RString.EMPTY
                 : 一時Entity.getShoKisaiHokenshaNo().getColumnValue());
-        returnEntity.set資格状態区分(一時Entity.getShikakuJyotaiKubun());
+        returnEntity.set資格状態区分(一時Entity.getShikakuJyotaiKubun() == null ? RString.EMPTY : 一時Entity.getShikakuJyotaiKubun());
         return returnEntity;
     }
 
@@ -668,25 +674,19 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
 
     private List<RString> getタイトル(KetteiTsuchishoInfoTempEntity entity) {
         List<RString> list = new ArrayList<>();
-        if (取り消し線無し.equals(設定値1)) {
-            if (Decimal.ZERO.compareTo(entity.getShikyuKingaku()) <= 0) {
+        if (entity.getKogakuShikyuGaku() == null) {
+            list.add(RString.EMPTY);
+            set6_ListEmpty(list);
+            set6_ListEmpty(list);
+        } else if (取り消し線無し.equals(設定値1)) {
+            if (Decimal.ZERO.compareTo(entity.getKogakuShikyuGaku()) <= 0) {
                 list.add(設定値2);
             } else {
                 list.add(設定値3);
             }
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-        } else if (Decimal.ZERO.compareTo(entity.getShikyuKingaku()) <= 0) {
+            set6_ListEmpty(list);
+            set6_ListEmpty(list);
+        } else if (Decimal.ZERO.compareTo(entity.getKogakuShikyuGaku()) <= 0) {
             list.add(RString.EMPTY);
             list.add(高額介護);
             if (支給区分_1.equals(entity.getKetteiShikyuKubunCode())) {
@@ -701,20 +701,10 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
                 list.add(RString.EMPTY);
             }
             list.add(決定通知書_NAME);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
+            set6_ListEmpty(list);
         } else {
             list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
+            set6_ListEmpty(list);
             list.add(高額介護);
             if (支給区分_1.equals(entity.getKetteiShikyuKubunCode())) {
                 list.add(支給区分_支給);
@@ -730,5 +720,14 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             list.add(決定通知書_調整用_NAME);
         }
         return list;
+    }
+
+    private void set6_ListEmpty(List<RString> list) {
+        list.add(RString.EMPTY);
+        list.add(RString.EMPTY);
+        list.add(RString.EMPTY);
+        list.add(RString.EMPTY);
+        list.add(RString.EMPTY);
+        list.add(RString.EMPTY);
     }
 }

@@ -239,8 +239,10 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         lastReportEntity = fushikyuReportEntity;
         JigyoKogakuShikyuFushikyuKetteTsuchiReport report = new JigyoKogakuShikyuFushikyuKetteTsuchiReport(fushikyuReportEntity, 連番, false);
         report.writeBy(reportSourceWriter3);
-        本人支給額合計 = 本人支給額合計.add(entity.get一時Entity().getRiyoshaFutanGaku());
-        支給額給額合計 = 支給額給額合計.add(entity.get一時Entity().getKogakuShikyuGaku());
+        本人支給額合計 = 本人支給額合計.add(entity.get一時Entity().getRiyoshaFutanGaku() == null ? Decimal.ZERO
+                : entity.get一時Entity().getRiyoshaFutanGaku());
+        支給額給額合計 = 支給額給額合計.add(entity.get一時Entity().getKogakuShikyuGaku() == null ? Decimal.ZERO
+                : entity.get一時Entity().getKogakuShikyuGaku());
 
     }
 
@@ -382,19 +384,22 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
                     一時Entity.getYokaigoJotaiKubunCode().getColumnValue());
             returnEntity.set要介護度(要介護度.getName());
         }
-
         returnEntity.set認定開始日(formatDate(一時Entity.getNinteiYukoKikanKaishiYMD()));
         returnEntity.set認定終了日(formatDate(一時Entity.getNinteiYukoKikanShuryoYMD()));
         returnEntity.set受付年月日(formatDate(一時Entity.getUketsukeYMD()));
         returnEntity.set決定年月日(formatDate(一時Entity.getKetteiYMD()));
         returnEntity.set本人支払額(doカンマ編集(一時Entity.getRiyoshaFutanGaku()));
         returnEntity.set支給額(doカンマ編集(一時Entity.getKogakuShikyuGaku()));
-        ShikyuKubun 支給不支給区分 = ShikyuKubun.toValue(一時Entity.getKetteiShikyuKubunCode());
-        returnEntity.set支給_不支給_決定区分(支給不支給区分.get名称());
+        if (null != null && !一時Entity.getKetteiShikyuKubunCode().isEmpty()) {
+            ShikyuKubun 支給不支給区分 = ShikyuKubun.toValue(一時Entity.getKetteiShikyuKubunCode());
+            returnEntity.set支給_不支給_決定区分(支給不支給区分.get名称());
+        }
         returnEntity.set資格喪失日(formatDate(一時Entity.getShikakuSoshitsuYMD()));
-        RString 喪失事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
-                new Code(一時Entity.getShikakuSoshitsuJiyuCode()), FlexibleDate.getNowDate());
-        returnEntity.set喪失事由(喪失事由);
+        if (null != 一時Entity.getShikakuSoshitsuJiyuCode() && !一時Entity.getShikakuSoshitsuJiyuCode().isEmpty()) {
+            RString 喪失事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
+                    new Code(一時Entity.getShikakuSoshitsuJiyuCode()), FlexibleDate.getNowDate());
+            returnEntity.set喪失事由(喪失事由);
+        }
         if (一時Entity.isJidoShokanTaishoFlag()) {
             returnEntity.set自動償還(自動償還フラグ_TRUE);
         } else {
@@ -501,24 +506,18 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
 
     private List<RString> getタイトル(KetteiTsuchishoInfoTempEntity entity) {
         List<RString> list = new ArrayList<>();
-        if (取り消し線無し.equals(設定値1)) {
+        if (entity.getKogakuShikyuGaku() == null) {
+            list.add(RString.EMPTY);
+            set6_ListEmpty(list);
+            set6_ListEmpty(list);
+        } else if (取り消し線無し.equals(設定値1)) {
             if (Decimal.ZERO.compareTo(entity.getKogakuShikyuGaku()) <= 0) {
                 list.add(設定値2);
             } else {
                 list.add(設定値3);
             }
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
+            set6_ListEmpty(list);
+            set6_ListEmpty(list);
         } else if (Decimal.ZERO.compareTo(entity.getKogakuShikyuGaku()) <= 0) {
             list.add(RString.EMPTY);
             list.add(事業高額介護);
@@ -534,20 +533,10 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
                 list.add(RString.EMPTY);
             }
             list.add(決定通知書_NAME);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
+            set6_ListEmpty(list);
         } else {
             list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
-            list.add(RString.EMPTY);
+            set6_ListEmpty(list);
             list.add(事業高額介護);
             if (支給区分_1.equals(entity.getKetteiShikyuKubunCode())) {
                 list.add(支給区分_支給);
@@ -563,5 +552,14 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
             list.add(決定通知書_調整用_NAME);
         }
         return list;
+    }
+
+    private void set6_ListEmpty(List<RString> list) {
+        list.add(RString.EMPTY);
+        list.add(RString.EMPTY);
+        list.add(RString.EMPTY);
+        list.add(RString.EMPTY);
+        list.add(RString.EMPTY);
+        list.add(RString.EMPTY);
     }
 }
