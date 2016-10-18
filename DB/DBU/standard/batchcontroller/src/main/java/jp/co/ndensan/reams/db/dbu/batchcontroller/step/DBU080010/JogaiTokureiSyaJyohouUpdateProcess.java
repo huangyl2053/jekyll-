@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.TokuteiKojinJohoHanKanri;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.DataSetNo;
@@ -14,14 +15,17 @@ import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TokuteiKojinJohomei
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.JogaiTokureiSyaJyohouMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.JogaiTokureiSyaJyohouProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeyikyouTayisyousyaJyohouRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeyikyouTayisyousyaJyohouRelateEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DoitsuninDaihyoshaYusenKubun;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -55,6 +59,20 @@ public class JogaiTokureiSyaJyohouUpdateProcess extends BatchProcessBase<Teyikyo
         // TODO 凌護行 パラメータの設定が不明です、QA回答まち、2016/10/20
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        List<JuminShubetsu> 住民種別List = new ArrayList<>();
+        住民種別List.add(JuminShubetsu.日本人);
+        住民種別List.add(JuminShubetsu.外国人);
+        住民種別List.add(JuminShubetsu.住登外個人_外国人);
+        住民種別List.add(JuminShubetsu.住登外個人_日本人);
+        List<JuminJotai> 住民状態List = new ArrayList<>();
+        住民状態List.add(JuminJotai.住民);
+        住民状態List.add(JuminJotai.住登外);
+        住民状態List.add(JuminJotai.消除者);
+        住民状態List.add(JuminJotai.転出者);
+        住民状態List.add(JuminJotai.死亡者);
+        key.set住民種別(住民種別List);
+        key.set住民状態(住民状態List);
+        key.set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         mybatisParameter = JogaiTokureiSyaJyohouMybatisParameter.createParamter当初_版改定_異動分データ抽出(
                 FlexibleDate.EMPTY, FlexibleDate.EMPTY,
@@ -67,6 +85,7 @@ public class JogaiTokureiSyaJyohouUpdateProcess extends BatchProcessBase<Teyikyo
 
     @Override
     protected void createWriter() {
+        dbT7301EntityWriter = new BatchPermanentTableWriter(DbT7301TokuteiKojinJohoHanKanriEntity.class);
         中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(TABLE_中間DB提供基本情報,
                 TeikyoKihonJohoNNTempEntity.class);
     }
@@ -87,11 +106,11 @@ public class JogaiTokureiSyaJyohouUpdateProcess extends BatchProcessBase<Teyikyo
 
     @Override
     protected void afterExecute() {
-        TokuteiKojinJohoTeikyoManager.createInstance().update特定個人情報提供(TABLE_中間DB提供基本情報,
+        TokuteiKojinJohoTeikyoManager.createInstance().update特定個人情報提供((new RString("\"").concat(TABLE_中間DB提供基本情報).concat("\""),
                 processParameter.get新規異動区分(), TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
                 DataSetNo._0102住所地特例情報.getコード(), processParameter.get版番号());
         List<TokuteiKojinJohoHanKanri> businessList = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(
-                processParameter.get新規異動区分(), TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
+                RString.EMPTY, TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
                 DataSetNo._0102住所地特例情報.getコード(), FlexibleDate.EMPTY);
         for (TokuteiKojinJohoHanKanri business : businessList) {
             DbT7301TokuteiKojinJohoHanKanriEntity entity = business.toEntity();

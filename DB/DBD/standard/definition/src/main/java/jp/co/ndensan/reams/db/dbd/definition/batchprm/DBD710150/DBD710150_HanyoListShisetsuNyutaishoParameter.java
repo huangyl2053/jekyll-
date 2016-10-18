@@ -39,6 +39,7 @@ public class DBD710150_HanyoListShisetsuNyutaishoParameter extends BatchParamete
     private static final String ATENACHUSHUTSUJOUKENN = "atenaChushutsuJoukenn";
     private static final String SHUTURYOKUJUNN = "shuturyokuJunn";
     private static final String SHUTURYOKUITEM = "shuturyokuItem";
+    private static final String CYOHYOID = "cyohyoid";
 
     @BatchParameter(key = CHUSHUTSUHOHOKUBUN, name = "抽出方法区分")
     private ChushutsuHohoKubun 抽出方法区分;
@@ -66,6 +67,8 @@ public class DBD710150_HanyoListShisetsuNyutaishoParameter extends BatchParamete
     private Long 出力順;
     @BatchParameter(key = SHUTURYOKUITEM, name = "出力項目")
     private RString 出力項目;
+    @BatchParameter(key = CYOHYOID, name = "帳票ID")
+    private RString cyohyoid;
 
     /**
      * バッチProcessパラメターを取得します．

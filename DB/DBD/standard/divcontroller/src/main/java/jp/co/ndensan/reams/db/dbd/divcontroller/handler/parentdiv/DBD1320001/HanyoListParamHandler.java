@@ -48,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 /**
  * 汎用リスト出力(介護受給共通)のハンドラークラスです。
  *
- * @reamsid_L DBD-3930-011 liwul
+ * @reamsid_L DBD-3930-010 liwul
  */
 public class HanyoListParamHandler {
 
@@ -358,6 +358,10 @@ public class HanyoListParamHandler {
         }
         return batchParameterMap;
     }
+//
+//    public boolean restoreCheck(){
+//         BatchParameterMap batchParameterMap = div.getBtnParamRestore().getRestoreBatchParameterMap();
+//    }
 
     /**
      * 条件の復元
@@ -532,6 +536,7 @@ public class HanyoListParamHandler {
         para.set宛名抽出条件(get宛名抽出条件());
         para.set出力順(div.getCcdShutsuryokujun().get出力順ID());
         para.set出力項目(get出力項目());
+        para.setCyohyoid(汎用リスト_施設入退所帳票ID);
         div.getBtnParamSave().setBatchId(汎用リスト_施設入退所バッチID);
         return para;
     }
@@ -830,8 +835,9 @@ public class HanyoListParamHandler {
         restore宛名抽出条件(batchParameterMap, 宛名抽出条件パラメータ名称2);
         Long 出力順 = batchParameterMap.getParameterValue(Long.class, 出力順パラメータ名称2);
         RString 出力項目 = batchParameterMap.getParameterValue(RString.class, 出力項目パラメータ名称2);
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_施設入退所帳票ID), Long.valueOf(出力順.toString()));
-        div.getCcdShutsuryokuKomoku().load(汎用リスト_施設入退所帳票ID, SubGyomuCode.DBD介護受給, 出力項目);
+        RString 帳票ID = batchParameterMap.getParameterValue(RString.class, 帳票IDパラメータ名称1);
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(帳票ID), Long.valueOf(出力順.toString()));
+        div.getCcdShutsuryokuKomoku().load(帳票ID, SubGyomuCode.DBD介護受給, 出力項目);
     }
 
     private void restore汎用リスト_利用者負担額減免BatchParameter(BatchParameterMap batchParameterMap) {
