@@ -44,6 +44,11 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
     private boolean 文言設定flag;
 
     @Override
+    protected void initialize() {
+        国保資格情報インポート用Entitｙ = new KokuhoShikakuJyohoInpotoyoEntity();
+    }
+
+    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID);
     }
