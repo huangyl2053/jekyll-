@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -40,27 +39,17 @@ public class RiyoshaFutanwariaiProcess extends BatchProcessBase<RiyoshaFutanwari
     private RiyoshaFutanwariaiProcessParameter processParameter;
     private RiyoshaFutanwariaiMybatisParameter mybatisParameter;
     private List<TokuteiKojinJohoHanKanri> 特定個人版管理特定情報;
-    /**
-     * 版番号です。
-     */
-    public static final RString 版番号;
 
-    static {
-        版番号 = new RString("hanNo");
-    }
-    private OutputParameter<RString> hanNo;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 中間DB提供基本情報;
 
     @Override
     protected void initialize() {
-        hanNo = new OutputParameter();
         特定個人版管理特定情報 = new ArrayList<>();
         RString 新規異動区分 = processParameter.get新規異動区分();
         特定個人版管理特定情報 = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(新規異動区分,
                 TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(), DataSetNo._0202負担割合.getコード(),
                 FlexibleDate.getNowDate());
-        hanNo.setValue(特定個人版管理特定情報.get(0).get版番号());
         HihokenshaNo 個人番号付替対象者被保険者番号 = processParameter.get個人番号付替対象者被保険者番号();
         if (個人番号付替対象者被保険者番号 == null) {
             個人番号付替対象者被保険者番号 = HihokenshaNo.EMPTY;

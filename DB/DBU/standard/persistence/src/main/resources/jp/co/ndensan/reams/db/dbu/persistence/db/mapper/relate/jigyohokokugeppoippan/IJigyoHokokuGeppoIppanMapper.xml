@@ -645,7 +645,7 @@
         , "naiYou1"
         , "naiYou2"
         FROM
-        rgdb."DbFt7029RiyoshaFutangakuGemmenSyoriKakuninRisuto"(
+        rgdb."DbFt7029RiyoshaFutangakuGemmenHihoDaichoSyoriKakunin"(
         ARRAY<foreach
             collection="koseiShichosonList"
             item="code"
