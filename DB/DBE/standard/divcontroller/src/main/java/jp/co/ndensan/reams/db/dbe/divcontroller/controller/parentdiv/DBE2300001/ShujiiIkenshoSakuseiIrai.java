@@ -225,6 +225,8 @@ public class ShujiiIkenshoSakuseiIrai {
             if (new RString(UrQuestionMessages.確認_汎用.getMessage().replace(再依頼申請者削除.toString()).getCode()).
                     equals(ResponseHolder.getMessageCode()) && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
                 row.setStatus(削除);
+            } else {
+                div.getDgShinseishaIchiran().getActiveRow().setSelected(Boolean.FALSE);
             }
         }
         return ResponseData.of(div).respond();

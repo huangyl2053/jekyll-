@@ -100,7 +100,13 @@ public class ShujiiIkenshoSakuseiIraiHandler {
                 row.getShinseiDay().setValue(new RDate(申請者.getTemp_認定申請日().toString()));
             }
             if (申請者.getTemp_申請区分() != null) {
-                row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(申請者.getTemp_申請区分().getKey()).get名称());
+                RString shinseiKubunMeisho;
+                try {
+                    shinseiKubunMeisho = NinteiShinseiShinseijiKubunCode.toValue(申請者.getTemp_申請区分().getKey()).get名称();
+                } catch (IllegalArgumentException e) {
+                    shinseiKubunMeisho = RString.EMPTY;
+                }
+                row.setShinseiKubunShinseiji(shinseiKubunMeisho);
             }
             if (申請者.getTemp_住所() != null) {
                 row.setJusho(申請者.getTemp_住所().value());
@@ -109,7 +115,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             if (申請者.getTemp_主治医() != null) {
                 row.setShujii(申請者.getTemp_主治医().value());
             }
-            if (申請者.getTemp_主治医意見書作成依頼日() != null) {
+            if (申請者.getTemp_主治医意見書作成依頼日() != null && !申請者.getTemp_主治医意見書作成依頼日().isEmpty()) {
                 row.getShujiiIkenshoSakuseiIraiDay().setValue(new RDate(申請者.getTemp_主治医意見書作成依頼日().toString()));
             }
             if (!RString.isNullOrEmpty(申請者.getTemp_主治医意見書依頼区分())) {
