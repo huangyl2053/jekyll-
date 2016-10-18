@@ -36,10 +36,10 @@ class DankaiHanteiRoreiNenkin implements IDai1DankaiHantei {
 
         boolean result = false;
 
-        if (hokenryoDankaiHanteiParameter.getFukaKonkyo().getRoreiNenkinStartYMD() != null
+        if (!isNullOrEmpty(hokenryoDankaiHanteiParameter.getFukaKonkyo().getRoreiNenkinStartYMD())
                 && kazeiKubunHantei(hokenryoDankaiHanteiParameter)) {
             老齢年金開始日 = getRealDateCalendar(hokenryoDankaiHanteiParameter.getFukaKonkyo().getRoreiNenkinStartYMD());
-            if (hokenryoDankaiHanteiParameter.getFukaKonkyo().getRoreiNenkinEndYMD() != null) {
+            if (!isNullOrEmpty(hokenryoDankaiHanteiParameter.getFukaKonkyo().getRoreiNenkinEndYMD())) {
                 老齢年金終了日 = getRealDateCalendar(hokenryoDankaiHanteiParameter.getFukaKonkyo().getRoreiNenkinEndYMD());
                 result = this.getResult(賦課年度開始日, 賦課年度終了日, 老齢年金開始日, 老齢年金終了日);
 
@@ -52,6 +52,10 @@ class DankaiHanteiRoreiNenkin implements IDai1DankaiHantei {
 
         return result;
 
+    }
+
+    private boolean isNullOrEmpty(FlexibleDate ymd) {
+        return null == ymd || ymd.isEmpty();
     }
 
     private boolean kazeiKubunHantei(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
