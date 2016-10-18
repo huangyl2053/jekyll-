@@ -161,19 +161,14 @@ public class ShokanRenrakuhyoOutputReport2Process extends BatchKeyBreakBase<Shok
     }
 
     @Override
-    protected void createWriter() {
-
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, 一覧EUCエンティティID, UzUDE0831EucAccesslogFileType.Csv);
-        csvFilePath = Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME);
-    }
-
-    @Override
     protected void keyBreakProcess(ShokanRenrakuhyoOutputReportEntity entity) {
     }
 
     @Override
     protected void usualProcess(ShokanRenrakuhyoOutputReportEntity entity) {
         if (count == INDEX_0) {
+            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, 一覧EUCエンティティID, UzUDE0831EucAccesslogFileType.Csv);
+            csvFilePath = Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME);
             batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200026.getReportId().value())
                     .addBreak(new ShokanRenrakuhyoSofuIchiranPageBreak(breakItemIds)).create();
             reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
@@ -224,17 +219,19 @@ public class ShokanRenrakuhyoOutputReport2Process extends BatchKeyBreakBase<Shok
 
     private ShokanRenrakuhyoSofuIchiranCsvEntity editCsvEntity(ShokanRenrakuhyoOutputReportEntity entity) {
         RString 送付年月 = RString.EMPTY;
-        if (processParameter.getSyoriYM() != null) {
-            送付年月 = processParameter.getSyoriYM().wareki().eraType(EraType.KANJI_RYAKU)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
+        RString 作成日時 = RString.EMPTY;
+        if (count == INDEX_1) {
+            if (processParameter.getSyoriYM() != null) {
+                送付年月 = processParameter.getSyoriYM().wareki().eraType(EraType.KANJI_RYAKU)
+                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                        .fillType(FillType.BLANK).toDateString();
+            }
+            RTime time = システム日付.getTime();
+            RString timeFormat = time.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+            作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.HALF_SPACE)
+                    .concat(timeFormat).concat(RString.HALF_SPACE).concat(SAKUSEI);
         }
-
-        RTime time = システム日付.getTime();
-        RString timeFormat = time.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        RString 作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.HALF_SPACE)
-                .concat(timeFormat).concat(RString.HALF_SPACE).concat(SAKUSEI);
 
         RString 保険者番号 = RString.EMPTY;
         if (entity.get償還払支給申請一時TBL().getHokenshaNo() != null) {

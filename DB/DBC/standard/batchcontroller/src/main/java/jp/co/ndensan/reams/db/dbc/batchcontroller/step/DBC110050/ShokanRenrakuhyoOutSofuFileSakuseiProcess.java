@@ -58,7 +58,6 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
     private static final RString RSTRING_00 = new RString("00");
     private static final RString ファイル管理番号 = new RString("000001");
     private static final RString 囲みの文字 = new RString("\"");
-    private static final RString 変換区分_1 = new RString("1");
     private static final RString レコード順次番号_99 = new RString("99");
     private static final RString データ区分_01 = new RString("01");
     private static final RString データ区分_02 = new RString("02");
@@ -214,8 +213,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             レコード番号 = レコード番号 + INDEX_1;
             csvWriter.writeLine(getEndEntity());
             csvWriter.close();
-            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
-                    FilesystemName.fromString(csvFileName));
+            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(csvFileName));
             sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
             SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(csvFilePath), opts);
