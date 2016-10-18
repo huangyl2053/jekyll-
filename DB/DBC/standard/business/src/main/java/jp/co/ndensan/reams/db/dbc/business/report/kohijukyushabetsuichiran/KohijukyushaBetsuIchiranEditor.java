@@ -7,12 +7,14 @@ package jp.co.ndensan.reams.db.dbc.business.report.kohijukyushabetsuichiran;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kohijukyushabetsuichiran.KohijukyushaBetsuIchiranBusiness;
 import jp.co.ndensan.reams.db.dbc.entity.report.kohijukyushabetsuichiran.KohijukyushaBetsuIchiranReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -28,21 +30,19 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class KohijukyushaBetsuIchiranEditor implements IKohijukyushaBetsuIchiranEditor {
 
-    private static final int 設定項目リスト_INDEX1 = 0;
-    private static final int 設定項目リスト_INDEX2 = 1;
-    private static final int 設定項目リスト_INDEX3 = 2;
-    private static final int 設定項目リスト_INDEX4 = 3;
-    private static final int 設定項目リスト_INDEX5 = 4;
     private static final int INDEX = 8;
     private final KohijukyushaBetsuIchiranBusiness business;
+    private final boolean 集計Flag;
 
     /**
      * インスタンスを生成します。
      *
      * @param business {@link KohijukyushaBetsuIchiranBusiness}
+     * @param 集計Flag 集計Flag
      */
-    protected KohijukyushaBetsuIchiranEditor(KohijukyushaBetsuIchiranBusiness business) {
+    protected KohijukyushaBetsuIchiranEditor(KohijukyushaBetsuIchiranBusiness business, boolean 集計Flag) {
         this.business = business;
+        this.集計Flag = 集計Flag;
     }
 
     @Override
@@ -52,20 +52,31 @@ public class KohijukyushaBetsuIchiranEditor implements IKohijukyushaBetsuIchiran
 
     private KohijukyushaBetsuIchiranReportSource editSource(KohijukyushaBetsuIchiranReportSource source) {
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), business.get被保険者番号());
+        source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), business.get登録被保険者番号().value());
         source.printTimeStamp = get印刷日時(business.get作成日時());
-        if (!RString.isNullOrEmpty(business.get審査年月())) {
-            source.shinsaYM = new FlexibleDate(business.get審査年月()).wareki().eraType(EraType.KANJI_RYAKU)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).getYearMonth();
+        FlexibleYearMonth 審査年月 = business.get審査年月();
+        if (審査年月 != null && !審査年月.isEmpty()) {
+            source.shinsaYM = 審査年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         source.kokuhorenName = business.get国保連合会名();
         source.kohiFutanshaNo = business.get公費負担者番号();
         source.kohiFutanshaName = business.get公費負担者名();
-        set並び順と改頁(source);
+        source.kaiPege1 = business.get改頁1();
+        source.kaiPege2 = business.get改頁2();
+        source.kaiPege3 = business.get改頁3();
+        source.kaiPege4 = business.get改頁4();
+        source.kaiPege5 = business.get改頁5();
+        source.shutsuryokujun1 = business.get並び順1();
+        source.shutsuryokujun2 = business.get並び順2();
+        source.shutsuryokujun3 = business.get並び順3();
+        source.shutsuryokujun4 = business.get並び順4();
+        source.shutsuryokujun5 = business.get並び順5();
         source.listUpper_1 = business.get公費受給者番号();
-        if (!RString.isNullOrEmpty(business.getサービス提供年月())) {
-            source.listUpper_2 = new FlexibleDate(business.getサービス提供年月())
-                    .wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).getYearMonth();
+        FlexibleYearMonth サービス提供年月 = business.getサービス提供年月();
+        if (サービス提供年月 != null && !サービス提供年月.isEmpty()) {
+            source.listUpper_2 = サービス提供年月
+                    .wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         }
         source.listUpper_3 = business.get事業所番号();
         source.listLower_1 = business.get事業所名();
@@ -81,27 +92,23 @@ public class KohijukyushaBetsuIchiranEditor implements IKohijukyushaBetsuIchiran
         } else {
             source.listUpper_4 = business.getサービス項目名();
         }
-        source.listUpper_6 = business.get日数回数();
-        if (business.get公費対象単位数() > 0) {
-            source.listUpper_7 = decimalToRString(business.get公費対象単位数());
+        source.listUpper_6 = new RString(business.get日数回数().toString());
+        source.listUpper_7 = decimalFormatter(business.get公費対象単位数(), 0);
+        source.listUpper_8 = decimalFormatter(business.get公費負担金額(), 0);
+        source.listUpper_9 = decimalFormatter(business.get公費分本人負担額(), 0);
+        HihokenshaNo 登録被保険者番号 = business.get登録被保険者番号();
+        if (登録被保険者番号 != null && !登録被保険者番号.isEmpty()) {
+            source.listUpper_10 = business.get登録被保険者番号().value();
         }
-        if (business.get公費負担金額() > 0) {
-            source.listUpper_8 = decimalToRString(business.get公費負担金額());
-        }
-        if (business.get公費分本人負担額() > 0) {
-            source.listUpper_9 = decimalToRString(business.get公費分本人負担額());
-        }
-        source.listUpper_10 = business.get登録被保険者番号();
         source.listLower_4 = business.get宛名名称();
-        source.listUpper_11 = business.get証記載保険者番号();
-        if (business.get公費対象単位数集計() > 0) {
-            source.kohiTensuGokei = decimalToRString(business.get公費対象単位数集計());
+        ShoKisaiHokenshaNo 証記載保険者番号 = business.get証記載保険者番号();
+        if (証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
+            source.listUpper_11 = business.get証記載保険者番号().value();
         }
-        if (business.get公費負担金額集計() > 0) {
-            source.kohiFutanGakuGokei = decimalToRString(business.get公費負担金額集計());
-        }
-        if (business.get公費分本人負担額集計() > 0) {
-            source.kohiHoninFutanGakuGokei = decimalToRString(business.get公費分本人負担額集計());
+        if (集計Flag) {
+            source.kohiTensuGokei = decimalFormatter(business.get公費対象単位数集計(), 0);
+            source.kohiFutanGakuGokei = decimalFormatter(business.get公費負担金額集計(), 0);
+            source.kohiHoninFutanGakuGokei = decimalFormatter(business.get公費分本人負担額集計(), 0);
         }
         return source;
     }
@@ -124,33 +131,11 @@ public class KohijukyushaBetsuIchiranEditor implements IKohijukyushaBetsuIchiran
         return systemDateTime.toRString();
     }
 
-    private void set並び順と改頁(KohijukyushaBetsuIchiranReportSource source) {
-        if (business.get出力順情報() != null
-                && business.get出力順情報().get設定項目リスト() != null) {
-            if (business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX1) != null) {
-                source.shutsuryokujun1 = business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX1).get項目名();
-                source.kaiPege1 = business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX1).get項目名();
-            }
-            if (business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX2) != null) {
-                source.shutsuryokujun2 = business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX2).get項目名();
-                source.kaiPege2 = business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX2).get項目名();
-            }
-            if (business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX3) != null) {
-                source.shutsuryokujun3 = business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX3).get項目名();
-                source.kaiPege3 = business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX3).get項目名();
-            }
-            if (business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX4) != null) {
-                source.shutsuryokujun4 = business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX4).get項目名();
-                source.kaiPege4 = business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX4).get項目名();
-            }
-            if (business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX5) != null) {
-                source.shutsuryokujun5 = business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX5).get項目名();
-                source.kaiPege5 = business.get出力順情報().get設定項目リスト().get(設定項目リスト_INDEX5).get項目名();
-            }
+    private RString decimalFormatter(Decimal 額, int count) {
+        if (null == 額) {
+            return RString.EMPTY;
         }
+        return DecimalFormatter.toコンマ区切りRString(額, count);
     }
 
-    private RString decimalToRString(int data) {
-        return DecimalFormatter.toコンマ区切りRString(new Decimal(data), 0);
-    }
 }
