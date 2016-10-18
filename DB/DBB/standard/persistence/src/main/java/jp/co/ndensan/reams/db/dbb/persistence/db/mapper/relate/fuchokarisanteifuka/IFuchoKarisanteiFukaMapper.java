@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuchokarisanteifuka;
 
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb014001.FuchoKarisanteiFukaMybatisParameter;
+
 /**
  * バッチ設計_DBBBT34001_普徴仮算定賦課のマッパーインタフェースです。
  *
@@ -12,4 +14,10 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuchokarisanteif
  */
 public interface IFuchoKarisanteiFukaMapper {
 
+    /**
+     * 処理日付管理テーブルを更新するメソッドです。
+     *
+     * @param parameter FuchoKarisanteiFukaMybatisParameter
+     */
+    void update処理日付管理(FuchoKarisanteiFukaMybatisParameter parameter);
 }

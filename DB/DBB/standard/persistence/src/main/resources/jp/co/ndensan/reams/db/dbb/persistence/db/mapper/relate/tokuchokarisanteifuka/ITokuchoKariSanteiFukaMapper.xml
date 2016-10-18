@@ -969,7 +969,7 @@
         "DbV2002Fuka"."hokenryoDankai2"
         end) AS 前年度保険料段階
         FROM rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
-        LEFT JOIN rgue."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報_介護継承
+        LEFT JOIN rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報_介護継承
         ON "DbT2015KeisangoJoho"."kariNenkinNo" = 年金特徴回付情報_介護継承."kisoNenkinNo"
         AND "DbT2015KeisangoJoho"."kariNenkinCode" = 年金特徴回付情報_介護継承."nenkinCode"
         AND "DbT2015KeisangoJoho"."kariHosokuM" = 年金特徴回付情報_介護継承."hosokuTsuki"
