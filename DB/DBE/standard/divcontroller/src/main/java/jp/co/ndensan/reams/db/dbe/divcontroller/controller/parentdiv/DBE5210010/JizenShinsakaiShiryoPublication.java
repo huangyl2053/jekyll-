@@ -13,11 +13,10 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5210010.Jiz
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5210010.JizenShinsakaiShiryoPublicationValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.jizenshinsakaishiryopublication.JizenShinsakaiShiryoPublicationManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -46,6 +45,7 @@ public class JizenShinsakaiShiryoPublication {
         前排他制御開催番号.append("DBEShinsakaiNo");
         前排他制御開催番号.append(審査会開催番号);
         前排他ロックキー(前排他制御開催番号.toRString());
+        div.setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -116,7 +116,7 @@ public class JizenShinsakaiShiryoPublication {
     private void 前排他ロックキー(RString 排他ロックキー) {
         LockingKey 前排他ロックキー = new LockingKey(排他ロックキー);
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+            throw new PessimisticLockingException();
         }
     }
 

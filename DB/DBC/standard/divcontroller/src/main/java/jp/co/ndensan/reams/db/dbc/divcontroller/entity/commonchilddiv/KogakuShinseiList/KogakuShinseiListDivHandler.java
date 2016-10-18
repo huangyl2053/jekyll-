@@ -30,7 +30,7 @@ public class KogakuShinseiListDivHandler {
 
     private final KogakuShinseiListDiv div;
     private static final RString 高額サービス費支給申請書登録 = new RString("DBCMN42001");
-    private static final RString 総合事業高額サービス費支給申請書登録 = new RString("DBCMN42002");
+    private static final RString 総合事業高額サービス費支給申請書登録 = new RString("DBCMNL2001");
     private static final RString 高額介護サービス費照会 = new RString("DBCMN11004");
     private static final RString 総合事業高額介護サービス費照会 = new RString("DBCMN11016");
     private static final RString 審査年月 = new RString("審査年月");
