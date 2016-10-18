@@ -145,8 +145,10 @@ public final class TaishoshaIchiranDivHandler {
         if (row.getTxtRirekiNo() != null && !row.getTxtRirekiNo().isEmpty()) {
             entity.set履歴番号(Integer.parseInt(row.getTxtRirekiNo().toString()));
         }
-        entity.set対象年月(new FlexibleYearMonth(row.getTxtTaishoNengetsu().
-                getValue().getYearMonth().toString()));
+        if (row.getTxtTaishoNengetsu().getValue() != null) {
+            entity.set対象年月(new FlexibleYearMonth(row.getTxtTaishoNengetsu().
+                    getValue().getYearMonth().toString()));
+        }
         return entity;
     }
 
