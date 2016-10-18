@@ -57,6 +57,8 @@ public class ChosaItakusakiAndChosainGuideHandler {
             ddlShoriKubun.add(new KeyValueDataSource(code.getコード(), code.get名称()));
         }
         div.getDdlChosaItakusakiKubun().setDataSource(ddlShoriKubun);
+        div.getTxtChikuCode().setMaxLength(5);
+        div.getTxtChikuCode().setPaddingZero(true);
     }
 
     /**
@@ -77,6 +79,8 @@ public class ChosaItakusakiAndChosainGuideHandler {
         div.getTxtChosainName().clearValue();
         div.getTxtChosainKanaShimei().clearValue();
         div.getTxtMaxKensu().clearValue();
+        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.
+                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**
@@ -113,6 +117,8 @@ public class ChosaItakusakiAndChosainGuideHandler {
         } else {
             div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
         }
+        div.getTxtChikuCode().setMaxLength(5);
+        div.getTxtChikuCode().setPaddingZero(true);
     }
 
     /**

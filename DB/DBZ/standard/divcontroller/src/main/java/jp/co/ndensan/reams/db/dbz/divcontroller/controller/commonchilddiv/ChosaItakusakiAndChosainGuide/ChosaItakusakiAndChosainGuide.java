@@ -30,6 +30,10 @@ public class ChosaItakusakiAndChosainGuide {
 
     private final KijuntsukiShichosonjohoFinder finder;
     private RString 市町村コード;
+    private RString 調査委託先コードFrom = RString.EMPTY;
+    private RString 調査委託先コードTo = RString.EMPTY;
+    private RString 調査員コードFrom = RString.EMPTY;
+    private RString 調査員コードTo = RString.EMPTY;
 
     /**
      * コンストラクタです。
@@ -102,18 +106,46 @@ public class ChosaItakusakiAndChosainGuide {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
 
+        if (!div.getTxtChosaItakusakiCodeFrom().getValue().isNullOrEmpty()
+                && !div.getTxtChosaItakuaskiCodeTo().getValue().isNullOrEmpty()) {
+            if (Long.valueOf(div.getTxtChosaItakusakiCodeFrom().getValue().toString())
+                    > Long.valueOf(div.getTxtChosaItakuaskiCodeTo().getValue().toString())) {
+                調査委託先コードFrom = div.getTxtChosaItakuaskiCodeTo().getValue();
+                調査委託先コードTo = div.getTxtChosaItakusakiCodeFrom().getValue();
+            } else {
+                調査委託先コードFrom = div.getTxtChosaItakusakiCodeFrom().getValue();
+                調査委託先コードTo = div.getTxtChosaItakuaskiCodeTo().getValue();
+            }
+        } else {
+            調査委託先コードFrom = div.getTxtChosaItakusakiCodeFrom().getValue();
+            調査委託先コードTo = div.getTxtChosaItakuaskiCodeTo().getValue();
+        }
+        if (!div.getTxtChosainCodeFrom().getValue().isNullOrEmpty()
+                && !div.getTxtChosainCodeTo().getValue().isNullOrEmpty()) {
+            if (Long.valueOf(div.getTxtChosainCodeFrom().getValue().toString())
+                    > Long.valueOf(div.getTxtChosainCodeTo().getValue().toString())) {
+                調査員コードFrom = div.getTxtChosainCodeTo().getValue();
+                調査員コードTo = div.getTxtChosainCodeFrom().getValue();
+            } else {
+                調査員コードFrom = div.getTxtChosainCodeFrom().getValue();
+                調査員コードTo = div.getTxtChosainCodeTo().getValue();
+            }
+        } else {
+            調査員コードFrom = div.getTxtChosainCodeFrom().getValue();
+            調査員コードTo = div.getTxtChosainCodeTo().getValue();
+        }
         市町村コード = dataPassModel.get市町村コード();
         if (RString.isNullOrEmpty(市町村コード)) {
         市町村コード = div.getHokensha().getSelectedItem().get市町村コード().value();
         }
         return ChosaItakusakiAndChosainGuideParameter.createParam(
-                div.getTxtChosaItakusakiCodeFrom().getValue(),
-                div.getTxtChosaItakuaskiCodeTo().getValue(),
+                調査委託先コードFrom,
+                調査委託先コードTo,
                 div.getRadItakusakiJokyo().getSelectedKey(),
                 div.getTxtChosaItakusakiName().getValue(),
                 div.getTxtChosaItakusakiKanaMeisho().getValue(),
-                div.getTxtChosainCodeFrom().getValue(),
-                div.getTxtChosainCodeTo().getValue(),
+                調査員コードFrom,
+                調査員コードTo,
                 div.getRadChosainJokyo().getSelectedKey(),
                 div.getTxtChosainName().getValue(),
                 div.getTxtChosainKanaShimei().getValue(),
