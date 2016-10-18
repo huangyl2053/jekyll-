@@ -35,7 +35,7 @@ public class RiyoshaFutanwariaiProcess extends BatchProcessBase<RiyoshaFutanwari
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate."
             + "tokuteikojinjohoteikyo.IRiyoshaFutanwariaiMapper.get提供情報_候補");
-    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJoho");
+    private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
     private RiyoshaFutanwariaiProcessParameter processParameter;
     private RiyoshaFutanwariaiMybatisParameter mybatisParameter;
     private List<TokuteiKojinJohoHanKanri> 特定個人版管理特定情報;
