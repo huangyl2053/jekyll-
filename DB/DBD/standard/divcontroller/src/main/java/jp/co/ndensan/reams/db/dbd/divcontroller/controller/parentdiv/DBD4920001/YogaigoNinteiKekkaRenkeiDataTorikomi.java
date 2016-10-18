@@ -10,10 +10,12 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4920001.DBD4
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4920001.YogaigoNinteiKekkaRenkeiDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4920001.YogaigoNinteiKekkaRenkeiDataTorikomiHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4920001.YogaigoNinteiKekkaRenkeiDataTorikomiValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 要介護認定結果連携データ取込のコントローラです。
@@ -75,7 +77,8 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomi {
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
-            getHandler(div).onClick_appurodo(files);
+            RString csvPath = getHandler(div).onClick_appurodo(files);
+            ViewStateHolder.put(ViewStateKeys.利用モード, csvPath);
             div.getDataGridFile().getDataSource().get(0).setTotal(div.getNum());
             validationHandler.保険者一致チェック_識別コード(pairs);
             if (pairs.iterator().hasNext()) {
@@ -126,7 +129,8 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomi {
      * @return ResponseData<DBD492001_NinteiKekkaInfoUploadParameter>
      */
     public ResponseData<DBD492001_NinteiKekkaInfoUploadParameter> onClick_btnBatch(YogaigoNinteiKekkaRenkeiDataTorikomiDiv div) {
-        DBD492001_NinteiKekkaInfoUploadParameter parameter = getHandler(div).toParameter();
+        RString csvPath = ViewStateHolder.get(ViewStateKeys.利用モード, RString.class);
+        DBD492001_NinteiKekkaInfoUploadParameter parameter = getHandler(div).toParameter(csvPath);
         return ResponseData.of(parameter).respond();
     }
 
