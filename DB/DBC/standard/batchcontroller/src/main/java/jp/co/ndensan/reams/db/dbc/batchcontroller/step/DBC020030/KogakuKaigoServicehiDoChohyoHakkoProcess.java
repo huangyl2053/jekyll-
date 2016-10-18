@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiy
 import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteitsuchihakko.KogakuShikyuFushikyuKetteiTsuchiHakkoPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteitsuchihakko.KogakuShikyuFushikyuKetteiTsuchiHakkoReport;
 import jp.co.ndensan.reams.db.dbc.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.KogakuKetteiTsuchiShoSealerReport;
+import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoReportParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho.KogakuKaigoServiceProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -30,7 +31,6 @@ import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer.Koga
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakushikyufushikyuketteitsuchihakkoichiran.KogakuShikyuFushikyuKetteiTsuchiHakkoSource;
 import jp.co.ndensan.reams.db.dbc.service.core.servicehishikyuketteitsuchisho.ServicehiShikyuKetteiTsuchisho;
-import jp.co.ndensan.reams.db.dbd.definition.core.shokanbaraikyufu.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -574,7 +574,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         returnEntity.set決定年月日(formatDate(一時Entity.getKetteiYMD()));
         returnEntity.set本人支払額(doカンマ編集(一時Entity.getRiyoshaFutanGaku()));
         returnEntity.set支給額(doカンマ編集(一時Entity.getKogakuShikyuGaku()));
-        ShikyuFushikyuKubun 支給不支給決定区分 = ShikyuFushikyuKubun.toValue(一時Entity.getKetteiShikyuKubunCode());
+        ShikyuKubun 支給不支給決定区分 = ShikyuKubun.toValue(一時Entity.getKetteiShikyuKubunCode());
         returnEntity.set支給_不支給_決定区分(支給不支給決定区分.get名称());
         returnEntity.set資格喪失日(formatDate(一時Entity.getShikakuSoshitsuYMD()));
         RString 喪失事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),

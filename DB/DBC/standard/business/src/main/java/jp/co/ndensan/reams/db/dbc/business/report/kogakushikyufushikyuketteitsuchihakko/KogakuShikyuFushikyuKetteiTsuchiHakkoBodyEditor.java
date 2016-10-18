@@ -70,10 +70,14 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoBodyEditor implements IKogakuS
                 source.listUpper_9 = entity.get本人支給額合計();
                 source.listLower_5 = entity.get支給額給額合計();
             }
+            source.yubinNo = entity.get郵便番号();
             source.choikiCode = entity.get町域コード();
             source.gyoseikuCode = entity.get行政区コード();
             source.kanaMeisho = entity.get氏名５０音カナ();
+            source.shichosonCode = entity.get市町村コード();
             source.shoKisaiHokenshaNo = entity.get証記載保険者番号();
+            source.hihokenshaNo = entity.get被保険者番号();
+            source.tsuchishoNo = entity.get決定通知No();
             source.shikakuJyotaiKubun = entity.get資格状態区分();
         }
 

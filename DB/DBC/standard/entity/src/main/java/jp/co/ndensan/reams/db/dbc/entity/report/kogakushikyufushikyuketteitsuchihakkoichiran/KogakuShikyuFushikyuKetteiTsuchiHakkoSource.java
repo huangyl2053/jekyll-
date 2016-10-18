@@ -81,14 +81,22 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoSource implements IReportSourc
     public RString listLower_7;
 // </editor-fold>
 
+    @ReportItem(name = "yubinNo")
+    public RString yubinNo;
     @ReportItem(name = "choikiCode")
     public RString choikiCode;
     @ReportItem(name = "gyoseikuCode")
     public RString gyoseikuCode;
     @ReportItem(name = "kanaMeisho")
     public RString kanaMeisho;
+    @ReportItem(name = "shichosonCode")
+    public RString shichosonCode;
     @ReportItem(name = "shoKisaiHokenshaNo")
     public RString shoKisaiHokenshaNo;
+    @ReportItem(name = "hihokenshaNo")
+    public RString hihokenshaNo;
+    @ReportItem(name = "tsuchishoNo")
+    public RString tsuchishoNo;
     @ReportItem(name = "shikakuJyotaiKubun")
     public RString shikakuJyotaiKubun;
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
