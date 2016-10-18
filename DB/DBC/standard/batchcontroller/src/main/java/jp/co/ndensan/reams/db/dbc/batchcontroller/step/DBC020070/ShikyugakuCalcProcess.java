@@ -475,7 +475,7 @@ public class ShikyugakuCalcProcess extends BatchKeyBreakBase<ShikyugakuCalcTempE
             entity.setShikyugaku_rirekiNo(1);
             entity.setShikyugaku_hokenSeidoCode(保険制度コード_3);
             entity.setShikyugaku_setaiFutanSogaku(addDecimal(全明細_負担額_70歳以上_合計, 全明細_負担額_70歳未満_合計));
-            entity.setShikyugaku_setaiGassanGaku(全明細_支給額_合計);
+            entity.setShikyugaku_setaiGassanGaku(全明細_負担額_合計);
             entity.setShikyugaku_over70_SetaiGassanGaku(全明細_負担額_70歳以上_合計);
             entity.setShikyugaku_setaiShikyuSogaku(事業_支給額);
             entity.setShikyugaku_over70_SetaiShikyuSogaku(事業_支給額_70歳以上);

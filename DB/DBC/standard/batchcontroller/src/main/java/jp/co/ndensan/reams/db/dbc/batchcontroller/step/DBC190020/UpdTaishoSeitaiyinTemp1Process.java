@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 対象世帯員クラスTempに更新1のバッチ処理フロークラスです
@@ -67,7 +68,7 @@ public class UpdTaishoSeitaiyinTemp1Process extends BatchProcessBase<UpdTaishoSe
             if ((RSTRING_10.equals(対象世帯員.getAtenaDateDhubetsu_kijunDay())
                     || RSTRING_20.equals(対象世帯員.getAtenaDateDhubetsu_kijunDay())) || RSTRING_1.equals(被保険者台帳管理.getJushochiTokureiFlag())) {
                 対象世帯員.setJukyuKubun(RSTRING_3);
-                対象世帯員.setShichosonCode(被保険者台帳管理.getShichosonCode().getColumnValue());
+                対象世帯員.setShichosonCode(getColumnValue(被保険者台帳管理.getShichosonCode()));
                 対象世帯員.setJushochiTokureiFlag(被保険者台帳管理.getJushochiTokureiFlag());
             }
             if (対象世帯員.getAge() != null && RSTRING_65.compareTo(対象世帯員.getAge()) <= 0) {
@@ -90,6 +91,13 @@ public class UpdTaishoSeitaiyinTemp1Process extends BatchProcessBase<UpdTaishoSe
         }
 
         this.taiShoTableWriter.update(対象世帯員);
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
     }
 
 }
