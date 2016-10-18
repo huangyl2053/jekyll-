@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票分類ID「DBB200021_TokubetsuChoshuIdojohoIchiran」（特別徴収異動情報一覧表）出力順設定可能項目です。
+ *
+ * @reamsid_L DBB-1840-050 xuzhao
  */
 public enum DBB200021_TokubetsuChoshuIdojohoIchiranEnum implements IReportItems {
 
