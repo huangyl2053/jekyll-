@@ -90,6 +90,9 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
                     this.所得年度世帯出力有無の判定();
                     this.entityList.clear();
                     this.firstEntity = entity;
+                    this.課税区分flg = false;
+                    this.課税所得flg = false;
+                    this.世帯出力flg = false;
                 }
             } else if (RSTRING_1.equals(parameter.get抽出条件())) {
                 this.entityList.add(exEntity);
@@ -98,6 +101,9 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
                     this.被保険者番号世帯出力有無の判定();
                     this.entityList.clear();
                     this.firstEntity = entity;
+                    this.課税区分flg = false;
+                    this.課税所得flg = false;
+                    this.世帯出力flg = false;
                 }
             }
         }
@@ -116,11 +122,10 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
             if (RSTRING_0.equals(parameter.get抽出条件())) {
                 this.get該当件数(exEntity.getShotaiCode());
                 this.所得年度世帯出力有無の判定();
-                this.entityList.clear();
+
             } else if (RSTRING_1.equals(parameter.get抽出条件())) {
                 this.get該当件数(exEntity.getShotaiCode());
                 this.被保険者番号世帯出力有無の判定();
-                this.entityList.clear();
 
             }
         }
