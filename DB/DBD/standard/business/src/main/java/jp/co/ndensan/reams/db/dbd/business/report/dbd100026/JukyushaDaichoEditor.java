@@ -642,7 +642,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
             source.setaiCode = 先頭Entity.get世帯コード();
         }
         if (先頭Entity.get住所コード() != null) {
-            source.shikibetsuCode = 先頭Entity.get住所コード();
+            source.shikibetsuCode = 先頭Entity.get住民コード();
         }
 
         return source;
