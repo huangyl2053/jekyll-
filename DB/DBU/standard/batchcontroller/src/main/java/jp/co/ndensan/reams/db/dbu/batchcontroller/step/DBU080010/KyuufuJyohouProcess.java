@@ -28,8 +28,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 public class KyuufuJyohouProcess extends BatchProcessBase<SougouJigyouJyohouRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo."
-            + "ISougouJigyouJyohouMapper.get当初_版改定_異動分データ");
+            + "ISougouJigyouJyohouMapper.get高額合算_当初_版改定_異動分データ");
     private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
+    private static final RString NOTACCEPTABLE = new RString("NotAcceptable");
     private SougouJigyouJyohouProcessParameter processParameter;
     private SougouJigyouJyohouMybatisParameter mybatisParameter;
     @BatchWriter
@@ -81,15 +82,15 @@ public class KyuufuJyohouProcess extends BatchProcessBase<SougouJigyouJyohouRela
         entity.setMisetteiJiyu04(RString.EMPTY);
         entity.setTeikyoNaiyo05(toRString(relateEntity.getHihokenshaShuryoYMD()));
         if (relateEntity.getHihokenshaShuryoYMD() != null && !relateEntity.getHihokenshaShuryoYMD().isEmpty()) {
-            entity.setMisetteiJiyu05(new RString("NotAcceptable"));
+            entity.setMisetteiJiyu05(NOTACCEPTABLE);
         } else {
             entity.setMisetteiJiyu05(RString.EMPTY);
         }
         entity.setTeikyoNaiyo06(relateEntity.getSumi_Gokei_JikoFutanGaku());
         entity.setMisetteiJiyu06(RString.EMPTY);
         entity.setTeikyoNaiyo07(relateEntity.getSumi_Gokei_70_74JikoFutanGaku());
-        if (relateEntity.getSumi_Gokei_70_74JikoFutanGaku() != null && !relateEntity.getSumi_Gokei_70_74JikoFutanGaku().isEmpty()) {
-            entity.setMisetteiJiyu05(new RString("NotAcceptable"));
+        if (!RString.isNullOrEmpty(relateEntity.getSumi_Gokei_70_74JikoFutanGaku())) {
+            entity.setMisetteiJiyu05(NOTACCEPTABLE);
         } else {
             entity.setMisetteiJiyu07(RString.EMPTY);
         }
