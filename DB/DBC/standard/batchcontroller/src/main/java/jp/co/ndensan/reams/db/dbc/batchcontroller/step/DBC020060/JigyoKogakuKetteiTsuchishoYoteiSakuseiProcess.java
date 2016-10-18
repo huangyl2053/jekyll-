@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakuketteitsuchishoyiji
 import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakuketteitsuchishoyijinashi.JigyoKogakuKetteiTsuchishoYijiNashiReport;
 import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakushikyufushikyukettetsuchiich.JigyoKogakuShikyuFushikyuKetteTsuchiPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakushikyufushikyukettetsuchiich.JigyoKogakuShikyuFushikyuKetteTsuchiReport;
+import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoReportParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho.KogakuKaigoServiceProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -25,7 +26,6 @@ import jp.co.ndensan.reams.db.dbc.entity.jigyokogakuketteitsuchishoyijinashi.Jig
 import jp.co.ndensan.reams.db.dbc.entity.report.jigyokogakushikyufushikyukettetsuchiichiran.JigyoKogakuShikyuFushikyuKetteTsuchiSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.servicehishikyuketteitsuchisho.ServicehiShikyuKetteiTsuchisho;
-import jp.co.ndensan.reams.db.dbd.definition.core.shokanbaraikyufu.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -179,8 +179,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
     @Override
     protected IBatchReader createReader() {
         ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
-        // TODO UR.ENUM.ShunoKamokuShubetsu.介護給付_事業高額がない
-        IShunoKamoku 介護給付_高額 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護給付_高額);
+        IShunoKamoku 介護給付_高額 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護給付_事業高額);
         IKozaSearchKey searchKey = new KozaSearchKeyBuilder()
                 .set業務コード(GyomuCode.DB介護保険)
                 .setサブ業務コード(SubGyomuCode.DBC介護給付)
@@ -366,7 +365,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         JigyoKogakuShikyuFushikyuKetteTsuchiEntity returnEntity = new JigyoKogakuShikyuFushikyuKetteTsuchiEntity();
         set出力順と改頁(returnEntity);
         KetteiTsuchishoInfoTempEntity 一時Entity = entity.get一時Entity();
-        returnEntity.set決定通知No(一時Entity.getTsuchishoNo());
+        returnEntity.set決定通知No(一時Entity.getTsuchishoNo() == null ? RString.EMPTY : 一時Entity.getTsuchishoNo());
         if (null != 一時Entity.getHihokenshaNo()) {
             returnEntity.set被保険者番号(一時Entity.getHihokenshaNo().getColumnValue());
         }
@@ -390,7 +389,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         returnEntity.set決定年月日(formatDate(一時Entity.getKetteiYMD()));
         returnEntity.set本人支払額(doカンマ編集(一時Entity.getRiyoshaFutanGaku()));
         returnEntity.set支給額(doカンマ編集(一時Entity.getKogakuShikyuGaku()));
-        ShikyuFushikyuKubun 支給不支給区分 = ShikyuFushikyuKubun.toValue(一時Entity.getKetteiShikyuKubunCode());
+        ShikyuKubun 支給不支給区分 = ShikyuKubun.toValue(一時Entity.getKetteiShikyuKubunCode());
         returnEntity.set支給_不支給_決定区分(支給不支給区分.get名称());
         returnEntity.set資格喪失日(formatDate(一時Entity.getShikakuSoshitsuYMD()));
         RString 喪失事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
@@ -406,7 +405,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         returnEntity.set氏名５０音カナ(entity.getカナ名称() == null ? RString.EMPTY : entity.getカナ名称().getColumnValue());
         returnEntity.set証記載保険者番号(一時Entity.getShoKisaiHokenshaNo() == null ? RString.EMPTY
                 : 一時Entity.getShoKisaiHokenshaNo().getColumnValue());
-        returnEntity.set資格状態区分(一時Entity.getShikakuJyotaiKubun());
+        returnEntity.set資格状態区分(一時Entity.getShikakuJyotaiKubun() == null ? RString.EMPTY : 一時Entity.getShikakuJyotaiKubun());
         return returnEntity;
     }
 

@@ -242,21 +242,41 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
         RString 項目内容new = RString.EMPTY;
         if (hanyoListShutsuryokuKomoku != null) {
             for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
-                try {
-                    Method getMethod = clazz.getDeclaredMethod(FutanGendoGakuNinteiCsvEnumEntity
-                            .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
-                                                    .get(i).get項目位置()))).get名称().toString());
-                    項目内容new = (RString) getMethod.invoke(eucCsvEntity);
-                } catch (NoSuchMethodException | SecurityException |
-                        IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    Logger.getLogger(HanyoListFutanGendoGakuNinteiProcess.class.getName()).log(Level.SEVERE, null, ex);
+                RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
+                if (get項目名称 != null && !get項目名称.isEmpty()) {
+                    try {
+                        Method getMethod = clazz.getDeclaredMethod(FutanGendoGakuNinteiCsvEnumEntity
+                                .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
+                                                        .get(i).get項目位置()))).get名称().toString());
+                        項目内容new = (RString) getMethod.invoke(eucCsvEntity);
+                        if (項目内容new != null) {
+                            項目内容new = HanyoListManager.createInstance().項目内容new編集(i, 項目内容new, hanyoListShutsuryokuKomoku);
+                        }
+                    } catch (NoSuchMethodException | SecurityException | IllegalAccessException |
+                            IllegalArgumentException | InvocationTargetException ex) {
+                        Logger.getLogger(HanyoListFutanGendoGakuNinteiProcess.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    if (is帳票出力) {
+                        帳票出力編集(i, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
+                    }
+                    if (isCSV出力) {
+                        出力編集(i, get項目名称, 項目内容new);
+                    }
                 }
-                if (is帳票出力) {
-                    帳票出力編集(i, hanyoListShutsuryokuKomoku, 項目内容new);
+            }
+            if (is帳票出力 && 項目内容 != null && !項目内容.isEmpty()) {
+                HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(),
+                        processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
+                report.writeBy(reportSourceWriter);
+                項目見出し = RString.EMPTY;
+                項目内容 = RString.EMPTY;
+            }
+            if (isCSV出力 && csvContent != null && !csvContent.isEmpty()) {
+                if (連番 == 1 && processParamter.isCsvkomokumeifuka() && csvHeader != null && !csvHeader.isEmpty()) {
+                    eucCsvWriter1.writeLine(csvHeader);
                 }
-                if (isCSV出力) {
-                    出力編集(i, hanyoListShutsuryokuKomoku, 項目内容new);
-                }
+                eucCsvWriter1.writeLine(csvContent);
+                csvContent = new ArrayList();
             }
         }
     }
@@ -750,8 +770,7 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
         return 項目見出し;
     }
 
-    private void 帳票出力編集(int i, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku, RString 項目内容new) {
-        RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
+    private void 帳票出力編集(int i, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku, RString get項目名称, RString 項目内容new) {
         int get項目桁数 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目桁数();
         if (get項目名称.length()
                 > get項目桁数) {
@@ -769,11 +788,8 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
         }
         if (i == 0) {
             項目見出し = 項目見出し.concat(get項目名称);
-            if (項目内容new != null) {
-                項目内容new = HanyoListManager.createInstance().項目内容new編集(i, 項目内容new, hanyoListShutsuryokuKomoku);
-            }
             if (項目内容new == null) {
-                項目内容 = 項目内容.concat(RString.EMPTY);
+                項目内容 = 項目内容.concat(RString.HALF_SPACE);
             } else {
                 項目内容 = 項目内容.concat(項目内容new);
             }
@@ -784,40 +800,38 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
             項目見出し = get項目見出し(項目見出し, 出力文字の開始位置 - 項目名称);
             項目見出し = 項目見出し.concat(get項目名称);
             項目内容 = get項目見出し(項目内容, 出力文字の開始位置 - 項目名称);
-            項目内容 = 項目内容.concat(項目内容new);
+            if (項目内容new == null) {
+                項目内容 = 項目内容.concat(RString.HALF_SPACE);
+            } else {
+                項目内容 = 項目内容.concat(項目内容new);
+            }
             出力桁数 = 出力文字の開始位置 + get項目桁数;
         }
-        HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(),
-                processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
-        report.writeBy(reportSourceWriter);
-        項目見出し = RString.EMPTY;
-        項目内容 = RString.EMPTY;
     }
 
-    private void 出力編集(int i, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku, RString 項目内容new) {
+    private void 出力編集(int i, RString get項目名称, RString 項目内容new) {
         if (processParamter.isCsvrenbanfuka()) {
-            連番あり(i, hanyoListShutsuryokuKomoku, 項目内容new);
+            連番あり(i, get項目名称, 項目内容new);
         } else {
-            csvHeader.add(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称());
-            csvContent.add(項目内容new);
+            csvHeader.add(get項目名称);
+            if (項目内容new != null && !項目内容new.isEmpty()) {
+                csvContent.add(項目内容new);
+            } else {
+                csvContent.add(new RString(" "));
+            }
         }
-        if (連番 == 1 && processParamter.isCsvkomokumeifuka()) {
-            eucCsvWriter1.writeLine(csvHeader);
-        }
-        eucCsvWriter1.writeLine(csvContent);
-        csvContent = new ArrayList();
     }
 
-    private void 連番あり(int i, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku, RString 項目内容new) {
+    private void 連番あり(int i, RString get項目名称, RString 項目内容new) {
         if (i == 0) {
             csvHeader.add(new RString("連番"));
             csvContent.add(new RString(String.valueOf(連番)));
         }
-        if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称() == null) {
-            csvHeader.add(RString.EMPTY);
+        csvHeader.add(get項目名称);
+        if (項目内容new != null && !項目内容new.isEmpty()) {
+            csvContent.add(項目内容new);
         } else {
-            csvHeader.add(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称());
+            csvContent.add(new RString(" "));
         }
-        csvContent.add(項目内容new);
     }
 }

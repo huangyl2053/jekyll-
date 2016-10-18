@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjoho
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.RiyoshaFutanwariaiMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.RiyoshaFutanwariaiRelateEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeyikyouTayisyousyaJyohouRelateEntity;
 
 /**
  * 負担割合のmapperクラスです。
@@ -31,5 +31,5 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter RiyoshaFutanwariaiMybatisParameter
      * @return List<TeikyoKihonJohoEntity>
      */
-    List<TeikyoKihonJohoNNTempEntity> get提供対象者(RiyoshaFutanwariaiMybatisParameter parameter);
+    List<TeyikyouTayisyousyaJyohouRelateEntity> get提供対象者(RiyoshaFutanwariaiMybatisParameter parameter);
 }

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 介護認定法改正管理するクラスです。
  *
- * @reamsid_L DBD_1510-010 liuyl
+ * @reamsid_L DBD-1510-010 liuyl
  */
 public class KaigoNinteiHokaiseiKanriManager {
 

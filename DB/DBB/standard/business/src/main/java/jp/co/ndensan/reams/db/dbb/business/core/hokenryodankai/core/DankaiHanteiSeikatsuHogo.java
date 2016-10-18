@@ -35,9 +35,9 @@ class DankaiHanteiSeikatsuHogo implements IDai1DankaiHantei {
 
         boolean result = false;
 
-        if (hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoStartYMD() != null) {
+        if (!isNullOrEmpty(hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoStartYMD())) {
             生活保護開始日 = getRealDateCalendar(hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoStartYMD());
-            if (hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoEndYMD() != null) {
+            if (!isNullOrEmpty(hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoEndYMD())) {
                 生活保護終了日 = getRealDateCalendar(hokenryoDankaiHanteiParameter.getFukaKonkyo().getSeihoEndYMD());
                 this.getResult(賦課年度開始日, 賦課年度終了日, 生活保護開始日, 生活保護終了日);
 
@@ -48,6 +48,10 @@ class DankaiHanteiSeikatsuHogo implements IDai1DankaiHantei {
             }
         }
         return result;
+    }
+
+    private boolean isNullOrEmpty(FlexibleDate ymd) {
+        return null == ymd || ymd.isEmpty();
     }
 
     @Override

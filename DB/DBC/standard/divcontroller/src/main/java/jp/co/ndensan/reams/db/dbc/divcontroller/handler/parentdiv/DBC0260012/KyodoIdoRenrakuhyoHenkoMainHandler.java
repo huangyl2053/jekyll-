@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoKihonSofu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoKogakuSofu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoShokanSofu;
+import jp.co.ndensan.reams.db.dbc.business.core.kyodojukyushataishosha.KyodoJukyushaTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyodoshoriyoJukyushaIdoRenrakuhyoParam;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param.KyoutuuEntity;
@@ -55,6 +56,8 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
     private static final int NUM_ONE = 1;
     private static final RString 修正KEY = new RString("修正");
     private static final RString 削除KEY = new RString("削除");
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
 
     /**
      * コンストラクタです。
@@ -131,10 +134,12 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
      *
      * @param 初期受給者異動情報 KyodoshoriyoJukyushaIdoRenrakuhyoParam
      * @param 処理モード RString
+     * @param 訂正項目の判定 int
+     * @param 対象者一覧 KyodoJukyushaTaishoshaEntity
      * @return 異動連絡票データ
      */
     public SourceDataCollection to帳票発行処理(KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期受給者異動情報,
-            RString 処理モード) {
+            RString 処理モード, int 訂正項目の判定, KyodoJukyushaTaishoshaEntity 対象者一覧) {
         KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = div.getKyodoIdoRenrakuhyoHenkoDetailInfo().getNewデータ();
         List<RString> 基本送付_追加チェックボックス = div.getKyodoIdoRenrakuhyoHenkoDetailInfo().get基本送付情報を追加する();
         List<RString> 償還送付_追加チェックボックス = div.getKyodoIdoRenrakuhyoHenkoDetailInfo().get償還送付情報を追加する();
@@ -154,14 +159,37 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
                 && チェックボックス_KEY.equals(高額送付_追加チェックボックス.get(NUM_ZERO))) {
             is高額送付_追加 = true;
         }
-        KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 異動連絡票データ = KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku
-                .createInstance().editKyodoshoriyoJukyushaTeiseiRenrakuhyo(
-                        entity,
-                        処理モード,
-                        初期受給者異動情報,
-                        is基本送付_追加,
-                        is償還送付_追加,
-                        is高額送付_追加);
+
+        HihokenshaNo 被保番号 = 対象者一覧.get被保番号();
+        FlexibleDate 異動日 = 対象者一覧.get異動日();
+        int 履歴番号 = 対象者一覧.get履歴番号();
+        KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 異動連絡票データ
+                = new KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity();
+        if (訂正項目の判定 == INDEX_1) {
+            異動連絡票データ = KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku
+                    .createInstance().editKyodoshoriyoJukyushaTeiseiRenrakuhyo(
+                            entity,
+                            処理モード,
+                            初期受給者異動情報,
+                            被保番号,
+                            異動日,
+                            INDEX_1,
+                            is基本送付_追加,
+                            is償還送付_追加,
+                            is高額送付_追加);
+        } else if (訂正項目の判定 == INDEX_2) {
+            異動連絡票データ = KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku
+                    .createInstance().editKyodoshoriyoJukyushaTeiseiRenrakuhyo(
+                            entity,
+                            処理モード,
+                            初期受給者異動情報,
+                            被保番号,
+                            異動日,
+                            履歴番号,
+                            is基本送付_追加,
+                            is償還送付_追加,
+                            is高額送付_追加);
+        }
         KyodoShoriJukyushaTeiseiRenrakuhyoPrintService printService = new KyodoShoriJukyushaTeiseiRenrakuhyoPrintService();
         return printService.printSingle(異動連絡票データ);
     }
@@ -190,9 +218,10 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
      * データの登録処理を実行です。
      *
      * @param 初期受給者異動情報 KyodoshoriyoJukyushaIdoRenrakuhyoParam
+     * @param 訂正項目の判定 int
      * @param entity KyodoshoriyoJukyushaIdoRenrakuhyoParam
      * @param 識別コード ShikibetsuCode
-     * @param 論理削除フラグ boolean
+     * @param 対象者一覧 KyodoJukyushaTaishoshaEntity
      * @param 基本送付_追加チェックボックス List
      * @param 償還送付_追加チェックボックス List
      * @param 高額送付_追加チェックボックス List
@@ -201,16 +230,17 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
      * @param is高額送付活性 boolean
      */
     public void データの登録(KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期受給者異動情報,
+            int 訂正項目の判定,
             KyodoshoriyoJukyushaIdoRenrakuhyoParam entity,
             ShikibetsuCode 識別コード,
-            boolean 論理削除フラグ,
+            KyodoJukyushaTaishoshaEntity 対象者一覧,
             List<RString> 基本送付_追加チェックボックス,
             List<RString> 償還送付_追加チェックボックス,
             List<RString> 高額送付_追加チェックボックス,
             boolean is基本送付活性,
             boolean is償還送付活性,
             boolean is高額送付活性) {
-
+        boolean 論理削除フラグ = 対象者一覧.is論理削除フラグ();
         KyoutuuEntity 共通項目Entity = entity.get共通項目Entity();
         HihokenshaNo 被保険者番号 = 共通項目Entity.get被保険者番号();
         List<RString> 基本送付_削除チェックボックス = div.getKyodoIdoRenrakuhyoHenkoDetailInfo().get基本送付情報を削除する();
@@ -271,7 +301,7 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
         if (論理削除フラグ) {
             save論理削除フラグ_TRUE(初期受給者異動情報, チェック状態, 基本_履歴番号, 償還_履歴番号, 高額_履歴番号);
         } else {
-            set論理削除フラグ_FALSE(初期受給者異動情報, entity, チェック状態, 共通項目Entity, 被保険者番号,
+            set論理削除フラグ_FALSE(初期受給者異動情報, 訂正項目の判定, 対象者一覧, entity, チェック状態, 共通項目Entity, 被保険者番号,
                     基本_履歴番号, 償還_履歴番号, 高額_履歴番号, is基本送付活性, is償還送付活性, is高額送付活性,
                     is基本送付_追加, is償還送付_追加, is高額送付_追加, is基本送付_削除, is償還送付_削除, is高額送付_削除);
         }
@@ -280,6 +310,8 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
     }
 
     private void set論理削除フラグ_FALSE(KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期受給者異動情報,
+            int 訂正項目の判定,
+            KyodoJukyushaTaishoshaEntity 対象者一覧,
             KyodoshoriyoJukyushaIdoRenrakuhyoParam entity,
             List<RString> チェック状態,
             KyoutuuEntity 共通項目Entity,
@@ -313,9 +345,21 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
             if (is高額送付_追加 && is高額送付活性) {
                 高額_活性 = true;
             }
-            boolean is基本送付情報 = handler.is基本送付情報変更あり(初期受給者異動情報, entity, 基本_活性);
-            boolean is償還送付情報 = handler.is償還送付情報変更あり(初期受給者異動情報, entity, 償還_活性);
-            boolean is高額送付情報 = handler.is高額送付情報変更あり(初期受給者異動情報, entity, 高額_活性);
+            boolean is基本送付情報 = false;
+            boolean is償還送付情報 = false;
+            boolean is高額送付情報 = false;
+            HihokenshaNo 被保番号 = 対象者一覧.get被保番号();
+            FlexibleDate 異動日 = 対象者一覧.get異動日();
+            int 履歴番号 = 対象者一覧.get履歴番号();
+            if (訂正項目の判定 == INDEX_1) {
+                is基本送付情報 = handler.is基本送付情報変更あり(被保番号, 異動日, INDEX_1, entity, 基本_活性);
+                is償還送付情報 = handler.is償還送付情報変更あり(被保番号, 異動日, INDEX_1, entity, 償還_活性);
+                is高額送付情報 = handler.is高額送付情報変更あり(被保番号, 異動日, INDEX_1, entity, 高額_活性);
+            } else if (訂正項目の判定 == INDEX_2) {
+                is基本送付情報 = handler.is基本送付情報変更あり(被保番号, 異動日, 履歴番号, entity, 基本_活性);
+                is償還送付情報 = handler.is償還送付情報変更あり(被保番号, 異動日, 履歴番号, entity, 償還_活性);
+                is高額送付情報 = handler.is高額送付情報変更あり(被保番号, 異動日, 履歴番号, entity, 高額_活性);
+            }
             save訂正区分_修正(entity, 共通項目Entity, 被保険者番号, チェック状態, is基本送付情報, is償還送付情報,
                     is高額送付情報, 基本_履歴番号, 償還_履歴番号, 高額_履歴番号, 区分, 訂正年月日);
         } else if (削除KEY.equals(訂正区分)) {

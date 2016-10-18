@@ -113,7 +113,10 @@ public class KyodoIdoRenrakuhyoHenkoMain {
                 KyodoJukyushaTaishoshaEntity 対象者一覧
                         = ViewStateHolder.get(ViewStateKeys.一覧検索キー, KyodoJukyushaTaishoshaEntity.class);
                 ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-                getHandler(div).データの登録(初期受給者異動情報, entity, 識別コード, 対象者一覧.is論理削除フラグ(),
+                int 訂正項目の判定 = Integer.parseInt(
+                        div.getKyodoIdoRenrakuhyoHenkoPrint()
+                        .getRadTeiseiKomokuHantei().getSelectedKey().toString());
+                getHandler(div).データの登録(初期受給者異動情報, 訂正項目の判定, entity, 識別コード, 対象者一覧,
                         基本送付_追加チェックボックス,
                         償還送付_追加チェックボックス,
                         高額送付_追加チェックボックス,
@@ -144,7 +147,14 @@ public class KyodoIdoRenrakuhyoHenkoMain {
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期受給者異動情報 = ViewStateHolder.get(
                 ViewStateKeys.共同処理用受給者異動情報, KyodoshoriyoJukyushaIdoRenrakuhyoParam.class);
-        return ResponseData.of(getHandler(div).to帳票発行処理(初期受給者異動情報, 処理モード)).respond();
+        int 訂正項目の判定 = Integer.parseInt(
+                div.getKyodoIdoRenrakuhyoHenkoPrint()
+                .getRadTeiseiKomokuHantei().getSelectedKey().toString());
+        KyodoJukyushaTaishoshaEntity 対象者一覧
+                = ViewStateHolder.get(ViewStateKeys.一覧検索キー, KyodoJukyushaTaishoshaEntity.class);
+        return ResponseData.of(getHandler(div)
+                .to帳票発行処理(初期受給者異動情報, 処理モード, 訂正項目の判定, 対象者一覧))
+                .respond();
     }
 
     /**

@@ -80,7 +80,8 @@
         master."年度" = 利用者負担割合明細Newest."nendo"
         ORDER BY
         master."被保険者番号",
-        master."年度" ASC
+        master."年度",
+        yukoKaishiYMD
     </select>
     
     <select resultOrdered="true" id="利用者負担減額情報の取得" resultMap="利用者負担減額情報の取得_resultMap" fetchSize="500">

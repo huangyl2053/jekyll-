@@ -27,6 +27,8 @@
     
     <select id="get印刷対象" fetchSize="500" resultOrdered="true" resultMap="ResultMap_YokaigoNintei"
         parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd582001.YokaigoNinteiTsukibetsuJukyushaMybatisParameter">
+        WITH master2 AS(
+        
         WITH master AS (
         (<include refid="select認定件数の場合_月別04" />)
         UNION
@@ -288,7 +290,32 @@
                 1 = 1
                 <include refid="条件3" />
                 <include refid="条件4" />
-                 
+            )
+            SELECT
+                master2.取得条件,
+                master2.市町村コード,
+                master2.市町村名称,
+                SUM(master2."件数") AS "件数",
+                SUM(master2."件数（旧措置）") AS "件数（旧措置）",
+                SUM(master2."新規") AS "新規",
+                SUM(master2."新規（旧措置）") AS "新規（旧措置）",
+                SUM(master2."（要支援）") AS "（要支援）",
+                SUM(master2."（要支援）（旧措置）") AS "（要支援）（旧措置）",
+                SUM(master2."更新") AS "更新",
+                SUM(master2."更新（旧措置）") AS "更新（旧措置）",
+                SUM(master2."区分変更") AS "区分変更",
+                SUM(master2."区分変更（旧措置）") AS "区分変更（旧措置）",
+                SUM(master2."転入") AS "転入",
+                SUM(master2."転入（旧措置）") AS "転入（旧措置）",
+                SUM(master2."職権他") AS "職権他",
+                SUM(master2."職権他（旧措置）") AS "職権他（旧措置）"
+            FROM
+                master2
+            GROUP BY 
+                市町村コード,取得条件,市町村名称
+            ORDER BY
+                市町村コード,取得条件
+    
     </select>
     
     <sql id = "selectSql1">

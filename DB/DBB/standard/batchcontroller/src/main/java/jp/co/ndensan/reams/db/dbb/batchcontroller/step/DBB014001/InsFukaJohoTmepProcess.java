@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB014001;
 
+import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb014001.FuchoKarisanteiFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FukaJohoCalculateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohoTempEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 賦課情報一時のクラスです。
+ * 出力順Tempのクラスです。
  *
  * @reamsid_L DBB-0870-010 pengxingyi
  */
@@ -45,6 +46,7 @@ public class InsFukaJohoTmepProcess extends BatchKeyBreakBase<FukaJohoCalculateE
     private static final RString 徴収方法1 = new RString("1");
     private static final RString 徴収方法2 = new RString("2");
     private static final RString TABLE_NAME = new RString("FukaJohoTemp");
+    private FuchoKarisanteiFukaProcessParameter parameter;
     private FukaJohoTempEntity 中間Entity;
 
     @BatchWriter
@@ -57,7 +59,7 @@ public class InsFukaJohoTmepProcess extends BatchKeyBreakBase<FukaJohoCalculateE
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID);
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toMybatisParameter());
     }
 
     @Override

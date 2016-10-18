@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
  * 不正な動作の原因になります。</br>
  * DBC0810021のイベント名定義クラスです</br>
  *
- * @reamsid_L DBC-1010-030 wangkanglei
+ * @author 自動生成
  */
 public enum DBC0810021TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
@@ -25,7 +25,8 @@ public enum DBC0810021TransitionEventName implements IContainerEvents {
     食事("食事"),
     請求額集計("請求額集計"),
     社福軽減額("社福軽減額"),
-    給付費明細_住特("給付費明細_住特");
+    給付費明細_住特("給付費明細_住特"),
+    総合照会給付情報("総合照会給付情報");
 
     private final RString name;
 

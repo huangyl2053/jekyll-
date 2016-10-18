@@ -24,7 +24,7 @@
                     支給申請."shiharaiShuryoTime" as "支払窓口終了期間",
                     支給申請."kozaID" as "口座ID",
                     支給判定結果."ketteiYMD" as "決定年月日",
-                    支給審査決定."tsuchishoNo" as "通知書番号",
+                    支給審査決定."tsuchishoNo" as "決定通知No",
                     支給判定結果."fushikyuRiyu" as "不支給理由",
                     支給判定結果."shiharaiKubunCode" as "判定支給区分コード",
                     支給判定結果."honninShiharaiGaku" AS "本人支払額",

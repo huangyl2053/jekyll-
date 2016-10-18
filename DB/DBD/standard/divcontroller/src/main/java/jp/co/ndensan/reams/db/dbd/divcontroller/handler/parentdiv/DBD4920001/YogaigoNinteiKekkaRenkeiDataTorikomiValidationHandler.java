@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 要介護認定申請連携データ取込のバリデーションハンドラークラスです。
  *
- * @reamsid_L DBD_1510-010 liuyl
+ * @reamsid_L DBD-1510-010 liuyl
  */
 public class YogaigoNinteiKekkaRenkeiDataTorikomiValidationHandler {
 

@@ -63,7 +63,7 @@ public class KyufujissekiKihonSyuuyakuShinsaYMGakuninProcess extends BatchProces
         RString 審査年月 = dbWT1131ErrorEntity.getShinsaYM() == null ? RString.EMPTY : dbWT1131ErrorEntity.getShinsaYM().toDateString();
         message = message.concat(審査年月不正MESSAGE)
                 .concat(RString.FULL_SPACE)
-                .concat(dbWT1131ErrorEntity.getSeiriNo()).concat(コロン)
+                .concat(dbWT1131ErrorEntity.getSeiriNo() == null ? RString.EMPTY : dbWT1131ErrorEntity.getSeiriNo()).concat(コロン)
                 .concat(入力識別番号).concat(コロン)
                 .concat(被保険者番号).concat(コロン)
                 .concat(サービス提供年月).concat(コロン)

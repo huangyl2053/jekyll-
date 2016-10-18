@@ -77,6 +77,13 @@ public class ShokanRenrakuhyoSofuIchiranBodyEditor
         if (null != 償還連絡票一覧表データ.get識別番号_略称()) {
             source.list_15 = 償還連絡票一覧表データ.get識別番号_略称().substringReturnAsPossible(NUM_0, NUM_6);
         }
+        source.yubinNo = get被保険者一時TBL == null ? RString.EMPTY : get被保険者一時TBL.getYubinNo();
+        source.choikiCode = get被保険者一時TBL == null ? RString.EMPTY : get被保険者一時TBL.getChoikiCode();
+        source.gyoseikuCode = get被保険者一時TBL == null ? RString.EMPTY : get被保険者一時TBL.getGyoseikuCode();
+        source.shimei50onKana = get被保険者一時TBL == null ? RString.EMPTY : get被保険者一時TBL.getShimei50onKana();
+        source.shichosonCode = get被保険者一時TBL == null ? RString.EMPTY : getColumnValue(get被保険者一時TBL.getShichosonCode());
+        source.shinseiYMD = new RString(償還払支給申請Entity.getShinseiYMD().toString());
+        source.jigyoshaNo = getColumnValue(償還連絡票一覧表データ.get基本_事業者番号());
 
     }
 
@@ -84,7 +91,7 @@ public class ShokanRenrakuhyoSofuIchiranBodyEditor
         if (null == 償還払支給申請Entity) {
             return;
         }
-        source.list_1 = new RString(償還払支給申請Entity.getRenban());
+        source.list_1 = new RString(parameter.get連番());
         source.list_2 = 償還払支給申請Entity.getSeiriNo();
         source.list_3 = doパターン54(償還払支給申請Entity.getServiceTeikyoYM());
         source.list_4 = getColumnValue(償還払支給申請Entity.getShoKisaiHokenshaNo());

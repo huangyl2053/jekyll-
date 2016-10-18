@@ -178,7 +178,7 @@ public class GemmenJisshiJokyoMainHandler {
         宛名抽出条件.setGyoseiku_FromMesho(宛名抽出条件.getGyoseiku_FromMesho() != null ? 宛名抽出条件.getGyoseiku_FromMesho() : RString.EMPTY);
         宛名抽出条件.setGyoseiku_To(宛名抽出条件.getGyoseiku_To() != null ? 宛名抽出条件.getGyoseiku_To() : RString.EMPTY);
         宛名抽出条件.setGyoseiku_ToMesho(宛名抽出条件.getGyoseiku_ToMesho() != null ? 宛名抽出条件.getGyoseiku_ToMesho() : RString.EMPTY);
-        宛名抽出条件.setJusho_From(宛名抽出条件.getJusho_From() != null ? 宛名抽出条件.getChiku1_From() : RString.EMPTY);
+        宛名抽出条件.setJusho_From(宛名抽出条件.getJusho_From() != null ? 宛名抽出条件.getJusho_From() : RString.EMPTY);
         宛名抽出条件.setJusho_FromMesho(宛名抽出条件.getJusho_FromMesho() != null ? 宛名抽出条件.getJusho_FromMesho() : RString.EMPTY);
         宛名抽出条件.setJusho_To(宛名抽出条件.getJusho_To() != null ? 宛名抽出条件.getJusho_To() : RString.EMPTY);
         宛名抽出条件.setJusho_ToMesho(宛名抽出条件.getJusho_ToMesho() != null ? 宛名抽出条件.getJusho_ToMesho() : RString.EMPTY);

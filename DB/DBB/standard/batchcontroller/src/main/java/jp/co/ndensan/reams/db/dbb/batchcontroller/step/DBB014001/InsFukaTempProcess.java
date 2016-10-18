@@ -63,8 +63,12 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
     private static final RString 仮算定賦課方法_04 = new RString("04");
     private static final RString 仮算定賦課方法_05 = new RString("05");
     private static final RString 仮算定賦課方法_06 = new RString("06");
-    private static final RString TABLE_NAME = new RString("FukaJohoTemp");
+    private static final RString 仮算定賦課方法_11 = new RString("11");
+    private static final RString TABLE_NAME = new RString("DbT2002FukaJohoTemp");
     private static final RString 区分_新規 = new RString("1");
+    private static final RString 特徴開始前普通徴収_あり = new RString("1");
+    private static final int NUM_1 = 1;
+    private static final int NUM_4 = 4;
     private FuchoKarisanteiFukaProcessParameter parameter;
     private List<SeikatsuHogoJukyusha> 生保の情報;
     private List<RoreiFukushiNenkinJukyusha> 老齢の情報;
@@ -76,19 +80,23 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
     private GyomuCode 業務コード;
     private FlexibleDate 受給開始日;
     private RString 仮算定賦課方法;
+    private RString 特別徴収_特徴開始前普通徴収_6月;
     private HonnSanteiFuka manager;
     private FuchoKariSanteiFukaBatch service;
+    private RDate 調定年度開始日;
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tableWriter;
 
     @Override
     protected void initialize() {
+        調定年度開始日 = new RDate(parameter.get調定年度().getYearValue(), NUM_4, NUM_1);
         manager = HonnSanteiFuka.createInstance();
         service = FuchoKariSanteiFukaBatch.createInstance();
         生保の情報 = new ArrayList<>();
         老齢の情報 = new ArrayList<>();
-        仮算定賦課方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        仮算定賦課方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
+        特別徴収_特徴開始前普通徴収_6月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, 調定年度開始日, SubGyomuCode.DBB介護賦課);
     }
 
     @Override
@@ -109,17 +117,18 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
                 HokenryoDankai 保険料段階 = get保険料段階(getBefore());
                 Decimal 計算用保険料 = get計算用保険料(getBefore(), 保険料段階);
                 FukaJohoTempEntity fukaJohoTempEntity = service.賦課通情報編集(parameter.get調定年度(), hihokenshaDaicho,
-                        getBefore().get徴収方法(), 生保の情報, 老齢の情報, 計算用保険料, 区分_新規, null,
-                        getBefore().get介護賦課前年度(), 保険料段階.get段階区分(), getBefore().get口座Entity());
+                        getBefore().get徴収方法(), 生保の情報, 老齢の情報, 計算用保険料, 区分_新規, null, getBefore().get介護賦課前年度(),
+                        保険料段階.get段階区分(), getBefore().get口座Entity(), entity.get普徴仮算定抽出().getTsuchishoNo());
                 tableWriter.insert(fukaJohoTempEntity);
-            } else {
+            } else if (特徴開始前普通徴収_あり.equals(特別徴収_特徴開始前普通徴収_6月)) {
                 RString 保険料段階_仮算定時 = getBefore().get賦課情報一時().getHokenryoDankaiKarisanntei();
                 HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
                 jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai 保険料段階 = 保険料段階List.getBy段階区分(保険料段階_仮算定時);
                 Decimal 計算用保険料 = 保険料段階.get保険料率();
                 FukaJohoTempEntity fukaJohoTempEntity = service.賦課通情報編集(parameter.get調定年度(), hihokenshaDaicho,
                         getBefore().get徴収方法(), 生保の情報, 老齢の情報, 計算用保険料, 区分_新規, getBefore().get賦課情報一時(),
-                        getBefore().get介護賦課前年度(), 保険料段階_仮算定時, getBefore().get口座Entity());
+                        getBefore().get介護賦課前年度(), 保険料段階_仮算定時, getBefore().get口座Entity(),
+                        entity.get普徴仮算定抽出().getTsuchishoNo());
                 tableWriter.insert(fukaJohoTempEntity);
             }
         }
@@ -138,7 +147,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
     }
 
     private HokenryoDankai get保険料段階(FukaKeisanEntity entity) {
-        if (仮算定賦課方法.equals(new RString("11"))) {
+        if (仮算定賦課方法_11.equals(仮算定賦課方法)) {
             HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().
                     get保険料段階ListIn(entity.get普徴仮算定抽出().getFukaNendo());
             SeigyoJoho 月別保険料制御情報 = manager.editor月別保険料制御情報(保険料段階List);
@@ -170,6 +179,8 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
             TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
             return 月別保険料段階.get保険料段階04月();
         }
+        HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
+        保険料段階List.getBy段階区分(区分_新規);
         return null;
     }
 
@@ -217,29 +228,35 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
     }
 
     private Decimal get最後の普徴期別金額(FukaJohoTempEntity 前年度賦課情報) {
-        if (前年度賦課情報.getFuKibetsuGaku12() != null && Decimal.ONE.compareTo(前年度賦課情報.getFuKibetsuGaku12()) <= 0) {
+        if (前年度賦課情報.getFuKibetsuGaku12() != null && Decimal.ZERO.compareTo(前年度賦課情報.getFuKibetsuGaku12()) < 0) {
             return 前年度賦課情報.getFuKibetsuGaku12();
-        } else if (前年度賦課情報.getFuKibetsuGaku11() != null && Decimal.ONE.compareTo(前年度賦課情報.getFuKibetsuGaku11()) <= 0) {
+        } else if (前年度賦課情報.getFuKibetsuGaku11() != null && Decimal.ZERO.compareTo(前年度賦課情報.getFuKibetsuGaku11()) < 0) {
             return 前年度賦課情報.getFuKibetsuGaku11();
-        } else if (前年度賦課情報.getFuKibetsuGaku10() != null && Decimal.ONE.compareTo(前年度賦課情報.getFuKibetsuGaku10()) <= 0) {
+        } else if (前年度賦課情報.getFuKibetsuGaku10() != null && Decimal.ZERO.compareTo(前年度賦課情報.getFuKibetsuGaku10()) < 0) {
             return 前年度賦課情報.getFuKibetsuGaku10();
-        } else if (前年度賦課情報.getFuKibetsuGaku09() != null && Decimal.ONE.compareTo(前年度賦課情報.getFuKibetsuGaku09()) <= 0) {
+        } else if (前年度賦課情報.getFuKibetsuGaku09() != null && Decimal.ZERO.compareTo(前年度賦課情報.getFuKibetsuGaku09()) < 0) {
             return 前年度賦課情報.getFuKibetsuGaku09();
-        } else if (前年度賦課情報.getFuKibetsuGaku08() != null && Decimal.ONE.compareTo(前年度賦課情報.getFuKibetsuGaku08()) <= 0) {
+        } else if (前年度賦課情報.getFuKibetsuGaku08() != null && Decimal.ZERO.compareTo(前年度賦課情報.getFuKibetsuGaku08()) < 0) {
             return 前年度賦課情報.getFuKibetsuGaku08();
-        } else if (前年度賦課情報.getFuKibetsuGaku07() != null && Decimal.ONE.compareTo(前年度賦課情報.getFuKibetsuGaku07()) <= 0) {
+        } else if (前年度賦課情報.getFuKibetsuGaku07() != null && Decimal.ZERO.compareTo(前年度賦課情報.getFuKibetsuGaku07()) < 0) {
             return 前年度賦課情報.getFuKibetsuGaku07();
-        } else if (前年度賦課情報.getFuKibetsuGaku06() != null && Decimal.ONE.compareTo(前年度賦課情報.getFuKibetsuGaku06()) <= 0) {
+        } else {
+            return get最後の普徴期別金額Part2(前年度賦課情報);
+        }
+    }
+
+    private Decimal get最後の普徴期別金額Part2(FukaJohoTempEntity 前年度賦課情報) {
+        if (前年度賦課情報.getFuKibetsuGaku06() != null && Decimal.ZERO.compareTo(前年度賦課情報.getFuKibetsuGaku06()) < 0) {
             return 前年度賦課情報.getFuKibetsuGaku06();
-        } else if (前年度賦課情報.getFuKibetsuGaku05() != null && Decimal.ONE.compareTo(前年度賦課情報.getFuKibetsuGaku05()) <= 0) {
+        } else if (前年度賦課情報.getFuKibetsuGaku05() != null && Decimal.ZERO.compareTo(前年度賦課情報.getFuKibetsuGaku05()) < 0) {
             return 前年度賦課情報.getFuKibetsuGaku05();
-        } else if (前年度賦課情報.getFuKibetsuGaku04() != null && Decimal.ONE.compareTo(前年度賦課情報.getFuKibetsuGaku04()) <= 0) {
+        } else if (前年度賦課情報.getFuKibetsuGaku04() != null && Decimal.ZERO.compareTo(前年度賦課情報.getFuKibetsuGaku04()) < 0) {
             return 前年度賦課情報.getFuKibetsuGaku04();
-        } else if (前年度賦課情報.getFuKibetsuGaku03() != null && Decimal.ONE.compareTo(前年度賦課情報.getFuKibetsuGaku03()) <= 0) {
+        } else if (前年度賦課情報.getFuKibetsuGaku03() != null && Decimal.ZERO.compareTo(前年度賦課情報.getFuKibetsuGaku03()) < 0) {
             return 前年度賦課情報.getFuKibetsuGaku03();
-        } else if (前年度賦課情報.getFuKibetsuGaku02() != null && Decimal.ONE.compareTo(前年度賦課情報.getFuKibetsuGaku02()) <= 0) {
+        } else if (前年度賦課情報.getFuKibetsuGaku02() != null && Decimal.ZERO.compareTo(前年度賦課情報.getFuKibetsuGaku02()) < 0) {
             return 前年度賦課情報.getFuKibetsuGaku02();
-        } else if (前年度賦課情報.getFuKibetsuGaku01() != null && Decimal.ONE.compareTo(前年度賦課情報.getFuKibetsuGaku01()) <= 0) {
+        } else if (前年度賦課情報.getFuKibetsuGaku01() != null && Decimal.ZERO.compareTo(前年度賦課情報.getFuKibetsuGaku01()) < 0) {
             return 前年度賦課情報.getFuKibetsuGaku01();
         }
         return Decimal.ZERO;
@@ -339,21 +356,21 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
                     HokenryoDankai 保険料段階 = get保険料段階(getBefore());
                     Decimal 計算用保険料 = get計算用保険料(getBefore(), 保険料段階);
                     FukaJohoTempEntity fukaJohoTempEntity = service.賦課通情報編集(parameter.get調定年度(), hihokenshaDaicho,
-                            getBefore().get徴収方法(), 生保の情報, 老齢の情報, 計算用保険料, 区分_新規, null,
-                            getBefore().get介護賦課前年度(), 保険料段階.get段階区分(), getBefore().get口座Entity());
+                            getBefore().get徴収方法(), 生保の情報, 老齢の情報, 計算用保険料, 区分_新規, null, getBefore().get介護賦課前年度(),
+                            保険料段階.get段階区分(), getBefore().get口座Entity(), getBefore().get普徴仮算定抽出().getTsuchishoNo());
                     tableWriter.insert(fukaJohoTempEntity);
-                } else {
+                } else if (特徴開始前普通徴収_あり.equals(特別徴収_特徴開始前普通徴収_6月)) {
                     RString 保険料段階_仮算定時 = getBefore().get賦課情報一時().getHokenryoDankaiKarisanntei();
                     HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
                     jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai 保険料段階 = 保険料段階List.getBy段階区分(保険料段階_仮算定時);
                     Decimal 計算用保険料 = 保険料段階.get保険料率();
                     FukaJohoTempEntity fukaJohoTempEntity = service.賦課通情報編集(parameter.get調定年度(), hihokenshaDaicho,
                             getBefore().get徴収方法(), 生保の情報, 老齢の情報, 計算用保険料, 区分_新規, getBefore().get賦課情報一時(),
-                            getBefore().get介護賦課前年度(), 保険料段階_仮算定時, getBefore().get口座Entity());
+                            getBefore().get介護賦課前年度(), 保険料段階_仮算定時, getBefore().get口座Entity(),
+                            getBefore().get普徴仮算定抽出().getTsuchishoNo());
                     tableWriter.insert(fukaJohoTempEntity);
                 }
             }
         }
     }
-
 }

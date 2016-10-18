@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD492001;
 
-import java.io.File;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd492001.RendingJieguoLianxieProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.ErrordataIchijiTeburuEntity;
@@ -14,24 +13,16 @@ import jp.co.ndensan.reams.db.dbd.service.core.dbd492001.NinteiKekkaRenkeiDataTo
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -68,26 +59,26 @@ public class NinteiKekkaCsvgetProcess extends BatchProcessBase<List<RString>> {
             csvファイル名 = DbBusinessConfig.get(ConfigNameDBD.要介護認定結果連携データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
         }
 
-        List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(csvファイル名);
-        if (sharedFiles == null || sharedFiles.isEmpty()) {
-            throw new BatchInterruptedException(DbzErrorMessages.アップロードファイル無し.getMessage().toString());
-        }
-
-        RString maeSharedName = RString.EMPTY;
-        RString atoSharedName = RString.EMPTY;
-        for (UzT0885SharedFileEntryEntity sharedfile : sharedFiles) {
-            atoSharedName = sharedfile.getLocalFileName();
-            if (atoSharedName.compareTo(maeSharedName) != 0) {
-                SharedFile.copyToLocal(FilesystemName.fromString(csvファイル名), FilesystemPath.fromString(Path.getTmpDirectoryPath()));
-                break;
-            }
-        }
-        //RString csvReaderPath = Path.combinePath(processParameter.get外部媒体格納パス(), csvファイル名);
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), atoSharedName);
-        File file = new File(filePath.toString());
-        if (!file.exists()) {
-            throw new ApplicationException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace(csvファイル名.toString()).evaluate());
-        }
+//        List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(csvファイル名);
+//        if (sharedFiles == null || sharedFiles.isEmpty()) {
+//            throw new BatchInterruptedException(DbzErrorMessages.アップロードファイル無し.getMessage().toString());
+//        }
+//
+//        RString maeSharedName = RString.EMPTY;
+//        RString atoSharedName = RString.EMPTY;
+//        for (UzT0885SharedFileEntryEntity sharedfile : sharedFiles) {
+//            atoSharedName = sharedfile.getLocalFileName();
+//            if (atoSharedName.compareTo(maeSharedName) != 0) {
+//                SharedFile.copyToLocal(FilesystemName.fromString(csvファイル名), FilesystemPath.fromString(Path.getTmpDirectoryPath()));
+//                break;
+//            }
+//        }
+        RString csvReaderPath = Path.combinePath(processParameter.get外部媒体格納パス(), csvファイル名);
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), csvReaderPath);
+//        File file = new File(filePath.toString());
+//        if (!file.exists()) {
+//            throw new ApplicationException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace(csvファイル名.toString()).evaluate());
+//        }
         return new BatchCsvListReader(new CsvListReader.InstanceBuilder(filePath)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(getEncode()).hasHeader(false).setNewLine(NewLine.CRLF).build());
     }

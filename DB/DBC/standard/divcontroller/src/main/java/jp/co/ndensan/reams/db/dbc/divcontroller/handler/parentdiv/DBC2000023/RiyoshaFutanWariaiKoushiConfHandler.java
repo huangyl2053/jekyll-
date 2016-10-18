@@ -269,6 +269,12 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
         List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List = 引継ぎデータ.get利用者負担割合明細list();
         FutanWariaiShoDivParameter parameter = new FutanWariaiShoDivParameter();
 
+        parameter.set交付年月日(new FlexibleDate(div.getPanelHakko().getTxtKofubi().toString()));
+        parameter.set住所(RString.EMPTY);
+        parameter.setカナ氏名(RString.EMPTY);
+        parameter.set氏名(RString.EMPTY);
+        parameter.set生年月日(new FlexibleDate(RString.EMPTY));
+        parameter.set性別(RString.EMPTY);
         parameter.set負担割合上段(div.getPanelShutsuryokuNaiyo().getLbl2wari().getText());
         parameter.set適用期間開始日上段(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl2wariKaishiYmd().getText()));
         parameter.set適用期間終了日上段(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl2wariShuryoYmd().getText()));

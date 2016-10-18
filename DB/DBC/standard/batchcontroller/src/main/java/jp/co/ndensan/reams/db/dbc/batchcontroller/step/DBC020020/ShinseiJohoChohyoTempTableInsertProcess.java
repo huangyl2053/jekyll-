@@ -47,6 +47,9 @@ public class ShinseiJohoChohyoTempTableInsertProcess extends BatchProcessBase<Sh
 
     @Override
     protected void process(ShinseiJohoChohyoTempRelateEntity tmp) {
+        if (tmp.get支払方法変更() != null) {
+            return;
+        }
         ShinseiJohoChohyoTempEntity entity = tmp.get申請情報();
         if (申請書電話番号表示.equals(parameter.getShinseishoTelNoHyoji())) {
             entity.setTelNoChohyo(null);

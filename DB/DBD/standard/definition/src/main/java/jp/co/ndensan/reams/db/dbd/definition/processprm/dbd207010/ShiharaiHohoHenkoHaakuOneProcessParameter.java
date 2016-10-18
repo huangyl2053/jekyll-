@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd207010.ShiharaiHohoHenkoHakuListMainMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * DBDMN32001_2_支払方法変更滞納者把握リスト作成_Process1クラスです．
@@ -34,10 +33,9 @@ public class ShiharaiHohoHenkoHaakuOneProcessParameter implements IBatchProcessP
     /**
      * SQL使用されたパラメターを取得します．
      *
-     * @param psmShikibetsuTaisho psmShikibetsuTaisho
      * @return SQL使用されたパラメター
      */
-    public ShiharaiHohoHenkoHakuListMainMybatisParameter toShiharaiHohoHenkoHakuListMainMybatisParameter(RString psmShikibetsuTaisho) {
-        return new ShiharaiHohoHenkoHakuListMainMybatisParameter(psmShikibetsuTaisho, 基準日);
+    public ShiharaiHohoHenkoHakuListMainMybatisParameter toShiharaiHohoHenkoHakuListMainMybatisParameter() {
+        return new ShiharaiHohoHenkoHakuListMainMybatisParameter(基準日);
     }
 }

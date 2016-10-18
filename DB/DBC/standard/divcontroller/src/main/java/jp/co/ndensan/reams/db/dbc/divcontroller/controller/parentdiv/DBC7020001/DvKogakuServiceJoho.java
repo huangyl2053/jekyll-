@@ -54,7 +54,6 @@ public class DvKogakuServiceJoho {
                 .getShichosonSecurityJoho(GyomuBunrui.介護事務);
         DvKogakuChushutsuJokenDiv panel = div.getDvKogakuServiceParam().getDvKogakuChushutsuJoken();
         if (市町村セキュリティ情報 == null) {
-            //throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
         if (市町村セキュリティ情報.get導入形態コード() != null

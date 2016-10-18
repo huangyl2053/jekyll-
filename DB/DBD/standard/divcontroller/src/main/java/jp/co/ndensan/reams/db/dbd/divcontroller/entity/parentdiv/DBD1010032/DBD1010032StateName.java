@@ -16,7 +16,6 @@ public enum DBD1010032StateName implements IStateEnumerations {
 
     NoChange(""),
     一括承認結果修正("一括承認結果修正"),
-    テスト結果確認("テスト結果確認"),
     完了("完了");
 
     private final RString name;

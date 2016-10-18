@@ -83,24 +83,15 @@ public class ShotokuJohoChushutsuRenkeitanitu {
                 処理区分 = 基準日時1(基準日時);
             }
             return 処理区分;
-        }
-        if (遷移区分_1.equals(遷移区分)) {
+        } else if (遷移区分_1.equals(遷移区分)) {
             if (処理日付管理異動情報EntityList == null || 処理日付管理異動情報EntityList.isEmpty()) {
                 処理区分 = 不可;
                 return 処理区分;
             } else {
                 基準日時 = 処理日付管理異動情報EntityList.get(0).getKijunTimestamp();
-                基準日時2(基準日時);
-                以降の判定処理を行わない判別(年度, 処理区分);
+                処理区分 = 基準日時2(基準日時, 年度);
+                return 処理区分;
             }
-            DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity
-                    = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課, ShoriName.所得引出.get名称(), 枝番, 年度);
-            if (処理日付管理異動情報Entity == null) {
-                処理区分 = 可;
-            } else {
-                処理区分 = 可;
-            }
-            return 処理区分;
         }
         return 処理区分;
     }
@@ -155,29 +146,17 @@ public class ShotokuJohoChushutsuRenkeitanitu {
         return 処理区分;
     }
 
-    private RString 基準日時2(YMDHMS 基準日時) {
-        RString 処理区分;
+    private RString 基準日時2(YMDHMS 基準日時, FlexibleYear 年度) {
         if (基準日時 != null && !基準日時.isEmpty()) {
-            処理区分 = 可;
-        } else {
-            処理区分 = 不可;
-        }
-        return 処理区分;
-    }
-
-    private RString 以降の判定処理を行わない判別(FlexibleYear 年度, RString 処理区分) {
-        RString 戻り値_処理区分 = RString.EMPTY;
-        if (!不可.equals(処理区分)) {
             DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity
                     = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課, ShoriName.所得引出.get名称(), 枝番, 年度);
-            if (処理日付管理異動情報Entity == null) {
-                戻り値_処理区分 = 不可;
+            if (処理日付管理異動情報Entity != null) {
+                return 可;
             } else {
-                戻り値_処理区分 = 可;
+                return 可;
             }
-            return 戻り値_処理区分;
         } else {
-            return 戻り値_処理区分;
+            return 不可;
         }
     }
 }

@@ -122,7 +122,6 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
 
     private OutputParameter<Integer> outputCount;
     private OutputParameter<List> outputEntry;
-    @BatchWriter
     private CsvListWriter csvListWriter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 給付実績一時tableWriter;

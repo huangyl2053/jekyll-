@@ -148,9 +148,10 @@ public class ShokanFushikyuKetteiInProcess extends BatchKeyBreakBase<ShokanFushi
         int index = 0;
         for (ISetSortItem item : 並び順.get設定項目リスト()) {
             if (item.is改頁項目()) {
-                改頁項目.add(item.get項目名());
-                pageBreakKeys.add(item.get項目ID());
-
+                if (index != 0) {
+                    改頁項目.add(item.get項目名());
+                    pageBreakKeys.add(item.get項目ID());
+                }
             }
             if (index == INDEX_1) {
                 出力順Map.put(KEY_並び順の２件目, item.get項目名());

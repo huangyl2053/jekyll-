@@ -14,9 +14,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
+import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -63,7 +67,6 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
         if (賦課の情報一時Entity != null) {
             source.listUpper_1 = getColumnValue(賦課の情報一時Entity.getTsuchishoNo());
             source.listUpper_2 = getColumnValue(賦課の情報一時Entity.getShikibetsuCode());
-            source.listUpper_3 = getColumnValue(賦課の情報一時Entity.getShikibetsuCode());
             if (保険料段階 != null) {
                 source.listCenter_1 = 保険料段階.get表記();
                 source.listCenter_2 = doカンマ編集(保険料段階.get保険料率());
@@ -79,18 +82,20 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
             source.listUpper_5 = 住所編集;
             source.listLower_3 = getColumnValue(宛名.get住所().get町域コード());
             if (宛名.get名称() != null) {
-                source.listLower_5 = new RString(宛名.get名称().toString());
+                source.listLower_5 = getColumnValue(宛名.get名称().getName());
             }
         }
         if (徴収方法 != null) {
             if (本算定Flag) {
                 source.listUpper_4 = 徴収方法.get本徴収_年金コード();
                 source.listLower_4 = 徴収方法.get本徴収_基礎年金番号();
-                source.listLower_6 = 徴収方法.get本徴収_年金コード();
+                source.listLower_6 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                        UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(徴収方法.get本徴収_年金コード()));
             } else {
                 source.listUpper_4 = 徴収方法.get仮徴収_年金コード();
                 source.listLower_4 = 徴収方法.get仮徴収_基礎年金番号();
-                source.listLower_6 = 徴収方法.get仮徴収_年金コード();
+                source.listLower_6 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                        UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(徴収方法.get仮徴収_年金コード()));
             }
         }
         if (年金特徴回付情報 != null) {

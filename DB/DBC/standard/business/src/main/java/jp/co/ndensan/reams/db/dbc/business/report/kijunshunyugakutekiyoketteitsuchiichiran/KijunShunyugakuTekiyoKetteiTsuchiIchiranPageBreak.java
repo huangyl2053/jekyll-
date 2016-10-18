@@ -39,21 +39,20 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranPageBreak extends PageBreak
     public boolean isBreak(ReportLineRecord<KijunShunyugakuTekiyoKetteiTsuchiIchiranSource> currentSource,
             ReportLineRecord<KijunShunyugakuTekiyoKetteiTsuchiIchiranSource> nextSource) {
         boolean flag = false;
-        // TODO Redmine#95716
-        if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.年度.getフォームフィールド名())
-                && !currentSource.getSource().listHakkoTaishosha_3.equals(nextSource.getSource().listHakkoTaishosha_3)) {
+        if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.郵便番号.getフォームフィールド名())
+                && !currentSource.getSource().yubinNo.equals(nextSource.getSource().yubinNo)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.申請年月日.getフォームフィールド名())
-                && !currentSource.getSource().listHakkoTaishosha_6.equals(nextSource.getSource().listHakkoTaishosha_6)) {
+        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.町域コード.getフォームフィールド名())
+                && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.決定年月日.getフォームフィールド名())
-                && !currentSource.getSource().listHakkoTaishosha_7.equals(nextSource.getSource().listHakkoTaishosha_7)) {
+        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.行政区コード.getフォームフィールド名())
+                && !currentSource.getSource().gyoseikuCode.equals(nextSource.getSource().gyoseikuCode)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.適用開始年月.getフォームフィールド名())
-                && !currentSource.getSource().listHakkoTaishosha_8.equals(nextSource.getSource().listHakkoTaishosha_8)) {
+        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.世帯コード.getフォームフィールド名())
+                && !currentSource.getSource().listHakkoTaishosha_2.equals(nextSource.getSource().listHakkoTaishosha_2)) {
             flag = true;
-        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.算定基準額.getフォームフィールド名())
-                && !currentSource.getSource().listHakkoTaishosha_9.equals(nextSource.getSource().listHakkoTaishosha_9)) {
+        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.市町村コード.getフォームフィールド名())
+                && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
             flag = true;
         }
         return flag;
@@ -69,21 +68,20 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranPageBreak extends PageBreak
     public boolean is改頁(KijunShunyugakuTekiyoKetteiEntity currentSource,
             KijunShunyugakuTekiyoKetteiEntity nextSource) {
         boolean flag = false;
-        // TODO Redmine#95716
-        if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.年度.getフォームフィールド名())
-                && !currentSource.get年度().equals(nextSource.get年度())) {
+        if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.郵便番号.getフォームフィールド名())
+                && !currentSource.get郵便番号().equals(nextSource.get郵便番号())) {
             flag = true;
-        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.申請年月日.getフォームフィールド名())
-                && !currentSource.get申請日().equals(nextSource.get申請日())) {
+        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.町域コード.getフォームフィールド名())
+                && !currentSource.get町域コード().equals(nextSource.get町域コード())) {
             flag = true;
-        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.決定年月日.getフォームフィールド名())
-                && !currentSource.get決定日().equals(nextSource.get決定日())) {
+        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.行政区コード.getフォームフィールド名())
+                && !currentSource.get行政区コード().equals(nextSource.get行政区コード())) {
             flag = true;
-        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.適用開始年月.getフォームフィールド名())
-                && !currentSource.get適用開始年月().equals(nextSource.get適用開始年月())) {
+        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.世帯コード.getフォームフィールド名())
+                && !currentSource.get世帯コード().equals(nextSource.get世帯コード())) {
             flag = true;
-        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.算定基準額.getフォームフィールド名())
-                && !currentSource.get算定基準額().equals(nextSource.get算定基準額())) {
+        } else if (this.breakKeysList.contains(KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder.市町村コード.getフォームフィールド名())
+                && !currentSource.get市町村コード().equals(nextSource.get市町村コード())) {
             flag = true;
         }
         return flag;

@@ -51,4 +51,8 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiran {
     private FlexibleYearMonth 適用開始年月;
     private Decimal 算定基準額;
     private RString 備考;
+    private RString 郵便番号;
+    private RString 町域コード;
+    private RString 行政区コード;
+    private RString 市町村コード;
 }

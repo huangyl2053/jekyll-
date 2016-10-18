@@ -196,7 +196,7 @@
                     FROM (
                         SELECT
                         *,
-                        ROW_NUMBER() OVER (ORDER BY "ninteiYMD" DESC) AS 受給者台帳_番号
+                        ROW_NUMBER() OVER (PARTITION BY "hihokenshaNo" ORDER BY "ninteiYMD" DESC) AS 受給者台帳_番号
                         FROM
                         rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
                         WHERE
@@ -260,7 +260,7 @@
                         SELECT 
                             受給者台帳."shikibetsuCode" AS 識別コード,
                             受給者台帳."hihokenshaNo" AS 被保険者番号,
-                            ROW_NUMBER() OVER (ORDER BY 受給者台帳."ninteiYMD" DESC) AS 受給者台帳_番号
+                            ROW_NUMBER() OVER (PARTITION BY "shikibetsuCode" ORDER BY 受給者台帳."ninteiYMD" DESC) AS 受給者台帳_番号
                         FROM rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
                         WHERE 
                             受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{課税判定等基準日}

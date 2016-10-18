@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyu
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.core.shunyugaku.ShutsuryokuJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.kogakukyufu.KogakuKyufu_OshiraseTsuchi_ChushutsuJoken;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.definition.core.KensakuYoShikibetsuCode;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
@@ -121,7 +121,7 @@ public class KogakuKaigoServicehiOshiraseHakkoMybatisParameter extends UaFt200Fi
     public KogakuKaigoServicehiOshiraseHakkoMybatisParameter(FlexibleYearMonth shoriYm, FlexibleDate sakuseibi,
             HihokenshaNo hihokenshaNo, boolean isShinseishoHakko, boolean isOshiraseTsuchishoHakko,
             boolean isHakkoIchiranhyoHakko, boolean isKinyuKikanHyoji, FlexibleDate shiseibi, FlexibleDate uketsukebi,
-            FlexibleDate keteibi, FlexibleDate shinseishoTeishutsuKigen, ShutsuryokuJoken chushutsuJoken, RString menuId,
+            FlexibleDate keteibi, FlexibleDate shinseishoTeishutsuKigen, KogakuKyufu_OshiraseTsuchi_ChushutsuJoken chushutsuJoken, RString menuId,
             boolean isJutakuAri, RString orderBy, RString 保険者番号, RString 事業高額, RString 初回申請把握基準日,
             IShikibetsuTaishoPSMSearchKey searchKey, IAtesakiPSMSearchKey atesakiKey,
             IKozaSearchKey kozaKey, List<KamokuCode> 権限有科目リスト) {

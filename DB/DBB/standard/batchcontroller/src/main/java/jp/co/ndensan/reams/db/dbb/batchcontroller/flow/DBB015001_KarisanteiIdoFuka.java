@@ -5,6 +5,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.CaluculateFukaS
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.CaluculateFukaShikakuSoshitsuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.CaluculateFukaTokuchoTeishiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.CaluculateIraiKinTokuchoHatiKaishiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.DeleteTempTableProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.HatiGatuTokuchoKaishiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.IdoFukaKeisanProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.IraikinKeisanShoriKubunProcess;
@@ -12,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.KozaIdoshaChush
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.SetaiinHakuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.ShikakuIdoshaChushutsuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.SpoolKariSanteiIdoKekkaIchiranProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.SpoolTokuchoKinMeisaiCSVProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.SystemTimeShutokuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.TokuchoKaishishaChushutsuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001.TokuchoTeishishaChushutsuProcess;
@@ -21,7 +23,6 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJo
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015001.DBB015001_KarisanteiIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.karisanteiidokekka.KarisanteiIdoKekkaProcessParameter;
-import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.karisanteiidofuka.IKariSanteiIdoFukaBatchMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
@@ -59,6 +60,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
     private static final RString 賦課の情報登録フローBATCHID = new RString("DBB004001_FukaJohoToroku");
 
     private static final String システム日時の取得 = "getSystemDate";
+    private static final String 一時テーブルの削除 = "deleteTempTable";
     private static final String 資格異動者抽出 = "getShikakuIdosha";
     private static final String 特別徴収開始者抽出 = "getTokuchoKaishishaChushutsu";
     private static final String 特別徴収停止者抽出 = "getTokuchoTeishishaChushutsu";
@@ -75,19 +77,15 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
     private static final String 依頼金額計算_8月特徴開始 = "caluculateIraiKinTokucho8gatuKaishi";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 仮算定異動一括結果一覧表出力 = "spoolKariSanteiIdoKekkaIchiran";
+    private static final String 特別徴収依頼金額明細一覧表出力 = "spoolTokuchoKinMeisaiCSV";
     private static final String 異動賦課計算 = "idoFukaKeisan";
     private static final String 八月特徴開始 = "hatiGatuTokuchoKaishi";
     private static final String 仮算定異動通知書一括発行 = "karisanteiIdoTsuchishoIkkatsuHakko";
 
-    private static final ReportId ID = new ReportId("DBB200013_KarisanteiIdoKekkaIchiran");
+    private static final ReportId 仮算定異動一括結果一覧表ID = new ReportId("DBB200013_KarisanteiIdoKekkaIchiran");
+    private static final ReportId 別徴収依頼金額明細一覧表ID = new ReportId("DBB200023_TokubetsuChoshuIraikingakuMeisaiIchiran");
 
     private KarisanteiIdoKekkaProcessParameter parameter;
-    private IKariSanteiIdoFukaBatchMapper mapper;
-
-    @Override
-    protected void initialize() {
-        mapper = getMapper(IKariSanteiIdoFukaBatchMapper.class);
-    }
 
     @Override
     protected void defineFlow() {
@@ -108,22 +106,23 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
                 executeStep(世帯員把握バッチ);
             }
         }
+
         if (RSTZERO.equals(getParameter().get特徴捕捉対象者の依頼金額計算区分())) {
             executeStep(賦課計算_資格喪失);
             executeStep(賦課の情報登録フロー);
-            mapper.delete賦課の情報一時テーブル();
+            executeStep(一時テーブルの削除);
 
             executeStep(賦課計算_特別徴収停止);
             executeStep(賦課の情報登録フロー);
-            mapper.delete賦課の情報一時テーブル();
+            executeStep(一時テーブルの削除);
 
             executeStep(賦課計算_資格取得);
             executeStep(賦課の情報登録フロー);
-            mapper.delete賦課の情報一時テーブル();
+            executeStep(一時テーブルの削除);
 
             executeStep(賦課計算_口座異動のみ反映);
             executeStep(賦課の情報登録フロー);
-            mapper.delete賦課の情報一時テーブル();
+            executeStep(一時テーブルの削除);
         }
 
         executeStep(依頼金額計算区分);
@@ -131,10 +130,16 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
                 new RString(依頼金額計算区分), IraikinKeisanShoriKubunProcess.依頼金計算処理区分);
         if (RSTONE.equals(依頼金計算処理区分)) {
             executeStep(依頼金額計算_8月特徴開始);
+            executeStep(賦課の情報登録フロー);
         }
         executeStep(計算後情報作成);
         for (TyouhyouEntity result : getParameter().get出力帳票一覧List()) {
-            if (result.get帳票分類ID().value().equals(ID.value())) {
+            if (result.get帳票分類ID().value().equals(仮算定異動一括結果一覧表ID.value())) {
+                parameter.set出力帳票Entity(result);
+                executeStep(仮算定異動一括結果一覧表出力);
+            } else if (RSTONE.equals(依頼金計算処理区分)
+                    && result.get帳票分類ID().value().equals(別徴収依頼金額明細一覧表ID.value())) {
+                parameter.set出力帳票Entity(result);
                 executeStep(仮算定異動一括結果一覧表出力);
             }
         }
@@ -156,6 +161,16 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
     @Step (システム日時の取得)
     protected IBatchFlowCommand getSystemDate() {
         return simpleBatch(SystemTimeShutokuProcess.class).define();
+    }
+
+    /**
+     * 一時テーブルの削除を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step (一時テーブルの削除)
+    protected IBatchFlowCommand deleteTempTable() {
+        return simpleBatch(DeleteTempTableProcess.class).define();
     }
 
     /**
@@ -322,6 +337,16 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
     }
 
     /**
+     * 特別徴収依頼金額明細一覧表出力を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step (特別徴収依頼金額明細一覧表出力)
+    protected IBatchFlowCommand spoolTokuchoKinMeisaiCSV() {
+        return loopBatch(SpoolTokuchoKinMeisaiCSVProcess.class).arguments(parameter).define();
+    }
+
+    /**
      * 異動賦課計算を行います。
      *
      * @return バッチコマンド
@@ -375,7 +400,6 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
         RDate 年月日2 = new RDate(getParameter().get抽出終了日時().substring(0, INT_EIGHT).toString());
         RTime 時刻2 = new RTime(getParameter().get抽出終了日時().substring(INT_EIGHT));
         parameter.set抽出終了日時(RDateTime.of(年月日2.toDateString(), 時刻2.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
-        parameter.set出力帳票List(getParameter().get出力帳票一覧List());
         RDate 年月日3 = new RDate(getParameter().get普徴仮算定賦課処理日時().substring(0, INT_NINE).toString());
         RTime 時刻3 = new RTime(getParameter().get普徴仮算定賦課処理日時().substring(INT_TEN));
         parameter.set普徴仮算定賦課処理日時(RDateTime.of(年月日3.toDateString(), 時刻3.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));

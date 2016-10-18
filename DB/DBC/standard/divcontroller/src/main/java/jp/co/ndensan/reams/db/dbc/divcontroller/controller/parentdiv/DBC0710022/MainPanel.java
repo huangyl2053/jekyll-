@@ -112,7 +112,7 @@ public class MainPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 ViewStateHolder.put(ViewStateKeys.識別コード, parameter.get識別コード());
-                ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月());
+                ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月().toDateString());
                 ViewStateHolder.put(ViewStateKeys.被保険者番号, parameter.get被保険者番号());
                 ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
                 ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());
@@ -120,7 +120,7 @@ public class MainPanel {
             }
         } else {
             ViewStateHolder.put(ViewStateKeys.識別コード, parameter.get識別コード());
-            ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月());
+            ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月().toDateString());
             ViewStateHolder.put(ViewStateKeys.被保険者番号, parameter.get被保険者番号());
             ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
             ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());
@@ -171,7 +171,7 @@ public class MainPanel {
             if (照会.equals(parameter.get画面モード())) {
                 return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.一覧に戻る).respond();
             } else if (審査.equals(parameter.get画面モード())) {
-                return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.一覧に戻る).parameter(審査);
+                return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.一覧に戻る).respond();
             } else {
                 return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.一覧に戻る).respond();
             }

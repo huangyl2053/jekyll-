@@ -79,7 +79,7 @@ public class IryouhiKoujyoValidationHandler {
         対象年の未入力チェック {
                     @Override
                     public boolean apply(IryouhiKoujyoDiv div) {
-                        return div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().getValue() != null;
+                        return !div.getIryohiKojyoSyosai().getSyosaiPanel1().getTaisyoYY().getSelectedKey().isEmpty();
                     }
                 };
 

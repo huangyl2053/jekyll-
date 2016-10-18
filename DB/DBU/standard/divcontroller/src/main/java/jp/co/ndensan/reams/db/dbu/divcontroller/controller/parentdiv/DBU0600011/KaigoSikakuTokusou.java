@@ -125,7 +125,7 @@ public class KaigoSikakuTokusou {
      * @return ResponseData<KaigoSikakuTokusouDiv>
      */
     public ResponseData<KaigoSikakuTokusouDiv> onClick_KensakuModoru(KaigoSikakuTokusouDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBU0600011TransitionEventName.検索に戻る).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0600011TransitionEventName.対象者検索に戻る).respond();
     }
 
     private KaigoSikakuTokusouHandler getHandler(KaigoSikakuTokusouDiv div) {

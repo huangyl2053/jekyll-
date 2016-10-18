@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -38,4 +39,8 @@ public class KijunShunyugakuTekiyoKetteiEntity implements Serializable {
     private boolean 宛先印字対象者フラグ;
     private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
     private UaFt250FindAtesakiEntity 宛先Entity;
+    private RString 郵便番号;
+    private RString 町域コード;
+    private RString 行政区コード;
+    private RString 市町村コード;
 }

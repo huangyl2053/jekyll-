@@ -143,8 +143,6 @@ public class CreateTargetHandler {
             rowList.add(row);
             PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
                     new RString("申請書管理番号"), list.get申請書管理番号()));
-            personalData.addExpandedInfo(new ExpandedInformation(new Code("0002"), new RString("証記載保険者番号"), list.get証記載保険者番号()));
-            personalData.addExpandedInfo(new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), list.get被保険者番号()));
             AccessLogger.log(AccessLogType.照会, personalData);
         }
         div.getDgCreateTargetSummary().setDataSource(rowList);

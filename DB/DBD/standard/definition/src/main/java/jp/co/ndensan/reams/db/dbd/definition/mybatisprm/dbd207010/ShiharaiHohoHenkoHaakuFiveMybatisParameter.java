@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd207010;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -28,13 +29,16 @@ public class ShiharaiHohoHenkoHaakuFiveMybatisParameter implements IMyBatisParam
 
     private FlexibleDate 基準日;
     private FlexibleYear 業務コンフィグ_日付関連_調定年度;
+    private final UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam;
 
     /**
      * コンストラクタです。
      *
+     * @param shikibetsutaishoParam 宛名識別対象PSM
      * @param 基準日 基準日
      */
-    public ShiharaiHohoHenkoHaakuFiveMybatisParameter(FlexibleDate 基準日) {
+    public ShiharaiHohoHenkoHaakuFiveMybatisParameter(UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam, FlexibleDate 基準日) {
+        this.shikibetsutaishoParam = shikibetsutaishoParam;
         this.基準日 = 基準日;
         set業務コンフィグ_日付関連_調定年度について();
     }

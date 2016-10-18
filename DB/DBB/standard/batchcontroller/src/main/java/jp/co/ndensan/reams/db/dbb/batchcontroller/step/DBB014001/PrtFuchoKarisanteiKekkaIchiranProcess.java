@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FuchoKarisanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.futsuchoshukarisanteikekkaichiranreport.FuchoKariKeisanGoFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.futsuchoshukarisanteikekkaichiranreport.FutsuChoshuKarisanteiKekkaIchiranSource;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ue.uex.definition.core.NenkinCode;
@@ -27,9 +26,12 @@ import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -74,13 +76,13 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
     private static final RString TITLE_調定年度 = new RString("【調定年度】　");
     private static final RString TITLE_賦課年度 = new RString("【賦課年度】　");
     private static final RString 定数_年度 = new RString("年度");
+    private static final RString CSV出力有無_有り = new RString("有り");
     private RString eucFilePath;
     FileSpoolManager spoolManager;
     private FuchoKariKeisanGoFukaEntity 普徴仮算定計算後賦課Entity;
     private DbT2015KeisangoJohoEntity 計算後情報;
     private FuchoKarisanteiFukaProcessParameter parameter;
     private FuchoKarisanteiFukaMybatisParameter mybatisParameter;
-    private ChohyoSeigyoKyotsu 帳票制御共通;
     private Association 地方公共団体情報;
     private int 連番;
     private IOutputOrder 出力順;
@@ -119,6 +121,7 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
 
     @Override
     protected void createWriter() {
+        //改ページの処理がない。
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200006.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
 
@@ -278,12 +281,27 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
     protected void afterExecute() {
         csvWriter.close();
         spoolManager.spool(eucFilePath);
+
+        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
+                ReportIdDBB.DBB200006.getReportId().getColumnValue(),
+                地方公共団体情報.getLasdecCode_().value(),
+                地方公共団体情報.get市町村名(),
+                new RString(String.valueOf(JobContextHolder.getJobId())),
+                ReportIdDBB.DBB200006.getReportName(),
+                new RString(reportSourceWriter.pageCount().value()),
+                CSV出力有無_有り,
+                CSVFILENAME,
+                get出力条件()
+        );
+        OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem)
+                .print();
     }
 
     private List<RString> get出力条件() {
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(TITLE_調定年度.concat(dateFormat308(parameter.get調定年度())).concat(定数_年度));
         出力条件.add(TITLE_賦課年度.concat(dateFormat308(parameter.get賦課年度())).concat(定数_年度));
+        出力条件.add(出力順.getFormated出力順名());
         return 出力条件;
     }
 

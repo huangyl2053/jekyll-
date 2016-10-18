@@ -28,7 +28,8 @@ public enum DBC0010011TransitionEventName implements IContainerEvents {
     高額介護サービス費("高額介護サービス費"),
     特定入所者費用("特定入所者費用"),
     社福軽減費("社福軽減費"),
-    ケアマネジメント費("ケアマネジメント費");
+    ケアマネジメント費("ケアマネジメント費"),
+    総合照会給付情報("総合照会給付情報");
 
     private final RString name;
 

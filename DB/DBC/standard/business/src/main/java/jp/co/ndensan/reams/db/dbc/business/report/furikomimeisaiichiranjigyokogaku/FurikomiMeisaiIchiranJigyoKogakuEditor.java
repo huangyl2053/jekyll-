@@ -45,8 +45,11 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
     private final RString 未申請 = new RString("未申請");
     private final RString 事業対象 = new RString("事業対象");
     private final RString 期間 = new RString("～");
+    private final RString 有 = new RString("有");
     private final RString 数字 = new RString("1");
     private static final RString 文_被保険者番号 = new RString("被保険者番号");
+    private final int INT_1 = 1;
+    private final int INT_2 = 2;
 
     /**
      * コンストラクタです
@@ -142,8 +145,9 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
         }
         DbWT0510FurikomiMeisaiTempEntity 振込明細 = target.get振込明細一時();
         source.list1_1 = 振込明細.getHihokenshaNo().getColumnValue();
-        //TODO QA#1711
-        //source.list1_2 =振込明細.getHihokenshaShime();
+        if (振込明細.getShimei() != null) {
+            source.list1_2 = 振込明細.getShimei().value();
+        }
         source.list1_3 = パターン54(振込明細.getServiceTeikyoYM());
         source.list1_4 = パターン4(振込明細.getShinseiYMD());
         source.list1_5 = NinteiShinseiShinseijiKubunCode.toValue(振込明細.getShiharaiHohoKubunCode()).get名称();
@@ -209,14 +213,12 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
             source.list2_6 = DecimalFormatter.toコンマ区切りRString(振込明細.getFurikomiKingaku(), 0);
         }
 
-        //TODO QA#1711
-//        if (振込明細.getKozaNayoseKey() != null) {
-//            if (INT_1.equals(振込明細.getKozaNayoseKey())) {
-//                source.list5_1 = RString.EMPTY;
-//            } else {
-//                source.list5_1 = 有;
-//            }
-//        }
+        if (INT_1 == target.get名寄せ件数()) {
+            source.list5_1 = RString.EMPTY;
+        } else if (INT_2 <= target.get名寄せ件数()) {
+            source.list5_1 = 有;
+        }
+
     }
 
     private RString パターン12(YMDHMS 作成日時) {

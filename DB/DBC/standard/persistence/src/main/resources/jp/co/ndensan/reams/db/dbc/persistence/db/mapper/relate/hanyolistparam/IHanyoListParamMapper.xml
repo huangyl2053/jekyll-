@@ -5,6 +5,7 @@
 
     <resultMap id="get基準収入額適用情報Result" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistparam.HanyoListParamRelateEntity">
         <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="資格取得事由コード" column="shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="資格取得年月日" column="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -15,7 +16,6 @@
         <result property="被保険者区分コード" column="hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="住所地特例フラグ" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="広域内住所地特例フラグ" column="koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="広住特措置元市町村コード" column="koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="受給申請事由" column="jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="受給申請年月日" column="jukyuShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="要介護認定状態区分コード" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -51,6 +51,8 @@
 
     <sql id="基準収入額適用情報">
         基準収入額適用情報."shichosonCode" AS "shichosonCode",
+        CASE 基準収入額適用情報."koikinaiJushochiTokureiFlag" WHEN '1' THEN 基準収入額適用情報."koikinaiTokureiSochimotoShichosonCode" 
+        ELSE 基準収入額適用情報."shichosonCode" END AS 証記載保険者番号,
         基準収入額適用情報."hihokenshaNo" AS "hihokenshaNo",
         基準収入額適用情報."shikakuShutokuJiyuCode" AS "shikakuShutokuJiyuCode",
         基準収入額適用情報."shikakuShutokuYMD" AS "shikakuShutokuYMD",
@@ -61,7 +63,6 @@
         基準収入額適用情報."hihokennshaKubunCode" AS "hihokennshaKubunCode",
         基準収入額適用情報."jushochiTokureiFlag" AS "jushochiTokureiFlag",
         基準収入額適用情報."koikinaiJushochiTokureiFlag" AS "koikinaiJushochiTokureiFlag",
-        基準収入額適用情報."koikinaiTokureiSochimotoShichosonCode" AS "koikinaiTokureiSochimotoShichosonCode",
         基準収入額適用情報."kyuShichosonCode" AS "kyuShichosonCode",
         基準収入額適用情報."jukyuShinseiJiyu" AS "jukyuShinseiJiyu",
         基準収入額適用情報."jukyuShinseiYMD" AS "jukyuShinseiYMD",

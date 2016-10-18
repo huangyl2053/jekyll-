@@ -4,9 +4,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
  * 特定個人情報提供管理テーブルの項目定義クラスです。
+ *
+ * @reamsid_L DBU-9999-013 sunhaidi
  */
 public enum DbT7304TokuteiKojinJohoTeikyoKanri implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * insertDantaiCd
      */
