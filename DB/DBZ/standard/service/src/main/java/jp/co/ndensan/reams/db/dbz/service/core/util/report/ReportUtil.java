@@ -6,10 +6,13 @@
 package jp.co.ndensan.reams.db.dbz.service.core.util.report;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -18,6 +21,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
@@ -43,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
@@ -61,6 +66,11 @@ public final class ReportUtil {
 
     private static final RString 首長名印字位置 = new RString("1");
     private static final RString 汎用キー_文書番号 = new RString("文書番号");
+    private static final int INT5 = 5;
+    private static RStringBuilder orderByClause;
+    private static RString space;
+    private static RString comma;
+    private static int commaCount;
 
     /**
      * 雛形部品_認証者を取得します。
@@ -217,6 +227,93 @@ public final class ReportUtil {
     }
 
     /**
+     * 出力順・改頁リスト及び、出力順・改頁項目管理Enumクラスを引数で指定することで、出力順・改頁のEntityを生成します。
+     *
+     * @param <T> IReportItemsを実装したEnumクラス
+     * @param clazz 出力順・改頁項目管理Enumクラス
+     * @param サブ業務コード サブ業務コード
+     * @param 帳票ID 帳票ID
+     * @param 出力順ID 出力順ID
+     * @return ShutsuryokujunRelateEntity
+     */
+    public static <T extends Enum<T> & IReportItems> ShutsuryokujunRelateEntity get出力順情報(
+            Class<T> clazz,
+            SubGyomuCode サブ業務コード,
+            ReportId 帳票ID,
+            long 出力順ID) {
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder outputOrder = finder.get出力順(サブ業務コード, 帳票ID, 出力順ID);
+        ReportItemsMap reportItems = new ReportItemsMap(Arrays.<IReportItems>asList(clazz.getEnumConstants()));
+        orderByClause = new RStringBuilder("order by");
+        space = new RString(" ");
+        comma = new RString(",");
+        commaCount = 0;
+        ShutsuryokujunRelateEntity entity = new ShutsuryokujunRelateEntity();
+        List<RString> 出力順List = new ArrayList<>();
+        List<RString> 改頁List = new ArrayList<>();
+        List<RString> pagebreakList = new ArrayList<>();
+        if (outputOrder.get設定項目リスト().isEmpty()) {
+            return entity;
+        }
+        for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
+            getOrderByClause(reportItems, setSortItem);
+            出力順List.add(setSortItem.get項目名());
+            if (setSortItem.is改頁項目() && 改頁List.size() < INT5) {
+                pagebreakList.add(reportItems.getフォームフィールド名(setSortItem.get項目ID()));
+                改頁List.add(setSortItem.get項目名());
+            }
+            commaCount++;
+        }
+        entity.set出力順OrderBy(orderByClause.toRString());
+        entity.set出力順項目(出力順List);
+        entity.setPageBreakKeys(pagebreakList);
+        entity.set改頁項目(改頁List);
+        return entity;
+    }
+
+    private static void getOrderByClause(ReportItemsMap reportItems, ISetSortItem setSortItem) {
+        if (commaCount < INT5) {
+            if (commaCount != 0) {
+                orderByClause = orderByClause.append(space).append(comma).append(space)
+                        .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(space).append(setSortItem.get昇降順().getOrder());
+
+            } else {
+                orderByClause = orderByClause.append(space)
+                        .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(space).append(setSortItem.get昇降順().getOrder());
+            }
+        }
+    }
+
+    private static class ReportItemsMap {
+
+        private Map<RString, IReportItems> map;
+
+        public ReportItemsMap(List<IReportItems> items) {
+            this.map = new HashMap<>();
+            for (IReportItems item : items) {
+                this.map.put(item.get項目ID(), item);
+            }
+            this.map = Collections.unmodifiableMap(map);
+        }
+
+        RString getMyBatis項目名(RString 項目ID) throws IllegalArgumentException {
+            if (this.map.containsKey(項目ID)) {
+                return this.map.get(項目ID).getMyBatis項目名();
+            } else {
+                throw new IllegalArgumentException(UrErrorMessages.データが存在しない.toString());
+            }
+        }
+
+        RString getフォームフィールド名(RString 項目ID) throws IllegalArgumentException {
+            if (this.map.containsKey(項目ID)) {
+                return this.map.get(項目ID).getフォームフィールド名();
+            } else {
+                throw new IllegalArgumentException(UrErrorMessages.データが存在しない.toString());
+            }
+        }
+    }
+
+    /**
      * 0から、出力順項目を取得します。
      *
      * @param shutsuryokujunId 出力順ID
@@ -292,4 +389,5 @@ public final class ReportUtil {
         }
         return null;
     }
+
 }
