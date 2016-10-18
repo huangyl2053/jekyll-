@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 要介護認定結果連携データ取込Serviceです。
  *
- * @reamsid_L DBD_1510-010 liuyl
+ * @reamsid_L DBD-1510-010 liuyl
  */
 public class YogaigoNinteiKekkaRenkeiDataTorikomiService {
 

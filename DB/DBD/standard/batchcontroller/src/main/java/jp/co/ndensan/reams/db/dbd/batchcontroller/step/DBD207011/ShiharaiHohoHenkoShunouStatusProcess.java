@@ -12,19 +12,14 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHa
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShunoJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShunyuJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.temptable.ShunoStatusTempTableEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.MinoKannoKubun;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriterBuilders;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -37,9 +32,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @reamsid_L DBD-3650-050 x_lilh
  */
 public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<ShiharaiHohoHenkoHaakuOneEntity> {
-
-    private static final RString 時効到来 = new RString("時効到来");
-    private static final RString 時効未到来 = new RString("時効未到来");
 
     private static final RString 時効成立 = new RString("時効成立");
     private static final RString 滞納期 = new RString("滞納期");
@@ -69,12 +61,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
-        key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toShiharaiHohoHenkoHakuListMainMybatisParameter(psmShikibetsuTaisho));
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toShiharaiHohoHenkoHakuListMainMybatisParameter());
     }
 
     @Override
@@ -245,9 +232,9 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
         }
 
         if (MinoKannoKubun.未納あり.getコード().equals(完納_未納区分) && 時効起算日2年後.isBeforeOrEquals(基準日)) {
-            return 時効到来;
+            return JikoKubun.時効到来.getコード();
         }
-        return 時効未到来;
+        return JikoKubun.時効未到来.getコード();
     }
 
     private Decimal edit未納額(Decimal 調定額, Decimal 収入額) {
@@ -265,7 +252,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
         Decimal 以前滞納額 = Decimal.ZERO;
         RString 以前滞納区分 = RString.EMPTY;
 
-        if (MinoKannoKubun.未納あり.getコード().equals(完納_未納区分) && 時効未到来.equals(時効区分)) {
+        if (MinoKannoKubun.未納あり.getコード().equals(完納_未納区分) && JikoKubun.時効未到来.getコード().equals(時効区分)) {
             if (未納額 != null) {
                 以前滞納額 = 以前滞納額.add(未納額);
             }
@@ -351,7 +338,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
     }
 
     private Decimal edit以降未納情報_滞納額合計(ShunoStatusTempTableEntity data, RString 完納_未納区分, RString 時効区分, Decimal 滞納額合計) {
-        if (時効到来.equals(時効区分) && 完納_未納区分.equals(MinoKannoKubun.未納あり.getコード())) {
+        if (JikoKubun.時効到来.getコード().equals(時効区分) && 完納_未納区分.equals(MinoKannoKubun.未納あり.getコード())) {
             if (data.getMiNoGaku() != null) {
                 滞納額合計 = 滞納額合計.add(data.getMiNoGaku());
             }

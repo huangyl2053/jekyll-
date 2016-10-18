@@ -128,6 +128,7 @@ public class IkkatsuShoninKekkaIchiranService {
     public List<FutanGendogakuNinteiBatchResult> load一括承認結果取得(YMDHMS 一括認定バッチ処理日時, Boolean 承認済みフラグ) {
         RString 減免減額種類_負担限度額認定 = GemmenGengakuShurui.負担限度額認定.getコード();
         FutanyikkatsuShoninListMapperParameter 検索条件 = new FutanyikkatsuShoninListMapperParameter(一括認定バッチ処理日時, 減免減額種類_負担限度額認定);
+        FutanyikkatsuShoninListMapperParameter 検索条件2 = new FutanyikkatsuShoninListMapperParameter(減免減額種類_負担限度額認定);
         List<FutanGendogakuNinteiBatchResult> 負担限度額認定バッチ結果 = new ArrayList<>();
         IFutanyikkatsuShoninkekkaListMapper mapper = mapperProvider.create(IFutanyikkatsuShoninkekkaListMapper.class);
         IFutanyikkatsuShoninkekkaListFalseMapper mapperfalse = mapperProvider.create(IFutanyikkatsuShoninkekkaListFalseMapper.class);
@@ -142,7 +143,7 @@ public class IkkatsuShoninKekkaIchiranService {
                 }
             }
         } else {
-            List<FutanGendogakuNinteiBatchResultEntity> EntityList = mapperfalse.get一括承認結果情報を取得_承認済みフラグFALSE(検索条件);
+            List<FutanGendogakuNinteiBatchResultEntity> EntityList = mapperfalse.get一括承認結果情報を取得_承認済みフラグFALSE(検索条件2);
             if (EntityList != null && !EntityList.isEmpty()) {
                 for (FutanGendogakuNinteiBatchResultEntity entity : EntityList) {
                     負担限度額認定バッチ結果.add(new FutanGendogakuNinteiBatchResult(entity));

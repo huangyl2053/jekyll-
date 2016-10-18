@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1040001;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040001.TokuteiNyushoServiceHiShinseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040001.TokuteiNyushoServiceHiShinseiPanelDivSpec;
+import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuChiikiKasanGemmenService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
@@ -25,9 +28,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBD-3680-010 miaojin
  */
 public class TokuteiNyushoServiceHiShinseiValidationHandler {
-
-    private final Decimal 給付率_81 = new Decimal(81);
-    private final Decimal 給付率_100 = new Decimal(100);
 
     /**
      * 申請日の必須入力チェックを行います。
@@ -211,24 +211,25 @@ public class TokuteiNyushoServiceHiShinseiValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateFor特別地域加算減免_軽減率範囲外(ValidationMessageControlPairs pairs, TokuteiNyushoServiceHiShinseiDiv div) {
-        Decimal 軽減率 = Decimal.ZERO;
-        if (div.getShinseiDetail().getTxtKeigenRitsu() != null && div.getShinseiDetail().getTxtKeigenRitsu().getValue() != null) {
-            軽減率 = div.getShinseiDetail().getTxtKeigenRitsu().getValue();
-        }
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (軽減率.compareTo(給付率_81) < 0 || 軽減率.compareTo(給付率_100) > 0) {
-            messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.特別地域加算減免_軽減率範囲外のチェック)
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getCcdKaigoKihon().get被保険者番号());
+        TokubetsuChiikiKasanGemmenService service = TokubetsuChiikiKasanGemmenService.createIntance();
+        FutanwariaiKubun 負担割合区分 = service.get利用者負担割合(被保険者番号, div.getShinseiDetail().getTxtShinseiYMD().getValue());
+        if (負担割合区分.getコード().equals(FutanwariaiKubun._２割.getコード())) {
+            messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.特別地域加算減免_軽減率範囲81外のチェック)
                     .thenAdd(TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲81外).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                     TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲81外, div.getShinseiDetail().getTxtKeigenRitsu()).build().check(messages));
             return pairs;
-        } else {
-            messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.特別地域加算減免_軽減率範囲外のチェック)
+        }
+        if (負担割合区分.getコード().equals(FutanwariaiKubun._１割.getコード())) {
+            messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.特別地域加算減免_軽減率範囲91外のチェック)
                     .thenAdd(TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲91外).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                     TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲91外, div.getShinseiDetail().getTxtKeigenRitsu()).build().check(messages));
             return pairs;
         }
+        return pairs;
     }
 
     /**

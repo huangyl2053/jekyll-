@@ -108,7 +108,7 @@ public class ShunoJokyoHaakuBusiness {
             if (仮の時効起算日.plusYear(2).isBeforeOrEquals(new FlexibleDate(caT0701.getShunyuYMD().toDateString()))) {
                 break;
             } else if (時効起算年月日 != null && !時効起算年月日.isEmpty() && !仮の時効起算日.isEmpty()
-                    && new FlexibleDate(caT0701.getShunyuYMD().toDateString()).isBefore(時効起算年月日)
+                    && new FlexibleDate(caT0701.getShunyuYMD().toDateString()).isBefore(時効起算年月日.plusYear(2))
                     && 仮の時効起算日.isBeforeOrEquals(new FlexibleDate(caT0701.getShunyuYMD().toDateString()))) {
                 仮の時効起算日 = new FlexibleDate(caT0701.getShunyuYMD().toDateString());
             }

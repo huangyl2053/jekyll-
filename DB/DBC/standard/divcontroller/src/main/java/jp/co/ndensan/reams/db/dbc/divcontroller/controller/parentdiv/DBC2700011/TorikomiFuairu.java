@@ -64,6 +64,7 @@ public class TorikomiFuairu {
             for (UzT0885SharedFileEntryEntity sharedFile : sharedFiles) {
                 SharedFileEntryDescriptor sfed = new ReadOnlySharedFileEntryDescriptor(filesystemName, sharedFile.getSharedFileId());
                 SharedFile.deleteEntry(sfed);
+                jp.co.ndensan.reams.uz.uza.io.File.deleteIfExists(SharedFile.getDirectAccessPath(sfed));
             }
 
             SharedFile.copyToSharedFile(sfd, path, opts);
@@ -88,8 +89,8 @@ public class TorikomiFuairu {
      */
     public ResponseData<TorikomiFuairuDiv> onCheck_btnExecute(TorikomiFuairuDiv div) {
         List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(共有ファイル名);
-        if (sharedFiles == null || sharedFiles.isEmpty()) {
-            throw new ApplicationException(DbzErrorMessages.アップロードファイル無し.getMessage().toString());
+        if (!isExists(sharedFiles)) {
+            throw new ApplicationException(DbzErrorMessages.アップロードファイル無し.getMessage());
         }
         return ResponseData.of(div).respond();
     }
@@ -112,4 +113,13 @@ public class TorikomiFuairu {
         return new TorikomiFuairuHandler(div);
     }
 
+    private boolean isExists(List<UzT0885SharedFileEntryEntity> sharedFiles) {
+        for (UzT0885SharedFileEntryEntity sharedFlie : sharedFiles) {
+            SharedFileEntryDescriptor sfed = new SharedFileEntryDescriptor(FilesystemName.fromString(共有ファイル名), sharedFlie.getSharedFileId());
+            if (!jp.co.ndensan.reams.uz.uza.io.File.exists(SharedFile.getDirectAccessPath(sfed))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -73,11 +73,12 @@ public class FutanyikkatsuShoninkekkaListHandler {
             div.getDatagridhojipanel().getTxtSakuseiNendo().setDomain(負担限度額一括認定情報.get作成年度());
             div.getDatagridhojipanel().getTxtKettaiYMD().setValue(負担限度額一括認定情報.get決定日());
             if (負担限度額一括認定情報.get承認済みフラグ()) {
-                div.getDatagridhojipanel().getChkTestKubun().setIsAllSelectable(false);
                 CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(承認を確定する, true);
                 CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(修正を保存する, false);
             } else {
-                div.getDatagridhojipanel().getChkTestKubun().setIsAllSelectable(true);
+                List<RString> keys = new ArrayList<>();
+                keys.add(new RString("key0"));
+                div.getDatagridhojipanel().getChkTestKubun().setSelectedItemsByKey(keys);
                 CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(承認を確定する, false);
                 CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(修正を保存する, true);
             }
@@ -92,11 +93,19 @@ public class FutanyikkatsuShoninkekkaListHandler {
      */
     public void ＤＢ処理更新(List<FutanGendogakuNinteiBatchResult> 画面更新用情報, List<YMDHMS> 一括処理日時list) {
         IkkatsuShoninKekkaIchiranService ikkatsuservice = IkkatsuShoninKekkaIchiranService.createInstance();
-        RString 一括認定バッチ処理日時 = div.getHyojiTaisho().getDdlBatchShoriNichiji().getSelectedKey().trim();
-        ikkatsuservice.ＤＢ処理_updata介護保険負担限度額認定(画面更新用情報);
-        ikkatsuservice.ＤＢ処理_減免減額申請(画面更新用情報);
-        int ddlBatchShoriNichiji_index = Integer.parseInt(一括認定バッチ処理日時.replace(new RString("key"), RString.EMPTY).toString());
-        ＤＢ処理_負担限度額一括認定(一括処理日時list.get(ddlBatchShoriNichiji_index));
+        if (画面更新用情報 != null && !画面更新用情報.isEmpty()) {
+            ikkatsuservice.ＤＢ処理_updata介護保険負担限度額認定(画面更新用情報);
+            ikkatsuservice.ＤＢ処理_減免減額申請(画面更新用情報);
+        }
+        if (一括処理日時list != null && !一括処理日時list.isEmpty()) {
+            int ddlBatchShoriNichiji_index = 0;
+            RString 一括認定バッチ処理日時 = div.getHyojiTaisho().getDdlBatchShoriNichiji().getSelectedKey();
+            if (一括認定バッチ処理日時 != null && !一括認定バッチ処理日時.isEmpty()) {
+                ddlBatchShoriNichiji_index = Integer.parseInt(一括認定バッチ処理日時.replace(new RString("key"),
+                        RString.EMPTY).toString());
+            }
+            ＤＢ処理_負担限度額一括認定(一括処理日時list.get(ddlBatchShoriNichiji_index));
+        }
     }
 
     /**

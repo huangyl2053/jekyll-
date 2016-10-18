@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.processprm.karisanteiidokekka;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -19,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class KarisanteiIdoKekkaProcessParameter implements IBatchProcessParameter {
 
     private FlexibleYear 調定年度;
@@ -27,7 +26,7 @@ public class KarisanteiIdoKekkaProcessParameter implements IBatchProcessParamete
     private RString 処理対象月;
     private RDateTime 抽出開始日時;
     private RDateTime 抽出終了日時;
-    private List<TyouhyouEntity> 出力帳票List;
+    private TyouhyouEntity 出力帳票Entity;
     private RDateTime 普徴仮算定賦課処理日時;
     private RString 依頼金額計算区分;
     private RDateTime 調定日時;

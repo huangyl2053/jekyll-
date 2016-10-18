@@ -85,20 +85,12 @@ public class ShokanJyohoForShinseiJyohoProcess extends BatchProcessBase<Hihokens
         申請情報.setShiharaiHohoKubunCodeJoho(ShiharaiHohoKubun.口座払.getコード());
         申請情報.setKozaIDJoho(entity.get申請情報償還().getKozaIDShokan());
         申請情報.setJidoShokanTaishoFlagJoho(true);
-        if (!parameter.isJutakuAri()) {
-            申請情報.setHanteiKekkaSofuYMJoho(FlexibleDate.getNowDate().getYearMonth());
-            申請情報.setKetteishaUketoriYMJoho(FlexibleDate.getNowDate().getYearMonth());
-        } else if (MENU_ID_DBCMN43001.equals(parameter.getMenuId()) && 国保連共同処理受託区分_高額_ONE.equals(高額)
-                && (申請情報.getHanteiKekkaSofuYMJoho() == null || 申請情報.getHanteiKekkaSofuYMJoho().isEmpty())) {
-            申請情報.setHanteiKekkaSofuYMJoho(FlexibleDate.getNowDate().getYearMonth());
-            申請情報.setKetteishaUketoriYMJoho(FlexibleDate.getNowDate().getYearMonth());
-        } else if (MENU_ID_DBCMNL3001.equals(parameter.getMenuId()) && 国保連共同処理受託区分_事業高額_ONE.equals(事業高額)
-                && (申請情報.getHanteiKekkaSofuYMJoho() == null || 申請情報.getHanteiKekkaSofuYMJoho().isEmpty())) {
-            申請情報.setHanteiKekkaSofuYMJoho(FlexibleDate.getNowDate().getYearMonth());
-            申請情報.setKetteishaUketoriYMJoho(FlexibleDate.getNowDate().getYearMonth());
-        } else {
+        if (parameter.isJutakuAri()) {
             申請情報.setHanteiKekkaSofuYMJoho(FlexibleYearMonth.EMPTY);
             申請情報.setKetteishaUketoriYMJoho(FlexibleYearMonth.EMPTY);
+        } else {
+            申請情報.setHanteiKekkaSofuYMJoho(FlexibleDate.getNowDate().getYearMonth());
+            申請情報.setKetteishaUketoriYMJoho(FlexibleDate.getNowDate().getYearMonth());
         }
         申請情報.setState(EntityDataState.Modified);
         tempDbWriter.update(申請情報);

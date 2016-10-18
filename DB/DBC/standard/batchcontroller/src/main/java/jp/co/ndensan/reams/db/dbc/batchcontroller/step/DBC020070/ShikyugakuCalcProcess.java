@@ -510,9 +510,9 @@ public class ShikyugakuCalcProcess extends BatchKeyBreakBase<ShikyugakuCalcTempE
             entity.setShikyugaku_shikyuShinseishoSeiriNo(支給額計算一時_区分1.getShikyugaku_shikyuShinseishoSeiriNo());
             entity.setShikyugaku_rirekiNo(1);
             entity.setShikyugaku_hokenSeidoCode(保険制度コード_3);
-            entity.setShikyugaku_jikoFutanSeiriNo(高額合算.get証明書().getShikyugaku_jikoFutanSeiriNo());
-            entity.setShikyugaku_taishoKeisanKaishiYMD(高額合算.get証明書().getShikyugaku_taishoKeisanKaishiYMD());
-            entity.setShikyugaku_taishoKeisanShuryoYMD(高額合算.get証明書().getShikyugaku_taishoKeisanShuryoYMD());
+            entity.setShikyugaku_jikoFutanSeiriNo(高額合算.get証明書().getZenFutangaku_jikoFutanSeiriNo());
+            entity.setShikyugaku_taishoKeisanKaishiYMD(高額合算.get証明書().getZenFutangaku_taishoKeisanKaishiYMD());
+            entity.setShikyugaku_taishoKeisanShuryoYMD(高額合算.get証明書().getZenFutangaku_taishoKeisanShuryoYMD());
             entity.setShikyugaku_setaiFutanSogaku(addDecimal(全明細_負担額_70歳以上_合計, 全明細_負担額_70歳未満_合計));
             entity.setShikyugaku_setaiGassanGaku(全明細_支給額_合計);
             entity.setShikyugaku_over70_SetaiGassanGaku(全明細_負担額_70歳以上_合計);
@@ -525,10 +525,10 @@ public class ShikyugakuCalcProcess extends BatchKeyBreakBase<ShikyugakuCalcTempE
             entity.setShikyugaku_honninShikyugaku(前事業_支給額_対象者分のみ);
             entity.setShikyugaku_over70_honninShikyugaku(前事業_支給額_70歳以上_対象者分のみ);
             entity.setShikyugaku_teiShotoku_1_SaiKeisanUmu(ONE);
-            entity.setShikyugaku_kekkaRenrakusakiYubinNo(高額合算.get証明書().getShikyugaku_kekkaRenrakusakiYubinNo());
-            entity.setShikyugaku_kekkaRenrakusakiJusho(高額合算.get証明書().getShikyugaku_kekkaRenrakusakiJusho());
-            entity.setShikyugaku_kekkaRenrakusakiMeisho2(高額合算.get証明書().getShikyugaku_kekkaRenrakusakiMeisho2());
-            entity.setShikyugaku_kettaRenrakusakiMeisho1(高額合算.get証明書().getShikyugaku_kettaRenrakusakiMeisho1());
+            entity.setShikyugaku_kekkaRenrakusakiYubinNo(高額合算.get証明書().getZenFutangaku_atesakiYubinNo());
+            entity.setShikyugaku_kekkaRenrakusakiJusho(高額合算.get証明書().getZenFutangaku_atesakiJusho());
+            entity.setShikyugaku_kekkaRenrakusakiMeisho2(高額合算.get証明書().getZenFutangaku_madoguchi_TaishoshaHanteiCode());
+            entity.setShikyugaku_kettaRenrakusakiMeisho1(高額合算.get証明書().getZenFutangaku_atesakiShimei());
             entity.setShikyugaku_over70_FutangakuGokei(全明細_負担額_70歳以上_合計);
             entity.setShikyugaku_over70_ShikyugakuGokei(全明細_支給額_70歳以上_合計);
             entity.setShikyugaku_under70_FutangakuGokei(全明細_負担額_70歳未満_合計);
