@@ -703,11 +703,11 @@
                 <include refid="allColumns_DbWT2111ShokanShinsei" />,
                 <include refid="allColumns_DbWT1001Hihokensha" />,
                 <include refid="allColumns_ShokanServicePlan" />,
-                '',
-                '',
-                0,
-                0,
-                0
+                '' AS "servicePlan_tantokangoshienSemmoninNo",
+                '' AS "servicePlan_tekiyo",
+                0 AS "servicePlan_kaisu",
+                0 AS "servicePlan_serviceTanisu",
+                0 AS "servicePlan_serviceTanisuTotal"
             FROM "DbWT2111ShokanShinsei"
             INNER JOIN "DbWT1001Hihokensha"
             ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
@@ -725,9 +725,9 @@
                     <include refid="allColumns_ShokanServicePlan" />,
                     servicePlan."tantokangoshienSemmoninNo" AS "servicePlan_tantokangoshienSemmoninNo",
                     servicePlan."tekiyo" AS "servicePlan_tekiyo",
-                    0,
-                    0,
-                    0
+                    0 AS "servicePlan_kaisu",
+                    0 AS "servicePlan_serviceTanisu",
+                    0 AS "servicePlan_serviceTanisuTotal"
                 FROM "DbWT2111ShokanShinsei"
                 INNER JOIN "DbWT1001Hihokensha"
                 ON "DbWT2111ShokanShinsei"."renban" = "DbWT1001Hihokensha"."exRenban"
