@@ -242,7 +242,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
                     }
                 }
             }
-            if (is帳票出力 && 項目内容 != null && 項目内容.isEmpty()) {
+            if (is帳票出力 && 項目内容 != null && !項目内容.isEmpty()) {
                 HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(),
                         processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
                 report.writeBy(reportSourceWriter);
