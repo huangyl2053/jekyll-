@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufuoshirasetsuchisho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.core.shunyugaku.ShutsuryokuJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.kogakukyufu.KogakuKyufu_OshiraseTsuchi_ChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
@@ -39,7 +39,7 @@ public class KogakuKaigoServicehiOshiraseHakkoProcessParameter implements IBatch
     private FlexibleDate uketsukebi;
     private FlexibleDate keteibi;
     private FlexibleDate shinseishoTeishutsuKigen;
-    private ShutsuryokuJoken chushutsuJoken;
+    private KogakuKyufu_OshiraseTsuchi_ChushutsuJoken chushutsuJoken;
     private RString menuId;
     private boolean isJutakuAri;
     private RString orderBy;
@@ -81,8 +81,8 @@ public class KogakuKaigoServicehiOshiraseHakkoProcessParameter implements IBatch
     public KogakuKaigoServicehiOshiraseHakkoProcessParameter(FlexibleYearMonth shoriYm, FlexibleDate sakuseibi, HihokenshaNo hihokenshaNo,
             boolean isShinseishoHakko, boolean isOshiraseTsuchishoHakko, boolean isHakkoIchiranhyoHakko, boolean isKinyuKikanHyoji,
             FlexibleDate shiseibi, FlexibleDate uketsukebi, FlexibleDate keteibi, FlexibleDate shinseishoTeishutsuKigen,
-            ShutsuryokuJoken chushutsuJoken, RString menuId, boolean isJutakuAri, Long shutsuryokujunId, RString bunshoMojiretsu,
-            RString ininjoTeishutsusaki, RString shinseishoTelNoHyoji) {
+            KogakuKyufu_OshiraseTsuchi_ChushutsuJoken chushutsuJoken, RString menuId, boolean isJutakuAri, Long shutsuryokujunId,
+            RString bunshoMojiretsu, RString ininjoTeishutsusaki, RString shinseishoTelNoHyoji) {
         this.shoriYm = shoriYm;
         this.sakuseibi = sakuseibi;
         this.hihokenshaNo = hihokenshaNo;
