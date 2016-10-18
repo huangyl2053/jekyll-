@@ -8,16 +8,10 @@ package jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
-import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
-import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaishaBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SeigoseiCheck;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SeigoseiCheckBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.ShikakuFuseigoBusiness;
@@ -27,19 +21,21 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakufuseigo.ShikakuFuseigo
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1009ShikakuShutokuJogaishaDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shikakufuseigo.IShikakuFuseigoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.SeigoseiCheckManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShikakuShutokuJogaishaManager;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.TashichosonJushochiTokureiManager;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.TekiyoJogaishaManager;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshashikakusoshitsu.HihokenshashikakusoshitsuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshashikakuteisei.HihokenshaShikakuTeiseiManager;
+import jp.co.ndensan.reams.db.dbz.service.core.shikakuhenkouidou.HihokenshaShikakuHenkoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.tashichosonjushochitokureisyaidoteisei.TaShichosonJushochiTokureisyaIdoTeisei;
+import jp.co.ndensan.reams.db.dbz.service.core.tekiyojogaishaidoteisei.TekiyoJogaishaIdoTeiseiFinder;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -53,12 +49,14 @@ public class ShikakuSeigoseiCheckJohoManager {
 
     private final MapperProvider mapperProvider;
     private final SeigoseiCheckManager dbt1014manager;
-    private final HihokenshaDaichoManager dbt1001manager;
-    private final TekiyoJogaishaManager dbt1002manager;
-    private final TashichosonJushochiTokureiManager dbt1003manager;
     private final ShikakuShutokuJogaishaManager dbt1009manager;
     private final DbT1009ShikakuShutokuJogaishaDac dbt1009dac;
-    private static final int NUMBER_4 = 4;
+    private final HihokenshaShikakuHenkoManager henkoManager;
+    private final HihokenshaShikakuTeiseiManager tsiseiManager;
+    private final HihokenshaShikakuShutokuManager shutokuManager;
+    private final HihokenshashikakusoshitsuManager soshitsuManager;
+    private final TaShichosonJushochiTokureisyaIdoTeisei tashiManager;
+    private final TekiyoJogaishaIdoTeiseiFinder tekiyoManager;
 
     /**
      * コンストラクタです。
@@ -66,11 +64,14 @@ public class ShikakuSeigoseiCheckJohoManager {
     ShikakuSeigoseiCheckJohoManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbt1014manager = SeigoseiCheckManager.createInstance();
-        this.dbt1001manager = HihokenshaDaichoManager.createInstance();
-        this.dbt1002manager = TekiyoJogaishaManager.createInstance();
-        this.dbt1003manager = TashichosonJushochiTokureiManager.createInstance();
         this.dbt1009manager = new ShikakuShutokuJogaishaManager();
         this.dbt1009dac = InstanceProvider.create(DbT1009ShikakuShutokuJogaishaDac.class);
+        this.henkoManager = HihokenshaShikakuHenkoManager.createInstance();
+        this.tsiseiManager = HihokenshaShikakuTeiseiManager.createInstance();
+        this.shutokuManager = HihokenshaShikakuShutokuManager.createInstance();
+        this.soshitsuManager = HihokenshashikakusoshitsuManager.createInstance();
+        this.tashiManager = TaShichosonJushochiTokureisyaIdoTeisei.createInstance();
+        this.tekiyoManager = InstanceProvider.create(TekiyoJogaishaIdoTeiseiFinder.class);
     }
 
     /**
@@ -122,14 +123,29 @@ public class ShikakuSeigoseiCheckJohoManager {
      * @param 現在の資格の情報 HihokenshaDaicho
      * @param 修正後の資格の情報 HihokenshaDaicho
      * @param 整合性情報 SeigoseiCheck
+     * @param 生年月日 生年月日
      */
-    public void save資格情報(HihokenshaDaicho 現在の資格の情報, HihokenshaDaicho 修正後の資格の情報, SeigoseiCheck 整合性情報) {
-        if (現在の資格の情報.get異動日().compareTo(修正後の資格の情報.get異動日()) != 0) {
-            HihokenshaDaicho 資格の情報 = new HihokenshaDaicho(現在の資格の情報.get被保険者番号(),
-                    現在の資格の情報.get異動日(), add枝番(現在の資格の情報.get枝番()));
-            dbt1001manager.save被保険者台帳管理(set資格の情報(現在の資格の情報, 資格の情報));
-        } else {
-            dbt1001manager.save被保険者台帳管理(修正後の資格の情報);
+    public void save資格情報(HihokenshaDaicho 現在の資格の情報, HihokenshaDaicho 修正後の資格の情報, SeigoseiCheck 整合性情報, IDateOfBirth 生年月日) {
+        if (現在の資格の情報 == null && 修正後の資格の情報 != null) {
+            shutokuManager.saveHihokenshaShutoku(修正後の資格の情報, 生年月日);
+        }
+        if (現在の資格の情報 != null && 修正後の資格の情報 != null
+                && !(現在の資格の情報.get資格喪失年月日() != null && 現在の資格の情報.get資格喪失年月日().isEmpty())
+                && 修正後の資格の情報.get資格喪失年月日() != null && !修正後の資格の情報.get資格喪失年月日().isEmpty()) {
+            soshitsuManager.saveHihokenshaShikakuSoshitsu(修正後の資格の情報.get識別コード(),
+                    修正後の資格の情報.get被保険者番号(), 修正後の資格の情報.get資格喪失年月日(),
+                    修正後の資格の情報.get資格喪失事由コード(), 修正後の資格の情報.get資格喪失届出年月日());
+        }
+        if (現在の資格の情報 != null && 修正後の資格の情報 != null
+                && !(現在の資格の情報.get資格変更年月日() != null && 現在の資格の情報.get資格変更年月日().isEmpty())
+                && 修正後の資格の情報.get資格変更年月日() != null && !修正後の資格の情報.get資格変更年月日().isEmpty()) {
+            henkoManager.saveHihokenshaHenko(修正後の資格の情報);
+        }
+        if (現在の資格の情報 != null && 修正後の資格の情報 != null
+                && hanChanged資格の情報(現在の資格の情報, 修正後の資格の情報)) {
+            List<HihokenshaDaicho> list = new ArrayList<>();
+            list.add(修正後の資格の情報);
+            tsiseiManager.saveHihokenshaShikakuTeisei(現在の資格の情報.get被保険者番号(), 現在の資格の情報.get資格取得年月日(), null, list);
         }
         dbt1014manager.save整合性チェック(整合性情報.deleted());
     }
@@ -154,12 +170,7 @@ public class ShikakuSeigoseiCheckJohoManager {
      */
     public void save他特情報(TashichosonJushochiTokurei 現在の他特の情報,
             TashichosonJushochiTokurei 修正後の他特の情報, SeigoseiCheck 整合性情報) {
-        if (現在の他特の情報.get異動日().compareTo(修正後の他特の情報.get異動日()) != 0) {
-            TashichosonJushochiTokurei 他特の情報 = new TashichosonJushochiTokurei(現在の他特の情報.get識別コード(),
-                    現在の他特の情報.get異動日(), add枝番(現在の他特の情報.get枝番()));
-            dbt1003manager.save他市町村住所地特例(set他特の情報(現在の他特の情報, 他特の情報));
-        }
-        dbt1003manager.save他市町村住所地特例(修正後の他特の情報);
+        tashiManager.save異動訂正(現在の他特の情報, 修正後の他特の情報);
         dbt1014manager.save整合性チェック(整合性情報.deleted());
     }
 
@@ -171,12 +182,7 @@ public class ShikakuSeigoseiCheckJohoManager {
      * @param 整合性情報 SeigoseiCheck
      */
     public void save除外情報(TekiyoJogaisha 現在の除外の情報, TekiyoJogaisha 修正後の除外の情報, SeigoseiCheck 整合性情報) {
-        if (現在の除外の情報.get異動日().compareTo(修正後の除外の情報.get異動日()) != 0) {
-            TekiyoJogaisha 除外の情報 = new TekiyoJogaisha(現在の除外の情報.get識別コード(),
-                    現在の除外の情報.get異動日(), add枝番(現在の除外の情報.get枝番()));
-            dbt1002manager.save適用除外者(set除外の情報(現在の除外の情報, 除外の情報));
-        }
-        dbt1002manager.save適用除外者(修正後の除外の情報);
+        tekiyoManager.save異動訂正(現在の除外の情報, 修正後の除外の情報);
         dbt1014manager.save整合性チェック(整合性情報.deleted());
     }
 
@@ -194,87 +200,111 @@ public class ShikakuSeigoseiCheckJohoManager {
         return entity.getRirekiNo();
     }
 
-    private HihokenshaDaicho set資格の情報(HihokenshaDaicho 資格の情報修正前, HihokenshaDaicho 資格の情報修正後) {
-        HihokenshaDaichoBuilder 資格の情報修正後Builder = 資格の情報修正後.createBuilderForEdit();
-        資格の情報修正後Builder.set異動事由コード(ObjectUtil.defaultIfNull(資格の情報修正前.get異動事由コード(), RString.EMPTY));
-        資格の情報修正後Builder.set市町村コード(ObjectUtil.defaultIfNull(資格の情報修正前.get市町村コード(), LasdecCode.EMPTY));
-        資格の情報修正後Builder.set識別コード(ObjectUtil.defaultIfNull(資格の情報修正前.get識別コード(), ShikibetsuCode.EMPTY));
-        資格の情報修正後Builder.set被保険者区分コード(ObjectUtil.defaultIfNull(資格の情報修正前.get被保険者区分コード(), RString.EMPTY));
-        資格の情報修正後Builder.set資格喪失事由コード(ObjectUtil.defaultIfNull(資格の情報修正前.get資格喪失事由コード(), RString.EMPTY));
-        資格の情報修正後Builder.set資格喪失年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格喪失年月日(), FlexibleDate.EMPTY));
-        資格の情報修正後Builder.set資格喪失届出年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格喪失届出年月日(), FlexibleDate.EMPTY));
-        資格の情報修正後Builder.set資格変更事由コード(ObjectUtil.defaultIfNull(資格の情報修正前.get資格変更事由コード(), RString.EMPTY));
-        資格の情報修正後Builder.set資格変更年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格変更年月日(), FlexibleDate.EMPTY));
-        資格の情報修正後Builder.set資格変更届出年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格変更届出年月日(), FlexibleDate.EMPTY));
-        資格の情報修正後Builder.set資格取得事由コード(ObjectUtil.defaultIfNull(資格の情報修正前.get資格取得事由コード(), RString.EMPTY));
-        資格の情報修正後Builder.set資格取得年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格取得年月日(), FlexibleDate.EMPTY));
-        資格の情報修正後Builder.set資格取得届出年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get資格取得届出年月日(), FlexibleDate.EMPTY));
-        資格の情報修正後Builder.set第1号資格取得年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get第1号資格取得年月日(), FlexibleDate.EMPTY));
-        資格の情報修正後Builder.set住所地特例適用事由コード(ObjectUtil.defaultIfNull(資格の情報修正前.get住所地特例適用事由コード(), RString.EMPTY));
-        資格の情報修正後Builder.set適用年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get適用年月日(), FlexibleDate.EMPTY));
-        資格の情報修正後Builder.set適用届出年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get適用届出年月日(), FlexibleDate.EMPTY));
-        資格の情報修正後Builder.set住所地特例解除事由コード(
-                ObjectUtil.defaultIfNull(資格の情報修正前.get住所地特例解除事由コード(), RString.EMPTY));
-        資格の情報修正後Builder.set解除年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get解除年月日(), FlexibleDate.EMPTY));
-        資格の情報修正後Builder.set解除届出年月日(ObjectUtil.defaultIfNull(資格の情報修正前.get解除届出年月日(), FlexibleDate.EMPTY));
-        資格の情報修正後Builder.set住所地特例フラグ(ObjectUtil.defaultIfNull(資格の情報修正前.get住所地特例フラグ(), RString.EMPTY));
-        資格の情報修正後Builder.set広域内住所地特例フラグ(ObjectUtil.defaultIfNull(資格の情報修正前.get広域内住所地特例フラグ(), RString.EMPTY));
-        資格の情報修正後Builder.set広住特措置元市町村コード(
-                ObjectUtil.defaultIfNull(資格の情報修正前.get広住特措置元市町村コード(), LasdecCode.EMPTY));
-        資格の情報修正後Builder.set旧市町村コード(ObjectUtil.defaultIfNull(資格の情報修正前.get旧市町村コード(), LasdecCode.EMPTY));
-        資格の情報修正後Builder.set論理削除フラグ(true);
-        return 資格の情報修正後Builder.build();
+    private boolean hanChanged資格の情報(HihokenshaDaicho 資格の情報修正前, HihokenshaDaicho 資格の情報修正後) {
+        RString ret = RString.EMPTY;
+        if (資格の情報修正後.get異動事由コード() != null && !資格の情報修正後.get異動事由コード().equals(資格の情報修正前.get異動事由コード())) {
+            ret = null;
+        }
+        if (資格の情報修正後.get市町村コード() != null && !資格の情報修正後.get市町村コード().equals(資格の情報修正前.get市町村コード())) {
+            ret = null;
+        }
+        if (資格の情報修正後.get識別コード() != null && !資格の情報修正後.get識別コード().equals(資格の情報修正前.get識別コード())) {
+            ret = null;
+        }
+        if (資格の情報修正後.get被保険者区分コード() != null
+                && !資格の情報修正後.get被保険者区分コード().equals(資格の情報修正前.get被保険者区分コード())) {
+            ret = null;
+        }
+        if (資格の情報修正後.get資格喪失事由コード() != null
+                && !資格の情報修正後.get資格喪失事由コード().equals(資格の情報修正前.get資格喪失事由コード())) {
+            ret = null;
+        }
+        if (資格の情報修正後.get資格喪失年月日() != null
+                && !資格の情報修正後.get資格喪失年月日().equals(資格の情報修正前.get資格喪失年月日())) {
+            ret = null;
+        }
+        if (資格の情報修正後.get資格喪失届出年月日() != null
+                && !資格の情報修正後.get資格喪失届出年月日().equals(資格の情報修正前.get資格喪失届出年月日())) {
+            ret = null;
+        }
+        if (資格の情報修正後.get資格変更事由コード() != null
+                && !資格の情報修正後.get資格変更事由コード().equals(資格の情報修正前.get資格変更事由コード())) {
+            ret = null;
+        }
+        return ret == null || hanChanged資格の情報2(資格の情報修正前, 資格の情報修正後) == null
+                || hanChanged資格の情報3(資格の情報修正前, 資格の情報修正後) == null;
     }
 
-    private TashichosonJushochiTokurei set他特の情報(TashichosonJushochiTokurei 他特の情報修正前,
-            TashichosonJushochiTokurei 他特の情報修正後) {
-        TashichosonJushochiTokureiBuilder 他特の情報修正後Builder = 他特の情報修正後.createBuilderForEdit();
-        他特の情報修正後Builder.set異動事由コード(ObjectUtil.defaultIfNull(他特の情報修正前.get異動事由コード(), RString.EMPTY));
-        他特の情報修正後Builder.set市町村コード(ObjectUtil.defaultIfNull(他特の情報修正前.get市町村コード(), LasdecCode.EMPTY));
-        他特の情報修正後Builder.set他市町村住所地特例適用事由コード(
-                ObjectUtil.defaultIfNull(他特の情報修正前.get他市町村住所地特例適用事由コード(), RString.EMPTY));
-        他特の情報修正後Builder.set適用年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get適用年月日(), FlexibleDate.EMPTY));
-        他特の情報修正後Builder.set適用届出年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get適用届出年月日(), FlexibleDate.EMPTY));
-        他特の情報修正後Builder.set適用受付年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get適用受付年月日(), FlexibleDate.EMPTY));
-        他特の情報修正後Builder.set他市町村住所地特例解除事由コード(
-                ObjectUtil.defaultIfNull(他特の情報修正前.get他市町村住所地特例解除事由コード(), RString.EMPTY));
-        他特の情報修正後Builder.set解除年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get解除年月日(), FlexibleDate.EMPTY));
-        他特の情報修正後Builder.set解除届出年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get解除届出年月日(), FlexibleDate.EMPTY));
-        他特の情報修正後Builder.set解除受付年月日(ObjectUtil.defaultIfNull(他特の情報修正前.get解除受付年月日(), FlexibleDate.EMPTY));
-        他特の情報修正後Builder.set措置保険者番号(ObjectUtil.defaultIfNull(他特の情報修正前.get措置保険者番号(), ShoKisaiHokenshaNo.EMPTY));
-        他特の情報修正後Builder.set措置被保険者番号(ObjectUtil.defaultIfNull(他特の情報修正前.get措置被保険者番号(), HihokenshaNo.EMPTY));
-        他特の情報修正後Builder.set他特例連絡票発行年月日(
-                ObjectUtil.defaultIfNull(他特の情報修正前.get他特例連絡票発行年月日(), FlexibleDate.EMPTY));
-        他特の情報修正後Builder.set施設退所通知発行年月日(
-                ObjectUtil.defaultIfNull(他特の情報修正前.get施設退所通知発行年月日(), FlexibleDate.EMPTY));
-        他特の情報修正後Builder.set施設変更通知発行年月日(
-                ObjectUtil.defaultIfNull(他特の情報修正前.get施設変更通知発行年月日(), FlexibleDate.EMPTY));
-        他特の情報修正後Builder.set論理削除フラグ(true);
-        return 他特の情報修正後Builder.build();
+    private RString hanChanged資格の情報2(HihokenshaDaicho 資格の情報修正前, HihokenshaDaicho 資格の情報修正後) {
+        if (資格の情報修正後.get資格変更年月日() != null
+                && !資格の情報修正後.get資格変更年月日().equals(資格の情報修正前.get資格変更年月日())) {
+            return null;
+        }
+        if (資格の情報修正後.get資格変更届出年月日() != null
+                && !資格の情報修正後.get資格変更届出年月日().equals(資格の情報修正前.get資格変更届出年月日())) {
+            return null;
+        }
+        if (資格の情報修正後.get資格取得事由コード() != null
+                && !資格の情報修正後.get資格取得事由コード().equals(資格の情報修正前.get資格取得事由コード())) {
+            return null;
+        }
+        if (資格の情報修正後.get資格取得年月日() != null
+                && !資格の情報修正後.get資格取得年月日().equals(資格の情報修正前.get資格取得年月日())) {
+            return null;
+        }
+        if (資格の情報修正後.get資格取得届出年月日() != null
+                && !資格の情報修正後.get資格取得届出年月日().equals(資格の情報修正前.get資格取得届出年月日())) {
+            return null;
+        }
+        if (資格の情報修正後.get第1号資格取得年月日() != null
+                && !資格の情報修正後.get第1号資格取得年月日().equals(資格の情報修正前.get第1号資格取得年月日())) {
+            return null;
+        }
+        if (資格の情報修正後.get住所地特例適用事由コード() != null
+                && !資格の情報修正後.get住所地特例適用事由コード().equals(資格の情報修正前.get住所地特例適用事由コード())) {
+            return null;
+        }
+        if (資格の情報修正後.get適用年月日() != null && !資格の情報修正後.get適用年月日().equals(資格の情報修正前.get適用年月日())) {
+            return null;
+        }
+        if (資格の情報修正後.get適用届出年月日() != null
+                && !資格の情報修正後.get適用届出年月日().equals(資格の情報修正前.get適用届出年月日())) {
+            return null;
+        }
+        return RString.EMPTY;
     }
 
-    private TekiyoJogaisha set除外の情報(TekiyoJogaisha 除外の情報修正前, TekiyoJogaisha 除外の情報修正後) {
-        TekiyoJogaishaBuilder 除外の情報修正後Builder = 除外の情報修正後.createBuilderForEdit();
-        除外の情報修正後Builder.set異動事由コード(ObjectUtil.defaultIfNull(除外の情報修正前.get異動事由コード(), RString.EMPTY));
-        除外の情報修正後Builder.set市町村コード(ObjectUtil.defaultIfNull(除外の情報修正前.get市町村コード(), LasdecCode.EMPTY));
-        除外の情報修正後Builder.set適用除外解除事由コード(
-                ObjectUtil.defaultIfNull(除外の情報修正前.get適用除外解除事由コード(), RString.EMPTY));
-        除外の情報修正後Builder.set解除年月日(ObjectUtil.defaultIfNull(除外の情報修正前.get解除年月日(), FlexibleDate.EMPTY));
-        除外の情報修正後Builder.set解除届出年月日(ObjectUtil.defaultIfNull(除外の情報修正前.get解除届出年月日(), FlexibleDate.EMPTY));
-        除外の情報修正後Builder.set適用除外適用事由コード(
-                ObjectUtil.defaultIfNull(除外の情報修正前.get適用除外適用事由コード(), RString.EMPTY));
-        除外の情報修正後Builder.set適用年月日(ObjectUtil.defaultIfNull(除外の情報修正前.get適用年月日(), FlexibleDate.EMPTY));
-        除外の情報修正後Builder.set適用届出年月日(ObjectUtil.defaultIfNull(除外の情報修正前.get適用届出年月日(), FlexibleDate.EMPTY));
-        除外の情報修正後Builder.set適用受付年月日(ObjectUtil.defaultIfNull(除外の情報修正前.get適用受付年月日(), FlexibleDate.EMPTY));
-        除外の情報修正後Builder.set解除受付年月日(ObjectUtil.defaultIfNull(除外の情報修正前.get解除受付年月日(), FlexibleDate.EMPTY));
-        除外の情報修正後Builder.set入所通知発行日(ObjectUtil.defaultIfNull(除外の情報修正前.get入所通知発行日(), FlexibleDate.EMPTY));
-        除外の情報修正後Builder.set退所通知発行日(ObjectUtil.defaultIfNull(除外の情報修正前.get退所通知発行日(), FlexibleDate.EMPTY));
-        除外の情報修正後Builder.set変更通知発行日(ObjectUtil.defaultIfNull(除外の情報修正前.get変更通知発行日(), FlexibleDate.EMPTY));
-        除外の情報修正後Builder.set論理削除フラグ(true);
-        return 除外の情報修正後Builder.build();
-    }
-
-    private RString add枝番(RString 枝番) {
-        return new RString(Integer.parseInt(枝番.trim().toString()) + 1).padZeroToLeft(NUMBER_4);
+    private RString hanChanged資格の情報3(HihokenshaDaicho 資格の情報修正前, HihokenshaDaicho 資格の情報修正後) {
+        if (資格の情報修正後.get住所地特例解除事由コード() != null
+                && !資格の情報修正後.get住所地特例解除事由コード().equals(資格の情報修正前.get住所地特例解除事由コード())) {
+            return null;
+        }
+        if (資格の情報修正後.get解除年月日() != null && !資格の情報修正後.get解除年月日().equals(資格の情報修正前.get解除年月日())) {
+            return null;
+        }
+        if (資格の情報修正後.get解除届出年月日() != null
+                && !資格の情報修正後.get解除届出年月日().equals(資格の情報修正前.get解除届出年月日())) {
+            return null;
+        }
+        if (資格の情報修正後.get住所地特例フラグ() != null
+                && !資格の情報修正後.get住所地特例フラグ().equals(資格の情報修正前.get住所地特例フラグ())) {
+            return null;
+        }
+        if (資格の情報修正後.get広域内住所地特例フラグ() != null
+                && !資格の情報修正後.get広域内住所地特例フラグ().equals(資格の情報修正前.get広域内住所地特例フラグ())) {
+            return null;
+        }
+        if (資格の情報修正後.get広住特措置元市町村コード() != null
+                && !資格の情報修正後.get広住特措置元市町村コード().equals(資格の情報修正前.get広住特措置元市町村コード())) {
+            return null;
+        }
+        if (資格の情報修正後.get旧市町村コード() != null
+                && !資格の情報修正後.get旧市町村コード().equals(資格の情報修正前.get旧市町村コード())) {
+            return null;
+        }
+        if (!(資格の情報修正後.is論理削除フラグ() && 資格の情報修正前.is論理削除フラグ())) {
+            return null;
+        }
+        return RString.EMPTY;
     }
 }
