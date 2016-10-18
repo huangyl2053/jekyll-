@@ -16,9 +16,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 特定個人情報提供管理テーブルのエンティティクラスです。
+ *
+ * @reamsid_L DBU-9999-013 sunhaidi
  */
 public class DbT7304TokuteiKojinJohoTeikyoKanriEntity extends DbTableEntityBase<DbT7304TokuteiKojinJohoTeikyoKanriEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7304TokuteiKojinJohoTeikyoKanri");
 
@@ -98,7 +101,6 @@ public class DbT7304TokuteiKojinJohoTeikyoKanriEntity extends DbTableEntityBase<
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
-
 
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
@@ -701,8 +703,7 @@ public class DbT7304TokuteiKojinJohoTeikyoKanriEntity extends DbTableEntityBase<
      * このエンティティの主キーが他の{@literal DbT7304TokuteiKojinJohoTeikyoKanriEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT7304TokuteiKojinJohoTeikyoKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT7304TokuteiKojinJohoTeikyoKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7304TokuteiKojinJohoTeikyoKanriEntity other) {
@@ -757,6 +758,7 @@ public class DbT7304TokuteiKojinJohoTeikyoKanriEntity extends DbTableEntityBase<
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

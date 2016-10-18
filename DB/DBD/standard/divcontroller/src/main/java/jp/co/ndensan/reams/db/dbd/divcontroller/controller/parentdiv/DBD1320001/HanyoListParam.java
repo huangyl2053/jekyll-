@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 画面設計_DBD1320001_汎用リスト出力(介護受給共通)。
  *
- * @reamsid_L DBD-3930-011 liwul
+ * @reamsid_L DBD-3930-010 liwul
  */
 public class HanyoListParam {
 
@@ -76,7 +76,9 @@ public class HanyoListParam {
      * @return ResponseData<HanyoListParamDiv>
      */
     public ResponseData<HanyoListParamDiv> onClick_onRestoreBatchParameter(HanyoListParamDiv div) {
-        getHandler(div).restoreBatchParameter(ResponseHolder.getMenuID());
+//        if () {
+//            getHandler(div).restoreBatchParameter(ResponseHolder.getMenuID());
+//        }
         return ResponseData.of(div).respond();
     }
 
