@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-0120-010 lishengli
  */
 public class HyojiJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +25,8 @@ public class HyojiJokenDiv extends Panel {
     private TextBoxDate txtHyojiKikanFrom;
     @JsonProperty("txtHyojiKikanTo")
     private TextBoxDate txtHyojiKikanTo;
+    @JsonProperty("txtSaidaiHyojiKensu")
+    private TextBoxNum txtSaidaiHyojiKensu;
     @JsonProperty("radHyojiJokenWaritsukeMikanryo")
     private RadioButton radHyojiJokenWaritsukeMikanryo;
     @JsonProperty("radHyojiJokenWaritsukeKanryo")
@@ -78,6 +80,24 @@ public class HyojiJokenDiv extends Panel {
     @JsonProperty("txtHyojiKikanTo")
     public void setTxtHyojiKikanTo(TextBoxDate txtHyojiKikanTo) {
         this.txtHyojiKikanTo = txtHyojiKikanTo;
+    }
+
+    /*
+     * gettxtSaidaiHyojiKensu
+     * @return txtSaidaiHyojiKensu
+     */
+    @JsonProperty("txtSaidaiHyojiKensu")
+    public TextBoxNum getTxtSaidaiHyojiKensu() {
+        return txtSaidaiHyojiKensu;
+    }
+
+    /*
+     * settxtSaidaiHyojiKensu
+     * @param txtSaidaiHyojiKensu txtSaidaiHyojiKensu
+     */
+    @JsonProperty("txtSaidaiHyojiKensu")
+    public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+        this.txtSaidaiHyojiKensu = txtSaidaiHyojiKensu;
     }
 
     /*

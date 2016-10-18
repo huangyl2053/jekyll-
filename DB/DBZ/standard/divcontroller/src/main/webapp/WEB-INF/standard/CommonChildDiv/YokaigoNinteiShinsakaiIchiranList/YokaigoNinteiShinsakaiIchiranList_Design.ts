@@ -57,6 +57,10 @@ module DBZ {
                 return new UZA.TextBoxDate(this.convFiledName("txtHyojiKikanTo"));
             }
 
+            public txtSaidaiHyojiKensu(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtSaidaiHyojiKensu"));
+            }
+
             public radHyojiJokenWaritsukeMikanryo(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radHyojiJokenWaritsukeMikanryo"));
             }
