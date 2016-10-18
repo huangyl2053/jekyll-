@@ -207,7 +207,7 @@ public final class JukyushaDaichoReport extends Report<JukyushaDaichoReportSourc
             }
         }
 
-        for (int page = 1; page < pageMax; page++) {
+        for (int page = 1; page <= pageMax; page++) {
             for (int index = page * (page - 1); index < NOCOUNT_7 * page; index++) {
                 IJukyushaDaichoEditor bodyEditor = new JukyushaDaichoEditor(帳票出力用受給者台帳, index, page, pageMax);
                 IJukyushaDaichoBuilder builder = new JukyushaDaichoBuilder(bodyEditor);
