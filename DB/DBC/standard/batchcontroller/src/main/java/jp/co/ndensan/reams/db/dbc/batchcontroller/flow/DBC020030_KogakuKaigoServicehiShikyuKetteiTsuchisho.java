@@ -40,7 +40,8 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho
     protected void defineFlow() {
         executeStep(高額サービス一時テーブルの登録);
         executeStep(高額サービス一時テーブルの設定);
-        if (決定日一括更新区分_2.equals(getParameter().get決定日一括更新区分()) && getParameter().get決定日() != null) {
+        if (決定日一括更新区分_2.equals(getParameter().get決定日一括更新区分()) && getParameter().get決定日() != null
+                && !getParameter().get決定日().toDateString().isEmpty()) {
             executeStep(高額介護サービス費支給判定結果の更新);
         }
         executeStep(帳票発行);

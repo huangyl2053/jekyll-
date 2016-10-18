@@ -435,7 +435,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             その他金額 = 今回認定結果.getSonotaKingaku();
         }
         Decimal 合計 = Decimal.ZERO;
-        合計.add(預貯金額).add(有価証券評価概算額).add(その他金額);
+        合計 = 合計.add(預貯金額).add(有価証券評価概算額).add(その他金額);
         source.list6_2 = DecimalFormatter.toコンマ区切りRString(合計, 0);
     }
 

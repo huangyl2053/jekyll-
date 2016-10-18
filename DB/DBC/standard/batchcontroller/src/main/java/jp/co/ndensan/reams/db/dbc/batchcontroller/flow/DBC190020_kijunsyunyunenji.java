@@ -66,7 +66,6 @@ public class DBC190020_kijunsyunyunenji extends BatchFlowBase<DBC190020_kijunsyu
     protected void defineFlow() {
 
         executeStep(世帯員所得情報一時テーブルに登録1);
-
         executeStep(世帯員把握_TEMP_2);
         executeStep(世帯員所得情報一時テーブルに更新);
         executeStep(世帯員所得情報一時テーブルに重複削除);
@@ -77,7 +76,6 @@ public class DBC190020_kijunsyunyunenji extends BatchFlowBase<DBC190020_kijunsyu
         executeStep(対象世帯員クラスに削除);
 
         executeStep(世帯員所得情報一時テーブルに登録2);
-
         executeStep(世帯員把握_TEMP_2);
         executeStep(世帯員所得情報一時テーブルに更新);
         executeStep(世帯員所得情報一時テーブルに重複削除);

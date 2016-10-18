@@ -40,7 +40,7 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiPageBreak extends PageBreaker<J
             ReportLineRecord<JigyoKogakuShikyuFushikyuKetteTsuchiSource> nextSource) {
         boolean flg = false;
         if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.郵便番号.get項目ID())
-                && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
+                && !currentSource.getSource().yubinNo.equals(nextSource.getSource().yubinNo)) {
             flg = true;
         } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.町域コード.get項目ID())
                 && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
@@ -52,16 +52,16 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiPageBreak extends PageBreaker<J
                 && !currentSource.getSource().kanaMeisho.equals(nextSource.getSource().kanaMeisho)) {
             flg = true;
         } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.市町村コード.get項目ID())
-                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+                && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
             flg = true;
         } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.証記載保険者番号.get項目ID())
                 && !currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             flg = true;
         } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.被保険者番号.get項目ID())
-                && !currentSource.getSource().listUpper_3.equals(nextSource.getSource().listUpper_3)) {
+                && !currentSource.getSource().hihokenshaNo.equals(nextSource.getSource().hihokenshaNo)) {
             flg = true;
         } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.決定通知番号.get項目ID())
-                && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
+                && !currentSource.getSource().tsuchishoNo.equals(nextSource.getSource().tsuchishoNo)) {
             flg = true;
         } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.資格状態区分.get項目ID())
                 && !currentSource.getSource().shikakuJyotaiKubun.equals(nextSource.getSource().shikakuJyotaiKubun)) {
