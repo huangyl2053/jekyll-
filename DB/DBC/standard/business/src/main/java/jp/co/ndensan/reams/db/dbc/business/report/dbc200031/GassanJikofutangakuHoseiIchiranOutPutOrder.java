@@ -20,6 +20,10 @@ public enum GassanJikofutangakuHoseiIchiranOutPutOrder implements IReportItems {
      */
     被保険者番号("0104", "被保険者番号", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"hihokenshaNo\""),
     /**
+     * 申請年月日
+     */
+    申請年月日("0333", "申請年月日", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"shinseiYMD\""),
+    /**
      * 対象年度
      */
     対象年度("0334", "対象年度", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"taishoNendo\""),
@@ -39,6 +43,14 @@ public enum GassanJikofutangakuHoseiIchiranOutPutOrder implements IReportItems {
      * 行政区コード
      */
     行政区コード("0004", "行政区コード", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"gyoseikuCode\""),
+    /**
+     * 氏名５０音カナ
+     */
+    氏名５０音カナ("0010", "氏名５０音カナ", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"hihokenshaShimeiKana\""),
+    /**
+     * 町域コード
+     */
+    町域コード("0002", "町域コード", "\"KogakugassanJikofutangakuInfoHoseiTemp\".\"choikiCode\""),
     /**
      * 郵便番号
      */
