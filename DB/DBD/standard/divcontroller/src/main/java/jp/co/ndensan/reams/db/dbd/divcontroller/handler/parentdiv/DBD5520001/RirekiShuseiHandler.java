@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4101NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4101NinteiShinseiJohoBuilder;
@@ -462,36 +461,36 @@ public class RirekiShuseiHandler {
     }
 
     private void set指定サービス種類(RirekiShuseiDataPass dataPass, JukyushaDaichoBuilder 受給者台帳Builder) {
-        受給者台帳Builder.set指定サービス種類01(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類01(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類02(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類02(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類03(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類03(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類04(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類04(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類05(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類05(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類06(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類06(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類07(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類07(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類08(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類08(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類09(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類09(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類10(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類10(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類11(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類11(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類12(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類12(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類13(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類13(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類14(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類14(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類15(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類15(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類16(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類16(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類17(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類17(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類18(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類18(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類19(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類19(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類20(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類20(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類21(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類21(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類22(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類22(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類23(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類23(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類24(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類24(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類25(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類25(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類26(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類26(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類27(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類27(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類28(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類28(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類29(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類29(), ServiceShuruiCode.EMPTY));
-        受給者台帳Builder.set指定サービス種類30(ObjectUtil.defaultIfNull(dataPass.get指定サービス種類30(), ServiceShuruiCode.EMPTY));
+        受給者台帳Builder.set指定サービス種類01(dataPass.get指定サービス種類01());
+        受給者台帳Builder.set指定サービス種類02(dataPass.get指定サービス種類02());
+        受給者台帳Builder.set指定サービス種類03(dataPass.get指定サービス種類03());
+        受給者台帳Builder.set指定サービス種類04(dataPass.get指定サービス種類04());
+        受給者台帳Builder.set指定サービス種類05(dataPass.get指定サービス種類05());
+        受給者台帳Builder.set指定サービス種類06(dataPass.get指定サービス種類06());
+        受給者台帳Builder.set指定サービス種類07(dataPass.get指定サービス種類07());
+        受給者台帳Builder.set指定サービス種類08(dataPass.get指定サービス種類08());
+        受給者台帳Builder.set指定サービス種類09(dataPass.get指定サービス種類09());
+        受給者台帳Builder.set指定サービス種類10(dataPass.get指定サービス種類10());
+        受給者台帳Builder.set指定サービス種類11(dataPass.get指定サービス種類11());
+        受給者台帳Builder.set指定サービス種類12(dataPass.get指定サービス種類12());
+        受給者台帳Builder.set指定サービス種類13(dataPass.get指定サービス種類13());
+        受給者台帳Builder.set指定サービス種類14(dataPass.get指定サービス種類14());
+        受給者台帳Builder.set指定サービス種類15(dataPass.get指定サービス種類15());
+        受給者台帳Builder.set指定サービス種類16(dataPass.get指定サービス種類16());
+        受給者台帳Builder.set指定サービス種類17(dataPass.get指定サービス種類17());
+        受給者台帳Builder.set指定サービス種類18(dataPass.get指定サービス種類18());
+        受給者台帳Builder.set指定サービス種類19(dataPass.get指定サービス種類19());
+        受給者台帳Builder.set指定サービス種類20(dataPass.get指定サービス種類20());
+        受給者台帳Builder.set指定サービス種類21(dataPass.get指定サービス種類21());
+        受給者台帳Builder.set指定サービス種類22(dataPass.get指定サービス種類22());
+        受給者台帳Builder.set指定サービス種類23(dataPass.get指定サービス種類23());
+        受給者台帳Builder.set指定サービス種類24(dataPass.get指定サービス種類24());
+        受給者台帳Builder.set指定サービス種類25(dataPass.get指定サービス種類25());
+        受給者台帳Builder.set指定サービス種類26(dataPass.get指定サービス種類26());
+        受給者台帳Builder.set指定サービス種類27(dataPass.get指定サービス種類27());
+        受給者台帳Builder.set指定サービス種類28(dataPass.get指定サービス種類28());
+        受給者台帳Builder.set指定サービス種類29(dataPass.get指定サービス種類29());
+        受給者台帳Builder.set指定サービス種類30(dataPass.get指定サービス種類30());
     }
 
     private void setRowList(List<RirekiShuseiBusiness> rstList) {
