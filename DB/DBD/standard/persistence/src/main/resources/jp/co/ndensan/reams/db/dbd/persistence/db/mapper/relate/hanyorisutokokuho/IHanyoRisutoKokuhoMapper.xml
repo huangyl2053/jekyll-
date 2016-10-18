@@ -595,10 +595,10 @@
 																													
 	WHERE 国保資格情報."isDeleted" = false
         <if test="is基準日">
-                AND (国保資格情報."shikakuSoshitsuYMD" IS NOT NULL
+                AND ((国保資格情報."shikakuSoshitsuYMD" IS NOT NULL
                     AND  国保資格情報."shikakuShutokuYMD" <![CDATA[<=]]> #{kizyunnichi} AND #{kizyunnichi} <![CDATA[<=]]> 国保資格情報."shikakuSoshitsuYMD")
                 OR (国保資格情報."shikakuSoshitsuYMD" IS NULL
-                    AND 国保資格情報."shikakuShutokuYMD" <![CDATA[<=]]> #{kizyunnichi})
+                    AND 国保資格情報."shikakuShutokuYMD" <![CDATA[<=]]> #{kizyunnichi}))
             </if>
             <if test="is範囲">
                 <if test="is取得日 and has日付範囲From">

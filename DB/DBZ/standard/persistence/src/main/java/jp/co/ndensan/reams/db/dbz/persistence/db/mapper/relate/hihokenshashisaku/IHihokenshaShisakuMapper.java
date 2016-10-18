@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshashisaku;
+package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshashisaku;
 
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashisaku.HihokenshaShisakuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshashisaku.HihokenshaShisakuRelateEntity;
 
 /**
  * 被保険者資格詳細異動用、宛名情報を取得です。

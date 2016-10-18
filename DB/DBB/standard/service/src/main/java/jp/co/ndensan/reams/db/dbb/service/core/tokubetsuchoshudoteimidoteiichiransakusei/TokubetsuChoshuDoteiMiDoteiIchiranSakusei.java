@@ -80,7 +80,7 @@ public class TokubetsuChoshuDoteiMiDoteiIchiranSakusei {
             tsuchiNaiyoCode = TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード();
         }
         return new TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter(shoriNendo,
-                kaishuTsuki, hosokuTsukiList, tsuchiNaiyoCode, atenaKey);
+                kaishuTsuki, hosokuTsukiList, tsuchiNaiyoCode);
     }
 
 }

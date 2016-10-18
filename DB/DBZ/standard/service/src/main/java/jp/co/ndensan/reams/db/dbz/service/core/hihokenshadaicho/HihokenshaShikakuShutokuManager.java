@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho;
+package jp.co.ndensan.reams.db.dbz.service.core.hihokenshadaicho;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
-import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaicho.IHihokenshaShikakuShutokuMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshadaicho.IHihokenshaShikakuShutokuMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
@@ -29,6 +29,9 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -188,11 +191,11 @@ public class HihokenshaShikakuShutokuManager {
         RString age = get年齢(当該識別対象の生年月日, 資格取得日);
         if (ShikakuShutokuJiyu.年齢到達.getコード().equals(資格取得事由コード)) {
             if (!(Integer.parseInt(age.toString()) >= AGE_65)) {
-                throw new ApplicationException(DbaErrorMessages.資格取得日時点１号被保険者年齢でない.getMessage());
+                throw new ApplicationException(RRErrorMessages.資格取得日時点１号被保険者年齢でない.getMessage());
             }
         } else {
             if (!(Integer.parseInt(age.toString()) >= AGE_40)) {
-                throw new ApplicationException(DbaErrorMessages.資格取得日時点２号被保険者年齢未到達.getMessage());
+                throw new ApplicationException(RRErrorMessages.資格取得日時点２号被保険者年齢未到達.getMessage());
             }
         }
     }
@@ -224,5 +227,28 @@ public class HihokenshaShikakuShutokuManager {
     private RString get年齢(IDateOfBirth dateOfBirth, FlexibleDate shikakuShutokuYMD) {
         AgeCalculator ageCalculator = new AgeCalculator(dateOfBirth, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日, shikakuShutokuYMD);
         return ageCalculator.get年齢();
+    }
+
+    private static enum RRErrorMessages implements IMessageGettable {
+
+        資格取得日時点２号被保険者年齢未到達(21, "取得日時点で２号被保険者年齢に到達していません。"),
+        資格取得日時点１号被保険者年齢でない(22, "取得日時点で１号被保険者ではありません。");
+
+        private final Message message;
+
+        /**
+         * コンストラクタです。
+         *
+         * @param no 番号
+         * @param message メッセージ
+         */
+        private RRErrorMessages(int no, String message) {
+            this.message = new ErrorMessage(toCode("DBAE", no), message);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }

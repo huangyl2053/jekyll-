@@ -44,9 +44,11 @@ public class JukyushagenmenshinseiProcess extends BatchProcessBase<NinteijyotaiE
     private final Decimal 介護保険負担限度額認定 = new Decimal(5);
     private final Decimal 特別地域加算減免 = new Decimal(6);
     private Decimal num = new Decimal(0);
+    private Decimal num1 = new Decimal(0);
     private Decimal localflag = new Decimal(1);
     private static final Decimal ZERO = new Decimal(0);
     private static final Decimal SIX = new Decimal(6);
+    private static final Decimal SEVEN = new Decimal(7);
     private static final Decimal THIRTHEEN = new Decimal(13);
     private final RString 全て = new RString("全て");
     private LasdecCode 市町村コード;
@@ -116,48 +118,48 @@ public class JukyushagenmenshinseiProcess extends BatchProcessBase<NinteijyotaiE
 
     private void set標準負担額減免状況(NinteijyotaiEntity entity, JukyushagenmenshinseiDateManager manager) {
         update集計List(entity, manager, SIX);
-        if (num.equals(SIX)) {
-            num = ZERO;
+        if (num.compareTo(SIX) <= 0) {
+            num1 = num.subtract(1);
         }
         localflag = entity.getTableFlag();
     }
 
     private void set利用者負担額減額(NinteijyotaiEntity entity, JukyushagenmenshinseiDateManager manager) {
         update集計List(entity, manager, SIX);
-        if (0 <= num.compareTo(SIX)) {
-            num = ZERO;
+        if (num.compareTo(SIX) <= 0) {
+            num1 = num.subtract(1);
         }
         localflag = entity.getTableFlag();
     }
 
     private void set訪問介護利用者負担額減額(NinteijyotaiEntity entity, JukyushagenmenshinseiDateManager manager) {
         update集計List(entity, manager, THIRTHEEN);
-        if (num.equals(THIRTHEEN)) {
-            num = ZERO;
+        if (num.compareTo(THIRTHEEN) <= 0) {
+            num1 = num.subtract(1);
         }
         localflag = entity.getTableFlag();
     }
 
     private void set社会福祉法人減免(NinteijyotaiEntity entity, JukyushagenmenshinseiDateManager manager) {
         update集計List(entity, manager, SIX);
-        if (num.equals(SIX)) {
-            num = ZERO;
+        if (num.compareTo(SEVEN) <= 0) {
+            num1 = num.subtract(1);
         }
         localflag = entity.getTableFlag();
     }
 
     private void set介護保険負担限度額認定(NinteijyotaiEntity entity, JukyushagenmenshinseiDateManager manager) {
         update集計List(entity, manager, THIRTHEEN);
-        if (num.equals(THIRTHEEN)) {
-            num = ZERO;
+        if (num.compareTo(THIRTHEEN) <= 0) {
+            num1 = num.subtract(1);
         }
         localflag = entity.getTableFlag();
     }
 
     private void set特別地域加算減免(NinteijyotaiEntity entity, JukyushagenmenshinseiDateManager manager) {
         update集計List(entity, manager, SIX);
-        if (num.equals(SIX)) {
-            num = ZERO;
+        if (num.compareTo(SIX) <= 0) {
+            num1 = num.subtract(1);
         }
         localflag = entity.getTableFlag();
     }
@@ -180,13 +182,11 @@ public class JukyushagenmenshinseiProcess extends BatchProcessBase<NinteijyotaiE
             index1 = THIRTHEEN;
         }
         if (!localflag.equals(entity.getTableFlag())) {
-            if (num.compareTo(index1) < 0) {
-                while (num.compareTo(index1) <= 0) {
-                    list.add(manager.add受給者減免月別申請認定状況表中間テーブルEmpty(entity.getTableFlag().subtract(1), num, 市町村コード, 市町村名称));
-                    num = num.add(1);
-                }
-            }
             num = ZERO;
+            while (num1.compareTo(index1) < 0) {
+                list.add(manager.add受給者減免月別申請認定状況表中間テーブルEmpty(localflag, num1.add(1), 市町村コード, 市町村名称));
+                num1 = num1.add(1);
+            }
         }
     }
 }
