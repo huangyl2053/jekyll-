@@ -38,12 +38,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<ShiharaiHohoHenkoHaakuOneEntity> {
 
-    private static final RString 未来納期 = new RString("未来納期");
-    private static final RString 完納_未納区分_0円 = new RString("0円");
-    private static final RString 完納 = new RString("完納");
-    private static final RString 過納 = new RString("過納");
-    private static final RString 未納あり = new RString("未納あり");
-
     private static final RString 時効到来 = new RString("時効到来");
     private static final RString 時効未到来 = new RString("時効未到来");
 
@@ -225,20 +219,20 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
 
     private RString edit完納_未納区分(FlexibleDate 基準日, FlexibleDate 納期限, Decimal 調定額, Decimal 収入額) {
         if (基準日.isBeforeOrEquals(納期限)) {
-            return 未来納期;
+            return MinoKannoKubun.未来納期.getコード();
         }
         if (Decimal.ZERO == 調定額 && Decimal.ZERO == 収入額) {
-            return 完納_未納区分_0円;
+            return MinoKannoKubun._0円.getコード();
         }
         if (Decimal.ZERO != 調定額 && Decimal.ZERO == 収入額) {
-            return 完納;
+            return MinoKannoKubun.完納.getコード();
         }
 
         if (調定額.compareTo(収入額) < 0) {
-            return 過納;
+            return MinoKannoKubun.過納.getコード();
         }
         if (調定額.compareTo(収入額) > 0) {
-            return 未納あり;
+            return MinoKannoKubun.未納あり.getコード();
         }
         return RString.EMPTY;
     }
@@ -271,7 +265,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
         Decimal 以前滞納額 = Decimal.ZERO;
         RString 以前滞納区分 = RString.EMPTY;
 
-        if (未納あり.equals(完納_未納区分) && 時効未到来.equals(時効区分)) {
+        if (MinoKannoKubun.未納あり.getコード().equals(完納_未納区分) && 時効未到来.equals(時効区分)) {
             if (未納額 != null) {
                 以前滞納額 = 以前滞納額.add(未納額);
             }
@@ -334,7 +328,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
     private FlexibleDate edit以降未納情報_時効起算日(RString 完納_未納区分, FlexibleDate 時効成立日, FlexibleDate 時効起算日,
             FlexibleDate 収納状況_時効起算日) {
         if ((!FlexibleDate.EMPTY.equals(時効成立日) && processParamter.get基準日().isBefore(時効成立日))
-                && 未納あり.equals(完納_未納区分)) {
+                && MinoKannoKubun.未納あり.getコード().equals(完納_未納区分)) {
             時効起算日 = 収納状況_時効起算日;
         }
         return 時効起算日;
@@ -342,7 +336,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
 
     private RString edit以降未納情報_時効起算事由(RString 完納_未納区分, FlexibleDate 時効成立日, RString 時効起算事由, RString 収納状況_時効起算事由) {
         if ((!FlexibleDate.EMPTY.equals(時効成立日) && processParamter.get基準日().isBefore(時効成立日))
-                && 未納あり.equals(完納_未納区分)) {
+                && MinoKannoKubun.未納あり.getコード().equals(完納_未納区分)) {
             時効起算事由 = 収納状況_時効起算事由;
         }
         return 時効起算事由;
@@ -350,14 +344,14 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
 
     private FlexibleDate edit以降未納情報_納期限(RString 完納_未納区分, FlexibleDate 時効成立日, FlexibleDate 納期限, FlexibleDate 収納状況_納期限) {
         if ((!FlexibleDate.EMPTY.equals(時効成立日) && processParamter.get基準日().isBefore(時効成立日))
-                && 未納あり.equals(完納_未納区分)) {
+                && MinoKannoKubun.未納あり.getコード().equals(完納_未納区分)) {
             納期限 = 収納状況_納期限;
         }
         return 納期限;
     }
 
     private Decimal edit以降未納情報_滞納額合計(ShunoStatusTempTableEntity data, RString 完納_未納区分, RString 時効区分, Decimal 滞納額合計) {
-        if (時効到来.equals(時効区分) && 完納_未納区分.equals(未納あり)) {
+        if (時効到来.equals(時効区分) && 完納_未納区分.equals(MinoKannoKubun.未納あり.getコード())) {
             if (data.getMiNoGaku() != null) {
                 滞納額合計 = 滞納額合計.add(data.getMiNoGaku());
             }
