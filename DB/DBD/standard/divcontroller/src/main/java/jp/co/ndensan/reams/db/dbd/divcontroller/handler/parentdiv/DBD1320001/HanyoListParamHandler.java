@@ -358,10 +358,37 @@ public class HanyoListParamHandler {
         }
         return batchParameterMap;
     }
-//
-//    public boolean restoreCheck(){
-//         BatchParameterMap batchParameterMap = div.getBtnParamRestore().getRestoreBatchParameterMap();
-//    }
+
+    /**
+     * 復元のチェック
+     *
+     * @param menuID メニューID
+     * @return チェックの結果
+     */
+    public boolean restoreCheck(RString menuID) {
+        RString 帳票ID = getBatchParameterMap().getParameterValue(RString.class, 帳票IDパラメータ名称1);
+        if (汎用リスト_施設入退所メニューID.equals(menuID)) {
+            return 汎用リスト_施設入退所帳票ID.equals(帳票ID);
+        } else if (汎用リスト_利用者負担額減免メニューID.equals(menuID)) {
+            return 汎用リスト_利用者負担額減免帳票ID.equals(帳票ID);
+        } else if (汎用リスト_訪問介護利用者負担額減額メニューID.equals(menuID)) {
+            return 汎用リスト_訪問介護利用者負担額減額帳票ID.equals(帳票ID);
+        } else if (汎用リスト_社会福祉法人軽減メニューID.equals(menuID)) {
+            return 汎用リスト_社会福祉法人軽減帳票ID.equals(帳票ID);
+        } else if (汎用リスト_特別地域加算減免メニューID.equals(menuID)) {
+            return 汎用リスト_特別地域加算減免帳票ID.equals(帳票ID);
+        } else if (汎用リスト_負担限度額認定メニューID.equals(menuID)) {
+            return 汎用リスト_負担限度額認定帳票ID.equals(帳票ID);
+        } else if (汎用リスト_国保メニューID.equals(menuID)) {
+            return 汎用リスト_国保帳票ID.equals(帳票ID);
+        } else if (汎用リスト_後期高齢者メニューID.equals(menuID)) {
+            return 汎用リスト_後期高齢者帳票ID.equals(帳票ID);
+        } else if (汎用リスト_事業対象者メニューID.equals(menuID)) {
+            return 汎用リスト_事業対象者帳票ID.equals(帳票ID);
+        } else {
+            return 汎用リスト_利用者負担割合帳票ID.equals(帳票ID);
+        }
+    }
 
     /**
      * 条件の復元
@@ -369,7 +396,7 @@ public class HanyoListParamHandler {
      * @param menuID メニューID
      */
     public void restoreBatchParameter(RString menuID) {
-        BatchParameterMap batchParameterMap = div.getBtnParamRestore().getRestoreBatchParameterMap();
+        BatchParameterMap batchParameterMap = getBatchParameterMap();
         if (汎用リスト_施設入退所メニューID.equals(menuID)) {
             div.getBtnParamRestore().setBatchId(汎用リスト_施設入退所バッチID);
             restore汎用リスト_施設入退所BatchParameter(batchParameterMap);
@@ -788,7 +815,7 @@ public class HanyoListParamHandler {
             para.setCyusyutsuhohokubun(ChushutsuHohoKubun.基準日.getコード());
         }
         if (年度基準日KEY.equals(div.getRadChushutsuJokenA2().getSelectedKey())) {
-            RString 年度 = div.getDdlKijunNendo().getSelectedValue();
+            RString 年度 = div.getDdlKijunNendo().getSelectedKey();
             RDate date = div.getTxtKijunDateA().getValue();
             if (!RString.isNullOrEmpty(年度)) {
                 para.setNendo(new FlexibleYear(年度));
@@ -1666,4 +1693,7 @@ public class HanyoListParamHandler {
         div.getCcdShutsuryokuKomoku().setDisabled(is非表示);
     }
 
+    private BatchParameterMap getBatchParameterMap() {
+        return div.getBtnParamRestore().getRestoreBatchParameterMap();
+    }
 }
