@@ -22,6 +22,7 @@ public class HanyoListParamRelateEntity {
 
     private RString 市町村コード;
     private RString 被保険者番号;
+    private RString 証記載保険者番号;
     private RString 資格取得事由コード;
     private RString 資格取得年月日;
     private RString 資格取得届出年月日;
@@ -31,7 +32,6 @@ public class HanyoListParamRelateEntity {
     private RString 被保険者区分コード;
     private RString 住所地特例フラグ;
     private RString 広域内住所地特例フラグ;
-    private RString 広住特措置元市町村コード;
     private RString 受給申請事由;
     private RString 受給申請年月日;
     private RString 要介護認定状態区分コード;
