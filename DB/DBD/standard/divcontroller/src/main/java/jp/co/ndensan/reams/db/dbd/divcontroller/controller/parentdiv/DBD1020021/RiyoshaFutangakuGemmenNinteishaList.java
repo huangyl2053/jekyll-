@@ -65,7 +65,7 @@ public class RiyoshaFutangakuGemmenNinteishaList {
             batchparameter.set帳票ID(ReportIdDBD.DBD200013.getReportId().value());
         } else {
             batchparameter.set対象リスト(TargetList.該当者リスト);
-            set受給者区分の設定(div);
+            set受給者区分の設定(div, batchparameter);
             batchparameter.set帳票ID(ReportIdDBD.DBD200002.getReportId().value());
         }
 
@@ -130,11 +130,11 @@ public class RiyoshaFutangakuGemmenNinteishaList {
      * 訪問介護利用者負担額減額認定者リスト画面,batchparameter受給者区分の設定します。
      *
      * @param div HomonKaigoRiyoshaFutanGengakuNinteishaListDiv
+     * @param batchparameter
      * @return bparamt
      */
-    public DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter set受給者区分の設定(RiyoshaFutanGenmenListDiv div) {
-        DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter batchparameter
-                = new DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter();
+    public DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter set受給者区分の設定(RiyoshaFutanGenmenListDiv div,
+            DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter batchparameter) {
         RString jukyushakubun = div.getRadJukyushaKubun().getSelectedKey();
         if (jukyushakubun.equals(被保険者)) {
             batchparameter.set受給者区分(JukyushaKubun2.被保険者);
