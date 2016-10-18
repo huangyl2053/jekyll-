@@ -62,15 +62,16 @@ public class InsSetaiyinShotokuJyohoTemp1Process extends BatchProcessBase<Hihoke
 
     @Override
     protected void process(HihokenshaDaichoTempSixColumnEntity entity) {
+        if (!ShinseishoHakkoChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())) {
+            SetaiHakuEntity hakuEntity = new SetaiHakuEntity();
+            hakuEntity.setHihokenshaNo(entity.getHihokenshaNo());
+            hakuEntity.setShikibetsuCode(entity.getShikibetsuCode());
+            hakuEntity.setKijunYMD(parameter.get世帯員把握基準日());
+            hakuEntity.setShotokuNendo(parameter.get世帯員把握基準日().getNendo());
+            hakuEntity.setJushochiTokureiFlag(entity.getJushochiTokureiFlag());
+            writer.insert(hakuEntity);
 
-        SetaiHakuEntity hakuEntity = new SetaiHakuEntity();
-        hakuEntity.setHihokenshaNo(entity.getHihokenshaNo());
-        hakuEntity.setShikibetsuCode(entity.getShikibetsuCode());
-        hakuEntity.setKijunYMD(parameter.get世帯員把握基準日());
-        hakuEntity.setShotokuNendo(parameter.get世帯員把握基準日().getNendo());
-        hakuEntity.setJushochiTokureiFlag(entity.getJushochiTokureiFlag());
-        writer.insert(hakuEntity);
-
+        }
     }
 
 }
