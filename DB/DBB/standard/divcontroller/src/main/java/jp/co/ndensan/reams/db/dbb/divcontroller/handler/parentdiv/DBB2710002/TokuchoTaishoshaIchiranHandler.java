@@ -566,8 +566,8 @@ public class TokuchoTaishoshaIchiranHandler {
 
     private void set特別徴収同定候補者詳細情報1(TokuchoDouteiKouhoshaShousaiJoho result) throws IllegalArgumentException, NullPointerException {
         div.setHiddenFukaNendo(RString.EMPTY);
-        if (result.get登録済年金情報_識別コード() != null) {
-            div.setHiddenFukaNendo(result.get登録済年金情報_識別コード());
+        if (result.get登録済年金情報_本徴収基礎年金番号() != null) {
+            div.setHiddenFukaNendo(result.get登録済年金情報_本徴収基礎年金番号());
         }
         if (result.get未同定年金情報_基礎年金番号() != null) {
             div.getTxtKisoNenkinNo().setValue(result.get未同定年金情報_基礎年金番号());
@@ -706,7 +706,7 @@ public class TokuchoTaishoshaIchiranHandler {
         List<TokuchoDouteiKouhoshaShousaiJoho> result_詳細 = tokudoutei.getTokuchoTaishoKouhosyaDetailJoho(
                 new FlexibleYear(処理年度), 基礎年金番号, 年金コード, 開始月, 捕捉月, 識別コード);
         if (result_詳細 != null && !result_詳細.isEmpty()) {
-            if (!RString.isNullOrEmpty(result_詳細.get(NUM0).get登録済年金情報_識別コード())) {
+            if (!RString.isNullOrEmpty(result_詳細.get(NUM0).get登録済年金情報_本徴収基礎年金番号())) {
                 div.getTorokuZumiNenkinInfo().setDisplayNone(false);
             } else {
                 div.getTorokuZumiNenkinInfo().setDisplayNone(true);
@@ -874,8 +874,8 @@ public class TokuchoTaishoshaIchiranHandler {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN同定対象外確認済にする, true);
             }
         }
-        RString 識別コード = div.getHiddenFukaNendo();
-        if (識別コード == null || 識別コード.isEmpty()) {
+        RString 基礎年金番号 = div.getHiddenFukaNendo();
+        if (基礎年金番号 == null || 基礎年金番号.isEmpty()) {
             div.getTorokuZumiNenkinInfo().setDisplayNone(true);
         } else {
             div.getTorokuZumiNenkinInfo().setDisplayNone(false);

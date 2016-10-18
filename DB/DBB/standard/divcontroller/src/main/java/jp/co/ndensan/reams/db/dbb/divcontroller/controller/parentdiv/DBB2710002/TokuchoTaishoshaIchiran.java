@@ -443,8 +443,8 @@ public class TokuchoTaishoshaIchiran {
      * @return を持つResponseData
      */
     public ResponseData<TokuchoTaishoshaIchiranDiv> onClick_btnHihokensha(TokuchoTaishoshaIchiranDiv div) {
-        RString 識別コード = div.getHiddenFukaNendo();
-        if (識別コード == null || 識別コード.isEmpty()) {
+        RString 基礎年金番号 = div.getHiddenFukaNendo();
+        if (基礎年金番号 == null || 基礎年金番号.isEmpty()) {
             div.getTorokuZumiNenkinInfo().setDisplayNone(true);
         } else {
             div.getTorokuZumiNenkinInfo().setDisplayNone(false);
