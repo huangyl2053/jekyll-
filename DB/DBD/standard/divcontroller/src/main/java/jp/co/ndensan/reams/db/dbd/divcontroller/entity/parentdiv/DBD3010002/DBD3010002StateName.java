@@ -16,7 +16,8 @@ public enum DBD3010002StateName implements IStateEnumerations {
 
     NoChange(""),
     認定履歴一覧("認定履歴一覧"),
-    詳細確認("詳細確認");
+    詳細確認("詳細確認"),
+    総合照会から("総合照会から");
 
     private final RString name;
 

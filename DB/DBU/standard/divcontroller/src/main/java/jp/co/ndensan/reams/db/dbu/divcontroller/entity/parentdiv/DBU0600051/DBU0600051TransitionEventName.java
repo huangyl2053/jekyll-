@@ -14,10 +14,10 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBU0600051TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    再検索("再検索"),
+    対象者検索に戻る("対象者検索に戻る"),
     完了("完了"),
-    総合照会資格情報("総合照会資格情報"),
-    総合照会受給情報("総合照会受給情報"),
+    総合照会資格得喪情報("総合照会資格得喪情報"),
+    総合照会受給者情報("総合照会受給者情報"),
     総合照会給付情報("総合照会給付情報"),
     総合照会賦課情報("総合照会賦課情報");
 
