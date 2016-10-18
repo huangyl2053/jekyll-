@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescript
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -59,6 +60,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
     private static final RString 共有ファイル名 = new RString("要介護認定結果連携データ取込");
     private static final int NO_328 = 328;
     private final YogaigoNinteiKekkaRenkeiDataTorikomiDiv div;
+    private RString tempPath;
 
     /**
      * コンストラクタです。
@@ -117,6 +119,8 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
             SharedFileDescriptor sfd = SharedFile.defineSharedFile(filesystemName);
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts();
             SharedFile.copyToSharedFile(sfd, path, opts);
+            SharedFile.copyToLocal(filesystemName, FilesystemPath.fromString(Path.getTmpDirectoryPath()));
+            tempPath = Path.combinePath(Path.getTmpDirectoryPath(), file.getFileName());
         }
         for (dgtorikomidataichiran_Row row : div.getDgtorikomidataichiran().getDataSource()) {
             ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("'被保険者番号"),
@@ -155,7 +159,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
         } else {
             parameter.set取込みデータ区分(new RString("2"));
         }
-        parameter.set格納パス(SharedFile.getDirectAccessPath(sfed).substring(0, SharedFile.getDirectAccessPath(sfed).length()));
+        parameter.set格納パス(tempPath);
         if (div.getHokenshaList().getSelectedItem().get保険者区分() != null) {
             parameter.set保険者区分(div.getHokenshaList().getSelectedItem().get保険者区分().getコード());
         } else {
