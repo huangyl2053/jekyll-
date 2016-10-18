@@ -6,19 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehijuryoininkeiyakukakuninsho;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoResult;
-import jp.co.ndensan.reams.db.dbc.business.report.dbc100031.KogakuServiceHiJyuryoItakuKeiyakuKakuninShoProperty;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
-import jp.co.ndensan.reams.db.dbc.entity.report.dbc100031.KogakuServiceHiJyuryoItakuKeiyakuKakuninShoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7062KaigoJigyoshaDaihyoshaDac;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7068ChohyoBunruiKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7068ChohyoBunruiKanriDac;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
@@ -31,18 +26,8 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiy
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
-import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.entity.db.relate.tsuchishoteikeibun.TsuchishoTeikeibunEntity;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
@@ -56,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -65,7 +49,6 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
-import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -79,11 +62,8 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
     private static final RString コンマ = new RString(",");
     private static final RString 円単位 = new RString("円");
     private static final RString 帳票分類ID = new RString("DBC100031_KogakuServiceHiJyuryoItakuKeiyakuKakuninSho");
-    private static final RString 帳票制御共通_首長名印字位置_公印にかける = new RString("1");
-    private ReportSourceWriter<KogakuServiceHiJyuryoItakuKeiyakuKakuninShoSource> reportSourceWriter;
     private DbT7060KaigoJigyoshaDac 介護事業者情報DAC;
     private DbT7062KaigoJigyoshaDaihyoshaDac 介護事業者代表者情報DAC;
-    private DbT7065ChohyoSeigyoKyotsuDac 帳票制御情報DAC;
     private DbT7068ChohyoBunruiKanriDac 帳票分類管理DAC;
 
     /**
@@ -120,7 +100,9 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
 
         介護事業者情報を取得する(result, param.get事業者番号());
         介護事業者代表者情報を取得する(result, param.get事業者番号());
-        認証者情報を取得する(result, param.get決定日());
+
+        result.set決定日(param.get決定日());
+
         通知書定型文情報を取得する(result);
         送付物宛先情報を取得する(result, param.get決定日());
 
@@ -157,45 +139,6 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
         DbT7062KaigoJigyoshaDaihyoshaEntity entity = 介護事業者代表者情報DAC.select介護事業者代表者情報の最新(new JigyoshaNo(事業者番号));
         result.set代表者氏名((null == entity || null == entity.getDaihyoshaShimei())
                 ? RString.EMPTY : entity.getDaihyoshaShimei().getColumnValue());
-    }
-
-    private void 認証者情報を取得する(KogakuServiceHiJuryoininKeiyakuKakuninshoResult result, FlexibleDate 通知日) {
-        KogakuServiceHiJyuryoItakuKeiyakuKakuninShoProperty property = new KogakuServiceHiJyuryoItakuKeiyakuKakuninShoProperty();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<KogakuServiceHiJyuryoItakuKeiyakuKakuninShoSource> assembler
-                    = createAssembler(reportManager, property)) {
-                reportSourceWriter = new ReportSourceWriter(assembler);
-            }
-        }
-
-        this.帳票制御情報DAC = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
-        DbT7065ChohyoSeigyoKyotsuEntity 帳票制御情報Entity = 帳票制御情報DAC.selectByKey(SubGyomuCode.DBC介護給付, new ReportId(帳票分類ID));
-
-        INinshoshaManager manager = NinshoshaFinderFactory.createInstance();
-        Ninshosha 帳票認証者情報Business = manager.get帳票認証者(GyomuCode.DB介護保険,
-                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), 通知日);
-
-        IAssociationFinder finder = AssociationFinderFactory.createInstance();
-        Association 地方公共団体Business = finder.getAssociation();
-
-        if (null != 帳票認証者情報Business && null != 地方公共団体Business
-                && null != 帳票制御情報Entity && null != reportSourceWriter.getImageFolderPath()) {
-            INinshoshaSourceBuilder builder = NinshoshaSourceBuilderFactory.createInstance(帳票認証者情報Business,
-                    地方公共団体Business, reportSourceWriter.getImageFolderPath(), new RDate(通知日.toString()),
-                    帳票制御共通_首長名印字位置_公印にかける.equals(帳票制御情報Entity.getShuchoMeiInjiIchi()),
-                    !帳票制御情報Entity.getDenshiKoinInjiUmu(), KenmeiFuyoKubunType.付与なし);
-            NinshoshaSource source = builder.buildSource();
-
-            result.set発行日(null == source.hakkoYMD ? RString.EMPTY : source.hakkoYMD);
-            result.set認証者役職名(null == source.ninshoshaYakushokuMei ? RString.EMPTY : source.ninshoshaYakushokuMei);
-            result.set認証者役職名1(null == source.ninshoshaYakushokuMei1 ? RString.EMPTY : source.ninshoshaYakushokuMei1);
-            result.set認証者役職名2(null == source.ninshoshaYakushokuMei2 ? RString.EMPTY : source.ninshoshaYakushokuMei2);
-            result.set電子公印(null == source.denshiKoin ? RString.EMPTY : source.denshiKoin);
-            result.set公印文字列(null == source.koinMojiretsu ? RString.EMPTY : source.koinMojiretsu);
-            result.set認証者氏名掛ける(null == source.ninshoshaShimeiKakeru ? RString.EMPTY : source.ninshoshaShimeiKakeru);
-            result.set認証者氏名掛けない(null == source.ninshoshaShimeiKakenai ? RString.EMPTY : source.ninshoshaShimeiKakenai);
-            result.set公印省略(null == source.koinShoryaku ? RString.EMPTY : source.koinShoryaku);
-        }
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
