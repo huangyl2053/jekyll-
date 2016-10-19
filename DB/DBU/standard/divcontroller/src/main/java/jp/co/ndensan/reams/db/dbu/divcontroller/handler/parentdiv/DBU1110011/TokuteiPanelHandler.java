@@ -10,8 +10,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU080010.DBU080010_TokuteiKojinJohoTeikyoParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU080010.DBU080010_TokuteiKojinJohoTeikyoParameterHandler;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TokuteiKojinJohoMeisho;
+import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TokuteiKojinJohomeiCode;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU1110011.TokuteiPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU1110011.grdTokuteiJoho_Row;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 個人番号関連情報提供のHandlerクラスです。
@@ -22,6 +24,7 @@ public class TokuteiPanelHandler {
 
     private final TokuteiPanelDiv div;
     private static final int 版番号カウント件数 = 0;
+    private static final int コードの下２桁 = 2;
 
     /**
      * コンストラクタです。
@@ -58,7 +61,8 @@ public class TokuteiPanelHandler {
             if (row.getChkSeiGyo().isValue()) {
                 DBU080010_TokuteiKojinJohoTeikyoParameterHandler parameterHandler
                         = new DBU080010_TokuteiKojinJohoTeikyoParameterHandler();
-                parameterHandler.set特定個人情報名コード(row.getTokuteiKojinJohoNo());
+                parameterHandler.set特定個人情報名コード(
+                        get特定個人情報名コード(row.getTokuteiKojinJohoNo()));
                 特定個人情報.add(parameterHandler);
             }
         }
@@ -79,5 +83,16 @@ public class TokuteiPanelHandler {
             listRow.add(row);
         }
         div.getGrdTokuteiJoho().setDataSource(listRow);
+    }
+
+    private RString get特定個人情報名コード(RString 個人情報名コード) {
+        for (TokuteiKojinJohomeiCode tokuteiKojin : TokuteiKojinJohomeiCode.values()) {
+            RString 情報名コード = tokuteiKojin.getコード();
+            if (個人情報名コード.equals(情報名コード.substring(
+                    情報名コード.length() - コードの下２桁, 情報名コード.length()))) {
+                return 情報名コード;
+            }
+        }
+        return RString.EMPTY;
     }
 }

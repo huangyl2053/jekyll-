@@ -170,7 +170,7 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
         }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         csvFilePath = Path.getTmpDirectoryPath();
-        fileName = fileName = Path.combinePath(csvFilePath, CSVファイル名);
+        fileName = Path.combinePath(csvFilePath, CSVファイル名);
         csvWriter = new CsvWriter.InstanceBuilder(fileName)
                 .alwaysWriteHeader(FutanGengaokuNintteiKakuninListCsvEntity.class)
                 .setEncode(Encode.SJIS)

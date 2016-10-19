@@ -71,34 +71,6 @@ public interface ITokuchoHeinjunkaKakuteiMapper {
     void update調定共通_介護継承();
 
     /**
-     * 調定額内訳_介護継承をupdate
-     *
-     * @param parameter Map<String, Object>
-     */
-    void delete調定額内訳_介護継承(Map<String, Object> parameter);
-
-    /**
-     * 調定状況_介護継承をupdate
-     *
-     * @param parameter Map<String, Object>
-     */
-    void delete調定状況_介護継承(Map<String, Object> parameter);
-
-    /**
-     * 収納管理マスタ_介護継承をupdate
-     *
-     * @param parameter Map<String, Object>
-     */
-    void delete収納管理マスタ_介護継承(Map<String, Object> parameter);
-
-    /**
-     * 調定共通_介護継承をupdate
-     *
-     * @param parameter Map<String, Object>
-     */
-    void delete調定共通_介護継承(Map<String, Object> parameter);
-
-    /**
      * 賦課Tempを取得
      *
      * @return FukaTempEntity

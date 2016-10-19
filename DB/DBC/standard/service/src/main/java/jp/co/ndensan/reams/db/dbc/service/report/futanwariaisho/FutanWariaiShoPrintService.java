@@ -167,7 +167,7 @@ public class FutanWariaiShoPrintService {
                     = riyoshaFutanWariaiHantei.riyoshaFutanWariaiMeisaiMergeGamen(entity.get利用者負担割合明細());
             // TODO 残件対応
             FutanWariaiShoReport report = new FutanWariaiShoReport(entity, 認証者ソースデータ, 被保険者番号, 編集後個人,
-                    利用者負担割合明細List, 保険者コード取得, flag,, null);
+                    利用者負担割合明細List, 保険者コード取得, flag, kojinList, null);
             report.writeBy(reportSourceWriter);
         }
     }
