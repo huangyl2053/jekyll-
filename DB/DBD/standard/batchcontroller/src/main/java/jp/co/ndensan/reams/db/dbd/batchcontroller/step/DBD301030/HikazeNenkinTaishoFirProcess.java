@@ -63,8 +63,7 @@ public class HikazeNenkinTaishoFirProcess extends BatchProcessBase<HikazeNenkinT
         data.setFuicchiJiyu(RString.EMPTY);
         data.setGaitouJiyu(該当事由_1);
         data.setFuicchiItem(t.get不一致項目());
-
-        data.setFuicchiItem(RString.EMPTY);
+        data.setKisoNennkinnNoHennkou(RString.EMPTY);
         data.setHihokenshaNo(t.get実績_被保険者番号());
         data.setAtenaKanaShimei(t.get実績_宛名カナ氏名());
         data.setAtenaSeinenngappi(t.get実績_宛名生年月日());
