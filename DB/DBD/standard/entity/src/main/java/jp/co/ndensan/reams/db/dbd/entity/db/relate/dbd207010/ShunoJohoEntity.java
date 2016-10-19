@@ -93,7 +93,7 @@ public class ShunoJohoEntity {
 
     //調定共通_介護継承
     private Long 調定共通_介護継承_調定ID;
-    private int 調定共通_介護継承_履歴番号;
+    private Long 調定共通_介護継承_履歴番号;
     private Long 調定共通_介護継承_収納ID;
     private RYear 調定共通_介護継承_会計年度;
     private RYear 調定共通_介護継承_処理年度;

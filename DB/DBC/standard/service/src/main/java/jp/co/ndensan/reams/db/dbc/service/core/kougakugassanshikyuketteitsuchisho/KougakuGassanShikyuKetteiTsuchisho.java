@@ -111,7 +111,7 @@ public class KougakuGassanShikyuKetteiTsuchisho {
         IShikibetsuTaishoPSMSearchKey searchKey = new ShikibetsuTaishoPSMSearchKeyBuilder(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).
                 setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード).
-                set基準日(発行日).
+                set基準日(FlexibleDate.getNowDate()).
                 build();
         KougakuGassanShikyuKetteiTsuchishoParameter param = new KougakuGassanShikyuKetteiTsuchishoParameter(searchKey);
         param.set対象年度(対象年度);
