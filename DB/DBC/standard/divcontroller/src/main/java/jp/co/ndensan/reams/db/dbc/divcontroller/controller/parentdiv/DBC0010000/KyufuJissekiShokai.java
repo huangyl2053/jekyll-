@@ -199,7 +199,7 @@ public class KyufuJissekiShokai {
         setパラメータ(給付実績情報照会情報);
         div.getKyufuJissekiSearchPanel().setIsOpen(false);
         div.getKyufuJissekiListPanel().setIsOpen(true);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会一覧);
     }
 
     /**

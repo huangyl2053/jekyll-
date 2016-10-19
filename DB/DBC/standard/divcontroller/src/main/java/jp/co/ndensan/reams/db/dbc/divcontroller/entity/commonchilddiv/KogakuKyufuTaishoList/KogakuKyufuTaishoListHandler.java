@@ -30,9 +30,9 @@ public class KogakuKyufuTaishoListHandler {
     private final KogakuKyufuTaishoListDiv div;
     private static final RString ONE_RS = new RString("1");
     private static final RString TWO_RS = new RString("2");
-    private static final RString 高額サービス費支給申請書登録 = new RString("DBCMNL2001");
+    private static final RString 高額サービス費支給申請書登録 = new RString("DBCMN42001");
     private static final RString 高額介護サービス費照会 = new RString("DBCMN11004");
-    private static final RString 総合事業高額サービス費支給申請書登録 = new RString("DBCMN42002");
+    private static final RString 総合事業高額サービス費支給申請書登録 = new RString("DBCMNL2001");
     private static final RString 総合事業高額介護サービス費照会 = new RString("DBCMN11016");
     private static final RString 照会モード = new RString("照会モード");
     private static final RString 明細編集モード = new RString("明細編集モード");
@@ -98,6 +98,7 @@ public class KogakuKyufuTaishoListHandler {
             List<JigyouKogakuKyuufuTaishouResult> 事業高額給付対象一覧
                     = KogakuKyuufuTaishouList.createInstance().
                     getJigyouKogakuKyuufuTaishouList(被保険者番号, サービス提供年月);
+            ViewStateHolder.put(ViewStateKeys.事業高額給付対象一覧, (Serializable) 事業高額給付対象一覧);
             set事業高額高額給付対象一覧(事業高額給付対象一覧);
         }
         if (照会モード.equals(画面モード)) {
