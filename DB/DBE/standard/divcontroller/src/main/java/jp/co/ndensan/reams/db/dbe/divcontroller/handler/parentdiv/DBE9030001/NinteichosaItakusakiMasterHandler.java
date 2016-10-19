@@ -236,6 +236,7 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getCcdChiku().applyNoOptionCodeMaster().load(
                 SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"), FlexibleDate.getNowDate());
         div.setHdnInputDiv(getChosaitakusakiJohoInputValue());
+        div.getChosaitakusakiJohoInput().getBtnKoza().setVisible(false);
     }
 
     /**
@@ -261,6 +262,7 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().setDisabled(Boolean.TRUE);
         setChosaitakusakiJohoInput(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedItem());
         div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(Boolean.FALSE);
+        div.getChosaitakusakiJohoInput().getBtnKoza().setVisible(true);
         div.setHdnInputDiv(getChosaitakusakiJohoInputValue());
     }
 
@@ -282,6 +284,7 @@ public class NinteichosaItakusakiMasterHandler {
         div.setHdnSelectID(new RString(String.valueOf(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedRowId())));
         setChosaitakusakiJohoInputDisabled(Boolean.TRUE);
         setChosaitakusakiJohoInput(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedItem());
+        div.getChosaitakusakiJohoInput().getBtnKoza().setVisible(true);
         div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(Boolean.FALSE);
     }
 

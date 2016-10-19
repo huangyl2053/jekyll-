@@ -176,6 +176,7 @@ public class ShujiiIryoKikanMaster {
         getHandler(div).setDisabledFalse();
         getHandler(div).clearShujiiIryoKikanJohoToMeisai();
         div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
+        div.getShujiiJohoInput().getBtnRegisterKoza().setVisible(false);
         return ResponseData.of(div).respond();
     }
 
@@ -231,6 +232,7 @@ public class ShujiiIryoKikanMaster {
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
         div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
         div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
+        div.getShujiiJohoInput().getBtnRegisterKoza().setVisible(true);
         return ResponseData.of(div).respond();
     }
 
@@ -247,6 +249,7 @@ public class ShujiiIryoKikanMaster {
         getHandler(div).setShujiiJohoToMeisai(row);
         getHandler(div).setDisabledTrue();
         div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
+        div.getShujiiJohoInput().getBtnRegisterKoza().setVisible(true);
         return ResponseData.of(div).respond();
     }
 
@@ -267,6 +270,7 @@ public class ShujiiIryoKikanMaster {
             getHandler(div).setDisabledTrue();
             div.getShujiiJohoInput().getBtnKakutei().setDisabled(true);
         }
+        div.getShujiiJohoInput().getBtnRegisterKoza().setVisible(true);
         return ResponseData.of(div).respond();
     }
 
@@ -667,6 +671,7 @@ public class ShujiiIryoKikanMaster {
             div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
             div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
             div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
+            div.getShujiiJohoInput().getBtnRegisterKoza().setVisible(true);
         }
         return ResponseData.of(div).respond();
     }

@@ -119,6 +119,7 @@ public class NinteichosaItakusakiMaster {
             div.getChosaitakusakiJohoInput().getTxtShichosonmei().setDisabled(Boolean.TRUE);
             div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().setDisabled(Boolean.TRUE);
             div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(Boolean.FALSE);
+            div.getChosaitakusakiJohoInput().getBtnKoza().setVisible(true);
         }
         return ResponseData.of(div).respond();
     }
