@@ -598,7 +598,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
      * @param モード RString
      * @return RString
      */
-    public RString get処理モード(HihokenshaNo 被保険者番号, RString モード) {
+    public ShoriModeHanteiResult get処理モード(HihokenshaNo 被保険者番号, RString モード) {
         ShoriModeHanteiResult shmoResult = new ShoriModeHanteiResult();
         FlexibleYearMonth 受取年月 = FlexibleYearMonth.EMPTY;
         if (新規.equals(モード)) {
@@ -631,10 +631,20 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                     new FlexibleYear(選択行データ.getTxtTaishoNendo().getValue().getYear().toDateString()),
                     受取年月, 選択行データ.getTxtShikyuKubun(), THREE);
         }
-        if (shmoResult.getWkメッセージ() != null && !shmoResult.getWkメッセージ().isEmpty()) {
-            getErrorMessage(shmoResult.getWkメッセージ(), shmoResult.getWkモード());
+
+        return shmoResult;
+    }
+
+    /**
+     * エラーメッセージ取得
+     *
+     * @param Wkメッセージ RString
+     */
+    public void getエラーメッセージ(RString Wkメッセージ) {
+        if (Wkメッセージ != null && !Wkメッセージ.isEmpty() && ResponseHolder.getState().
+                equals(DBC1230011StateName.支給決定情報補正.getName())) {
+            getErrorMessage(Wkメッセージ);
         }
-        return shmoResult.getWkモード();
     }
 
     /**
@@ -1071,23 +1081,23 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         }
     }
 
-    private void getErrorMessage(RString メッセージ, RString モード) {
-        if (支給決定情報補正判定MSG1.equals(メッセージ) && 処理不可.equals(モード)) {
+    private void getErrorMessage(RString メッセージ) {
+        if (支給決定情報補正判定MSG1.equals(メッセージ)) {
             throw new ApplicationException(
                     DbcErrorMessages.支給決定情報補正判定Msg1.getMessage());
-        } else if (支給決定情報補正判定MSG2.equals(メッセージ) && 処理不可.equals(モード)) {
+        } else if (支給決定情報補正判定MSG2.equals(メッセージ)) {
             throw new ApplicationException(
                     DbcErrorMessages.支給決定情報補正判定Msg2.getMessage());
-        } else if (支給決定情報補正判定MSG3.equals(メッセージ) && 処理不可.equals(モード)) {
+        } else if (支給決定情報補正判定MSG3.equals(メッセージ)) {
             throw new ApplicationException(
                     DbcErrorMessages.支給決定情報補正判定Msg3.getMessage());
-        } else if (支給決定情報補正判定MSG4.equals(メッセージ) && 処理不可.equals(モード)) {
+        } else if (支給決定情報補正判定MSG4.equals(メッセージ)) {
             throw new ApplicationException(
                     DbcErrorMessages.支給決定情報補正判定Msg4.getMessage());
-        } else if (支給決定情報補正判定MSG5.equals(メッセージ) && 処理不可.equals(モード)) {
+        } else if (支給決定情報補正判定MSG5.equals(メッセージ)) {
             throw new ApplicationException(
                     DbcErrorMessages.支給決定情報補正判定Msg5.getMessage());
-        } else if (支給決定情報補正判定MSG6.equals(メッセージ) && 処理不可.equals(モード)) {
+        } else if (支給決定情報補正判定MSG6.equals(メッセージ)) {
             throw new ApplicationException(
                     DbcErrorMessages.支給決定情報補正判定Msg6.getMessage());
         }
