@@ -41,8 +41,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -257,7 +255,6 @@ public class CreateTarget {
      * @return ResponseData<CreateTargetDiv>
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(CreateTargetDiv div, IDownLoadServletResponse response) {
-        LockingKey 前排他ロックキー = new LockingKey(new RString("ShinseishoKanriNo"));
         RString ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定支援センター送信ファイル名,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         List<dgCreateTargetSummary_Row> rowList = div.getDgCreateTargetSummary().getDataSource();
@@ -313,7 +310,6 @@ public class CreateTarget {
             前回サービス項目List.add(前回サービス項目);
         }
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル名);
-        RealInitialLocker.lock(前排他ロックキー);
         try (CsvWriter<CreateTargetCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
@@ -326,7 +322,6 @@ public class CreateTarget {
             }
             csvWriter.close();
         }
-        RealInitialLocker.release(前排他ロックキー);
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(ファイル名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
