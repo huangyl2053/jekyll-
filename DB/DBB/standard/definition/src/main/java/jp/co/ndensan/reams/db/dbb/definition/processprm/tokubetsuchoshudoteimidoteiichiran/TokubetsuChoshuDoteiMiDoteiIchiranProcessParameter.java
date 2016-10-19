@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.definition.processprm.tokubetsuchoshudoteimid
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -31,7 +30,6 @@ public class TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter implements IBatc
     private RString 出力対象;
     private YMDHMS 処理日時;
     private RString 通知内容コード;
-    private IShikibetsuTaishoPSMSearchKey atenaKey;
 
     /**
      * コンストラクタです。
@@ -57,7 +55,7 @@ public class TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter implements IBatc
      * @return {@link TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter}
      */
     public TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter getMybatisParameter() {
-        return new TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter(処理年度.toDateString(), 特別徴収開始月, 捕捉月, 通知内容コード, atenaKey);
+        return new TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter(処理年度.toDateString(), 特別徴収開始月, 捕捉月, 通知内容コード);
     }
 
 }

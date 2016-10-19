@@ -286,7 +286,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setDisabled(false);
             div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCancelGokeiInput().setDisabled(false);
             div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
-
+            div.getBtnKakutei().setDisabled(false);
         } else if (修正.equals(表示モード)) {
             div.getDdlKoshinKbn().setDisabled(false);
             div.getTxtKoshinYMD().setDisabled(false);
@@ -316,6 +316,7 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu().setDisabled(false);
             div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCancelGokeiInput().setDisabled(false);
             div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
+            div.getBtnKakutei().setDisabled(false);
         } else if (削除.equals(表示モード)) {
             非活性または活性(true);
             div.getDdlKoshinKbn().setDisabled(false);
@@ -332,10 +333,11 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setDisabled(true);
             div.getServiceRiyohyoBeppyoGokei().setDisabled(true);
             div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCancelGokeiInput().setDisabled(false);
-            div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
-            div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
+            div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
+            div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoFooter().getBtnBackRiyoNengetsuIchiran().setDisabled(false);
             div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(false);
+            div.getBtnKakutei().setDisabled(true);
         } else if (照会.equals(表示モード)) {
             非活性または活性(true);
             div.getDdlKoshinKbn().setDisabled(true);
@@ -347,15 +349,16 @@ public class ServiceRiyohyoInfoDivHandler {
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setDisabled(true);
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisabled(true);
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceTypeInput().setDisplayNone(false);
-            div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
+            div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoMeisai().setDisabled(true);
             div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisai().setDisabled(true);
             div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCancelMeisaiInput().setDisabled(true);
             div.getServiceRiyohyoBeppyoMeisai().getServiceRiyohyoBeppyoMeisaiFooter().getBtnCalcMeisaiGokei().setDisabled(true);
-            div.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
+            div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
             div.getServiceRiyohyoBeppyoGokei().setDisabled(true);
             div.getServiceRiyohyoBeppyoGokei().getServiceRiyohyoBeppyoGokeiFooter().getBtnCancelGokeiInput().setDisabled(true);
             div.getServiceRiyohyoBeppyoFooter().getBtnUpdate().setDisabled(true);
+            div.getBtnKakutei().setDisabled(true);
         }
     }
 

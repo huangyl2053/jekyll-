@@ -279,5 +279,26 @@ public class JigyoHokokuShiryouTorokuKaigoKyufuProcess extends BatchProcessBase<
         予防給付数情報根拠_0402csvWriter.close();
         予防給付数情報根拠_0403csvWriter.close();
         予防給付数情報根拠_0404csvWriter.close();
+        processParameter.getManager().spool(filePath_0101);
+        processParameter.getManager().spool(filePath_0102);
+        processParameter.getManager().spool(filePath_0103);
+        processParameter.getManager().spool(filePath_0104);
+        processParameter.getManager().spool(filePath_0107);
+        processParameter.getManager().spool(filePath_0108);
+        processParameter.getManager().spool(filePath_0109);
+        processParameter.getManager().spool(filePath_0110);
+        processParameter.getManager().spool(filePath_0201);
+        processParameter.getManager().spool(filePath_0202);
+        processParameter.getManager().spool(filePath_0203);
+        processParameter.getManager().spool(filePath_0204);
+        processParameter.getManager().spool(filePath_0301);
+        processParameter.getManager().spool(filePath_0302);
+        processParameter.getManager().spool(filePath_0303);
+        processParameter.getManager().spool(filePath_0304);
+        processParameter.getManager().spool(filePath_0401);
+        processParameter.getManager().spool(filePath_0402);
+        processParameter.getManager().spool(filePath_0403);
+        processParameter.getManager().spool(filePath_0404);
+
     }
 }

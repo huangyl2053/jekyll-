@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaisha;
@@ -32,6 +33,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.tatokureiidojiyu.TatokureiTeki
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.ShikakuFuseigoShuseiMainDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.dgShikakuFuseigoIchiran_Row;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -39,6 +42,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayDateFormat;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -58,6 +65,8 @@ public class ShikakuFuseigoShuseiMainHandler {
     private static final int NUMBER_FLAG_3 = 3;
     private static final int NUMBER_FLAG_4 = 4;
     private final int 第１号被保険者到達基準年齢;
+    private static final RString STRING_被保険者番号 = new RString("被保険者番号");
+    private static final RString CODE_0003 = new RString("0003");
 
     /**
      * コンストラクタです。
@@ -99,6 +108,7 @@ public class ShikakuFuseigoShuseiMainHandler {
     public void setDataGridByDaichoType(List<ShikakuFuseigoBusiness> resultList, RString daichoType, boolean gaiHyoji) {
         List<dgShikakuFuseigoIchiran_Row> rowList = new ArrayList<>();
         RDateTime 処理日時 = null;
+        List<PersonalData> dataList = new ArrayList<>();
         for (ShikakuFuseigoBusiness business : resultList) {
             if (処理日時 == null) {
                 処理日時 = business.get処理日時();
@@ -126,8 +136,10 @@ public class ShikakuFuseigoShuseiMainHandler {
                 row.setSeibetsuAndNenrei(toAppendBR(business.get性別(), business.get年齢()));
                 row.setFuseigoNaiyo(FuseigoRiyu.toValue(business.get不整合理由コード()).get名称());
                 rowList.add(row);
+                dataList.add(this.getPersonalData(business.get被保険者番号(), business.get識別コード()));
             }
         }
+        AccessLogger.log(AccessLogType.照会, dataList);
         div.getDgShikakuFuseigoIchiran().setDataSource(rowList);
         div.getTxtShoriDateTime().setValue(rdateToRstr(処理日時));
     }
@@ -835,5 +847,10 @@ public class ShikakuFuseigoShuseiMainHandler {
         日時.append(new RString(" "));
         日時.append(処理日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
         return 日時.toRString();
+    }
+
+    private PersonalData getPersonalData(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_0003), STRING_被保険者番号, 被保険者番号.value());
+        return PersonalData.of(識別コード, expandedInfo);
     }
 }

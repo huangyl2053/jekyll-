@@ -817,10 +817,8 @@ public class TokuteiNyushoServiceHiShinseiHandler {
     }
 
     private boolean is承認情報等しい(TokubetsuchiikiKasanGemmen 特別地域加算減免申請の情報) {
-
         RString 決定区分 = div.getShinseiDetail().getRadKettaiKubun().getSelectedKey();
         RString 決定区分コード = RString.EMPTY;
-
         if (承認する_KEY.equals(決定区分)) {
             決定区分コード = KetteiKubun.承認する.getコード();
         } else if (承認しない_KEY.equals(決定区分)) {
@@ -828,19 +826,25 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         }
         Decimal 軽減率 = 特別地域加算減免申請の情報.get減額率() == null ? HokenKyufuRitsu.ZERO.value() : 特別地域加算減免申請の情報.get減額率().value();
         if (承認する_KEY.equals(決定区分)) {
-            return is等しい(特別地域加算減免申請の情報.get決定区分(), 決定区分コード)
-                    && 特別地域加算減免申請の情報.get決定年月日().equals(div.getShinseiDetail().getTxtKettaiYMD().getValue())
-                    && (div.getShinseiDetail().getTxtTekiyoYMD().getValue().equals(特別地域加算減免申請の情報.get適用開始年月日())
-                    || div.getShinseiDetail().getTxtTekiyoYMD().getValue().isEmpty() && 特別地域加算減免申請の情報.get適用開始年月日() == null)
-                    && (div.getShinseiDetail().getTxtYukoKigenYMD().getValue().equals(特別地域加算減免申請の情報.get適用終了年月日())
-                    || div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isEmpty() && 特別地域加算減免申請の情報.get適用終了年月日() == null)
-                    && 軽減率.compareTo(div.getShinseiDetail().getTxtKeigenRitsu().getValue()) == 0
-                    && is等しい(特別地域加算減免申請の情報.get非承認理由(), div.getShinseiDetail().getTxtHiShoninRiyu().getValue())
-                    && is等しい(特別地域加算減免申請の情報.get確認番号(), div.getShinseiDetail().getTxtKakuninNo().getValue());
+            return is承認等しい(特別地域加算減免申請の情報, 決定区分コード, 軽減率);
         }
         return is等しい(特別地域加算減免申請の情報.get決定区分(), 決定区分コード)
-                && 特別地域加算減免申請の情報.get決定年月日().equals(div.getShinseiDetail().getTxtKettaiYMD().getValue())
+                && (div.getShinseiDetail().getTxtKettaiYMD().getValue().equals(特別地域加算減免申請の情報.get決定年月日())
+                || div.getShinseiDetail().getTxtKettaiYMD().getValue().isEmpty() && 特別地域加算減免申請の情報.get決定年月日() == null)
                 && is等しい(特別地域加算減免申請の情報.get非承認理由(), div.getShinseiDetail().getTxtHiShoninRiyu().getValue());
+    }
+
+    private boolean is承認等しい(TokubetsuchiikiKasanGemmen 特別地域加算減免申請の情報, RString 決定区分コード, Decimal 軽減率) {
+        return is等しい(特別地域加算減免申請の情報.get決定区分(), 決定区分コード)
+                && (div.getShinseiDetail().getTxtKettaiYMD().getValue().equals(特別地域加算減免申請の情報.get決定年月日())
+                || div.getShinseiDetail().getTxtKettaiYMD().getValue().isEmpty() && 特別地域加算減免申請の情報.get決定年月日() == null)
+                && (div.getShinseiDetail().getTxtTekiyoYMD().getValue().equals(特別地域加算減免申請の情報.get適用開始年月日())
+                || div.getShinseiDetail().getTxtTekiyoYMD().getValue().isEmpty() && 特別地域加算減免申請の情報.get適用開始年月日() == null)
+                && (div.getShinseiDetail().getTxtYukoKigenYMD().getValue().equals(特別地域加算減免申請の情報.get適用終了年月日())
+                || div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isEmpty() && 特別地域加算減免申請の情報.get適用終了年月日() == null)
+                && 軽減率.compareTo(div.getShinseiDetail().getTxtKeigenRitsu().getValue()) == 0
+                && is等しい(特別地域加算減免申請の情報.get非承認理由(), div.getShinseiDetail().getTxtHiShoninRiyu().getValue())
+                && is等しい(特別地域加算減免申請の情報.get確認番号(), div.getShinseiDetail().getTxtKakuninNo().getValue());
     }
 
     private boolean is減免減額申請共有子Div等しい(TokubetsuchiikiKasanGemmen 特別地域加算減免申請の情報) {

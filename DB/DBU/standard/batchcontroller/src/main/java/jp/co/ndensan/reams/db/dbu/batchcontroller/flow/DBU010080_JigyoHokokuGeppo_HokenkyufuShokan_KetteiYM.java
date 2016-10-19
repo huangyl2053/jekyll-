@@ -51,13 +51,14 @@ public class DBU010080_JigyoHokokuGeppo_HokenkyufuShokan_KetteiYM
     private static final String 処理結果確認リスト帳票出力_負担割合エラーフラグ分プロセス = "処理結果確認リスト帳票出力_負担割合エラーフラグ分";
     private static final String 処理結果確認リスト帳票出力_前後給付率エラーフラグ分プロセス = "処理結果確認リスト帳票出力_前後給付率エラーフラグ分";
     private static final String 処理結果確認リスト帳票出力_市町村コード分プロセス = "処理結果確認リスト帳票出力_市町村コード分";
+    private static final EucEntityId ENTITYID = new EucEntityId("DBU010080");
     private DBU010080_JigyoHokokuGeppo_HokenkyufuShokan_KetteiYMParameter parameter;
     private FileSpoolManager manager;
 
     @Override
     protected void defineFlow() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
-                new EucEntityId("DBU010080"), UzUDE0831EucAccesslogFileType.Csv);
+                ENTITYID, UzUDE0831EucAccesslogFileType.Csv);
         parameter = getParameter();
         parameter.setCsvFilePath(manager.getEucOutputDirectry());
         parameter.setManager(manager);

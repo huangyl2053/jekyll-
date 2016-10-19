@@ -44,23 +44,23 @@ public enum HokenshaKyufujissekiOutOrder implements IReportItems {
      */
     被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"DbWT1001Hihokensha\".\"exHihokenshaNo\"")),
     /**
-     * 被保険者番号
+     * サービス提供年月
      */
     サービス提供年月(new RString("0364"), new RString("サービス提供年月"), new RString("\"DbWT1111KyufuJisseki\".\"serviceTeikyoYM\"")),
     /**
-     * 被保険者番号
+     * 事業者番号
      */
     事業者番号(new RString("0366"), new RString("事業者番号"), new RString("\"DbWT1111KyufuJisseki\".\"jigyoshoNo\"")),
     /**
-     * 被保険者番号
+     * 入力識別番号
      */
     入力識別番号(new RString("0304"), new RString("入力識別番号"), new RString("\"DbWT1111KyufuJisseki\".\"nyuryokuShikibetsuNo\"")),
     /**
-     * 被保険者番号
+     * 整理番号
      */
     整理番号(new RString("0305"), new RString("整理番号"), new RString("\"DbWT1111KyufuJisseki\".\"seiriNo\"")),
     /**
-     * 被保険者番号
+     * 現物償還の別
      */
     現物償還の別(new RString("0306"), new RString("現物償還の別"), new RString("\"DbWT1111KyufuJisseki\".\"kyufuJissekiKubun\""));
 

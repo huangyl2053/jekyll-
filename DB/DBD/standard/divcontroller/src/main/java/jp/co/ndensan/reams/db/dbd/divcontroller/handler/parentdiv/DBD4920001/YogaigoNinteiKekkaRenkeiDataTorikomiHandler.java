@@ -57,7 +57,6 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
     private static final RString 共有ファイル名 = new RString("要介護認定結果連携データ取込");
     private static final int NO_328 = 328;
     private final YogaigoNinteiKekkaRenkeiDataTorikomiDiv div;
-    private RString tempPath;
 
     /**
      * コンストラクタです。
@@ -104,8 +103,10 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
      * 連携データを取込みするを押下。
      *
      * @param files FileData[]
+     * @return RString
      */
-    public void onClick_appurodo(FileData... files) {
+    public RString onClick_appurodo(FileData... files) {
+        RString tempPath = RString.EMPTY;
         for (FileData file : files) {
             File shareFile = new File(file.getFilePath().toString());
             RString csvPath = file.getFilePath();
@@ -124,6 +125,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
                     row.getHihono());
             AccessLogger.log(AccessLogType.照会, PersonalData.withHojinNo(ShikibetsuCode.EMPTY, expandedInfo));
         }
+        return tempPath;
     }
 
     /**
@@ -140,9 +142,10 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
     /**
      * バッチ用パラメータクラスを作成します。
      *
+     * @param tempPath RString
      * @return DBD492001_NinteiKekkaInfoUploadParameter
      */
-    public DBD492001_NinteiKekkaInfoUploadParameter toParameter() {
+    public DBD492001_NinteiKekkaInfoUploadParameter toParameter(RString tempPath) {
         DBD492001_NinteiKekkaInfoUploadParameter parameter = new DBD492001_NinteiKekkaInfoUploadParameter();
         if (div.getRadDataSelect().getSelectedKey().equals(new RString("key0"))) {
             parameter.set取込みデータ区分(new RString("1"));

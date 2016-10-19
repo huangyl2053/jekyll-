@@ -57,8 +57,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
     /**
      * print
      *
-     * @param entityList
-     * List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
+     * @param entityList List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
      * @param 宛名データ IShikibetsuTaisho
      * @param 作成日 FlexibleDate
      * @return SourceDataCollection
@@ -77,8 +76,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
     /**
      * printSingle
      *
-     * @param entityList
-     * List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
+     * @param entityList List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
      * @param 宛名データ IShikibetsuTaisho
      * @param 作成日 FlexibleDate
      * @param reportManager ReportManager
@@ -91,11 +89,10 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
         try (ReportAssembler<GassanJigyobunKeisanKekkaRenrakuhyoSource> assembler
                 = createAssembler(property, reportManager)) {
             ReportSourceWriter<GassanJigyobunKeisanKekkaRenrakuhyoSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            FlexibleDate 開始年月日 = new FlexibleDate("20000401");
             RString 通知書定型文1 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100204.getReportId(),
-                    KamokuCode.EMPTY, INDEX_1, INDEX_1, 開始年月日);
+                    KamokuCode.EMPTY, INDEX_1).get(INDEX_1);
             RString 通知書定型文2 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100204.getReportId(),
-                    KamokuCode.EMPTY, INDEX_2, INDEX_1, 開始年月日);
+                    KamokuCode.EMPTY, INDEX_2).get(INDEX_1);
             IToiawasesakiSourceBuilderCreator creator = ReportSourceBuilders.toiawaseSourceBuilder();
             IToiawasesakiSourceBuilder builder = creator.create(GyomuCode.DB介護保険,
                     ReportIdDBC.DBC100204.getReportId(), BushoCode.EMPTY, RDate.getNowDate());

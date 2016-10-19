@@ -4,26 +4,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0260012;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJukyushaIdoRenrakuhyo.KyodoJukyushaIdoRenrakuhyo.IKyodoJukyushaIdoRenrakuhyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyodoJukyushaIdoRenrakuhyo.KyodoJukyushaIdoRenrakuhyo.KyodoJukyushaIdoRenrakuhyoDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonReportPublish;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * KyodoIdoRenrakuhyoHenkoMain のクラスファイル
- *
- * @reamsid_L DBC-1951-020 wangkanglei
+ * KyodoIdoRenrakuhyoHenkoMain のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class KyodoIdoRenrakuhyoHenkoMainDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,10 +30,10 @@ public class KyodoIdoRenrakuhyoHenkoMainDiv extends Panel {
     private KyodoIdoRenrakuhyoHenkoPrintDiv KyodoIdoRenrakuhyoHenkoPrint;
     @JsonProperty("hdnFlag")
     private TextBox hdnFlag;
-    @JsonProperty("KyodoIdoRenrakuhyoHenkoDetailInfo")
-    private KyodoJukyushaIdoRenrakuhyoDiv KyodoIdoRenrakuhyoHenkoDetailInfo;
     @JsonProperty("KanryoMessage")
     private KanryoMessageDiv KanryoMessage;
+    @JsonProperty("KyodoIdoRenrakuhyoHenkoDetailInfo")
+    private KyodoJukyushaIdoRenrakuhyoDiv KyodoIdoRenrakuhyoHenkoDetailInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -82,21 +78,21 @@ public class KyodoIdoRenrakuhyoHenkoMainDiv extends Panel {
     }
 
     /*
-     * getKyodoIdoRenrakuhyoHenkoDetailInfo
-     * @return KyodoIdoRenrakuhyoHenkoDetailInfo
-     */
-    @JsonProperty("KyodoIdoRenrakuhyoHenkoDetailInfo")
-    public IKyodoJukyushaIdoRenrakuhyoDiv getKyodoIdoRenrakuhyoHenkoDetailInfo() {
-        return KyodoIdoRenrakuhyoHenkoDetailInfo;
-    }
-
-    /*
      * getKanryoMessage
      * @return KanryoMessage
      */
     @JsonProperty("KanryoMessage")
     public IKanryoMessageDiv getKanryoMessage() {
         return KanryoMessage;
+    }
+
+    /*
+     * getKyodoIdoRenrakuhyoHenkoDetailInfo
+     * @return KyodoIdoRenrakuhyoHenkoDetailInfo
+     */
+    @JsonProperty("KyodoIdoRenrakuhyoHenkoDetailInfo")
+    public IKyodoJukyushaIdoRenrakuhyoDiv getKyodoIdoRenrakuhyoHenkoDetailInfo() {
+        return KyodoIdoRenrakuhyoHenkoDetailInfo;
     }
 
     /*
@@ -108,7 +104,7 @@ public class KyodoIdoRenrakuhyoHenkoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkRensakuhyoHakko(CheckBoxList chkRensakuhyoHakko) {
+    public void  setChkRensakuhyoHakko(CheckBoxList chkRensakuhyoHakko) {
         this.getKyodoIdoRenrakuhyoHenkoPrint().setChkRensakuhyoHakko(chkRensakuhyoHakko);
     }
 
@@ -118,8 +114,28 @@ public class KyodoIdoRenrakuhyoHenkoMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnReportPublish(ButtonReportPublish btnReportPublish) {
+    public void  setBtnReportPublish(ButtonReportPublish btnReportPublish) {
         this.getKyodoIdoRenrakuhyoHenkoPrint().setBtnReportPublish(btnReportPublish);
+    }
+
+    @JsonIgnore
+    public HorizontalLine getLin01() {
+        return this.getKyodoIdoRenrakuhyoHenkoPrint().getLin01();
+    }
+
+    @JsonIgnore
+    public void  setLin01(HorizontalLine lin01) {
+        this.getKyodoIdoRenrakuhyoHenkoPrint().setLin01(lin01);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadTeiseiKomokuHantei() {
+        return this.getKyodoIdoRenrakuhyoHenkoPrint().getRadTeiseiKomokuHantei();
+    }
+
+    @JsonIgnore
+    public void  setRadTeiseiKomokuHantei(RadioButton radTeiseiKomokuHantei) {
+        this.getKyodoIdoRenrakuhyoHenkoPrint().setRadTeiseiKomokuHantei(radTeiseiKomokuHantei);
     }
 
     // </editor-fold>

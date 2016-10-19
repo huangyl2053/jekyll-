@@ -60,7 +60,7 @@ public class KyufujissekiKongakuSyuuyakuDoKeyGakuninProcess extends BatchProcess
                 ? RString.EMPTY : dbWT1132ErrorEntity.getServiceTeikyoYM().toDateString();
         message = message.concat(同一キーMESSAGE)
                 .concat(RString.FULL_SPACE)
-                .concat(dbWT1132ErrorEntity.getKanriNo()).concat(コロン)
+                .concat(dbWT1132ErrorEntity.getKanriNo() == null ? RString.EMPTY : dbWT1132ErrorEntity.getKanriNo()).concat(コロン)
                 .concat(入力識別番号).concat(コロン)
                 .concat(被保険者番号).concat(コロン)
                 .concat(サービス提供年月).concat(改行);

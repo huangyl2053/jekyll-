@@ -132,7 +132,7 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
             return 賦課年度開始日;
         }
         FlexibleDate temp = entity.get資格().getIchigoShikakuShutokuYMD();
-        if (temp != null && temp.isBefore(賦課年度開始日)) {
+        if (!賦課年度開始日.isBefore(temp)) {
             return 賦課年度開始日;
         } else {
             return temp;

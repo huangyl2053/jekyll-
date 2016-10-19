@@ -94,6 +94,7 @@ public class HanyouRisutoSyuturyokuEntity {
     private boolean 住所地特例フラグ;
     private boolean 広域内住所地特例フラグ;
     private LasdecCode 広住特措置元市町村コード;
+    private LasdecCode 被保険者市町村コード;
 
     private JigyoshaNo 入所施設コード;
     private FlexibleDate 入所年月日;

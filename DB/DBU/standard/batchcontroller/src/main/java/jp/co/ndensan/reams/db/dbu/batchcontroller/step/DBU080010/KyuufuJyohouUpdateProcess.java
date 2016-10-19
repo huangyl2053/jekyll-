@@ -83,6 +83,7 @@ public class KyuufuJyohouUpdateProcess extends BatchProcessBase<TeyikyouTayisyou
 
     @Override
     protected void createWriter() {
+        dbT7301EntityWriter = new BatchPermanentTableWriter(DbT7301TokuteiKojinJohoHanKanriEntity.class);
         中間DB提供基本情報 = new BatchEntityCreatedTempTableWriter(TABLE_中間DB提供基本情報,
                 TeikyoKihonJohoNNTempEntity.class);
     }
@@ -103,7 +104,7 @@ public class KyuufuJyohouUpdateProcess extends BatchProcessBase<TeyikyouTayisyou
 
     @Override
     protected void afterExecute() {
-        TokuteiKojinJohoTeikyoManager.createInstance().update特定個人情報提供(TABLE_中間DB提供基本情報,
+        TokuteiKojinJohoTeikyoManager.createInstance().update特定個人情報提供(new RString("\"").concat(TABLE_中間DB提供基本情報).concat("\""),
                 processParameter.get新規異動区分(), TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
                 DataSetNo._0300給付情報.getコード(), processParameter.get版番号());
         List<TokuteiKojinJohoHanKanri> businessList = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(

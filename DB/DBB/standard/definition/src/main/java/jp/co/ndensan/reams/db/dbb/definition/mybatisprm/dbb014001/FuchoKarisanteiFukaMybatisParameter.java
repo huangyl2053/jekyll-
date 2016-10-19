@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb014001;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,6 +30,7 @@ public class FuchoKarisanteiFukaMybatisParameter implements IMyBatisParameter {
     private FlexibleDate 調定前年度終了日;
     private RString 処理日付区分;
     private RString 出力順;
+    private YMDHMS 処理日付;
 
     private RString 作成処理名;
     private RString 特別徴収対象者情報;

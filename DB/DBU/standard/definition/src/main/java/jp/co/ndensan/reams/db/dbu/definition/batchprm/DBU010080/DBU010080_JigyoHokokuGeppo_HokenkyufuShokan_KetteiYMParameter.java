@@ -74,12 +74,6 @@ public class DBU010080_JigyoHokokuGeppo_HokenkyufuShokan_KetteiYMParameter exten
     private FileSpoolManager manager;
 
     /**
-     * コンストラクタです。
-     */
-    public DBU010080_JigyoHokokuGeppo_HokenkyufuShokan_KetteiYMParameter() {
-    }
-
-    /**
      * Process用のパラメータを生成します。
      *
      * @return JigyoHokokuRenkeiHokenkyufuShokanKetteiProcessParameter

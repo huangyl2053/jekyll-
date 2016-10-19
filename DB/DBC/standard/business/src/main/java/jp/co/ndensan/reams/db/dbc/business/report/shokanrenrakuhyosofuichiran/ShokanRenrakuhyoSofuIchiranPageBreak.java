@@ -66,17 +66,27 @@ public class ShokanRenrakuhyoSofuIchiranPageBreak extends PageBreaker<ShokanRenr
         boolean flag = false;
         if (!flag && this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.保険者番号.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().hokenshaNo).equals(nextRecord.getSource().hokenshaNo);
-        }
-        if (!flag && this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.被保険者番号.get項目ID())) {
+        } else if (this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.郵便番号.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().yubinNo).equals(nextRecord.getSource().yubinNo);
+        } else if (this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.町域コード.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().choikiCode).equals(nextRecord.getSource().choikiCode);
+        } else if (this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.行政区コード.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().gyoseikuCode).equals(nextRecord.getSource().gyoseikuCode);
+        } else if (this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.氏名５０音カナ.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().shimei50onKana).equals(nextRecord.getSource().shimei50onKana);
+        } else if (this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.市町村コード.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().shichosonCode).equals(nextRecord.getSource().shichosonCode);
+        } else if (this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.被保険者番号.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().list_5).equals(nextRecord.getSource().list_5);
-        }
-        if (!flag && this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.サービス提供年月.get項目ID())) {
+        } else if (this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.サービス提供年月.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().list_3).equals(nextRecord.getSource().list_3);
-        }
-        if (!flag && this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.整理番号.get項目ID())) {
+        } else if (this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.整理番号.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().list_2).equals(nextRecord.getSource().list_2);
-        }
-        if (!flag && this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.様式番号.get項目ID())) {
+        } else if (this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.償還払申請日.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().shinseiYMD).equals(nextRecord.getSource().shinseiYMD);
+        } else if (this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.指定事業者番号.get項目ID())) {
+            flag = !checkNull(currentRecord.getSource().jigyoshaNo).equals(nextRecord.getSource().jigyoshaNo);
+        } else if (this.keys.contains(ShokanRenrakuhyoSofuIchiranOrder.様式番号.get項目ID())) {
             flag = !checkNull(currentRecord.getSource().list_14).equals(nextRecord.getSource().list_14);
         }
         return flag;
