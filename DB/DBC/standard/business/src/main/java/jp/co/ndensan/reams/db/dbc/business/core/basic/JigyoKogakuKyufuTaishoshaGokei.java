@@ -10,7 +10,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -245,13 +244,32 @@ public class JigyoKogakuKyufuTaishoshaGokei
     @Override
     public JigyoKogakuKyufuTaishoshaGokei deleted() {
         DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+        deletedEntity.setState(EntityDataState.Deleted);
         return new JigyoKogakuKyufuTaishoshaGokei(deletedEntity, id);
+    }
+
+    /**
+     * 修正 JigyoKogakuKyufuTaishoshaGokei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public JigyoKogakuKyufuTaishoshaGokei modified() {
+        DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new JigyoKogakuKyufuTaishoshaGokei(modifiedEntity, id);
+    }
+
+    /**
+     * add JigyoKogakuKyufuTaishoshaGokei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public JigyoKogakuKyufuTaishoshaGokei added() {
+        DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new JigyoKogakuKyufuTaishoshaGokei(addedEntity, id);
     }
 
     /**
