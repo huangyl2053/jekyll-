@@ -587,7 +587,7 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
                     : SuiteiKyufuKubunCode.toValue(business.get一次判定結果情報().get給付区分()).get名称());
             a4Data.set意見書認知症高齢者自立度(business.get一次判定結果情報().get障害高齢者自立度日常生活自立度());
             a4Data.set現在のサービス利用状況名(business.get一次判定結果情報().getサービス区分コード());
-            //a4Data.set現在のサービス状況(shutsuryoku.setサービス状況(business, 認定調査票概況調査リスト, 認定調査票フラグリスト));
+            a4Data.set現在のサービス状況(shutsuryoku.setサービス状況(business, 認定調査票概況調査リスト, 認定調査票フラグリスト));
             set帳票印刷(a4Data, business, shutsuryoku, 認定調査票調査項目リスト, 前回調査項目リスト,
                     dbt5304Entity, 前回dbt5304Entity, 認定調査特記事項番号リスト);
             printService.print(a4Data);

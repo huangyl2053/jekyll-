@@ -60,7 +60,7 @@ and open the template in the editor.
         </if>
         <if test="is利用者負担段階_利用者負担4段階">
             AND  A."利用者負担段階" = #{利用者負担4段階}
-            AND A."is高齢者複数世帯" = FALSE
+            AND A."is高齢者複数世帯" = TRUE
         </if>
     </select>
 

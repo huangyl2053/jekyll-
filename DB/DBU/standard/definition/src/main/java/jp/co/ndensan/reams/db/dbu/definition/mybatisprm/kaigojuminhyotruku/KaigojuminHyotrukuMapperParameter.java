@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojuminhyotruku;
 
-import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,7 +20,7 @@ import lombok.Getter;
 public final class KaigojuminHyotrukuMapperParameter implements IMyBatisParameter {
 
     private final RDateTime shoriTimestamp;
-    private final List<RString> shichosonCode;
+    private final RString shichosonCode;
 
     /**
      * コンストラクタです。
@@ -30,7 +29,7 @@ public final class KaigojuminHyotrukuMapperParameter implements IMyBatisParamete
      */
     private KaigojuminHyotrukuMapperParameter(
             RDateTime shoriTimestamp,
-            List<RString> shichosonCode) {
+            RString shichosonCode) {
 
         this.shoriTimestamp = shoriTimestamp;
         this.shichosonCode = shichosonCode;
@@ -45,7 +44,7 @@ public final class KaigojuminHyotrukuMapperParameter implements IMyBatisParamete
      */
     public static KaigojuminHyotrukuMapperParameter createParam_common(
             RDateTime shoriTimestamp,
-            List<RString> shichosonCode) {
+            RString shichosonCode) {
         return new KaigojuminHyotrukuMapperParameter(shoriTimestamp, shichosonCode);
     }
 }
