@@ -44,6 +44,7 @@ public class ShoukanFurikomiProcess extends BatchProcessBase<FurikomiDetaiResult
     private static final int ZERO = 0;
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
+    private static final int 桁数_10 = 10;
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
@@ -127,9 +128,9 @@ public class ShoukanFurikomiProcess extends BatchProcessBase<FurikomiDetaiResult
         data.setKozaMeiginin(AtenaKanaMeisho.EMPTY);
         data.setKozaMeigininKanji(AtenaMeisho.EMPTY);
         if (TWO.equals(parameter.get支払方法().getコード())) {
-            data.setKozaNayoseKey(fdre.get償還払支給判定結果Entity().getHiHokenshaNo().getColumnValue().
+            data.setKozaNayoseKey(fdre.get償還払支給判定結果Entity().getHiHokenshaNo().getColumnValue().padZeroToLeft(桁数_10).
                     concat(fdre.get償還払支給判定結果Entity().getServiceTeikyoYM().toDateString()).
-                    concat(fdre.get償還払支給判定結果Entity().getSeiriNo()).concat(new RString("0000")));
+                    concat(fdre.get償還払支給判定結果Entity().getSeiriNo().padZeroToLeft(桁数_10)).concat(new RString("0000")));
         } else if (!TWO.equals(parameter.get支払方法().getコード())) {
             data.setKozaNayoseKey(RString.EMPTY);
         }
