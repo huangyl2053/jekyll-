@@ -180,49 +180,50 @@ public class KaigoKyufuJuryoininKeiyakuToroku {
         CustomerBarCode barcode = new CustomerBarCode();
         if (受領委任契約事業者データ.get送付先住所() == null || 受領委任契約事業者データ.get送付先住所().getColumnValue().isEmpty()) {
             事業者用Entity.set郵便番号(受領委任契約事業者データ.get契約事業者郵便番号().getEditedYubinNo());
-            事業者用Entity.set住所(受領委任契約事業者データ.get契約事業者住所().getColumnValue());
-            事業者用Entity.set氏名(受領委任契約事業者データ.get契約事業者名称() == null ? RString.EMPTY
+            事業者用Entity.set住所Text(受領委任契約事業者データ.get契約事業者住所().getColumnValue());
+            事業者用Entity.set氏名Text(受領委任契約事業者データ.get契約事業者名称() == null ? RString.EMPTY
                     : 受領委任契約事業者データ.get契約事業者名称().getColumnValue());
             CustomerBarCodeResult result = barcode.convertCustomerBarCode(受領委任契約事業者データ.get契約事業者郵便番号().getYubinNo(),
                     受領委任契約事業者データ.get契約事業者住所().getColumnValue());
             事業者用Entity.setカスタマバーコード(result.getCustomerBarCode());
         } else {
             事業者用Entity.set郵便番号(受領委任契約事業者データ.get送付先郵便番号().getEditedYubinNo());
-            事業者用Entity.set住所(受領委任契約事業者データ.get送付先住所().getColumnValue());
-            事業者用Entity.set氏名(受領委任契約事業者データ.get送付先事業者名称() == null ? RString.EMPTY
+            事業者用Entity.set住所Text(受領委任契約事業者データ.get送付先住所().getColumnValue());
+            事業者用Entity.set氏名Text(受領委任契約事業者データ.get送付先事業者名称() == null ? RString.EMPTY
                     : 受領委任契約事業者データ.get送付先事業者名称().getColumnValue());
             CustomerBarCodeResult result = barcode.convertCustomerBarCode(受領委任契約事業者データ.get送付先郵便番号().getYubinNo(),
                     受領委任契約事業者データ.get送付先住所().getColumnValue());
             事業者用Entity.setカスタマバーコード(result.getCustomerBarCode());
         }
         事業者用Entity.set行政区(RString.EMPTY);
-        事業者用Entity.set住所１(RString.EMPTY);
-        事業者用Entity.set住所２(RString.EMPTY);
-        事業者用Entity.set住所３(RString.EMPTY);
-        事業者用Entity.set方書１(RString.EMPTY);
-        事業者用Entity.set方書２(RString.EMPTY);
-        事業者用Entity.set方書小1(RString.EMPTY);
-        事業者用Entity.set方書小2(RString.EMPTY);
-        事業者用Entity.set方書(RString.EMPTY);
+        事業者用Entity.set住所1(RString.EMPTY);
+        事業者用Entity.set住所2(RString.EMPTY);
+        事業者用Entity.set住所3(RString.EMPTY);
+        事業者用Entity.set方書Text(RString.EMPTY);
+        事業者用Entity.set方書1(RString.EMPTY);
+        事業者用Entity.set方書2(RString.EMPTY);
+        事業者用Entity.set方書Small1(RString.EMPTY);
+        事業者用Entity.set方書Small2(RString.EMPTY);
+        事業者用Entity.set代納人区分(RString.EMPTY);
         事業者用Entity.set氏名1(RString.EMPTY);
         事業者用Entity.set氏名2(RString.EMPTY);
-        事業者用Entity.set小氏名1(RString.EMPTY);
-        事業者用Entity.set小氏名2(RString.EMPTY);
+        事業者用Entity.set氏名Small1(RString.EMPTY);
+        事業者用Entity.set氏名Small2(RString.EMPTY);
+        事業者用Entity.set氏名samabunText(RString.EMPTY);
+        事業者用Entity.set氏名samabun1(RString.EMPTY);
+        事業者用Entity.set氏名samabun2(RString.EMPTY);
+        事業者用Entity.set氏名samabunSmall1(RString.EMPTY);
+        事業者用Entity.set氏名samabunSmall2(RString.EMPTY);
+
         ChohyoSeigyoHanyo 名称付与制御汎用 = load帳票制御汎用(事業者用帳票分類ID, 宛先敬称);
         事業者用Entity.set名称付与1(名称付与制御汎用.get設定値());
         事業者用Entity.set名称付与2(RString.EMPTY);
-        事業者用Entity.set代納区分名(RString.EMPTY);
         事業者用Entity.set様文1(RString.EMPTY);
         事業者用Entity.set様文2(RString.EMPTY);
-        事業者用Entity.set様文氏名1(RString.EMPTY);
-        事業者用Entity.set様文氏名2(RString.EMPTY);
-        事業者用Entity.set小様文氏名1(RString.EMPTY);
-        事業者用Entity.set小様文氏名2(RString.EMPTY);
-        事業者用Entity.set様文氏名(RString.EMPTY);
-        事業者用Entity.set左括弧1(RString.EMPTY);
-        事業者用Entity.set左括弧2(RString.EMPTY);
-        事業者用Entity.set右括弧1(RString.EMPTY);
-        事業者用Entity.set右括弧2(RString.EMPTY);
+        事業者用Entity.set括弧Left1(RString.EMPTY);
+        事業者用Entity.set括弧Left2(RString.EMPTY);
+        事業者用Entity.set括弧Right1(RString.EMPTY);
+        事業者用Entity.set括弧Right2(RString.EMPTY);
         事業者用Entity.set文書番号(文書番号);
 
         ChohyoSeigyoHanyo 帳票制御汎用 = load帳票制御汎用(事業者用帳票分類ID, 帳票タイトル);
@@ -269,34 +270,34 @@ public class KaigoKyufuJuryoininKeiyakuToroku {
             SofubutsuAtesakiSource 送付物宛先 = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
             利用者向けEntity.set郵便番号(送付物宛先.yubinNo);
             利用者向けEntity.set行政区(送付物宛先.gyoseiku);
-            利用者向けEntity.set住所１(送付物宛先.jusho1);
-            利用者向けEntity.set住所２(送付物宛先.jusho2);
-            利用者向けEntity.set住所３(送付物宛先.jusho3);
-            利用者向けEntity.set住所(送付物宛先.jushoText);
-            利用者向けEntity.set方書１(送付物宛先.katagaki1);
-            利用者向けEntity.set方書２(送付物宛先.katagaki2);
-            利用者向けEntity.set方書小1(送付物宛先.katagakiSmall1);
-            利用者向けEntity.set方書小2(送付物宛先.katagakiSmall2);
-            利用者向けEntity.set方書(送付物宛先.katagakiText);
+            利用者向けEntity.set住所Text(送付物宛先.jushoText);
+            利用者向けEntity.set住所1(送付物宛先.jusho1);
+            利用者向けEntity.set住所2(送付物宛先.jusho2);
+            利用者向けEntity.set住所3(送付物宛先.jusho3);
+            利用者向けEntity.set方書Text(送付物宛先.katagakiText);
+            利用者向けEntity.set方書1(送付物宛先.katagaki1);
+            利用者向けEntity.set方書2(送付物宛先.katagaki2);
+            利用者向けEntity.set方書Small1(送付物宛先.katagakiSmall1);
+            利用者向けEntity.set方書Small2(送付物宛先.katagakiSmall2);
+            利用者向けEntity.set代納人区分(送付物宛先.dainoKubunMei);
+            利用者向けEntity.set氏名Text(送付物宛先.shimeiText);
             利用者向けEntity.set氏名1(送付物宛先.shimei1);
             利用者向けEntity.set氏名2(送付物宛先.shimei2);
-            利用者向けEntity.set小氏名1(送付物宛先.shimeiSmall1);
-            利用者向けEntity.set小氏名2(送付物宛先.shimeiSmall2);
-            利用者向けEntity.set氏名(送付物宛先.shimeiText);
+            利用者向けEntity.set氏名Small1(送付物宛先.shimeiSmall1);
+            利用者向けEntity.set氏名Small2(送付物宛先.shimeiSmall2);
+            利用者向けEntity.set氏名samabunText(送付物宛先.samabunShimeiText);
+            利用者向けEntity.set氏名samabun1(送付物宛先.samabunShimei1);
+            利用者向けEntity.set氏名samabun2(送付物宛先.samabunShimei2);
+            利用者向けEntity.set氏名samabunSmall1(送付物宛先.samabunShimeiSmall1);
+            利用者向けEntity.set氏名samabunSmall2(送付物宛先.samabunShimeiSmall2);
             利用者向けEntity.set名称付与1(送付物宛先.meishoFuyo1);
             利用者向けEntity.set名称付与2(送付物宛先.meishoFuyo2);
-            利用者向けEntity.set代納区分名(送付物宛先.dainoKubunMei);
             利用者向けEntity.set様文1(送付物宛先.samaBun1);
             利用者向けEntity.set様文2(送付物宛先.samaBun2);
-            利用者向けEntity.set様文氏名1(送付物宛先.samabunShimei1);
-            利用者向けEntity.set様文氏名2(送付物宛先.samabunShimei2);
-            利用者向けEntity.set小様文氏名1(送付物宛先.samabunShimeiSmall1);
-            利用者向けEntity.set小様文氏名2(送付物宛先.samabunShimeiSmall2);
-            利用者向けEntity.set様文氏名(送付物宛先.samabunShimeiText);
-            利用者向けEntity.set左括弧1(送付物宛先.kakkoLeft1);
-            利用者向けEntity.set左括弧2(送付物宛先.kakkoLeft2);
-            利用者向けEntity.set右括弧1(送付物宛先.kakkoRight1);
-            利用者向けEntity.set右括弧2(送付物宛先.kakkoRight2);
+            利用者向けEntity.set括弧Left1(送付物宛先.kakkoLeft1);
+            利用者向けEntity.set括弧Left2(送付物宛先.kakkoLeft2);
+            利用者向けEntity.set括弧Right1(送付物宛先.kakkoRight1);
+            利用者向けEntity.set括弧Right2(送付物宛先.kakkoRight2);
             利用者向けEntity.setカスタマバーコード(送付物宛先.customerBarCode);
         }
     }
