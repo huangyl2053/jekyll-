@@ -88,6 +88,7 @@ public class JigyouHoukokuTokeiProcess extends BatchProcessBase<IppanJokyoJigyou
         tokeiEntity.setShukeiTani(entity.getShukeiTani());
         tokeiEntity.setTateNo(entity.getTateNo());
         tokeiEntity.setYokoNo(entity.getYokoNo());
+        tokeiEntity.setShukeiKekkaAtai(entity.getShukeiKekkaAtai());
         tokeiEntity.setTateKomokuCode(Code.EMPTY);
         tokeiEntity.setShukeiKomokuMeisho(RString.EMPTY);
         tokeiEntity.setYokoKomokuCode(Code.EMPTY);
