@@ -16,10 +16,10 @@ import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.ur.urd.business.core.heijunka.GyomuConfigJohoClass;
-import jp.co.ndensan.reams.ur.urd.business.core.heijunka.Heijunka;
-import jp.co.ndensan.reams.ur.urd.business.core.heijunka.HeijunkaInput;
-import jp.co.ndensan.reams.ur.urd.business.core.heijunka.HeijunkaOutput;
+import jp.co.ndensan.reams.dz.dzx.business.core.heijunka.GyomuConfigJohoClass;
+import jp.co.ndensan.reams.dz.dzx.business.core.heijunka.Heijunka;
+import jp.co.ndensan.reams.dz.dzx.business.core.heijunka.HeijunkaInput;
+import jp.co.ndensan.reams.dz.dzx.business.core.heijunka.HeijunkaOutput;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -137,7 +137,7 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
         業務コンフィグ情報.set基準となる差額幅(Decimal.ZERO);
         業務コンフィグ情報.set基準となる差額率(Decimal.ZERO);
         業務コンフィグ情報.set平準化対象期別額最小値(Decimal.ONE);
-        List<jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu> 期別リスト = new ArrayList<>();
+        List<jp.co.ndensan.reams.dz.dzx.business.core.heijunka.Kibetsu> 期別リスト = new ArrayList<>();
         期別リスト作成(期別リスト);
         業務コンフィグ情報.set期別クラス(期別リスト);
         heijunkaInput.set業務コンフィグ情報(業務コンフィグ情報);
@@ -147,8 +147,8 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
         return fuchoChoteigaku == null ? Decimal.ZERO : fuchoChoteigaku;
     }
 
-    private void 期別リスト作成(List<jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu> 期別リスト) {
-        jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu 期別 = new jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu();
+    private void 期別リスト作成(List<jp.co.ndensan.reams.dz.dzx.business.core.heijunka.Kibetsu> 期別リスト) {
+        jp.co.ndensan.reams.dz.dzx.business.core.heijunka.Kibetsu 期別 = new jp.co.ndensan.reams.dz.dzx.business.core.heijunka.Kibetsu();
         for (int i = 0; i <= NUM_11; i++) {
             期別リスト.add(期別);
         }
