@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.ca.cax.batchcontroller.step.choteitoroku.ChoteiDataCheckProcess;
+import jp.co.ndensan.reams.ca.cax.definition.batchprm.ChoteiTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB004001.FukaJohoHenshuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB004001.FukaJohoInsertProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
@@ -48,9 +49,9 @@ public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTo
     @Step(CALL_CHOTEITOROKU_FLOW)
     protected IBatchFlowCommand callChoteiTorokuFlow() {
         Map param = new HashMap();
-        param.put(new RString("schema"), new RString("rgdb"));
-        param.put(new RString("choteiIdNumbering"), Boolean.valueOf(true));
-        param.put(new RString("shunoIdNumbering"), Boolean.valueOf(true));
+        param.put(new RString(ChoteiTorokuParameter.SCHEMA), new RString("rgdb"));
+        param.put(new RString(ChoteiTorokuParameter.調定ID採番), Boolean.valueOf(true));
+        param.put(new RString(ChoteiTorokuParameter.収納ID採番), Boolean.valueOf(true));
         return simpleBatch(ChoteiDataCheckProcess.class).arguments(param).define();
     }
 
