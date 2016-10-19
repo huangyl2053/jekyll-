@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiguide.Sh
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.dgKensakuKekkaIchiran_Row;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -49,11 +48,7 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         if (dataPassModel != null) {
             div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
-            if (!RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
-                LasdecCode 市町村コード = new LasdecCode(dataPassModel.get市町村コード());
-                div.getHokenshaList().setSelectedShichosonIfExist(市町村コード);
             }
-        }
         div.getKensakuKekkaIchiran().getDgKensakuKekkaIchiran().setDataSource(null);
     }
 
@@ -75,7 +70,7 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
             for (int i = 0; i < list.size(); i++) {
                 ShujiiIryokikanAndShujii business = list.get(i);
                 dgKensakuKekkaIchiran_Row kensakuKekkaIchiran_Row = new dgKensakuKekkaIchiran_Row();
-                kensakuKekkaIchiran_Row.getIryoKikancode().setValue(nullToEmpty(business.get医療機関コード()));
+                kensakuKekkaIchiran_Row.getIryoKikancode().setValue(nullToEmpty(business.get主治医医療機関コード()));
                 kensakuKekkaIchiran_Row.setIryoKikanMeisho(nullToEmpty(business.get主治医医療機関名称()));
                 kensakuKekkaIchiran_Row.setIryoKikanKanaMeisho(nullToEmpty(business.get主治医医療機関カナ()));
                 kensakuKekkaIchiran_Row.setIryoKikanjusho(nullToEmpty(business.get主治医医療機関情報_住所()));
