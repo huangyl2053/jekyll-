@@ -73,34 +73,16 @@ public class KyufuKanrihyoKyotakuYoboSogoJigyoServiceEditor implements IKyufuKan
         }
         source.hihokenshaKanaShimei = 帳票出力対象データ.get宛名カナ名称();
         source.hihokenshaShimei = 帳票出力対象データ.get宛名名称();
-
-        FlexibleDate 生年月日 = 帳票出力対象データ.get生年月日();
-        if (生年月日 != null) {
-            RString era = 生年月日.wareki().eraType(EraType.KANJI).toDateString();
-            if (era.startsWith(元号_明治)) {
-                source.seinengappiGengoMeiji = RString.EMPTY;
-                source.seinengappiGengoTaisho = HOUSI;
-                source.seinengappiGengoShowa = HOUSI;
-            } else if (era.startsWith(元号_大正)) {
-                source.seinengappiGengoMeiji = HOUSI;
-                source.seinengappiGengoTaisho = RString.EMPTY;
-                source.seinengappiGengoShowa = HOUSI;
-            } else if (era.startsWith(元号_昭和)) {
-                source.seinengappiGengoMeiji = HOUSI;
-                source.seinengappiGengoTaisho = HOUSI;
-                source.seinengappiGengoShowa = RString.EMPTY;
-            }
-            source.seinengappiYY = era.substring(2, INDEX_4);
-            source.seinengappiMM = era.substring(INDEX_5, INDEX_7);
-            source.seinengappiDD = era.substring(INDEX_8);
-        }
+        edit1(source);
         if (!RString.isNullOrEmpty(帳票出力対象データ.get性別コード())) {
             source.seibetsu = Seibetsu.toValue(帳票出力対象データ.get性別コード()).get名称();
         }
         RString 表示用要介護状態区分コード = 帳票出力対象データ.get表示用要介護状態区分コード();
         FlexibleYearMonth 利用年月 = 帳票出力対象データ.get利用年月();
-        source.yokaigoJotaiKubun
-                = YokaigoJotaiKubunSupport.toValue(利用年月, 表示用要介護状態区分コード).getName();
+        if ((利用年月 != null && !利用年月.isEmpty()) && !RString.isNullOrEmpty(表示用要介護状態区分コード)) {
+            source.yokaigoJotaiKubun
+                    = YokaigoJotaiKubunSupport.toValue(利用年月, 表示用要介護状態区分コード).getName();
+        }
         source.shikyuGendoKijunGaku = get金額のカンマ編集(帳票出力対象データ.get表示用支給限度単位数());
         RString 限度額適用期間_開始年月 = パターン62(帳票出力対象データ.get限度額適用期間_開始年月());
         if (!RString.isNullOrEmpty(限度額適用期間_開始年月)) {
@@ -147,14 +129,37 @@ public class KyufuKanrihyoKyotakuYoboSogoJigyoServiceEditor implements IKyufuKan
             source.listUpper_6 = new RString("(-)");
             source.listLower_3 = new RString(帳票出力対象データ.get給付計画単位数().toString()).replace(new RString("-"), RString.HALF_SPACE);
             source.gokeiTanisuMainusKigo = new RString("(-)");
-            source.gokeiTanisu =  new RString(帳票出力対象データ.get給付計画単位数().toString()).replace(new RString("-"), RString.HALF_SPACE);
+            source.gokeiTanisu = new RString(帳票出力対象データ.get給付計画単位数().toString()).replace(new RString("-"), RString.HALF_SPACE);
         } else {
             source.listLower_3 = new RString(帳票出力対象データ.get給付計画単位数().toString());
-            source.gokeiTanisu =  new RString(帳票出力対象データ.get給付計画単位数().toString());
+            source.gokeiTanisu = new RString(帳票出力対象データ.get給付計画単位数().toString());
         }
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 帳票出力対象データ.get被保険者番号());
         return source;
+    }
+
+    private void edit1(KyufuKanrihyoKyotakuYoboSogoJigyoServiceReportSource source) {
+        FlexibleDate 生年月日 = 帳票出力対象データ.get生年月日();
+        if (生年月日 != null && !生年月日.isEmpty()) {
+            RString era = 生年月日.wareki().eraType(EraType.KANJI).toDateString();
+            if (era.startsWith(元号_明治)) {
+                source.seinengappiGengoMeiji = RString.EMPTY;
+                source.seinengappiGengoTaisho = HOUSI;
+                source.seinengappiGengoShowa = HOUSI;
+            } else if (era.startsWith(元号_大正)) {
+                source.seinengappiGengoMeiji = HOUSI;
+                source.seinengappiGengoTaisho = RString.EMPTY;
+                source.seinengappiGengoShowa = HOUSI;
+            } else if (era.startsWith(元号_昭和)) {
+                source.seinengappiGengoMeiji = HOUSI;
+                source.seinengappiGengoTaisho = HOUSI;
+                source.seinengappiGengoShowa = RString.EMPTY;
+            }
+            source.seinengappiYY = era.substring(2, INDEX_4);
+            source.seinengappiMM = era.substring(INDEX_5, INDEX_7);
+            source.seinengappiDD = era.substring(INDEX_8);
+        }
     }
 
     private RString get金額のカンマ編集(Decimal 金額) {
