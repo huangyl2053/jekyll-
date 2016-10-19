@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutojyukyusya.Han
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -199,13 +200,13 @@ public class HanyoRisutoJyukyusyaProcessParameter implements IBatchProcessParame
     /**
      * Mybatisのパラメータを作成します。
      *
-     * @param psmShikibetsuTaisho 宛名識別対象PSM
+     * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoParam
      * @param psmAtesaki 宛先PSM
      * @param 出力順 RString
      * @return HanyoRisutoJyukyusyaDaichoMybatisParameter
      */
     public HanyoRisutoJyukyusyaMybatisParameter toHanyoRisutoJyukyusyaMybatisParameter(
-            RString psmShikibetsuTaisho,
+            UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam,
             RString psmAtesaki,
             RString 出力順) {
         if (ChushutsuHohoKubun.直近.equals(抽出方法区分)) {
@@ -244,7 +245,7 @@ public class HanyoRisutoJyukyusyaProcessParameter implements IBatchProcessParame
         set項目1();
         set項目2();
         set項目3();
-        return new HanyoRisutoJyukyusyaMybatisParameter(psmShikibetsuTaisho,
+        return new HanyoRisutoJyukyusyaMybatisParameter(shikibetsutaishoParam,
                 psmAtesaki, is直近, is有効データ内最新, is抽出方法区分_基準日,
                 is抽出方法区分_範囲, is日付範囲From, is日付範囲To,
                 is資格取得者のみ, is資格喪失者のみ, is旧措置者, is1号被保険者true2号被保険者true,
