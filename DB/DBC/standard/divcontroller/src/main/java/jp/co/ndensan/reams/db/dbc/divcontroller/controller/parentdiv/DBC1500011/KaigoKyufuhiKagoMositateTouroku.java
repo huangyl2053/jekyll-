@@ -231,14 +231,20 @@ public class KaigoKyufuhiKagoMositateTouroku {
      * @return ResponseData<KaigoKyufuhiKagoMositateTourokuDiv>
      */
     public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onClick_BtnSave(KaigoKyufuhiKagoMositateTourokuDiv div) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (is送付済みチェック(div)) {
-            return ResponseData.of(div).addValidationMessages(getValidation(div).check送付済みチェック()).respond();
+            validationMessages.add(getValidation(div).check送付済みチェック());
         }
-        if (is申立日の年月と提供年月の関連チェック(div)) {
-            return ResponseData.of(div).addValidationMessages(getValidation(div).check申立日エラー()).respond();
+        if (!削除モード.equals(div.getHdnState())) {
+            if (is申立日の年月と提供年月の関連チェック(div)) {
+                validationMessages.add(getValidation(div).check申立日エラー());
+            }
+            if (is同月審査用と申立理由の関連チェック(div)) {
+                validationMessages.add(getValidation(div).check同月審査申立理由整合性エラー());
+            }
         }
-        if (is同月審査用と申立理由の関連チェック(div)) {
-            return ResponseData.of(div).addValidationMessages(getValidation(div).check同月審査申立理由整合性エラー()).respond();
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         int index = div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().getClickedRowId();
         KaigoKyufuhiKagoMositateTourokuResult 給付実績情報 = ViewStateHolder
