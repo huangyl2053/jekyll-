@@ -7,40 +7,45 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.kyokaisoggaitoshareportp
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputResult;
 import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListBodyItem;
 import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListHeadItem;
 import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReport;
+import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlistchohyodatasakusei.KyokaisoKanriMasterListBusiness;
 import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlistchohyodatasakusei.KyokaisoKanriMasterListChohyoDataSakusei;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kyokaisogaitosha.KyokaisoGaitoshaProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoKanriMasterListChohyoDataSakuseiEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisogGaitoshaListEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisogGaitoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReportSource;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.association.IAssociation;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -49,39 +54,22 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * @reamsid_L DBU-1050-020 wanghui
  *
  */
-public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<KyokaisogGaitoshaRelateEntity> {
+public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<KyokaisogGaitoshaRelateEntity> {
 
-    private static final RString 取得モード_1 = new RString("1");
-    private static final RString 取得モード_2 = new RString("2");
-    private static final RString 取得モード_3 = new RString("3");
-    private static final RString 境界層該当申請日名称 = new RString("1");
-    private static final RString 境界層該当開始日名称 = new RString("2");
-    private static final RString 境界層該当終了日名称 = new RString("3");
-    private static final RString 登録されて = new RString("1");
-    private static final RString 出力条件_基準日 = new RString("【抽出条件】 基準日で抽出");
-    private static final RString 出力条件_範囲 = new RString("【抽出条件】 範囲で抽出");
-    private static final RString 出力条件_指定無し = new RString("【抽出条件】 指定無し");
-    private static final RString 境界層該当申請日 = new RString("境界層該当申請日");
-    private static final RString 境界層該当開始日 = new RString("境界層該当開始日");
-    private static final RString 境界層該当終了日 = new RString("境界層該当終了日");
-    private static final RString 時点での境界層登録者 = new RString("時点での境界層登録者");
-    private static final RString 標準負担額 = new RString("標準負担額の減額情報が登録されている情報");
-    private static final RString 給付額減額記載解除 = new RString("給付額減額記載解除情報が登録されている情報");
-    private static final RString 特定介護サービス居住費 = new RString("特定介護サービス居住費等負担額の減額情報が登録されている情報");
-    private static final RString 特定介護サービス食費負 = new RString("特定介護サービス食費負担額の減額情報が登録されている情報");
-    private static final RString 高額介護サービス費世帯 = new RString("高額介護サービス費世帯上限額の減額情報が登録されている情報");
-    private static final RString 保険料額 = new RString("保険料額の低減適用情報が登録されている情報");
-    private static final RString 出力条件_が = new RString("が");
-    private static final RString 出力条件_ = new RString("～");
     private static final RString なし = new RString("なし");
-    private static final RString 境界層該当内容 = new RString("【境界層該当内容】");
+    private static final int NUM5 = 5;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kyokaisogaitosha.IKkyokaisoGaitoshaMapper.getKyokaisoKanriMasterList");
     private KyokaisoKanriMasterListHeadItem headItem;
     private List<KyokaisoKanriMasterListBodyItem> bodyItemList;
+    private KyokaisoKanriMasterListChohyoDataSakusei dataSakusei;
     List<KyokaisogGaitoshaRelateEntity> daichoJohoList = new ArrayList<>();
     private KyokaisogGaitoshaListEntity kyokaisokanrimasterList;
     private KyokaisoGaitoshaProcessParameter parameter;
+    private KyokaisoKanriMasterListBusiness business;
+    private List<RString> 並び順list;
+    private List<RString> 改頁list;
+    private int 連番 = 1;
     @BatchWriter
     private BatchReportWriter<KyokaisoKanriMasterListReportSource> batchReportWriter;
     private ReportSourceWriter<KyokaisoKanriMasterListReportSource> reportSourceWriter;
@@ -90,143 +78,78 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
     protected void initialize() {
         kyokaisokanrimasterList = new KyokaisogGaitoshaListEntity();
         bodyItemList = new ArrayList<>();
+        dataSakusei = new KyokaisoKanriMasterListChohyoDataSakusei();
+        並び順list = new ArrayList<>();
+        改頁list = new ArrayList<>();
+        business = new KyokaisoKanriMasterListBusiness();
     }
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
-        key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        KyokaisoGaitoshaMybatisParameter mybatisParameter = parameter.toKyokaisoGaitoshaMybatisParameter();
-        KyokaisoGaitoshaMybatisParameter piarameter = KyokaisoGaitoshaMybatisParameter.createParam(
-                mybatisParameter.getMode(),
-                mybatisParameter.getRange(),
-                mybatisParameter.getDate_FROM(),
-                mybatisParameter.getDate_TO(),
-                mybatisParameter.getIskyuufugakuFlag(),
-                mybatisParameter.getIshyojunFutanFlag(),
-                mybatisParameter.getIskyojuhinadoFutangFlag(),
-                mybatisParameter.getIsshokuhiKeiFlag(),
-                mybatisParameter.getIskogakuFlag(),
-                mybatisParameter.getIshokenFlag(),
-                mybatisParameter.getOrder_ID(),
-                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
-        return new BatchDbReader(MYBATIS_SELECT_ID, piarameter);
+        return new BatchDbReader(MYBATIS_SELECT_ID, business.createMybatisParameter(get出力順(), parameter));
     }
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBU.DBA200005.getReportId().value()).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBU.DBA200005.getReportId().value())
+                .addBreak(new BreakerCatalog<KyokaisoKanriMasterListReportSource>().simpleLayoutBreaker(改頁list)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
     @Override
-    protected void process(KyokaisogGaitoshaRelateEntity entity) {
-//         TODO  QA377 AccessLogの実装方式
-//       PersonalData personalData = toPersonalData(KyokaisogGaitoshaRelateEntity);
-//        AccessLogger.log(AccessLogType.照会, KyokaisogGaitoshaRelateEntity);
-//        KyokaisoKanriMasterListChohyoDataSakusei chohyoDataSakusei = new KyokaisoKanriMasterListChohyoDataSakusei();
-//        chohyoDataSakusei.getcreateNenreiToutatsuYoteishaCheckListChohyo(kyokaisokanrimasterList);
-        daichoJohoList.add(entity);
+    protected void keyBreakProcess(KyokaisogGaitoshaRelateEntity entity) {
+        if (hasBrek(getBefore(), entity)) {
+            連番 = 1;
+            KyokaisoKanriMasterListReport report = KyokaisoKanriMasterListReport.createFrom(headItem, bodyItemList);
+            report.writeBy(reportSourceWriter);
+            bodyItemList = new ArrayList<>();
+        }
+    }
 
+    private boolean hasBrek(KyokaisogGaitoshaRelateEntity before, KyokaisogGaitoshaRelateEntity current) {
+        return !before.getHihokenshaNo().equals(current.getHihokenshaNo());
+    }
+
+    @Override
+    protected void usualProcess(KyokaisogGaitoshaRelateEntity entity) {
+        dataSakusei.getcreateNenreiToutatsuYoteishaCheckListChohyo(kyokaisokanrimasterList);
+        daichoJohoList.add(entity);
+        new NinteiChosaDataOutputResult().getアクセスログ(entity.getSeibetsuCode());
+    }
+
+    /**
+     * アクセスログを出力するメッソドです。
+     *
+     * @param 識別コード ShikibetsuCode
+     */
+    public void getアクセスログ(ShikibetsuCode 識別コード) {
+        AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード));
+    }
+
+    private PersonalData toPersonalData(ShikibetsuCode 識別コード) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), RString.EMPTY);
+        return PersonalData.of(識別コード, expandedInfo);
     }
 
     private void paramte() {
         IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
         kyokaisokanrimasterList.set市町村コード(association.get地方公共団体コード().getColumnValue());
         kyokaisokanrimasterList.set市町村名(association.get市町村名());
-        // TODO QA #73393 出力順ID実装方式 回復待ち
-        kyokaisokanrimasterList.set並び順(parameter.toKyokaisoGaitoshaMybatisParameter().getOrder_ID());
-        kyokaisokanrimasterList.set改頁(parameter.toKyokaisoGaitoshaMybatisParameter().getOrder_ID());
-
-    }
-
-    private List<RString> contribute() {
-        List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder nituliki = new RStringBuilder();
-        if ((取得モード_1).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getMode())) {
-            nituliki.append((出力条件_基準日));
-            if (parameter.toKyokaisoGaitoshaMybatisParameter().getDate_FROM() != null) {
-                nituliki.append(parameter.toKyokaisoGaitoshaMybatisParameter().getDate_FROM()
-                        .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            } else {
-                nituliki.append(RString.EMPTY);
-            }
-            nituliki.append(時点での境界層登録者);
-            出力条件.add(nituliki.toRString());
-        }
-        if ((取得モード_2).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getMode())) {
-            nituliki = new RStringBuilder();
-            nituliki.append((出力条件_範囲));
-            if ((境界層該当申請日名称).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getRange())) {
-                nituliki.append(境界層該当申請日);
-            }
-            if ((境界層該当開始日名称).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getRange())) {
-                nituliki.append(境界層該当開始日);
-            }
-            if ((境界層該当終了日名称).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getRange())) {
-                nituliki.append(境界層該当終了日);
-            }
-            nituliki.append((出力条件_が));
-            if (parameter.toKyokaisoGaitoshaMybatisParameter().getDate_FROM() != null) {
-                nituliki.append(parameter.toKyokaisoGaitoshaMybatisParameter().getDate_FROM()
-                        .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            } else {
-                nituliki.append(RString.EMPTY);
-            }
-            nituliki.append((出力条件_));
-            if (parameter.toKyokaisoGaitoshaMybatisParameter().getDate_TO() != null) {
-                nituliki.append(parameter.toKyokaisoGaitoshaMybatisParameter().getDate_TO()
-                        .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-                出力条件.add(nituliki.toRString());
-            } else {
-                nituliki.append(RString.EMPTY);
-                出力条件.add(nituliki.toRString());
-            }
-
-        }
-        if ((取得モード_3).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getMode())) {
-            nituliki = new RStringBuilder();
-            nituliki.append((出力条件_指定無し));
-            出力条件.add(nituliki.toRString());
-        }
-        if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIshokenFlag())) {
-            出力条件.add((給付額減額記載解除));
-        }
-        if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIshyojunFutanFlag())) {
-            出力条件.add((標準負担額));
-        }
-        if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIskogakuFlag())) {
-            出力条件.add((特定介護サービス居住費));
-        }
-        if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIskyojuhinadoFutangFlag())) {
-            出力条件.add((特定介護サービス食費負));
-        }
-        if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIskyuufugakuFlag())) {
-            出力条件.add((高額介護サービス費世帯));
-        }
-        if ((登録されて).equals(parameter.toKyokaisoGaitoshaMybatisParameter().getIsshokuhiKeiFlag())) {
-            出力条件.add((保険料額));
-        }
-        出力条件.set(1, 境界層該当内容.concat(出力条件.get(1)));
-        return 出力条件;
+        kyokaisokanrimasterList.set並び順(並び順list);
+        kyokaisokanrimasterList.set改頁(改頁list);
     }
 
     private void outputJokenhyoFactory(int pageCnt) {
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem item
                 = new ReportOutputJokenhyoItem(ReportIdDBU.DBA200005.getReportId().value(),
-                        kyokaisokanrimasterList.get市町村コード(), kyokaisokanrimasterList.get市町村名(),
+                        association.getLasdecCode_().value(), association.get市町村名(),
                         new RString(String.valueOf(JobContextHolder.getJobId())),
                         ReportIdDBU.DBA200005.getReportName(),
-                        //new RString(String.valueOf(reportSourceWriter.pageCount().value())),
                         new RString(String.valueOf(pageCnt)),
                         なし,
                         RString.EMPTY,
-                        contribute());
+                        business.contribute(parameter));
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
@@ -256,13 +179,12 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
     protected void afterExecute() {
         paramte();
         kyokaisokanrimasterList.setKyokaisokanrimasterList(daichoJohoList);
-        KyokaisoKanriMasterListChohyoDataSakusei 帳票データリスト = new KyokaisoKanriMasterListChohyoDataSakusei();
-        List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> 帳票データ = 帳票データリスト.getcreateNenreiToutatsuYoteishaCheckListChohyo(kyokaisokanrimasterList);
+        List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> 帳票データ = dataSakusei
+                .getcreateNenreiToutatsuYoteishaCheckListChohyo(kyokaisokanrimasterList);
         for (KyokaisoKanriMasterListChohyoDataSakuseiEntity dataSakuseiEntity : 帳票データ) {
             if (dataSakuseiEntity.get被保険者番号() != null) {
                 bodyItemList.add(setBodyItem(dataSakuseiEntity));
             }
-
             headItem = new KyokaisoKanriMasterListHeadItem(
                     dataSakuseiEntity.get印刷日時(),
                     dataSakuseiEntity.get市町村コード(),
@@ -283,5 +205,26 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
             report.writeBy(reportSourceWriter);
             outputJokenhyoFactory(帳票データ.size());
         }
+    }
+
+    private RString get出力順() {
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBU介護統計報告, ReportIdDBU.DBA200005.getReportId(),
+                Long.valueOf(parameter.getOrder_ID().toString()));
+        RString 出力順 = RString.EMPTY;
+        if (outputOrder != null) {
+            出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(
+                    KyokaisoKanriMasterListBusiness.ShutsuryokujunEnum.class, outputOrder), NUM5);
+            List<ISetSortItem> 設定項目リスト = outputOrder.get設定項目リスト();
+            for (ISetSortItem iSetSortItem : 設定項目リスト) {
+                RString 並び順 = iSetSortItem.get項目名();
+                並び順list.add(並び順);
+                if (iSetSortItem.is改頁項目()) {
+                    RString 改頁 = iSetSortItem.get項目名();
+                    改頁list.add(改頁);
+                }
+            }
+        }
+        return 出力順.replace("order by", "");
     }
 }

@@ -47,17 +47,20 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
     private final Decimal 特別地域加算減免 = new Decimal(6);
     private Decimal num = new Decimal(0);
     private Decimal localflag = new Decimal(1);
-    private Decimal flag = new Decimal(1);
+    private Decimal flag = new Decimal(0);
     private Decimal 月数;
     private final int twelve = 12;
     private final int eleven = 11;
+    private final int thirteen = 13;
     private final int five = 5;
     private static final Decimal ZERO = new Decimal(0);
     private static final Decimal ONE = new Decimal(1);
     private static final Decimal FIVE = new Decimal(5);
+    private static final Decimal SIX = new Decimal(6);
     private static final Decimal FOUR = new Decimal(4);
     private static final Decimal ELEVEN = new Decimal(11);
     private static final Decimal TWELVE = new Decimal(12);
+    private static final Decimal THIRTEEN = new Decimal(13);
     private DBD104010ProcessParameter processParameter;
     private FlexibleDate 抽出期間開始日;
     private FlexibleDate 抽出期間終了日;
@@ -76,7 +79,7 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
 
         月数 = FOUR;
         抽出期間開始日 = new FlexibleDate(processParameter.get対象年度().getYearValue(), Integer.valueOf("04"), Integer.valueOf("01"));
-        抽出期間終了日 = 抽出期間開始日.minusDay(1).minusYear(1);
+        抽出期間終了日 = 抽出期間開始日.minusDay(1).plusYear(1);
         if (全て.equals(processParameter.get宛名抽出条件().getShichoson_Code().value()) || processParameter.get宛名抽出条件().getShichoson_Code().isEmpty()) {
             市町村コード = 地方公共団体.getLasdecCode_();
             市町村名称 = 地方公共団体.get市町村名();
@@ -103,52 +106,55 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
     protected void process(NinteiyotaiTwoEntity t) {
         JukyushagenmenninteiDateManager manager = new JukyushagenmenninteiDateManager();
         if (月の件数.isEmpty()) {
-            if (月数.equals(t.getFlag1()) && flag.equals(t.getFlag())) {
+            if (ONE.equals(t.getTableFlag()) && 月数.equals(t.getFlag1()) && flag.equals(t.getFlag())) {
                 月の件数.add(t);
-            } else {
+            } else if (ONE.equals(t.getTableFlag())) {
                 addNew月の件数(t, manager);
                 月の件数.add(t);
-                flag = flag.add(1);
+            } else {
+                while (localflag.compareTo(t.getTableFlag()) < 0) {
+                    addNewTable月の件数(t, manager);
+                    localflag.add(1);
+                    flag = ZERO;
+                }
+                addNew月の件数(t, manager);
+                月の件数.add(t);
             }
         } else if (月の件数.get(0).getTableFlag().equals(t.getTableFlag()) && 月の件数.get(0).getFlag().equals(t.getFlag())) {
             addNew月の件数(t, manager);
             月の件数.add(t);
             flag = flag.add(1);
         } else {
-            if ((t.getTableFlag().equals(訪問介護利用者負担額減額) || t.getTableFlag().equals(介護保険負担限度額認定)) && 0 < TWELVE.compareTo(月数)) {
-                while (0 <= TWELVE.compareTo(月数) || !月の件数.isEmpty()) {
+            if (月の件数.get(0).getTableFlag().equals(t.getTableFlag()) && 月の件数.get(0).getFlag().equals(t.getFlag())) {
+                while (0 <= TWELVE.compareTo(月数)) {
                     月の件数.add(manager.getNinteiyotai月の件数(月の件数.get(月の件数.size() - 1).getFlag(), t.getTableFlag()));
                     月数 = 月数.add(1);
                 }
-            } else {
-                while (0 <= FIVE.compareTo(月数) || !月の件数.isEmpty()) {
+                entity = manager.setNinteijyotaiEntity(月の件数);
+                set認定者数状況(manager);
+                月数 = ONE;
+                月の件数.clear();
+                flag = flag.add(1);
+            } else if (月の件数.get(0).getTableFlag().equals(t.getTableFlag()) && !月の件数.get(0).getFlag().equals(t.getFlag())) {
+                while (0 <= TWELVE.compareTo(月数)) {
                     月の件数.add(manager.getNinteiyotai月の件数(月の件数.get(月の件数.size() - 1).getFlag(), t.getTableFlag()));
                     月数 = 月数.add(1);
                 }
-            }
-
-            if (t.getTableFlag().subtract(ONE).equals(訪問介護利用者負担額減額) || t.getTableFlag().subtract(ONE).equals(介護保険負担限度額認定)) {
-                while (flag.compareTo(ELEVEN) <= 0) {
-                    for (int item = 1; item <= twelve; item++) {
-                        月の件数.add(manager.getNinteiyotai月の件数(t.getFlag(), t.getTableFlag()));
-                    }
-                    flag = flag.add(1);
+                entity = manager.setNinteijyotaiEntity(月の件数);
+                set認定者数状況(manager);
+                月数 = ONE;
+                月の件数.clear();
+                flag = flag.add(1);
+                addNew月の件数(t, manager);
+            } else if (!月の件数.get(0).getTableFlag().equals(t.getTableFlag())) {
+                while (localflag.compareTo(t.getTableFlag()) < 0) {
+                    addNewTable月の件数(t, manager);
+                    localflag.add(1);
+                    flag = ZERO;
                 }
-            } else {
-                while (flag.compareTo(FIVE) <= 0) {
-                    for (int item = 1; item <= twelve; item++) {
-                        月の件数.add(manager.getNinteiyotai月の件数(t.getFlag(), t.getTableFlag()));
-                    }
-                    flag = flag.add(1);
-                }
+                addNew月の件数(t, manager);
+                月の件数.add(t);
             }
-            entity = manager.setNinteijyotaiEntity(月の件数);
-            set認定者数状況(manager);
-            月数 = ONE;
-            月の件数.clear();
-            flag = ONE;
-            addNew月の件数(t, manager);
-            月の件数.add(t);
         }
     }
 
@@ -197,27 +203,30 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
     }
 
     private void set認定者数状況(JukyushagenmenninteiDateManager manager) {
-        if (entity.getTableFlag().equals(標準負担額減免)) {
-            set標準負担額減免状況(entity, manager);
-        } else if (entity.getTableFlag().equals(利用者負担額減額)) {
-            set利用者負担額減額(entity, manager);
-        } else if (entity.getTableFlag().equals(訪問介護利用者負担額減額)) {
-            set訪問介護利用者負担額減額(entity, manager);
-        } else if (entity.getTableFlag().equals(社会福祉法人減免)) {
-            set社会福祉法人減免(entity, manager);
-        } else if (entity.getTableFlag().equals(介護保険負担限度額認定)) {
-            set介護保険負担限度額認定(entity, manager);
-        } else if (entity.getTableFlag().equals(特別地域加算減免)) {
-            set特別地域加算減免(entity, manager);
-        }
+        list.add(manager.set受給者減免月別認定者数状況表中間テーブル(entity, entity.getFlag(), 市町村コード, 市町村名称));
+
+//        if (entity.getTableFlag().equals(標準負担額減免)) {
+//            set標準負担額減免状況(entity, manager);
+//        } else if (entity.getTableFlag().equals(利用者負担額減額)) {
+//            set利用者負担額減額(entity, manager);
+//        } else if (entity.getTableFlag().equals(訪問介護利用者負担額減額)) {
+//            set訪問介護利用者負担額減額(entity, manager);
+//        } else if (entity.getTableFlag().equals(社会福祉法人減免)) {
+//            set社会福祉法人減免(entity, manager);
+//        } else if (entity.getTableFlag().equals(介護保険負担限度額認定)) {
+//            set介護保険負担限度額認定(entity, manager);
+//        } else if (entity.getTableFlag().equals(特別地域加算減免)) {
+//            set特別地域加算減免(entity, manager);
+//        }
     }
 
     private void set標準負担額減免状況(NinteijyotaiEntity entity, JukyushagenmenninteiDateManager manager) {
-        update集計List(entity, manager, FIVE);
-        if (num.equals(FIVE)) {
-            num = ZERO;
-        }
-        localflag = entity.getTableFlag();
+        list.add(manager.set受給者減免月別認定者数状況表中間テーブル(entity, entity.getFlag(), 市町村コード, 市町村名称));
+//        update集計List(entity, manager, FIVE);
+//        if (num.equals(FIVE)) {
+//            num = ZERO;
+//        }
+//        localflag = entity.getTableFlag();
     }
 
     private void set利用者負担額減額(NinteijyotaiEntity entity, JukyushagenmenninteiDateManager manager) {
@@ -305,13 +314,16 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
     }
 
     private void addNew月の件数(NinteiyotaiTwoEntity t, JukyushagenmenninteiDateManager manager) {
-        while (t.getFlag().compareTo(flag) < 0) {
+        while (0 < t.getFlag().compareTo(flag)) {
             for (int item = 1; item <= twelve; item++) {
                 月の件数.add(manager.getNinteiyotai月の件数(flag, t.getTableFlag()));
             }
             flag = flag.add(1);
+            entity = manager.setNinteijyotaiEntity(月の件数);
+            set認定者数状況(manager);
+            月の件数.clear();
         }
-        while (t.getFlag1().compareTo(月数) < 0) {
+        while (0 < t.getFlag1().compareTo(月数)) {
             月の件数.add(manager.getNinteiyotai月の件数(t.getFlag(), t.getTableFlag()));
             月数 = 月数.add(1);
         }
@@ -330,6 +342,30 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
                     }
                 }
                 localflag = localflag.add(ONE);
+            }
+        }
+    }
+
+    private void addNewTable月の件数(NinteiyotaiTwoEntity t, JukyushagenmenninteiDateManager manager) {
+        if (t.getTableFlag().subtract(ONE).equals(訪問介護利用者負担額減額) || t.getTableFlag().subtract(ONE).equals(介護保険負担限度額認定)) {
+            while (flag.compareTo(THIRTEEN) <= 0) {
+                for (int item = 1; item <= twelve; item++) {
+                    月の件数.add(manager.getNinteiyotai月の件数(t.getFlag(), t.getTableFlag()));
+                }
+                entity = manager.setNinteijyotaiEntity(月の件数);
+                set認定者数状況(manager);
+                月の件数.clear();
+                flag = flag.add(1);
+            }
+        } else {
+            while (flag.compareTo(SIX) <= 0) {
+                for (int item = 1; item <= twelve; item++) {
+                    月の件数.add(manager.getNinteiyotai月の件数(t.getFlag(), t.getTableFlag()));
+                }
+                entity = manager.setNinteijyotaiEntity(月の件数);
+                set認定者数状況(manager);
+                月の件数.clear();
+                flag = flag.add(1);
             }
         }
     }

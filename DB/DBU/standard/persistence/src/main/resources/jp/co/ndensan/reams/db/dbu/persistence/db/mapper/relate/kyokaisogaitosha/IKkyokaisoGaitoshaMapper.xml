@@ -111,7 +111,6 @@
         rgua.${psmShikibetsuTaisho} AS PSM
         ON
         DbT1001Hiho."shikibetsuCode" = PSM."shikibetsuCode"
-
         WHERE
         (
         <if test = "kyuufugakuFlag">
@@ -182,10 +181,9 @@
             DbT1006Kyo."tekiyoShuryoYMD"  <![CDATA[<=]]> #{date_TO}
         </if>
         <if test = "ismodenayi">
-
         </if>
         ORDER BY
-        DbT1006Kyo."hihokenshaNo"
+        DbT1006Kyo."hihokenshaNo",${order_ID}
         ) DbT1006Kyokaiso
         WHERE
         rank_number1= 1

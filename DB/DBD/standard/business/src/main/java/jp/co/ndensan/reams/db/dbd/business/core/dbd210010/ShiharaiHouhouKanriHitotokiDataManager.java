@@ -285,7 +285,7 @@ public class ShiharaiHouhouKanriHitotokiDataManager {
 
         tempTable.set確定給付額減額期間開始日(new RString(entity.get確定給付額減額期間開始日().toString()));
         tempTable.set確定給付額減額期間終了日(new RString(entity.get確定給付額減額期間終了日().toString()));
-        if (entity.get現在滞納額合計() == null) {
+        if (entity.get通知時滞納額合計() == null) {
             tempTable.set通知時滞納額合計(RString.EMPTY);
         } else {
             tempTable.set通知時滞納額合計(new RString(entity.get通知時滞納額合計().toString()));

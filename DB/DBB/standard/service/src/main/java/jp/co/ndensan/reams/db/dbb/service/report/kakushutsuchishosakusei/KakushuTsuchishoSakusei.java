@@ -109,15 +109,12 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.UeT0511NenkinTokuchoKaifuJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.report.parts.kaigotoiawasesaki.KaigoToiawasesakiSourceBuilderCreator;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
@@ -136,7 +133,8 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.service.core.dainonin.DainoninRelateFinderFactory;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.IKozaManager;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaService;
-import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
+import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
+import jp.co.ndensan.reams.ue.uex.service.core.NenkinTokuchoKaifuJohoManager;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo;
@@ -1845,21 +1843,15 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         if (更正前後entity == null || 賦課の情報 == null) {
             return null;
         }
-        UeT0511NenkinTokuchoKaifuJohoDac dac = InstanceProvider.create(UeT0511NenkinTokuchoKaifuJohoDac.class);
-        List<RString> 通知内容コードList = new ArrayList<>();
-        通知内容コードList.add(TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード());
-        通知内容コードList.add(TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード());
-        List<UeT0511NenkinTokuchoKaifuJohoEntity> entitys;
+        NenkinTokuchoKaifuJohoManager nenkinTokuchoKaifuJohoManager = InstanceProvider.create(NenkinTokuchoKaifuJohoManager.class);
         if (本算定区分) {
-            entitys = dac.select対象者_追加含む(GyomuCode.DB介護保険,
+            return nenkinTokuchoKaifuJohoManager.get年金特徴対象者情報(GyomuCode.DB介護保険,
                     賦課の情報.get賦課年度(), 更正前後entity.get介護徴収方法().getHonNenkinNo(),
-                    更正前後entity.get介護徴収方法().getHonNenkinCode(), 更正前後entity.get介護徴収方法().getHonHosokuM(), 通知内容コードList);
-        } else {
-            entitys = dac.select対象者_追加含む(GyomuCode.DB介護保険,
-                    賦課の情報.get賦課年度().minusYear(定値_番号1), 更正前後entity.get介護徴収方法().getKariNenkinNo(),
-                    更正前後entity.get介護徴収方法().getKariNenkinCode(), 更正前後entity.get介護徴収方法().getKariHosokuM(), 通知内容コードList);
+                    更正前後entity.get介護徴収方法().getHonNenkinCode(), 更正前後entity.get介護徴収方法().getHonHosokuM());
         }
-        return entitys.isEmpty() ? null : new NenkinTokuchoKaifuJoho(entitys.get(0));
+        return nenkinTokuchoKaifuJohoManager.get年金特徴対象者情報(GyomuCode.DB介護保険,
+                賦課の情報.get賦課年度().minusYear(定値_番号1), 更正前後entity.get介護徴収方法().getKariNenkinNo(),
+                更正前後entity.get介護徴収方法().getKariNenkinCode(), 更正前後entity.get介護徴収方法().getKariHosokuM());
     }
 
     private FukaAtena get賦課の情報_宛名(KakushuTsuchishoEntity 更正前後entity) {

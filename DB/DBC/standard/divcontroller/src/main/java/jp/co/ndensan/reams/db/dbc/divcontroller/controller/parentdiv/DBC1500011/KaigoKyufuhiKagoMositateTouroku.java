@@ -89,16 +89,16 @@ public class KaigoKyufuhiKagoMositateTouroku {
         get給付実績一覧(div, controlData);
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         KagoMoshitateGamenData 画面データ = ViewStateHolder.get(ViewStateKeys.介護給付費過誤申立登録, KagoMoshitateGamenData.class);
+        if (画面データ != null) {
+            div.getCcdJigyoshaSentaku().setNyuryokuShisetsuKodo(画面データ.get事業者());
+            div.getCcdJigyoshaSentaku().setShisetsuMeisho(画面データ.get事業者名());
+            div.getTxtTeikyoYMRange().setFromValue(画面データ.get提供年月From());
+            div.getTxtTeikyoYMRange().setToValue(画面データ.get提供年月To());
+            div.getMoshitateshoSakuseiZumi().setSelectedItemsByKey(画面データ.get申立書作成済());
+        }
         if (資格対象者 != null) {
+            div.getTxtHihoNo().setValue(資格対象者.get被保険者番号().value());
             div.getTxtHihoName().setValue(get被保名称(資格対象者.get識別コード()));
-            if (画面データ != null) {
-                div.getCcdJigyoshaSentaku().setNyuryokuShisetsuKodo(画面データ.get事業者());
-                div.getCcdJigyoshaSentaku().setShisetsuMeisho(画面データ.get事業者名());
-                div.getTxtHihoNo().setValue(画面データ.get被保番号());
-                div.getTxtTeikyoYMRange().setFromValue(画面データ.get提供年月From());
-                div.getTxtTeikyoYMRange().setToValue(画面データ.get提供年月To());
-                div.getMoshitateshoSakuseiZumi().setSelectedItemsByKey(画面データ.get申立書作成済());
-            }
         }
         div.getKyufuJissekiGaitoshaListPanel().setIsOpen(false);
         if (MENUID_DBCMN91001.equals(menuID)) {
@@ -231,14 +231,20 @@ public class KaigoKyufuhiKagoMositateTouroku {
      * @return ResponseData<KaigoKyufuhiKagoMositateTourokuDiv>
      */
     public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onClick_BtnSave(KaigoKyufuhiKagoMositateTourokuDiv div) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (is送付済みチェック(div)) {
-            return ResponseData.of(div).addValidationMessages(getValidation(div).check送付済みチェック()).respond();
+            validationMessages.add(getValidation(div).check送付済みチェック());
         }
-        if (is申立日の年月と提供年月の関連チェック(div)) {
-            return ResponseData.of(div).addValidationMessages(getValidation(div).check申立日エラー()).respond();
+        if (!削除モード.equals(div.getHdnState())) {
+            if (is申立日の年月と提供年月の関連チェック(div)) {
+                validationMessages.add(getValidation(div).check申立日エラー());
+            }
+            if (is同月審査用と申立理由の関連チェック(div)) {
+                validationMessages.add(getValidation(div).check同月審査申立理由整合性エラー());
+            }
         }
-        if (is同月審査用と申立理由の関連チェック(div)) {
-            return ResponseData.of(div).addValidationMessages(getValidation(div).check同月審査申立理由整合性エラー()).respond();
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         int index = div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().getClickedRowId();
         KaigoKyufuhiKagoMositateTourokuResult 給付実績情報 = ViewStateHolder

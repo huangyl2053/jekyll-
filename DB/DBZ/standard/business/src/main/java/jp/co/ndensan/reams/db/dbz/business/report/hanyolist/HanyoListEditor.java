@@ -80,37 +80,21 @@ public class HanyoListEditor implements IHanyoListEditor {
         source.sakuseiymd = get印刷日時();
         Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(outputOrder);
         if (改頁Map.get(INDEX_1) != null) {
-            source.page1 = 改頁Map.get(INDEX_1).get項目名();
+            source.page1 = 改頁Map.get(INDEX_1).getDB項目名() != null ? 改頁Map.get(INDEX_1).get項目名() : null;
         }
         if (改頁Map.get(INDEX_2) != null) {
-            source.page2 = 改頁Map.get(INDEX_2).get項目名();
+            source.page2 = 改頁Map.get(INDEX_2).getDB項目名() != null ? 改頁Map.get(INDEX_2).get項目名() : null;
         }
         if (改頁Map.get(INDEX_3) != null) {
-            source.page3 = 改頁Map.get(INDEX_3).get項目名();
+            source.page3 = 改頁Map.get(INDEX_3).getDB項目名() != null ? 改頁Map.get(INDEX_3).get項目名() : null;
         }
         if (改頁Map.get(INDEX_4) != null) {
-            source.page4 = 改頁Map.get(INDEX_4).get項目名();
+            source.page4 = 改頁Map.get(INDEX_4).getDB項目名() != null ? 改頁Map.get(INDEX_4).get項目名() : null;
         }
         if (改頁Map.get(INDEX_5) != null) {
-            source.page5 = 改頁Map.get(INDEX_5).get項目名();
+            source.page5 = 改頁Map.get(INDEX_5).getDB項目名() != null ? 改頁Map.get(INDEX_5).get項目名() : null;
         }
-
-        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(outputOrder);
-        if (出力順Map.get(INDEX_1) != null) {
-            source.sort1 = 出力順Map.get(INDEX_1).get項目名();
-        }
-        if (出力順Map.get(INDEX_2) != null) {
-            source.sort2 = 出力順Map.get(INDEX_2).get項目名();
-        }
-        if (出力順Map.get(INDEX_3) != null) {
-            source.sort3 = 出力順Map.get(INDEX_3).get項目名();
-        }
-        if (出力順Map.get(INDEX_4) != null) {
-            source.sort4 = 出力順Map.get(INDEX_4).get項目名();
-        }
-        if (出力順Map.get(INDEX_5) != null) {
-            source.sort5 = 出力順Map.get(INDEX_5).get項目名();
-        }
+        setiOutputOrder(source);
     }
 
     private void set出力内容(HanyoListReportSource source) {
@@ -125,5 +109,24 @@ public class HanyoListEditor implements IHanyoListEditor {
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         return 年月日.concat(時分秒);
+    }
+
+    private void setiOutputOrder(HanyoListReportSource source) {
+        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(outputOrder);
+        if (出力順Map.get(INDEX_1) != null) {
+            source.sort1 = 出力順Map.get(INDEX_1).getDB項目名() != null ? 出力順Map.get(INDEX_1).get項目名() : null;
+        }
+        if (出力順Map.get(INDEX_2) != null) {
+            source.sort2 = 出力順Map.get(INDEX_2).getDB項目名() != null ? 出力順Map.get(INDEX_2).get項目名() : null;
+        }
+        if (出力順Map.get(INDEX_3) != null) {
+            source.sort3 = 出力順Map.get(INDEX_3).getDB項目名() != null ? 出力順Map.get(INDEX_3).get項目名() : null;
+        }
+        if (出力順Map.get(INDEX_4) != null) {
+            source.sort4 = 出力順Map.get(INDEX_4).getDB項目名() != null ? 出力順Map.get(INDEX_4).get項目名() : null;
+        }
+        if (出力順Map.get(INDEX_5) != null) {
+            source.sort5 = 出力順Map.get(INDEX_5).getDB項目名() != null ? 出力順Map.get(INDEX_5).get項目名() : null;
+        }
     }
 }

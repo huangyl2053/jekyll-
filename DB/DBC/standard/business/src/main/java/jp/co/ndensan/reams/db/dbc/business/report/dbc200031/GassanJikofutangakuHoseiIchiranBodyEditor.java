@@ -27,8 +27,8 @@ public class GassanJikofutangakuHoseiIchiranBodyEditor
         implements IGassanJikofutangakuHoseiIchiranEditor {
 
     private final GassanJikofutangakuHoseiIchiranEntity entity;
-    private static final RString 種別日本人 = new RString("１x");
-    private static final RString 種別外国人 = new RString("２x");
+    private static final RString 種別日本人 = new RString("１");
+    private static final RString 種別外国人 = new RString("２");
     private static final RString LINE = new RString(" ～ ");
 
     /**
