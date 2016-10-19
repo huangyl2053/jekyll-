@@ -65,7 +65,7 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
 
     private static final RString 証発行モード_001 = new RString("001");
     private static final RString 証発行モード_002 = new RString("002");
-  //  private static final RString 発行管理リスト = new RString("1");
+    //  private static final RString 発行管理リスト = new RString("1");
     private static final RString 被保険者証発行 = new RString("介護保険　被保険者証発行管理リスト");
     private static final RString 被保険者未回収者 = new RString("介護保険　被保険者証未回収者リスト");
     private static final RString 資格者証発行 = new RString("介護保険　資格者証発行管理一覧表");
@@ -80,7 +80,7 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
     private IHihokenshashoHakkoKanriboMapper mapper;
     private AkasiHakouKanriRelateEntity relateEntityList;
     private FileSpoolManager manager;
-    
+
     private static final RString 抽出条件 = new RString("【抽出条件】");
     private static final RString 出力対象 = new RString("出力対象：");
     private static final RString 交付年月日 = new RString("交付年月日：");
@@ -88,8 +88,6 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
     private static final RString 交付事由 = new RString("交付事由：");
     private static final RString 回収事由 = new RString("回収事由：");
     private static final RString カラ = new RString("　～　");
-    private static final RString コンマ = new RString("、");
-    
 
     @BatchWriter
     private EucCsvWriter<HihohenshashoHakoKanriboCsvDataSakuseiEntity> eucCsvWriter;
@@ -145,10 +143,10 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
                 processParameter.isSeyisinjyohoflg(),
                 processParameter.getSiyuturiyokudaysyou()
-                );
+        );
         List<AkasiHakouKanriEntity> akaEntityList = mapper.get証発行管理リスト情報(mybatisParameter);
         List<AkasiHakouKanriEntity> 最新情報リスト = new ArrayList<>();
-        for (AkasiHakouKanriEntity akasiEntity : akaEntityList) {    
+        for (AkasiHakouKanriEntity akasiEntity : akaEntityList) {
             最新情報リスト.add(akasiEntity);
         }
         relateEntityList.setAkasiHakouKanriEntityList(最新情報リスト);
@@ -211,7 +209,7 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
             batchReportWriter.close();
         }
     }
-    
+
     private void outputJokenhyoFactory(Association association, RString csvName) {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
@@ -224,7 +222,7 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
                 contribute());
         OutputJokenhyoFactory.createInstance(item).print();
     }
-    
+
     private List<RString> contribute() {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
@@ -234,7 +232,7 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
         jokenBuilder.append(出力対象);
         jokenBuilder.append(processParameter.getSiyuturiyokudaysyou());
         出力条件List.add(jokenBuilder.toRString());
-        
+
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(交付年月日);
         jokenBuilder.append(processParameter.getKoufukayisihi());
@@ -250,7 +248,7 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
             jokenBuilder.append(カラ);
             jokenBuilder.append(processParameter.getKasyuusiuryouhi());
         }
-        
+
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(交付事由);
         if (processParameter.getKofuJiyulist().size() > 0) {
@@ -262,10 +260,10 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
             jokenBuilder.append("交付事由なし");
         }
         出力条件List.add(jokenBuilder.toRString());
-        
+
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(回収事由);
-        if (processParameter.getKofuJiyulist().size() > 0) {
+        if (processParameter.getKaishuJiyulist().size() > 0) {
             for (RString jiyu : processParameter.getKaishuJiyulist()) {
                 jokenBuilder.append(jiyu).append(カラ);
             }

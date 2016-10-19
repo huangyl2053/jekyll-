@@ -175,7 +175,7 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
             条件出力_住民種別 = new RString("日本人のみ");
         } else if (住民種別_外国人のみ.equals(processParameter.getJuminShubetsu())) {
             条件出力_住民種別 = new RString("外国人のみ");
-        } else{
+        } else {
             条件出力_住民種別 = new RString("全て");
         }
         set年齢到達予定者リスト();
