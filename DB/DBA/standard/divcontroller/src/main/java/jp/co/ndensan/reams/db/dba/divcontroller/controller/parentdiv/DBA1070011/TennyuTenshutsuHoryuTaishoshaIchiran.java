@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011.dgTe
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011.dgTenshutsu_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1070011.TennyuTenshutsuHoryuTaishoshaIchiranHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1070011.TennyuTenshutsuHoryuTaishoshaIchiranValidationHandler;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dba.service.core.tennyutenshutsuhoryutaishosha.TennyuTenshutsuHoryuTaishoshaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -103,19 +103,19 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
         boolean 比較結果 = false;
         for (TenshutsuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 転出対象者情報 : 転出保留対象者情報) {
             if ((転出対象者情報.get識別コード() != null) && (!転出対象者情報.get識別コード().isEmpty())
-                && 転出対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
+                    && 転出対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
                 比較結果 = true;
             }
         }
         for (TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 転入対象者情報 : 転入保留対象者情報) {
             if ((転入対象者情報.get識別コード() != null) && (!転入対象者情報.get識別コード().isEmpty())
-                && 転入対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
+                    && 転入対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
                 比較結果 = true;
             }
         }
         for (TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 広域対象者情報 : 広域保留対象者情報) {
             if ((広域対象者情報.get識別コード() != null) && (!広域対象者情報.get識別コード().isEmpty())
-                && 広域対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
+                    && 広域対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
                 比較結果 = true;
             }
         }
@@ -162,7 +162,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 転入保留対象者情報
                     = (Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha>) ViewStateHolder
                     .get(ViewStateKeys.転入保留対象者, Models.class);
@@ -186,7 +186,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
                 new ShikibetsuCode(click転出保留対象者.getShikibetsuCode().getText()), SetaiCode.EMPTY);
         ViewStateHolder.put(ViewStateKeys.資格対象者, key);
         if (KEY_資格喪失.equals(click転出保留対象者.getNextTask().getSelectedKey())
-            || click転出保留対象者.getNextTask().getSelectedKey().isEmpty()) {
+                || click転出保留対象者.getNextTask().getSelectedKey().isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転出).parameter(PARAMETER_資格喪失);
         }
         if (KEY_住所地特例適用.equals(click転出保留対象者.getNextTask().getSelectedKey())) {
@@ -196,7 +196,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha> 転出保留対象者情報
                     = (Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha>) ViewStateHolder
                     .get(ViewStateKeys.転出保留対象者, Models.class);
@@ -220,7 +220,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
                 new ShikibetsuCode(click広域保留対象者.getShikibetsuCode().getText()), SetaiCode.EMPTY);
         ViewStateHolder.put(ViewStateKeys.資格対象者, key);
         if (KEY_資格取得異動.equals(click広域保留対象者.getNextTask().getSelectedKey())
-            || click広域保留対象者.getNextTask().getSelectedKey().isEmpty()) {
+                || click広域保留対象者.getNextTask().getSelectedKey().isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.広域).parameter(PARAMETER_資格取得異動);
         }
         if (KEY_住所地特例適用.equals(click広域保留対象者.getNextTask().getSelectedKey())) {
@@ -230,7 +230,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 広域保留対象者情報
                     = (Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha>) ViewStateHolder
                     .get(ViewStateKeys.広域転入保留対象者, Models.class);
@@ -253,7 +253,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && !div.getDgTenshutsu().getDataSource().isEmpty()) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && !div.getDgTenshutsu().getDataSource().isEmpty()) {
             ValidationMessageControlPairs message = new TennyuTenshutsuHoryuTaishoshaIchiranValidationHandler(div).doCheck();
             if (message.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(message).respond();
