@@ -82,15 +82,30 @@ public class KyufuKanrihyoKyotakuYoboSogoJigyoServiceReportSource implements IRe
     public RString gokeiTanisuMainusKigo;
     @ReportItem(name = "gokeiTanisu", length = 5, order = 33)
     public RString gokeiTanisu;
+    @ReportItem(name = "riyoYM", length = 6, order = 34)
+    public RString riyoYM;
+    @ReportItem(name = "kyotakuServiceKubun", length = 1, order = 35)
+    public RString kyotakuServiceKubun;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
-
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation hishokenshaNo;
 // </editor-fold>
+
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        hokenshaNo,
+        riyoYM,
+        hihokenshaNo,
+        kyotakuServiceKubun,
+    }
 }
