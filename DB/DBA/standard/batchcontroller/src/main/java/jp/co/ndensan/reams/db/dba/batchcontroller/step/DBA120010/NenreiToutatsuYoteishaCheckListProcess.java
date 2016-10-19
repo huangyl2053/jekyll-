@@ -130,6 +130,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
     List<RString> 出力順リスト;
     List<RString> 改頁リスト;
     private static List<RString> pageBreakKeys;
+    private RString 条件出力_出力対象者;
+    private RString 条件出力_住民種別;
 
     @BatchWriter
     private BatchReportWriter<NenreitotatsuYoteishaIchiranhyoReportSource> batchReportWriter;
@@ -164,8 +166,17 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         createWriter();
         if (出力対象者_登録対象者.equals(processParameter.getSyutsuryokutaisyo())) {
             getTorokuSya();
+            条件出力_出力対象者 = new RString("登録対象者のみ");
         } else if (出力対象者_全ての対象者.equals(processParameter.getSyutsuryokutaisyo())) {
             getZenbuSya();
+            条件出力_出力対象者 = new RString("全ての対象者");
+        }
+        if (住民種別_日本人のみ.equals(processParameter.getJuminShubetsu())) {
+            条件出力_住民種別 = new RString("日本人のみ");
+        } else if (住民種別_外国人のみ.equals(processParameter.getJuminShubetsu())) {
+            条件出力_住民種別 = new RString("外国人のみ");
+        } else{
+            条件出力_住民種別 = new RString("全て");
         }
         set年齢到達予定者リスト();
     }
@@ -265,8 +276,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         nenreiCheckListJyohoEntity.set日付編集フラグ(processParameter.isNichihensyuflg());
         nenreiCheckListJyohoEntity.set抽出期間From(toWarekiFormat(processParameter.getKonkaikaishi()));
         nenreiCheckListJyohoEntity.set抽出期間To(toWarekiFormat(processParameter.getKonkaisyuryo()));
-        nenreiCheckListJyohoEntity.set住民種別(processParameter.getJuminShubetsu());
-        nenreiCheckListJyohoEntity.set出力対象(processParameter.getSyutsuryokutaisyo());
+        nenreiCheckListJyohoEntity.set住民種別(条件出力_住民種別);
+        nenreiCheckListJyohoEntity.set出力対象(条件出力_出力対象者);
     }
 
     private RString toWarekiFormat(FlexibleDate date) {
