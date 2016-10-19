@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0030011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dbu.business.core.yoshikibetsurenkeijoho.JigyoHokokuTokei;
@@ -59,6 +60,8 @@ public class JigyoJokyoHokokuGeppo {
      * @return ResponseData<JigyoJokyoHokokuGeppoDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoDiv> onChange_ddlKakoHokokuYM(JigyoJokyoHokokuGeppoDiv div) {
+        List<RString> key = new ArrayList<>();
+        div.getCblShutsuryokuAll().setSelectedItemsByKey(key);
         getHandler(div).clearTxtShukeiYM();
         if (!RString.isNullOrEmpty(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey())) {
             FlexibleYearMonth yearMonth = new FlexibleYearMonth(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey());

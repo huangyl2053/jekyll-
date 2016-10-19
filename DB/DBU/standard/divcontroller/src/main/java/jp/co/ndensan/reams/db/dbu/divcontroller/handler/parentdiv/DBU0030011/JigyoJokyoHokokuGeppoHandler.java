@@ -46,7 +46,7 @@ public class JigyoJokyoHokokuGeppoHandler {
     private static final List<RString> 決定状況合算 = new ArrayList<>();
     private static final List<RString> 保険給付決定状況_現物分 = new ArrayList<>();
     private static final List<RString> 決定状況合算_償還分 = new ArrayList<>();
-
+    private static final List<RString> emptyKey = new ArrayList<>();
     private final JigyoJokyoHokokuGeppoDiv div;
 
     /**
@@ -349,24 +349,43 @@ public class JigyoJokyoHokokuGeppoHandler {
             div.getCblHokenKyufuShokan().setDisabled(false);
         } else {
             if (div.getTxtShukeiYM1().getValue() == null || div.getTxtShukeiYM1().getValue().isEmpty()) {
+                div.getCblIppan1to10().setSelectedItemsByKey(emptyKey);
                 div.getCblIppan1to10().setDisabled(true);
+                div.getTxtShukeiYM1().setDisabled(true);
+            } else {
+                div.getCblIppan1to10().setDisabled(false);
+                div.getTxtShukeiYM1().setDisabled(false);
             }
             if (div.getTxtShukeiYM2().getValue() == null || div.getTxtShukeiYM2().getValue().isEmpty()) {
+                div.getCblIppanGembutsu().setSelectedItemsByKey(emptyKey);
                 div.getCblIppanGembutsu().setDisabled(true);
+                div.getTxtShukeiYM2().setDisabled(true);
+            } else {
+                div.getCblIppanGembutsu().setDisabled(false);
+                div.getTxtShukeiYM2().setDisabled(false);
             }
             if (div.getTxtShukeiYM3().getValue() == null || div.getTxtShukeiYM3().getValue().isEmpty()) {
+                div.getCblIppanShokan().setSelectedItemsByKey(emptyKey);
                 div.getCblIppanShokan().setDisabled(true);
+                div.getTxtShukeiYM3().setDisabled(true);
+            } else {
+                div.getCblIppanShokan().setDisabled(false);
+                div.getTxtShukeiYM3().setDisabled(false);
             }
             if ((div.getTxtShukeiYM2().getValue() == null || div.getTxtShukeiYM2().getValue().isEmpty())
                     && (div.getTxtShukeiYM3().getValue() == null || div.getTxtShukeiYM3().getValue().isEmpty())) {
+                div.getCblGassan1().setSelectedItemsByKey(emptyKey);
                 div.getCblGassan1().setDisabled(true);
+            } else {
+                div.getCblGassan1().setDisabled(false);
             }
             getShutsuryoku();
         }
         if (new FlexibleDate("平26.07").isBeforeOrEquals((new FlexibleDate(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedValue())))) {
+            div.getCblGassan2().setSelectedItemsByKey(emptyKey);
             div.getCblHokenKyufuGembutsu().setDisabled(true);
             div.getCblGassan2().setDisabled(true);
-        }
+        } 
     }
 
     /**
@@ -374,14 +393,27 @@ public class JigyoJokyoHokokuGeppoHandler {
      */
     public void getShutsuryoku() {
         if (div.getTxtShukeiYM4().getValue() == null || div.getTxtShukeiYM4().getValue().isEmpty()) {
+            div.getCblHokenKyufuGembutsu().setSelectedItemsByKey(emptyKey);
             div.getCblHokenKyufuGembutsu().setDisabled(true);
+            div.getTxtShukeiYM4().setDisabled(true);
+        } else {
+            div.getCblHokenKyufuGembutsu().setDisabled(false);
+            div.getTxtShukeiYM4().setDisabled(false);
         }
         if (div.getTxtShukeiYM5().getValue() == null || div.getTxtShukeiYM5().getValue().isEmpty()) {
+            div.getCblHokenKyufuShokan().setSelectedItemsByKey(emptyKey);
             div.getCblHokenKyufuShokan().setDisabled(true);
+            div.getTxtShukeiYM5().setDisabled(true);
+        } else {
+            div.getCblHokenKyufuShokan().setDisabled(false);
+            div.getTxtShukeiYM5().setDisabled(false);
         }
         if ((div.getTxtShukeiYM4().getValue() == null || div.getTxtShukeiYM4().getValue().isEmpty())
                 && (div.getTxtShukeiYM5().getValue() == null || div.getTxtShukeiYM5().getValue().isEmpty())) {
+            div.getCblGassan2().setSelectedItemsByKey(emptyKey);
             div.getCblGassan2().setDisabled(true);
+        } else {
+            div.getCblGassan2().setDisabled(false);
         }
     }
 
@@ -424,7 +456,7 @@ public class JigyoJokyoHokokuGeppoHandler {
 
     /**
      * 広域構成市町村用保険者選択ラジオボタンの処理です。
-     */
+     */ 
     public void setRadKoikiKoseiShichoson() {
         if (new RString("koiki").equals(div.getJikkoTanni().getRadKoikiKoseiShichoson().getSelectedKey())) {
             div.getJikkoTanni().getBtnShichosonSentaku().setDisabled(true);
@@ -494,16 +526,15 @@ public class JigyoJokyoHokokuGeppoHandler {
             一般状況10.add(new RString("ippan1_11"));
             div.getCblIppan1to10().setSelectedItemsByKey(一般状況10);
         }
-        if (div.getCblGassan1().isDisabled()) {
-            setCblGassan1();
-        } else {
+        
+        setCblGassan1();
+        if (!div.getCblGassan1().isDisabled()) {
             一般状況_合算.clear();
             一般状況_合算.add(ALL);
             div.getCblGassan1().setSelectedItemsByKey(一般状況_合算);
         }
-        if (div.getCblGassan2().isDisabled()) {
-            setCblGassan2();
-        } else {
+        setCblGassan2();
+        if (!div.getCblGassan2().isDisabled()) {
             決定状況合算.clear();
             決定状況合算.add(ALL);
             div.getCblGassan2().setSelectedItemsByKey(決定状況合算);
