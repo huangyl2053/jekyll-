@@ -247,7 +247,8 @@ public class HanyoListRiyoshaFutanwariaiBusiness {
         }
         eucCsvEntity.set職権フラグ(entity.is利用者負担割合_職権変更フラグ() ? 職権変更 : RString.EMPTY);
         eucCsvEntity.set資格区分(ShikakuKubun.toValue(entity.get利用者負担割合明細_資格区分()).get名称());
-        eucCsvEntity.set負担割合区分(FutanwariaiKubun.toValue(entity.get利用者負担割合明細_負担割合区分()).get名称());
+        eucCsvEntity.set負担割合区分((entity.get利用者負担割合明細_負担割合区分() != null && !entity.get利用者負担割合明細_負担割合区分().isEmpty())
+                ? FutanwariaiKubun.toValue(entity.get利用者負担割合明細_負担割合区分()).get名称() : RString.EMPTY);
         eucCsvEntity.set判定区分(entity.get利用者負担割合_判定区分());
         eucCsvEntity.set判定日(set年月日(entity.get利用者負担割合_判定日()));
         eucCsvEntity.set有効開始年月日(set年月日(entity.get利用者負担割合明細_有効開始日()));
