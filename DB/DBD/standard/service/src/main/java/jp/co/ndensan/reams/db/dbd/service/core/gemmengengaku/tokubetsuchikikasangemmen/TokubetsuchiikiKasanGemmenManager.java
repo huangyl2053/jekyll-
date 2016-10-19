@@ -101,7 +101,7 @@ public class TokubetsuchiikiKasanGemmenManager {
         if (!特別地域加算減免.hasChanged()) {
             return false;
         }
-        //特別地域加算減免 = 特別地域加算減免.modifiedModel();
+        特別地域加算減免 = 特別地域加算減免.modifiedModel();
         save減免減額申請リスト(特別地域加算減免.getGemmenGengakuShinseiList());
         return 1 == 特別地域加算減免Dac.save(特別地域加算減免.toEntity());
     }
