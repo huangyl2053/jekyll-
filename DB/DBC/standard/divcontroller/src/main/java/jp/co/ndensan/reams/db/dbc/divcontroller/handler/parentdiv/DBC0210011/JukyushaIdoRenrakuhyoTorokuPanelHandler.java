@@ -225,43 +225,39 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
                 && RString.isNullOrEmpty(result.get認定有効期間終了年月日())) {
             resultEdit = resultEdit.set認定有効期間終了年月日(半角アスタリスク);
         }
-        if ((!RString.isNullOrEmpty(entity.get認定有効期間終了年月日()))
-                && RString.isNullOrEmpty(result.get認定有効期間終了年月日())) {
-            resultEdit = resultEdit.set認定有効期間終了年月日(半角アスタリスク);
-        }
-        if ((!RString.isNullOrEmpty(entity.get認定有効期間終了年月日()))
+        if ((!RString.isNullOrEmpty(entity.get居宅サービス計画適用開始年月日()))
                 && RString.isNullOrEmpty(result.get居宅サービス計画適用開始年月日())) {
             resultEdit = resultEdit.set居宅サービス計画適用開始年月日(半角アスタリスク);
         }
-        if ((!RString.isNullOrEmpty(entity.get認定有効期間終了年月日()))
+        if ((!RString.isNullOrEmpty(entity.get居宅サービス計画適用終了年月日()))
                 && RString.isNullOrEmpty(result.get居宅サービス計画適用終了年月日())) {
             resultEdit = resultEdit.set居宅サービス計画適用終了年月日(半角アスタリスク);
         }
-        if ((!RString.isNullOrEmpty(entity.get認定有効期間終了年月日()))
+        if ((!RString.isNullOrEmpty(entity.get訪問通所サービス上限管理適用期間終了年月日()))
                 && RString.isNullOrEmpty(result.get訪問通所サービス上限管理適用期間終了年月日())) {
             resultEdit = resultEdit.set訪問通所サービス上限管理適用期間終了年月日(半角アスタリスク);
         }
-        if ((!RString.isNullOrEmpty(entity.get認定有効期間終了年月日()))
+        if ((!RString.isNullOrEmpty(entity.get償還払化開始年月日()))
                 && RString.isNullOrEmpty(result.get償還払化開始年月日())) {
             resultEdit = resultEdit.set償還払化開始年月日(半角アスタリスク);
         }
-        if ((!RString.isNullOrEmpty(entity.get認定有効期間終了年月日()))
+        if ((!RString.isNullOrEmpty(entity.get償還払化終了年月日()))
                 && RString.isNullOrEmpty(result.get償還払化終了年月日())) {
             resultEdit = resultEdit.set償還払化終了年月日(半角アスタリスク);
         }
-        if ((!RString.isNullOrEmpty(entity.get認定有効期間終了年月日()))
+        if ((!RString.isNullOrEmpty(entity.get適用開始年月日()))
                 && RString.isNullOrEmpty(result.get適用開始年月日())) {
             resultEdit = resultEdit.set適用開始年月日(半角アスタリスク);
         }
-        if ((!RString.isNullOrEmpty(entity.get認定有効期間終了年月日()))
+        if ((!RString.isNullOrEmpty(entity.get適用終了年月日()))
                 && RString.isNullOrEmpty(result.get適用終了年月日())) {
             resultEdit = resultEdit.set適用終了年月日(半角アスタリスク);
         }
-        if ((!RString.isNullOrEmpty(entity.get認定有効期間終了年月日()))
+        if ((!RString.isNullOrEmpty(entity.get負担額適用開始年月日()))
                 && RString.isNullOrEmpty(result.get負担額適用開始年月日())) {
             resultEdit = resultEdit.set負担額適用開始年月日(半角アスタリスク);
         }
-        if ((!RString.isNullOrEmpty(entity.get認定有効期間終了年月日()))
+        if ((!RString.isNullOrEmpty(entity.get負担額適用終了年月日()))
                 && RString.isNullOrEmpty(result.get負担額適用終了年月日())) {
             resultEdit = resultEdit.set負担額適用終了年月日(半角アスタリスク);
         }
