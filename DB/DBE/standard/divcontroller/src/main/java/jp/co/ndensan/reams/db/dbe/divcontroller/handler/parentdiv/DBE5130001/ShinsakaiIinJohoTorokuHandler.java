@@ -78,14 +78,25 @@ public class ShinsakaiIinJohoTorokuHandler {
             row.setStatus(RString.EMPTY);
             row.setShinsainCode(shinsakaiIinJoho.get介護認定審査会委員コード());
             row.getShinsakaiIinKaishiYMD().setValue(new RDate(shinsakaiIinJoho.get介護認定審査会委員開始年月日().toString()));
-            row.getShinsakaiIinShuryoYMD().setValue(new RDate(shinsakaiIinJoho.get介護認定審査会委員終了年月日().toString()));
+            if (!(shinsakaiIinJoho.get介護認定審査会委員終了年月日() == null || shinsakaiIinJoho.get介護認定審査会委員終了年月日().isEmpty())) {
+                if (!shinsakaiIinJoho.get介護認定審査会委員終了年月日().toString().equals("99999999")) {
+                    row.getShinsakaiIinShuryoYMD().setValue(new RDate(shinsakaiIinJoho.get介護認定審査会委員終了年月日().toString()));
+                }
+            }
             row.setShimei(shinsakaiIinJoho.get介護認定審査会委員氏名().value());
             row.setKanaShimei(shinsakaiIinJoho.get介護認定審査会委員氏名カナ().value());
             row.setSeibetsu(Seibetsu.toValue(shinsakaiIinJoho.get性別()).get名称());
             if (shinsakaiIinJoho.get生年月日() != null && !shinsakaiIinJoho.get生年月日().isEmpty()) {
                 row.getBarthYMD().setValue(new RDate(shinsakaiIinJoho.get生年月日().toString()));
             }
-            row.setShikakuCode(Sikaku.toValue(shinsakaiIinJoho.get介護認定審査員資格コード().value()).get名称());
+            RString shikakuCode;
+            try {
+                shikakuCode = Sikaku.toValue(shinsakaiIinJoho.get介護認定審査員資格コード().value()).get名称();
+            } catch (IllegalArgumentException e) {
+                shikakuCode = RString.EMPTY;
+            }
+            row.setShikakuCode(shikakuCode);
+
             if (shinsakaiIinJoho.get備考() == null) {
                 row.setBiko(RString.EMPTY);
             } else {
