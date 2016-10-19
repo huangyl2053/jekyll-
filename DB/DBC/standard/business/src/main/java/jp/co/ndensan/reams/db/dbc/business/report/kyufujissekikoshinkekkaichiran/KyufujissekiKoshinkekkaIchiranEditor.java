@@ -33,11 +33,11 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
 
     private final FlexibleYearMonth 処理年月;
     private final ChohyoShutsuryokuTaishoDateEntity entity;
-    private final RString 並び順の１件目;
-    private final RString 並び順の２件目;
-    private final RString 並び順の３件目;
-    private final RString 並び順の４件目;
-    private final RString 並び順の５件目;
+    private final RString 並び順の2件目;
+    private final RString 並び順の3件目;
+    private final RString 並び順の4件目;
+    private final RString 並び順の5件目;
+    private final RString 並び順の6件目;
     private final List<RString> 改頁項目List;
     private final YMDHMS システム日時;
     private final int 連番;
@@ -48,6 +48,7 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
+    private static final int NUM_5 = 5;
     private static final int NUM_8 = 8;
     private static final int NUM_9 = 9;
     private static final int NUM_16 = 16;
@@ -65,11 +66,11 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
      *
      * @param 処理年月 FlexibleYearMonth
      * @param entity ChohyoShutsuryokuTaishoDateEntity
-     * @param 並び順の１件目 RString
-     * @param 並び順の２件目 RString
-     * @param 並び順の３件目 RString
-     * @param 並び順の４件目 RString
-     * @param 並び順の５件目 RString
+     * @param 並び順の2件目 RString
+     * @param 並び順の3件目 RString
+     * @param 並び順の4件目 RString
+     * @param 並び順の5件目 RString
+     * @param 並び順の6件目 RString
      * @param 改頁項目List List<RString>
      * @param システム日時 YMDHMS
      * @param 連番 int
@@ -79,11 +80,11 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
     public KyufujissekiKoshinkekkaIchiranEditor(
             FlexibleYearMonth 処理年月,
             ChohyoShutsuryokuTaishoDateEntity entity,
-            RString 並び順の１件目,
-            RString 並び順の２件目,
-            RString 並び順の３件目,
-            RString 並び順の４件目,
-            RString 並び順の５件目,
+            RString 並び順の2件目,
+            RString 並び順の3件目,
+            RString 並び順の4件目,
+            RString 並び順の5件目,
+            RString 並び順の6件目,
             List<RString> 改頁項目List,
             YMDHMS システム日時,
             int 連番,
@@ -91,11 +92,11 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
             int 合計) {
         this.処理年月 = 処理年月;
         this.entity = entity;
-        this.並び順の１件目 = 並び順の１件目;
-        this.並び順の２件目 = 並び順の２件目;
-        this.並び順の３件目 = 並び順の３件目;
-        this.並び順の４件目 = 並び順の４件目;
-        this.並び順の５件目 = 並び順の５件目;
+        this.並び順の2件目 = 並び順の2件目;
+        this.並び順の3件目 = 並び順の3件目;
+        this.並び順の4件目 = 並び順の4件目;
+        this.並び順の5件目 = 並び順の5件目;
+        this.並び順の6件目 = 並び順の6件目;
         this.改頁項目List = 改頁項目List;
         this.システム日時 = システム日時;
         this.連番 = 連番;
@@ -249,26 +250,26 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
     }
 
     private void set出力順And改ページ(KyufujissekiKoshinkekkaIchiranSource source) {
-        source.shutsuryokujun1 = 並び順の１件目;
-        source.shutsuryokujun2 = 並び順の２件目;
-        source.shutsuryokujun3 = 並び順の３件目;
-        source.shutsuryokujun4 = 並び順の４件目;
-        source.shutsuryokujun5 = 並び順の５件目;
+        source.shutsuryokujun1 = 並び順の2件目;
+        source.shutsuryokujun2 = 並び順の3件目;
+        source.shutsuryokujun3 = 並び順の4件目;
+        source.shutsuryokujun4 = 並び順の5件目;
+        source.shutsuryokujun5 = 並び順の6件目;
         if (null != 改頁項目List && !改頁項目List.isEmpty()) {
-            if (改頁項目List.size() > NUM_0) {
-                source.kaipage1 = 改頁項目List.get(NUM_0);
-            }
             if (改頁項目List.size() > NUM_1) {
-                source.kaipage2 = 改頁項目List.get(NUM_1);
+                source.kaipage1 = 改頁項目List.get(NUM_1);
             }
             if (改頁項目List.size() > NUM_2) {
-                source.kaipage3 = 改頁項目List.get(NUM_2);
+                source.kaipage2 = 改頁項目List.get(NUM_2);
             }
             if (改頁項目List.size() > NUM_3) {
-                source.kaipage4 = 改頁項目List.get(NUM_3);
+                source.kaipage3 = 改頁項目List.get(NUM_3);
             }
             if (改頁項目List.size() > NUM_4) {
-                source.kaipage5 = 改頁項目List.get(NUM_4);
+                source.kaipage4 = 改頁項目List.get(NUM_4);
+            }
+            if (改頁項目List.size() > NUM_5) {
+                source.kaipage5 = 改頁項目List.get(NUM_5);
             }
         }
     }
