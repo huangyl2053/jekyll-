@@ -49,8 +49,6 @@ public class ShinsakauIinHoshuShokaiHandler {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, false);
         div.getShinsakaiIinHoshu().setDisplayNone(true);
         div.getShinsakaiKaisaibi().setDisplayNone(false);
-        div.getShinsakaiKaisaibi().getTxtShinsakaiKaisaiYM().setPlaceHolder(
-                RDate.getNowDate().getYearMonth().wareki().toDateString());
     }
 
     /**
