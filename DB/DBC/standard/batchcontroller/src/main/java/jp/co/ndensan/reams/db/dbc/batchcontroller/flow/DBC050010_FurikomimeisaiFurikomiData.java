@@ -151,8 +151,8 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
         if (0 != 振込明細レコード件数) {
             executeStep(被保険者台帳_宛名情報);
             被保険者台帳_宛名情報レコード件数 = getResult(
-                    Integer.class, new RString(処理結果確認リスト_振込データなし),
-                    ShoriKekkaKakuninListDataNasiProcess.PARAMETER_OUT_COUNT);
+                    Integer.class, new RString(被保険者台帳_宛名情報),
+                    HihokenshaAtenaJohoProcess.PARAMETER_OUT_COUNT);
 
             if (0 == 被保険者台帳_宛名情報レコード件数) {
                 executeStep(被保険者台帳_宛名情報_エラー登録);
