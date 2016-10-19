@@ -173,14 +173,14 @@
                                 SELECT *,ROW_NUMBER() OVER (PARTITION BY 被保険者台帳."hihokenshaNo" 
                                     ORDER BY 被保険者台帳."idoYMD" DESC,被保険者台帳."edaNo" DESC) AS 最大順
                                     FROM rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳
-                                    WHERE 被保険者台帳."idoYMD" <![CDATA[<=]]> #{課税判定等基準日}
+                                    WHERE 被保険者台帳."idoYMD" <![CDATA[<=]]> #{基準日}
                              ) AS X
                              WHERE 
                                 X.最大順 = 1
-                                AND X."shikakuShutokuYMD" <![CDATA[<=]]> #{課税判定等基準日}
+                                AND X."shikakuShutokuYMD" <![CDATA[<=]]> #{基準日}
                                 AND (CASE WHEN X."shikakuSoshitsuYMD" = ''
                                             THEN '99999999' 
-                                          ELSE X."shikakuSoshitsuYMD" END) <![CDATA[>]]> #{課税判定等基準日}
+                                          ELSE X."shikakuSoshitsuYMD" END) <![CDATA[>]]> #{基準日}
             ) AS 被保険者台帳情報 
             ON 被保険者台帳情報."hihokenshaNo" = A.被保険者番号
         </if>    
