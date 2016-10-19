@@ -82,6 +82,18 @@ public class KohijukyushaBetsuIchiranReportSource implements IReportSource {
     public RString kohiFutanGakuGokei;
     @ReportItem(name = "kohiHoninFutanGakuGokei", length = 15, order = 33)
     public RString kohiHoninFutanGakuGokei;
+    @ReportItem(name = "kohiHonninFutanGakuGokei", length = 15, order = 34)
+    public RString kohiHonninFutanGakuGokei;
+    @ReportItem(name = "yubinNo", length = 40, order = 35)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 40, order = 36)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 40, order = 37)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 40, order = 38)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 40, order = 39)
+    public RString shichosonCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -97,7 +109,44 @@ public class KohijukyushaBetsuIchiranReportSource implements IReportSource {
      */
     public enum ReportSourceFields {
 
-        kohiFutanshaNo
+        printTimeStamp,
+        shinsaYM,
+        kohiFutanshaNo,
+        kohiFutanshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kokuhorenName,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        listUpper_1,
+        listUpper_2,
+        listUpper_3,
+        listUpper_4,
+        listUpper_5,
+        listUpper_6,
+        listUpper_7,
+        listUpper_8,
+        listUpper_9,
+        listUpper_10,
+        listUpper_11,
+        listLower_1,
+        listLower_2,
+        listLower_3,
+        listLower_4,
+        kohiTensuGokei,
+        kohiFutanGakuGokei,
+        kohiHonninFutanGakuGokei,
+        yubinNo,
+        choikiCode,
+        gyoseikuCode,
+        shimei50onKana,
+        shichosonCode
     }
 // </editor-fold>
 }

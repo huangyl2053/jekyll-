@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 償還連絡票情報作成の送付ファイル作成Processです。
@@ -655,6 +656,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             tempList.add(RSTRING_0);
             往診日数 = 往診日数 + entity.getOshinNissu();
             通院日数 = 通院日数 + entity.getTsuinNissu();
+            緊急時施設療養費合計単位数 = 緊急時施設療養費合計単位数 + entity.getKinkyuShisetsuRyoyohiTotalTanisu();
             緊急時治療管理単位数 = 緊急時治療管理単位数 + entity.getKinkyuChiryoKanriTanisu();
             緊急時治療管理日数 = 緊急時治療管理日数 + entity.getKinkyuChiryoKanriNissu();
             緊急時治療管理小計 = 緊急時治療管理小計 + entity.getKinkyuChiryoKanriSubTotal();
@@ -859,7 +861,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             単位数単価 = RString.EMPTY;
         } else {
             単位数単価 = entity.getTanisuTanka().compareTo(Decimal.ZERO) == 0 ? RSTRING_0000
-                    : trimDecimal(entity.getTanisuTanka().multiply(INT_100)).padZeroToLeft(INT_4);
+                    : DecimalFormatter.toRString(entity.getTanisuTanka().multiply(INT_100), 0).padZeroToLeft(INT_4);
         }
         tempList.add(単位数単価);
         tempList.add(new RString(entity.getSeikyuKingaku()));
@@ -888,7 +890,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             単位数単価 = RString.EMPTY;
         } else {
             単位数単価 = entity.getTanisuTanka().compareTo(Decimal.ZERO) == 0 ? RSTRING_0000
-                    : trimDecimal(entity.getTanisuTanka().multiply(INT_100)).padZeroToLeft(INT_4);
+                    : DecimalFormatter.toRString(entity.getTanisuTanka().multiply(INT_100), 0).padZeroToLeft(INT_4);
         }
         tempList.add(単位数単価);
         tempList.add(new RString(entity.getSeikyuKingaku()));
@@ -926,7 +928,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             単位数単価 = RString.EMPTY;
         } else {
             単位数単価 = entity.getTanisuTanka().compareTo(Decimal.ZERO) == 0 ? RSTRING_0000
-                    : trimDecimal(entity.getTanisuTanka().multiply(INT_100)).padZeroToLeft(INT_4);
+                    : DecimalFormatter.toRString(entity.getTanisuTanka().multiply(INT_100), 0).padZeroToLeft(INT_4);
         }
         tempList.add(単位数単価);
         if (lastFlag) {
@@ -1021,7 +1023,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             単位数単価 = RString.EMPTY;
         } else {
             単位数単価 = entity.getTanisuTanka().compareTo(Decimal.ZERO) == 0 ? RSTRING_0000
-                    : trimDecimal(entity.getTanisuTanka().multiply(INT_100)).padZeroToLeft(INT_4);
+                    : DecimalFormatter.toRString(entity.getTanisuTanka().multiply(INT_100), 0).padZeroToLeft(INT_4);
         }
         tempList.add(単位数単価);
         tempList.add(trimDecimal(entity.getSeikyugaku()));
@@ -1129,7 +1131,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             軽減率 = RString.EMPTY;
         } else {
             軽減率 = entity.getKeigenritsu().compareTo(Decimal.ZERO) == 0 ? RSTRING_0000
-                    : trimDecimal(entity.getKeigenritsu().multiply(INT_10)).padZeroToLeft(INT_4);
+                    : DecimalFormatter.toRString(entity.getKeigenritsu().multiply(INT_10), 0).padZeroToLeft(INT_4);
         }
         tempList.add(軽減率);
         tempList.add(entity.getServiceShuruiCode() == null || entity.getServiceShuruiCode().isEmpty()

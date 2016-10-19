@@ -105,6 +105,8 @@ public class JukyushagenmenninteiDateManager {
     private static final Decimal NINE = new Decimal(9);
     private static final Decimal TEN = new Decimal(10);
     private static final Decimal ELEVEN = new Decimal(11);
+    private static final Decimal TWELVE = new Decimal(12);
+    private static final Decimal THIRTEEN = new Decimal(13);
     private static final int ZERO1 = 0;
     private static final int ONE1 = 1;
     private static final int TWO1 = 2;
@@ -125,6 +127,7 @@ public class JukyushagenmenninteiDateManager {
     private static final RString 年齢層抽出方法_生年月日 = NenreiSoChushutsuHoho.生年月日範囲.getコード();
 
     private static final RString タイトルのみ印字 = new RString("タイトルのみ印字");
+    private static final RString 印字不要 = new RString("印字不要");
 
     /**
      * コンストラクタです。
@@ -203,13 +206,15 @@ public class JukyushagenmenninteiDateManager {
             if (FIVE.equals(num) || ONE.equals(num)) {
                 newEntity.setInnjiKubun(タイトルのみ印字);
             }
-        } else if (TWO.equals(entity.getTableFlag())) {
-            if (ONE.equals(num) || FIVE.equals(num)) {
-                newEntity.setInnjiKubun(タイトルのみ印字);
+            if (SIX.equals(num)) {
+                newEntity.setInnjiKubun(印字不要);
             }
         } else if (THREE.equals(entity.getTableFlag())) {
             if (ONE.equals(num) || ZERO.equals(num) || SIX.equals(num) || ELEVEN.equals(num)) {
                 newEntity.setInnjiKubun(タイトルのみ印字);
+            }
+            if (TWELVE.equals(num) || THIRTEEN.equals(num)) {
+                newEntity.setInnjiKubun(印字不要);
             }
         } else {
             newEntity.setInnjiKubun(set受給者タイトルのみ印字(num, entity.getTableFlag()));
@@ -272,14 +277,16 @@ public class JukyushagenmenninteiDateManager {
         if (ONE.equals(tableFlag) || TWO.equals(tableFlag)) {
             if (FIVE.equals(num) || ONE.equals(num)) {
                 newEntity.setInnjiKubun(タイトルのみ印字);
-            }
-        } else if (TWO.equals(tableFlag)) {
-            if (ONE.equals(num) || FIVE.equals(num)) {
-                newEntity.setInnjiKubun(タイトルのみ印字);
+                if (SIX.equals(num)) {
+                    newEntity.setInnjiKubun(印字不要);
+                }
             }
         } else if (THREE.equals(tableFlag)) {
             if (ONE.equals(num) || ZERO.equals(num) || SIX.equals(num) || ELEVEN.equals(num)) {
                 newEntity.setInnjiKubun(タイトルのみ印字);
+            }
+            if (TWELVE.equals(num) || THIRTEEN.equals(num)) {
+                newEntity.setInnjiKubun(印字不要);
             }
         } else {
             newEntity.setInnjiKubun(set受給者タイトルのみ印字(num, tableFlag));
@@ -363,6 +370,32 @@ public class JukyushagenmenninteiDateManager {
         JukyushaGemmenJisshiJokyoEntity データリスト = new JukyushaGemmenJisshiJokyoEntity();
 
         データリスト.setタイトル(t.getTitle());
+        データリスト.set一月(RString.EMPTY);
+        データリスト.set二月(RString.EMPTY);
+        データリスト.set三月(RString.EMPTY);
+        データリスト.set四月(RString.EMPTY);
+        データリスト.set五月(RString.EMPTY);
+        データリスト.set六月(RString.EMPTY);
+        データリスト.set七月(RString.EMPTY);
+        データリスト.set八月(RString.EMPTY);
+        データリスト.set九月(RString.EMPTY);
+        データリスト.set十月(RString.EMPTY);
+        データリスト.set十一月(RString.EMPTY);
+        データリスト.set十二月(RString.EMPTY);
+        データリスト.set合計(RString.EMPTY);
+        return データリスト;
+    }
+
+    /**
+     * 受給者減免月別申請認定状況帳票出力データを設定します。
+     *
+     * @param t NinteijkouTempTableEntity
+     * @return JukyushaGemmenJisshiJokyoEntity
+     */
+    public JukyushaGemmenJisshiJokyoEntity set受給者減免月別認定者数帳票出力_印字不要(NinteijkouTempTableEntity t) {
+        JukyushaGemmenJisshiJokyoEntity データリスト = new JukyushaGemmenJisshiJokyoEntity();
+
+        データリスト.setタイトル(RString.EMPTY);
         データリスト.set一月(RString.EMPTY);
         データリスト.set二月(RString.EMPTY);
         データリスト.set三月(RString.EMPTY);
@@ -582,13 +615,22 @@ public class JukyushagenmenninteiDateManager {
             if (ZERO.equals(num)) {
                 return タイトルのみ印字;
             }
+            if (SIX.equals(num)) {
+                return 印字不要;
+            }
         } else if (FIVE.equals(tableflag)) {
             if (ZERO.equals(num) || SEVEN.equals(num) || EIGHT.equals(num) || NINE.equals(num) || TEN.equals(num) || ELEVEN.equals(num)) {
                 return タイトルのみ印字;
             }
+            if (TWELVE.equals(num) || THIRTEEN.equals(num)) {
+                return 印字不要;
+            }
         } else if (SIX.equals(tableflag)) {
             if (FIVE.equals(num) || ZERO.equals(num) || FOUR.equals(num)) {
                 return タイトルのみ印字;
+            }
+            if (SIX.equals(num)) {
+                return 印字不要;
             }
         }
         return RString.EMPTY;

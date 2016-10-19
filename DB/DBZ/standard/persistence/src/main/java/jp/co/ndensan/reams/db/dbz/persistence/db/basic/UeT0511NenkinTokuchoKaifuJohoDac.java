@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -157,6 +158,38 @@ public class UeT0511NenkinTokuchoKaifuJohoDac implements ISaveable<UeT0511Nenkin
                 where(and(eq(gyomuCode, 業務コード),
                                 eq(shoriNendo, 処理年度),
                                 eq(tsuchiNaiyoCode, 通知内容コード),
+                                eq(hosokuTsuki, 捕捉月))).
+                toList(UeT0511NenkinTokuchoKaifuJohoEntity.class);
+    }
+
+    /**
+     * 年金特徴回付情報（介護継承）から、対象者_追加含む情報を取得する。
+     *
+     * @param 業務コード 業務コード
+     * @param 基礎年金番号 基礎年金番号
+     * @param 処理年度 処理年度
+     * @param 年金コード 年金コード
+     * @param 捕捉月 捕捉月
+     * @param 通知内容コードList 通知内容コードList
+     * @return 年金特徴回付情報エンティティリスト
+     */
+    @Transaction
+    public List<UeT0511NenkinTokuchoKaifuJohoEntity> select対象者_追加含む(
+            GyomuCode 業務コード, FlexibleYear 処理年度, RString 基礎年金番号, RString 年金コード, RString 捕捉月, List<RString> 通知内容コードList) {
+        requireNonNull(業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(Constants.業務コード.name()));
+        requireNonNull(基礎年金番号, UrSystemErrorMessages.値がnull.getReplacedMessage(Constants.基礎年金番号.name()));
+        requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage(Constants.処理年度.name()));
+        requireNonNull(年金コード, UrSystemErrorMessages.値がnull.getReplacedMessage(Constants.年金コード.name()));
+        requireNonNull(捕捉月, UrSystemErrorMessages.値がnull.getReplacedMessage(Constants.天引月.name()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(UeT0511NenkinTokuchoKaifuJoho.class).
+                where(and(eq(gyomuCode, 業務コード),
+                                in(tsuchiNaiyoCode, 通知内容コードList),
+                                eq(shoriNendo, 処理年度),
+                                eq(kisoNenkinNo, 基礎年金番号),
+                                eq(nenkinCode, 年金コード),
                                 eq(hosokuTsuki, 捕捉月))).
                 toList(UeT0511NenkinTokuchoKaifuJohoEntity.class);
     }

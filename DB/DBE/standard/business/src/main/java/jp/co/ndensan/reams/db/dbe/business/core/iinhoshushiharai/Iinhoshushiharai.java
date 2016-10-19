@@ -38,6 +38,7 @@ public class Iinhoshushiharai {
     private RString ページ番号;
     private RString タイトル;
     private RString 通知文1;
+    private RString 介護認定審査会委員コード;
     private RString 審査会委員氏名;
     private RString 報酬報償費;
     private RString 源泉所得税;

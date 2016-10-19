@@ -94,7 +94,8 @@
         LEFT OUTER JOIN rgdb."DbT5102NinteiKekkaJoho" AS T5102_2
         ON T5121."zenkaiShinseishoKanriNo" = T5102_2."shinseishoKanriNo"
         WHERE T5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
-        ORDER BY T5502."shinsakaiOrder" ASC
+        ORDER BY T5502."shinsakaiOrder" ASC,
+                 T5101."hihokenshaNo"
     </select>
     
     <select id="get事前審査会結果情報"

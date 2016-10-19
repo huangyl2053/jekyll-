@@ -203,7 +203,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
 
         if (賦課台帳情報.get対象者_追加含む_情報() != null && 賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード() != null) {
             RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                    賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード().value());
+                    賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード());
             編集後仮算定賦課台帳情報.set本人特徴義務者(特別徴収義務者);
         }
         RString 年金コード = 賦課台帳情報.get徴収方法情報() != null ? 賦課台帳情報.get徴収方法情報().get仮徴収_年金コード() : RString.EMPTY;
@@ -289,7 +289,7 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
 
         if (賦課台帳情報.get対象者_追加含む_情報() != null && 賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード() != null) {
             RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                    賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード().value());
+                    賦課台帳情報.get対象者_追加含む_情報().getDT特別徴収義務者コード());
             編集後本算定賦課台帳情報.set本人特徴義務者(特別徴収義務者);
         }
         RString 年金コード = 賦課台帳情報.get徴収方法情報() != null ? 賦課台帳情報.get徴収方法情報().get仮徴収_年金コード() : RString.EMPTY;

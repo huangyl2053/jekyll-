@@ -161,7 +161,7 @@ public class KijunShunyugakuTekiyo {
         if (文字1.equals(entity.get住所地特例フラグ())) {
             eucEntity.set住所地特例状態(new RString("住特"));
         }
-        eucEntity.set資格_証記載保険者番号(get証記載保険者番号(entity, 市町村名MasterMap));
+        eucEntity.set資格_証記載保険者番号(entity.get証記載保険者番号());
         eucEntity.set受給申請事由(get受給申請事由(entity));
         eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
         if (!isNullCheck(entity.get要介護認定状態区分コード())) {
@@ -473,7 +473,7 @@ public class KijunShunyugakuTekiyo {
         if (文字1.equals(entity.get住所地特例フラグ())) {
             eucEntity.set住所地特例状態(new RString("住特"));
         }
-        eucEntity.set資格_証記載保険者番号(get証記載保険者番号(entity, 市町村名MasterMap));
+        eucEntity.set資格_証記載保険者番号(entity.get証記載保険者番号());
         eucEntity.set受給申請事由(get受給申請事由(entity));
         eucEntity.set受給申請日(set日付編集(entity.get受給申請年月日()));
         if (!isNullCheck(entity.get要介護認定状態区分コード())) {
@@ -521,20 +521,6 @@ public class KijunShunyugakuTekiyo {
         eucEntity.set決定通知書発行日(set日付編集(entity.get決定通知書発行日()));
         eucEntity.set削除データ(RString.EMPTY);
         return eucEntity;
-    }
-
-    private RString get証記載保険者番号(HanyoListParamRelateEntity entity, Map<RString, KoseiShichosonMaster> 市町村名MasterMap) {
-        RString 証記載保険者番号 = null;
-        if (文字1.equals(entity.get広域内住所地特例フラグ()) && 市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
-            if (!isNullCheck(entity.get広住特措置元市町村コード())) {
-                証記載保険者番号 = 市町村名MasterMap.get(entity.get広住特措置元市町村コード()).get証記載保険者番号().value();
-            }
-        } else {
-            if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
-                証記載保険者番号 = 市町村名MasterMap.get(entity.get市町村コード()).get証記載保険者番号().value();
-            }
-        }
-        return 証記載保険者番号;
     }
 
     private RString get受給申請事由(HanyoListParamRelateEntity entity) {

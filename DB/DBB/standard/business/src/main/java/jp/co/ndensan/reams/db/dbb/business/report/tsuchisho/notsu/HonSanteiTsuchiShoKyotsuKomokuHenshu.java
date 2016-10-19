@@ -16,16 +16,17 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HyojiCodeResearcher;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
-import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
@@ -33,7 +34,6 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -440,9 +440,9 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         FlexibleDate 基準日 = FlexibleDate.getNowDate();
         if (対象者_追加含む_情報_更正前 != null && 対象者_追加含む_情報_更正前.getDT特別徴収義務者コード() != null) {
             RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                    対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value(), 基準日);
+                    対象者_追加含む_情報_更正前.getDT特別徴収義務者コード(), 基準日);
             更正前.set特別徴収義務者(特別徴収義務者);
-            更正前.set特別徴収義務者コード(対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value().value());
+            更正前.set特別徴収義務者コード(対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value());
         }
 
         ChoshuHoho 徴収方法情報_更正前 = 本算定通知書情報.get徴収方法情報_更正前();
@@ -562,9 +562,9 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         FlexibleDate 基準日 = FlexibleDate.getNowDate();
         if (対象者_追加含む_情報_更正後 != null && 対象者_追加含む_情報_更正後.getDT特別徴収義務者コード() != null) {
             RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                    対象者_追加含む_情報_更正後.getDT特別徴収義務者コード().value(), 基準日);
+                    対象者_追加含む_情報_更正後.getDT特別徴収義務者コード(), 基準日);
             更正後.set特別徴収義務者(特別徴収義務者);
-            更正後.set特別徴収義務者コード(対象者_追加含む_情報_更正後.getDT特別徴収義務者コード().value().value());
+            更正後.set特別徴収義務者コード(対象者_追加含む_情報_更正後.getDT特別徴収義務者コード().value());
         }
 
         ChoshuHoho 徴収方法情報_更正後 = 本算定通知書情報.get徴収方法情報_更正後();

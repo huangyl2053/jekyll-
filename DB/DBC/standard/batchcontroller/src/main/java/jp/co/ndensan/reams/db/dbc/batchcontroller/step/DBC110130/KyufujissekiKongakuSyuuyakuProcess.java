@@ -113,7 +113,7 @@ public class KyufujissekiKongakuSyuuyakuProcess extends BatchProcessBase<DbWT113
             } else {
                 全てエラーmessages = getMessage(全てエラーmessages, entity1);
             }
-        } else if (区分_取消.equals(区分1)) {
+        } else if (区分_取消.equals(区分1) && 区分_新規.equals(区分2)) {
             RString 作成区分コード = 区分_修正;
             entity1.setSofuJogaiFlag(true);
             entity2 = 更新check(entity1, entity2, 作成区分コード);
@@ -147,7 +147,7 @@ public class KyufujissekiKongakuSyuuyakuProcess extends BatchProcessBase<DbWT113
                 ? RString.EMPTY : dbWT1132ErrorEntity.getServiceTeikyoYM().toDateString();
         message = message.concat(全てエラーMESSAGE)
                 .concat(RString.FULL_SPACE)
-                .concat(dbWT1132ErrorEntity.getKanriNo()).concat(コロン)
+                .concat(dbWT1132ErrorEntity.getKanriNo() == null ? RString.EMPTY : dbWT1132ErrorEntity.getKanriNo()).concat(コロン)
                 .concat(入力識別番号).concat(コロン)
                 .concat(被保険者番号).concat(コロン)
                 .concat(サービス提供年月).concat(改行);

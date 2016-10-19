@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hoshushiharaijunbi.Hoshu
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahoshumeisai.ChosaHoshumeisaiReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbi.IHoshuShiharaiJunbiMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -118,18 +119,19 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
         ChosaHoshumeisaiEdit edit = new ChosaHoshumeisaiEdit();
         ChosaHoshumeisai chosaHoshumeisai = edit.getChosaHoshumeisai(entity);
         chosaHoshumeisai = getChosaHoshumeisai(chosaHoshumeisai, entity);
+        chosaHoshumeisai.set申請書管理番号(get申請書管理番号(entity.getShinseishoKanriNo()));
         ChosaHoshumeisaiReport report = new ChosaHoshumeisaiReport(chosaHoshumeisai);
         report.writeBy(reportSourceWriter);
         index_tmp++;
     }
 
     private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
-        RString hihokenshaNo = RString.EMPTY;
-        if (entity.getHihokenshaNo() != null) {
-            hihokenshaNo = entity.getHihokenshaNo();
+        RString shinseishoKanriNo = RString.EMPTY;
+        if (entity.getShinseishoKanriNo() != null && !entity.getShinseishoKanriNo().isEmpty()) {
+            shinseishoKanriNo = entity.getShinseishoKanriNo().value();
         }
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                hihokenshaNo);
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
+                shinseishoKanriNo);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
@@ -239,5 +241,12 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
             return RString.EMPTY;
         }
         return new RString(date.toString());
+    }
+
+    private RString get申請書管理番号(ShinseishoKanriNo date) {
+        if (date != null) {
+            return date.value();
+        }
+        return RString.EMPTY;
     }
 }

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301030.ShimeiKanaTotsu
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301030.ShimeiKanaTotsugoTouItuninProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301020.DBD301030_HikazeiNenkinTaishoshaDoteiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.JissekiDataIchijiSakuseiProcessParamter;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazenenkintaishoshadoutei.IChofukuTorikomiDataDeleteShoriMapper;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -47,6 +48,7 @@ public class DBD301030_HikazeiNenkinTaishoshaDotei extends BatchFlowBase<DBD3010
     protected void defineFlow() {
         executeStep(実績データ一時作成);
         executeStep(重複取込データ除外処理);
+        getMapper(IChofukuTorikomiDataDeleteShoriMapper.class).deleteデータを削除処理();
         executeStep(年金番号突合_非課税年金対象者情報１_登録);
         executeStep(年金番号突合_該当年金情報なし);
         if (!処理区_1.equals(getParameter().get処理区分()) && !処理区_9.equals(getParameter().get処理区分())) {

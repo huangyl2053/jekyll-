@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,6 +44,13 @@ public class HanyoListShotokuJohoProcessParameter implements IBatchProcessParame
     private List<RString> 課税区分減免前s;
     private List<RString> 課税区分減免後s;
     private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
+    private RString 年齢層抽出方法;
+    private Decimal 年齢範囲開始;
+    private Decimal 年齢範囲終了;
+    private RDate 生年月日範囲開始1;
+    private RDate 生年月日範囲終了1;
+    private RDate 生年月日範囲開始;
+    private RDate 生年月日範囲終了;
 
     /**
      * コンストラクタ
@@ -94,6 +103,7 @@ public class HanyoListShotokuJohoProcessParameter implements IBatchProcessParame
      */
     public HanyoListShotokuJohoMybatisParameter toMybatisParameter() {
         return new HanyoListShotokuJohoMybatisParameter(帳票ID, 宛名抽出条件, 出力順ID, 出力項目ID, 項目名付加, 連番付加, 日付編集,
-                賦課年度, 抽出期間From, 抽出期間To, 住民税減免前後表示区分, 課税区分減免前s, 課税区分減免後s, 出力順, 宛名検索条件);
+                賦課年度, 抽出期間From, 抽出期間To, 住民税減免前後表示区分, 課税区分減免前s, 課税区分減免後s, 出力順,
+                年齢層抽出方法, 年齢範囲開始, 年齢範囲終了, 生年月日範囲開始1, 生年月日範囲終了1, 生年月日範囲開始, 生年月日範囲終了, 宛名検索条件);
     }
 }

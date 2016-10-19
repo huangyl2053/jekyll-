@@ -24,12 +24,22 @@ public class SelRiyoushaHutanwariaitorigaDataProcessParameter implements IBatchP
     private RDateTime 抽出期間開始日時;
     private RDateTime 抽出期間終了日時;
 
+    /**
+     *
+     * @param 抽出期間開始日時 RDateTime
+     * @param 抽出期間終了日時 RDateTime
+     */
     public SelRiyoushaHutanwariaitorigaDataProcessParameter(RDateTime 抽出期間開始日時, RDateTime 抽出期間終了日時) {
 
         this.抽出期間開始日時 = 抽出期間開始日時;
         this.抽出期間終了日時 = 抽出期間終了日時;
     }
 
+    /**
+     * toSelRiyoushaHutanwariaitorigaDataMybatisParameter
+     *
+     * @return SelRiyoushaHutanwariaitorigaDataMybatisParameter
+     */
     public SelRiyoushaHutanwariaitorigaDataMybatisParameter toSelRiyoushaHutanwariaitorigaDataMybatisParameter() {
 
         SelRiyoushaHutanwariaitorigaDataMybatisParameter parameter = new SelRiyoushaHutanwariaitorigaDataMybatisParameter();

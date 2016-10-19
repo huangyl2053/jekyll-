@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.taishoshaichiran.Taishos
 import jp.co.ndensan.reams.db.dbc.service.core.taishoshakensaku.TaishoshaKensaku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -39,6 +40,8 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
     private static final RString 選択モード = new RString("選択");
     private static final RString KEY = new RString("isDeletedDataSearch");
     private static final RString 受給者異動_訂正連絡票発行 = new RString("DBCMN83001");
+    private static final RString イベント_対象者特定 = new RString("DBZ0200001_対象者特定");
+    private static final RString イベント_終了 = new RString("DBZ0200001_終了");
 
     /**
      * 申請情報検索_画面初期化です。
@@ -51,11 +54,11 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
         ViewStateHolder.put(ViewStateKeys.メニューID, メニューID);
         TaishoshaIchiranParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.退避用データ, TaishoshaIchiranParameter.class);
-        if (parameter != null && parameter.get異動日From() != null) {
+        if (parameter != null && parameter.get異動日From() != null && !parameter.get異動日From().isEmpty()) {
             div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().getTxtIdoDateRange().
                     setFromValue(new RDate(parameter.get異動日From().toString()));
         }
-        if (parameter != null && parameter.get異動日To() != null) {
+        if (parameter != null && parameter.get異動日To() != null && !parameter.get異動日To().isEmpty()) {
             div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().getTxtIdoDateRange().
                     setToValue(new RDate(parameter.get異動日To().toString()));
         }
@@ -63,6 +66,7 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
             div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
                     getTxtSearchHihoNo().setValue(parameter.get被保番号().value());
         }
+        set検索条件(div);
         if (parameter != null && new RString(Boolean.TRUE.toString()).equals(parameter.get削除データ検索())) {
             List<RString> list = new ArrayList();
             list.add(KEY);
@@ -94,13 +98,45 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
             }
             List<TaishoshaKensakuResult> 異動対象者一覧情報 = TaishoshaKensaku.createInstance().
                     selectJukyushaIdoTaishosha(異動日From, 異動日To, 被保険者番号, 削除データ);
-            if (異動対象者一覧情報 == null) {
-                throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-            }
+            getエラー(異動対象者一覧情報);
             getHandler(div).initialize対象者一覧(メニューID, 異動日From, 異動日To, 被保険者番号, 異動対象者一覧情報);
             return ResponseData.of(div).setState(DBC0220011StateName.対象者一覧);
         }
         return ResponseData.of(div).setState(DBC0220011StateName.対象者検索);
+    }
+
+    private void getエラー(List<TaishoshaKensakuResult> 異動対象者一覧情報) {
+        if (異動対象者一覧情報 == null) {
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        }
+    }
+
+    private void set検索条件(JukyushaIdoRenrakuhyoHenkoMainPanelDiv div) {
+        RString イベント名 = ResponseHolder.getBeforeEvent();
+        if (イベント_対象者特定.equals(イベント名) || イベント_終了.equals(イベント名)) {
+            TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            HihokenshaNo 被保番号 = 資格対象者.get被保険者番号();
+            JukyushaIdoRenrakuhyoHenkoParameter parameter = ViewStateHolder.get(ViewStateKeys.検索退避用,
+                    JukyushaIdoRenrakuhyoHenkoParameter.class);
+            if (被保番号 != null && !被保番号.isEmpty()) {
+                div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
+                        getTxtSearchHihoNo().setValue(資格対象者.get被保険者番号().getColumnValue());
+            }
+            if (parameter != null && parameter.get異動日From() != null && !parameter.get異動日From().isEmpty()) {
+                div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().getTxtIdoDateRange().
+                        setFromValue(new RDate(parameter.get異動日From().toString()));
+            }
+            if (parameter != null && parameter.get異動日To() != null && !parameter.get異動日To().isEmpty()) {
+                div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().getTxtIdoDateRange().
+                        setToValue(new RDate(parameter.get異動日To().toString()));
+            }
+            if (parameter != null && parameter.is削除データ検索()) {
+                List<RString> list = new ArrayList();
+                list.add(KEY);
+                div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
+                        getChkIsSearchDeletedData().setSelectedItemsByKey(list);
+            }
+        }
     }
 
     /**

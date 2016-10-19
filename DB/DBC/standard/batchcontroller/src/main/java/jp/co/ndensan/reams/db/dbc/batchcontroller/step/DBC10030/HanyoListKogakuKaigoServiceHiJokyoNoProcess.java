@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC10030;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.KokuhorenFuicchi;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.SanteiKijun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShiharaiSaki;
@@ -23,10 +25,12 @@ import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.DBC701019B
 import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.HanyoListKogakuKaigoEucCsvNoEntityEditor;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0301YokinShubetsuPatternEntity;
@@ -145,6 +149,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
     private boolean modoFlag = true;
     private IOutputOrder 並び順;
     private ReportId 帳票ID;
+    private Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map;
 
     @BatchWriter
     private EucCsvWriter<HanyouRisutoSyuturyokuEucCsvNoEntity> eucNoCsvWriter;
@@ -187,6 +192,13 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
             出力順 = MyBatisOrderByClauseCreator.create(DBC701019BreakerFieldsEnum.class, 並び順);
         }
         parameter.set出力順(出力順);
+        構成市町村Map = new HashMap<>();
+        List<KoseiShichosonMaster> 構成市町村マスタ = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
+        if (構成市町村マスタ != null && !構成市町村マスタ.isEmpty()) {
+            for (KoseiShichosonMaster koseiShichosonMaster : 構成市町村マスタ) {
+                構成市町村Map.put(koseiShichosonMaster.get市町村コード(), koseiShichosonMaster);
+            }
+        }
     }
 
     @Override
@@ -268,7 +280,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
                     preEntity.get口座情報().getKinyuKikanEntity().add(kinyuKikanEntity);
                 }
             }
-            eucNoCsvWriter.writeLine(dataNoCreate.edit(preEntity, parameter, 連番));
+            eucNoCsvWriter.writeLine(dataNoCreate.edit(preEntity, parameter, 連番, 構成市町村Map));
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(preEntity));
             lstKinyuKikanEntity.clear();
@@ -299,7 +311,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
             }
         }
         if (preEntity != null) {
-            eucNoCsvWriter.writeLine(dataNoCreate.edit(preEntity, parameter, 連番));
+            eucNoCsvWriter.writeLine(dataNoCreate.edit(preEntity, parameter, 連番, 構成市町村Map));
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(preEntity));
         }

@@ -62,6 +62,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -87,11 +88,6 @@ public class ShokanRenrakuhyoOutputReport2Process extends BatchKeyBreakBase<Shok
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
-    private static final int INDEX_6 = 6;
-    private static final int INDEX_8 = 8;
-    private static final RString 定値_時 = new RString("時");
-    private static final RString 定値_分 = new RString("分");
-    private static final RString 定値_秒 = new RString("秒");
     private static final RString 一覧EUCエンティティID = new RString("DBC200026");
     private static final RString CSVFILENAME = new RString("DBC200026_ShokanRenrakuhyoSofuJohoErrorIchiran.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
@@ -99,6 +95,7 @@ public class ShokanRenrakuhyoOutputReport2Process extends BatchKeyBreakBase<Shok
     private static final RString 丸 = new RString("●");
     private static final Code コード = new Code("0003");
     private static final RString 漢字_被保険者番号 = new RString("被保険者番号");
+    private static final RString SAKUSEI = new RString("作成");
 
     private BatchReportWriter<ShokanRenrakuhyoSofuIchiranSource> batchReportWriter;
     private ReportSourceWriter<ShokanRenrakuhyoSofuIchiranSource> reportSourceWriter;
@@ -164,19 +161,14 @@ public class ShokanRenrakuhyoOutputReport2Process extends BatchKeyBreakBase<Shok
     }
 
     @Override
-    protected void createWriter() {
-
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, 一覧EUCエンティティID, UzUDE0831EucAccesslogFileType.Csv);
-        csvFilePath = Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME);
-    }
-
-    @Override
     protected void keyBreakProcess(ShokanRenrakuhyoOutputReportEntity entity) {
     }
 
     @Override
     protected void usualProcess(ShokanRenrakuhyoOutputReportEntity entity) {
         if (count == INDEX_0) {
+            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, 一覧EUCエンティティID, UzUDE0831EucAccesslogFileType.Csv);
+            csvFilePath = Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME);
             batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200026.getReportId().value())
                     .addBreak(new ShokanRenrakuhyoSofuIchiranPageBreak(breakItemIds)).create();
             reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
@@ -201,6 +193,7 @@ public class ShokanRenrakuhyoOutputReport2Process extends BatchKeyBreakBase<Shok
         reportParam.set処理年月(processParameter.getSyoriYM());
         reportParam.set作成日時(システム日付);
         reportParam.set帳票タイトル(帳票タイトル);
+        reportParam.set連番(count);
         ShokanRenrakuhyoSofuIchiranReport report = new ShokanRenrakuhyoSofuIchiranReport(reportParam);
         report.writeBy(reportSourceWriter);
 
@@ -226,19 +219,19 @@ public class ShokanRenrakuhyoOutputReport2Process extends BatchKeyBreakBase<Shok
 
     private ShokanRenrakuhyoSofuIchiranCsvEntity editCsvEntity(ShokanRenrakuhyoOutputReportEntity entity) {
         RString 送付年月 = RString.EMPTY;
-        if (processParameter.getSyoriYM() != null) {
-            送付年月 = processParameter.getSyoriYM().wareki().eraType(EraType.KANJI_RYAKU)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
+        RString 作成日時 = RString.EMPTY;
+        if (count == INDEX_1) {
+            if (processParameter.getSyoriYM() != null) {
+                送付年月 = processParameter.getSyoriYM().wareki().eraType(EraType.KANJI_RYAKU)
+                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                        .fillType(FillType.BLANK).toDateString();
+            }
+            RTime time = システム日付.getTime();
+            RString timeFormat = time.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+            作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.HALF_SPACE)
+                    .concat(timeFormat).concat(RString.HALF_SPACE).concat(SAKUSEI);
         }
-
-        RTime time = システム日付.getTime();
-        RString hour = new RString(time.toString()).substringReturnAsPossible(INDEX_0, INDEX_2);
-        RString min = new RString(time.toString()).substringReturnAsPossible(INDEX_3, INDEX_5);
-        RString sec = new RString(time.toString()).substringReturnAsPossible(INDEX_6, INDEX_8);
-        RString timeFormat = hour.concat(定値_時).concat(min).concat(定値_分).concat(sec).concat(定値_秒);
-        RString 作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(timeFormat);
 
         RString 保険者番号 = RString.EMPTY;
         if (entity.get償還払支給申請一時TBL().getHokenshaNo() != null) {

@@ -39,6 +39,11 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcessParameter implemen
         this.抽出期間終了日時 = 抽出期間終了日時;
     }
 
+    /**
+     * toKoseiTaishoKyuhuzissekiItiranhyoShuturyokuMybatisParameter
+     *
+     * @return KoseiTaishoKyuhuzissekiItiranhyoShuturyokuMybatisParameter
+     */
     public KoseiTaishoKyuhuzissekiItiranhyoShuturyokuMybatisParameter toKoseiTaishoKyuhuzissekiItiranhyoShuturyokuMybatisParameter() {
         return new KoseiTaishoKyuhuzissekiItiranhyoShuturyokuMybatisParameter(出力順);
     }

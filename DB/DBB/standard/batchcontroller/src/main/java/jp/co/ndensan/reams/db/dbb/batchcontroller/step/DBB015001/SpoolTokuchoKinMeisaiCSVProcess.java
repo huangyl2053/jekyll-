@@ -283,7 +283,6 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
             csvEntity.set被保険者氏名(getColumnValue(宛名.get名称().getName()));
             csvEntity.set住所コード(getColumnValue(宛名.get住所().get町域コード()));
             csvEntity.set行政区コード(getColumnValue(宛名.get行政区画().getGyoseiku().getコード()));
-            //TODO
             csvEntity.set町域管内_管外住所(getColumnValue(宛名.get住所().get全国住所コード()));
             csvEntity.set番地(getColumnValue(宛名PSM.getBanchi()));
         }

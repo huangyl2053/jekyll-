@@ -66,7 +66,7 @@ public class KyufuJoho {
      * @return ResponseData<KyufuJohoDiv>
      */
     public ResponseData<KyufuJohoDiv> onClick_KensakuModoru(KyufuJohoDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBU0600031TransitionEventName.再検索).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0600031TransitionEventName.対象者検索に戻る).respond();
     }
 
     private KyufuJohoHandler getHandler(KyufuJohoDiv div) {

@@ -4,8 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7110TankiNyushoShikyuGendoGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.TankiNyushoShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.TankiNyushoShikyuGendoGakuBuilder;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7110TankiNyushoShikyuGendoGakuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

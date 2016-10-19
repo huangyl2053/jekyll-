@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -34,6 +35,7 @@ public class FutanWariaiShoReport extends
     private final HokenshaNo 保険者コード取得;
     private final RString flag;
     private final List<IKojin> 個人;
+    private final SofubutsuAtesakiSource 送付物宛先ソースデータ;
 
     /**
      * コンストラクタです。
@@ -46,10 +48,11 @@ public class FutanWariaiShoReport extends
      * @param 保険者コード取得 HokenshaNo
      * @param flag RString
      * @param 個人 List<IKojin>
+     * @param 送付物宛先ソースデータ SofubutsuAtesakiSource
      */
     public FutanWariaiShoReport(FutanWariaiShoDivParameter entity, NinshoshaSource 認証者ソースデータ, HihokenshaNo 被保険者番号,
             EditedKojin 編集後個人, List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List, HokenshaNo 保険者コード取得,
-            RString flag, List<IKojin> 個人) {
+            RString flag, List<IKojin> 個人, SofubutsuAtesakiSource 送付物宛先ソースデータ) {
         this.entity = entity;
         this.認証者ソースデータ = 認証者ソースデータ;
         this.被保険者番号 = 被保険者番号;
@@ -58,12 +61,13 @@ public class FutanWariaiShoReport extends
         this.保険者コード取得 = 保険者コード取得;
         this.flag = flag;
         this.個人 = 個人;
+        this.送付物宛先ソースデータ = 送付物宛先ソースデータ;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<FutanWariaiShoSource> writer) {
         IFutanWariaiShoEditor editor = new FutanWariaiShoEditor(entity, 認証者ソースデータ, 被保険者番号, 編集後個人, 利用者負担割合明細List,
-                保険者コード取得, flag, 個人);
+                保険者コード取得, flag, 個人, 送付物宛先ソースデータ);
         IFutanWariaiShoBuilder builder = new FutanWariaiShoBuilder(editor);
         writer.writeLine(builder);
     }

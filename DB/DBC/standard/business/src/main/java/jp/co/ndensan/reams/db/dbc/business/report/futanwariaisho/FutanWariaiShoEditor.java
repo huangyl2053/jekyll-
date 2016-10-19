@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -40,6 +41,7 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
     private final HokenshaNo 保険者コード取得;
     private final RString flag;
     private final List<IKojin> 個人List;
+    private final SofubutsuAtesakiSource 送付物宛先ソースデータ;
     private static final RString 照会画面 = new RString("1");
     private static final RString 更新結果確認画面 = new RString("2");
     private static final RString 定数_交付年月日 = new RString("交付年月日　");
@@ -65,10 +67,11 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
      * @param 保険者コード取得 HokenshaNo
      * @param flag RString
      * @param 個人List List<IKojin>
+     * @param 送付物宛先ソースデータ SofubutsuAtesakiSource
      */
     public FutanWariaiShoEditor(FutanWariaiShoDivParameter entity, NinshoshaSource 認証者ソースデータ, HihokenshaNo 被保険者番号,
             EditedKojin 編集後個人, List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List, HokenshaNo 保険者コード取得,
-            RString flag, List<IKojin> 個人List) {
+            RString flag, List<IKojin> 個人List, SofubutsuAtesakiSource 送付物宛先ソースデータ) {
         this.entity = entity;
         this.認証者ソースデータ = 認証者ソースデータ;
         this.被保険者番号 = 被保険者番号;
@@ -77,6 +80,7 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
         this.保険者コード取得 = 保険者コード取得;
         this.flag = flag;
         this.個人List = 個人List;
+        this.送付物宛先ソースデータ = 送付物宛先ソースデータ;
     }
 
     @Override
@@ -116,6 +120,7 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
         source.ninshosha_denshiKoin = 認証者ソースデータ.denshiKoin;
         source.renban = 定数_ONE;
         source.ocrRenban = 定数_ONE;
+        source.compSofubutsuAtesakiSource = 送付物宛先ソースデータ;
         return source;
     }
 

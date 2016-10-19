@@ -10,9 +10,9 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyugakuKeisanKekkaMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShikyuGakuKeisanKekkaRelate;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_HokenSeido;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
-import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_HokenSeido;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011.ShikyugakuKeisanKekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011.dgKogakuGassanShikyuGakuKeisanKekka_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011.dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row;
@@ -127,6 +127,10 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
                 row.setSelectButtonState(DataGridButtonState.Enabled);
                 row.setModifyButtonState(DataGridButtonState.Disabled);
                 row.setDeleteButtonState(DataGridButtonState.Disabled);
+            } else {
+                row.setSelectButtonState(DataGridButtonState.Disabled);
+                row.setModifyButtonState(DataGridButtonState.Enabled);
+                row.setDeleteButtonState(DataGridButtonState.Enabled);
             }
             row.getTxtTaishoNendo().setValue(new RDate(result.get対象年度().getYearValue()));
             row.setTxtSanteiKubun(result.get支給額計算結果連絡先郵便番号() != null && 郵便番号MAX.equals(
@@ -483,7 +487,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
                         : div.getDdlHokenSeido().getSelectedKey())
                 .set自己負担額証明書整理番号(div.getTxtJikoFutanSeiriNo().getValue())
                 .set対象計算期間開始年月日(rDateToFixibleDate(div.getTxtTaishoKeisanKikan().getFromValue()))
-                .set対象計算期間終了年月日(rDateToFixibleDate(div.getTxtTaishoKeisanKikan().getFromValue()))
+                .set対象計算期間終了年月日(rDateToFixibleDate(div.getTxtTaishoKeisanKikan().getToValue()))
                 .set世帯負担総額(div.getTxtSetaiFutanSogaku().getValue())
                 .set介護等合算一部負担金等世帯合算額(div.getTxtSetaiGassanGaku().getValue())
                 .set70歳以上介護等合算一部負担金等世帯合算額(div.getTxtOver70SetaiGassanGaku().getValue())
@@ -823,7 +827,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         Decimal 未満負担額 = div.getTxtUnder70Futangaku().getValue() == null ? Decimal.ZERO : div.getTxtUnder70Futangaku().getValue();
         Decimal 以上負担額 = div.getTxtOver70Futangaku().getValue() == null ? Decimal.ZERO : div.getTxtOver70Futangaku().getValue();
         Decimal 以上支給額 = div.getTxtOver70Shikyugaku().getValue() == null ? Decimal.ZERO : div.getTxtOver70Shikyugaku().getValue();
-        div.getTxtFutangaku().setValue(未満負担額.add((以上負担額.multiply(以上支給額))));
+        div.getTxtFutangaku().setValue(未満負担額.add((以上負担額.subtract(以上支給額))));
     }
 
     private void 処理2() {
@@ -846,9 +850,9 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         }
         if (!追加.equals(状態)) {
             dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row clickedRow = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getClickedItem();
-            以上負担額合計 = 以上負担額合計.multiply(RString.isNullOrEmpty(clickedRow.getTxtOver70Futangaku().getText())
+            以上負担額合計 = 以上負担額合計.subtract(RString.isNullOrEmpty(clickedRow.getTxtOver70Futangaku().getText())
                     ? Decimal.ZERO : new Decimal(clickedRow.getTxtOver70Futangaku().getValue().toString()));
-            負担額合計 = 負担額合計.multiply(RString.isNullOrEmpty(clickedRow.getTxtFutangaku().getText())
+            負担額合計 = 負担額合計.subtract(RString.isNullOrEmpty(clickedRow.getTxtFutangaku().getText())
                     ? Decimal.ZERO : new Decimal(clickedRow.getTxtFutangaku().getValue().toString()));
         }
         Decimal 以上負担額 = div.getTxtOver70Futangaku().getValue() == null ? Decimal.ZERO : div.getTxtOver70Futangaku().getValue();
