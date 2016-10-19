@@ -122,63 +122,80 @@ public class YoboKeikakuJikoSakuseiProcess extends BatchProcessBase<YoboKeikakuJ
                 処理結果リスト一時TBL.insert(kyotakuKeikakuResult.edit処理結果リスト一時TBL());
             }
         }
-        ShikyuGendoGakuEntity 支給限度額entity1 = mapper.get支給限度額登録1();
-        if (支給限度額entity1 != null) {
-            DbT4001JukyushaDaichoEntity 受給者台帳Entity1 = 支給限度額entity1.get受給者台帳Entity();
-            KyotakuKeikakuJikosakuseiKanriTempEntity 居宅給付計画自己作成管理一時Entity1 = 支給限度額entity1.get居宅給付計画自己作成管理一時Entity();
-            居宅給付計画自己作成管理一時Entity1.setHyojiYokaigoJotaiKubunCode(getRString(受給者台帳Entity1.getYokaigoJotaiKubunCode()));
-            自己作成管理一時TBL.update(居宅給付計画自己作成管理一時Entity1);
+        List<ShikyuGendoGakuEntity> 支給限度額entity1 = mapper.get支給限度額登録1();
+        if (0 < 支給限度額entity1.size()) {
+            for (ShikyuGendoGakuEntity shikyuGendoGakuEntity : 支給限度額entity1) {
+                if (shikyuGendoGakuEntity != null) {
+                    DbT4001JukyushaDaichoEntity 受給者台帳Entity1 = shikyuGendoGakuEntity.get受給者台帳Entity();
+                    KyotakuKeikakuJikosakuseiKanriTempEntity 居宅給付計画自己作成管理一時Entity1 = shikyuGendoGakuEntity.get居宅給付計画自己作成管理一時Entity();
+                    居宅給付計画自己作成管理一時Entity1.setHyojiYokaigoJotaiKubunCode(getRString(受給者台帳Entity1.getYokaigoJotaiKubunCode()));
+                    自己作成管理一時TBL.update(居宅給付計画自己作成管理一時Entity1);
+                }
+            }
         }
 
-        ShikyuGendoGakuEntity 支給限度額entity2 = mapper.get支給限度額登録2();
-        if (支給限度額entity2 != null) {
-            DbT4001JukyushaDaichoEntity 受給者台帳Entity2 = 支給限度額entity2.get受給者台帳Entity();
-            KyotakuKeikakuJikosakuseiKanriTempEntity 居宅給付計画自己作成管理一時Entity2 = 支給限度額entity2.get居宅給付計画自己作成管理一時Entity();
-            居宅給付計画自己作成管理一時Entity2.setHyojiShikyuGendoTanisu(受給者台帳Entity2.getShikyuGendoTanisu());
-            居宅給付計画自己作成管理一時Entity2.setYokaigoJotaiKubunCode(getRString(受給者台帳Entity2.getYokaigoJotaiKubunCode()));
-            居宅給付計画自己作成管理一時Entity2.setNinteiYukoKikanKaishiYM(getFlexibleYearMonth(受給者台帳Entity2.getNinteiYukoKikanKaishiYMD()));
-            居宅給付計画自己作成管理一時Entity2.setNinteiYukoKikanShuryoYM(getFlexibleYearMonth(受給者台帳Entity2.getNinteiYukoKikanShuryoYMD()));
-            居宅給付計画自己作成管理一時Entity2.setShikyuGendoTanisu(受給者台帳Entity2.getShikyuGendoTanisu());
-            居宅給付計画自己作成管理一時Entity2.setShikyuGendoKaishiYM(getFlexibleYearMonth(受給者台帳Entity2.getShikyuGendoKaishiYMD()));
-            居宅給付計画自己作成管理一時Entity2.setShikyuGendoShuryoYM(getFlexibleYearMonth(受給者台帳Entity2.getShikyuGendoShuryoYMD()));
-            自己作成管理一時TBL.update(居宅給付計画自己作成管理一時Entity2);
+        List<ShikyuGendoGakuEntity> 支給限度額entity2 = mapper.get支給限度額登録2();
+        if (0 < 支給限度額entity2.size()) {
+            for (ShikyuGendoGakuEntity shikyuGendoGakuEntity : 支給限度額entity2) {
+
+                if (shikyuGendoGakuEntity != null) {
+                    DbT4001JukyushaDaichoEntity 受給者台帳Entity2 = shikyuGendoGakuEntity.get受給者台帳Entity();
+                    KyotakuKeikakuJikosakuseiKanriTempEntity 居宅給付計画自己作成管理一時Entity2 = shikyuGendoGakuEntity.get居宅給付計画自己作成管理一時Entity();
+                    居宅給付計画自己作成管理一時Entity2.setHyojiShikyuGendoTanisu(受給者台帳Entity2.getShikyuGendoTanisu());
+                    居宅給付計画自己作成管理一時Entity2.setYokaigoJotaiKubunCode(getRString(受給者台帳Entity2.getYokaigoJotaiKubunCode()));
+                    居宅給付計画自己作成管理一時Entity2.setNinteiYukoKikanKaishiYM(getFlexibleYearMonth(受給者台帳Entity2.getNinteiYukoKikanKaishiYMD()));
+                    居宅給付計画自己作成管理一時Entity2.setNinteiYukoKikanShuryoYM(getFlexibleYearMonth(受給者台帳Entity2.getNinteiYukoKikanShuryoYMD()));
+                    居宅給付計画自己作成管理一時Entity2.setShikyuGendoTanisu(受給者台帳Entity2.getShikyuGendoTanisu());
+                    居宅給付計画自己作成管理一時Entity2.setShikyuGendoKaishiYM(getFlexibleYearMonth(受給者台帳Entity2.getShikyuGendoKaishiYMD()));
+                    居宅給付計画自己作成管理一時Entity2.setShikyuGendoShuryoYM(getFlexibleYearMonth(受給者台帳Entity2.getShikyuGendoShuryoYMD()));
+                    自己作成管理一時TBL.update(居宅給付計画自己作成管理一時Entity2);
+                }
+            }
+        } else {
+            List<HihokenshaNo> hihokenshaNo = mapper.get支給限度額情報の取得チェック();
+            RStringBuilder rb = new RStringBuilder();
+            rb.append(new RString("【被保険者番号】"));
+            if (0 < hihokenshaNo.size() && !hihokenshaNo.isEmpty()) {
+                for (int i = 0; i < hihokenshaNo.size(); i++) {
+                    rb.append(hihokenshaNo.get(i));
+                    rb.append(new RString("："));
+                }
+                throw new BatchInterruptedException(DbcErrorMessages.受給者台帳_支給限度額情報不正.getMessage().replace(rb.toString()).toString());
+            }
         }
 
         RString sakiEncodeKeitai = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_支給限度額一本化, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         paramter.toKyufukanrihyoOutMybatisParameter().set制度改正施行日支給限度額一本化の年月(sakiEncodeKeitai.substring(值零, 值六));
         paramter.toKyufukanrihyoOutMybatisParameter().set居宅サービス区分短期入所のコード(KyotakuServiceKubun.短期入所.getコード());
-        ShikyuGendoGakuEntity 支給限度額entity3 = mapper.get支給限度額登録3(paramter.toKyufukanrihyoOutMybatisParameter());
-        if (支給限度額entity3 != null) {
-            DbT4001JukyushaDaichoEntity 受給者台帳Entity3 = 支給限度額entity3.get受給者台帳Entity();
-            KyotakuKeikakuJikosakuseiKanriTempEntity 居宅給付計画自己作成管理一時Entity3 = 支給限度額entity3.get居宅給付計画自己作成管理一時Entity();
-            居宅給付計画自己作成管理一時Entity3.setHyojiYokaigoJotaiKubunCode(getRString(受給者台帳Entity3.getYokaigoJotaiKubunCode()));
-            居宅給付計画自己作成管理一時Entity3.setHyojiShikyuGendoTanisu(new Decimal(受給者台帳Entity3.getTankiSikyuGendoNissu()));
-            居宅給付計画自己作成管理一時Entity3.setTankiYokaigoJotaiKubunCode(getRString(受給者台帳Entity3.getYokaigoJotaiKubunCode()));
-            居宅給付計画自己作成管理一時Entity3.setTankiSikyuGendoNissu(new RString(String.valueOf(受給者台帳Entity3.getTankiSikyuGendoNissu())));
-            居宅給付計画自己作成管理一時Entity3.setTankiShikyuGendoKaishiYM(getFlexibleYearMonth(受給者台帳Entity3.getTankiShikyuGendoKaishiYMD()));
-            居宅給付計画自己作成管理一時Entity3.setTankiShikyuGendoShuryoYM(getFlexibleYearMonth(受給者台帳Entity3.getTankiShikyuGendoShuryoYMD()));
-            自己作成管理一時TBL.update(居宅給付計画自己作成管理一時Entity3);
-        }
-
-        List<HihokenshaNo> hihokenshaNo = mapper.get支給限度額情報の取得チェック();
-        RStringBuilder rb = new RStringBuilder();
-        rb.append(new RString("【被保険者番号】"));
-        if (0 < hihokenshaNo.size() && hihokenshaNo.isEmpty()) {
-            for (int i = 0; i < hihokenshaNo.size(); i++) {
-                rb.append(hihokenshaNo.get(i));
-                rb.append(new RString("："));
+        List<ShikyuGendoGakuEntity> 支給限度額entity3 = mapper.get支給限度額登録3(paramter.toKyufukanrihyoOutMybatisParameter());
+        if (0 < 支給限度額entity3.size()) {
+            for (ShikyuGendoGakuEntity shikyuGendoGakuEntity : 支給限度額entity3) {
+                if (shikyuGendoGakuEntity != null) {
+                    DbT4001JukyushaDaichoEntity 受給者台帳Entity3 = shikyuGendoGakuEntity.get受給者台帳Entity();
+                    KyotakuKeikakuJikosakuseiKanriTempEntity 居宅給付計画自己作成管理一時Entity3 = shikyuGendoGakuEntity.get居宅給付計画自己作成管理一時Entity();
+                    居宅給付計画自己作成管理一時Entity3.setHyojiYokaigoJotaiKubunCode(getRString(受給者台帳Entity3.getYokaigoJotaiKubunCode()));
+                    居宅給付計画自己作成管理一時Entity3.setHyojiShikyuGendoTanisu(new Decimal(受給者台帳Entity3.getTankiSikyuGendoNissu()));
+                    居宅給付計画自己作成管理一時Entity3.setTankiYokaigoJotaiKubunCode(getRString(受給者台帳Entity3.getYokaigoJotaiKubunCode()));
+                    居宅給付計画自己作成管理一時Entity3.setTankiSikyuGendoNissu(new RString(String.valueOf(受給者台帳Entity3.getTankiSikyuGendoNissu())));
+                    居宅給付計画自己作成管理一時Entity3.setTankiShikyuGendoKaishiYM(getFlexibleYearMonth(受給者台帳Entity3.getTankiShikyuGendoKaishiYMD()));
+                    居宅給付計画自己作成管理一時Entity3.setTankiShikyuGendoShuryoYM(getFlexibleYearMonth(受給者台帳Entity3.getTankiShikyuGendoShuryoYMD()));
+                    自己作成管理一時TBL.update(居宅給付計画自己作成管理一時Entity3);
+                }
             }
-            throw new BatchInterruptedException(DbcErrorMessages.受給者台帳_支給限度額情報不正.getMessage().replace(rb.toString()).toString());
-        }
-        ShikyuGendoGakuEntity 支給限度額entity4 = mapper.get支給限度額登録4();
-        if (支給限度額entity4 != null) {
-            DbT7109KubunShikyuGendoGakuEntity 居宅サービス区分支給限度額Entity = 支給限度額entity4.get居宅サービス区分支給限度額Entity();
-            KyotakuKeikakuJikosakuseiKanriTempEntity 居宅給付計画自己作成管理一時Entity4 = 支給限度額entity4.get居宅給付計画自己作成管理一時Entity();
-            居宅給付計画自己作成管理一時Entity4.setHyojiShikyuGendoTanisu(居宅サービス区分支給限度額Entity.getShikyuGendoTaniSu());
-            居宅給付計画自己作成管理一時Entity4.setShikyuGendoKaishiYM(居宅サービス区分支給限度額Entity.getTekiyoKaishiYM());
-            自己作成管理一時TBL.update(居宅給付計画自己作成管理一時Entity4);
         }
 
+        List<ShikyuGendoGakuEntity> 支給限度額entity4 = mapper.get支給限度額登録4();
+        if (0 < 支給限度額entity4.size()) {
+            for (ShikyuGendoGakuEntity shikyuGendoGakuEntity : 支給限度額entity4) {
+                if (shikyuGendoGakuEntity != null) {
+                    DbT7109KubunShikyuGendoGakuEntity 居宅サービス区分支給限度額Entity = shikyuGendoGakuEntity.get居宅サービス区分支給限度額Entity();
+                    KyotakuKeikakuJikosakuseiKanriTempEntity 居宅給付計画自己作成管理一時Entity4 = shikyuGendoGakuEntity.get居宅給付計画自己作成管理一時Entity();
+                    居宅給付計画自己作成管理一時Entity4.setHyojiShikyuGendoTanisu(居宅サービス区分支給限度額Entity.getShikyuGendoTaniSu());
+                    居宅給付計画自己作成管理一時Entity4.setShikyuGendoKaishiYM(居宅サービス区分支給限度額Entity.getTekiyoKaishiYM());
+                    自己作成管理一時TBL.update(居宅給付計画自己作成管理一時Entity4);
+                }
+            }
+        }
         outCount.setValue(連番);
     }
 

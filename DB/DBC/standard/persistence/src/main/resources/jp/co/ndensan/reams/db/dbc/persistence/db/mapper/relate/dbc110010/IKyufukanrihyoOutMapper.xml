@@ -361,7 +361,7 @@
     <select resultOrdered="true" id="get支給限度額情報の取得チェック" 
             resultType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" 
             fetchSize="500">
-        SELECT   DISTINCT DbtWT8211."hihokenshaNo"  FROM  "DbWT8211KyotakuKeikakuJikosakuseiKanri" AS DbtWT8211
+        SELECT   DISTINCT "hihokenshaNo"  FROM  "DbWT8211KyotakuKeikakuJikosakuseiKanri"
         WHERE "hyojiYokaigoJotaiKubunCode" = '' OR "hyojiYokaigoJotaiKubunCode" IS NULL
     </select>
     <select resultOrdered="true" id="get支給限度額登録4" 
@@ -519,6 +519,11 @@
     </select>
     <resultMap id="resultMap_ShikyuGendoGakuEntity1" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.ShikyuGendoGakuEntity"  autoMapping="true"> 
         <id property="居宅給付計画自己作成管理一時Entity.renban"  column="renban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="受給者台帳Entity.shichosonCode" column="dbT4001JukyushaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="受給者台帳Entity.hihokenshaNo" column="dbT4001JukyushaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="受給者台帳Entity.rirekiNo" column="dbT4001JukyushaDaicho_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="受給者台帳Entity.edaban" column="dbT4001JukyushaDaicho_edaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="受給者台帳Entity.jukyuShinseiJiyu" column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <association property="居宅給付計画自己作成管理一時Entity" resultMap="ResultMap_自己作成管理一時Entity"/>
         <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
     </resultMap>
@@ -567,7 +572,8 @@
         <result property="ninteiYukoKikanShuryoYM"  column="ninteiYukoKikanShuryoYM"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>                                      
         <result property="shikyuGendoTanisu" column="shikyuGendoTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>                                   
         <result property="shikyuGendoKaishiYM"  column="shikyuGendoKaishiYM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>                                                              
-        <result property="shikyuGendoShuryoYM"  column="shikyuGendoShuryoYM"      typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>                          
+        <result property="shikyuGendoShuryoYM"  column="shikyuGendoShuryoYM"      typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>  
+        <result property="tankiYokaigoJotaiKubunCode"  column="tankiYokaigoJotaiKubunCode"      typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>         
         <result property="tankiSikyuGendoNissu" column="tankiSikyuGendoNissu"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>        
         <result property="tankiShikyuGendoKaishiYM"  column="tankiShikyuGendoKaishiYM"       typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>                           
         <result property="tankiShikyuGendoShuryoYM" column="tankiShikyuGendoShuryoYM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>                            

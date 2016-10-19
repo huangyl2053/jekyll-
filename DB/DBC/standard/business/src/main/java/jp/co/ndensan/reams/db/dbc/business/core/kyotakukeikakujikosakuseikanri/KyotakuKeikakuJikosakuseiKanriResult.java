@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class KyotakuKeikakuJikosakuseiKanriResult {
 
-    private static final RString 值0 = new RString("值0");
+    private static final RString 值0 = new RString("0");
 
     /**
      * edit居宅給付計画自己作成管理Entity

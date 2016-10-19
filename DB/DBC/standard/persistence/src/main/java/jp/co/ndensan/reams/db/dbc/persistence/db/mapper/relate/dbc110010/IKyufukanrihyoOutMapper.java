@@ -44,14 +44,14 @@ public interface IKyufukanrihyoOutMapper {
      *
      * @return ShikyuGendoGakuEntity
      */
-    ShikyuGendoGakuEntity get支給限度額登録1();
+    List<ShikyuGendoGakuEntity> get支給限度額登録1();
 
     /**
      * get支給限度額登録2
      *
      * @return ShikyuGendoGakuEntity
      */
-    ShikyuGendoGakuEntity get支給限度額登録2();
+    List<ShikyuGendoGakuEntity> get支給限度額登録2();
 
     /**
      * get支給限度額登録3
@@ -59,14 +59,14 @@ public interface IKyufukanrihyoOutMapper {
      * @param parameter KyufukanrihyoOutMybatisParameter
      * @return ShikyuGendoGakuEntity
      */
-    ShikyuGendoGakuEntity get支給限度額登録3(KyufukanrihyoOutMybatisParameter parameter);
+    List<ShikyuGendoGakuEntity> get支給限度額登録3(KyufukanrihyoOutMybatisParameter parameter);
 
     /**
      * get支給限度額登録4
      *
      * @return ShikyuGendoGakuEntity
      */
-    ShikyuGendoGakuEntity get支給限度額登録4();
+    List<ShikyuGendoGakuEntity> get支給限度額登録4();
 
     /**
      * get支給限度額情報の取得チェック
