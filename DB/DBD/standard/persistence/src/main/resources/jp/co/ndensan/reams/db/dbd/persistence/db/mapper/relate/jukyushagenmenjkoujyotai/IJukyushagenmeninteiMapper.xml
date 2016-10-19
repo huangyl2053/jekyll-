@@ -103,8 +103,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0131') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'01',#{基準日})
@@ -231,8 +231,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'02',#{基準日付2})
@@ -359,8 +359,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0331') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'03',#{基準日})
@@ -488,8 +488,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0430') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'04',#{基準日付4})
@@ -616,8 +616,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0531') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'05',#{基準日})
@@ -744,8 +744,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0630') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'06',#{基準日付6})
@@ -872,8 +872,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0731') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'07',#{基準日})
@@ -999,8 +999,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0831') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'08',#{基準日})
@@ -1127,8 +1127,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0930') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'09',#{基準日付9})
@@ -1255,8 +1255,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'1031') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'10',#{基準日})
@@ -1383,8 +1383,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'1130') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'11',#{基準日付11})
@@ -1510,8 +1510,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'1231') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'12',#{基準日})
@@ -1638,8 +1638,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0131') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'01',#{基準日})
@@ -1766,8 +1766,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'02',#{基準日付2})
@@ -1894,8 +1894,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0331') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'03',#{基準日})
@@ -2024,8 +2024,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0430') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'04',#{基準日付4})
@@ -2152,8 +2152,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0531') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'05',#{基準日})
@@ -2280,8 +2280,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0630') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'06',#{基準日付6})
@@ -2408,8 +2408,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0731') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'07',#{基準日})
@@ -2536,8 +2536,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0831') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'08',#{基準日})
@@ -2664,8 +2664,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'0930') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'09',#{基準日付9})
@@ -2792,8 +2792,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'1031') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'10',#{基準日})
@@ -2920,8 +2920,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'1130') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'11',#{基準日付11})
@@ -3048,8 +3048,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'1231') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4012HyojunFutangakuGemmen"."ketteiYMD",1,4),'12',#{基準日})
@@ -3175,8 +3175,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0131') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'01',#{基準日})
@@ -3303,8 +3303,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2})
@@ -3431,8 +3431,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0331') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'03',#{基準日})
@@ -3559,8 +3559,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0430') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'04',#{基準日付4})
@@ -3686,8 +3686,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0531') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'05',#{基準日})
@@ -3812,8 +3812,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0630') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'06',#{基準日付6})
@@ -3939,8 +3939,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0731') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'07',#{基準日})
@@ -4066,8 +4066,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0831') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'08',#{基準日})
@@ -4193,8 +4193,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0930') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'09',#{基準日付9})
@@ -4320,8 +4320,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'1031') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'10',#{基準日})
@@ -4447,8 +4447,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'1130') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'11',#{基準日付11})
@@ -4574,8 +4574,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'1231') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'12',#{基準日})
@@ -4703,8 +4703,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0131') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'01',#{基準日})
@@ -4832,8 +4832,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2})
@@ -4961,8 +4961,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0331') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'03',#{基準日})
@@ -5090,8 +5090,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0430') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'04',#{基準日付4})
@@ -5218,8 +5218,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0531') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'05',#{基準日})
@@ -5345,8 +5345,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0630') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'06',#{基準日付6})
@@ -5473,8 +5473,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0731') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'07',#{基準日})
@@ -5601,8 +5601,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0831') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'08',#{基準日})
@@ -5729,8 +5729,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0930') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'09',#{基準日付9})
@@ -5857,8 +5857,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'1031') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'10',#{基準日})
@@ -5985,8 +5985,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'1130') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'11',#{基準日付11})
@@ -6113,8 +6113,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'1231') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4014RiyoshaFutangakuGengaku"."ketteiYMD",1,4),'12',#{基準日})
@@ -6245,8 +6245,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0131') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'01',#{基準日})
@@ -6374,8 +6374,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2})
@@ -6503,8 +6503,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0331') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'03',#{基準日})
@@ -6633,8 +6633,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0430') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'04',#{基準日付4})
@@ -6762,8 +6762,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0531') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'05',#{基準日})
@@ -6892,8 +6892,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0630') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'06',#{基準日付6})
@@ -7022,8 +7022,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0731') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'07',#{基準日})
@@ -7152,8 +7152,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0831') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'08',#{基準日})
@@ -7282,8 +7282,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0930') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'09',#{基準日付9})
@@ -7411,8 +7411,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'1031') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'10',#{基準日})
@@ -7540,8 +7540,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'1130') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'11',#{基準日付11})
@@ -7670,8 +7670,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'1231') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'12',#{基準日})
@@ -7803,8 +7803,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0131') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'01',#{基準日})
@@ -7935,8 +7935,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'02',#{基準日付2})
@@ -8067,8 +8067,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0331') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'03',#{基準日})
@@ -8199,8 +8199,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0430') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'04',#{基準日付4})
@@ -8331,8 +8331,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0531') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'05',#{基準日})
@@ -8464,8 +8464,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0630') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'06',#{基準日付6})
@@ -8597,8 +8597,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0731') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'07',#{基準日})
@@ -8730,8 +8730,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0831') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'08',#{基準日})
@@ -8863,8 +8863,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'0930') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'09',#{基準日付9})
@@ -8995,8 +8995,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'1031') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'10',#{基準日})
@@ -9127,8 +9127,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'1130') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'11',#{基準日付11})
@@ -9260,8 +9260,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'1231') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."ketteiYMD",1,4),'12',#{基準日})
@@ -9394,8 +9394,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0131') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'01',#{基準日})
@@ -9528,8 +9528,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'02',#{基準日付2})
@@ -9662,8 +9662,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0331') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'03',#{基準日})
@@ -9797,8 +9797,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0430') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'04',#{基準日付4})
@@ -9931,8 +9931,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0531') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'05',#{基準日})
@@ -10064,8 +10064,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0630') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'06',#{基準日付6})
@@ -10197,8 +10197,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0731') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'07',#{基準日})
@@ -10330,8 +10330,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0831') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'08',#{基準日})
@@ -10463,8 +10463,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0930') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'09',#{基準日付9})
@@ -10597,8 +10597,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'1031') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'10',#{基準日})
@@ -10731,8 +10731,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'1130') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'11',#{基準日付11})
@@ -10864,8 +10864,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'1231') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'12',#{基準日})
@@ -11001,8 +11001,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0131') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'01',#{基準日})
@@ -11138,8 +11138,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'02',#{基準日付2})
@@ -11274,8 +11274,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0331') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'03',#{基準日})
@@ -11411,8 +11411,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0430') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'04',#{基準日付4})
@@ -11548,8 +11548,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0531') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'05',#{基準日})
@@ -11684,8 +11684,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0630') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'06',#{基準日付6})
@@ -11820,8 +11820,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0731') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'07',#{基準日})
@@ -11956,8 +11956,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0831') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'08',#{基準日})
@@ -12092,8 +12092,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'0930') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'09',#{基準日付9})
@@ -12229,8 +12229,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'1031') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'10',#{基準日})
@@ -12366,8 +12366,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'1130') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'11',#{基準日付11})
@@ -12502,8 +12502,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'1231') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD",1,4),'12',#{基準日})
@@ -12635,8 +12635,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0131') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'01',#{基準日})
@@ -12768,8 +12768,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'02',#{基準日付2})
@@ -12901,8 +12901,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0331') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'03',#{基準日})
@@ -13035,8 +13035,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0430') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'04',#{基準日付4})
@@ -13168,8 +13168,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0531') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'05',#{基準日})
@@ -13300,8 +13300,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0630') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'06',#{基準日付6})
@@ -13433,8 +13433,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0731') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'07',#{基準日})
@@ -13566,8 +13566,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0831') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'08',#{基準日})
@@ -13699,8 +13699,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0930') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'09',#{基準日付9})
@@ -13831,8 +13831,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'1031') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'10',#{基準日})
@@ -13964,8 +13964,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'1130') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'11',#{基準日付11})
@@ -14096,8 +14096,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'1231') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'12',#{基準日})
@@ -14233,8 +14233,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0131') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'01',#{基準日})
@@ -14370,8 +14370,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'02',#{基準日付2})
@@ -14507,8 +14507,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0331') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'03',#{基準日})
@@ -14645,8 +14645,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0430') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'04',#{基準日付4})
@@ -14782,8 +14782,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0531') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'05',#{基準日})
@@ -14918,8 +14918,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0630') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'06',#{基準日付6})
@@ -15055,8 +15055,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0731') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'07',#{基準日})
@@ -15192,8 +15192,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0831') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'08',#{基準日})
@@ -15329,8 +15329,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'0930') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'09',#{基準日付9})
@@ -15465,8 +15465,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'1031') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'10',#{基準日})
@@ -15602,8 +15602,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'1130') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'11',#{基準日付11})
@@ -15738,8 +15738,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'1231') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4018KaigoHokenFutanGendogakuNintei"."ketteiYMD",1,4),'12',#{基準日})
@@ -15869,8 +15869,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0131') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'01',#{基準日})
@@ -15999,8 +15999,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'02',#{基準日付2})
@@ -16129,8 +16129,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0331') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'03',#{基準日})
@@ -16259,8 +16259,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0430') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'04',#{基準日付4})
@@ -16388,8 +16388,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0531') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'05',#{基準日})
@@ -16517,8 +16517,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0630') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'06',#{基準日付6})
@@ -16647,8 +16647,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0731') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'07',#{基準日})
@@ -16776,8 +16776,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0831') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'08',#{基準日})
@@ -16906,8 +16906,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0930') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'09',#{基準日付9})
@@ -17036,8 +17036,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'1031') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'10',#{基準日})
@@ -17166,8 +17166,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'1130') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'11',#{基準日付11})
@@ -17296,8 +17296,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'1231') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'12',#{基準日})
@@ -17428,8 +17428,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0131') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'01',#{基準日})
@@ -17558,8 +17558,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'02',#{基準日付2}) <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'02',#{基準日付2})
@@ -17688,8 +17688,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0331') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'03',#{基準日})
@@ -17819,8 +17819,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0430') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'04',#{基準日付4})
@@ -17948,8 +17948,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0531') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'05',#{基準日})
@@ -18077,8 +18077,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0630') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'06',#{基準日付6})
@@ -18207,8 +18207,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0731') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'07',#{基準日})
@@ -18336,8 +18336,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0831') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'08',#{基準日})
@@ -18466,8 +18466,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'0930') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'09',#{基準日付9})
@@ -18596,8 +18596,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'1031') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'10',#{基準日})
@@ -18726,8 +18726,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'1130') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'11',#{基準日付11})
@@ -18856,8 +18856,8 @@ and open the template in the editor.-->
             AND concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'1231') <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD"
         </if>
         OR 受給."ninteiYukoKikanShuryoYMD" = '')
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
+        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         AND (
         <if test="基準日flag" >
             "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD"  <![CDATA[<=]]> concat(substring("DbT4020TokubetsuchiikiKasanGemmen"."ketteiYMD",1,4),'12',#{基準日})
