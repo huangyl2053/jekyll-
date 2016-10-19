@@ -67,13 +67,13 @@
             ON urT0526."shikibetsuCode" = urT0508."shikibetsuCode"
             AND urT0526."gyomuCode" = urT0508."gyomuCode"
             AND urT0526."jukyuKaishiYMD" = urT0508."jukyuKaishiYMD"
-        INNER  JOIN
+        LEFT JOIN
             rgdb."DbV1001HihokenshaDaicho" AS dbV1001
             ON dbV1001."shikibetsuCode" = urT0508."shikibetsuCode"
         INNER JOIN
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
             AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
-            ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = dbV1001."shikibetsuCode"
+            ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = urT0508."shikibetsuCode"
              <if test="is年齢">
                 <if test="has年齢範囲開始">
                     AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
@@ -92,7 +92,7 @@
             </if>
         INNER JOIN
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
-            ON "Atesaki"."shikibetsuCode" = dbV1001."shikibetsuCode"
+            ON "Atesaki"."shikibetsuCode" = urT0508."shikibetsuCode"
         LEFT JOIN (
             SELECT
                 I."shikibetsuCode"
@@ -112,7 +112,7 @@
                     AND I."rirekiNo" <![CDATA[<]]> I2."rirekiNo"
                 )
             ) AS dbT1008
-            ON dbT1008."shikibetsuCode" = dbV1001."shikibetsuCode"
+            ON dbT1008."shikibetsuCode" = urT0508."shikibetsuCode"
         LEFT JOIN (
             SELECT
                 R."shikibetsuCode"
@@ -130,7 +130,7 @@
                     AND R."jukyuKaishiYMD" <![CDATA[<]]> R2."jukyuKaishiYMD"
                 )
             ) AS dbT7006
-            ON dbT7006."shikibetsuCode" = dbV1001."shikibetsuCode"
+            ON dbT7006."shikibetsuCode" = urT0508."shikibetsuCode"
         WHERE
             urT0508."gyomuCode" = 'DB'
             <if test="isFujoShuruiFlag">
@@ -141,9 +141,14 @@
                 AND NOT EXISTS (
                     SELECT 1
                     FROM rgur."UrT0508SeikatsuHogoJukyusha" AS urT0508_2
+                    INNER JOIN rgur."UrT0526SeikatsuHogoFujoShurui" AS urT0526_2
+                    ON urT0526_2."shikibetsuCode" = urT0508_2."shikibetsuCode"
+                    AND urT0526_2."gyomuCode" = urT0508_2."gyomuCode"
+                    AND urT0526_2."jukyuKaishiYMD" = urT0508_2."jukyuKaishiYMD"
                     WHERE
                             urT0508."shikibetsuCode" = urT0508_2."shikibetsuCode"
                         AND urT0508."gyomuCode" = urT0508_2."gyomuCode"
+                        AND urT0526."fujoShuruiCode" = urT0526_2."fujoShuruiCode"
                         AND urT0508."jukyuKaishiYMD" <![CDATA[<]]> urT0508_2."jukyuKaishiYMD"
                 )
             </if>
