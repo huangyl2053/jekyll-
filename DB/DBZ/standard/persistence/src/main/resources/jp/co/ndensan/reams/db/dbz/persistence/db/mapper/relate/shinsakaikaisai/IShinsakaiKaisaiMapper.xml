@@ -84,5 +84,6 @@
             </if>
         </if>
         ORDER BY shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD", shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
+        LIMIT #{saidaiHyojiKensu}
     </select>
 </mapper>
