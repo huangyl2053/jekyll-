@@ -104,6 +104,10 @@ public class JigyoHokokuShiryouTorokuTokuteiNyusyoProcess extends BatchProcessBa
         特定入所者保険給付数情報根拠_0106csvWriter.close();
         特定入所者保険給付数情報根拠_0205csvWriter.close();
         特定入所者保険給付数情報根拠_0206csvWriter.close();
+        processParameter.getManager().spool(filePath_0105);
+        processParameter.getManager().spool(filePath_0106);
+        processParameter.getManager().spool(filePath_0205);
+        processParameter.getManager().spool(filePath_0206);
         business.追加事業報告統計データ(processParameter, mapper);
         mapper.updateShoriDateKanri(processParameter.create処理日付管理マスタへ登録MybitisParamter());
     }

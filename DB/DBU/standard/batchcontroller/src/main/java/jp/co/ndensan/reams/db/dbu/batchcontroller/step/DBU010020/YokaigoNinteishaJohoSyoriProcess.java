@@ -36,6 +36,7 @@ public class YokaigoNinteishaJohoSyoriProcess extends BatchProcessBase<YokaigoNi
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence."
             + "db.mapper.relate.jigyohokokugeppoippan.IJigyoHokokuGeppoIppanMapper.getYokaigoNinteishaJohoKonkyoCSV");
     private static final RString 拡張子 = new RString(".CSV");
+    private static final RString CSVファイル名_前部 = new RString("DBU01");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
 
@@ -53,7 +54,7 @@ public class YokaigoNinteishaJohoSyoriProcess extends BatchProcessBase<YokaigoNi
         mybatisParameter = processParameter.toYokaigoNinteishaJohoSyoriMybatisParameter();
         mybatisParameter.setShukeiNo(new Code(集計番号));
         mapper = getMapper(IJigyoHokokuGeppoIppanMapper.class);
-        RString filename = Path.combinePath(processParameter.get出力ファイルPATH(), 集計番号.concat(拡張子));
+        RString filename = Path.combinePath(processParameter.get出力ファイルPATH(), CSVファイル名_前部.concat(集計番号).concat(拡張子));
         csvWriter = new CsvWriter.InstanceBuilder(filename).
                 setEncode(Encode.UTF_8withBOM)
                 .canAppend(true)

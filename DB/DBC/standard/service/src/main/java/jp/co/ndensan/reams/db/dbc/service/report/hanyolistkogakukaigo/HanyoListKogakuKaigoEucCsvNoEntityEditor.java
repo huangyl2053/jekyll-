@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo;
 
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoProcessParameter;
@@ -13,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvNoEntit
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.HanyouRisutoSyuturyokuEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -120,12 +122,14 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
      * @param entity HanyouRisutoSyuturyokuEntity
      * @param parameter HanyouRisutoSyuturyokuProcessParameter
      * @param 連番 Decimal
+     * @param 構成市町村Map Map<LasdecCode, KoseiShichosonMaster>
      * <p>
      * @return HanyouRisutoSyuturyokuEucCsvNoEntity
      */
     public HanyouRisutoSyuturyokuEucCsvNoEntity edit(HanyouRisutoSyuturyokuEntity entity,
             HanyoListKogakuKaigoProcessParameter parameter,
-            Decimal 連番) {
+            Decimal 連番,
+            Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map) {
         HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity = new HanyouRisutoSyuturyokuEucCsvNoEntity();
 
         set宛名(entity, csvEntity, parameter);
@@ -141,11 +145,8 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
         csvEntity.set市町村コード(entity.get市町村コード() != null
                 ? entity.get市町村コード().getColumnValue()
                 : RString.EMPTY);
-
-        Association association = AssociationFinderFactory.createInstance().getAssociation(entity
-                .get市町村コード());
+        set市町村名(構成市町村Map, entity, csvEntity);
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        csvEntity.set市町村名(association.get市町村名());
         csvEntity.set保険者コード(地方公共団体.get地方公共団体コード().getColumnValue());
         csvEntity.set保険者名(地方公共団体.get市町村名());
 
@@ -180,12 +181,7 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
         csvEntity.set資格喪失日(get日付項目(資格喪失日, parameter));
         FlexibleDate 資格喪失届日 = entity.get資格喪失届出年月日();
         csvEntity.set資格取得届出日(get日付項目(資格喪失届日, parameter));
-        if (entity.get被保険者区分コード() != null && !entity.get被保険者区分コード().isEmpty()) {
-            HihokenshaKubunCode 被保険者区分コード = HihokenshaKubunCode.toValue(entity.get被保険者区分コード());
-            csvEntity.set資格区分(被保険者区分コード != null
-                    ? 被保険者区分コード.get名称()
-                    : RString.EMPTY);
-        }
+        set資格区分(entity, csvEntity);
         boolean 住所地特例フラグ = entity.is住所地特例フラグ();
         csvEntity.set住所地特例状態(住所地特例フラグ
                 ? 住所地特例状態_住特
@@ -213,6 +209,23 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
         }
 
         return csvEntity;
+    }
+
+    private void set資格区分(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity) {
+        if (entity.get被保険者区分コード() != null && !entity.get被保険者区分コード().isEmpty()) {
+            HihokenshaKubunCode 被保険者区分コード = HihokenshaKubunCode.toValue(entity.get被保険者区分コード());
+            csvEntity.set資格区分(被保険者区分コード != null
+                    ? 被保険者区分コード.get名称()
+                    : RString.EMPTY);
+        }
+    }
+
+    private void set市町村名(Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map, HanyouRisutoSyuturyokuEntity entity,
+            HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity) {
+        KoseiShichosonMaster 構成市町村マスタ = 構成市町村Map.get(entity.get市町村コード());
+        if (構成市町村マスタ != null) {
+            csvEntity.set市町村名(構成市町村マスタ.get市町村名称());
+        }
     }
 
     private void set受給者台帳(HanyouRisutoSyuturyokuEntity entity,

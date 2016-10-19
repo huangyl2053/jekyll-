@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.ShoriModeHanteiResult;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011.DBC1230011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011.DBC1230011TransitionEventName;
@@ -275,8 +276,8 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         }
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        RString 処理モー = getHandler(div).get処理モード(被保険者番号, 新規);
-        if (処理不可.equals(処理モー)) {
+        ShoriModeHanteiResult 処理モー = getHandler(div).get処理モード(被保険者番号, 新規);
+        if (処理不可.equals(処理モー.getWkモード())) {
             return ResponseData.of(div).respond();
         }
         getHandler(div).set新規決定情報初期値(被保険者番号, 識別コード);
@@ -297,12 +298,12 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        RString 処理モー = getHandler(div).get処理モード(被保険者番号, 修正);
-        if (処理不可.equals(処理モー)) {
+        ShoriModeHanteiResult 処理モー = getHandler(div).get処理モード(被保険者番号, 修正);
+        if (処理不可.equals(処理モー.getWkモード())) {
             return ResponseData.of(div).respond();
         }
         getHandler(div).set新規以外の決定情報初期値(修正, 識別コード);
-        if (口座修正モード.equals(処理モー)) {
+        if (口座修正モード.equals(処理モー.getWkモード())) {
             getHandler(div).set状態_Three();
         } else {
             getHandler(div).set状態_Four();
@@ -338,11 +339,11 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        RString 処理モー = getHandler(div).get処理モード(被保険者番号, 削除);
-        if (処理不可.equals(処理モー)) {
+        ShoriModeHanteiResult 処理モー = getHandler(div).get処理モード(被保険者番号, 削除);
+        if (処理不可.equals(処理モー.getWkモード())) {
             return ResponseData.of(div).respond();
         }
-        if (削除照会モード.equals(処理モー)) {
+        if (削除照会モード.equals(処理モー.getWkモード())) {
             getHandler(div).set新規以外の決定情報初期値(照会, 識別コード);
         } else {
             getHandler(div).set新規以外の決定情報初期値(削除, 識別コード);
@@ -466,8 +467,13 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
      * @param div KarisanteiIdoFukaPanelDiv
      * @return ResponseData
      */
-    public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onStateTransition(KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+    public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onStateTransition(
+            KogakuGassanShikyuKetteiHoseiPanelDiv div) {
         getHandler(div).set保存ボタン();
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        ShoriModeHanteiResult 処理モー = getHandler(div).get処理モード(被保険者番号, 画面モード);
+        getHandler(div).getエラーメッセージ(処理モー.getWkメッセージ());
         return ResponseData.of(div).respond();
     }
 

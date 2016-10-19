@@ -39,11 +39,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -52,10 +50,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -120,7 +114,6 @@ public class ChosaHoshuShiharaiProcess extends BatchKeyBreakBase<HoshuShiharaiJu
 
     @Override
     protected void usualProcess(HoshuShiharaiJunbiRelateEntity entity) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         ChosaHoshuShiharaiEdit edit = new ChosaHoshuShiharaiEdit();
         List<RString> 業務固有キー = new ArrayList<>();
         業務固有キー.add(entity.getNinteichosaItakusakiCode());
@@ -135,16 +128,6 @@ public class ChosaHoshuShiharaiProcess extends BatchKeyBreakBase<HoshuShiharaiJu
                 get通知文(), get口座情報(new KamokuCode("003"), 業務固有キー), shiharaiEntity, true, ninteichosaItakusakiCode);
         shiharaiEntity.set対象期間(get対象期間());
         ninteichosaItakusakiCode = entity.getNinteichosaItakusakiCode();
-    }
-
-    private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
-        RString hihokenshaNo = RString.EMPTY;
-        if (entity.getHihokenshaNo() != null) {
-            hihokenshaNo = entity.getHihokenshaNo();
-        }
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                hihokenshaNo);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     private void バッチ出力条件リストの出力() {

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710030;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.KokuhorenFuicchi;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.SanteiKijun;
@@ -20,9 +21,10 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.Hanyou
 import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.HanyoListKogakuKaigoEucCsvNoEntityEditor;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
@@ -167,7 +169,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
 
     @Override
     protected void process(HanyouRisutoSyuturyokuEntity entity) {
-        eucNoCsvWriter.writeLine(dataNoCreate.edit(entity, parameter, 連番));
+        eucNoCsvWriter.writeLine(dataNoCreate.edit(entity, parameter, 連番, new HashMap<LasdecCode, KoseiShichosonMaster>()));
         連番 = 連番.add(Decimal.ONE);
         personalDataList.add(toPersonalData(entity));
 
