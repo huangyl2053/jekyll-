@@ -76,7 +76,7 @@ public class SaishinsaKohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatch
     private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3063.\"shoKisaiHokenshaNo\" ASC ");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
-    private static final RString 漢字_分 = new RString("分");
+    private static final RString 漢字_作成 = new RString("作成");
 
     @Override
     protected void process() {
@@ -139,13 +139,14 @@ public class SaishinsaKohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatch
             SaishinsaKetteiTsuchishoChohyoEntity 出力対象 = list.get(index);
             if (index == 0) {
                 output.set処理年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(漢字_分));
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
                 RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString();
                 RString 作成時 = 作成日時.getTime()
                         .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
-                output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
+                output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時)
+                        .concat(RString.HALF_SPACE).concat(漢字_作成));
                 output.set国保連合会名(出力対象.get国保連合会名());
                 output.set審査委員会名(出力対象.get審査委員会名());
             } else {
