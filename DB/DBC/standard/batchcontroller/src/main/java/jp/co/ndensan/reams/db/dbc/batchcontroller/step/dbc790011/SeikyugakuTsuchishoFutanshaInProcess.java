@@ -80,6 +80,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
     private int renban;
     private boolean 合計;
     private boolean 累計;
+    private boolean 支払手数料;
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter 請求額通知書一時tableWriter;
@@ -123,11 +124,13 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
                 meisaiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvMeisaiEntity.class, data);
             } else if (帳票レコード種別_T1.equals(data.get(INDEX_3))) {
                 gokeiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvGokeiEntity.class, data);
+                合計判断();
             } else if (帳票レコード種別_T2.equals(data.get(INDEX_3))) {
                 ruikeiCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoFutanshaInCsvRuikeiEntity.class, data);
+                累計判断();
             } else if (帳票レコード種別_T3.equals(data.get(INDEX_3))) {
                 tesuuyouCsvEntity = ListToObjectMappingHelper.toObject(SeikyugakuTsuchishoCsvFileToreraRecode3Entity.class, data);
-                累計判断();
+                手数料判断();
             }
         }
     }
@@ -153,11 +156,12 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
         if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null && gokeiCsvEntity != null) {
             合計 = true;
             累計 = false;
+            支払手数料 = false;
             set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
             set明細レコード(suchishoTempentity, meisaiCsvEntity);
             set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
             set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
-            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 累計);
+            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 支払手数料);
             請求額通知書一時tableWriter.insert(suchishoTempentity);
             headCsvEntity = null;
             meisaiCsvEntity = null;
@@ -165,11 +169,12 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
         } else if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null) {
             合計 = false;
             累計 = false;
+            支払手数料 = false;
             set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
             set明細レコード(suchishoTempentity, meisaiCsvEntity);
             set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
             set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
-            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 累計);
+            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 支払手数料);
             請求額通知書一時tableWriter.insert(suchishoTempentity);
             headCsvEntity = null;
             meisaiCsvEntity = null;
@@ -180,25 +185,96 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
         if (meisaiCsvEntity != null) {
             合計 = false;
             累計 = false;
+            支払手数料 = false;
             set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
             set明細レコード(suchishoTempentity, meisaiCsvEntity);
             set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
             set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
-            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 累計);
+            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 支払手数料);
             請求額通知書一時tableWriter.insert(suchishoTempentity);
             meisaiCsvEntity = null;
         }
     }
 
-    private void 累計判断() {
-        if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null && gokeiCsvEntity != null && ruikeiCsvEntity != null) {
+    private void 合計判断() {
+        if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null
+                && ruikeiCsvEntity != null && tesuuyouCsvEntity == null) {
             合計 = true;
             累計 = true;
+            支払手数料 = false;
             set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
             set明細レコード(suchishoTempentity, meisaiCsvEntity);
             set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
             set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
-            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 累計);
+            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 支払手数料);
+            headCsvEntity = null;
+            meisaiCsvEntity = null;
+            gokeiCsvEntity = null;
+            ruikeiCsvEntity = null;
+            tesuuyouCsvEntity = null;
+        } else if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null
+                && ruikeiCsvEntity == null && tesuuyouCsvEntity != null) {
+            合計 = true;
+            累計 = false;
+            支払手数料 = true;
+            set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
+            set明細レコード(suchishoTempentity, meisaiCsvEntity);
+            set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
+            set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
+            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 支払手数料);
+            headCsvEntity = null;
+            meisaiCsvEntity = null;
+            gokeiCsvEntity = null;
+            ruikeiCsvEntity = null;
+            tesuuyouCsvEntity = null;
+        }
+    }
+
+    private void 累計判断() {
+        if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null
+                && gokeiCsvEntity != null && tesuuyouCsvEntity == null) {
+            合計 = false;
+            累計 = true;
+            支払手数料 = false;
+            set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
+            set明細レコード(suchishoTempentity, meisaiCsvEntity);
+            set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
+            set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
+            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 支払手数料);
+            headCsvEntity = null;
+            meisaiCsvEntity = null;
+            gokeiCsvEntity = null;
+            ruikeiCsvEntity = null;
+            tesuuyouCsvEntity = null;
+        } else if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null
+                && gokeiCsvEntity != null && tesuuyouCsvEntity == null) {
+            合計 = false;
+            累計 = true;
+            支払手数料 = true;
+            set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
+            set明細レコード(suchishoTempentity, meisaiCsvEntity);
+            set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
+            set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
+            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 支払手数料);
+            headCsvEntity = null;
+            meisaiCsvEntity = null;
+            gokeiCsvEntity = null;
+            ruikeiCsvEntity = null;
+            tesuuyouCsvEntity = null;
+        }
+    }
+
+    private void 手数料判断() {
+        if (controlCsvEntity != null && headCsvEntity != null && meisaiCsvEntity != null
+                && gokeiCsvEntity != null && ruikeiCsvEntity != null) {
+            合計 = false;
+            累計 = false;
+            支払手数料 = true;
+            set共通レコード(suchishoTempentity, controlCsvEntity, headCsvEntity);
+            set明細レコード(suchishoTempentity, meisaiCsvEntity);
+            set合計レコード(suchishoTempentity, gokeiCsvEntity, 合計);
+            set累計レコード(suchishoTempentity, ruikeiCsvEntity, 累計);
+            set審査支払手数料レコード(suchishoTempentity, tesuuyouCsvEntity, 支払手数料);
             請求額通知書一時tableWriter.insert(suchishoTempentity);
             headCsvEntity = null;
             meisaiCsvEntity = null;

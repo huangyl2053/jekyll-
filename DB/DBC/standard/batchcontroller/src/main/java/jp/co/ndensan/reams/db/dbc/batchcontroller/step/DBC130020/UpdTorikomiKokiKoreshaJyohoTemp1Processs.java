@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -33,9 +34,25 @@ public class UpdTorikomiKokiKoreshaJyohoTemp1Processs extends BatchProcessBase<K
     private static final RString エラー区分 = new RString("1");
     private static final RString TEMP_TABLE = new RString("tempTorikomiKokuhoJyoho");
     private UpdTorikomiKokuhoJyohoTempProcessParameter processParameter;
+    private OutputParameter<Boolean> 文言_設定_FLAG;
+    private boolean 文言設定flag;
+    /**
+     * プロセス戻り値：対象月データありなしフラグ
+     */
+    public static final RString OUT_HAS_TARGET_DATA;
+
+    static {
+        OUT_HAS_TARGET_DATA = new RString("文言_設定_FLAG");
+    }
 
     @BatchWriter
     private IBatchTableWriter<TorikomiKokiKoreshaJyohoEntity> 一時tableWriter;
+
+    @Override
+    protected void initialize() {
+        文言_設定_FLAG = new OutputParameter<>();
+        文言設定flag = processParameter.is文言設定flag();
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -64,5 +81,10 @@ public class UpdTorikomiKokiKoreshaJyohoTemp1Processs extends BatchProcessBase<K
             }
         }
         一時tableWriter.update(entity.get取込後期高齢者情報Entity());
+    }
+
+    @Override
+    protected void afterExecute() {
+        文言_設定_FLAG.setValue(文言設定flag);
     }
 }
