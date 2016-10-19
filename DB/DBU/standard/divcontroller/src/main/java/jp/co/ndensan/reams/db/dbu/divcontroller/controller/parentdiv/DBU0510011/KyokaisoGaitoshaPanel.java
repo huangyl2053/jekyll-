@@ -156,6 +156,61 @@ public class KyokaisoGaitoshaPanel {
     }
 
     /**
+     * 該当・非該当を押下された場合、標準負担額の項目が活性・不活性になる。
+     *
+     * @param div 画面情報
+     * @return ResponseData<KyokaisoGaitoshaPanelDiv>
+     */
+    public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_radHyojunFutanGaku(KyokaisoGaitoshaPanelDiv div) {
+        getHandler(div).onClick_radHyojunFutanGaku();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 該当・非該当を押下された場合、居住費等負担額減額の項目が活性・不活性になる。
+     *
+     * @param div 画面情報
+     * @return ResponseData<KyokaisoGaitoshaPanelDiv>
+     */
+    public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_radkyojuhiFutanGakuGengaku(KyokaisoGaitoshaPanelDiv div) {
+        getHandler(div).onClick_radkyojuhiFutanGakuGengaku();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 該当・非該当を押下された場合、食費負担額減額の項目が活性・不活性になる。
+     *
+     * @param div 画面情報
+     * @return ResponseData<KyokaisoGaitoshaPanelDiv>
+     */
+    public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_radShokuhiFutangakuGengaku(KyokaisoGaitoshaPanelDiv div) {
+        getHandler(div).onClick_radShokuhiFutangakuGengaku();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 該当・非該当を押下された場合、高額サービス費上限額減額の項目が活性・不活性になる。
+     *
+     * @param div 画面情報
+     * @return ResponseData<KyokaisoGaitoshaPanelDiv>
+     */
+    public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_radGogakuServiceJoken(KyokaisoGaitoshaPanelDiv div) {
+        getHandler(div).onClick_radGogakuServiceJoken();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 適用する・適用しないを押下された場合、項目が活性・不活性になる。
+     *
+     * @param div 画面情報
+     * @return ResponseData<KyokaisoGaitoshaPanelDiv>
+     */
+    public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_radHokenryoNofuGengaku(KyokaisoGaitoshaPanelDiv div) {
+        getHandler(div).onClick_radHokenryoNofuGengaku();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 保険料納付を追加するボタンが押下された場合、保険料納付入力エリアの項目が活性になる。
      *
      * @param div 画面情報
