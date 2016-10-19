@@ -72,6 +72,11 @@ public class DBC180050_KoseiTaishoKyufuJissekiIchiran extends BatchFlowBase<DBC1
         executeStep(SHORIKEKKA_KAKUNINLIST);
     }
 
+    /**
+     * 利用者負担割合トリガデータ抽出
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(SEL_RIYOUSHAHUTANWARIAITORIGA)
     protected IBatchFlowCommand 利用者負担割合トリガデータ抽出() {
         return loopBatch(SelRiyoushaHutanwariaitorigaDataProcess.class)
@@ -79,6 +84,11 @@ public class DBC180050_KoseiTaishoKyufuJissekiIchiran extends BatchFlowBase<DBC1
                 .define();
     }
 
+    /**
+     * 給付実績トリガデータ抽出
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(SEL_KYUHUZISSEKIKIHONTORIGA)
     protected IBatchFlowCommand 給付実績トリガデータ抽出() {
         return loopBatch(SelKyuhuzissekiKihonTorigaDataProcess.class)
@@ -86,53 +96,103 @@ public class DBC180050_KoseiTaishoKyufuJissekiIchiran extends BatchFlowBase<DBC1
                 .define();
     }
 
+    /**
+     * 利用者負担割合情報の取得
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(INS_FUTANWARIAIJOHOTEMP)
     protected IBatchFlowCommand 利用者負担割合情報の取得() {
         return loopBatch(InsFutanwariaiJohoTempProcess.class).define();
     }
 
+    /**
+     * 利用者負担減額情報の取得
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(UPD_RIYOSHAFUTANGENGAKUTEMP)
     protected IBatchFlowCommand 利用者負担減額情報の取得() {
         return loopBatch(UpdRiyoshaFutangengakuTempProcess.class).define();
     }
 
+    /**
+     * 支払方法変更情報の取得
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(UPD_SHIHARAIHOHOHENKOTEMP)
     protected IBatchFlowCommand 支払方法変更情報の取得() {
         return loopBatch(UpdShiharaihohoHenkoTempProcess.class).define();
     }
 
+    /**
+     * 給付実績情報作成用
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(KYUHUZISSEKI_JOHOSAKUSEIYO)
     protected IBatchFlowCommand 給付実績情報作成用() {
         return loopBatch(KyuhuzissekiJohoSakuseiYoProcess.class).define();
     }
 
+    /**
+     * 給付実績情報作成
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(KYUHUZISSEKI_JOHOSAKUSEI)
     protected IBatchFlowCommand 給付実績情報作成() {
         return loopBatch(KyuhuzissekiJohoSakuseiProcess.class).define();
     }
 
+    /**
+     * 給付実績情報年月作成
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(INS_FUTANWARIAIYMTEMP)
     protected IBatchFlowCommand 給付実績情報年月作成() {
         return loopBatch(InsFutanWariaiYMTempProcess.class).define();
     }
 
+    /**
+     * 更正対象給付実績情報の作成
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(KOSEITAISHO_KYUHUZISSEKIJOHOUSAKUSEI)
     protected IBatchFlowCommand 更正対象給付実績情報の作成() {
         return loopBatch(KoseiTaishoKyuhuzissekiJohouSakuseiProcess.class).define();
     }
 
+    /**
+     * 更正対象給付実績一覧表出力
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(KOSEITAISHO_KYUHUZISSEKII)
     protected IBatchFlowCommand 更正対象給付実績一覧表出力() {
         return loopBatch(KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess.class)
                 .arguments(toKoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcessParameter()).define();
     }
 
+    /**
+     * 処理日付管理テーブル更新
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(SHORIHIDUKE_KANRITEBURUKOSHI)
     protected IBatchFlowCommand 処理日付管理テーブル更新() {
         return loopBatch(ShoriHidukeKanriTeburuKoshiProcess.class)
                 .arguments(toShoriHidukeKanriTeburuKoshiProcessParameter()).define();
     }
 
+    /**
+     * 処理結果確認リスト作成
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(SHORIKEKKA_KAKUNINLIST)
     protected IBatchFlowCommand 処理結果確認リスト作成() {
         return loopBatch(ShoriKekkaKakuninProcess.class)

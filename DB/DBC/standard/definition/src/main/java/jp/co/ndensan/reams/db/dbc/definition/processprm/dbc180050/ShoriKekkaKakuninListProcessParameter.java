@@ -22,6 +22,10 @@ public class ShoriKekkaKakuninListProcessParameter implements IBatchProcessParam
 
     private RDateTime 作成日時;
 
+    /**
+     *
+     * @param 作成日時 RDateTime
+     */
     public ShoriKekkaKakuninListProcessParameter(RDateTime 作成日時) {
         this.作成日時 = 作成日時;
     }

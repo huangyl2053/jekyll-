@@ -36,6 +36,11 @@ public class ShoriHidukeKanriTeburuKoshiProcessParameter implements IBatchProces
         this.抽出期間終了日時 = 抽出期間終了日時;
     }
 
+    /**
+     * toMybatisParameter
+     *
+     * @return ShoriHidukeKanriTeburuKoshiMybatisParameter
+     */
     public ShoriHidukeKanriTeburuKoshiMybatisParameter toMybatisParameter() {
         return new ShoriHidukeKanriTeburuKoshiMybatisParameter(ShoriName.更正対象給付実績一覧.get名称());
     }
