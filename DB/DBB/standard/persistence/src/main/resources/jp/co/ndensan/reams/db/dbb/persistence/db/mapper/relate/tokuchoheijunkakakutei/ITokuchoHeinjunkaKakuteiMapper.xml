@@ -886,39 +886,6 @@
         WHERE A."choteiId" = B."choteiId"
     </update>
     
-    
-    <delete id="delete調定額内訳_介護継承" parameterType="java.util.Map">
-        delete from rgdb."UrT0706ChoteigakuUchiwake"
-        where "UrT0706ChoteigakuUchiwake"."choteiId" IN
-        <foreach item="choteiId" index="index" collection="choteiId" open="(" separator="," close=")">
-            #{choteiId}
-        </foreach>
-    </delete>
-    
-    <delete id="delete調定状況_介護継承" parameterType="java.util.Map">
-        delete from rgdb."UrT0707ChoteiJokyo"
-        where "UrT0707ChoteiJokyo"."choteiJokyoId" IN
-        <foreach item="shunoId" index="index" collection="shunoId" open="(" separator="," close=")">
-            #{shunoId}
-        </foreach>
-    </delete>
-    
-    <delete id="delete収納管理マスタ_介護継承" parameterType="java.util.Map">
-        delete from rgdb."UrT0700ShunoKanri"
-        where "UrT0700ShunoKanri"."shunoId" IN
-        <foreach item="shunoId" index="index" collection="shunoId" open="(" separator="," close=")">
-            #{shunoId}
-        </foreach>
-    </delete>
-    
-    <delete id="delete調定共通_介護継承" parameterType="java.util.Map">
-        delete from rgdb."UrT0705ChoteiKyotsu"
-        where "UrT0705ChoteiKyotsu"."choteiId" IN
-        <foreach item="choteiId" index="index" collection="choteiId" open="(" separator="," close=")">
-            #{choteiId}
-        </foreach>
-    </delete>
-    
     <resultMap id="resultMap_FukaTempEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.FukaTempEntity">
         <result property="平準化前調定年度" column="choteiNendoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="平準化前賦課年度" column="fukaNendoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>

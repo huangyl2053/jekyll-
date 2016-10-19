@@ -562,10 +562,6 @@ public class TokuchoHeijunkaKakuteiBatch {
             Map<String, Object> parameter_収納ID = new HashMap<>();
             parameter_調定ID.put(キー_調定ID.toString(), 調定IDList);
             parameter_収納ID.put(キー_収納ID.toString(), 収納IDList);
-            mapper.delete調定額内訳_介護継承(parameter_調定ID);
-            mapper.delete調定状況_介護継承(parameter_収納ID);
-            mapper.delete収納管理マスタ_介護継承(parameter_収納ID);
-            mapper.delete調定共通_介護継承(parameter_調定ID);
             List<DbT2003KibetsuEntity> 介護期別List = 介護期別Dac.select介護期別(賦課Temp.get調定年度(), 賦課Temp.get賦課年度(),
                     賦課Temp.get通知書番号(), 賦課Temp.get履歴番号(), 文字列_ONE);
             if (介護期別List != null && !介護期別List.isEmpty()) {
