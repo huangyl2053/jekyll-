@@ -26,10 +26,11 @@ public class KazeiHanteiChosaChu implements IKazeiHantei {
     public RString hokenryoDankaiShiyo(HokenryoDankaiHanteiParameter ｈokenryoDankaiHanteiParameter) {
         return ｈokenryoDankaiHanteiParameter.getSeigyoJoho().getShotokuChosachuDankai();
     }
-
+    
     @Override
     public void hokenryoDankaiShiyoShinai(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
-        if (hokenryoDankaiHanteiParameter.getSeigyoJoho().getShotokuChosachuKazeiKubun() != null) {
+        if (hokenryoDankaiHanteiParameter.getSeigyoJoho().getShotokuChosachuKazeiKubun() != null
+                && hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList().contains(KazeiKubun.所得調査中)) {
             List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
             setaiinKazeiKubunList.add(hokenryoDankaiHanteiParameter.getSeigyoJoho().getShotokuChosachuKazeiKubun());
             hokenryoDankaiHanteiParameter.getFukaKonkyo().setSetaiinKazeiKubunList(setaiinKazeiKubunList);
