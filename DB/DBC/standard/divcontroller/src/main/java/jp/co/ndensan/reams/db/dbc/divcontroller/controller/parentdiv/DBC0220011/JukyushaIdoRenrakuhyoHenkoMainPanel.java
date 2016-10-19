@@ -66,7 +66,7 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
             div.getJukyushaIdoRenrakuhyoHenkoSearchConditionPanel().
                     getTxtSearchHihoNo().setValue(parameter.get被保番号().value());
         }
-        set被保険者番号(div);
+        set検索条件(div);
         if (parameter != null && new RString(Boolean.TRUE.toString()).equals(parameter.get削除データ検索())) {
             List<RString> list = new ArrayList();
             list.add(KEY);
@@ -98,16 +98,20 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanel {
             }
             List<TaishoshaKensakuResult> 異動対象者一覧情報 = TaishoshaKensaku.createInstance().
                     selectJukyushaIdoTaishosha(異動日From, 異動日To, 被保険者番号, 削除データ);
-            if (異動対象者一覧情報 == null) {
-                throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-            }
+            getエラー(異動対象者一覧情報);
             getHandler(div).initialize対象者一覧(メニューID, 異動日From, 異動日To, 被保険者番号, 異動対象者一覧情報);
             return ResponseData.of(div).setState(DBC0220011StateName.対象者一覧);
         }
         return ResponseData.of(div).setState(DBC0220011StateName.対象者検索);
     }
 
-    private void set被保険者番号(JukyushaIdoRenrakuhyoHenkoMainPanelDiv div) {
+    private void getエラー(List<TaishoshaKensakuResult> 異動対象者一覧情報) {
+        if (異動対象者一覧情報 == null) {
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        }
+    }
+
+    private void set検索条件(JukyushaIdoRenrakuhyoHenkoMainPanelDiv div) {
         RString イベント名 = ResponseHolder.getBeforeEvent();
         if (イベント_対象者特定.equals(イベント名) || イベント_終了.equals(イベント名)) {
             TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
