@@ -386,8 +386,12 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         List<HihokenshaDaicho> 資格の情報年度minus1 = new ArrayList<>();
         List<FukaJoho> 賦課の情報年度minus1 = new ArrayList<>();
         for (DbT1001AndFukaJohoEntity entity : daichoEntityList) {
-            資格の情報年度minus1.add(new HihokenshaDaicho(entity.get被保険者台帳管理()));
-            賦課の情報年度minus1.add(new FukaJoho(entity.get賦課Newest()));
+            if (null != entity.get被保険者台帳管理()) {
+                資格の情報年度minus1.add(new HihokenshaDaicho(entity.get被保険者台帳管理()));
+            }
+            if (null != entity.get賦課Newest()) {
+                賦課の情報年度minus1.add(new FukaJoho(entity.get賦課Newest()));
+            }
         }
 
         mapper.createKanendoHonSanteiChushutsuTmp();
@@ -398,8 +402,12 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         List<HihokenshaDaicho> 資格の情報年度minus2 = new ArrayList<>();
         List<FukaJoho> 賦課の情報年度minus2 = new ArrayList<>();
         for (DbT1001AndFukaJohoEntity entity : daichoEntityList) {
-            資格の情報年度minus2.add(new HihokenshaDaicho(entity.get被保険者台帳管理()));
-            賦課の情報年度minus2.add(new FukaJoho(entity.get賦課Newest()));
+            if (null != entity.get被保険者台帳管理()) {
+                資格の情報年度minus2.add(new HihokenshaDaicho(entity.get被保険者台帳管理()));
+            }
+            if (null != entity.get賦課Newest()) {
+                賦課の情報年度minus2.add(new FukaJoho(entity.get賦課Newest()));
+            }
         }
 
         dbの処理(資格の情報年度minus2, 賦課の情報年度minus2, param);

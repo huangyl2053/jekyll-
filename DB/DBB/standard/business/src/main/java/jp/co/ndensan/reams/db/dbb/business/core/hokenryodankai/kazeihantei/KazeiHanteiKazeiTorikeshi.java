@@ -29,7 +29,8 @@ public class KazeiHanteiKazeiTorikeshi implements IKazeiHantei {
 
     @Override
     public void hokenryoDankaiShiyoShinai(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
-        if (hokenryoDankaiHanteiParameter.getSeigyoJoho().getKazeiTorikeshiKazeiKubun() != null) {
+        if (hokenryoDankaiHanteiParameter.getSeigyoJoho().getKazeiTorikeshiKazeiKubun() != null
+                && hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList().contains(KazeiKubun.課税取消)) {
             List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
             setaiinKazeiKubunList.add(hokenryoDankaiHanteiParameter.getSeigyoJoho().getShotokuChosachuKazeiKubun());
             hokenryoDankaiHanteiParameter.getFukaKonkyo().setSetaiinKazeiKubunList(setaiinKazeiKubunList);

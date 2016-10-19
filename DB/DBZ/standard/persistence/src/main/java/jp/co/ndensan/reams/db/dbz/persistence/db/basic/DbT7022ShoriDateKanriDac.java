@@ -1922,4 +1922,23 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 toList(DbT7022ShoriDateKanriEntity.class);
     }
 
+    /**
+     * 処理日付管理マスタテーブルから、処理状況取得する。
+     *
+     * @param 処理名 処理名
+     * @param 年度内連番 年度内連番
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity get処理状況(RString 処理名, RString 年度内連番) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriName, 処理名),
+                                eq(nendoNaiRenban, 年度内連番))).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
 }

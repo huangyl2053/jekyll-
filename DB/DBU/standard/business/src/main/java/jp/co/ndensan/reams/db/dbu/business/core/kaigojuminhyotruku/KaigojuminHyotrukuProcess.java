@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyotruku;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojuminhyotruku.KaigojuminHyotrukuProcessParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoSearchKeyBuilder;
@@ -34,13 +36,17 @@ public class KaigojuminHyotrukuProcess {
 
     /**
      *
-     * @param entity DbT7022ShoriDateKanriEntity
+     * @param 抽出開始日時 RDateTime
      * @return keyBuilder
      */
-    public ShikibetsuTaishoIdoSearchKeyBuilder 宛名識別対象異動分取得PSM(DbT7022ShoriDateKanriEntity entity) {
+    public ShikibetsuTaishoIdoSearchKeyBuilder 宛名識別対象異動分取得PSM(RDateTime 抽出開始日時) {
+        if (抽出開始日時 == null) {
+            抽出開始日時 = new YMDHMS(DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_介護保険施行日,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).concat(new RString("000000"))).getRDateTime();
+        }
         ShikibetsuTaishoIdoSearchKeyBuilder keyBuilder = new ShikibetsuTaishoIdoSearchKeyBuilder(
                 ShikibetsuTaishoIdoChushutsuKubun.異動処理日時と異動事由で異動前後を抽出,
-                entity.getKijunTimestamp().getRDateTime(), RDate.getNowDateTime());
+                抽出開始日時, RDate.getNowDateTime());
         List<JukiIdoJiyu> juminShubetsu = new ArrayList<>();
         juminShubetsu.add(JukiIdoJiyu.転入);
         juminShubetsu.add(JukiIdoJiyu.第30条の46届出);
@@ -80,7 +86,6 @@ public class KaigojuminHyotrukuProcess {
         jutogaiIdoJiyu.add(JutogaiIdoJiyu.新規追加);
         jutogaiIdoJiyu.add(JutogaiIdoJiyu.物理削除);
         jutogaiIdoJiyu.add(JutogaiIdoJiyu.誤謬修正);
-        // TODO  現全国地方公共団体コードと住登外異動事由使用有無と住基異動事由使用有無があります。QA:1258
         keyBuilder.set個人のみ取得区分(true);
         keyBuilder.set住基異動事由コードList(juminShubetsu);
         keyBuilder.set住登外異動事由コードList(jutogaiIdoJiyu);
@@ -90,29 +95,18 @@ public class KaigojuminHyotrukuProcess {
     /**
      *
      * @param processParameter KaigojuminHyotrukuProcessParameter
-     * @param a int
-     * @param i int
-     * @param dbT7022List List<DbT7022ShoriDateKanriEntity>
-     * @param entity DbT7022ShoriDateKanriEntity
+     * @param dateentity DbT7022ShoriDateKanriEntity
      * @param 処理日時 RDateTime
-     * @param shichosonCodeList List<RString>
-     * @return a
+     * @return entity
      */
-    public int データ編集(KaigojuminHyotrukuProcessParameter processParameter, int a,
-            int i, List<DbT7022ShoriDateKanriEntity> dbT7022List, List<RString> shichosonCodeList,
-            RDateTime 処理日時, DbT7022ShoriDateKanriEntity entity) {
-
+    public DbT7022ShoriDateKanriEntity データ編集(KaigojuminHyotrukuProcessParameter processParameter,
+            RDateTime 処理日時, DbT7022ShoriDateKanriEntity dateentity) {
         processParameter.setShoriTimestamp(YMDHMS.now().getRDateTime());
+        DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
         entity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
-        entity.setShichosonCode(new LasdecCode(processParameter.getShichosonCode().get(i).toString()));
-        if (shichosonCodeList.contains(processParameter.getShichosonCode().get(i))) {
-            entity.setShoriEdaban(new RString(String.valueOf(Integer.valueOf(dbT7022List.get(a).getShoriEdaban().toString()) + 1)));
-            entity.setNendoNaiRenban(new RString(String.valueOf(Integer.valueOf(dbT7022List.get(a).getNendoNaiRenban().toString()) + 1)));
-            a++;
-        } else {
-            entity.setShoriEdaban(new RString("1"));
-            entity.setNendoNaiRenban(new RString("1"));
-        }
+        entity.setShichosonCode(new LasdecCode(processParameter.getShichosonCode()));
+        entity.setShoriEdaban(new RString(String.valueOf(Integer.valueOf(dateentity.getShoriEdaban().toString()) + 1)));
+        entity.setNendoNaiRenban(new RString(String.valueOf(Integer.valueOf(dateentity.getNendoNaiRenban().toString()) + 1)));
         entity.setShoriName(ShoriName.住民異動連携情報登録_他社住基用.get名称());
         entity.setNendo(new FlexibleYear("0000"));
         entity.setKijunYMD(new FlexibleDate(processParameter.getShoriTimestamp().getDate().toString()));
@@ -124,6 +118,35 @@ public class KaigojuminHyotrukuProcess {
         日時.append(処理日時.getDate());
         日時.append(処理日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
         entity.setTaishoShuryoTimestamp(new YMDHMS(日時.toString().replace(":", "")));
-        return a;
+        return entity;
+    }
+
+    /**
+     *
+     * @param processParameter KaigojuminHyotrukuProcessParameter
+     * @param dateentity DbT7022ShoriDateKanriEntity
+     * @param 処理日時 RDateTime
+     * @return entity
+     */
+    public DbT7022ShoriDateKanriEntity データ更新(KaigojuminHyotrukuProcessParameter processParameter,
+            RDateTime 処理日時, DbT7022ShoriDateKanriEntity dateentity) {
+        processParameter.setShoriTimestamp(YMDHMS.now().getRDateTime());
+        DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
+        entity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
+        entity.setShichosonCode(new LasdecCode(processParameter.getShichosonCode()));
+        entity.setShoriEdaban(new RString("1"));
+        entity.setNendoNaiRenban(new RString("1"));
+        entity.setShoriName(ShoriName.住民異動連携情報登録_他社住基用.get名称());
+        entity.setNendo(new FlexibleYear("0000"));
+        entity.setKijunYMD(new FlexibleDate(processParameter.getShoriTimestamp().getDate().toString()));
+        entity.setKijunTimestamp(new YMDHMS(処理日時));
+        entity.setTaishoKaishiYMD(new FlexibleDate(processParameter.getShoriTimestamp().getDate().toString()));
+        entity.setTaishoShuryoYMD(new FlexibleDate(処理日時.getDate().toString()));
+        entity.setTaishoKaishiTimestamp(new YMDHMS(processParameter.getShoriTimestamp()));
+        RStringBuilder 日時 = new RStringBuilder();
+        日時.append(処理日時.getDate());
+        日時.append(処理日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
+        entity.setTaishoShuryoTimestamp(new YMDHMS(日時.toString().replace(":", "")));
+        return entity;
     }
 }

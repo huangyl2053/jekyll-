@@ -1023,6 +1023,10 @@ public class KyufuJissekiShokaiHandler {
     }
 
     private void setボタン表示非表示の設定(FlexibleYearMonth サービス提供年月_開始, FlexibleYearMonth サービス提供年月_終了) {
+        div.getBtnSento().setVisible(true);
+        div.getBtnMae().setVisible(true);
+        div.getBtnTsugi().setVisible(true);
+        div.getBtnSaigo().setVisible(true);
         int 列 = サービス提供年月_終了.getBetweenMonths(サービス提供年月_開始) + INT_ICHI;
         if (列 < INT_SJYUNA) {
             div.getBtnSento().setVisible(false);
@@ -1030,8 +1034,6 @@ public class KyufuJissekiShokaiHandler {
             div.getBtnTsugi().setVisible(false);
             div.getBtnSaigo().setVisible(false);
         }
-        div.setHiddenZenBanGo(RS_ZERO);
-        div.setHiddenSaiGoBango(new RString(列 - INT_ICHI));
     }
 
     private void set選択ボタン表示非表示の設定(dgKyufuJissekiGokeiList_Row 合計一覧) {
