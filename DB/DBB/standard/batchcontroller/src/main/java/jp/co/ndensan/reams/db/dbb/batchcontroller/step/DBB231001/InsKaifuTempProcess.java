@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB231001;
 
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoseidokanifsakusei.TokuchoSeidokanIFSakuseiDBUpdateProcessParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -15,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -41,6 +45,7 @@ public class InsKaifuTempProcess extends BatchProcessBase<
     private final RString 月8 = new RString("08");
     private final RString 月10 = new RString("10");
     private final RString 月12 = new RString("12");
+    private final RString 月4開始_待機 = new RString("04");
     private static final RString RS30 = new RString("30");
     private static final RString RS00 = new RString("00");
     private static final RString 特徴制度間IF全件作成 = new RString("DBBMN84002");
@@ -60,7 +65,13 @@ public class InsKaifuTempProcess extends BatchProcessBase<
         FlexibleYear 入力処理年度 = null;
         RString 通知内容コード = null;
         RString 捕捉月 = RString.EMPTY;
+        boolean 月4開始_待機FLG = false;
         RString 遷移元メニュー = parameter.get遷移元メニュー();
+        if (月4開始_待機.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課))
+                || 月4開始_待機.equals(
+                        DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課))) {
+            月4開始_待機FLG = true;
+        }
         if (月8.equals(特徴開始月数)) {
             if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
                 path = MAPPERPATH.concat(SELECTAUG);
@@ -70,7 +81,7 @@ public class InsKaifuTempProcess extends BatchProcessBase<
             捕捉月 = 月2;
         } else if (月10.equals(特徴開始月数)) {
             if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
-                path = MAPPERPATH.concat(SELECTOCT);
+                aaa(月4開始_待機FLG);
             }
             入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
             通知内容コード = RS00;
@@ -130,5 +141,11 @@ public class InsKaifuTempProcess extends BatchProcessBase<
     @Override
     protected void process(UeT0511NenkinTokuchoKaifuJohoEntity entity) {
         特徴回付情報Temp.insert(entity);
+    }
+
+    private void aaa(boolean 月4開始_待機FLG) {
+        if (月4開始_待機FLG) {
+            path = MAPPERPATH.concat(SELECTOCT);
+        }
     }
 }
