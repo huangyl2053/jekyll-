@@ -134,7 +134,7 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
                 processParameter.getKasyuusiuryouhi(),
                 processParameter.getKofuJiyulist(),
                 processParameter.getKaishuJiyulist(),
-                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()), 
+                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
                 processParameter.isSeyisinjyohoflg(),
                 processParameter.getSiyuturiyokudaysyou());
         List<AkasiHakouKanriEntity> akaEntityList = mapper.get証発行管理リスト情報(mybatisParameter);
@@ -190,7 +190,7 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
                 PersonalData personalData = PersonalData.of(new ShikibetsuCode(csvEntity.getShikibetsuCode()), expandedInformations);
                 personalDataList.add(personalData);
             }
-            outputJokenhyoFactory(association,csvName);
+            outputJokenhyoFactory(association, csvName);
             eucCsvWriter.close();
             AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
             manager.spool(eucFilePath, id);
@@ -221,7 +221,7 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
             batchReportWriter.close();
         }
     }
-    
+
     private void outputJokenhyoFactory(Association association, RString csvName) {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
@@ -234,7 +234,7 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
                 contribute());
         OutputJokenhyoFactory.createInstance(item).print();
     }
-    
+
     private List<RString> contribute() {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
@@ -244,7 +244,7 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
         jokenBuilder.append(出力対象);
         jokenBuilder.append(processParameter.getSiyuturiyokudaysyou());
         出力条件List.add(jokenBuilder.toRString());
-        
+
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(交付年月日);
         jokenBuilder.append(processParameter.getKoufukayisihi());
@@ -260,7 +260,7 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
             jokenBuilder.append(カラ);
             jokenBuilder.append(processParameter.getKasyuusiuryouhi());
         }
-        
+
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(交付事由);
         if (processParameter.getKofuJiyulist().size() > 0) {
@@ -272,10 +272,10 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
             jokenBuilder.append("交付事由なし");
         }
         出力条件List.add(jokenBuilder.toRString());
-        
+
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(回収事由);
-        if (processParameter.getKofuJiyulist().size() > 0) {
+        if (processParameter.getKaishuJiyulist().size() > 0) {
             for (RString jiyu : processParameter.getKaishuJiyulist()) {
                 jokenBuilder.append(jiyu).append(コンマ);
             }
