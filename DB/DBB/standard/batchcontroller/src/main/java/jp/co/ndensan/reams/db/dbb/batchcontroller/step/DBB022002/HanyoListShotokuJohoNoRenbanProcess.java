@@ -37,8 +37,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -124,6 +127,8 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
     private static final RString 地区3SHOW = new RString("地区3：");
     private static final RString 保険者SHOW = new RString("保険者：");
     private static final int INDEX_ZERO = 0;
+    private static final int INDEX_ONE = 1;
+    private static final int INDEX_TWO = 2;
     private HanyoListShotokuJohoNoRenbanCsvEditor csvEditor;
     private HanyoListShotokuJohoProcessParameter processParameter;
     private List<PersonalData> personalDataList;
@@ -162,8 +167,53 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                 KensakuYusenKubun.住登外優先);
         builder.setデータ取得区分(DataShutokuKubun.直近レコード);
+        RString 地区区分 = processParameter.get宛名抽出条件().getChiku_Kubun().getコード();
+        if (定数_住所.equals(地区区分)) {
+            builder.set町域コード開始値(new ChoikiCode(processParameter.get宛名抽出条件().getJusho_From()));
+            builder.set町域コード終了値(new ChoikiCode(processParameter.get宛名抽出条件().getJusho_To()));
+        } else if (定数_行政区.equals(地区区分)) {
+            builder.set行政区コード開始値(new GyoseikuCode(processParameter.get宛名抽出条件().getGyoseiku_From()));
+            builder.set行政区コード終了値(new GyoseikuCode(processParameter.get宛名抽出条件().getGyoseiku_To()));
+        } else if (定数_地区.equals(地区区分)) {
+            builder.set地区コード1開始値(new ChikuCode(processParameter.get宛名抽出条件().getChiku1_From()));
+            builder.set地区コード1終了値(new ChikuCode(processParameter.get宛名抽出条件().getChiku1_To()));
+            builder.set地区コード2開始値(new ChikuCode(processParameter.get宛名抽出条件().getChiku2_From()));
+            builder.set地区コード2終了値(new ChikuCode(processParameter.get宛名抽出条件().getChiku2_To()));
+            builder.set地区コード3開始値(new ChikuCode(processParameter.get宛名抽出条件().getChiku3_From()));
+            builder.set地区コード3終了値(new ChikuCode(processParameter.get宛名抽出条件().getChiku3_To()));
+        }
+        RString 年齢層抽出方法 = processParameter.get宛名抽出条件().getAgeSelectKijun().getコード();
+        RDate 生年月日範囲終了 = null;
+        RDate 生年月日範囲開始 = null;
+        if (定数_ONE.equals(年齢層抽出方法)) {
+            Decimal 年齢範囲開始 = processParameter.get宛名抽出条件().getNenreiRange().getFrom();
+            Decimal 年齢範囲終了 = processParameter.get宛名抽出条件().getNenreiRange().getTo();
+            RDate 年齢基準日 = processParameter.get宛名抽出条件().getNenreiKijunbi();
+            if (年齢範囲開始 != null && 年齢基準日 != null) {
+                生年月日範囲終了 = 年齢基準日.minusYear(年齢範囲開始.intValue()).plusDay(INDEX_ONE);
+            }
+            if (年齢範囲終了 != null && 年齢基準日 != null) {
+                生年月日範囲開始 = 年齢基準日.minusYear(年齢範囲終了.intValue() + INDEX_ONE).plusDay(INDEX_TWO);
+            }
+            processParameter.set年齢範囲開始(年齢範囲開始);
+            processParameter.set年齢範囲終了(年齢範囲終了);
+        } else if (定数_TWO.equals(年齢層抽出方法)) {
+            RDate 生年月日範囲開始1 = processParameter.get宛名抽出条件().getSeinengappiRange().getFrom();
+            RDate 生年月日範囲終了1 = processParameter.get宛名抽出条件().getSeinengappiRange().getTo();
+            if (生年月日範囲開始1 != null) {
+                生年月日範囲開始 = 生年月日範囲開始1;
+            }
+            if (生年月日範囲終了1 != null) {
+                生年月日範囲終了 = 生年月日範囲終了1;
+            }
+            processParameter.set生年月日範囲開始1(生年月日範囲開始1);
+            processParameter.set生年月日範囲終了1(生年月日範囲終了1);
+        }
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         processParameter.set宛名検索条件(searchKey);
+        processParameter.set年齢層抽出方法(年齢層抽出方法);
+        processParameter.set生年月日範囲開始(生年月日範囲開始);
+        processParameter.set生年月日範囲終了(生年月日範囲終了);
         return new BatchDbReader(READ_DATA_ID, processParameter.toMybatisParameter());
     }
 
@@ -255,8 +305,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
         List<KaigoDonyuKeitai> list = manager.get介護導入形態By業務分類(GyomuBunrui.介護事務);
         if (list.get(INDEX_ZERO).get導入形態コード().is広域()) {
             builder10.append(保険者SHOW);
-            //TODO パラメータ.宛名抽出条件.保険者
-            builder10.append(RString.EMPTY);
+            builder10.append(processParameter.get宛名抽出条件().getShichoson_Code());
             出力条件.add(builder10.toRString());
         }
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
