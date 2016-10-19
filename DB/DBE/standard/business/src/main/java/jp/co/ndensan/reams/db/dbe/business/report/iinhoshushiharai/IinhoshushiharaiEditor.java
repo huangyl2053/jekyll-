@@ -59,6 +59,7 @@ public class IinhoshushiharaiEditor implements IIinhoshushiharaiEditor {
         source.taishoKikan = item.get対象期間();
         source.shinsakaiShussekiCount = item.get審査会出席回数();
         source.tsuchibun2 = item.get通知文2();
+        source.shinsakaiIinCode = item.get介護認定審査会委員コード();
         return source;
     }
 }

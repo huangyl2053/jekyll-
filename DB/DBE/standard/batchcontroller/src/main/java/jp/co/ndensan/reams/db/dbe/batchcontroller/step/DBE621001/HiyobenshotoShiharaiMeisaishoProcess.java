@@ -31,11 +31,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -44,10 +42,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -103,7 +97,6 @@ public class HiyobenshotoShiharaiMeisaishoProcess extends BatchProcessBase<Hoshu
 
     @Override
     protected void process(HoshuShiharaiJunbiRelateEntity entity) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         HiyobenshotoShiharaiMeisaishoEdit edit = new HiyobenshotoShiharaiMeisaishoEdit();
         meisaisho = edit.getHiyobenshotoShiharaiMeisai(meisaisho, entity, getKoza(entity), index, get対象期間(),
                 dateFormat9(processParameter.getFurikomishiteiday()));
@@ -113,16 +106,6 @@ public class HiyobenshotoShiharaiMeisaishoProcess extends BatchProcessBase<Hoshu
             meisaisho = new HiyobenshotoShiharaimeisaisho();
         }
         ++index;
-    }
-
-    private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
-        RString hihokenshaNo = RString.EMPTY;
-        if (entity.getHihokenshaNo() != null) {
-            hihokenshaNo = entity.getHihokenshaNo();
-        }
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                hihokenshaNo);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     private void バッチ出力条件リストの出力() {
