@@ -69,6 +69,7 @@ public class HonsanteiIdoHandler {
     private static final RString 済 = new RString("済");
     private static final RString 遷移元区分_0 = new RString("0");
     private static final RString 遷移元区分_1 = new RString("1");
+    private static final RString チェックボックス_0 = new RString("0");
     private static final RString 口座異動のみ通知書_出力否 = new RString("0");
     private static final RString 口座異動のみ通知書_出力要 = new RString("1");
     private static final RString 算定月_2 = new RString("02");
@@ -550,6 +551,8 @@ public class HonsanteiIdoHandler {
             if (決定_発行日 != null) {
                 paramter.set決定_発行日(new FlexibleDate(決定_発行日.toString()));
             }
+        } else {
+            paramter.set決定_チェックボックス(チェックボックス_0);
         }
         List<RString> 変更_チェックボックス = div.getChkHenkoTsuchi().getSelectedKeys();
         if (変更_チェックボックス != null && !変更_チェックボックス.isEmpty()) {
@@ -564,6 +567,8 @@ public class HonsanteiIdoHandler {
             if (変更_発行日 != null) {
                 paramter.set変更_発行日(new FlexibleDate(変更_発行日.toString()));
             }
+        } else {
+            paramter.set変更_チェックボックス(チェックボックス_0);
         }
         List<RString> 納入_対象者 = div.getChkNotsuTaishoSha().getSelectedValues();
         if (納入_対象者 != null && !納入_対象者.isEmpty()) {
