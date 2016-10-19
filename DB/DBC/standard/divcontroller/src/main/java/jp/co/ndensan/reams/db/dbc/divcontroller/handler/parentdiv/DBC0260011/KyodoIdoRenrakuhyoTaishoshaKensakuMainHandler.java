@@ -138,7 +138,7 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuMainHandler {
         if (異動日From != null && !異動日From.isEmpty()) {
             div.getTxtSearchIdoYMD().setFromValue(new RDate(異動日From.toString()));
         }
-        if (異動日From != null && !異動日From.isEmpty()) {
+        if (異動日To != null && !異動日To.isEmpty()) {
             div.getTxtSearchIdoYMD().setToValue(new RDate(異動日To.toString()));
         }
         List<RString> keyList = new ArrayList<>();

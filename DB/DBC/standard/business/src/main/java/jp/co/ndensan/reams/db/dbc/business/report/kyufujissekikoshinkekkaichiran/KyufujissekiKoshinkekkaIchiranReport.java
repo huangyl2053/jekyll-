@@ -23,11 +23,11 @@ public class KyufujissekiKoshinkekkaIchiranReport extends Report<KyufujissekiKos
 
     private final ChohyoShutsuryokuTaishoDateEntity entity;
     private final FlexibleYearMonth 処理年月;
-    private final RString 並び順の１件目;
-    private final RString 並び順の２件目;
-    private final RString 並び順の３件目;
-    private final RString 並び順の４件目;
-    private final RString 並び順の５件目;
+    private final RString 並び順の2件目;
+    private final RString 並び順の3件目;
+    private final RString 並び順の4件目;
+    private final RString 並び順の5件目;
+    private final RString 並び順の6件目;
     private final List<RString> 改頁項目List;
     private final YMDHMS システム日時;
     private final int 連番;
@@ -39,11 +39,11 @@ public class KyufujissekiKoshinkekkaIchiranReport extends Report<KyufujissekiKos
      *
      * @param 処理年月 FlexibleYearMonth
      * @param entity ChohyoShutsuryokuTaishoDateEntity
-     * @param 並び順の１件目 RString
-     * @param 並び順の２件目 RString
-     * @param 並び順の３件目 RString
-     * @param 並び順の４件目 RString
-     * @param 並び順の５件目 RString
+     * @param 並び順の2件目 RString
+     * @param 並び順の3件目 RString
+     * @param 並び順の4件目 RString
+     * @param 並び順の5件目 RString
+     * @param 並び順の6件目 RString
      * @param 改頁項目List List<RString>
      * @param システム日時 YMDHMS
      * @param 連番 int
@@ -51,15 +51,15 @@ public class KyufujissekiKoshinkekkaIchiranReport extends Report<KyufujissekiKos
      * @param 合計 int
      */
     public KyufujissekiKoshinkekkaIchiranReport(FlexibleYearMonth 処理年月, ChohyoShutsuryokuTaishoDateEntity entity,
-            RString 並び順の１件目, RString 並び順の２件目, RString 並び順の３件目,
-            RString 並び順の４件目, RString 並び順の５件目, List<RString> 改頁項目List, YMDHMS システム日時, int 連番, boolean flag, int 合計) {
+            RString 並び順の2件目, RString 並び順の3件目, RString 並び順の4件目,
+            RString 並び順の5件目, RString 並び順の6件目, List<RString> 改頁項目List, YMDHMS システム日時, int 連番, boolean flag, int 合計) {
         this.処理年月 = 処理年月;
         this.entity = entity;
-        this.並び順の１件目 = 並び順の１件目;
-        this.並び順の２件目 = 並び順の２件目;
-        this.並び順の３件目 = 並び順の３件目;
-        this.並び順の４件目 = 並び順の４件目;
-        this.並び順の５件目 = 並び順の５件目;
+        this.並び順の2件目 = 並び順の2件目;
+        this.並び順の3件目 = 並び順の3件目;
+        this.並び順の4件目 = 並び順の4件目;
+        this.並び順の5件目 = 並び順の5件目;
+        this.並び順の6件目 = 並び順の6件目;
         this.改頁項目List = 改頁項目List;
         this.システム日時 = システム日時;
         this.連番 = 連番;
@@ -70,8 +70,8 @@ public class KyufujissekiKoshinkekkaIchiranReport extends Report<KyufujissekiKos
     @Override
     public void writeBy(ReportSourceWriter<KyufujissekiKoshinkekkaIchiranSource> reportSourceWriter) {
         IKyufujissekiKoshinkekkaIchiranEditor editor
-                = new KyufujissekiKoshinkekkaIchiranEditor(処理年月, entity, 並び順の１件目, 並び順の２件目,
-                        並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List, システム日時, 連番, flag, 合計);
+                = new KyufujissekiKoshinkekkaIchiranEditor(処理年月, entity, 並び順の2件目, 並び順の3件目,
+                        並び順の4件目, 並び順の5件目, 並び順の6件目, 改頁項目List, システム日時, 連番, flag, 合計);
         IKyufujissekiKoshinkekkaIchiranBuilder builder
                 = new KyufujissekiKoshinkekkaIchiranBuilder(editor);
         reportSourceWriter.writeLine(builder);

@@ -63,7 +63,7 @@ public class JukyushagenmenshinseiProcess extends BatchProcessBase<NinteijyotaiE
         list = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         抽出期間開始日 = new FlexibleDate(processParameter.get対象年度().getYearValue(), Integer.valueOf("04"), Integer.valueOf("01"));
-        抽出期間終了日 = 抽出期間開始日.minusDay(1).plusYear(1);
+        抽出期間終了日 = 抽出期間開始日.minusDay(1).minusYear(1);
         if (全て.equals(processParameter.get宛名抽出条件().getShichoson_Code().value()) || processParameter.get宛名抽出条件().getShichoson_Code().isEmpty()) {
             市町村コード = 地方公共団体.getLasdecCode_();
             市町村名称 = 地方公共団体.get市町村名();

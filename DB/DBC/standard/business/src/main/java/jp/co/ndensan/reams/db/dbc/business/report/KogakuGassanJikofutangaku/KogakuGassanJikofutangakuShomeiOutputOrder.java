@@ -18,7 +18,7 @@ public enum KogakuGassanJikofutangakuShomeiOutputOrder implements IReportItems {
     /**
      * 証記載保険者番号
      */
-    証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("\"DbWT37H1\".\"hokenshaNoIn\"")),
+    証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("\"DbWT37H1\".\"shoKisaiHokenshaNo\"")),
     /**
      * 自己負担額の差異
      */

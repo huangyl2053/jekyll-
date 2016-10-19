@@ -362,6 +362,10 @@
     </resultMap>
     
     <resultMap  id="利用者負担割合明細最新_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.InsFutanwariaiJohoTempResultEntity" autoMapping="true">
+        <id column="nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="rirekiNo" />
+        <id column="edaNo" />
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="年度" column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <association property="利用者負担割合明細最新Entity" resultMap="利用者負担割合Newest_resultMap"/>
