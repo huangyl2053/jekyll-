@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1050021;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
