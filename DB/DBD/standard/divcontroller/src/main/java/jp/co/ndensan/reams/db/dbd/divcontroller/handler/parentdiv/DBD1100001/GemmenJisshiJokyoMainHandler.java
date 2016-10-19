@@ -68,10 +68,12 @@ public class GemmenJisshiJokyoMainHandler {
         RString key = div.getGemmenJisshiJokyoJoken().getRadKijunBi().getSelectedKey();
         if (null != key && "1".equals(key.toString())) {
             div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(false);
+            div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setDisabled(false);
             div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setValue(new Decimal(RDate.getNowDate().getDayValue()));
         } else {
-            div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(true);
             div.getGemmenJisshiJokyoJoken().getTxtKijunBi().clearValue();
+            div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(true);
+            div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setDisabled(true);
         }
     }
 
@@ -143,11 +145,13 @@ public class GemmenJisshiJokyoMainHandler {
                 div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().clearSelectedItem();
                 div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setValue(new Decimal(基準日.toString()));
                 div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(false);
+                div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setDisabled(false);
             } else {
                 div.getGemmenJisshiJokyoJoken().getRadKijunBi().clearSelectedItem();
                 div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().setSelectedKey(new RString("2"));
                 div.getGemmenJisshiJokyoJoken().getTxtKijunBi().clearValue();
                 div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(true);
+                div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setDisabled(false);
             }
 
         }
