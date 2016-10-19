@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBE-0120-010 lishengli
  */
 public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYokaigoNinteiShinsakaiIchiranListDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -170,6 +170,16 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     @JsonIgnore
     public void  setTxtHyojiKikanTo(TextBoxDate txtHyojiKikanTo) {
         this.getHyojiJoken().setTxtHyojiKikanTo(txtHyojiKikanTo);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtSaidaiHyojiKensu() {
+        return this.getHyojiJoken().getTxtSaidaiHyojiKensu();
+    }
+
+    @JsonIgnore
+    public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+        this.getHyojiJoken().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
     }
 
     @JsonIgnore

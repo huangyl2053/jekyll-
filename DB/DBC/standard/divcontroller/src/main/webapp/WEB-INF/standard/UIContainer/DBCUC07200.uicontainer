@@ -23,7 +23,7 @@
      "layoutName": "DBC0720011",
      "layoutTitle": "住宅改修費支給申請一括審査・決定",
      "eventName": "申請修正",
-     "destroy": true,
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0710021",
@@ -37,7 +37,7 @@
      "layoutName": "DBC0710021",
      "layoutTitle": "住宅改修費支給申請登録",
      "eventName": "to申請一覧",
-     "destroy": true,
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0720011",
@@ -60,13 +60,27 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0710021",
      "layoutTitle": "住宅改修費支給申請登録",
-     "eventName": "処理完了",
-     "destroy": true,
+     "eventName": "to住宅改修費事前申請登録",
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC0720011",
-     "toLayoutTitle": "住宅改修費支給申請一括審査・決定",
-     "toState": "申請審査"
+     "toLayoutName": "DBC0700011",
+     "toLayoutTitle": "住宅改修費事前申請登録",
+     "toState": "照会"
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0700011",
+     "layoutTitle": "住宅改修費事前申請登録",
+     "eventName": "戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0710021",
+     "toLayoutTitle": "住宅改修費支給申請登録",
+     "toState": ""
     }
    ]
   }

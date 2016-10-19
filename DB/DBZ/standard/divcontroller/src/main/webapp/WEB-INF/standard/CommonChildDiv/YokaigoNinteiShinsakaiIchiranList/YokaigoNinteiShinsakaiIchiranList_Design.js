@@ -51,6 +51,10 @@ var DBZ;
                 return new UZA.TextBoxDate(this.convFiledName("txtHyojiKikanTo"));
             };
 
+            Controls.prototype.txtSaidaiHyojiKensu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtSaidaiHyojiKensu"));
+            };
+
             Controls.prototype.radHyojiJokenWaritsukeMikanryo = function () {
                 return new UZA.RadioButton(this.convFiledName("radHyojiJokenWaritsukeMikanryo"));
             };

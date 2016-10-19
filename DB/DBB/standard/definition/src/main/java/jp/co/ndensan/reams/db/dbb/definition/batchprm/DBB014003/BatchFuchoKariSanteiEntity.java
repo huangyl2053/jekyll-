@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 
 /**
@@ -15,11 +16,18 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class BatchFuchoKariSanteiEntity {
+public class BatchFuchoKariSanteiEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private ReportId 帳票分類ID;
     private ReportId 帳票ID;
     private long 出力順ID;
+
+    /**
+     * コンストラクタです。
+     */
+    public BatchFuchoKariSanteiEntity() {
+    }
 
     /**
      * コンストラクタです。

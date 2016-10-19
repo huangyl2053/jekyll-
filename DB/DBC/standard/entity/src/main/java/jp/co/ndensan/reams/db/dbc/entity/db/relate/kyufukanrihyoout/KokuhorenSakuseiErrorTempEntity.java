@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -29,9 +30,9 @@ public class KokuhorenSakuseiErrorTempEntity extends DbTableEntityBase<Kokuhoren
     @TempTableColumnOrder(3)
     private RString hihokenshaNo;
     @TempTableColumnOrder(4)
-    private RString key1;
+    private FlexibleYearMonth key1;
     @TempTableColumnOrder(5)
-    private RString key2;
+    private FlexibleYearMonth key2;
     @TempTableColumnOrder(6)
     private RString key3;
     @TempTableColumnOrder(7)

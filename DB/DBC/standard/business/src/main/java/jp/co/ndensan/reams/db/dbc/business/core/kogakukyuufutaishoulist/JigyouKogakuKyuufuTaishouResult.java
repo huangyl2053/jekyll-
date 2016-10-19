@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuKyufuTaishoshaGokei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuKyufuTaishoshaMeisai;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JigyouKogakuKyuufuTaishouResult {
+public class JigyouKogakuKyuufuTaishouResult implements Serializable {
 
     private JigyoKogakuKyufuTaishoshaMeisai 給付対象者明細entity;
     private JigyoKogakuKyufuTaishoshaGokei 給付対象者合計entity;

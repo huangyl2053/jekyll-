@@ -87,6 +87,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
     private static final RString 所得照会票一覧_EUCファイル名 = new RString("ShotokushokaihyoHakkoIchiran.csv");
     private static final RString 定数_処理年度 = new RString("処理年度");
     private static final RString 定数_照会年月日 = new RString("照会年月日");
+    private static final RString 定数_出力対象 = new RString("出力対象");
     private static final RString 定数_テストプリント = new RString("テストプリント");
     private static final RString 定数_有り = new RString("有り");
     private static final RString 定数_無し = new RString("無し");
@@ -205,6 +206,9 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
                 .concat(processParameter.get照会年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()));
         出力条件リスト.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append((FORMAT_LEFT).concat(定数_出力対象).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+                .concat(processParameter.get出力対象()));
         builder = new RStringBuilder();
         RString 有無し;
         if (processParameter.isテストプリント()) {

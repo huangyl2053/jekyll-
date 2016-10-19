@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojuminhyotruku;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kaigojuminhyotruku.KaigojuminHyotrukuMapperParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -24,7 +23,7 @@ import lombok.Setter;
 public class KaigojuminHyotrukuProcessParameter implements IBatchProcessParameter {
 
     private RDateTime shoriTimestamp;
-    private List<RString> shichosonCode;
+    private RString shichosonCode;
 
     /**
      * コンストラクタ

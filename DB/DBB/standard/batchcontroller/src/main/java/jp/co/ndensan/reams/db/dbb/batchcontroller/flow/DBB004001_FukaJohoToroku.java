@@ -1,5 +1,8 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
+import java.util.HashMap;
+import java.util.Map;
+import jp.co.ndensan.reams.ca.cax.batchcontroller.step.choteitoroku.ChoteiDataCheckProcess;
 import jp.co.ndensan.reams.ca.cax.definition.batchprm.ChoteiTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB004001.FukaJohoHenshuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB004001.FukaJohoInsertProcess;
@@ -7,7 +10,6 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJo
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -17,15 +19,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTorokuParameter> {
 
+    private static final String HENSHU_PROCESS = "fukaJohoHenshuProcess";
+    private static final String FUKAJOHOINSERTPROCESS = "fukaJohoInsertProcess";
+    private static final String CALL_CHOTEITOROKU_FLOW = "ChoteiTorokuFlow";
+
     @Override
     protected void defineFlow() {
         executeStep(HENSHU_PROCESS);
         executeStep(CALL_CHOTEITOROKU_FLOW);
         executeStep(FUKAJOHOINSERTPROCESS);
     }
-
-    private static final String HENSHU_PROCESS = "fukaJohoHenshuProcess";
-    private static final String FUKAJOHOINSERTPROCESS = "fukaJohoInsertProcess";
 
     /**
      * 賦課の情報を一括登録事前データを編集します。
@@ -37,8 +40,6 @@ public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTo
         return loopBatch(FukaJohoHenshuProcess.class).arguments(getParameter()
                 .toFukaJohoHenshuProcessParameter()).define();
     }
-    private static final String CALL_CHOTEITOROKU_FLOW = "ChoteiTorokuFlow";
-    private static final RString BATCH_ID = new RString("ChoteiTorokuFlow");
 
     /**
      * 賦課情報一時テーブルのすべての要素を取得します。
@@ -47,9 +48,11 @@ public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTo
      */
     @Step(CALL_CHOTEITOROKU_FLOW)
     protected IBatchFlowCommand callChoteiTorokuFlow() {
-        ChoteiTorokuParameter choteiTorokuParameter = new ChoteiTorokuParameter();
-        choteiTorokuParameter.setSchema(new RString("rgdb"));
-        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, choteiTorokuParameter).define();
+        Map param = new HashMap();
+        param.put(new RString(ChoteiTorokuParameter.SCHEMA), new RString("rgdb"));
+        param.put(new RString(ChoteiTorokuParameter.調定ID採番), Boolean.valueOf(true));
+        param.put(new RString(ChoteiTorokuParameter.収納ID採番), Boolean.valueOf(true));
+        return simpleBatch(ChoteiDataCheckProcess.class).arguments(param).define();
     }
 
     /**

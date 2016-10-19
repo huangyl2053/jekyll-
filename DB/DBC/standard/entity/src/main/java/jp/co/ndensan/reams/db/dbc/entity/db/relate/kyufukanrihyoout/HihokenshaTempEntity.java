@@ -5,12 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
@@ -24,8 +27,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @OnNextSchema("rgdb")
 public class HihokenshaTempEntity extends DbTableEntityBase<HihokenshaTempEntity> implements IDbAccessable {
 
+    @PrimaryKey
     @TempTableColumnOrder(1)
-    private RString exRenban;
+    private Decimal exRenban;
     @TempTableColumnOrder(2)
     private RString exHokenshaNo;
     @TempTableColumnOrder(3)
@@ -67,7 +71,7 @@ public class HihokenshaTempEntity extends DbTableEntityBase<HihokenshaTempEntity
     @TempTableColumnOrder(21)
     private RString shimei50onKana;
     @TempTableColumnOrder(22)
-    private RString shikibetsuCode;
+    private ShikibetsuCode shikibetsuCode;
     @TempTableColumnOrder(23)
     private FlexibleDate shikakuShutokuYmd;
     @TempTableColumnOrder(24)

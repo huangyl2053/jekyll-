@@ -66,6 +66,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
     private static ShoriName 処理名;
     private int レコード件数 = 0;
     private int 振込明細レコード件数 = 0;
+    private int 被保険者台帳_宛名情報レコード件数 = 0;
 
     private static final String 口座振込データの登録処理 = "kouzaFurikomiDataInsert";
     private static final String 一時テーブル作成_振込明細 = "tempTableCreateMaisai";
@@ -149,7 +150,13 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
 
         if (0 != 振込明細レコード件数) {
             executeStep(被保険者台帳_宛名情報);
-            executeStep(被保険者台帳_宛名情報_エラー登録);
+            被保険者台帳_宛名情報レコード件数 = getResult(
+                    Integer.class, new RString(被保険者台帳_宛名情報),
+                    HihokenshaAtenaJohoProcess.PARAMETER_OUT_COUNT);
+
+            if (0 == 被保険者台帳_宛名情報レコード件数) {
+                executeStep(被保険者台帳_宛名情報_エラー登録);
+            }
             executeStep(還口座払の口座情報);
             executeStep(高額の口座情報);
             executeStep(償還受領委任払の口座情報);

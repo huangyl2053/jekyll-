@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -43,6 +45,17 @@ public class IkenshoSakuseiIraiIchiranhyoReport extends Report<IkenshoSakuseiIra
     @Override
     public void writeBy(ReportSourceWriter<IkenshoSakuseiIraiIchiranhyoReportSource> reportSourceWriter) {
         int index = ZERO;
+        Collections.sort(bodyItemList, new Comparator<IkenshoSakuseiIraiIchiranhyoItem>() {
+            @Override
+            public int compare(IkenshoSakuseiIraiIchiranhyoItem entity1, IkenshoSakuseiIraiIchiranhyoItem entity2) {
+                if (entity1.getListIchiranhyo_2().compareTo(entity2.getListIchiranhyo_2()) == 0) {
+                    return entity1.getListIchiranhyo_3().compareTo(entity2.getListIchiranhyo_3());
+                } else {
+                    entity1.getListIchiranhyo_2().compareTo(entity2.getListIchiranhyo_2());
+                }
+                return 0;
+            }
+        });
         RString keyBreak = RString.EMPTY;
         for (IkenshoSakuseiIraiIchiranhyoItem item : bodyItemList) {
             if (!keyBreak.equals(item.getShujiiIryokikanCode())) {

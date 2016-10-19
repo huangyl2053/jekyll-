@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2017TsuchishoHakkogoIdoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteitsuchishoikkatsuhakko.TmpHonsanteiTsuchishoTableEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0301YokinShubetsuPatternEntity;
@@ -25,11 +24,8 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0302KinyuKikanEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0303KinyuKikanShitenEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0310KozaEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
-import jp.co.ndensan.reams.ue.uex.definition.core.RenkeiShubetsu;
-import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
-import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuSeidoCode;
-import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCode;
+import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -989,41 +985,30 @@ public class HonsanteiTsuchishoIkkatsuHakkoSyori {
             TmpHonsanteiTsuchishoTableEntity tmpEntity) {
         tmpEntity.setUeT0511after_gyomuCode(対象者_追加含む_情報.getGyomuCode());
         tmpEntity.setUeT0511after_shoriNendo(対象者_追加含む_情報.getShoriNendo());
-        if (対象者_追加含む_情報.getTsuchiNaiyoCode() != null) {
-            tmpEntity.setUeT0511after_tsuchiNaiyoCode(new TsuchiNaiyoCode(対象者_追加含む_情報.getTsuchiNaiyoCode()));
-        }
+        tmpEntity.setUeT0511after_tsuchiNaiyoCode(対象者_追加含む_情報.getTsuchiNaiyoCode());
         tmpEntity.setUeT0511after_shoriTaishoYM(対象者_追加含む_情報.getShoriTaishoYM());
         tmpEntity.setUeT0511after_kisoNenkinNo(対象者_追加含む_情報.getKisoNenkinNo());
         tmpEntity.setUeT0511after_nenkinCode(対象者_追加含む_情報.getNenkinCode());
         tmpEntity.setUeT0511after_koseiCityCode(対象者_追加含む_情報.getKoseiCityCode());
         tmpEntity.setUeT0511after_renban(対象者_追加含む_情報.getRenban());
         tmpEntity.setUeT0511after_shoriTimestamp(対象者_追加含む_情報.getShoriTimestamp());
-        if (対象者_追加含む_情報.getRenkeiShubetsu() != null) {
-            tmpEntity.setUeT0511after_renkeiShubetsu(new RenkeiShubetsu(対象者_追加含む_情報.getRenkeiShubetsu()));
-        }
+        tmpEntity.setUeT0511after_renkeiShubetsu(対象者_追加含む_情報.getRenkeiShubetsu());
         tmpEntity.setUeT0511after_hosokuTsuki(対象者_追加含む_情報.getHosokuTsuki());
         tmpEntity.setUeT0511after_tenbikiTsuki(対象者_追加含む_情報.getTenbikiTsuki());
         tmpEntity.setUeT0511after_shikibetsuCode(対象者_追加含む_情報.getShikibetsuCode());
         tmpEntity.setUeT0511after_hihokenshaNo(対象者_追加含む_情報.getHihokenshaNo());
         tmpEntity.setUeT0511after_kokuhoSetaiCode(対象者_追加含む_情報.getKokuhoSetaiCode());
         tmpEntity.setUeT0511after_dtCityCode(対象者_追加含む_情報.getDtCityCode());
-        tmpEntity.setUeT0511after_dtTokubetsuChoshuGimushaCode(対象者_追加含む_情報.getDtTokubetsuChoshuGimushaCode());
-        if (対象者_追加含む_情報.getDtTsuchiNaiyoCode() != null) {
-            tmpEntity.setUeT0511after_dtTsuchiNaiyoCode(new TsuchiNaiyoCode(対象者_追加含む_情報.getDtTsuchiNaiyoCode()));
-        }
+        tmpEntity.setUeT0511after_dtTokubetsuChoshuGimushaCode(getCode(対象者_追加含む_情報.getDtTokubetsuChoshuGimushaCode()));
+        tmpEntity.setUeT0511after_dtTsuchiNaiyoCode(対象者_追加含む_情報.getDtTsuchiNaiyoCode());
         tmpEntity.setUeT0511after_dtBaitaiCode(対象者_追加含む_情報.getDtBaitaiCode());
-        if (対象者_追加含む_情報.getDtTokubetsuChoshuSeidoCode() != null) {
-            tmpEntity.setUeT0511after_dtTokubetsuChoshuSeidoCode(
-                    new TokubetsuChoshuSeidoCode(対象者_追加含む_情報.getDtTokubetsuChoshuSeidoCode()));
-        }
+        tmpEntity.setUeT0511after_dtTokubetsuChoshuSeidoCode(対象者_追加含む_情報.getDtTokubetsuChoshuSeidoCode());
         tmpEntity.setUeT0511after_dtSakuseiYMD(対象者_追加含む_情報.getDtSakuseiYMD());
         tmpEntity.setUeT0511after_dtKisoNenkinNo(対象者_追加含む_情報.getDtKisoNenkinNo());
         tmpEntity.setUeT0511after_dtNenkinCode(対象者_追加含む_情報.getDtNenkinCode());
         tmpEntity.setUeT0511after_dtYobi1(対象者_追加含む_情報.getDtYobi1());
         tmpEntity.setUeT0511after_dtBirthDay(対象者_追加含む_情報.getDtBirthDay());
-        if (対象者_追加含む_情報.getDtSeibetsu() != null) {
-            tmpEntity.setUeT0511after_dtSeibetsu(new SeibetsuCodeNenkinTokucho(対象者_追加含む_情報.getDtSeibetsu()));
-        }
+        tmpEntity.setUeT0511after_dtSeibetsu(対象者_追加含む_情報.getDtSeibetsu());
         tmpEntity.setUeT0511after_dtKanaShimei(対象者_追加含む_情報.getDtKanaShimei());
         tmpEntity.setUeT0511after_dtShiftCode1(対象者_追加含む_情報.getDtShiftCode1());
         tmpEntity.setUeT0511after_dtKanjiShimei(対象者_追加含む_情報.getDtKanjiShimei());
@@ -1056,41 +1041,30 @@ public class HonsanteiTsuchishoIkkatsuHakkoSyori {
             TmpHonsanteiTsuchishoTableEntity tmpEntity) {
         tmpEntity.setUeT0511_gyomuCode(対象者_追加含む_情報.getGyomuCode());
         tmpEntity.setUeT0511_shoriNendo(対象者_追加含む_情報.getShoriNendo());
-        if (対象者_追加含む_情報.getTsuchiNaiyoCode() != null) {
-            tmpEntity.setUeT0511_tsuchiNaiyoCode(new TsuchiNaiyoCode(対象者_追加含む_情報.getTsuchiNaiyoCode()));
-        }
+        tmpEntity.setUeT0511_tsuchiNaiyoCode(対象者_追加含む_情報.getTsuchiNaiyoCode());
         tmpEntity.setUeT0511_shoriTaishoYM(対象者_追加含む_情報.getShoriTaishoYM());
         tmpEntity.setUeT0511_kisoNenkinNo(対象者_追加含む_情報.getKisoNenkinNo());
         tmpEntity.setUeT0511_nenkinCode(対象者_追加含む_情報.getNenkinCode());
         tmpEntity.setUeT0511_koseiCityCode(対象者_追加含む_情報.getKoseiCityCode());
         tmpEntity.setUeT0511_renban(対象者_追加含む_情報.getRenban());
         tmpEntity.setUeT0511_shoriTimestamp(対象者_追加含む_情報.getShoriTimestamp());
-        if (対象者_追加含む_情報.getRenkeiShubetsu() != null) {
-            tmpEntity.setUeT0511_renkeiShubetsu(new RenkeiShubetsu(対象者_追加含む_情報.getRenkeiShubetsu()));
-        }
+        tmpEntity.setUeT0511_renkeiShubetsu(対象者_追加含む_情報.getRenkeiShubetsu());
         tmpEntity.setUeT0511_hosokuTsuki(対象者_追加含む_情報.getHosokuTsuki());
         tmpEntity.setUeT0511_tenbikiTsuki(対象者_追加含む_情報.getTenbikiTsuki());
         tmpEntity.setUeT0511_shikibetsuCode(対象者_追加含む_情報.getShikibetsuCode());
         tmpEntity.setUeT0511_hihokenshaNo(対象者_追加含む_情報.getHihokenshaNo());
         tmpEntity.setUeT0511_kokuhoSetaiCode(対象者_追加含む_情報.getKokuhoSetaiCode());
         tmpEntity.setUeT0511_dtCityCode(対象者_追加含む_情報.getDtCityCode());
-        tmpEntity.setUeT0511_dtTokubetsuChoshuGimushaCode(対象者_追加含む_情報.getDtTokubetsuChoshuGimushaCode());
-        if (対象者_追加含む_情報.getDtTsuchiNaiyoCode() != null) {
-            tmpEntity.setUeT0511_dtTsuchiNaiyoCode(new TsuchiNaiyoCode(対象者_追加含む_情報.getDtTsuchiNaiyoCode()));
-        }
+        tmpEntity.setUeT0511_dtTokubetsuChoshuGimushaCode(getCode(対象者_追加含む_情報.getDtTokubetsuChoshuGimushaCode()));
+        tmpEntity.setUeT0511_dtTsuchiNaiyoCode(対象者_追加含む_情報.getDtTsuchiNaiyoCode());
         tmpEntity.setUeT0511_dtBaitaiCode(対象者_追加含む_情報.getDtBaitaiCode());
-        if (対象者_追加含む_情報.getDtTokubetsuChoshuSeidoCode() != null) {
-            tmpEntity.setUeT0511_dtTokubetsuChoshuSeidoCode(
-                    new TokubetsuChoshuSeidoCode(対象者_追加含む_情報.getDtTokubetsuChoshuSeidoCode()));
-        }
+        tmpEntity.setUeT0511_dtTokubetsuChoshuSeidoCode(対象者_追加含む_情報.getDtTokubetsuChoshuSeidoCode());
         tmpEntity.setUeT0511_dtSakuseiYMD(対象者_追加含む_情報.getDtSakuseiYMD());
         tmpEntity.setUeT0511_dtKisoNenkinNo(対象者_追加含む_情報.getDtKisoNenkinNo());
         tmpEntity.setUeT0511_dtNenkinCode(対象者_追加含む_情報.getDtNenkinCode());
         tmpEntity.setUeT0511_dtYobi1(対象者_追加含む_情報.getDtYobi1());
         tmpEntity.setUeT0511_dtBirthDay(対象者_追加含む_情報.getDtBirthDay());
-        if (対象者_追加含む_情報.getDtSeibetsu() != null) {
-            tmpEntity.setUeT0511_dtSeibetsu(new SeibetsuCodeNenkinTokucho(対象者_追加含む_情報.getDtSeibetsu()));
-        }
+        tmpEntity.setUeT0511_dtSeibetsu(対象者_追加含む_情報.getDtSeibetsu());
         tmpEntity.setUeT0511_dtKanaShimei(対象者_追加含む_情報.getDtKanaShimei());
         tmpEntity.setUeT0511_dtShiftCode1(対象者_追加含む_情報.getDtShiftCode1());
         tmpEntity.setUeT0511_dtKanjiShimei(対象者_追加含む_情報.getDtKanjiShimei());
