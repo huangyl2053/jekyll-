@@ -160,8 +160,6 @@
         DbT1001Hiho."logicalDeletedFlag" <![CDATA[<>]]> TRUE
         AND
         DbT1001Hiho."hihokennshaKubunCode" = '2'
-        ORDER BY
-        #{shutsuryokuSort}
         UNION
         SELECT
         PSM."shikibetsuCode" AS "PSM_shikibetsuCode",
@@ -190,8 +188,6 @@
         DbT1001Hiho."jushochiTokureiFlag" = '1'
         AND
         DbT1001Hiho."hihokennshaKubunCode" = '2'
-        ORDER BY
-        #{shutsuryokuSort}
         UNION
         SELECT
         PSM."shikibetsuCode" AS "PSM_shikibetsuCode",

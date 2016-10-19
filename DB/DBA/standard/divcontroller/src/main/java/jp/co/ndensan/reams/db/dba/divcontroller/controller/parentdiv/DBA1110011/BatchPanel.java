@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class BatchPanel {
 
     private static final RString 未回収者リスト = new RString("key1");
-    private static final RString 開始日と終了日両方 = new RString("開始日と終了日両方");
+    private static final RString エラーメッセージ = new RString("開始日および終了日");
 
     /**
      * 被保険者証発行管理簿を画面初期化処理しました。
@@ -78,7 +78,7 @@ public class BatchPanel {
         if (flg) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(
-                    new BatchPanel.BatchPanelMessages(UrErrorMessages.必須, 開始日と終了日両方.toString())));
+                    new BatchPanel.BatchPanelMessages(UrErrorMessages.必須, エラーメッセージ.toString())));
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         return ResponseData.of(div).respond();
