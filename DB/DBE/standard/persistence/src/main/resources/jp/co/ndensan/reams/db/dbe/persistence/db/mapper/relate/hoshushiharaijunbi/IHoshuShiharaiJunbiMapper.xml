@@ -7,6 +7,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbi.IHoshuShiharaiJunbiMapper">
     <resultMap id="resultMap_HoshuShiharaiJunbiRelateEntity"
                 type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity" autoMapping="true">
+        <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="shujiiIryoKikanCode" column="shujiiIryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -136,6 +137,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
             resultOrdered="true" fetchSize="500">
         SELECT  
+                T5101."shinseishoKanriNo" AS "shinseishoKanriNo",
                 T5601."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode",
                 T7051."shichosonMeisho" AS "shichosonMeisho",
                 T5910."jigyoshaMeisho" AS "jigyoshaMeisho",
@@ -285,6 +287,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
             resultOrdered="true" fetchSize="500">
         SELECT  
+                T5101."shinseishoKanriNo" AS "shinseishoKanriNo",
                 T5602."shujiiIryoKikanCode" AS "shujiiIryoKikanCode",
                 T7051."shichosonMeisho" AS "shichosonMeisho",
                 T5911."iryoKikanMeisho" AS "iryoKikanMeisho",
@@ -335,6 +338,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
             resultOrdered="true" fetchSize="500">
         SELECT  
+                T5101."shinseishoKanriNo" AS "shinseishoKanriNo",
                 T5602."shujiiIryoKikanCode" AS "shujiiIryoKikanCode",
                 T5911."yubinNo" AS "yubinNo",
                 T5911."jusho" AS "jusho",
@@ -567,7 +571,8 @@
     <select id="get介護認定審査会委員報酬支払明細書" resultMap="resultMap_HoshuShiharaiJunbiRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
             resultOrdered="true" fetchSize="500">
-        SELECT 
+        SELECT
+            T5101."shinseishoKanriNo" AS "shinseishoKanriNo",
             T7051."shichosonMeisho" AS "shichosonMeisho",         
             T5603."shinsakaiIinCode" AS "shinsakaiIinCode",          
             T5594."shinsakaiIinShimei" AS "shinsakaiIinShimei",          
