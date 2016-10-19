@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.futangendogaku.nintei;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.RiyoshaFutanDankaiHanni;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.YochokinShinkokuKubun;
@@ -155,15 +156,15 @@ public class NinteiBatchMain extends BatchProcessBase<ShoninShoriEntity> {
             FutangendogakuNinteiService service = FutangendogakuNinteiService.createInstance();
             RString 旧措置者区分 = entity.get介護保険負担限度額認定Entity().getKyusochishaKubun();
             RString 利用者負担段階 = entity.get介護保険負担限度額認定Entity().getRiyoshaFutanDankai();
-            shoninKekkaTempEntity.setShokuhiFutanGendogaku(new Decimal(service.load食費負担限度額候補(旧措置者区分, parameter.get決定日(), 利用者負担段階).get(0).toString()));
-            shoninKekkaTempEntity.setUnitTypeKoshitsu(new Decimal(service.loadユニット型個室負担限度額候補(旧措置者区分, parameter.get決定日(), 利用者負担段階).get(0).toString()));
-            shoninKekkaTempEntity.setUnitTypeJunKoshitsu(new Decimal(
-                    service.loadユニット型準個室負担限度額候補(旧措置者区分, parameter.get決定日(), 利用者負担段階).get(0).toString()));
-            shoninKekkaTempEntity.setJuraiTypeKoshitsu_Tokuyo(new Decimal(
-                    service.load従来型個室特養等負担限度額候補(旧措置者区分, parameter.get決定日(), 利用者負担段階).get(0).toString()));
-            shoninKekkaTempEntity.setJuraiTypeKoshitsu_Roken_Ryoyo(new Decimal(
-                    service.load従来型個室老健等負担限度額候補(旧措置者区分, parameter.get決定日(), 利用者負担段階).get(0).toString()));
-            shoninKekkaTempEntity.setTashoshitsu(new Decimal(service.load多床室負担限度額候補(旧措置者区分, parameter.get決定日(), 利用者負担段階).get(0).toString()));
+            shoninKekkaTempEntity.setShokuhiFutanGendogaku(listToDecimal(service.load食費負担限度額候補(旧措置者区分, parameter.get決定日(), 利用者負担段階)));
+            shoninKekkaTempEntity.setUnitTypeKoshitsu(listToDecimal(service.loadユニット型個室負担限度額候補(旧措置者区分, parameter.get決定日(), 利用者負担段階)));
+            shoninKekkaTempEntity.setUnitTypeJunKoshitsu(listToDecimal(
+                    service.loadユニット型準個室負担限度額候補(旧措置者区分, parameter.get決定日(), 利用者負担段階)));
+            shoninKekkaTempEntity.setJuraiTypeKoshitsu_Tokuyo(listToDecimal(
+                    service.load従来型個室特養等負担限度額候補(旧措置者区分, parameter.get決定日(), 利用者負担段階)));
+            shoninKekkaTempEntity.setJuraiTypeKoshitsu_Roken_Ryoyo(listToDecimal(
+                    service.load従来型個室老健等負担限度額候補(旧措置者区分, parameter.get決定日(), 利用者負担段階)));
+            shoninKekkaTempEntity.setTashoshitsu(listToDecimal(service.load多床室負担限度額候補(旧措置者区分, parameter.get決定日(), 利用者負担段階)));
         } else {
             shoninKekkaTempEntity.setShokuhiFutanGendogaku(Decimal.ZERO);
             shoninKekkaTempEntity.setUnitTypeKoshitsu(Decimal.ZERO);
@@ -173,6 +174,14 @@ public class NinteiBatchMain extends BatchProcessBase<ShoninShoriEntity> {
             shoninKekkaTempEntity.setTashoshitsu(Decimal.ZERO);
         }
 
+    }
+
+    private Decimal listToDecimal(List<RString> list) {
+        if (!list.isEmpty()) {
+            return new Decimal(list.get(0).toString());
+        } else {
+            return null;
+        }
     }
 
     private void 配偶者情報処理(ShoninKekkaTempEntity shoninKekkaTempEntity,
