@@ -64,18 +64,11 @@
         <result property="dtTeishiYM" column="ueT0511NenkinTokuchoKaifuJoho_dtTeishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dtYobi4Juminzei" column="ueT0511NenkinTokuchoKaifuJoho_dtYobi4Juminzei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dtKojinNo" column="ueT0511NenkinTokuchoKaifuJoho_dtKojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuhoYoteiSoshitsuKubun" column="ueT0511NenkinTokuchoKaifuJoho_kokuhoYoteiSoshitsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <sql id="table_UeT0511NenkinTokuchoKaifuJoho">
-        rgue."UeT0511NenkinTokuchoKaifuJoho"
-    </sql>
-
-    <sql id="table_UeV0511NenkinTokuchoKaifuJoho">
-        rgue."UeV0511NenkinTokuchoKaifuJoho"
-    </sql>
-
-    <sql id="table_UeV0511NenkinTokuchoKaifuJohoLatest">
-        rgue."UeV0511NenkinTokuchoKaifuJohoLatest"
+        rgdb."UeT0511NenkinTokuchoKaifuJoho"
     </sql>
 
     <sql id="as_UeT0511NenkinTokuchoKaifuJoho">
@@ -134,7 +127,8 @@
         "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku8" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku8",
         "UeT0511NenkinTokuchoKaifuJoho"."dtTeishiYM" AS "ueT0511NenkinTokuchoKaifuJoho_dtTeishiYM",
         "UeT0511NenkinTokuchoKaifuJoho"."dtYobi4Juminzei" AS "ueT0511NenkinTokuchoKaifuJoho_dtYobi4Juminzei",
-        "UeT0511NenkinTokuchoKaifuJoho"."dtKojinNo" AS "ueT0511NenkinTokuchoKaifuJoho_dtKojinNo"
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKojinNo" AS "ueT0511NenkinTokuchoKaifuJoho_dtKojinNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."kokuhoYoteiSoshitsuKubun" as "ueT0511NenkinTokuchoKaifuJoho_kokuhoYoteiSoshitsuKubun"
     </sql>
     <sql id="allColumn">
         "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode",
@@ -188,7 +182,8 @@
         "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku8",
         "UeT0511NenkinTokuchoKaifuJoho"."dtTeishiYM",
         "UeT0511NenkinTokuchoKaifuJoho"."dtYobi4Juminzei",
-        "UeT0511NenkinTokuchoKaifuJoho"."dtKojinNo"
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKojinNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."kokuhoYoteiSoshitsuKubun"
     </sql>
     <select resultOrdered="true" id="select" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
         SELECT
@@ -319,8 +314,13 @@
         <where>
                 "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
-                AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
+                AND (
+                    "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
+                    OR "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+                )
+                AND ("UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
+                    OR "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '10'
+                )
         </where>
     </select>
     <select resultOrdered="true" id="selectDec" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
