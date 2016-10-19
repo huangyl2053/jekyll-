@@ -42,6 +42,16 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
     private static final RString 性別_男 = new RString("男");
     private static final RString 性別_女 = new RString("女");
     private static final RString 給付額減額記載解除フラグ_解除する = new RString("解除する");
+    private static final int 並び順1 = 1;
+    private static final int 並び順2 = 2;
+    private static final int 並び順3 = 3;
+    private static final int 並び順4 = 4;
+    private static final int 並び順5 = 5;
+    private static final int 改頁1 = 1;
+    private static final int 改頁2 = 2;
+    private static final int 改頁3 = 3;
+    private static final int 改頁4 = 4;
+    private static final int 改頁5 = 5;
 
     /**
      *
@@ -66,16 +76,16 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                 データリスト.setページ数(new RString(String.valueOf(pageCount)));
                 データリスト.set市町村コード(kyokaisogGaitoshaListEntity.get市町村コード());
                 データリスト.set市町村名(kyokaisogGaitoshaListEntity.get市町村名());
-                データリスト.set並び順1(null);
-                データリスト.set並び順2(null);
-                データリスト.set並び順3(null);
-                データリスト.set並び順4(null);
-                データリスト.set並び順5(null);
-                データリスト.set改頁1(null);
-                データリスト.set改頁2(null);
-                データリスト.set改頁3(null);
-                データリスト.set改頁4(null);
-                データリスト.set改頁5(null);
+                データリスト.set並び順1(kyokaisogGaitoshaListEntity.get並び順().get(並び順1));
+                データリスト.set並び順2(kyokaisogGaitoshaListEntity.get並び順().get(並び順2));
+                データリスト.set並び順3(kyokaisogGaitoshaListEntity.get並び順().get(並び順3));
+                データリスト.set並び順4(kyokaisogGaitoshaListEntity.get並び順().get(並び順4));
+                データリスト.set並び順5(kyokaisogGaitoshaListEntity.get並び順().get(並び順5));
+                データリスト.set改頁1(kyokaisogGaitoshaListEntity.get改頁().get(改頁1));
+                データリスト.set改頁2(kyokaisogGaitoshaListEntity.get改頁().get(改頁2));
+                データリスト.set改頁3(kyokaisogGaitoshaListEntity.get改頁().get(改頁3));
+                データリスト.set改頁4(kyokaisogGaitoshaListEntity.get改頁().get(改頁4));
+                データリスト.set改頁5(kyokaisogGaitoshaListEntity.get改頁().get(改頁5));
                 pageCount++;
             }
         }
@@ -113,17 +123,48 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         chohyoDataEntity.setページ数(new RString("1"));
         chohyoDataEntity.set市町村コード(kyokaisogGaitoshaListEntity.get市町村コード());
         chohyoDataEntity.set市町村名(kyokaisogGaitoshaListEntity.get市町村名());
-        //TODO QA#73393 改頁 ,並び順取得。
-        chohyoDataEntity.set並び順1(kyokaisogGaitoshaListEntity.get並び順());
-        chohyoDataEntity.set並び順2(null);
-        chohyoDataEntity.set並び順3(null);
-        chohyoDataEntity.set並び順4(null);
-        chohyoDataEntity.set並び順5(null);
-        chohyoDataEntity.set改頁1(kyokaisogGaitoshaListEntity.get改頁());
-        chohyoDataEntity.set改頁2(null);
-        chohyoDataEntity.set改頁3(null);
-        chohyoDataEntity.set改頁4(null);
-        chohyoDataEntity.set改頁5(null);
+        if (kyokaisogGaitoshaListEntity.get並び順().size() > 並び順1) {
+            chohyoDataEntity.set並び順1(kyokaisogGaitoshaListEntity.get並び順().get(並び順1));
+        } else if (kyokaisogGaitoshaListEntity.get並び順().size() > 並び順2) {
+            chohyoDataEntity.set並び順1(kyokaisogGaitoshaListEntity.get並び順().get(並び順1));
+            chohyoDataEntity.set並び順2(kyokaisogGaitoshaListEntity.get並び順().get(並び順2));
+        } else if (kyokaisogGaitoshaListEntity.get並び順().size() > 並び順3) {
+            chohyoDataEntity.set並び順1(kyokaisogGaitoshaListEntity.get並び順().get(並び順1));
+            chohyoDataEntity.set並び順2(kyokaisogGaitoshaListEntity.get並び順().get(並び順2));
+            chohyoDataEntity.set並び順3(kyokaisogGaitoshaListEntity.get並び順().get(並び順3));
+        } else if (kyokaisogGaitoshaListEntity.get並び順().size() > 並び順4) {
+            chohyoDataEntity.set並び順1(kyokaisogGaitoshaListEntity.get並び順().get(並び順1));
+            chohyoDataEntity.set並び順2(kyokaisogGaitoshaListEntity.get並び順().get(並び順2));
+            chohyoDataEntity.set並び順3(kyokaisogGaitoshaListEntity.get並び順().get(並び順3));
+            chohyoDataEntity.set並び順4(kyokaisogGaitoshaListEntity.get並び順().get(並び順4));
+        } else if (kyokaisogGaitoshaListEntity.get並び順().size() > 並び順5) {
+            chohyoDataEntity.set並び順1(kyokaisogGaitoshaListEntity.get並び順().get(並び順1));
+            chohyoDataEntity.set並び順2(kyokaisogGaitoshaListEntity.get並び順().get(並び順2));
+            chohyoDataEntity.set並び順3(kyokaisogGaitoshaListEntity.get並び順().get(並び順3));
+            chohyoDataEntity.set並び順4(kyokaisogGaitoshaListEntity.get並び順().get(並び順4));
+            chohyoDataEntity.set並び順5(kyokaisogGaitoshaListEntity.get並び順().get(並び順5));
+        }
+        if (kyokaisogGaitoshaListEntity.get改頁().size() > 改頁1) {
+            chohyoDataEntity.set改頁1(kyokaisogGaitoshaListEntity.get改頁().get(改頁1));
+        } else if (kyokaisogGaitoshaListEntity.get改頁().size() > 改頁2) {
+            chohyoDataEntity.set改頁1(kyokaisogGaitoshaListEntity.get改頁().get(改頁1));
+            chohyoDataEntity.set改頁2(kyokaisogGaitoshaListEntity.get改頁().get(改頁2));
+        } else if (kyokaisogGaitoshaListEntity.get改頁().size() > 改頁3) {
+            chohyoDataEntity.set改頁1(kyokaisogGaitoshaListEntity.get改頁().get(改頁1));
+            chohyoDataEntity.set改頁2(kyokaisogGaitoshaListEntity.get改頁().get(改頁2));
+            chohyoDataEntity.set改頁3(kyokaisogGaitoshaListEntity.get改頁().get(改頁3));
+        } else if (kyokaisogGaitoshaListEntity.get改頁().size() > 改頁4) {
+            chohyoDataEntity.set改頁1(kyokaisogGaitoshaListEntity.get改頁().get(改頁1));
+            chohyoDataEntity.set改頁2(kyokaisogGaitoshaListEntity.get改頁().get(改頁2));
+            chohyoDataEntity.set改頁3(kyokaisogGaitoshaListEntity.get改頁().get(改頁3));
+            chohyoDataEntity.set改頁4(kyokaisogGaitoshaListEntity.get改頁().get(改頁4));
+        } else if (kyokaisogGaitoshaListEntity.get改頁().size() > 改頁5) {
+            chohyoDataEntity.set改頁1(kyokaisogGaitoshaListEntity.get改頁().get(改頁1));
+            chohyoDataEntity.set改頁2(kyokaisogGaitoshaListEntity.get改頁().get(改頁2));
+            chohyoDataEntity.set改頁3(kyokaisogGaitoshaListEntity.get改頁().get(改頁3));
+            chohyoDataEntity.set改頁4(kyokaisogGaitoshaListEntity.get改頁().get(改頁4));
+            chohyoDataEntity.set改頁5(kyokaisogGaitoshaListEntity.get改頁().get(改頁5));
+        }
         return chohyoDataEntity;
     }
 
