@@ -99,8 +99,8 @@ public class HanyoListParamValidationHandler {
 
     private ValidationMessageControlDictionary createDictionary帳票出力項目チェック() {
         return new ValidationMessageControlDictionaryBuilder()
-                .add(HanyoListParamValidationMessage.帳票出力項目チェック２, div)
-                .add(HanyoListParamValidationMessage.帳票出力項目チェック３, div)
+                .add(HanyoListParamValidationMessage.帳票出力項目チェック２)
+                .add(HanyoListParamValidationMessage.帳票出力項目チェック３)
                 .build();
     }
 
