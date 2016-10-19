@@ -259,7 +259,7 @@ public class HoshuMasutaKoshinHandler {
             新規データ.setZaitakuShisetsuKubun(
                     div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlZaitakuShisetsuKubun().getSelectedValue());
             新規データ.setZaitakuShisetsuKubunCode(
-                    div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlIkenshoSakuseiKaisuKubun().getSelectedKey());
+                    div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlZaitakuShisetsuKubun().getSelectedKey());
             新規データ.setIkenshoSakuseiKaisuKubun(
                     div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlIkenshoSakuseiKaisuKubun().getSelectedValue());
             新規データ.setIkenshoSakuseiKaisuKubunCode(
@@ -279,7 +279,7 @@ public class HoshuMasutaKoshinHandler {
                 選択したデータ.setZaitakuShisetsuKubun(
                         div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlZaitakuShisetsuKubun().getSelectedValue());
                 選択したデータ.setZaitakuShisetsuKubunCode(
-                        div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlIkenshoSakuseiKaisuKubun().getSelectedKey());
+                        div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlZaitakuShisetsuKubun().getSelectedKey());
                 選択したデータ.setIkenshoSakuseiKaisuKubun(
                         div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlIkenshoSakuseiKaisuKubun().getSelectedValue());
                 選択したデータ.setIkenshoSakuseiKaisuKubunCode(

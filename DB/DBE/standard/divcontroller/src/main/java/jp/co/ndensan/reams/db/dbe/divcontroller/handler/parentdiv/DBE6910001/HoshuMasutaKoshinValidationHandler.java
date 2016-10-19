@@ -42,6 +42,55 @@ public class HoshuMasutaKoshinValidationHandler {
     }
 
     /**
+     * 保存するボタンを押下するとき、バリデーションチェックを行う。
+     *
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateForUpdate() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+
+        List<dgIkenShohoshuTankaIchiran_Row> ikenShohoshuTankaIchiranList = div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDgIkenShohoshuTankaIchiran().getDataSource();
+        List<dgChosainhoshuTankaIchiran_Row> chosainhoshuTankaIchiranList = div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDgChosainhoshuTankaIchiran().getDataSource();
+        List<dgHomonChosahoshuTankaIchiran_Row> homonChosahoshuTankaIchiranList = div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDgHomonChosahoshuTankaIchiran().getDataSource();
+        List<dgShinsakaiIinBetuTanka_Row> shinsakaiIinBetuTankaList = div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDgShinsakaiIinBetuTanka().getDataSource();
+        boolean ikenShohoshuTankaIchirannotUpdate = true;
+        boolean chosainhoshuTankaIchirannotUpdate = true;
+        boolean homonChosahoshuTankaIchirannotUpdate = true;
+        boolean shinsakaiIinBetuTankanotUpdate = true;
+
+        for (dgIkenShohoshuTankaIchiran_Row row : ikenShohoshuTankaIchiranList) {
+            if (!RString.EMPTY.equals(row.getColumnState())) {
+                ikenShohoshuTankaIchirannotUpdate = false;
+                break;
+            }
+        }
+        for (dgChosainhoshuTankaIchiran_Row row : chosainhoshuTankaIchiranList) {
+            if (!RString.EMPTY.equals(row.getColumnState())) {
+                chosainhoshuTankaIchirannotUpdate = false;
+                break;
+            }
+        }
+        for (dgHomonChosahoshuTankaIchiran_Row row : homonChosahoshuTankaIchiranList) {
+            if (!RString.EMPTY.equals(row.getColumnState())) {
+                homonChosahoshuTankaIchirannotUpdate = false;
+                break;
+            }
+        }
+        for (dgShinsakaiIinBetuTanka_Row row : shinsakaiIinBetuTankaList) {
+            if (!RString.EMPTY.equals(row.getColumnState())) {
+                shinsakaiIinBetuTankanotUpdate = false;
+                break;
+            }
+        }
+        if (ikenShohoshuTankaIchirannotUpdate && chosainhoshuTankaIchirannotUpdate && homonChosahoshuTankaIchirannotUpdate && shinsakaiIinBetuTankanotUpdate) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new IdocheckMessages(UrErrorMessages.編集なしで更新不可),
+                    div.getHoshuMasutaTab()));
+        }
+        return validPairs;
+    }
+    
+    /**
      * 審査員報酬単価マスタの入力明細エリア入力チェックを実行します。
      *
      * @return ValidationMessageControlPairs
@@ -260,6 +309,20 @@ public class HoshuMasutaKoshinValidationHandler {
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
+    
+        private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 
