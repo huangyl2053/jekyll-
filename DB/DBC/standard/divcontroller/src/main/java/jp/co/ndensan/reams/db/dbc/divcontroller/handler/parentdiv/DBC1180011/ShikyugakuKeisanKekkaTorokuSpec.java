@@ -120,7 +120,7 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
     高額合算支給不支給決定データの存在チェック {
                 @Override
                 public boolean apply(ShikyugakuKeisanKekkaTorokuDiv div) {
-                    return SpecHelper.is高額合算支給不支給決定データの存在チェック(div);
+                    return SpecHelper.is高額合算支給不支給決定データの存在チェック();
                 }
             },
     /**
@@ -272,7 +272,7 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
             return うち70歳以上分按分後支給額 == null || うち70歳以上分按分後支給額.compareTo(按分後支給額) <= 0;
         }
 
-        private static boolean is高額合算支給不支給決定データの存在チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
+        private static boolean is高額合算支給不支給決定データの存在チェック() {
             KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果
                     = ViewStateHolder.get(ViewStateKeys.支給額計算結果, KogakuGassanShikyuGakuKeisanKekkaRelate.class);
             HihokenshaNo 被保険者番号 = 支給額計算結果.get被保険者番号();
@@ -307,6 +307,9 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
 
         private static boolean is自己負担額証明書整理番号入力値が不正チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RString 自己負担額証明書整理番号 = div.getTxtJikoFutanSeiriNom().getValue();
+            if (RString.isNullOrEmpty(自己負担額証明書整理番号)) {
+                return false;
+            }
             RString 保険者番号 = 自己負担額証明書整理番号.substring(INT_5, INT_11);
             RString 先頭2桁 = 保険者番号.substring(INT_0, INT_2);
             boolean flg1 = RSTRING_3.equals(div.getDdlHokenSeido().getSelectedKey());
@@ -320,6 +323,9 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
                 return true;
             }
             RString 証明書整理番号 = div.getTxtJikoFutanSeiriNom().getText();
+            if (RString.isNullOrEmpty(証明書整理番号)) {
+                return true;
+            }
             List<dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row> rowList
                     = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getDataSource();
             if (rowList == null || rowList.isEmpty()) {
