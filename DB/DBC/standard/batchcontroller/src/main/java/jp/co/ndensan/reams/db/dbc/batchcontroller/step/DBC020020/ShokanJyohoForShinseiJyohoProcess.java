@@ -37,13 +37,21 @@ public class ShokanJyohoForShinseiJyohoProcess extends BatchProcessBase<Hihokens
     private static final RString MYBATIS_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakukaigoservicehikyufuoshirasetsuchisho.IKogakuKaigoServicehiOshiraseHakkoMapper.get申請情報償還For申請情報");
     private static final RString TABLE_NAME = new RString("ShinseiJohoTemp");
+    private static final RString MENU_ID_DBCMN43001 = new RString("DBCMN43001");
+    private static final RString MENU_ID_DBCMNL3001 = new RString("DBCMNL3001");
+    private static final RString 国保連共同処理受託区分_高額_ONE = new RString("1");
+    private static final RString 国保連共同処理受託区分_事業高額_ONE = new RString("1");
 
     private KogakuKaigoServicehiOshiraseHakkoProcessParameter parameter;
     private RString 審査方法区分;
+    private RString 高額;
+    private RString 事業高額;
 
     @Override
     protected void initialize() {
         審査方法区分 = DbBusinessConfig.get(ConfigNameDBC.償還支給申請書_審査方法初期表示, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        事業高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
     }
 
     @BatchWriter
