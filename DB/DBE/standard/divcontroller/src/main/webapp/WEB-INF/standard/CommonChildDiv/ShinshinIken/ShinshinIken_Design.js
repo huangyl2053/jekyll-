@@ -239,6 +239,10 @@ var DBE;
                 return new UZA.CheckBoxList(this.convFiledName("chkHidariKashiMahiTeido"));
             };
 
+            Controls.prototype.Sp1 = function () {
+                return new UZA.Space(this.convFiledName("Sp1"));
+            };
+
             Controls.prototype.chkSonotaMahi = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkSonotaMahi"));
             };
