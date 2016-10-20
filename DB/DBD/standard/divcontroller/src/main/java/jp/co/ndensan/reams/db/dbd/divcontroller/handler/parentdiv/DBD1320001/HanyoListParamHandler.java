@@ -830,8 +830,12 @@ public class HanyoListParamHandler {
         Long 出力順 = batchParameterMap.getParameterValue(Long.class, 出力順パラメータ名称2);
         RString 出力項目 = batchParameterMap.getParameterValue(RString.class, 出力項目パラメータ名称2);
         RString 帳票ID = batchParameterMap.getParameterValue(RString.class, 帳票IDパラメータ名称1);
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(帳票ID), Long.valueOf(出力順.toString()));
-        div.getCcdShutsuryokuKomoku().load(帳票ID, SubGyomuCode.DBD介護受給, 出力項目);
+        if (出力順 != null) {
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(帳票ID), Long.valueOf(出力順.toString()));
+        }
+        if (!RString.isNullOrEmpty(出力項目)) {
+            div.getCcdShutsuryokuKomoku().load(帳票ID, SubGyomuCode.DBD介護受給, 出力項目);
+        }
     }
 
     private void restore汎用リスト_利用者負担額減免BatchParameter(BatchParameterMap batchParameterMap) {

@@ -92,13 +92,31 @@ public class ShotokushokaihyoIkkatuHandler {
      */
     public void check再発行する() {
         List<RString> 再発行する = div.getChkSaihakko().getSelectedKeys();
+        List<RString> itemByKeys = new ArrayList<>();
         if (再発行する.contains(キー_KEY0)) {
+            div.getChkShuturyokuTaisho().setSelectedItemsByKey(itemByKeys);
             div.getChkTestPrint().setDisabled(true);
             div.getChkShuturyokuTaisho().setDisabled(true);
         } else {
+            itemByKeys.add(キー_KEY0);
+            itemByKeys.add(キー_KEY1);
+            div.getChkShuturyokuTaisho().setSelectedItemsByKey(itemByKeys);
             div.getChkTestPrint().setDisabled(false);
             div.getChkShuturyokuTaisho().setDisabled(false);
         }
+    }
+
+    /**
+     * 出力対象チェックのメソッドです。
+     */
+    public void check出力対象() {
+        List<RString> 出力対象List = div.getChkShuturyokuTaisho().getSelectedKeys();
+        List<RString> itemByKeys = new ArrayList<>();
+        itemByKeys.add(キー_KEY0);
+        if (!出力対象List.contains(キー_KEY0) && !出力対象List.contains(キー_KEY1)) {
+            div.getChkSaihakko().setSelectedItemsByKey(itemByKeys);
+        }
+
     }
 
     /**

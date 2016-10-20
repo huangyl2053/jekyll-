@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.Ikenshokinyuyo
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 要介護認定主治医意見書記入用紙エディターのインターフェースクラスです。
+ * 要介護認定主治医意見書記入用紙-片面-白黒エディターのインターフェースクラスです。
  *
  * @reamsid_L DBE-0050-030 xuyannan
  */

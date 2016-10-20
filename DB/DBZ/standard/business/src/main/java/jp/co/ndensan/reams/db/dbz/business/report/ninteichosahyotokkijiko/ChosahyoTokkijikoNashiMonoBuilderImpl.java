@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyotokkijiko.Chosahyo
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 要介護認定調査票（特記事項）Builderのクラスです。
+ * 要介護認定調査票（特記事項）なし-白黒Builderのクラスです。
  *
  * @reamsid_L DBE-0080-040 xuyannan
  */
-public class ChosahyoTokkijikoBuilderImpl implements IChosahyoTokkijikoBuilder {
+public class ChosahyoTokkijikoNashiMonoBuilderImpl implements IChosahyoTokkijikoBuilder {
 
     private final IChosahyoTokkijikoEditor editor;
 
@@ -22,7 +22,7 @@ public class ChosahyoTokkijikoBuilderImpl implements IChosahyoTokkijikoBuilder {
      *
      * @param editor {@link IChosahyoTokkijikoEditor}
      */
-    public ChosahyoTokkijikoBuilderImpl(IChosahyoTokkijikoEditor editor) {
+    public ChosahyoTokkijikoNashiMonoBuilderImpl(IChosahyoTokkijikoEditor editor) {
         this.editor = editor;
     }
 
