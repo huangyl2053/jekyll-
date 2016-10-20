@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519001.PntNinteiShinsaHant
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd503001.ShinsaHanteiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -54,7 +55,7 @@ public class PntNinteiShinsaHanteiListManager {
         帳票出力用申請情報Entityリスト.set住所(entity.get住所());
         帳票出力用申請情報Entityリスト.set保険者名称(市町村名);
         帳票出力用申請情報Entityリスト.set出力CSV状況申請(RString.EMPTY);
-        帳票出力用申請情報Entityリスト.set前回要介護状態区分コード(entity.get前回要介護状態区分コード());
+        帳票出力用申請情報Entityリスト.set前回要介護状態区分コード(YokaigoJotaiKubun.toValue(entity.get前回要介護状態区分コード().value()).get名称());
         帳票出力用申請情報Entityリスト.set前回認定有効期間終了(entity.get前回認定有効期間_終了());
         帳票出力用申請情報Entityリスト.set前回認定有効期間開始(entity.get前回認定有効期間_開始());
         帳票出力用申請情報Entityリスト.set性別(entity.get性別().value());
