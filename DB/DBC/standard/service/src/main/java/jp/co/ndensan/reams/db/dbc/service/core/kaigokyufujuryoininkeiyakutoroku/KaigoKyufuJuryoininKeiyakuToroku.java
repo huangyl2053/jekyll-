@@ -142,6 +142,7 @@ public class KaigoKyufuJuryoininKeiyakuToroku {
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         ChohyoSeigyoKyotsu 帳票利用者向け制御共通 = load帳票制御共通(利用者向け帳票分類ID);
         set送付物宛先_利用者向け(利用者向けEntity, 地方公共団体, 帳票利用者向け制御共通, 被保険者情報.get識別コード());
+        利用者向けEntity.set識別コード(被保険者情報.get識別コード());
         利用者向けEntity.set文書番号(文書番号);
         ChohyoSeigyoHanyo 帳票制御汎用 = load帳票制御汎用(利用者向け帳票分類ID, 帳票タイトル);
         利用者向けEntity.setタイトル(帳票制御汎用.get設定値());
@@ -177,6 +178,7 @@ public class KaigoKyufuJuryoininKeiyakuToroku {
         if (被保険者情報 == null) {
             return;
         }
+        事業者用Entity.set識別コード(被保険者情報.get識別コード());
         CustomerBarCode barcode = new CustomerBarCode();
         if (受領委任契約事業者データ.get送付先住所() == null || 受領委任契約事業者データ.get送付先住所().getColumnValue().isEmpty()) {
             事業者用Entity.set郵便番号(受領委任契約事業者データ.get契約事業者郵便番号().getEditedYubinNo());

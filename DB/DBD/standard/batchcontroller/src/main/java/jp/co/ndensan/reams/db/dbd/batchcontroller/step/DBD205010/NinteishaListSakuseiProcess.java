@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -72,7 +72,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBD-3960-050 x_liuwei
  */
-public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListSakuseiEntity> {
+public class NinteishaListSakuseiProcess extends BatchKeyBreakBase<NinteishaListSakuseiEntity> {
 
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -185,7 +185,12 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     }
 
     @Override
-    protected void process(NinteishaListSakuseiEntity t) {
+    protected void keyBreakProcess(NinteishaListSakuseiEntity current) {
+
+    }
+
+    @Override
+    protected void usualProcess(NinteishaListSakuseiEntity t) {
         i++;
         FutanGendogakuNinteiGaitoshaIchiranReport find
                 = new FutanGendogakuNinteiGaitoshaIchiranReport(parameter.get帳票作成日時(),
