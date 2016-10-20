@@ -15,9 +15,12 @@ import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecur
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -34,6 +37,16 @@ public class HanyorisutoPanelHandler {
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
+    private static final ReportId REPORTID = new ReportId("DBC701001_HanyoListKyotakuServiceKeikaku");
+    private static final RString KEY_構成市町村コード = new RString("構成市町村コード");
+    private static final RString KEY_作成区分 = new RString("作成区分");
+    private static final RString KEY_抽出区分 = new RString("抽出区分");
+    private static final RString KEY_基準年月日 = new RString("基準年月日");
+    private static final RString KEY_支援事業者番号 = new RString("支援事業者番号");
+    private static final RString KEY_項目名付加 = new RString("csv項目名付加");
+    private static final RString KEY_連番付加 = new RString("csv連番付加");
+    private static final RString KEY_日付スラッシュ編集 = new RString("csv日付スラッシュ編集");
+    private static final RString KEY_改頁出力順ID = new RString("改頁出力順ID");
 
     /**
      * HanyorisutoPanelDiv取得します。
@@ -125,6 +138,62 @@ public class HanyorisutoPanelHandler {
         bparam.setCsv連番付加(list.contains(TWO));
         bparam.setCsv日付スラッシュ編集(list.contains(THREE));
         return bparam;
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     */
+    public void pamaRestore() {
+
+        BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
+        LasdecCode 構成市町村コード = restoreBatchParameterMap.getParameterValue(LasdecCode.class, KEY_構成市町村コード);
+        if (構成市町村コード != null) {
+            if (構成市町村コード.isEmpty()) {
+                div.getCcdHokensya().loadHokenshaList();
+            } else {
+                div.getCcdHokensya().setSelectedShichosonIfExist(構成市町村コード);
+            }
+        }
+        RString 作成区分 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_作成区分);
+        if (作成区分 != null && !作成区分.isEmpty()) {
+            div.getRadSakuseiKubun().setSelectedKey(作成区分);
+        }
+        RString 抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_抽出区分);
+        if (抽出区分 != null && !抽出区分.isEmpty()) {
+            div.getRadChusyutuKubun().setSelectedKey(抽出区分);
+        }
+        FlexibleDate 基準年月日 = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_基準年月日);
+        div.getTxtKijunYMD().clearValue();
+        if (基準年月日 != null && !基準年月日.isEmpty()) {
+            div.getTxtKijunYMD().setValue(new RDate(基準年月日.toString()));
+        }
+        div.getTxtSienJigyosyano().clearValue();
+        RString 支援事業者番号 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_支援事業者番号);
+        if (支援事業者番号 != null && !支援事業者番号.isEmpty()) {
+            div.getTxtSienJigyosyano().setValue(支援事業者番号);
+        }
+        List<RString> csv編集方法リスト = new ArrayList<>();
+        boolean csv項目名付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_項目名付加);
+        if (csv項目名付加) {
+            csv編集方法リスト.add(ONE);
+        }
+        boolean csv連番付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_連番付加);
+        if (csv連番付加) {
+            csv編集方法リスト.add(TWO);
+        }
+        boolean csv日付スラッシュ編集 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_日付スラッシュ編集);
+        if (csv日付スラッシュ編集) {
+            csv編集方法リスト.add(THREE);
+        }
+        if (!csv編集方法リスト.isEmpty()) {
+            div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
+        }
+        RString 改頁出力順ID = restoreBatchParameterMap.getParameterValue(RString.class, KEY_改頁出力順ID);
+        if (改頁出力順ID != null && !改頁出力順ID.isEmpty()) {
+            div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, REPORTID,
+                    Long.valueOf(改頁出力順ID.toString()));
+        }
+        set抽出区分表示制御処理();
     }
 
 }

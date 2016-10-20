@@ -147,13 +147,13 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                 source.shutsuryokujun2 = 設定項目リスト.get(1).get項目名();
             }
             if (設定項目リスト.size() > 2) {
-                source.shutsuryokujun2 = 設定項目リスト.get(2).get項目名();
+                source.shutsuryokujun3 = 設定項目リスト.get(2).get項目名();
             }
             if (設定項目リスト.size() > LISTINDEX_3) {
-                source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+                source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
             }
             if (設定項目リスト.size() > LISTINDEX_4) {
-                source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+                source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
             }
         }
         if (支払方法 != null) {
@@ -202,7 +202,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
             if (振込明細一時TBL.getYubinNo() != null) {
                 RString 郵便番号1 = 振込明細一時TBL.getYubinNo().getYubinNo().substring(0, LISTINDEX_3);
-                RString 郵便番号2 = 振込明細一時TBL.getYubinNo().getYubinNo().substring(LISTINDEX_4);
+                RString 郵便番号2 = 振込明細一時TBL.getYubinNo().getYubinNo().substring(LISTINDEX_3);
                 source.listUpper_3 = 郵便番号1.concat(半角ハイフン).concat(郵便番号2);
             }
             if (振込明細一時TBL.getKinyuKikanCode() != null && 振込明細一時TBL.getKinyuKikanShitenCode() != null) {

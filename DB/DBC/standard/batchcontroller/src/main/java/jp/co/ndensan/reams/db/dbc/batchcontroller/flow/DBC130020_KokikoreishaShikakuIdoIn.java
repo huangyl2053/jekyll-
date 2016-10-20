@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC130020_KokikoreishaShikakuIdoIn extends BatchFlowBase<DBC130020_KokikoreishaShikakuIdoInParameter> {
 
     private RString 市町村識別ID;
+    private boolean 文言_設定_FLAG;
 
     private static final String 取込後期高齢者情報に登録 = "kokikoreishaShikakuIdoInOutputProcess";
     private static final String エラーチェックして取込後期高齢者情報に更新一 = "updTorikomiKokiKoreshaJyohoProcess1";
@@ -48,11 +49,16 @@ public class DBC130020_KokikoreishaShikakuIdoIn extends BatchFlowBase<DBC130020_
             市町村識別ID = value;
             executeStep(取込後期高齢者情報に登録);
         }
+        文言_設定_FLAG = getResult(Boolean.class, new RString(取込後期高齢者情報に登録),
+                InsTorikomiKokiKoreshaJyohoProcess.OUT_HAS_TARGET_DATA);
         executeStep(エラーチェックして取込後期高齢者情報に更新一);
+        文言_設定_FLAG = getResult(Boolean.class, new RString(エラーチェックして取込後期高齢者情報に更新一),
+                UpdTorikomiKokiKoreshaJyohoTemp1Processs.OUT_HAS_TARGET_DATA);
         executeStep(エラーチェックして取込後期高齢者情報に更新二);
+        文言_設定_FLAG = getResult(Boolean.class, new RString(エラーチェックして取込後期高齢者情報に更新二),
+                UpdTorikomiKokiKoreshaJyohoTemp2Processs.OUT_HAS_TARGET_DATA);
         executeStep(後期高齢者情報インポート用に登録);
         executeStep(処理日付管理マスタ更新);
-        executeStep(エラーチェックして取込後期高齢者情報に更新二);
         executeStep(後期高齢者情報に登録);
         executeStep(取込確認CSVファイル出力);
     }
@@ -154,6 +160,7 @@ public class DBC130020_KokikoreishaShikakuIdoIn extends BatchFlowBase<DBC130020_
                 getParameter().getShoriShichoson(),
                 getParameter().getIfType(),
                 getParameter().getTorikomiKeishiki(),
-                getParameter().getShoriTimestamp());
+                getParameter().getShoriTimestamp(),
+                文言_設定_FLAG);
     }
 }

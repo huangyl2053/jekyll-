@@ -83,7 +83,7 @@ public class KogakuGassanKyufuJissekiInDoMasterTorokuProcess
         DbWT38P1KogakuGassanKyufuJissekiTempEntity 高額合算給付実績一時 = entity.get高額合算給付実績一時();
         dbt3075entity.setKokanJohoShikibetsuNo(高額合算給付実績一時.getKokanJohoShikibetsuNo());
         dbt3075entity.setHihokenshaNo(高額合算給付実績一時.getHihokenshaNoIn());
-        dbt3075entity.setShikyuShinseiSeiriNo(高額合算給付実績一時.getShikyuShinseiSeiriNo());
+        dbt3075entity.setShikyuShinseiSeiriNo(高額合算給付実績一時.getShikyuShinseishoSeiriNo());
         dbt3075entity.setSeiriNo(new RString(採番.getCount()));
         dbt3075entity.setJikoFutanSeiriNo(高額合算給付実績一時.getJikoFutanSeiriNo());
         dbt3075entity.setHokenSeidoCode(高額合算給付実績一時.getHokenSeidoCode());

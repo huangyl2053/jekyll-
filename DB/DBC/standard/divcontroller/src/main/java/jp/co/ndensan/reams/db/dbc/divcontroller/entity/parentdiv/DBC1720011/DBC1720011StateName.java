@@ -16,7 +16,8 @@ public enum DBC1720011StateName implements IStateEnumerations {
 
     NoChange(""),
     Default("default"),
-    alter("alter");
+    alter("alter"),
+    Kanryo("Kanryo");
 
     private final RString name;
 

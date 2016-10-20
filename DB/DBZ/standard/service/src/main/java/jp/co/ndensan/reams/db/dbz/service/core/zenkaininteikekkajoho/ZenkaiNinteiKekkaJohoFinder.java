@@ -60,8 +60,8 @@ public class ZenkaiNinteiKekkaJohoFinder {
     public SearchResult<HokenshaNinteiShinseiJoho> get要介護度_前回受給(ShinseishoKanriNo 申請書管理番号) {
         List<HokenshaNinteiShinseiJoho> hokenshaNinteiShinseiJohoList = new ArrayList<>();
         IZenkaiNinteiKekkaJohoMapper mapper = mapperProvider.create(IZenkaiNinteiKekkaJohoMapper.class);
-        DbT4101NinteiShinseiJohoEntity entity = mapper.get要介護度_前回受給(申請書管理番号);
-        if (entity != null) {
+        List<DbT4101NinteiShinseiJohoEntity> entitylist = mapper.get要介護度_前回受給(申請書管理番号);
+        for (DbT4101NinteiShinseiJohoEntity entity : entitylist) {
             hokenshaNinteiShinseiJohoList.add(new HokenshaNinteiShinseiJoho(entity));
         }
         return SearchResult.of(hokenshaNinteiShinseiJohoList, 0, false);
@@ -76,8 +76,8 @@ public class ZenkaiNinteiKekkaJohoFinder {
     public SearchResult<NinteiShinseiJoho> get要介護度_前回認定(ShinseishoKanriNo 申請書管理番号) {
         List<NinteiShinseiJoho> ninteiShinseiJohoList = new ArrayList<>();
         IZenkaiNinteiKekkaJohoMapper mapper = mapperProvider.create(IZenkaiNinteiKekkaJohoMapper.class);
-        DbT5101NinteiShinseiJohoEntity entity = mapper.get要介護度_前回認定(申請書管理番号);
-        if (entity != null) {
+        List<DbT5101NinteiShinseiJohoEntity> entityList = mapper.get要介護度_前回認定(申請書管理番号);
+        for (DbT5101NinteiShinseiJohoEntity entity : entityList) {
             ninteiShinseiJohoList.add(new NinteiShinseiJoho(entity));
         }
         return SearchResult.of(ninteiShinseiJohoList, 0, false);

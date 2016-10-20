@@ -72,6 +72,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 画面設計_DBBGM13001_2_即時賦課更正のクラスです。
@@ -93,6 +94,7 @@ public class SokujiFukaKouseiMain {
     private static final RString メニューID_即時賦課更正 = new RString("DBBMN13001");
     private static final RString メニューID_特殊処理 = new RString("DBBMNC3001");
     private static final Code CODE_003 = new Code("0003");
+    private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
@@ -111,6 +113,8 @@ public class SokujiFukaKouseiMain {
     private static final RString TEXT_期 = new RString("期");
     private static final RString 調定事由コード_更正 = new RString("04");
     private static final RString 戻るフラグ = new RString("ViaSokujiKosei");
+    private static final RString ZERO = new RString("0");
+    private static final RString 読点 = new RString(",");
 
     /**
      * 画面の初期化メソッドです。
@@ -341,26 +345,360 @@ public class SokujiFukaKouseiMain {
     }
 
     /**
-     * 「特徴徴収」エリア6月更正後のイベントメソッドです。
+     * 「特徴徴収」エリア4月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtTokuchoKoseiGo04(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblTokuchoZogenValue04().setText(get金額のカンマ編集(
+                (tablePanel.getTxtTokuchoKoseiGo04().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtTokuchoKoseiGo04().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblTokuchoKoseiMaeValue04().getText()))));
+        tablePanel.getLblTokuchoKoseiGoSum().setText(handler.get特別徴収の更正後合計());
+        tablePanel.getLblTokuchoZogenSum().setText(handler.get特別徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「特徴徴収」エリア6月更正後のtextBoxのonblurでイベントメソッドです。
      *
      * @param div SokujiFukaKouseiMainDiv
      * @return ResponseData<SokujiFukaKouseiMainDiv>
      */
     public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtTokuchoKoseiGo06(SokujiFukaKouseiMainDiv div) {
-        Decimal 特別徴収_6月 = div.getSokujikouseiKiwarigaku().getTxtTokuchoKoseiGo06().getValue();
-        div.getSokujikouseiKiwarigaku().getTxtTokuchoKoseiGo08().setValue(特別徴収_6月);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        Decimal 特別徴収_6月 = tablePanel.getTxtTokuchoKoseiGo06().getValue();
+        tablePanel.getTxtTokuchoKoseiGo08().setValue(特別徴収_6月);
+        tablePanel.getLblTokuchoZogenValue06().setText(get金額のカンマ編集(
+                (tablePanel.getTxtTokuchoKoseiGo06().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtTokuchoKoseiGo06().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblTokuchoKoseiMaeValue06().getText()))));
+        return onBlur_txtTokuchoKoseiGo08(div);
+    }
+
+    /**
+     * 「特徴徴収」エリア8月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtTokuchoKoseiGo08(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblTokuchoZogenValue08().setText(get金額のカンマ編集(
+                (tablePanel.getTxtTokuchoKoseiGo08().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtTokuchoKoseiGo08().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblTokuchoKoseiMaeValue08().getText()))));
+        tablePanel.getLblTokuchoKoseiGoSum().setText(handler.get特別徴収の更正後合計());
+        tablePanel.getLblTokuchoZogenSum().setText(handler.get特別徴収の増減合計());
         return getResponseData(div);
     }
 
     /**
-     * 「特徴徴収」エリア12月更正後のイベントメソッドです。
+     * 「特徴徴収」エリア10月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtTokuchoKoseiGo10(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblTokuchoZogenValue10().setText(get金額のカンマ編集(
+                (tablePanel.getTxtTokuchoKoseiGo10().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtTokuchoKoseiGo10().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblTokuchoKoseiMaeValue10().getText()))));
+        tablePanel.getLblTokuchoKoseiGoSum().setText(handler.get特別徴収の更正後合計());
+        tablePanel.getLblTokuchoZogenSum().setText(handler.get特別徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「特徴徴収」エリア12月更正後のtextBoxのonblurでイベントメソッドです。
      *
      * @param div SokujiFukaKouseiMainDiv
      * @return ResponseData<SokujiFukaKouseiMainDiv>
      */
     public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtTokuchoKoseiGo12(SokujiFukaKouseiMainDiv div) {
-        Decimal 特別徴収_12月 = div.getSokujikouseiKiwarigaku().getTxtTokuchoKoseiGo12().getValue();
-        div.getSokujikouseiKiwarigaku().getTxtTokuchoKoseiGo02().setValue(特別徴収_12月);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        Decimal 特別徴収_12月 = tablePanel.getTxtTokuchoKoseiGo12().getValue();
+        tablePanel.getTxtTokuchoKoseiGo02().setValue(特別徴収_12月);
+        tablePanel.getLblTokuchoZogenValue12().setText(get金額のカンマ編集(
+                (tablePanel.getTxtTokuchoKoseiGo12().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtTokuchoKoseiGo12().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblTokuchoKoseiMaeValue12().getText()))));
+        return onBlur_txtTokuchoKoseiGo02(div);
+    }
+
+    /**
+     * 「特徴徴収」エリア2月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtTokuchoKoseiGo02(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblTokuchoZogenValue02().setText(get金額のカンマ編集(
+                (tablePanel.getTxtTokuchoKoseiGo02().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtTokuchoKoseiGo02().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblTokuchoKoseiMaeValue02().getText()))));
+        tablePanel.getLblTokuchoKoseiGoSum().setText(handler.get特別徴収の更正後合計());
+        tablePanel.getLblTokuchoZogenSum().setText(handler.get特別徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア4月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGo04(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValue04().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGo04().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGo04().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValue04().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア5月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGo05(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValue05().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGo05().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGo05().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValue05().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア6月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGo06(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValue06().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGo06().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGo06().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValue06().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア7月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGo07(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValue07().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGo07().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGo07().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValue07().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア8月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGo08(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValue08().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGo08().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGo08().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValue08().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア9月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGo09(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValue09().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGo09().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGo09().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValue09().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア10月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGo10(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValue10().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGo10().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGo10().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValue10().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア11月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGo11(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValue11().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGo11().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGo11().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValue11().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア12月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGo12(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValue12().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGo12().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGo12().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValue12().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア1月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGo01(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValue01().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGo01().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGo01().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValue01().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア2月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGo02(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValue02().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGo02().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGo02().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValue02().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア3月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGo03(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValue03().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGo03().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGo03().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValue03().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア翌年度4月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGoYoku04(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValueYoku04().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGoYoku04().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGoYoku04().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValueYoku04().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
+        return getResponseData(div);
+    }
+
+    /**
+     * 「普通徴収」エリア翌年度5月更正後のtextBoxのonblurでイベントメソッドです。
+     *
+     * @param div SokujiFukaKouseiMainDiv
+     * @return ResponseData<SokujiFukaKouseiMainDiv>
+     */
+    public ResponseData<SokujiFukaKouseiMainDiv> onBlur_txtFuchoKoseiGoYoku05(SokujiFukaKouseiMainDiv div) {
+        SokujiFukaKouseiMainHandler handler = getHandler(div);
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+        tablePanel.getLblFuchoZogenValueYoku05().setText(get金額のカンマ編集(
+                (tablePanel.getTxtFuchoKoseiGoYoku05().getValue() == null ? Decimal.ZERO
+                : tablePanel.getTxtFuchoKoseiGoYoku05().getValue()).subtract(
+                        getFormat金額(tablePanel.getLblFuchoKoseiMaeValueYoku05().getText()))));
+        tablePanel.getLblFuchoKoseiGoSum().setText(handler.get普通徴収の更正後合計());
+        tablePanel.getLblFuchoZogenSum().setText(handler.get普通徴収の増減合計());
         return getResponseData(div);
     }
 
@@ -1006,5 +1344,19 @@ public class SokujiFukaKouseiMain {
             賦課の情報.createBuilderForEdit().setKibetsu(介護期別情報);
         }
         return is差異がある;
+    }
+
+    private RString get金額のカンマ編集(Decimal 金額) {
+        if (金額 == null) {
+            return ZERO;
+        }
+        return DecimalFormatter.toコンマ区切りRString(金額, NUM_0);
+    }
+
+    private Decimal getFormat金額(RString 金額) {
+        if (RString.isNullOrEmpty(金額)) {
+            return Decimal.ZERO;
+        }
+        return new Decimal(金額.replace(読点, RString.EMPTY).trim().toString());
     }
 }

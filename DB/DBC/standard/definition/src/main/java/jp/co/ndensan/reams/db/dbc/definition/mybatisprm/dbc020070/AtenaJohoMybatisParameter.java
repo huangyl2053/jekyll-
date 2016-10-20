@@ -19,9 +19,9 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class AtenaJohoMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
+public class AtenaJohoMybatisParameter implements IMyBatisParameter {
 
-    private final IShikibetsuTaishoPSMSearchKey searchKey;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      *
@@ -30,8 +30,6 @@ public class AtenaJohoMybatisParameter extends UaFt200FindShikibetsuTaishoParam 
      * @param searchKey searchKey
      */
     public AtenaJohoMybatisParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
-        super(searchKey);
-
-        this.searchKey = searchKey;
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
     }
 }

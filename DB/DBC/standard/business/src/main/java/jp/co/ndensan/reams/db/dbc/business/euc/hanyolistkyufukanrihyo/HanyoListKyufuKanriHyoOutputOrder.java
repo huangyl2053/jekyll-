@@ -30,7 +30,7 @@ public enum HanyoListKyufuKanriHyoOutputOrder implements IReportItems {
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString(""), new RString("")),
+    氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"ShikibetsuTaisho\".\"kanaShimei\"")),
     /**
      * 市町村コード
      */
@@ -46,11 +46,11 @@ public enum HanyoListKyufuKanriHyoOutputOrder implements IReportItems {
     /**
      * 支給区分コード
      */
-    要介護度(new RString("0403"), new RString(""), new RString("")),
+    要介護度(new RString("0403"), new RString(""), new RString("\"JukyushaDaicho_yokaigoJotaiKubunCode\"")),
     /**
      * 申請書整理番号
      */
-    認定開始日(new RString("0411"), new RString(""), new RString("")),
+    認定開始日(new RString("0411"), new RString(""), new RString("\"JukyushaDaicho_ninteiYukoKikanKaishiYMD\"")),
     /**
      * 新規継続区分
      */
@@ -58,7 +58,7 @@ public enum HanyoListKyufuKanriHyoOutputOrder implements IReportItems {
     /**
      * 新規継続区分
      */
-    計画事業者番号(new RString("0311"), new RString(""), new RString(""));
+    計画事業者番号(new RString("0311"), new RString(""), new RString("\"kyufuKanrihyo_kyotakushienJigyoshoNo\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

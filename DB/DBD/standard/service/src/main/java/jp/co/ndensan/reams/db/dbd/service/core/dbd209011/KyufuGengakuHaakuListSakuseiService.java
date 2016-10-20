@@ -681,9 +681,6 @@ public class KyufuGengakuHaakuListSakuseiService {
                 }
                 期別情報List.add(期別情報);
             }
-//            if (年度の把握情報List.isEmpty()) {
-//                shunoEntity.set収納情報なし(収納情報なし);
-//            }
             shunoEntity.set期別情報(期別情報List);
             収納情報リスト.add(shunoEntity);
         }

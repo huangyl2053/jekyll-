@@ -6,11 +6,14 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.KaigoUploadPanel;
 
 import java.io.File;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoUploadPanel.KaigoUploadPanel.KaigoUploadHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoUploadPanel.KaigoUploadPanel.KaigoUploadPanelDiv;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -68,6 +71,7 @@ public class KaigoUploadPanel {
         File tempFile = new File(file.getFilePath().toString());
 
         if (tempFile.exists() && moveDir.exists()) {
+            ViewStateHolder.put(ViewStateKeys.ファイル日時, YMDHMS.now());
             return tempFile.renameTo(new File(moveDir, ファイル名称.toString()
                     + "." + file.getFileName().split("\\.").get(1)));
         }
@@ -80,6 +84,7 @@ public class KaigoUploadPanel {
         File tempFile = new File(file.getFilePath().toString());
 
         if (tempFile.exists() && moveDir.exists()) {
+            ViewStateHolder.put(ViewStateKeys.ファイル日時, YMDHMS.now());
             return tempFile.renameTo(new File(moveDir, file.getFileName().toString()));
         }
         return true;
