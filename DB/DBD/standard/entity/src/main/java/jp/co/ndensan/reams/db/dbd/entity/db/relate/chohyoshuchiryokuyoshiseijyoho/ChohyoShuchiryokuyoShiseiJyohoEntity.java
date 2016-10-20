@@ -36,7 +36,7 @@ public class ChohyoShuchiryokuyoShiseiJyohoEntity {
     private Code 認定申請区分_申請時コード;
     private RString 被保険者区分コード;
     private FlexibleDate 認定申請年月日;
-    private Code 前回要介護状態区分コード;
+    private RString 前回要介護状態区分コード;
     private FlexibleDate 前回認定有効期間開始;
     private FlexibleDate 前回認定有効期間終了;
     private ShikibetsuCode 識別コード;
