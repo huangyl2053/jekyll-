@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7010001.Hany
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7010001.HanyorisutoPanelHandler;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -30,6 +31,32 @@ public class HanyorisutoPanel {
     public ResponseData<HanyorisutoPanelDiv> onLoad(HanyorisutoPanelDiv div) {
         getHandler(div).initialize(div);
         return createResponse(div);
+    }
+
+    /**
+     * 条件を保存するボタンのメソッドです。
+     *
+     * @param div HanyorisutoPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<BatchParameterMap> onClick_btnBatchParameterSave(HanyorisutoPanelDiv div) {
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        HanyoListKyotakuServiceKeikakuBatchParameter parameter = getHandler(div).setBatchParameter(div);
+        parameter.set改頁出力順ID(div.getCcdChohyoShutsuryokujun().getSelected出力順() == null
+                ? RString.EMPTY : new RString(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID().toString()));
+        responseData.data = new BatchParameterMap(parameter);
+        return responseData;
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     *
+     * @param div HanyorisutoPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<HanyorisutoPanelDiv> onClick_btnBatchParameterRestore(HanyorisutoPanelDiv div) {
+        getHandler(div).pamaRestore();
+        return ResponseData.of(div).respond();
     }
 
     /**
