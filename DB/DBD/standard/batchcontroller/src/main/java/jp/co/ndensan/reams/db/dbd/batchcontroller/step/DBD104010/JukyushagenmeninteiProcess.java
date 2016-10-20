@@ -194,6 +194,7 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
             Decimal index = new Decimal(0);
             while (index.compareTo(FIVE) <= 0) {
                 list.add(manager.add受給者減免月別認定者数状況表中間テーブルEmpty(標準負担額減免, index, 市町村コード, 市町村名称));
+                index = index.add(1);
             }
         } else {
             if (標準負担額減免flag_0) {
@@ -239,6 +240,7 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
             Decimal index = new Decimal(0);
             while (index.compareTo(FIVE) <= 0) {
                 list.add(manager.add受給者減免月別認定者数状況表中間テーブルEmpty(利用者負担額減額, index, 市町村コード, 市町村名称));
+                index = index.add(1);
             }
         } else {
             if (利用者負担額減額flag_0) {
@@ -284,6 +286,7 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
             Decimal index = new Decimal(0);
             while (index.compareTo(ELEVEN) <= 0) {
                 list.add(manager.add受給者減免月別認定者数状況表中間テーブルEmpty(訪問介護利用者負担額減額, index, 市町村コード, 市町村名称));
+                index = index.add(1);
             }
         } else {
             if (訪問介護利用者負担額減額flag_0) {
@@ -359,6 +362,7 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
             Decimal index = new Decimal(0);
             while (index.compareTo(FIVE) <= 0) {
                 list.add(manager.add受給者減免月別認定者数状況表中間テーブルEmpty(社会福祉法人減免, index, 市町村コード, 市町村名称));
+                index = index.add(1);
             }
         } else {
             if (社会福祉法人減免flag_0) {
@@ -404,6 +408,7 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
             Decimal index = new Decimal(0);
             while (index.compareTo(ELEVEN) <= 0) {
                 list.add(manager.add受給者減免月別認定者数状況表中間テーブルEmpty(介護保険負担限度額認定, index, 市町村コード, 市町村名称));
+                index = index.add(1);
             }
         } else {
             if (介護保険負担限度額認定flag_0) {
@@ -479,6 +484,7 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
             Decimal index = new Decimal(0);
             while (index.compareTo(FIVE) <= 0) {
                 list.add(manager.add受給者減免月別認定者数状況表中間テーブルEmpty(特別地域加算減免, index, 市町村コード, 市町村名称));
+                index = index.add(1);
             }
         } else {
             if (特別地域加算減免flag_0) {
