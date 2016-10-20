@@ -222,7 +222,10 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
 
         連番 = 連番 + INT_1;
         IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(entity.get宛名());
-        IKoza 口座情報 = do口座マスク編集(entity.get口座());
+        IKoza 口座情報 = null;
+        if (entity.get口座() != null && entity.get口座().getUaT0310KozaEntity().getKozaId() != 0L) {
+            口座情報 = do口座マスク編集(entity.get口座());
+        }
         RString 住所 = JushoHenshu.editJusho(帳票制御共通情報, 宛名情報, 導入団体情報);
         KogakuKetteiTsuchiShoEntity reportEntity = getReportEntity(entity.get一時Entity(), 宛名情報, 口座情報);
         if (ReportIdDBC.DBC100061.getReportId().getColumnValue().equals(帳票ID)) {
@@ -275,7 +278,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         if (出力順 != null) {
             出力順情報 = MyBatisOrderByClauseCreator.create(JigyoKogakuKetteiTsuchishoOutputOrder.class, 出力順);
             for (ISetSortItem item : 出力順.get設定項目リスト()) {
-                並び順.add(item.getDB項目名());
+                並び順.add(item.get項目名());
                 if (item.is改頁項目()) {
                     pageBreakKeys.add(item.get項目ID());
                     改頁リスト.add(item.get項目名());
@@ -474,7 +477,9 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
     }
 
     private void set口座情報(KogakuKetteiTsuchiShoEntity reportEntity, IKoza 口座情報) {
-
+        reportEntity.set金融機関コード(口座情報.get金融機関コード() == null ? RString.EMPTY
+                : 口座情報.get金融機関コード().getColumnValue());
+        reportEntity.setゆうちょ銀行フラグ(口座情報.isゆうちょ銀行());
         if (フラグ_TRUE.equals(parameter.get利用者向け決定通知書フラグ())) {
             if (!口座情報.isゆうちょ銀行()) {
                 reportEntity.set金融機関上段(口座情報.get金融機関().get金融機関名称());
@@ -487,7 +492,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
                 reportEntity.set通帳記号(口座情報.get通帳記号());
                 reportEntity.set通帳番号(口座情報.getEdited通帳番号());
             }
-            reportEntity.set口座名義人(口座情報.get口座名義人漢字().getColumnValue());
+            reportEntity.set口座名義人(口座情報.get口座名義人漢字() == null ? RString.EMPTY : 口座情報.get口座名義人漢字().getColumnValue());
         } else if (フラグ_TRUE.equals(parameter.get受領委任者向け決定通知書フラグ())) {
             if (!口座情報.isゆうちょ銀行()) {
                 reportEntity.set金融機関上段(アスタリスク);
