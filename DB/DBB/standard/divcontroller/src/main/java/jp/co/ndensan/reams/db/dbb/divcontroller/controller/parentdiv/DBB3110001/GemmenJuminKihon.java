@@ -112,6 +112,7 @@ public class GemmenJuminKihon {
         NendobunFukaGemmenListResult 減免リスト = handler.onClick_選択ボタン(被保険者番号);
         load(減免リスト, div);
         handler.set全賦課履歴情報Visible(true);
+        handler.clear減免後();
         return createResponse(div);
     }
 
