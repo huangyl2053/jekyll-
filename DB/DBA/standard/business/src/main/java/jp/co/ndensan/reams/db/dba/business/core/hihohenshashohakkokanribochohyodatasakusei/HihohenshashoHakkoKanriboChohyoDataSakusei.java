@@ -42,12 +42,10 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
 //    private static final RString 改頁 = new RString("被保険者証発行管理簿");
     private static final RString 被保険者証発行 = new RString("介護保険　被保険者証発行管理一覧表");
     private static final RString 資格者証発行 = new RString("介護保険　資格者証発行管理一覧表");
-    private static final RString ハイフン = new RString(" - ");
+    private static final RString ハイフン = new RString("-");
     private static final int 郵便番号_0桁 = 0;
     private static final int 郵便番号_3桁 = 3;
-    private static final int 郵便番号_4桁 = 4;
-    private static final int 郵便番号_7桁 = 7;
-    private RStringBuilder 郵便番号 = new RStringBuilder();
+    private final RStringBuilder 郵便番号 = new RStringBuilder();
 
     /**
      * 証発行管理帳票データリスト作成します。
@@ -87,8 +85,9 @@ public final class HihohenshashoHakkoKanriboChohyoDataSakusei {
                 if (!(RString.isNullOrEmpty(entity.getYubinNo()))) {
                     郵便番号.append(entity.getYubinNo().substring(郵便番号_0桁, 郵便番号_3桁));
                     郵便番号.append(ハイフン);
-                    郵便番号.append(entity.getYubinNo().substring(郵便番号_4桁, 郵便番号_7桁));
+                    郵便番号.append(entity.getYubinNo().substring(郵便番号_3桁, entity.getYubinNo().length()));
                     chohyoDataEntity.set郵便番号(郵便番号.toRString());
+                    郵便番号.delete(郵便番号_0桁, 郵便番号.length());
                 } else {
                     chohyoDataEntity.set郵便番号(entity.getYubinNo());
                 }
