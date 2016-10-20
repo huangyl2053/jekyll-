@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGakuIdentifier;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
