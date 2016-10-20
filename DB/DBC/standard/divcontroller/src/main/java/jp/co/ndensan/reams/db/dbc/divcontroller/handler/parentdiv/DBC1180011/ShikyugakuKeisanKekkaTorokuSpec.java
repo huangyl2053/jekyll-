@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -221,7 +220,7 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
 
         public static boolean is年度チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RString 支給申請書整理番号 = div.getTxtShikyuShinseishoSeiriNoInput().getValue();
-            return RYear.canConvert(支給申請書整理番号.substringEmptyOnError(INT_0, INT_3));
+            return RDate.canConvert(支給申請書整理番号.substring(INT_0, INT_3));
         }
 
         public static boolean is明細グリッドチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
@@ -234,7 +233,8 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
 
         public static boolean isうち70歳以上分チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             boolean flg1 = INT_0 == div.getDdlOver70ShotokuKubun().getSelectedIndex();
-            boolean flg2 = div.getTxtOver70HonninShikyugaku().getValue().compareTo(Decimal.ZERO) < 0;
+            boolean flg2 = Decimal.ZERO.compareTo(div.getTxtOver70HonninShikyugaku().getValue()) < 0
+                    || Decimal.ZERO.compareTo(div.getTxtOver70SetaiShikyuSogaku().getValue()) < 0;
             return !flg1 || !flg2;
         }
 
