@@ -141,7 +141,11 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
         } else {
             納期限の翌日 = FlexibleDate.EMPTY;
         }
+        return 収入情報について仮の時効起算日設定(収納情報, 時効起算日, 督促状発行年月日, 納期限の翌日);
+    }
 
+    private FlexibleDate 収入情報について仮の時効起算日設定(ShunoJohoEntity 収納情報, FlexibleDate 時効起算日,
+            FlexibleDate 督促状発行年月日, FlexibleDate 納期限の翌日) {
         FlexibleDate 仮の時効起算日 = FlexibleDate.EMPTY;
         if ((時効起算日 == null || FlexibleDate.EMPTY.equals(時効起算日)) && (督促状発行年月日 == null || FlexibleDate.EMPTY.equals(督促状発行年月日))
                 && (納期限の翌日 == null || FlexibleDate.EMPTY.equals(納期限の翌日))) {
@@ -158,12 +162,6 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
             is納期限の翌日 = true;
             仮の時効起算日 = 納期限の翌日;
         }
-        収入情報について再設定(収納情報, 仮の時効起算日, 時効起算日);
-
-        return 仮の時効起算日;
-    }
-
-    private void 収入情報について再設定(ShunoJohoEntity 収納情報, FlexibleDate 仮の時効起算日, FlexibleDate 時効起算日) {
         if (収納情報.get収入情報リスト() != null && !収納情報.get収入情報リスト().isEmpty()) {
             for (ShunyuJohoEntity 収入情報 : 収納情報.get収入情報リスト()) {
                 if (収入情報.get収入額() != null) {
@@ -179,6 +177,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
                 }
             }
         }
+        return 仮の時効起算日;
     }
 
     private RString edit時効起算事由(ShunoJohoEntity entity) {
@@ -388,6 +387,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
             data.setJikoKisambiJiyu(RString.EMPTY);
             data.setBeforeTainoGaku(Decimal.ZERO);
         }
+        data.setTainoKubun(滞納区分);
         is行削除 = Decimal.ZERO.equals(調定額) && Decimal.ZERO.equals(滞納額);
     }
 
@@ -423,7 +423,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
             data.setTainoKubun(当該期の滞納区分);
         }
         if (最古滞納期Date != null && !FlexibleDate.EMPTY.equals(最古滞納期Date)) {
-            最長滞納期間 = 最古滞納期Date.compareTo(processParamter.get基準日());
+            最長滞納期間 = 最古滞納期Date.getBetweenDays(processParamter.get基準日());
             data.setLongestTainoPeriod(最長滞納期間);
         }
     }
