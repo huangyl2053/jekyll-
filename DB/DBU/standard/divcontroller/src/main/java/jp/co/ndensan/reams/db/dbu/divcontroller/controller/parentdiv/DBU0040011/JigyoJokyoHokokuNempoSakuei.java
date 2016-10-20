@@ -55,8 +55,8 @@ public class JigyoJokyoHokokuNempoSakuei {
     private static final RString 月報報告一般状況１１１処理名 = new RString("月報報告　一般状況１～１１");
     private static final RString 月報報告一般状況１２１４現物分処理名 = new RString("月報報告　一般状況１２～１４　現物分");
     private static final RString 月報報告保険給付決定現物分処理名 = new RString("月報報告　保険給付決定　現物分");
-    private static final RString 月報報告一般状況1２１４償還分審査処理名 = new RString("月報報告　一般状況1２～１４　償還分審査");
-    private static final RString 月報報告一般状況1２１４償還分決定処理名 = new RString("月報報告　一般状況1２～１４　償還分決定");
+    private static final RString 月報報告一般状況1２１４償還分審査処理名 = new RString("月報報告　一般状況１２～１４　償還分審査");
+    private static final RString 月報報告一般状況1２１４償還分決定処理名 = new RString("月報報告　一般状況１２～１４　償還分決定");
     private static final RString 月報報告保険給付決定償還分審査処理名 = new RString("月報報告　保険給付決定　償還分審査");
     private static final RString 月報報告保険給付決定償還分決定処理名 = new RString("月報報告　保険給付決定　償還分決定");
     private static final RString 月報報告保険給付決定高額分処理名 = new RString("月報報告　保険給付決定　高額分");
