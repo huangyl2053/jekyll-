@@ -312,13 +312,13 @@ public class HokenkyufuShokanKetteiManager {
             tempEntity.setSakuseiKubunErrorFlag(エラーフラグ_1);
             tempEntity.setFutanWariaiKubun(負担割合区分_10);
         }
-        if (保険給付率_80 < tempEntity.getHokenKyufuritsu().value().intValue()
-                && tempEntity.getHokenKyufuritsu().value().intValue() < 保険給付率_89
+        if (保険給付率_80 <= tempEntity.getHokenKyufuritsu().value().intValue()
+                && tempEntity.getHokenKyufuritsu().value().intValue() <= 保険給付率_89
                 && 負担割合区分_20.equals(tempEntity.getFutanWariaiKubun())) {
             tempEntity.setSakuseiKubunErrorFlag(エラーフラグ_0);
         }
-        if (保険給付率_80 < tempEntity.getHokenKyufuritsu().value().intValue()
-                && tempEntity.getHokenKyufuritsu().value().intValue() < 保険給付率_89
+        if (保険給付率_80 <= tempEntity.getHokenKyufuritsu().value().intValue()
+                && tempEntity.getHokenKyufuritsu().value().intValue() <= 保険給付率_89
                 && 負担割合区分_10.equals(tempEntity.getFutanWariaiKubun())) {
             tempEntity.setSakuseiKubunErrorFlag(エラーフラグ_1);
             tempEntity.setFutanWariaiKubun(負担割合区分_20);
