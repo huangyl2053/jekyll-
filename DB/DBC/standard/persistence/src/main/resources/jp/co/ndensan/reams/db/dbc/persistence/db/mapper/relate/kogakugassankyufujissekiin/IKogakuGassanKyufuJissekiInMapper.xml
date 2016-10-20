@@ -46,7 +46,7 @@
         OR(DbT3075."kokanJohoShikibetsuNo"  LIKE'38P_'
         AND DbT3075."dataKubun" = '1'))) AS DbT3075
         ON DbWT38P1."hihokenshaNoIn"=DbT3075."hihokenshaNo"
-        AND DbWT38P1."shikyuShinseiSeiriNo"=DbT3075."shikyuShinseiSeiriNo"
+        AND DbWT38P1."shikyuShinseishoSeiriNo"=DbT3075."shikyuShinseiSeiriNo"
         AND DbWT38P1."jikoFutanSeiriNo"=DbT3075."jikoFutanSeiriNo"
         AND DbWT38P1."shikyuGaku"=DbT3075."shikyuGaku"
     </select>
@@ -58,7 +58,7 @@
         SET
         "kokanJohoShikibetsuNo" = DbWT38P1."kokanJohoShikibetsuNo"
         ,"hihokenshaNo" = DbWT38P1."hihokenshaNoIn"
-        ,"shikyuShinseiSeiriNo" = DbWT38P1."shikyuShinseiSeiriNo"
+        ,"shikyuShinseiSeiriNo" = DbWT38P1."shikyuShinseishoSeiriNo"
         ,"jikoFutanSeiriNo" = DbWT38P1."jikoFutanSeiriNo"
         ,"hokenSeidoCode" = DbWT38P1."hokenSeidoCode"
         ,"kyufuJissekiSakuseiKubunCode" = DbWT38P1."kyufuJissekiSakuseiKubunCode"
@@ -75,7 +75,7 @@
         "DbWT38P1KogakuGassanKyufuJisseki" AS DbWT38P1
         WHERE
         DbT3075."hihokenshaNo" = DbWT38P1."hihokenshaNoIn" 
-        AND DbT3075."shikyuShinseiSeiriNo"= DbWT38P1."shikyuShinseiSeiriNo" 
+        AND DbT3075."shikyuShinseiSeiriNo"= DbWT38P1."shikyuShinseishoSeiriNo" 
         AND  DbT3075."jikoFutanSeiriNo"= DbWT38P1."jikoFutanSeiriNo" 
         AND  DbT3075."shikyuGaku" = DbWT38P1."shikyuGaku" 
         AND (DbT3075."sofuYM" IS NULL  OR  DbT3075."sofuYM"='' )
@@ -101,7 +101,7 @@
         <id property="renban" column="DbWT38P1_renban" />
         <result property="kokanJohoShikibetsuNo" column="DbWT38P1_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
         <result property="hihokenshaNoIn" column="DbWT38P1_hihokenshaNoIn" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="shikyuShinseiSeiriNo" column="DbWT38P1_shikyuShinseiSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikyuShinseishoSeiriNo" column="DbWT38P1_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="seiriNo" column="DbWT38P1_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jikoFutanSeiriNo" column="DbWT38P1_jikoFutanSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenSeidoCode" column="DbWT38P1_hokenSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -123,7 +123,7 @@
         DbWT38P1."renban" AS DbWT38P1_renban,
         DbWT38P1."kokanJohoShikibetsuNo" AS DbWT38P1_kokanJohoShikibetsuNo,
         DbWT38P1."hihokenshaNoIn" AS DbWT38P1_hihokenshaNoIn,
-        DbWT38P1."shikyuShinseiSeiriNo" AS DbWT38P1_shikyuShinseiSeiriNo,
+        DbWT38P1."shikyuShinseishoSeiriNo" AS DbWT38P1_shikyuShinseishoSeiriNo,
         DbWT38P1."seiriNo" AS DbWT38P1_seiriNo,
         DbWT38P1."jikoFutanSeiriNo" AS DbWT38P1_jikoFutanSeiriNo,
         DbWT38P1."hokenSeidoCode" AS DbWT38P1_hokenSeidoCode,
