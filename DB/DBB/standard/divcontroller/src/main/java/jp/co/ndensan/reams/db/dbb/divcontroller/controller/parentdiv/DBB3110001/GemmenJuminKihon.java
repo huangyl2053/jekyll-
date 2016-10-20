@@ -185,6 +185,7 @@ public class GemmenJuminKihon {
         ValidationMessageControlPairs pairs = validationHandler.決定日の必須入力チェック();
 //        pairs.add(validationHandler.減免額の整合性チェック());
         pairs.add(validationHandler.減免額の必須入力チェック());
+        pairs.add(validationHandler.減免額の必須入力チェック1());
 //        pairs.add(validationHandler.計算処理の未実行チェック(最新減免の情報));
         pairs.add(validationHandler.決定日の必須入力チェック２());
         if (pairs.iterator().hasNext()) {
@@ -305,6 +306,50 @@ public class GemmenJuminKihon {
     public ResponseData<GemmenJuminKihonDiv> onOkClose_btnGemmenShurui(GemmenJuminKihonDiv div) {
         Code 減免種類code = getHandler(div).onOkClose減免種類();
         ViewStateHolder.put(ViewStateKeys.減免種類コード, 減免種類code);
+        return createResponse(div);
+    }
+
+    /**
+     * 金額のonChange事件です。
+     *
+     * @param div HanyorisutoPanelDiv
+     * @return 介護保険料減免画面
+     */
+    public ResponseData<GemmenJuminKihonDiv> onChange_GemmenGaku(GemmenJuminKihonDiv div) {
+        getHandler(div).onChange_GemmenGaku();
+        return createResponse(div);
+    }
+
+    /**
+     * 金額のonChange事件です。
+     *
+     * @param div HanyorisutoPanelDiv
+     * @return 介護保険料減免画面
+     */
+    public ResponseData<GemmenJuminKihonDiv> onChange_GemmenGaku1(GemmenJuminKihonDiv div) {
+        getHandler(div).onChange_GemmenGaku1();
+        return createResponse(div);
+    }
+
+    /**
+     * 金額のonChange事件です。
+     *
+     * @param div HanyorisutoPanelDiv
+     * @return 介護保険料減免画面
+     */
+    public ResponseData<GemmenJuminKihonDiv> onChange_GemmenGaku2(GemmenJuminKihonDiv div) {
+        getHandler(div).onChange_GemmenGaku2();
+        return createResponse(div);
+    }
+
+    /**
+     * 金額のonChange事件です。
+     *
+     * @param div HanyorisutoPanelDiv
+     * @return 介護保険料減免画面
+     */
+    public ResponseData<GemmenJuminKihonDiv> onChange_GemmenGaku3(GemmenJuminKihonDiv div) {
+        getHandler(div).onChange_GemmenGaku3();
         return createResponse(div);
     }
 

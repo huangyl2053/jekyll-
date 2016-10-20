@@ -192,12 +192,12 @@ public class KaigoHokenryoGemmen {
         if ((画面状況_決定済.equals(状況) && 決定区分 && 取消日 != null && !取消日.isEmpty())
                 || (画面状況_決定済.equals(状況) && !決定区分 && 定値_イチR.equals(減免情報.get減免状態区分()))) {
             賦課情報_介護賦課.setGemmenGaku(Decimal.ZERO);
-            賦課情報_介護賦課.setGemmenMaeHokenryo(入力減免前介護保険料_年額);
+            賦課情報_介護賦課.setKakuteiHokenryo(入力減免前介護保険料_年額);
         } else {
             賦課情報_介護賦課.setGemmenGaku(減免額);
             Decimal 賦課減免前介護保険料_年額 = 入力減免前介護保険料_年額 != null && 減免額 != null
                     ? 入力減免前介護保険料_年額.subtract(減免額) : null;
-            賦課情報_介護賦課.setGemmenMaeHokenryo(賦課減免前介護保険料_年額);
+            賦課情報_介護賦課.setKakuteiHokenryo(賦課減免前介護保険料_年額);
         }
         賦課の情報RelateEntity.set介護賦課Entity(賦課情報_介護賦課);
         FukaManager.createInstance().save賦課(new FukaJoho(賦課の情報RelateEntity));
