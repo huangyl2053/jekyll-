@@ -111,4 +111,22 @@ public class ShotokuManager {
         requireNonNull(介護所得, UrSystemErrorMessages.値がnull.getReplacedMessage("介護所得"));
         return 1 == dac.save(介護所得.toEntity());
     }
+
+    /**
+     * 所得年度と識別コードを利用して、次の履歴番号を取ります。
+     *
+     * @param 所得年度 FlexibleYear
+     * @param 識別コード ShikibetsuCode
+     * @return 最新履歴番号
+     */
+    @Transaction
+    public int get最新履歴番号(FlexibleYear 所得年度,
+            ShikibetsuCode 識別コード) {
+        int 履歴番号 = 1;
+        DbT2008ShotokuKanriEntity 最新所得 = dac.selectBySomeKey(所得年度, 識別コード);
+        if (null != 最新所得) {
+            履歴番号 = 最新所得.getRirekiNo() + 1;
+        }
+        return 履歴番号;
+    }
 }
