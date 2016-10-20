@@ -331,4 +331,27 @@ public final class ReportUtil {
             }
         }
     }
+
+    /**
+     * 出力順IDを取得します。
+     *
+     * @param shutsuryokujunId 出力順ID
+     * @param reportId 帳票ID
+     * @param subGyomuCode サブ業務コード
+     * @return List<ISetSortItem>
+     */
+    public static IOutputOrder get出力順ID(
+            SubGyomuCode subGyomuCode,
+            Long shutsuryokujunId,
+            ReportId reportId) {
+        if (shutsuryokujunId != null) {
+            IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
+            return chohyoShutsuryokujunFinder.get出力順(subGyomuCode,
+                    reportId,
+                    reamsLoginID,
+                    Long.valueOf(shutsuryokujunId.toString()));
+        }
+        return null;
+    }
 }
