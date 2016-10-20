@@ -27,10 +27,12 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4121ShinseiRirekiJohoBu
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoHokensha;
 import jp.co.ndensan.reams.db.dbz.business.core.rirekishusei.RirekiShuseiDataPass;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoHokenshaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -199,7 +201,8 @@ public class RirekiShusei {
             div.setHdnReceiveSerializeBusiness(row.getDataPass());
         } else {
             RirekiShuseiBusiness business = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
-            div.setHdnReceiveSerializeBusiness(DataPassingConverter.serialize(business.get履歴修正情報()));
+            div.setHdnReceiveSerializeBusiness(DataPassingConverter.serialize(business.get履歴修正情報(
+                    new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()))));
         }
         setHdnItem(div.getDgRirekiIchiran().getDataSource().indexOf(row), div);
         div.setHdnDeleteKey(RString.EMPTY);
@@ -218,7 +221,8 @@ public class RirekiShusei {
             div.setHdnReceiveSerializeBusiness(row.getDataPass());
         } else {
             RirekiShuseiBusiness business = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
-            div.setHdnReceiveSerializeBusiness(DataPassingConverter.serialize(business.get履歴修正情報()));
+            div.setHdnReceiveSerializeBusiness(DataPassingConverter.serialize(business.get履歴修正情報(
+                    new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()))));
         }
         setHdnItem(div.getDgRirekiIchiran().getDataSource().indexOf(row), div);
         div.setHdnDeleteKey(RString.EMPTY);
