@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaigokyufujuryoi
 
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufujuryoininkeiyakutoroku.HihokenshaJohoEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護保険受領委任契約承認（不承認）確認書のMapperクラスです。
@@ -19,8 +18,8 @@ public interface IKaigoKyufuJuryoininKeiyakuTorokuMapper {
     /**
      * 被保険者情報を取得します。
      *
-     * @param map Map<RString,Object>
+     * @param map Map<String,Object>
      * @return HihokenshaJohoEntity
      */
-    HihokenshaJohoEntity get被保険者情報(Map<RString, Object> map);
+    HihokenshaJohoEntity get被保険者情報(Map<String, Object> map);
 }
