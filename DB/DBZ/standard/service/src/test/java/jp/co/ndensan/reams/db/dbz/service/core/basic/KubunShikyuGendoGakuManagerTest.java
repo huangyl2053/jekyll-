@@ -5,13 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.basic;
 
-import jp.co.ndensan.reams.db.dbz.service.core.basic.KubunShikyuGendoGakuManager;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGaku;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7109KubunShikyuGendoGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7109KubunShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -20,8 +19,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Matchers.any;

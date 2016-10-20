@@ -4,10 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGaku;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGakuBuilder;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7109KubunShikyuGendoGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

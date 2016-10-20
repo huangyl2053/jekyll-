@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGaku;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGakuIdentifier;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +39,7 @@ public class KubunShikyuGendoGakuHolder implements Serializable {
     /**
      * KubunShikyuGendoGakuHolderのobj作成です。
      *
-     * @param kubunShikyuGendoGakuList Models<KubunShikyuGendoGakuIdentifier,
-     * KubunShikyuGendoGaku>
+     * @param kubunShikyuGendoGakuList Models<KubunShikyuGendoGakuIdentifier, KubunShikyuGendoGaku>
      */
     public KubunShikyuGendoGakuHolder(
             Models<KubunShikyuGendoGakuIdentifier, KubunShikyuGendoGaku> kubunShikyuGendoGakuList) {

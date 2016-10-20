@@ -4,10 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGaku;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7109KubunShikyuGendoGakuEntityGenerator;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7109KubunShikyuGendoGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,10 +16,10 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link KubunShikyuGendoGaku}のテストクラスです。

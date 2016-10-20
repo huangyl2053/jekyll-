@@ -4,13 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7109KubunShikyuGendoGakuDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7109KubunShikyuGendoGakuEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7109KubunShikyuGendoGakuEntityGenerator.DEFAULT_履歴番号;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7109KubunShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7109KubunShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

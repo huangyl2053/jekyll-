@@ -12,7 +12,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendo
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGaku.yoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
