@@ -258,7 +258,6 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         RString 導入団体コード = 導入団体.getLasdecCode_().getColumnValue();
         RString 市町村名 = 導入団体.get市町村名();
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
-        RString 帳票名 = new RString("");
         RString 出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
         RString csv出力有無 = new RString("あり");
         RString csvファイル名 = ファイル名;
@@ -287,7 +286,15 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
             出力条件.add(世帯非課税等);
         }
         if (null != parameter.getCsv出力設定()) {
-            出力条件.add(new RString("【CSV出力設定】 項目名付加、連番付加、日付\"/\"編集"));
+            RString CSV出力設定 = new RString("【CSV出力設定】");
+            int count = 0;
+            for (CSVSettings data : parameter.getCsv出力設定()) {
+                if (count == 0) {
+                    CSV出力設定 = CSV出力設定.concat(data.get名称());
+                } else {
+                    CSV出力設定 = CSV出力設定.concat(new RString("、")).concat(data.get名称());
+                }
+            }
         } else {
             出力条件.add(new RString("【CSV出力設定】 指定なし"));
         }
@@ -305,7 +312,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
-                帳票名,
+                帳票タイトル,
                 出力ページ数,
                 csv出力有無,
                 csvファイル名,

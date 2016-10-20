@@ -103,6 +103,7 @@
             LEFT JOIN (
                 SELECT
                     有効受給認定結果."hihokenshaNo" AS 認定情報の被保険者番号,
+                    有効受給認定結果."shinseishoKanriNo" AS 申請書管理番号,
                     有効受給認定結果."yokaigoJotaiKubunCode" AS 要介護状態区分コード,
                     有効受給認定結果."ninteiYMD" AS 認定年月日,
                     有効受給認定結果."ninteiYukoKikanKaishiYMD" AS 認定有効期間開始年月日,
@@ -125,7 +126,7 @@
                 ON 認定情報."認定情報の被保険者番号" = A."被保険者番号"
             LEFT JOIN
                 rgdb."DbT4101NinteiShinseiJoho" AS 要介護認定申請情報子
-                ON 認定情報."認定情報の被保険者番号" = 要介護認定申請情報子."hihokenshaNo"
+                ON 認定情報."申請書管理番号" = 要介護認定申請情報子."shinseishoKanriNo"
             LEFT JOIN
                     rgdb."DbT4014RiyoshaFutangakuGengaku" AS 利用者負担額減額
                 ON 利用者負担額減額."hihokenshaNo" = A."被保険者番号"
@@ -170,8 +171,7 @@
                     AND FALSE
                 </if>
             ) AS 世帯員情報
-                ON 世帯員情報."世帯員の識別コード" = A."本人識別コード"
-                AND 世帯員情報."世帯員の被保険者番号" = A."被保険者番号"
+                ON 世帯員情報."世帯員の被保険者番号" = A."被保険者番号"
             LEFT JOIN (
                 SELECT
                     総合事業対象者."hihokenshaNo" AS 総者の被保険者番号,

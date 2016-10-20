@@ -48,7 +48,9 @@ public class NinteishaListSakuseiBusiness {
      */
     public NinteishaListSakuseiResultCsvEntity set利用者負担額減免認定者リストCSV(NinteishaListSakuseiResultEntity t, List<CSVSettings> csv出力設定) {
         NinteishaListSakuseiResultCsvEntity resultEntity = new NinteishaListSakuseiResultCsvEntity();
-        resultEntity.set連番(new RString(String.valueOf(++連番)));
+        if (csv出力設定.contains(CSVSettings.連番付加)) {
+            resultEntity.set連番(new RString(String.valueOf(++連番)));
+        }
         resultEntity.set被保険者番号(t.get被保険者番号().getColumnValue());
         if (t.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.getPsmEntity());
