@@ -48,4 +48,7 @@ public class HihokenshaJohoEntity {
     private RString 納付済み期間;
     private RString 給付額減額期間;
 
+    private RString 町域コード;
+    private RString 市町村コード;
+
 }
