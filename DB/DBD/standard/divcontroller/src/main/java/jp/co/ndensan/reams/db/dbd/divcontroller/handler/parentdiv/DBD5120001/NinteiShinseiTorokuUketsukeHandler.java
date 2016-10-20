@@ -164,13 +164,12 @@ public class NinteiShinseiTorokuUketsukeHandler {
             } else {
                 市町村コード = result.getEntity().getT4001市町村コード().getColumnValue();
             }
+            div.getCcdKaigoNinteiShikakuInfo().initialize(
+                    市町村コード,
+                    被保険者番号 != null ? 被保険者番号.getColumnValue() : null);
         }
-        div.getCcdKaigoNinteiShikakuInfo().initialize(
-                市町村コード,
-                被保険者番号 != null ? 被保険者番号.getColumnValue() : null);
-
+        initControls();
         if (result != null) {
-
             this.set介護認定申請基本情報(result);
             this.set認定申請届出者(result);
             this.set主治医医療機関_主治医入力(result);
@@ -181,7 +180,8 @@ public class NinteiShinseiTorokuUketsukeHandler {
             this.set延期タブ表示用の情報(result);
             div.setHdnRirekiNo(result.getEntity().get履歴番号());
             div.setHdnEdaban(result.getEntity().get枝番());
-            div.setHdnJukyuShinseiJiyu(result.getEntity().get受給申請事由().getColumnValue());
+            // TODO 初回表示時エラーとなるため一時コメントアウト　修正表示で必要になるかも
+//            div.setHdnJukyuShinseiJiyu(result.getEntity().get受給申請事由().getColumnValue());
         }
         div.setHdnRenrakusakiReadOnly(new RString("0"));
         div.setHdnShichosonCode(市町村コード);
@@ -190,6 +190,27 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.setHdnHihokenshaNo(被保険者番号 != null ? 被保険者番号.getColumnValue() : null);
         div.setHdnShichosonRenrakuJiko(RString.EMPTY);
 
+    }
+    
+    private void initControls() {
+        KaigoNinteiShinseiKihonJohoInputDiv 介護認定申請Div
+                = div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv();
+        介護認定申請Div.initialize();
+        
+        INinteiShinseiTodokedeshaDiv iNinteiShinseiTodokedeshaDiv
+                = div.getCcdShinseiTodokedesha();
+        List<RString> 申請届出代行区分List = new ArrayList<>();
+        for (ShinseiTodokedeDaikoKubunCode code : ShinseiTodokedeDaikoKubunCode.values()) {
+            申請届出代行区分List.add(code.getCode());
+        }
+        iNinteiShinseiTodokedeshaDiv.getDdlTodokledeDaikoKubun().setDataSource(setDataSource(申請届出代行区分List, true));
+        List<RString> shinseiKankeishaCodeList = new ArrayList<>();
+        for (ShinseishaKankeiCode code : ShinseishaKankeiCode.values()) {
+            shinseiKankeishaCodeList.add(code.getコード());
+        }
+        iNinteiShinseiTodokedeshaDiv.getDdlShinseiKankeisha().setDataSource(setDataSource(shinseiKankeishaCodeList, false));
+        
+        
     }
 
     /**
@@ -1789,11 +1810,11 @@ public class NinteiShinseiTorokuUketsukeHandler {
         if (result.getEntity().get申請種別() != null) {
             介護認定申請Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(result.getEntity().get申請種別().getColumnValue()));
         }
-        if (result.getEntity().get認定申請区分コード_申請時() != null) {
+        if (!RString.isNullOrEmpty(result.getEntity().get認定申請区分コード_申請時().getColumnValue())) {
             介護認定申請Div.setShinseiKubunShinseiji(
                     NinteiShinseiShinseijiKubunCode.toValue(result.getEntity().get認定申請区分コード_申請時().getColumnValue()));
         }
-        if (result.getEntity().get認定申請区分コード_法令() != null) {
+        if (!RString.isNullOrEmpty(result.getEntity().get認定申請区分コード_法令().getColumnValue())) {
             介護認定申請Div.setShinseiKubunHorei(
                     NinteiShinseiHoreiCode.toValue(result.getEntity().get認定申請区分コード_法令().getColumnValue()));
         }
@@ -1806,7 +1827,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         }
         介護認定申請Div.setKyuSochisha(dataSource);
 
-        if (result.getEntity().get被保険者区分コード() != null) {
+        if (!RString.isNullOrEmpty(result.getEntity().get被保険者区分コード())) {
             介護認定申請Div.setHihokenshaKubun(
                     HihokenshaKubunCode.toValue(result.getEntity().get被保険者区分コード()));
         }
@@ -1817,7 +1838,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         }
         介護認定申請Div.setChkShikakuShutokuMae(dataSource1);
 
-        if (result.getEntity().get二号特定疾病コード() != null) {
+        if (!RString.isNullOrEmpty(result.getEntity().get二号特定疾病コード().getColumnValue())) {
             介護認定申請Div.setTokuteiShippei(
                     TokuteiShippei.toValue(result.getEntity().get二号特定疾病コード().getColumnValue()));
         }
@@ -1873,7 +1894,8 @@ public class NinteiShinseiTorokuUketsukeHandler {
             iNinteiShinseiTodokedeshaDiv.getTxtTelNo().setDomain(電話番号);
 
             YubinNo 郵便番号 = result.getEntity().get申請届出者郵便番号();
-            iNinteiShinseiTodokedeshaDiv.getCcdZenkokuJushoInput().load(new ZenkokuJushoCode(result.getEntity().get申請届出者住所()), 郵便番号);
+            // TODO 申請情報ロード時にエラー。住所コード11桁の文字列か空白を指定してください。ロード時に必要ないため一時コメントアウト
+            // iNinteiShinseiTodokedeshaDiv.getCcdZenkokuJushoInput().load(new ZenkokuJushoCode(result.getEntity().get申請届出者住所()), 郵便番号);
         }
     }
 
@@ -1940,7 +1962,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void set前回認定結果(NinteiShinseiTorokuUketsukeBusiness result) {
         IZenkaiNinteiKekkaJohoDiv 前回認定結果div = div.getCcdZenkaiNinteiKekkaJoho();
-        if (result.getEntity().get前回要介護状態区分コード() != null) {
+        if (!RString.isNullOrEmpty(result.getEntity().get前回要介護状態区分コード().getColumnValue())) {
             前回認定結果div.getTxtYokaigodo().setValue(
                     YokaigoJotaiKubun.toValue(result.getEntity().get前回要介護状態区分コード().getColumnValue()).get名称());
         }
