@@ -5,12 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8010001;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8010001.DBC8010001MainHandler;
+import jp.co.ndensan.reams.db.dbc.service.core.furikomidaitasakusai.DBC8010001MainManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ux.uxx.definition.mybatisprm.kozafurikomi.kozafurikomi.KozaFurikomiMapperParameter;
-import jp.co.ndensan.reams.ux.uxx.entity.db.relate.kozafurikomi.furikomigroup.FurikomiGroupItakushaRelateEntity;
 import jp.co.ndensan.reams.ux.uxx.service.core.kozafurikomi.kozafurikomi.KozaFurikomiManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
@@ -35,8 +34,8 @@ public enum DBC8010001MainDivSpec implements IPredicate<DBC8010001MainDiv> {
                     DBC8010001MainHandler handler = new DBC8010001MainHandler(div);
                     RString メニューID = ResponseHolder.getMenuID();
                     RString 振込単位 = DbBusinessConfig.get(ConfigNameDBC.振込単位, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-                    List<FurikomiGroupItakushaRelateEntity> list = handler.getFurikomiGroupItakushaRelateEntityList(メニューID, 振込単位);
-                    return 0 != list.size();
+                    DBC8010001MainManager manager = new DBC8010001MainManager();
+                    return manager.if存在(メニューID, 振込単位);
                 }
             },
     /**

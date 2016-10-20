@@ -65,8 +65,16 @@ public class DBC8010001MainManager {
      */
     public DBC8010001 getFurikomiGroupItakushaRelateEntity(RString メニューID, RString 振込単位) {
         List<FurikomiGroupItakushaRelateEntity> list = getFurikomiGroupItakushaRelateEntityList(メニューID, 振込単位);
-        FurikomiGroupItakushaRelateEntity fentity = list.get(0);
+        FurikomiGroupItakushaRelateEntity fentity = new FurikomiGroupItakushaRelateEntity();
+        if (!list.isEmpty()) {
+            fentity = list.get(0);
+        }
         return new DBC8010001(fentity);
+    }
+
+    public boolean if存在(RString メニューID, RString 振込単位) {
+        List<FurikomiGroupItakushaRelateEntity> list = getFurikomiGroupItakushaRelateEntityList(メニューID, 振込単位);
+        return !list.isEmpty();
     }
 
     /**
