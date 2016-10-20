@@ -122,9 +122,9 @@ public class KaigoKyufuJuryoininKeiyakuToroku {
         KaigoKyufuJuryoininKeiyakuTorokuJigyoshaEntity 事業者用Entity = new KaigoKyufuJuryoininKeiyakuTorokuJigyoshaEntity();
 
         IKaigoKyufuJuryoininKeiyakuTorokuMapper mapper = mapperProvider.create(IKaigoKyufuJuryoininKeiyakuTorokuMapper.class);
-        Map<RString, Object> map = new HashMap<>();
-        map.put(KEY_HIHOKENSHANO, 償還受領委任契約者データ.get被保険者番号());
-        map.put(KEY_SHORIYMD, RDate.getNowDate());
+        Map<String, Object> map = new HashMap<>();
+        map.put(KEY_HIHOKENSHANO.toString(), 償還受領委任契約者データ.get被保険者番号());
+        map.put(KEY_SHORIYMD.toString(), RDate.getNowDate());
         HihokenshaJohoEntity 被保険者情報 = mapper.get被保険者情報(map);
         set利用者向けEntity(利用者向けEntity, 文書番号, 償還受領委任契約者データ, 受領委任契約事業者データ, 被保険者情報);
         set事業者用Entity(事業者用Entity, 文書番号, 償還受領委任契約者データ, 受領委任契約事業者データ, 被保険者情報);

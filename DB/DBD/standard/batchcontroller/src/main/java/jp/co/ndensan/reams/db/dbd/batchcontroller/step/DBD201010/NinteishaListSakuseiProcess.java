@@ -181,7 +181,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     @Override
     protected void process(NinteishaListSakuseiResultEntity t) {
         RiyoshaFutangakuGemmenGaitoshaIchiranReport reportSource = new RiyoshaFutangakuGemmenGaitoshaIchiranReport(t, 帳票日時,
-                outputOrder, 導入団体.getLasdecCode_().getColumnValue(), 導入団体.getShichosonName_(), 帳票タイトル, 改ページ);
+                outputOrder, 導入団体.get地方公共団体コード().value(), 導入団体.get市町村名(), 帳票タイトル, 改ページ);
         reportSource.writeBy(reportSourceWriter);
 
         if (t.getPsmEntity() != null) {
