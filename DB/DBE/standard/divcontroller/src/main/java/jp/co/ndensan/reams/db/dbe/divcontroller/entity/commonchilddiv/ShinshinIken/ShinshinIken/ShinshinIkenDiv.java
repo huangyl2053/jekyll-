@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShinshinI
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  * 
  */
 public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -484,6 +485,16 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     @JsonIgnore
     public void  setChkHidariKashiMahiTeido(CheckBoxList chkHidariKashiMahiTeido) {
         this.getKaradaJotai().setChkHidariKashiMahiTeido(chkHidariKashiMahiTeido);
+    }
+
+    @JsonIgnore
+    public Space getSp1() {
+        return this.getKaradaJotai().getSp1();
+    }
+
+    @JsonIgnore
+    public void  setSp1(Space Sp1) {
+        this.getKaradaJotai().setSp1(Sp1);
     }
 
     @JsonIgnore

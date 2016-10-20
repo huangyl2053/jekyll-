@@ -5,8 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0210011;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyo.ChushutsuKikanJohoData;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU070010.DBU070010_KobetsujikoRenkei_TashaParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0210011.KobetsuJikoRenkeiInfoSakuseiDiv;
@@ -38,6 +41,16 @@ public class KobetsuJikoRenkeiInfoSakusei {
         ChushutsuKikanJohoData chushutsuKikanJohoData
                 = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance().getChushutsukikanJoho();
         getHandler(div).initialize(chushutsuKikanJohoData);
+        
+        if(chushutsuKikanJohoData == null){
+            Map 処理日付Map = new HashMap();
+            処理日付Map.put("TxtZenkaiChushutsuToYMD",div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().getValue());
+            処理日付Map.put("TxtZenkaiChushutsuToTime",div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().getValue());
+            処理日付Map.put("TxtKonkaiChushutsuFromYMD",div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().getValue());
+            処理日付Map.put("TxtKonkaiChushutsuFromTime",div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().getValue());
+            ViewStateHolder.put(ViewStateKeys.発行日時Map ,(Serializable)処理日付Map);
+        }
+        
         ViewStateHolder.put(ViewStateKeys.退避用データ, chushutsuKikanJohoData);
         return ResponseData.of(div).respond();
     }
@@ -65,12 +78,13 @@ public class KobetsuJikoRenkeiInfoSakusei {
                 div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(
                         chushutsuKikanJohoData.get対象終了日時().getRDateTime().getTime());
             } else {
+                Map 処理日付Map = ViewStateHolder.get(ViewStateKeys.発行日時Map, HashMap.class);
                 div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromYMD().clearValue();
                 div.getTblChushutsuKikan().getTxtZenkaiChushutsuFromTime().clearValue();
-                div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(RDate.getNowDate());
-                div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().setValue(RDate.getNowTime());
-                div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(RDate.getNowDate());
-                div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(RDate.getNowTime());
+                div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().setValue(new RDate(処理日付Map.get("TxtZenkaiChushutsuToYMD").toString()));
+                div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().setValue(new RTime(new RString(処理日付Map.get("TxtZenkaiChushutsuToTime").toString())));
+                div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().setValue(new RDate(処理日付Map.get("TxtKonkaiChushutsuFromYMD").toString()));
+                div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().setValue(new RTime(new RString(処理日付Map.get("TxtKonkaiChushutsuFromTime").toString())));
             }
             div.getKobetsuJikoRenkeiInfoSakuseiBP().getChkKikanHenko().setDisabled(false);
         }
