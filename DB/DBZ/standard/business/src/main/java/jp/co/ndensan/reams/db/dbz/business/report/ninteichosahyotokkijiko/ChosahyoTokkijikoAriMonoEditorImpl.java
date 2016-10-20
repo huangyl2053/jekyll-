@@ -14,11 +14,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
- * 要介護認定調査票（特記事項）のEditorです。
+ * 要介護認定調査票（特記事項）有り-白黒のEditorです。
  *
  * @reamsid_L DBE-0080-040 xuyannan
  */
-public class ChosahyoTokkijikoEditorImpl implements IChosahyoTokkijikoEditor {
+public class ChosahyoTokkijikoAriMonoEditorImpl implements IChosahyoTokkijikoEditor {
 
     private final ChosahyoTokkijikoBusiness business;
 
@@ -27,7 +27,7 @@ public class ChosahyoTokkijikoEditorImpl implements IChosahyoTokkijikoEditor {
      *
      * @param business {@link ChosahyoTokkijikoBusiness}
      */
-    protected ChosahyoTokkijikoEditorImpl(ChosahyoTokkijikoBusiness business) {
+    protected ChosahyoTokkijikoAriMonoEditorImpl(ChosahyoTokkijikoBusiness business) {
         this.business = business;
     }
 
@@ -60,29 +60,6 @@ public class ChosahyoTokkijikoEditorImpl implements IChosahyoTokkijikoEditor {
         source.hihokenshaNo9 = business.getHihokenshaNo9();
         source.hihokenshaNo10 = business.getHihokenshaNo10();
         source.hihokenshaName = business.getHihokenshaName();
-        source.oCR_shinseiYY1 = business.getShinseiYY1();
-        source.oCR_shinseiYY2 = business.getShinseiYY2();
-        source.oCR_shinseiMM1 = business.getShinseiMM1();
-        source.oCR_shinseiMM2 = business.getShinseiMM2();
-        source.oCR_shinseiDD1 = business.getShinseiDD1();
-        source.oCR_shinseiDD2 = business.getShinseiDD2();
-        source.oCR_hokenshaNo1 = business.getHokenshaNo1();
-        source.oCR_hokenshaNo2 = business.getHokenshaNo2();
-        source.oCR_hokenshaNo3 = business.getHokenshaNo3();
-        source.oCR_hokenshaNo4 = business.getHokenshaNo4();
-        source.oCR_hokenshaNo5 = business.getHokenshaNo5();
-        source.oCR_hokenshaNo6 = business.getHokenshaNo6();
-        source.oCR_shinseishaName = business.getHihokenshaName();
-        source.oCR_hishokenshaNo7 = business.getHihokenshaNo7();
-        source.oCR_hishokenshaNo8 = business.getHihokenshaNo8();
-        source.oCR_hishokenshaNo9 = business.getHihokenshaNo9();
-        source.oCR_hishokenshaNo10 = business.getHihokenshaNo10();
-        source.oCR_hishokenshaNo1 = business.getHihokenshaNo1();
-        source.oCR_hishokenshaNo2 = business.getHihokenshaNo2();
-        source.oCR_hishokenshaNo3 = business.getHihokenshaNo3();
-        source.oCR_hishokenshaNo4 = business.getHihokenshaNo4();
-        source.oCR_hishokenshaNo5 = business.getHihokenshaNo5();
-        source.oCR_hishokenshaNo6 = business.getHihokenshaNo6();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         RStringBuilder builder = new RStringBuilder();
         builder.append(business.getHihokenshaNo1());

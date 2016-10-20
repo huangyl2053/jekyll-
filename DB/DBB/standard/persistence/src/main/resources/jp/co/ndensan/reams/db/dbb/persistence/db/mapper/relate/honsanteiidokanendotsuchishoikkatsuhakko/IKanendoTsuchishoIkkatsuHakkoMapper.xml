@@ -976,10 +976,364 @@
     
     <insert id="insert賦課情報一時FROM計算後情報"
      parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendotsuchishoikkatsuhakko.IdoFukaJohoParameter">
-        INSERT INTO 
+        WITH master AS (
+            SELECT	
+                計算後情報."insertDantaiCd" AS "dbT2015KeisangoJoho_insertDantaiCd",
+                計算後情報."insertTimestamp" AS "dbT2015KeisangoJoho_insertTimestamp",
+                計算後情報."insertReamsLoginId" AS "dbT2015KeisangoJoho_insertReamsLoginId",
+                計算後情報."insertContextId" AS "dbT2015KeisangoJoho_insertContextId",
+                計算後情報."isDeleted" AS "dbT2015KeisangoJoho_isDeleted",
+                計算後情報."updateCount" AS "dbT2015KeisangoJoho_updateCount",
+                計算後情報."lastUpdateTimestamp" AS "dbT2015KeisangoJoho_lastUpdateTimestamp",
+                計算後情報."lastUpdateReamsLoginId" AS "dbT2015KeisangoJoho_lastUpdateReamsLoginId",
+                計算後情報."choteiNendo" AS "dbT2015KeisangoJoho_choteiNendo",
+                計算後情報."fukaNendo" AS "dbT2015KeisangoJoho_fukaNendo",
+                計算後情報."tsuchishoNo" AS "dbT2015KeisangoJoho_tsuchishoNo",
+                計算後情報."koseiZengoKubun" AS "dbT2015KeisangoJoho_koseiZengoKubun",
+                計算後情報."sakuseiShoriName" AS "dbT2015KeisangoJoho_sakuseiShoriName",
+                計算後情報."fukaRirekiNo" AS "dbT2015KeisangoJoho_fukaRirekiNo",
+                計算後情報."hihokenshaNo" AS "dbT2015KeisangoJoho_hihokenshaNo",
+                計算後情報."shikibetsuCode" AS "dbT2015KeisangoJoho_shikibetsuCode",
+                計算後情報."setaiCode" AS "dbT2015KeisangoJoho_setaiCode",
+                計算後情報."setaiInsu" AS "dbT2015KeisangoJoho_setaiInsu",
+                計算後情報."shikakuShutokuYMD" AS "dbT2015KeisangoJoho_shikakuShutokuYMD",
+                計算後情報."shikakuShutokuJiyu" AS "dbT2015KeisangoJoho_shikakuShutokuJiyu",
+                計算後情報."shikakuSoshitsuYMD" AS "dbT2015KeisangoJoho_shikakuSoshitsuYMD",
+                計算後情報."shikakuSoshitsuJiyu" AS "dbT2015KeisangoJoho_shikakuSoshitsuJiyu",
+                計算後情報."seihofujoShurui" AS "dbT2015KeisangoJoho_seihofujoShurui",
+                計算後情報."seihoKaishiYMD" AS "dbT2015KeisangoJoho_seihoKaishiYMD",
+                計算後情報."seihoHaishiYMD" AS "dbT2015KeisangoJoho_seihoHaishiYMD",
+                計算後情報."ronenKaishiYMD" AS "dbT2015KeisangoJoho_ronenKaishiYMD",
+                計算後情報."ronenHaishiYMD" AS "dbT2015KeisangoJoho_ronenHaishiYMD",
+                計算後情報."fukaYMD" AS "dbT2015KeisangoJoho_fukaYMD",
+                計算後情報."kazeiKubun" AS "dbT2015KeisangoJoho_kazeiKubun",
+                計算後情報."setaikazeiKubun" AS "dbT2015KeisangoJoho_setaikazeiKubun",
+                計算後情報."gokeiShotokuGaku" AS "dbT2015KeisangoJoho_gokeiShotokuGaku",
+                計算後情報."nenkinShunyuGaku" AS "dbT2015KeisangoJoho_nenkinShunyuGaku",
+                計算後情報."hokenryoDankai" AS "dbT2015KeisangoJoho_hokenryoDankai",
+                計算後情報."hokenryoDankai1" AS "dbT2015KeisangoJoho_hokenryoDankai1",
+                計算後情報."nengakuHokenryo1" AS "dbT2015KeisangoJoho_nengakuHokenryo1",
+                計算後情報."tsukiwariStartYM1" AS "dbT2015KeisangoJoho_tsukiwariStartYM1",
+                計算後情報."tsukiwariEndYM1" AS "dbT2015KeisangoJoho_tsukiwariEndYM1",
+                計算後情報."hokenryoDankai2" AS "dbT2015KeisangoJoho_hokenryoDankai2",
+                計算後情報."nengakuHokenryo2" AS "dbT2015KeisangoJoho_nengakuHokenryo2",
+                計算後情報."tsukiwariStartYM2" AS "dbT2015KeisangoJoho_tsukiwariStartYM2",
+                計算後情報."tsukiwariEndYM2" AS "dbT2015KeisangoJoho_tsukiwariEndYM2",
+                計算後情報."choteiNichiji" AS "dbT2015KeisangoJoho_choteiNichiji",
+                計算後情報."choteiJiyu1" AS "dbT2015KeisangoJoho_choteiJiyu1",
+                計算後情報."choteiJiyu2" AS "dbT2015KeisangoJoho_choteiJiyu2",
+                計算後情報."choteiJiyu3" AS "dbT2015KeisangoJoho_choteiJiyu3",
+                計算後情報."choteiJiyu4" AS "dbT2015KeisangoJoho_choteiJiyu4",
+                計算後情報."koseiM" AS "dbT2015KeisangoJoho_koseiM",
+                計算後情報."gemmenMaeHokenryo" AS "dbT2015KeisangoJoho_gemmenMaeHokenryo",
+                計算後情報."gemmenGaku" AS "dbT2015KeisangoJoho_gemmenGaku",
+                計算後情報."kakuteiHokenryo" AS "dbT2015KeisangoJoho_kakuteiHokenryo",
+                計算後情報."hokenryoDankaiKarisanntei" AS "dbT2015KeisangoJoho_hokenryoDankaiKarisanntei",
+                計算後情報."choshuHohoRirekiNo" AS "dbT2015KeisangoJoho_choshuHohoRirekiNo",
+                計算後情報."idoKijunNichiji" AS "dbT2015KeisangoJoho_idoKijunNichiji",
+                計算後情報."kozaKubun" AS "dbT2015KeisangoJoho_kozaKubun",
+                計算後情報."kyokaisoKubun" AS "dbT2015KeisangoJoho_kyokaisoKubun",
+                計算後情報."shokkenKubun" AS "dbT2015KeisangoJoho_shokkenKubun",
+                計算後情報."fukaShichosonCode" AS "dbT2015KeisangoJoho_fukaShichosonCode",
+                計算後情報."tkSaishutsuKampuGaku" AS "dbT2015KeisangoJoho_tkSaishutsuKampuGaku",
+                計算後情報."fuSaishutsuKampuGaku" AS "dbT2015KeisangoJoho_fuSaishutsuKampuGaku",
+                計算後情報."tkKibetsuGaku01" AS "dbT2015KeisangoJoho_tkKibetsuGaku01",
+                計算後情報."tkKibetsuGaku02" AS "dbT2015KeisangoJoho_tkKibetsuGaku02",
+                計算後情報."tkKibetsuGaku03" AS "dbT2015KeisangoJoho_tkKibetsuGaku03",
+                計算後情報."tkKibetsuGaku04" AS "dbT2015KeisangoJoho_tkKibetsuGaku04",
+                計算後情報."tkKibetsuGaku05" AS "dbT2015KeisangoJoho_tkKibetsuGaku05",
+                計算後情報."tkKibetsuGaku06" AS "dbT2015KeisangoJoho_tkKibetsuGaku06",
+                計算後情報."fuKibetsuGaku01" AS "dbT2015KeisangoJoho_fuKibetsuGaku01",
+                計算後情報."fuKibetsuGaku02" AS "dbT2015KeisangoJoho_fuKibetsuGaku02",
+                計算後情報."fuKibetsuGaku03" AS "dbT2015KeisangoJoho_fuKibetsuGaku03",
+                計算後情報."fuKibetsuGaku04" AS "dbT2015KeisangoJoho_fuKibetsuGaku04",
+                計算後情報."fuKibetsuGaku05" AS "dbT2015KeisangoJoho_fuKibetsuGaku05",
+                計算後情報."fuKibetsuGaku06" AS "dbT2015KeisangoJoho_fuKibetsuGaku06",
+                計算後情報."fuKibetsuGaku07" AS "dbT2015KeisangoJoho_fuKibetsuGaku07",
+                計算後情報."fuKibetsuGaku08" AS "dbT2015KeisangoJoho_fuKibetsuGaku08",
+                計算後情報."fuKibetsuGaku09" AS "dbT2015KeisangoJoho_fuKibetsuGaku09",
+                計算後情報."fuKibetsuGaku10" AS "dbT2015KeisangoJoho_fuKibetsuGaku10",
+                計算後情報."fuKibetsuGaku11" AS "dbT2015KeisangoJoho_fuKibetsuGaku11",
+                計算後情報."fuKibetsuGaku12" AS "dbT2015KeisangoJoho_fuKibetsuGaku12",
+                計算後情報."fuKibetsuGaku13" AS "dbT2015KeisangoJoho_fuKibetsuGaku13",
+                計算後情報."fuKibetsuGaku14" AS "dbT2015KeisangoJoho_fuKibetsuGaku14",
+                計算後情報."choshuHoho4gatsu" AS "dbT2015KeisangoJoho_choshuHoho4gatsu",
+                計算後情報."choshuHoho5gatsu" AS "dbT2015KeisangoJoho_choshuHoho5gatsu",
+                計算後情報."choshuHoho6gatsu" AS "dbT2015KeisangoJoho_choshuHoho6gatsu",
+                計算後情報."choshuHoho7gatsu" AS "dbT2015KeisangoJoho_choshuHoho7gatsu",
+                計算後情報."choshuHoho8gatsu" AS "dbT2015KeisangoJoho_choshuHoho8gatsu",
+                計算後情報."choshuHoho9gatsu" AS "dbT2015KeisangoJoho_choshuHoho9gatsu",
+                計算後情報."choshuHoho10gatsu" AS "dbT2015KeisangoJoho_choshuHoho10gatsu",
+                計算後情報."choshuHoho11gatsu" AS "dbT2015KeisangoJoho_choshuHoho11gatsu",
+                計算後情報."choshuHoho12gatsu" AS "dbT2015KeisangoJoho_choshuHoho12gatsu",
+                計算後情報."choshuHoho1gatsu" AS "dbT2015KeisangoJoho_choshuHoho1gatsu",
+                計算後情報."choshuHoho2gatsu" AS "dbT2015KeisangoJoho_choshuHoho2gatsu",
+                計算後情報."choshuHoho3gatsu" AS "dbT2015KeisangoJoho_choshuHoho3gatsu",
+                計算後情報."choshuHohoYoku4gatsu" AS "dbT2015KeisangoJoho_choshuHohoYoku4gatsu",
+                計算後情報."choshuHohoYoku5gatsu" AS "dbT2015KeisangoJoho_choshuHohoYoku5gatsu",
+                計算後情報."choshuHohoYoku6gatsu" AS "dbT2015KeisangoJoho_choshuHohoYoku6gatsu",
+                計算後情報."choshuHohoYoku7gatsu" AS "dbT2015KeisangoJoho_choshuHohoYoku7gatsu",
+                計算後情報."choshuHohoYoku8gatsu" AS "dbT2015KeisangoJoho_choshuHohoYoku8gatsu",
+                計算後情報."choshuHohoYoku9gatsu" AS "dbT2015KeisangoJoho_choshuHohoYoku9gatsu",
+                計算後情報."kariNenkinNo" AS "dbT2015KeisangoJoho_kariNenkinNo",
+                計算後情報."kariNenkinCode" AS "dbT2015KeisangoJoho_kariNenkinCode",
+                計算後情報."kariHosokuM" AS "dbT2015KeisangoJoho_kariHosokuM",
+                計算後情報."honNenkinNo" AS "dbT2015KeisangoJoho_honNenkinNo",
+                計算後情報."honNenkinCode" AS "dbT2015KeisangoJoho_honNenkinCode",
+                計算後情報."honHosokuM" AS "dbT2015KeisangoJoho_honHosokuM",
+                計算後情報."yokunendoKariNenkinNo" AS "dbT2015KeisangoJoho_yokunendoKariNenkinNo",
+                計算後情報."yokunendoKariNenkinCode" AS "dbT2015KeisangoJoho_yokunendoKariNenkinCode",
+                計算後情報."yokunendoKariHosokuM" AS "dbT2015KeisangoJoho_yokunendoKariHosokuM",
+                計算後情報."iraiSohuzumiFlag" AS "dbT2015KeisangoJoho_iraiSohuzumiFlag",
+                計算後情報."tsuikaIraiSohuzumiFlag" AS "dbT2015KeisangoJoho_tsuikaIraiSohuzumiFlag",
+                計算後情報."tokuchoTeishiNichiji" AS "dbT2015KeisangoJoho_tokuchoTeishiNichiji",
+                計算後情報."tokuchoTeishiJiyuCode" AS "dbT2015KeisangoJoho_tokuchoTeishiJiyuCode",
+                計算後情報."tkShunyuGaku01" AS "dbT2015KeisangoJoho_tkShunyuGaku01",
+                計算後情報."tkShunyuGaku02" AS "dbT2015KeisangoJoho_tkShunyuGaku02",
+                計算後情報."tkShunyuGaku03" AS "dbT2015KeisangoJoho_tkShunyuGaku03",
+                計算後情報."tkShunyuGaku04" AS "dbT2015KeisangoJoho_tkShunyuGaku04",
+                計算後情報."tkShunyuGaku05" AS "dbT2015KeisangoJoho_tkShunyuGaku05",
+                計算後情報."tkShunyuGaku06" AS "dbT2015KeisangoJoho_tkShunyuGaku06",
+                計算後情報."fuShunyuGaku01" AS "dbT2015KeisangoJoho_fuShunyuGaku01",
+                計算後情報."fuShunyuGaku02" AS "dbT2015KeisangoJoho_fuShunyuGaku02",
+                計算後情報."fuShunyuGaku03" AS "dbT2015KeisangoJoho_fuShunyuGaku03",
+                計算後情報."fuShunyuGaku04" AS "dbT2015KeisangoJoho_fuShunyuGaku04",
+                計算後情報."fuShunyuGaku05" AS "dbT2015KeisangoJoho_fuShunyuGaku05",
+                計算後情報."fuShunyuGaku06" AS "dbT2015KeisangoJoho_fuShunyuGaku06",
+                計算後情報."fuShunyuGaku07" AS "dbT2015KeisangoJoho_fuShunyuGaku07",
+                計算後情報."fuShunyuGaku08" AS "dbT2015KeisangoJoho_fuShunyuGaku08",
+                計算後情報."fuShunyuGaku09" AS "dbT2015KeisangoJoho_fuShunyuGaku09",
+                計算後情報."fuShunyuGaku10" AS "dbT2015KeisangoJoho_fuShunyuGaku10",
+                計算後情報."fuShunyuGaku11" AS "dbT2015KeisangoJoho_fuShunyuGaku11",
+                計算後情報."fuShunyuGaku12" AS "dbT2015KeisangoJoho_fuShunyuGaku12",
+                計算後情報."fuShunyuGaku13" AS "dbT2015KeisangoJoho_fuShunyuGaku13",
+                計算後情報."fuShunyuGaku14" AS "dbT2015KeisangoJoho_fuShunyuGaku14",
+                年金特徴回付情報."gyomuCode" AS "ueT0511after_gyomuCode",
+                年金特徴回付情報."shoriNendo" AS "ueT0511after_shoriNendo",
+                年金特徴回付情報."tsuchiNaiyoCode" AS "ueT0511after_tsuchiNaiyoCode",
+                年金特徴回付情報."shoriTaishoYM" AS "ueT0511after_shoriTaishoYM",
+                年金特徴回付情報."kisoNenkinNo" AS "ueT0511after_kisoNenkinNo",
+                年金特徴回付情報."nenkinCode" AS "ueT0511after_nenkinCode",
+                年金特徴回付情報."koseiCityCode" AS "ueT0511after_koseiCityCode",
+                年金特徴回付情報."renban" AS "ueT0511after_renban",
+                年金特徴回付情報."insertDantaiCd" AS "ueT0511after_insertDantaiCd",
+                年金特徴回付情報."insertTimestamp" AS "ueT0511after_insertTimestamp",
+                年金特徴回付情報."insertReamsLoginId" AS "ueT0511after_insertReamsL,ginId",
+                年金特徴回付情報."insertContextId" AS "ueT0511after_insertContextId",
+                年金特徴回付情報."isDeleted" AS "ueT0511after_isDeleted",
+                年金特徴回付情報."updateCount" AS "ueT0511after_updateCount",
+                年金特徴回付情報."lastUpdateTimestamp" AS "ueT0511after_lastUpdateTimestamp",
+                年金特徴回付情報."lastUpdateReamsLoginId" AS "ueT0511after_lastUpdateReamsLoginId",
+                年金特徴回付情報."shoriTimestamp" AS "ueT0511after_shoriTimestamp",
+                年金特徴回付情報."renkeiShubetsu" AS "ueT0511after_renkeiShubetsu",
+                年金特徴回付情報."hosokuTsuki" AS "ueT0511after_hosokuTsuki",
+                年金特徴回付情報."tenbikiTsuki" AS "ueT0511after_tenbikiTsuki",
+                年金特徴回付情報."shikibetsuCode" AS "ueT0511after_ShikibetsuCode",
+                年金特徴回付情報."hihokenshaNo" AS "ueT0511after_hihokenshaNo",
+                年金特徴回付情報."kokuhoSetaiCode" AS "ueT0511after_kokuhoSetaiCode",
+                年金特徴回付情報."dtCityCode" AS "ueT0511after_dtCityCode",
+                年金特徴回付情報."dtTokubetsuChoshuGimushaCode" AS "ueT0511after_dtTokubetsuChoshuGimushaCode",
+                年金特徴回付情報."dtTsuchiNaiyoCode" AS "ueT0511after_dtTsuchiNaiyoCode",
+                年金特徴回付情報."dtBaitaiCode" AS "ueT0511after_dtBaitaiCode",
+                年金特徴回付情報."dtTokubetsuChoshuSeidoCode" AS "ueT0511after_dtTokubetsuChoshuSeidoCode",
+                年金特徴回付情報."dtSakuseiYMD" AS "ueT0511after_dtSakuseiYMD",
+                年金特徴回付情報."dtKisoNenkinNo" AS "ueT0511after_dtKisoNenkinNo",
+                年金特徴回付情報."dtNenkinCode" AS "ueT0511after_dtNenkinCode",
+                年金特徴回付情報."dtYobi1" AS "ueT0511after_dtYobi1",
+                年金特徴回付情報."dtBirthDay" AS "ueT0511after_dtBirthDay",
+                年金特徴回付情報."dtSeibetsu" AS "ueT0511after_dtSeibetsu",
+                年金特徴回付情報."dtKanaShimei" AS "ueT0511after_dtKanaShimei",
+                年金特徴回付情報."dtShiftCode1" AS "ueT0511after_dtShiftCode1",
+                年金特徴回付情報."dtKanjiShimei" AS "ueT0511after_dtKanjiShimei",
+                年金特徴回付情報."dtShiftCode2" AS "ueT0511after_dtShiftCode2",
+                年金特徴回付情報."dtYubinNo" AS "ueT0511after_dtYubinNo",
+                年金特徴回付情報."dtKanaJusho" AS "ueT0511after_dtKanaJusho",
+                年金特徴回付情報."dtShiftCode3" AS "ueT0511after_dtShiftCode3",
+                年金特徴回付情報."dtKanjiJusho" AS "ueT0511after_dtKanjiJusho",
+                年金特徴回付情報."dtShiftCode4" AS "ueT0511after_dtShiftCode4",
+                年金特徴回付情報."dtKakushuKubun" AS "ueT0511after_dtKakushuKubun", 
+                年金特徴回付情報."dtShoriKekka" AS "ueT0511after_dtShoriKekka",
+                年金特徴回付情報."dtKokiIkanCode" AS "ueT0511after_dtKokiIkanCode", 
+                年金特徴回付情報."dtKakushuYMD" AS "ueT0511after_dtKakushuYMD",
+                年金特徴回付情報."dtKakushuKingaku1" AS "ueT0511after_dtKakushuKingaku1",
+                年金特徴回付情報."dtKakushuKingaku2" AS "ueT0511after_dtKakushuKingaku2",
+                年金特徴回付情報."dtKakushuKingaku3" AS "ueT0511after_dtKakushuKingaku3",
+                年金特徴回付情報."dtYobi2" AS "ueT0511after_dtYobi2",
+                年金特徴回付情報."dtKyosaiNenkinshoshoKigoNo" AS "ueT0511after_dtKyosaiNenkinshoshoKigoNo",
+                年金特徴回付情報."dtKakushuKingaku4" AS "ueT0511after_dtKakushuKingaku4",
+                年金特徴回付情報."dtKakushuKingaku5" AS "ueT0511after_dtKakushuKingaku5",
+                年金特徴回付情報."dtKakushuKingaku6" AS "ueT0511after_dtKakushuKingaku6",
+                年金特徴回付情報."dtKakushuKingaku7" AS "ueT0511after_dtKakushuKingaku7",
+                年金特徴回付情報."dtKakushuKingaku8" AS "ueT0511after_dtKakushuKingaku8",
+                年金特徴回付情報."dtTeishiYM" AS "ueT0511after_dtTeishiYM",
+                年金特徴回付情報."dtYobi4Juminzei" AS "ueT0511after_dtYobi4Juminzei",
+                年金特徴回付情報."dtKojinNo" AS "ueT0511after_dtKojinNo"
+        FROM 
+          "DbT2015KeisangoJoho" AS 計算後情報
+          INNER JOIN 
+              rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
+              ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
+              AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
+              AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
+              AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
+              AND 年金特徴回付情報."gyomuCode" = 'DB'
+              <choose>
+                  <when test="判定フラグ == 1">   
+                      AND 年金特徴回付情報."shoriNendo" = #{調定年度前１年}
+                  </when>
+                  <otherwise>
+                      AND 年金特徴回付情報."shoriNendo" = #{調定年度前２年}
+                  </otherwise>
+              </choose>            
+        WHERE
+            <choose>
+                  <when test="判定フラグ == 1">  
+                      (計算後情報."choteiNendo" = #{調定年度} AND 計算後情報."fukaNendo" = #{調定年度前１年}
+                      OR
+                      計算後情報."choteiNendo" = #{調定年度前１年} AND 計算後情報."fukaNendo" = #{調定年度前１年})
+                  </when>
+                  <otherwise>
+                      計算後情報."choteiNendo" = #{調定年度} 
+                      AND 計算後情報."fukaNendo" = #{調定年度前２年}
+                  </otherwise>
+            </choose> 
+            AND 計算後情報."koseiZengoKubun" = '2'
+            AND 計算後情報."sakuseiShoriName" = '過年度賦課'
+            AND 計算後情報."choteiNichiji" = #{調定日時}
+        )
+    INSERT INTO 
         "IdoFukaJohoTemp"
         SELECT
-            計算後情報.*,
+            master."dbT2015KeisangoJoho_insertDantaiCd",
+            master."dbT2015KeisangoJoho_insertTimestamp",
+            master."dbT2015KeisangoJoho_insertReamsLoginId",
+            master."dbT2015KeisangoJoho_insertContextId",
+            master."dbT2015KeisangoJoho_isDeleted",
+            master."dbT2015KeisangoJoho_updateCount",
+            master."dbT2015KeisangoJoho_lastUpdateTimestamp",
+            master."dbT2015KeisangoJoho_lastUpdateReamsLoginId",
+            master."dbT2015KeisangoJoho_choteiNendo",
+            master."dbT2015KeisangoJoho_fukaNendo",
+            master."dbT2015KeisangoJoho_tsuchishoNo",
+            master."dbT2015KeisangoJoho_koseiZengoKubun",
+            master."dbT2015KeisangoJoho_sakuseiShoriName",
+            master."dbT2015KeisangoJoho_fukaRirekiNo",
+            master."dbT2015KeisangoJoho_hihokenshaNo",
+            master."dbT2015KeisangoJoho_shikibetsuCode",
+            master."dbT2015KeisangoJoho_setaiCode",
+            master."dbT2015KeisangoJoho_setaiInsu",
+            master."dbT2015KeisangoJoho_shikakuShutokuYMD",
+            master."dbT2015KeisangoJoho_shikakuShutokuJiyu",
+            master."dbT2015KeisangoJoho_shikakuSoshitsuYMD",
+            master."dbT2015KeisangoJoho_shikakuSoshitsuJiyu",
+            master."dbT2015KeisangoJoho_seihofujoShurui",
+            master."dbT2015KeisangoJoho_seihoKaishiYMD",
+            master."dbT2015KeisangoJoho_seihoHaishiYMD",
+            master."dbT2015KeisangoJoho_ronenKaishiYMD",
+            master."dbT2015KeisangoJoho_ronenHaishiYMD",
+            master."dbT2015KeisangoJoho_fukaYMD",
+            master."dbT2015KeisangoJoho_kazeiKubun",
+            master."dbT2015KeisangoJoho_setaikazeiKubun",
+            master."dbT2015KeisangoJoho_gokeiShotokuGaku",
+            master."dbT2015KeisangoJoho_nenkinShunyuGaku",
+            master."dbT2015KeisangoJoho_hokenryoDankai",
+            master."dbT2015KeisangoJoho_hokenryoDankai1",
+            master."dbT2015KeisangoJoho_nengakuHokenryo1",
+            master."dbT2015KeisangoJoho_tsukiwariStartYM1",
+            master."dbT2015KeisangoJoho_tsukiwariEndYM1",
+            master."dbT2015KeisangoJoho_hokenryoDankai2",
+            master."dbT2015KeisangoJoho_nengakuHokenryo2",
+            master."dbT2015KeisangoJoho_tsukiwariStartYM2",
+            master."dbT2015KeisangoJoho_tsukiwariEndYM2",
+            master."dbT2015KeisangoJoho_choteiNichiji",
+            master."dbT2015KeisangoJoho_choteiJiyu1",
+            master."dbT2015KeisangoJoho_choteiJiyu2",
+            master."dbT2015KeisangoJoho_choteiJiyu3",
+            master."dbT2015KeisangoJoho_choteiJiyu4",
+            master."dbT2015KeisangoJoho_koseiM",
+            master."dbT2015KeisangoJoho_gemmenMaeHokenryo",
+            master."dbT2015KeisangoJoho_gemmenGaku",
+            master."dbT2015KeisangoJoho_kakuteiHokenryo",
+            master."dbT2015KeisangoJoho_hokenryoDankaiKarisanntei",
+            master."dbT2015KeisangoJoho_choshuHohoRirekiNo",
+            master."dbT2015KeisangoJoho_idoKijunNichiji",
+            master."dbT2015KeisangoJoho_kozaKubun",
+            master."dbT2015KeisangoJoho_kyokaisoKubun",
+            master."dbT2015KeisangoJoho_shokkenKubun",
+            master."dbT2015KeisangoJoho_fukaShichosonCode",
+            master."dbT2015KeisangoJoho_tkSaishutsuKampuGaku",
+            master."dbT2015KeisangoJoho_fuSaishutsuKampuGaku",
+            master."dbT2015KeisangoJoho_tkKibetsuGaku01",
+            master."dbT2015KeisangoJoho_tkKibetsuGaku02",
+            master."dbT2015KeisangoJoho_tkKibetsuGaku03",
+            master."dbT2015KeisangoJoho_tkKibetsuGaku04",
+            master."dbT2015KeisangoJoho_tkKibetsuGaku05",
+            master."dbT2015KeisangoJoho_tkKibetsuGaku06",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku01",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku02",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku03",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku04",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku05",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku06",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku07",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku08",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku09",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku10",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku11",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku12",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku13",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku14",
+            master."dbT2015KeisangoJoho_choshuHoho4gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho5gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho6gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho7gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho8gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho9gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho10gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho11gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho12gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho1gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho2gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho3gatsu",
+            master."dbT2015KeisangoJoho_choshuHohoYoku4gatsu",
+            master."dbT2015KeisangoJoho_choshuHohoYoku5gatsu",
+            master."dbT2015KeisangoJoho_choshuHohoYoku6gatsu",
+            master."dbT2015KeisangoJoho_choshuHohoYoku7gatsu",
+            master."dbT2015KeisangoJoho_choshuHohoYoku8gatsu",
+            master."dbT2015KeisangoJoho_choshuHohoYoku9gatsu",
+            master."dbT2015KeisangoJoho_kariNenkinNo",
+            master."dbT2015KeisangoJoho_kariNenkinCode",
+            master."dbT2015KeisangoJoho_kariHosokuM",
+            master."dbT2015KeisangoJoho_honNenkinNo",
+            master."dbT2015KeisangoJoho_honNenkinCode",
+            master."dbT2015KeisangoJoho_honHosokuM",
+            master."dbT2015KeisangoJoho_yokunendoKariNenkinNo",
+            master."dbT2015KeisangoJoho_yokunendoKariNenkinCode",
+            master."dbT2015KeisangoJoho_yokunendoKariHosokuM",
+            master."dbT2015KeisangoJoho_iraiSohuzumiFlag",
+            master."dbT2015KeisangoJoho_tsuikaIraiSohuzumiFlag",
+            master."dbT2015KeisangoJoho_tokuchoTeishiNichiji",
+            master."dbT2015KeisangoJoho_tokuchoTeishiJiyuCode",
+            master."dbT2015KeisangoJoho_tkShunyuGaku01",
+            master."dbT2015KeisangoJoho_tkShunyuGaku02",
+            master."dbT2015KeisangoJoho_tkShunyuGaku03",
+            master."dbT2015KeisangoJoho_tkShunyuGaku04",
+            master."dbT2015KeisangoJoho_tkShunyuGaku05",
+            master."dbT2015KeisangoJoho_tkShunyuGaku06",
+            master."dbT2015KeisangoJoho_fuShunyuGaku01",
+            master."dbT2015KeisangoJoho_fuShunyuGaku02",
+            master."dbT2015KeisangoJoho_fuShunyuGaku03",
+            master."dbT2015KeisangoJoho_fuShunyuGaku04",
+            master."dbT2015KeisangoJoho_fuShunyuGaku05",
+            master."dbT2015KeisangoJoho_fuShunyuGaku06",
+            master."dbT2015KeisangoJoho_fuShunyuGaku07",
+            master."dbT2015KeisangoJoho_fuShunyuGaku08",
+            master."dbT2015KeisangoJoho_fuShunyuGaku09",
+            master."dbT2015KeisangoJoho_fuShunyuGaku10",
+            master."dbT2015KeisangoJoho_fuShunyuGaku11",
+            master."dbT2015KeisangoJoho_fuShunyuGaku12",
+            master."dbT2015KeisangoJoho_fuShunyuGaku13",
+            master."dbT2015KeisangoJoho_fuShunyuGaku14",
             null,
             null,
             null,
@@ -1110,7 +1464,66 @@
             null,
             null,
             null,
-            年金特徴回付情報.*,
+            master."ueT0511after_insertDantaiCd",
+            master."ueT0511after_insertTimestamp",
+            master."ueT0511after_insertReamsL,ginId",
+            master."ueT0511after_insertContextId",
+            master."ueT0511after_isDeleted",
+            master."ueT0511after_updateCount",
+            master."ueT0511after_lastUpdateTimestamp",
+            master."ueT0511after_lastUpdateReamsLoginId",
+            master."ueT0511after_gyomuCode",
+            master."ueT0511after_shoriNendo",
+            master."ueT0511after_tsuchiNaiyoCode",
+            master."ueT0511after_shoriTaishoYM",
+            master."ueT0511after_kisoNenkinNo",
+            master."ueT0511after_nenkinCode",
+            master."ueT0511after_koseiCityCode",
+            master."ueT0511after_renban",
+            master."ueT0511after_shoriTimestamp",
+            master."ueT0511after_renkeiShubetsu",
+            master."ueT0511after_hosokuTsuki",
+            master."ueT0511after_tenbikiTsuki",
+            master."ueT0511after_ShikibetsuCode",
+            master."ueT0511after_hihokenshaNo",
+            master."ueT0511after_kokuhoSetaiCode",
+            master."ueT0511after_dtCityCode",
+            master."ueT0511after_dtTokubetsuChoshuGimushaCode",
+            master."ueT0511after_dtTsuchiNaiyoCode",
+            master."ueT0511after_dtBaitaiCode",
+            master."ueT0511after_dtTokubetsuChoshuSeidoCode",
+            master."ueT0511after_dtSakuseiYMD",
+            master."ueT0511after_dtKisoNenkinNo",
+            master."ueT0511after_dtNenkinCode",
+            master."ueT0511after_dtYobi1",
+            master."ueT0511after_dtBirthDay",
+            master."ueT0511after_dtSeibetsu",
+            master."ueT0511after_dtKanaShimei",
+            master."ueT0511after_dtShiftCode1",
+            master."ueT0511after_dtKanjiShimei",
+            master."ueT0511after_dtShiftCode2",
+            master."ueT0511after_dtYubinNo",
+            master."ueT0511after_dtKanaJusho",
+            master."ueT0511after_dtShiftCode3",
+            master."ueT0511after_dtKanjiJusho",
+            master."ueT0511after_dtShiftCode4",
+            master."ueT0511after_dtKakushuKubun", 
+            master."ueT0511after_dtShoriKekka",
+            master."ueT0511after_dtKokiIkanCode", 
+            master."ueT0511after_dtKakushuYMD",
+            master."ueT0511after_dtKakushuKingaku1",
+            master."ueT0511after_dtKakushuKingaku2",
+            master."ueT0511after_dtKakushuKingaku3",
+            master."ueT0511after_dtYobi2",
+            master."ueT0511after_dtKyosaiNenkinshoshoKigoNo",
+            master."ueT0511after_dtKakushuKingaku4",
+            master."ueT0511after_dtKakushuKingaku5",
+            master."ueT0511after_dtKakushuKingaku6",
+            master."ueT0511after_dtKakushuKingaku7",
+            master."ueT0511after_dtKakushuKingaku8",
+            master."ueT0511after_dtTeishiYM",
+            master."ueT0511after_dtYobi4Juminzei",
+            master."ueT0511after_dtKojinNo",
             null,
             null,
             null,
@@ -1371,14 +1784,14 @@
             "Atesaki"."subGyomuCode",
             "Atesaki"."gyomuGroupCode",
             "Atesaki"."gyomuGroupName",
-            "Atesaki"."subGyomuGroupCode" ,
-            "Atesaki"."subGyomuGroupName" ,
+            "Atesaki"."subGyomuGroupCode",
+            "Atesaki"."subGyomuGroupName",
             "Atesaki"."kamokuCode",
             "Atesaki"."gyomuKoyuKey",
-            "Atesaki"."kannaiKangaiKubun" ,
+            "Atesaki"."kannaiKangaiKubun",
             "Atesaki"."zenkokuJushoCode",
             "Atesaki"."choikiCode",
-            "Atesaki"."jusho" ,
+            "Atesaki"."jusho",
             "Atesaki"."yubinNo" ,
             "Atesaki"."banchiCode1" ,
             "Atesaki"."banchiCode2" ,
@@ -1750,55 +2163,31 @@
             '0',
             '0'
         FROM 
-          "DbT2015KeisangoJoho" AS 計算後情報
-          INNER JOIN 
+            master 
+        INNER JOIN 
             rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
                    '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-              ON "ShikibetsuTaisho"."shikibetsuCode" = 計算後情報."shikibetsuCode"
-          INNER JOIN
+                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                   (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT2015KeisangoJoho_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                   )) AS "ShikibetsuTaisho"
+              ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        LEFT JOIN
              rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
-              ON "Atesaki"."shikibetsuCode" = 計算後情報."shikibetsuCode"
-          LEFT JOIN
+              ON "Atesaki"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        LEFT JOIN
              rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','false','false','') AS "AtesakiDaino"
-              ON "AtesakiDaino"."shikibetsuCode" = 計算後情報."shikibetsuCode"
+              ON "AtesakiDaino"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
                   AND "AtesakiDaino"."atesakiShubetsu" = '3'
-          LEFT JOIN
+        LEFT JOIN
             rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
-             ON "Nokumi"."CaT0714shikibetsuCode" = 計算後情報."shikibetsuCode"
-          LEFT JOIN
+             ON "Nokumi"."CaT0714shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        LEFT JOIN
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
-             ON koza."uaT0310Koza_shikibetsuCode" = 計算後情報."shikibetsuCode"
-          INNER JOIN 
-              rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
-              ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
-              AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
-              AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
-              AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
-              AND 年金特徴回付情報."gyomuCode" = 'DB'
-              <choose>
-                  <when test="判定フラグ == 1">   
-                      AND 年金特徴回付情報."shoriNendo" = #{調定年度前１年}
-                  </when>
-                  <otherwise>
-                      AND 年金特徴回付情報."shoriNendo" = #{調定年度前２年}
-                  </otherwise>
-              </choose>            
-        WHERE
-            <choose>
-                  <when test="判定フラグ == 1">  
-                      (計算後情報."choteiNendo" = #{調定年度} AND 計算後情報."fukaNendo" = #{調定年度前１年}
-                      OR
-                      計算後情報."choteiNendo" = #{調定年度前１年} AND 計算後情報."fukaNendo" = #{調定年度前１年})
-                  </when>
-                  <otherwise>
-                      計算後情報."choteiNendo" = #{調定年度} 
-                      AND 計算後情報."fukaNendo" = #{調定年度前２年}
-                  </otherwise>
-            </choose> 
-            AND 計算後情報."koseiZengoKubun" = '2'
-            AND 計算後情報."sakuseiShoriName" = '過年度賦課'
-            AND 計算後情報."choteiNichiji" = #{調定日時}
+             ON koza."uaT0310Koza_shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
     </insert>
     
     <update id="update異動賦課情報一時テーブルFROM計算後情報">
@@ -1937,10 +2326,364 @@
     
     <insert id="insert賦課情報一時FROM計算後情報FLAGTRUE"
      parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendotsuchishoikkatsuhakko.IdoFukaJohoParameter">
-        INSERT INTO 
+        WITH master AS (
+        SELECT	
+            計算後情報."choteiNendo" AS "dbT2015KeisangoJoho_choteiNendo",
+            計算後情報."fukaNendo" AS "dbT2015KeisangoJoho_fukaNendo",
+            計算後情報."tsuchishoNo" AS "dbT2015KeisangoJoho_tsuchishoNo",
+            計算後情報."koseiZengoKubun" AS "dbT2015KeisangoJoho_koseiZengoKubun",
+            計算後情報."sakuseiShoriName" AS "dbT2015KeisangoJoho_sakuseiShoriName",
+            計算後情報."insertDantaiCd" AS "dbT2015KeisangoJoho_insertDantaiCd",
+            計算後情報."insertTimestamp" AS "dbT2015KeisangoJoho_insertTimestamp",
+            計算後情報."insertReamsLoginId" AS "dbT2015KeisangoJoho_insertReamsLoginId",
+            計算後情報."insertContextId" AS "dbT2015KeisangoJoho_insertContextId",
+            計算後情報."isDeleted" AS "dbT2015KeisangoJoho_isDeleted",
+            計算後情報."updateCount" AS "dbT2015KeisangoJoho_updateCount",
+            計算後情報."lastUpdateTimestamp" AS "dbT2015KeisangoJoho_lastUpdateTimestamp",
+            計算後情報."lastUpdateReamsLoginId" AS "dbT2015KeisangoJoho_lastUpdateReamsLoginId",
+            計算後情報."fukaRirekiNo" AS "dbT2015KeisangoJoho_fukaRirekiNo",
+            計算後情報."hihokenshaNo" AS "dbT2015KeisangoJoho_hihokenshaNo",
+            計算後情報."shikibetsuCode" AS "dbT2015KeisangoJoho_shikibetsuCode",
+            計算後情報."setaiCode" AS "dbT2015KeisangoJoho_setaiCode",
+            計算後情報."setaiInsu" AS "dbT2015KeisangoJoho_setaiInsu",
+            計算後情報."shikakuShutokuYMD" AS "dbT2015KeisangoJoho_shikakuShutokuYMD",
+            計算後情報."shikakuShutokuJiyu" AS "dbT2015KeisangoJoho_shikakuShutokuJiyu",
+            計算後情報."shikakuSoshitsuYMD" AS "dbT2015KeisangoJoho_shikakuSoshitsuYMD",
+            計算後情報."shikakuSoshitsuJiyu" AS "dbT2015KeisangoJoho_shikakuSoshitsuJiyu",
+            計算後情報."seihofujoShurui" AS "dbT2015KeisangoJoho_seihofujoShurui",
+            計算後情報."seihoKaishiYMD" AS "dbT2015KeisangoJoho_seihoKaishiYMD",
+            計算後情報."seihoHaishiYMD" AS "dbT2015KeisangoJoho_seihoHaishiYMD",
+            計算後情報."ronenKaishiYMD" AS "dbT2015KeisangoJoho_ronenKaishiYMD",
+            計算後情報."ronenHaishiYMD" AS "dbT2015KeisangoJoho_ronenHaishiYMD",
+            計算後情報."fukaYMD" AS "dbT2015KeisangoJoho_fukaYMD",
+            計算後情報."kazeiKubun" AS "dbT2015KeisangoJoho_kazeiKubun",
+            計算後情報."setaikazeiKubun" AS "dbT2015KeisangoJoho_setaikazeiKubun",
+            計算後情報."gokeiShotokuGaku" AS "dbT2015KeisangoJoho_gokeiShotokuGaku",
+            計算後情報."nenkinShunyuGaku" AS "dbT2015KeisangoJoho_nenkinShunyuGaku",
+            計算後情報."hokenryoDankai" AS "dbT2015KeisangoJoho_hokenryoDankai",
+            計算後情報."hokenryoDankai1" AS "dbT2015KeisangoJoho_hokenryoDankai1",
+            計算後情報."nengakuHokenryo1" AS "dbT2015KeisangoJoho_nengakuHokenryo1",
+            計算後情報."tsukiwariStartYM1" AS "dbT2015KeisangoJoho_tsukiwariStartYM1",
+            計算後情報."tsukiwariEndYM1" AS "dbT2015KeisangoJoho_tsukiwariEndYM1",
+            計算後情報."hokenryoDankai2" AS "dbT2015KeisangoJoho_hokenryoDankai2",
+            計算後情報."nengakuHokenryo2" AS "dbT2015KeisangoJoho_nengakuHokenryo2",
+            計算後情報."tsukiwariStartYM2" AS "dbT2015KeisangoJoho_tsukiwariStartYM2",
+            計算後情報."tsukiwariEndYM2" AS "dbT2015KeisangoJoho_tsukiwariEndYM2",
+            計算後情報."choteiNichiji" AS "dbT2015KeisangoJoho_choteiNichiji",
+            計算後情報."choteiJiyu1" AS "dbT2015KeisangoJoho_choteiJiyu1",
+            計算後情報."choteiJiyu2" AS "dbT2015KeisangoJoho_choteiJiyu2",
+            計算後情報."choteiJiyu3" AS "dbT2015KeisangoJoho_choteiJiyu3",
+            計算後情報."choteiJiyu4" AS "dbT2015KeisangoJoho_choteiJiyu4",
+            計算後情報."koseiM" AS "dbT2015KeisangoJoho_koseiM",
+            計算後情報."gemmenMaeHokenryo" AS "dbT2015KeisangoJoho_gemmenMaeHokenryo",
+            計算後情報."gemmenGaku" AS "dbT2015KeisangoJoho_gemmenGaku",
+            計算後情報."kakuteiHokenryo" AS "dbT2015KeisangoJoho_kakuteiHokenryo",
+            計算後情報."hokenryoDankaiKarisanntei" AS "dbT2015KeisangoJoho_hokenryoDankaiKarisanntei",
+            計算後情報."choshuHohoRirekiNo" AS "dbT2015KeisangoJoho_choshuHohoRirekiNo",
+            計算後情報."idoKijunNichiji" AS "dbT2015KeisangoJoho_idoKijunNichiji",
+            計算後情報."kozaKubun" AS "dbT2015KeisangoJoho_kozaKubun",
+            計算後情報."kyokaisoKubun" AS "dbT2015KeisangoJoho_kyokaisoKubun",
+            計算後情報."shokkenKubun" AS "dbT2015KeisangoJoho_shokkenKubun",
+            計算後情報."fukaShichosonCode" AS "dbT2015KeisangoJoho_fukaShichosonCode",
+            計算後情報."tkSaishutsuKampuGaku" AS "dbT2015KeisangoJoho_tkSaishutsuKampuGaku",
+            計算後情報."fuSaishutsuKampuGaku" AS "dbT2015KeisangoJoho_fuSaishutsuKampuGaku",
+            計算後情報."tkKibetsuGaku01" AS "dbT2015KeisangoJoho_tkKibetsuGaku01",
+            計算後情報."tkKibetsuGaku02" AS "dbT2015KeisangoJoho_tkKibetsuGaku02",
+            計算後情報."tkKibetsuGaku03" AS "dbT2015KeisangoJoho_tkKibetsuGaku03",
+            計算後情報."tkKibetsuGaku04" AS "dbT2015KeisangoJoho_tkKibetsuGaku04",
+            計算後情報."tkKibetsuGaku05" AS "dbT2015KeisangoJoho_tkKibetsuGaku05",
+            計算後情報."tkKibetsuGaku06" AS "dbT2015KeisangoJoho_tkKibetsuGaku06",
+            計算後情報."fuKibetsuGaku01" AS "dbT2015KeisangoJoho_fuKibetsuGaku01",
+            計算後情報."fuKibetsuGaku02" AS "dbT2015KeisangoJoho_fuKibetsuGaku02",
+            計算後情報."fuKibetsuGaku03" AS "dbT2015KeisangoJoho_fuKibetsuGaku03",
+            計算後情報."fuKibetsuGaku04" AS "dbT2015KeisangoJoho_fuKibetsuGaku04",
+            計算後情報."fuKibetsuGaku05" AS "dbT2015KeisangoJoho_fuKibetsuGaku05",
+            計算後情報."fuKibetsuGaku06" AS "dbT2015KeisangoJoho_fuKibetsuGaku06",
+            計算後情報."fuKibetsuGaku07" AS "dbT2015KeisangoJoho_fuKibetsuGaku07",
+            計算後情報."fuKibetsuGaku08" AS "dbT2015KeisangoJoho_fuKibetsuGaku08",
+            計算後情報."fuKibetsuGaku09" AS "dbT2015KeisangoJoho_fuKibetsuGaku09",
+            計算後情報."fuKibetsuGaku10" AS "dbT2015KeisangoJoho_fuKibetsuGaku10",
+            計算後情報."fuKibetsuGaku11" AS "dbT2015KeisangoJoho_fuKibetsuGaku11",
+            計算後情報."fuKibetsuGaku12" AS "dbT2015KeisangoJoho_fuKibetsuGaku12",
+            計算後情報."fuKibetsuGaku13" AS "dbT2015KeisangoJoho_fuKibetsuGaku13",
+            計算後情報."fuKibetsuGaku14" AS "dbT2015KeisangoJoho_fuKibetsuGaku14",
+            計算後情報."choshuHoho4gatsu" AS "dbT2015KeisangoJoho_choshuHoho4gatsu",
+            計算後情報."choshuHoho5gatsu" AS "dbT2015KeisangoJoho_choshuHoho5gatsu",
+            計算後情報."choshuHoho6gatsu" AS "dbT2015KeisangoJoho_choshuHoho6gatsu",
+            計算後情報."choshuHoho7gatsu" AS "dbT2015KeisangoJoho_choshuHoho7gatsu",
+            計算後情報."choshuHoho8gatsu" AS "dbT2015KeisangoJoho_choshuHoho8gatsu",
+            計算後情報."choshuHoho9gatsu" AS "dbT2015KeisangoJoho_choshuHoho9gatsu",
+            計算後情報."choshuHoho10gatsu" AS "dbT2015KeisangoJoho_choshuHoho10gatsu",
+            計算後情報."choshuHoho11gatsu" AS "dbT2015KeisangoJoho_choshuHoho11gatsu",
+            計算後情報."choshuHoho12gatsu" AS "dbT2015KeisangoJoho_choshuHoho12gatsu",
+            計算後情報."choshuHoho1gatsu" AS "dbT2015KeisangoJoho_choshuHoho1gatsu",
+            計算後情報."choshuHoho2gatsu" AS "dbT2015KeisangoJoho_choshuHoho2gatsu",
+            計算後情報."choshuHoho3gatsu" AS "dbT2015KeisangoJoho_choshuHoho3gatsu",
+            計算後情報."choshuHohoYoku4gatsu" AS "dbT2015KeisangoJoho_choshuHohoYoku4gatsu",
+            計算後情報."choshuHohoYoku5gatsu" AS "dbT2015KeisangoJoho_choshuHohoYoku5gatsu",
+            計算後情報."choshuHohoYoku6gatsu" AS "dbT2015KeisangoJoho_choshuHohoYoku6gatsu",
+            計算後情報."choshuHohoYoku7gatsu" AS "dbT2015KeisangoJoho_choshuHohoYoku7gatsu",
+            計算後情報."choshuHohoYoku8gatsu" AS "dbT2015KeisangoJoho_choshuHohoYoku8gatsu",
+            計算後情報."choshuHohoYoku9gatsu" AS "dbT2015KeisangoJoho_choshuHohoYoku9gatsu",
+            計算後情報."kariNenkinNo" AS "dbT2015KeisangoJoho_kariNenkinNo",
+            計算後情報."kariNenkinCode" AS "dbT2015KeisangoJoho_kariNenkinCode",
+            計算後情報."kariHosokuM" AS "dbT2015KeisangoJoho_kariHosokuM",
+            計算後情報."honNenkinNo" AS "dbT2015KeisangoJoho_honNenkinNo",
+            計算後情報."honNenkinCode" AS "dbT2015KeisangoJoho_honNenkinCode",
+            計算後情報."honHosokuM" AS "dbT2015KeisangoJoho_honHosokuM",
+            計算後情報."yokunendoKariNenkinNo" AS "dbT2015KeisangoJoho_yokunendoKariNenkinNo",
+            計算後情報."yokunendoKariNenkinCode" AS "dbT2015KeisangoJoho_yokunendoKariNenkinCode",
+            計算後情報."yokunendoKariHosokuM" AS "dbT2015KeisangoJoho_yokunendoKariHosokuM",
+            計算後情報."iraiSohuzumiFlag" AS "dbT2015KeisangoJoho_iraiSohuzumiFlag",
+            計算後情報."tsuikaIraiSohuzumiFlag" AS "dbT2015KeisangoJoho_tsuikaIraiSohuzumiFlag",
+            計算後情報."tokuchoTeishiNichiji" AS "dbT2015KeisangoJoho_tokuchoTeishiNichiji",
+            計算後情報."tokuchoTeishiJiyuCode" AS "dbT2015KeisangoJoho_tokuchoTeishiJiyuCode",
+            計算後情報."tkShunyuGaku01" AS "dbT2015KeisangoJoho_tkShunyuGaku01",
+            計算後情報."tkShunyuGaku02" AS "dbT2015KeisangoJoho_tkShunyuGaku02",
+            計算後情報."tkShunyuGaku03" AS "dbT2015KeisangoJoho_tkShunyuGaku03",
+            計算後情報."tkShunyuGaku04" AS "dbT2015KeisangoJoho_tkShunyuGaku04",
+            計算後情報."tkShunyuGaku05" AS "dbT2015KeisangoJoho_tkShunyuGaku05",
+            計算後情報."tkShunyuGaku06" AS "dbT2015KeisangoJoho_tkShunyuGaku06",
+            計算後情報."fuShunyuGaku01" AS "dbT2015KeisangoJoho_fuShunyuGaku01",
+            計算後情報."fuShunyuGaku02" AS "dbT2015KeisangoJoho_fuShunyuGaku02",
+            計算後情報."fuShunyuGaku03" AS "dbT2015KeisangoJoho_fuShunyuGaku03",
+            計算後情報."fuShunyuGaku04" AS "dbT2015KeisangoJoho_fuShunyuGaku04",
+            計算後情報."fuShunyuGaku05" AS "dbT2015KeisangoJoho_fuShunyuGaku05",
+            計算後情報."fuShunyuGaku06" AS "dbT2015KeisangoJoho_fuShunyuGaku06",
+            計算後情報."fuShunyuGaku07" AS "dbT2015KeisangoJoho_fuShunyuGaku07",
+            計算後情報."fuShunyuGaku08" AS "dbT2015KeisangoJoho_fuShunyuGaku08",
+            計算後情報."fuShunyuGaku09" AS "dbT2015KeisangoJoho_fuShunyuGaku09",
+            計算後情報."fuShunyuGaku10" AS "dbT2015KeisangoJoho_fuShunyuGaku10",
+            計算後情報."fuShunyuGaku11" AS "dbT2015KeisangoJoho_fuShunyuGaku11",
+            計算後情報."fuShunyuGaku12" AS "dbT2015KeisangoJoho_fuShunyuGaku12",
+            計算後情報."fuShunyuGaku13" AS "dbT2015KeisangoJoho_fuShunyuGaku13",
+            計算後情報."fuShunyuGaku14" AS "dbT2015KeisangoJoho_fuShunyuGaku14",
+            年金特徴回付情報."gyomuCode" AS "ueT0511after_gyomuCode",
+            年金特徴回付情報."shoriNendo" AS "ueT0511after_shoriNendo",
+            年金特徴回付情報."tsuchiNaiyoCode" AS "ueT0511after_tsuchiNaiyoCode",
+            年金特徴回付情報."shoriTaishoYM" AS "ueT0511after_shoriTaishoYM",
+            年金特徴回付情報."kisoNenkinNo" AS "ueT0511after_kisoNenkinNo",
+            年金特徴回付情報."nenkinCode" AS "ueT0511after_nenkinCode",
+            年金特徴回付情報."koseiCityCode" AS "ueT0511after_koseiCityCode",
+            年金特徴回付情報."renban" AS "ueT0511after_renban",
+            年金特徴回付情報."insertDantaiCd" AS "ueT0511after_insertDantaiCd",
+            年金特徴回付情報."insertTimestamp" AS "ueT0511after_insertTimestamp",
+            年金特徴回付情報."insertReamsLoginId" AS "ueT0511after_insertReamsL,ginId",
+            年金特徴回付情報."insertContextId" AS "ueT0511after_insertContextId",
+            年金特徴回付情報."isDeleted" AS "ueT0511after_isDeleted",
+            年金特徴回付情報."updateCount" AS "ueT0511after_updateCount",
+            年金特徴回付情報."lastUpdateTimestamp" AS "ueT0511after_lastUpdateTimestamp",
+            年金特徴回付情報."lastUpdateReamsLoginId" AS "ueT0511after_lastUpdateReamsLoginId",
+            年金特徴回付情報."shoriTimestamp" AS "ueT0511after_shoriTimestamp",
+            年金特徴回付情報."renkeiShubetsu" AS "ueT0511after_renkeiShubetsu",
+            年金特徴回付情報."hosokuTsuki" AS "ueT0511after_hosokuTsuki",
+            年金特徴回付情報."tenbikiTsuki" AS "ueT0511after_tenbikiTsuki",
+            年金特徴回付情報."shikibetsuCode" AS "ueT0511after_ShikibetsuCode",
+            年金特徴回付情報."hihokenshaNo" AS "ueT0511after_hihokenshaNo",
+            年金特徴回付情報."kokuhoSetaiCode" AS "ueT0511after_kokuhoSetaiCode",
+            年金特徴回付情報."dtCityCode" AS "ueT0511after_dtCityCode",
+            年金特徴回付情報."dtTokubetsuChoshuGimushaCode" AS "ueT0511after_dtTokubetsuChoshuGimushaCode",
+            年金特徴回付情報."dtTsuchiNaiyoCode" AS "ueT0511after_dtTsuchiNaiyoCode",
+            年金特徴回付情報."dtBaitaiCode" AS "ueT0511after_dtBaitaiCode",
+            年金特徴回付情報."dtTokubetsuChoshuSeidoCode" AS "ueT0511after_dtTokubetsuChoshuSeidoCode",
+            年金特徴回付情報."dtSakuseiYMD" AS "ueT0511after_dtSakuseiYMD",
+            年金特徴回付情報."dtKisoNenkinNo" AS "ueT0511after_dtKisoNenkinNo",
+            年金特徴回付情報."dtNenkinCode" AS "ueT0511after_dtNenkinCode",
+            年金特徴回付情報."dtYobi1" AS "ueT0511after_dtYobi1",
+            年金特徴回付情報."dtBirthDay" AS "ueT0511after_dtBirthDay",
+            年金特徴回付情報."dtSeibetsu" AS "ueT0511after_dtSeibetsu",
+            年金特徴回付情報."dtKanaShimei" AS "ueT0511after_dtKanaShimei",
+            年金特徴回付情報."dtShiftCode1" AS "ueT0511after_dtShiftCode1",
+            年金特徴回付情報."dtKanjiShimei" AS "ueT0511after_dtKanjiShimei",
+            年金特徴回付情報."dtShiftCode2" AS "ueT0511after_dtShiftCode2",
+            年金特徴回付情報."dtYubinNo" AS "ueT0511after_dtYubinNo",
+            年金特徴回付情報."dtKanaJusho" AS "ueT0511after_dtKanaJusho",
+            年金特徴回付情報."dtShiftCode3" AS "ueT0511after_dtShiftCode3",
+            年金特徴回付情報."dtKanjiJusho" AS "ueT0511after_dtKanjiJusho",
+            年金特徴回付情報."dtShiftCode4" AS "ueT0511after_dtShiftCode4",
+            年金特徴回付情報."dtKakushuKubun" AS "ueT0511after_dtKakushuKubun", 
+            年金特徴回付情報."dtShoriKekka" AS "ueT0511after_dtShoriKekka",
+            年金特徴回付情報."dtKokiIkanCode" AS "ueT0511after_dtKokiIkanCode", 
+            年金特徴回付情報."dtKakushuYMD" AS "ueT0511after_dtKakushuYMD",
+            年金特徴回付情報."dtKakushuKingaku1" AS "ueT0511after_dtKakushuKingaku1",
+            年金特徴回付情報."dtKakushuKingaku2" AS "ueT0511after_dtKakushuKingaku2",
+            年金特徴回付情報."dtKakushuKingaku3" AS "ueT0511after_dtKakushuKingaku3",
+            年金特徴回付情報."dtYobi2" AS "ueT0511after_dtYobi2",
+            年金特徴回付情報."dtKyosaiNenkinshoshoKigoNo" AS "ueT0511after_dtKyosaiNenkinshoshoKigoNo",
+            年金特徴回付情報."dtKakushuKingaku4" AS "ueT0511after_dtKakushuKingaku4",
+            年金特徴回付情報."dtKakushuKingaku5" AS "ueT0511after_dtKakushuKingaku5",
+            年金特徴回付情報."dtKakushuKingaku6" AS "ueT0511after_dtKakushuKingaku6",
+            年金特徴回付情報."dtKakushuKingaku7" AS "ueT0511after_dtKakushuKingaku7",
+            年金特徴回付情報."dtKakushuKingaku8" AS "ueT0511after_dtKakushuKingaku8",
+            年金特徴回付情報."dtTeishiYM" AS "ueT0511after_dtTeishiYM",
+            年金特徴回付情報."dtYobi4Juminzei" AS "ueT0511after_dtYobi4Juminzei",
+            年金特徴回付情報."dtKojinNo" AS "ueT0511after_dtKojinNo"
+        FROM 
+          "DbT2015KeisangoJoho" AS 計算後情報
+        INNER JOIN 
+              rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
+              ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
+              AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
+              AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
+              AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
+              AND 年金特徴回付情報."gyomuCode" = 'DB'
+              <choose>
+                  <when test="判定フラグ == 3">   
+                      AND 年金特徴回付情報."shoriNendo" = #{調定年度前２年}
+                  </when>
+                  <otherwise>
+                      AND 年金特徴回付情報."shoriNendo" = #{調定年度前１年}
+                  </otherwise>
+              </choose>            
+        WHERE
+            <choose>
+                  <when test="判定フラグ == 1">  
+                      計算後情報."choteiNendo" = #{調定年度前１年} AND 計算後情報."fukaNendo" = #{調定年度前１年}
+                  </when>
+                  <when test="判定フラグ == 2">  
+                      計算後情報."choteiNendo" = #{調定年度} 
+                      AND (計算後情報."fukaNendo" = #{調定年度前１年} OR 計算後情報."fukaNendo" = #{調定年度前２年})
+                  </when>
+                  <otherwise>
+                      ((計算後情報."choteiNendo" = #{調定年度} AND 計算後情報."fukaNendo" = #{調定年度前２年})
+                      OR (計算後情報."choteiNendo" = #{調定年度前１年} AND 計算後情報."fukaNendo" = #{調定年度前１年}))
+                  </otherwise>
+            </choose> 
+            AND 計算後情報."koseiZengoKubun" = '2'
+        )
+    INSERT INTO 
         "IdoFukaJohoTemp"
         SELECT
-            計算後情報.*,
+            master."dbT2015KeisangoJoho_insertDantaiCd",
+            master."dbT2015KeisangoJoho_insertTimestamp",
+            master."dbT2015KeisangoJoho_insertReamsLoginId",
+            master."dbT2015KeisangoJoho_insertContextId",
+            master."dbT2015KeisangoJoho_isDeleted",
+            master."dbT2015KeisangoJoho_updateCount",
+            master."dbT2015KeisangoJoho_lastUpdateTimestamp",
+            master."dbT2015KeisangoJoho_lastUpdateReamsLoginId",
+            master."dbT2015KeisangoJoho_choteiNendo",
+            master."dbT2015KeisangoJoho_fukaNendo",
+            master."dbT2015KeisangoJoho_tsuchishoNo",
+            master."dbT2015KeisangoJoho_koseiZengoKubun",
+            master."dbT2015KeisangoJoho_sakuseiShoriName",
+            master."dbT2015KeisangoJoho_fukaRirekiNo",
+            master."dbT2015KeisangoJoho_hihokenshaNo",
+            master."dbT2015KeisangoJoho_shikibetsuCode",
+            master."dbT2015KeisangoJoho_setaiCode",
+            master."dbT2015KeisangoJoho_setaiInsu",
+            master."dbT2015KeisangoJoho_shikakuShutokuYMD",
+            master."dbT2015KeisangoJoho_shikakuShutokuJiyu",
+            master."dbT2015KeisangoJoho_shikakuSoshitsuYMD",
+            master."dbT2015KeisangoJoho_shikakuSoshitsuJiyu",
+            master."dbT2015KeisangoJoho_seihofujoShurui",
+            master."dbT2015KeisangoJoho_seihoKaishiYMD",
+            master."dbT2015KeisangoJoho_seihoHaishiYMD",
+            master."dbT2015KeisangoJoho_ronenKaishiYMD",
+            master."dbT2015KeisangoJoho_ronenHaishiYMD",
+            master."dbT2015KeisangoJoho_fukaYMD",
+            master."dbT2015KeisangoJoho_kazeiKubun",
+            master."dbT2015KeisangoJoho_setaikazeiKubun",
+            master."dbT2015KeisangoJoho_gokeiShotokuGaku",
+            master."dbT2015KeisangoJoho_nenkinShunyuGaku",
+            master."dbT2015KeisangoJoho_hokenryoDankai",
+            master."dbT2015KeisangoJoho_hokenryoDankai1",
+            master."dbT2015KeisangoJoho_nengakuHokenryo1",
+            master."dbT2015KeisangoJoho_tsukiwariStartYM1",
+            master."dbT2015KeisangoJoho_tsukiwariEndYM1",
+            master."dbT2015KeisangoJoho_hokenryoDankai2",
+            master."dbT2015KeisangoJoho_nengakuHokenryo2",
+            master."dbT2015KeisangoJoho_tsukiwariStartYM2",
+            master."dbT2015KeisangoJoho_tsukiwariEndYM2",
+            master."dbT2015KeisangoJoho_choteiNichiji",
+            master."dbT2015KeisangoJoho_choteiJiyu1",
+            master."dbT2015KeisangoJoho_choteiJiyu2",
+            master."dbT2015KeisangoJoho_choteiJiyu3",
+            master."dbT2015KeisangoJoho_choteiJiyu4",
+            master."dbT2015KeisangoJoho_koseiM",
+            master."dbT2015KeisangoJoho_gemmenMaeHokenryo",
+            master."dbT2015KeisangoJoho_gemmenGaku",
+            master."dbT2015KeisangoJoho_kakuteiHokenryo",
+            master."dbT2015KeisangoJoho_hokenryoDankaiKarisanntei",
+            master."dbT2015KeisangoJoho_choshuHohoRirekiNo",
+            master."dbT2015KeisangoJoho_idoKijunNichiji",
+            master."dbT2015KeisangoJoho_kozaKubun",
+            master."dbT2015KeisangoJoho_kyokaisoKubun",
+            master."dbT2015KeisangoJoho_shokkenKubun",
+            master."dbT2015KeisangoJoho_fukaShichosonCode",
+            master."dbT2015KeisangoJoho_tkSaishutsuKampuGaku",
+            master."dbT2015KeisangoJoho_fuSaishutsuKampuGaku",
+            master."dbT2015KeisangoJoho_tkKibetsuGaku01",
+            master."dbT2015KeisangoJoho_tkKibetsuGaku02",
+            master."dbT2015KeisangoJoho_tkKibetsuGaku03",
+            master."dbT2015KeisangoJoho_tkKibetsuGaku04",
+            master."dbT2015KeisangoJoho_tkKibetsuGaku05",
+            master."dbT2015KeisangoJoho_tkKibetsuGaku06",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku01",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku02",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku03",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku04",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku05",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku06",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku07",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku08",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku09",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku10",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku11",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku12",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku13",
+            master."dbT2015KeisangoJoho_fuKibetsuGaku14",
+            master."dbT2015KeisangoJoho_choshuHoho4gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho5gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho6gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho7gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho8gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho9gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho10gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho11gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho12gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho1gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho2gatsu",
+            master."dbT2015KeisangoJoho_choshuHoho3gatsu",
+            master."dbT2015KeisangoJoho_choshuHohoYoku4gatsu",
+            master."dbT2015KeisangoJoho_choshuHohoYoku5gatsu",
+            master."dbT2015KeisangoJoho_choshuHohoYoku6gatsu",
+            master."dbT2015KeisangoJoho_choshuHohoYoku7gatsu",
+            master."dbT2015KeisangoJoho_choshuHohoYoku8gatsu",
+            master."dbT2015KeisangoJoho_choshuHohoYoku9gatsu",
+            master."dbT2015KeisangoJoho_kariNenkinNo",
+            master."dbT2015KeisangoJoho_kariNenkinCode",
+            master."dbT2015KeisangoJoho_kariHosokuM",
+            master."dbT2015KeisangoJoho_honNenkinNo",
+            master."dbT2015KeisangoJoho_honNenkinCode",
+            master."dbT2015KeisangoJoho_honHosokuM",
+            master."dbT2015KeisangoJoho_yokunendoKariNenkinNo",
+            master."dbT2015KeisangoJoho_yokunendoKariNenkinCode",
+            master."dbT2015KeisangoJoho_yokunendoKariHosokuM",
+            master."dbT2015KeisangoJoho_iraiSohuzumiFlag",
+            master."dbT2015KeisangoJoho_tsuikaIraiSohuzumiFlag",
+            master."dbT2015KeisangoJoho_tokuchoTeishiNichiji",
+            master."dbT2015KeisangoJoho_tokuchoTeishiJiyuCode",
+            master."dbT2015KeisangoJoho_tkShunyuGaku01",
+            master."dbT2015KeisangoJoho_tkShunyuGaku02",
+            master."dbT2015KeisangoJoho_tkShunyuGaku03",
+            master."dbT2015KeisangoJoho_tkShunyuGaku04",
+            master."dbT2015KeisangoJoho_tkShunyuGaku05",
+            master."dbT2015KeisangoJoho_tkShunyuGaku06",
+            master."dbT2015KeisangoJoho_fuShunyuGaku01",
+            master."dbT2015KeisangoJoho_fuShunyuGaku02",
+            master."dbT2015KeisangoJoho_fuShunyuGaku03",
+            master."dbT2015KeisangoJoho_fuShunyuGaku04",
+            master."dbT2015KeisangoJoho_fuShunyuGaku05",
+            master."dbT2015KeisangoJoho_fuShunyuGaku06",
+            master."dbT2015KeisangoJoho_fuShunyuGaku07",
+            master."dbT2015KeisangoJoho_fuShunyuGaku08",
+            master."dbT2015KeisangoJoho_fuShunyuGaku09",
+            master."dbT2015KeisangoJoho_fuShunyuGaku10",
+            master."dbT2015KeisangoJoho_fuShunyuGaku11",
+            master."dbT2015KeisangoJoho_fuShunyuGaku12",
+            master."dbT2015KeisangoJoho_fuShunyuGaku13",
+            master."dbT2015KeisangoJoho_fuShunyuGaku14",
             null,
             null,
             null,
@@ -2071,7 +2814,66 @@
             null,
             null,
             null,
-            年金特徴回付情報.*,
+            master."ueT0511after_insertDantaiCd",
+            master."ueT0511after_insertTimestamp",
+            master."ueT0511after_insertReamsL,ginId",
+            master."ueT0511after_insertContextId",
+            master."ueT0511after_isDeleted",
+            master."ueT0511after_updateCount",
+            master."ueT0511after_lastUpdateTimestamp",
+            master."ueT0511after_lastUpdateReamsLoginId",
+            master."ueT0511after_gyomuCode",
+            master."ueT0511after_shoriNendo",
+            master."ueT0511after_tsuchiNaiyoCode",
+            master."ueT0511after_shoriTaishoYM",
+            master."ueT0511after_kisoNenkinNo",
+            master."ueT0511after_nenkinCode",
+            master."ueT0511after_koseiCityCode",
+            master."ueT0511after_renban",
+            master."ueT0511after_shoriTimestamp",
+            master."ueT0511after_renkeiShubetsu",
+            master."ueT0511after_hosokuTsuki",
+            master."ueT0511after_tenbikiTsuki",
+            master."ueT0511after_ShikibetsuCode",
+            master."ueT0511after_hihokenshaNo",
+            master."ueT0511after_kokuhoSetaiCode",
+            master."ueT0511after_dtCityCode",
+            master."ueT0511after_dtTokubetsuChoshuGimushaCode",
+            master."ueT0511after_dtTsuchiNaiyoCode",
+            master."ueT0511after_dtBaitaiCode",
+            master."ueT0511after_dtTokubetsuChoshuSeidoCode",
+            master."ueT0511after_dtSakuseiYMD",
+            master."ueT0511after_dtKisoNenkinNo",
+            master."ueT0511after_dtNenkinCode",
+            master."ueT0511after_dtYobi1",
+            master."ueT0511after_dtBirthDay",
+            master."ueT0511after_dtSeibetsu",
+            master."ueT0511after_dtKanaShimei",
+            master."ueT0511after_dtShiftCode1",
+            master."ueT0511after_dtKanjiShimei",
+            master."ueT0511after_dtShiftCode2",
+            master."ueT0511after_dtYubinNo",
+            master."ueT0511after_dtKanaJusho",
+            master."ueT0511after_dtShiftCode3",
+            master."ueT0511after_dtKanjiJusho",
+            master."ueT0511after_dtShiftCode4",
+            master."ueT0511after_dtKakushuKubun", 
+            master."ueT0511after_dtShoriKekka",
+            master."ueT0511after_dtKokiIkanCode", 
+            master."ueT0511after_dtKakushuYMD",
+            master."ueT0511after_dtKakushuKingaku1",
+            master."ueT0511after_dtKakushuKingaku2",
+            master."ueT0511after_dtKakushuKingaku3",
+            master."ueT0511after_dtYobi2",
+            master."ueT0511after_dtKyosaiNenkinshoshoKigoNo",
+            master."ueT0511after_dtKakushuKingaku4",
+            master."ueT0511after_dtKakushuKingaku5",
+            master."ueT0511after_dtKakushuKingaku6",
+            master."ueT0511after_dtKakushuKingaku7",
+            master."ueT0511after_dtKakushuKingaku8",
+            master."ueT0511after_dtTeishiYM",
+            master."ueT0511after_dtYobi4Juminzei",
+            master."ueT0511after_dtKojinNo",
             null,
             null,
             null,
@@ -2711,55 +3513,31 @@
             '0',
             '0'
         FROM 
-          "DbT2015KeisangoJohoTemp" AS 計算後情報
-          INNER JOIN 
+            master 
+        INNER JOIN 
             rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
                    '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-              ON "ShikibetsuTaisho"."shikibetsuCode" = 計算後情報."shikibetsuCode"
-          INNER JOIN
+                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                   (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT2015KeisangoJoho_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                   )) AS "ShikibetsuTaisho"
+              ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        LEFT JOIN
              rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
-              ON "Atesaki"."shikibetsuCode" = 計算後情報."shikibetsuCode"
-          LEFT JOIN
+              ON "Atesaki"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        LEFT JOIN
              rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','false','false','') AS "AtesakiDaino"
-              ON "AtesakiDaino"."shikibetsuCode" = 計算後情報."shikibetsuCode"
+              ON "AtesakiDaino"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
                   AND "AtesakiDaino"."atesakiShubetsu" = '3'
-          LEFT JOIN
+        LEFT JOIN
             rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
-             ON "Nokumi"."CaT0714shikibetsuCode" = 計算後情報."shikibetsuCode"
-          LEFT JOIN
+             ON "Nokumi"."CaT0714shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
+        LEFT JOIN
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
-             ON koza."uaT0310Koza_shikibetsuCode" = 計算後情報."shikibetsuCode"
-          INNER JOIN 
-              rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
-              ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
-              AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
-              AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
-              AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
-              AND 年金特徴回付情報."gyomuCode" = 'DB'
-              <choose>
-                  <when test="判定フラグ == 3">   
-                      AND 年金特徴回付情報."shoriNendo" = #{調定年度前２年}
-                  </when>
-                  <otherwise>
-                      AND 年金特徴回付情報."shoriNendo" = #{調定年度前１年}
-                  </otherwise>
-              </choose>            
-        WHERE
-            <choose>
-                  <when test="判定フラグ == 1">  
-                      計算後情報."choteiNendo" = #{調定年度前１年} AND 計算後情報."fukaNendo" = #{調定年度前１年}
-                  </when>
-                  <when test="判定フラグ == 2">  
-                      計算後情報."choteiNendo" = #{調定年度} 
-                      AND (計算後情報."fukaNendo" = #{調定年度前１年} OR 計算後情報."fukaNendo" = #{調定年度前２年})
-                  </when>
-                  <otherwise>
-                      ((計算後情報."choteiNendo" = #{調定年度} AND 計算後情報."fukaNendo" = #{調定年度前２年})
-                      OR (計算後情報."choteiNendo" = #{調定年度前１年} AND 計算後情報."fukaNendo" = #{調定年度前１年}))
-                  </otherwise>
-            </choose> 
-            AND 計算後情報."koseiZengoKubun" = '2'
+             ON koza."uaT0310Koza_shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
     </insert>
     
     <update id="update異動賦課情報一時テーブルFROM計算後情報一時FLAGTRUE">

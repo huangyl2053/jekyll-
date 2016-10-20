@@ -152,7 +152,6 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
     @Override
     public void initialize() {
         get出力順();
-        出力順 = MyBatisOrderByClauseCreator.create(HonsanteiKekkaIcihiranOutPutOrder.class, 出力順情報);
         KozaSearchKeyBuilder kozabuilder = new KozaSearchKeyBuilder();
         kozabuilder.set業務コード(GyomuCode.DB介護保険);
         kozabuilder.set用途区分(new KozaYotoKubunCodeValue(KozaYotoKubunType.振替口座.getCode()));
@@ -175,10 +174,11 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
     private void get出力順() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         if (RString.isNullOrEmpty(processParameter.get出力帳票().get出力順ID())) {
-            出力順情報 = null;
+            return;
         } else {
             出力順情報 = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票ID,
                     Long.parseLong(processParameter.get出力帳票().get出力順ID().toString()));
+            出力順 = MyBatisOrderByClauseCreator.create(HonsanteiKekkaIcihiranOutPutOrder.class, 出力順情報);
         }
         if (出力順情報 == null) {
             return;

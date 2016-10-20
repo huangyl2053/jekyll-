@@ -18,11 +18,11 @@ public enum HonsanteiKekkaIcihiranOutPutOrder implements IReportItems {
     /**
      * 郵便番号
      */
-    郵便番号(new RString("0001"), new RString("郵便番号"), new RString("\"atena_yubinNo\"")),
+    郵便番号(new RString("0001"), new RString("郵便番号"), new RString("\"ShikibetsuTaisho_yubinNo\"")),
     /**
      * 町域コード
      */
-    町域コード(new RString("0002"), new RString("町域コード"), new RString("\"atena_choikiCode\"")),
+    町域コード(new RString("0002"), new RString("町域コード"), new RString("\"ShikibetsuTaisho_choikiCode\"")),
     /**
      * 世帯コード
      */
@@ -34,15 +34,15 @@ public enum HonsanteiKekkaIcihiranOutPutOrder implements IReportItems {
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"setaiCode\"")),
+    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho_kanjiShimei\"")),
     /**
      * 生年月日
      */
-    生年月日(new RString("0012"), new RString("生年月日"), new RString("\"atena_seinengappiYMD\"")),
+    生年月日(new RString("0012"), new RString("生年月日"), new RString("\"ShikibetsuTaisho_seinengappiYMD\"")),
     /**
      * 性別
      */
-    性別(new RString("0013"), new RString("性別"), new RString("\"atena_seibetsuCode\"")),
+    性別(new RString("0013"), new RString("性別"), new RString("\"ShikibetsuTaisho_seibetsuCode\"")),
     /**
      * 市町村コード
      */
