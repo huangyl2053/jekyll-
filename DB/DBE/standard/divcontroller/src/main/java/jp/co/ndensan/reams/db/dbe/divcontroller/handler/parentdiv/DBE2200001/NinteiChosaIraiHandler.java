@@ -265,7 +265,7 @@ public class NinteiChosaIraiHandler {
             row.setZenkaiChosaItakusaki(nullToEmpty(business.getTemp_jigyoshaMeisho()));
             row.setZenkaiNinteiChosainShimei(nullToEmpty(business.getTemp_chosainShimei()));
             row.setHokensha(nullToEmpty(hokenshaName));
-            if (business.getChosaKubun() != null) {
+            if (business.getChosaKubun() != null && !business.getChosaKubun().isEmpty()) {
                 row.setChosaKubun(ChosaKubun.toValue(business.getChosaKubun().value()).get名称());
             }
             if (business.getJusho() != null) {
@@ -412,7 +412,7 @@ public class NinteiChosaIraiHandler {
             if (business.getNinteichosaIraiYMD() != null) {
                 row.setChosaIraiDay(business.getNinteichosaIraiYMD().wareki().toDateString());
             }
-            if (business.getChosaKubun() != null) {
+            if (business.getChosaKubun() != null && !business.getChosaKubun().isEmpty()) {
                 row.setChosaKubun(ChosaKubun.toValue(business.getChosaKubun().value()).get名称());
             }
 
