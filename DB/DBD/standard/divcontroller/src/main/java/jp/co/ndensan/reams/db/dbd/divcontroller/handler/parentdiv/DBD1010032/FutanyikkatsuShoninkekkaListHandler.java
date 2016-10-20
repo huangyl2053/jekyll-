@@ -48,7 +48,7 @@ public class FutanyikkatsuShoninkekkaListHandler {
     /**
      * 画面初期化処理です。
      *
-     * @param 一括処理日時list
+     * @param 一括処理日時list List<YMDHMS>
      */
     public void onLoad(List<YMDHMS> 一括処理日時list) {
         div.getHyojiTaisho().getDdlBatchShoriNichiji().setDataSource(onLoad_ddlServiceYMDHMS(一括処理日時list));
@@ -65,7 +65,7 @@ public class FutanyikkatsuShoninkekkaListHandler {
     /**
      * 「選択する」ボタンをクリックする
      *
-     * @param 負担限度額一括認定情報
+     * @param 負担限度額一括認定情報 FutangendogakuyikkatsuShoninEntity
      */
     public void onClick_selectbutton(FutangendogakuyikkatsuShoninEntity 負担限度額一括認定情報) {
         if (負担限度額一括認定情報.get承認済みフラグ() != null && 負担限度額一括認定情報.get作成年度() != null
@@ -89,7 +89,7 @@ public class FutanyikkatsuShoninkekkaListHandler {
      * 介護保険負担限度額認定の情報を更新する。
      *
      * @param 画面更新用情報 List<FutanGendogakuNinteiBatchResult>
-     * @param 一括処理日時list
+     * @param 一括処理日時list List<YMDHMS>
      */
     public void ＤＢ処理更新(List<FutanGendogakuNinteiBatchResult> 画面更新用情報, List<YMDHMS> 一括処理日時list) {
         IkkatsuShoninKekkaIchiranService ikkatsuservice = IkkatsuShoninKekkaIchiranService.createInstance();
@@ -132,8 +132,10 @@ public class FutanyikkatsuShoninkekkaListHandler {
      */
     public void ＤＢ更新(List<FutanGendogakuNinteiBatchResult> 画面更新用情報) {
         IkkatsuShoninKekkaIchiranService ikkatsuservice = IkkatsuShoninKekkaIchiranService.createInstance();
-        ikkatsuservice.update介護保険負担限度額認定(画面更新用情報);
-        ikkatsuservice.get減免減額申請更新(画面更新用情報);
+        if (画面更新用情報 != null && !画面更新用情報.isEmpty()) {
+            ikkatsuservice.update介護保険負担限度額認定(画面更新用情報);
+            ikkatsuservice.get減免減額申請更新(画面更新用情報);
+        }
     }
 
     /**
@@ -150,8 +152,8 @@ public class FutanyikkatsuShoninkekkaListHandler {
             RString 年月日 = 一括処理日時list.get(i).getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
             RString 時分秒 = 一括処理日時list.get(i).getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-            RString KeyValueDataSource_key = new RString("key");
-            dataSource.setKey(KeyValueDataSource_key.concat(new RString(i)));
+            RString dataSourcekey = new RString("key");
+            dataSource.setKey(dataSourcekey.concat(new RString(i)));
             dataSource.setValue(年月日.concat(" ").concat(時分秒));
             dataSourceList.add(dataSource);
         }
@@ -166,27 +168,25 @@ public class FutanyikkatsuShoninkekkaListHandler {
      */
     public ArrayList<dgNinteiIchiran_Row> setDgShinseiIchiran_Row(List<FutanGendogakuNinteiBatchResult> 負担限度額認定バッチ結果) {
         ArrayList<dgNinteiIchiran_Row> 一括承認結果一覧 = new ArrayList<>();
-        if (負担限度額認定バッチ結果 != null && !負担限度額認定バッチ結果.isEmpty()) {
-            for (FutanGendogakuNinteiBatchResult futangenresult : 負担限度額認定バッチ結果) {
-                dgNinteiIchiran_Row futangendogakunintei = new dgNinteiIchiran_Row();
-                if (futangenresult.get介護保険負担限度額認定の情報().getState().equals(EntityDataState.Modified)) {
-                    futangendogakunintei.setJotai(new RString("修正"));
-                }
-                futangendogakunintei.setHihoNo(futangenresult.get介護保険負担限度額認定の情報().get被保険者番号().value());
-                futangendogakunintei.setShikibetsuCode(futangenresult.get個人().get識別コード().value());
-                futangendogakunintei.getTxtSeinengappiYMD().setValue(futangenresult.get個人().get生年月日().toFlexibleDate());
-                futangendogakunintei.setNenrei(futangenresult.get個人().get年齢算出().get年齢());
-                futangendogakunintei.setKetteiKubun(futangenresult.get介護保険負担限度額認定の情報().get決定区分());
-                futangendogakunintei.getTxtKetteiYMD().setValue(futangenresult.get介護保険負担限度額認定の情報().get決定年月日());
-                futangendogakunintei.getTxtTekiyoYMD().setValue(futangenresult.get介護保険負担限度額認定の情報().get適用開始年月日());
-                futangendogakunintei.getTxtYukoKigenYMD().setValue(futangenresult.get介護保険負担限度額認定の情報().get適用終了年月日());
-                futangendogakunintei.setFutanDankai(futangenresult.get介護保険負担限度額認定の情報().get利用者負担段階());
-                if (div.getDatagridhojipanel().getRadHyojiNaiyo().getSelectedKey().equals(全件)) {
-                    一括承認結果一覧.add(futangendogakunintei);
+        for (FutanGendogakuNinteiBatchResult futangenresult : 負担限度額認定バッチ結果) {
+            dgNinteiIchiran_Row futangendogakunintei = new dgNinteiIchiran_Row();
+            if (futangenresult.get介護保険負担限度額認定の情報().getState().equals(EntityDataState.Modified)) {
+                futangendogakunintei.setJotai(new RString("修正"));
+            }
+            futangendogakunintei.setHihoNo(futangenresult.get介護保険負担限度額認定の情報().get被保険者番号().value());
+            futangendogakunintei.setShikibetsuCode(futangenresult.get個人().get識別コード().value());
+            futangendogakunintei.getTxtSeinengappiYMD().setValue(futangenresult.get個人().get生年月日().toFlexibleDate());
+            futangendogakunintei.setNenrei(futangenresult.get個人().get年齢算出().get年齢());
+            futangendogakunintei.setKetteiKubun(futangenresult.get介護保険負担限度額認定の情報().get決定区分());
+            futangendogakunintei.getTxtKetteiYMD().setValue(futangenresult.get介護保険負担限度額認定の情報().get決定年月日());
+            futangendogakunintei.getTxtTekiyoYMD().setValue(futangenresult.get介護保険負担限度額認定の情報().get適用開始年月日());
+            futangendogakunintei.getTxtYukoKigenYMD().setValue(futangenresult.get介護保険負担限度額認定の情報().get適用終了年月日());
+            futangendogakunintei.setFutanDankai(futangenresult.get介護保険負担限度額認定の情報().get利用者負担段階());
+            if (div.getDatagridhojipanel().getRadHyojiNaiyo().getSelectedKey().equals(全件)) {
+                一括承認結果一覧.add(futangendogakunintei);
 
-                } else if (futangendogakunintei.getKetteiKubun().isEmpty() && futangendogakunintei.getKetteiKubun() == null) {
-                    一括承認結果一覧.add(futangendogakunintei);
-                }
+            } else if (futangendogakunintei.getKetteiKubun() == null) {
+                一括承認結果一覧.add(futangendogakunintei);
             }
         }
         return 一括承認結果一覧;

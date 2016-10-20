@@ -34,7 +34,6 @@ public class FutanyikkatsuShoninkekkaList {
 
     private static final RString 承認保存処理完了 = new RString("承認内容の保存処理が完了しました.");
     private static final RString 修正保存処理完了 = new RString("修正内容の保存処理が完了しました.");
-    private static List<YMDHMS> 一括処理日時list;
 
     /**
      * 画面初期化処理です。
@@ -43,7 +42,8 @@ public class FutanyikkatsuShoninkekkaList {
      * @return ResponseData<FutanyikkatsuShoninkekkaListDiv>
      */
     public ResponseData<FutanyikkatsuShoninkekkaListDiv> onLoad(FutanyikkatsuShoninkekkaListDiv div) {
-        一括処理日時list = IkkatsuShoninKekkaIchiranService.createInstance().load一括処理日時();
+        List<YMDHMS> 一括処理日時list = IkkatsuShoninKekkaIchiranService.createInstance().load一括処理日時();
+        ViewStateHolder.put(ViewStateKeys.一括処理日時リスト, new ArrayList<>(一括処理日時list));
         createhandler(div).onLoad(一括処理日時list);
         return ResponseData.of(div).respond();
     }
@@ -56,6 +56,8 @@ public class FutanyikkatsuShoninkekkaList {
      */
     public ResponseData<FutanyikkatsuShoninkekkaListDiv> onClick_selectbutton(FutanyikkatsuShoninkekkaListDiv div) {
         Boolean 承認済みフラグ = false;
+        div.getDatagridhojipanel().getDgNinteiIchiran().getDataSource().clear();
+        List<YMDHMS> 一括処理日時list = ViewStateHolder.get(ViewStateKeys.一括処理日時リスト, List.class);
         if (一括処理日時list != null && !一括処理日時list.isEmpty()) {
             RString 一括処理日時 = div.getHyojiTaisho().getDdlBatchShoriNichiji().getSelectedKey();
             int ddlBatchShoriNichiji_index = 0;
@@ -71,7 +73,10 @@ public class FutanyikkatsuShoninkekkaList {
             List<FutanGendogakuNinteiBatchResult> 負担限度額認定バッチ結果 = IkkatsuShoninKekkaIchiranService.createInstance()
                     .load一括承認結果取得(一括処理日時list.get(ddlBatchShoriNichiji_index), 承認済みフラグ);
             ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, new ArrayList<>(負担限度額認定バッチ結果));
-            createhandler(div).setDgShinseiIchiran_Row(負担限度額認定バッチ結果);
+            if (負担限度額認定バッチ結果 != null && !負担限度額認定バッチ結果.isEmpty()) {
+                div.getDatagridhojipanel().getDgNinteiIchiran().setDataSource(
+                        createhandler(div).setDgShinseiIchiran_Row(負担限度額認定バッチ結果));
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -84,7 +89,7 @@ public class FutanyikkatsuShoninkekkaList {
      */
     public ResponseData<FutanyikkatsuShoninkekkaListDiv> onClick_shonintakuteyibutton(FutanyikkatsuShoninkekkaListDiv div) {
         List<FutanGendogakuNinteiBatchResult> 画面更新用情報
-                = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, new ArrayList<>().getClass());
+                = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, List.class);
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor承認確定対象存在チェック(pairs, div);
         if (pairs.iterator().hasNext()) {
@@ -96,6 +101,7 @@ public class FutanyikkatsuShoninkekkaList {
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            List<YMDHMS> 一括処理日時list = ViewStateHolder.get(ViewStateKeys.一括処理日時リスト, List.class);
             createhandler(div).ＤＢ処理更新(画面更新用情報, 一括処理日時list);
             div.getCcdKaigoKanryoMessage().setMessage(承認保存処理完了, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBD1010032StateName.完了);
@@ -111,7 +117,7 @@ public class FutanyikkatsuShoninkekkaList {
      */
     public ResponseData<FutanyikkatsuShoninkekkaListDiv> onClick_shuseyihozonbutton(FutanyikkatsuShoninkekkaListDiv div) {
         List<FutanGendogakuNinteiBatchResult> 画面更新用情報
-                = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, new ArrayList<>().getClass());
+                = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, List.class);
         //TODO QA
 //        RStringBuilder 前排他ロックキー = new RStringBuilder();
 //        RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ShoKisaiHokenshaNo.class).value();

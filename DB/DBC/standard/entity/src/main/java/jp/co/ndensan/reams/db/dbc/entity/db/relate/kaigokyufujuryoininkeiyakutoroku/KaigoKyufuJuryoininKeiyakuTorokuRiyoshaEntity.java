@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufujuryoininkeiyakuto
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoKyufuJuryoininKeiyakuTorokuRiyoshaEntity {
 
+    private ShikibetsuCode 識別コード;
     private RString 郵便番号;
     private RString 行政区;
     private RString 住所Text;

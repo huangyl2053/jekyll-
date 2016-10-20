@@ -10,10 +10,18 @@ import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5710001.JyukyushaDaichoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5710001.JyukyushaDaichoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5710001.JyukyushaDaichoValidationHandler;
+import jp.co.ndensan.reams.db.dbd.service.core.basic.shoridatekanri.JyukyushaDaichoshoridatekanriService;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 受給者台帳画面のDivControllerです。
@@ -23,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class JyukyushaDaicho {
 
     private static final RString 対象期間 = new RString("1");
+    private LasdecCode 市町村コード;
+    private JyukyushaDaichoshoridatekanriService jyukyushoriDateKanriService;
 
     /**
      * 画面初期化処理です。
@@ -31,7 +41,16 @@ public class JyukyushaDaicho {
      * @return ResponseData<JyukyushaDaichoDiv>
      */
     public ResponseData<JyukyushaDaichoDiv> onLoad(JyukyushaDaichoDiv div) {
-        creatJyukyushaDaichoHandler(div).onLoad();
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(
+                GyomuBunrui.介護事務);
+        ShoriDateKanri shoriDateKanri = null;
+        if (shichosonSecurityJoho != null) {
+            市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
+            jyukyushoriDateKanriService = JyukyushaDaichoshoridatekanriService.createInstance();
+            shoriDateKanri = jyukyushoriDateKanriService.get一件取得(市町村コード);
+            ViewStateHolder.put(ViewStateKeys.受給者台帳情報, shoriDateKanri);
+        }
+        creatJyukyushaDaichoHandler(div).onLoad(shoriDateKanri);
         div.getShutsuryokuSort().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100026.getReportId());
         return ResponseData.of(div).respond();
     }
@@ -43,7 +62,8 @@ public class JyukyushaDaicho {
      * @return ResponseData<JyukyushaDaichoDiv>
      */
     public ResponseData<JyukyushaDaichoDiv> radChushutsuJyouken_onChange(JyukyushaDaichoDiv div) {
-        creatJyukyushaDaichoHandler(div).radChushutsuJyouken_onChange();
+        ShoriDateKanri shoriDateKanri = ViewStateHolder.get(ViewStateKeys.受給者台帳情報, ShoriDateKanri.class);
+        creatJyukyushaDaichoHandler(div).radChushutsuJyouken_onChange(shoriDateKanri);
         return ResponseData.of(div).respond();
     }
 
@@ -78,7 +98,8 @@ public class JyukyushaDaicho {
      */
     public ResponseData<DBD571001_JukyushaDaichoParameter> onCilck_btnBatchRegister(JyukyushaDaichoDiv div) {
         DBD571001_JukyushaDaichoParameter parameter = new DBD571001_JukyushaDaichoParameter();
-        creatJyukyushaDaichoHandler(div).onCilck_btnBatchRegister(div, parameter);
+        ShoriDateKanri shoriDateKanri = ViewStateHolder.get(ViewStateKeys.受給者台帳情報, ShoriDateKanri.class);
+        creatJyukyushaDaichoHandler(div).onCilck_btnBatchRegister(div, parameter, shoriDateKanri);
         return ResponseData.of(parameter).respond();
     }
 

@@ -204,7 +204,7 @@
                         AND A."is所得税課税世帯" = false
                     </if>
                     <if test="is市町村民税本人非課税者">
-                        AND A."本人課税区分" = '1'
+                        AND A."本人課税区分" = '2'
                     </if>
                     <if test="is老齢福祉年金受給者">
                         AND A."is老齢福祉年金受給者" = true
