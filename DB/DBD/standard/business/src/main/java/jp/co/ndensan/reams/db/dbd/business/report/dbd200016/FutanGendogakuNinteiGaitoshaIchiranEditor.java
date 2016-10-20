@@ -266,6 +266,8 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
 
         if (null != this.負担限度額認定者リストEntity.get非課税年金勘案額()) {
             source.listCenter_14 = 星;
+        } else {
+            source.listCenter_14 = RString.EMPTY;
         }
     }
 
