@@ -72,19 +72,19 @@ public class GassanJikofutangakuHoseiIchiranSource implements IReportSource {
     public RString listList1_16;
     @ReportItem(name = "listList1_17", length = 1, order = 30)
     public RString listList1_17;
-    @ReportItem(name = "add_hokenshaNo", length = 38, order = 31)
+    @ReportItem(name = "add_hokenshaNo")
     public RString add_hokenshaNo;
-    @ReportItem(name = "add_shichosonCode", length = 38, order = 32)
+    @ReportItem(name = "add_shichosonCode")
     public RString add_shichosonCode;
-    @ReportItem(name = "add_kanaMeisho", length = 38, order = 33)
+    @ReportItem(name = "add_kanaMeisho")
     public RString add_kanaMeisho;
-    @ReportItem(name = "add_choikiCode", length = 38, order = 34)
+    @ReportItem(name = "add_choikiCode")
     public RString add_choikiCode;
-    @ReportItem(name = "add_gyoseikuCode", length = 38, order = 35)
+    @ReportItem(name = "add_gyoseikuCode")
     public RString add_gyoseikuCode;
-    @ReportItem(name = "add_yubinNo", length = 38, order = 36)
+    @ReportItem(name = "add_yubinNo")
     public RString add_yubinNo;
-    @ReportItem(name = "add_shinnseiYMD", length = 38, order = 37)
+    @ReportItem(name = "add_shinnseiYMD")
     public RString add_shinnseiYMD;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
