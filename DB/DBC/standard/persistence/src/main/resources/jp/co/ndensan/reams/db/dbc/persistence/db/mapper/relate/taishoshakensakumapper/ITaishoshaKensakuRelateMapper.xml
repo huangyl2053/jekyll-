@@ -108,14 +108,13 @@
         , T."取込年月明細"
         , T."shikibetsuCode"
         , T."様式"
-        , "宛名"."meisho" AS "被保険者氏名"
+        , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."meisho" AS "被保険者氏名"
         FROM
         T
-        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',TRUE,
-        '','','','','','','',FALSE,'','','','','','','','','','','',FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,
-        FALSE,'','','','','','','','',FALSE,'','',FALSE,FALSE,FALSE,'','','','','','','','','','','','','','','','','','','{}')
-        AS 宛名
-        ON 宛名."shikibetsuCode" = T."shikibetsuCode"
+        LEFT JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = T."shikibetsuCode"
     </select>
 
     <resultMap id="ResultMap_TaishoshaKensaku" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.taishoshakensaku.TaishoshaKensakuRelateEntity" autoMapping="true">
@@ -169,5 +168,6 @@
         <result property="取込年月_明細" column="取込年月明細" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="コード略称" column="様式" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="被保険者氏名" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
 </mapper>

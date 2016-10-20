@@ -23,6 +23,7 @@ public final class TaishoshaKensakuParameter implements IMyBatisParameter {
     private final RString 市町村コード;
     private final boolean 履歴番号フラグ;
     private final boolean 市町村フラグ;
+    private final RString psmShikibetsuTaisho;
 
     /**
      * コンストラクタです。
@@ -33,15 +34,17 @@ public final class TaishoshaKensakuParameter implements IMyBatisParameter {
      * @param 市町村コード 市町村コード
      * @param 履歴番号フラグ 履歴番号フラグ
      * @param 市町村フラグ 市町村フラグ
+     * @param psmShikibetsuTaisho PSM宛名
      */
     protected TaishoshaKensakuParameter(RString 取扱年月, RString 保険者区分, int 履歴番号, RString 市町村コード,
-            boolean 履歴番号フラグ, boolean 市町村フラグ) {
+            boolean 履歴番号フラグ, boolean 市町村フラグ, RString psmShikibetsuTaisho) {
         this.取扱年月 = 取扱年月;
         this.保険者区分 = 保険者区分;
         this.履歴番号 = 履歴番号;
         this.市町村コード = 市町村コード;
         this.履歴番号フラグ = 履歴番号フラグ;
         this.市町村フラグ = 市町村フラグ;
+        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
     /**
@@ -53,22 +56,26 @@ public final class TaishoshaKensakuParameter implements IMyBatisParameter {
      * @param 市町村コード 市町村コード
      * @param 履歴番号フラグ 履歴番号フラグ
      * @param 市町村フラグ 市町村フラグ
+     * @param psmShikibetsuTaisho PSM宛名
      * @return TaishoshaKensakuParameter
      */
     public static TaishoshaKensakuParameter creatParameter(RString 取扱年月, RString 保険者区分, int 履歴番号, RString 市町村コード,
-            boolean 履歴番号フラグ, boolean 市町村フラグ) {
-        return new TaishoshaKensakuParameter(取扱年月, 保険者区分, 履歴番号, 市町村コード, 履歴番号フラグ, 市町村フラグ);
+            boolean 履歴番号フラグ, boolean 市町村フラグ, RString psmShikibetsuTaisho) {
+        return new TaishoshaKensakuParameter(取扱年月, 保険者区分, 履歴番号, 市町村コード, 履歴番号フラグ, 市町村フラグ, psmShikibetsuTaisho);
     }
 
     /**
      * Mybatisのパラメータを作成します。
      *
      * @param 取扱年月 取扱年月
+     * @param 保険者区分 保険者区分
      * @param 市町村コード 市町村コード
      * @param 市町村フラグ 市町村フラグ
+     * @param psmShikibetsuTaisho PSM宛名
      * @return TaishoshaKensakuParameter
      */
-    public static TaishoshaKensakuParameter creatRirekiParameter(RString 取扱年月, RString 市町村コード, boolean 市町村フラグ) {
-        return new TaishoshaKensakuParameter(取扱年月, RString.EMPTY, 0, 市町村コード, false, 市町村フラグ);
+    public static TaishoshaKensakuParameter creatRirekiParameter(RString 取扱年月, RString 保険者区分, RString 市町村コード,
+            boolean 市町村フラグ, RString psmShikibetsuTaisho) {
+        return new TaishoshaKensakuParameter(取扱年月, 保険者区分, 0, 市町村コード, false, 市町村フラグ, psmShikibetsuTaisho);
     }
 }
