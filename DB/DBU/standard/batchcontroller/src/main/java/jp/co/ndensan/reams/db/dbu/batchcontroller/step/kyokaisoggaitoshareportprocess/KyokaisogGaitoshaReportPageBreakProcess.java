@@ -52,7 +52,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<KyokaisogGaitoshaRelateEntity> {
 
     private static final RString なし = new RString("なし");
-    private static final int NUM5 = 5;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kyokaisogaitosha.IKkyokaisoGaitoshaMapper.getKyokaisoKanriMasterList");
     private KyokaisoKanriMasterListChohyoDataSakusei dataSakusei;
