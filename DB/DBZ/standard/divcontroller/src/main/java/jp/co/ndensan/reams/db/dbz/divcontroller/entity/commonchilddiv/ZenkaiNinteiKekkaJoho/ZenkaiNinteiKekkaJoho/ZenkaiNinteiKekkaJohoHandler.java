@@ -70,8 +70,21 @@ public class ZenkaiNinteiKekkaJohoHandler {
         div.setHdnKekkaShosaiJohoModel(DataPassingConverter.serialize(set結果詳細情報パラメータ(div, shinseishoKanriNo)));
     }
 
-    private void set前回情報(SubGyomuCode subGyomuCode,
+    public RString get要介護状態区分コード(SubGyomuCode subGyomuCode,
+            ShinseishoKanriNo shinseishoKanriNo,
+            RString 参照結果) {
+        RString 要介護状態区分コード = RString.EMPTY;
+        if (new RString("1").equals(参照結果)) {
+            要介護状態区分コード = set前回情報(subGyomuCode, shinseishoKanriNo);
+        } else if (new RString("2").equals(参照結果)) {
+            要介護状態区分コード = set今回情報(subGyomuCode, shinseishoKanriNo);
+        }
+        return 要介護状態区分コード;
+    }
+
+    private RString set前回情報(SubGyomuCode subGyomuCode,
             ShinseishoKanriNo shinseishoKanriNo) {
+        RString 要介護状態区分コード = RString.EMPTY;
         if (SubGyomuCode.DBD介護受給.equals(subGyomuCode)) {
             List<HokenshaNinteiShinseiJoho> hokenshaNinteiShinseiJohoList = getService()
                     .get要介護度_前回受給(shinseishoKanriNo).records();
@@ -81,6 +94,7 @@ public class ZenkaiNinteiKekkaJohoHandler {
                 div.getTxtNinteiDay().setValue(joho.get前回認定年月日());
                 div.getTxtYukoKikanFrom().setValue(joho.get前回認定有効期間_開始());
                 div.getTxtYukoKikanTo().setValue(joho.get前回認定有効期間_終了());
+                要介護状態区分コード = joho.get前回要介護状態区分コード().value();
             }
         } else if (SubGyomuCode.DBE認定支援.equals(subGyomuCode)) {
             List<NinteiShinseiJoho> ninteiShinseiJohoList = getService()
@@ -91,12 +105,15 @@ public class ZenkaiNinteiKekkaJohoHandler {
                 div.getTxtNinteiDay().setValue(joho.get前回認定年月日());
                 div.getTxtYukoKikanFrom().setValue(joho.get前回認定有効期間_開始_());
                 div.getTxtYukoKikanTo().setValue(joho.get前回認定有効期間_終了_());
+                要介護状態区分コード = joho.get前回要介護状態区分コード().value();
             }
         }
+        return 要介護状態区分コード;
     }
 
-    private void set今回情報(SubGyomuCode subGyomuCode,
+    private RString set今回情報(SubGyomuCode subGyomuCode,
             ShinseishoKanriNo shinseishoKanriNo) {
+        RString 要介護状態区分コード = RString.EMPTY;
         if (SubGyomuCode.DBD介護受給.equals(subGyomuCode)) {
             List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoList = getService().get要介護度_今回受給(shinseishoKanriNo).records();
             if (!zenkaiNinteiKekkaJohoList.isEmpty()) {
@@ -105,7 +122,7 @@ public class ZenkaiNinteiKekkaJohoHandler {
                 div.getTxtNinteiDay().setValue(set共通ポリシーパターン1(joho.get次判定年月日()));
                 div.getTxtYukoKikanFrom().setValue(set共通ポリシーパターン1(joho.get二次判定認定有効開始年月日()));
                 div.getTxtYukoKikanTo().setValue(set共通ポリシーパターン1(joho.get二次判定認定有効終了年月日()));
-
+                要介護状態区分コード = joho.get二次判定要介護状態区分コード();
             }
         } else if (SubGyomuCode.DBE認定支援.equals(subGyomuCode)) {
             List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoList = getService().get要介護度_今回認定(shinseishoKanriNo).records();
@@ -115,8 +132,10 @@ public class ZenkaiNinteiKekkaJohoHandler {
                 div.getTxtNinteiDay().setValue(set共通ポリシーパターン1(joho.get次判定年月日()));
                 div.getTxtYukoKikanFrom().setValue(set共通ポリシーパターン1(joho.get二次判定認定有効開始年月日()));
                 div.getTxtYukoKikanTo().setValue(set共通ポリシーパターン1(joho.get二次判定認定有効終了年月日()));
+                要介護状態区分コード = joho.get二次判定要介護状態区分コード();
             }
         }
+        return 要介護状態区分コード;
     }
 
     private FlexibleDate set共通ポリシーパターン1(RString date) {
