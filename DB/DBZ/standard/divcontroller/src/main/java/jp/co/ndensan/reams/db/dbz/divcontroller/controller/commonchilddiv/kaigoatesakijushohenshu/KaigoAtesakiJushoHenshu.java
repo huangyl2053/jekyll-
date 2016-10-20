@@ -28,6 +28,29 @@ public class KaigoAtesakiJushoHenshu {
     }
 
     /**
+     * 住所編集方法onChangeの処理です。
+     *
+     * @param div {@link KaigoAtesakiJushoHenshuDiv  介護住所編集方法ダイアログDiv}
+     * @return 介護住所編集方法ダイアログDivを持つResponseData
+     */
+    public ResponseData<KaigoAtesakiJushoHenshuDiv> onChange_jusho(KaigoAtesakiJushoHenshuDiv div) {
+        if (!div.getHdnGunMei().equals(div.getRadGunmeiHyojiUmu().getSelectedKey())
+                || !div.getHdnShichosonMei().equals(div.getRadCitymeiHyojiUmu().getSelectedKey())
+                || !div.getHdnKatagaki().equals(div.getRadKatagakiHyojiUmu().getSelectedKey())
+                || !div.getHdnTodofukenMei().equals(div.getRadKenmeiHyojiUmu().getSelectedKey())
+                || !div.getHdnHensyuHoho().equals(div.getDdlChoikiHenshu().getSelectedKey())) {
+            div.getBtnKakutei().setDisabled(false);
+        } else if (div.getHdnGunMei().equals(div.getRadGunmeiHyojiUmu().getSelectedKey())
+                && div.getHdnShichosonMei().equals(div.getRadCitymeiHyojiUmu().getSelectedKey())
+                && div.getHdnKatagaki().equals(div.getRadKatagakiHyojiUmu().getSelectedKey())
+                && div.getHdnTodofukenMei().equals(div.getRadKenmeiHyojiUmu().getSelectedKey())
+                && div.getHdnHensyuHoho().equals(div.getDdlChoikiHenshu().getSelectedKey())) {
+            div.getBtnKakutei().setDisabled(true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 確定btnの処理です。
      *
      * @param div {@link KaigoAtesakiJushoHenshuDiv  介護住所編集方法ダイアログDiv}

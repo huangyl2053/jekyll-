@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dba.business.core.fuseigolist.FuseigoListHenshu;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.juminidorendoshikakutoroku.JuminIdoRendoShikakuTorokuEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.juminidorendotennyu.JuminIdoRendoTennyuEntity;
 import jp.co.ndensan.reams.db.dba.entity.euc.juminidorendoshikakutoroku.FuseigoListCsvEntity;
+import jp.co.ndensan.reams.db.dba.service.core.juminidorendoshikakusoshitsu.JuminIdoRendoShikakuSoshitsu;
 import jp.co.ndensan.reams.db.dba.service.core.juminidorendotennyu.JuminIdoRendoTennyuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -52,7 +53,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
-import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -416,13 +416,13 @@ public class JuminIdoRendoShikakuToroku {
         FlexibleDate seinengappiYMD = 住民異動情報.getSeinengappiYMD();
         RString juminJotaiCode = 住民異動情報.getJuminJotaiCode();
         FlexibleDate shojoIdoYMD = 住民異動情報.getShojoIdoYMD();
-        if (torokuIdoYMD != null && seinengappiYMD != null && juminJotaiCode != null && shojoIdoYMD != null && 介護保険施行日 != null
-                && Integer.valueOf(getNenrei(torokuIdoYMD, seinengappiYMD,
-                                juminJotaiCode, shojoIdoYMD, 介護保険施行日).toString()) < (Integer.valueOf(第２号被保険者到達基準年齢.toString()))) {
+        if (has不整合コード(torokuIdoYMD, seinengappiYMD, shojoIdoYMD, juminJotaiCode,
+                介護保険施行日, 第２号被保険者到達基準年齢)) {
             entity.set不整合コード(RString.EMPTY);
             return entity;
         }
-        if (介護保険施行日 != null && torokuIdoYMD != null && torokuIdoYMD.isBefore(new FlexibleDate(介護保険施行日))) {
+        if (介護保険施行日 != null && !介護保険施行日.isEmpty() && torokuIdoYMD != null
+                && !torokuIdoYMD.isEmpty() && torokuIdoYMD.isBefore(new FlexibleDate(介護保険施行日))) {
             住民異動情報.setTorokuIdoYMD(new FlexibleDate(介護保険施行日));
         }
         entity = checkTekiyoJogaisha(住民異動情報);
@@ -445,6 +445,14 @@ public class JuminIdoRendoShikakuToroku {
             entity.set被保険者台帳EntityList(idorendoTennyuEntity.get被保険者台帳list());
         }
         return entity;
+    }
+
+    private boolean has不整合コード(FlexibleDate torokuIdoYMD, FlexibleDate seinengappiYMD, FlexibleDate shojoIdoYMD,
+            RString juminJotaiCode, RString 介護保険施行日, RString 第２号被保険者到達基準年齢) {
+        return torokuIdoYMD != null && !torokuIdoYMD.isEmpty() && seinengappiYMD != null && !seinengappiYMD.isEmpty()
+                && juminJotaiCode != null && shojoIdoYMD != null && !shojoIdoYMD.isEmpty() && 介護保険施行日 != null
+                && Integer.valueOf(getNenrei(torokuIdoYMD, seinengappiYMD, juminJotaiCode, shojoIdoYMD,
+                                介護保険施行日).toString()) < (Integer.valueOf(第２号被保険者到達基準年齢.toString()));
     }
 
     private Map<String, RString> getTennyuShoriKubun(UaFt200FindShikibetsuTaishoEntity 住民異動情報,
@@ -606,8 +614,7 @@ public class JuminIdoRendoShikakuToroku {
             entity.set不整合コード(不整合コード);
             return entity;
         }
-        setTennyuEntity(住民異動情報, 介護保険施行日, 広域システム構成);
-        return entity;
+        return setTennyuEntity(住民異動情報, 介護保険施行日, 広域システム構成, 被保険者台帳);
     }
 
     private RString getSonota不整合コード(UaFt200FindShikibetsuTaishoEntity 住民異動情報) {
@@ -642,12 +649,15 @@ public class JuminIdoRendoShikakuToroku {
         }
     }
 
-    private void setTennyuEntity(UaFt200FindShikibetsuTaishoEntity 住民異動情報, RString 介護保険施行日, RString 広域システム構成) {
+    private JuminIdoRendoShikakuTorokuEntity setTennyuEntity(UaFt200FindShikibetsuTaishoEntity 住民異動情報,
+            RString 介護保険施行日, RString 広域システム構成, DbV1001HihokenshaDaichoEntity 被保険者台帳) {
+        JuminIdoRendoShikakuTorokuEntity entity = new JuminIdoRendoShikakuTorokuEntity();
         set住民異動情報(住民異動情報, 介護保険施行日);
+        JuminIdoRendoShikakuSoshitsu juminIdoRendoShikakuSoshitsu = new JuminIdoRendoShikakuSoshitsu();
         if (転出.equals(住民異動情報.getIdoJiyuCode())) {
             Map<String, RString> map = getTenshutsuShoriKubun(住民異動情報, 広域システム構成);
             if (広域内転出.equals(map.get(処理区分.toString())) || 広域外転出.equals(map.get(処理区分.toString()))) {
-                // TODO  「ビジネス設計_DBAMN00000_住民異動連動資格登録（転出・死亡・転入通知受理）」の「宛名連動転出処理」を実行する。
+                entity = juminIdoRendoShikakuSoshitsu.getTenshutsu(住民異動情報, 被保険者台帳);
                 map.get(処理区分.toString());
             }
         } else if (死亡.equals(住民異動情報.getIdoJiyuCode())) {
@@ -658,12 +668,13 @@ public class JuminIdoRendoShikakuToroku {
             } else if (shojoIdoYMD != null && !shojoIdoYMD.isEmpty() && (shojoTodokedeYMD == null || shojoTodokedeYMD.isEmpty())) {
                 住民異動情報.setShojoTodokedeYMD(住民異動情報.getShojoIdoYMD());
             }
-            // TODO 「ビジネス設計_DBAMN00000_住民異動連動資格登録（転出・死亡・転入通知受理）」の「宛名連動死亡処理」を実行する。
+            entity = juminIdoRendoShikakuSoshitsu.getShiBo(住民異動情報, 被保険者台帳);
         } else if (転入通知受理.equals(住民異動情報.getIdoJiyuCode())
                 && 処理区分_転入通知受理.equals(getTennyuTsuchiJuriShoriKubun(住民異動情報, 広域システム構成))) {
             住民異動情報.setShojoTodokedeYMD(住民異動情報.getShojoIdoYMD());
-            // TODO 「ビジネス設計_DBAMN00000_住民異動連動資格登録（転出・死亡・転入通知受理）」の「宛名連動転入通知受理処理」を実行する。
+            entity = juminIdoRendoShikakuSoshitsu.getTennyuTsuchiJuri(住民異動情報, 被保険者台帳);
         }
+        return entity;
     }
 
     private void set住民異動情報(UaFt200FindShikibetsuTaishoEntity 住民異動情報, RString 介護保険施行日) {
@@ -832,19 +843,6 @@ public class JuminIdoRendoShikakuToroku {
         return 全国住所.get地方公共団体コード();
     }
 
-    private Encode getEncode() {
-        RString sakiEncodeKeitai = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        Encode encode = Encode.UTF_8withBOM;
-        if (new RString("1").equals(sakiEncodeKeitai)) {
-            encode = Encode.UTF_8withBOM;
-        } else if (new RString("2").equals(sakiEncodeKeitai)) {
-            encode = Encode.SJIS;
-        } else if (new RString("3").equals(sakiEncodeKeitai)) {
-            encode = Encode.SJIS;
-        }
-        return encode;
-    }
-
     private PersonalData toPersonalData(DbV1001HihokenshaDaichoEntity dbv1001Entity, UaFt200FindShikibetsuTaishoEntity 住民異動情報) {
         RString 被保険者番号 = RString.EMPTY;
         if (dbv1001Entity != null && dbv1001Entity.getHihokenshaNo() != null) {
@@ -921,7 +919,7 @@ public class JuminIdoRendoShikakuToroku {
         住民異動情報.setJuminShubetsuCode(宛名識別対象.get住民種別コード());
         住民異動情報.setKojinNo(宛名識別対象.get個人番号());
         住民異動情報.setShoriYMD(宛名識別対象.get処理年月日());
-        住民異動情報.setIdoJiyuCode(宛名識別対象.get届出事由コード());
+        住民異動情報.setIdoJiyuCode(宛名識別対象.get異動事由コード());
         住民異動情報.setIdoYMD(宛名識別対象.get異動年月日());
         住民異動情報.setTodokedeJiyuCode(宛名識別対象.get届出事由コード());
         住民異動情報.setTodokedeYMD(宛名識別対象.get届出年月日());
@@ -1002,15 +1000,6 @@ public class JuminIdoRendoShikakuToroku {
         住民異動情報.setTennyumaeKatagaki(宛名識別対象.get転入前方書());
         住民異動情報.setTennyumaeSetainushimei(宛名識別対象.get転入前世帯主名());
         住民異動情報.setTennyumaeKyusei(new AtenaMeisho(宛名識別対象.get転入前旧姓()));
-        住民異動情報.setJuteiTodokedeYMD(宛名識別対象.get住定届出年月日());
-        住民異動情報.setShojoJiyuCode(宛名識別対象.get消除事由コード());
-        住民異動情報.setShojoIdoYMD(宛名識別対象.get消除異動年月日());
-        住民異動情報.setShojoTodokedeYMD(宛名識別対象.get消除届出年月日());
-        住民異動情報.setAimaiShojobiMongon(宛名識別対象.getあいまい消除日文言());
-        住民異動情報.setTennyumaeYubinNo(宛名識別対象.get転入前郵便番号());
-        住民異動情報.setTennyumaeZenkokuJushoCode(宛名識別対象.get転入前全国住所コード());
-        住民異動情報.setTennyumaeJusho(宛名識別対象.get転入前住所());
-        住民異動情報.setTennyumaeBanchi(宛名識別対象.get転入前番地());
         住民異動情報.setSaishuJutochiYubinNo(宛名識別対象.get最終住登地郵便番号());
         住民異動情報.setSaishuJutochiZenkokuJushoCode(宛名識別対象.get最終住登地全国住所コード());
         住民異動情報.setSaishuJutochiJusho(宛名識別対象.get最終住登地住所());
@@ -1018,7 +1007,7 @@ public class JuminIdoRendoShikakuToroku {
         住民異動情報.setSaishuJutochiKatagaki(宛名識別対象.get最終住登地方書());
         住民異動情報.setSaishuJutochiSetainushimei(宛名識別対象.get最終住登地世帯主名());
         住民異動情報.setTenshutsuYoteiIdoYMD(宛名識別対象.get転出予定異動年月日());
-        住民異動情報.setTenshutsuYoteiYubinNo(宛名識別対象.get最終住登地郵便番号());
+        住民異動情報.setTenshutsuYoteiYubinNo(宛名識別対象.get転出予定郵便番号());
         住民異動情報.setTenshutsuYoteiZenkokuJushoCode(宛名識別対象.get転出予定全国住所コード());
         住民異動情報.setTenshutsuYoteiJusho(宛名識別対象.get転出予定住所());
         住民異動情報.setTenshutsuYoteiBanchi(宛名識別対象.get転出予定番地());
@@ -1044,10 +1033,6 @@ public class JuminIdoRendoShikakuToroku {
         住民異動情報.setRenrakusakiKubun3(宛名識別対象.get連絡先区分３().value());
         住民異動情報.setMailAddress(宛名識別対象.getメールアドレス());
         住民異動情報.setBiko(宛名識別対象.get備考());
-//        TODO QA1810再提出ので、実装しない
-//        住民異動情報.setKanaName(宛名識別対象.getカナ名());
-//        住民異動情報.setGaikokujinKanaName(宛名識別対象.get外国人カナ名());
-//        住民異動情報.setKanaTsushoName(宛名識別対象.getカナ通称名のみ());
         juminIdoRendoKyotsu(住民異動情報, csvWriter);
     }
 }
