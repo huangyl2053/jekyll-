@@ -164,7 +164,7 @@ public class HihokenshaFinderHandler {
      * 最近処理者を読み込みます。
      */
     void load最近処理者() {
-        div.getCcdSaikinShorisha().setInitialLoad(new ScopeCode(ScopeCodeType.識別対象.getCode()));
+        div.getCcdSaikinShorisha().setInitialLoad(new ScopeCode(ScopeCodeType.個人.getCode()));
     }
 
     /**
@@ -174,7 +174,7 @@ public class HihokenshaFinderHandler {
      * @param 名称 名称
      */
     void save最近処理者(ShikibetsuCode 識別コード, AtenaMeisho 名称) {
-        saikinShorishaManager.save(new ScopeCode(ScopeCodeType.識別対象.getCode()), 識別コード.value(), 名称.value());
+        saikinShorishaManager.save(new ScopeCode(ScopeCodeType.個人.getCode()), 識別コード.value(), 名称.value());
     }
 
     /**

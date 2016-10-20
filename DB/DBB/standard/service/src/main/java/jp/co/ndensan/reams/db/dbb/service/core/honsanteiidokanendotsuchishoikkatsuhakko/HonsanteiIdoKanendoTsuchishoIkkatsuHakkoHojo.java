@@ -84,7 +84,6 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
-//    private static final int INT_6 = 6;
     private static final int INT_7 = 7;
     private static final int INT_8 = 8;
     private static final int INT_14 = 14;
@@ -146,7 +145,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
      */
     public static HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo createInstance() {
         return InstanceProvider.create(HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo.class);
@@ -157,7 +157,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
      *
      * @param entityList List<HonsanteiTsuchishoTempEntity>
      * @return List<HonsanteiTsuchishoTempResult> 賦課情報リスト
-     * @throws java.lang.reflect.InvocationTargetException 賦課の情報_更正前後が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException
+     * 賦課の情報_更正前後が取得できない場合、Exception
      */
     public List<HonsanteiTsuchishoTempResult> get賦課情報(List<HonsanteiTsuchishoTempEntity> entityList) throws InvocationTargetException {
 
