@@ -438,6 +438,8 @@ WITH master AS (
 
         今回申請."shiteiiFlag" AS 今回申請_指定医フラグ,
 
+        施設入所."shikibetsuCode" AS 施設入所_識別コード,
+        施設入所."rirekiNo" AS 施設入所_履歴番号,
         施設入所."nyushoShisetsuCode" AS 施設入所_入所施設コード,
         施設入所."nyushoYMD" AS 施設入所_入所年月日,
         施設入所."taishoYMD" AS 施設入所_退所年月日,
@@ -838,6 +840,6 @@ WITH master AS (
          <if test="is地区3To">
             AND "ShikibetsuTaisho"."chikuCode3" <![CDATA[<=]]> #{chiku3_To}
         </if>
-
+     ${出力順}
     </select>
 </mapper>

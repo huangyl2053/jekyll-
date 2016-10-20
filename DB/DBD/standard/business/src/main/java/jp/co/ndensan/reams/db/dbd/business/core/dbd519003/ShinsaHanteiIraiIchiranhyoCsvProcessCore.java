@@ -69,7 +69,7 @@ public class ShinsaHanteiIraiIchiranhyoCsvProcessCore {
             csvEntity.set性別コード(Seibetsu.toValue(entity.get性別()).getコード());
         }
         if (entity.get前回要介護状態区分コード() != null) {
-            csvEntity.set前回の認定審査会結果(YokaigoJotaiKubun09.toValue(entity.get前回要介護状態区分コード().value()).getコード());
+            csvEntity.set前回の認定審査会結果(YokaigoJotaiKubun09.toValue(entity.get前回要介護状態区分コード()).getコード());
         }
         return csvEntity;
     }

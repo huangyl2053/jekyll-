@@ -185,15 +185,15 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
         RString 時効起算事由 = RString.EMPTY;
 
         if (is収入年月日) {
-            時効起算事由 = JikoKisanbiKubun.収入日.get名称();
+            時効起算事由 = JikoKisanbiKubun.収入日.getコード();
         } else if (is時効起算日) {
             時効起算事由 = entity.get時効_時効起算日区分();
         } else if (is督促状発行年月日) {
-            時効起算事由 = JikoKisanbiKubun.督促状発行日.get名称();
+            時効起算事由 = JikoKisanbiKubun.督促状発行日.getコード();
         } else if (is納期限の翌日) {
-            時効起算事由 = JikoKisanbiKubun.納期限翌日.get名称();
+            時効起算事由 = JikoKisanbiKubun.納期限翌日.getコード();
         } else {
-            時効起算事由 = JikoKisanbiKubun.不明_調定無し.get名称();
+            時効起算事由 = JikoKisanbiKubun.不明_調定無し.getコード();
         }
         return 時効起算事由;
     }

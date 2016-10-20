@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.karisanteiidofuka.KariSanteiIdoFukaBatch;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -29,7 +30,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -298,7 +298,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
             csvEntity.set特別徴収業務者コード(getColumnValue(年金特徴回付情報.getDT特別徴収義務者コード()));
             if (年金特徴回付情報.getDT特別徴収義務者コード() != null) {
                 csvEntity.set特別徴収業務者(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                        UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(年金特徴回付情報.getDT特別徴収義務者コード().toRString())));
+                        UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), 年金特徴回付情報.getDT特別徴収義務者コード()));
             }
         }
         csvEntity.set特徴開始月(特徴開始月);

@@ -566,8 +566,8 @@ public class TokuchoTaishoshaIchiranHandler {
 
     private void set特別徴収同定候補者詳細情報1(TokuchoDouteiKouhoshaShousaiJoho result) throws IllegalArgumentException, NullPointerException {
         div.setHiddenFukaNendo(RString.EMPTY);
-        if (result.get登録済年金情報_本徴収基礎年金番号() != null) {
-            div.setHiddenFukaNendo(result.get登録済年金情報_本徴収基礎年金番号());
+        if (result.get登録済年金情報_基礎年金番号() != null) {
+            div.setHiddenFukaNendo(result.get登録済年金情報_基礎年金番号());
         }
         if (result.get未同定年金情報_基礎年金番号() != null) {
             div.getTxtKisoNenkinNo().setValue(result.get未同定年金情報_基礎年金番号());

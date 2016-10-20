@@ -93,15 +93,30 @@
     
     <select resultOrdered="true" id="get納付額一覧表情報" resultMap="ResultMap_NofugakuJohoReportEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nofugakudatasakuseitandokushichoson.NofugakuDataMybatisParameter" fetchSize="500" >
+        WITH master AS (
         SELECT 
-            <include refid="allColumns_DbT2016NofugakuJohoTemp" />,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
-        FROM "DbT2016NofugakuJohoTemp" AS "DbT2016NofugakuJohoTemp"
-        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',false,'',
-        '','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')  AS "ShikibetsuTaisho"
-        ON  "DbT2016NofugakuJohoTemp"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
-        AND "DbT2016NofugakuJohoTemp"."fukaShichosonCode" = "ShikibetsuTaisho"."genLasdecCode"
+            <include refid="allColumns_DbT2016NofugakuJohoTemp" />
+        FROM
+             "DbT2016NofugakuJohoTemp" AS "DbT2016NofugakuJohoTemp"
+        )
+        SELECT    
+             master.*,
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM 
+             master 
+        INNER JOIN 
+            rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',false,'',
+                    '','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+                    true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                   (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT2016NofugakuJohoTemp_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                   )) AS "ShikibetsuTaisho"
+        ON  master."dbT2016NofugakuJohoTemp_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+        AND master."dbT2016NofugakuJohoTemp_fukaShichosonCode" = "ShikibetsuTaisho"."genLasdecCode"
+        
         <if test="出力順 != null">
         ${出力順}
         </if>

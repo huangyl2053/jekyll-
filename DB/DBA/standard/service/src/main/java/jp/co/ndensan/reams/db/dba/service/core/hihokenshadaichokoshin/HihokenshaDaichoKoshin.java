@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.service.core.hihokenshadaichokoshin;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.SaishinIdohiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsushikakuido.INenreitotatsuShikakuIdoRelateMapper;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
@@ -55,7 +55,8 @@ public class HihokenshaDaichoKoshin {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoKoshin}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoKoshin}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoKoshin}のインスタンス
      */
     public static HihokenshaDaichoKoshin createInstance() {
         return InstanceProvider.create(HihokenshaDaichoKoshin.class);

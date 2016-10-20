@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.InsShotokusho
 import jp.co.ndensan.reams.db.dbb.definition.processprm.shotokushokaihyohakko.ShotokuShokaihyoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataMapbEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataTempEntity;
+import jp.co.ndensan.reams.db.dbb.service.core.shotokushokaihyo.Shotokushokaihyo;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -52,6 +53,7 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
     private BatchEntityCreatedTempTableWriter 所得照会票データwriter;
     private ShotokuShokaihyoHakkoProcessParameter processParameter;
     private InsShotokushokaihyoTmpParameter myBatisParameter;
+    private Shotokushokaihyo manager;
     private RString 都道府県名;
     private RString 市町村名;
     private RString 郡名;
@@ -65,6 +67,7 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
 
     @Override
     public void initialize() {
+        manager = Shotokushokaihyo.createInstance();
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
         都道府県名 = association.get都道府県名();
@@ -165,12 +168,8 @@ public class InsShotokushokaihyoTmpProcess extends BatchProcessBase<ShotokuShouk
                 所得照会票データ.setGenjusho(RString.EMPTY);
             }
         } else if (導入形態コード.equals(導入形態コード_111)) {
-            RString 市町村識別ID = RString.EMPTY;
-            if (所得照会票データ.getGenLasdecCode() != null
-                    && INT_2 <= 所得照会票データ.getGenLasdecCode().getColumnValue().length()) {
-                市町村識別ID = 所得照会票データ.getGenLasdecCode().getColumnValue().substring(INT_0, INT_2);
-
-            }
+            LasdecCode 市町村コード = 所得照会票データ.getShichosonCode();
+            RString 市町村識別ID = manager.get市町村識別ID(市町村コード);
             KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho
                     .getKouseiShichosonJoho(市町村識別ID);
             RString 都道府県名_構成 = RString.EMPTY;

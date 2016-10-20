@@ -9,6 +9,7 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class TokubetuTyoushuuKaisiTempEntity implements Serializable {
 
     private FlexibleYear 賦課年度;
@@ -62,5 +63,11 @@ public class TokubetuTyoushuuKaisiTempEntity implements Serializable {
     private RString 保険料算定段階2;
     private Decimal 合計所得金額;
     private Decimal 公的年金収入額;
+    private FlexibleDate 生保開始日;
+    private FlexibleDate 生保廃止日;
+    private FlexibleDate 老年開始日;
+    private FlexibleDate 老年廃止日;
+    private RString 課税区分;
+    private RString 世帯課税区分;
 
 }
