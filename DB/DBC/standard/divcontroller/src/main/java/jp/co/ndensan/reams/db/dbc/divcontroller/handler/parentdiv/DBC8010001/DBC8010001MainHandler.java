@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.dbc8010001.DBC8010001;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC050010.DBC050010_FurikomimeisaiFurikomiDataParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiGyomunaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_MeisaiIchiranChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_SaishoriShitei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
@@ -22,9 +21,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ux.uxx.definition.mybatisprm.kozafurikomi.furikomiitakushakosei.FurikomiItakushaKoseiMapperParameter;
-import jp.co.ndensan.reams.ux.uxx.entity.db.relate.kozafurikomi.furikomigroup.FurikomiGroupItakushaRelateEntity;
-import jp.co.ndensan.reams.ux.uxx.service.core.kozafurikomi.furikomi.FurikomiGroupItakushaItakushaKoseiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -56,8 +52,8 @@ public class DBC8010001MainHandler {
     private final DBC8010001MainDiv div;
     private KinyuKikanCode 代表金融機関コード;
     private RString 振込グループコード;
-    private int indexstart = 0;
-    private int indexend = 6;
+    private static int indexstart = 0;
+    private static int indexend = 6;
 
     /**
      * コンストラクターです。
@@ -102,16 +98,15 @@ public class DBC8010001MainHandler {
     }
 
     private void init画面表示内容(RString メニューID, RString 振込単位, DBC8010001 dbc) {
-        List<FurikomiGroupItakushaRelateEntity> list = getFurikomiGroupItakushaRelateEntityList(メニューID, 振込単位);
-        FurikomiGroupItakushaRelateEntity fentity = list.get(0);
-        fentity.get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode();
-        this.代表金融機関コード = fentity.get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode();
-        this.振込グループコード = fentity.get振込グループEntity().getFurikomiGroupCode();
-        div.getItakusha().getTxtItakushaCode().setValue(fentity.get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaCode());
-        div.getItakusha().getTxtItakushamei().setValue(fentity.get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushamei());
-        div.getItakusha().setItakushaId(new RString(fentity.get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaId().toString()));
-        div.getItakusha().getTxtFurikomiGroupCode().setValue(fentity.get振込グループEntity().getFurikomiGroupCode());
-        div.getItakusha().getTxtFurikomiGroupMeisho().setValue(fentity.get振込グループEntity().getFurikomiGroupMeisho());
+        DBC8010001MainManager manager = new DBC8010001MainManager();
+        DBC8010001 entity = manager.getFurikomiGroupItakushaRelateEntity(メニューID, 振込単位);
+        this.代表金融機関コード = entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode();
+        this.振込グループコード = entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode();
+        div.getItakusha().getTxtItakushaCode().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaCode());
+        div.getItakusha().getTxtItakushamei().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushamei());
+        div.getItakusha().setItakushaId(new RString(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaId().toString()));
+        div.getItakusha().getTxtFurikomiGroupCode().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode());
+        div.getItakusha().getTxtFurikomiGroupMeisho().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupMeisho());
         List<KeyValueDataSource> list1 = new ArrayList<>();
         KeyValueDataSource source1 = new KeyValueDataSource();
         source1.setKey(Furikomi_ShoriTaisho.償還高額.getコード());
@@ -281,45 +276,6 @@ public class DBC8010001MainHandler {
                 break;
         }
         return 処理名;
-    }
-
-    /**
-     * 委託者情報の取得。
-     *
-     * @param メニューID
-     * @param 振込単位
-     * @return List<FurikomiGroupItakushaRelateEntity>
-     */
-    public List<FurikomiGroupItakushaRelateEntity> getFurikomiGroupItakushaRelateEntityList(RString メニューID, RString 振込単位) {
-        List<FurikomiGroupItakushaRelateEntity> list;
-        RString 業務内区分 = new RString("");
-        switch (メニューID.toString()) {
-            case "DBCMN43003":
-                switch (振込単位.toString()) {
-                    case "1":
-                        業務内区分 = FurikomiGyomunaiKubun.償還高額.getコード();
-                        break;
-                    case "2":
-                        業務内区分 = FurikomiGyomunaiKubun.高額.getコード();
-                        break;
-                }
-                break;
-            case "DBCMN54002":
-                switch (振込単位.toString()) {
-                    case "1":
-                        業務内区分 = FurikomiGyomunaiKubun.償還高額.getコード();
-                        break;
-                    case "2":
-                        業務内区分 = FurikomiGyomunaiKubun.償還.getコード();
-                        break;
-                }
-                break;
-        }
-        FurikomiItakushaKoseiMapperParameter parameter;
-        parameter = FurikomiItakushaKoseiMapperParameter.createSelectByKeyParam(null, SubGyomuCode.DBC介護給付, 業務内区分, null, null, null);
-        FurikomiGroupItakushaItakushaKoseiFinder finder = FurikomiGroupItakushaItakushaKoseiFinder.createInstance();
-        list = finder.getFurikomiGroupItakushItakushKosei(parameter);
-        return list;
     }
 
     /**
