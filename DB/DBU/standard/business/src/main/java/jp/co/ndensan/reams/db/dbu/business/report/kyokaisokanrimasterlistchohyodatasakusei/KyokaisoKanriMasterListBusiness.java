@@ -118,6 +118,10 @@ public class KyokaisoKanriMasterListBusiness {
          */
         被保険者番号(new RString("0104"), new RString(""), new RString("\"DbT1006Kyo.hihokenshaNo\"")),
         /**
+         * 市町村コード
+         */
+        市町村コード(new RString("0016"), new RString(""), new RString("\"DbT1001Hiho.shichosonCode\"")),
+        /**
          * 境界層該当申請日
          */
         境界層該当申請日(new RString("0117"), new RString(""), new RString("DbT1013Kyo.shinseiYMD\"")),
