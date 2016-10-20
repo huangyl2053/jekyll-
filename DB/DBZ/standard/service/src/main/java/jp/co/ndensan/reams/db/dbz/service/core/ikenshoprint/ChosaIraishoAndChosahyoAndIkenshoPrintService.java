@@ -18,8 +18,6 @@ import jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo.ChosaIraiI
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoReport;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiProperty;
-import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiReport;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReport;
@@ -47,7 +45,6 @@ import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosairaisho.ChosaIraishoReportSource;
-import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.IkenshokinyuyoshiReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
@@ -424,12 +421,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * @param items 主治医意見書記入用紙_帳票クラスパラメータクラス
      */
     public void print主治医意見書記入用紙(List<IkenshokinyuyoshiBusiness> items) {
-        IkenshokinyuyoshiProperty property = new IkenshokinyuyoshiProperty();
-        try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
-            ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            IkenshokinyuyoshiReport report = new IkenshokinyuyoshiReport(items);
-            report.writeBy(reportSourceWriter);
-        }
+//        IkenshokinyuyoshiProperty property = new IkenshokinyuyoshiProperty();
+//        try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
+//            ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+//            IkenshokinyuyoshiReport report = new IkenshokinyuyoshiReport(items);
+//            report.writeBy(reportSourceWriter);
+//        }
     }
 
     /**
