@@ -254,7 +254,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
     public void print認定調査票_特記事項(List<ChosahyoTokkijikoBusiness> 認定調査票_特記事項List) {
         List<ChosahyoTokkijikoReport> list = new ArrayList<>();
         if (!認定調査票_特記事項List.isEmpty()) {
-            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List));
+//            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List));
         }
         ChosahyoTokkijikoProperty property = new ChosahyoTokkijikoProperty();
         try (ReportAssembler<ChosahyoTokkijikoReportSource> assembler = createAssembler(property, reportManager)) {
