@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
@@ -66,6 +65,8 @@ public final class ReportUtil {
 
     private static final RString 首長名印字位置 = new RString("1");
     private static final RString 汎用キー_文書番号 = new RString("文書番号");
+    private static final int INT3 = 3;
+    private static final int INT4 = 4;
     private static final int INT5 = 5;
     private static RStringBuilder orderByClause;
     private static RString space;
@@ -241,29 +242,47 @@ public final class ReportUtil {
             SubGyomuCode サブ業務コード,
             ReportId 帳票ID,
             long 出力順ID) {
+        ShutsuryokujunRelateEntity entity = new ShutsuryokujunRelateEntity();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         IOutputOrder outputOrder = finder.get出力順(サブ業務コード, 帳票ID, 出力順ID);
         ReportItemsMap reportItems = new ReportItemsMap(Arrays.<IReportItems>asList(clazz.getEnumConstants()));
+        if (outputOrder == null) {
+            return entity;
+        }
         orderByClause = new RStringBuilder("order by");
-        space = new RString(" ");
+        space = RString.HALF_SPACE;
         comma = new RString(",");
         commaCount = 0;
-        ShutsuryokujunRelateEntity entity = new ShutsuryokujunRelateEntity();
+
         List<RString> 出力順List = new ArrayList<>();
         List<RString> 改頁List = new ArrayList<>();
         List<RString> pagebreakList = new ArrayList<>();
+        for (int i = 0; i < INT5; i++) {
+            出力順List.add(RString.EMPTY);
+            改頁List.add(RString.EMPTY);
+        }
         if (outputOrder.get設定項目リスト().isEmpty()) {
             return entity;
         }
         for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
             getOrderByClause(reportItems, setSortItem);
-            出力順List.add(setSortItem.get項目名());
-            if (setSortItem.is改頁項目() && 改頁List.size() < INT5) {
+            出力順List.set(commaCount, setSortItem.get項目名());
+            if (setSortItem.is改頁項目() && 改頁List.size() == INT5) {
                 pagebreakList.add(reportItems.getフォームフィールド名(setSortItem.get項目ID()));
-                改頁List.add(setSortItem.get項目名());
+                改頁List.set(commaCount, setSortItem.get項目名());
             }
             commaCount++;
         }
+        entity.set出力順1(出力順List.get(0));
+        entity.set出力順2(出力順List.get(1));
+        entity.set出力順3(出力順List.get(2));
+        entity.set出力順4(出力順List.get(INT3));
+        entity.set出力順5(出力順List.get(INT4));
+        entity.set改頁項目1(改頁List.get(0));
+        entity.set改頁項目2(改頁List.get(1));
+        entity.set改頁項目3(改頁List.get(2));
+        entity.set改頁項目4(改頁List.get(INT3));
+        entity.set改頁項目5(改頁List.get(INT4));
         entity.set出力順OrderBy(orderByClause.toRString());
         entity.set出力順項目(出力順List);
         entity.setPageBreakKeys(pagebreakList);
@@ -312,82 +331,4 @@ public final class ReportUtil {
             }
         }
     }
-
-    /**
-     * 0から、出力順項目を取得します。
-     *
-     * @param shutsuryokujunId 出力順ID
-     * @param reportId 帳票ID
-     * @param subGyomuCode サブ業務コード
-     * @return List<ISetSortItem>
-     */
-    public static Map<Integer, ISetSortItem> get出力順項目(
-            SubGyomuCode subGyomuCode,
-            Long shutsuryokujunId,
-            ReportId reportId) {
-        List<ISetSortItem> 設定項目リスト = new ArrayList<>();
-        IOutputOrder iOutputOrder = ReportUtil.get出力順ID(subGyomuCode, shutsuryokujunId, reportId);
-        if (iOutputOrder != null) {
-            設定項目リスト = iOutputOrder.get設定項目リスト();
-        }
-        Map<Integer, ISetSortItem> 出力順Map = new HashMap();
-        int i = 0;
-        for (ISetSortItem sortItem : 設定項目リスト) {
-            出力順Map.put(i, sortItem);
-            i++;
-        }
-        return 出力順Map;
-    }
-
-    /**
-     * 0から、改頁項目を取得します。
-     *
-     * @param shutsuryokujunId 出力順ID
-     * @param reportId 帳票ID
-     * @param subGyomuCode サブ業務コード
-     * @return List<ISetSortItem>
-     */
-    public static Map<Integer, RString> get改頁項目(
-            SubGyomuCode subGyomuCode,
-            Long shutsuryokujunId,
-            ReportId reportId) {
-        List<ISetSortItem> 設定項目リスト = new ArrayList<>();
-        IOutputOrder iOutputOrder = ReportUtil.get出力順ID(subGyomuCode, shutsuryokujunId, reportId);
-        if (iOutputOrder != null) {
-            設定項目リスト = iOutputOrder.get設定項目リスト();
-        }
-        Map<Integer, RString> 改頁Map = new HashMap();
-        int i = 0;
-        for (ISetSortItem sortItem : 設定項目リスト) {
-            if (sortItem.is改頁項目()) {
-                改頁Map.put(i, sortItem.get項目名());
-                i++;
-            }
-        }
-        return 改頁Map;
-    }
-
-    /**
-     * 出力順IDを取得します。
-     *
-     * @param shutsuryokujunId 出力順ID
-     * @param reportId 帳票ID
-     * @param subGyomuCode サブ業務コード
-     * @return List<ISetSortItem>
-     */
-    public static IOutputOrder get出力順ID(
-            SubGyomuCode subGyomuCode,
-            Long shutsuryokujunId,
-            ReportId reportId) {
-        if (shutsuryokujunId != null) {
-            IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-            RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
-            return chohyoShutsuryokujunFinder.get出力順(subGyomuCode,
-                    reportId,
-                    reamsLoginID,
-                    Long.valueOf(shutsuryokujunId.toString()));
-        }
-        return null;
-    }
-
 }
