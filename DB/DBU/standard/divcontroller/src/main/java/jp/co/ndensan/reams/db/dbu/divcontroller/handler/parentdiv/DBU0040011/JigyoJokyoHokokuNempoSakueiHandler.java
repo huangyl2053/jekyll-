@@ -1336,7 +1336,7 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
     private List<RString> get旧市町村コードリスト(List<GappeiCityJyoho> 合併市町村情報) {
         List<RString> 旧市町村コードリスト = new ArrayList<>();
         for (GappeiCityJyoho 合併市町村 : 合併市町村情報) {
-            旧市町村コードリスト.add(合併市町村.get市町村コード().value());
+            旧市町村コードリスト.add(合併市町村.get旧市町村コード().value());
         }
         return 旧市町村コードリスト;
     }
