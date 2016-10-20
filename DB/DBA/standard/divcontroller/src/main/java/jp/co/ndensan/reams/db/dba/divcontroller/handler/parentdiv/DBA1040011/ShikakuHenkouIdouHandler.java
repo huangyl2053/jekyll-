@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1040011;
 
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1040011.ShikakuHenkouIdouDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;

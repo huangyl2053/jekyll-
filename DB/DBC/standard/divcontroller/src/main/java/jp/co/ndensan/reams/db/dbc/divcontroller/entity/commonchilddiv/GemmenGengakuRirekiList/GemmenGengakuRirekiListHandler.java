@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.gmmengngakurrekijoho.FutanGendog
 import jp.co.ndensan.reams.db.dbc.business.core.gmmengngakurrekijoho.HyojunFutangakuGemmenJyohoEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.gmmengngakurrekijoho.RiyoshaFutangakuGengakuJyohoEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.gmmengngakurrekijoho.ShakaiFukushiHojinRiyoshaFutanKeigenJyohoEntity;
-import jp.co.ndensan.reams.db.dbc.definition.core.gemmengengakurirekijyoho.GemmenGengakuShurui;
+import jp.co.ndensan.reams.db.dbc.definition.core.gemmengengakugirekijoho.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbc.service.core.gmmengngakurrekijoho.GemmenGengakuRirekiJyoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

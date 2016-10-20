@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanr
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TashichosonRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakusoshitsu.HihokenshashikakusoshitsuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshashikakusoshitsu.HihokenshashikakusoshitsuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.code.KaigoTatokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.code.KaigoTatokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -427,7 +427,7 @@ public class TaJushochiTokureisyaKanriManager {
             return new RString("0001");
         }
         return entity.getEdaNo() == null || entity.getEdaNo().isEmpty()
-               ? new RString("0001") : new RString(Integer.parseInt(entity.getEdaNo().toString()) + 1).padZeroToLeft(枝番);
+                ? new RString("0001") : new RString(Integer.parseInt(entity.getEdaNo().toString()) + 1).padZeroToLeft(枝番);
     }
 
     private void set他市町村住所地特例(
