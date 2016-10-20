@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.ikenshokinyuyoshi.Ikenshokinyuyo
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiReport;
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.IkenshokinyuyoshiReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
@@ -24,14 +25,15 @@ public class IkenshokinyuyoshiPrintService {
      * 要介護認定主治医意見書記入用紙を印刷します。
      *
      * @param businessList 要介護認定主治医意見書記入用紙のBusinessList
+     * @param id 帳票ID
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(List<IkenshokinyuyoshiBusiness> businessList) {
-        IkenshokinyuyoshiProperty property = new IkenshokinyuyoshiProperty();
-        return new Printer<IkenshokinyuyoshiReportSource>().spool(property, toReports(businessList));
+    public SourceDataCollection print(List<IkenshokinyuyoshiBusiness> businessList, ReportId id) {
+        IkenshokinyuyoshiProperty property = new IkenshokinyuyoshiProperty(id);
+        return new Printer<IkenshokinyuyoshiReportSource>().spool(property, toReports(businessList, id));
     }
 
-    private static IkenshokinyuyoshiReport toReports(List<IkenshokinyuyoshiBusiness> businessList) {
-        return new IkenshokinyuyoshiReport(businessList);
+    private static IkenshokinyuyoshiReport toReports(List<IkenshokinyuyoshiBusiness> businessList, ReportId id) {
+        return new IkenshokinyuyoshiReport(businessList, id);
     }
 }

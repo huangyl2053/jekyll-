@@ -215,7 +215,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
                 build();
         List<RString> pageBreakKeys = new ArrayList<>();
         set改頁Key(outputOrder, pageBreakKeys);
-        batchReportWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBZ.DBZ700001.getReportId().value()).addBreak(
+        batchReportWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBZ.DBZ700001.getReportId().value(), SubGyomuCode.DBZ介護共通).addBreak(
                 new BreakerCatalog<HanyoListReportSource>().simplePageBreaker(pageBreakKeys)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
     }
@@ -239,7 +239,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
                                 .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
                                                         .get(i).get項目位置()))).get名称().toString());
                         項目内容new = (RString) getMethod.invoke(eucCsvEntity);
-                        if (項目内容new != null && !項目内容.isEmpty()) {
+                        if (項目内容new != null && !項目内容new.isEmpty()) {
                             項目内容new = HanyoListManager.createInstance().項目内容new編集(i, 項目内容new, hanyoListShutsuryokuKomoku);
                             flag = true;
                         }
