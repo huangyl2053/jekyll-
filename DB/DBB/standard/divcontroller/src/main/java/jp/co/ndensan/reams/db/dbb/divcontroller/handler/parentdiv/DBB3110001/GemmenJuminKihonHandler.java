@@ -407,6 +407,41 @@ public class GemmenJuminKihonHandler {
     }
 
     /**
+     * clear減免後金額です。
+     */
+    public void clear減免後() {
+        KiwarigakuPanel1Div 減免情報パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuPanel1();
+        KiwarigakuKanendo1Div 過年度1パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo1();
+        KiwarigakuKanendo2Div 過年度2パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo2();
+        減免情報パネル.getTxtFuchoGemmemGo13().setValue(null);
+        減免情報パネル.getTxtFuchoGemmemGo14().setValue(null);
+        減免情報パネル.getTxtFuchoGemmemGo1().setValue(null);
+        減免情報パネル.getTxtFuchoGemmemGo2().setValue(null);
+        減免情報パネル.getTxtFuchoGemmemGo3().setValue(null);
+        減免情報パネル.getTxtFuchoGemmemGo4().setValue(null);
+        減免情報パネル.getTxtFuchoGemmemGo5().setValue(null);
+        減免情報パネル.getTxtFuchoGemmemGo6().setValue(null);
+        減免情報パネル.getTxtFuchoGemmemGo7().setValue(null);
+        減免情報パネル.getTxtFuchoGemmemGo8().setValue(null);
+        減免情報パネル.getTxtFuchoGemmemGo9().setValue(null);
+        減免情報パネル.getTxtFuchoGemmemGo10().setValue(null);
+        減免情報パネル.getTxtFuchoGemmemGo11().setValue(null);
+        減免情報パネル.getTxtFuchoGemmemGo12().setValue(null);
+        減免情報パネル.getTxtTokuchoGemmemGo1().setValue(null);
+        減免情報パネル.getTxtTokuchoGemmemGo2().setValue(null);
+        減免情報パネル.getTxtTokuchoGemmemGo3().setValue(null);
+        減免情報パネル.getTxtTokuchoGemmemGo4().setValue(null);
+        減免情報パネル.getTxtTokuchoGemmemGo5().setValue(null);
+        減免情報パネル.getTxtTokuchoGemmemGo6().setValue(null);
+        過年度1パネル.getTxtGo1().setValue(null);
+        過年度2パネル.getTxtGo2().setValue(null);
+        減免情報パネル.getLblFuchoGemmemGoTotal().setText(RString.EMPTY);
+        減免情報パネル.getLblTokuchoGemmemGoTotal().setText(RString.EMPTY);
+        過年度2パネル.getKiwarigakuPanel3().getMaeTotalGo2().setText(RString.EMPTY);
+        過年度2パネル.getKiwarigakuPanel3().getMaeTotalGo2().setText(RString.EMPTY);
+    }
+
+    /**
      * 金額のonChange事件です。
      */
     public void onChange_GemmenGaku() {

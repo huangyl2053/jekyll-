@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
  */
 public class SofusakiNyuryokuPanelDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -45,10 +45,10 @@ public class SofusakiNyuryokuPanelDiv extends Panel {
     private Label lblSama;
     @JsonProperty("TextNo")
     private TextBox TextNo;
-    @JsonProperty("ccdZenkokuJushoInput1")
-    private ZenkokuJushoInputDiv ccdZenkokuJushoInput1;
     @JsonProperty("TextNO1")
     private TextBox TextNO1;
+    @JsonProperty("ccdZenkokuJushoInput1")
+    private ZenkokuJushoInputDiv ccdZenkokuJushoInput1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -219,15 +219,6 @@ public class SofusakiNyuryokuPanelDiv extends Panel {
     }
 
     /*
-     * getccdZenkokuJushoInput1
-     * @return ccdZenkokuJushoInput1
-     */
-    @JsonProperty("ccdZenkokuJushoInput1")
-    public IZenkokuJushoInputDiv getCcdZenkokuJushoInput1() {
-        return ccdZenkokuJushoInput1;
-    }
-
-    /*
      * getTextNO1
      * @return TextNO1
      */
@@ -243,6 +234,15 @@ public class SofusakiNyuryokuPanelDiv extends Panel {
     @JsonProperty("TextNO1")
     public void setTextNO1(TextBox TextNO1) {
         this.TextNO1 = TextNO1;
+    }
+
+    /*
+     * getccdZenkokuJushoInput1
+     * @return ccdZenkokuJushoInput1
+     */
+    @JsonProperty("ccdZenkokuJushoInput1")
+    public IZenkokuJushoInputDiv getCcdZenkokuJushoInput1() {
+        return ccdZenkokuJushoInput1;
     }
 
     // </editor-fold>

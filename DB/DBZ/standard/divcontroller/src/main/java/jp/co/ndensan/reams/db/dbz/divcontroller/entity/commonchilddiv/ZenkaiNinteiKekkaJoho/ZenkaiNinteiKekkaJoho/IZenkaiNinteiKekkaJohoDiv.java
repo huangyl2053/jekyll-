@@ -42,4 +42,8 @@ public interface IZenkaiNinteiKekkaJohoDiv extends ICommonChildDivBaseProperties
     public void setTxtYukoKikanTo(TextBoxFlexibleDate txtYukoKikanTo);
 
     public void setMode_ShokaiButtonType(ShokaiButtonType value);
+
+    public RString get要介護状態区分コード(SubGyomuCode subGyomuCode,
+            ShinseishoKanriNo shinseishoKanriNo,
+            RString 参照結果);
 }

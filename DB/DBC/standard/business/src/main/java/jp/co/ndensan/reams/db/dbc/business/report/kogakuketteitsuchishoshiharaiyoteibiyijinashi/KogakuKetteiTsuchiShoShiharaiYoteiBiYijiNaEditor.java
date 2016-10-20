@@ -148,13 +148,13 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
         if (帳票情報.get支給_不支給決定区分() != null) {
             source.kekka = ShikyuKubun.toValue(帳票情報.get支給_不支給決定区分()).get名称();
         }
-        if (Decimal.ONE.compareTo(帳票情報.get支給金額()) < 0) {
+        if (Decimal.ZERO.compareTo(帳票情報.get支給金額()) <= 0) {
             source.ketteiGaku = 支給金額;
         } else {
             source.ketteiGaku = 決定額;
         }
         source.shikyuGaku = doカンマ編集(帳票情報.get支給金額());
-        if (帳票情報.get支給_不支給区分() != null) {
+        if (帳票情報.get支給_不支給決定区分() != null) {
             if (支給.equals(帳票情報.get支給_不支給決定区分())) {
                 source.riyuTitle = 増減の理由;
             } else if (不支給.equals(帳票情報.get支給_不支給決定区分())) {
@@ -165,7 +165,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
 
         set窓口払口座払取り消し持ちもの(source);
         set種別And種別タイトル(source);
-        if (支給.equals(帳票情報.get支給_不支給区分()) && !窓口払い区分.equals(帳票情報.get支払方法区分())) {
+        if (支給.equals(帳票情報.get支給_不支給決定区分()) && !窓口払い区分.equals(帳票情報.get支払方法区分())) {
             if (!帳票情報.isゆうちょ銀行フラグ()) {
                 source.kouzaShu = 帳票情報.get口座種別();
                 source.kouzaNo = 帳票情報.get口座番号();
@@ -216,8 +216,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
             }
         }
         if ((支給.equals(帳票情報.get支給_不支給決定区分())
-                && 帳票情報.get支給額() != null
-                && 帳票情報.get支給額().compareTo(Decimal.ZERO) < 0)
+                && 帳票情報.get支給金額() != null
+                && 帳票情報.get支給金額().compareTo(Decimal.ZERO) < 0)
                 || 不支給.equals(帳票情報.get支給_不支給決定区分())) {
             source.shumokuTitle = 口座種別;
             source.bangoTitle = 口座番号;
@@ -413,7 +413,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
                 source.torikeshi2 = 半角アスタリスク2;
             }
         }
-        if (帳票情報.get支給_不支給区分() != null && 支給.equals(帳票情報.get支給_不支給決定区分())
+        if (帳票情報.get支給_不支給決定区分() != null && 支給.equals(帳票情報.get支給_不支給決定区分())
                 && !窓口払い.equals(帳票情報.get支給_不支給決定区分())
                 || 不支給.equals(帳票情報.get支給_不支給決定区分())) {
             source.torikeshiMochimono1 = 半角アスタリスク;
@@ -421,7 +421,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
             source.torikeshiShiharaibasho = 半角アスタリスク;
             source.torikeshiShiharaikikan = 半角アスタリスク;
         }
-        if (帳票情報.get支給_不支給区分() != null && 支給.equals(帳票情報.get支給_不支給区分())
+        if (帳票情報.get支給_不支給決定区分() != null && 支給.equals(帳票情報.get支給_不支給決定区分())
                 && 窓口払い区分.equals(帳票情報.get支払方法区分())) {
             source.mochimono = 帳票情報.get持ちもの();
             source.shiharaiBasho = 帳票情報.get支払場所();

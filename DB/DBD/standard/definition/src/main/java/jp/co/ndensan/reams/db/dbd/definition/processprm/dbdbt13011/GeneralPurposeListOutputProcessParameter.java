@@ -37,6 +37,7 @@ public class GeneralPurposeListOutputProcessParameter implements IBatchProcessPa
     private AtenaSelectBatchParameter 宛名抽出条件;
     private Long 出力順;
     private RString 出力項目;
+    private RString 帳票ID;
 
     /**
      * コンストラクタです。
@@ -54,6 +55,7 @@ public class GeneralPurposeListOutputProcessParameter implements IBatchProcessPa
      * @param 宛名抽出条件 宛名抽出条件
      * @param 出力順 出力順
      * @param 出力項目 出力項目
+     * @param 帳票ID 帳票ID
      */
     public GeneralPurposeListOutputProcessParameter(ChushutsuHohoKubun 抽出方法区分,
             RString 抽出項目区分,
@@ -67,7 +69,8 @@ public class GeneralPurposeListOutputProcessParameter implements IBatchProcessPa
             boolean 日付スラッシュ付加,
             AtenaSelectBatchParameter 宛名抽出条件,
             Long 出力順,
-            RString 出力項目) {
+            RString 出力項目,
+            RString 帳票ID) {
         this.抽出方法区分 = 抽出方法区分;
         this.抽出項目区分 = 抽出項目区分;
         this.基準日 = 基準日;
@@ -81,6 +84,7 @@ public class GeneralPurposeListOutputProcessParameter implements IBatchProcessPa
         this.宛名抽出条件 = 宛名抽出条件;
         this.出力順 = 出力順;
         this.出力項目 = 出力項目;
+        this.帳票ID = 帳票ID;
     }
 
     /**
@@ -88,10 +92,11 @@ public class GeneralPurposeListOutputProcessParameter implements IBatchProcessPa
      *
      * @param shikibetsutaishoParam 宛名識別対象PSM
      * @param psmAtesaki 宛先PSM
+     * @param 出力順項目 出力順項目
      * @return ＳＱＬ使用されたパラメター情報
      */
     public GeneralPurposeListOutputMybatisParameter toGeneralPurposeListOutputMybatisParameter(UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam,
-            RString psmAtesaki) {
+            RString psmAtesaki, RString 出力順項目) {
 
         return new GeneralPurposeListOutputMybatisParameter(抽出方法区分,
                 抽出項目区分,
@@ -102,6 +107,7 @@ public class GeneralPurposeListOutputProcessParameter implements IBatchProcessPa
                 宛名抽出条件,
                 喪失区分,
                 shikibetsutaishoParam,
-                psmAtesaki);
+                psmAtesaki,
+                出力順項目);
     }
 }

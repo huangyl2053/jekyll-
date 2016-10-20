@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jul 19 14:59:25 CST 2016
+ * Wed Oct 19 11:38:11 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @reamsid_L DBB-1710-010 xuhao
  */
 public class dgShotokuShokaiHyoHakko_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     private RString txtShikibetsuCode;
     private RString txtShimei;
@@ -29,7 +29,9 @@ public class dgShotokuShokaiHyoHakko_Row extends DataRow {
     private RString txtZokugara;
     private TextBoxFlexibleDate txtSeinenGappi;
     private RString txtKetsugo03;
+    private RString txtIdouka;
     private RString txtTennyuTodokedeBi;
+    private RString txtKetsugo06;
     private RString txtTennyumaeJusho;
     private RString txtTennyumaeJusho2;
     private RString txtKetsugo04;
@@ -61,7 +63,9 @@ public class dgShotokuShokaiHyoHakko_Row extends DataRow {
         this.txtZokugara = RString.EMPTY;
         this.txtSeinenGappi = new TextBoxFlexibleDate();
         this.txtKetsugo03 = RString.EMPTY;
+        this.txtIdouka = RString.EMPTY;
         this.txtTennyuTodokedeBi = RString.EMPTY;
+        this.txtKetsugo06 = RString.EMPTY;
         this.txtTennyumaeJusho = RString.EMPTY;
         this.txtTennyumaeJusho2 = RString.EMPTY;
         this.txtKetsugo04 = RString.EMPTY;
@@ -90,7 +94,9 @@ public class dgShotokuShokaiHyoHakko_Row extends DataRow {
         this.setOriginalData("txtZokugara", txtZokugara);
         this.setOriginalData("txtSeinenGappi", txtSeinenGappi);
         this.setOriginalData("txtKetsugo03", txtKetsugo03);
+        this.setOriginalData("txtIdouka", txtIdouka);
         this.setOriginalData("txtTennyuTodokedeBi", txtTennyuTodokedeBi);
+        this.setOriginalData("txtKetsugo06", txtKetsugo06);
         this.setOriginalData("txtTennyumaeJusho", txtTennyumaeJusho);
         this.setOriginalData("txtTennyumaeJusho2", txtTennyumaeJusho2);
         this.setOriginalData("txtKetsugo04", txtKetsugo04);
@@ -112,7 +118,7 @@ public class dgShotokuShokaiHyoHakko_Row extends DataRow {
         this.setOriginalData("txtMemoShikibetsuTaishoCode", txtMemoShikibetsuTaishoCode);
     }
 
-    public dgShotokuShokaiHyoHakko_Row(RString txtShikibetsuCode, RString txtShimei, RString txtKetsugo01, RString txtShubetsu, RString txtSeibetsu, RString txtKetsugo02, RString txtZokugara, TextBoxFlexibleDate txtSeinenGappi, RString txtKetsugo03, RString txtTennyuTodokedeBi, RString txtTennyumaeJusho, RString txtTennyumaeJusho2, RString txtKetsugo04, RString txtTenshutsubi1, TextBoxFlexibleDate txtTenshutsubi2, RString txtKetsugo05x, RString txtTenshutsusakiJusho, RString txtTenshutsusakiJusho2, RString txtKetsugo05, RString txtGenJusho, RString txtSoYubinNo, RString txtSofusaki01, RString txtSofusaki02, RString txtSofusaki03, RString txtSofusakiOnchu, RString txtSofusakisama, ImageDialog btnMemo, RString txtMemoShikibetsuKbn, RString txtMemoShikibetsuTaishoCode) {
+    public dgShotokuShokaiHyoHakko_Row(RString txtShikibetsuCode, RString txtShimei, RString txtKetsugo01, RString txtShubetsu, RString txtSeibetsu, RString txtKetsugo02, RString txtZokugara, TextBoxFlexibleDate txtSeinenGappi, RString txtKetsugo03, RString txtIdouka, RString txtTennyuTodokedeBi, RString txtKetsugo06, RString txtTennyumaeJusho, RString txtTennyumaeJusho2, RString txtKetsugo04, RString txtTenshutsubi1, TextBoxFlexibleDate txtTenshutsubi2, RString txtKetsugo05x, RString txtTenshutsusakiJusho, RString txtTenshutsusakiJusho2, RString txtKetsugo05, RString txtGenJusho, RString txtSoYubinNo, RString txtSofusaki01, RString txtSofusaki02, RString txtSofusaki03, RString txtSofusakiOnchu, RString txtSofusakisama, ImageDialog btnMemo, RString txtMemoShikibetsuKbn, RString txtMemoShikibetsuTaishoCode) {
         super();
         this.setOriginalData("txtShikibetsuCode", txtShikibetsuCode);
         this.setOriginalData("txtShimei", txtShimei);
@@ -123,7 +129,9 @@ public class dgShotokuShokaiHyoHakko_Row extends DataRow {
         this.setOriginalData("txtZokugara", txtZokugara);
         this.setOriginalData("txtSeinenGappi", txtSeinenGappi);
         this.setOriginalData("txtKetsugo03", txtKetsugo03);
+        this.setOriginalData("txtIdouka", txtIdouka);
         this.setOriginalData("txtTennyuTodokedeBi", txtTennyuTodokedeBi);
+        this.setOriginalData("txtKetsugo06", txtKetsugo06);
         this.setOriginalData("txtTennyumaeJusho", txtTennyumaeJusho);
         this.setOriginalData("txtTennyumaeJusho2", txtTennyumaeJusho2);
         this.setOriginalData("txtKetsugo04", txtKetsugo04);
@@ -152,7 +160,9 @@ public class dgShotokuShokaiHyoHakko_Row extends DataRow {
         this.txtZokugara = txtZokugara;
         this.txtSeinenGappi = txtSeinenGappi;
         this.txtKetsugo03 = txtKetsugo03;
+        this.txtIdouka = txtIdouka;
         this.txtTennyuTodokedeBi = txtTennyuTodokedeBi;
+        this.txtKetsugo06 = txtKetsugo06;
         this.txtTennyumaeJusho = txtTennyumaeJusho;
         this.txtTennyumaeJusho2 = txtTennyumaeJusho2;
         this.txtKetsugo04 = txtKetsugo04;
@@ -185,7 +195,9 @@ public class dgShotokuShokaiHyoHakko_Row extends DataRow {
         this.txtZokugara = RString.EMPTY;
         this.txtSeinenGappi = new TextBoxFlexibleDate();
         this.txtKetsugo03 = RString.EMPTY;
+        this.txtIdouka = RString.EMPTY;
         this.txtTennyuTodokedeBi = RString.EMPTY;
+        this.txtKetsugo06 = RString.EMPTY;
         this.txtTennyumaeJusho = RString.EMPTY;
         this.txtTennyumaeJusho2 = RString.EMPTY;
         this.txtKetsugo04 = RString.EMPTY;
@@ -214,7 +226,9 @@ public class dgShotokuShokaiHyoHakko_Row extends DataRow {
         this.setOriginalData("txtZokugara", txtZokugara);
         this.setOriginalData("txtSeinenGappi", txtSeinenGappi);
         this.setOriginalData("txtKetsugo03", txtKetsugo03);
+        this.setOriginalData("txtIdouka", txtIdouka);
         this.setOriginalData("txtTennyuTodokedeBi", txtTennyuTodokedeBi);
+        this.setOriginalData("txtKetsugo06", txtKetsugo06);
         this.setOriginalData("txtTennyumaeJusho", txtTennyumaeJusho);
         this.setOriginalData("txtTennyumaeJusho2", txtTennyumaeJusho2);
         this.setOriginalData("txtKetsugo04", txtKetsugo04);
@@ -272,8 +286,16 @@ public class dgShotokuShokaiHyoHakko_Row extends DataRow {
         return txtKetsugo03;
     }
 
+    public RString getTxtIdouka() {
+        return txtIdouka;
+    }
+
     public RString getTxtTennyuTodokedeBi() {
         return txtTennyuTodokedeBi;
+    }
+
+    public RString getTxtKetsugo06() {
+        return txtKetsugo06;
     }
 
     public RString getTxtTennyumaeJusho() {
@@ -397,9 +419,19 @@ public class dgShotokuShokaiHyoHakko_Row extends DataRow {
         this.txtKetsugo03 = txtKetsugo03;
     }
 
+    public void setTxtIdouka(RString txtIdouka) {
+        this.setOriginalData("txtIdouka", txtIdouka);
+        this.txtIdouka = txtIdouka;
+    }
+
     public void setTxtTennyuTodokedeBi(RString txtTennyuTodokedeBi) {
         this.setOriginalData("txtTennyuTodokedeBi", txtTennyuTodokedeBi);
         this.txtTennyuTodokedeBi = txtTennyuTodokedeBi;
+    }
+
+    public void setTxtKetsugo06(RString txtKetsugo06) {
+        this.setOriginalData("txtKetsugo06", txtKetsugo06);
+        this.txtKetsugo06 = txtKetsugo06;
     }
 
     public void setTxtTennyumaeJusho(RString txtTennyumaeJusho) {
