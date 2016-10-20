@@ -118,6 +118,8 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         source.hokenshaName = association.get市町村名();
         if (計算後情報_宛名_口座_更正後Entity != null) {
             edit項目(source);
+            source.shikibetsuCode = 計算後情報_宛名_口座_更正後Entity.get識別コード() == null ? RString.EMPTY
+                    : 計算後情報_宛名_口座_更正後Entity.get識別コード().getColumnValue();
             source.list1_6 = get調定事由略称(計算後情報_宛名_口座_更正後Entity.get調定事由1());
             if (計算後情報_宛名_口座_更正前Entity != null && 計算後情報_宛名_口座_更正前Entity.get調定日時() != null) {
                 source.list2_1 = 計算後情報_宛名_口座_更正前Entity.get調定日時().getDate().wareki().toDateString();
