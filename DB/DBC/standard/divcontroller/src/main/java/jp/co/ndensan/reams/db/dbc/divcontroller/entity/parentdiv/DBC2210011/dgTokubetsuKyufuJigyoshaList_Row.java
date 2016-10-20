@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2210011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Oct 12 10:43:15 CST 2016 
+ * Thu Oct 20 15:05:24 CST 2016 
  */
 
 
@@ -19,8 +19,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgTokubetsuKyufuJigyoshaList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-21_20-30-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
+    private RString txtJotai;
     private RString txtIdoKubun;
     private RString txtIdoYMD;
     private RString txtJigyoshaCode;
@@ -32,6 +33,7 @@ public class dgTokubetsuKyufuJigyoshaList_Row extends DataRow {
 
     public dgTokubetsuKyufuJigyoshaList_Row() {
         super();
+        this.txtJotai = RString.EMPTY;
         this.txtIdoKubun = RString.EMPTY;
         this.txtIdoYMD = RString.EMPTY;
         this.txtJigyoshaCode = RString.EMPTY;
@@ -40,6 +42,7 @@ public class dgTokubetsuKyufuJigyoshaList_Row extends DataRow {
         this.txtServiceName = RString.EMPTY;
         this.txtServiceCode = RString.EMPTY;
         this.txtRirekiNo = RString.EMPTY;
+        this.setOriginalData("txtJotai", txtJotai);
         this.setOriginalData("txtIdoKubun", txtIdoKubun);
         this.setOriginalData("txtIdoYMD", txtIdoYMD);
         this.setOriginalData("txtJigyoshaCode", txtJigyoshaCode);
@@ -50,8 +53,9 @@ public class dgTokubetsuKyufuJigyoshaList_Row extends DataRow {
         this.setOriginalData("txtRirekiNo", txtRirekiNo);
     }
 
-    public dgTokubetsuKyufuJigyoshaList_Row(RString txtIdoKubun, RString txtIdoYMD, RString txtJigyoshaCode, RString txtShinseishaName, RString txtShinseishaJusho, RString txtServiceName, RString txtServiceCode, RString txtRirekiNo) {
+    public dgTokubetsuKyufuJigyoshaList_Row(RString txtJotai, RString txtIdoKubun, RString txtIdoYMD, RString txtJigyoshaCode, RString txtShinseishaName, RString txtShinseishaJusho, RString txtServiceName, RString txtServiceCode, RString txtRirekiNo) {
         super();
+        this.setOriginalData("txtJotai", txtJotai);
         this.setOriginalData("txtIdoKubun", txtIdoKubun);
         this.setOriginalData("txtIdoYMD", txtIdoYMD);
         this.setOriginalData("txtJigyoshaCode", txtJigyoshaCode);
@@ -60,6 +64,7 @@ public class dgTokubetsuKyufuJigyoshaList_Row extends DataRow {
         this.setOriginalData("txtServiceName", txtServiceName);
         this.setOriginalData("txtServiceCode", txtServiceCode);
         this.setOriginalData("txtRirekiNo", txtRirekiNo);
+        this.txtJotai = txtJotai;
         this.txtIdoKubun = txtIdoKubun;
         this.txtIdoYMD = txtIdoYMD;
         this.txtJigyoshaCode = txtJigyoshaCode;
@@ -68,6 +73,10 @@ public class dgTokubetsuKyufuJigyoshaList_Row extends DataRow {
         this.txtServiceName = txtServiceName;
         this.txtServiceCode = txtServiceCode;
         this.txtRirekiNo = txtRirekiNo;
+    }
+
+    public RString getTxtJotai() {
+        return txtJotai;
     }
 
     public RString getTxtIdoKubun() {
@@ -100,6 +109,11 @@ public class dgTokubetsuKyufuJigyoshaList_Row extends DataRow {
 
     public RString getTxtRirekiNo() {
         return txtRirekiNo;
+    }
+
+    public void setTxtJotai(RString txtJotai) {
+        this.setOriginalData("txtJotai", txtJotai);
+        this.txtJotai = txtJotai;
     }
 
     public void setTxtIdoKubun(RString txtIdoKubun) {

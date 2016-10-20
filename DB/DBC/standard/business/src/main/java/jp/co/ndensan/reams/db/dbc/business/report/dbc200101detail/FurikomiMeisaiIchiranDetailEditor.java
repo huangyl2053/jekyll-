@@ -202,7 +202,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
             if (振込明細一時TBL.getYubinNo() != null) {
                 RString 郵便番号1 = 振込明細一時TBL.getYubinNo().getYubinNo().substring(0, LISTINDEX_3);
-                RString 郵便番号2 = 振込明細一時TBL.getYubinNo().getYubinNo().substring(LISTINDEX_4);
+                RString 郵便番号2 = 振込明細一時TBL.getYubinNo().getYubinNo().substring(LISTINDEX_3);
                 source.listUpper_3 = 郵便番号1.concat(半角ハイフン).concat(郵便番号2);
             }
             if (振込明細一時TBL.getKinyuKikanCode() != null && 振込明細一時TBL.getKinyuKikanShitenCode() != null) {

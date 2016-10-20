@@ -340,13 +340,16 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
         if (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
                 && 修正.equals(div.getKyodoJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedValue())) {
             KyodoJukyushaIdoRenrakuhyoHandler hander = new KyodoJukyushaIdoRenrakuhyoHandler();
-            if (!((hander.is高額送付情報変更あり(初期化異動情報Entity.get高額情報Entity().get被保険者番号(),
-                    初期化異動情報Entity.get高額情報Entity().get異動年月日(),
-                    初期化異動情報Entity.get高額情報Entity().get履歴番号(), 画面項目異動情報Entity, 高額送付情報Flag))
-                    || (hander.is基本送付情報変更あり(初期化異動情報Entity.get基本情報Entity().get被保険者番号(),
+            if (!((初期化異動情報Entity.get高額情報Entity() != null
+                    && hander.is高額送付情報変更あり(初期化異動情報Entity.get高額情報Entity().get被保険者番号(),
+                            初期化異動情報Entity.get高額情報Entity().get異動年月日(),
+                            初期化異動情報Entity.get高額情報Entity().get履歴番号(), 画面項目異動情報Entity, 高額送付情報Flag))
+                    || (初期化異動情報Entity.get基本情報Entity() != null
+                    && hander.is基本送付情報変更あり(初期化異動情報Entity.get基本情報Entity().get被保険者番号(),
                             初期化異動情報Entity.get基本情報Entity().get異動年月日(),
                             初期化異動情報Entity.get基本情報Entity().get履歴番号(), 画面項目異動情報Entity, 基本送付情報Flag))
-                    || (hander.is償還送付情報変更あり(初期化異動情報Entity.get償還情報Entity().get被保険者番号(),
+                    || (初期化異動情報Entity.get償還情報Entity() != null
+                    && hander.is償還送付情報変更あり(初期化異動情報Entity.get償還情報Entity().get被保険者番号(),
                             初期化異動情報Entity.get償還情報Entity().get異動年月日(),
                             初期化異動情報Entity.get償還情報Entity().get履歴番号(), 画面項目異動情報Entity, 償還送付情報変Flag)))) {
                 validPairs.add(new ValidationMessageControlPair(ValidationMessages.修正有無チェック));
