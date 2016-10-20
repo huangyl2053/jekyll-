@@ -104,7 +104,7 @@ public class DBU0130011Main {
             if (老健受給情報.get老人保健市町村コード() == null) {
                 div.getMeisaiPanel().getTxtRoukenShichosonNo().setValue(RString.EMPTY);
             } else {
-                div.getMeisaiPanel().getTxtRoukenShichosonNo().setValue(老健受給情報.get老人保健市町村コード());
+                div.getMeisaiPanel().getTxtRoukenShichosonNo().setValue(老健受給情報.get老人保健市町村コード().value());
             }
         }
     }
