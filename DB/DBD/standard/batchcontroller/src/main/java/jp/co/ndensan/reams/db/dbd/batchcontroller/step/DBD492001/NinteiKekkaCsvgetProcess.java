@@ -74,12 +74,12 @@ public class NinteiKekkaCsvgetProcess extends BatchProcessBase<List<RString>> {
 //            }
 //        }
         RString csvReaderPath = Path.combinePath(processParameter.get外部媒体格納パス(), csvファイル名);
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), csvReaderPath);
+        //RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), csvReaderPath);
 //        File file = new File(filePath.toString());
 //        if (!file.exists()) {
 //            throw new ApplicationException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace(csvファイル名.toString()).evaluate());
 //        }
-        return new BatchCsvListReader(new CsvListReader.InstanceBuilder(filePath)
+        return new BatchCsvListReader(new CsvListReader.InstanceBuilder(csvReaderPath)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(getEncode()).hasHeader(false).setNewLine(NewLine.CRLF).build());
     }
 

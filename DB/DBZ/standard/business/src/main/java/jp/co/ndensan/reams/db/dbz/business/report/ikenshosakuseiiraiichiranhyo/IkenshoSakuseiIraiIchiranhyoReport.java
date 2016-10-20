@@ -51,9 +51,8 @@ public class IkenshoSakuseiIraiIchiranhyoReport extends Report<IkenshoSakuseiIra
                 if (entity1.getListIchiranhyo_2().compareTo(entity2.getListIchiranhyo_2()) == 0) {
                     return entity1.getListIchiranhyo_3().compareTo(entity2.getListIchiranhyo_3());
                 } else {
-                    entity1.getListIchiranhyo_2().compareTo(entity2.getListIchiranhyo_2());
+                    return entity1.getListIchiranhyo_2().compareTo(entity2.getListIchiranhyo_2());
                 }
-                return 0;
             }
         });
         RString keyBreak = RString.EMPTY;

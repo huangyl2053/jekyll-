@@ -118,7 +118,7 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiHandler {
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts();
             SharedFile.copyToSharedFile(sfd, path, opts);
             SharedFile.copyToLocal(filesystemName, FilesystemPath.fromString(Path.getTmpDirectoryPath()));
-            tempPath = Path.combinePath(Path.getTmpDirectoryPath(), file.getFileName());
+            tempPath = Path.getTmpDirectoryPath();
         }
         for (dgtorikomidataichiran_Row row : div.getDgtorikomidataichiran().getDataSource()) {
             ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("'被保険者番号"),

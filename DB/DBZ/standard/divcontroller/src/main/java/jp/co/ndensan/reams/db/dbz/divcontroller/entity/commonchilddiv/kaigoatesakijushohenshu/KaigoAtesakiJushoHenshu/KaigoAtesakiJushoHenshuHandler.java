@@ -45,6 +45,7 @@ public class KaigoAtesakiJushoHenshuHandler {
         div.getRadCitymeiHyojiUmu().setSelectedKey(div.getHdnShichosonMei());
         div.getDdlChoikiHenshu().setSelectedKey(div.getHdnHensyuHoho());
         div.getRadKatagakiHyojiUmu().setSelectedKey(div.getHdnKatagaki());
+        div.getBtnKakutei().setDisabled(true);
     }
 
     private void setDatasource() {

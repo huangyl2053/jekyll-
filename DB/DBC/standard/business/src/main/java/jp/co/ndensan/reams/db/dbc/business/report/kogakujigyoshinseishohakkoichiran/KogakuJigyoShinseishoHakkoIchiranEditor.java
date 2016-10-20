@@ -9,11 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyoshinseishohakkoichiransource.KogakuJigyoShinseishoHakkoIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -31,7 +35,6 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
     private final ShinseiJohoChohyoTempEntity 帳票出力対象データ;
     private final RDateTime システム日付;
     private final RString count;
-    private final RString 市町村名;
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -53,7 +56,6 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
         this.帳票出力対象データ = parameter.get帳票出力対象データ();
         this.システム日付 = parameter.getシステム日付();
         this.count = parameter.get連番();
-        this.市町村名 = parameter.get市町村名();
     }
 
     /**
@@ -65,10 +67,10 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
     @Override
     public KogakuJigyoShinseishoHakkoIchiranSource edit(
             KogakuJigyoShinseishoHakkoIchiranSource source) {
-        if (帳票出力対象データ.getShoKisaiHokenshaNoChohyo() != null) {
-            source.shichosonNo = 帳票出力対象データ.getShoKisaiHokenshaNoChohyo().getColumnValue();
-        }
-        source.shichosonName = 市町村名;
+        source.shichosonNo = DbBusinessConfig
+                .get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        source.shichosonName = DbBusinessConfig
+                .get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         editIOutputOrder(source);
         RTime time = システム日付.getTime();
         RString hour = new RString(time.toString()).substringReturnAsPossible(INDEX_0, INDEX_2);
