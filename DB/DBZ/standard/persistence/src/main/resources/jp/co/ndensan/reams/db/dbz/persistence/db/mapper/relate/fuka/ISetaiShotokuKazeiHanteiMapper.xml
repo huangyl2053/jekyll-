@@ -35,20 +35,31 @@
     </resultMap>
     
      <select resultOrdered="true" id="select世帯員把握入力_1" resultMap="resultMap_SetaiHakuEntity" fetchSize="500">
-        SELECT
-        A."hihokenshaNo",
-        A."shikibetsuCode",
-        A."kijunYMD",
-        A."shotokuNendo",
-        A."jushochiTokureiFlag",
-        宛名."setaiCode"
-        FROM "TmpSetaiHaaku" AS A
-        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
-        AS 宛名
-        ON 宛名."shikibetsuCode" = A."shikibetsuCode"
-        WHERE A."jushochiTokureiFlag"= '1'
+        WITH master AS (
+         SELECT
+            "hihokenshaNo",
+            "shikibetsuCode",
+            "kijunYMD",
+            "shotokuNendo",
+            "jushochiTokureiFlag"
+            FROM "TmpSetaiHaaku"
+            WHERE "jushochiTokureiFlag"= '1'
+        )
+         SELECT master.*,
+                "ShikibetsuTaisho"."setaiCode"
+         FROM 
+             master 
+         INNER JOIN 
+            rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
+                    '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+                    true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                   (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                   )) AS "ShikibetsuTaisho"
+         ON master."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
     
      <resultMap id="resultMap_SetaiHaakuResultEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiHaakuResultEntity" autoMapping="true">
