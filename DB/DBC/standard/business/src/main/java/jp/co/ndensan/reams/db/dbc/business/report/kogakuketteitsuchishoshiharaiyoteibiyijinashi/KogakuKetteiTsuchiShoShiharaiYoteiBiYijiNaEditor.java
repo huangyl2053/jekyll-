@@ -155,12 +155,10 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
                 source.ketteiGaku = 決定額;
             }
             source.shikyuGaku = doカンマ編集(帳票情報.get支給金額());
-            if (帳票情報.get支給_不支給決定区分() != null) {
-                if (支給.equals(帳票情報.get支給_不支給決定区分())) {
-                    source.riyuTitle = 増減の理由;
-                } else if (不支給.equals(帳票情報.get支給_不支給決定区分())) {
-                    source.riyuTitle = 不支給の理由;
-                }
+            if (帳票情報.get支給_不支給決定区分() != null && 支給.equals(帳票情報.get支給_不支給決定区分())) {
+                source.riyuTitle = 増減の理由;
+            } else if (不支給.equals(帳票情報.get支給_不支給決定区分())) {
+                source.riyuTitle = 不支給の理由;
             }
         }
         source.riyu = 帳票情報.get不支給理由();
