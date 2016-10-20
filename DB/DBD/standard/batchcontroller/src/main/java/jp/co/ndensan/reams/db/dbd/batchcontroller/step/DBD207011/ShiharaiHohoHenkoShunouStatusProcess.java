@@ -156,7 +156,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
             仮の時効起算日 = 督促状発行年月日;
         } else if (納期限の翌日 != null && !FlexibleDate.EMPTY.equals(納期限の翌日)) {
             is納期限の翌日 = true;
-            仮の時効起算日 = 督促状発行年月日;
+            仮の時効起算日 = 納期限の翌日;
         }
         収入情報について再設定(収納情報, 仮の時効起算日, 時効起算日);
 
