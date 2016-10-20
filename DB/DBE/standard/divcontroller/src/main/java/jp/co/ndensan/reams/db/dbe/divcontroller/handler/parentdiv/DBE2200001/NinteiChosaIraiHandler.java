@@ -251,12 +251,12 @@ public class NinteiChosaIraiHandler {
             if (business.getSeibetsu() != null && !RString.isNullOrEmpty(business.getSeibetsu().value())) {
                 row.setSeibetsu(Seibetsu.toValue(business.getSeibetsu().value()).get名称());
             }
-            if (business.getNinteiShinseiYMD() != null) {
+            if (business.getNinteiShinseiYMD() != null && !business.getNinteiShinseiYMD().isEmpty()) {
                 TextBoxDate ninteiShinseiDay = new TextBoxDate();
                 ninteiShinseiDay.setValue(new RDate(business.getNinteiShinseiYMD().toString()));
                 row.setNinteiShinseiDay(ninteiShinseiDay);
             }
-            if (business.getNinteiShinseiKubunCode() != null) {
+            if (business.getNinteiShinseiKubunCode() != null && !business.getNinteiShinseiKubunCode().isEmpty()) {
                 row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(business.getNinteiShinseiKubunCode().value()).get名称());
             }
             if (business.getChikuCode() != null) {
@@ -295,11 +295,11 @@ public class NinteiChosaIraiHandler {
     private void setDgMiwaritsukeShinseishaIchiran_Row(dgMiwaritsukeShinseishaIchiran_Row row, WaritsukeBusiness business) {
         row.setWaritsukeTeiin(new RString(String.valueOf(business.getWaritsukeTeiin())));
         row.setChosaKanoNinzuPerMonth(new RString(String.valueOf(business.getChosaKanoNinzuPerMonth())));
-        if (business.getNinteichosaKigenYMD() != null) {
+        if (business.getNinteichosaKigenYMD() != null && !business.getNinteichosaKigenYMD().isEmpty()) {
             row.setNinteichosaKigenYMD(new RString(business.getNinteichosaKigenYMD().toString()));
         }
         row.setHihokenshaKana(business.getHihokenshaKana() == null ? RString.EMPTY : business.getHihokenshaKana().value());
-        if (business.getSeinengappiYMD() != null) {
+        if (business.getSeinengappiYMD() != null && !business.getSeinengappiYMD().isEmpty()) {
             row.setSeinengappiYMD(new RString(business.getSeinengappiYMD().toString()));
         }
         row.setYubinNo(business.getYubinNo() == null ? RString.EMPTY : business.getYubinNo().value());
@@ -309,10 +309,10 @@ public class NinteiChosaIraiHandler {
         row.setHomonChosasakiJusho(business.getHomonChosasakiJusho() == null ? RString.EMPTY : business.getHomonChosasakiJusho().value());
         row.setHomonChosasakiName(business.getHomonChosasakiName() == null ? RString.EMPTY : business.getHomonChosasakiName().value());
         row.setHomonChosasakiTelNo(business.getHomonChosasakiTelNo() == null ? RString.EMPTY : business.getHomonChosasakiTelNo().value());
-        if (business.getNinteiShinseiYMDKoShin() != null) {
+        if (business.getNinteiShinseiYMDKoShin() != null && !business.getNinteiShinseiYMDKoShin().isEmpty()) {
             row.setNinteiShinseiYMDKoShin(new RString(business.getNinteiShinseiYMDKoShin().toString()));
         }
-        if (business.getZenkaiNinteiYMD() != null) {
+        if (business.getZenkaiNinteiYMD() != null && !business.getZenkaiNinteiYMD().isEmpty()) {
             row.setZenkaiNinteiYMD(new RString(business.getZenkaiNinteiYMD().toString()));
         }
         row.setZenYokaigoKubunCode(business.getZenYokaigoKubunCode() == null ? RString.EMPTY : business.getZenYokaigoKubunCode().value());
@@ -395,12 +395,12 @@ public class NinteiChosaIraiHandler {
             if (business.getSeibetsu() != null && !RString.isNullOrEmpty(business.getSeibetsu().value())) {
                 row.setSeibetsu(Seibetsu.toValue(business.getSeibetsu().value()).get名称());
             }
-            if (business.getNinteiShinseiYMD() != null) {
+            if (business.getNinteiShinseiYMD() != null && !business.getNinteiShinseiYMD().isEmpty()) {
                 TextBoxDate ninteiShinseiDay = new TextBoxDate();
                 ninteiShinseiDay.setValue(new RDate(business.getNinteiShinseiYMD().toString()));
                 row.setNinteiShinseiDay(ninteiShinseiDay);
             }
-            if (business.getNinteiShinseiKubunCode() != null) {
+            if (business.getNinteiShinseiKubunCode() != null && !business.getNinteiShinseiKubunCode().isEmpty()) {
                 row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(business.getNinteiShinseiKubunCode().value()).get名称());
             }
             if (business.getChikuCode() != null) {
@@ -409,7 +409,7 @@ public class NinteiChosaIraiHandler {
             row.setZenkaiChosaItakusaki(nullToEmpty(business.getTemp_jigyoshaMeisho()));
             row.setZenkaiChosain(nullToEmpty(business.getTemp_chosainShimei()));
 
-            if (business.getNinteichosaIraiYMD() != null) {
+            if (business.getNinteichosaIraiYMD() != null && !business.getNinteichosaIraiYMD().isEmpty()) {
                 row.setChosaIraiDay(business.getNinteichosaIraiYMD().wareki().toDateString());
             }
             if (business.getChosaKubun() != null && !business.getChosaKubun().isEmpty()) {
@@ -431,18 +431,18 @@ public class NinteiChosaIraiHandler {
             }
 
             TextBoxDate iraishoShutsuryokuDay = new TextBoxDate();
-            if (business.getIraishoShutsuryokuYMD() != null) {
+            if (business.getIraishoShutsuryokuYMD() != null && !business.getIraishoShutsuryokuYMD().isEmpty()) {
                 iraishoShutsuryokuDay.setValue(new RDate(business.getIraishoShutsuryokuYMD().toString()));
             }
 
             row.setIraishoShutsuryokuDay(iraishoShutsuryokuDay);
             TextBoxDate chosahyoNadoShutsuryookuDay = new TextBoxDate();
-            if (business.getChosahyoTouShutsuryokuYMD() != null) {
+            if (business.getChosahyoTouShutsuryokuYMD() != null && !business.getChosahyoTouShutsuryokuYMD().isEmpty()) {
                 chosahyoNadoShutsuryookuDay.setValue(new RDate(business.getChosahyoTouShutsuryokuYMD().toString()));
             }
 
             row.setChosahyoNadoShutsuryookuDay(chosahyoNadoShutsuryookuDay);
-            if (business.getNinteichosaKanryoYMD() != null) {
+            if (business.getNinteichosaKanryoYMD() != null && !business.getNinteichosaKanryoYMD().isEmpty()) {
                 row.setNinteichosaKanryoYMD(new RString(business.getNinteichosaKanryoYMD().toString()));
             }
             row.setShinseishoKanriNo(nullToEmpty(business.getShinseishoKanriNo()));
