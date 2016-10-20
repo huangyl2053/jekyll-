@@ -67,6 +67,7 @@ public class DBC710090_HanyoListKagoMoshitate extends BatchFlowBase<DBC710090_Ha
         param.set連番付加(getParameter().is連番付加());
         param.set日付スラッシュ付加(getParameter().is日付スラッシュ付加());
         param.set保険者コード(getParameter().get保険者コード());
+        param.set出力順(getParameter().get出力順());
         param.setシステム日時(システム日時);
         param.setシステム日付(new FlexibleDate(システム日時.getDate().toDateString()));
         param.setSearchKey(new ShikibetsuTaishoPSMSearchKeyBuilder(

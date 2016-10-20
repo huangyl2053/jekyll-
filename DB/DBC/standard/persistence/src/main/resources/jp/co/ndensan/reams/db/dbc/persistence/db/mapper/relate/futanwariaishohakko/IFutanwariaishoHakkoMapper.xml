@@ -80,11 +80,12 @@
         <include refid="selectRiyoshaFutanWariaiSho" />
     </select>
     <sql id="selectRiyoshaFutanWariaiSho">
+        WITH master as( 
         SELECT
             <include refid="allColumns_DbT3113RiyoshaFutanWariai" />,
             <include refid="allColumns_DbT1001HihokenshaDaicho" />,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+            
             CASE WHEN jigyoutaishousha_jyukyusha."kubun" IS NULL THEN '3' ELSE jigyoutaishousha_jyukyusha."kubun" END AS "kubun" ,
             <include refid="allColumns_FutanWariKikanTemp" />,
             CASE WHEN "DbT1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" = '1' THEN "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" ELSE
@@ -141,9 +142,7 @@
         LEFT OUTER JOIN
             rgdb."DbV1001HihokenshaDaicho"  as "DbT1001HihokenshaDaicho"
         ON  "DbT3113RiyoshaFutanWariai"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
-        LEFT OUTER JOIN
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
-        ON  "DbT1001HihokenshaDaicho"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+       
         LEFT OUTER JOIN
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmParamClassAtesaki" /> AS "Atesaki"   
         ON  "DbT1001HihokenshaDaicho"."shikibetsuCode" =  "Atesaki"."shikibetsuCode"
@@ -173,7 +172,24 @@
                           ) 
             ) AS "DbT7037ShoKofuKaishu"
         ON   "DbT1001HihokenshaDaicho"."hihokenshaNo"  = "DbT7037ShoKofuKaishu"."hihokenshaNo"
-            
+        )
+        select 
+            master.*,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM
+            master
+        LEFT OUTER JOIN
+            rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',        
+                (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT1001HihokenshaDaicho_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                )      
+            ) AS "ShikibetsuTaisho"
+        ON  "master"."dbT1001HihokenshaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"         
     </sql>
     
     <select resultOrdered="true" id="select利用者負担割合証Temp"
