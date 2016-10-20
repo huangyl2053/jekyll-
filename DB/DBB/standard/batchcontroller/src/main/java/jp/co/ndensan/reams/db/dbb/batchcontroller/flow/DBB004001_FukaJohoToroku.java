@@ -1,8 +1,5 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import java.util.HashMap;
-import java.util.Map;
-import jp.co.ndensan.reams.ca.cax.batchcontroller.step.choteitoroku.ChoteiDataCheckProcess;
 import jp.co.ndensan.reams.ca.cax.definition.batchprm.ChoteiTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB004001.FukaJohoHenshuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB004001.FukaJohoInsertProcess;
@@ -10,6 +7,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJo
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,6 +20,8 @@ public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTo
     private static final String HENSHU_PROCESS = "fukaJohoHenshuProcess";
     private static final String FUKAJOHOINSERTPROCESS = "fukaJohoInsertProcess";
     private static final String CALL_CHOTEITOROKU_FLOW = "ChoteiTorokuFlow";
+    // TODO QA106692確認中 2016/10/20
+    private static final RString CHOTEITOROKU_FLOWID = new RString("ChoteiTorokuFlow");
 
     @Override
     protected void defineFlow() {
@@ -48,11 +48,11 @@ public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTo
      */
     @Step(CALL_CHOTEITOROKU_FLOW)
     protected IBatchFlowCommand callChoteiTorokuFlow() {
-        Map param = new HashMap();
-        param.put(new RString(ChoteiTorokuParameter.SCHEMA), new RString("rgdb"));
-        param.put(new RString(ChoteiTorokuParameter.調定ID採番), Boolean.valueOf(true));
-        param.put(new RString(ChoteiTorokuParameter.収納ID採番), Boolean.valueOf(true));
-        return simpleBatch(ChoteiDataCheckProcess.class).arguments(param).define();
+        ChoteiTorokuParameter parameter = new ChoteiTorokuParameter();
+        parameter.setSchema(new RString("rgdb"));
+        parameter.setChoteiIdAutoNumbering(true);
+        parameter.setShunoIdAutoNumbering(true);
+        return otherBatchFlow(CHOTEITOROKU_FLOWID, SubGyomuCode.DBB介護賦課, parameter).define();
     }
 
     /**
