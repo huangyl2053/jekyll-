@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor implements IJukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor {
 
+    private static final RString 年度 = new RString("年度");
     private final Association association;
     private final FlexibleYear 対象年度;
     private final JukyushaGemmenJisshiJokyoEntity データリスト;
@@ -61,7 +62,9 @@ public class JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor implements IJuk
             source.shichosonName = this.association.get市町村名();
         }
         if (null != this.対象年度) {
-            source.nendo = this.対象年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+            source.nendo = this.対象年度.wareki().
+                    eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString()
+                    .concat(年度);
         }
         source.printTimeStamp = get印刷日時();
         if (null != this.保険者番号) {
