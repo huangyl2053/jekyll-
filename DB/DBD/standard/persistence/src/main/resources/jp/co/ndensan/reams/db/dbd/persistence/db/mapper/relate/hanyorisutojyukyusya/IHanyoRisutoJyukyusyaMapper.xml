@@ -276,8 +276,10 @@ WITH
             ) AS 受給者台帳2 
           WHERE
             受給者台帳2.受給者台帳_番号 = 1
-        ) 
+        ),
+        master as (
 SELECT
+    DISTINCT
     最新被保台帳."shichosonCode" AS 被保険者台帳管理_市町村コード, 
     最新被保台帳."koikinaiJushochiTokureiFlag" AS 被保険者台帳管理_広域内住所地特例フラグ, 
     最新被保台帳."koikinaiTokureiSochimotoShichosonCode" AS 被保険者台帳管理_広住特措置元市町村コード, 
@@ -289,7 +291,8 @@ SELECT
     最新被保台帳."shikakuSoshitsuYMD" AS 被保険者台帳管理_資格喪失年月日, 
     最新被保台帳."shikakuSoshitsuTodokedeYMD" AS 被保険者台帳管理_資格喪失届出年月日, 
     最新被保台帳."hihokennshaKubunCode" AS 被保険者台帳管理_被保険者区分コード, 
-    最新被保台帳."jushochiTokureiFlag" AS 被保険者台帳管理_住所地特例フラグ, 
+    最新被保台帳."jushochiTokureiFlag" AS 被保険者台帳管理_住所地特例フラグ,
+    最新被保台帳."shikibetsuCode" AS 識別コード,
     受給者台帳."nigoTokuteiShippeiCode" AS 受給者台帳_2号特定疾病コード, 
     受給者台帳."jukyuShinseiJiyu" AS 受給者台帳_受給申請事由,
     受給者台帳."yoshienshaNinteiShinseiFlag" AS 受給者台帳_要支援者認定申請区分,
@@ -499,19 +502,14 @@ SELECT
     委託先事業者."jigyoshaNameKana" AS 委託先事業者_事業者名称カナ,
     委託先事業者代表者."daihyoshaShimei" AS 委託先事業者代表者_代表者名,
     委託先事業者代表者."daihyoshaKanaShimei" AS 委託先事業者代表者_代表者名カナ,
-    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
     <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
 FROM
   rgdb."DbT4001JukyushaDaicho" AS 受給者台帳 
   INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS 最新被保台帳 
     ON 最新被保台帳."hihokenshaNo" = 受給者台帳."hihokenshaNo" 
-     INNER  JOIN
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
-            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
-     ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 最新被保台帳."shikibetsuCode"
-     INNER  JOIN
-         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
-     ON "Atesaki"."shikibetsuCode" = 最新被保台帳."shikibetsuCode"  
+  INNER JOIN
+    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+  ON "Atesaki"."shikibetsuCode" = 最新被保台帳."shikibetsuCode"  
  LEFT JOIN ( 
     SELECT
       I."shikibetsuCode", I."iryoHokenShubetsuCode" ,I."iryoHokenshaNo", I."iryoHokenshaMeisho", I."iryoHokenKigoNo" 
@@ -883,63 +881,75 @@ WHERE 受給者台帳."logicalDeletedFlag" = false
     <if test="isサービス指定者true">
         AND 受給者台帳."shiteiServiceShurui01" IS NOT NULL
     </if>
+    <if test="is宛名抽出条件_保険者コード_非全部">
+     AND (最新被保台帳."shichosonCode" = #{hokenshaNo} OR 最新被保台帳."koikinaiTokureiSochimotoShichosonCode" = #{hokenshaNo})
+     </if>
+    )
+    SELECT master.*,
+              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+            FROM master
+            INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+            ( SELECT ARRAY_AGG(CAST ("識別コード" AS TEXT))
+                FROM master
+            )
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+            AS "ShikibetsuTaisho"
+                     ON master."識別コード" = "ShikibetsuTaisho"."shikibetsuCode"
+
      <if test="is宛名抽出区分_年齢">
         <if test="is宛名抽出区分_年齢From">
-           AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]> #{ageFrom}
+           AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{ageFrom}
         </if>
         <if test="is宛名抽出区分_年齢To">
-           AND #{ageTo} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD"
+           AND #{ageTo} <![CDATA[<=]]> "ShikibetsuTaisho"."seinengappiYMD"
         </if>
     </if>
     <if test="is宛名抽出区分_生年月日">
         <if test="is宛名抽出区分_生年月日From">
-            AND #{seinengappiYMDFrom} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD"
+            AND #{seinengappiYMDFrom} <![CDATA[<=]]> "ShikibetsuTaisho"."seinengappiYMD"
         </if>
         <if test="is宛名抽出区分_生年月日To">
-            AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]> #{seinengappiYMDTo}
+            AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{seinengappiYMDTo}
         </if>
     </if>
-    <if test="is宛名抽出条件_保険者コード_非全部">
-     AND (最新被保台帳."shichosonCode" = #{hokenshaNo} OR 最新被保台帳."koikinaiTokureiSochimotoShichosonCode" = #{hokenshaNo})
-     </if>
     <if test ="is住所">
          <if test="地区選択From">
-             AND #{tiiki_From} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."choikiCode"
+             AND #{tiiki_From} <![CDATA[<=]]> "ShikibetsuTaisho"."choikiCode"
          </if>
           <if test="地区選択To">
-             AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."choikiCode" <![CDATA[<=]]> #{tiiki_To}
+             AND "ShikibetsuTaisho"."choikiCode" <![CDATA[<=]]> #{tiiki_To}
          </if>
     </if>
     <if test ="is行政区">
          <if test="地区選択From">
-             AND #{tiiki_From} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyoseikuCode"
+             AND #{tiiki_From} <![CDATA[<=]]> "ShikibetsuTaisho"."gyoseikuCode"
          </if>
           <if test="地区選択To">
-             AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyoseikuCode" <![CDATA[<=]]> #{tiiki_To}
+             AND "ShikibetsuTaisho"."gyoseikuCode" <![CDATA[<=]]> #{tiiki_To}
          </if>
     </if>
     <if test ="is地区1">
          <if test="地区選択From">
-             AND #{tiiki_From} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1"
+             AND #{tiiki_From} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode1"
          </if>
           <if test="地区選択To">
-             AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode1" <![CDATA[<=]]> #{tiiki_To}
+             AND "ShikibetsuTaisho"."chikuCode1" <![CDATA[<=]]> #{tiiki_To}
          </if>
     </if>
     <if test ="is地区2">
          <if test="地区選択From">
-             AND #{tiiki_From} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2"
+             AND #{tiiki_From} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode2"
          </if>
           <if test="地区選択To">
-             AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode2" <![CDATA[<=]]> #{tiiki_To}
+             AND "ShikibetsuTaisho"."chikuCode2" <![CDATA[<=]]> #{tiiki_To}
          </if>
     </if>
     <if test ="is地区3">
          <if test="地区選択From">
-             AND #{tiiki_From} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3"
+             AND #{tiiki_From} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode3"
          </if>
           <if test="地区選択To">
-             AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."chikuCode3" <![CDATA[<=]]> #{tiiki_To}
+             AND "ShikibetsuTaisho"."chikuCode3" <![CDATA[<=]]> #{tiiki_To}
          </if>
     </if>
         ${出力順}

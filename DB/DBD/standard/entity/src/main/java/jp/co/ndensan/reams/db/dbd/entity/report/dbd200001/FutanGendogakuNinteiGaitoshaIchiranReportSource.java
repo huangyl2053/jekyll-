@@ -60,7 +60,7 @@ public class FutanGendogakuNinteiGaitoshaIchiranReportSource implements IReportS
     public RString listUpper_5;
     @ReportItem(name = "listUpper_6", length = 4, order = 20)
     public RString listUpper_6;
-    @ReportItem(name = "listUpper_7", length = 1, order = 21)
+    @ReportItem(name = "listUpper_7", length = 2, order = 21)
     public RString listUpper_7;
     @ReportItem(name = "listUpper_8", length = 9, order = 22)
     public RString listUpper_8;
@@ -78,7 +78,7 @@ public class FutanGendogakuNinteiGaitoshaIchiranReportSource implements IReportS
     public RString listUpper_14;
     @ReportItem(name = "listUpper_15", length = 1, order = 29)
     public RString listUpper_15;
-    @ReportItem(name = "listUpper_16", length = 8, order = 30)
+    @ReportItem(name = "listUpper_16", length = 20, order = 30)
     public RString listUpper_16;
     @ReportItem(name = "listUpper_17", length = 2, order = 31)
     public RString listUpper_17;
@@ -176,4 +176,15 @@ public class FutanGendogakuNinteiGaitoshaIchiranReportSource implements IReportS
     @ReportExpandedInfo(id = "001", code = "0003", name = "被保険者番号")
     public ExpandedInformation hihokenshaNo;
 // </editor-fold>
+    @ReportItem(name = "choikiCode", length = 100, order = 74)
+    public RString choikiCode;
+    @ReportItem(name = "setaiCode", length = 100, order = 75)
+    public RString setaiCode;
+    @ReportItem(name = "shikibetsuCodeKai", length = 100, order = 76)
+    public RString shikibetsuCodeKai;
+    @ReportItem(name = "gaikokujinKanaShimei", length = 100, order = 77)
+    public RString gaikokujinKanaShimei;
+    @ReportItem(name = "shichosonCode", length = 100, order = 78)
+    public RString shichosonCode;
+
 }

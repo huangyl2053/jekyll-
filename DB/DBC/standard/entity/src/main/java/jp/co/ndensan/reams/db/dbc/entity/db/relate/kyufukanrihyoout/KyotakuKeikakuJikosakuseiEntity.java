@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout;
 
 import java.io.Serializable;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3119KyotakuKeikakuJikosakuseiKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity;
 
 /**
@@ -20,6 +21,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakus
 public class KyotakuKeikakuJikosakuseiEntity implements Serializable {
 
     private DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity 居宅給付計画自己作成短期入所利用日数entity;
-    private List<KyotakuKeikakuJikosakuseiKanriTempEntity> 居宅給付計画自己作成管理entity;
+    private List<DbT3119KyotakuKeikakuJikosakuseiKanriEntity> 居宅給付計画自己作成管理entity;
 
 }

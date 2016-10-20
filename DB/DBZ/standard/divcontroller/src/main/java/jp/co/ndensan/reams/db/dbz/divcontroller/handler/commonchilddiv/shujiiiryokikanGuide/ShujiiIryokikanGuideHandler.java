@@ -78,7 +78,7 @@ public class ShujiiIryokikanGuideHandler {
             for (int i = 0; i < list.size(); i++) {
                 ShujiiIryokikanAndShujii business = list.get(i);
                 dgKensakuKekkaIchiran_Row kensakuKekkaIchiran_Row = new dgKensakuKekkaIchiran_Row();
-                kensakuKekkaIchiran_Row.getIryoKikancode().setValue(nullToEmpty(business.get医療機関コード()));
+                kensakuKekkaIchiran_Row.getIryoKikancode().setValue(nullToEmpty(business.get主治医医療機関コード()));
                 kensakuKekkaIchiran_Row.setIryoKikanMeisho(nullToEmpty(business.get主治医医療機関名称()));
                 kensakuKekkaIchiran_Row.setIryoKikanKanaMeisho(nullToEmpty(business.get主治医医療機関カナ()));
                 kensakuKekkaIchiran_Row.setIryoKikanjusho(nullToEmpty(business.get主治医医療機関情報_住所()));

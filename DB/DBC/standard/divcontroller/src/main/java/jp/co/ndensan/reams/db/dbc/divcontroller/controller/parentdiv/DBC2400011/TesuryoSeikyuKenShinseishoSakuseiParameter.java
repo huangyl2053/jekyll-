@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2400011.Tes
 import jp.co.ndensan.reams.db.dbc.service.core.tesuryoseikyukenshinseishosakusei.TesuryoSeikyuKenShinseishoSakuseiManager;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -36,8 +37,9 @@ public class TesuryoSeikyuKenShinseishoSakuseiParameter {
         TesuryoSeikyuKenShinseishoSakuseiMybatisParameter mybitisParamter = new TesuryoSeikyuKenShinseishoSakuseiMybatisParameter(市町村コード_Temp);
         List<TesuryoSeikyuKenShinseishoSakuseiBusiness> businessList = TesuryoSeikyuKenShinseishoSakuseiManager
                 .creatInstance().getTemp_市町村コード(mybitisParamter).records();
+        div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().setToValue(RDate.getNowDate());
         if (!businessList.isEmpty()) {
-            gethHandler(div).onLoad(businessList.get(0));
+            getHandler(div).onLoad(businessList.get(0));
         }
         return ResponseData.of(div).respond();
     }
@@ -51,7 +53,7 @@ public class TesuryoSeikyuKenShinseishoSakuseiParameter {
     public ResponseData<DBC100010_KaishuriyushoSeikyushoShinseishoParameter> onClick_btnJikko(TesuryoSeikyuKenShinseishoSakuseiParameterDiv div) {
         RString 市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().value();
         RString 市町村名 = AssociationFinderFactory.createInstance().getAssociation().get市町村名();
-        return ResponseData.of(gethHandler(div).onClick_btnJikko(div, 市町村コード, 市町村名)).respond();
+        return ResponseData.of(getHandler(div).onClick_btnJikko(div, 市町村コード, 市町村名)).respond();
     }
 
     /**
@@ -61,22 +63,17 @@ public class TesuryoSeikyuKenShinseishoSakuseiParameter {
      * @return ResponseData<TesuryoSeikyuKenShinseishoSakuseiParameterDiv>
      */
     public ResponseData<TesuryoSeikyuKenShinseishoSakuseiParameterDiv> onClick_Check(TesuryoSeikyuKenShinseishoSakuseiParameterDiv div) {
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).作成申請年月日空白チェック();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        validPairs = getValidationHandler(div).作成申請年月日比較チェック();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        validPairs = getValidationHandler(div).前回作成期間重複チェック();
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(getValidationHandler(div).作成申請年月日空白チェック());
+        validPairs.add(getValidationHandler(div).作成申請年月日比較チェック());
+        validPairs.add(getValidationHandler(div).前回作成期間重複チェック());
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         return ResponseData.of(div).respond();
     }
 
-    private TesuryoSeikyuKenShinseishoSakuseiParameterHandler gethHandler(TesuryoSeikyuKenShinseishoSakuseiParameterDiv div) {
+    private TesuryoSeikyuKenShinseishoSakuseiParameterHandler getHandler(TesuryoSeikyuKenShinseishoSakuseiParameterDiv div) {
         return new TesuryoSeikyuKenShinseishoSakuseiParameterHandler(div);
     }
 
