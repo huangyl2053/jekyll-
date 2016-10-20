@@ -148,7 +148,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
         if (帳票情報.get支給_不支給決定区分() != null) {
             source.kekka = ShikyuKubun.toValue(帳票情報.get支給_不支給決定区分()).get名称();
         }
-        if (Decimal.ONE.compareTo(帳票情報.get決定額()) < 0) {
+        if (Decimal.ONE.compareTo(帳票情報.get支給金額()) < 0) {
             source.ketteiGaku = 支給金額;
         } else {
             source.ketteiGaku = 決定額;
