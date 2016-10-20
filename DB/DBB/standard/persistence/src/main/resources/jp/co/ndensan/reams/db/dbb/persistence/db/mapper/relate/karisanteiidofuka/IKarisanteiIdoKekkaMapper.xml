@@ -79,7 +79,7 @@
         <include refid="allColumns_賦課の情報一時" />,
         "ShikibetsuTaisho".*,
         徴収方法Newest.*,
-        年金特徴回付情報.*
+        "UeT0511NenkinTokuchoKaifuJoho".*
         FROM "DbT2002FukaJohoTemp" AS "DbT2002FukaJohoTemp"
         LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
         AS "ShikibetsuTaisho"
@@ -89,14 +89,14 @@
         AND "DbT2002FukaJohoTemp"."hihokenshaNo" = 徴収方法Newest."dbV2001ChoshuHoho_hihokenshaNo"
         AND 徴収方法Newest."dbV2001ChoshuHoho_kariNenkinNo" IS NOT NULL
         AND 徴収方法Newest."dbV2001ChoshuHoho_kariNenkinNo" <![CDATA[<>]]> ''
-        LEFT JOIN rgue."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
+        LEFT JOIN rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
         ON      
-            年金特徴回付情報."gyomuCode" = 'DB'
-        AND 年金特徴回付情報."shoriNendo" = 徴収方法Newest."dbV2001ChoshuHoho_fukaNendo"
-        AND 年金特徴回付情報."tsuchiNaiyoCode" = '30'
-        AND 年金特徴回付情報."shoriTaishoYM" = 徴収方法Newest."dbV2001ChoshuHoho_fukaNendo"||'04'
-        AND 年金特徴回付情報."kisoNenkinNo" = 徴収方法Newest."dbV2001ChoshuHoho_kariNenkinNo"
-        AND 年金特徴回付情報."nenkinCode" = 徴収方法Newest."dbV2001ChoshuHoho_kariNenkinCode"
+            "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+        AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = 徴収方法Newest."dbV2001ChoshuHoho_fukaNendo"
+        AND "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+        AND "UeT0511NenkinTokuchoKaifuJoho"."shoriTaishoYM" = 徴収方法Newest."dbV2001ChoshuHoho_fukaNendo"||'04'
+        AND "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = 徴収方法Newest."dbV2001ChoshuHoho_kariNenkinNo"
+        AND "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = 徴収方法Newest."dbV2001ChoshuHoho_kariNenkinCode"
     </select>
     
     <sql id="allColumns_賦課の情報一時">
