@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -51,17 +50,15 @@ public class ChosaItakusakiAndChosainGuideHandler {
         if (dataPassModel != null) {
             div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード());
             div.getTxtChosainCodeFrom().setValue(dataPassModel.get調査員コード());
-            if (!RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
-                LasdecCode 市町村コード = new LasdecCode(dataPassModel.get市町村コード());
-                div.getHokensha().setSelectedShichosonIfExist(市町村コード);
             }
-        }
         List<KeyValueDataSource> ddlShoriKubun = new ArrayList<>();
         ddlShoriKubun.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ChosaItakuKubunCode code : ChosaItakuKubunCode.values()) {
             ddlShoriKubun.add(new KeyValueDataSource(code.getコード(), code.get名称()));
         }
         div.getDdlChosaItakusakiKubun().setDataSource(ddlShoriKubun);
+        div.getTxtChikuCode().setMaxLength(5);
+        div.getTxtChikuCode().setPaddingZero(true);
     }
 
     /**
@@ -82,6 +79,8 @@ public class ChosaItakusakiAndChosainGuideHandler {
         div.getTxtChosainName().clearValue();
         div.getTxtChosainKanaShimei().clearValue();
         div.getTxtMaxKensu().clearValue();
+        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.
+                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**
@@ -118,6 +117,8 @@ public class ChosaItakusakiAndChosainGuideHandler {
         } else {
             div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
         }
+        div.getTxtChikuCode().setMaxLength(5);
+        div.getTxtChikuCode().setPaddingZero(true);
     }
 
     /**

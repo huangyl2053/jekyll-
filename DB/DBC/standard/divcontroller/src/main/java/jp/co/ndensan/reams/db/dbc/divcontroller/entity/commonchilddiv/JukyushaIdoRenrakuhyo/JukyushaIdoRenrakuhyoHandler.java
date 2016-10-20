@@ -193,6 +193,10 @@ public class JukyushaIdoRenrakuhyoHandler {
         if (新規モード.equals(処理モード)) {
             onClick_事業区分();
         }
+        if (訂正モード.equals(処理モード)) {
+            div.getJukyushaIdoRenrakuhyoTeisei().getTxtTeiseiYMD().clearValue();
+            div.getJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().clearSelectedItem();
+        }
         return 受給者異動情報;
     }
 

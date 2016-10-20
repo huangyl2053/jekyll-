@@ -28,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0700011",
      "toLayoutTitle": "住宅改修費事前申請登録",
-     "toState": "default"
+     "toState": "申請登録"
     },
     {
      "id": "3",
@@ -37,7 +37,7 @@
      "layoutName": "DBC0700011",
      "layoutTitle": "住宅改修費事前申請登録",
      "eventName": "検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
@@ -50,8 +50,8 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0700011",
      "layoutTitle": "住宅改修費事前申請登録",
-     "eventName": "一覧に戻る",
-     "destroy": false,
+     "eventName": "該当者一覧",
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",

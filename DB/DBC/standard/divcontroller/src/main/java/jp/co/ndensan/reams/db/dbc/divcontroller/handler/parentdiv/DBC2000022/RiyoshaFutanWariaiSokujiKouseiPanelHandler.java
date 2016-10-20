@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000022;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.FutanWariaiSokujiKouseiHolder;
 import jp.co.ndensan.reams.db.dbc.business.core.futanwariai.FutanWariaiSokujiKouseiResult;
@@ -22,6 +24,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000022.dgFu
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariai.RiyoshaFutanWariaiSokujiKouseiFinder;
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariai.RiyoshaFutanWariaiSokujiKouseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariaisho.FutanWariaisho;
+import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariai;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiKonkyo;
@@ -76,6 +79,8 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     private final RiyoshaFutanWariaiSokujiKouseiFinder finder;
 
     private static final int INT_2 = 2;
+    private static final int INT_1 = 1;
+    private static final int INDEX_ZERO = 0;
     private static final RString RSTZERO = new RString("0");
     private static final RString RSTONE = new RString("1");
     private static final RString RSTTWO = new RString("2");
@@ -592,15 +597,53 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
      * @return SourceDataCollection
      */
     public SourceDataCollection onClick_btnPrint(TaishoshaKey 資格対象者, List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細) {
+
         FutanWariaisho futanWariaisho = FutanWariaisho.createInstance();
         FutanWariaiShoDivParameter parameter = new FutanWariaiShoDivParameter();
+        parameter.set交付年月日(new FlexibleDate(div.getPanelHosokuItem().getTxtKofubi().getValue().toDateString()));
         parameter.setカナ氏名(div.getCcdKaigoAtenaInfo().get氏名カナ());
         parameter.set住所(div.getCcdKaigoAtenaInfo().get住所().getColumnValue());
         parameter.set氏名(div.getCcdKaigoAtenaInfo().get氏名漢字());
         parameter.set生年月日(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeinengappiYMD().getValue());
         parameter.set性別(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeibetsu().getValue());
         parameter.set利用者負担割合明細(利用者負担割合明細);
+
+        RiyoshaFutanWariaiHantei source = new RiyoshaFutanWariaiHantei();
+        List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細後list = source.riyoshaFutanWariaiMeisaiMergeGamen(利用者負担割合明細);
+        編集昇順List(利用者負担割合明細後list);
+        int size = 利用者負担割合明細後list.size();
+        if (INT_1 == size) {
+            parameter.set負担割合上段(fetch負担割合(利用者負担割合明細後list, INDEX_ZERO));
+            parameter.set適用期間開始日上段(利用者負担割合明細後list.get(INDEX_ZERO).get有効開始日());
+            parameter.set適用期間終了日上段(利用者負担割合明細後list.get(INDEX_ZERO).get有効終了日());
+            parameter.set負担割合下段(RString.EMPTY);
+            parameter.set適用期間開始日下段(FlexibleDate.EMPTY);
+            parameter.set適用期間終了日下段(FlexibleDate.EMPTY);
+        } else if (INT_2 <= size) {
+            parameter.set負担割合上段(fetch負担割合(利用者負担割合明細後list, size - INT_2));
+            parameter.set適用期間開始日上段(利用者負担割合明細後list.get(size - INT_2).get有効開始日());
+            parameter.set適用期間終了日上段(利用者負担割合明細後list.get(size - INT_2).get有効終了日());
+            parameter.set負担割合下段(fetch負担割合(利用者負担割合明細後list, size - INT_1));
+            parameter.set適用期間開始日下段(利用者負担割合明細後list.get(size - INT_1).get有効開始日());
+            parameter.set適用期間終了日下段(利用者負担割合明細後list.get(size - INT_1).get有効終了日());
+        }
         return futanWariaisho.getSourceDataSinger(資格対象者.get識別コード(), 資格対象者.get被保険者番号(), parameter, RSTONE);
+    }
+
+    private void 編集昇順List(List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細後list) {
+        Collections.sort(利用者負担割合明細後list, new Comparator<RiyoshaFutanWariaiMeisai>() {
+            @Override
+            public int compare(RiyoshaFutanWariaiMeisai i1, RiyoshaFutanWariaiMeisai i2) {
+                if (i1.get有効開始日().isBefore(i2.get有効開始日())) {
+                    return -1;
+                }
+                return 1;
+            }
+        });
+    }
+
+    private RString fetch負担割合(List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細後list, int index) {
+        return FutanwariaiKubun.toValue(利用者負担割合明細後list.get(index).get負担割合区分()).get名称();
     }
 
     /**

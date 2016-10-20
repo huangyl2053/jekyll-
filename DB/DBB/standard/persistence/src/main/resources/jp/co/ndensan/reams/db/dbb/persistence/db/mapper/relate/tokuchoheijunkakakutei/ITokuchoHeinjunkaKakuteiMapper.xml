@@ -1107,7 +1107,7 @@
         <id property="年金特徴回付情報_介護継承.renban" column="renban" />
         <association property="fukeEntity" resultMap="resultMap_FukaTempEntity"/>
         <association property="徴収方法Newest" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity"/>
-        <association property="年金特徴回付情報_介護継承" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
+        <association property="年金特徴回付情報_介護継承" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="selest特徴平準化確定一覧"

@@ -270,10 +270,10 @@
                                 hihokenshaDaicho4.hihokenshaNo = hihokenshaDaicho2.hihokenshaNo
                         AND hihokenshaDaicho4.shikakuShutokuYMD = hihokenshaDaicho2.shikakuShutokuYMD
                         AND (
-                                        hihokenshaDaicho4.idoYMD <![CDATA[>]]> hihokenshaDaicho2.idoYMD
+                                        hihokenshaDaicho2.idoYMD <![CDATA[<]]> hihokenshaDaicho4.idoYMD
                                 OR  (
                                                 hihokenshaDaicho4.idoYMD = hihokenshaDaicho2.idoYMD
-                                        AND hihokenshaDaicho4.edaNo <![CDATA[>]]> hihokenshaDaicho2.edaNo
+                                        AND hihokenshaDaicho2.edaNo <![CDATA[<]]> hihokenshaDaicho4.edaNo
                                         )
                                 )
                 ))
@@ -314,7 +314,7 @@
                                 nyutaisho."daichoShubetsu" = #{台帳種別}
                         AND nyutaisho."shikibetsuCode" = shisetsuNyutaisho."shikibetsuCode"
                         AND nyutaisho."nyushoYMD" = shisetsuNyutaisho."nyushoYMD"
-                        AND nyutaisho."rirekiNo" <![CDATA[>]]> shisetsuNyutaisho."rirekiNo"
+                        AND shisetsuNyutaisho."rirekiNo" <![CDATA[<]]> nyutaisho."rirekiNo"
                         )
         )
     </sql>

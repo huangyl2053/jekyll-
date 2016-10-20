@@ -91,6 +91,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -134,6 +135,11 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
     private static final RString カラ = new RString("～");
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
+    private static final int NO_0 = 0;
+    private static final int NO_1 = 1;
+    private static final int NO_2 = 2;
+    private static final int NO_3 = 3;
+    private static final int NO_4 = 4;
     private final List<RString> csvHeader = new ArrayList<>();
     private List<RString> csvContent;
     private FileSpoolManager manager;
@@ -149,11 +155,13 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
     private RString csvFilePath1;
     private RString 項目見出し;
     private int 項目名称;
+    private int 項目内容lenth;
     private int 出力文字の開始位置;
     private int 出力桁数;
     private RString 項目内容;
     private IOutputOrder outputOrder;
     private int 連番;
+    private int 連番flag;
     private HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku;
     @BatchWriter
     private BatchReportWriter<HanyoListReportSource> batchReportWrite;
@@ -165,6 +173,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         personalDataList = new ArrayList<>();
         連番 = 0;
+        連番flag = 0;
         項目見出し = RString.EMPTY;
         項目内容 = RString.EMPTY;
         出力文字の開始位置 = 0;
@@ -181,7 +190,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         outputOrder = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
                 Long.valueOf(processParamter.getSyutsuryokujunparameter().toString()));
-        RString 出力順 = get出力順(outputOrder);
+        RString 出力順 = get出力順();
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         List<JuminShubetsu> 住民種別List = new ArrayList<>();
         List<JuminJotai> 住民状態List = new ArrayList<>();
@@ -216,8 +225,10 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
                 setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 build();
-        batchReportWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBZ.DBZ700001.getReportId().value(),
-                SubGyomuCode.DBZ介護共通).create();
+        List<RString> pageBreakKeys = new ArrayList<>();
+        set改頁Key(outputOrder, pageBreakKeys);
+        batchReportWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBZ.DBZ700001.getReportId().value()).addBreak(
+                new BreakerCatalog<HanyoListReportSource>().simplePageBreaker(pageBreakKeys)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
     }
 
@@ -231,6 +242,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         personalDataList.add(toPersonalData(entity));
         Class clazz = eucCsvEntity.getClass();
         RString 項目内容new = RString.EMPTY;
+        boolean flag = false;
         if (hanyoListShutsuryokuKomoku != null) {
             for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
                 RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
@@ -242,6 +254,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
                         項目内容new = (RString) getMethod.invoke(eucCsvEntity);
                         if (項目内容new != null && !項目内容new.isEmpty()) {
                             項目内容new = HanyoListManager.createInstance().項目内容new編集(i, 項目内容new, hanyoListShutsuryokuKomoku);
+                            flag = true;
                         }
                     } catch (NoSuchMethodException | SecurityException | IllegalAccessException |
                             IllegalArgumentException | InvocationTargetException ex) {
@@ -255,18 +268,24 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
                     }
                 }
             }
-            if (is帳票出力 && 項目内容 != null && !項目内容.isEmpty()) {
-                HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(),
-                        processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
-                report.writeBy(reportSourceWriter);
+            if (is帳票出力) {
+                if (flag) {
+                    HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(),
+                            processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
+                    report.writeBy(reportSourceWriter);
+                }
                 項目見出し = RString.EMPTY;
                 項目内容 = RString.EMPTY;
+                出力文字の開始位置 = 0;
             }
             if (isCSV出力 && csvContent != null && !csvContent.isEmpty()) {
-                if (連番 == 1 && processParamter.isCsvkomokumeifuka() && csvHeader != null && !csvHeader.isEmpty()) {
+                連番flag = 連番flag + 1;
+                if (連番flag == 1 && processParamter.isCsvkomokumeifuka() && csvHeader != null && !csvHeader.isEmpty()) {
                     eucCsvWriter1.writeLine(csvHeader);
                 }
-                eucCsvWriter1.writeLine(csvContent);
+                if (flag) {
+                    eucCsvWriter1.writeLine(csvContent);
+                }
                 csvContent = new ArrayList();
             }
         }
@@ -298,7 +317,10 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
 
     }
 
-    private RString get出力順(IOutputOrder order) {
+    private RString get出力順() {
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
+                Long.valueOf(processParamter.getSyutsuryokujunparameter().toString()));
         List<RString> 出力DB項目名 = new ArrayList();
         List<ISetSortItem> 設定項目リスト = order.get設定項目リスト();
         for (ISetSortItem item : 設定項目リスト) {
@@ -695,34 +717,57 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.左詰め.getコード())) {
             int 桁数 = get項目桁数 - get項目名称.length();
             for (int j = 0; j < 桁数; j++) {
-                get項目名称 = RString.HALF_SPACE.concat(get項目名称);
+                get項目名称 = get項目名称.concat(RString.HALF_SPACE);
             }
         } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.右詰め.getコード())) {
             int 桁数 = get項目桁数 - get項目名称.length();
             for (int j = 0; j < 桁数; j++) {
-                get項目名称 = get項目名称.concat(RString.HALF_SPACE);
+                get項目名称 = RString.HALF_SPACE.concat(get項目名称);
+            }
+        }
+        if (項目内容new != null && !項目内容new.isEmpty()) {
+            if (項目内容new.length() > get項目桁数) {
+                項目内容new = 項目内容new.substring(0, get項目桁数);
+            } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.左詰め.getコード())) {
+                int 桁数 = get項目桁数 - 項目内容new.length();
+                for (int j = 0; j < 桁数; j++) {
+                    項目内容new = 項目内容new.concat(RString.HALF_SPACE);
+                }
+            } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.右詰め.getコード())) {
+                int 桁数 = get項目桁数 - 項目内容new.length();
+                for (int j = 0; j < 桁数; j++) {
+                    項目内容new = RString.HALF_SPACE.concat(項目内容new);
+                }
+
             }
         }
         if (i == 0) {
             項目見出し = 項目見出し.concat(get項目名称);
-            if (項目内容new == null) {
-                項目内容 = 項目内容.concat(RString.HALF_SPACE);
+            if (項目内容new == null || 項目内容new.isEmpty()) {
+                項目内容 = get項目見出し(項目内容, get項目桁数);
+                項目内容lenth = get項目桁数;
             } else {
                 項目内容 = 項目内容.concat(項目内容new);
+                項目内容lenth = 出力文字の開始位置 + 項目内容new.length();
             }
             出力桁数 = get項目桁数;
-            項目名称 = 出力文字の開始位置 + hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称().length();
+            項目名称 = 出力文字の開始位置 + get項目名称.length();
+
         } else {
             出力文字の開始位置 = 出力桁数 + hanyoListShutsuryokuKomoku.get項目間スペース数();
             項目見出し = get項目見出し(項目見出し, 出力文字の開始位置 - 項目名称);
             項目見出し = 項目見出し.concat(get項目名称);
-            項目内容 = get項目見出し(項目内容, 出力文字の開始位置 - 項目名称);
-            if (項目内容new == null) {
-                項目内容 = 項目内容.concat(RString.HALF_SPACE);
+            項目内容 = get項目見出し(項目内容, 出力文字の開始位置 - 項目内容lenth);
+            if (項目内容new == null || 項目内容new.isEmpty()) {
+                項目内容 = get項目見出し(項目内容, get項目桁数);
+                項目内容lenth = get項目桁数;
             } else {
                 項目内容 = 項目内容.concat(項目内容new);
+                項目内容lenth = 出力文字の開始位置 + 項目内容new.length();
             }
             出力桁数 = 出力文字の開始位置 + get項目桁数;
+            項目名称 = 出力文字の開始位置 + get項目名称.length();
+
         }
     }
 
@@ -754,7 +799,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
 
     private RString get項目見出し(RString 項目見出し, int 出力文字の開始位置) {
         for (int i = 0; i < 出力文字の開始位置; i++) {
-            項目見出し.concat(RString.HALF_SPACE);
+            項目見出し = 項目見出し.concat(RString.HALF_SPACE);
         }
         return 項目見出し;
     }
@@ -773,5 +818,98 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         住民状態List.add(JuminJotai.転出者);
         住民状態List.add(JuminJotai.死亡者);
         return 住民状態List;
+    }
+
+    private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
+        RString 改頁１ = RString.EMPTY;
+        RString 改頁２ = RString.EMPTY;
+        RString 改頁３ = RString.EMPTY;
+        RString 改頁４ = RString.EMPTY;
+        RString 改頁５ = RString.EMPTY;
+        if (outputOrder != null) {
+            List<ISetSortItem> list = outputOrder.get設定項目リスト();
+            if (list == null) {
+                list = new ArrayList<>();
+            }
+            if (list.size() > NO_0 && list.get(NO_0).is改頁項目()) {
+                改頁１ = to帳票物理名(list.get(NO_0).get項目ID());
+            }
+            if (list.size() > NO_1 && list.get(NO_1).is改頁項目()) {
+                改頁２ = to帳票物理名(list.get(NO_1).get項目ID());
+            }
+            if (list.size() > NO_2 && list.get(NO_2).is改頁項目()) {
+                改頁３ = to帳票物理名(list.get(NO_2).get項目ID());
+            }
+            if (list.size() > NO_3 && list.get(NO_3).is改頁項目()) {
+                改頁４ = to帳票物理名(list.get(NO_3).get項目ID());
+            }
+            if (list.size() > NO_4 && list.get(NO_4).is改頁項目()) {
+                改頁５ = to帳票物理名(list.get(NO_4).get項目ID());
+            }
+
+            if (!改頁１.isEmpty()) {
+                pageBreakKeys.add(改頁１);
+            }
+            if (!改頁２.isEmpty()) {
+                pageBreakKeys.add(改頁２);
+            }
+            if (!改頁３.isEmpty()) {
+                pageBreakKeys.add(改頁３);
+            }
+            if (!改頁４.isEmpty()) {
+                pageBreakKeys.add(改頁４);
+            }
+            if (!改頁５.isEmpty()) {
+                pageBreakKeys.add(改頁５);
+            }
+        }
+    }
+
+    private RString to帳票物理名(RString 項目ID) {
+        RString 帳票物理名 = RString.EMPTY;
+        if (HanyoListShakaiFukushiHojinKeigenOrderby.郵便番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("yubinNo");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.町域コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("choikiCode");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.番地コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("banchi");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.行政区コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("gyoseikuCode");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.地区１.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("chikuCode1");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.地区２.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("chikuCode2");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.世帯コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("setaiCode");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.識別コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shikibetsuCode");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.氏名５０音カナ.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("kanaShimei");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.生年月日.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("seinengappiYMD");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.性別.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("seibetsuCode");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.市町村コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shichosonCode1");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.証記載保険者番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shoKisaiHokenshaNo");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.被保険者番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("hokenshaNo");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.資格区分.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("new1");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.受給申請区分.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("new2");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.受給申請日.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("new3");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.要介護度.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("new4");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.認定開始日.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("new5");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.資格取得日.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("new6");
+        } else if (HanyoListShakaiFukushiHojinKeigenOrderby.資格喪失日.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("new7");
+        }
+        return 帳票物理名;
     }
 }

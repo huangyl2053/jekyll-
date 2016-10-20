@@ -262,9 +262,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         NenreiSoChushutsuHoho nenreiSoChushutsuHoho = atenaSelectBatchParameter.getAgeSelectKijun();
 
         list.add(出力条件表_抽出対象者);
-        if (!atenaSelectBatchParameter.getShichoson_Code().getColumnValue().isNullOrEmpty()
-                && !すべて.equals(atenaSelectBatchParameter.getShichoson_Code().getColumnValue())) {
-
+        if (atenaSelectBatchParameter.getShichoson_Code() != null && !atenaSelectBatchParameter.getShichoson_Code().isEmpty()) {
             list.add(出力条件表_保険者.concat(edit市町村(atenaSelectBatchParameter.getShichoson_Code())));
         }
 
