@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0081011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.saisinsaketeijyohou.TaishoshaKensakuBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.saisinsaketeijyohou.TaishoshaKensakuParameter;
@@ -16,8 +17,16 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DoitsuninDaihyoshaYusenKubun;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -76,8 +85,20 @@ public class TaishoshaKensaku {
                 保険者区分_2, 0, 市町村コード, false, 市町村フラグ);
         List<TaishoshaKensakuBusiness> 総合公費負担者Business = get明細情報(div.getTxtToriatsukaiYM().getValue().getYearMonth().toDateString(),
                 保険者区分_4, 0, 市町村コード, false, 市町村フラグ);
+        if (!保険者Business.isEmpty()) {
+            div.setHidden_hokenshaKubun(保険者区分_1);
+        }
+        if (保険者Business.isEmpty() && !総合保険者Business.isEmpty()) {
+            div.setHidden_hokenshaKubun(保険者区分_3);
+        }
+        if (保険者Business.isEmpty() && 総合保険者Business.isEmpty() && !公費負担者Business.isEmpty()) {
+            div.setHidden_hokenshaKubun(保険者区分_2);
+        }
+        if (保険者Business.isEmpty() && 総合保険者Business.isEmpty() && 公費負担者Business.isEmpty() && !総合公費負担者Business.isEmpty()) {
+            div.setHidden_hokenshaKubun(保険者区分_4);
+        }
         List<TaishoshaKensakuBusiness> 履歴番号Business = get履歴番号(div.getTxtToriatsukaiYM().getValue().getYearMonth().toDateString(),
-                市町村コード, 市町村フラグ);
+                div.getHidden_hokenshaKubun(), 市町村コード, 市町村フラグ);
         List<TaishoshaKensakuBusiness> 再審査決定情報Business = getHandler(div).
                 onClick_btnSearch(保険者Business, 総合保険者Business, 公費負担者Business, 総合公費負担者Business, 履歴番号Business);
         div.getKetteiHokensha().setToriatsukaiYM(div.getTxtToriatsukaiYM().getValue().getYearMonth().toDateString());
@@ -165,7 +186,7 @@ public class TaishoshaKensaku {
         List<TaishoshaKensakuBusiness> 総合保険者Business = get明細情報(div.getKetteiHokensha().getToriatsukaiYM(),
                 保険者区分, 履歴番号, 市町村コード, 履歴番号フラグ, 市町村フラグ);
         List<TaishoshaKensakuBusiness> 履歴番号Business = get履歴番号(div.getKetteiHokensha().getToriatsukaiYM(),
-                市町村コード, 市町村フラグ);
+                保険者区分, 市町村コード, 市町村フラグ);
         getHandler(div).set再審査決定情報(総合保険者Business, 保険者区分, 履歴番号Business);
         return ResponseData.of(div).respond();
     }
@@ -198,15 +219,40 @@ public class TaishoshaKensaku {
         return ResponseData.of(div).respond();
     }
 
-    private List<TaishoshaKensakuBusiness> get履歴番号(RString 取扱年月, RString 市町村コード, boolean 市町村フラグ) {
-        TaishoshaKensakuParameter parameter = TaishoshaKensakuParameter.creatRirekiParameter(取扱年月, 市町村コード, 市町村フラグ);
+    private List<TaishoshaKensakuBusiness> get履歴番号(RString 取扱年月, RString 保険者区分, RString 市町村コード, boolean 市町村フラグ) {
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        key.set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない);
+        List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
+        juminShubetsuList.add(JuminShubetsu.日本人);
+        juminShubetsuList.add(JuminShubetsu.住登外個人_日本人);
+        juminShubetsuList.add(JuminShubetsu.住登外個人_外国人);
+        juminShubetsuList.add(JuminShubetsu.外国人);
+        key.set住民種別(juminShubetsuList);
+        List<JuminJotai> juminJotaiList = new ArrayList<>();
+        juminJotaiList.add(JuminJotai.住民);
+        juminJotaiList.add(JuminJotai.住登外);
+        juminJotaiList.add(JuminJotai.未定義);
+        juminJotaiList.add(JuminJotai.死亡者);
+        juminJotaiList.add(JuminJotai.消除者);
+        juminJotaiList.add(JuminJotai.転出者);
+        key.set住民状態(juminJotaiList);
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
+
+        TaishoshaKensakuParameter parameter = TaishoshaKensakuParameter.creatRirekiParameter(取扱年月, 保険者区分,
+                市町村コード, 市町村フラグ, psmShikibetsuTaisho);
         return TaishoshaKensakuFinder.createInstance().get履歴番号(parameter).records();
     }
 
     private List<TaishoshaKensakuBusiness> get明細情報(RString 取扱年月, RString 保険者区分, int 履歴番号,
             RString 市町村コード, boolean 履歴番号フラグ, boolean 市町村フラグ) {
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
         TaishoshaKensakuParameter parameter = TaishoshaKensakuParameter
-                .creatParameter(取扱年月, 保険者区分, 履歴番号, 市町村コード, 履歴番号フラグ, 市町村フラグ);
+                .creatParameter(取扱年月, 保険者区分, 履歴番号, 市町村コード, 履歴番号フラグ, 市町村フラグ, psmShikibetsuTaisho);
         return TaishoshaKensakuFinder.createInstance().saiSinsaKeteiJyohouList(parameter).records();
     }
 
