@@ -47,7 +47,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
     private static final int INDEX_TEN = 10;
     private static final int INDEX_ELEVEN = 11;
     private static final int INDEX_TWELVE = 12;
-    private int 連番;
+    private final int 連番;
     private final List<RString> 通知書定型文List;
     private static final RString 増減の理由 = new RString("増減の理由");
     private static final RString 不支給の理由 = new RString("不支給の理由");
@@ -71,6 +71,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
     private static final RString 口座払い区分 = new RString("2");
     private static final RString コード_9900 = new RString("9900");
     private final RString 金融機関コード;
+    private static final RString 支給金額 = new RString("支給金額");
+    private static final RString 決定額 = new RString("決定額");
 
     /**
      * コンストラクタです。
@@ -143,56 +145,25 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
         source.honninShiharaiGaku = doカンマ編集(帳票情報.get本人支払額());
         source.taishoYM = 年月編集(帳票情報.get対象年月());
         source.kyufuShurui = 帳票情報.get給付の種類();
-        source.kekka = ShikyuKubun.toValue(帳票情報.get支給_不支給決定区分()).get名称();
-        if (Decimal.ONE.compareTo(帳票情報.get決定額()) < 0) {
-            source.ketteiGaku = get金額(帳票情報.get支給金額());
+        if (帳票情報.get支給_不支給決定区分() != null) {
+            source.kekka = ShikyuKubun.toValue(帳票情報.get支給_不支給決定区分()).get名称();
+        }
+        if (Decimal.ONE.compareTo(帳票情報.get支給金額()) < 0) {
+            source.ketteiGaku = 支給金額;
         } else {
-            source.ketteiGaku = get金額(帳票情報.get決定額());
+            source.ketteiGaku = 決定額;
         }
         source.shikyuGaku = doカンマ編集(帳票情報.get支給金額());
-        if (支給.equals(帳票情報.get支給_不支給決定区分())) {
-            source.riyuTitle = 増減の理由;
-        } else if (不支給.equals(帳票情報.get支給_不支給決定区分())) {
-            source.riyuTitle = 不支給の理由;
+        if (帳票情報.get支給_不支給区分() != null) {
+            if (支給.equals(帳票情報.get支給_不支給決定区分())) {
+                source.riyuTitle = 増減の理由;
+            } else if (不支給.equals(帳票情報.get支給_不支給決定区分())) {
+                source.riyuTitle = 不支給の理由;
+            }
         }
         source.riyu = 帳票情報.get不支給理由();
 
-        if (ShiharaiHohoKubun.窓口払.getコード().equals(帳票情報.get支払方法区分())) {
-            source.torikeshi1 = RString.EMPTY;
-        } else {
-            source.torikeshi1 = 半角アスタリスク2;
-        }
-        if (ShiharaiHohoKubun.口座払.getコード().equals(帳票情報.get支払方法区分())) {
-            source.torikeshi2 = RString.EMPTY;
-        } else {
-            source.torikeshi2 = 半角アスタリスク2;
-        }
-        if (支給.equals(帳票情報.get支給_不支給決定区分()) && !窓口払い.equals(帳票情報.get支給_不支給決定区分())
-                || 不支給.equals(帳票情報.get支給_不支給決定区分())) {
-            source.torikeshiMochimono1 = 半角アスタリスク;
-            source.torikeshiMochimono2 = 半角アスタリスク;
-            source.torikeshiShiharaibasho = 半角アスタリスク;
-            source.torikeshiShiharaikikan = 半角アスタリスク;
-        }
-        if (支給.equals(帳票情報.get支給_不支給区分()) && 窓口払い区分.equals(帳票情報.get支払方法区分())) {
-            source.mochimono = 帳票情報.get持ちもの();
-            source.shiharaiBasho = 帳票情報.get支払場所();
-            source.shiharaiStartYMD = 年月日編集(帳票情報.get支払期間開始年月日()).
-                    concat(get日本語名略称(帳票情報.get支払期間開始年月日())).concat(記号);
-            source.karaFugo = 記号;
-            source.shiharaiEndYMD = 年月日編集(帳票情報.get支払期間終了年月日());
-            source.shiharaiStartHMS = 時分秒編集(帳票情報.get支払窓口開始時間());
-            source.shiharaiEndHMS = 時分秒編集(帳票情報.get支払窓口終了時間());
-        } else {
-            source.mochimono = RString.EMPTY;
-            source.shiharaiBasho = RString.EMPTY;
-            source.shiharaiStartYMD = RString.EMPTY;
-            source.karaFugo = RString.EMPTY;
-            source.shiharaiEndYMD = RString.EMPTY;
-            source.shiharaiStartHMS = RString.EMPTY;
-            source.shiharaiEndHMS = RString.EMPTY;
-        }
-
+        set窓口払口座払取り消し持ちもの(source);
         set種別And種別タイトル(source);
         if (支給.equals(帳票情報.get支給_不支給区分()) && !窓口払い区分.equals(帳票情報.get支払方法区分())) {
             if (!帳票情報.isゆうちょ銀行フラグ()) {
@@ -387,10 +358,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
         }
     }
 
-    private RString get金額(Decimal 金額) {
-        return 金額 != null ? new RString(金額.toString()) : RString.EMPTY;
-    }
-
     private void set雛形部品CompNinshosha(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
         if (認証者ソースデータ != null) {
             source.denshiKoin = 認証者ソースデータ.denshiKoin;
@@ -429,5 +396,49 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
 
     private String get日本語名略称(RDate 日付) {
         return 日付.getDayOfWeek().getInFullParentheses();
+    }
+
+    private void set窓口払口座払取り消し持ちもの(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
+        if (ShiharaiHohoKubun.窓口払 != null && 帳票情報.get支払方法区分() != null) {
+            if (ShiharaiHohoKubun.窓口払.getコード().equals(帳票情報.get支払方法区分())) {
+                source.torikeshi1 = RString.EMPTY;
+            } else {
+                source.torikeshi1 = 半角アスタリスク2;
+            }
+        }
+        if (ShiharaiHohoKubun.口座払 != null && 帳票情報.get支払方法区分() != null) {
+            if (ShiharaiHohoKubun.口座払.getコード().equals(帳票情報.get支払方法区分())) {
+                source.torikeshi2 = RString.EMPTY;
+            } else {
+                source.torikeshi2 = 半角アスタリスク2;
+            }
+        }
+        if (帳票情報.get支給_不支給区分() != null && 支給.equals(帳票情報.get支給_不支給決定区分())
+                && !窓口払い.equals(帳票情報.get支給_不支給決定区分())
+                || 不支給.equals(帳票情報.get支給_不支給決定区分())) {
+            source.torikeshiMochimono1 = 半角アスタリスク;
+            source.torikeshiMochimono2 = 半角アスタリスク;
+            source.torikeshiShiharaibasho = 半角アスタリスク;
+            source.torikeshiShiharaikikan = 半角アスタリスク;
+        }
+        if (帳票情報.get支給_不支給区分() != null && 支給.equals(帳票情報.get支給_不支給区分())
+                && 窓口払い区分.equals(帳票情報.get支払方法区分())) {
+            source.mochimono = 帳票情報.get持ちもの();
+            source.shiharaiBasho = 帳票情報.get支払場所();
+            source.shiharaiStartYMD = 年月日編集(帳票情報.get支払期間開始年月日()).
+                    concat(get日本語名略称(帳票情報.get支払期間開始年月日())).concat(記号);
+            source.karaFugo = 記号;
+            source.shiharaiEndYMD = 年月日編集(帳票情報.get支払期間終了年月日());
+            source.shiharaiStartHMS = 時分秒編集(帳票情報.get支払窓口開始時間());
+            source.shiharaiEndHMS = 時分秒編集(帳票情報.get支払窓口終了時間());
+        } else {
+            source.mochimono = RString.EMPTY;
+            source.shiharaiBasho = RString.EMPTY;
+            source.shiharaiStartYMD = RString.EMPTY;
+            source.karaFugo = RString.EMPTY;
+            source.shiharaiEndYMD = RString.EMPTY;
+            source.shiharaiStartHMS = RString.EMPTY;
+            source.shiharaiEndHMS = RString.EMPTY;
+        }
     }
 }

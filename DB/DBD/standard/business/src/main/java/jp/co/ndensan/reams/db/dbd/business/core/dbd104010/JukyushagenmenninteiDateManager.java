@@ -146,7 +146,7 @@ public class JukyushagenmenninteiDateManager {
         entity.setTableFlag(月の件数.get(0).getTableFlag());
         entity.setFlag(月の件数.get(0).getFlag());
 
-        entity.setShichigatukensu(月の件数.get(ZERO1).getKensu());
+        entity.setSigatukensu(月の件数.get(ZERO1).getKensu());
         entity.setGogatukensu(月の件数.get(ONE1).getKensu());
         entity.setLokugatukensu(月の件数.get(TWO1).getKensu());
         entity.setShichigatukensu(月の件数.get(THREE1).getKensu());
@@ -159,7 +159,7 @@ public class JukyushagenmenninteiDateManager {
         entity.setNigatukensu(月の件数.get(TEN1).getKensu());
         entity.setSangatukensu(月の件数.get(ELEVEN1).getKensu());
 
-        entity.setShichigatusotishakensu(月の件数.get(ZERO1).getSotishakensu());
+        entity.setSigatusotishakensu(月の件数.get(ZERO1).getSotishakensu());
         entity.setGogatusotishakensu(月の件数.get(ONE1).getSotishakensu());
         entity.setLokugatusotishakensu(月の件数.get(TWO1).getSotishakensu());
         entity.setShichigatusotishakensu(月の件数.get(THREE1).getSotishakensu());
@@ -187,6 +187,7 @@ public class JukyushagenmenninteiDateManager {
         entity.setTableFlag(tableflag);
         entity.setFlag(flag);
         entity.setKensu(ZERO);
+        entity.setSotishakensu(ZERO);
         return entity;
     }
 
@@ -233,7 +234,10 @@ public class JukyushagenmenninteiDateManager {
         newEntity.setJyuichigatukensu(entity.getJyuichigatukensu());
         newEntity.setJyunigatukensu(entity.getJyunigatukensu());
 
-        newEntity.setShichigatusotishakensu(entity.getIchigatusotishakensu());
+        newEntity.setIchigatusotishakensu(entity.getIchigatusotishakensu());
+        newEntity.setNigatusotishakensu(entity.getNigatusotishakensu());
+        newEntity.setSangatusotishakensu(entity.getSangatusotishakensu());
+        newEntity.setSigatusotishakensu(entity.getSigatusotishakensu());
         newEntity.setGogatusotishakensu(entity.getGogatusotishakensu());
         newEntity.setLokugatusotishakensu(entity.getLokugatusotishakensu());
         newEntity.setShichigatusotishakensu(entity.getShichigatusotishakensu());
@@ -242,9 +246,6 @@ public class JukyushagenmenninteiDateManager {
         newEntity.setJyugatusotishakensu(entity.getJyugatusotishakensu());
         newEntity.setJyuichigatusotishakensu(entity.getJyuichigatusotishakensu());
         newEntity.setJyunigatusotishakensu(entity.getJyunigatusotishakensu());
-        newEntity.setIchigatusotishakensu(entity.getIchigatusotishakensu());
-        newEntity.setNigatusotishakensu(entity.getNigatusotishakensu());
-        newEntity.setSangatusotishakensu(entity.getSangatusotishakensu());
 
         Decimal sum = entity.getIchigatukensu().add(entity.getNigatukensu()).add(entity.getSangatukensu())
                 .add(entity.getSigatukensu()).add(entity.getGogatukensu()).add(entity.getLokugatukensu()).add(entity.getShichigatukensu())
@@ -275,11 +276,11 @@ public class JukyushagenmenninteiDateManager {
         newEntity.setTitle(setタイトル(tableFlag, num));
 
         if (ONE.equals(tableFlag) || TWO.equals(tableFlag)) {
-            if (FIVE.equals(num) || ONE.equals(num)) {
+            if (FIVE.equals(num) || ZERO.equals(num)) {
                 newEntity.setInnjiKubun(タイトルのみ印字);
-                if (SIX.equals(num)) {
-                    newEntity.setInnjiKubun(印字不要);
-                }
+            }
+            if (SIX.equals(num)) {
+                newEntity.setInnjiKubun(印字不要);
             }
         } else if (THREE.equals(tableFlag)) {
             if (ONE.equals(num) || ZERO.equals(num) || SIX.equals(num) || ELEVEN.equals(num)) {
@@ -318,7 +319,6 @@ public class JukyushagenmenninteiDateManager {
         newEntity.setJyuichigatusotishakensu(Decimal.ZERO);
         newEntity.setJyunigatusotishakensu(Decimal.ZERO);
         newEntity.setGoukeisotishakensu(Decimal.ZERO);
-
         return newEntity;
     }
 
@@ -332,17 +332,17 @@ public class JukyushagenmenninteiDateManager {
         JukyushaGemmenJisshiJokyoEntity データリスト = new JukyushaGemmenJisshiJokyoEntity();
         データリスト.setタイトル(t.getTitle());
         RString yue1 = new RString(t.getIchigatukensu().longValue());
-        RString yue2 = new RString(t.getIchigatukensu().longValue());
-        RString yue3 = new RString(t.getIchigatukensu().longValue());
-        RString yue4 = new RString(t.getIchigatukensu().longValue());
-        RString yue5 = new RString(t.getIchigatukensu().longValue());
-        RString yue6 = new RString(t.getIchigatukensu().longValue());
-        RString yue7 = new RString(t.getIchigatukensu().longValue());
-        RString yue8 = new RString(t.getIchigatukensu().longValue());
-        RString yue9 = new RString(t.getIchigatukensu().longValue());
-        RString yue10 = new RString(t.getIchigatukensu().longValue());
-        RString yue11 = new RString(t.getIchigatukensu().longValue());
-        RString yue12 = new RString(t.getIchigatukensu().longValue());
+        RString yue2 = new RString(t.getNigatukensu().longValue());
+        RString yue3 = new RString(t.getSangatukensu().longValue());
+        RString yue4 = new RString(t.getShichigatukensu().longValue());
+        RString yue5 = new RString(t.getGogatukensu().longValue());
+        RString yue6 = new RString(t.getLokugatukensu().longValue());
+        RString yue7 = new RString(t.getShichigatukensu().longValue());
+        RString yue8 = new RString(t.getHachigatukensu().longValue());
+        RString yue9 = new RString(t.getKugatukensu().longValue());
+        RString yue10 = new RString(t.getJyugatukensu().longValue());
+        RString yue11 = new RString(t.getJyuichigatukensu().longValue());
+        RString yue12 = new RString(t.getJyunigatukensu().longValue());
         RString yue合計 = new RString(t.getGoukeikensu().longValue());
         データリスト.set一月(yue1.concat("(").concat(new RString(t.getIchigatusotishakensu().longValue())).concat(")"));
         データリスト.set二月(yue2.concat("(").concat(new RString(t.getNigatusotishakensu().longValue())).concat(")"));

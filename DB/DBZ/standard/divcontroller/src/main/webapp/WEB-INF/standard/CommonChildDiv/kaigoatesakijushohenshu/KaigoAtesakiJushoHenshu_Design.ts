@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onChange_jusho(): string {
+                return "onChange_jusho";
+            }
+
             public static onClickBtnClose(): string {
                 return "onClickBtnClose";
             }

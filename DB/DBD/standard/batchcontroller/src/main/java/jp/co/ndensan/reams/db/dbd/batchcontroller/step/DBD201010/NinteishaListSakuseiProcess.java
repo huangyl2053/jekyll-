@@ -87,8 +87,8 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     private RString 帳票ID;
     private RString 帳票タイトル;
     private RString 改ページ;
-    private static final RString 認定者リストタイトル = new RString("介護保険 利用者負担額減免認定者リスト");
-    private static final RString 該当者リストタイトル = new RString("介護保険 利用者負担額減免該当者リスト");
+    private static final RString 認定者リストタイトル = new RString("利用者負担額減免認定者リスト");
+    private static final RString 該当者リストタイトル = new RString("利用者負担額減免該当者リスト");
     private static final int INDEX_0 = 0;
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;

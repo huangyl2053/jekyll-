@@ -229,10 +229,11 @@ public class HanyoListTaShichosonJushochiTokureishaProcessParameter implements I
      *
      * @param psmShikibetsuTaisho 宛名識別対象抽出PSM
      * @param psmAtesaki 宛先抽出PSM
+     * @param 出力順 出力順
      * @return HanyoListTaShichosonJushochiTokureishaMybatisParameter
      */
     public HanyoListTaShichosonJushochiTokureishaMybatisParameter
-            toHanyoListTaShichosonJushochiTokureishaMybatisParameter(RString psmShikibetsuTaisho, RString psmAtesaki) {
+            toHanyoListTaShichosonJushochiTokureishaMybatisParameter(RString psmShikibetsuTaisho, RString psmAtesaki, RString 出力順) {
         return HanyoListTaShichosonJushochiTokureishaMybatisParameter.creatParameter(
                 psmChushutsuAge_Start,
                 psmChushutsuAge_End,
@@ -252,6 +253,7 @@ public class HanyoListTaShichosonJushochiTokureishaProcessParameter implements I
                 shisetsuHenkoari,
                 shisetsuHenkonashi,
                 psmShikibetsuTaisho,
-                psmAtesaki);
+                psmAtesaki,
+                出力順);
     }
 }

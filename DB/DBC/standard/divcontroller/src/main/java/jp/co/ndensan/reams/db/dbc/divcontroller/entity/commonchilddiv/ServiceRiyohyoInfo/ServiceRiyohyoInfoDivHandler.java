@@ -763,7 +763,7 @@ public class ServiceRiyohyoInfoDivHandler {
         RString 居宅総合事業区分 = ViewStateHolder.get(ViewStateKeys.居宅総合事業区分, RString.class
         );
         if (総合事業.equals(居宅総合事業区分)) {
-            総合事業の場合(サービス種類コード, サービス種類Tmp, サービスフラグTmp, 利用サービス);
+            総合事業の場合(サービス種類Tmp, サービスフラグTmp, 利用サービス);
         }
 
         if (!総合事業.equals(居宅総合事業区分)
@@ -796,10 +796,10 @@ public class ServiceRiyohyoInfoDivHandler {
         }
     }
 
-    private void 総合事業の場合(RString サービス種類コード, RString サービス種類Tmp, boolean サービスフラグTmp,
+    private void 総合事業の場合(RString サービス種類Tmp, boolean サービスフラグTmp,
             KaigoServiceNaiyou 利用サービス) throws ApplicationException {
         KaigoServiceShuruiManager serviceShuruimanager = KaigoServiceShuruiManager.createInstance();
-        List<KaigoServiceShurui> result = serviceShuruimanager.getFocusServiceTypeList(サービス種類コード).records();
+        List<KaigoServiceShurui> result = serviceShuruimanager.getFocusServiceTypeList(サービス種類Tmp).records();
         if (result == null || result.isEmpty()) {
             throw new ApplicationException(DbcErrorMessages.サービス種類不正.getMessage());
         }
@@ -847,23 +847,25 @@ public class ServiceRiyohyoInfoDivHandler {
     }
 
     private void 総合事業以外の場合(RString サービス種類Tmp, KaigoServiceNaiyou 利用サービス) {
-        dgServiceRiyohyoBeppyoList_Row row
-                = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
-        if (合計有り.equals(row.getHdnGokeiGyoFlag())
-                && row.getHdnJigyoshaCode().equals(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo())
-                && row.getHdnServiceShuruiCode().equals(サービス種類Tmp)) {
-            int 単位数 = 利用サービス.get単位数();
-            Decimal サービス単位 = row.getServiceTani().getValue().multiply(
-                    単位数).divide(DECIMAL_1000).roundHalfUpTo(INT_0);
-            div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(サービス単位);
-            RString 加算区分 = 利用サービス.getサービス名称().substring(利用サービス.getサービス名称().length() - INT_2);
-            RYearMonth 画面利用年月 = div.getTxtRiyoYM().getValue().getYearMonth();
-            利用年月判定(画面利用年月, 加算区分, サービス単位);
-            Decimal 区分限度内単位
-                    = row.getKubunGendonaiTani().getValue().multiply(単位数).divide(DECIMAL_1000).roundHalfUpTo(INT_0);
-            div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().setValue(区分限度内単位);
-            Decimal サービス単位final = div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue();
-            div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendoChokaTani().setValue(サービス単位final.subtract(区分限度内単位));
+        List<dgServiceRiyohyoBeppyoList_Row> rowList
+                = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
+        for (dgServiceRiyohyoBeppyoList_Row row : rowList) {
+            if (合計有り.equals(row.getHdnGokeiGyoFlag())
+                    && row.getHdnJigyoshaCode().equals(div.getCcdJigyoshaInput().getNyuryokuShisetsuKodo())
+                    && row.getHdnServiceShuruiCode().equals(サービス種類Tmp)) {
+                int 単位数 = 利用サービス.get単位数();
+                Decimal サービス単位 = row.getServiceTani().getValue().multiply(
+                        単位数).divide(DECIMAL_1000).roundHalfUpTo(INT_0);
+                div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().setValue(サービス単位);
+                RString 加算区分 = 利用サービス.getサービス名称().substring(利用サービス.getサービス名称().length() - INT_2);
+                RYearMonth 画面利用年月 = div.getTxtRiyoYM().getValue().getYearMonth();
+                利用年月判定(画面利用年月, 加算区分, サービス単位);
+                Decimal 区分限度内単位
+                        = row.getKubunGendonaiTani().getValue().multiply(単位数).divide(DECIMAL_1000).roundHalfUpTo(INT_0);
+                div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendonaiTani().setValue(区分限度内単位);
+                Decimal サービス単位final = div.getServiceRiyohyoBeppyoMeisai().getTxtServiceTani().getValue();
+                div.getServiceRiyohyoBeppyoGokei().getTxtKubunGendoChokaTani().setValue(サービス単位final.subtract(区分限度内単位));
+            }
         }
     }
 

@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.Ikenshokinyuyo
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 要介護認定主治医意見書記入用紙Builderのクラスです。
+ * 要介護認定主治医意見書記入用紙-片面-白黒-裏Builderのクラスです。
  *
  * @reamsid_L DBE-0050-030 xuyannan
  */
-public class IkenshokinyuyoshiBuilderImpl implements IIkenshokinyuyoshiBuilder {
+public class IkenshokinyuyoshiUraBuilderImpl implements IIkenshokinyuyoshiBuilder {
 
     private final IIkenshokinyuyoshiEditor editor;
 
@@ -22,7 +22,7 @@ public class IkenshokinyuyoshiBuilderImpl implements IIkenshokinyuyoshiBuilder {
      *
      * @param editor {@link IIkenshokinyuyoshiEditor}
      */
-    public IkenshokinyuyoshiBuilderImpl(IIkenshokinyuyoshiEditor editor) {
+    public IkenshokinyuyoshiUraBuilderImpl(IIkenshokinyuyoshiEditor editor) {
         this.editor = editor;
     }
 

@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.lang.Width;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -104,10 +103,10 @@ public class ServiceCodeBetsuRiyoJokyoEditor implements
         RStringBuilder sakuseiYMD = new RStringBuilder();
 
         sakuseiYMD.append(datetime.getDate().wareki().
-                eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
+                eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.NONE).
-                width(Width.HALF).toDateString());
+                fillType(FillType.BLANK)
+                .toDateString());
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(datetime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         sakuseiYMD.append(RString.HALF_SPACE);
