@@ -7,13 +7,41 @@
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"
             fetchSize="500">
         SELECT
-            A."koroshoIfShikibetsuCode",
-            A."zenYokaigoKubunCode",
-            A."zenkaiNinteiYMD",
-            A."zenkaiYukoKikanStart",
-            A."zenkaiYukoKikanEnd"
+            C."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode",
+            D.二次判定要介護状態区分コード AS "zenYokaigoKubunCode",
+            D.二次判定年月日 AS "zenkaiNinteiYMD",
+            D.二次判定認定有効開始年月日 AS "zenkaiYukoKikanStart",
+            D.二次判定認定有効終了年月日 AS "zenkaiYukoKikanEnd"
         FROM               
             rgdb."DbT4101NinteiShinseiJoho"  AS  A
+        INNER JOIN
+          rgdb."DbT4121ShinseiRirekiJoho" AS B
+        ON
+          A."shinseishoKanriNo" = B."shinseishoKanriNo"
+        INNER JOIN
+          rgdb."DbT4101NinteiShinseiJoho"  AS  C
+        ON
+          B."zenkaiShinseishoKanriNo" = C."shinseishoKanriNo"
+        INNER JOIN
+          (SELECT 
+             "shinseishoKanriNo",
+             "nijiHanteiYMD" AS 二次判定年月日,
+             "nijiHanteiYokaigoJotaiKubunCode" AS 二次判定要介護状態区分コード,
+             "nijiHanteiNinteiYukoKaishiYMD" AS 二次判定認定有効開始年月日,
+             "nijiHanteiNinteiYukoShuryoYMD" AS 二次判定認定有効終了年月日
+           FROM
+             rgdb."DbT4102NinteiKekkaJoho"
+             UNION
+             SELECT  
+               "shinseishoKanriNo",
+               "nijiHanteiYMD",
+               "nijiHanteiYokaigoJotaiKubunCode",
+               "nijiHanteiNinteiYukoKaishiYMD",
+               "nijiHanteiNinteiYukoShuryoYMD"
+             FROM
+               rgdb."DbT4129Tennyu"
+           ) AS D
+           ON C."shinseishoKanriNo" = D."shinseishoKanriNo"  
         WHERE
             A."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
@@ -22,15 +50,44 @@
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"
             fetchSize="500">
         SELECT
-            A."koroshoIfShikibetsuCode",
-            A."zenYokaigoKubunCode",
-            A."zenkaiNinteiYMD",
-            A."zenkaiYukoKikanStart",
-            A."zenkaiYukoKikanEnd"
+            C."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode",
+            D.二次判定要介護状態区分コード AS "zenYokaigoKubunCode",
+            D.二次判定年月日 AS "zenkaiNinteiYMD",
+            D.二次判定認定有効開始年月日 AS "zenkaiYukoKikanStart",
+            D.二次判定認定有効終了年月日 AS "zenkaiYukoKikanEnd"
         FROM               
             rgdb."DbT5101NinteiShinseiJoho"  AS  A
+        INNER JOIN
+          rgdb."DbT5121ShinseiRirekiJoho" AS B
+        ON
+          A."shinseishoKanriNo" = B."shinseishoKanriNo"
+        INNER JOIN
+          rgdb."DbT5101NinteiShinseiJoho"  AS  C
+        ON
+          B."zenkaiShinseishoKanriNo" = C."shinseishoKanriNo"
+        INNER JOIN
+          (SELECT 
+             "shinseishoKanriNo",
+             "nijiHanteiYMD" AS 二次判定年月日,
+             "nijiHanteiYokaigoJotaiKubunCode" AS 二次判定要介護状態区分コード,
+             "nijiHanteiNinteiYukoKaishiYMD" AS 二次判定認定有効開始年月日,
+             "nijiHanteiNinteiYukoShuryoYMD" AS 二次判定認定有効終了年月日
+           FROM
+             rgdb."DbT5102NinteiKekkaJoho"
+             UNION
+             SELECT  
+               "shinseishoKanriNo",
+               "nijiHanteiYMD",
+               "nijiHanteiYokaigoJotaiKubunCode",
+               "nijiHanteiNinteiYukoKaishiYMD",
+               "nijiHanteiNinteiYukoShuryoYMD"
+             FROM
+               rgdb."DbT5129Tennyu"
+           ) AS D
+           ON C."shinseishoKanriNo" = D."shinseishoKanriNo"  
         WHERE
             A."shinseishoKanriNo" = #{shinseishoKanriNo}
+            
     </select>
     
     <select resultOrdered="true" id="get要介護度_今回受給" 
