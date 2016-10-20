@@ -96,6 +96,17 @@ public class ShotokushokaihyoIkkatu {
     }
 
     /**
+     * 出力対象のメソッドです。
+     *
+     * @param div ShotokushokaihyoIkkatuDiv
+     * @return ResponseData<ShotokushokaihyoIkkatuDiv>
+     */
+    public ResponseData<ShotokushokaihyoIkkatuDiv> onChange_shuturyokucheck(ShotokushokaihyoIkkatuDiv div) {
+        getHandler(div).check出力対象();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 処理年度ドロップダウンの変更のメソッドです。
      *
      * @param div ShotokushokaihyoIkkatuDiv
