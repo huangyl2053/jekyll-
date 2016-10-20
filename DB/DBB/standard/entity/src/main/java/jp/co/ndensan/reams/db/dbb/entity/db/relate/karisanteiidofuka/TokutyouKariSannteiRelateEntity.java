@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -22,12 +23,18 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class TokutyouKariSannteiRelateEntity {
 
     private RString 前年度保険料段階;
     private Decimal 前年度合計所得金額;
     private Decimal 前年度公的年金収入額;
+    private FlexibleDate 生保開始日;
+    private FlexibleDate 生保廃止日;
+    private FlexibleDate 老年開始日;
+    private FlexibleDate 老年廃止日;
+    private RString 課税区分;
+    private RString 世帯課税区分;
     private DbT1001HihokenshaDaichoEntity 被保険者台帳管理Entity;
     private FukaJohoRelateEntity 賦課情報Entity;
     private DbT2001ChoshuHohoEntity 徴収方法Entity;

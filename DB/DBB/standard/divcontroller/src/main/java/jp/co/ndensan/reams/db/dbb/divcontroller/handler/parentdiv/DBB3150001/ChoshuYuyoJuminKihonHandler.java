@@ -234,7 +234,7 @@ public class ChoshuYuyoJuminKihonHandler {
         if (介護賦課徴収猶予.get徴収猶予申請年月日() != null) {
             申請情報パネル.getTxtShinseiYMD().setValue(new RDate(介護賦課徴収猶予.get徴収猶予申請年月日().toString()));
         }
-        if (介護賦課徴収猶予.get徴収猶予種類コード() != null) {
+        if (介護賦課徴収猶予.get徴収猶予種類コード() != null && !介護賦課徴収猶予.get徴収猶予種類コード().isEmpty()) {
             申請情報パネル.getTxtYuyoShurui().setValue(CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課,
                     DBBCodeShubetsu.保険料徴収猶予種類.getコード(), 介護賦課徴収猶予.get徴収猶予種類コード(), FlexibleDate.getNowDate()));
         }
@@ -777,8 +777,10 @@ public class ChoshuYuyoJuminKihonHandler {
         if (介護賦課徴収猶予List != null && !介護賦課徴収猶予List.isEmpty()) {
             ChoshuYuyo 介護賦課徴収猶予 = 介護賦課徴収猶予List.get(ゼロ_定値);
             boolean flag1 = checkDate(介護賦課徴収猶予.get徴収猶予申請年月日(), 申請情報パネル.getTxtShinseiYMD().getValue());
-            boolean flag2 = checkRString(CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.保険料徴収猶予種類.getコード(),
-                    介護賦課徴収猶予.get徴収猶予種類コード(), FlexibleDate.getNowDate()), 申請情報パネル.getTxtYuyoShurui().getValue());
+            Code 徴収猶予種類コード = 介護賦課徴収猶予.get徴収猶予種類コード();
+            boolean flag2 = checkRString(徴収猶予種類コード == null || 徴収猶予種類コード.isEmpty()
+                    ? null : CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.保険料徴収猶予種類.getコード(),
+                            徴収猶予種類コード, FlexibleDate.getNowDate()), 申請情報パネル.getTxtYuyoShurui().getValue());
             boolean flag3 = checkRString(介護賦課徴収猶予.get申請事由(), 申請情報パネル.getTxtShinseiRiyu().getValue());
             return flag1 || flag2 || flag3;
         } else {

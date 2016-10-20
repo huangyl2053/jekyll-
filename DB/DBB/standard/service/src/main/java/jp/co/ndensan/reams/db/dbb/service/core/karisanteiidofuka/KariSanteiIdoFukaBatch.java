@@ -85,15 +85,15 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyus
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
+import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.GyomuConfigJohoClass;
+import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwari;
+import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariInput;
+import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariOutput;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.KozaYotoKubunType;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
-import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.GyomuConfigJohoClass;
-import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwari;
-import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariInput;
-import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariOutput;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -814,7 +814,10 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                 編集後賦課の情報 = editFukaJokyoKyotsu(RSTRING_0, 調定日時, 特徴仮算定Entity, 新しい賦課の情報, 調定年度,
                         資格情報, 徴収方法情報, 生保の情報のリスト,
                         老齢の情報のリスト,
-                        特徴仮算定Entity.get前年度合計所得金額(), 特徴仮算定Entity.get前年度公的年金収入額(), 枝番号);
+                        特徴仮算定Entity.get前年度合計所得金額(), 特徴仮算定Entity.get前年度公的年金収入額(),
+                        枝番号, 特徴仮算定Entity.get生保開始日(), 特徴仮算定Entity.get生保廃止日(),
+                        特徴仮算定Entity.get老年開始日(), 特徴仮算定Entity.get老年廃止日(),
+                        特徴仮算定Entity.get課税区分(), 特徴仮算定Entity.get世帯課税区分());
                 枝番号 = 枝番号.add(Decimal.ONE);
                 賦課Flag = true;
             } else {
@@ -822,7 +825,10 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                 編集後賦課の情報 = editFukaJokyoKyotsu(RSTRING_1, 調定日時, 特徴仮算定Entity, 更正後賦課の情報, 調定年度,
                         資格情報, 徴収方法情報, 生保の情報のリスト,
                         老齢の情報のリスト,
-                        特徴仮算定Entity.get前年度合計所得金額(), 特徴仮算定Entity.get前年度公的年金収入額(), Decimal.ZERO);
+                        特徴仮算定Entity.get前年度合計所得金額(), 特徴仮算定Entity.get前年度公的年金収入額(), Decimal.ZERO,
+                        特徴仮算定Entity.get生保開始日(), 特徴仮算定Entity.get生保廃止日(),
+                        特徴仮算定Entity.get老年開始日(), 特徴仮算定Entity.get老年廃止日(),
+                        特徴仮算定Entity.get課税区分(), 特徴仮算定Entity.get世帯課税区分());
             }
             RString 特別徴収_年額基準年度_8月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_8月開始,
                     new RDate(調定年度.minusYear(NUM_1).toString()), SubGyomuCode.DBB介護賦課);
@@ -919,6 +925,12 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
      * @param 前年度合計所得金額 Decimal
      * @param 前年度公的年金収入額 Decimal
      * @param 枝番号 Decimal
+     * @param 生保開始日 FlexibleDate
+     * @param 生保廃止日 FlexibleDate
+     * @param 老年開始日 FlexibleDate
+     * @param 老年廃止日 FlexibleDate
+     * @param 課税区分 RString
+     * @param 世帯課税区分 RString
      * @return 編集後賦課の情報
      */
     public FukaJoho editFukaJokyoKyotsu(RString 処理区分, YMDHMS 調定日時,
@@ -927,7 +939,9 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             HihokenshaDaicho 資格情報, ChoshuHoho 徴収方法情報,
             List<SeikatsuHogoJukyusha> 生保の情報のリスト,
             List<RoreiFukushiNenkinJukyusha> 老齢の情報のリスト,
-            Decimal 前年度合計所得金額, Decimal 前年度公的年金収入額, Decimal 枝番号) {
+            Decimal 前年度合計所得金額, Decimal 前年度公的年金収入額, Decimal 枝番号,
+            FlexibleDate 生保開始日, FlexibleDate 生保廃止日, FlexibleDate 老年開始日,
+            FlexibleDate 老年廃止日, RString 課税区分, RString 世帯課税区分) {
         TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
         if (RSTRING_0.equals(処理区分)) {
             RString 枝番 = new RString(枝番号.toString()).padZeroToLeft(2);
@@ -948,10 +962,27 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         月別保険料制御情報セット(月別保険料制御情報, 保険料段階List);
         FukaKonkyo 賦課根拠 = new FukaKonkyo();
         賦課根拠.setFukakijunYMD(new FlexibleDate(調定年度.toDateString().concat(RSTRING_0401).toString()));
-        賦課根拠.setSeihoStartYMD(new FlexibleDate(調定年度.toDateString().concat(RSTRING_0401).toString()));
-        賦課根拠.setRoreiNenkinStartYMD(new FlexibleDate(調定年度.toDateString().concat(RSTRING_0401).toString()));
-        賦課根拠.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
+        FlexibleDate 開始日 = new FlexibleDate(調定年度.toDateString().concat(RSTRING_0401).toString());
+        if (生保開始日 == null || 生保開始日.isEmpty()) {
+            賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
+        } else {
+            if (生保廃止日 == null || 生保廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
+                賦課根拠.setSeihoStartYMD(開始日);
+            } else {
+                賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
+            }
+        }
         賦課根拠.setSeihoEndYMD(FlexibleDate.EMPTY);
+        if (老年開始日 == null || 老年開始日.isEmpty()) {
+            賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
+        } else {
+            if (老年廃止日 == null || 老年廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
+                賦課根拠.setRoreiNenkinStartYMD(開始日);
+            } else {
+                賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
+            }
+        }
+        賦課根拠.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
         賦課根拠.setGokeiShotoku(前年度合計所得金額);
         賦課根拠.setKotekiNenkinShunyu(前年度公的年金収入額);
         HokenryoDankaiHanteiParameter parameter = new HokenryoDankaiHanteiParameter();

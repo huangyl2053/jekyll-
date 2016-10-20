@@ -359,6 +359,22 @@ public class DbT7051KoseiShichosonMasterDac {
     }
 
     /**
+     * 市町村コードによる市町村情報の検索します。
+     *
+     * @param 市町村コード LasdecCode
+     * @return DbT7051KoseiShichosonMasterEntity
+     */
+    @Transaction
+    public DbT7051KoseiShichosonMasterEntity selectBy市町村コード(LasdecCode 市町村コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(eq(shichosonCode, 市町村コード)).order(by(DbT7051KoseiShichosonMaster.kanyuYMD, Order.DESC))
+                .limit(1).toObject(DbT7051KoseiShichosonMasterEntity.class);
+    }
+
+    /**
      * 指定された市町村コードのの構成市町村エンティティを取得します。
      *
      * @param 市町村コード 市町村コード

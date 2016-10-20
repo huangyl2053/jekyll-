@@ -77,17 +77,6 @@ public class HanyoListParamValidationHandler {
 
     }
 
-    /**
-     * 復元のバリデーション
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs validate復元() {
-        ValidationMessageControlPairs validateResult = new ValidationMessageControlPairs();
-        validateResult.add(new ValidationMessageControlPair(new ReplaceErrorMessage(UrErrorMessages.実行不可, "復元"), div.getBtnParamRestore()));
-        return validateResult;
-    }
-
     private ValidationMessageControlDictionary createDictionary実行するボタンクリック() {
         return new ValidationMessageControlDictionaryBuilder()
                 .add(HanyoListParamValidationMessage.実行するボタンクリック1, div.getDdlKijunNendo())
@@ -99,8 +88,8 @@ public class HanyoListParamValidationHandler {
 
     private ValidationMessageControlDictionary createDictionary帳票出力項目チェック() {
         return new ValidationMessageControlDictionaryBuilder()
-                .add(HanyoListParamValidationMessage.帳票出力項目チェック２, div)
-                .add(HanyoListParamValidationMessage.帳票出力項目チェック３, div)
+                .add(HanyoListParamValidationMessage.帳票出力項目チェック２)
+                .add(HanyoListParamValidationMessage.帳票出力項目チェック３)
                 .build();
     }
 

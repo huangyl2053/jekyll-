@@ -29,7 +29,6 @@ public class JigyohokokuCompYoshiki151300106Data {
     private FlexibleYearMonth 集計期間TO;
     private RString 保険者番号;
     private RString 保険者名;
-    private RString 様式;
 
     private RString 食費居住費の特例減額措置_第1号被保険者_1;
     private RString 食費居住費の特例減額措置_第1号被保険者_2;

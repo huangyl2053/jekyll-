@@ -143,9 +143,17 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
                     if (under70Futangaku != null) {
                         uederFutangaku = uederFutangaku.add(new Decimal(under70Futangaku.toString()));
                     }
+                    RString under70Shikyugaku = dbt3173Entity.getUnder70_Shikyugaku();
+                    if (under70Shikyugaku != null) {
+                        underShikyugaku = underShikyugaku.add(new Decimal(under70Shikyugaku.toString()));
+                    }
                     RString futangaku = dbt3173Entity.getFutangaku();
                     if (futangaku != null) {
                         futangakuDec = futangakuDec.add(new Decimal(futangaku.toString()));
+                    }
+                    RString shikyugaku = dbt3173Entity.getShikyugaku();
+                    if (shikyugaku != null) {
+                        shikyugakuDec = shikyugakuDec.add(new Decimal(shikyugaku.toString()));
                     }
                     mutiEntity.setOver70_Futangaku(decimal_to_string(overFutangaku));
                     mutiEntity.setOver70_Shikyugaku(decimal_to_string(overShikyugaku));
@@ -191,16 +199,21 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
                     panelEntity2.setDbt3173Entity(singleEntity);
                     panelEntity2.setDbt3172Entity(dbt3172Entity);
                 }
-                int count = entityList.size() / INDEX_12;
-                if (entityList.size() % INDEX_12 != 0) {
-                    count = count + 1;
-                }
+                int count = editCount(entityList);
                 printOrder(保険制度コード, entityList, j, 通知書定型文1, 通知書定型文2,
                         panelEntity1, 認証者, 宛名データ, 問い合わせ先, flag, reportSourceWriter, panelEntity2, isBreak, count);
 
             }
 
         }
+    }
+
+    private int editCount(List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> entityList) {
+        int count = entityList.size() / INDEX_12;
+        if (entityList.size() % INDEX_12 != 0) {
+            count = count + 1;
+        }
+        return count;
     }
 
     private void printOrder(RString 保険制度コード, List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> entityList,

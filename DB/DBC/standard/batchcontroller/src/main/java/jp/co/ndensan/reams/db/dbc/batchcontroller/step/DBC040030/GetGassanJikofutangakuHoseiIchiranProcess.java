@@ -148,6 +148,13 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
         tmpEntity.set警告(entity.getIchiranKakuninKubun());
         tmpEntity.set警告2(entity.getIchiranKakuninKubun2());
         tmpEntity.set宛名ﾃﾞｰﾀ種別(entity.getJuminShubetsuCode());
+        tmpEntity.set市町村コード(entity.getShichosonCode());
+        tmpEntity.set氏名５０音カナ(entity.getHihokenshaShimeiKana());
+        tmpEntity.set申請年月日(entity.getShinseiYMD());
+        tmpEntity.set町域コード(entity.getChoikiCode());
+        tmpEntity.set行政区コード(entity.getGyoseikuCode());
+        tmpEntity.set証記載保険者番号(entity.getHokenshaNo());
+        tmpEntity.set郵便番号(entity.getYubinNo());
         param.set高額合算自己負担額補正一覧表(tmpEntity);
         GassanJikofutangakuHoseiIchiranReport report = new GassanJikofutangakuHoseiIchiranReport(param);
         report.writeBy(reportSourceWriter);

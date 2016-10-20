@@ -266,6 +266,8 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
 
         if (null != this.負担限度額認定者リストEntity.get非課税年金勘案額()) {
             source.listCenter_14 = 星;
+        } else {
+            source.listCenter_14 = RString.EMPTY;
         }
     }
 
@@ -475,7 +477,6 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
         Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(出力順);
         if (出力順Map.get(LISTINDEX_1) != null) {
             source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_1).get項目名();
-
         }
         if (出力順Map.get(LISTINDEX_2) != null) {
             source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_2).get項目名();

@@ -8,15 +8,13 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1140011;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.ShotokuJohoTorokuTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.dgSetaiShotoku_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -25,9 +23,10 @@ import jp.co.ndensan.reams.db.dbz.business.config.ShotokuHikidashiConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.GekihenkanwaSochi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.TorokuGyomu;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2008ShotokuKanriDac;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShotokuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotokuJohoFinder;
@@ -51,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 画面設計_DBBGM13003_所得照会回答内容登録のハンドラクラス
@@ -81,6 +81,7 @@ public final class ShotokuJohoTorokuHandler {
 
     private final SetaiinShotokuJohoFinder 世帯員所得情報Finder;
     private final DataGridSetting shotokuJohoGridSetting;
+    private final DbT2008ShotokuKanriDac dac;
 
     /**
      * コンストラクタ
@@ -91,6 +92,7 @@ public final class ShotokuJohoTorokuHandler {
         this.世帯員所得情報Finder = SetaiinShotokuJohoFinder.createInstance();
         this.div = div;
         this.shotokuJohoGridSetting = div.getDgSetaiShotoku().getGridSetting();
+        this.dac = InstanceProvider.create(DbT2008ShotokuKanriDac.class);
     }
 
     /**
@@ -221,10 +223,6 @@ public final class ShotokuJohoTorokuHandler {
     private boolean get金額表示Flg(FlexibleDate 生年月日, boolean is被保険者) {
         ShotokuHikidashiConfig shotokuHikidashiConfig = new ShotokuHikidashiConfig();
         RString syotokuKingakuHyojiKubun = shotokuHikidashiConfig.get所得引出_64歳未満所得金額表示区分();
-        // 業務コンフィング（賦課）「所得引出_６４歳未満所得金額表示区分」が「0:表示しない」、
-        // かつ、住民税課税年度（ドロップダウン）の値の４月１日時点で６４歳未満
-        // かつ、被保険者でない場合、以下の項目は空白で表示する。
-        // 合計所得金額、年金収入額、年金所得額、課税所得額
         return !syotokuKingakuHyojiKubun.equals(住民税減免前後表示区分_表示しない) || has年齢到達From所得年度(生年月日) || is被保険者;
     }
 
@@ -279,6 +277,7 @@ public final class ShotokuJohoTorokuHandler {
             div.getShotokuJohoToroku().getDdlJuminzeiGenmenMae().setDisplayNone(true);
             div.getShotokuJohoToroku().getDdlJuminzeiGenmenAto().setDisplayNone(true);
             div.getShotokuJohoToroku().getDdlJuminzei().setDisplayNone(false);
+            div.getShotokuJohoToroku().getLblJuminZeiHikazeiKbn().setDisplayNone(true);
         } else {
             div.getShotokuJohoToroku().getDdlJuminzeiGenmenMae().setVisible(true);
             div.getShotokuJohoToroku().getDdlJuminzeiGenmenAto().setVisible(true);
@@ -286,6 +285,7 @@ public final class ShotokuJohoTorokuHandler {
             div.getShotokuJohoToroku().getDdlJuminzeiGenmenMae().setDisplayNone(false);
             div.getShotokuJohoToroku().getDdlJuminzeiGenmenAto().setDisplayNone(false);
             div.getShotokuJohoToroku().getDdlJuminzei().setDisplayNone(true);
+            div.getShotokuJohoToroku().getLblJuminZeiHikazeiKbn().setDisplayNone(false);
         }
     }
 
@@ -430,22 +430,9 @@ public final class ShotokuJohoTorokuHandler {
                 識別コード = new ShikibetsuCode(ketsugo01List.get(0));
             }
             int 履歴番号 = 1;
-            List<Shotoku> shotokuList = shotokuManager.get介護所得一覧();
-            for (Iterator<Shotoku> i = shotokuList.iterator(); i.hasNext();) {
-                Shotoku shotokuTemp = i.next();
-                if (!shotokuTemp.get識別コード().toString().equals(識別コード.toString())
-                        || (shotokuTemp.get所得年度().compareTo(所得年度) != 0)) {
-                    i.remove();
-                }
-            }
-            Collections.sort(shotokuList, new Comparator<Shotoku>() {
-                @Override
-                public int compare(Shotoku o1, Shotoku o2) {
-                    return o2.toEntity().getRirekiNo() - o1.toEntity().getRirekiNo();
-                }
-            });
-            if (!shotokuList.isEmpty()) {
-                履歴番号 = shotokuList.get(0).toEntity().getRirekiNo() + 1;
+            DbT2008ShotokuKanriEntity 最新所得 = dac.selectBySomeKey(所得年度, 識別コード);
+            if (null != 最新所得) {
+                履歴番号 = 最新所得.getRirekiNo() + 1;
             }
             Shotoku shotoku = new Shotoku(所得年度, 識別コード, 履歴番号);
             shotoku = shotoku.createBuilderForEdit().set公的年金収入額(Decimal.ZERO).build();
@@ -479,7 +466,7 @@ public final class ShotokuJohoTorokuHandler {
                 shotoku = shotoku.createBuilderForEdit()
                         .set激変緩和措置区分(激変緩和.getコード()).build();
             } else {
-                shotoku = shotoku.createBuilderForEdit().set激変緩和措置区分(RString.EMPTY).build();
+                shotoku = shotoku.createBuilderForEdit().set激変緩和措置区分(GekihenkanwaSochi.対象外.getコード()).build();
             }
             shotoku = shotoku.createBuilderForEdit().set優先区分(優先区分).set処理日時(YMDHMS.now()).build();
             boolean success = shotokuManager.insert介護所得(shotoku);

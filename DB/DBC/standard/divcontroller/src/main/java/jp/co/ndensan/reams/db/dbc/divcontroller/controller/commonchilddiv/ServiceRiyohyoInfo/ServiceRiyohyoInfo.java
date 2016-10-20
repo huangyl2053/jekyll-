@@ -234,6 +234,7 @@ public class ServiceRiyohyoInfo {
         getHandler(div).onClick_btnBeppyoMeisaiKakutei(状態);
         div.getServiceRiyohyoBeppyoJigyoshaServiceInput().setDisplayNone(true);
         div.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
+        div.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
         return ResponseData.of(div).respond();
     }
 

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130010.InsKokuhoShikakuJyohoTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoShikakuJyohoInpotoyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoShikakuJyohoYoResultEntity;
-import jp.co.ndensan.reams.db.dbd.definition.core.hikazeinenkin.TorokuKubun;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -61,7 +60,9 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
 
     @Override
     protected void process(KokuhoShikakuJyohoYoResultEntity entity) {
-        文言設定flag = entity.get取込国保情報Entity().is文言設定flag();
+        if (entity.get取込国保情報Entity() != null) {
+            文言設定flag = entity.get取込国保情報Entity().is文言設定flag();
+        }
         if (entity.get現在国保資格情報Entity() != null
                 && entity.get取込国保情報Entity() != null
                 && 登録区分_画面登録.equals(entity.get現在国保資格情報Entity().getTorokuKubun())
@@ -111,7 +112,7 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
 
             if (entity.get取込国保情報Entity() == null
                     && entity.get現在国保資格情報Entity() != null
-                    && TorokuKubun.画面登録.getコード().equals(entity.get現在国保資格情報Entity().getTorokuKubun())) {
+                    && 登録区分_画面登録.equals(entity.get現在国保資格情報Entity().getTorokuKubun())) {
                 現在国保資格情報より_項目設定(entity);
             }
         }
@@ -138,7 +139,7 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
 
     private void get国保資格情報インポート用Entitｙ(KokuhoShikakuJyohoYoResultEntity entity) {
         if (entity.get現在国保資格情報Entity() != null) {
-            if (!TorokuKubun.画面登録.getコード().equals(entity.get現在国保資格情報Entity().getTorokuKubun())) {
+            if (!登録区分_画面登録.equals(entity.get現在国保資格情報Entity().getTorokuKubun())) {
                 取込国保情報より_項目設定(entity);
             } else {
                 現在国保資格情報より_項目設定(entity);

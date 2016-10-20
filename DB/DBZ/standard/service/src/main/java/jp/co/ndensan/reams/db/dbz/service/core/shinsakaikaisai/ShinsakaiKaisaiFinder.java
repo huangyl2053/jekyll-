@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shinsakaikaisai.I
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -61,6 +62,7 @@ public class ShinsakaiKaisaiFinder {
      * @param 表示期間To 表示期間To
      * @param モード モード
      * @param 表示条件 表示条件
+     * @param 最大表示件数
      * @param ダミー審査会 ダミー審査会
      * @return ShinsakaiKaisai 審査会一覧情報 nullが返る可能性があります。
      */
@@ -70,6 +72,7 @@ public class ShinsakaiKaisaiFinder {
             RDate 表示期間To,
             RString モード,
             RString 表示条件,
+            Decimal 最大表示件数,
             RString ダミー審査会) {
         IShinsakaiKaisaiMapper mapper = mapperProvider.create(IShinsakaiKaisaiMapper.class);
         RString 期間From;
@@ -84,7 +87,7 @@ public class ShinsakaiKaisaiFinder {
         ShinsakaiKaisaiParameter parameter = ShinsakaiKaisaiParameter.createParam(
                 期間From,
                 期間To,
-                モード, 表示条件, ダミー審査会);
+                モード, 表示条件, 最大表示件数, ダミー審査会);
         List<ShinsakaiKaisaiRelateEntity> relateEntityList = mapper.get審査会一覧(parameter);
 
         if (relateEntityList == null || relateEntityList.isEmpty()) {

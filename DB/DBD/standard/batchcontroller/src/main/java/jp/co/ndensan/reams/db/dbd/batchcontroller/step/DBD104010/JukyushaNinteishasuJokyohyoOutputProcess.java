@@ -45,6 +45,7 @@ public class JukyushaNinteishasuJokyohyoOutputProcess extends BatchProcessBase<N
     private RString 市町村名称;
     private Association 地方公共団体;
     private static final RString タイトルのみ印字 = new RString("タイトルのみ印字");
+    private static final RString 印字不要 = new RString("印字不要");
 
     @Override
     protected void initialize() {
@@ -76,10 +77,12 @@ public class JukyushaNinteishasuJokyohyoOutputProcess extends BatchProcessBase<N
     protected void process(NinteijkouTempTableEntity t) {
         JukyushagenmenninteiDateManager manager = new JukyushagenmenninteiDateManager();
         JukyushaGemmenJisshiJokyoEntity データリスト;
-        if (!タイトルのみ印字.equals(t.getInnjiKubun())) {
+        if ((!タイトルのみ印字.equals(t.getInnjiKubun()) && !印字不要.equals(t.getInnjiKubun())) || t.getInnjiKubun() == null) {
             データリスト = manager.set受給者減免月別認定者数帳票出力(t);
-        } else {
+        } else if (タイトルのみ印字.equals(t.getInnjiKubun())) {
             データリスト = manager.set受給者減免月別認定者数帳票出力_タイトルのみ印字(t);
+        } else {
+            データリスト = manager.set受給者減免月別認定者数帳票出力_印字不要(t);
         }
         JukyushaGemmenTsukibetsuNinteishasuJokyohyoReport report
                 = new JukyushaGemmenTsukibetsuNinteishasuJokyohyoReport(地方公共団体, processParameter.get対象年度(),
@@ -94,20 +97,18 @@ public class JukyushaNinteishasuJokyohyoOutputProcess extends BatchProcessBase<N
 
     private void outputJokenhyoFactory() {
         JukyushagenmenninteiDateManager manager = new JukyushagenmenninteiDateManager();
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        RString 市町村名 = association.get市町村名();
 
         RString ページ数 = new RString(reportSourceWriter.pageCount().value());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 processParameter.get帳票ID().value(),
-                地方公共団体.getLasdecCode_().getColumnValue(),
-                地方公共団体.get市町村名(),
+                市町村コード.getColumnValue(),
+                市町村名称,
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 new RString("「受給者減免月別認定者数状況表」"),
                 ページ数,
                 new RString("なし"),
                 RString.EMPTY,
-                manager.set出力条件(processParameter, 市町村名));
+                manager.set出力条件(processParameter, 市町村名称));
         OutputJokenhyoFactory.createInstance(item).print();
     }
 }

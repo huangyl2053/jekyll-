@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2400011;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2400011.TesuryoSeikyuKenShinseishoSakuseiParameterDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -55,14 +54,13 @@ public class TesuryoSeikyuKenShinseishoSakuseiParameterValidationHandler {
      */
     public ValidationMessageControlPairs 作成申請年月日比較チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getToValue().
+        if (div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getToValue() != null
+                && div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getFromValue() != null
+                && div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getToValue().
                 isBefore(div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getFromValue())) {
-            RStringBuilder builder = new RStringBuilder();
-            builder.append(div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getToValue());
-            builder.append("-");
-            builder.append(div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getFromValue());
             validPairs.add(new ValidationMessageControlPair(new TesuryoSeikyuKenShinseishoSakuseiParameterValidationHandler.IdocheckMessages(
-                    UrErrorMessages.期間が不正_追加メッセージあり１, builder.toString()), div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD()));
+                    UrErrorMessages.期間が不正_追加メッセージあり１, div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getToValue().toString(),
+                    div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getFromValue().toString()), div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD()));
         }
         return validPairs;
     }

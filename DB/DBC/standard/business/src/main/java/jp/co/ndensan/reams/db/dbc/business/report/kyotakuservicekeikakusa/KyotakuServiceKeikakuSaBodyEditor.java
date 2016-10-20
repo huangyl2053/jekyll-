@@ -56,8 +56,8 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
                 source.listList3_2 = 宛名.get行政区画().getGyoseiku().get名称();
             }
 
-            if (帳票情報.get住民コード() != null) {
-                source.listList2_1 = 帳票情報.get住民コード().getColumnValue();
+            if (帳票情報.get識別コード() != null) {
+                source.listList2_1 = 帳票情報.get識別コード().getColumnValue();
             }
             if (帳票情報.get資格取得日() != null) {
                 source.listList1_5 = パターン4(帳票情報.get資格取得日());
@@ -118,8 +118,8 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
         if (帳票情報.get被保険者番号() != null) {
             HihokenshaNo 被保険者番号 = 帳票情報.get被保険者番号();
             source.listList1_1 = 被保険者番号.getColumnValue();
-            if (帳票情報.get住民コード() != null) {
-                PersonalData personalData = PersonalData.of(帳票情報.get住民コード(),
+            if (帳票情報.get識別コード() != null) {
+                PersonalData personalData = PersonalData.of(帳票情報.get識別コード(),
                         new ExpandedInformation(new Code("003"), 文_被保険者番号, 被保険者番号.getColumnValue()));
                 AccessLogger.log(AccessLogType.照会, personalData);
             }

@@ -18,7 +18,7 @@ public enum HanyoListJukyusha implements IReportItems {
     /**
      * 項目ID:0001 フォームフィールド名:郵便番号 MyBatis項目名:定義なし
      */
-    郵便番号("0001", "郵便番号", "今回調査員_郵便番号"),
+    郵便番号("0001", "郵便番号", "\"ShikibetsuTaisho\".\"yubinNo\""),
     /**
      * 項目ID:0002 フォームフィールド名:町域コード MyBatis項目名:定義なし
      */

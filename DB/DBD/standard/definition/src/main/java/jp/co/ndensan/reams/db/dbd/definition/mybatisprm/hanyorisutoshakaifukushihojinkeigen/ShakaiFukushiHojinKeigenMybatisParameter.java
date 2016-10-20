@@ -106,6 +106,7 @@ public class ShakaiFukushiHojinKeigenMybatisParameter implements IMyBatisParamet
      * @param atenacyusyutsujyoken 宛名抽出条件
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛名識別対象PSM
+     * @param 出力順 出力順
      */
     public ShakaiFukushiHojinKeigenMybatisParameter(
             RString cyusyutsuhohokubun,

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBB-4270-020 chenyadong -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.nenkintokucho.INenkinTokuchoMapper">
+    <select resultOrdered="true" id="get取込ファイル_回付情報"  resultMap="resultMap_NenkinTokuchoEntity"  fetchSize="500">
+        SELECT
+        <include refid = "allColumns_TorikomiFileKaifuJohoTemp"/>,
+        <include refid="allColumns_TorikomiFileTrailRecordTemp"/>
+        FROM "TorikomiFileKaifuJohoTemp"
+        INNER JOIN 
+             "TorikomiFileTrailRecordTemp"
+        ON
+             "TorikomiFileKaifuJohoTemp"."recordKubun"='2'
+        AND
+             "TorikomiFileTrailRecordTemp"."recordKubun"='3'
+        AND
+             "TorikomiFileKaifuJohoTemp"."shichosoCode"="TorikomiFileTrailRecordTemp"."shichosoCode"
+        AND
+             "TorikomiFileKaifuJohoTemp"."tokuchoGimuCode"="TorikomiFileTrailRecordTemp"."tokuchoGimuCode"
+        AND
+             "TorikomiFileKaifuJohoTemp"."tsuchiNaiyoCode"="TorikomiFileTrailRecordTemp"."tsuchiNaiyoCode"
+        ORDER BY
+             "TorikomiFileTrailRecordTemp"."tsuchiNaiyoCode"       
+    </select>
+    
+    <sql id = "allColumns_TorikomiFileKaifuJohoTemp" >
+        "TorikomiFileKaifuJohoTemp"."recordKubun" AS "Joho_recordKubun",
+        "TorikomiFileKaifuJohoTemp"."shichosoCode" AS "Joho_shichosoCode",
+        "TorikomiFileKaifuJohoTemp"."tokuchoGimuCode" AS "Joho_tokuchoGimuCode",
+        "TorikomiFileKaifuJohoTemp"."tsuchiNaiyoCode" AS "Joho_tsuchiNaiyoCode",
+        "TorikomiFileKaifuJohoTemp"."yobi1" AS "Joho_yobi1",
+        "TorikomiFileKaifuJohoTemp"."tokuchoSeidoCode" AS "Joho_tokuchoSeidoCode",
+        "TorikomiFileKaifuJohoTemp"."sakuseiYMD" AS "Joho_sakuseiYMD",
+        "TorikomiFileKaifuJohoTemp"."kisoNenkinNo" AS "Joho_kisoNenkinNo",
+        "TorikomiFileKaifuJohoTemp"."nenkinCode" AS "Joho_nenkinCode",
+        "TorikomiFileKaifuJohoTemp"."yobi2" AS "Joho_yobi2",
+        "TorikomiFileKaifuJohoTemp"."seiNengappi" AS "Joho_seiNengappi",
+        "TorikomiFileKaifuJohoTemp"."seibetsu" AS "Joho_seibetsu",
+        "TorikomiFileKaifuJohoTemp"."shimeiKana" AS "Joho_shimeiKana",
+        "TorikomiFileKaifuJohoTemp"."shimeiKanji" AS "Joho_shimeiKanji",
+        "TorikomiFileKaifuJohoTemp"."jushoYubinNo" AS "Joho_jushoYubinNo",
+        "TorikomiFileKaifuJohoTemp"."jushoKana" AS "Joho_jushoKana",
+        "TorikomiFileKaifuJohoTemp"."jushoKanji" AS "Joho_jushoKanji",
+        "TorikomiFileKaifuJohoTemp"."kakushuKubun" AS "Joho_kakushuKubun",
+        "TorikomiFileKaifuJohoTemp"."shoriKeikka" AS "Joho_shoriKeikka",
+        "TorikomiFileKaifuJohoTemp"."gokoIkanCode" AS "Joho_gokoIkanCode",
+        "TorikomiFileKaifuJohoTemp"."kakushuYMD" AS "Joho_kakushuYMD",
+        "TorikomiFileKaifuJohoTemp"."kakushuKingaku1" AS "Joho_kakushuKingaku1",
+        "TorikomiFileKaifuJohoTemp"."kakushuKingaku2" AS "Joho_kakushuKingaku2",
+        "TorikomiFileKaifuJohoTemp"."kakushuKingaku3" AS "Joho_kakushuKingaku3",
+        "TorikomiFileKaifuJohoTemp"."yobi3" AS "Joho_yobi3",
+        "TorikomiFileKaifuJohoTemp"."kyosaiNenkinShoshoKigoBango" AS "Joho_kyosaiNenkinShoshoKigoBango"       
+    </sql>    
+    
+    <sql id = "allColumns_TorikomiFileTrailRecordTemp" >
+         "TorikomiFileTrailRecordTemp"."recordKubun" AS "Trail_recordKubun",
+         "TorikomiFileTrailRecordTemp"."shichosoCode" AS "Trail_shichosoCode",
+         "TorikomiFileTrailRecordTemp"."tokuchoGimuCode" AS "Trail_tokuchoGimuCode",
+         "TorikomiFileTrailRecordTemp"."tsuchiNaiyoCode" AS "Trail_tsuchiNaiyoCode",
+         "TorikomiFileTrailRecordTemp"."yobi1" AS "Trail_yobi1",
+         "TorikomiFileTrailRecordTemp"."tokuchoSeidoCode" AS "Trail_tokuchoSeidoCode",
+         "TorikomiFileTrailRecordTemp"."sakuseiYMD" AS "Trail_sakuseiYMD",
+         "TorikomiFileTrailRecordTemp"."recordKensu" AS "Trail_recordKensu",
+         "TorikomiFileTrailRecordTemp"."goukeiKingaku1" AS "Trail_goukeiKingaku1",
+         "TorikomiFileTrailRecordTemp"."goukeiKingaku2" AS "Trail_goukeiKingaku2",
+         "TorikomiFileTrailRecordTemp"."goukeiKingaku3" AS "Trail_goukeiKingaku3",
+         "TorikomiFileTrailRecordTemp"."yobi2" AS "Trail_yobi2"
+    </sql>
+    
+    <resultMap id="resultMap_NenkinTokuchoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.nenkintokucho.NenkinTokuchoEntity" autoMapping="true">
+        <id property="recordKubun" column="Joho_recordKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shichosoCode" column="Joho_shichosoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="tokuchoGimuCode" column="Joho_tokuchoGimuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="tsuchiNaiyoCode" column="Joho_tsuchiNaiyoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="yobi1" column="Joho_yobi1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="tokuchoSeidoCode" column="Joho_tokuchoSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="sakuseiYMD" column="Joho_sakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="kisoNenkinNo" column="Joho_kisoNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="nenkinCode" column="Joho_nenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="yobi2" column="Joho_yobi2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="seiNengappi" column="Joho_seiNengappi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="seibetsu" column="Joho_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shimeiKana" column="Joho_shimeiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shimeiKanji" column="Joho_shimeiKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="jushoYubinNo" column="Joho_jushoYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="jushoKana" column="Joho_jushoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="jushoKanji" column="Joho_jushoKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="kakushuKubun" column="Joho_kakushuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shoriKeikka" column="Joho_shoriKeikka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="gokoIkanCode" column="Joho_gokoIkanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="kakushuYMD" column="Joho_kakushuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="kakushuKingaku1" column="Joho_kakushuKingaku1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="kakushuKingaku2" column="Joho_kakushuKingaku2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="kakushuKingaku3" column="Joho_kakushuKingaku3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="yobi3" column="Joho_yobi3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="kyosaiNenkinShoshoKigoBango" column="Joho_kyosaiNenkinShoshoKigoBango" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="データレコードEntity" resultMap="ResultMap_TorikomiFileKaifuJohoTempEntity"/>
+        <association property="トレイラレコードEntity" resultMap="ResultMap_TorikomiFileTrailRecordTempEntity"/>   
+    </resultMap>
+       
+    <resultMap id="ResultMap_TorikomiFileKaifuJohoTempEntity" type="jp.co.ndensan.reams.ue.uex.entity.db.relate.uext00010.TorikomiFileKaifuJohoTempEntity" autoMapping="true">
+        <result property="recordKubun" column="Joho_recordKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosoCode" column="Joho_shichosoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuchoGimuCode" column="Joho_tokuchoGimuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tsuchiNaiyoCode" column="Joho_tsuchiNaiyoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yobi1" column="Joho_yobi1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuchoSeidoCode" column="Joho_tokuchoSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sakuseiYMD" column="Joho_sakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kisoNenkinNo" column="Joho_kisoNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nenkinCode" column="Joho_nenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yobi2" column="Joho_yobi2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seiNengappi" column="Joho_seiNengappi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="seibetsu" column="Joho_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shimeiKana" column="Joho_shimeiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shimeiKanji" column="Joho_shimeiKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushoYubinNo" column="Joho_jushoYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushoKana" column="Joho_jushoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushoKanji" column="Joho_jushoKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kakushuKubun" column="Joho_kakushuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoriKeikka" column="Joho_shoriKeikka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokoIkanCode" column="Joho_gokoIkanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kakushuYMD" column="Joho_kakushuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kakushuKingaku1" column="Joho_kakushuKingaku1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kakushuKingaku2" column="Joho_kakushuKingaku2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kakushuKingaku3" column="Joho_kakushuKingaku3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yobi3" column="Joho_yobi3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyosaiNenkinShoshoKigoBango" column="Joho_kyosaiNenkinShoshoKigoBango" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMap_TorikomiFileTrailRecordTempEntity" type="jp.co.ndensan.reams.ue.uex.entity.db.relate.uext00010.TorikomiFileTrailRecordTempEntity" autoMapping="true">
+        <result property="recordKubun" column="Trail_recordKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosoCode" column="Trail_shichosoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuchoGimuCode" column="Trail_tokuchoGimuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tsuchiNaiyoCode" column="Trail_tsuchiNaiyoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yobi1" column="Trail_yobi1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuchoSeidoCode" column="Trail_tokuchoSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sakuseiYMD" column="Trail_sakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="recordKensu" column="Trail_recordKensu" />
+        <result property="goukeiKingaku1" column="Joho_kakushuKingaku1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="goukeiKingaku1" column="Joho_kakushuKingaku2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="goukeiKingaku1" column="Joho_kakushuKingaku3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yobi2" column="Trail_yobi2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+
+    <select id="select年金特徴回付情報" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb241001.TokuchoHaishinDataTorikomiMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity" fetchSize="500">
+        SELECT  
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />
+        FROM 
+            rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
+        WHERE 
+            "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = #{gyomuCode}
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+            AND "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = #{tsuchiNaiyoCode}
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriTaishoYM" = #{shoriTaishoYM}
+            AND "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = #{kisoNenkinNo}
+            AND "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = #{nenkinCode}
+            AND "UeT0511NenkinTokuchoKaifuJoho"."koseiCityCode" = #{koseiCityCode}
+            AND "UeT0511NenkinTokuchoKaifuJoho"."renban" = #{renban}
+    </select>
+</mapper>

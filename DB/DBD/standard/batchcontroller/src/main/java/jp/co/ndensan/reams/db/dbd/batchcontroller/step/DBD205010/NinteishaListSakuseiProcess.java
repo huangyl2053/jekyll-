@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -72,7 +72,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBD-3960-050 x_liuwei
  */
-public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListSakuseiEntity> {
+public class NinteishaListSakuseiProcess extends BatchKeyBreakBase<NinteishaListSakuseiEntity> {
 
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -185,7 +185,12 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     }
 
     @Override
-    protected void process(NinteishaListSakuseiEntity t) {
+    protected void keyBreakProcess(NinteishaListSakuseiEntity current) {
+
+    }
+
+    @Override
+    protected void usualProcess(NinteishaListSakuseiEntity t) {
         i++;
         FutanGendogakuNinteiGaitoshaIchiranReport find
                 = new FutanGendogakuNinteiGaitoshaIchiranReport(parameter.get帳票作成日時(),
@@ -413,7 +418,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
                 list = new ArrayList<>();
             }
             if (list.size() > NO_0 && list.get(NO_0).is改頁項目()) {
-                改頁１ = to帳票物理名(list.get(0).get項目ID());
+                改頁１ = to帳票物理名(list.get(NO_0).get項目ID());
             }
             if (list.size() > NO_1 && list.get(NO_1).is改頁項目()) {
                 改頁２ = to帳票物理名(list.get(NO_1).get項目ID());
@@ -458,6 +463,16 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.被保険者番号.
                 get項目ID() == 項目ID) {
             帳票物理名 = new RString("listUpper_1");
+        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.世帯コード.get項目ID() == 項目ID) {
+            帳票物理名 = new RString("setaiCode");
+        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.市町村コード.get項目ID() == 項目ID) {
+            帳票物理名 = new RString("shichosonCode");
+        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.氏名５０音カナ.get項目ID() == 項目ID) {
+            帳票物理名 = new RString("gaikokujinKanaShimei");
+        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.町域コード.get項目ID() == 項目ID) {
+            帳票物理名 = new RString("choikiCode");
+        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.識別コード.get項目ID() == 項目ID) {
+            帳票物理名 = new RString("shikibetsuCodeKai");
         }
         return 帳票物理名;
     }

@@ -111,7 +111,6 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
             executeStep(賦課計算_資格喪失);
             executeStep(賦課の情報登録フロー);
             executeStep(一時テーブルの削除);
-
             executeStep(賦課計算_特別徴収停止);
             executeStep(賦課の情報登録フロー);
             executeStep(一時テーブルの削除);
@@ -124,7 +123,6 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
             executeStep(賦課の情報登録フロー);
             executeStep(一時テーブルの削除);
         }
-
         executeStep(依頼金額計算区分);
         RString 依頼金計算処理区分 = getResult(RString.class,
                 new RString(依頼金額計算区分), IraikinKeisanShoriKubunProcess.依頼金計算処理区分);
@@ -140,7 +138,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
             } else if (RSTONE.equals(依頼金計算処理区分)
                     && result.get帳票分類ID().value().equals(別徴収依頼金額明細一覧表ID.value())) {
                 parameter.set出力帳票Entity(result);
-                executeStep(仮算定異動一括結果一覧表出力);
+                executeStep(特別徴収依頼金額明細一覧表出力);
             }
         }
         executeStep(異動賦課計算);

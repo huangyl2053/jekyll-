@@ -229,9 +229,11 @@ public class HanyoListTekiyoJogaishaProcessParameter implements IBatchProcessPar
      *
      * @param psmShikibetsuTaisho 宛名識別対象抽出PSM
      * @param psmAtesaki 宛先抽出PSM
+     * @param 出力順 出力順
      * @return SeikatsuhogoJukyushaMybatisParameter
      */
-    public HanyoListTekiyoJogaishaMybatisParameter toHanyoListTekiyoJogaishaMybatisParameter(RString psmShikibetsuTaisho, RString psmAtesaki) {
+    public HanyoListTekiyoJogaishaMybatisParameter toHanyoListTekiyoJogaishaMybatisParameter(RString psmShikibetsuTaisho,
+            RString psmAtesaki, RString 出力順) {
         return HanyoListTekiyoJogaishaMybatisParameter.creatParameter(
                 psmChushutsuAge_Start,
                 psmChushutsuAge_End,
@@ -251,6 +253,7 @@ public class HanyoListTekiyoJogaishaProcessParameter implements IBatchProcessPar
                 shisetsuHenkoari,
                 shisetsuHenkonashi,
                 psmShikibetsuTaisho,
-                psmAtesaki);
+                psmAtesaki,
+                出力順);
     }
 }

@@ -18,8 +18,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -170,8 +177,26 @@ public class Sofujoho {
             証記載保険者番号 = div.getDdlShichosonName().getSelectedKey().substring(0, 連番_5);
             保険者番号フラグ = true;
         }
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険,
+                KensakuYusenKubun.住登外優先), true);
+        List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
+        juminShubetsuList.add(JuminShubetsu.日本人);
+        juminShubetsuList.add(JuminShubetsu.住登外個人_日本人);
+        juminShubetsuList.add(JuminShubetsu.住登外個人_外国人);
+        juminShubetsuList.add(JuminShubetsu.外国人);
+        key.set住民種別(juminShubetsuList);
+        List<JuminJotai> juminJotaiList = new ArrayList<>();
+        juminJotaiList.add(JuminJotai.住民);
+        juminJotaiList.add(JuminJotai.住登外);
+        juminJotaiList.add(JuminJotai.未定義);
+        juminJotaiList.add(JuminJotai.死亡者);
+        juminJotaiList.add(JuminJotai.消除者);
+        juminJotaiList.add(JuminJotai.転出者);
+        key.set住民状態(juminJotaiList);
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
         SofujohoMybatisParameter parameter = SofujohoMybatisParameter
-                .creatParameter(送付年月, 申立書区分コード, 送付年月フラグ, 保険者番号フラグ, 証記載保険者番号);
+                .creatParameter(送付年月, 申立書区分コード, 送付年月フラグ, 保険者番号フラグ, 証記載保険者番号, psmShikibetsuTaisho);
         return KagoMousitatesyoSouhuJyohouFinder.createInstance().get過誤申立送付情報照会(parameter).records();
     }
 

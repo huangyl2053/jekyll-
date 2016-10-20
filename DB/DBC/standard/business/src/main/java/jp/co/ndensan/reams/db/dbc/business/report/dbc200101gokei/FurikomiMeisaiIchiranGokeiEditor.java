@@ -87,13 +87,13 @@ public class FurikomiMeisaiIchiranGokeiEditor implements IFurikomiMeisaiIchiranG
                 source.shutsuryokujun2 = 設定項目リスト.get(1).get項目名();
             }
             if (設定項目リスト.size() > 2) {
-                source.shutsuryokujun2 = 設定項目リスト.get(2).get項目名();
+                source.shutsuryokujun3 = 設定項目リスト.get(2).get項目名();
             }
             if (設定項目リスト.size() > LISTINDEX_3) {
-                source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_3).get項目名();
+                source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
             }
             if (設定項目リスト.size() > LISTINDEX_4) {
-                source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_4).get項目名();
+                source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
             }
         }
     }

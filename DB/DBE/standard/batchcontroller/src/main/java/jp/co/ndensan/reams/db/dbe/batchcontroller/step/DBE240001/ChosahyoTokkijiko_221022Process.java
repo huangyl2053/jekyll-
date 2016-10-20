@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.I
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
-import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReport;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
@@ -130,8 +129,8 @@ public class ChosahyoTokkijiko_221022Process extends BatchProcessBase<HomonChosa
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
         update認定調査依頼情報(entity);
-        ChosahyoTokkijikoReport report = new ChosahyoTokkijikoReport(setItem(entity));
-        report.writeBy(reportSourceWriter);
+//        ChosahyoTokkijikoReport report = new ChosahyoTokkijikoReport(setItem(entity));
+//        report.writeBy(reportSourceWriter);
     }
 
     @Override

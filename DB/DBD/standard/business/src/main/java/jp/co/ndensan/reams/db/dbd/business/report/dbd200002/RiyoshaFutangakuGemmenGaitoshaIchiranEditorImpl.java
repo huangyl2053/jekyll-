@@ -213,7 +213,11 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
         }
         source.listCenter_7 = entity.get入所施設コード();
         source.listCenter_8 = eidt空白と空白以外(entity.is旧措置者フラグ());
-        source.listCenter_9 = editFormmatDate(entity.get認定情報の認定有効期間開始年月日());
+        if (entity.get認定情報の認定有効期間開始年月日() != null && !entity.get認定情報の認定有効期間開始年月日().isEmpty()) {
+            source.listCenter_9 = editFormmatDate(entity.get認定情報の認定有効期間開始年月日());
+        } else {
+            source.listCenter_9 = editFormmatDate(entity.get総者の適用開始年月日());
+        }
         source.listCenter_14 = 空白;
         return source;
     }
@@ -243,7 +247,11 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
             }
         }
         source.listLower_5 = entity.get入所施設名称();
-        source.listLower_6 = editFormmatDate(entity.get認定情報の認定有効期間終了年月日());
+        if (entity.get認定情報の認定有効期間終了年月日() != null && !entity.get認定情報の認定有効期間終了年月日().isEmpty()) {
+            source.listLower_6 = editFormmatDate(entity.get認定情報の認定有効期間終了年月日());
+        } else {
+            source.listLower_6 = editFormmatDate(entity.get総者の適用終了年月日());
+        }
         source.listLower_11 = 空白;
         return source;
     }

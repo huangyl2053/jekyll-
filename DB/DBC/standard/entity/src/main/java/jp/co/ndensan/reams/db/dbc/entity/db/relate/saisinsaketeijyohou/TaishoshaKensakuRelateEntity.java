@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.saisinsaketeijyohou;
 
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -58,4 +59,5 @@ public class TaishoshaKensakuRelateEntity {
     private RString 公費受給者番号;
     private RString 証記載保険者番号;
     private RString 保険者区分;
+    private UaFt200FindShikibetsuTaishoEntity psmEntity;
 }

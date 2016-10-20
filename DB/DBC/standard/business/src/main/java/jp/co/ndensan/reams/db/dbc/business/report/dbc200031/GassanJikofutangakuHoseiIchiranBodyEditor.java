@@ -27,8 +27,8 @@ public class GassanJikofutangakuHoseiIchiranBodyEditor
         implements IGassanJikofutangakuHoseiIchiranEditor {
 
     private final GassanJikofutangakuHoseiIchiranEntity entity;
-    private static final RString 種別日本人 = new RString("１x");
-    private static final RString 種別外国人 = new RString("２x");
+    private static final RString 種別日本人 = new RString("１");
+    private static final RString 種別外国人 = new RString("２");
     private static final RString LINE = new RString(" ～ ");
 
     /**
@@ -48,6 +48,7 @@ public class GassanJikofutangakuHoseiIchiranBodyEditor
             return source;
         }
         edit明細(source);
+        edit出力項目(source);
         return source;
     }
 
@@ -87,6 +88,18 @@ public class GassanJikofutangakuHoseiIchiranBodyEditor
         source.listList1_15 = entity.get支給額補正有無();
         source.listList1_16 = entity.get警告();
         source.listList1_17 = entity.get警告2();
+    }
+
+    private void edit出力項目(GassanJikofutangakuHoseiIchiranSource source) {
+        source.add_choikiCode = getColumnValue(entity.get町域コード());
+        source.add_gyoseikuCode = getColumnValue(entity.get行政区コード());
+        source.add_hokenshaNo = getColumnValue(entity.get証記載保険者番号());
+        source.add_kanaMeisho = getColumnValue(entity.get氏名５０音カナ());
+        source.add_shichosonCode = getColumnValue(entity.get市町村コード());
+        if (entity.get申請年月日() != null && !entity.get申請年月日().isEmpty()) {
+            source.add_shinnseiYMD = new RString(entity.get申請年月日().toString());
+        }
+        source.add_yubinNo = getColumnValue(entity.get郵便番号());
     }
 
     private RString get共通ポリシー金額1(Decimal 金額) {

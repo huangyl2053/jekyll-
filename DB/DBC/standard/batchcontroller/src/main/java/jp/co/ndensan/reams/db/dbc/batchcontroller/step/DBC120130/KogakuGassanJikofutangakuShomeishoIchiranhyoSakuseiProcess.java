@@ -95,8 +95,6 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
             = new RString("DBC200034_GassanJikofutangakuShomeishoTorikomiIchiran.csv");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString コンマ = new RString(",");
-    private static final RString 固定改頁項目ID1 = new RString("0103");
-    private static final RString 固定改頁項目ID2 = new RString("0372");
     private List<RString> 出力順リスト;
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
@@ -117,8 +115,6 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends 
         出力順リスト = new ArrayList<>();
         改頁リスト = new ArrayList<>();
         personalDataList = new ArrayList<>();
-        改頁リスト.add(固定改頁項目ID1);
-        改頁リスト.add(固定改頁項目ID2);
         並び順 = get並び順();
 
         if (null == 並び順) {

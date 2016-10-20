@@ -23,13 +23,13 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.ChoteiNendoKibetsuClass;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.FuchoTsukiClass;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.FukaKoseiJohoClass;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.GyomuConfigJohoClass;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.KiwariKeisan;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.KiwariKeisanInput;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.KiwariKeisanOutput;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.ChoteiNendoKibetsuClass;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FuchoTsukiClass;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FukaKoseiJohoClass;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.GyomuConfigJohoClass;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisan;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanInput;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanOutput;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -422,6 +422,7 @@ public class KanendoKoseiKeisan {
 
         RDate date1 = new RDate(算定日時.getYearValue(), INT_3, INT_1);
         RDate date2 = new RDate(算定日時.getYearValue(), INT_5, INT_31);
+        kiwariKeisanInput.set現在調定年度(調定年度);
         if (算定日時.getDate().isBeforeOrEquals(date2) && date1.isBeforeOrEquals(算定日時.getDate())) {
             出納整理期間増額用期月 = 更正月判定.find更正月(算定日時.getDate(), ZogakuGengakuKubun.増額更正);
             if (Tsuki._3月.equals(出納整理期間増額用期月.get月())) {
@@ -432,6 +433,7 @@ public class KanendoKoseiKeisan {
             } else if (Tsuki.翌年度4月.equals(出納整理期間増額用期月.get月()) || Tsuki.翌年度5月.equals(出納整理期間増額用期月.get月())) {
                 出納整理期間減額用期月 = 更正月判定.find更正月(算定日時.getDate(), ZogakuGengakuKubun.減額更正);
                 set現在期月(kiwariKeisanInput, 出納整理期間増額用期月, 出納整理期間減額用期月, 今回保険料, 前回保険料);
+                kiwariKeisanInput.set現在調定年度(調定年度.minusYear(INT_1));
             }
         } else {
             過年度期月 = 更正月判定.find過年度更正月(算定日時.getDate());
@@ -441,7 +443,6 @@ public class KanendoKoseiKeisan {
             kiwariKeisanInput.set現在過年期区分(過年度期月.get月処理区分().get区分());
         }
 
-        kiwariKeisanInput.set現在調定年度(調定年度);
         kiwariKeisanInput.set現在期区分(INT_5);
         kiwariKeisanInput.set特徴停止可能期(0);
         kiwariKeisanInput.set現在特徴期区分(INT_4);

@@ -248,7 +248,10 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         dataFlag = false;
         連番 = 連番 + INT_1;
         IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(entity.get宛名());
-        IKoza 口座情報 = do口座マスク編集(entity.get口座());
+        IKoza 口座情報 = null;
+        if (entity.get口座() != null && entity.get口座().getUaT0310KozaEntity().getKozaId() != 0L) {
+            口座情報 = do口座マスク編集(entity.get口座());
+        }
         RString 金融機関コード = 口座情報 == null || 口座情報.get金融機関コード() == null ? RString.EMPTY
                 : 口座情報.get金融機関コード().getColumnValue();
         KetteiTsuchishoInfoTempEntity 一時Entity = entity.get一時Entity();
@@ -321,7 +324,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         if (出力順 != null) {
             出力順情報 = MyBatisOrderByClauseCreator.create(JigyoKogakuKetteiTsuchishoOutputOrder.class, 出力順);
             for (ISetSortItem item : 出力順.get設定項目リスト()) {
-                並び順.add(item.getDB項目名());
+                並び順.add(item.get項目名());
                 if (item.is改頁項目()) {
                     pageBreakKeys.add(item.get項目ID());
                     改頁リスト.add(item.get項目名());
@@ -385,11 +388,11 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         reportEntity.set決定年月日(toRDate(entity.getKetteiYMD()));
         reportEntity.set支払予定日(parameter.get振込予定日());
         reportEntity.set受付年月日(toRDate(entity.getUketsukeYMD()));
-        reportEntity.set本人支払額(entity.getHonninShiharaiGaku());
+        reportEntity.set本人支払額(entity.getRiyoshaFutanGaku());
         reportEntity.set対象年月(entity.getServiceTeikyoYM());
         reportEntity.set給付の種類(entity.getServiceShuruiName());
         reportEntity.set支給_不支給決定区分(entity.getKetteiShikyuKubunCode());
-        reportEntity.set支給金額(entity.getShikyuKingaku());
+        reportEntity.set支給金額(entity.getKogakuShikyuGaku());
         reportEntity.set不支給理由(entity.getFushikyuRiyu());
         reportEntity.set支払方法区分(entity.getShiharaiHohoKubunCode());
         reportEntity.set持ちもの(通知書定型文.get(INT_0));
@@ -458,8 +461,8 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         if (parameter.get振込予定日() != null) {
             reportEntity.set支払予定日(new FlexibleDate(parameter.get振込予定日().toDateString()));
         }
-        reportEntity.set対象年月(entity.getServiceTeikyoYM());
-        reportEntity.set支給金額(entity.getKogakuShikyuGaku());
+        reportEntity.set対象年月1(entity.getServiceTeikyoYM());
+        reportEntity.set支給金額1(entity.getKogakuShikyuGaku());
         reportEntity.set支給不支給決定区分(entity.getKetteiShikyuKubunCode());
         reportEntity.set支払方法区分(entity.getShiharaiHohoKubunCode());
         if (口座情報 != null) {
@@ -482,7 +485,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
                 reportEntity.set通帳記号(口座情報.getEdited通帳記号());
                 reportEntity.set通帳番号(口座情報.getEdited通帳番号());
             }
-            reportEntity.set口座名義人(口座情報.get口座名義人漢字().value());
+            reportEntity.set口座名義人(口座情報.get口座名義人漢字() == null ? RString.EMPTY : 口座情報.get口座名義人漢字().value());
         } else if (フラグ_TRUE.equals(parameter.get受領委任者向け決定通知書フラグ())) {
             if (!口座情報.isゆうちょ銀行()) {
                 reportEntity.set金融機関上段(アスタリスク);
@@ -501,6 +504,8 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
 
     private void set口座情報_1(KogakuKetteiTsuchiShoEntity reportEntity, IKoza 口座情報) {
         reportEntity.setゆうちょ銀行フラグ(口座情報.isゆうちょ銀行());
+        reportEntity.set金融機関コード(口座情報.get金融機関コード() == null ? RString.EMPTY
+                : 口座情報.get金融機関コード().getColumnValue());
         if (フラグ_TRUE.equals(parameter.get利用者向け決定通知書フラグ())) {
             if (!口座情報.isゆうちょ銀行()) {
                 reportEntity.set金融機関上段(口座情報.get金融機関().get金融機関名称());
@@ -513,7 +518,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
                 reportEntity.set通帳記号(口座情報.getEdited通帳記号());
                 reportEntity.set通帳番号(口座情報.getEdited通帳番号());
             }
-            reportEntity.set口座名義人(口座情報.get口座名義人漢字().value());
+            reportEntity.set口座名義人(口座情報.get口座名義人漢字() == null ? RString.EMPTY : 口座情報.get口座名義人漢字().value());
         } else if (フラグ_TRUE.equals(parameter.get受領委任者向け決定通知書フラグ())) {
             if (!口座情報.isゆうちょ銀行()) {
                 reportEntity.set金融機関上段(アスタリスク);
@@ -532,6 +537,8 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
 
     private void set口座情報_2(KogakuKetteiTsuchiShoEntity reportEntity, IKoza 口座情報) {
         reportEntity.setゆうちょ銀行フラグ(口座情報.isゆうちょ銀行());
+        reportEntity.set金融機関コード(口座情報.get金融機関コード() == null ? RString.EMPTY
+                : 口座情報.get金融機関コード().getColumnValue());
         if (!口座情報.isゆうちょ銀行()) {
             reportEntity.set金融機関上段(口座情報.get金融機関().get金融機関名称());
             reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
@@ -543,7 +550,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             reportEntity.set通帳記号(口座情報.getEdited通帳記号());
             reportEntity.set通帳番号(口座情報.getEdited通帳番号());
         }
-        reportEntity.set口座名義人(口座情報.get口座名義人漢字().value());
+        reportEntity.set口座名義人(口座情報.get口座名義人漢字() == null ? RString.EMPTY : 口座情報.get口座名義人漢字().value());
     }
 
     private KogakuShikyuFushikyuKetteiTsuchiHakkoEntity getFushikyuReportEntity(KogakuServiceReportEntity entity,
@@ -576,7 +583,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         returnEntity.set決定年月日(formatDate(一時Entity.getKetteiYMD()));
         returnEntity.set本人支払額(doカンマ編集(一時Entity.getRiyoshaFutanGaku()));
         returnEntity.set支給額(doカンマ編集(一時Entity.getKogakuShikyuGaku()));
-        if (null != 一時Entity.getKetteiShikyuKubunCode() || !一時Entity.getKetteiShikyuKubunCode().isEmpty()) {
+        if (null != 一時Entity.getKetteiShikyuKubunCode() && !一時Entity.getKetteiShikyuKubunCode().isEmpty()) {
             ShikyuKubun 支給不支給決定区分 = ShikyuKubun.toValue(一時Entity.getKetteiShikyuKubunCode());
             returnEntity.set支給_不支給_決定区分(支給不支給決定区分.get名称());
         }

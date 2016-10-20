@@ -710,7 +710,11 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
             csvEntity.set保決定利用負担額(保決定利用負担額 != null
                     ? numToRString(保決定利用負担額)
                     : RString.EMPTY);
-            csvEntity.set保決定支給区分(entity.get判定_支給区分コード());
+            csvEntity.set保決定支給区分(
+                    entity.get決定_支給区分コード() != null
+                    && entity.get決定_支給区分コード().toString().equals("1")
+                    ? ShikyuKubun.支給.get名称()
+                    : RString.EMPTY);
             Decimal 保決定高額支給額 = entity.get支給金額();
             csvEntity.set保決定高額支給額(保決定高額支給額 != null
                     ? numToRString(保決定高額支給額)

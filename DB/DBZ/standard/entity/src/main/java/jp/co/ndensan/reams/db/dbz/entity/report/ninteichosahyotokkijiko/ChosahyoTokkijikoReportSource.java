@@ -1,5 +1,9 @@
 package jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyotokkijiko;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -117,5 +121,16 @@ public class ChosahyoTokkijikoReportSource implements IReportSource {
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation hishokenshaNo;
+    @ReportItem(name = "layout", order = 999)
+    public Layouts layout;
+
+    /**
+     * レイアウトブレイク用キーの一覧です。
+     */
+    public static final List<RString> LAYOUT_BREAK_KEYS;
+
+    static {
+        LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
+    }
 // </editor-fold>
 }

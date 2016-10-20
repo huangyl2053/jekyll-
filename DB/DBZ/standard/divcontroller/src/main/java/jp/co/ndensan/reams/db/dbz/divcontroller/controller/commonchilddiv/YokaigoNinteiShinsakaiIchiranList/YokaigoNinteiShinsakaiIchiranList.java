@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.shinsakaikaisai.ShinsakaiKaisaiFi
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -35,6 +36,17 @@ public class YokaigoNinteiShinsakaiIchiranList {
     private RString 表示条件;
     private RString ダミー審査会;
 
+    /**
+     * 画面初期化処理です。
+     *
+     * @param div YokaigoNinteiShinsakaiIchiranListDiv
+     * @return ResponseData<YokaigoNinteiShinsakaiIchiranListDiv>
+     */
+    public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onLoad(YokaigoNinteiShinsakaiIchiranListDiv div) {
+        div.getTxtSaidaiHyojiKensu().setValue(new Decimal("100"));
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 検索するの処理です。
      *
@@ -66,7 +78,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
             表示条件 = div.getRadHyojiJokenShinsakaiKanryo().getSelectedValue();
         }
         List<ShinsakaiKaisai> 審査会一覧 = ShinsakaiKaisaiFinder.
-                createInstance().get審査会一覧(表示期間From, 表示期間To, モード, 表示条件, ダミー審査会).records();
+                createInstance().get審査会一覧(表示期間From, 表示期間To, モード, 表示条件, div.getTxtSaidaiHyojiKensu().getValue(), ダミー審査会).records();
         if (審査会一覧 == null || 審査会一覧.isEmpty()) {
             validationMessages = getHandler(div).該当データが存在のチェック();
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();

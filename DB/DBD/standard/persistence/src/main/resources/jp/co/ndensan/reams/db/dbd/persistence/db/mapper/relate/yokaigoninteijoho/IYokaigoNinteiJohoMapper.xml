@@ -185,6 +185,10 @@
         AND "DbT4101NinteiShinseiJoho"."ninteiChosaItakusakiCode" = "DbT4913ChosainJoho"."ninteiChosaItakusakiCode"
         AND "DbT4101NinteiShinseiJoho"."ninteiChosainCode" = "DbT4913ChosainJoho"."ninteiChosainCode"
 
+        LEFT OUTER JOIN
+        rgdb."DbT4102NinteiKekkaJoho" AS "DbT4102NinteiKekkaJoho"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4102NinteiKekkaJoho"."shinseishoKanriNo"
+        
         LEFT OUTER JOIN rgdb."DbT4120ShinseitodokedeJoho" AS "DbT4120ShinseitodokedeJoho"
         ON "DbT4120ShinseitodokedeJoho"."shinseishoKanriNo" = "DbV4001JukyushaDaicho"."shinseishoKanriNo"
         LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha" "DbT7060KaigoJigyosha"

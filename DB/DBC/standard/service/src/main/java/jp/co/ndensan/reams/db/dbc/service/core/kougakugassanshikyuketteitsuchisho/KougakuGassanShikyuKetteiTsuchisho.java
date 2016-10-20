@@ -176,7 +176,7 @@ public class KougakuGassanShikyuKetteiTsuchisho {
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
         AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
         builder.set識別コード(識別コード);
-        builder.set基準日(発行日);
+        builder.set基準日(FlexibleDate.getNowDate());
         builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
         IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(builder.build());
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();

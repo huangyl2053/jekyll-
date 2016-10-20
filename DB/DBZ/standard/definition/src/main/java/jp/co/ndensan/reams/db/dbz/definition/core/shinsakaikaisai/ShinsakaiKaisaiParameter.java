@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護認定審査会共有一覧のパラメータクラス。
@@ -29,6 +30,7 @@ public final class ShinsakaiKaisaiParameter {
     private final RString モード;
     private final RString 表示条件;
     private final RString ダミー審査会;
+    private final Decimal saidaiHyojiKensu;
     private final boolean is割付未完了のみ;
     private final boolean is割付完了のみ;
     private final boolean is審査会未完了のみ;
@@ -44,6 +46,7 @@ public final class ShinsakaiKaisaiParameter {
      * @param モード モード
      * @param 表示条件 表示条件
      * @param ダミー審査会 ダミー審査会
+     * @param saidaiHyojiKensu saidaiHyojiKensu
      * @param is割付未完了のみ is割付未完了のみ
      * @param is割付完了のみ is割付完了のみ
      * @param is審査会未完了のみ is審査会未完了のみ
@@ -57,6 +60,7 @@ public final class ShinsakaiKaisaiParameter {
             RString モード,
             RString 表示条件,
             RString ダミー審査会,
+            Decimal saidaiHyojiKensu,
             boolean is割付未完了のみ,
             boolean is割付完了のみ,
             boolean is審査会未完了のみ,
@@ -68,6 +72,7 @@ public final class ShinsakaiKaisaiParameter {
         this.モード = モード;
         this.表示条件 = 表示条件;
         this.ダミー審査会 = ダミー審査会;
+        this.saidaiHyojiKensu = saidaiHyojiKensu;
         this.is割付未完了のみ = is割付未完了のみ;
         this.is割付完了のみ = is割付完了のみ;
         this.is審査会未完了のみ = is審査会未完了のみ;
@@ -83,6 +88,7 @@ public final class ShinsakaiKaisaiParameter {
      * @param 表示期間To 表示期間To
      * @param モード モード
      * @param 表示条件 表示条件
+     * @param 最大表示件数
      * @param ダミー審査会 ダミー審査会
      * @return 介護認定審査会共有一覧のパラメータ
      */
@@ -91,6 +97,7 @@ public final class ShinsakaiKaisaiParameter {
             RString 表示期間To,
             RString モード,
             RString 表示条件,
+            Decimal 最大表示件数,
             RString ダミー審査会) {
         boolean is割付未完了のみ = false;
         boolean is割付完了のみ = false;
@@ -123,6 +130,7 @@ public final class ShinsakaiKaisaiParameter {
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
+                最大表示件数,
                 is割付未完了のみ,
                 is割付完了のみ,
                 is審査会未完了のみ,

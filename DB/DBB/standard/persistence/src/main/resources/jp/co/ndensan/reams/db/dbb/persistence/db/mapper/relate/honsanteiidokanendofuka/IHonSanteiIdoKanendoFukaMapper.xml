@@ -1390,7 +1390,7 @@
         ( <include refid="distinct_IdoTmp" /> ) AS B
         ON
         資格."hihokenshaNo" = B."hihokenshaNo"
-        LEFT JOIN
+        FULL OUTER  JOIN
         ( <include refid="select賦課情報sql" /> )  AS "DbT2002Fuka" 
         ON
         資格."hihokenshaNo" = "DbT2002Fuka"."dbT2002Fuka_hihokenshaNo"

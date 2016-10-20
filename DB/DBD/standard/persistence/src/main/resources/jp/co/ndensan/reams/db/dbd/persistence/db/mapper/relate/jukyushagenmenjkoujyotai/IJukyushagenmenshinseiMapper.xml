@@ -55,8 +55,8 @@ and open the template in the editor.-->
         ON
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -187,8 +187,8 @@ and open the template in the editor.-->
         ON
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -322,8 +322,8 @@ and open the template in the editor.-->
         ON
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
-        WHERE "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -455,8 +455,8 @@ and open the template in the editor.-->
         ON
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -588,8 +588,8 @@ and open the template in the editor.-->
         ON
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -723,8 +723,8 @@ and open the template in the editor.-->
         ON
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
-        WHERE "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -856,8 +856,8 @@ and open the template in the editor.-->
         ON
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -991,8 +991,8 @@ and open the template in the editor.-->
         ON
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -1129,8 +1129,8 @@ and open the template in the editor.-->
         ON
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
-        WHERE "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD"
+        WHERE ("DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4016HomonKaigoRiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -1268,8 +1268,8 @@ and open the template in the editor.-->
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
 
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -1404,8 +1404,8 @@ and open the template in the editor.-->
         ON
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -1542,8 +1542,8 @@ and open the template in the editor.-->
         ON
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
-        WHERE "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD"
+        WHERE ("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -1681,8 +1681,8 @@ and open the template in the editor.-->
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
 
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -1818,8 +1818,8 @@ and open the template in the editor.-->
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
 
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -1967,8 +1967,8 @@ and open the template in the editor.-->
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
 
-        WHERE "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD"
+        WHERE ("DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -2102,8 +2102,8 @@ and open the template in the editor.-->
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
 
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -2235,8 +2235,8 @@ and open the template in the editor.-->
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
 
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>
@@ -2371,8 +2371,8 @@ and open the template in the editor.-->
         宛名."shikibetsuCode" = 直近被保."shikibetsuCode"
 
 
-        WHERE "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間開始日}
-        OR  #{抽出期間終了日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD"
+        WHERE ("DbT4020TokubetsuchiikiKasanGemmen"."tekiyoKaishiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+        OR  #{抽出期間開始日} <![CDATA[<=]]> "DbT4020TokubetsuchiikiKasanGemmen"."tekiyoShuryoYMD")
         <if test="宛名生年月日1" >
             AND #{年齢基準日from} <![CDATA[<=]]> 宛名."seinengappiYMD"
         </if>

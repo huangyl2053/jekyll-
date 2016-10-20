@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0440011
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
+import jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist.JigyouKogakuKyuufuTaishouResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist.KogakuKyuufuTaishouListEntityResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishousainaiyou.KougakuSabisuhiShousaiNaiyouResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0440011.DBC0440011StateName;
@@ -56,6 +57,9 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     private static final RString 明細編集モード = new RString("明細編集モード");
     private static final RString 定値_交換情報識別番号1 = new RString("111");
     private static final RString 定値_交換情報識別番号2 = new RString("113");
+    private static final RString 高額サービス費支給申請書登録 = new RString("DBCMN42001");
+    private static final RString 総合事業高額サービス費支給申請書登録 = new RString("DBCMNL2001");
+    private static final RString 総合事業高額サービス費支給申請登録 = new RString("総合事業高額サービス費支給申請書登録");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
 
@@ -87,6 +91,10 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             div.getCommonPanel().getCcdKaigoAtenaInfo().initialize(識別コード);
         }
         getHandler(div).initialize申請情報検索(メニューID, 被保険者番号, 導入形態コード);
+        if (総合事業高額サービス費支給申請書登録.equals(メニューID)) {
+            return ResponseData.of(ResponseData.of(div).setState(
+                    DBC0440011StateName.申請情報検索).data).rootTitle(総合事業高額サービス費支給申請登録).respond();
+        }
         return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
     }
 
@@ -290,9 +298,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                List<KogakuKyuufuTaishouListEntityResult> 高額給付対象一覧list
-                        = ViewStateHolder.get(ViewStateKeys.高額給付対象一覧, List.class);
-                getHandler(div).save対象者情報(被保険者番号, サービス年月, メニューID, 高額給付対象一覧list);
+                save対象者情報データ(div, 被保険者番号, サービス年月, メニューID);
                 getHandler(div).clear対象者情報();
                 return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
             } else {
@@ -307,9 +313,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                List<KogakuKyuufuTaishouListEntityResult> 高額給付対象一覧list
-                        = ViewStateHolder.get(ViewStateKeys.高額給付対象一覧, List.class);
-                getHandler(div).save対象者情報(被保険者番号, サービス年月, メニューID, 高額給付対象一覧list);
+                save対象者情報データ(div, 被保険者番号, サービス年月, メニューID);
                 getHandler(div).clear対象者情報();
                 return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
             } else {
@@ -317,6 +321,21 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             }
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void save対象者情報データ(KogakuSabisuhiShikyuShinseiPanelDiv div,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス年月,
+            RString メニューID) {
+        if (高額サービス費支給申請書登録.equals(メニューID)) {
+            List<KogakuKyuufuTaishouListEntityResult> 高額給付対象一覧list
+                    = ViewStateHolder.get(ViewStateKeys.高額給付対象一覧, List.class);
+            getHandler(div).save対象者情報(被保険者番号, サービス年月, メニューID, 高額給付対象一覧list);
+        } else if (総合事業高額サービス費支給申請書登録.equals(メニューID)) {
+            List<JigyouKogakuKyuufuTaishouResult> 事業高額給付対象一覧list
+                    = ViewStateHolder.get(ViewStateKeys.事業高額給付対象一覧, List.class);
+            getHandler(div).save事業高額対象者情報(被保険者番号, サービス年月, メニューID, 事業高額給付対象一覧list);
+        }
     }
 
     private ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> save申請情報登録(
@@ -337,8 +356,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).save申請情報(被保険者番号, サービス年月,
-                        証記載保険者番号, メニューID, 画面モード, 履歴番号, result);
+                save申請情報データ(div, 被保険者番号, サービス年月, 証記載保険者番号, メニューID, 画面モード, 履歴番号, result);
                 getHandler(div).clear申請情報();
                 div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().set画面tap();
                 return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
@@ -354,8 +372,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).save申請情報(被保険者番号, サービス年月,
-                        証記載保険者番号, メニューID, 画面モード, 履歴番号, result);
+                save申請情報データ(div, 被保険者番号, サービス年月, 証記載保険者番号, メニューID, 画面モード, 履歴番号, result);
                 getHandler(div).clear申請情報();
                 div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().set画面tap();
                 div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().release削除制御();
@@ -365,6 +382,19 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             }
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void save申請情報データ(KogakuSabisuhiShikyuShinseiPanelDiv div,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
+            HokenshaNo 証記載保険者番号, RString メニューID, RString 画面モード,
+            int 履歴番号, KougakuSabisuhiShousaiNaiyouResult result) {
+        if (高額サービス費支給申請書登録.equals(メニューID)) {
+            getHandler(div).save申請情報(被保険者番号, サービス年月,
+                    証記載保険者番号, メニューID, 画面モード, 履歴番号, result);
+        } else if (総合事業高額サービス費支給申請書登録.equals(メニューID)) {
+            getHandler(div).save事業高額申請情報(被保険者番号, サービス年月,
+                    証記載保険者番号, メニューID, 画面モード, 履歴番号, result);
+        }
     }
 
     /**

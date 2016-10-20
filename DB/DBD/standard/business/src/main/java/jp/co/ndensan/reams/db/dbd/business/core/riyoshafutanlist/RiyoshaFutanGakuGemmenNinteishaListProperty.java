@@ -48,7 +48,7 @@ public class RiyoshaFutanGakuGemmenNinteishaListProperty {
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho_kanaShimei\"")),
+        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho_kanaMeisho\"")),
         /**
          * 市町村コード
          */

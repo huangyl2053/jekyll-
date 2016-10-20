@@ -12,7 +12,10 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.BatchFuchoKariSanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.FuchoKariSanteiFukaEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014001.DBB014001_FuchoKarisanteiFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003.BatchFuchoKariSanteiEntity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003.DBB014003_FuchoKarisanteiTsuchishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
 import jp.co.ndensan.reams.db.dbb.definition.core.fucho.ZanteiKeisanHasuChosei;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.FuchoZanteiKeisanHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoKaishiMaeFucho6Gatsu;
@@ -313,7 +316,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     }
 
     /**
-     * バッチパラメータを作成する。
+     * 普徴仮算定通知書一括発行バッチパラメータを作成する。
      *
      * @return バッチパラメータ DBB014003_FuchoKarisanteiTsuchishoHakkoParameter
      */
@@ -370,6 +373,52 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
             condition.set賦課年度(new FlexibleYear(賦課年度.toString()));
         }
         return FuchoKariSanteiFuka.createInstance().createFuchoKariSanteiParameter(condition);
+    }
+
+    /**
+     * 普徴仮算定賦課バッチパラメータを作成する。
+     *
+     * @return バッチパラメータ DBB014001_FuchoKarisanteiFukaParameter
+     */
+    public DBB014001_FuchoKarisanteiFukaParameter getバッチパラメータ1() {
+        DBB014001_FuchoKarisanteiFukaParameter param = new DBB014001_FuchoKarisanteiFukaParameter();
+        FuchoKariSanteiFuka fuchoKariSanteiFuka = new FuchoKariSanteiFuka();
+        Map<RString, RString> 出力帳票一覧 = div.getMainPanelBatchParameter()
+                .getFuchoKarisanteiChohyoHakko2().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        List<BatchFuchoKariSanteiResult> list = new ArrayList<>();
+        for (Map.Entry<RString, RString> map : 出力帳票一覧.entrySet()) {
+            RString 帳票Id = map.getKey();
+            RString 出力順Id = map.getValue();
+            if (帳票Id != null && !帳票Id.isEmpty() && 出力順Id != null && !出力順Id.isEmpty()) {
+                BatchFuchoKariSanteiResult result = new BatchFuchoKariSanteiResult(
+                        new ReportId(map.getKey()), Long.valueOf(map.getValue().toString()));
+                list.add(result);
+            }
+        }
+        FuchoKarisanteiShoriNaiyoDiv panel = div.getMainPanelBatchParameter()
+                .getFuchoKarisanteiFukaKakunin().getShoriJokyo().getFuchoKarisanteiShoriNaiyo();
+        RYear 調定年度 = panel.getTxtChoteiNendo().getDomain();
+        param.set調定年度(new FlexibleYear(調定年度.toString()));
+        RYear 賦課年度 = panel.getTxtFukaNendo().getDomain();
+        if (賦課年度 != null) {
+            param.set賦課年度(new FlexibleYear(賦課年度.toString()));
+        }
+        FuchoTsuchiKobetsuJohoDiv 帳票作成個別情報Panel = div
+                .getMainPanelBatchParameter().getFuchoKarisanteiChohyoHakko2().getFuchoTsuchiKobetsuJoho();
+        RString 出力期R = 帳票作成個別情報Panel.getDdlNotsuShuturyokuki2().getSelectedValue();
+        RString 出力期 = 出力期R.substring(ゼロ_定値, 出力期R.indexOf(期RSTRING));
+        List<BatchFuchoKariSanteiEntity> batchList = fuchoKariSanteiFuka.getChohyoIchiran(list, new FlexibleYear(調定年度.toString()), 出力期);
+        List<HonsanteifukaBatchTyouhyou> honsanteiList = new ArrayList<>();
+        HonsanteifukaBatchTyouhyou honsanteifuka;
+        for (BatchFuchoKariSanteiEntity entity : batchList) {
+            honsanteifuka = new HonsanteifukaBatchTyouhyou();
+            honsanteifuka.set帳票分類ID(entity.get帳票分類ID());
+            honsanteifuka.set帳票ID(entity.get帳票ID());
+            honsanteifuka.set出力順ID(new RString(entity.get出力順ID()));
+        }
+        param.set出力帳票一覧(honsanteiList);
+        return param;
+
     }
 
     /**
