@@ -205,16 +205,19 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                 RString 郵便番号2 = 振込明細一時TBL.getYubinNo().getYubinNo().substring(LISTINDEX_3);
                 source.listUpper_3 = 郵便番号1.concat(半角ハイフン).concat(郵便番号2);
             }
-            if (振込明細一時TBL.getKinyuKikanCode() != null && 振込明細一時TBL.getKinyuKikanShitenCode() != null) {
-                source.listUpper_4 = 振込明細一時TBL.getKinyuKikanCode().value().
-                        concat(半角ハイフン).concat(振込明細一時TBL.getKinyuKikanShitenCode().value());
-            }
-            if (振込明細一時TBL.getKinyuKikanCode() != null) {
-                source.listUpper_5 = 振込明細一時TBL.getKinyuKikanCode().value();
+            if (!Furikomi_ShihraiHohoShitei.口座.equals(支払方法)) {
+                if (振込明細一時TBL.getKinyuKikanCode() != null && 振込明細一時TBL.getKinyuKikanShitenCode() != null) {
+                    source.listUpper_4 = 振込明細一時TBL.getKinyuKikanCode().value().
+                            concat(半角ハイフン).concat(振込明細一時TBL.getKinyuKikanShitenCode().value());
+                }
+                if (振込明細一時TBL.getKinyuKikanCode() != null) {
+                    source.listUpper_5 = 振込明細一時TBL.getKinyuKikanCode().value();
+                }
+
+                source.listUpper_6 = 振込明細一時TBL.getYokinShubetsuName();
+                source.listUpper_7 = 振込明細一時TBL.getKozaNo();
             }
 
-            source.listUpper_6 = 振込明細一時TBL.getYokinShubetsuName();
-            source.listUpper_7 = 振込明細一時TBL.getKozaNo();
             source.listUpper_8 = 振込明細一時TBL.getKetteiTsuchiNo();
 
             if (振込明細一時TBL.getServiceTeikyoYM() != null && !振込明細一時TBL.getServiceTeikyoYM().isEmpty()) {
