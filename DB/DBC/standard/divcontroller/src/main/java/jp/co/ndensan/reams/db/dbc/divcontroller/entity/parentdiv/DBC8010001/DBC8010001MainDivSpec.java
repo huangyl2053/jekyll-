@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8010001;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8010001.DBC8010001MainHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.furikomidaitasakusai.DBC8010001MainManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -31,7 +30,6 @@ public enum DBC8010001MainDivSpec implements IPredicate<DBC8010001MainDiv> {
     実行不可 {
                 @Override
                 public boolean apply(DBC8010001MainDiv div) {
-                    DBC8010001MainHandler handler = new DBC8010001MainHandler(div);
                     RString メニューID = ResponseHolder.getMenuID();
                     RString 振込単位 = DbBusinessConfig.get(ConfigNameDBC.振込単位, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
                     DBC8010001MainManager manager = new DBC8010001MainManager();
