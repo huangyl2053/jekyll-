@@ -53,8 +53,7 @@ public class KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku}のインスタンスを返します。
      *
-     * @return // *
-     * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku}のインスタンス
+     * @return // * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku}のインスタンス
      */
     public static KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku createInstance() {
         return InstanceProvider.create(KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku.class);
@@ -207,7 +206,7 @@ public class KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku {
             return 出力用共同処理受給者訂正情報Entity;
         }
         KyodoShoriyoJukyushaIdoKihonSofu div基本情報Entity = divEntity.get基本情報Entity();
-        if (基本送付 != null && div基本情報Entity != null) {
+        if (div基本情報Entity != null) {
             RString 氏名 = 基本送付.get被保険者氏名();
             if (氏名 != null
                     && !氏名.equals(divEntity.get基本情報Entity().get被保険者氏名())) {
@@ -265,7 +264,7 @@ public class KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku {
             return 出力用共同処理受給者訂正情報Entity;
         }
         KyodoShoriyoJukyushaIdoShokanSofu div償還情報Entity = divEntity.get償還情報Entity();
-        if (償還送付 != null && divEntity.get償還情報Entity() != null) {
+        if (divEntity.get償還情報Entity() != null) {
             FlexibleDate 開始年月日 = 償還送付.get保険給付支払一時差止開始年月日();
             if (開始年月日 != null
                     && !開始年月日.equals(div償還情報Entity.get保険給付支払一時差止開始年月日())) {
@@ -309,7 +308,7 @@ public class KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku {
             return 出力用共同処理受給者訂正情報Entity;
         }
         KyodoShoriyoJukyushaIdoKogakuSofu div高額情報Entity = divEntity.get高額情報Entity();
-        if ((高額送付 != null && div高額情報Entity != null)) {
+        if (div高額情報Entity != null) {
             HihokenshaNo 世帯主被保険者番号 = 高額送付.get世帯集約番号();
             if (世帯主被保険者番号 != null
                     && !世帯主被保険者番号.equals(div高額情報Entity.get世帯集約番号())) {

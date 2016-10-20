@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
 
     private static final int LENGTH = 25;
+    private final int indexstart = 0;
+    private final int indexend = 3;
 
     /**
      * 印字様式番号別集計。
@@ -114,7 +116,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         out.set被保険者番号(group.get(0).get被保険者番号());
         out.setサービス提供年月(group.get(0).getサービス提供年月());
         out.set整理番号(group.get(0).get整理番号());
-        out.set集計様式番号(group.get(0).get様式番号().substring(0, 3));
+        out.set集計様式番号(group.get(0).get様式番号().substring(indexstart, indexend));
         out.set印字様式番号(get印字様式番号(group));
         out.set支給金額計(calculate支給金額計(group));
         out.set差額金額計(calculate差額金額計(group));
