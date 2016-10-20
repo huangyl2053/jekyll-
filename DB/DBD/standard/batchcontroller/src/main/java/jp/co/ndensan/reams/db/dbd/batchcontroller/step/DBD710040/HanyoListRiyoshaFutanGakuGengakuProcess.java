@@ -229,7 +229,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
                 build();
         List<RString> pageBreakKeys = new ArrayList<>();
         set改頁Key(outputOrder, pageBreakKeys);
-        batchReportWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBZ.DBZ700001.getReportId().value()).addBreak(
+        batchReportWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBZ.DBZ700001.getReportId().value(), SubGyomuCode.DBZ介護共通).addBreak(
                 new BreakerCatalog<HanyoListReportSource>().simplePageBreaker(pageBreakKeys)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
     }
