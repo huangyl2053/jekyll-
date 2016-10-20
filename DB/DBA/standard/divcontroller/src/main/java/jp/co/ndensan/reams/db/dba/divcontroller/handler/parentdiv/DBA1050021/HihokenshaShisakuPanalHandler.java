@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1050021;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshashisaku.HihokenshaShisaku;
-import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashisaku.HihokenshaShisaku;
+import jp.co.ndensan.reams.db.dbz.business.core.sikakuidouteisei.ShikakuRirekiJoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050021.HihokenshaShisakuPanalDiv;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakuteisei.HihokenshaShikakuTeiseiManager;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshashikakuteisei.HihokenshaShikakuTeiseiManager;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -363,7 +363,7 @@ public class HihokenshaShisakuPanalHandler {
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getCode())) {
             return 広域保険者;
         } else if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード.getCode())
-                   || DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード.getCode())) {
+                || DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード.getCode())) {
             return 単一保険者;
         }
         return RString.EMPTY;
@@ -439,7 +439,7 @@ public class HihokenshaShisakuPanalHandler {
 
             DropDownList shutokuKeyHokensha = panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha();
             if (shutokuKeyHokensha.getDataSource().isEmpty()
-                || (shutokuKeyHokensha.getDataSource().size() == 1 && shutokuKeyHokensha.getIsBlankLine())) {
+                    || (shutokuKeyHokensha.getDataSource().size() == 1 && shutokuKeyHokensha.getIsBlankLine())) {
                 panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setDisabled(true);
             } else {
                 panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setSelectedKey(
