@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 本算定異動（現年度）結果一覧表帳票Source
@@ -64,7 +65,9 @@ public class GenNendoHonsanteiIdouSource implements IReportSource {
     public RString fuchoKi13;
     @ReportItem(name = "fuchoKi14", length = 3, order = 23)
     public RString fuchoKi14;
-    @ReportExpandedInfo(id = "X")
+    @ReportPerson(id = "X")
+    public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "list1_1", length = 10, order = 24)
     public RString list1_1;
     @ReportItem(name = "list1_2", length = 20, order = 25)

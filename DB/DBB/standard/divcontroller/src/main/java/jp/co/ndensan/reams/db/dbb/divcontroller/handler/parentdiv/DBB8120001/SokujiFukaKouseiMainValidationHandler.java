@@ -42,7 +42,7 @@ public class SokujiFukaKouseiMainValidationHandler {
     private static final RString 読点 = new RString(",");
     private static final RString コンマ = new RString("、");
     private static final RString 更正後年間保険料 = new RString("更正後年間保険料");
-    private static final RString 特別徴収の更正後合計_普通徴収の更正後合計_減免額 = new RString("特別徴収の更正後合計+普通徴収の更正後合計ー減免額");
+    private static final RString 特別徴収の更正後合計_普通徴収の更正後合計 = new RString("特別徴収の更正後合計+普通徴収の更正後合計");
     private static final RString 特殊処理のメニューID = new RString("DBBMN13001");
     private static final RString 左括弧 = new RString("（");
     private static final RString 右括弧 = new RString("）");
@@ -208,11 +208,10 @@ public class SokujiFukaKouseiMainValidationHandler {
         FukakonkyoAtoDiv fukakonkyoAtoDiv = div.getTabSokujiKousei().getSokujiKoseiTab1().getSokujikouseiFukakonkyo().getFukakonkyoAto();
         Decimal 更正後年間保険料額 = fukakonkyoAtoDiv.getTxtNenkanHokenryo2().getValue();
         更正後年間保険料額 = 更正後年間保険料額 == null ? Decimal.ZERO : 更正後年間保険料額;
-        Decimal 減免額 = div.getGemmenGakuInput().getTxtGemmenGakuInput().getValue();
-        if (!更正後年間保険料額.equals(getFormat金額(tablePanel.getLblTokuchoKoseiGoSum().getText()).add(getFormat金額(tablePanel.getLblFuchoKoseiGoSum().getText())).
-                subtract(減免額 == null ? Decimal.ZERO : 減免額))) {
+        if (!更正後年間保険料額.equals(getFormat金額(tablePanel.getLblTokuchoKoseiGoSum().getText()).
+                add(getFormat金額(tablePanel.getLblFuchoKoseiGoSum().getText())))) {
             validPairs.add(new ValidationMessageControlPair(new SokujiFukaKouseiMainValidationMessages(UrErrorMessages.項目に対する制約,
-                    更正後年間保険料.toString(), 特別徴収の更正後合計_普通徴収の更正後合計_減免額.toString())));
+                    更正後年間保険料.toString(), 特別徴収の更正後合計_普通徴収の更正後合計.toString())));
         }
     }
 

@@ -212,7 +212,7 @@ public class SokujiFukaKouseiMainHandler {
      * @return is入力があれ
      */
     public boolean is入力があれ() {
-        return !div.getInitData().equals(getPaneItem()) || FLAG_CHANGE.equals(div.getIsDataChange());
+        return !getPaneItem().equals(div.getInitData()) || FLAG_CHANGE.equals(div.getIsDataChange());
     }
 
     private FukaJoho get賦課の情報履歴番号採番(FukaJoho 賦課の情報) {
@@ -1647,7 +1647,12 @@ public class SokujiFukaKouseiMainHandler {
         return get金額のカンマ編集(普通徴収の更正前合計);
     }
 
-    private RString get特別徴収の更正後合計() {
+    /**
+     * 特別徴収の更正後合計のメッセージです。
+     *
+     * @return 更正後合計
+     */
+    public RString get特別徴収の更正後合計() {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         Decimal 特別徴収の更正後合計 = getDecimalNull(tablePanel.getTxtTokuchoKoseiGo04().getValue()).add(getDecimalNull(tablePanel.getTxtTokuchoKoseiGo06().getValue())).
                 add(getDecimalNull(tablePanel.getTxtTokuchoKoseiGo08().getValue())).add(getDecimalNull(tablePanel.getTxtTokuchoKoseiGo10().getValue())).
@@ -1655,7 +1660,12 @@ public class SokujiFukaKouseiMainHandler {
         return get金額のカンマ編集(特別徴収の更正後合計);
     }
 
-    private RString get普通徴収の更正後合計() {
+    /**
+     * 普通徴収の更正後合計のメッセージです。
+     *
+     * @return 更正後合計
+     */
+    public RString get普通徴収の更正後合計() {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         Decimal 普通徴収の更正後合計 = getDecimalNull(tablePanel.getTxtFuchoKoseiGo04().getValue()).add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo05().getValue())).
                 add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo06().getValue())).add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo07().getValue())).
@@ -1671,7 +1681,12 @@ public class SokujiFukaKouseiMainHandler {
         return num == null ? Decimal.ZERO : num;
     }
 
-    private RString get特別徴収の増減合計() {
+    /**
+     * 特別徴収の増減合計のメッセージです。
+     *
+     * @return 特別徴収の増減合計
+     */
+    public RString get特別徴収の増減合計() {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         Decimal 特別徴収の増減合計 = getFormat金額(tablePanel.getLblTokuchoZogenValue04().getText()).
                 add(getFormat金額(tablePanel.getLblTokuchoZogenValue06().getText())).
@@ -1682,7 +1697,12 @@ public class SokujiFukaKouseiMainHandler {
         return get金額のカンマ編集(特別徴収の増減合計);
     }
 
-    private RString get普通徴収の増減合計() {
+    /**
+     * 普通徴収の増減のメッセージです。
+     *
+     * @return 普通徴収の増減
+     */
+    public RString get普通徴収の増減合計() {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         Decimal 普通徴収の増減合計 = getFormat金額(tablePanel.getLblFuchoZogenValue04().getText()).
                 add(getFormat金額(tablePanel.getLblFuchoZogenValue05().getText())).

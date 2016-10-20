@@ -239,11 +239,11 @@
         <include refid="selectKaigoShotokuIdo" />
     </select>
     <sql id="selectKaigoShotokuIdo">
+        WITH master as(
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />,
             <include refid="allColumns_DbT3105SogoJigyoTaishosha" />,
-            "ShikibetsuTaisho"."setaiCode" as "shikibetsuTaisho_setaiCode",
             <include refid="allColumns_DbV2512KaigoShotokuNewest" />
         FROM 
             (SELECT * FROM rgdb."DbV2512KaigoShotokuNewest"  AS A
@@ -260,10 +260,6 @@
             ))  AS "DbT1001HihokenshaDaicho"
         ON  
             "DbV2512KaigoShotokuNewest"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
-        INNER JOIN 
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
-        ON
-            "DbV2512KaigoShotokuNewest"."shikibetsuCode"= "ShikibetsuTaisho"."shikibetsuCode"     
         LEFT OUTER JOIN 
             (SELECT * FROM rgdb."DbT4001JukyushaDaicho"   AS  "B"
             WHERE "logicalDeletedFlag" = false  AND "yukoMukoKubun" = '2'
@@ -291,6 +287,25 @@
             "DbT1001HihokenshaDaicho"."hihokenshaNo" =  "DbT3105SogoJigyoTaishosha"."hihokenshaNo"
          ORDER BY 
             "DbT4001JukyushaDaicho"."hihokenshaNo"
+        )
+        SELECT 
+            master.*,
+            "ShikibetsuTaisho"."setaiCode" as "shikibetsuTaisho_setaiCode"
+        FROM
+            master
+        INNER JOIN 
+            rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',        
+                (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT1001HihokenshaDaicho_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                )      
+            ) AS "ShikibetsuTaisho"
+        ON
+            "master"."dbT1001HihokenshaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"   
     </sql>
     
      <select resultOrdered="true" id="select宛名識別対象異動"
@@ -357,11 +372,11 @@
         <include refid="selectSeikatsuHogoJukyushaIdo" />
     </select>
     <sql id="selectSeikatsuHogoJukyushaIdo">
+        WITH master as(
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />,
             <include refid="allColumns_DbT3105SogoJigyoTaishosha" />,
-            "ShikibetsuTaisho"."setaiCode" as "shikibetsuTaisho_setaiCode",
             <include refid="allColumns_DbV2512KaigoShotokuNewest" />
         FROM 
             (SELECT * FROM rgur."UrT0508SeikatsuHogoJukyusha"
@@ -377,11 +392,7 @@
             AND  NOT EXISTS (SELECT 1  FROM  "HanteiTaishoshaTemp"  AS B WHERE A."hihokenshaNo"=B."hihokenshaNo" AND B."taishoNendo"= #{対象年度}                              
             ))  AS "DbT1001HihokenshaDaicho"     
         ON 
-            "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"  
-        INNER JOIN 
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
-        ON
-            "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"= "ShikibetsuTaisho"."shikibetsuCode"     
+            "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"      
         LEFT OUTER JOIN 
             (SELECT * FROM rgdb."DbT4001JukyushaDaicho"   AS  "B"
             WHERE "logicalDeletedFlag" = false  AND "yukoMukoKubun" = '2'
@@ -413,6 +424,25 @@
             "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"= "DbV2512KaigoShotokuNewest"."shikibetsuCode"
          ORDER BY 
             "DbT4001JukyushaDaicho"."hihokenshaNo"
+        )
+        SELECT 
+            master.*,
+            "ShikibetsuTaisho"."setaiCode" as "shikibetsuTaisho_setaiCode"
+        FROM
+            master
+        INNER JOIN 
+            rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',        
+                (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT1001HihokenshaDaicho_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                )      
+            ) AS "ShikibetsuTaisho"
+        ON
+            "master"."dbT1001HihokenshaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"               
     </sql>
     
     <resultMap id="resultMap_IdoData" autoMapping="true"

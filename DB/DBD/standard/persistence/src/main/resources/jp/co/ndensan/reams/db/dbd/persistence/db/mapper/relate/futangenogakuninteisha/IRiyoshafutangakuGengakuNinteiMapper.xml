@@ -98,7 +98,7 @@
             A.is所得税課税者 AS is所得税課税者,
             A.is生活保護受給者 AS is生活保護受給者,
             A.利用者負担段階,
-            nvl(A.合計所得金額,0) + nvl(A.年金収入額,0) + nvl(A.非課税年金勘案額,0) AS 合計所得_含年金収入,
+            coalesce(A.合計所得金額,0) + coalesce(A.年金収入額,0) + coalesce(A.非課税年金勘案額,0) AS 合計所得_含年金収入,
             A.非課税年金勘案額,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
             施設入所情報.入所施設コード,

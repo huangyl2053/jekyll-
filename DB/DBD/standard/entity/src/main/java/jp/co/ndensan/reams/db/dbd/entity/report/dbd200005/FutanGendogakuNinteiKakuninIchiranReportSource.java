@@ -166,6 +166,7 @@ public class FutanGendogakuNinteiKakuninIchiranReportSource implements IReportSo
     @ReportExpandedInfo(id = "001", code = "0003", name = "被保険者番号")
     public RString hihokenshaNo;
     @ReportPerson(id = "001")
+    @ReportItem(name = "shikibetsuCode", order = 73)
     public RString shikibetsuCode;
 
 // </editor-fold>

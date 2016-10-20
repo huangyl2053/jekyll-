@@ -37,7 +37,7 @@ public class HanyoListParam {
      */
     public ResponseData<BatchParameterMap> onClick_btnBatchParameterSave(HanyoListParamDiv div) {
         ResponseData<BatchParameterMap> responseData = new ResponseData<>();
-        responseData.data = new BatchParameterMap(getHandler(div).条件を保存());
+        responseData.data = new BatchParameterMap(getHandler(div).onClick_btnExecute());
         return responseData;
     }
 

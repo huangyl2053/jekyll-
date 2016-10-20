@@ -339,18 +339,28 @@
         
     <select resultOrdered="true" id="get宛名情報" resultMap="ResultMap_宛名情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020070.AtenaJohoMybatisParameter" fetchSize="500">
-        SELECT
+        with master as (
+            select 
             "ShikyugakuUpdateTemp".*,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
-        FROM
-            "ShikyugakuUpdateTemp" 
+            "DbT1001HihokenshaDaicho"."shikibetsuCode" as "shikibetsuCodeAtena"
+            from 
+                "ShikyugakuUpdateTemp" 
             INNER JOIN
                 rgdb."DbT1001HihokenshaDaicho" as "DbT1001HihokenshaDaicho"
                 ON "ShikyugakuUpdateTemp"."hihokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
-             INNER JOIN 
-                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-                AS "ShikibetsuTaisho"
-                ON "DbT1001HihokenshaDaicho"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+        )
+        SELECT
+            master.*,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+            master
+          INNER JOIN 
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+            (
+                select ARRAY_AGG(CAST ("shikibetsuCodeAtena" AS TEXT)) from master
+            )
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" /> as "ShikibetsuTaisho"
+            ON master."shikibetsuCodeAtena" = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
         
     <select resultOrdered="true" id="get口座情報" resultMap="ResultMap_口座情報"

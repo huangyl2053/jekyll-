@@ -5,9 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.furikomidaitasakusai;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.dbc8010001.DBC8010001;
+import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiGyomunaiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.ux.uxx.definition.mybatisprm.kozafurikomi.furikomiitakushakosei.FurikomiItakushaKoseiMapperParameter;
+import jp.co.ndensan.reams.ux.uxx.entity.db.relate.kozafurikomi.furikomigroup.FurikomiGroupItakushaRelateEntity;
+import jp.co.ndensan.reams.ux.uxx.service.core.kozafurikomi.furikomi.FurikomiGroupItakushaItakushaKoseiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -38,7 +43,7 @@ public class DBC8010001MainManager {
      * @param 処理枝番 RString
      * @param 年度 FlexibleYear
      * @param 年度内連番 RString
-     * @return DbT7022ShoriDateKanriEntity
+     * @return DBC8010001
      */
     public DBC8010001 get前回処理情報(SubGyomuCode サブ業務コード, LasdecCode 市町村コード, RString 処理名, RString 処理枝番,
             FlexibleYear 年度, RString 年度内連番) {
@@ -52,4 +57,60 @@ public class DBC8010001MainManager {
         return new DBC8010001(entity);
     }
 
+    /**
+     *
+     * @param メニューID RString
+     * @param 振込単位 RString
+     * @return DBC8010001
+     */
+    public DBC8010001 getFurikomiGroupItakushaRelateEntity(RString メニューID, RString 振込単位) {
+        List<FurikomiGroupItakushaRelateEntity> list = getFurikomiGroupItakushaRelateEntityList(メニューID, 振込単位);
+        FurikomiGroupItakushaRelateEntity fentity = list.get(0);
+        return new DBC8010001(fentity);
+    }
+
+    /**
+     * 委託者情報の取得。
+     *
+     * @param メニューID RString
+     * @param 振込単位 RString
+     * @return List<FurikomiGroupItakushaRelateEntity>
+     */
+    public List<FurikomiGroupItakushaRelateEntity> getFurikomiGroupItakushaRelateEntityList(RString メニューID, RString 振込単位) {
+        List<FurikomiGroupItakushaRelateEntity> list;
+        RString 業務内区分 = new RString("");
+        switch (メニューID.toString()) {
+            case "DBCMN43003":
+                switch (振込単位.toString()) {
+                    case "1":
+                        業務内区分 = FurikomiGyomunaiKubun.償還高額.getコード();
+                        break;
+                    case "2":
+                        業務内区分 = FurikomiGyomunaiKubun.高額.getコード();
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case "DBCMN54002":
+                switch (振込単位.toString()) {
+                    case "1":
+                        業務内区分 = FurikomiGyomunaiKubun.償還高額.getコード();
+                        break;
+                    case "2":
+                        業務内区分 = FurikomiGyomunaiKubun.償還.getコード();
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+        FurikomiItakushaKoseiMapperParameter parameter;
+        parameter = FurikomiItakushaKoseiMapperParameter.createSelectByKeyParam(null, SubGyomuCode.DBC介護給付, 業務内区分, null, null, null);
+        FurikomiGroupItakushaItakushaKoseiFinder finder = FurikomiGroupItakushaItakushaKoseiFinder.createInstance();
+        list = finder.getFurikomiGroupItakushItakushKosei(parameter);
+        return list;
+    }
 }

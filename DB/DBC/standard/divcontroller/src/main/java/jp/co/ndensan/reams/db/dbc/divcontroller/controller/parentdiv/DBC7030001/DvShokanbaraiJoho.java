@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7030001.DvS
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7030001.DvShokanbaraiJohoValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.dvshokanbaraijoho.DvShokanbaraiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -51,6 +52,31 @@ public class DvShokanbaraiJoho {
         ViewStateHolder.put(ViewStateKeys.市町村判定, 市町村判定);
         div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
         return createResponse(div);
+    }
+
+    /**
+     * 条件を保存するボタンのメソッドです。
+     *
+     * @param div DvShokanbaraiJohoDiv
+     * @return ResponseData
+     */
+    public ResponseData<BatchParameterMap> onClick_btnShokanParamSave(DvShokanbaraiJohoDiv div) {
+        RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        responseData.data = new BatchParameterMap(getHandler(div).setBatchParamter(市町村判定));
+        return responseData;
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     *
+     * @param div DvShokanbaraiJohoDiv
+     * @return ResponseData
+     */
+    public ResponseData<DvShokanbaraiJohoDiv> onClick_btnShokanParamRestore(DvShokanbaraiJohoDiv div) {
+        RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
+        getHandler(div).pamaRestore(市町村判定);
+        return ResponseData.of(div).respond();
     }
 
     /**
