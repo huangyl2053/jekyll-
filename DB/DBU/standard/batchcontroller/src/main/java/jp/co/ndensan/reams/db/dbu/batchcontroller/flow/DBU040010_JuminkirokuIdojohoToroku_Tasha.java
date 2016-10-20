@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.batchcontroller.flow.kaigojuminhyotruku;
+package jp.co.ndensan.reams.db.dbu.batchcontroller.flow;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.kaigojuminhyotruku.KaigojuminHyotrukuDBUpdateProcess;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyotruku.KaigojuminHyotrukuBatchParameter;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU040010.KaigojuminHyotrukuDBUpdateProcess;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU040010.DBU040010_JuminkirokuIdojohoToroku_TashaParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojuminhyotruku.KaigojuminHyotrukuProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
  *
  * @reamsid_L DBA-1400-020 wanghui
  */
-public class KaigojuminHyotrukufFlow extends BatchFlowBase<KaigojuminHyotrukuBatchParameter> {
+public class DBU040010_JuminkirokuIdojohoToroku_Tasha extends BatchFlowBase<DBU040010_JuminkirokuIdojohoToroku_TashaParameter> {
 
     private static final String KAIGOJUMINHYO_DB_UPD_PROCESS = "KaigojuminHyotrukuDBUpdateProcess";
     private KaigojuminHyotrukuProcessParameter processParameter;
