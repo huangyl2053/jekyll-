@@ -6,13 +6,13 @@
 package jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi;
 
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.IkenshokinyuyoshiReportSource;
-import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
+import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 要介護認定主治医意見書記入用紙-片面-白黒Builderのインターフェースクラスです。
+ * 要介護認定主治医意見書記入用紙OCRエディターのインターフェースクラスです。
  *
  * @reamsid_L DBE-0050-030 xuyannan
  */
-public interface IIkenshokinyuyoshiBuilder extends IReportBuilder<IkenshokinyuyoshiReportSource> {
+public interface IIkenshokinyuyoshiOCREditor extends IReportEditor<IkenshokinyuyoshiReportSource> {
 
 }

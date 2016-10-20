@@ -9,10 +9,10 @@ import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.Ikenshokinyuyo
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 要介護認定主治医意見書記入用紙-片面-白黒Builderのインターフェースクラスです。
+ * 要介護認定主治医意見書記入用紙OCRBuilderのインターフェースクラスです。
  *
  * @reamsid_L DBE-0050-030 xuyannan
  */
-public interface IIkenshokinyuyoshiBuilder extends IReportBuilder<IkenshokinyuyoshiReportSource> {
+public interface IIkenshokinyuyoshiOCRBuilder extends IReportBuilder<IkenshokinyuyoshiReportSource> {
 
 }
