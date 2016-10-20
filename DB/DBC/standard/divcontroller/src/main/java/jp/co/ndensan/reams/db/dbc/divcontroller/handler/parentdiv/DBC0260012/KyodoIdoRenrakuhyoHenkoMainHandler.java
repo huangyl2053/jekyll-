@@ -301,7 +301,7 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
         if (論理削除フラグ) {
             save論理削除フラグ_TRUE(初期受給者異動情報, チェック状態, 基本_履歴番号, 償還_履歴番号, 高額_履歴番号);
         } else {
-            set論理削除フラグ_FALSE(初期受給者異動情報, 訂正項目の判定, 対象者一覧, entity, チェック状態, 共通項目Entity, 被保険者番号,
+            set論理削除フラグ_FALSE(訂正項目の判定, 対象者一覧, entity, チェック状態, 共通項目Entity, 被保険者番号,
                     基本_履歴番号, 償還_履歴番号, 高額_履歴番号, is基本送付活性, is償還送付活性, is高額送付活性,
                     is基本送付_追加, is償還送付_追加, is高額送付_追加, is基本送付_削除, is償還送付_削除, is高額送付_削除);
         }
@@ -309,8 +309,7 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
         前排他キーの解除(被保険者番号.getColumnValue());
     }
 
-    private void set論理削除フラグ_FALSE(KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期受給者異動情報,
-            int 訂正項目の判定,
+    private void set論理削除フラグ_FALSE(int 訂正項目の判定,
             KyodoJukyushaTaishoshaEntity 対象者一覧,
             KyodoshoriyoJukyushaIdoRenrakuhyoParam entity,
             List<RString> チェック状態,
