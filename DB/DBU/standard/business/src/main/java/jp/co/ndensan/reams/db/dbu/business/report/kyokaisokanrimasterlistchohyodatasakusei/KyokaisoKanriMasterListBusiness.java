@@ -114,21 +114,21 @@ public class KyokaisoKanriMasterListBusiness {
          */
         生年月日(new RString("0012"), new RString(""), new RString("\"PSM_seinengappiYMD\"")),
         /**
-         * 証記載保険者番号
-         */
-        証記載保険者番号(new RString("0103"), new RString(""), new RString("\"DbT1006Kyo.shoKisaiHokenshaNo\"")),
-        /**
          * 被保険者番号
          */
         被保険者番号(new RString("0104"), new RString(""), new RString("\"DbT1006Kyo.hihokenshaNo\"")),
         /**
+         * 市町村コード
+         */
+        市町村コード(new RString("0016"), new RString(""), new RString("\"DbT1001Hiho.shichosonCode\"")),
+        /**
          * 境界層該当申請日
          */
-        境界層該当申請日(new RString("0117"), new RString(""), new RString("kyokaisoGaitoShinseiYMD\"")),
+        境界層該当申請日(new RString("0117"), new RString(""), new RString("DbT1013Kyo.shinseiYMD\"")),
         /**
          * 境界層該当開始日
          */
-        境界層該当開始日(new RString("0118"), new RString(""), new RString("kyokaisoGaitoKaishiYMD\""));
+        境界層該当開始日(new RString("0118"), new RString(""), new RString("DbT1006Kyo.tekiyoKaishiYMD\""));
         private final RString 項目ID;
         private final RString フォームフィールド名;
         private final RString myBatis項目名;

@@ -23,6 +23,5 @@ public class KyokaisogGaitoshaListEntity {
     private RString 市町村名;
     private List<RString> 並び順;
     private List<RString> 改頁;
-    private List<KyokaisogGaitoshaRelateEntity> kyokaisokanrimasterList;
-
+    private KyokaisogGaitoshaRelateEntity entity;
 }
