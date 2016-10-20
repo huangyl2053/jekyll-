@@ -344,7 +344,7 @@ public class HokenshaSofuListHandler {
             }
         }
 
-        if (kanri != null && !(審査年月の翌月 != null && 審査年月の翌月.isEmpty() && kanri.get処理状態区分().equals(取消3))) {
+        if (kanri != null && !(審査年月の翌月 != null || 審査年月の翌月.isEmpty() || kanri.get処理状態区分().equals(取消3))) {
             取込漏れ確認チェック(file, データ種別, kanri);
             国保連取込漏れ確認チェック(file);
             国保連取込順序逆転確認チェック(file);
@@ -375,18 +375,25 @@ public class HokenshaSofuListHandler {
                     && myBatisParameter.get同月過誤取下分フラグ()
                     && faceKanri.getコントロール上処理年月() != null
                     && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
-                if (!コントロールレコード.get(三).isEmpty()
-                        && faceKanri.getコントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())
-                        && !ResponseHolder.isReRequest()) {
-                    return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込済二重取込続行確認.getMessage()
-                            .replace(処理年月.toString(), ConfigKeysKokuhorenTorikomi.toValue(データ種別).toString())).respond();
-                }
-                if (new RString(DbcQuestionMessages.国保連取込済二重取込続行確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                    deleteEntitys(file);
-                    return ResponseData.of(div).respond();
-                }
+                return 二重取込チェックnew(データ種別, file, faceKanri, コントロールレコード);
             }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<JyusinDataBaitaiTorikomuDiv> 二重取込チェックnew(
+            RString データ種別, FileData file, KokuhorenInterfaceKanri faceKanri, List<RString> コントロールレコード)
+            throws NumberFormatException, ApplicationException {
+        if (!コントロールレコード.get(三).isEmpty()
+                && faceKanri.getコントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())
+                && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込済二重取込続行確認.getMessage()
+                    .replace(処理年月.toString(), ConfigKeysKokuhorenTorikomi.toValue(データ種別).toString())).respond();
+        }
+        if (new RString(DbcQuestionMessages.国保連取込済二重取込続行確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            deleteEntitys(file);
+            return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
     }
