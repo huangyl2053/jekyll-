@@ -85,6 +85,8 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
     private FlexibleDate 年齢Fromから逆算した生年月日;
     private FlexibleDate 年齢Toから逆算した生年月日;
 
+    private RString 出力順;
+
     /**
      * コンストラクタです。
      *
@@ -98,6 +100,7 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
      * @param 喪失区分 喪失区分
      * @param shikibetsutaishoParam 宛名識別対象PSM
      * @param psmAtesaki 宛名識別対象PSM
+     * @param 出力順 出力順
      */
     public GeneralPurposeListOutputMybatisParameter(ChushutsuHohoKubun 抽出方法区分,
             RString 抽出項目区分,
@@ -108,9 +111,11 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
             AtenaSelectBatchParameter 宛名抽出条件,
             SoshitsuKubun 喪失区分,
             UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam,
-            RString psmAtesaki) {
+            RString psmAtesaki,
+            RString 出力順) {
         this.psmAtesaki = psmAtesaki;
         this.shikibetsutaishoParam = shikibetsutaishoParam;
+        this.出力順 = 出力順;
         is直近データ抽出 = 直近データ抽出;
         kijunYMD = 基準日;
         set抽出方法区分について(抽出方法区分, 抽出項目区分, 直近データ抽出,

@@ -88,7 +88,8 @@ public class DBD710150_HanyoListShisetsuNyutaishoParameter extends BatchParamete
                 日付スラッシュ付加,
                 宛名抽出条件,
                 出力順,
-                出力項目);
+                出力項目,
+                cyohyoid);
     }
 
 }
