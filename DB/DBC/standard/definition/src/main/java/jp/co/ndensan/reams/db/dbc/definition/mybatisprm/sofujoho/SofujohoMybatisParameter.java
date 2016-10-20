@@ -21,6 +21,7 @@ public final class SofujohoMybatisParameter {
     private final RString 送付年月;
     private final RString 申立書区分コード;
     private final RString 証記載保険者番号;
+    private final RString psmShikibetsuTaisho;
 
     /**
      * コンストラクタです。
@@ -30,14 +31,16 @@ public final class SofujohoMybatisParameter {
      * @param 送付年月フラグ 送付年月フラグ
      * @param 保険者番号フラグ 保険者番号フラグ
      * @param 証記載保険者番号 証記載保険者番号
+     * @param psmShikibetsuTaisho 宛名
      */
     protected SofujohoMybatisParameter(RString 送付年月, RString 申立書区分コード,
-            boolean 送付年月フラグ, boolean 保険者番号フラグ, RString 証記載保険者番号) {
+            boolean 送付年月フラグ, boolean 保険者番号フラグ, RString 証記載保険者番号, RString psmShikibetsuTaisho) {
         this.送付年月 = 送付年月;
         this.申立書区分コード = 申立書区分コード;
         this.送付年月フラグ = 送付年月フラグ;
         this.保険者番号フラグ = 保険者番号フラグ;
         this.証記載保険者番号 = 証記載保険者番号;
+        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
     /**
@@ -48,10 +51,11 @@ public final class SofujohoMybatisParameter {
      * @param 送付年月フラグ 送付年月フラグ
      * @param 保険者番号フラグ 保険者番号フラグ
      * @param 証記載保険者番号 証記載保険者番号
+     * @param psmShikibetsuTaisho 宛名
      * @return パラメータ
      */
     public static SofujohoMybatisParameter creatParameter(RString 送付年月, RString 申立書区分コード,
-            boolean 送付年月フラグ, boolean 保険者番号フラグ, RString 証記載保険者番号) {
-        return new SofujohoMybatisParameter(送付年月, 申立書区分コード, 送付年月フラグ, 保険者番号フラグ, 証記載保険者番号);
+            boolean 送付年月フラグ, boolean 保険者番号フラグ, RString 証記載保険者番号, RString psmShikibetsuTaisho) {
+        return new SofujohoMybatisParameter(送付年月, 申立書区分コード, 送付年月フラグ, 保険者番号フラグ, 証記載保険者番号, psmShikibetsuTaisho);
     }
 }
