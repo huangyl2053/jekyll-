@@ -307,7 +307,7 @@ public class HanyoListKokiKoreishaProcess extends BatchProcessBase<HanyoRisutoKo
         IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
                 Long.valueOf(processParamter.getSyutsuryokujun().toString()));
         RString 出力順 = MyBatisOrderByClauseCreator.create(HanyoListKokiKoreishaOrderby.class, order);
-        return 出力順.concat(",後期高齢者情報_識別コード，後期高齢者情報_履歴番号");
+        return 出力順.concat(",後期高齢者情報_識別コード,後期高齢者情報_履歴番号");
     }
 
     private PersonalData toPersonalData(HanyoRisutoKokiKoreishaEntity entity) {
