@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.servicecodebetsuriyojokyo.Serv
 import jp.co.ndensan.reams.db.dbc.business.report.servicecoderiyojokyo.ServicecodeRiyojokyoReport;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicecoderiyojokyo.ServicecodeRiyojokyoReportEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.servicecodebetsuriyojokyo.ServiceCodeBetsuRiyoJokyoSource;
@@ -43,7 +44,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
  * @reamsid_L DBC-3340-030 jiangxiaolong
  */
 public class IchiranServicecodeRiyojokyoProcess
-        extends BatchKeyBreakBase<DbWT3470chohyouShutsuryokuyouTempEntity> {
+        extends BatchKeyBreakBase<DbWT3470chohyouShutsuryokuyouEntity> {
 
     private KyufuJissekiMeisaiGetProcessParameter parameter;
     private static final RString READ_DATA_ID
@@ -55,6 +56,8 @@ public class IchiranServicecodeRiyojokyoProcess
             + ", \"DbWT3470chohyouShutsuryokuyou\".\"sortYouKomokuCode\" ASC");
     private static final RString 対象年月指定_サービス対象年月 = new RString("00");
     private static final RString 対象年月指定_審査年月 = new RString("01");
+    private static final RString サービス種類_00 = new RString("00");
+    private static final RString サービス種類_すべて = new RString("すべて");
     private static final RString 提供月 = new RString("提供月：");
     private static final RString 審査月 = new RString("審査月：");
     private static final RString 選択対象_町域 = new RString("町域");
@@ -92,6 +95,7 @@ public class IchiranServicecodeRiyojokyoProcess
     private RString currentサービス種類スコード;
     private RString beforeソート用サービス項目コード;
     private RString currentソート用サービス項目コード;
+    private RString サービス種類名称;
     private DbWT3470chohyouShutsuryokuyouTempEntity beforeEntity;
     private DbWT3470chohyouShutsuryokuyouTempEntity currentEntity;
     private Decimal nissuKaisuSyukeichi_01;
@@ -166,12 +170,13 @@ public class IchiranServicecodeRiyojokyoProcess
     }
 
     @Override
-    protected void usualProcess(DbWT3470chohyouShutsuryokuyouTempEntity entity) {
-        currentサービス種類スコード = entity.getServiceShuruiCode();
-        currentソート用サービス項目コード = entity.getSortYouKomokuCode();
-        currentEntity = entity;
+    protected void usualProcess(DbWT3470chohyouShutsuryokuyouEntity entity) {
+        サービス種類名称 = entity.getサービス種類名称();
+        currentEntity = entity.get帳票出力();
+        currentサービス種類スコード = currentEntity.getServiceShuruiCode();
+        currentソート用サービス項目コード = currentEntity.getSortYouKomokuCode();
         count = count + INT_1;
-        beforeEntity = getBefore();
+        beforeEntity = getBefore().get帳票出力();
         if (beforeEntity != null) {
             beforeサービス種類スコード = beforeEntity.getServiceShuruiCode();
             beforeソート用サービス項目コード = beforeEntity.getSortYouKomokuCode();
@@ -196,7 +201,7 @@ public class IchiranServicecodeRiyojokyoProcess
     }
 
     @Override
-    protected void keyBreakProcess(DbWT3470chohyouShutsuryokuyouTempEntity t) {
+    protected void keyBreakProcess(DbWT3470chohyouShutsuryokuyouEntity t) {
     }
 
     private void set明細(DbWT3470chohyouShutsuryokuyouTempEntity entity) {
@@ -334,7 +339,11 @@ public class IchiranServicecodeRiyojokyoProcess
         } else if (対象年月指定_審査年月.equals(parameter.get対象年月指定())) {
             reportEntity.set条件１(get条件１(審査月));
         }
-        reportEntity.set条件２(parameter.get対象サービス種類());
+        if (サービス種類_00.equals(parameter.get対象サービス種類())) {
+            reportEntity.set条件２(サービス種類_すべて);
+        } else {
+            reportEntity.set条件２(サービス種類名称);
+        }
         if (選択対象_町域.equals(parameter.get選択対象())) {
             reportEntity.set条件３(get条件３(町域));
         } else if (選択対象_地区１.equals(parameter.get選択対象())) {
@@ -398,7 +407,11 @@ public class IchiranServicecodeRiyojokyoProcess
             } else if (対象年月指定_審査年月.equals(parameter.get対象年月指定())) {
                 reportEntity.set条件１(get条件１(審査月));
             }
-            reportEntity.set条件２(parameter.get対象サービス種類());
+            if (サービス種類_00.equals(parameter.get対象サービス種類())) {
+                reportEntity.set条件２(サービス種類_すべて);
+            } else {
+                reportEntity.set条件２(サービス種類名称);
+            }
             if (選択対象_町域.equals(parameter.get選択対象())) {
                 reportEntity.set条件３(get条件３(町域));
             } else if (選択対象_地区１.equals(parameter.get選択対象())) {

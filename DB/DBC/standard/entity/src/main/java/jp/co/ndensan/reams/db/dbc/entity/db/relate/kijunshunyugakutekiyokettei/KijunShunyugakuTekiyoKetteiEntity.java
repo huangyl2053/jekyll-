@@ -5,17 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kijunshunyugakutekiyokettei;
 
-import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 基準収入額適用管理entityクラスです。
@@ -25,7 +29,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KijunShunyugakuTekiyoKetteiEntity implements Serializable {
+public class KijunShunyugakuTekiyoKetteiEntity extends
+        DbTableEntityBase<KijunShunyugakuTekiyoKetteiEntity> implements IDbAccessable {
 
     private SetaiCode 世帯コード;
     private FlexibleYear 年度;
@@ -39,8 +44,8 @@ public class KijunShunyugakuTekiyoKetteiEntity implements Serializable {
     private boolean 宛先印字対象者フラグ;
     private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
     private UaFt250FindAtesakiEntity 宛先Entity;
-    private RString 郵便番号;
-    private RString 町域コード;
-    private RString 行政区コード;
-    private RString 市町村コード;
+    private YubinNo 郵便番号;
+    private ChoikiCode 町域コード;
+    private GyoseikuCode 行政区コード;
+    private LasdecCode 市町村コード;
 }

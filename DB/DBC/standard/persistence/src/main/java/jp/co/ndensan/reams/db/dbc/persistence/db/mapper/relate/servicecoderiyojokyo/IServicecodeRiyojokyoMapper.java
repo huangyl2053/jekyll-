@@ -4,7 +4,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.ChohyouShutsuryokuyouTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470ToukeihyoMeisaichukanTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470shoriKekkaListTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.HihokenshaShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.KyufuJissekiMeisaiEntity;
@@ -77,7 +77,7 @@ public interface IServicecodeRiyojokyoMapper {
      * @param parameter KyufuJissekiMeisaiGetMybatisParameter
      * @return DbWT3470chohyouShutsuryokuyouTempEntity
      */
-    List<DbWT3470chohyouShutsuryokuyouTempEntity> get帳票出力用一時TBL出力順(KyufuJissekiMeisaiGetMybatisParameter parameter);
+    List<DbWT3470chohyouShutsuryokuyouEntity> get帳票出力用一時TBL出力順(KyufuJissekiMeisaiGetMybatisParameter parameter);
 
     /**
      * 処理結果リストの取得

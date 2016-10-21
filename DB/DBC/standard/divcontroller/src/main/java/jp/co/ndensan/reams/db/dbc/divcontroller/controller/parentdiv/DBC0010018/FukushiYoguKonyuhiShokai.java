@@ -10,6 +10,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiFukushiYoguHanbaihiBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiFukushiYoguHanbaihiJyohou;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKihonJyohou;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010018.DBC0010018TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010018.FukushiYoguKonyuhiShokaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010018.FukushiYoguKonyuhiShokaiHandler;
@@ -41,7 +44,7 @@ public class FukushiYoguKonyuhiShokai {
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         FlexibleYearMonth サービス提供年月
                 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
-        KyufujissekiKihon 給付実績基本情報 = 給付実績情報照会情報.getCsData_A().get(INT_ZERO);
+        KyufujissekiKihon 給付実績基本情報 = getCsData_A();
         RString 整理番号 = 給付実績基本情報.get整理番号();
         NyuryokuShikibetsuNo 識別番号検索キー = 給付実績基本情報.get入力識別番号();
         div.getCcdKyufuJissekiHeader().initialize(
@@ -54,7 +57,7 @@ public class FukushiYoguKonyuhiShokai {
         if (!識別番号管理データリスト.isEmpty()) {
             getHandler(div).setButton(識別番号管理データリスト.get(0));
         }
-        getHandler(div).onLoad(給付実績情報照会情報.getCsData_G(), 整理番号, div.getCcdKyufuJissekiHeader().get事業者番号(),
+        getHandler(div).onLoad(getCsData_G(), 整理番号, div.getCcdKyufuJissekiHeader().get事業者番号(),
                 div.getCcdKyufuJissekiHeader().get様式番号(), サービス提供年月.toDateString());
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
@@ -76,7 +79,7 @@ public class FukushiYoguKonyuhiShokai {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         getHandler(div).change事業者(new RString("前事業者"),
                 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2(),
-                給付実績情報照会情報.getCsData_G());
+                getCsData_G());
         return ResponseData.of(div).respond();
     }
 
@@ -90,7 +93,7 @@ public class FukushiYoguKonyuhiShokai {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         getHandler(div).change事業者(new RString("後事業者"),
                 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2(),
-                給付実績情報照会情報.getCsData_G());
+                getCsData_G());
         return ResponseData.of(div).respond();
     }
 
@@ -102,10 +105,10 @@ public class FukushiYoguKonyuhiShokai {
      */
     public ResponseData<FukushiYoguKonyuhiShokaiDiv> onClick_btnZengetsu(FukushiYoguKonyuhiShokaiDiv div) {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        KyufujissekiKihon 給付実績基本情報 = 給付実績情報照会情報.getCsData_A().get(INT_ZERO);
+        KyufujissekiKihon 給付実績基本情報 = getCsData_A();
         RString 整理番号 = 給付実績基本情報.get整理番号();
         NyuryokuShikibetsuNo 識別番号検索キー = 給付実績基本情報.get入力識別番号();
-        getHandler(div).change年月(new RString("前月"), 給付実績情報照会情報.getCsData_G(),
+        getHandler(div).change年月(new RString("前月"), getCsData_G(),
                 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2(),
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
                 整理番号,
@@ -124,10 +127,10 @@ public class FukushiYoguKonyuhiShokai {
      */
     public ResponseData<FukushiYoguKonyuhiShokaiDiv> onClick_btnJigetsu(FukushiYoguKonyuhiShokaiDiv div) {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        KyufujissekiKihon 給付実績基本情報 = 給付実績情報照会情報.getCsData_A().get(INT_ZERO);
+        KyufujissekiKihon 給付実績基本情報 = getCsData_A();
         RString 整理番号 = 給付実績基本情報.get整理番号();
         NyuryokuShikibetsuNo 識別番号検索キー = 給付実績基本情報.get入力識別番号();
-        getHandler(div).change年月(new RString("次月"), 給付実績情報照会情報.getCsData_G(),
+        getHandler(div).change年月(new RString("次月"), getCsData_G(),
                 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2(),
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
                 整理番号,
@@ -270,5 +273,15 @@ public class FukushiYoguKonyuhiShokai {
 
     private FukushiYoguKonyuhiShokaiHandler getHandler(FukushiYoguKonyuhiShokaiDiv div) {
         return new FukushiYoguKonyuhiShokaiHandler(div);
+    }
+
+    private KyufujissekiKihon getCsData_A() {
+        return ViewStateHolder.get(ViewStateKeys.給付実績基本情報,
+                KyufujissekiKihonJyohou.class).getCsData_A().get(INT_ZERO);
+    }
+
+    private List<KyufujissekiFukushiYoguHanbaihiBusiness> getCsData_G() {
+        return ViewStateHolder.get(ViewStateKeys.給付実績福祉用具情報,
+                KyufujissekiFukushiYoguHanbaihiJyohou.class).getCsData_G();
     }
 }
