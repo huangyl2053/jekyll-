@@ -41,7 +41,7 @@ public class HihokenshaTempEntity extends DbTableEntityBase<HihokenshaTempEntity
     @TempTableColumnOrder(6)
     private FlexibleYearMonth exServiceTeikyoYm;
     @TempTableColumnOrder(7)
-    private boolean henkanFlag;
+    private RString henkanFlag;
     @TempTableColumnOrder(8)
     private RString oldShichosonCode;
     @TempTableColumnOrder(9)
