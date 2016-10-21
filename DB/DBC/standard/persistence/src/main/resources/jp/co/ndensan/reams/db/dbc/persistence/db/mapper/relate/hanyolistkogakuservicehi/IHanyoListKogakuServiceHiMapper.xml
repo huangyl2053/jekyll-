@@ -395,7 +395,7 @@
             AND ((DbV1001."koikinaiJushochiTokureiFlag" = '1' AND DbV1001."koikinaiTokureiSochimotoShichosonCode"  = #{kouseiShichosonCode})
             OR (DbV1001."koikinaiJushochiTokureiFlag" != '1' AND DbV1001."shichosonCode"  = #{kouseiShichosonCode}))
         </if>
-        ) as A ${出力順})
+        ) as A )
         
         SELECT
         master.*,
@@ -412,6 +412,7 @@
         master
         ))AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode"=master."shikibetsuCode"
+        ${出力順}
     </sql>
 
     <resultMap id="resultMap_HanyouRisutoSyuturyokuEntity" autoMapping="true"
@@ -1073,7 +1074,7 @@
             AND ((DbV1001."koikinaiJushochiTokureiFlag" = '1' AND DbV1001."koikinaiTokureiSochimotoShichosonCode"  = #{kouseiShichosonCode})
             OR (DbV1001."koikinaiJushochiTokureiFlag" != '1' AND DbV1001."shichosonCode"  = #{kouseiShichosonCode}))
         </if>
-        ) as A ${出力順})
+        ) as A )
         
         SELECT
         master.*,
@@ -1090,6 +1091,7 @@
         master
         ))AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode"=master."shikibetsuCode"
+        ${出力順}
     </sql>
 
     <sql id="kozaSearchModeResult">
