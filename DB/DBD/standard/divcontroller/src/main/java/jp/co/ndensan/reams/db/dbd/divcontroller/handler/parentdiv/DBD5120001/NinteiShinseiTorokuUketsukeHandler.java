@@ -68,6 +68,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoF
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ur.urz.business.core.zenkokujusho.ZenkokuJushoItem;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.IZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -92,6 +94,11 @@ import jp.co.ndensan.reams.uz.uza.util.CountedItem;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
+
+
+
+
+import jp.co.ndensan.reams.ur.urz.service.core.zenkokujusho.*;
 
 /**
  * 要介護認定申請受付画面のHandlerクラスです。
@@ -192,8 +199,10 @@ public class NinteiShinseiTorokuUketsukeHandler {
             this.set延期タブ表示用の情報(result);
             div.setHdnRirekiNo(result.getEntity().get履歴番号());
             div.setHdnEdaban(result.getEntity().get枝番());
-            // TODO 初回表示時エラーとなるため一時コメントアウト　修正表示で必要になるかも
-//            div.setHdnJukyuShinseiJiyu(result.getEntity().get受給申請事由().getColumnValue());
+            // TODO 初回表示時エラーとなるため一時コメントアウト　修正表示で必要になるかも  ---　龍野
+            if(表示パターン_申請中.equals(表示パターン)){ //仕様書より、パターンが1=申請中の場合のみ読み取る
+                div.setHdnJukyuShinseiJiyu(result.getEntity().get受給申請事由().getColumnValue());
+            }
         }
         div.setHdnRenrakusakiReadOnly(new RString("0"));
         div.setHdnShichosonCode(市町村コード);
@@ -1906,8 +1915,22 @@ public class NinteiShinseiTorokuUketsukeHandler {
             iNinteiShinseiTodokedeshaDiv.getTxtTelNo().setDomain(電話番号);
 
             YubinNo 郵便番号 = result.getEntity().get申請届出者郵便番号();
-            // TODO 申請情報ロード時にエラー。住所コード11桁の文字列か空白を指定してください。ロード時に必要ないため一時コメントアウト
-            // iNinteiShinseiTodokedeshaDiv.getCcdZenkokuJushoInput().load(new ZenkokuJushoCode(result.getEntity().get申請届出者住所()), 郵便番号);
+            // TODO 申請情報ロード時にエラー。住所コード11桁の文字列か空白を指定してください。ロード時に必要ないため一時コメントアウト  ---　龍野
+//            iNinteiShinseiTodokedeshaDiv.getCcdZenkokuJushoInput().load(new ZenkokuJushoCode(result.getEntity().get申請届出者住所()), 郵便番号);
+//            
+//            IZenkokuJushoInputDiv test = iNinteiShinseiTodokedeshaDiv.getCcdZenkokuJushoInput();
+//            RString 申請届出者住所 = result.getEntity().get申請届出者住所();
+//            
+//            //TODO 郵便番号から全国住所コードをとる。又はそれ以外の方法で全国住所コードをとる。
+//            IZenkokuJushoFinder finder = ZenkokuJushoFinderFactory.createInstance();
+//            List<ZenkokuJushoItem> zenkokuJushoItemList = finder.get全国住所by郵便番号(郵便番号);
+//            ZenkokuJushoCode code = null;
+//            if(zenkokuJushoItemList.size() > 0){
+//                ZenkokuJushoItem zi = zenkokuJushoItemList.get(0);
+//                code = zi.get全国住所コード(); //11桁来ない
+//            }
+////            ZenkokuJushoCode 全国住所コード = new ZenkokuJushoCode(申請届出者住所); //本来ほしいのは全国住所コード自体。ZenkokuJushoCodeはただの入れ物に近い
+//            test.load(code, 郵便番号);
         }
     }
 
