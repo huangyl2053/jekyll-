@@ -195,5 +195,57 @@
             LIMIT #{saidaiHyojiKensu}
         </if>
     </select>
+    <select resultOrdered="true" id="getChosaItakusaki" resultMap="resultMap_getKijuntsukiShichosonjoho"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter" fetchSize="500">
+        SELECT
+        DbT5910."ninteichosaItakusakiCode" as "DbT4910_ninteichosaItakusakiCode" ,
+        DbT5910."jigyoshaMeisho" as "DbT4910_jigyoshaMeisho",
+        DbT5910."jigyoshaMeishoKana" as"DbT4910_jigyoshaMeishoKana" ,
+        DbT5910."chosaItakuKubun" as "DbT4910_chosaItakuKubun" ,
+        DbT5910."jokyoFlag" as "DbT4910_jokyoFlag",
+        DbT5910."shichosonCode" as "DbT4910_shichosonCode"
+        FROM
+        rgdb."DbT5910NinteichosaItakusakiJoho" as DbT5910
+        <where>
+         <if test="市町村コードフラグ">
+           AND  DbT5910."shichosonCode" =#{市町村コード}
+        </if>
+        <if test="認定調査委託先コードFROMフラグ">
+            AND
+            DbT5910."ninteichosaItakusakiCode"<![CDATA[>=]]> #{認定調査委託先コードFROM}
+        </if>
+        <if test="認定調査委託先コードToフラグ">
+            AND
+            DbT5910."ninteichosaItakusakiCode"<![CDATA[<=]]> #{認定調査委託先コードTo}
+        </if>
+        <if test="認定調査状況フラグ">
+            AND
+            DbT5910."jokyoFlag" = TRUE
+        </if>
+        <if test="認定調査状況無効フラグ">
+            AND
+            DbT5910."jokyoFlag" = FALSE
+        </if>
+        <if test="認定調査委託先名称フラグ">
+            AND
+            DbT5910."jigyoshaMeisho" LIKE '%'||#{認定調査委託先名称}||'%'
+        </if>
+        <if test="認定調査委託先カナフラグ">
+            AND
+            DbT5910."jigyoshaMeishoKana"  LIKE '%'||#{認定調査委託先カナ}||'%'
+        </if>
+        <if test="認定調査区分フラグ">
+            AND
+            DbT5910."chosaItakuKubun" = #{認定調査区分}
+        </if>
+        <if test="地区コードフラグ">
+            AND
+            DbT5910."waritsukeChiku"  LIKE '%'||#{地区コード}||'%'
+        </if>    
+        </where>
+        <if test="usesSaidaiHyojiKensu" >
+            LIMIT #{saidaiHyojiKensu}
+        </if>
+    </select>
 </mapper>
 

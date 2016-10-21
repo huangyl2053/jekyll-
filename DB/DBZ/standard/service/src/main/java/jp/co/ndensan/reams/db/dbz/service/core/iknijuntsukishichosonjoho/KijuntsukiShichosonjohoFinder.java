@@ -77,4 +77,23 @@ public class KijuntsukiShichosonjohoFinder {
         }
         return SearchResult.of(kojinJokyoShokaiList, 0, false);
     }
+    
+    /**
+     * 画面の検索条件より、適当な条件を連結して、調査委託先情報を検索する。
+     *
+     * @param parametere INinteichosaItakusakiJohoParameter
+     * @return 調査委託先調査員情報
+     */
+    @Transaction
+    public SearchResult<KijuntsukiShichosonjoho> getChosaItakusaki(ChosaItakusakiAndChosainGuideParameter parametere) {
+        requireNonNull(parametere, UrSystemErrorMessages.値がnull.getReplacedMessage("パラメーター"));
+        IChosaItakusakiAndChosainGuideMapper mapper = mapperProvider.create(IChosaItakusakiAndChosainGuideMapper.class);
+        List<IKijuntsukiShichosonjohoRelateEntity> juntsukiShichosonjohoList;
+        juntsukiShichosonjohoList = mapper.getChosaItakusaki(parametere);
+        List<KijuntsukiShichosonjoho> kojinJokyoShokaiList = new ArrayList();
+        for (IKijuntsukiShichosonjohoRelateEntity entity : juntsukiShichosonjohoList) {
+            kojinJokyoShokaiList.add(new KijuntsukiShichosonjoho(entity));
+        }
+        return SearchResult.of(kojinJokyoShokaiList, 0, false);
+    }
 }
