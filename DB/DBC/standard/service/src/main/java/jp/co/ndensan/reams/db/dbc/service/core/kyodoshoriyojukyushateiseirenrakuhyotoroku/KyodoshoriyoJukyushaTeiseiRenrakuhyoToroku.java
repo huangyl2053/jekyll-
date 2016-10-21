@@ -84,12 +84,21 @@ public class KyodoshoriyoJukyushaTeiseiRenrakuhyoToroku {
         KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity 出力用共同処理受給者訂正情報Entity = new KyodoShoriJukyushaTeiseiRenrakuhyoResultEntity();
         if (モード_訂正.equals(画面モード)
                 && 訂正区分_訂正.equals(divEntity.get共通項目Entity().get訂正区分())) {
+            KyodoShoriyoJukyushaIdoKihonSofu 基本送付 = null;
             DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本送付Entity = dbT3002dac.select基本送付ByKey(被保険者番号, 異動日, 履歴番号);
-            KyodoShoriyoJukyushaIdoKihonSofu 基本送付 = new KyodoShoriyoJukyushaIdoKihonSofu(基本送付Entity);
+            if (基本送付Entity != null) {
+                基本送付 = new KyodoShoriyoJukyushaIdoKihonSofu(基本送付Entity);
+            }
+            KyodoShoriyoJukyushaIdoShokanSofu 償還送付 = null;
             DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity 償還送付Entity = dbT3003dac.select償還送付ByKey(被保険者番号, 異動日, 履歴番号);
-            KyodoShoriyoJukyushaIdoShokanSofu 償還送付 = new KyodoShoriyoJukyushaIdoShokanSofu(償還送付Entity);
+            if (償還送付Entity != null) {
+                償還送付 = new KyodoShoriyoJukyushaIdoShokanSofu(償還送付Entity);
+            }
+            KyodoShoriyoJukyushaIdoKogakuSofu 高額送付 = null;
             DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額送付Entity = dbT3004dac.select高額送付ByKey(被保険者番号, 異動日, 履歴番号);
-            KyodoShoriyoJukyushaIdoKogakuSofu 高額送付 = new KyodoShoriyoJukyushaIdoKogakuSofu(高額送付Entity);
+            if (高額送付Entity != null) {
+                高額送付 = new KyodoShoriyoJukyushaIdoKogakuSofu(高額送付Entity);
+            }
             出力用共同処理受給者訂正情報Entity = get訂正情報Entity(divEntity, 基本送付, 償還送付, 高額送付, 基本送付flag, 償還送付flag, 高額送付flag);
 
         } else if (モード_訂正.equals(画面モード)
