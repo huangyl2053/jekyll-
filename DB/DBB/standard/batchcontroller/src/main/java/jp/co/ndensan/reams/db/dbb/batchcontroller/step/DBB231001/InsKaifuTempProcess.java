@@ -51,6 +51,7 @@ public class InsKaifuTempProcess extends BatchProcessBase<
     private static final RString 特徴制度間IF全件作成 = new RString("DBBMN84002");
     private static final RString 特徴制度間IF作成 = new RString("DBBMN84001");
     private RString path;
+    private boolean 月4開始_待機FLG = false;
     private static final RString T_特徴回付情報TMP = new RString("NenkinTokuchoKaifuJohoTemp");
     private TokuchoSeidokanIFSakuseiDBUpdateProcessParameter parameter;
     private TokuchoSeidokanIFSakuseiMyBatisParameter param;
@@ -65,7 +66,6 @@ public class InsKaifuTempProcess extends BatchProcessBase<
         FlexibleYear 入力処理年度 = null;
         RString 通知内容コード = null;
         RString 捕捉月 = RString.EMPTY;
-        boolean 月4開始_待機FLG = false;
         RString 遷移元メニュー = parameter.get遷移元メニュー();
         if (月4開始_待機.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課))
                 || 月4開始_待機.equals(
@@ -81,7 +81,7 @@ public class InsKaifuTempProcess extends BatchProcessBase<
             捕捉月 = 月2;
         } else if (月10.equals(特徴開始月数)) {
             if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
-                aaa(月4開始_待機FLG);
+                path = MAPPERPATH.concat(SELECTOCT);
             }
             入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
             通知内容コード = RS00;
@@ -135,17 +135,12 @@ public class InsKaifuTempProcess extends BatchProcessBase<
 
     @Override
     protected IBatchReader createReader() {
+        param.set四月待機フラグ(月4開始_待機FLG);
         return new BatchDbReader(path, param);
     }
 
     @Override
     protected void process(UeT0511NenkinTokuchoKaifuJohoEntity entity) {
         特徴回付情報Temp.insert(entity);
-    }
-
-    private void aaa(boolean 月4開始_待機FLG) {
-        if (月4開始_待機FLG) {
-            path = MAPPERPATH.concat(SELECTOCT);
-        }
     }
 }
