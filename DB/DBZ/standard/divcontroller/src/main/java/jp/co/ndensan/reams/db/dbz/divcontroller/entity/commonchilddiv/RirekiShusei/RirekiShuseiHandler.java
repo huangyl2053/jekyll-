@@ -382,7 +382,8 @@ public class RirekiShuseiHandler {
             }
             count = count + 1;
         }
-        konkai.set前回要介護状態区分コード(new Code(div.getCcdZenkaiNinteiKekka().getTxtYokaigodo().getValue()));
+        konkai.set前回要介護状態区分コード(new Code(div.getCcdZenkaiNinteiKekka().get要介護状態区分コード(
+                new SubGyomuCode(div.getHdnSubGyomuCd()), konkai.get申請書管理番号(), new RString("1"))));
         konkai.set前回認定年月日(div.getCcdZenkaiNinteiKekka().getTxtNinteiDay().getValue());
         konkai.set前回認定有効開始年月日(div.getCcdZenkaiNinteiKekka().getTxtYukoKikanFrom().getValue());
         konkai.set前回認定有効終了年月日(div.getCcdZenkaiNinteiKekka().getTxtYukoKikanTo().getValue());

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.kyokaisoggaitoshareportprocess.KyokaisogGaitoshaReportPageBreakProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU060010.KyokaisogGaitoshaReportPageBreakProcess;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU060010.DBU060010_KyokaisoKanriMasterListParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

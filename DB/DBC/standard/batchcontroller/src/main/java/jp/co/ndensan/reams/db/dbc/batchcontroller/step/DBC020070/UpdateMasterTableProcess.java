@@ -99,7 +99,6 @@ public class UpdateMasterTableProcess extends BatchProcessBase<ShikyugakuUpdateT
             結果.setSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD(entity.getShikyugaku_sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD());
             結果.setState(EntityDataState.Added);
             結果Writer.insert(結果);
-            // TODO QA1632
             if (entity.getKettei_hihokenshaNo() == null || entity.getKettei_hihokenshaNo().isEmpty()) {
                 return;
             }

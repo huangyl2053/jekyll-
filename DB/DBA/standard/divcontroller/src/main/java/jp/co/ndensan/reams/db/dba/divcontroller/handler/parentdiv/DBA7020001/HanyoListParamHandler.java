@@ -871,7 +871,7 @@ public class HanyoListParamHandler {
             div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaTekiyoJiyu().setDisabled(false);
             div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaKaijoJiyu().setDisabled(true);
         } else if (JiyuChushutsuKubun.適用除外解除者のみ.getコード().equals(事由抽出区分)) {
-            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaTekiyoJiyu().setDisabled(true);
+            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaTekiyoJiyu().setDisabled(false);
             div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaKaijoJiyu().setDisabled(false);
         } else if (JiyuChushutsuKubun.両方.getコード().equals(事由抽出区分)) {
             div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaTekiyoJiyu().setDisabled(false);
@@ -884,7 +884,7 @@ public class HanyoListParamHandler {
             div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaTekiyoJiyu().setDisabled(false);
             div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaKaijoJiyu().setDisabled(true);
         } else if (他特例解除者のみ.equals(事由抽出区分)) {
-            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaTekiyoJiyu().setDisabled(true);
+            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaTekiyoJiyu().setDisabled(false);
             div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaKaijoJiyu().setDisabled(false);
         } else if (両方.equals(事由抽出区分)) {
             div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaTekiyoJiyu().setDisabled(false);
@@ -895,6 +895,7 @@ public class HanyoListParamHandler {
     private void 宛名抽出条件復元(BatchParameterMap restoreBatchParameterMap) {
         RString 年齢層抽出方法 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChushutsu_Kubun"));
         div.getCcdHanyoListAtenaSelect().set年齢層抽出方法(年齢層抽出方法);
+        div.getCcdHanyoListAtenaSelect().onChange_SelectKijun();
         Decimal 宛名抽出年齢開始 = restoreBatchParameterMap.getParameterValue(Decimal.class, new RString("psmChushutsuAge_Start"));
         if (宛名抽出年齢開始 != null) {
             div.getCcdHanyoListAtenaSelect().set年齢開始(宛名抽出年齢開始);
@@ -918,7 +919,7 @@ public class HanyoListParamHandler {
         div.getCcdHanyoListAtenaSelect().set保険者();
         RString 地区区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku_Kubun"));
         div.getCcdHanyoListAtenaSelect().set地区(地区区分);
-
+        div.getCcdHanyoListAtenaSelect().onChange_SelectChiku();
         RString 町域From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmJusho_From"));
         if (!RString.isNullOrEmpty(町域From)) {
             div.getCcdHanyoListAtenaSelect().set住所開始(new ChoikiCode(町域From));

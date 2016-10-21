@@ -81,10 +81,10 @@
         <result property="認定情報_認定有効期間終了年月日" column="認定情報_認定有効期間終了年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_setaiinshotokujoho"  type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.SetaiInRisutoEntity" autoMapping="true">
-        <result property="識別コード" column="shikibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="課税区分" column="kazeiKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="課税所得額" column="kazeiShotokuGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="is受給者" column="is受給者" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="識別コード" column="世帯員情報.shikibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="課税区分" column="世帯員情報.kazeiKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="課税所得額" column="世帯員情報.kazeiShotokuGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="is受給者" column="世帯員情報.is受給者" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <association property="世帯員宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>    
     </resultMap>
     <select resultOrdered="true" id="get負担限度額認定者リスト"
@@ -98,12 +98,11 @@
             A.is所得税課税者 AS is所得税課税者,
             A.is生活保護受給者 AS is生活保護受給者,
             A.利用者負担段階,
-            nvl(A.合計所得金額,0) + nvl(A.年金収入額,0) + nvl(A.非課税年金勘案額,0) AS 合計所得_含年金収入,
+            coalesce(A.合計所得金額,0) + coalesce(A.年金収入額,0) + coalesce(A.非課税年金勘案額,0) AS 合計所得_含年金収入,
             A.非課税年金勘案額,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
             施設入所情報.入所施設コード,
             施設入所情報.入所施設名称,
-            認定情報.*,
             要介護認定申請情報."koroshoIfShikibetsuCode" AS 要介護認定申請情報_厚労省IF識別コード,
             (CASE WHEN 受給者台帳Newest."kyuSochishaFlag" IS NULL 
                   THEN false 

@@ -797,17 +797,6 @@ public class TokuchoTaishoshaIchiranSakusei {
         徴収方法entity.setTsuikaIraiSohuzumiFlag(false);
         徴収方法entity.setTokuchoTeishiNichiji(null);
         徴収方法entity.setTokuchoTeishiJiyuCode(null);
-//        徴収方法entity.setKariNenkinNo(null);
-//        徴収方法entity.setKariNenkinCode(null);
-//        徴収方法entity.setKariHosokuM(null);
-//        徴収方法entity.setHonNenkinNo(null);
-//        徴収方法entity.setHonNenkinCode(null);
-//        徴収方法entity.setHonHosokuM(null);
-//        徴収方法entity.setYokunendoKariNenkinNo(null);
-//        徴収方法entity.setYokunendoKariNenkinCode(null);
-//        徴収方法entity.setYokunendoKariHosokuM(null);
-//        徴収方法entity.setTokuchoTeishiNichiji(null);
-//        徴収方法entity.setTokuchoTeishiJiyuCode(null);
         徴収方法entity.setState(EntityDataState.Added);
         徴収方法Dac.save(徴収方法entity);
     }
@@ -836,6 +825,7 @@ public class TokuchoTaishoshaIchiranSakusei {
         param.setShuturyokuTaisho(result.get出力対象());
         param.setShoriNichiji(new YMDHMS(nowDateTime));
         param.setKakuninJokyoKubun(result.is確認状況区分());
+        param.setOutputID(result.get出力順ID());
         return param;
     }
 

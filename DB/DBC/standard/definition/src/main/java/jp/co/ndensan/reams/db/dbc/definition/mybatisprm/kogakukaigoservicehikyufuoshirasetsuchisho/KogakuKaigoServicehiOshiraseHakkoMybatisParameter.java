@@ -34,7 +34,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class KogakuKaigoServicehiOshiraseHakkoMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
+public class KogakuKaigoServicehiOshiraseHakkoMybatisParameter implements IMyBatisParameter {
 
     private final FlexibleYearMonth shoriYm;
     private final FlexibleDate sakuseibi;
@@ -90,6 +90,7 @@ public class KogakuKaigoServicehiOshiraseHakkoMybatisParameter extends UaFt200Fi
     private final boolean usesKoza_kijunYMD;
     private final RYear koza_genNendo;
     private final boolean hasValidKamoku;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      *
@@ -125,7 +126,8 @@ public class KogakuKaigoServicehiOshiraseHakkoMybatisParameter extends UaFt200Fi
             boolean isJutakuAri, RString orderBy, RString 保険者番号, RString 事業高額, RString 初回申請把握基準日,
             IShikibetsuTaishoPSMSearchKey searchKey, IAtesakiPSMSearchKey atesakiKey,
             IKozaSearchKey kozaKey, List<KamokuCode> 権限有科目リスト) {
-        super(searchKey);
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
+
         this.shoriYm = shoriYm;
         this.sakuseibi = sakuseibi;
         this.hihokenshaNo = hihokenshaNo;

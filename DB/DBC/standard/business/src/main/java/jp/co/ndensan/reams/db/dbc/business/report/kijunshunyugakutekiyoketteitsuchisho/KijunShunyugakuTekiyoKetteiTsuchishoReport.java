@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteitsuchisho;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoketteitsuchisho.KijunShunyugakuTekiyoKetteiTsuchishoSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -17,19 +18,24 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KijunShunyugakuTekiyoKetteiTsuchishoReport extends Report<KijunShunyugakuTekiyoKetteiTsuchishoSource> {
 
     private final KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書パラメータ;
+    private final ChohyoSeigyoKyotsu 帳票制御共通;
 
     /**
      * コンストラクタです
      *
      * @param 基準収入額適用決定通知書パラメータ KijunShunyugakuTekiyoKetteiTsuchisho
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      */
-    public KijunShunyugakuTekiyoKetteiTsuchishoReport(KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書パラメータ) {
+    public KijunShunyugakuTekiyoKetteiTsuchishoReport(KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書パラメータ,
+            ChohyoSeigyoKyotsu 帳票制御共通) {
         this.基準収入額適用決定通知書パラメータ = 基準収入額適用決定通知書パラメータ;
+        this.帳票制御共通 = 帳票制御共通;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KijunShunyugakuTekiyoKetteiTsuchishoSource> reportSourceWriter) {
-        IKijunShunyugakuTekiyoKetteiTsuchishoEditor editor = new KijunShunyugakuTekiyoKetteiTsuchishoEditor(基準収入額適用決定通知書パラメータ);
+        IKijunShunyugakuTekiyoKetteiTsuchishoEditor editor
+                = new KijunShunyugakuTekiyoKetteiTsuchishoEditor(基準収入額適用決定通知書パラメータ, 帳票制御共通);
         IKijunShunyugakuTekiyoKetteiTsuchishoBuilder builder = new KijunShunyugakuTekiyoKetteiTsuchishoBuilder(editor);
         reportSourceWriter.writeLine(builder);
     }

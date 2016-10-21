@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJoh
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 特殊修正Businessクラスです。
@@ -366,6 +367,152 @@ public class RirekiShuseiBusiness implements Serializable {
             dataPass.set要介護認定一次判定結果コード(dbt4116.get要介護認定一次判定結果コード());
             dataPass.set要介護認定一次判定年月日(dbt4116.get要介護認定一次判定年月日());
             dataPass.set要介護認定一次判定結果コード_認知症加算(dbt4116.get要介護認定一次判定結果コード_認知症加算());
+        }
+        return dataPass;
+    }
+
+    /**
+     * DBZ.RirekiShuseiのデータを取得します
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @return 履歴修正情報
+     */
+    public RirekiShuseiDataPass get履歴修正情報(Code 厚労省IF識別コード) {
+        RirekiShuseiDataPass dataPass = new RirekiShuseiDataPass();
+        if (dbt4001 != null) {
+            dataPass.setデータ区分(dbt4001.getデータ区分());
+            dataPass.set認定年月日(dbt4001.get認定年月日());
+            dataPass.set要介護状態区分コード(Code.EMPTY);
+            dataPass.set認定有効開始年月日(dbt4001.get認定有効期間開始年月日());
+            dataPass.set認定有効終了年月日(dbt4001.get認定有効期間終了年月日());
+            dataPass.set旧措置フラグ(dbt4001.is旧措置者フラグ());
+            dataPass.set受給申請事由(dbt4001.get受給申請事由());
+            dataPass.set申請状況区分(dbt4001.get申請状況区分());
+            dataPass.set資格取得前申請フラグ(dbt4001.is資格取得前申請フラグ());
+            dataPass.setみなし要介護区分コード(dbt4001.getみなし要介護区分コード());
+            dataPass.set指定サービス種類01(dbt4001.get指定サービス種類01());
+            dataPass.set指定サービス種類02(dbt4001.get指定サービス種類02());
+            dataPass.set指定サービス種類03(dbt4001.get指定サービス種類03());
+            dataPass.set指定サービス種類04(dbt4001.get指定サービス種類04());
+            dataPass.set指定サービス種類05(dbt4001.get指定サービス種類05());
+            dataPass.set指定サービス種類06(dbt4001.get指定サービス種類06());
+            dataPass.set指定サービス種類07(dbt4001.get指定サービス種類07());
+            dataPass.set指定サービス種類08(dbt4001.get指定サービス種類08());
+            dataPass.set指定サービス種類09(dbt4001.get指定サービス種類09());
+            dataPass.set指定サービス種類10(dbt4001.get指定サービス種類10());
+            dataPass.set指定サービス種類11(dbt4001.get指定サービス種類11());
+            dataPass.set指定サービス種類12(dbt4001.get指定サービス種類12());
+            dataPass.set指定サービス種類13(dbt4001.get指定サービス種類13());
+            dataPass.set指定サービス種類14(dbt4001.get指定サービス種類14());
+            dataPass.set指定サービス種類15(dbt4001.get指定サービス種類15());
+            dataPass.set指定サービス種類16(dbt4001.get指定サービス種類16());
+            dataPass.set指定サービス種類17(dbt4001.get指定サービス種類17());
+            dataPass.set指定サービス種類18(dbt4001.get指定サービス種類18());
+            dataPass.set指定サービス種類19(dbt4001.get指定サービス種類19());
+            dataPass.set指定サービス種類20(dbt4001.get指定サービス種類20());
+            dataPass.set指定サービス種類21(dbt4001.get指定サービス種類21());
+            dataPass.set指定サービス種類22(dbt4001.get指定サービス種類22());
+            dataPass.set指定サービス種類23(dbt4001.get指定サービス種類23());
+            dataPass.set指定サービス種類24(dbt4001.get指定サービス種類24());
+            dataPass.set指定サービス種類25(dbt4001.get指定サービス種類25());
+            dataPass.set指定サービス種類26(dbt4001.get指定サービス種類26());
+            dataPass.set指定サービス種類27(dbt4001.get指定サービス種類27());
+            dataPass.set指定サービス種類28(dbt4001.get指定サービス種類28());
+            dataPass.set指定サービス種類29(dbt4001.get指定サービス種類29());
+            dataPass.set指定サービス種類30(dbt4001.get指定サービス種類30());
+            dataPass.set削除事由コード(dbt4001.get削除事由コード());
+            dataPass.set異動理由(dbt4001.get異動理由());
+            dataPass.set喪失年月日(dbt4001.get喪失年月日());
+            dataPass.set当初認定有効開始年月日(dbt4001.get当初認定有効開始年月日());
+            dataPass.set当初認定有効終了年月日(dbt4001.get当初認定有効終了年月日());
+            dataPass.set受給資格証明書発行年月日１(dbt4001.get受給資格証明書発行年月日１());
+            dataPass.set受給資格証明書発行年月日２(dbt4001.get受給資格証明書発行年月日２());
+            dataPass.set市町村コード(dbt4001.get市町村コード());
+            dataPass.set申請書管理番号(dbt4001.get申請書管理番号());
+        }
+        if (dbt4102 != null) {
+            dataPass.set介護認定審査会意見(dbt4102.get介護認定審査会意見());
+            dataPass.set介護認定審査会資料作成年月日(dbt4102.get介護認定審査会資料作成年月日());
+            dataPass.set二次判定年月日(dbt4102.get二次判定年月日());
+            dataPass.set二次判定要介護状態区分コード(Code.EMPTY);
+            dataPass.set二次判定認定有効期間(dbt4102.get二次判定認定有効期間());
+            dataPass.set二次判定認定有効開始年月日(dbt4102.get二次判定認定有効開始年月日());
+            dataPass.set二次判定認定有効終了年月日(dbt4102.get二次判定認定有効終了年月日());
+        }
+        if (dbt4101 != null) {
+            dataPass.set要介護申請_要支援申請の区分(dbt4101.get要介護申請_要支援申請の区分());
+            dataPass.set認定申請年月日(dbt4101.get認定申請年月日());
+            dataPass.set認定申請区分_法令_コード(dbt4101.get認定申請区分_法令_コード());
+            dataPass.set認定申請区分_申請時_コード(dbt4101.get認定申請区分_申請時_コード());
+            dataPass.set被保険者区分コード(dbt4101.get被保険者区分コード());
+            dataPass.set二号特定疾病コード(dbt4101.get２号特定疾病コード());
+            dataPass.set支所コード(dbt4101.get支所コード());
+            dataPass.set認定申請理由(dbt4101.get認定申請理由());
+            dataPass.set取下年月日(dbt4101.get取下年月日());
+            dataPass.set指定医フラグ(dbt4101.is指定医フラグ());
+            dataPass.set訪問調査先名称(dbt4101.get訪問調査先名称());
+            dataPass.set訪問調査先郵便番号(dbt4101.get訪問調査先郵便番号());
+            dataPass.set訪問調査先住所(dbt4101.get訪問調査先住所());
+            dataPass.set訪問調査先電話番号(dbt4101.get訪問調査先電話番号());
+            dataPass.set延期通知発行年月日(dbt4101.get延期通知発行年月日());
+            dataPass.set延期通知発行回数(dbt4101.get延期通知発行回数());
+            dataPass.set厚労省IF識別コード(厚労省IF識別コード);
+        }
+        if (dbt4120 != null) {
+            dataPass.set届出代行区分(dbt4120.get申請届出代行区分コード());
+            dataPass.set氏名(dbt4120.get申請届出者氏名());
+            dataPass.setカナ氏名(dbt4120.get申請届出者氏名カナ());
+            dataPass.set本人との関係性(dbt4120.get申請届出者続柄());
+            dataPass.set事業者番号(dbt4120.get申請届出代行事業者番号());
+            dataPass.set事業者区分(dbt4120.get事業者区分());
+            dataPass.set郵便番号(dbt4120.get申請届出者郵便番号());
+            dataPass.set住所(dbt4120.get申請届出者住所());
+            dataPass.set電話番号(dbt4120.get申請届出者電話番号());
+        }
+        if (dbt4913Entity != null) {
+            dataPass.set認定調査員コード(dbt4913Entity.getNinteiChosainCode());
+            dataPass.set調査員氏名(dbt4913Entity.getChosainShimei());
+        }
+        if (dbt4910Entity != null) {
+            dataPass.set認定調査委託先コード(dbt4910Entity.getNinteichosaItakusakiCode().value());
+            dataPass.set事業者名称(dbt4910Entity.getJigyoshaMeisho());
+            dataPass.set認定郵便番号(dbt4910Entity.getYubinNo());
+            dataPass.set認定住所(dbt4910Entity.getJusho());
+            dataPass.set認定電話番号(dbt4910Entity.getTelNo());
+            dataPass.set調査委託区分(dbt4910Entity.getChosaItakuKubun());
+        }
+        if (dbt4201 != null) {
+            dataPass.set認定調査依頼年月日(dbt4201.get認定調査依頼年月日());
+        }
+        if (dbt4123 != null) {
+            dataPass.set認定調査予定年月日(dbt4123.get認定調査予定年月日());
+            dataPass.set主治医意見書登録予定年月日(dbt4123.get主治医意見書登録予定年月日());
+            dataPass.set認定審査会予定年月日(dbt4123.get認定審査会予定年月日());
+        }
+        if (dbt4202 != null) {
+            dataPass.set認定調査実施年月日(dbt4202.get認定調査実施年月日());
+        }
+        if (dbt4912Entity != null) {
+            dataPass.set主治医コード(dbt4912Entity.getShujiiCode());
+            dataPass.set主治医氏名(dbt4912Entity.getShujiiName());
+        }
+        if (dbt4911Entity != null) {
+            dataPass.set主治医医療機関コード(dbt4911Entity.getShujiiIryokikanCode());
+            dataPass.set医療機関名称(dbt4911Entity.getIryoKikanMeisho());
+            dataPass.set主治医郵便番号(dbt4911Entity.getYubinNo());
+            dataPass.set主治医住所(dbt4911Entity.getJusho());
+            dataPass.set主治医電話番号(dbt4911Entity.getTelNo());
+        }
+        if (dbt4301 != null) {
+            dataPass.set主治医意見書作成依頼年月日(dbt4301.get主治医意見書作成依頼年月日());
+        }
+        if (dbt4302 != null) {
+            dataPass.set主治医意見書記入年月日(dbt4302.get主治医意見書記入年月日());
+        }
+        if (dbt4116 != null) {
+            dataPass.set要介護認定一次判定結果コード(Code.EMPTY);
+            dataPass.set要介護認定一次判定年月日(dbt4116.get要介護認定一次判定年月日());
+            dataPass.set要介護認定一次判定結果コード_認知症加算(Code.EMPTY);
         }
         return dataPass;
     }

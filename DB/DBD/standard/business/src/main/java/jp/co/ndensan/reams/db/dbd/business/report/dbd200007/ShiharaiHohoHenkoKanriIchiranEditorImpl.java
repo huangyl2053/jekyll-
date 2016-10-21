@@ -797,19 +797,19 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         edit下部_年度２の期(source);
         edit下部_年度３の期(source);
 
-        if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 0) {
+        if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 0) {
             if (count == NUM15 && 日付関連_調定年度.plusYear(2).equals(支払方法変更リストEntity_下.get収納情報List().get(INDEX_0).get賦課年度())
                     && 支払方法変更リストEntity_下.get収納情報List().get(INDEX_0).is過年度フラグ()) {
                 edit下部_年度１の過年度(source);
             }
         }
-        if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 1) {
+        if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 1) {
             if (count == NUM15 && 日付関連_調定年度.plusYear(1).equals(支払方法変更リストEntity_下.get収納情報List().get(INDEX_1).get賦課年度())
                     && 支払方法変更リストEntity_下.get収納情報List().get(INDEX_1).is過年度フラグ()) {
                 edit下部_年度２の過年度(source);
             }
         }
-        if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 2) {
+        if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 2) {
             if (count == NUM15 && 日付関連_調定年度.equals(支払方法変更リストEntity_下.get収納情報List().get(INDEX_2).get賦課年度())
                     && 支払方法変更リストEntity_下.get収納情報List().get(INDEX_2).is過年度フラグ()) {
                 edit下部_年度３の過年度(source);

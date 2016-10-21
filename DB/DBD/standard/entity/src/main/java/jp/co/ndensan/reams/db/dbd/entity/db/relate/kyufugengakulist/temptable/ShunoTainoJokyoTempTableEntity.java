@@ -54,7 +54,7 @@ public class ShunoTainoJokyoTempTableEntity extends DbTableEntityBase<ShunoTaino
     private TsuchishoNo tmp_tsuchishoNo;
     @TempTableColumnOrder(6)
     @PrimaryKey
-    private int tmp_kibetsu;
+    private RString tmp_kibetsu;
     @TempTableColumnOrder(7)
     private Decimal tmp_choteigaku;
     @TempTableColumnOrder(8)

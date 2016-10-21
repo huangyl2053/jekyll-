@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -43,6 +44,15 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private boolean 文言設定flag;
     private RString filePath;
     private RString ファイル名称;
+    private OutputParameter<Boolean> 文言_設定_FLAG;
+    /**
+     * プロセス戻り値：対象月データありなしフラグ
+     */
+    public static final RString OUT_HAS_TARGET_DATA;
+
+    static {
+        OUT_HAS_TARGET_DATA = new RString("文言_設定_FLAG");
+    }
     private TorikomiKokiKoreshaJyohoTempProcessParameter processParameter;
     private TorikomiKokiKoreshaJyohoEntity 取込後期高齢者情報Entity;
     private List<LasdecCode> 市町村コードリスト;
@@ -53,6 +63,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final int INDEX_17 = 17;
     private static final int INDEX_25 = 25;
     private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
     private static final int INDEX_28 = 28;
     private static final int INDEX_39 = 39;
     private static final int INDEX_47 = 47;
@@ -79,7 +90,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final int INDEX_46 = 46;
     private static final int INDEX_54 = 54;
     private static final int INDEX_12 = 12;
-    private static final int INDEX_4 = 4;
     private static final int INDEX_8 = 8;
     private static final RString ＩＦ種類_電算 = new RString("1");
     private static final RString ＩＦ種類_電算２ = new RString("2");
@@ -101,7 +111,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString エラーコード_05 = new RString("05");
     private static final RString エラーコード_06 = new RString("06");
     private static final RString エラーコード_07 = new RString("07");
-
     private static final RString エラーコード_11 = new RString("11");
     private static final RString エラーコード_52 = new RString("52");
     private static final RString エラーコード_53 = new RString("53");
@@ -170,7 +179,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         FilesystemPath filesystemPath = new FilesystemPath(tmpPath);
         filePath = new RString(filesystemPath.getCanonicalPath()).concat(ファイル名称);
         市町村コードリスト = getMapper(IKokikoreishaShikakuIdoInMapper.class).get構成市町村マスタ();
-        取込後期高齢者情報Entity.setエラーコード(エラーコード_0);
+        文言_設定_FLAG = new OutputParameter<>();
     }
 
     @Override
@@ -187,6 +196,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     @Override
     protected void process(RString result) {
         取込後期高齢者情報Entity = new TorikomiKokiKoreshaJyohoEntity();
+//        取込後期高齢者情報Entity.setエラーコード(エラーコード_0);
         if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
             int バイト数 = 0;
             try {
@@ -223,6 +233,11 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             エラーチェック処理_電算2();
         }
         一時tableWriter.insert(取込後期高齢者情報Entity);
+    }
+
+    @Override
+    protected void afterExecute() {
+        文言_設定_FLAG.setValue(文言設定flag);
     }
 
     private RString get指定バイト数な文字列(int 指定バイト数, RString 判断文字列) {
@@ -576,9 +591,18 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     }
 
     private boolean is構成市町村マスタあり(RString 市町村コード) {
-        for (LasdecCode lasdecCode : 市町村コードリスト) {
-            if (市町村コード.equals(lasdecCode.value())) {
-                return true;
+        if (ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
+            for (LasdecCode lasdecCode : 市町村コードリスト) {
+                if (市町村コード.equals(lasdecCode.value().substring(0, INDEX_4))) {
+                    return true;
+                }
+            }
+        }
+        if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
+            for (LasdecCode lasdecCode : 市町村コードリスト) {
+                if (市町村コード.equals(lasdecCode.value())) {
+                    return true;
+                }
             }
         }
         return false;

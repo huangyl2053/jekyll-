@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -140,6 +141,7 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             }
             if (null != this.負担限度額認定確認リスト.get被保険者番号()) {
                 source.list1_1 = this.負担限度額認定確認リスト.get被保険者番号().value();
+                source.hihokenshaNo = this.負担限度額認定確認リスト.get被保険者番号().value();
             }
             if (null != this.負担限度額認定確認リスト.get資格取得日()) {
                 source.list2_1 = this.負担限度額認定確認リスト.get資格取得日().wareki().eraType(EraType.KANJI_RYAKU).
@@ -312,6 +314,11 @@ public class FutanGendogakuNinteiKakuninIchiranEditor implements IFutanGendogaku
             if (null != gaikokujinKanaShimei) {
                 source.gaikokujinKanaShimei = gaikokujinKanaShimei.value();
             }
+            ShikibetsuCode shikibetsuCode = atesakiEntity.getShikibetsuCode();
+            if (null != shikibetsuCode) {
+                source.shikibetsuCode = shikibetsuCode.value();
+            }
+
         }
         if (null != this.負担限度額認定確認リスト && null != this.負担限度額認定確認リスト.get市町村コード()) {
             source.shichosonCode = this.負担限度額認定確認リスト.get市町村コード().value();

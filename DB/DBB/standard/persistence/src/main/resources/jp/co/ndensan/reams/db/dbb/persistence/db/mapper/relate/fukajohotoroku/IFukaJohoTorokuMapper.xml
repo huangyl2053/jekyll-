@@ -259,4 +259,32 @@
         dbT2002."fukaNendo",
         dbT2002."tsuchishoNo"
     </select>
+
+    <select id="getSyoriDate"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            fetchSize="500">
+        SELECT shoriDate."nendo"
+        , shoriDate."kijunTimestamp"
+        FROM rgdb."DbT7022ShoriDateKanri" shoriDate
+        WHERE shoriDate."shoriName" = #{syoriName}
+        AND shoriDate."nendo" IN (
+        SELECT DISTINCT fukaJohoTemp."fukaNendo"
+        FROM "DbT2002FukaJohoTemp" fukaJohoTemp
+        GROUP BY fukaJohoTemp."fukaNendo")
+    </select>
+
+    <select id="getSyoriDateForManager"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajohotoroku.FukaJohoTorokuMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            fetchSize="500">
+        SELECT shoriDate."nendo"
+        , shoriDate."kijunTimestamp"
+        FROM rgdb."DbT7022ShoriDateKanri" shoriDate
+        WHERE shoriDate."shoriName" = #{syoriName}
+        AND shoriDate."nendo" = #{nendo}
+    </select>
+
 </mapper>

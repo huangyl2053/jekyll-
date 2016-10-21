@@ -52,8 +52,6 @@ public class KyufujissekiTorikomiIchiranEditor implements
     private static final int LENGTH_9 = 9;
     private static final int LENGTH_17 = 17;
 
-    private static final RString 警告なし = new RString("1");
-    private static final RString 警告あり = new RString("2");
     private static final RString 中空まる = new RString("○");
     private static final RString 環まる = new RString("◎");
     private static final RString ソリッドまる = new RString("●");
@@ -188,8 +186,8 @@ public class KyufujissekiTorikomiIchiranEditor implements
         source.listUpper_22 = getレコード種別(entity.get給付実績_レコード件数DA());
         source.listUpper_23 = getレコード種別(entity.get給付実績_レコード件数DB());
         source.listUpper_24 = getレコード種別(entity.get給付実績_レコード件数DC());
-        if (!entity.get給付実績_警告区分コード().equals(警告なし)) {
-            source.listUpper_25 = KeikokuKubun.toValue(警告あり).get略称();
+        if (!KeikokuKubun.警告なし.getコード().equals(entity.get給付実績_警告区分コード())) {
+            source.listUpper_25 = KeikokuKubun.警告あり.get略称();
         }
 
         source.listLower_2 = entity.get被保険者_宛名名称();
