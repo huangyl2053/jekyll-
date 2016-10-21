@@ -680,11 +680,15 @@ public class ShokujiHiyoShokaiHandler {
      * @param 整理番号 RString
      * @param 被保険者番号 HihokenshaNo
      * @param 識別番号 NyuryokuShikibetsuNo
+     * @param 給付実績食事費用1504 給付実績食事費用1504
+     * @param 給付実績明細 給付実績明細
+     * @param 給付実績食事費用1503 給付実績食事費用1503
      */
     public void change年月(RString date, KyufuJissekiPrmBusiness 給付実績情報照会情報,
             FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号,
-            NyuryokuShikibetsuNo 識別番号) {
-        List<KyufujissekiShokujiHiyo> 給付実績食事費用1504 = 給付実績情報照会情報.getCsData_E();
+            NyuryokuShikibetsuNo 識別番号, List<KyufujissekiShokujiHiyo> 給付実績食事費用1504,
+            List<KyufujissekiMeisaiBusiness> 給付実績明細,
+            List<KyufujissekiShokujiHiyo> 給付実績食事費用1503) {
         int index = INT_ZERO;
         List<KyufujissekiShokujiHiyo> サービス提供年月リスト = get食費1504サービス提供年月リスト(給付実績食事費用1504);
         Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
@@ -716,7 +720,7 @@ public class ShokujiHiyoShokaiHandler {
         div.getCcdKyufuJissekiHeader().set整理番号(新整理番号);
         div.getCcdKyufuJissekiHeader().set様式番号(新識別番号.value());
         div.getCcdKyufuJissekiHeader().set事業者番号(事業者番号);
-        setDataGrid(給付実績情報照会情報.getCsData_E(), 給付実績情報照会情報.getCsData_B(), 給付実績情報照会情報.getCsData_E());
+        setDataGrid(給付実績食事費用1504, 給付実績明細, 給付実績食事費用1503);
     }
 
     /**
