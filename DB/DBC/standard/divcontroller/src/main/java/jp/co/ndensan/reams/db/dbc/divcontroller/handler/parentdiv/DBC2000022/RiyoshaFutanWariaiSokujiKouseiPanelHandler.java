@@ -196,6 +196,9 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
                     年度.wareki().toDateString()));
         } else {
             List<RiyoshaFutanWariai> 利用者負担割合list = manager.select年度By被保険者番号(資格対象者.get被保険者番号());
+            if (null == 利用者負担割合list || 利用者負担割合list.isEmpty()) {
+                throw new ApplicationException(DbcErrorMessages.該当年度負担割合情報なし.getMessage());
+            }
             for (RiyoshaFutanWariai result : 利用者負担割合list) {
                 if (!dataSourceList.contains(new KeyValueDataSource(new RString(result.get年度().getYearValue()),
                         result.get年度().wareki().toDateString()))) {
@@ -210,6 +213,9 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             List<RiyoshaFutanWariaiMeisai> 履歴番号list = manager.select履歴番号BY年度と被保険者番号(
                     new FlexibleYear(div.getDdlNendo().getSelectedKey()),
                     資格対象者.get被保険者番号());
+            if (null == 履歴番号list || 履歴番号list.isEmpty()) {
+                throw new ApplicationException(DbcErrorMessages.該当年度負担割合情報なし.getMessage());
+            }
             div.getDdlRirekiNo().setDataSource(get履歴番号list(履歴番号list));
             div.getDdlRirekiNo().setSelectedIndex(0);
         }
@@ -873,13 +879,13 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             set証発行不要(利用者負担割合.is発行不要フラグ());
             div.getDdlHakkoKubun().setSelectedKey(利用者負担割合.get発行区分());
             FlexibleDate 発行日 = 利用者負担割合.get発行日();
-            if (発行日 != null) {
+            if (発行日 != null && !発行日.isEmpty()) {
                 div.getTxtHakkobi().setValue(new RDate(発行日.toString()));
             } else {
                 div.getTxtHakkobi().setValue(RDate.getNowDate());
             }
             FlexibleDate 交付日 = 利用者負担割合.get交付日();
-            if (交付日 != null) {
+            if (交付日 != null && !交付日.isEmpty()) {
                 div.getTxtKofubi().setValue(new RDate(交付日.toString()));
             } else {
                 div.getTxtKofubi().setValue(RDate.getNowDate());
