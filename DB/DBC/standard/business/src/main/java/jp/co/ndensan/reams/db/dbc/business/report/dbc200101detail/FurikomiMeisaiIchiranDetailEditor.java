@@ -267,7 +267,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                 source.listLower_1 = 振込明細一時Data.getJusho().value().substring(0, LISTINDEX_20);
             }
 
-            if (Furikomi_ShihraiHohoShitei.口座.equals(支払方法)) {
+            if (!Furikomi_ShihraiHohoShitei.口座.equals(支払方法)) {
                 source.listLower_2 = 振込明細一時Data.getKinyuKikanShitenName();
                 if (振込明細一時Data.getKozaMeiginin() != null) {
                     if (振込明細一時Data.getKozaMeiginin().value().length() <= LISTINDEX_24) {
@@ -325,24 +325,26 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     }
 
     private void set様式連番_1のその他帳票データ(FurikomiMeisaiIchiranDetailReportSource source) {
-        FurikomiDetailTempTableEntity 振込明細一時Data = 一覧表用データ.get振込明細一時TBL();
-        if (振込明細一時Data.getShiharaiBasho() != null) {
-            source.listMadoguchiUpper_1 = 振込明細一時Data.getShiharaiBasho();
-        }
-        if (振込明細一時Data.getShiharaiKaishiYMD() != null && 振込明細一時Data.getShiharaiKaishiTime() != null) {
-            RString 支払期間開始年月日 = 振込明細一時Data.getShiharaiKaishiYMD().wareki().eraType(EraType.KANJI_RYAKU).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            RTime 支払窓口開始時間 = new RTime(振込明細一時Data.getShiharaiKaishiTime());
-            RString 支払窓口開始時間1 = 支払窓口開始時間.toFormattedTimeString(DisplayTimeFormat.HH_mm);
-            source.listMadoguchiUpper_2 = 支払期間開始年月日.concat(半角スペース1桁).concat(支払窓口開始時間1);
-        }
+        if (Furikomi_ShihraiHohoShitei.口座.equals(支払方法)) {
+            FurikomiDetailTempTableEntity 振込明細一時Data = 一覧表用データ.get振込明細一時TBL();
+            if (振込明細一時Data.getShiharaiBasho() != null) {
+                source.listMadoguchiUpper_1 = 振込明細一時Data.getShiharaiBasho();
+            }
+            if (振込明細一時Data.getShiharaiKaishiYMD() != null && 振込明細一時Data.getShiharaiKaishiTime() != null) {
+                RString 支払期間開始年月日 = 振込明細一時Data.getShiharaiKaishiYMD().wareki().eraType(EraType.KANJI_RYAKU).
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+                RTime 支払窓口開始時間 = new RTime(振込明細一時Data.getShiharaiKaishiTime());
+                RString 支払窓口開始時間1 = 支払窓口開始時間.toFormattedTimeString(DisplayTimeFormat.HH_mm);
+                source.listMadoguchiUpper_2 = 支払期間開始年月日.concat(半角スペース1桁).concat(支払窓口開始時間1);
+            }
 
-        if (振込明細一時Data.getShiharaiShuryoYMD() != null && 振込明細一時Data.getShiharaiShuryoTime() != null) {
-            RString 支払期間終了年月日 = 振込明細一時Data.getShiharaiShuryoYMD().wareki().eraType(EraType.KANJI_RYAKU).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            RTime 支払窓口終了時間 = new RTime(振込明細一時Data.getShiharaiShuryoTime());
-            RString 支払窓口終了時間1 = 支払窓口終了時間.toFormattedTimeString(DisplayTimeFormat.HH_mm);
-            source.listMadoguchiLower_1 = 支払期間終了年月日.concat(半角スペース1桁).concat(支払窓口終了時間1);
+            if (振込明細一時Data.getShiharaiShuryoYMD() != null && 振込明細一時Data.getShiharaiShuryoTime() != null) {
+                RString 支払期間終了年月日 = 振込明細一時Data.getShiharaiShuryoYMD().wareki().eraType(EraType.KANJI_RYAKU).
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+                RTime 支払窓口終了時間 = new RTime(振込明細一時Data.getShiharaiShuryoTime());
+                RString 支払窓口終了時間1 = 支払窓口終了時間.toFormattedTimeString(DisplayTimeFormat.HH_mm);
+                source.listMadoguchiLower_1 = 支払期間終了年月日.concat(半角スペース1桁).concat(支払窓口終了時間1);
+            }
         }
     }
 
