@@ -8,11 +8,14 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5120001;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.jukyushokai.JukyuShokaiShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseitorokuuketsuke.NinteiShinseiTorokuUketsukeBusiness;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5120001.NinteiShinseiTorokuUketsukeParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001.DBD5120001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001.NinteiShinseiTorokuUketsukeDiv;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.JissekiDataIchijiSakuseiTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.dbd5120001.NinteiShinseiTorokuUketsukeManager;
+import jp.co.ndensan.reams.db.dbd.service.core.jukyushokai.JukyuShokaiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseishaKankeiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
@@ -20,6 +23,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4101NinteiShinseiJoho;
@@ -53,9 +57,11 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitaku
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.DbT4101NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.DbT4120ShinseitodokedeJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.DbT4121ShinseiRirekiJohoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.JukyushaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShisetsuNyutaishoManager;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -155,19 +161,25 @@ public class NinteiShinseiTorokuUketsukeHandler {
         NinteiShinseiTorokuUketsukeBusiness result = manager.get初期化情報(param);
         div.getCcdKaigoNinteiAtenaInfo().initialize();
         div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(申請書管理番号, 識別コード);
-
+        
+        // 被保険者台帳から市町村コードを取得
         RString 市町村コード = null;
-        if (result != null
-                && result.getEntity().getT1001市町村コード() != null) {
-            if (表示パターン_新規.equals(表示パターン)) {
-                市町村コード = result.getEntity().getT1001市町村コード().getColumnValue();
-            } else {
-                市町村コード = result.getEntity().getT4001市町村コード().getColumnValue();
+        if(!RString.isNullOrEmpty(被保険者番号.getColumnValue())){
+            HihokenshaDaichoManager hhdm = HihokenshaDaichoManager.createInstance();
+            HihokenshaDaicho hhd = hhdm.find被保険者台帳(被保険者番号, FlexibleDate.getNowDate());
+            市町村コード = hhd.get市町村コード().getColumnValue();
+            
+            // managerでレコード取得できた場合は市町村コードをそちらに書き換え
+            if (result != null && result.getEntity().getT1001市町村コード() != null) {
+                if (表示パターン_新規.equals(表示パターン)) {
+                    市町村コード = result.getEntity().getT1001市町村コード().getColumnValue();
+                } else {
+                    市町村コード = result.getEntity().getT4001市町村コード().getColumnValue();
+                }
             }
-            div.getCcdKaigoNinteiShikakuInfo().initialize(
-                    市町村コード,
-                    被保険者番号 != null ? 被保険者番号.getColumnValue() : null);
+            div.getCcdKaigoNinteiShikakuInfo().initialize(市町村コード, 被保険者番号.getColumnValue());
         }
+        
         initControls();
         if (result != null) {
             this.set介護認定申請基本情報(result);
