@@ -344,7 +344,7 @@ public class HokenshaSofuListHandler {
             }
         }
 
-        if (kanri != null && !(審査年月の翌月 != null || 審査年月の翌月.isEmpty() || kanri.get処理状態区分().equals(取消3))) {
+        if (!((審査年月の翌月 != null && 審査年月の翌月.isEmpty()) && (kanri != null && kanri.get処理状態区分().equals(取消3)))) {
             取込漏れ確認チェック(file, データ種別, kanri);
             国保連取込漏れ確認チェック(file);
             国保連取込順序逆転確認チェック(file);
