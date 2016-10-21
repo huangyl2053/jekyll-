@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoketteitsuchisho;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.chohyomongon.ChohyoMongonYoshiki;
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoketteitsuchisho.KijunShunyugakuTekiyoKetteiTsuchishoSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -22,14 +24,18 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
 
     private final KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書パラメータ;
     private static final int INT_0 = 0;
+    private final ChohyoSeigyoKyotsu 帳票制御共通;
 
     /**
      * コンストラクタです
      *
      * @param 基準収入額適用決定通知書パラメータ KijunShunyugakuTekiyoKetteiTsuchisho
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      */
-    protected KijunShunyugakuTekiyoKetteiTsuchishoEditor(KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書パラメータ) {
+    protected KijunShunyugakuTekiyoKetteiTsuchishoEditor(KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書パラメータ,
+            ChohyoSeigyoKyotsu 帳票制御共通) {
         this.基準収入額適用決定通知書パラメータ = 基準収入額適用決定通知書パラメータ;
+        this.帳票制御共通 = 帳票制御共通;
     }
 
     @Override
@@ -68,13 +74,6 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
             source.hihokenshaName3 = 基準収入額適用決定通知書パラメータ.get被保険者氏名３().value();
         }
         source.sonotaHihokensha = 基準収入額適用決定通知書パラメータ.getその他被保険者();
-        source.tsuchibun1 = 基準収入額適用決定通知書パラメータ.get通知文１();
-        source.tsuchibun2 = 基準収入額適用決定通知書パラメータ.get通知文２();
-        source.tsuchibunLarge = 基準収入額適用決定通知書パラメータ.get通知文３_大();
-        source.tsuchibunMix1 = 基準収入額適用決定通知書パラメータ.get通知文4_上小();
-        source.tsuchibunMix2 = 基準収入額適用決定通知書パラメータ.get通知文5_下大();
-        source.tsuchibunMixTwo1 = 基準収入額適用決定通知書パラメータ.get通知文6_上大();
-        source.tsuchibunMixTwo2 = 基準収入額適用決定通知書パラメータ.get通知文7_下小();
         if (基準収入額適用決定通知書パラメータ.getCompNinshoshaソース() != null) {
             source.hakkoYMD = 基準収入額適用決定通知書パラメータ.getCompNinshoshaソース().hakkoYMD;
             source.denshiKoin = 基準収入額適用決定通知書パラメータ.getCompNinshoshaソース().denshiKoin;
@@ -127,6 +126,18 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
         }
         if (基準収入額適用決定通知書パラメータ.get識別コード３() != null) {
             source.shikibetsuCode3 = 基準収入額適用決定通知書パラメータ.get識別コード３().value();
+        }
+        if (ChohyoMongonYoshiki.フォント小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
+            source.tsuchibun1 = 基準収入額適用決定通知書パラメータ.get通知文１();
+            source.tsuchibun2 = 基準収入額適用決定通知書パラメータ.get通知文２();
+        } else if (ChohyoMongonYoshiki.フォント大.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
+            source.tsuchibunLarge = 基準収入額適用決定通知書パラメータ.get通知文３_大();
+        } else if (ChohyoMongonYoshiki.フォント混在_上大_下小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
+            source.tsuchibunMix1 = 基準収入額適用決定通知書パラメータ.get通知文4_上小();
+            source.tsuchibunMix2 = 基準収入額適用決定通知書パラメータ.get通知文5_下大();
+        } else if (ChohyoMongonYoshiki.フォント混在_上小_下大.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
+            source.tsuchibunMixTwo1 = 基準収入額適用決定通知書パラメータ.get通知文6_上大();
+            source.tsuchibunMixTwo2 = 基準収入額適用決定通知書パラメータ.get通知文7_下小();
         }
         return source;
     }
