@@ -52,6 +52,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 主治医意見書作成報酬支払内訳確認書のprocessです。
@@ -99,6 +101,7 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
     protected void createWriter() {
         batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
                 .addBreak(new BreakerCatalog<IkenShiharaiuchiwakeReportSource>().new SimpleLayoutBreaker(
+
 
 
 
