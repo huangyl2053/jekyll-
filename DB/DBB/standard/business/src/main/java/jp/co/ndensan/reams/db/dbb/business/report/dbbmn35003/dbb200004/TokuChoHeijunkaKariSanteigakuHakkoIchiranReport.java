@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-0820-060 xuyue
  */
-public class TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport
+public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReport
         extends Report<TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource> {
 
     private final KarisanteiGakuHenkoEntity entity;
@@ -57,7 +57,7 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport
      * @param 帳票作成日時 帳票作成日時
      * @param 連番 バッチから渡す連番
      */
-    public TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport(KarisanteiGakuHenkoEntity entity,
+    public TokuChoHeijunkaKariSanteigakuHakkoIchiranReport(KarisanteiGakuHenkoEntity entity,
             EditedKariSanteiTsuchiShoKyotsu editedData,
             IOutputOrder outputOrder, RDateTime 帳票作成日時, int 連番) {
         this.entity = entity;
