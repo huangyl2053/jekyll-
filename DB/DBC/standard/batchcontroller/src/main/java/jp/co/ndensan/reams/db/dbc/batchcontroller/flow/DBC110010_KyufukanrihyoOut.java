@@ -70,7 +70,7 @@ public class DBC110010_KyufukanrihyoOut extends BatchFlowBase<DBC110010_Kyufukan
     protected void defineFlow() {
         エントリ情報List = new ArrayList<>();
         交換情報識別番号 = DbBusinessConfig.get(
-                ConfigNameDBC.国保連送付_再審査申立書情報_交換情報識別番号,
+                ConfigNameDBC.国保連送付_給付管理票_交換情報識別番号,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         executeStep(送付対象データ取得);
         連番 = getResult(Integer.class, new RString(送付対象データ取得),
