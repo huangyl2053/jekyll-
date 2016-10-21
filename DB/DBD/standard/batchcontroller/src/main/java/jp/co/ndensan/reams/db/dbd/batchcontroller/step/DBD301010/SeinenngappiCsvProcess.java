@@ -147,7 +147,7 @@ public class SeinenngappiCsvProcess extends BatchProcessBase<HikazeNenkinTaishos
         eucCsvEntity.set性別年金保険者データ(set性別コード(t.getDtSeibetsu()));
         eucCsvEntity.setカナ氏名市町村データ(t.getAtenaKanaShimei());
         eucCsvEntity.setカナ氏名年金保険者データ(t.getDtKanaShimei());
-        eucCsvEntity.set不一致項目(set不一致(t.getFuicchiJiyu()));
+        eucCsvEntity.set不一致項目(set不一致(t.getFuicchiItem()));
     }
 
     private RString set年月日(RString 年月日) {
