@@ -60,6 +60,8 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
     private static final RString 給付区分_3 = new RString("3");
     private static final RString 同月審査を行う = new RString("1");
     private static final RString 様式洗い出し = new RString("：");
+    private static final int 証記載保険者番号_7 = 7;
+    private static final int 証記載保険者番号_8 = 8;
     private final KaigoKyufuhiKagoMositateTourokuDiv div;
 
     /**
@@ -227,7 +229,14 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
             }
         }
         data = data.createBuilderForEdit().set申立者区分コード(申立者区分コード).build();
-        data = data.createBuilderForEdit().set証記載保険者番号(new ShoKisaiHokenshaNo(div.getTxtMeisaiShokisaiHokenshaNo().getValue())).build();
+        RString 証記載保険者番号 = div.getTxtMeisaiShokisaiHokenshaNo().getValue();
+        if (証記載保険者番号.length() == 証記載保険者番号_7) {
+            証記載保険者番号 = 証記載保険者番号.substring(1);
+        }
+        if (証記載保険者番号.length() == 証記載保険者番号_8) {
+            証記載保険者番号 = 証記載保険者番号.substring(2);
+        }
+        data = data.createBuilderForEdit().set証記載保険者番号(new ShoKisaiHokenshaNo(証記載保険者番号)).build();
         data = data.createBuilderForEdit().set申立事由コード(div.getTxtMeisaiKagoForm()
                 .getValue().substring(0, 2).concat(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())).build();
         if (div.getTxtMeisaiSendYM().getValue() != null) {
