@@ -162,6 +162,30 @@ public class PnlTotalRegister {
     }
 
     /**
+     * onClick_onBlur
+     *
+     * @param div PnlTotalRegisterDiv
+     * @return ResponseData
+     */
+    public ResponseData<PnlTotalRegisterDiv> onClick_onBlur(PnlTotalRegisterDiv div) {
+        PnlTotalRegisterHandler handler = getHandler(div);
+        handler.set送付先口座種別();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * onClick_onOkClose
+     *
+     * @param div PnlTotalRegisterDiv
+     * @return ResponseData
+     */
+    public ResponseData<PnlTotalRegisterDiv> onClick_onOkClose(PnlTotalRegisterDiv div) {
+        PnlTotalRegisterHandler handler = getHandler(div);
+        handler.set送付先口座種別();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * Handlerクラスを取得する
      *
      * @param div PnlTotalRegisterDiv
