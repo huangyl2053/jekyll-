@@ -100,7 +100,7 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
      * @param count count
      * @return HihokenshaTempEntity HihokenshaTempEntity
      */
-    public HihokenshaTempEntity edit被保険者entity(
+    public HihokenshaTempEntity edit被保険者entity1(
             DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity 居宅給付計画自己作成短期入所利用日数entity,
             DbT3119KyotakuKeikakuJikosakuseiKanriEntity kyoEntity, int count) {
         HihokenshaTempEntity hihokenshaTempEntity = new HihokenshaTempEntity();
@@ -111,7 +111,7 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
         hihokenshaTempEntity.setExShoHokenshaNo(RString.EMPTY);
         hihokenshaTempEntity.setExHihokenshaNo(getColumnValue(kyoEntity.getHihokenshaNo()));
         hihokenshaTempEntity.setExServiceTeikyoYm(居宅給付計画自己作成短期入所利用日数entity.getRiyoYM());
-        hihokenshaTempEntity.setHenkanFlag(new RString("false"));
+        hihokenshaTempEntity.setHenkanFlag(值0);
         hihokenshaTempEntity.setOldShichosonCode(RString.EMPTY);
         hihokenshaTempEntity.setSofuHihokenshaNo(getColumnValue(kyoEntity.getHihokenshaNo()));
         hihokenshaTempEntity.setShichosonCode(RString.EMPTY);
@@ -205,7 +205,7 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
      * @param count count
      * @return HihokenshaTempEntity HihokenshaTempEntity
      */
-    public HihokenshaTempEntity edit被保険entity(
+    public HihokenshaTempEntity edit被保険entity2(
             DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity 予防給付計画自己作成短期利用日数entity,
             DbT3120YoboKeikakuJikoSakuseiKanriEntity kyoEntity, int count) {
         HihokenshaTempEntity hihokenshaTempEntity = new HihokenshaTempEntity();
@@ -215,7 +215,7 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
         hihokenshaTempEntity.setExShoHokenshaNo(RString.EMPTY);
         hihokenshaTempEntity.setExHihokenshaNo(getColumnValue(kyoEntity.getHihokenshaNo()));
         hihokenshaTempEntity.setExServiceTeikyoYm(予防給付計画自己作成短期利用日数entity.getRiyoYM());
-        hihokenshaTempEntity.setHenkanFlag(new RString("false"));
+        hihokenshaTempEntity.setHenkanFlag(值0);
         hihokenshaTempEntity.setOldShichosonCode(RString.EMPTY);
         hihokenshaTempEntity.setSofuHihokenshaNo(getColumnValue(kyoEntity.getHihokenshaNo()));
         hihokenshaTempEntity.setShichosonCode(RString.EMPTY);

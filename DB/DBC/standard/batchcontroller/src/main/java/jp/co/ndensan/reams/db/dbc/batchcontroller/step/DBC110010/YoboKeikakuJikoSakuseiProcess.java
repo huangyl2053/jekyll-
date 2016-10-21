@@ -106,7 +106,7 @@ public class YoboKeikakuJikoSakuseiProcess extends BatchProcessBase<YoboKeikakuJ
         for (DbT3120YoboKeikakuJikoSakuseiKanriEntity yoboKeikakuEntity : 予防給付計画自己作成管理entity) {
             自己作成管理一時TBL.insert(kyotakuKeikakuResult.edit居宅給付計画自己作成Entity2(予防給付計画自己作成短期利用日数entity,
                     yoboKeikakuEntity, 連番));
-            被保険者一時TBL.insert(kyotakuKeikakuResult.edit被保険entity(予防給付計画自己作成短期利用日数entity, yoboKeikakuEntity, 連番));
+            被保険者一時TBL.insert(kyotakuKeikakuResult.edit被保険entity2(予防給付計画自己作成短期利用日数entity, yoboKeikakuEntity, 連番));
             連番++;
         }
     }

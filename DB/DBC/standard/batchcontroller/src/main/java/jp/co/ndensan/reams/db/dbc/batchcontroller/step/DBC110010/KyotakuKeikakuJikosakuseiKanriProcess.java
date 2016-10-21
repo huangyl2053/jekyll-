@@ -80,7 +80,7 @@ public class KyotakuKeikakuJikosakuseiKanriProcess extends BatchProcessBase<Kyot
         for (DbT3119KyotakuKeikakuJikosakuseiKanriEntity kyotakuKeikakuTempEntity : 居宅給付計画自己作成管理entity) {
             自己作成管理一時TBL.insert(result.edit居宅給付計画自己作成管理Entity1(
                     居宅給付計利用日数entity, kyotakuKeikakuTempEntity, count));
-            被保険者一時TBL.insert(result.edit被保険者entity(居宅給付計利用日数entity,
+            被保険者一時TBL.insert(result.edit被保険者entity1(居宅給付計利用日数entity,
                     kyotakuKeikakuTempEntity, count));
             count++;
         }
