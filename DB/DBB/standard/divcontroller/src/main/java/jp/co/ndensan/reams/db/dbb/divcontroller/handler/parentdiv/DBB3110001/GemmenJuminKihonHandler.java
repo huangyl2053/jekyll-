@@ -286,10 +286,9 @@ public class GemmenJuminKihonHandler {
     public NendobunFukaGemmenListResult onClick_選択ボタン(HihokenshaNo 被保険者番号) {
         IFukaRirekiAllDiv 全賦課履歴 = div.getGemmenFukaRirekiAll().getCcdFukaRirekiAll();
         TsuchishoNo 通知書番号 = 全賦課履歴.getClicked通知書番号();
-        FlexibleYear 調定年度 = 全賦課履歴.getClicked調定年度();
         FlexibleYear 賦課年度 = 全賦課履歴.getClicked賦課年度();
         NendobunFukaGemmenListResult 減免リスト = KaigoHokenryoGemmen.createInstance()
-                .getJokyo(調定年度, 賦課年度, 通知書番号, 被保険者番号);
+                .getJokyo(賦課年度, 賦課年度, 通知書番号, 被保険者番号);
         return 減免リスト;
     }
 
@@ -359,6 +358,10 @@ public class GemmenJuminKihonHandler {
         取消情報パネル.getTxtTorikeshiShurui().clearValue();
         取消情報パネル.getTxtTorikeshiRiyu().setValue(null);
         取消情報パネル.getTxtTorikeshiRiyu().clearValue();
+    }
+
+    public boolean isNot取消() {
+        return div.getGemmenMain().getTorikeshiInfo().getTxtTorikeshiYMD().getValue() == null;
     }
 
     /**
@@ -1682,7 +1685,7 @@ public class GemmenJuminKihonHandler {
                     ? null : CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.保険料減免種類.getコード(),
                             減免種類コード, FlexibleDate.getNowDate()), 申請情報パネル.getTxtGemmenShurui().getValue());
             boolean flag4 = checkRString(介護賦課減免.get申請事由(), 申請情報パネル.getTxtShinseiRiyu().getValue());
-            return flag1 && flag2 && flag3 && flag4;
+            return flag1 || flag2 || flag3 || flag4;
         } else {
             RDate 申請日 = 申請情報パネル.getTxtShinseiYMD().getValue();
             boolean flag1 = 申請日 != null;
@@ -1712,13 +1715,13 @@ public class GemmenJuminKihonHandler {
             } else {
                 flag3 = checkRString(定値_二, 介護賦課減免.get減免状態区分());
             }
-            flag4 = checkRString(介護賦課減免.get申請事由(), 決定情報パネル.getTxtKetteiRiyu().getValue());
+            flag4 = checkRString(介護賦課減免.get減免事由(), 決定情報パネル.getTxtKetteiRiyu().getValue());
         } else {
             FlexibleDate 減免決定日 = 決定情報パネル.getTxtKetteiYMD().getValue();
             flag1 = !(減免決定日 == null || 減免決定日.isEmpty());
             flag3 = !承認.equals(決定情報パネル.getRadKetteiKubun().getSelectedValue());
-            RString 申請事由 = 決定情報パネル.getTxtKetteiRiyu().getValue();
-            flag4 = !(申請事由 == null || 申請事由.isEmpty());
+            RString 減免事由 = 決定情報パネル.getTxtKetteiRiyu().getValue();
+            flag4 = !(減免事由 == null || 減免事由.isEmpty());
         }
         if (最新減免の情報.toEntity() != null) {
             flag2 = checkDecimal(最新減免の情報.get減免額(), 決定情報パネル.getTxtZenkaiGemmengaku().getValue());
@@ -1879,7 +1882,7 @@ public class GemmenJuminKihonHandler {
             if (dec2 == null) {
                 return true;
             } else {
-                return (dec1.compareTo(dec2) == ゼロ_定値);
+                return !(dec1.compareTo(dec2) == ゼロ_定値);
             }
         }
     }

@@ -23,10 +23,12 @@ import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKe
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey.Builder;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -87,7 +89,7 @@ public class GemmenJuminKihon {
         } else if (全賦課履歴データ件数 == イチ_定値) {
             Fuka 賦課基本 = handler.get賦課基本();
             NendobunFukaGemmenListResult 減免リスト = KaigoHokenryoGemmen.createInstance()
-                    .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(),
+                    .getJokyo(賦課基本.get賦課年度(), 賦課基本.get賦課年度(),
                             div.getCcdKaigoFukaKihon().get通知書番号(), div.getCcdKaigoFukaKihon().get被保番号());
             load(減免リスト, div);
             handler.set全賦課履歴情報Visible(false);
@@ -180,19 +182,21 @@ public class GemmenJuminKihon {
      */
     public ResponseData<GemmenJuminKihonDiv> onClick_btnUpt(GemmenJuminKihonDiv div) {
         NendobunFukaGemmenList 年度分賦課減免リスト = ViewStateHolder.get(ViewStateKeys.年度分賦課減免リスト, NendobunFukaGemmenList.class);
+        GemmenJuminKihonHandler handler = getHandler(div);
         GemmenJoho 最新減免の情報 = 年度分賦課減免リスト.get最新減免の情報();
         GemmenJuminKihonValidationHandler validationHandler = new GemmenJuminKihonValidationHandler(div);
         // TODO ビジネス設計_DBBBZ13001_23_賦課の計算.xlsxの調定計算 が問題があります。
         ValidationMessageControlPairs pairs = validationHandler.決定日の必須入力チェック();
 //        pairs.add(validationHandler.減免額の整合性チェック());
-        pairs.add(validationHandler.減免額の必須入力チェック());
+        if (handler.isNot取消()) {
+            pairs.add(validationHandler.減免額の必須入力チェック());
+        }
         pairs.add(validationHandler.減免額の必須入力チェック1());
 //        pairs.add(validationHandler.計算処理の未実行チェック(最新減免の情報));
         pairs.add(validationHandler.決定日の必須入力チェック２());
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        GemmenJuminKihonHandler handler = getHandler(div);
         RString 入力状況 = handler.メッセージ判断(最新減免の情報);
         QuestionMessage message = null;
         if (入力状況_新規申請.equals(入力状況)) {
@@ -218,6 +222,9 @@ public class GemmenJuminKihon {
                     DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_決定.toString(), 処理_取消.toString()).evaluate());
         }
         if (!ResponseHolder.isReRequest()) {
+            if (message == null) {
+                throw new ApplicationException(UrErrorMessages.保存データなし.getMessage().evaluate());
+            }
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
