@@ -43,6 +43,9 @@ public class DBB271003_TokuchoTaishoshaIchiranSakuseiParameter extends BatchPara
     private static final String KEY_KAKUNINJOKYOKUBUN = "kakuninJokyoKubun";
     @BatchParameter(key = KEY_KAKUNINJOKYOKUBUN, name = "確認状況区分")
     private boolean kakuninJokyoKubun;
+    private static final String KEY_OUTPUTID = "outputID";
+    @BatchParameter(key = KEY_OUTPUTID, name = "出力順ID")
+    private RString outputID;
 
     /**
      * toProcessParameterのメソドです。
