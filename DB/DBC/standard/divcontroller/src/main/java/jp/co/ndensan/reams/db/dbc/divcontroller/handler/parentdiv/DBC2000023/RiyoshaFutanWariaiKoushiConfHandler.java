@@ -254,35 +254,31 @@ public class RiyoshaFutanWariaiKoushiConfHandler {
      * 負担割合証のソースデータ取得
      *
      * @param div RiyoshaFutanWariaiKoushiConfDiv
-     * @param 引継ぎデータ RiyoshaFutanWariaiKoushiConfData
      * @param 資格対象者 TaishoshaKey
      * @return SourceDataCollection
      */
     public SourceDataCollection getソースデータ取得(RiyoshaFutanWariaiKoushiConfDiv div,
-            FutanWariaiSokujiKouseiServiceData 引継ぎデータ,
             TaishoshaKey 資格対象者) {
         FutanWariaisho futanWariaisho;
         futanWariaisho = FutanWariaisho.createInstance();
         ShikibetsuCode 識別コード;
         識別コード = 資格対象者.get識別コード();
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
-        List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List = 引継ぎデータ.get利用者負担割合明細list();
         FutanWariaiShoDivParameter parameter = new FutanWariaiShoDivParameter();
-
+        parameter.set呼出し元画面区分(パラメータ);
         parameter.set交付年月日(new FlexibleDate(div.getPanelHakko().getTxtKofubi().toString()));
         parameter.set住所(RString.EMPTY);
         parameter.setカナ氏名(RString.EMPTY);
         parameter.set氏名(RString.EMPTY);
         parameter.set生年月日(new FlexibleDate(RString.EMPTY));
         parameter.set性別(RString.EMPTY);
-        parameter.set負担割合上段(div.getPanelShutsuryokuNaiyo().getLbl2wari().getText());
-        parameter.set適用期間開始日上段(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl2wariKaishiYmd().getText()));
-        parameter.set適用期間終了日上段(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl2wariShuryoYmd().getText()));
-        parameter.set負担割合下段(div.getPanelShutsuryokuNaiyo().getLbl1wari().getText());
-        parameter.set適用期間開始日下段(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariKaishiYmd().getText()));
-        parameter.set適用期間終了日下段(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().getText()));
-        parameter.set利用者負担割合明細(利用者負担割合明細List);
+        parameter.set負担割合1(div.getPanelShutsuryokuNaiyo().getLbl2wari().getText());
+        parameter.set適用期間開始日1(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl2wariKaishiYmd().getText()));
+        parameter.set適用期間終了日1(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl2wariShuryoYmd().getText()));
+        parameter.set負担割合2(div.getPanelShutsuryokuNaiyo().getLbl1wari().getText());
+        parameter.set適用期間開始日2(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariKaishiYmd().getText()));
+        parameter.set適用期間終了日2(new FlexibleDate(div.getPanelShutsuryokuNaiyo().getLbl1wariShuryoYmd().getText()));
 
-        return futanWariaisho.getSourceDataSinger(識別コード, 被保険者番号, parameter, パラメータ);
+        return futanWariaisho.getSourceDataSinger(識別コード, 被保険者番号, parameter);
     }
 }
