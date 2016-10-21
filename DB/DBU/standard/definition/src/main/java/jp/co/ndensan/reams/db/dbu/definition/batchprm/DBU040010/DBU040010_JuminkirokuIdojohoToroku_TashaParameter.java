@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyotruku;
+package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU040010;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojuminhyotruku.KaigojuminHyotrukuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class KaigojuminHyotrukuBatchParameter extends BatchParameterBase {
+public class DBU040010_JuminkirokuIdojohoToroku_TashaParameter extends BatchParameterBase {
 
     private static final String SHORITIMESTAMP = "shoriTimestamp";
     @BatchParameter(key = SHORITIMESTAMP, name = "処理日時")
@@ -27,7 +27,7 @@ public class KaigojuminHyotrukuBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public KaigojuminHyotrukuBatchParameter() {
+    public DBU040010_JuminkirokuIdojohoToroku_TashaParameter() {
     }
 
     /**

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1320011;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC060020.DBC060020_KyufuhiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -22,11 +23,11 @@ import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -34,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
@@ -51,6 +51,7 @@ public class KyufuTsuchiSakuseiIkatuHandler {
     private static final RString すべて選択 = new RString("すべて");
     private static final RString TWO = new RString("2");
     private static final RString ONE = new RString("1");
+    private static final int NUM_ZERO = 0;
     private static final RString ZERO = new RString("0");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
@@ -72,9 +73,9 @@ public class KyufuTsuchiSakuseiIkatuHandler {
     private static final RString 介護導入区分_導入済 = new RString("1");
     private static final RString 帳票レコード種別 = new RString("F1");
     private static final RString 広域の場合市町村コード = new RString("000000");
-    private static final RString 国保連IF取込レコードファイル名 = new RString("32200000.CSV");
     private static final RString SHARED_FILE_NAME = new RString("1_322");
     private static final RString 共有ファイル名 = new RString("国保連IF取込レコードファイル");
+    private static final RString FILTER = new RString("1_322*.CSV");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
 
     /**
@@ -192,7 +193,7 @@ public class KyufuTsuchiSakuseiIkatuHandler {
         List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(SHARED_FILE_NAME);
         for (UzT0885SharedFileEntryEntity sharedfile : sharedFiles) {
             FilesystemPath tempPath = get共有ファイル(
-                    FilesystemPath.fromString(Path.getTmpDirectoryPath()), sharedfile.getSharedFileId());
+                    FilesystemPath.fromString(Path.getTmpDirectoryPath()), sharedfile);
             if (tempPath != null) {
                 localFilePath = tempPath.toRString();
             }
@@ -201,9 +202,16 @@ public class KyufuTsuchiSakuseiIkatuHandler {
             div.getKyufuTsuchiSakusei().getGrdTuuchiJoho().setDataSource(new ArrayList());
             return;
         }
+        RString localFileName;
+        List<RString> localFiles = Arrays.asList(Directory.getFiles(localFilePath, FILTER, false));
+        if (localFiles != null && !localFiles.isEmpty()) {
+            localFileName = localFiles.get(NUM_ZERO);
+        } else {
+            return;
+        }
         List<grdTuuchiJoho_Row> list = new ArrayList();
         try (CsvReader<KyufuTsuchiSakuseiIkatuCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                Path.combinePath(localFilePath, 国保連IF取込レコードファイル名),
+                Path.combinePath(localFilePath, localFileName),
                 KyufuTsuchiSakuseiIkatuCsvEntity.class)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEncode(Encode.SJIS)
@@ -294,9 +302,8 @@ public class KyufuTsuchiSakuseiIkatuHandler {
         }
     }
 
-    private FilesystemPath get共有ファイル(FilesystemPath local複写先フォルダパス, RDateTime sharedFileID) {
-        ReadOnlySharedFileEntryDescriptor ro_entry = new ReadOnlySharedFileEntryDescriptor(
-                FilesystemName.fromString(SHARED_FILE_NAME), sharedFileID);
+    private FilesystemPath get共有ファイル(FilesystemPath local複写先フォルダパス, UzT0885SharedFileEntryEntity entity) {
+        ReadOnlySharedFileEntryDescriptor ro_entry = ReadOnlySharedFileEntryDescriptor.fromEntity(entity);
         FilesystemPath copiedPath = SharedFile.copyToLocal(ro_entry, local複写先フォルダパス);
         return copiedPath;
     }

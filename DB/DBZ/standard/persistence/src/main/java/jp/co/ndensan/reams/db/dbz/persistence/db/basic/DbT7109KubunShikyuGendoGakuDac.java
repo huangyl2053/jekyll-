@@ -2,17 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7109KubunShikyuGendoGaku;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7109KubunShikyuGendoGaku.rirekiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7109KubunShikyuGendoGaku.tekiyoKaishiYM;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7109KubunShikyuGendoGaku.yoKaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGaku;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGaku.rirekiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGaku.tekiyoKaishiYM;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGaku.yoKaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;

@@ -174,6 +174,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
                 } else if (時効起算日 != null && !時効起算日.isEmpty() && edit日期(収入情報.get収入日()).isBefore(時効起算日.plusYear(2))
                         && 仮の時効起算日.isBefore(edit日期(収入情報.get収入日()))) {
                     仮の時効起算日 = edit日期(収入情報.get収入日());
+                    is収入年月日 = true;
                 }
             }
         }

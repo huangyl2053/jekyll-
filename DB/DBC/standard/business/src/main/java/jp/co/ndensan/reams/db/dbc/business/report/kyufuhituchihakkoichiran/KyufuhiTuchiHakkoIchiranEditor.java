@@ -98,8 +98,10 @@ public class KyufuhiTuchiHakkoIchiranEditor implements IKyufuhiTuchiHakkoIchiran
                     toコンマ区切りRString(new Decimal(item.getサービス費用_円().toString()), 0).concat("円");
         }
         source.listCenter_13 = item.get要介護度();
-        source.listCenter_14 = new FlexibleDate(item.get資格喪失日()).wareki()
-                .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        if (item.get資格喪失日() != null) {
+            source.listCenter_14 = new FlexibleDate(item.get資格喪失日()).wareki()
+                    .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        }
         source.listCenter_15 = item.get喪失事由();
         source.listCenter_16 = item.get補正有無();
         source.listHihokenshaNo_1 = item.get被保険者氏名();
