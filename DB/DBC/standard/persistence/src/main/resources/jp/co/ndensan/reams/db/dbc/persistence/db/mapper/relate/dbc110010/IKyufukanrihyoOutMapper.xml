@@ -637,7 +637,7 @@
         <result property="exShoHokenshaNo" column="exShoHokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>   
         <result property="exHihokenshaNo" column="exHihokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>                                                                                                                           
         <result property="exServiceTeikyoYm" column="exServiceTeikyoYm"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>                                 
-        <result property="henkanFlag"  column="henkanFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>                                                 
+        <result property="henkanFlag"  column="henkanFlag" />                                                 
         <result property="oldShichosonCode" column="oldShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>                          
         <result property="sofuHihokenshaNo" column="sofuHihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>                                 
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>                                
