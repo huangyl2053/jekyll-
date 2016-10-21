@@ -13,10 +13,11 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.JissekiFutangakuDataTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjikofutangakukeisankekkaichiran.GassanJikofutangakuKeisanKekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjikofutangakukeisankekkaichiran.GassanJikofutangakuKeisanKekkaIchiranSource;
-import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -68,7 +69,7 @@ public class DBC200029GassanKekkaIchiranReportProcess extends BatchKeyBreakBase<
         市町村コード = parameter.get市町村コード();
         市町村名称 = AssociationFinderFactory.createInstance().getAssociation(市町村コード).get市町村名();
         Long 帳票出力順ID = parameter.get帳票出力順ID();
-        IOutputOrder 出力順情報 = ReportUtil.get出力順ID(subGyomuCode, 帳票出力順ID, reportId);
+        IOutputOrder 出力順情報 = get出力順ID(subGyomuCode, 帳票出力順ID, reportId);
         RString 出力順 = MyBatisOrderByClauseCreator.create(DBC200029GassanKekkaIchiranOutputOrder.class, 出力順情報);
         parameter.set出力順(出力順);
         processCore = new DBC200029GassanKekkaIchiranReportProcessCore(出力順情報);
@@ -116,5 +117,18 @@ public class DBC200029GassanKekkaIchiranReportProcess extends BatchKeyBreakBase<
     @Override
     protected void afterExecute() {
         batchReportWriter.close();
+    }
+
+    private IOutputOrder get出力順ID(
+            SubGyomuCode subGyomuCode,
+            Long shutsuryokujunId,
+            ReportId reportId) {
+        if (shutsuryokujunId != null) {
+            IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            return chohyoShutsuryokujunFinder.get出力順(subGyomuCode,
+                    reportId,
+                    Long.valueOf(shutsuryokujunId.toString()));
+        }
+        return null;
     }
 }
