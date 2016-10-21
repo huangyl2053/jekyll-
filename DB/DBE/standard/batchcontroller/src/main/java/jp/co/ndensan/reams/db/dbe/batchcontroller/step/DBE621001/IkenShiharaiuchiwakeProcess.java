@@ -98,7 +98,31 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
     @Override
     protected void createWriter() {
         batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
-                .addBreak(new BreakerCatalog<IkenShiharaiuchiwakeReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .addBreak(new BreakerCatalog<IkenShiharaiuchiwakeReportSource>().new SimpleLayoutBreaker(
+
+
+
+
+
+
+
+
+
+                    IkenShiharaiuchiwakeReportSource.LAYOUT_BREAK_KEYS) {
+            @Override
+                    public ReportLineRecord<IkenShiharaiuchiwakeReportSource> occuredBreak(
+                            ReportLineRecord<IkenShiharaiuchiwakeReportSource> currentRecord,
+                            ReportLineRecord<IkenShiharaiuchiwakeReportSource> nextRecord,
+                            ReportDynamicChart dynamicChart) {
+                                int layout = currentRecord.getSource().layout.index();
+                                currentRecord.setFormGroupIndex(layout);
+                                if (nextRecord != null && nextRecord.getSource() != null) {
+                                    layout = nextRecord.getSource().layout.index();
+                                    nextRecord.setFormGroupIndex(layout);
+                                }
+                                return currentRecord;
+                            }
+                }).addBreak(new BreakerCatalog<IkenShiharaiuchiwakeReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
