@@ -70,6 +70,29 @@ public class ChosainJohoManager {
     }
 
     /**
+     * 市町村コード、認定調査委託先コードに合致する調査員情報の一覧を返します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 認定調査委託先コード 認定調査委託先コード
+     * @return ChosainJohoの{@code list}
+     */
+    @Transaction
+    public List<ChosainJoho> get調査員情報(
+            LasdecCode 市町村コード,
+            ChosaItakusakiCode 認定調査委託先コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+        List<ChosainJoho> businessList = new ArrayList<>();
+        for (DbT5913ChosainJohoEntity entity : dac.selectByKey(
+                市町村コード,
+                認定調査委託先コード)) {
+            entity.initializeMd5();
+            businessList.add(new ChosainJoho(entity));
+        }
+        return businessList;
+    }
+
+    /**
      * 調査員情報を全件返します。
      *
      * @return ChosainJohoの{@code list}

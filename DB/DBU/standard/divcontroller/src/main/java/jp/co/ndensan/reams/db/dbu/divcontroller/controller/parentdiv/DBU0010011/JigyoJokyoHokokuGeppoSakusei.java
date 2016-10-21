@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -251,12 +250,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho4(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        FlexibleDate shukeiYM4 = div.getTxtShukeiYM4().getValue();
-        if (div.getRadlblShukeiType4().getSelectedKey().equals(new RString("shinsaYM4"))) {
-            div.getTxtShukeiYM4().setValue(new FlexibleDate(div.getTxtShukeiYM4Bak()));
-        } else if (div.getRadlblShukeiType4().getSelectedKey().equals(new RString("keiteiYM4"))) {
-            div.getTxtShukeiYM4().setValue(shukeiYM4);
-        }
+        getHandler(div).onChange一般状況12to14集計年月();        
         setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }
@@ -267,13 +261,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @param div 事業状況報告（月報）作成Div
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
-    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho5(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        FlexibleDate shukeiYM5 = div.getTxtShukeiYM5().getValue();
-        if (div.getRadlblShukeiType5().getSelectedKey().equals(new RString("shinsaYM5"))) {
-            div.getTxtShukeiYM5().setValue(new FlexibleDate(div.getTxtShukeiYM5Bak()));
-        } else if (div.getRadlblShukeiType5().getSelectedKey().equals(new RString("keiteiYM5"))) {
-            div.getTxtShukeiYM5().setValue(shukeiYM5);
-        }
+    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_cblOutputTaisho5(JigyoJokyoHokokuGeppoSakuseiDiv div) {     
+        getHandler(div).onChange保険給付決定状況集計年月();
         setすべて選択チェックボックス(div);
         return ResponseData.of(div).respond();
     }

@@ -32,4 +32,12 @@ public interface IChosaItakusakiAndChosainGuideMapper {
      * @return List<IKijuntsukiShichosonjohoRelateEntity>
      */
     List<IKijuntsukiShichosonjohoRelateEntity> getKijuntsukiShichoson(ChosaItakusakiAndChosainGuideParameter params);
+    
+    /**
+     * 調査委託先情報の取得処理します。
+     *
+     * @param params 調査委託先ガイドパラメータクラス
+     * @return List<IKijuntsukiShichosonjohoRelateEntity>
+     */
+    List<IKijuntsukiShichosonjohoRelateEntity> getChosaItakusaki(ChosaItakusakiAndChosainGuideParameter params);
 }

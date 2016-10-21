@@ -208,31 +208,6 @@ public class ShujiiIkenshoSakuseiIrai {
     }
 
     /**
-     * 削除処理を行います。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onSelect_btnDelete(ShujiiIkenshoSakuseiIraiDiv div) {
-        dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
-        if (RString.isNullOrEmpty(row.getIraiKubun())) {
-            clearShujii(row);
-            row.setStatus(RString.EMPTY);
-        } else {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(UrQuestionMessages.確認_汎用.getMessage().replace(再依頼申請者削除.toString())).respond();
-            }
-            if (new RString(UrQuestionMessages.確認_汎用.getMessage().replace(再依頼申請者削除.toString()).getCode()).
-                    equals(ResponseHolder.getMessageCode()) && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-                row.setStatus(削除);
-            } else {
-                div.getDgShinseishaIchiran().getActiveRow().setSelected(Boolean.FALSE);
-            }
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 保存処理を行います。
      *
      * @param div コントロールdiv

@@ -43,12 +43,14 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
     private static final int 平成17年度 = 2005;
     private static final int 平成18年度 = 2006;
     private static final int 平成20年度 = 2008;
-    private static final int 年度報告月 = 13;
+    private static final int 年度報告月 = 16;
     private static final int INT_ITTI = 1;
     private static final int INT_NI = 2;
     private static final int INT_ZEO = 0;
     private static final int INT_YOU = 4;
     private static final int INT_ROKU = 6;
+    private static final int INT_JUNI = 12;
+    private static final int INT_1988 = 1988;
     private static final RString 市町村識別ID = new RString("00");
     private static final RString 選択する = new RString("1");
     private static final RString 選択無し = new RString("0");
@@ -197,12 +199,10 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
      * @param システム日付 システム日付
      */
     public void onClick_onChangeShukeiFromYM(RDate システム日付) {
-        RStringBuilder builder = new RStringBuilder();
         RString 状況集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_一般状況集計方法, システム日付, SubGyomuCode.DBU介護統計報告);
         RString 給付集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_保険給付集計方法, システム日付, SubGyomuCode.DBU介護統計報告);
         if (!RString.isNullOrEmpty(div.getDdlShukeiFromYM().getSelectedKey())) {
-            FlexibleDate 集計開始年月 = new FlexibleDate(builder.append(div.getDdlHokokuNendo().getSelectedKey())
-                    .append(div.getDdlShukeiFromYM().getSelectedKey()).toRString());
+            FlexibleDate 集計開始年月 = getSyukeiFromData(div);
             if (審査年月で集計.equals(状況集計方法)) {
                 div.getTxtShukeiFromYM5().setValue(集計開始年月.minusMonth(INT_ITTI));
                 div.setHiddenShukeiFromYM5(new RString(集計開始年月.toString()));
@@ -247,12 +247,10 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
      * @param システム日付 システム日付
      */
     public void onClick_onChangeShukeiToYM(RDate システム日付) {
-        RStringBuilder builder = new RStringBuilder();
         RString 状況集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_一般状況集計方法, システム日付, SubGyomuCode.DBU介護統計報告);
         RString 給付集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_保険給付集計方法, システム日付, SubGyomuCode.DBU介護統計報告);
         if (!RString.isNullOrEmpty(div.getDdlShukeiToYM().getSelectedKey())) {
-            FlexibleDate 報告終了年月 = new FlexibleDate(builder.append(div.getDdlHokokuNendo().getSelectedKey())
-                    .append(div.getDdlShukeiToYM().getSelectedKey()).toRString());
+            FlexibleDate 報告終了年月 = getSyukeiToData(div);
             if (審査年月で集計.equals(状況集計方法)) {
                 div.getTxtShukeiToYM5().setValue(報告終了年月.minusMonth(INT_ITTI));
                 div.setHiddenShukeiToYM5(new RString(報告終了年月.toString()));
@@ -289,6 +287,28 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         setチェックボックス非活性();
         set一般状況集計年月選択ラジオ非活性();
         set保険給付決定集計年月選択ラジオ非活性();
+    }
+    
+    private FlexibleDate getSyukeiFromData(JigyoJokyoHokokuNempoSakueiDiv div) {
+        RStringBuilder builder = new RStringBuilder();
+        RString year = new RString(div.getDdlHokokuNendo().getSelectedKey().toString());
+        RString month = new RString(div.getDdlShukeiFromYM().getSelectedKey().toString());
+        if (Integer.parseInt(month.toString()) < INT_YOU) {
+            year = new RString(String.valueOf(Integer.parseInt(year.toString()) + 1)); 
+        }
+        return new FlexibleDate(builder.append(year)
+                    .append(div.getDdlShukeiFromYM().getSelectedKey()).toRString());
+    }
+    
+    private FlexibleDate getSyukeiToData(JigyoJokyoHokokuNempoSakueiDiv div) {
+        RStringBuilder builder = new RStringBuilder();
+        RString year = new RString(div.getDdlHokokuNendo().getSelectedKey().toString());
+        RString month = new RString(div.getDdlShukeiToYM().getSelectedKey().toString());
+        if (Integer.parseInt(month.toString()) < INT_YOU) {
+            year = new RString(String.valueOf(Integer.parseInt(year.toString()) + 1)); 
+        }
+        return new FlexibleDate(builder.append(year)
+                    .append(div.getDdlShukeiToYM().getSelectedKey()).toRString());
     }
 
     /**
@@ -705,17 +725,30 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
     }
 
     private List<KeyValueDataSource> get報告年月(RString 報告終了年月) {
+        int month;
+        int year = Integer.parseInt(div.getDdlHokokuNendo().getSelectedKey().toString());
         List<KeyValueDataSource> keyValue = new ArrayList<>();
-        for (int i = 1; i < 年度報告月; i++) {
+        for (int i = INT_YOU; i < 年度報告月; i++) {
+            month = i;
+            if (i > INT_JUNI) {
+                month = month - INT_JUNI;
+            }
             KeyValueDataSource dataSource = new KeyValueDataSource();
-            dataSource.setKey(new RString(i).padZeroToLeft(INT_NI));
-            dataSource.setValue(new RString(i).padZeroToLeft(INT_NI));
+            dataSource.setKey(new RString(month).padZeroToLeft(INT_NI));
+            dataSource.setValue(new RString(month).padZeroToLeft(INT_NI).insert(0, toWareki(year, month) + "."));
             keyValue.add(dataSource);
         }
         if (!RString.isNullOrEmpty(報告終了年月)) {
-            Collections.sort(keyValue, new DateComparator());
+            Collections.reverse(keyValue);
         }
         return keyValue;
+    }
+
+    private String toWareki(int year, int month) {
+        if (month < INT_YOU) {
+            year++;
+        }
+        return new RString(year - INT_1988).padZeroToLeft(INT_NI).insert(0, "平").toString();
     }
 
     private void set審査年月と決定年月(RDate システム日付) {

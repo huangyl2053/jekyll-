@@ -28,11 +28,16 @@ import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 様式別連携情報作成のバッチフ処理クラスです。
@@ -58,10 +63,14 @@ public class DBU020010_JigyoHokokuRenkei_Main extends BatchFlowBase<DBU020010_Ji
     private static final String SHOKANYOUSIKINI_GOPROCESS = "shokanYousikiNi_GoProcess";
     private static final String SHOKANYOUSIKINI_ICHIPROCESS = "shokanYousikiNi_IchiProcess";
     private static final String SHOKANYOUSIKINI_SITIPROCESS = "shokanYousikiNi_SitiProcess";
+    private FileSpoolManager manager;
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBU020011"));
 
     @Override
     protected void defineFlow() {
-        RString spoolWorkPath = Directory.createTmpDirectory();
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
+                
         getParameter().setSpoolWorkPath(spoolWorkPath);
         if (getParameter().is出力_一般状況1_10()) {
             executeStep(YOUSIKIICHIPROCESS);
@@ -103,6 +112,7 @@ public class DBU020010_JigyoHokokuRenkei_Main extends BatchFlowBase<DBU020010_Ji
                 + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) + ".zip");
         RString zipPath = Path.combinePath(spoolWorkPath, csvFileName);
         ZipUtil.createFromFolder(zipPath, spoolWorkPath);
+        manager.spool(zipPath);
     }
 
     /**

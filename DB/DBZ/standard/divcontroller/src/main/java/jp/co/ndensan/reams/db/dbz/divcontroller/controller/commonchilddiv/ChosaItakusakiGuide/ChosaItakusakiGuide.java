@@ -59,7 +59,7 @@ public class ChosaItakusakiGuide {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        List<KijuntsukiShichosonjoho> list = finder.getKojinJokyoShokai(createParam(div)).records();
+        List<KijuntsukiShichosonjoho> list = finder.getChosaItakusaki(createParam(div)).records();
         getHandler(div).setDataGrid(list);
         return ResponseData.of(div).respond();
     }

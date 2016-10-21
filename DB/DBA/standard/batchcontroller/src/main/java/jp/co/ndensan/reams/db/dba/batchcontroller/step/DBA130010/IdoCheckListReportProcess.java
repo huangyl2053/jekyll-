@@ -187,8 +187,16 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
 
                 識別コード = entity.get識別コード();
 
-                entity.set区分_前_資格(ShikakuKubun.toValue(entity.get区分_前_資格()).get略称());
-                entity.set区分_後_資格(ShikakuKubun.toValue(entity.get区分_後_資格()).get略称());
+                if (RString.isNullOrEmpty(entity.get区分_前_資格())) {
+                    entity.set区分_前_資格(RString.EMPTY);
+                } else {
+                    entity.set区分_前_資格(ShikakuKubun.toValue(entity.get区分_前_資格()).get略称());
+                }
+                if (RString.isNullOrEmpty(entity.get区分_後_資格())) {
+                    entity.set区分_後_資格(RString.EMPTY);
+                } else {
+                    entity.set区分_後_資格(ShikakuKubun.toValue(entity.get区分_後_資格()).get略称());
+                }
             }
         }
 
