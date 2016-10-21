@@ -183,6 +183,19 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
     }
 
     /**
+     * 主キーで介護事業者指定サービスを物理的に削除します。
+     *
+     * @param entity 介護事業者指定サービス
+     * @return 削除件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int deletePhysical(DbT7063KaigoJigyoshaShiteiServiceEntity entity) throws NullPointerException {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(介護事業者指定サービス.toString()));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 主キーで介護事業者指定サービスを削除します。
      *
      * @param entity 介護事業者指定サービス
@@ -192,7 +205,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceDac implements ISaveable<DbT7063Ka
     @Transaction
     public int delete(DbT7063KaigoJigyoshaShiteiServiceEntity entity) throws NullPointerException {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(介護事業者指定サービス.toString()));
-        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.delete(entity).execute();
     }
 
     /**

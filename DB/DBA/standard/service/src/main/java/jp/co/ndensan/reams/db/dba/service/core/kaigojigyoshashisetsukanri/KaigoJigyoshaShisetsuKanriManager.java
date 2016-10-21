@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukan
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.JigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJigyoshaRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kaigojigyoshashisetsukanri.IKaigoJigyoshaShisetsuKanriMapper;
+import jp.co.ndensan.reams.db.dba.service.core.jigyoshaservice.JigyoshaServiceManager;
 import jp.co.ndensan.reams.db.dba.service.core.jigyoshatouroku.JigyoshaTourokuFinder;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyoshaBuilder;
@@ -26,10 +27,11 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihy
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyoshaBuilder;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyoshaIdentifier;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceIdentifier;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigojigyosha.kaigojigyosha.KaigoJigyoshaManager;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsu;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
@@ -43,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -57,9 +60,9 @@ public class KaigoJigyoshaShisetsuKanriManager {
 
     private final MapperProvider mapperProvider;
     private final DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005dac;
-    private final DbT7063KaigoJigyoshaShiteiServiceDac dbT7063dac;
     private static final RString 介護保険施設 = new RString("11");
-    private final KaigoJigyoshaManager manager;
+    private final KaigoJigyoshaManager 事業者Manager;
+    private final JigyoshaServiceManager 事業者サービスManager;
     private final KaigoJogaiTokureiTaishoShisetsuManager 対象施設;
 
     /**
@@ -68,8 +71,8 @@ public class KaigoJigyoshaShisetsuKanriManager {
     KaigoJigyoshaShisetsuKanriManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbT1005dac = InstanceProvider.create(DbT1005KaigoJogaiTokureiTaishoShisetsuDac.class);
-        this.dbT7063dac = InstanceProvider.create(DbT7063KaigoJigyoshaShiteiServiceDac.class);
-        this.manager = InstanceProvider.create(KaigoJigyoshaManager.class);
+        this.事業者Manager = InstanceProvider.create(KaigoJigyoshaManager.class);
+        this.事業者サービスManager = InstanceProvider.create(JigyoshaServiceManager.class);
         this.対象施設 = InstanceProvider.create(KaigoJogaiTokureiTaishoShisetsuManager.class);
     }
 
@@ -80,13 +83,13 @@ public class KaigoJigyoshaShisetsuKanriManager {
      */
     KaigoJigyoshaShisetsuKanriManager(MapperProvider mapperProvider,
             DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005dac,
-            DbT7063KaigoJigyoshaShiteiServiceDac dbT7063dac,
             KaigoJigyoshaManager manager,
+            JigyoshaServiceManager 事業者サービスManager,
             KaigoJogaiTokureiTaishoShisetsuManager 対象施設) {
         this.mapperProvider = mapperProvider;
         this.dbT1005dac = dbT1005dac;
-        this.dbT7063dac = dbT7063dac;
-        this.manager = manager;
+        this.事業者Manager = manager;
+        this.事業者サービスManager = 事業者サービスManager;
         this.対象施設 = 対象施設;
     }
 
@@ -109,10 +112,12 @@ public class KaigoJigyoshaShisetsuKanriManager {
     @Transaction
     public boolean checkKikanGorisei(KaigoJogaiTokureiParameter parameter) {
 
+        FlexibleDate yukoKaishiYMD = parameter.getYukoKaishiYMD();
+        yukoKaishiYMD = yukoKaishiYMD == null || yukoKaishiYMD.isEmpty() ? FlexibleDate.MIN : yukoKaishiYMD;
         FlexibleDate yukoShuryoYMD = parameter.getYukoShuryoYMD();
-        boolean checkFlag = false;
+        boolean checkFlag;
         if (yukoShuryoYMD != null && !yukoShuryoYMD.isEmpty()) {
-            checkFlag = parameter.getYukoKaishiYMD().isBeforeOrEquals(yukoShuryoYMD);
+            checkFlag = yukoKaishiYMD.isBeforeOrEquals(yukoShuryoYMD);
         } else {
             checkFlag = true;
         }
@@ -152,8 +157,8 @@ public class KaigoJigyoshaShisetsuKanriManager {
                 break;
             }
             if (count != relateEntityList.size() && relateEntity.getYukoShuryoYMD() != null
-                && relateEntityList.get(count).getYukoKaishiYMD() != null
-                && relateEntityList.get(count).getYukoKaishiYMD().isBeforeOrEquals(relateEntity.getYukoShuryoYMD())) {
+                    && relateEntityList.get(count).getYukoKaishiYMD() != null
+                    && relateEntityList.get(count).getYukoKaishiYMD().isBeforeOrEquals(relateEntity.getYukoShuryoYMD())) {
                 重複チェックフラグ = true;
                 break;
             }
@@ -172,9 +177,6 @@ public class KaigoJigyoshaShisetsuKanriManager {
     @Transaction
     public void サービスと事業者期間関連のチェック(List<ServiceJohoBusiness> サービス一覧List,
             FlexibleDate 事業者の有効開始日, FlexibleDate 事業者の有効終了日) {
-        if (事業者の有効終了日 == null || 事業者の有効終了日.isEmpty()) {
-            事業者の有効終了日 = FlexibleDate.MAX;
-        }
 
         RStringBuilder エラーメッセージ = new RStringBuilder();
         for (ServiceJohoBusiness サービス一覧 : サービス一覧List) {
@@ -187,12 +189,14 @@ public class KaigoJigyoshaShisetsuKanriManager {
                 エラーメッセージ.append(new RString(" "));
                 continue;
             }
-            if (有効終了日 != null && !有効終了日.isEmpty() && 事業者の有効開始日.isBefore(有効終了日)) {
+            if (有効開始日 != null && !有効開始日.isEmpty() && 有効開始日.isBefore(事業者の有効開始日)) {
                 エラーメッセージ.append(サービス略称);
                 エラーメッセージ.append(new RString(" "));
                 continue;
             }
-            if (有効開始日 != null && !有効開始日.isEmpty() && 事業者の有効終了日.isBefore(有効開始日)) {
+            if (事業者の有効終了日 != null && !事業者の有効終了日.isEmpty()
+                    && 有効終了日 != null && !有効終了日.isEmpty()
+                    && 事業者の有効終了日.isBefore(有効終了日)) {
                 エラーメッセージ.append(サービス略称);
                 エラーメッセージ.append(new RString(" "));
             }
@@ -271,6 +275,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
         IKaigoJigyoshaShisetsuKanriMapper iKaigoJigyoshaShisetsuKanri = mapperProvider.create(IKaigoJigyoshaShisetsuKanriMapper.class);
         List<DbT7063KaigoJigyoshaShiteiServiceEntity> サービス一覧情報 = iKaigoJigyoshaShisetsuKanri.getServiceItiranJoho(parameter);
         for (DbT7063KaigoJigyoshaShiteiServiceEntity entity : サービス一覧情報) {
+            entity.initializeMd5();
             KaigoJigyoshaShiteiService business = new KaigoJigyoshaShiteiService(entity);
             serviceShuruiList.add(business);
         }
@@ -311,10 +316,35 @@ public class KaigoJigyoshaShisetsuKanriManager {
             RString 事業者種別,
             KaigoJogaiTokureiTaishoShisetsu 介護除外住所地特例対象施設) {
         if (事業者種別.equals(介護保険施設)) {
-            return manager.save(事業者登録情報);
+            return 事業者Manager.save(事業者登録情報);
         } else {
             return 対象施設.save介護除外住所地特例対象施設(介護除外住所地特例対象施設);
         }
+    }
+
+    /**
+     * 新規に追加した事業者・事業者サービスを一括で登録します。
+     *
+     * @param 事業者登録情報 事業者情報
+     * @param サービスList 事業者サービスのList
+     * @return 全ての保存に成功した場合、true
+     */
+    @Transaction
+    public boolean insertJigyoshaAndService(KaigoJigyosha 事業者登録情報,
+            Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> サービスList) {
+        boolean isSave = 事業者Manager.save(事業者登録情報);
+
+        JigyoshaNo jigyoshaNo = 事業者登録情報.get事業者番号();
+        FlexibleDate yukoKaishiDate = 事業者登録情報.get有効開始日();
+
+        for (KaigoJigyoshaShiteiService service : サービスList.values()) {
+            DbT7063KaigoJigyoshaShiteiServiceEntity entity = service.toEntity();
+            entity.setJigyoshaNo(jigyoshaNo);
+            entity.setYukoKaishiYMD(yukoKaishiDate);
+            isSave = 事業者サービスManager.insertJigyoshaServiceJoho(new KaigoJigyoshaShiteiService(entity));
+        }
+
+        return isSave;
     }
 
     /**
@@ -333,7 +363,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
             KaigoJogaiTokureiTaishoShisetsu 旧施設情報, KaigoJogaiTokureiTaishoShisetsu 施設情報) {
         if (介護保険施設.equals(事業者種別)) {
             if (旧事業者情報.get有効開始日().equals(事業者情報.get有効開始日())) {
-                return manager.save(事業者情報);
+                return 事業者Manager.save(事業者情報);
             } else {
                 JigyoshaTourokuFinder jigyoshaTourokuFinder = JigyoshaTourokuFinder.createInstance();
                 KaigoJigyoshaDaihyoshaIdentifier identifier
@@ -345,7 +375,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
                 kaigoJigyoshaBuilder.setKaigoJigyoshaDaihyosha(kaigoJigyoshaDaihyosha.deleted());
                 旧事業者情報 = kaigoJigyoshaBuilder.build();
                 jigyoshaTourokuFinder.saveOrDelete(旧事業者情報);
-                return manager.save(事業者情報);
+                return 事業者Manager.save(事業者情報);
             }
         } else {
             if (旧施設情報.get有効開始年月日().equals(施設情報.get有効開始年月日())) {
@@ -358,65 +388,84 @@ public class KaigoJigyoshaShisetsuKanriManager {
     }
 
     /**
-     * 事業者サービス情報取得。
+     * 修正した事業者・事業者サービスを一括で更新します。
      *
-     * @param parameter KaigoJigyoshaShisetsuKanriMapperParameter
-     * @return 事業者サービス情報取得
+     * @param 旧事業者情報 旧事業者情報
+     * @param 事業者情報 事業者情報
+     * @param サービスList 事業者サービスのList
+     * @return 全ての保存に成功した場合、true
      */
     @Transaction
-    public SearchResult<KaigoJigyoshaShiteiService> getJigyoshaServiceJoho(KaigoJigyoshaShisetsuKanriMapperParameter parameter) {
+    public boolean updateJigyoshaAndService(KaigoJigyosha 旧事業者情報, KaigoJigyosha 事業者情報,
+            Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> サービスList) {
 
-        List<KaigoJigyoshaShiteiService> serviceShuruiList = new ArrayList<>();
-        List<DbT7063KaigoJigyoshaShiteiServiceEntity> 事業者サービス情報取得 = dbT7063dac.select事業者サービス(parameter.getJigyoshaNo(),
-                parameter.getサービス種類コード(), parameter.getYukoKaishiYMD());
-        if (事業者サービス情報取得 == null || 事業者サービス情報取得.isEmpty()) {
-            return SearchResult.of(Collections.<KaigoJigyoshaShiteiService>emptyList(), 0, false);
+        boolean isSave = updateJigyosha(旧事業者情報, 事業者情報);
+
+        JigyoshaNo jigyoshaNo = 事業者情報.get事業者番号();
+        FlexibleDate yukoKaishiDate = 事業者情報.get有効開始日();
+
+        for (KaigoJigyoshaShiteiService service : サービスList.values()) {
+            DbT7063KaigoJigyoshaShiteiServiceEntity oldEntity = service.toEntity();
+            DbT7063KaigoJigyoshaShiteiServiceEntity newEntity = service.toEntity();
+            newEntity.setJigyoshaNo(jigyoshaNo);
+            newEntity.setYukoKaishiYMD(yukoKaishiDate);
+            isSave = 事業者サービスManager.updateJigyoshaServiceJoho(new KaigoJigyoshaShiteiService(oldEntity), new KaigoJigyoshaShiteiService(newEntity));
         }
-        for (DbT7063KaigoJigyoshaShiteiServiceEntity entity : 事業者サービス情報取得) {
-            entity.initializeMd5();
-            serviceShuruiList.add(new KaigoJigyoshaShiteiService(entity));
-        }
-        return SearchResult.of(serviceShuruiList, 0, false);
+
+        return isSave;
     }
 
-    /**
-     * 事業者サービス情報登録します。
-     *
-     * @param 事業者サービス情報登録 KaigoJigyoshaShiteiService
-     * @return count 件数
-     */
-    @Transaction
-    public boolean insertJigyoshaServiceJoho(KaigoJigyoshaShiteiService 事業者サービス情報登録) {
-        if (!事業者サービス情報登録.hasChanged()) {
-            return false;
-        }
-        DbT7063KaigoJigyoshaShiteiServiceEntity dbT7063Entity = 事業者サービス情報登録.toEntity();
-        dbT7063Entity.setState(EntityDataState.Added);
-        return 1 == dbT7063dac.save(dbT7063Entity);
-    }
-
-    /**
-     * 事業者サービス情報修正します。
-     *
-     * @param 旧事業者サービス情報 KaigoJigyoshaShiteiService
-     * @param 事業者サービス情報 KaigoJigyoshaShiteiService
-     * @return count 件数
-     */
-    @Transaction
-    public boolean updateJigyoshaServiceJoho(
-            KaigoJigyoshaShiteiService 旧事業者サービス情報,
-            KaigoJigyoshaShiteiService 事業者サービス情報) {
-        if (旧事業者サービス情報.get有効開始日().equals(事業者サービス情報.get有効開始日())) {
-            DbT7063KaigoJigyoshaShiteiServiceEntity dbT7063Entity = 事業者サービス情報.toEntity();
-            dbT7063Entity.setState(EntityDataState.Modified);
-            return 1 == dbT7063dac.save(dbT7063Entity);
+    private boolean updateJigyosha(KaigoJigyosha 旧事業者情報, KaigoJigyosha 事業者情報) {
+        boolean isSave;
+        if (旧事業者情報.get有効開始日().equals(事業者情報.get有効開始日())) {
+            isSave = 事業者Manager.save(事業者情報);
         } else {
-            旧事業者サービス情報 = 旧事業者サービス情報.deleted();
-            dbT7063dac.delete(旧事業者サービス情報.toEntity());
-            DbT7063KaigoJigyoshaShiteiServiceEntity dbT7063Entity = 事業者サービス情報.toEntity();
-            dbT7063Entity.setState(EntityDataState.Added);
-            return 1 == dbT7063dac.save(dbT7063Entity);
+            JigyoshaTourokuFinder jigyoshaTourokuFinder = JigyoshaTourokuFinder.createInstance();
+            if (!旧事業者情報.getKaigoJigyoshaDaihyoshaList().isEmpty()) {
+                KaigoJigyoshaDaihyoshaIdentifier identifier
+                        = new KaigoJigyoshaDaihyoshaIdentifier(旧事業者情報.get事業者番号(), 旧事業者情報.get有効開始日());
+                KaigoJigyoshaDaihyosha kaigoJigyoshaDaihyosha = 旧事業者情報.getKaigoJigyoshaDaihyoshaList(identifier);
+                KaigoJigyoshaDaihyoshaBuilder kaigoJigyoshaDaihyoshaBuilder = kaigoJigyoshaDaihyosha.createBuilderForEdit();
+                kaigoJigyoshaDaihyosha = kaigoJigyoshaDaihyoshaBuilder.build();
+                KaigoJigyoshaBuilder kaigoJigyoshaBuilder = 旧事業者情報.createBuilderForEdit();
+                kaigoJigyoshaBuilder.setKaigoJigyoshaDaihyosha(kaigoJigyoshaDaihyosha.deleted());
+                旧事業者情報 = kaigoJigyoshaBuilder.build();
+            }
+            jigyoshaTourokuFinder.saveOrDelete(旧事業者情報);
+            isSave = 事業者Manager.save(事業者情報);
         }
+        return isSave;
+    }
+
+    /**
+     * 対象の事業者・事業者サービスを一括で削除します。
+     *
+     * @param 旧事業者情報 旧事業者情報
+     * @param 事業者情報 事業者情報
+     * @param サービスList 事業者サービスのList
+     * @return 全ての保存に成功した場合、true
+     */
+    @Transaction
+    public boolean deleteJigyoshaAndService(KaigoJigyosha 旧事業者情報, KaigoJigyosha 事業者情報,
+            Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> サービスList) {
+        boolean isSave = updateJigyosha(旧事業者情報, 事業者情報);
+
+        JigyoshaNo jigyoshaNo = 事業者情報.get事業者番号();
+        FlexibleDate yukoKaishiDate = 事業者情報.get有効開始日();
+
+        for (KaigoJigyoshaShiteiService service : サービスList.values()) {
+            if (service.toEntity().getIsDeleted()) {
+                continue;
+            }
+            DbT7063KaigoJigyoshaShiteiServiceEntity oldEntity = service.toEntity();
+            DbT7063KaigoJigyoshaShiteiServiceEntity newEntity = service.toEntity();
+            newEntity.setJigyoshaNo(jigyoshaNo);
+            newEntity.setYukoKaishiYMD(yukoKaishiDate);
+            newEntity.setState(EntityDataState.Deleted);
+            isSave = 事業者サービスManager.updateJigyoshaServiceJoho(new KaigoJigyoshaShiteiService(oldEntity), new KaigoJigyoshaShiteiService(newEntity));
+        }
+
+        return isSave;
     }
 
     /**

@@ -7,10 +7,14 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010013;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.jigyoshaservice.JigyoshaServiceJoho;
 import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.ServiceItiranHyojiJohoBusiness;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.JigyoshaTourokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.dgServiceList_Row;
+import jp.co.ndensan.reams.db.dba.service.core.jigyoshaservice.JigyoshaServiceManager;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceIdentifier;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -23,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 事業者登録Handlerクラスです。
@@ -106,16 +112,16 @@ public class JigyoshaTourokuHandler {
      * @param selectFlag 検索結果あり/なし
      * @param business 介護事業者・施設管理のBusiness
      */
-    public void get事業者情報_代表者_開設者情報(boolean selectFlag, KaigoJigyosha business) {
+    public void set事業者情報_代表者_開設者情報(boolean selectFlag, KaigoJigyosha business) {
         if (selectFlag) {
-            get事業者情報_代表者_開設者あり場合(business);
-            get事業者情報_代表者_開設者あり場合2(business);
+            set事業者情報_代表者_開設者あり場合(business);
+            set事業者情報_代表者_開設者あり場合2(business);
         } else {
-            get事業者情報_代表者_開設者の情報できないの場合();
+            set事業者情報_代表者_開設者の情報できないの場合();
         }
     }
 
-    private void get事業者情報_代表者_開設者あり場合(KaigoJigyosha business) {
+    private void set事業者情報_代表者_開設者あり場合(KaigoJigyosha business) {
         panelDiv.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().setValue(business.get有効開始日());
         panelDiv.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().setValue(
                 business.get有効終了日() == null ? FlexibleDate.EMPTY : business.get有効終了日());
@@ -164,7 +170,7 @@ public class JigyoshaTourokuHandler {
         return valueObject == null ? RString.EMPTY : valueObject.value();
     }
 
-    private void get事業者情報_代表者_開設者あり場合2(KaigoJigyosha business) {
+    private void set事業者情報_代表者_開設者あり場合2(KaigoJigyosha business) {
         AtenaMeisho 宛先人名 = business.get宛先人名();
         panelDiv.getServiceJigyoshaJoho().getTxtAtesakininName().setValue(valueOrEmpty(宛先人名));
         AtenaKanaMeisho 宛先人名カナ = business.get宛先人名カナ();
@@ -220,7 +226,7 @@ public class JigyoshaTourokuHandler {
         }
     }
 
-    private void get事業者情報_代表者_開設者の情報できないの場合() {
+    private void set事業者情報_代表者_開設者の情報できないの場合() {
         panelDiv.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().setValue(FlexibleDate.EMPTY);
         panelDiv.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().setValue(FlexibleDate.EMPTY);
         panelDiv.getServiceJigyoshaJoho().getTxtJigyoshaNo().setValue(RString.EMPTY);
@@ -264,12 +270,17 @@ public class JigyoshaTourokuHandler {
     /**
      * 画面初期のサービス一覧情報を設定します。
      *
-     * @param サービス一覧情報List サービス一覧情報List
+     * @param サービス一覧情報Models サービス一覧情報
      */
-    public void getサービス一覧情報(List<ServiceItiranHyojiJohoBusiness> サービス一覧情報List) {
+    public void setサービス一覧情報(Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> サービス一覧情報Models) {
+        List<ServiceItiranHyojiJohoBusiness> 表示用List = create表示用事業者(サービス一覧情報Models);
+
         List<dgServiceList_Row> サービス一覧データ = new ArrayList<>();
-        for (ServiceItiranHyojiJohoBusiness result : サービス一覧情報List) {
+        for (ServiceItiranHyojiJohoBusiness result : 表示用List) {
             dgServiceList_Row row = new dgServiceList_Row();
+            if (result.get削除フラグ()) {
+                continue;
+            }
             if (!RString.isNullOrEmpty(result.getサービス種類コード().getColumnValue())) {
                 row.setServiceShuruiCode(result.getサービス種類コード().getColumnValue());
                 row.setServiceType(result.getサービス種類略称());
@@ -290,15 +301,33 @@ public class JigyoshaTourokuHandler {
         panelDiv.getServiceJoho().getDgServiceList().setDataSource(サービス一覧データ);
     }
 
+    private List<ServiceItiranHyojiJohoBusiness> create表示用事業者(
+            Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> サービス一覧情報List) {
+        List<RString> サービス種類コードList = new ArrayList<>();
+        for (KaigoJigyoshaShiteiService service : サービス一覧情報List) {
+            サービス種類コードList.add(service.getサービス種類コード().getColumnValue());
+        }
+        SearchResult<JigyoshaServiceJoho> サービス種類List = JigyoshaServiceManager.createInstance().getServiceShurui(サービス種類コードList);
+
+        List<ServiceItiranHyojiJohoBusiness> 表示用List = new ArrayList<>();
+
+        for (KaigoJigyoshaShiteiService service : サービス一覧情報List) {
+            表示用List.add(ServiceItiranHyojiJohoBusiness.create(service, サービス種類List.records()));
+        }
+        return 表示用List;
+    }
+
     /**
      * 「再表示」ボタンを押下時、サービス一覧情報を設定します。
      *
-     * @param サービス一覧情報List サービス一覧情報List
+     * @param サービス一覧情報Models サービス一覧情報
      * @param chkFlg chkFlg
      */
-    public void getサービス一覧情報再表示(List<ServiceItiranHyojiJohoBusiness> サービス一覧情報List, boolean chkFlg) {
+    public void setサービス一覧情報再表示(Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> サービス一覧情報Models, boolean chkFlg) {
+        List<ServiceItiranHyojiJohoBusiness> 表示用List = create表示用事業者(サービス一覧情報Models);
+
         List<dgServiceList_Row> サービス一覧データ = new ArrayList<>();
-        for (ServiceItiranHyojiJohoBusiness result : サービス一覧情報List) {
+        for (ServiceItiranHyojiJohoBusiness result : 表示用List) {
             dgServiceList_Row row = new dgServiceList_Row();
             if (RString.isNullOrEmpty(result.getサービス種類コード().getColumnValue())) {
                 continue;
@@ -311,7 +340,7 @@ public class JigyoshaTourokuHandler {
                     row.setModifyButtonState(DataGridButtonState.Enabled);
                     row.setDeleteButtonState(DataGridButtonState.Enabled);
                 }
-                row.setServiceType(result.getサービス種類コード().getColumnValue());
+                row.setServiceShuruiCode(result.getサービス種類コード().getColumnValue());
                 row.setServiceType(result.getサービス種類略称());
                 TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
                 開始日.setValue(new FlexibleDate(result.get有効開始日().toString()));
