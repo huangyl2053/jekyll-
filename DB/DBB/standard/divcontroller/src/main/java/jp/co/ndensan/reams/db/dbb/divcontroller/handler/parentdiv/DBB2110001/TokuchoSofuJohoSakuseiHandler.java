@@ -457,7 +457,7 @@ public final class TokuchoSofuJohoSakuseiHandler {
         RString 出力順ID = RString.EMPTY;
         for (dgOutputChohyoIchiran_Row row : chohyoList) {
             if (row.getSelected()) {
-                出力順ID = row.getChohyoID();
+                出力順ID = row.getShutsuryokujunID();
             }
         }
         param.set出力順ID(出力順ID);
