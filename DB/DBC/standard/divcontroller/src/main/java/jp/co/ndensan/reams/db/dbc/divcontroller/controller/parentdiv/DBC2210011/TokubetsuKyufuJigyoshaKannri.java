@@ -13,12 +13,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.tokubetsukyufujigyoshakannri.Shi
 import jp.co.ndensan.reams.db.dbc.business.core.tokubetsukyufujigyoshakannri.TokubetsuKyufuJigyoshaSearchResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2210011.DBC2210011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2210011.TokubetsuKyufuJigyoshaKannriDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2210011.dgTokubetsuKyufuJigyoshaDetailServiceList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2210011.dgTokubetsuKyufuJigyoshaList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2210011.TokubetsuKyufuJigyoshaKannriHandler;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.ShichosonTokubetsuKyufuJigyoshaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.tokubetsukyufujigyoshakannri.TokubetsuKyufuJigyoshaRelateFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -58,7 +57,19 @@ public class TokubetsuKyufuJigyoshaKannri {
      */
     public ResponseData<TokubetsuKyufuJigyoshaKannriDiv> onClick_btnSearchCheckDigit(TokubetsuKyufuJigyoshaKannriDiv div) {
         ICheckDigit icheckgigit = CheckDigitFactory.getInstance(CheckDigitKind.Modulus10);
-        getHandler(div).setモジュラス１０(icheckgigit);
+        getHandler(div).setモジュラス10ForSearch(icheckgigit);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「Ｃ／Ｄ　Button」の押した(onClick)イベントを行う。
+     *
+     * @param div TokubetsuKyufuJigyoshaKannriDiv
+     * @return 引数のDivを持つResponseData型
+     */
+    public ResponseData<TokubetsuKyufuJigyoshaKannriDiv> onClick_btnCheckDigit(TokubetsuKyufuJigyoshaKannriDiv div) {
+        ICheckDigit icheckgigit = CheckDigitFactory.getInstance(CheckDigitKind.Modulus10);
+        getHandler(div).setモジュラス10ForCheck(icheckgigit);
         return ResponseData.of(div).respond();
     }
 
@@ -174,7 +185,7 @@ public class TokubetsuKyufuJigyoshaKannri {
         if (市町村特別給付サービス事業者 != null) {
             ViewStateHolder.put(ViewStateKeys.市町村特別給付サービス事業者の情報, 市町村特別給付サービス事業者);
         }
-        List<ShichosonTokubetsuKyufuJigyoshaViewState> viewStateList = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者ListViewState, ArrayList.class);
+        ArrayList<ShichosonTokubetsuKyufuJigyoshaViewState> viewStateList = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者ListViewState, ArrayList.class);
         ShichosonTokubetsuKyufuJigyoshaViewState 市町村特別給付サービス事業者ViewState = getHandler(div).get該当申請のViewState(選択row, viewStateList);
         if (市町村特別給付サービス事業者ViewState != null) {
             ViewStateHolder.put(ViewStateKeys.市町村特別給付サービス事業者ViewState, 市町村特別給付サービス事業者ViewState);
@@ -187,6 +198,8 @@ public class TokubetsuKyufuJigyoshaKannri {
         getHandler(div).set項目クリア();
         getHandler(div).set選択項目1_5(選択row, 市町村特別給付サービス事業者);
         getHandler(div).set選択ボタンを押した状態制御();
+        getHandler(div).onSelectByDeleteButton(選択row, viewStateList);
+        ViewStateHolder.put(ViewStateKeys.市町村特別給付サービス事業者ListViewState, viewStateList);
         return ResponseData.of(div).setState(DBC2210011StateName.詳細情報);
     }
 
@@ -208,6 +221,30 @@ public class TokubetsuKyufuJigyoshaKannri {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「申請者情報からコピーする」の押した(onClick)イベントを行う。
+     *
+     * @param div TokubetsuKyufuJigyoshaKannriDiv
+     * @return 引数のDivを持つResponseData型
+     */
+    public ResponseData<TokubetsuKyufuJigyoshaKannriDiv> onClick_btnDaihyoshaCopy(TokubetsuKyufuJigyoshaKannriDiv div) {
+        getHandler(div).setDaihyoshaCopy();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「サービス一覧DataGrid.選択」の押した(onClick)イベントを行う。
+     *
+     * @param div TokubetsuKyufuJigyoshaKannriDiv
+     * @return 引数のDivを持つResponseData型
+     */
+    public ResponseData<TokubetsuKyufuJigyoshaKannriDiv> onClick_btnBySelect(TokubetsuKyufuJigyoshaKannriDiv div) {
+        dgTokubetsuKyufuJigyoshaDetailServiceList_Row row = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailServiceList().
+                getDgTokubetsuKyufuJigyoshaDetailServiceList().getActiveRow();
+        getHandler(div).set詳細情報(row);
+        return ResponseData.of(div).respond();
+    }
+
     private void set確定す処理(TokubetsuKyufuJigyoshaKannriDiv div) {
         ShichosonTokubetsuKyufuJigyoshaViewState 編集情報
                 = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者ViewState, ShichosonTokubetsuKyufuJigyoshaViewState.class);
@@ -220,42 +257,10 @@ public class TokubetsuKyufuJigyoshaKannri {
             最初情報 = get最初情報(編集情報);
         }
         List<ShichosonTokubetsuKyufuJigyoshaViewState> viewStateList = ViewStateHolder.get(ViewStateKeys.市町村特別給付サービス事業者ListViewState, ArrayList.class);
+        if (null == viewStateList) {
+            viewStateList = new ArrayList<>();
+        }
         getHandler(div).onClick_btnSaveTemp(viewStateList, 編集情報, 追加履歴番号, 最初情報);
-//        ArrayList<ShichosonTokubetsuKyufuJigyoshaViewState> viewStateList = ViewStateHolder.get(
-//                ViewStateKeys.市町村特別給付サービス事業者ListViewState, ArrayList.class);
-//        if (viewStateList == null) {
-//            viewStateList = new ArrayList<>();
-//        }
-//        ShichosonTokubetsuKyufuJigyosha 市町村特別給付サービス事業者の情報 = ViewStateHolder.get(
-//                ViewStateKeys.市町村特別給付サービス事業者の情報, ShichosonTokubetsuKyufuJigyosha.class);
-//        ShichosonTokubetsuKyufuJigyoshaViewState 特別地域加算減免ViewState = ViewStateHolder.get(
-//                ViewStateKeys.市町村特別給付サービス事業者ViewState, ShichosonTokubetsuKyufuJigyoshaViewState.class);
-//        JigyoshaNo 市町村特別給付用事業者番号;
-//        ServiceCode 市町村特別給付用サービスコード;
-//        int 履歴番号;
-//        EntityDataState state;
-//        ShichosonTokubetsuKyufuJigyoshaBuilder builder;
-//        if (市町村特別給付サービス事業者の情報 != null) {
-//            市町村特別給付用事業者番号 = 市町村特別給付サービス事業者の情報.get市町村特別給付用事業者番号();
-//            市町村特別給付用サービスコード = 市町村特別給付サービス事業者の情報.get市町村特別給付用サービスコード();
-//            履歴番号 = 市町村特別給付サービス事業者の情報.get履歴番号();
-//            boolean 変更あり = getHandler(div).情報変更あり(市町村特別給付サービス事業者の情報);
-//            if (変更あり) {
-//                state = EntityDataState.Modified;
-//            } else {
-//                state = EntityDataState.Unchanged;
-//            }
-//            builder = 市町村特別給付サービス事業者の情報.createBuilderForEdit();
-//        } else {
-//            state = EntityDataState.Added;
-//            RString 県コード = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailCode().getDdlKenCode().getSelectedKey();
-//            RString 事業者区分 = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailCode().getTxtJigyoshaKubun().getText();
-//            RString 郡市コード = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailCode().getTxtGunshiCode().getText();
-//            RString 連番 = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailCode().getTxtRenban().getText();
-//            RString cd = div.getTokubetsuKyufuJigyoshaDetail().getTokubetsuKyufuJigyoshaDetailCode().getTxtCheckDigit().getText();
-//            市町村特別給付用事業者番号 = new JigyoshaNo(県コード.concat(事業者区分).concat(郡市コード).concat(連番).concat(cd));
-//
-//        }
 
     }
 

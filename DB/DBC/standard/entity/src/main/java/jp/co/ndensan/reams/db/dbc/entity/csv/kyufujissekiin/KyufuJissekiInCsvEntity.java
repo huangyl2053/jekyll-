@@ -82,8 +82,8 @@ public class KyufuJissekiInCsvEntity {
     private RString 作成レコード種別_12社福;
     @CsvField(order = 310, name = "作成レコード種別・13ケア")
     private RString 作成レコード種別_13ケア;
-    @CsvField(order = 320, name = "作成レコード種別・13所定")
-    private RString 作成レコード種別_13所定;
+    @CsvField(order = 320, name = "作成レコード種別・14所定")
+    private RString 作成レコード種別_14所定;
     @CsvField(order = 330, name = "備考")
     private RString 備考;
     @CsvField(order = 340, name = "合計件数")

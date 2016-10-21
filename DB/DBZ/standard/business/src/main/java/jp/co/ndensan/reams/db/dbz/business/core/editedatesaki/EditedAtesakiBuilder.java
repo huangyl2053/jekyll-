@@ -54,14 +54,7 @@ public final class EditedAtesakiBuilder {
         return new EditedAtesaki(
                 宛先,
                 地方公共団体,
-                帳票共通情報,
-                null,
-                null,
-                usesCustomerBarcode(帳票共通情報),
-                getJushoKangaiEditPattern(帳票共通情報),
-                getJushoPrefix(帳票共通情報),
-                getJushoKannaiEditPattern(帳票共通情報),
-                getGyoseikuInjiKubun(帳票共通情報));
+                帳票共通情報);
     }
 
     /**

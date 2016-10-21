@@ -63,7 +63,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
     private final NinshoshaSource 認証者ソースデータ;
     private final ChohyoSeigyoKyotsu 帳票制御共通情報;
     private final List<RString> titleList;
-    private final RString 記号 = new RString("~");
+    private final RString 記号 = new RString("～");
     private static final RString SIZE_TWO = new RString("2");
     private static final RString SIZE_THREE = new RString("3");
     private static final RString SIZE_FOUR = new RString("4");
@@ -148,14 +148,14 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
         if (帳票情報.get支給_不支給決定区分() != null) {
             source.kekka = ShikyuKubun.toValue(帳票情報.get支給_不支給決定区分()).get名称();
         }
-        if (Decimal.ZERO.compareTo(帳票情報.get支給金額()) <= 0) {
-            source.ketteiGaku = 支給金額;
-        } else {
-            source.ketteiGaku = 決定額;
-        }
-        source.shikyuGaku = doカンマ編集(帳票情報.get支給金額());
-        if (帳票情報.get支給_不支給決定区分() != null) {
-            if (支給.equals(帳票情報.get支給_不支給決定区分())) {
+        if (帳票情報.get支給金額() != null) {
+            if (Decimal.ZERO.compareTo(帳票情報.get支給金額()) <= 0) {
+                source.ketteiGaku = 支給金額;
+            } else {
+                source.ketteiGaku = 決定額;
+            }
+            source.shikyuGaku = doカンマ編集(帳票情報.get支給金額());
+            if (帳票情報.get支給_不支給決定区分() != null && 支給.equals(帳票情報.get支給_不支給決定区分())) {
                 source.riyuTitle = 増減の理由;
             } else if (不支給.equals(帳票情報.get支給_不支給決定区分())) {
                 source.riyuTitle = 不支給の理由;
@@ -428,7 +428,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
             source.shiharaiStartYMD = 年月日編集(帳票情報.get支払期間開始年月日()).
                     concat(get日本語名略称(帳票情報.get支払期間開始年月日())).concat(記号);
             source.karaFugo = 記号;
-            source.shiharaiEndYMD = 年月日編集(帳票情報.get支払期間終了年月日());
+            source.shiharaiEndYMD = 年月日編集(帳票情報.get支払期間終了年月日())
+                    .concat(get日本語名略称(帳票情報.get支払期間終了年月日()));
             source.shiharaiStartHMS = 時分秒編集(帳票情報.get支払窓口開始時間());
             source.shiharaiEndHMS = 時分秒編集(帳票情報.get支払窓口終了時間());
         } else {

@@ -6,21 +6,23 @@
     <select resultOrdered="true" id="get高額介護サービス費一覧" resultMap="resultMap_KogakuShokai"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuSearch"
             fetchSize="500">
+        WITH 支給申請 AS (
+                          SELECT *
+                          FROM rgdb."DbT3056KogakuShikyuShinsei" AS A1
+                          WHERE NOT EXISTS (
+                           SELECT *
+                           FROM rgdb."DbT3056KogakuShikyuShinsei" AS A2
+                           WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
+                           AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
+                           AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
+                           AND   A1."rirekiNo" <![CDATA[<]]> A2."rirekiNo"))
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.allColumns_DbT3056KogakuShikyuShinsei" />,
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.allColumns_DbT3057KogakuShikyuHanteiKekka" />,
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.allColumns_DbT3058KogakuShikyuShinsaKettei" />,
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.allColumns_DbT3055KogakuKyufuTaishoshaGokei" />
-        FROM
-            (SELECT *
-             FROM rgdb."DbT3056KogakuShikyuShinsei" AS A1
-             WHERE NOT EXISTS (
-                SELECT *
-                FROM rgdb."DbT3056KogakuShikyuShinsei" AS A2
-                WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
-                AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
-                AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
-                AND   A1."rirekiNo" <![CDATA[<]]> A2."rirekiNo")) AS "DbT3056KogakuShikyuShinsei"
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.allColumns_DbT3055KogakuKyufuTaishoshaGokei" />,
+            台帳T."shikibetsuCode" AS "識別コード"
+        FROM 支給申請 AS "DbT3056KogakuShikyuShinsei"
         LEFT JOIN rgdb."DbT3057KogakuShikyuHanteiKekka" AS "DbT3057KogakuShikyuHanteiKekka"
         ON      "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = "DbT3057KogakuShikyuHanteiKekka"."hihokenshaNo"
             AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3057KogakuShikyuHanteiKekka"."serviceTeikyoYM"
@@ -35,6 +37,35 @@
         ON      "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo"
             AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM"
             AND "DbT3056KogakuShikyuShinsei"."rirekiNo" = "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo"
+        LEFT JOIN (SELECT 台帳A."shikibetsuCode",
+                          台帳WK."最新被保険者番号",
+                          台帳WK."サービス提供年月"
+                   FROM rgdb."DbT1001HihokenshaDaicho" AS 台帳A
+                   INNER JOIN (SELECT 被保険者台帳管理."hihokenshaNo" AS "最新被保険者番号",
+                                      MAX(被保険者台帳管理."idoYMD" || 被保険者台帳管理."edaNo") AS "最大履歴番号",
+                                      E."serviceTeikyoYM" AS "サービス提供年月"
+                               FROM rgdb."DbT1001HihokenshaDaicho" AS 被保険者台帳管理
+                               INNER JOIN 支給申請 AS E
+                               ON 被保険者台帳管理."hihokenshaNo" = E."hihokenshaNo"
+                               AND substring(被保険者台帳管理."idoYMD" from 1 for 6) <![CDATA[<=]]> E."serviceTeikyoYM"
+                               AND 被保険者台帳管理."isDeleted" = false
+                               GROUP BY "最新被保険者番号" , "サービス提供年月") AS 台帳WK
+                    ON 台帳A."hihokenshaNo" = 台帳WK."最新被保険者番号"
+                    AND 台帳A."idoYMD" || 台帳A."edaNo" = 台帳WK."最大履歴番号"
+                    WHERE 1 = 1
+                        <if test="市町村コード != 000000">
+                                    <if test="措置先区分 == 1">
+                                         AND 台帳A."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+                                    </if>
+                                    <if test="措置先区分 == 2">
+                                         AND 台帳A."shichosonCode" = #{市町村コード}
+                                    </if>
+                                    <if test="措置先区分 == 3">
+                                         AND (台帳A."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード} OR 台帳A."shichosonCode" = #{市町村コード})
+                                    </if>
+                          </if>) AS 台帳T
+        ON "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = 台帳T."最新被保険者番号"
+        AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" = 台帳T."サービス提供年月"
         WHERE 1 = 1
         <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
                 AND "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = #{被保険者番号}
@@ -46,16 +77,16 @@
                 AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" <![CDATA[<=]]> #{提供年月To} 
         </if>
         <if test="申請年月From != null and !申請年月From.isEmpty()">
-                AND #{申請年月From} <![CDATA[<=]]> "DbT3056KogakuShikyuShinsei"."shinseiYMD" 
+                AND #{申請年月From} || '01' <![CDATA[<=]]> "DbT3056KogakuShikyuShinsei"."shinseiYMD" 
         </if>
         <if test="申請年月To != null and !申請年月To.isEmpty()">
-                AND "DbT3056KogakuShikyuShinsei"."shinseiYMD" <![CDATA[<=]]> #{申請年月To} 
+                AND "DbT3056KogakuShikyuShinsei"."shinseiYMD" <![CDATA[<=]]> #{申請年月To} || '01' 
         </if>
         <if test="決定年月From != null and !決定年月From.isEmpty()">
-                AND #{決定年月From} <![CDATA[<=]]> "DbT3057KogakuShikyuHanteiKekka"."ketteiYMD" 
+                AND #{決定年月From} || '01' <![CDATA[<=]]> "DbT3057KogakuShikyuHanteiKekka"."ketteiYMD" 
         </if>
         <if test="決定年月To != null and !決定年月To.isEmpty()">
-                AND "DbaNo" ASC,T3057KogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[<=]]> #{決定年月To} 
+                AND "DbaNo" ASC,T3057KogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[<=]]> #{決定年月To} || '01' 
         </if>
         ORDER BY
             "DbT3056KogakuShikyuShinsei"."hihokenshaNo" ASC,
@@ -67,6 +98,7 @@
         <id column="dbT3056KogakuShikyuShinsei_serviceTeikyoYM"/>
         <id column="dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo"/>
         <id column="dbT3056KogakuShikyuShinsei_rirekiNo"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <association property="高額介護サービス費支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.ResultMap_DbT3056KogakuShikyuShinseiEntity"/>
         <association property="高額介護サービス費支給判定結果Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity"/>
         <association property="高額介護サービス費支給審査決定Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3058KogakuShikyuShinsaKetteiEntity"/>
@@ -76,21 +108,23 @@
 <select resultOrdered="true" id="get事業高額介護サービス費一覧" resultMap="resultMap_JigyoKogakuShokai"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuSearch"
             fetchSize="500">
+      WITH 支給申請 AS (
+                          SELECT *
+                          FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A1
+                          WHERE NOT EXISTS (
+                           SELECT *
+                           FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A2
+                           WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
+                           AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
+                           AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
+                           AND   A1."rirekiNo" <![CDATA[<]]> A2."rirekiNo"))
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3110JigyoKogakuShikyuShinseiMapper.allColumns_DbT3110JigyoKogakuShikyuShinsei" />,
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3111JigyoKogakuShikyuHanteiKekkaMapper.allColumns_DbT3111JigyoKogakuShikyuHanteiKekka" />,
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3112KogakuShikyuShinsaKetteiMapper.allColumns_DbT3112KogakuShikyuShinsaKettei" />,
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3109JigyoKogakuKyufuTaishoshaGokeiMapper.allColumns_DbT3109JigyoKogakuKyufuTaishoshaGokei" />
-        FROM
-            (SELECT *
-             FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A1
-             WHERE NOT EXISTS (
-                SELECT *
-                FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A2
-                WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
-                AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
-                AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
-                AND   A1."rirekiNo" <![CDATA[<]]> A2."rirekiNo")) AS "DbT3110JigyoKogakuShikyuShinsei"
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3109JigyoKogakuKyufuTaishoshaGokeiMapper.allColumns_DbT3109JigyoKogakuKyufuTaishoshaGokei" />,
+            台帳T."shikibetsuCode" AS "識別コード"
+        FROM 支給申請 AS "DbT3110JigyoKogakuShikyuShinsei"
         LEFT JOIN rgdb."DbT3111JigyoKogakuShikyuHanteiKekka" AS "DbT3111JigyoKogakuShikyuHanteiKekka"
         ON      "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" = "DbT3111JigyoKogakuShikyuHanteiKekka"."hihokenshaNo"
             AND "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3111JigyoKogakuShikyuHanteiKekka"."serviceTeikyoYM"
@@ -105,6 +139,35 @@
         ON      "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" = "DbT3109JigyoKogakuKyufuTaishoshaGokei"."hihokenshaNo"
             AND "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3109JigyoKogakuKyufuTaishoshaGokei"."serviceTeikyoYM"
             AND "DbT3110JigyoKogakuShikyuShinsei"."rirekiNo" = "DbT3109JigyoKogakuKyufuTaishoshaGokei"."rirekiNo"
+        LEFT JOIN (SELECT 台帳A."shikibetsuCode",
+                          台帳WK."最新被保険者番号",
+                          台帳WK."サービス提供年月"
+                   FROM rgdb."DbT1001HihokenshaDaicho" AS 台帳A
+                   INNER JOIN (SELECT 被保険者台帳管理."hihokenshaNo" AS "最新被保険者番号",
+                                      MAX(被保険者台帳管理."idoYMD" || 被保険者台帳管理."edaNo") AS "最大履歴番号",
+                                      E."serviceTeikyoYM" AS "サービス提供年月"
+                               FROM rgdb."DbT1001HihokenshaDaicho" AS 被保険者台帳管理
+                               INNER JOIN 支給申請 AS E
+                               ON 被保険者台帳管理."hihokenshaNo" = E."hihokenshaNo"
+                               AND substring(被保険者台帳管理."idoYMD" from 1 for 6) <![CDATA[<=]]> E."serviceTeikyoYM"
+                               AND 被保険者台帳管理."isDeleted" = false
+                               GROUP BY "最新被保険者番号" , "サービス提供年月") AS 台帳WK
+                    ON 台帳A."hihokenshaNo" = 台帳WK."最新被保険者番号"
+                    AND 台帳A."idoYMD" || 台帳A."edaNo" = 台帳WK."最大履歴番号"
+                    WHERE 1 = 1
+                         <if test="市町村コード != 000000">
+                                    <if test="措置先区分 == 1">
+                                         AND 台帳A."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+                                    </if>
+                                    <if test="措置先区分 == 2">
+                                         AND 台帳A."shichosonCode" = #{市町村コード}
+                                    </if>
+                                    <if test="措置先区分 == 3">
+                                         AND (台帳A."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード} OR 台帳A."shichosonCode" = #{市町村コード})
+                                    </if>
+                          </if>) AS 台帳T
+        ON "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" = 台帳T."最新被保険者番号"
+        AND "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" = 台帳T."サービス提供年月"
         WHERE 1 = 1
         <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
                 AND "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" = #{被保険者番号}
@@ -116,16 +179,16 @@
                 AND "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" <![CDATA[<=]]> #{提供年月To} 
         </if>
         <if test="申請年月From != null and !申請年月From.isEmpty()">
-                AND #{申請年月From} <![CDATA[<=]]> "DbT3110JigyoKogakuShikyuShinsei"."shinseiYMD" 
+                AND #{申請年月From} || '01' <![CDATA[<=]]> "DbT3110JigyoKogakuShikyuShinsei"."shinseiYMD" 
         </if>
         <if test="申請年月To != null and !申請年月To.isEmpty()">
-                AND "DbT3110JigyoKogakuShikyuShinsei"."shinseiYMD" <![CDATA[<=]]> #{申請年月To} 
+                AND "DbT3110JigyoKogakuShikyuShinsei"."shinseiYMD" <![CDATA[<=]]> #{申請年月To} || '01'
         </if>
         <if test="決定年月From != null and !決定年月From.isEmpty()">
-                AND #{決定年月From} <![CDATA[<=]]> "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiYMD" 
+                AND #{決定年月From} || '01' <![CDATA[<=]]> "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiYMD" 
         </if>
         <if test="決定年月To != null and !決定年月To.isEmpty()">
-                AND "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[<=]]> #{決定年月To} 
+                AND "DbT3111JigyoKogakuShikyuHanteiKekka"."ketteiYMD" <![CDATA[<=]]> #{決定年月To} || '01' 
         </if>
         ORDER BY
             "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" ASC,
@@ -137,6 +200,7 @@
         <id column="dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM"/>
         <id column="dbT3110JigyoKogakuShikyuShinsei_shoKisaiHokenshaNo"/>
         <id column="dbT3110JigyoKogakuShikyuShinsei_rirekiNo"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <association property="事業高額介護サービス費支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3110JigyoKogakuShikyuShinseiMapper.ResultMap_DbT3110JigyoKogakuShikyuShinseiEntity"/>
         <association property="事業高額介護サービス費支給判定結果Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3111JigyoKogakuShikyuHanteiKekkaMapper.ResultMap_DbT3111JigyoKogakuShikyuHanteiKekkaEntity"/>
         <association property="事業高額介護サービス費支給審査決定Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3112KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3112KogakuShikyuShinsaKetteiEntity"/>

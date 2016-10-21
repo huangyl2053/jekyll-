@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaitaishoshakensaku;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +22,8 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuShokaiTaishoshaKensakuEntity {
+
+    private ShikibetsuCode 識別コード;
 
     /**
      * -- GETTER -- 高額介護サービス費支給申請Entityを返します。

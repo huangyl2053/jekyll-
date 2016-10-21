@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0081011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -31,6 +32,8 @@ public class TaishoshaKensakuDiv extends Panel {
     private Button btnSearch;
     @JsonProperty("KetteiHokensha")
     private KetteiHokenshaDiv KetteiHokensha;
+    @JsonProperty("hidden_hokenshaKubun")
+    private RString hidden_hokenshaKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -108,6 +111,24 @@ public class TaishoshaKensakuDiv extends Panel {
     @JsonProperty("KetteiHokensha")
     public void setKetteiHokensha(KetteiHokenshaDiv KetteiHokensha) {
         this.KetteiHokensha = KetteiHokensha;
+    }
+
+    /*
+     * gethidden_hokenshaKubun
+     * @return hidden_hokenshaKubun
+     */
+    @JsonProperty("hidden_hokenshaKubun")
+    public RString getHidden_hokenshaKubun() {
+        return hidden_hokenshaKubun;
+    }
+
+    /*
+     * sethidden_hokenshaKubun
+     * @param hidden_hokenshaKubun hidden_hokenshaKubun
+     */
+    @JsonProperty("hidden_hokenshaKubun")
+    public void setHidden_hokenshaKubun(RString hidden_hokenshaKubun) {
+        this.hidden_hokenshaKubun = hidden_hokenshaKubun;
     }
 
     /*

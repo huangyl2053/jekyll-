@@ -294,6 +294,9 @@
     </select>
     <select resultOrdered="true" id="get帳票出力用データ" resultMap="result_帳票出力用データ" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoMybatisParameter">
+        WITH master AS ( 
+            select "ShinseiJohoTemp".* from "ShinseiJohoTemp"
+        )
         SELECT 
         "ShinseiJohoTemp"."hihokenshaNoJoho" AS "hihokenshaNoChohyo",
         "ShinseiJohoTemp"."serviceTeikyoYMJoho" AS "serviceTeikyoYMChohyo",
@@ -404,13 +407,17 @@
             "Koza"."uaT0310Koza_tsuchoNo" AS "tsuchoNoChohyo"
         </if>
         FROM
-        "ShinseiJohoTemp"
+            master as "ShinseiJohoTemp"
         LEFT JOIN 
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> as "ShikibetsuTaisho"
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+        (
+            select ARRAY_AGG(CAST ("shikibetsuCodeJoho" AS TEXT)) from master
+        )
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" /> as "ShikibetsuTaisho"
         ON "ShinseiJohoTemp"."shikibetsuCodeJoho" = "ShikibetsuTaisho"."shikibetsuCode"
         <if test="hasValidKamoku">
             LEFT JOIN
-            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS "Koza"
+            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS "Koza"
             ON "ShinseiJohoTemp"."shikibetsuCodeJoho" = "Koza"."uaT0310Koza_shikibetsuCode"
             AND "ShinseiJohoTemp"."kozaIDJoho" = "Koza"."uaT0310Koza_kozaId"
         </if>

@@ -270,7 +270,7 @@ public class KogakuGassanKyufuJissekiInDoIchiranhyoSakuseiProcess
         csvEntity.set番号(new RString(連番));
         csvEntity.set被保険者番号(被保険者.get登録被保険者番号().getColumnValue());
         csvEntity.set被保険者氏名(被保険者.get宛名名称());
-        csvEntity.set支給申請書整理番号(高額合算給付実績.getShikyuShinseiSeiriNo());
+        csvEntity.set支給申請書整理番号(高額合算給付実績.getShikyuShinseishoSeiriNo());
         csvEntity.set自己負担額証明書整理番号(高額合算給付実績.getJikoFutanSeiriNo());
         csvEntity.set作成区分コード(高額合算給付実績.getKyufuJissekiSakuseiKubunCode());
         csvEntity.set作成区分名称(KaigoGassan_KyufuJissekiSakuseiKubun

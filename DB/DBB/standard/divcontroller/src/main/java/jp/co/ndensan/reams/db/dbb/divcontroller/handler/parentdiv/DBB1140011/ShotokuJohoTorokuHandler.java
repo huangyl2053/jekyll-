@@ -25,8 +25,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.GekihenkanwaSochi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.TorokuGyomu;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2008ShotokuKanriDac;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShotokuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotokuJohoFinder;
@@ -50,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 画面設計_DBBGM13003_所得照会回答内容登録のハンドラクラス
@@ -81,7 +78,6 @@ public final class ShotokuJohoTorokuHandler {
 
     private final SetaiinShotokuJohoFinder 世帯員所得情報Finder;
     private final DataGridSetting shotokuJohoGridSetting;
-    private final DbT2008ShotokuKanriDac dac;
 
     /**
      * コンストラクタ
@@ -92,7 +88,6 @@ public final class ShotokuJohoTorokuHandler {
         this.世帯員所得情報Finder = SetaiinShotokuJohoFinder.createInstance();
         this.div = div;
         this.shotokuJohoGridSetting = div.getDgSetaiShotoku().getGridSetting();
-        this.dac = InstanceProvider.create(DbT2008ShotokuKanriDac.class);
     }
 
     /**
@@ -429,11 +424,7 @@ public final class ShotokuJohoTorokuHandler {
                 List<RString> ketsugo01List = ketsugo01.split(改行タグ.toString());
                 識別コード = new ShikibetsuCode(ketsugo01List.get(0));
             }
-            int 履歴番号 = 1;
-            DbT2008ShotokuKanriEntity 最新所得 = dac.selectBySomeKey(所得年度, 識別コード);
-            if (null != 最新所得) {
-                履歴番号 = 最新所得.getRirekiNo() + 1;
-            }
+            int 履歴番号 = shotokuManager.get最新履歴番号(所得年度, 識別コード);
             Shotoku shotoku = new Shotoku(所得年度, 識別コード, 履歴番号);
             shotoku = shotoku.createBuilderForEdit().set公的年金収入額(Decimal.ZERO).build();
             if (div.getShotokuJohoToroku().getDdlJuminzeiGenmenMae().isVisible()) {

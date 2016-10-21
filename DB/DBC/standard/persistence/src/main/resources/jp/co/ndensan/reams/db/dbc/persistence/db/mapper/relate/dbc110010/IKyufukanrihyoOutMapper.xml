@@ -382,7 +382,7 @@
         ( 
         SELECT
         <include refid="allColumns_自己作成管理一時Entity"/>
-        , <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT7109KubunShikyuGendoGakuMapper.allColumns_DbT7109KubunShikyuGendoGaku" />
+        , <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7109KubunShikyuGendoGakuMapper.allColumns_DbT7109KubunShikyuGendoGaku" />
         FROM
         "DbWT8211KyotakuKeikakuJikosakuseiKanri" AS "DbWT8211KyotakuKeikakuJikosakuseiKanri" 
         INNER JOIN rgdb."DbT7109KubunShikyuGendoGaku" AS "DbT7109KubunShikyuGendoGaku" 
@@ -530,7 +530,7 @@
     <resultMap id="resultMap_ShikyuGendoGakuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.ShikyuGendoGakuEntity"  autoMapping="true"> 
         <id property="居宅給付計画自己作成管理一時Entity.renban"  column="renban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <association property="居宅給付計画自己作成管理一時Entity" resultMap="ResultMap_自己作成管理一時Entity"/>
-        <association property="居宅サービス区分支給限度額Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT7109KubunShikyuGendoGakuMapper.ResultMap_DbT7109KubunShikyuGendoGakuEntity"/>
+        <association property="居宅サービス区分支給限度額Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7109KubunShikyuGendoGakuMapper.ResultMap_DbT7109KubunShikyuGendoGakuEntity"/>
         <association property="介護事業者指定サービスEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity"/>
         <association property="介護事業者Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
     </resultMap>

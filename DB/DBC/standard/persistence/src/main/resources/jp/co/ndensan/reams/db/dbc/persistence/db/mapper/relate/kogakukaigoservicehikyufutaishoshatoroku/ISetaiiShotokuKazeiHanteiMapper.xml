@@ -515,5 +515,65 @@
         AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> "世帯員所得情報事業高額一時"."kijunYMD" 
         AND "世帯員所得情報事業高額一時"."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD")
     </update>
-    
-    </mapper>
+
+    <update id="createTmpSetaiHaakuNyuryoku">
+        CREATE TEMPORARY TABLE "TmpSetaiHaakuNyuryoku" (
+            "hihokenshaNo" text
+            ,"shikibetsuCode" rshare. "UDD001ShikibetsuCode"
+            ,"kijunYMD" rshare. "UDD015YMD"
+            ,"shotokuNendo" rshare. "UDD012YSeireki"
+            ,"jushochiTokureiFlag" text
+            ,"setaiCode" text
+            ,"honninKubun" text
+            ,"kazeiKubun" text
+            ,"kazeiKubunGemmenGo" text
+            ,"gekihenKanwaKubun" text
+            ,"gokeiShotokuGaku" text
+            ,"nenkiniShunyuGaku" text
+            ,"nenkiniShotokuGaku" text
+            ,"kazeiShotokuGaku" text
+            ,"torokuGyomu" text
+            ,"shichosonCode" text
+            ,"shoboKubun" text
+            ,"roreiFukushiKubun" text
+            ,"setaiinHihokenshaNo" text
+            ,"honninKazeiKubun" text
+            ,"setaiKazeiKubun" text
+        )
+        INHERITS (rshare."UzT0000RootTable")
+        WITH (
+          OIDS=FALSE
+        );
+    </update>
+
+    <update id="createTmpSetaiJigyoHaakuNyuryoku">
+        CREATE TEMPORARY TABLE "TmpSetaiJigyoHaakuNyuryoku" (
+            "hihokenshaNo" text
+            ,"shikibetsuCode" rshare. "UDD001ShikibetsuCode"
+            ,"setaiInshikibetsuCode" rshare. "UDD001ShikibetsuCode"
+            ,"kijunYMD" rshare. "UDD015YMD"
+            ,"shotokuNendo" rshare. "UDD012YSeireki"
+            ,"jushochiTokureiFlag" text
+            ,"setaiCode" text
+            ,"honninKubun" text
+            ,"kazeiKubun" text
+            ,"kazeiKubunGemmenGo" text
+            ,"gekihenKanwaKubun" text
+            ,"gokeiShotokuGaku" text
+            ,"nenkiniShunyuGaku" text
+            ,"nenkiniShotokuGaku" text
+            ,"kazeiShotokuGaku" text
+            ,"torokuGyomu" text
+            ,"shichosonCode" text
+            ,"shoboKubun" text
+            ,"roreiFukushiKubun" text
+            ,"setaiinHihokenshaNo" text
+            ,"honninKazeiKubun" text
+            ,"setaiKazeiKubun" text
+        )
+        INHERITS (rshare."UzT0000RootTable")
+        WITH (
+          OIDS=FALSE
+        );
+    </update>
+</mapper>

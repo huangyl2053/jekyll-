@@ -164,9 +164,9 @@ public class KyufuGengakuHaakuListSakuseiService {
         Decimal 未納額_合計 = 未納額Map.get(賦課年度);
         if (未納額_合計 != null) {
             未納額_合計 = 未納額_合計.add(未納額_当該);
-            収入額Map.put(賦課年度, 未納額_合計);
+            未納額Map.put(賦課年度, 未納額_合計);
         } else {
-            収入額Map.put(賦課年度, 未納額_当該);
+            未納額Map.put(賦課年度, 未納額_当該);
         }
     }
 
@@ -398,10 +398,10 @@ public class KyufuGengakuHaakuListSakuseiService {
         }
         認定有効終了日日付builder.append("　　　　　開始：").append(認定有効終日抽出の開始).append(" ～ ").append(認定有効終日抽出の終了);
 
-        if (チェックオン.equals(parameter.get保険料完納者も出力())) {
+        if (new RString("1").equals(parameter.get保険料完納者も出力())) {
             保険料完納者も出力builder.append("　　　　・保険料完納者も出力");
         }
-        帳票作成日時builder.append(出力条件_帳票作成日時).append(RString.HALF_SPACE).append(parameter.get帳票作成日時());
+        帳票作成日時builder.append(出力条件_帳票作成日時).append(RString.HALF_SPACE).append(parameter.get帳票作成日時().substring(0, 18));
 
         出力条件.add(基準日builder.toRString());
         出力条件.add(時効起算日登録者の選択builder.toRString());
@@ -494,7 +494,7 @@ public class KyufuGengakuHaakuListSakuseiService {
         }
     }
 
-    private RString to帳票物理名(ISetSortItem item) {  // #103476  「町域コード」「市町村コード」がありません。
+    private RString to帳票物理名(ISetSortItem item) {
 
         RString 帳票物理名 = RString.EMPTY;
 
@@ -510,6 +510,10 @@ public class KyufuGengakuHaakuListSakuseiService {
             帳票物理名 = KyufuGengakuHaakuIchiranReportSource.改頁_氏名５０音カナ;
         } else if (DBD200008ShutsuryokujunEnum.被保険者番号.get項目ID().equals(item.get項目ID())) {
             帳票物理名 = KyufuGengakuHaakuIchiranReportSource.改頁_被保険者番号;
+        } else if (DBD200008ShutsuryokujunEnum.町域コード.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = KyufuGengakuHaakuIchiranReportSource.改頁_町域コード;
+        } else if (DBD200008ShutsuryokujunEnum.市町村コード.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = KyufuGengakuHaakuIchiranReportSource.改頁_市町村コード;
         }
 
         return 帳票物理名;
@@ -598,6 +602,9 @@ public class KyufuGengakuHaakuListSakuseiService {
         if (郵便番号 != null) {
             被保険者情報Entity.set郵便番号(郵便番号.getColumnValue());
         }
+        if (宛名Entity.getChoikiCode() != null) {
+            被保険者情報Entity.set町域コード(宛名Entity.getChoikiCode().getColumnValue());
+        }
     }
 
     private void edit資格情報(KyufuGengakuHaakuListSakuseiEntity entity, HihokenshaJohoEntity 被保険者情報Entity) {
@@ -619,6 +626,9 @@ public class KyufuGengakuHaakuListSakuseiService {
             生保フラグ = true;
         }
         被保険者情報Entity.set生保フラグ(生保フラグ);
+        if (資格情報Entity.getShichosonCode() != null) {
+            被保険者情報Entity.set市町村コード(資格情報Entity.getShichosonCode().getColumnValue());
+        }
     }
 
     private void edit認定情報(KyufuGengakuHaakuListSakuseiEntity entity, HihokenshaJohoEntity 被保険者情報Entity) {
@@ -673,7 +683,7 @@ public class KyufuGengakuHaakuListSakuseiService {
                 期別情報.set保険料金(tblEntity.get収納滞納状況TmpTblEntity().getTmp_choteigaku());
                 期別情報.set時効起算事由(tblEntity.get収納滞納状況TmpTblEntity().getTmp_jikoKisanJiyu());
                 期別情報.set時効起算日(tblEntity.get収納滞納状況TmpTblEntity().getTmp_jikoKisanYMD());
-                期別情報.set期別(new RString(tblEntity.get収納滞納状況TmpTblEntity().getTmp_kibetsu()));
+                期別情報.set期別(tblEntity.get収納滞納状況TmpTblEntity().getTmp_kibetsu());
                 期別情報.set滞納区分(tblEntity.get収納滞納状況TmpTblEntity().getTmp_tainoKubun());
                 期別情報.set滞納額(tblEntity.get収納滞納状況TmpTblEntity().getTmp_minogaku());
                 if (tblEntity.get収納滞納状況TmpTblEntity().getTmp_nokigen() != null) {

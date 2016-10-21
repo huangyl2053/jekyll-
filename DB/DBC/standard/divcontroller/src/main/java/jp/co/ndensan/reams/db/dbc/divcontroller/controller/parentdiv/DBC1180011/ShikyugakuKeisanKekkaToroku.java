@@ -594,6 +594,27 @@ public class ShikyugakuKeisanKekkaToroku {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「完了する」ボタンのイベントです。
+     *
+     * @param div ShikyugakuKeisanKekkaTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onClick_btnComplete(ShikyugakuKeisanKekkaTorokuDiv div) {
+        前排他解除();
+        return ResponseData.of(div).forwardWithEventName(DBC1180011TransitionEventName.完了).respond();
+    }
+
+    /**
+     * 「処理を続ける」ボタンのイベントです。
+     *
+     * @param div ShikyugakuKeisanKekkaTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onClick_btnContinue(ShikyugakuKeisanKekkaTorokuDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC1180011TransitionEventName.処理継続).respond();
+    }
+
     private void アクセスログを出力_照会(TaishoshaKey 対象者) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_003),
                 名称_被保険者番号, 対象者.get被保険者番号().getColumnValue());

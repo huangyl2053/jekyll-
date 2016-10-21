@@ -36,7 +36,7 @@ public class DbWT38P1KogakuGassanKyufuJissekiTempEntity extends
     @TempTableColumnOrder(3)
     private HihokenshaNo hihokenshaNoIn;
     @TempTableColumnOrder(4)
-    private RString shikyuShinseiSeiriNo;
+    private RString shikyuShinseishoSeiriNo;
     @TempTableColumnOrder(5)
     private RString seiriNo;
     @TempTableColumnOrder(6)

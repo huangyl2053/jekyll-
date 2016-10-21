@@ -20,12 +20,18 @@ import jp.co.ndensan.reams.db.dbc.service.core.dvshokanbaraijoho.DvShokanbaraiJo
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.IKinyuKikanInputDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.KinyuKikanInputDiv;
+import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -57,6 +63,31 @@ public class DvShokanbaraiJohoHandler {
     private static final RString 部分_2 = new RString("2");
     private static final RString 全市町村 = new RString("全市町村");
     private static final RString 窓口払い = new RString("窓口払い");
+    private static final ReportId REPORTID = new ReportId("DBC701002_HanyoListShokanbaraiJokyo");
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_4 = 4;
+    private static final RString KEY_サービス提供年月開始 = new RString("サービス提供年月From");
+    private static final RString KEY_サービス提供年月終了 = new RString("サービス提供年月To");
+    private static final RString KEY_処理状況 = new RString("処理状況");
+    private static final RString KEY_決定情報 = new RString("決定情報");
+    private static final RString KEY_支払方法 = new RString("支払方法");
+    private static final RString KEY_金融機関コード = new RString("金融機関コード");
+    private static final RString KEY_金融機関名称 = new RString("金融機関名称");
+    private static final RString KEY_申請日開始 = new RString("申請日From");
+    private static final RString KEY_申請日終了 = new RString("申請日To");
+    private static final RString KEY_住宅改修支給届出日開始 = new RString("住宅改修支給届出日From");
+    private static final RString KEY_住宅改修支給届出日終了 = new RString("住宅改修支給届出日To");
+    private static final RString KEY_決定日開始 = new RString("決定日From");
+    private static final RString KEY_決定日終了 = new RString("決定日To");
+    private static final RString KEY_国保連送付年月開始 = new RString("国保連送付年月From");
+    private static final RString KEY_国保連送付年月終了 = new RString("国保連送付年月To");
+    private static final RString KEY_様式番号 = new RString("様式番号");
+    private static final RString KEY_保険者コード = new RString("保険者コード");
+    private static final RString KEY_保険者名 = new RString("保険者名");
+    private static final RString KEY_項目名付加 = new RString("項目名付加");
+    private static final RString KEY_連番付加 = new RString("連番付加");
+    private static final RString KEY_日付スラッシュ付加 = new RString("日付スラッシュ付加");
+    private static final RString KEY_出力順 = new RString("出力順");
 
     /**
      * コンストラクタです。
@@ -298,6 +329,160 @@ public class DvShokanbaraiJohoHandler {
             dataSourceList.add(dataSource);
         }
         return dataSourceList;
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     *
+     * @param 市町村判定 RString
+     */
+    public void pamaRestore(RString 市町村判定) {
+
+        BatchParameterMap restoreBatchParameterMap = div.getBtnShokanParamRestore().getRestoreBatchParameterMap();
+        restoreClear(市町村判定);
+        FlexibleYearMonth サービス提供年月F = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_サービス提供年月開始);
+        if (サービス提供年月F != null && !サービス提供年月F.isEmpty()) {
+            div.getTxtShokanServiceTeikyoYM().setFromValue(new RDate(サービス提供年月F.getYearValue(), サービス提供年月F.getMonthValue(), サービス提供年月F.getLastDay()));
+        }
+        FlexibleYearMonth サービス提供年月T = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_サービス提供年月終了);
+        if (サービス提供年月T != null) {
+            div.getTxtShokanServiceTeikyoYM().setToValue(new RDate(サービス提供年月T.getYearValue(), サービス提供年月T.getMonthValue(), サービス提供年月T.getLastDay()));
+        }
+        RString 処理状況 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_処理状況);
+        if (処理状況 != null && !処理状況.isEmpty()) {
+            div.getDdlShokanShoriJokyo().setSelectedKey(処理状況);
+        }
+        RString 決定情報 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_決定情報);
+        if (決定情報 != null && !決定情報.isEmpty()) {
+            div.getDdlShokanKetteiJoho().setSelectedKey(決定情報);
+        }
+        RString 支払方法 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_支払方法);
+        if (支払方法 != null && !支払方法.isEmpty()) {
+            div.getRadKogakuShiharaisaki().setSelectedKey(支払方法);
+        }
+        RString 金融機関コード = restoreBatchParameterMap.getParameterValue(RString.class, KEY_金融機関コード);
+        RString 金融機関名称 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_金融機関名称);
+        KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
+        if (!RString.isNullOrEmpty(金融機関コード) && !RString.isNullOrEmpty(金融機関名称)) {
+            KinyuKikan 金融機関 = kinyuKikanManager.getValidKinyuKikanOn(FlexibleDate.getNowDate(), 金融機関コード.substring(INDEX_0, INDEX_4));
+            div.getCcdKogakuKinyuKikan().set金融機関(金融機関);
+        }
+        FlexibleDate 申請日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_申請日開始);
+        if (申請日From != null) {
+            div.getTxtShokanShinseiDate().setFromValue(new RDate(申請日From.toString()));
+        }
+        FlexibleDate 申請日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_申請日終了);
+        if (申請日To != null) {
+            div.getTxtShokanShinseiDate().setToValue(new RDate(申請日To.toString()));
+        }
+        FlexibleDate 住宅改修支給届出日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_住宅改修支給届出日開始);
+        if (住宅改修支給届出日From != null) {
+            div.getTxtShokanHokenshaKetteiDate().setFromValue(new RDate(住宅改修支給届出日From.toString()));
+        }
+        FlexibleDate 住宅改修支給届出日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_住宅改修支給届出日終了);
+        if (住宅改修支給届出日To != null) {
+            div.getTxtShokanHokenshaKetteiDate().setToValue(new RDate(住宅改修支給届出日To.toString()));
+        }
+        FlexibleDate 決定日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_決定日開始);
+        if (決定日From != null) {
+            div.getTxtShokanKetteiDate().setFromValue(new RDate(決定日From.toString()));
+        }
+        FlexibleDate 決定日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_決定日終了);
+        if (決定日To != null) {
+            div.getTxtShokanKetteiDate().setToValue(new RDate(決定日To.toString()));
+        }
+        pamaRestorePart2(restoreBatchParameterMap);
+    }
+
+    private void restoreClear(RString 市町村判定) {
+        if (広域.equals(市町村判定)) {
+            div.getCcdShokanHokenshaList().loadHokenshaList();
+        } else {
+            div.getCcdShokanHokenshaList().setDisabled(true);
+            div.getCcdShokanHokenshaList().setVisible(false);
+        }
+        div.getTxtShokanServiceTeikyoYM().clearFromValue();
+        div.getTxtShokanServiceTeikyoYM().clearToValue();
+        div.getCcdKogakuKinyuKikan().clear();
+        div.getTxtShokanShinseiDate().clearFromValue();
+        div.getTxtShokanShinseiDate().clearToValue();
+        div.getTxtShokanHokenshaKetteiDate().clearFromValue();
+        div.getTxtShokanHokenshaKetteiDate().clearToValue();
+        div.getTxtShokanKetteiDate().clearFromValue();
+        div.getTxtShokanKetteiDate().clearToValue();
+        div.getTxtShokanKokuhorenSofuYM().clearFromValue();
+        div.getTxtShokanKokuhorenSofuYM().clearToValue();
+    }
+
+    private void pamaRestorePart2(BatchParameterMap restoreBatchParameterMap) {
+
+        FlexibleYearMonth 国保連送付年月From = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_国保連送付年月開始);
+        if (国保連送付年月From != null && !国保連送付年月From.isEmpty()) {
+            div.getTxtShokanKokuhorenSofuYM().setFromValue(new RDate(国保連送付年月From.getYearValue(), 国保連送付年月From.getMonthValue(), 国保連送付年月From.getLastDay()));
+        }
+        FlexibleYearMonth 国保連送付年月To = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_国保連送付年月終了);
+        if (国保連送付年月To != null) {
+            div.getTxtShokanKokuhorenSofuYM().setToValue(new RDate(国保連送付年月To.getYearValue(), 国保連送付年月To.getMonthValue(), 国保連送付年月To.getLastDay()));
+        }
+        RString 様式番号 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_様式番号);
+        List<dgYoshikiNo_Row> 様式番号選択リスト = new ArrayList<>();
+        if (様式番号 != null && !様式番号.isEmpty()) {
+            List<RString> 識別番号リスト = 様式番号.split(カンマ.toString());
+            if (識別番号リスト != null && !識別番号リスト.isEmpty()) {
+                get様式番号選択(識別番号リスト, 様式番号選択リスト);
+            }
+        }
+        if (!様式番号選択リスト.isEmpty()) {
+            div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().setSelectedItems(様式番号選択リスト);
+        }
+        RString 保険者コード = restoreBatchParameterMap.getParameterValue(RString.class, KEY_保険者コード);
+        if (保険者コード != null && !保険者コード.isEmpty()) {
+            div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getCcdShokanHokenshaList()
+                    .setSelectedShichosonIfExist(new LasdecCode(保険者コード));
+        }
+        RString 保険者名 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_保険者名);
+        if (保険者名 != null && !保険者名.isEmpty()) {
+            div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getCcdShokanHokenshaList()
+                    .setSelectedShoKisaiHokenshaNoIfExist(new ShoKisaiHokenshaNo(保険者名));
+        }
+        List<RString> csv編集方法リスト = new ArrayList<>();
+        boolean 項目名付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_項目名付加);
+        if (項目名付加) {
+            csv編集方法リスト.add(項目名);
+        }
+        boolean 連番付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_連番付加);
+        if (連番付加) {
+            csv編集方法リスト.add(連番);
+        }
+        boolean 日付スラッシュ付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_日付スラッシュ付加);
+        if (日付スラッシュ付加) {
+            csv編集方法リスト.add(日付スラッシュ);
+        }
+        if (!csv編集方法リスト.isEmpty()) {
+            div.getDvShokanbaraiParam().getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
+        }
+        RString 出力順 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_出力順);
+        if (出力順 != null && !出力順.isEmpty()) {
+            div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().load(SubGyomuCode.DBC介護給付, REPORTID,
+                    Long.valueOf(出力順.toString()));
+        }
+        onChange支払先RDB();
+    }
+
+    private void get様式番号選択(List<RString> 識別番号リスト, List<dgYoshikiNo_Row> 様式番号選択リスト) {
+        List<dgYoshikiNo_Row> 様式番号リスト = div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().getDataSource();
+        for (dgYoshikiNo_Row 様式番号 : 様式番号リスト) {
+            for (RString 識別番号 : 識別番号リスト) {
+                set様式番号選択リスト(様式番号選択リスト, 様式番号, 識別番号);
+            }
+        }
+
+    }
+
+    private void set様式番号選択リスト(List<dgYoshikiNo_Row> 様式番号選択リスト, dgYoshikiNo_Row 様式番号, RString 識別番号) {
+        if (様式番号.getYoshikiNo().equals(識別番号)) {
+            様式番号選択リスト.add(様式番号);
+        }
     }
 
 }

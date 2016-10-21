@@ -152,7 +152,7 @@ public class ShunoJokyoHaakuBusiness {
 
         insertEntity.setTmp_tokucho_fuchoKubun(特徴_普徴区分);
         insertEntity.setTmp_tsuchishoNo(通知書番号);
-        insertEntity.setTmp_kibetsu(期);
+        insertEntity.setTmp_kibetsu(new RString(期));
         insertEntity.setTmp_choteigaku(調定額);
         insertEntity.setTmp_shunyugaku(収入額);
         if (!収入List.isEmpty()) {

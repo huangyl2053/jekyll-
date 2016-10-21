@@ -122,6 +122,7 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
                 ChosaHoshuShiharaiProcess.get通知文(), ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("002"), 業務固有キー));
         shumeisaiEntity.setCount(index_tmp);
         shumeisaiEntity = editIkenShiharaiuchiwakeEntity(shumeisaiEntity, entity);
+        shumeisaiEntity.set申請書管理番号(entity.getShinseishoKanriNo().value());
         IkenShiharaiuchiwakeReport report = new IkenShiharaiuchiwakeReport(shumeisaiEntity);
         report.writeBy(reportSourceWriter);
         index_tmp++;

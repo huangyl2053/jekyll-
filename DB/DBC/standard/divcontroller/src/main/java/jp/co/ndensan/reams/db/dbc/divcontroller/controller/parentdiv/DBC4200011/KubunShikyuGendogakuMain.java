@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC4200011;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KubunShikyuGendoGaku;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KubunShikyuGendoGakuHolder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGakuHolder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseKubunShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseKubunShikyuGendoGakuHolder;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyugendogaku.ShikyuGendogakuTableKubun;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.DBC4
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.KubunShikyuGendogakuMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4200011.KubunShikyuGendogakuMainHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4200011.KubunShikyuGendogakuMainValidationHandler;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.KubunShikyuGendoGakuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.KubunShikyuGendoGakuManager;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.UwanoseKubunShikyuGendoGakuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;

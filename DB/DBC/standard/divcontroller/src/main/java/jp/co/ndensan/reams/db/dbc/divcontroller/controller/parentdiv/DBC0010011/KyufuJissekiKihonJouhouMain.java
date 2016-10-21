@@ -141,7 +141,7 @@ public class KyufuJissekiKihonJouhouMain {
                 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         KyufuJissekiPrmBusiness 給付実績情報照会情報
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        List<KyufujissekiKihon> 給付実績基本情報 = 給付実績情報照会情報.getCsData_A();
+        List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         HihokenshaNo 被保険者番号 = 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
@@ -175,7 +175,7 @@ public class KyufuJissekiKihonJouhouMain {
                 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         KyufuJissekiPrmBusiness 給付実績情報照会情報
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        List<KyufujissekiKihon> 給付実績基本情報 = 給付実績情報照会情報.getCsData_A();
+        List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         HihokenshaNo 被保険者番号 = 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);

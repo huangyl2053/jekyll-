@@ -5,8 +5,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uzi.divcontroller.entity.commonchilddiv.ImageMasking.IImageMaskingDiv;
+import jp.co.ndensan.reams.uz.uzi.divcontroller.entity.commonchilddiv.ImageMasking.ImageMaskingDiv;
 
 /**
  * maskingPanel のクラスファイル 
@@ -14,15 +15,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class maskingPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("TextBox1")
-    private TextBox TextBox1;
+    @JsonProperty("ccdImageMasking")
+    private ImageMaskingDiv ccdImageMasking;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +32,12 @@ public class maskingPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getTextBox1
-     * @return TextBox1
+     * getccdImageMasking
+     * @return ccdImageMasking
      */
-    @JsonProperty("TextBox1")
-    public TextBox getTextBox1() {
-        return TextBox1;
-    }
-
-    /*
-     * setTextBox1
-     * @param TextBox1 TextBox1
-     */
-    @JsonProperty("TextBox1")
-    public void setTextBox1(TextBox TextBox1) {
-        this.TextBox1 = TextBox1;
+    @JsonProperty("ccdImageMasking")
+    public IImageMaskingDiv getCcdImageMasking() {
+        return ccdImageMasking;
     }
 
     // </editor-fold>

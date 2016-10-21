@@ -89,11 +89,14 @@ public class FukaKonkyoFactory {
             List<RoreiFukushiNenkinJukyusha> 老齢の情報のリスト, FlexibleDate 賦課基準日) {
         FukaKonkyo 賦課根拠 = new FukaKonkyo();
         賦課根拠.setFukakijunYMD(賦課基準日);
-        if (生保の情報リスト == null || 生保の情報リスト.isEmpty()) {
+        if (生保の情報リスト == null) {
             賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
             賦課根拠.setSeihoEndYMD(FlexibleDate.EMPTY);
         } else {
             for (SeikatsuHogoJukyusha 生保の情報 : 生保の情報リスト) {
+                if (生保の情報.get受給開始日() == null || 生保の情報.get受給開始日().isEmpty()) {
+                    continue;
+                }
                 if (!生保の情報.toEntity().getIsDeleted() && 生保の情報.get受給開始日().isBeforeOrEquals(賦課基準日)
                         && (生保の情報.get受給廃止日() == null || 生保の情報.get受給廃止日().isEmpty()
                         || 賦課基準日.isBefore(生保の情報.get受給廃止日()))) {
@@ -103,11 +106,14 @@ public class FukaKonkyoFactory {
                 }
             }
         }
-        if (老齢の情報のリスト == null || 老齢の情報のリスト.isEmpty()) {
+        if (老齢の情報のリスト == null) {
             賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
             賦課根拠.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
         } else {
             for (RoreiFukushiNenkinJukyusha 老齢の情報 : 老齢の情報のリスト) {
+                if (老齢の情報.get受給開始年月日() == null || 老齢の情報.get受給開始年月日().isEmpty()) {
+                    continue;
+                }
                 if (!老齢の情報.toEntity().getIsDeleted() && 老齢の情報.get受給開始年月日().isBeforeOrEquals(賦課基準日)
                         && (老齢の情報.get受給終了年月日() == null || 老齢の情報.get受給終了年月日().isEmpty()
                         || 賦課基準日.isBefore(老齢の情報.get受給終了年月日()))) {

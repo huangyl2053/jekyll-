@@ -30,29 +30,31 @@ public class TempDwbTKyufujissekiShukeiKonkyo2Entity extends DbTableEntityBase<T
     private RString shukeiKubun;
     @TempTableColumnOrder(3)
     private RString hyoNo;
-    @PrimaryKey
     @TempTableColumnOrder(4)
     private RString shukeiNo;
     @TempTableColumnOrder(5)
     private RString shukeiTani;
-    @PrimaryKey
     @TempTableColumnOrder(6)
     private RString tateNo;
-    @PrimaryKey
     @TempTableColumnOrder(7)
     private RString yokoNo;
+    @PrimaryKey
     @TempTableColumnOrder(8)
     private RString inputShikibetsuNo;
     @TempTableColumnOrder(9)
     private RString shoKisaiHokenshaNo;
+    @PrimaryKey
     @TempTableColumnOrder(10)
     private RString hihokenshaNo;
+    @PrimaryKey
     @TempTableColumnOrder(11)
     private RString serviceTeikyoYM;
     @TempTableColumnOrder(12)
     private RString kyufuJissekiKubunCode;
+    @PrimaryKey
     @TempTableColumnOrder(13)
     private RString jigyoshaNo;
+    @PrimaryKey
     @TempTableColumnOrder(14)
     private RString seiriNo;
     @TempTableColumnOrder(15)

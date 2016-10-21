@@ -61,6 +61,11 @@ public class HihokenshaAtenaJohoProcess extends BatchProcessBase<HihokenshaAtena
     BatchEntityCreatedTempTableWriter furikomiDetailTempTable;
 
     @Override
+    protected void initialize() {
+        outputCount = new OutputParameter<>();
+    }
+
+    @Override
     protected IBatchReader createReader() {
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);

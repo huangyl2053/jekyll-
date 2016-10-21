@@ -11,7 +11,10 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKihonJyohou;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiMeisaiBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiMeisaiJyohou;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiShokujiHiyoJyohou;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010016.DBC0010016TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010016.ShokujiHiyoShokaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010016.ShokujiHiyoShokaiHandler;
@@ -51,7 +54,7 @@ public class ShokujiHiyoShokai {
                 識別番号検索キー);
         List<ShikibetsuNoKanri> 識別番号管理データ取得 = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
                 サービス提供年月, 識別番号検索キー).records();
-        getHandler(div).setDataGrid(給付実績情報照会情報.getCsData_E(), 給付実績情報照会情報.getCsData_B(), 給付実績情報照会情報.getCsData_E());
+        getHandler(div).setDataGrid(getCsData_E(), getCsData_B(), getCsData_E());
         if (識別番号管理データ取得 != null && !識別番号管理データ取得.isEmpty()) {
             getHandler(div).setButton(識別番号管理データ取得.get(0));
         }
@@ -68,13 +71,7 @@ public class ShokujiHiyoShokai {
         List<KyufuJissekiHedajyoho2> 事業者番号リスト
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
                 .getCommonHeader().get給付実績ヘッダ情報2();
-        List<KyufujissekiShokujiHiyo> 給付実績食事費用1504
-                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCsData_E();
-        List<KyufujissekiMeisaiBusiness> 給付実績明細
-                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCsData_B();
-        List<KyufujissekiShokujiHiyo> 給付実績食事費用1503
-                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCsData_E();
-        getHandler(div).change事業者(new RString("前事業者"), 事業者番号リスト, 給付実績食事費用1504, 給付実績明細, 給付実績食事費用1503);
+        getHandler(div).change事業者(new RString("前事業者"), 事業者番号リスト, getCsData_E(), getCsData_B(), getCsData_E());
         return ResponseData.of(div).respond();
     }
 
@@ -88,13 +85,7 @@ public class ShokujiHiyoShokai {
         List<KyufuJissekiHedajyoho2> 事業者番号リスト
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
                 .getCommonHeader().get給付実績ヘッダ情報2();
-        List<KyufujissekiShokujiHiyo> 給付実績食事費用1504
-                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCsData_E();
-        List<KyufujissekiMeisaiBusiness> 給付実績明細
-                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCsData_B();
-        List<KyufujissekiShokujiHiyo> 給付実績食事費用1503
-                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCsData_E();
-        getHandler(div).change事業者(new RString("後事業者"), 事業者番号リスト, 給付実績食事費用1504, 給付実績明細, 給付実績食事費用1503);
+        getHandler(div).change事業者(new RString("後事業者"), 事業者番号リスト, getCsData_E(), getCsData_B(), getCsData_E());
         return ResponseData.of(div).respond();
     }
 
@@ -111,7 +102,8 @@ public class ShokujiHiyoShokai {
         NyuryokuShikibetsuNo 識別番号 = get識別番号(給付実績基本情報);
         getHandler(div).change年月(new RString("前月"), 給付実績情報照会情報,
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
-                整理番号, 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(), 識別番号);
+                整理番号, 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(), 識別番号,
+                getCsData_E(), getCsData_B(), getCsData_E());
         FlexibleYearMonth 画面提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 画面提供年月);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
@@ -136,7 +128,8 @@ public class ShokujiHiyoShokai {
         NyuryokuShikibetsuNo 識別番号 = get識別番号(給付実績基本情報);
         getHandler(div).change年月(new RString("次月"), 給付実績情報照会情報,
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
-                整理番号, 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(), 識別番号);
+                整理番号, 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(), 識別番号,
+                getCsData_E(), getCsData_B(), getCsData_E());
         FlexibleYearMonth 画面提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 画面提供年月);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
@@ -283,9 +276,7 @@ public class ShokujiHiyoShokai {
     }
 
     private List<KyufujissekiKihon> get給付実績基本情報() {
-        KyufuJissekiPrmBusiness 給付実績情報照会情報
-                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        return 給付実績情報照会情報.getCsData_A();
+        return ViewStateHolder.get(ViewStateKeys.給付実績基本情報, KyufujissekiKihonJyohou.class).getCsData_A();
     }
 
     private RString get整理番号(List<KyufujissekiKihon> 給付実績基本情報) {
@@ -294,5 +285,15 @@ public class ShokujiHiyoShokai {
 
     private NyuryokuShikibetsuNo get識別番号(List<KyufujissekiKihon> 給付実績基本情報) {
         return 給付実績基本情報.get(INT_ZERO).get入力識別番号();
+    }
+
+    private List<KyufujissekiMeisaiBusiness> getCsData_B() {
+        return ViewStateHolder.get(ViewStateKeys.給付実績サービス明細情報,
+                KyufujissekiMeisaiJyohou.class).getCsData_B();
+    }
+
+    private List<KyufujissekiShokujiHiyo> getCsData_E() {
+        return ViewStateHolder.get(ViewStateKeys.給付実績食事費用情報,
+                KyufujissekiShokujiHiyoJyohou.class).getCsData_E();
     }
 }
