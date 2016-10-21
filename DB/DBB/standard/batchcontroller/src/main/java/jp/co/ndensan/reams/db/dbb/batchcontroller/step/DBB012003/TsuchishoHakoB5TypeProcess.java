@@ -151,7 +151,7 @@ public class TsuchishoHakoB5TypeProcess extends BatchProcessBase<KarisanteiGakuH
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012, Long.parseLong(parameter.get出力順ID().toString()));
 
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Excel, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucPathName = Path.combinePath(manager.getEucOutputDirectry(), EUCファイル名);
         csvWriter = new CsvWriter.InstanceBuilder(eucPathName).canAppend(false)
                 .alwaysWriteHeader(KariSanteigakuHenkoTsuchishoHakkoIchiranData.class)
@@ -177,7 +177,7 @@ public class TsuchishoHakoB5TypeProcess extends BatchProcessBase<KarisanteiGakuH
         }
         service.set普徴と特徴(編集後仮算定通知書, entity);
         TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport ichiranReport = new TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport(
-                編集後仮算定通知書, outputOrder, parameter.get帳票作成日時(), 連番);
+                entity, 編集後仮算定通知書, outputOrder, parameter.get帳票作成日時(), 連番);
         ichiranReport.writeBy(reportSourceWriterIchiran);
         csvData = service.csvData作成(編集後仮算定通知書, parameter, 連番, 通知書番号, entity);
         csvWriter.writeLine(csvData);

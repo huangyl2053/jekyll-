@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004;
 
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KarisanteiGakuHenkoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -33,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport
         extends Report<TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource> {
 
+    private final KarisanteiGakuHenkoEntity entity;
     private final EditedKariSanteiTsuchiShoKyotsu editedData;
     private final IOutputOrder outputOrder;
     private static final int INDEX_0 = 0;
@@ -49,13 +51,16 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport
     /**
      * コンストラクタです。
      *
+     * @param entity 仮算定額変更情報一時テーブル情報entity
      * @param editedData 編集後仮算定通知書共通情報entity
      * @param outputOrder outputOrder
      * @param 帳票作成日時 帳票作成日時
      * @param 連番 バッチから渡す連番
      */
-    public TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport(EditedKariSanteiTsuchiShoKyotsu editedData,
+    public TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport(KarisanteiGakuHenkoEntity entity,
+            EditedKariSanteiTsuchiShoKyotsu editedData,
             IOutputOrder outputOrder, RDateTime 帳票作成日時, int 連番) {
+        this.entity = entity;
         this.editedData = editedData != null ? editedData : new EditedKariSanteiTsuchiShoKyotsu();
         this.outputOrder = outputOrder;
         this.帳票作成日時 = 帳票作成日時;
@@ -68,7 +73,7 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport
         setHeader(editedData, item, outputOrder);
         setBody(editedData, item, 連番);
         ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor headerEditor = new TokuChoHeijunkaKariSanteigakuHakkoIchiranHeaderEditor(item);
-        ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor hyojiBodyEditor = new TokuChoHeijunkaKariSanteigakuHakkoIchiranBodyEditor(item);
+        ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor hyojiBodyEditor = new TokuChoHeijunkaKariSanteigakuHakkoIchiranBodyEditor(entity, item);
         ITokuChoHeijunkaKariSanteigakuHakkoIchiranBuilder builder
                 = new TokuChoHeijunkaKariSanteigakuHakkoIchiranBuilderImpl(headerEditor, hyojiBodyEditor);
         reportSourceWriter.writeLine(builder);
