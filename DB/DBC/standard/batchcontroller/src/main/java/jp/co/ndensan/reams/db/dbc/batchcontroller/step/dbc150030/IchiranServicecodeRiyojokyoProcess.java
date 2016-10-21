@@ -58,6 +58,7 @@ public class IchiranServicecodeRiyojokyoProcess
     private static final RString 対象年月指定_審査年月 = new RString("01");
     private static final RString サービス種類_00 = new RString("00");
     private static final RString サービス種類_すべて = new RString("すべて");
+    private static final RString 選択対象_全て = new RString("全て");
     private static final RString 提供月 = new RString("提供月：");
     private static final RString 審査月 = new RString("審査月：");
     private static final RString 選択対象_町域 = new RString("町域");
@@ -176,19 +177,20 @@ public class IchiranServicecodeRiyojokyoProcess
         currentサービス種類スコード = currentEntity.getServiceShuruiCode();
         currentソート用サービス項目コード = currentEntity.getSortYouKomokuCode();
         count = count + INT_1;
-        beforeEntity = getBefore().get帳票出力();
-        if (beforeEntity != null) {
-            beforeサービス種類スコード = beforeEntity.getServiceShuruiCode();
-            beforeソート用サービス項目コード = beforeEntity.getSortYouKomokuCode();
-            if (is変換(beforeサービス種類スコード, currentサービス種類スコード)) {
-                改頁Flag = true;
-                非集計(beforeEntity, false);
-                集計(beforeEntity);
-            } else {
-                非集計(beforeEntity, false);
+        if (null != getBefore()) {
+            beforeEntity = getBefore().get帳票出力();
+            if (beforeEntity != null) {
+                beforeサービス種類スコード = beforeEntity.getServiceShuruiCode();
+                beforeソート用サービス項目コード = beforeEntity.getSortYouKomokuCode();
+                if (is変換(beforeサービス種類スコード, currentサービス種類スコード)) {
+                    改頁Flag = true;
+                    非集計(beforeEntity, false);
+                    集計(beforeEntity);
+                } else {
+                    非集計(beforeEntity, false);
+                }
             }
         }
-
     }
 
     @Override
@@ -344,6 +346,9 @@ public class IchiranServicecodeRiyojokyoProcess
         } else {
             reportEntity.set条件２(サービス種類名称);
         }
+        if (選択対象_全て.equals(parameter.get選択対象())) {
+            reportEntity.set条件３(選択対象_全て);
+        }
         if (選択対象_町域.equals(parameter.get選択対象())) {
             reportEntity.set条件３(get条件３(町域));
         } else if (選択対象_地区１.equals(parameter.get選択対象())) {
@@ -411,6 +416,9 @@ public class IchiranServicecodeRiyojokyoProcess
                 reportEntity.set条件２(サービス種類_すべて);
             } else {
                 reportEntity.set条件２(サービス種類名称);
+            }
+            if (選択対象_全て.equals(parameter.get選択対象())) {
+                reportEntity.set条件３(選択対象_全て);
             }
             if (選択対象_町域.equals(parameter.get選択対象())) {
                 reportEntity.set条件３(get条件３(町域));
