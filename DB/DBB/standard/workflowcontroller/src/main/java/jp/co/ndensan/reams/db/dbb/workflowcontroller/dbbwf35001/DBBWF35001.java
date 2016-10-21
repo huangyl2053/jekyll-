@@ -42,7 +42,7 @@ public class DBBWF35001 {
      * @param flowPrm フローパラメータ
      * @return バッチパラメータ
      */
-    public DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter setTsuchishoBatchParam(FlowParameters flowPrm) {
+    public DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter toBatchParameter(FlowParameters flowPrm) {
         DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter param = new DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter();
         param.set調定年度(flowPrm.get(new RString("調定年度"), FlexibleYear.class));
         param.set賦課年度(flowPrm.get(new RString("賦課年度"), FlexibleYear.class));
