@@ -20,8 +20,7 @@ public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTo
     private static final String HENSHU_PROCESS = "fukaJohoHenshuProcess";
     private static final String FUKAJOHOINSERTPROCESS = "fukaJohoInsertProcess";
     private static final String CALL_CHOTEITOROKU_FLOW = "ChoteiTorokuFlow";
-    // TODO QA106692確認中 2016/10/20
-    private static final RString CHOTEITOROKU_FLOWID = new RString("ChoteiTorokuFlow");
+    private static final RString CHOTEITOROKU_FLOWID = new RString("CAX000001_ChoteiToroku");
 
     @Override
     protected void defineFlow() {
