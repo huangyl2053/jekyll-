@@ -1350,10 +1350,14 @@ public class FukaKijunTotalHandler {
         for (int index = NUM_1; index < count; index++) {
             保険料率 = 保険料段階一覧.get(index - NUM_1).get保険料率();
             次の保険料率 = 保険料段階一覧.get(index).get保険料率();
-            if ((保険料率 == null || 保険料率.compareTo(Decimal.ZERO) == NUM_0)
-                    || (次の保険料率 == null || 次の保険料率.compareTo(Decimal.ZERO) == NUM_0)) {
+            if ((保険料率 == null || 次の保険料率 == null)) {
                 return true;
-            } else if (保険料率.compareTo(次の保険料率) == NUM_1) {
+            }
+            if (保険料率.compareTo(Decimal.ZERO) == NUM_0
+                    && 次の保険料率.compareTo(Decimal.ZERO) != NUM_0) {
+                return true;
+            }
+            if (保険料率.compareTo(次の保険料率) == NUM_1 && 次の保険料率.compareTo(Decimal.ZERO) != NUM_0) {
                 return true;
             }
         }
