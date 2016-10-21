@@ -1128,14 +1128,14 @@ public class JukyushaIdoRenrakuhyoHandler {
         entity.set要介護状態区分(div.getYokaigoNinteiPanel().getDdlYokaigoJotaiKubun().getSelectedKey());
         entity.set有効期間開始年月日(new FlexibleDate(div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().
                 getFromValue().toDateString()));
-        entity.set有効期間終了年月日(new FlexibleDate(div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().
-                getToValue().toDateString()));
+        entity.set有効期間終了年月日(div.getYokaigoNinteiPanel().getTxtNinteiYukoKikanYMD().
+                getToValue().toDateString());
         entity.set支給限度基準額1(new RString(div.getShikyuGendoKijungakuPanel().
                 getTxtHomonTsushoServiceShikyuGendoKijungaku().getValue().toString()));
         entity.set上限管理適用開始年月日１(new FlexibleDate(div.getShikyuGendoKijungakuPanel().
                 getTxtHomonTsushoServiceJogenKanriTekiyoYMD().getFromValue().toDateString()));
-        entity.set上限管理終了年月日１(new FlexibleDate(div.getShikyuGendoKijungakuPanel().
-                getTxtHomonTsushoServiceJogenKanriTekiyoYMD().getToValue().toDateString()));
+        entity.set上限管理終了年月日１(div.getShikyuGendoKijungakuPanel().
+                getTxtHomonTsushoServiceJogenKanriTekiyoYMD().getToValue().toDateString());
         entity.set支給限度基準額２(new RString(div.getShikyuGendoKijungakuPanel().
                 getTxtTankiNyushoServiceShikyuGendoKijungaku().getValue().toString()));
         entity.set上限管理適用開始年月日２(new FlexibleDate(div.getShikyuGendoKijungakuPanel().
@@ -1144,40 +1144,40 @@ public class JukyushaIdoRenrakuhyoHandler {
                 getTxtTankinyushoServiceJogenKanriTekiyoYMD().getToValue().toDateString()));
         entity.set計画作成区分(div.getKyotakuServicePlanPanel().getRadKyotakuServiceSakuseiKubun().getSelectedKey());
         entity.set居宅支援事業者番号(div.getKyotakuServicePlanPanel().getTxtKyotakuKaigoShienJigyoshoNo().getValue());
-        entity.set居宅適用開始年月日(new FlexibleDate(div.getKyotakuServicePlanPanel().
-                getTxtKyotakuServiceTekiyoYMD().getFromValue().toDateString()));
-        entity.set居宅適用終了年月日(new FlexibleDate(div.getKyotakuServicePlanPanel().
-                getTxtKyotakuServiceTekiyoYMD().getToValue().toDateString()));
+        entity.set居宅適用開始年月日(div.getKyotakuServicePlanPanel().
+                getTxtKyotakuServiceTekiyoYMD().getFromValue().toDateString());
+        entity.set居宅適用終了年月日(div.getKyotakuServicePlanPanel().
+                getTxtKyotakuServiceTekiyoYMD().getToValue().toDateString());
         entity.set減免申請中区分(div.getGemmenGengakuPanel().getRadGemmenShinseichuKubun().getSelectedKey());
         entity.set利用者負担区分(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                 getJukyushaIdoRenrakuhyoRiyoshaFutan().getRadRiyoshaFutanKubunCode().getSelectedKey());
         entity.set利用給付率(new RString(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                 getJukyushaIdoRenrakuhyoRiyoshaFutan().getTxtKyufuritsu().getValue().toString()));
-        entity.set利用適用開始年月日(new FlexibleDate(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
-                getJukyushaIdoRenrakuhyoRiyoshaFutan().getTxtTekiyoYMD().getFromValue().toDateString()));
-        entity.set利用適用終了年月日(new FlexibleDate(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
-                getJukyushaIdoRenrakuhyoRiyoshaFutan().getTxtTekiyoYMD().getToValue().toDateString()));
+        entity.set利用適用開始年月日(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                getJukyushaIdoRenrakuhyoRiyoshaFutan().getTxtTekiyoYMD().getFromValue().toDateString());
+        entity.set利用適用終了年月日(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                getJukyushaIdoRenrakuhyoRiyoshaFutan().getTxtTekiyoYMD().getToValue().toDateString());
         entity.set標準負担区分(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                 getJukyushaIdoRenrakuhyoHyojunFutan().getRadHyojunFutanKubun().getSelectedKey());
         entity.set標準負担額(new RString(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                 getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangaku().getValue().toString()));
-        entity.set標準適用開始年月日(new FlexibleDate(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
-                getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangakuTekiyoYMD().getFromValue().toDateString()));
-        entity.set標準適用終了年月日(new FlexibleDate(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
-                getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangakuTekiyoYMD().getToValue().toDateString()));
+        entity.set標準適用開始年月日(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangakuTekiyoYMD().getFromValue().toDateString());
+        entity.set標準適用終了年月日(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangakuTekiyoYMD().getToValue().toDateString());
         if (div.getKyufuSeigenPanel().getRadKohiFutanJogenGengakuAriFlag().getSelectedKey().equals(ONE)) {
             entity.set公費負担上限額減額(Boolean.FALSE);
         } else if (div.getKyufuSeigenPanel().getRadKohiFutanJogenGengakuAriFlag().getSelectedKey().equals(TWO)) {
             entity.set公費負担上限額減額(Boolean.TRUE);
         }
-        entity.set償還払化適用開始年月日(new FlexibleDate(div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().
-                getFromValue().toDateString()));
-        entity.set償還払化適用終了年月日(new FlexibleDate(div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().
-                getToValue().toDateString()));
-        entity.set給付率引下げ適用開始年月日(new FlexibleDate(div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().
-                getFromValue().toDateString()));
-        entity.set給付率引下げ適用終了年月日(new FlexibleDate(div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().
-                getToValue().toDateString()));
+        entity.set償還払化適用開始年月日(div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().
+                getFromValue().toDateString());
+        entity.set償還払化適用終了年月日(div.getKyufuSeigenPanel().getTxtShokanbaraikaYMD().
+                getToValue().toDateString());
+        entity.set給付率引下げ適用開始年月日(div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().
+                getFromValue().toDateString());
+        entity.set給付率引下げ適用終了年月日(div.getKyufuSeigenPanel().getTxtKyufuritsuHikisage().
+                getToValue().toDateString());
         entity.set認定申請中区分(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
                 getRadTokuteiNyushoshaNinteiShinseichuKubun().getSelectedKey());
         entity.setｻｰﾋﾞｽ区分(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
@@ -1203,21 +1203,21 @@ public class JukyushaIdoRenrakuhyoHandler {
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtKyotakuhiShin2FutanGendogaku().getValue().toString()));
         entity.set新３(new RString(div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtKyotakuhiShin3utanGendogaku().getValue().toString()));
-        entity.set特定入所者適用開始年月日(new FlexibleDate(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
-                getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangakuTekiyoYMD().getFromValue().toDateString()));
-        entity.set特定入所者適用終了年月日(new FlexibleDate(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
-                getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangakuTekiyoYMD().getToValue().toDateString()));
+        entity.set特定入所者適用開始年月日(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangakuTekiyoYMD().getFromValue().toDateString());
+        entity.set特定入所者適用終了年月日(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
+                getJukyushaIdoRenrakuhyoHyojunFutan().getTxtFutangakuTekiyoYMD().getToValue().toDateString());
         entity.set広域保険者番号(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtKoikiHokenshaNo().getValue());
         entity.set老人保健市町村番号(div.getRojinHokenPanel().getTxtRojinHokenShichosonNo().getValue());
         entity.set老人保健公費負担者番号(div.getRojinHokenPanel().getTxtKohiFutanshaNo().getValue());
         entity.set老人保健受給者番号(div.getRojinHokenPanel().getTxtRojinHokenJukyushaNo().getValue());
         entity.set軽減率(new RString(div.getGemmenGengakuPanel().getJukyushaIdoRenrakuhyoGemmenGengakuSub().
                 getJukyushaIdoRenrakuhyoFukushiHojinKeigen().getTxtKeigenritsu().getValue().toString()));
-        entity.set軽減率適用開始年月日(new FlexibleDate(div.getGemmenGengakuPanel().
-                getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtFutanGendogakuTekiyoYMD().getFromValue().toDateString()));
-        entity.set軽減率適用終了年月日(new FlexibleDate(div.getGemmenGengakuPanel().
+        entity.set軽減率適用開始年月日(div.getGemmenGengakuPanel().
+                getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getTxtFutanGendogakuTekiyoYMD().getFromValue().toDateString());
+        entity.set軽減率適用終了年月日(div.getGemmenGengakuPanel().
                 getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().
-                getTxtFutanGendogakuTekiyoYMD().getToValue().toDateString()));
+                getTxtFutanGendogakuTekiyoYMD().getToValue().toDateString());
         if (div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().getSelectedKey().equals(ONE)) {
             entity.set小規模居宅ｻｰﾋﾞｽ利用(Boolean.FALSE);
         } else if (div.getKyotakuServicePlanPanel().getRadShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag().getSelectedKey().equals(TWO)) {
@@ -1241,14 +1241,14 @@ public class JukyushaIdoRenrakuhyoHandler {
         entity.set住特対象者区分(div.getJushochiTokureiPanel().getRadJushochiTokureiTaishoshaKubun().getSelectedKey());
         entity.set住特施設所在保険者番号(div.getJushochiTokureiPanel().getHokenshaJohoPanel().
                 getTxtShisetsuShozaiHokenjaNo().getValue());
-        entity.set住特適用開始年月日(new FlexibleDate(div.getJushochiTokureiPanel().
-                getTxtJushochiTokureiTekiyoYMD().getFromValue().toDateString()));
-        entity.set住特適用終了年月日(new FlexibleDate(div.getJushochiTokureiPanel().
-                getTxtJushochiTokureiTekiyoYMD().getToValue().toDateString()));
-        entity.set二割負担適用開始年月日(new FlexibleDate(div.getRiyosyaFutanWariaiPanel().
-                getTxtRiyosyaFutanWariaiYukoYMD().getFromValue().toDateString()));
-        entity.set二割負担適用終了年月日(new FlexibleDate(div.getRiyosyaFutanWariaiPanel().
-                getTxtRiyosyaFutanWariaiYukoYMD().getToValue().toDateString()));
+        entity.set住特適用開始年月日(div.getJushochiTokureiPanel().
+                getTxtJushochiTokureiTekiyoYMD().getFromValue().toDateString());
+        entity.set住特適用終了年月日(div.getJushochiTokureiPanel().
+                getTxtJushochiTokureiTekiyoYMD().getToValue().toDateString());
+        entity.set二割負担適用開始年月日(div.getRiyosyaFutanWariaiPanel().
+                getTxtRiyosyaFutanWariaiYukoYMD().getFromValue().toDateString());
+        entity.set二割負担適用終了年月日(div.getRiyosyaFutanWariaiPanel().
+                getTxtRiyosyaFutanWariaiYukoYMD().getToValue().toDateString());
         entity.set送付年月(div.getJukyushaIdoRenrakuhyoKihonJoho().getTxtSofuYM().getValue().getYearMonth());
         return entity;
     }
