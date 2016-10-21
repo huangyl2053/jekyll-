@@ -125,14 +125,10 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         finder = AssociationFinderFactory.createInstance();
         保険者リスト = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         personalDataList = new ArrayList<>();
-    }
 
-    @Override
-    protected void beforeExecute() {
         IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
                 new ReportId(processParamter.get帳票ID()), processParamter.get出力順());
         出力順 = get出力順(outputOrder);
-
     }
 
     @Override
@@ -176,8 +172,11 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     }
 
     private RString get出力順(IOutputOrder order) {
-        RString 出力順 = MyBatisOrderByClauseCreator.create(HanyoListShisetsuNyutaishoOrderKey.class, order);
-        return 出力順.concat(",施設入所_識別コード，施設入所_履歴番号");
+        if (order != null) {
+            RString 出力順 = MyBatisOrderByClauseCreator.create(HanyoListShisetsuNyutaishoOrderKey.class, order);
+            return 出力順.concat(",施設入所_識別コード,施設入所_履歴番号");
+        }
+        return RString.EMPTY;
     }
 
     @Override
