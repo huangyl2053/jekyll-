@@ -29,8 +29,8 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  */
 public class ShoriKekkaListProcess extends BatchProcessBase<DBB021051ShoriKekkaListTempEntity> {
 
-    private final RString eucエンティティID = new RString("DBZ000001");
-    private final RString eucファイル名 = new RString("ShoriKekkaKakuninList.csv");
+    private final RString eucエンティティID = new RString("DBU900002");
+    private final RString eucファイル名 = new RString("DBU900002_ShoriKekkaKakuninList.csv");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString カンマ = new RString(",");
 

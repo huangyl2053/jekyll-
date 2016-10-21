@@ -55,8 +55,15 @@ public class AtenaSealEditor
     private static final int NUM_2 = 2;
     private static final int NUM_1 = 1;
     private static final int NUM_0 = 0;
+    private static final int NUM_MINUS1 = -1;
+    private static final int NUM_MINUS2 = -2;
+    private static final int NUM_MINUS3 = -3;
+
     private static final RString EMPTY = RString.EMPTY;
     private final Class cls = DBZ100001AtenaSealSource.class;
+    private RString tmpChkJusho;
+    private RString tmpChkShimei;
+    private RString tmpChkKatagaki;
     private ShikibetsuCode tmp0;
     private RString tmp1;
     private RString tmp2;
@@ -124,6 +131,12 @@ public class AtenaSealEditor
 
     private void editBody(DBZ100001AtenaSealSource source) {
         try {
+            this.method = this.cls.getMethod(getMethodName(NUM_MINUS3), RString.class);
+            this.method.invoke(source, this.tmpChkJusho);
+            this.method = this.cls.getMethod(getMethodName(NUM_MINUS2), RString.class);
+            this.method.invoke(source, this.tmpChkKatagaki);
+            this.method = this.cls.getMethod(getMethodName(NUM_MINUS1), RString.class);
+            this.method.invoke(source, this.tmpChkShimei);
             this.method = this.cls.getMethod(getMethodName(0), ShikibetsuCode.class);
             this.method.invoke(source, this.tmp0);
             this.method = this.cls.getMethod(getMethodName(NUM_1), RString.class);
@@ -192,7 +205,10 @@ public class AtenaSealEditor
 
     private static enum MethodName {
 
-        未定義(AtenaSealEditor.EMPTY, Integer.valueOf(-1)),
+        未定義(AtenaSealEditor.EMPTY, Integer.valueOf(-4)),
+        chkJusho(new RString("ChkJusho"), Integer.valueOf(-3)),
+        chkKatagaki(new RString("ChkKatagaki"), Integer.valueOf(-2)),
+        chkShimei(new RString("ChkShimei"), Integer.valueOf(-1)),
         shikibetsuCode(new RString("ShikibetsuCode"), Integer.valueOf(0)),
         yubinNo(new RString("YubinNo"), Integer.valueOf(1)),
         gyoseiku(new RString("Gyoseiku"), Integer.valueOf(2)),
@@ -244,6 +260,9 @@ public class AtenaSealEditor
     }
 
     private void setTemp(DBZ100001AtenaSealEntity entity) {
+        this.tmpChkJusho = entity.getChk住所();
+        this.tmpChkKatagaki = entity.getChk方書();
+        this.tmpChkShimei = entity.getChk氏名();
         this.tmp0 = entity.get識別コード();
         this.tmp1 = entity.get郵便番号();
         this.tmp2 = entity.get行政区();
