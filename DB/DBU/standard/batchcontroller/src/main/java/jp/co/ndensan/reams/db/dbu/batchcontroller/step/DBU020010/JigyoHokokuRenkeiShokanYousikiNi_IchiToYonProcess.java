@@ -713,14 +713,12 @@ public class JigyoHokokuRenkeiShokanYousikiNi_IchiToYonProcess extends BatchProc
 
     @Override
     protected void afterExecute() {
-        boolean flag = true;
+        eucCsvWriter.close();
+        tempCsv(true);
         int i = 0;
         RString 保険者番号bak = RString.EMPTY;
         for (RString 保険者番号 : 保険者番号data.get(番号)) {
             if (!保険者番号bak.equals(保険者番号)) {
-                eucCsvWriter.close();
-                tempCsv(flag);
-                flag = false;
                 RStringBuilder filePath = new RStringBuilder();
                 filePath.append("DUJRENF10_");
                 filePath.append(processParameter.get過去集計年月());
@@ -733,8 +731,8 @@ public class JigyoHokokuRenkeiShokanYousikiNi_IchiToYonProcess extends BatchProc
             get様式２_様式２の４のCSV出力(保険者番号, 保険者名称data.get(名称).get(i));
             i++;
         }
-        eucCsvWriter.close();
-    }
+            eucCsvWriter.close();   
+        }
 
     private boolean tempCsv(boolean flag) {
         if (flag) {
