@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.riyoshafutanlist.RiyoshaFutanGak
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200002.NinteishaListSakuseiBusiness;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200002.RiyoshaFutangakuGemmenGaitoshaIchiranReport;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.NinteishaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -200,8 +201,27 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
             }
         }
         if (t.get世帯員リスト() != null) {
+            editCsv(t);
+        } else {
             NinteishaListSakuseiResultCsvEntity resultEntity = business.set利用者負担額減免認定者リストCSV(t, parameter.getCsv出力設定());
-            NinteishaListSakuseiResultCsvEntity csvEntity = resultEntity;
+            eucCsvWriter.writeLine(resultEntity);
+        }
+    }
+
+    @Override
+    protected void afterExecute() {
+        eucCsvWriter.close();
+        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(eucFilePath, log);
+        AccessLogUUID reportLog = AccessLogger.logReport(personalDataList);
+        batchReportWrite.addPrivacy(reportLog);
+        バッチ出力条件リストの出力();
+    }
+
+    private void editCsv(NinteishaListSakuseiResultEntity t) {
+        NinteishaListSakuseiResultCsvEntity resultEntity = business.set利用者負担額減免認定者リストCSV(t, parameter.getCsv出力設定());
+        NinteishaListSakuseiResultCsvEntity csvEntity = resultEntity;
+        if (SetaiHyoji.表示する.equals(parameter.get世帯表示())) {
             for (SeteiYouEntity entity : t.get世帯員リスト()) {
                 IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
                 csvEntity.set世帯員氏名(kojin.get名称().getName().getColumnValue());
@@ -216,17 +236,8 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
                 csvEntity = new NinteishaListSakuseiResultCsvEntity();
             }
         } else {
-            NinteishaListSakuseiResultCsvEntity resultEntity = business.set利用者負担額減免認定者リストCSV(t, parameter.getCsv出力設定());
-            eucCsvWriter.writeLine(resultEntity);
+            eucCsvWriter.writeLine(csvEntity);
         }
-    }
-
-    @Override
-    protected void afterExecute() {
-        eucCsvWriter.close();
-        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-        manager.spool(eucFilePath, log);
-        バッチ出力条件リストの出力();
     }
 
     private void edit初期化() {

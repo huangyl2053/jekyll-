@@ -192,7 +192,7 @@
                     (利用者負担額減額."ketteiKubun" = #{承認する}
                     AND 利用者負担額減額."tekiyoKaishiYMD" &lt;= #{基準日}
                     AND #{基準日} &lt;= 利用者負担額減額."tekiyoShuryoYMD")
-                    OR (利用者負担額減額."ketteiKubun" is null 
+                    OR (利用者負担額減額."ketteiKubun" = ''
                         AND 利用者負担額減額."shinseiYMD" &lt;= #{基準日})
                     )
 		)
@@ -227,7 +227,7 @@
          ${出力順}
     </select>
     <resultMap id="resultMap_ChohyoShutsuryokuJohoResultEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultEntity" autoMapping="true">
-        <id property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="本人識別コード" column="本人識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="本人課税区分" column="本人課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="is老齢福祉年金受給者" column="is老齢福祉年金受給者" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
