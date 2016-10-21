@@ -156,8 +156,8 @@ public class KaigoJigyoshaShisetsuKanriManager {
                 重複チェックフラグ = true;
                 break;
             }
-            if (count != relateEntityList.size() && relateEntity.getYukoShuryoYMD() != null
-                    && relateEntityList.get(count).getYukoKaishiYMD() != null
+            if (count != relateEntityList.size() && relateEntity.getYukoShuryoYMD() != null && !relateEntity.getYukoShuryoYMD().isEmpty()
+                    && relateEntityList.get(count).getYukoKaishiYMD() != null && !relateEntityList.get(count).getYukoKaishiYMD().isEmpty()
                     && relateEntityList.get(count).getYukoKaishiYMD().isBeforeOrEquals(relateEntity.getYukoShuryoYMD())) {
                 重複チェックフラグ = true;
                 break;

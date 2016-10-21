@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dba.business.core.jigyoshaservice.JigyoshaServiceJ
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.JigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -88,6 +89,15 @@ public class ServiceItiranHyojiJohoBusiness {
     }
 
     /**
+     * サービス種類略称を取得します。
+     *
+     * @return サービス種類略称
+     */
+    public RString get状態() {
+        return entity.getState();
+    }
+
+    /**
      * isDeletedのgetメソッドです。
      *
      * @return isDeleted
@@ -114,9 +124,10 @@ public class ServiceItiranHyojiJohoBusiness {
                 }
             }
         }
-        ServiceItiranHyojiJohoBusiness business;
         JigyoshaShiteiServiceEntity entity = new JigyoshaShiteiServiceEntity();
         entity.setDeleted(!service.hasChanged() && service.toEntity().getIsDeleted());
+        ViewExecutionStatus status = ViewExecutionStatus.toValue(new RString(service.toEntity().getState().name()));
+        entity.setState(status.get名称());
         entity.setJigyoshaName(service.get事業者名称());
         entity.setKanrishaName(service.get管理者氏名());
         entity.setServiceShuruiCode(service.getサービス種類コード());

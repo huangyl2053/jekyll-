@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dba.business.core.jigyoshaservice.JigyoshaServiceJoho;
-import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.ServiceItiranHyojiJohoBusiness;
-import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.ServiceJohoBusiness;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.DBA2010014StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.DBA2010014TransitionEventName;
@@ -37,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -275,8 +272,12 @@ public class JigyoshaService {
             stateChangeNewService = stateChangeNewService.modifiedModel();
             models.add(stateChangeNewService);
         } else if (状態_削除.equals(画面状態)) {
-            stateChangeNewService = motoData.deleted();
-            models.add(stateChangeNewService);
+            if (motoData.isAdded()) {
+                models.deleteOrRemove(motoData.identifier());
+            } else {
+                stateChangeNewService = motoData.deleted();
+                models.add(stateChangeNewService);
+            }
         }
 
         ViewStateHolder.put(ViewStateKeys.サービス一覧情報, models);
@@ -300,17 +301,6 @@ public class JigyoshaService {
         if (!getService().checkKikanGorisei(合理性パラメータ)) {
             throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
         }
-        KaigoJogaiTokureiParameter サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
-                ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.有効開始日, FlexibleDate.class),
-                FlexibleDate.EMPTY, RDate.getNowDate().getYearMonth());
-        List<ServiceItiranHyojiJohoBusiness> サービス一覧表示情報List = getService().getServiceItiranHyojiJoho(サービス一覧パラメータ).records();
-        List<ServiceJohoBusiness> businessList = new ArrayList<>();
-        for (ServiceItiranHyojiJohoBusiness johoBusiness : サービス一覧表示情報List) {
-            ServiceJohoBusiness serviceJohoBusiness = new ServiceJohoBusiness(johoBusiness.get有効開始日(), johoBusiness.get有効終了日(), johoBusiness.getサービス種類略称());
-            businessList.add(serviceJohoBusiness);
-        }
-        getService().サービスと事業者期間関連のチェック(businessList, yukoKaishiYMD, yukoShuryoYMD);
     }
 
     /**

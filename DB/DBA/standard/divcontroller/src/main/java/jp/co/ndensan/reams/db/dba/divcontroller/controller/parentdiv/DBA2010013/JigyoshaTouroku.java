@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2010013
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.ServiceJohoBusiness;
+import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriMapperParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter;
@@ -363,7 +364,7 @@ public class JigyoshaTouroku {
         JigyoshaNo jigyoshaNo = new JigyoshaNo(div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue());
         FlexibleDate 有効開始日 = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
         if (jigyoshaTourokuFinder.事業者番号重複チェック(jigyoshaNo, 有効開始日)) {
-            throw new ApplicationException("事業者番号が介護事業者テーブルに存在するのため登録できません。");
+            throw new ApplicationException(DbaErrorMessages.事業者番号重複.getMessage());
         }
         FlexibleDate yukoKaishiYMD = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
         FlexibleDate yukoShuryoYMD = div.getServiceJigyoshaJoho().getTxtYukoShuryoYMD().getValue();

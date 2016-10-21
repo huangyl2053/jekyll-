@@ -282,6 +282,7 @@ public class JigyoshaTourokuHandler {
                 continue;
             }
             if (!RString.isNullOrEmpty(result.getサービス種類コード().getColumnValue())) {
+                row.setState(result.get状態());
                 row.setServiceShuruiCode(result.getサービス種類コード().getColumnValue());
                 row.setServiceType(result.getサービス種類略称());
                 TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
@@ -340,6 +341,7 @@ public class JigyoshaTourokuHandler {
                     row.setModifyButtonState(DataGridButtonState.Enabled);
                     row.setDeleteButtonState(DataGridButtonState.Enabled);
                 }
+                row.setState(result.get状態());
                 row.setServiceShuruiCode(result.getサービス種類コード().getColumnValue());
                 row.setServiceType(result.getサービス種類略称());
                 TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
