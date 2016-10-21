@@ -402,7 +402,7 @@ public class NinteiChosaIrai {
         NinteichosaIraiJohoManager ninteichosaIraiJohoManager = NinteichosaIraiJohoManager.createInstance();
         RDate date = RDate.getNowDate();
         RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, date, SubGyomuCode.DBE認定支援);
-        RString 調査票提出期限 = DbBusinessConfig.get(ConfigNameDBE.調査票提出期限, date, SubGyomuCode.DBE認定支援);
+        RString 認定調査期限日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, date, SubGyomuCode.DBE認定支援);
         FlexibleDate 認定調査依頼年月日 = new FlexibleDate(div.getTxtChosaIraiDay().getValue().toDateString());
         for (dgWaritsukeZumiShinseishaIchiran_Row row : waritsukeZumiShinseishaIchiran) {
             if (MIWARITSUKE.equals(row.getJotai())) {
@@ -414,9 +414,9 @@ public class NinteiChosaIrai {
                 FlexibleDate 認定申請日 = new FlexibleDate(row.getNinteiShinseiDay().getValue().toDateString());
                 FlexibleDate 認定調査期限年月日;
                 if (設定方法.equals(認定調査期限設定方法)) {
-                    認定調査期限年月日 = 認定調査依頼年月日.plusDay(Integer.parseInt(調査票提出期限.toString()));
+                    認定調査期限年月日 = 認定調査依頼年月日.plusDay(Integer.parseInt(認定調査期限日数.toString()));
                 } else {
-                    認定調査期限年月日 = 認定申請日.plusDay(Integer.parseInt(調査票提出期限.toString()));
+                    認定調査期限年月日 = 認定申請日.plusDay(Integer.parseInt(認定調査期限日数.toString()));
                 }
                 if (ChosaKubun.新規調査.get名称().equals(row.getChosaKubun())) {
                     NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(申請書管理番号, 認定調査依頼履歴番号);

@@ -76,7 +76,9 @@
         rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
         ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
         WHERE
-        DbT5910NinteichosaItakusakiJoho."shichosonCode" IN (
+        DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND DbT5910NinteichosaItakusakiJoho."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
@@ -84,7 +86,7 @@
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
         )
-        AND DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE
+        </if>
         GROUP BY
         DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
         , DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho"
@@ -410,6 +412,7 @@
         <if test="uses支所コード">
             AND dbT5101."shishoCode" = #{shishoCode}
         </if>
+        AND dbT5101."ninteiShinseiShinseijiKubunCode" NOT IN ('A','B')
         ORDER BY dbT5101."ninteiChosaItakusakiCode",
         dbT5101."ninteiChosainCode",
         dbT5201."iraishoShutsuryokuYMD"
@@ -737,6 +740,7 @@
             AND dbT5101."shishoCode" = #{shishoCode}
         </if>
         AND dbT5101ShiTe.shinseishoKanriNoNull IS NULL
+        AND dbT5101."ninteiShinseiShinseijiKubunCode" NOT IN ('A','B')
         ORDER BY
         dbT5101."chosaKubun"
     </select>
@@ -880,6 +884,7 @@
         <if test="uses支所コード">
             AND dbT5101."shishoCode" = #{shishoCode}
         </if>
+        AND dbT5101."ninteiShinseiShinseijiKubunCode" NOT IN ('A','B')
         ORDER BY
         dbT5101."chosaKubun"
     </select>

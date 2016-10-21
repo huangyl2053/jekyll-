@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgMi
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgWaritsukeZumiShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgchosainIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairai.NinnteiChousairaiFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -36,7 +37,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.RensakusakiTsuzukigara;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
@@ -256,8 +256,9 @@ public class NinteiChosaIraiHandler {
                 ninteiShinseiDay.setValue(new RDate(business.getNinteiShinseiYMD().toString()));
                 row.setNinteiShinseiDay(ninteiShinseiDay);
             }
-            if (business.getNinteiShinseiKubunCode() != null && !business.getNinteiShinseiKubunCode().isEmpty()) {
-                row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(business.getNinteiShinseiKubunCode().value()).get名称());
+            if (business.getNinteiShinseiKubunCode() != null && !RString.isNullOrEmpty(business.getNinteiShinseiKubunCode().value())) {
+                int ninteiShinseiKubun = Integer.parseInt(business.getNinteiShinseiKubunCode().getColumnValue().toString());
+                row.setShinseiKubunShinseiji(new RString(NinteiShinseiKubunShinsei.toValue(ninteiShinseiKubun).name()));
             }
             if (business.getChikuCode() != null) {
                 row.setChiku(business.getChikuCode().value());
@@ -295,11 +296,11 @@ public class NinteiChosaIraiHandler {
     private void setDgMiwaritsukeShinseishaIchiran_Row(dgMiwaritsukeShinseishaIchiran_Row row, WaritsukeBusiness business) {
         row.setWaritsukeTeiin(new RString(String.valueOf(business.getWaritsukeTeiin())));
         row.setChosaKanoNinzuPerMonth(new RString(String.valueOf(business.getChosaKanoNinzuPerMonth())));
-        if (business.getNinteichosaKigenYMD() != null && !business.getNinteichosaKigenYMD().isEmpty()) {
+        if (business.getNinteichosaKigenYMD() != null) {
             row.setNinteichosaKigenYMD(new RString(business.getNinteichosaKigenYMD().toString()));
         }
         row.setHihokenshaKana(business.getHihokenshaKana() == null ? RString.EMPTY : business.getHihokenshaKana().value());
-        if (business.getSeinengappiYMD() != null && !business.getSeinengappiYMD().isEmpty()) {
+        if (business.getSeinengappiYMD() != null) {
             row.setSeinengappiYMD(new RString(business.getSeinengappiYMD().toString()));
         }
         row.setYubinNo(business.getYubinNo() == null ? RString.EMPTY : business.getYubinNo().value());
@@ -400,8 +401,9 @@ public class NinteiChosaIraiHandler {
                 ninteiShinseiDay.setValue(new RDate(business.getNinteiShinseiYMD().toString()));
                 row.setNinteiShinseiDay(ninteiShinseiDay);
             }
-            if (business.getNinteiShinseiKubunCode() != null && !business.getNinteiShinseiKubunCode().isEmpty()) {
-                row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(business.getNinteiShinseiKubunCode().value()).get名称());
+            if (business.getNinteiShinseiKubunCode() != null && !RString.isNullOrEmpty(business.getNinteiShinseiKubunCode().value())) {
+                int ninteiShinseiKubun = Integer.parseInt(business.getNinteiShinseiKubunCode().getColumnValue().toString());
+                row.setShinseiKubunShinseiji(new RString(NinteiShinseiKubunShinsei.toValue(ninteiShinseiKubun).name()));
             }
             if (business.getChikuCode() != null) {
                 row.setChiku(business.getChikuCode().value());
