@@ -967,6 +967,24 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     }
 
     /**
+     * 一般状況１２～１４【償還分】集計年月選択ラジオボタンの選択状態の切り替えと同時に集計年月の切り替えを行います。
+     */
+    public void onChange一般状況12to14集計年月() {
+        FlexibleDate shukeiYM4 = div.getTxtShukeiYM4().getValue();
+        div.getTxtShukeiYM4().setValue(new FlexibleDate(div.getTxtShukeiYM4Bak()));
+        div.setTxtShukeiYM4Bak(new RString(shukeiYM4.toString()));
+    }
+    
+    /**
+     * 保険給付決定状況【償還分】集計年月選択ラジオボタンの選択状態の切り替えと同時に集計年月の切り替えを行います。
+     */
+    public void onChange保険給付決定状況集計年月() {
+        FlexibleDate shukeiYM5 = div.getTxtShukeiYM5().getValue();
+        div.getTxtShukeiYM5().setValue(new FlexibleDate(div.getTxtShukeiYM5Bak()));
+        div.setTxtShukeiYM5Bak(new RString(shukeiYM5.toString()));
+    }    
+    
+    /**
      * 実行するボタンを押します。
      *
      * @return DBU010010_JigyoHokokuGeppo_MainParameter
@@ -1017,7 +1035,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         }
         return getバッチID(param);
     }
-
+    
     private RString getプリントコントロール区分() {
         RString プリントコントロール区分 = RString.EMPTY;
         if (集計のみ.equals(div.getRadJikkoTaniShukeiOnly().getSelectedKey())) {
