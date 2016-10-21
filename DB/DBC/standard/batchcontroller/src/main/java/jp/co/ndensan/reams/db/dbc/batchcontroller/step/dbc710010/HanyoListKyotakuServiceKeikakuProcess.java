@@ -97,7 +97,6 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     private List<PersonalData> personalDataList;
     private RString eucFilePath;
     private Decimal 連番;
-    private FlexibleDate システム日付;
     private final MapperProvider mapperProvider = InstanceProvider.create(MapperProvider.class);
     private IHanyoListKyotakuServiceKeikakuMapper mapper;
 
@@ -107,8 +106,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     @Override
     protected void beforeExecute() {
         連番 = Decimal.ONE;
-        システム日付 = FlexibleDate.getNowDate();
-        csvEntityEditor = new HanyoListKyotakuServiceKeikakuCsvEntityEditor(システム日付);
+        csvEntityEditor = new HanyoListKyotakuServiceKeikakuCsvEntityEditor();
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
@@ -130,7 +128,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
 
     @Override
     protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, CSVNAME);
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
@@ -158,7 +156,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(entity));
         }
-    
+
     }
 
     private PersonalData toPersonalData(HanyoListKyotakuServiceKeikakuEntity entity) {
@@ -176,7 +174,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         if (personalDataList == null || personalDataList.isEmpty()) {
             manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
         } else {
-            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
         }
         バッチ出力条件リストの出力();
