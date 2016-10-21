@@ -606,28 +606,27 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         parameter.set氏名(div.getCcdKaigoAtenaInfo().get氏名漢字());
         parameter.set生年月日(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeinengappiYMD().getValue());
         parameter.set性別(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeibetsu().getValue());
-        parameter.set利用者負担割合明細(利用者負担割合明細);
-
+        parameter.set呼出し元画面区分(RSTONE);
         RiyoshaFutanWariaiHantei source = new RiyoshaFutanWariaiHantei();
         List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細後list = source.riyoshaFutanWariaiMeisaiMergeGamen(利用者負担割合明細);
         編集昇順List(利用者負担割合明細後list);
         int size = 利用者負担割合明細後list.size();
         if (INT_1 == size) {
-            parameter.set負担割合上段(fetch負担割合(利用者負担割合明細後list, INDEX_ZERO));
-            parameter.set適用期間開始日上段(利用者負担割合明細後list.get(INDEX_ZERO).get有効開始日());
-            parameter.set適用期間終了日上段(利用者負担割合明細後list.get(INDEX_ZERO).get有効終了日());
-            parameter.set負担割合下段(RString.EMPTY);
-            parameter.set適用期間開始日下段(FlexibleDate.EMPTY);
-            parameter.set適用期間終了日下段(FlexibleDate.EMPTY);
+            parameter.set負担割合1(fetch負担割合(利用者負担割合明細後list, INDEX_ZERO));
+            parameter.set適用期間開始日1(利用者負担割合明細後list.get(INDEX_ZERO).get有効開始日());
+            parameter.set適用期間終了日1(利用者負担割合明細後list.get(INDEX_ZERO).get有効終了日());
+            parameter.set負担割合2(RString.EMPTY);
+            parameter.set適用期間開始日2(FlexibleDate.EMPTY);
+            parameter.set適用期間終了日2(FlexibleDate.EMPTY);
         } else if (INT_2 <= size) {
-            parameter.set負担割合上段(fetch負担割合(利用者負担割合明細後list, size - INT_2));
-            parameter.set適用期間開始日上段(利用者負担割合明細後list.get(size - INT_2).get有効開始日());
-            parameter.set適用期間終了日上段(利用者負担割合明細後list.get(size - INT_2).get有効終了日());
-            parameter.set負担割合下段(fetch負担割合(利用者負担割合明細後list, size - INT_1));
-            parameter.set適用期間開始日下段(利用者負担割合明細後list.get(size - INT_1).get有効開始日());
-            parameter.set適用期間終了日下段(利用者負担割合明細後list.get(size - INT_1).get有効終了日());
+            parameter.set負担割合1(fetch負担割合(利用者負担割合明細後list, size - INT_2));
+            parameter.set適用期間開始日1(利用者負担割合明細後list.get(size - INT_2).get有効開始日());
+            parameter.set適用期間終了日1(利用者負担割合明細後list.get(size - INT_2).get有効終了日());
+            parameter.set負担割合2(fetch負担割合(利用者負担割合明細後list, size - INT_1));
+            parameter.set適用期間開始日2(利用者負担割合明細後list.get(size - INT_1).get有効開始日());
+            parameter.set適用期間終了日2(利用者負担割合明細後list.get(size - INT_1).get有効終了日());
         }
-        return futanWariaisho.getSourceDataSinger(資格対象者.get識別コード(), 資格対象者.get被保険者番号(), parameter, RSTONE);
+        return futanWariaisho.getSourceDataSinger(資格対象者.get識別コード(), 資格対象者.get被保険者番号(), parameter);
     }
 
     private void 編集昇順List(List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細後list) {

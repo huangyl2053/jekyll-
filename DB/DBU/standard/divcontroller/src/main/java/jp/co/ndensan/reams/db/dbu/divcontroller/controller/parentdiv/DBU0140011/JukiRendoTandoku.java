@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0140011;
 
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyotruku.KaigojuminHyotrukuBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU040010.DBU040010_JuminkirokuIdojohoToroku_TashaParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0140011.JukiRendoTandokuDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0140011.JukiRendoTandokuHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -53,7 +53,7 @@ public class JukiRendoTandoku {
      * @param div 住民異動連携情報登録情報Div
      * @return ResponseData
      */
-    public ResponseData<KaigojuminHyotrukuBatchParameter> onClick_jiko(JukiRendoTandokuDiv div) {
+    public ResponseData<DBU040010_JuminkirokuIdojohoToroku_TashaParameter> onClick_jiko(JukiRendoTandokuDiv div) {
         return ResponseData.of(createHandlerOf(div).setBatchParameter()).respond();
     }
 

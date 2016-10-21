@@ -25,12 +25,12 @@ public class KyufuGengakuHaakuIchiranReportSource implements IReportSource {
 
     static {
         改頁_郵便番号 = new RString("listUpper2_5");
-        改頁_町域コード = new RString("atena_choikiCode"); // #103476
+        改頁_町域コード = new RString("choikiCode");
         改頁_行政区コード = new RString("listUpper1_4");
         改頁_世帯コード = new RString("listUpper1_3");
         改頁_識別コード = new RString("listUpper2_1");
         改頁_氏名５０音カナ = new RString("listUpper1_2");
-        改頁_市町村コード = new RString("atesaki_chiku3"); // #103476
+        改頁_市町村コード = new RString("shichosonCode");
         改頁_被保険者番号 = new RString("hokenshaNo");
     }
 
@@ -381,6 +381,10 @@ public class KyufuGengakuHaakuIchiranReportSource implements IReportSource {
     public RString hihokenshaNo;
     @ReportPerson(id = "A")
     public RString shikibetsuCode;
+    @ReportItem(name = "choikiCode", order = 170)
+    public RString choikiCode;
+    @ReportItem(name = "shichosonCode", order = 171)
+    public RString shichosonCode;
 
 // </editor-fold>
 }

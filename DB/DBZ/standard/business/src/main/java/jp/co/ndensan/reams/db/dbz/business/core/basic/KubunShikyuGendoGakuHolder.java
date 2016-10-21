@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -39,8 +39,7 @@ public class KubunShikyuGendoGakuHolder implements Serializable {
     /**
      * KubunShikyuGendoGakuHolderのobj作成です。
      *
-     * @param kubunShikyuGendoGakuList Models<KubunShikyuGendoGakuIdentifier,
-     * KubunShikyuGendoGaku>
+     * @param kubunShikyuGendoGakuList Models<KubunShikyuGendoGakuIdentifier, KubunShikyuGendoGaku>
      */
     public KubunShikyuGendoGakuHolder(
             Models<KubunShikyuGendoGakuIdentifier, KubunShikyuGendoGaku> kubunShikyuGendoGakuList) {

@@ -23,12 +23,16 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -49,6 +53,10 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
     private static final String 介護保険給付費通知書_ｼｰﾗﾀｲﾌﾟ = "dbc100042";
     private static final String 介護保険給付費通知書_福祉用具貸与品目 = "dbc100043";
     private static final String 給付費通知発行一覧表 = "dbc200044";
+    private static final RString 帳票制御汎用キー_帳票タイプ = new RString("帳票タイプ");
+    private static final RString 帳票タイプ_A4 = new RString("1");
+    private static final RString 帳票タイプ_シーラ = new RString("2");
+    private static final RString 給付費通知情報が取り込む = new RString("1");
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
     private boolean flag = true;
@@ -85,9 +93,26 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
                 .get(ConfigNameDBU.合併情報管理_合併情報区分, now, SubGyomuCode.DBU介護統計報告))) {
             保険者構成();
         }
-        executeStep(介護保険給付費通知書作成);
-        executeStep(介護保険給付費通知書_ｼｰﾗﾀｲﾌﾟ);
-        executeStep(介護保険給付費通知書_福祉用具貸与品目);
+
+        ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
+        RString 帳票タイプ = RString.EMPTY;
+        ChohyoSeigyoHanyo 帳票制御汎帳票タイプ = 帳票制御汎用Manager.get帳票制御汎用(
+                SubGyomuCode.DBC介護給付,
+                ReportIdDBC.DBC100042.getReportId(),
+                FlexibleYear.MIN,
+                帳票制御汎用キー_帳票タイプ);
+        if (帳票制御汎帳票タイプ != null) {
+            帳票タイプ = 帳票制御汎帳票タイプ.get設定値();
+        }
+        if (帳票タイプ_A4.equals(帳票タイプ)) {
+            executeStep(介護保険給付費通知書作成);
+        }
+        if (帳票タイプ_シーラ.equals(帳票タイプ)) {
+            executeStep(介護保険給付費通知書_ｼｰﾗﾀｲﾌﾟ);
+        }
+        if (給付費通知情報が取り込む.equals(getParameter().get福祉用具貸与ページ出力区分())) {
+            executeStep(介護保険給付費通知書_福祉用具貸与品目);
+        }
         executeStep(給付費通知発行一覧表);
     }
 

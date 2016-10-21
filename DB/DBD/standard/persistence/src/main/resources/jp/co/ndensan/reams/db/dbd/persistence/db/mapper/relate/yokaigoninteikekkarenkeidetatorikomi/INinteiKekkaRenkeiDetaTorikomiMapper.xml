@@ -345,9 +345,9 @@
         B."ninteiShinseiYMD",
         B."ninteiShinseiShinseijiKubunCode"
         FROM
-            "NichijiShinchokuIchijiTeburuTemp" AS A
-        LEFT JOIN
             rgdb."DbT4101NinteiShinseiJoho" AS B
+        INNER JOIN
+            "NichijiShinchokuIchijiTeburuTemp" AS A
         ON
             B."shoKisaiHokenshaNo" = A."hokenshabango"
         AND

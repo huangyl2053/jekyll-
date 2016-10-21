@@ -46,7 +46,9 @@
               ,被保険者台帳管理Newest."shikakuSoshitsuYMD" AS 資格喪失年月日
               ,被保険者台帳管理Newest."shikakuSoshitsuJiyuCode" AS 資格喪失事由コード
               ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+              <if test = "福祉用具貸与ページ出力区分フラグ" >
               ,介護給付費福祉用具貸与品目一時TBL."jigyoshoNo" 
+              </if>
             FROM
               ( 
                 SELECT
@@ -73,7 +75,7 @@
                    AND 給付実績基本データ."kyufuSakuseiKubunCode" <![CDATA[<>]]> '3' 
                    AND #{サービス年月開始} <![CDATA[<=]]> 給付実績基本データ."serviceTeikyoYM" 
                   AND 給付実績基本データ."serviceTeikyoYM" <![CDATA[<=]]> #{サービス年月終了} 
-                  AND 給付実績基本データ."yoKaigoJotaiKubunCode" IN (#{要介護度}) 
+                  AND 給付実績基本データ."yoKaigoJotaiKubunCode" IN <foreach collection="list要介護度" item="values" open="(" separator="," close=")"> #{values} </foreach>
                   AND 給付実績基本データ."shokisaiHokenshaNo" = #{証記載保険者番号}
               ) AS 給付実績基本抽出データ 
               LEFT JOIN rgdb."DbT3018KyufujissekiMeisai" AS 給付実績明細 
