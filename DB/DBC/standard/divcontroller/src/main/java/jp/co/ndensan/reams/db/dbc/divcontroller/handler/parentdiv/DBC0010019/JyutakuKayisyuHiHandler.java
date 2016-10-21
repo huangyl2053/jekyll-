@@ -131,9 +131,10 @@ public class JyutakuKayisyuHiHandler {
      * データグリッドの設定処理です。
      *
      * @param 引き継ぎ情報 KyufuJissekiPrmBusiness
+     * @param 給付実績住宅改修費List 給付実績住宅改修費List
      */
-    public void setデータグリッド(KyufuJissekiPrmBusiness 引き継ぎ情報) {
-        List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List = 引き継ぎ情報.getCsData_H();
+    public void setデータグリッド(KyufuJissekiPrmBusiness 引き継ぎ情報,
+            List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List) {
         List<dgJutakuKaishuhi_Row> rowList = new ArrayList<>();
         RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
@@ -168,8 +169,10 @@ public class JyutakuKayisyuHiHandler {
      *
      * @param 事業者Flg 事業者Flg
      * @param 引き継ぎ情報 KyufuJissekiPrmBusiness
+     * @param 給付実績住宅改修費List 給付実績住宅改修費List
      */
-    public void chenge事業者(RString 事業者Flg, KyufuJissekiPrmBusiness 引き継ぎ情報) {
+    public void chenge事業者(RString 事業者Flg, KyufuJissekiPrmBusiness 引き継ぎ情報,
+            List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List) {
         RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
@@ -194,7 +197,8 @@ public class JyutakuKayisyuHiHandler {
             div.getCcdKyufuJissekiHeader().set様式番号(ヘッダ情報2.get(index + i).get識別番号());
             setDataGrid(引き継ぎ情報, ヘッダ情報2.get(index + i).getサービス提供年月(),
                     check事業所番号Null(ヘッダ情報2.get(index + i).get事業所番号()), ヘッダ情報2.get(index + i).get整理番号(),
-                    ヘッダ情報2.get(index + i).get給付実績区分コード(), ヘッダ情報2.get(index + i).get識別番号());
+                    ヘッダ情報2.get(index + i).get給付実績区分コード(), ヘッダ情報2.get(index + i).get識別番号(),
+                    給付実績住宅改修費List);
         }
     }
 
@@ -204,10 +208,12 @@ public class JyutakuKayisyuHiHandler {
      * @param 月Flg 月Flg
      * @param サービス提供年月 サービス提供年月
      * @param 引き継ぎ情報 引き継ぎ情報
+     * @param 給付実績住宅改修費List 給付実績住宅改修費List
      * @return サービス提供年月
      */
-    public FlexibleYearMonth get直近サービス提供年月(RString 月Flg, RDate サービス提供年月, KyufuJissekiPrmBusiness 引き継ぎ情報) {
-        List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List = 引き継ぎ情報.getCsData_H();
+    public FlexibleYearMonth get直近サービス提供年月(RString 月Flg, RDate サービス提供年月,
+            KyufuJissekiPrmBusiness 引き継ぎ情報,
+            List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List) {
         Collections.sort(給付実績住宅改修費List, new DateComparatorServiceTeikyoYM());
         List<KyufujissekiJutakuKaishuhi> サービス提供年月前 = new ArrayList<>();
         List<KyufujissekiJutakuKaishuhi> サービス提供年月後 = new ArrayList<>();
@@ -292,8 +298,7 @@ public class JyutakuKayisyuHiHandler {
     }
 
     private void setDataGrid(KyufuJissekiPrmBusiness 引き継ぎ情報, FlexibleYearMonth サービス提供年月, RString 事業者番号, RString 整理番号,
-            RString 実績区分コード, RString 様式番号) {
-        List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List = 引き継ぎ情報.getCsData_H();
+            RString 実績区分コード, RString 様式番号, List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List) {
         List<dgJutakuKaishuhi_Row> rowList = new ArrayList<>();
         for (KyufujissekiJutakuKaishuhiBusiness business : 給付実績住宅改修費List) {
             KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi = business.get給付実績住宅改修費情報();

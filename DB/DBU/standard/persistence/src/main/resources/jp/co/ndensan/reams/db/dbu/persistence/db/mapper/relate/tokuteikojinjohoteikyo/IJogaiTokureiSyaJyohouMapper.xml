@@ -21,7 +21,7 @@
         LEFT JOIN 
             <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.住特施設" /> AS jogaiShisetsu
         ON
-            jogaiShisetsu.shikibetsuCode = hihokenDaicho.hihokenDaichoshikibetsuCode
+            jogaiShisetsu.shikibetsuCode = hihokenDaicho.shikibetsuCode
         AND jogaiShisetsu.nyushoYMD = hihokenDaicho.jushochitokureiTekiyoYMD
         <if test = "is当初または版改定">
             WHERE
@@ -51,7 +51,7 @@
             LEFT JOIN 
                 <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.住特施設" /> AS jogaiShisetsu1
             ON
-                jogaiShisetsu1.shikibetsuCode = hihokenDaicho1.hihokenDaichoshikibetsuCode
+                jogaiShisetsu1.shikibetsuCode = hihokenDaicho1.shikibetsuCode
             AND jogaiShisetsu1.nyushoYMD = hihokenDaicho1.jushochitokureiTekiyoYMD
             INNER JOIN (SELECT 
                             dbT7304."hihokenshaNo",
@@ -88,7 +88,7 @@
             LEFT JOIN 
                 <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.住特施設" /> AS jogaiShisetsu2
             ON
-                jogaiShisetsu2.shikibetsuCode = hihokenDaicho2.hihokenDaichoshikibetsuCode
+                jogaiShisetsu2.shikibetsuCode = hihokenDaicho2.shikibetsuCode
             AND jogaiShisetsu2.nyushoYMD = hihokenDaicho2.jushochitokureiTekiyoYMD
             INNER JOIN 
                 <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.介護施設" /> AS kaigoShisetsu

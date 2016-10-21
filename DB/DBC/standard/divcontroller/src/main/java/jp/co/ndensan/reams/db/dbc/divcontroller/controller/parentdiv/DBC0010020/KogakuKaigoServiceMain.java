@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKihonJyohou;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKogakuKaigoServicehiJyohou;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010020.DBC0010020TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010020.KogakuKaigoServiceMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010020.KogakuKaigoServiceHandler;
@@ -40,7 +42,7 @@ public class KogakuKaigoServiceMain {
     public ResponseData<KogakuKaigoServiceMainDiv> onLoad(KogakuKaigoServiceMainDiv div) {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
-        List<KyufujissekiKihon> 給付実績基本情報 = 給付実績情報照会情報.getCsData_A();
+        List<KyufujissekiKihon> 給付実績基本情報 = getCsData_A();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         div.getCcdKyufuJissekiHeader().initialize(
@@ -51,8 +53,7 @@ public class KogakuKaigoServiceMain {
         if (!識別番号管理データリスト.isEmpty()) {
             getHandler(div).clear制御性(識別番号管理データリスト.get(0));
         }
-        List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費 = 給付実績情報照会情報.getCsData_I();
-        getHandler(div).set給付実績高額介護サービス費データ(高額介護サービス費, サービス提供年月);
+        getHandler(div).set給付実績高額介護サービス費データ(getCsData_I(), サービス提供年月);
         return createResponse(div);
     }
 
@@ -63,15 +64,13 @@ public class KogakuKaigoServiceMain {
      * @return ResponseData
      */
     public ResponseData<KogakuKaigoServiceMainDiv> onClick_Zengatsu(KogakuKaigoServiceMainDiv div) {
-        KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費 = 給付実績情報照会情報.getCsData_I();
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
-        List<KyufujissekiKihon> 給付実績基本情報 = 給付実績情報照会情報.getCsData_A();
+        List<KyufujissekiKihon> 給付実績基本情報 = getCsData_A();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
-        getHandler(div).change年月(new RString("前月"), 高額介護サービス費,
+        getHandler(div).change年月(new RString("前月"), getCsData_I(),
                 サービス提供年月, 整理番号,
                 被保険者番号, 識別番号検索キー);
         FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
@@ -86,15 +85,13 @@ public class KogakuKaigoServiceMain {
      * @return ResponseData
      */
     public ResponseData<KogakuKaigoServiceMainDiv> onClick_btnJigetsu(KogakuKaigoServiceMainDiv div) {
-        KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費 = 給付実績情報照会情報.getCsData_I();
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
-        List<KyufujissekiKihon> 給付実績基本情報 = 給付実績情報照会情報.getCsData_A();
+        List<KyufujissekiKihon> 給付実績基本情報 = getCsData_A();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
-        getHandler(div).change年月(new RString("次月"), 高額介護サービス費, サービス提供年月, 整理番号, 被保険者番号, 識別番号検索キー);
+        getHandler(div).change年月(new RString("次月"), getCsData_I(), サービス提供年月, 整理番号, 被保険者番号, 識別番号検索キー);
         FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return createResponse(div);
@@ -244,5 +241,15 @@ public class KogakuKaigoServiceMain {
 
     private ResponseData<KogakuKaigoServiceMainDiv> createResponse(KogakuKaigoServiceMainDiv div) {
         return ResponseData.of(div).respond();
+    }
+
+    private List<KyufujissekiKihon> getCsData_A() {
+        return ViewStateHolder.get(ViewStateKeys.給付実績基本情報,
+                KyufujissekiKihonJyohou.class).getCsData_A();
+    }
+
+    private List<KyufujissekiKogakuKaigoServicehi> getCsData_I() {
+        return ViewStateHolder.get(ViewStateKeys.給付実績高額明細管理情報,
+                KyufujissekiKogakuKaigoServicehiJyohou.class).getCsData_I();
     }
 }
