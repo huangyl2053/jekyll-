@@ -124,11 +124,11 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
     private RString getデータセットキー(HihokenshaNo 被保険者番号, FlexibleDate 資格取得年月日) {
         RStringBuilder データセットキー = new RStringBuilder();
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            データセットキー.append(被保険者番号);
+            データセットキー.append(被保険者番号.value());
         }
         データセットキー.append(DataSetNo._0102住所地特例情報.getコード());
         if (資格取得年月日 != null && !資格取得年月日.isEmpty()) {
-            データセットキー.append(資格取得年月日);
+            データセットキー.append(資格取得年月日.toString());
         }
         return データセットキー.toRString();
     }

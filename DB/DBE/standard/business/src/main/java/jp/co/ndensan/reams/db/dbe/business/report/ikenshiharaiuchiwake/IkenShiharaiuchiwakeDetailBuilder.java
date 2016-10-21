@@ -13,17 +13,18 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  *
  * @reamsid_L DBE-1980-047 xuyongchao
  */
-public class IkenShiharaiuchiwakeBuilder implements IIkenShiharaiuchiwakeBuilder {
+public class IkenShiharaiuchiwakeDetailBuilder implements IIkenShiharaiuchiwakeBuilder {
 
-    private final IIkenShiharaiuchiwakeEditor editor;
+    private final IIkenShiharaiuchiwakeEditor detailEditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param editor editor
+     * @param detailEditor detailEditor
      */
-    public IkenShiharaiuchiwakeBuilder(IIkenShiharaiuchiwakeEditor editor) {
-        this.editor = editor;
+    public IkenShiharaiuchiwakeDetailBuilder(IIkenShiharaiuchiwakeEditor detailEditor) {
+
+        this.detailEditor = detailEditor;
     }
 
     /**
@@ -33,7 +34,6 @@ public class IkenShiharaiuchiwakeBuilder implements IIkenShiharaiuchiwakeBuilder
      */
     @Override
     public IkenShiharaiuchiwakeReportSource build() {
-        return ReportEditorJoiner.from(new IkenShiharaiuchiwakeReportSource()).join(editor).buildSource();
+        return ReportEditorJoiner.from(new IkenShiharaiuchiwakeReportSource()).join(detailEditor).buildSource();
     }
-
 }

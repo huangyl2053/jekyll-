@@ -91,7 +91,7 @@ public class AtenaSealJohoShutokuProcess extends BatchProcessBase<AtenaSealJohoE
     protected void afterExecute() {
         if (!existingFlag) {
             処理結果リストTemp.insert(dataUtil.getErrorEntity());
-            hasError.setValue(!existingFlag);
+            hasError.setValue(true);
         }
     }
 }

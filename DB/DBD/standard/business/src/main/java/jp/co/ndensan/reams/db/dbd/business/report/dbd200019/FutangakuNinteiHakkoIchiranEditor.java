@@ -32,6 +32,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoIchiranEditor {
 
+    private static final RString タイトル = new RString("負担限度額認定証・決定通知書発行一覧表");
+    private static final RString ホシ = new RString("*");
+    private static final RString 承認 = new RString("承認");
+    private static final RString 却下 = new RString("却下");
+    private static final RString 作成 = new RString("作成");
+    private static final RString 丸 = new RString("○");
+    private static final RString 記号 = new RString("~");
+
     private static final int LISTINDEX_0 = 0;
     private static final int LISTINDEX_1 = 1;
     private static final int LISTINDEX_2 = 2;
@@ -73,7 +81,7 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
 
     private void setLayer1Step1(FutangakuNinteiHakkoIchiranReportSource source) {
         source.printTimeStamp = get印刷日時();
-        source.title = new RString("負担限度額認定証・決定通知書発行一覧表");
+        source.title = タイトル;
         if (null != association) {
             source.hokenshaNo = this.association.get地方公共団体コード().value();
             source.hokenshaName = this.association.get市町村名();
@@ -86,7 +94,7 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
         if (null != 帳票情報) {
             FlexibleDate 喪失年月日 = this.帳票情報.get喪失年月日();
             if (null != 喪失年月日 && !喪失年月日.isEmpty()) {
-                source.list_2 = new RString("*");
+                source.list_2 = ホシ;
             }
             if (null != this.帳票情報.get被保険者番号()) {
                 source.list_3 = this.帳票情報.get被保険者番号().value();
@@ -110,27 +118,25 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
                 source.list_7 = this.帳票情報.get決定日().wareki().toDateString();
             }
             source.list_8 = get適用日有効期限();
-            if (this.帳票情報.get決定().equals(KetteiKubun.承認する)) {
-                source.list_9 = new RString("承認");
-            } else if (this.帳票情報.get決定().equals(KetteiKubun.承認しない)) {
-                source.list_9 = new RString("却下");
-            }
-            if (this.帳票情報.get決定().equals(KetteiKubun.承認する)) {
+            KetteiKubun 決定 = this.帳票情報.get決定();
+            if (null != 決定 && KetteiKubun.承認する.equals(決定)) {
+                source.list_9 = 承認;
                 source.list_10 = this.帳票情報.get負担段階();
-            } else if (this.帳票情報.get決定().equals(KetteiKubun.承認しない)) {
+            } else if (null != 決定 && KetteiKubun.承認しない.equals(決定)) {
+                source.list_9 = 却下;
                 source.list_10 = RString.EMPTY;
             }
             if (this.帳票情報.is認定証発行フラグ() && this.帳票情報.is認定証発行済み()) {
-                source.list_11 = new RString("○");
+                source.list_11 = 丸;
             }
             if (this.帳票情報.is認定証発行フラグ() && !this.帳票情報.is認定証発行済み()) {
-                source.list_11 = new RString("却下");
+                source.list_11 = 却下;
             }
             if (!this.帳票情報.is認定証発行フラグ()) {
                 source.list_11 = RString.EMPTY;
             }
             if (this.帳票情報.is通知書発行フラグ()) {
-                source.list_12 = new RString("○");
+                source.list_12 = 丸;
             }
             if (null != this.帳票情報.get入所施設CD()) {
                 source.list_13 = this.帳票情報.get入所施設CD().getColumnValue();
@@ -150,13 +156,13 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        return 年月日.concat(" ").concat(時分秒).concat(" ").concat("作成");
+        return 年月日.concat(RString.HALF_SPACE).concat(時分秒).concat(RString.HALF_SPACE).concat(作成);
     }
 
     private RString get適用日有効期限() {
         RString 適用日 = this.帳票情報.get適用日().wareki().toDateString();
         RString 有効期限 = this.帳票情報.get有効期限().wareki().toDateString();
-        return 適用日.concat(new RString("~")).concat(有効期限);
+        return 適用日.concat(記号).concat(有効期限);
     }
 
     private void setiOutputOrder(FutangakuNinteiHakkoIchiranReportSource source) {

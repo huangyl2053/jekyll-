@@ -269,8 +269,9 @@
         , shoriDate."kijunTimestamp"
         FROM rgdb."DbT7022ShoriDateKanri" shoriDate
         WHERE shoriDate."shoriName" = #{syoriName}
+        AND shoriDate."subGyomuCode" = 'DBB'
         AND shoriDate."nendo" IN (
-        SELECT DISTINCT fukaJohoTemp."fukaNendo"
+        SELECT fukaJohoTemp."fukaNendo"
         FROM "DbT2002FukaJohoTemp" fukaJohoTemp
         GROUP BY fukaJohoTemp."fukaNendo")
     </select>
@@ -284,6 +285,7 @@
         , shoriDate."kijunTimestamp"
         FROM rgdb."DbT7022ShoriDateKanri" shoriDate
         WHERE shoriDate."shoriName" = #{syoriName}
+        AND shoriDate."subGyomuCode" = 'DBB'
         AND shoriDate."nendo" = #{nendo}
     </select>
 

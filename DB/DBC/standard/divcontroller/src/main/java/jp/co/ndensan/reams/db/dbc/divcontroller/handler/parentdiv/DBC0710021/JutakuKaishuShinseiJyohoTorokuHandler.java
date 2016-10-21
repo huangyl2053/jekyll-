@@ -1949,7 +1949,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     public void get作成事業者名() {
         RString 作成事業者番号 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
                 .getTxtCreationJigyoshaNo().getValue();
-        if (!作成事業者番号.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(作成事業者番号)) {
             JigyoshaNo 作成事業者 = new JigyoshaNo(作成事業者番号);
             AtenaMeisho 作成事業者名称 = JutakuKaishuJizenShinsei.createInstance().getJigyoshaName(作成事業者);
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
