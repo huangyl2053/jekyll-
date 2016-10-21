@@ -1490,7 +1490,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getTxtKonkaiHokenkyufugakuGokei().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().
                 getTxtKonkaiRiyoshaFutangakuGokei().setDisabled(true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(申請を保存する, true);
     }
 
     /**
@@ -1532,7 +1531,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getTxtZenkaiRiyoshaFutangakuGokei().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().
                 getTxtKonkaiHiyogakuGokei().setDisabled(true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(申請を保存する, true);
     }
 
     /**
@@ -1603,7 +1601,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getTxtKonkaiHokenkyufugakuGokei().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().
                 getTxtKonkaiRiyoshaFutangakuGokei().setDisabled(true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(申請を保存する, true);
     }
 
     /**
