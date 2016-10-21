@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * FuchoTablePanel のクラスファイル
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  */
 public class FuchoTablePanelDiv extends TablePanel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -240,13 +241,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi13() {
-        return this.celFucho0305.getLblYuyoKikanKaishi13();
+    public TextBoxDate getTxtYuyoKikanKaishi4() {
+        return this.celFucho0305.getTxtYuyoKikanKaishi4();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo13() {
-        return this.celFucho0311.getLblYuyoKikanShuryo13();
+    public TextBoxDate getTxtYuyoKikanShuryo4() {
+        return this.celFucho0311.getTxtYuyoKikanShuryo4();
     }
 
     @JsonIgnore
@@ -265,13 +266,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi14() {
-        return this.celFucho0405.getLblYuyoKikanKaishi14();
+    public TextBoxDate getTxtYuyoKikanKaishi5() {
+        return this.celFucho0405.getTxtYuyoKikanKaishi5();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo14() {
-        return this.celFucho0411.getLblYuyoKikanShuryo14();
+    public TextBoxDate getTxtYuyoKikanShuryo5() {
+        return this.celFucho0411.getTxtYuyoKikanShuryo5();
     }
 
     @JsonIgnore
@@ -290,13 +291,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi1() {
-        return this.celFucho0505.getLblYuyoKikanKaishi1();
+    public TextBoxDate getTxtYuyoKikanKaishi6() {
+        return this.celFucho0505.getTxtYuyoKikanKaishi6();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo1() {
-        return this.celFucho0511.getLblYuyoKikanShuryo1();
+    public TextBoxDate getTxtYuyoKikanShuryo6() {
+        return this.celFucho0511.getTxtYuyoKikanShuryo6();
     }
 
     @JsonIgnore
@@ -315,13 +316,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi2() {
-        return this.celFucho0605.getLblYuyoKikanKaishi2();
+    public TextBoxDate getTxtYuyoKikanKaishi7() {
+        return this.celFucho0605.getTxtYuyoKikanKaishi7();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo2() {
-        return this.celFucho0611.getLblYuyoKikanShuryo2();
+    public TextBoxDate getTxtYuyoKikanShuryo7() {
+        return this.celFucho0611.getTxtYuyoKikanShuryo7();
     }
 
     @JsonIgnore
@@ -340,13 +341,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi3() {
-        return this.celFucho0705.getLblYuyoKikanKaishi3();
+    public TextBoxDate getTxtYuyoKikanKaishi8() {
+        return this.celFucho0705.getTxtYuyoKikanKaishi8();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo3() {
-        return this.celFucho0711.getLblYuyoKikanShuryo3();
+    public TextBoxDate getTxtYuyoKikanShuryo8() {
+        return this.celFucho0711.getTxtYuyoKikanShuryo8();
     }
 
     @JsonIgnore
@@ -365,13 +366,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi4() {
-        return this.celFucho0805.getLblYuyoKikanKaishi4();
+    public TextBoxDate getTxtYuyoKikanKaishi9() {
+        return this.celFucho0805.getTxtYuyoKikanKaishi9();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo4() {
-        return this.celFucho0811.getLblYuyoKikanShuryo4();
+    public TextBoxDate getTxtYuyoKikanShuryo9() {
+        return this.celFucho0811.getTxtYuyoKikanShuryo9();
     }
 
     @JsonIgnore
@@ -390,13 +391,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi5() {
-        return this.celFucho0905.getLblYuyoKikanKaishi5();
+    public TextBoxDate getTxtYuyoKikanKaishi10() {
+        return this.celFucho0905.getTxtYuyoKikanKaishi10();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo5() {
-        return this.celFucho0911.getLblYuyoKikanShuryo5();
+    public TextBoxDate getTxtYuyoKikanShuryo10() {
+        return this.celFucho0911.getTxtYuyoKikanShuryo10();
     }
 
     @JsonIgnore
@@ -415,13 +416,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi6() {
-        return this.celFucho1005.getLblYuyoKikanKaishi6();
+    public TextBoxDate getTxtYuyoKikanKaishi11() {
+        return this.celFucho1005.getTxtYuyoKikanKaishi11();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo6() {
-        return this.celFucho1011.getLblYuyoKikanShuryo6();
+    public TextBoxDate getTxtYuyoKikanShuryo11() {
+        return this.celFucho1011.getTxtYuyoKikanShuryo11();
     }
 
     @JsonIgnore
@@ -440,13 +441,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi7() {
-        return this.celFucho1105.getLblYuyoKikanKaishi7();
+    public TextBoxDate getTxtYuyoKikanKaishi12() {
+        return this.celFucho1105.getTxtYuyoKikanKaishi12();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo7() {
-        return this.celFucho1111.getLblYuyoKikanShuryo7();
+    public TextBoxDate getTxtYuyoKikanShuryo12() {
+        return this.celFucho1111.getTxtYuyoKikanShuryo12();
     }
 
     @JsonIgnore
@@ -465,13 +466,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi8() {
-        return this.celFucho1205.getLblYuyoKikanKaishi8();
+    public TextBoxDate getTxtYuyoKikanKaishi1() {
+        return this.celFucho1205.getTxtYuyoKikanKaishi1();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo8() {
-        return this.celFucho1211.getLblYuyoKikanShuryo8();
+    public TextBoxDate getTxtYuyoKikanShuryo1() {
+        return this.celFucho1211.getTxtYuyoKikanShuryo1();
     }
 
     @JsonIgnore
@@ -490,13 +491,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi9() {
-        return this.celFucho1305.getLblYuyoKikanKaishi9();
+    public TextBoxDate getTxtYuyoKikanKaishi2() {
+        return this.celFucho1305.getTxtYuyoKikanKaishi2();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo9() {
-        return this.celFucho1311.getLblYuyoKikanShuryo9();
+    public TextBoxDate getTxtYuyoKikanShuryo2() {
+        return this.celFucho1311.getTxtYuyoKikanShuryo2();
     }
 
     @JsonIgnore
@@ -515,13 +516,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi10() {
-        return this.celFucho1405.getLblYuyoKikanKaishi10();
+    public TextBoxDate getTxtYuyoKikanKaishi3() {
+        return this.celFucho1405.getTxtYuyoKikanKaishi3();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo10() {
-        return this.celFucho1411.getLblYuyoKikanShuryo10();
+    public TextBoxDate getTxtYuyoKikanShuryo3() {
+        return this.celFucho1411.getTxtYuyoKikanShuryo3();
     }
 
     @JsonIgnore
@@ -540,13 +541,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi11() {
-        return this.celFucho1505.getLblYuyoKikanKaishi11();
+    public TextBoxDate getTxtYuyoKikanKaishi13() {
+        return this.celFucho1505.getTxtYuyoKikanKaishi13();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo11() {
-        return this.celFucho1511.getLblYuyoKikanShuryo11();
+    public TextBoxDate getTxtYuyoKikanShuryo13() {
+        return this.celFucho1511.getTxtYuyoKikanShuryo13();
     }
 
     @JsonIgnore
@@ -565,13 +566,13 @@ public class FuchoTablePanelDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi12() {
-        return this.celFucho1605.getLblYuyoKikanKaishi12();
+    public TextBoxDate getTxtYuyoKikanKaishi14() {
+        return this.celFucho1605.getTxtYuyoKikanKaishi14();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo12() {
-        return this.celFucho1611.getLblYuyoKikanShuryo12();
+    public TextBoxDate getTxtYuyoKikanShuryo14() {
+        return this.celFucho1611.getTxtYuyoKikanShuryo14();
     }
 
     @JsonIgnore
@@ -2075,7 +2076,7 @@ public class FuchoTablePanelDiv extends TablePanel {
  * @author 自動生成
  */
 class celFucho0101AtFuchoTablePanel extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     // </editor-fold>
 }
@@ -2087,7 +2088,7 @@ class celFucho0101AtFuchoTablePanel extends TableCell {
  */
 class celFucho0102AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFucho")
     private Label lblFucho;
 
@@ -2119,7 +2120,7 @@ class celFucho0102AtFuchoTablePanel extends TableCell {
  */
 class celFucho0201AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki")
     private Label lblFuchoTsuki;
 
@@ -2151,7 +2152,7 @@ class celFucho0201AtFuchoTablePanel extends TableCell {
  */
 class celFucho0202AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi")
     private Label lblFuchoKi;
 
@@ -2183,7 +2184,7 @@ class celFucho0202AtFuchoTablePanel extends TableCell {
  */
 class celFucho0203AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku")
     private Label lblFuchoNofuGaku;
 
@@ -2215,7 +2216,7 @@ class celFucho0203AtFuchoTablePanel extends TableCell {
  */
 class celFucho0205AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblYuyoKikanKaishi")
     private Label lblYuyoKikanKaishi;
 
@@ -2247,7 +2248,7 @@ class celFucho0205AtFuchoTablePanel extends TableCell {
  */
 class celFucho0206AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblYuyoKikanShuryo")
     private Label lblYuyoKikanShuryo;
 
@@ -2279,7 +2280,7 @@ class celFucho0206AtFuchoTablePanel extends TableCell {
  */
 class celFucho0301AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki4Gatsu")
     private Label lblFuchoTsuki4Gatsu;
 
@@ -2311,7 +2312,7 @@ class celFucho0301AtFuchoTablePanel extends TableCell {
  */
 class celFucho0302AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi13")
     private Label lblFuchoKi13;
 
@@ -2343,7 +2344,7 @@ class celFucho0302AtFuchoTablePanel extends TableCell {
  */
 class celFucho0303AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku13")
     private Label lblFuchoNofuGaku13;
 
@@ -2375,26 +2376,26 @@ class celFucho0303AtFuchoTablePanel extends TableCell {
  */
 class celFucho0305AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi13")
-    private Label lblYuyoKikanKaishi13;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi4")
+    private TextBoxDate txtYuyoKikanKaishi4;
 
     /*
-     * getlblYuyoKikanKaishi13
-     * @return lblYuyoKikanKaishi13
+     * gettxtYuyoKikanKaishi4
+     * @return txtYuyoKikanKaishi4
      */
-    @JsonProperty("lblYuyoKikanKaishi13")
-    public Label getLblYuyoKikanKaishi13() {
-        return lblYuyoKikanKaishi13;
+    @JsonProperty("txtYuyoKikanKaishi4")
+    public TextBoxDate getTxtYuyoKikanKaishi4() {
+        return txtYuyoKikanKaishi4;
     }
 
     /*
-     * setlblYuyoKikanKaishi13
-     * @param lblYuyoKikanKaishi13 lblYuyoKikanKaishi13
+     * settxtYuyoKikanKaishi4
+     * @param txtYuyoKikanKaishi4 txtYuyoKikanKaishi4
      */
-    @JsonProperty("lblYuyoKikanKaishi13")
-    public void setLblYuyoKikanKaishi13(Label lblYuyoKikanKaishi13) {
-        this.lblYuyoKikanKaishi13 = lblYuyoKikanKaishi13;
+    @JsonProperty("txtYuyoKikanKaishi4")
+    public void setTxtYuyoKikanKaishi4(TextBoxDate txtYuyoKikanKaishi4) {
+        this.txtYuyoKikanKaishi4 = txtYuyoKikanKaishi4;
     }
 
     // </editor-fold>
@@ -2407,26 +2408,26 @@ class celFucho0305AtFuchoTablePanel extends TableCell {
  */
 class celFucho0311AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo13")
-    private Label lblYuyoKikanShuryo13;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo4")
+    private TextBoxDate txtYuyoKikanShuryo4;
 
     /*
-     * getlblYuyoKikanShuryo13
-     * @return lblYuyoKikanShuryo13
+     * gettxtYuyoKikanShuryo4
+     * @return txtYuyoKikanShuryo4
      */
-    @JsonProperty("lblYuyoKikanShuryo13")
-    public Label getLblYuyoKikanShuryo13() {
-        return lblYuyoKikanShuryo13;
+    @JsonProperty("txtYuyoKikanShuryo4")
+    public TextBoxDate getTxtYuyoKikanShuryo4() {
+        return txtYuyoKikanShuryo4;
     }
 
     /*
-     * setlblYuyoKikanShuryo13
-     * @param lblYuyoKikanShuryo13 lblYuyoKikanShuryo13
+     * settxtYuyoKikanShuryo4
+     * @param txtYuyoKikanShuryo4 txtYuyoKikanShuryo4
      */
-    @JsonProperty("lblYuyoKikanShuryo13")
-    public void setLblYuyoKikanShuryo13(Label lblYuyoKikanShuryo13) {
-        this.lblYuyoKikanShuryo13 = lblYuyoKikanShuryo13;
+    @JsonProperty("txtYuyoKikanShuryo4")
+    public void setTxtYuyoKikanShuryo4(TextBoxDate txtYuyoKikanShuryo4) {
+        this.txtYuyoKikanShuryo4 = txtYuyoKikanShuryo4;
     }
 
     // </editor-fold>
@@ -2439,7 +2440,7 @@ class celFucho0311AtFuchoTablePanel extends TableCell {
  */
 class celFucho0401AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki5Gatsu")
     private Label lblFuchoTsuki5Gatsu;
 
@@ -2471,7 +2472,7 @@ class celFucho0401AtFuchoTablePanel extends TableCell {
  */
 class celFucho0402AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi14")
     private Label lblFuchoKi14;
 
@@ -2503,7 +2504,7 @@ class celFucho0402AtFuchoTablePanel extends TableCell {
  */
 class celFucho0403AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku14")
     private Label lblFuchoNofuGaku14;
 
@@ -2535,26 +2536,26 @@ class celFucho0403AtFuchoTablePanel extends TableCell {
  */
 class celFucho0405AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi14")
-    private Label lblYuyoKikanKaishi14;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi5")
+    private TextBoxDate txtYuyoKikanKaishi5;
 
     /*
-     * getlblYuyoKikanKaishi14
-     * @return lblYuyoKikanKaishi14
+     * gettxtYuyoKikanKaishi5
+     * @return txtYuyoKikanKaishi5
      */
-    @JsonProperty("lblYuyoKikanKaishi14")
-    public Label getLblYuyoKikanKaishi14() {
-        return lblYuyoKikanKaishi14;
+    @JsonProperty("txtYuyoKikanKaishi5")
+    public TextBoxDate getTxtYuyoKikanKaishi5() {
+        return txtYuyoKikanKaishi5;
     }
 
     /*
-     * setlblYuyoKikanKaishi14
-     * @param lblYuyoKikanKaishi14 lblYuyoKikanKaishi14
+     * settxtYuyoKikanKaishi5
+     * @param txtYuyoKikanKaishi5 txtYuyoKikanKaishi5
      */
-    @JsonProperty("lblYuyoKikanKaishi14")
-    public void setLblYuyoKikanKaishi14(Label lblYuyoKikanKaishi14) {
-        this.lblYuyoKikanKaishi14 = lblYuyoKikanKaishi14;
+    @JsonProperty("txtYuyoKikanKaishi5")
+    public void setTxtYuyoKikanKaishi5(TextBoxDate txtYuyoKikanKaishi5) {
+        this.txtYuyoKikanKaishi5 = txtYuyoKikanKaishi5;
     }
 
     // </editor-fold>
@@ -2567,26 +2568,26 @@ class celFucho0405AtFuchoTablePanel extends TableCell {
  */
 class celFucho0411AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo14")
-    private Label lblYuyoKikanShuryo14;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo5")
+    private TextBoxDate txtYuyoKikanShuryo5;
 
     /*
-     * getlblYuyoKikanShuryo14
-     * @return lblYuyoKikanShuryo14
+     * gettxtYuyoKikanShuryo5
+     * @return txtYuyoKikanShuryo5
      */
-    @JsonProperty("lblYuyoKikanShuryo14")
-    public Label getLblYuyoKikanShuryo14() {
-        return lblYuyoKikanShuryo14;
+    @JsonProperty("txtYuyoKikanShuryo5")
+    public TextBoxDate getTxtYuyoKikanShuryo5() {
+        return txtYuyoKikanShuryo5;
     }
 
     /*
-     * setlblYuyoKikanShuryo14
-     * @param lblYuyoKikanShuryo14 lblYuyoKikanShuryo14
+     * settxtYuyoKikanShuryo5
+     * @param txtYuyoKikanShuryo5 txtYuyoKikanShuryo5
      */
-    @JsonProperty("lblYuyoKikanShuryo14")
-    public void setLblYuyoKikanShuryo14(Label lblYuyoKikanShuryo14) {
-        this.lblYuyoKikanShuryo14 = lblYuyoKikanShuryo14;
+    @JsonProperty("txtYuyoKikanShuryo5")
+    public void setTxtYuyoKikanShuryo5(TextBoxDate txtYuyoKikanShuryo5) {
+        this.txtYuyoKikanShuryo5 = txtYuyoKikanShuryo5;
     }
 
     // </editor-fold>
@@ -2599,7 +2600,7 @@ class celFucho0411AtFuchoTablePanel extends TableCell {
  */
 class celFucho0501AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki6Gatsu")
     private Label lblFuchoTsuki6Gatsu;
 
@@ -2631,7 +2632,7 @@ class celFucho0501AtFuchoTablePanel extends TableCell {
  */
 class celFucho0502AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi1")
     private Label lblFuchoKi1;
 
@@ -2663,7 +2664,7 @@ class celFucho0502AtFuchoTablePanel extends TableCell {
  */
 class celFucho0503AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku1")
     private Label lblFuchoNofuGaku1;
 
@@ -2695,26 +2696,26 @@ class celFucho0503AtFuchoTablePanel extends TableCell {
  */
 class celFucho0505AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi1")
-    private Label lblYuyoKikanKaishi1;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi6")
+    private TextBoxDate txtYuyoKikanKaishi6;
 
     /*
-     * getlblYuyoKikanKaishi1
-     * @return lblYuyoKikanKaishi1
+     * gettxtYuyoKikanKaishi6
+     * @return txtYuyoKikanKaishi6
      */
-    @JsonProperty("lblYuyoKikanKaishi1")
-    public Label getLblYuyoKikanKaishi1() {
-        return lblYuyoKikanKaishi1;
+    @JsonProperty("txtYuyoKikanKaishi6")
+    public TextBoxDate getTxtYuyoKikanKaishi6() {
+        return txtYuyoKikanKaishi6;
     }
 
     /*
-     * setlblYuyoKikanKaishi1
-     * @param lblYuyoKikanKaishi1 lblYuyoKikanKaishi1
+     * settxtYuyoKikanKaishi6
+     * @param txtYuyoKikanKaishi6 txtYuyoKikanKaishi6
      */
-    @JsonProperty("lblYuyoKikanKaishi1")
-    public void setLblYuyoKikanKaishi1(Label lblYuyoKikanKaishi1) {
-        this.lblYuyoKikanKaishi1 = lblYuyoKikanKaishi1;
+    @JsonProperty("txtYuyoKikanKaishi6")
+    public void setTxtYuyoKikanKaishi6(TextBoxDate txtYuyoKikanKaishi6) {
+        this.txtYuyoKikanKaishi6 = txtYuyoKikanKaishi6;
     }
 
     // </editor-fold>
@@ -2727,26 +2728,26 @@ class celFucho0505AtFuchoTablePanel extends TableCell {
  */
 class celFucho0511AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo1")
-    private Label lblYuyoKikanShuryo1;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo6")
+    private TextBoxDate txtYuyoKikanShuryo6;
 
     /*
-     * getlblYuyoKikanShuryo1
-     * @return lblYuyoKikanShuryo1
+     * gettxtYuyoKikanShuryo6
+     * @return txtYuyoKikanShuryo6
      */
-    @JsonProperty("lblYuyoKikanShuryo1")
-    public Label getLblYuyoKikanShuryo1() {
-        return lblYuyoKikanShuryo1;
+    @JsonProperty("txtYuyoKikanShuryo6")
+    public TextBoxDate getTxtYuyoKikanShuryo6() {
+        return txtYuyoKikanShuryo6;
     }
 
     /*
-     * setlblYuyoKikanShuryo1
-     * @param lblYuyoKikanShuryo1 lblYuyoKikanShuryo1
+     * settxtYuyoKikanShuryo6
+     * @param txtYuyoKikanShuryo6 txtYuyoKikanShuryo6
      */
-    @JsonProperty("lblYuyoKikanShuryo1")
-    public void setLblYuyoKikanShuryo1(Label lblYuyoKikanShuryo1) {
-        this.lblYuyoKikanShuryo1 = lblYuyoKikanShuryo1;
+    @JsonProperty("txtYuyoKikanShuryo6")
+    public void setTxtYuyoKikanShuryo6(TextBoxDate txtYuyoKikanShuryo6) {
+        this.txtYuyoKikanShuryo6 = txtYuyoKikanShuryo6;
     }
 
     // </editor-fold>
@@ -2759,7 +2760,7 @@ class celFucho0511AtFuchoTablePanel extends TableCell {
  */
 class celFucho0601AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki7Gatsu")
     private Label lblFuchoTsuki7Gatsu;
 
@@ -2791,7 +2792,7 @@ class celFucho0601AtFuchoTablePanel extends TableCell {
  */
 class celFucho0602AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi2")
     private Label lblFuchoKi2;
 
@@ -2823,7 +2824,7 @@ class celFucho0602AtFuchoTablePanel extends TableCell {
  */
 class celFucho0603AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku2")
     private Label lblFuchoNofuGaku2;
 
@@ -2855,26 +2856,26 @@ class celFucho0603AtFuchoTablePanel extends TableCell {
  */
 class celFucho0605AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi2")
-    private Label lblYuyoKikanKaishi2;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi7")
+    private TextBoxDate txtYuyoKikanKaishi7;
 
     /*
-     * getlblYuyoKikanKaishi2
-     * @return lblYuyoKikanKaishi2
+     * gettxtYuyoKikanKaishi7
+     * @return txtYuyoKikanKaishi7
      */
-    @JsonProperty("lblYuyoKikanKaishi2")
-    public Label getLblYuyoKikanKaishi2() {
-        return lblYuyoKikanKaishi2;
+    @JsonProperty("txtYuyoKikanKaishi7")
+    public TextBoxDate getTxtYuyoKikanKaishi7() {
+        return txtYuyoKikanKaishi7;
     }
 
     /*
-     * setlblYuyoKikanKaishi2
-     * @param lblYuyoKikanKaishi2 lblYuyoKikanKaishi2
+     * settxtYuyoKikanKaishi7
+     * @param txtYuyoKikanKaishi7 txtYuyoKikanKaishi7
      */
-    @JsonProperty("lblYuyoKikanKaishi2")
-    public void setLblYuyoKikanKaishi2(Label lblYuyoKikanKaishi2) {
-        this.lblYuyoKikanKaishi2 = lblYuyoKikanKaishi2;
+    @JsonProperty("txtYuyoKikanKaishi7")
+    public void setTxtYuyoKikanKaishi7(TextBoxDate txtYuyoKikanKaishi7) {
+        this.txtYuyoKikanKaishi7 = txtYuyoKikanKaishi7;
     }
 
     // </editor-fold>
@@ -2887,26 +2888,26 @@ class celFucho0605AtFuchoTablePanel extends TableCell {
  */
 class celFucho0611AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo2")
-    private Label lblYuyoKikanShuryo2;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo7")
+    private TextBoxDate txtYuyoKikanShuryo7;
 
     /*
-     * getlblYuyoKikanShuryo2
-     * @return lblYuyoKikanShuryo2
+     * gettxtYuyoKikanShuryo7
+     * @return txtYuyoKikanShuryo7
      */
-    @JsonProperty("lblYuyoKikanShuryo2")
-    public Label getLblYuyoKikanShuryo2() {
-        return lblYuyoKikanShuryo2;
+    @JsonProperty("txtYuyoKikanShuryo7")
+    public TextBoxDate getTxtYuyoKikanShuryo7() {
+        return txtYuyoKikanShuryo7;
     }
 
     /*
-     * setlblYuyoKikanShuryo2
-     * @param lblYuyoKikanShuryo2 lblYuyoKikanShuryo2
+     * settxtYuyoKikanShuryo7
+     * @param txtYuyoKikanShuryo7 txtYuyoKikanShuryo7
      */
-    @JsonProperty("lblYuyoKikanShuryo2")
-    public void setLblYuyoKikanShuryo2(Label lblYuyoKikanShuryo2) {
-        this.lblYuyoKikanShuryo2 = lblYuyoKikanShuryo2;
+    @JsonProperty("txtYuyoKikanShuryo7")
+    public void setTxtYuyoKikanShuryo7(TextBoxDate txtYuyoKikanShuryo7) {
+        this.txtYuyoKikanShuryo7 = txtYuyoKikanShuryo7;
     }
 
     // </editor-fold>
@@ -2919,7 +2920,7 @@ class celFucho0611AtFuchoTablePanel extends TableCell {
  */
 class celFucho0701AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki8Gatsu")
     private Label lblFuchoTsuki8Gatsu;
 
@@ -2951,7 +2952,7 @@ class celFucho0701AtFuchoTablePanel extends TableCell {
  */
 class celFucho0702AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi3")
     private Label lblFuchoKi3;
 
@@ -2983,7 +2984,7 @@ class celFucho0702AtFuchoTablePanel extends TableCell {
  */
 class celFucho0703AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku3")
     private Label lblFuchoNofuGaku3;
 
@@ -3015,26 +3016,26 @@ class celFucho0703AtFuchoTablePanel extends TableCell {
  */
 class celFucho0705AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi3")
-    private Label lblYuyoKikanKaishi3;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi8")
+    private TextBoxDate txtYuyoKikanKaishi8;
 
     /*
-     * getlblYuyoKikanKaishi3
-     * @return lblYuyoKikanKaishi3
+     * gettxtYuyoKikanKaishi8
+     * @return txtYuyoKikanKaishi8
      */
-    @JsonProperty("lblYuyoKikanKaishi3")
-    public Label getLblYuyoKikanKaishi3() {
-        return lblYuyoKikanKaishi3;
+    @JsonProperty("txtYuyoKikanKaishi8")
+    public TextBoxDate getTxtYuyoKikanKaishi8() {
+        return txtYuyoKikanKaishi8;
     }
 
     /*
-     * setlblYuyoKikanKaishi3
-     * @param lblYuyoKikanKaishi3 lblYuyoKikanKaishi3
+     * settxtYuyoKikanKaishi8
+     * @param txtYuyoKikanKaishi8 txtYuyoKikanKaishi8
      */
-    @JsonProperty("lblYuyoKikanKaishi3")
-    public void setLblYuyoKikanKaishi3(Label lblYuyoKikanKaishi3) {
-        this.lblYuyoKikanKaishi3 = lblYuyoKikanKaishi3;
+    @JsonProperty("txtYuyoKikanKaishi8")
+    public void setTxtYuyoKikanKaishi8(TextBoxDate txtYuyoKikanKaishi8) {
+        this.txtYuyoKikanKaishi8 = txtYuyoKikanKaishi8;
     }
 
     // </editor-fold>
@@ -3047,26 +3048,26 @@ class celFucho0705AtFuchoTablePanel extends TableCell {
  */
 class celFucho0711AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo3")
-    private Label lblYuyoKikanShuryo3;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo8")
+    private TextBoxDate txtYuyoKikanShuryo8;
 
     /*
-     * getlblYuyoKikanShuryo3
-     * @return lblYuyoKikanShuryo3
+     * gettxtYuyoKikanShuryo8
+     * @return txtYuyoKikanShuryo8
      */
-    @JsonProperty("lblYuyoKikanShuryo3")
-    public Label getLblYuyoKikanShuryo3() {
-        return lblYuyoKikanShuryo3;
+    @JsonProperty("txtYuyoKikanShuryo8")
+    public TextBoxDate getTxtYuyoKikanShuryo8() {
+        return txtYuyoKikanShuryo8;
     }
 
     /*
-     * setlblYuyoKikanShuryo3
-     * @param lblYuyoKikanShuryo3 lblYuyoKikanShuryo3
+     * settxtYuyoKikanShuryo8
+     * @param txtYuyoKikanShuryo8 txtYuyoKikanShuryo8
      */
-    @JsonProperty("lblYuyoKikanShuryo3")
-    public void setLblYuyoKikanShuryo3(Label lblYuyoKikanShuryo3) {
-        this.lblYuyoKikanShuryo3 = lblYuyoKikanShuryo3;
+    @JsonProperty("txtYuyoKikanShuryo8")
+    public void setTxtYuyoKikanShuryo8(TextBoxDate txtYuyoKikanShuryo8) {
+        this.txtYuyoKikanShuryo8 = txtYuyoKikanShuryo8;
     }
 
     // </editor-fold>
@@ -3079,7 +3080,7 @@ class celFucho0711AtFuchoTablePanel extends TableCell {
  */
 class celFucho0801AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki9Gatsu")
     private Label lblFuchoTsuki9Gatsu;
 
@@ -3111,7 +3112,7 @@ class celFucho0801AtFuchoTablePanel extends TableCell {
  */
 class celFucho0802AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi4")
     private Label lblFuchoKi4;
 
@@ -3143,7 +3144,7 @@ class celFucho0802AtFuchoTablePanel extends TableCell {
  */
 class celFucho0803AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku4")
     private Label lblFuchoNofuGaku4;
 
@@ -3175,26 +3176,26 @@ class celFucho0803AtFuchoTablePanel extends TableCell {
  */
 class celFucho0805AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi4")
-    private Label lblYuyoKikanKaishi4;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi9")
+    private TextBoxDate txtYuyoKikanKaishi9;
 
     /*
-     * getlblYuyoKikanKaishi4
-     * @return lblYuyoKikanKaishi4
+     * gettxtYuyoKikanKaishi9
+     * @return txtYuyoKikanKaishi9
      */
-    @JsonProperty("lblYuyoKikanKaishi4")
-    public Label getLblYuyoKikanKaishi4() {
-        return lblYuyoKikanKaishi4;
+    @JsonProperty("txtYuyoKikanKaishi9")
+    public TextBoxDate getTxtYuyoKikanKaishi9() {
+        return txtYuyoKikanKaishi9;
     }
 
     /*
-     * setlblYuyoKikanKaishi4
-     * @param lblYuyoKikanKaishi4 lblYuyoKikanKaishi4
+     * settxtYuyoKikanKaishi9
+     * @param txtYuyoKikanKaishi9 txtYuyoKikanKaishi9
      */
-    @JsonProperty("lblYuyoKikanKaishi4")
-    public void setLblYuyoKikanKaishi4(Label lblYuyoKikanKaishi4) {
-        this.lblYuyoKikanKaishi4 = lblYuyoKikanKaishi4;
+    @JsonProperty("txtYuyoKikanKaishi9")
+    public void setTxtYuyoKikanKaishi9(TextBoxDate txtYuyoKikanKaishi9) {
+        this.txtYuyoKikanKaishi9 = txtYuyoKikanKaishi9;
     }
 
     // </editor-fold>
@@ -3207,26 +3208,26 @@ class celFucho0805AtFuchoTablePanel extends TableCell {
  */
 class celFucho0811AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo4")
-    private Label lblYuyoKikanShuryo4;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo9")
+    private TextBoxDate txtYuyoKikanShuryo9;
 
     /*
-     * getlblYuyoKikanShuryo4
-     * @return lblYuyoKikanShuryo4
+     * gettxtYuyoKikanShuryo9
+     * @return txtYuyoKikanShuryo9
      */
-    @JsonProperty("lblYuyoKikanShuryo4")
-    public Label getLblYuyoKikanShuryo4() {
-        return lblYuyoKikanShuryo4;
+    @JsonProperty("txtYuyoKikanShuryo9")
+    public TextBoxDate getTxtYuyoKikanShuryo9() {
+        return txtYuyoKikanShuryo9;
     }
 
     /*
-     * setlblYuyoKikanShuryo4
-     * @param lblYuyoKikanShuryo4 lblYuyoKikanShuryo4
+     * settxtYuyoKikanShuryo9
+     * @param txtYuyoKikanShuryo9 txtYuyoKikanShuryo9
      */
-    @JsonProperty("lblYuyoKikanShuryo4")
-    public void setLblYuyoKikanShuryo4(Label lblYuyoKikanShuryo4) {
-        this.lblYuyoKikanShuryo4 = lblYuyoKikanShuryo4;
+    @JsonProperty("txtYuyoKikanShuryo9")
+    public void setTxtYuyoKikanShuryo9(TextBoxDate txtYuyoKikanShuryo9) {
+        this.txtYuyoKikanShuryo9 = txtYuyoKikanShuryo9;
     }
 
     // </editor-fold>
@@ -3239,7 +3240,7 @@ class celFucho0811AtFuchoTablePanel extends TableCell {
  */
 class celFucho0901AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki10Gatsu")
     private Label lblFuchoTsuki10Gatsu;
 
@@ -3271,7 +3272,7 @@ class celFucho0901AtFuchoTablePanel extends TableCell {
  */
 class celFucho0902AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi5")
     private Label lblFuchoKi5;
 
@@ -3303,7 +3304,7 @@ class celFucho0902AtFuchoTablePanel extends TableCell {
  */
 class celFucho0903AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku5")
     private Label lblFuchoNofuGaku5;
 
@@ -3335,26 +3336,26 @@ class celFucho0903AtFuchoTablePanel extends TableCell {
  */
 class celFucho0905AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi5")
-    private Label lblYuyoKikanKaishi5;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi10")
+    private TextBoxDate txtYuyoKikanKaishi10;
 
     /*
-     * getlblYuyoKikanKaishi5
-     * @return lblYuyoKikanKaishi5
+     * gettxtYuyoKikanKaishi10
+     * @return txtYuyoKikanKaishi10
      */
-    @JsonProperty("lblYuyoKikanKaishi5")
-    public Label getLblYuyoKikanKaishi5() {
-        return lblYuyoKikanKaishi5;
+    @JsonProperty("txtYuyoKikanKaishi10")
+    public TextBoxDate getTxtYuyoKikanKaishi10() {
+        return txtYuyoKikanKaishi10;
     }
 
     /*
-     * setlblYuyoKikanKaishi5
-     * @param lblYuyoKikanKaishi5 lblYuyoKikanKaishi5
+     * settxtYuyoKikanKaishi10
+     * @param txtYuyoKikanKaishi10 txtYuyoKikanKaishi10
      */
-    @JsonProperty("lblYuyoKikanKaishi5")
-    public void setLblYuyoKikanKaishi5(Label lblYuyoKikanKaishi5) {
-        this.lblYuyoKikanKaishi5 = lblYuyoKikanKaishi5;
+    @JsonProperty("txtYuyoKikanKaishi10")
+    public void setTxtYuyoKikanKaishi10(TextBoxDate txtYuyoKikanKaishi10) {
+        this.txtYuyoKikanKaishi10 = txtYuyoKikanKaishi10;
     }
 
     // </editor-fold>
@@ -3367,26 +3368,26 @@ class celFucho0905AtFuchoTablePanel extends TableCell {
  */
 class celFucho0911AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo5")
-    private Label lblYuyoKikanShuryo5;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo10")
+    private TextBoxDate txtYuyoKikanShuryo10;
 
     /*
-     * getlblYuyoKikanShuryo5
-     * @return lblYuyoKikanShuryo5
+     * gettxtYuyoKikanShuryo10
+     * @return txtYuyoKikanShuryo10
      */
-    @JsonProperty("lblYuyoKikanShuryo5")
-    public Label getLblYuyoKikanShuryo5() {
-        return lblYuyoKikanShuryo5;
+    @JsonProperty("txtYuyoKikanShuryo10")
+    public TextBoxDate getTxtYuyoKikanShuryo10() {
+        return txtYuyoKikanShuryo10;
     }
 
     /*
-     * setlblYuyoKikanShuryo5
-     * @param lblYuyoKikanShuryo5 lblYuyoKikanShuryo5
+     * settxtYuyoKikanShuryo10
+     * @param txtYuyoKikanShuryo10 txtYuyoKikanShuryo10
      */
-    @JsonProperty("lblYuyoKikanShuryo5")
-    public void setLblYuyoKikanShuryo5(Label lblYuyoKikanShuryo5) {
-        this.lblYuyoKikanShuryo5 = lblYuyoKikanShuryo5;
+    @JsonProperty("txtYuyoKikanShuryo10")
+    public void setTxtYuyoKikanShuryo10(TextBoxDate txtYuyoKikanShuryo10) {
+        this.txtYuyoKikanShuryo10 = txtYuyoKikanShuryo10;
     }
 
     // </editor-fold>
@@ -3399,7 +3400,7 @@ class celFucho0911AtFuchoTablePanel extends TableCell {
  */
 class celFucho1001AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki11Gatsu")
     private Label lblFuchoTsuki11Gatsu;
 
@@ -3431,7 +3432,7 @@ class celFucho1001AtFuchoTablePanel extends TableCell {
  */
 class celFucho1002AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi6")
     private Label lblFuchoKi6;
 
@@ -3463,7 +3464,7 @@ class celFucho1002AtFuchoTablePanel extends TableCell {
  */
 class celFucho1003AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku6")
     private Label lblFuchoNofuGaku6;
 
@@ -3495,26 +3496,26 @@ class celFucho1003AtFuchoTablePanel extends TableCell {
  */
 class celFucho1005AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi6")
-    private Label lblYuyoKikanKaishi6;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi11")
+    private TextBoxDate txtYuyoKikanKaishi11;
 
     /*
-     * getlblYuyoKikanKaishi6
-     * @return lblYuyoKikanKaishi6
+     * gettxtYuyoKikanKaishi11
+     * @return txtYuyoKikanKaishi11
      */
-    @JsonProperty("lblYuyoKikanKaishi6")
-    public Label getLblYuyoKikanKaishi6() {
-        return lblYuyoKikanKaishi6;
+    @JsonProperty("txtYuyoKikanKaishi11")
+    public TextBoxDate getTxtYuyoKikanKaishi11() {
+        return txtYuyoKikanKaishi11;
     }
 
     /*
-     * setlblYuyoKikanKaishi6
-     * @param lblYuyoKikanKaishi6 lblYuyoKikanKaishi6
+     * settxtYuyoKikanKaishi11
+     * @param txtYuyoKikanKaishi11 txtYuyoKikanKaishi11
      */
-    @JsonProperty("lblYuyoKikanKaishi6")
-    public void setLblYuyoKikanKaishi6(Label lblYuyoKikanKaishi6) {
-        this.lblYuyoKikanKaishi6 = lblYuyoKikanKaishi6;
+    @JsonProperty("txtYuyoKikanKaishi11")
+    public void setTxtYuyoKikanKaishi11(TextBoxDate txtYuyoKikanKaishi11) {
+        this.txtYuyoKikanKaishi11 = txtYuyoKikanKaishi11;
     }
 
     // </editor-fold>
@@ -3527,26 +3528,26 @@ class celFucho1005AtFuchoTablePanel extends TableCell {
  */
 class celFucho1011AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo6")
-    private Label lblYuyoKikanShuryo6;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo11")
+    private TextBoxDate txtYuyoKikanShuryo11;
 
     /*
-     * getlblYuyoKikanShuryo6
-     * @return lblYuyoKikanShuryo6
+     * gettxtYuyoKikanShuryo11
+     * @return txtYuyoKikanShuryo11
      */
-    @JsonProperty("lblYuyoKikanShuryo6")
-    public Label getLblYuyoKikanShuryo6() {
-        return lblYuyoKikanShuryo6;
+    @JsonProperty("txtYuyoKikanShuryo11")
+    public TextBoxDate getTxtYuyoKikanShuryo11() {
+        return txtYuyoKikanShuryo11;
     }
 
     /*
-     * setlblYuyoKikanShuryo6
-     * @param lblYuyoKikanShuryo6 lblYuyoKikanShuryo6
+     * settxtYuyoKikanShuryo11
+     * @param txtYuyoKikanShuryo11 txtYuyoKikanShuryo11
      */
-    @JsonProperty("lblYuyoKikanShuryo6")
-    public void setLblYuyoKikanShuryo6(Label lblYuyoKikanShuryo6) {
-        this.lblYuyoKikanShuryo6 = lblYuyoKikanShuryo6;
+    @JsonProperty("txtYuyoKikanShuryo11")
+    public void setTxtYuyoKikanShuryo11(TextBoxDate txtYuyoKikanShuryo11) {
+        this.txtYuyoKikanShuryo11 = txtYuyoKikanShuryo11;
     }
 
     // </editor-fold>
@@ -3559,7 +3560,7 @@ class celFucho1011AtFuchoTablePanel extends TableCell {
  */
 class celFucho1101AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki12Gatsu")
     private Label lblFuchoTsuki12Gatsu;
 
@@ -3591,7 +3592,7 @@ class celFucho1101AtFuchoTablePanel extends TableCell {
  */
 class celFucho1102AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi7")
     private Label lblFuchoKi7;
 
@@ -3623,7 +3624,7 @@ class celFucho1102AtFuchoTablePanel extends TableCell {
  */
 class celFucho1103AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku7")
     private Label lblFuchoNofuGaku7;
 
@@ -3655,26 +3656,26 @@ class celFucho1103AtFuchoTablePanel extends TableCell {
  */
 class celFucho1105AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi7")
-    private Label lblYuyoKikanKaishi7;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi12")
+    private TextBoxDate txtYuyoKikanKaishi12;
 
     /*
-     * getlblYuyoKikanKaishi7
-     * @return lblYuyoKikanKaishi7
+     * gettxtYuyoKikanKaishi12
+     * @return txtYuyoKikanKaishi12
      */
-    @JsonProperty("lblYuyoKikanKaishi7")
-    public Label getLblYuyoKikanKaishi7() {
-        return lblYuyoKikanKaishi7;
+    @JsonProperty("txtYuyoKikanKaishi12")
+    public TextBoxDate getTxtYuyoKikanKaishi12() {
+        return txtYuyoKikanKaishi12;
     }
 
     /*
-     * setlblYuyoKikanKaishi7
-     * @param lblYuyoKikanKaishi7 lblYuyoKikanKaishi7
+     * settxtYuyoKikanKaishi12
+     * @param txtYuyoKikanKaishi12 txtYuyoKikanKaishi12
      */
-    @JsonProperty("lblYuyoKikanKaishi7")
-    public void setLblYuyoKikanKaishi7(Label lblYuyoKikanKaishi7) {
-        this.lblYuyoKikanKaishi7 = lblYuyoKikanKaishi7;
+    @JsonProperty("txtYuyoKikanKaishi12")
+    public void setTxtYuyoKikanKaishi12(TextBoxDate txtYuyoKikanKaishi12) {
+        this.txtYuyoKikanKaishi12 = txtYuyoKikanKaishi12;
     }
 
     // </editor-fold>
@@ -3687,26 +3688,26 @@ class celFucho1105AtFuchoTablePanel extends TableCell {
  */
 class celFucho1111AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo7")
-    private Label lblYuyoKikanShuryo7;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo12")
+    private TextBoxDate txtYuyoKikanShuryo12;
 
     /*
-     * getlblYuyoKikanShuryo7
-     * @return lblYuyoKikanShuryo7
+     * gettxtYuyoKikanShuryo12
+     * @return txtYuyoKikanShuryo12
      */
-    @JsonProperty("lblYuyoKikanShuryo7")
-    public Label getLblYuyoKikanShuryo7() {
-        return lblYuyoKikanShuryo7;
+    @JsonProperty("txtYuyoKikanShuryo12")
+    public TextBoxDate getTxtYuyoKikanShuryo12() {
+        return txtYuyoKikanShuryo12;
     }
 
     /*
-     * setlblYuyoKikanShuryo7
-     * @param lblYuyoKikanShuryo7 lblYuyoKikanShuryo7
+     * settxtYuyoKikanShuryo12
+     * @param txtYuyoKikanShuryo12 txtYuyoKikanShuryo12
      */
-    @JsonProperty("lblYuyoKikanShuryo7")
-    public void setLblYuyoKikanShuryo7(Label lblYuyoKikanShuryo7) {
-        this.lblYuyoKikanShuryo7 = lblYuyoKikanShuryo7;
+    @JsonProperty("txtYuyoKikanShuryo12")
+    public void setTxtYuyoKikanShuryo12(TextBoxDate txtYuyoKikanShuryo12) {
+        this.txtYuyoKikanShuryo12 = txtYuyoKikanShuryo12;
     }
 
     // </editor-fold>
@@ -3719,7 +3720,7 @@ class celFucho1111AtFuchoTablePanel extends TableCell {
  */
 class celFucho1201AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki1Gatsu")
     private Label lblFuchoTsuki1Gatsu;
 
@@ -3751,7 +3752,7 @@ class celFucho1201AtFuchoTablePanel extends TableCell {
  */
 class celFucho1202AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi8")
     private Label lblFuchoKi8;
 
@@ -3783,7 +3784,7 @@ class celFucho1202AtFuchoTablePanel extends TableCell {
  */
 class celFucho1203AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku8")
     private Label lblFuchoNofuGaku8;
 
@@ -3815,26 +3816,26 @@ class celFucho1203AtFuchoTablePanel extends TableCell {
  */
 class celFucho1205AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi8")
-    private Label lblYuyoKikanKaishi8;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi1")
+    private TextBoxDate txtYuyoKikanKaishi1;
 
     /*
-     * getlblYuyoKikanKaishi8
-     * @return lblYuyoKikanKaishi8
+     * gettxtYuyoKikanKaishi1
+     * @return txtYuyoKikanKaishi1
      */
-    @JsonProperty("lblYuyoKikanKaishi8")
-    public Label getLblYuyoKikanKaishi8() {
-        return lblYuyoKikanKaishi8;
+    @JsonProperty("txtYuyoKikanKaishi1")
+    public TextBoxDate getTxtYuyoKikanKaishi1() {
+        return txtYuyoKikanKaishi1;
     }
 
     /*
-     * setlblYuyoKikanKaishi8
-     * @param lblYuyoKikanKaishi8 lblYuyoKikanKaishi8
+     * settxtYuyoKikanKaishi1
+     * @param txtYuyoKikanKaishi1 txtYuyoKikanKaishi1
      */
-    @JsonProperty("lblYuyoKikanKaishi8")
-    public void setLblYuyoKikanKaishi8(Label lblYuyoKikanKaishi8) {
-        this.lblYuyoKikanKaishi8 = lblYuyoKikanKaishi8;
+    @JsonProperty("txtYuyoKikanKaishi1")
+    public void setTxtYuyoKikanKaishi1(TextBoxDate txtYuyoKikanKaishi1) {
+        this.txtYuyoKikanKaishi1 = txtYuyoKikanKaishi1;
     }
 
     // </editor-fold>
@@ -3847,26 +3848,26 @@ class celFucho1205AtFuchoTablePanel extends TableCell {
  */
 class celFucho1211AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo8")
-    private Label lblYuyoKikanShuryo8;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo1")
+    private TextBoxDate txtYuyoKikanShuryo1;
 
     /*
-     * getlblYuyoKikanShuryo8
-     * @return lblYuyoKikanShuryo8
+     * gettxtYuyoKikanShuryo1
+     * @return txtYuyoKikanShuryo1
      */
-    @JsonProperty("lblYuyoKikanShuryo8")
-    public Label getLblYuyoKikanShuryo8() {
-        return lblYuyoKikanShuryo8;
+    @JsonProperty("txtYuyoKikanShuryo1")
+    public TextBoxDate getTxtYuyoKikanShuryo1() {
+        return txtYuyoKikanShuryo1;
     }
 
     /*
-     * setlblYuyoKikanShuryo8
-     * @param lblYuyoKikanShuryo8 lblYuyoKikanShuryo8
+     * settxtYuyoKikanShuryo1
+     * @param txtYuyoKikanShuryo1 txtYuyoKikanShuryo1
      */
-    @JsonProperty("lblYuyoKikanShuryo8")
-    public void setLblYuyoKikanShuryo8(Label lblYuyoKikanShuryo8) {
-        this.lblYuyoKikanShuryo8 = lblYuyoKikanShuryo8;
+    @JsonProperty("txtYuyoKikanShuryo1")
+    public void setTxtYuyoKikanShuryo1(TextBoxDate txtYuyoKikanShuryo1) {
+        this.txtYuyoKikanShuryo1 = txtYuyoKikanShuryo1;
     }
 
     // </editor-fold>
@@ -3879,7 +3880,7 @@ class celFucho1211AtFuchoTablePanel extends TableCell {
  */
 class celFucho1301AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki2Gatsu")
     private Label lblFuchoTsuki2Gatsu;
 
@@ -3911,7 +3912,7 @@ class celFucho1301AtFuchoTablePanel extends TableCell {
  */
 class celFucho1302AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi9")
     private Label lblFuchoKi9;
 
@@ -3943,7 +3944,7 @@ class celFucho1302AtFuchoTablePanel extends TableCell {
  */
 class celFucho1303AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku9")
     private Label lblFuchoNofuGaku9;
 
@@ -3975,26 +3976,26 @@ class celFucho1303AtFuchoTablePanel extends TableCell {
  */
 class celFucho1305AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi9")
-    private Label lblYuyoKikanKaishi9;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi2")
+    private TextBoxDate txtYuyoKikanKaishi2;
 
     /*
-     * getlblYuyoKikanKaishi9
-     * @return lblYuyoKikanKaishi9
+     * gettxtYuyoKikanKaishi2
+     * @return txtYuyoKikanKaishi2
      */
-    @JsonProperty("lblYuyoKikanKaishi9")
-    public Label getLblYuyoKikanKaishi9() {
-        return lblYuyoKikanKaishi9;
+    @JsonProperty("txtYuyoKikanKaishi2")
+    public TextBoxDate getTxtYuyoKikanKaishi2() {
+        return txtYuyoKikanKaishi2;
     }
 
     /*
-     * setlblYuyoKikanKaishi9
-     * @param lblYuyoKikanKaishi9 lblYuyoKikanKaishi9
+     * settxtYuyoKikanKaishi2
+     * @param txtYuyoKikanKaishi2 txtYuyoKikanKaishi2
      */
-    @JsonProperty("lblYuyoKikanKaishi9")
-    public void setLblYuyoKikanKaishi9(Label lblYuyoKikanKaishi9) {
-        this.lblYuyoKikanKaishi9 = lblYuyoKikanKaishi9;
+    @JsonProperty("txtYuyoKikanKaishi2")
+    public void setTxtYuyoKikanKaishi2(TextBoxDate txtYuyoKikanKaishi2) {
+        this.txtYuyoKikanKaishi2 = txtYuyoKikanKaishi2;
     }
 
     // </editor-fold>
@@ -4007,26 +4008,26 @@ class celFucho1305AtFuchoTablePanel extends TableCell {
  */
 class celFucho1311AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo9")
-    private Label lblYuyoKikanShuryo9;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo2")
+    private TextBoxDate txtYuyoKikanShuryo2;
 
     /*
-     * getlblYuyoKikanShuryo9
-     * @return lblYuyoKikanShuryo9
+     * gettxtYuyoKikanShuryo2
+     * @return txtYuyoKikanShuryo2
      */
-    @JsonProperty("lblYuyoKikanShuryo9")
-    public Label getLblYuyoKikanShuryo9() {
-        return lblYuyoKikanShuryo9;
+    @JsonProperty("txtYuyoKikanShuryo2")
+    public TextBoxDate getTxtYuyoKikanShuryo2() {
+        return txtYuyoKikanShuryo2;
     }
 
     /*
-     * setlblYuyoKikanShuryo9
-     * @param lblYuyoKikanShuryo9 lblYuyoKikanShuryo9
+     * settxtYuyoKikanShuryo2
+     * @param txtYuyoKikanShuryo2 txtYuyoKikanShuryo2
      */
-    @JsonProperty("lblYuyoKikanShuryo9")
-    public void setLblYuyoKikanShuryo9(Label lblYuyoKikanShuryo9) {
-        this.lblYuyoKikanShuryo9 = lblYuyoKikanShuryo9;
+    @JsonProperty("txtYuyoKikanShuryo2")
+    public void setTxtYuyoKikanShuryo2(TextBoxDate txtYuyoKikanShuryo2) {
+        this.txtYuyoKikanShuryo2 = txtYuyoKikanShuryo2;
     }
 
     // </editor-fold>
@@ -4039,7 +4040,7 @@ class celFucho1311AtFuchoTablePanel extends TableCell {
  */
 class celFucho1401AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki3Gatsu")
     private Label lblFuchoTsuki3Gatsu;
 
@@ -4071,7 +4072,7 @@ class celFucho1401AtFuchoTablePanel extends TableCell {
  */
 class celFucho1402AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi10")
     private Label lblFuchoKi10;
 
@@ -4103,7 +4104,7 @@ class celFucho1402AtFuchoTablePanel extends TableCell {
  */
 class celFucho1403AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku10")
     private Label lblFuchoNofuGaku10;
 
@@ -4135,26 +4136,26 @@ class celFucho1403AtFuchoTablePanel extends TableCell {
  */
 class celFucho1405AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi10")
-    private Label lblYuyoKikanKaishi10;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi3")
+    private TextBoxDate txtYuyoKikanKaishi3;
 
     /*
-     * getlblYuyoKikanKaishi10
-     * @return lblYuyoKikanKaishi10
+     * gettxtYuyoKikanKaishi3
+     * @return txtYuyoKikanKaishi3
      */
-    @JsonProperty("lblYuyoKikanKaishi10")
-    public Label getLblYuyoKikanKaishi10() {
-        return lblYuyoKikanKaishi10;
+    @JsonProperty("txtYuyoKikanKaishi3")
+    public TextBoxDate getTxtYuyoKikanKaishi3() {
+        return txtYuyoKikanKaishi3;
     }
 
     /*
-     * setlblYuyoKikanKaishi10
-     * @param lblYuyoKikanKaishi10 lblYuyoKikanKaishi10
+     * settxtYuyoKikanKaishi3
+     * @param txtYuyoKikanKaishi3 txtYuyoKikanKaishi3
      */
-    @JsonProperty("lblYuyoKikanKaishi10")
-    public void setLblYuyoKikanKaishi10(Label lblYuyoKikanKaishi10) {
-        this.lblYuyoKikanKaishi10 = lblYuyoKikanKaishi10;
+    @JsonProperty("txtYuyoKikanKaishi3")
+    public void setTxtYuyoKikanKaishi3(TextBoxDate txtYuyoKikanKaishi3) {
+        this.txtYuyoKikanKaishi3 = txtYuyoKikanKaishi3;
     }
 
     // </editor-fold>
@@ -4167,26 +4168,26 @@ class celFucho1405AtFuchoTablePanel extends TableCell {
  */
 class celFucho1411AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo10")
-    private Label lblYuyoKikanShuryo10;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo3")
+    private TextBoxDate txtYuyoKikanShuryo3;
 
     /*
-     * getlblYuyoKikanShuryo10
-     * @return lblYuyoKikanShuryo10
+     * gettxtYuyoKikanShuryo3
+     * @return txtYuyoKikanShuryo3
      */
-    @JsonProperty("lblYuyoKikanShuryo10")
-    public Label getLblYuyoKikanShuryo10() {
-        return lblYuyoKikanShuryo10;
+    @JsonProperty("txtYuyoKikanShuryo3")
+    public TextBoxDate getTxtYuyoKikanShuryo3() {
+        return txtYuyoKikanShuryo3;
     }
 
     /*
-     * setlblYuyoKikanShuryo10
-     * @param lblYuyoKikanShuryo10 lblYuyoKikanShuryo10
+     * settxtYuyoKikanShuryo3
+     * @param txtYuyoKikanShuryo3 txtYuyoKikanShuryo3
      */
-    @JsonProperty("lblYuyoKikanShuryo10")
-    public void setLblYuyoKikanShuryo10(Label lblYuyoKikanShuryo10) {
-        this.lblYuyoKikanShuryo10 = lblYuyoKikanShuryo10;
+    @JsonProperty("txtYuyoKikanShuryo3")
+    public void setTxtYuyoKikanShuryo3(TextBoxDate txtYuyoKikanShuryo3) {
+        this.txtYuyoKikanShuryo3 = txtYuyoKikanShuryo3;
     }
 
     // </editor-fold>
@@ -4199,7 +4200,7 @@ class celFucho1411AtFuchoTablePanel extends TableCell {
  */
 class celFucho1501AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki4Gatsu2")
     private Label lblFuchoTsuki4Gatsu2;
 
@@ -4231,7 +4232,7 @@ class celFucho1501AtFuchoTablePanel extends TableCell {
  */
 class celFucho1502AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi11")
     private Label lblFuchoKi11;
 
@@ -4263,7 +4264,7 @@ class celFucho1502AtFuchoTablePanel extends TableCell {
  */
 class celFucho1503AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku11")
     private Label lblFuchoNofuGaku11;
 
@@ -4295,26 +4296,26 @@ class celFucho1503AtFuchoTablePanel extends TableCell {
  */
 class celFucho1505AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi11")
-    private Label lblYuyoKikanKaishi11;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi13")
+    private TextBoxDate txtYuyoKikanKaishi13;
 
     /*
-     * getlblYuyoKikanKaishi11
-     * @return lblYuyoKikanKaishi11
+     * gettxtYuyoKikanKaishi13
+     * @return txtYuyoKikanKaishi13
      */
-    @JsonProperty("lblYuyoKikanKaishi11")
-    public Label getLblYuyoKikanKaishi11() {
-        return lblYuyoKikanKaishi11;
+    @JsonProperty("txtYuyoKikanKaishi13")
+    public TextBoxDate getTxtYuyoKikanKaishi13() {
+        return txtYuyoKikanKaishi13;
     }
 
     /*
-     * setlblYuyoKikanKaishi11
-     * @param lblYuyoKikanKaishi11 lblYuyoKikanKaishi11
+     * settxtYuyoKikanKaishi13
+     * @param txtYuyoKikanKaishi13 txtYuyoKikanKaishi13
      */
-    @JsonProperty("lblYuyoKikanKaishi11")
-    public void setLblYuyoKikanKaishi11(Label lblYuyoKikanKaishi11) {
-        this.lblYuyoKikanKaishi11 = lblYuyoKikanKaishi11;
+    @JsonProperty("txtYuyoKikanKaishi13")
+    public void setTxtYuyoKikanKaishi13(TextBoxDate txtYuyoKikanKaishi13) {
+        this.txtYuyoKikanKaishi13 = txtYuyoKikanKaishi13;
     }
 
     // </editor-fold>
@@ -4327,26 +4328,26 @@ class celFucho1505AtFuchoTablePanel extends TableCell {
  */
 class celFucho1511AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo11")
-    private Label lblYuyoKikanShuryo11;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo13")
+    private TextBoxDate txtYuyoKikanShuryo13;
 
     /*
-     * getlblYuyoKikanShuryo11
-     * @return lblYuyoKikanShuryo11
+     * gettxtYuyoKikanShuryo13
+     * @return txtYuyoKikanShuryo13
      */
-    @JsonProperty("lblYuyoKikanShuryo11")
-    public Label getLblYuyoKikanShuryo11() {
-        return lblYuyoKikanShuryo11;
+    @JsonProperty("txtYuyoKikanShuryo13")
+    public TextBoxDate getTxtYuyoKikanShuryo13() {
+        return txtYuyoKikanShuryo13;
     }
 
     /*
-     * setlblYuyoKikanShuryo11
-     * @param lblYuyoKikanShuryo11 lblYuyoKikanShuryo11
+     * settxtYuyoKikanShuryo13
+     * @param txtYuyoKikanShuryo13 txtYuyoKikanShuryo13
      */
-    @JsonProperty("lblYuyoKikanShuryo11")
-    public void setLblYuyoKikanShuryo11(Label lblYuyoKikanShuryo11) {
-        this.lblYuyoKikanShuryo11 = lblYuyoKikanShuryo11;
+    @JsonProperty("txtYuyoKikanShuryo13")
+    public void setTxtYuyoKikanShuryo13(TextBoxDate txtYuyoKikanShuryo13) {
+        this.txtYuyoKikanShuryo13 = txtYuyoKikanShuryo13;
     }
 
     // </editor-fold>
@@ -4359,7 +4360,7 @@ class celFucho1511AtFuchoTablePanel extends TableCell {
  */
 class celFucho1601AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsuki5Gatsu2")
     private Label lblFuchoTsuki5Gatsu2;
 
@@ -4391,7 +4392,7 @@ class celFucho1601AtFuchoTablePanel extends TableCell {
  */
 class celFucho1602AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoKi12")
     private Label lblFuchoKi12;
 
@@ -4423,7 +4424,7 @@ class celFucho1602AtFuchoTablePanel extends TableCell {
  */
 class celFucho1603AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGaku12")
     private Label lblFuchoNofuGaku12;
 
@@ -4455,26 +4456,26 @@ class celFucho1603AtFuchoTablePanel extends TableCell {
  */
 class celFucho1605AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanKaishi12")
-    private Label lblYuyoKikanKaishi12;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanKaishi14")
+    private TextBoxDate txtYuyoKikanKaishi14;
 
     /*
-     * getlblYuyoKikanKaishi12
-     * @return lblYuyoKikanKaishi12
+     * gettxtYuyoKikanKaishi14
+     * @return txtYuyoKikanKaishi14
      */
-    @JsonProperty("lblYuyoKikanKaishi12")
-    public Label getLblYuyoKikanKaishi12() {
-        return lblYuyoKikanKaishi12;
+    @JsonProperty("txtYuyoKikanKaishi14")
+    public TextBoxDate getTxtYuyoKikanKaishi14() {
+        return txtYuyoKikanKaishi14;
     }
 
     /*
-     * setlblYuyoKikanKaishi12
-     * @param lblYuyoKikanKaishi12 lblYuyoKikanKaishi12
+     * settxtYuyoKikanKaishi14
+     * @param txtYuyoKikanKaishi14 txtYuyoKikanKaishi14
      */
-    @JsonProperty("lblYuyoKikanKaishi12")
-    public void setLblYuyoKikanKaishi12(Label lblYuyoKikanKaishi12) {
-        this.lblYuyoKikanKaishi12 = lblYuyoKikanKaishi12;
+    @JsonProperty("txtYuyoKikanKaishi14")
+    public void setTxtYuyoKikanKaishi14(TextBoxDate txtYuyoKikanKaishi14) {
+        this.txtYuyoKikanKaishi14 = txtYuyoKikanKaishi14;
     }
 
     // </editor-fold>
@@ -4487,26 +4488,26 @@ class celFucho1605AtFuchoTablePanel extends TableCell {
  */
 class celFucho1611AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
-    @JsonProperty("lblYuyoKikanShuryo12")
-    private Label lblYuyoKikanShuryo12;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    @JsonProperty("txtYuyoKikanShuryo14")
+    private TextBoxDate txtYuyoKikanShuryo14;
 
     /*
-     * getlblYuyoKikanShuryo12
-     * @return lblYuyoKikanShuryo12
+     * gettxtYuyoKikanShuryo14
+     * @return txtYuyoKikanShuryo14
      */
-    @JsonProperty("lblYuyoKikanShuryo12")
-    public Label getLblYuyoKikanShuryo12() {
-        return lblYuyoKikanShuryo12;
+    @JsonProperty("txtYuyoKikanShuryo14")
+    public TextBoxDate getTxtYuyoKikanShuryo14() {
+        return txtYuyoKikanShuryo14;
     }
 
     /*
-     * setlblYuyoKikanShuryo12
-     * @param lblYuyoKikanShuryo12 lblYuyoKikanShuryo12
+     * settxtYuyoKikanShuryo14
+     * @param txtYuyoKikanShuryo14 txtYuyoKikanShuryo14
      */
-    @JsonProperty("lblYuyoKikanShuryo12")
-    public void setLblYuyoKikanShuryo12(Label lblYuyoKikanShuryo12) {
-        this.lblYuyoKikanShuryo12 = lblYuyoKikanShuryo12;
+    @JsonProperty("txtYuyoKikanShuryo14")
+    public void setTxtYuyoKikanShuryo14(TextBoxDate txtYuyoKikanShuryo14) {
+        this.txtYuyoKikanShuryo14 = txtYuyoKikanShuryo14;
     }
 
     // </editor-fold>
@@ -4519,7 +4520,7 @@ class celFucho1611AtFuchoTablePanel extends TableCell {
  */
 class celFucho2601AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoTsukiTotal")
     private Label lblFuchoTsukiTotal;
 
@@ -4550,7 +4551,7 @@ class celFucho2601AtFuchoTablePanel extends TableCell {
  * @author 自動生成
  */
 class celFucho2602AtFuchoTablePanel extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     // </editor-fold>
 }
@@ -4562,7 +4563,7 @@ class celFucho2602AtFuchoTablePanel extends TableCell {
  */
 class celFucho2603AtFuchoTablePanel extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblFuchoNofuGakuTotal")
     private Label lblFuchoNofuGakuTotal;
 
@@ -4593,7 +4594,7 @@ class celFucho2603AtFuchoTablePanel extends TableCell {
  * @author 自動生成
  */
 class celFucho2605AtFuchoTablePanel extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     // </editor-fold>
 }
@@ -4604,7 +4605,7 @@ class celFucho2605AtFuchoTablePanel extends TableCell {
  * @author 自動生成
  */
 class celFucho2611AtFuchoTablePanel extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     // </editor-fold>
 }
