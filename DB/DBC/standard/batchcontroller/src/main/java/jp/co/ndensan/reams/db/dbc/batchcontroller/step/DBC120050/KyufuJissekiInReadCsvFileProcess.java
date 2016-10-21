@@ -461,7 +461,8 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         登録H11Entity.setKokuhoHiHokenshashoNo(RString.EMPTY);
         登録H11Entity.setKokuhoKojinNo(RString.EMPTY);
         登録H11Entity.setKyotakuServiceSakuseiKubunCode(h11CsvEntity.get居宅サービス計画作成区分コード());
-        登録H11Entity.setKyotakuKaigoShienJigyoshoNo(h11CsvEntity.get事業所番号_居宅介護支援事業所等());
+        登録H11Entity.setKyotakuKaigoShienJigyoshoNo(new JigyoshaNo(get事業所番号(
+                h11CsvEntity.get事業所番号_居宅介護支援事業所等())));
         登録H11Entity.setKaishiYMD(h11CsvEntity.get開始年月日());
         登録H11Entity.setChushiYMD(h11CsvEntity.get中止年月日());
         登録H11Entity.setChushiRiyuNyushomaeJyokyoCode(h11CsvEntity.get中止理由_入所院前の状況コード());
