@@ -63,7 +63,7 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     private boolean is世帯非課税等_市町村民税本人非課税者;
     private boolean is世帯非課税等_老齢福祉年金受給者;
     private boolean is世帯非課税等_生活保護受給者;
-    private RString 世帯表示_表示しない;
+    private boolean 世帯表示_表示しない;
     private RString 減免減額種類_訪問介護利用者負担額減額;
     private RString 有効無効区分_有効;
     private RString 決定区分_承認する;
@@ -155,14 +155,18 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
         edit対象リスト(対象リスト);
         edit法別区分(法別区分);
         edit世帯非課税等(世帯非課税等);
+        edit世帯表示_表示しない(世帯表示);
         this.世帯課税区分_非課税 = SetaiKazeiKubun.非課税.getコード();
         this.決定区分_承認する = KetteiKubun.承認する.getコード();
         this.減免減額種類_訪問介護利用者負担額減額 = GemmenGengakuShurui.訪問介護利用者負担額減額.getコード();
         this.有効無効区分_有効 = YukoMukoKubun.有効.getコード();
-        this.世帯表示_表示しない = SetaiHyoji.表示しない.getコード();
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.出力順 = 出力順;
 
+    }
+
+    private void edit世帯表示_表示しない(SetaiHyoji 世帯表示) {
+        世帯表示_表示しない = 世帯表示 != null && SetaiHyoji.表示しない.equals(世帯表示);
     }
 
     private void edit対象期間指定(TaishoKikan 対象期間指定) {

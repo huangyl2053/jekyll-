@@ -52,7 +52,7 @@
             FROM
                 "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
             WHERE
-                0 <![CDATA[<=]]> 振込明細一時TBL."furikomiKingaku"
+                0 <![CDATA[<]]> 振込明細一時TBL."furikomiKingaku"
                 AND 振込明細一時TBL."kozaDataFlag" = TRUE
             GROUP BY
                 振込明細一時TBL."kozaNayoseKey"

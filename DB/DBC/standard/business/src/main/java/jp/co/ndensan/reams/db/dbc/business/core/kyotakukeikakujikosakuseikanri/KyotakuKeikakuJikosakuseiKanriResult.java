@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3120YoboKeikakuJikoSakuseiK
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.KokuhorenSakuseiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.KyotakuKeikakuJikosakuseiKanriTempEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -55,20 +56,16 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
         tempEntity.setServiceKomokuCode(getColumnValue(kyoEntity.getServiceKomokuCode()));
         tempEntity.setTaniSu(new RString(String.valueOf(kyoEntity.getTaniSu())));
         tempEntity.setKaisu_Nissu(new RString(String.valueOf(kyoEntity.getKaisu_Nissu())));
-        tempEntity.setWaribikiGoTekiyoRitsu(new RString(String.valueOf(kyoEntity.getWaribikiGoTekiyoRitsu())));
+        tempEntity.setWaribikiGoTekiyoRitsu(getValue(kyoEntity.getWaribikiGoTekiyoRitsu()));
         tempEntity.setWaribikiGoTekiyoTaniSu(new RString(String.valueOf(kyoEntity.getWaribikiGoTekiyoTaniSu())));
-        tempEntity.setKyufuTaishoNissu(new RString(kyoEntity.getKyufuTaishoNissu().toString()));
-        if (kyoEntity.getGoukeiFlag()) {
-            tempEntity.setGoukeiFlag(true);
-        } else {
-            tempEntity.setGoukeiFlag(false);
-        }
+        tempEntity.setKyufuTaishoNissu(RString.EMPTY);
+        tempEntity.setGoukeiFlag(kyoEntity.getGoukeiFlag());
         tempEntity.setShuruiGendoChokaTaniSuNissu(new RString(String.valueOf(kyoEntity.getShuruiGendoChokaTaniSu_Nissu())));
         tempEntity.setShuruiGendoNaiTaniSuNissu(new RString(String.valueOf(kyoEntity.getShuruiGendoNaiTaniSu_Nissu())));
         tempEntity.setKubunGendoChokaTaniSuNissu(new RString(String.valueOf(kyoEntity.getKubunGendoChokaTaniSu_Nissu())));
         tempEntity.setKubunGendoNaiTaniSuNissu(kyoEntity.getKubunGendoNaiTaniSu_Nissu());
         tempEntity.setTaniSuTanka(new RString(String.valueOf(kyoEntity.getTaniSuTanka())));
-        tempEntity.setKyufuRitsu(new RString(String.valueOf(kyoEntity.getKyufuRitsu())));
+        tempEntity.setKyufuRitsu(getValue(kyoEntity.getKyufuRitsu()));
         tempEntity.setKyufuKeikakuTaniSu(kyoEntity.getKyufuKeikakuTaniSu());
         tempEntity.setZenkaiRiyoNissu(new RString(String.valueOf(居宅給付計画自己作成短期入所利用日数entity.getZenkaiRiyoNissu())));
         tempEntity.setKonkaiKeikakuRiyoNissu(new RString(String.valueOf(居宅給付計画自己作成短期入所利用日数entity.getKonkaiKeikakuRiyoNissu())));
@@ -103,11 +100,12 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
      * @param count count
      * @return HihokenshaTempEntity HihokenshaTempEntity
      */
-    public HihokenshaTempEntity edit被保険者entity(
+    public HihokenshaTempEntity edit被保険者entity1(
             DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity 居宅給付計画自己作成短期入所利用日数entity,
             DbT3119KyotakuKeikakuJikosakuseiKanriEntity kyoEntity, int count) {
         HihokenshaTempEntity hihokenshaTempEntity = new HihokenshaTempEntity();
-        hihokenshaTempEntity.setExRenban(new Decimal(count).multiply(1));
+        Decimal coun = new Decimal(count).add(1);
+        hihokenshaTempEntity.setExRenban(coun);
         hihokenshaTempEntity.setExHokenshaNo(RString.EMPTY);
         hihokenshaTempEntity.setExHokenshaName(RString.EMPTY);
         hihokenshaTempEntity.setExShoHokenshaNo(RString.EMPTY);
@@ -164,19 +162,15 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
         tempEntity.setServiceKomokuCode(getColumnValue(kyoEntity.getServiceKomokuCode()));
         tempEntity.setTaniSu(new RString(String.valueOf(kyoEntity.getTaniSu())));
         tempEntity.setKaisu_Nissu(new RString(String.valueOf(kyoEntity.getKaisu_Nissu())));
-        tempEntity.setWaribikiGoTekiyoRitsu(new RString(String.valueOf(kyoEntity.getWaribikiGoTekiyoRitsu())));
+        tempEntity.setWaribikiGoTekiyoRitsu(getValue(kyoEntity.getWaribikiGoTekiyoRitsu()));
         tempEntity.setWaribikiGoTekiyoTaniSu(new RString(String.valueOf(kyoEntity.getWaribikiGoTekiyoTaniSu())));
-        if (kyoEntity.getGoukeiFlag()) {
-            tempEntity.setGoukeiFlag(true);
-        } else {
-            tempEntity.setGoukeiFlag(false);
-        }
+        tempEntity.setGoukeiFlag(kyoEntity.getGoukeiFlag());
         tempEntity.setShuruiGendoChokaTaniSuNissu(new RString(String.valueOf(kyoEntity.getShuruiGendoChokaTaniSu_Nissu())));
         tempEntity.setShuruiGendoNaiTaniSuNissu(new RString(String.valueOf(kyoEntity.getShuruiGendoNaiTaniSu_Nissu())));
         tempEntity.setKubunGendoChokaTaniSuNissu(new RString(String.valueOf(kyoEntity.getKubunGendoChokaTaniSu_Nissu())));
         tempEntity.setKubunGendoNaiTaniSuNissu(kyoEntity.getKubunGendoNaiTaniSu_Nissu());
         tempEntity.setTaniSuTanka(new RString(String.valueOf(kyoEntity.getTaniSuTanka())));
-        tempEntity.setKyufuRitsu(new RString(String.valueOf(kyoEntity.getKyufuRitsu())));
+        tempEntity.setKyufuRitsu(getValue(kyoEntity.getKyufuRitsu()));
         tempEntity.setKyufuKeikakuTaniSu(kyoEntity.getKeikakuTaniSu());
         tempEntity.setZenkaiRiyoNissu(new RString(String.valueOf(予防給付計画自己作成短期利用日数entity.getZenkaiRiyoNissu())));
         tempEntity.setKonkaiKeikakuRiyoNissu(new RString(String.valueOf(予防給付計画自己作成短期利用日数entity.getKonkaiKeikakuRiyoNissu())));
@@ -211,7 +205,7 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
      * @param count count
      * @return HihokenshaTempEntity HihokenshaTempEntity
      */
-    public HihokenshaTempEntity edit被保険entity(
+    public HihokenshaTempEntity edit被保険entity2(
             DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity 予防給付計画自己作成短期利用日数entity,
             DbT3120YoboKeikakuJikoSakuseiKanriEntity kyoEntity, int count) {
         HihokenshaTempEntity hihokenshaTempEntity = new HihokenshaTempEntity();
@@ -273,6 +267,13 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
     private RString getColumnValue(IDbColumnMappable entity) {
         if (null != entity) {
             return entity.getColumnValue();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getValue(HokenKyufuRitsu entity) {
+        if (null != entity) {
+            return new RString(entity.value().toString());
         }
         return RString.EMPTY;
     }

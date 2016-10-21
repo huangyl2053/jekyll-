@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufukanrihyoout.KyufukanrihyoOutProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3120YoboKeikakuJikoSakuseiKanriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.KokuhorenSakuseiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.KyotakuKeikakuJikosakuseiKanriTempEntity;
@@ -23,6 +22,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7109KubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -106,7 +106,7 @@ public class YoboKeikakuJikoSakuseiProcess extends BatchProcessBase<YoboKeikakuJ
         for (DbT3120YoboKeikakuJikoSakuseiKanriEntity yoboKeikakuEntity : 予防給付計画自己作成管理entity) {
             自己作成管理一時TBL.insert(kyotakuKeikakuResult.edit居宅給付計画自己作成Entity2(予防給付計画自己作成短期利用日数entity,
                     yoboKeikakuEntity, 連番));
-            被保険者一時TBL.insert(kyotakuKeikakuResult.edit被保険entity(予防給付計画自己作成短期利用日数entity, yoboKeikakuEntity, 連番));
+            被保険者一時TBL.insert(kyotakuKeikakuResult.edit被保険entity2(予防給付計画自己作成短期利用日数entity, yoboKeikakuEntity, 連番));
             連番++;
         }
     }

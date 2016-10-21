@@ -825,7 +825,8 @@ public class TokuchoTaishoshaIchiranSakusei {
         param.setShuturyokuTaisho(result.get出力対象());
         param.setShoriNichiji(new YMDHMS(nowDateTime));
         param.setKakuninJokyoKubun(result.is確認状況区分());
-        param.setOutputID(result.get出力順ID());
+        param.setDoteiOutputID(result.get同定出力順ID());
+        param.setMidoteiOutputID(result.get未同定出力順ID());
         return param;
     }
 

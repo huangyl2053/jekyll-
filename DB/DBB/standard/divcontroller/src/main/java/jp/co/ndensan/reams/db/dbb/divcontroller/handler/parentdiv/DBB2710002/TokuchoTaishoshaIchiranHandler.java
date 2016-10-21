@@ -54,7 +54,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class TokuchoTaishoshaIchiranHandler {
 
-    private static final RString 帳票分類ID = new RString("DBB200031_TokubetsuChoshuDoteiIchiranDaihyo");
+    private static final RString 同定帳票分類ID = new RString("DBB200031_TokubetsuChoshuDoteiIchiranDaihyo");
+    private static final RString 未同定帳票分類ID = new RString("DBB200032_TokubetsuChoshuMidoteiIchiranDaihyo");
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
     private static final RString KEY2 = new RString("2");
@@ -800,11 +801,12 @@ public class TokuchoTaishoshaIchiranHandler {
         } else {
             result.set出力対象(selectedKeys.get(NUM0));
         }
-        result.set出力順ID(get出力順ID());
+        result.set同定出力順ID(get出力順ID(同定帳票分類ID));
+        result.set未同定出力順ID(get出力順ID(未同定帳票分類ID));
         return tokudoutei.getBatchiPara(result);
     }
 
-    private RString get出力順ID() {
+    private RString get出力順ID(RString 帳票分類ID) {
         Map<RString, RString> rowMap = div.getCcdOutputChohyoIchiran().getSelected帳票IdAnd出力順Id();
         Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
         for (Map.Entry<RString, RString> entry : set) {

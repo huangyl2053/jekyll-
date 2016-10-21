@@ -353,6 +353,8 @@
         AND
             B."ninteiShinseiYMD" = A."ninteishinseibi"
         AND
+            B."hihokenshaNo" = A."hihokenjabango"
+        AND
             B."ninteiShinseiShinseijiKubunCode" = A."shinseikubunshinseiji"
         WHERE
         A."hokenshabango" = #{保険者番号}
