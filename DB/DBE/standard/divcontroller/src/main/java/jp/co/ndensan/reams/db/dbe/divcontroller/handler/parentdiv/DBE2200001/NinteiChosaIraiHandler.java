@@ -726,64 +726,75 @@ public class NinteiChosaIraiHandler {
             } else {
                 性別男 = HOUSI;
             }
-            ChosainJoho 調査員情報 = new ChosainJohoManager().get調査員情報(new LasdecCode(row.getShichosonCode()),
-                    new ChosaItakusakiCode(row.getNinteiChosaItakusakiCode()),
-                    new ChosainCode(row.getNinteiChosainCode()));
+            List<ChosainJoho> 調査員情報リスト = new ArrayList();
+            if (RString.isNullOrEmpty(row.getNinteiChosainCode())) {
+                調査員情報リスト = new ChosainJohoManager().get調査員情報(new LasdecCode(row.getShichosonCode()),
+                        new ChosaItakusakiCode(row.getNinteiChosaItakusakiCode()));
+            } else {
+                ChosainJoho 調査員情報 = new ChosainJohoManager().get調査員情報(new LasdecCode(row.getShichosonCode()),
+                        new ChosaItakusakiCode(row.getNinteiChosaItakusakiCode()),
+                        new ChosainCode(row.getNinteiChosainCode()));
+                if (調査員情報 != null) {
+                    調査員情報リスト.add(調査員情報);
+                }
+            }
             Map<Integer, RString> 通知文
                     = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
             RString homonChosasakiJusho = row.getHomonChosasakiJusho();
-            YubinNo 郵便番号 = 調査員情報.get郵便番号();
-            AtenaJusho 住所 = 調査員情報.get住所();
-            ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(
-                    div.getTxthokkoymd().getValue().toDateString(),
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    郵便番号 == null ? RString.EMPTY : 郵便番号.value(),
-                    住所 == null ? RString.EMPTY : 住所.value(),
-                    調査員情報.get所属機関名称(),
-                    調査員情報.get調査員氏名(),
-                    get名称付与(),
-                    getカスタマーバーコード(調査員情報),
-                    RString.EMPTY,
-                    ConfigNameDBE.認定調査依頼書.get名称(),
-                    通知文.get(1),
-                    被保険者番号リスト.get(0),
-                    被保険者番号リスト.get(1),
-                    被保険者番号リスト.get(2),
-                    被保険者番号リスト.get(INDEX_3),
-                    被保険者番号リスト.get(INDEX_4),
-                    被保険者番号リスト.get(INDEX_5),
-                    被保険者番号リスト.get(INDEX_6),
-                    被保険者番号リスト.get(INDEX_7),
-                    被保険者番号リスト.get(INDEX_8),
-                    被保険者番号リスト.get(INDEX_9),
-                    row.getHihokenshaKana(),
-                    誕生日明治,
-                    誕生日大正,
-                    誕生日昭和,
-                    seinengappiYMD.wareki().toDateString(),
-                    row.getHihokenshaShimei(),
-                    性別男,
-                    性別女,
-                    editYubinNoToIchiran(row.getYubinNo()),
-                    row.getJusho(),
-                    row.getTelNo(),
-                    row.getHomonChosasakiYubinNo(),
-                    homonChosasakiJusho,
-                    row.getHomonChosasakiName(),
-                    row.getHomonChosasakiTelNo(),
-                    row.getNinteiShinseiYMDKoShin(),
-                    row.getNinteichosaKigenYMD(),
-                    通知文.get(2)
-            );
-            chosaIraishoHeadItemList.add(item);
+            for (ChosainJoho 調査員情報 : 調査員情報リスト) {
+                YubinNo 郵便番号 = 調査員情報.get郵便番号();
+                AtenaJusho 住所 = 調査員情報.get住所();
+                ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(
+                        div.getTxthokkoymd().getValue().toDateString(),
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        郵便番号 == null ? RString.EMPTY : 郵便番号.value(),
+                        住所 == null ? RString.EMPTY : 住所.value(),
+                        調査員情報.get所属機関名称(),
+                        調査員情報.get調査員氏名(),
+                        get名称付与(),
+                        getカスタマーバーコード(調査員情報),
+                        RString.EMPTY,
+                        ConfigNameDBE.認定調査依頼書.get名称(),
+                        通知文.get(1),
+                        被保険者番号リスト.get(0),
+                        被保険者番号リスト.get(1),
+                        被保険者番号リスト.get(2),
+                        被保険者番号リスト.get(INDEX_3),
+                        被保険者番号リスト.get(INDEX_4),
+                        被保険者番号リスト.get(INDEX_5),
+                        被保険者番号リスト.get(INDEX_6),
+                        被保険者番号リスト.get(INDEX_7),
+                        被保険者番号リスト.get(INDEX_8),
+                        被保険者番号リスト.get(INDEX_9),
+                        row.getHihokenshaKana(),
+                        誕生日明治,
+                        誕生日大正,
+                        誕生日昭和,
+                        seinengappiYMD.wareki().toDateString(),
+                        row.getHihokenshaShimei(),
+                        性別男,
+                        性別女,
+                        editYubinNoToIchiran(row.getYubinNo()),
+                        row.getJusho(),
+                        row.getTelNo(),
+                        row.getHomonChosasakiYubinNo(),
+                        homonChosasakiJusho,
+                        row.getHomonChosasakiName(),
+                        row.getHomonChosasakiTelNo(),
+                        row.getNinteiShinseiYMDKoShin(),
+                        row.getNinteichosaKigenYMD(),
+                        通知文.get(2)
+                );
+                chosaIraishoHeadItemList.add(item);
+            }
         }
         return chosaIraishoHeadItemList;
     }
