@@ -49,8 +49,7 @@ public class JissekiDataIchijiSakuseiProcess extends BatchProcessBase<JissekiDat
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toJissekiDataIchijiSakuseiMybatisprmParamter(psmShikibetsuTaisho));
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toJissekiDataIchijiSakuseiMybatisprmParamter(uaFt200Psm));
     }
 
     @Override

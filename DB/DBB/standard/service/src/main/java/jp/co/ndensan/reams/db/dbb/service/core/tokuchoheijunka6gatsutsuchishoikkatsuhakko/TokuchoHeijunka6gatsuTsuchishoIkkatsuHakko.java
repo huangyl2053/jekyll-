@@ -428,47 +428,26 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         }
     }
 
-    private void set改頁名前(IOutputOrder outputOrder, List pageBreakKeys) {
-        RString 改頁１ = RString.EMPTY;
-        RString 改頁２ = RString.EMPTY;
-        RString 改頁３ = RString.EMPTY;
-        RString 改頁４ = RString.EMPTY;
-        RString 改頁５ = RString.EMPTY;
+    private void set改頁名前(IOutputOrder outputOrder, List 改ページ項目List) {
         if (outputOrder != null) {
             List<ISetSortItem> list = outputOrder.get設定項目リスト();
             if (list == null) {
                 list = new ArrayList<>();
             }
             if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
-                改頁１ = to帳票フィールド名前(list.get(INDEX_0));
+                改ページ項目List.add(list.get(INDEX_0).get項目名());
             }
             if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
-                改頁２ = to帳票フィールド名前(list.get(INDEX_1));
+                改ページ項目List.add(list.get(INDEX_1).get項目名());
             }
             if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
-                改頁３ = to帳票フィールド名前(list.get(INDEX_2));
+                改ページ項目List.add(list.get(INDEX_2).get項目名());
             }
             if (list.size() > INDEX_3 && list.get(INDEX_3).is改頁項目()) {
-                改頁４ = to帳票フィールド名前(list.get(INDEX_3));
+                改ページ項目List.add(list.get(INDEX_3).get項目名());
             }
             if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
-                改頁５ = to帳票フィールド名前(list.get(INDEX_4));
-            }
-
-            if (!改頁１.isEmpty()) {
-                pageBreakKeys.add(改頁１);
-            }
-            if (!改頁２.isEmpty()) {
-                pageBreakKeys.add(改頁２);
-            }
-            if (!改頁３.isEmpty()) {
-                pageBreakKeys.add(改頁３);
-            }
-            if (!改頁４.isEmpty()) {
-                pageBreakKeys.add(改頁４);
-            }
-            if (!改頁５.isEmpty()) {
-                pageBreakKeys.add(改頁５);
+                改ページ項目List.add(list.get(INDEX_4).get項目名());
             }
         }
     }
@@ -611,27 +590,24 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
             帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_性別;
         } else if (DBB100012ShutsuryokujunEnum.市町村コード.get項目ID().equals(item.get項目ID())) {
             帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_市町村コード;
-        }
-
-        return 帳票物理名;
-    }
-
-    private RString to帳票フィールド名前(ISetSortItem item) {
-
-        RString 帳票物理名 = RString.EMPTY;
-
-        if (DBB100012ShutsuryokujunEnum.郵便番号.get項目ID().equals(item.get項目ID())) {
-            帳票物理名 = item.get項目名();
-        } else if (DBB100012ShutsuryokujunEnum.行政区コード.get項目ID().equals(item.get項目ID())) {
-            帳票物理名 = item.get項目名();
-        } else if (DBB100012ShutsuryokujunEnum.世帯コード.get項目ID().equals(item.get項目ID())) {
-            帳票物理名 = item.get項目名();
-        } else if (DBB100012ShutsuryokujunEnum.生年月日.get項目ID().equals(item.get項目ID())) {
-            帳票物理名 = item.get項目名();
-        } else if (DBB100012ShutsuryokujunEnum.性別.get項目ID().equals(item.get項目ID())) {
-            帳票物理名 = item.get項目名();
-        } else if (DBB100012ShutsuryokujunEnum.市町村コード.get項目ID().equals(item.get項目ID())) {
-            帳票物理名 = item.get項目名();
+        } else if (DBB100012ShutsuryokujunEnum.町域コード.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_町域コード;
+        } else if (DBB100012ShutsuryokujunEnum.番地コード.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_番地コード;
+        } else if (DBB100012ShutsuryokujunEnum.被保険者番号.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_被保険者番号;
+        } else if (DBB100012ShutsuryokujunEnum.年金コード.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_年金コード;
+        } else if (DBB100012ShutsuryokujunEnum.納組コード.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_納組コード;
+        } else if (DBB100012ShutsuryokujunEnum.地区１.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_地区１;
+        } else if (DBB100012ShutsuryokujunEnum.地区２.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_地区２;
+        } else if (DBB100012ShutsuryokujunEnum.地区３.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_地区３;
+        } else if (DBB100012ShutsuryokujunEnum.氏名５０音カナ.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource.改頁_氏名５０音カナ;
         }
 
         return 帳票物理名;

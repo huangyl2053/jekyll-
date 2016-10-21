@@ -222,36 +222,38 @@ public class KyufuKanrihyoSofuIchiranDoBillOutProcess extends BatchKeyBreakBase<
         KyotakuKeikakuJikosakuseiKanriTempEntity 自己作成管理一時Entity = entity.get自己作成管理一時Entity();
         HihokenshaTempEntity 被保険者一時Entity = entity.get被保険者一時Entity();
         if (ヘッダー項目は1行目 == 0) {
+            明細行数カウンター++;
             ヘッダー項目は1行目++;
             保険者番号 = 自己作成管理一時Entity.getHokenshaNo();
             利用年月 = new RString(自己作成管理一時Entity.getRiyoYM().toString());
             被保険者番号 = 自己作成管理一時Entity.getHihokenshaNo().getColumnValue();
             居宅サービス区分 = 自己作成管理一時Entity.getKyotakuServiceKubun();
-        }
-
-        if (!(保険者番号.equals(自己作成管理一時Entity.getHokenshaNo()) && 利用年月.equals(new RString(自己作成管理一時Entity.getRiyoYM().toString()))
-                && 被保険者番号.equals(自己作成管理一時Entity.getHihokenshaNo().getColumnValue()) && 居宅サービス区分.equals(自己作成管理一時Entity.getKyotakuServiceKubun()))) {
-            保険者番号 = 自己作成管理一時Entity.getHokenshaNo();
-            利用年月 = new RString(自己作成管理一時Entity.getRiyoYM().toString());
-            被保険者番号 = 自己作成管理一時Entity.getHihokenshaNo().getColumnValue();
-            居宅サービス区分 = 自己作成管理一時Entity.getKyotakuServiceKubun();
-            editKyufuKanrihyoSofuIchiranEntity(自己作成管理一時Entity, 被保険者一時Entity, 帳票通番カウンター, 明細合計単位数);
-            帳票通番カウンター = 0;
-            明細行数カウンター = 0;
-            明細合計単位数 = Decimal.ZERO;
         } else {
-            if (明細行数カウンター < 固定15) {
-                明細行数カウンター++;
-                明細合計単位数 = 明細合計単位数.multiply(自己作成管理一時Entity.getKyufuKeikakuTaniSu());
+            if (!(保険者番号.equals(自己作成管理一時Entity.getHokenshaNo()) && 利用年月.equals(new RString(自己作成管理一時Entity.getRiyoYM().toString()))
+                    && 被保険者番号.equals(自己作成管理一時Entity.getHihokenshaNo().getColumnValue())
+                    && 居宅サービス区分.equals(自己作成管理一時Entity.getKyotakuServiceKubun()))) {
+                保険者番号 = 自己作成管理一時Entity.getHokenshaNo();
+                利用年月 = new RString(自己作成管理一時Entity.getRiyoYM().toString());
+                被保険者番号 = 自己作成管理一時Entity.getHihokenshaNo().getColumnValue();
+                居宅サービス区分 = 自己作成管理一時Entity.getKyotakuServiceKubun();
+                editKyufuKanrihyoSofuIchiranEntity(自己作成管理一時Entity, 被保険者一時Entity, 帳票通番カウンター, 明細合計単位数);
+                帳票通番カウンター = 0;
+                明細行数カウンター = 0;
+                明細合計単位数 = Decimal.ZERO;
+            } else {
+                if (明細行数カウンター < 固定15) {
+                    明細行数カウンター++;
+                    明細合計単位数 = 明細合計単位数.multiply(自己作成管理一時Entity.getKyufuKeikakuTaniSu());
 
-            } else if (明細行数カウンター == 固定15) {
-                明細行数カウンター = 1;
-                帳票通番カウンター++;
-                明細合計単位数 = 明細合計単位数.multiply(自己作成管理一時Entity.getKyufuKeikakuTaniSu());
+                } else if (明細行数カウンター == 固定15) {
+                    明細行数カウンター = 1;
+                    帳票通番カウンター++;
+                    明細合計単位数 = 明細合計単位数.multiply(自己作成管理一時Entity.getKyufuKeikakuTaniSu());
 
+                }
             }
-        }
 
+        }
     }
 
     @Override

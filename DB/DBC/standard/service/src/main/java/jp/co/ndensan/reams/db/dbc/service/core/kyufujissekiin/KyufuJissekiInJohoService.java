@@ -175,10 +175,15 @@ public class KyufuJissekiInJohoService {
         } else {
             resultEntity.set作成レコード種別_12社福(RString.EMPTY);
         }
-        if (entity.get給付実績_レコード件数DC() >= 1) {
-            resultEntity.set作成レコード種別_13所定(マルTWO);
+        if (entity.get給付実績_レコード件数DB() >= 1) {
+            resultEntity.set作成レコード種別_13ケア(マルTWO);
         } else {
-            resultEntity.set作成レコード種別_13所定(RString.EMPTY);
+            resultEntity.set作成レコード種別_13ケア(RString.EMPTY);
+        }
+        if (entity.get給付実績_レコード件数DC() >= 1) {
+            resultEntity.set作成レコード種別_14所定(マルTWO);
+        } else {
+            resultEntity.set作成レコード種別_14所定(RString.EMPTY);
         }
         if (!RString.isNullOrEmpty(entity.get給付実績_警告区分コード())) {
             if (NUM_ONE.equals(entity.get給付実績_警告区分コード())) {

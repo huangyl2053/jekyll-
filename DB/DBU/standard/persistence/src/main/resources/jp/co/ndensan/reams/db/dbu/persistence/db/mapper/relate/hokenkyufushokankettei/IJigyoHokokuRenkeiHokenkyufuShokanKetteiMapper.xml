@@ -810,8 +810,8 @@
                 FROM
                   rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS A 
                 WHERE
-                  A."hihokenshaNo" = "hihokenshaNo" 
-                  AND A."nendo" = "futanWariaiNendo" 
+                  A."hihokenshaNo" = temp."hihokenshaNo" 
+                  AND A."nendo" = temp."futanWariaiNendo" 
                   AND A."logicalDeletedFlag" <![CDATA[<>]]> 'true' 
                 GROUP BY
                   A."hihokenshaNo"

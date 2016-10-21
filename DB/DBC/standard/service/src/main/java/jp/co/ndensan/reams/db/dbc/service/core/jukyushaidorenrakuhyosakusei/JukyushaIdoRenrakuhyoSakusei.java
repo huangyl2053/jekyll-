@@ -62,6 +62,20 @@ public class JukyushaIdoRenrakuhyoSakusei {
         return RString.EMPTY;
     }
 
+    private RString compareRStringDate(RString obj1, RString obj2) {
+        if ((obj1 == null || obj1.isEmpty()) && (obj2 == null || obj2.isEmpty())) {
+            return RString.EMPTY;
+        } else if ((obj1 == null || obj1.isEmpty())
+                && (obj2 != null && !obj2.isEmpty())) {
+            return obj2;
+        } else if ((obj1 != null && !obj1.isEmpty()) && (obj2 == null || obj2.isEmpty())) {
+            return RString.EMPTY;
+        } else if (obj1 != null && !obj1.equals(obj2)) {
+            return obj2;
+        }
+        return RString.EMPTY;
+    }
+
     private FlexibleDate compareFlexibleDate(FlexibleDate obj1, FlexibleDate obj2) {
         if ((obj1 == null || obj1.isEmpty()) && (obj2 == null || obj2.isEmpty())) {
             return FlexibleDate.EMPTY;
@@ -167,39 +181,39 @@ public class JukyushaIdoRenrakuhyoSakusei {
                 get資格喪失年月日(), 変更後entity.get資格喪失年月日()));
         relateEntity.get出力用受給者訂正情報Entity().set有効期間開始年月日(compareFlexibleDate(変更前entity.
                 get有効期間開始年月日(), 変更後entity.get有効期間開始年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set有効期間終了年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set有効期間終了年月日(compareRStringDate(変更前entity.
                 get有効期間終了年月日(), 変更後entity.get有効期間終了年月日()));
         relateEntity.get出力用受給者訂正情報Entity().set上限管理適用開始年月日１(compareFlexibleDate(変更前entity.
                 get上限管理適用開始年月日１(), 変更後entity.get上限管理適用開始年月日１()));
-        relateEntity.get出力用受給者訂正情報Entity().set上限管理終了年月日１(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set上限管理終了年月日１(compareRStringDate(変更前entity.
                 get上限管理終了年月日１(), 変更後entity.get上限管理終了年月日１()));
         relateEntity.get出力用受給者訂正情報Entity().set上限管理適用開始年月日２(compareFlexibleDate(変更前entity.
                 get上限管理適用開始年月日２(), 変更後entity.get上限管理適用開始年月日２()));
         relateEntity.get出力用受給者訂正情報Entity().set上限管理終了年月日２(compareFlexibleDate(変更前entity.
                 get上限管理終了年月日２(), 変更後entity.get上限管理終了年月日２()));
-        relateEntity.get出力用受給者訂正情報Entity().set居宅適用開始年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set居宅適用開始年月日(compareRStringDate(変更前entity.
                 get居宅適用開始年月日(), 変更後entity.get居宅適用開始年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set居宅適用終了年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set居宅適用終了年月日(compareRStringDate(変更前entity.
                 get居宅適用終了年月日(), 変更後entity.get居宅適用終了年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set利用適用開始年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set利用適用開始年月日(compareRStringDate(変更前entity.
                 get利用適用開始年月日(), 変更後entity.get利用適用開始年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set利用適用終了年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set利用適用終了年月日(compareRStringDate(変更前entity.
                 get利用適用終了年月日(), 変更後entity.get利用適用終了年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set標準適用開始年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set標準適用開始年月日(compareRStringDate(変更前entity.
                 get標準適用開始年月日(), 変更後entity.get標準適用開始年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set標準適用終了年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set標準適用終了年月日(compareRStringDate(変更前entity.
                 get標準適用終了年月日(), 変更後entity.get標準適用終了年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set償還払化適用開始年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set償還払化適用開始年月日(compareRStringDate(変更前entity.
                 get償還払化適用開始年月日(), 変更後entity.get償還払化適用開始年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set償還払化適用終了年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set償還払化適用終了年月日(compareRStringDate(変更前entity.
                 get償還払化適用終了年月日(), 変更後entity.get償還払化適用終了年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set給付率引下げ適用開始年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set給付率引下げ適用開始年月日(compareRStringDate(変更前entity.
                 get給付率引下げ適用開始年月日(), 変更後entity.get給付率引下げ適用開始年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set給付率引下げ適用終了年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set給付率引下げ適用終了年月日(compareRStringDate(変更前entity.
                 get給付率引下げ適用終了年月日(), 変更後entity.get給付率引下げ適用終了年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set特定入所者適用開始年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set特定入所者適用開始年月日(compareRStringDate(変更前entity.
                 get特定入所者適用開始年月日(), 変更後entity.get特定入所者適用開始年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set特定入所者適用終了年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set特定入所者適用終了年月日(compareRStringDate(変更前entity.
                 get特定入所者適用終了年月日(), 変更後entity.get特定入所者適用終了年月日()));
         if (!変更前entity.get公費負担上限額減額().equals(変更後entity.get公費負担上限額減額())) {
             relateEntity.get出力用受給者訂正情報Entity().set公費負担上限額減額(変更後entity.get公費負担上限額減額());
@@ -212,9 +226,9 @@ public class JukyushaIdoRenrakuhyoSakusei {
         } else {
             relateEntity.get出力用受給者訂正情報Entity().set小規模居宅ｻｰﾋﾞｽ利用(Boolean.FALSE);
         }
-        relateEntity.get出力用受給者訂正情報Entity().set軽減率適用開始年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set軽減率適用開始年月日(compareRStringDate(変更前entity.
                 get軽減率適用開始年月日(), 変更後entity.get軽減率適用開始年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set軽減率適用終了年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set軽減率適用終了年月日(compareRStringDate(変更前entity.
                 get軽減率適用終了年月日(), 変更後entity.get軽減率適用終了年月日()));
         relateEntity.get出力用受給者訂正情報Entity().set二次予防有効期間開始年月日(compareFlexibleDate(変更前entity.
                 get二次予防有効期間開始年月日(), 変更後entity.get二次予防有効期間開始年月日()));
@@ -222,13 +236,13 @@ public class JukyushaIdoRenrakuhyoSakusei {
                 get二次予防有効期間終了年月日(), 変更後entity.get二次予防有効期間終了年月日()));
         relateEntity.get出力用受給者訂正情報Entity().set申請年月日(compareFlexibleDate(変更前entity.
                 get申請年月日(), 変更後entity.get申請年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set住特適用開始年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set住特適用開始年月日(compareRStringDate(変更前entity.
                 get住特適用開始年月日(), 変更後entity.get住特適用開始年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set住特適用終了年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set住特適用終了年月日(compareRStringDate(変更前entity.
                 get住特適用終了年月日(), 変更後entity.get住特適用終了年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set二割負担適用開始年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set二割負担適用開始年月日(compareRStringDate(変更前entity.
                 get二割負担適用開始年月日(), 変更後entity.get二割負担適用開始年月日()));
-        relateEntity.get出力用受給者訂正情報Entity().set二割負担適用終了年月日(compareFlexibleDate(変更前entity.
+        relateEntity.get出力用受給者訂正情報Entity().set二割負担適用終了年月日(compareRStringDate(変更前entity.
                 get二割負担適用終了年月日(), 変更後entity.get二割負担適用終了年月日()));
         return relateEntity;
     }
@@ -246,7 +260,9 @@ public class JukyushaIdoRenrakuhyoSakusei {
         if (変更前Entity == null) {
             return null;
         }
-        relateEntity.set上限管理終了年月日１(変更前Entity.getNijiyoboJigyoYukoKikanKaishiYMD());
+
+        relateEntity.set上限管理終了年月日１(変更前Entity.getHomonTsushoServiceJogenKanriTekiyoShuryoYMD());
+
         relateEntity.set作成年月日(new FlexibleDate(RDate.getNowDate().toDateString()));
         if (変更前Entity.getShoKisaiHokenshaNo() != null) {
             relateEntity.set証記載保険者番号(変更前Entity.getShoKisaiHokenshaNo().getColumnValue());
@@ -266,14 +282,12 @@ public class JukyushaIdoRenrakuhyoSakusei {
         relateEntity.setみなし区分(変更前Entity.getMinashiYokaigoJotaiKubunCode());
         relateEntity.set要介護状態区分(変更前Entity.getYokaigoJotaiKubunCode());
         relateEntity.set有効期間開始年月日(変更前Entity.getNinteiYukoKikankaishiYMD());
-        relateEntity.set有効期間終了年月日(new FlexibleDate(
-                変更前Entity.getNinteiYukoKikanShuryoYMD()));
+        relateEntity.set有効期間終了年月日(変更前Entity.getNinteiYukoKikanShuryoYMD());
         relateEntity.set支給限度基準額1(new RString(
                 変更前Entity.getHomonTsushoServiceShikyuGendoKijungaku()));
         relateEntity.set上限管理適用開始年月日１(
                 変更前Entity.getHomonTsushoServiceJogenKanriTekiyoKaishiYMD());
-        relateEntity.set上限管理終了年月日１(new FlexibleDate(
-                変更前Entity.getHomonTsushoServiceJogenKanriTekiyoShuryoYMD()));
+        relateEntity.set上限管理終了年月日１(変更前Entity.getHomonTsushoServiceJogenKanriTekiyoShuryoYMD());
         relateEntity.set支給限度基準額２(new RString(
                 変更前Entity.getTankiNyushoServiceShikyuGendoKijungaku()));
         relateEntity.set上限管理適用開始年月日２(変更前Entity.
@@ -282,38 +296,29 @@ public class JukyushaIdoRenrakuhyoSakusei {
                 変更前Entity.getTankinyushoServiceJogenKanriTekiyoShuryoYMD());
         relateEntity.set計画作成区分(変更前Entity.getKyotakuServiceSakuseiKubunCode());
         relateEntity.set居宅支援事業者番号(変更前Entity.getKyotakuKaigoShienJigyoshoNo());
-        relateEntity.set居宅適用開始年月日(new FlexibleDate(
-                変更前Entity.getKyotakuServiceTekiyoKaishiYMD()));
-        relateEntity.set居宅適用終了年月日(new FlexibleDate(
-                変更前Entity.getKyotakuServiceTekiyoShuryoYMD()));
+        relateEntity.set居宅適用開始年月日(変更前Entity.getKyotakuServiceTekiyoKaishiYMD());
+        relateEntity.set居宅適用終了年月日(変更前Entity.getKyotakuServiceTekiyoShuryoYMD());
         relateEntity.set減免申請中区分(変更前Entity.getGemmenShinseichuKubunCode());
         relateEntity.set利用者負担区分(変更前Entity.getRiyoshaFutanKubunCode());
         Decimal kyufuritsu = 変更前Entity.getKyufuritsu();
         if (kyufuritsu != null) {
             relateEntity.set利用給付率(new RString(kyufuritsu.toString()));
         }
-        relateEntity.set利用適用開始年月日(new FlexibleDate(変更前Entity.getTekiyoKaishiYMD()));
-        relateEntity.set利用適用終了年月日(new FlexibleDate(変更前Entity.getTekiyoShuryoYMD()));
+        relateEntity.set利用適用開始年月日(変更前Entity.getTekiyoKaishiYMD());
+        relateEntity.set利用適用終了年月日(変更前Entity.getTekiyoShuryoYMD());
         relateEntity.set標準負担区分(変更前Entity.getHyojunFutanKubunCode());
         Decimal futangaku = 変更前Entity.getFutangaku();
         if (futangaku != null) {
             relateEntity.set標準負担額(new RString(futangaku.toString()));
         }
-        relateEntity.set標準適用開始年月日(new FlexibleDate(
-                変更前Entity.getFutangakuTekiyoKaishiYMD()));
-        relateEntity.set標準適用終了年月日(new FlexibleDate(
-                変更前Entity.getFutangakuTekiyoShuryoYMD()));
+        relateEntity.set標準適用開始年月日(変更前Entity.getFutangakuTekiyoKaishiYMD());
+        relateEntity.set標準適用終了年月日(変更前Entity.getFutangakuTekiyoShuryoYMD());
         relateEntity.set公費負担上限額減額(変更前Entity.getKohiFutanJogenGengakuAriFlag());
-        relateEntity.set償還払化適用開始年月日(new FlexibleDate(
-                変更前Entity.getShokanbaraikaKaishiYMD()));
-        relateEntity.set償還払化適用終了年月日(new FlexibleDate(
-                変更前Entity.getShokanbaraikaShuryoYMD()));
-        relateEntity.set給付率引下げ適用開始年月日(new FlexibleDate(
-                変更前Entity.getKyufuritsuHikisageKaishiYMD()));
-        relateEntity.set給付率引下げ適用終了年月日(new FlexibleDate(
-                変更前Entity.getKyufuritsuHikisageShuryoYMD()));
-        relateEntity.set認定申請中区分(
-                変更前Entity.getTokuteiNyushoshaNinteiShinseichuKubunCode());
+        relateEntity.set償還払化適用開始年月日(変更前Entity.getShokanbaraikaKaishiYMD());
+        relateEntity.set償還払化適用終了年月日(変更前Entity.getShokanbaraikaShuryoYMD());
+        relateEntity.set給付率引下げ適用開始年月日(変更前Entity.getKyufuritsuHikisageKaishiYMD());
+        relateEntity.set給付率引下げ適用終了年月日(変更前Entity.getKyufuritsuHikisageShuryoYMD());
+        relateEntity.set認定申請中区分(変更前Entity.getTokuteiNyushoshaNinteiShinseichuKubunCode());
         relateEntity.setｻｰﾋﾞｽ区分(変更前Entity.getTokuteiNyushoshaKaigoServiceKubunCode());
         relateEntity.set特例減額措置対象(変更前Entity.getKaizeisoTokureiGengakuSochiTaishoFlag());
         relateEntity.set食費負担限度額(変更前Entity.getShokuhiFutanGendogaku());
@@ -327,10 +332,8 @@ public class JukyushaIdoRenrakuhyoSakusei {
         relateEntity.set新１(変更前Entity.getKyotakuhiShin1FutanGendogaku());
         relateEntity.set新２(変更前Entity.getKyotakuhiShin2FutanGendogaku());
         relateEntity.set新３(変更前Entity.getKyotakuhiShin3FutanGendogaku());
-        relateEntity.set特定入所者適用開始年月日(new FlexibleDate(
-                変更前Entity.getFutanGendogakuTekiyoKaishiYMD()));
-        relateEntity.set特定入所者適用終了年月日(new FlexibleDate(
-                変更前Entity.getFutanGendogakuTekiyoShuryoYMD()));
+        relateEntity.set特定入所者適用開始年月日(変更前Entity.getFutanGendogakuTekiyoKaishiYMD());
+        relateEntity.set特定入所者適用終了年月日(変更前Entity.getFutanGendogakuTekiyoShuryoYMD());
         ShoKisaiHokenshaNo koikiRengoHokenshaNo = 変更前Entity.getKoikiRengoHokenshaNo();
         if (koikiRengoHokenshaNo != null) {
             relateEntity.set広域保険者番号(koikiRengoHokenshaNo.getColumnValue());
@@ -339,17 +342,12 @@ public class JukyushaIdoRenrakuhyoSakusei {
         relateEntity.set老人保健受給者番号(変更前Entity.getRojinHokenJukyushaNo());
         relateEntity.set老人保健公費負担者番号(変更前Entity.getKohiFutanshaNo());
         relateEntity.set軽減率(変更前Entity.getKeigenritsu());
-        relateEntity.set軽減率適用開始年月日(new FlexibleDate(
-                変更前Entity.getKeigenritsuTekiyoKaishiYMD()));
-        relateEntity.set軽減率適用終了年月日(new FlexibleDate(
-                変更前Entity.getKeigenritsuTekiyoShuryoYMD()));
-        relateEntity.set小規模居宅ｻｰﾋﾞｽ利用(
-                変更前Entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag());
+        relateEntity.set軽減率適用開始年月日(変更前Entity.getKeigenritsuTekiyoKaishiYMD());
+        relateEntity.set軽減率適用終了年月日(変更前Entity.getKeigenritsuTekiyoShuryoYMD());
+        relateEntity.set小規模居宅ｻｰﾋﾞｽ利用(変更前Entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag());
         relateEntity.set二次予防事業区分(変更前Entity.getNijiyoboJigyoKubunCode());
-        relateEntity.set二次予防有効期間開始年月日(
-                変更前Entity.getNijiyoboJigyoYukoKikanKaishiYMD());
-        relateEntity.set二次予防有効期間終了年月日(
-                変更前Entity.getNijiyoboJigyoYukoKikanShuryoYMD());
+        relateEntity.set二次予防有効期間開始年月日(変更前Entity.getNijiyoboJigyoYukoKikanKaishiYMD());
+        relateEntity.set二次予防有効期間終了年月日(変更前Entity.getNijiyoboJigyoYukoKikanShuryoYMD());
         relateEntity.set申請種別(変更前Entity.getShinseiShubetsuCode());
         relateEntity.set変更申請中区分(変更前Entity.getHenkoShinseichuKubunCode());
         relateEntity.set申請年月日(変更前Entity.getShinseiYMD());
@@ -360,14 +358,10 @@ public class JukyushaIdoRenrakuhyoSakusei {
         relateEntity.set後期高齢被保険者番号(変更前Entity.getKokikoureiIryoHiHokenshaNo());
         relateEntity.set住特対象者区分(変更前Entity.getJushochiTokureiTaishoshaKubunCode());
         relateEntity.set住特施設所在保険者番号(変更前Entity.getShisetsuShozaiHokenjaNo());
-        relateEntity.set住特適用開始年月日(new FlexibleDate(
-                変更前Entity.getJushochiTokureiTekiyoKaishiYMD()));
-        relateEntity.set住特適用終了年月日(new FlexibleDate(
-                変更前Entity.getJushochiTokureiTekiyoShuryoYMD()));
-        relateEntity.set二割負担適用開始年月日(new FlexibleDate(
-                変更前Entity.getRiyosyaFutanWariaiYukoKaishiYMD()));
-        relateEntity.set二割負担適用終了年月日(new FlexibleDate(
-                変更前Entity.getRiyosyaFutanWariaiYukoShuryoYMD()));
+        relateEntity.set住特適用開始年月日(変更前Entity.getJushochiTokureiTekiyoKaishiYMD());
+        relateEntity.set住特適用終了年月日(変更前Entity.getJushochiTokureiTekiyoShuryoYMD());
+        relateEntity.set二割負担適用開始年月日(変更前Entity.getRiyosyaFutanWariaiYukoKaishiYMD());
+        relateEntity.set二割負担適用終了年月日(変更前Entity.getRiyosyaFutanWariaiYukoShuryoYMD());
         relateEntity.set訂正年月日(変更前Entity.getTeiseiYMD());
         relateEntity.set訂正区分コード(変更前Entity.getTeiseiKubunCode());
         return relateEntity;
