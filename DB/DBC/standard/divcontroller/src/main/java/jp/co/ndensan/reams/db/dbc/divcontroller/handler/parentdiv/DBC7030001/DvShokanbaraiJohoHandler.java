@@ -365,7 +365,9 @@ public class DvShokanbaraiJohoHandler {
         KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
         if (!RString.isNullOrEmpty(金融機関コード) && !RString.isNullOrEmpty(金融機関名称)) {
             KinyuKikan 金融機関 = kinyuKikanManager.getValidKinyuKikanOn(FlexibleDate.getNowDate(), 金融機関コード.substring(INDEX_0, INDEX_4));
-            div.getCcdKogakuKinyuKikan().set金融機関(金融機関);
+            if (金融機関 != null) {
+                div.getCcdKogakuKinyuKikan().set金融機関(金融機関);
+            }
         }
         FlexibleDate 申請日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_申請日開始);
         if (申請日From != null) {

@@ -60,7 +60,7 @@ public class HanyoListFukaDaichoParamHandler {
     private static final RString KEY_保険料段階 = new RString("保険料段階s");
     private static final RString KEY_項目名付加 = new RString("項目名付加");
     private static final RString KEY_連番付加 = new RString("連番付加");
-    private static final RString KEY_日付スラッシュ付加 = new RString("日付スラッシュ付加");
+    private static final RString KEY_日付スラッシュ付加 = new RString("日付編集");
 
     /**
      * コンストラクタです。
@@ -257,6 +257,7 @@ public class HanyoListFukaDaichoParamHandler {
     public void pamaRestore() {
 
         BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
+        set初期項目状態();
         List<RString> csv編集方法リスト = new ArrayList<>();
         boolean 項目名付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_項目名付加);
         if (項目名付加) {
@@ -275,15 +276,16 @@ public class HanyoListFukaDaichoParamHandler {
         }
         FlexibleYear 調定年度 = restoreBatchParameterMap.getParameterValue(FlexibleYear.class, KEY_調定年度);
         if (調定年度 != null && !調定年度.isEmpty()) {
-            div.getNendoKijumbiSitei().getDdlChoteiNendo().setSelectedValue(調定年度.toDateString());
+            div.getNendoKijumbiSitei().getDdlChoteiNendo().setSelectedKey(調定年度.toDateString());
         }
         FlexibleYear 賦課年度 = restoreBatchParameterMap.getParameterValue(FlexibleYear.class, KEY_賦課年度);
         if (賦課年度 != null && !賦課年度.isEmpty()) {
-            div.getNendoKijumbiSitei().getDdlFukaNendo().setSelectedValue(賦課年度.toDateString());
+            div.getNendoKijumbiSitei().getDdlFukaNendo().setSelectedKey(賦課年度.toDateString());
         }
         div.getNendoKijumbiSitei().getTxtKijyunbi().clearValue();
         RDate 基準日 = restoreBatchParameterMap.getParameterValue(RDate.class, KEY_基準日);
         if (基準日 != null) {
+            div.getNendoKijumbiSitei().getChkKijyunbiSiteiUmu().setSelectedItemsByKey(new ArrayList<RString>());
             div.getNendoKijumbiSitei().getTxtKijyunbi().setValue(基準日);
         }
         RString 基準日区分 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_基準日区分);
@@ -313,32 +315,81 @@ public class HanyoListFukaDaichoParamHandler {
         }
         AtenaSelectBatchParameter 宛名抽出条件 = restoreBatchParameterMap.getParameterValue(AtenaSelectBatchParameter.class, KEY_宛名抽出条件);
         if (宛名抽出条件 != null) {
-            div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(new ChoikiCode(宛名抽出条件.getJusho_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(new ChoikiCode(宛名抽出条件.getJusho_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(toChoikiCode(宛名抽出条件.getJusho_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(toChoikiCode(宛名抽出条件.getJusho_From()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set保険者(宛名抽出条件.getShichoson_Code());
-            div.getChushutsuPanel2().getCcdAtenaJoken().set地区(宛名抽出条件.getChiku_Kubun().get名称());
-            div.getChushutsuPanel2().getCcdAtenaJoken().set地区１終了(new ChikuCode(宛名抽出条件.getChiku1_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set地区１開始(new ChikuCode(宛名抽出条件.getChiku1_From()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set地区２終了(new ChikuCode(宛名抽出条件.getChiku2_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set地区２開始(new ChikuCode(宛名抽出条件.getChiku2_From()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set地区３終了(new ChikuCode(宛名抽出条件.getChiku3_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set地区３開始(new ChikuCode(宛名抽出条件.getChiku3_From()));
+            if (宛名抽出条件.getChiku_Kubun() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set地区(宛名抽出条件.getChiku_Kubun().getコード());
+            }
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区１終了(toChikuCode(宛名抽出条件.getChiku1_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区１開始(toChikuCode(宛名抽出条件.getChiku1_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区２終了(toChikuCode(宛名抽出条件.getChiku2_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区２開始(toChikuCode(宛名抽出条件.getChiku2_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区３終了(toChikuCode(宛名抽出条件.getChiku3_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区３開始(toChikuCode(宛名抽出条件.getChiku3_From()));
             div.getChushutsuPanel2().getCcdAtenaJoken().set年齢基準日(宛名抽出条件.getNenreiKijunbi());
-            div.getChushutsuPanel2().getCcdAtenaJoken().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().get名称());
-            div.getChushutsuPanel2().getCcdAtenaJoken().set年齢終了(宛名抽出条件.getNenreiRange().getTo());
-            div.getChushutsuPanel2().getCcdAtenaJoken().set年齢開始(宛名抽出条件.getNenreiRange().getFrom());
-            div.getChushutsuPanel2().getCcdAtenaJoken().set生年月日終了(宛名抽出条件.getSeinengappiRange().getTo());
-            div.getChushutsuPanel2().getCcdAtenaJoken().set生年月日開始(宛名抽出条件.getSeinengappiRange().getFrom());
-            div.getChushutsuPanel2().getCcdAtenaJoken().set行政区終了(new GyoseikuCode(宛名抽出条件.getGyoseiku_To()));
-            div.getChushutsuPanel2().getCcdAtenaJoken().set行政区開始(new GyoseikuCode(宛名抽出条件.getGyoseiku_From()));
+            if (宛名抽出条件.getAgeSelectKijun() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().getコード());
+            }
+            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getFrom() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢開始(宛名抽出条件.getNenreiRange().getFrom());
+            }
+            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getTo() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢終了(宛名抽出条件.getNenreiRange().getTo());
+            }
+            if (宛名抽出条件.getSeinengappiRange() != null && 宛名抽出条件.getSeinengappiRange().getFrom() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set生年月日開始(宛名抽出条件.getSeinengappiRange().getFrom());
+            }
+            if (宛名抽出条件.getSeinengappiRange() != null && 宛名抽出条件.getSeinengappiRange().getTo() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set生年月日終了(宛名抽出条件.getSeinengappiRange().getTo());
+            }
+            div.getChushutsuPanel2().getCcdAtenaJoken().set行政区終了(toGyoseikuCode(宛名抽出条件.getGyoseiku_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set行政区開始(toGyoseikuCode(宛名抽出条件.getGyoseiku_From()));
         }
         RString 徴収方法 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_徴収方法);
         if (徴収方法 != null && !徴収方法.isEmpty()) {
             div.getChushutsuJokenPanel().getDdlChosyuHoho().setSelectedKey(徴収方法);
         }
-        List<RString> 保険料段階s = restoreBatchParameterMap.getParameterValue(List.class, KEY_保険料段階);
-        if (保険料段階s != null && !保険料段階s.isEmpty()) {
-            div.getChushutsuJokenPanel().getChkHokenryoDankai().setSelectedItemsByKey(保険料段階s);
+        List<String> 保険料段階s = restoreBatchParameterMap.getParameterValue(List.class, KEY_保険料段階);
+        if (保険料段階s != null) {
+            if (!保険料段階s.isEmpty()) {
+                div.getChushutsuJokenPanel().getChkHokenryoDankai().setSelectedItemsByKey(set保険料段階(保険料段階s));
+            } else {
+                div.getChushutsuJokenPanel().getChkHokenryoDankai().setSelectedItemsByKey(new ArrayList<RString>());
+            }
         }
+        onChange_chkKijyunbiSiteiUmu();
+    }
+
+    private ChoikiCode toChoikiCode(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return ChoikiCode.EMPTY;
+        } else {
+            return new ChoikiCode(value);
+        }
+    }
+
+    private ChikuCode toChikuCode(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return ChikuCode.EMPTY;
+        } else {
+            return new ChikuCode(value);
+        }
+    }
+
+    private GyoseikuCode toGyoseikuCode(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return GyoseikuCode.EMPTY;
+        } else {
+            return new GyoseikuCode(value);
+        }
+    }
+
+    private List<RString> set保険料段階(List<String> 保険料段階s) {
+        List<RString> 保険料段階リスト = new ArrayList<>();
+        for (int i = 0; i < 保険料段階s.size(); i++) {
+            保険料段階リスト.add(new RString(保険料段階s.get(i)));
+        }
+        return 保険料段階リスト;
     }
 }
