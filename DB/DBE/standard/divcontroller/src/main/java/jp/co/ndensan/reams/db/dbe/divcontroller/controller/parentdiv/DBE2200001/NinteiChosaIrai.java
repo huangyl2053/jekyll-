@@ -258,9 +258,8 @@ public class NinteiChosaIrai {
         int waritsukeZumiCount = 0;
         RYearMonth chosaIraiDay = div.getTxtChosaIraiDay().getValue().getYearMonth();
         for (dgWaritsukeZumiShinseishaIchiran_Row row : waritsukeZumiList) {
-            RYearMonth chosaIrai = new RDate(row.getChosaIraiDay().toString()).getYearMonth();
-            if ((RString.EMPTY.equals(row.getJotai()) || WARITSUKE_ZUMI.equals(row.getJotai()))
-                    && chosaIraiDay.equals(chosaIrai)) {
+            if (!RString.isNullOrEmpty(row.getChosaIraiDay()) && (RString.EMPTY.equals(row.getJotai()) || WARITSUKE_ZUMI.equals(row.getJotai()))
+                    && chosaIraiDay.equals(new RDate(row.getChosaIraiDay().toString()).getYearMonth())) {
                 waritsukeZumiCount++;
             }
         }
