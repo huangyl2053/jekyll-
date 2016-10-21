@@ -72,6 +72,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshuru
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
 import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisan;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanInput;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanOutput;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -1346,28 +1349,20 @@ public class FukaKeisan extends FukaKeisanFath {
     }
 
     private KoseiShorikoaResult get調定計算_現年度(CalculateChoteiParameter param) {
-//        KiwariKeisanInput inputEntity = new KiwariKeisanInput();
-//        setInputEntity(inputEntity, param);
-//        KiwariKeisan kiwariKeisan = new KiwariKeisan();
-//        KiwariKeisanOutput kiwariKeisanOutputEntity = kiwariKeisan.getKibetsuGaku(inputEntity);
-//        List<Decimal> 特徴期別金額 = kiwariKeisanOutputEntity.get調定年度期別クラス().get(0).get特徴期別額();
-//        List<Decimal> 普徴期別金額 = kiwariKeisanOutputEntity.get調定年度期別クラス().get(0).get普徴期別額();
-        List<Decimal> 特徴期別金額 = new ArrayList<>();
-        for (int i = 0; i < INT_6; i++) {
-            特徴期別金額.add(Decimal.ONE);
-        }
-        List<Decimal> 普徴期別金額 = new ArrayList<>();
-        for (int i = 0; i < INT_14; i++) {
-            普徴期別金額.add(Decimal.TEN);
-        }
-        // TODO QAのNo.1741 以下がDummy Data
+        KiwariKeisanInput inputEntity = new KiwariKeisanInput();
+        setInputEntity(inputEntity, param);
+        KiwariKeisan kiwariKeisan = new KiwariKeisan();
+        KiwariKeisanOutput kiwariKeisanOutputEntity = kiwariKeisan.getKibetsuGaku(inputEntity);
+        List<Decimal> 特徴期別金額 = kiwariKeisanOutputEntity.get調定年度期別クラス().get(0).get特徴期別額();
+        List<Decimal> 普徴期別金額 = kiwariKeisanOutputEntity.get調定年度期別クラス().get(0).get普徴期別額();
+        // TODO QAのNo.1741(Redmine#106404) 以下がDummy Data
         RString 特徴停止事由コード = new RString("01");
 
-        FukaJoho 現年度 = param.get年度分賦課リスト_更正前().get現年度();
+        FukaJoho 更正前 = param.get年度分賦課リスト_更正前().get現年度();
         FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
-        fukaJohoRelateEntity.set介護賦課Entity(現年度.toEntity());
+        fukaJohoRelateEntity.set介護賦課Entity(更正前.toEntity());
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
-        List<Kibetsu> kibetsuList = 現年度.getKibetsuList();
+        List<Kibetsu> kibetsuList = 更正前.getKibetsuList();
         for (Kibetsu kibetsu : kibetsuList) {
             if (ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.get徴収方法())) {
                 set特徴期別金額(kibetsu, 特徴期別金額, 介護期別RelateEntity);
@@ -1376,9 +1371,8 @@ public class FukaKeisan extends FukaKeisanFath {
             }
         }
         fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
-        現年度 = new FukaJoho(fukaJohoRelateEntity);
+        FukaJoho 現年度 = new FukaJoho(fukaJohoRelateEntity);
 
-        FukaJoho 更正前 = param.get年度分賦課リスト_更正前().get現年度();
         ChoshuHoho 出力用徴収方法の情報 = get出力用徴収方法の情報(更正前, 現年度, param, param.get徴収方法の情報_更正前(),
                 特徴期別金額, 特徴停止事由コード);
 
