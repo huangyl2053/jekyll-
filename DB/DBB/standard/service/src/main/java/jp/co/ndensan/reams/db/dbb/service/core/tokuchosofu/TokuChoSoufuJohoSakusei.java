@@ -141,7 +141,7 @@ public class TokuChoSoufuJohoSakusei {
         parameter.set賦課年度(divParam.get賦課年度());
         RString 処理対象月 = divParam.get処理対象月();
         parameter.set処理対象月(処理対象月);
-        if (Tsuki._7月.equals(処理対象月)) {
+        if (Tsuki._7月.getコード().equals(処理対象月)) {
             parameter.set帳票ID(帳票ID_1);
             parameter.set件数表帳票ID(件数表帳票ID_1);
         } else {
