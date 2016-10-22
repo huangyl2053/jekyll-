@@ -110,11 +110,12 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
         YokaigoNinteiEnkiTshuchishoEntity entity = new YokaigoNinteiEnkiTshuchishoEntity();
         entity.setEntity(dbtEntity);
         set送付物宛先情報(entity);
-        entity.set文書番号(ReportUtil.get文書番号(SubGyomuCode.DBD介護受給, REPORT_DBD522001, parameter.get通知書発行日()));
+        FlexibleDate 通知書発行日 = get通知書発行日(dbtEntity.getShinseishoKanriNo().value());
+        entity.set文書番号(ReportUtil.get文書番号(SubGyomuCode.DBD介護受給, REPORT_DBD522001, 通知書発行日));
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBD介護受給,
                 REPORT_DBD522001,
-                parameter.get通知書発行日(),
+                通知書発行日,
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                 KenmeiFuyoKubunType.付与なし,
                 reportSourceWriter);
@@ -157,9 +158,19 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
         YokaigoNinteiEnkiTshuchishoReport report = new YokaigoNinteiEnkiTshuchishoReport(entity);
         report.writeBy(reportSourceWriter);
 
-        dbtEntity.setEnkiTsuchiHakkoYMD(parameter.get通知書発行日());
+        dbtEntity.setEnkiTsuchiHakkoYMD(通知書発行日);
         dbtEntity.setEnkiTsuchiHakkoKaisu(entity.getEntity().getEnkiTsuchiHakkoKaisu() + 1);
         dbT4101TableWriter.update(dbtEntity);
+    }
+
+    private FlexibleDate get通知書発行日(RString 申請書管理番号) {
+        FlexibleDate 通知書発行日 = FlexibleDate.EMPTY;
+        for (int index = 0; index < parameter.get申請書管理番号リスト().size(); index++) {
+            if (申請書管理番号.equals(parameter.get申請書管理番号リスト().get(index))) {
+                通知書発行日 = parameter.get通知書発行日().get(index);
+            }
+        }
+        return 通知書発行日;
     }
 
     private void set送付物宛先情報(YokaigoNinteiEnkiTshuchishoEntity entity) {
