@@ -76,7 +76,9 @@
             ) AS "shikibetsuCode"     
        ON
             "master"."shikibetsuCode" = "shikibetsuCode"."shikibetsuCode"
-                        
+       <if test="doteiOutput!=null and !doteiOutput.isEmpty()">
+            ${doteiOutput}
+       </if>                   
     </select>   
     
     <select id="get特別徴収未同定一覧情報" 
@@ -130,7 +132,10 @@
                 )      
             ) AS "shikibetsuCode"       
        ON
-            "master"."shikibetsuCode" = "shikibetsuCode"."shikibetsuCode"             
+            "master"."shikibetsuCode" = "shikibetsuCode"."shikibetsuCode"  
+       <if test="midoteiOutput!=null and !midoteiOutput.isEmpty()">
+            ${midoteiOutput}
+       </if>                         
     </select> 
       
         
