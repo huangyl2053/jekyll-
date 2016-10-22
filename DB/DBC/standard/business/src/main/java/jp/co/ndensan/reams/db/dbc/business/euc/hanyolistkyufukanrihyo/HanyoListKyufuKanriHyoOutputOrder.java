@@ -34,15 +34,15 @@ public enum HanyoListKyufuKanriHyoOutputOrder implements IReportItems {
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString(""), new RString("\"DbT1001HihokenshaDaicho\".\"shichosonCode\"")),
+    市町村コード(new RString("0016"), new RString(""), new RString("\"dbT1001HihokenshaDaicho_shichosonCode\"")),
     /**
      * 証記載保険者番号
      */
-    証記載保険者番号(new RString("0103"), new RString(""), new RString("\"KyufuKanrihyo\".\"shokisaiHokenshaNo\"")),
+    証記載保険者番号(new RString("0103"), new RString(""), new RString("\"KyufuKanrihyo_shokisaiHokenshaNo\"")),
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString(""), new RString("\"KyufuKanrihyo\".\"hiHokenshaNo\"")),
+    被保険者番号(new RString("0104"), new RString(""), new RString("\"kyufuKanrihyo_hiHokenshaNo\"")),
     /**
      * 支給区分コード
      */
@@ -54,7 +54,7 @@ public enum HanyoListKyufuKanriHyoOutputOrder implements IReportItems {
     /**
      * 新規継続区分
      */
-    サービス年月(new RString("0301"), new RString(""), new RString("\"KyufuKanrihyo\".\"serviceTeikyoYM\"")),
+    サービス年月(new RString("0301"), new RString(""), new RString("\"kyufuKanrihyo_serviceTeikyoYM\"")),
     /**
      * 新規継続区分
      */

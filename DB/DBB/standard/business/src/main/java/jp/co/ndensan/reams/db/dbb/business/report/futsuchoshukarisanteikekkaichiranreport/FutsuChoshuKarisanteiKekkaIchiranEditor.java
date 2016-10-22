@@ -337,7 +337,7 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
         前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku13());
         前期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku14());
         for (int i = NUM0; i < 前期別金額list.size(); i++) {
-            if (Decimal.ZERO.compareTo(前期別金額list.get(i)) < NUM0) {
+            if (前期別金額list.get(i) != null && Decimal.ZERO.compareTo(前期別金額list.get(i)) < NUM0) {
                 後期別金額list.add(前期別金額list.get(i));
             }
         }

@@ -153,6 +153,7 @@ public class KogakuKyufuTaishoshaInDoIchiranhyoSakuseiProcess extends SimpleBatc
                 output.set処理年月(RString.EMPTY);
                 output.set作成日時(RString.EMPTY);
             }
+            output.set国保連合会名(対象者.get国保連合会名());
             output.set証記載保険者番号(getColumnValue(対象者.get証記載保険者番号()));
             output.set証記載保険者名(対象者.get証記載保険者名());
             output.set通知書番号(対象者.getNo());

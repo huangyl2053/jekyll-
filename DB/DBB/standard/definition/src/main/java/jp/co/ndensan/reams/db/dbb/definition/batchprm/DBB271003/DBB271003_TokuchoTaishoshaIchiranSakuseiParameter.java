@@ -56,7 +56,7 @@ public class DBB271003_TokuchoTaishoshaIchiranSakuseiParameter extends BatchPara
      */
     public TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter toProcessParameter() {
         return new TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter(
-                shoriNendo, hosokudukiList, tokubetuchoshuKaishiDuki, shuturyokuTaisho, shoriNichiji
+                shoriNendo, hosokudukiList, tokubetuchoshuKaishiDuki, shuturyokuTaisho, shoriNichiji, doteiOutputID, midoteiOutputID
         );
     }
 }

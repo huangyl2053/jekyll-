@@ -24,35 +24,37 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class HanyoListShokanbaraiJokyoMybatisParameter extends KozaSearchParameter
         implements IMyBatisParameter {
 
-    private final RString 保険者コード;
-    private final RString 保険者名;
-    private final FlexibleYearMonth サービス提供年月From;
-    private final FlexibleYearMonth サービス提供年月To;
-    private final RString 処理状況;
-    private final RString 決定情報;
-    private final RString 支払方法;
-    private final RString 金融機関コード;
-    private final RString 金融機関名称;
-    private final FlexibleDate 申請日From;
-    private final FlexibleDate 申請日To;
-    private final FlexibleDate 住宅改修支給届出日From;
-    private final FlexibleDate 住宅改修支給届出日To;
-    private final FlexibleDate 決定日From;
-    private final FlexibleDate 決定日To;
-    private final FlexibleYearMonth 国保連送付年月From;
-    private final FlexibleYearMonth 国保連送付年月To;
-    private final RString 様式番号選択;
-    private final List<RString> 様式番号;
-    private final boolean 項目名付加;
-    private final boolean 連番付加;
-    private final boolean 日付スラッシュ付加;
-    private final Long 出力順;
-    private final RString 出力項目;
-    private final ReportId 帳票ID;
+    private RString 保険者コード;
+    private RString 保険者名;
+    private FlexibleYearMonth サービス提供年月From;
+    private FlexibleYearMonth サービス提供年月To;
+    private RString 処理状況;
+    private RString 決定情報;
+    private RString 支払方法;
+    private RString 金融機関コード;
+    private RString 金融機関名称;
+    private FlexibleDate 申請日From;
+    private FlexibleDate 申請日To;
+    private FlexibleDate 住宅改修支給届出日From;
+    private FlexibleDate 住宅改修支給届出日To;
+    private FlexibleDate 決定日From;
+    private FlexibleDate 決定日To;
+    private FlexibleYearMonth 国保連送付年月From;
+    private FlexibleYearMonth 国保連送付年月To;
+    private RString 様式番号選択;
+    private List<RString> 様式番号;
+    private boolean 項目名付加;
+    private boolean 連番付加;
+    private boolean 日付スラッシュ付加;
+    private Long 出力順;
+    private RString 出力項目;
+    private ReportId 帳票ID;
+    private RString 様式番号Order;
+    private RString orderByClause;
 
     /**
      * コンストラクタです
@@ -84,6 +86,8 @@ public class HanyoListShokanbaraiJokyoMybatisParameter extends KozaSearchParamet
      * @param 出力順 Long
      * @param 出力項目 RString
      * @param 帳票ID ReportId
+     * @param 様式番号Order RString
+     * @param orderByClause RString
      */
     public HanyoListShokanbaraiJokyoMybatisParameter(
             IKozaSearchKey searchkey,
@@ -112,7 +116,9 @@ public class HanyoListShokanbaraiJokyoMybatisParameter extends KozaSearchParamet
             boolean 日付スラッシュ付加,
             Long 出力順,
             RString 出力項目,
-            ReportId 帳票ID
+            ReportId 帳票ID,
+            RString 様式番号Order,
+            RString orderByClause
     ) {
         super(searchkey, list);
         this.保険者コード = 保険者コード;
@@ -140,5 +146,7 @@ public class HanyoListShokanbaraiJokyoMybatisParameter extends KozaSearchParamet
         this.出力順 = 出力順;
         this.出力項目 = 出力項目;
         this.帳票ID = 帳票ID;
+        this.様式番号Order = 様式番号Order;
+        this.orderByClause = orderByClause;
     }
 }
