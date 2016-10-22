@@ -40,6 +40,7 @@ public class SelectShotokuJohoProcess extends BatchProcessBase<RString> {
     private static final RString 異動_広域_2 = new RString("2");
     private static final RString 当初_単一_3 = new RString("3");
     private static final RString 異動_単一_4 = new RString("4");
+    private static final RString ファイル名 = new RString("BBKAIGO.csv");
 
     private RString csvReaderPath;
     private RString path;
@@ -51,11 +52,19 @@ public class SelectShotokuJohoProcess extends BatchProcessBase<RString> {
 
     @Override
     protected void initialize() {
-        ReadOnlySharedFileEntryDescriptor descriptor = new ReadOnlySharedFileEntryDescriptor(
-                FilesystemName.fromString(parameter.get共有ファイル名()), parameter.get共有ファイルID());
-        path = SharedFile.getDirectAccessPath(descriptor);
-        FilesystemPath filesystemPath = SharedFile.copyToLocal(descriptor, FilesystemPath.fromString(path));
-        csvReaderPath = Path.combinePath(filesystemPath.toRString(), parameter.getファイル名());
+        RString 処理区分 = parameter.get処理区分();
+        if (当初_広域_1.equals(処理区分) || 異動_広域_2.equals(処理区分)) {
+            ReadOnlySharedFileEntryDescriptor descriptor = new ReadOnlySharedFileEntryDescriptor(
+                    FilesystemName.fromString(parameter.get共有ファイル名()), parameter.get共有ファイルID());
+            path = SharedFile.getDirectAccessPath(descriptor);
+            FilesystemPath filesystemPath = SharedFile.copyToLocal(descriptor, FilesystemPath.fromString(path));
+            csvReaderPath = Path.combinePath(filesystemPath.toRString(), parameter.getファイル名());
+        } else if (当初_単一_3.equals(処理区分) || 異動_単一_4.equals(処理区分)) {
+            ReadOnlySharedFileEntryDescriptor descriptor = ReadOnlySharedFileEntryDescriptor.fromString(ファイル名.toString());
+            path = SharedFile.getDirectAccessPath(descriptor);
+            FilesystemPath filesystemPath = SharedFile.copyToLocal(descriptor, FilesystemPath.fromString(path));
+            csvReaderPath = Path.combinePath(filesystemPath.toRString(), parameter.getファイル名());
+        }
     }
 
     @Override

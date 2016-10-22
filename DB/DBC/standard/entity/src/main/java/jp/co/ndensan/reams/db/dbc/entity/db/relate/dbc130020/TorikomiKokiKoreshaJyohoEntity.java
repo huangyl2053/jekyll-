@@ -78,5 +78,7 @@ public class TorikomiKokiKoreshaJyohoEntity extends DbTableEntityBase<TorikomiKo
     private RString エラー文言;
     @CsvField(order = 270, name = "エラー区分")
     private RString エラー区分;
+    @CsvField(order = 280, name = "文言設定flag")
+    private boolean 文言設定flag;
 
 }

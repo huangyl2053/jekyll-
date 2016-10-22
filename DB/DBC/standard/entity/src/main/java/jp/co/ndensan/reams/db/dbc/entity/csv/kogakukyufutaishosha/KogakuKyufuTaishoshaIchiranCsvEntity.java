@@ -60,5 +60,7 @@ public class KogakuKyufuTaishoshaIchiranCsvEntity {
     private RString 支払済金額合計;
     @CsvField(order = 210, name = "高額支給額")
     private RString 高額支給額;
+    @CsvField(order = 220, name = "国保連合会名")
+    private RString 国保連合会名;
 
 }

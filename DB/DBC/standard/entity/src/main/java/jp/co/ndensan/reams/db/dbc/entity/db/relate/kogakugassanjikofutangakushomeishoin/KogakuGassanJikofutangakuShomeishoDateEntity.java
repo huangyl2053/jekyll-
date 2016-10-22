@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -57,7 +56,7 @@ public class KogakuGassanJikofutangakuShomeishoDateEntity {
     private int 高額合算自己負担額_連番;
     private HihokenshaNo 高額合算自己負担額_被保険者番号;
     private FlexibleYear 高額合算自己負担額_対象年度;
-    private ShoKisaiHokenshaNo 高額合算自己負担額_保険者番号;
+    private RString 高額合算自己負担額_保険者番号;
     private RString 高額合算自己負担額_支給申請書整理番号;
     private int 高額合算自己負担額_履歴番号;
     private RString 高額合算自己負担額_保険制度コード;

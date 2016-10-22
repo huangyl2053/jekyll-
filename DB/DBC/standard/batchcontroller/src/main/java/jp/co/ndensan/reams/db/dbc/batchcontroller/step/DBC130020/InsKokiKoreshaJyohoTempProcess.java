@@ -39,12 +39,14 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
     private static final RString エラーコード文言 = new RString("画面登録されたデータです");
     private static final RString エラー区分 = new RString("1");
     private static final RString TEMP_TABLE = new RString("tempKokuhoShikakuJyohoInpotoyo");
+    private boolean 文言設定flag;
+
     @BatchWriter
     private IBatchTableWriter<TorikomiKokiKoreshaJyohoImportEntity> torikomiKokuhoJyohoEntityWriter;
 
     @Override
     protected void initialize() {
-        後期高齢者情報インポート用Entity = null;
+        後期高齢者情報インポート用Entity = new TorikomiKokiKoreshaJyohoImportEntity();
     }
 
     @Override
@@ -60,26 +62,36 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
 
     @Override
     protected void process(KokiKoreshaJyohoResultEntity entity) {
+        if (entity.get取込後期高齢者情報Entity() != null) {
+            文言設定flag = entity.get取込後期高齢者情報Entity().is文言設定flag();
+        }
         if (entity.get取込後期高齢者情報Entity() != null
                 && entity.get現在後期高齢者情報() != null
                 && 登録区分_画面登録.equals(entity.get現在後期高齢者情報().getTorokuKubun())) {
-            if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
-                entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_32);
+            entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_32);
+            if (文言設定flag) {
                 entity.get取込後期高齢者情報Entity().setエラー文言(エラーコード文言);
-                entity.get取込後期高齢者情報Entity().setエラー区分(エラー区分);
+                文言設定flag = false;
             }
-            if (ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
-                entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_82);
-                entity.get取込後期高齢者情報Entity().setエラー文言(エラーコード文言);
-                entity.get取込後期高齢者情報Entity().setエラー区分(エラー区分);
-            }
-            if (エラー区分_正常データ.equals(entity.get取込後期高齢者情報Entity().getエラー区分())) {
-                後期高齢者情報インポート用Entityリストの編集_取込形式_全件(entity);
-                後期高齢者情報インポート用Entityリストの編集_取込形式_差分(entity);
-            }
+            entity.get取込後期高齢者情報Entity().setエラー区分(エラー区分);
         }
-        if (後期高齢者情報インポート用Entity != null) {
+        if (entity.get取込後期高齢者情報Entity() != null
+                && entity.get取込後期高齢者情報Entity() != null
+                && 登録区分_画面登録.equals(entity.get現在後期高齢者情報().getTorokuKubun())
+                && ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
+            entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_82);
+            if (文言設定flag) {
+                entity.get取込後期高齢者情報Entity().setエラー文言(エラーコード文言);
+            }
+            entity.get取込後期高齢者情報Entity().setエラー区分(エラー区分);
+        }
+        if (entity.get取込後期高齢者情報Entity() == null || エラー区分_正常データ.equals(entity.get取込後期高齢者情報Entity().getエラー区分())) {
+            後期高齢者情報インポート用Entityリストの編集_取込形式_全件(entity);
+            後期高齢者情報インポート用Entityリストの編集_取込形式_差分(entity);
+        }
+        if (isデータ存在()) {
             torikomiKokuhoJyohoEntityWriter.insert(後期高齢者情報インポート用Entity);
+            後期高齢者情報インポート用Entity = new TorikomiKokiKoreshaJyohoImportEntity();
         }
     }
 
@@ -160,5 +172,22 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
         後期高齢者情報インポート用Entity.set保険者適用開始日(entity.get現在後期高齢者情報().getHokenshaKaishiYMD());
         後期高齢者情報インポート用Entity.set保険者適用終了日(entity.get現在後期高齢者情報().getHokenshaShuryoYMD());
         後期高齢者情報インポート用Entity.set登録区分(entity.get現在後期高齢者情報().getTorokuKubun());
+    }
+
+    private boolean isデータ存在() {
+        return 後期高齢者情報インポート用Entity.get個人区分コード() != null
+                || 後期高齢者情報インポート用Entity.get保険者適用終了日() != null
+                || 後期高齢者情報インポート用Entity.get保険者適用開始日() != null
+                || 後期高齢者情報インポート用Entity.get個人区分コード() != null
+                || 後期高齢者情報インポート用Entity.get履歴番号() != null
+                || 後期高齢者情報インポート用Entity.get後期高齢保険者番号_市町村() != null
+                || 後期高齢者情報インポート用Entity.get後期高齢保険者番号_広域() != null
+                || 後期高齢者情報インポート用Entity.get後期高齢被保険者番号() != null
+                || 後期高齢者情報インポート用Entity.get資格取得日() != null
+                || 後期高齢者情報インポート用Entity.get資格喪失日() != null
+                || 後期高齢者情報インポート用Entity.get識別コード() != null
+                || 後期高齢者情報インポート用Entity.get登録区分() != null
+                || 後期高齢者情報インポート用Entity.get資格取得事由コード() != null
+                || 後期高齢者情報インポート用Entity.get資格喪失事由コード() != null;
     }
 }

@@ -123,7 +123,7 @@ public class EnkiTsuchishohakenIchiranhyoJyohoReportProcess extends BatchKeyBrea
             出力条件.add(処理見込み日To.concat(parameter.get処理見込み日To().wareki().toDateString()));
         }
         if (parameter.get通知書発行日() != null) {
-            出力条件.add(通知書発行日.concat(parameter.get通知書発行日().wareki().toDateString()));
+            出力条件.add(通知書発行日.concat(parameter.get通知書発行日().get(0).wareki().toDateString()));
         }
         return 出力条件;
     }

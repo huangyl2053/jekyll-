@@ -519,7 +519,13 @@ public class KyufuGengakuHaakuListSakuseiService {
         return 帳票物理名;
     }
 
-    private RString get出力順RStr(IOutputOrder outputOrder) {
+    /**
+     * 出力順を設定します。
+     *
+     * @param outputOrder IOutputOrder
+     * @return 出力順
+     */
+    public RString get出力順RStr(IOutputOrder outputOrder) {
         RStringBuilder 出力順builder = new RStringBuilder();
         出力順builder.append(出力条件_出力順).append(RString.HALF_SPACE);
 

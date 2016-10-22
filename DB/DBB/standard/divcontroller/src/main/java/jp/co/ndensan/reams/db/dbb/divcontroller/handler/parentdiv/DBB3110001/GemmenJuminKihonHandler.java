@@ -440,7 +440,7 @@ public class GemmenJuminKihonHandler {
         過年度2パネル.getTxtGo2().setValue(null);
         減免情報パネル.getLblFuchoGemmemGoTotal().setText(RString.EMPTY);
         減免情報パネル.getLblTokuchoGemmemGoTotal().setText(RString.EMPTY);
-        過年度2パネル.getKiwarigakuPanel3().getMaeTotalGo2().setText(RString.EMPTY);
+        過年度1パネル.getKiwarigakuPanel2().getMaeTotalGo1().setText(RString.EMPTY);
         過年度2パネル.getKiwarigakuPanel3().getMaeTotalGo2().setText(RString.EMPTY);
     }
 

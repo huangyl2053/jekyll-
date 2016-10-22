@@ -116,8 +116,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
     }
 
     private void edit減額対象情報(KyufuGengakuHaakuIchiranReportSource source) {
-        //TODO
-        if (count > NUM_3) {
+        if (count % NUM_14 > 2) {
             return;
         }
         int no1 = getNo(1);
@@ -179,7 +178,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
     }
 
     private int getNo(int no) {
-        return NUM_4 * count + no;
+        return NUM_4 * (count % NUM_14) + no;
     }
 
     private void editHeader(KyufuGengakuHaakuIchiranReportSource source) {
@@ -313,12 +312,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
 
     private void edit収納情報(KyufuGengakuHaakuIchiranReportSource source) {
         List<ShunoJohoEntity> 収納情報リスト = this.給付額減額把握リストEntity.get収納情報リスト();
-        int ページ;
-        if (count < NUM_14) {
-            ページ = 0;
-        } else {
-            ページ = 1;
-        }
+        int ページ = count / NUM_14;
         set年度のヘッダ(source, 収納情報リスト, ページ);
         edit年度1の期(source, 収納情報リスト, ページ);
         edit年度2の期(source, 収納情報リスト, ページ);

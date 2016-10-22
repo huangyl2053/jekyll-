@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -44,18 +43,10 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private boolean 文言設定flag;
     private RString filePath;
     private RString ファイル名称;
-    private OutputParameter<Boolean> 文言_設定_FLAG;
-    /**
-     * プロセス戻り値：対象月データありなしフラグ
-     */
-    public static final RString OUT_HAS_TARGET_DATA;
-
-    static {
-        OUT_HAS_TARGET_DATA = new RString("文言_設定_FLAG");
-    }
     private TorikomiKokiKoreshaJyohoTempProcessParameter processParameter;
     private TorikomiKokiKoreshaJyohoEntity 取込後期高齢者情報Entity;
     private List<LasdecCode> 市町村コードリスト;
+    private static final RString LONG_RSTRING_ZERO = new RString("000000000000000");
     private static final int INDEX_492 = 492;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -63,7 +54,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final int INDEX_17 = 17;
     private static final int INDEX_25 = 25;
     private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
     private static final int INDEX_28 = 28;
     private static final int INDEX_39 = 39;
     private static final int INDEX_47 = 47;
@@ -90,7 +80,10 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final int INDEX_46 = 46;
     private static final int INDEX_54 = 54;
     private static final int INDEX_12 = 12;
+    private static final int INDEX_4 = 4;
     private static final int INDEX_8 = 8;
+    private static final int INDEX_10 = 10;
+    private static final int INDEX_15 = 15;
     private static final RString ＩＦ種類_電算 = new RString("1");
     private static final RString ＩＦ種類_電算２ = new RString("2");
     private static final RString 処理枝番_単一時 = new RString("0000");
@@ -111,6 +104,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString エラーコード_05 = new RString("05");
     private static final RString エラーコード_06 = new RString("06");
     private static final RString エラーコード_07 = new RString("07");
+
     private static final RString エラーコード_11 = new RString("11");
     private static final RString エラーコード_52 = new RString("52");
     private static final RString エラーコード_53 = new RString("53");
@@ -141,6 +135,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString 文言_資格取得日資格喪失日 = new RString("項目設定エラー：資格取得日＞資格喪失日");
     private static final RString 文言_保険者開始日保険者終了日 = new RString("項目設定エラー：保険者開始日＞保険者終了日");
     private static final RString エラー区分_1 = new RString("1");
+    private static final RString エラー区分_0 = new RString("0");
     private static final RString エラーコード_51 = new RString("51");
     private static final RString 履歴番号_0001 = new RString("0001");
     private static final RString 日付_99999999 = new RString("99999999");
@@ -179,7 +174,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         FilesystemPath filesystemPath = new FilesystemPath(tmpPath);
         filePath = new RString(filesystemPath.getCanonicalPath()).concat(ファイル名称);
         市町村コードリスト = getMapper(IKokikoreishaShikakuIdoInMapper.class).get構成市町村マスタ();
-        文言_設定_FLAG = new OutputParameter<>();
     }
 
     @Override
@@ -196,7 +190,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     @Override
     protected void process(RString result) {
         取込後期高齢者情報Entity = new TorikomiKokiKoreshaJyohoEntity();
-//        取込後期高齢者情報Entity.setエラーコード(エラーコード_0);
+        取込後期高齢者情報Entity.setエラー区分(エラー区分_0);
         if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
             int バイト数 = 0;
             try {
@@ -232,12 +226,8 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
 
             エラーチェック処理_電算2();
         }
+        取込後期高齢者情報Entity.set文言設定flag(文言設定flag);
         一時tableWriter.insert(取込後期高齢者情報Entity);
-    }
-
-    @Override
-    protected void afterExecute() {
-        文言_設定_FLAG.setValue(文言設定flag);
     }
 
     private RString get指定バイト数な文字列(int 指定バイト数, RString 判断文字列) {
@@ -416,6 +406,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         エラーチェック処理_電算２用部分();
         エラーチェック処理_電算２用部分1();
         エラーチェック処理_電算２用部分2();
+        エラーチェック処理_電算２用部分3();
     }
 
     private void エラーチェック処理_電算２用部分() {
@@ -450,7 +441,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
-
     }
 
     private void エラーチェック処理_電算２用部分1() {
@@ -485,26 +475,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             取込後期高齢者情報Entity.setエラーコード(エラーコード_64);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_性別コード);
-                文言設定flag = false;
-            }
-            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
-        }
-        RString 現住所 = 取込後期高齢者情報Entity.get住所();
-        if (!Pattern.compile(正則表現_全角空白.toString()).matcher(現住所).matches()
-                && !Pattern.compile(正則表現_半角空白.toString()).matcher(現住所).matches()) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_65);
-            if (文言設定flag) {
-                取込後期高齢者情報Entity.setエラー文言(コード文言_現住所);
-                文言設定flag = false;
-            }
-            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
-        }
-        RString 市町村コード = 取込後期高齢者情報Entity.get市町村コード();
-        if (!Pattern.compile(正則表現_全角空白.toString()).matcher(市町村コード).matches()
-                && !Pattern.compile(正則表現_半角空白.toString()).matcher(市町村コード).matches() && !is構成市町村マスタあり(市町村コード)) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_66);
-            if (文言設定flag) {
-                取込後期高齢者情報Entity.setエラー文言(コード文言_市町村コード);
                 文言設定flag = false;
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
@@ -548,6 +518,29 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         }
     }
 
+    private void エラーチェック処理_電算２用部分3() {
+        RString 現住所 = 取込後期高齢者情報Entity.get住所();
+        if (RStringUtil.is全角Only(現住所)
+                && !Pattern.compile(正則表現_半角空白.toString()).matcher(現住所).matches()) {
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_65);
+            if (文言設定flag) {
+                取込後期高齢者情報Entity.setエラー文言(コード文言_現住所);
+                文言設定flag = false;
+            }
+            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
+        }
+        RString 市町村コード = 取込後期高齢者情報Entity.get市町村コード();
+        if (!RStringUtil.is全角Only(市町村コード)
+                && !Pattern.compile(正則表現_半角空白.toString()).matcher(市町村コード).matches() && !is構成市町村マスタあり(市町村コード)) {
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_66);
+            if (文言設定flag) {
+                取込後期高齢者情報Entity.setエラー文言(コード文言_市町村コード);
+                文言設定flag = false;
+            }
+            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
+        }
+    }
+
     private void setEntity(RString 指定な文字列) {
         取込後期高齢者情報Entity.set市町村コード(get指定位置な文字列(指定な文字列, INDEX_0, INDEX_6));
         取込後期高齢者情報Entity.set住民コード(get指定位置な文字列(指定な文字列, INDEX_6, INDEX_12));
@@ -561,7 +554,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
 
     private void setEntityDensanNi(RString 指定な文字列) {
         取込後期高齢者情報Entity.set個人区分コード(get指定位置な文字列(指定な文字列, INDEX_0, INDEX_1));
-        取込後期高齢者情報Entity.set住民コード(get指定位置な文字列(指定な文字列, INDEX_1, INDEX_16));
+        取込後期高齢者情報Entity.set住民コード(住民コード取得(get指定位置な文字列(指定な文字列, INDEX_1, INDEX_16)));
         取込後期高齢者情報Entity.set後期高齢被保険者番号(get指定位置な文字列(指定な文字列, INDEX_17, INDEX_8));
         取込後期高齢者情報Entity.set資格取得事由コード(get指定位置な文字列(指定な文字列, INDEX_25, INDEX_3));
         取込後期高齢者情報Entity.set資格取得年月日(get指定位置な文字列(指定な文字列, INDEX_28, INDEX_8));
@@ -591,20 +584,16 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     }
 
     private boolean is構成市町村マスタあり(RString 市町村コード) {
-        if (ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
-            for (LasdecCode lasdecCode : 市町村コードリスト) {
-                if (市町村コード.equals(lasdecCode.value().substring(0, INDEX_4))) {
-                    return true;
-                }
-            }
-        }
-        if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
-            for (LasdecCode lasdecCode : 市町村コードリスト) {
-                if (市町村コード.equals(lasdecCode.value())) {
-                    return true;
-                }
+        for (LasdecCode lasdecCode : 市町村コードリスト) {
+            if (市町村コード.equals(lasdecCode.value())) {
+                return true;
             }
         }
         return false;
+    }
+
+    private RString 住民コード取得(RString 住民コード) {
+        RString code = 住民コード.substring(INDEX_2, INDEX_10).trim();
+        return LONG_RSTRING_ZERO.substring(code.length(), INDEX_15).concat(code);
     }
 }
