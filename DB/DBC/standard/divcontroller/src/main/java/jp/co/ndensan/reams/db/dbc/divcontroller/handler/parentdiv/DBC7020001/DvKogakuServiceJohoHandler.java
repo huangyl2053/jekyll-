@@ -535,9 +535,15 @@ public class DvKogakuServiceJohoHandler {
         if (!RString.isNullOrEmpty(申請区分)) {
             div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShinseiKubun().setSelectedKey(申請区分);
         }
-        RString 支払先 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_SHIHARAISAKI);
-        if (!RString.isNullOrEmpty(支払先)) {
-            div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().setSelectedKey(支払先);
+        FlexibleYearMonth 対象者受取年月From = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_TAISHOSHAUKETORIYMFROM);
+        if (対象者受取年月From != null && !対象者受取年月From.isEmpty()) {
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuTaishoshaUketoriYM().setFromValue(
+                    new RDate(対象者受取年月From.getYearValue(), 対象者受取年月From.getMonthValue(), 対象者受取年月From.getLastDay()));
+        }
+        FlexibleYearMonth 対象者受取年月To = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_TAISHOSHAUKETORIYMTO);
+        if (対象者受取年月To != null && !対象者受取年月To.isEmpty()) {
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuTaishoshaUketoriYM().setToValue(
+                    new RDate(対象者受取年月To.getYearValue(), 対象者受取年月To.getMonthValue(), 対象者受取年月To.getLastDay()));
         }
         pamaRestorePart2(restoreBatchParameterMap);
         pamaRestorePart3(restoreBatchParameterMap);
@@ -569,6 +575,10 @@ public class DvKogakuServiceJohoHandler {
     }
 
     private void pamaRestorePart2(BatchParameterMap restoreBatchParameterMap) {
+        RString 支払先 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_SHIHARAISAKI);
+        if (!RString.isNullOrEmpty(支払先)) {
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().setSelectedKey(支払先);
+        }
         RString 金融機関コード = restoreBatchParameterMap.getParameterValue(RString.class, KEY_KIYUKIKANCODE);
         RString 金融機関名称 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_KIYUKIKANNAME);
         KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
@@ -606,17 +616,6 @@ public class DvKogakuServiceJohoHandler {
             div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKokuhorenKetteiYM().setToValue(
                     new RDate(国保連決定年月To.getYearValue(), 国保連決定年月To.getMonthValue(), 国保連決定年月To.getLastDay()));
         }
-        FlexibleYearMonth 対象者受取年月From = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_TAISHOSHAUKETORIYMFROM);
-        if (対象者受取年月From != null && !対象者受取年月From.isEmpty()) {
-            div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuTaishoshaUketoriYM().setFromValue(
-                    new RDate(対象者受取年月From.getYearValue(), 対象者受取年月From.getMonthValue(), 対象者受取年月From.getLastDay()));
-        }
-        FlexibleYearMonth 対象者受取年月To = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_TAISHOSHAUKETORIYMTO);
-        if (対象者受取年月To != null && !対象者受取年月To.isEmpty()) {
-            div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuTaishoshaUketoriYM().setToValue(
-                    new RDate(対象者受取年月To.getYearValue(), 対象者受取年月To.getMonthValue(), 対象者受取年月To.getLastDay()));
-        }
-
     }
 
     private void pamaRestorePart3(BatchParameterMap restoreBatchParameterMap) {
@@ -653,9 +652,7 @@ public class DvKogakuServiceJohoHandler {
         if (日付スラッシュ付加) {
             csv編集方法リスト.add(日付スラッシュ);
         }
-        if (!csv編集方法リスト.isEmpty()) {
-            div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
-        }
+        div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
         int モード = restoreBatchParameterMap.getParameterValue(int.class, KEY_MODO);
         Long 出力順 = restoreBatchParameterMap.getParameterValue(Long.class, KEY_SHUTSURYOKUJU);
         if (出力順 != null && モード == NUM_1) {

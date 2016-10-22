@@ -103,7 +103,7 @@ public class DvKogakuServiceJoho {
     /**
      * 条件を保存するボタンのメソッドです。
      *
-     * @param div HanyoListFukaDaichoParamDiv
+     * @param div DvKogakuServiceJohoDiv
      * @return ResponseData
      */
     public ResponseData<BatchParameterMap> onClick_btnKogakuParamSave(DvKogakuServiceJohoDiv div) {
@@ -116,7 +116,7 @@ public class DvKogakuServiceJoho {
     /**
      * 条件を復元するボタンのメソッドです。
      *
-     * @param div HanyoListFukaDaichoParamDiv
+     * @param div DvKogakuServiceJohoDiv
      * @return ResponseData
      */
     public ResponseData<DvKogakuServiceJohoDiv> onClick_btnKogakuParamRestore(DvKogakuServiceJohoDiv div) {
