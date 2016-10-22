@@ -106,9 +106,6 @@ public class JogaiTokureiSyaJyohouUpdateProcess extends BatchProcessBase<Teyikyo
 
     @Override
     protected void afterExecute() {
-        TokuteiKojinJohoTeikyoManager.createInstance().update特定個人情報提供(new RString("\"").concat(TABLE_中間DB提供基本情報).concat("\""),
-                processParameter.get新規異動区分(), TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
-                DataSetNo._0102住所地特例情報.getコード(), processParameter.get版番号());
         List<TokuteiKojinJohoHanKanri> businessList = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(
                 RString.EMPTY, TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
                 DataSetNo._0102住所地特例情報.getコード(), FlexibleDate.EMPTY);
