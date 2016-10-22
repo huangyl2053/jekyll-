@@ -144,16 +144,29 @@ public class Ninteishinseibi {
                         検索件数);
         SearchResult<NiTeiCyoSaiChiRanBusiness> business = manager.get認定調査一覧(niTeiCyoSaiChiRanParameter);
         if (!business.records().isEmpty()) {
-            NinteichosahyoGaikyoChosaRelateBusiness 認定調査 = manager.get認定調査(niTeiCyoSaiChiRanParameter).records().get(0);
-            ViewStateHolder.put(ViewStateKeys.認定調査票基本調査_調査項目, Models.create(認定調査.get認定調査票基本調査_調査項目Lsit()));
-            ViewStateHolder.put(ViewStateKeys.認定調査票_概況調査, Models.create(認定調査.get認定調査票_概況調査Lsit()));
-            ViewStateHolder.put(ViewStateKeys.認定調査票_概況特記, Models.create(認定調査.get認定調査票_概況特記Lsit()));
-            ViewStateHolder.put(ViewStateKeys.認定調査票_基本調査, Models.create(認定調査.get認定調査票_基本調査Lsit()));
-            ViewStateHolder.put(ViewStateKeys.認定調査票概況調査_記入項目, Models.create(認定調査.get認定調査票概況調査記入項目Lsit()));
-            ViewStateHolder.put(ViewStateKeys.認定調査票概況調査サービスの状況, Models.create(認定調査.get認定調査票概況調査サービスの状況Lsit()));
-            ViewStateHolder.put(ViewStateKeys.認定調査票概況調査サービスの状況フラグ, Models.create(認定調査.get認定調査票概況調査サービスの状況フラグLsit()));
-            ViewStateHolder.put(ViewStateKeys.認定調査票概況調査施設利用, Models.create(認定調査.get認定調査票概況調査施設利用Lsit()));
-            ViewStateHolder.put(ViewStateKeys.認定調査票_特記情報, Models.create(認定調査.get認定調査票_特記情報Lsit()));
+            List<NinteichosahyoGaikyoChosaRelateBusiness> relateBusiness = manager.get認定調査(niTeiCyoSaiChiRanParameter).records();
+            if (!relateBusiness.isEmpty()) {
+                NinteichosahyoGaikyoChosaRelateBusiness 認定調査 = relateBusiness.get(0);
+                ViewStateHolder.put(ViewStateKeys.認定調査票基本調査_調査項目, Models.create(認定調査.get認定調査票基本調査_調査項目Lsit()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票_概況調査, Models.create(認定調査.get認定調査票_概況調査Lsit()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票_概況特記, Models.create(認定調査.get認定調査票_概況特記Lsit()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票_基本調査, Models.create(認定調査.get認定調査票_基本調査Lsit()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票概況調査_記入項目, Models.create(認定調査.get認定調査票概況調査記入項目Lsit()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票概況調査サービスの状況, Models.create(認定調査.get認定調査票概況調査サービスの状況Lsit()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票概況調査サービスの状況フラグ, Models.create(認定調査.get認定調査票概況調査サービスの状況フラグLsit()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票概況調査施設利用, Models.create(認定調査.get認定調査票概況調査施設利用Lsit()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票_特記情報, Models.create(認定調査.get認定調査票_特記情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.認定調査票基本調査_調査項目, Models.create(new ArrayList()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票_概況調査, Models.create(new ArrayList()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票_概況特記, Models.create(new ArrayList()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票_基本調査, Models.create(new ArrayList()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票概況調査_記入項目, Models.create(new ArrayList()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票概況調査サービスの状況, Models.create(new ArrayList()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票概況調査サービスの状況フラグ, Models.create(new ArrayList()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票概況調査施設利用, Models.create(new ArrayList()));
+                ViewStateHolder.put(ViewStateKeys.認定調査票_特記情報, Models.create(new ArrayList()));
+            }
         } else {
             ViewStateHolder.put(ViewStateKeys.認定調査票基本調査_調査項目, Models.create(new ArrayList()));
             ViewStateHolder.put(ViewStateKeys.認定調査票_概況調査, Models.create(new ArrayList()));

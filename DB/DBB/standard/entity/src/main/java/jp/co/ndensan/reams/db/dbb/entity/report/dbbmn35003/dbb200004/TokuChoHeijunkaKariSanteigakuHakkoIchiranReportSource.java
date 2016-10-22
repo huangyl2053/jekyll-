@@ -30,19 +30,19 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource implements IR
     public static final RString 改頁_納組コード;
 
     static {
-        改頁_郵便 = new RString("listLower_2");
+        改頁_郵便 = new RString("listUpper_2");
         改頁_町域コード = new RString("atena_choikiCode");
         改頁_番地コード = new RString("atesaki_banchi");
-        改頁_行政区コード = new RString("listUpper_4");
+        改頁_行政区コード = new RString("atena_gyoseikuCode");
         改頁_地区１ = new RString("atesaki_chiku1");
         改頁_地区２ = new RString("atesaki_chiku2");
         改頁_地区３ = new RString("atesaki_chiku3");
-        改頁_世帯コード = new RString("listUpper_4");
+        改頁_世帯コード = new RString("listLower_2");
         改頁_識別コード = new RString("atena_shikibetsuCode");
         改頁_氏名５０音カナ = new RString("atena_kanaMeisho");
         改頁_生年月日 = new RString("listUpper_6");
         改頁_性別 = new RString("listUpper_5");
-        改頁_市町村コード = new RString("hokenshaNo");
+        改頁_市町村コード = new RString("shichosonCode");
         改頁_被保険者番号 = new RString("koseigo_hihokenshaNo");
         改頁_年金コード = new RString("nenkinTokuchoKaifuJoho_nenkinCode");
         改頁_納組コード = new RString("caT0714SeikyuHoho_nokumiCode");
@@ -127,7 +127,7 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource implements IR
     public RString atesaki_chiku3;
     @ReportItem(name = "atena_shikibetsuCode", order = 37)
     public RString atena_shikibetsuCode;
-    @ReportItem(name = "atena_kanaShimei", order = 38)
+    @ReportItem(name = "atena_kanaMeisho", order = 38)
     public RString atena_kanaMeisho;
     @ReportItem(name = "koseigo_hihokenshaNo", order = 39)
     public RString koseigo_hihokenshaNo;
@@ -135,5 +135,9 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource implements IR
     public RString nenkinTokuchoKaifuJoho_nenkinCode;
     @ReportItem(name = "caT0714SeikyuHoho_nokumiCode", order = 41)
     public RString caT0714SeikyuHoho_nokumiCode;
+    @ReportItem(name = "atena_gyoseikuCode", order = 42)
+    public RString atena_gyoseikuCode;
+    @ReportItem(name = "shichosonCode", order = 43)
+    public RString shichosonCode;
 // </editor-fold>
 }

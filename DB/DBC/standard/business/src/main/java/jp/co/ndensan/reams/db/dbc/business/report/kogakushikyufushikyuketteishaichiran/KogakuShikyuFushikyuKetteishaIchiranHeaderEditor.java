@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteishaichiran;
 
-import java.util.Map;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiChohyoDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufukettei.KogakuShikyuFushikyuKetteishaIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -24,14 +24,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class KogakuShikyuFushikyuKetteishaIchiranHeaderEditor implements IKogakuShikyuFushikyuKetteishaIchiranEditor {
 
     private final KogakuKyufuKetteiChohyoDataEntity 帳票出力対象データ;
-    private final Map<RString, RString> 出力順Map;
+    private final List<RString> 出力項目リスト;
+    private final List<RString> 改頁項目リスト;
     private final RDateTime 作成日時;
-
-    private static final RString KEY_並び順の２件目 = new RString("KEY_並び順の２件目");
-    private static final RString KEY_並び順の３件目 = new RString("KEY_並び順の３件目");
-    private static final RString KEY_並び順の４件目 = new RString("KEY_並び順の４件目");
-    private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
-    private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
+    private static final int NUM_0 = 0;
+    private static final int NUM_1 = 1;
+    private static final int NUM_2 = 2;
+    private static final int NUM_3 = 3;
+    private static final int NUM_4 = 4;
 
     private static final RString SAKUSEI = new RString("作成");
 
@@ -39,13 +39,15 @@ public class KogakuShikyuFushikyuKetteishaIchiranHeaderEditor implements IKogaku
      * コンストラクタです
      *
      * @param 帳票出力対象データ KogakuKyufuKetteiChohyoDataEntity
-     * @param 出力順Map Map<RString, RString>
+     * @param 出力項目リスト List<RString>
+     * @param 改頁項目リスト List<RString>
      * @param 作成日時 RDateTime
      */
     public KogakuShikyuFushikyuKetteishaIchiranHeaderEditor(KogakuKyufuKetteiChohyoDataEntity 帳票出力対象データ,
-            Map<RString, RString> 出力順Map, RDateTime 作成日時) {
+            List<RString> 出力項目リスト, List<RString> 改頁項目リスト, RDateTime 作成日時) {
         this.帳票出力対象データ = 帳票出力対象データ;
-        this.出力順Map = 出力順Map;
+        this.出力項目リスト = 出力項目リスト;
+        this.改頁項目リスト = 改頁項目リスト;
         this.作成日時 = 作成日時;
     }
 
@@ -61,21 +63,25 @@ public class KogakuShikyuFushikyuKetteishaIchiranHeaderEditor implements IKogaku
             source.shoKisaiHokenshaNo = 帳票出力対象データ.getKetteiTemp().get証記載保険者番号().getColumnValue();
         }
         source.shoKisaiHokenshaName = 帳票出力対象データ.getKetteiTemp().get証記載保険者名();
-        source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
-        source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
-        source.shutsuryokujun3 = get並び順(KEY_並び順の４件目);
-        source.shutsuryokujun4 = get並び順(KEY_並び順の５件目);
-        source.shutsuryokujun5 = get並び順(KEY_並び順の６件目);
-        source.kaipage1 = get並び順(KEY_並び順の２件目);
-        source.kaipage2 = get並び順(KEY_並び順の３件目);
-        source.kaipage3 = get並び順(KEY_並び順の４件目);
-        source.kaipage4 = get並び順(KEY_並び順の５件目);
-        source.kaipage5 = get並び順(KEY_並び順の６件目);
+        source.shutsuryokujun1 = get並び順(NUM_0);
+        source.shutsuryokujun2 = get並び順(NUM_1);
+        source.shutsuryokujun3 = get並び順(NUM_2);
+        source.shutsuryokujun4 = get並び順(NUM_3);
+        source.shutsuryokujun5 = get並び順(NUM_4);
+        source.kaipage1 = get改頁(NUM_0);
+        source.kaipage2 = get改頁(NUM_1);
+        source.kaipage3 = get改頁(NUM_2);
+        source.kaipage4 = get改頁(NUM_3);
+        source.kaipage5 = get改頁(NUM_4);
         return source;
     }
 
-    private RString get並び順(RString 並び順Key) {
-        return 出力順Map.containsKey(並び順Key) ? 出力順Map.get(並び順Key) : RString.EMPTY;
+    private RString get改頁(int index) {
+        return index < 改頁項目リスト.size() ? 改頁項目リスト.get(index) : RString.EMPTY;
+    }
+
+    private RString get並び順(int index) {
+        return index < 出力項目リスト.size() ? 出力項目リスト.get(index) : RString.EMPTY;
     }
 
 }

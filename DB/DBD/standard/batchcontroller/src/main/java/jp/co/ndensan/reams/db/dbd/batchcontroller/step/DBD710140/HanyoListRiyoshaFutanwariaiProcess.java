@@ -336,7 +336,7 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
                     true, true, PageBreakType.設定なし, 0, 0));
         }
         RString 出力順 = MyBatisOrderByClauseCreator.create(HanyoListRiyoshaFutanwariaiOrderby.class, order);
-        return 出力順.concat(",利用者負担割合_履歴番号，利用者負担割合_枝番号");
+        return 出力順.concat(",利用者負担割合_履歴番号,利用者負担割合_枝番号");
     }
 
     private PersonalData toPersonalData(HanyoRisutoRiyoshaFutanWariaiEntity entity) {

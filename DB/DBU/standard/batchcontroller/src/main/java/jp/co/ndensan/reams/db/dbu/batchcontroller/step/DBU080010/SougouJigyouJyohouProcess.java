@@ -81,7 +81,7 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
         entity.setTeikyoNaiyo04(toRString(relateEntity.getHihokenshaKaishiYMD()));
         entity.setMisetteiJiyu04(RString.EMPTY);
         entity.setTeikyoNaiyo05(toRString(relateEntity.getHihokenshaShuryoYMD()));
-        if (relateEntity.getHihokenshaShuryoYMD() == null && relateEntity.getHihokenshaShuryoYMD().isEmpty()) {
+        if (relateEntity.getHihokenshaShuryoYMD() == null || relateEntity.getHihokenshaShuryoYMD().isEmpty()) {
             entity.setMisetteiJiyu05(NOTACCEPTABLE);
         } else {
             entity.setMisetteiJiyu05(RString.EMPTY);

@@ -205,7 +205,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                 RString 郵便番号2 = 振込明細一時TBL.getYubinNo().getYubinNo().substring(LISTINDEX_3);
                 source.listUpper_3 = 郵便番号1.concat(半角ハイフン).concat(郵便番号2);
             }
-            if (!Furikomi_ShihraiHohoShitei.口座.equals(支払方法)) {
+            if (!支払方法_口座.equals(一覧表用データ.get振込明細一時TBL().getShiharaiHohoKubunCode())) {
                 if (振込明細一時TBL.getKinyuKikanCode() != null && 振込明細一時TBL.getKinyuKikanShitenCode() != null) {
                     source.listUpper_4 = 振込明細一時TBL.getKinyuKikanCode().value().
                             concat(半角ハイフン).concat(振込明細一時TBL.getKinyuKikanShitenCode().value());
@@ -267,7 +267,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                 source.listLower_1 = 振込明細一時Data.getJusho().value().substring(0, LISTINDEX_20);
             }
 
-            if (!Furikomi_ShihraiHohoShitei.口座.equals(支払方法)) {
+            if (!支払方法_口座.equals(一覧表用データ.get振込明細一時TBL().getShiharaiHohoKubunCode())) {
                 source.listLower_2 = 振込明細一時Data.getKinyuKikanShitenName();
                 if (振込明細一時Data.getKozaMeiginin() != null) {
                     if (振込明細一時Data.getKozaMeiginin().value().length() <= LISTINDEX_24) {
@@ -325,7 +325,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     }
 
     private void set様式連番_1のその他帳票データ(FurikomiMeisaiIchiranDetailReportSource source) {
-        if (Furikomi_ShihraiHohoShitei.口座.equals(支払方法)) {
+        if (支払方法_口座.equals(一覧表用データ.get振込明細一時TBL().getShiharaiHohoKubunCode())) {
             FurikomiDetailTempTableEntity 振込明細一時Data = 一覧表用データ.get振込明細一時TBL();
             if (振込明細一時Data.getShiharaiBasho() != null) {
                 source.listMadoguchiUpper_1 = 振込明細一時Data.getShiharaiBasho();

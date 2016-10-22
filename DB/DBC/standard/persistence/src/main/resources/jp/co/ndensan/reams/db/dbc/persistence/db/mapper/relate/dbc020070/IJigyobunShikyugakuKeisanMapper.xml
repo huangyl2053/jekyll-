@@ -392,10 +392,11 @@
             <if test="orderBy != null">
                 ${ orderBy },
             </if>
-            "ShikyugakuUpdateTemp"."hihokenshaNo",
-            "ShikyugakuUpdateTemp"."taishoNendo",
-            "ShikyugakuUpdateTemp"."shikyuShinseishoSeiriNo",
-            "ShikyugakuUpdateTemp"."shoKisaiHokenshaNo"
+            "ShikyugakuUpdateTemp"."hihokenshaNo" ASC,
+            "ShikyugakuUpdateTemp"."taishoNendo" ASC,
+            "ShikyugakuUpdateTemp"."shikyuShinseishoSeiriNo" ASC,
+            "ShikyugakuUpdateTemp"."shoKisaiHokenshaNo" ASC,
+            "ShikyugakuUpdateTemp"."kubun" ASC
     </select>
     
     <select resultOrdered="true" id="get処理結果確認リスト情報" resultMap="ResultMap_ShikyugakuUpdateTempEntity" fetchSize="500">

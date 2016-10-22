@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteishaichiran;
 
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiChohyoDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufukettei.KogakuShikyuFushikyuKetteishaIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -23,7 +22,8 @@ public class KogakuShikyuFushikyuKetteishaIchiranReport extends Report<KogakuShi
 
     private final List<KogakuKyufuKetteiChohyoDataEntity> 帳票出力対象データリスト;
     private final List<RString> 住所List;
-    private final Map<RString, RString> 出力順Map;
+    private final List<RString> 出力項目リスト;
+    private final List<RString> 改頁項目リスト;
     private final RDateTime 作成日時;
 
     /**
@@ -31,14 +31,16 @@ public class KogakuShikyuFushikyuKetteishaIchiranReport extends Report<KogakuShi
      *
      * @param 帳票出力対象データリスト List<KogakuKyufuKetteiChohyoDataEntity>
      * @param 住所List List<RString>
-     * @param 出力順Map Map<RString, RString>
+     * @param 出力項目リスト List<RString>
+     * @param 改頁項目リスト List<RString>
      * @param 作成日時 RDateTime
      */
     public KogakuShikyuFushikyuKetteishaIchiranReport(List<KogakuKyufuKetteiChohyoDataEntity> 帳票出力対象データリスト,
-            List<RString> 住所List, Map<RString, RString> 出力順Map, RDateTime 作成日時) {
+            List<RString> 住所List, List<RString> 出力項目リスト, List<RString> 改頁項目リスト, RDateTime 作成日時) {
         this.帳票出力対象データリスト = 帳票出力対象データリスト;
         this.住所List = 住所List;
-        this.出力順Map = 出力順Map;
+        this.出力項目リスト = 出力項目リスト;
+        this.改頁項目リスト = 改頁項目リスト;
         this.作成日時 = 作成日時;
     }
 
@@ -47,7 +49,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranReport extends Report<KogakuShi
         for (int i = 0; i < 帳票出力対象データリスト.size(); i++) {
             IKogakuShikyuFushikyuKetteishaIchiranEditor headerEditor
                     = new KogakuShikyuFushikyuKetteishaIchiranHeaderEditor(帳票出力対象データリスト.get(i),
-                            出力順Map, 作成日時);
+                            出力項目リスト, 改頁項目リスト, 作成日時);
             IKogakuShikyuFushikyuKetteishaIchiranEditor bodyEditor
                     = new KogakuShikyuFushikyuKetteishaIchiranBodyEditor(帳票出力対象データリスト.get(i),
                             住所List.get(i));

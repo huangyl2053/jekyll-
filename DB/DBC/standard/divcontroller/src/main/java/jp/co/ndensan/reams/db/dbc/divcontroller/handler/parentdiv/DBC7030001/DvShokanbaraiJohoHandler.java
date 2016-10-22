@@ -460,9 +460,7 @@ public class DvShokanbaraiJohoHandler {
         if (日付スラッシュ付加) {
             csv編集方法リスト.add(日付スラッシュ);
         }
-        if (!csv編集方法リスト.isEmpty()) {
-            div.getDvShokanbaraiParam().getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
-        }
+        div.getDvShokanbaraiParam().getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
         RString 出力順 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_出力順);
         if (出力順 != null && !出力順.isEmpty()) {
             div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().load(SubGyomuCode.DBC介護給付, REPORTID,

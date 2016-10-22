@@ -155,10 +155,10 @@ public class FukaKeisanFath {
         kiwariKeisanInput.set現在期区分(Integer.parseInt(本算定期と月の対応.get月処理区分().get区分().toString()));
         kiwariKeisanInput.set特徴停止可能期(get特徴停止可能期(param.get調定日時().getDate()));
 
-        kiwariKeisanInput.set現在特徴期区分(Integer.parseInt(hantei.find特徴更正月(param.get調定日時().getDate())
-                .get月処理区分().get区分().toString()));
+        Kitsuki 特徴更正月期と月の対応 = hantei.find特徴更正月(param.get調定日時().getDate());
+        kiwariKeisanInput.set現在特徴期区分(Integer.parseInt(特徴更正月期と月の対応.get月処理区分().get区分().toString()));
 
-        Kitsuki 過年度期と月の対応 = hantei.find更正月_本算定期(param.get調定日時().getDate());
+        Kitsuki 過年度期と月の対応 = hantei.find過年度更正月(param.get調定日時().getDate());
         kiwariKeisanInput.set現在過年期(new RString(過年度期と月の対応.get期AsInt()));
         kiwariKeisanInput.set現在過年期区分(過年度期と月の対応.get月処理区分().get区分());
 
@@ -486,8 +486,7 @@ public class FukaKeisanFath {
                     break;
                 }
             }
-        } else if (ChoteiJiyuCode.資格喪失特徴中止.getコード().equals(param.get徴収方法の情報_更正前().get特別徴収停止事由コード())
-                && param.get資格の情報().get資格喪失年月日() != null && !param.get資格の情報().get資格喪失年月日().isEmpty()) {
+        } else if (param.get資格の情報().get資格喪失年月日() != null && !param.get資格の情報().get資格喪失年月日().isEmpty()) {
             set資格喪失した場合(kiwariKeisanInput, param);
         } else {
             if (!特別徴収_厚生労働省.equals(param.get徴収方法の情報_更正前().get徴収方法11月())

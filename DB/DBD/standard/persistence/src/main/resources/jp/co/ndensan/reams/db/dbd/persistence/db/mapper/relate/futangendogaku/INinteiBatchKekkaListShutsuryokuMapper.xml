@@ -21,7 +21,7 @@
         <result property="合計所得金額" column="合計所得金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="世帯課税区分" column="世帯課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="今回認定結果.shoKisaiHokenshaNo" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
-        <result property="今回認定結果.hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="今回認定結果.hihokenshaNo" column="今回_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="今回認定結果.rirekiNo" column="履歴番号" />
         <result property="今回認定結果.kyusochishaKubun" column="旧措置者区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="今回認定結果.shinseiRiyuKubun" column="申請理由区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -104,7 +104,7 @@
              + 所得等情報."非課税年金勘案額" ) AS 合計所得金額,
             所得等情報."世帯課税区分" AS 世帯課税区分,
             今回認定結果."shoKisaiHokenshaNo" AS 証記載保険者番号,
-            今回認定結果."hihokenshaNo" AS 被保険者番号,
+            今回認定結果."hihokenshaNo" AS 今回_被保険者番号,
             今回認定結果."rirekiNo" AS 履歴番号,
             今回認定結果."kyusochishaKubun" AS 旧措置者区分,
             今回認定結果."shinseiRiyuKubun" AS 申請理由区分,
@@ -163,7 +163,7 @@
             ON  今回認定結果."hihokenshaNo" = 所得等情報."被保険者番号"
         LEFT JOIN(
             SELECT
-                temp利用者."hihokenshaNo" AS 被保険者番号,
+                temp利用者."hihokenshaNo" AS temp_被保険者番号,
                 (CASE WHEN temp利用者."ketteiKubun" IS NULL OR temp利用者."ketteiKubun" = ''
                 THEN true
                 ELSE false
@@ -176,10 +176,10 @@
                 AND #{認定期間_開始日} <![CDATA[<=]]> temp利用者."tekiyoKaishiYMD"
                 AND  temp利用者."tekiyoShuryoYMD" <![CDATA[<=]]> #{認定期間_終了日})
         ) AS 利用減額
-            ON 今回認定結果."hihokenshaNo" = 利用減額.被保険者番号 
+            ON 今回認定結果."hihokenshaNo" = 利用減額.temp_被保険者番号
         LEFT JOIN(
             SELECT
-                temp訪問."hihokenshaNo" AS 被保険者番号,
+                temp訪問."hihokenshaNo" AS temp_被保険者番号,
                 (CASE WHEN temp訪問."ketteiKubun" IS NULL OR temp訪問."ketteiKubun" = ''
                 THEN true
                 ELSE false
@@ -192,10 +192,10 @@
                 AND #{認定期間_開始日} <![CDATA[<=]]> temp訪問."tekiyoKaishiYMD"
                 AND  temp訪問."tekiyoShuryoYMD" <![CDATA[<=]]> #{認定期間_終了日})
         ) AS 訪問減額
-            ON 今回認定結果."hihokenshaNo" = 訪問減額.被保険者番号
+            ON 今回認定結果."hihokenshaNo" = 訪問減額.temp_被保険者番号
        LEFT JOIN(
             SELECT
-                temp社福."hihokenshaNo" AS 被保険者番号,
+                temp社福."hihokenshaNo" AS temp_被保険者番号,
                 (CASE WHEN temp社福."ketteiKubun" IS NULL OR temp社福."ketteiKubun" = ''
                 THEN true
                 ELSE false
@@ -208,10 +208,10 @@
                 AND #{認定期間_開始日} <![CDATA[<=]]> temp社福."tekiyoKaishiYMD"
                 AND  temp社福."tekiyoShuryoYMD" <![CDATA[<=]]> #{認定期間_終了日})
         ) AS 社福軽減
-            ON 今回認定結果."hihokenshaNo" = 社福軽減.被保険者番号
+            ON 今回認定結果."hihokenshaNo" = 社福軽減.temp_被保険者番号
        LEFT JOIN(
             SELECT
-                temp特地."hihokenshaNo" AS 被保険者番号,
+                temp特地."hihokenshaNo" AS temp_被保険者番号,
                 (CASE WHEN temp特地."ketteiKubun" IS NULL OR temp特地."ketteiKubun" = ''
                 THEN true
                 ELSE false
@@ -224,7 +224,7 @@
                 AND #{認定期間_開始日} <![CDATA[<=]]> temp特地."tekiyoKaishiYMD"
                 AND  temp特地."tekiyoShuryoYMD" <![CDATA[<=]]> #{認定期間_終了日})
         ) AS 特地減免
-            ON 今回認定結果."hihokenshaNo" = 特地減免.被保険者番号
+            ON 今回認定結果."hihokenshaNo" = 特地減免.temp_被保険者番号
         )
         
         SELECT
