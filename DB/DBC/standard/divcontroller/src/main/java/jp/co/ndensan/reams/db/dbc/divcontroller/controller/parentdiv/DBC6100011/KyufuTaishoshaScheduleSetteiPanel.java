@@ -122,11 +122,17 @@ public class KyufuTaishoshaScheduleSetteiPanel {
         List<KokuhorenInterfaceKanri> スケジュール履歴情報List
                 = ViewStateHolder.get(ViewStateKeys.スケジュール履歴情報, List.class);
         List<dgScheduleList_Row> rowList = div.getDgScheduleList().getDataSource();
-        for (dgScheduleList_Row row : rowList) {
-            if (ShoriJotaiKubun.起動.getコード().equals(row.getDdlShoriJokyo().getSelectedKey())) {
-                if (new RString(DbcErrorMessages.設定不能状態への変更.getMessage().getCode())
-                        .equals(ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+        if (new RString(DbcErrorMessages.設定不能状態への変更.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
+        if (!new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && !new RString(DbcErrorMessages.設定不能状態への変更.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
+            for (dgScheduleList_Row row : rowList) {
+                if (ShoriJotaiKubun.起動.getコード().equals(row.getDdlShoriJokyo().getSelectedKey())) {
                     WarningMessage message = new WarningMessage(DbcErrorMessages.設定不能状態への変更.getMessage().getCode(),
                             DbcErrorMessages.設定不能状態への変更.getMessage().evaluate());
                     return ResponseData.of(div).addMessage(message).respond();
@@ -139,7 +145,8 @@ public class KyufuTaishoshaScheduleSetteiPanel {
         } else if (総合事業高額介護_メニューID.equals(ResponseHolder.getMenuID())) {
             交換情報識別番号 = 総合事業高額介護場合;
         }
-        if (!ResponseHolder.isReRequest()) {
+        if (!new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
