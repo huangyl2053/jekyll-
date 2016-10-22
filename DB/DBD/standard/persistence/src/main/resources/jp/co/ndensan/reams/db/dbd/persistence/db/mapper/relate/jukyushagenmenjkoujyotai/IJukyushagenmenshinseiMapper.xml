@@ -70,8 +70,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND  EXISTS (
         SELECT
@@ -202,8 +202,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND  EXISTS (
         SELECT
@@ -337,8 +337,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS(
         SELECT
@@ -470,8 +470,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
 
         AND EXISTS (
@@ -603,8 +603,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS (
         SELECT
@@ -738,8 +738,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS (
         SELECT
@@ -871,8 +871,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS (
         SELECT
@@ -1006,8 +1006,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS (
         SELECT
@@ -1144,8 +1144,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS(
         SELECT
@@ -1283,8 +1283,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS (
         SELECT
@@ -1419,8 +1419,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS (
         SELECT
@@ -1557,8 +1557,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS (
         SELECT
@@ -1696,8 +1696,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS (
         SELECT
@@ -1833,8 +1833,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS(
         SELECT
@@ -1982,8 +1982,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS (
         SELECT
@@ -2117,8 +2117,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS(
         SELECT
@@ -2250,8 +2250,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS (
         SELECT
@@ -2386,8 +2386,8 @@ and open the template in the editor.-->
             AND  宛名."seinengappiYMD" <![CDATA[<=]]> #{生年月日to}
         </if>
         <if test="直近被保" >
-            AND  （直近被保."shichosonCode" = #{市町村コード}
-            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}）
+            AND  (直近被保."shichosonCode" = #{市町村コード}
+            OR 直近被保."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
         </if>
         AND EXISTS (
         SELECT
