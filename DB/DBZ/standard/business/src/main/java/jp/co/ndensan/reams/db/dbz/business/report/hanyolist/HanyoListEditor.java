@@ -100,6 +100,8 @@ public class HanyoListEditor implements IHanyoListEditor {
         }
         setiOutputOrder(source);
         set改頁(source);
+        set改頁1(source);
+        set改頁2(source);
     }
 
     private void set出力内容(HanyoListReportSource source) {
@@ -160,6 +162,9 @@ public class HanyoListEditor implements IHanyoListEditor {
         if (hanyolistentity.get氏名５０音カナ() != null && !hanyolistentity.get氏名５０音カナ().isEmpty()) {
             source.kanaShimei = hanyolistentity.get氏名５０音カナ();
         }
+    }
+
+    private void set改頁1(HanyoListReportSource source) {
         if (hanyolistentity.get生年月日() != null && !hanyolistentity.get生年月日().isEmpty()) {
             source.seinengappiYMD = new RString(hanyolistentity.get生年月日().toString());
         }
@@ -184,6 +189,9 @@ public class HanyoListEditor implements IHanyoListEditor {
         if (hanyolistentity.get認定開始日() != null && !hanyolistentity.get認定開始日().isEmpty()) {
             source.ninteiKaishiYMD = new RString(hanyolistentity.get認定開始日().toString());
         }
+    }
+
+    private void set改頁2(HanyoListReportSource source) {
         if (hanyolistentity.get識別コード() != null && !hanyolistentity.get識別コード().isEmpty()) {
             source.shikibetsuCode = hanyolistentity.get識別コード();
         }
