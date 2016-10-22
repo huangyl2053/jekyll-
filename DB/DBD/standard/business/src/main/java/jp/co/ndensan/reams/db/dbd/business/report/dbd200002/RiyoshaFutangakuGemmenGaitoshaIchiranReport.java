@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200002;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd00002.RiyoshaFutangakuGemmenGaitoshaIchiranReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -24,6 +25,7 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranReport extends Report<RiyoshaF
     private final IOutputOrder outputOrder;
     private static final int NUM_0 = 0;
     private static final int NUM_4 = 3;
+    private final SetaiHyoji 世帯表示;
 
     /**
      * インスタンスを生成します。
@@ -35,9 +37,10 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranReport extends Report<RiyoshaF
      * @param 導入団体名称 導入団体名称
      * @param 帳票タイトル 帳票タイトル
      * @param 改ページ 改ページ
+     * @param 世帯表示 SetaiHyoji
      */
     public RiyoshaFutangakuGemmenGaitoshaIchiranReport(NinteishaListSakuseiResultEntity target, FlexibleDate 帳票作成日時,
-            IOutputOrder 出力順, RString 導入団体コード, RString 導入団体名称, RString 帳票タイトル, RString 改ページ) {
+            IOutputOrder 出力順, RString 導入団体コード, RString 導入団体名称, RString 帳票タイトル, RString 改ページ, SetaiHyoji 世帯表示) {
         this.target = target;
         this.target.set帳票作成日時(帳票作成日時);
         this.outputOrder = 出力順;
@@ -45,6 +48,7 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranReport extends Report<RiyoshaF
         this.target.set導入団体名称(導入団体名称);
         this.target.set帳票タイトル(帳票タイトル);
         this.target.set改ページ(改ページ);
+        this.世帯表示 = 世帯表示;
     }
 
     @Override
@@ -53,13 +57,13 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranReport extends Report<RiyoshaF
         int index = 1;
         if (target.get世帯員リスト() == null || target.get世帯員リスト().isEmpty()) {
             IRiyoshaFutangakuGemmenGaitoshaIchiranEditor editor = new RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl(target,
-                    outputOrder, index);
+                    outputOrder, index, 世帯表示);
             IRiyoshaFutangakuGemmenGaitoshaIchiranBuilder builder = new RiyoshaFutangakuGemmenGaitoshaIchiranBuilderImpl(editor);
             writer.writeLine(builder);
         } else {
             for (int i = NUM_0; i < target.get世帯員リスト().size(); i += NUM_4) {
                 IRiyoshaFutangakuGemmenGaitoshaIchiranEditor editor = new RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl(target,
-                        outputOrder, index);
+                        outputOrder, index, 世帯表示);
                 IRiyoshaFutangakuGemmenGaitoshaIchiranBuilder builder = new RiyoshaFutangakuGemmenGaitoshaIchiranBuilderImpl(editor);
                 writer.writeLine(builder);
                 index += NUM_4;
