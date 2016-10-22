@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.ca.cax.definition.core.shuno.chotei.FukaShoriJokyo;
 import jp.co.ndensan.reams.ca.cax.service.core.shuno.ShunoService;
 import jp.co.ndensan.reams.ca.cax.service.core.shuno.shuno.ShunoManager;
 import jp.co.ndensan.reams.ca.cax.service.saiban.ChoteiSaiban;
+import jp.co.ndensan.reams.ca.cax.service.saiban.ShunoSaiban;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsuKomokuHenshu;
@@ -216,7 +217,8 @@ public class FukaManager {
 
     private void save介護期別(FukaJoho 介護賦課, IShunoKamoku 科目, ChoshuHohoKibetsu 徴収種別, Decimal 調定額, RDate 納期限, int 期) {
         long 調定ID = ChoteiSaiban.getNumbering調定ID();
-        ShunoKanri 収納管理 = get収納管理(介護賦課, 科目, 期);
+        long 収納ID = ShunoSaiban.getNumbering収納ID();
+        ShunoKanri 収納管理 = get収納管理(収納ID, 介護賦課, 科目, 期);
         shunoManager.save収納管理(収納管理);
         shunoManager.save調定(収納管理, get調定クラス(介護賦課.get調定年度(), 調定額, 納期限, 調定ID, 納期限, 収納管理));
         介護期別Manager.save介護期別(new Kibetsu(介護賦課.get調定年度(), 介護賦課.get賦課年度(),
@@ -243,8 +245,8 @@ public class FukaManager {
                 .set処理番号(0).build();
     }
 
-    private ShunoKanri get収納管理(FukaJoho 介護賦課, IShunoKamoku 科目, int 期) {
-        return new ShunoKanri(0L,
+    private ShunoKanri get収納管理(long 収納ID, FukaJoho 介護賦課, IShunoKamoku 科目, int 期) {
+        return new ShunoKanri(収納ID,
                 科目.getコード(),
                 科目.get枝番コード(),
                 new RyokinShubetsuCodeValue(RString.EMPTY),
