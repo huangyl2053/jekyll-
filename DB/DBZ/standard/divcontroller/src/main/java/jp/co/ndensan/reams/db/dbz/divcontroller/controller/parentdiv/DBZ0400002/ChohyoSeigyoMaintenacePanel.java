@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -72,6 +73,8 @@ public class ChohyoSeigyoMaintenacePanel {
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             throw new PessimisticLockingException();
         }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBack"), false);
         div.getChohyoSeigyoMaintenace().setDisabled(false);
         RString 帳票名称 = ViewStateHolder.get(ViewStateKeys.帳票分類名称, RString.class);
         div.getLblChohyoName().setText(ViewStateHolder.get(ViewStateKeys.帳票分類名称, RString.class));
