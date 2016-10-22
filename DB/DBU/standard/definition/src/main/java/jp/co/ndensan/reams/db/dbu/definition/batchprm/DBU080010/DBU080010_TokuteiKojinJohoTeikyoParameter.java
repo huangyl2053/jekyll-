@@ -5,12 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU080010;
 
-import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.SougouJigyouJyohouProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.JogaiTokureiSyaJyohouProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.JukyushaKihonJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.RiyoshaFutanwariaiProcessParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.SougouJigyouJyohouProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinKadouKahiHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -36,7 +35,7 @@ public class DBU080010_TokuteiKojinJohoTeikyoParameter extends BatchParameterBas
     private static final String KOJINBANGOHIHOKENSHANO = "KojinbangoTsukekaeTaisyosyaHihokenshaNo";
 
     @BatchParameter(key = TOKUTEIKOJINJOHO, name = "特定個人情報")
-    private List<DBU080010_TokuteiKojinJohoTeikyoParameterHandler> 特定個人情報;
+    private List<RString> 特定個人情報;
     @BatchParameter(key = SHINKIIDOKUBUN, name = "新規異動区分")
     private RString 新規異動区分;
     @BatchParameter(key = TAISHOKAISHITIMESTAMP, name = "対象開始日時")
@@ -65,7 +64,7 @@ public class DBU080010_TokuteiKojinJohoTeikyoParameter extends BatchParameterBas
         parameter.set対象開始日時(対象開始日時);
         parameter.set対象終了日時(対象終了日時);
         parameter.set新規異動区分(新規異動区分);
-        parameter.set特定個人情報名コードList(get特定個人情報名コードList());
+        parameter.set特定個人情報名コードList(特定個人情報);
         return parameter;
     }
 
@@ -123,13 +122,5 @@ public class DBU080010_TokuteiKojinJohoTeikyoParameter extends BatchParameterBas
         parameter.set連携先団体内統合宛名_連携方式(連携先団体内統合宛名_連携方式);
         parameter.set個人番号付替対象者被保険者番号(個人番号付替対象者被保険者番号);
         return parameter;
-    }
-
-    private List<RString> get特定個人情報名コードList() {
-        List<RString> 特定個人情報名コードList = new ArrayList<>();
-        for (DBU080010_TokuteiKojinJohoTeikyoParameterHandler parameterHandler : 特定個人情報) {
-            特定個人情報名コードList.add(parameterHandler.get特定個人情報名コード());
-        }
-        return 特定個人情報名コードList;
     }
 }

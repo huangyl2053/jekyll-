@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo;
 
-import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokuteiKojinKadouKahiHanteiProcessParameter implements IBatchProcessParameter {
 
-    private List<RString> 特定個人情報名コードList;
+    private RString 特定個人情報名コード;
     private RString 新規異動区分;
     private RString データセット番号;
     private FlexibleDate システム日付;
