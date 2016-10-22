@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3020003.Juko
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD3020003.JukoKisambiTokushuTorokuHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD3020003.JukoKisambiTokushuTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -62,10 +61,6 @@ public class JukoKisambiTokushuToroku {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
-        //ShoKisaiHokenshaNo 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
-        ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("880888"));
-        div.setHdnShoKisaiHokenshaNo(証記載保険者番号.getColumnValue());
-        //div.setHdnShoKisaiHokenshaNo(証記載保険者番号 == null ? RString.EMPTY : 証記載保険者番号.getColumnValue());
 
         boolean データなし = true;
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
@@ -93,7 +88,7 @@ public class JukoKisambiTokushuToroku {
             div.getShunoJokyo().setDisabled(true);
             div.getJikoKisambi().setDisabled(true);
             div.getJikoKisambi().setIsOpen(false);
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
 
         ViewStateHolder.put(ViewStateKeys.滞納判定結果, new ArrayList<>(滞納判定結果List));
