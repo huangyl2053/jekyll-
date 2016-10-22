@@ -81,7 +81,7 @@ public class KyuufuJyohouProcess extends BatchProcessBase<SougouJigyouJyohouRela
         entity.setTeikyoNaiyo04(toRString(relateEntity.getHihokenshaKaishiYMD()));
         entity.setMisetteiJiyu04(RString.EMPTY);
         entity.setTeikyoNaiyo05(toRString(relateEntity.getHihokenshaShuryoYMD()));
-        if (relateEntity.getHihokenshaShuryoYMD() == null && relateEntity.getHihokenshaShuryoYMD().isEmpty()) {
+        if (relateEntity.getHihokenshaShuryoYMD() == null || relateEntity.getHihokenshaShuryoYMD().isEmpty()) {
             entity.setMisetteiJiyu05(NOTACCEPTABLE);
         } else {
             entity.setMisetteiJiyu05(RString.EMPTY);
@@ -90,7 +90,7 @@ public class KyuufuJyohouProcess extends BatchProcessBase<SougouJigyouJyohouRela
         entity.setMisetteiJiyu06(RString.EMPTY);
         entity.setTeikyoNaiyo07(relateEntity.getSumi_Gokei_70_74JikoFutanGaku());
         if (RString.isNullOrEmpty(relateEntity.getSumi_Gokei_70_74JikoFutanGaku())) {
-            entity.setMisetteiJiyu05(NOTACCEPTABLE);
+            entity.setMisetteiJiyu07(NOTACCEPTABLE);
         } else {
             entity.setMisetteiJiyu07(RString.EMPTY);
         }
