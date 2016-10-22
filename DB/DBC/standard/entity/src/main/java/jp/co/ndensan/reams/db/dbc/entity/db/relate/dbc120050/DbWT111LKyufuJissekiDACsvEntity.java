@@ -65,9 +65,9 @@ public class DbWT111LKyufuJissekiDACsvEntity {
     @CsvField(order = 190, name = "後_軽減後利用者負担額")
     private Decimal 後_軽減後利用者負担額;
     @CsvField(order = 200, name = "再審査回数")
-    private Integer 再審査回数;
+    private int 再審査回数;
     @CsvField(order = 210, name = "過誤回数")
-    private Integer 過誤回数;
+    private int 過誤回数;
     @CsvField(order = 220, name = "審査年月")
     private FlexibleYearMonth 審査年月;
 
