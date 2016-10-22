@@ -676,22 +676,22 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
             if (FIVE.equals(item.getFlag())) {
                 訪問介護利用者負担額減額flag_5 = true;
             }
-            if (FIVE.equals(item.getFlag())) {
+            if (SIX.equals(item.getFlag())) {
                 訪問介護利用者負担額減額flag_6 = true;
             }
-            if (FIVE.equals(item.getFlag())) {
+            if (SEVEN.equals(item.getFlag())) {
                 訪問介護利用者負担額減額flag_7 = true;
             }
-            if (FIVE.equals(item.getFlag())) {
+            if (EIGHT.equals(item.getFlag())) {
                 訪問介護利用者負担額減額flag_8 = true;
             }
-            if (FIVE.equals(item.getFlag())) {
+            if (NINE.equals(item.getFlag())) {
                 訪問介護利用者負担額減額flag_9 = true;
             }
-            if (FIVE.equals(item.getFlag())) {
+            if (TEN.equals(item.getFlag())) {
                 訪問介護利用者負担額減額flag_10 = true;
             }
-            if (FIVE.equals(item.getFlag())) {
+            if (ELEVEN.equals(item.getFlag())) {
                 訪問介護利用者負担額減額flag_11 = true;
             }
         }
@@ -742,22 +742,22 @@ public class JukyushagenmeninteiProcess extends BatchProcessBase<NinteiyotaiTwoE
             if (FIVE.equals(item.getFlag())) {
                 介護保険負担限度額認定flag_5 = true;
             }
-            if (FIVE.equals(item.getFlag())) {
+            if (SIX.equals(item.getFlag())) {
                 介護保険負担限度額認定flag_6 = true;
             }
-            if (FIVE.equals(item.getFlag())) {
+            if (SEVEN.equals(item.getFlag())) {
                 介護保険負担限度額認定flag_7 = true;
             }
-            if (FIVE.equals(item.getFlag())) {
+            if (EIGHT.equals(item.getFlag())) {
                 介護保険負担限度額認定flag_8 = true;
             }
-            if (FIVE.equals(item.getFlag())) {
+            if (NINE.equals(item.getFlag())) {
                 介護保険負担限度額認定flag_9 = true;
             }
-            if (FIVE.equals(item.getFlag())) {
+            if (TEN.equals(item.getFlag())) {
                 介護保険負担限度額認定flag_10 = true;
             }
-            if (FIVE.equals(item.getFlag())) {
+            if (ELEVEN.equals(item.getFlag())) {
                 介護保険負担限度額認定flag_11 = true;
             }
         }
