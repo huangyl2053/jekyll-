@@ -166,7 +166,7 @@ public enum NinteiEnkiTsuchishoHakkoDivSpec implements IPredicate<NinteiEnkiTsuc
                  */
                 @Override
                 public boolean apply(NinteiEnkiTsuchishoHakkoDiv div) {
-                    List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getDataSource();
+                    List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getSelectedItems();
                     RString 変更フラグ_変更 = new RString("1");
                     for (dgHakkotaishosha_Row row : rowList) {
                         if (変更フラグ_変更.equals(row.getChangeflag())) {
