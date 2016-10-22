@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuThreeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.temptable.TainoMaxRirekiNoTempTableEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -30,15 +27,8 @@ public class ShiharaiHohoHenkoHaakuMaxTainouTaisakuProcess extends BatchProcessB
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohohenkohaakuichiran."
             + "IShiharaiHohoHenkoHakuListMainMapper.find最大履歴情報");
 
-    private Map<RString, List<ShiharaiHohoHenkoHaakuThreeEntity>> resultMap;
-
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
-
-    @Override
-    protected void initialize() {
-        resultMap = new HashMap<>();
-    }
 
     @Override
     protected IBatchReader createReader() {
