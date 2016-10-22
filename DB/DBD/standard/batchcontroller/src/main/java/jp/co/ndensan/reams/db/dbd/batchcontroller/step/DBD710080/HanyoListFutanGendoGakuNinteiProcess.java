@@ -966,19 +966,19 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
         } else if (HanyoListFutanGendoGakuNinteiOrderby.被保険者番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("hokenshaNo");
         } else if (HanyoListFutanGendoGakuNinteiOrderby.資格区分.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new1");
+            帳票物理名 = new RString("shikakuKubun");
         } else if (HanyoListFutanGendoGakuNinteiOrderby.受給申請区分.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new2");
+            帳票物理名 = new RString("jukyuShinseiKubun");
         } else if (HanyoListFutanGendoGakuNinteiOrderby.受給申請日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new3");
+            帳票物理名 = new RString("jukyuShinseiYMD");
         } else if (HanyoListFutanGendoGakuNinteiOrderby.要介護度.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new4");
+            帳票物理名 = new RString("yoKaigoJotaiKubunCode");
         } else if (HanyoListFutanGendoGakuNinteiOrderby.認定開始日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new5");
+            帳票物理名 = new RString("ninteiKaishiYMD");
         } else if (HanyoListFutanGendoGakuNinteiOrderby.資格取得日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new6");
+            帳票物理名 = new RString("shikakuShutokuYMD");
         } else if (HanyoListFutanGendoGakuNinteiOrderby.資格喪失日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new7");
+            帳票物理名 = new RString("shikakuSoshitsuYMD");
         }
         return 帳票物理名;
     }

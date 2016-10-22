@@ -902,10 +902,6 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
         return 帳票物理名;
     }
 
-    private void 帳票source(RiyoshaFutanGakuGengakuEntity entity) {
-
-    }
-
     private RString 宛名判定(RString 帳票物理名, RString 項目ID) {
         if (HanyoListRiyoshaFutanGakuGengakuOrderby.郵便番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("yubinNo");
