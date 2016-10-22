@@ -104,6 +104,7 @@ public class HanyoListKyotakuServiceKeikakuEntity {
     private RString dbV4001旧措置フラグ;
     private Code dbT4001みなし要介護区分コード;
     private Code dbV4001直近異動事由コード;
+    private RString dbT4101厚労省IF識別コード;
 
     /**
      * -- GETTER -- 宛名Entity。
