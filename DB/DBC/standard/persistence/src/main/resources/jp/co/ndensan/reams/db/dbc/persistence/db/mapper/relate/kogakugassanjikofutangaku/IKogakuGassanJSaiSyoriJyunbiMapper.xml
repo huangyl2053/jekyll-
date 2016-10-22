@@ -508,7 +508,7 @@
         <id property="高額合算自己負担額_連番" column="dbWT37H1_連番"/>
         <id property="高額合算自己負担額_被保険者番号" column="dbWT37H1_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="高額合算自己負担額_対象年度" column="dbWT37H1_対象年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="高額合算自己負担額_保険者番号" column="dbWT37H1_保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="高額合算自己負担額_保険者番号" column="dbWT37H1_保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="高額合算自己負担額_支給申請書整理番号" column="dbWT37H1_支給申請書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="高額合算自己負担額_履歴番号" column="dbWT37H1_履歴番号"/>
         <result property="高額合算自己負担額_保険制度コード" column="dbWT37H1_保険制度コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

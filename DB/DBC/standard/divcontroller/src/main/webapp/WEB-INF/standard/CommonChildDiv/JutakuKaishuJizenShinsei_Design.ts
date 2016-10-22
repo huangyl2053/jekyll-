@@ -48,7 +48,7 @@ module DBC {
             }
 
             public JutakuKaishuZizenShinseiDetail(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JutakuKaishuJizenShinseiContents_JutakuKaishuZizenShinseiDetail"));
+                return new UZA.Panel(this.convFiledName("JutakuKaishuZizenShinseiDetail"));
             }
 
             public dgJutakuKaishuJizenShinseiDetail(): UZA.DataGrid {
@@ -64,7 +64,7 @@ module DBC {
             }
 
             public JutakuKaishuJizenShinseiReason(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JutakuKaishuJizenShinseiContents_JutakuKaishuJizenShinseiReason"));
+                return new UZA.Panel(this.convFiledName("JutakuKaishuJizenShinseiReason"));
             }
 
             public txtCreateDate(): UZA.TextBoxDate {
@@ -92,7 +92,7 @@ module DBC {
             }
 
             public JutakuKaishuJizenShinseiKozaInfoMock(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JutakuKaishuJizenShinseiContents_JutakuKaishuJizenShinseiKozaInfoMock"));
+                return new UZA.Panel(this.convFiledName("JutakuKaishuJizenShinseiKozaInfoMock"));
             }
 
             public txtKinyuKikanCode(): UZA.TextBoxCode {
@@ -132,7 +132,7 @@ module DBC {
             }
 
             public JutakuKaishuJizenShinseiShinsaResult(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JutakuKaishuJizenShinseiResult_JutakuKaishuJizenShinseiShinsaResult"));
+                return new UZA.Panel(this.convFiledName("JutakuKaishuJizenShinseiShinsaResult"));
             }
 
             public txtJudgeDate(): UZA.TextBoxDate {
@@ -152,7 +152,7 @@ module DBC {
             }
 
             public JutakuKaishuJizenShinseiResetInfo(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JutakuKaishuJizenShinseiResult_JutakuKaishuJizenShinseiResetInfo"));
+                return new UZA.Panel(this.convFiledName("JutakuKaishuJizenShinseiResetInfo"));
             }
 
             public chkResetInfo(): UZA.CheckBoxList {

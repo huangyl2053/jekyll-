@@ -256,7 +256,7 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGenga
                 .concat(RString.HALF_SPACE).concat(new RString(processParameter.get帳票作成日時().getHour())).concat(時)
                 .concat(new RString(processParameter.get帳票作成日時().getMinute())).concat(分)
                 .concat(new RString(processParameter.get帳票作成日時().getSecond())).concat(秒));
-        出力条件.add(出力順);
+        出力条件.add(service.get出力順RStr(outputOrder));
 
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 帳票ID,

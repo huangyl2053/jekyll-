@@ -54,13 +54,13 @@ public class DbWT111BKyufuJissekiD1CsvEntity {
     @CsvField(order = 130, name = "単位数")
     private Decimal 単位数;
     @CsvField(order = 140, name = "日数_回数")
-    private Integer 日数_回数;
+    private int 日数_回数;
     @CsvField(order = 150, name = "公費１対象日数_回数")
-    private Integer 公費１対象日数_回数;
+    private int 公費１対象日数_回数;
     @CsvField(order = 160, name = "公費２対象日数_回数")
-    private Integer 公費２対象日数_回数;
+    private int 公費２対象日数_回数;
     @CsvField(order = 170, name = "公費３対象日数_回数")
-    private Integer 公費３対象日数_回数;
+    private int 公費３対象日数_回数;
     @CsvField(order = 180, name = "サービス単位数")
     private Decimal サービス単位数;
     @CsvField(order = 190, name = "公費１対象サービス単位数")
@@ -74,13 +74,13 @@ public class DbWT111BKyufuJissekiD1CsvEntity {
     @CsvField(order = 230, name = "後_単位数")
     private Decimal 後_単位数;
     @CsvField(order = 240, name = "後_日数_回数")
-    private Integer 後_日数_回数;
+    private int 後_日数_回数;
     @CsvField(order = 250, name = "後_公費１対象日数_回数")
-    private Integer 後_公費１対象日数_回数;
+    private int 後_公費１対象日数_回数;
     @CsvField(order = 260, name = "後_公費２対象日数_回数")
-    private Integer 後_公費２対象日数_回数;
+    private int 後_公費２対象日数_回数;
     @CsvField(order = 270, name = "後_公費３対象日数_回数")
-    private Integer 後_公費３対象日数_回数;
+    private int 後_公費３対象日数_回数;
     @CsvField(order = 280, name = "後_サービス単位数")
     private Decimal 後_サービス単位数;
     @CsvField(order = 290, name = "後_公費１対象サービス単位数")
@@ -90,9 +90,9 @@ public class DbWT111BKyufuJissekiD1CsvEntity {
     @CsvField(order = 310, name = "後_公費３対象サービス単位数")
     private Decimal 後_公費３対象サービス単位数;
     @CsvField(order = 320, name = "再審査回数")
-    private Integer 再審査回数;
+    private int 再審査回数;
     @CsvField(order = 330, name = "過誤回数")
-    private Integer 過誤回数;
+    private int 過誤回数;
     @CsvField(order = 340, name = "審査年月")
     private FlexibleYearMonth 審査年月;
 

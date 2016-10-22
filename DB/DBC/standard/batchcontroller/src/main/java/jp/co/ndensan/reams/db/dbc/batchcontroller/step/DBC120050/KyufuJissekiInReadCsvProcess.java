@@ -257,7 +257,7 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
             if (!RString.isNullOrEmpty(sentouCsvEntity.get被保険者番号())) {
                 hihokensha.setOrgHihokenshaNo(new HihokenshaNo(sentouCsvEntity.get被保険者番号()));
             }
-            if (null != sentouCsvEntity.getサービス提供年月()) {
+            if (!RString.isNullOrEmpty(sentouCsvEntity.getサービス提供年月())) {
                 int lastDay = new FlexibleYearMonth(sentouCsvEntity.getサービス提供年月()).getLastDay();
                 hihokensha.setServiceTeikyoYmd(new FlexibleDate(new FlexibleYearMonth(sentouCsvEntity.getサービス提供年月()).toDateString()
                         .concat(new RString(lastDay))));
@@ -265,7 +265,7 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
             hihokensha.setOrgHihokenshaKanaShimei(RString.EMPTY);
             hihokensha.setOrgHihokenshaShimei(RString.EMPTY);
             hihokensha.setOldShichosonCode(LasdecCode.EMPTY);
-            hihokensha.setHenkanHihokenshaNo(null);
+            hihokensha.setHenkanHihokenshaNo(HihokenshaNo.EMPTY);
             if (!RString.isNullOrEmpty(sentouCsvEntity.get被保険者番号())) {
                 hihokensha.setHihokenshaNo(new HihokenshaNo(sentouCsvEntity.get被保険者番号()));
             }
@@ -339,7 +339,7 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
         }
         入力識別番号 = sentouCsvEntity.get入力識別番号();
         申請先頭レコードのキー項目値 = sentouCsvEntity.get交換情報識別番号().concat(入力識別番号)
-                .concat(sentouCsvEntity.get被保険者番号()).concat(new FlexibleYearMonth(sentouCsvEntity.getサービス提供年月()).toDateString())
+                .concat(sentouCsvEntity.get被保険者番号()).concat(sentouCsvEntity.getサービス提供年月())
                 .concat(sentouCsvEntity.get事業所番号()).concat(sentouCsvEntity.get整理番号());
         doキー項目値チェック(申請先頭レコードのキー項目値, listCsvShinseiJouhouCsvEntity, tableWriter);
         if (do件数チェック(入力識別番号)) {
@@ -352,7 +352,7 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
             errorTempentity.setHihokenshaNo(new HihokenshaNo(sentouCsvEntity.get被保険者番号()));
             errorTempentity.setKey1(sentouCsvEntity.get交換情報識別番号());
             errorTempentity.setKey2(sentouCsvEntity.get入力識別番号());
-            errorTempentity.setKey3(new FlexibleYearMonth(sentouCsvEntity.getサービス提供年月()).toDateString());
+            errorTempentity.setKey3(sentouCsvEntity.getサービス提供年月());
             errorTempentity.setKey4(sentouCsvEntity.get事業所番号());
             errorTempentity.setKey5(sentouCsvEntity.get整理番号());
             組み合わせ不正登録(errorTempentity, tableWriter);
@@ -1185,7 +1185,26 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
         recordKensu.set件数_DE(件数_DE);
         recordKensu.set件数_H1(件数_H1);
         recordKensu.set件数_T1(件数_T1);
+        reset件数();
+    }
 
+    private void reset件数() {
+        件数_D1 = 0;
+        件数_D2 = 0;
+        件数_D3 = 0;
+        件数_D4 = 0;
+        件数_D5 = 0;
+        件数_D6 = 0;
+        件数_D7 = 0;
+        件数_D8 = 0;
+        件数_D9 = 0;
+        件数_DA = 0;
+        件数_DB = 0;
+        件数_DC = 0;
+        件数_DD = 0;
+        件数_DE = 0;
+        件数_H1 = 0;
+        件数_T1 = 0;
     }
 
 }

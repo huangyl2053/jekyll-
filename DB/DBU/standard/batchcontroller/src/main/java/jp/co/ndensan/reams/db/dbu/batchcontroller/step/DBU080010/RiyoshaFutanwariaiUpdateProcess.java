@@ -103,19 +103,13 @@ public class RiyoshaFutanwariaiUpdateProcess extends BatchProcessBase<TeyikyouTa
 
     @Override
     protected void afterExecute() {
-        TokuteiKojinJohoTeikyoManager.createInstance().update特定個人情報提供(
-                new RString("\"").concat(TABLE_中間DB提供基本情報).concat("\""),
-                processParameter.get新規異動区分(), TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
-                DataSetNo._0202負担割合.getコード(), processParameter.get版番号());
-        if (TeikyoYohi.提供要.getコード().equals(processParameter.get特定個人情報名コード())) {
-            List<TokuteiKojinJohoHanKanri> entityList = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(
-                    RString.EMPTY, TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
-                    DataSetNo._0202負担割合.getコード(), FlexibleDate.EMPTY);
-            for (TokuteiKojinJohoHanKanri business : entityList) {
-                DbT7301TokuteiKojinJohoHanKanriEntity entity = business.toEntity();
-                entity.setShokaiTeikyoKubun(ShokaiTeikyoKubun.初回提供済み.getコード());
-                dbT7301EntityWriter.update(entity);
-            }
+        List<TokuteiKojinJohoHanKanri> entityList = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(
+                RString.EMPTY, TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード(),
+                DataSetNo._0202負担割合.getコード(), FlexibleDate.EMPTY);
+        for (TokuteiKojinJohoHanKanri business : entityList) {
+            DbT7301TokuteiKojinJohoHanKanriEntity entity = business.toEntity();
+            entity.setShokaiTeikyoKubun(ShokaiTeikyoKubun.初回提供済み.getコード());
+            dbT7301EntityWriter.update(entity);
         }
     }
 }

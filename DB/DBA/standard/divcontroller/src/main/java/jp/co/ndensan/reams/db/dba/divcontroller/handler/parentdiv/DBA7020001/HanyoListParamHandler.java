@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA740010.DBA740010_HanyoL
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA760010.DBA760010_HanyoListSeikatsuHogoJukyushaParameter;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.common.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tekiyojogaisha.JiyuChushutsuKubun;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020001.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -701,6 +703,10 @@ public class HanyoListParamHandler {
     private void 適用除外者Restore(BatchParameterMap restoreBatchParameterMap) {
         RString 抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun"));
         set日付抽出区分(抽出区分, モード2);
+        Long 出力順ID = restoreBatchParameterMap.getParameterValue(Long.class, new RString("shutsuryokujunId"));
+        if (出力順ID != null) {
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701003.getReportId(), 出力順ID);
+        }
         div.getRadTekiyoJogaishaChushutsu().setSelectedKey(抽出区分);
         div.getRadTekiyoJogaishaTekiyoKijyun().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMDkubun")));
@@ -752,6 +758,10 @@ public class HanyoListParamHandler {
     private void 他市町村住所地特例者Restore(BatchParameterMap restoreBatchParameterMap) {
         RString 抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun"));
         set日付抽出区分(抽出区分, モード3);
+        Long 出力順ID = restoreBatchParameterMap.getParameterValue(Long.class, new RString("shutsuryokujunId"));
+        if (出力順ID != null) {
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701003.getReportId(), 出力順ID);
+        }
         div.getRadTaShichosonJushotiTokureishaChushutsu().setSelectedKey(抽出区分);
         div.getRadTaShichosonJushotiTokureishaTekiyoKijyun().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMDkubun")));
@@ -803,6 +813,10 @@ public class HanyoListParamHandler {
     private void 老齢福祉年金受給者Restore(BatchParameterMap restoreBatchParameterMap) {
         RString 抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun"));
         set日付抽出区分(抽出区分, モード4);
+        Long 出力順ID = restoreBatchParameterMap.getParameterValue(Long.class, new RString("shutsuryokujunId"));
+        if (出力順ID != null) {
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701004.getReportId(), 出力順ID);
+        }
         div.getRadRoreiFukushiNenkinJukyushaChushutsu().setSelectedKey(抽出区分);
         RString 基準年月日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMD"));
         if (!RString.isNullOrEmpty(基準年月日)) {
@@ -823,6 +837,10 @@ public class HanyoListParamHandler {
     private void 生活保護受給者Restore(BatchParameterMap restoreBatchParameterMap) {
         RString 抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun"));
         set日付抽出区分(抽出区分, モード5);
+        Long 出力順ID = restoreBatchParameterMap.getParameterValue(Long.class, new RString("shutsuryokujunId"));
+        if (出力順ID != null) {
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701006.getReportId(), 出力順ID);
+        }
         div.getRadSeikatuhogoJukyushaChushutsu().setSelectedKey(抽出区分);
         RString 基準年月日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMD"));
         if (!RString.isNullOrEmpty(基準年月日)) {

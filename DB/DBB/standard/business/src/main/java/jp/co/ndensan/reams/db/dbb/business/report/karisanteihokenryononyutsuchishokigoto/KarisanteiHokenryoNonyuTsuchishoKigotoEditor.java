@@ -449,6 +449,9 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editShotokuDankai(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
+        if (null == 編集後仮算定通知書共通情報.get前年度情報().get前年度保険料段階()) {
+            return;
+        }
         source.shotokuDankai = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get前年度情報().get前年度保険料段階());
     }
 

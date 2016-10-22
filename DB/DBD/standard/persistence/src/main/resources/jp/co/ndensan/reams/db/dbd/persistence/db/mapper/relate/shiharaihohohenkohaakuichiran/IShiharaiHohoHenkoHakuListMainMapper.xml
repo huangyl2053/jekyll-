@@ -348,7 +348,7 @@
                 償還払支給申請."serviceTeikyoYM" AS 償還払支給申請_サービス提供年月,
                 償還払支給申請."seiriNo" AS 償還払支給申請_整理番号,
                 償還払支給判定結果."shiharaiKingaku" AS 償還払支給判定結果_支払金額,
-                償還払支給判定結果."shiharaiKingaku" AS 償還払支給判定結果_支払金額
+                償還払支給判定結果."sagakuKingakuGokei" AS 償還払支給判定結果_差額金額合計
             FROM rgdb."DbT3034ShokanShinsei" AS 償還払支給申請
             LEFT JOIN rgdb."DbT3036ShokanHanteiKekka" AS 償還払支給判定結果
             ON 	償還払支給申請."hiHokenshaNo" = 償還払支給判定結果."hiHokenshaNo"
@@ -505,14 +505,15 @@
     <resultMap id="resultMap_償還情報リスト" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShokanShinseiHanteiKekkaJohoEntity" autoMapping="true">
         <result property="償還払支給申請_被保険者番号" column="償還払支給申請_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="償還払支給申請_サービス提供年月" column="償還払支給申請_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="償還払支給申請_整理番号" column="償還払支給申請_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="償還払支給判定結果_支払金額" column="償還払支給判定結果_支払金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="償還払支給判定結果_差額金額合計" column="償還払支給判定結果_差額金額合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_find最大履歴情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuThreeEntity" autoMapping="true">
-        <result property="証記載保険者番号" column="収入_収納ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="被保険者番号" column="収入_SUM収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="管理区分" column="収入_収納ID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property=" 履歴番号" column="収入_SUM収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="管理区分" column="管理区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property=" 履歴番号" column="履歴番号" />
     </resultMap>
 
     <resultMap id="resultMap_find償還未払い情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuTwoEntity" autoMapping="true">

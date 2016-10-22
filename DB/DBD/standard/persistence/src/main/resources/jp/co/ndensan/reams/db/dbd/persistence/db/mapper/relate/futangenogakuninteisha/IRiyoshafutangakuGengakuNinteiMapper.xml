@@ -277,7 +277,7 @@
                         AND FALSE
                     </if> 
                     ) AS 世帯員情報 
-                    ON 世帯員情報.被保険者番号 = A.被保険者番号
+                    ON 世帯員情報.被保険者番号S = A.被保険者番号
                     WHERE 
                     (減免減額申請."gemmenGengakuShurui" = #{減免減額種類_介護保険負担限度額認定} OR 
                      減免減額申請."gemmenGengakuShurui" IS NULL) 

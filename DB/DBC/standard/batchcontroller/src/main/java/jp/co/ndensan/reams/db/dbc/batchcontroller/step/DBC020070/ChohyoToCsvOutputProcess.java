@@ -136,7 +136,6 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
     private FileSpoolManager manager;
     private IOutputOrder 出力順;
     private int 通番;
-    private int 明細通番;
     private RString 自市町村コード;
     private RString 自市町村名;
 
@@ -157,9 +156,8 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
 
     @Override
     protected void initialize() {
-        通番 = 1;
+        通番 = 0;
         hasData = false;
-        明細通番 = 0;
         breakItemIds = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         出力順 = ReportUtil.get出力順ID(SubGyomuCode.DBC介護給付, parameter.get出力順ID(), ReportIdDBC.DBC200204.getReportId());
@@ -207,9 +205,8 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
                 && getBefore().getTaishoNendo().equals(entity.getTaishoNendo())
                 && getBefore().getShoKisaiHokenshaNo().equals(entity.getShoKisaiHokenshaNo())
                 && getBefore().getShikyuShinseishoSeiriNo().equals(entity.getShikyuShinseishoSeiriNo()))) {
-            csvOutput(getBefore());
+            csvOutput();
         }
-        通番 = 通番 + 1;
     }
 
     @Override
@@ -281,60 +278,74 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
             csvEntity.set氏名(該当データ無し);
             csvWriter.writeLine(csvEntity);
         } else {
-            csvOutput(getBefore());
+            csvOutput();
         }
         csvWriter.close();
         manager.spool(CSV_FILE_NAME);
     }
 
-    private void csvOutput(ShikyugakuUpdateTempEntity entity) {
-        明細通番 = 明細通番 + 1;
-        RString kubun = 区分１;
+    private void csvOutput() {
+        int 明細通番 = 0;
         boolean has区分34 = false;
+        boolean isFirst = true;
+        ShikyugakuUpdateTempEntity 区分２合算 = new ShikyugakuUpdateTempEntity();
+        ShikyugakuUpdateTempEntity 合算 = new ShikyugakuUpdateTempEntity();
         for (ShikyugakuUpdateTempEntity tmp : キー項目List) {
+            明細通番 = 明細通番 + 1;
             GassanJigyobunShikyugakuKeisanKekkaIchiranEntity csvEntity = new GassanJigyobunShikyugakuKeisanKekkaIchiranEntity();
-            csvEntity.set通番(new RString(通番));
-            csvEntity.set被保険者番号(entity.getHihokenshaNo().getColumnValue());
-            csvEntity.set対象年度(ReportKomokuEditorUtil.パターン107(entity.getTaishoNendo()));
-            csvEntity.set証記載保険者番号(entity.getShoKisaiHokenshaNo().getColumnValue());
-            csvEntity.set支給申請書整理番号(entity.getShikyuShinseishoSeiriNo());
-            csvEntity.set氏名カナ(entity.getAtenaKanaShimei().getColumnValue());
-            csvEntity.set氏名(entity.getAtenaShimei().getColumnValue());
-            csvEntity.set生年月日(ReportKomokuEditorUtil.パターン12(entity.getSeinengappiYMD()));
+            setCommonData(csvEntity, tmp);
             csvEntity.set明細通番(new RString(明細通番));
-            if (区分１.equals(entity.getKubun())) {
+
+            if (区分２.equals(tmp.getKubun())) {
+                区分２合算 = tmp;
+            }
+            if (isFirst && 区分２.equals(区分２合算.getKubun()) && 区分３.equals(tmp.getKubun())) {
+                csvEntity.setデータ内容(高額合算小計);
+                writeCsvData(区分２合算, csvEntity);
+                isFirst = false;
+            }
+            if (区分１.equals(tmp.getKubun())) {
                 csvEntity.setデータ内容(合計);
-            } else if (区分２.equals(entity.getKubun())) {
+            } else if (区分２.equals(tmp.getKubun())) {
                 csvEntity.setデータ内容(高額合算);
-            } else if (区分３.equals(entity.getKubun())) {
+            } else if (区分３.equals(tmp.getKubun())) {
                 csvEntity.setデータ内容(事業高額合算);
                 has区分34 = true;
-            } else if (区分４.equals(entity.getKubun())) {
+                合算 = tmp;
+            } else if (区分４.equals(tmp.getKubun())) {
                 csvEntity.setデータ内容(事業高額合算_転入前);
                 has区分34 = true;
-            }
-            if (!kubun.equals(tmp.getKubun()) && 区分２.equals(kubun)) {
-                kubun = tmp.getKubun();
-                csvEntity.setデータ内容(高額合算小計);
-                writeCsvData(tmp, csvEntity);
+                合算 = tmp;
             }
             writeCsvData(tmp, csvEntity);
         }
+        if (isFirst && 区分２合算.getHihokenshaNo() != null && !区分２合算.getHihokenshaNo().isEmpty()) {
+            GassanJigyobunShikyugakuKeisanKekkaIchiranEntity csvEntity = new GassanJigyobunShikyugakuKeisanKekkaIchiranEntity();
+            csvEntity.setデータ内容(高額合算小計);
+            setCommonData(csvEntity, 区分２合算);
+            csvEntity.set明細通番(new RString(明細通番 + 1));
+            writeCsvData(キー項目List.get(0), csvEntity);
+        }
         if (has区分34) {
             GassanJigyobunShikyugakuKeisanKekkaIchiranEntity csvEntity = new GassanJigyobunShikyugakuKeisanKekkaIchiranEntity();
-            csvEntity.set通番(new RString(通番));
-            csvEntity.set被保険者番号(entity.getHihokenshaNo().getColumnValue());
-            csvEntity.set対象年度(ReportKomokuEditorUtil.パターン107(entity.getTaishoNendo()));
-            csvEntity.set証記載保険者番号(entity.getShoKisaiHokenshaNo().getColumnValue());
-            csvEntity.set支給申請書整理番号(entity.getShikyuShinseishoSeiriNo());
-            csvEntity.set氏名カナ(entity.getAtenaKanaShimei().getColumnValue());
-            csvEntity.set氏名(entity.getAtenaShimei().getColumnValue());
-            csvEntity.set生年月日(ReportKomokuEditorUtil.パターン12(entity.getSeinengappiYMD()));
-            csvEntity.set明細通番(new RString(明細通番));
+            setCommonData(csvEntity, 合算);
+            csvEntity.set明細通番(new RString(明細通番 + 1));
             csvEntity.setデータ内容(事業高額合算小計);
             writeCsvData(キー項目List.get(0), csvEntity);
         }
         init();
+    }
+
+    private void setCommonData(GassanJigyobunShikyugakuKeisanKekkaIchiranEntity csvEntity, ShikyugakuUpdateTempEntity tmp) {
+        通番 = 通番 + 1;
+        csvEntity.set通番(new RString(通番));
+        csvEntity.set被保険者番号(tmp.getHihokenshaNo().getColumnValue());
+        csvEntity.set対象年度(ReportKomokuEditorUtil.パターン107(tmp.getTaishoNendo()));
+        csvEntity.set証記載保険者番号(tmp.getShoKisaiHokenshaNo().getColumnValue());
+        csvEntity.set支給申請書整理番号(tmp.getShikyuShinseishoSeiriNo());
+        csvEntity.set氏名カナ(tmp.getAtenaKanaShimei().getColumnValue());
+        csvEntity.set氏名(tmp.getAtenaShimei().getColumnValue());
+        csvEntity.set生年月日(ReportKomokuEditorUtil.パターン12(tmp.getSeinengappiYMD()));
     }
 
     private void writeCsvData(ShikyugakuUpdateTempEntity entity, GassanJigyobunShikyugakuKeisanKekkaIchiranEntity csvEntity) {

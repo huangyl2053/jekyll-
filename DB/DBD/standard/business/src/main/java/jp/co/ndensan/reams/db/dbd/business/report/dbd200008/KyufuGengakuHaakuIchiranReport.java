@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd200008;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.core.common.TokuchoFuchoKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran.KyufuGengakuHaakuIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran.ShunoJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200008.KyufuGengakuHaakuIchiranReportSource;
@@ -61,10 +62,11 @@ public final class KyufuGengakuHaakuIchiranReport extends Report<KyufuGengakuHaa
     @Override
     public void writeBy(ReportSourceWriter<KyufuGengakuHaakuIchiranReportSource> writer) {
         収納情報の出力設定();
-        int 総行数 = 行数14;
-        if (給付額減額把握リストEntity.get収納情報リスト().size() > INT_10) {
-            総行数 = 行数28;
+        int ページ = 給付額減額把握リストEntity.get収納情報リスト().size() / INT_10;
+        if (給付額減額把握リストEntity.get収納情報リスト().size() % INT_10 > 0) {
+            ページ = ページ + 1;
         }
+        int 総行数 = 行数14 * ページ;
         for (int 行数 = 0; 行数 < 総行数; 行数++) {
             IKyufuGengakuHaakuIchiranEditor bodyEditor = new KyufuGengakuHaakuIchiranEditor(
                     作成日時, 保険者番号, 保険者名称, 給付額減額把握リストEntity, iOutputOrder, 行数);
@@ -93,10 +95,26 @@ public final class KyufuGengakuHaakuIchiranReport extends Report<KyufuGengakuHaa
         List<ShunoJohoEntity> 賦課年度_収納情報リスト = new ArrayList<>();
         for (ShunoJohoEntity 収納情報 : 収納情報リスト) {
             if (賦課年度.equals(収納情報.get賦課年度())) {
-                賦課年度_収納情報リスト.add(収納情報);
+                add賦課年度_収納情報リスト(賦課年度_収納情報リスト, 収納情報);
             }
         }
         return 賦課年度_収納情報リスト;
+    }
+
+    private void add賦課年度_収納情報リスト(List<ShunoJohoEntity> 賦課年度_収納情報リスト, ShunoJohoEntity add収納情報) {
+        if (賦課年度_収納情報リスト.isEmpty()) {
+            賦課年度_収納情報リスト.add(add収納情報);
+            return;
+        }
+        for (int index = 0; index < 賦課年度_収納情報リスト.size(); index++) {
+            ShunoJohoEntity 収納情報 = 賦課年度_収納情報リスト.get(index);
+            if (add収納情報.get調定年度().equals(収納情報.get調定年度()) && TokuchoFuchoKubun.特別徴収.getコード().equals(add収納情報.get特徴普徴区分())
+                    || add収納情報.get調定年度().isBefore(収納情報.get調定年度())) {
+                賦課年度_収納情報リスト.add(index, 収納情報);
+                return;
+            }
+        }
+        賦課年度_収納情報リスト.add(add収納情報);
     }
 
     private void add賦課年度List(List<FlexibleYear> 賦課年度List, FlexibleYear 賦課年度) {

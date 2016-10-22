@@ -51,7 +51,7 @@ public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTo
         parameter.setSchema(new RString("rgdb"));
         parameter.setChoteiIdAutoNumbering(true);
         parameter.setShunoIdAutoNumbering(true);
-        return otherBatchFlow(CHOTEITOROKU_FLOWID, SubGyomuCode.DBB介護賦課, parameter).define();
+        return otherBatchFlow(CHOTEITOROKU_FLOWID, SubGyomuCode.CAX収滞公開, parameter).define();
     }
 
     /**
