@@ -62,6 +62,13 @@ public class ShujiiIkenshoSakuseiIraiHandler {
      */
     public void load() {
         div.getCcdNinteishinseishaFinder().initialize();
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getCcdGeninShikkan().clear();
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setHdnChosainCode(RString.EMPTY);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setHdnChosaItakusakiCode(RString.EMPTY);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setHdnShujiiCode(RString.EMPTY);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setHdnShujiiIryokikanCode(RString.EMPTY);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setHdnZenkaiChosaItakusakiCode(RString.EMPTY);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setHdnZenkaiShujiiIryokikanCode(RString.EMPTY);
         div.getCcdShujiiIryoKikanAndShujiiInput().initialize(
                 div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().getSelectedItem().get市町村コード(),
                 ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
