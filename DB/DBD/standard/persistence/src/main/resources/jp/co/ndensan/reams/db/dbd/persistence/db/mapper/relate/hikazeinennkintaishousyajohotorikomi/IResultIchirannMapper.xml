@@ -67,7 +67,7 @@ and open the template in the editor.
         WHERE
         "douteiResultKubun" = '1'
         ORDER BY
-        #{出力順}
+       ${出力順}
     </select>
 
     <select id="get不一致情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100201.FuicchiCsvMybatisParameter"
@@ -127,8 +127,7 @@ and open the template in the editor.
         "HikazeNenkinTaishoshaDouteiResultJohoTempTable"
         WHERE
         "douteiResultKubun" = '2'
-        ORDER BY
-        #{出力順}
+        ${出力順}
     </select>
 
     <select id="get生年月日情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100201.SeinenngappiCsvMybatisParameter"
@@ -189,8 +188,7 @@ and open the template in the editor.
         WHERE
         "douteiResultKubun" = '1'
         AND "fuicchiItem" != ''
-        ORDER BY
-        #{出力順}
+        ${出力順}
     </select>
 
     <select id="get年金番号情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100201.NennkinnBanngouCsvMybatisParameter"
@@ -246,7 +244,6 @@ and open the template in the editor.
         "dtKyousaiNennkinnShoushoKigouNo"
         FROM
         "NenkinNoCheckListTempTable"
-        ORDER BY
-        #{出力順}
+        ${出力順}
     </select>
 </mapper>

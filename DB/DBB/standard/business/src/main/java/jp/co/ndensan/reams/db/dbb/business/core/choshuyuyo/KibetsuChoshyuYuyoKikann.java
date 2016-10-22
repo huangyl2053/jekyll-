@@ -22,8 +22,6 @@ public class KibetsuChoshyuYuyoKikann implements Serializable {
     private RString 普徴期;
     private RString 普徴月;
     private RString 普徴期別納付額;
-    private RString 徴収猶予期間開始;
-    private RString 徴収猶予期間終了;
     private FlexibleDate 徴収猶予_開始;
     private FlexibleDate 徴収猶予_終了;
 

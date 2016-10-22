@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.ShutsuryokuKomok
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoListEntity;
 import jp.co.ndensan.reams.db.dbz.entity.report.hanyolist.HanyoListReportSource;
 import jp.co.ndensan.reams.db.dbz.service.core.hanyolist.HanyoListReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
@@ -61,12 +62,18 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -255,7 +262,9 @@ public class HanyoListKokiKoreishaProcess extends BatchProcessBase<HanyoRisutoKo
             }
             if (is帳票出力) {
                 if (flag) {
-                    HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(),
+                    HanyoListEntity hanyolistentity = new HanyoListEntity();
+                    get方法(entity, hanyolistentity);
+                    HanyoListReport report = new HanyoListReport(hanyolistentity, processParamter.getHyoudai(),
                             processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
                     report.writeBy(reportSourceWriter);
                 }
@@ -818,20 +827,50 @@ public class HanyoListKokiKoreishaProcess extends BatchProcessBase<HanyoRisutoKo
         } else if (HanyoListKokiKoreishaOrderby.被保険者番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("hokenshaNo");
         } else if (HanyoListKokiKoreishaOrderby.資格区分.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new1");
+            帳票物理名 = new RString("shikakuKubun");
         } else if (HanyoListKokiKoreishaOrderby.受給申請区分.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new2");
+            帳票物理名 = new RString("jukyuShinseiKubun");
         } else if (HanyoListKokiKoreishaOrderby.受給申請日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new3");
+            帳票物理名 = new RString("jukyuShinseiYMD");
         } else if (HanyoListKokiKoreishaOrderby.要介護度.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new4");
+            帳票物理名 = new RString("yoKaigoJotaiKubunCode");
         } else if (HanyoListKokiKoreishaOrderby.認定開始日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new5");
+            帳票物理名 = new RString("ninteiKaishiYMD");
         } else if (HanyoListKokiKoreishaOrderby.資格取得日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new6");
+            帳票物理名 = new RString("shikakuShutokuYMD");
         } else if (HanyoListKokiKoreishaOrderby.資格喪失日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new7");
+            帳票物理名 = new RString("shikakuSoshitsuYMD");
         }
         return 帳票物理名;
+    }
+
+    private void get方法(HanyoRisutoKokiKoreishaEntity entity, HanyoListEntity hanyolistentity) {
+        ChoikiCode 町域コード = entity.getPsmEntity().getChoikiCode();
+        YubinNo 郵便番号 = entity.getPsmEntity().getYubinNo();
+        AtenaBanchi 番地コード = entity.getPsmEntity().getBanchi();
+        GyoseikuCode 行政区コード = entity.getPsmEntity().getGyoseikuCode();
+        ChikuCode 地区１ = entity.getPsmEntity().getChikuCode1();
+        ChikuCode 地区２ = entity.getPsmEntity().getChikuCode2();
+        SetaiCode 世帯コード = entity.getPsmEntity().getSetaiCode();
+        hanyolistentity.set郵便番号(郵便番号 != null ? 郵便番号.getYubinNo() : RString.EMPTY);
+        hanyolistentity.set町域コード(町域コード != null ? 町域コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set番地コード(番地コード != null ? 番地コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set行政区コード(行政区コード != null ? 行政区コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set地区１(地区１ != null ? 地区１.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set地区２(地区２ != null ? 地区２.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set世帯コード(世帯コード != null ? 世帯コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set識別コード(entity.get被保険者台帳管理_識別コード());
+        hanyolistentity.set氏名５０音カナ(entity.getPsmEntity().getKanaName());
+        hanyolistentity.set生年月日(entity.getPsmEntity().getSeinengappiYMD());
+        hanyolistentity.set性別(entity.getPsmEntity().getSeibetsuCode());
+        hanyolistentity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
+        hanyolistentity.set被保険者番号(entity.get被保険者台帳管理_被保険者番号());
+        hanyolistentity.set資格区分(entity.get被保険者台帳管理_被保険者区分コード());
+        hanyolistentity.set認定開始日(entity.get前回受給情報_認定年月日());
+        hanyolistentity.set資格取得日(entity.get被保険者台帳管理_資格取得年月日());
+        hanyolistentity.set資格喪失日(entity.get被保険者台帳管理_資格喪失年月日());
+        hanyolistentity.set受給申請区分(entity.get初回申請_要支援者認定申請区分());
+        hanyolistentity.set受給申請日(entity.get受給者台帳_受給申請年月日());
+        hanyolistentity.set要介護度(entity.get初回受給情報_みなし要介護区分コード());
     }
 }

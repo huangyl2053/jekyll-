@@ -19,7 +19,7 @@
         DbV1001."shikakuSoshitsuYMD" as 資格喪失年月日,
         DbV1001."shikakuSoshitsuTodokedeYMD" as 資格喪失届出年月日,
         DbV1001."hihokennshaKubunCode" as 被保険者区分コード,
-        DbV1001."jushochiTokureiFlag" as 住所地特例フラグ,
+        DbV1001."jushochiTokureiFlag" as 住所地特例フラグ,  
         DbV1001."koikinaiJushochiTokureiFlag" as 広域内住所地特例フラグ,
         DbV1001."koikinaiTokureiSochimotoShichosonCode" as 広住特措置元市町村コード,
         DbV1004."nyushoShisetsuCode" as 入所施設コード,
@@ -63,12 +63,21 @@
         DbT3034.*,
         DbT3035.*,
         DbT3036.*,
-        DbT3038.*,
         DbT3048.*,
         DbT3049.*,
         koza.*,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
+        "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード,
+        "ShikibetsuTaisho"."setaiCode"AS 世帯コード,
+        DbV1001."shikibetsuCode" AS 識別コード,
+        "ShikibetsuTaisho"."katakanaHyoki" AS 氏名５０音カナ,
+        DbT3034."dbT3034ShokanShinsei_shoKisaiHokenshaNo" AS 証記載保険者番号,
+        DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" AS サービス年月,
+        DbT3034."dbT3034ShokanShinsei_seiriNo" AS 整理番号,
+        DbT3034."dbT3034ShokanShinsei_shiharaiHohoKubunCode" AS 支払方法,
+        DbT3038."yoshikiNo" AS 様式番号,
+        DbT3036."dbT3036ShokanHanteiKekka_ketteiTsuchishoSakuseiYMD"　AS　通知書作成日
         From 
         (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) As DbT3034
         LEFT OUTER JOIN 
@@ -82,7 +91,31 @@
         AND DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" = DbT3036."dbT3036ShokanHanteiKekka_serviceTeikyoYM"
         AND DbT3034."dbT3034ShokanShinsei_seiriNo" = DbT3036."dbT3036ShokanHanteiKekka_seiriNo"
         LEFT OUTER JOIN 
-        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.noDeleted_DbT3038ShokanKihon" />) As DbT3038
+       (
+        SELECT
+            noDeleted_DbT3038."dbT3038ShokanKihon_hiHokenshaNo",
+            noDeleted_DbT3038."dbT3038ShokanKihon_serviceTeikyoYM",
+            noDeleted_DbT3038."dbT3038ShokanKihon_seiriNo",
+            string_agg(
+                noDeleted_DbT3038."dbT3038ShokanKihon_yoshikiNo", ','
+                order by noDeleted_DbT3038."dbT3038ShokanKihon_yoshikiNo" ${様式番号Order} 
+            ) as "yoshikiNo"
+        FROM (
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.noDeleted_DbT3038ShokanKihon" />
+        ) as noDeleted_DbT3038
+        WHERE
+            1 = 1
+            <if test="様式番号 !=null and !様式番号.isEmpty()">			
+                AND noDeleted_DbT3038."dbT3038ShokanKihon_yoshikiNo" IN			
+                <foreach item="様式番号" index="index" collection="様式番号" open="(" separator="," close=")">			
+                     #{様式番号}			
+                </foreach>			
+            </if>
+        GROUP BY
+            noDeleted_DbT3038."dbT3038ShokanKihon_hiHokenshaNo",
+            noDeleted_DbT3038."dbT3038ShokanKihon_serviceTeikyoYM",
+            noDeleted_DbT3038."dbT3038ShokanKihon_seiriNo"
+        ) AS DbT3038
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbT3038."dbT3038ShokanKihon_hiHokenshaNo"
         AND DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" = DbT3038."dbT3038ShokanKihon_serviceTeikyoYM"
         AND DbT3034."dbT3034ShokanShinsei_seiriNo" = DbT3038."dbT3038ShokanKihon_seiriNo"
@@ -97,7 +130,7 @@
         AND DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" = DbT3049."dbT3049ShokanJutakuKaishu_serviceTeikyoYM"
         AND DbT3034."dbT3034ShokanShinsei_seiriNo" = DbT3049."dbT3049ShokanJutakuKaishu_seiriNo"
         LEFT OUTER JOIN 
-        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON DbT3034."dbT3034ShokanShinsei_kozaID" = koza."uaT0310Koza_kozaId"
         LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho" As DbV1001
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbV1001."hihokenshaNo"
@@ -242,20 +275,9 @@
             AND DbT3036."dbT3036ShokanHanteiKekka_furikomiMeisaishoSakuseiYMD" <![CDATA[<>]]> ''
             AND DbT3036."dbT3036ShokanHanteiKekka_furikomiMeisaishoSakuseiYMD" IS NOT NULL
         </if>
-        <if test="様式番号 !=null and !様式番号.isEmpty()">
-            AND DbT3038."dbT3038ShokanKihon_yoshikiNo" IN
-            <foreach item="様式番号" index="index" collection="様式番号" open="(" separator="," close=")">
-                #{様式番号}
-            </foreach>
+        <if test="orderByClause != null">
+            ${orderByClause}
         </if>
-        order by  DbT3034. "dbT3034ShokanShinsei_hiHokenshaNo",
-        DbT3034. "dbT3034ShokanShinsei_serviceTeikyoYM",
-        DbT3034. "dbT3034ShokanShinsei_seiriNo",
-        DbT3034. "dbT3034ShokanShinsei_shinseiJigyoshaNo",
-        DbT3038."dbT3038ShokanKihon_yoshikiNo",
-        DbT3038."dbT3038ShokanKihon_meisaiNo",
-        koza. "uaT0301YokinShubetsuPattern_yokinShubetsuPatternCode",
-        koza. "uaT0301YokinShubetsuPattern_yokinShubetsuCode"
     </sql>
         
     <resultMap id="resultMap_HanyoListShokanbaraiJokyoEntity" autoMapping="true"
@@ -264,8 +286,6 @@
         <id column="dbT3034ShokanShinsei_serviceTeikyoYM"/>
         <id column="dbT3034ShokanShinsei_seiriNo"/>
         <id column="dbT3034ShokanShinsei_shinseiJigyoshaNo"/>
-        <id column="dbT3038ShokanKihon_yoshikiNo"/>
-        <id column="dbT3038ShokanKihon_meisaiNo"/>
         <id column="uaT0301YokinShubetsuPattern_yokinShubetsuPatternCode"/>
         <id column="uaT0301YokinShubetsuPattern_yokinShubetsuCode"/>
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -318,6 +338,7 @@
         <result property="旧措置者フラグ" column="旧措置者フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="みなし要介護区分コード" column="みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="直近異動事由コード" column="直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="様式番号s" column="様式番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="支給申請Entity" 
                      resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
         <association property="支給住宅Entity" 
@@ -328,13 +349,11 @@
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3048ShokanFukushiYoguHanbaihiMapper.ResultMap_DbT3048ShokanFukushiYoguHanbaihiEntity"/>
         <association property="請求住宅Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3049ShokanJutakuKaishuMapper.ResultMap_DbT3049ShokanJutakuKaishuEntity"/>
-        <association property="口座情報Entity"
-                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
+        <association property="口座情報Entity"  
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_TokuteiKozaRelateEntity" />
         <association property="宛名Entity" 
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先Entity" 
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
-        <collection property="請求基本List"
-                    resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
     </resultMap>  
 </mapper>

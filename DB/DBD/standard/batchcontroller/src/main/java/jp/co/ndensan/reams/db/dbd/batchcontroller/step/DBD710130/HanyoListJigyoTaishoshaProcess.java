@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbd.business.report.HanyoListJigyoTaishoshaOrderby;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.hanyorisutojigyotaishosha.JigyoTaishoshaCsvEnumEntity;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710130.HanyoListJigyoTaishoshaProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutojigyotaishosha.HanyoRisutoJigyoTaishoshaEntity;
@@ -23,9 +22,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.hanyolist.HanyoListShutsuryokuKo
 import jp.co.ndensan.reams.db.dbz.business.report.hanyolist.HanyoListReport;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.Outputs;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.ShutsuryokuKomokuPosition;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoListEntity;
 import jp.co.ndensan.reams.db.dbz.entity.report.hanyolist.HanyoListReportSource;
 import jp.co.ndensan.reams.db.dbz.service.core.hanyolist.HanyoListReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
@@ -40,8 +38,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder._SetSortItem;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportoutputorder.PageBreakType;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportoutputorder.SortOrder;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportyamawake.NewpageType;
@@ -49,26 +45,26 @@ import jp.co.ndensan.reams.ur.urz.definition.core.reportyamawake.YamawakeType;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJokenhyoFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -76,12 +72,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
@@ -101,27 +92,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBD701013");
-    private static final RString CYUSYUTSUTAISYOSHA = new RString("【抽出対象者】");
-    private static final RString HOKENSHA = new RString("保険者：");
-    private static final RString KIZYUNNICHI = new RString("基準日：");
-    private static final RString CHOKINNOMI = new RString("対象データ：直近のみ");
     private static final RString SHIKIBETSUCODE = new RString("二次予防事業対象者_識別コード");
-    private static final RString CHIKI_1 = new RString("地区１");
-    private static final RString CHIKI_2 = new RString("地区２");
-    private static final RString CHIKI_3 = new RString("地区３");
-    private static final RString JUSHO = new RString("町域：");
-    private static final RString GYOSEIKU = new RString("行政区");
-    private static final RString JUSYO = new RString("住所");
-    private static final RString NENLEI = new RString("年齢");
-    private static final RString NENLEIKIZYUNNICHI = new RString("年齢基準日:");
-    private static final RString SAI = new RString("歳");
-    private static final RString SEINENGAPPI = new RString("生年月日");
-    private static final RString SPACE = new RString(" ");
-    private static final RString COMMA = new RString(",");
-    private static final RString COLON = new RString(":");
-    private static final RString カラ = new RString("～");
-    private static final RString 左記号 = new RString("(");
-    private static final RString 右記号 = new RString(")");
     private static final int NO_0 = 0;
     private static final int NO_1 = 1;
     private static final int NO_2 = 2;
@@ -151,6 +122,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
     private IOutputOrder outputOrder;
     private int 連番;
     private int 連番flag;
+    private List<RString> pageBreakKeys;
     private HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku;
     @BatchWriter
     private BatchReportWriter<HanyoListReportSource> batchReportWrite;
@@ -160,6 +132,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
     protected void initialize() {
         association = AssociationFinderFactory.createInstance().getAssociation();
         personalDataList = new ArrayList<>();
+        pageBreakKeys = new ArrayList<>();
         連番 = 0;
         連番flag = 0;
         項目見出し = RString.EMPTY;
@@ -213,7 +186,6 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
                 setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 build();
-        List<RString> pageBreakKeys = new ArrayList<>();
         set改頁Key(outputOrder, pageBreakKeys);
         batchReportWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBZ.DBZ700001.getReportId().value(), SubGyomuCode.DBZ介護共通).addBreak(
                 new BreakerCatalog<HanyoListReportSource>().simplePageBreaker(pageBreakKeys)).create();
@@ -228,12 +200,12 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
         eucCsvWriter.writeLine(eucCsvEntity);
         personalDataList.add(toPersonalData(entity));
         Class clazz = eucCsvEntity.getClass();
-        RString 項目内容new = RString.EMPTY;
         boolean flag = false;
         if (hanyoListShutsuryokuKomoku != null) {
             for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
                 RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
                 if (get項目名称 != null && !get項目名称.isEmpty()) {
+                    RString 項目内容new = RString.EMPTY;
                     try {
                         Method getMethod = clazz.getDeclaredMethod(JigyoTaishoshaCsvEnumEntity
                                 .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
@@ -257,7 +229,9 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
             }
             if (is帳票出力) {
                 if (flag) {
-                    HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(),
+                    HanyoListEntity hanyolistentity = new HanyoListEntity();
+                    get方法(entity, hanyolistentity);
+                    HanyoListReport report = new HanyoListReport(hanyolistentity, processParamter.getHyoudai(),
                             processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
                     report.writeBy(reportSourceWriter);
                 }
@@ -289,7 +263,11 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
         if (isCSV出力) {
             manager.spool(csvFilePath1, log);
         }
-        バッチ出力条件リストの出力();
+        RString 導入団体コード = association.getLasdecCode_().value();
+        RString 市町村名 = association.get市町村名();
+        RString 出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
+        HanyoListJigyoTaishoshaManager.createInstance().
+                バッチ出力条件リストの出力(processParamter, 導入団体コード, 市町村名, 出力ページ数, is帳票出力);
     }
 
     private void set帳表CSV出力() {
@@ -326,347 +304,6 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
                 entity.get二次予防事業対象者_被保険者番号());
         return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode(), expandedInfo);
-    }
-
-    private void バッチ出力条件リストの出力() {
-        RString 導入団体コード = association.getLasdecCode_().value();
-        RString 市町村名 = association.get市町村名();
-        RString 出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
-        RString 日本語ファイル名 = new RString("汎用リスト　事業対象者CSV");
-        RString 英数字ファイル名 = new RString("HanyoList_Jigyotaisyosya.csv");
-        RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
-        List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(CYUSYUTSUTAISYOSHA);
-        RStringBuilder builder = new RStringBuilder();
-        if (null != processParamter.getAtenacyusyutsujyoken()
-                && null != processParamter.getAtenacyusyutsujyoken().getShichoson_Code()
-                && !processParamter.getAtenacyusyutsujyoken().getShichoson_Code().equals(LasdecCode.EMPTY)) {
-            builder.append(HOKENSHA);
-            Association 地方公共団体 = get地方公共団体(processParamter.getAtenacyusyutsujyoken().getShichoson_Code());
-            builder.append(地方公共団体.get市町村名());
-            builder.append(COMMA);
-        }
-        if (null != processParamter.getKizyunnichi() && !processParamter.getKizyunnichi().isEmpty()) {
-            builder.append(KIZYUNNICHI);
-            builder.append(processParamter.getKizyunnichi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-            builder.append(COMMA);
-        }
-        builder = get日付範囲(builder);
-        if (processParamter.isJigyotaishoshadatacyusyutsu()) {
-            builder.append(CHOKINNOMI);
-            builder.append(COMMA);
-        }
-        if (builder.toRString() != null && !builder.toRString().isEmpty()) {
-            List<RString> builderList = builder.toRString().substring(0, builder.toRString().length() - 1).split(COMMA.toString());
-            for (RString build : builderList) {
-                出力条件.add(build);
-            }
-        }
-        if (null != processParamter.getAtenacyusyutsujyoken()
-                && null != processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun()) {
-            RString get宛名抽出区分情報 = get宛名抽出区分情報();
-            if (get宛名抽出区分情報 != null && !get宛名抽出区分情報.isEmpty()) {
-                出力条件.add(get宛名抽出区分情報());
-            }
-        }
-        if (null != processParamter.getAtenacyusyutsujyoken()
-                && null != processParamter.getAtenacyusyutsujyoken().getChiku_Kubun()) {
-            RString get地区区分情報 = get地区選択区分情報();
-            if (get地区区分情報 != null && !get地区区分情報.isEmpty()) {
-                List<RString> 地区区分情報 = get地区区分情報.substring(0, get地区区分情報.length() - 1).split(COMMA.toString());
-                for (RString 情報 : 地区区分情報) {
-                    出力条件.add(情報);
-                }
-            }
-        }
-        バッチ出力条件表出力(導入団体コード, 市町村名, 出力ページ数, 日本語ファイル名, 英数字ファイル名, ジョブ番号, 出力条件);
-    }
-
-    private void バッチ出力条件表出力(RString 導入団体コード, RString 市町村名, RString 出力ページ数, RString 日本語ファイル名,
-            RString 英数字ファイル名, RString ジョブ番号, List<RString> 出力条件) {
-        if (is帳票出力) {
-            RString csv出力有無;
-            RString csvファイル名;
-            if (processParamter.getSyutsuryoku().equals(new RString("帳表・CSV出力"))) {
-                csv出力有無 = new RString("あり");
-                csvファイル名 = 英数字ファイル名;
-            } else {
-                csv出力有無 = new RString("なし");
-                csvファイル名 = RString.EMPTY;
-            }
-            ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                    new RString("DBD701013"),
-                    導入団体コード,
-                    市町村名,
-                    ジョブ番号,
-                    processParamter.getHyoudai(),
-                    出力ページ数,
-                    csv出力有無,
-                    csvファイル名,
-                    出力条件);
-            IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
-            printer.print();
-        } else if (processParamter.getSyutsuryoku().equals(new RString("CSVのみ出力"))) {
-            EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                    日本語ファイル名,
-                    導入団体コード,
-                    市町村名,
-                    ジョブ番号,
-                    英数字ファイル名,
-                    new RString("DBD701013"),
-                    出力ページ数,
-                    出力条件);
-            EucFileOutputJokenhyoFactory.createInstance(item).print();
-        }
-    }
-
-    private RStringBuilder get日付範囲(RStringBuilder builder) {
-        if (!processParamter.getHitsukehanifrom().isEmpty()
-                && !processParamter.getHitsukehanito().isEmpty()) {
-            builder.append(ChushutsuKomokuKubun.toValue(processParamter.getCyusyutsukomokukubun()).get名称());
-            builder.append(SPACE);
-            builder.append(COLON);
-            builder.append(SPACE);
-            builder.append(processParamter.getHitsukehanifrom().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-            builder.append(SPACE);
-            builder.append(カラ);
-            builder.append(SPACE);
-            builder.append(processParamter.getHitsukehanito().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-            builder.append(COMMA);
-        } else if (!processParamter.getHitsukehanifrom().isEmpty()
-                && processParamter.getHitsukehanito().isEmpty()) {
-            builder.append(ChushutsuKomokuKubun.toValue(processParamter.getCyusyutsukomokukubun()).get名称());
-            builder.append(SPACE);
-            builder.append(COLON);
-            builder.append(SPACE);
-            builder.append(processParamter.getHitsukehanifrom().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-            builder.append(SPACE);
-            builder.append(カラ);
-            builder.append(COMMA);
-        } else if (processParamter.getHitsukehanifrom().isEmpty()
-                && !processParamter.getHitsukehanito().isEmpty()) {
-            builder.append(ChushutsuKomokuKubun.toValue(processParamter.getCyusyutsukomokukubun()).get名称());
-            builder.append(SPACE);
-            builder.append(COLON);
-            builder.append(SPACE);
-            builder.append(カラ);
-            builder.append(SPACE);
-            builder.append(processParamter.getHitsukehanito().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-            builder.append(COMMA);
-        }
-        return builder;
-    }
-
-    private RString get宛名抽出区分情報() {
-        RStringBuilder builder = new RStringBuilder();
-        if (NenreiSoChushutsuHoho.年齢範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())
-                && processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi() != null) {
-            builder = get年齢();
-        } else if (NenreiSoChushutsuHoho.生年月日範囲.equals(processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun())) {
-            builder = get生年月日();
-        }
-        return builder.toRString();
-    }
-
-    private RString get地区選択区分情報() {
-        RStringBuilder builder = new RStringBuilder();
-        if (!RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getJusho_From())
-                && !RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getJusho_To())) {
-            builder.append(JUSHO);
-            builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getJusho_From(),
-                    processParamter.getAtenacyusyutsujyoken().getJusho_FromMesho(),
-                    processParamter.getAtenacyusyutsujyoken().getJusho_To(),
-                    processParamter.getAtenacyusyutsujyoken().getJusho_ToMesho()));
-            builder.append(COMMA);
-        } else if (!RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getJusho_From())
-                && RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getJusho_To())) {
-            builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getJusho_From(),
-                    processParamter.getAtenacyusyutsujyoken().getJusho_FromMesho(),
-                    processParamter.getAtenacyusyutsujyoken().getJusho_To(),
-                    processParamter.getAtenacyusyutsujyoken().getJusho_ToMesho()));
-            builder.append(COMMA);
-        } else if (RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getJusho_From())
-                && !RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getJusho_To())) {
-            builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getJusho_From(),
-                    processParamter.getAtenacyusyutsujyoken().getJusho_FromMesho(),
-                    processParamter.getAtenacyusyutsujyoken().getJusho_To(),
-                    processParamter.getAtenacyusyutsujyoken().getJusho_ToMesho()));
-            builder.append(COMMA);
-        }
-        if (Chiku.地区.equals(processParamter.getAtenacyusyutsujyoken().getChiku_Kubun())) {
-            if (!RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku1_From())
-                    && !RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku1_To())) {
-                builder.append(CHIKI_1);
-                builder.append(COLON);
-                builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getChiku1_From(),
-                        processParamter.getAtenacyusyutsujyoken().getChiku1_FromMesho(),
-                        processParamter.getAtenacyusyutsujyoken().getChiku1_To(),
-                        processParamter.getAtenacyusyutsujyoken().getChiku1_ToMesho()));
-            } else if (!RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku2_From())
-                    && RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku2_To())) {
-                builder.append(CHIKI_2);
-                builder.append(COLON);
-                builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getChiku2_From(),
-                        processParamter.getAtenacyusyutsujyoken().getChiku2_FromMesho(),
-                        RString.EMPTY,
-                        RString.EMPTY));
-            } else if (RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku3_From())
-                    && !RString.isNullOrEmpty(processParamter.getAtenacyusyutsujyoken().getChiku3_To())) {
-                builder.append(CHIKI_3);
-                builder.append(COLON);
-                builder.append(get地区区間出力条件(RString.EMPTY,
-                        RString.EMPTY,
-                        processParamter.getAtenacyusyutsujyoken().getChiku3_To(),
-                        processParamter.getAtenacyusyutsujyoken().getChiku3_ToMesho()));
-            }
-            builder.append(COMMA);
-        } else if (Chiku.行政区.equals(processParamter.getAtenacyusyutsujyoken().getChiku_Kubun())) {
-            builder.append(GYOSEIKU);
-            builder.append(COLON);
-            builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getGyoseiku_From(),
-                    processParamter.getAtenacyusyutsujyoken().getGyoseiku_FromMesho(),
-                    processParamter.getAtenacyusyutsujyoken().getGyoseiku_To(),
-                    processParamter.getAtenacyusyutsujyoken().getGyoseiku_ToMesho()));
-            builder.append(COMMA);
-        } else if (Chiku.住所.equals(processParamter.getAtenacyusyutsujyoken().getChiku_Kubun())) {
-            builder.append(JUSYO);
-            builder.append(COLON);
-            builder.append(get地区区間出力条件(processParamter.getAtenacyusyutsujyoken().getJusho_From(),
-                    processParamter.getAtenacyusyutsujyoken().getJusho_FromMesho(),
-                    processParamter.getAtenacyusyutsujyoken().getJusho_To(),
-                    processParamter.getAtenacyusyutsujyoken().getJusho_ToMesho()));
-            builder.append(COMMA);
-        }
-        return builder.toRString();
-    }
-
-    private RString get地区区間出力条件(RString codeFrom, RString fromMesho, RString codeTo, RString toMesho) {
-        RStringBuilder builder = new RStringBuilder();
-        if (!RString.isNullOrEmpty(codeFrom)) {
-            builder.append(左記号);
-            builder.append(codeFrom);
-            builder.append(右記号);
-            builder.append(SPACE);
-            builder.append(fromMesho);
-            builder.append(SPACE);
-        }
-        builder.append(カラ);
-        if (!RString.isNullOrEmpty(codeTo)) {
-            builder.append(SPACE);
-            builder.append(左記号);
-            builder.append(codeTo);
-            builder.append(右記号);
-            builder.append(SPACE);
-            builder.append(toMesho);
-        }
-        return builder.toRString();
-    }
-
-    private RStringBuilder get年齢() {
-        RStringBuilder builder = new RStringBuilder();
-        if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
-                && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()
-                && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
-            builder.append(NENLEI);
-            builder.append(SPACE);
-            builder.append(COLON);
-            builder.append(SPACE);
-            builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom().toString()));
-            builder.append(SAI);
-            builder.append(SPACE);
-            builder.append(カラ);
-            builder.append(SPACE);
-            builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo().toString()));
-            builder.append(SAI);
-            builder.append(SPACE);
-            builder.append(左記号);
-            builder.append(NENLEIKIZYUNNICHI);
-            builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-            builder.append(右記号);
-        } else if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
-                && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()
-                && null == processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
-            builder.append(NENLEI);
-            builder.append(SPACE);
-            builder.append(COLON);
-            builder.append(SPACE);
-            builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom().toString()));
-            builder.append(SAI);
-            builder.append(SPACE);
-            builder.append(カラ);
-            builder.append(SPACE);
-            builder.append(左記号);
-            builder.append(NENLEIKIZYUNNICHI);
-            builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-            builder.append(右記号);
-        } else if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
-                && null == processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()
-                && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo()) {
-            builder.append(NENLEI);
-            builder.append(SPACE);
-            builder.append(COLON);
-            builder.append(SPACE);
-            builder.append(カラ);
-            builder.append(SPACE);
-            builder.append(new RString(processParamter.getAtenacyusyutsujyoken().getNenreiRange().getTo().toString()));
-            builder.append(SAI);
-            builder.append(SPACE);
-            builder.append(左記号);
-            builder.append(NENLEIKIZYUNNICHI);
-            builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-            builder.append(右記号);
-        }
-        return builder;
-    }
-
-    private RStringBuilder get生年月日() {
-        RStringBuilder builder = new RStringBuilder();
-        if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
-                && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()
-                && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
-            builder.append(SEINENGAPPI);
-            builder.append(COLON);
-            builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-            builder.append(SPACE);
-            builder.append(カラ);
-            builder.append(SPACE);
-            builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-        } else if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
-                && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()
-                && null == processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
-            builder.append(SEINENGAPPI);
-            builder.append(COLON);
-            builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-            builder.append(SPACE);
-            builder.append(カラ);
-        } else if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
-                && null == processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()
-                && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
-            builder.append(SEINENGAPPI);
-            builder.append(COLON);
-            builder.append(SPACE);
-            builder.append(カラ);
-            builder.append(SPACE);
-            builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-        }
-        return builder;
-    }
-
-    private Association get地方公共団体(LasdecCode 市町村コード) {
-        IAssociationFinder finder = AssociationFinderFactory.createInstance();
-        return finder.getAssociation(市町村コード);
     }
 
     private List<JuminShubetsu> get住民種別(List<JuminShubetsu> 住民種別List) {
@@ -850,10 +487,33 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
         } else if (HanyoListJigyoTaishoshaOrderby.性別.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("seibetsuCode");
         } else if (HanyoListJigyoTaishoshaOrderby.市町村コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("shichosonCode1");
+            帳票物理名 = new RString("shichosonCode");
         } else if (HanyoListJigyoTaishoshaOrderby.被保険者番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("hokenshaNo");
         }
         return 帳票物理名;
+    }
+
+    private void get方法(HanyoRisutoJigyoTaishoshaEntity entity, HanyoListEntity hanyolistentity) {
+        ChoikiCode 町域コード = entity.getPsmEntity().getChoikiCode();
+        YubinNo 郵便番号 = entity.getPsmEntity().getYubinNo();
+        AtenaBanchi 番地コード = entity.getPsmEntity().getBanchi();
+        GyoseikuCode 行政区コード = entity.getPsmEntity().getGyoseikuCode();
+        ChikuCode 地区１ = entity.getPsmEntity().getChikuCode1();
+        ChikuCode 地区２ = entity.getPsmEntity().getChikuCode2();
+        SetaiCode 世帯コード = entity.getPsmEntity().getSetaiCode();
+        hanyolistentity.set郵便番号(郵便番号 != null ? 郵便番号.getYubinNo() : RString.EMPTY);
+        hanyolistentity.set町域コード(町域コード != null ? 町域コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set番地コード(番地コード != null ? 番地コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set行政区コード(行政区コード != null ? 行政区コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set地区１(地区１ != null ? 地区１.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set地区２(地区２ != null ? 地区２.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set世帯コード(世帯コード != null ? 世帯コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set識別コード(entity.get被保険者台帳管理_識別コード());
+        hanyolistentity.set氏名５０音カナ(entity.getPsmEntity().getKanaName());
+        hanyolistentity.set生年月日(entity.getPsmEntity().getSeinengappiYMD());
+        hanyolistentity.set性別(entity.getPsmEntity().getSeibetsuCode());
+        hanyolistentity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
+        hanyolistentity.set被保険者番号(entity.get二次予防事業対象者_被保険者番号());
     }
 }

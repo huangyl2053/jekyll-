@@ -478,8 +478,6 @@ public class KogakuKyufuTaishoshaInManager {
         IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.createKojin(宛名);
         DbWT0002KokuhorenTorikomiErrorTempEntity 処理結果 = new DbWT0002KokuhorenTorikomiErrorTempEntity();
         処理結果.setエラー区分(エラー区分_再処理データなし);
-        //TODO 高額介護サービス費給付対象者合計TBL．証記載保険者番号
-//        処理結果.set証記載保険者番号(合計);
         処理結果.set被保険者番号(合計.getHihokenshaNo());
         if (null != 合計.getServiceTeikyoYM()) {
             RString サービス提供年月 = 合計.getServiceTeikyoYM().wareki().firstYear(FirstYear.ICHI_NEN).toDateString();

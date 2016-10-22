@@ -4,17 +4,18 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTas
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * YokaigoNinteiTaskList のクラスファイル
@@ -22,8 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class YokaigoNinteiTaskListDiv extends Panel implements IYokaigoNinteiTaskListDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -115,7 +115,8 @@ public class YokaigoNinteiTaskListDiv extends Panel implements IYokaigoNinteiTas
         Masking("Masking"),
         ShinsakaiToroku("ShinsakaiToroku"),
         NijiHantei("NijiHantei"),
-        GetsureiShori("GetsureiShori");
+        GetsureiShori("GetsureiShori"),
+        ShinsaUketsuke("ShinsaUketsuke");
 
         private final String name;
 
@@ -127,7 +128,7 @@ public class YokaigoNinteiTaskListDiv extends Panel implements IYokaigoNinteiTas
             GridDisplayMode[] enumArray = GridDisplayMode.values();
 
             for (GridDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -142,11 +143,11 @@ public class YokaigoNinteiTaskListDiv extends Panel implements IYokaigoNinteiTas
     }
 
     public GridDisplayMode getMode_GridDisplayMode() {
-        return (GridDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, GridDisplayMode.class);
+        return (GridDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, GridDisplayMode.class );
     }
 
-    public void setMode_GridDisplayMode(GridDisplayMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, GridDisplayMode.class, value);
+    public void setMode_GridDisplayMode( GridDisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, GridDisplayMode.class , value );
     }
 
     // </editor-fold>

@@ -100,7 +100,7 @@ public class KogakuServicehiDetailDivHandler {
             if (証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
                 div.getTplShinseisha().getTxtHokenJyaBango().setValue(証記載保険者番号.value());
             }
-//            set高額口座情報エリア(追加モード, 識別コード, null);
+            set高額口座情報エリア(追加モード, 識別コード, null);
         } else if (修正モード.equals(画面モード) || 送付済モード.equals(画面モード)
                 || 削除モード.equals(画面モード) || 照会モード.equals(画面モード)) {
             result = KougakuSabisuhiShousaiNaiyou.createInstance().
@@ -109,7 +109,7 @@ public class KogakuServicehiDetailDivHandler {
             if (高額サービス費支給申請書登録.equals(メニューID) || 高額介護サービス費照会.equals(メニューID)) {
                 set高額申請情報エリア(result);
                 set高額判定結果情報エリア(result);
-//                set高額口座情報エリア(画面モード, 識別コード, result);
+                set高額口座情報エリア(画面モード, 識別コード, result);
             } else if (総合事業高額サービス費支給申請書登録.equals(メニューID)
                     || 総合事業高額介護サービス費照会.equals(メニューID)) {
                 set事業高額申請情報エリア(result);
@@ -576,20 +576,21 @@ public class KogakuServicehiDetailDivHandler {
         }
     }
 
-//    private void set高額口座情報エリア(RString 画面モード, ShikibetsuCode 識別コード,
-//            KougakuSabisuhiShousaiNaiyouResult result) {
-//        SikyuSinseiJyohoParameter para = new SikyuSinseiJyohoParameter();
-//        para.setShikibetsuCode(識別コード);
-//        if (追加モード.equals(画面モード)) {
-//            div.getCcdShiharaiHohoJyoho().initialize(para, 登録);
-//        } else if (修正モード.equals(画面モード) || 送付済モード.equals(画面モード)) {
-//            if (result != null) {
-//                div.getCcdShiharaiHohoJyoho().initialize(set高額支払方法情報(para, result), 修正);
-//            }
-//        } else if (削除モード.equals(画面モード) || 照会モード.equals(画面モード)) {
-//            div.getCcdShiharaiHohoJyoho().initialize(set高額支払方法情報(para, result), 照会);
-//        }
-//    }
+    private void set高額口座情報エリア(RString 画面モード, ShikibetsuCode 識別コード,
+            KougakuSabisuhiShousaiNaiyouResult result) {
+        SikyuSinseiJyohoParameter para = new SikyuSinseiJyohoParameter();
+        para.setShikibetsuCode(識別コード);
+        if (追加モード.equals(画面モード)) {
+            div.getCcdShiharaiHohoJyoho().initialize(para, 登録);
+        } else if (修正モード.equals(画面モード) || 送付済モード.equals(画面モード)) {
+            if (result != null) {
+                div.getCcdShiharaiHohoJyoho().initialize(set高額支払方法情報(para, result), 修正);
+            }
+        } else if (削除モード.equals(画面モード) || 照会モード.equals(画面モード)) {
+            div.getCcdShiharaiHohoJyoho().initialize(set高額支払方法情報(para, result), 照会);
+        }
+    }
+
     private void set事業高額口座情報エリア(RString 画面モード, ShikibetsuCode 識別コード,
             KougakuSabisuhiShousaiNaiyouResult result) {
         SikyuSinseiJyohoParameter para = new SikyuSinseiJyohoParameter();
@@ -601,7 +602,7 @@ public class KogakuServicehiDetailDivHandler {
                 div.getCcdShiharaiHohoJyoho().initialize(set事業高額支払方法情報(para, result), 修正);
             }
         } else if (削除モード.equals(画面モード) || 照会モード.equals(画面モード)) {
-            div.getCcdShiharaiHohoJyoho().initialize(set高額支払方法情報(para, result), 照会);
+            div.getCcdShiharaiHohoJyoho().initialize(set事業高額支払方法情報(para, result), 照会);
         }
     }
 

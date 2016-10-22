@@ -285,9 +285,9 @@ public class JutakuKaishuJizenShinseiToroku {
         ShiharaiKekkaResult 前回までの支払結果 = ViewStateHolder.get(ViewStateKeys.前回までの支払結果, ShiharaiKekkaResult.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
-        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
+        RDate サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, RDate.class);
         ViewStateHolder.put(ViewStateKeys.住宅改修データ, handler.過去の住宅改修費取得(hihokenshaNo, 前回までの支払結果,
-                画面モード, 整理番号, サービス提供年月));
+                画面モード, 整理番号, new FlexibleYearMonth(サービス年月.getYearMonth().toDateString())));
         ViewStateHolder.put(ViewStateKeys.一覧データ, (Serializable) handler.to住宅改修データを画面メモリに保存());
         return ResponseData.of(div).respond();
     }

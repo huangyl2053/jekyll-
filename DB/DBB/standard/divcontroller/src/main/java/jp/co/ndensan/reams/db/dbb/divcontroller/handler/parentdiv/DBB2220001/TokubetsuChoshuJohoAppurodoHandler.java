@@ -117,13 +117,11 @@ public class TokubetsuChoshuJohoAppurodoHandler {
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
-    private static final int INT_4 = 4;
     private static final int INT_5 = 5;
     private static final int INT_9 = 9;
     private static final int INT_11 = 11;
     private static final int INT_12 = 12;
     private static final int INT_13 = 13;
-    private static final int INT_17 = 17;
     private static final int INT_48 = 48;
     private static final int INT_96 = 96;
     private static final int INT_500 = 500;
@@ -131,8 +129,6 @@ public class TokubetsuChoshuJohoAppurodoHandler {
     private static final RString 状態_市町村 = new RString("市町村");
     private static final RString 状態_月 = new RString("月");
     private static final RString Z1 = new RString("Z1");
-    private static final RString Z2 = new RString("Z2");
-    private static final RString Z3 = new RString("Z3");
     private static final RString Z14 = new RString("Z14");
     private static final RString Z11 = new RString("Z11");
     private static final RString Z13 = new RString("Z13");
@@ -143,17 +139,12 @@ public class TokubetsuChoshuJohoAppurodoHandler {
     private static final RString 拡張子 = new RString(".DTA");
     private static final RString REACH_KEY = new RString("_*");
     private static final RString 市町村コードチェック_MSG = new RString("他市町村のファイルです。");
-    private static final RString 取込日の差のチェック_MSG = new RString("以前のファイルが指定されています。");
     private static final RString ファイル破損チェック_MSG = new RString("ファイルが読み込めませんでした。");
-    private static final RString 非対象ファイルの存在チェック_MSG = new RString("対象のファイルではありません。");
-    private static final RString 対象ファイル業務種別の存在チェック_MSG = new RString("対象のファイルがありません。");
     private static final RString 対象ファイル情報種別の存在チェック_MSG = new RString("対象のファイルではありません。");
     private static final RString 対象ファイルの重複チェック_MSG = new RString("同一情報が複数あります。");
     private static final RString 奇数月のチェック_MSG = new RString("天引き結果情報がありません。");
     private static final RString 偶数月のチェック_MSG = new RString("天引き結果情報が含まれています。");
     private static final RString 介護の制度コードのチェック_MSG = new RString("介護用のファイルではありません。");
-    private static final RString 国保の制度コードのチェック_MSG = new RString("国保用のファイルではありません。");
-    private static final RString 後期の制度コードのチェック_MSG = new RString("後期用のファイルではありません。");
     private static final RString 拡張子のチェック_MSG = new RString("ファイル拡張子が不正です。");
     private static final RString その他チェック_MSG = new RString("ファイルがアップロードできません。");
     private static final RString 共有ファイル名 = new RString("連携種別_500_市町村ID_対象月.DTA");
@@ -720,16 +711,11 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         if (!ファイル名.endsWith(拡張子)) {
             throw new ApplicationException(拡張子のチェック_MSG.toString());
         }
-        RDate システム日付 = RDate.getNowDate();
         try (FileReader reader = new FileReader(選択ファイル.getFilePath(), Encode.UTF_8)) {
             RString ファイルのデータレコード = reader.readLine();
             reader.close();
             市町村コードチェック(ファイルのデータレコード);
-            取込日の差のチェック(ファイルのデータレコード, システム日付);
-            取込済チェック();
             ファイル破損チェック(ファイルのデータレコード);
-            非対象ファイルの存在チェック(ファイル名, システム日付);
-            対象ファイル業務種別の存在チェック(ファイル名, システム日付);
             対象ファイル情報種別の存在チェック(ファイル名);
             対象ファイルの重複チェック(ファイル名);
             通知内容コードのチェック(ファイルのデータレコード);
@@ -755,65 +741,10 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         }
     }
 
-    private void 取込日の差のチェック(RString ファイルのデータレコード, RDate システム日付) {
-        //TODO QA1479
-        int チェック日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBB.取込ファイルチェック期間,
-                システム日付, SubGyomuCode.DBB介護賦課).toString());
-        RDate 管理作成年月日 = new RDate(ファイルのデータレコード.substring(INT_9, INT_17).toString());
-        int 取込日の差 = Math.abs(管理作成年月日.getBetweenDays(システム日付));
-        if (チェック日数 < 取込日の差) {
-            throw new ApplicationException(取込日の差のチェック_MSG.toString());
-        }
-    }
-
-    private void 取込済チェック() {
-        //TODO QA1479
-    }
-
     private void ファイル破損チェック(RString ファイルのデータレコード) {
         int ファイルバイト数 = ファイルのデータレコード.length();
         if ((ファイルバイト数 - INT_48 - INT_48) % INT_500 != 0) {
             throw new ApplicationException(ファイル破損チェック_MSG.toString());
-        }
-    }
-
-    private void 非対象ファイルの存在チェック(RString ファイル名, RDate システム日付) {
-        RString 連携業務種別 = ファイル名.substring(INT_0, INT_2);
-        Enum 業務コンフィグ = null;
-        if (Z1.equals(連携業務種別)) {
-            業務コンフィグ = ConfigNameDBB.業務有無_介護;
-        } else if (Z2.equals(連携業務種別)) {
-            業務コンフィグ = ConfigNameDBB.業務有無_国保;
-        } else if (Z3.equals(連携業務種別)) {
-            業務コンフィグ = ConfigNameDBB.業務有無_後期;
-        }
-        if (業務コンフィグ == null) {
-            return;
-        }
-        RString 業務有無 = DbBusinessConfig.get(業務コンフィグ, システム日付,
-                SubGyomuCode.DBB介護賦課);
-        if (STR_0.equals(業務有無)) {
-            throw new ApplicationException(非対象ファイルの存在チェック_MSG.toString());
-        }
-    }
-
-    private void 対象ファイル業務種別の存在チェック(RString ファイル名, RDate システム日付) {
-        RString 連携業務種別 = ファイル名.substring(INT_0, INT_2);
-        Enum 業務コンフィグ = null;
-        if (Z1.equals(連携業務種別)) {
-            業務コンフィグ = ConfigNameDBB.業務有無_介護;
-        } else if (Z2.equals(連携業務種別)) {
-            業務コンフィグ = ConfigNameDBB.業務有無_国保;
-        } else if (Z3.equals(連携業務種別)) {
-            業務コンフィグ = ConfigNameDBB.業務有無_後期;
-        }
-        if (業務コンフィグ == null) {
-            return;
-        }
-        RString 業務有無 = DbBusinessConfig.get(業務コンフィグ, システム日付,
-                SubGyomuCode.DBB介護賦課);
-        if (!STR_1.equals(業務有無)) {
-            throw new ApplicationException(対象ファイル業務種別の存在チェック_MSG.toString());
         }
     }
 
@@ -887,12 +818,6 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         RString 特別徴収制度コード = ヘッダー.substring(INT_12, INT_13);
         if (ファイル名.startsWith(Z1) && !STR_0.equals(特別徴収制度コード)) {
             throw new ApplicationException(介護の制度コードのチェック_MSG.toString());
-        }
-        if (ファイル名.startsWith(Z2) && !STR_1.equals(特別徴収制度コード)) {
-            throw new ApplicationException(国保の制度コードのチェック_MSG.toString());
-        }
-        if (ファイル名.startsWith(Z3) && !STR_2.equals(特別徴収制度コード)) {
-            throw new ApplicationException(後期の制度コードのチェック_MSG.toString());
         }
     }
 
