@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakushokaitaishoshakensaku.Kog
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.JidoShokanTaishoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.TaishoshaKensakuHoho;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuSearch;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.HihokenshaKensakuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiTaishoshaKensakuMainDiv;
@@ -70,6 +70,7 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
     private static final int INDEX_ゼロ = 0;
     private static final int INDEX_イチ = 1;
     private static final RString 市町村識別ID_00 = new RString("00");
+    private static final RString 市町村コード_000000 = new RString("000000");
 
     /**
      * 高額介護サービス費照会（対象者検索）のHandlerです。
@@ -102,8 +103,7 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
     public void load該当者検索(TaishoshaKey 資格対象者) {
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            // TODO 被保険者でないデータはENUMテーブルがありません。
-            throw new ApplicationException(DbcErrorMessages.住宅改修データなし.getMessage().evaluate());
+            throw new ApplicationException(DbcInformationMessages.被保険者でないデータ.getMessage().evaluate());
         }
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
@@ -123,6 +123,7 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         builder.set住民状態(住民状態List);
         builder.set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない);
         builder.set識別コード(識別コード);
+        // TODO QA1765
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         AtenaMeisho 名称 = KogakuShokaiTaishoshaKensaku.createInstance().get氏名(searchKey);
         if (名称 != null && !名称.isEmpty()) {
@@ -182,6 +183,16 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
             RDate 決定年月 = panel指定_年月.getTxtKetteiYM().getValue();
             searchCondition = getパラメータ(メニューID, RString.EMPTY, 提供年月, 提供年月, 申請年月, 申請年月, 決定年月, 決定年月);
         }
+        return 検索(searchCondition);
+    }
+
+    /**
+     * 検索処理、対象者一覧（パネル）初期化する。
+     *
+     * @param searchCondition KogakuShokaiTaishoshaKensakuSearch
+     * @return 該当者一覧キー KogakuServiceData
+     */
+    public KogakuServiceData 検索(KogakuShokaiTaishoshaKensakuSearch searchCondition) {
         List<KogakuShokaiTaishoshaKensakuResultEntity> 該当者一覧情報
                 = KogakuShokaiTaishoshaKensaku.createInstance().selectTaishosha(searchCondition);
         if (該当者一覧情報 == null || 該当者一覧情報.isEmpty()) {
@@ -222,13 +233,13 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         LasdecCode 市町村コード;
         KoseiShichosonJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get市町村情報();
         if (市町村識別ID_00.equals(市町村セキュリティ情報.get市町村識別ID())) {
-            市町村コード = new LasdecCode("000000");
+            市町村コード = new LasdecCode(市町村コード_000000);
         } else {
             市町村コード = 市町村セキュリティ情報.get市町村コード();
         }
         searchCondition.set市町村コード(市町村コード);
         searchCondition.setメニューID(メニューID);
-        if (被保険者番号 != null && !被保険者番号.isNullOrEmpty()) {
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             searchCondition.set被保険者番号(new HihokenshaNo(被保険者番号));
         }
         if (提供年月From != null) {
@@ -360,11 +371,19 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         }
     }
 
+    /**
+     * 「再検索する」ボタンを押下した、高額介護サービス費一覧エリアをクリア。
+     */
+    public void clear一覧エリア() {
+        List<dgKogakuServicehiRireki_Row> dataSource = new ArrayList<>();
+        div.getKogakuServicehiResult().getDgKogakuServicehiRireki().setDataSource(dataSource);
+    }
+
     private KogakuServiceData set該当者一覧キー(dgKogakuServicehiRireki_Row row) {
         KogakuServiceData 該当者一覧キー = new KogakuServiceData();
         RString 被保険者番号 = row.getTxtHihoNo();
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            該当者一覧キー.set被保険者番号(new HihokenshaNo(被保険者番号.toString()));
+            該当者一覧キー.set被保険者番号(new HihokenshaNo(被保険者番号));
         } else {
             該当者一覧キー.set被保険者番号(HihokenshaNo.EMPTY);
         }
@@ -386,16 +405,12 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         } else {
             該当者一覧キー.set証記載保険者番号(HokenshaNo.EMPTY);
         }
-        // TODO 上の画面の識別コードの取得は問題があります。Redmine#89690
-//        ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
-        該当者一覧キー.set識別コード(識別コード);
-//        RString 識別コード = row.getTxtHdnShikibetsuCode();
-//        if (識別コード != null && !識別コード.isEmpty()) {
-//            該当者一覧キー.set識別コード(new ShikibetsuCode(識別コード));
-//        } else {
-//            該当者一覧キー.set識別コード(ShikibetsuCode.EMPTY);
-//        }
+        RString 識別コード = row.getTxtHdnShikibetsuCode();
+        if (識別コード != null && !識別コード.isEmpty()) {
+            該当者一覧キー.set識別コード(new ShikibetsuCode(識別コード));
+        } else {
+            該当者一覧キー.set識別コード(ShikibetsuCode.EMPTY);
+        }
         return 該当者一覧キー;
     }
 
@@ -405,11 +420,10 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             row.setTxtHihoNo(被保険者番号.getColumnValue());
         }
-        // TODO entity.get識別対象()取得できません。
-//        AtenaMeisho 申請者氏名 = entity.get識別対象().get名称().getName();
-//        if (申請者氏名 != null && !申請者氏名.isEmpty()) {
-//            row.setTxtHihoName(申請者氏名.getColumnValue());
-//        }
+        AtenaMeisho 申請者氏名 = entity.get識別対象().get名称().getName();
+        if (申請者氏名 != null && !申請者氏名.isEmpty()) {
+            row.setTxtHihoName(申請者氏名.getColumnValue());
+        }
         FlexibleYearMonth サービス提供年月 = entity.getサービス提供年月();
         if (サービス提供年月 != null && !サービス提供年月.isEmpty()) {
             row.getTxtTeikyoYM().setValue(new RDate(サービス提供年月.toString()));
@@ -441,11 +455,10 @@ public class KogakuServicehiTaishoshaKensakuMainHandler {
         if (証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
             row.setTxtHdnShoHokensha(証記載保険者番号.getColumnValue());
         }
-        // TODO entity.get識別対象()取得できません。
-//        ShikibetsuCode 識別コード = entity.get識別対象().get識別コード();
-//        if (識別コード != null && !識別コード.isEmpty()) {
-//            row.setTxtHdnShikibetsuCode(識別コード.getColumnValue());
-//        }
+        ShikibetsuCode 識別コード = entity.get識別対象().get識別コード();
+        if (識別コード != null && !識別コード.isEmpty()) {
+            row.setTxtHdnShikibetsuCode(識別コード.getColumnValue());
+        }
         return row;
     }
 
