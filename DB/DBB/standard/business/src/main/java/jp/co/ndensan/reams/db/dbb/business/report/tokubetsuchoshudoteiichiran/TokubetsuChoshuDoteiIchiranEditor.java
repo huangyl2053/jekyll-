@@ -93,7 +93,7 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
         set導入団体コード(source);
         set導入市町村名(source);
         set出力順(source);
-        set改ページ(source);
+        set改ページ項目名(source);
         set被保険者番号(source);
         set年金番号と年金コード(source);
         set識別コード(source);
@@ -105,7 +105,25 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
         set漢字氏名(source);
         set郵便番号(source);
         set住所(source);
+        set改ページデータ(source);
         return source;
+    }
+
+    private void set改ページデータ(TokubetsuChoshuDoteiIchiranSource source) {
+        source.chokiCode = this.特徴対象一覧.getChokiCode();
+        source.gyoseikuCode = this.特徴対象一覧.getGyoseikuCode();
+        source.chiku1 = this.特徴対象一覧.getChiku1();
+        source.chiku2 = this.特徴対象一覧.getChiku2();
+        source.chiku3 = this.特徴対象一覧.getChiku3();
+        source.setaiCode = source.listList2_2;
+        source.kanaShimei = source.listList1_6;
+        source.seinengappiYMD = nonullRString(this.特徴対象一覧.getUmareYMD());
+        source.seibetsuCode = this.特徴対象一覧.getSeibetsuCode();
+        source.shichosonCode = this.特徴対象一覧.getShichosonCode();
+        source.hihokenshaNo = source.listList1_1;
+        source.nenkinCode = source.listList2_1;
+        source.kisoNenkinNo = source.listList1_2;
+
     }
 
     private void set年度(TokubetsuChoshuDoteiIchiranSource source) {
@@ -237,7 +255,7 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
         }
     }
 
-    private void set改ページ(TokubetsuChoshuDoteiIchiranSource source) {
+    private void set改ページ項目名(TokubetsuChoshuDoteiIchiranSource source) {
         if (改頁項目リスト == null || 改頁項目リスト.isEmpty()) {
             return;
         }
@@ -254,5 +272,12 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
         if (改頁項目リスト.size() > NUM_4) {
             source.kaiPageArea5 = 改頁項目リスト.get(NUM_4);
         }
+    }
+
+    private RString nonullRString(RDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return date.toDateString();
     }
 }
