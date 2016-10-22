@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 特定個人情報提供の稼働可否の判定バッチ処理parameterクラスです。
  *
- * @reamsid_L DBU-4880-050 wangxiaodong
+ * @reamsid_L DBU-4880-090 wangxiaodong
  */
 @lombok.Getter
 @lombok.Setter
