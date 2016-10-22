@@ -128,7 +128,7 @@
                 rgdb."DbT4101NinteiShinseiJoho" AS 要介護認定申請情報子
                 ON 認定情報."申請書管理番号" = 要介護認定申請情報子."shinseishoKanriNo"
             LEFT JOIN
-                    rgdb."DbT4014RiyoshaFutangakuGengaku" AS 利用者負担額減額
+                rgdb."DbT4014RiyoshaFutangakuGengaku" AS 利用者負担額減額
                 ON 利用者負担額減額."hihokenshaNo" = A."被保険者番号"
             LEFT JOIN
                 rgdb."DbT4010GemmenGengakuShinsei" AS 減免減額申請
@@ -187,15 +187,25 @@
             WHERE
                 (減免減額申請."gemmenGengakuShurui" = #{利用者負担額減額}
                 OR 減免減額申請."gemmenGengakuShurui" IS null )
-                AND (利用者負担額減額."hihokenshaNo" IS null
-                OR (
-                    (利用者負担額減額."ketteiKubun" = #{承認する}
-                    AND 利用者負担額減額."tekiyoKaishiYMD" &lt;= #{基準日}
-                    AND #{基準日} &lt;= 利用者負担額減額."tekiyoShuryoYMD")
-                    OR (利用者負担額減額."ketteiKubun" = ''
-                        AND 利用者負担額減額."shinseiYMD" &lt;= #{基準日})
+                AND( 利用者負担額減額."hihokenshaNo" IS null
+                OR 利用者負担額減額."shinseiYMD" IN ( 
+                SELECT
+                  MAX( 
+                    rgdb."DbT4014RiyoshaFutangakuGengaku"."shinseiYMD"
+                  ) 
+                FROM
+                  rgdb."DbT4014RiyoshaFutangakuGengaku" 
+                WHERE
+                  rgdb."DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" = A."被保険者番号" 
+                AND(
+                    (rgdb."DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = #{承認する}
+                    AND rgdb."DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" &lt;= #{基準日}
+                    AND #{基準日} &lt;= rgdb."DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
+                    OR (rgdb."DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = ''
+                        AND rgdb."DbT4014RiyoshaFutangakuGengaku"."shinseiYMD" &lt;= #{基準日})
+                     )
                     )
-		)
+                )
                 <if test="is該当者リスト">
                     <if test="is市町村民税非課税世帯">
                         AND A."世帯課税区分" = '2'

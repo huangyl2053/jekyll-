@@ -82,8 +82,11 @@ public class ShiharaiHohoHenkoHaakuTainouTaisakuProcess extends BatchProcessBase
                 }
                 edit差止中金額(t, 支払方法変更差止Data);
                 最大差止納付期日 = get最大の差止納付期限(最大差止納付期日, 支払方法変更差止Data.getSashitome_NofuYMD());
-                最大の控除被保険者証提出期限 = get最大の差止納付期限(最大の控除被保険者証提出期限, 支払方法変更差止Data.getKojo_ShoTeishutsuYMD());
-                edit控除件数と控除証期限(支払方法変更差止Data.getJohoBunruiKubun());
+
+                edit控除件数(支払方法変更差止Data.getJohoBunruiKubun());
+                if (保険料控除情報コード.equals(支払方法変更差止Data.getJohoBunruiKubun())) {
+                    最大の控除被保険者証提出期限 = get最大の差止納付期限(最大の控除被保険者証提出期限, 支払方法変更差止Data.getKojo_ShoTeishutsuYMD());
+                }
             }
         }
 
@@ -103,18 +106,19 @@ public class ShiharaiHohoHenkoHaakuTainouTaisakuProcess extends BatchProcessBase
             for (ShokanShinseiHanteiKekkaJohoEntity 償還Data : t.get償還情報リスト()) {
                 FlexibleYearMonth 差止提供年月 = 支払方法変更差止Data.getSashitome_ServiceTeikyoYM();
                 FlexibleYearMonth 償還払支給申請_サービス提供年月 = 償還Data.get償還払支給申請_サービス提供年月();
+                RString 差止償還整理番号 = 支払方法変更差止Data.getSashitome_ShokanSeiriNo();
+                RString 整理番号 = 償還Data.get償還払支給申請_整理番号();
 
                 if (差止提供年月 != null
                         && !FlexibleYearMonth.EMPTY.equals(差止提供年月)
                         && 償還払支給申請_サービス提供年月 != null
                         && !FlexibleYearMonth.EMPTY.equals(償還払支給申請_サービス提供年月)
-                        && 差止提供年月.equals(償還払支給申請_サービス提供年月)) {
-
+                        && 差止提供年月.equals(償還払支給申請_サービス提供年月)
+                        && 差止償還整理番号.equals(整理番号)) {
                     差止中金額 = 差止中金額.add(償還Data.get償還払支給判定結果_支払金額().subtract(償還Data.get償還払支給判定結果_差額金額合計()));
                 }
             }
         }
-
     }
 
     private boolean is情報分類区分_差止控除状態区分が登録(RString 情報分類区分, RString 差止控除状態区分) {
@@ -133,7 +137,7 @@ public class ShiharaiHohoHenkoHaakuTainouTaisakuProcess extends BatchProcessBase
         return 最大差止納付期日;
     }
 
-    private void edit控除件数と控除証期限(RString 情報分類区分) {
+    private void edit控除件数(RString 情報分類区分) {
         if (保険料控除情報コード.equals(情報分類区分)) {
             控除件数 = 控除件数 + 1;
         }

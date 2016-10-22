@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.J
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.JukyushaKihonJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.RiyoshaFutanwariaiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.SougouJigyouJyohouProcessParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoKanriUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinKadouKahiHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -121,6 +122,17 @@ public class DBU080010_TokuteiKojinJohoTeikyoParameter extends BatchParameterBas
         parameter.set対象終了日時(対象終了日時);
         parameter.set連携先団体内統合宛名_連携方式(連携先団体内統合宛名_連携方式);
         parameter.set個人番号付替対象者被保険者番号(個人番号付替対象者被保険者番号);
+        return parameter;
+    }
+
+    /**
+     * TokuteiKojinJohoTeikyoKanriUpdateProcessParameterに転換します。
+     *
+     * @return TokuteiKojinJohoTeikyoKanriUpdateProcessParameter
+     */
+    public TokuteiKojinJohoTeikyoKanriUpdateProcessParameter toTokuteiKojinJohoTeikyoKanriUpdateProcessParameter() {
+        TokuteiKojinJohoTeikyoKanriUpdateProcessParameter parameter = new TokuteiKojinJohoTeikyoKanriUpdateProcessParameter();
+        parameter.set新規異動区分(新規異動区分);
         return parameter;
     }
 }
