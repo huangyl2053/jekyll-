@@ -8,6 +8,7 @@
         <include refid="selectHanyoListKyufuKanriHyoEntity" />
     </select>
     <sql id="selectHanyoListKyufuKanriHyoEntity">
+        WITH master as(
         WITH "KaigoJigyoshanNewest" AS       
         (SELECT 
             dbT7060."jigyoshaNo",
@@ -115,7 +116,6 @@
         SELECT
             <include refid="allColumns_KyufuKanrihyo" />,
             <include refid="allColumns_DbT1001HihokenshaDaicho" />,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
             <include refid="allColumns_JukyushaDaicho" />,
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.allColumns_DbT7130KaigoServiceShurui" />,
             <include refid="allColumns_JohyoJigyosha" />,
@@ -127,11 +127,7 @@
         INNER JOIN 
             rgdb."DbV1001HihokenshaDaicho"  AS "DbT1001HihokenshaDaicho"
         ON 
-            "KyufuKanrihyo"."hiHokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
-        INNER JOIN
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
-        ON
-            "DbT1001HihokenshaDaicho"."shikibetsuCode"= "ShikibetsuTaisho"."shikibetsuCode"              
+            "KyufuKanrihyo"."hiHokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"           
         LEFT JOIN
             (SELECT 
                 *             
@@ -215,6 +211,25 @@
         <if test="保険者コード!=null">
             AND #{保険者コード} = "DbT1001HihokenshaDaicho"."shichosonCode"
         </if>
+        )
+        SELECT 
+            master.*,            
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM
+            master
+        INNER JOIN
+            rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT1001HihokenshaDaicho_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                )             
+             ) AS "ShikibetsuTaisho" 
+        ON
+            "master"."dbT1001HihokenshaDaicho_shikibetsuCode"= "ShikibetsuTaisho"."shikibetsuCode"   
         <if test="出力順!=null and !出力順.isEmpty()">
             ${出力順}
         </if>             

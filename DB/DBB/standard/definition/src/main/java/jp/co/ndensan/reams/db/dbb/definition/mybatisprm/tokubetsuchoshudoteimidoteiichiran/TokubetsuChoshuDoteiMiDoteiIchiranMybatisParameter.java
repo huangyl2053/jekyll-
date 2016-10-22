@@ -27,6 +27,8 @@ public class TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter implements IMyBa
     private RString kaishuTsuki;
     private List<RString> hosokuTsukiList;
     private RString tsuchiNaiyoCode;
+    private RString doteiOutput;
+    private RString midoteiOutput;
 
     /**
      *
@@ -34,13 +36,17 @@ public class TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter implements IMyBa
      * @param kaishuTsuki 開始月
      * @param hosokuTsukiList 捕捉月リスト
      * @param tsuchiNaiyoCode 通知内容コード
+     * @param doteiOutput 同定出力順
+     * @param midoteiOutput 未同定出力順
      */
     public TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter(RString shoriNendo, RString kaishuTsuki,
-            List<RString> hosokuTsukiList, RString tsuchiNaiyoCode) {
+            List<RString> hosokuTsukiList, RString tsuchiNaiyoCode, RString doteiOutput, RString midoteiOutput) {
         this.shoriNendo = shoriNendo;
         this.kaishuTsuki = kaishuTsuki;
         this.hosokuTsukiList = hosokuTsukiList;
         this.tsuchiNaiyoCode = tsuchiNaiyoCode;
+        this.doteiOutput = doteiOutput;
+        this.midoteiOutput = midoteiOutput;
     }
 
 }
