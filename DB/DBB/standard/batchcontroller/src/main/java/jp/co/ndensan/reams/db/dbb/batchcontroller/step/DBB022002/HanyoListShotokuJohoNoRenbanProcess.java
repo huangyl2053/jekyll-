@@ -214,6 +214,7 @@ public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoL
         processParameter.set年齢層抽出方法(年齢層抽出方法);
         processParameter.set生年月日範囲開始(生年月日範囲開始);
         processParameter.set生年月日範囲終了(生年月日範囲終了);
+        processParameter.set保険者コード(processParameter.get宛名抽出条件().getShichoson_Code());
         return new BatchDbReader(READ_DATA_ID, processParameter.toMybatisParameter());
     }
 

@@ -105,6 +105,19 @@
                 AND B."hihokenshaNo" = DbV1001."hihokenshaNo"
         WHERE
                 1=1
+                <if test="保険者コード !=null and !保険者コード.isEmpty() and 保険者コード !='000000'">
+                    AND (
+                        (
+                            DbV1001."koikinaiJushochiTokureiFlag" <![CDATA[<>]]> '1'
+                            AND DbV1001."shichosonCode" = #{保険者コード}
+                        )
+                        OR
+                        (
+                            DbV1001."koikinaiJushochiTokureiFlag" = '1'
+                            AND DbV1001."koikinaiTokureiSochimotoShichosonCode" = #{保険者コード}
+                        )
+                    )
+                </if>
                 AND DbV2502."shotokuNendo" = #{賦課年度}
                 <if test="課税区分減免前s != null and !課税区分減免前s.isEmpty()">
                 AND DbV2502."kazeiKubun" IN 
