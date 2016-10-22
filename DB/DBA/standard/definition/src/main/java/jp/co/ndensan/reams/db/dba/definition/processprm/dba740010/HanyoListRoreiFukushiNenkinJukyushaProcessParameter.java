@@ -196,10 +196,11 @@ public class HanyoListRoreiFukushiNenkinJukyushaProcessParameter implements IBat
      *
      * @param psmShikibetsuTaisho 宛名識別対象抽出PSM
      * @param psmAtesaki 宛先抽出PSM
+     * @param 出力順 出力順
      * @return SeikatsuhogoJukyushaMybatisParameter
      */
     public HanyoListRoreiFukushiNenkinJukyushaMybatisParameter toHanyoListRoreiFukushiNenkinJukyushaMybatisParameter(
-            RString psmShikibetsuTaisho, RString psmAtesaki) {
+            RString psmShikibetsuTaisho, RString psmAtesaki, RString 出力順) {
         return HanyoListRoreiFukushiNenkinJukyushaMybatisParameter.creatParameter(
                 psmChushutsuAge_Start,
                 psmChushutsuAge_End,
@@ -213,6 +214,7 @@ public class HanyoListRoreiFukushiNenkinJukyushaProcessParameter implements IBat
                 chushutsunichiFrom,
                 chushutsunichiTo,
                 psmShikibetsuTaisho,
-                psmAtesaki);
+                psmAtesaki,
+                出力順);
     }
 }
