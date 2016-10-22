@@ -81,6 +81,8 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
     private static final RString 保険制度コード3 = new RString("3");
     private static final RString 介護 = new RString("3：介護");
     private static final RString 保険制度コード5 = new RString("5");
+    private static final RString 所得区分0 = new RString("0");
+    private static final RString 所得区分_一般 = new RString("0：一般");
     private static final RString 所得区分1 = new RString("1");
     private static final RString 低所得 = new RString("1：低所得");
     private static final RString 一般 = new RString("1：一般");
@@ -100,6 +102,7 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
     private static final RString 区分エ = new RString("8：区分エ");
     private static final RString 所得区分9 = new RString("9");
     private static final RString 区分オ = new RString("9：区分オ");
+    private static final RString 国保被保険者以外 = new RString("国保被保険者以外");
     private static final RString 再計算実施1 = new RString("1");
     private static final RString 支給 = new RString("支給");
     private static final RString 再計算実施2 = new RString("2");
@@ -486,7 +489,9 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
     }
 
     private void set所得区分(ShikyugakuUpdateTempEntity entity, GassanJigyobunShikyugakuKeisanKekkaIchiranEntity csvEntity) {
-        if (所得区分1.equals(entity.getShikyugaku_shotokuKubun())) {
+        if (所得区分0.equals(entity.getShikyugaku_shotokuKubun())) {
+            csvEntity.set所得区分(所得区分_一般);
+        } else if (所得区分1.equals(entity.getShikyugaku_shotokuKubun())) {
             csvEntity.set所得区分(低所得);
         } else if (所得区分2.equals(entity.getShikyugaku_shotokuKubun())) {
             csvEntity.set所得区分(上位所得者);
@@ -500,6 +505,8 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
             csvEntity.set所得区分(区分エ);
         } else if (所得区分9.equals(entity.getShikyugaku_shotokuKubun())) {
             csvEntity.set所得区分(区分オ);
+        } else {
+            csvEntity.set所得区分(国保被保険者以外);
         }
         if (所得区分1.equals(entity.getShikyugaku_over70_ShotokuKubun())) {
             csvEntity.set七十歳以上の者に係る所得区分(一般);
