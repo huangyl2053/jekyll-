@@ -87,7 +87,7 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.hokenshaNo = 保険者番号;
         source.hokenshaName = 保険者名称;
-        source.shoKisaiHokenshaNo = entity.get高額合算自己負担額_保険者番号().value();
+        source.shoKisaiHokenshaNo = entity.get高額合算自己負担額_保険者番号();
         source.shoKisaiHokenshaName = entity.get高額合算自己負担額_保険者名();
         set出力順And改ページ(source);
         source.list_1 = new RString(連番);

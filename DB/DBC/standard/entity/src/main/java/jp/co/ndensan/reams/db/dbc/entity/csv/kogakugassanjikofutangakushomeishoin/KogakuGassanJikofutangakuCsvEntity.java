@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassanjikofutangakushomeishoin;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -34,7 +33,7 @@ public class KogakuGassanJikofutangakuCsvEntity {
     @CsvField(order = 60, name = "No.")
     private RString no;
     @CsvField(order = 70, name = "証記載保険者番号")
-    private ShoKisaiHokenshaNo 証記載保険者番号;
+    private RString 証記載保険者番号;
     @CsvField(order = 80, name = "証記載保険者名")
     private RString 証記載保険者名;
     @CsvField(order = 90, name = "対象年度")
