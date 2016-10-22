@@ -79,12 +79,12 @@ public class ShiharaiHohoHenkoHaakuTainouTaisakuProcess extends BatchProcessBase
                 if (is情報分類区分_差止控除状態区分が登録(支払方法変更差止Data.getJohoBunruiKubun(),
                         支払方法変更差止Data.getSashitomeKojoJotaiKubun())) {
                     差止中件数 = 差止中件数 + 1;
+                    edit差止中金額(t, 支払方法変更差止Data);
+                    最大差止納付期日 = get最大の差止納付期限(最大差止納付期日, 支払方法変更差止Data.getSashitome_NofuYMD());
                 }
-                edit差止中金額(t, 支払方法変更差止Data);
-                最大差止納付期日 = get最大の差止納付期限(最大差止納付期日, 支払方法変更差止Data.getSashitome_NofuYMD());
 
-                edit控除件数(支払方法変更差止Data.getJohoBunruiKubun());
                 if (保険料控除情報コード.equals(支払方法変更差止Data.getJohoBunruiKubun())) {
+                    控除件数 = 控除件数 + 1;
                     最大の控除被保険者証提出期限 = get最大の差止納付期限(最大の控除被保険者証提出期限, 支払方法変更差止Data.getKojo_ShoTeishutsuYMD());
                 }
             }
@@ -137,9 +137,4 @@ public class ShiharaiHohoHenkoHaakuTainouTaisakuProcess extends BatchProcessBase
         return 最大差止納付期日;
     }
 
-    private void edit控除件数(RString 情報分類区分) {
-        if (保険料控除情報コード.equals(情報分類区分)) {
-            控除件数 = 控除件数 + 1;
-        }
-    }
 }
