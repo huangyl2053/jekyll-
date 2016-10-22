@@ -288,7 +288,7 @@ public class HanyoListTaShichosonJushochiTokureishaProcess extends BatchProcessB
 
     private RString get出力順() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBA.DBA701002.getReportId(),
+        IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701002.getReportId(),
                 processParamter.getShutsuryokujunId());
         RString 出力順 = RString.EMPTY;
         if (outputOrder != null) {

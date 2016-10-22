@@ -468,6 +468,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
      */
     public DBD522001_EnkitsuchiParameter getバッチパラメータ() {
         DBD522001_EnkitsuchiParameter parameter = new DBD522001_EnkitsuchiParameter();
+        List<FlexibleDate> 通知書発行日 = new ArrayList<>();
         if (検索.getName().equals(ResponseHolder.getState())) {
             parameter.set画面モード(画面モード_1);
             if (div.getTxtMikomiDateIchiran().getFromValue() != null) {
@@ -477,14 +478,16 @@ public class NinteiEnkiTsuchishoHakkoHandler {
                 parameter.set処理見込み日To(new FlexibleDate(div.getTxtMikomiDateIchiran().getToValue().toDateString()));
             }
             if (div.getTxtInsatsuDate().getValue() != null) {
-                parameter.set通知書発行日(new FlexibleDate(div.getTxtInsatsuDate().getValue().toDateString()));
+                通知書発行日.add(new FlexibleDate(div.getTxtInsatsuDate().getValue().toDateString()));
+                parameter.set通知書発行日(通知書発行日);
             }
         } else if (通知書.getName().equals(ResponseHolder.getState())) {
             parameter.set画面モード(画面モード_2);
             parameter.set申請書管理番号リスト(get申請書管理番号リスト());
             parameter.set処理見込み日From(FlexibleDate.EMPTY);
             parameter.set処理見込み日To(FlexibleDate.EMPTY);
-            parameter.set通知書発行日(new FlexibleDate(RDate.getNowDate().toDateString()));
+            通知書発行日.add(new FlexibleDate(RDate.getNowDate().toDateString()));
+            parameter.set通知書発行日(通知書発行日);
         }
         return parameter;
     }
