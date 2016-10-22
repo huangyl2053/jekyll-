@@ -406,6 +406,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         エラーチェック処理_電算２用部分();
         エラーチェック処理_電算２用部分1();
         エラーチェック処理_電算２用部分2();
+        エラーチェック処理_電算２用部分3();
     }
 
     private void エラーチェック処理_電算２用部分() {
@@ -440,7 +441,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
-
     }
 
     private void エラーチェック処理_電算２用部分1() {
@@ -479,26 +479,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
-        RString 現住所 = 取込後期高齢者情報Entity.get住所();
-        if (!Pattern.compile(正則表現_全角空白.toString()).matcher(現住所).matches()
-                && !Pattern.compile(正則表現_半角空白.toString()).matcher(現住所).matches()) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_65);
-            if (文言設定flag) {
-                取込後期高齢者情報Entity.setエラー文言(コード文言_現住所);
-                文言設定flag = false;
-            }
-            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
-        }
-        RString 市町村コード = 取込後期高齢者情報Entity.get市町村コード();
-        if (!Pattern.compile(正則表現_全角空白.toString()).matcher(市町村コード).matches()
-                && !Pattern.compile(正則表現_半角空白.toString()).matcher(市町村コード).matches() && !is構成市町村マスタあり(市町村コード)) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_66);
-            if (文言設定flag) {
-                取込後期高齢者情報Entity.setエラー文言(コード文言_市町村コード);
-                文言設定flag = false;
-            }
-            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
-        }
     }
 
     private void エラーチェック処理_電算２用部分2() {
@@ -532,6 +512,29 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             取込後期高齢者情報Entity.setエラーコード(エラーコード_69);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(文言_保険者開始日保険者終了日);
+                文言設定flag = false;
+            }
+            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
+        }
+    }
+
+    private void エラーチェック処理_電算２用部分3() {
+        RString 現住所 = 取込後期高齢者情報Entity.get住所();
+        if (RStringUtil.is全角Only(現住所)
+                && !Pattern.compile(正則表現_半角空白.toString()).matcher(現住所).matches()) {
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_65);
+            if (文言設定flag) {
+                取込後期高齢者情報Entity.setエラー文言(コード文言_現住所);
+                文言設定flag = false;
+            }
+            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
+        }
+        RString 市町村コード = 取込後期高齢者情報Entity.get市町村コード();
+        if (!RStringUtil.is全角Only(市町村コード)
+                && !Pattern.compile(正則表現_半角空白.toString()).matcher(市町村コード).matches() && !is構成市町村マスタあり(市町村コード)) {
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_66);
+            if (文言設定flag) {
+                取込後期高齢者情報Entity.setエラー文言(コード文言_市町村コード);
                 文言設定flag = false;
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
