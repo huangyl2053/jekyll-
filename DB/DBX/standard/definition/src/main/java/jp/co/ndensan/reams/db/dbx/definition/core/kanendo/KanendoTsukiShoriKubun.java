@@ -94,6 +94,6 @@ public enum KanendoTsukiShoriKubun implements ITsukiShorkiKubun {
      */
     @Override
     public RString get区分() {
-        return fullName;
+        return code;
     }
 }
