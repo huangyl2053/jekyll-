@@ -482,7 +482,7 @@ public class JukoKisambiTokushuTorokuHandler {
 
         if (!存在フラグ) {
             JikoKisambiKanri newJikoKisambiKanri = new JikoKisambiKanri(
-                    new ShoKisaiHokenshaNo(div.getHdnShoKisaiHokenshaNo()),
+                    new ShoKisaiHokenshaNo(RString.EMPTY),
                     被保険者番号,
                     調定年度,
                     new RYear(row.getHdnFukaNendo()),
