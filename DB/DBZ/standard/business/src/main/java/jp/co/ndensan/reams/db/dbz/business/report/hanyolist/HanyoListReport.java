@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class HanyoListReport extends Report<HanyoListReportSource> {
 
+    private final HanyoListEntity hanyolistentity;
     private final RString 表題;
     private final RString データ種別;
     private final RString 項目見出し;
@@ -64,11 +65,12 @@ public class HanyoListReport extends Report<HanyoListReportSource> {
         this.項目内容 = 項目内容;
         this.地方公共団体 = 地方公共団体;
         this.outputOrder = outputOrder;
+        this.hanyolistentity = hanyolistentity;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<HanyoListReportSource> writer) {
-        IHanyoListEditor editor = new HanyoListEditor(表題, データ種別,
+        IHanyoListEditor editor = new HanyoListEditor(hanyolistentity, 表題, データ種別,
                 項目見出し, 項目内容, 地方公共団体, outputOrder);
         IHanyoListBuilder builder = new HanyoListBuilder(editor);
         writer.writeLine(builder);

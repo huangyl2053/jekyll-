@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.report.hanyolist;
 
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoListEntity;
 import jp.co.ndensan.reams.db.dbz.entity.report.hanyolist.HanyoListReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class HanyoListEditor implements IHanyoListEditor {
 
+    private final HanyoListEntity hanyolistentity;
     private final RString 表題;
     private final RString データ種別;
     private final RString 項目見出し;
@@ -42,6 +44,7 @@ public class HanyoListEditor implements IHanyoListEditor {
     /**
      * インスタンスを生成します。
      *
+     * @param hanyolistentity hanyolistentity
      * @param 表題 表題
      * @param データ種別 データ種別
      * @param 項目見出し 項目見出し
@@ -49,7 +52,7 @@ public class HanyoListEditor implements IHanyoListEditor {
      * @param 地方公共団体 地方公共団体
      * @param outputOrder outputOrder
      */
-    protected HanyoListEditor(RString 表題, RString データ種別, RString 項目見出し,
+    protected HanyoListEditor(HanyoListEntity hanyolistentity, RString 表題, RString データ種別, RString 項目見出し,
             RString 項目内容, Association 地方公共団体, IOutputOrder outputOrder) {
         this.表題 = 表題;
         this.データ種別 = データ種別;
@@ -57,6 +60,7 @@ public class HanyoListEditor implements IHanyoListEditor {
         this.項目内容 = 項目内容;
         this.地方公共団体 = 地方公共団体;
         this.outputOrder = outputOrder;
+        this.hanyolistentity = hanyolistentity;
     }
 
     /**
