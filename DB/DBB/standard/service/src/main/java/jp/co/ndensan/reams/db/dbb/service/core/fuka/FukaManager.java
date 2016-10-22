@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.ca.cax.definition.core.shuno.chotei.FukaShoriJokyo;
 import jp.co.ndensan.reams.ca.cax.service.core.shuno.ShunoService;
 import jp.co.ndensan.reams.ca.cax.service.core.shuno.shuno.ShunoManager;
 import jp.co.ndensan.reams.ca.cax.service.saiban.ChoteiSaiban;
-import jp.co.ndensan.reams.ca.cax.service.saiban.ShunoSaiban;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsuKomokuHenshu;
@@ -217,10 +216,9 @@ public class FukaManager {
 
     private void save介護期別(FukaJoho 介護賦課, IShunoKamoku 科目, ChoshuHohoKibetsu 徴収種別, Decimal 調定額, RDate 納期限, int 期) {
         long 調定ID = ChoteiSaiban.getNumbering調定ID();
-        long 収納ID = ShunoSaiban.getNumbering収納ID();
-        ShunoKanri 収納管理 = get収納管理(収納ID, 介護賦課, 科目, 期);
+        ShunoKanri 収納管理 = get収納管理(介護賦課, 科目, 期);
         shunoManager.save収納管理(収納管理);
-        shunoManager.save調定(収納管理, get調定クラス(介護賦課.get調定年度(), 調定額, 納期限, 調定ID, 収納ID, 納期限, 収納管理));
+        shunoManager.save調定(収納管理, get調定クラス(介護賦課.get調定年度(), 調定額, 納期限, 調定ID, 納期限, 収納管理));
         介護期別Manager.save介護期別(new Kibetsu(介護賦課.get調定年度(), 介護賦課.get賦課年度(),
                 介護賦課.get通知書番号(), 介護賦課.get履歴番号(), 徴収種別.getコード(), 期)
                 .createBuilderForEdit().set調定ID(new Decimal(調定ID)).build());
@@ -235,18 +233,18 @@ public class FukaManager {
         return null;
     }
 
-    private Chotei get調定クラス(FlexibleYear 調定年度, Decimal 調定額, RDate 納期限, long 調定ID, long 収納ID, RDate 調定年月日, ShunoKanri 収納管理) {
+    private Chotei get調定クラス(FlexibleYear 調定年度, Decimal 調定額, RDate 納期限, long 調定ID, RDate 調定年月日, ShunoKanri 収納管理) {
         return ChoteiFactory.createChoteiInstanceParamChoteiId(
                 調定ID, new RYear(調定年度.getYearValue()), 0, ChoteiJiyu.更正その他, 調定年月日, 調定額,
                 Decimal.ZERO, 納期限, FukaShoriJokyo.保留中, ShunoShoriJokyo.未取込, Collections.EMPTY_LIST, 収納管理)
                 .createBuilderForEdit()
                 .set処理年度(new RYear(調定年度.getYearValue()))
-                .set収納ID(収納ID)
+                .set収納ID(0L)
                 .set処理番号(0).build();
     }
 
-    private ShunoKanri get収納管理(long 収納ID, FukaJoho 介護賦課, IShunoKamoku 科目, int 期) {
-        return new ShunoKanri(収納ID,
+    private ShunoKanri get収納管理(FukaJoho 介護賦課, IShunoKamoku 科目, int 期) {
+        return new ShunoKanri(0L,
                 科目.getコード(),
                 科目.get枝番コード(),
                 new RyokinShubetsuCodeValue(RString.EMPTY),
