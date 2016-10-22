@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushakoshinkekkain;
 
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -16,11 +17,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyodoJukyushaKoshinKekkaInMybatisParameter {
+public class KyodoJukyushaKoshinKekkaInMybatisParameter implements IMyBatisParameter {
 
     private SubGyomuCode subGyomuCode;
     private RString chohyoBunruiID;
     private RString kanriNendo;
     private RString komokuName;
-
+    private RString 出力順;
 }
