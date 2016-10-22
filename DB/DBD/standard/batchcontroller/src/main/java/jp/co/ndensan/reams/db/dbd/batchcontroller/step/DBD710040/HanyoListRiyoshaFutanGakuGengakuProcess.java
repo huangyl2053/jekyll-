@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.ShutsuryokuKomok
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoListEntity;
 import jp.co.ndensan.reams.db.dbz.entity.report.hanyolist.HanyoListReportSource;
 import jp.co.ndensan.reams.db.dbz.service.core.hanyolist.HanyoListReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
@@ -261,34 +262,10 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
                     } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                         Logger.getLogger(HanyoListRiyoshaFutanGakuGengakuProcess.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    if (is帳票出力) {
-                        帳票出力編集(i, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
-                    }
-                    if (isCSV出力) {
-                        出力編集(i, get項目名称, 項目内容new);
-                    }
+                    帳票出力とCSV出力編集(i, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
                 }
             }
-            if (is帳票出力) {
-                if (flag) {
-                    HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(),
-                            processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
-                    report.writeBy(reportSourceWriter);
-                }
-                項目見出し = RString.EMPTY;
-                項目内容 = RString.EMPTY;
-                出力文字の開始位置 = 0;
-            }
-            if (isCSV出力 && csvContent != null && !csvContent.isEmpty()) {
-                連番flag = 連番flag + 1;
-                if (連番flag == 1 && processParamter.isCsvkomokumeifuka() && csvHeader != null && !csvHeader.isEmpty()) {
-                    eucCsvWriter1.writeLine(csvHeader);
-                }
-                if (flag) {
-                    eucCsvWriter1.writeLine(csvContent);
-                }
-                csvContent = new ArrayList();
-            }
+            帳票出力とCSV出力(flag);
         }
     }
 
@@ -304,6 +281,39 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
             manager.spool(csvFilePath1, log);
         }
         バッチ出力条件リストの出力();
+    }
+
+    private void 帳票出力とCSV出力(boolean flag) {
+        if (is帳票出力) {
+            if (flag) {
+                HanyoListEntity hanyolistentity = new HanyoListEntity();
+                HanyoListReport report = new HanyoListReport(hanyolistentity, processParamter.getHyoudai(),
+                        processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
+                report.writeBy(reportSourceWriter);
+            }
+            項目見出し = RString.EMPTY;
+            項目内容 = RString.EMPTY;
+            出力文字の開始位置 = 0;
+        }
+        if (isCSV出力 && csvContent != null && !csvContent.isEmpty()) {
+            連番flag = 連番flag + 1;
+            if (連番flag == 1 && processParamter.isCsvkomokumeifuka() && csvHeader != null && !csvHeader.isEmpty()) {
+                eucCsvWriter1.writeLine(csvHeader);
+            }
+            if (flag) {
+                eucCsvWriter1.writeLine(csvContent);
+            }
+            csvContent = new ArrayList();
+        }
+    }
+
+    private void 帳票出力とCSV出力編集(int i, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku, RString get項目名称, RString 項目内容new) {
+        if (is帳票出力) {
+            帳票出力編集(i, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
+        }
+        if (isCSV出力) {
+            出力編集(i, get項目名称, 項目内容new);
+        }
     }
 
     private void set帳表CSV出力() {
@@ -867,6 +877,36 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
 
     private RString to帳票物理名(RString 項目ID) {
         RString 帳票物理名 = RString.EMPTY;
+        帳票物理名 = 宛名判定(帳票物理名, 項目ID);
+        if (!帳票物理名.isEmpty()) {
+            if (HanyoListRiyoshaFutanGakuGengakuOrderby.証記載保険者番号.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("shoKisaiHokenshaNo");
+            } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.被保険者番号.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("hokenshaNo");
+            } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.資格区分.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("shikakuKubun");
+            } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.受給申請区分.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("jukyuShinseiKubun");
+            } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.受給申請日.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("jukyuShinseiYMD");
+            } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.要介護度.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("yoKaigoJotaiKubunCode");
+            } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.認定開始日.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("ninteiKaishiYMD");
+            } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.資格取得日.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("shikakuShutokuYMD");
+            } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.資格喪失日.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("shikakuSoshitsuYMD");
+            }
+        }
+        return 帳票物理名;
+    }
+
+    private void 帳票source(RiyoshaFutanGakuGengakuEntity entity) {
+
+    }
+
+    private RString 宛名判定(RString 帳票物理名, RString 項目ID) {
         if (HanyoListRiyoshaFutanGakuGengakuOrderby.郵便番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("yubinNo");
         } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.町域コード.get項目ID().equals(項目ID)) {
@@ -891,24 +931,6 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
             帳票物理名 = new RString("seibetsuCode");
         } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.市町村コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("shichosonCode1");
-        } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.証記載保険者番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("shoKisaiHokenshaNo");
-        } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.被保険者番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("hokenshaNo");
-        } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.資格区分.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new1");
-        } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.受給申請区分.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new2");
-        } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.受給申請日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new3");
-        } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.要介護度.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new4");
-        } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.認定開始日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new5");
-        } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.資格取得日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new6");
-        } else if (HanyoListRiyoshaFutanGakuGengakuOrderby.資格喪失日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("new7");
         }
         return 帳票物理名;
     }

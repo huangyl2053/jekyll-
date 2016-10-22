@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.ShutsuryokuKomok
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoListEntity;
 import jp.co.ndensan.reams.db.dbz.entity.report.hanyolist.HanyoListReportSource;
 import jp.co.ndensan.reams.db.dbz.service.core.hanyolist.HanyoListReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
@@ -67,13 +68,19 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -250,12 +257,12 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
         eucCsvWriter.writeLine(eucCsvEntity);
         personalDataList.add(toPersonalData(entity));
         Class clazz = eucCsvEntity.getClass();
-        RString 項目内容new = RString.EMPTY;
         boolean flag = false;
         if (hanyoListShutsuryokuKomoku != null) {
             for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
                 RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
                 if (get項目名称 != null && !get項目名称.isEmpty()) {
+                    RString 項目内容new = RString.EMPTY;
                     try {
                         Method getMethod = clazz.getDeclaredMethod(FutanGendoGakuNinteiCsvEnumEntity
                                 .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
@@ -279,7 +286,9 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
             }
             if (is帳票出力) {
                 if (flag) {
-                    HanyoListReport report = new HanyoListReport(processParamter.getHyoudai(),
+                    HanyoListEntity hanyolistentity = new HanyoListEntity();
+                    get方法(entity, hanyolistentity);
+                    HanyoListReport report = new HanyoListReport(hanyolistentity, processParamter.getHyoudai(),
                             processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
                     report.writeBy(reportSourceWriter);
                 }
@@ -358,7 +367,6 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
     private void バッチ出力条件リストの出力() {
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
-        RString 出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
         RString 日本語ファイル名 = new RString("汎用リスト 負担限度額認定CSV");
         RString 英数字ファイル名 = new RString("HanyoList_FutanGendoGakuNintei.csv");
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
@@ -417,12 +425,13 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
         }
         出力条件.add(get旧措置者());
         出力条件.add(get利用者負担段階());
-        バッチ出力条件表出力(導入団体コード, 市町村名, 出力ページ数, 日本語ファイル名, 英数字ファイル名, ジョブ番号, 出力条件);
+        バッチ出力条件表出力(導入団体コード, 市町村名, 日本語ファイル名, 英数字ファイル名, ジョブ番号, 出力条件);
     }
 
-    private void バッチ出力条件表出力(RString 導入団体コード, RString 市町村名, RString 出力ページ数, RString 日本語ファイル名,
+    private void バッチ出力条件表出力(RString 導入団体コード, RString 市町村名, RString 日本語ファイル名,
             RString 英数字ファイル名, RString ジョブ番号, List<RString> 出力条件) {
         if (is帳票出力) {
+            RString 出力ページ数 = new RString(String.valueOf(batchReportWrite.getPageCount()));
             RString csv出力有無;
             RString csvファイル名;
             if (processParamter.getSyutsuryoku().equals(Outputs.帳票_CSV出力.getコード())) {
@@ -445,6 +454,7 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
             IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
             printer.print();
         } else if (processParamter.getSyutsuryoku().equals(Outputs.CSVのみ出力.getコード())) {
+            RString 出力件数 = new RString(String.valueOf(eucCsvWriter1.getCount()));
             EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                     日本語ファイル名,
                     導入団体コード,
@@ -452,7 +462,7 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
                     ジョブ番号,
                     英数字ファイル名,
                     new RString("DBD701008"),
-                    出力ページ数,
+                    出力件数,
                     出力条件);
             EucFileOutputJokenhyoFactory.createInstance(item).print();
         }
@@ -971,5 +981,36 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
             帳票物理名 = new RString("new7");
         }
         return 帳票物理名;
+    }
+
+    private void get方法(FutanGendoGakuNinteiEntity entity, HanyoListEntity hanyolistentity) {
+        ChoikiCode 町域コード = entity.getPsmEntity().getChoikiCode();
+        YubinNo 郵便番号 = entity.getPsmEntity().getYubinNo();
+        AtenaBanchi 番地コード = entity.getPsmEntity().getBanchi();
+        GyoseikuCode 行政区コード = entity.getPsmEntity().getGyoseikuCode();
+        ChikuCode 地区１ = entity.getPsmEntity().getChikuCode1();
+        ChikuCode 地区２ = entity.getPsmEntity().getChikuCode2();
+        SetaiCode 世帯コード = entity.getPsmEntity().getSetaiCode();
+        hanyolistentity.set郵便番号(郵便番号 != null ? 郵便番号.getYubinNo() : RString.EMPTY);
+        hanyolistentity.set町域コード(町域コード != null ? 町域コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set番地コード(番地コード != null ? 番地コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set行政区コード(行政区コード != null ? 行政区コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set地区１(地区１ != null ? 地区１.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set地区２(地区２ != null ? 地区２.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set世帯コード(世帯コード != null ? 世帯コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set識別コード(entity.get被保険者台帳管理_識別コード());
+        hanyolistentity.set氏名５０音カナ(entity.getPsmEntity().getKanaName());
+        hanyolistentity.set生年月日(entity.getPsmEntity().getSeinengappiYMD());
+        hanyolistentity.set性別(entity.getPsmEntity().getSeibetsuCode());
+        hanyolistentity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
+        hanyolistentity.set被保険者番号(entity.get被保険者台帳管理_被保険者番号());
+        hanyolistentity.set資格区分(entity.get被保険者台帳管理_被保険者区分コード());
+        hanyolistentity.set認定開始日(entity.get前回受給情報_認定年月日());
+        hanyolistentity.set資格取得日(entity.get被保険者台帳管理_資格取得年月日());
+        hanyolistentity.set資格喪失日(entity.get被保険者台帳管理_資格喪失年月日());
+        hanyolistentity.set受給申請区分(entity.get初回申請_要支援者認定申請区分());
+        hanyolistentity.set受給申請日(entity.get受給者台帳_受給申請年月日());
+        hanyolistentity.set要介護度(entity.get初回受給情報_みなし要介護区分コード());
+        hanyolistentity.set証記載保険者番号(entity.get介護保険負担限度額認定_証記載保険者番号());
     }
 }
