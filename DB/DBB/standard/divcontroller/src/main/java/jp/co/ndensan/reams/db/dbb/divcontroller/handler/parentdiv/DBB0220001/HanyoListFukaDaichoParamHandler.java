@@ -271,9 +271,7 @@ public class HanyoListFukaDaichoParamHandler {
         if (日付スラッシュ付加) {
             csv編集方法リスト.add(CSVSettings.日付スラッシュ編集.getコード());
         }
-        if (!csv編集方法リスト.isEmpty()) {
-            div.getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
-        }
+        div.getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
         FlexibleYear 調定年度 = restoreBatchParameterMap.getParameterValue(FlexibleYear.class, KEY_調定年度);
         if (調定年度 != null && !調定年度.isEmpty()) {
             div.getNendoKijumbiSitei().getDdlChoteiNendo().setSelectedKey(調定年度.toDateString());

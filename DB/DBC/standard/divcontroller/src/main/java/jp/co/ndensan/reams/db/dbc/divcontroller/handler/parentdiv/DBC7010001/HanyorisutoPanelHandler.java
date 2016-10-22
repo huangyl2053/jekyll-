@@ -185,9 +185,7 @@ public class HanyorisutoPanelHandler {
         if (csv日付スラッシュ編集) {
             csv編集方法リスト.add(THREE);
         }
-        if (!csv編集方法リスト.isEmpty()) {
-            div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
-        }
+        div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
         RString 改頁出力順ID = restoreBatchParameterMap.getParameterValue(RString.class, KEY_改頁出力順ID);
         if (改頁出力順ID != null && !改頁出力順ID.isEmpty()) {
             div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, REPORTID,
