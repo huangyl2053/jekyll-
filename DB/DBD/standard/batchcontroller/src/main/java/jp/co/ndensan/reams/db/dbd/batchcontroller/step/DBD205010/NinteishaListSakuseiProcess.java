@@ -455,23 +455,23 @@ public class NinteishaListSakuseiProcess extends BatchKeyBreakBase<NinteishaList
 
         RString 帳票物理名 = RString.EMPTY;
 
-        if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.郵便番号.get項目ID() == 項目ID) {
+        if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.郵便番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("listCenter_2");
         } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.行政区コード.
-                get項目ID() == 項目ID) {
+                get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("listLower_2");
         } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.被保険者番号.
-                get項目ID() == 項目ID) {
+                get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("listUpper_1");
-        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.世帯コード.get項目ID() == 項目ID) {
+        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.世帯コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("setaiCode");
-        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.市町村コード.get項目ID() == 項目ID) {
+        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.市町村コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("shichosonCode");
-        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.氏名５０音カナ.get項目ID() == 項目ID) {
+        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.氏名５０音カナ.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("gaikokujinKanaShimei");
-        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.町域コード.get項目ID() == 項目ID) {
+        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.町域コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("choikiCode");
-        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.識別コード.get項目ID() == 項目ID) {
+        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.識別コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("shikibetsuCodeKai");
         }
         return 帳票物理名;
