@@ -105,7 +105,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
                 data.setMiNoGaku(未納額);
                 data.setJikoKisambiJiyu(edit時効起算事由(entity));
 
-                if (edit日期(data.getNokigenYMD()).isBefore(processParamter.get基準日().minusYear(年_3))) {
+                if (is以前未納情報(data.getNokigenYMD())) {
                     edit以前未納情報(完納_未納区分, data.getJikoKubun(), data.getMiNoGaku(), data.getJikoKisambiYMD(), processParamter.get基準日(), data);
                 } else {
                     edit以降未納情報(完納_未納区分, data, 収納情報List);
@@ -172,7 +172,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
                         || 時効起算日 == null || 時効起算日.isEmpty() || 仮の時効起算日.plusYear(2).isBeforeOrEquals(edit日期(収入情報.get収入日()))) {
                     break;
                 } else if (時効起算日 != null && !時効起算日.isEmpty() && edit日期(収入情報.get収入日()).isBefore(時効起算日.plusYear(2))
-                        && 仮の時効起算日.isBefore(edit日期(収入情報.get収入日()))) {
+                        && 仮の時効起算日.isBeforeOrEquals(edit日期(収入情報.get収入日()))) {
                     仮の時効起算日 = edit日期(収入情報.get収入日());
                     is収入年月日 = true;
                 }
@@ -374,7 +374,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
     }
 
     private void clear行設定値(FlexibleDate 納期限, Decimal 調定額, Decimal 滞納額, RString 滞納区分, ShunoStatusTempTableEntity data) {
-        if (納期限 == null || 納期限.isEmpty()) {
+        if ((納期限 == null || 納期限.isEmpty()) && is以前未納情報(data.getNokigenYMD())) {
             滞納区分 = RString.EMPTY;
         }
 
@@ -386,7 +386,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
         if (TainoKubun.納期限未到来.get名称().equals(滞納区分)) {
             data.setJikoKisambiYMD(FlexibleDate.EMPTY);
             data.setJikoKisambiJiyu(RString.EMPTY);
-            data.setBeforeTainoGaku(Decimal.ZERO);
+            data.setBeforeTainoGaku(null);
         }
         data.setTainoKubun(滞納区分);
         is行削除 = Decimal.ZERO.equals(調定額) && Decimal.ZERO.equals(滞納額);
@@ -436,7 +436,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
         if (収納情報リスト != null && !収納情報リスト.isEmpty()) {
             for (ShunoJohoEntity 収納情報 : 収納情報リスト) {
                 FlexibleDate 納期限Date = edit日期(収納情報.get調定共通_介護継承_納期限());
-                if (納期限Date != null && !納期限Date.isEmpty() && 納期限Date.isBefore(processParamter.get基準日().minusYear(年_3))) {
+                if (納期限Date != null && !納期限Date.isEmpty() && is以前未納情報(収納情報.get調定共通_介護継承_納期限())) {
                     以前納期限 = edit以前納期限(以前納期限, 納期限Date);
                 }
             }
@@ -468,7 +468,7 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
                 FlexibleDate 時効起算日 = edit仮の時効起算日(収納情報);
                 RString 滞納区分 = edit滞納区分(edit日期(収納情報.get調定共通_介護継承_納期限()), 時効起算日, 未納額);
 
-                if (TainoKubun.滞納期.get名称().equals(滞納区分)) {
+                if ((!is以前未納情報(収納情報.get調定共通_介護継承_納期限())) && TainoKubun.滞納期.get名称().equals(滞納区分)) {
                     仮の最古滞納期 = edit滞納区分が滞納期の仮の最古滞納期(収納情報, 仮の最古滞納期);
                 }
             }
@@ -496,5 +496,9 @@ public class ShiharaiHohoHenkoShunouStatusProcess extends BatchProcessBase<Shiha
             }
         }
         return 仮の最古滞納期;
+    }
+
+    private boolean is以前未納情報(RDate 納期限) {
+        return edit日期(納期限).isBefore(processParamter.get基準日().minusYear(年_3));
     }
 }
