@@ -57,6 +57,8 @@ public class ShinsakaiIinJohoTorokuHandler {
         kensakuJokenDiv_init(new RString("key1"));
         div.getTxtDispMax().setValue(new Decimal(DbBusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtDispMax().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         shinsakaiIinJohoIchiranDiv_init();
         shinsakaiIinJohoDiv_init();
         shozokuKikanIchiranDiv_init();
@@ -278,6 +280,15 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getTxtHaishiYMD().clearValue();
         div.getTxtTelNo1().clearDomain();
         div.getTxtFaxNo().clearDomain();
+    }
+    
+    /**
+     * 検索条件エリアをクリアする
+     */
+    public void clear検索条件() {
+        kensakuJokenDiv_init(new RString("key1"));
+        div.getTxtDispMax().setValue(new Decimal(DbBusinessConfig.
+                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**

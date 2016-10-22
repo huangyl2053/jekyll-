@@ -387,6 +387,20 @@ public class ShinsakaiIinJohoToroku {
         response.data = div;
         return response;
     }
+    
+    /**
+     * 検索条件入力値をクリアする
+     *
+     * @param div 介護認定審査会委員情報
+     * @return ResponseData
+     */
+    public ResponseData onClick_btnClear(ShinsakaiIinJohoTorokuDiv div) {
+        ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+        ShinsakaiIinJohoTorokuHandler handler = createHandOf(div);
+        handler.clear検索条件();
+        response.data = div;
+        return response;
+    }
 
     /**
      * 「入力内容を更新する」ボタンを押下します。
