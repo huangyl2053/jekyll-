@@ -137,7 +137,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         source.hokenshaName = 保険者名称;
 
         List<ISetSortItem> list = new ArrayList<>();
-        if (出力順 != null && 出力順.get設定項目リスト() == null) {
+        if (出力順 != null && 出力順.get設定項目リスト() != null) {
             list = 出力順.get設定項目リスト();
         }
         if (list.size() > INDEX_0) {

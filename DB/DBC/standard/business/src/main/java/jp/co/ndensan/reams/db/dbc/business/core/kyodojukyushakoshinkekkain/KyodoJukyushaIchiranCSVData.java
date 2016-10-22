@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkaichir
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkaichiran.DbWT5C30KyoudouShoriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkaichiran.KyodoJukyushaKoshinkekkaIchiranReportData;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkain.KyodoJukyushaKoshinkekkaIchiranEntity;
+import jp.co.ndensan.reams.db.dbc.entity.report.kyodojukyushakoshinkekkaichiran.KyodoJukyushaKoshinkekkaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -383,6 +386,96 @@ public class KyodoJukyushaIchiranCSVData {
             return 電話番号.value();
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * 帳票物理名の取得する。
+     *
+     * @param item ISetSortItem
+     * @return 帳票物理名
+     */
+    public RString get帳票物理名(ISetSortItem item) {
+
+        RString 帳票物理名 = RString.EMPTY;
+
+        if (KyodoJukyushaKoshinkekkaIchiranOutPutOrder.保険者番号.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.hokenshaNo.name());
+        } else if (KyodoJukyushaKoshinkekkaIchiranOutPutOrder.郵便番号.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.yubinNo.name());
+        } else if (KyodoJukyushaKoshinkekkaIchiranOutPutOrder.町域コード.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.choikiCode.name());
+        } else if (KyodoJukyushaKoshinkekkaIchiranOutPutOrder.行政区コード.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.gyoseikuCode.name());
+        } else if (KyodoJukyushaKoshinkekkaIchiranOutPutOrder.氏名５０音カナ.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.shimei50onKana.name());
+        } else if (KyodoJukyushaKoshinkekkaIchiranOutPutOrder.市町村コード.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.shichosonCode.name());
+        } else if (KyodoJukyushaKoshinkekkaIchiranOutPutOrder.被保険者番号.get項目ID().equals(item.get項目ID())) {
+            帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.hihokenshaNo.name());
+        }
+
+        return 帳票物理名;
+    }
+
+    /**
+     * 国保連保有共同処理用受給者情報一覧取込帳票の出力順設定可能項目です。
+     */
+    public enum KyodoJukyushaKoshinkekkaIchiranOutPutOrder implements IReportItems {
+
+        /**
+         * 保険者番号
+         */
+        保険者番号(new RString("0365"), new RString("hokenshaNo"), new RString("\"保険者番号\"")),
+        /**
+         * 郵便番号
+         */
+        郵便番号(new RString("0001"), new RString("yubinNo"), new RString("\"郵便番号\"")),
+        /**
+         * 町域コード
+         */
+        町域コード(new RString("0002"), new RString("choikiCode"), new RString("\"町域コード\"")),
+        /**
+         * 行政区コード
+         */
+        行政区コード(new RString("0004"), new RString("gyoseikuCode"), new RString("\"行政区コード\"")),
+        /**
+         * 氏名５０音カナ
+         */
+        氏名５０音カナ(new RString("0010"), new RString("shimei50onKana"), new RString("\"氏名50音カナ\"")),
+        /**
+         * 市町村コード
+         */
+        市町村コード(new RString("0016"), new RString("shichosonCode"), new RString("\"市町村コード\"")),
+        /**
+         * 被保険者番号
+         */
+        被保険者番号(new RString("0104"), new RString("hihokenshaNo"), new RString("\"被保険者番号\""));
+
+        private final RString 項目ID;
+        private final RString フォームフィールド名;
+        private final RString myBatis項目名;
+
+        private KyodoJukyushaKoshinkekkaIchiranOutPutOrder(RString 項目ID, RString フォームフィールド名,
+                RString myBatis項目名) {
+            this.項目ID = 項目ID;
+            this.フォームフィールド名 = フォームフィールド名;
+            this.myBatis項目名 = myBatis項目名;
+        }
+
+        @Override
+        public RString get項目ID() {
+            return 項目ID;
+        }
+
+        @Override
+        public RString getフォームフィールド名() {
+            return フォームフィールド名;
+        }
+
+        @Override
+        public RString getMyBatis項目名() {
+            return myBatis項目名;
+        }
     }
 
 }
