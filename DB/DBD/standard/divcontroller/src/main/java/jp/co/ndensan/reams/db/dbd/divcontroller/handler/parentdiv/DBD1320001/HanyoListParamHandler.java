@@ -1315,7 +1315,8 @@ public class HanyoListParamHandler {
     }
 
     private void 初期化_施設入退所() {
-        init出力方法ラジオボタン_グループ();
+        div.getRadShuturyokuHoho().setSelectedKey(Outputs.CSVのみ出力.getコード());
+        div.getRadShuturyokuHoho().setDisabled(非表示);
         set年度基準日パネル(非表示);
         set基準日RbGr();
         set基準日範囲パネル(表示, 非表示, 非表示, 非表示);
@@ -1546,6 +1547,8 @@ public class HanyoListParamHandler {
         get宛名抽出条件子Div().getTxtNenrei().setDisabled(非表示);
         get宛名抽出条件子Div().getTxtNenreiKijunbi().setDisabled(非表示);
         get宛名抽出条件子Div().getTxtNenreiKijunbi().setDisplayNone(非表示);
+        get宛名抽出条件子Div().getTxtSeinengappi().setDisplayNone(非表示);
+        get宛名抽出条件子Div().getTxtSeinengappi().setDisabled(非表示);
         set宛名抽出条件共有パネル();
         setCSV編集条件パネル();
         set出力項目選択(表示);
