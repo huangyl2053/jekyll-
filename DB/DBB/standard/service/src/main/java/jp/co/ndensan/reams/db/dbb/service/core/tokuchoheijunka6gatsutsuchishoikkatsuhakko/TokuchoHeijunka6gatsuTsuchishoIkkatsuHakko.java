@@ -428,28 +428,34 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         }
     }
 
-    private void set改頁名前(IOutputOrder outputOrder, List 改ページ項目List) {
+    private RString get改頁条件(IOutputOrder outputOrder) {
+        RStringBuilder 改頁Builder = new RStringBuilder();
         if (outputOrder != null) {
             List<ISetSortItem> list = outputOrder.get設定項目リスト();
             if (list == null) {
                 list = new ArrayList<>();
             }
             if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
-                改ページ項目List.add(list.get(INDEX_0).get項目名());
+                改頁Builder.append(list.get(INDEX_0).get項目名()).append(SIGN);
             }
             if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
-                改ページ項目List.add(list.get(INDEX_1).get項目名());
+                改頁Builder.append(list.get(INDEX_1).get項目名()).append(SIGN);
             }
             if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
-                改ページ項目List.add(list.get(INDEX_2).get項目名());
+                改頁Builder.append(list.get(INDEX_2).get項目名()).append(SIGN);
             }
             if (list.size() > INDEX_3 && list.get(INDEX_3).is改頁項目()) {
-                改ページ項目List.add(list.get(INDEX_3).get項目名());
+                改頁Builder.append(list.get(INDEX_3).get項目名()).append(SIGN);
             }
             if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
-                改ページ項目List.add(list.get(INDEX_4).get項目名());
+                改頁Builder.append(list.get(INDEX_4).get項目名()).append(SIGN);
             }
         }
+        RString 改頁RStr = RString.EMPTY;
+        if (改頁Builder.length() > 0) {
+            改頁RStr = 改頁Builder.substring(0, 改頁Builder.length() - INDEX_3);
+        }
+        return 改頁RStr;
     }
 
     /**
@@ -469,17 +475,10 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         }
 
         List<RString> 出力順項目List = new ArrayList<>();
-        int i = 1;
-        if (outputOrder != null && outputOrder.get設定項目リスト() != null) {
-            for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
-                if (i++ <= INDEX_5) {
-                    出力順項目List.add(setSortItem.get項目名());
-                }
-            }
-        }
+        出力順項目List.add(get出力順(outputOrder));
 
         List<RString> 改ページ項目List = new ArrayList<>();
-        set改頁名前(outputOrder, 改ページ項目List);
+        改ページ項目List.add(get改頁条件(outputOrder));
 
         List<Decimal> ページ数List = new ArrayList<>();
         ページ数List.add(new Decimal(通知書ページ数));
@@ -529,10 +528,32 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         List<RString> 出力条件List = new ArrayList<>();
         RStringBuilder 発行日Builder = new RStringBuilder();
         RStringBuilder 出力対象Builder = new RStringBuilder();
-        RStringBuilder 出力順Builder = new RStringBuilder();
+
         発行日Builder.append(抽出条件_発行日).append(param.get発行日().wareki().toDateString());
         出力対象Builder.append(抽出条件_出力対象).append(HeijunkaHenkoOutputJoken.toValue(new RString(param.get出力対象区分())));
 
+        出力条件List.add(発行日Builder.toRString());
+        出力条件List.add(出力対象Builder.toRString());
+        出力条件List.add(get出力順(outputOrder));
+
+        RString 帳票名;
+        if (ReportIdDBB.DBB100012.getReportId().getColumnValue().equals(param.get帳票ID())) {
+            帳票名 = ReportIdDBB.DBB100012.getReportName();
+        } else {
+            帳票名 = ReportIdDBB.DBB100013.getReportName();
+        }
+
+        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
+                param.get帳票ID(), association.getLasdecCode_().getColumnValue(), association.get市町村名(),
+                ジョブ番号.concat(RString.HALF_SPACE).concat(new RString(String.valueOf(JobContextHolder.getJobId()))),
+                帳票名,
+                new RString(通知書ページ数), csv出力有無, csvファイル名, 出力条件List);
+        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
+        printer.print();
+    }
+
+    private RString get出力順(IOutputOrder outputOrder) {
+        RStringBuilder 出力順Builder = new RStringBuilder();
         List<ISetSortItem> list = outputOrder.get設定項目リスト();
         if (list != null && list.size() > INDEX_0) {
             出力順Builder.append(list.get(INDEX_0).get項目名()).append(SIGN);
@@ -553,25 +574,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         if (出力順Builder.length() > 0) {
             出力順RStr = 出力順Builder.substring(0, 出力順Builder.length() - INDEX_3);
         }
-
-        出力条件List.add(発行日Builder.toRString());
-        出力条件List.add(出力対象Builder.toRString());
-        出力条件List.add(出力順RStr);
-
-        RString 帳票名;
-        if (ReportIdDBB.DBB100012.getReportId().getColumnValue().equals(param.get帳票ID())) {
-            帳票名 = ReportIdDBB.DBB100012.getReportName();
-        } else {
-            帳票名 = ReportIdDBB.DBB100013.getReportName();
-        }
-
-        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                param.get帳票ID(), association.getLasdecCode_().getColumnValue(), association.get市町村名(),
-                ジョブ番号.concat(RString.HALF_SPACE).concat(new RString(String.valueOf(JobContextHolder.getJobId()))),
-                帳票名,
-                new RString(通知書ページ数), csv出力有無, csvファイル名, 出力条件List);
-        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
-        printer.print();
+        return 出力順RStr;
     }
 
     private RString to帳票物理名(ISetSortItem item) {
