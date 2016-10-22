@@ -78,8 +78,8 @@ public class ShujiiHoshumeisaiEditor implements IShujiiHoshumeisaiEditor {
     }
 
     private ShujiiHoshumeisaiReportSource edit2(ShujiiHoshumeisaiReportSource source) {
-        if (item.get被保険者番号() != null) {
-            source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.get被保険者番号());
+        if (item.get申請書管理番号() != null) {
+            source.hihokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }
         return source;
     }

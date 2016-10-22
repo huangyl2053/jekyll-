@@ -31,7 +31,7 @@ public class DBD522001_EnkitsuchiParameter extends BatchParameterBase {
     @BatchParameter(key = "処理見込み日To", name = "処理見込み日To")
     private FlexibleDate 処理見込み日To;
     @BatchParameter(key = "通知書発行日", name = "通知書発行日")
-    private FlexibleDate 通知書発行日;
+    private List<FlexibleDate> 通知書発行日;
     @BatchParameter(key = "申請書管理番号リスト", name = "申請書管理番号リスト")
     private List<RString> 申請書管理番号リスト;
 

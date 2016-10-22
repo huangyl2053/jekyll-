@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.report.util;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.core.setainusihyojijoho.SetainusiHyojiJoho;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.jusho.JushoEditor;
@@ -58,44 +59,6 @@ public class EditedAtesaki {
      * @param 宛先 宛先
      * @param 地方公共団体 地方公共団体
      * @param 帳票制御共通 帳票制御共通
-     * @param 送付物宛先ソース 送付物宛先ソース
-     * @param 編集後住所 編集後住所
-     * @param カスタマバーコード使用有無 boolean
-     * @param 管外住所編集パターン JushoKangaiEditPattern
-     * @param 管内住所接頭辞 JushoPrefix
-     * @param 管内住所編集パターン JushoKannaiEditPattern
-     * @param 行政区印字区分 GyoseikuInjiKubun
-     */
-    public EditedAtesaki(IAtesaki 宛先,
-            Association 地方公共団体,
-            ChohyoSeigyoKyotsu 帳票制御共通,
-            SofubutsuAtesakiSource 送付物宛先ソース,
-            RString 編集後住所,
-            boolean カスタマバーコード使用有無,
-            JushoKangaiEditPattern 管外住所編集パターン,
-            JushoPrefix 管内住所接頭辞,
-            JushoKannaiEditPattern 管内住所編集パターン,
-            GyoseikuInjiKubun 行政区印字区分) {
-        this.宛先 = requireNonNull(宛先, UrSystemErrorMessages.値がnull.getReplacedMessage("宛先"));
-        this.地方公共団体 = requireNonNull(地方公共団体, UrSystemErrorMessages.値がnull.getReplacedMessage("地方公共団体"));
-        this.帳票制御共通 = requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通"));
-        this.送付物宛先ソース = 送付物宛先ソース;
-        this.編集後住所 = 編集後住所;
-        this.カスタマバーコード使用有無 = カスタマバーコード使用有無;
-        this.管外住所編集パターン = 管外住所編集パターン;
-        this.管内住所接頭辞 = 管内住所接頭辞;
-        this.管内住所編集パターン = 管内住所編集パターン;
-        this.行政区印字区分 = 行政区印字区分;
-    }
-
-    /**
-     * コンストラクタです。
-     *
-     * @param 宛先 宛先
-     * @param 地方公共団体 地方公共団体
-     * @param 帳票制御共通 帳票制御共通
-     *
-     * このコンストラクタを利用する場合、メソッドgetSofubutsuAtesakiSourceとget編集後住所は使用不可
      */
     public EditedAtesaki(IAtesaki 宛先,
             Association 地方公共団体,
@@ -103,13 +66,11 @@ public class EditedAtesaki {
         this.宛先 = requireNonNull(宛先, UrSystemErrorMessages.値がnull.getReplacedMessage("宛先"));
         this.地方公共団体 = requireNonNull(地方公共団体, UrSystemErrorMessages.値がnull.getReplacedMessage("地方公共団体"));
         this.帳票制御共通 = requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通"));
-        this.送付物宛先ソース = null;
-        this.編集後住所 = null;
-        this.カスタマバーコード使用有無 = true;
-        this.管外住所編集パターン = null;
-        this.管内住所接頭辞 = null;
-        this.管内住所編集パターン = null;
-        this.行政区印字区分 = null;
+        this.カスタマバーコード使用有無 = JushoHenshu.usesCustomerBarcode(帳票制御共通);
+        this.管外住所編集パターン = JushoHenshu.getJushoKangaiEditPattern(帳票制御共通);
+        this.管内住所編集パターン = JushoHenshu.getJushoKannaiEditPattern(帳票制御共通);
+        this.管内住所接頭辞 = JushoHenshu.getJushoPrefix(帳票制御共通);
+        this.行政区印字区分 = JushoHenshu.getGyoseikuInjiKubun(帳票制御共通);
     }
 
     /**
@@ -119,9 +80,9 @@ public class EditedAtesaki {
      */
     public KaigoSofubutsuAtesakiSource getSofubutsuAtesakiSource() {
         AtenaMeisho 世帯主名 = 宛先.toEntity().getSetainushiKanjiShimei();
-        RStringBuilder builder世帯主 = new RStringBuilder(RString.EMPTY);
+        RStringBuilder builder世帯主 = new RStringBuilder();
         if (世帯主名 != null) {
-            builder世帯主 = new RStringBuilder(世帯主名.value()).append(様方);
+            builder世帯主.append(世帯主名.value()).append(様方);
         }
         if (送付物宛先ソース != null) {
             return new KaigoSofubutsuAtesakiSource(送付物宛先ソース, new SetainusiHyojiJoho(
@@ -143,7 +104,7 @@ public class EditedAtesaki {
         }
         送付物宛先ソース = atesakiSource;
         return new KaigoSofubutsuAtesakiSource(送付物宛先ソース, new SetainusiHyojiJoho(
-                帳票制御共通.is世帯主表示有無() ? builder世帯主.append(様方).toRString() : RString.EMPTY));
+                帳票制御共通.is世帯主表示有無() ? builder世帯主.toRString() : RString.EMPTY));
     }
 
     /**

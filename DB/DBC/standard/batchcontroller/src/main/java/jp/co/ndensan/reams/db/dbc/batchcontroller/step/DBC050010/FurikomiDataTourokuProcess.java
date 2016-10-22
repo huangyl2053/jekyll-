@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class FurikomiDataTourokuProcess extends BatchProcessBase<KozaFurikomiTempTableEntity> {
 
     private static final RString 処理区分_振込指定日修正_2 = new RString("2");
-    private static final RString 処理区分_明細一覧表作成_3 = new RString("3");
 
     private OutputParameter<Integer> outputCount;
     private FurikomiDataTourokuProcessParameter parameter;
@@ -41,8 +40,7 @@ public class FurikomiDataTourokuProcess extends BatchProcessBase<KozaFurikomiTem
 
     @Override
     protected void beforeExecute() {
-        if (!処理区分_明細一覧表作成_3.equals(parameter.get処理区分().getコード())
-                && (処理区分_振込指定日修正_2.equals(parameter.get処理区分().getコード()) && !parameter.is再処理フラグ())) {
+        if (処理区分_振込指定日修正_2.equals(parameter.get処理区分().getコード()) && !parameter.is再処理フラグ()) {
 
             KozaFurikomiManager.createInstance();
             // TODO 5.1　再処理準備

@@ -540,9 +540,10 @@ public class JutakuKaishuShinseiJyohoToroku {
             JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
             handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
-            if (画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード)) {
+            if ((画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード))
+                    && (!領収日.getYear().equals(画面提供着工年月.getYear()))) {
                 div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                        SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード(), 画面提供着工年月.getYearValue()).nextString());
+                        SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード(), 領収日.getYearValue()).nextString());
             }
         }
         return ResponseData.of(div).respond();

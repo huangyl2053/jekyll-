@@ -32,13 +32,13 @@ public class IkenShiharaiuchiwakeReport extends Report<IkenShiharaiuchiwakeRepor
     @Override
     public void writeBy(ReportSourceWriter<IkenShiharaiuchiwakeReportSource> reportSourceWriter) {
         if (data.getCount() > COUNT) {
-            data.setLayoutBreakItem(2);
+            IIkenShiharaiuchiwakeEditor detailEditor = new IkenShiharaiuchiwakeDetailEditor(data);
+            IIkenShiharaiuchiwakeBuilder builder = new IkenShiharaiuchiwakeDetailBuilder(detailEditor);
+            reportSourceWriter.writeLine(builder);
         } else {
-            data.setLayoutBreakItem(1);
+            IIkenShiharaiuchiwakeEditor editor = new IkenShiharaiuchiwakeEditor(data);
+            IIkenShiharaiuchiwakeBuilder builder = new IkenShiharaiuchiwakeBuilder(editor);
+            reportSourceWriter.writeLine(builder);
         }
-        IIkenShiharaiuchiwakeEditor editor = new IkenShiharaiuchiwakeEditor(data);
-        IIkenShiharaiuchiwakeEditor detailEditor = new IkenShiharaiuchiwakeDetailEditor(data);
-        IIkenShiharaiuchiwakeBuilder builder = new IkenShiharaiuchiwakeBuilder(editor, detailEditor);
-        reportSourceWriter.writeLine(builder);
     }
 }

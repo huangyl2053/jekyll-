@@ -19,11 +19,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -47,7 +47,7 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaDa
     private FileSpoolManager manager;
     private RString eucFilePath;
     @BatchWriter
-    private EucCsvWriter<NinteiChosaDataOutputEucCsvEntity> eucCsvWriter;
+    private CsvWriter<NinteiChosaDataOutputEucCsvEntity> eucCsvWriter;
 
     @Override
     protected void initialize() {
@@ -62,7 +62,7 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaDa
 
     @Override
     protected void createWriter() {
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.SJIS).

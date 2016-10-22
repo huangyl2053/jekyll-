@@ -111,7 +111,7 @@ public class RiyoshaFutanwariaiProcess extends BatchProcessBase<RiyoshaFutanwari
     private RString getデータセットキー(HihokenshaNo 被保険者番号, int 枝番号) {
         RStringBuilder データセットキー = new RStringBuilder();
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            データセットキー.append(被保険者番号);
+            データセットキー.append(被保険者番号.value());
         }
         データセットキー.append(DataSetNo._0202負担割合.getコード());
         データセットキー.append(枝番号);

@@ -75,7 +75,14 @@
             ON
               T2."hihokenshaNo" = shinsei."dbT3034ShokanShinsei_hiHokenshaNo"
         WHERE
-            shinsei."dbT3034ShokanShinsei_shikyuShinseiShinsaKubun" = '1'
+            NOT EXISTS (
+                    SELECT 1
+                    FROM rgdb."DbT3036ShokanHanteiKekka" dbt3036
+                    WHERE
+                        shinsei."dbT3034ShokanShinsei_hiHokenshaNo" = dbt3036."hiHokenshaNo"
+                        AND shinsei."dbT3034ShokanShinsei_serviceTeikyoYM" = dbt3036."serviceTeikyoYM"
+                        AND shinsei."dbT3034ShokanShinsei_seiriNo" = dbt3036."seiriNo"
+                )
             AND shinsei."dbT3034ShokanShinsei_shinsaHohoKubun" = '2'
             <if test="支給申請開始日 != null">
                AND shinsei."dbT3034ShokanShinsei_shinseiYMD" <![CDATA[>=]]> #{支給申請開始日}    

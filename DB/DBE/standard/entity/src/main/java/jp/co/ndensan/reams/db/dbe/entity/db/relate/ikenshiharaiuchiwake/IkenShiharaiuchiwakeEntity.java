@@ -19,6 +19,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IkenShiharaiuchiwakeEntity {
 
+    private RString 申請書管理番号;
     private RString 電子公印;
     private RString 発行日;
     private RString 認証者役職名;

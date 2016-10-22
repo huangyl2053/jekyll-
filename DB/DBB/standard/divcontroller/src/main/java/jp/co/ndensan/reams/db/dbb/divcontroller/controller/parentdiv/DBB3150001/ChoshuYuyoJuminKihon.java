@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.KibetsuChoshyuYuyoKikann;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choshuyuyojoho.ChoshuYuyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kaigofukachoshuyuyo.KaigoFukaChoshuYuyoParam;
+import jp.co.ndensan.reams.db.dbb.definition.message.DbbQuestionMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3150001.ChoshuYuyoJuminKihonDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3150001.DBB3150001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB3150001.ChoshuYuyoJuminKihonHandler;
@@ -24,11 +25,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -49,18 +51,18 @@ public class ChoshuYuyoJuminKihon {
     private static final int イチ_定値 = 1;
     private static final RString 画面モード_取消 = new RString("取消");
     private static final RString 画面モード_訂正 = new RString("訂正");
-//    private static final RString 状況_申請 = new RString("申請");
-//    private static final RString 状況_決定 = new RString("決定");
-//    private static final RString 処理_取消 = new RString("取消");
-//    private static final RString 状況_訂正 = new RString("訂正した内容で、決定");
-//    private static final RString 処理_登録 = new RString("登録");
-//    private static final RString 入力状況_新規申請 = new RString("新規_申請");
-//    private static final RString 入力状況_新規決定 = new RString("新規_決定");
-//    private static final RString 入力状況_申請中申請 = new RString("申請中_申請");
-//    private static final RString 入力状況_申請中決定 = new RString("申請中_決定");
-//    private static final RString 入力状況_申請中取消 = new RString("申請中_取消");
-//    private static final RString 入力状況_決定済訂正 = new RString("決定済_訂正");
-//    private static final RString 入力状況_決定済取消 = new RString("決定済_取消");
+    private static final RString 状況_申請 = new RString("申請");
+    private static final RString 状況_決定 = new RString("決定");
+    private static final RString 処理_取消 = new RString("取消");
+    private static final RString 状況_訂正 = new RString("訂正した内容で、決定");
+    private static final RString 処理_登録 = new RString("登録");
+    private static final RString 入力状況_新規申請 = new RString("新規_申請");
+    private static final RString 入力状況_新規決定 = new RString("新規_決定");
+    private static final RString 入力状況_申請中申請 = new RString("申請中_申請");
+    private static final RString 入力状況_申請中決定 = new RString("申請中_決定");
+    private static final RString 入力状況_申請中取消 = new RString("申請中_取消");
+    private static final RString 入力状況_決定済訂正 = new RString("決定済_訂正");
+    private static final RString 入力状況_決定済取消 = new RString("決定済_取消");
 
     /**
      * 画面の初期化メソッドです。
@@ -187,34 +189,34 @@ public class ChoshuYuyoJuminKihon {
     public ResponseData<ChoshuYuyoJuminKihonDiv> onClick_btnUpt(ChoshuYuyoJuminKihonDiv div) {
         ChoshuYuyoJoho 徴収猶予の情報 = ViewStateHolder.get(ViewStateKeys.徴収猶予の情報, ChoshuYuyoJoho.class);
         ChoshuYuyoJuminKihonHandler handler = getHandler(div);
-        // TODO QA1158 メッセージ 「%1情報を%2します。よろしいですか？」 がありません。
-//        RString 入力状況 = handler.メッセージ判断(徴収猶予の情報);
-//        QuestionMessage message = null;
-//        if (入力状況_新規申請.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_申請.toString()).replace(処理_登録.toString()).evaluate());
-//        } else if (入力状況_新規決定.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_決定.toString()).replace(処理_登録.toString()).evaluate());
-//        } else if (入力状況_申請中申請.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_申請.toString()).replace(処理_登録.toString()).evaluate());
-//        } else if (入力状況_申請中決定.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_決定.toString()).replace(処理_登録.toString()).evaluate());
-//        } else if (入力状況_申請中取消.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_申請.toString()).replace(処理_取消.toString()).evaluate());
-//        } else if (入力状況_決定済訂正.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_訂正.toString()).replace(処理_登録.toString()).evaluate());
-//        } else if (入力状況_決定済取消.equals(入力状況)) {
-//            message = new QuestionMessage(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
-//                    DbzQuestionMessages.判断基準より前の日付.getMessage().replace(状況_決定.toString()).replace(処理_取消.toString()).evaluate());
-//        }
-        QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                UrQuestionMessages.保存の確認.getMessage().evaluate());
+        RString 入力状況 = handler.メッセージ判断(徴収猶予の情報);
+        QuestionMessage message = null;
+        if (入力状況_新規申請.equals(入力状況)) {
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_申請.toString(), 処理_登録.toString()).evaluate());
+        } else if (入力状況_新規決定.equals(入力状況)) {
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_決定.toString(), 処理_登録.toString()).evaluate());
+        } else if (入力状況_申請中申請.equals(入力状況)) {
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_申請.toString(), 処理_登録.toString()).evaluate());
+        } else if (入力状況_申請中決定.equals(入力状況)) {
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_決定.toString(), 処理_登録.toString()).evaluate());
+        } else if (入力状況_申請中取消.equals(入力状況)) {
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_申請.toString(), 処理_取消.toString()).evaluate());
+        } else if (入力状況_決定済訂正.equals(入力状況)) {
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_訂正.toString(), 処理_登録.toString()).evaluate());
+        } else if (入力状況_決定済取消.equals(入力状況)) {
+            message = new QuestionMessage(DbbQuestionMessages.減免情報等更新確認.getMessage().getCode(),
+                    DbbQuestionMessages.減免情報等更新確認.getMessage().replace(状況_決定.toString(), 処理_取消.toString()).evaluate());
+        }
         if (!ResponseHolder.isReRequest()) {
+            if (message == null) {
+                throw new ApplicationException(UrErrorMessages.保存データなし.getMessage().evaluate());
+            }
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {

@@ -389,7 +389,7 @@ public class KyokaisoGaitoshaPanel {
                 最新リンク番号 = Integer.parseInt(nofu_Row.getTekiyoLinkNo().toString());
                 最新履歴番号 = Integer.parseInt(nofu_Row.getTekiyoRirekiNo().toString());
             }
-            RDate 修正前の適用開始年月 = new RDate(nofu_Row.getTekiyoKaishiDate().toString());
+            RDate 修正前の適用開始年月 = new RDate(nofu_Row.getHiddenTekiyoKaishiDate().toString());
             KyokaisoHokenryoDankaiIdentifier key = new KyokaisoHokenryoDankaiIdentifier(
                     被保険者番号,
                     最新履歴番号,

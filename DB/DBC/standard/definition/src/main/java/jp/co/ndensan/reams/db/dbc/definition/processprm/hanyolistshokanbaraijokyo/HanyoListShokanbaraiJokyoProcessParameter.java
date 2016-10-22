@@ -24,7 +24,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessParameter {
 
     private static final RString 区切り文字 = new RString(",");
@@ -56,6 +56,8 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
     private IKozaSearchKey searchkey;
     private List<KamokuCode> list;
     private RString reamsLoginId;
+    private RString 様式番号Order;
+    private RString orderByClause;
 
     /**
      * コンストラクタです
@@ -188,7 +190,9 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
                 日付スラッシュ付加,
                 出力順,
                 出力項目,
-                帳票ID);
+                帳票ID,
+                様式番号Order,
+                orderByClause);
     }
 
 }

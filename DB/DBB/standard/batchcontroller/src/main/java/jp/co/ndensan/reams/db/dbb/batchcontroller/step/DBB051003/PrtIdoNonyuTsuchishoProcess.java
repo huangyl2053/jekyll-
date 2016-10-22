@@ -324,7 +324,7 @@ public class PrtIdoNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuch
     @Override
     protected void createWriter() {
 
-        一覧表reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200010.getReportId().value()).create();
+        一覧表reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200016.getReportId().value()).create();
         一覧表ReportSourceWriter = new ReportSourceWriter<>(一覧表reportWriter);
 
         fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,

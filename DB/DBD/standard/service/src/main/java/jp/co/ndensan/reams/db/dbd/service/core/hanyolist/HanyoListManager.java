@@ -9,9 +9,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.hanyolist.HanyoListShutsuryokuKo
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.KingakuEditingNecessity;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -73,6 +77,11 @@ public class HanyoListManager {
         set地区コード1(atenacyusyutsujyoken, key);
         set地区コード2(atenacyusyutsujyoken, key);
         set地区コード3(atenacyusyutsujyoken, key);
+    }
+
+    public Association get地方公共団体(LasdecCode 市町村コード) {
+        IAssociationFinder finder = AssociationFinderFactory.createInstance();
+        return finder.getAssociation(市町村コード);
     }
 
     private void set町域コード(AtenaSelectBatchParameter atenacyusyutsujyoken, ShikibetsuTaishoPSMSearchKeyBuilder key) {

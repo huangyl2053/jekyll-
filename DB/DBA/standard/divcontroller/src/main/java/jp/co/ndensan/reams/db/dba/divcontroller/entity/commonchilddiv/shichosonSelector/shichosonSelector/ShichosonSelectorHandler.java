@@ -16,9 +16,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ShichosonSelectorHandler {
 
     private final ShichosonSelectorDiv div;
-    private static final RString selectItemKyo = new RString("key0");
-    private static final RString selectItemKousei = new RString("key1");
-    //TODO 張紅麗　QA57　市町村選択モードの確認　2015/12/02まで
+    private static final RString SELECTITEMKYO = new RString("key0");
+    private static final RString SELECTITEMKOUSEI = new RString("key1");
     private static final RString KOUSEI_MODO_KOUSEI = new RString("1");
     private static final RString KOUSEI_MODO_KYU = new RString("0");
 
@@ -74,14 +73,14 @@ public class ShichosonSelectorHandler {
         DataGrid<dgShichoson_Row> datagrid = div.getDgShichoson();
         List<dgShichoson_Row> rowList = new ArrayList();
         for (ShichosonSelectorResult result : resultList) {
-            if (div.getRadShichosonKubun().getSelectedKey().equals(selectItemKyo)
+            if (div.getRadShichosonKubun().getSelectedKey().equals(SELECTITEMKYO)
                     && KOUSEI_MODO_KOUSEI.equals(result.get合併旧市町村区分())) {
                 dgShichoson_Row row = new dgShichoson_Row();
                 row.setTxtShichosonCode(result.get市町村コード().value());
                 row.setTxtShichosonName(result.get市町村名());
                 rowList.add(row);
             }
-            if (div.getRadShichosonKubun().getSelectedKey().equals(selectItemKousei)
+            if (div.getRadShichosonKubun().getSelectedKey().equals(SELECTITEMKOUSEI)
                     && KOUSEI_MODO_KYU.equals(result.get合併旧市町村区分())) {
                 dgShichoson_Row row = new dgShichoson_Row();
                 row.setTxtShichosonCode(result.get市町村コード().value());

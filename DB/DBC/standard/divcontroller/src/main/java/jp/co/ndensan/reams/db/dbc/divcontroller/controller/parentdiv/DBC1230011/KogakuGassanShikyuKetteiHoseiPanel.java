@@ -388,6 +388,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                 || 照会.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
             getHandler(div).set状態_Two(false);
             getHandler(div).clear決定情報();
+            getHandler(div).set画面tap();
             return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報一覧);
         }
         if (!ResponseHolder.isReRequest()) {
@@ -402,6 +403,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             getHandler(div).前排他キーの解除(被保険者番号);
             getHandler(div).set状態_Two(false);
+            getHandler(div).set画面tap();
             return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報一覧);
         } else {
             return ResponseData.of(div).respond();
@@ -506,7 +508,6 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                             支給申請書整理番号, 画面モード, 決定情報list, para);
                     getHandler(div).前排他キーの解除(被保険者番号);
                     getHandler(div).clear決定情報();
-                    getHandler(div).set画面tap();
                     div.getCcdKanryoMessage().setMessage(
                             支給額決定情報の更新が正常に行われました,
                             div.getCcdKaigoShikakuKihon().get被保険者番号(),
@@ -533,7 +534,6 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
                     getHandler(div).save決定情報(被保険者番号, 対象年度, 保険者番号,
                             支給申請書整理番号, 画面モード, 決定情報list, para);
                     getHandler(div).clear決定情報();
-                    getHandler(div).set画面tap();
                     getHandler(div).前排他キーの解除(被保険者番号);
                     div.getCcdKanryoMessage().setMessage(
                             支給額決定情報の更新が正常に行われました,

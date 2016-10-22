@@ -190,10 +190,10 @@
             OR 受給者台帳."rirekiNo" = '0000')
             AND 受給者台帳."logicalDeletedFlag" = FALSE
         ORDER BY
+            <if test="orderBy != null and orderBy.toString() != ''.toString()">
+            ${ orderBy },
+            </if>
             受給者台帳."hihokenshaNo" ASC,
             受給者台帳."rirekiNo" DESC
-            <if test="orderBy != null and orderBy.toString() != ''.toString()">
-            ${ orderBy }
-            </if>
     </select>
 </mapper>

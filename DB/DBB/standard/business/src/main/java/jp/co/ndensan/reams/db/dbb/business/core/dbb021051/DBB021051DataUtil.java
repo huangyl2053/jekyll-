@@ -178,7 +178,6 @@ public class DBB021051DataUtil {
         atena.set識別コード(entity.get識別コード());
         atena.set郵便番号(nonullRStr(entity.get郵便番号()));
         atena.set行政区(entity.get行政区());
-//        TODO QA Redmine#100667
         atena.set住所TXT(entity.get住所());
         if (judge宛先住所設定(parameter, str方書)) {
             atena.set方書1(nonullRStr(entity.get宛名方書()));
@@ -202,6 +201,9 @@ public class DBB021051DataUtil {
         atena.set右括号1(右括号);
         atena.set右括号2(右括号);
         atena.setバーコード住所(entity.getバーコード住所());
+        atena.setChk住所(entity.get住所());
+        atena.setChk氏名(nonullRStr(entity.get氏名()));
+        atena.setChk方書(nonullRStr(entity.get方書()));
         return atena;
     }
 
@@ -474,7 +476,6 @@ public class DBB021051DataUtil {
             住所 = 宛名PSM.getJusho();
             番地 = 宛名PSM.getBanchi();
             方書 = 宛名PSM.getKatagaki();
-            //        TODO QA Redmine#100667
             result.set住所(getWK管内管外区分が1の住所(parameter, wk管内管外区分, 住所));
             result.set番地(番地);
             result.set方書(方書);

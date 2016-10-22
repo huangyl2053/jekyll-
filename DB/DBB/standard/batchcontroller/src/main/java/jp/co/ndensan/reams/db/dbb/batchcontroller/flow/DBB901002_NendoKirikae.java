@@ -64,7 +64,7 @@ public class DBB901002_NendoKirikae extends BatchFlowBase<DBB901002_NendoKirikae
      */
     @Step(業務コンフィグ年度切替)
     protected IBatchFlowCommand insertUzT0002CustomConfigProcess() {
-        return loopBatch(InsertUzT0002CustomConfigProcess.class)
+        return simpleBatch(InsertUzT0002CustomConfigProcess.class)
                 .arguments(createProcessParameter()).define();
     }
 

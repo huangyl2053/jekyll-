@@ -153,13 +153,13 @@ public class FukaKeisanFath {
         Kitsuki 本算定期と月の対応 = hantei.find更正月_本算定期(param.get調定日時().getDate());
         kiwariKeisanInput.set現在期(本算定期と月の対応.get期AsInt());
         kiwariKeisanInput.set現在期区分(Integer.parseInt(本算定期と月の対応.get月処理区分().get区分().toString()));
-        kiwariKeisanInput.set特徴停止可能期(get特徴停止可能期(param.get調定日時().getDate(), param.get賦課年度()));
+        kiwariKeisanInput.set特徴停止可能期(get特徴停止可能期(param.get調定日時().getDate()));
 
         kiwariKeisanInput.set現在特徴期区分(Integer.parseInt(hantei.find特徴更正月(param.get調定日時().getDate())
                 .get月処理区分().get区分().toString()));
 
         Kitsuki 過年度期と月の対応 = hantei.find更正月_本算定期(param.get調定日時().getDate());
-        kiwariKeisanInput.set現在過年期(過年度期と月の対応.get期());
+        kiwariKeisanInput.set現在過年期(new RString(過年度期と月の対応.get期AsInt()));
         kiwariKeisanInput.set現在過年期区分(過年度期と月の対応.get月処理区分().get区分());
 
         GyomuConfigJohoClass 業務コンフィグ情報 = new GyomuConfigJohoClass();
@@ -252,13 +252,21 @@ public class FukaKeisanFath {
         KoseiTsukiHantei hantei = InstanceProvider.create(KoseiTsukiHantei.class);
         int 算定月 = hantei.find更正月_本算定期(調定日時.getDate()).get月AsInt();
         if (本算定第１期の期月 > 算定月) {
-            return new RString(本算定第１期の期月).padZeroToLeft(INT_2);
+            return fomate月(本算定第１期の期月);
         } else {
-            return new RString(算定月).padZeroToLeft(INT_2);
+            return fomate月(算定月);
         }
     }
 
-    private int get特徴停止可能期(RDate 調定日時, FlexibleYear 年度) {
+    private RString fomate月(int 月) {
+        if (月 <= INT_3) {
+            return 定数_10.concat(new RString(月));
+        } else {
+            return new RString(月).padZeroToLeft(INT_3);
+        }
+    }
+
+    private int get特徴停止可能期(RDate 調定日時) {
         KoseiTsukiHantei hantei = InstanceProvider.create(KoseiTsukiHantei.class);
         Kitsuki 期月 = hantei.find特徴更正月(調定日時);
         if (期月 != null) {
@@ -266,13 +274,13 @@ public class FukaKeisanFath {
             if (月 >= INT_4 && 月 <= INT_7) {
                 return INT_4;
             } else if (月 >= INT_8 && 月 <= INT_12) {
-                return get月08_12(期月, 年度);
+                return get月08_12(期月);
             }
         }
         return 0;
     }
 
-    private int get月08_12(Kitsuki 期月, FlexibleYear 年度) {
+    private int get月08_12(Kitsuki 期月) {
         int 月 = 期月.get月AsInt();
         if (月 % INT_2 != 0) {
             return 期月.get期AsInt() + INT_2;

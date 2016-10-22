@@ -461,7 +461,8 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         登録H11Entity.setKokuhoHiHokenshashoNo(RString.EMPTY);
         登録H11Entity.setKokuhoKojinNo(RString.EMPTY);
         登録H11Entity.setKyotakuServiceSakuseiKubunCode(h11CsvEntity.get居宅サービス計画作成区分コード());
-        登録H11Entity.setKyotakuKaigoShienJigyoshoNo(h11CsvEntity.get事業所番号_居宅介護支援事業所等());
+        登録H11Entity.setKyotakuKaigoShienJigyoshoNo(new JigyoshaNo(get事業所番号(
+                h11CsvEntity.get事業所番号_居宅介護支援事業所等())));
         登録H11Entity.setKaishiYMD(h11CsvEntity.get開始年月日());
         登録H11Entity.setChushiYMD(h11CsvEntity.get中止年月日());
         登録H11Entity.setChushiRiyuNyushomaeJyokyoCode(h11CsvEntity.get中止理由_入所院前の状況コード());
@@ -565,7 +566,8 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         登録H11Entity.setKokuhoHiHokenshashoNo(h12CsvEntity.get被保険者証番号_国保());
         登録H11Entity.setKokuhoKojinNo(h12CsvEntity.get宛名番号());
         登録H11Entity.setKyotakuServiceSakuseiKubunCode(h12CsvEntity.get居宅サービス計画作成区分コード());
-        登録H11Entity.setKyotakuKaigoShienJigyoshoNo(h12CsvEntity.get事業所番号_居宅介護支援事業所等());
+        登録H11Entity.setKyotakuKaigoShienJigyoshoNo(new JigyoshaNo(get事業所番号(
+                h12CsvEntity.get事業所番号_居宅介護支援事業所等())));
         登録H11Entity.setKaishiYMD(h12CsvEntity.get開始年月日());
         登録H11Entity.setChushiYMD(h12CsvEntity.get中止年月日());
         登録H11Entity.setChushiRiyuNyushomaeJyokyoCode(h12CsvEntity.get中止理由_入所院前の状況コード());
@@ -1161,7 +1163,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d9Entity.setAtoHokenbunSeikyugaku(d9CsvEntity.get保険分請求額());
         d9Entity.setAtoKohi1Futangaku(d9CsvEntity.get後_公費１負担額_明細());
         d9Entity.setAtoKohi2Futangaku(d9CsvEntity.get後_公費2負担額_明細());
-        d9Entity.setAtoKohi2Futangaku(d9CsvEntity.get公費3負担額_明細());
+        d9Entity.setAtoKohi3Futangaku(d9CsvEntity.get公費3負担額_明細());
         d9Entity.setAtoRiyoshaFutangaku(d9CsvEntity.get後_利用者負担額());
         d9Entity.setAtoHiyogakuTotal(d9CsvEntity.get後_費用額合計());
         d9Entity.setAtoHokenbunSeikyugakuTotal(d9CsvEntity.get後_保険分請求額合計());

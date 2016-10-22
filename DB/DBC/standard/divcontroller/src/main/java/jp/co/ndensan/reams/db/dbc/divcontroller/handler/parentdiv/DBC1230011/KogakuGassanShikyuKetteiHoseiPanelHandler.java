@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.Hi
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KoshinShoriResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.ShoriModeHanteiResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
@@ -231,6 +232,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 row.setFushikyuRiyu(entity.get事業高額合算決定entity().get不支給理由());
                 row.getKetteiTsuchiSakuseiYMD().setValue(entity.get事業高額合算決定entity().get決定通知書作成年月日());
                 row.getFurikomiTsuchiSakuseiYMD().setValue(entity.get事業高額合算決定entity().get振込通知書作成年月日());
+                row.setShiharaiHohoKubun(entity.get事業高額合算決定entity().get支払方法区分());
                 rowList.add(row);
             } else {
                 row.setHihokenshaNo(entity.get高額合算決定entity().get被保険者番号().value());
@@ -263,6 +265,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 row.setFushikyuRiyu(entity.get高額合算決定entity().get不支給理由());
                 row.getKetteiTsuchiSakuseiYMD().setValue(entity.get高額合算決定entity().get決定通知書作成年月日());
                 row.getFurikomiTsuchiSakuseiYMD().setValue(entity.get高額合算決定entity().get振込通知書作成年月日());
+                row.setShiharaiHohoKubun(entity.get高額合算決定entity().get支払方法区分());
                 rowList.add(row);
             }
         }
@@ -329,11 +332,12 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().
                         getTxtKeisanYMD().getToValue().toString()), 事業分フラグ);
         div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTxtKyufuShurui().setValue(給付の種類);
-//        set支払方法タブ(被保険者番号, 新規, 識別コード, null);
+        set支払方法タブ(被保険者番号, 新規, 識別コード, null);
     }
 
     /**
      * 新規以外の決定情報初期値取得設定です。
+     *
      *
      * @param 処理モデル RString
      * @param 識別コード ShikibetsuCode
@@ -367,7 +371,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                     getTxtJikoFutanSogaku().setValue(row.getTxtJikoFutangaku().getValue());
         }
         set新規以外の決定情報初期値_Two(row);
-//        set支払方法タブ(HihokenshaNo.EMPTY, 処理モデル, 識別コード, row);
+        set支払方法タブ(HihokenshaNo.EMPTY, 処理モデル, 識別コード, row);
     }
 
     private void set新規以外の決定情報初期値_Two(dgKogakuGassanShikyuFushikyuKettei_Row row) {
@@ -1052,15 +1056,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         }
     }
 
-    /**
-     * 支払方法タブ
-     *
-     * @param 被保険者番号 HihokenshaNo
-     * @param 処理モデル RString
-     * @param 識別コード ShikibetsuCode
-     * @param row dgKogakuGassanShikyuFushikyuKettei_Row
-     */
-    public void set支払方法タブ(
+    private void set支払方法タブ(
             HihokenshaNo 被保険者番号,
             RString 処理モデル,
             ShikibetsuCode 識別コード,
@@ -1073,10 +1069,16 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         } else if (修正.equals(処理モデル)) {
             para.setKozaId(Long.parseLong(row.getKozaID().toString()));
             para.setHihokenshaNo(new HihokenshaNo(row.getHihokenshaNo()));
+            if (row.getShiharaiHohoKubun() != null && !row.getShiharaiHohoKubun().isEmpty()) {
+                para.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(row.getShiharaiHohoKubun()));
+            }
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 修正);
         } else if (削除.equals(処理モデル) || 照会.equals(処理モデル)) {
             para.setHihokenshaNo(new HihokenshaNo(row.getHihokenshaNo()));
             para.setKozaId(Long.parseLong(row.getKozaID().toString()));
+            if (row.getShiharaiHohoKubun() != null && !row.getShiharaiHohoKubun().isEmpty()) {
+                para.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(row.getShiharaiHohoKubun()));
+            }
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 照会);
         }
     }

@@ -240,7 +240,7 @@
             ON 施設入所情報."shikibetsuCode" = A."本人識別コード"
          LEFT JOIN  (
              SELECT
-                世帯員所得情報一時."hihokenshaNo" AS 被保険者番号,
+                世帯員所得情報一時."hihokenshaNo" AS 被保険者番号S,
                 世帯員所得情報一時."shikibetsuCode",
                 世帯員所得情報一時."kazeiKubun",
                 世帯員所得情報一時."kazeiShotokuGaku",

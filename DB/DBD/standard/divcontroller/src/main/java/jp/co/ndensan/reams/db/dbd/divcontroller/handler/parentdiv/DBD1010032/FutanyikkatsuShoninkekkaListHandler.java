@@ -134,7 +134,7 @@ public class FutanyikkatsuShoninkekkaListHandler {
         IkkatsuShoninKekkaIchiranService ikkatsuservice = IkkatsuShoninKekkaIchiranService.createInstance();
         if (画面更新用情報 != null && !画面更新用情報.isEmpty()) {
             ikkatsuservice.update介護保険負担限度額認定(画面更新用情報);
-            ikkatsuservice.get減免減額申請更新(画面更新用情報);
+            ikkatsuservice.get減免減額申請処理(画面更新用情報);
         }
     }
 
@@ -175,6 +175,7 @@ public class FutanyikkatsuShoninkekkaListHandler {
             }
             futangendogakunintei.setHihoNo(futangenresult.get介護保険負担限度額認定の情報().get被保険者番号().value());
             futangendogakunintei.setShikibetsuCode(futangenresult.get個人().get識別コード().value());
+            futangendogakunintei.setShimei(futangenresult.get個人().get名称().getName().value());
             futangendogakunintei.getTxtSeinengappiYMD().setValue(futangenresult.get個人().get生年月日().toFlexibleDate());
             futangendogakunintei.setNenrei(futangenresult.get個人().get年齢算出().get年齢());
             futangendogakunintei.setKetteiKubun(futangenresult.get介護保険負担限度額認定の情報().get決定区分());
