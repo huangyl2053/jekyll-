@@ -281,26 +281,17 @@
         SELECT
             <include refid="allColumns_FukaJoho"/>
         FROM
-            rgdb."DbT2002Fuka" AS "db2002Fuka"
-        WHERE
-            "db2002Fuka"."choteiNendo"= #{choteiNendo} 
-        AND "db2002Fuka"."fukaNendo" = #{fukaNendo}
-        AND "db2002Fuka"."choteiNichiji" = #{choteiNichiji}
-        AND NOT EXISTS(
-            SELECT
-                "rirekiNo"
-            FROM
-                rgdb."DbT2002Fuka"
-            WHERE
-                "choteiNendo"= #{choteiNendo} 
-            AND "fukaNendo" = #{fukaNendo}
-            AND "choteiNichiji" = #{choteiNichiji}
-            AND  "tsuchishoNo" = "db2002Fuka"."tsuchishoNo"
-            AND "rirekiNo" <![CDATA[>]]> "db2002Fuka"."rirekiNo")
-        ORDER BY
-            "db2002Fuka"."choteiNendo",
-            "db2002Fuka"."fukaNendo",
-            "db2002Fuka"."tsuchishoNo"
+            rgdb."DbV2002Fuka" AS "db2002Fuka"
+        WHERE 
+            "fukaNendo"='2015' 
+        AND "db2002Fuka"."choteiNendo"||"db2002Fuka"."tsuchishoNo" IN
+          (SELECT MAX("choteiNendo")||"tsuchishoNo"
+           FROM rgdb."DbV2002Fuka"  
+           WHERE 
+               "choteiNichiji"=#{choteiNichiji}
+           AND "fukaNendo"=#{fukaNendo}
+           GROUP BY 
+                "tsuchishoNo")
     </select>
     
     <select resultOrdered="true" id="get全賦課最新情報4" resultMap="ResultMap_FukaEntity"

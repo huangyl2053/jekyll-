@@ -108,8 +108,20 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         set天引先区分(source);
         set出力事由(source);
         set出力順(source);
-        set改ページ(source);
+        set改ページ項目名(source);
+        set改ページデータ(source);
         return source;
+    }
+
+    private void set改ページデータ(TokubetsuChoshuMidoteiIchiranSource source) {
+        source.kanaShimei = source.listList1_5;
+        source.seinengappiYMD = nonullRString(特徴対象一覧未同定.getUmareYMD());
+        source.seibetsuCode = 特徴対象一覧未同定.getSeibetsuCode();
+        source.shichosonCode = 特徴対象一覧未同定.getShichosonCode();
+        source.hihokenshaNo = 特徴対象一覧未同定.getHihokenshaNo();
+        source.nenkinCode = source.listList1_2;
+        source.kisoNenkinNo = source.listList1_1;
+
     }
 
     private void set年度(TokubetsuChoshuMidoteiIchiranSource source) {
@@ -134,7 +146,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     }
 
     private void set年金番号と年金コード(TokubetsuChoshuMidoteiIchiranSource source) {
-        if (RString.isNullOrEmpty(特徴開始月)) {
+        if (特徴対象一覧未同定.isFlag()) {
             source.listList1_1 = this.特徴対象一覧未同定.getKisoNenkinNo();
             source.listList1_2 = this.特徴対象一覧未同定.getNenkinCode();
             return;
@@ -254,7 +266,7 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         }
     }
 
-    private void set改ページ(TokubetsuChoshuMidoteiIchiranSource source) {
+    private void set改ページ項目名(TokubetsuChoshuMidoteiIchiranSource source) {
         if (改頁項目リスト == null || 改頁項目リスト.isEmpty()) {
             return;
         }
@@ -271,5 +283,12 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         if (改頁項目リスト.size() > NUM_4) {
             source.kaiPageArea5 = 改頁項目リスト.get(NUM_4);
         }
+    }
+
+    private RString nonullRString(RDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return date.toDateString();
     }
 }

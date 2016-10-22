@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.service.report.kogakukyufukettei;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteishaichiran.KogakuShikyuFushikyuKetteishaIchiranProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteishaichiran.KogakuShikyuFushikyuKetteishaIchiranReport;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiChohyoDataEntity;
@@ -40,16 +38,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 public class KogakuShikyuFushikyuKetteishaIchiranPrintService {
 
     private static final int INDEX_1 = 1;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
-
-    private static final RString KEY_並び順の２件目 = new RString("KEY_並び順の２件目");
-    private static final RString KEY_並び順の３件目 = new RString("KEY_並び順の３件目");
-    private static final RString KEY_並び順の４件目 = new RString("KEY_並び順の４件目");
-    private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
-    private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
 
     private static final RString 帳票分類ID = new RString("DBC200015_KogakuShikyuFushikyuKetteishaIchiran");
 
@@ -83,27 +72,22 @@ public class KogakuShikyuFushikyuKetteishaIchiranPrintService {
             IOutputOrder 出力順情報, RDateTime 作成日時, ReportManager reportManager) {
         ChohyoJushoEditor 住所Editor = new ChohyoJushoEditor(SubGyomuCode.DBC介護給付, 帳票分類ID, GyomuBunrui.介護事務);
         KogakuShikyuFushikyuKetteishaIchiranProperty property = new KogakuShikyuFushikyuKetteishaIchiranProperty();
+
         try (ReportAssembler<KogakuShikyuFushikyuKetteishaIchiranSource> assembler
                 = createAssembler(property, reportManager)) {
             ReportSourceWriter<KogakuShikyuFushikyuKetteishaIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            int i = 0;
-            Map<RString, RString> 出力順Map = new HashMap<>();
-            if (出力順情報 != null) {
-                for (ISetSortItem item : 出力順情報.get設定項目リスト()) {
-                    if (i == INDEX_1) {
-                        出力順Map.put(KEY_並び順の２件目, item.get項目名());
-                    } else if (i == INDEX_2) {
-                        出力順Map.put(KEY_並び順の３件目, item.get項目名());
-                    } else if (i == INDEX_3) {
-                        出力順Map.put(KEY_並び順の４件目, item.get項目名());
-                    } else if (i == INDEX_4) {
-                        出力順Map.put(KEY_並び順の５件目, item.get項目名());
-                    } else if (i == INDEX_5) {
-                        出力順Map.put(KEY_並び順の６件目, item.get項目名());
+            List<RString> 出力項目リスト = new ArrayList<>();
+            List<RString> 改頁項目リスト = new ArrayList<>();
+            int i = INDEX_1;
+            for (ISetSortItem setSortItem : 出力順情報.get設定項目リスト()) {
+                if (i <= INDEX_5) {
+                    出力項目リスト.add(setSortItem.get項目名());
+                    if (setSortItem.is改頁項目()) {
+                        改頁項目リスト.add(setSortItem.get項目名());
                     }
-                    i = i + 1;
                 }
+                i = i + INDEX_1;
             }
             List<RString> 住所List = new ArrayList<>();
             for (KogakuKyufuKetteiChohyoDataEntity 帳票出力対象データ : 帳票出力対象データリスト) {
@@ -117,7 +101,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranPrintService {
                 住所List.add(編集住所);
             }
             new KogakuShikyuFushikyuKetteishaIchiranReport(帳票出力対象データリスト, 住所List,
-                    出力順Map, 作成日時).writeBy(reportSourceWriter);
+                    出力項目リスト, 改頁項目リスト, 作成日時).writeBy(reportSourceWriter);
         }
     }
 

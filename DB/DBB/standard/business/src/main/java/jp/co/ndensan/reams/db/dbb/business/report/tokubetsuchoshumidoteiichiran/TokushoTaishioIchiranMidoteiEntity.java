@@ -94,6 +94,15 @@ public class TokushoTaishioIchiranMidoteiEntity {
      * 不一致理由コード
      */
     private RString fuichiRiyuCode;
+    private boolean flag;
+    /**
+     * 市町村コード
+     */
+    private RString shichosonCode;
+    /**
+     * 被保険者番号
+     */
+    private RString hihokenshaNo;
 
     /**
      * 特徴対象一覧未同定エンティティクラスのコンストラクタです。
@@ -142,6 +151,57 @@ public class TokushoTaishioIchiranMidoteiEntity {
         this.jusho = jusho;
         this.koroshoHantei = koroshoHantei;
         this.fuichiRiyuCode = fuichiRiyuCode;
+        flag = true;
+    }
+
+    /**
+     * 特徴対象一覧未同定エンティティクラスのコンストラクタです。
+     *
+     * @param kisoNenkinNo 基礎年金番号
+     * @param nenkinCode 年金コード
+     * @param shikibetuCode 識別コード
+     * @param umareYMD 生年月日
+     * @param juminShubetsuCode 住民種別コード
+     * @param seibetsuCode 性別コード
+     * @param kanaShimei カナ氏名
+     * @param kanjiShimei 漢字氏名
+     * @param yubinNo 郵便番号
+     * @param jusho 住所
+     * @param koroshoHantei 厚労省判定
+     * @param fuichiRiyuCode 不一致理由コード
+     * @param shichosonCode 市町村コード
+     * @param hihokenshaNo 被保険者番号
+     */
+    public TokushoTaishioIchiranMidoteiEntity(RString kisoNenkinNo,
+            RString nenkinCode,
+            ShikibetsuCode shikibetuCode,
+            RDate umareYMD,
+            RString juminShubetsuCode,
+            RString seibetsuCode,
+            RString kanaShimei,
+            RString kanjiShimei,
+            RString yubinNo,
+            RString jusho,
+            Boolean koroshoHantei,
+            RString fuichiRiyuCode,
+            RString shichosonCode,
+            RString hihokenshaNo
+    ) {
+        this.kisoNenkinNo = kisoNenkinNo;
+        this.nenkinCode = nenkinCode;
+        this.shikibetuCode = shikibetuCode;
+        this.umareYMD = umareYMD;
+        this.juminShubetsuCode = juminShubetsuCode;
+        this.seibetsuCode = seibetsuCode;
+        this.kanaShimei = kanaShimei;
+        this.kanjiShimei = kanjiShimei;
+        this.yubinNo = yubinNo;
+        this.jusho = jusho;
+        this.koroshoHantei = koroshoHantei;
+        this.fuichiRiyuCode = fuichiRiyuCode;
+        this.shichosonCode = shichosonCode;
+        this.hihokenshaNo = hihokenshaNo;
+        flag = true;
     }
 
     /**
@@ -179,7 +239,8 @@ public class TokushoTaishioIchiranMidoteiEntity {
             RString yubinNo,
             RString jusho,
             Boolean koroshoHantei,
-            RString fuichiRiyuCode) {
+            RString fuichiRiyuCode
+    ) {
         this.karichoshuKisoNenkinNo = karichoshuKisoNenkinNo;
         this.honchoshuKisoNenkinNo = honchoshuKisoNenkinNo;
         this.yokunendoKarichoshuKisoNenkinNo = yokunendoKarichoshuKisoNenkinNo;
@@ -196,5 +257,67 @@ public class TokushoTaishioIchiranMidoteiEntity {
         this.jusho = jusho;
         this.koroshoHantei = koroshoHantei;
         this.fuichiRiyuCode = fuichiRiyuCode;
+        flag = false;
+    }
+
+    /**
+     * 特徴対象一覧未同定エンティティクラスのコンストラクタです。
+     *
+     * @param karichoshuKisoNenkinNo 仮徴収・基礎年金番号
+     * @param honchoshuKisoNenkinNo 本徴収・基礎年金番号
+     * @param yokunendoKarichoshuKisoNenkinNo 翌年度仮徴収・基礎年金番号
+     * @param karichoshuNenkinCode 仮徴収・年金コード
+     * @param honchoshuKisonenkinCode 本徴収・基礎年金コード
+     * @param yokunendoKariChoshuKisonenkinCode 翌年度仮徴収・基礎年金コード
+     * @param shikibetuCode 識別コード
+     * @param umareYMD 生年月日
+     * @param juminShubetsuCode 住民種別コード
+     * @param seibetsuCode 性別コード
+     * @param kanaShimei カナ氏名
+     * @param kanjiShimei 漢字氏名
+     * @param yubinNo 郵便番号
+     * @param jusho 住所
+     * @param koroshoHantei 厚労省判定
+     * @param fuichiRiyuCode 不一致理由コード
+     * @param shichosonCode 市町村コード
+     * @param hihokenshaNo 被保険者番号
+     */
+    public TokushoTaishioIchiranMidoteiEntity(RString karichoshuKisoNenkinNo,
+            RString honchoshuKisoNenkinNo,
+            RString yokunendoKarichoshuKisoNenkinNo,
+            RString karichoshuNenkinCode,
+            RString honchoshuKisonenkinCode,
+            RString yokunendoKariChoshuKisonenkinCode,
+            ShikibetsuCode shikibetuCode,
+            RDate umareYMD,
+            RString juminShubetsuCode,
+            RString seibetsuCode,
+            RString kanaShimei,
+            RString kanjiShimei,
+            RString yubinNo,
+            RString jusho,
+            Boolean koroshoHantei,
+            RString fuichiRiyuCode,
+            RString shichosonCode,
+            RString hihokenshaNo) {
+        this.karichoshuKisoNenkinNo = karichoshuKisoNenkinNo;
+        this.honchoshuKisoNenkinNo = honchoshuKisoNenkinNo;
+        this.yokunendoKarichoshuKisoNenkinNo = yokunendoKarichoshuKisoNenkinNo;
+        this.karichoshuNenkinCode = karichoshuNenkinCode;
+        this.honchoshuKisonenkinCode = honchoshuKisonenkinCode;
+        this.yokunendoKariChoshuKisonenkinCode = yokunendoKariChoshuKisonenkinCode;
+        this.shikibetuCode = shikibetuCode;
+        this.umareYMD = umareYMD;
+        this.juminShubetsuCode = juminShubetsuCode;
+        this.seibetsuCode = seibetsuCode;
+        this.kanaShimei = kanaShimei;
+        this.kanjiShimei = kanjiShimei;
+        this.yubinNo = yubinNo;
+        this.jusho = jusho;
+        this.koroshoHantei = koroshoHantei;
+        this.fuichiRiyuCode = fuichiRiyuCode;
+        this.shichosonCode = shichosonCode;
+        this.hihokenshaNo = hihokenshaNo;
+        flag = false;
     }
 }

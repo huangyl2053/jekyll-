@@ -88,6 +88,10 @@ public class KyufujissekiKoshinkekkaIchiranPageBreak extends PageBreaker<Kyufuji
                 .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.整理番号.get項目ID())
                 && !currentSource.getSource().listUpper_10.equals(nextSource.getSource().listUpper_10)) {
             return true;
+        } else if (this.breakKeysList
+                .contains(KyufujissekiKoshinkekkaIchiranProperty.DBC200054_KyufujissekiKoshinkekkaIchiran.現物償還の別.get項目ID())
+                && !currentSource.getSource().kyufuJissekiKubun.equals(nextSource.getSource().kyufuJissekiKubun)) {
+            return true;
         }
         return false;
     }
