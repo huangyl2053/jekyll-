@@ -18,6 +18,11 @@ public class HanyoLisyInvertedParameter {
 
     private final ReportId 帳票ID;
 
+    /**
+     * コンストラクタです
+     *
+     * @param 帳票ID ReportId
+     */
     public HanyoLisyInvertedParameter(ReportId 帳票ID) {
         this.帳票ID = 帳票ID;
     }
