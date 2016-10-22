@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuFukaK
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuHokenryoKeisanParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KyokaisoKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
@@ -1355,8 +1356,6 @@ public class FukaKeisan extends FukaKeisanFath {
         KiwariKeisanOutput kiwariKeisanOutputEntity = kiwariKeisan.getKibetsuGaku(inputEntity);
         List<Decimal> 特徴期別金額 = kiwariKeisanOutputEntity.get調定年度期別クラス().get(0).get特徴期別額();
         List<Decimal> 普徴期別金額 = kiwariKeisanOutputEntity.get調定年度期別クラス().get(0).get普徴期別額();
-        // TODO QAのNo.1741(Redmine#106404) 以下がDummy Data
-        RString 特徴停止事由コード = new RString("01");
 
         FukaJoho 更正前 = param.get年度分賦課リスト_更正前().get現年度();
         FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
@@ -1373,6 +1372,7 @@ public class FukaKeisan extends FukaKeisanFath {
         fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
         FukaJoho 現年度 = new FukaJoho(fukaJohoRelateEntity);
 
+        RString 特徴停止事由コード = ChoteiJiyuCode.保険料額の減額変更.getコード();
         ChoshuHoho 出力用徴収方法の情報 = get出力用徴収方法の情報(更正前, 現年度, param, param.get徴収方法の情報_更正前(),
                 特徴期別金額, 特徴停止事由コード);
 
