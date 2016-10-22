@@ -75,7 +75,7 @@ public class RiyoshaFutanWariaiKoushiConf {
 
         getHandler(div).insertDB(div, 引継ぎデータ, 資格対象者);
 
-        return ResponseData.of(getHandler(div).getソースデータ取得(div, 引継ぎデータ, 資格対象者)).setState(DBC2000023StateName.初期表示);
+        return ResponseData.of(getHandler(div).getソースデータ取得(div, 資格対象者)).setState(DBC2000023StateName.初期表示);
 
     }
 

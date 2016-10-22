@@ -29,7 +29,7 @@
             "DbT3017KyufujissekiKihon"."hiHokenshaNo" AS "DbT3017_hiHokenshaNo",
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM" AS "DbT3017_serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo" AS "DbT3017_jigyoshoNo",
-            "DbT3017KyufujissekiKihon"."toshiNo" AS "DbT3017_toshiNo"
+            "DbT3017KyufujissekiKihon"."seiriNo" AS "DbT3017_seiriNo"
             FROM
             rgdb."DbT3017KyufujissekiKihon"
             GROUP BY
@@ -37,13 +37,13 @@
             "DbT3017KyufujissekiKihon"."hiHokenshaNo",
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo",
-            "DbT3017KyufujissekiKihon"."toshiNo") AS T0
+            "DbT3017KyufujissekiKihon"."seiriNo") AS T0
             ON T9."shinsaYM" = 最新審査年月
             AND T9."inputShikibetsuNo" = T0."DbT3017_inputShikibetsuNo"
             AND T9."hiHokenshaNo" = T0."DbT3017_hiHokenshaNo"
             AND T9."serviceTeikyoYM" = T0."DbT3017_serviceTeikyoYM"
             AND T9."jigyoshoNo" = T0."DbT3017_jigyoshoNo"
-            AND T9."toshiNo" = T0."DbT3017_toshiNo"
+            AND T9."seiriNo" = T0."DbT3017_seiriNo"
             ) AS T1
             LEFT OUTER JOIN
             rgdb."DbT3018KyufujissekiMeisai" AS T2
@@ -104,7 +104,7 @@
             "DbT3017KyufujissekiKihon"."hiHokenshaNo" AS "DbT3017_hiHokenshaNo",
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM" AS "DbT3017_serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo" AS "DbT3017_jigyoshoNo",
-            "DbT3017KyufujissekiKihon"."toshiNo" AS "DbT3017_toshiNo"
+            "DbT3017KyufujissekiKihon"."seiriNo" AS "DbT3017_seiriNo"
             FROM
             rgdb."DbT3017KyufujissekiKihon"
             GROUP BY
@@ -112,13 +112,13 @@
             "DbT3017KyufujissekiKihon"."hiHokenshaNo",
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo",
-            "DbT3017KyufujissekiKihon"."toshiNo") AS T0
+            "DbT3017KyufujissekiKihon"."seiriNo") AS T0
             ON T9."shinsaYM" = 最新審査年月
             AND T9."inputShikibetsuNo" = T0."DbT3017_inputShikibetsuNo"
             AND T9."hiHokenshaNo" = T0."DbT3017_hiHokenshaNo"
             AND T9."serviceTeikyoYM" = T0."DbT3017_serviceTeikyoYM"
             AND T9."jigyoshoNo" = T0."DbT3017_jigyoshoNo"
-            AND T9."toshiNo" = T0."DbT3017_toshiNo"
+            AND T9."seiriNo" = T0."DbT3017_seiriNo"
             ) AS T1
             LEFT OUTER JOIN
             rgdb."DbT3025KyufujissekiKyotakuService" AS T2
@@ -179,7 +179,7 @@
             "DbT3017KyufujissekiKihon"."hiHokenshaNo" AS "DbT3017_hiHokenshaNo",
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM" AS "DbT3017_serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo" AS "DbT3017_jigyoshoNo",
-            "DbT3017KyufujissekiKihon"."toshiNo" AS "DbT3017_toshiNo"
+            "DbT3017KyufujissekiKihon"."seiriNo" AS "DbT3017_seiriNo"
             FROM
             rgdb."DbT3017KyufujissekiKihon"
             GROUP BY
@@ -187,13 +187,13 @@
             "DbT3017KyufujissekiKihon"."hiHokenshaNo",
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo",
-            "DbT3017KyufujissekiKihon"."toshiNo") AS T0
+            "DbT3017KyufujissekiKihon"."seiriNo") AS T0
             ON T9."shinsaYM" = 最新審査年月
             AND T9."inputShikibetsuNo" = T0."DbT3017_inputShikibetsuNo"
             AND T9."hiHokenshaNo" = T0."DbT3017_hiHokenshaNo"
             AND T9."serviceTeikyoYM" = T0."DbT3017_serviceTeikyoYM"
             AND T9."jigyoshoNo" = T0."DbT3017_jigyoshoNo"
-            AND T9."toshiNo" = T0."DbT3017_toshiNo"
+            AND T9."seiriNo" = T0."DbT3017_seiriNo"
             ) AS T1
             LEFT OUTER JOIN
             rgdb."DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" AS T2
@@ -525,11 +525,15 @@
     
     <select resultOrdered="true" id="get帳票出力用一時TBL出力順"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetMybatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouTempEntity" fetchSize="500">
+            resultMap="resultMap_DbWT3470chohyouShutsuryokuyou" fetchSize="500">
         SELECT
-        "DbWT3470chohyouShutsuryokuyou".*
+        "DbWT3470chohyouShutsuryokuyou".*,
+        "DbT7130KaigoServiceShurui"."serviceShuruiMeisho"
         FROM 
-        "DbWT3470chohyouShutsuryokuyou"
+        "DbWT3470chohyouShutsuryokuyou" AS "DbWT3470chohyouShutsuryokuyou"
+        LEFT JOIN
+        rgdb."DbT7130KaigoServiceShurui" AS "DbT7130KaigoServiceShurui"
+        ON "DbT7130KaigoServiceShurui"."serviceShuruiCd" =  "DbWT3470chohyouShutsuryokuyou"."serviceShuruiCode"
         ${出力順}
     </select>
     
@@ -571,6 +575,21 @@
          "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
          "DbT1001HihokenshaDaicho"."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode"
     </sql>
+        
+    <resultMap id="resultMap_DbWT3470chohyouShutsuryokuyou" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouEntity" autoMapping="true">
+        <result property="サービス種類名称" column="serviceShuruiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="帳票出力" resultMap="resultMap_DbWT3470chohyouShutsuryokuyouTempEntity"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_DbWT3470chohyouShutsuryokuyouTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouTempEntity" autoMapping="true">
+        <result property="renban" column="renban"/>
+        <result property="serviceShuruiCode" column="serviceShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sortYouKomokuCode" column="sortYouKomokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoKaigoJotaiKubunCode" column="yoKaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nissuKaisuSyukeichi" column="nissuKaisuSyukeichi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="taniSuSyukeichi" column="taniSuSyukeichi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="serviceRyakushou" column="serviceRyakushou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
         
     <resultMap id="resultMap_KyufuJissekiMeisaiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.KyufuJissekiMeisaiEntity" autoMapping="true">
         <result property="被保険者番号" column="T1_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>

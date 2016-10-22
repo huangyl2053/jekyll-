@@ -3,22 +3,26 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTas
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 23 11:02:54 CST 2016
+ * Fri Oct 21 19:07:36 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
+
 /**
- * dgNinteiTaskList_Row のクラスファイル
- *
+ * dgNinteiTaskList_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
+
 public class dgNinteiTaskList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     private RString hokensha;
     private TextBoxDate ninteiShinseiDay;

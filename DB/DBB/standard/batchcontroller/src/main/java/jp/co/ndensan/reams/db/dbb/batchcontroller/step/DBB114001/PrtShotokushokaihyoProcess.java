@@ -259,16 +259,22 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
                 .concat(有無し));
         出力条件リスト.add(builder.toRString());
         List<SaiHakkoParameter> 再発行対象リスト = processParameter.get再発行対象リスト();
-        for (SaiHakkoParameter param : 再発行対象リスト) {
+        if (再発行対象リスト != null) {
+            for (SaiHakkoParameter param : 再発行対象リスト) {
+                builder = new RStringBuilder();
+                RString 発行件数 = new RString(String.valueOf(param.get発行件数()));
+                RString 処理年度 = new RString(param.get処理年度().toString());
+                RString ユーザ = param.getユーザ();
+                RString 処理日時 = new RString(param.get処理日時().toString());
+                builder.append((FORMAT_LEFT).concat(定数_再発行対象リスト).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+                        .concat(発行件数).concat(カンマ).concat(RString.FULL_SPACE)
+                        .concat(処理年度).concat(カンマ).concat(RString.FULL_SPACE)
+                        .concat(ユーザ).concat(カンマ).concat(RString.FULL_SPACE).concat(処理日時));
+                出力条件リスト.add(builder.toRString());
+            }
+        } else {
             builder = new RStringBuilder();
-            RString 発行件数 = new RString(String.valueOf(param.get発行件数()));
-            RString 処理年度 = new RString(param.get処理年度().toString());
-            RString ユーザ = param.getユーザ();
-            RString 処理日時 = new RString(param.get処理日時().toString());
-            builder.append((FORMAT_LEFT).concat(定数_再発行対象リスト).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
-                    .concat(発行件数).concat(カンマ).concat(RString.FULL_SPACE)
-                    .concat(処理年度).concat(カンマ).concat(RString.FULL_SPACE)
-                    .concat(ユーザ).concat(カンマ).concat(RString.FULL_SPACE).concat(処理日時));
+            builder.append((FORMAT_LEFT).concat(定数_再発行対象リスト).concat(FORMAT_RIGHT));
             出力条件リスト.add(builder.toRString());
         }
 

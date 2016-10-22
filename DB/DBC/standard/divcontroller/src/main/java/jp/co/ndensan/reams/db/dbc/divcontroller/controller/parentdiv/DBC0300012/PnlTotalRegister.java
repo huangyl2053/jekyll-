@@ -4,7 +4,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.hokenjuryoininharaitoriatsukai.HokenJuryoIninHaraiToriatsukaiResult;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.deleted;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.saved;
-import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012TransitionEventName.検索に戻る;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012TransitionEventName.処理完了;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.PnlTotalRegisterDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0300012.PnlTotalRegisterHandler;
 import jp.co.ndensan.reams.db.dbc.service.report.jyuryoitakuatukaijigyoshatorokutsuchisho.JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService;
@@ -119,12 +119,12 @@ public class PnlTotalRegister {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
+                return ResponseData.of(div).forwardWithEventName(処理完了).respond();
             } else {
                 return ResponseData.of(div).respond();
             }
         } else {
-            return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
+            return ResponseData.of(div).forwardWithEventName(処理完了).respond();
         }
     }
 
@@ -159,6 +159,30 @@ public class PnlTotalRegister {
         HokenJuryoIninHaraiToriatsukaiResult result = getHandler(div).get発行データ(契約事業者番号);
         FlexibleDate 発行日 = new FlexibleDate(div.getPnlHakoubi().getTxtHakoubi().getValue().toDateString());
         return ResponseData.of(new JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService().print(result.getEntity(), 発行日)).respond();
+    }
+
+    /**
+     * onClick_onBlur
+     *
+     * @param div PnlTotalRegisterDiv
+     * @return ResponseData
+     */
+    public ResponseData<PnlTotalRegisterDiv> onClick_onBlur(PnlTotalRegisterDiv div) {
+        PnlTotalRegisterHandler handler = getHandler(div);
+        handler.set送付先口座種別();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * onClick_onOkClose
+     *
+     * @param div PnlTotalRegisterDiv
+     * @return ResponseData
+     */
+    public ResponseData<PnlTotalRegisterDiv> onClick_onOkClose(PnlTotalRegisterDiv div) {
+        PnlTotalRegisterHandler handler = getHandler(div);
+        handler.set送付先口座種別();
+        return ResponseData.of(div).respond();
     }
 
     /**

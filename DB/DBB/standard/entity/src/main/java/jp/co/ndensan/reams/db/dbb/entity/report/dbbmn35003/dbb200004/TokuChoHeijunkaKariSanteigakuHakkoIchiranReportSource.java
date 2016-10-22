@@ -13,19 +13,39 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource implements IR
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     public static final RString 改頁_郵便;
+    public static final RString 改頁_町域コード;
+    public static final RString 改頁_番地コード;
     public static final RString 改頁_行政区コード;
+    public static final RString 改頁_地区１;
+    public static final RString 改頁_地区２;
+    public static final RString 改頁_地区３;
     public static final RString 改頁_世帯コード;
+    public static final RString 改頁_識別コード;
+    public static final RString 改頁_氏名５０音カナ;
     public static final RString 改頁_生年月日;
     public static final RString 改頁_性別;
     public static final RString 改頁_市町村コード;
+    public static final RString 改頁_被保険者番号;
+    public static final RString 改頁_年金コード;
+    public static final RString 改頁_納組コード;
 
     static {
         改頁_郵便 = new RString("listLower_2");
+        改頁_町域コード = new RString("atena_choikiCode");
+        改頁_番地コード = new RString("atesaki_banchi");
         改頁_行政区コード = new RString("listUpper_4");
-        改頁_世帯コード = new RString("listLower_2");
+        改頁_地区１ = new RString("atesaki_chiku1");
+        改頁_地区２ = new RString("atesaki_chiku2");
+        改頁_地区３ = new RString("atesaki_chiku3");
+        改頁_世帯コード = new RString("listUpper_4");
+        改頁_識別コード = new RString("atena_shikibetsuCode");
+        改頁_氏名５０音カナ = new RString("atena_kanaMeisho");
         改頁_生年月日 = new RString("listUpper_6");
         改頁_性別 = new RString("listUpper_5");
         改頁_市町村コード = new RString("hokenshaNo");
+        改頁_被保険者番号 = new RString("koseigo_hihokenshaNo");
+        改頁_年金コード = new RString("nenkinTokuchoKaifuJoho_nenkinCode");
+        改頁_納組コード = new RString("caT0714SeikyuHoho_nokumiCode");
     }
 
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
@@ -95,5 +115,25 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource implements IR
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportItem(name = "atena_choikiCode", order = 32)
+    public RString atena_choikiCode;
+    @ReportItem(name = "atesaki_banchi", order = 33)
+    public RString atesaki_banchi;
+    @ReportItem(name = "atesaki_chiku1", order = 34)
+    public RString atesaki_chiku1;
+    @ReportItem(name = "atesaki_chiku2", order = 35)
+    public RString atesaki_chiku2;
+    @ReportItem(name = "atesaki_chiku3", order = 36)
+    public RString atesaki_chiku3;
+    @ReportItem(name = "atena_shikibetsuCode", order = 37)
+    public RString atena_shikibetsuCode;
+    @ReportItem(name = "atena_kanaShimei", order = 38)
+    public RString atena_kanaMeisho;
+    @ReportItem(name = "koseigo_hihokenshaNo", order = 39)
+    public RString koseigo_hihokenshaNo;
+    @ReportItem(name = "nenkinTokuchoKaifuJoho_nenkinCode", order = 40)
+    public RString nenkinTokuchoKaifuJoho_nenkinCode;
+    @ReportItem(name = "caT0714SeikyuHoho_nokumiCode", order = 41)
+    public RString caT0714SeikyuHoho_nokumiCode;
 // </editor-fold>
 }

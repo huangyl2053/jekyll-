@@ -428,7 +428,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
             source.shiharaiStartYMD = 年月日編集(帳票情報.get支払期間開始年月日()).
                     concat(get日本語名略称(帳票情報.get支払期間開始年月日())).concat(記号);
             source.karaFugo = 記号;
-            source.shiharaiEndYMD = 年月日編集(帳票情報.get支払期間終了年月日());
+            source.shiharaiEndYMD = 年月日編集(帳票情報.get支払期間終了年月日())
+                    .concat(get日本語名略称(帳票情報.get支払期間終了年月日()));
             source.shiharaiStartHMS = 時分秒編集(帳票情報.get支払窓口開始時間());
             source.shiharaiEndHMS = 時分秒編集(帳票情報.get支払窓口終了時間());
         } else {

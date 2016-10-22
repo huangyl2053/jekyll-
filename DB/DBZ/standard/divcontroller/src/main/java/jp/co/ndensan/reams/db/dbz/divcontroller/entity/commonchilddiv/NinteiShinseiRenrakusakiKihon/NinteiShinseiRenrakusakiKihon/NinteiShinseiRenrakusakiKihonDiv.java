@@ -3,7 +3,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
- * @reamsid_L DBE-3000-080  suguangjun
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +18,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishi
  * @author 自動生成
  */
 public class NinteiShinseiRenrakusakiKihonDiv extends Panel implements INinteiShinseiRenrakusakiKihonDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

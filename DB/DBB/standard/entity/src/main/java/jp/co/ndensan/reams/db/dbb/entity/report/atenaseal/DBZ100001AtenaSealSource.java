@@ -799,5 +799,78 @@ public class DBZ100001AtenaSealSource implements IReportSource {
     public ShikibetsuCode shikibetsuCode10;
     @ReportPerson(id = "12", order = 388)
     public ShikibetsuCode shikibetsuCode11;
+    @ReportItem(name = "chkJusho", order = 377)
+    public RString chkJusho;
+    @ReportItem(name = "chkJusho1", order = 378)
+    public RString chkJusho1;
+    @ReportItem(name = "chkJusho2", order = 379)
+    public RString chkJusho2;
+    @ReportItem(name = "chkJusho3", order = 380)
+    public RString chkJusho3;
+    @ReportItem(name = "chkJusho4", order = 381)
+    public RString chkJusho4;
+    @ReportItem(name = "chkJusho5", order = 382)
+    public RString chkJusho5;
+    @ReportItem(name = "chkJusho6", order = 383)
+    public RString chkJusho6;
+    @ReportItem(name = "chkJusho7", order = 384)
+    public RString chkJusho7;
+    @ReportItem(name = "chkJusho8", order = 385)
+    public RString chkJusho8;
+    @ReportItem(name = "chkJusho9", order = 386)
+    public RString chkJusho9;
+    @ReportItem(name = "chkJusho10", order = 387)
+    public RString chkJusho10;
+    @ReportItem(name = "chkJusho11", order = 388)
+    public RString chkJusho11;
+    @ReportItem(name = "chkShimei", order = 389)
+    public RString chkShimei;
+    @ReportItem(name = "chkShimei1", order = 390)
+    public RString chkShimei1;
+    @ReportItem(name = "chkShimei2", order = 391)
+    public RString chkShimei2;
+    @ReportItem(name = "chkShimei3", order = 392)
+    public RString chkShimei3;
+    @ReportItem(name = "chkShimei4", order = 393)
+    public RString chkShimei4;
+    @ReportItem(name = "chkShimei5", order = 394)
+    public RString chkShimei5;
+    @ReportItem(name = "chkShimei6", order = 395)
+    public RString chkShimei6;
+    @ReportItem(name = "chkShimei7", order = 396)
+    public RString chkShimei7;
+    @ReportItem(name = "chkShimei8", order = 397)
+    public RString chkShimei8;
+    @ReportItem(name = "chkShimei9", order = 398)
+    public RString chkShimei9;
+    @ReportItem(name = "chkShimei10", order = 399)
+    public RString chkShimei10;
+    @ReportItem(name = "chkShimei11", order = 400)
+    public RString chkShimei11;
+    @ReportItem(name = "chkKatagaki", order = 401)
+    public RString chkKatagaki;
+    @ReportItem(name = "chkKatagaki1", order = 402)
+    public RString chkKatagaki1;
+    @ReportItem(name = "chkKatagaki2", order = 403)
+    public RString chkKatagaki2;
+    @ReportItem(name = "chkKatagaki3", order = 404)
+    public RString chkKatagaki3;
+    @ReportItem(name = "chkKatagaki4", order = 405)
+    public RString chkKatagaki4;
+    @ReportItem(name = "chkKatagaki5", order = 406)
+    public RString chkKatagaki5;
+    @ReportItem(name = "chkKatagaki6", order = 407)
+    public RString chkKatagaki6;
+    @ReportItem(name = "chkKatagaki7", order = 408)
+    public RString chkKatagaki7;
+    @ReportItem(name = "chkKatagaki8", order = 409)
+    public RString chkKatagaki8;
+    @ReportItem(name = "chkKatagaki9", order = 410)
+    public RString chkKatagaki9;
+    @ReportItem(name = "chkKatagaki10", order = 411)
+    public RString chkKatagaki10;
+    @ReportItem(name = "chkKatagaki11", order = 412)
+    public RString chkKatagaki11;
+
 // </editor-fold>
 }

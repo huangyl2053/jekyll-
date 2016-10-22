@@ -480,6 +480,9 @@ public class KarisanteiFukaDaichoPrintService {
             iten4.setListFutsuChoshu_17(entity.get普通徴収収入額().get普徴金額１２());
             iten4.setListFutsuChoshu_18(entity.get普通徴収収入額().get普徴金額１３());
             iten4.setListFutsuChoshu_19(entity.get普通徴収収入額().get普徴金額１４());
+            iten4.setListFutsuChoshu_3(entity.get普通徴収収入額().get普徴仮算定保険料());
+            iten4.setListFutsuChoshu_4(entity.get普通徴収収入額().get普徴納付済額());
+            iten4.setListFutsuChoshu_5(entity.get普通徴収収入額().get普徴今後納付すべき額());
             iten4.setListFutsuChoshu_6(entity.get普通徴収収入額().get普徴金額１());
             iten4.setListFutsuChoshu_7(entity.get普通徴収収入額().get普徴金額２());
             iten4.setListFutsuChoshu_8(entity.get普通徴収収入額().get普徴金額３());
@@ -584,6 +587,9 @@ public class KarisanteiFukaDaichoPrintService {
             iten4.setListTokuChoshu_17(entity.get特別徴収収入額().get特徴金額１２());
             iten4.setListTokuChoshu_18(entity.get特別徴収収入額().get特徴金額１３());
             iten4.setListTokuChoshu_19(entity.get特別徴収収入額().get特徴金額１４());
+            iten4.setListTokuChoshu_3(entity.get特別徴収収入額().get特徴仮算定保険料());
+            iten4.setListTokuChoshu_4(entity.get特別徴収収入額().get特徴納付済額());
+            iten4.setListTokuChoshu_5(entity.get特別徴収収入額().get特徴今後納付すべき額());
             iten4.setListTokuChoshu_6(entity.get特別徴収収入額().get特徴金額１());
             iten4.setListTokuChoshu_7(entity.get特別徴収収入額().get特徴金額２());
             iten4.setListTokuChoshu_8(entity.get特別徴収収入額().get特徴金額３());

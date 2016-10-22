@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishin
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uzi.divcontroller.entity.commonchilddiv.ImageMasking.IImageMaskingDiv;
+import jp.co.ndensan.reams.uz.uzi.divcontroller.entity.commonchilddiv.ImageMasking.ImageMaskingDiv;
 
 /**
  * ImageJohoMasking のクラスファイル 
@@ -19,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ImageJohoMaskingDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -257,13 +259,8 @@ public class ImageJohoMaskingDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTextBox1() {
-        return this.getMaskingPanel().getTextBox1();
-    }
-
-    @JsonIgnore
-    public void  setTextBox1(TextBox TextBox1) {
-        this.getMaskingPanel().setTextBox1(TextBox1);
+    public IImageMaskingDiv getCcdImageMasking() {
+        return this.getMaskingPanel().getCcdImageMasking();
     }
 
     // </editor-fold>

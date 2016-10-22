@@ -638,7 +638,7 @@ public class HanyoListShiharaiNotContainNoBusiness {
         }
 
         if (!日付スラッシュ付加) {
-            return date.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+            return date.seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString();
         }
         return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }

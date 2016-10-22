@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.sonotakik
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Mar 04 16:56:30 CST 2016 
+ * Fri Oct 21 19:24:15 CST 2016 
  */
 
 
@@ -15,10 +15,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgSonotaKikanIchiran_Row のクラスファイル 
  * 
+ * @author 自動生成
  */
 
 public class dgSonotaKikanIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     private RString sonotakikancode;
     private RString sonotakikanname;

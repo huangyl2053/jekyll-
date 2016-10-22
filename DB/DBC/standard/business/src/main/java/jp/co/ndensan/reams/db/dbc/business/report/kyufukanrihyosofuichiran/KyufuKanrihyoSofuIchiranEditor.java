@@ -69,9 +69,9 @@ public class KyufuKanrihyoSofuIchiranEditor implements IKyufuKanrihyoSofuIchiran
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString());
-        hakkoYMD.append("△");
+        hakkoYMD.append(" ");
         hakkoYMD.append(entity.get作成日時().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-        hakkoYMD.append("△");
+        hakkoYMD.append(" ");
         hakkoYMD.append("作成");
         source.printTimeStamp = new RString(hakkoYMD.toString());
         source.teishutsuYM = パターン56(entity.get処理年月());

@@ -79,20 +79,20 @@ public class HanyoListReportSource implements IReportSource {
     public RString shoKisaiHokenshaNo;
     @ReportItem(name = "hokenshaNo", length = 20, order = 31)
     public RString hokenshaNo;
-    @ReportItem(name = "new1", length = 20, order = 32)
-    public RString new1;
-    @ReportItem(name = "new2", length = 20, order = 33)
-    public RString new2;
-    @ReportItem(name = "new3", length = 20, order = 34)
-    public RString new3;
-    @ReportItem(name = "new4", length = 20, order = 35)
-    public RString new4;
-    @ReportItem(name = "new5", length = 20, order = 36)
-    public RString new5;
-    @ReportItem(name = "new6", length = 20, order = 37)
-    public RString new6;
-    @ReportItem(name = "new7", length = 20, order = 38)
-    public RString new7;
+    @ReportItem(name = "shikakuKubun", length = 20, order = 32)
+    public RString shikakuKubun;
+    @ReportItem(name = "jukyuShinseiKubun", length = 20, order = 33)
+    public RString jukyuShinseiKubun;
+    @ReportItem(name = "jukyuShinseiYMD", length = 20, order = 34)
+    public RString jukyuShinseiYMD;
+    @ReportItem(name = "yoKaigoJotaiKubunCode", length = 20, order = 35)
+    public RString yoKaigoJotaiKubunCode;
+    @ReportItem(name = "ninteiKaishiYMD", length = 20, order = 36)
+    public RString ninteiKaishiYMD;
+    @ReportItem(name = "shikakuShutokuYMD", length = 20, order = 37)
+    public RString shikakuShutokuYMD;
+    @ReportItem(name = "shikakuSoshitsuYMD", length = 20, order = 38)
+    public RString shikakuSoshitsuYMD;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4101NinteiShinseiJohoBu
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4102NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4102NinteiKekkaJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4120ShinseitodokedeJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4120ShinseitodokedeJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4121ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4121ShinseiRirekiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
@@ -232,7 +233,6 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             model.setMode(new RString(KekkaShosaiJohoDiv.ShoriType.InputMode.toString()));
         }
         if (!is今回 || (is今回 && outModel == null)) {
-            passModel.set認定区分(new RString("1"));
             passModel.setみなし更新認定(new ArrayList<RString>());
             if (認定情報 == null) {
                 passModel.set申請書管理番号(ShinseishoKanriNo.EMPTY);
@@ -439,7 +439,63 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
     }
 
     /**
-     * 認定結果情報を作成します。
+     * 登録用認定結果情報を作成します。
+     *
+     * @param menuId メニューID
+     * @param 今回情報 今回情報
+     * @param 採番申請書管理番号 採番申請書管理番号
+     * @return 登録用認定結果情報
+     */
+    public DbT4102NinteiKekkaJoho create登録用認定結果情報(RString menuId, ShokkenTorikeshiNinteiJohoKonkaiBusiness 今回情報,
+            ShinseishoKanriNo 採番申請書管理番号) {
+        DbT4102NinteiKekkaJoho 認定結果情報 = 今回情報.get要介護認定結果情報();
+        KekkaShosaiJohoOutModel outModel = DataPassingConverter.deserialize(div.getHdnKekkaShosaiJohoOutModel(), KekkaShosaiJohoOutModel.class);
+        DbT4102NinteiKekkaJoho 登録用認定結果情報 = new DbT4102NinteiKekkaJoho(採番申請書管理番号);
+        DbT4102NinteiKekkaJohoBuilder 登録用情報Builder = 登録用認定結果情報.createBuilderForEdit();
+        if (メニュID_職権修正.equals(menuId) || メニュID_職権取消一部喪失.equals(menuId)) {
+            登録用情報Builder.set二次判定年月日(認定結果情報.get二次判定年月日());
+            登録用情報Builder.set二次判定要介護状態区分コード(認定結果情報.get二次判定要介護状態区分コード());
+            登録用情報Builder.set二次判定認定有効期間(認定結果情報.get二次判定認定有効期間());
+            登録用情報Builder.set二次判定認定有効開始年月日(認定結果情報.get二次判定認定有効開始年月日());
+            登録用情報Builder.set二次判定認定有効終了年月日(認定結果情報.get二次判定認定有効終了年月日());
+            登録用情報Builder.set介護認定審査会資料作成年月日(認定結果情報.get介護認定審査会資料作成年月日());
+            登録用情報Builder.set介護認定審査会開催番号(認定結果情報.get介護認定審査会開催番号());
+            登録用情報Builder.set介護認定審査会意見(認定結果情報.get介護認定審査会意見());
+            登録用情報Builder.set一次判定結果変更理由(認定結果情報.get一次判定結果変更理由());
+            登録用情報Builder.set要介護状態像例コード(認定結果情報.get要介護状態像例コード());
+            登録用情報Builder.set認定審査会意見種類(認定結果情報.get認定審査会意見種類());
+            登録用情報Builder.set審査会メモ(認定結果情報.get審査会メモ());
+            登録用情報Builder.set二次判定結果入力方法(認定結果情報.get二次判定結果入力方法());
+            登録用情報Builder.set二次判定結果入力年月日(認定結果情報.get二次判定結果入力年月日());
+        }
+        if ((メニュID_サービス変更認定.equals(menuId) || メニュID_区分変更認定.equals(menuId))
+                && !認定区分_却.equals(div.getTxtKubunKonkai().getValue())) {
+            if (div.getTxtNinteibiKonkai().getValue() == null || div.getTxtNinteibiKonkai().getValue().isEmpty()) {
+                登録用情報Builder.set二次判定年月日(FlexibleDate.getNowDate());
+            } else {
+                登録用情報Builder.set二次判定年月日(div.getTxtNinteibiKonkai().getValue());
+            }
+            登録用情報Builder.set二次判定認定有効期間(set有効期間(outModel));
+            if (outModel != null) {
+                登録用情報Builder.set二次判定要介護状態区分コード(new Code(outModel.get認定内容().get要介護度コード()));
+                登録用情報Builder.set二次判定認定有効開始年月日(nullToEmpty(outModel.get認定内容().get有効開始年月日()));
+                登録用情報Builder.set二次判定認定有効終了年月日(nullToEmpty(outModel.get認定内容().get有効終了年月日()));
+                登録用情報Builder.set介護認定審査会意見(outModel.get認定内容().get審査会意見());
+            }
+            登録用情報Builder.set介護認定審査会資料作成年月日(FlexibleDate.EMPTY);
+            登録用情報Builder.set介護認定審査会開催番号(RString.EMPTY);
+            登録用情報Builder.set一次判定結果変更理由(RString.EMPTY);
+            登録用情報Builder.set要介護状態像例コード(Code.EMPTY);
+            登録用情報Builder.set認定審査会意見種類(RString.EMPTY);
+            登録用情報Builder.set審査会メモ(RString.EMPTY);
+            登録用情報Builder.set二次判定結果入力方法(Code.EMPTY);
+            登録用情報Builder.set二次判定結果入力年月日(FlexibleDate.EMPTY);
+        }
+        return 登録用情報Builder.build();
+    }
+
+    /**
+     * 申請履歴情報を作成します。
      *
      * @param 採番申請書管理番号 採番申請書管理番号
      * @param menuId メニューID
@@ -587,6 +643,30 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             }
             登録用情報Builder.set論理削除フラグ(true);
         }
+        return 登録用情報Builder.build();
+    }
+
+    /**
+     * 登録用申請届出者を作成します。
+     *
+     * @param 採番申請書管理番号 採番申請書管理番号
+     * @param menuId メニューID
+     * @param 今回情報 今回情報
+     * @return 登録用申請届出者
+     */
+    public DbT4120ShinseitodokedeJoho create登録用申請届出者(ShinseishoKanriNo 採番申請書管理番号, RString menuId, ShokkenTorikeshiNinteiJohoKonkaiBusiness 今回情報) {
+        DbT4120ShinseitodokedeJoho 申請届出者 = 今回情報.get申請届出者情報();
+        DbT4120ShinseitodokedeJoho 登録用申請届出者 = new DbT4120ShinseitodokedeJoho(採番申請書管理番号);
+        DbT4120ShinseitodokedeJohoBuilder 登録用情報Builder = 登録用申請届出者.createBuilderForEdit();
+        登録用情報Builder.set申請届出代行区分コード(申請届出者.get申請届出代行区分コード());
+        登録用情報Builder.set申請届出者氏名(申請届出者.get申請届出者氏名());
+        登録用情報Builder.set申請届出者氏名カナ(申請届出者.get申請届出者氏名カナ());
+        登録用情報Builder.set申請届出者続柄(申請届出者.get申請届出者続柄());
+        登録用情報Builder.set申請届出代行事業者番号(申請届出者.get申請届出代行事業者番号());
+        登録用情報Builder.set事業者区分(申請届出者.get事業者区分());
+        登録用情報Builder.set申請届出者郵便番号(申請届出者.get申請届出者郵便番号());
+        登録用情報Builder.set申請届出者住所(申請届出者.get申請届出者住所());
+        登録用情報Builder.set申請届出者電話番号(申請届出者.get申請届出者電話番号());
         return 登録用情報Builder.build();
     }
 
@@ -1154,6 +1234,18 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
 
     private FlexibleDate nullToEmpty(FlexibleDate target) {
         return target == null ? FlexibleDate.EMPTY : target;
+    }
+
+    private int set有効期間(KekkaShosaiJohoOutModel outModel) {
+        if (outModel != null && outModel.get認定内容().get有効開始年月日() != null && !outModel.get認定内容().get有効開始年月日().isEmpty()
+                && outModel.get認定内容().get有効終了年月日() != null && !outModel.get認定内容().get有効終了年月日().isEmpty()) {
+            if (outModel.get認定内容().get有効開始年月日().getDayValue() == 1) {
+                return outModel.get認定内容().get有効終了年月日().getMonthValue() - outModel.get認定内容().get有効開始年月日().getMonthValue();
+            } else {
+                return outModel.get認定内容().get有効終了年月日().getMonthValue() - outModel.get認定内容().get有効開始年月日().getMonthValue() - 1;
+            }
+        }
+        return 0;
     }
 
     private JukyushaDaichoBuilder set指定サービス種類(JukyushaDaichoBuilder builder, int 指定サービス種類Index, ServiceShuruiCode target) {

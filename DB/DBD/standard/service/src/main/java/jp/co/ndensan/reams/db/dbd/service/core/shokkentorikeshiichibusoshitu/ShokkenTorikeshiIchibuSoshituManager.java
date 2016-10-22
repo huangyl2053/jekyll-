@@ -16,18 +16,21 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4101NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4102NinteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4120ShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4121ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4102NinteiKekkaJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4120ShinseitodokedeJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5150RenrakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV4001JukyushaDaichoAliveDac;
@@ -53,6 +56,7 @@ public class ShokkenTorikeshiIchibuSoshituManager {
     private final DbT4001JukyushaDaichoDac 受給者台帳Dac;
     private final DbT4102NinteiKekkaJohoDac 認定結果情報Dac;
     private final DbT4121ShinseiRirekiJohoDac 申請履歴情報Dac;
+    private final DbT4120ShinseitodokedeJohoDac 申請届出者情報Dac;
 
     /**
      * コンストラクタです。
@@ -65,12 +69,14 @@ public class ShokkenTorikeshiIchibuSoshituManager {
         this.受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         this.認定結果情報Dac = InstanceProvider.create(DbT4102NinteiKekkaJohoDac.class);
         this.申請履歴情報Dac = InstanceProvider.create(DbT4121ShinseiRirekiJohoDac.class);
+        this.申請届出者情報Dac = InstanceProvider.create(DbT4120ShinseitodokedeJohoDac.class);
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShokkenTorikeshiIchibuSoshituManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShokkenTorikeshiIchibuSoshituManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShokkenTorikeshiIchibuSoshituManager}のインスタンス
      */
     public static ShokkenTorikeshiIchibuSoshituManager createInstance() {
         return InstanceProvider.create(ShokkenTorikeshiIchibuSoshituManager.class);
@@ -210,6 +216,21 @@ public class ShokkenTorikeshiIchibuSoshituManager {
     }
 
     /**
+     * 申請届出者情報を更新します。
+     *
+     * @param 申請届出者情報 申請届出者情報
+     * @param state 更新状態
+     *
+     * @return 更新件数
+     */
+    @Transaction
+    public int save申請届出者情報(DbT4120ShinseitodokedeJoho 申請届出者情報, EntityDataState state) {
+        DbT4120ShinseitodokedeJohoEntity entity = 申請届出者情報.toEntity();
+        entity.setState(state);
+        return 申請届出者情報Dac.save(entity);
+    }
+
+    /**
      * 職権修正／職権取消(一部)／認定結果入力(サ変・区変)DB更新します。
      *
      * @param 登録用要介護認定申請情報 登録用要介護認定申請情報
@@ -218,11 +239,14 @@ public class ShokkenTorikeshiIchibuSoshituManager {
      * @param 更新用受給者台帳 更新用受給者台帳
      * @param 認定結果情報 認定結果情報
      * @param 申請履歴情報 申請履歴情報
+     * @param 登録用申請届出者 登録用申請届出者
+     * @param 登録用認定結果情報 登録用認定結果情報
      */
     @Transaction
     public void save(DbT4101NinteiShinseiJoho 登録用要介護認定申請情報, JukyushaDaicho 登録用受給者台帳,
             DbT4101NinteiShinseiJoho 更新用介護認定申請情報, JukyushaDaicho 更新用受給者台帳,
-            DbT4102NinteiKekkaJoho 認定結果情報, DbT4121ShinseiRirekiJoho 申請履歴情報) {
+            DbT4102NinteiKekkaJoho 認定結果情報, DbT4121ShinseiRirekiJoho 申請履歴情報,
+            DbT4120ShinseitodokedeJoho 登録用申請届出者, DbT4102NinteiKekkaJoho 登録用認定結果情報) {
 
         if (登録用要介護認定申請情報 != null) {
             save介護認定申請情報(登録用要介護認定申請情報, EntityDataState.Added);
@@ -241,6 +265,12 @@ public class ShokkenTorikeshiIchibuSoshituManager {
         }
         if (申請履歴情報 != null) {
             save申請履歴情報(申請履歴情報, EntityDataState.Added);
+        }
+        if (登録用申請届出者 != null) {
+            save申請届出者情報(登録用申請届出者, EntityDataState.Added);
+        }
+        if (登録用認定結果情報 != null) {
+            save認定結果情報(登録用認定結果情報, EntityDataState.Added);
         }
     }
 }

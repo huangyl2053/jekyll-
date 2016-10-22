@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ShichosonSelector {
 
     private final ShichosonSentakuFinder service;
-    //TODO 張紅麗　QA57　市町村選択モードの確認　2015/12/02まで
     private static final RString KOUSEI_MODO_KOUSEI = new RString("1");
     private static final RString KOUSEI_MODO_KYU = new RString("0");
 

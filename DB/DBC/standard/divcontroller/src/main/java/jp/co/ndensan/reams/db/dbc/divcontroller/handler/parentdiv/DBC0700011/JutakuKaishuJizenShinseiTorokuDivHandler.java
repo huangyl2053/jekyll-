@@ -216,9 +216,11 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .setValue((param.get理由書作成事業者番号() == null || param.get理由書作成事業者番号().isEmpty())
                         ? RString.EMPTY : param.get理由書作成事業者番号().value());
 
-        AtenaMeisho 作成事業者名称 = JutakuKaishuJizenShinsei.createInstance().getJigyoshaName(param.get理由書作成事業者番号());
-        div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason().getTxtCreationJigyoshaName()
-                .setValue((作成事業者名称 == null || 作成事業者名称.isEmpty()) ? RString.EMPTY : 作成事業者名称.value());
+        if (param.get理由書作成事業者番号() != null && !param.get理由書作成事業者番号().isEmpty()) {
+            AtenaMeisho 作成事業者名称 = JutakuKaishuJizenShinsei.createInstance().getJigyoshaName(param.get理由書作成事業者番号());
+            div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason().getTxtCreationJigyoshaName()
+                    .setValue((作成事業者名称 == null || 作成事業者名称.isEmpty()) ? RString.EMPTY : 作成事業者名称.value());
+        }
         div.setHidShinseiJyohoFlg(初期化済み);
     }
 
