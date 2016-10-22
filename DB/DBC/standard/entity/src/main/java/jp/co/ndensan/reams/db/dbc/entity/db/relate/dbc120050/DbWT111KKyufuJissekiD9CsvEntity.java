@@ -58,13 +58,13 @@ public class DbWT111KKyufuJissekiD9CsvEntity {
     @CsvField(order = 150, name = "負担限度額")
     private Decimal 負担限度額;
     @CsvField(order = 160, name = "日数")
-    private Integer 日数;
+    private int 日数;
     @CsvField(order = 170, name = "公費１日数")
-    private Integer 公費１日数;
+    private int 公費１日数;
     @CsvField(order = 180, name = "公費２日数")
-    private Integer 公費２日数;
+    private int 公費２日数;
     @CsvField(order = 190, name = "公費３日数")
-    private Integer 公費３日数;
+    private int 公費３日数;
     @CsvField(order = 200, name = "費用額")
     private Decimal 費用額;
     @CsvField(order = 210, name = "保険分請求額")
@@ -104,13 +104,13 @@ public class DbWT111KKyufuJissekiD9CsvEntity {
     @CsvField(order = 380, name = "後_費用単価")
     private Decimal 後_費用単価;
     @CsvField(order = 390, name = "後_日数")
-    private Integer 後_日数;
+    private int 後_日数;
     @CsvField(order = 400, name = "後_公費１日数")
-    private Integer 後_公費１日数;
+    private int 後_公費１日数;
     @CsvField(order = 410, name = "後_公費２日数")
-    private Integer 後_公費２日数;
+    private int 後_公費２日数;
     @CsvField(order = 420, name = "後_公費３日数")
-    private Integer 後_公費３日数;
+    private int 後_公費３日数;
     @CsvField(order = 430, name = "後_費用額")
     private Decimal 後_費用額;
     @CsvField(order = 440, name = "後_保険分請求額")
@@ -148,9 +148,9 @@ public class DbWT111KKyufuJissekiD9CsvEntity {
     @CsvField(order = 600, name = "後_公費３_本人負担月額")
     private Decimal 後_公費３_本人負担月額;
     @CsvField(order = 610, name = "再審査回数")
-    private Integer 再審査回数;
+    private int 再審査回数;
     @CsvField(order = 620, name = "過誤回数")
-    private Integer 過誤回数;
+    private int 過誤回数;
     @CsvField(order = 630, name = "審査年月")
     private FlexibleYearMonth 審査年月;
 }
