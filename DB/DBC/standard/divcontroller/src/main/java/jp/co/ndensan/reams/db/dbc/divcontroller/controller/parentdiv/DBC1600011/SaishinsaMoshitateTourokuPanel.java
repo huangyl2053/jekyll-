@@ -82,6 +82,7 @@ public class SaishinsaMoshitateTourokuPanel {
     private static final RString MESSAGE = new RString("再審査申立テーブルを更新しました。");
     private static final RString 排他キー = new RString("DBCHihokenshaNo");
     private static final int ONE = 1;
+    private static final int SIX = 6;
 
     /**
      * 画面初期化します。
@@ -486,7 +487,11 @@ public class SaishinsaMoshitateTourokuPanel {
             builder.set履歴番号(履歴番号);
             builder.set申立年月日(new FlexibleDate(div.getKagoMoshitatePanel().getTextBoxDate1().getValue().toDateString()));
             builder.set申立者区分コード(div.getKagoMoshitatePanel().getDropDownList2().getSelectedKey());
-            builder.set証記載保険者番号(new ShoKisaiHokenshaNo(div.getKagoMoshitatePanel().getTextBox7().getValue()));
+            RString 証記載保険者番号 = div.getKagoMoshitatePanel().getTextBox7().getValue();
+            if (!RString.isNullOrEmpty(証記載保険者番号) && 証記載保険者番号.length() > SIX) {
+                証記載保険者番号 = 証記載保険者番号.substring(証記載保険者番号.length() - SIX, 証記載保険者番号.length());
+            }
+            builder.set証記載保険者番号(new ShoKisaiHokenshaNo(証記載保険者番号));
             builder.set申立単位数(Integer.parseInt(div.getKagoMoshitatePanel().getTextBox12().getValue().toString()));
             builder.set申立事由コード(div.getKagoMoshitatePanel().getDropDownList4().getSelectedKey().concat(
                     div.getKagoMoshitatePanel().getDropDownList5().getSelectedKey()));
