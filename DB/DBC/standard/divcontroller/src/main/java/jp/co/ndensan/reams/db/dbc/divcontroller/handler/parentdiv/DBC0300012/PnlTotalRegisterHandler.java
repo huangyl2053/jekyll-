@@ -193,6 +193,8 @@ public final class PnlTotalRegisterHandler {
             builder.set開始年月日(new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getFromValue().toDateString()));
             if (div.getPnlKeyakuJigyosya().getTxtKeyakubi().getToValue() != null) {
                 builder.set終了年月日(new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getToValue().toDateString()));
+            } else {
+                builder.set終了年月日(FlexibleDate.MAX);
             }
             builder.set契約種類(div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().getSelectedKey());
             builder.set契約事業者名称(div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyo().getDomain());
