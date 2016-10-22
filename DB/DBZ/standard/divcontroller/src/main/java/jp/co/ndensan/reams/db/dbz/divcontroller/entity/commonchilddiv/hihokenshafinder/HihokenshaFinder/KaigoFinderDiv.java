@@ -1,12 +1,15 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * KaigoFinder のクラスファイル
@@ -14,7 +17,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KaigoFinderDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -38,7 +42,7 @@ public class KaigoFinderDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * getddlHokensha
      * @return ddlHokensha
      */
@@ -126,6 +130,25 @@ public class KaigoFinderDiv extends Panel {
     @JsonProperty("KaigoFinderDetail")
     public void setKaigoFinderDetail(KaigoFinderDetailDiv KaigoFinderDetail) {
         this.KaigoFinderDetail = KaigoFinderDetail;
+    }
+
+    public void clear() {
+
+        if (this.ddlHokensha.getSelectedIndex() >= 0) {
+            this.ddlHokensha.setSelectedIndex(0);
+        }
+
+        this.txtHihokenshaNo.clearValue();
+        this.txtTuchishoNo.clearValue();
+
+        if (this.ddlFukaNendo.getSelectedIndex() >= 0) {
+            this.ddlFukaNendo.setSelectedIndex(0);
+        }
+
+        List<KeyValueDataSource> def = new ArrayList();
+        this.KaigoFinderDetail.getChkHihokenshaDaicho().setSelectedItems(def);
+        this.KaigoFinderDetail.getChkJukyushaDaicho().setSelectedItems(def);
+        this.KaigoFinderDetail.getChkJushochiTokureisha().setSelectedItems(def);
     }
 
     // </editor-fold>
