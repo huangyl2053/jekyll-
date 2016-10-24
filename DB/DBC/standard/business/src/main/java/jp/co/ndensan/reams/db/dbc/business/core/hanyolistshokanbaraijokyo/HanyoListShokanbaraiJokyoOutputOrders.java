@@ -26,11 +26,11 @@ public enum HanyoListShokanbaraiJokyoOutputOrders implements IReportItems {
     /**
      * 識別コード
      */
-    識別コード(new RString("0009"), new RString("識別コード"), new RString("\"shikibetsuTaisho_shikibetsuCode\"")),
+    識別コード(new RString("0009"), new RString("識別コード"), new RString("DbV1001.\"shikibetsuCode\"")),
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("")),
+    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"shikibetsuTaisho_katakanaHyoki\"")),
     /**
      * 市町村コード
      */
@@ -38,7 +38,7 @@ public enum HanyoListShokanbaraiJokyoOutputOrders implements IReportItems {
     /**
      * 証記載保険者番号
      */
-    証記載保険者番号(new RString("0103"), new RString("証記載保険者番号"), new RString("")),
+    証記載保険者番号(new RString("0103"), new RString("証記載保険者番号"), new RString("DbT3034.\"dbT3034ShokanShinsei_shoKisaiHokenshaNo\"")),
     /**
      * 被保険者番号
      */
@@ -54,27 +54,27 @@ public enum HanyoListShokanbaraiJokyoOutputOrders implements IReportItems {
     /**
      * サービス年月
      */
-    サービス年月(new RString("0301"), new RString("サービス年月"), new RString("")),
+    サービス年月(new RString("0301"), new RString("サービス年月"), new RString("DbT3034.\"dbT3034ShokanShinsei_serviceTeikyoYM\"")),
     /**
      * 指定事業者番号
      */
-    指定事業者番号(new RString("0303"), new RString("入所施設コード"), new RString("")),
+    指定事業者番号(new RString("0303"), new RString("入所施設コード"), new RString("DbV1004.\"nyushoShisetsuCode\"")),
     /**
      * 整理番号
      */
-    整理番号(new RString("0305"), new RString("整理番号"), new RString("")),
+    整理番号(new RString("0305"), new RString("整理番号"), new RString("DbT3034.\"dbT3034ShokanShinsei_seiriNo\"")),
     /**
      * 支払方法
      */
-    支払方法(new RString("0312"), new RString("支払方法"), new RString("")),
+    支払方法(new RString("0312"), new RString("支払方法"), new RString("DbT3034.\"dbT3034ShokanShinsei_shiharaiHohoKubunCode\"")),
     /**
      * 様式番号
      */
-    様式番号(new RString("0315"), new RString("様式番号"), new RString("")),
+    様式番号(new RString("0315"), new RString("様式番号"), new RString("DbT3038.\"yoshikiNo\"")),
     /**
      * 通知書作成日
      */
-    通知書作成日(new RString("0410"), new RString("通知書作成日"), new RString(""));
+    通知書作成日(new RString("0410"), new RString("通知書作成日"), new RString("DbT3036.\"dbT3036ShokanHanteiKekka_ketteiTsuchishoSakuseiYMD\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
