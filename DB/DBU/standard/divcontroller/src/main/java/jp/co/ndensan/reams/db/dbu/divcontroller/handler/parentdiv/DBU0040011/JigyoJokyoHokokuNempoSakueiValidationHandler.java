@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -27,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class JigyoJokyoHokokuNempoSakueiValidationHandler {
 
     private final JigyoJokyoHokokuNempoSakueiDiv div;
+    private static final int INT_ITTI = 1;
+    private static final int INT_YOU = 4;
     private static final RString 旧市町村分KEY = new RString("kyuShichoson");
     private static final RString 構成市町村分KEY = new RString("koseiShichoson");
     private static final RString 集計開始日期 = new RString("200904");
@@ -127,12 +130,24 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.報告終了年月の必須入力チェック, div.getDdlShukeiToYM()));
         }
         if (!RString.isNullOrEmpty(div.getDdlShukeiFromYM().getSelectedKey()) && !RString.isNullOrEmpty(div.getDdlShukeiToYM().getSelectedKey())) {
-            int 終了日 = Integer.parseInt(div.getDdlShukeiToYM().getSelectedKey().toString());
-            int 開始日 = Integer.parseInt(div.getDdlShukeiFromYM().getSelectedKey().toString());
+            int 終了日 = Integer.parseInt(get報告年月(div.getDdlShukeiToYM()).toString());
+            int 開始日 = Integer.parseInt(get報告年月(div.getDdlShukeiFromYM()).toString());
             if (終了日 < 開始日) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.報告開始年月と報告終了年月の範囲チェック, div.getDdlShukeiFromYM(), div.getDdlShukeiToYM()));
             }
         }
+    }
+    
+    private RString get報告年月(DropDownList list) {
+        RString 報告年度 = new RString(div.getDdlHokokuNendo().getSelectedKey().toString());
+        RString 報告月 = new RString(list.getSelectedKey().toString());
+        int year = Integer.parseInt(報告年度.toString());
+        int month = Integer.parseInt(報告月.toString());
+        if (month < INT_YOU) {
+            year = year + INT_ITTI;
+            報告年度 = new RString(year);
+        }
+        return 報告年度.concat(報告月);
     }
 
     private void do保険給付決定状況_高額合算分(ValidationMessageControlPairs validPairs) {
