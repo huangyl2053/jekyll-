@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB014001.CollectSetaiinP
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB014001.InsFukaJohoTmepProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB014001.InsFukaKeisanTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB014001.InsFukaTempProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB014001.InsSortTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB014001.PrtFuchoKarisanteiKekkaIchiranProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB014001.SelectKeisanTaishoshaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB014001.SelectZenFukaDataProcess;
@@ -45,6 +46,7 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
     private static final String 賦課計算 = "InsFukaTempProcess";
     private static final String 普徴仮算定結果 = "PrtFuchoKarisanteiKekkaIchiranProcess";
     private static final String 処理日付管理テーブル更新 = "UpdShoriDateKanriProcess";
+    private static final String 出力順設定 = "InsSortTempProcess";
 
     private static final RString 世帯員把握BATCH_ID = new RString("DBB002001_SetaiinHaaku");
     private static final ReportId 帳票ID = new ReportId("DBB200006_FutsuChoshuKarisanteiKekkaIchiran");
@@ -68,6 +70,7 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
         executeStep(賦課情報登録);
         executeStep(計算後情報作成);
         executeStep(普徴仮算定結果);
+        executeStep(出力順設定);
         executeStep(処理日付管理テーブル更新);
     }
 
@@ -129,6 +132,13 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
     @Step(処理日付管理テーブル更新)
     IBatchFlowCommand updShoriDateKanriProcess() {
         return simpleBatch(UpdShoriDateKanriProcess.class)
+                .arguments(getProcessParameter())
+                .define();
+    }
+
+    @Step(出力順設定)
+    IBatchFlowCommand insSortTempProcess() {
+        return loopBatch(InsSortTempProcess.class)
                 .arguments(getProcessParameter())
                 .define();
     }

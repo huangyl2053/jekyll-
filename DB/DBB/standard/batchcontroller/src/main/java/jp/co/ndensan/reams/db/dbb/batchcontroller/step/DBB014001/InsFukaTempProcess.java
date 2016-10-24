@@ -99,7 +99,8 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
         生保の情報 = new ArrayList<>();
         老齢の情報 = new ArrayList<>();
         仮算定賦課方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
-        特別徴収_特徴開始前普通徴収_6月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, 調定年度開始日, SubGyomuCode.DBB介護賦課);
+        特別徴収_特徴開始前普通徴収_6月
+                = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, 調定年度開始日, SubGyomuCode.DBB介護賦課);
     }
 
     @Override
@@ -110,6 +111,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
     @Override
     protected void createWriter() {
         tableWriter = new BatchEntityCreatedTempTableWriter(TABLE_NAME, FukaJohoTempEntity.class);
+
     }
 
     @Override
@@ -141,6 +143,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
     protected void usualProcess(FukaKeisanEntity entity) {
         set老齢の情報EntityList(entity);
         set生保の情報List(entity);
+        set世帯員所得情報(entity);
     }
 
     private boolean isBreak(FukaKeisanEntity current, FukaKeisanEntity before) {
@@ -167,7 +170,7 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
             保険料段階パラメータ.setFukaKonkyo(賦課根拠);
             保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
             TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
-            return get最後の月別保険料段階(月別保険料段階);
+            return 月別保険料段階.get保険料段階04月();
         } else if (entity.get介護賦課前年度() != null) {
             HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().
                     get保険料段階ListIn(entity.get普徴仮算定抽出().getFukaNendo());
@@ -184,35 +187,6 @@ public class InsFukaTempProcess extends BatchKeyBreakBase<FukaKeisanEntity> {
         }
         HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
         保険料段階List.getBy段階区分(区分_新規);
-        return null;
-    }
-
-    private HokenryoDankai get最後の月別保険料段階(TsukibetsuHokenryoDankai 月別保険料段階) {
-        if (月別保険料段階.get保険料段階03月() != null) {
-            return 月別保険料段階.get保険料段階03月();
-        } else if (月別保険料段階.get保険料段階02月() != null) {
-            return 月別保険料段階.get保険料段階02月();
-        } else if (月別保険料段階.get保険料段階01月() != null) {
-            return 月別保険料段階.get保険料段階01月();
-        } else if (月別保険料段階.get保険料段階12月() != null) {
-            return 月別保険料段階.get保険料段階12月();
-        } else if (月別保険料段階.get保険料段階11月() != null) {
-            return 月別保険料段階.get保険料段階11月();
-        } else if (月別保険料段階.get保険料段階10月() != null) {
-            return 月別保険料段階.get保険料段階10月();
-        } else if (月別保険料段階.get保険料段階09月() != null) {
-            return 月別保険料段階.get保険料段階09月();
-        } else if (月別保険料段階.get保険料段階08月() != null) {
-            return 月別保険料段階.get保険料段階08月();
-        } else if (月別保険料段階.get保険料段階07月() != null) {
-            return 月別保険料段階.get保険料段階07月();
-        } else if (月別保険料段階.get保険料段階06月() != null) {
-            return 月別保険料段階.get保険料段階06月();
-        } else if (月別保険料段階.get保険料段階05月() != null) {
-            return 月別保険料段階.get保険料段階05月();
-        } else if (月別保険料段階.get保険料段階04月() != null) {
-            return 月別保険料段階.get保険料段階04月();
-        }
         return null;
     }
 

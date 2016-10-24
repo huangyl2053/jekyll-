@@ -52,7 +52,6 @@ public class FuchoKariSanteiFukaBatch {
     private static final int NUM_1 = 1;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
-    private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_31 = 31;
     private static final int NUM_100 = 100;
@@ -217,9 +216,9 @@ public class FuchoKariSanteiFukaBatch {
             KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
             int 期 = 期月リスト.filtered仮算定期間().toList().size();
             int 納期数;
-            RString 仮算定賦課 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
+//          QA #105593
+//          RString 仮算定賦課 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
             RString 仮算定賦課方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
-
             if (仮算定賦課方法_02.equals(仮算定賦課方法) || 仮算定賦課方法_04.equals(仮算定賦課方法)
                     || 仮算定賦課方法_10.equals(仮算定賦課方法) || 仮算定賦課方法_11.equals(仮算定賦課方法)) {
                 納期数 = 期月リスト.get最終法定納期().get期AsInt();
