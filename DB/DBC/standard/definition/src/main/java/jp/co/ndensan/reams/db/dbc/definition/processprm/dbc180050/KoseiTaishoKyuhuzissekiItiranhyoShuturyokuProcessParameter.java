@@ -25,6 +25,8 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcessParameter implemen
     private RString 出力順;
     private RDateTime 抽出期間開始日時;
     private RDateTime 抽出期間終了日時;
+    private RString 給付実績ファイルパス;
+    private RString 給付実績取消ファイルパス;
 
     /**
      *
