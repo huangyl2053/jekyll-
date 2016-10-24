@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050021;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiGyomunaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050021.FurikomimeisaiFurikomiDataMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -36,7 +35,7 @@ public class FurikomimeisaiFurikomiDataProcessParameter implements IBatchProcess
     private RDate 振込指定年月日;
     private FurikomiGyomunaiKubun 振込業務内区分;
     private ShoriName 処理名;
-    private IOutputOrder 出力順情報;
+    private RString 出力順ID;
     private RString batchKunbun;
     private RString 処理区分;
 
