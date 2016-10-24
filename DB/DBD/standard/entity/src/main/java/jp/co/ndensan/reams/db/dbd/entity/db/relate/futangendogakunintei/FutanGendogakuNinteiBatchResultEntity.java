@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakunintei;
 
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4010GemmenGengakuShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNinteiEntity;
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FutanGendogakuNinteiBatchResultEntity {
+public class FutanGendogakuNinteiBatchResultEntity implements Serializable {
 
     private DbT4018KaigoHokenFutanGendogakuNinteiEntity 負担限度額認定;
     private List<DbT4010GemmenGengakuShinseiEntity> 減免減額申請;
