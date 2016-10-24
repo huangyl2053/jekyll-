@@ -49,7 +49,7 @@ public class DBD492001_NinteiKekkaInfoUpload extends BatchFlowBase<DBD492001_Nin
      * @return バッチコマンド
      */
     @Step(取込みファイル)
-    protected IBatchFlowCommand NinteiKekkaCsvgetProcess() {
+    protected IBatchFlowCommand ninteiKekkaCsvgetProcess() {
         return loopBatch(NinteiKekkaCsvgetProcess.class)
                 .arguments(getParameter().toRendingJieguoLianxieProcessParameter(NUM_0, false))
                 .define();
@@ -85,7 +85,7 @@ public class DBD492001_NinteiKekkaInfoUpload extends BatchFlowBase<DBD492001_Nin
      * @return バッチコマンド
      */
     @Step(エラーリストファイルの出力)
-    protected IBatchFlowCommand TorikomiErarisutofairuCSVProcess() {
+    protected IBatchFlowCommand torikomiErarisutofairuCSVProcess() {
         return loopBatch(TorikomiErarisutofairuCSVProcess.class)
                 .arguments(getParameter().toRendingJieguoLianxieProcessParameter(NUM_0, false))
                 .define();

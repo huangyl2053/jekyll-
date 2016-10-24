@@ -73,14 +73,7 @@ public class NinteiKekkaRenkeiDetaTorikomiProcess extends BatchProcessBase<HenKo
                 && !よっ.equals(entity.get取下区分コード().value())) {
             error = new ErrordataIchijiTeburuEntity();
             NinteiKekkaRenkeiDataTorikomiManager.createInstance().エラー項目設定(エラーメッセージ1, entity, error);
-        } else if (!ゼロいち.equals(entity.get二次判定結果())
-                && !じゅうに.equals(entity.get二次判定結果())
-                && !じゅうさん.equals(entity.get二次判定結果())
-                && !にじゅういち.equals(entity.get二次判定結果())
-                && !にじゅうに.equals(entity.get二次判定結果())
-                && !にじゅうみ.equals(entity.get二次判定結果())
-                && !にじゅうよっ.equals(entity.get二次判定結果())
-                && !にじゅうご.equals(entity.get二次判定結果())) {
+        } else if (eidt二次判定結果(entity)) {
             error = new ErrordataIchijiTeburuEntity();
             NinteiKekkaRenkeiDataTorikomiManager.createInstance().エラー項目設定(エラーメッセージ2, entity, error);
         } else if (entity.get申請情報_申請書管理番号() == null || entity.get申請情報_申請書管理番号().isEmpty()) {
@@ -106,5 +99,16 @@ public class NinteiKekkaRenkeiDetaTorikomiProcess extends BatchProcessBase<HenKo
 
     @Override
     protected void afterExecute() {
+    }
+
+    private boolean eidt二次判定結果(HenKouData entity) {
+        return (!ゼロいち.equals(entity.get二次判定結果())
+                && !じゅうに.equals(entity.get二次判定結果())
+                && !じゅうさん.equals(entity.get二次判定結果())
+                && !にじゅういち.equals(entity.get二次判定結果())
+                && !にじゅうに.equals(entity.get二次判定結果())
+                && !にじゅうみ.equals(entity.get二次判定結果())
+                && !にじゅうよっ.equals(entity.get二次判定結果())
+                && !にじゅうご.equals(entity.get二次判定結果()));
     }
 }
