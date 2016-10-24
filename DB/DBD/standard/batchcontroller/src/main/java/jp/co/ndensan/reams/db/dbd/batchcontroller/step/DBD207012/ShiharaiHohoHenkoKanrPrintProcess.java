@@ -180,13 +180,13 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
     private RString get出力順(IOutputOrder order) {
         if (order != null) {
             RString 出力順 = MyBatisOrderByClauseCreator.create(ShiharaiHohoHenkoHaakuOrderKey.class, order);
-            return 出力順.concat(",対象者情報一時テーブル.\"hihokenshaNo\","
-                    + "収納状況一時テーブル.\"choteiNendo\",収納状況一時テーブル.\"fukaNendo\""
-                    + ",収納状況一時テーブル.\"tsuchishoNo\",,収納状況一時テーブル.\"ki\"");
+            return 出力順.concat(",対象者情報_被保険者番号,"
+                    + "収納状況_調定年度,収納状況_賦課年度"
+                    + ",収納状況_通知書番号,収納状況_期");
         }
-        return new RString("対象者情報一時テーブル.\"hihokenshaNo\","
-                + "収納状況一時テーブル.\"choteiNendo\",収納状況一時テーブル.\"fukaNendo\""
-                + ",収納状況一時テーブル.\"tsuchishoNo\",,収納状況一時テーブル.\"ki\"");
+        return new RString("order by 対象者情報_被保険者番号,"
+                + "収納状況_調定年度,収納状況_賦課年度"
+                + ",収納状況_通知書番号,収納状況_期");
     }
 
     private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
