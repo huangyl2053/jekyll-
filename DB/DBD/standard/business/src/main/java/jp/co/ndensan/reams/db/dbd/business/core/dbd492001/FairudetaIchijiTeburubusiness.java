@@ -82,7 +82,7 @@ public class FairudetaIchijiTeburubusiness {
         } else {
             entity.setHihokenjabango(RString.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setNinteishinseibi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setNinteishinseibi(FlexibleDate.EMPTY);
@@ -92,7 +92,7 @@ public class FairudetaIchijiTeburubusiness {
         } else {
             entity.setEdaban(RString.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setShinseikubunhorei(new Code(list.get(index - 1)));
         } else {
             entity.setShinseikubunhorei(Code.EMPTY);
@@ -101,45 +101,45 @@ public class FairudetaIchijiTeburubusiness {
     }
 
     private void edit9to18(List<RString> list, NichijiShinchokuIchijiTeburuEntity entity) {
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setShinseikubunshinseiji(new Code(list.get(index - 1)));
         } else {
             entity.setShinseikubunshinseiji(Code.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setTorisakubunkodo(new Code(list.get(index - 1)));
         } else {
             entity.setTorisakubunkodo(Code.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setHihokenjakubun(new Code(list.get(index - 1)));
         } else {
             entity.setHihokenjakubun(Code.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setShinseidaikokubun(new Code(list.get(index - 1)));
         } else {
             entity.setShinseidaikokubun(Code.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setSeinengappi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setSeinengappi(FlexibleDate.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setNenrei(Integer.parseInt(list.get(index - 1).toString()));
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setSeibetsukodo(new Code(list.get(index - 1)));
         } else {
             entity.setSeibetsukodo(Code.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setHihokenjakanashimei(new AtenaKanaMeisho(list.get(index - 1)));
         } else {
             entity.setHihokenjakanashimei(AtenaKanaMeisho.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setHihokenjakanjishimei(new AtenaMeisho(list.get(index - 1)));
         } else {
             entity.setHihokenjakanjishimei(AtenaMeisho.EMPTY);
@@ -152,7 +152,7 @@ public class FairudetaIchijiTeburubusiness {
         } else {
             entity.setYubenbango(RString.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setJusho(new AtenaJusho(list.get(index - 1)));
         } else {
             entity.setJusho(AtenaJusho.EMPTY);
@@ -177,12 +177,12 @@ public class FairudetaIchijiTeburubusiness {
         } else {
             entity.setZenkainoninteishinsakaikekka(RString.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setZenkainoninteiyukokigenkaishi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setZenkainoninteiyukokigenkaishi(FlexibleDate.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setZenkainoninteiyukokigenshuryo(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setZenkainoninteiyukokigenshuryo(FlexibleDate.EMPTY);
@@ -197,12 +197,12 @@ public class FairudetaIchijiTeburubusiness {
         } else {
             entity.setShujiibango(RString.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setLkenshoiraibi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setLkenshoiraibi(FlexibleDate.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setLkenshonyushubi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setLkenshonyushubi(FlexibleDate.EMPTY);
@@ -235,12 +235,12 @@ public class FairudetaIchijiTeburubusiness {
         } else {
             entity.setLkensho_ninshishokoreishajiritsudo(RString.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setChosairaibi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setChosairaibi(FlexibleDate.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setChosajisshibi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setChosajisshibi(FlexibleDate.EMPTY);
@@ -260,12 +260,12 @@ public class FairudetaIchijiTeburubusiness {
         } else {
             entity.setNinteichosainbango(RString.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setNinteichosainshikakukodo(new Code(list.get(index - 1)));
         } else {
             entity.setNinteichosainshikakukodo(Code.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setLchijihanteibi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setLchijihanteibi(FlexibleDate.EMPTY);
@@ -358,7 +358,7 @@ public class FairudetaIchijiTeburubusiness {
         } else {
             entity.setChukanhyokakomokutokuten_dai5gun(RString.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setLchijihanteikeikoku(new Code(list.get(index - 1)));
         } else {
             entity.setLchijihanteikeikoku(Code.EMPTY);
@@ -381,12 +381,12 @@ public class FairudetaIchijiTeburubusiness {
         } else {
             entity.setNinchikinokyufukubun(RString.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setNinteishinsakaishiryosakuseibi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setNinteishinsakaishiryosakuseibi(FlexibleDate.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setNinteishinsakaiyoteibi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setNinteishinsakaiyoteibi(FlexibleDate.EMPTY);
@@ -401,7 +401,7 @@ public class FairudetaIchijiTeburubusiness {
         } else {
             entity.setShinsakaishiryobango(RString.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setNijihanteibi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setNijihanteibi(FlexibleDate.EMPTY);
@@ -411,17 +411,17 @@ public class FairudetaIchijiTeburubusiness {
         } else {
             entity.setNijihanteikekka(RString.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setNinteiyukokigen_kaishi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setNinteiyukokigen_kaishi(FlexibleDate.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setNinteiyukokigen_shuryo(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setNinteiyukokigen_shuryo(FlexibleDate.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setTokuteishippeikodo(new Code(list.get(index - 1)));
         } else {
             entity.setTokuteishippeikodo(Code.EMPTY);
@@ -435,7 +435,7 @@ public class FairudetaIchijiTeburubusiness {
         } else {
             entity.setYokaigo1nobaainojotaizo(RString.EMPTY);
         }
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setGenzainosabisukubunkodo(new Code(list.get(index - 1)));
         } else {
             entity.setGenzainosabisukubunkodo(Code.EMPTY);
@@ -1696,7 +1696,7 @@ public class FairudetaIchijiTeburubusiness {
             entity.setZenkaikekka_chukanhyokakomokutokutendai5_gun(RString.EMPTY);
         }
 
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setZenkaikekka_kodo(new Code(list.get(index - 1)));
         } else {
             entity.setZenkaikekka_kodo(Code.EMPTY);
@@ -1720,19 +1720,19 @@ public class FairudetaIchijiTeburubusiness {
             entity.setZenkaikekka_ninchikinokyufukubun(RString.EMPTY);
         }
 
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setZenkaikekka_shinseibi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setZenkaikekka_shinseibi(FlexibleDate.EMPTY);
         }
 
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setZenkaikekka_nijihanteibi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setZenkaikekka_nijihanteibi(FlexibleDate.EMPTY);
         }
 
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setZenkaikekka_genzainosabisukubunkodo(new Code(list.get(index - 1)));
         } else {
             entity.setZenkaikekka_genzainosabisukubunkodo(Code.EMPTY);
@@ -1973,7 +1973,7 @@ public class FairudetaIchijiTeburubusiness {
             entity.setZenkaikekka_yoboninshishokaigo_gurupuhomu(RString.EMPTY);
         }
 
-        if (!list.get(index++).isNull() && !list.get(index++).isEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setZenkaishikibetsukodo(new Code(list.get(index - 1)));
         } else {
             entity.setZenkaishikibetsukodo(Code.EMPTY);
