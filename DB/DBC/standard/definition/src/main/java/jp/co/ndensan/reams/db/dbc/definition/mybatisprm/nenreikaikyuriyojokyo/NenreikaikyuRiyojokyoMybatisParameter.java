@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.nenreikaikyuriyojokyo;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
