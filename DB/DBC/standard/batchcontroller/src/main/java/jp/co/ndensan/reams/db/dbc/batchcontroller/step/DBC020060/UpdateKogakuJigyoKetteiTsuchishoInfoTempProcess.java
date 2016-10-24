@@ -78,15 +78,18 @@ public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProces
     protected void process(KogakuServiceUpdateTempEntity entity) {
 
         if (beforeEntity == null) {
-            サービス種類名称 = entity.get介護サービス種類Entity().getServiceShuruiMeisho();
+            サービス種類名称 = entity.get介護サービス種類Entity() == null ? RString.EMPTY
+                    : entity.get介護サービス種類Entity().getServiceShuruiMeisho();
         } else if (beforeEntity.getHihokenshaNo().equals(entity.getHihokenshaNo())
                 && beforeEntity.getServiceTeikyoYM().equals(entity.getServiceTeikyoYM())) {
-            サービス種類名称 = サービス種類名称.concat(読点).concat(entity.get介護サービス種類Entity().getServiceShuruiMeisho());
+            サービス種類名称 = entity.get介護サービス種類Entity() == null ? サービス種類名称
+                    : サービス種類名称.concat(読点).concat(entity.get介護サービス種類Entity().getServiceShuruiMeisho());
         } else {
             KetteiTsuchishoInfoTempEntity 一時Entit = beforeEntity.get一時Entity();
             一時Entit.setServiceShuruiName(サービス種類名称);
             一時tableWriter.update(一時Entit);
-            サービス種類名称 = entity.get介護サービス種類Entity().getServiceShuruiMeisho();
+            サービス種類名称 = entity.get介護サービス種類Entity() == null ? RString.EMPTY
+                    : entity.get介護サービス種類Entity().getServiceShuruiMeisho();
         }
         beforeEntity = entity;
     }
@@ -102,7 +105,7 @@ public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProces
         if (フラグ_FALSE.equals(parameter.getテスト出力フラグ())) {
             SelectShoriDateKanriMybatisParameter mybatisParameter
                     = new SelectShoriDateKanriMybatisParameter(SubGyomuCode.DBC介護給付, 市町村コード,
-                            ShoriName.高額サービス等支給不支給決定通知書一括作成.get名称(), 処理枝番, 年度_固定);
+                            ShoriName.事業高額サービス等支給不支給決定通知書一括作成.get名称(), 処理枝番, 年度_固定);
             int 年度内連番 = mapper.select最大年度内連番(mybatisParameter);
             permanentTableWriter.insert(get処理日付管理マスタ(年度内連番));
         }
@@ -113,7 +116,7 @@ public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProces
         DbT7022ShoriDateKanriEntity tempEntity = new DbT7022ShoriDateKanriEntity();
         tempEntity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
         tempEntity.setShichosonCode(市町村コード);
-        tempEntity.setShoriName(ShoriName.高額サービス等支給不支給決定通知書一括作成.get名称());
+        tempEntity.setShoriName(ShoriName.事業高額サービス等支給不支給決定通知書一括作成.get名称());
         tempEntity.setShoriEdaban(処理枝番);
         tempEntity.setNendo(年度_固定);
         tempEntity.setNendoNaiRenban(new RString(年度内連番 + 1).padZeroToLeft(2));

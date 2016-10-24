@@ -25,9 +25,10 @@ public final class TaishoshaKensakuMybitisParamter {
     private final RString コード種別;
     private final boolean 履歴番号フラグ;
     private final boolean 市町村フラグ;
+    private final RString psmShikibetsuTaisho;
 
     private TaishoshaKensakuMybitisParamter(FlexibleYearMonth 取扱年月, RString 保険者区分, Decimal 履歴番号, RString 市町村コード,
-            RString コード種別, boolean 履歴番号フラグ, boolean 市町村フラグ) {
+            RString コード種別, boolean 履歴番号フラグ, boolean 市町村フラグ, RString psmShikibetsuTaisho) {
         this.保険者区分 = 保険者区分;
         this.取扱年月 = 取扱年月;
         this.履歴番号 = 履歴番号;
@@ -35,6 +36,7 @@ public final class TaishoshaKensakuMybitisParamter {
         this.コード種別 = コード種別;
         this.履歴番号フラグ = 履歴番号フラグ;
         this.市町村フラグ = 市町村フラグ;
+        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
     /**
@@ -47,12 +49,14 @@ public final class TaishoshaKensakuMybitisParamter {
      * @param コード種別 コード種別
      * @param 履歴番号フラグ 履歴番号フラグ
      * @param 市町村フラグ 市町村フラグ
+     * @param psmShikibetsuTaisho PSM宛名
      *
      * @return 過誤申立決定情報照会のパラメータ
      */
     public static TaishoshaKensakuMybitisParamter createParamter(FlexibleYearMonth 取扱年月, RString 保険者区分,
-            Decimal 履歴番号, RString 市町村コード, RString コード種別, boolean 履歴番号フラグ, boolean 市町村フラグ) {
-        return new TaishoshaKensakuMybitisParamter(取扱年月, 保険者区分, 履歴番号, 市町村コード, コード種別, 履歴番号フラグ, 市町村フラグ);
+            Decimal 履歴番号, RString 市町村コード, RString コード種別, boolean 履歴番号フラグ, boolean 市町村フラグ, RString psmShikibetsuTaisho) {
+        return new TaishoshaKensakuMybitisParamter(取扱年月, 保険者区分, 履歴番号, 市町村コード, コード種別, 履歴番号フラグ,
+                市町村フラグ, psmShikibetsuTaisho);
     }
 
     /**
@@ -61,10 +65,13 @@ public final class TaishoshaKensakuMybitisParamter {
      * @param 取扱年月 取扱年月
      * @param 市町村コード 市町村コード
      * @param 市町村フラグ 市町村フラグ
+     * @param psmShikibetsuTaisho PSM宛名
+     *
      * @return 過誤申立決定情報照会のパラメータ
      */
     public static TaishoshaKensakuMybitisParamter creatRirekiParameter(FlexibleYearMonth 取扱年月, RString 市町村コード,
-            boolean 市町村フラグ) {
-        return new TaishoshaKensakuMybitisParamter(取扱年月, RString.EMPTY, Decimal.ZERO, 市町村コード, RString.EMPTY, false, 市町村フラグ);
+            boolean 市町村フラグ, RString psmShikibetsuTaisho) {
+        return new TaishoshaKensakuMybitisParamter(取扱年月, RString.EMPTY, Decimal.ZERO, 市町村コード,
+                RString.EMPTY, false, 市町村フラグ, psmShikibetsuTaisho);
     }
 }

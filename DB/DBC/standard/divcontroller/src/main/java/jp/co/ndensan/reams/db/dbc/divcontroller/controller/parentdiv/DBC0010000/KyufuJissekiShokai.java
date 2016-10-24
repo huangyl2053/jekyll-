@@ -199,7 +199,7 @@ public class KyufuJissekiShokai {
         setパラメータ(給付実績情報照会情報);
         div.getKyufuJissekiSearchPanel().setIsOpen(false);
         div.getKyufuJissekiListPanel().setIsOpen(true);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会一覧);
     }
 
     /**
@@ -1104,9 +1104,7 @@ public class KyufuJissekiShokai {
     }
 
     private KyufuJissekiSearchDataBusiness get一覧データ() {
-        KyufuJissekiPrmBusiness 給付実績情報照会情報
-                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        return 給付実績情報照会情報.getSearchData();
+        return ViewStateHolder.get(ViewStateKeys.給付実績情報照会検索一覧, KyufuJissekiSearchDataBusiness.class);
     }
 
     private void setパラメータ(KyufuJissekiPrmBusiness 給付実績情報照会情報) {
@@ -1119,6 +1117,7 @@ public class KyufuJissekiShokai {
         key.set被保険者番号(被保険者番号);
         key.set世帯コード(世帯コード);
         給付実績情報照会情報.setKojinKakuteiKey(key);
+        ViewStateHolder.put(ViewStateKeys.給付実績情報照会検索一覧, 給付実績情報照会情報.getSearchData());
         KyufujissekiKihonJyohou kyufujissekiKihonJyohou = new KyufujissekiKihonJyohou();
         kyufujissekiKihonJyohou.setCsData_A(給付実績情報照会情報.getCsData_A());
         ViewStateHolder.put(ViewStateKeys.給付実績基本情報, kyufujissekiKihonJyohou);

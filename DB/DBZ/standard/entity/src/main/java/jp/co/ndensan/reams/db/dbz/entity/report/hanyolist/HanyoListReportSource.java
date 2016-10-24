@@ -51,6 +51,49 @@ public class HanyoListReportSource implements IReportSource {
     public RString listMeisaititle;
     @ReportItem(name = "listMeisailist_1", length = 210, order = 17)
     public RString listMeisailist_1;
+    @ReportItem(name = "yubinNo", length = 20, order = 18)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 20, order = 19)
+    public RString choikiCode;
+    @ReportItem(name = "banchi", length = 20, order = 20)
+    public RString banchi;
+    @ReportItem(name = "gyoseikuCode", length = 20, order = 21)
+    public RString gyoseikuCode;
+    @ReportItem(name = "chikuCode1", length = 20, order = 22)
+    public RString chikuCode1;
+    @ReportItem(name = "chikuCode2", length = 20, order = 23)
+    public RString chikuCode2;
+    @ReportItem(name = "setaiCode", length = 20, order = 24)
+    public RString setaiCode;
+    @ReportItem(name = "shikibetsuCode", length = 20, order = 25)
+    public RString shikibetsuCode;
+    @ReportItem(name = "kanaShimei", length = 20, order = 26)
+    public RString kanaShimei;
+    @ReportItem(name = "seinengappiYMD", length = 20, order = 27)
+    public RString seinengappiYMD;
+    @ReportItem(name = "seibetsuCode", length = 20, order = 28)
+    public RString seibetsuCode;
+    @ReportItem(name = "shichosonCode1", length = 20, order = 29)
+    public RString shichosonCode1;
+    @ReportItem(name = "shoKisaiHokenshaNo", length = 20, order = 30)
+    public RString shoKisaiHokenshaNo;
+    @ReportItem(name = "hokenshaNo", length = 20, order = 31)
+    public RString hokenshaNo;
+    @ReportItem(name = "shikakuKubun", length = 20, order = 32)
+    public RString shikakuKubun;
+    @ReportItem(name = "jukyuShinseiKubun", length = 20, order = 33)
+    public RString jukyuShinseiKubun;
+    @ReportItem(name = "jukyuShinseiYMD", length = 20, order = 34)
+    public RString jukyuShinseiYMD;
+    @ReportItem(name = "yoKaigoJotaiKubunCode", length = 20, order = 35)
+    public RString yoKaigoJotaiKubunCode;
+    @ReportItem(name = "ninteiKaishiYMD", length = 20, order = 36)
+    public RString ninteiKaishiYMD;
+    @ReportItem(name = "shikakuShutokuYMD", length = 20, order = 37)
+    public RString shikakuShutokuYMD;
+    @ReportItem(name = "shikakuSoshitsuYMD", length = 20, order = 38)
+    public RString shikakuSoshitsuYMD;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

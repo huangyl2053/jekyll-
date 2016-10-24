@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelate;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaisha.tekiyojogaisha.ITekiyoJogaishaMapper;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakusoshitsu.HihokenshashikakusoshitsuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshashikakusoshitsu.HihokenshashikakusoshitsuManager;
 import jp.co.ndensan.reams.db.dba.service.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaishoManager;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureisyaKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -425,12 +425,12 @@ public class TekiyoJogaishaManager {
             FlexibleDate 解除年月日 = 最新データ.get解除年月日();
             FlexibleDate 異動日 = 最新データ.get異動日();
             if (資格取得年月日 != null && !資格取得年月日.isEmpty() && (資格喪失年月日 == null || 資格喪失年月日.isEmpty())
-                && !(適用年月日 != null && !適用年月日.isEmpty() && (解除年月日 == null || 解除年月日.isEmpty()))
-                && 異動日.isBeforeOrEquals(基準日)) {
+                    && !(適用年月日 != null && !適用年月日.isEmpty() && (解除年月日 == null || 解除年月日.isEmpty()))
+                    && 異動日.isBeforeOrEquals(基準日)) {
                 登録可否判定 = 登録可能で資格喪失必要;
             }
             if (資格取得年月日 != null && !資格取得年月日.isEmpty() && 資格喪失年月日 != null && !資格喪失年月日.isEmpty()
-                && 異動日.isBeforeOrEquals(基準日)) {
+                    && 異動日.isBeforeOrEquals(基準日)) {
                 登録可否判定 = 登録可能で資格喪失不要;
             }
         } else {

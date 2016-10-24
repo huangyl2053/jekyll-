@@ -55,6 +55,13 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
     private RString keteiKubun;
     private RString shiharaiHoho;
 
+    private RString choikiCode;
+    private RString gyoseikuCode;
+    private RString kanaMeisho;
+    private RString shoKisaiHokenshaNo;
+    private RString ketteiTsuchiNo;
+    private RString shinseishaKubun;
+
     /**
      * インスタンスを生成します。
      *
@@ -98,6 +105,11 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
      * @param shurui 種類
      * @param keteiKubun 支給（不支給）決定区分
      * @param shiharaiHoho 支払方法
+     * @param choikiCode 町域コード
+     * @param gyoseikuCode 行政区コード
+     * @param kanaMeisho 氏名５０音カナ
+     * @param shoKisaiHokenshaNo 証記載保険者番号
+     * @param ketteiTsuchiNo 決定通知番号
      */
     public ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem(RString printTimeStamp,
             RString hokenshaNo, RString hokenshaName, RString shutsuryokujun1, RString shutsuryokujun2,
@@ -106,7 +118,8 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
             RString keteiTsuchiNo, RString hihokenshaNo, RString hihokenshaName, RString jusho, RString yubinBango,
             RString teikyo, RString yoKaigodo, RString ninteiKaishibi, RString ninteiShuryobi, RString uketsukeYMD,
             RString keteiYMD, RString honjinShiharaigaku, RString shikyugaku, RString yoshikigotoKingaku, RString tuika,
-            RString shurui, RString keteiKubun, RString shiharaiHoho) {
+            RString shurui, RString keteiKubun, RString shiharaiHoho, RString choikiCode, RString gyoseikuCode, RString kanaMeisho,
+            RString shoKisaiHokenshaNo, RString ketteiTsuchiNo, RString shinseishaKubun) {
         this.printTimeStamp = printTimeStamp;
         this.hokenshaNo = hokenshaNo;
         this.hokenshaName = hokenshaName;
@@ -140,6 +153,11 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
         this.shurui = shurui;
         this.keteiKubun = keteiKubun;
         this.shiharaiHoho = shiharaiHoho;
+        this.choikiCode = choikiCode;
+        this.gyoseikuCode = gyoseikuCode;
+        this.kanaMeisho = kanaMeisho;
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+        this.ketteiTsuchiNo = ketteiTsuchiNo;
+        this.shinseishaKubun = shinseishaKubun;
     }
-
 }

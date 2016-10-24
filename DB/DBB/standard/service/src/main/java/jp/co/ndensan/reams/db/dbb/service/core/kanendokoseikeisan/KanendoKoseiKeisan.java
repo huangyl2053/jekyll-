@@ -23,13 +23,13 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.ChoteiNendoKibetsuClass;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.FuchoTsukiClass;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.FukaKoseiJohoClass;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.GyomuConfigJohoClass;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.KiwariKeisan;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.KiwariKeisanInput;
-import jp.co.ndensan.reams.ur.urd.business.core.kiwarikeisan.KiwariKeisanOutput;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.ChoteiNendoKibetsuClass;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FuchoTsukiClass;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.FukaKoseiJohoClass;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.GyomuConfigJohoClass;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisan;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanInput;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanOutput;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -614,32 +614,36 @@ public class KanendoKoseiKeisan {
         調定年度期別.set調定年度(賦課の情報.get調定年度());
 
         List<Decimal> 普徴期別額List = new ArrayList<>();
-        普徴期別額List.add(賦課の情報.get普徴期別金額01());
-        普徴期別額List.add(賦課の情報.get普徴期別金額02());
-        普徴期別額List.add(賦課の情報.get普徴期別金額03());
-        普徴期別額List.add(賦課の情報.get普徴期別金額04());
-        普徴期別額List.add(賦課の情報.get普徴期別金額05());
-        普徴期別額List.add(賦課の情報.get普徴期別金額06());
-        普徴期別額List.add(賦課の情報.get普徴期別金額07());
-        普徴期別額List.add(賦課の情報.get普徴期別金額08());
-        普徴期別額List.add(賦課の情報.get普徴期別金額09());
-        普徴期別額List.add(賦課の情報.get普徴期別金額10());
-        普徴期別額List.add(賦課の情報.get普徴期別金額11());
-        普徴期別額List.add(賦課の情報.get普徴期別金額12());
-        普徴期別額List.add(賦課の情報.get普徴期別金額13());
-        普徴期別額List.add(賦課の情報.get普徴期別金額14());
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額01()));
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額02()));
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額03()));
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額04()));
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額05()));
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額06()));
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額07()));
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額08()));
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額09()));
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額10()));
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額11()));
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額12()));
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額13()));
+        普徴期別額List.add(getDecimal(賦課の情報.get普徴期別金額14()));
         調定年度期別.set普徴期別額(普徴期別額List);
 
         List<Decimal> 特徴期別額List = new ArrayList<>();
-        特徴期別額List.add(賦課の情報.get特徴期別金額01());
-        特徴期別額List.add(賦課の情報.get特徴期別金額02());
-        特徴期別額List.add(賦課の情報.get特徴期別金額03());
-        特徴期別額List.add(賦課の情報.get特徴期別金額04());
-        特徴期別額List.add(賦課の情報.get特徴期別金額05());
-        特徴期別額List.add(賦課の情報.get特徴期別金額06());
+        特徴期別額List.add(getDecimal(賦課の情報.get特徴期別金額01()));
+        特徴期別額List.add(getDecimal(賦課の情報.get特徴期別金額02()));
+        特徴期別額List.add(getDecimal(賦課の情報.get特徴期別金額03()));
+        特徴期別額List.add(getDecimal(賦課の情報.get特徴期別金額04()));
+        特徴期別額List.add(getDecimal(賦課の情報.get特徴期別金額05()));
+        特徴期別額List.add(getDecimal(賦課の情報.get特徴期別金額06()));
         調定年度期別.set特徴期別額(特徴期別額List);
 
         return 調定年度期別;
+    }
+
+    private Decimal getDecimal(Decimal value) {
+        return null == value ? Decimal.ZERO : value;
     }
 
     private void set普徴切替時期別区分(GyomuConfigJohoClass 業務コンフィグ情報, RDate 適用基準日) {

@@ -91,7 +91,7 @@ public class InsReHakouShotokushokaihyoTmpProcess extends BatchProcessBase<Shoto
         entity.setChikuCode3(所得照会票データ.getChikuCode3());
         entity.setJuminJotaiCode(所得照会票データ.getJuminJotaiCode());
         entity.setKannaiKangaiKubun(所得照会票データ.getKannaiKangaiKubun());
-        entity.setHihokennshaKubunCode(所得照会票データ.getHihokennshaKubunCode());
+        entity.setHihokennshaKubunCode(RString.EMPTY);
         entity.setSeibetsuCode(所得照会票データ.getSeibetsuCode());
         entity.setJuminShubetsuCode(所得照会票データ.getJuminShubetsuCode());
         return entity;

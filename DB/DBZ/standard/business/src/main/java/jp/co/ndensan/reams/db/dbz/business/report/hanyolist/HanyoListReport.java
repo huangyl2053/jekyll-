@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.hanyolist;
 
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoListEntity;
 import jp.co.ndensan.reams.db.dbz.entity.report.hanyolist.HanyoListReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class HanyoListReport extends Report<HanyoListReportSource> {
 
+    private final HanyoListEntity hanyolistentity;
     private final RString 表題;
     private final RString データ種別;
     private final RString 項目見出し;
@@ -29,6 +31,7 @@ public class HanyoListReport extends Report<HanyoListReportSource> {
     /**
      * インスタンスを生成します。
      *
+     * @param hanyolistentity hanyolistentity
      * @param 表題 表題
      * @param データ種別 データ種別
      * @param 項目見出し 項目見出し
@@ -37,15 +40,16 @@ public class HanyoListReport extends Report<HanyoListReportSource> {
      * @param 項目内容 項目内容
      * @return 汎用リスト
      */
-    public static HanyoListReport createReport(RString 表題, RString データ種別, RString 項目見出し,
+    public static HanyoListReport createReport(HanyoListEntity hanyolistentity, RString 表題, RString データ種別, RString 項目見出し,
             RString 項目内容, Association 地方公共団体, IOutputOrder outputOrder) {
-        return new HanyoListReport(表題, データ種別, 項目見出し,
+        return new HanyoListReport(hanyolistentity, 表題, データ種別, 項目見出し,
                 項目内容, 地方公共団体, outputOrder);
     }
 
     /**
      * インスタンスを生成します。
      *
+     * @param hanyolistentity hanyolistentity
      * @param 表題 表題
      * @param データ種別 データ種別
      * @param 項目見出し 項目見出し
@@ -53,7 +57,7 @@ public class HanyoListReport extends Report<HanyoListReportSource> {
      * @param outputOrder IOutputOrder
      * @param 項目内容 項目内容
      */
-    public HanyoListReport(RString 表題, RString データ種別, RString 項目見出し,
+    public HanyoListReport(HanyoListEntity hanyolistentity, RString 表題, RString データ種別, RString 項目見出し,
             RString 項目内容, Association 地方公共団体, IOutputOrder outputOrder) {
         this.表題 = 表題;
         this.データ種別 = データ種別;
@@ -61,11 +65,12 @@ public class HanyoListReport extends Report<HanyoListReportSource> {
         this.項目内容 = 項目内容;
         this.地方公共団体 = 地方公共団体;
         this.outputOrder = outputOrder;
+        this.hanyolistentity = hanyolistentity;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<HanyoListReportSource> writer) {
-        IHanyoListEditor editor = new HanyoListEditor(表題, データ種別,
+        IHanyoListEditor editor = new HanyoListEditor(hanyolistentity, 表題, データ種別,
                 項目見出し, 項目内容, 地方公共団体, outputOrder);
         IHanyoListBuilder builder = new HanyoListBuilder(editor);
         writer.writeLine(builder);

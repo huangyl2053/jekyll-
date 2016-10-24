@@ -81,7 +81,7 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
         entity.setTeikyoNaiyo04(toRString(relateEntity.getHihokenshaKaishiYMD()));
         entity.setMisetteiJiyu04(RString.EMPTY);
         entity.setTeikyoNaiyo05(toRString(relateEntity.getHihokenshaShuryoYMD()));
-        if (relateEntity.getHihokenshaShuryoYMD() != null && !relateEntity.getHihokenshaShuryoYMD().isEmpty()) {
+        if (relateEntity.getHihokenshaShuryoYMD() == null || relateEntity.getHihokenshaShuryoYMD().isEmpty()) {
             entity.setMisetteiJiyu05(NOTACCEPTABLE);
         } else {
             entity.setMisetteiJiyu05(RString.EMPTY);
@@ -89,7 +89,7 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
         entity.setTeikyoNaiyo06(relateEntity.getSumi_Gokei_JikoFutanGaku());
         entity.setMisetteiJiyu06(RString.EMPTY);
         entity.setTeikyoNaiyo07(relateEntity.getSumi_Gokei_70_74JikoFutanGaku());
-        if (!RString.isNullOrEmpty(relateEntity.getSumi_Gokei_70_74JikoFutanGaku())) {
+        if (RString.isNullOrEmpty(relateEntity.getSumi_Gokei_70_74JikoFutanGaku())) {
             entity.setMisetteiJiyu07(NOTACCEPTABLE);
         } else {
             entity.setMisetteiJiyu07(RString.EMPTY);
@@ -107,7 +107,7 @@ public class SougouJigyouJyohouProcess extends BatchProcessBase<SougouJigyouJyoh
     private RString getデータセットキー(HihokenshaNo 被保険者番号, RString 支給整理番号) {
         RStringBuilder データセットキー = new RStringBuilder();
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            データセットキー.append(被保険者番号);
+            データセットキー.append(被保険者番号.value());
         }
         if (!RString.isNullOrEmpty(支給整理番号)) {
             データセットキー.append(支給整理番号);

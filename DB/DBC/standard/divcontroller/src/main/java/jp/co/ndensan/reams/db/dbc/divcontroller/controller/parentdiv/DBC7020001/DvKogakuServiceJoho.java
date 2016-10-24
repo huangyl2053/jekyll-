@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -97,6 +98,31 @@ public class DvKogakuServiceJoho {
         div.getCcdKogakuShutsuryokuKomoku().setDisabled(true);
         div.getDvCsvHenshuHoho().setVisible(true);
         return createResponse(div);
+    }
+
+    /**
+     * 条件を保存するボタンのメソッドです。
+     *
+     * @param div DvKogakuServiceJohoDiv
+     * @return ResponseData
+     */
+    public ResponseData<BatchParameterMap> onClick_btnKogakuParamSave(DvKogakuServiceJohoDiv div) {
+        RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        responseData.data = new BatchParameterMap(getHandler(div).getBatchParamter(市町村判定));
+        return responseData;
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     *
+     * @param div DvKogakuServiceJohoDiv
+     * @return ResponseData
+     */
+    public ResponseData<DvKogakuServiceJohoDiv> onClick_btnKogakuParamRestore(DvKogakuServiceJohoDiv div) {
+        RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
+        getHandler(div).pamaRestore(市町村判定);
+        return ResponseData.of(div).respond();
     }
 
     /**

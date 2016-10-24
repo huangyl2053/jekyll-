@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutojyukyusya;
 
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyoRisutoJyukyusyaMybatisParameter implements IMyBatisParameter {
 
-    private RString psmShikibetsuTaisho;
+    private UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
     private RString psmAtesaki;
     private boolean is直近;
     private boolean is有効データ内最新;
@@ -86,7 +87,7 @@ public class HanyoRisutoJyukyusyaMybatisParameter implements IMyBatisParameter {
     /**
      * コンストラクタです。
      *
-     * @param psmShikibetsuTaisho 宛名識別対象PSM
+     * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoParam
      * @param psmAtesaki 宛名識別対象PSM
      * @param is直近 boolean
      * @param is有効データ内最新 boolean
@@ -149,7 +150,8 @@ public class HanyoRisutoJyukyusyaMybatisParameter implements IMyBatisParameter {
      * @param 出力順 RString
      */
     public HanyoRisutoJyukyusyaMybatisParameter(
-            RString psmShikibetsuTaisho, RString psmAtesaki, boolean is直近, boolean is有効データ内最新, boolean is抽出方法区分_基準日,
+            UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam, RString psmAtesaki,
+            boolean is直近, boolean is有効データ内最新, boolean is抽出方法区分_基準日,
             boolean is抽出方法区分_範囲, boolean is日付範囲From, boolean is日付範囲To, boolean is資格取得者のみ, boolean is資格喪失者のみ,
             boolean is旧措置者, boolean is1号被保険者true2号被保険者true, boolean is1号被保険者true2号被保険者false,
             boolean is1号被保険者false2号被保険者true, boolean isサービス指定者true, boolean is宛名抽出区分_年齢,
@@ -165,7 +167,7 @@ public class HanyoRisutoJyukyusyaMybatisParameter implements IMyBatisParameter {
             boolean is認定結果8length0, boolean is認定結果8length非0, boolean is認定結果9length0, boolean is認定結果9length非0,
             boolean is認定結果10length0, boolean is認定結果10length非0, RString 出力順) {
 
-        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+        this.shikibetsutaishoParam = shikibetsutaishoParam;
         this.psmAtesaki = psmAtesaki;
         this.is有効データ内最新 = is有効データ内最新;
         this.is直近 = is直近;

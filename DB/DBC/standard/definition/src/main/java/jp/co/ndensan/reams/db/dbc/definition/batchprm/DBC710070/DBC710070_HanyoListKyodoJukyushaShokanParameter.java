@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710070.HanyoListKyodoJukyushaShokanProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -77,7 +76,6 @@ public class DBC710070_HanyoListKyodoJukyushaShokanParameter extends BatchParame
      * @return 汎用リスト_共同処理用受給者情報（償還）用ProcessParameter HanyoListKyodoJukyushaShokanProcessParameter
      */
     public HanyoListKyodoJukyushaShokanProcessParameter toProcessParameter() {
-        LasdecCode 保険者コード = null;
         FlexibleYearMonth 処理対象年月From = null;
         FlexibleYearMonth 処理対象年月To = null;
         FlexibleYearMonth 異動年月From = null;

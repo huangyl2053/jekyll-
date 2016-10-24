@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1140012;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanJikofutangakuHosei;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140012.DBC1140012TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140012.JikoFutangakuHosei2PanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1140012.JikoFH2ValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1140012.JikoFutangakuHosei2Handler1;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1140012.JikoFutangakuHosei2Handler2;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1140012.JikoFutangakuHosei2Handler3;
@@ -17,12 +17,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1140012.Jik
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -35,12 +35,6 @@ public class JikoFutangakuHosei2Panel {
     private static final RString 文字列_0 = new RString("0");
     private static final RString 文字列_1 = new RString("1");
     private static final FlexibleYear 平成20年度 = new FlexibleYear("2008");
-    private static final RString 月_003 = new RString("03");
-    private static final RString 月_007 = new RString("07");
-    private static final RString 日_31 = new RString("31");
-    private static final int 歳_75 = 75;
-    private static final int INT_35 = 35;
-    private static final int INT_36 = 36;
 
     /**
      * 画面の初期化のメソッドです。
@@ -922,78 +916,31 @@ public class JikoFutangakuHosei2Panel {
 
         FlexibleYear 対象年度 = 高額合算自己負担額補正保持Entity.get対象年度();
         if (平成20年度.equals(対象年度)) {
-            check_20年度(div, 高額合算自己負担額補正保持Entity);
+            ValidationMessageControlPairs valid = getJikoFH2ValidationHandler(div, 高額合算自己負担額補正保持Entity.get生年月日(),
+                    高額合算自己負担額補正保持Entity.get対象年度()).validate補正後チェック();
+            if (valid.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(valid).respond();
+            }
             getJikoFutangakuHosei2Handler4(div).高額合算自己負担額保持Entity設定(高額合算自己負担額補正保持Entity);
             ViewStateHolder.put(ViewStateKeys.高額合算自己負担額補正保持Entity, 高額合算自己負担額補正保持Entity);
         }
         if (!平成20年度.equals(対象年度)) {
-            check_20年度以外(div, 高額合算自己負担額補正保持Entity);
+            ValidationMessageControlPairs valid = getJikoFH2ValidationHandler(div, 高額合算自己負担額補正保持Entity.get生年月日(),
+                    高額合算自己負担額補正保持Entity.get対象年度()).validate補正後チェック_20年度以外();
+            if (valid.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(valid).respond();
+            }
             getJikoFutangakuHosei2Handler3(div).高額合算自己負担額保持Entity設定(高額合算自己負担額補正保持Entity);
             ViewStateHolder.put(ViewStateKeys.高額合算自己負担額補正保持Entity, 高額合算自己負担額補正保持Entity);
         }
         return ResponseData.of(div).forwardWithEventName(DBC1140012TransitionEventName.戻る).respond();
     }
 
-    private void check_20年度(JikoFutangakuHosei2PanelDiv div, KogakuGassanJikofutangakuHosei 高額合算自己負担額補正保持Entity) {
-        FlexibleDate 生年月日 = 高額合算自己負担額補正保持Entity.get生年月日();
-        FlexibleYear 対象年度 = 高額合算自己負担額補正保持Entity.get対象年度();
-        FlexibleDate 対象年_3月_31日 = new FlexibleDate(対象年度.toString().concat(月_003.toString()).concat(日_31.toString()));
-
-        JikoFutangakuHosei2Handler4 handler24 = getJikoFutangakuHosei2Handler4(div);
-        if (handler24.is補正後チェック１(div)) {
-            throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連３.getMessage());
-        }
-        if (handler24.is補正後チェック２(div)) {
-            throw new ApplicationException(DbcErrorMessages.高額合算自己負担額関連１.getMessage());
-        }
-        if (handler24.is補正後チェック３(div)) {
-            throw new ApplicationException(DbcErrorMessages.高額合算自己負担額関連２.getMessage());
-        }
-        if (生年月日.plusYear(歳_75).isBeforeOrEquals(対象年_3月_31日)
-                && handler24.is補正後チェック4_補正後(div)) {
-            throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連１.getMessage());
-        }
-        int message_code = handler24.is補正後チェック4_6(div, 生年月日, 対象年度);
-        if (INT_35 == message_code) {
-            throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連４.getMessage());
-        }
-        if (INT_36 == message_code) {
-            throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連２.getMessage());
-        }
-        if (handler24.is高額介護_予防_サービス費チェック(div)) {
-            throw new ApplicationException(DbcErrorMessages.高額合算自己負担額関連3.getMessage());
-        }
-    }
-
-    private void check_20年度以外(JikoFutangakuHosei2PanelDiv div, KogakuGassanJikofutangakuHosei 高額合算自己負担額補正保持Entity) {
-        FlexibleDate 生年月日 = 高額合算自己負担額補正保持Entity.get生年月日();
-        FlexibleYear 対象年度 = 高額合算自己負担額補正保持Entity.get対象年度();
-        FlexibleDate 対象年_7月_31日 = new FlexibleDate(対象年度.toString().concat(月_007.toString()).concat(日_31.toString()));
-
-        JikoFutangakuHosei2Handler3 handler23 = getJikoFutangakuHosei2Handler3(div);
-        if (handler23.is補正後チェック１(div)) {
-            throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連３.getMessage());
-        }
-        if (handler23.is補正後チェック２(div)) {
-            throw new ApplicationException(DbcErrorMessages.高額合算自己負担額関連１.getMessage());
-        }
-        if (handler23.is補正後チェック３(div)) {
-            throw new ApplicationException(DbcErrorMessages.高額合算自己負担額関連２.getMessage());
-        }
-        if (生年月日.plusYear(歳_75).isBeforeOrEquals(対象年_7月_31日)
-                && handler23.is補正後チェック4_補正後(div)) {
-            throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連１.getMessage());
-        }
-        int message_code = handler23.is補正後チェック8_10(div, 生年月日, 対象年度);
-        if (INT_35 == message_code) {
-            throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連４.getMessage());
-        }
-        if (INT_36 == message_code) {
-            throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連２.getMessage());
-        }
-        if (handler23.is高額介護_予防_サービス費チェック(div)) {
-            throw new ApplicationException(DbcErrorMessages.高額合算自己負担額関連3.getMessage());
-        }
+    private JikoFH2ValidationHandler getJikoFH2ValidationHandler(
+            JikoFutangakuHosei2PanelDiv div,
+            FlexibleDate 生年月日,
+            FlexibleYear 対象年度) {
+        return new JikoFH2ValidationHandler(div, 生年月日, 対象年度);
     }
 
     private JikoFutangakuHosei2Handler1 getJikoFutangakuHosei2Handler1(JikoFutangakuHosei2PanelDiv div) {

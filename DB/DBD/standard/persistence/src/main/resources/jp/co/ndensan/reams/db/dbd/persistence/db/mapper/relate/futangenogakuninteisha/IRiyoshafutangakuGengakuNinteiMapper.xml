@@ -35,14 +35,16 @@
         </if>
         <if test="is対象リスト_認定者リスト">
             <if test="is対象期間指定_対象年度">
-                AND 介護保険負担限度額認定."ketteiKubun" = #{決定区分_承認する}
-                AND #{対象年度の開始年月日} <![CDATA[<=]]> 介護保険負担限度額認定."tekiyoKaishiYMD"
-                AND 介護保険負担限度額認定."tekiyoShuryoYMD" <![CDATA[<=]]> #{対象年度の終了年月日}
+                AND ((介護保険負担限度額認定."ketteiKubun" = #{決定区分_承認する}
+                AND (#{対象年度の開始年月日} <![CDATA[<=]]> 介護保険負担限度額認定."tekiyoKaishiYMD"
+                AND 介護保険負担限度額認定."tekiyoShuryoYMD" <![CDATA[<=]]> #{対象年度の終了年月日})) 
+                OR 介護保険負担限度額認定."ketteiKubun" <![CDATA[!=]]> #{決定区分_承認する})
             </if>
             <if test="is対象期間指定_基準日">
-                AND 介護保険負担限度額認定."ketteiKubun" = #{決定区分_承認する}
-                AND 介護保険負担限度額認定."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準日}
-                AND #{基準日} <![CDATA[<=]]> 介護保険負担限度額認定."tekiyoShuryoYMD"
+                AND ((介護保険負担限度額認定."ketteiKubun" = #{決定区分_承認する}
+                AND (介護保険負担限度額認定."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準日}
+                AND #{基準日} <![CDATA[<=]]> 介護保険負担限度額認定."tekiyoShuryoYMD"))
+                OR 介護保険負担限度額認定."ketteiKubun" <![CDATA[!=]]> #{決定区分_承認する})
             </if>
         </if>
         <if test="is対象リスト_該当者リスト">
@@ -81,10 +83,10 @@
         <result property="認定情報_認定有効期間終了年月日" column="認定情報_認定有効期間終了年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_setaiinshotokujoho"  type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.SetaiInRisutoEntity" autoMapping="true">
-        <result property="識別コード" column="shikibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="課税区分" column="kazeiKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="課税所得額" column="kazeiShotokuGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="is受給者" column="is受給者" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="識別コード" column="世帯員情報.shikibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="課税区分" column="世帯員情報.kazeiKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="課税所得額" column="世帯員情報.kazeiShotokuGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="is受給者" column="世帯員情報.is受給者" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <association property="世帯員宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>    
     </resultMap>
     <select resultOrdered="true" id="get負担限度額認定者リスト"
@@ -98,12 +100,11 @@
             A.is所得税課税者 AS is所得税課税者,
             A.is生活保護受給者 AS is生活保護受給者,
             A.利用者負担段階,
-            A.合計所得金額 + A.年金収入額 + A.非課税年金勘案額 AS 合計所得_含年金収入,
+            coalesce(A.合計所得金額,0) + coalesce(A.年金収入額,0) + coalesce(A.非課税年金勘案額,0) AS 合計所得_含年金収入,
             A.非課税年金勘案額,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
             施設入所情報.入所施設コード,
             施設入所情報.入所施設名称,
-            認定情報.*,
             要介護認定申請情報."koroshoIfShikibetsuCode" AS 要介護認定申請情報_厚労省IF識別コード,
             (CASE WHEN 受給者台帳Newest."kyuSochishaFlag" IS NULL 
                   THEN false 
@@ -173,14 +174,14 @@
                                 SELECT *,ROW_NUMBER() OVER (PARTITION BY 被保険者台帳."hihokenshaNo" 
                                     ORDER BY 被保険者台帳."idoYMD" DESC,被保険者台帳."edaNo" DESC) AS 最大順
                                     FROM rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳
-                                    WHERE 被保険者台帳."idoYMD" <![CDATA[<=]]> #{課税判定等基準日}
+                                    WHERE 被保険者台帳."idoYMD" <![CDATA[<=]]> #{基準日}
                              ) AS X
                              WHERE 
                                 X.最大順 = 1
-                                AND X."shikakuShutokuYMD" <![CDATA[<=]]> #{課税判定等基準日}
+                                AND X."shikakuShutokuYMD" <![CDATA[<=]]> #{基準日}
                                 AND (CASE WHEN X."shikakuSoshitsuYMD" = ''
                                             THEN '99999999' 
-                                          ELSE X."shikakuSoshitsuYMD" END) <![CDATA[>]]> #{課税判定等基準日}
+                                          ELSE X."shikakuSoshitsuYMD" END) <![CDATA[>]]> #{基準日}
             ) AS 被保険者台帳情報 
             ON 被保険者台帳情報."hihokenshaNo" = A.被保険者番号
         </if>    
@@ -241,7 +242,7 @@
             ON 施設入所情報."shikibetsuCode" = A."本人識別コード"
          LEFT JOIN  (
              SELECT
-                世帯員所得情報一時."hihokenshaNo" AS 被保険者番号,
+                世帯員所得情報一時."hihokenshaNo" AS 被保険者番号S,
                 世帯員所得情報一時."shikibetsuCode",
                 世帯員所得情報一時."kazeiKubun",
                 世帯員所得情報一時."kazeiShotokuGaku",
@@ -278,7 +279,7 @@
                         AND FALSE
                     </if> 
                     ) AS 世帯員情報 
-                    ON 世帯員情報.被保険者番号 = A.被保険者番号
+                    ON 世帯員情報.被保険者番号S = A.被保険者番号
                     WHERE 
                     (減免減額申請."gemmenGengakuShurui" = #{減免減額種類_介護保険負担限度額認定} OR 
                      減免減額申請."gemmenGengakuShurui" IS NULL) 
@@ -318,7 +319,7 @@
                 AND A.利用者負担段階 = #{利用者負担4段階_高齢者複数世帯} 
                 AND A.is高齢者複数世帯 = true
             </if>
-        </if>         
+        </if>
         ${出力順}
 </select>
 </mapper>

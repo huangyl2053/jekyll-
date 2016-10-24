@@ -542,6 +542,7 @@ public class RiyoshaFutanWariaiHantei {
             if (!nonullRStr(before.getHihokenshaNo()).equals(nonullRStr(now.getHihokenshaNo()))) {
                 before.setYukoShuryoYMD(new FlexibleDate(対象年度.getYearValue() + 1, NUM七月, NUM三十一日));
                 before = now;
+                負担割合判定マージ処理１件目(now.getHanteiKubun(), now, 対象年度);
                 continue;
             }
             前負担割合区分 = before.getFutanWariaiKubun();
@@ -570,10 +571,14 @@ public class RiyoshaFutanWariaiHantei {
         List<RiyoshaFutanWariaiMeisaiTempEntity> 明細情報temp = new ArrayList<>();
         int edaNo = 1;
         List<RiyoshaFutanWariaiKonkyoTempEntity> 根拠情報temp = new ArrayList<>();
+        HihokenshaNo beforeNo = null;
         for (RiyoshaFutanWariaiMeisaiTempEntity 明細情報 : 明細情報result) {
             負担割合区分 = 明細情報.getFutanWariaiKubun();
             if (なし.equals(負担割合区分)) {
                 continue;
+            }
+            if (beforeNo != null && !beforeNo.equals(明細情報.getHihokenshaNo())) {
+                edaNo = 1;
             }
             for (RiyoshaFutanWariaiKonkyoTempEntity entity : 根拠情報map.get(getKeyOf明細根拠情報(明細情報))) {
                 entity.setEdaNo(edaNo);
@@ -582,6 +587,7 @@ public class RiyoshaFutanWariaiHantei {
             明細情報.setEdaNo(edaNo);
             明細情報temp.add(明細情報);
             edaNo++;
+            beforeNo = 明細情報.getHihokenshaNo();
         }
         result.set利用者負担割合明細情報(明細情報temp);
         result.set利用者負担割合根拠情報(根拠情報temp);
@@ -618,17 +624,21 @@ public class RiyoshaFutanWariaiHantei {
         for (int i = 0; i < oldSize; i++) {
             flags.add(Boolean.TRUE);
         }
-        RString keyBefore = RString.EMPTY;
-        RString keyAfter;
-        for (int i = 0; i < oldSize - 1; i++) {
-            if (i == 0) {
-                keyBefore = getKey利用者負担割合明細情報(利用者負担割合明細情報.get(0));
+        RString keyi;
+        RString keyj;
+        for (int i = 0; i < oldSize; i++) {
+            if (!flags.get(i)) {
+                continue;
             }
-            keyAfter = getKey利用者負担割合明細情報(利用者負担割合明細情報.get(i + 1));
-            if (keyAfter.equals(keyBefore)) {
-                flags.set(i + 1, Boolean.FALSE);
-            } else {
-                keyBefore = keyAfter;
+            keyi = getKey利用者負担割合明細情報(利用者負担割合明細情報.get(i));
+            for (int j = i + 1; j < oldSize; j++) {
+                if (!flags.get(j)) {
+                    continue;
+                }
+                keyj = getKey利用者負担割合明細情報(利用者負担割合明細情報.get(j));
+                if (keyi.equals(keyj)) {
+                    flags.set(j, false);
+                }
             }
         }
         for (int i = 0; i < oldSize; i++) {

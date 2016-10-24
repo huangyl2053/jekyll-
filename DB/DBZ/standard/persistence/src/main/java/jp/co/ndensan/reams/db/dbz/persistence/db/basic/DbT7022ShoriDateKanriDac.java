@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -44,7 +43,6 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -1276,7 +1274,6 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
-                                // TODO 設計書に処理名称不正
                                 eq(shoriName, ShoriName.依頼金額計算.get名称()),
                                 eq(nendo, 調定年度),
                                 eq(shoriEdaban, 処理枝番),
@@ -1900,26 +1897,22 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
-     * 月次処理状況の取得です。
+     * 処理日付管理マスタテーブルから、処理状況取得する。
      *
-     * @param 口座振替年月 FlexibleYearMonth
-     * @return List<DbT7022ShoriDateKanriEntity>
-     * @throws NullPointerException 引数のいずれかがnullの場合
+     * @param 処理名 処理名
+     * @param 年度内連番 年度内連番
+     * @return DbT7022ShoriDateKanriEntity
      */
     @Transaction
-    public List<DbT7022ShoriDateKanriEntity> get月次処理状況(FlexibleYearMonth 口座振替年月) throws NullPointerException {
+    public DbT7022ShoriDateKanriEntity get処理状況(RString 処理名, RString 年度内連番) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.selectSpecific(kijunTimestamp).
+        return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
-                                eq(substr(kijunTimestamp, 開始桁数, LENGTH), 口座振替年月),
-                                in(shoriName, ShoriName.普徴仮算定賦課確定.get名称(),
-                                        ShoriName.仮算定異動賦課確定.get名称(),
-                                        ShoriName.本算定賦課確定.get名称(),
-                                        ShoriName.異動賦課確定.get名称(),
-                                        ShoriName.過年度賦課確定.get名称()))).
-                toList(DbT7022ShoriDateKanriEntity.class);
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriName, 処理名),
+                                eq(nendoNaiRenban, 年度内連番))).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
     }
-
 }

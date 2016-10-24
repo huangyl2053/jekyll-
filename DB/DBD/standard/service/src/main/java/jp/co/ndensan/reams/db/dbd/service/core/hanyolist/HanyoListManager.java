@@ -9,9 +9,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.hanyolist.HanyoListShutsuryokuKo
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.KingakuEditingNecessity;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,6 +30,9 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  * @reamsid_L DBD-3950-030 panxiaobo
  */
 public class HanyoListManager {
+
+    private static final int NO_3 = 3;
+    private static final int NO_6 = 6;
 
     /**
      * HanyoListManagerのインスタンス化
@@ -47,11 +54,14 @@ public class HanyoListManager {
     public RString 項目内容new編集(int i, RString 項目内容new, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku) {
         if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分() != null) {
             if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("02"))) {
-                項目内容new = new RString(new FlexibleDate(項目内容new.toString()).wareki().firstYear(FirstYear.ICHI_NEN).toString());
+                項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki()
+                        .firstYear(FirstYear.ICHI_NEN).toDateString().substring(0, NO_3);
             } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("03"))) {
-                項目内容new = new RString(new FlexibleDate(項目内容new.toString()).wareki().firstYear(FirstYear.ICHI_NEN).toString());
+                項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki().
+                        firstYear(FirstYear.ICHI_NEN).toDateString().substring(0, NO_6);
             } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("04"))) {
-                項目内容new = new RString(new FlexibleDate(項目内容new.toString()).wareki().toString());
+                項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki()
+                        .toDateString().substring(0, NO_6);
             }
         }
         if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get金額編集().equals(KingakuEditingNecessity.必要.getコード())) {
@@ -73,6 +83,18 @@ public class HanyoListManager {
         set地区コード1(atenacyusyutsujyoken, key);
         set地区コード2(atenacyusyutsujyoken, key);
         set地区コード3(atenacyusyutsujyoken, key);
+    }
+
+    /**
+     * get地方公共団体
+     *
+     * @param 市町村コード 市町村コード
+     * @return get地方公共団体 get地方公共団体
+     *
+     */
+    public Association get地方公共団体(LasdecCode 市町村コード) {
+        IAssociationFinder finder = AssociationFinderFactory.createInstance();
+        return finder.getAssociation(市町村コード);
     }
 
     private void set町域コード(AtenaSelectBatchParameter atenacyusyutsujyoken, ShikibetsuTaishoPSMSearchKeyBuilder key) {

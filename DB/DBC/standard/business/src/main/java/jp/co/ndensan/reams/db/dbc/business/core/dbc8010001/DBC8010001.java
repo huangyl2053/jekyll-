@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.dbc8010001;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.ux.uxx.entity.db.relate.kozafurikomi.furikomigroup.FurikomiGroupItakushaRelateEntity;
 
 /**
  * 振込明細・振込みデータ作成の前回処理情報を取得するのビジネス。
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 public class DBC8010001 {
 
     private final DbT7022ShoriDateKanriEntity entity;
+    private final FurikomiGroupItakushaRelateEntity furikomiGroupItakushaRelateEntity;
 
     /**
      * コンストラクタです。
@@ -23,6 +25,17 @@ public class DBC8010001 {
      */
     public DBC8010001(DbT7022ShoriDateKanriEntity entity) {
         this.entity = entity;
+        this.furikomiGroupItakushaRelateEntity = null;
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param furikomiGroupItakushaRelateEntity FurikomiGroupItakushaRelateEntity
+     */
+    public DBC8010001(FurikomiGroupItakushaRelateEntity furikomiGroupItakushaRelateEntity) {
+        this.entity = null;
+        this.furikomiGroupItakushaRelateEntity = furikomiGroupItakushaRelateEntity;
     }
 
     /**
@@ -32,6 +45,15 @@ public class DBC8010001 {
      */
     public DbT7022ShoriDateKanriEntity getEntity() {
         return this.entity;
+    }
+
+    /**
+     * FurikomiGroupItakushaRelateEntityを返します。
+     *
+     * @return entity DbT7022ShoriDateKanriEntity
+     */
+    public FurikomiGroupItakushaRelateEntity getFurikomiGroupItakushaRelateEntity() {
+        return this.furikomiGroupItakushaRelateEntity;
     }
 
 }

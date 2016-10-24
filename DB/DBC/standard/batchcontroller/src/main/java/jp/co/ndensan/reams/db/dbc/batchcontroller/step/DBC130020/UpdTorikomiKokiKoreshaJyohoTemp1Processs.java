@@ -33,6 +33,7 @@ public class UpdTorikomiKokiKoreshaJyohoTemp1Processs extends BatchProcessBase<K
     private static final RString エラー区分 = new RString("1");
     private static final RString TEMP_TABLE = new RString("tempTorikomiKokuhoJyoho");
     private UpdTorikomiKokuhoJyohoTempProcessParameter processParameter;
+    private boolean 文言設定flag;
 
     @BatchWriter
     private IBatchTableWriter<TorikomiKokiKoreshaJyohoEntity> 一時tableWriter;
@@ -50,6 +51,7 @@ public class UpdTorikomiKokiKoreshaJyohoTemp1Processs extends BatchProcessBase<K
 
     @Override
     protected void process(KokiKoreshaJyohoRealEntity entity) {
+        文言設定flag = entity.get取込後期高齢者情報Entity().is文言設定flag();
         if (entity.get件数() > 1) {
             if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
                 entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_13);
@@ -63,6 +65,7 @@ public class UpdTorikomiKokiKoreshaJyohoTemp1Processs extends BatchProcessBase<K
                 entity.get取込後期高齢者情報Entity().setエラー区分(エラー区分);
             }
         }
+        entity.get取込後期高齢者情報Entity().set文言設定flag(文言設定flag);
         一時tableWriter.update(entity.get取込後期高齢者情報Entity());
     }
 }

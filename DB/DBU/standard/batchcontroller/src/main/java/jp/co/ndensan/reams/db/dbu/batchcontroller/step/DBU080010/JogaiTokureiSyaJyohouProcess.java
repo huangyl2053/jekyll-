@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbu.business.core.basic.TokuteiKojinJohoHanKanri;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.DataSetNo;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShinkiIdoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TokuteiKojinJohomeiCode;
@@ -44,13 +41,11 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
     private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
     private JogaiTokureiSyaJyohouProcessParameter processParameter;
     private JogaiTokureiSyaJyohouMybatisParameter mybatisParameter;
-    private List<TokuteiKojinJohoHanKanri> 特定個人版管理特定情報;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 中間DB提供基本情報;
 
     @Override
     protected void initialize() {
-        特定個人版管理特定情報 = new ArrayList<>();
         RString 新規異動区分 = processParameter.get新規異動区分();
         RDateTime 対象開始日時 = processParameter.get対象開始日時();
         FlexibleDate システム日付 = new FlexibleDate(RDate.getNowDate().toDateString());
@@ -70,7 +65,7 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
                 事業所抽出開始年月日, 事業所抽出終了年月日,
                 processParameter.get対象開始日時(), processParameter.get対象終了日時(),
                 processParameter.get個人番号付替対象者被保険者番号(),
-                特定個人版管理特定情報.get(0).get版番号(),
+                processParameter.get版番号(),
                 新規異動区分,
                 RString.EMPTY);
     }
@@ -99,7 +94,7 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
         entity.setShikibetsuCode(relateEntity.getShikibetsuCode());
         entity.setKojinNo(RString.EMPTY);
         entity.setTokuteiKojinJohoMeiCode(TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード());
-        entity.setHanNo(特定個人版管理特定情報.get(0).get版番号());
+        entity.setHanNo(processParameter.get版番号());
         entity.setTeikyoNaiyo01(relateEntity.getJigyoshaJusho());
         entity.setMisetteiJiyu01(get未設定事由(relateEntity.getJigyoshaJusho()));
         entity.setTeikyoNaiyo02(get事業者名称(relateEntity.getJigyoshaMeisho()));
@@ -129,11 +124,11 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
     private RString getデータセットキー(HihokenshaNo 被保険者番号, FlexibleDate 資格取得年月日) {
         RStringBuilder データセットキー = new RStringBuilder();
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            データセットキー.append(被保険者番号);
+            データセットキー.append(被保険者番号.value());
         }
         データセットキー.append(DataSetNo._0102住所地特例情報.getコード());
         if (資格取得年月日 != null && !資格取得年月日.isEmpty()) {
-            データセットキー.append(資格取得年月日);
+            データセットキー.append(資格取得年月日.toString());
         }
         return データセットキー.toRString();
     }

@@ -37,4 +37,8 @@ public class ShisetsuNyutaishoEntity {
     private FlexibleDate jukyuTeishiKaishiYMD;
     private FlexibleDate jukyuTeishiShuryoYMD;
     private AtenaMeisho jigyoshaName;
+    private RString shichosonMeisho;
+    private RString iryoHokenshaMeisho;
+    private RString iryoHokenKigoNo;
+    private RString iryoHokenShubetsuCode;
 }

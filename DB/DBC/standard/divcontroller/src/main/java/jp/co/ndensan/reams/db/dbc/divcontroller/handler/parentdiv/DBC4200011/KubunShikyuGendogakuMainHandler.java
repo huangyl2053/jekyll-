@@ -7,14 +7,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4200011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KubunShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseKubunShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.kubunshikyugendogaku.KubunShikyuGendogakuData;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyugendogaku.KubunShikyuGendogakuYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyugendogaku.ShikyuGendogakuTableKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.KubunShikyuGendogakuMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.dgShikyuGendogaku_Row;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.KubunShikyuGendoGakuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.KubunShikyuGendoGakuManager;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.UwanoseKubunShikyuGendoGakuManager;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

@@ -345,13 +345,15 @@
         B."ninteiShinseiYMD",
         B."ninteiShinseiShinseijiKubunCode"
         FROM
-            "NichijiShinchokuIchijiTeburuTemp" AS A
-        LEFT JOIN
             rgdb."DbT4101NinteiShinseiJoho" AS B
+        RIGHT JOIN
+            "NichijiShinchokuIchijiTeburuTemp" AS A
         ON
             B."shoKisaiHokenshaNo" = A."hokenshabango"
         AND
             B."ninteiShinseiYMD" = A."ninteishinseibi"
+        AND
+            B."hihokenshaNo" = A."hihokenjabango"
         AND
             B."ninteiShinseiShinseijiKubunCode" = A."shinseikubunshinseiji"
         WHERE

@@ -119,6 +119,7 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
         ShujiiHoshumeisaiEdit edit = new ShujiiHoshumeisaiEdit();
         ShujiiHoshumeisaiEntity shumeisaiEntity = edit.getShujiiHoshumeisaiEntity(entity);
         shumeisaiEntity = editShujiiHoshumeisaiEntity(shumeisaiEntity, entity);
+        shumeisaiEntity.set申請書管理番号(entity.getShinseishoKanriNo().value());
         ShujiiHoshumeisaiReport report = new ShujiiHoshumeisaiReport(shumeisaiEntity);
         report.writeBy(reportSourceWriter);
         index_tmp++;

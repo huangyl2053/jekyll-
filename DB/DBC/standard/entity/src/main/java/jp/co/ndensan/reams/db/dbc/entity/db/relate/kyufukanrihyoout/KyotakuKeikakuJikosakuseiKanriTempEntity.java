@@ -5,12 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
@@ -24,16 +27,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 @OnNextSchema("rgdb")
 public class KyotakuKeikakuJikosakuseiKanriTempEntity extends DbTableEntityBase<KyotakuKeikakuJikosakuseiKanriTempEntity> implements IDbAccessable {
 
+    @PrimaryKey
     @TempTableColumnOrder(1)
-    private RString renban;
+    private Decimal renban;
+    @PrimaryKey
     @TempTableColumnOrder(2)
-    private RString hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @TempTableColumnOrder(3)
     private FlexibleYearMonth taishoYM;
     @TempTableColumnOrder(4)
     private RString rirekiNo;
+    @PrimaryKey
     @TempTableColumnOrder(5)
     private FlexibleYearMonth riyoYM;
+    @PrimaryKey
     @TempTableColumnOrder(6)
     private RString kyotakuServiceKubun;
     @TempTableColumnOrder(7)
@@ -55,13 +62,13 @@ public class KyotakuKeikakuJikosakuseiKanriTempEntity extends DbTableEntityBase<
     @TempTableColumnOrder(15)
     private RString kyufuTaishoNissu;
     @TempTableColumnOrder(16)
-    private RString goukeiFlag;
+    private boolean goukeiFlag;
     @TempTableColumnOrder(17)
     private RString shuruiGendoNaiTaniSuNissu;
     @TempTableColumnOrder(18)
     private RString shuruiGendoChokaTaniSuNissu;
     @TempTableColumnOrder(19)
-    private RString kubunGendoNaiTaniSuNissu;
+    private Decimal kubunGendoNaiTaniSuNissu;
     @TempTableColumnOrder(20)
     private RString kubunGendoChokaTaniSuNissu;
     @TempTableColumnOrder(21)
@@ -69,7 +76,7 @@ public class KyotakuKeikakuJikosakuseiKanriTempEntity extends DbTableEntityBase<
     @TempTableColumnOrder(22)
     private RString kyufuRitsu;
     @TempTableColumnOrder(23)
-    private RString kyufuKeikakuTaniSu;
+    private Decimal kyufuKeikakuTaniSu;
     @TempTableColumnOrder(24)
     private RString zenkaiRiyoNissu;
     @TempTableColumnOrder(25)
@@ -85,7 +92,7 @@ public class KyotakuKeikakuJikosakuseiKanriTempEntity extends DbTableEntityBase<
     @TempTableColumnOrder(30)
     private RString hyojiYokaigoJotaiKubunCode;
     @TempTableColumnOrder(31)
-    private RString hyojiShikyuGendoTanisu;
+    private Decimal hyojiShikyuGendoTanisu;
     @TempTableColumnOrder(32)
     private RString yokaigoJotaiKubunCode;
     @TempTableColumnOrder(33)
@@ -93,7 +100,7 @@ public class KyotakuKeikakuJikosakuseiKanriTempEntity extends DbTableEntityBase<
     @TempTableColumnOrder(34)
     private FlexibleYearMonth ninteiYukoKikanShuryoYM;
     @TempTableColumnOrder(35)
-    private RString shikyuGendoTanisu;
+    private Decimal shikyuGendoTanisu;
     @TempTableColumnOrder(36)
     private FlexibleYearMonth shikyuGendoKaishiYM;
     @TempTableColumnOrder(37)
@@ -108,6 +115,7 @@ public class KyotakuKeikakuJikosakuseiKanriTempEntity extends DbTableEntityBase<
     private FlexibleYearMonth tankiShikyuGendoShuryoYM;
     @TempTableColumnOrder(42)
     private RString serviceTeikyoJigyoshaName;
+    @PrimaryKey
     @TempTableColumnOrder(43)
     private RString hokenshaNo;
     @TempTableColumnOrder(44)

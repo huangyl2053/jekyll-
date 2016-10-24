@@ -39,7 +39,7 @@ public class TokuteiKojinKadouKahiHanteiProcess extends SimpleBatchProcessBase {
     protected void process() {
         hanNoJohoList = new OutputParameter<>();
         List<TokuteiKojinJohoHanKanri> 版番号情報List = TokuteiKojinJohoTeikyoManager.createInstance().get版番号(
-                processParameter.get新規異動区分(), processParameter.get特定個人情報名コードList(),
+                processParameter.get新規異動区分(), processParameter.get特定個人情報名コード(),
                 processParameter.getデータセット番号(), processParameter.getシステム日付());
         List<TokuteiKojinJohoHanKanri> 具合版番号情報List = new ArrayList<>();
         for (TokuteiKojinJohoHanKanri 版番号情報 : 版番号情報List) {

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2210011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Oct 12 10:43:16 CST 2016 
+ * Thu Oct 20 15:05:24 CST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-21_20-30-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     private RString txtService;
     private RString txtKanrisha;
@@ -31,6 +31,9 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
     private RString txtTorokuShuryoYMD;
     private RString txtJuryoInin;
     private RString txtSeikatsuHogo;
+    private RString txtJigyoshaCode;
+    private RString txtServiceCode;
+    private RString txtRirekiNo;
 
     public dgTokubetsuKyufuJigyoshaDetailServiceList_Row() {
         super();
@@ -44,6 +47,9 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
         this.txtTorokuShuryoYMD = RString.EMPTY;
         this.txtJuryoInin = RString.EMPTY;
         this.txtSeikatsuHogo = RString.EMPTY;
+        this.txtJigyoshaCode = RString.EMPTY;
+        this.txtServiceCode = RString.EMPTY;
+        this.txtRirekiNo = RString.EMPTY;
         this.setOriginalData("txtService", txtService);
         this.setOriginalData("txtKanrisha", txtKanrisha);
         this.setOriginalData("txtJigyoKaishiYMD", txtJigyoKaishiYMD);
@@ -54,9 +60,12 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
         this.setOriginalData("txtTorokuShuryoYMD", txtTorokuShuryoYMD);
         this.setOriginalData("txtJuryoInin", txtJuryoInin);
         this.setOriginalData("txtSeikatsuHogo", txtSeikatsuHogo);
+        this.setOriginalData("txtJigyoshaCode", txtJigyoshaCode);
+        this.setOriginalData("txtServiceCode", txtServiceCode);
+        this.setOriginalData("txtRirekiNo", txtRirekiNo);
     }
 
-    public dgTokubetsuKyufuJigyoshaDetailServiceList_Row(RString txtService, RString txtKanrisha, RString txtJigyoKaishiYMD, RString txtJigyoKyushiYMD, RString txtJigyoHaishiYMD, RString txtJigyoSaikaiYMD, RString txtTorokuKaishiYMD, RString txtTorokuShuryoYMD, RString txtJuryoInin, RString txtSeikatsuHogo) {
+    public dgTokubetsuKyufuJigyoshaDetailServiceList_Row(RString txtService, RString txtKanrisha, RString txtJigyoKaishiYMD, RString txtJigyoKyushiYMD, RString txtJigyoHaishiYMD, RString txtJigyoSaikaiYMD, RString txtTorokuKaishiYMD, RString txtTorokuShuryoYMD, RString txtJuryoInin, RString txtSeikatsuHogo, RString txtJigyoshaCode, RString txtServiceCode, RString txtRirekiNo) {
         super();
         this.setOriginalData("txtService", txtService);
         this.setOriginalData("txtKanrisha", txtKanrisha);
@@ -68,6 +77,9 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
         this.setOriginalData("txtTorokuShuryoYMD", txtTorokuShuryoYMD);
         this.setOriginalData("txtJuryoInin", txtJuryoInin);
         this.setOriginalData("txtSeikatsuHogo", txtSeikatsuHogo);
+        this.setOriginalData("txtJigyoshaCode", txtJigyoshaCode);
+        this.setOriginalData("txtServiceCode", txtServiceCode);
+        this.setOriginalData("txtRirekiNo", txtRirekiNo);
         this.txtService = txtService;
         this.txtKanrisha = txtKanrisha;
         this.txtJigyoKaishiYMD = txtJigyoKaishiYMD;
@@ -78,6 +90,9 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
         this.txtTorokuShuryoYMD = txtTorokuShuryoYMD;
         this.txtJuryoInin = txtJuryoInin;
         this.txtSeikatsuHogo = txtSeikatsuHogo;
+        this.txtJigyoshaCode = txtJigyoshaCode;
+        this.txtServiceCode = txtServiceCode;
+        this.txtRirekiNo = txtRirekiNo;
     }
 
     public RString getTxtService() {
@@ -118,6 +133,18 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
 
     public RString getTxtSeikatsuHogo() {
         return txtSeikatsuHogo;
+    }
+
+    public RString getTxtJigyoshaCode() {
+        return txtJigyoshaCode;
+    }
+
+    public RString getTxtServiceCode() {
+        return txtServiceCode;
+    }
+
+    public RString getTxtRirekiNo() {
+        return txtRirekiNo;
     }
 
     public void setTxtService(RString txtService) {
@@ -168,6 +195,21 @@ public class dgTokubetsuKyufuJigyoshaDetailServiceList_Row extends DataRow {
     public void setTxtSeikatsuHogo(RString txtSeikatsuHogo) {
         this.setOriginalData("txtSeikatsuHogo", txtSeikatsuHogo);
         this.txtSeikatsuHogo = txtSeikatsuHogo;
+    }
+
+    public void setTxtJigyoshaCode(RString txtJigyoshaCode) {
+        this.setOriginalData("txtJigyoshaCode", txtJigyoshaCode);
+        this.txtJigyoshaCode = txtJigyoshaCode;
+    }
+
+    public void setTxtServiceCode(RString txtServiceCode) {
+        this.setOriginalData("txtServiceCode", txtServiceCode);
+        this.txtServiceCode = txtServiceCode;
+    }
+
+    public void setTxtRirekiNo(RString txtRirekiNo) {
+        this.setOriginalData("txtRirekiNo", txtRirekiNo);
+        this.txtRirekiNo = txtRirekiNo;
     }
 
     // </editor-fold>

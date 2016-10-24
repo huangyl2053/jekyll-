@@ -147,6 +147,10 @@ public class HanyoListBatchParamHandler {
      */
     public void onClick_btnBatchParameterRestore() {
         BatchParameterMap restoreBatchParameterMap = div.getJokenFukugenHozonl().getBtnBatchParameterRestore().getRestoreBatchParameterMap();
+        Long 出力順ID = restoreBatchParameterMap.getParameterValue(Long.class, new RString("出力順ID"));
+        if (出力順ID != null) {
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701020.getReportId(), 出力順ID);
+        }
         List<RString> 編集方法 = new ArrayList<>();
         boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("is項目名付加"));
         if (is項目名付加) {

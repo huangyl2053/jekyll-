@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.exclusivekey.DbaExclusiveKey;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.ShikakuTokusoChecker;
-import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.sikakuidouteisei.ShikakuRirekiJoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuIdoTotalDiv;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -356,7 +356,7 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         if (hihokenshaNo == null) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         } else if (任意手入力付番.equals(DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_付番方法, RDate.getNowDate(), SubGyomuCode.DBA介護資格))
-                   && hihokenshaNo.isEmpty()) {
+                && hihokenshaNo.isEmpty()) {
             div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtHihoNo().setDisplayNone(false);
         } else if (!hihokenshaNo.isEmpty()) {
             div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtHihoNo().setDisplayNone(true);
@@ -424,15 +424,15 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
 
     private LasdecCode get市町村コード(ShichosonSecurityJoho 市町村情報セキュリティ情報) {
         if (new RString("111").equals(市町村情報セキュリティ情報.get導入形態コード().value())
-            || new RString("112").equals(市町村情報セキュリティ情報.get導入形態コード().value())
-            || new RString("211").equals(市町村情報セキュリティ情報.get導入形態コード().value())) {
+                || new RString("112").equals(市町村情報セキュリティ情報.get導入形態コード().value())
+                || new RString("211").equals(市町村情報セキュリティ情報.get導入形態コード().value())) {
             IHistoryIterator<IShikibetsuTaisho> ite = div.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
                     .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().getAll();
             if (ite.hasPrevious()) {
                 return ite.previous().get現全国地方公共団体コード();
             }
         } else if (new RString("120").equals(市町村情報セキュリティ情報.get導入形態コード().value())
-                   || new RString("220").equals(市町村情報セキュリティ情報.get導入形態コード().value())) {
+                || new RString("220").equals(市町村情報セキュリティ情報.get導入形態コード().value())) {
             KoikiShichosonJohoFinder johoFinder = KoikiShichosonJohoFinder.createInstance();
             List<KoikiZenShichosonJoho> johoList = johoFinder.koseiShichosonJoho().records();
             return johoList.get(0).get市町村コード();

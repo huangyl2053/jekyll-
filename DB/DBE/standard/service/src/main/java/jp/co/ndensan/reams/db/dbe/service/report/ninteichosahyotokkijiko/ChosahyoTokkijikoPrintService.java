@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyotokkijiko.Chosahyo
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReport;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
@@ -19,18 +20,19 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
  */
 public class ChosahyoTokkijikoPrintService {
 
-/**
+    /**
      * 要介護認定調査票（特記事項）を印刷します。
      *
      * @param business 要介護認定調査票（特記事項）作成_帳票クラスパラメータクラス
+     * @param id 帳票ID
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(ChosahyoTokkijikoBusiness business) {
-        ChosahyoTokkijikoProperty property = new ChosahyoTokkijikoProperty();
-        return new Printer<ChosahyoTokkijikoReportSource>().spool(property, toReports(business));
+    public SourceDataCollection print(ChosahyoTokkijikoBusiness business, ReportId id) {
+        ChosahyoTokkijikoProperty property = new ChosahyoTokkijikoProperty(id);
+        return new Printer<ChosahyoTokkijikoReportSource>().spool(property, toReports(business, id));
     }
 
-    private static ChosahyoTokkijikoReport toReports(ChosahyoTokkijikoBusiness business) {
-        return new ChosahyoTokkijikoReport(business);
+    private static ChosahyoTokkijikoReport toReports(ChosahyoTokkijikoBusiness business, ReportId id) {
+        return new ChosahyoTokkijikoReport(business, id);
     }
 }

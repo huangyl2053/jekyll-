@@ -20,16 +20,19 @@ public class KyufuJissekiInProcessParameter implements IBatchProcessParameter {
 
     private final RString 保存先フォルダ;
     private final RString csvファイル名;
+    private final RString 出力順ID;
 
     /**
      * コンストラクタです。
      *
      * @param 保存先フォルダ 保存先フォルダ
      * @param csvファイル名 csvファイル名
+     * @param 出力順ID 出力順ID
      */
     public KyufuJissekiInProcessParameter(RString 保存先フォルダ,
-            RString csvファイル名) {
+            RString csvファイル名, RString 出力順ID) {
         this.保存先フォルダ = 保存先フォルダ;
         this.csvファイル名 = csvファイル名;
+        this.出力順ID = 出力順ID;
     }
 }

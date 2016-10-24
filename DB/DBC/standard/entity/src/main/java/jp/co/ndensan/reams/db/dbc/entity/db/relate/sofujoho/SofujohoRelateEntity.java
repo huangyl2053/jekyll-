@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.sofujoho;
 
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,4 +28,5 @@ public class SofujohoRelateEntity {
     private FlexibleYearMonth サービス提供年月;
     private FlexibleDate 申立年月日;
     private RString 証記載保険者番号;
+    private UaFt200FindShikibetsuTaishoEntity psmEntity;
 }

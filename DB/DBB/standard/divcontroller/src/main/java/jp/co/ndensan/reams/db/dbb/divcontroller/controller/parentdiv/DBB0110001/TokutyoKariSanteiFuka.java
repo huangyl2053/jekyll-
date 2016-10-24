@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0110001
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011001.DBB011001_TokuchoKarisanteiFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011003.DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001.DBB0110001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001.TokutyoKariSanteiFukaDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0110001.TokutyoKariSanteiFukaHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0110001.TokutyoKariSanteiFukaValidationHandler;
@@ -38,9 +39,11 @@ public class TokutyoKariSanteiFuka {
         TokutyoKariSanteiFukaHandler handler = getHandler(div);
         handler.initialize();
         if (DBBMN33001.equals(ResponseHolder.getMenuID())) {
-            return ResponseData.of(div).rootTitle(特徴仮算定賦課).respond();
+            return ResponseData.of(ResponseData.of(div).setState(
+                    DBB0110001StateName.特徴仮算定賦課).data).rootTitle(特徴仮算定賦課).respond();
         } else if (DBBMN33002.equals(ResponseHolder.getMenuID())) {
-            return ResponseData.of(div).rootTitle(特徴仮算定通知書一括発行).respond();
+            return ResponseData.of(ResponseData.of(div).setState(
+                    DBB0110001StateName.通知書一括発行).data).rootTitle(特徴仮算定通知書一括発行).respond();
         } else {
             return ResponseData.of(div).respond();
         }

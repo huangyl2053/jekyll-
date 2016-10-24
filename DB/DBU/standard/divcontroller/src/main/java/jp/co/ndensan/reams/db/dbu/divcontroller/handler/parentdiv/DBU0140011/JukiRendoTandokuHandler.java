@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0140011;
 
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyotruku.KaigojuminHyotrukuBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU040010.DBU040010_JuminkirokuIdojohoToroku_TashaParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0140011.JukiRendoTandokuDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -60,8 +60,8 @@ public class JukiRendoTandokuHandler {
      *
      * @return KaigojuminHyotrukuBatchParameter
      */
-    public KaigojuminHyotrukuBatchParameter setBatchParameter() {
-        KaigojuminHyotrukuBatchParameter parameter = new KaigojuminHyotrukuBatchParameter();
+    public DBU040010_JuminkirokuIdojohoToroku_TashaParameter setBatchParameter() {
+        DBU040010_JuminkirokuIdojohoToroku_TashaParameter parameter = new DBU040010_JuminkirokuIdojohoToroku_TashaParameter();
 
         parameter.setShoriTimestamp(RDateTime.now());
         return parameter;

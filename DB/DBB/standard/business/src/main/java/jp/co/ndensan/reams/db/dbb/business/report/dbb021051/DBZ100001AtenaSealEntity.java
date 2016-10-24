@@ -40,6 +40,9 @@ public class DBZ100001AtenaSealEntity {
     private RString 右括号2;
     private RString バーコード住所;
     private ShikibetsuCode 識別コード;
+    private RString chk住所;
+    private RString chk氏名;
+    private RString chk方書;
 
     /**
      * DBZ100001AtenaSealEntityのコンストラクタです。
@@ -65,6 +68,9 @@ public class DBZ100001AtenaSealEntity {
         this.右括号2 = EMPTY;
         this.バーコード住所 = EMPTY;
         this.識別コード = ShikibetsuCode.EMPTY;
+        this.chk住所 = EMPTY;
+        this.chk氏名 = EMPTY;
+        this.chk方書 = EMPTY;
     }
 
 }

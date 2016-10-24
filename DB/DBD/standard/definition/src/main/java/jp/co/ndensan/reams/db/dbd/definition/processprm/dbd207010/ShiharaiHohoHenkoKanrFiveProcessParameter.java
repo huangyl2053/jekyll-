@@ -88,10 +88,11 @@ public class ShiharaiHohoHenkoKanrFiveProcessParameter implements IBatchProcessP
      * DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス5SQL用パラメターを取得します．
      *
      * @param shikibetsutaishoParam 宛名識別対象PSM
+     * @param 出力順 出力順
      * @return DBDMN32001_2_支払方法変更滞納者把握リスト作成_バッチプロセス5
      */
     public ShiharaiHohoHenkoHaakuFiveMybatisParameter toShiharaiHohoHenkoHaakuFiveMybatisParameter(
-            UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam) {
-        return new ShiharaiHohoHenkoHaakuFiveMybatisParameter(shikibetsutaishoParam, 基準日);
+            UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam, RString 出力順) {
+        return new ShiharaiHohoHenkoHaakuFiveMybatisParameter(shikibetsutaishoParam, 基準日, 出力順);
     }
 }

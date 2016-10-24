@@ -216,9 +216,11 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .setValue((param.get理由書作成事業者番号() == null || param.get理由書作成事業者番号().isEmpty())
                         ? RString.EMPTY : param.get理由書作成事業者番号().value());
 
-        AtenaMeisho 作成事業者名称 = JutakuKaishuJizenShinsei.createInstance().getJigyoshaName(param.get理由書作成事業者番号());
-        div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason().getTxtCreationJigyoshaName()
-                .setValue((作成事業者名称 == null || 作成事業者名称.isEmpty()) ? RString.EMPTY : 作成事業者名称.value());
+        if (param.get理由書作成事業者番号() != null && !param.get理由書作成事業者番号().isEmpty()) {
+            AtenaMeisho 作成事業者名称 = JutakuKaishuJizenShinsei.createInstance().getJigyoshaName(param.get理由書作成事業者番号());
+            div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason().getTxtCreationJigyoshaName()
+                    .setValue((作成事業者名称 == null || 作成事業者名称.isEmpty()) ? RString.EMPTY : 作成事業者名称.value());
+        }
         div.setHidShinseiJyohoFlg(初期化済み);
     }
 
@@ -1216,8 +1218,11 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         builder.set申請者郵便番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtYubinNo().getValue());
         builder.set申請者住所(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtAddress().getDomain().value());
         builder.set申請者電話番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtTelNo().getDomain());
-        builder.set申請事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
-                .getTxtJigyoshaNo().getValue()));
+        final JigyoshaNo 申請事業者番号 = new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
+                .getTxtJigyoshaNo().getValue());
+        if (!申請事業者番号.isEmpty()) {
+            builder.set申請事業者番号(申請事業者番号);
+        }
         if (div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreateYMD().getValue() != null) {
             builder.set理由書作成日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
@@ -1227,8 +1232,11 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTxtCreatorName().getDomain().value());
         builder.set理由書作成者カナ(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreatorKanaName().getDomain().value());
-        builder.set理由書作成事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
-                .getTxtCreationJigyoshaNo().getValue()));
+        final JigyoshaNo 理由書作成事業者番号 = new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
+                .getTxtCreationJigyoshaNo().getValue());
+        if (!理由書作成事業者番号.isEmpty()) {
+            builder.set理由書作成事業者番号(理由書作成事業者番号);
+        }
         RString 支払方法区分コード = div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                 .getCcdJutakuKaishuJizenShinseiKoza().getShiharaiHohoRad();
         builder.set支払方法区分コード(支払方法区分コード);
@@ -1342,8 +1350,11 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         builder.set申請者郵便番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtYubinNo().getValue());
         builder.set申請者住所(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtAddress().getDomain().value());
         builder.set申請者電話番号(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtTelNo().getDomain());
-        builder.set申請事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
-                .getTxtJigyoshaNo().getValue()));
+        JigyoshaNo 申請事業者番号 = new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
+                .getTxtJigyoshaNo().getValue());
+        if (!申請事業者番号.isEmpty()) {
+            builder.set申請事業者番号(申請事業者番号);
+        }
         if (div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason().getTxtCreateYMD().getValue() != null) {
             builder.set理由書作成日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                     .getTxtCreateYMD().getValue().toDateString()));
@@ -1352,8 +1363,11 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTxtCreatorName().getDomain().value());
         builder.set理由書作成者カナ(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreatorKanaName().getDomain().value());
-        builder.set理由書作成事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
-                .getTxtCreationJigyoshaNo().getValue()));
+        JigyoshaNo 理由書作成事業者番号 = new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
+                .getTxtCreationJigyoshaNo().getValue());
+        if (!理由書作成事業者番号.isEmpty()) {
+            builder.set理由書作成事業者番号(理由書作成事業者番号);
+        }
         RString 支払方法区分コード = div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                 .getCcdJutakuKaishuJizenShinseiKoza().getShiharaiHohoRad();
         builder.set支払方法区分コード(支払方法区分コード);

@@ -26,5 +26,7 @@ public class TokuchoTaishoshaIchiranSakuseiResult {
     private List<RString> 捕捉月リスト;
     private RString 出力対象;
     private boolean 確認状況区分;
+    private RString 同定出力順ID;
+    private RString 未同定出力順ID;
 
 }

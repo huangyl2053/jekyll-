@@ -41,11 +41,13 @@ public final class JushoHenshu {
      * @param 帳票共通情報 帳票共通情報
      * @param 宛名情報 宛名情報
      * @param 地方公共団体 地方公共団体
-     * @return 帳票制御共通情報
+     * @return 編集した住所
      */
     public static RString editJusho(ChohyoSeigyoKyotsu 帳票共通情報, IShikibetsuTaisho 宛名情報, Association 地方公共団体) {
         JushoEditorBuilder jushoEditorBuilder = new JushoEditorBuilder(宛名情報.get住所());
-        jushoEditorBuilder.set管内住所接頭辞(JushoHenshu.getJushoPrefix(帳票共通情報), 地方公共団体);
+        if (宛名情報.is住登内() && 地方公共団体 != null) {
+            jushoEditorBuilder.set管内住所接頭辞(JushoHenshu.getJushoPrefix(帳票共通情報), 地方公共団体);
+        }
         set管内住所編集パターン(jushoEditorBuilder, 帳票共通情報);
         jushoEditorBuilder.set管外住所編集パターン(JushoHenshu.getJushoKangaiEditPattern(帳票共通情報));
         jushoEditorBuilder.set行政区(宛名情報.get行政区画().getGyoseiku());

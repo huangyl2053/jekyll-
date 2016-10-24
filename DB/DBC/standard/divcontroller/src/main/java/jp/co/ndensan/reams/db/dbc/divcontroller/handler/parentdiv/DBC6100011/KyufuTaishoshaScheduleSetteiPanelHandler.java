@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC6100011.KyufuTaishoshaScheduleSetteiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC6100011.dgScheduleList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiKyufuTaishoshaScheduleSettei;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -286,7 +285,7 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
                             DbcErrorMessages.設定不能状態への変更.getMessage().evaluate());
                     return ResponseData.of(div).addMessage(message).respond();
                 }
-                if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                if (new RString(DbcErrorMessages.設定不能状態への変更.getMessage().getCode())
                         .equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                     return ResponseData.of(div).respond();

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA3030011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.IryoHokenJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuteisei.IryoHokenJoho;
 import jp.co.ndensan.reams.db.dba.business.core.iryohokenkanyujokyo.IryohokenKanyuJokyoBusiness;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA3030011.IryohokenKanyuJokyoDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

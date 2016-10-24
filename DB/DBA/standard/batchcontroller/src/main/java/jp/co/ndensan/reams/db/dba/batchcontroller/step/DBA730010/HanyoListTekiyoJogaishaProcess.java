@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaResult;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba730010.HanyoListTekiyoJogaishaProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaCsvEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaRelateEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMas
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
@@ -26,9 +28,13 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -68,6 +74,7 @@ public class HanyoListTekiyoJogaishaProcess extends BatchProcessBase<HanyoListTe
     private static final RString FILENAME = new RString("HanyoList_TekiyoJogaisha.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final int NUM5 = 5;
     private HanyoListTekiyoJogaishaProcessParameter processParamter;
     private FileSpoolManager manager;
     private RString eucFilePath;
@@ -140,7 +147,8 @@ public class HanyoListTekiyoJogaishaProcess extends BatchProcessBase<HanyoListTe
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBA介護資格));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toHanyoListTekiyoJogaishaMybatisParameter(psmShikibetsuTaisho, psmAtesaki));
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toHanyoListTekiyoJogaishaMybatisParameter(
+                psmShikibetsuTaisho, psmAtesaki, get出力順()));
     }
 
     @Override
@@ -165,9 +173,9 @@ public class HanyoListTekiyoJogaishaProcess extends BatchProcessBase<HanyoListTe
 
     @Override
     protected void afterExecute() {
-        if (eucCsvWriter.getCount() == 0) {
-            eucCsvWriter.writeLine(setBlank());
-        }
+//        if (eucCsvWriter.getCount() == 0) {
+//            eucCsvWriter.writeLine(setBlank());
+//        }
         eucCsvWriter.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         manager.spool(eucFilePath, log);
@@ -272,5 +280,17 @@ public class HanyoListTekiyoJogaishaProcess extends BatchProcessBase<HanyoListTe
                     entity.get被保険者番号());
             return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode(), expandedInfo);
         }
+    }
+
+    private RString get出力順() {
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701003.getReportId(),
+                processParamter.getShutsuryokujunId());
+        RString 出力順 = RString.EMPTY;
+        if (outputOrder != null) {
+            出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(
+                    HanyoListTekiyoJogaishaResult.ShutsuryokujunEnum.class, outputOrder), NUM5);
+        }
+        return 出力順;
     }
 }

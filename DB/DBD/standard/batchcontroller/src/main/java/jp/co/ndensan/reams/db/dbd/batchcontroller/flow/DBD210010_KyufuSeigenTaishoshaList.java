@@ -100,7 +100,6 @@ public class DBD210010_KyufuSeigenTaishoshaList extends BatchFlowBase<DBD210010_
     }
 
     private ShunoJokyoHaakuProcessParameter createShunoJokyoHaakuProcessParameter() {
-        ShunoJokyoHaakuProcessParameter processParameter = new ShunoJokyoHaakuProcessParameter(FlexibleDate.getNowDate());
-        return processParameter;
+        return new ShunoJokyoHaakuProcessParameter(FlexibleDate.getNowDate());
     }
 }

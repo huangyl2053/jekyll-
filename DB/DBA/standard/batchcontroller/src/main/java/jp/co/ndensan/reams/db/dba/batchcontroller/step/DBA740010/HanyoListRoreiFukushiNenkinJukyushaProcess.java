@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaResult;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba740010.HanyoListRoreiFukushiNenkinJukyushaProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.euc.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
@@ -71,6 +73,7 @@ public class HanyoListRoreiFukushiNenkinJukyushaProcess extends BatchProcessBase
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString コンマ = new RString("、");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString ORDERBYCLAUSE = new RString("order by ");
     private HanyoListRoreiFukushiNenkinJukyushaProcessParameter processParamter;
     private FileSpoolManager manager;
     private RString eucFilePath;
@@ -142,8 +145,15 @@ public class HanyoListRoreiFukushiNenkinJukyushaProcess extends BatchProcessBase
 
     @Override
     protected IBatchReader createReader() {
+        RString 出力順 = ReportUtil.get出力順情報(HanyoListRoreiFukushiNenkinJukyushaResult.ShutsuryokujunEnum.class,
+                SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701004.getReportId(),
+                processParamter.getShutsuryokujunId()).get出力順OrderBy();
+        if (!RString.isNullOrEmpty(出力順)) {
+            出力順 = 出力順.replace(ORDERBYCLAUSE, EUC_WRITER_DELIMITER);
+        }
         return new BatchDbReader(MYBATIS_SELECT_ID,
-                processParamter.toHanyoListRoreiFukushiNenkinJukyushaMybatisParameter(psmShikibetsuTaisho, psmAtesaki));
+                processParamter.toHanyoListRoreiFukushiNenkinJukyushaMybatisParameter(psmShikibetsuTaisho, psmAtesaki,
+                        出力順));
     }
 
     @Override

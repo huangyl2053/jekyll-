@@ -225,10 +225,8 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         div.getTxtHiHokenshaShoNo().setReadOnly(flg);
         div.getTxtJikoFutanSeiriNom().setReadOnly(flg);
         div.getTxtOver70Futangaku().setReadOnly(flg);
-        div.getTxtOver70AmbunRitsu().setReadOnly(flg);
         div.getTxtOver70Shikyugaku().setReadOnly(flg);
         div.getTxtUnder70Futangaku().setReadOnly(flg);
-        div.getTxtAmbunRitsu().setReadOnly(flg);
         div.getTxtUnder70Shikyugaku().setReadOnly(flg);
         div.getTxtOver70Biko().setReadOnly(flg);
         div.getTxtUnder70Biko().setReadOnly(flg);
@@ -337,10 +335,8 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         div.getTxtHiHokenshaShoNo().setReadOnly(flg);
         div.getTxtJikoFutanSeiriNom().setReadOnly(flg);
         div.getTxtOver70Futangaku().setReadOnly(flg);
-        div.getTxtOver70AmbunRitsu().setReadOnly(flg);
         div.getTxtOver70Shikyugaku().setReadOnly(flg);
         div.getTxtUnder70Futangaku().setReadOnly(flg);
-        div.getTxtAmbunRitsu().setReadOnly(flg);
         div.getTxtUnder70Shikyugaku().setReadOnly(flg);
         div.getTxtOver70Biko().setReadOnly(flg);
         div.getTxtUnder70Biko().setReadOnly(flg);
@@ -484,7 +480,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
             KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果, RString 状態) {
         return 支給額計算結果.createBuilderForEdit()
                 .set保険制度コード(追加.equals(状態) ? KaigoGassan_HokenSeido.介護.getCode()
-                        : div.getDdlHokenSeido().getSelectedKey())
+                        : 支給額計算結果.get保険制度コード())
                 .set自己負担額証明書整理番号(div.getTxtJikoFutanSeiriNo().getValue())
                 .set対象計算期間開始年月日(rDateToFixibleDate(div.getTxtTaishoKeisanKikan().getFromValue()))
                 .set対象計算期間終了年月日(rDateToFixibleDate(div.getTxtTaishoKeisanKikan().getToValue()))
@@ -785,7 +781,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
         div.getTxtTsuchiYMD().setValue(flexibleDateToRDate(支給額計算結果.get通知年月日()));
         div.getTxtRenrakuhyoHakkoshaMei().setValue(支給額計算結果.get連絡票発行者名() == null
                 ? null : 支給額計算結果.get連絡票発行者名().getColumnValue());
-        div.getTxtRenrakuhyoHakkoshaYubinNo().setValue(支給額計算結果.get支給額計算結果連絡先郵便番号());
+        div.getTxtRenrakuhyoHakkoshaYubinNo().setValue(支給額計算結果.get連絡票発行者郵便番号());
         div.getTxtRenrakuhyoHakkoshaJusho().setValue(支給額計算結果.get連絡票発行者住所());
         div.getTxtToiawasesakiMeisho1().setValue(支給額計算結果.get問い合わせ先名称1());
         div.getTxtToiawasesakiYobinNo().setValue(支給額計算結果.get問い合わせ先郵便番号());

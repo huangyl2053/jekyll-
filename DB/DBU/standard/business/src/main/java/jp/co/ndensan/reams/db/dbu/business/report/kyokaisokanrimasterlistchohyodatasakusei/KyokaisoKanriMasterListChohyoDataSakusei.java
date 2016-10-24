@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlistchohyodatasakusei;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoKanriMasterListChohyoDataSakuseiEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisogGaitoshaListEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisogGaitoshaRelateEntity;
@@ -36,50 +34,52 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class KyokaisoKanriMasterListChohyoDataSakusei {
 
-    private static final int NOCOUNT_20 = 20;
     private static final RString 男 = new RString("1");
     private static final RString 解除する = new RString("1");
     private static final RString 性別_男 = new RString("男");
     private static final RString 性別_女 = new RString("女");
     private static final RString 給付額減額記載解除フラグ_解除する = new RString("解除する");
+    private static final int 並び順1 = 0;
+    private static final int 並び順2 = 1;
+    private static final int 並び順3 = 2;
+    private static final int 並び順4 = 3;
+    private static final int 並び順5 = 4;
+    private static final int 改頁1 = 0;
+    private static final int 改頁2 = 1;
+    private static final int 改頁3 = 2;
+    private static final int 改頁4 = 3;
+    private static final int 改頁5 = 4;
 
     /**
-     *
      * @param kyokaisogGaitoshaListEntity kyokaisogGaitoshaListEntity
+     * @param entity KyokaisogGaitoshaRelateEntity
      *
      * @return 境界層管理マスタリスト帳票ソースデータリスト。
-     *
      */
-    //TODO QA#73393 改頁 ,並び順取得。
-    public List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> getcreateNenreiToutatsuYoteishaCheckListChohyo(
-            KyokaisogGaitoshaListEntity kyokaisogGaitoshaListEntity) {
-        List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> 境界層管理マスタリスト帳票ソースデータリスト = new ArrayList<>();
-        if (kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList() == null
-                || 0 == kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList().size()) {
-            KyokaisoKanriMasterListChohyoDataSakuseiEntity chohyoDataEntity = 帳票用データリスト(kyokaisogGaitoshaListEntity);
-            境界層管理マスタリスト帳票ソースデータリスト.add(chohyoDataEntity);
+    public KyokaisoKanriMasterListChohyoDataSakuseiEntity getcreateNenreiToutatsuYoteishaCheckListChohyo(
+            KyokaisogGaitoshaListEntity kyokaisogGaitoshaListEntity, KyokaisogGaitoshaRelateEntity entity) {
+        KyokaisoKanriMasterListChohyoDataSakuseiEntity 帳票ソースデータ = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
+        if (entity == null) {
+            帳票ソースデータ = 帳票用データリスト(kyokaisogGaitoshaListEntity);
         } else {
-            境界層管理マスタリスト帳票ソースデータリスト = get境界層管理マスタリスト分割処理(kyokaisogGaitoshaListEntity);
-            int pageCount = 1;
-            for (KyokaisoKanriMasterListChohyoDataSakuseiEntity データリスト : 境界層管理マスタリスト帳票ソースデータリスト) {
-                データリスト.set印刷日時(get印刷日時());
-                データリスト.setページ数(new RString(String.valueOf(pageCount)));
-                データリスト.set市町村コード(kyokaisogGaitoshaListEntity.get市町村コード());
-                データリスト.set市町村名(kyokaisogGaitoshaListEntity.get市町村名());
-                データリスト.set並び順1(null);
-                データリスト.set並び順2(null);
-                データリスト.set並び順3(null);
-                データリスト.set並び順4(null);
-                データリスト.set並び順5(null);
-                データリスト.set改頁1(null);
-                データリスト.set改頁2(null);
-                データリスト.set改頁3(null);
-                データリスト.set改頁4(null);
-                データリスト.set改頁5(null);
-                pageCount++;
-            }
+            帳票ソースデータ = get境界層管理マスタリスト分割処理(entity);
+            帳票ソースデータ.set印刷日時(get印刷日時());
+            帳票ソースデータ.setページ数(RString.EMPTY);
+            帳票ソースデータ.set市町村コード(kyokaisogGaitoshaListEntity.get市町村コード());
+            帳票ソースデータ.set市町村名(kyokaisogGaitoshaListEntity.get市町村名());
+            帳票ソースデータ.set並び順1(kyokaisogGaitoshaListEntity.get並び順().get(並び順1));
+            帳票ソースデータ.set並び順2(kyokaisogGaitoshaListEntity.get並び順().get(並び順2));
+            帳票ソースデータ.set並び順3(kyokaisogGaitoshaListEntity.get並び順().get(並び順3));
+            帳票ソースデータ.set並び順4(kyokaisogGaitoshaListEntity.get並び順().get(並び順4));
+            帳票ソースデータ.set並び順5(kyokaisogGaitoshaListEntity.get並び順().get(並び順5));
+            帳票ソースデータ.set改頁1(kyokaisogGaitoshaListEntity.get改頁().get(改頁1));
+            帳票ソースデータ.set改頁2(kyokaisogGaitoshaListEntity.get改頁().get(改頁2));
+            帳票ソースデータ.set改頁3(kyokaisogGaitoshaListEntity.get改頁().get(改頁3));
+            帳票ソースデータ.set改頁4(kyokaisogGaitoshaListEntity.get改頁().get(改頁4));
+            帳票ソースデータ.set改頁5(kyokaisogGaitoshaListEntity.get改頁().get(改頁5));
+
         }
-        return 境界層管理マスタリスト帳票ソースデータリスト;
+        return 帳票ソースデータ;
     }
 
     /**
@@ -106,24 +106,23 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         return systemDateTime.toRString();
     }
 
-    private static KyokaisoKanriMasterListChohyoDataSakuseiEntity
+    private KyokaisoKanriMasterListChohyoDataSakuseiEntity
             帳票用データリスト(KyokaisogGaitoshaListEntity kyokaisogGaitoshaListEntity) {
         KyokaisoKanriMasterListChohyoDataSakuseiEntity chohyoDataEntity = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
         chohyoDataEntity.set印刷日時(get印刷日時());
         chohyoDataEntity.setページ数(new RString("1"));
         chohyoDataEntity.set市町村コード(kyokaisogGaitoshaListEntity.get市町村コード());
         chohyoDataEntity.set市町村名(kyokaisogGaitoshaListEntity.get市町村名());
-        //TODO QA#73393 改頁 ,並び順取得。
-        chohyoDataEntity.set並び順1(kyokaisogGaitoshaListEntity.get並び順());
-        chohyoDataEntity.set並び順2(null);
-        chohyoDataEntity.set並び順3(null);
-        chohyoDataEntity.set並び順4(null);
-        chohyoDataEntity.set並び順5(null);
-        chohyoDataEntity.set改頁1(kyokaisogGaitoshaListEntity.get改頁());
-        chohyoDataEntity.set改頁2(null);
-        chohyoDataEntity.set改頁3(null);
-        chohyoDataEntity.set改頁4(null);
-        chohyoDataEntity.set改頁5(null);
+        chohyoDataEntity.set並び順1(kyokaisogGaitoshaListEntity.get並び順().get(並び順1));
+        chohyoDataEntity.set並び順2(kyokaisogGaitoshaListEntity.get並び順().get(並び順2));
+        chohyoDataEntity.set並び順3(kyokaisogGaitoshaListEntity.get並び順().get(並び順3));
+        chohyoDataEntity.set並び順4(kyokaisogGaitoshaListEntity.get並び順().get(並び順4));
+        chohyoDataEntity.set並び順5(kyokaisogGaitoshaListEntity.get並び順().get(並び順5));
+        chohyoDataEntity.set改頁1(kyokaisogGaitoshaListEntity.get改頁().get(改頁1));
+        chohyoDataEntity.set改頁2(kyokaisogGaitoshaListEntity.get改頁().get(改頁2));
+        chohyoDataEntity.set改頁3(kyokaisogGaitoshaListEntity.get改頁().get(改頁3));
+        chohyoDataEntity.set改頁4(kyokaisogGaitoshaListEntity.get改頁().get(改頁4));
+        chohyoDataEntity.set改頁5(kyokaisogGaitoshaListEntity.get改頁().get(改頁5));
         return chohyoDataEntity;
     }
 
@@ -132,170 +131,78 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
      * 境界層管理マスタリスト分割処理です。
      *
      */
-    private List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> get境界層管理マスタリスト分割処理(
-            KyokaisogGaitoshaListEntity kyokaisogGaitoshaListEntity) {
-        //TODO QA#73393 改頁 ,並び順取得　　List<境界層管理マスタリスト>を引数.並び順でソートする
-        int nocount = 0;
-        List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> 境界層管理マスタ帳票用データリスト = new ArrayList<>();
-        List<KyokaisogGaitoshaRelateEntity> 境界層管理マスタリスト = kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList();
-        List<RString> 被保険者番号 = new ArrayList<>();
-        List<RString> 識別コード = new ArrayList<>();
-        List<RString> カナ氏名 = new ArrayList<>();
-        List<RString> 氏名 = new ArrayList<>();
-        List<RString> 性別 = new ArrayList<>();
-        List<RString> 種別 = new ArrayList<>();
-        List<RString> 状態 = new ArrayList<>();
-        List<RString> 世帯コード = new ArrayList<>();
-        List<RString> 生年月日 = new ArrayList<>();
-        List<RString> 該当申請日 = new ArrayList<>();
-        List<RString> 該当開始日 = new ArrayList<>();
-        List<RString> 該当終了日 = new ArrayList<>();
-        List<RString> 給付額減額解除 = new ArrayList<>();
-        List<RString> 標準負担減額後負担額 = new ArrayList<>();
-        List<RString> 居住費軽減後居室種類 = new ArrayList<>();
-        List<RString> 居住費軽減後負担額 = new ArrayList<>();
-        List<RString> 食費軽減後負担額 = new ArrayList<>();
-        List<RString> 高額ｻｰﾋﾞｽ費減額後上限額 = new ArrayList<>();
-        List<RString> 保険料納付減額後保険料段階 = new ArrayList<>();
-        for (KyokaisogGaitoshaRelateEntity entity : 境界層管理マスタリスト) {
-            被保険者番号.add(entity.getHihokenshaNo().value());
-            識別コード.add(nullToEmpty(entity.getShikibetsuCode().value()));
-            カナ氏名.add(nullToEmpty(entity.getKanaShimei()));
-            氏名.add(nullToEmpty(entity.getMeisho()));
-            if (男.equals(nullToEmpty(entity.getSeibetsuCode()))) {
-                性別.add(性別_男);
-            } else {
-                性別.add(性別_女);
-            }
-            種別.add(entity.getJuminShubetsuCode() == null
-                    ? RString.EMPTY : JuminShubetsu.toValue(entity.getJuminShubetsuCode()).toRString());
-            状態.add(entity.getJuminJotaiCode() == null
-                    ? RString.EMPTY : JuminJotai.toValue(entity.getJuminJotaiCode()).住民状態略称());
-            if (entity.getSetaiCode() != null) {
-                世帯コード.add(nullToEmpty(entity.getSetaiCode().value()));
-            } else {
-                世帯コード.add(null);
-            }
-            生年月日.add(共通ポリシfomart(entity.getSeinengappiYMD()));
-            該当申請日.add(共通ポリシfomart(entity.getShinseiYMD()));
-            該当開始日.add(共通ポリシfomart(entity.getTekiyoKaishiYMD()));
-            該当終了日.add(共通ポリシfomart(entity.getTekiyoShuryoYMD()));
-            if (解除する.equals(nullToEmpty(entity.getKyuufugakuGengakuKisaiKiajoFlag()))) {
-                給付額減額解除.add(給付額減額記載解除フラグ_解除する);
-            } else {
-                給付額減額解除.add(RString.EMPTY);
-            }
-            if (entity.getHyojunFutanKeigengoFutangaku() != null) {
-                標準負担減額後負担額.add(new RString(DecimalFormatter.toコンマ区切りRString(entity.getHyojunFutanKeigengoFutangaku(), 0).toString()));
-            } else {
-                標準負担減額後負担額.add(null);
-            }
-            UzT0007CodeEntity 居室種類 = CodeMaster.getCode(SubGyomuCode.DBZ介護共通,
-                    DBZCodeShubetsu.居室種類.getコード(), new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode()), FlexibleDate.getNowDate());
-            if (居室種類 != null) {
-                居住費軽減後居室種類.add(new RString(居室種類.getコード名称().toString()));
-            } else {
-                居住費軽減後居室種類.add(null);
-            }
-            setlist(entity, 居住費軽減後負担額, 食費軽減後負担額, 高額ｻｰﾋﾞｽ費減額後上限額, 保険料納付減額後保険料段階);
-            if ((nocount + 1) % NOCOUNT_20 == 0) {
-                KyokaisoKanriMasterListChohyoDataSakuseiEntity データEntity
-                        = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
-                データEntity.set被保険者番号(被保険者番号);
-                データEntity.set識別コード(識別コード);
-                データEntity.setカナ氏名(カナ氏名);
-                データEntity.set氏名(氏名);
-                データEntity.set性別(性別);
-                データEntity.set種別(種別);
-                データEntity.set状態(状態);
-                データEntity.set世帯コード(世帯コード);
-                データEntity.set生年月日(生年月日);
-                データEntity.set該当申請日(該当申請日);
-                データEntity.set該当開始日(該当開始日);
-                データEntity.set該当終了日(該当終了日);
-                データEntity.set給付額減額解除(給付額減額解除);
-                データEntity.set標準負担減額後負担額(標準負担減額後負担額);
-                データEntity.set居住費軽減後居室種類(居住費軽減後居室種類);
-                データEntity.set居住費軽減後負担額(居住費軽減後負担額);
-                データEntity.set食費軽減後負担額(食費軽減後負担額);
-                データEntity.set高額ｻｰﾋﾞｽ費減額後上限額(高額ｻｰﾋﾞｽ費減額後上限額);
-                データEntity.set保険料納付減額後保険料段階(保険料納付減額後保険料段階);
-                境界層管理マスタ帳票用データリスト.add(データEntity);
-                被保険者番号 = new ArrayList<>();
-                識別コード = new ArrayList<>();
-                カナ氏名 = new ArrayList<>();
-                氏名 = new ArrayList<>();
-                性別 = new ArrayList<>();
-                種別 = new ArrayList<>();
-                状態 = new ArrayList<>();
-                世帯コード = new ArrayList<>();
-                生年月日 = new ArrayList<>();
-                該当申請日 = new ArrayList<>();
-                該当開始日 = new ArrayList<>();
-                該当終了日 = new ArrayList<>();
-                給付額減額解除 = new ArrayList<>();
-                標準負担減額後負担額 = new ArrayList<>();
-                居住費軽減後居室種類 = new ArrayList<>();
-                居住費軽減後負担額 = new ArrayList<>();
-                食費軽減後負担額 = new ArrayList<>();
-                高額ｻｰﾋﾞｽ費減額後上限額 = new ArrayList<>();
-                保険料納付減額後保険料段階 = new ArrayList<>();
-            } else if (境界層管理マスタリスト.size() == (nocount + 1)) {
-                KyokaisoKanriMasterListChohyoDataSakuseiEntity データEntity
-                        = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
-                データEntity.set被保険者番号(被保険者番号);
-                データEntity.set識別コード(識別コード);
-                データEntity.setカナ氏名(カナ氏名);
-                データEntity.set氏名(氏名);
-                データEntity.set性別(性別);
-                データEntity.set種別(種別);
-                データEntity.set状態(状態);
-                データEntity.set世帯コード(世帯コード);
-                データEntity.set生年月日(生年月日);
-                データEntity.set該当申請日(該当申請日);
-                データEntity.set該当開始日(該当開始日);
-                データEntity.set該当終了日(該当終了日);
-                データEntity.set給付額減額解除(給付額減額解除);
-                データEntity.set標準負担減額後負担額(標準負担減額後負担額);
-                データEntity.set居住費軽減後居室種類(居住費軽減後居室種類);
-                データEntity.set居住費軽減後負担額(居住費軽減後負担額);
-                データEntity.set食費軽減後負担額(食費軽減後負担額);
-                データEntity.set高額ｻｰﾋﾞｽ費減額後上限額(高額ｻｰﾋﾞｽ費減額後上限額);
-                データEntity.set保険料納付減額後保険料段階(保険料納付減額後保険料段階);
-                境界層管理マスタ帳票用データリスト.add(データEntity);
-            }
-            nocount++;
+    private KyokaisoKanriMasterListChohyoDataSakuseiEntity get境界層管理マスタリスト分割処理(
+            KyokaisogGaitoshaRelateEntity entity) {
+        KyokaisoKanriMasterListChohyoDataSakuseiEntity 帳票用データ = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
+        帳票用データ.set被保険者番号(entity.getHihokenshaNo().value());
+        帳票用データ.set識別コード(nullToEmpty(entity.getShikibetsuCode().value()));
+        帳票用データ.setカナ氏名(nullToEmpty(entity.getKanaShimei()));
+        帳票用データ.set氏名(nullToEmpty(entity.getMeisho()));
+        if (男.equals(nullToEmpty(entity.getSeibetsuCode()))) {
+            帳票用データ.set性別(性別_男);
+        } else {
+            帳票用データ.set性別(性別_女);
         }
-        return 境界層管理マスタ帳票用データリスト;
+        帳票用データ.set種別(entity.getJuminShubetsuCode() == null
+                ? RString.EMPTY : JuminShubetsu.toValue(entity.getJuminShubetsuCode()).toRString());
+        帳票用データ.set状態(entity.getJuminJotaiCode() == null
+                ? RString.EMPTY : JuminJotai.toValue(entity.getJuminJotaiCode()).住民状態略称());
+        if (entity.getSetaiCode() != null) {
+            帳票用データ.set世帯コード(nullToEmpty(entity.getSetaiCode().value()));
+        } else {
+            帳票用データ.set世帯コード(nullToEmpty(entity.getSetaiCode().value()));
+        }
+        帳票用データ.set生年月日(共通ポリシfomart(entity.getSeinengappiYMD()));
+        帳票用データ.set該当申請日(共通ポリシfomart(entity.getShinseiYMD()));
+        帳票用データ.set該当開始日(共通ポリシfomart(entity.getTekiyoKaishiYMD()));
+        帳票用データ.set該当終了日(共通ポリシfomart(entity.getTekiyoShuryoYMD()));
+        if (解除する.equals(nullToEmpty(entity.getKyuufugakuGengakuKisaiKiajoFlag()))) {
+            帳票用データ.set給付額減額解除(給付額減額記載解除フラグ_解除する);
+        } else {
+            帳票用データ.set給付額減額解除(RString.EMPTY);
+        }
+        if (entity.getHyojunFutanKeigengoFutangaku() != null) {
+            帳票用データ.set標準負担減額後負担額(new RString(DecimalFormatter.toコンマ区切りRString(entity.getHyojunFutanKeigengoFutangaku(), 0).toString()));
+        } else {
+            帳票用データ.set標準負担減額後負担額(RString.EMPTY);
+        }
+        UzT0007CodeEntity 居室種類 = CodeMaster.getCode(SubGyomuCode.DBZ介護共通,
+                DBZCodeShubetsu.居室種類.getコード(), new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode()), FlexibleDate.getNowDate());
+        if (居室種類 != null) {
+            帳票用データ.set居住費軽減後居室種類(new RString(居室種類.getコード名称().toString()));
+        } else {
+            帳票用データ.set居住費軽減後居室種類(RString.EMPTY);
+        }
+        setlist(entity, 帳票用データ);
+
+        return 帳票用データ;
     }
 
-    private void setlist(KyokaisogGaitoshaRelateEntity entity, List<RString> 居住費軽減後負担額,
-            List<RString> 食費軽減後負担額,
-            List<RString> 高額ｻｰﾋﾞｽ費減額後上限額,
-            List<RString> 保険料納付減額後保険料段階) {
+    private void setlist(KyokaisogGaitoshaRelateEntity entity, KyokaisoKanriMasterListChohyoDataSakuseiEntity 帳票用データ) {
         if (entity.getKyojuhiKeigengoHutangaku() != null) {
-            居住費軽減後負担額.add(new RString(DecimalFormatter.toコンマ区切りRString(entity.getKyojuhiKeigengoHutangaku(), 0).toString()));
+            帳票用データ.set居住費軽減後負担額(new RString(DecimalFormatter.toコンマ区切りRString(entity.getKyojuhiKeigengoHutangaku(), 0).toString()));
         } else {
-            居住費軽減後負担額.add(null);
+            帳票用データ.set居住費軽減後負担額(null);
         }
         if (entity.getShokuhiKeigengoHutangaku() != null) {
-            食費軽減後負担額.add(new RString(DecimalFormatter.toコンマ区切りRString(entity.getShokuhiKeigengoHutangaku(), 0).toString()));
+            帳票用データ.set食費軽減後負担額(new RString(DecimalFormatter.toコンマ区切りRString(entity.getShokuhiKeigengoHutangaku(), 0).toString()));
         } else {
-            食費軽減後負担額.add(null);
+            帳票用データ.set食費軽減後負担額(null);
         }
         if (entity.getKogakuServicehiJogengakuGengakugoJogengaku() != null) {
-            高額ｻｰﾋﾞｽ費減額後上限額.add(new RString(DecimalFormatter.toコンマ区切りRString(entity.getKogakuServicehiJogengakuGengakugoJogengaku(), 0).toString()));
+            帳票用データ.set高額ｻｰﾋﾞｽ費減額後上限額(new RString(DecimalFormatter.
+                    toコンマ区切りRString(entity.getKogakuServicehiJogengakuGengakugoJogengaku(), 0).toString()));
         } else {
-            高額ｻｰﾋﾞｽ費減額後上限額.add(null);
+            帳票用データ.set高額ｻｰﾋﾞｽ費減額後上限額(null);
         }
         if (entity.getGengakuGoHokenryoDankai() != null) {
             RStringBuilder nituliki = new RStringBuilder();
             nituliki.append(new RString("第"));
             nituliki.append(entity.getGengakuGoHokenryoDankai());
             nituliki.append(new RString("段階"));
-            保険料納付減額後保険料段階.add(nituliki.toRString());
+            帳票用データ.set保険料納付減額後保険料段階(nituliki.toRString());
         } else {
-            保険料納付減額後保険料段階.add(null);
+            帳票用データ.set保険料納付減額後保険料段階(null);
         }
     }
 

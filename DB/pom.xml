@@ -45,10 +45,13 @@
         <!-- 公開系 -->
         <jp.co.ndensan.reams.urVersion>1.13.2</jp.co.ndensan.reams.urVersion>
         <jp.co.ndensan.reams.uaxVersion>1.12.0</jp.co.ndensan.reams.uaxVersion>
-        <jp.co.ndensan.reams.uexVersion>1.12.0</jp.co.ndensan.reams.uexVersion>
+        <jp.co.ndensan.reams.uexVersion>1.12.2</jp.co.ndensan.reams.uexVersion>
         <jp.co.ndensan.reams.uxxVersion>1.13.2</jp.co.ndensan.reams.uxxVersion>
         <jp.co.ndensan.reams.caxVersion>1.13.1</jp.co.ndensan.reams.caxVersion>
         <jp.co.ndensan.reams.aaxVersion>1.12.0</jp.co.ndensan.reams.aaxVersion>
+        <jp.co.ndensan.reams.dzxVersion>1.12.0</jp.co.ndensan.reams.dzxVersion>
+        <jp.co.ndensan.reams.uaVersion>1.12.3</jp.co.ndensan.reams.uaVersion>
+        <jp.co.ndensan.reams.bbVersion>1.12.1</jp.co.ndensan.reams.bbVersion>
         <!-- other -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -215,6 +218,22 @@
                 <groupId>jp.co.ndensan.reams.aa.aax</groupId>
                 <artifactId>AaxService</artifactId>
                 <version>${jp.co.ndensan.reams.aaxVersion}</version>
+            </dependency>
+            <!-- DZX -->
+            <dependency>
+                <groupId>jp.co.ndensan.reams.dz.dzx</groupId>
+                <artifactId>DzxDefinition</artifactId>
+                <version>${jp.co.ndensan.reams.dzxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.dz.dzx</groupId>
+                <artifactId>DzxEntity</artifactId>
+                <version>${jp.co.ndensan.reams.dzxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.dz.dzx</groupId>
+                <artifactId>DzxBusiness</artifactId>
+                <version>${jp.co.ndensan.reams.dzxVersion}</version>
             </dependency>
             <!-- ツール -->
             <dependency>

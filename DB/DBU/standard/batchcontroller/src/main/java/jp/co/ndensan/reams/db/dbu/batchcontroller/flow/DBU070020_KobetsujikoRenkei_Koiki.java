@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuDBUpdateProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuEucCsvProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU070020.KaiGoJuminHyokouKiuDBUpdateProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU070020.KaiGoJuminHyokouKiuEucCsvProcess;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU070020.DBU070020_KobetsujikoRenkei_KoikiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

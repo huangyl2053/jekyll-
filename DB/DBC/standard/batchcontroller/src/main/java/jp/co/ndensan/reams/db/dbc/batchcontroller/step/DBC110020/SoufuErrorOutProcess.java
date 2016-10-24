@@ -81,7 +81,7 @@ public class SoufuErrorOutProcess extends BatchKeyBreakBase<SoufuErrorTblEntity>
     private static final RString CSV_標準開始日 = new RString("標準開始日");
     private static final RString CSV_標準終了日 = new RString("標準終了日");
     private static final RString CSV_被下開始日 = new RString("被下開始日");
-    private static final RString CSV_ページ数 = new RString("ページ数");
+//    private static final RString CSV_ページ数 = new RString("ページ数");
     private static final RString CSV_作成年月日 = new RString("作成年月日");
     private static final RString CSV_処理年月 = new RString("処理年月");
 

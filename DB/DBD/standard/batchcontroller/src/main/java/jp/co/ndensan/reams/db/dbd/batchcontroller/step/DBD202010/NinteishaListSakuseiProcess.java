@@ -195,6 +195,12 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         if (SetaiHyoji.表示しない.equals(parameter.get世帯表示())
                 && (t.get世帯員リスト() != null && !t.get世帯員リスト().isEmpty())) {
             t.get世帯員リスト().clear();
+        } else {
+            for (int j = 0; j < t.get世帯員リスト().size(); j++) {
+                if (t.get世帯員リスト().get(j).get識別コード() == null || RString.EMPTY.equals(t.get世帯員リスト().get(j).get識別コード())) {
+                    t.get世帯員リスト().remove(j);
+                }
+            }
         }
         edit帳票用データ(t);
         HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReport find

@@ -54,7 +54,7 @@ public class InsFutanWariaiYMTempProcess extends BatchProcessBase<FutanWariaiTem
     @Override
     protected void process(FutanWariaiTempEntity entity) {
         FlexibleYearMonth 開始年月 = new FlexibleYearMonth(entity.get年度().toDateString().concat(開始月));
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 十一; i++) {
             FutanWariaiYMTempEntity tempEntity = new FutanWariaiYMTempEntity();
             tempEntity.set被保険者番号(entity.get被保険者番号());
             tempEntity.set年度(entity.get年度());

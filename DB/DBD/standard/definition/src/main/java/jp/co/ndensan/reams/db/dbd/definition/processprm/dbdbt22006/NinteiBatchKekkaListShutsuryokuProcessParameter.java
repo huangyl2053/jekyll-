@@ -109,9 +109,12 @@ public class NinteiBatchKekkaListShutsuryokuProcessParameter implements IBatchPr
     /**
      * バッチMybatisパラメターを取得します。
      *
+     * @param searchKey IShikibetsuTaishoPSMSearchKey
+     * @param orderBy RString
      * @return NinteiBatchKekkaListShutsuryokuMybatisParameter
      */
-    public NinteiBatchKekkaListShutsuryokuMybatisParameter toNinteiBatchKekkaListShutsuryokuMybatisParameter(IShikibetsuTaishoPSMSearchKey searchKey, RString orderBy) {
+    public NinteiBatchKekkaListShutsuryokuMybatisParameter toNinteiBatchKekkaListShutsuryokuMybatisParameter(
+            IShikibetsuTaishoPSMSearchKey searchKey, RString orderBy) {
         this.searchKey = searchKey;
         return new NinteiBatchKekkaListShutsuryokuMybatisParameter(searchKey, orderBy, 認定期間_開始日, 認定期間_終了日);
     }

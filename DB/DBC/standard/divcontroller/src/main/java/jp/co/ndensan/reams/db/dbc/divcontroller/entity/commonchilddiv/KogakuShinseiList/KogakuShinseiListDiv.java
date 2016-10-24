@@ -4,17 +4,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuShi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxYearMonth;
@@ -28,8 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBC-2020-010 quxiaodong
  */
 public class KogakuShinseiListDiv extends Panel implements IKogakuShinseiListDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -281,49 +281,6 @@ public class KogakuShinseiListDiv extends Panel implements IKogakuShinseiListDiv
     @JsonProperty("証記載保険者番号")
     public void set証記載保険者番号(RString 証記載保険者番号) {
         this.証記載保険者番号 = 証記載保険者番号;
-    }
-
-    /*
-     * [共有子DIVモード]
-     */
-    @JsonProperty("modes")
-    private HashSet<Mode> modes;
-
-    public static enum DisplayMode implements ICommonChildDivMode {
-
-        shokai("shokai"),
-        toroku("toroku");
-
-        private final String name;
-
-        private DisplayMode(final String name) {
-            this.name = name;
-        }
-
-        public static DisplayMode getEnum(String str) {
-            DisplayMode[] enumArray = DisplayMode.values();
-
-            for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
-    }
-
-    public void setMode_DisplayMode(DisplayMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
     }
 
     // </editor-fold>

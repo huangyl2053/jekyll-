@@ -5,6 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshiharaiuchiwake;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -108,12 +112,16 @@ public class IkenShiharaiuchiwakeReportSource implements IReportSource {
     @ReportItem(name = "detail_listShiharaiuchiwake_5", length = 7, order = 41)
     public RString detail_listShiharaiuchiwake_5;
 
-    @ReportItem(name = "layoutBreakItem", length = 10, order = 999)
-    public int layoutBreakItem;
-    public static final RString LAYOUTBREAKITEM;
+    @ReportItem(name = "layout", order = 999)
+    public Layouts layout;
+
+    /**
+     * レイアウトブレイク用キーの一覧です。
+     */
+    public static final List<RString> LAYOUT_BREAK_KEYS;
 
     static {
-        LAYOUTBREAKITEM = new RString("layoutBreakItem");
+        LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
     }
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

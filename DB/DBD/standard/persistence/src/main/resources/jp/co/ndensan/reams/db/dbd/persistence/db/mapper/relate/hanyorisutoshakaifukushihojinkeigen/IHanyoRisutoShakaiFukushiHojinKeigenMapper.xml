@@ -924,7 +924,7 @@
 			AND 自己作成."rirekiNo" = 居宅届出."rirekiNo"																					
 																								
 		LEFT JOIN																						
-			rgdb."DbT5121ShinseiRirekiJoho" AS 履歴情報																					
+			rgdb."DbT4121ShinseiRirekiJoho" AS 履歴情報																					
 			ON 履歴情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo"																					
 																								
 		LEFT JOIN																						
@@ -1072,5 +1072,6 @@
                         AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日To}
                     </if>
                </if>
+               ${出力順}
      </select>
 </mapper>

@@ -76,12 +76,8 @@ public class HanyoListParam {
      * @return ResponseData<HanyoListParamDiv>
      */
     public ResponseData<HanyoListParamDiv> onClick_onRestoreBatchParameter(HanyoListParamDiv div) {
-        if (getHandler(div).restoreCheck(ResponseHolder.getMenuID())) {
-            getHandler(div).restoreBatchParameter(ResponseHolder.getMenuID());
-            return ResponseData.of(div).respond();
-        } else {
-            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).validate復元()).respond();
-        }
+        getHandler(div).restoreBatchParameter(ResponseHolder.getMenuID());
+        return ResponseData.of(div).respond();
     }
 
     /**

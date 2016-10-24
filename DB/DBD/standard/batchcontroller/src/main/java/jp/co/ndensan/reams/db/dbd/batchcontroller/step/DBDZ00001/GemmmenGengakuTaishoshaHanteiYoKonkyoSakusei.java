@@ -144,17 +144,20 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
     }
 
     private void get合計金額(TaishouJohoEntity list) {
-        if (list.get合計所得金額() == null) {
-            list.set合計所得金額(Decimal.ZERO);
-        }
-        if (list.get年金収入額() == null) {
-            list.set年金収入額(Decimal.ZERO);
-        }
-        if (list.get非課税年金勘案額() == null) {
-            list.set非課税年金勘案額(Decimal.ZERO);
-        }
+
         if (本人.equals(list.get本人区分())) {
-            金額list.add(list.get合計所得金額().add(list.get年金収入額()).add(list.get非課税年金勘案額()));
+            Decimal 金額 = Decimal.ZERO;
+            if (list.get合計所得金額() != null) {
+                金額 = 金額.add(list.get合計所得金額());
+            }
+            if (list.get年金収入額() != null) {
+                金額 = 金額.add(list.get年金収入額());
+            }
+            if (list.get非課税年金勘案額() != null) {
+                金額 = 金額.add(list.get非課税年金勘案額());
+            }
+            金額list.add(金額);
+
         }
     }
 
@@ -207,21 +210,14 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
             entity.set老齢福祉年金受給者(Boolean.FALSE);
         }
 
-        if (item.get合計所得金額() == null) {
-            entity.set合計所得金額(Decimal.ZERO);
-        } else {
+        if (item.get合計所得金額() != null) {
             entity.set合計所得金額(item.get合計所得金額());
         }
-
-        if (item.get年金収入額() == null) {
-            entity.set年金収入額(Decimal.ZERO);
-        } else {
+        if (item.get年金収入額() != null) {
             entity.set年金収入額(item.get年金収入額());
         }
 
-        if (item.get非課税年金勘案額() == null) {
-            entity.set非課税年金勘案額(Decimal.ZERO);
-        } else {
+        if (item.get非課税年金勘案額() != null) {
             entity.set非課税年金勘案額(item.get非課税年金勘案額());
         }
 

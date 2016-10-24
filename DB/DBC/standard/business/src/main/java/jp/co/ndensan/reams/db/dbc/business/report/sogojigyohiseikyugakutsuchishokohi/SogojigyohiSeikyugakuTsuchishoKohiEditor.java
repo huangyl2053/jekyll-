@@ -52,7 +52,7 @@ public class SogojigyohiSeikyugakuTsuchishoKohiEditor implements ISogojigyohiSei
             source.printTimeStamp = 帳票作成日.concat(RString.HALF_SPACE).concat(帳票作成時).concat(RString.HALF_SPACE).concat(SAKUSEI);
         }
         if (請求額通知書情報.get審査年月() != null && !請求額通知書情報.get審査年月().isEmpty()) {
-            source.shinsaYM = 請求額通知書情報.get審査年月().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+            source.shinsaYM = 請求額通知書情報.get審査年月().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         source.kohiFutanshaNo = 請求額通知書情報.get公費負担者番号();

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dba.business.core.iryohokenkanyujokyo.IryohokenKan
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA3030011.DBA3030011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA3030011.IryohokenKanyuJokyoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA3030011.IryohokenKanyuJokyoHandler;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakuteisei.HihokenshaShikakuTeiseiManager;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshashikakuteisei.HihokenshaShikakuTeiseiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;

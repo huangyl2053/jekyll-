@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB111001.PrtKaigoHokenSh
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB111001.RegistShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB111001.TanitsuShichosonShotokuIchiarnProcess;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranProperty;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.ShichosonJouhouResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB111001.DBB111001_ShotokujohoIchiranhyoSakuseiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.ShichosonJouhouResult;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheinjunkakakutei.RegistShoriDateKanriProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheinjunkakakutei.ShotokujohoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;

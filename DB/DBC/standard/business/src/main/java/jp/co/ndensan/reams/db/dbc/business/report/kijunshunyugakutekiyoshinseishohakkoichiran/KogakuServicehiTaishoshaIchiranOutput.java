@@ -39,23 +39,23 @@ public class KogakuServicehiTaishoshaIchiranOutput {
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("A.\"shotokuHantei_shichosonCode\"")),
+        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("master.市町村コード")),
         /**
          * 証記載保険者番号
          */
-        証記載保険者番号(new RString("0103"), new RString("証記載保険者番号"), new RString("A.\"shokisaiHokenshaNo\"")),
+        証記載保険者番号(new RString("0103"), new RString("証記載保険者番号"), new RString("master.証記載保険者番号")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("A.\"hiHokenshaNo\"")),
+        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("master.被保険者番号")),
         /**
          * 要介護度
          */
-        要介護度(new RString("0403"), new RString("要介護度"), new RString("C.\"yokaigoJotaiKubunCode\"")),
+        要介護度(new RString("0403"), new RString("要介護度"), new RString("master.要介護認定状態区分コード")),
         /**
-         * サービス年月
+         * サービス提供年月
          */
-        サービス年月(new RString("0301"), new RString("サービス年月"), new RString("A.\"yokaigoJotaiKubunCode\""));
+        サービス提供年月(new RString("0301"), new RString("サービス提供年月"), new RString("master.サービス提供年月"));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

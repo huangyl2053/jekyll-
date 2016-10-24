@@ -28,6 +28,8 @@ public class DBD1080001Handler {
     private final ShinseishoHakkoTaishoshaHaakuParameterMainDiv taishoshaHaakuMainDiv;
     private RString code;
     private static final RString KEYTWO = new RString("key2");
+    private static final RString KEYONE = new RString("key1");
+    private static final RString KEYTHREE = new RString("key3");
 
     /**
      * コンストラクタです。
@@ -49,11 +51,11 @@ public class DBD1080001Handler {
         div.getParameters().getRadShinkiKoshiKubun().setSelectedKey(KEYTWO);
 
         setDataSource(div.getParameters().getDdlGemmenGengakuShrui().getDataSource(),
-                new RString("key1"), new RString("利用者負担額減額"));
+                KEYONE, new RString("利用者負担額減額"));
         setDataSource(div.getParameters().getDdlGemmenGengakuShrui().getDataSource(),
                 KEYTWO, new RString("訪問介護利用者負担額減額"));
         setDataSource(div.getParameters().getDdlGemmenGengakuShrui().getDataSource(),
-                new RString("key3"), new RString("社会福祉法人等利用者負担軽減"));
+                KEYTHREE, new RString("社会福祉法人等利用者負担軽減"));
 
         FlexibleDate 基準日 = new FlexibleDate(new RString(RDate.getNowDate().toString()));
         div.getParameters().getTxtKijunYMD().setValue(基準日);
@@ -63,22 +65,22 @@ public class DBD1080001Handler {
         div.getParameters().getTxtShotokuNendo().setDomain(所得年度);
 
         setDataSource(div.getParameters().getDdlKyushochishaKubun1().getDataSource(),
-                new RString("key1"), new RString("旧措置者以外"));
+                KEYONE, new RString("旧措置者以外"));
         setDataSource(div.getParameters().getDdlKyushochishaKubun1().getDataSource(),
                 KEYTWO, new RString("旧措置者"));
         setDataSource(div.getParameters().getDdlKyushochishaKubun2().getDataSource(),
-                new RString("key1"), new RString("旧措置者以外"));
+                KEYONE, new RString("旧措置者以外"));
         setDataSource(div.getParameters().getDdlKyushochishaKubun2().getDataSource(),
                 KEYTWO, new RString("旧措置者"));
 
         div.getParameters().getRadShisetsuNyushoKubun1().setSelectedKey(new RString("key0"));
 
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
-                new RString("key1"), RiyoshaFutanDankaiHanni.利用者負担1段階.get名称());
+                KEYONE, RiyoshaFutanDankaiHanni.利用者負担1段階.get名称());
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
                 KEYTWO, RiyoshaFutanDankaiHanni.利用者負担2段階.get名称());
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
-                new RString("key3"), RiyoshaFutanDankaiHanni.利用者負担3段階.get名称());
+                KEYTHREE, RiyoshaFutanDankaiHanni.利用者負担3段階.get名称());
         setDataSource(div.getParameters().getDdlRiyoshaFutanDankai().getDataSource(),
                 new RString("key4"), RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.get名称());
         responseData.data = div;

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.ikenshiharaiuchiwake;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshiharaiuchiwake.IkenShiharaiuchiwakeEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshiharaiuchiwake.IkenShiharaiuchiwakeReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 
 /**
  * 帳票設計_DBE622004_主治医意見書作成料支払内訳確認書のIkenShiharaiuchiwakeDetailEditorです。
@@ -34,6 +35,7 @@ public class IkenShiharaiuchiwakeDetailEditor implements IIkenShiharaiuchiwakeEd
         source.detail_listShiharaiuchiwake_3 = detailItem.get被保険者氏名();
         source.detail_listShiharaiuchiwake_4 = detailItem.get内訳住所();
         source.detail_listShiharaiuchiwake_5 = detailItem.get金額();
+        source.layout = Layouts.必須;
         return source;
     }
 }

@@ -33,24 +33,22 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class JukyushagenmenshinseiDateManager {
 
     private final RString タイトル1_0 = new RString("標準負担申請受付件数");
-    private final RString タイトル1_1 = new RString("　承認件数");
+    private final RString タイトル_1 = new RString("　承認件数");
     private final RString タイトル1_2 = new RString("　金額 500円");
     private final RString タイトル1_3 = new RString("　金額 300円");
     private final RString タイトル1_4 = new RString("　金額 その他");
-    private final RString タイトル1_5 = new RString("　不承認件数");
+    private final RString タイトル5 = new RString("　不承認件数");
     private final RString タイトル1_6 = RString.EMPTY;
 
     private final RString タイトル2_0 = new RString("利用者負担申請受付件数");
-    private final RString タイトル2_1 = new RString("　承認件数");
     private final RString タイトル2_2 = new RString("　給付率 91～95%");
     private final RString タイトル2_3 = new RString("　給付率 96～99%");
     private final RString タイトル2_4 = new RString("　給付率 100%");
-    private final RString タイトル2_5 = new RString("　不承認件数");
+
     private final RString タイトル2_6 = RString.EMPTY;
 
     private final RString タイトル3_0 = new RString("特別対策申請受付件数");
     private final RString タイトル3_1 = new RString(" 施行時ホームヘルプ");
-    private final RString タイトル3_2 = new RString("　承認件数");
     private final RString タイトル3_3 = new RString("　給付率 90～95%");
     private final RString タイトル3_4 = new RString("　給付率 96～99%");
     private final RString タイトル3_5 = new RString("　給付率 100%");
@@ -60,21 +58,17 @@ public class JukyushagenmenshinseiDateManager {
     private final RString タイトル3_9 = new RString("　給付率 90～95%");
     private final RString タイトル3_10 = new RString("　給付率 96～99%");
     private final RString タイトル3_11 = new RString("　給付率 100%");
-    private final RString タイトル3_12 = new RString("　不承認件数");
     private final RString タイトル3_13 = RString.EMPTY;
 
     private final RString タイトル4_0 = new RString("社会福祉法人申請受付件数");
-    private final RString タイトル4_1 = new RString("　承認件数");
     private final RString タイトル4_2 = new RString("　軽減率 12.5/100");
     private final RString タイトル4_3 = new RString("　軽減率　 25/100");
     private final RString タイトル4_4 = new RString("　軽減率　 50/100");
     private final RString タイトル4_5 = new RString("　軽減率　その他");
-    private final RString タイトル4_6 = new RString("　不承認件数");
 
     private final RString タイトル5_0 = new RString("特定入所者申請受付件数");
-    private final RString タイトル5_1 = new RString("　承認件数");
     private final RString タイトル5_2 = new RString("　負担第４段階・旧措置");
-    private final RString タイトル5_3 = new RString("　負担課税層第３段階・旧措置");
+    private final RString タイトル5_3 = new RString("　負担課税層第3段階･旧措置");
     private final RString タイトル5_4 = new RString("　負担第３段階・旧措置");
     private final RString タイトル5_5 = new RString("　負担第２段階・旧措置");
     private final RString タイトル5_6 = new RString("　負担第１段階・旧措置");
@@ -83,14 +77,11 @@ public class JukyushagenmenshinseiDateManager {
     private final RString タイトル5_9 = new RString("　負担第３段階");
     private final RString タイトル5_10 = new RString("　負担第２段階");
     private final RString タイトル5_11 = new RString("　負担第１段階");
-    private final RString タイトル5_12 = new RString("　不承認件数");
     private final RString タイトル5_13 = RString.EMPTY;
 
     private final RString タイトル6_0 = new RString("特別地域加算申請受付件数");
-    private final RString タイトル6_1 = new RString("　承認件数");
     private final RString タイトル6_2 = new RString("　減額率 10/100");
     private final RString タイトル6_3 = new RString("　減額率　その他");
-    private final RString タイトル6_4 = new RString("　不承認件数");
     private final RString タイトル6_5 = RString.EMPTY;
     private final RString タイトル6_6 = RString.EMPTY;
     private final Decimal 標準負担額減免 = new Decimal(1);
@@ -434,7 +425,7 @@ public class JukyushagenmenshinseiDateManager {
             return タイトル1_0;
         }
         if (ONE.equals(num)) {
-            return タイトル1_1;
+            return タイトル_1;
         }
         if (TWO.equals(num)) {
             return タイトル1_2;
@@ -446,7 +437,7 @@ public class JukyushagenmenshinseiDateManager {
             return タイトル1_4;
         }
         if (FIVE.equals(num)) {
-            return タイトル1_5;
+            return タイトル5;
         }
         if (SIX.equals(num)) {
             return タイトル1_6;
@@ -459,7 +450,7 @@ public class JukyushagenmenshinseiDateManager {
             return タイトル2_0;
         }
         if (ONE.equals(num)) {
-            return タイトル2_1;
+            return タイトル_1;
         }
         if (TWO.equals(num)) {
             return タイトル2_2;
@@ -471,7 +462,7 @@ public class JukyushagenmenshinseiDateManager {
             return タイトル2_4;
         }
         if (FIVE.equals(num)) {
-            return タイトル2_5;
+            return タイトル5;
         }
         if (SIX.equals(num)) {
             return タイトル2_6;
@@ -487,7 +478,7 @@ public class JukyushagenmenshinseiDateManager {
             return タイトル3_1;
         }
         if (TWO.equals(num)) {
-            return タイトル3_2;
+            return タイトル_1;
         }
         if (THREE.equals(num)) {
             return タイトル3_3;
@@ -517,7 +508,7 @@ public class JukyushagenmenshinseiDateManager {
             return タイトル3_11;
         }
         if (TWELVE.equals(num)) {
-            return タイトル3_12;
+            return タイトル5;
         }
         if (THIRTEEN.equals(num)) {
             return タイトル3_13;
@@ -530,7 +521,7 @@ public class JukyushagenmenshinseiDateManager {
             return タイトル4_0;
         }
         if (ONE.equals(num)) {
-            return タイトル4_1;
+            return タイトル_1;
         }
         if (TWO.equals(num)) {
             return タイトル4_2;
@@ -545,7 +536,7 @@ public class JukyushagenmenshinseiDateManager {
             return タイトル4_5;
         }
         if (SIX.equals(num)) {
-            return タイトル4_6;
+            return タイトル5;
         }
         return RString.EMPTY;
     }
@@ -555,7 +546,7 @@ public class JukyushagenmenshinseiDateManager {
             return タイトル5_0;
         }
         if (ONE.equals(num)) {
-            return タイトル5_1;
+            return タイトル_1;
         }
         if (TWO.equals(num)) {
             return タイトル5_2;
@@ -588,7 +579,7 @@ public class JukyushagenmenshinseiDateManager {
             return タイトル5_11;
         }
         if (TWELVE.equals(num)) {
-            return タイトル5_12;
+            return タイトル5;
         }
         if (THIRTEEN.equals(num)) {
             return タイトル5_13;
@@ -601,7 +592,7 @@ public class JukyushagenmenshinseiDateManager {
             return タイトル6_0;
         }
         if (ONE.equals(num)) {
-            return タイトル6_1;
+            return タイトル_1;
         }
         if (TWO.equals(num)) {
             return タイトル6_2;
@@ -610,7 +601,7 @@ public class JukyushagenmenshinseiDateManager {
             return タイトル6_3;
         }
         if (FOUR.equals(num)) {
-            return タイトル6_4;
+            return タイトル5;
         }
         if (FIVE.equals(num)) {
             return タイトル6_5;

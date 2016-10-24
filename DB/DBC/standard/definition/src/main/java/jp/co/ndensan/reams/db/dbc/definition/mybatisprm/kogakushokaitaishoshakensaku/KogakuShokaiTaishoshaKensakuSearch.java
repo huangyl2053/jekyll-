@@ -32,5 +32,6 @@ public class KogakuShokaiTaishoshaKensakuSearch {
     private FlexibleDate 決定年月From;
     private FlexibleDate 決定年月To;
     private LasdecCode 市町村コード;
+    private RString 措置先区分;
 
 }

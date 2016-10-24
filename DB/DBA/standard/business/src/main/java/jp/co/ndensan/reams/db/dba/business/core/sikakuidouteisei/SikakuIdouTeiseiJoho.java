@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei;
 
 import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.IryoHokenJoho;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.RoreiFukushiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuteisei.IryoHokenJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuteisei.RoreiFukushiJoho;
 import lombok.Getter;
 import lombok.Setter;
 

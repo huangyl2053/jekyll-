@@ -182,8 +182,7 @@
         ON 
             "DbT2003Kibetsu"."choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
         WHERE
-            "KeisanTyukanTemp"."choteiNendo"= #{choteiNendo} 
-        AND "KeisanTyukanTemp"."fukaNendo" = #{fukaNendo}
+            "KeisanTyukanTemp"."fukaNendo" = #{fukaNendo}
         ORDER BY
             "KeisanTyukanTemp"."choteiNendo",
             "KeisanTyukanTemp"."fukaNendo",
@@ -218,8 +217,7 @@
         ON
             "UrT0705ChoteiKyotsu"."shunoId" = "TotalShunyu"."UrT0700shunoId"
         WHERE
-            "KeisanTyukanTemp"."choteiNendo"= #{choteiNendo} 
-        AND "KeisanTyukanTemp"."fukaNendo" = #{fukaNendo}
+            "KeisanTyukanTemp"."fukaNendo" = #{fukaNendo}
         ORDER BY
             "KeisanTyukanTemp"."choteiNendo",
             "KeisanTyukanTemp"."fukaNendo",
@@ -281,26 +279,17 @@
         SELECT
             <include refid="allColumns_FukaJoho"/>
         FROM
-            rgdb."DbT2002Fuka" AS "db2002Fuka"
-        WHERE
-            "db2002Fuka"."choteiNendo"= #{choteiNendo} 
-        AND "db2002Fuka"."fukaNendo" = #{fukaNendo}
-        AND "db2002Fuka"."choteiNichiji" = #{choteiNichiji}
-        AND NOT EXISTS(
-            SELECT
-                "rirekiNo"
-            FROM
-                rgdb."DbT2002Fuka"
-            WHERE
-                "choteiNendo"= #{choteiNendo} 
-            AND "fukaNendo" = #{fukaNendo}
-            AND "choteiNichiji" = #{choteiNichiji}
-            AND  "tsuchishoNo" = "db2002Fuka"."tsuchishoNo"
-            AND "rirekiNo" <![CDATA[>]]> "db2002Fuka"."rirekiNo")
-        ORDER BY
-            "db2002Fuka"."choteiNendo",
-            "db2002Fuka"."fukaNendo",
-            "db2002Fuka"."tsuchishoNo"
+            rgdb."DbV2002Fuka" AS "db2002Fuka"
+        WHERE 
+            "fukaNendo"=#{fukaNendo}
+        AND "db2002Fuka"."choteiNendo"||"db2002Fuka"."tsuchishoNo" IN
+          (SELECT MAX("choteiNendo")||"tsuchishoNo"
+           FROM rgdb."DbV2002Fuka"  
+           WHERE 
+               "choteiNichiji"=#{choteiNichiji}
+           AND "fukaNendo"=#{fukaNendo}
+           GROUP BY 
+                "tsuchishoNo")
     </select>
     
     <select resultOrdered="true" id="get全賦課最新情報4" resultMap="ResultMap_FukaEntity"
@@ -321,7 +310,6 @@
                 "choteiNendo"= "db2002Fuka"."choteiNendo"
             AND "fukaNendo" = "db2002Fuka"."fukaNendo"
             AND "tsuchishoPrintTimeStamp" <![CDATA[>=]]> "db2002Fuka"."choteiNichiji"
-            AND "tsuchishoPrintTimeStamp" <![CDATA[<=]]> #{systemDate}
             AND "tsuchishoNo" = "db2002Fuka"."tsuchishoNo"
             AND "chohyoBunruiID" = #{chohyoBunruiID})
         ORDER BY
@@ -335,40 +323,34 @@
         SELECT
             <include refid="allColumns_FukaJoho"/>
         FROM
-            rgdb."DbT2002Fuka" AS "db2002Fuka"
+            rgdb."DbV2002Fuka" AS "db2002Fuka"
         WHERE
-            "db2002Fuka"."choteiNendo"= #{choteiNendo} 
-        AND "db2002Fuka"."fukaNendo" = #{fukaNendo}
-        AND "db2002Fuka"."choteiNichiji" <![CDATA[>=]]> #{choteiNichiji}
-        AND "db2002Fuka"."choteiNichiji" <![CDATA[<=]]> #{systemDate}
-        AND NOT EXISTS(
-            SELECT
-                "rirekiNo"
-            FROM
-                rgdb."DbT2002Fuka"
-            WHERE
-                "choteiNendo"= #{choteiNendo} 
-            AND "fukaNendo" = #{fukaNendo}
-            AND "choteiNichiji" <![CDATA[>=]]> #{choteiNichiji}
-            AND "choteiNichiji" <![CDATA[<=]]> #{systemDate}
-            AND "tsuchishoNo" = "db2002Fuka"."tsuchishoNo"
-            AND "rirekiNo" > "db2002Fuka"."rirekiNo")
-        AND NOT EXISTS(
-            SELECT
-                "rirekiNo"
-            FROM
-                rgdb."DbT2018RealHakkoRireki"
-            WHERE
-                "choteiNendo"= "db2002Fuka"."choteiNendo"
-            AND "fukaNendo" = "db2002Fuka"."fukaNendo"
-            AND "tsuchishoPrintTimeStamp" <![CDATA[>=]]> "db2002Fuka"."choteiNichiji"
-            AND "tsuchishoPrintTimeStamp" <![CDATA[<=]]> #{systemDate}
-            AND "tsuchishoNo" = "db2002Fuka"."tsuchishoNo"
-            AND "chohyoBunruiID" = #{chohyoBunruiID})
-        ORDER BY
-            "db2002Fuka"."choteiNendo",
-            "db2002Fuka"."fukaNendo",
-            "db2002Fuka"."tsuchishoNo"
+            "db2002Fuka"."fukaNendo" = #{fukaNendo}
+            AND "db2002Fuka"."choteiNendo" || "db2002Fuka"."tsuchishoNo" IN ( 
+              SELECT
+                MAX("choteiNendo") || "tsuchishoNo" 
+              FROM
+                rgdb."DbT2002Fuka" 
+              WHERE
+                "choteiNichiji" = #{choteiNichiji}
+                AND "fukaNendo" = #{fukaNendo}
+              GROUP BY
+                "tsuchishoNo"
+            ) 
+            AND NOT ( 
+              EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT2018RealHakkoRireki" AS C 
+                WHERE
+                  C."tsuchishoPrintTimeStamp" <![CDATA[>=]]> #{choteiNichiji} 
+                  AND C."tsuchishoNo" = A."tsuchishoNo" 
+                  AND C."choteiNendo" = A."choteiNendo" 
+                  AND C."fukaNendo" = A."fukaNendo" 
+                  AND C."chohyoBunruiID" = 'DBB100045_HokenryoNonyuTsuchishoDaihyo'
+              )
+            ) 
     </select>
     
    <select resultOrdered="true" id="get計算中間Temp更新前情報処理３" resultMap="ResultMap_FukaEntity" 
@@ -384,6 +366,11 @@
                     ) AS rrkno
             FROM
                 rgdb."DbT2002Fuka" AS "db2002Fuka"
+            INNER JOIN 
+                "KeisanTyukanTemp" AS "KeisanTyukanTemp"
+            ON
+                "db2002Fuka"."fukaNendo" = "KeisanTyukanTemp"."fukaNendo"
+            AND "db2002Fuka"."tsuchishoNo" = "KeisanTyukanTemp"."tsuchishoNo"
             WHERE    
                 "db2002Fuka"."fukaNendo" = #{fukaNendo}
             ) AS "db2002Fuka"

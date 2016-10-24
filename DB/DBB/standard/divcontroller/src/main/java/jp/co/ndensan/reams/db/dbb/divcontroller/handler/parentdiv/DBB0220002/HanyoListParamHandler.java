@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolistatenaselect.HanyoListAtenaSelect.IHanyoListAtenaSelectDiv;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
@@ -59,9 +58,27 @@ public class HanyoListParamHandler {
     private final RString 時間_END = new RString("23:59:59");
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_FOUR = 4;
+    private static final RString KEY_0 = new RString("key0");
+    private static final RString KEY_1 = new RString("key1");
+    private static final RString KEY_2 = new RString("key2");
+    private static final RString KEY_3 = new RString("key3");
+    private static final RString KEY_4 = new RString("key4");
     private static final RString KEY1 = new RString("1");
     private static final RString KEY2 = new RString("2");
     private static final RString KEY3 = new RString("3");
+    private static final RString KEY_課税区分減免後 = new RString("課税区分減免後s");
+    private static final RString KEY_課税区分減免前 = new RString("課税区分減免前s");
+    private static final RString KEY_帳票ID = new RString("帳票ID");
+    private static final RString KEY_出力順ID = new RString("出力順ID");
+    private static final RString KEY_出力項目ID = new RString("出力項目ID");
+    private static final RString KEY_宛名抽出条件 = new RString("宛名抽出条件");
+    private static final RString KEY_住民税減免前後表示区分 = new RString("住民税減免前後表示区分");
+    private static final RString KEY_抽出期間開始 = new RString("抽出期間From");
+    private static final RString KEY_抽出期間終了 = new RString("抽出期間To");
+    private static final RString KEY_項目名付加 = new RString("項目名付加");
+    private static final RString KEY_連番付加 = new RString("連番付加");
+    private static final RString KEY_賦課年度 = new RString("賦課年度");
+    private static final RString KEY_日付編集 = new RString("日付編集");
 
     /**
      * コンストラクタです。
@@ -273,70 +290,16 @@ public class HanyoListParamHandler {
     }
 
     /**
-     * 条件を保存するボタンのメソッドです。
-     *
-     * @return DBB022002_ShotokuJohoHanyoListSakuseiParameter
-     */
-    public DBB022002_ShotokuJohoHanyoListSakuseiParameter 条件を保存() {
-
-        DBB022002_ShotokuJohoHanyoListSakuseiParameter parameter = new DBB022002_ShotokuJohoHanyoListSakuseiParameter();
-        if (div.getCcdShutsuryokujun() != null) {
-            parameter.set帳票ID(div.getCcdShutsuryokujun().get帳票ID());
-        }
-        parameter.set宛名抽出条件(div.getChushutsuPanel2().getCcdAtenaJoken().get宛名抽出条件());
-        if (div.getCcdShutsuryokujun().getSelected出力順() != null) {
-            parameter.set出力順ID(div.getCcdShutsuryokujun().getSelected出力順().get出力順ID());
-        }
-        if (div.getCcdShutsuryokuKoumoku() != null) {
-            parameter.set出力項目ID(div.getCcdShutsuryokuKoumoku().get出力項目ID());
-        }
-        List<RString> 編集方法list = div.getChkCsvHenshuHoho().getSelectedKeys();
-        if (編集方法list.contains(KEY1)) {
-            parameter.set項目名付加(true);
-        }
-        if (編集方法list.contains(KEY2)) {
-            parameter.set連番付加(true);
-        }
-        if (編集方法list.contains(KEY3)) {
-            parameter.set日付編集(true);
-        }
-        RString 年度 = div.getDdlFukaNendo().getSelectedValue();
-        if (年度 != null && !年度.isEmpty()) {
-            parameter.set賦課年度(new FlexibleYear(年度));
-        }
-        RDate 抽出期間From = div.getTxtChushutsuKikan().getFromValue();
-        if (抽出期間From != null) {
-            parameter.set抽出期間From(new YMDHMS(抽出期間From, RTime.now()));
-        }
-        RDate 抽出期間To = div.getTxtChushutsuKikan().getToValue();
-        if (抽出期間To != null) {
-            parameter.set抽出期間To(new YMDHMS(抽出期間To, RTime.now()));
-        }
-        if (div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().isDisplayNone()) {
-            parameter.set住民税減免前後表示区分(表示しない);
-        } else {
-            parameter.set住民税減免前後表示区分(表示する);
-        }
-        if (div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae() != null) {
-            parameter.set課税区分減免前s(div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().getSelectedKeys());
-        }
-        if (div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo() != null) {
-            parameter.set課税区分減免後s(div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().getSelectedKeys());
-        }
-        return parameter;
-    }
-
-    /**
      * 条件を復元するボタンのメソッドです。
      */
     public void 条件を復元() {
         BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
-        ReportId 条件保存の帳票ID = restoreBatchParameterMap.getParameterValue(ReportId.class, new RString("帳票ID"));
-        long 条件保存の出力順ID = restoreBatchParameterMap.getParameterValue(long.class, new RString("出力順ID"));
+        ReportId 条件保存の帳票ID = restoreBatchParameterMap.getParameterValue(ReportId.class, KEY_帳票ID);
+        long 条件保存の出力順ID = restoreBatchParameterMap.getParameterValue(long.class, KEY_出力順ID);
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBB介護賦課, 条件保存の帳票ID, 条件保存の出力順ID);
-        RString 条件保存の出力項目ID = restoreBatchParameterMap.getParameterValue(RString.class, new RString("出力項目ID"));
+        RString 条件保存の出力項目ID = restoreBatchParameterMap.getParameterValue(RString.class, KEY_出力項目ID);
         div.getCcdShutsuryokuKoumoku().load(条件保存の出力項目ID, SubGyomuCode.DBB介護賦課);
-        RString 表示区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("住民税減免前後表示区分"));
+        RString 表示区分 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_住民税減免前後表示区分);
         if (表示区分.equals(表示しない)) {
             div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().setDisabled(false);
             div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().setLabelLText(定数課税区分);
@@ -348,61 +311,127 @@ public class HanyoListParamHandler {
             div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setLabelLText(定数課税区分減免後);
         }
         AtenaSelectBatchParameter 宛名抽出条件 = restoreBatchParameterMap
-                .getParameterValue(AtenaSelectBatchParameter.class, new RString("宛名抽出条件"));
-        IHanyoListAtenaSelectDiv selectDiv = div.getChushutsuPanel2().getCcdAtenaJoken();
+                .getParameterValue(AtenaSelectBatchParameter.class, KEY_宛名抽出条件);
         if (宛名抽出条件 != null) {
-            selectDiv.set住所終了(new ChoikiCode(宛名抽出条件.getJusho_To()));
-            selectDiv.set住所開始(new ChoikiCode(宛名抽出条件.getJusho_From()));
-            selectDiv.set保険者(宛名抽出条件.getShichoson_Code());
-            selectDiv.set地区(宛名抽出条件.getChiku_Kubun().get名称());
-            selectDiv.set地区１終了(new ChikuCode(宛名抽出条件.getChiku1_To()));
-            selectDiv.set地区１開始(new ChikuCode(宛名抽出条件.getChiku1_From()));
-            selectDiv.set地区２終了(new ChikuCode(宛名抽出条件.getChiku2_To()));
-            selectDiv.set地区２開始(new ChikuCode(宛名抽出条件.getChiku2_From()));
-            selectDiv.set地区３終了(new ChikuCode(宛名抽出条件.getChiku3_To()));
-            selectDiv.set地区３開始(new ChikuCode(宛名抽出条件.getChiku3_From()));
-            selectDiv.set年齢基準日(宛名抽出条件.getNenreiKijunbi());
-            selectDiv.set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().get名称());
-            selectDiv.set年齢終了(宛名抽出条件.getNenreiRange().getTo());
-            selectDiv.set年齢開始(宛名抽出条件.getNenreiRange().getFrom());
-            selectDiv.set生年月日終了(宛名抽出条件.getSeinengappiRange().getTo());
-            selectDiv.set生年月日開始(宛名抽出条件.getSeinengappiRange().getFrom());
-            selectDiv.set行政区終了(new GyoseikuCode(宛名抽出条件.getGyoseiku_To()));
-            selectDiv.set行政区開始(new GyoseikuCode(宛名抽出条件.getGyoseiku_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所終了(toChoikiCode(宛名抽出条件.getJusho_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set住所開始(toChoikiCode(宛名抽出条件.getJusho_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set保険者(宛名抽出条件.getShichoson_Code());
+            if (宛名抽出条件.getChiku_Kubun() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set地区(宛名抽出条件.getChiku_Kubun().getコード());
+            }
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区１終了(toChikuCode(宛名抽出条件.getChiku1_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区１開始(toChikuCode(宛名抽出条件.getChiku1_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区２終了(toChikuCode(宛名抽出条件.getChiku2_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区２開始(toChikuCode(宛名抽出条件.getChiku2_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区３終了(toChikuCode(宛名抽出条件.getChiku3_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set地区３開始(toChikuCode(宛名抽出条件.getChiku3_From()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set年齢基準日(宛名抽出条件.getNenreiKijunbi());
+            if (宛名抽出条件.getAgeSelectKijun() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().getコード());
+            }
+            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getFrom() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢開始(宛名抽出条件.getNenreiRange().getFrom());
+            }
+            if (宛名抽出条件.getNenreiRange() != null && 宛名抽出条件.getNenreiRange().getTo() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set年齢終了(宛名抽出条件.getNenreiRange().getTo());
+            }
+            if (宛名抽出条件.getSeinengappiRange() != null && 宛名抽出条件.getSeinengappiRange().getFrom() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set生年月日開始(宛名抽出条件.getSeinengappiRange().getFrom());
+            }
+            if (宛名抽出条件.getSeinengappiRange() != null && 宛名抽出条件.getSeinengappiRange().getTo() != null) {
+                div.getChushutsuPanel2().getCcdAtenaJoken().set生年月日終了(宛名抽出条件.getSeinengappiRange().getTo());
+            }
+            div.getChushutsuPanel2().getCcdAtenaJoken().set行政区終了(toGyoseikuCode(宛名抽出条件.getGyoseiku_To()));
+            div.getChushutsuPanel2().getCcdAtenaJoken().set行政区開始(toGyoseikuCode(宛名抽出条件.getGyoseiku_From()));
         }
-        boolean 項目名付加 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("項目名付加"));
+        条件を復元Part2(restoreBatchParameterMap);
+    }
+
+    private void 条件を復元Part2(BatchParameterMap restoreBatchParameterMap) {
+        boolean 項目名付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_項目名付加);
         List<RString> 編集方法list = new ArrayList<>();
         if (項目名付加) {
             編集方法list.add(KEY1);
         }
-        boolean 連番付加 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("連番付加"));
+        boolean 連番付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_連番付加);
         if (連番付加) {
             編集方法list.add(KEY2);
         }
-        boolean 日付編集 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("日付編集"));
+        boolean 日付編集 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_日付編集);
         if (日付編集) {
             編集方法list.add(KEY3);
         }
         div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法list);
-        FlexibleYear 賦課年度 = restoreBatchParameterMap.getParameterValue(FlexibleYear.class, new RString("賦課年度"));
+        FlexibleYear 賦課年度 = restoreBatchParameterMap.getParameterValue(FlexibleYear.class, KEY_賦課年度);
         if (賦課年度 != null && !賦課年度.isEmpty()) {
-            div.getDdlFukaNendo().setSelectedValue(賦課年度.toDateString());
+            div.getDdlFukaNendo().setSelectedKey(賦課年度.toDateString());
         }
-        YMDHMS 抽出期間From = restoreBatchParameterMap.getParameterValue(YMDHMS.class, new RString("抽出期間From"));
+        YMDHMS 抽出期間From = restoreBatchParameterMap.getParameterValue(YMDHMS.class, KEY_抽出期間開始);
         if (抽出期間From != null && !抽出期間From.isEmpty()) {
             div.getTxtChushutsuKikan().setFromValue(抽出期間From.getDate());
         }
-        YMDHMS 抽出期間To = restoreBatchParameterMap.getParameterValue(YMDHMS.class, new RString("抽出期間To"));
+        YMDHMS 抽出期間To = restoreBatchParameterMap.getParameterValue(YMDHMS.class, KEY_抽出期間終了);
         if (抽出期間To != null && !抽出期間To.isEmpty()) {
             div.getTxtChushutsuKikan().setToValue(抽出期間To.getDate());
         }
-        List<RString> 課税区分減免前s = restoreBatchParameterMap.getParameterValue(List.class, new RString("課税区分減免前s"));
-        if (div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae() != null) {
-            div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().setSelectedItemsByKey(課税区分減免前s);
+        List<String> 課税区分減免前s = restoreBatchParameterMap.getParameterValue(List.class, KEY_課税区分減免前);
+        if (課税区分減免前s != null) {
+            if (!課税区分減免前s.isEmpty()) {
+                div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().setSelectedItemsByKey(set課税区分減免(課税区分減免前s));
+            } else {
+                div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setSelectedItemsByKey(new ArrayList<RString>());
+            }
         }
-        List<RString> 課税区分減免後s = restoreBatchParameterMap.getParameterValue(List.class, new RString("課税区分減免後s"));
-        if (div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo() != null) {
-            div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setSelectedItemsByKey(課税区分減免後s);
+        List<String> 課税区分減免後s = restoreBatchParameterMap.getParameterValue(List.class, KEY_課税区分減免後);
+        if (課税区分減免後s != null) {
+            if (!課税区分減免後s.isEmpty()) {
+                div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setSelectedItemsByKey(set課税区分減免(課税区分減免後s));
+            } else {
+                div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setSelectedItemsByKey(new ArrayList<RString>());
+            }
         }
+    }
+
+    private ChoikiCode toChoikiCode(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return ChoikiCode.EMPTY;
+        } else {
+            return new ChoikiCode(value);
+        }
+    }
+
+    private ChikuCode toChikuCode(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return ChikuCode.EMPTY;
+        } else {
+            return new ChikuCode(value);
+        }
+    }
+
+    private GyoseikuCode toGyoseikuCode(RString value) {
+        if (RString.isNullOrEmpty(value)) {
+            return GyoseikuCode.EMPTY;
+        } else {
+            return new GyoseikuCode(value);
+        }
+    }
+
+    private List<RString> set課税区分減免(List<String> 課税区分減免s) {
+        List<RString> 課税区分減免 = new ArrayList<>();
+        for (int i = 0; i < 課税区分減免s.size(); i++) {
+            if (定数1.equals(new RString(課税区分減免s.get(i)))) {
+                課税区分減免.add(KEY_0);
+            } else if (定数2.equals(new RString(課税区分減免s.get(i)))) {
+                課税区分減免.add(KEY_1);
+            } else if (定数3.equals(new RString(課税区分減免s.get(i)))) {
+                課税区分減免.add(KEY_2);
+            } else if (定数4.equals(new RString(課税区分減免s.get(i)))) {
+                課税区分減免.add(KEY_3);
+            } else {
+                課税区分減免.add(KEY_4);
+            }
+
+        }
+        return 課税区分減免;
     }
 }

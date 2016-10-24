@@ -173,17 +173,17 @@ public class JukyushaIdoRenrakuhyoToroku {
             jukyuEntity.set住特対象者区分(entity.getJushochiTokureiTaishoshaKubunCode());
             jukyuEntity.set住特施設所在保険者番号(entity.getShisetsuShozaiHokenjaNo());
             if (entity.getJushochiTokureiTekiyoKaishiYMD() != null) {
-                jukyuEntity.set住特適用開始年月日(new FlexibleDate(entity.getJushochiTokureiTekiyoKaishiYMD()));
+                jukyuEntity.set住特適用開始年月日(entity.getJushochiTokureiTekiyoKaishiYMD());
             }
             if (entity.getJushochiTokureiTekiyoShuryoYMD() != null) {
-                jukyuEntity.set住特適用終了年月日(new FlexibleDate(entity.getJushochiTokureiTekiyoShuryoYMD()));
+                jukyuEntity.set住特適用終了年月日(entity.getJushochiTokureiTekiyoShuryoYMD());
             }
             jukyuEntity.set送付年月(entity.getSofuYM());
             if (entity.getRiyosyaFutanWariaiYukoKaishiYMD() != null) {
-                jukyuEntity.set二割負担適用開始年月日(new FlexibleDate(entity.getRiyosyaFutanWariaiYukoKaishiYMD()));
+                jukyuEntity.set二割負担適用開始年月日(entity.getRiyosyaFutanWariaiYukoKaishiYMD());
             }
             if (entity.getRiyosyaFutanWariaiYukoShuryoYMD() != null) {
-                jukyuEntity.set二割負担適用終了年月日(new FlexibleDate(entity.getRiyosyaFutanWariaiYukoShuryoYMD()));
+                jukyuEntity.set二割負担適用終了年月日(entity.getRiyosyaFutanWariaiYukoShuryoYMD());
             }
             set年月日(jukyuEntity, entity);
         }
@@ -193,59 +193,59 @@ public class JukyushaIdoRenrakuhyoToroku {
     private void set年月日(JukyushaIdoRenrakuhyoTorokuEntity jukyuEntity, DbT3001JukyushaIdoRenrakuhyoEntity entity) {
         jukyuEntity.set有効期間開始年月日(entity.getNinteiYukoKikankaishiYMD());
         if (entity.getNinteiYukoKikanShuryoYMD() != null) {
-            jukyuEntity.set有効期間終了年月日(new FlexibleDate(entity.getNinteiYukoKikanShuryoYMD()));
+            jukyuEntity.set有効期間終了年月日(entity.getNinteiYukoKikanShuryoYMD());
         }
         if (entity.getKyotakuServiceTekiyoKaishiYMD() != null) {
-            jukyuEntity.set居宅適用開始年月日(new FlexibleDate(entity.getKyotakuServiceTekiyoKaishiYMD()));
+            jukyuEntity.set居宅適用開始年月日(entity.getKyotakuServiceTekiyoKaishiYMD());
         }
         if (entity.getKyotakuServiceTekiyoShuryoYMD() != null) {
-            jukyuEntity.set居宅適用終了年月日(new FlexibleDate(entity.getKyotakuServiceTekiyoShuryoYMD()));
+            jukyuEntity.set居宅適用終了年月日(entity.getKyotakuServiceTekiyoShuryoYMD());
         }
         jukyuEntity.set上限管理適用開始年月日１(entity.getHomonTsushoServiceJogenKanriTekiyoKaishiYMD());
         if (entity.getHomonTsushoServiceJogenKanriTekiyoShuryoYMD() != null) {
-            jukyuEntity.set上限管理終了年月日１(new FlexibleDate(entity.getHomonTsushoServiceJogenKanriTekiyoShuryoYMD()));
+            jukyuEntity.set上限管理終了年月日１(entity.getHomonTsushoServiceJogenKanriTekiyoShuryoYMD());
         }
         if (entity.getTekiyoKaishiYMD() != null) {
-            jukyuEntity.set利用適用開始年月日(new FlexibleDate(entity.getTekiyoKaishiYMD()));
+            jukyuEntity.set利用適用開始年月日(entity.getTekiyoKaishiYMD());
         }
         if (entity.getTekiyoShuryoYMD() != null) {
-            jukyuEntity.set利用適用終了年月日(new FlexibleDate(entity.getTekiyoShuryoYMD()));
+            jukyuEntity.set利用適用終了年月日(entity.getTekiyoShuryoYMD());
         }
         if (entity.getFutangakuTekiyoKaishiYMD() != null) {
-            jukyuEntity.set標準適用開始年月日(new FlexibleDate(entity.getFutangakuTekiyoKaishiYMD()));
+            jukyuEntity.set標準適用開始年月日(entity.getFutangakuTekiyoKaishiYMD());
         }
         if (entity.getFutangakuTekiyoShuryoYMD() != null) {
-            jukyuEntity.set標準適用終了年月日(new FlexibleDate(entity.getFutangakuTekiyoShuryoYMD()));
+            jukyuEntity.set標準適用終了年月日(entity.getFutangakuTekiyoShuryoYMD());
         }
         if (entity.getShokanbaraikaKaishiYMD() != null) {
-            jukyuEntity.set償還払化適用開始年月日(new FlexibleDate(entity.getShokanbaraikaKaishiYMD()));
+            jukyuEntity.set償還払化適用開始年月日(entity.getShokanbaraikaKaishiYMD());
         }
         if (entity.getShokanbaraikaShuryoYMD() != null) {
-            jukyuEntity.set償還払化適用終了年月日(new FlexibleDate(entity.getShokanbaraikaShuryoYMD()));
+            jukyuEntity.set償還払化適用終了年月日(entity.getShokanbaraikaShuryoYMD());
         }
         if (entity.getKyufuritsuHikisageKaishiYMD() != null) {
-            jukyuEntity.set給付率引下げ適用開始年月日(new FlexibleDate(entity.getKyufuritsuHikisageKaishiYMD()));
+            jukyuEntity.set給付率引下げ適用開始年月日(entity.getKyufuritsuHikisageKaishiYMD());
         }
         if (entity.getKyufuritsuHikisageShuryoYMD() != null) {
-            jukyuEntity.set給付率引下げ適用終了年月日(new FlexibleDate(entity.getKyufuritsuHikisageShuryoYMD()));
+            jukyuEntity.set給付率引下げ適用終了年月日(entity.getKyufuritsuHikisageShuryoYMD());
         }
         if (entity.getFutanGendogakuTekiyoKaishiYMD() != null) {
-            jukyuEntity.set特定入所者適用開始年月日(new FlexibleDate(entity.getFutanGendogakuTekiyoKaishiYMD()));
+            jukyuEntity.set特定入所者適用開始年月日(entity.getFutanGendogakuTekiyoKaishiYMD());
         }
         if (entity.getFutanGendogakuTekiyoShuryoYMD() != null) {
-            jukyuEntity.set特定入所者適用終了年月日(new FlexibleDate(entity.getFutanGendogakuTekiyoShuryoYMD()));
+            jukyuEntity.set特定入所者適用終了年月日(entity.getFutanGendogakuTekiyoShuryoYMD());
         }
         if (entity.getKeigenritsuTekiyoKaishiYMD() != null) {
-            jukyuEntity.set軽減率適用開始年月日(new FlexibleDate(entity.getKeigenritsuTekiyoKaishiYMD()));
+            jukyuEntity.set軽減率適用開始年月日(entity.getKeigenritsuTekiyoKaishiYMD());
         }
         if (entity.getKeigenritsuTekiyoShuryoYMD() != null) {
-            jukyuEntity.set軽減率適用終了年月日(new FlexibleDate(entity.getKeigenritsuTekiyoShuryoYMD()));
+            jukyuEntity.set軽減率適用終了年月日(entity.getKeigenritsuTekiyoShuryoYMD());
         }
         if (entity.getJushochiTokureiTekiyoKaishiYMD() != null) {
-            jukyuEntity.set住特適用開始年月日(new FlexibleDate(entity.getJushochiTokureiTekiyoKaishiYMD()));
+            jukyuEntity.set住特適用開始年月日(entity.getJushochiTokureiTekiyoKaishiYMD());
         }
         if (entity.getJushochiTokureiTekiyoShuryoYMD() != null) {
-            jukyuEntity.set住特適用終了年月日(new FlexibleDate(entity.getJushochiTokureiTekiyoShuryoYMD()));
+            jukyuEntity.set住特適用終了年月日(entity.getJushochiTokureiTekiyoShuryoYMD());
         }
     }
 }

@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB271003;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshumidoteiichiran.TokubetsuChoshuMidoteiIchiranOutputOrder;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshumidoteiichiran.TokubetsuChoshuMidoteiIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshumidoteiichiran.TokubetsuChoshuMidoteiIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshumidoteiichiran.TokushoTaishioIchiranMidoteiEntity;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter;
@@ -19,8 +21,13 @@ import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -29,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -39,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -61,8 +70,10 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
     private FileSpoolManager manager;
     private final RString csvファイル名 = new RString("TokubetsuChoshuMidoteiIchiran.csv");
     private final RString csvOutFlag = new RString("有り");
-
+    private IOutputOrder 出力順;
     private RString 通知内容コード;
+    private List<RString> pageBreakKeys;
+    private List<RString> 出力順項目リスト;
 
     @BatchWriter
     private CsvWriter<TokubetsuChoshuMidoteiIchiranCSVEntity> eucCsvWriter;
@@ -88,6 +99,8 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
 
     @Override
     protected void initialize() {
+        pageBreakKeys = new ArrayList<>();
+        出力順項目リスト = new ArrayList<>();
         導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         if (定数_10.equals(parameter.get特別徴収開始月())) {
             通知内容コード = TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード();
@@ -95,11 +108,32 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
             通知内容コード = TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード();
         }
         parameter.set通知内容コード(通知内容コード);
+        if (!RString.isNullOrEmpty(parameter.get未同定出力順())) {
+            IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBB介護賦課,
+                    ReportIdDBB.DBB200032.getReportId(), Long.valueOf(parameter.get未同定出力順().toString()));
+            if (出力順 != null) {
+                parameter.set未同定出力順(MyBatisOrderByClauseCreator.create(TokubetsuChoshuMidoteiIchiranOutputOrder.class, 出力順));
+                setPageBreakKeys();
+            }
+        }
+    }
+
+    private void setPageBreakKeys() {
+        for (ISetSortItem item : 出力順.get設定項目リスト()) {
+            出力順項目リスト.add(item.get項目名());
+            if (item.is改頁項目()) {
+                pageBreakKeys.add(item.get項目ID());
+            }
+        }
     }
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200032.getReportId().value()).create();
+        PageBreaker<TokubetsuChoshuMidoteiIchiranSource> breaker = new TokubetsuChoshuMidoteiIchiranPageBreak(pageBreakKeys);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200032.getReportId().value()).
+                addBreak(breaker)
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
@@ -189,7 +223,7 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
                 entity.getFuichiRiyuCode()
         );
         TokubetsuChoshuMidoteiIchiranReport report = new TokubetsuChoshuMidoteiIchiranReport(
-                導入団体クラス, null, null, target, parameter.get特別徴収開始月());
+                導入団体クラス, 出力順項目リスト, pageBreakKeys, target, parameter.get特別徴収開始月());
         report.writeBy(reportSourceWriter);
     }
 

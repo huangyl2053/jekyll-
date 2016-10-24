@@ -21,12 +21,12 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan
         extends BatchFlowBase<DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter> {
 //TODO Processの名称を修正
 
-    private static final String PROCESS1 = "Process1";
+//    private static final String PROCESS1 = "Process1";
     private static final String INITCHECKPROCESS = "InitJissekiCheckProcess";
-
-    private static final String PROCESS2 = "Process2";
-    private static final String PROCESS3 = "Process3";
-    private static final String PROCESS4 = "Process4";
+//
+//    private static final String PROCESS2 = "Process2";
+//    private static final String PROCESS3 = "Process3";
+//    private static final String PROCESS4 = "Process4";
     private static final String BACKUP_TO_FILE = "BackupToFile";
     private RString importTableNamePermanent;
     private static final RString BACKUPTABLE1 = new RString("DbT3068KogakuGassanShinseisho");
@@ -44,9 +44,10 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisan
         executeStep(BACKUP_TO_FILE);
 //        TODO executeStep Process1とInitJissekiCheckProcess
         boolean isデータがあり = getResult(Boolean.class, new RString(INITCHECKPROCESS), InitJissekiCheckProcess.OUTPUTNAME);
-//        if (!isデータがあり) {
-//            return;
-//        }
+        if (!isデータがあり) {
+            return;
+        }
+        executeStep(BACKUP_TO_FILE);
 //        TODO executeStep Process2_2~2_6
 //        TODO executeStep Process3,4
     }

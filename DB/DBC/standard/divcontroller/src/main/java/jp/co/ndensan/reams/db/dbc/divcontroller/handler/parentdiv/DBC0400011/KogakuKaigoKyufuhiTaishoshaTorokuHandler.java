@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0400011.KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiKyufuTaishoshaToroku;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -58,12 +59,12 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
     public void initializeDisplay() {
         RString menuId = ResponseHolder.getMenuID();
         if (高額介護サービス費給付対象者登録自庁.equals(menuId)) {
-            set抽出開始日時(交換情報識別番号_ONE);
+            set処理年月日時(交換情報識別番号_ONE);
             div.getPublishIchiranhyo().setTitle(LABLE_ONE);
             div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200016.getReportId());
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(実行ボタン_DBCMNL1002, true);
         } else if (総合事業高額介護サービス費給付対象者登録自庁.equals(menuId)) {
-            set抽出開始日時(交換情報識別番号_TWO);
+            set処理年月日時(交換情報識別番号_TWO);
             div.getPublishIchiranhyo().setTitle(LABLE_TWO);
             div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200077.getReportId());
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(実行ボタン_DBCMN41002, true);
@@ -71,10 +72,10 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
         set画面初期化制御();
     }
 
-    private void set抽出開始日時(RString 交換情報識別番号) {
+    private void set処理年月日時(RString 交換情報識別番号) {
         KogakuKaigoServicehiKyufuTaishoshaToroku business = new KogakuKaigoServicehiKyufuTaishoshaToroku();
         KokuhorenInterfaceKanri result = business.getSinsaYM(交換情報識別番号);
-        div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel().getTxtShinsaYM().setValue(result.get抽出開始日時().getDate());
+        div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel().getTxtShinsaYM().setValue(new RDate(result.get処理年月().toString()));
         div.getPublishIchiranhyo().setIsPublish(true);
     }
 

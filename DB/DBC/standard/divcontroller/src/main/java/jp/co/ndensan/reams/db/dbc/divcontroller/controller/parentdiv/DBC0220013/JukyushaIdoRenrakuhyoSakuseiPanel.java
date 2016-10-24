@@ -108,7 +108,6 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
         if (div.getJukyushaIdoRenrakuhyoHenkoPrint().getChkJukyushaIdoRenrakuhyo().isAllSelected()) {
             氏名性別生年月日を印字する = ONE;
         }
-        int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
         JukyushaIdoRenrakuhyoTorokuEntity 受給者異動連絡票Entity = getHandler(div).
                 get受給者異動連絡票Entity(作成年月日, 氏名性別生年月日を印字する);
         JukyushaIdoRenrakuhyoPrintSevice 異動連絡票service = new JukyushaIdoRenrakuhyoPrintSevice();

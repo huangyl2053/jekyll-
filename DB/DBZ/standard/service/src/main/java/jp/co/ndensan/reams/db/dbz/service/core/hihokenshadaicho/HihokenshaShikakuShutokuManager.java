@@ -81,7 +81,8 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンス
      */
     public static HihokenshaShikakuShutokuManager createInstance() {
         return InstanceProvider.create(HihokenshaShikakuShutokuManager.class);
@@ -148,8 +149,8 @@ public class HihokenshaShikakuShutokuManager {
     public RString getSaidaiEdaban(HihokenshaNo hihokenshaNo, FlexibleDate idoYMD) {
         requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号.toString()));
         requireNonNull(idoYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
-        DbT1001HihokenshaDaichoEntity entity = dbT1001Dac.get最大枝番(hihokenshaNo, idoYMD);
-        if (entity == null || entity.getEdaNo().isEmpty()) {
+        DbT1001HihokenshaDaichoEntity entity = dbT1001Dac.selectMaxEdaNoByKey(hihokenshaNo, idoYMD);
+        if (entity == null || RString.isNullOrEmpty(entity.getEdaNo())) {
             return 枝番;
         } else {
             return new RString(String.valueOf(Integer.valueOf(entity.getEdaNo().toString().trim()) + 1)).padZeroToLeft(INT_4);

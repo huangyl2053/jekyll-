@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblCommentDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -293,7 +293,7 @@ public class tblCommentDiv extends TablePanel {
  * @author 自動生成
  */
 class celTainocolorKannoAttblComment extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("TainocolorKanno")
     private TainocolorKannoDiv TainocolorKanno;
 
@@ -323,7 +323,7 @@ class celTainocolorKannoAttblComment extends TableCell {
  * @author 自動生成
  */
 class celTainoSetsumeiKannoAttblComment extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblTainoSetsumeiKanno")
     private Label lblTainoSetsumeiKanno;
 
@@ -353,7 +353,7 @@ class celTainoSetsumeiKannoAttblComment extends TableCell {
  * @author 自動生成
  */
 class celTainocolorMitoraiAttblComment extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("TainocolorMitorai")
     private TainocolorMitoraiDiv TainocolorMitorai;
 
@@ -383,7 +383,7 @@ class celTainocolorMitoraiAttblComment extends TableCell {
  * @author 自動生成
  */
 class celTainoSetsumeiMiToraiAttblComment extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblTainoSetsumeiMiTorai")
     private Label lblTainoSetsumeiMiTorai;
 
@@ -413,7 +413,7 @@ class celTainoSetsumeiMiToraiAttblComment extends TableCell {
  * @author 自動生成
  */
 class celTainocolorToraiAttblComment extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("TainocolorTorai")
     private TainocolorToraiDiv TainocolorTorai;
 
@@ -443,7 +443,7 @@ class celTainocolorToraiAttblComment extends TableCell {
  * @author 自動生成
  */
 class celTainoSetsumeiToraiAttblComment extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblTainoSetsumeiTorai")
     private Label lblTainoSetsumeiTorai;
 
@@ -473,7 +473,7 @@ class celTainoSetsumeiToraiAttblComment extends TableCell {
  * @author 自動生成
  */
 class celTainocolorTaishoGaiAttblComment extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("TainocolorTaishoGai")
     private TainocolorTaishoGaiDiv TainocolorTaishoGai;
 
@@ -503,7 +503,7 @@ class celTainocolorTaishoGaiAttblComment extends TableCell {
  * @author 自動生成
  */
 class celTainoSetsumeiTaishoGaiAttblComment extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblTainoSetsumeiTaishoGai")
     private Label lblTainoSetsumeiTaishoGai;
 
@@ -533,7 +533,7 @@ class celTainoSetsumeiTaishoGaiAttblComment extends TableCell {
  * @author 自動生成
  */
 class celTainocolorKanoAttblComment extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("TainocolorKano")
     private TainocolorKanoDiv TainocolorKano;
 
@@ -563,7 +563,7 @@ class celTainocolorKanoAttblComment extends TableCell {
  * @author 自動生成
  */
 class celTainoSetsumeiKanoAttblComment extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblTainoSetsumeiKano")
     private Label lblTainoSetsumeiKano;
 

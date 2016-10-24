@@ -4,6 +4,10 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_jusho = function () {
+                return "onChange_jusho";
+            };
+
             Events.onClickBtnClose = function () {
                 return "onClickBtnClose";
             };

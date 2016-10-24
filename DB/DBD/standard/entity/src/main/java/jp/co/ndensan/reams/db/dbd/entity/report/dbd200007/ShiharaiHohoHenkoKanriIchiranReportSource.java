@@ -12,6 +12,26 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 public class ShiharaiHohoHenkoKanriIchiranReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
+    public static final RString 改頁_郵便番号;
+    public static final RString 改頁_町域コード;
+    public static final RString 改頁_行政区コード;
+    public static final RString 改頁_世帯コード;
+    public static final RString 改頁_識別コード;
+    public static final RString 改頁_氏名５０音カナ;
+    public static final RString 改頁_市町村コード;
+    public static final RString 改頁_被保険者番号;
+
+    static {
+        改頁_郵便番号 = new RString("yubinNo");
+        改頁_町域コード = new RString("choikiCode");
+        改頁_行政区コード = new RString("gyoseikuCode");
+        改頁_世帯コード = new RString("setaiCode");
+        改頁_識別コード = new RString("shikibetsuCode");
+        改頁_氏名５０音カナ = new RString("shimeiKana");
+        改頁_市町村コード = new RString("shichosonCode");
+        改頁_被保険者番号 = new RString("hihokenshaNo");
+    }
+
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
     public RString printTimeStamp;
     @ReportItem(name = "title", length = 19, order = 2)
@@ -303,5 +323,22 @@ public class ShiharaiHohoHenkoKanriIchiranReportSource implements IReportSource 
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+
+    @ReportItem(name = "yubinNo", order = 144)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", order = 145)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", order = 146)
+    public RString gyoseikuCode;
+    @ReportItem(name = "setaiCode", order = 147)
+    public RString setaiCode;
+    @ReportItem(name = "shikibetsuCode", order = 148)
+    public RString shikibetsuCode;
+    @ReportItem(name = "shimeiKana", order = 149)
+    public RString shimeiKana;
+    @ReportItem(name = "shichosonCode", order = 150)
+    public RString shichosonCode;
+    @ReportItem(name = "hihokenshaNo", order = 151)
+    public RString hihokenshaNo;
 // </editor-fold>
 }

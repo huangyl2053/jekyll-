@@ -7,7 +7,10 @@ package jp.co.ndensan.reams.db.dbe.business.core.hiyobenshotoshiharaimeisaisho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
@@ -54,10 +57,10 @@ public class HiyobenshotoShiharaiMeisaishoEdit {
             meisaisho.set対象期間1(対象期間);
             meisaisho.set振込予定日1(振込予定日);
             if (koza != null && !koza.isEmpty()) {
-                meisaisho.set金融機関1(new RString(koza.get(0).get金融機関().toString()));
-                meisaisho.set支店1(new RString(koza.get(0).get支店().toString()));
-                meisaisho.set種別1(new RString(koza.get(0).get預金種別().toString()));
-                meisaisho.set番号1(new RString(koza.get(0).get口座番号().toString()));
+                meisaisho.set金融機関1(get金融機関(koza.get(0).get金融機関()));
+                meisaisho.set支店1(get支店(koza.get(0).get支店()));
+                meisaisho.set種別1(get種別(koza.get(0).get預金種別()));
+                meisaisho.set番号1(koza.get(0).get口座番号());
             }
         } else if (index % INDEX_4 == 2) {
             if (entity.getShinsakaiIinShimei() != null) {
@@ -73,10 +76,10 @@ public class HiyobenshotoShiharaiMeisaishoEdit {
             meisaisho.set対象期間2(対象期間);
             meisaisho.set振込予定日2(振込予定日);
             if (koza != null && !koza.isEmpty()) {
-                meisaisho.set金融機関2(new RString(koza.get(0).get金融機関().toString()));
-                meisaisho.set支店2(new RString(koza.get(0).get支店().toString()));
-                meisaisho.set種別2(new RString(koza.get(0).get預金種別().toString()));
-                meisaisho.set番号2(new RString(koza.get(0).get口座番号().toString()));
+                meisaisho.set金融機関2(get金融機関(koza.get(0).get金融機関()));
+                meisaisho.set支店2(get支店(koza.get(0).get支店()));
+                meisaisho.set種別2(get種別(koza.get(0).get預金種別()));
+                meisaisho.set番号2(koza.get(0).get口座番号());
             }
         } else if (index % INDEX_4 == INDEX_3) {
             if (entity.getShinsakaiIinShimei() != null) {
@@ -92,10 +95,10 @@ public class HiyobenshotoShiharaiMeisaishoEdit {
             meisaisho.set対象期間3(対象期間);
             meisaisho.set振込予定日3(振込予定日);
             if (koza != null && !koza.isEmpty()) {
-                meisaisho.set金融機関3(new RString(koza.get(0).get金融機関().toString()));
-                meisaisho.set支店3(new RString(koza.get(0).get支店().toString()));
-                meisaisho.set種別3(new RString(koza.get(0).get預金種別().toString()));
-                meisaisho.set番号3(new RString(koza.get(0).get口座番号().toString()));
+                meisaisho.set金融機関3(get金融機関(koza.get(0).get金融機関()));
+                meisaisho.set支店3(get支店(koza.get(0).get支店()));
+                meisaisho.set種別3(get種別(koza.get(0).get預金種別()));
+                meisaisho.set番号3(koza.get(0).get口座番号());
             }
         } else {
             if (entity.getShinsakaiIinShimei() != null) {
@@ -111,10 +114,10 @@ public class HiyobenshotoShiharaiMeisaishoEdit {
             meisaisho.set対象期間4(対象期間);
             meisaisho.set振込予定日4(振込予定日);
             if (koza != null && !koza.isEmpty()) {
-                meisaisho.set金融機関4(new RString(koza.get(0).get金融機関().toString()));
-                meisaisho.set支店4(new RString(koza.get(0).get支店().toString()));
-                meisaisho.set種別4(new RString(koza.get(0).get預金種別().toString()));
-                meisaisho.set番号4(new RString(koza.get(0).get口座番号().toString()));
+                meisaisho.set金融機関4(get金融機関(koza.get(0).get金融機関()));
+                meisaisho.set支店4(get支店(koza.get(0).get支店()));
+                meisaisho.set種別4(get種別(koza.get(0).get預金種別()));
+                meisaisho.set番号4(koza.get(0).get口座番号());
             }
         }
         return meisaisho;
@@ -125,5 +128,26 @@ public class HiyobenshotoShiharaiMeisaishoEdit {
             return RString.EMPTY;
         }
         return new RString(date.toString());
+    }
+
+    private RString get金融機関(KinyuKikan date) {
+        if (date != null) {
+            return date.get金融機関名称();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get支店(KinyuKikanShiten date) {
+        if (date != null) {
+            return date.get支店名称();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get種別(YokinShubetsuPattern date) {
+        if (date != null) {
+            return date.get預金種別名称();
+        }
+        return RString.EMPTY;
     }
 }

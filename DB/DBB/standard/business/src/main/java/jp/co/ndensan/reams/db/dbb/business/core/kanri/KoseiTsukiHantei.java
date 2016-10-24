@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiHyoki;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
@@ -175,7 +176,7 @@ public class KoseiTsukiHantei {
         if (Tsuki.翌年度4月.equals(tsuki) || Tsuki.翌年度5月.equals(tsuki)) {
             return new Kitsuki(Tsuki._4月, RString.EMPTY, TsukiShorkiKubun.デフォルト, false, KitsukiHyoki.EMPTY);
         } else {
-            return new FuchoKiUtil(new FlexibleYear(指定日.getYear().toDateString())).get期月リスト().get月の期(tsuki);
+            return new TokuchoKiUtil(new FlexibleYear(指定日.getYear().toDateString())).get期月リスト().get月の期(tsuki);
         }
     }
 }

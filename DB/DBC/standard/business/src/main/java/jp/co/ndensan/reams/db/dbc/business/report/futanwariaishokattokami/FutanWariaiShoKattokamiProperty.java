@@ -70,7 +70,7 @@ public class FutanWariaiShoKattokamiProperty extends ReportPropertyBase<FutanWar
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString(""), new RString("")),
+        氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"shikibetsuTaisho_kanaShimei\"")),
         /**
          * 生年月日
          */

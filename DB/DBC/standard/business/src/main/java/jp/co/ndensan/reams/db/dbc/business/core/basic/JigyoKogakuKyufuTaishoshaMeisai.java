@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -196,13 +195,32 @@ public class JigyoKogakuKyufuTaishoshaMeisai
     @Override
     public JigyoKogakuKyufuTaishoshaMeisai deleted() {
         DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+        deletedEntity.setState(EntityDataState.Deleted);
         return new JigyoKogakuKyufuTaishoshaMeisai(deletedEntity, id);
+    }
+
+    /**
+     * add JigyoKogakuKyufuTaishoshaMeisai
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public JigyoKogakuKyufuTaishoshaMeisai added() {
+        DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new JigyoKogakuKyufuTaishoshaMeisai(addedEntity, id);
+    }
+
+    /**
+     * 修正KogakuKyufuTaishoshaMeisai
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public JigyoKogakuKyufuTaishoshaMeisai modified() {
+        DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new JigyoKogakuKyufuTaishoshaMeisai(modifiedEntity, id);
     }
 
     /**

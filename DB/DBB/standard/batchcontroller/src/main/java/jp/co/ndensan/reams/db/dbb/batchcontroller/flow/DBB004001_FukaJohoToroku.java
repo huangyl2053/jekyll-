@@ -17,15 +17,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTorokuParameter> {
 
+    private static final String HENSHU_PROCESS = "fukaJohoHenshuProcess";
+    private static final String FUKAJOHOINSERTPROCESS = "fukaJohoInsertProcess";
+    private static final String CALL_CHOTEITOROKU_FLOW = "ChoteiTorokuFlow";
+    private static final RString CHOTEITOROKU_FLOWID = new RString("CAX000001_ChoteiToroku");
+
     @Override
     protected void defineFlow() {
         executeStep(HENSHU_PROCESS);
         executeStep(CALL_CHOTEITOROKU_FLOW);
         executeStep(FUKAJOHOINSERTPROCESS);
     }
-
-    private static final String HENSHU_PROCESS = "fukaJohoHenshuProcess";
-    private static final String FUKAJOHOINSERTPROCESS = "fukaJohoInsertProcess";
 
     /**
      * 賦課の情報を一括登録事前データを編集します。
@@ -37,8 +39,6 @@ public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTo
         return loopBatch(FukaJohoHenshuProcess.class).arguments(getParameter()
                 .toFukaJohoHenshuProcessParameter()).define();
     }
-    private static final String CALL_CHOTEITOROKU_FLOW = "ChoteiTorokuFlow";
-    private static final RString BATCH_ID = new RString("ChoteiTorokuFlow");
 
     /**
      * 賦課情報一時テーブルのすべての要素を取得します。
@@ -47,9 +47,11 @@ public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTo
      */
     @Step(CALL_CHOTEITOROKU_FLOW)
     protected IBatchFlowCommand callChoteiTorokuFlow() {
-        ChoteiTorokuParameter choteiTorokuParameter = new ChoteiTorokuParameter();
-        choteiTorokuParameter.setSchema(new RString("rgdb"));
-        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, choteiTorokuParameter).define();
+        ChoteiTorokuParameter parameter = new ChoteiTorokuParameter();
+        parameter.setSchema(new RString("rgdb"));
+        parameter.setChoteiIdAutoNumbering(true);
+        parameter.setShunoIdAutoNumbering(true);
+        return otherBatchFlow(CHOTEITOROKU_FLOWID, SubGyomuCode.CAX収滞公開, parameter).define();
     }
 
     /**

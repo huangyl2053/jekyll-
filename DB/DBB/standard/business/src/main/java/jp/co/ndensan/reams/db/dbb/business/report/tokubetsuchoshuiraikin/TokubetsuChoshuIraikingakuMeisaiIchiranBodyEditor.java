@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJoh
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranSource;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -46,8 +46,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
     /**
      * インスタンスを生成します。
      *
-     * @param inputEntity
-     * {@link TokubetsuChoshuIraikingakuMeisaiIchiranInputParam}
+     * @param inputEntity {@link TokubetsuChoshuIraikingakuMeisaiIchiranInputParam}
      */
     public TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor(
             TokubetsuChoshuIraikingakuMeisaiIchiranInputParam inputEntity) {

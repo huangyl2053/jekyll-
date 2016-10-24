@@ -150,7 +150,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 ReportIdDBC.DBC200060.getReportId(), processParameter.getShutsuryokujunId());
         if (並び順 != null) {
             出力順 = MyBatisOrderByClauseCreator.create(
-                    KeikakuTodokedeJokyoIchiranOrder.class, 並び順).replace(ORDER_BY, EUC_WRITER_DELIMITER);
+                    KeikakuTodokedeJokyoIchiranOrder.class, 並び順).replace(ORDER_BY, RString.EMPTY);
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
                     breakItemIds.add(item.get項目ID());
@@ -296,7 +296,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
 
     private void setReportList(KeikakuTodokedeJokyoIchiranEntity entity, KyotakuServiceKeikakuSaList reportList) {
         reportList.set被保険者番号(entity.get被保険者番号());
-        reportList.set住民コード(entity.get識別コード());
+        reportList.set識別コード(entity.get識別コード());
         reportList.set宛名(entity.get宛名());
         reportList.set資格取得日(entity.get資格取得年月日());
         reportList.set資格喪失日(entity.get資格喪失年月日());

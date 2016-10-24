@@ -155,5 +155,6 @@ WITH master AS (
                         AND "ShikibetsuTaisho"."chikuCode3" <![CDATA[<=]]> #{地区選択コードTo}
                     </if>
                 </if>
+                ${syutsuryokujun}
      </select>
 </mapper>

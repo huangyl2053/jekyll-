@@ -116,8 +116,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
     }
 
     private void edit減額対象情報(KyufuGengakuHaakuIchiranReportSource source) {
-        //TODO
-        if (count > NUM_3) {
+        if (count % NUM_14 > 2) {
             return;
         }
         int no1 = getNo(1);
@@ -156,6 +155,10 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
             source.listGengakuJohoUpper_16 = 減額対象情報.get給付額減額期間();
             source.listGengakuJohoLower_4 = get給付額減額開始日_終了日(減額対象情報);
         }
+        if (給付額減額把握リストEntity.get被保険者情報Entity() != null) {
+            source.shichosonCode = 給付額減額把握リストEntity.get被保険者情報Entity().get市町村コード();
+            source.choikiCode = 給付額減額把握リストEntity.get被保険者情報Entity().get町域コード();
+        }
     }
 
     private RString get給付額減額開始日_終了日(GengakuTaishoJohoEntity 減額対象情報) {
@@ -175,7 +178,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
     }
 
     private int getNo(int no) {
-        return NUM_4 * count + no;
+        return NUM_4 * (count % NUM_14) + no;
     }
 
     private void editHeader(KyufuGengakuHaakuIchiranReportSource source) {
@@ -309,12 +312,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
 
     private void edit収納情報(KyufuGengakuHaakuIchiranReportSource source) {
         List<ShunoJohoEntity> 収納情報リスト = this.給付額減額把握リストEntity.get収納情報リスト();
-        int ページ;
-        if (count < NUM_14) {
-            ページ = 0;
-        } else {
-            ページ = 1;
-        }
+        int ページ = count / NUM_14;
         set年度のヘッダ(source, 収納情報リスト, ページ);
         edit年度1の期(source, 収納情報リスト, ページ);
         edit年度2の期(source, 収納情報リスト, ページ);

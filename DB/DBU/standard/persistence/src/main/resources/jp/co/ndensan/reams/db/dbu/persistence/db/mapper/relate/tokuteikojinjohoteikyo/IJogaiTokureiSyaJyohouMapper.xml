@@ -21,7 +21,7 @@
         LEFT JOIN 
             <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.住特施設" /> AS jogaiShisetsu
         ON
-            jogaiShisetsu.shikibetsuCode = hihokenDaicho.hihokenDaichoshikibetsuCode
+            jogaiShisetsu.shikibetsuCode = hihokenDaicho.shikibetsuCode
         AND jogaiShisetsu.nyushoYMD = hihokenDaicho.jushochitokureiTekiyoYMD
         <if test = "is当初または版改定">
             WHERE
@@ -51,7 +51,7 @@
             LEFT JOIN 
                 <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.住特施設" /> AS jogaiShisetsu1
             ON
-                jogaiShisetsu1.shikibetsuCode = hihokenDaicho1.hihokenDaichoshikibetsuCode
+                jogaiShisetsu1.shikibetsuCode = hihokenDaicho1.shikibetsuCode
             AND jogaiShisetsu1.nyushoYMD = hihokenDaicho1.jushochitokureiTekiyoYMD
             INNER JOIN (SELECT 
                             dbT7304."hihokenshaNo",
@@ -88,7 +88,7 @@
             LEFT JOIN 
                 <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.住特施設" /> AS jogaiShisetsu2
             ON
-                jogaiShisetsu2.shikibetsuCode = hihokenDaicho2.hihokenDaichoshikibetsuCode
+                jogaiShisetsu2.shikibetsuCode = hihokenDaicho2.shikibetsuCode
             AND jogaiShisetsu2.nyushoYMD = hihokenDaicho2.jushochitokureiTekiyoYMD
             INNER JOIN 
                 <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.介護施設" /> AS kaigoShisetsu
@@ -104,7 +104,7 @@
             <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.allColumns_TeikyoKihonJoho" />
          FROM "TeikyoKihonJohoNNTemp" AS teikyoKihonJoho
         INNER JOIN rgua.${psmShikibetsuTaisho} AS psm
-            ON psm."shikibetsuCode" = teikyoKihonJoho.shikibetsuCode
+            ON psm."shikibetsuCode" = teikyoKihonJoho."shikibetsuCode"
         <if test = "is異動">    
             WHERE NOT EXISTS(SELECT 1
                               FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" AS dbT7304
@@ -158,9 +158,9 @@
     
     <resultMap id="ResultMap_TeyikyouTayisyousyaJyohouRelateEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeyikyouTayisyousyaJyohouRelateEntity" autoMapping="true">
         <id property="teikyoKihonJohoNNTempEntity.hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="teikyoKihonJohoNNTempEntity.inputShikibetsuNo" column="dataSetKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="teikyoKihonJohoNNTempEntity.dataSetKey" column="dataSetKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kojinNo" column="kojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KojinNoTypeHandler"/>
-        <association property="teikyoKihonJohoNNTempEntity" resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.ResultMap_TeikyoKihonJohoNNTempEntity"/>
+        <association property="teikyoKihonJohoNNTempEntity" resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.ResultMap_TeikyoKihonJohoEntity"/>
     </resultMap>
     
     <resultMap id="ResultMap_TeikyoKihonJohoEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity" autoMapping="true">
@@ -253,7 +253,7 @@
                                                 rgdb."DbT1001HihokenshaDaicho" AS hihokenshaDaicho3
                                         WHERE
                                                 (
-                                                        hihokenshaDaicho3."shikakuShutokuYMD" <![CDATA[<>]]> hihokenshaDaicho3.shikakuSoshitsuYMD
+                                                        hihokenshaDaicho3."shikakuShutokuYMD" <![CDATA[<>]]> hihokenshaDaicho3."shikakuSoshitsuYMD"
                                                 AND hihokenshaDaicho3."logicalDeletedFlag" = False
                                                 AND hihokenshaDaicho3."jushochitokureiTekiyoJiyuCode" =  #{自特例適用}
                                                 AND (hihokenshaDaicho3."jushochitokureiKaijoJiyuCode" IS NULL OR hihokenshaDaicho3."jushochitokureiKaijoJiyuCode" = '')
@@ -270,10 +270,10 @@
                                 hihokenshaDaicho4.hihokenshaNo = hihokenshaDaicho2.hihokenshaNo
                         AND hihokenshaDaicho4.shikakuShutokuYMD = hihokenshaDaicho2.shikakuShutokuYMD
                         AND (
-                                        hihokenshaDaicho4.idoYMD <![CDATA[>]]> hihokenshaDaicho2.idoYMD
+                                        hihokenshaDaicho2.idoYMD <![CDATA[<]]> hihokenshaDaicho4.idoYMD
                                 OR  (
                                                 hihokenshaDaicho4.idoYMD = hihokenshaDaicho2.idoYMD
-                                        AND hihokenshaDaicho4.edaNo <![CDATA[>]]> hihokenshaDaicho2.edaNo
+                                        AND hihokenshaDaicho2.edaNo <![CDATA[<]]> hihokenshaDaicho4.edaNo
                                         )
                                 )
                 ))
@@ -314,7 +314,7 @@
                                 nyutaisho."daichoShubetsu" = #{台帳種別}
                         AND nyutaisho."shikibetsuCode" = shisetsuNyutaisho."shikibetsuCode"
                         AND nyutaisho."nyushoYMD" = shisetsuNyutaisho."nyushoYMD"
-                        AND nyutaisho."rirekiNo" <![CDATA[>]]> shisetsuNyutaisho."rirekiNo"
+                        AND shisetsuNyutaisho."rirekiNo" <![CDATA[<]]> nyutaisho."rirekiNo"
                         )
         )
     </sql>

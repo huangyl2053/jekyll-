@@ -49,7 +49,7 @@ public class DbWT111ZKyufuJissekiT1CsvEntity {
     @CsvField(order = 110, name = "サービス種類コード")
     private ServiceShuruiCode サービス種類コード;
     @CsvField(order = 120, name = "サービス実日数")
-    private Integer サービス実日数;
+    private int サービス実日数;
     @CsvField(order = 130, name = "計画単位数")
     private Decimal 計画単位数;
     @CsvField(order = 140, name = "限度額管理対象単位数")
@@ -57,9 +57,9 @@ public class DbWT111ZKyufuJissekiT1CsvEntity {
     @CsvField(order = 150, name = "限度額管理対象外単位数")
     private Decimal 限度額管理対象外単位数;
     @CsvField(order = 160, name = "短期入所計画日数")
-    private Integer 短期入所計画日数;
+    private int 短期入所計画日数;
     @CsvField(order = 170, name = "短期入所実日数")
-    private Integer 短期入所実日数;
+    private int 短期入所実日数;
     @CsvField(order = 180, name = "保険_単位数合計")
     private Decimal 保険_単位数合計;
     @CsvField(order = 190, name = "保険_単位数単価")
@@ -111,7 +111,7 @@ public class DbWT111ZKyufuJissekiT1CsvEntity {
     @CsvField(order = 420, name = "公費３_出来高医療費本人負担額")
     private Decimal 公費３_出来高医療費本人負担額;
     @CsvField(order = 430, name = "後_短期入所実日数")
-    private Integer 後_短期入所実日数;
+    private int 後_短期入所実日数;
     @CsvField(order = 440, name = "後_単位数合計")
     private Decimal 後_単位数合計;
     @CsvField(order = 450, name = "後_保険請求分請求額")
@@ -145,9 +145,9 @@ public class DbWT111ZKyufuJissekiT1CsvEntity {
     @CsvField(order = 590, name = "後_公費３_出来高請求額")
     private Decimal 後_公費３_出来高請求額;
     @CsvField(order = 600, name = "再審査回数")
-    private Integer 再審査回数;
+    private int 再審査回数;
     @CsvField(order = 610, name = "過誤回数")
-    private Integer 過誤回数;
+    private int 過誤回数;
     @CsvField(order = 620, name = "審査年月")
     private FlexibleYearMonth 審査年月;
 

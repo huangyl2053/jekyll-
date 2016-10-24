@@ -96,19 +96,17 @@ public class JukyushaShinseiNinteiJokyohyoOutputProcess extends BatchProcessBase
 
     private void outputJokenhyoFactory() {
         JukyushagenmenninteiDateManager manager = new JukyushagenmenninteiDateManager();
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        RString 市町村名 = association.get市町村名();
         RString ページ数 = new RString(reportSourceWriter.pageCount().value());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 processParameter.get帳票ID().value(),
-                地方公共団体.getLasdecCode_().getColumnValue(),
-                地方公共団体.get市町村名(),
+                市町村コード.getColumnValue(),
+                市町村名称,
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 new RString("「受給者減免月別申請・認定状況表」"),
                 ページ数,
                 new RString("なし"),
                 RString.EMPTY,
-                manager.set出力条件(processParameter, 市町村名));
+                manager.set出力条件(processParameter, 市町村名称));
         OutputJokenhyoFactory.createInstance(item).print();
     }
 }

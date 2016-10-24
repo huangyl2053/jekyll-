@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.service.report.gassanjigyobunkeisankekkarenrakuhyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanPanelEntity;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunkeisankekkarenrakuhyo.GassanJigyobunKeisanKekkaRenrakuhyoProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunkeisankekkarenrakuhyo.GassanJigyobunKeisanKekkaRenrakuhyoReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -62,7 +62,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
      * @param 作成日 FlexibleDate
      * @return SourceDataCollection
      */
-    public SourceDataCollection print(List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> entityList,
+    public SourceDataCollection print(List<JigyobunShikyugakuKeisanPanelEntity> entityList,
             IShikibetsuTaisho 宛名データ,
             FlexibleDate 作成日) {
         SourceDataCollection collection;
@@ -81,7 +81,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
      * @param 作成日 FlexibleDate
      * @param reportManager ReportManager
      */
-    public void printSingle(List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> entityList,
+    public void printSingle(List<JigyobunShikyugakuKeisanPanelEntity> entityList,
             IShikibetsuTaisho 宛名データ,
             FlexibleDate 作成日,
             ReportManager reportManager) {
@@ -117,8 +117,8 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
 
             DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity mutiEntity = new DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity();
             DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity singleEntity = new DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity();
-            JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity panelEntity1 = new JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity();
-            JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity panelEntity2 = new JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity();
+            JigyobunShikyugakuKeisanPanelEntity panelEntity1 = new JigyobunShikyugakuKeisanPanelEntity();
+            JigyobunShikyugakuKeisanPanelEntity panelEntity2 = new JigyobunShikyugakuKeisanPanelEntity();
 
             for (int j = INDEX_0; j < entityList.size(); j++) {
                 if (null == entityList.get(j) || null == entityList.get(j).getDbt3173Entity()) {
@@ -143,9 +143,17 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
                     if (under70Futangaku != null) {
                         uederFutangaku = uederFutangaku.add(new Decimal(under70Futangaku.toString()));
                     }
+                    RString under70Shikyugaku = dbt3173Entity.getUnder70_Shikyugaku();
+                    if (under70Shikyugaku != null) {
+                        underShikyugaku = underShikyugaku.add(new Decimal(under70Shikyugaku.toString()));
+                    }
                     RString futangaku = dbt3173Entity.getFutangaku();
                     if (futangaku != null) {
                         futangakuDec = futangakuDec.add(new Decimal(futangaku.toString()));
+                    }
+                    RString shikyugaku = dbt3173Entity.getShikyugaku();
+                    if (shikyugaku != null) {
+                        shikyugakuDec = shikyugakuDec.add(new Decimal(shikyugaku.toString()));
                     }
                     mutiEntity.setOver70_Futangaku(decimal_to_string(overFutangaku));
                     mutiEntity.setOver70_Shikyugaku(decimal_to_string(overShikyugaku));
@@ -191,10 +199,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
                     panelEntity2.setDbt3173Entity(singleEntity);
                     panelEntity2.setDbt3172Entity(dbt3172Entity);
                 }
-                int count = entityList.size() / INDEX_12;
-                if (entityList.size() % INDEX_12 != 0) {
-                    count = count + 1;
-                }
+                int count = editCount(entityList);
                 printOrder(保険制度コード, entityList, j, 通知書定型文1, 通知書定型文2,
                         panelEntity1, 認証者, 宛名データ, 問い合わせ先, flag, reportSourceWriter, panelEntity2, isBreak, count);
 
@@ -203,12 +208,20 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
         }
     }
 
-    private void printOrder(RString 保険制度コード, List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> entityList,
-            int j, RString 通知書定型文1, RString 通知書定型文2, JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity panelEntity1,
+    private int editCount(List<JigyobunShikyugakuKeisanPanelEntity> entityList) {
+        int count = entityList.size() / INDEX_12;
+        if (entityList.size() % INDEX_12 != 0) {
+            count = count + 1;
+        }
+        return count;
+    }
+
+    private void printOrder(RString 保険制度コード, List<JigyobunShikyugakuKeisanPanelEntity> entityList,
+            int j, RString 通知書定型文1, RString 通知書定型文2, JigyobunShikyugakuKeisanPanelEntity panelEntity1,
             NinshoshaSource 認証者,
             IShikibetsuTaisho 宛名データ, ToiawasesakiSource 問い合わせ先, boolean flag,
             ReportSourceWriter<GassanJigyobunKeisanKekkaRenrakuhyoSource> reportSourceWriter,
-            JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity panelEntity2, boolean isBreak, int count) {
+            JigyobunShikyugakuKeisanPanelEntity panelEntity2, boolean isBreak, int count) {
 
         if (保険制度コード.equals(INT_5)
                 && !(j - 1 < INDEX_0)

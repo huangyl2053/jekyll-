@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130020.InsTorikomiKoki
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130020.UpdTorikomiKokiKoreshaJyohoTemp1Processs;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130020.UpdTorikomiKokiKoreshaJyohoTemp2Processs;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC130020.DBC130020_KokikoreishaShikakuIdoInParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130010.UpdShoriDateKanriProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130020.TorikomiKokiKoreshaJyohoTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130020.UpdTorikomiKokuhoJyohoTempProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -28,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC130020_KokikoreishaShikakuIdoIn extends BatchFlowBase<DBC130020_KokikoreishaShikakuIdoInParameter> {
 
     private RString 市町村識別ID;
+    private static final RString 処理名 = new RString("後期高齢者情報取り込み");
 
     private static final String 取込後期高齢者情報に登録 = "kokikoreishaShikakuIdoInOutputProcess";
     private static final String エラーチェックして取込後期高齢者情報に更新一 = "updTorikomiKokiKoreshaJyohoProcess1";
@@ -52,7 +54,6 @@ public class DBC130020_KokikoreishaShikakuIdoIn extends BatchFlowBase<DBC130020_
         executeStep(エラーチェックして取込後期高齢者情報に更新二);
         executeStep(後期高齢者情報インポート用に登録);
         executeStep(処理日付管理マスタ更新);
-        executeStep(エラーチェックして取込後期高齢者情報に更新二);
         executeStep(後期高齢者情報に登録);
         executeStep(取込確認CSVファイル出力);
     }
@@ -125,8 +126,7 @@ public class DBC130020_KokikoreishaShikakuIdoIn extends BatchFlowBase<DBC130020_
     @Step(処理日付管理マスタ更新)
     protected IBatchFlowCommand updShoriDateKanriProcess() {
         return simpleBatch(UpdShoriDateKanriProcess.class)
-                .arguments(getUpdTorikomiKokuhoJyohoTempProcessParameter())
-                .define();
+                .arguments(getUpdShoriDateKanriProcessParameter()).define();
     }
 
     /**
@@ -155,5 +155,15 @@ public class DBC130020_KokikoreishaShikakuIdoIn extends BatchFlowBase<DBC130020_
                 getParameter().getIfType(),
                 getParameter().getTorikomiKeishiki(),
                 getParameter().getShoriTimestamp());
+    }
+
+    private UpdShoriDateKanriProcessParameter getUpdShoriDateKanriProcessParameter() {
+        return new UpdShoriDateKanriProcessParameter(getParameter().getInsurerDistinction(),
+                getParameter().getTableName(),
+                getParameter().getShoriShichoson(),
+                getParameter().getIfType(),
+                getParameter().getTorikomiKeishiki(),
+                getParameter().getShoriTimestamp(),
+                処理名);
     }
 }

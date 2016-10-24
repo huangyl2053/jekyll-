@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb100013.KarisanteiHenjunkaHenkoTsuchishoA4TateReport;
-import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty;
+import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
@@ -151,7 +151,7 @@ public class TsuchishoHakoA4TypeProcess extends BatchProcessBase<KarisanteiGakuH
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID_DBB100012, Long.parseLong(parameter.get出力順ID().toString()));
 
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucPathName = Path.combinePath(manager.getEucOutputDirectry(), EUCファイル名);
         csvWriter = new CsvWriter.InstanceBuilder(eucPathName).canAppend(false)
                 .alwaysWriteHeader(KariSanteigakuHenkoTsuchishoHakkoIchiranData.class)
@@ -176,8 +176,8 @@ public class TsuchishoHakoA4TypeProcess extends BatchProcessBase<KarisanteiGakuH
             return;
         }
         service.set普徴と特徴(編集後仮算定通知書, entity);
-        TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport ichiranReport = new TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport(
-                編集後仮算定通知書, outputOrder, parameter.get帳票作成日時(), 連番);
+        TokuChoHeijunkaKariSanteigakuHakkoIchiranReport ichiranReport = new TokuChoHeijunkaKariSanteigakuHakkoIchiranReport(
+                entity, 編集後仮算定通知書, outputOrder, parameter.get帳票作成日時(), 連番);
         ichiranReport.writeBy(reportSourceWriterIchiran);
         csvData = service.csvData作成(編集後仮算定通知書, parameter, 連番, 通知書番号, entity);
         csvWriter.writeLine(csvData);

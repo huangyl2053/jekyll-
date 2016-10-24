@@ -126,11 +126,11 @@ public class HokenshaSofuListHandler {
     private static final RString 九 = new RString("2");
     private static final RString H1 = new RString("H1");
     private static final RString D8 = new RString("D8");
-    private static FlexibleYearMonth 審査年月;
+    private FlexibleYearMonth 審査年月;
     private static FlexibleYearMonth 審査年月の翌月;
     private static FlexibleYearMonth 処理年月;
     private static FlexibleYearMonth 処理年月の前月;
-    private static RString 識別番号;
+    private RString 識別番号;
     private static RString 保険者番号;
 
     /**
@@ -260,6 +260,8 @@ public class HokenshaSofuListHandler {
             RString 給付実績情報作成区分コード = データレコード.get(五);
             if (データ種別 != null && !データ種別.isEmpty() && データ種別.equals(給付実績情報111)) {
                 判断１(データレコード, 給付実績情報作成区分コード, myBatisParameter);
+            } else {
+                審査年月 = FlexibleYearMonth.EMPTY;
             }
             if (myBatisParameter.get同月過誤取下分フラグ() != null && myBatisParameter.get同月過誤取下分フラグ()) {
                 識別番号 = 識別番号011;
@@ -273,7 +275,9 @@ public class HokenshaSofuListHandler {
             for (UzT0885SharedFileEntryEntity entity : uzt0805EntityList) {
                 List<RString> コントロールレコード2 = csvReader.readLine();
                 RString データ種別2 = コントロールレコード2.get(四);
-                if (データ種別2 == null || データ種別2.isEmpty()) {
+                try {
+                    ConfigKeysKokuhorenTorikomi.toValue(データ種別2);
+                } catch (IllegalArgumentException e) {
                     ReadOnlySharedFileEntryDescriptor deleteEntity = new ReadOnlySharedFileEntryDescriptor(
                             new FilesystemName(entity.getSharedFileName()), entity.getSharedFileId());
                     SharedFile.deleteEntry(deleteEntity);
@@ -344,7 +348,7 @@ public class HokenshaSofuListHandler {
             }
         }
 
-        if (kanri != null && !(審査年月の翌月 != null && 審査年月の翌月.isEmpty() && kanri.get処理状態区分().equals(取消3))) {
+        if (!((審査年月の翌月 != null && 審査年月の翌月.isEmpty()) && (kanri != null && kanri.get処理状態区分().equals(取消3)))) {
             取込漏れ確認チェック(file, データ種別, kanri);
             国保連取込漏れ確認チェック(file);
             国保連取込順序逆転確認チェック(file);
@@ -375,18 +379,25 @@ public class HokenshaSofuListHandler {
                     && myBatisParameter.get同月過誤取下分フラグ()
                     && faceKanri.getコントロール上処理年月() != null
                     && faceKanri.getコントロール上処理年月().toDateString().equals(コントロールレコード.get(十))) {
-                if (!コントロールレコード.get(三).isEmpty()
-                        && faceKanri.getコントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())
-                        && !ResponseHolder.isReRequest()) {
-                    return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込済二重取込続行確認.getMessage()
-                            .replace(処理年月.toString(), ConfigKeysKokuhorenTorikomi.toValue(データ種別).toString())).respond();
-                }
-                if (new RString(DbcQuestionMessages.国保連取込済二重取込続行確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                    deleteEntitys(file);
-                    return ResponseData.of(div).respond();
-                }
+                return 二重取込チェックnew(データ種別, file, faceKanri, コントロールレコード);
             }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<JyusinDataBaitaiTorikomuDiv> 二重取込チェックnew(
+            RString データ種別, FileData file, KokuhorenInterfaceKanri faceKanri, List<RString> コントロールレコード)
+            throws NumberFormatException, ApplicationException {
+        if (!コントロールレコード.get(三).isEmpty()
+                && faceKanri.getコントロール上レコード件数() == Integer.parseInt(コントロールレコード.get(三).toString())
+                && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込済二重取込続行確認.getMessage()
+                    .replace(処理年月.toString(), ConfigKeysKokuhorenTorikomi.toValue(データ種別).toString())).respond();
+        }
+        if (new RString(DbcQuestionMessages.国保連取込済二重取込続行確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            deleteEntitys(file);
+            return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -445,7 +456,7 @@ public class HokenshaSofuListHandler {
         }
     }
 
-    private void 保険者番号取得(List<RString> データレコード, RString データ種別) {
+    private RString 保険者番号取得(List<RString> データレコード, RString データ種別) {
         if (データレコード.get(ゼロ).equals(二)) {
             if (データ種別.equals(給付実績情報111) || データ種別.equals(データ種別112) || データ種別.equals(データ種別114)
                     || データ種別.equals(データ種別386) || データ種別.equals(データ種別38B) || データ種別.equals(データ種別38H)
@@ -455,9 +466,10 @@ public class HokenshaSofuListHandler {
             保険者番号取得四(データレコード, データ種別);
             保険者番号取得五(データレコード, データ種別);
         }
+        return 保険者番号;
     }
 
-    private void 保険者番号取得四(List<RString> データレコード, RString データ種別) {
+    private RString 保険者番号取得四(List<RString> データレコード, RString データ種別) {
         if (データ種別.equals(データ種別151) || データ種別.equals(データ種別161) || データ種別.equals(データ種別221)
                 || データ種別.equals(データ種別222) || データ種別.equals(データ種別331) || データ種別.equals(データ種別351)
                 || データ種別.equals(データ種別121) || データ種別.equals(データ種別122) || データ種別.equals(データ種別123)
@@ -466,9 +478,10 @@ public class HokenshaSofuListHandler {
                 || データ種別.equals(データ種別641) || データ種別.equals(データ種別642)) {
             保険者番号 = データレコード.get(四);
         }
+        return 保険者番号;
     }
 
-    private void 保険者番号取得五(List<RString> データレコード, RString データ種別) {
+    private RString 保険者番号取得五(List<RString> データレコード, RString データ種別) {
         保険者番号取得四(データレコード, データ種別);
         if (データ種別.equals(データ種別171) || データ種別.equals(データ種別172) || データ種別.equals(データ種別175)
                 || データ種別.equals(データ種別177) || データ種別.equals(データ種別178) || データ種別.equals(データ種別651)
@@ -484,6 +497,7 @@ public class HokenshaSofuListHandler {
         if (データ種別.equals(データ種別741)) {
             保険者番号 = データレコード.get(二2);
         }
+        return 保険者番号;
     }
 
     private void deleteEntitys(FileData file) {

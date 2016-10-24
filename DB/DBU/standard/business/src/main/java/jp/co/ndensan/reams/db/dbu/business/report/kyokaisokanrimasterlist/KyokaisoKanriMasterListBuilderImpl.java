@@ -16,17 +16,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 class KyokaisoKanriMasterListBuilderImpl implements IKyokaisoKanriMasterListBuilder {
 
     private final IKyokaisoKanriMasterListEditor headerEditor;
-    private final IKyokaisoKanriMasterListEditor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
      * @param headerEditor {@link IKyokaisoKanriMasterListEditor}
-     * @param bodyEditor {@link IKyokaisoKanriMasterListEditor}
      */
-    public KyokaisoKanriMasterListBuilderImpl(IKyokaisoKanriMasterListEditor headerEditor, IKyokaisoKanriMasterListEditor bodyEditor) {
+    public KyokaisoKanriMasterListBuilderImpl(IKyokaisoKanriMasterListEditor headerEditor) {
         this.headerEditor = headerEditor;
-        this.bodyEditor = bodyEditor;
     }
 
     /**
@@ -36,6 +33,6 @@ class KyokaisoKanriMasterListBuilderImpl implements IKyokaisoKanriMasterListBuil
      */
     @Override
     public KyokaisoKanriMasterListReportSource build() {
-        return ReportEditorJoiner.from(new KyokaisoKanriMasterListReportSource()).join(headerEditor).join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new KyokaisoKanriMasterListReportSource()).join(headerEditor).buildSource();
     }
 }

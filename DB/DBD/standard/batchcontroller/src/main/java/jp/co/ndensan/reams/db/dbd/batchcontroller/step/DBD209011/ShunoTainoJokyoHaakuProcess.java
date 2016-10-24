@@ -58,14 +58,7 @@ public class ShunoTainoJokyoHaakuProcess extends BatchProcessBase<ShunoTainoJoky
     protected void process(ShunoTainoJokyoHaakuEntity entity) {
         if (!entity.get対象者TmpTblEntity().getHihokenshaNo2().equals(当該被保険者番号)) {
             if (当該被保険者番号 != null) {
-                RDate 納期限;
-                for (ShunoTainoJokyoHaakuEntity haakuEntity : 滞納状況把握情報List) {
-                    納期限 = haakuEntity.get収納状況TmpTblEntity().getTmp_nokigen();
-                    if ((最古の滞納納期限 == null || (納期限 != null && 納期限.isBefore(最古の滞納納期限)))
-                            && MinoKannoKubun.未納あり.getコード().equals(haakuEntity.get収納状況TmpTblEntity().getTmp_minoKannoKubun())) {
-                        最古の滞納納期限 = 納期限;
-                    }
-                }
+                edit最古の滞納納期限();
                 一時テーブル登録(滞納状況把握情報List, 最古の滞納納期限);
                 滞納状況把握情報List = new ArrayList<>();
                 最古の滞納納期限 = null;
@@ -87,6 +80,17 @@ public class ShunoTainoJokyoHaakuProcess extends BatchProcessBase<ShunoTainoJoky
                 }
             }
             一時テーブル登録(滞納状況把握情報List, 最古の滞納納期限);
+        }
+    }
+
+    private void edit最古の滞納納期限() {
+        RDate 納期限;
+        for (ShunoTainoJokyoHaakuEntity haakuEntity : 滞納状況把握情報List) {
+            納期限 = haakuEntity.get収納状況TmpTblEntity().getTmp_nokigen();
+            if ((最古の滞納納期限 == null || (納期限 != null && 納期限.isBefore(最古の滞納納期限)))
+                    && MinoKannoKubun.未納あり.getコード().equals(haakuEntity.get収納状況TmpTblEntity().getTmp_minoKannoKubun())) {
+                最古の滞納納期限 = 納期限;
+            }
         }
     }
 

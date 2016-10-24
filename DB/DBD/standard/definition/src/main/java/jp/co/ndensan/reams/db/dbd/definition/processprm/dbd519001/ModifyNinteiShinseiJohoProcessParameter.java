@@ -6,10 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd519001;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519001.ModifyNinteiShinseiJohoMybatisParameter;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -42,11 +40,10 @@ public class ModifyNinteiShinseiJohoProcessParameter implements IBatchProcessPar
     /**
      * Mybatisのパラメータを作成します。
      *
+     * @param searchKey IShikibetsuTaishoPSMSearchKey
      * @return ModifyNinteiShinseiJohoMybatisParameter
      */
-    public ModifyNinteiShinseiJohoMybatisParameter toModifyNinteiShinseiJohoMybatisParameter() {
-        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(
-                GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
-        return new ModifyNinteiShinseiJohoMybatisParameter(key.build(), 認定申請IF種類, 市町村コード);
+    public ModifyNinteiShinseiJohoMybatisParameter toModifyNinteiShinseiJohoMybatisParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
+        return new ModifyNinteiShinseiJohoMybatisParameter(searchKey, 認定申請IF種類, 市町村コード);
     }
 }

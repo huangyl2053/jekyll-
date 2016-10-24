@@ -257,6 +257,9 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
             item.setListTokuChoshu_18(entity.get特別徴収収入額().get特徴金額１３());
             item.setListTokuChoshu_19(entity.get特別徴収収入額().get特徴金額１４());
             item.setListTokuChoshu_20(entity.get特別徴収収入額().get調整額歳出還付());
+            item.setListTokuChoshu_3(entity.get特別徴収収入額().get特徴確定年額保険料());
+            item.setListTokuChoshu_4(entity.get特別徴収収入額().get特徴納付済額());
+            item.setListTokuChoshu_5(entity.get特別徴収収入額().get特徴今後納付すべき額());
             item.setListTokuChoshu_6(entity.get特別徴収収入額().get特徴金額１());
             item.setListTokuChoshu_7(entity.get特別徴収収入額().get特徴金額２());
             item.setListTokuChoshu_8(entity.get特別徴収収入額().get特徴金額３());
@@ -376,6 +379,9 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
             item.setListFutsuChoshu_18(entity.get普通徴収収入額().get普徴金額１３());
             item.setListFutsuChoshu_19(entity.get普通徴収収入額().get普徴金額１４());
             item.setListFutsuChoshu_20(entity.get普通徴収収入額().get調整額歳出還付());
+            item.setListFutsuChoshu_3(entity.get普通徴収収入額().get普徴確定年額保険料());
+            item.setListFutsuChoshu_4(entity.get普通徴収収入額().get普徴納付済額());
+            item.setListFutsuChoshu_5(entity.get普通徴収収入額().get普徴今後納付すべき額());
             item.setListFutsuChoshu_6(entity.get普通徴収収入額().get普徴金額１());
             item.setListFutsuChoshu_7(entity.get普通徴収収入額().get普徴金額２());
             item.setListFutsuChoshu_8(entity.get普通徴収収入額().get普徴金額３());

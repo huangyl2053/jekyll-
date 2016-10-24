@@ -48,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 public final class PnlTotalRegisterHandler {
 
     private final PnlTotalRegisterDiv div;
-    private KinyuKikanManager kinyuKikanManager;
     private static final RString 参照 = new RString("参照");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
@@ -116,16 +115,20 @@ public final class PnlTotalRegisterHandler {
         div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().setDomain(record.get送付先住所());
         div.getPnlKeyakuJigyosya().getTxtSofusakiBusyo().setValue(record.get送付先部署());
         KinyuKikanMapperParameter 金融機関検索条件 = KinyuKikanMapperParameter.createSelectByKeyParam(record.get金融機関コード(), record.get開始年月日());
-        KinyuKikan kinyuKikan = kinyuKikanManager.get金融機関(金融機関検索条件);
+        KinyuKikan kinyuKikan = KinyuKikanManager.createInstance().get金融機関(金融機関検索条件);
         div.getCcdKinyukikan().set金融機関(kinyuKikan, record.get支店コード(), record.get開始年月日());
-        List<YokinShubetsuPattern> 口座種別情報 = kinyuKikanManager.get金融機関(金融機関検索条件).get預金種別リスト();
-        List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
+        List<YokinShubetsuPattern> 口座種別情報 = KinyuKikanManager.createInstance().get金融機関(金融機関検索条件).get預金種別リスト();
+        List<KeyValueDataSource> keyValueDataSource = div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().getDataSource();
         if (口座種別情報 != null && !口座種別情報.isEmpty()) {
             for (YokinShubetsuPattern code : 口座種別情報) {
                 keyValueDataSource.add(new KeyValueDataSource(code.get預金種別コード(), code.get預金種別名称()));
             }
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
-            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setSelectedKey(record.get口座種別());
+            for (KeyValueDataSource source : keyValueDataSource) {
+                if (source.getKey().equals(record.get口座種別())) {
+                    div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setSelectedKey(record.get口座種別());
+                }
+            }
         } else {
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
         }
@@ -191,7 +194,11 @@ public final class PnlTotalRegisterHandler {
             RString 契約事業者番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.契約事業者番号.getコード()).nextString();
             builder.set契約事業者番号(契約事業者番号);
             builder.set開始年月日(new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getFromValue().toDateString()));
-            builder.set終了年月日(new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getToValue().toDateString()));
+            if (div.getPnlKeyakuJigyosya().getTxtKeyakubi().getToValue() != null) {
+                builder.set終了年月日(new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getToValue().toDateString()));
+            } else {
+                builder.set終了年月日(FlexibleDate.MAX);
+            }
             builder.set契約種類(div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().getSelectedKey());
             builder.set契約事業者名称(div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyo().getDomain());
             builder.set契約事業者カナ名称(div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyoKana().getDomain());
@@ -494,5 +501,22 @@ public final class PnlTotalRegisterHandler {
     public HokenJuryoIninHaraiToriatsukaiResult get発行データ(RString 契約事業者番号) {
         KaigoHokenJuryoIninHaraiToriatsukaiJigyosha data = KaigoHokenJuryoIninHaraiToriatsukaiJigyosha.createInstance();
         return data.setHokenJuryoIninHaraiToriatsukai(data.selectByKey(契約事業者番号));
+    }
+
+    /**
+     * 送付先口座種別の取得
+     */
+    public void set送付先口座種別() {
+        if (div.getPnlKeyakuJigyosya().getCcdKinyukikan().get金融機関() != null) {
+            List<YokinShubetsuPattern> 口座種別情報 = div.getPnlKeyakuJigyosya().getCcdKinyukikan().get金融機関().get預金種別リスト();
+            if (口座種別情報 != null) {
+                List<KeyValueDataSource> list = new ArrayList<>();
+                for (YokinShubetsuPattern 預金種別 : 口座種別情報) {
+                    KeyValueDataSource keyValueDataSource = new KeyValueDataSource(預金種別.get預金種別コード(), 預金種別.get預金種別名称());
+                    list.add(keyValueDataSource);
+                }
+                div.getDdlSofusakiKouzasyubetu().setDataSource(list);
+            }
+        }
     }
 }

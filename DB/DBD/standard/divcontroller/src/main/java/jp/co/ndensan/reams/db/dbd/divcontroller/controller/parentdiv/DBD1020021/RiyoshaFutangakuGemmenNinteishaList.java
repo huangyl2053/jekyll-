@@ -130,7 +130,7 @@ public class RiyoshaFutangakuGemmenNinteishaList {
      * 訪問介護利用者負担額減額認定者リスト画面,batchparameter受給者区分の設定します。
      *
      * @param div HomonKaigoRiyoshaFutanGengakuNinteishaListDiv
-     * @param batchparameter
+     * @param batchparameter DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter
      * @return bparamt
      */
     public DBD201010_RiyoshaFutanGakuGemmenNinteishaListParameter set受給者区分の設定(RiyoshaFutanGenmenListDiv div,

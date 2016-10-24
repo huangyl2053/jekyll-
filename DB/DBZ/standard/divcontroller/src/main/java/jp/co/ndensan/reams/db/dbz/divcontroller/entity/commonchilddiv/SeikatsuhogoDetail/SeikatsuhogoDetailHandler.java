@@ -170,8 +170,31 @@ public class SeikatsuhogoDetailHandler {
             shurui.append(dataSource.getValue());
             shurui.append(連結);
         }
-        dataModel.set扶助種類(shurui.toRString().remove(shurui.length() - 1));
-        dataModel.set扶助種類コード(shuruiCode.toRString().remove(shurui.length() - 1));
+        if (!RString.isNullOrEmpty(shurui.toRString())) {
+            dataModel.set扶助種類(shurui.toRString().remove(shurui.length() - 1));
+        }
+        if (!RString.isNullOrEmpty(shuruiCode.toRString())) {
+            dataModel.set扶助種類コード(shuruiCode.toRString().remove(shuruiCode.length() - 1));
+        }
+        RStringBuilder 停止開始日 = new RStringBuilder();
+        RStringBuilder 停止終了日 = new RStringBuilder();
+        for (dgTeishiRireki_Row row : div.getDgTeishiRireki().getDataSource()) {
+            停止開始日.append(row.getTxtTeishiKaishiYMD());
+            停止開始日.append(連結);
+            停止終了日.append(row.getTxtTeishiShuryoYMD());
+            停止終了日.append(連結);
+        }
+        if (!RString.isNullOrEmpty(停止開始日.toRString())) {
+            停止開始日.toRString().remove(停止開始日.length() - 1);
+        }
+        if (!RString.isNullOrEmpty(停止終了日.toRString())) {
+            停止終了日.toRString().remove(停止終了日.length() - 1);
+        }
+        RString 受給期間 = 停止開始日.append(カラ).append(停止終了日.toRString()).toRString();
+        if (カラ.equals(受給期間.toString())) {
+            受給期間 = RString.EMPTY;
+        }
+        dataModel.set受給停止期間(受給期間);
         div.setHdnDataPass(DataPassingConverter.serialize(dataModel));
     }
 

@@ -1,7 +1,13 @@
 package jp.co.ndensan.reams.db.dbb.service.core.fuka;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jp.co.ndensan.reams.ca.cax.business.core.chotei.choteikyotsu.Chotei;
 import jp.co.ndensan.reams.ca.cax.business.core.chotei.choteikyotsu.ChoteiFactory;
 import jp.co.ndensan.reams.ca.cax.business.core.shunokanri.shunokanri.ShunoKanri;
@@ -13,13 +19,19 @@ import jp.co.ndensan.reams.ca.cax.service.core.shuno.shuno.ShunoManager;
 import jp.co.ndensan.reams.ca.cax.service.saiban.ChoteiSaiban;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsuKomokuHenshu;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajohotoroku.FukaJohoTorokuMybatisParameter;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fukajohotoroku.IFukaJohoTorokuMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
-import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
+import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.JigyoKubun;
@@ -27,6 +39,7 @@ import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoK
 import jp.co.ndensan.reams.ur.urc.service.core.kamoku.shunokamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.code.RyokinShubetsuCodeValue;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -43,6 +56,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class FukaManager {
 
+    private static final int 最後の期_過年度 = new KanendoKiUtil().get期月リスト().getLast().get期AsInt();
+    private static final RString メソッド_普徴期別金額 = new RString("get普徴期別金額");
+    private static final RString 処理名 = new RString("本算定賦課");
     private static final int 納期_2 = 2;
     private static final int 納期_3 = 3;
     private static final int 納期_4 = 4;
@@ -50,13 +66,28 @@ public class FukaManager {
     private static final int 納期_6 = 6;
     private final DbT2002FukaDac 介護賦課Dac;
     private final KibetsuManager 介護期別Manager;
+    private final List<RString> 全て期;
+    private final IShunoKamoku 科目_普通徴収;
+    private final IShunoKamoku 科目_特別徴収;
+    private final FukaNokiResearcher 賦課納期取得;
+    private final KitsukiList 月期対応取得_普徴;
+    private final ShunoManager shunoManager;
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
      */
     FukaManager() {
         this.介護賦課Dac = InstanceProvider.create(DbT2002FukaDac.class);
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.介護期別Manager = new KibetsuManager();
+        全て期 = get全て期();
+        ShunoKamokuFinder manager = ShunoKamokuFinder.createInstance();
+        科目_普通徴収 = manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
+        科目_特別徴収 = manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
+        賦課納期取得 = FukaNokiResearcher.createInstance();
+        shunoManager = ShunoService.get収納Manager();
+        月期対応取得_普徴 = new FuchoKiUtil().get期月リスト();
     }
 
     /**
@@ -65,9 +96,17 @@ public class FukaManager {
      * @param 介護賦課Dac 介護賦課Dac
      * @param 介護期別Manager 介護期別Manager
      */
-    FukaManager(DbT2002FukaDac 介護賦課Dac, KibetsuManager 介護期別Manager) {
+    FukaManager(DbT2002FukaDac 介護賦課Dac, KibetsuManager 介護期別Manager, MapperProvider mapperProvider) {
         this.介護賦課Dac = 介護賦課Dac;
         this.介護期別Manager = 介護期別Manager;
+        this.mapperProvider = mapperProvider;
+        全て期 = get全て期();
+        ShunoKamokuFinder manager = ShunoKamokuFinder.createInstance();
+        科目_普通徴収 = manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
+        科目_特別徴収 = manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
+        賦課納期取得 = FukaNokiResearcher.createInstance();
+        shunoManager = ShunoService.get収納Manager();
+        月期対応取得_普徴 = new FuchoKiUtil().get期月リスト();
     }
 
     /**
@@ -87,128 +126,95 @@ public class FukaManager {
     @Transaction
     public void save賦課(FukaJoho 介護賦課) {
         requireNonNull(介護賦課, UrSystemErrorMessages.値がnull.getReplacedMessage("介護賦課"));
-        ShunoManager shunoManager = ShunoService.get収納Manager();
-        ShunoKamokuFinder shunoKamokuManager = ShunoKamokuFinder.createInstance();
-        FukaNokiResearcher 納期 = FukaNokiResearcher.createInstance();
-        save介護期別By特別徴収(介護賦課, shunoKamokuManager, shunoManager, 納期);
-        KitsukiList 期月リスト = new FuchoKiUtil().get期月リスト();
-        save介護期別By普通徴収07期(介護賦課, shunoKamokuManager, shunoManager, 納期, 期月リスト);
-        save介護期別By普通徴収14期(介護賦課, shunoKamokuManager, shunoManager, 納期, 期月リスト);
+        if (介護賦課.get賦課年度().equals(介護賦課.get調定年度())) {
+            FukaJohoTorokuMybatisParameter parameter = new FukaJohoTorokuMybatisParameter();
+            parameter.setSyoriName(処理名);
+            parameter.setNendo(介護賦課.get賦課年度());
+            List<DbT7022ShoriDateKanriEntity> 処理日付情報 = mapperProvider.create(IFukaJohoTorokuMapper.class).getSyoriDateForManager(parameter);
+            YMDHMS 処理日時 = get処理日時(処理日付情報, 介護賦課.get賦課年度());
+            YMDHMS 調定日時 = 介護賦課.get調定日時();
+            if (処理日時 == null || (調定日時 != null && 調定日時.isBefore(処理日時))) {
+                save仮算定データ(介護賦課);
+            } else {
+                save特徴期別(介護賦課);
+                save普徴期別金額By最後の期(介護賦課, 月期対応取得_普徴.getLast().get期AsInt());
+            }
+        } else {
+            save普徴期別金額By最後の期(介護賦課, 最後の期_過年度);
+        }
         DbT2002FukaEntity 介護賦課Entity = 介護賦課.toEntity();
         介護賦課Entity.setState(EntityDataState.Added);
         介護賦課Dac.save(介護賦課Entity);
     }
 
-    private void save介護期別By特別徴収(FukaJoho 介護賦課,
-            ShunoKamokuFinder shunoKamokuManager,
-            ShunoManager shunoManager,
-            FukaNokiResearcher 納期) {
-        if (介護賦課.get特徴期別金額01() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額01()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
-                    介護賦課.get特徴期別金額01(), 納期.get特徴納期(1).get納期限(), 1);
-        }
-        if (介護賦課.get特徴期別金額02() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額02()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
-                    介護賦課.get特徴期別金額02(), 納期.get特徴納期(納期_2).get納期限(), 納期_2);
-        }
-        if (介護賦課.get特徴期別金額03() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額03()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
-                    介護賦課.get特徴期別金額03(), 納期.get特徴納期(納期_3).get納期限(), 納期_3);
-        }
-        if (介護賦課.get特徴期別金額04() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額04()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
-                    介護賦課.get特徴期別金額04(), 納期.get特徴納期(納期_4).get納期限(), 納期_4);
-        }
-        if (介護賦課.get特徴期別金額05() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額05()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
-                    介護賦課.get特徴期別金額05(), 納期.get特徴納期(納期_5).get納期限(), 納期_5);
-        }
-        if (介護賦課.get特徴期別金額06() != null && Decimal.ZERO.compareTo(介護賦課.get特徴期別金額06()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.特別徴収,
-                    介護賦課.get特徴期別金額06(), 納期.get特徴納期(納期_6).get納期限(), 納期_6);
-        }
-
-    }
-
-    private void save介護期別By普通徴収07期(FukaJoho 介護賦課,
-            ShunoKamokuFinder shunoKamokuManager,
-            ShunoManager shunoManager,
-            FukaNokiResearcher 納期,
-            KitsukiList 期月リスト) {
-        if (介護賦課.get普徴期別金額01() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額01()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額01(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki._4月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki._4月).get期AsInt());
-        }
-        if (介護賦課.get普徴期別金額02() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額02()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額02(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki._5月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki._5月).get期AsInt());
-        }
-        if (介護賦課.get普徴期別金額03() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額03()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額03(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki._6月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki._6月).get期AsInt());
-        }
-        if (介護賦課.get普徴期別金額04() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額04()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額02(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki._7月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki._7月).get期AsInt());
-        }
-        if (介護賦課.get普徴期別金額05() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額05()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額05(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki._8月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki._8月).get期AsInt());
-        }
-        if (介護賦課.get普徴期別金額06() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額06()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額06(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki._9月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki._9月).get期AsInt());
-        }
-        if (介護賦課.get普徴期別金額07() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額07()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額07(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki._10月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki._10月).get期AsInt());
+    private void save仮算定データ(FukaJoho 賦課情報) {
+        save特徴期別01まで特徴期別03(賦課情報);
+        for (Kitsuki 期月 : 月期対応取得_普徴.filtered仮算定期間().toList()) {
+            int 期別 = 期月.get期AsInt();
+            if (0 < 期別) {
+                Decimal 期別金額 = get期別金額By期(賦課情報, 期月.get期());
+                if (期別金額 != null) {
+                    save介護期別(賦課情報, 科目_普通徴収, ChoshuHohoKibetsu.普通徴収, 期別金額, 賦課納期取得.get普徴納期(期別).get納期限(), 期別);
+                }
+            }
         }
     }
 
-    private void save介護期別By普通徴収14期(FukaJoho 介護賦課,
-            ShunoKamokuFinder shunoKamokuManager,
-            ShunoManager shunoManager,
-            FukaNokiResearcher 納期,
-            KitsukiList 期月リスト) {
-        if (介護賦課.get普徴期別金額08() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額08()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額08(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki._11月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki._11月).get期AsInt());
+    private void save特徴期別01まで特徴期別03(FukaJoho 賦課情報) {
+        if (賦課情報.get特徴期別金額01() != null) {
+            save介護期別(賦課情報, 科目_特別徴収, ChoshuHohoKibetsu.特別徴収,
+                    賦課情報.get特徴期別金額01(), 賦課納期取得.get特徴納期(1).get納期限(), 1);
         }
-        if (介護賦課.get普徴期別金額09() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額09()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額09(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki._12月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki._12月).get期AsInt());
+        if (賦課情報.get特徴期別金額02() != null) {
+            save介護期別(賦課情報, 科目_特別徴収, ChoshuHohoKibetsu.特別徴収,
+                    賦課情報.get特徴期別金額02(), 賦課納期取得.get特徴納期(納期_2).get納期限(), 納期_2);
         }
-        if (介護賦課.get普徴期別金額10() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額10()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額10(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki._1月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki._1月).get期AsInt());
-        }
-        if (介護賦課.get普徴期別金額11() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額11()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額11(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki._2月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki._2月).get期AsInt());
-        }
-        if (介護賦課.get普徴期別金額12() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額12()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額12(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki._3月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki._3月).get期AsInt());
-        }
-        if (介護賦課.get普徴期別金額13() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額13()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額13(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki.翌年度4月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki.翌年度4月).get期AsInt());
-        }
-        if (介護賦課.get普徴期別金額14() != null && Decimal.ZERO.compareTo(介護賦課.get普徴期別金額14()) < 0) {
-            save介護期別(shunoManager, shunoKamokuManager, 介護賦課, ChoshuHohoKibetsu.普通徴収, 介護賦課.get普徴期別金額14(),
-                    納期.get普徴納期(期月リスト.get月の期(Tsuki.翌年度5月).get期AsInt()).get納期限(), 期月リスト.get月の期(Tsuki.翌年度5月).get期AsInt());
+        if (賦課情報.get特徴期別金額03() != null) {
+            save介護期別(賦課情報, 科目_特別徴収, ChoshuHohoKibetsu.特別徴収,
+                    賦課情報.get特徴期別金額03(), 賦課納期取得.get特徴納期(納期_3).get納期限(), 納期_3);
         }
     }
 
-    private void save介護期別(ShunoManager shunoManager,
-            ShunoKamokuFinder shunoKamokuManager,
-            FukaJoho 介護賦課,
-            ChoshuHohoKibetsu 徴収種別,
-            Decimal 調定額,
-            RDate 納期限,
-            int 期) {
-        IShunoKamoku 科目 = shunoKamokuManager.get科目(徴収種別.equals(ChoshuHohoKibetsu.普通徴収)
-                ? ShunoKamokuShubetsu.介護保険料_普通徴収 : ShunoKamokuShubetsu.介護保険料_特別徴収);
+    private void save特徴期別(FukaJoho 賦課情報) {
+        save特徴期別01まで特徴期別03(賦課情報);
+        if (賦課情報.get特徴期別金額04() != null) {
+            save介護期別(賦課情報, 科目_特別徴収, ChoshuHohoKibetsu.特別徴収,
+                    賦課情報.get特徴期別金額04(), 賦課納期取得.get特徴納期(納期_4).get納期限(), 納期_4);
+        }
+        if (賦課情報.get特徴期別金額05() != null) {
+            save介護期別(賦課情報, 科目_特別徴収, ChoshuHohoKibetsu.特別徴収,
+                    賦課情報.get特徴期別金額05(), 賦課納期取得.get特徴納期(納期_5).get納期限(), 納期_5);
+        }
+        if (賦課情報.get特徴期別金額06() != null) {
+            save介護期別(賦課情報, 科目_特別徴収, ChoshuHohoKibetsu.特別徴収,
+                    賦課情報.get特徴期別金額06(), 賦課納期取得.get特徴納期(納期_6).get納期限(), 納期_6);
+        }
+    }
+
+    private void save普徴期別金額By最後の期(FukaJoho 賦課情報, int 最後の期) {
+        for (RString 期別 : 全て期) {
+            int 期 = Integer.parseInt(期別.toString());
+            if (期 <= 最後の期) {
+                Decimal 期別金額 = get期別金額By期(賦課情報, 期別);
+                if (期別金額 != null) {
+                    save介護期別(賦課情報, 科目_普通徴収, ChoshuHohoKibetsu.普通徴収, 期別金額, 賦課納期取得.get普徴納期(期).get納期限(), 期);
+                }
+            }
+        }
+    }
+
+    private Decimal get期別金額By期(FukaJoho 賦課情報, RString 期) {
+        Class clazz = 賦課情報.getClass();
+        try {
+            Method getMethod = clazz.getDeclaredMethod(メソッド_普徴期別金額.concat(期).toString());
+            return (Decimal) getMethod.invoke(賦課情報);
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
+            Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    private void save介護期別(FukaJoho 介護賦課, IShunoKamoku 科目, ChoshuHohoKibetsu 徴収種別, Decimal 調定額, RDate 納期限, int 期) {
         long 調定ID = ChoteiSaiban.getNumbering調定ID();
         ShunoKanri 収納管理 = get収納管理(介護賦課, 科目, 期);
         shunoManager.save収納管理(収納管理);
@@ -216,6 +222,15 @@ public class FukaManager {
         介護期別Manager.save介護期別(new Kibetsu(介護賦課.get調定年度(), 介護賦課.get賦課年度(),
                 介護賦課.get通知書番号(), 介護賦課.get履歴番号(), 徴収種別.getコード(), 期)
                 .createBuilderForEdit().set調定ID(new Decimal(調定ID)).build());
+    }
+
+    private YMDHMS get処理日時(List<DbT7022ShoriDateKanriEntity> 処理日付情報, FlexibleYear 賦課年度) {
+        for (DbT7022ShoriDateKanriEntity shoriDate : 処理日付情報) {
+            if (shoriDate.getNendo().equals(賦課年度)) {
+                return shoriDate.getKijunTimestamp();
+            }
+        }
+        return null;
     }
 
     private Chotei get調定クラス(FlexibleYear 調定年度, Decimal 調定額, RDate 納期限, long 調定ID, RDate 調定年月日, ShunoKanri 収納管理) {
@@ -238,5 +253,24 @@ public class FukaManager {
                 new RYear(介護賦課.get賦課年度().toString()),
                 new TsuchishoNo(new Decimal(介護賦課.get通知書番号().toString())),
                 期, true, 0).createBuilderForEdit().set識別コード(介護賦課.get識別コード()).build();
+    }
+
+    private List<RString> get全て期() {
+        List<RString> 期 = new ArrayList<>();
+        期.add(new RString("01"));
+        期.add(new RString("02"));
+        期.add(new RString("03"));
+        期.add(new RString("04"));
+        期.add(new RString("05"));
+        期.add(new RString("06"));
+        期.add(new RString("07"));
+        期.add(new RString("08"));
+        期.add(new RString("09"));
+        期.add(new RString("10"));
+        期.add(new RString("11"));
+        期.add(new RString("12"));
+        期.add(new RString("13"));
+        期.add(new RString("14"));
+        return 期;
     }
 }

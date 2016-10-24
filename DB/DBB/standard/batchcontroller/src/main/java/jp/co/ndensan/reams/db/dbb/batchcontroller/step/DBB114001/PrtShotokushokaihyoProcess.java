@@ -87,10 +87,10 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
     private static final RString 文字列_001 = new RString("001");
     private static final RString 定数_処理年度 = new RString("処理年度");
     private static final RString 定数_照会年月日 = new RString("照会年月日");
+    private static final RString 定数_出力対象 = new RString("出力対象");
     private static final RString 定数_テストプリント = new RString("テストプリント");
     private static final RString 定数_有り = new RString("有り");
     private static final RString 定数_無し = new RString("無し");
-    private static final RString 定数_出力順ID = new RString("出力順ID");
     private static final RString FORMAT_LEFT = new RString("【");
     private static final RString FORMAT_RIGHT = new RString("】");
     private static final RString 定数_再発行対象リスト = new RString("再発行対象リスト");
@@ -245,6 +245,9 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
+        builder.append((FORMAT_LEFT).concat(定数_出力対象).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+                .concat(processParameter.get出力対象()));
+        builder = new RStringBuilder();
         RString 有無し;
         if (processParameter.isテストプリント()) {
             有無し = 定数_有り;
@@ -255,22 +258,24 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
                 .concat(有無し));
         出力条件リスト.add(builder.toRString());
         List<SaiHakkoParameter> 再発行対象リスト = processParameter.get再発行対象リスト();
-        for (SaiHakkoParameter param : 再発行対象リスト) {
+        if (再発行対象リスト != null) {
+            for (SaiHakkoParameter param : 再発行対象リスト) {
+                builder = new RStringBuilder();
+                RString 発行件数 = new RString(String.valueOf(param.get発行件数()));
+                RString 処理年度 = new RString(param.get処理年度().toString());
+                RString ユーザ = param.getユーザ();
+                RString 処理日時 = new RString(param.get処理日時().toString());
+                builder.append((FORMAT_LEFT).concat(定数_再発行対象リスト).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+                        .concat(発行件数).concat(カンマ).concat(RString.FULL_SPACE)
+                        .concat(処理年度).concat(カンマ).concat(RString.FULL_SPACE)
+                        .concat(ユーザ).concat(カンマ).concat(RString.FULL_SPACE).concat(処理日時));
+                出力条件リスト.add(builder.toRString());
+            }
+        } else {
             builder = new RStringBuilder();
-            RString 発行件数 = new RString(String.valueOf(param.get発行件数()));
-            RString 処理年度 = new RString(param.get処理年度().toString());
-            RString ユーザ = param.getユーザ();
-            RString 処理日時 = new RString(param.get処理日時().toString());
-            builder.append((FORMAT_LEFT).concat(定数_再発行対象リスト).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
-                    .concat(発行件数).concat(カンマ).concat(RString.FULL_SPACE)
-                    .concat(処理年度).concat(カンマ).concat(RString.FULL_SPACE)
-                    .concat(ユーザ).concat(カンマ).concat(RString.FULL_SPACE).concat(処理日時));
+            builder.append((FORMAT_LEFT).concat(定数_再発行対象リスト).concat(FORMAT_RIGHT));
             出力条件リスト.add(builder.toRString());
         }
-        builder = new RStringBuilder();
-        builder.append((FORMAT_LEFT).concat(定数_出力順ID).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
-                .concat(new RString(String.valueOf(processParameter.get出力順ID()))));
-        出力条件リスト.add(builder.toRString());
 
         RString reportId;
         if (文字列_001.equals(通知書タイプ)) {
@@ -338,7 +343,7 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
             番地 = atesaki.get番地();
             住所 = atesaki.get住所();
             RString 名称 = atesaki.get名称();
-            if (!名称.isNullOrEmpty()) {
+            if (名称 != null && !名称.isEmpty()) {
                 役所_役場名 = editor役所_役場名(名称, 役所_役場名, atesaki);
             }
             if (役所_役場名.length() >= INT_10) {

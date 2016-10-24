@@ -82,5 +82,10 @@
             <artifactId>DbdEntity</artifactId>
             <type>test-jar</type>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+            <artifactId>UxxEntity</artifactId>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

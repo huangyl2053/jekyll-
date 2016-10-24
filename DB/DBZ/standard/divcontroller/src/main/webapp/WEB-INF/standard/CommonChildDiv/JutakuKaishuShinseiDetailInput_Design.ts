@@ -2,7 +2,7 @@
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
 
-module DBC {
+module DBZ {
 
      export module JutakuKaishuShinseiDetailInput {
 
@@ -42,11 +42,11 @@ module DBC {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBC.JutakuKaishuShinseiDetailInput.Controls.myType();
+                return this._myName + "_" + DBZ.JutakuKaishuShinseiDetailInput.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBC.JutakuKaishuShinseiDetailInput.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.JutakuKaishuShinseiDetailInput.Controls.myType() + "_" + fieldName;
             }
 
             public JutakuKaishuShinseiDetailInput(): UZA.Panel {

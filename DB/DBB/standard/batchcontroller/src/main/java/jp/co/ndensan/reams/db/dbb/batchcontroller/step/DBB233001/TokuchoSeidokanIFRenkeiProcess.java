@@ -13,10 +13,10 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb233001.TokuchouSeidoKanIFRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb233001.TokuchouSeidoKanIFRenkeiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.dta.dbb233001.TokuchouSeidoKanIFRenkeiDTAEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosofujohorenkei.ITokuchoSofuJohoRenkeiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
-import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -45,7 +45,7 @@ public class TokuchoSeidokanIFRenkeiProcess extends BatchProcessBase<TokuchouSei
     private static final RString DTA_NAME_PREFIX = new RString("Z99_550_");
     private static final RString DTA_NAME_SUFFIX = new RString(".DTA");
     private TokuchouSeidoKanIFRenkeiProcessParameter parameter;
-    private List<KoseiShichoson> 広域市町村情報;
+    private List<DbT7051KoseiShichosonMasterEntity> 広域市町村情報;
     private List<RString> ファイル出力List;
     private Map<RString, FldWriter<TokuchouSeidoKanIFRenkeiDTAEntity>> map;
     private Map<RString, RString> 情報map;
@@ -62,10 +62,12 @@ public class TokuchoSeidokanIFRenkeiProcess extends BatchProcessBase<TokuchouSei
         ファイル出力List = new ArrayList<>();
         map = new HashMap<>();
         情報map = new HashMap<>();
-        KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
-        広域市町村情報 = finder.getKoseiShichosonList().records();
-        for (KoseiShichoson 情報 : 広域市町村情報) {
-            parameter.get市町村コードリスト().add(情報.get市町村コード().value());
+        広域市町村情報 = getMapper(ITokuchoSofuJohoRenkeiMapper.class).select広域市町村情報();
+
+        if (!広域市町村情報.isEmpty()) {
+            for (DbT7051KoseiShichosonMasterEntity 情報 : 広域市町村情報) {
+                parameter.get市町村コードリスト().add(情報.getShichosonCode().value());
+            }
         }
         parameter.set処理年度(new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString()));
@@ -80,14 +82,14 @@ public class TokuchoSeidokanIFRenkeiProcess extends BatchProcessBase<TokuchouSei
 
     @Override
     protected void createWriter() {
-        for (KoseiShichoson 情報 : 広域市町村情報) {
-            RString ファイル名 = DTA_NAME_PREFIX.concat(情報.get市町村識別ID()).concat(DTA_NAME_SUFFIX);
+        for (DbT7051KoseiShichosonMasterEntity 情報 : 広域市町村情報) {
+            RString ファイル名 = DTA_NAME_PREFIX.concat(情報.getShichosonShokibetsuID()).concat(DTA_NAME_SUFFIX);
             RString dtaFilePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル名);
             writer = new FldWriter.InstanceBuilder(dtaFilePath)
                     .setNewLine(NewLine.CRLF)
                     .setEncodeJIS().build();
-            情報map.put(情報.get市町村コード().value(), ファイル名);
-            map.put(情報.get市町村コード().value(), writer);
+            情報map.put(情報.getShichosonCode().value(), ファイル名);
+            map.put(情報.getShichosonCode().value(), writer);
         }
     }
 
@@ -100,8 +102,6 @@ public class TokuchoSeidokanIFRenkeiProcess extends BatchProcessBase<TokuchouSei
 
     @Override
     protected void afterExecute() {
-        // AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY));
-        // QA1562(#102498) AccessLoggerの質疑が存在します。
         for (RString fileName : ファイル出力List) {
             FilesystemName sharedFileName = new FilesystemName(fileName);
             SharedFile.defineSharedFile(sharedFileName);

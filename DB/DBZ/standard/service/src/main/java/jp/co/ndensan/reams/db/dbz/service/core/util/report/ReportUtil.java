@@ -66,6 +66,8 @@ public final class ReportUtil {
 
     private static final RString 首長名印字位置 = new RString("1");
     private static final RString 汎用キー_文書番号 = new RString("文書番号");
+    private static final int INT3 = 3;
+    private static final int INT4 = 4;
     private static final int INT5 = 5;
     private static RStringBuilder orderByClause;
     private static RString space;
@@ -241,29 +243,52 @@ public final class ReportUtil {
             SubGyomuCode サブ業務コード,
             ReportId 帳票ID,
             long 出力順ID) {
+        ShutsuryokujunRelateEntity entity = new ShutsuryokujunRelateEntity();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         IOutputOrder outputOrder = finder.get出力順(サブ業務コード, 帳票ID, 出力順ID);
         ReportItemsMap reportItems = new ReportItemsMap(Arrays.<IReportItems>asList(clazz.getEnumConstants()));
+        if (outputOrder == null) {
+            return entity;
+        }
         orderByClause = new RStringBuilder("order by");
-        space = new RString(" ");
+        space = RString.HALF_SPACE;
         comma = new RString(",");
         commaCount = 0;
-        ShutsuryokujunRelateEntity entity = new ShutsuryokujunRelateEntity();
+        int shutsuryokujunCount = 0;
+        int kaiPeijiCount = 0;
         List<RString> 出力順List = new ArrayList<>();
         List<RString> 改頁List = new ArrayList<>();
         List<RString> pagebreakList = new ArrayList<>();
+        for (int i = 0; i < INT5; i++) {
+            出力順List.add(RString.EMPTY);
+            改頁List.add(RString.EMPTY);
+        }
         if (outputOrder.get設定項目リスト().isEmpty()) {
             return entity;
         }
         for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
             getOrderByClause(reportItems, setSortItem);
-            出力順List.add(setSortItem.get項目名());
-            if (setSortItem.is改頁項目() && 改頁List.size() < INT5) {
+            if (INT5 > shutsuryokujunCount) {
+                出力順List.set(commaCount, setSortItem.get項目名());
+                shutsuryokujunCount++;
+            }
+            if (setSortItem.is改頁項目() && INT5 > kaiPeijiCount) {
                 pagebreakList.add(reportItems.getフォームフィールド名(setSortItem.get項目ID()));
-                改頁List.add(setSortItem.get項目名());
+                改頁List.set(commaCount, setSortItem.get項目名());
+                kaiPeijiCount++;
             }
             commaCount++;
         }
+        entity.set出力順1(出力順List.get(0));
+        entity.set出力順2(出力順List.get(1));
+        entity.set出力順3(出力順List.get(2));
+        entity.set出力順4(出力順List.get(INT3));
+        entity.set出力順5(出力順List.get(INT4));
+        entity.set改頁項目1(改頁List.get(0));
+        entity.set改頁項目2(改頁List.get(1));
+        entity.set改頁項目3(改頁List.get(2));
+        entity.set改頁項目4(改頁List.get(INT3));
+        entity.set改頁項目5(改頁List.get(INT4));
         entity.set出力順OrderBy(orderByClause.toRString());
         entity.set出力順項目(出力順List);
         entity.setPageBreakKeys(pagebreakList);
@@ -389,5 +414,4 @@ public final class ReportUtil {
         }
         return null;
     }
-
 }

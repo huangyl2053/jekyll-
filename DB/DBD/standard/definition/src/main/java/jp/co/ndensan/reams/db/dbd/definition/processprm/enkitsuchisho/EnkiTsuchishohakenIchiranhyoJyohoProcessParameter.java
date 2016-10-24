@@ -27,7 +27,7 @@ public class EnkiTsuchishohakenIchiranhyoJyohoProcessParameter implements IBatch
     private RString 画面モード;
     private FlexibleDate 処理見込み日From;
     private FlexibleDate 処理見込み日To;
-    private FlexibleDate 通知書発行日;
+    private List<FlexibleDate> 通知書発行日;
     private List<RString> 申請書管理番号リスト;
 
     /**
@@ -43,7 +43,7 @@ public class EnkiTsuchishohakenIchiranhyoJyohoProcessParameter implements IBatch
             RString gamenmodo,
             FlexibleDate shorimikomibiFrom,
             FlexibleDate shorimikomibiTo,
-            FlexibleDate tsuchishohakkonbi,
+            List<FlexibleDate> tsuchishohakkonbi,
             List<RString> shinseishokanribangorisuto) {
         this.画面モード = gamenmodo;
         this.処理見込み日From = shorimikomibiFrom;
@@ -58,7 +58,7 @@ public class EnkiTsuchishohakenIchiranhyoJyohoProcessParameter implements IBatch
      * @return EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter
      */
     public EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter toEnkiTsuchishohakenIchiranhyoJyohoMybatisParameter() {
-        return new EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter(処理見込み日From, 処理見込み日To, 通知書発行日);
+        return new EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter(処理見込み日From, 処理見込み日To, 通知書発行日.get(0));
     }
 
     /**

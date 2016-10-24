@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshato
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.TyukannKogakuRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -44,7 +43,6 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
     private static final RString TABLE_高額介護サービス費支給判定結果全件一時 = new RString("TempKogakuShikyuHanteiKekkaZen");
     private static final RString TABLE_高額介護サービス費支給審査決定全件一時 = new RString("TempKogakuShikyuShinsaKetteiZen");
     private static final RString TABLE_高額介護サービス費給付対象者合計全件一時 = new RString("TempKogakuKyufuTaishoshaGokeiZen");
-    private static final RString TABLE_高額介護サービス費給付対象者明細全件一時 = new RString("TempKogakuKyufuTaishoshaMeisaiZen");
     private static final RString TABLE_高額介護サービス費給付対象者明細全件更新一時 = new RString("TempKogakuKyufuTaishoshaMeisaiZenUpdate");
     private static final RString TABLE_給付実績中間高額一時9 = new RString("TempKyufujissekiTyukann9");
     private static final RString DELIMITER = new RString("～");
@@ -62,8 +60,6 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
     BatchEntityCreatedTempTableWriter 審査決定全件一時Writer;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 合計全件一時Writer;
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter 明細全件一時Writer;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 中間高額一時Writer;
     @BatchWriter
@@ -96,8 +92,6 @@ public class InsKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<TyukannK
                 TABLE_高額介護サービス費支給審査決定全件一時, DbT3058KogakuShikyuShinsaKetteiEntity.class);
         合計全件一時Writer = new BatchEntityCreatedTempTableWriter(
                 TABLE_高額介護サービス費給付対象者合計全件一時, DbT3055KogakuKyufuTaishoshaGokeiEntity.class);
-        明細全件一時Writer = new BatchEntityCreatedTempTableWriter(
-                TABLE_高額介護サービス費給付対象者明細全件一時, DbT3054KogakuKyufuTaishoshaMeisaiEntity.class);
         中間高額一時Writer = new BatchEntityCreatedTempTableWriter(
                 TABLE_給付実績中間高額一時9, TempKyufujissekiTyukannEntity.class);
         明細全件更新一時Writer = new BatchEntityCreatedTempTableWriter(

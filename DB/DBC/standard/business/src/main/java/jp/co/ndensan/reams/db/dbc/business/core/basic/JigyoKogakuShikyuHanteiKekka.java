@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHantei
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -262,13 +261,32 @@ public class JigyoKogakuShikyuHanteiKekka
     @Override
     public JigyoKogakuShikyuHanteiKekka deleted() {
         DbT3111JigyoKogakuShikyuHanteiKekkaEntity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+        deletedEntity.setState(EntityDataState.Deleted);
         return new JigyoKogakuShikyuHanteiKekka(deletedEntity, id);
+    }
+
+    /**
+     * add JigyoKogakuShikyuHanteiKekka
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public JigyoKogakuShikyuHanteiKekka added() {
+        DbT3111JigyoKogakuShikyuHanteiKekkaEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new JigyoKogakuShikyuHanteiKekka(addedEntity, id);
+    }
+
+    /**
+     * 修正 JigyoKogakuShikyuHanteiKekka
+     *
+     * @return JigyoKogakuShikyuHanteiKekka {@link ShokanMeisai}のクローン
+     */
+    public JigyoKogakuShikyuHanteiKekka modified() {
+        DbT3111JigyoKogakuShikyuHanteiKekkaEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new JigyoKogakuShikyuHanteiKekka(modifiedEntity, id);
     }
 
     /**

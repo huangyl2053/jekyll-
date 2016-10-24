@@ -43,13 +43,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
-import jp.co.ndensan.reams.uz.uza.report.IReportSource;
-import jp.co.ndensan.reams.uz.uza.report.Report;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
-import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -139,17 +132,6 @@ public class KogakuServiceHiJuryoininKeiyakuKakuninsho {
         DbT7062KaigoJigyoshaDaihyoshaEntity entity = 介護事業者代表者情報DAC.select介護事業者代表者情報の最新(new JigyoshaNo(事業者番号));
         result.set代表者氏名((null == entity || null == entity.getDaihyoshaShimei())
                 ? RString.EMPTY : entity.getDaihyoshaShimei().getColumnValue());
-    }
-
-    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
-            ReportManager manager, IReportProperty<T> property) {
-        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
-        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
-            builder.addBreak(breaker);
-        }
-        builder.isHojinNo(property.containsHojinNo());
-        builder.isKojinNo(property.containsKojinNo());
-        return builder.<T>create();
     }
 
     private void 通知書定型文情報を取得する(KogakuServiceHiJuryoininKeiyakuKakuninshoResult result) {

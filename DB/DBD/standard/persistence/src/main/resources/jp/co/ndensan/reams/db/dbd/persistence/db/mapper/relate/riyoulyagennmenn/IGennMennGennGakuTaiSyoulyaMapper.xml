@@ -103,6 +103,7 @@
             LEFT JOIN (
                 SELECT
                     有効受給認定結果."hihokenshaNo" AS 認定情報の被保険者番号,
+                    有効受給認定結果."shinseishoKanriNo" AS 申請書管理番号,
                     有効受給認定結果."yokaigoJotaiKubunCode" AS 要介護状態区分コード,
                     有効受給認定結果."ninteiYMD" AS 認定年月日,
                     有効受給認定結果."ninteiYukoKikanKaishiYMD" AS 認定有効期間開始年月日,
@@ -125,9 +126,9 @@
                 ON 認定情報."認定情報の被保険者番号" = A."被保険者番号"
             LEFT JOIN
                 rgdb."DbT4101NinteiShinseiJoho" AS 要介護認定申請情報子
-                ON 認定情報."認定情報の被保険者番号" = 要介護認定申請情報子."hihokenshaNo"
+                ON 認定情報."申請書管理番号" = 要介護認定申請情報子."shinseishoKanriNo"
             LEFT JOIN
-                    rgdb."DbT4014RiyoshaFutangakuGengaku" AS 利用者負担額減額
+                rgdb."DbT4014RiyoshaFutangakuGengaku" AS 利用者負担額減額
                 ON 利用者負担額減額."hihokenshaNo" = A."被保険者番号"
             LEFT JOIN
                 rgdb."DbT4010GemmenGengakuShinsei" AS 減免減額申請
@@ -170,8 +171,7 @@
                     AND FALSE
                 </if>
             ) AS 世帯員情報
-                ON 世帯員情報."世帯員の識別コード" = A."本人識別コード"
-                AND 世帯員情報."世帯員の被保険者番号" = A."被保険者番号"
+                ON 世帯員情報."世帯員の被保険者番号" = A."被保険者番号"
             LEFT JOIN (
                 SELECT
                     総合事業対象者."hihokenshaNo" AS 総者の被保険者番号,
@@ -187,15 +187,25 @@
             WHERE
                 (減免減額申請."gemmenGengakuShurui" = #{利用者負担額減額}
                 OR 減免減額申請."gemmenGengakuShurui" IS null )
-                AND (利用者負担額減額."hihokenshaNo" IS null
-                OR (
-                    (利用者負担額減額."ketteiKubun" = #{承認する}
-                    AND 利用者負担額減額."tekiyoKaishiYMD" &lt;= #{基準日}
-                    AND #{基準日} &lt;= 利用者負担額減額."tekiyoShuryoYMD")
-                    OR (利用者負担額減額."ketteiKubun" is null 
-                        AND 利用者負担額減額."shinseiYMD" &lt;= #{基準日})
+                AND( 利用者負担額減額."hihokenshaNo" IS null
+                OR 利用者負担額減額."shinseiYMD" IN ( 
+                SELECT
+                  MAX( 
+                    rgdb."DbT4014RiyoshaFutangakuGengaku"."shinseiYMD"
+                  ) 
+                FROM
+                  rgdb."DbT4014RiyoshaFutangakuGengaku" 
+                WHERE
+                  rgdb."DbT4014RiyoshaFutangakuGengaku"."hihokenshaNo" = A."被保険者番号" 
+                AND(
+                    (rgdb."DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = #{承認する}
+                    AND rgdb."DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" &lt;= #{基準日}
+                    AND #{基準日} &lt;= rgdb."DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD")
+                    OR (rgdb."DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = ''
+                        AND rgdb."DbT4014RiyoshaFutangakuGengaku"."shinseiYMD" &lt;= #{基準日})
+                     )
                     )
-		)
+                )
                 <if test="is該当者リスト">
                     <if test="is市町村民税非課税世帯">
                         AND A."世帯課税区分" = '2'
@@ -204,7 +214,7 @@
                         AND A."is所得税課税世帯" = false
                     </if>
                     <if test="is市町村民税本人非課税者">
-                        AND A."本人課税区分" = '1'
+                        AND A."本人課税区分" = '2'
                     </if>
                     <if test="is老齢福祉年金受給者">
                         AND A."is老齢福祉年金受給者" = true
@@ -220,6 +230,7 @@
             INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
             ( SELECT ARRAY_AGG(CAST ("本人識別コード" AS TEXT))
                 FROM master
+                WHERE "本人識別コード" != null
             )
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
             AS "ShikibetsuTaisho"
@@ -227,7 +238,7 @@
          ${出力順}
     </select>
     <resultMap id="resultMap_ChohyoShutsuryokuJohoResultEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultEntity" autoMapping="true">
-        <id property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="本人識別コード" column="本人識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="本人課税区分" column="本人課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="is老齢福祉年金受給者" column="is老齢福祉年金受給者" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />

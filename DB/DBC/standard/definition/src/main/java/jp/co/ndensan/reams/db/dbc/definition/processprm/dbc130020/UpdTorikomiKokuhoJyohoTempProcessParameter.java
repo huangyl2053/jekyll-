@@ -24,17 +24,26 @@ public class UpdTorikomiKokuhoJyohoTempProcessParameter implements IBatchProcess
     private RString 保険者区分;
     private RString 表題;
     private List<RString> 処理対象市町村;
-    private RString IF種類;
+    private RString iF種類;
     private RString 取込形式;
     private RString 処理日時;
 
+    /**
+     *
+     * @param 保険者区分 RString
+     * @param 表題 RString
+     * @param 処理対象市町村 List<RString>
+     * @param iF種類 RString
+     * @param 取込形式 RString
+     * @param 処理日時 RString
+     */
     public UpdTorikomiKokuhoJyohoTempProcessParameter(RString 保険者区分, RString 表題,
-            List<RString> 処理対象市町村, RString IF種類, RString 取込形式, RString 処理日時) {
+            List<RString> 処理対象市町村, RString iF種類, RString 取込形式, RString 処理日時) {
 
         this.保険者区分 = 保険者区分;
         this.表題 = 表題;
         this.処理対象市町村 = 処理対象市町村;
-        this.IF種類 = IF種類;
+        this.iF種類 = iF種類;
         this.取込形式 = 取込形式;
         this.処理日時 = 処理日時;
     }
