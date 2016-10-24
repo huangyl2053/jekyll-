@@ -211,22 +211,60 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
                 csvEntity.set氏名(宛名.get名称().getName().value());
             }
         }
-        if (entity.get資格取得日() != null && !entity.get資格取得日().isEmpty()) {
+        if (checkFlexibleDateNullOrEmpty(entity.get資格取得日())) {
             csvEntity.set資格取得日(entity.get資格取得日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
         }
-        if (entity.get資格喪失日() != null && !entity.get資格喪失日().isEmpty()) {
+        if (checkFlexibleDateNullOrEmpty(entity.get資格喪失日())) {
             csvEntity.set資格喪失日(entity.get資格喪失日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
         }
-        if (entity.get認定開始日() != null && !entity.get認定開始日().isEmpty()) {
+        if (checkFlexibleDateNullOrEmpty(entity.get認定開始日())) {
             csvEntity.set認定開始日(entity.get認定開始日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
         }
-        if (entity.get認定終了日() != null && !entity.get認定終了日().isEmpty()) {
+        if (checkFlexibleDateNullOrEmpty(entity.get認定終了日())) {
             csvEntity.set認定終了日(entity.get認定終了日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
         }
         if (entity.get厚労省IF識別コード() != null && entity.get要介護状態区分コード() != null) {
-            IYokaigoJotaiKubun iYokaigoJotaiKubun = YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(entity.get厚労省IF識別コード()), entity.get要介護状態区分コード());
+            IYokaigoJotaiKubun iYokaigoJotaiKubun = YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode
+                    .toValue(entity.get厚労省IF識別コード()), entity.get要介護状態区分コード());
             csvEntity.set要介護度(iYokaigoJotaiKubun.getName());
         }
+        set申請負担段階と旧措置(csvEntity, entity);
+        csvEntity.set合計所得_含年金収入(DecimalFormatter.toRString(nullToZero(entity.get合計所得金額()), 0));
+        csvEntity.set空白(RString.EMPTY);
+        RString 世帯課税 = entity.get世帯課税区分();
+        RString 世帯課税名称 = RString.EMPTY;
+        if (null != 世帯課税 && !世帯課税.isEmpty()) {
+            世帯課税名称 = SetaiKazeiKubun.toValue(世帯課税).get名称();
+        }
+        csvEntity.set世帯課税(世帯課税名称);
+        set配偶者(csvEntity, entity);
+        csvEntity.set預貯金額(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getYochokinGaku()), 0));
+        csvEntity.set有価証券評価概算額(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getYukashoukenGaisangaku()), 0));
+        csvEntity.setその他金額(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getSonotaKingaku()), 0));
+        csvEntity.set預貯金等合計(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getYochokinGaku())
+                .add(nullToZero(entity.get今回認定結果().getYukashoukenGaisangaku()))
+                .add(nullToZero(entity.get今回認定結果().getSonotaKingaku())), 0));
+        if (null != entity.getAtesakiEntity() && checkFlexibleDateNullOrEmpty(entity.getAtesakiEntity().getTorokuIdoYMD())) {
+            csvEntity.set住民となった日(checkNullOrEmpty(entity.getAtesakiEntity().getTorokuIdoYMD()
+                    .seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString()));
+        }
+        if (住所地特例フラグ_1.equals(entity.get住所地特例フラグ())) {
+            csvEntity.set住所地特例該当(星);
+        } else {
+            csvEntity.set住所地特例該当(RString.EMPTY);
+        }
+        csvEntity.set非課税年金有(RString.EMPTY);
+        if (entity.get今回認定結果().getIzokuNenkinJukyuFlag() || entity.get今回認定結果().getShogaiNenkinJukyuFlag()) {
+            csvEntity.set非課税年金自己申告有(星);
+        } else {
+            csvEntity.set非課税年金自己申告有(RString.EMPTY);
+        }
+        csvEntity.set激変緩和(RString.EMPTY);
+
+    }
+
+    private void set申請負担段階と旧措置(FutanGengaokuNintteiKakuninListCsvEntity csvEntity,
+            FutanGengaokuNintteiKakuninListEntity entity) {
         if (申請理由区分_世帯非課税８０万以下.equals(entity.get今回認定結果().getShinseiRiyuKubun())) {
             csvEntity.set申請負担段階(申請負担段階_2);
         } else if (申請理由区分_世帯非課税８０万超.equals(entity.get今回認定結果().getShinseiRiyuKubun())) {
@@ -285,24 +323,20 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
         } else {
             csvEntity.set老齡(RString.EMPTY);
         }
-        csvEntity.set合計所得_含年金収入(DecimalFormatter.toRString(nullToZero(entity.get合計所得金額()), 0));
-        csvEntity.set空白(RString.EMPTY);
-        RString 世帯課税 = entity.get世帯課税区分();
-        RString 世帯課税名称 = RString.EMPTY;
-        if (null != 世帯課税 && !世帯課税.isEmpty()) {
-            世帯課税名称 = SetaiKazeiKubun.toValue(世帯課税).get名称();
-        }
-        csvEntity.set世帯課税(世帯課税名称);
+    }
+
+    private void set配偶者(FutanGengaokuNintteiKakuninListCsvEntity csvEntity,
+            FutanGengaokuNintteiKakuninListEntity entity) {
         if (entity.get今回認定結果().getHaigushaUmuFlag()) {
             csvEntity.set配偶者有無(星);
         } else {
             csvEntity.set配偶者有無(RString.EMPTY);
         }
         if (entity.get今回認定結果().getHaigushaShikibetsuCd() != null) {
-            csvEntity.set配偶者識別コード(entity.get今回認定結果().getHaigushaShikibetsuCd().value());
+            csvEntity.set配偶者識別コード(checkNullOrEmpty(entity.get今回認定結果().getHaigushaShikibetsuCd().value()));
         }
         if (entity.get今回認定結果().getHaigushaShimei() != null) {
-            csvEntity.set配偶者氏名(entity.get今回認定結果().getHaigushaShimei().value());
+            csvEntity.set配偶者氏名(checkNullOrEmpty(entity.get今回認定結果().getHaigushaShimei().value()));
         }
         RString 配偶者課税区分 = entity.get今回認定結果().getHaigushaKazeiKubun();
         RString 配偶者課税区分名称 = RString.EMPTY;
@@ -310,30 +344,17 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
             配偶者課税区分名称 = HaigushaKazeiKubun.toValue(配偶者課税区分).get名称();
         }
         csvEntity.set配偶者課税区分(配偶者課税区分名称);
-        csvEntity.set預貯金額(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getYochokinGaku()), 0));
-        csvEntity.set有価証券評価概算額(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getYukashoukenGaisangaku()), 0));
-        csvEntity.setその他金額(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getSonotaKingaku()), 0));
-        csvEntity.set預貯金等合計(DecimalFormatter.toRString(nullToZero(entity.get今回認定結果().getYochokinGaku())
-                .add(nullToZero(entity.get今回認定結果().getYukashoukenGaisangaku()))
-                .add(nullToZero(entity.get今回認定結果().getSonotaKingaku())), 0));
-        if (entity.getAtesakiEntity() != null && entity.getAtesakiEntity().getTorokuIdoYMD() != null
-                && !entity.getAtesakiEntity().getTorokuIdoYMD().isEmpty()) {
-            csvEntity.set住民となった日(entity.getAtesakiEntity().getTorokuIdoYMD()
-                    .seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-        }
-        if (住所地特例フラグ_1.equals(entity.get住所地特例フラグ())) {
-            csvEntity.set住所地特例該当(星);
-        } else {
-            csvEntity.set住所地特例該当(RString.EMPTY);
-        }
-        csvEntity.set非課税年金有(RString.EMPTY);
-        if (entity.get今回認定結果().getIzokuNenkinJukyuFlag() || entity.get今回認定結果().getShogaiNenkinJukyuFlag()) {
-            csvEntity.set非課税年金自己申告有(星);
-        } else {
-            csvEntity.set非課税年金自己申告有(RString.EMPTY);
-        }
-        csvEntity.set激変緩和(RString.EMPTY);
+    }
 
+    private RString checkNullOrEmpty(RString string) {
+        if (string != null && !string.isEmpty()) {
+            return string;
+        }
+        return RString.EMPTY;
+    }
+
+    private boolean checkFlexibleDateNullOrEmpty(FlexibleDate date) {
+        return null != date && !date.isEmpty();
     }
 
     private Boolean booleanListValue(List<IsShinseiEntity> list) {
@@ -349,11 +370,11 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
 
     private void 今回と前回情報設定(FutanGengaokuNintteiKakuninListCsvEntity csvEntity,
             FutanGengaokuNintteiKakuninListEntity entity) {
-        if (entity.get今回認定結果().getShinseiYMD() != null && !entity.get今回認定結果().getShinseiYMD().isEmpty()) {
-            csvEntity.set今回_申請年月日(entity.get今回認定結果().getShinseiYMD().seireki().toDateString());
+        if (checkFlexibleDateNullOrEmpty(entity.get今回認定結果().getShinseiYMD())) {
+            csvEntity.set今回_申請年月日(checkNullOrEmpty(entity.get今回認定結果().getShinseiYMD().seireki().toDateString()));
         }
-        if (entity.get今回認定結果().getKetteiYMD() != null && !entity.get今回認定結果().getKetteiYMD().isEmpty()) {
-            csvEntity.set今回_決定年月日(entity.get今回認定結果().getKetteiYMD().seireki().toDateString());
+        if (checkFlexibleDateNullOrEmpty(entity.get今回認定結果().getKetteiYMD())) {
+            csvEntity.set今回_決定年月日(checkNullOrEmpty(entity.get今回認定結果().getKetteiYMD().seireki().toDateString()));
         }
         if (KetteiKubun.承認する.getコード().equals(entity.get今回認定結果().getKetteiKubun())) {
             csvEntity.set今回_決定区分(決定区分_承認);
@@ -362,15 +383,16 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
         } else {
             csvEntity.set今回_決定区分(RString.EMPTY);
         }
-        if (entity.get今回認定結果().getTekiyoKaishiYMD() != null && !entity.get今回認定結果().getTekiyoKaishiYMD().isEmpty()) {
-            csvEntity.set今回_適用日(entity.get今回認定結果().getTekiyoKaishiYMD().seireki().toDateString());
+        if (checkFlexibleDateNullOrEmpty(entity.get今回認定結果().getTekiyoKaishiYMD())) {
+            csvEntity.set今回_適用日(checkNullOrEmpty(entity.get今回認定結果().getTekiyoKaishiYMD().seireki().toDateString()));
         }
-        if (entity.get今回認定結果().getTekiyoShuryoYMD() != null && !entity.get今回認定結果().getTekiyoShuryoYMD().isEmpty()) {
-            csvEntity.set今回_有効期限(entity.get今回認定結果().getTekiyoShuryoYMD().seireki().toDateString());
+        if (checkFlexibleDateNullOrEmpty(entity.get今回認定結果().getTekiyoShuryoYMD())) {
+            csvEntity.set今回_有効期限(checkNullOrEmpty(entity.get今回認定結果().getTekiyoShuryoYMD().seireki().toDateString()));
         }
         csvEntity.set今回_旧措置(entity.get今回認定結果().getKyusochishaKubun());
-        if (entity.get前回認定結果() != null
-                && !entity.get今回認定結果().getRiyoshaFutanDankai().equals(entity.get前回認定結果().getRiyoshaFutanDankai())) {
+        if (null != entity.get前回認定結果()
+                && !checkNullOrEmpty(entity.get今回認定結果().getRiyoshaFutanDankai())
+                .equals(checkNullOrEmpty(entity.get前回認定結果().getRiyoshaFutanDankai()))) {
             csvEntity.set今回_前回との比較(星);
         } else {
             csvEntity.set今回_前回との比較(RString.EMPTY);
@@ -389,11 +411,11 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
         }
         if (entity.get前回認定結果() != null) {
 
-            if (entity.get前回認定結果().getShinseiYMD() != null && !entity.get前回認定結果().getShinseiYMD().isEmpty()) {
-                csvEntity.set前回_申請年月日(entity.get前回認定結果().getShinseiYMD().seireki().toDateString());
+            if (checkFlexibleDateNullOrEmpty(entity.get前回認定結果().getShinseiYMD())) {
+                csvEntity.set前回_申請年月日(checkNullOrEmpty(entity.get前回認定結果().getShinseiYMD().seireki().toDateString()));
             }
-            if (entity.get前回認定結果().getKetteiYMD() != null && !entity.get前回認定結果().getKetteiYMD().isEmpty()) {
-                csvEntity.set前回_決定年月日(entity.get前回認定結果().getKetteiYMD().seireki().toDateString());
+            if (checkFlexibleDateNullOrEmpty(entity.get前回認定結果().getKetteiYMD())) {
+                csvEntity.set前回_決定年月日(checkNullOrEmpty(entity.get前回認定結果().getKetteiYMD().seireki().toDateString()));
             }
             if (KetteiKubun.承認する.getコード().equals(entity.get前回認定結果().getKetteiKubun())) {
                 csvEntity.set前回_決定区分(決定区分_承認);
@@ -402,11 +424,11 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
             } else {
                 csvEntity.set前回_決定区分(RString.EMPTY);
             }
-            if (entity.get前回認定結果().getTekiyoKaishiYMD() != null && !entity.get前回認定結果().getTekiyoKaishiYMD().isEmpty()) {
-                csvEntity.set前回_適用日(entity.get前回認定結果().getTekiyoKaishiYMD().seireki().toDateString());
+            if (checkFlexibleDateNullOrEmpty(entity.get前回認定結果().getTekiyoKaishiYMD())) {
+                csvEntity.set前回_適用日(checkNullOrEmpty(entity.get前回認定結果().getTekiyoKaishiYMD().seireki().toDateString()));
             }
-            if (entity.get前回認定結果().getTekiyoShuryoYMD() != null && !entity.get前回認定結果().getTekiyoShuryoYMD().isEmpty()) {
-                csvEntity.set前回_有効期限(entity.get前回認定結果().getTekiyoShuryoYMD().seireki().toDateString());
+            if (checkFlexibleDateNullOrEmpty(entity.get前回認定結果().getTekiyoShuryoYMD())) {
+                csvEntity.set前回_有効期限(checkNullOrEmpty(entity.get前回認定結果().getTekiyoShuryoYMD().seireki().toDateString()));
             }
             csvEntity.set前回_旧措置(entity.get前回認定結果().getKyusochishaKubun());
             csvEntity.set前回_負担段階(entity.get前回認定結果().getRiyoshaFutanDankai());

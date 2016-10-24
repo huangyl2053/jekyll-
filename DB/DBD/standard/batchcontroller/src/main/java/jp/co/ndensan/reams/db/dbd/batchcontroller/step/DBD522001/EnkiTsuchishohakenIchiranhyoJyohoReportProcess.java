@@ -55,8 +55,8 @@ public class EnkiTsuchishohakenIchiranhyoJyohoReportProcess extends BatchKeyBrea
     private BatchReportWriter<NinteiEnkiTsuchishoHakkoIchiranhyoReportSource> batchReportWriter;
     private ReportSourceWriter<NinteiEnkiTsuchishoHakkoIchiranhyoReportSource> reportSourceWriter;
     private EnkiTsuchishohakenIchiranhyoJyohoProcessParameter parameter;
-    private static final RString 処理見込み日From = new RString("【処理見込み日From】");
-    private static final RString 処理見込み日To = new RString("【処理見込み日To】");
+    private static final RString 処理見込み日FROM = new RString("【処理見込み日From】");
+    private static final RString 処理見込み日TO = new RString("【処理見込み日To】");
     private static final RString 通知書発行日 = new RString("【通知書発行日】");
 
     @Override
@@ -117,10 +117,10 @@ public class EnkiTsuchishohakenIchiranhyoJyohoReportProcess extends BatchKeyBrea
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
         if (parameter.get処理見込み日From() != null) {
-            出力条件.add(処理見込み日From.concat(parameter.get処理見込み日From().wareki().toDateString()));
+            出力条件.add(処理見込み日FROM.concat(parameter.get処理見込み日From().wareki().toDateString()));
         }
         if (parameter.get処理見込み日To() != null) {
-            出力条件.add(処理見込み日To.concat(parameter.get処理見込み日To().wareki().toDateString()));
+            出力条件.add(処理見込み日TO.concat(parameter.get処理見込み日To().wareki().toDateString()));
         }
         if (parameter.get通知書発行日() != null) {
             出力条件.add(通知書発行日.concat(parameter.get通知書発行日().get(0).wareki().toDateString()));
