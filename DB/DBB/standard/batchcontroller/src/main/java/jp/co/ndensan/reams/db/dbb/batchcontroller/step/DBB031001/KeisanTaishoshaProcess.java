@@ -279,9 +279,10 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
         entity.setKyuShichosonCode(daichoEntity.getKyuShichosonCode());
         entity.setLogicalDeletedFlag(daichoEntity.getLogicalDeletedFlag());
         FlexibleDate fukaDate = new FlexibleDate(param.get賦課年度().getYearValue(), 四月, INDEX_1);
-        if (daichoEntity.getIchigoShikakuShutokuYMD() != null
-                && fukaDate.isBeforeOrEquals(daichoEntity.getIchigoShikakuShutokuYMD())) {
-            entity.setKijunYMD(daichoEntity.getIchigoShikakuShutokuYMD());
+        FlexibleDate ichigoShikakuShutokuYMD = daichoEntity.getIchigoShikakuShutokuYMD();
+        if (ichigoShikakuShutokuYMD != null && !ichigoShikakuShutokuYMD.isEmpty()
+                && fukaDate.isBeforeOrEquals(ichigoShikakuShutokuYMD)) {
+            entity.setKijunYMD(ichigoShikakuShutokuYMD);
         } else {
             entity.setKijunYMD(fukaDate);
         }
