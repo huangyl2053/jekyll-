@@ -90,7 +90,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onClick_chkMahiChange(KihonChosaInput1Div div) {
         getHandler(div).麻痺等の有無ないChange();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).focusId(div.getChkMahi().getSelectControlID()).respond();
     }
 
     /**

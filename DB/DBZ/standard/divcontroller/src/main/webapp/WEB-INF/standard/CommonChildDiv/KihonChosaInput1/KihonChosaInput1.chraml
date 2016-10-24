@@ -23,7 +23,8 @@
      
    
    
-   <script class="RamlConvert" type="text/javascript">
+   
+         <script class="RamlConvert" type="text/javascript">
 var DBZ= DBZ? DBZ: {};
 DBZ['KIHONCHOSAINPUT1'] = {};
 DBZ['KIHONCHOSAINPUT1'].KihonChosaInput1Request = function(parentFieldName){ 
