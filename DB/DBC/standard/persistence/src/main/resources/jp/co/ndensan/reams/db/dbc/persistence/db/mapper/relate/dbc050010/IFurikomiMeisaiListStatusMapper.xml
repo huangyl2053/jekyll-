@@ -74,7 +74,7 @@
                 FROM rgdb."DbT4001JukyushaDaicho"
                 INNER JOIN "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
                 ON      rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" = 振込明細一時TBL."hihokenshaNo"
-                        AND rgdb."DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> 振込明細一時TBL."serviceTeikyoYM"
+                        AND substr(rgdb."DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> 振込明細一時TBL."serviceTeikyoYM"
                         AND rgdb."DbT4001JukyushaDaicho"."logicalDeletedFlag" =  FALSE
                 WHERE((rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" = '1'
                     AND 振込明細一時TBL."serviceTeikyoYM" <![CDATA[<=]]> rgdb."DbT4001JukyushaDaicho"."shikyuGendoShuryoYMD")
