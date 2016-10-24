@@ -9,13 +9,14 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
  * 不正な動作の原因になります。</br>
  * DBC0300011の状態名定義クラスです
  *
- * @reamsid_L DBC-2120-010 panhe
+ * @author 自動生成
  */
 public enum DBC0300011StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    Default("default");
+    Default("default"),
+    sub検索("sub検索");
 
     private final RString name;
 

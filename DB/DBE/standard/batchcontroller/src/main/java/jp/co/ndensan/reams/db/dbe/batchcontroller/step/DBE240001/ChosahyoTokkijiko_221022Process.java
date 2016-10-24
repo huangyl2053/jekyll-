@@ -129,8 +129,9 @@ public class ChosahyoTokkijiko_221022Process extends BatchProcessBase<HomonChosa
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
         update認定調査依頼情報(entity);
+        setItem(entity);
 //        ChosahyoTokkijikoReport report = new ChosahyoTokkijikoReport(setItem(entity));
-//        report.writeBy(reportSourceWriter);
+        //        report.writeBy(reportSourceWriter);
     }
 
     @Override
