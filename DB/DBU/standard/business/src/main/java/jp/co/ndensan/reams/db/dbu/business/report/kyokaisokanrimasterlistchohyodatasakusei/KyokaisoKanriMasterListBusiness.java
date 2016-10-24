@@ -100,7 +100,7 @@ public class KyokaisoKanriMasterListBusiness {
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"PSM_kanaShimei\"")),
+        氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"PSM_kanaMeisho\"")),
         /**
          * 住民種別
          */

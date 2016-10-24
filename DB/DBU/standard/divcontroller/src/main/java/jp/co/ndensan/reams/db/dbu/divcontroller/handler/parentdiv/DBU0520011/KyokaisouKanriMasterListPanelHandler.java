@@ -61,6 +61,7 @@ public class KyokaisouKanriMasterListPanelHandler {
         div.getKyokaisoKariParam().getTxtKijumbi().setDisabled(false);
         div.getKyokaisoKariParam().getTxtKijumbi().setValue(RDate.getNowDate());
         div.getKyokaisoKariParam().getRadHaniRadio().setDisabled(true);
+        div.getKyokaisoKariParam().getRadHaniRadio().setSelectedKey(KY1);
         div.getKyokaisoKariParam().getTxtHaniChushutsu().setDisabled(true);
         div.getShiteiNaiyoKubun().getChkShiteiNaiyoKubun().setDisplayNone(false);
         div.getShiteiNaiyoKubun().getCcdChohyoShutsuryokujun().setVisible(true);
