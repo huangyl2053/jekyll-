@@ -29,8 +29,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiC
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -97,11 +95,12 @@ public class HanyoListKokiKoreishaBusiness {
      * @param entity SQL検索結果情報
      * @param association 地方公共団体情報
      * @param hokenshaList 保険者リスト
-     * @param Csvhitsukesurasyuhensyu 日付スラッシュ付加
+     * @param csvhitsukesurasyuhensyu 日付スラッシュ付加
+     * @param 市町村名 市町村名
      */
-    public void setEucCsvEntity(Association association, boolean Csvhitsukesurasyuhensyu,
-            HanyoRisutoKokiKoreishaEucCsvEntity eucCsvEntity, HanyoRisutoKokiKoreishaEntity entity, HokenshaList hokenshaList) {
-        isCsvhitsukesurasyuhensyu = Csvhitsukesurasyuhensyu;
+    public void setEucCsvEntity(Association association, boolean csvhitsukesurasyuhensyu,
+            HanyoRisutoKokiKoreishaEucCsvEntity eucCsvEntity, HanyoRisutoKokiKoreishaEntity entity, HokenshaList hokenshaList, RString 市町村名) {
+        isCsvhitsukesurasyuhensyu = csvhitsukesurasyuhensyu;
         if (entity.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
             eucCsvEntity.set識別コード(kojin.get識別コード().value());
@@ -150,7 +149,7 @@ public class HanyoListKokiKoreishaBusiness {
             eucCsvEntity.set前住所方書(kojin.get転入前().get方書().value());
         }
         eucCsvEntity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
-        eucCsvEntity.set市町村名(get地方公共団体(new LasdecCode(entity.get被保険者台帳管理_市町村コード())).get市町村名());
+        eucCsvEntity.set市町村名(市町村名);
         eucCsvEntity.set保険者コード(association.get地方公共団体コード().value());
         eucCsvEntity.set保険者名(association.getShichosonName_());
         eucCsvEntity.set空白(RString.EMPTY);
@@ -818,11 +817,6 @@ public class HanyoListKokiKoreishaBusiness {
             return RString.EMPTY;
         }
         return NinchishoNichijoSeikatsuJiritsudoCode.toValue(認知症高齢者の日常生活自立度コード).get名称();
-    }
-
-    private Association get地方公共団体(LasdecCode 市町村コード) {
-        IAssociationFinder finder = AssociationFinderFactory.createInstance();
-        return finder.getAssociation(市町村コード);
     }
 
 }

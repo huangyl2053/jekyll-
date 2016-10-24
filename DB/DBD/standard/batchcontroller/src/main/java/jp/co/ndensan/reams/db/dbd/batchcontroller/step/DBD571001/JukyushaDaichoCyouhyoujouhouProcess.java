@@ -255,7 +255,7 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         支払方法変更情報EntityList = 帳票出力用受給者台帳.set支払方法変更情報EntityList(t, 支払方法変更情報EntityList);
         給付額減額情報EntityList = 帳票出力用受給者台帳.set給付額減額情報EntityList(t, 給付額減額情報EntityList);
         資格情報EntityList = 帳票出力用受給者台帳.set資格情報EntityList(t, 資格情報EntityList);
-        老齢福祉年金情報EntityList = 老齢福祉年金情報EntityList = 帳票出力用受給者台帳.set老齢福祉年金情報EntityList(t, 老齢福祉年金情報EntityList);
+        老齢福祉年金情報EntityList = 帳票出力用受給者台帳.set老齢福祉年金情報EntityList(t, 老齢福祉年金情報EntityList);
         生活保護情報EntityList = 帳票出力用受給者台帳.set生活保護情報EntityList(t, 生活保護情報EntityList);
     }
 
