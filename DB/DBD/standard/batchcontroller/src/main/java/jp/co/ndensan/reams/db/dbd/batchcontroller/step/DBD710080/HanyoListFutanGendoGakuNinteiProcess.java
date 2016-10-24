@@ -191,7 +191,7 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
     protected void process(FutanGendoGakuNinteiEntity entity) {
         連番 = 連番 + 1;
         FutanGendoGakuNinteiEucCsvEntity eucCsvEntity = new FutanGendoGakuNinteiEucCsvEntity();
-        HanyoListFutanGendoGakuNinteiManager.createInstance().CSV情報設定(eucCsvEntity, entity, association,
+        HanyoListFutanGendoGakuNinteiManager.createInstance().get情報設定(eucCsvEntity, entity, association,
                 hokenshaList, processParamter.isCsvhitsukesurasyuhensyu());
         eucCsvWriter.writeLine(eucCsvEntity);
         personalDataList.add(toPersonalData(entity));

@@ -204,7 +204,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
     protected void process(TokubetsuChiikiKasanGemmenEntity entity) {
         連番 = 連番 + 1;
         TokubetsuChiikiKasanGemmenEucCsvEntity eucCsvEntity = new TokubetsuChiikiKasanGemmenEucCsvEntity();
-        HanyoListTokubetsuChiikiKasanGemmenManager.createInstance().CSV情報設定(eucCsvEntity, entity, association,
+        HanyoListTokubetsuChiikiKasanGemmenManager.createInstance().get情報設定(eucCsvEntity, entity, association,
                 hokenshaList, processParamter.isCsvhitsukesurasyuhensyu());
         eucCsvWriter.writeLine(eucCsvEntity);
         personalDataList.add(toPersonalData(entity));

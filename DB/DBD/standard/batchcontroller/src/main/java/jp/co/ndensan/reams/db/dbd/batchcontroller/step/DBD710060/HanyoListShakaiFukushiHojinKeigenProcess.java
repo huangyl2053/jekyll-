@@ -190,7 +190,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
     protected void process(ShakaiFukushiHojinKeigenEntity entity) {
         連番 = 連番 + 1;
         ShakaiFukushiHojinKeigenEucCsvEntity eucCsvEntity = new ShakaiFukushiHojinKeigenEucCsvEntity();
-        HanyoListShakaiFukushiHojinKeigenManager.createInstance().CSV情報設定(eucCsvEntity, entity, association, hokenshaList,
+        HanyoListShakaiFukushiHojinKeigenManager.createInstance().get情報設定(eucCsvEntity, entity, association, hokenshaList,
                 processParamter.isCsvhitsukesurasyuhensyu());
         eucCsvWriter.writeLine(eucCsvEntity);
         personalDataList.add(toPersonalData(entity));
