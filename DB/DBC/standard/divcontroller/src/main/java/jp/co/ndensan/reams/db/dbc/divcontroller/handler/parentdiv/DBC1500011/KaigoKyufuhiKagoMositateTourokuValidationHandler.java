@@ -56,6 +56,19 @@ public class KaigoKyufuhiKagoMositateTourokuValidationHandler {
     }
 
     /**
+     * データが存在したチェックを行う。
+     *
+     * @param msg メッセージの引数
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs check存在しない(RString msg) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(new KaigoKyufuhiKagoMositateTourokuValidationHandler.CheckMessages(
+                UrErrorMessages.存在しない, msg.toString())));
+        return validationMessages;
+    }
+
+    /**
      * 終了日が開始日以前チェックを行う。
      *
      * @return バリデーション結果

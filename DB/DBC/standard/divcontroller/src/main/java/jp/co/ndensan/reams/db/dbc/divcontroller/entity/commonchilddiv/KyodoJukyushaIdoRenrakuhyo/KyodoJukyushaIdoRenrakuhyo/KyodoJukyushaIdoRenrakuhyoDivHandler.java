@@ -295,6 +295,8 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
 
     private void set初期値_削除(KyodoshoriyoJukyushaIdoRenrakuhyoParam entity) {
         if (entity.get基本情報Entity() != null) {
+            List<KeyValueDataSource> delete_基本 = div.getChkKihonSofuDelete().getDataSource();
+            div.getChkKihonSofuDelete().setSelectedItems(delete_基本);
             if (entity.get基本情報Entity().get履歴番号() == 1) {
                 div.getTxtTeiseiYMD().setDisplayNone(true);
                 div.getRadTeiseiKubunCode().setDisabled(true);
@@ -305,6 +307,8 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
             set基本送付情報エリア(entity);
         }
         if (entity.get償還情報Entity() != null) {
+            List<KeyValueDataSource> delete_償還 = div.getChkShokanSofuDelete().getDataSource();
+            div.getChkShokanSofuDelete().setSelectedItems(delete_償還);
             if (entity.get償還情報Entity().get履歴番号() == 1) {
                 div.getTxtTeiseiYMD().setDisplayNone(true);
                 div.getRadTeiseiKubunCode().setDisabled(true);
@@ -315,6 +319,8 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
             set償還送付情報エリア(entity);
         }
         if (entity.get高額情報Entity() != null) {
+            List<KeyValueDataSource> delete_高額 = div.getChkKogakuSofuDelete().getDataSource();
+            div.getChkKogakuSofuDelete().setSelectedItems(delete_高額);
             if (entity.get高額情報Entity().get履歴番号() == 1) {
                 div.getTxtTeiseiYMD().setDisplayNone(true);
                 div.getRadTeiseiKubunCode().setDisabled(true);

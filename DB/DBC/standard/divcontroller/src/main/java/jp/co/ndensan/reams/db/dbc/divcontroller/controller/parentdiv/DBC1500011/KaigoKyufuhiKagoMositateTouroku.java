@@ -67,6 +67,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
     private static final RString 総合事業費過誤申立書_経過措置 = new RString("総合事業費過誤申立書（経過措置）");
     private static final RString 総合事業費過誤申立書 = new RString("総合事業費過誤申立書");
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
+    private static final RString MESSAGE_REPLACE_コンフィグのキー = new RString("該当の給付実績データ");
 
     /**
      * 画面初期化します。
@@ -185,6 +186,9 @@ public class KaigoKyufuhiKagoMositateTouroku {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         div.setHdnKensaku(再検索フラグ);
         get給付実績一覧(div, controlData);
+        if (ViewStateHolder.get(ViewStateKeys.給付実績一覧, KagoMoshitateCollect.class).get給付実績情報List().isEmpty()) {
+            return ResponseData.of(div).addValidationMessages(getValidation(div).check存在しない(MESSAGE_REPLACE_コンフィグのキー)).respond();
+        }
         return ResponseData.of(div).setState(DBC1500011StateName.search);
     }
 
@@ -354,6 +358,8 @@ public class KaigoKyufuhiKagoMositateTouroku {
             List<KaigoKyufuhiKagoMositateTourokuResult> resultList = getService().selectKyufuJissekiList(param).records();
             if (!resultList.isEmpty()) {
                 div.getKyufuJissekiGaitoshaListPanel().setIsOpen(true);
+            } else {
+                div.getKyufuJissekiGaitoshaListPanel().setIsOpen(false);
             }
             ViewStateHolder.put(ViewStateKeys.給付実績一覧, getHandler(div).set画面一覧(resultList));
         }

@@ -27,6 +27,11 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0302KinyuKikanEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0303KinyuKikanShitenEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0310KozaEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
+import jp.co.ndensan.reams.ue.uex.definition.core.RenkeiShubetsu;
+import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
+import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
+import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuSeidoCode;
+import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCode;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -128,60 +133,60 @@ public class IdoFukaJohoTempEntitySet {
      */
     protected void update異動賦課情報一時_賦課Entity(TmpIdoFukaJohoEntity 異動賦課情報一時,
             FukaJohoZenendoTmpEntity 介護賦課前年度) {
-        異動賦課情報一時.setFuka_choteiNendo(介護賦課前年度.getChoteiNendo());
-        異動賦課情報一時.setFuka_fukaNendo(介護賦課前年度.getFukaNendo());
-        異動賦課情報一時.setFuka_tsuchishoNo(介護賦課前年度.getTsuchishoNo());
-        異動賦課情報一時.setFuka_rirekiNo(介護賦課前年度.getRirekiNo());
-        異動賦課情報一時.setFuka_hihokenshaNo(介護賦課前年度.getHihokenshaNo());
-        異動賦課情報一時.setFuka_shikibetsuCode(介護賦課前年度.getShikibetsuCode());
-        異動賦課情報一時.setFuka_setaiCode(介護賦課前年度.getSetaiCode());
-        異動賦課情報一時.setFuka_setaiInsu(介護賦課前年度.getSetaiInsu());
-        異動賦課情報一時.setFuka_shikakuShutokuYMD(介護賦課前年度.getShikakuShutokuYMD());
-        異動賦課情報一時.setFuka_shikakuShutokuJiyu(介護賦課前年度.getShikakuShutokuJiyu());
-        異動賦課情報一時.setFuka_shikakuSoshitsuYMD(介護賦課前年度.getShikakuSoshitsuYMD());
-        異動賦課情報一時.setFuka_shikakuSoshitsuJiyu(介護賦課前年度.getShikakuSoshitsuJiyu());
-        異動賦課情報一時.setFuka_seihofujoShurui(介護賦課前年度.getSeihofujoShurui());
-        異動賦課情報一時.setFuka_seihoKaishiYMD(介護賦課前年度.getSeihoKaishiYMD());
-        異動賦課情報一時.setFuka_seihoHaishiYMD(介護賦課前年度.getSeihoHaishiYMD());
-        異動賦課情報一時.setFuka_ronenKaishiYMD(介護賦課前年度.getRonenKaishiYMD());
-        異動賦課情報一時.setFuka_ronenHaishiYMD(介護賦課前年度.getRonenHaishiYMD());
-        異動賦課情報一時.setFuka_fukaYMD(介護賦課前年度.getFukaYMD());
-        異動賦課情報一時.setFuka_kazeiKubun(介護賦課前年度.getKazeiKubun());
-        異動賦課情報一時.setFuka_setaikazeiKubun(介護賦課前年度.getSetaikazeiKubun());
-        異動賦課情報一時.setFuka_gokeiShotokuGaku(介護賦課前年度.getGokeiShotokuGaku());
-        異動賦課情報一時.setFuka_nenkinShunyuGaku(介護賦課前年度.getNenkinShunyuGaku());
-        異動賦課情報一時.setFuka_hokenryoDankai(介護賦課前年度.getHokenryoDankai());
-        異動賦課情報一時.setFuka_hokenryoDankai1(介護賦課前年度.getHokenryoDankai1());
-        異動賦課情報一時.setFuka_nengakuHokenryo1(介護賦課前年度.getNengakuHokenryo1());
-        異動賦課情報一時.setFuka_tsukiwariStartYM1(介護賦課前年度.getTsukiwariStartYM1());
-        異動賦課情報一時.setFuka_tsukiwariEndYM1(介護賦課前年度.getTsukiwariEndYM1());
-        異動賦課情報一時.setFuka_hokenryoDankai2(介護賦課前年度.getHokenryoDankai2());
-        異動賦課情報一時.setFuka_nengakuHokenryo2(介護賦課前年度.getNengakuHokenryo2());
-        異動賦課情報一時.setFuka_tsukiwariStartYM2(介護賦課前年度.getTsukiwariStartYM2());
-        異動賦課情報一時.setFuka_tsukiwariEndYM2(介護賦課前年度.getTsukiwariEndYM2());
-        異動賦課情報一時.setFuka_choteiNichiji(介護賦課前年度.getChoteiNichiji());
-        異動賦課情報一時.setFuka_choteiJiyu1(介護賦課前年度.getChoteiJiyu1());
-        異動賦課情報一時.setFuka_choteiJiyu2(介護賦課前年度.getChoteiJiyu2());
-        異動賦課情報一時.setFuka_choteiJiyu3(介護賦課前年度.getChoteiJiyu3());
-        異動賦課情報一時.setFuka_choteiJiyu4(介護賦課前年度.getChoteiJiyu4());
-        異動賦課情報一時.setFuka_koseiM(介護賦課前年度.getKoseiM());
-        異動賦課情報一時.setFuka_gemmenMaeHokenryo(介護賦課前年度.getGemmenMaeHokenryo());
-        異動賦課情報一時.setFuka_gemmenGaku(介護賦課前年度.getGemmenGaku());
-        異動賦課情報一時.setFuka_kakuteiHokenryo(介護賦課前年度.getKakuteiHokenryo());
-        異動賦課情報一時.setFuka_hokenryoDankaiKarisanntei(介護賦課前年度.getHokenryoDankaiKarisanntei());
-        異動賦課情報一時.setFuka_choshuHohoRirekiNo(介護賦課前年度.getChoshuHohoRirekiNo());
-        異動賦課情報一時.setFuka_idoKijunNichiji(介護賦課前年度.getIdoKijunNichiji());
-        異動賦課情報一時.setFuka_kozaKubun(介護賦課前年度.getKozaKubun());
-        異動賦課情報一時.setFuka_kyokaisoKubun(介護賦課前年度.getKyokaisoKubun());
-        異動賦課情報一時.setFuka_shokkenKubun(介護賦課前年度.getShokkenKubun());
-        異動賦課情報一時.setFuka_fukaShichosonCode(介護賦課前年度.getFukaShichosonCode());
-        異動賦課情報一時.setFuka_tkSaishutsuKampuGaku(介護賦課前年度.getTkSaishutsuKampuGaku());
-        異動賦課情報一時.setFuka_fuSaishutsuKampuGaku(介護賦課前年度.getFuSaishutsuKampuGaku());
-        異動賦課情報一時.setKi(介護賦課前年度.getKi());
-        異動賦課情報一時.setChoteigaku(介護賦課前年度.getChoteigaku());
-        異動賦課情報一時.setChoshuHouhou(介護賦課前年度.getChoshuHouhou());
-        異動賦課情報一時.setChoteiId(介護賦課前年度.getChoteiId());
-        異動賦課情報一時.setShunoId(介護賦課前年度.getShunoId());
+        異動賦課情報一時.setFuka_choteiNendo(介護賦課前年度.getFuka_ChoteiNendo());
+        異動賦課情報一時.setFuka_fukaNendo(介護賦課前年度.getFuka_FukaNendo());
+        異動賦課情報一時.setFuka_tsuchishoNo(介護賦課前年度.getFuka_TsuchishoNo());
+        異動賦課情報一時.setFuka_rirekiNo(介護賦課前年度.getFuka_RirekiNo());
+        異動賦課情報一時.setFuka_hihokenshaNo(介護賦課前年度.getFuka_HihokenshaNo());
+        異動賦課情報一時.setFuka_shikibetsuCode(介護賦課前年度.getFuka_ShikibetsuCode());
+        異動賦課情報一時.setFuka_setaiCode(介護賦課前年度.getFuka_SetaiCode());
+        異動賦課情報一時.setFuka_setaiInsu(介護賦課前年度.getFuka_SetaiInsu());
+        異動賦課情報一時.setFuka_shikakuShutokuYMD(介護賦課前年度.getFuka_ShikakuShutokuYMD());
+        異動賦課情報一時.setFuka_shikakuShutokuJiyu(介護賦課前年度.getFuka_ShikakuShutokuJiyu());
+        異動賦課情報一時.setFuka_shikakuSoshitsuYMD(介護賦課前年度.getFuka_ShikakuSoshitsuYMD());
+        異動賦課情報一時.setFuka_shikakuSoshitsuJiyu(介護賦課前年度.getFuka_ShikakuSoshitsuJiyu());
+        異動賦課情報一時.setFuka_seihofujoShurui(介護賦課前年度.getFuka_SeihofujoShurui());
+        異動賦課情報一時.setFuka_seihoKaishiYMD(介護賦課前年度.getFuka_SeihoKaishiYMD());
+        異動賦課情報一時.setFuka_seihoHaishiYMD(介護賦課前年度.getFuka_SeihoHaishiYMD());
+        異動賦課情報一時.setFuka_ronenKaishiYMD(介護賦課前年度.getFuka_RonenKaishiYMD());
+        異動賦課情報一時.setFuka_ronenHaishiYMD(介護賦課前年度.getFuka_RonenHaishiYMD());
+        異動賦課情報一時.setFuka_fukaYMD(介護賦課前年度.getFuka_FukaYMD());
+        異動賦課情報一時.setFuka_kazeiKubun(介護賦課前年度.getFuka_KazeiKubun());
+        異動賦課情報一時.setFuka_setaikazeiKubun(介護賦課前年度.getFuka_SetaikazeiKubun());
+        異動賦課情報一時.setFuka_gokeiShotokuGaku(介護賦課前年度.getFuka_GokeiShotokuGaku());
+        異動賦課情報一時.setFuka_nenkinShunyuGaku(介護賦課前年度.getFuka_NenkinShunyuGaku());
+        異動賦課情報一時.setFuka_hokenryoDankai(介護賦課前年度.getFuka_HokenryoDankai());
+        異動賦課情報一時.setFuka_hokenryoDankai1(介護賦課前年度.getFuka_HokenryoDankai1());
+        異動賦課情報一時.setFuka_nengakuHokenryo1(介護賦課前年度.getFuka_NengakuHokenryo1());
+        異動賦課情報一時.setFuka_tsukiwariStartYM1(介護賦課前年度.getFuka_TsukiwariStartYM1());
+        異動賦課情報一時.setFuka_tsukiwariEndYM1(介護賦課前年度.getFuka_TsukiwariEndYM1());
+        異動賦課情報一時.setFuka_hokenryoDankai2(介護賦課前年度.getFuka_HokenryoDankai2());
+        異動賦課情報一時.setFuka_nengakuHokenryo2(介護賦課前年度.getFuka_NengakuHokenryo2());
+        異動賦課情報一時.setFuka_tsukiwariStartYM2(介護賦課前年度.getFuka_TsukiwariStartYM2());
+        異動賦課情報一時.setFuka_tsukiwariEndYM2(介護賦課前年度.getFuka_TsukiwariEndYM2());
+        異動賦課情報一時.setFuka_choteiNichiji(介護賦課前年度.getFuka_ChoteiNichiji());
+        異動賦課情報一時.setFuka_choteiJiyu1(介護賦課前年度.getFuka_ChoteiJiyu1());
+        異動賦課情報一時.setFuka_choteiJiyu2(介護賦課前年度.getFuka_ChoteiJiyu2());
+        異動賦課情報一時.setFuka_choteiJiyu3(介護賦課前年度.getFuka_ChoteiJiyu3());
+        異動賦課情報一時.setFuka_choteiJiyu4(介護賦課前年度.getFuka_ChoteiJiyu4());
+        異動賦課情報一時.setFuka_koseiM(介護賦課前年度.getFuka_KoseiM());
+        異動賦課情報一時.setFuka_gemmenMaeHokenryo(介護賦課前年度.getFuka_GemmenMaeHokenryo());
+        異動賦課情報一時.setFuka_gemmenGaku(介護賦課前年度.getFuka_GemmenGaku());
+        異動賦課情報一時.setFuka_kakuteiHokenryo(介護賦課前年度.getFuka_KakuteiHokenryo());
+        異動賦課情報一時.setFuka_hokenryoDankaiKarisanntei(介護賦課前年度.getFuka_HokenryoDankaiKarisanntei());
+        異動賦課情報一時.setFuka_choshuHohoRirekiNo(介護賦課前年度.getFuka_ChoshuHohoRirekiNo());
+        異動賦課情報一時.setFuka_idoKijunNichiji(介護賦課前年度.getFuka_IdoKijunNichiji());
+        異動賦課情報一時.setFuka_kozaKubun(介護賦課前年度.getFuka_KozaKubun());
+        異動賦課情報一時.setFuka_kyokaisoKubun(介護賦課前年度.getFuka_KyokaisoKubun());
+        異動賦課情報一時.setFuka_shokkenKubun(介護賦課前年度.getFuka_ShokkenKubun());
+        異動賦課情報一時.setFuka_fukaShichosonCode(介護賦課前年度.getFuka_FukaShichosonCode());
+        異動賦課情報一時.setFuka_tkSaishutsuKampuGaku(介護賦課前年度.getFuka_TkSaishutsuKampuGaku());
+        異動賦課情報一時.setFuka_fuSaishutsuKampuGaku(介護賦課前年度.getFuka_FuSaishutsuKampuGaku());
+        異動賦課情報一時.setFuka_ki(介護賦課前年度.getFuka_Ki());
+        異動賦課情報一時.setFuka_choteigaku(介護賦課前年度.getFuka_Choteigaku());
+        異動賦課情報一時.setFuka_choshuHouhou(介護賦課前年度.getFuka_ChoshuHouhou());
+        異動賦課情報一時.setFuka_choteiId(介護賦課前年度.getFuka_ChoteiId());
+        異動賦課情報一時.setFuka_shunoId(介護賦課前年度.getFuka_ShunoId());
     }
 
     /**
@@ -984,6 +989,82 @@ public class IdoFukaJohoTempEntitySet {
         entity.setUeT0511after_dtTeishiYM(年金特徴回付情報_更正後.getDtTeishiYM());
         entity.setUeT0511after_dtYobi4Juminzei(年金特徴回付情報_更正後.getDtYobi4Juminzei());
         entity.setUeT0511after_dtKojinNo(年金特徴回付情報_更正後.getDtKojinNo());
+        entity.setUeT0511after_kokuhoYoteiSoshitsuKubun(年金特徴回付情報_更正後.getKokuhoYoteiSoshitsuKubun());
+    }
+
+    /**
+     * 年金特徴回付情報_類型転換メソッドです。
+     *
+     * @param entity jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @param 年金特徴回付情報_転換前 UeT0511NenkinTokuchoKaifuJohoEntity
+     */
+    public void 年金特徴回付情報_類型転換(jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity entity,
+            final UeT0511NenkinTokuchoKaifuJohoEntity 年金特徴回付情報_転換前) {
+        entity.setGyomuCode(年金特徴回付情報_転換前.getGyomuCode());
+        entity.setShoriNendo(年金特徴回付情報_転換前.getShoriNendo());
+        if (年金特徴回付情報_転換前.getTsuchiNaiyoCode() != null) {
+            entity.setTsuchiNaiyoCode(new TsuchiNaiyoCode(年金特徴回付情報_転換前.getTsuchiNaiyoCode()));
+        }
+        entity.setShoriTaishoYM(年金特徴回付情報_転換前.getShoriTaishoYM());
+        entity.setKisoNenkinNo(年金特徴回付情報_転換前.getKisoNenkinNo());
+        entity.setNenkinCode(年金特徴回付情報_転換前.getNenkinCode());
+        entity.setKoseiCityCode(年金特徴回付情報_転換前.getKoseiCityCode());
+        entity.setRenban(年金特徴回付情報_転換前.getRenban());
+        entity.setShoriTimestamp(年金特徴回付情報_転換前.getShoriTimestamp());
+        if (年金特徴回付情報_転換前.getRenkeiShubetsu() != null) {
+            entity.setRenkeiShubetsu(new RenkeiShubetsu(年金特徴回付情報_転換前.getRenkeiShubetsu()));
+        }
+        entity.setHosokuTsuki(年金特徴回付情報_転換前.getHosokuTsuki());
+        entity.setTenbikiTsuki(年金特徴回付情報_転換前.getTenbikiTsuki());
+        entity.setShikibetsuCode(年金特徴回付情報_転換前.getShikibetsuCode());
+        entity.setHihokenshaNo(年金特徴回付情報_転換前.getHihokenshaNo());
+        entity.setKokuhoSetaiCode(年金特徴回付情報_転換前.getKokuhoSetaiCode());
+        entity.setDtCityCode(年金特徴回付情報_転換前.getDtCityCode());
+        if (年金特徴回付情報_転換前.getDtTokubetsuChoshuGimushaCode() != null) {
+            entity.setDtTokubetsuChoshuGimushaCode(new TokubetsuChoshuGimushaCode(年金特徴回付情報_転換前.getDtTokubetsuChoshuGimushaCode()));
+        }
+        if (年金特徴回付情報_転換前.getDtTsuchiNaiyoCode() != null) {
+            entity.setDtTsuchiNaiyoCode(new TsuchiNaiyoCode(年金特徴回付情報_転換前.getDtTsuchiNaiyoCode()));
+        }
+        entity.setDtBaitaiCode(年金特徴回付情報_転換前.getDtBaitaiCode());
+        if (年金特徴回付情報_転換前.getDtTokubetsuChoshuSeidoCode() != null) {
+            entity.setDtTokubetsuChoshuSeidoCode(new TokubetsuChoshuSeidoCode(年金特徴回付情報_転換前.getDtTokubetsuChoshuSeidoCode()));
+        }
+        entity.setDtSakuseiYMD(年金特徴回付情報_転換前.getDtSakuseiYMD());
+        entity.setDtKisoNenkinNo(年金特徴回付情報_転換前.getDtKisoNenkinNo());
+        entity.setDtNenkinCode(年金特徴回付情報_転換前.getDtNenkinCode());
+        entity.setDtYobi1(年金特徴回付情報_転換前.getDtYobi1());
+        entity.setDtBirthDay(年金特徴回付情報_転換前.getDtBirthDay());
+        if (年金特徴回付情報_転換前.getDtSeibetsu() != null) {
+            entity.setDtSeibetsu(new SeibetsuCodeNenkinTokucho(年金特徴回付情報_転換前.getDtSeibetsu()));
+        }
+        entity.setDtKanaShimei(年金特徴回付情報_転換前.getDtKanaShimei());
+        entity.setDtShiftCode1(年金特徴回付情報_転換前.getDtShiftCode1());
+        entity.setDtKanjiShimei(年金特徴回付情報_転換前.getDtKanjiShimei());
+        entity.setDtShiftCode2(年金特徴回付情報_転換前.getDtShiftCode2());
+        entity.setDtYubinNo(年金特徴回付情報_転換前.getDtYubinNo());
+        entity.setDtKanaJusho(年金特徴回付情報_転換前.getDtKanaJusho());
+        entity.setDtShiftCode3(年金特徴回付情報_転換前.getDtShiftCode3());
+        entity.setDtKanjiJusho(年金特徴回付情報_転換前.getDtKanjiJusho());
+        entity.setDtShiftCode4(年金特徴回付情報_転換前.getDtShiftCode4());
+        entity.setDtKakushuKubun(年金特徴回付情報_転換前.getDtKakushuKubun());
+        entity.setDtShoriKekka(年金特徴回付情報_転換前.getDtShoriKekka());
+        entity.setDtKokiIkanCode(年金特徴回付情報_転換前.getDtKokiIkanCode());
+        entity.setDtKakushuYMD(年金特徴回付情報_転換前.getDtKakushuYMD());
+        entity.setDtKakushuKingaku1(年金特徴回付情報_転換前.getDtKakushuKingaku1());
+        entity.setDtKakushuKingaku2(年金特徴回付情報_転換前.getDtKakushuKingaku2());
+        entity.setDtKakushuKingaku3(年金特徴回付情報_転換前.getDtKakushuKingaku3());
+        entity.setDtYobi2(年金特徴回付情報_転換前.getDtYobi2());
+        entity.setDtKyosaiNenkinshoshoKigoNo(年金特徴回付情報_転換前.getDtKyosaiNenkinshoshoKigoNo());
+        entity.setDtKakushuKingaku4(年金特徴回付情報_転換前.getDtKakushuKingaku4());
+        entity.setDtKakushuKingaku5(年金特徴回付情報_転換前.getDtKakushuKingaku5());
+        entity.setDtKakushuKingaku6(年金特徴回付情報_転換前.getDtKakushuKingaku6());
+        entity.setDtKakushuKingaku7(年金特徴回付情報_転換前.getDtKakushuKingaku7());
+        entity.setDtKakushuKingaku8(年金特徴回付情報_転換前.getDtKakushuKingaku8());
+        entity.setDtTeishiYM(年金特徴回付情報_転換前.getDtTeishiYM());
+        entity.setDtYobi4Juminzei(年金特徴回付情報_転換前.getDtYobi4Juminzei());
+        entity.setDtKojinNo(年金特徴回付情報_転換前.getDtKojinNo());
+        entity.setKokuhoYoteiSoshitsuKubun(年金特徴回付情報_転換前.getKokuhoYoteiSoshitsuKubun());
     }
 
     private void 計算後情報_更正後値設定(TmpIdoFukaJohoEntity entity, final DbT2015KeisangoJohoEntity 計算後情報_更正後) {
@@ -1058,6 +1139,7 @@ public class IdoFukaJohoTempEntitySet {
         entity.setDbT2015KeisangoJoho_fuKibetsuGaku12(計算後情報_更正後.getFuKibetsuGaku12());
         entity.setDbT2015KeisangoJoho_fuKibetsuGaku13(計算後情報_更正後.getFuKibetsuGaku13());
         entity.setDbT2015KeisangoJoho_fuKibetsuGaku14(計算後情報_更正後.getFuKibetsuGaku14());
+        entity.setDbT2015KeisangoJoho_choshuHoho4gatsu(計算後情報_更正後.getChoshuHoho4gatsu());
         entity.setDbT2015KeisangoJoho_choshuHoho5gatsu(計算後情報_更正後.getChoshuHoho5gatsu());
         entity.setDbT2015KeisangoJoho_choshuHoho6gatsu(計算後情報_更正後.getChoshuHoho6gatsu());
         entity.setDbT2015KeisangoJoho_choshuHoho7gatsu(計算後情報_更正後.getChoshuHoho7gatsu());
