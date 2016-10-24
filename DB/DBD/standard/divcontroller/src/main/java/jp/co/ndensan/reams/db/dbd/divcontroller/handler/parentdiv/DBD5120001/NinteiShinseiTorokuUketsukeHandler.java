@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.JissekiD
 import jp.co.ndensan.reams.db.dbd.service.core.dbd5120001.NinteiShinseiTorokuUketsukeManager;
 import jp.co.ndensan.reams.db.dbd.service.core.jukyushokai.JukyuShokaiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseishaKankeiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -36,6 +37,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosajokyo.NinteiChosaJokyoDataPass;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
@@ -166,16 +168,17 @@ public class NinteiShinseiTorokuUketsukeHandler {
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
 
         NinteiShinseiTorokuUketsukeBusiness result = manager.get初期化情報(param);
+        div.getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getCcdKaigoNinteiAtenaInfo().initialize();
         div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(申請書管理番号, 識別コード);
-        
+
         // 被保険者台帳から市町村コードを取得
         RString 市町村コード = null;
-        if(!RString.isNullOrEmpty(被保険者番号.getColumnValue())){
+        if (!RString.isNullOrEmpty(被保険者番号.getColumnValue())) {
             HihokenshaDaichoManager hhdm = HihokenshaDaichoManager.createInstance();
             HihokenshaDaicho hhd = hhdm.find被保険者台帳(被保険者番号, FlexibleDate.getNowDate());
             市町村コード = hhd.get市町村コード().getColumnValue();
-            
+
             // managerでレコード取得できた場合は市町村コードをそちらに書き換え
             if (result != null && result.getEntity().getT1001市町村コード() != null) {
                 if (表示パターン_新規.equals(表示パターン)) {
@@ -186,7 +189,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
             }
             div.getCcdKaigoNinteiShikakuInfo().initialize(市町村コード, 被保険者番号.getColumnValue());
         }
-        
+
         initControls();
         if (result != null) {
             this.set介護認定申請基本情報(result);
@@ -212,12 +215,12 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.setHdnShichosonRenrakuJiko(RString.EMPTY);
 
     }
-    
+
     private void initControls() {
         KaigoNinteiShinseiKihonJohoInputDiv 介護認定申請Div
                 = div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv();
         介護認定申請Div.initialize();
-        
+
         INinteiShinseiTodokedeshaDiv iNinteiShinseiTodokedeshaDiv
                 = div.getCcdShinseiTodokedesha();
         List<RString> 申請届出代行区分List = new ArrayList<>();
@@ -230,8 +233,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
             shinseiKankeishaCodeList.add(code.getコード());
         }
         iNinteiShinseiTodokedeshaDiv.getDdlShinseiKankeisha().setDataSource(setDataSource(shinseiKankeishaCodeList, false));
-        
-        
+
     }
 
     /**
@@ -851,12 +853,13 @@ public class NinteiShinseiTorokuUketsukeHandler {
     }
 
     private RString get受給申請事由for申請() {
-
         JukyushaDaichoManager manager = new JukyushaDaichoManager();
         List<JukyushaDaicho> resultList = manager.get受給者台帳(
                 new HihokenshaNo(div.getHdnHihokenshaNo()),
                 new ShikibetsuCode(div.getHdnShikibetsuCode()));
-
+        if (resultList == null || resultList.isEmpty()) {
+            return JukyuShinseiJiyu.初回申請.getコード();
+        }
         boolean 存在フラグ = false;
         boolean 処理なしフラグ = false;
         RString 受給申請事由 = RString.EMPTY;
@@ -1090,24 +1093,28 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set取下区分コード(new Code("1"));
         builder.set被保険者区分コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().getSelectedKey());
-        builder.set生年月日(new FlexibleDate(div.getCcdKaigoNinteiAtenaInfo().get生年月日().toDateString()));
-        builder.set年齢(Integer.parseInt(div.getCcdKaigoNinteiAtenaInfo().get年齢().toString()));
-
-        if (new RString("男").equals(div.getCcdKaigoNinteiAtenaInfo().get性別())) {
-            builder.set性別(new Code(new RString("1")));
-        } else if (new RString("女").equals(div.getCcdKaigoNinteiAtenaInfo().get性別())) {
-            builder.set性別(new Code(new RString("1")));
+        if (div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().canBe個人()) {
+            builder.set生年月日(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                    .getShikibetsuTaishoHisory().get直近().to個人().get生年月日().toFlexibleDate());
+            builder.set年齢(Integer.parseInt(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                    .getShikibetsuTaishoHisory().get直近().to個人().get年齢算出().get年齢().toString()));
+            if (div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().to個人().get性別() != null) {
+                builder.set性別(new Code(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                        .getShikibetsuTaishoHisory().get直近().to個人().get性別().getCode()));
+            }
         }
         builder.set被保険者氏名カナ(new AtenaKanaMeisho(div.getCcdShinseiTodokedesha().get一覧内容().getカナ氏名()));
         builder.set被保険者氏名(new AtenaMeisho(div.getCcdShinseiTodokedesha().get一覧内容().get氏名()));
         if (SELECT_KEY0.equals(div.getCcdShinseiTodokedesha().getRadKannaiKangai().getSelectedKey())) {
             builder.set郵便番号(div.getCcdShinseiTodokedesha().get一覧内容().get郵便番号());
-            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード()));
+            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード() != null
+                    ? div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード() : RString.EMPTY));
         } else {
             builder.set郵便番号(new YubinNo(div.getCcdShinseiTodokedesha().get一覧内容().get全国郵便番号()));
-            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード()));
+            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード() != null
+                    ? div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード() : RString.EMPTY));
         }
-        builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get全国住所名称()));
+        builder.set電話番号(new TelNo(div.getCcdShinseiTodokedesha().get一覧内容().get電話番号()));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getSelectedKey());
         builder.set識別コード(new ShikibetsuCode(div.getHdnShikibetsuCode()));
@@ -1291,24 +1298,29 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set取下区分コード(new Code("1"));
         builder.set被保険者区分コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().getSelectedKey());
-        builder.set生年月日(new FlexibleDate(div.getCcdKaigoNinteiAtenaInfo().get生年月日().toDateString()));
-        builder.set年齢(Integer.parseInt(div.getCcdKaigoNinteiAtenaInfo().get年齢().toString()));
-
-        if (new RString("男").equals(div.getCcdKaigoNinteiAtenaInfo().get性別())) {
-            builder.set性別(new Code(new RString("1")));
-        } else if (new RString("女").equals(div.getCcdKaigoNinteiAtenaInfo().get性別())) {
-            builder.set性別(new Code(new RString("1")));
+        if (div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().canBe個人()) {
+            builder.set生年月日(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                    .getShikibetsuTaishoHisory().get直近().to個人().get生年月日().toFlexibleDate());
+            builder.set年齢(Integer.parseInt(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                    .getShikibetsuTaishoHisory().get直近().to個人().get年齢算出().get年齢().toString()));
+            if (div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().to個人().get性別() != null) {
+                builder.set性別(new Code(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                        .getShikibetsuTaishoHisory().get直近().to個人().get性別().getCode()));
+            }
         }
         builder.set被保険者氏名カナ(new AtenaKanaMeisho(div.getCcdShinseiTodokedesha().get一覧内容().getカナ氏名()));
         builder.set被保険者氏名(new AtenaMeisho(div.getCcdShinseiTodokedesha().get一覧内容().get氏名()));
-        builder.set電話番号(new TelNo(div.getCcdShinseiTodokedesha().get一覧内容().get電話番号()));
         if (SELECT_KEY0.equals(div.getCcdShinseiTodokedesha().getRadKannaiKangai().getSelectedKey())) {
             builder.set郵便番号(div.getCcdShinseiTodokedesha().get一覧内容().get郵便番号());
-            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード()));
+            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード() != null
+                    ? div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード() : RString.EMPTY));
         } else {
             builder.set郵便番号(new YubinNo(div.getCcdShinseiTodokedesha().get一覧内容().get全国郵便番号()));
             builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード()));
+            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード() != null
+                    ? div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード() : RString.EMPTY));
         }
+        builder.set電話番号(new TelNo(div.getCcdShinseiTodokedesha().get一覧内容().get電話番号()));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getSelectedKey());
         builder.set識別コード(new ShikibetsuCode(div.getHdnShikibetsuCode()));
@@ -1420,24 +1432,28 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set取下区分コード(new Code("1"));
         builder.set被保険者区分コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().getSelectedKey());
-        builder.set生年月日(new FlexibleDate(div.getCcdKaigoNinteiAtenaInfo().get生年月日().toDateString()));
-        builder.set年齢(Integer.parseInt(div.getCcdKaigoNinteiAtenaInfo().get年齢().toString()));
-
-        if (new RString("男").equals(div.getCcdKaigoNinteiAtenaInfo().get性別())) {
-            builder.set性別(new Code(new RString("1")));
-        } else if (new RString("女").equals(div.getCcdKaigoNinteiAtenaInfo().get性別())) {
-            builder.set性別(new Code(new RString("1")));
+        if (div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().canBe個人()) {
+            builder.set生年月日(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                    .getShikibetsuTaishoHisory().get直近().to個人().get生年月日().toFlexibleDate());
+            builder.set年齢(Integer.parseInt(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                    .getShikibetsuTaishoHisory().get直近().to個人().get年齢算出().get年齢().toString()));
+            if (div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().to個人().get性別() != null) {
+                builder.set性別(new Code(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                        .getShikibetsuTaishoHisory().get直近().to個人().get性別().getCode()));
+            }
         }
         builder.set被保険者氏名カナ(new AtenaKanaMeisho(div.getCcdShinseiTodokedesha().get一覧内容().getカナ氏名()));
         builder.set被保険者氏名(new AtenaMeisho(div.getCcdShinseiTodokedesha().get一覧内容().get氏名()));
-        builder.set電話番号(new TelNo(div.getCcdShinseiTodokedesha().get一覧内容().get電話番号()));
         if (SELECT_KEY0.equals(div.getCcdShinseiTodokedesha().getRadKannaiKangai().getSelectedKey())) {
             builder.set郵便番号(div.getCcdShinseiTodokedesha().get一覧内容().get郵便番号());
-            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード()));
+            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード() != null
+                    ? div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード() : RString.EMPTY));
         } else {
             builder.set郵便番号(new YubinNo(div.getCcdShinseiTodokedesha().get一覧内容().get全国郵便番号()));
-            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード()));
+            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード() != null
+                    ? div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード() : RString.EMPTY));
         }
+        builder.set電話番号(new TelNo(div.getCcdShinseiTodokedesha().get一覧内容().get電話番号()));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getSelectedKey());
         builder.set識別コード(new ShikibetsuCode(div.getHdnShikibetsuCode()));
@@ -1551,24 +1567,28 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set取下区分コード(new Code("1"));
         builder.set被保険者区分コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().getSelectedKey());
-        builder.set生年月日(new FlexibleDate(div.getCcdKaigoNinteiAtenaInfo().get生年月日().toDateString()));
-        builder.set年齢(Integer.parseInt(div.getCcdKaigoNinteiAtenaInfo().get年齢().toString()));
-
-        if (new RString("男").equals(div.getCcdKaigoNinteiAtenaInfo().get性別())) {
-            builder.set性別(new Code(new RString("1")));
-        } else if (new RString("女").equals(div.getCcdKaigoNinteiAtenaInfo().get性別())) {
-            builder.set性別(new Code(new RString("1")));
+        if (div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().canBe個人()) {
+            builder.set生年月日(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                    .getShikibetsuTaishoHisory().get直近().to個人().get生年月日().toFlexibleDate());
+            builder.set年齢(Integer.parseInt(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                    .getShikibetsuTaishoHisory().get直近().to個人().get年齢算出().get年齢().toString()));
+            if (div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().to個人().get性別() != null) {
+                builder.set性別(new Code(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                        .getShikibetsuTaishoHisory().get直近().to個人().get性別().getCode()));
+            }
         }
         builder.set被保険者氏名カナ(new AtenaKanaMeisho(div.getCcdShinseiTodokedesha().get一覧内容().getカナ氏名()));
         builder.set被保険者氏名(new AtenaMeisho(div.getCcdShinseiTodokedesha().get一覧内容().get氏名()));
-        builder.set電話番号(new TelNo(div.getCcdShinseiTodokedesha().get一覧内容().get電話番号()));
         if (SELECT_KEY0.equals(div.getCcdShinseiTodokedesha().getRadKannaiKangai().getSelectedKey())) {
             builder.set郵便番号(div.getCcdShinseiTodokedesha().get一覧内容().get郵便番号());
-            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード()));
+            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード() != null
+                    ? div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード() : RString.EMPTY));
         } else {
             builder.set郵便番号(new YubinNo(div.getCcdShinseiTodokedesha().get一覧内容().get全国郵便番号()));
-            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード()));
+            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード() != null
+                    ? div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード() : RString.EMPTY));
         }
+        builder.set電話番号(new TelNo(div.getCcdShinseiTodokedesha().get一覧内容().get電話番号()));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getSelectedKey());
         builder.set識別コード(new ShikibetsuCode(div.getHdnShikibetsuCode()));
@@ -1656,26 +1676,31 @@ public class NinteiShinseiTorokuUketsukeHandler {
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunShinseiji().getSelectedKey()));
         builder.set被保険者区分コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().getSelectedKey());
-        builder.set生年月日(new FlexibleDate(div.getCcdKaigoNinteiAtenaInfo().get生年月日().toDateString()));
-        builder.set年齢(Integer.parseInt(div.getCcdKaigoNinteiAtenaInfo().get年齢().toString()));
-        if (new RString("男").equals(div.getCcdKaigoNinteiAtenaInfo().get性別())) {
-            builder.set性別(new Code(new RString("1")));
-        } else if (new RString("女").equals(div.getCcdKaigoNinteiAtenaInfo().get性別())) {
-            builder.set性別(new Code(new RString("1")));
+        if (div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().canBe個人()) {
+            builder.set生年月日(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                    .getShikibetsuTaishoHisory().get直近().to個人().get生年月日().toFlexibleDate());
+            builder.set年齢(Integer.parseInt(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                    .getShikibetsuTaishoHisory().get直近().to個人().get年齢算出().get年齢().toString()));
+            if (div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().to個人().get性別() != null) {
+                builder.set性別(new Code(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                        .getShikibetsuTaishoHisory().get直近().to個人().get性別().getCode()));
+            }
         }
         builder.set被保険者氏名カナ(new AtenaKanaMeisho(div.getCcdShinseiTodokedesha().get一覧内容().getカナ氏名()));
         builder.set被保険者氏名(new AtenaMeisho(div.getCcdShinseiTodokedesha().get一覧内容().get氏名()));
-        builder.set電話番号(new TelNo(div.getCcdShinseiTodokedesha().get一覧内容().get電話番号()));
         if (SELECT_KEY0.equals(div.getCcdShinseiTodokedesha().getRadKannaiKangai().getSelectedKey())) {
             builder.set郵便番号(div.getCcdShinseiTodokedesha().get一覧内容().get郵便番号());
-            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード()));
+            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード() != null
+                    ? div.getCcdShinseiTodokedesha().get一覧内容().get町域入力住所コード() : RString.EMPTY));
         } else {
             builder.set郵便番号(new YubinNo(div.getCcdShinseiTodokedesha().get一覧内容().get全国郵便番号()));
-            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード()));
+            builder.set住所(new AtenaJusho(div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード() != null
+                    ? div.getCcdShinseiTodokedesha().get一覧内容().get全国住所コード() : RString.EMPTY));
         }
+        builder.set電話番号(new TelNo(div.getCcdShinseiTodokedesha().get一覧内容().get電話番号()));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getSelectedKey());
-        builder.set識別コード(new ShikibetsuCode(div.getCcdKaigoNinteiAtenaInfo().get識別コード()));
+        builder.set識別コード(new ShikibetsuCode(div.getCcdKaigoAtenaInfo().getShokaiData().getTxtShikibetsuCode().toString()));
         builder.setみなし２号等対象フラグ(false);
         builder.set広域内転居区分(new Code("0"));
         builder.set認定申請有効区分(new Code("1"));
@@ -1819,12 +1844,13 @@ public class NinteiShinseiTorokuUketsukeHandler {
 //
 //    }
     private void set介護認定申請基本情報(NinteiShinseiTorokuUketsukeBusiness result) {
-
         KaigoNinteiShinseiKihonJohoInputDiv 介護認定申請Div
                 = div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv();
         介護認定申請Div.initialize();
         介護認定申請Div.setRadShinseishoKubun(result.getEntity().get申請書区分());
-        介護認定申請Div.setTxtShinseiJokyo(result.getEntity().get申請状況());
+        if (!RString.isNullOrEmpty(result.getEntity().get申請状況())) {
+            介護認定申請Div.setTxtShinseiJokyo(ShinseiJokyoKubun.toValue(result.getEntity().get申請状況()).get名称());
+        }
         if (result.getEntity().get申請日() != null) {
             介護認定申請Div.setTxtShinseiYMD(new RDate(result.getEntity().get申請日().toString()));
         }
