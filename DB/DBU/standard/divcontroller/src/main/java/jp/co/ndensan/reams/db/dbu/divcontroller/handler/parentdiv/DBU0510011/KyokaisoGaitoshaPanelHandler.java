@@ -173,7 +173,7 @@ public class KyokaisoGaitoshaPanelHandler {
         set境界層該当明細(row, 境界層保険料段階情報);
         set境界層該当明細非活性();
     }
-    
+
     /**
      * 該当・非該当を押下された場合、標準負担額の項目が活性・不活性になる。
      */
@@ -184,9 +184,9 @@ public class KyokaisoGaitoshaPanelHandler {
             div.getTxtHyojunFutanKeigenAtoFutanGaku().setDisabled(false);
         }
     }
-    
+
     /**
-     *  該当・非該当を押下された場合、居住費等負担額減額の項目が活性・不活性になる。
+     * 該当・非該当を押下された場合、居住費等負担額減額の項目が活性・不活性になる。
      */
     public void onClick_radkyojuhiFutanGakuGengaku() {
         if (非該当フラグ.equals(div.getRadKyojuhiFutanGakuGengaku().getSelectedKey())) {
@@ -197,7 +197,7 @@ public class KyokaisoGaitoshaPanelHandler {
             div.getTxtKeigenAtoFutanGaku().setDisabled(false);
         }
     }
-    
+
     /**
      * 該当・非該当を押下された場合、食費負担額減額の項目が活性・不活性になる。
      */
@@ -208,7 +208,7 @@ public class KyokaisoGaitoshaPanelHandler {
             div.getTxtShokuhiGenkenAtoFutangaku().setDisabled(false);
         }
     }
-    
+
     /**
      * 該当・非該当を押下された場合、高額サービス費上限額減額の項目が活性・不活性になる。
      */
@@ -219,20 +219,22 @@ public class KyokaisoGaitoshaPanelHandler {
             div.getDdlSeidaiJogengaku().setDisabled(false);
         }
     }
-    
+
     /**
      * 適用する・適用しないを押下された場合、項目が活性・不活性になる。
      */
     public void onClick_radHokenryoNofuGengaku() {
         if (非該当フラグ.equals(div.getRadHokenryoNofuGengaku().getSelectedKey())) {
             div.getHohenryoNofuPanel().setDisabled(true);
+            div.getTxtHohenryoNofuFromDate().setDisabled(true);
+            div.getTxtHohenryoNofuToDate().setDisabled(true);
+            div.getDdlTekiyouSuruShutokuDankai().setDisabled(true);
+            div.getBtnCancel().setDisabled(true);
+            div.getBtnKakutei().setDisabled(true);
         } else {
             div.getHohenryoNofuPanel().setDisabled(false);
         }
     }
-    
-    
-    
 
     /**
      * 保険料納付を追加するボタンが押下された場合、保険料納付入力エリアの項目が活性になる。
@@ -826,7 +828,7 @@ public class KyokaisoGaitoshaPanelHandler {
             }
         }
     }
-    
+
     private List<KeyValueDataSource> 読替後高額介護世帯上限額ドロップダウンリスト(RDate 申請日) {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         RDate 適用基準日 = RDate.getNowDate();
@@ -863,7 +865,7 @@ public class KyokaisoGaitoshaPanelHandler {
         }
         return dataSourceList;
     }
-    
+
     private RString 読替後高額介護世帯上限額カンマ処理(ConfigNameDBC con, RDate 適用基準日) {
         Decimal dec = new Decimal(DbBusinessConfig.get(con, 適用基準日, SubGyomuCode.DBC介護給付).toString());
         return DecimalFormatter.toコンマ区切りRString(dec, 0);
