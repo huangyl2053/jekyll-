@@ -8,8 +8,12 @@ package jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharaiRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -337,5 +341,50 @@ public class ShokanKetteiTsuchiShoShiharai {
      */
     public RString getサービス種類コード() {
         return entity.getServiceShuruiCode();
+    }
+
+    /**
+     * 町域コードを取得します。
+     *
+     * @return 町域コード
+     */
+    public ChoikiCode get町域コード() {
+        return entity.getChoikiCode();
+    }
+
+    /**
+     * 行政区コードを取得します。
+     *
+     * @return 行政区コード
+     */
+    public GyoseikuCode get行政区コード() {
+        return entity.getGyoseikuCode();
+    }
+
+    /**
+     * 氏名５０音カナを取得します。
+     *
+     * @return 氏名５０音カナ
+     */
+    public AtenaKanaMeisho get氏名５０音カナ() {
+        return entity.getKanaMeisho();
+    }
+
+    /**
+     * 市町村コードを取得します。
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード() {
+        return entity.getGenLasdecCode();
+    }
+
+    /**
+     * 申請者区分を取得します。
+     *
+     * @return 申請者区分
+     */
+    public RString get申請者区分() {
+        return entity.getShinseishaKubun();
     }
 }

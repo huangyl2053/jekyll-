@@ -221,29 +221,7 @@ public class HanyoListRiyoshaFutanwariaiManager {
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(CYUSYUTSUTAISYOSHA);
         RStringBuilder builder = new RStringBuilder();
-        if (null != processParamter.getAtenacyusyutsujyoken()
-                && null != processParamter.getAtenacyusyutsujyoken().getShichoson_Code()
-                && !processParamter.getAtenacyusyutsujyoken().getShichoson_Code().equals(LasdecCode.EMPTY)) {
-            builder.append(HOKENSHA);
-            Association 地方公共団体 = get地方公共団体(processParamter.getAtenacyusyutsujyoken().getShichoson_Code());
-            builder.append(地方公共団体.get市町村名());
-            builder.append(COMMA);
-        }
-        if (null != processParamter.getNendo()) {
-            builder.append(NENDO);
-            builder.append(processParamter.getNendo().wareki().eraType(EraType.KANJI).toDateString());
-            builder.append(COMMA);
-        }
-        if (null != processParamter.getKizyunnichi()) {
-            builder.append(KIZYUNNICHI);
-            builder.append(processParamter.getKizyunnichi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-            builder.append(COMMA);
-        }
-        if (processParamter.isNendochokindatacyusyutsu()) {
-            builder.append(CHOKINNOMI);
-            builder.append(COMMA);
-        }
+        宛名判定(builder, processParamter);
         if (builder.toRString() != null && !builder.toRString().isEmpty()) {
             List<RString> builderList = builder.toRString().substring(0, builder.toRString().length() - 1).split(COMMA.toString());
             for (RString build : builderList) {
@@ -311,6 +289,32 @@ public class HanyoListRiyoshaFutanwariaiManager {
                     出力件数,
                     出力条件);
             EucFileOutputJokenhyoFactory.createInstance(item).print();
+        }
+    }
+
+    private void 宛名判定(RStringBuilder builder, HanyoListRiyoshaFutanwariaiProcessParameter processParamter) {
+        if (null != processParamter.getAtenacyusyutsujyoken()
+                && null != processParamter.getAtenacyusyutsujyoken().getShichoson_Code()
+                && !processParamter.getAtenacyusyutsujyoken().getShichoson_Code().equals(LasdecCode.EMPTY)) {
+            builder.append(HOKENSHA);
+            Association 地方公共団体 = get地方公共団体(processParamter.getAtenacyusyutsujyoken().getShichoson_Code());
+            builder.append(地方公共団体.get市町村名());
+            builder.append(COMMA);
+        }
+        if (null != processParamter.getNendo()) {
+            builder.append(NENDO);
+            builder.append(processParamter.getNendo().wareki().eraType(EraType.KANJI).toDateString());
+            builder.append(COMMA);
+        }
+        if (null != processParamter.getKizyunnichi()) {
+            builder.append(KIZYUNNICHI);
+            builder.append(processParamter.getKizyunnichi().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+            builder.append(COMMA);
+        }
+        if (processParamter.isNendochokindatacyusyutsu()) {
+            builder.append(CHOKINNOMI);
+            builder.append(COMMA);
         }
     }
 

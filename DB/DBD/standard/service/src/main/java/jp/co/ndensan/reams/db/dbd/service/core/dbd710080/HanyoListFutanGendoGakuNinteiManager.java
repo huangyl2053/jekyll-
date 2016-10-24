@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.Soshit
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710080.HanyoListFutanGendoGakuNinteiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolistfutangendogakunintei.FutanGendoGakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolistfutangendogakunintei.FutanGendoGakuNinteiEucCsvEntity;
+import jp.co.ndensan.reams.db.dbd.service.core.hanyolist.HanyoListManager;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.Outputs;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
@@ -113,7 +114,9 @@ public class HanyoListFutanGendoGakuNinteiManager {
     public void get情報設定(FutanGendoGakuNinteiEucCsvEntity eucCsvEntity, FutanGendoGakuNinteiEntity entity,
             Association 地方公共団体情報, HokenshaList 保険者リスト, boolean 日付スラッシュ付加) {
         HanyoListFutanGendoGakuNinteiBusiness bus = new HanyoListFutanGendoGakuNinteiBusiness();
-        bus.setEucCsvEntity(地方公共団体情報, 日付スラッシュ付加, eucCsvEntity, entity, 保険者リスト);
+        RString 市町村名 = HanyoListManager.createInstance().
+                get地方公共団体(new LasdecCode(entity.get被保険者台帳管理_市町村コード())).get市町村名();
+        bus.setEucCsvEntity(地方公共団体情報, 日付スラッシュ付加, eucCsvEntity, entity, 保険者リスト, 市町村名);
     }
 
     /**
@@ -167,8 +170,8 @@ public class HanyoListFutanGendoGakuNinteiManager {
     /**
      * 改頁Key
      *
-     * @param outputOrder
-     * @param pageBreakKeys
+     * @param outputOrder outputOrder
+     * @param pageBreakKeys pageBreakKeys
      *
      *
      */
@@ -237,28 +240,7 @@ public class HanyoListFutanGendoGakuNinteiManager {
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(CYUSYUTSUTAISYOSHA);
         RStringBuilder builder = new RStringBuilder();
-        if (null != processParamter.getAtenacyusyutsujyoken()
-                && null != processParamter.getAtenacyusyutsujyoken().getShichoson_Code()
-                && !processParamter.getAtenacyusyutsujyoken().getShichoson_Code().equals(LasdecCode.EMPTY)) {
-            builder.append(HOKENSHA);
-            Association 地方公共団体 = get地方公共団体(processParamter.getAtenacyusyutsujyoken().getShichoson_Code());
-            builder.append(地方公共団体.get市町村名());
-            builder.append(COMMA);
-        }
-        if (null != processParamter.getKizyunnichi()) {
-            builder.append(KIZYUNNICHI);
-            builder.append(processParamter.getKizyunnichi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            builder.append(COMMA);
-        }
-        builder = get日付範囲(processParamter, builder);
-        if (builder.toRString() != null && !builder.toRString().isEmpty()) {
-            List<RString> builderList = builder.toRString().substring(0, builder.toRString().length() - 1).split(COMMA.toString());
-            for (RString build : builderList) {
-                出力条件.add(build);
-            }
-            builder = new RStringBuilder();
-        }
+        builder = 宛名判定(出力条件, builder, processParamter);
         if (null != processParamter.getAtenacyusyutsujyoken()
                 && null != processParamter.getAtenacyusyutsujyoken().getAgeSelectKijun()) {
             RString get宛名抽出区分情報 = get宛名抽出区分情報(processParamter);
@@ -290,6 +272,32 @@ public class HanyoListFutanGendoGakuNinteiManager {
         出力条件.add(get旧措置者(processParamter));
         出力条件.add(get利用者負担段階(processParamter));
         バッチ出力条件表出力(processParamter, 導入団体コード, 市町村名, 日本語ファイル名, 英数字ファイル名, ジョブ番号, 出力条件, 帳票出力, 出力ページ数, 出力件数);
+    }
+
+    private RStringBuilder 宛名判定(List<RString> 出力条件, RStringBuilder builder, HanyoListFutanGendoGakuNinteiProcessParameter processParamter) {
+        if (null != processParamter.getAtenacyusyutsujyoken()
+                && null != processParamter.getAtenacyusyutsujyoken().getShichoson_Code()
+                && !processParamter.getAtenacyusyutsujyoken().getShichoson_Code().equals(LasdecCode.EMPTY)) {
+            builder.append(HOKENSHA);
+            Association 地方公共団体 = get地方公共団体(processParamter.getAtenacyusyutsujyoken().getShichoson_Code());
+            builder.append(地方公共団体.get市町村名());
+            builder.append(COMMA);
+        }
+        if (null != processParamter.getKizyunnichi()) {
+            builder.append(KIZYUNNICHI);
+            builder.append(processParamter.getKizyunnichi().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            builder.append(COMMA);
+        }
+        builder = get日付範囲(processParamter, builder);
+        if (builder.toRString() != null && !builder.toRString().isEmpty()) {
+            List<RString> builderList = builder.toRString().substring(0, builder.toRString().length() - 1).split(COMMA.toString());
+            for (RString build : builderList) {
+                出力条件.add(build);
+            }
+            builder = new RStringBuilder();
+        }
+        return builder;
     }
 
     private void バッチ出力条件表出力(HanyoListFutanGendoGakuNinteiProcessParameter processParamter, RString 導入団体コード, RString 市町村名, RString 日本語ファイル名,
@@ -643,6 +651,32 @@ public class HanyoListFutanGendoGakuNinteiManager {
 
     private RString to帳票物理名(RString 項目ID) {
         RString 帳票物理名 = RString.EMPTY;
+        帳票物理名 = 宛名判定(帳票物理名, 項目ID);
+        if (帳票物理名 != null && !帳票物理名.isEmpty()) {
+            if (HanyoListFutanGendoGakuNinteiOrderby.証記載保険者番号.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("shoKisaiHokenshaNo");
+            } else if (HanyoListFutanGendoGakuNinteiOrderby.被保険者番号.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("hokenshaNo");
+            } else if (HanyoListFutanGendoGakuNinteiOrderby.資格区分.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("shikakuKubun");
+            } else if (HanyoListFutanGendoGakuNinteiOrderby.受給申請区分.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("jukyuShinseiKubun");
+            } else if (HanyoListFutanGendoGakuNinteiOrderby.受給申請日.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("jukyuShinseiYMD");
+            } else if (HanyoListFutanGendoGakuNinteiOrderby.要介護度.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("yoKaigoJotaiKubunCode");
+            } else if (HanyoListFutanGendoGakuNinteiOrderby.認定開始日.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("ninteiKaishiYMD");
+            } else if (HanyoListFutanGendoGakuNinteiOrderby.資格取得日.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("shikakuShutokuYMD");
+            } else if (HanyoListFutanGendoGakuNinteiOrderby.資格喪失日.get項目ID().equals(項目ID)) {
+                帳票物理名 = new RString("shikakuSoshitsuYMD");
+            }
+        }
+        return 帳票物理名;
+    }
+
+    private RString 宛名判定(RString 帳票物理名, RString 項目ID) {
         if (HanyoListFutanGendoGakuNinteiOrderby.郵便番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("yubinNo");
         } else if (HanyoListFutanGendoGakuNinteiOrderby.町域コード.get項目ID().equals(項目ID)) {
@@ -667,24 +701,6 @@ public class HanyoListFutanGendoGakuNinteiManager {
             帳票物理名 = new RString("seibetsuCode");
         } else if (HanyoListFutanGendoGakuNinteiOrderby.市町村コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("shichosonCode1");
-        } else if (HanyoListFutanGendoGakuNinteiOrderby.証記載保険者番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("shoKisaiHokenshaNo");
-        } else if (HanyoListFutanGendoGakuNinteiOrderby.被保険者番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("hokenshaNo");
-        } else if (HanyoListFutanGendoGakuNinteiOrderby.資格区分.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("shikakuKubun");
-        } else if (HanyoListFutanGendoGakuNinteiOrderby.受給申請区分.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("jukyuShinseiKubun");
-        } else if (HanyoListFutanGendoGakuNinteiOrderby.受給申請日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("jukyuShinseiYMD");
-        } else if (HanyoListFutanGendoGakuNinteiOrderby.要介護度.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("yoKaigoJotaiKubunCode");
-        } else if (HanyoListFutanGendoGakuNinteiOrderby.認定開始日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("ninteiKaishiYMD");
-        } else if (HanyoListFutanGendoGakuNinteiOrderby.資格取得日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("shikakuShutokuYMD");
-        } else if (HanyoListFutanGendoGakuNinteiOrderby.資格喪失日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("shikakuSoshitsuYMD");
         }
         return 帳票物理名;
     }

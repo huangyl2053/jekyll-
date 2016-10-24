@@ -90,6 +90,21 @@ public class ShokanbaraiShikyuFushikyuReportSource implements IReportSource {
     public RString listLower_8;
     @ReportItem(name = "listLower_9", length = 10, order = 36)
     public RString listLower_9;
+
+    @ReportItem(name = "choikiCode", length = 10, order = 37)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 10, order = 38)
+    public RString gyoseikuCode;
+    @ReportItem(name = "kanaMeisho", length = 10, order = 39)
+    public RString kanaMeisho;
+    @ReportItem(name = "shoKisaiHokenshaNo", length = 10, order = 40)
+    public RString shoKisaiHokenshaNo;
+    @ReportItem(name = "seiriNo", length = 10, order = 41)
+    public RString seiriNo;
+    @ReportItem(name = "ketteiTsuchiNo", length = 10, order = 42)
+    public RString ketteiTsuchiNo;
+    @ReportItem(name = "shinseishaKubun", length = 10, order = 43)
+    public RString shinseishaKubun;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

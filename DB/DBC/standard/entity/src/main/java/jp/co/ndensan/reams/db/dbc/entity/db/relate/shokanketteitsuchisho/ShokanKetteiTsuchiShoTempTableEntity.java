@@ -40,6 +40,7 @@ public class ShokanKetteiTsuchiShoTempTableEntity extends DbTableEntityBase<Shok
     private RString seiriNo;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private FlexibleDate uketsukeYMD;
+    private RString shinseishaKubun;
     private RString shiharaiHohoKubunCode;
     private RString shiharaiBasho;
     private FlexibleDate shiharaiKaishiYMD;

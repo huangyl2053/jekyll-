@@ -76,8 +76,30 @@ public class YokaigoNinteiTsukibetsuJukyushaMybatisParameter implements IMyBatis
      *
      * @param 基準フラグ 基準フラグ
      * @param 年齢基準日 年齢基準日
-     * @param 基準年月日 基準年月日
-     * @param 基準年月 基準年月
+     * @param 基準年月日04 基準年月日04
+     * @param 基準年月日05 基準年月日05
+     * @param 基準年月日06 基準年月日06
+     * @param 基準年月日07 基準年月日07
+     * @param 基準年月日08 基準年月日08
+     * @param 基準年月日09 基準年月日09
+     * @param 基準年月日10 基準年月日10
+     * @param 基準年月日11 基準年月日11
+     * @param 基準年月日12 基準年月日12
+     * @param 基準年月日01 基準年月日01
+     * @param 基準年月日02 基準年月日02
+     * @param 基準年月日03 基準年月日03
+     * @param 基準年月04 基準年月04
+     * @param 基準年月05 基準年月05
+     * @param 基準年月06 基準年月06
+     * @param 基準年月07 基準年月07
+     * @param 基準年月08 基準年月08
+     * @param 基準年月09 基準年月09
+     * @param 基準年月10 基準年月10
+     * @param 基準年月11 基準年月11
+     * @param 基準年月12 基準年月12
+     * @param 基準年月01 基準年月01
+     * @param 基準年月02 基準年月02
+     * @param 基準年月03 基準年月03
      * @param 生年月日From 生年月日From
      * @param 生年月日To 生年月日To
      * @param 地区区分 地区区分
