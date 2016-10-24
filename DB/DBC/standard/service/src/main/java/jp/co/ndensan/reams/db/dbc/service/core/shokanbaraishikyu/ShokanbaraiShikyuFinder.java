@@ -52,7 +52,8 @@ public class ShokanbaraiShikyuFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShokanbaraiShikyuFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShokanbaraiShikyuFinder}のインスタンス
+     * @return *
+     * {@link InstanceProvider#create}にて生成した{@link ShokanbaraiShikyuFinder}のインスタンス
      */
     public static ShokanbaraiShikyuFinder createInstance() {
         return InstanceProvider.create(ShokanbaraiShikyuFinder.class);
@@ -82,7 +83,7 @@ public class ShokanbaraiShikyuFinder {
      */
     @Transaction
     public ChohyoBunruiKanri select帳票分類ID() {
-        DbT7068ChohyoBunruiKanriEntity entity = dbt7068Dac.selectByKey(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002.getReportId());
+        DbT7068ChohyoBunruiKanriEntity entity = dbt7068Dac.selectByKey(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId());
         if (entity != null) {
             return new ChohyoBunruiKanri(entity);
         }

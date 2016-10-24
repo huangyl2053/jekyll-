@@ -165,7 +165,7 @@
           "biko" character varying(100), -- 備考
           "shotokuKubun" character varying(1), -- 所得区分
           "over70_ShotokuKubun" character varying(1), -- 70歳以上の者に係る所得区分
-          "ShichosonCode" rshare."UDD023LasdecCode", -- 市町村コード
+          "shichosonCode" rshare."UDD023LasdecCode", -- 市町村コード
           "kyuShichosonCode" rshare."UDD023LasdecCode", -- 旧市町村コード 合併市町村の時は、旧市町村コードを設定
           CONSTRAINT "Gassan_pkey" PRIMARY KEY ("hihokenshaNo", "taishoNendo", "hokenshaNo", "shikyuSeiriNo", "rirekiNo")
         )

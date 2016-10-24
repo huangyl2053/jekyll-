@@ -26,7 +26,7 @@ public class JigyoHokokuDataCsvRelateEntity {
     private RString syukeKubun;
     private RString hyouNo;
     private RString syukeiNo;
-    private RString syukeTani;
+    private RString syukeiTani;
     private RString tateNo;
     private RString yokoNo;
     private HihokenshaNo hihokenshaNo;

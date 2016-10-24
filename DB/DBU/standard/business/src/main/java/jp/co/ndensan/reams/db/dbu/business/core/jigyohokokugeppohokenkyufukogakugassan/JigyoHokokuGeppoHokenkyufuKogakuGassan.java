@@ -54,7 +54,7 @@ public class JigyoHokokuGeppoHokenkyufuKogakuGassan {
         }
         eucEntity.set表番号(entity.getHyouNo());
         eucEntity.set集計番号(entity.getSyukeiNo());
-        eucEntity.set集計単位(entity.getSyukeTani());
+        eucEntity.set集計単位(entity.getSyukeiTani());
         eucEntity.set縦番号(entity.getTateNo());
         eucEntity.set横番号(entity.getYokoNo());
         eucEntity.set被保険者番号(entity.getHihokenshaNo().value());
