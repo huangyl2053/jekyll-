@@ -73,6 +73,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<KijunShunyugakuTekiyoKetteiEntity> {
 
     private SpoolKijunShunyugakuTekiyoKetteiProcessParameter parameter;
+    private ChohyoSeigyoKyotsu 帳票制御共通;
     private IOutputOrder 並び順;
     private RString 出力順;
     private List<RString> 改頁項目リスト;
@@ -124,6 +125,8 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
         rule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBC介護給付, 帳票ID_通知書);
         基準収入額適用管理List = new ArrayList<>();
         基準収入額適用管理manager = new KijunShunyugakuTekiyoKanriManager();
+        帳票制御共通 = new ChohyoSeigyoKyotsuManager()
+                .get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100074.getReportId());
     }
 
     @Override
@@ -201,8 +204,6 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
             基準収入額適用管理List.add(entity);
         } else {
             KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter = get基準収入額適用決定通知書パラメータ();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsuManager()
-                    .get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100074.getReportId());
             KijunShunyugakuTekiyoKetteiTsuchishoReport 通知書report
                     = new KijunShunyugakuTekiyoKetteiTsuchishoReport(基準収入額適用決定通知書Parameter, 帳票制御共通);
             if (基準収入額適用決定通知書Parameter.isFlag()) {
@@ -221,8 +222,6 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
     @Override
     protected void afterExecute() {
         KijunShunyugakuTekiyoKetteiTsuchisho 基準収入額適用決定通知書Parameter = get基準収入額適用決定通知書パラメータ();
-        ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsuManager()
-                .get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100074.getReportId());
         KijunShunyugakuTekiyoKetteiTsuchishoReport 通知書report
                 = new KijunShunyugakuTekiyoKetteiTsuchishoReport(基準収入額適用決定通知書Parameter, 帳票制御共通);
         if (基準収入額適用決定通知書Parameter.isFlag()) {
