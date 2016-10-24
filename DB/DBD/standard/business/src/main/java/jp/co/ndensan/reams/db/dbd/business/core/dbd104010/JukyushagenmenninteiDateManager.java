@@ -34,14 +34,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class JukyushagenmenninteiDateManager {
 
     private final RString タイトル1_0 = new RString("標準負担");
-    private final RString タイトル1_1 = new RString("　承認件数　　　　　(旧措置)");
-    private final RString タイトル1_2 = new RString("　金額 500円　　　　　(旧措置)");
-    private final RString タイトル1_3 = new RString("　金額 300円　　　　　(旧措置)");
+    private final RString タイトル_1 = new RString("　承認件数　　　　　(旧措置)");
+    private final RString タイトル1_2 = new RString("　金額 500円　　　　(旧措置)");
+    private final RString タイトル1_3 = new RString("　金額 300円　　　　(旧措置)");
     private final RString タイトル1_4 = new RString("　金額 その他　　　　(旧措置)");
     private final RString タイトル1_5 = RString.EMPTY;
 
     private final RString タイトル2_0 = new RString("利用者負担");
-    private final RString タイトル2_1 = new RString("　承認件数　　　　　(旧措置)");
     private final RString タイトル2_2 = new RString("　給付率 91～95%　　(旧措置)");
     private final RString タイトル2_3 = new RString("　給付率 96～99%　　(旧措置)");
     private final RString タイトル2_4 = new RString("　給付率 100% 　　　(旧措置)");
@@ -49,7 +48,6 @@ public class JukyushagenmenninteiDateManager {
 
     private final RString タイトル3_0 = new RString("特別対策");
     private final RString タイトル3_1 = new RString(" 施行時ホームヘルプ");
-    private final RString タイトル3_2 = new RString("　承認件数　　　　　(旧措置)");
     private final RString タイトル3_3 = new RString("　給付率 90～95%　　(旧措置)");
     private final RString タイトル3_4 = new RString("　給付率 96～99%　　(旧措置)");
     private final RString タイトル3_5 = new RString("　給付率 100% 　　　(旧措置)");
@@ -61,7 +59,6 @@ public class JukyushagenmenninteiDateManager {
     private final RString タイトル3_11 = RString.EMPTY;
 
     private final RString タイトル4_0 = new RString("社会福祉法人");
-    private final RString タイトル4_1 = new RString("　承認件数　　　　　(旧措置)");
     private final RString タイトル4_2 = new RString("　軽減率 12.5/100 　(旧措置)");
     private final RString タイトル4_3 = new RString("　軽減率　 25/100 　(旧措置)");
     private final RString タイトル4_4 = new RString("　軽減率　 50/100 　(旧措置)");
@@ -69,7 +66,6 @@ public class JukyushagenmenninteiDateManager {
     private final RString タイトル4_6 = RString.EMPTY;
 
     private final RString タイトル5_0 = new RString("特定入所者");
-    private final RString タイトル5_1 = new RString("　承認件数　　　　　(旧措置)");
     private final RString タイトル5_2 = new RString("　負担第４段階　　　(旧措置)");
     private final RString タイトル5_3 = new RString("　負担課税層第３段階(旧措置)");
     private final RString タイトル5_4 = new RString("　負担第３段階　　　(旧措置)");
@@ -82,7 +78,6 @@ public class JukyushagenmenninteiDateManager {
     private final RString タイトル5_11 = RString.EMPTY;
 
     private final RString タイトル6_0 = new RString("特別地域加算");
-    private final RString タイトル6_1 = new RString("　承認件数　　　　　(旧措置)");
     private final RString タイトル6_2 = new RString("　減額率 10/100 　　(旧措置)");
     private final RString タイトル6_3 = new RString("　減額率　その他　　(旧措置)");
     private final RString タイトル6_4 = RString.EMPTY;
@@ -128,6 +123,9 @@ public class JukyushagenmenninteiDateManager {
 
     private static final RString タイトルのみ印字 = new RString("タイトルのみ印字");
     private static final RString 印字不要 = new RString("印字不要");
+    private static final RString 印字_1 = new RString("：（");
+    private static final RString 印字_2 = new RString("　～　（");
+    private static final RString 印字_3 = new RString("）");
 
     /**
      * コンストラクタです。
@@ -443,28 +441,28 @@ public class JukyushagenmenninteiDateManager {
             if (Chiku.地区.equals(processParameter.get宛名抽出条件().getChiku_Kubun()) && !processParameter.get宛名抽出条件().getChiku1_From().isEmpty()
                     && !processParameter.get宛名抽出条件().getChiku1_To().isEmpty()) {
 
-                出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(new RString("：（"))
-                        .concat(processParameter.get宛名抽出条件().getChiku1_From()).concat(new RString("）"))
-                        .concat(processParameter.get宛名抽出条件().getChiku1_FromMesho()).concat(new RString("　～　（"))
-                        .concat(processParameter.get宛名抽出条件().getChiku1_To()).concat(new RString("）"))
+                出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(印字_1)
+                        .concat(processParameter.get宛名抽出条件().getChiku1_From()).concat(印字_3)
+                        .concat(processParameter.get宛名抽出条件().getChiku1_FromMesho()).concat(印字_2)
+                        .concat(processParameter.get宛名抽出条件().getChiku1_To()).concat(印字_3)
                         .concat(processParameter.get宛名抽出条件().getChiku1_ToMesho()));
             }
             if (Chiku.地区.equals(processParameter.get宛名抽出条件().getChiku_Kubun())
                     && !processParameter.get宛名抽出条件().getChiku1_From().isEmpty()
                     && processParameter.get宛名抽出条件().getChiku1_To().isEmpty()) {
-                出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(new RString("：（"))
-                        .concat(processParameter.get宛名抽出条件().getChiku1_From()).concat(new RString("）"))
-                        .concat(processParameter.get宛名抽出条件().getChiku1_FromMesho()).concat(new RString("　～　（"))
-                        .concat(processParameter.get宛名抽出条件().getChiku1_To()).concat(new RString("）"))
+                出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(印字_1)
+                        .concat(processParameter.get宛名抽出条件().getChiku1_From()).concat(印字_3)
+                        .concat(processParameter.get宛名抽出条件().getChiku1_FromMesho()).concat(印字_2)
+                        .concat(processParameter.get宛名抽出条件().getChiku1_To()).concat(印字_3)
                         .concat(processParameter.get宛名抽出条件().getChiku1_FromMesho()));
             }
             if (Chiku.地区.equals(processParameter.get宛名抽出条件().getChiku_Kubun())
                     && processParameter.get宛名抽出条件().getChiku1_From().isEmpty()
                     && !processParameter.get宛名抽出条件().getChiku1_To().isEmpty()) {
-                出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(new RString("：（"))
-                        .concat(processParameter.get宛名抽出条件().getChiku1_From()).concat(new RString("）"))
-                        .concat(processParameter.get宛名抽出条件().getChiku1_ToMesho()).concat(new RString("　～　（"))
-                        .concat(processParameter.get宛名抽出条件().getChiku1_To()).concat(new RString("）"))
+                出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(印字_1)
+                        .concat(processParameter.get宛名抽出条件().getChiku1_From()).concat(印字_3)
+                        .concat(processParameter.get宛名抽出条件().getChiku1_ToMesho()).concat(印字_2)
+                        .concat(processParameter.get宛名抽出条件().getChiku1_To()).concat(印字_3)
                         .concat(processParameter.get宛名抽出条件().getChiku1_ToMesho()));
             }
             if (Chiku.地区.equals(processParameter.get宛名抽出条件().getChiku_Kubun())) {
@@ -486,21 +484,21 @@ public class JukyushagenmenninteiDateManager {
                                         .longValue()).concat(new RString("歳"))).concat(new RString("　　（年齢基準日："))
                         .concat(processParameter.get宛名抽出条件().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
                                 .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO)
-                                .toDateString()).concat(new RString("）")));
+                                .toDateString()).concat(印字_3));
             } else if (processParameter.get宛名抽出条件().getNenreiRange().getFrom() != null
                     && processParameter.get宛名抽出条件().getNenreiRange().getTo() == null) {
                 出力条件.add(new RString("年齢：").concat(new RString(processParameter.get宛名抽出条件().getNenreiRange().getFrom()
                         .longValue())).concat(new RString("歳　～　　（年齢基準日：")).concat(processParameter
                                 .get宛名抽出条件().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
                                 .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString())
-                        .concat(new RString("）")));
+                        .concat(印字_3));
             } else if (processParameter.get宛名抽出条件().getNenreiRange().getFrom() == null
                     && processParameter.get宛名抽出条件().getNenreiRange().getTo() == null) {
                 出力条件.add(new RString("年齢：～").concat(new RString(processParameter.get宛名抽出条件().getNenreiRange().getTo()
                         .longValue())).concat(new RString("歳　　（年齢基準日：")).concat(processParameter
                                 .get宛名抽出条件().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
                                 .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO)
-                                .toDateString()).concat(new RString("）")));
+                                .toDateString()).concat(印字_3));
             }
         }
     }
@@ -533,19 +531,19 @@ public class JukyushagenmenninteiDateManager {
                     && !processParameter.get宛名抽出条件().getJusho_From().isEmpty()
                     && !processParameter.get宛名抽出条件().getJusho_To().isEmpty()) {
                 出力条件.add(new RString("町域：（").concat(processParameter.get宛名抽出条件().getJusho_From())
-                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getJusho_FromMesho()).concat(new RString("　～　（"))
+                        .concat(印字_3).concat(processParameter.get宛名抽出条件().getJusho_FromMesho()).concat(印字_2)
                         .concat(processParameter.get宛名抽出条件().getJusho_To())
-                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getJusho_ToMesho()));
+                        .concat(印字_3).concat(processParameter.get宛名抽出条件().getJusho_ToMesho()));
             }
             if (processParameter.get宛名抽出条件().getJusho_From() != null && !processParameter.get宛名抽出条件().getJusho_From().isEmpty()
                     && (processParameter.get宛名抽出条件().getJusho_To() == null || processParameter.get宛名抽出条件().getJusho_To().isEmpty())) {
                 出力条件.add(new RString("町域：（").concat(processParameter.get宛名抽出条件().getJusho_From())
-                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getJusho_FromMesho()).concat(new RString("　～")));
+                        .concat(印字_3).concat(processParameter.get宛名抽出条件().getJusho_FromMesho()).concat(new RString("　～")));
             }
             if ((processParameter.get宛名抽出条件().getJusho_From() == null || processParameter.get宛名抽出条件().getJusho_From().isEmpty())
                     && processParameter.get宛名抽出条件().getJusho_To() != null && !processParameter.get宛名抽出条件().getJusho_To().isEmpty()) {
                 出力条件.add(new RString("町域：～　（").concat(processParameter.get宛名抽出条件().getJusho_To())
-                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getJusho_ToMesho()));
+                        .concat(印字_3).concat(processParameter.get宛名抽出条件().getJusho_ToMesho()));
             }
         }
         set出力条件_行政区分(processParameter, 出力条件);
@@ -557,14 +555,14 @@ public class JukyushagenmenninteiDateManager {
             if (processParameter.get宛名抽出条件().getGyoseiku_From() != null && processParameter.get宛名抽出条件().getGyoseiku_To() != null
                     && !processParameter.get宛名抽出条件().getGyoseiku_From().isEmpty() && !processParameter.get宛名抽出条件().getGyoseiku_To().isEmpty()) {
                 出力条件.add(new RString("行政区：（").concat(processParameter.get宛名抽出条件().getGyoseiku_From())
-                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getGyoseiku_FromMesho()).concat(new RString("　～　（"))
+                        .concat(印字_3).concat(processParameter.get宛名抽出条件().getGyoseiku_FromMesho()).concat(印字_2)
                         .concat(processParameter.get宛名抽出条件().getGyoseiku_To())
-                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getGyoseiku_ToMesho()));
+                        .concat(印字_3).concat(processParameter.get宛名抽出条件().getGyoseiku_ToMesho()));
             }
             if (processParameter.get宛名抽出条件().getGyoseiku_From() != null && !processParameter.get宛名抽出条件().getGyoseiku_From().isEmpty()
                     && (processParameter.get宛名抽出条件().getGyoseiku_To() == null || processParameter.get宛名抽出条件().getGyoseiku_To().isEmpty())) {
                 出力条件.add(new RString("行政区：（").concat(processParameter.get宛名抽出条件().getGyoseiku_From())
-                        .concat(new RString("）")).concat(processParameter.get宛名抽出条件().getGyoseiku_FromMesho()).concat(new RString("　～")));
+                        .concat(印字_3).concat(processParameter.get宛名抽出条件().getGyoseiku_FromMesho()).concat(new RString("　～")));
             }
             if ((processParameter.get宛名抽出条件().getGyoseiku_From() == null || processParameter.get宛名抽出条件().getGyoseiku_From().isEmpty())
                     && processParameter.get宛名抽出条件().getGyoseiku_To() != null && !processParameter.get宛名抽出条件().getGyoseiku_To().isEmpty()) {
@@ -577,26 +575,26 @@ public class JukyushagenmenninteiDateManager {
     private void set出力条件_地区2の分類(DBD104010ProcessParameter processParameter, List<RString> 出力条件, IJushoNyuryokuConfig config) {
         if (processParameter.get宛名抽出条件().getChiku2_From() != null && processParameter.get宛名抽出条件().getChiku2_To() != null
                 && !processParameter.get宛名抽出条件().getChiku2_From().isEmpty() && !processParameter.get宛名抽出条件().getChiku2_To().isEmpty()) {
-            出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(new RString("：（"))
-                    .concat(processParameter.get宛名抽出条件().getChiku2_From()).concat(new RString("）"))
-                    .concat(processParameter.get宛名抽出条件().getChiku2_FromMesho()).concat(new RString("　～　（"))
-                    .concat(processParameter.get宛名抽出条件().getChiku2_To()).concat(new RString("）"))
+            出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(印字_1)
+                    .concat(processParameter.get宛名抽出条件().getChiku2_From()).concat(印字_3)
+                    .concat(processParameter.get宛名抽出条件().getChiku2_FromMesho()).concat(印字_2)
+                    .concat(processParameter.get宛名抽出条件().getChiku2_To()).concat(印字_3)
                     .concat(processParameter.get宛名抽出条件().getChiku2_ToMesho()));
         }
         if (processParameter.get宛名抽出条件().getChiku2_From() != null && !processParameter.get宛名抽出条件().getChiku2_From().isEmpty()
                 && (processParameter.get宛名抽出条件().getChiku2_To() == null || processParameter.get宛名抽出条件().getChiku2_To().isEmpty())) {
-            出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(new RString("：（"))
-                    .concat(processParameter.get宛名抽出条件().getChiku2_From()).concat(new RString("）"))
-                    .concat(processParameter.get宛名抽出条件().getChiku2_FromMesho()).concat(new RString("　～　（"))
-                    .concat(processParameter.get宛名抽出条件().getChiku2_To()).concat(new RString("）"))
+            出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(印字_1)
+                    .concat(processParameter.get宛名抽出条件().getChiku2_From()).concat(印字_3)
+                    .concat(processParameter.get宛名抽出条件().getChiku2_FromMesho()).concat(印字_2)
+                    .concat(processParameter.get宛名抽出条件().getChiku2_To()).concat(印字_3)
                     .concat(processParameter.get宛名抽出条件().getChiku2_FromMesho()));
         }
         if ((processParameter.get宛名抽出条件().getChiku2_From() == null || processParameter.get宛名抽出条件().getChiku2_From().isEmpty())
                 && processParameter.get宛名抽出条件().getChiku2_To() != null && !processParameter.get宛名抽出条件().getChiku2_To().isEmpty()) {
-            出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(new RString("：（"))
-                    .concat(processParameter.get宛名抽出条件().getChiku2_From()).concat(new RString("）"))
-                    .concat(processParameter.get宛名抽出条件().getChiku2_ToMesho()).concat(new RString("　～　（"))
-                    .concat(processParameter.get宛名抽出条件().getChiku2_To()).concat(new RString("）"))
+            出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(印字_1)
+                    .concat(processParameter.get宛名抽出条件().getChiku2_From()).concat(印字_3)
+                    .concat(processParameter.get宛名抽出条件().getChiku2_ToMesho()).concat(印字_2)
+                    .concat(processParameter.get宛名抽出条件().getChiku2_To()).concat(印字_3)
                     .concat(processParameter.get宛名抽出条件().getChiku2_ToMesho()));
         }
     }
@@ -604,26 +602,26 @@ public class JukyushagenmenninteiDateManager {
     private void set出力条件_地区3の分類(DBD104010ProcessParameter processParameter, List<RString> 出力条件, IJushoNyuryokuConfig config) {
         if (processParameter.get宛名抽出条件().getChiku3_From() != null && processParameter.get宛名抽出条件().getChiku3_To() != null
                 && !processParameter.get宛名抽出条件().getChiku3_From().isEmpty() && !processParameter.get宛名抽出条件().getChiku3_To().isEmpty()) {
-            出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(new RString("：（"))
-                    .concat(processParameter.get宛名抽出条件().getChiku3_From()).concat(new RString("）"))
-                    .concat(processParameter.get宛名抽出条件().getChiku3_FromMesho()).concat(new RString("　～　（"))
-                    .concat(processParameter.get宛名抽出条件().getChiku3_To()).concat(new RString("）"))
+            出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(印字_1)
+                    .concat(processParameter.get宛名抽出条件().getChiku3_From()).concat(印字_3)
+                    .concat(processParameter.get宛名抽出条件().getChiku3_FromMesho()).concat(印字_2)
+                    .concat(processParameter.get宛名抽出条件().getChiku3_To()).concat(印字_3)
                     .concat(processParameter.get宛名抽出条件().getChiku3_ToMesho()));
         }
         if (processParameter.get宛名抽出条件().getChiku3_From() != null && !processParameter.get宛名抽出条件().getChiku3_From().isEmpty()
                 && (processParameter.get宛名抽出条件().getChiku3_To() == null || processParameter.get宛名抽出条件().getChiku3_To().isEmpty())) {
-            出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(new RString("：（"))
-                    .concat(processParameter.get宛名抽出条件().getChiku3_From()).concat(new RString("）"))
-                    .concat(processParameter.get宛名抽出条件().getChiku3_FromMesho()).concat(new RString("　～　（"))
-                    .concat(processParameter.get宛名抽出条件().getChiku3_To()).concat(new RString("）"))
+            出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(印字_1)
+                    .concat(processParameter.get宛名抽出条件().getChiku3_From()).concat(印字_3)
+                    .concat(processParameter.get宛名抽出条件().getChiku3_FromMesho()).concat(印字_2)
+                    .concat(processParameter.get宛名抽出条件().getChiku3_To()).concat(印字_3)
                     .concat(processParameter.get宛名抽出条件().getChiku3_FromMesho()));
         }
         if ((processParameter.get宛名抽出条件().getChiku3_From() == null || processParameter.get宛名抽出条件().getChiku3_From().isEmpty())
                 && processParameter.get宛名抽出条件().getChiku3_To() != null && !processParameter.get宛名抽出条件().getChiku3_To().isEmpty()) {
-            出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(new RString("：（"))
-                    .concat(processParameter.get宛名抽出条件().getChiku3_From()).concat(new RString("）"))
-                    .concat(processParameter.get宛名抽出条件().getChiku3_ToMesho()).concat(new RString("　～　（"))
-                    .concat(processParameter.get宛名抽出条件().getChiku3_To()).concat(new RString("）"))
+            出力条件.add(config.getコード名称(ConfigKeysCodeName.コード名称_地区の分類１).concat(印字_1)
+                    .concat(processParameter.get宛名抽出条件().getChiku3_From()).concat(印字_3)
+                    .concat(processParameter.get宛名抽出条件().getChiku3_ToMesho()).concat(印字_2)
+                    .concat(processParameter.get宛名抽出条件().getChiku3_To()).concat(印字_3)
                     .concat(processParameter.get宛名抽出条件().getChiku3_ToMesho()));
         }
     }
@@ -700,7 +698,7 @@ public class JukyushagenmenninteiDateManager {
             return タイトル1_0;
         }
         if (ONE.equals(num)) {
-            return タイトル1_1;
+            return タイトル_1;
         }
         if (TWO.equals(num)) {
             return タイトル1_2;
@@ -722,7 +720,7 @@ public class JukyushagenmenninteiDateManager {
             return タイトル2_0;
         }
         if (ONE.equals(num)) {
-            return タイトル2_1;
+            return タイトル_1;
         }
         if (TWO.equals(num)) {
             return タイトル2_2;
@@ -747,7 +745,7 @@ public class JukyushagenmenninteiDateManager {
             return タイトル3_1;
         }
         if (TWO.equals(num)) {
-            return タイトル3_2;
+            return タイトル_1;
         }
         if (THREE.equals(num)) {
             return タイトル3_3;
@@ -784,7 +782,7 @@ public class JukyushagenmenninteiDateManager {
             return タイトル4_0;
         }
         if (ONE.equals(num)) {
-            return タイトル4_1;
+            return タイトル_1;
         }
         if (TWO.equals(num)) {
             return タイトル4_2;
@@ -809,7 +807,7 @@ public class JukyushagenmenninteiDateManager {
             return タイトル5_0;
         }
         if (ONE.equals(num)) {
-            return タイトル5_1;
+            return タイトル_1;
         }
         if (TWO.equals(num)) {
             return タイトル5_2;
@@ -849,7 +847,7 @@ public class JukyushagenmenninteiDateManager {
             return タイトル6_0;
         }
         if (ONE.equals(num)) {
-            return タイトル6_1;
+            return タイトル_1;
         }
         if (TWO.equals(num)) {
             return タイトル6_2;
