@@ -90,7 +90,6 @@ public class GetKogakugassanJikofutangakuInfoHoseiTempProcess extends BatchProce
         tmpEntity.setTaishoNendo(entity.getTaishoNendo());
         tmpEntity.setHokenshaNo(entity.getHokenshaNo());
         tmpEntity.setShikyuShinseishoSeiriNo(entity.getShikyuShinseishoSeiriNo());
-        //tmpEntity.setRirekiNo1(null);
         tmpEntity.setRirekiNo2(entity.getRirekiNo());
         tmpEntity.setHokenSeidoCode(entity.getHokenSeidoCode());
         tmpEntity.setHokenshaMei(entity.getHokenshaMei());

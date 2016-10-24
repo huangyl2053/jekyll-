@@ -69,8 +69,6 @@
           )
           LEFT JOIN rgdb."DbV1004ShisetsuNyutaisho" AS 介護保険施設入退所Newest
             ON DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_shikibetsuCode" = 介護保険施設入退所Newest."shikibetsuCode"
-          LEFT JOIN rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS 居宅給付計画事業者作成
-            ON DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_hihokenshaNo" = 居宅給付計画事業者作成."hihokenshaNo" <!--  TODO QA:639-->
           LEFT JOIN 
             (
             SELECT 被保険者番号,計画事業者番号

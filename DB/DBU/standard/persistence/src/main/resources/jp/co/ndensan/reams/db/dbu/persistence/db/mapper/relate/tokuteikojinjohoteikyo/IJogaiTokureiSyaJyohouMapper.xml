@@ -104,7 +104,7 @@
             <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.allColumns_TeikyoKihonJoho" />
          FROM "TeikyoKihonJohoNNTemp" AS teikyoKihonJoho
         INNER JOIN rgua.${psmShikibetsuTaisho} AS psm
-            ON psm."shikibetsuCode" = teikyoKihonJoho.shikibetsuCode
+            ON psm."shikibetsuCode" = teikyoKihonJoho."shikibetsuCode"
         <if test = "is異動">    
             WHERE NOT EXISTS(SELECT 1
                               FROM rgdb."DbT7304TokuteiKojinJohoTeikyoKanri" AS dbT7304
@@ -158,9 +158,9 @@
     
     <resultMap id="ResultMap_TeyikyouTayisyousyaJyohouRelateEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeyikyouTayisyousyaJyohouRelateEntity" autoMapping="true">
         <id property="teikyoKihonJohoNNTempEntity.hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="teikyoKihonJohoNNTempEntity.inputShikibetsuNo" column="dataSetKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="teikyoKihonJohoNNTempEntity.dataSetKey" column="dataSetKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kojinNo" column="kojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KojinNoTypeHandler"/>
-        <association property="teikyoKihonJohoNNTempEntity" resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.ResultMap_TeikyoKihonJohoNNTempEntity"/>
+        <association property="teikyoKihonJohoNNTempEntity" resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.IJogaiTokureiSyaJyohouMapper.ResultMap_TeikyoKihonJohoEntity"/>
     </resultMap>
     
     <resultMap id="ResultMap_TeikyoKihonJohoEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity" autoMapping="true">
@@ -253,7 +253,7 @@
                                                 rgdb."DbT1001HihokenshaDaicho" AS hihokenshaDaicho3
                                         WHERE
                                                 (
-                                                        hihokenshaDaicho3."shikakuShutokuYMD" <![CDATA[<>]]> hihokenshaDaicho3.shikakuSoshitsuYMD
+                                                        hihokenshaDaicho3."shikakuShutokuYMD" <![CDATA[<>]]> hihokenshaDaicho3."shikakuSoshitsuYMD"
                                                 AND hihokenshaDaicho3."logicalDeletedFlag" = False
                                                 AND hihokenshaDaicho3."jushochitokureiTekiyoJiyuCode" =  #{自特例適用}
                                                 AND (hihokenshaDaicho3."jushochitokureiKaijoJiyuCode" IS NULL OR hihokenshaDaicho3."jushochitokureiKaijoJiyuCode" = '')

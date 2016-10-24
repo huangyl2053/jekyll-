@@ -48,10 +48,10 @@ public class NinteiKekkaRenkeiDataTorikomiManager {
     private final RString 結果の取込みエラーリストファイル = new RString("結果の取込みエラーリストファイル");
     private final RString 英数字_進捗の取込みエラーリストファイル = new RString("SinchokuNoTorikomiErrList.CSV");
     private final RString 英数字_結果の取込みエラーリストファイル = new RString("KekkaNoTorikomiErrList.CSV");
-    private final RString 市町村コード = new RString("【市町村コード】 .CSV");
-    private final RString 市町村名称 = new RString("【市町村名称】 .CSV");
-    private final RString 証記載保険者番号 = new RString("【証記載保険者番号】 .CSV");
-    private final RString 保険者区分 = new RString("【保険者区分】 .CSV");
+    private final RString 市町村コード = new RString("【市町村コード】");
+    private final RString 市町村名称 = new RString("【市町村名称】");
+    private final RString 証記載保険者番号 = new RString("【証記載保険者番号】");
+    private final RString 保険者区分 = new RString("【保険者区分】");
 
     /**
      * NinteiKekkaRenkeiDataTorikomiManagerのインスタンス化

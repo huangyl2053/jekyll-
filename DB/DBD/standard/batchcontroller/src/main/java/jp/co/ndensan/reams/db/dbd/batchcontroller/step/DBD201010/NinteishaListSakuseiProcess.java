@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiH
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00002.NinteishaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.SeteiYouEntity;
@@ -106,6 +107,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     private FileSpoolManager manager;
     private RString eucFilePath;
     private CsvWriter<NinteishaListSakuseiResultCsvEntity> eucCsvWriter;
+    private CsvWriter<NinteishaListSakuseiCsvEntity> csvWriter;
     private EucEntityId eUC_ENTITY_ID;
     private RString ファイル名;
     private RString 帳票名称;
@@ -171,18 +173,27 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, eUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
-        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
-                setDelimiter(EUC_WRITER_DELIMITER).
-                setEncode(Encode.UTF_8withBOM).
-                setNewLine(NewLine.CRLF).
-                hasHeader(項目名付加).
-                build();
+        if (parameter.getCsv出力設定().contains(CSVSettings.連番付加)) {
+            eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
+                    setDelimiter(EUC_WRITER_DELIMITER).
+                    setEncode(Encode.UTF_8withBOM).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(項目名付加).
+                    build();
+        } else {
+            csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
+                    setDelimiter(EUC_WRITER_DELIMITER).
+                    setEncode(Encode.UTF_8withBOM).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(項目名付加).
+                    build();
+        }
     }
 
     @Override
     protected void process(NinteishaListSakuseiResultEntity t) {
         RiyoshaFutangakuGemmenGaitoshaIchiranReport reportSource = new RiyoshaFutangakuGemmenGaitoshaIchiranReport(t, 帳票日時,
-                outputOrder, 導入団体.get地方公共団体コード().value(), 導入団体.get市町村名(), 帳票タイトル, 改ページ);
+                outputOrder, 導入団体.get地方公共団体コード().value(), 導入団体.get市町村名(), 帳票タイトル, 改ページ, parameter.get世帯表示());
         reportSource.writeBy(reportSourceWriter);
 
         if (t.getPsmEntity() != null) {
@@ -201,16 +212,32 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
             }
         }
         if (t.get世帯員リスト() != null) {
-            editCsv(t);
+            if (parameter.getCsv出力設定().contains(CSVSettings.連番付加)) {
+                NinteishaListSakuseiResultCsvEntity resultEntity = business.set利用者負担額減免認定者リストCSV(t, parameter.getCsv出力設定());
+                editCsv(resultEntity, t);
+            } else {
+                NinteishaListSakuseiCsvEntity csventity = business.set連番しない(t, parameter.getCsv出力設定());
+                edit連番しない(csventity, t);
+            }
         } else {
-            NinteishaListSakuseiResultCsvEntity resultEntity = business.set利用者負担額減免認定者リストCSV(t, parameter.getCsv出力設定());
-            eucCsvWriter.writeLine(resultEntity);
+            if (parameter.getCsv出力設定().contains(CSVSettings.連番付加)) {
+                NinteishaListSakuseiResultCsvEntity resultEntity = business.set利用者負担額減免認定者リストCSV(t, parameter.getCsv出力設定());
+                eucCsvWriter.writeLine(resultEntity);
+            } else {
+                NinteishaListSakuseiCsvEntity csventity = business.set連番しない(t, parameter.getCsv出力設定());
+                csvWriter.writeLine(csventity);
+            }
+
         }
     }
 
     @Override
     protected void afterExecute() {
-        eucCsvWriter.close();
+        if (parameter.getCsv出力設定().contains(CSVSettings.連番付加)) {
+            eucCsvWriter.close();
+        } else {
+            csvWriter.close();
+        }
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         manager.spool(eucFilePath, log);
         AccessLogUUID reportLog = AccessLogger.logReport(personalDataList);
@@ -218,8 +245,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         バッチ出力条件リストの出力();
     }
 
-    private void editCsv(NinteishaListSakuseiResultEntity t) {
-        NinteishaListSakuseiResultCsvEntity resultEntity = business.set利用者負担額減免認定者リストCSV(t, parameter.getCsv出力設定());
+    private void editCsv(NinteishaListSakuseiResultCsvEntity resultEntity, NinteishaListSakuseiResultEntity t) {
         NinteishaListSakuseiResultCsvEntity csvEntity = resultEntity;
         if (SetaiHyoji.表示する.equals(parameter.get世帯表示())) {
             for (SeteiYouEntity entity : t.get世帯員リスト()) {
@@ -237,6 +263,27 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
             }
         } else {
             eucCsvWriter.writeLine(csvEntity);
+        }
+    }
+
+    private void edit連番しない(NinteishaListSakuseiCsvEntity resultEntity, NinteishaListSakuseiResultEntity t) {
+        NinteishaListSakuseiCsvEntity csvEntity = resultEntity;
+        if (SetaiHyoji.表示する.equals(parameter.get世帯表示())) {
+            for (SeteiYouEntity entity : t.get世帯員リスト()) {
+                IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
+                csvEntity.set世帯員氏名(kojin.get名称().getName().getColumnValue());
+                csvEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
+                if (entity.get課税区分() != null && KazeiKubun.課税.getコード().equals(entity.get課税区分())) {
+                    csvEntity.set世帯員課税区分(課);
+                }
+                if (entity.get課税所得額() != null && entity.get課税所得額().intValue() > 0) {
+                    csvEntity.set世帯員所得税課税区分(課);
+                }
+                csvWriter.writeLine(csvEntity);
+                csvEntity = new NinteishaListSakuseiCsvEntity();
+            }
+        } else {
+            csvWriter.writeLine(csvEntity);
         }
     }
 
@@ -269,7 +316,12 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         RString 導入団体コード = 導入団体.getLasdecCode_().getColumnValue();
         RString 市町村名 = 導入団体.get市町村名();
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
-        RString 出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
+        RString 出力ページ数;
+        if (parameter.getCsv出力設定().contains(CSVSettings.連番付加)) {
+            出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
+        } else {
+            出力ページ数 = new RString(String.valueOf(csvWriter.getCount()));
+        }
         RString csv出力有無 = new RString("あり");
         RString csvファイル名 = ファイル名;
 

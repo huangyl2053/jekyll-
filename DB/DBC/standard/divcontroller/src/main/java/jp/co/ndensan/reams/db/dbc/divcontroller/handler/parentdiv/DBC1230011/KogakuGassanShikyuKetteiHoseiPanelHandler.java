@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.Hi
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KoshinShoriResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.ShoriModeHanteiResult;
-import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
@@ -66,7 +65,6 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
     private static final RString 被保番号 = new RString("被保険者番号");
-    private static final RString 処理不可 = new RString("処理不可");
     private static final RString 新規 = new RString("新規");
     private static final RString 登録 = new RString("登録");
     private static final RString 修正 = new RString("修正");
@@ -1069,16 +1067,10 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         } else if (修正.equals(処理モデル)) {
             para.setKozaId(Long.parseLong(row.getKozaID().toString()));
             para.setHihokenshaNo(new HihokenshaNo(row.getHihokenshaNo()));
-            if (row.getShiharaiHohoKubun() != null && !row.getShiharaiHohoKubun().isEmpty()) {
-                para.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(row.getShiharaiHohoKubun()));
-            }
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 修正);
         } else if (削除.equals(処理モデル) || 照会.equals(処理モデル)) {
             para.setHihokenshaNo(new HihokenshaNo(row.getHihokenshaNo()));
             para.setKozaId(Long.parseLong(row.getKozaID().toString()));
-            if (row.getShiharaiHohoKubun() != null && !row.getShiharaiHohoKubun().isEmpty()) {
-                para.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(row.getShiharaiHohoKubun()));
-            }
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 照会);
         }
     }

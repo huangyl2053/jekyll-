@@ -142,6 +142,10 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         boolean 決定情報フラグ = div.getCcdKogakuShinseiList().is決定情報フラグ();
         RString 受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (総合事業高額サービス費支給申請書登録.equals(メニューID)) {
+            受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額,
+                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        }
         int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
         if (TWO.equals(受託区分)) {
             if (審査決定フラグ) {
