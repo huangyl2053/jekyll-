@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.service.core.dbd710130;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.dbd710130.HanyoListJigyoTaishoshaBusiness;
+import jp.co.ndensan.reams.db.dbd.business.report.HanyoListJigyoTaishoshaOrderby;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710130.HanyoListJigyoTaishoshaProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutojigyotaishosha.HanyoRisutoJigyoTaishoshaEntity;
@@ -15,7 +16,10 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutojigyotaishosha.Han
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.Outputs;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hanyolist.HanyoListEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -24,7 +28,13 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -60,6 +70,11 @@ public class HanyoListJigyoTaishoshaManager {
     private static final RString カラ = new RString("～");
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
+    private static final int NO_0 = 0;
+    private static final int NO_1 = 1;
+    private static final int NO_2 = 2;
+    private static final int NO_3 = 3;
+    private static final int NO_4 = 4;
 
     /**
      * HanyoListJigyoTaishoshaManagerのインスタンス化
@@ -78,7 +93,7 @@ public class HanyoListJigyoTaishoshaManager {
      * @param 地方公共団体情報 地方公共団体情報
      * @param 日付スラッシュ付加 日付スラッシュ付加
      */
-    public void CSV情報設定(HanyoRisutoJigyoTaishoshaEucCsvEntity eucCsvEntity, HanyoRisutoJigyoTaishoshaEntity entity,
+    public void get情報設定(HanyoRisutoJigyoTaishoshaEucCsvEntity eucCsvEntity, HanyoRisutoJigyoTaishoshaEntity entity,
             Association 地方公共団体情報, boolean 日付スラッシュ付加) {
         HanyoListJigyoTaishoshaBusiness bus = new HanyoListJigyoTaishoshaBusiness();
         bus.setEucCsvEntity(地方公共団体情報, 日付スラッシュ付加, eucCsvEntity, entity);
@@ -94,8 +109,59 @@ public class HanyoListJigyoTaishoshaManager {
         return bus.setNewBlank();
     }
 
+    /**
+     * ＣＳＶ情報
+     *
+     * @param entity entity
+     * @param hanyolistentity hanyolistentity
+     *
+     */
+    public void get方法(HanyoRisutoJigyoTaishoshaEntity entity, HanyoListEntity hanyolistentity) {
+        ChoikiCode 町域コード = ChoikiCode.EMPTY;
+        YubinNo 郵便番号 = YubinNo.EMPTY;
+        AtenaBanchi 番地コード = AtenaBanchi.EMPTY;
+        GyoseikuCode 行政区コード = GyoseikuCode.EMPTY;
+        ChikuCode 地区１ = ChikuCode.EMPTY;
+        ChikuCode 地区２ = ChikuCode.EMPTY;
+        SetaiCode 世帯コード = SetaiCode.EMPTY;
+        if (entity.getPsmEntity() != null) {
+            町域コード = entity.getPsmEntity().getChoikiCode();
+            郵便番号 = entity.getPsmEntity().getYubinNo();
+            番地コード = entity.getPsmEntity().getBanchi();
+            行政区コード = entity.getPsmEntity().getGyoseikuCode();
+            地区１ = entity.getPsmEntity().getChikuCode1();
+            地区２ = entity.getPsmEntity().getChikuCode2();
+            世帯コード = entity.getPsmEntity().getSetaiCode();
+            hanyolistentity.set氏名５０音カナ(entity.getPsmEntity().getKanaName());
+            hanyolistentity.set生年月日(entity.getPsmEntity().getSeinengappiYMD());
+            hanyolistentity.set性別(entity.getPsmEntity().getSeibetsuCode());
+        }
+        hanyolistentity.set郵便番号((郵便番号 != null && !郵便番号.isEmpty()) ? 郵便番号.getYubinNo() : RString.EMPTY);
+        hanyolistentity.set町域コード((町域コード != null && !町域コード.isEmpty()) ? 町域コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set番地コード((番地コード != null && 番地コード.isEmpty()) ? 番地コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set行政区コード((行政区コード != null && !行政区コード.isEmpty()) ? 行政区コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set地区１((地区１ != null && !地区１.isEmpty()) ? 地区１.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set地区２((地区２ != null && !地区２.isEmpty()) ? 地区２.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set世帯コード((世帯コード != null && !世帯コード.isEmpty()) ? 世帯コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set識別コード(entity.get被保険者台帳管理_識別コード());
+        hanyolistentity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
+        hanyolistentity.set被保険者番号(entity.get二次予防事業対象者_被保険者番号());
+    }
+
+    /**
+     * バッチ出力条件リストの出力
+     *
+     * @param processParamter processParamter
+     * @param 導入団体コード 導入団体コード
+     * @param 市町村名 市町村名
+     * @param 帳票出力 帳票出力
+     * @param 出力ページ数 出力ページ数
+     * @param 出力件数 出力件数
+     *
+     *
+     */
     public void バッチ出力条件リストの出力(HanyoListJigyoTaishoshaProcessParameter processParamter,
-            RString 導入団体コード, RString 市町村名, RString 出力ページ数, boolean is帳票出力) {
+            RString 導入団体コード, RString 市町村名, boolean 帳票出力, RString 出力ページ数, RString 出力件数) {
         RString 日本語ファイル名 = new RString("汎用リスト　事業対象者CSV");
         RString 英数字ファイル名 = new RString("HanyoList_Jigyotaisyosya.csv");
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
@@ -144,11 +210,96 @@ public class HanyoListJigyoTaishoshaManager {
                 }
             }
         }
-        バッチ出力条件表出力(processParamter, 導入団体コード, 市町村名, 出力ページ数, 日本語ファイル名, 英数字ファイル名, ジョブ番号, 出力条件, is帳票出力);
+        バッチ出力条件表出力(processParamter, 導入団体コード, 市町村名, 出力ページ数, 出力件数, 日本語ファイル名, 英数字ファイル名, ジョブ番号, 出力条件, 帳票出力);
+    }
+
+    /**
+     * 改頁Key
+     *
+     * @param outputOrder outputOrder
+     * @param pageBreakKeys pageBreakKeys
+     *
+     *
+     */
+    public void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
+        RString 改頁１ = RString.EMPTY;
+        RString 改頁２ = RString.EMPTY;
+        RString 改頁３ = RString.EMPTY;
+        RString 改頁４ = RString.EMPTY;
+        RString 改頁５ = RString.EMPTY;
+        if (outputOrder != null) {
+            List<ISetSortItem> list = outputOrder.get設定項目リスト();
+            if (list == null) {
+                list = new ArrayList<>();
+            }
+            if (list.size() > NO_0 && list.get(NO_0).is改頁項目()) {
+                改頁１ = to帳票物理名(list.get(NO_0).get項目ID());
+            }
+            if (list.size() > NO_1 && list.get(NO_1).is改頁項目()) {
+                改頁２ = to帳票物理名(list.get(NO_1).get項目ID());
+            }
+            if (list.size() > NO_2 && list.get(NO_2).is改頁項目()) {
+                改頁３ = to帳票物理名(list.get(NO_2).get項目ID());
+            }
+            if (list.size() > NO_3 && list.get(NO_3).is改頁項目()) {
+                改頁４ = to帳票物理名(list.get(NO_3).get項目ID());
+            }
+            if (list.size() > NO_4 && list.get(NO_4).is改頁項目()) {
+                改頁５ = to帳票物理名(list.get(NO_4).get項目ID());
+            }
+
+            if (!改頁１.isEmpty()) {
+                pageBreakKeys.add(改頁１);
+            }
+            if (!改頁２.isEmpty()) {
+                pageBreakKeys.add(改頁２);
+            }
+            if (!改頁３.isEmpty()) {
+                pageBreakKeys.add(改頁３);
+            }
+            if (!改頁４.isEmpty()) {
+                pageBreakKeys.add(改頁４);
+            }
+            if (!改頁５.isEmpty()) {
+                pageBreakKeys.add(改頁５);
+            }
+        }
+    }
+
+    private RString to帳票物理名(RString 項目ID) {
+        RString 帳票物理名 = RString.EMPTY;
+        if (HanyoListJigyoTaishoshaOrderby.郵便番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("yubinNo");
+        } else if (HanyoListJigyoTaishoshaOrderby.町域コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("choikiCode");
+        } else if (HanyoListJigyoTaishoshaOrderby.番地コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("banchi");
+        } else if (HanyoListJigyoTaishoshaOrderby.行政区コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("gyoseikuCode");
+        } else if (HanyoListJigyoTaishoshaOrderby.地区１.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("chikuCode1");
+        } else if (HanyoListJigyoTaishoshaOrderby.地区２.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("chikuCode2");
+        } else if (HanyoListJigyoTaishoshaOrderby.世帯コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("setaiCode");
+        } else if (HanyoListJigyoTaishoshaOrderby.識別コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shikibetsuCode");
+        } else if (HanyoListJigyoTaishoshaOrderby.氏名５０音カナ.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("kanaShimei");
+        } else if (HanyoListJigyoTaishoshaOrderby.生年月日.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("seinengappiYMD");
+        } else if (HanyoListJigyoTaishoshaOrderby.性別.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("seibetsuCode");
+        } else if (HanyoListJigyoTaishoshaOrderby.市町村コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shichosonCode");
+        } else if (HanyoListJigyoTaishoshaOrderby.被保険者番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("hokenshaNo");
+        }
+        return 帳票物理名;
     }
 
     private void バッチ出力条件表出力(HanyoListJigyoTaishoshaProcessParameter processParamter, RString 導入団体コード,
-            RString 市町村名, RString 出力ページ数, RString 日本語ファイル名,
+            RString 市町村名, RString 出力ページ数, RString 出力件数, RString 日本語ファイル名,
             RString 英数字ファイル名, RString ジョブ番号, List<RString> 出力条件, boolean is帳票出力) {
         if (is帳票出力) {
             RString csv出力有無;
@@ -180,7 +331,7 @@ public class HanyoListJigyoTaishoshaManager {
                     ジョブ番号,
                     英数字ファイル名,
                     new RString("DBD701013"),
-                    出力ページ数,
+                    出力件数,
                     出力条件);
             EucFileOutputJokenhyoFactory.createInstance(item).print();
         }
