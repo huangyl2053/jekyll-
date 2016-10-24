@@ -91,7 +91,6 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
     private static final RString 定数_テストプリント = new RString("テストプリント");
     private static final RString 定数_有り = new RString("有り");
     private static final RString 定数_無し = new RString("無し");
-    private static final RString 定数_出力順ID = new RString("出力順ID");
     private static final RString FORMAT_LEFT = new RString("【");
     private static final RString FORMAT_RIGHT = new RString("】");
     private static final RString 定数_再発行対象リスト = new RString("再発行対象リスト");
@@ -344,7 +343,7 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
             番地 = atesaki.get番地();
             住所 = atesaki.get住所();
             RString 名称 = atesaki.get名称();
-            if (!名称.isNullOrEmpty()) {
+            if (名称 != null && !名称.isEmpty()) {
                 役所_役場名 = editor役所_役場名(名称, 役所_役場名, atesaki);
             }
             if (役所_役場名.length() >= INT_10) {
