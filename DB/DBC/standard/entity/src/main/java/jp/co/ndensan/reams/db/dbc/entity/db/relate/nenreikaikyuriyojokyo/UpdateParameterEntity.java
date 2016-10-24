@@ -18,10 +18,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class UpdateParameterEntity {
 
     private int kubun;
-    private RString no;
-    private RString ページNo;
     private RString 区分;
     private RString 要介護状態区分コード;
+    private RString 集計番号;
+    private RString サービス項目コード;
     private boolean hiGaitouflag;
     private boolean yoSien1flag;
     private boolean yoSien2flag;

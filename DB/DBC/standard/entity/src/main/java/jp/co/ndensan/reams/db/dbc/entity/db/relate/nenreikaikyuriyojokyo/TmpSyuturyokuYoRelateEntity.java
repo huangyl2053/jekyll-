@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
@@ -23,12 +24,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 public class TmpSyuturyokuYoRelateEntity implements IDbAccessable {
 
     @TempTableColumnOrder(1)
-    private RString serviceSyuruiCodeMei;
+    @PrimaryKey
+    private RString shuukeiBangouCd;
     @TempTableColumnOrder(2)
-    private RString no;
-    @TempTableColumnOrder(3)
-    private RString pageNo;
+    @PrimaryKey
+    private RString serviceSyuruiCodeMei;
     @TempTableColumnOrder(4)
+    @PrimaryKey
     private RString kubun;
     @TempTableColumnOrder(5)
     private Decimal hiGaitou;
@@ -52,4 +54,6 @@ public class TmpSyuturyokuYoRelateEntity implements IDbAccessable {
     private Decimal goikei;
     @TempTableColumnOrder(15)
     private RString bikou;
+    @TempTableColumnOrder(16)
+    private int nenrenCd;
 }
