@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjoho
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.JukyushaKihonJohoMybatisParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoMybatisParamater;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.JukyushaTeikyoJohoKohoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.JukyushaTeikyoKihonJohoNNTempEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,6 +27,14 @@ public interface ITokuteiKojinJohoTeikyoMapper {
      * @return COUNT(版番号)
      */
     int getTokuteiKojinJohoHanKanriCount(RString shokaiTeikyoKubun);
+
+    /**
+     * 処理日付を取得します。
+     *
+     * @param paramater TokuteiKojinJohoTeikyoMybatisParamater
+     * @return 処理日付
+     */
+    DbT7022ShoriDateKanriEntity getKijunYMD(TokuteiKojinJohoTeikyoMybatisParamater paramater);
 
     /**
      * 受給者基本情報の提供情報(候補)を取得します。

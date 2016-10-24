@@ -1004,11 +1004,11 @@ public class TmpIdoFukaJohoEntity extends DbTableEntityBase<TmpIdoFukaJohoEntity
     private FlexibleYear fuka_fukaNendo;
     private TsuchishoNo fuka_tsuchishoNo;
     private int fuka_rirekiNo;
-    private int ki;
-    private int shunoId;
-    private Decimal choteigaku;
-    private Decimal choteiId;
-    private RString choshuHouhou;
+    private int fuka_ki;
+    private Decimal fuka_shunoId;
+    private Decimal fuka_choteigaku;
+    private Decimal fuka_choteiId;
+    private RString fuka_choshuHouhou;
     private HihokenshaNo fuka_hihokenshaNo;
     private ShikibetsuCode fuka_shikibetsuCode;
     private SetaiCode fuka_setaiCode;

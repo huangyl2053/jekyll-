@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase
 import jp.co.ndensan.reams.db.dbb.entity.report.karinonyutsuchishohakkoichiran.KariNonyuTsuchishoHakkoIchiranSource;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -45,6 +44,7 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
     private static final int NUM_7 = 7;
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString HYPHEN = new RString("-");
+    private static final RString 定値_ほし = new RString("＊");
     private final Association association;
 
     protected KariNonyuTsuchishoHakkoIchiranBodyEditor(KariSanteiNonyuTsuchiShoJoho entity,
@@ -165,13 +165,7 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
             source.listLower_3 = RString.EMPTY;
             source.listUpper_8 = RString.EMPTY;
         } else {
-            if (isNull(編集後宛先.get宛先種別()) || isNull(編集後宛先.get宛先名称())
-                    || (!AtesakiShubetsu.本人.equals(編集後宛先.get宛先種別()))) {
-                source.listUpper_11 = RString.EMPTY;
-            } else {
-                source.listUpper_11 = isNull(編集後宛先.get宛先名称().getName()) ? RString.EMPTY
-                        : 編集後宛先.get宛先名称().getName().value();
-            }
+            set納付人_送付先(編集後宛先, source);
             if (isNull(編集後宛先.get行政区())) {
                 source.listUpper_8 = RString.EMPTY;
             } else {
@@ -185,6 +179,15 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
             }
             source.listLower_2 = 編集後宛先.get郵便番号();
             source.listLower_3 = 編集後宛先.get編集後住所();
+        }
+    }
+
+    private void set納付人_送付先(EditedAtesaki 編集後宛先, KariNonyuTsuchishoHakkoIchiranSource source) {
+        if (編集後宛先.get宛先名称().equals(編集後宛先.get本人名称())) {
+            source.listUpper_11 = RString.EMPTY;
+        } else {
+            source.listUpper_11 = 定値_ほし.concat(RString.FULL_SPACE)
+                    .concat(編集後宛先.get宛先名称().getName().getColumnValue());
         }
     }
 
