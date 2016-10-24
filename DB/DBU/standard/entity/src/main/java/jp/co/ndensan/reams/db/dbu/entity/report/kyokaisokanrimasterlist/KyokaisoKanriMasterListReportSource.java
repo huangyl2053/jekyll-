@@ -77,6 +77,8 @@ public class KyokaisoKanriMasterListReportSource implements IReportSource {
     public RString listLower_9;
     @ReportItem(name = "listLower_10", length = 5, order = 32)
     public RString listLower_10;
+    @ReportItem(name = "choikiCode", length = 5, order = 33)
+    public RString choikiCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

@@ -48,7 +48,7 @@ public class ShiharaiHohoHenkoHaakuFiveEntity {
     private FlexibleDate 滞納者対策情報_弁明期限;
     private FlexibleDate 滞納者対策情報_弁明受付日;
     private FlexibleDate 滞納者対策情報_償還発行日;
-    private int 滞納者対策情報_償還証期限;
+    private FlexibleDate 滞納者対策情報_償還証期限;
     private int 滞納者対策情報_差止中件数;
     private Decimal 滞納者対策情報_差止中金額;
     private FlexibleDate 滞納者対策情報_差止納付期日;

@@ -384,9 +384,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
         reportData.set弁明受付日_6行目(t.get滞納者対策情報_弁明受付日());
         reportData.set償還発行日_7行目(t.get滞納者対策情報_償還発行日());
 
-        if (0 != t.get滞納者対策情報_償還証期限()) {
-            reportData.set償還証期限_8行目(new FlexibleDate(String.valueOf(t.get滞納者対策情報_償還証期限())));
-        }
+        reportData.set償還証期限_8行目(t.get滞納者対策情報_償還証期限());
 
         reportData.set差止中件数_9行目(new RString(t.get滞納者対策情報_差止中件数()));
         reportData.set差止中金額_10行目((t.get滞納者対策情報_差止中金額()));

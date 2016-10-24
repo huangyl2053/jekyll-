@@ -30,6 +30,7 @@
         <result property="setaiCode" column="PSM_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <result property="juminShubetsuCode"    column="PSM_juminShubetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="juminJotaiCode"   column="PSM_juminJotaiCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choikiCode"   column="PSM_choikiCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>   
     </resultMap>
     <select id="getKyokaisoKanriMasterList" resultMap="resultMap_KoseiShichosonMasterEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaMybatisParameter"  fetchSize="500" resultOrdered="true">
@@ -58,7 +59,8 @@
         DbT1006Kyokaiso."PSM_seibetsuCode" as "PSM_seibetsuCode",
         DbT1006Kyokaiso."PSM_setaiCode" as "PSM_setaiCode",
         DbT1006Kyokaiso."PSM_juminShubetsuCode" as "PSM_juminShubetsuCode",
-        DbT1006Kyokaiso."PSM_juminJotaiCode" as "PSM_juminJotaiCode"
+        DbT1006Kyokaiso."PSM_juminJotaiCode" as "PSM_juminJotaiCode",
+        DbT1006Kyokaiso."PSM_choikiCode" as "PSM_choikiCode"
 
         FROM
         ( SELECT
@@ -87,6 +89,7 @@
         PSM."setaiCode" as "PSM_setaiCode",
         PSM."juminShubetsuCode" as "PSM_juminShubetsuCode",
         PSM."juminJotaiCode" as "PSM_juminJotaiCode",
+        PSM."choikiCode" as "PSM_choikiCode",
         row_number() over(partition by (DbT1001Hiho."hihokenshaNo") order by DbT1001Hiho."idoYMD" desc,DbT1001Hiho."edaNo" desc) as rank_number1,
         row_number() over(partition by (DbT1007Kyo."hihokenshaNo") order by DbT1007Kyo."tekiyoKaishiYM" desc) as rank_number2
         FROM
