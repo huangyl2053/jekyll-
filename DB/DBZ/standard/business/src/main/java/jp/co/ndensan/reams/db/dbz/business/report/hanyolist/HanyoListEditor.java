@@ -100,6 +100,8 @@ public class HanyoListEditor implements IHanyoListEditor {
         }
         setiOutputOrder(source);
         set改頁(source);
+        set改頁1(source);
+        set改頁2(source);
     }
 
     private void set出力内容(HanyoListReportSource source) {
@@ -157,6 +159,9 @@ public class HanyoListEditor implements IHanyoListEditor {
         if (hanyolistentity.get性別() != null && !hanyolistentity.get性別().isEmpty()) {
             source.seibetsuCode = hanyolistentity.get性別();
         }
+    }
+
+    private void set改頁1(HanyoListReportSource source) {
         if (hanyolistentity.get氏名５０音カナ() != null && !hanyolistentity.get氏名５０音カナ().isEmpty()) {
             source.kanaShimei = hanyolistentity.get氏名５０音カナ();
         }
@@ -178,6 +183,9 @@ public class HanyoListEditor implements IHanyoListEditor {
         if (hanyolistentity.get要介護度() != null && !hanyolistentity.get要介護度().isEmpty()) {
             source.yoKaigoJotaiKubunCode = hanyolistentity.get要介護度();
         }
+    }
+
+    private void set改頁2(HanyoListReportSource source) {
         if (hanyolistentity.get証記載保険者番号() != null && !hanyolistentity.get証記載保険者番号().isEmpty()) {
             source.shoKisaiHokenshaNo = hanyolistentity.get証記載保険者番号();
         }

@@ -376,6 +376,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
             honsanteifuka.set帳票分類ID(entity.get帳票分類ID());
             honsanteifuka.set帳票ID(entity.get帳票ID());
             honsanteifuka.set出力順ID(new RString(entity.get出力順ID()));
+            honsanteiList.add(honsanteifuka);
         }
         param.set出力帳票一覧(honsanteiList);
         return param;

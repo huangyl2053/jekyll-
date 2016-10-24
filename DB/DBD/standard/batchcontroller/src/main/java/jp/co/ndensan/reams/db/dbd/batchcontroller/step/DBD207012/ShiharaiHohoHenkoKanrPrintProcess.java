@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbd.business.core.dbd207011.ShiharaiHohoHenkoHaakuOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200007.ShiharaiHohoHenkoKanriIchiranReport;
 import jp.co.ndensan.reams.db.dbd.definition.core.common.TainoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoHenkoKanrFiveProcessParameter;
@@ -34,6 +35,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -104,11 +106,12 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
     private static final RString 適用中者滞納保険料なしのみ = new RString("適用中者（滞納保険料なし）のみ");
     private static final RString 滞納保険料なしのみ = new RString("滞納保険料なしのみ");
 
-    private static final RString 出力順 = new RString("出力順:");
+    private static final RString バッチ出力条件出力順 = new RString("出力順:");
     private static final int 帳票期別リストSIZE = 3;
 
     private Association association;
     private IOutputOrder outputOrder;
+    private RString 出力順;
 
     @BatchWriter
     private BatchReportWriter<ShiharaiHohoHenkoKanriIchiranReportSource> batchReportWrite;
@@ -117,12 +120,9 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
     @Override
     protected void initialize() {
         association = AssociationFinderFactory.createInstance().getAssociation();
-    }
-
-    @Override
-    protected void beforeExecute() {
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
                 parameter.get帳票ID(), parameter.get改頁出力順ID());
+        出力順 = get出力順(outputOrder);
     }
 
     @Override
@@ -131,7 +131,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toShiharaiHohoHenkoHaakuFiveMybatisParameter(uaFt200Psm));
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toShiharaiHohoHenkoHaakuFiveMybatisParameter(uaFt200Psm, 出力順));
     }
 
     @Override
@@ -165,6 +165,18 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
             finder.writeBy(reportSourceWriter);
             count = 0;
         }
+    }
+
+    private RString get出力順(IOutputOrder order) {
+        if (order != null) {
+            RString 出力順 = MyBatisOrderByClauseCreator.create(ShiharaiHohoHenkoHaakuOrderKey.class, order);
+            return 出力順.concat(",対象者情報一時テーブル.\"hihokenshaNo\","
+                    + "収納状況一時テーブル.\"choteiNendo\",収納状況一時テーブル.\"fukaNendo\""
+                    + ",収納状況一時テーブル.\"tsuchishoNo\",,収納状況一時テーブル.\"ki\"");
+        }
+        return new RString("対象者情報一時テーブル.\"hihokenshaNo\","
+                + "収納状況一時テーブル.\"choteiNendo\",収納状況一時テーブル.\"fukaNendo\""
+                + ",収納状況一時テーブル.\"tsuchishoNo\",,収納状況一時テーブル.\"ki\"");
     }
 
     private ShiharaiHohoHenkoEntity createShiharaiHohoHenkoEntity(ShiharaiHohoHenkoHaakuFiveEntity t) {
@@ -226,7 +238,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
             if (kojin.get世帯コード() != null && !kojin.get世帯コード().isEmpty()) {
                 reportData.set世帯番号(new Code(kojin.get世帯コード().getColumnValue()));
             }
-            reportData.set行政区ｺｰﾄﾞ(kojin.get行政区画().getGyoseiku().getコード().value());
+            reportData.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
             reportData.set行政区(kojin.get行政区画().getGyoseiku().get名称());
             reportData.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
             reportData.set郵便番号(kojin.get住所().get郵便番号());
@@ -391,20 +403,18 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         result.add(基準日.concat(parameter.get基準日().toString()));
         if (選択あり.equals(parameter.get登録者選択())) {
             result.add(登録者選択);
-        } else {
-            if (SELECTED_VALUE_1.equals(parameter.get登録者選択())) {
-                出力条件_差止予告登録者２号の選択(result);
-            } else if (SELECTED_VALUE_2.equals(parameter.get登録者選択())) {
-                出力条件_差止登録者２号の選択(result);
-            } else if (SELECTED_VALUE_3.equals(parameter.get登録者選択())) {
-                出力条件_償還予告登録者１号の選択(result);
-            } else if (SELECTED_VALUE_4.equals(parameter.get登録者選択())) {
-                出力条件_償還決定登録者１号の選択(result);
-            } else if (SELECTED_VALUE_5.equals(parameter.get登録者選択())) {
-                出力条件_差止中あり者のみ１号の選択(result);
-            } else if (SELECTED_VALUE_6.equals(parameter.get登録者選択())) {
-                出力条件_保険料控除あり者のみ１号の選択(result);
-            }
+        } else if (SELECTED_VALUE_1.equals(parameter.get登録者選択())) {
+            出力条件_差止予告登録者２号の選択(result);
+        } else if (SELECTED_VALUE_2.equals(parameter.get登録者選択())) {
+            出力条件_差止登録者２号の選択(result);
+        } else if (SELECTED_VALUE_3.equals(parameter.get登録者選択())) {
+            出力条件_償還予告登録者１号の選択(result);
+        } else if (SELECTED_VALUE_4.equals(parameter.get登録者選択())) {
+            出力条件_償還決定登録者１号の選択(result);
+        } else if (SELECTED_VALUE_5.equals(parameter.get登録者選択())) {
+            出力条件_差止中あり者のみ１号の選択(result);
+        } else if (SELECTED_VALUE_6.equals(parameter.get登録者選択())) {
+            出力条件_保険料控除あり者のみ１号の選択(result);
         }
 
         RString 設定項目 = RString.EMPTY;
@@ -416,7 +426,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         if (!設定項目.isEmpty()) {
             設定項目 = 設定項目.substringEmptyOnError(1, 設定項目.length() - 1);
         }
-        result.add(出力順.concat(設定項目));
+        result.add(バッチ出力条件出力順.concat(設定項目));
         return result;
     }
 

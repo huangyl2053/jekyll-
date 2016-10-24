@@ -35,7 +35,7 @@ public class NinteiKekkaRenkeiDetaTorikomiProcess extends BatchProcessBase<HenKo
     private final RString にじゅういち = new RString("21");
     private final RString にじゅうに = new RString("22");
     private final RString にじゅうみ = new RString("23");
-    private final RString にじゅうよっ = new RString("25");
+    private final RString にじゅうよっ = new RString("24");
     private final RString にじゅうご = new RString("25");
     private final RString エラーメッセージ1 = new RString("取り下げ区分が無効です");
     private final RString エラーメッセージ2 = new RString("二次判定結果が無効です");
@@ -83,7 +83,7 @@ public class NinteiKekkaRenkeiDetaTorikomiProcess extends BatchProcessBase<HenKo
                 && !にじゅうご.equals(entity.get二次判定結果())) {
             error = new ErrordataIchijiTeburuEntity();
             NinteiKekkaRenkeiDataTorikomiManager.createInstance().エラー項目設定(エラーメッセージ2, entity, error);
-        } else if (entity.get申請情報_申請書管理番号().isNullOrEmpty()) {
+        } else if (entity.get申請情報_申請書管理番号() == null || entity.get申請情報_申請書管理番号().isEmpty()) {
             error = new ErrordataIchijiTeburuEntity();
             NinteiKekkaRenkeiDataTorikomiManager.createInstance().エラー項目設定(エラーメッセージ3, entity, error);
         } else if ((entity.get被保険者ｶﾅ氏名() == null || entity.get被保険者ｶﾅ氏名().isEmpty())

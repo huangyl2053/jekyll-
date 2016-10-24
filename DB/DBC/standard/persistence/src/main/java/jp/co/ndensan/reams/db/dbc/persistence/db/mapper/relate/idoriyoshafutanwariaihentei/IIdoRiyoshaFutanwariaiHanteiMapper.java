@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoriyoshafutanwariaihen
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
- * 高額サービス費給付お知らせ通知書作成マッパーインタフェースです。
+ * 異動分利用者負担割合判定マッパーインタフェースです。
  *
- * @reamsid_L DBC-4770-030 zhujun
+ * @reamsid_L DBC-4950-031 zhujun
  */
 public interface IIdoRiyoshaFutanwariaiHanteiMapper {
 

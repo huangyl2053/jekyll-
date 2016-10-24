@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbd.business.core.dbd207011.ShiharaiHohoHenkoHaakuOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200007.ShiharaiHohoHenkoKanriIchiranReport;
 import jp.co.ndensan.reams.db.dbd.definition.core.common.TainoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoHenkoHaakoFiveProcessParameter;
@@ -33,6 +34,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -96,6 +98,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
 
     private Association association;
     private IOutputOrder outputOrder;
+    private RString 出力順;
 
     @BatchWriter
     private BatchReportWriter<ShiharaiHohoHenkoKanriIchiranReportSource> batchReportWrite;
@@ -104,6 +107,9 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
     @Override
     protected void initialize() {
         association = AssociationFinderFactory.createInstance().getAssociation();
+        outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
+                parameter.get帳票ID(), parameter.get改頁出力順ID());
+        出力順 = get出力順(outputOrder);
     }
 
     @Override
@@ -118,7 +124,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toShiharaiHohoHenkoHaakuFiveMybatisParameter(uaFt200Psm));
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toShiharaiHohoHenkoHaakuFiveMybatisParameter(uaFt200Psm, 出力順));
     }
 
     @Override
@@ -180,6 +186,18 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
         printer.print();
     }
 
+    private RString get出力順(IOutputOrder order) {
+        if (order != null) {
+            RString 出力順 = MyBatisOrderByClauseCreator.create(ShiharaiHohoHenkoHaakuOrderKey.class, order);
+            return 出力順.concat(",対象者情報一時テーブル.\"hihokenshaNo\","
+                    + "収納状況一時テーブル.\"choteiNendo\",収納状況一時テーブル.\"fukaNendo\""
+                    + ",収納状況一時テーブル.\"tsuchishoNo\",,収納状況一時テーブル.\"ki\"");
+        }
+        return new RString("対象者情報一時テーブル.\"hihokenshaNo\","
+                + "収納状況一時テーブル.\"choteiNendo\",収納状況一時テーブル.\"fukaNendo\""
+                + ",収納状況一時テーブル.\"tsuchishoNo\",,収納状況一時テーブル.\"ki\"");
+    }
+
     private ShiharaiHohoHenkoEntity createShiharaiHohoHenkoEntity(ShiharaiHohoHenkoHaakuFiveEntity t) {
 
         reportData.set被保険者番号(t.get対象者情報_被保険者番号());
@@ -210,7 +228,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
             if (kojin.get世帯コード() != null && !kojin.get世帯コード().isEmpty()) {
                 reportData.set世帯番号(new Code(kojin.get世帯コード().getColumnValue()));
             }
-            reportData.set行政区ｺｰﾄﾞ(kojin.get行政区画().getGyoseiku().getコード().value());
+            reportData.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
             reportData.set行政区(kojin.get行政区画().getGyoseiku().get名称());
             reportData.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
             reportData.set郵便番号(kojin.get住所().get郵便番号());

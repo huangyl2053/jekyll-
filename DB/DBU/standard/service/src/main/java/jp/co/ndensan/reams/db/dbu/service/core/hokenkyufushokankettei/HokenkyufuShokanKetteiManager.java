@@ -717,6 +717,7 @@ public class HokenkyufuShokanKetteiManager {
                 || 入力識別番号_21B.equals(entity.getInputShikibetsuNo())) {
             entity.setTateNo(縦番号_NO20);
         }
+        // TODO 内部QA:1901 Redmine# 「食事費用」がなし、集計できない。
 //        if (entity.getShokujiHiyosikyuGaku() != null
 //                && (入力識別番号_718.equals(entity.getInputShikibetsuNo())
 //                || 入力識別番号_218.equals(entity.getInputShikibetsuNo()))) {
@@ -818,10 +819,8 @@ public class HokenkyufuShokanKetteiManager {
                 for (int j = 1; j <= 予防給付横番号INDEX; j++) {
                     Decimal 集計結果値;
                     if (ShukeiNoyoshiki2._1_介護給付_予防給付1総数_件数.getコード().equals(集計番号)) {
-                        集計結果値 = mapper.get集計結果値_0101_1(processParameter.create集計結果値MybitisParamter(
-                                市町村コード, 旧市町村コード, i, j))
-                                .subtract(mapper.get集計結果値_0101_2(processParameter.create集計結果値MybitisParamter(
-                                                        市町村コード, 旧市町村コード, i, j)));
+                        集計結果値 = mapper.get集計結果値_0101(processParameter.create集計結果値MybitisParamter(
+                                市町村コード, 旧市町村コード, i, j));
                     } else if (ShukeiNoyoshiki2._1_介護給付_予防給付1総数_単位数.getコード().equals(集計番号)) {
                         集計結果値 = mapper.get集計結果値_0102(processParameter.create集計結果値MybitisParamter(
                                 市町村コード, 旧市町村コード, i, j));
@@ -832,10 +831,8 @@ public class HokenkyufuShokanKetteiManager {
                         集計結果値 = mapper.get集計結果値_0104(processParameter.create集計結果値MybitisParamter(
                                 市町村コード, 旧市町村コード, i, j));
                     } else if (ShukeiNoyoshiki2._1_介護給付_予防給付2二割負担被保険者分_再掲_件数.getコード().equals(集計番号)) {
-                        集計結果値 = mapper.get集計結果値_0107_1(processParameter.create集計結果値MybitisParamter(
-                                市町村コード, 旧市町村コード, i, j))
-                                .subtract(mapper.get集計結果値_0107_2(processParameter.create集計結果値MybitisParamter(
-                                                        市町村コード, 旧市町村コード, i, j)));
+                        集計結果値 = mapper.get集計結果値_0107(processParameter.create集計結果値MybitisParamter(
+                                市町村コード, 旧市町村コード, i, j));
                     } else if (ShukeiNoyoshiki2._1_介護給付_予防給付2二割負担被保険者分_再掲_単位数.getコード().equals(集計番号)) {
                         集計結果値 = mapper.get集計結果値_0108(processParameter.create集計結果値MybitisParamter(
                                 市町村コード, 旧市町村コード, i, j));
@@ -846,10 +843,8 @@ public class HokenkyufuShokanKetteiManager {
                         集計結果値 = mapper.get集計結果値_0110(processParameter.create集計結果値MybitisParamter(
                                 市町村コード, 旧市町村コード, i, j));
                     } else if (ShukeiNoyoshiki2._1_介護給付_予防給付2第２号被保険者分_再掲_件数.getコード().equals(集計番号)) {
-                        集計結果値 = mapper.get集計結果値_0201_1(processParameter.create集計結果値MybitisParamter(
-                                市町村コード, 旧市町村コード, i, j))
-                                .subtract(mapper.get集計結果値_0201_2(processParameter.create集計結果値MybitisParamter(
-                                                        市町村コード, 旧市町村コード, i, j)));
+                        集計結果値 = mapper.get集計結果値_0201(processParameter.create集計結果値MybitisParamter(
+                                市町村コード, 旧市町村コード, i, j));
                     } else if (ShukeiNoyoshiki2._1_介護給付_予防給付2第２号被保険者分_再掲_単位数.getコード().equals(集計番号)) {
                         集計結果値 = mapper.get集計結果値_0202(processParameter.create集計結果値MybitisParamter(
                                 市町村コード, 旧市町村コード, i, j));
@@ -880,10 +875,8 @@ public class HokenkyufuShokanKetteiManager {
             IJigyoHokokuRenkeiHokenkyufuShokanKetteiMapper mapper) {
         Decimal 集計結果値 = Decimal.ZERO;
         if (ShukeiNoyoshiki2._1_介護給付_予防給付3総数_特例分_件数.getコード().equals(集計番号)) {
-            集計結果値 = mapper.get集計結果値_0301_1(processParameter.create集計結果値MybitisParamter(
-                    市町村コード, 旧市町村コード, i, j))
-                    .subtract(mapper.get集計結果値_0301_2(processParameter.create集計結果値MybitisParamter(
-                                            市町村コード, 旧市町村コード, i, j)));
+            集計結果値 = mapper.get集計結果値_0301(processParameter.create集計結果値MybitisParamter(
+                    市町村コード, 旧市町村コード, i, j));
         } else if (ShukeiNoyoshiki2._1_介護給付_予防給付3総数_特例分_単位数.getコード().equals(集計番号)) {
             集計結果値 = mapper.get集計結果値_0302(processParameter.create集計結果値MybitisParamter(
                     市町村コード, 旧市町村コード, i, j));
@@ -894,10 +887,8 @@ public class HokenkyufuShokanKetteiManager {
             集計結果値 = mapper.get集計結果値_0304(processParameter.create集計結果値MybitisParamter(
                     市町村コード, 旧市町村コード, i, j));
         } else if (ShukeiNoyoshiki2._1_介護給付_予防給付4第２号被保険者分_再掲_特例分_件数.getコード().equals(集計番号)) {
-            集計結果値 = mapper.get集計結果値_0401_1(processParameter.create集計結果値MybitisParamter(
-                    市町村コード, 旧市町村コード, i, j))
-                    .subtract(mapper.get集計結果値_0401_2(processParameter.create集計結果値MybitisParamter(
-                                            市町村コード, 旧市町村コード, i, j)));
+            集計結果値 = mapper.get集計結果値_0401(processParameter.create集計結果値MybitisParamter(
+                    市町村コード, 旧市町村コード, i, j));
         } else if (ShukeiNoyoshiki2._1_介護給付_予防給付4第２号被保険者分_再掲_特例分_単位数.getコード().equals(集計番号)) {
             集計結果値 = mapper.get集計結果値_0402(processParameter.create集計結果値MybitisParamter(
                     市町村コード, 旧市町村コード, i, j));
