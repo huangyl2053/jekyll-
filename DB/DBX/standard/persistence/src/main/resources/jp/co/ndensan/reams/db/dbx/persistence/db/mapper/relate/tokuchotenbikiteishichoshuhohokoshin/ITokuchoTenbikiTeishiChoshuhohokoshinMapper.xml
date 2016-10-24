@@ -20,7 +20,7 @@
                     "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" as "ueT0511NenkinTokuchoKaifuJoho_nenkinCode",
                     "DbT2001ChoshuHoho"."hihokenshaNo" as "dbT2001ChoshuHoho_hihokenshaNo"
                 FROM
-                    rgue."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
+                    rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
                 INNER JOIN
                     rgdb."DbT2001ChoshuHoho" AS "DbT2001ChoshuHoho"
                 ON

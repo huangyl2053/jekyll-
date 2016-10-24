@@ -23,11 +23,4 @@ public interface IUeT0511NenkinTokuchoKaifuJohoMapper {
      */
     List<UeT0511NenkinTokuchoKaifuJohoEntity> selectAllNoDeleted();
 
-    /**
-     * {@link UeT0511NenkinTokuchoKaifuJohoEntity}を取得します。
-     *
-     * @return {@link UeT0511NenkinTokuchoKaifuJohoEntity}
-     */
-    List<UeT0511NenkinTokuchoKaifuJohoEntity> selectAllNoDeletedUex();
-
 }
