@@ -226,9 +226,13 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
         }
         eucCsvWriter.close();
         eucCsvWriter1.close();
-        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         if (isCSV出力) {
+            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
             manager.spool(csvFilePath1, log);
+        }
+        if (is帳票出力) {
+            AccessLogUUID reportLog = AccessLogger.logReport(personalDataList);
+            batchReportWrite.addPrivacy(reportLog);
         }
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
