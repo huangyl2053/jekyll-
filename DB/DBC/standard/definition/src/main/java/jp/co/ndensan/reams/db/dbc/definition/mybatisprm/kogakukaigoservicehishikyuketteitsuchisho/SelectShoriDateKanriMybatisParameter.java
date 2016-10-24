@@ -29,6 +29,15 @@ public class SelectShoriDateKanriMybatisParameter implements IMyBatisParameter {
     private RString 処理枝番;
     private FlexibleYear 年度;
 
+    /**
+     * 年度内連番取得Parameterを作成する。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理枝番 LasdecCode
+     * @param 市町村コード RString
+     * @param 処理名 RString
+     * @param 年度 FlexibleYear
+     */
     public SelectShoriDateKanriMybatisParameter(SubGyomuCode サブ業務コード, LasdecCode 市町村コード, RString 処理名,
             RString 処理枝番, FlexibleYear 年度) {
         this.サブ業務コード = サブ業務コード;
