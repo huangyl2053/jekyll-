@@ -182,13 +182,7 @@ public class IchiranServicecodeRiyojokyoProcess
             if (beforeEntity != null) {
                 beforeサービス種類スコード = beforeEntity.getServiceShuruiCode();
                 beforeソート用サービス項目コード = beforeEntity.getSortYouKomokuCode();
-                if (is変換(beforeサービス種類スコード, currentサービス種類スコード)) {
-                    改頁Flag = true;
-                    非集計(beforeEntity, false);
-                    集計(beforeEntity);
-                } else {
-                    非集計(beforeEntity, false);
-                }
+                集計判定();
             }
         }
     }
@@ -510,5 +504,15 @@ public class IchiranServicecodeRiyojokyoProcess
             return null;
         }
         return 値;
+    }
+
+    private void 集計判定() {
+        if (is変換(beforeサービス種類スコード, currentサービス種類スコード)) {
+            改頁Flag = true;
+            非集計(beforeEntity, false);
+            集計(beforeEntity);
+        } else {
+            非集計(beforeEntity, false);
+        }
     }
 }
