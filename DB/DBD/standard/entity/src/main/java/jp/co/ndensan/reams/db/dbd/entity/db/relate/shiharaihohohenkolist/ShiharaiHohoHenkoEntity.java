@@ -32,9 +32,11 @@ public class ShiharaiHohoHenkoEntity {
     private RString 被保険者氏名カナ;
     private RString 被保険者氏名;
     private Code 世帯番号;
-    private RString 行政区ｺｰﾄﾞ;
+    private RString 行政区コード;
     private RString 行政区;
     private RString 住所コード;
+    private RString 町域コード;
+    private RString 市町村コード;
     private YubinNo 郵便番号;
     private RString 住所;
 

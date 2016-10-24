@@ -210,7 +210,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
             if (kojin.get世帯コード() != null && !kojin.get世帯コード().isEmpty()) {
                 reportData.set世帯番号(new Code(kojin.get世帯コード().getColumnValue()));
             }
-            reportData.set行政区ｺｰﾄﾞ(kojin.get行政区画().getGyoseiku().getコード().value());
+            reportData.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
             reportData.set行政区(kojin.get行政区画().getGyoseiku().get名称());
             reportData.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
             reportData.set郵便番号(kojin.get住所().get郵便番号());
