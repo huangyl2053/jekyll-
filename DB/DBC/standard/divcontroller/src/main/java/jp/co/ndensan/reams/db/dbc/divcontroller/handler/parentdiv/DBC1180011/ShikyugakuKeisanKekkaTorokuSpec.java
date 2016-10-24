@@ -245,7 +245,7 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
             return div.getTxtSanteiKijunGaku().getValue() != null && !Decimal.ZERO.equals(div.getTxtSanteiKijunGaku().getValue());
         }
 
-        private static boolean is対象計算期間終了年月日チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
+        public static boolean is対象計算期間終了年月日チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RDate 対象計算期間終了年月日 = div.getTxtTaishoKeisanKikan().getToValue();
             return 対象計算期間終了年月日.compareTo(RDate.getNowDate()) <= 0;
         }
@@ -269,13 +269,13 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
             return true;
         }
 
-        private static boolean is金額チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
+        public static boolean is金額チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             Decimal 按分後支給額 = div.getTxtHonninShikyugaku().getValue();
             Decimal うち70歳以上分按分後支給額 = div.getTxtOver70HonninShikyugaku().getValue();
             return うち70歳以上分按分後支給額 == null || うち70歳以上分按分後支給額.compareTo(按分後支給額) <= 0;
         }
 
-        private static boolean is高額合算支給不支給決定データの存在チェック() {
+        public static boolean is高額合算支給不支給決定データの存在チェック() {
             KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果
                     = ViewStateHolder.get(ViewStateKeys.支給額計算結果, KogakuGassanShikyuGakuKeisanKekkaRelate.class);
             HihokenshaNo 被保険者番号 = 支給額計算結果.get被保険者番号();
@@ -288,27 +288,27 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
             return resultList.isEmpty();
         }
 
-        private static boolean is自己負担額証明書整理番号桁数不正のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
+        public static boolean is自己負担額証明書整理番号桁数不正のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RString 自己負担額証明書整理番号 = div.getTxtJikoFutanSeiriNom().getValue();
             return !RString.isNullOrEmpty(自己負担額証明書整理番号) && 自己負担額証明書整理番号.length() == INT_20;
         }
 
-        private static boolean is保険者番号桁数不正のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
+        public static boolean is保険者番号桁数不正のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RString 保険者番号 = div.getTxtShoKisaiHokenshaNo().getValue();
             return !RString.isNullOrEmpty(保険者番号) && 保険者番号.length() == INT_8;
         }
 
-        private static boolean is被保険者記号桁数不正のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
+        public static boolean is被保険者記号桁数不正のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RString 被保険者記号 = div.getTxtKokuhoHihokenshaShoKigo().getValue();
             return !RString.isNullOrEmpty(被保険者記号) && 被保険者記号.length() == INT_20;
         }
 
-        private static boolean is被保険者証番号桁数不正のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
+        public static boolean is被保険者証番号桁数不正のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RString 被保険者証番号 = div.getTxtHiHokenshaShoNo().getValue();
             return !RString.isNullOrEmpty(被保険者証番号) && 被保険者証番号.length() == INT_20;
         }
 
-        private static boolean is自己負担額証明書整理番号入力値が不正チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
+        public static boolean is自己負担額証明書整理番号入力値が不正チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RString 自己負担額証明書整理番号 = div.getTxtJikoFutanSeiriNom().getValue();
             if (RString.isNullOrEmpty(自己負担額証明書整理番号)) {
                 return false;
@@ -320,7 +320,7 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
             return !flg1 || !flg2;
         }
 
-        private static boolean is既に存在のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
+        public static boolean is既に存在のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果明細状態, RString.class);
             if (追加.equals(状態)) {
                 return true;
