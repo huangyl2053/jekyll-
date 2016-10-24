@@ -86,7 +86,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<K
         pageBreakKeys = Collections.unmodifiableList(出力順Entity.getPageBreakKeys());
         if (pageBreakKeys != null && !pageBreakKeys.isEmpty()) {
             batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBU.DBA200005.getReportId().value())
-                    .addBreak(new BreakerCatalog<KyokaisoKanriMasterListReportSource>().simpleLayoutBreaker(pageBreakKeys)).create();
+                    .addBreak(new BreakerCatalog<KyokaisoKanriMasterListReportSource>().simplePageBreaker(pageBreakKeys)).create();
         } else {
             batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBU.DBA200005.getReportId().value()).create();
         }
