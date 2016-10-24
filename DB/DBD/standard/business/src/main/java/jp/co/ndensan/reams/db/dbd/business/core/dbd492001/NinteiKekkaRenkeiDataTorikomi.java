@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbd.business.core.dbd492001;
 
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.OutFile;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.OutFilekekka;
-import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.GenzainoJokyoCode;
@@ -82,15 +82,15 @@ public class NinteiKekkaRenkeiDataTorikomi {
      */
     public void edit識別コード名称(OutFile t, OutFilekekka out) {
         if (K02A.equals(t.get識別コード())) {
-            out.set識別コード名称(KoroshoInterfaceShikibetsuCode.V02A.getCode());
+            out.set識別コード名称(KoroshoIfShikibetsuCode.toValue(t.get識別コード()).get名称());
         } else if (K99A.equals(t.get識別コード())) {
-            out.set識別コード名称(KoroshoInterfaceShikibetsuCode.V99A.getCode());
+            out.set識別コード名称(KoroshoIfShikibetsuCode.toValue(t.get識別コード()).get名称());
         } else if (K06A.equals(t.get識別コード())) {
-            out.set識別コード名称(KoroshoInterfaceShikibetsuCode.V06A.getCode());
+            out.set識別コード名称(KoroshoIfShikibetsuCode.toValue(t.get識別コード()).get名称());
         } else if (K09A.equals(t.get識別コード())) {
-            out.set識別コード名称(KoroshoInterfaceShikibetsuCode.V09A.getCode());
+            out.set識別コード名称(KoroshoIfShikibetsuCode.toValue(t.get識別コード()).get名称());
         } else if (K09B.equals(t.get識別コード())) {
-            out.set識別コード名称(KoroshoInterfaceShikibetsuCode.V09B.getCode());
+            out.set識別コード名称(KoroshoIfShikibetsuCode.toValue(t.get識別コード()).get名称());
         }
     }
 

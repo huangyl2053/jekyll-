@@ -34,7 +34,7 @@
         <result property="利用者負担割合明細_論理削除フラグ" column="利用者負担割合明細_論理削除フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="利用者負担割合_年度" column="利用者負担割合_年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="利用者負担割合_履歴番号" column="利用者負担割合_履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
-        <result property="利用者負担割合明細_枝番号" column="利用者負担割合明細_枝番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="利用者負担割合_枝番号" column="利用者負担割合明細_枝番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="利用者負担割合明細_履歴番号" column="利用者負担割合明細_履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="利用者負担割合明細2_枝番号" column="利用者負担割合明細2_枝番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="利用者負担割合明細2_履歴番号" column="利用者負担割合明細2_履歴番号" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
