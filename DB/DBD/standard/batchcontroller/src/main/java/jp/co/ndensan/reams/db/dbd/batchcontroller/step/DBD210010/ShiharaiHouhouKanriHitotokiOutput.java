@@ -32,7 +32,7 @@ public class ShiharaiHouhouKanriHitotokiOutput extends BatchProcessBase<Shiharai
     private DBD210010ProcessParameter processParameter;
     private IShikibetsuTaishoPSMSearchKey searchKey;
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter shiharaiHouhouKanriHitotokiTemp;
+    private BatchEntityCreatedTempTableWriter shiharHouhKanriTemp;
 
     @Override
     protected void initialize() {
@@ -46,7 +46,7 @@ public class ShiharaiHouhouKanriHitotokiOutput extends BatchProcessBase<Shiharai
 
     @Override
     protected void createWriter() {
-        shiharaiHouhouKanriHitotokiTemp = new BatchEntityCreatedTempTableWriter(ShiharaiHouhouKanriHitotokiTempEntity.TABLE_NAME,
+        shiharHouhKanriTemp = new BatchEntityCreatedTempTableWriter(ShiharaiHouhouKanriHitotokiTempEntity.TABLE_NAME,
                 ShiharaiHouhouKanriHitotokiTempEntity.class);
     }
 
@@ -54,6 +54,6 @@ public class ShiharaiHouhouKanriHitotokiOutput extends BatchProcessBase<Shiharai
     protected void process(ShiharaiHohoHenkoEntity t) {
         ShiharaiHouhouKanriHitotokiDataManager manager = new ShiharaiHouhouKanriHitotokiDataManager();
         ShiharaiHouhouKanriHitotokiTempEntity tempTable = manager.set支払方法管理一時テーブル(t);
-        shiharaiHouhouKanriHitotokiTemp.insert(tempTable);
+        shiharHouhKanriTemp.insert(tempTable);
     }
 }
