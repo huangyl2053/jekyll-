@@ -187,9 +187,9 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
         private static final int INT_1 = 1;
         private static final int INT_2 = 2;
         private static final int INT_3 = 3;
-        private static final int INT_5 = 5;
+        private static final int INT_4 = 4;
         private static final int INT_8 = 8;
-        private static final int INT_11 = 11;
+        private static final int INT_12 = 12;
         private static final int INT_20 = 20;
         private static final RString RSTRING_3 = new RString("3");
         private static final RString RSTRING_99 = new RString("99");
@@ -232,6 +232,9 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
         }
 
         public static boolean isうち70歳以上分チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
+            if (div.getTxtOver70HonninShikyugaku().getValue() == null || div.getTxtOver70SetaiShikyuSogaku().getValue() == null) {
+                return true;
+            }
             boolean flg1 = INT_0 == div.getDdlOver70ShotokuKubun().getSelectedIndex();
             boolean flg2 = Decimal.ZERO.compareTo(div.getTxtOver70HonninShikyugaku().getValue()) < 0
                     || Decimal.ZERO.compareTo(div.getTxtOver70SetaiShikyuSogaku().getValue()) < 0;
@@ -310,20 +313,24 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
             if (RString.isNullOrEmpty(自己負担額証明書整理番号)) {
                 return false;
             }
-            RString 保険者番号 = 自己負担額証明書整理番号.substring(INT_5, INT_11);
+            RString 保険者番号 = 自己負担額証明書整理番号.substring(INT_4, INT_12);
             RString 先頭2桁 = 保険者番号.substring(INT_0, INT_2);
             boolean flg1 = RSTRING_3.equals(div.getDdlHokenSeido().getSelectedKey());
-            boolean flg2 = RSTRING_99.equals(先頭2桁);
+            boolean flg2 = !RSTRING_99.equals(先頭2桁);
             return !flg1 || !flg2;
         }
 
         private static boolean is既に存在のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果明細状態, RString.class);
-            if (!追加.equals(状態)) {
+            if (追加.equals(状態)) {
                 return true;
             }
             RString 証明書整理番号 = div.getTxtJikoFutanSeiriNom().getText();
             if (RString.isNullOrEmpty(証明書整理番号)) {
+                return true;
+            }
+            RString 選択行証明書整理番号 = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getClickedItem().getTxtJikoFutanSeiriNo();
+            if (証明書整理番号.equals(選択行証明書整理番号)) {
                 return true;
             }
             List<dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row> rowList
