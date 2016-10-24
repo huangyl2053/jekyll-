@@ -26,7 +26,7 @@ public class SeikatsuValidationHandler {
 
     private final SeikatsuhogoRirekiDiv div;
     private final RString 表示モード_修正 = new RString("修正");
-    private final RString 表示モード_追加 = new RString("追加");
+    private final RString 表示モード_追加 = new RString("新規");
 
     /**
      * コンストラクタです。
