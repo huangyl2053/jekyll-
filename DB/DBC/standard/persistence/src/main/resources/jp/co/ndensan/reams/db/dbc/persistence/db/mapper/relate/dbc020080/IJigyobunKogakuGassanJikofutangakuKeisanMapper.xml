@@ -525,17 +525,7 @@
         <association property="支払方法変更" 
                      resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity" />
     </resultMap>
-    <resultMap id="ResultMap_DbT3070MatchingEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DbT3070MatchingEntity" autoMapping="true" >
-        <id column="temp_hihokenshaNo" />
-        <id column="temp_taishoNendo" />
-        <id column="temp_hokenshaNo" />
-        <id column="temp_shikyuShinseishoSeiriNo" />
-        <association property="実績負担額データ" resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
-        <association property="高額合算自己負担額"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity" />
-        <association property="高額合算自己負担額明細" 
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity" />
-    </resultMap>
+    
     <resultMap id="ResultMap_DbT3170MatchingEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DbT3170MatchingEntity" autoMapping="true" >
         <id column="temp_hihokenshaNo" />
         <id column="temp_taishoNendo" />
