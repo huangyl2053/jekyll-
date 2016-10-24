@@ -208,6 +208,7 @@ public class NinteiChosaIraiHandler {
      */
     public void set調査員情報一覧(List<NinnteiChousairaiBusiness> 調査員情報一覧List, dgChosaItakusakiIchiran_Row selectRow) {
         List<dgchosainIchiran_Row> dataSource = new ArrayList<>();
+        FlexibleDate 基準日 = FlexibleDate.getNowDate();
         for (NinnteiChousairaiBusiness business : 調査員情報一覧List) {
             dgchosainIchiran_Row row = new dgchosainIchiran_Row();
             TextBoxCode chosainCode = new TextBoxCode();
@@ -220,6 +221,15 @@ public class NinteiChosaIraiHandler {
             }
             row.setChosainTelNo(business.getTelNo() == null ? RString.EMPTY : business.getTelNo().value());
             row.setChosaChiku(nullToEmpty(business.getChikuCode()));
+            if (business.getChikuCode() != null) {
+                RString codeName = CodeMaster.getCodeMeisho(
+                        SubGyomuCode.DBE認定支援,
+                        DBECodeShubetsu.調査地区コード.getコード(),
+                        new Code(business.getChikuCode()), 基準日);
+                if (codeName != null) {
+                    row.setChosaChiku(codeName);
+                }
+            }
             TextBoxNum waritsukeZumi = new TextBoxNum();
             waritsukeZumi.setValue(new Decimal(business.getWaritsukesumiKensu()));
             row.setWaritsukeZumi(waritsukeZumi);

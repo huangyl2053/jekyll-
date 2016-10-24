@@ -165,7 +165,9 @@
         ) AS ninteichosaIraiJohoZimi
         ON ninteichosaIraiJohoZimi.Temp_ninteiChosainCode = DbT5913ChosainJoho."ninteiChosainCode"
         WHERE
-        DbT5913ChosainJoho."shichosonCode" IN (
+        DbT5913ChosainJoho."ninteiChosaItakusakiCode" = #{ninteichosaItakusakiCode}
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND DbT5913ChosainJoho."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
@@ -173,7 +175,7 @@
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
         )
-        AND DbT5913ChosainJoho."ninteiChosaItakusakiCode" = #{ninteichosaItakusakiCode}
+        </if>
         AND DbT5913ChosainJoho."jokyoFlag" = TRUE
         GROUP BY
         DbT5913ChosainJoho."ninteiChosainCode"
@@ -317,25 +319,31 @@
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913
         ON dbT5913."shichosonCode" = dbT7051."shichosonCode"
         AND dbT5913."ninteiChosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
+        <if test="uses調査員コード">
         AND dbT5913."ninteiChosainCode" = dbT5101."ninteiChosainCode"
+        </if>
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910
         ON dbT5910."shichosonCode" = dbT7051."shichosonCode"
         AND dbT5910."ninteichosaItakusakiCode" = dbT5913."ninteiChosaItakusakiCode"
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911
         ON
-        dbT5911."shichosonCode" IN (
+        dbT5911."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5911."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
         rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-        )
-        AND dbT5911."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        )    
+        </if>
         AND dbT5911."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912
         ON
-        dbT5912."shichosonCode" IN (
+        dbT5912."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5912."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
@@ -343,7 +351,7 @@
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
         )
-        AND dbT5912."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        </if>
         AND dbT5912."shujiiCode" = dbT5101."shujiiCode"
         AND dbT5912."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS dbT5121
@@ -368,7 +376,9 @@
         AND dbT5201."logicalDeletedFlag" = FALSE
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911Zenkai
         ON
-        dbT5911Zenkai."shichosonCode" IN (
+        dbT5911Zenkai."shujiiIryokikanCode" = dbT5101Zenkai."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5911Zenkai."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
@@ -376,11 +386,13 @@
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
         )
-        AND dbT5911Zenkai."shujiiIryokikanCode" = dbT5101Zenkai."shujiiIryokikanCode"
+        </if>
         AND dbT5911Zenkai."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912Zenkai
         ON
-        dbT5912Zenkai."shichosonCode" IN (
+        dbT5912Zenkai."shujiiIryokikanCode" = dbT5101Zenkai."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5912Zenkai."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
@@ -388,7 +400,7 @@
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
         )
-        AND dbT5912Zenkai."shujiiIryokikanCode" = dbT5101Zenkai."shujiiIryokikanCode"
+        </if>
         AND dbT5912Zenkai."shujiiCode" = dbT5101Zenkai."shujiiCode"
         AND dbT5912Zenkai."jokyoFlag" = TRUE
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbT5105
@@ -402,8 +414,10 @@
                      AND G.renban <![CDATA[<]]> G1.renban
         )
         WHERE
-        dbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-        AND dbT5101."shoriJotaiKubun" IN ('0','3')
+        dbT5101."shoriJotaiKubun" IN ('0','3')
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+        </if>
         AND dbT5101."logicalDeletedFlag" = FALSE
         AND dbT5101."ninteiChosaItakusakiCode" = #{ninteichosaItakusakiCode}
         <if test="uses調査員コード">
@@ -507,19 +521,23 @@
         AND dbT5910."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911
         ON
-        dbT5911."shichosonCode" IN (
+        dbT5911."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5911."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
         rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-        )
-        AND dbT5911."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        )   
+        </if>
         AND dbT5911."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912
         ON
-        dbT5912."shichosonCode" IN (
+        dbT5912."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5912."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
@@ -527,7 +545,7 @@
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
         )
-        AND dbT5912."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        </if>
         AND dbT5912."shujiiCode" = dbT5101."shujiiCode"
         AND dbT5912."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS dbT5121
@@ -551,32 +569,38 @@
         ON dbT5201."shinseishoKanriNo" = dbT5201Waritukezumi."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911Zenkai
         ON
-        dbT5911Zenkai."shichosonCode" IN (
+        dbT5911Zenkai."shujiiIryokikanCode" = dbT5101Zenkai."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5911Zenkai."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
         rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-        )
-        AND dbT5911Zenkai."shujiiIryokikanCode" = dbT5101Zenkai."shujiiIryokikanCode"
+        )  
+        </if>
         AND dbT5911Zenkai."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912Zenkai
         ON
-        dbT5912Zenkai."shichosonCode" IN (
+        dbT5912Zenkai."shujiiIryokikanCode" = dbT5101Zenkai."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5912Zenkai."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
         rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-        )
-        AND dbT5912Zenkai."shujiiIryokikanCode" = dbT5101Zenkai."shujiiIryokikanCode"
+        ) 
+        </if>
         AND dbT5912Zenkai."shujiiCode" = dbT5101Zenkai."shujiiCode"
         AND dbT5912Zenkai."jokyoFlag" = TRUE
         WHERE
-        dbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-        AND dbT5101."shoriJotaiKubun" IN ('0','3')
+        dbT5101."shoriJotaiKubun" IN ('0','3')
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+        </if>
         AND dbT5101."logicalDeletedFlag" = FALSE
         AND dbT5101."ninteiChosaItakusakiCode" = #{ninteichosaItakusakiCode}
         <if test="uses調査員コード">
@@ -665,23 +689,31 @@
         rgdb."DbT5101NinteiShinseiJoho" AS dbT5101Nintei
         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201Nintei
         ON dbT5201Nintei."shinseishoKanriNo" = dbT5101Nintei."shinseishoKanriNo"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
         WHERE
-        dbT5101Nintei."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+        dbT5101Nintei."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}           
+        </if>
         ) AS dbT5101ShiTe
         ON dbT5101."shinseishoKanriNo" = dbT5101ShiTe.shinseishoKanriNo
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911Shujii
-        ON dbT5911Shujii."shichosonCode" IN (
+        ON
+        dbT5911Shujii."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5911Shujii."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
         rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-        )
-        AND dbT5911Shujii."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        ) 
+        </if>
         AND dbT5911Shujii."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912Shujii
-        ON dbT5912Shujii."shichosonCode" IN (
+        ON
+        dbT5912Shujii."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5912Shujii."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
@@ -689,7 +721,7 @@
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
         )
-        AND dbT5912Shujii."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        </if>
         AND dbT5912Shujii."shujiiCode" = dbT5101."shujiiCode"
         AND dbT5912Shujii."jokyoFlag" = TRUE
         INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS dbT5121Shinsei
@@ -710,18 +742,24 @@
         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201Nintei
         ON DbT5201Nintei."shinseishoKanriNo" = dbT5101ShiTe.shinseishoKanriNo
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911SenKai
-        ON dbT5911SenKai."shichosonCode" IN (
+        ON
+        dbT5911SenKai."shujiiIryokikanCode" = dbT5101SenKai."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">    
+        AND dbT5911SenKai."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
         rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-        )
-        AND dbT5911SenKai."shujiiIryokikanCode" = dbT5101SenKai."shujiiIryokikanCode"
+        )  
+        </if>
         AND dbT5911SenKai."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912SenKai
-        ON dbT5912SenKai."shichosonCode" IN (
+        ON
+        dbT5912SenKai."shujiiIryokikanCode" = dbT5101SenKai."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5912SenKai."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
@@ -729,12 +767,14 @@
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
         )
-        AND dbT5912SenKai."shujiiIryokikanCode" = dbT5101SenKai."shujiiIryokikanCode"
+        </if>
         AND dbT5912SenKai."shujiiCode" = dbT5101SenKai."shujiiCode"
         AND dbT5912SenKai."jokyoFlag" = TRUE
         WHERE
-        dbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-        AND dbT5101."shoriJotaiKubun" IN ('0', '3')
+        dbT5101."shoriJotaiKubun" IN ('0', '3')
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo} 
+        </if>
         AND dbT5101."logicalDeletedFlag" = FALSE
         <if test="uses支所コード">
             AND dbT5101."shishoCode" = #{shishoCode}
@@ -814,7 +854,10 @@
         ) AS ninteiChosaShite
         ON dbT5101."shinseishoKanriNo" = ninteiChosaShite.shinseishoKanriNo
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911Shujii
-        ON dbT5911Shujii."shichosonCode" IN (
+        ON
+        dbT5911Shujii."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5911Shujii."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
@@ -822,18 +865,21 @@
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
         )
-        AND dbT5911Shujii."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        </if>
         AND dbT5911Shujii."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912Shujii
-        ON dbT5912Shujii."shichosonCode" IN (
+        ON
+        dbT5912Shujii."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5912Shujii."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
         rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-        )
-        AND dbT5912Shujii."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode"
+        ) 
+        </if>
         AND dbT5912Shujii."shujiiCode" = dbT5101."shujiiCode"
         AND dbT5912Shujii."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS dbT5121Shinsei
@@ -855,7 +901,10 @@
         ON DbT5201Nintei."shinseishoKanriNo" = ninteiChosaShite.shinseishoKanriNo
         AND DbT5201Nintei."logicalDeletedFlag" = FALSE
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911SenKai
-        ON dbT5911SenKai."shichosonCode" IN (
+        ON
+        dbT5911SenKai."shujiiIryokikanCode" = dbT5101SenKai."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5911SenKai."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
@@ -863,23 +912,28 @@
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
         )
-        AND dbT5911SenKai."shujiiIryokikanCode" = dbT5101SenKai."shujiiIryokikanCode"
+        </if>
         AND dbT5911SenKai."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912SenKai
-        ON dbT5912SenKai."shichosonCode" IN (
+        ON
+        dbT5912SenKai."shujiiIryokikanCode" = dbT5101SenKai."shujiiIryokikanCode"
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5912SenKai."shichosonCode" IN (
         SELECT
         dbT7051."shichosonCode" AS shichosonCode
         FROM
         rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
         WHERE
         dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-        )
-        AND dbT5912SenKai."shujiiIryokikanCode" = dbT5101SenKai."shujiiIryokikanCode"
+        )    
+        </if>
         AND dbT5912SenKai."shujiiCode" = dbT5101SenKai."shujiiCode"
         AND dbT5912SenKai."jokyoFlag" = TRUE
         WHERE
-        dbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-        AND dbT5101."shoriJotaiKubun" IN ('0', '3')
+        dbT5101."shoriJotaiKubun" IN ('0', '3')
+        <if test= "shoKisaiHokenshaNo!=null and !shoKisaiHokenshaNo.isEmpty()">
+        AND dbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+        </if>
         AND dbT5101."logicalDeletedFlag" = FALSE
         <if test="uses支所コード">
             AND dbT5101."shishoCode" = #{shishoCode}
