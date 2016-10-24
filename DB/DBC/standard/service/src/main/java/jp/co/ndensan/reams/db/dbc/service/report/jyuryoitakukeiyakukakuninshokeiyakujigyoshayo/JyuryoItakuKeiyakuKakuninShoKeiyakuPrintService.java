@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.report.jyuryoitakukeiyakukakuninshokeiyakujigyoshayo;
 
-import jp.co.ndensan.reams.db.dbc.business.core.kaigokyufujuryoininkeiyakutoroku.KaigoKyufuJuryoininKeiyakuTorokuResult;
 import jp.co.ndensan.reams.db.dbc.business.report.jyuryoitakukeiyakukakuninshokeiyaku.JyuryoItakuKeiyakuKakuninShoKeiyakuProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.jyuryoitakukeiyakukakuninshokeiyaku.JyuryoItakuKeiyakuKakuninShoKeiyakuReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -37,16 +36,15 @@ public class JyuryoItakuKeiyakuKakuninShoKeiyakuPrintService {
     /**
      * 帳票設計_DBCMN31003_介護保険受領委任契約承認（不承認）確認書（事業者用）
      *
-     * @param result KaigoKyufuJuryoininKeiyakuTorokuResult
-     * @param 発行日 FlexibleDate
+     * @param 事業者用Entity KaigoKyufuJuryoininKeiyakuTorokuJigyoshaEntity
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
-            KaigoKyufuJuryoininKeiyakuTorokuResult result,
-            FlexibleDate 発行日) {
+            KaigoKyufuJuryoininKeiyakuTorokuJigyoshaEntity 事業者用Entity
+    ) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(result.get事業者用Entity(), reportManager, 発行日);
+            print(事業者用Entity, reportManager, FlexibleDate.getNowDate());
             collection = reportManager.publish();
         }
         return collection;
