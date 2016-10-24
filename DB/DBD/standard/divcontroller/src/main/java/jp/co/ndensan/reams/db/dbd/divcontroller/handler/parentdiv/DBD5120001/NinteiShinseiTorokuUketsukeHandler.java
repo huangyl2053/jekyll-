@@ -2004,10 +2004,12 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void set認定情報(NinteiShinseiTorokuUketsukeBusiness result) {
         INinteiInputDiv 認定div = div.getCcdNinteiInput();
-        if (new RString("00").equals(result.getEntity().get異動事由().getColumnValue())) {
-            認定div.getNinteiJoho().getRadNinteiKubun().setSelectedKey(new RString("1"));
-        } else {
-            認定div.getNinteiJoho().getRadNinteiKubun().setSelectedKey(new RString("2"));
+        if (result.getEntity().get異動事由() != null) {
+            if (new RString("00").equals(result.getEntity().get異動事由().getColumnValue())) {
+                認定div.getNinteiJoho().getRadNinteiKubun().setSelectedKey(new RString("1"));
+            } else {
+                認定div.getNinteiJoho().getRadNinteiKubun().setSelectedKey(new RString("2"));
+            }
         }
 
         if (result.getEntity().get要介護認定状態区分コード() != null) {
@@ -2023,7 +2025,8 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void set前回認定結果(NinteiShinseiTorokuUketsukeBusiness result) {
         IZenkaiNinteiKekkaJohoDiv 前回認定結果div = div.getCcdZenkaiNinteiKekkaJoho();
-        if (!RString.isNullOrEmpty(result.getEntity().get前回要介護状態区分コード().getColumnValue())) {
+        if (result.getEntity().get前回要介護状態区分コード() != null 
+                && !RString.isNullOrEmpty(result.getEntity().get前回要介護状態区分コード().getColumnValue())) {
             前回認定結果div.getTxtYokaigodo().setValue(
                     YokaigoJotaiKubun.toValue(result.getEntity().get前回要介護状態区分コード().getColumnValue()).get名称());
         }
