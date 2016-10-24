@@ -240,7 +240,7 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
         RString 訂正区分 = div.getRadTeiseiKubunCode().getSelectedKey();
         if ((KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
                 && 訂正区分_修正.equals(訂正区分) && 基本送付情報追加チェック)
-                || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
+                || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
                 && 訂正区分_削除.equals(訂正区分) && 基本送付情報削除チェック)
                 || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
                 && 基本送付情報追加チェック)) {
@@ -274,7 +274,7 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
         RString 訂正区分 = div.getRadTeiseiKubunCode().getSelectedKey();
         if ((KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
                 && 訂正区分_修正.equals(訂正区分) && 償還送付情報追加チェック)
-                || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
+                || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
                 && 訂正区分_削除.equals(訂正区分) && 償還送付情報削除チェック)
                 || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
                 && 償還送付情報追加チェック)) {
@@ -307,7 +307,7 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
         RString 訂正区分 = div.getRadTeiseiKubunCode().getSelectedKey();
         if ((KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
                 && 訂正区分_修正.equals(訂正区分) && 高額送付情報追加チェック)
-                || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
+                || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
                 && 訂正区分_削除.equals(訂正区分) && 高額送付情報削除チェック)
                 || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
                 && 高額送付情報追加チェック)) {
