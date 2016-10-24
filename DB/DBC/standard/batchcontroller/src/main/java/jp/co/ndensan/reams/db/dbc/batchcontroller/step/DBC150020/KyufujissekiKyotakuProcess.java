@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150020;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.nenreikaikyuriyojokyo.KyufujissekiEdit;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.nenreikaikyuriyojokyo.NenreikaikyuRiyojokyoProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.NenreikaikyuRiyojokyoRelateEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.SyorikekkatempTblEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.TmpKyufujissekiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.TmpSyuturyokuYoRelateEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -20,16 +20,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 給付実績居宅サービス計画費データ取得、 「給付実績データ一時TBL」に登録クラスです。
+ * 「給付実績データ一時TBL」に登録クラスです。
  *
  * @reamsid_L DBC-3470-030 xuyongchao
  */
-public class KyufujissekiKyotakuProcess extends BatchProcessBase<NenreikaikyuRiyojokyoRelateEntity> {
+public class KyufujissekiKyotakuProcess extends BatchProcessBase<TmpKyufujissekiRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nenreikaikyuriyojokyo."
-            + "INenreikaikyuRiyojokyoMapper.getKyufujissekiKyotaku");
+            + "INenreikaikyuRiyojokyoMapper.get給付実績データ一時");
     private static final RString 給付実績NAME = new RString("DbKyufujissekiTemp");
     private static final RString 出力用NAME = new RString("DbSyuturyokuYoTemp");
+    private static final RString 処理結果リスト一時TBL_NAME = new RString("DbWSyorikekkatempTbl");
     private NenreikaikyuRiyojokyoProcessParameter processParameter;
     private KyufujissekiEdit edit;
 
@@ -37,6 +38,8 @@ public class KyufujissekiKyotakuProcess extends BatchProcessBase<NenreikaikyuRiy
     BatchEntityCreatedTempTableWriter 給付実績Temp;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 出力用Temp;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 処理結果リスト一時TBL;
 
     @Override
     protected void beforeExecute() {
@@ -49,6 +52,8 @@ public class KyufujissekiKyotakuProcess extends BatchProcessBase<NenreikaikyuRiy
                 TmpKyufujissekiRelateEntity.class);
         出力用Temp = new BatchEntityCreatedTempTableWriter(出力用NAME,
                 TmpSyuturyokuYoRelateEntity.class);
+        処理結果リスト一時TBL = new BatchEntityCreatedTempTableWriter(処理結果リスト一時TBL_NAME,
+                SyorikekkatempTblEntity.class);
     }
 
     @Override
@@ -57,7 +62,7 @@ public class KyufujissekiKyotakuProcess extends BatchProcessBase<NenreikaikyuRiy
     }
 
     @Override
-    protected void process(NenreikaikyuRiyojokyoRelateEntity entity) {
+    protected void process(TmpKyufujissekiRelateEntity entity) {
         if (null != entity) {
             給付実績Temp.insert(edit.editEntity(entity));
         }

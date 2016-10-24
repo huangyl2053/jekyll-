@@ -77,7 +77,7 @@
                         AND substr(rgdb."DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> 振込明細一時TBL."serviceTeikyoYM"
                         AND rgdb."DbT4001JukyushaDaicho"."logicalDeletedFlag" =  FALSE
                 WHERE((rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" = '1'
-                    AND 振込明細一時TBL."serviceTeikyoYM" <![CDATA[<=]]> rgdb."DbT4001JukyushaDaicho"."shikyuGendoShuryoYMD")
+                    AND 振込明細一時TBL."serviceTeikyoYM" <![CDATA[<=]]> substr(rgdb."DbT4001JukyushaDaicho"."shikyuGendoShuryoYMD",1,6))
                     OR  (rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" =  '2'
                     AND (rgdb."DbT4001JukyushaDaicho"."soshitsuYMD" IS NULL OR (rgdb."DbT4001JukyushaDaicho"."soshitsuYMD" = '')
                     AND rgdb."DbT4001JukyushaDaicho"."yokaigoJotaiKubunCode" = '01' ))

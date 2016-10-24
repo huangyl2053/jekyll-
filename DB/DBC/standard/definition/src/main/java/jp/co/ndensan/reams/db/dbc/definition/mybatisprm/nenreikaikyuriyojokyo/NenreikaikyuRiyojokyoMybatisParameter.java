@@ -25,11 +25,11 @@ import lombok.Getter;
 public class NenreikaikyuRiyojokyoMybatisParameter implements IMyBatisParameter {
 
     private static final Code CODE = new Code("000000");
-    private static final RString 町域 = new RString("1");
-    private static final RString 行政区 = new RString("2");
-    private static final RString 地区1 = new RString("3");
-    private static final RString 地区2 = new RString("4");
-    private static final RString 地区3 = new RString("5");
+    private static final RString 町域 = new RString("町域");
+    private static final RString 行政区 = new RString("行政区");
+    private static final RString 地区1 = new RString("地区1");
+    private static final RString 地区2 = new RString("地区2");
+    private static final RString 地区3 = new RString("地区3");
     private final FlexibleDate serviceTeikyoYM;
     private final FlexibleDate sinsaYM;
     private final FlexibleDate nenreiSansyutuKijyubi;
@@ -118,7 +118,7 @@ public class NenreikaikyuRiyojokyoMybatisParameter implements IMyBatisParameter 
      * @param sinsaYM 審査年月
      * @param nenreiSansyutuKijyubi 年齢算出基準日
      * @param sentakuTaisyoKubun 選択対象区分
-     * @param sentakuTaisyoMap 選択対象Map
+     * @param sentakuTaisyoList 選択対象Map
      * @param shichosonCode 市町村コード
      * @param shichosonMeisho 市町村名称
      * @param kyoShichosonCode 旧市町村コード
@@ -129,7 +129,7 @@ public class NenreikaikyuRiyojokyoMybatisParameter implements IMyBatisParameter 
             FlexibleDate sinsaYM,
             FlexibleDate nenreiSansyutuKijyubi,
             RString sentakuTaisyoKubun,
-            Map<RString, RString> sentakuTaisyoMap,
+            List<RString> sentakuTaisyoList,
             Code shichosonCode,
             RString shichosonMeisho,
             Code kyoShichosonCode,
@@ -177,10 +177,6 @@ public class NenreikaikyuRiyojokyoMybatisParameter implements IMyBatisParameter 
             if (地区3.equals(tmpSentakuTaisyo)) {
                 chikuCode3Flag = true;
             }
-        }
-        List<RString> sentakuTaisyoList = new ArrayList<>();
-        for (RString code : sentakuTaisyoMap.keySet()) {
-            sentakuTaisyoList.add(code);
         }
         return new NenreikaikyuRiyojokyoMybatisParameter(serviceTeikyoYM,
                 sinsaYM,

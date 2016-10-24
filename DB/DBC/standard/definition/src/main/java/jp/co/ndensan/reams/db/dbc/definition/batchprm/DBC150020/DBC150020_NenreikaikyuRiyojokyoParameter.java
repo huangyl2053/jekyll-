@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150020;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.nenreikaikyuriyojokyo.NenreikaikyuRiyojokyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -45,7 +47,7 @@ public class DBC150020_NenreikaikyuRiyojokyoParameter extends BatchParameterBase
     @BatchParameter(key = SENTAKUTEISYOKUBUN, name = "選択対象区分")
     private RString sentakuTaisyoKubun;
     @BatchParameter(key = SENTAKUTEISYOLIST, name = "選択対象リスト")
-    private Map<RString, RString> sentakuTaisyoList;
+    private Map<RString, RString> sentakuTaisyoMap;
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
     private Code shichosonCode;
     @BatchParameter(key = SHICHOSONMEISHO, name = "市町村名称")
@@ -69,7 +71,7 @@ public class DBC150020_NenreikaikyuRiyojokyoParameter extends BatchParameterBase
      * @param sinsaYM 審査年月
      * @param nenreiSansyutuKijyubi 年齢算出基準日
      * @param sentakuTaisyoKubun 選択対象区分
-     * @param sentakuTaisyoList 選択対象リスト
+     * @param sentakuTaisyoMap 選択対象リスト
      * @param shichosonCode 市町村コード
      * @param shichosonMeisho 市町村名称
      * @param kyoShichosonCode 旧市町村コード
@@ -79,7 +81,7 @@ public class DBC150020_NenreikaikyuRiyojokyoParameter extends BatchParameterBase
             FlexibleDate sinsaYM,
             FlexibleDate nenreiSansyutuKijyubi,
             RString sentakuTaisyoKubun,
-            Map<RString, RString> sentakuTaisyoList,
+            Map<RString, RString> sentakuTaisyoMap,
             Code shichosonCode,
             RString shichosonMeisho,
             Code kyoShichosonCode,
@@ -88,7 +90,7 @@ public class DBC150020_NenreikaikyuRiyojokyoParameter extends BatchParameterBase
         this.sinsaYM = sinsaYM;
         this.nenreiSansyutuKijyubi = nenreiSansyutuKijyubi;
         this.sentakuTaisyoKubun = sentakuTaisyoKubun;
-        this.sentakuTaisyoList = sentakuTaisyoList;
+        this.sentakuTaisyoMap = sentakuTaisyoMap;
         this.shichosonCode = shichosonCode;
         this.shichosonMeisho = shichosonMeisho;
         this.kyoShichosonCode = kyoShichosonCode;
@@ -105,10 +107,20 @@ public class DBC150020_NenreikaikyuRiyojokyoParameter extends BatchParameterBase
                 sinsaYM,
                 nenreiSansyutuKijyubi,
                 sentakuTaisyoKubun,
-                sentakuTaisyoList,
+                setselectorChikulist(),
                 shichosonCode,
                 shichosonMeisho,
                 kyoShichosonCode,
                 kyoShichosonMeisho);
+    }
+
+    private List<RString> setselectorChikulist() {
+        List<RString> selectorChikulist = new ArrayList<>();
+        if (0 < sentakuTaisyoMap.size()) {
+            for (RString 選択結果 : sentakuTaisyoMap.keySet()) {
+                selectorChikulist.add(選択結果);
+            }
+        }
+        return selectorChikulist;
     }
 }

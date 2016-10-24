@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -26,7 +25,7 @@ public class SyorikekkatempTblEntity implements IDbAccessable {
     @TempTableColumnOrder(1)
     private RString shoriMei;
     @TempTableColumnOrder(2)
-    private HihokenshaNo hiHokenshaNo;
+    private RString hiHokenshaNo;
     @TempTableColumnOrder(3)
     private FlexibleYearMonth serviceTeikyoYM;
     @TempTableColumnOrder(4)
