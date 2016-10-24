@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.ShunyuJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NotsuKozaShutsuryokuTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuchokaritsuchishoikkatsuhakko.FuchokaritsuchishoikkatsuhakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb014003.FuchoKarisanteiTsuchishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
@@ -92,7 +93,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
+import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
+import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -106,6 +108,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.DaikoPrintFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.IDaikoPrint;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -170,6 +173,10 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
     private static final int 特徴納期_3期 = 3;
     private static final RString 生活保護者先頭出力フラグ_する = new RString("1");
     private static final RString 生活保護者先頭出力フラグ_しない = new RString("0");
+    private static final RString ページごとに山分け_する = new RString("0");
+    private static final RString 定値_ゼロ = new RString("0");
+    private static final RString 定値_する = new RString("する");
+    private static final RString 定値_しない = new RString("しない");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -198,7 +205,7 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
     private static final int 月_14 = 14;
     private static final int 月_15 = 15;
     private static final RString 重複な期情報 = new RString("0");
-    private static final RString 山分け区分_する = new RString(0);
+    private static final RString 山分け区分_する = new RString("0");
     private static final RString 山分け区分_しない = new RString("1");
     private static final int 出力期リストのサイズ_1 = 1;
     private static final int 出力期リストのサイズ_2 = 2;
@@ -215,11 +222,11 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
     private static final int 山分け用スプール数_3 = 3;
     private static final int 山分け用スプール数_4 = 4;
     private static final int 山分け用スプール数_5 = 5;
-    private static final RString ブック開始位置_1 = new RString("1");
-    private static final RString ブック開始位置_2 = new RString("2");
-    private static final RString ブック開始位置_3 = new RString("3");
-    private static final RString ブック開始位置_4 = new RString("4");
-    private static final RString ブック開始位置_5 = new RString("5");
+    private static final RString ブック開始位置_1 = new RString("01");
+    private static final RString ブック開始位置_2 = new RString("02");
+    private static final RString ブック開始位置_3 = new RString("03");
+    private static final RString ブック開始位置_4 = new RString("04");
+    private static final RString ブック開始位置_5 = new RString("05");
     private static final RString 定数_特徴方法 = new RString("getTkKibetsuGaku");
     private static final RString 定数_普徴方法 = new RString("getFuKibetsuGaku");
     private static final RString ゆうちょ銀行 = new RString("9900");
@@ -255,15 +262,20 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
     private static final RString パラメータ名_対象者 = new RString("対象者");
     private static final RString パラメータ名_発行日 = new RString("発行日");
     private static final RString パラメータ名_出力期 = new RString("出力期");
+    private static final RString 代行プリント_帳票名 = new RString("保険料納入通知書（仮算定）");
     private static final RString パラメータ名_生活保護対象者をまとめて先頭に出力 = new RString("生活保護対象者をまとめて先頭に出力");
     private static final RString パラメータ名_ページごとに山分け = new RString("ページごとに山分け");
     private static final RString CSV出力有無_なし = new RString("なし");
+    private static final RString CSV出力有無_あり = new RString("あり");
     private static final RString CSVファイル名_なし = new RString("なし");
+    private static final RString CSVファイル名_納入一覧表 = new RString("KariNonyuTsuchishoHakkoIchiranData.csv");
     private static final RString 処理名 = new RString("普徴仮算定通知書一括発行");
     private static final RString 出力条件_左括弧 = new RString("【");
     private static final RString 出力条件_右括弧 = new RString("】");
     private static final ReportId 納入通知書_帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
     private static final RString ジョブ番号 = new RString("【ジョブ番号】");
+    private static final ReportId 代行プリント送付票_帳票ID = new ReportId("URU000A10_DaikoPrintCheck");
+    private static final RString 定値_ほし = new RString("＊");
     private NinshoshaSource dbb100014NinshoshaSource;
     private NinshoshaSource dbb100015NinshoshaSource;
     private NinshoshaSource dbb100018NinshoshaSource;
@@ -332,8 +344,10 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
     private LasdecCode 市町村コード;
     private RString 市町村名;
     private ReportId 帳票ID;
+    private IdoFukaJohoTempEntitySet entitySet;
     private DbT2002FukaEntity fukaEntity;
     private DbT2003KibetsuEntity kibetsuEntity;
+    private boolean データ有無区分;
     private FuchoKariTsuchishoIkkatsuHakkoTempEntity lastEntity;
     private List<KibetsuEntity> kibetsuEntityList;
     private List<UrT0705ChoteiKyotsuEntity> choteiKyotsuEntityList;
@@ -367,6 +381,7 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
         RString 帳票タイプ = get帳票タイプ();
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
         期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
+        出力期 = Integer.parseInt(processParameter.get出力期().toString());
         get出力期の期月情報リスト();
         山分け用スプール数 = 山分け用スプール数の算出(帳票タイプ);
 
@@ -374,12 +389,12 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
         仮算定納入通知書制御情報 = NonyuTsuchiShoSeigyoJohoLoaderFinder.createInstance().get仮算定納入通知書制御情報();
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBB介護賦課, 納入通知書_帳票分類ID);
+        entitySet = new IdoFukaJohoTempEntitySet();
     }
 
     @Override
     protected IBatchReader createReader() {
         KitsukiList 普徴仮算定期間 = 期月リスト_普徴.filtered仮算定期間();
-        出力期 = Integer.parseInt(processParameter.get出力期().toString());
 
         int 普徴仮算定期間の最後の期 = 普徴仮算定期間.getLast().get期AsInt();
         final RString 生活保護対象者をまとめて先頭に出力 = processParameter.get生活保護対象者をまとめて先頭に出力();
@@ -414,12 +429,16 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
 
     @Override
     protected void process(FuchoKariTsuchishoIkkatsuHakkoTempEntity entity) {
+
+        データ有無区分 = true;
         final FukaJohoZenendoTmpEntity 賦課情報 = entity.get賦課情報();
-        if (choteiNendo == null) {
+        if (賦課情報 == null || 賦課情報.getFuka_FukaNendo() == null) {
+            保険料納入通知書発行(entity, null);
+        } else if (choteiNendo == null) {
             lastEntity = entity;
             set賦課情報集計前データ(賦課情報);
-        } else if ((!choteiNendo.equals(賦課情報.getChoteiNendo())) || (!fukaNendo.equals(賦課情報.getFukaNendo()))
-                || (!tsuchishoNo.equals(賦課情報.getTsuchishoNo())) || (rirekiNo != 賦課情報.getRirekiNo())) {
+        } else if ((!choteiNendo.equals(賦課情報.getFuka_ChoteiNendo())) || (!fukaNendo.equals(賦課情報.getFuka_FukaNendo()))
+                || (!tsuchishoNo.equals(賦課情報.getFuka_TsuchishoNo())) || (rirekiNo != 賦課情報.getFuka_RirekiNo())) {
             FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
             fukaJohoRelateEntity.set介護賦課Entity(fukaEntity);
             fukaJohoRelateEntity.set介護期別RelateEntity(kibetsuEntityList);
@@ -441,7 +460,10 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
 
     private void 保険料納入通知書発行(
             FuchoKariTsuchishoIkkatsuHakkoTempEntity entity, FukaJohoRelateEntity fukaJohoRelateEntity) {
-        Long shunoId = Long.valueOf(entity.get賦課情報().getShunoId());
+        Long shunoId = null;
+        if (entity.get賦課情報() != null && entity.get賦課情報().getFuka_ShunoId() != null) {
+            shunoId = Long.valueOf(entity.get賦課情報().getFuka_ShunoId().toString());
+        }
         市町村コード = 導入団体クラス.get地方公共団体コード();
         市町村名 = 導入団体クラス.get市町村名();
         List<Kitsuki> 出力期リスト = get出力期リスト(出力期);
@@ -451,28 +473,45 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
         保険料納入通知書仮算定情報.set帳票ID(帳票ID);
         保険料納入通知書仮算定情報.set処理区分(ShoriKubun.バッチ);
         保険料納入通知書仮算定情報.set地方公共団体(導入団体クラス);
-        FukaAtena 賦課情報_宛名_更正前 = new FukaAtena();
         IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名識別対象());
-        賦課情報_宛名_更正前.set賦課情報(get賦課情報(entity.get計算後情報_更正前(), shunoId));
-        賦課情報_宛名_更正前.set宛名(宛名);
+        if (entity.get計算後情報_更正前() != null && entity.get計算後情報_更正前().getChoteiNendo() != null) {
+            FukaAtena 賦課情報_宛名_更正前 = new FukaAtena();
+            賦課情報_宛名_更正前.set賦課情報(get賦課情報(entity.get計算後情報_更正前(), shunoId));
+            賦課情報_宛名_更正前.set宛名(宛名);
+            保険料納入通知書仮算定情報.set賦課の情報_更正前(賦課情報_宛名_更正前);
+        }
         FukaAtena 賦課情報_宛名_更正後 = new FukaAtena();
         賦課情報_宛名_更正後.set賦課情報(get賦課情報(entity.get計算後情報_更正後(), shunoId));
         賦課情報_宛名_更正後.set宛名(宛名);
-        保険料納入通知書仮算定情報.set賦課の情報_更正前(賦課情報_宛名_更正前);
         保険料納入通知書仮算定情報.set賦課の情報_更正後(賦課情報_宛名_更正後);
         保険料納入通知書仮算定情報.set納組情報(entity.get納組());
         保険料納入通知書仮算定情報.set普徴納期情報リスト(通知書共通情報.get普徴納期情報リスト());
         保険料納入通知書仮算定情報.set特徴納期情報リスト(通知書共通情報.get特徴納期情報リスト());
         IAtesaki 宛先情報 = AtesakiFactory.createInstance(entity.get宛先());
         保険料納入通知書仮算定情報.set宛先情報(宛先情報);
-        保険料納入通知書仮算定情報.set前年度賦課情報(new FukaJoho(fukaJohoRelateEntity));
+        if (fukaJohoRelateEntity != null && fukaJohoRelateEntity.get介護賦課Entity() != null) {
+            保険料納入通知書仮算定情報.set前年度賦課情報(new FukaJoho(fukaJohoRelateEntity));
+        }
         保険料納入通知書仮算定情報.set口座情報(new Koza(entity.get特定口座()));
-        保険料納入通知書仮算定情報.set徴収方法情報_更正前(get徴収方法情報(entity.get計算後情報_更正前()));
+        if (entity.get計算後情報_更正前() != null && entity.get計算後情報_更正前().getChoteiNendo() != null) {
+            保険料納入通知書仮算定情報.set徴収方法情報_更正前(get徴収方法情報(entity.get計算後情報_更正前()));
+        }
         保険料納入通知書仮算定情報.set徴収方法情報_更正後(get徴収方法情報(entity.get計算後情報_更正後()));
-//        保険料納入通知書仮算定情報.set対象者_追加含む_情報_更正前(new NenkinTokuchoKaifuJoho(
-//                entity.get年金特徴回付情報_更正前()));
-//        保険料納入通知書仮算定情報.set対象者_追加含む_情報_更正後(new NenkinTokuchoKaifuJoho(
-//                entity.get年金特徴回付情報_更正後()));
+        UeT0511NenkinTokuchoKaifuJohoEntity 年金特徴回付情報_更正前 = null;
+        UeT0511NenkinTokuchoKaifuJohoEntity 年金特徴回付情報_更正後 = new UeT0511NenkinTokuchoKaifuJohoEntity();
+        if (entity.get年金特徴回付情報_更正前() != null && entity.get年金特徴回付情報_更正前().getNenkinCode() != null) {
+            年金特徴回付情報_更正前 = new UeT0511NenkinTokuchoKaifuJohoEntity();
+            entitySet.年金特徴回付情報_類型転換(年金特徴回付情報_更正前, entity.get年金特徴回付情報_更正前());
+        }
+        if (entity.get年金特徴回付情報_更正後() != null && entity.get年金特徴回付情報_更正後().getNenkinCode() != null) {
+            entitySet.年金特徴回付情報_類型転換(年金特徴回付情報_更正後, entity.get年金特徴回付情報_更正後());
+        }
+        if (年金特徴回付情報_更正前 != null) {
+            保険料納入通知書仮算定情報.set対象者_追加含む_情報_更正前(new NenkinTokuchoKaifuJoho(
+                    年金特徴回付情報_更正前));
+        }
+        保険料納入通知書仮算定情報.set対象者_追加含む_情報_更正後(new NenkinTokuchoKaifuJoho(
+                年金特徴回付情報_更正後));
         保険料納入通知書仮算定情報.set収入情報(get収入情報(entity.get計算後情報_更正後()));
         保険料納入通知書仮算定情報.set帳票制御共通(帳票制御共通);
         NonyuTsuchiShoJohoFactory 納入通知書情報作成サービス = new NonyuTsuchiShoJohoFactory();
@@ -491,9 +530,11 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
         FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
         fukaJohoRelateEntity.set介護賦課Entity(fukaEntity);
         fukaJohoRelateEntity.set介護期別RelateEntity(kibetsuEntityList);
-        保険料納入通知書発行(lastEntity, fukaJohoRelateEntity);
-        permanentTableWriter.insert(get通知書発行後異動者(processParameter.getシステム日時(),
-                lastEntity.get計算後情報_更正後(), 連番.intValue()));
+        if (lastEntity != null) {
+            保険料納入通知書発行(lastEntity, fukaJohoRelateEntity);
+            permanentTableWriter.insert(get通知書発行後異動者(processParameter.getシステム日時(),
+                    lastEntity.get計算後情報_更正後(), 連番.intValue()));
+        }
 
         if (山分け区分_しない.equals(processParameter.getページごとに山分け())) {
             総ページ数 = スプール.get(String.valueOf(0)).pageCount().value();
@@ -503,8 +544,13 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
                     processParameter.get発行日(), 出力期, processParameter.get生活保護対象者をまとめて先頭に出力(),
                     processParameter.getページごとに山分け(), 市町村コード, 市町村名, 総ページ数);
         }
-        バッチ出力条件リストの出力(processParameter.get発行日(), 出力期, processParameter.get生活保護対象者をまとめて先頭に出力(),
-                processParameter.getページごとに山分け(), 市町村コード, 市町村名, new RString(総ページ数));
+        if (データ有無区分) {
+            バッチ出力条件リストの出力(processParameter.get発行日(), 出力期, processParameter.get生活保護対象者をまとめて先頭に出力(),
+                    processParameter.getページごとに山分け(), 市町村コード, 市町村名, new RString(総ページ数), CSV出力有無_あり, CSVファイル名_納入一覧表);
+        } else {
+            バッチ出力条件リストの出力(processParameter.get発行日(), 出力期, processParameter.get生活保護対象者をまとめて先頭に出力(),
+                    processParameter.getページごとに山分け(), 市町村コード, 市町村名, 定値_ゼロ, CSV出力有無_なし, CSVファイル名_なし);
+        }
 
         manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
         close納入通知書();
@@ -514,36 +560,56 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
             RString 納入通知書対象者, FlexibleDate 発行日, int 出力期, RString 生活保護者先頭出力フラグ, RString 山分け区分,
             LasdecCode 市町村コード, RString 市町村名, int ページ数) {
         List<RString> 帳票名リスト = new ArrayList<>();
-        帳票名リスト.add(帳票名);
+        帳票名リスト.add(代行プリント_帳票名);
         List<Decimal> ページ数リスト = new ArrayList<>();
         ページ数リスト.add(new Decimal(ページ数));
         List<RString> 抽出条件 = new ArrayList<>();
         抽出条件.add(パラメータ名_調定年度.concat(RString.FULL_SPACE).concat(調定年度.wareki().toDateString()));
         抽出条件.add(パラメータ名_賦課年度.concat(RString.FULL_SPACE).concat(賦課年度.wareki().toDateString()));
-        抽出条件.add(パラメータ名_対象者.concat(RString.FULL_SPACE).concat(納入通知書対象者));
+        抽出条件.add(パラメータ名_対象者.concat(RString.FULL_SPACE).concat(
+                NotsuKozaShutsuryokuTaisho.toValue(納入通知書対象者).get名称()));
         List<RString> 詳細設定 = new ArrayList<>();
         詳細設定.add(パラメータ名_発行日.concat(RString.FULL_SPACE).concat(発行日.wareki().toDateString()));
         詳細設定.add(パラメータ名_出力期.concat(RString.FULL_SPACE).concat(new RString(出力期)));
-        詳細設定.add(パラメータ名_生活保護対象者をまとめて先頭に出力.concat(RString.FULL_SPACE).concat(
-                生活保護者先頭出力フラグ));
-        詳細設定.add(パラメータ名_ページごとに山分け.concat(RString.FULL_SPACE).concat(山分け区分));
+        if (生活保護者先頭出力フラグ_する.equals(生活保護者先頭出力フラグ)) {
+            詳細設定.add(パラメータ名_生活保護対象者をまとめて先頭に出力.concat(RString.FULL_SPACE).concat(定値_する));
+        } else {
+            詳細設定.add(パラメータ名_生活保護対象者をまとめて先頭に出力.concat(RString.FULL_SPACE).concat(定値_しない));
+        }
+        if (ページごとに山分け_する.equals(山分け区分)) {
+            詳細設定.add(パラメータ名_ページごとに山分け.concat(RString.FULL_SPACE).concat(定値_する));
+        } else {
+            詳細設定.add(パラメータ名_ページごとに山分け.concat(RString.FULL_SPACE).concat(定値_しない));
+        }
         DaikoPrintItem item = new DaikoPrintItem(SubGyomuCode.DBB介護賦課, 市町村コード, 市町村名,
                 ジョブ番号.concat(RString.FULL_SPACE).concat(new RString(String.valueOf(JobContextHolder.getJobId()))),
-                処理名, 帳票ID.value(), 帳票名リスト, ページ数リスト, 抽出条件, 出力順リスト, 改頁条件リスト, 詳細設定);
-        DaikoPrintFactory.createInstance(item);
+                処理名, 代行プリント送付票_帳票ID.value(), 帳票名リスト, ページ数リスト, 抽出条件, 出力順リスト, 改頁条件リスト, 詳細設定);
+        IDaikoPrint daikoPrint = DaikoPrintFactory.createInstance(item);
+        daikoPrint.print();
     }
 
     private void バッチ出力条件リストの出力(FlexibleDate 発行日, int 出力期, RString 生活保護者先頭出力フラグ,
-            RString 山分け区分, LasdecCode 市町村コード, RString 市町村名, RString ページ数) {
+            RString 山分け区分, LasdecCode 市町村コード, RString 市町村名, RString ページ数, RString csv出力有無, RString csvファイル名) {
         List<RString> 出力条件リスト = new ArrayList<>();
         出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_発行日).concat(出力条件_右括弧).concat(
                 発行日.wareki().toDateString()));
         出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_出力期).concat(出力条件_右括弧).concat(new RString(出力期)));
-        出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_対象者).concat(出力条件_右括弧).concat(processParameter.get対象者()));
-        出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_生活保護対象者をまとめて先頭に出力).concat(出力条件_右括弧)
-                .concat(生活保護者先頭出力フラグ));
-        出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_ページごとに山分け).concat(出力条件_右括弧).
-                concat(山分け区分));
+        出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_対象者).concat(出力条件_右括弧).concat(
+                NotsuKozaShutsuryokuTaisho.toValue(processParameter.get対象者()).get名称()));
+        if (生活保護者先頭出力フラグ_する.equals(生活保護者先頭出力フラグ)) {
+            出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_生活保護対象者をまとめて先頭に出力).concat(出力条件_右括弧)
+                    .concat(定値_する));
+        } else {
+            出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_生活保護対象者をまとめて先頭に出力).concat(出力条件_右括弧)
+                    .concat(定値_しない));
+        }
+        if (ページごとに山分け_する.equals(山分け区分)) {
+            出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_ページごとに山分け).concat(出力条件_右括弧).
+                    concat(定値_する));
+        } else {
+            出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_ページごとに山分け).concat(出力条件_右括弧).
+                    concat(定値_しない));
+        }
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 帳票ID.value(),
                 市町村コード.value(),
@@ -551,8 +617,8 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 帳票名,
                 ページ数,
-                CSV出力有無_なし,
-                CSVファイル名_なし,
+                csv出力有無,
+                csvファイル名,
                 出力条件リスト);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
@@ -842,80 +908,82 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
     }
 
     private void set賦課情報集計前データ(final FukaJohoZenendoTmpEntity 賦課情報) {
-        choteiNendo = 賦課情報.getChoteiNendo();
-        fukaNendo = 賦課情報.getFukaNendo();
-        tsuchishoNo = 賦課情報.getTsuchishoNo();
-        rirekiNo = 賦課情報.getRirekiNo();
-        if (fukaEntity == null) {
+        choteiNendo = 賦課情報.getFuka_ChoteiNendo();
+        fukaNendo = 賦課情報.getFuka_FukaNendo();
+        tsuchishoNo = 賦課情報.getFuka_TsuchishoNo();
+        rirekiNo = 賦課情報.getFuka_RirekiNo();
+        if (fukaEntity == null && choteiNendo != null) {
             fukaEntity = new DbT2002FukaEntity();
-            fukaEntity.setChoteiNendo(賦課情報.getChoteiNendo());
-            fukaEntity.setFukaNendo(賦課情報.getFukaNendo());
-            fukaEntity.setTsuchishoNo(賦課情報.getTsuchishoNo());
-            fukaEntity.setRirekiNo(賦課情報.getRirekiNo());
-            fukaEntity.setHihokenshaNo(賦課情報.getHihokenshaNo());
-            fukaEntity.setShikibetsuCode(賦課情報.getShikibetsuCode());
-            fukaEntity.setSetaiCode(賦課情報.getSetaiCode());
-            fukaEntity.setSetaiInsu(賦課情報.getSetaiInsu());
-            fukaEntity.setShikakuShutokuYMD(賦課情報.getShikakuShutokuYMD());
-            fukaEntity.setShikakuShutokuJiyu(賦課情報.getShikakuShutokuJiyu());
-            fukaEntity.setShikakuSoshitsuYMD(賦課情報.getShikakuSoshitsuYMD());
-            fukaEntity.setShikakuSoshitsuJiyu(賦課情報.getShikakuSoshitsuJiyu());
-            fukaEntity.setSeihofujoShurui(賦課情報.getSeihofujoShurui());
-            fukaEntity.setSeihoKaishiYMD(賦課情報.getSeihoKaishiYMD());
-            fukaEntity.setSeihoHaishiYMD(賦課情報.getSeihoHaishiYMD());
-            fukaEntity.setRonenKaishiYMD(賦課情報.getRonenKaishiYMD());
-            fukaEntity.setRonenHaishiYMD(賦課情報.getRonenHaishiYMD());
-            fukaEntity.setFukaYMD(賦課情報.getFukaYMD());
-            fukaEntity.setKazeiKubun(賦課情報.getKazeiKubun());
-            fukaEntity.setSetaikazeiKubun(賦課情報.getSetaikazeiKubun());
-            fukaEntity.setGokeiShotokuGaku(賦課情報.getGokeiShotokuGaku());
-            fukaEntity.setNenkinShunyuGaku(賦課情報.getNenkinShunyuGaku());
-            fukaEntity.setHokenryoDankai(賦課情報.getHokenryoDankai());
-            fukaEntity.setHokenryoDankai1(賦課情報.getHokenryoDankai1());
-            fukaEntity.setNengakuHokenryo1(賦課情報.getNengakuHokenryo1());
-            fukaEntity.setTsukiwariStartYM1(賦課情報.getTsukiwariStartYM1());
-            fukaEntity.setTsukiwariEndYM1(賦課情報.getTsukiwariEndYM1());
-            fukaEntity.setHokenryoDankai2(賦課情報.getHokenryoDankai2());
-            fukaEntity.setNengakuHokenryo2(賦課情報.getNengakuHokenryo2());
-            fukaEntity.setTsukiwariStartYM2(賦課情報.getTsukiwariStartYM2());
-            fukaEntity.setTsukiwariEndYM2(賦課情報.getTsukiwariEndYM2());
-            fukaEntity.setChoteiNichiji(賦課情報.getChoteiNichiji());
-            fukaEntity.setChoteiJiyu1(賦課情報.getChoteiJiyu1());
-            fukaEntity.setChoteiJiyu2(賦課情報.getChoteiJiyu2());
-            fukaEntity.setChoteiJiyu3(賦課情報.getChoteiJiyu3());
-            fukaEntity.setChoteiJiyu4(賦課情報.getChoteiJiyu4());
-            fukaEntity.setKoseiM(賦課情報.getKoseiM());
-            fukaEntity.setGemmenMaeHokenryo(賦課情報.getGemmenMaeHokenryo());
-            fukaEntity.setGemmenGaku(賦課情報.getGemmenGaku());
-            fukaEntity.setKakuteiHokenryo(賦課情報.getKakuteiHokenryo());
-            fukaEntity.setHokenryoDankaiKarisanntei(賦課情報.getHokenryoDankaiKarisanntei());
-            fukaEntity.setChoshuHohoRirekiNo(賦課情報.getChoshuHohoRirekiNo());
-            fukaEntity.setIdoKijunNichiji(賦課情報.getIdoKijunNichiji());
-            fukaEntity.setKozaKubun(賦課情報.getKozaKubun());
-            fukaEntity.setKyokaisoKubun(賦課情報.getKyokaisoKubun());
-            fukaEntity.setShokkenKubun(賦課情報.getShokkenKubun());
-            fukaEntity.setFukaShichosonCode(賦課情報.getFukaShichosonCode());
-            fukaEntity.setTkSaishutsuKampuGaku(賦課情報.getTkSaishutsuKampuGaku());
-            fukaEntity.setFuSaishutsuKampuGaku(賦課情報.getFuSaishutsuKampuGaku());
+            fukaEntity.setChoteiNendo(賦課情報.getFuka_ChoteiNendo());
+            fukaEntity.setFukaNendo(賦課情報.getFuka_FukaNendo());
+            fukaEntity.setTsuchishoNo(賦課情報.getFuka_TsuchishoNo());
+            fukaEntity.setRirekiNo(賦課情報.getFuka_RirekiNo());
+            fukaEntity.setHihokenshaNo(賦課情報.getFuka_HihokenshaNo());
+            fukaEntity.setShikibetsuCode(賦課情報.getFuka_ShikibetsuCode());
+            fukaEntity.setSetaiCode(賦課情報.getFuka_SetaiCode());
+            fukaEntity.setSetaiInsu(賦課情報.getFuka_SetaiInsu());
+            fukaEntity.setShikakuShutokuYMD(賦課情報.getFuka_ShikakuShutokuYMD());
+            fukaEntity.setShikakuShutokuJiyu(賦課情報.getFuka_ShikakuShutokuJiyu());
+            fukaEntity.setShikakuSoshitsuYMD(賦課情報.getFuka_ShikakuSoshitsuYMD());
+            fukaEntity.setShikakuSoshitsuJiyu(賦課情報.getFuka_ShikakuSoshitsuJiyu());
+            fukaEntity.setSeihofujoShurui(賦課情報.getFuka_SeihofujoShurui());
+            fukaEntity.setSeihoKaishiYMD(賦課情報.getFuka_SeihoKaishiYMD());
+            fukaEntity.setSeihoHaishiYMD(賦課情報.getFuka_SeihoHaishiYMD());
+            fukaEntity.setRonenKaishiYMD(賦課情報.getFuka_RonenKaishiYMD());
+            fukaEntity.setRonenHaishiYMD(賦課情報.getFuka_RonenHaishiYMD());
+            fukaEntity.setFukaYMD(賦課情報.getFuka_FukaYMD());
+            fukaEntity.setKazeiKubun(賦課情報.getFuka_KazeiKubun());
+            fukaEntity.setSetaikazeiKubun(賦課情報.getFuka_SetaikazeiKubun());
+            fukaEntity.setGokeiShotokuGaku(賦課情報.getFuka_GokeiShotokuGaku());
+            fukaEntity.setNenkinShunyuGaku(賦課情報.getFuka_NenkinShunyuGaku());
+            fukaEntity.setHokenryoDankai(賦課情報.getFuka_HokenryoDankai());
+            fukaEntity.setHokenryoDankai1(賦課情報.getFuka_HokenryoDankai1());
+            fukaEntity.setNengakuHokenryo1(賦課情報.getFuka_NengakuHokenryo1());
+            fukaEntity.setTsukiwariStartYM1(賦課情報.getFuka_TsukiwariStartYM1());
+            fukaEntity.setTsukiwariEndYM1(賦課情報.getFuka_TsukiwariEndYM1());
+            fukaEntity.setHokenryoDankai2(賦課情報.getFuka_HokenryoDankai2());
+            fukaEntity.setNengakuHokenryo2(賦課情報.getFuka_NengakuHokenryo2());
+            fukaEntity.setTsukiwariStartYM2(賦課情報.getFuka_TsukiwariStartYM2());
+            fukaEntity.setTsukiwariEndYM2(賦課情報.getFuka_TsukiwariEndYM2());
+            fukaEntity.setChoteiNichiji(賦課情報.getFuka_ChoteiNichiji());
+            fukaEntity.setChoteiJiyu1(賦課情報.getFuka_ChoteiJiyu1());
+            fukaEntity.setChoteiJiyu2(賦課情報.getFuka_ChoteiJiyu2());
+            fukaEntity.setChoteiJiyu3(賦課情報.getFuka_ChoteiJiyu3());
+            fukaEntity.setChoteiJiyu4(賦課情報.getFuka_ChoteiJiyu4());
+            fukaEntity.setKoseiM(賦課情報.getFuka_KoseiM());
+            fukaEntity.setGemmenMaeHokenryo(賦課情報.getFuka_GemmenMaeHokenryo());
+            fukaEntity.setGemmenGaku(賦課情報.getFuka_GemmenGaku());
+            fukaEntity.setKakuteiHokenryo(賦課情報.getFuka_KakuteiHokenryo());
+            fukaEntity.setHokenryoDankaiKarisanntei(賦課情報.getFuka_HokenryoDankaiKarisanntei());
+            fukaEntity.setChoshuHohoRirekiNo(賦課情報.getFuka_ChoshuHohoRirekiNo());
+            fukaEntity.setIdoKijunNichiji(賦課情報.getFuka_IdoKijunNichiji());
+            fukaEntity.setKozaKubun(賦課情報.getFuka_KozaKubun());
+            fukaEntity.setKyokaisoKubun(賦課情報.getFuka_KyokaisoKubun());
+            fukaEntity.setShokkenKubun(賦課情報.getFuka_ShokkenKubun());
+            fukaEntity.setFukaShichosonCode(賦課情報.getFuka_FukaShichosonCode());
+            fukaEntity.setTkSaishutsuKampuGaku(賦課情報.getFuka_TkSaishutsuKampuGaku());
+            fukaEntity.setFuSaishutsuKampuGaku(賦課情報.getFuka_FuSaishutsuKampuGaku());
         }
 
         KibetsuEntity 介護期別Relate = new KibetsuEntity();
 
-        if (kibetsuEntity == null || (!kibetsuEntity.getChoshuHouhou().equals(賦課情報.getChoshuHouhou()))
-                || (kibetsuEntity.getKi() != 賦課情報.getKi())) {
+        if ((kibetsuEntity == null && choteiNendo != null)
+                || ((kibetsuEntity != null)
+                && ((!kibetsuEntity.getChoshuHouhou().equals(賦課情報.getFuka_ChoshuHouhou()))
+                || (kibetsuEntity.getKi() != 賦課情報.getFuka_Ki())))) {
             kibetsuEntity = new DbT2003KibetsuEntity();
-            kibetsuEntity.setChoteiNendo(賦課情報.getChoteiNendo());
-            kibetsuEntity.setFukaNendo(賦課情報.getFukaNendo());
-            kibetsuEntity.setTsuchishoNo(賦課情報.getTsuchishoNo());
-            kibetsuEntity.setRirekiNo(賦課情報.getRirekiNo());
-            kibetsuEntity.setChoteiId(賦課情報.getChoteiId());
-            kibetsuEntity.setChoshuHouhou(賦課情報.getChoshuHouhou());
-            kibetsuEntity.setKi(賦課情報.getKi());
+            kibetsuEntity.setChoteiNendo(賦課情報.getFuka_ChoteiNendo());
+            kibetsuEntity.setFukaNendo(賦課情報.getFuka_FukaNendo());
+            kibetsuEntity.setTsuchishoNo(賦課情報.getFuka_TsuchishoNo());
+            kibetsuEntity.setRirekiNo(賦課情報.getFuka_RirekiNo());
+            kibetsuEntity.setChoteiId(賦課情報.getFuka_ChoteiId());
+            kibetsuEntity.setChoshuHouhou(賦課情報.getFuka_ChoshuHouhou());
+            kibetsuEntity.setKi(賦課情報.getFuka_Ki());
             介護期別Relate.set介護期別Entity(kibetsuEntity);
             UrT0705ChoteiKyotsuEntity choteiKyotsuEntity = new UrT0705ChoteiKyotsuEntity();
-            choteiKyotsuEntity.setChoteiId(賦課情報.getChoteiId().longValue());
-            choteiKyotsuEntity.setChoteigaku(賦課情報.getChoteigaku());
-            choteiKyotsuEntity.setShunoId(Long.valueOf(賦課情報.getShunoId()));
+            choteiKyotsuEntity.setChoteiId(賦課情報.getFuka_ChoteiId().longValue());
+            choteiKyotsuEntity.setChoteigaku(賦課情報.getFuka_Choteigaku());
+            choteiKyotsuEntity.setShunoId(Long.valueOf(賦課情報.getFuka_ShunoId().toString()));
             choteiKyotsuEntityList.add(choteiKyotsuEntity);
             介護期別Relate.set調定共通Entity(choteiKyotsuEntityList);
             kibetsuEntityList.add(介護期別Relate);
@@ -1117,14 +1185,7 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
                     ? RString.EMPTY : new RString(編集後仮算定通知書共通情報.get更正後().get保険料率().toString()));
         }
         set当期(編集後仮算定通知書共通情報, 出力期, bodyList);
-        if (isNull(編集後仮算定通知書共通情報.get編集後宛先())
-                || isNull(編集後仮算定通知書共通情報.get編集後宛先().get宛先種別())
-                || (!AtesakiShubetsu.本人.equals(編集後仮算定通知書共通情報.get編集後宛先().get宛先種別()))) {
-            bodyList.add(RString.EMPTY);
-        } else {
-            bodyList.add(編集後仮算定通知書共通情報.get編集後宛先().get宛先名称().getName().value());
-
-        }
+        set納付人_送付先(編集後仮算定通知書共通情報, bodyList);
         if (isNull(編集後仮算定通知書共通情報.get更正後())) {
             bodyList.add(RString.EMPTY);
         } else {
@@ -1164,6 +1225,19 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
         set次期以降(編集後仮算定通知書共通情報, 出力期, bodyList);
         bodyList.add(get口座情報(編集後仮算定通知書共通情報));
         return bodyList;
+    }
+
+    private void set納付人_送付先(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報, List<RString> bodyList) {
+        if (isNull(編集後仮算定通知書共通情報.get編集後宛先())
+                || (isNull(編集後仮算定通知書共通情報.get編集後宛先().get宛先名称())
+                && isNull(編集後仮算定通知書共通情報.get編集後宛先().get本人名称()))
+                || (!isNull(編集後仮算定通知書共通情報.get編集後宛先().get宛先名称())
+                && 編集後仮算定通知書共通情報.get編集後宛先().get宛先名称().equals(編集後仮算定通知書共通情報.get編集後宛先().get本人名称()))) {
+            bodyList.add(RString.EMPTY);
+        } else {
+            bodyList.add(定値_ほし.concat(RString.FULL_SPACE)
+                    .concat(編集後仮算定通知書共通情報.get編集後宛先().get宛先名称().getName().getColumnValue()));
+        }
     }
 
     private RString get帳票タイプ() {
@@ -1593,7 +1667,7 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
             UrT0705ChoteiKyotsuEntity 調定共通Entity = new UrT0705ChoteiKyotsuEntity();
             調定共通Entity.setChoteiId(new Decimal(index).longValue());
             調定共通Entity.setChoteigaku(get特徴調定額(計算後情報, index));
-            調定共通Entity.setShunoId(shunoId);
+            調定共通Entity.setShunoId(Long.valueOf(index));
             調定共通EntityList.add(調定共通Entity);
             介護期別Relate.set介護期別Entity(介護期別Entity);
             介護期別Relate.set調定共通Entity(調定共通EntityList);
@@ -1612,7 +1686,7 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
             List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
             UrT0705ChoteiKyotsuEntity 調定共通Entity = new UrT0705ChoteiKyotsuEntity();
             調定共通Entity.setChoteiId(new Decimal(index).add(Decimal.TEN).longValue());
-            調定共通Entity.setShunoId(shunoId);
+            調定共通Entity.setShunoId(Long.valueOf(index));
             調定共通Entity.setChoteigaku(get普通調定額(計算後情報, index));
             調定共通EntityList.add(調定共通Entity);
             介護期別Relate.set介護期別Entity(介護期別Entity);
@@ -1754,6 +1828,11 @@ public class PrtNonyuTsuchishoHakkoProcess extends BatchProcessBase<FuchoKariTsu
         } else {
             boolean 区分 = false;
             List<UniversalPhase> 普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get更正後普徴期別金額リスト();
+            if (NUM_1 == 普徴期別金額リスト.size() && NUM_1 == 普徴期別金額リスト.get(0).get期()) {
+                bodyList.add(isNull(普徴期別金額リスト.get(0).get金額()) ? RString.EMPTY
+                        : DecimalFormatter.toコンマ区切りRString(普徴期別金額リスト.get(0).get金額(), 0));
+                return;
+            }
             for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
                 if (出力期 == (普徴期別金額.get期() + NUM_1)) {
                     区分 = true;
