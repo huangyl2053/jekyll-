@@ -127,9 +127,9 @@
         tmp1."dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM" DESC
         ) サービス費申請情報
         WHERE 
-        サービス費申請情報.rowNo = 2
+        サービス費申請情報.rowNo = 1
         ) AS サービス費申請情報
-        WHERE サービス費申請情報."dbT3110JigyoKogakuShikyuShinsei_shiharaiHohoKubunCode" = '2'
+        WHERE サービス費申請情報."dbT3110JigyoKogakuShikyuShinsei_shiharaiHohoKubunCode" = '' OR サービス費申請情報."dbT3110JigyoKogakuShikyuShinsei_shiharaiHohoKubunCode" IS NULL
     </select>
     <sql id="自動償還対象For事業高額介護サービス費">
         SELECT 

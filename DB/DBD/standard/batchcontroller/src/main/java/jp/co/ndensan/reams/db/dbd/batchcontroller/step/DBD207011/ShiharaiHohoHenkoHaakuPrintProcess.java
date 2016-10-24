@@ -355,7 +355,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                     期別情報.set保険料金(収納状況情報Data.get収納状況_調定額());
                     期別情報.set納期限(edit日期(収納状況情報Data.get収納状況_納期限()));
                     期別情報.set滞納額(収納状況情報Data.get収納状況_未納額());
-                    if (収納状況情報Data.get収納状況_滞納区分() != null) {
+                    if (収納状況情報Data.get収納状況_滞納区分() != null && !収納状況情報Data.get収納状況_滞納区分().isEmpty()) {
                         期別情報.set滞納区分(TainoKubun.toValue(収納状況情報Data.get収納状況_滞納区分()));
                     }
 

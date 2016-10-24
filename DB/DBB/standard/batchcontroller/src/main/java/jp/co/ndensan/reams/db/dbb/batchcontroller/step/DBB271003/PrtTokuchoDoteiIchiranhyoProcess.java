@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB271003;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshudoteiichiran.TokubetsuChoshuDoteiIchiranOutputOrder;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshudoteiichiran.TokubetsuChoshuDoteiIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshudoteiichiran.TokubetsuChoshuDoteiIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshudoteiichiran.TokushoTaishioIchiranEntity;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -44,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -80,6 +83,8 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
     private Association 導入団体クラス;
     private RString 通知内容コード;
     private IOutputOrder 出力順;
+    private List<RString> pageBreakKeys;
+    private List<RString> 出力順項目リスト;
     @BatchWriter
     private CsvWriter<TokubetsuChoshuDoteiIchiranCSVEntity> eucCsvWriter;
 
@@ -89,6 +94,8 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
 
     @Override
     protected void initialize() {
+        pageBreakKeys = new ArrayList<>();
+        出力順項目リスト = new ArrayList<>();
         導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         if (定数_10.equals(parameter.get特別徴収開始月())) {
             通知内容コード = TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード();
@@ -103,13 +110,26 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
                     ReportIdDBB.DBB200031.getReportId(), Long.valueOf(parameter.get同定出力順().toString()));
             if (出力順 != null) {
                 parameter.set同定出力順(MyBatisOrderByClauseCreator.create(TokubetsuChoshuDoteiIchiranOutputOrder.class, 出力順));
+                setPageBreakKeys();
+            }
+        }
+    }
+
+    private void setPageBreakKeys() {
+        for (ISetSortItem item : 出力順.get設定項目リスト()) {
+            出力順項目リスト.add(item.get項目名());
+            if (item.is改頁項目()) {
+                pageBreakKeys.add(item.get項目ID());
             }
         }
     }
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200031.getReportId().value()).create();
+        PageBreaker<TokubetsuChoshuDoteiIchiranSource> breaker = new TokubetsuChoshuDoteiIchiranPageBreak(pageBreakKeys);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200031.getReportId().value()).
+                addBreak(breaker).
+                create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
@@ -201,7 +221,7 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
                 entity.getKanjiJusho()
         );
         TokubetsuChoshuDoteiIchiranReport report = new TokubetsuChoshuDoteiIchiranReport(
-                導入団体クラス, null, null, target, parameter.get特別徴収開始月());
+                導入団体クラス, 出力順項目リスト, pageBreakKeys, target, parameter.get特別徴収開始月());
         report.writeBy(reportSourceWriter);
     }
 
