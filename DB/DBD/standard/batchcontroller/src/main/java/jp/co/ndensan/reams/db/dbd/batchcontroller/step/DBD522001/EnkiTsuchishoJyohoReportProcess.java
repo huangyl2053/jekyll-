@@ -79,6 +79,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
     private SofubutsuAtesakiSource sofubutsuAtesakiSource;
     private static final RString 申請書管理番号リスト = new RString("【申請書管理番号】");
     private static final RString 申請書管理番号空白 = new RString("　　　　　　　　　　　　");
+    private static final RString 通知書発行日 = new RString("【通知書発行日】");
 
     @Override
     protected IBatchReader createReader() {
@@ -235,6 +236,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
         boolean 空白Flag = Boolean.FALSE;
+        出力条件.add(通知書発行日.concat(get通知書発行日リスト()));
         if (parameter.get申請書管理番号リスト() != null) {
             for (RString 申請書管理番号 : parameter.get申請書管理番号リスト()) {
                 if (!空白Flag) {
@@ -246,6 +248,19 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
             }
         }
         return 出力条件;
+    }
+
+    private RString get通知書発行日リスト() {
+        RString 通知書発行日リスト = RString.EMPTY;
+        for (FlexibleDate date : parameter.get通知書発行日()) {
+            if (通知書発行日リスト.isEmpty()) {
+                通知書発行日リスト = 通知書発行日リスト.concat(date.wareki().toDateString());
+            } else {
+                通知書発行日リスト = 通知書発行日リスト.concat(",").concat(date.wareki().toDateString());
+            }
+
+        }
+        return 通知書発行日リスト;
     }
 
 }
