@@ -67,6 +67,7 @@ public class TokuchoInfoFDownloadHandler {
     private static final int INT_0 = 0;
     private static final int INT_6 = 6;
     private static final int INT_4 = 4;
+    private static final RString STR_済 = new RString("済");
     private static final RString STR_1 = new RString("1");
     private static final RString STR_2 = new RString("2");
     private static final RString STR_3 = new RString("3");
@@ -76,6 +77,15 @@ public class TokuchoInfoFDownloadHandler {
     private static final RString STR_7 = new RString("7");
     private static final RString STR_8 = new RString("8");
     private static final RString STR_9 = new RString("9");
+    private static final RString STR_01 = new RString("01");
+    private static final RString STR_02 = new RString("02");
+    private static final RString STR_03 = new RString("03");
+    private static final RString STR_04 = new RString("04");
+    private static final RString STR_05 = new RString("05");
+    private static final RString STR_06 = new RString("06");
+    private static final RString STR_07 = new RString("07");
+    private static final RString STR_08 = new RString("08");
+    private static final RString STR_09 = new RString("09");
     private static final RString STR_10 = new RString("10");
     private static final RString STR_11 = new RString("11");
     private static final RString STR_12 = new RString("12");
@@ -134,6 +144,8 @@ public class TokuchoInfoFDownloadHandler {
     }
 
     private void 市町村処理状況グリッド設定(RString 市町村ID, FlexibleYear year) {
+        List<RString> 状況済月 = TokuchoInfoShoriDateKanri.createInstance().get状況済月();
+        Map<RString, RString> 処理月Map = get処理月Map();
         List<dgShoriKakunin_Row> 処理状況Rows = new ArrayList<>();
         List<RString> 処理月List = get処理状況グリッド処理月List();
         for (RString 処理月 : 処理月List) {
@@ -145,8 +157,11 @@ public class TokuchoInfoFDownloadHandler {
                 row.getTxtShoriMei().setValue(特徴異動情報作成);
             }
             row.getTxtShoriNichiji().setValue(get市町村ID処理日付(市町村ID, year));
-            //TODO QA1412
-            row.getTxtJokyo().setValue(RString.EMPTY);
+            if (状況済月.contains(処理月Map.get(処理月))) {
+                row.getTxtJokyo().setValue(STR_済);
+            } else {
+                row.getTxtJokyo().setValue(RString.EMPTY);
+            }
             処理状況Rows.add(row);
         }
         div.getTokuchoInfoDownloadShoriKakunin().getDgShoriKakunin().setDataSource(処理状況Rows);
@@ -401,6 +416,8 @@ public class TokuchoInfoFDownloadHandler {
         }
         List<dgShoriKakunin_Row> 処理状況Rows = new ArrayList<>();
         List<RString> 処理月List = get処理状況グリッド処理月List();
+        List<RString> 状況済月 = TokuchoInfoShoriDateKanri.createInstance().get状況済月();
+        Map<RString, RString> map = get処理月Map();
         for (RString 処理月 : 処理月List) {
             dgShoriKakunin_Row row = new dgShoriKakunin_Row();
             row.getTxtTsuki().setValue(処理月);
@@ -410,8 +427,11 @@ public class TokuchoInfoFDownloadHandler {
                 row.getTxtShoriMei().setValue(特徴異動情報作成);
             }
             row.getTxtShoriNichiji().setValue(処理日時);
-            //TODO QA1412
-            row.getTxtJokyo().setValue(RString.EMPTY);
+            if (状況済月.contains(map.get(処理月))) {
+                row.getTxtJokyo().setValue(STR_済);
+            } else {
+                row.getTxtJokyo().setValue(RString.EMPTY);
+            }
             処理状況Rows.add(row);
         }
         div.getTokuchoInfoDownloadShoriKakunin().getDgShoriKakunin().setDataSource(処理状況Rows);
@@ -496,4 +516,20 @@ public class TokuchoInfoFDownloadHandler {
         }
     }
 
+    private Map<RString, RString> get処理月Map() {
+        Map<RString, RString> 処理月Map = new HashMap<>();
+        処理月Map.put(月_4, STR_04);
+        処理月Map.put(月_5, STR_05);
+        処理月Map.put(月_6, STR_06);
+        処理月Map.put(月_7, STR_07);
+        処理月Map.put(月_8, STR_08);
+        処理月Map.put(月_9, STR_09);
+        処理月Map.put(月_10, STR_10);
+        処理月Map.put(月_11, STR_11);
+        処理月Map.put(月_12, STR_12);
+        処理月Map.put(月_1, STR_01);
+        処理月Map.put(月_2, STR_02);
+        処理月Map.put(月_3, STR_03);
+        return 処理月Map;
+    }
 }

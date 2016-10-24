@@ -42,10 +42,10 @@ public class InsIdoIchiji1TempTempProcess extends BatchProcessBase<IdoTblTmpEnti
     private static final RString 定数_11 = new RString("11");
     private static final RString 定数_12 = new RString("12");
     private static final RString 定数_13 = new RString("13");
-    private static final RString 定数_14 = new RString("14");
-    private static final RString 定数_15 = new RString("15");
+//    private static final RString 定数_14 = new RString("14");
+//    private static final RString 定数_15 = new RString("15");
     private static final RString 定数_16 = new RString("16");
-    private static final RString 定数_17 = new RString("17");
+//    private static final RString 定数_17 = new RString("17");
 
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
