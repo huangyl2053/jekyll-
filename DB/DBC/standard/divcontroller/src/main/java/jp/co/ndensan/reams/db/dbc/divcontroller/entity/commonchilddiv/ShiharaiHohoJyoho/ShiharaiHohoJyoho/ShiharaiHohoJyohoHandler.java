@@ -963,9 +963,12 @@ public class ShiharaiHohoJyohoHandler {
             return ShunoKamokuShubetsu.介護給付_償還;
 
         }
-        if (高額サービス費支給申請.equals(uiContainerId) || 総合事業高額サービス費支給申請.equals(uiContainerId)) {
+        if (高額サービス費支給申請.equals(uiContainerId)) {
 
             return ShunoKamokuShubetsu.介護給付_高額;
+        }
+        if (総合事業高額サービス費支給申請.equals(uiContainerId)) {
+            return ShunoKamokuShubetsu.介護給付_事業高額;
         }
         // TODO QA.1583
         if (高額合算支給申請.equals(uiContainerId)
