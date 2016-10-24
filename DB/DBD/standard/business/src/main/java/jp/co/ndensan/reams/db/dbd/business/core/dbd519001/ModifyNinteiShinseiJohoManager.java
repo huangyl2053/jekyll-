@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -168,6 +171,7 @@ public class ModifyNinteiShinseiJohoManager {
     private static final int NO_169 = 169;
     private static final int NO_170 = 170;
     private static final int NO_171 = 171;
+    private static final RString EMPTRY = new RString("00000000");
     private RString 編集状況フラグ = new RString("0");
 
     /**
@@ -213,38 +217,38 @@ public class ModifyNinteiShinseiJohoManager {
     private void setTempEntity(KouikiyoukaigoNinteishinseiJouhouTempEntity tempEntity,
             List<DbT4150RenrakusakiJohoEntity> 介護連絡先情報List) {
         if (介護連絡先情報List.size() >= 1) {
-            if (介護連絡先情報List.get(0).getRenrakusakiShimei() != null) {
-                tempEntity.setHonninKinkyuurenrakuMeishou1(介護連絡先情報List.get(0).getRenrakusakiShimei().value());
-            } else {
-                tempEntity.setHonninKinkyuurenrakuMeishou1(RString.EMPTY);
-            }
-            if (介護連絡先情報List.get(0).getRenrakusakiJusho() != null) {
-                tempEntity.setHonninKinkyuurenrakuJosho1(介護連絡先情報List.get(0).getRenrakusakiJusho().value());
-            } else {
-                tempEntity.setHonninKinkyuurenrakuJosho1(RString.EMPTY);
-            }
-            if (介護連絡先情報List.get(0).getRenrakusakiTelNo() != null) {
-                tempEntity.setHonninKinkyuurenrakuNo1(介護連絡先情報List.get(0).getRenrakusakiTelNo().value());
-            } else {
-                tempEntity.setHonninKinkyuurenrakuNo1(RString.EMPTY);
-            }
+            tempEntity.setHonninKinkyuurenrakuMeishou1(checkForNull(介護連絡先情報List.get(0).getRenrakusakiShimei()));
+            tempEntity.setHonninKinkyuurenrakuJosho1(checkForNull(介護連絡先情報List.get(0).getRenrakusakiJusho()));
+            tempEntity.setHonninKinkyuurenrakuNo1(checkForNull(介護連絡先情報List.get(0).getRenrakusakiTelNo()));
         }
         if (介護連絡先情報List.size() >= 2) {
-            if (介護連絡先情報List.get(1).getRenrakusakiShimei() != null) {
-                tempEntity.setHonninKinkyuurenrakuMeishou2(介護連絡先情報List.get(1).getRenrakusakiShimei().value());
-            } else {
-                tempEntity.setHonninKinkyuurenrakuMeishou2(RString.EMPTY);
-            }
-            if (介護連絡先情報List.get(1).getRenrakusakiJusho() != null) {
-                tempEntity.setHonninKinkyuurenrakuJosho2(介護連絡先情報List.get(1).getRenrakusakiJusho().value());
-            } else {
-                tempEntity.setHonninKinkyuurenrakuJosho2(RString.EMPTY);
-            }
-            if (介護連絡先情報List.get(1).getRenrakusakiTelNo() != null) {
-                tempEntity.setHonninKinkyuurenrakuNo2(介護連絡先情報List.get(1).getRenrakusakiTelNo().value());
-            } else {
-                tempEntity.setHonninKinkyuurenrakuNo2(RString.EMPTY);
-            }
+            tempEntity.setHonninKinkyuurenrakuMeishou2(checkForNull(介護連絡先情報List.get(1).getRenrakusakiShimei()));
+            tempEntity.setHonninKinkyuurenrakuJosho2(checkForNull(介護連絡先情報List.get(1).getRenrakusakiJusho()));
+            tempEntity.setHonninKinkyuurenrakuNo2(checkForNull(介護連絡先情報List.get(1).getRenrakusakiTelNo()));
+        }
+    }
+
+    private RString checkForNull(AtenaMeisho renrakusakiShimei) {
+        if (renrakusakiShimei != null) {
+            return renrakusakiShimei.value();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString checkForNull(AtenaJusho atenaJusho) {
+        if (atenaJusho != null) {
+            return atenaJusho.value();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString checkForNull(TelNo renrakusakiTelNo) {
+        if (renrakusakiTelNo != null) {
+            return renrakusakiTelNo.value();
+        } else {
+            return RString.EMPTY;
         }
     }
 
@@ -259,7 +263,7 @@ public class ModifyNinteiShinseiJohoManager {
                 編集状況フラグ = new RString("1");
             }
         }
-        if (tempEntity.getShichousonCode().isEmpty() || tempEntity.getShichousonCode().equals(new RString("00000000"))) {
+        if (tempEntity.getShichousonCode().isEmpty() || tempEntity.getShichousonCode().equals(EMPTRY)) {
             tempEntity.setShichousonCode(new RString("市町村コードの入力がありません"));
             編集状況フラグ = new RString("1");
         }
@@ -277,7 +281,7 @@ public class ModifyNinteiShinseiJohoManager {
 
     private void checkTempEntity1(KouikiyoukaigoNinteishinseiJouhouTempEntity tempEntity, ModifyNinteiShinseiJohoEntity entity) {
         if (entity.get認定申請年月日() == null || entity.get認定申請年月日().isEmpty()
-                || tempEntity.getNinteiShinseiYMD().equals(new RString("00000000"))) {
+                || tempEntity.getNinteiShinseiYMD().equals(EMPTRY)) {
             tempEntity.setNinteiShinseiYMD(new RString("申請日の入力がありません"));
             編集状況フラグ = new RString("1");
         } else if (!entity.get認定申請年月日().isValid()) {
@@ -289,7 +293,7 @@ public class ModifyNinteiShinseiJohoManager {
             編集状況フラグ = new RString("1");
         }
         if (entity.get生年月日() == null || tempEntity.getSeinengappiYMD().isEmpty()
-                || tempEntity.getSeinengappiYMD().equals(new RString("00000000"))) {
+                || tempEntity.getSeinengappiYMD().equals(EMPTRY)) {
             tempEntity.setSeinengappiYMD(new RString("生年月日の入力がありません"));
             編集状況フラグ = new RString("1");
         } else if (!entity.get生年月日().isValid()) {
@@ -301,7 +305,7 @@ public class ModifyNinteiShinseiJohoManager {
                 JuminJotai.住民,
                 FlexibleDate.MAX);
         if (ageCalculator.get年齢() == null || entity.get生年月日() == null || ageCalculator.get年齢().isEmpty()
-                || entity.get生年月日().isEmpty() || tempEntity.getSeinengappiYMD().equals(new RString("00000000"))
+                || entity.get生年月日().isEmpty() || tempEntity.getSeinengappiYMD().equals(EMPTRY)
                 || !entity.get生年月日().isValid()) {
             tempEntity.setAge(new RString("年齢の算出が出来ませんでした"));
             編集状況フラグ = new RString("1");
@@ -337,26 +341,21 @@ public class ModifyNinteiShinseiJohoManager {
             tempEntity.setHihokenshaNo(new RString("被保険者番号の桁数が間違っています"));
             編集状況フラグ = new RString("1");
         }
-        if (!entity.get前回認定有効期間開始().isEmpty()) {
-            if (!entity.get前回認定有効期間開始().isValid()) {
-                tempEntity.setZenkaiNinteiYuukoukaishikikan(new RString("認定有効期間開始日のデータが不正です"));
-                編集状況フラグ = new RString("1");
-            }
+        if (!entity.get前回認定有効期間開始().isEmpty() && !entity.get前回認定有効期間開始().isValid()) {
+            tempEntity.setZenkaiNinteiYuukoukaishikikan(new RString("認定有効期間開始日のデータが不正です"));
+            編集状況フラグ = new RString("1");
         }
-        if (!entity.get前回認定有効期間終了().isEmpty()) {
-            if (!entity.get前回認定有効期間終了().isValid()) {
-                tempEntity.setZenkaiNinteiYuukoushuuryoukikan(new RString("認定有効期間終了日のデータが不正です"));
-                編集状況フラグ = new RString("1");
-            }
+        if (!entity.get前回認定有効期間終了().isEmpty() && !entity.get前回認定有効期間終了().isValid()) {
+            tempEntity.setZenkaiNinteiYuukoushuuryoukikan(new RString("認定有効期間終了日のデータが不正です"));
+            編集状況フラグ = new RString("1");
         }
         if (!entity.get前回認定有効期間開始().isEmpty() && !entity.get前回認定有効期間終了().isEmpty()
                 && entity.get前回認定有効期間終了().isValid()
-                && entity.get前回認定有効期間開始().isValid()) {
-            if (entity.get前回認定有効期間終了().getBetweenMonths(entity.get前回認定有効期間開始()) > NO_24) {
-                tempEntity.setZenkaiNinteiYuukoukaishikikan(new RString("認定有効期間開のデータが不正です"));
-                tempEntity.setZenkaiNinteiYuukoushuuryoukikan(new RString("認定有効期間のデータが不正です"));
-                編集状況フラグ = new RString("1");
-            }
+                && entity.get前回認定有効期間開始().isValid()
+                && entity.get前回認定有効期間終了().getBetweenMonths(entity.get前回認定有効期間開始()) > NO_24) {
+            tempEntity.setZenkaiNinteiYuukoukaishikikan(new RString("認定有効期間開のデータが不正です"));
+            tempEntity.setZenkaiNinteiYuukoushuuryoukikan(new RString("認定有効期間のデータが不正です"));
+            編集状況フラグ = new RString("1");
         }
     }
 
