@@ -253,7 +253,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
         List<dgSeikyuMeisai_Row> rowList = new ArrayList<>();
         dgSeikyuMeisai_Row 明細一覧 = new dgSeikyuMeisai_Row();
         明細一覧.setDefaultDataName1(住宅改修理由書事業者情報.getDbT3095().get被保険者番号().value());
-        明細一覧.setDefaultDataName0(住宅改修理由書事業者情報.getDbT3095().get対象外フラグ());
+        明細一覧.setDefaultDataName0(住宅改修理由書事業者情報.getDbT3095().is対象外フラグ());
         if (!住宅改修理由書事業者情報.getDbT3095().get介護住宅改修住宅所有者().isEmpty()) {
             明細一覧.setDefaultDataName3(住宅改修理由書事業者情報.getDbT3095().get介護住宅改修住宅所有者().value());
         }
