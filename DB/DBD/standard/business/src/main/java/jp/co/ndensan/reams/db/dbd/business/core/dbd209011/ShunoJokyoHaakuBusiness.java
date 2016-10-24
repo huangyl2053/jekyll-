@@ -70,15 +70,7 @@ public class ShunoJokyoHaakuBusiness {
 
         int 期 = 期別.get期別Entity().getKi();
         Decimal 調定額 = 調定共通Entity.getChoteigaku();
-
-        Decimal 収入額 = Decimal.ZERO;
-        List<CaT0701ShunyuEntity> 収入List = 期別.get調定関連().get収入List();
-        for (CaT0701ShunyuEntity caT0701 : 収入List) {
-            caT0701.getShunyuYMD();
-            if (caT0701.getShunyugaku() != null) {
-                収入額 = 収入額.add(caT0701.getShunyugaku());
-            }
-        }
+        Decimal 収入額 = get収入額(期別);
         Decimal 未納額 = 調定額.subtract(収入額);
         RDate 納期限 = 調定共通Entity.getNokigenYMD();
 
@@ -104,6 +96,7 @@ public class ShunoJokyoHaakuBusiness {
             時効起算事由 = JikoKisanbiKubun.納期限翌日.getコード();
         }
 
+        List<CaT0701ShunyuEntity> 収入List = 期別.get調定関連().get収入List();
         for (CaT0701ShunyuEntity caT0701 : 収入List) {
             if (仮の時効起算日.plusYear(2).isBeforeOrEquals(new FlexibleDate(caT0701.getShunyuYMD().toDateString()))) {
                 break;
@@ -119,29 +112,8 @@ public class ShunoJokyoHaakuBusiness {
             時効起算事由 = JikoKisanbiKubun.不明_調定無し.getコード();
         }
 
-        RString 未納完納区分 = RString.EMPTY;
-        if (基準日.isBefore(new FlexibleDate(納期限.toDateString()))) {
-            未納完納区分 = MinoKannoKubun.未来納期.getコード();
-        } else if (未納額.equals(Decimal.ZERO)) {
-            未納完納区分 = MinoKannoKubun.完納.getコード();
-        } else if (未納額.compareTo(Decimal.ZERO) > 0) {
-            未納完納区分 = MinoKannoKubun.未納あり.getコード();
-        } else if (未納額.compareTo(Decimal.ZERO) < 0) {
-            未納完納区分 = MinoKannoKubun.過納.getコード();
-        } else if (時効起算日.isEmpty() || 調定額.compareTo(Decimal.ZERO) == 0) {
-            未納完納区分 = MinoKannoKubun._0円.getコード();
-        }
-
-        RString 時効区分 = RString.EMPTY;
-        if (MinoKannoKubun.未納あり.getコード().equals(未納完納区分)) {
-            if (基準日.isBefore(時効起算日.plusYear(2))) {
-                時効区分 = JikoKubun.時効未到来.getコード();
-            } else if (時効起算日.plusYear(2).isBeforeOrEquals(基準日)) {
-                時効区分 = JikoKubun.時効到来.getコード();
-            }
-        } else {
-            時効区分 = JikoKubun.空.getコード();
-        }
+        RString 未納完納区分 = get未納完納区分(基準日, 納期限, 調定額, 未納額, 時効起算日);
+        RString 時効区分 = get時効区分(基準日, 時効起算日, 未納完納区分);
 
         RString 特徴_普徴区分 = 期別.get期別Entity().getChoshuHouhou();
         TsuchishoNo 通知書番号 = 期別.get期別Entity().getTsuchishoNo();
@@ -170,6 +142,48 @@ public class ShunoJokyoHaakuBusiness {
         insertEntity.setTmp_jikoKubun(時効区分);
 
         insertEnList.add(insertEntity);
+    }
+
+    private Decimal get収入額(KibetsuJohoEntity 期別) {
+        Decimal 収入額 = Decimal.ZERO;
+        List<CaT0701ShunyuEntity> 収入List = 期別.get調定関連().get収入List();
+        for (CaT0701ShunyuEntity caT0701 : 収入List) {
+            caT0701.getShunyuYMD();
+            if (caT0701.getShunyugaku() != null) {
+                収入額 = 収入額.add(caT0701.getShunyugaku());
+            }
+        }
+        return 収入額;
+    }
+
+    private RString get未納完納区分(FlexibleDate 基準日, RDate 納期限, Decimal 調定額, Decimal 未納額, FlexibleDate 時効起算日) {
+        RString 未納完納区分 = RString.EMPTY;
+        if (基準日.isBefore(new FlexibleDate(納期限.toDateString()))) {
+            未納完納区分 = MinoKannoKubun.未来納期.getコード();
+        } else if (未納額.equals(Decimal.ZERO)) {
+            未納完納区分 = MinoKannoKubun.完納.getコード();
+        } else if (未納額.compareTo(Decimal.ZERO) > 0) {
+            未納完納区分 = MinoKannoKubun.未納あり.getコード();
+        } else if (未納額.compareTo(Decimal.ZERO) < 0) {
+            未納完納区分 = MinoKannoKubun.過納.getコード();
+        } else if (時効起算日.isEmpty() || 調定額.compareTo(Decimal.ZERO) == 0) {
+            未納完納区分 = MinoKannoKubun._0円.getコード();
+        }
+        return 未納完納区分;
+    }
+
+    private RString get時効区分(FlexibleDate 基準日, FlexibleDate 時効起算日, RString 未納完納区分) {
+        RString 時効区分 = RString.EMPTY;
+        if (MinoKannoKubun.未納あり.getコード().equals(未納完納区分)) {
+            if (基準日.isBefore(時効起算日.plusYear(2))) {
+                時効区分 = JikoKubun.時効未到来.getコード();
+            } else if (時効起算日.plusYear(2).isBeforeOrEquals(基準日)) {
+                時効区分 = JikoKubun.時効到来.getコード();
+            }
+        } else {
+            時効区分 = JikoKubun.空.getコード();
+        }
+        return 時効区分;
     }
 
 }

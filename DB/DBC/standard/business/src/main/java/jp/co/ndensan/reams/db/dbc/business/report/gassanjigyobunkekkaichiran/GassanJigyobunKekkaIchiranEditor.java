@@ -78,14 +78,14 @@ public class GassanJigyobunKekkaIchiranEditor implements
 
         source.shori_ymd_hms = getSakuseiYmhm(RDate.getNowDate(), RTime.now());
         if (entity.get出力対象区分().equals(区分コード_1)) {
-            source.Data1 = 受取年月タイトル.concat(entity.get受取年月().wareki().
+            source.data1 = 受取年月タイトル.concat(entity.get受取年月().wareki().
                     eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).
                     toDateString());
 
         } else if (entity.get出力対象区分().equals(区分コード_2)) {
-            source.Data1 = 被保険者番号タイトル.concat(entity.get被保険者番号().value());
-            source.Data1 = 年度タイトル.concat(entity.get年度().wareki().
+            source.data1 = 被保険者番号タイトル.concat(entity.get被保険者番号().value());
+            source.data2 = 年度タイトル.concat(entity.get年度().wareki().
                     eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     fillType(FillType.BLANK).toDateString().
                     concat(年度文字));
@@ -109,13 +109,7 @@ public class GassanJigyobunKekkaIchiranEditor implements
                 source.List1_2 = 無関連データ;
             }
             source.List1_3 = 帳票用データ.get支給額_支給申請書整理番号();
-            if (!RString.isNullOrEmpty(帳票用データ.get決定_支給区分コード())) {
-                if (区分コード_1.equals(帳票用データ.get決定_支給区分コード())) {
-                    source.List1_4 = 支給結果;
-                } else if (区分コード_2.equals(帳票用データ.get決定_支給区分コード())) {
-                    source.List1_4 = 不支給結果;
-                }
-            }
+            setList1_4(source, 帳票用データ);
             source.List1_5 = doカンマ編集(帳票用データ.get支給額_世帯負担総額());
             source.List1_6 = doカンマ編集(帳票用データ.get支給額_介護等合算一部負担金等世帯合算額());
             source.List1_7 = doカンマ編集(帳票用データ.get支給額_70歳以上介護等合算一部負担金等世帯合算額());
@@ -258,5 +252,15 @@ public class GassanJigyobunKekkaIchiranEditor implements
             return DecimalFormatter.toコンマ区切りRString(decimal, 0);
         }
         return RString.EMPTY;
+    }
+
+    private void setList1_4(GassanJigyobunKekkaIchiranSource source, GassanJigyobunKekkaIchiranEntity 帳票用データ) {
+        if (!RString.isNullOrEmpty(帳票用データ.get決定_支給区分コード())) {
+            if (区分コード_1.equals(帳票用データ.get決定_支給区分コード())) {
+                source.List1_4 = 支給結果;
+            } else if (区分コード_2.equals(帳票用データ.get決定_支給区分コード())) {
+                source.List1_4 = 不支給結果;
+            }
+        }
     }
 }

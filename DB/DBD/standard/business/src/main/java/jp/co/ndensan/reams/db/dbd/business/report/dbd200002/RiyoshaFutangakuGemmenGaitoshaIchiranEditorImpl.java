@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd200002;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.SeteiYouEntity;
@@ -56,6 +57,7 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
     private static final int LISTINDEX_4 = 4;
     private final IOutputOrder outputOrder;
     private final int index;
+    private final SetaiHyoji 世帯表示;
 
     /**
      * インスタンスを生成します。
@@ -63,11 +65,14 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
      * @param entity entity
      * @param outputOrder IOutputOrder
      * @param index int
+     * @param 世帯表示 SetaiHyoji
      */
-    protected RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl(NinteishaListSakuseiResultEntity entity, IOutputOrder outputOrder, int index) {
+    protected RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl(NinteishaListSakuseiResultEntity entity,
+            IOutputOrder outputOrder, int index, SetaiHyoji 世帯表示) {
         this.entity = entity;
         this.outputOrder = outputOrder;
         this.index = index;
+        this.世帯表示 = 世帯表示;
     }
 
     /**
@@ -84,11 +89,15 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
     private RiyoshaFutangakuGemmenGaitoshaIchiranReportSource edit項目(RiyoshaFutangakuGemmenGaitoshaIchiranReportSource source) {
         if (index == 1) {
             editHeader(source);
-            edit世帯員(source);
+            if (SetaiHyoji.表示する.equals(世帯表示)) {
+                edit世帯員(source);
+            }
             edit項目１(source);
             edit項目2(source);
         } else {
-            edit世帯員(source);
+            if (SetaiHyoji.表示する.equals(世帯表示)) {
+                edit世帯員(source);
+            }
         }
         return source;
     }

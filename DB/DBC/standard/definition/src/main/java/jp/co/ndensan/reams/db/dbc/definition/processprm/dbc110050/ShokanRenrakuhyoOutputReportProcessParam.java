@@ -32,6 +32,9 @@ public class ShokanRenrakuhyoOutputReportProcessParam implements IBatchProcessPa
         this.shutsuryokujunId = shutsuryokujunId;
     }
 
+    /**
+     * コンストラクタです。
+     */
     public ShokanRenrakuhyoOutputReportProcessParam() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

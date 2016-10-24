@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011;
 
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoJohoBunruiKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoSashitomeKojoJotaiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitomeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuFourEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShokanShinseiHanteiKekkaJohoEntity;
@@ -30,9 +32,6 @@ public class ShiharaiHohoHenkoHaakuTainouTaisakuProcess extends BatchProcessBase
     private int 差止中件数 = 0;
     private int 控除件数 = 0;
     private Decimal 差止中金額 = Decimal.ZERO;
-    private static final RString 差止情報コード = new RString("1");
-    private static final RString 保険料控除情報コード = new RString("2");
-    private static final RString 差止控除状態区分_登録 = new RString("01");
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohohenkohaakuichiran."
@@ -79,11 +78,14 @@ public class ShiharaiHohoHenkoHaakuTainouTaisakuProcess extends BatchProcessBase
                 if (is情報分類区分_差止控除状態区分が登録(支払方法変更差止Data.getJohoBunruiKubun(),
                         支払方法変更差止Data.getSashitomeKojoJotaiKubun())) {
                     差止中件数 = 差止中件数 + 1;
+                    edit差止中金額(t, 支払方法変更差止Data);
+                    最大差止納付期日 = get最大の差止納付期限(最大差止納付期日, 支払方法変更差止Data.getSashitome_NofuYMD());
                 }
-                edit差止中金額(t, 支払方法変更差止Data);
-                最大差止納付期日 = get最大の差止納付期限(最大差止納付期日, 支払方法変更差止Data.getSashitome_NofuYMD());
-                最大の控除被保険者証提出期限 = get最大の差止納付期限(最大の控除被保険者証提出期限, 支払方法変更差止Data.getKojo_ShoTeishutsuYMD());
-                edit控除件数と控除証期限(支払方法変更差止Data.getJohoBunruiKubun());
+
+                if (ShiharaiHenkoJohoBunruiKubun.保険料控除情報.getコード().equals(支払方法変更差止Data.getJohoBunruiKubun())) {
+                    控除件数 = 控除件数 + 1;
+                    最大の控除被保険者証提出期限 = get最大の差止納付期限(最大の控除被保険者証提出期限, 支払方法変更差止Data.getKojo_ShoTeishutsuYMD());
+                }
             }
         }
 
@@ -103,22 +105,24 @@ public class ShiharaiHohoHenkoHaakuTainouTaisakuProcess extends BatchProcessBase
             for (ShokanShinseiHanteiKekkaJohoEntity 償還Data : t.get償還情報リスト()) {
                 FlexibleYearMonth 差止提供年月 = 支払方法変更差止Data.getSashitome_ServiceTeikyoYM();
                 FlexibleYearMonth 償還払支給申請_サービス提供年月 = 償還Data.get償還払支給申請_サービス提供年月();
+                RString 差止償還整理番号 = 支払方法変更差止Data.getSashitome_ShokanSeiriNo();
+                RString 整理番号 = 償還Data.get償還払支給申請_整理番号();
 
                 if (差止提供年月 != null
                         && !FlexibleYearMonth.EMPTY.equals(差止提供年月)
                         && 償還払支給申請_サービス提供年月 != null
                         && !FlexibleYearMonth.EMPTY.equals(償還払支給申請_サービス提供年月)
-                        && 差止提供年月.equals(償還払支給申請_サービス提供年月)) {
-
+                        && 差止提供年月.equals(償還払支給申請_サービス提供年月)
+                        && 差止償還整理番号.equals(整理番号)) {
                     差止中金額 = 差止中金額.add(償還Data.get償還払支給判定結果_支払金額().subtract(償還Data.get償還払支給判定結果_差額金額合計()));
                 }
             }
         }
-
     }
 
     private boolean is情報分類区分_差止控除状態区分が登録(RString 情報分類区分, RString 差止控除状態区分) {
-        return 差止情報コード.equals(情報分類区分) && 差止控除状態区分_登録.equals(差止控除状態区分);
+        return ShiharaiHenkoJohoBunruiKubun.差止情報.getコード().equals(情報分類区分)
+                && ShiharaiHenkoSashitomeKojoJotaiKubun.登録.getコード().equals(差止控除状態区分);
     }
 
     private FlexibleDate get最大の差止納付期限(FlexibleDate 最大差止納付期日, FlexibleDate 該当行差止納付期日) {
@@ -133,9 +137,4 @@ public class ShiharaiHohoHenkoHaakuTainouTaisakuProcess extends BatchProcessBase
         return 最大差止納付期日;
     }
 
-    private void edit控除件数と控除証期限(RString 情報分類区分) {
-        if (保険料控除情報コード.equals(情報分類区分)) {
-            控除件数 = 控除件数 + 1;
-        }
-    }
 }

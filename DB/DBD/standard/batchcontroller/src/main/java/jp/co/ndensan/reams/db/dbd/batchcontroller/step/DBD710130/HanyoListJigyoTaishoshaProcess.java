@@ -495,24 +495,33 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
     }
 
     private void get方法(HanyoRisutoJigyoTaishoshaEntity entity, HanyoListEntity hanyolistentity) {
-        ChoikiCode 町域コード = entity.getPsmEntity().getChoikiCode();
-        YubinNo 郵便番号 = entity.getPsmEntity().getYubinNo();
-        AtenaBanchi 番地コード = entity.getPsmEntity().getBanchi();
-        GyoseikuCode 行政区コード = entity.getPsmEntity().getGyoseikuCode();
-        ChikuCode 地区１ = entity.getPsmEntity().getChikuCode1();
-        ChikuCode 地区２ = entity.getPsmEntity().getChikuCode2();
-        SetaiCode 世帯コード = entity.getPsmEntity().getSetaiCode();
-        hanyolistentity.set郵便番号(郵便番号 != null ? 郵便番号.getYubinNo() : RString.EMPTY);
-        hanyolistentity.set町域コード(町域コード != null ? 町域コード.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set番地コード(番地コード != null ? 番地コード.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set行政区コード(行政区コード != null ? 行政区コード.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set地区１(地区１ != null ? 地区１.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set地区２(地区２ != null ? 地区２.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set世帯コード(世帯コード != null ? 世帯コード.getColumnValue() : RString.EMPTY);
+        ChoikiCode 町域コード = ChoikiCode.EMPTY;
+        YubinNo 郵便番号 = YubinNo.EMPTY;
+        AtenaBanchi 番地コード = AtenaBanchi.EMPTY;
+        GyoseikuCode 行政区コード = GyoseikuCode.EMPTY;
+        ChikuCode 地区１ = ChikuCode.EMPTY;
+        ChikuCode 地区２ = ChikuCode.EMPTY;
+        SetaiCode 世帯コード = SetaiCode.EMPTY;
+        if (entity.getPsmEntity() != null) {
+            町域コード = entity.getPsmEntity().getChoikiCode();
+            郵便番号 = entity.getPsmEntity().getYubinNo();
+            番地コード = entity.getPsmEntity().getBanchi();
+            行政区コード = entity.getPsmEntity().getGyoseikuCode();
+            地区１ = entity.getPsmEntity().getChikuCode1();
+            地区２ = entity.getPsmEntity().getChikuCode2();
+            世帯コード = entity.getPsmEntity().getSetaiCode();
+            hanyolistentity.set氏名５０音カナ(entity.getPsmEntity().getKanaName());
+            hanyolistentity.set生年月日(entity.getPsmEntity().getSeinengappiYMD());
+            hanyolistentity.set性別(entity.getPsmEntity().getSeibetsuCode());
+        }
+        hanyolistentity.set郵便番号((郵便番号 != null && !郵便番号.isEmpty()) ? 郵便番号.getYubinNo() : RString.EMPTY);
+        hanyolistentity.set町域コード((町域コード != null && !町域コード.isEmpty()) ? 町域コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set番地コード((番地コード != null && 番地コード.isEmpty()) ? 番地コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set行政区コード((行政区コード != null && !行政区コード.isEmpty()) ? 行政区コード.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set地区１((地区１ != null && !地区１.isEmpty()) ? 地区１.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set地区２((地区２ != null && !地区２.isEmpty()) ? 地区２.getColumnValue() : RString.EMPTY);
+        hanyolistentity.set世帯コード((世帯コード != null && !世帯コード.isEmpty()) ? 世帯コード.getColumnValue() : RString.EMPTY);
         hanyolistentity.set識別コード(entity.get被保険者台帳管理_識別コード());
-        hanyolistentity.set氏名５０音カナ(entity.getPsmEntity().getKanaName());
-        hanyolistentity.set生年月日(entity.getPsmEntity().getSeinengappiYMD());
-        hanyolistentity.set性別(entity.getPsmEntity().getSeibetsuCode());
         hanyolistentity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
         hanyolistentity.set被保険者番号(entity.get二次予防事業対象者_被保険者番号());
     }

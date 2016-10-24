@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 振込データ登録_口座振込一時処理_Processクラスです．
@@ -41,9 +42,8 @@ public class FurikomiDataTourokuProcess extends BatchProcessBase<KozaFurikomiTem
     @Override
     protected void beforeExecute() {
         if (処理区分_振込指定日修正_2.equals(parameter.get処理区分().getコード()) && !parameter.is再処理フラグ()) {
-
-            KozaFurikomiManager.createInstance();
-            // TODO 5.1　再処理準備
+            KozaFurikomiManager.createInstance().deleteBy委託者IDAnd振込年月日(new Decimal(parameter.get委託者コード().toString()),
+                    parameter.get振込指定年月日());
         }
     }
 

@@ -116,7 +116,7 @@ public class DBC8010001MainManager {
                 break;
         }
         FurikomiItakushaKoseiMapperParameter parameter;
-        parameter = FurikomiItakushaKoseiMapperParameter.createSelectByKeyParam(null, SubGyomuCode.DBC介護給付, 業務内区分, null, null, null);
+        parameter = FurikomiItakushaKoseiMapperParameter.createSelectByKeyParamAllowsNull(null, SubGyomuCode.DBC介護給付, 業務内区分, null, null, null);
         FurikomiGroupItakushaItakushaKoseiFinder finder = FurikomiGroupItakushaItakushaKoseiFinder.createInstance();
         list = finder.getFurikomiGroupItakushItakushKosei(parameter);
         return list;

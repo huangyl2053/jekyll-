@@ -60,7 +60,7 @@ public class DbWT111GKyufuJissekiD53CsvEntity {
     @CsvField(order = 160, name = "単位数")
     private Decimal 単位数;
     @CsvField(order = 170, name = "回数")
-    private Integer 回数;
+    private int 回数;
     @CsvField(order = 180, name = "サービス単位数")
     private Decimal サービス単位数;
     @CsvField(order = 190, name = "サービス単位数合計")
@@ -74,7 +74,7 @@ public class DbWT111GKyufuJissekiD53CsvEntity {
     @CsvField(order = 230, name = "後_単位数")
     private Decimal 後_単位数;
     @CsvField(order = 240, name = "後_回数")
-    private Integer 後_回数;
+    private int 後_回数;
     @CsvField(order = 250, name = "後_サービス単位数")
     private Decimal 後_サービス単位数;
     @CsvField(order = 260, name = "後_サービス単位数合計")
@@ -82,9 +82,9 @@ public class DbWT111GKyufuJissekiD53CsvEntity {
     @CsvField(order = 270, name = "後_請求金額")
     private Decimal 後_請求金額;
     @CsvField(order = 280, name = "再審査回数")
-    private Integer 再審査回数;
+    private int 再審査回数;
     @CsvField(order = 290, name = "過誤回数")
-    private Integer 過誤回数;
+    private int 過誤回数;
     @CsvField(order = 300, name = "審査年月")
     private FlexibleYearMonth 審査年月;
 }

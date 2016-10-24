@@ -137,7 +137,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         source.hokenshaName = 保険者名称;
 
         List<ISetSortItem> list = new ArrayList<>();
-        if (出力順 != null && 出力順.get設定項目リスト() == null) {
+        if (出力順 != null && 出力順.get設定項目リスト() != null) {
             list = 出力順.get設定項目リスト();
         }
         if (list.size() > INDEX_0) {
@@ -174,6 +174,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit上部の被保険者情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
+        source = edit上部の改頁項目(source);
         source = edit上部の宛名情報(source);
         source = edit上部の資格情報(source);
         source = edit上部の認定情報(source);
@@ -189,6 +190,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit下部の被保険者情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
+        source = edit下部の改頁項目(source);
         source = edit下部の宛名情報(source);
         source = edit下部の資格情報(source);
         source = edit下部の認定情報(source);
@@ -200,6 +202,26 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         }
         source = edit下部の滞納者対策情報(source);
         source = edit下部の収納情報(source);
+        return source;
+    }
+
+    private ShiharaiHohoHenkoKanriIchiranReportSource edit上部の改頁項目(ShiharaiHohoHenkoKanriIchiranReportSource source) {
+        if (支払方法変更リストEntity_上.get郵便番号() != null) {
+            source.yubinNo = 支払方法変更リストEntity_上.get郵便番号().getEditedYubinNo();
+        }
+        source.choikiCode = 支払方法変更リストEntity_上.get町域コード();
+        source.gyoseikuCode = 支払方法変更リストEntity_上.get行政区コード();
+        if (支払方法変更リストEntity_上.get世帯番号() != null) {
+            source.setaiCode = 支払方法変更リストEntity_上.get世帯番号().value();
+        }
+        if (支払方法変更リストEntity_上.get識別コード() != null) {
+            source.shikibetsuCode = 支払方法変更リストEntity_上.get識別コード().value();
+        }
+        source.shimeiKana = 支払方法変更リストEntity_上.get被保険者氏名カナ();
+        source.shichosonCode = 支払方法変更リストEntity_上.get市町村コード();
+        if (支払方法変更リストEntity_上.get被保険者番号() != null) {
+            source.hihokenshaNo = 支払方法変更リストEntity_上.get被保険者番号().value();
+        }
         return source;
     }
 
@@ -215,7 +237,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         if (支払方法変更リストEntity_上.get世帯番号() != null) {
             source.listUpper1_3 = 支払方法変更リストEntity_上.get世帯番号().value();
         }
-        source.listUpper1_4 = 支払方法変更リストEntity_上.get行政区ｺｰﾄﾞ();
+        source.listUpper1_4 = 支払方法変更リストEntity_上.get行政区コード();
         source.listUpper2_3 = 支払方法変更リストEntity_上.get行政区();
         source.listUpper2_4 = 支払方法変更リストEntity_上.get住所コード();
         if (支払方法変更リストEntity_上.get郵便番号() != null) {
@@ -226,12 +248,8 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit上部の資格情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
-        if (支払方法変更リストEntity_上.get資格取得日() != null) {
-            source.listUpper1_5 = toパターン4(支払方法変更リストEntity_上.get資格取得日());
-        }
-        if (支払方法変更リストEntity_上.get資格喪失日() != null) {
-            source.listUpper1_6 = toパターン4(支払方法変更リストEntity_上.get資格喪失日());
-        }
+        source.listUpper1_5 = toパターン4(支払方法変更リストEntity_上.get資格取得日());
+        source.listUpper1_6 = toパターン4(支払方法変更リストEntity_上.get資格喪失日());
         if (支払方法変更リストEntity_上.get喪失事由() != null) {
             source.listUpper1_7 = 支払方法変更リストEntity_上.get喪失事由().get名称();
         }
@@ -256,27 +274,19 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
                     toパターン4(new FlexibleDate(支払方法変更リストEntity_上.get認定有効期間().substring(INDEX_9))));
         }
         source.listUpper1_13 = 支払方法変更リストEntity_上.get償還未払い情報_申請中();
-        if (支払方法変更リストEntity_上.get申請日() != null) {
-            source.listUpper1_14 = toパターン4(支払方法変更リストEntity_上.get申請日());
-        }
-        if (支払方法変更リストEntity_上.get認定日() != null) {
-            source.listUpper2_7 = toパターン4(支払方法変更リストEntity_上.get認定日());
-        }
+        source.listUpper1_14 = toパターン4(支払方法変更リストEntity_上.get申請日());
+        source.listUpper2_7 = toパターン4(支払方法変更リストEntity_上.get認定日());
         return source;
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit上部の償還未払い情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
         source.listUpper2_8 = 支払方法変更リストEntity_上.get認定情報_申請中();
-        if (支払方法変更リストEntity_上.get償還未払い情報_申請日() != null) {
-            source.listUpper2_9 = toパターン4(支払方法変更リストEntity_上.get償還未払い情報_申請日());
-        }
+        source.listUpper2_9 = toパターン4(支払方法変更リストEntity_上.get償還未払い情報_申請日());
         source.listUpper1_15 = 支払方法変更リストEntity_上.get申請中件数();
         if (支払方法変更リストEntity_上.get整理番号() != null) {
             source.listUpper2_10 = 支払方法変更リストEntity_上.get整理番号().value();
         }
-        if (支払方法変更リストEntity_上.get提供年月() != null) {
-            source.listUpper2_11 = toパターン54(支払方法変更リストEntity_上.get提供年月());
-        }
+        source.listUpper2_11 = toパターン54(支払方法変更リストEntity_上.get提供年月());
         source.listUpper2_12 = 支払方法変更リストEntity_上.get未通知件数();
         return source;
     }
@@ -308,13 +318,13 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
             source.listUpper6_1 = new RString(KingakuFormatter.create(支払方法変更リストEntity_上.get差止中金額_10行目())
                     .format(KingakuUnit.円).setCommaSeparated().toString());
 
-        } else if (count == 行数11 && 支払方法変更リストEntity_上.get差止納付期日_11行目() != null) {
+        } else if (count == 行数11) {
             source.listUpper6_1 = toパターン4(支払方法変更リストEntity_上.get差止納付期日_11行目());
 
         } else if (count == 行数12) {
             source.listUpper6_1 = 支払方法変更リストEntity_上.get控除件数_12行目();
 
-        } else if (count == 行数13 && 支払方法変更リストEntity_上.get控除証期限_13行目() != null) {
+        } else if (count == 行数13) {
             source.listUpper6_1 = toパターン4(支払方法変更リストEntity_上.get控除証期限_13行目());
         } else if (count == 行数14) {
             source.listUpper6_1 = 支払方法変更リストEntity_上.get行14();
@@ -329,28 +339,28 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit上部の滞納者対策情報１To８(ShiharaiHohoHenkoKanriIchiranReportSource source) {
-        if (count == 行数1 && 支払方法変更リストEntity_上.get適用開始日_1行目() != null) {
+        if (count == 行数1) {
             source.listUpper6_1 = toパターン4(支払方法変更リストEntity_上.get適用開始日_1行目());
 
-        } else if (count == 行数2 && 支払方法変更リストEntity_上.get適用終了日_2行目() != null) {
+        } else if (count == 行数2) {
             source.listUpper6_1 = toパターン4(支払方法変更リストEntity_上.get適用終了日_2行目());
 
-        } else if (count == 行数3 && 支払方法変更リストEntity_上.get終了受付日_3行目() != null) {
+        } else if (count == 行数3) {
             source.listUpper6_1 = toパターン4(支払方法変更リストEntity_上.get終了受付日_3行目());
 
-        } else if (count == 行数4 && 支払方法変更リストEntity_上.get予告発行日_4行目() != null) {
+        } else if (count == 行数4) {
             source.listUpper6_1 = toパターン4(支払方法変更リストEntity_上.get予告発行日_4行目());
 
-        } else if (count == 行数5 && 支払方法変更リストEntity_上.get弁明期限_5行目() != null) {
+        } else if (count == 行数5) {
             source.listUpper6_1 = toパターン4(支払方法変更リストEntity_上.get弁明期限_5行目());
 
-        } else if (count == 行数6 && 支払方法変更リストEntity_上.get弁明受付日_6行目() != null) {
+        } else if (count == 行数6) {
             source.listUpper6_1 = toパターン4(支払方法変更リストEntity_上.get弁明受付日_6行目());
 
-        } else if (count == 行数7 && 支払方法変更リストEntity_上.get償還発行日_7行目() != null) {
+        } else if (count == 行数7) {
             source.listUpper6_1 = toパターン4(支払方法変更リストEntity_上.get償還発行日_7行目());
 
-        } else if (count == 行数8 && 支払方法変更リストEntity_上.get償還証期限_8行目() != null) {
+        } else if (count == 行数8) {
             source.listUpper6_1 = toパターン4(支払方法変更リストEntity_上.get償還証期限_8行目());
         }
         return source;
@@ -379,23 +389,21 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         edit上部_年度２の期(source);
         edit上部_年度３の期(source);
 
-        if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 0) {
-            if (count == NUM15 && 日付関連_調定年度.plusYear(2).equals(支払方法変更リストEntity_上.get収納情報List().get(INDEX_0).get賦課年度())
-                    && 支払方法変更リストEntity_上.get収納情報List().get(INDEX_0).is過年度フラグ()) {
-                edit上部_年度１の過年度(source);
-            }
+        if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 0
+                && count == NUM15 && 日付関連_調定年度.plusYear(2).equals(支払方法変更リストEntity_上.get収納情報List().get(INDEX_0).get賦課年度())
+                && 支払方法変更リストEntity_上.get収納情報List().get(INDEX_0).is過年度フラグ()) {
+            edit上部_年度１の過年度(source);
         }
-        if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 1) {
-            if (count == NUM15 && 日付関連_調定年度.plusYear(1).equals(支払方法変更リストEntity_上.get収納情報List().get(INDEX_1).get賦課年度())
-                    && 支払方法変更リストEntity_上.get収納情報List().get(INDEX_1).is過年度フラグ()) {
-                edit上部_年度２の過年度(source);
-            }
+
+        if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 1
+                && count == NUM15 && 日付関連_調定年度.plusYear(1).equals(支払方法変更リストEntity_上.get収納情報List().get(INDEX_1).get賦課年度())
+                && 支払方法変更リストEntity_上.get収納情報List().get(INDEX_1).is過年度フラグ()) {
+            edit上部_年度２の過年度(source);
         }
-        if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 0) {
-            if (count == NUM15 && 日付関連_調定年度.equals(支払方法変更リストEntity_上.get収納情報List().get(INDEX_2).get賦課年度())
-                    && 支払方法変更リストEntity_上.get収納情報List().get(INDEX_2).is過年度フラグ()) {
-                edit上部_年度３の過年度(source);
-            }
+        if (支払方法変更リストEntity_上.get収納情報List() != null && 支払方法変更リストEntity_上.get収納情報List().size() > 0
+                && count == NUM15 && 日付関連_調定年度.equals(支払方法変更リストEntity_上.get収納情報List().get(INDEX_2).get賦課年度())
+                && 支払方法変更リストEntity_上.get収納情報List().get(INDEX_2).is過年度フラグ()) {
+            edit上部_年度３の過年度(source);
         }
         return source;
     }
@@ -413,18 +421,16 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
                 source.listUpper3_2 = new RString(KingakuFormatter.create(年度１の期.get保険料金()).format(KingakuUnit.円)
                         .setCommaSeparated().toString());
             }
-            if (年度１の期.get納期限() != null) {
-                source.listUpper3_3 = toパターン4(年度１の期.get納期限());
-            }
+            source.listUpper3_3 = toパターン4(年度１の期.get納期限());
             if (年度１の期.get滞納額() != null) {
                 source.listUpper3_4 = new RString(KingakuFormatter.create(年度１の期.get滞納額()).format(KingakuUnit.円)
                         .setCommaSeparated().toString());
             }
             source.listUpper3_5 = get滞納区分の記号(年度１の期.get滞納区分());
-            if (年度１の期.get時効起算日() != null) {
-                source.listUpper3_6 = toパターン4(年度１の期.get時効起算日());
+            source.listUpper3_6 = toパターン4(年度１の期.get時効起算日());
+            if (年度１の期.get時効起算事由() != null && !年度１の期.get時効起算事由().isEmpty()) {
+                source.listUpper3_7 = JikoKisanbiKubun.toValue(年度１の期.get時効起算事由()).get記号();
             }
-            source.listUpper3_7 = JikoKisanbiKubun.toValue(年度１の期.get時効起算事由()).get記号();
         }
         return source;
     }
@@ -444,10 +450,10 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         source.listUpper3_3 = toパターン4(過年度の期.get納期限());
         source.listUpper3_4 = new RString(KingakuFormatter.create(過年度の期.get滞納額()).format(KingakuUnit.円)
                 .setCommaSeparated().toString());
-        if (過年度の期.get時効起算日() != null) {
-            source.listUpper3_6 = toパターン4(過年度の期.get時効起算日());
+        source.listUpper3_6 = toパターン4(過年度の期.get時効起算日());
+        if (過年度の期.get時効起算事由() != null && !過年度の期.get時効起算事由().isEmpty()) {
+            source.listUpper3_7 = JikoKisanbiKubun.toValue(過年度の期.get時効起算事由()).get記号();
         }
-        source.listUpper3_7 = JikoKisanbiKubun.toValue(過年度の期.get時効起算事由()).get記号();
         return source;
     }
 
@@ -464,18 +470,16 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
                 source.listUpper4_2 = new RString(KingakuFormatter.create(年度２の期.get保険料金()).format(KingakuUnit.円)
                         .setCommaSeparated().toString());
             }
-            if (年度２の期.get納期限() != null) {
-                source.listUpper4_3 = toパターン4(年度２の期.get納期限());
-            }
+            source.listUpper4_3 = toパターン4(年度２の期.get納期限());
             if (年度２の期.get滞納額() != null) {
                 source.listUpper4_4 = new RString(KingakuFormatter.create(年度２の期.get滞納額()).format(KingakuUnit.円)
                         .setCommaSeparated().toString());
             }
             source.listUpper4_5 = get滞納区分の記号(年度２の期.get滞納区分());
-            if (年度２の期.get時効起算日() != null) {
-                source.listUpper4_6 = toパターン4(年度２の期.get時効起算日());
+            source.listUpper4_6 = toパターン4(年度２の期.get時効起算日());
+            if (年度２の期.get時効起算事由() != null && !年度２の期.get時効起算事由().isEmpty()) {
+                source.listUpper4_7 = JikoKisanbiKubun.toValue(年度２の期.get時効起算事由()).get名称();
             }
-            source.listUpper4_7 = JikoKisanbiKubun.toValue(年度２の期.get時効起算事由()).get名称();
         }
         return source;
     }
@@ -495,10 +499,10 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         source.listUpper4_3 = toパターン4(過年度の期.get納期限());
         source.listUpper4_4 = new RString(KingakuFormatter.create(過年度の期.get滞納額()).format(KingakuUnit.円)
                 .setCommaSeparated().toString());
-        if (過年度の期.get時効起算日() != null) {
-            source.listUpper4_6 = toパターン4(過年度の期.get時効起算日());
+        source.listUpper4_6 = toパターン4(過年度の期.get時効起算日());
+        if (過年度の期.get時効起算事由() != null && !過年度の期.get時効起算事由().isEmpty()) {
+            source.listUpper4_7 = JikoKisanbiKubun.toValue(過年度の期.get時効起算事由()).get記号();
         }
-        source.listUpper4_7 = JikoKisanbiKubun.toValue(過年度の期.get時効起算事由()).get記号();
         return source;
     }
 
@@ -515,18 +519,16 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
                 source.listUpper5_2 = new RString(KingakuFormatter.create(年度３の期.get保険料金()).format(KingakuUnit.円)
                         .setCommaSeparated().toString());
             }
-            if (年度３の期.get納期限() != null) {
-                source.listUpper5_3 = toパターン4(年度３の期.get納期限());
-            }
+            source.listUpper5_3 = toパターン4(年度３の期.get納期限());
             if (年度３の期.get滞納額() != null) {
                 source.listUpper5_4 = new RString(KingakuFormatter.create(年度３の期.get滞納額()).format(KingakuUnit.円)
                         .setCommaSeparated().toString());
             }
             source.listUpper5_5 = get滞納区分の記号(年度３の期.get滞納区分());
-            if (年度３の期.get時効起算日() != null) {
-                source.listUpper5_6 = toパターン4(年度３の期.get時効起算日());
+            source.listUpper5_6 = toパターン4(年度３の期.get時効起算日());
+            if (年度３の期.get時効起算事由() != null && !年度３の期.get時効起算事由().isEmpty()) {
+                source.listUpper5_7 = JikoKisanbiKubun.toValue(年度３の期.get時効起算事由()).get記号();
             }
-            source.listUpper5_7 = JikoKisanbiKubun.toValue(年度３の期.get時効起算事由()).get記号();
         }
         return source;
     }
@@ -546,10 +548,10 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         source.listUpper5_3 = toパターン4(過年度の期.get納期限());
         source.listUpper5_4 = new RString(KingakuFormatter.create(過年度の期.get滞納額()).format(KingakuUnit.円)
                 .setCommaSeparated().toString());
-        if (過年度の期.get時効起算日() != null) {
-            source.listUpper5_6 = toパターン4(過年度の期.get時効起算日());
+        source.listUpper5_6 = toパターン4(過年度の期.get時効起算日());
+        if (過年度の期.get時効起算事由() != null && !過年度の期.get時効起算事由().isEmpty()) {
+            source.listUpper5_7 = JikoKisanbiKubun.toValue(過年度の期.get時効起算事由()).get記号();
         }
-        source.listUpper5_7 = JikoKisanbiKubun.toValue(過年度の期.get時効起算事由()).get記号();
         return source;
     }
 
@@ -622,6 +624,26 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         return source;
     }
 
+    private ShiharaiHohoHenkoKanriIchiranReportSource edit下部の改頁項目(ShiharaiHohoHenkoKanriIchiranReportSource source) {
+        if (支払方法変更リストEntity_下.get郵便番号() != null) {
+            source.yubinNo = 支払方法変更リストEntity_下.get郵便番号().getEditedYubinNo();
+        }
+        source.choikiCode = 支払方法変更リストEntity_下.get町域コード();
+        source.gyoseikuCode = 支払方法変更リストEntity_下.get行政区コード();
+        if (支払方法変更リストEntity_下.get世帯番号() != null) {
+            source.setaiCode = 支払方法変更リストEntity_下.get世帯番号().value();
+        }
+        if (支払方法変更リストEntity_下.get識別コード() != null) {
+            source.shikibetsuCode = 支払方法変更リストEntity_下.get識別コード().value();
+        }
+        source.shimeiKana = 支払方法変更リストEntity_下.get被保険者氏名カナ();
+        source.shichosonCode = 支払方法変更リストEntity_下.get市町村コード();
+        if (支払方法変更リストEntity_下.get被保険者番号() != null) {
+            source.hihokenshaNo = 支払方法変更リストEntity_下.get被保険者番号().value();
+        }
+        return source;
+    }
+
     private ShiharaiHohoHenkoKanriIchiranReportSource edit下部の宛名情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
         if (支払方法変更リストEntity_下.get被保険者番号() != null) {
             source.listLower1_1 = 支払方法変更リストEntity_下.get被保険者番号().value();
@@ -634,7 +656,7 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         if (支払方法変更リストEntity_下.get世帯番号() != null) {
             source.listLower1_3 = 支払方法変更リストEntity_下.get世帯番号().value();
         }
-        source.listLower1_4 = 支払方法変更リストEntity_下.get行政区ｺｰﾄﾞ();
+        source.listLower1_4 = 支払方法変更リストEntity_下.get行政区コード();
         source.listLower2_3 = 支払方法変更リストEntity_下.get行政区();
         source.listLower2_4 = 支払方法変更リストEntity_下.get住所コード();
         if (支払方法変更リストEntity_下.get郵便番号() != null) {
@@ -645,22 +667,18 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit下部の資格情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
-        if (支払方法変更リストEntity_下.get資格取得日() != null) {
-            source.listLower1_5 = toパターン4(支払方法変更リストEntity_下.get資格取得日());
-        }
-        if (支払方法変更リストEntity_下.get資格喪失日() != null) {
-            source.listLower1_6 = toパターン4(支払方法変更リストEntity_下.get資格喪失日());
-        }
+        source.listLower1_5 = toパターン4(支払方法変更リストEntity_下.get資格取得日());
+        source.listLower1_6 = toパターン4(支払方法変更リストEntity_下.get資格喪失日());
         if (支払方法変更リストEntity_下.get喪失事由() != null) {
             source.listLower1_7 = 支払方法変更リストEntity_下.get喪失事由().get名称();
         }
         if (支払方法変更リストEntity_下.get資格区分() != null) {
             source.listLower1_8 = 支払方法変更リストEntity_下.get資格区分().get名称();
         }
-        if (住特フラグ_1.equals(支払方法変更リストEntity_上.get住特フラグ())) {
+        if (住特フラグ_1.equals(支払方法変更リストEntity_下.get住特フラグ())) {
             source.listUpper1_9 = ホシ;
         }
-        if (支払方法変更リストEntity_上.is生保()) {
+        if (支払方法変更リストEntity_下.is生保()) {
             source.listUpper1_10 = ホシ;
         }
         return source;
@@ -674,27 +692,19 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
                     toパターン4(new FlexibleDate(支払方法変更リストEntity_下.get認定有効期間().substring(INDEX_9))));
         }
         source.listLower1_13 = 支払方法変更リストEntity_下.get償還未払い情報_申請中();
-        if (支払方法変更リストEntity_下.get申請日() != null) {
-            source.listLower1_14 = toパターン4(支払方法変更リストEntity_下.get申請日());
-        }
-        if (支払方法変更リストEntity_下.get認定日() != null) {
-            source.listLower2_7 = toパターン4(支払方法変更リストEntity_下.get認定日());
-        }
+        source.listLower1_14 = toパターン4(支払方法変更リストEntity_下.get申請日());
+        source.listLower2_7 = toパターン4(支払方法変更リストEntity_下.get認定日());
         return source;
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit下部の償還未払い情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
         source.listLower2_8 = 支払方法変更リストEntity_下.get認定情報_申請中();
-        if (支払方法変更リストEntity_下.get償還未払い情報_申請日() != null) {
-            source.listLower2_9 = toパターン4(支払方法変更リストEntity_下.get償還未払い情報_申請日());
-        }
-        source.listLower1_15 = 支払方法変更リストEntity_上.get申請中件数();
+        source.listLower2_9 = toパターン4(支払方法変更リストEntity_下.get償還未払い情報_申請日());
+        source.listLower1_15 = 支払方法変更リストEntity_下.get申請中件数();
         if (支払方法変更リストEntity_下.get整理番号() != null) {
             source.listLower2_10 = 支払方法変更リストEntity_下.get整理番号().value();
         }
-        if (支払方法変更リストEntity_下.get提供年月() != null) {
-            source.listLower2_11 = toパターン54(支払方法変更リストEntity_下.get提供年月());
-        }
+        source.listLower2_11 = toパターン54(支払方法変更リストEntity_下.get提供年月());
         source.listLower2_12 = 支払方法変更リストEntity_下.get未通知件数();
         return source;
     }
@@ -726,13 +736,13 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
             source.listLower6_1 = new RString(KingakuFormatter.create(支払方法変更リストEntity_下.get差止中金額_10行目())
                     .format(KingakuUnit.円).setCommaSeparated().toString());
 
-        } else if (count == 行数11 && 支払方法変更リストEntity_下.get差止納付期日_11行目() != null) {
+        } else if (count == 行数11) {
             source.listLower6_1 = toパターン4(支払方法変更リストEntity_下.get差止納付期日_11行目());
 
         } else if (count == 行数12) {
             source.listLower6_1 = 支払方法変更リストEntity_下.get控除件数_12行目();
 
-        } else if (count == 行数13 && 支払方法変更リストEntity_下.get控除証期限_13行目() != null) {
+        } else if (count == 行数13) {
             source.listLower6_1 = toパターン4(支払方法変更リストEntity_下.get控除証期限_13行目());
         } else if (count == 行数14) {
             source.listLower6_1 = 支払方法変更リストEntity_下.get行14();
@@ -747,28 +757,28 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     }
 
     private ShiharaiHohoHenkoKanriIchiranReportSource edit下部の滞納者対策情報１To８(ShiharaiHohoHenkoKanriIchiranReportSource source) {
-        if (count == 行数1 && 支払方法変更リストEntity_下.get適用開始日_1行目() != null) {
+        if (count == 行数1) {
             source.listLower6_1 = toパターン4(支払方法変更リストEntity_下.get適用開始日_1行目());
 
-        } else if (count == 行数2 && 支払方法変更リストEntity_下.get適用終了日_2行目() != null) {
+        } else if (count == 行数2) {
             source.listLower6_1 = toパターン4(支払方法変更リストEntity_下.get適用終了日_2行目());
 
-        } else if (count == 行数3 && 支払方法変更リストEntity_下.get終了受付日_3行目() != null) {
+        } else if (count == 行数3) {
             source.listLower6_1 = toパターン4(支払方法変更リストEntity_下.get終了受付日_3行目());
 
-        } else if (count == 行数4 && 支払方法変更リストEntity_下.get予告発行日_4行目() != null) {
+        } else if (count == 行数4) {
             source.listLower6_1 = toパターン4(支払方法変更リストEntity_下.get予告発行日_4行目());
 
-        } else if (count == 行数5 && 支払方法変更リストEntity_下.get弁明期限_5行目() != null) {
+        } else if (count == 行数5) {
             source.listLower6_1 = toパターン4(支払方法変更リストEntity_下.get弁明期限_5行目());
 
-        } else if (count == 行数6 && 支払方法変更リストEntity_下.get弁明受付日_6行目() != null) {
+        } else if (count == 行数6) {
             source.listLower6_1 = toパターン4(支払方法変更リストEntity_下.get弁明受付日_6行目());
 
-        } else if (count == 行数7 && 支払方法変更リストEntity_下.get償還発行日_7行目() != null) {
+        } else if (count == 行数7) {
             source.listLower6_1 = toパターン4(支払方法変更リストEntity_下.get償還発行日_7行目());
 
-        } else if (count == 行数8 && 支払方法変更リストEntity_下.get償還証期限_8行目() != null) {
+        } else if (count == 行数8) {
             source.listLower6_1 = toパターン4(支払方法変更リストEntity_下.get償還証期限_8行目());
 
         }
@@ -797,23 +807,20 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         edit下部_年度２の期(source);
         edit下部_年度３の期(source);
 
-        if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 0) {
-            if (count == NUM15 && 日付関連_調定年度.plusYear(2).equals(支払方法変更リストEntity_下.get収納情報List().get(INDEX_0).get賦課年度())
-                    && 支払方法変更リストEntity_下.get収納情報List().get(INDEX_0).is過年度フラグ()) {
-                edit下部_年度１の過年度(source);
-            }
+        if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 0
+                && count == NUM15 && 日付関連_調定年度.plusYear(2).equals(支払方法変更リストEntity_下.get収納情報List().get(INDEX_0).get賦課年度())
+                && 支払方法変更リストEntity_下.get収納情報List().get(INDEX_0).is過年度フラグ()) {
+            edit下部_年度１の過年度(source);
         }
-        if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 1) {
-            if (count == NUM15 && 日付関連_調定年度.plusYear(1).equals(支払方法変更リストEntity_下.get収納情報List().get(INDEX_1).get賦課年度())
-                    && 支払方法変更リストEntity_下.get収納情報List().get(INDEX_1).is過年度フラグ()) {
-                edit下部_年度２の過年度(source);
-            }
+        if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 1
+                && count == NUM15 && 日付関連_調定年度.plusYear(1).equals(支払方法変更リストEntity_下.get収納情報List().get(INDEX_1).get賦課年度())
+                && 支払方法変更リストEntity_下.get収納情報List().get(INDEX_1).is過年度フラグ()) {
+            edit下部_年度２の過年度(source);
         }
-        if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 2) {
-            if (count == NUM15 && 日付関連_調定年度.equals(支払方法変更リストEntity_下.get収納情報List().get(INDEX_2).get賦課年度())
-                    && 支払方法変更リストEntity_下.get収納情報List().get(INDEX_2).is過年度フラグ()) {
-                edit下部_年度３の過年度(source);
-            }
+        if (支払方法変更リストEntity_下.get収納情報List() != null && 支払方法変更リストEntity_下.get収納情報List().size() > 2
+                && count == NUM15 && 日付関連_調定年度.equals(支払方法変更リストEntity_下.get収納情報List().get(INDEX_2).get賦課年度())
+                && 支払方法変更リストEntity_下.get収納情報List().get(INDEX_2).is過年度フラグ()) {
+            edit下部_年度３の過年度(source);
         }
         return source;
     }
@@ -831,18 +838,16 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
                 source.listLower3_2 = new RString(KingakuFormatter.create(年度１の期.get保険料金()).format(KingakuUnit.円)
                         .setCommaSeparated().toString());
             }
-            if (年度１の期.get納期限() != null) {
-                source.listLower3_3 = toパターン4(年度１の期.get納期限());
-            }
+            source.listLower3_3 = toパターン4(年度１の期.get納期限());
             if (年度１の期.get滞納額() != null) {
                 source.listLower3_4 = new RString(KingakuFormatter.create(年度１の期.get滞納額()).format(KingakuUnit.円)
                         .setCommaSeparated().toString());
             }
             source.listLower3_5 = get滞納区分の記号(年度１の期.get滞納区分());
-            if (年度１の期.get時効起算日() != null) {
-                source.listLower3_6 = toパターン4(年度１の期.get時効起算日());
+            source.listLower3_6 = toパターン4(年度１の期.get時効起算日());
+            if (年度１の期.get時効起算事由() != null && !年度１の期.get時効起算事由().isEmpty()) {
+                source.listLower3_7 = JikoKisanbiKubun.toValue(年度１の期.get時効起算事由()).get記号();
             }
-            source.listLower3_7 = JikoKisanbiKubun.toValue(年度１の期.get時効起算事由()).get記号();
         }
         return source;
     }
@@ -862,10 +867,10 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         source.listLower3_3 = toパターン4(過年度の期.get納期限());
         source.listLower3_4 = new RString(KingakuFormatter.create(過年度の期.get滞納額()).format(KingakuUnit.円)
                 .setCommaSeparated().toString());
-        if (過年度の期.get時効起算日() != null) {
-            source.listLower3_6 = toパターン4(過年度の期.get時効起算日());
+        source.listLower3_6 = toパターン4(過年度の期.get時効起算日());
+        if (過年度の期.get時効起算事由() != null && !過年度の期.get時効起算事由().isEmpty()) {
+            source.listLower3_7 = JikoKisanbiKubun.toValue(過年度の期.get時効起算事由()).get記号();
         }
-        source.listLower3_7 = JikoKisanbiKubun.toValue(過年度の期.get時効起算事由()).get記号();
         return source;
     }
 
@@ -882,18 +887,16 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
                 source.listLower4_2 = new RString(KingakuFormatter.create(年度２の期.get保険料金()).format(KingakuUnit.円)
                         .setCommaSeparated().toString());
             }
-            if (年度２の期.get納期限() != null) {
-                source.listLower4_3 = toパターン4(年度２の期.get納期限());
-            }
+            source.listLower4_3 = toパターン4(年度２の期.get納期限());
             if (年度２の期.get滞納額() != null) {
                 source.listLower4_4 = new RString(KingakuFormatter.create(年度２の期.get滞納額()).format(KingakuUnit.円)
                         .setCommaSeparated().toString());
             }
             source.listLower4_5 = get滞納区分の記号(年度２の期.get滞納区分());
-            if (年度２の期.get時効起算日() != null) {
-                source.listLower4_6 = toパターン4(年度２の期.get時効起算日());
+            source.listLower4_6 = toパターン4(年度２の期.get時効起算日());
+            if (年度２の期.get時効起算事由() != null && !年度２の期.get時効起算事由().isEmpty()) {
+                source.listLower4_7 = JikoKisanbiKubun.toValue(年度２の期.get時効起算事由()).get記号();
             }
-            source.listLower4_7 = JikoKisanbiKubun.toValue(年度２の期.get時効起算事由()).get記号();
         }
         return source;
     }
@@ -913,10 +916,10 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         source.listLower4_3 = toパターン4(過年度の期.get納期限());
         source.listLower4_4 = new RString(KingakuFormatter.create(過年度の期.get滞納額()).format(KingakuUnit.円)
                 .setCommaSeparated().toString());
-        if (過年度の期.get時効起算日() != null) {
-            source.listLower4_6 = toパターン4(過年度の期.get時効起算日());
+        source.listLower4_6 = toパターン4(過年度の期.get時効起算日());
+        if (過年度の期.get時効起算事由() != null && !過年度の期.get時効起算事由().isEmpty()) {
+            source.listLower4_7 = JikoKisanbiKubun.toValue(過年度の期.get時効起算事由()).get記号();
         }
-        source.listLower4_7 = JikoKisanbiKubun.toValue(過年度の期.get時効起算事由()).get記号();
         return source;
     }
 
@@ -933,18 +936,16 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
                 source.listLower5_2 = new RString(KingakuFormatter.create(年度３の期.get保険料金()).format(KingakuUnit.円)
                         .setCommaSeparated().toString());
             }
-            if (年度３の期.get納期限() != null) {
-                source.listLower5_3 = toパターン4(年度３の期.get納期限());
-            }
+            source.listLower5_3 = toパターン4(年度３の期.get納期限());
             if (年度３の期.get滞納額() != null) {
                 source.listLower5_4 = new RString(KingakuFormatter.create(年度３の期.get滞納額()).format(KingakuUnit.円)
                         .setCommaSeparated().toString());
             }
             source.listLower5_5 = get滞納区分の記号(年度３の期.get滞納区分());
-            if (年度３の期.get時効起算日() != null) {
-                source.listLower5_6 = toパターン4(年度３の期.get時効起算日());
+            source.listLower5_6 = toパターン4(年度３の期.get時効起算日());
+            if (年度３の期.get時効起算事由() != null && !年度３の期.get時効起算事由().isEmpty()) {
+                source.listLower5_7 = JikoKisanbiKubun.toValue(年度３の期.get時効起算事由()).get記号();
             }
-            source.listLower5_7 = JikoKisanbiKubun.toValue(年度３の期.get時効起算事由()).get記号();
         }
         return source;
     }
@@ -964,10 +965,10 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
         source.listLower5_3 = toパターン4(過年度の期.get納期限());
         source.listLower5_4 = new RString(KingakuFormatter.create(過年度の期.get滞納額()).format(KingakuUnit.円)
                 .setCommaSeparated().toString());
-        if (過年度の期.get時効起算日() != null) {
-            source.listLower5_6 = toパターン4(過年度の期.get時効起算日());
+        source.listLower5_6 = toパターン4(過年度の期.get時効起算日());
+        if (過年度の期.get時効起算事由() != null && !過年度の期.get時効起算事由().isEmpty()) {
+            source.listLower5_7 = JikoKisanbiKubun.toValue(過年度の期.get時効起算事由()).get記号();
         }
-        source.listLower5_7 = JikoKisanbiKubun.toValue(過年度の期.get時効起算事由()).get記号();
         return source;
     }
 
@@ -1041,11 +1042,17 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     }
 
     private RString toパターン4(FlexibleDate 日付) {
+        if (日付 == null || 日付.isEmpty()) {
+            return RString.EMPTY;
+        }
         return 日付.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
     private RString toパターン54(FlexibleYearMonth 年月) {
+        if (年月 == null || 年月.isEmpty()) {
+            return RString.EMPTY;
+        }
         return 年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 

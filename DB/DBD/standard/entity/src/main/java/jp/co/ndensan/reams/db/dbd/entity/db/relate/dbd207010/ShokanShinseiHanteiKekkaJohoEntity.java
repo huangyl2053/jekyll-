@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -21,6 +22,7 @@ public class ShokanShinseiHanteiKekkaJohoEntity {
 
     private HihokenshaNo 償還払支給申請_被保険者番号;
     private FlexibleYearMonth 償還払支給申請_サービス提供年月;
+    private RString 償還払支給申請_整理番号;
     private Decimal 償還払支給判定結果_支払金額;
     private Decimal 償還払支給判定結果_差額金額合計;
 

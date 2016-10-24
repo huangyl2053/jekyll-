@@ -335,7 +335,7 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
         if (tmpEntity == null) {
             tmpEntity = entity.getトレイラレコードEntity();
             entityList.add(entity.getデータレコードEntity());
-        } else if (tmpEntity != null && isEquals(entity.getトレイラレコードEntity())) {
+        } else if (isEquals(entity.getトレイラレコードEntity())) {
             entityList.add(entity.getデータレコードEntity());
         } else {
             editOutPutKennSuuCsv();
@@ -471,7 +471,7 @@ public class NenkinTokuchoCsvOutputProcess extends BatchProcessBase<NenkinTokuch
         } else if (TsuchiNaiyoCodeType.特別徴収依頼処理結果通知.get通知内容コード().equals(通知内容コード)) {
             return 処理対象年月.getMonthValue() == INT_9;
         } else if (TsuchiNaiyoCodeType.特別徴収結果通知.get通知内容コード().equals(通知内容コード)) {
-            return 処理対象年月.getMonthValue() % INT_2 == INT_1;
+            return 処理対象年月.getMonthValue() % INT_2 != INT_0;
         } else if (TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード().equals(通知内容コード)) {
             return (処理対象年月.getMonthValue() % INT_2 == INT_0) && (処理対象年月.getMonthValue() != INT_6);
         } else if (TsuchiNaiyoCodeType.特別徴収追加依頼処理結果通知.get通知内容コード().equals(通知内容コード)) {

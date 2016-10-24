@@ -26,51 +26,51 @@ public class FuicchiCsvProcessProperty {
         /**
          * DT市町村コード
          */
-        DT市町村コード(new RString("0425"), new RString("DT市町村コード"), new RString("")),
+        DT市町村コード(new RString("0425"), new RString("DT市町村コード"), new RString("dtShichosonCode")),
         /**
          * DT郵便番号
          */
-        DT郵便番号(new RString("0426"), new RString("DT郵便番号"), new RString("")),
+        DT郵便番号(new RString("0426"), new RString("DT郵便番号"), new RString("dtYubinNo")),
         /**
          * DTカナ氏名
          */
-        DTカナ氏名(new RString("0427"), new RString("DTカナ氏名"), new RString("")),
+        DTカナ氏名(new RString("0427"), new RString("DTカナ氏名"), new RString("dtKanaShimei")),
         /**
          * DT生年月日
          */
-        DT生年月日(new RString("0428"), new RString("DT生年月日"), new RString("")),
+        DT生年月日(new RString("0428"), new RString("DT生年月日"), new RString("dtSeinenngappi")),
         /**
          * DT性別
          */
-        DT性別(new RString("0429"), new RString("DT性別"), new RString("")),
+        DT性別(new RString("0429"), new RString("DT性別"), new RString("dtSeibetsu")),
         /**
          * DT年金保険者コード
          */
-        DT年金保険者コード(new RString("0430"), new RString("DT年金保険者コード"), new RString("")),
+        DT年金保険者コード(new RString("0430"), new RString("DT年金保険者コード"), new RString("dtNennkinnHokenshaCode")),
         /**
          * DT基礎年金番号
          */
-        DT基礎年金番号(new RString("0431"), new RString("DT基礎年金番号"), new RString("")),
+        DT基礎年金番号(new RString("0431"), new RString("DT基礎年金番号"), new RString("kisoNennkinnNo")),
         /**
          * DT年金コード
          */
-        DT年金コード(new RString("0432"), new RString("DT年金コード"), new RString("")),
+        DT年金コード(new RString("0432"), new RString("DT年金コード"), new RString("nennkinnCode")),
         /**
          * DT対象年
          */
-        DT対象年(new RString("0433"), new RString("DT対象年"), new RString("")),
+        DT対象年(new RString("0433"), new RString("DT対象年"), new RString("dtTaisyoYear")),
         /**
          * DT訂正表示
          */
-        DT訂正表示(new RString("0434"), new RString("DT訂正表示"), new RString("")),
+        DT訂正表示(new RString("0434"), new RString("DT訂正表示"), new RString("dtTeiseiHyouji")),
         /**
          * DT各種区分
          */
-        DT各種区分(new RString("0435"), new RString("DT各種区分"), new RString("")),
+        DT各種区分(new RString("0435"), new RString("DT各種区分"), new RString("dtKakushuKubun")),
         /**
          * DT処理結果
          */
-        DT処理結果(new RString("0436"), new RString("DT処理結果"), new RString(""));
+        DT処理結果(new RString("0436"), new RString("DT処理結果"), new RString("dtShoriResult"));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

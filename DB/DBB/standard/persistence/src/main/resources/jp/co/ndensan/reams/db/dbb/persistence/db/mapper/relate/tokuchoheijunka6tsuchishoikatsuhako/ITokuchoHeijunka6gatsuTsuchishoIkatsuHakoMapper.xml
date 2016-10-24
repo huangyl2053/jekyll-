@@ -144,7 +144,7 @@
         AND  "DbT2015KeisangoJohoTemp"."tkKibetsuGaku02" != 0
         AND  "DbT2015KeisangoJohoTemp"."tkKibetsuGaku03" != 0
       ) 
-      SELECT master,
+      SELECT master.*,
       <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
       FROM
           master
@@ -208,7 +208,7 @@
         AND  "DbT2015KeisangoJoho"."tkKibetsuGaku02" != 0
         AND  "DbT2015KeisangoJoho"."tkKibetsuGaku03" != 0
       )
-      SELECT master,
+      SELECT master.*,
       <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
       FROM master
       INNER JOIN

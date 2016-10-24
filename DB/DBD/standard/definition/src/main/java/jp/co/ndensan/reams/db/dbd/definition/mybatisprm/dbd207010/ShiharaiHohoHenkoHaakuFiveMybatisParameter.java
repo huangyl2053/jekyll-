@@ -30,16 +30,20 @@ public class ShiharaiHohoHenkoHaakuFiveMybatisParameter implements IMyBatisParam
     private FlexibleDate 基準日;
     private FlexibleYear 業務コンフィグ_日付関連_調定年度;
     private final UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam;
+    private RString 出力順;
 
     /**
      * コンストラクタです。
      *
      * @param shikibetsutaishoParam 宛名識別対象PSM
      * @param 基準日 基準日
+     * @param 出力順 出力順
      */
-    public ShiharaiHohoHenkoHaakuFiveMybatisParameter(UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam, FlexibleDate 基準日) {
+    public ShiharaiHohoHenkoHaakuFiveMybatisParameter(UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam, FlexibleDate 基準日,
+            RString 出力順) {
         this.shikibetsutaishoParam = shikibetsutaishoParam;
         this.基準日 = 基準日;
+        this.出力順 = 出力順;
         set業務コンフィグ_日付関連_調定年度について();
     }
 

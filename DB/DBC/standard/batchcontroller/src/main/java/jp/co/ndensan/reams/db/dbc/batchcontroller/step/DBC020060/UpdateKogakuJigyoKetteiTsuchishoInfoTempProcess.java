@@ -102,7 +102,7 @@ public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProces
         if (フラグ_FALSE.equals(parameter.getテスト出力フラグ())) {
             SelectShoriDateKanriMybatisParameter mybatisParameter
                     = new SelectShoriDateKanriMybatisParameter(SubGyomuCode.DBC介護給付, 市町村コード,
-                            ShoriName.高額サービス等支給不支給決定通知書一括作成.get名称(), 処理枝番, 年度_固定);
+                            ShoriName.事業高額サービス等支給不支給決定通知書一括作成.get名称(), 処理枝番, 年度_固定);
             int 年度内連番 = mapper.select最大年度内連番(mybatisParameter);
             permanentTableWriter.insert(get処理日付管理マスタ(年度内連番));
         }
@@ -113,7 +113,7 @@ public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProces
         DbT7022ShoriDateKanriEntity tempEntity = new DbT7022ShoriDateKanriEntity();
         tempEntity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
         tempEntity.setShichosonCode(市町村コード);
-        tempEntity.setShoriName(ShoriName.高額サービス等支給不支給決定通知書一括作成.get名称());
+        tempEntity.setShoriName(ShoriName.事業高額サービス等支給不支給決定通知書一括作成.get名称());
         tempEntity.setShoriEdaban(処理枝番);
         tempEntity.setNendo(年度_固定);
         tempEntity.setNendoNaiRenban(new RString(年度内連番 + 1).padZeroToLeft(2));

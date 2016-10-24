@@ -125,6 +125,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
 
     private KogakuKaigoServiceProcessParameter parameter;
     private JigyoKogakuKetteiTsuchishoReportParameter mybatisParameter;
@@ -185,9 +186,12 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         get出力順();
         導入団体情報 = AssociationFinderFactory.createInstance().getAssociation();
         帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID);
-        通知書定型文 = get通知書定型文();
-        帳票ID = DbBusinessConfig.get(ConfigNameDBC.高額決定通知書_帳票ID,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        帳票ID = DbBusinessConfig.get(ConfigNameDBC.高額決定通知書_帳票ID, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (ReportIdDBC.DBC100010.getReportId().getColumnValue().equals(帳票ID)) {
+            通知書定型文 = get通知書定型文2();
+        } else {
+            通知書定型文 = get通知書定型文();
+        }
     }
 
     @Override
@@ -336,11 +340,9 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
     }
 
     private IKoza do口座マスク編集(TokuteiKozaRelateEntity koza) {
-        if (帳票制御共通情報.is口座マスク有無()) {
-            if (口座表示区分_0.equals(koza.getUaT0310KozaEntity().getKozaHyojiKubun())) {
-                MaskedKozaCreator maskedKozaCreator = MaskedKozaCreator.createInstance(SubGyomuCode.DBC介護給付);
-                return maskedKozaCreator.createマスク編集済口座(new Koza(koza));
-            }
+        if (帳票制御共通情報.is口座マスク有無() && 口座表示区分_0.equals(koza.getUaT0310KozaEntity().getKozaHyojiKubun())) {
+            MaskedKozaCreator maskedKozaCreator = MaskedKozaCreator.createInstance(SubGyomuCode.DBC介護給付);
+            return maskedKozaCreator.createマスク編集済口座(new Koza(koza));
         }
         return null;
     }
@@ -359,6 +361,29 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             map = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票分類ID, KamokuCode.EMPTY, INT_3);
         } else if (定型文文字サイズ_4.equals(帳票制御共通情報.get定型文文字サイズ())) {
             map = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票分類ID, KamokuCode.EMPTY, INT_4);
+        }
+        if (!map.isEmpty()) {
+            通知書0 = map.get(INT_0);
+            通知書1 = map.get(INT_1);
+            通知書2 = map.get(INT_2);
+            通知書3 = map.get(INT_3);
+        }
+        List<RString> list = new ArrayList<>();
+        list.add(通知書0);
+        list.add(通知書1);
+        list.add(通知書2);
+        list.add(通知書3);
+        return list;
+    }
+
+    private List<RString> get通知書定型文2() {
+        RString 通知書0 = RString.EMPTY;
+        RString 通知書1 = RString.EMPTY;
+        RString 通知書2 = RString.EMPTY;
+        RString 通知書3 = RString.EMPTY;
+        Map<Integer, RString> map = new HashMap<>();
+        if (定型文文字サイズ_1.equals(帳票制御共通情報.get定型文文字サイズ())) {
+            map = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票分類ID, KamokuCode.EMPTY, INT_5);
         }
         if (!map.isEmpty()) {
             通知書0 = map.get(INT_0);
@@ -482,8 +507,8 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             } else {
                 reportEntity.set金融機関上段(口座情報.get金融機関().get金融機関名称());
                 reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
-                reportEntity.set通帳記号(口座情報.getEdited通帳記号());
-                reportEntity.set通帳番号(口座情報.getEdited通帳番号());
+                reportEntity.set通帳記号(口座情報.get通帳記号());
+                reportEntity.set通帳番号(口座情報.get通帳番号());
             }
             reportEntity.set口座名義人(口座情報.get口座名義人漢字() == null ? RString.EMPTY : 口座情報.get口座名義人漢字().value());
         } else if (フラグ_TRUE.equals(parameter.get受領委任者向け決定通知書フラグ())) {
@@ -515,8 +540,8 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
             } else {
                 reportEntity.set金融機関上段(口座情報.get金融機関().get金融機関名称());
                 reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
-                reportEntity.set通帳記号(口座情報.getEdited通帳記号());
-                reportEntity.set通帳番号(口座情報.getEdited通帳番号());
+                reportEntity.set通帳記号(口座情報.get通帳記号());
+                reportEntity.set通帳番号(口座情報.get通帳番号());
             }
             reportEntity.set口座名義人(口座情報.get口座名義人漢字() == null ? RString.EMPTY : 口座情報.get口座名義人漢字().value());
         } else if (フラグ_TRUE.equals(parameter.get受領委任者向け決定通知書フラグ())) {
@@ -547,8 +572,8 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         } else {
             reportEntity.set金融機関上段(口座情報.get金融機関().get金融機関名称());
             reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
-            reportEntity.set通帳記号(口座情報.getEdited通帳記号());
-            reportEntity.set通帳番号(口座情報.getEdited通帳番号());
+            reportEntity.set通帳記号(口座情報.get通帳記号());
+            reportEntity.set通帳番号(口座情報.get通帳番号());
         }
         reportEntity.set口座名義人(口座情報.get口座名義人漢字() == null ? RString.EMPTY : 口座情報.get口座名義人漢字().value());
     }

@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.Hi
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KoshinShoriResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.ShoriModeHanteiResult;
-import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
@@ -66,7 +65,6 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
     private static final RString 被保番号 = new RString("被保険者番号");
-    private static final RString 処理不可 = new RString("処理不可");
     private static final RString 新規 = new RString("新規");
     private static final RString 登録 = new RString("登録");
     private static final RString 修正 = new RString("修正");
@@ -492,8 +490,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                         被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
                 KogakuGassanShikyuFushikyuKettei 高額決定result = new KogakuGassanShikyuFushikyuKettei(
                         被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-                高額決定result = buid高額決定(高額決定result);
-                高額決定result.added();
+                高額決定result = buid高額決定(高額決定result).added();
                 処理モード = ONE;
                 KoshinShoriResult result = new KoshinShoriResult();
                 result.set高額合算支給不支給決定Entity(高額決定result);
@@ -642,12 +639,12 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     /**
      * エラーメッセージ取得
      *
-     * @param Wkメッセージ RString
+     * @param メッセージ RString
      */
-    public void getエラーメッセージ(RString Wkメッセージ) {
-        if (Wkメッセージ != null && !Wkメッセージ.isEmpty() && ResponseHolder.getState().
+    public void getエラーメッセージ(RString メッセージ) {
+        if (メッセージ != null && !メッセージ.isEmpty() && ResponseHolder.getState().
                 equals(DBC1230011StateName.支給決定情報補正.getName())) {
-            getErrorMessage(Wkメッセージ);
+            getErrorMessage(メッセージ);
         }
     }
 
@@ -1069,16 +1066,10 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         } else if (修正.equals(処理モデル)) {
             para.setKozaId(Long.parseLong(row.getKozaID().toString()));
             para.setHihokenshaNo(new HihokenshaNo(row.getHihokenshaNo()));
-            if (row.getShiharaiHohoKubun() != null && !row.getShiharaiHohoKubun().isEmpty()) {
-                para.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(row.getShiharaiHohoKubun()));
-            }
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 修正);
         } else if (削除.equals(処理モデル) || 照会.equals(処理モデル)) {
             para.setHihokenshaNo(new HihokenshaNo(row.getHihokenshaNo()));
             para.setKozaId(Long.parseLong(row.getKozaID().toString()));
-            if (row.getShiharaiHohoKubun() != null && !row.getShiharaiHohoKubun().isEmpty()) {
-                para.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(row.getShiharaiHohoKubun()));
-            }
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 照会);
         }
     }

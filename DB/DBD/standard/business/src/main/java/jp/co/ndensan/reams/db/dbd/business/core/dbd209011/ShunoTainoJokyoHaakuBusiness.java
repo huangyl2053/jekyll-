@@ -51,25 +51,31 @@ public class ShunoTainoJokyoHaakuBusiness {
         insertEntity.setTmp_minoKannoKubun(収納状況TmpTblEntity.getTmp_minoKannoKubun());
         insertEntity.setTmp_jikoKubun(収納状況TmpTblEntity.getTmp_jikoKubun());
 
-        RString 滞納区分 = RString.EMPTY;
         DbT4022ShiharaiHohoHenkoTainoEntity 支払方法変更滞納Entity = entity.get支払方法変更滞納Entity();
         if (支払方法変更滞納Entity != null) {
-            if (JikoKubun.時効未到来.getコード().equals(支払方法変更滞納Entity.getJikoKubun())
-                    && JikoKubun.時効到来.getコード().equals(収納状況TmpTblEntity.getTmp_jikoKubun())) {
-                滞納区分 = new RString("2");
-
-            } else if (JikoKubun.時効到来.getコード().equals(支払方法変更滞納Entity.getJikoKubun())) {
-                if (最古の滞納納期限 != null && 最古の滞納納期限.equals(収納状況TmpTblEntity.getTmp_nokigen())) {
-                    滞納区分 = new RString("3");
-                } else {
-                    滞納区分 = new RString("1");
-                }
-            } else if (基準日.isBeforeOrEquals(支払方法変更滞納Entity.getNokigen())) {
-                滞納区分 = new RString("4");
-            }
+            RString 滞納区分 = get滞納区分(基準日, 最古の滞納納期限, 支払方法変更滞納Entity, 収納状況TmpTblEntity);
             insertEntity.setTmp_tainoKubun(滞納区分);
         }
         return insertEntity;
+    }
+
+    private RString get滞納区分(FlexibleDate 基準日, RDate 最古の滞納納期限,
+            DbT4022ShiharaiHohoHenkoTainoEntity 支払方法変更滞納Entity, ShunoJokyoTempTableEntity 収納状況TmpTblEntity) {
+        RString 滞納区分 = RString.EMPTY;
+        if (JikoKubun.時効未到来.getコード().equals(支払方法変更滞納Entity.getJikoKubun())
+                && JikoKubun.時効到来.getコード().equals(収納状況TmpTblEntity.getTmp_jikoKubun())) {
+            滞納区分 = new RString("2");
+
+        } else if (JikoKubun.時効到来.getコード().equals(支払方法変更滞納Entity.getJikoKubun())) {
+            if (最古の滞納納期限 != null && 最古の滞納納期限.equals(収納状況TmpTblEntity.getTmp_nokigen())) {
+                滞納区分 = new RString("3");
+            } else {
+                滞納区分 = new RString("1");
+            }
+        } else if (基準日.isBeforeOrEquals(支払方法変更滞納Entity.getNokigen())) {
+            滞納区分 = new RString("4");
+        }
+        return 滞納区分;
     }
 
 }

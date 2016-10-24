@@ -172,7 +172,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         導入団体情報 = AssociationFinderFactory.createInstance().getAssociation();
         帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID);
         通知書定型文 = get通知書定型文();
-        帳票ID = DbBusinessConfig.get(ConfigNameDBC.高額決定通知書_帳票ID,
+        帳票ID = DbBusinessConfig.get(ConfigNameDBC.事業高額決定通知書_帳票ID,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
     }
 
@@ -290,11 +290,9 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
     }
 
     private IKoza do口座マスク編集(TokuteiKozaRelateEntity koza) {
-        if (帳票制御共通情報.is口座マスク有無()) {
-            if (口座表示区分_0.equals(koza.getUaT0310KozaEntity().getKozaHyojiKubun())) {
-                MaskedKozaCreator maskedKozaCreator = MaskedKozaCreator.createInstance(SubGyomuCode.DBC介護給付);
-                return maskedKozaCreator.createマスク編集済口座(new Koza(koza));
-            }
+        if (帳票制御共通情報.is口座マスク有無() && 口座表示区分_0.equals(koza.getUaT0310KozaEntity().getKozaHyojiKubun())) {
+            MaskedKozaCreator maskedKozaCreator = MaskedKozaCreator.createInstance(SubGyomuCode.DBC介護給付);
+            return maskedKozaCreator.createマスク編集済口座(new Koza(koza));
         }
         return null;
     }
@@ -393,7 +391,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         returnEntity.set決定年月日(formatDate(一時Entity.getKetteiYMD()));
         returnEntity.set本人支払額(doカンマ編集(一時Entity.getRiyoshaFutanGaku()));
         returnEntity.set支給額(doカンマ編集(一時Entity.getKogakuShikyuGaku()));
-        if (null != null && !一時Entity.getKetteiShikyuKubunCode().isEmpty()) {
+        if (null != 一時Entity.getKetteiShikyuKubunCode() && !一時Entity.getKetteiShikyuKubunCode().isEmpty()) {
             ShikyuKubun 支給不支給区分 = ShikyuKubun.toValue(一時Entity.getKetteiShikyuKubunCode());
             returnEntity.set支給_不支給_決定区分(支給不支給区分.get名称());
         }
@@ -490,7 +488,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
                 reportEntity.set金融機関上段(口座情報.get金融機関().get金融機関名称());
                 reportEntity.set金融機関下段(口座情報.get支店().get支店名称());
                 reportEntity.set通帳記号(口座情報.get通帳記号());
-                reportEntity.set通帳番号(口座情報.getEdited通帳番号());
+                reportEntity.set通帳番号(口座情報.get通帳番号());
             }
             reportEntity.set口座名義人(口座情報.get口座名義人漢字() == null ? RString.EMPTY : 口座情報.get口座名義人漢字().getColumnValue());
         } else if (フラグ_TRUE.equals(parameter.get受領委任者向け決定通知書フラグ())) {

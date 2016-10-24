@@ -39,7 +39,7 @@ public class KogakugassanJikofutangakuInfoHoseiTempEntity implements IDbAccessab
     private RString tyushutuTaishouKubun;
 
     private RString seiriNo;
-    private int rirekiNo1;
+    private RString rirekiNo1;
     private FlexibleYearMonth jikoFutan_KeisanYM;
 
     @PrimaryKey

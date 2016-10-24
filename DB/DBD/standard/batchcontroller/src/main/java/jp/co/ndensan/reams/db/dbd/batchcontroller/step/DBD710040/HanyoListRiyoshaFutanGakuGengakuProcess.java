@@ -265,7 +265,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
                     帳票出力とCSV出力編集(i, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
                 }
             }
-            帳票出力とCSV出力(flag);
+            帳票出力とCSV出力(entity, flag);
         }
     }
 
@@ -283,10 +283,11 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
         バッチ出力条件リストの出力();
     }
 
-    private void 帳票出力とCSV出力(boolean flag) {
+    private void 帳票出力とCSV出力(RiyoshaFutanGakuGengakuEntity entity, boolean flag) {
         if (is帳票出力) {
             if (flag) {
                 HanyoListEntity hanyolistentity = new HanyoListEntity();
+                HanyoListRiyoshaFutanGakuGengakuManageer.createInstance().get方法(entity, hanyolistentity);
                 HanyoListReport report = new HanyoListReport(hanyolistentity, processParamter.getHyoudai(),
                         processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
                 report.writeBy(reportSourceWriter);

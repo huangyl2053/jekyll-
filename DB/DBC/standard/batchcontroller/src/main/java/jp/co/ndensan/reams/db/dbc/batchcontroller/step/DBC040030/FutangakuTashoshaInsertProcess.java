@@ -37,6 +37,9 @@ public class FutangakuTashoshaInsertProcess extends BatchProcessBase<Kogakugassa
     private static final RString 負担額補正対象者データTEMP = new RString("FutangakuTaishoshaTemp");
     private static final ReportId 高額合算自己負担額補正結果一覧表帳票ID = ReportIdDBC.DBC200031.getReportId();
     private static final RString ZERO = new RString("0");
+    private static final RString 補正 = new RString("補正");
+    private static final RString 非補正 = new RString("非補正");
+    private static final int INT_ZERO = 0;
     private static final RString ORDERBY = new RString("order by");
     private KogakugassanJikofutangakuInfoHoseiProcessParameter processParameter;
     private IOutputOrder 出力順;
@@ -72,6 +75,8 @@ public class FutangakuTashoshaInsertProcess extends BatchProcessBase<Kogakugassa
     @Override
     protected void process(KogakugassanJikofutangakuInfoHoseiTempEntity entity) {
         FutangakuTashoshaEntity futangakuTashoshaEntity = new FutangakuTashoshaEntity();
+        futangakuTashoshaEntity.setKaipejiKey(editソートキーand改ページキー(entity));
+        futangakuTashoshaEntity.setSourceKey(editソートキーand改ページキー(entity));
         futangakuTashoshaEntity.setHihokenshaNo(entity.getHihokenshaNo());
         futangakuTashoshaEntity.setTaishoNendo(entity.getTaishoNendo());
         futangakuTashoshaEntity.setHokenshaNo(entity.getHokenshaNo());
@@ -114,11 +119,127 @@ public class FutangakuTashoshaInsertProcess extends BatchProcessBase<Kogakugassa
         futangakuTashoshaEntity.setChoikiCode(entity.getChoikiCode());
         futangakuTashoshaEntity.setGyoseikuCode(entity.getGyoseikuCode());
         futangakuTashoshaEntity.setIchiranBiko(entity.getIchiranBiko());
-        futangakuTashoshaEntity.setJikoFutanGakuHoseiJissi(entity.getJikoFutanGakuHoseiJissi());
-        futangakuTashoshaEntity.setKogakuShikyuGakuGakuHoseiJissi(entity.getKogakuShikyuGakuGakuHoseiJissi());
+        futangakuTashoshaEntity.setJikoFutanGakuHoseiJissi(edit自己負担額補正実施(entity));
+        futangakuTashoshaEntity.setKogakuShikyuGakuGakuHoseiJissi(edit高額支給額補正実施(entity));
         futangakuTashoshaEntity.setIchiranKakuninKubun(entity.getIchiranKakuninKubun());
         futangakuTashoshaEntity.setIchiranKakuninKubun2(entity.getIchiranKakuninKubun2());
         tempDbWriter.insert(futangakuTashoshaEntity);
+    }
+
+    private RString edit自己負担額補正実施(KogakugassanJikofutangakuInfoHoseiTempEntity entity) {
+        if (entity.getTounen_04_JikoFutanGaku() != null
+                && entity.getTounen_04_JikoFutanGaku().compareTo(entity.getTounen_04_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_05_JikoFutanGaku() != null
+                && entity.getTounen_05_JikoFutanGaku().compareTo(entity.getTounen_05_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_06_JikoFutanGaku() != null
+                && entity.getTounen_06_JikoFutanGaku().compareTo(entity.getTounen_06_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_07_JikoFutanGaku() != null
+                && entity.getTounen_07_JikoFutanGaku().compareTo(entity.getTounen_07_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_08_JikoFutanGaku() != null
+                && entity.getTounen_08_JikoFutanGaku().compareTo(entity.getTounen_08_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_09_JikoFutanGaku() != null
+                && entity.getTounen_09_JikoFutanGaku().compareTo(entity.getTounen_09_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_10_JikoFutanGaku() != null
+                && entity.getTounen_10_JikoFutanGaku().compareTo(entity.getTounen_10_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_11_JikoFutanGaku() != null
+                && entity.getTounen_11_JikoFutanGaku().compareTo(entity.getTounen_11_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_12_JikoFutanGaku() != null
+                && entity.getTounen_12_JikoFutanGaku().compareTo(entity.getTounen_12_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_01_JikoFutanGaku() != null
+                && entity.getYokunen_01_JikoFutanGaku().compareTo(entity.getYokunen_01_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_02_JikoFutanGaku() != null
+                && entity.getYokunen_02_JikoFutanGaku().compareTo(entity.getYokunen_02_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_03_JikoFutanGaku() != null
+                && entity.getYokunen_03_JikoFutanGaku().compareTo(entity.getYokunen_03_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_04_JikoFutanGaku() != null
+                && entity.getYokunen_04_JikoFutanGaku().compareTo(entity.getYokunen_04_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_05_JikoFutanGaku() != null
+                && entity.getYokunen_05_JikoFutanGaku().compareTo(entity.getYokunen_05_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_06_JikoFutanGaku() != null
+                && entity.getYokunen_06_JikoFutanGaku().compareTo(entity.getYokunen_06_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_07_JikoFutanGaku() != null
+                && entity.getYokunen_07_JikoFutanGaku().compareTo(entity.getYokunen_07_sumi_JikoFutanGaku()) != INT_ZERO) {
+            return 補正;
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString edit高額支給額補正実施(KogakugassanJikofutangakuInfoHoseiTempEntity entity) {
+        if (entity.getTounen_04_Under_70KogakuShikyuGaku() != null
+                && entity.getTounen_04_Under_70KogakuShikyuGaku().compareTo(entity.getTounen_04_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_05_Under_70KogakuShikyuGaku() != null
+                && entity.getTounen_05_Under_70KogakuShikyuGaku().compareTo(entity.getTounen_05_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_06_Under_70KogakuShikyuGaku() != null
+                && entity.getTounen_06_Under_70KogakuShikyuGaku().compareTo(entity.getTounen_06_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_07_Under_70KogakuShikyuGaku() != null
+                && entity.getTounen_07_Under_70KogakuShikyuGaku().compareTo(entity.getTounen_07_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_08_Under_70KogakuShikyuGaku() != null
+                && entity.getTounen_08_Under_70KogakuShikyuGaku().compareTo(entity.getTounen_08_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_09_Under_70KogakuShikyuGaku() != null
+                && entity.getTounen_09_Under_70KogakuShikyuGaku().compareTo(entity.getTounen_09_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_10_Under_70KogakuShikyuGaku() != null
+                && entity.getTounen_10_Under_70KogakuShikyuGaku().compareTo(entity.getTounen_10_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_11_Under_70KogakuShikyuGaku() != null
+                && entity.getTounen_11_Under_70KogakuShikyuGaku().compareTo(entity.getTounen_11_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getTounen_12_Under_70KogakuShikyuGaku() != null
+                && entity.getTounen_12_Under_70KogakuShikyuGaku().compareTo(entity.getTounen_12_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_01_Under_70KogakuShikyuGaku() != null
+                && entity.getYokunen_01_Under_70KogakuShikyuGaku().compareTo(entity.getYokunen_01_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_02_Under_70KogakuShikyuGaku() != null
+                && entity.getYokunen_02_Under_70KogakuShikyuGaku().compareTo(entity.getYokunen_02_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_03_Under_70KogakuShikyuGaku() != null
+                && entity.getYokunen_03_Under_70KogakuShikyuGaku().compareTo(entity.getYokunen_03_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_04_Under_70KogakuShikyuGaku() != null
+                && entity.getYokunen_04_Under_70KogakuShikyuGaku().compareTo(entity.getYokunen_04_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_05_Under_70KogakuShikyuGaku() != null
+                && entity.getYokunen_05_Under_70KogakuShikyuGaku().compareTo(entity.getYokunen_05_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_06_Under_70KogakuShikyuGaku() != null
+                && entity.getYokunen_06_Under_70KogakuShikyuGaku().compareTo(entity.getYokunen_06_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else if (entity.getYokunen_07_Under_70KogakuShikyuGaku() != null
+                && entity.getYokunen_07_Under_70KogakuShikyuGaku().compareTo(entity.getYokunen_07_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
+            return 補正;
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString editソートキーand改ページキー(KogakugassanJikofutangakuInfoHoseiTempEntity entity) {
+        if (!RString.isNullOrEmpty(edit高額支給額補正実施(entity)) || !RString.isNullOrEmpty(edit自己負担額補正実施(entity))) {
+            return 補正;
+        } else {
+            return 非補正;
+        }
     }
 
 }

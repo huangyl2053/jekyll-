@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelec
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -49,6 +50,7 @@ public class HanyoListShotokuJohoMybatisParameter extends UaFt200FindShikibetsuT
     private final RDate 生年月日範囲終了1;
     private final RDate 生年月日範囲終了;
     private final RDate 生年月日範囲開始;
+    private final LasdecCode 保険者コード;
 
     /**
      * コンストラクタ
@@ -74,13 +76,14 @@ public class HanyoListShotokuJohoMybatisParameter extends UaFt200FindShikibetsuT
      * @param 生年月日範囲終了1 RDate
      * @param 生年月日範囲開始 RDate
      * @param 生年月日範囲終了 RDate
+     * @param 保険者コード LasdecCode
      * @param searchKey IShikibetsuTaishoPSMSearchKey
      */
     public HanyoListShotokuJohoMybatisParameter(ReportId 帳票ID, AtenaSelectBatchParameter 宛名抽出条件, long 出力順ID,
             RString 出力項目ID, boolean 項目名付加, boolean 連番付加, boolean 日付編集, FlexibleYear 賦課年度, YMDHMS 抽出期間From,
             YMDHMS 抽出期間To, RString 住民税減免前後表示区分, List<RString> 課税区分減免前s, List<RString> 課税区分減免後s, RString 出力順,
             RString 年齢層抽出方法, Decimal 年齢範囲開始, Decimal 年齢範囲終了, RDate 生年月日範囲開始1, RDate 生年月日範囲終了1,
-            RDate 生年月日範囲開始, RDate 生年月日範囲終了, IShikibetsuTaishoPSMSearchKey searchKey) {
+            RDate 生年月日範囲開始, RDate 生年月日範囲終了, LasdecCode 保険者コード, IShikibetsuTaishoPSMSearchKey searchKey) {
         super(searchKey);
         this.帳票ID = 帳票ID;
         this.宛名抽出条件 = 宛名抽出条件;
@@ -103,6 +106,7 @@ public class HanyoListShotokuJohoMybatisParameter extends UaFt200FindShikibetsuT
         this.生年月日範囲終了1 = 生年月日範囲終了1;
         this.生年月日範囲開始 = 生年月日範囲開始;
         this.生年月日範囲終了 = 生年月日範囲終了;
+        this.保険者コード = 保険者コード;
     }
 
 }

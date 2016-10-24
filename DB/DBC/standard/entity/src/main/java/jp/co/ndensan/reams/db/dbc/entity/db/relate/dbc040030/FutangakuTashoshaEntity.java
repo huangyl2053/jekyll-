@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * 負担額補正対象者データentityクラスです。
@@ -36,11 +37,15 @@ public class FutangakuTashoshaEntity implements IDbAccessable, Serializable {
     private RString sourceKeName;
     private RString kaipejiKey;
     private RString kaipejiKeyName;
-
+    @PrimaryKey
     private HihokenshaNo hihokenshaNo;
+    @PrimaryKey
     private FlexibleYear taishoNendo;
+    @PrimaryKey
     private HokenshaNo hokenshaNo;
+    @PrimaryKey
     private RString shikyuShinseishoSeiriNo;
+    @PrimaryKey
     private int rirekiNo2;
 
     private RString hokenSeidoCode;

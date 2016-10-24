@@ -26,43 +26,43 @@ public class SeinenngappiCsvProperty {
         /**
          * DT市町村コード
          */
-        DT市町村コード(new RString("0425"), new RString("DT市町村コード"), new RString("")),
+        DT市町村コード(new RString("0425"), new RString("DT市町村コード"), new RString("dtShichosonCode")),
         /**
          * 世帯コード
          */
-        世帯コード(new RString("0008"), new RString("世帯コード"), new RString("")),
+        世帯コード(new RString("0008"), new RString("世帯コード"), new RString("shotaiCode")),
         /**
          * 識別コード
          */
-        識別コード(new RString("0009"), new RString("識別コード"), new RString("")),
+        識別コード(new RString("0009"), new RString("識別コード"), new RString("shikibetsuCode")),
         /**
          * 宛名カナ氏名
          */
-        宛名カナ氏名(new RString("0437"), new RString("宛名カナ氏名"), new RString("")),
+        宛名カナ氏名(new RString("0437"), new RString("宛名カナ氏名"), new RString("atenaKanaShimei")),
         /**
          * 宛名生年月日
          */
-        宛名生年月日(new RString("0438"), new RString("宛名生年月日"), new RString("")),
+        宛名生年月日(new RString("0438"), new RString("宛名生年月日"), new RString("atenaSeinenngappi")),
         /**
          * 宛名性別
          */
-        宛名性別(new RString("0439"), new RString("宛名性別"), new RString("")),
+        宛名性別(new RString("0439"), new RString("宛名性別"), new RString("atenaSeibetsu")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("")),
+        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("hihokenshaNo")),
         /**
          * DTカナ氏名
          */
-        DTカナ氏名(new RString("0427"), new RString("DTカナ氏名"), new RString("")),
+        DTカナ氏名(new RString("0427"), new RString("DTカナ氏名"), new RString("dtKanaShimei")),
         /**
          * DT生年月日
          */
-        DT生年月日(new RString("0428"), new RString("DT生年月日"), new RString("")),
+        DT生年月日(new RString("0428"), new RString("DT生年月日"), new RString("dtSeinenngappi")),
         /**
          * DT性別
          */
-        DT性別(new RString("0429"), new RString("DT性別"), new RString("")),
+        DT性別(new RString("0429"), new RString("DT性別"), new RString("dtSeibetsu")),
         /**
          * DT年金保険者コード
          */
@@ -70,19 +70,19 @@ public class SeinenngappiCsvProperty {
         /**
          * DT基礎年金番号
          */
-        DT基礎年金番号(new RString("0431"), new RString("DT基礎年金番号"), new RString("")),
+        DT基礎年金番号(new RString("0431"), new RString("DT基礎年金番号"), new RString("dtNennkinnHokenshaCode")),
         /**
          * DT年金コード
          */
-        DT年金コード(new RString("0432"), new RString("DT年金コード"), new RString("")),
+        DT年金コード(new RString("0432"), new RString("DT年金コード"), new RString("nennkinnCode")),
         /**
          * DT対象年
          */
-        DT対象年(new RString("0433"), new RString("DT対象年"), new RString("")),
+        DT対象年(new RString("0433"), new RString("DT対象年"), new RString("dtTaisyoYear")),
         /**
          * 不一致項目
          */
-        不一致項目(new RString("0440"), new RString("不一致項目"), new RString(""));
+        不一致項目(new RString("0440"), new RString("不一致項目"), new RString("fuicchiItem"));
         private final RString 項目ID;
         private final RString フォームフィールド名;
         private final RString myBatis項目名;

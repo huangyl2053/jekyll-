@@ -89,7 +89,7 @@ public enum TsukiShorkiKubun implements ITsukiShorkiKubun {
      */
     @Override
     public RString getName() {
-        return RString.EMPTY;
+        return fullName;
     }
 
     /**
@@ -99,6 +99,6 @@ public enum TsukiShorkiKubun implements ITsukiShorkiKubun {
      */
     @Override
     public RString get区分() {
-        return fullName;
+        return code;
     }
 }

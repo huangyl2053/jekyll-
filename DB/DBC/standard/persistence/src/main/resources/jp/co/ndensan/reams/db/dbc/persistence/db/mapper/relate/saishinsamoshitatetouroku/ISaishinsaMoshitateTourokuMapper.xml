@@ -360,45 +360,33 @@
               rgdb."DbT3017KyufujissekiKihon" 実績基本  
               LEFT JOIN rgur."UrT0507Hokenja" 保険者 
                 ON 保険者."hokenjaNo" = 実績基本."shokisaiHokenshaNo" 
-                AND 保険者."hokenjaShubetsu" = #{保険者種別}
+                AND 保険者."hokenjaShubetsu" = #{保険者種別}              
               LEFT JOIN ( 
                 SELECT
                   介護事業者."jigyoshaNo"
                   , 介護事業者."jigyoshaName" 
-                FROM
+                from
                   rgdb."DbT7060KaigoJigyosha" 介護事業者
-                  , ( 
-                    SELECT
-                      MAX(介護事業者."yukoKaishiYMD") AS 有効開始日
-                      , 介護事業者."jigyoshaNo" 
-                    FROM
-                      rgdb."DbT7060KaigoJigyosha" 介護事業者
-                      , rgdb."DbT3017KyufujissekiKihon" 実績基本A 
-                    WHERE
-                      実績基本A."kyufuJissekiKubunCode" = #{行番号} 
-                      AND 実績基本A."serviceTeikyoYM" <![CDATA[>=]]> #{提供年月開始} 
-                      AND 実績基本A."serviceTeikyoYM" <![CDATA[<=]]> #{提供年月終了} 
-                      <if test="事業所番号フラグ">            	
-                      AND 実績基本A."jigyoshoNo" = #{事業所番号}   
-                      </if>   
-                      <if test="被保険者番号フラグ">
-                      AND 実績基本A."hiHokenshaNo" = #{被保険者番号}    
-                      </if>
-                      <if test="保険者番号フラグ">
-                      AND substr(実績基本A."shokisaiHokenshaNo", 1, 5) = substr(#{保険者番号}, 1, 5) 
-                      </if>
-                      AND substr(介護事業者."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> 実績基本A."serviceTeikyoYM" 
-                      AND CASE 
-                        WHEN 介護事業者."yukoShuryoYMD" IS NOT NULL 
-                        THEN substr(介護事業者."yukoShuryoYMD", 1, 6) <![CDATA[>=]]> 実績基本A."serviceTeikyoYM" 
-                        END 
-                    GROUP BY
-                      介護事業者."jigyoshaNo"
-                  ) AS 介護事業A 
-                WHERE
-                  介護事業A."有効開始日" = 介護事業者."yukoKaishiYMD" 
-                  AND 介護事業A."jigyoshaNo" = 介護事業者."jigyoshaNo"
-              ) AS 介護事業B 
+                  , rgdb."DbT3017KyufujissekiKihon" 実績基本A 
+                where
+                  実績基本A."kyufuJissekiKubunCode" =  #{行番号} 
+                  AND 実績基本A."serviceTeikyoYM" <![CDATA[>=]]>  #{提供年月開始} 
+                  AND 実績基本A."serviceTeikyoYM" <![CDATA[<=]]>  #{提供年月終了} 
+                  <if test="事業所番号フラグ">            	
+                  AND 実績基本A."jigyoshoNo" = #{事業所番号}   
+                  </if> 
+                  <if test="被保険者番号フラグ">
+                  AND 実績基本A."hiHokenshaNo" = #{被保険者番号}    
+                  </if>
+                  <if test="保険者番号フラグ">
+                  AND substr(実績基本A."shokisaiHokenshaNo", 3, 8) = #{保険者番号}
+                  </if>
+                  AND substr(介護事業者."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> 実績基本A."serviceTeikyoYM" 
+                  AND ( 
+                    介護事業者."yukoKaishiYMD" = '' 
+                    or 実績基本A."serviceTeikyoYM" <![CDATA[<=]]> substr(介護事業者."yukoShuryoYMD", 1, 6)
+                  )
+              ) AS 介護事業B
                 ON 実績基本."jigyoshoNo" = 介護事業B."jigyoshaNo" 
             WHERE
               実績基本."kyufuJissekiKubunCode" = #{行番号}  
@@ -411,7 +399,7 @@
               AND 実績基本."hiHokenshaNo" = #{被保険者番号}          
               </if>  
               <if test="保険者番号フラグ">    	
-              AND substr(実績基本."shokisaiHokenshaNo", 1, 5) = substr(#{保険者番号}, 1, 5)
+              AND substr(実績基本."shokisaiHokenshaNo", 3, 8) = #{保険者番号}
               </if>
           ) AS 給付実績基本情報 
         WHERE

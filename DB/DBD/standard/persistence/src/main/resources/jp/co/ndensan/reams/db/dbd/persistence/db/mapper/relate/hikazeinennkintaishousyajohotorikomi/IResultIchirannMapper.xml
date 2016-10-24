@@ -66,7 +66,6 @@ and open the template in the editor.
         "HikazeNenkinTaishoshaDouteiResultJohoTempTable"
         WHERE
         "douteiResultKubun" = '1'
-        ORDER BY
        ${出力順}
     </select>
 

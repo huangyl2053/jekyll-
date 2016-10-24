@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbd.business.core.dbd207011.ShiharaiHohoHenkoHaakuOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200007.ShiharaiHohoHenkoKanriIchiranReport;
 import jp.co.ndensan.reams.db.dbd.definition.core.common.TainoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoHenkoHaakoFiveProcessParameter;
@@ -33,6 +34,8 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -60,6 +63,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -91,11 +95,19 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
     private static final RString カラ = new RString("～");
     private static final RString 償還申請中者 = new RString("【抽出対象】 償還申請中者");
     private static final RString 償還支給決定日抽出 = new RString("【抽出方法】 償還支給決定日抽出");
-
+    private static final RString バッチ出力条件出力順 = new RString("出力順:");
     private static final int 帳票期別リストSIZE = 3;
+    private static final RString より = new RString("＞");
+
+    private static final int NO_0 = 0;
+    private static final int NO_1 = 1;
+    private static final int NO_2 = 2;
+    private static final int NO_3 = 3;
+    private static final int NO_4 = 4;
 
     private Association association;
     private IOutputOrder outputOrder;
+    private RString 出力順;
 
     @BatchWriter
     private BatchReportWriter<ShiharaiHohoHenkoKanriIchiranReportSource> batchReportWrite;
@@ -104,6 +116,9 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
     @Override
     protected void initialize() {
         association = AssociationFinderFactory.createInstance().getAssociation();
+        outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
+                parameter.get帳票ID(), parameter.get改頁出力順ID());
+        出力順 = get出力順(outputOrder);
     }
 
     @Override
@@ -118,13 +133,16 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toShiharaiHohoHenkoHaakuFiveMybatisParameter(uaFt200Psm));
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toShiharaiHohoHenkoHaakuFiveMybatisParameter(uaFt200Psm, 出力順));
     }
 
     @Override
     protected void createWriter() {
+        List<RString> pageBreakKeys = new ArrayList<>();
+        set改頁Key(outputOrder, pageBreakKeys);
         batchReportWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBD200006.getReportId().value(),
-                SubGyomuCode.DBD介護受給).create();
+                SubGyomuCode.DBD介護受給).addBreak(
+                        new BreakerCatalog<ShiharaiHohoHenkoKanriIchiranReportSource>().simplePageBreaker(pageBreakKeys)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
     }
 
@@ -180,6 +198,85 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
         printer.print();
     }
 
+    private RString get出力順(IOutputOrder order) {
+        if (order != null) {
+            RString 出力順 = MyBatisOrderByClauseCreator.create(ShiharaiHohoHenkoHaakuOrderKey.class, order);
+            return 出力順.concat(",対象者情報一時テーブル.\"hihokenshaNo\","
+                    + "収納状況一時テーブル.\"choteiNendo\",収納状況一時テーブル.\"fukaNendo\""
+                    + ",収納状況一時テーブル.\"tsuchishoNo\",,収納状況一時テーブル.\"ki\"");
+        }
+        return new RString("対象者情報一時テーブル.\"hihokenshaNo\","
+                + "収納状況一時テーブル.\"choteiNendo\",収納状況一時テーブル.\"fukaNendo\""
+                + ",収納状況一時テーブル.\"tsuchishoNo\",,収納状況一時テーブル.\"ki\"");
+    }
+
+    private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
+        RString 改頁１ = RString.EMPTY;
+        RString 改頁２ = RString.EMPTY;
+        RString 改頁３ = RString.EMPTY;
+        RString 改頁４ = RString.EMPTY;
+        RString 改頁５ = RString.EMPTY;
+        if (outputOrder != null) {
+            List<ISetSortItem> list = outputOrder.get設定項目リスト();
+            if (list == null) {
+                list = new ArrayList<>();
+            }
+            if (list.size() > NO_0 && list.get(NO_0).is改頁項目()) {
+                改頁１ = to帳票物理名(list.get(NO_0).get項目ID());
+            }
+            if (list.size() > NO_1 && list.get(NO_1).is改頁項目()) {
+                改頁２ = to帳票物理名(list.get(NO_1).get項目ID());
+            }
+            if (list.size() > NO_2 && list.get(NO_2).is改頁項目()) {
+                改頁３ = to帳票物理名(list.get(NO_2).get項目ID());
+            }
+            if (list.size() > NO_3 && list.get(NO_3).is改頁項目()) {
+                改頁４ = to帳票物理名(list.get(NO_3).get項目ID());
+            }
+            if (list.size() > NO_4 && list.get(NO_4).is改頁項目()) {
+                改頁５ = to帳票物理名(list.get(NO_4).get項目ID());
+            }
+
+            if (!改頁１.isEmpty()) {
+                pageBreakKeys.add(改頁１);
+            }
+            if (!改頁２.isEmpty()) {
+                pageBreakKeys.add(改頁２);
+            }
+            if (!改頁３.isEmpty()) {
+                pageBreakKeys.add(改頁３);
+            }
+            if (!改頁４.isEmpty()) {
+                pageBreakKeys.add(改頁４);
+            }
+            if (!改頁５.isEmpty()) {
+                pageBreakKeys.add(改頁５);
+            }
+        }
+    }
+
+    private RString to帳票物理名(RString 項目ID) {
+        RString 帳票物理名 = RString.EMPTY;
+        if (ShiharaiHohoHenkoHaakuOrderKey.郵便番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("yubinNo");
+        } else if (ShiharaiHohoHenkoHaakuOrderKey.町域コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("choikiCode");
+        } else if (ShiharaiHohoHenkoHaakuOrderKey.行政区コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("gyoseikuCode");
+        } else if (ShiharaiHohoHenkoHaakuOrderKey.世帯コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("setaiCode");
+        } else if (ShiharaiHohoHenkoHaakuOrderKey.識別コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shikibetsuCode");
+        } else if (ShiharaiHohoHenkoHaakuOrderKey.氏名５０音カナ.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shimeiKana");
+        } else if (ShiharaiHohoHenkoHaakuOrderKey.市町村コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("shichosonCode");
+        } else if (ShiharaiHohoHenkoHaakuOrderKey.被保険者番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("hihokenshaNo");
+        }
+        return 帳票物理名;
+    }
+
     private ShiharaiHohoHenkoEntity createShiharaiHohoHenkoEntity(ShiharaiHohoHenkoHaakuFiveEntity t) {
 
         reportData.set被保険者番号(t.get対象者情報_被保険者番号());
@@ -210,7 +307,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
             if (kojin.get世帯コード() != null && !kojin.get世帯コード().isEmpty()) {
                 reportData.set世帯番号(new Code(kojin.get世帯コード().getColumnValue()));
             }
-            reportData.set行政区ｺｰﾄﾞ(kojin.get行政区画().getGyoseiku().getコード().value());
+            reportData.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
             reportData.set行政区(kojin.get行政区画().getGyoseiku().get名称());
             reportData.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
             reportData.set郵便番号(kojin.get住所().get郵便番号());
@@ -355,7 +452,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                     期別情報.set保険料金(収納状況情報Data.get収納状況_調定額());
                     期別情報.set納期限(edit日期(収納状況情報Data.get収納状況_納期限()));
                     期別情報.set滞納額(収納状況情報Data.get収納状況_未納額());
-                    if (収納状況情報Data.get収納状況_滞納区分() != null) {
+                    if (収納状況情報Data.get収納状況_滞納区分() != null && !収納状況情報Data.get収納状況_滞納区分().isEmpty()) {
                         期別情報.set滞納区分(TainoKubun.toValue(収納状況情報Data.get収納状況_滞納区分()));
                     }
 
@@ -409,6 +506,16 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                 list.add(滞納期間.concat(new RString(parameter.get受給支給決定日抽出の滞納期間())).concat(ヵ月経過));
             }
         }
+        RString 設定項目 = RString.EMPTY;
+        if (outputOrder != null) {
+            for (ISetSortItem item : outputOrder.get設定項目リスト()) {
+                設定項目 = 設定項目.concat(より).concat(item.get項目名());
+            }
+        }
+        if (!設定項目.isEmpty()) {
+            設定項目 = 設定項目.substringEmptyOnError(1, 設定項目.length() - 1);
+        }
+        list.add(バッチ出力条件出力順.concat(設定項目));
         return list;
     }
 

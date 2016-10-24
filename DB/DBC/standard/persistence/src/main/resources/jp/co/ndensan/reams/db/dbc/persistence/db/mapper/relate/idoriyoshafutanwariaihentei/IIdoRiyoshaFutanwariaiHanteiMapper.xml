@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 高額サービス費給付お知らせ通知書作成 -->
-<!-- @reamsid_L DBC-4770-030 zhujun -->
+<!-- 異動分利用者負担割合判定 -->
+<!-- @reamsid_L DBC-4950-031 zhujun -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoriyoshafutanwariaihentei.IIdoRiyoshaFutanwariaiHanteiMapper">
     <select  resultOrdered="true" id="selectMaxRenban" 
              resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity" 

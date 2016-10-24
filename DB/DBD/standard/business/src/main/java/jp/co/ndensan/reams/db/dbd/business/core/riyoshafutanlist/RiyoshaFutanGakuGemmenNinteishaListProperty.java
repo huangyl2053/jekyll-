@@ -52,11 +52,11 @@ public class RiyoshaFutanGakuGemmenNinteishaListProperty {
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("構成市町村マスタ.\"shichosonCode\"")),
+        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("認定情報.\"shichosonCode\"")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("要介護認定申請情報.\"hihokenshaNo\""));
+        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("taishoShaHanteiYoukonkyoItokiTemp\".\"hihokenshaNo\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

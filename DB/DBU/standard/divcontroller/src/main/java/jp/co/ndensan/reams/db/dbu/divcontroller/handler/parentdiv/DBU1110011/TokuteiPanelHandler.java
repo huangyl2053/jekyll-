@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU1110011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU080010.DBU080010_TokuteiKojinJohoTeikyoParameter;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU080010.DBU080010_TokuteiKojinJohoTeikyoParameterHandler;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TokuteiKojinJohoMeisho;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TokuteiKojinJohomeiCode;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU1110011.TokuteiPanelDiv;
@@ -54,16 +53,12 @@ public class TokuteiPanelHandler {
 //        設計書「バッチ設計_DBUMNC2001-1_特定個人情報提供」のバッチパラメータシート
 //        （画面起動時（ワークフローID = xxxxxx）を参照。
 //        QA1818_#103726
-        List<DBU080010_TokuteiKojinJohoTeikyoParameterHandler> 特定個人情報 = new ArrayList<>();
+        List<RString> 特定個人情報 = new ArrayList<>();
         DBU080010_TokuteiKojinJohoTeikyoParameter parameter = new DBU080010_TokuteiKojinJohoTeikyoParameter();
         List<grdTokuteiJoho_Row> listRow = div.getGrdTokuteiJoho().getDataSource();
         for (grdTokuteiJoho_Row row : listRow) {
             if (row.getChkSeiGyo().isValue()) {
-                DBU080010_TokuteiKojinJohoTeikyoParameterHandler parameterHandler
-                        = new DBU080010_TokuteiKojinJohoTeikyoParameterHandler();
-                parameterHandler.set特定個人情報名コード(
-                        get特定個人情報名コード(row.getTokuteiKojinJohoNo()));
-                特定個人情報.add(parameterHandler);
+                特定個人情報.add(get特定個人情報名コード(row.getTokuteiKojinJohoNo()));
             }
         }
         parameter.set特定個人情報(特定個人情報);
