@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaGendoGakuKanri;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.KubunShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.TankiNyushoShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -31,7 +32,7 @@ public class ShikyuGendogakuEdit {
     private FlexibleDate 一本化施行日 = FlexibleDate.EMPTY;
     private List<JukyushaGendoGakuKanri> 受給者限度額Entityリスト = new ArrayList<>();
     private List<TankiNyushoShikyuGendoGaku> 短期入所系支給限度額Entityリスト = new ArrayList<>();
-    private List<TankiNyushoShikyuGendoGaku> 訪問通所系限度額Entityリスト = new ArrayList<>();
+    private List<KubunShikyuGendoGaku> 訪問通所系限度額Entityリスト = new ArrayList<>();
     private List<GendoGakuEntity> 短期入所限度額Entityリスト = new ArrayList<>();
     private List<GendoGakuEntity> 訪問通所限度額Entityリスト = new ArrayList<>();
     private final Code 有効無効区分_有効 = new Code("1");
@@ -74,11 +75,11 @@ public class ShikyuGendogakuEdit {
             List<JukyushaDaicho> 受給者台帳リスト,
             List<JukyushaGendoGakuKanri> 受給者限度額リスト,
             List<TankiNyushoShikyuGendoGaku> 短期入所系支給限度額リスト,
-            List<TankiNyushoShikyuGendoGaku> 訪問通所系限度額リスト) {
+            List<KubunShikyuGendoGaku> 訪問通所系限度額リスト) {
         this.一本化施行日 = 一本化日;
         this.受給者台帳Entityリスト = 受給者台帳リスト;
         this.受給者限度額Entityリスト = 受給者限度額リスト;
-        this.短期入所系支給限度額Entityリスト = 訪問通所系限度額リスト;
+        this.短期入所系支給限度額Entityリスト = 短期入所系支給限度額リスト;
         this.訪問通所系限度額Entityリスト = 訪問通所系限度額リスト;
         if (makeShikyuGendoList()) {
             for (int index = 0; index < 受給者台帳Entityリスト.size(); index++) {
@@ -100,10 +101,10 @@ public class ShikyuGendogakuEdit {
         JukyushaDaicho 編集された受給者台帳 = editShikyuGendoGaku(受給者台帳Entityリスト.get(index));
         if (index == 受給者台帳Entityリスト.size() - 1) {
             受給者台帳Entityリスト.remove(index);
-            受給者台帳Entityリスト.add(editShikyuGendoGaku(編集された受給者台帳));
+            受給者台帳Entityリスト.add(編集された受給者台帳);
         } else {
             受給者台帳Entityリスト.remove(index);
-            受給者台帳Entityリスト.add(index, editShikyuGendoGaku(編集された受給者台帳));
+            受給者台帳Entityリスト.add(index, 編集された受給者台帳);
         }
     }
 
@@ -115,12 +116,13 @@ public class ShikyuGendogakuEdit {
         GendoGakuEntity 訪問通所限度額 = 訪問通所限度額Entityリスト.get(訪問通所限度額IDX);
         FlexibleDate 訪問通所支給適用開始日ＷＫ = FlexibleDate.EMPTY;
         FlexibleDate 訪問通所支給適用終了日ＷＫ = FlexibleDate.EMPTY;
+        Decimal 訪問通所支給限度基準額ＷＫ = Decimal.ZERO;
         if (!getCodeFromYokaigoJotaiKubun(YokaigoJotaiKubun.非該当).equals(訪問通所限度額.get要介護区分())) {
-            TankiNyushoShikyuGendoGaku 訪問通所系支給限度額 = get系支給限度額(訪問通所限度額, 訪問通所系限度額Entityリスト);
+            KubunShikyuGendoGaku 訪問通所系支給限度額 = get支給限度額(訪問通所限度額, 訪問通所系限度額Entityリスト);
             if (訪問通所系支給限度額 != null) {
                 訪問通所支給適用開始日ＷＫ = new FlexibleDate(訪問通所限度額.get適用開始年月().toDateString().concat("01"));
                 訪問通所支給適用終了日ＷＫ = getFlexibleDateFromFlexibleYearMonthBy末日(訪問通所限度額.get適用終了年月());
-                //TODO 訪問通所支給限度基準額ＷＫに対象限度額データの限度額を設定
+                訪問通所支給限度基準額ＷＫ = 訪問通所系支給限度額.get支給限度単位数();
             }
         }
         FlexibleDate 短期入所適用開始日ＷＫ = FlexibleDate.EMPTY;
@@ -139,7 +141,7 @@ public class ShikyuGendogakuEdit {
             }
         }
         JukyushaDaichoBuilder builder = 受給者台帳Entity.createBuilderForEdit();
-        //TODO 訪問通所支給限度基準額ＷＫ
+        builder.set支給限度単位数(訪問通所支給限度基準額ＷＫ);
         builder.set支給限度有効開始年月日(訪問通所支給適用開始日ＷＫ);
         builder.set支給限度有効終了年月日(訪問通所支給適用終了日ＷＫ);
         builder.set短期入所支給限度日数(短期入所基準額ＷＫ.intValue());
@@ -240,6 +242,17 @@ public class ShikyuGendogakuEdit {
 
     private TankiNyushoShikyuGendoGaku get系支給限度額(GendoGakuEntity 限度額, List<TankiNyushoShikyuGendoGaku> 系支給限度額リスト) {
         for (TankiNyushoShikyuGendoGaku 訪問通所限度額Entity : 系支給限度額リスト) {
+            if (訪問通所限度額Entity.get適用開始年月().isBeforeOrEquals(限度額.get適用開始年月())
+                    && 限度額.get適用開始年月().isBeforeOrEquals(訪問通所限度額Entity.get適用終了年月())
+                    && 訪問通所限度額Entity.get要介護状態区分().equals(限度額.get要介護区分().getColumnValue())) {
+                return 訪問通所限度額Entity;
+            }
+        }
+        return null;
+    }
+
+    private KubunShikyuGendoGaku get支給限度額(GendoGakuEntity 限度額, List<KubunShikyuGendoGaku> 系支給限度額リスト) {
+        for (KubunShikyuGendoGaku 訪問通所限度額Entity : 系支給限度額リスト) {
             if (訪問通所限度額Entity.get適用開始年月().isBeforeOrEquals(限度額.get適用開始年月())
                     && 限度額.get適用開始年月().isBeforeOrEquals(訪問通所限度額Entity.get適用終了年月())
                     && 訪問通所限度額Entity.get要介護状態区分().equals(限度額.get要介護区分().getColumnValue())) {
@@ -421,9 +434,12 @@ public class ShikyuGendogakuEdit {
     }
 
     private int get直近データ限度額IDX() {
-        int 限度額IDX = -1;
-        //TODO 直近データを検索、適用終了年月が設定されている限度額IDXを取得する。
-        return 限度額IDX;
+        for (int 限度額IDX = 短期入所限度額Entityリスト.size() - 1; 限度額IDX >= 0; 限度額IDX--) {
+            if (短期入所限度額Entityリスト.get(限度額IDX).get適用終了年月() != null) {
+                return 限度額IDX;
+            }
+        }
+        return -1;
     }
 
     private GendoGakuEntity get限度額EntityFrom受給者情報(JukyushaDaicho 受給者情報) {
@@ -445,6 +461,16 @@ public class ShikyuGendogakuEdit {
         for (JukyushaDaicho 受給者情報 : 受給者台帳Entityリスト) {
             if (有効無効区分_有効.equals(受給者情報.get有効無効区分())) {
                 受給者情報リスト.add(get受給者情報By重み度変換(受給者情報));
+            }
+        }
+        for (int i = 0; i < 受給者情報リスト.size(); i++) {
+            for (int j = i + 1; j < 受給者情報リスト.size(); j++) {
+                JukyushaDaicho temp = null;
+                if (受給者情報リスト.get(i).get履歴番号().compareTo(受給者情報リスト.get(j).get履歴番号()) > 0) {
+                    temp = 受給者情報リスト.get(i);
+                    受給者情報リスト.set(i, 受給者情報リスト.get(j));
+                    受給者情報リスト.set(j, temp);
+                }
             }
         }
         return 受給者情報リスト;

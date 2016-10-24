@@ -36,8 +36,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.kingaku.KingakuFormatter;
 import jp.co.ndensan.reams.ur.urz.definition.core.kingaku.KingakuUnit;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -112,14 +110,16 @@ public class HanyoListFutanGendoGakuNinteiBusiness {
      * @param entity SQL検索結果情報
      * @param association 地方公共団体情報
      * @param hokenshaList 保険者リスト
-     * @param Csvhitsukesurasyuhensyu 日付スラッシュ付加
+     * @param csvhitsukesurasyuhensyu 日付スラッシュ付加
+     * @param 市町村名 市町村名
      */
-    public void setEucCsvEntity(Association association, boolean Csvhitsukesurasyuhensyu,
-            FutanGendoGakuNinteiEucCsvEntity eucCsvEntity, FutanGendoGakuNinteiEntity entity, HokenshaList hokenshaList) {
-        isCsvhitsukesurasyuhensyu = Csvhitsukesurasyuhensyu;
+    public void setEucCsvEntity(Association association, boolean csvhitsukesurasyuhensyu,
+            FutanGendoGakuNinteiEucCsvEntity eucCsvEntity, FutanGendoGakuNinteiEntity entity,
+            HokenshaList hokenshaList, RString 市町村名) {
+        isCsvhitsukesurasyuhensyu = csvhitsukesurasyuhensyu;
         if (entity.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
-            eucCsvEntity.set識別コード(kojin.get識別コード().value());
+            eucCsvEntity.set識別コード(kojin.get識別コード().getColumnValue());
             eucCsvEntity.set住民種別(kojin.get住民状態().住民状態略称());
             eucCsvEntity.set氏名(kojin.get名称().getName().value());
             eucCsvEntity.set氏名カナ(kojin.get名称().getKana().value());
@@ -165,7 +165,7 @@ public class HanyoListFutanGendoGakuNinteiBusiness {
             eucCsvEntity.set前住所方書(kojin.get転入前().get方書().value());
         }
         eucCsvEntity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
-        eucCsvEntity.set市町村名(get地方公共団体(new LasdecCode(entity.get被保険者台帳管理_市町村コード())).get市町村名());
+        eucCsvEntity.set市町村名(市町村名);
         eucCsvEntity.set保険者コード(association.get地方公共団体コード().value());
         eucCsvEntity.set保険者名(association.getShichosonName_());
         eucCsvEntity.set空白(RString.EMPTY);
@@ -411,7 +411,7 @@ public class HanyoListFutanGendoGakuNinteiBusiness {
         return eucCsvEntity;
     }
 
-    public void setBlank2(FutanGendoGakuNinteiEucCsvEntity eucCsvEntity) {
+    private void setBlank2(FutanGendoGakuNinteiEucCsvEntity eucCsvEntity) {
         eucCsvEntity.set受給状況(RString.EMPTY);
         eucCsvEntity.set異動事由コード(RString.EMPTY);
         eucCsvEntity.set異動事由追加文(RString.EMPTY);
@@ -1015,10 +1015,5 @@ public class HanyoListFutanGendoGakuNinteiBusiness {
             return RString.EMPTY;
         }
         return HihokenshaKubunCode.toValue(被保険者区分コード).get名称();
-    }
-
-    private Association get地方公共団体(LasdecCode 市町村コード) {
-        IAssociationFinder finder = AssociationFinderFactory.createInstance();
-        return finder.getAssociation(市町村コード);
     }
 }

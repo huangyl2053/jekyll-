@@ -45,7 +45,6 @@ public class SelectKeisanTaishoshaProcess extends BatchKeyBreakBase<FuchoKarisan
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_4 = 4;
-    private static final int NUM_14 = 14;
     private FuchoKarisanteiFukaProcessParameter parameter;
     private FlexibleDate 賦課年度開始日;
     private int 資格件数;

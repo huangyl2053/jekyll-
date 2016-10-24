@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.service.core.jigyobunshikyugakukeisankekkarenrakuhyopanel;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanPanelEntity;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuPanelListParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigyobunshikyugakukeisankekkarenrakuhyo.IJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigyobunshikyugakukeisankekkarenrakuhyo.IJigyobunShikyugakuKeisanPanelMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -63,12 +63,12 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelFinder {
      *
      * @return List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
      */
-    public List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> getJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelList(
-            JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter parameter) {
+    public List<JigyobunShikyugakuKeisanPanelEntity> getJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelList(
+            JigyobunShikyugakuPanelListParameter parameter) {
 
-        IJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelMapper mapper = mapperProvider.create(
-                IJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelMapper.class);
-        List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> panelentity = mapper.get対象データ(parameter);
+        IJigyobunShikyugakuKeisanPanelMapper mapper = mapperProvider.create(
+                IJigyobunShikyugakuKeisanPanelMapper.class);
+        List<JigyobunShikyugakuKeisanPanelEntity> panelentity = mapper.get対象データ(parameter);
         return panelentity;
     }
 
@@ -80,12 +80,12 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelFinder {
      *
      * @return List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult>
      */
-    public List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> getJigyobunShikyugakuKeisanKekkaRenrakuhyoPanel(
-            JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter parameter) {
+    public List<JigyobunShikyugakuKeisanPanelEntity> getJigyobunShikyugakuKeisanKekkaRenrakuhyoPanel(
+            JigyobunShikyugakuPanelListParameter parameter) {
 
-        IJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelMapper mapper = mapperProvider.create(
-                IJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelMapper.class);
-        List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> panelEntityList = mapper.get処理対象データ(parameter);
+        IJigyobunShikyugakuKeisanPanelMapper mapper = mapperProvider.create(
+                IJigyobunShikyugakuKeisanPanelMapper.class);
+        List<JigyobunShikyugakuKeisanPanelEntity> panelEntityList = mapper.get処理対象データ(parameter);
         return panelEntityList;
     }
 

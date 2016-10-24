@@ -53,18 +53,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
-import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -93,11 +87,6 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBD701013");
     private static final RString SHIKIBETSUCODE = new RString("二次予防事業対象者_識別コード");
-    private static final int NO_0 = 0;
-    private static final int NO_1 = 1;
-    private static final int NO_2 = 2;
-    private static final int NO_3 = 3;
-    private static final int NO_4 = 4;
     private final List<RString> csvHeader = new ArrayList<>();
     private List<RString> csvContent;
     private static final RString MYBATIS_SELECT_ID = new RString(
@@ -186,7 +175,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
                 setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 build();
-        set改頁Key(outputOrder, pageBreakKeys);
+        HanyoListJigyoTaishoshaManager.createInstance().set改頁Key(outputOrder, pageBreakKeys);
         batchReportWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBZ.DBZ700001.getReportId().value(), SubGyomuCode.DBZ介護共通).addBreak(
                 new BreakerCatalog<HanyoListReportSource>().simplePageBreaker(pageBreakKeys)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
@@ -196,59 +185,30 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
     protected void process(HanyoRisutoJigyoTaishoshaEntity entity) {
         連番 = 連番 + 1;
         HanyoRisutoJigyoTaishoshaEucCsvEntity eucCsvEntity = new HanyoRisutoJigyoTaishoshaEucCsvEntity();
-        HanyoListJigyoTaishoshaManager.createInstance().CSV情報設定(eucCsvEntity, entity, association, processParamter.isCsvhitsukesurasyuhensyu());
+        HanyoListJigyoTaishoshaManager.createInstance().get情報設定(eucCsvEntity, entity, association, processParamter.isCsvhitsukesurasyuhensyu());
         eucCsvWriter.writeLine(eucCsvEntity);
         personalDataList.add(toPersonalData(entity));
-        Class clazz = eucCsvEntity.getClass();
         boolean flag = false;
         if (hanyoListShutsuryokuKomoku != null) {
             for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
+                RString 項目内容new = RString.EMPTY;
                 RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
                 if (get項目名称 != null && !get項目名称.isEmpty()) {
-                    RString 項目内容new = RString.EMPTY;
+                    Class clazz = eucCsvEntity.getClass();
+                    Method getMethod;
                     try {
-                        Method getMethod = clazz.getDeclaredMethod(JigyoTaishoshaCsvEnumEntity
+                        getMethod = clazz.getDeclaredMethod(JigyoTaishoshaCsvEnumEntity
                                 .toValue(new RString(String.valueOf(hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト()
                                                         .get(i).get項目位置()))).get名称().toString());
-                        項目内容new = (RString) getMethod.invoke(eucCsvEntity);
-                        if (項目内容new != null && !項目内容new.isEmpty()) {
-                            項目内容new = HanyoListManager.createInstance().項目内容new編集(i, 項目内容new, hanyoListShutsuryokuKomoku);
-                            flag = true;
-                        }
-                    } catch (NoSuchMethodException | SecurityException | IllegalAccessException |
-                            IllegalArgumentException | InvocationTargetException ex) {
+                        項目内容new = get項目内容(getMethod, 項目内容new, eucCsvEntity, i);
+                    } catch (NoSuchMethodException | SecurityException ex) {
                         Logger.getLogger(HanyoListJigyoTaishoshaProcess.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    if (is帳票出力) {
-                        帳票出力編集(i, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
-                    }
-                    if (isCSV出力) {
-                        出力編集(i, get項目名称, 項目内容new);
-                    }
+                    flag = flag判定(flag, 項目内容new);
+                    帳票出力とCSV出力編集(i, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
                 }
             }
-            if (is帳票出力) {
-                if (flag) {
-                    HanyoListEntity hanyolistentity = new HanyoListEntity();
-                    get方法(entity, hanyolistentity);
-                    HanyoListReport report = new HanyoListReport(hanyolistentity, processParamter.getHyoudai(),
-                            processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
-                    report.writeBy(reportSourceWriter);
-                }
-                項目見出し = RString.EMPTY;
-                項目内容 = RString.EMPTY;
-                出力文字の開始位置 = 0;
-            }
-            if (isCSV出力 && csvContent != null && !csvContent.isEmpty()) {
-                連番flag = 連番flag + 1;
-                if (連番flag == 1 && processParamter.isCsvkomokumeifuka() && csvHeader != null && !csvHeader.isEmpty()) {
-                    eucCsvWriter1.writeLine(csvHeader);
-                }
-                if (flag) {
-                    eucCsvWriter1.writeLine(csvContent);
-                }
-                csvContent = new ArrayList();
-            }
+            帳票出力とCSV出力(entity, flag);
         }
     }
 
@@ -263,11 +223,16 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
         if (isCSV出力) {
             manager.spool(csvFilePath1, log);
         }
+        if (is帳票出力) {
+            AccessLogUUID reportLog = AccessLogger.logReport(personalDataList);
+            batchReportWrite.addPrivacy(reportLog);
+        }
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
-        RString 出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
-        HanyoListJigyoTaishoshaManager.createInstance().
-                バッチ出力条件リストの出力(processParamter, 導入団体コード, 市町村名, 出力ページ数, is帳票出力);
+        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount()));
+        RString 出力件数 = new RString(String.valueOf(eucCsvWriter1.getCount()));
+        HanyoListJigyoTaishoshaManager.createInstance().バッチ出力条件リストの出力(processParamter, 導入団体コード,
+                市町村名, is帳票出力, 出力ページ数, 出力件数);
     }
 
     private void set帳表CSV出力() {
@@ -280,6 +245,40 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
             is帳票出力 = true;
         }
 
+    }
+
+    private void 帳票出力とCSV出力編集(int i, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku, RString get項目名称, RString 項目内容new) {
+        if (is帳票出力) {
+            帳票出力編集(i, hanyoListShutsuryokuKomoku, get項目名称, 項目内容new);
+        }
+        if (isCSV出力) {
+            出力編集(i, get項目名称, 項目内容new);
+        }
+    }
+
+    private void 帳票出力とCSV出力(HanyoRisutoJigyoTaishoshaEntity entity, boolean flag) {
+        if (is帳票出力) {
+            if (flag) {
+                HanyoListEntity hanyolistentity = new HanyoListEntity();
+                HanyoListJigyoTaishoshaManager.createInstance().get方法(entity, hanyolistentity);
+                HanyoListReport report = new HanyoListReport(hanyolistentity, processParamter.getHyoudai(),
+                        processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
+                report.writeBy(reportSourceWriter);
+            }
+            項目見出し = RString.EMPTY;
+            項目内容 = RString.EMPTY;
+            出力文字の開始位置 = 0;
+        }
+        if (isCSV出力 && csvContent != null && !csvContent.isEmpty()) {
+            連番flag = 連番flag + 1;
+            if (連番flag == 1 && processParamter.isCsvkomokumeifuka() && csvHeader != null && !csvHeader.isEmpty()) {
+                eucCsvWriter1.writeLine(csvHeader);
+            }
+            if (flag) {
+                eucCsvWriter1.writeLine(csvContent);
+            }
+            csvContent = new ArrayList();
+        }
     }
 
     private RString get出力順() {
@@ -417,112 +416,22 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
         return 項目見出し;
     }
 
-    private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
-        RString 改頁１ = RString.EMPTY;
-        RString 改頁２ = RString.EMPTY;
-        RString 改頁３ = RString.EMPTY;
-        RString 改頁４ = RString.EMPTY;
-        RString 改頁５ = RString.EMPTY;
-        if (outputOrder != null) {
-            List<ISetSortItem> list = outputOrder.get設定項目リスト();
-            if (list == null) {
-                list = new ArrayList<>();
-            }
-            if (list.size() > NO_0 && list.get(NO_0).is改頁項目()) {
-                改頁１ = to帳票物理名(list.get(NO_0).get項目ID());
-            }
-            if (list.size() > NO_1 && list.get(NO_1).is改頁項目()) {
-                改頁２ = to帳票物理名(list.get(NO_1).get項目ID());
-            }
-            if (list.size() > NO_2 && list.get(NO_2).is改頁項目()) {
-                改頁３ = to帳票物理名(list.get(NO_2).get項目ID());
-            }
-            if (list.size() > NO_3 && list.get(NO_3).is改頁項目()) {
-                改頁４ = to帳票物理名(list.get(NO_3).get項目ID());
-            }
-            if (list.size() > NO_4 && list.get(NO_4).is改頁項目()) {
-                改頁５ = to帳票物理名(list.get(NO_4).get項目ID());
-            }
-
-            if (!改頁１.isEmpty()) {
-                pageBreakKeys.add(改頁１);
-            }
-            if (!改頁２.isEmpty()) {
-                pageBreakKeys.add(改頁２);
-            }
-            if (!改頁３.isEmpty()) {
-                pageBreakKeys.add(改頁３);
-            }
-            if (!改頁４.isEmpty()) {
-                pageBreakKeys.add(改頁４);
-            }
-            if (!改頁５.isEmpty()) {
-                pageBreakKeys.add(改頁５);
-            }
+    private RString get項目内容(Method getMethod, RString 項目内容new, HanyoRisutoJigyoTaishoshaEucCsvEntity eucCsvEntity, int i) {
+        try {
+            項目内容new = (RString) getMethod.invoke(eucCsvEntity);
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(HanyoListJigyoTaishoshaProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if (項目内容new != null && !項目内容new.isEmpty()) {
+            項目内容new = HanyoListManager.createInstance().項目内容new編集(i, 項目内容new, hanyoListShutsuryokuKomoku);
+        }
+        return 項目内容new;
     }
 
-    private RString to帳票物理名(RString 項目ID) {
-        RString 帳票物理名 = RString.EMPTY;
-        if (HanyoListJigyoTaishoshaOrderby.郵便番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("yubinNo");
-        } else if (HanyoListJigyoTaishoshaOrderby.町域コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("choikiCode");
-        } else if (HanyoListJigyoTaishoshaOrderby.番地コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("banchi");
-        } else if (HanyoListJigyoTaishoshaOrderby.行政区コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("gyoseikuCode");
-        } else if (HanyoListJigyoTaishoshaOrderby.地区１.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("chikuCode1");
-        } else if (HanyoListJigyoTaishoshaOrderby.地区２.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("chikuCode2");
-        } else if (HanyoListJigyoTaishoshaOrderby.世帯コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("setaiCode");
-        } else if (HanyoListJigyoTaishoshaOrderby.識別コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("shikibetsuCode");
-        } else if (HanyoListJigyoTaishoshaOrderby.氏名５０音カナ.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("kanaShimei");
-        } else if (HanyoListJigyoTaishoshaOrderby.生年月日.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("seinengappiYMD");
-        } else if (HanyoListJigyoTaishoshaOrderby.性別.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("seibetsuCode");
-        } else if (HanyoListJigyoTaishoshaOrderby.市町村コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("shichosonCode");
-        } else if (HanyoListJigyoTaishoshaOrderby.被保険者番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("hokenshaNo");
+    private boolean flag判定(boolean flag, RString 項目内容new) {
+        if (項目内容new != null && !項目内容new.isEmpty()) {
+            flag = true;
         }
-        return 帳票物理名;
-    }
-
-    private void get方法(HanyoRisutoJigyoTaishoshaEntity entity, HanyoListEntity hanyolistentity) {
-        ChoikiCode 町域コード = ChoikiCode.EMPTY;
-        YubinNo 郵便番号 = YubinNo.EMPTY;
-        AtenaBanchi 番地コード = AtenaBanchi.EMPTY;
-        GyoseikuCode 行政区コード = GyoseikuCode.EMPTY;
-        ChikuCode 地区１ = ChikuCode.EMPTY;
-        ChikuCode 地区２ = ChikuCode.EMPTY;
-        SetaiCode 世帯コード = SetaiCode.EMPTY;
-        if (entity.getPsmEntity() != null) {
-            町域コード = entity.getPsmEntity().getChoikiCode();
-            郵便番号 = entity.getPsmEntity().getYubinNo();
-            番地コード = entity.getPsmEntity().getBanchi();
-            行政区コード = entity.getPsmEntity().getGyoseikuCode();
-            地区１ = entity.getPsmEntity().getChikuCode1();
-            地区２ = entity.getPsmEntity().getChikuCode2();
-            世帯コード = entity.getPsmEntity().getSetaiCode();
-            hanyolistentity.set氏名５０音カナ(entity.getPsmEntity().getKanaName());
-            hanyolistentity.set生年月日(entity.getPsmEntity().getSeinengappiYMD());
-            hanyolistentity.set性別(entity.getPsmEntity().getSeibetsuCode());
-        }
-        hanyolistentity.set郵便番号((郵便番号 != null && !郵便番号.isEmpty()) ? 郵便番号.getYubinNo() : RString.EMPTY);
-        hanyolistentity.set町域コード((町域コード != null && !町域コード.isEmpty()) ? 町域コード.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set番地コード((番地コード != null && 番地コード.isEmpty()) ? 番地コード.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set行政区コード((行政区コード != null && !行政区コード.isEmpty()) ? 行政区コード.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set地区１((地区１ != null && !地区１.isEmpty()) ? 地区１.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set地区２((地区２ != null && !地区２.isEmpty()) ? 地区２.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set世帯コード((世帯コード != null && !世帯コード.isEmpty()) ? 世帯コード.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set識別コード(entity.get被保険者台帳管理_識別コード());
-        hanyolistentity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
-        hanyolistentity.set被保険者番号(entity.get二次予防事業対象者_被保険者番号());
+        return flag;
     }
 }

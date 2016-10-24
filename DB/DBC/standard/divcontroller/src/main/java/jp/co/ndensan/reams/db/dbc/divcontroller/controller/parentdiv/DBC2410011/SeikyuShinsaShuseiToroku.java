@@ -45,9 +45,6 @@ public class SeikyuShinsaShuseiToroku {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 保存 = new RString("保存は正常に終了しました。");
-    private static final RString 検索結果一覧へ = new RString("btnBackSearchResult_TorokuGamen");
-    private static final RString 保存ボタン = new RString("btnShuseiUpdate");
-    private static final RString メニューへ = new RString("btnBackMenu1");
     private static final RString 前排他キー = new RString("JutakuKaishuRiyushoSakuseiTesuryo");
 
     /**

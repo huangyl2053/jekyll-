@@ -21,7 +21,7 @@
         ,"B"."shinseiYMD" AS "shinseiYMD"
         ,"B"."kokuho_HihokenshaShoKigo" AS "kokuho_HihokenshaShoKigo"
         ,"V1001"."hihokenshaNo" AS "daichoHihokenshaNo"
-        ,(CASE "V1001"."koikinaiJushochiTokureiFlag" WHEN '1' THEN "V1001"."koikinaiTokureiSochimotoShichosonCode" ELSE "V1001"."shichosonCode") AS "shichosonCode"
+        ,(CASE "V1001"."koikinaiJushochiTokureiFlag" WHEN '1' THEN "V1001"."koikinaiTokureiSochimotoShichosonCode"  ELSE "V1001"."shichosonCode" END) AS "shichosonCode"
         ,"V1001"."shikibetsuCode" AS "shikibetsuCode"
         FROM
         (SELECT
@@ -45,12 +45,12 @@
         AND  "K"."rirekiNo" = "B"."rirekiNo"
         LEFT JOIN  rgdb."DbV1001HihokenshaDaicho"  AS "V1001"
         ON "V1001"."hihokenshaNo"= "B"."hihokenshaNo"
-        WHERE "B"."isDeleted" ＝ False
+        WHERE "B"."isDeleted" =False
         AND #{申請対象日開始} <![CDATA[<=]]> "B"."shinseiYMD"
         AND "B"."shinseiYMD"<![CDATA[<=]]>#{申請対象日終了}
         AND "B"."shinseiJokyoKubun" = '2'
         AND ("B"."shikyuShinseiKubun" ='1' or "B"."shikyuShinseiKubun"='2')
-        AND (("B"."jikoFutan_KeisanYM"= '' )  OR ("B"."jikoFutan_KeisanYM" <![CDATA[<>]]>'' AND "B"."saiKeisanKubun" = '1'))
+        AND (("B"."jikoFutan_KeisanYM"= '' OR "B"."jikoFutan_KeisanYM" is NULL)  OR ("B"."jikoFutan_KeisanYM" <![CDATA[<>]]>'' AND "B"."saiKeisanKubun" = '1'))
         )
         SELECT
         master."taishoHihokenshaNo" AS "taishoHihokenshaNo"
@@ -84,7 +84,7 @@
         (SELECT ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT)) FROM master) 
         <include refid="tableName_PsmParamClassShikibetsuTaisho_right" />
         AS "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode"="V1001"."shikibetsuCode"
+        ON "ShikibetsuTaisho"."shikibetsuCode"=master."shikibetsuCode"
         ORDER BY
         master."taishoHihokenshaNo",master."hokenshaNo",master."taishoNendo",master."seiriNo"
     </select>
@@ -107,7 +107,7 @@
         ,"B"."shinseiYMD" AS "shinseiYMD"
         ,"B"."kokuho_HihokenshaShoKigo" AS "kokuho_HihokenshaShoKigo"
         ,"V1001"."hihokenshaNo" AS "daichoHihokenshaNo"
-        ,(CASE "V1001"."koikinaiJushochiTokureiFlag" WHEN '1' THEN "V1001"."koikinaiTokureiSochimotoShichosonCode" ELSE "V1001"."shichosonCode") AS "shichosonCode"
+        ,(CASE "V1001"."koikinaiJushochiTokureiFlag" WHEN '1' THEN "V1001"."koikinaiTokureiSochimotoShichosonCode"  ELSE "V1001"."shichosonCode" END) AS "shichosonCode"
         ,"V1001"."shikibetsuCode" AS "shikibetsuCode"
         FROM
         (SELECT
@@ -131,11 +131,11 @@
         AND  "K"."rirekiNo" = "B"."rirekiNo"
         LEFT JOIN  rgdb."DbV1001HihokenshaDaicho"  AS "V1001"
         ON      "V1001"."hihokenshaNo"= "B"."hihokenshaNo"
-        WHERE "B"."isDeleted" ＝ False
+        WHERE "B"."isDeleted" = False
         AND     '2014'<![CDATA[<=]]>"B"."taishoNendo"
-        AND "B"."dataSakuseiKubun"＝'1'
+        AND "B"."dataSakuseiKubun"='1'
         <if test="出力対象区分=='1' " >
-            AND "B".自己負担額証明書情報受取年月＝#{抽出期間開始年月}
+            AND "B".自己負担額証明書情報受取年月=#{抽出期間開始年月}
         </if>
         <if test="出力対象区分=='2' " >
             AND "B"."taishoNendo" = #{年度}
@@ -176,159 +176,6 @@
         ORDER BY
         master."taishoHihokenshaNo",master."hokenshaNo",master."taishoNendo",master."shikyuShinseishoSeiriNo"
     </select>
-
-    <!--シート「SetFutangaku」-->
-    <select id="getFutangaku"
-            resultMap="ResultMap_DbT3070MatchingEntity" resultOrdered="true" fetchSize="500">
-        SELECT
-        <include refid="allColumns_JissekiFutangakuDataTempEntity" />
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.allColumns_DbT3070KogakuGassanJikoFutanGaku" />
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
-        FROM
-        "JissekiFutangakuDataTemp" AS "temp"
-        LEFT JOIN
-        rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070KogakuGassanJikoFutanGaku"
-        ON "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo" = "temp"."hihokenshaNo"
-        AND "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo" = "temp"."taishoNendo"
-        AND "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo" = "temp"."hokenshaNo"
-        AND "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = "temp"."shikyuShinseishoSeiriNo"
-        INNER JOIN (SELECT
-        "hihokenshaNo"
-        ,"taishoNendo"
-        ,"hokenshaNo"
-        ,"shikyuShinseishoSeiriNo"
-        ,MAX("rirekiNo") AS "MAXRirekiNo"
-        FROM
-        rgdb."DbT3070KogakuGassanJikoFutanGaku"
-        WHERE
-        "isDeleted"= False
-        GROUP BY
-        "hihokenshaNo"
-        ,"taishoNendo"
-        ,"hokenshaNo"
-        ,"shikyuShinseishoSeiriNo" ) AS "DbT3070B"
-        ON  "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo"="DbT3070B"."hihokenshaNo"
-        AND "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo"="DbT3070B"."taishoNendo"
-        AND "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo"="DbT3070B"."hokenshaNo"
-        AND "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"="DbT3070B"."shikyuShinseishoSeiriNo"
-        AND "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo"="DbT3070B"."MAXRirekiNo"
-        LEFT JOIN
-        <!--自我决定-->
-        rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai" AS "DbT3071KogakuGassanJikoFutanGakuMeisai"
-        ON "DbT3071KogakuGassanJikoFutanGakuMeisai"."hihokenshaNo" = "temp"."hihokenshaNo"
-        AND "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoNendo" = "temp"."taishoNendo"
-        AND "DbT3071KogakuGassanJikoFutanGakuMeisai"."hokenshaNo" = "temp"."hokenshaNo"
-        AND "DbT3071KogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo" = "temp"."shikyuShinseishoSeiriNo"
-        INNER JOIN (SELECT
-        "hihokenshaNo"
-        ,"taishoNendo"
-        ,"hokenshaNo"
-        ,"shikyuShinseishoSeiriNo"
-        ,"taishoM"
-        ,MAX("rirekiNo") AS "MAXRirekiNo"
-        FROM
-        rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai"
-        WHERE
-        "isDeleted"= False
-        GROUP BY
-        "hihokenshaNo"
-        ,"taishoNendo"
-        ,"hokenshaNo"
-        ,"shikyuShinseishoSeiriNo"
-        ,"taishoM" ) AS "DbT3071B"
-        ON  "DbT3071KogakuGassanJikoFutanGakuMeisai"."hihokenshaNo"="DbT3071B"."hihokenshaNo"
-        AND "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoNendo"="DbT3071B"."taishoNendo"
-        AND "DbT3071KogakuGassanJikoFutanGakuMeisai"."hokenshaNo"="DbT3071B"."hokenshaNo"
-        AND "DbT3071KogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo"="DbT3071B"."shikyuShinseishoSeiriNo"
-        AND "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoM"="DbT3071B"."taishoM"
-        AND "DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo"="DbT3071B"."MAXRirekiNo"
-        WHERE
-        "DbT3070KogakuGassanJikoFutanGaku"."isDeleted" = False
-        AND "DbT3071KogakuGassanJikoFutanGakuMeisai"."isDeleted" = False
-        ORDER BY
-        "temp"."hihokenshaNo" ASC
-        ,"temp"."taishoNendo" ASC
-        ,"temp"."hokenshaNo" ASC
-        ,"temp"."shikyuShinseishoSeiriNo" ASC
-        ,"DbT3070KogakuGassanJikoFutanGaku"."rirekiNo" ASC
-        ,"DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoM" ASC
-    </select>
-
-    <!--シート「SetFutangaku」事業分-->
-    <select id="getFutangakuJigyobun"
-            resultMap="ResultMap_DbT3170MatchingEntity" resultOrdered="true" fetchSize="500">
-        SELECT
-        <include refid="allColumns_JissekiFutangakuDataTempEntity" />
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3170JigyoKogakuGassanJikoFutanGakuMapper.allColumns_DbT3170JigyoKogakuGassanJikoFutanGaku" />
-        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3171JigyoKogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3171JigyoKogakuGassanJikoFutanGakuMeisai" />
-        FROM
-        "JissekiFutangakuDataTemp" AS "temp"
-        LEFT JOIN
-        rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku" AS "DbT3170JigyoKogakuGassanJikoFutanGaku"
-        ON "DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo" = "temp"."hihokenshaNo"
-        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo" = "temp"."taishoNendo"
-        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo" = "temp"."hokenshaNo"
-        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = "temp"."shikyuShinseishoSeiriNo"
-        INNER JOIN (SELECT
-        "hihokenshaNo"
-        ,"taishoNendo"
-        ,"hokenshaNo"
-        ,"shikyuShinseishoSeiriNo"
-        ,MAX("rirekiNo") AS "MAXRirekiNo"
-        FROM
-        rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku"
-        WHERE
-        "isDeleted"= False
-        GROUP BY
-        "hihokenshaNo"
-        ,"taishoNendo"
-        ,"hokenshaNo"
-        ,"shikyuShinseishoSeiriNo" ) AS "DbT3170B"
-        ON  "DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo"="DbT3170B"."hihokenshaNo"
-        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo"="DbT3170B"."taishoNendo"
-        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo"="DbT3170B"."hokenshaNo"
-        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"="DbT3170B"."shikyuShinseishoSeiriNo"
-        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."rirekiNo"="DbT3170B"."MAXRirekiNo"
-        LEFT JOIN
-        rgdb."DbT3171JigyoKogakuGassanJikoFutanGakuMeisai" AS "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"
-        ON "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hihokenshaNo" = "temp"."hihokenshaNo"
-        AND "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."taishoNendo" = "temp"."taishoNendo"
-        AND "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hokenshaNo" = "temp"."hokenshaNo"
-        AND "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo" = "temp"."shikyuShinseishoSeiriNo"
-        INNER JOIN (SELECT
-        "hihokenshaNo"
-        ,"taishoNendo"
-        ,"hokenshaNo"
-        ,"shikyuShinseishoSeiriNo"
-        ,"taishoM"
-        ,MAX("rirekiNo") AS "MAXRirekiNo"
-        FROM
-        rgdb."DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"
-        WHERE
-        "isDeleted"= False
-        GROUP BY
-        "hihokenshaNo"
-        ,"taishoNendo"
-        ,"hokenshaNo"
-        ,"shikyuShinseishoSeiriNo"
-        ,"taishoM" ) AS "DbT3171B"
-        ON  "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hihokenshaNo"="DbT3171B"."hihokenshaNo"
-        AND "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."taishoNendo"="DbT3171B"."taishoNendo"
-        AND "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hokenshaNo"="DbT3171B"."hokenshaNo"
-        AND "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo"="DbT3171B"."shikyuShinseishoSeiriNo"
-        AND "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."taishoM"="DbT3171B"."taishoM"
-        AND "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."rirekiNo"="DbT3171B"."MAXRirekiNo"
-        WHERE
-        "DbT3170JigyoKogakuGassanJikoFutanGaku"."isDeleted" = False
-        AND "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."isDeleted" = False
-        ORDER BY
-        "temp"."hihokenshaNo" ASC
-        ,"temp"."taishoNendo" ASC
-        ,"temp"."hokenshaNo" ASC
-        ,"temp"."shikyuShinseishoSeiriNo" ASC
-        ,"DbT3170JigyoKogakuGassanJikoFutanGaku"."rirekiNo" ASC
-        ,"DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."taishoM" ASC
-    </select>
     
     <!--BatchStep2.3<変更>-->
     <select id="get給付実績基本一時" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.InsShiharaihohoHenkoTempBeforeMyBatisParameter"
@@ -344,7 +191,7 @@
             AND substring("A"."inputShikibetsuNo" from 1 for 3)='71R'
         </if>
         AND EXISTS(SELECT "temp".* FROM "JissekiFutangakuDataTemp" AS "temp"
-        WHERE "temp"."hihokenshaNo"＝"A"."hiHokenshaNo"
+        WHERE "temp"."hihokenshaNo"="A"."hiHokenshaNo"
         AND substring("temp"."taishoKeisanKaishiYMD" from 1 for 6)<![CDATA[<=]]>"A"."serviceTeikyoYM"            
         AND "A"."serviceTeikyoYM"<![CDATA[<=]]>substring("temp"."taishoKeisanShuryoYMD" from 1 for 6)
     </select>
@@ -357,7 +204,7 @@
         ,"henko".*
         FROM "JissekiFutangakuDataTemp" AS "temp"
         LEFT JOIN "KyufujissekiKihonTemp" as "kihon"
-        ON "temp"."hihokenshaNo"＝"kihon"."hiHokenshaNo"
+        ON "temp"."hihokenshaNo"="kihon"."hiHokenshaNo"
         AND substring("temp"."taishoKeisanKaishiYMD" from 1 for 6)<![CDATA[<=]]>"kihon"."serviceTeikyoYM"
         AND "kihon"."serviceTeikyoYM"<![CDATA[<=]]>substring("temp"."taishoKeisanShuryoYMD" from 1 for 6)
         LEFT JOIN (SELECT * FROM rgdb."DbT4021ShiharaiHohoHenko"  as "B"
@@ -385,7 +232,7 @@
         ,"serviceTeikyoYM"                      
         ,SUM("atoKeigengoRiyoshaFutangaku") AS "riyoshaFutangaku"                      
         FROM rgdb."DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" AS "A"                      
-        WHERE "isDeleted" ＝ FALSE                 
+        WHERE "isDeleted" =FALSE                 
         AND "serviceSyuruiCode" IN 
         <choose>
             <when test="事業分フラグ">
@@ -432,65 +279,16 @@
         ,"serviceTeikyoYM"                       
         ) AS "Shukei"                       
         ) AS "riyoshaFutan"
-        ON "temp"."hihokenshaNo"＝ "riyoshaFutan"."hiHokenshaNo"
-    </select>
-
-    <!--Batch: 高額支給額集計 TODO Parameter-->
-    <select id="getCalcKogakuShikyugaku"
-            resultMap="ResultMap_CalcKogakuShikyugakuEntity" resultOrdered="true" fetchSize="500">
-        SELECT
-        <include refid="allColumns_JissekiFutangakuDataTempEntity"/>
-        ,<include refid="allColumns_KogakuShikyugakuEntity" />
-        FROM "JissekiFutangakuDataTemp" AS "temp"
-
-        LEFT JOIN rgdb."DbT3056KogakuShikyuShinsei" AS "DbT3056KogakuShikyuShinsei"
-        ON "DbT3056KogakuShikyuShinsei"."isDeleted" ＝ False
-        AND "DbT3056KogakuShikyuShinsei"."hihokenshaNo" ＝ "temp"."hihokenshaNo"
-        AND substring("temp"."taishoKeisanKaishiYMD",1,6) ≦ "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM"
-        AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" ≦ substring("temp"."taishoKeisanShuryoYMD",1,6)
-
-        LEFT JOIN rgdb."DbT3057KogakuShikyuHanteiKekka" AS "DbT3057KogakuShikyuHanteiKekka"
-        ON  "DbT3056KogakuShikyuShinsei"."hihokenshaNo"    = "DbT3057KogakuShikyuHanteiKekka"."hihokenshaNo"
-        AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM"    = "DbT3057KogakuShikyuHanteiKekka"."serviceTeikyoYM"
-        AND  "DbT3056KogakuShikyuShinsei"."shoKisaiHokenshaNo"    = "DbT3057KogakuShikyuHanteiKekka"."shoKisaiHokenshaNo"
-        AND  "DbT3057KogakuShikyuHanteiKekka"."isDeleted" = False
-
-        LEFT JOIN rgdb."DbT3058KogakuShikyuShinsaKettei" AS "DbT3058KogakuShikyuShinsaKettei"
-        ON  "DbT3056KogakuShikyuShinsei"."hihokenshaNo"    = "DbT3058KogakuShikyuShinsaKettei"."hihokenshaNo"
-        AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM"    = "DbT3058KogakuShikyuShinsaKettei"."serviceTeikyoYM"
-        AND "DbT3056KogakuShikyuShinsei"."shoKisaiHokenshaNo"    = "DbT3058KogakuShikyuShinsaKettei"."shoKisaiHokenshaNo"
-        AND "DbT3058KogakuShikyuShinsaKettei"."isDeleted"    = False
-
-        LEFT JOIN
-        (SELECT * FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS dbt3055a
-        INNER JOIN 
-        (select "hihokenshaNo","serviceTeikyoYM",MAX("rirekiNo") as "rirekiNo"
-        from rgdb."DbT3055KogakuKyufuTaishoshaGokei"
-        where "isDeleted"= False
-        group by "hihokenshaNo","serviceTeikyoYM"
-        ) as dbt3055b 
-        on dbt3055a."hihokenshaNo"=dbt3055b."hihokenshaNo" 
-        and dbt3055a."serviceTeikyoYM"=dbt3055b."serviceTeikyoYM"
-        and dbt3055a."rirekiNo"=dbt3055b."rirekiNo"
-        and dbt3055a."isDeleted"    = False)
-        AS "DbT3055KogakuKyufuTaishoshaGokei"
-        ON  "DbT3056KogakuShikyuShinsei"."hihokenshaNo"    = "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo"               
-        AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM"    = "DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM"               
-        AND "DbT3055KogakuKyufuTaishoshaGokei"."isDeleted"    = False
-
-        ORDER BY
-        "DbT3056KogakuShikyuShinsei"."hihokenshaNo"    ASC
-        ,"DbT3056KogakuShikyuShinsei"."serviceTeikyoYM"    ASC
-        ,"DbT3056KogakuShikyuShinsei"."rirekiNo"    ASC
+        ON "temp"."hihokenshaNo"="riyoshaFutan"."hiHokenshaNo"
     </select>
     
     <!--BatchStep 2.6-->
     <select id="get実績負担額データ2"
             resultMap="ResultMap_JissekiFutangakuDataTempEntity" resultOrdered="true" fetchSize="500">
         SELECT <include refid="allColumns_JissekiFutangakuDataTempEntity" />
-        FROM "JissekiFutangakuDataTemp2"
+        FROM "JissekiFutangakuDataTemp2" AS "temp"
     </select>
-    
+
     <select id="get処理結果"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080ShoriKekkaTempEntity" resultOrdered="true" fetchSize="500">
         SELECT * FROM "DBC020080ShoriKekkaListTemp"
@@ -500,7 +298,7 @@
     <select id="get実績負担額データ"
             resultMap="ResultMap_JissekiFutangakuDataTempEntity" resultOrdered="true" fetchSize="500">
         SELECT <include refid="allColumns_JissekiFutangakuDataTempEntity" />
-        FROM "JissekiFutangakuDataTemp"
+        FROM "JissekiFutangakuDataTemp" AS "temp"
     </select>
     
     <select id="get帳票データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter"
@@ -524,6 +322,197 @@
         order by "DbT7022ShoriDateKanri"."nendoNaiRenban" desc
         LIMIT 1
     </select>
+    <!--BatchStep 2.2-->
+    <select id="select給付実績基本一時"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity" resultOrdered="true" fetchSize="500">
+        SELECT *
+        FROM "KyufujissekiKihonTemp"
+    </select>
+
+    <!--高額支給額集計RelateEntityを取得します。 -->
+    <select id="get高額支給額集計"
+            resultMap="ResultMap_高額支給額集計Entity" resultOrdered="true" fetchSize="500">
+        SELECT
+        <include refid="allColumns_JissekiFutangakuDataTempEntity"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.allColumns_DbT3056KogakuShikyuShinsei" />
+        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.allColumns_DbT3057KogakuShikyuHanteiKekka" />
+        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.allColumns_DbT3058KogakuShikyuShinsaKettei" />
+        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.allColumns_DbT3055KogakuKyufuTaishoshaGokei" />
+        FROM "JissekiFutangakuDataTemp" AS "temp"
+        INNER JOIN rgdb."DbT3056KogakuShikyuShinsei" AS "DbT3056KogakuShikyuShinsei"
+        ON "DbT3056KogakuShikyuShinsei"."isDeleted" = False
+        AND "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = "temp"."hihokenshaNo"
+        AND substring(COALESCE("temp"."taishoKeisanKaishiYMD", '000000'),1,6) <![CDATA[<=]]> "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM"
+        AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" <![CDATA[<=]]> substring(COALESCE("temp"."taishoKeisanShuryoYMD", '000000'),1,6)
+        LEFT JOIN rgdb."DbT3057KogakuShikyuHanteiKekka" AS "DbT3057KogakuShikyuHanteiKekka"
+        ON  "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = "DbT3057KogakuShikyuHanteiKekka"."hihokenshaNo"
+        AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3057KogakuShikyuHanteiKekka"."serviceTeikyoYM"
+        AND  "DbT3056KogakuShikyuShinsei"."shoKisaiHokenshaNo" = "DbT3057KogakuShikyuHanteiKekka"."shoKisaiHokenshaNo"
+        AND  "DbT3056KogakuShikyuShinsei"."rirekiNo" = "DbT3057KogakuShikyuHanteiKekka"."rirekiNo"
+        LEFT JOIN rgdb."DbT3058KogakuShikyuShinsaKettei" AS "DbT3058KogakuShikyuShinsaKettei"
+        ON  "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = "DbT3058KogakuShikyuShinsaKettei"."hihokenshaNo"
+        AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3058KogakuShikyuShinsaKettei"."serviceTeikyoYM"
+        AND "DbT3056KogakuShikyuShinsei"."shoKisaiHokenshaNo" = "DbT3058KogakuShikyuShinsaKettei"."shoKisaiHokenshaNo"
+        AND "DbT3056KogakuShikyuShinsei"."rirekiNo" = "DbT3058KogakuShikyuShinsaKettei"."rirekiNo"
+        LEFT JOIN
+        (SELECT * FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS mst
+        WHERE NOT EXISTS(
+        SELECT slv.*
+        FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS slv
+        WHERE mst."hihokenshaNo"=slv."hihokenshaNo"
+        AND mst."serviceTeikyoYM"=slv."serviceTeikyoYM"
+        AND mst."rirekiNo" <![CDATA[<]]> slv."rirekiNo")
+        ) AS "DbT3055KogakuKyufuTaishoshaGokei"
+        ON "DbT3056KogakuShikyuShinsei"."hihokenshaNo"="DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo"
+        AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM"="DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM"
+        ORDER BY  "temp"."hihokenshaNo" ASC,
+        ,"DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" ASC
+        ,"DbT3056KogakuShikyuShinsei"."rirekiNo" ASC
+    </select>
+
+    <!--BatchStep_SetFutangaku-->
+    <select id="get自己負担額"  parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.SetFutangakuMyBatisParameter"
+            resultMap="ResultMap_DbT3170MatchingEntity" resultOrdered="true" fetchSize="500">
+        SELECT
+        <include refid="allColumns_JissekiFutangakuDataTempEntity" />
+        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3170JigyoKogakuGassanJikoFutanGakuMapper.allColumns_DbT3170JigyoKogakuGassanJikoFutanGaku" />
+        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3171JigyoKogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3171JigyoKogakuGassanJikoFutanGakuMeisai" />
+        FROM
+        "JissekiFutangakuDataTemp" AS "temp"
+        LEFT JOIN (
+        SELECT * 
+        FROM 
+        <choose>
+            <when test="事業分フラグ">
+                rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku"
+            </when>
+            <otherwise>
+                rgdb."DbT3070KogakuGassanJikoFutanGaku"
+            </otherwise>
+        </choose>
+        AS mst
+        WHERE NOT EXISTS (
+        SELECT *
+        FROM 
+        <choose>
+            <when test="事業分フラグ">
+                rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku"
+            </when>
+            <otherwise>
+                rgdb."DbT3070KogakuGassanJikoFutanGaku"
+            </otherwise>
+        </choose>
+        AS slv
+        WHERE mst."hihokenshaNo"=slv."hihokenshaNo"
+        WHERE mst."taishoNendo"=slv."taishoNendo"
+        WHERE mst."hokenshaNo"=slv."hokenshaNo"
+        WHERE mst."shikyuShinseishoSeiriNo"=slv."shikyuShinseishoSeiriNo"
+        WHERE mst."rirekiNo"<![CDATA[<]]>slv."rirekiNo")
+        AND mst."isDeleted" IS FALSE) AS "DbT3170JigyoKogakuGassanJikoFutanGaku"
+        ON "temp"."hihokenshaNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo"
+        AND "temp"."taishoNendo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo"
+        AND "temp"."shikyuShinseishoSeiriNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
+        AND "temp"."shikyuShinseishoSeiriNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo"
+        LEFT JOIN 
+        <choose>
+            <when test="事業分フラグ">
+                rgdb."DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"
+            </when>
+            <otherwise>
+                rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai"
+            </otherwise>
+        </choose>
+        AS "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"
+        ON "DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hihokenshaNo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."taishoNendo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hokenshaNo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."rirekiNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."rirekiNo"
+        ORDER BY  
+        "temp"."hihokenshaNo" ASC,
+        "temp"."taishoNendo" ASC,
+        "temp"."hokenshaNo" ASC,
+        "temp"."shikyuShinseishoSeiriNo" ASC,
+        "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."taishoM" ASC
+    </select>
+    <!--    
+    BatchStep_SetFutangaku
+    <select id="get自己負担額事業分"  parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.SetFutangakuMyBatisParameter"
+        resultMap="ResultMap_DbT3170MatchingEntity" resultOrdered="true" fetchSize="500">
+        SELECT
+        <include refid="allColumns_JissekiFutangakuDataTempEntity" />
+        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3170JigyoKogakuGassanJikoFutanGakuMapper.allColumns_DbT3170JigyoKogakuGassanJikoFutanGaku" />
+        ,<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3171JigyoKogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3171JigyoKogakuGassanJikoFutanGakuMeisai" />
+        FROM
+        "JissekiFutangakuDataTemp" AS "temp"
+        LEFT JOIN (
+        SELECT * 
+        FROM 
+        <choose >
+            <when test="事業分フラグ">
+                rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku"
+            </when>
+            <otherwise>
+                rgdb."DbT3070KogakuGassanJikoFutanGaku"
+            </otherwise>
+        </choose>
+        AS mst
+        WHERE NOT EXISTS (
+        SELECT *
+        FROM 
+        <choose>
+            <when test="事業分フラグ">
+                rgdb."DbT3170JigyoKogakuGassanJikoFutanGaku"
+            </when>
+            <otherwise>
+                rgdb."DbT3070KogakuGassanJikoFutanGaku"
+            </otherwise>
+        </choose>
+        AS slv
+        WHERE mst."hihokenshaNo"=slv."hihokenshaNo"
+        WHERE mst."taishoNendo"=slv."taishoNendo"
+        WHERE mst."hokenshaNo"=slv."hokenshaNo"
+        WHERE mst."shikyuShinseishoSeiriNo"=slv."shikyuShinseishoSeiriNo"
+        WHERE mst."rirekiNo"<![CDATA[<]]>slv."rirekiNo")
+        AND mst."isDeleted" IS FALSE) AS "DbT3170JigyoKogakuGassanJikoFutanGaku"
+        ON "temp"."hihokenshaNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo"
+        AND "temp"."taishoNendo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo"
+        AND "temp"."shikyuShinseishoSeiriNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
+        AND "temp"."shikyuShinseishoSeiriNo"="DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo"
+        LEFT JOIN 
+        <choose>
+            <when test="事業分フラグ">
+                rgdb."DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"
+            </when>
+            <otherwise>
+                rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai"
+            </otherwise>
+        </choose>
+        AS "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"
+        ON "DbT3170JigyoKogakuGassanJikoFutanGaku"."hihokenshaNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hihokenshaNo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."taishoNendo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."taishoNendo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."hokenshaNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."hokenshaNo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo"
+        AND "DbT3170JigyoKogakuGassanJikoFutanGaku"."rirekiNo"="DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."rirekiNo"
+        ORDER BY  
+        "temp"."hihokenshaNo" ASC,
+        "temp"."taishoNendo" ASC,
+        "temp"."hokenshaNo" ASC,
+        "temp"."shikyuShinseishoSeiriNo" ASC,
+        "DbT3171JigyoKogakuGassanJikoFutanGakuMeisai"."taishoM" ASC
+    </select>
+    -->
+    <resultMap id="ResultMap_高額支給額集計Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.CalcKogakuShikyugakuRelateEntity" autoMapping="true">
+        <id column="temp_hihokenshaNo" />
+        <id column="temp_taishoNendo" />
+        <id column="temp_hokenshaNo" />
+        <id column="temp_shikyuShinseishoSeiriNo" />
+        <association property="実績負担額データ"   resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
+        <association property="支給申請Entity"   resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.ResultMap_DbT3056KogakuShikyuShinseiEntity" />
+        <association property="支給判定結果Entity"   resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity" />
+        <association property="支給審査決定Entity"   resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3058KogakuShikyuShinsaKetteiEntity" />
+        <association property="給付対象者合計"   resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3055KogakuKyufuTaishoshaGokeiEntity" />
+    </resultMap>
 
     <resultMap id="ResultMap_DbT3017MatchingEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DbT3017MatchingEntity" autoMapping="true" >
         <id column="temp_hihokenshaNo" />
@@ -536,17 +525,7 @@
         <association property="支払方法変更" 
                      resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity" />
     </resultMap>
-    <resultMap id="ResultMap_DbT3070MatchingEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DbT3070MatchingEntity" autoMapping="true" >
-        <id column="temp_hihokenshaNo" />
-        <id column="temp_taishoNendo" />
-        <id column="temp_hokenshaNo" />
-        <id column="temp_shikyuShinseishoSeiriNo" />
-        <association property="実績負担額データ" resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
-        <association property="高額合算自己負担額"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity" />
-        <association property="高額合算自己負担額明細" 
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity" />
-    </resultMap>
+    
     <resultMap id="ResultMap_DbT3170MatchingEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DbT3170MatchingEntity" autoMapping="true" >
         <id column="temp_hihokenshaNo" />
         <id column="temp_taishoNendo" />
@@ -572,28 +551,6 @@
         <result property="riyoshaFutangaku" column="riyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
     </resultMap>
     
-    <resultMap id="ResultMap_CalcKogakuShikyugakuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.CalcKogakuShikyugakuEntity" autoMapping="true">
-        <id column="temp_hihokenshaNo" />
-        <id column="temp_taishoNendo" />
-        <id column="temp_hokenshaNo" />
-        <id column="temp_shikyuShinseishoSeiriNo" />
-        <association property="実績負担額データ"   resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
-        <association property="関連データ"   resultMap="ResultMap_KogakuShikyugakuEntity" />
-    </resultMap>
-    
-    <resultMap id="ResultMap_KogakuShikyugakuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.KogakuShikyugakuEntity" autoMapping="true">
-        <result property="被保険者番号" column="DbT3056KogakuShikyuShinsei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="サービス提供年月" column="DbT3056KogakuShikyuShinsei_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="証記載保険者番号" column="DbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="履歴番号" column="DbT3056KogakuShikyuShinsei_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額支給額" column="DbT3055KogakuKyufuTaishoshaGokei_KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="支給区分コード" column="DbT3057KogakuShikyuHanteiKekka_shikyuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="支給金額" column="DbT3057KogakuShikyuHanteiKekka_shikyuKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="審査支払区分" column="DbT3057KogakuShikyuHanteiKekka_shinsaHohoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="決定支給区分コード" column="DbT3058KogakuShikyuShinsaKettei_shikyuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="決定高額支給額" column="DbT3058KogakuShikyuShinsaKettei_kogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-    </resultMap>
-
     <resultMap id="ResultMap_JissekiFutangakuDataTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.JissekiFutangakuDataTempEntity" autoMapping="true" >
         <id property="hihokenshaNo" column="temp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="taishoNendo" column="temp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -884,20 +841,7 @@
         <result property="biko107" column="temp_biko107" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceTeikyoYMs" column="temp_serviceTeikyoYMs" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-
-    <sql id="allColumns_KogakuShikyugakuEntity">
-        "DbT3056KogakuShikyuShinsei"."hihokenshaNo"as "DbT3056KogakuShikyuShinsei_hihokenshaNo"
-        ,"DbT3056KogakuShikyuShinsei"."serviceTeikyoYM"as "DbT3056KogakuShikyuShinsei_serviceTeikyoYM"
-        ,"DbT3056KogakuShikyuShinsei"."shoKisaiHokenshaNo"as "DbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo"
-        ,"DbT3056KogakuShikyuShinsei"."rirekiNo"as "DbT3056KogakuShikyuShinsei_rirekiNo"
-        ,"DbT3055KogakuKyufuTaishoshaGokei"."KogakuShikyuGaku"as "DbT3055KogakuKyufuTaishoshaGokei_KogakuShikyuGaku"
-        ,"DbT3057KogakuShikyuHanteiKekka"."shikyuKubunCode"as "DbT3057KogakuShikyuHanteiKekka_shikyuKubunCode"
-        ,"DbT3057KogakuShikyuHanteiKekka"."shikyuKingaku"as "DbT3057KogakuShikyuHanteiKekka_shikyuKingaku"
-        ,"DbT3057KogakuShikyuHanteiKekka"."shinsaHohoKubun"as "DbT3057KogakuShikyuHanteiKekka_shinsaHohoKubun"
-        ,"DbT3058KogakuShikyuShinsaKettei"."shikyuKubunCode"as "DbT3058KogakuShikyuShinsaKettei_shikyuKubunCode"
-        ,"DbT3058KogakuShikyuShinsaKettei"."kogakuShikyuGaku"as "DbT3058KogakuShikyuShinsaKettei_kogakuShikyuGaku"
-    </sql>
-
+    
     <sql id="WKサービス種類コード集計対象" >
         ('11','15','21','24','51','54','61','65','71','72','73','74','75','76','77')
     </sql>

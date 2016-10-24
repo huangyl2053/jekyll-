@@ -118,8 +118,9 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
         }
         resultEdit = edit開始終了日(result, resultEdit, entity);
         resultEdit = edit番号(result, resultEdit, entity);
-        resultEdit = edit開始終了年月日(result, resultEdit, entity);
+        resultEdit = edit適用開始終了年月日(result, resultEdit, entity);
         resultEdit = edit限度額(result, resultEdit, entity);
+        resultEdit = edit開始終了年月日(result, resultEdit, entity);
         result = resultEdit.build();
         return result;
     }
@@ -219,12 +220,8 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
         return resultEdit;
     }
 
-    private JukyushaIdoRenrakuhyoBuilder edit開始終了年月日(JukyushaIdoRenrakuhyo result,
+    private JukyushaIdoRenrakuhyoBuilder edit適用開始終了年月日(JukyushaIdoRenrakuhyo result,
             JukyushaIdoRenrakuhyoBuilder resultEdit, JukyushaIdoRenrakuhyo entity) {
-        if ((!RString.isNullOrEmpty(entity.get認定有効期間終了年月日()))
-                && RString.isNullOrEmpty(result.get認定有効期間終了年月日())) {
-            resultEdit = resultEdit.set認定有効期間終了年月日(半角アスタリスク);
-        }
         if ((!RString.isNullOrEmpty(entity.get居宅サービス計画適用開始年月日()))
                 && RString.isNullOrEmpty(result.get居宅サービス計画適用開始年月日())) {
             resultEdit = resultEdit.set居宅サービス計画適用開始年月日(半角アスタリスク);
@@ -236,14 +233,6 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
         if ((!RString.isNullOrEmpty(entity.get訪問通所サービス上限管理適用期間終了年月日()))
                 && RString.isNullOrEmpty(result.get訪問通所サービス上限管理適用期間終了年月日())) {
             resultEdit = resultEdit.set訪問通所サービス上限管理適用期間終了年月日(半角アスタリスク);
-        }
-        if ((!RString.isNullOrEmpty(entity.get償還払化開始年月日()))
-                && RString.isNullOrEmpty(result.get償還払化開始年月日())) {
-            resultEdit = resultEdit.set償還払化開始年月日(半角アスタリスク);
-        }
-        if ((!RString.isNullOrEmpty(entity.get償還払化終了年月日()))
-                && RString.isNullOrEmpty(result.get償還払化終了年月日())) {
-            resultEdit = resultEdit.set償還払化終了年月日(半角アスタリスク);
         }
         if ((!RString.isNullOrEmpty(entity.get適用開始年月日()))
                 && RString.isNullOrEmpty(result.get適用開始年月日())) {
@@ -261,6 +250,31 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
                 && RString.isNullOrEmpty(result.get負担額適用終了年月日())) {
             resultEdit = resultEdit.set負担額適用終了年月日(半角アスタリスク);
         }
+        return resultEdit;
+    }
+
+    private JukyushaIdoRenrakuhyoBuilder edit開始終了年月日(JukyushaIdoRenrakuhyo result,
+            JukyushaIdoRenrakuhyoBuilder resultEdit, JukyushaIdoRenrakuhyo entity) {
+        if ((!RString.isNullOrEmpty(entity.get認定有効期間終了年月日()))
+                && RString.isNullOrEmpty(result.get認定有効期間終了年月日())) {
+            resultEdit = resultEdit.set認定有効期間終了年月日(半角アスタリスク);
+        }
+        if ((!RString.isNullOrEmpty(entity.get償還払化開始年月日()))
+                && RString.isNullOrEmpty(result.get償還払化開始年月日())) {
+            resultEdit = resultEdit.set償還払化開始年月日(半角アスタリスク);
+        }
+        if ((!RString.isNullOrEmpty(entity.get償還払化終了年月日()))
+                && RString.isNullOrEmpty(result.get償還払化終了年月日())) {
+            resultEdit = resultEdit.set償還払化終了年月日(半角アスタリスク);
+        }
+        if ((!RString.isNullOrEmpty(entity.get給付率引下げ開始年月日()))
+                && RString.isNullOrEmpty(result.get給付率引下げ開始年月日())) {
+            resultEdit = resultEdit.set給付率引下げ開始年月日(半角アスタリスク);
+        }
+        if ((!RString.isNullOrEmpty(entity.get給付率引下げ終了年月日()))
+                && RString.isNullOrEmpty(result.get給付率引下げ終了年月日())) {
+            resultEdit = resultEdit.set給付率引下げ終了年月日(半角アスタリスク);
+        }
         if ((!RString.isNullOrEmpty(entity.get負担限度額適用開始年月日()))
                 && RString.isNullOrEmpty(result.get負担限度額適用開始年月日())) {
             resultEdit = resultEdit.set負担限度額適用開始年月日(半角アスタリスク);
@@ -276,14 +290,6 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
         if ((!RString.isNullOrEmpty(entity.get軽減率適用終了年月日()))
                 && RString.isNullOrEmpty(result.get軽減率適用終了年月日())) {
             resultEdit = resultEdit.set軽減率適用終了年月日(半角アスタリスク);
-        }
-        if ((!RString.isNullOrEmpty(entity.get給付率引下げ開始年月日()))
-                && RString.isNullOrEmpty(result.get給付率引下げ開始年月日())) {
-            resultEdit = resultEdit.set給付率引下げ開始年月日(半角アスタリスク);
-        }
-        if ((!RString.isNullOrEmpty(entity.get給付率引下げ終了年月日()))
-                && RString.isNullOrEmpty(result.get給付率引下げ終了年月日())) {
-            resultEdit = resultEdit.set給付率引下げ終了年月日(半角アスタリスク);
         }
         return resultEdit;
     }

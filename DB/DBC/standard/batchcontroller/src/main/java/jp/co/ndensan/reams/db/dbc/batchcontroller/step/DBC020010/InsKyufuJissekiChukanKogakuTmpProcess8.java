@@ -467,72 +467,72 @@ public class InsKyufuJissekiChukanKogakuTmpProcess8 extends BatchProcessBase<Kyu
     private Decimal get世帯合算処理の算定基準額(TempKyufujissekiTyukannEntity 給付実績中間,
             List<KyufuJissekiChukanKogaku8Entity> 世帯分List) {
         Decimal 世帯算定基準額 = Decimal.ZERO;
-        RString 利用者負担第2段階 = RString.EMPTY;
-        RString 激変緩和区分 = RString.EMPTY;
+//        RString 利用者負担第2段階 = RString.EMPTY;
+//        RString 激変緩和区分 = RString.EMPTY;
         // TODO 給付実績中間高額一時.生活保護＝"1" QA確認中
         if (ONE.equals(給付実績中間.getTaishogoJotaiCode())
                 && TWO.equals(給付実績中間.getShotokuHantei_kazeiKubunGemmenGo())) {
             世帯算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_15000);
         }
-        if (Decimal.ZERO.equals(給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku())) {
-            if (TWO.equals(給付実績中間.getShotokuHantei_kazeiKubunGemmenGo())) {
-                世帯算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_24600);
-            } else {
-                世帯算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_37200);
-            }
-        } else {
-            世帯算定基準額 = 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku();
-        }
-        Decimal 最小の個人算定基準額 = Decimal.ZERO;
-        Decimal 個人算定基準額合計 = Decimal.ZERO;
-        for (KyufuJissekiChukanKogaku8Entity entity : 世帯分List) {
-            Decimal 利用者負担額 = get利用者負担額を算出(entity.get給付実績中間高額一時());
-            Decimal 個人算定基準額 = new Decimal(世帯算定基準額.multiply(利用者負担額).subtract(利用者負担額合計).intValue());
-            if (個人算定基準額.compareTo(最小の個人算定基準額) < 0) {
-                最小の個人算定基準額 = 個人算定基準額;
-            }
-            個人算定基準額合計 = 個人算定基準額合計.add(個人算定基準額);
-        }
-        Decimal 利用者負担額 = get利用者負担額を算出(給付実績中間);
-        Decimal 個人算定基準額 = new Decimal(世帯算定基準額.multiply(利用者負担額).subtract(利用者負担額合計).intValue());
-        if (最小の個人算定基準額.equals(個人算定基準額)
-                && 個人算定基準額合計.compareTo(世帯算定基準額) < 0) {
-            個人算定基準額 = 個人算定基準額.add(世帯算定基準額.multiply(個人算定基準額合計));
-        }
-        // 境界層区分、世帯所得区分 QA確認中
-        if (ZERO.equals(給付実績中間.getChushiRiyuNyushomaeJyokyoCode())) {
-            if (世帯算定基準額.equals(get算定基準額コンフィグ(高額自己負担上限額_24600))
-                    && ONE.equals(給付実績中間.getShotokuHantei_roreiFukushi())
-                    && get算定基準額コンフィグ(高額自己負担上限額_15000).compareTo(個人算定基準額) < 0) {
-                個人算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_15000);
-            } else {
-                Decimal ＷＫ金額 = 給付実績中間.getShotokuHantei_gokeiShotokuGaku().
-                        add(給付実績中間.getShotokuHantei_nenkiniShunyuGaku());
-                if (年月_200510.compareTo(給付実績中間.getServiceTeikyoYM()) <= 0
-                        && get算定基準額コンフィグ(高額自己負担上限額_15000).equals(個人算定基準額)
-                        && ＷＫ金額.compareTo(金額_800000) < 0) {
-                    利用者負担第2段階 = ONE;
-                    if (get算定基準額コンフィグ(高額自己負担上限額_15000).compareTo(個人算定基準額) < 0) {
-                        個人算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_15000);
-                    }
-                } else {
-                    // ａ．共通管理の激変緩和適用開始年月≦サービス提供年月（ｎ）≦共通管理の激変緩和適用終了年月かつ
-                    // QA確認中
-                    if (ONE.equals(給付実績中間.getShotokuHantei_gekihenKanwaKubun())
-                            && ONE.equals(給付実績中間.getShotokuHantei_roreiFukushi())) {
-                        激変緩和区分 = ONE;
-                        if (get算定基準額コンフィグ(高額自己負担上限額_15000).compareTo(個人算定基準額) < 0) {
-                            個人算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_15000);
-                        }
-                    } else {
-                        激変緩和区分 = TWO;
-                        if (get算定基準額コンフィグ(高額自己負担上限額_24600).compareTo(個人算定基準額) < 0) {
-                            個人算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_24600);
-                        }
-                    }
-                }
-            }
-        }
+//        if (Decimal.ZERO.equals(給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku())) {
+//            if (TWO.equals(給付実績中間.getShotokuHantei_kazeiKubunGemmenGo())) {
+//                世帯算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_24600);
+//            } else {
+//                世帯算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_37200);
+//            }
+//        } else {
+//            世帯算定基準額 = 給付実績中間.getKogakuServicehiJogengakuGengakugoJogengaku();
+//        }
+//        Decimal 最小の個人算定基準額 = Decimal.ZERO;
+//        Decimal 個人算定基準額合計 = Decimal.ZERO;
+//        for (KyufuJissekiChukanKogaku8Entity entity : 世帯分List) {
+//            Decimal 利用者負担額 = get利用者負担額を算出(entity.get給付実績中間高額一時());
+//            Decimal 個人算定基準額 = new Decimal(世帯算定基準額.multiply(利用者負担額).subtract(利用者負担額合計).intValue());
+//            if (個人算定基準額.compareTo(最小の個人算定基準額) < 0) {
+//                最小の個人算定基準額 = 個人算定基準額;
+//            }
+//            個人算定基準額合計 = 個人算定基準額合計.add(個人算定基準額);
+//        }
+//        Decimal 利用者負担額 = get利用者負担額を算出(給付実績中間);
+//        Decimal 個人算定基準額 = new Decimal(世帯算定基準額.multiply(利用者負担額).subtract(利用者負担額合計).intValue());
+//        if (最小の個人算定基準額.equals(個人算定基準額)
+//                && 個人算定基準額合計.compareTo(世帯算定基準額) < 0) {
+//            個人算定基準額 = 個人算定基準額.add(世帯算定基準額.multiply(個人算定基準額合計));
+//        }
+//        // 境界層区分、世帯所得区分 QA確認中
+//        if (ZERO.equals(給付実績中間.getChushiRiyuNyushomaeJyokyoCode())) {
+//            if (世帯算定基準額.equals(get算定基準額コンフィグ(高額自己負担上限額_24600))
+//                    && ONE.equals(給付実績中間.getShotokuHantei_roreiFukushi())
+//                    && get算定基準額コンフィグ(高額自己負担上限額_15000).compareTo(個人算定基準額) < 0) {
+//                個人算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_15000);
+//            } else {
+//                Decimal ＷＫ金額 = 給付実績中間.getShotokuHantei_gokeiShotokuGaku().
+//                        add(給付実績中間.getShotokuHantei_nenkiniShunyuGaku());
+//                if (年月_200510.compareTo(給付実績中間.getServiceTeikyoYM()) <= 0
+//                        && get算定基準額コンフィグ(高額自己負担上限額_15000).equals(個人算定基準額)
+//                        && ＷＫ金額.compareTo(金額_800000) < 0) {
+//                    利用者負担第2段階 = ONE;
+//                    if (get算定基準額コンフィグ(高額自己負担上限額_15000).compareTo(個人算定基準額) < 0) {
+//                        個人算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_15000);
+//                    }
+//                } else {
+//                    // ａ．共通管理の激変緩和適用開始年月≦サービス提供年月（ｎ）≦共通管理の激変緩和適用終了年月かつ
+//                    // QA確認中
+//                    if (ONE.equals(給付実績中間.getShotokuHantei_gekihenKanwaKubun())
+//                            && ONE.equals(給付実績中間.getShotokuHantei_roreiFukushi())) {
+//                        激変緩和区分 = ONE;
+//                        if (get算定基準額コンフィグ(高額自己負担上限額_15000).compareTo(個人算定基準額) < 0) {
+//                            個人算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_15000);
+//                        }
+//                    } else {
+//                        激変緩和区分 = TWO;
+//                        if (get算定基準額コンフィグ(高額自己負担上限額_24600).compareTo(個人算定基準額) < 0) {
+//                            個人算定基準額 = get算定基準額コンフィグ(高額自己負担上限額_24600);
+//                        }
+//                    }
+//                }
+//            }
+//        }
         return 世帯算定基準額;
     }
 

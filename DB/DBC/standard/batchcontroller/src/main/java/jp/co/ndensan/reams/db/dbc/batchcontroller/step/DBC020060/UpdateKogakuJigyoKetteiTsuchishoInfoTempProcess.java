@@ -78,15 +78,18 @@ public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProces
     protected void process(KogakuServiceUpdateTempEntity entity) {
 
         if (beforeEntity == null) {
-            サービス種類名称 = entity.get介護サービス種類Entity().getServiceShuruiMeisho();
+            サービス種類名称 = entity.get介護サービス種類Entity() == null ? RString.EMPTY
+                    : entity.get介護サービス種類Entity().getServiceShuruiMeisho();
         } else if (beforeEntity.getHihokenshaNo().equals(entity.getHihokenshaNo())
                 && beforeEntity.getServiceTeikyoYM().equals(entity.getServiceTeikyoYM())) {
-            サービス種類名称 = サービス種類名称.concat(読点).concat(entity.get介護サービス種類Entity().getServiceShuruiMeisho());
+            サービス種類名称 = entity.get介護サービス種類Entity() == null ? サービス種類名称
+                    : サービス種類名称.concat(読点).concat(entity.get介護サービス種類Entity().getServiceShuruiMeisho());
         } else {
             KetteiTsuchishoInfoTempEntity 一時Entit = beforeEntity.get一時Entity();
             一時Entit.setServiceShuruiName(サービス種類名称);
             一時tableWriter.update(一時Entit);
-            サービス種類名称 = entity.get介護サービス種類Entity().getServiceShuruiMeisho();
+            サービス種類名称 = entity.get介護サービス種類Entity() == null ? RString.EMPTY
+                    : entity.get介護サービス種類Entity().getServiceShuruiMeisho();
         }
         beforeEntity = entity;
     }

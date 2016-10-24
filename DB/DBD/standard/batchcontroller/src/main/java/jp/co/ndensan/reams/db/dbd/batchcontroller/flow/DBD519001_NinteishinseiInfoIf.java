@@ -38,7 +38,6 @@ public class DBD519001_NinteishinseiInfoIf extends BatchFlowBase<DBD519001_Ninte
     private static final String 申請情報抽出 = "申請情報抽出";
     private static final String 申請情報IF編集 = "申請情報IF編集";
     private static final String 認定審査判定依頼一覧表発行 = "認定審査判定依頼一覧表発行";
-    private static final String 要介護認定外部データ出力 = "要介護認定外部データ出力";
     private static final String 申請情報IFファイル電算標準版作成 = "申請情報IFファイル電算標準版作成";
     private static final String 各テーブルへの登録 = "各テーブルへの登録";
     private static final String 申請情報IFファイル厚労省作成 = "申請情報IFファイル厚労省作成";

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel;
+package jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Setter
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity implements Cloneable, Serializable {
+public class JigyobunShikyugakuKeisanPanelEntity implements Cloneable, Serializable {
 
     private HihokenshaNo hihokenshaNo;
     private FlexibleYear taishoNendo;
@@ -38,7 +38,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity implements Clone
     /**
      * コンストラクタです。
      */
-    public JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity() {
+    public JigyobunShikyugakuKeisanPanelEntity() {
 
     }
 
@@ -47,7 +47,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity implements Clone
      *
      * @param entity DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity
      */
-    public JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity(DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity entity) {
+    public JigyobunShikyugakuKeisanPanelEntity(DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity entity) {
         this.dbt3172Entity = entity;
     }
 
@@ -56,7 +56,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity implements Clone
      *
      * @param entity DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity
      */
-    public JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity(DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity entity) {
+    public JigyobunShikyugakuKeisanPanelEntity(DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity entity) {
         this.dbt3173Entity = entity;
     }
 
@@ -65,7 +65,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity implements Clone
      *
      * @param hokenSeidoCode RString
      */
-    public JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity(RString hokenSeidoCode) {
+    public JigyobunShikyugakuKeisanPanelEntity(RString hokenSeidoCode) {
         this.hokenSeidoCode = hokenSeidoCode;
     }
 }

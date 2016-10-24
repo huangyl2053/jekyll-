@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -45,7 +46,6 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess2 extends BatchProcessBas
 
     @Override
     protected void beforeExecute() {
-        super.beforeExecute();
     }
 
     @Override
@@ -81,6 +81,9 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess2 extends BatchProcessBas
     }
 
     private void set給付実績基本情報(TempKyufujissekiTyukannEntity entity, DbT3017KyufujissekiKihonEntity 実績基本) {
+        if (実績基本 == null) {
+            return;
+        }
         entity.setInputShikibetsuNo(実績基本.getInputShikibetsuNo());
         entity.setRecodeShubetsuCode(実績基本.getRecodeShubetsuCode());
         entity.setShokisaiHokenshaNo(実績基本.getShokisaiHokenshaNo());
@@ -183,9 +186,12 @@ public class InsKyufuJissekiChukanJigyoKogakuTmpProcess2 extends BatchProcessBas
 
     private void set世帯員所得判定明細高額一時(TempKyufujissekiTyukannEntity entity,
             TempSetaiinShotokuHanteiEntity 明細高額) {
+        if (明細高額 == null) {
+            return;
+        }
         entity.setShotokuHantei_hihokenshaNo(明細高額.getHihokenshaNo());
         entity.setShotokuHantei_shikibetsuCode(明細高額.getShikibetsuCode());
-        entity.setShotokuHantei_setaiinShikibetsuCode(null);
+        entity.setShotokuHantei_setaiinShikibetsuCode(ShikibetsuCode.EMPTY);
         entity.setShotokuHantei_kijunYMD(明細高額.getKijunYMD());
         entity.setShotokuHantei_shotokuNendo(明細高額.getShotokuNendo());
         entity.setShotokuHantei_jushochiTokureiFlag(明細高額.getJushochiTokureiFlag());

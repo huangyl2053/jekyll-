@@ -67,6 +67,7 @@ class KyokaisoKanriMasterListHeaderEditor implements IKyokaisoKanriMasterListEdi
         source.listLower_8 = headItem.get食費軽減後負担額();
         source.listLower_9 = headItem.get高額ｻｰﾋﾞｽ費減額後上限額();
         source.listLower_10 = headItem.get保険料納付減額後保険料段階();
+        source.choikiCode = headItem.get町域コード();
         return source;
     }
 }

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ue.uex.definition.batchprm.tokuchodotei.UEXT02010_Tok
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -34,7 +35,7 @@ public class DBB271001_TokuchoTaishoshaDotei extends BatchFlowBase<DBB271001_Tok
     private static final String バッチ特徴同定を呼び出し = "doBatchTokuchoDotei";
     private static final String 同定情報を取得する = "getDoteiJoho";
     private static final String 未同定情報を取得する = "getMiDoteiJoho";
-    private static final RString 同定方法_宛名同定 = new RString("1");
+    private static final RString 同定方法_宛名同定 = new RString("0");
 
     private static final RString BATCH_ID = new RString("UEXT02010_TokuchoDotei");
 
@@ -95,7 +96,7 @@ public class DBB271001_TokuchoTaishoshaDotei extends BatchFlowBase<DBB271001_Tok
         parameter.setKaigoShoriNendo(getParameter().get処理年度());
         parameter.setHosokuTsuki(getParameter().get捕捉月());
         parameter.setDoteiHoho(同定方法_宛名同定);
-        parameter.setGyomuCode(null);
+        parameter.setGyomuCode(GyomuCode.DB介護保険);
         parameter.setShoriTime(getParameter().get処理日時());
         boolean 年度切替後 = Boolean.FALSE;
         FlexibleYear システム日付の年 = FlexibleDate.getNowDate().getYear();

@@ -58,7 +58,7 @@ public class SeikyuShinsaShuseiTorokuFinder {
     /**
      * 検索条件より、適当な条件を連結して、申請者一覧情報を検索する
      *
-     * @param 検索条件
+     * @param 検索条件 検索条件
      * @return ResponseData<SeikyuShinsaShuseiTorokuDiv>
      */
     public SearchResult<SeikyuShinsaShuseiTorokuBusiness> getKoikinaiTenkyoList(SeikyuShinsaShuseiTorokuMapperParameter 検索条件) {

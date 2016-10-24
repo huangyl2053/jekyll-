@@ -31,7 +31,6 @@ public class InsShiharaiHohoHenkoKanriTmpProcess extends BatchProcessBase<DbT402
 
     @Override
     protected void beforeExecute() {
-        super.beforeExecute();
     }
 
     @Override

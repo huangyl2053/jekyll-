@@ -27,6 +27,7 @@ public class InitJissekiCheckProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void beforeExecute() {
+        isデータがあり = new OutputParameter<>();
         IJigyobunKogakuGassanJikofutangakuKeisanMapper mapper
                 = getMapper(IJigyobunKogakuGassanJikofutangakuKeisanMapper.class);
         List<JissekiFutangakuDataTempEntity> resultList = mapper.get実績負担額データ();

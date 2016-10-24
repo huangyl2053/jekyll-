@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -51,7 +52,6 @@ public class FuchoKariSanteiFukaBatch {
     private static final int NUM_1 = 1;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
-    private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_31 = 31;
     private static final int NUM_100 = 100;
@@ -79,12 +79,14 @@ public class FuchoKariSanteiFukaBatch {
      * @param 前年度賦課情報 前年度賦課情報
      * @param 保険料段階_段階区分 保険料段階_段階区分
      * @param 口座Entity 口座Entity
+     * @param 通知書番号 通知書番号
+     * @param 調定日時 調定日時
      * @return {@link FukaJohoTempEntity}
      */
     public FukaJohoTempEntity 賦課通情報編集(FlexibleYear 調定年度, HihokenshaDaicho 資格情報, DbT2001ChoshuHohoEntity 徴収方法,
             List<SeikatsuHogoJukyusha> 生保の情報, List<RoreiFukushiNenkinJukyusha> 老齢の情報, Decimal 計算用保険料,
             RString 区分, FukaJohoTempEntity 更正前賦課情報, FukaJohoTempEntity 前年度賦課情報, RString 保険料段階_段階区分,
-            TokuteiKozaRelateEntity 口座Entity, TsuchishoNo 通知書番号) {
+            TokuteiKozaRelateEntity 口座Entity, TsuchishoNo 通知書番号, YMDHMS 調定日時) {
         FukaJohoTempEntity 賦課情報 = new FukaJohoTempEntity();
         賦課情報.setShikakuShutokuYMD(資格情報.get第1号資格取得年月日());
         賦課情報.setShikakuShutokuJiyu(資格情報.get資格取得事由コード());
@@ -130,6 +132,13 @@ public class FuchoKariSanteiFukaBatch {
         FukaKeisan 賦課の計算 = FukaKeisan.createInstance();
         賦課情報.setFukaYMD(賦課の計算.findOut賦課基準日(調定年度, 資格情報));
         賦課情報.setHokenryoDankai(保険料段階_段階区分);
+
+        return 賦課通情報編集Part2(賦課情報, 調定年度, 更正前賦課情報, 資格情報, 徴収方法, 通知書番号, 調定日時, 計算用保険料, 区分);
+    }
+
+    private FukaJohoTempEntity 賦課通情報編集Part2(FukaJohoTempEntity 賦課情報, FlexibleYear 調定年度, FukaJohoTempEntity 更正前賦課情報,
+            HihokenshaDaicho 資格情報, DbT2001ChoshuHohoEntity 徴収方法, TsuchishoNo 通知書番号, YMDHMS 調定日時, Decimal 計算用保険料,
+            RString 区分) {
         if (資格情報.get旧市町村コード() != null && !資格情報.get旧市町村コード().isEmpty()) {
             賦課情報.setFukaShichosonCode(資格情報.get旧市町村コード());
         } else if (資格情報.get広住特措置元市町村コード() != null
@@ -146,6 +155,7 @@ public class FuchoKariSanteiFukaBatch {
         賦課情報.setFuKibetsuGaku01(普徴期別金額リスト.get(0));
         賦課情報.setFuKibetsuGaku02(普徴期別金額リスト.get(1));
         賦課情報.setFuKibetsuGaku03(普徴期別金額リスト.get(2));
+        //QA #105593
         //１．１０．口座区分を編集する。
         if (更正前賦課情報 != null) {
             賦課情報.setChoteiNendo(更正前賦課情報.getChoteiNendo());
@@ -174,8 +184,9 @@ public class FuchoKariSanteiFukaBatch {
             賦課情報.setTkKibetsuGaku05(Decimal.ZERO);
             賦課情報.setTkKibetsuGaku06(Decimal.ZERO);
         }
-        // 通知書番号,調定日時,異動基準日時
         賦課情報.setTsuchishoNo(通知書番号);
+        賦課情報.setChoteiNichiji(調定日時);
+        賦課情報.setIdoKijunNichiji(調定日時);
         賦課情報.setChoteiJiyu1(ChoteiJiyuCode.仮算定賦課.getコード());
         賦課情報.setChoshuHohoRirekiNo(徴収方法.getRirekiNo());
         賦課情報.setKyokaisoKubun(境界層区分_非該当);
@@ -204,10 +215,10 @@ public class FuchoKariSanteiFukaBatch {
             FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(調定年度);
             KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
             int 期 = 期月リスト.filtered仮算定期間().toList().size();
-            int 納期数 = 0;
-            RString 仮算定賦課 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
+            int 納期数;
+//          QA #105593
+//          RString 仮算定賦課 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
             RString 仮算定賦課方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, 調定年度開始日, SubGyomuCode.DBB介護賦課);
-
             if (仮算定賦課方法_02.equals(仮算定賦課方法) || 仮算定賦課方法_04.equals(仮算定賦課方法)
                     || 仮算定賦課方法_10.equals(仮算定賦課方法) || 仮算定賦課方法_11.equals(仮算定賦課方法)) {
                 納期数 = 期月リスト.get最終法定納期().get期AsInt();
@@ -217,6 +228,7 @@ public class FuchoKariSanteiFukaBatch {
                 納期数 = 期月リスト.get最終法定納期().get期AsInt();
             } else {
                 納期数 = 期月リスト.get最終法定納期().get期AsInt();
+//                QA #105593
 //                int 最終法定納期の期 = 期月リスト.get最終法定納期().get期AsInt();
 //                for (int i = NUM_1; i <= 最終法定納期の期; i++) {
 //                    int 普徴期別金額

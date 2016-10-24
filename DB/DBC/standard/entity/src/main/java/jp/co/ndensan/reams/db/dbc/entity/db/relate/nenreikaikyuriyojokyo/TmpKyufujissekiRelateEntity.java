@@ -5,15 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
@@ -28,7 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 public class TmpKyufujissekiRelateEntity implements IDbAccessable {
 
     @TempTableColumnOrder(1)
-    private HihokenshaNo hiHokenshaNo;
+    @PrimaryKey
+    private RString hiHokenshaNo;
     @TempTableColumnOrder(2)
     private FlexibleYearMonth serviceTeikyoYM;
     @TempTableColumnOrder(3)
@@ -36,9 +35,11 @@ public class TmpKyufujissekiRelateEntity implements IDbAccessable {
     @TempTableColumnOrder(4)
     private FlexibleDate umareYMD;
     @TempTableColumnOrder(5)
-    private ServiceShuruiCode serviceSyuruiCode;
+    private RString serviceSyuruiCode;
     @TempTableColumnOrder(6)
-    private ServiceKomokuCode serviceKomokuCode;
+    private RString serviceKomokuCode;
     @TempTableColumnOrder(7)
     private AtenaMeisho meisho;
+    @TempTableColumnOrder(8)
+    private RString shuukeibangou;
 }

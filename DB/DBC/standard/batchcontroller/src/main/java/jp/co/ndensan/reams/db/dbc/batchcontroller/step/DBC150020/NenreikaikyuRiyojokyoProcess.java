@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150020;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.nenreikeikyubetsuriyojyokyo.NenreiKeikyuBetsuRiyoJyokyoReport;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.nenreikaikyuriyojokyo.NenreikaikyuRiyojokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -13,15 +14,12 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.TmpSyut
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikeikyubetsuriyojyokyo.NenreiKeikyuBetsuRiyoJyokyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.nenreikeikyubetsuriyojyokyo.NenreiKeikyuBetsuRiyoJyokyoReportSource;
 import jp.co.ndensan.reams.db.dbc.service.core.nenreikaikyuriyojokyo.NenreiKaikyuRiyoJokyoFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,19 +44,16 @@ public class NenreikaikyuRiyojokyoProcess extends BatchProcessBase<TmpSyuturyoku
     private static final RString 値000000 = new RString("000000");
     private static final RString 市町村名 = new RString("市町村名:");
     private static final RString 旧市町村名 = new RString("旧市町村名:");
-    private static final RString 住所 = new RString("住所:");
-    private static final RString 行政区 = new RString("行政区:");
-    private static final RString 地区1 = new RString("地区1:");
-    private static final RString 地区2 = new RString("地区2:");
-    private static final RString 地区3 = new RString("地区3:");
-    private static final RString 町域 = new RString("1");
-    private static final RString 値2 = new RString("2");
-    private static final RString 値3 = new RString("3");
-    private static final RString 値4 = new RString("4");
-    private static final RString 値5 = new RString("5");
-    NenreiKeikyuBetsuRiyoJyokyoEntity reportEntity = new NenreiKeikyuBetsuRiyoJyokyoEntity();
-    private NenreikaikyuRiyojokyoProcessParameter processParameter;
+    private static final RString 住所 = new RString("住所");
+    private static final RString 行政区 = new RString("行政区");
+    private static final RString 地区1 = new RString("地区1");
+    private static final RString 地区2 = new RString("地区2");
+    private static final RString 地区3 = new RString("地区3");
+    private static final RString 町域 = new RString("町域");
+    private static final RString RSTRING_07 = new RString("07");
     private int count = 0;
+    List<NenreiKeikyuBetsuRiyoJyokyoEntity> resultList = new ArrayList<>();
+    private NenreikaikyuRiyojokyoProcessParameter processParameter;
 
     @BatchWriter
     private BatchReportWriter<NenreiKeikyuBetsuRiyoJyokyoReportSource> batchReportWriter;
@@ -83,27 +78,39 @@ public class NenreikaikyuRiyojokyoProcess extends BatchProcessBase<TmpSyuturyoku
 
     @Override
     protected void process(TmpSyuturyokuYoRelateEntity entity) {
-        count++;
+        NenreiKeikyuBetsuRiyoJyokyoEntity reportEntity = new NenreiKeikyuBetsuRiyoJyokyoEntity();
         editReportEntity(reportEntity);
-        reportEntity.setページ数(entity.getPageNo());
         reportEntity.set印刷日時(RDate.getNowDateTime());
-        if (entity.getNo().equals(new RString("1"))) {
+        if (!entity.getShuukeiBangouCd().equals(RSTRING_07)) {
+            int 番号_NUM = Integer.valueOf(entity.getShuukeiBangouCd().toString());
+            if (番号_NUM % 2 != 0) {
+                reportEntity.setサービス種類名称1(entity.getServiceSyuruiCodeMei());
+                set明細1(reportEntity, entity);
+                resultList.add(reportEntity);
+            } else {
+                resultList.get(count).setサービス種類名称2(entity.getServiceSyuruiCodeMei());
+                set明細2(resultList.get(count), entity);
+                count++;
+            }
+        } else {
             reportEntity.setサービス種類名称1(entity.getServiceSyuruiCodeMei());
-            set明細1(entity);
-        }
-        if (entity.getNo().equals(new RString("2"))) {
-            reportEntity.setサービス種類名称2(entity.getServiceSyuruiCodeMei());
-            set明細2(entity);
-        }
-
-        if (count == 2) {
-            NenreiKeikyuBetsuRiyoJyokyoReport report = new NenreiKeikyuBetsuRiyoJyokyoReport(reportEntity);
-            report.writeBy(reportSourceWriter);
-            count = 0;
+            set明細1(reportEntity, entity);
+            reportEntity.setサービス種類名称2(RString.EMPTY);
+            set明細2(reportEntity, null);
+            resultList.add(reportEntity);
+            count++;
         }
     }
 
-    private void set明細1(TmpSyuturyokuYoRelateEntity entity) {
+    @Override
+    protected void afterExecute() {
+        for (NenreiKeikyuBetsuRiyoJyokyoEntity result : resultList) {
+            NenreiKeikyuBetsuRiyoJyokyoReport report = new NenreiKeikyuBetsuRiyoJyokyoReport(result);
+            report.writeBy(reportSourceWriter);
+        }
+    }
+
+    private void set明細1(NenreiKeikyuBetsuRiyoJyokyoEntity reportEntity, TmpSyuturyokuYoRelateEntity entity) {
         if (entity.getServiceSyuruiCodeMei().isEmpty()) {
             reportEntity.set区分_1(RString.EMPTY);
             reportEntity.set非該当_1(RString.EMPTY);
@@ -133,8 +140,8 @@ public class NenreikaikyuRiyojokyoProcess extends BatchProcessBase<TmpSyuturyoku
         }
     }
 
-    private void set明細2(TmpSyuturyokuYoRelateEntity entity) {
-        if (entity.getServiceSyuruiCodeMei().isEmpty()) {
+    private void set明細2(NenreiKeikyuBetsuRiyoJyokyoEntity reportEntity, TmpSyuturyokuYoRelateEntity entity) {
+        if (entity == null || entity.getServiceSyuruiCodeMei().isEmpty()) {
             reportEntity.set区分_2(RString.EMPTY);
             reportEntity.set非該当_2(RString.EMPTY);
             reportEntity.set要支援１_2(RString.EMPTY);
@@ -158,16 +165,12 @@ public class NenreikaikyuRiyojokyoProcess extends BatchProcessBase<TmpSyuturyoku
             reportEntity.set要介護３_2(getRString(entity.getYouKaigo3()));
             reportEntity.set要介護４_2(getRString(entity.getYouKaigo4()));
             reportEntity.set要介護５_2(getRString(entity.getYouKaigo5()));
-            reportEntity.set合計_1(getRString(entity.getGoikei()));
-            reportEntity.set備考_1(entity.getBikou());
+            reportEntity.set合計_2(getRString(entity.getGoikei()));
+            reportEntity.set備考_2(entity.getBikou());
         }
     }
 
     private void editReportEntity(NenreiKeikyuBetsuRiyoJyokyoEntity entity) {
-        RString 保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        entity.set保険者番号(保険者番号);
-        RString 保険者名称 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        entity.set保険者名(保険者名称);
         if (!processParameter.getServiceTeikyoYM().isEmpty()) {
             RStringBuilder rb = new RStringBuilder();
             rb.append(提供月);
@@ -197,42 +200,27 @@ public class NenreikaikyuRiyojokyoProcess extends BatchProcessBase<TmpSyuturyoku
         } else if (processParameter.getShichosonCode().value().isEmpty() && processParameter.getKyoShichosonCode().value().isEmpty()) {
             if (processParameter.getSentakuTaisyoKubun().equals(町域)) {
                 entity.set条件2(setBuilder(住所));
-            } else if (processParameter.getSentakuTaisyoKubun().equals(値2)) {
+            } else if (processParameter.getSentakuTaisyoKubun().equals(行政区)) {
                 entity.set条件2(setBuilder(行政区));
-            } else if (processParameter.getSentakuTaisyoKubun().equals(値3)) {
+            } else if (processParameter.getSentakuTaisyoKubun().equals(地区1)) {
                 entity.set条件2(setBuilder(地区1));
-            } else if (processParameter.getSentakuTaisyoKubun().equals(値4)) {
+            } else if (processParameter.getSentakuTaisyoKubun().equals(地区2)) {
                 entity.set条件2(setBuilder(地区2));
-            } else if (processParameter.getSentakuTaisyoKubun().equals(値5)) {
+            } else if (processParameter.getSentakuTaisyoKubun().equals(地区3)) {
                 entity.set条件2(setBuilder(地区3));
             } else {
                 entity.set条件2(RString.EMPTY);
             }
         }
-
     }
 
     private RString setBuilder(RString 対象区分) {
-        Map<RString, RString> map = processParameter.getSentakuTaisyoList();
-        RString firstCode = RString.EMPTY;
-        RString lastCode = RString.EMPTY;
-        boolean firstFlag = true;
-        int count = 0;
-        for (RString key : map.keySet()) {
-            ++count;
-            if (firstFlag) {
-                firstCode = key;
-                firstFlag = false;
-            }
-            if (count == map.keySet().size()) {
-                lastCode = key;
-            }
-        }
         RStringBuilder rb = new RStringBuilder();
         rb.append(対象区分);
-        rb.append(firstCode);
+        rb.append(":");
+        rb.append(processParameter.getSentakuTaisyoList().get(0));
         rb.append("～");
-        rb.append(lastCode);
+        rb.append(processParameter.getSentakuTaisyoList().get(processParameter.getSentakuTaisyoList().size() - 1));
         return rb.toRString();
     }
 

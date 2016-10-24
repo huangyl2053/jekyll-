@@ -290,11 +290,9 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
     }
 
     private IKoza do口座マスク編集(TokuteiKozaRelateEntity koza) {
-        if (帳票制御共通情報.is口座マスク有無()) {
-            if (口座表示区分_0.equals(koza.getUaT0310KozaEntity().getKozaHyojiKubun())) {
-                MaskedKozaCreator maskedKozaCreator = MaskedKozaCreator.createInstance(SubGyomuCode.DBC介護給付);
-                return maskedKozaCreator.createマスク編集済口座(new Koza(koza));
-            }
+        if (帳票制御共通情報.is口座マスク有無() && 口座表示区分_0.equals(koza.getUaT0310KozaEntity().getKozaHyojiKubun())) {
+            MaskedKozaCreator maskedKozaCreator = MaskedKozaCreator.createInstance(SubGyomuCode.DBC介護給付);
+            return maskedKozaCreator.createマスク編集済口座(new Koza(koza));
         }
         return null;
     }

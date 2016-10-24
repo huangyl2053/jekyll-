@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -33,6 +34,7 @@ public class UpdateShikyugakuUpdateTempProcess extends BatchProcessBase<Shikyuga
     private static final RString TABLE_NAME = new RString("ShikyugakuUpdateTemp");
     private static final RString 支払方法区分 = new RString(1);
     private static final RString 窓口区分 = new RString(5);
+    public static final RString コロン = new RString(":");
 
     private JigyobunShikyugakuKeisanProcessParameter parameter;
 
@@ -72,6 +74,9 @@ public class UpdateShikyugakuUpdateTempProcess extends BatchProcessBase<Shikyuga
     }
 
     private RString getTime(RTime time) {
-        return null;
+        if (time == null) {
+            return RString.EMPTY;
+        }
+        return time.toFormattedTimeString(DisplayTimeFormat.HH_mm).replace(コロン, RString.EMPTY);
     }
 }

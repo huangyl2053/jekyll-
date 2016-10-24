@@ -381,7 +381,7 @@ public enum ReportIdDBB {
     /**
      * 介護保険料額決定通知書発行一覧表の帳票ID
      */
-    DBB200012(new ReportId("DBB200012_KaigoHokenryogakuKetteiHenkoTsuchiHakkoIchiran"), new RString("介護保険料額決定通知書発行 一覧表")),
+    DBB200012(new ReportId("DBB200012_KaigoHokenryogakuKetteiTsuchiHakkoIchiran"), new RString("介護保険料額決定通知書発行一覧表")),
     /**
      * 特別徴収開始通知書（本算定）発行一覧表の帳票ID
      */
@@ -439,6 +439,10 @@ public enum ReportIdDBB {
      * 所得照会票発行一覧表の帳票ID
      */
     DBB200024(new ReportId("DBB200024_ShotokushokaihyoHakkoIchiran"), new RString("所得照会票発行一覧表")),
+    /**
+     * 介護保険料額変更通知書発行一覧表の帳票ID
+     */
+    DBB200030(new ReportId("DBB200030_KaigoHokenryogakuHenkoTsuchiHakkoIchiran"), new RString("介護保険料額変更通知書発行一覧表")),
     /**
      * 介護保険　特別徴収同定一覧表の帳票ID
      */

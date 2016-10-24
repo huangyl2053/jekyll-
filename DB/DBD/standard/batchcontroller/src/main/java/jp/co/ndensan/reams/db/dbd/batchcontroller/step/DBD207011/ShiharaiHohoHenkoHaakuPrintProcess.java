@@ -122,12 +122,6 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
     }
 
     @Override
-    protected void beforeExecute() {
-        outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
-                parameter.get帳票ID(), parameter.get改頁出力順ID());
-    }
-
-    @Override
     protected IBatchReader createReader() {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
@@ -201,13 +195,13 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
     private RString get出力順(IOutputOrder order) {
         if (order != null) {
             RString 出力順 = MyBatisOrderByClauseCreator.create(ShiharaiHohoHenkoHaakuOrderKey.class, order);
-            return 出力順.concat(",対象者情報一時テーブル.\"hihokenshaNo\","
-                    + "収納状況一時テーブル.\"choteiNendo\",収納状況一時テーブル.\"fukaNendo\""
-                    + ",収納状況一時テーブル.\"tsuchishoNo\",,収納状況一時テーブル.\"ki\"");
+            return 出力順.concat(",対象者情報_被保険者番号,"
+                    + "収納状況_調定年度,収納状況_賦課年度"
+                    + ",収納状況_通知書番号,収納状況_期");
         }
-        return new RString("対象者情報一時テーブル.\"hihokenshaNo\","
-                + "収納状況一時テーブル.\"choteiNendo\",収納状況一時テーブル.\"fukaNendo\""
-                + ",収納状況一時テーブル.\"tsuchishoNo\",,収納状況一時テーブル.\"ki\"");
+        return new RString("order by 対象者情報_被保険者番号,"
+                + "収納状況_調定年度,収納状況_賦課年度"
+                + ",収納状況_通知書番号,収納状況_期");
     }
 
     private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
@@ -390,9 +384,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
         reportData.set弁明受付日_6行目(t.get滞納者対策情報_弁明受付日());
         reportData.set償還発行日_7行目(t.get滞納者対策情報_償還発行日());
 
-        if (0 != t.get滞納者対策情報_償還証期限()) {
-            reportData.set償還証期限_8行目(new FlexibleDate(String.valueOf(t.get滞納者対策情報_償還証期限())));
-        }
+        reportData.set償還証期限_8行目(t.get滞納者対策情報_償還証期限());
 
         reportData.set差止中件数_9行目(new RString(t.get滞納者対策情報_差止中件数()));
         reportData.set差止中金額_10行目((t.get滞納者対策情報_差止中金額()));

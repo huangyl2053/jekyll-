@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKyufujissekiTyukannJigyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity3;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @reamsid_L DBC-2010-040 zhouchuanlin
  */
-public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3 extends BatchProcessBase<UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity> {
+public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3 extends BatchProcessBase<UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity3> {
 
     private static final RString MYBATIS_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper."
@@ -48,7 +48,7 @@ public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3 extends BatchProcessB
     }
 
     @Override
-    protected void process(UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity entity) {
+    protected void process(UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity3 entity) {
         TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時５ = entity.get給付実績中間事業高額一時５();
         DbT3055KogakuKyufuTaishoshaGokeiEntity 給付対象者合計 = entity.get高額介護サービス費給付対象者合計();
         Decimal 高額介護サービス費 = Decimal.ZERO;

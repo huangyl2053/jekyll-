@@ -22,14 +22,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBB233001_TokuchoSeidokanIFRenkei extends BatchFlowBase<DBB233001_TokuchoSeidokanIFRenkeiParameter> {
 
-    private static final String TOKUCHOUSEIDOKANIFRENKEI_PROCESS = "tokuchouSeidoKanIFRenkeiProcess";
+    private static final String TOKUCHOUSEIDOKANIFRENKEI_PRO = "tokuchouSeidoKanIFRenkeiProcess";
 
     @Override
     protected void defineFlow() {
-        executeStep(TOKUCHOUSEIDOKANIFRENKEI_PROCESS);
+        executeStep(TOKUCHOUSEIDOKANIFRENKEI_PRO);
     }
 
-    @Step(TOKUCHOUSEIDOKANIFRENKEI_PROCESS)
+    @Step(TOKUCHOUSEIDOKANIFRENKEI_PRO)
     IBatchFlowCommand tokuchouSeidoKanIFRenkeiProcess() {
         List<RString> 市町村コードリスト = new ArrayList<>();
         return loopBatch(TokuchoSeidokanIFRenkeiProcess.class).arguments(

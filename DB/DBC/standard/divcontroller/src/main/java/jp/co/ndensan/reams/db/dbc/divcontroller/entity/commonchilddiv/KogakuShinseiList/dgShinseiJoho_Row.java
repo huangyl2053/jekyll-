@@ -3,24 +3,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jul 19 14:23:46 CST 2016 
+ * Mon Oct 24 15:47:16 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
-
 /**
- * dgShinseiJoho_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgShinseiJoho_Row のクラスファイル
+ *
+ * @reamsid_L DBC-2020-010 quxiaodong
  */
-
 public class dgShinseiJoho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     private RString data1;
     private RString data2;
@@ -35,6 +31,9 @@ public class dgShinseiJoho_Row extends DataRow {
     private RString data11;
     private RString data12;
     private RString data13;
+    private RString data14;
+    private RString data15;
+    private RString data16;
 
     public dgShinseiJoho_Row() {
         super();
@@ -51,6 +50,9 @@ public class dgShinseiJoho_Row extends DataRow {
         this.data11 = RString.EMPTY;
         this.data12 = RString.EMPTY;
         this.data13 = RString.EMPTY;
+        this.data14 = RString.EMPTY;
+        this.data15 = RString.EMPTY;
+        this.data16 = RString.EMPTY;
         this.setOriginalData("data1", data1);
         this.setOriginalData("data2", data2);
         this.setOriginalData("data3", data3);
@@ -64,9 +66,12 @@ public class dgShinseiJoho_Row extends DataRow {
         this.setOriginalData("data11", data11);
         this.setOriginalData("data12", data12);
         this.setOriginalData("data13", data13);
+        this.setOriginalData("data14", data14);
+        this.setOriginalData("data15", data15);
+        this.setOriginalData("data16", data16);
     }
 
-    public dgShinseiJoho_Row(RString data1, RString data2, TextBoxNum data3, TextBoxNum data4, TextBoxNum data5, TextBoxNum data6, TextBoxNum data7, RString data8, RString data9, RString data10, RString data11, RString data12, RString data13) {
+    public dgShinseiJoho_Row(RString data1, RString data2, TextBoxNum data3, TextBoxNum data4, TextBoxNum data5, TextBoxNum data6, TextBoxNum data7, RString data8, RString data9, RString data10, RString data11, RString data12, RString data13, RString data14, RString data15, RString data16) {
         super();
         this.setOriginalData("data1", data1);
         this.setOriginalData("data2", data2);
@@ -81,6 +86,9 @@ public class dgShinseiJoho_Row extends DataRow {
         this.setOriginalData("data11", data11);
         this.setOriginalData("data12", data12);
         this.setOriginalData("data13", data13);
+        this.setOriginalData("data14", data14);
+        this.setOriginalData("data15", data15);
+        this.setOriginalData("data16", data16);
         this.data1 = data1;
         this.data2 = data2;
         this.data3 = data3;
@@ -94,6 +102,9 @@ public class dgShinseiJoho_Row extends DataRow {
         this.data11 = data11;
         this.data12 = data12;
         this.data13 = data13;
+        this.data14 = data14;
+        this.data15 = data15;
+        this.data16 = data16;
     }
 
     public RString getData1() {
@@ -146,6 +157,18 @@ public class dgShinseiJoho_Row extends DataRow {
 
     public RString getData13() {
         return data13;
+    }
+
+    public RString getData14() {
+        return data14;
+    }
+
+    public RString getData15() {
+        return data15;
+    }
+
+    public RString getData16() {
+        return data16;
     }
 
     public void setData1(RString data1) {
@@ -211,6 +234,21 @@ public class dgShinseiJoho_Row extends DataRow {
     public void setData13(RString data13) {
         this.setOriginalData("data13", data13);
         this.data13 = data13;
+    }
+
+    public void setData14(RString data14) {
+        this.setOriginalData("data14", data14);
+        this.data14 = data14;
+    }
+
+    public void setData15(RString data15) {
+        this.setOriginalData("data15", data15);
+        this.data15 = data15;
+    }
+
+    public void setData16(RString data16) {
+        this.setOriginalData("data16", data16);
+        this.data16 = data16;
     }
 
     // </editor-fold>

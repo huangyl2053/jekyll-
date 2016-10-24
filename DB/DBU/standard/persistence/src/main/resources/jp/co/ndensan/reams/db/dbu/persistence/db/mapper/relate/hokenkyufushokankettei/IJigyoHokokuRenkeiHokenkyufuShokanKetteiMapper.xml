@@ -604,7 +604,7 @@
                 AND A."hiHokenshaNo" = F."hihokenshaNo" 
                 AND A."serviceTeikyoYM" = F."serviceTeikyoYM" 
                 AND A."jigyoshoNo" = F."jigyoshaNo" 
-                AND A."seiriNo" = F."seiriNo" 
+                AND A."seiriNo" = F."motoSeiriNo" 
             WHERE
                 A."inputShikibetsuNo" NOT LIKE '816%' 
                 AND A."inputShikibetsuNo" NOT LIKE '71P%' 

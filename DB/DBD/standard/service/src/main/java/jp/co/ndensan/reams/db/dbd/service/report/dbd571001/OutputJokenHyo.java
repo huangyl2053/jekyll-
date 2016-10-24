@@ -58,7 +58,7 @@ public class OutputJokenHyo {
         if (processParamter.get抽出条件設定区分().equals(区分_0)) {
             set今回抽出あり(出力条件, processParamter);
         } else if (processParamter.get抽出条件設定区分().equals(区分_1)) {
-            set今回抽出なし(出力条件, processParamter);
+            set今回抽出なし(出力条件);
         }
         if (processParamter.get異動抽出対象リスト().isEmpty()) {
             出力条件.add(new RString("【異動抽出対象】　").concat(なし));
@@ -96,7 +96,7 @@ public class OutputJokenHyo {
         }
     }
 
-    private void set今回抽出なし(List<RString> 出力条件, IdoChushutsuDaichoProcessParameter parameter) {
+    private void set今回抽出なし(List<RString> 出力条件) {
         出力条件.add(new RString("【今回抽出開始年月日】　").concat(なし));
         出力条件.add(new RString("【今回抽出開始時分秒】　").concat(なし));
         出力条件.add(new RString("【今回抽出終了年月日】　").concat(なし));
@@ -142,7 +142,6 @@ public class OutputJokenHyo {
                 builder.append(改行);
             }
         }
-        List<RString> buildernew = builder.toRString().split("\r\n");
-        return buildernew;
+        return builder.toRString().split("\r\n");
     }
 }

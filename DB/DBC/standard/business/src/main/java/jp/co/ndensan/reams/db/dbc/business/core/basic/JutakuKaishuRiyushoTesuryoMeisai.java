@@ -163,7 +163,7 @@ public class JutakuKaishuRiyushoTesuryoMeisai
      *
      * @return 対象外フラグ
      */
-    public boolean get対象外フラグ() {
+    public boolean is対象外フラグ() {
         return entity.getTaishogaiFlag();
     }
 

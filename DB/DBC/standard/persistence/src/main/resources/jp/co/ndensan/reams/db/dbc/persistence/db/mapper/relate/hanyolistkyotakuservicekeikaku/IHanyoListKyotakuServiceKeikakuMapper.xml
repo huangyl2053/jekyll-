@@ -77,6 +77,10 @@
             DbT3007."keikakuHenkoYMD"                                           AS dbT3007計画変更年月日,
             DbT3007."keikakuHenkoJiyu"                                          AS dbT3007変更理由,
 
+            CASE WHEN DbT3006."tekiyoKaishiYMD" IS NULL
+               THEN DbT3007."tekiyoKaishiYMD"
+              ELSE DbT3006."tekiyoKaishiYMD" END                                AS 計画適用開始日,
+
             DbT3006."keikakuJigyoshaNo"                                         AS dbT3006計画事業者番号,
             DbT7060_Keikaku."jigyoshaName"                                      AS dbT7060_Keikaku事業者名称,
             DbT7060_Keikaku."jigyoshaNameKana"                                  AS dbT7060_Keikaku事業者カナ名称,
