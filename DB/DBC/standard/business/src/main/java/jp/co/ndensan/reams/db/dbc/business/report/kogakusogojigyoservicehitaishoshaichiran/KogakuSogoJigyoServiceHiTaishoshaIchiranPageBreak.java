@@ -40,7 +40,7 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranPageBreak extends PageBreak
         if (this.breakKeysList.contains(KogakuSogoJigyoServiceHiTaishoshaIchiranOutput.BreakerFieldsEnum.被保険者番号.get項目ID())
                 && !currentSource.getSource().listTaishoshaIchiran_2.equals(nextSource.getSource().listTaishoshaIchiran_2)) {
             flg = true;
-        } else if (this.breakKeysList.contains(KogakuSogoJigyoServiceHiTaishoshaIchiranOutput.BreakerFieldsEnum.サービス年月.get項目ID())
+        } else if (this.breakKeysList.contains(KogakuSogoJigyoServiceHiTaishoshaIchiranOutput.BreakerFieldsEnum.サービス提供年月.get項目ID())
                 && !currentSource.getSource().listTaishoshaIchiran_3.equals(nextSource.getSource().listTaishoshaIchiran_3)) {
             flg = true;
         } else if (this.breakKeysList.contains(KogakuSogoJigyoServiceHiTaishoshaIchiranOutput.BreakerFieldsEnum.要介護度.get項目ID())

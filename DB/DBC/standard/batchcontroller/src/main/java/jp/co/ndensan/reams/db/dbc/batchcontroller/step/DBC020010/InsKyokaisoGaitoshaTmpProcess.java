@@ -31,7 +31,6 @@ public class InsKyokaisoGaitoshaTmpProcess extends BatchProcessBase<DbT1006Kyoka
 
     @Override
     protected void beforeExecute() {
-        super.beforeExecute();
     }
 
     @Override

@@ -41,7 +41,7 @@ public class KogakuServicehiTaishoshaIchiranPageBreak extends PageBreaker<Kogaku
         if (this.breakKeysList.contains(KogakuServicehiTaishoshaIchiranOutput.BreakerFieldsEnum.被保険者番号.get項目ID())
                 && !currentSource.getSource().listTaishosha_2.equals(nextSource.getSource().listTaishosha_2)) {
             flg = true;
-        } else if (this.breakKeysList.contains(KogakuServicehiTaishoshaIchiranOutput.BreakerFieldsEnum.サービス年月.get項目ID())
+        } else if (this.breakKeysList.contains(KogakuServicehiTaishoshaIchiranOutput.BreakerFieldsEnum.サービス提供年月.get項目ID())
                 && !currentSource.getSource().listTaishosha_3.equals(nextSource.getSource().listTaishosha_3)) {
             flg = true;
         } else if (this.breakKeysList.contains(KogakuServicehiTaishoshaIchiranOutput.BreakerFieldsEnum.要介護度.get項目ID())
