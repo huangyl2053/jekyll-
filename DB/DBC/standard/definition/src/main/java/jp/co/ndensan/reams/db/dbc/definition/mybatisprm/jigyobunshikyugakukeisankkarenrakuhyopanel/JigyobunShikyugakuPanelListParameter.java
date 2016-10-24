@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter implements IMyBatisParameter {
+public class JigyobunShikyugakuPanelListParameter implements IMyBatisParameter {
 
     private HihokenshaNo 被保険者番号;
     private FlexibleYear 対象年度;
@@ -34,7 +34,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter implement
      * @param 連絡票整理番号 RString
      * @param 証記載保険者番号 HokenshaNo
      */
-    public JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter(HihokenshaNo 被保険者番号, 
+    public JigyobunShikyugakuPanelListParameter(HihokenshaNo 被保険者番号, 
             FlexibleYear 対象年度, RString 連絡票整理番号, HokenshaNo 証記載保険者番号) {
 
         this.被保険者番号 = 被保険者番号;

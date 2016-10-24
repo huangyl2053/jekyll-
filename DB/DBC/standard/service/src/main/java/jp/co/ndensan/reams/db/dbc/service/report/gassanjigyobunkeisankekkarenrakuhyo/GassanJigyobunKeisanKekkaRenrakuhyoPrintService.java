@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.service.report.gassanjigyobunkeisankekkarenrakuhyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanPanelEntity;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunkeisankekkarenrakuhyo.GassanJigyobunKeisanKekkaRenrakuhyoProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunkeisankekkarenrakuhyo.GassanJigyobunKeisanKekkaRenrakuhyoReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -62,7 +62,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
      * @param 作成日 FlexibleDate
      * @return SourceDataCollection
      */
-    public SourceDataCollection print(List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> entityList,
+    public SourceDataCollection print(List<JigyobunShikyugakuKeisanPanelEntity> entityList,
             IShikibetsuTaisho 宛名データ,
             FlexibleDate 作成日) {
         SourceDataCollection collection;
@@ -81,7 +81,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
      * @param 作成日 FlexibleDate
      * @param reportManager ReportManager
      */
-    public void printSingle(List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> entityList,
+    public void printSingle(List<JigyobunShikyugakuKeisanPanelEntity> entityList,
             IShikibetsuTaisho 宛名データ,
             FlexibleDate 作成日,
             ReportManager reportManager) {
@@ -117,8 +117,8 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
 
             DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity mutiEntity = new DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity();
             DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity singleEntity = new DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity();
-            JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity panelEntity1 = new JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity();
-            JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity panelEntity2 = new JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity();
+            JigyobunShikyugakuKeisanPanelEntity panelEntity1 = new JigyobunShikyugakuKeisanPanelEntity();
+            JigyobunShikyugakuKeisanPanelEntity panelEntity2 = new JigyobunShikyugakuKeisanPanelEntity();
 
             for (int j = INDEX_0; j < entityList.size(); j++) {
                 if (null == entityList.get(j) || null == entityList.get(j).getDbt3173Entity()) {
@@ -208,7 +208,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
         }
     }
 
-    private int editCount(List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> entityList) {
+    private int editCount(List<JigyobunShikyugakuKeisanPanelEntity> entityList) {
         int count = entityList.size() / INDEX_12;
         if (entityList.size() % INDEX_12 != 0) {
             count = count + 1;
@@ -216,12 +216,12 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoPrintService {
         return count;
     }
 
-    private void printOrder(RString 保険制度コード, List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> entityList,
-            int j, RString 通知書定型文1, RString 通知書定型文2, JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity panelEntity1,
+    private void printOrder(RString 保険制度コード, List<JigyobunShikyugakuKeisanPanelEntity> entityList,
+            int j, RString 通知書定型文1, RString 通知書定型文2, JigyobunShikyugakuKeisanPanelEntity panelEntity1,
             NinshoshaSource 認証者,
             IShikibetsuTaisho 宛名データ, ToiawasesakiSource 問い合わせ先, boolean flag,
             ReportSourceWriter<GassanJigyobunKeisanKekkaRenrakuhyoSource> reportSourceWriter,
-            JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity panelEntity2, boolean isBreak, int count) {
+            JigyobunShikyugakuKeisanPanelEntity panelEntity2, boolean isBreak, int count) {
 
         if (保険制度コード.equals(INT_5)
                 && !(j - 1 < INDEX_0)
