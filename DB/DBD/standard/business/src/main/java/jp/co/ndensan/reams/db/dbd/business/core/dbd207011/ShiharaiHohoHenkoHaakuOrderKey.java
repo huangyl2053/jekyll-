@@ -24,10 +24,6 @@ public enum ShiharaiHohoHenkoHaakuOrderKey implements IReportItems {
      */
     町域コード("0002", "町域コード", "\"ShikibetsuTaisho\".\"choikiCode\""),
     /**
-     * 項目ID:0003 フォームフィールド名:番地コード MyBatis項目名:定義なし
-     */
-    番地コード("0003", "番地コード", "\"ShikibetsuTaisho\".\"banchi\""),
-    /**
      * 項目ID:0004 フォームフィールド名:行政区コード MyBatis項目名:定義なし
      */
     行政区コード("0004", "行政区コード", "\"ShikibetsuTaisho\".\"gyoseikuCode\""),
