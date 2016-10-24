@@ -31,7 +31,6 @@ public class InsHihokenshaDaichoTmpProcess2 extends BatchProcessBase<DbT1001Hiho
 
     @Override
     protected void beforeExecute() {
-        super.beforeExecute();
     }
 
     @Override

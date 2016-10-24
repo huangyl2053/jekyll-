@@ -33,7 +33,6 @@ public class InsSaishoriKogakuShikyuSinseiTmpProcess extends BatchProcessBase<Db
 
     @Override
     protected void beforeExecute() {
-        super.beforeExecute();
     }
 
     @Override
