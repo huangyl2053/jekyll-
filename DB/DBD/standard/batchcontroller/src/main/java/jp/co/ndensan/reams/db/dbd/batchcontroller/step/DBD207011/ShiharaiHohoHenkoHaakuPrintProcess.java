@@ -210,7 +210,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
             if (kojin.get世帯コード() != null && !kojin.get世帯コード().isEmpty()) {
                 reportData.set世帯番号(new Code(kojin.get世帯コード().getColumnValue()));
             }
-            reportData.set行政区ｺｰﾄﾞ(kojin.get行政区画().getGyoseiku().getコード().value());
+            reportData.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
             reportData.set行政区(kojin.get行政区画().getGyoseiku().get名称());
             reportData.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
             reportData.set郵便番号(kojin.get住所().get郵便番号());
@@ -355,7 +355,7 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                     期別情報.set保険料金(収納状況情報Data.get収納状況_調定額());
                     期別情報.set納期限(edit日期(収納状況情報Data.get収納状況_納期限()));
                     期別情報.set滞納額(収納状況情報Data.get収納状況_未納額());
-                    if (収納状況情報Data.get収納状況_滞納区分() != null) {
+                    if (収納状況情報Data.get収納状況_滞納区分() != null && !収納状況情報Data.get収納状況_滞納区分().isEmpty()) {
                         期別情報.set滞納区分(TainoKubun.toValue(収納状況情報Data.get収納状況_滞納区分()));
                     }
 

@@ -55,7 +55,7 @@ public class KogakuGassanJikoFutanGakuUpdateProcess extends BatchProcessBase<Kog
     protected void process(KogakuGassanUpdateEntity entity) {
         DbT3070KogakuGassanJikoFutanGakuEntity 高額合算自己負担額 = entity.get高額合算自己負担額();
         高額合算自己負担額.setSumi_Gokei_JikoFutanGaku(entity.get中間DBEntity().getSumi_Gokei_JikoFutanGaku());
-        高額合算自己負担額.setSumi_Gokei_70_74JikoFutanGaku(entity.get中間DBEntity().getSumi_Gokei_Under70KogakuShikyuGaku());
+        高額合算自己負担額.setSumi_Gokei_70_74JikoFutanGaku(entity.get中間DBEntity().getSumi_Gokei_70_74JikoFutanGaku());
         高額合算自己負担額.setSumi_Gokei_Under70KogakuShikyuGaku(entity.get中間DBEntity().getSumi_Gokei_Under70KogakuShikyuGaku());
         高額合算自己負担額.setSumi_Gokei_70_74KogakuShikyuGaku(entity.get中間DBEntity().getSumi_Gokei_70_74KogakuShikyuGaku());
         高額合算自己負担額.setShiharaiBasho(edit支払場所(entity));

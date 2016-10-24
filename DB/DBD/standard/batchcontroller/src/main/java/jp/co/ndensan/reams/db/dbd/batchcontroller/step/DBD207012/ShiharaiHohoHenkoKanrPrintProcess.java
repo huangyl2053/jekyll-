@@ -226,7 +226,7 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
             if (kojin.get世帯コード() != null && !kojin.get世帯コード().isEmpty()) {
                 reportData.set世帯番号(new Code(kojin.get世帯コード().getColumnValue()));
             }
-            reportData.set行政区ｺｰﾄﾞ(kojin.get行政区画().getGyoseiku().getコード().value());
+            reportData.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
             reportData.set行政区(kojin.get行政区画().getGyoseiku().get名称());
             reportData.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
             reportData.set郵便番号(kojin.get住所().get郵便番号());
@@ -391,20 +391,18 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
         result.add(基準日.concat(parameter.get基準日().toString()));
         if (選択あり.equals(parameter.get登録者選択())) {
             result.add(登録者選択);
-        } else {
-            if (SELECTED_VALUE_1.equals(parameter.get登録者選択())) {
-                出力条件_差止予告登録者２号の選択(result);
-            } else if (SELECTED_VALUE_2.equals(parameter.get登録者選択())) {
-                出力条件_差止登録者２号の選択(result);
-            } else if (SELECTED_VALUE_3.equals(parameter.get登録者選択())) {
-                出力条件_償還予告登録者１号の選択(result);
-            } else if (SELECTED_VALUE_4.equals(parameter.get登録者選択())) {
-                出力条件_償還決定登録者１号の選択(result);
-            } else if (SELECTED_VALUE_5.equals(parameter.get登録者選択())) {
-                出力条件_差止中あり者のみ１号の選択(result);
-            } else if (SELECTED_VALUE_6.equals(parameter.get登録者選択())) {
-                出力条件_保険料控除あり者のみ１号の選択(result);
-            }
+        } else if (SELECTED_VALUE_1.equals(parameter.get登録者選択())) {
+            出力条件_差止予告登録者２号の選択(result);
+        } else if (SELECTED_VALUE_2.equals(parameter.get登録者選択())) {
+            出力条件_差止登録者２号の選択(result);
+        } else if (SELECTED_VALUE_3.equals(parameter.get登録者選択())) {
+            出力条件_償還予告登録者１号の選択(result);
+        } else if (SELECTED_VALUE_4.equals(parameter.get登録者選択())) {
+            出力条件_償還決定登録者１号の選択(result);
+        } else if (SELECTED_VALUE_5.equals(parameter.get登録者選択())) {
+            出力条件_差止中あり者のみ１号の選択(result);
+        } else if (SELECTED_VALUE_6.equals(parameter.get登録者選択())) {
+            出力条件_保険料控除あり者のみ１号の選択(result);
         }
 
         RString 設定項目 = RString.EMPTY;

@@ -193,12 +193,11 @@ public class JigyoHokokuShiryouTorokuKaigoKyufuProcess extends BatchProcessBase<
         mapper.update負担割合年度_2();
         mapper.update負担割合区分と負担割合エラーフラグ_一回目();
         mapper.update負担割合区分と負担割合エラーフラグ_二回目();
-        // TODO 内部QA:1725 Redmine#101525 テーブル「利用者負担減免マスタ」はデータベースに存在しません。
-//        mapper.update利用者負担減免被保険者番号();
-        // TODO 内部QA:1781 Redmine# 更新項目の値は複数件可能があります。
-//        mapper.update0x02_集計();
-//        mapper.update0x03_集計();
-//        mapper.update0x04_集計();
+        mapper.update利用者負担減免被保険者番号();
+        mapper.update0x02と0x03_集計1();
+        mapper.update0x02と0x03と0x04_集計2();
+        mapper.update0x02と0x03_集計3();
+        mapper.update0x04_集計2();
         mapper.update0x04再掲_集計1();
         mapper.update0x04再掲_集計2();
         mapper.update0x04再掲_集計3();

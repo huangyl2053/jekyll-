@@ -52,8 +52,8 @@ public class DBC8010001MainHandler {
     private final DBC8010001MainDiv div;
     private KinyuKikanCode 代表金融機関コード;
     private RString 振込グループコード;
-    private static int indexstart = 0;
-    private static int indexend = 6;
+    private static final int INDEXSTART = 0;
+    private static final int INDEXEND = 6;
 
     /**
      * コンストラクターです。
@@ -411,14 +411,14 @@ public class DBC8010001MainHandler {
 
         parameter.set支払方法(Furikomi_ShihraiHohoShitei.toValue(div.getRadSiharaihohou().getSelectedKey()));
         if (null != div.getTxtKetteishaUketoriYmRange().getToValue()) {
-            parameter.set終了受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getToValue().toDateString().substring(indexstart, indexend)));
+            parameter.set終了受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getToValue().toDateString().substring(INDEXSTART, INDEXEND)));
         }
         if (null != div.getTxtWrongFurikomiShiteiYMD().getValue()) {
             parameter.set誤振込指定年月日(div.getTxtWrongFurikomiShiteiYMD().getValue());
 
         }
         if (null != div.getTxtKetteishaUketoriYmRange().getFromValue()) {
-            parameter.set開始受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getFromValue().toDateString().substring(indexstart, indexend)));
+            parameter.set開始受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getFromValue().toDateString().substring(INDEXSTART, INDEXEND)));
         }
         if (null != div.getTxtKonkaiTaishoYmdRange().getFromValue()) {
             parameter.set開始年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getFromValue().toDateString()));

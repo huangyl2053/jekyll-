@@ -89,24 +89,24 @@ public interface IJigyoHokokuRenkeiHokenkyufuShokanKetteiMapper {
     void update利用者負担減免被保険者番号();
 
     /**
-     * 一時テーブルより、負担割合区分と作成区分エラーフラグの更新です。
+     * 一時テーブルより、0x02と0x03-集計の更新です。
      */
-    void update負担割合区分と作成区分エラーフラグ();
+    void update0x02と0x03_集計1();
 
     /**
-     * 一時テーブルより、0x02-集計の更新です。
+     * 一時テーブルより、0x02と0x03と0x04-集計の更新です。
      */
-    void update0x02_集計();
+    void update0x02と0x03と0x04_集計2();
 
     /**
-     * 一時テーブルより、0x03-集計の更新です。
+     * 一時テーブルより、0x02と0x03-集計の更新です。
      */
-    void update0x03_集計();
+    void update0x02と0x03_集計3();
 
     /**
-     * 一時テーブルより、0x04-集計の更新です。
+     * 一時テーブルより、0x04-集計2の更新です。
      */
-    void update0x04_集計();
+    void update0x04_集計2();
 
     /**
      * 一時テーブルより、0x04再掲-集計1の更新です。
@@ -177,15 +177,7 @@ public interface IJigyoHokokuRenkeiHokenkyufuShokanKetteiMapper {
      * @param parameter 保険給付【償還_決定】パラメータ
      * @return 集計結果値
      */
-    Decimal get集計結果値_0101_1(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
-
-    /**
-     * 集計番号による集計内容を取得します。
-     *
-     * @param parameter 保険給付【償還_決定】パラメータ
-     * @return 集計結果値
-     */
-    Decimal get集計結果値_0101_2(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
+    Decimal get集計結果値_0101(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
 
     /**
      * 集計番号による集計内容を取得します。
@@ -217,15 +209,7 @@ public interface IJigyoHokokuRenkeiHokenkyufuShokanKetteiMapper {
      * @param parameter 保険給付【償還_決定】パラメータ
      * @return 集計結果値
      */
-    Decimal get集計結果値_0107_1(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
-
-    /**
-     * 集計番号による集計内容を取得します。
-     *
-     * @param parameter 保険給付【償還_決定】パラメータ
-     * @return 集計結果値
-     */
-    Decimal get集計結果値_0107_2(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
+    Decimal get集計結果値_0107(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
 
     /**
      * 集計番号による集計内容を取得します。
@@ -257,15 +241,7 @@ public interface IJigyoHokokuRenkeiHokenkyufuShokanKetteiMapper {
      * @param parameter 保険給付【償還_決定】パラメータ
      * @return 集計結果値
      */
-    Decimal get集計結果値_0201_1(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
-
-    /**
-     * 集計番号による集計内容を取得します。
-     *
-     * @param parameter 保険給付【償還_決定】パラメータ
-     * @return 集計結果値
-     */
-    Decimal get集計結果値_0201_2(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
+    Decimal get集計結果値_0201(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
 
     /**
      * 集計番号による集計内容を取得します。
@@ -297,15 +273,7 @@ public interface IJigyoHokokuRenkeiHokenkyufuShokanKetteiMapper {
      * @param parameter 保険給付【償還_決定】パラメータ
      * @return 集計結果値
      */
-    Decimal get集計結果値_0301_1(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
-
-    /**
-     * 集計番号による集計内容を取得します。
-     *
-     * @param parameter 保険給付【償還_決定】パラメータ
-     * @return 集計結果値
-     */
-    Decimal get集計結果値_0301_2(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
+    Decimal get集計結果値_0301(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
 
     /**
      * 集計番号による集計内容を取得します。
@@ -337,15 +305,7 @@ public interface IJigyoHokokuRenkeiHokenkyufuShokanKetteiMapper {
      * @param parameter 保険給付【償還_決定】パラメータ
      * @return 集計結果値
      */
-    Decimal get集計結果値_0401_1(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
-
-    /**
-     * 集計番号による集計内容を取得します。
-     *
-     * @param parameter 保険給付【償還_決定】パラメータ
-     * @return 集計結果値
-     */
-    Decimal get集計結果値_0401_2(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
+    Decimal get集計結果値_0401(JigyoHokokuRenkeiHokenkyufuShokanKetteiMybatisParameter parameter);
 
     /**
      * 集計番号による集計内容を取得します。

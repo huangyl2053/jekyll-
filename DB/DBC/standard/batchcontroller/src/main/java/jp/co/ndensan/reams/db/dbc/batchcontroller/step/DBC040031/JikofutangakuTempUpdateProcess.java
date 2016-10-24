@@ -73,6 +73,8 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
     private static final RString 合計 = new RString("合計");
     private static final RString STRING_ONE = new RString("1");
     private static final RString STRING_TWO = new RString("2");
+    private static final RString STRING_THREE = new RString("3");
+    private static final RString アステリスク = new RString("*");
     private static final int INT_ZERO = 0;
     private Map<RString, Decimal> 高額支給額;
     private Map<RString, HihokenshaNo> 被保険者番号Map;
@@ -94,6 +96,7 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
     private Decimal 翌年06月高額支給額;
     private Decimal 翌年07月高額支給額;
     private boolean 処理結果確認リスト中間ファイルFLAG;
+    private RString 一覧表用区分;
     private int count = 0;
     private FileSpoolManager manager;
     @BatchWriter
@@ -121,6 +124,7 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
         高額支給額 = new HashMap<>();
         被保険者番号Map = new HashMap<>();
         処理結果確認リスト中間ファイルFLAG = false;
+        一覧表用区分 = RString.EMPTY;
         initialize月高額支給額();
     }
 
@@ -274,6 +278,99 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
 
     }
 
+    private RString edit一覧表用区分2(KogakugassanJikofutangakuInfoHoseiSubEntity entity) {
+        RString 一覧表用区分2 = RString.EMPTY;
+        if (Integer.parseInt(当年4月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getTounen_04_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getTounen_04_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(当年5月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getTounen_05_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getTounen_05_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(当年6月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getTounen_06_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getTounen_06_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(当年7月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getTounen_07_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getTounen_07_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(当年8月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getTounen_08_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getTounen_08_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(当年9月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getTounen_09_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getTounen_09_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(当年10月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getTounen_10_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getTounen_10_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(当年11月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getTounen_11_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getTounen_11_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(当年12月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getTounen_12_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getTounen_12_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        }
+        一覧表用区分2 = edit一覧表用区分2Sub(entity);
+        return 一覧表用区分2;
+    }
+
+    private RString edit一覧表用区分2Sub(KogakugassanJikofutangakuInfoHoseiSubEntity entity) {
+        RString 一覧表用区分2 = RString.EMPTY;
+        if (Integer.parseInt(翌年1月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getYokunen_01_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getYokunen_01_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(翌年2月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getYokunen_02_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getYokunen_02_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(翌年3月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getYokunen_03_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getYokunen_03_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(翌年4月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getYokunen_04_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getYokunen_04_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(翌年5月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getYokunen_05_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getYokunen_05_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(翌年6月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getYokunen_06_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getYokunen_06_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        } else if (Integer.parseInt(翌年7月.toString()) == entity.getサービス提供年月().getMonthValue()) {
+            if (entity.get中間DBEntity().getYokunen_07_sumi_JikoFutanGaku()
+                    .compareTo(entity.get中間DBEntity().getYokunen_07_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+                一覧表用区分2 = アステリスク;
+            }
+        }
+        return 一覧表用区分2;
+    }
+
     private void update中間DB(KogakugassanJikofutangakuInfoHoseiSubEntity entity) {
         entity.get中間DBEntity().setTounen_04_sumi_under_70KogakuShikyuGaku(高額支給額.get(当年4月));
         entity.get中間DBEntity().setTounen_05_sumi_under_70KogakuShikyuGaku(高額支給額.get(当年5月));
@@ -293,75 +390,165 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
         entity.get中間DBEntity().setYokunen_07_sumi_under_70KogakuShikyuGaku(高額支給額.get(翌年7月));
         entity.get中間DBEntity().setSumi_Gokei_Under70KogakuShikyuGaku(高額支給額.get(合計));
         entity.get中間DBEntity().setBatchHoseiJissiYMD(FlexibleDate.getNowDate());
-        // 一覧表用区分 一覧表用区分2 QA No.1700
+        entity.get中間DBEntity().setIchiranKakuninKubun(一覧表用区分);
+        entity.get中間DBEntity().setIchiranKakuninKubun2(edit一覧表用区分2(entity));
         tempDbWriter.update(entity.get中間DBEntity());
     }
 
     private void 処理結果確認リスト中間ファイルを出力(KogakugassanJikofutangakuInfoHoseiSubEntity entity) {
         if (当年04月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             当年04月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (当年05月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             当年05月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (当年06月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             当年06月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (当年07月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             当年07月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (当年08月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             当年08月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (当年09月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             当年09月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (当年010月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             当年010月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (当年011月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             当年011月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (当年012月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             当年012月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
+        処理結果確認リスト中間ファイルを出力Sub();
+        edit中間ファイル(entity);
+    }
+
+    private void 処理結果確認リスト中間ファイルを出力Sub() {
+
         if (翌年01月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             翌年01月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (翌年02月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             翌年02月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (翌年03月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             翌年03月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (翌年04月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             翌年04月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (翌年05月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             翌年05月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (翌年06月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             翌年06月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
         if (翌年07月高額支給額.compareTo(Decimal.ZERO) < INT_ZERO) {
             翌年07月高額支給額 = Decimal.ZERO;
+            if (RString.isNullOrEmpty(一覧表用区分)) {
+                一覧表用区分 = STRING_TWO;
+            } else {
+                一覧表用区分 = STRING_THREE;
+            }
             処理結果確認リスト中間ファイルFLAG = true;
         }
+    }
+
+    private void edit中間ファイル(KogakugassanJikofutangakuInfoHoseiSubEntity entity) {
         if (処理結果確認リスト中間ファイルFLAG) {
             RString 作成日時 = RString.EMPTY;
             if (count == 1) {
@@ -380,6 +567,7 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
             ));
             処理結果確認リスト中間ファイルFLAG = false;
         }
+
     }
 
     private RString getDate12Time142(RDateTime dt) {
@@ -429,6 +617,7 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
         if (Integer.parseInt(月.toString()) == entity.getサービス提供年月().getMonthValue()) {
             if (RString.isNullOrEmpty(entity.get審査支払区分())) {
                 合計支給額 = 高額支給額.add(entity.get合計高額支給額());
+                一覧表用区分 = STRING_ONE;
             } else if ((STRING_ONE.equals(entity.get審査支払区分()) && RString.isNullOrEmpty(entity.get決定支給区分コード())
                     && STRING_ONE.equals(entity.get結果支給区分コード())) || (STRING_TWO.equals(entity.get審査支払区分())
                     && STRING_ONE.equals(entity.get結果支給区分コード()))) {
