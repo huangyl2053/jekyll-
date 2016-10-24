@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD205010.DBD205010_FutanGendoGakuNinteishaListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.RiyoshaFutanDankaiHanni;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
@@ -28,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.core._ControlData;
 import jp.co.ndensan.reams.uz.uza.core._ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.BatchFlowTestHelper;
 import jp.co.ndensan.reams.uz.uza.workflow.context.FlowContext;
@@ -62,41 +59,9 @@ public class DBD205010_FutanGendoGakuNinteishaListTest {
      */
     @Test
     public void testDefineFlow() {
-//        DBD522001_EnkitsuchiParameter parameter = new DBD522001_EnkitsuchiParameter();
-//        parameter.set画面モード(new RString("2"));
-//        parameter.set処理見込み日From(FlexibleDate.EMPTY);
-//        parameter.set処理見込み日To(FlexibleDate.EMPTY);
-//        parameter.set通知書発行日(new FlexibleDate("20160902"));
-//        List<RString> list = new ArrayList<>();
-//        list.add(new RString("51551551551551551"));
-//        parameter.set申請書管理番号リスト(list);
-//        setExecutionSubGyomuCodeToControlData(SubGyomuCode.DBD介護受給);
-//        BatchExitStatus a = flowHelper.executeFlow(
-//                new RString("DBD522001_Enkitsuchi"),
-//                new RString("延期通知書出力"),
-//                DBD522001_Enkitsuchi.class, parameter);
-//        assertThat(a.getStatus(), is(BatchExitStatus.Status.SUCCESS));
         DBD205010_FutanGendoGakuNinteishaListParameter parameter = new DBD205010_FutanGendoGakuNinteishaListParameter();
-        parameter.setCsv出力設定(null);
-        parameter.set世帯表示(SetaiHyoji.表示する);
-        parameter.set利用者負担段階(RiyoshaFutanDankaiHanni.利用者負担1段階);
-        parameter.set受給者区分(JukyushaKubun2.被保険者);
-        parameter.set基準日(new FlexibleDate(RDate.getNowDate().toDateString()));
-        parameter.set課税判定等基準日(new FlexibleDate(RDate.getNowDate().toDateString()));
-        parameter.set対象リスト(TargetList.該当者リスト);
-        parameter.set帳票ID(new ReportId("DBD200001_FutanGendogakuNinteiGaitoshaIchiran"));
-        parameter.set所得年度(new FlexibleYear("2016"));
-        parameter.set対象年度の開始年月日(new FlexibleDate("20160801"));
-        parameter.set対象年度の終了年月日(new FlexibleDate("20170731"));
-//        parameter.set旧措置区分(KyusochishaJukyushaKubun.旧措置者以外);
-//        parameter.set課税判定等基準日(new FlexibleDate(RDate.getNowDate().toDateString()));
-        parameter.set所得年度(new FlexibleYear("2016"));
-        parameter.set対象期間指定(TaishoKikan.対象年度);
-        parameter.set改頁出力順ID(new Long(1));
-        parameter.set旧措置区分(KyusochishaJukyushaKubun.旧措置者以外);
-        List<CSVSettings> list = new ArrayList<>();
-        list.add(CSVSettings.連番付加);
-        parameter.setCsv出力設定(list);
+        setparameter2(parameter);
+
         setExecutionSubGyomuCodeToControlData(SubGyomuCode.DBD介護受給);
         BatchExitStatus a = flowHelper.executeFlow(
                 new RString("DBD205010_FutanGendoGakuNinteishaList"),
@@ -121,4 +86,37 @@ public class DBD205010_FutanGendoGakuNinteishaListTest {
         return flowContext;
     }
 
+    private void setparameter1(DBD205010_FutanGendoGakuNinteishaListParameter parameter) {
+        parameter.set世帯表示(SetaiHyoji.表示する);
+        parameter.set基準日(new FlexibleDate("20161018"));
+        parameter.set課税判定等基準日(new FlexibleDate("20161018"));
+        parameter.set対象リスト(TargetList.認定者リスト);
+        parameter.set帳票ID(new ReportId("DBD200016_FutanGendogakuNinteishaIchiran"));
+        parameter.set所得年度(new FlexibleYear("2016"));
+//        parameter.set対象年度の開始年月日(new FlexibleDate("20160801"));
+//        parameter.set対象年度の終了年月日(new FlexibleDate("20170731"));
+        parameter.set対象期間指定(TaishoKikan.基準日);
+        parameter.set改頁出力順ID(new Long(1));
+        parameter.set旧措置区分(KyusochishaJukyushaKubun.両方);
+        List<CSVSettings> list = new ArrayList<>();
+        list.add(CSVSettings.連番付加);
+        parameter.setCsv出力設定(list);
+    }
+
+    private void setparameter2(DBD205010_FutanGendoGakuNinteishaListParameter parameter) {
+        parameter.set世帯表示(SetaiHyoji.表示する);
+        parameter.set基準日(new FlexibleDate("20161018"));
+        parameter.set課税判定等基準日(new FlexibleDate("20161018"));
+        parameter.set対象リスト(TargetList.認定者リスト);
+        parameter.set帳票ID(new ReportId("DBD200016_FutanGendogakuNinteishaIchiran"));
+        parameter.set所得年度(new FlexibleYear("2016"));
+        parameter.set対象年度の開始年月日(new FlexibleDate("20160801"));
+        parameter.set対象年度の終了年月日(new FlexibleDate("20170731"));
+        parameter.set対象期間指定(TaishoKikan.対象年度);
+        parameter.set改頁出力順ID(new Long(1));
+        parameter.set旧措置区分(KyusochishaJukyushaKubun.両方);
+        List<CSVSettings> list = new ArrayList<>();
+        list.add(CSVSettings.連番付加);
+        parameter.setCsv出力設定(list);
+    }
 }
