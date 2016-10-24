@@ -137,7 +137,7 @@ public enum JikoFH2Spec implements IPredicate<JikoFutangakuHosei2PanelDiv> {
             }
         }
 
-        private static boolean is補正後チェック１(JikoFutangakuHosei2PanelDiv div) {
+        public static boolean is補正後チェック１(JikoFutangakuHosei2PanelDiv div) {
             Decimal 自己負担額_4月分 = div.getTbl20Nendo().getCel20NendoJikofutangaku4GatsuGo().getValue();
             Decimal うち70_74歳に係る負担額_4月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku4GatsuGo().getValue();
             Decimal 自己負担額_5月分 = div.getTbl20Nendo().getTxt20NendoJikofutangaku5GatsuGo().getValue();
@@ -194,7 +194,7 @@ public enum JikoFH2Spec implements IPredicate<JikoFutangakuHosei2PanelDiv> {
                     || (!Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分) && !isNull(自己負担額_7月分).equals(うち70_74歳に係る負担額_7月分));
         }
 
-        private static boolean is補正後チェック２(JikoFutangakuHosei2PanelDiv div) {
+        public static boolean is補正後チェック２(JikoFutangakuHosei2PanelDiv div) {
             Decimal 自己負担額_4月分 = div.getTbl20Nendo().getCel20NendoJikofutangaku4GatsuGo().getValue();
             Decimal うち70_74歳に係る負担額_4月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku4GatsuGo().getValue();
             Decimal 自己負担額_5月分 = div.getTbl20Nendo().getTxt20NendoJikofutangaku5GatsuGo().getValue();
@@ -251,7 +251,7 @@ public enum JikoFH2Spec implements IPredicate<JikoFutangakuHosei2PanelDiv> {
                     || (Decimal.ZERO.equals(自己負担額_7月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分));
         }
 
-        private static boolean is補正後チェック３(JikoFutangakuHosei2PanelDiv div) {
+        public static boolean is補正後チェック３(JikoFutangakuHosei2PanelDiv div) {
             Decimal 自己負担額_4月分 = div.getTbl20Nendo().getCel20NendoJikofutangaku4GatsuGo().getValue();
             Decimal 高額介護_予防_サービス費_4月分 = div.getTbl20Nendo().getTxt20NendoKougakuKaigoServicehi4GatsuGo().getValue();
             Decimal 自己負担額_5月分 = div.getTbl20Nendo().getTxt20NendoJikofutangaku5GatsuGo().getValue();
@@ -308,7 +308,7 @@ public enum JikoFH2Spec implements IPredicate<JikoFutangakuHosei2PanelDiv> {
                     || (Decimal.ZERO.equals(自己負担額_7月分) && !Decimal.ZERO.equals(高額介護_予防_サービス費_7月分));
         }
 
-        private static boolean is高額介護_予防_サービス費チェック(JikoFutangakuHosei2PanelDiv div) {
+        public static boolean is高額介護_予防_サービス費チェック(JikoFutangakuHosei2PanelDiv div) {
             Decimal 自己負担額_4月分 = div.getTbl20Nendo().getCel20NendoJikofutangaku4GatsuGo().getValue();
             Decimal 高額介護_予防_サービス費_4月分 = div.getTbl20Nendo().getTxt20NendoKougakuKaigoServicehi4GatsuGo().getValue();
             Decimal 自己負担額_5月分 = div.getTbl20Nendo().getTxt20NendoJikofutangaku5GatsuGo().getValue();
@@ -365,7 +365,7 @@ public enum JikoFH2Spec implements IPredicate<JikoFutangakuHosei2PanelDiv> {
                     || 高額介護_予防_サービス費_7月分.compareTo(自己負担額_7月分) == INT_1);
         }
 
-        private static boolean is補正後チェック4_補正後(JikoFutangakuHosei2PanelDiv div) {
+        public static boolean is補正後チェック4_補正後(JikoFutangakuHosei2PanelDiv div) {
             Decimal うち70_74歳に係る負担額_4月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku4GatsuGo().getValue();
             Decimal うち70_74歳に係る負担額_5月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku5GatsuGo().getValue();
             Decimal うち70_74歳に係る負担額_6月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku6GatsuGo().getValue();
@@ -406,7 +406,7 @@ public enum JikoFH2Spec implements IPredicate<JikoFutangakuHosei2PanelDiv> {
                     || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年7月分));
         }
 
-        private static boolean is補正後チェック１_20年度以外(JikoFutangakuHosei2PanelDiv div) {
+        public static boolean is補正後チェック１_20年度以外(JikoFutangakuHosei2PanelDiv div) {
             Decimal 自己負担額_8月分 = div.getTbl20Igai().getTxt20IgaiJikofutangaku8GatsuGo().getValue();
             Decimal うち70_74歳に係る負担額_8月分 = div.getTbl20Igai().getTxt20Igai70Kara74Futangaku8GatsuGo().getValue();
             Decimal 自己負担額_9月分 = div.getTbl20Igai().getTxt20IgaiJikofutangaku9GatsuGo().getValue();
@@ -451,7 +451,7 @@ public enum JikoFH2Spec implements IPredicate<JikoFutangakuHosei2PanelDiv> {
                     || (!Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分) && !isNull(自己負担額_7月分).equals(うち70_74歳に係る負担額_7月分));
         }
 
-        private static boolean is補正後チェック２_20年度以外(JikoFutangakuHosei2PanelDiv div) {
+        public static boolean is補正後チェック２_20年度以外(JikoFutangakuHosei2PanelDiv div) {
             Decimal 自己負担額_8月分 = div.getTbl20Igai().getTxt20IgaiJikofutangaku8GatsuGo().getValue();
             Decimal うち70_74歳に係る負担額_8月分 = div.getTbl20Igai().getTxt20Igai70Kara74Futangaku8GatsuGo().getValue();
             Decimal 自己負担額_9月分 = div.getTbl20Igai().getTxt20IgaiJikofutangaku9GatsuGo().getValue();
@@ -496,7 +496,7 @@ public enum JikoFH2Spec implements IPredicate<JikoFutangakuHosei2PanelDiv> {
                     || (Decimal.ZERO.equals(自己負担額_7月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分));
         }
 
-        private static boolean is補正後チェック３_20年度以外(JikoFutangakuHosei2PanelDiv div) {
+        public static boolean is補正後チェック３_20年度以外(JikoFutangakuHosei2PanelDiv div) {
             Decimal 自己負担額_8月分 = div.getTbl20Igai().getTxt20IgaiJikofutangaku8GatsuGo().getValue();
             Decimal 高額介護_予防_サービス費_8月分 = div.getTbl20Igai().getTxt20IgaiKougakuKaigoServicehi8GatsuGo().getValue();
             Decimal 自己負担額_9月分 = div.getTbl20Igai().getTxt20IgaiJikofutangaku9GatsuGo().getValue();
@@ -541,7 +541,7 @@ public enum JikoFH2Spec implements IPredicate<JikoFutangakuHosei2PanelDiv> {
                     || (Decimal.ZERO.equals(自己負担額_7月分) && !Decimal.ZERO.equals(高額介護_予防_サービス費_7月分));
         }
 
-        private static boolean is補正後チェック4_補正後_20年度以外(JikoFutangakuHosei2PanelDiv div) {
+        public static boolean is補正後チェック4_補正後_20年度以外(JikoFutangakuHosei2PanelDiv div) {
             Decimal うち70_74歳に係る負担額_8月分 = div.getTbl20Igai().getTxt20Igai70Kara74Futangaku8GatsuGo().getValue();
             Decimal うち70_74歳に係る負担額_9月分 = div.getTbl20Igai().getTxt20Igai70Kara74Futangaku9GatsuGo().getValue();
             Decimal うち70_74歳に係る負担額_10月分 = div.getTbl20Igai().getTxt20Igai70Kara74Futangaku10GatsuGo().getValue();
@@ -574,7 +574,7 @@ public enum JikoFH2Spec implements IPredicate<JikoFutangakuHosei2PanelDiv> {
                     || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年7月分));
         }
 
-        private static boolean is高額介護_予防_サービス費チェック_20年度以外(JikoFutangakuHosei2PanelDiv div) {
+        public static boolean is高額介護_予防_サービス費チェック_20年度以外(JikoFutangakuHosei2PanelDiv div) {
             Decimal 自己負担額_8月分 = div.getTbl20Igai().getTxt20IgaiJikofutangaku8GatsuGo().getValue();
             Decimal 高額介護_予防_サービス費_8月分 = div.getTbl20Igai().getTxt20IgaiKougakuKaigoServicehi8GatsuGo().getValue();
             Decimal 自己負担額_9月分 = div.getTbl20Igai().getTxt20IgaiJikofutangaku9GatsuGo().getValue();
