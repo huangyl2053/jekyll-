@@ -90,7 +90,6 @@ public class Csvfileeditbusiness {
         } else {
             csventity.set調査依頼日(RString.EMPTY);
         }
-
         if (entity.getChosajisshibi() != null && !entity.getChosajisshibi().isEmpty()) {
             csventity.set調査実施日(new RString(entity.getChosajisshibi().toString()));
         } else {
@@ -111,43 +110,7 @@ public class Csvfileeditbusiness {
         csventity.set一次判定結果名称(entity.getLchijihanteikekka_meisho());
         csventity.set一次判定結果_認知症加算(entity.getLchijihanteikekka_ninshishokasan());
         csventity.set一次判定結果_認知症加算_名称(entity.getLchijihanteikekka_ninshishokasan_meisho());
-        if (entity.getNinteishinsakaishiryosakuseibi() != null && !entity.getNinteishinsakaishiryosakuseibi().isEmpty()) {
-            csventity.set認定審査会資料作成日(new RString(entity.getNinteishinsakaishiryosakuseibi().toString()));
-        } else {
-            csventity.set認定審査会資料作成日(RString.EMPTY);
-        }
-        if (entity.getNinteishinsakaiyoteibi() != null && !entity.getNinteishinsakaiyoteibi().isEmpty()) {
-            csventity.set認定審査会予定日(new RString(entity.getNinteishinsakaiyoteibi().toString()));
-        } else {
-            csventity.set認定審査会予定日(RString.EMPTY);
-        }
-        csventity.set合議体番号(entity.getGogitaibango());
-        csventity.set審査会資料番号(entity.getShinsakaishiryobango());
-        if (entity.getNijihanteibi() != null && !entity.getNijihanteibi().isEmpty()) {
-            csventity.set二次判定日(new RString(entity.getNijihanteibi().toString()));
-        } else {
-            csventity.set二次判定日(RString.EMPTY);
-        }
-        csventity.set二次判定結果(entity.getNijihanteikekka());
-        csventity.set二次判定結果名称(entity.getNijihanteikekka_meisho());
-        if (entity.getNinteiyukokigen_kaishi() != null && !entity.getNinteiyukokigen_kaishi().isEmpty()) {
-            csventity.set認定有効期間_開始(new RString(entity.getNinteiyukokigen_kaishi().toString()));
-        } else {
-            csventity.set認定有効期間_開始(RString.EMPTY);
-        }
-        if (entity.getNinteiyukokigen_shuryo() != null && !entity.getNinteiyukokigen_shuryo().isEmpty()) {
-            csventity.set認定有効期間_終了(new RString(entity.getNinteiyukokigen_shuryo().toString()));
-        } else {
-            csventity.set認定有効期間_終了(RString.EMPTY);
-        }
-        csventity.set特定疾病コード(entity.getTokuteishippeikodo());
-        csventity.set特定疾病コード名称(entity.getTokuteishippeikodo_meisho());
-        csventity.set要介護１の場合の状態像(entity.getYokaigo1nobaainojotaizo());
-        csventity.set要介護１の場合の状態像名称(entity.getYokaigo1nobaainojotaizo_meisho());
-        csventity.set現在のサービス区分コード(entity.getGenzainosabisukubunkodo());
-        csventity.set現在のサービス区分コード名称(entity.getGenzainosabisukubunkodo_meisho());
-        csventity.set現在の状況(entity.getGenzainojokyo());
-        csventity.set現在の状況名称(entity.getGenzainojokyo_meisho());
+        editFairuCSV2(csventity, entity);
     }
 
     /**
@@ -198,6 +161,50 @@ public class Csvfileeditbusiness {
             csventity.set生年月日(RString.EMPTY);
         }
         csventity.set年齢(new RString(entity.getNenrei()));
+        editErarCsv2(csventity, entity);
+    }
+
+    private void editFairuCSV2(ShinchokuNoTorikomiRisutoFairuCSVEntity csventity, JinbunoQurirumirisutofairuYishiteburuEntity entity) {
+        if (entity.getNinteishinsakaishiryosakuseibi() != null && !entity.getNinteishinsakaishiryosakuseibi().isEmpty()) {
+            csventity.set認定審査会資料作成日(new RString(entity.getNinteishinsakaishiryosakuseibi().toString()));
+        } else {
+            csventity.set認定審査会資料作成日(RString.EMPTY);
+        }
+        if (entity.getNinteishinsakaiyoteibi() != null && !entity.getNinteishinsakaiyoteibi().isEmpty()) {
+            csventity.set認定審査会予定日(new RString(entity.getNinteishinsakaiyoteibi().toString()));
+        } else {
+            csventity.set認定審査会予定日(RString.EMPTY);
+        }
+        csventity.set合議体番号(entity.getGogitaibango());
+        csventity.set審査会資料番号(entity.getShinsakaishiryobango());
+        if (entity.getNijihanteibi() != null && !entity.getNijihanteibi().isEmpty()) {
+            csventity.set二次判定日(new RString(entity.getNijihanteibi().toString()));
+        } else {
+            csventity.set二次判定日(RString.EMPTY);
+        }
+        csventity.set二次判定結果(entity.getNijihanteikekka());
+        csventity.set二次判定結果名称(entity.getNijihanteikekka_meisho());
+        if (entity.getNinteiyukokigen_kaishi() != null && !entity.getNinteiyukokigen_kaishi().isEmpty()) {
+            csventity.set認定有効期間_開始(new RString(entity.getNinteiyukokigen_kaishi().toString()));
+        } else {
+            csventity.set認定有効期間_開始(RString.EMPTY);
+        }
+        if (entity.getNinteiyukokigen_shuryo() != null && !entity.getNinteiyukokigen_shuryo().isEmpty()) {
+            csventity.set認定有効期間_終了(new RString(entity.getNinteiyukokigen_shuryo().toString()));
+        } else {
+            csventity.set認定有効期間_終了(RString.EMPTY);
+        }
+        csventity.set特定疾病コード(entity.getTokuteishippeikodo());
+        csventity.set特定疾病コード名称(entity.getTokuteishippeikodo_meisho());
+        csventity.set要介護１の場合の状態像(entity.getYokaigo1nobaainojotaizo());
+        csventity.set要介護１の場合の状態像名称(entity.getYokaigo1nobaainojotaizo_meisho());
+        csventity.set現在のサービス区分コード(entity.getGenzainosabisukubunkodo());
+        csventity.set現在のサービス区分コード名称(entity.getGenzainosabisukubunkodo_meisho());
+        csventity.set現在の状況(entity.getGenzainojokyo());
+        csventity.set現在の状況名称(entity.getGenzainojokyo_meisho());
+    }
+
+    private void editErarCsv2(TorikomiErarisutofairuCSVEntity csventity, ErrordataIchijiTeburuEntity entity) {
         if (entity.getSeibetsukodo() != null && !entity.getSeibetsukodo().isEmpty()) {
             csventity.set性別コード(new RString(entity.getSeibetsukodo().toString()));
         } else {
