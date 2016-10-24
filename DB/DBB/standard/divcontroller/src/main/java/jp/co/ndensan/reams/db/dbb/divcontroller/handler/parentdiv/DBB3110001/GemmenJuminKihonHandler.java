@@ -360,6 +360,11 @@ public class GemmenJuminKihonHandler {
         取消情報パネル.getTxtTorikeshiRiyu().clearValue();
     }
 
+    /**
+     * isNot取消
+     *
+     * @return not取消Flag
+     */
     public boolean isNot取消() {
         return div.getGemmenMain().getTorikeshiInfo().getTxtTorikeshiYMD().getValue() == null;
     }
@@ -1568,47 +1573,57 @@ public class GemmenJuminKihonHandler {
     }
 
     private GemmenJoho set調定額(GemmenJoho 最新減免の情報, KiwarigakuDiv 減免情報パネル) {
+        KiwarigakuKanendo1Div 過年度1パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo1();
+        KiwarigakuKanendo2Div 過年度2パネル = div.getGemmenMain().getKiwarigaku().getKiwarigakuKanendo2();
         GemmenJohoBuilder builder = 最新減免の情報.createBuilderForEdit();
-        RString 期_4月 = 普徴期月リスト.get月の期(Tsuki._4月).get期();
-        RString 期_5月 = 普徴期月リスト.get月の期(Tsuki._5月).get期();
-        RString 期_6月 = 普徴期月リスト.get月の期(Tsuki._6月).get期();
-        RString 期_7月 = 普徴期月リスト.get月の期(Tsuki._7月).get期();
-        RString 期_8月 = 普徴期月リスト.get月の期(Tsuki._8月).get期();
-        RString 期_9月 = 普徴期月リスト.get月の期(Tsuki._9月).get期();
-        RString 期_10月 = 普徴期月リスト.get月の期(Tsuki._10月).get期();
-        RString 期_11月 = 普徴期月リスト.get月の期(Tsuki._11月).get期();
-        RString 期_12月 = 普徴期月リスト.get月の期(Tsuki._12月).get期();
-        RString 期_1月 = 普徴期月リスト.get月の期(Tsuki._1月).get期();
-        RString 期_2月 = 普徴期月リスト.get月の期(Tsuki._2月).get期();
-        RString 期_3月 = 普徴期月リスト.get月の期(Tsuki._3月).get期();
-        RString 期_翌年4月 = 普徴期月リスト.get月の期(Tsuki.翌年度4月).get期();
-        RString 期_翌年5月 = 普徴期月リスト.get月の期(Tsuki.翌年度5月).get期();
-        builder = set普徴期別金額(期_4月, builder, 減免情報パネル.getTxtFuchoGemmemGo13().getValue());
-        builder = set普徴期別金額(期_5月, builder, 減免情報パネル.getTxtFuchoGemmemGo14().getValue());
-        builder = set普徴期別金額(期_6月, builder, 減免情報パネル.getTxtFuchoGemmemGo1().getValue());
-        builder = set普徴期別金額(期_7月, builder, 減免情報パネル.getTxtFuchoGemmemGo2().getValue());
-        builder = set普徴期別金額(期_8月, builder, 減免情報パネル.getTxtFuchoGemmemGo3().getValue());
-        builder = set普徴期別金額(期_9月, builder, 減免情報パネル.getTxtFuchoGemmemGo4().getValue());
-        builder = set普徴期別金額(期_10月, builder, 減免情報パネル.getTxtFuchoGemmemGo5().getValue());
-        builder = set普徴期別金額(期_11月, builder, 減免情報パネル.getTxtFuchoGemmemGo6().getValue());
-        builder = set普徴期別金額(期_12月, builder, 減免情報パネル.getTxtFuchoGemmemGo7().getValue());
-        builder = set普徴期別金額(期_1月, builder, 減免情報パネル.getTxtFuchoGemmemGo8().getValue());
-        builder = set普徴期別金額(期_2月, builder, 減免情報パネル.getTxtFuchoGemmemGo9().getValue());
-        builder = set普徴期別金額(期_3月, builder, 減免情報パネル.getTxtFuchoGemmemGo10().getValue());
-        builder = set普徴期別金額(期_翌年4月, builder, 減免情報パネル.getTxtFuchoGemmemGo11().getValue());
-        builder = set普徴期別金額(期_翌年5月, builder, 減免情報パネル.getTxtFuchoGemmemGo12().getValue());
-        RString 特期_4月 = 特徴期月リスト.get月の期(Tsuki._4月).get期();
-        RString 特期_6月 = 特徴期月リスト.get月の期(Tsuki._6月).get期();
-        RString 特期_8月 = 特徴期月リスト.get月の期(Tsuki._8月).get期();
-        RString 特期_10月 = 特徴期月リスト.get月の期(Tsuki._10月).get期();
-        RString 特期_12月 = 特徴期月リスト.get月の期(Tsuki._12月).get期();
-        RString 特期_2月 = 特徴期月リスト.get月の期(Tsuki._2月).get期();
-        builder = set特徴期別金額(特期_4月, builder, 減免情報パネル.getTxtTokuchoGemmemGo1().getValue());
-        builder = set特徴期別金額(特期_6月, builder, 減免情報パネル.getTxtTokuchoGemmemGo2().getValue());
-        builder = set特徴期別金額(特期_8月, builder, 減免情報パネル.getTxtTokuchoGemmemGo3().getValue());
-        builder = set特徴期別金額(特期_10月, builder, 減免情報パネル.getTxtTokuchoGemmemGo4().getValue());
-        builder = set特徴期別金額(特期_12月, builder, 減免情報パネル.getTxtTokuchoGemmemGo5().getValue());
-        builder = set特徴期別金額(特期_2月, builder, 減免情報パネル.getTxtTokuchoGemmemGo6().getValue());
+        if (過年度2パネル.isVisible()) {
+            RString 期 = 過年度2パネル.getKi2().getText().trimEnd(期R.toString().charAt(ゼロ_定値));
+            builder = set普徴期別金額(期, builder, 過年度2パネル.getTxtGo2().getValue());
+        } else if (過年度1パネル.isVisible()) {
+            RString 期 = 過年度1パネル.getKi1().getText().trimEnd(期R.toString().charAt(ゼロ_定値));
+            builder = set普徴期別金額(期, builder, 過年度1パネル.getTxtGo1().getValue());
+        } else {
+            RString 期_4月 = 普徴期月リスト.get月の期(Tsuki._4月).get期();
+            RString 期_5月 = 普徴期月リスト.get月の期(Tsuki._5月).get期();
+            RString 期_6月 = 普徴期月リスト.get月の期(Tsuki._6月).get期();
+            RString 期_7月 = 普徴期月リスト.get月の期(Tsuki._7月).get期();
+            RString 期_8月 = 普徴期月リスト.get月の期(Tsuki._8月).get期();
+            RString 期_9月 = 普徴期月リスト.get月の期(Tsuki._9月).get期();
+            RString 期_10月 = 普徴期月リスト.get月の期(Tsuki._10月).get期();
+            RString 期_11月 = 普徴期月リスト.get月の期(Tsuki._11月).get期();
+            RString 期_12月 = 普徴期月リスト.get月の期(Tsuki._12月).get期();
+            RString 期_1月 = 普徴期月リスト.get月の期(Tsuki._1月).get期();
+            RString 期_2月 = 普徴期月リスト.get月の期(Tsuki._2月).get期();
+            RString 期_3月 = 普徴期月リスト.get月の期(Tsuki._3月).get期();
+            RString 期_翌年4月 = 普徴期月リスト.get月の期(Tsuki.翌年度4月).get期();
+            RString 期_翌年5月 = 普徴期月リスト.get月の期(Tsuki.翌年度5月).get期();
+            builder = set普徴期別金額(期_4月, builder, 減免情報パネル.getTxtFuchoGemmemGo13().getValue());
+            builder = set普徴期別金額(期_5月, builder, 減免情報パネル.getTxtFuchoGemmemGo14().getValue());
+            builder = set普徴期別金額(期_6月, builder, 減免情報パネル.getTxtFuchoGemmemGo1().getValue());
+            builder = set普徴期別金額(期_7月, builder, 減免情報パネル.getTxtFuchoGemmemGo2().getValue());
+            builder = set普徴期別金額(期_8月, builder, 減免情報パネル.getTxtFuchoGemmemGo3().getValue());
+            builder = set普徴期別金額(期_9月, builder, 減免情報パネル.getTxtFuchoGemmemGo4().getValue());
+            builder = set普徴期別金額(期_10月, builder, 減免情報パネル.getTxtFuchoGemmemGo5().getValue());
+            builder = set普徴期別金額(期_11月, builder, 減免情報パネル.getTxtFuchoGemmemGo6().getValue());
+            builder = set普徴期別金額(期_12月, builder, 減免情報パネル.getTxtFuchoGemmemGo7().getValue());
+            builder = set普徴期別金額(期_1月, builder, 減免情報パネル.getTxtFuchoGemmemGo8().getValue());
+            builder = set普徴期別金額(期_2月, builder, 減免情報パネル.getTxtFuchoGemmemGo9().getValue());
+            builder = set普徴期別金額(期_3月, builder, 減免情報パネル.getTxtFuchoGemmemGo10().getValue());
+            builder = set普徴期別金額(期_翌年4月, builder, 減免情報パネル.getTxtFuchoGemmemGo11().getValue());
+            builder = set普徴期別金額(期_翌年5月, builder, 減免情報パネル.getTxtFuchoGemmemGo12().getValue());
+            RString 特期_4月 = 特徴期月リスト.get月の期(Tsuki._4月).get期();
+            RString 特期_6月 = 特徴期月リスト.get月の期(Tsuki._6月).get期();
+            RString 特期_8月 = 特徴期月リスト.get月の期(Tsuki._8月).get期();
+            RString 特期_10月 = 特徴期月リスト.get月の期(Tsuki._10月).get期();
+            RString 特期_12月 = 特徴期月リスト.get月の期(Tsuki._12月).get期();
+            RString 特期_2月 = 特徴期月リスト.get月の期(Tsuki._2月).get期();
+            builder = set特徴期別金額(特期_4月, builder, 減免情報パネル.getTxtTokuchoGemmemGo1().getValue());
+            builder = set特徴期別金額(特期_6月, builder, 減免情報パネル.getTxtTokuchoGemmemGo2().getValue());
+            builder = set特徴期別金額(特期_8月, builder, 減免情報パネル.getTxtTokuchoGemmemGo3().getValue());
+            builder = set特徴期別金額(特期_10月, builder, 減免情報パネル.getTxtTokuchoGemmemGo4().getValue());
+            builder = set特徴期別金額(特期_12月, builder, 減免情報パネル.getTxtTokuchoGemmemGo5().getValue());
+            builder = set特徴期別金額(特期_2月, builder, 減免情報パネル.getTxtTokuchoGemmemGo6().getValue());
+        }
         return builder.build();
     }
 
@@ -1616,19 +1631,20 @@ public class GemmenJuminKihonHandler {
         if (期 == null || 期.isEmpty()) {
             return builder;
         }
+        Decimal 金額notNull = 金額 == null ? Decimal.ZERO : 金額;
         switch (Integer.valueOf(期.toString())) {
             case イチ_定値:
-                return builder.set特徴期別金額01(金額);
+                return builder.set特徴期別金額01(金額notNull);
             case 二_定値:
-                return builder.set特徴期別金額02(金額);
+                return builder.set特徴期別金額02(金額notNull);
             case ミ_定値:
-                return builder.set特徴期別金額03(金額);
+                return builder.set特徴期別金額03(金額notNull);
             case ヨ_定値:
-                return builder.set特徴期別金額04(金額);
+                return builder.set特徴期別金額04(金額notNull);
             case ゴ_定値:
-                return builder.set特徴期別金額05(金額);
+                return builder.set特徴期別金額05(金額notNull);
             case ロク_定値:
-                return builder.set特徴期別金額06(金額);
+                return builder.set特徴期別金額06(金額notNull);
             default:
                 return builder;
         }
@@ -1639,35 +1655,36 @@ public class GemmenJuminKihonHandler {
         if (期 == null || 期.isEmpty()) {
             return builder;
         }
+        Decimal 金額notNull = 金額 == null ? Decimal.ZERO : 金額;
         switch (Integer.valueOf(期.toString())) {
             case イチ_定値:
-                return builder.set普徴期別金額01(金額);
+                return builder.set普徴期別金額01(金額notNull);
             case 二_定値:
-                return builder.set普徴期別金額02(金額);
+                return builder.set普徴期別金額02(金額notNull);
             case ミ_定値:
-                return builder.set普徴期別金額03(金額);
+                return builder.set普徴期別金額03(金額notNull);
             case ヨ_定値:
-                return builder.set普徴期別金額04(金額);
+                return builder.set普徴期別金額04(金額notNull);
             case ゴ_定値:
-                return builder.set普徴期別金額05(金額);
+                return builder.set普徴期別金額05(金額notNull);
             case ロク_定値:
-                return builder.set普徴期別金額06(金額);
+                return builder.set普徴期別金額06(金額notNull);
             case ナナ_定値:
-                return builder.set普徴期別金額07(金額);
+                return builder.set普徴期別金額07(金額notNull);
             case ハチ_定値:
-                return builder.set普徴期別金額08(金額);
+                return builder.set普徴期別金額08(金額notNull);
             case キュウ_定値:
-                return builder.set普徴期別金額09(金額);
+                return builder.set普徴期別金額09(金額notNull);
             case ジュウ_定値:
-                return builder.set普徴期別金額10(金額);
+                return builder.set普徴期別金額10(金額notNull);
             case ジュウイチ_定値:
-                return builder.set普徴期別金額11(金額);
+                return builder.set普徴期別金額11(金額notNull);
             case ジュウ二_定値:
-                return builder.set普徴期別金額12(金額);
+                return builder.set普徴期別金額12(金額notNull);
             case ジュウミ_定値:
-                return builder.set普徴期別金額13(金額);
+                return builder.set普徴期別金額13(金額notNull);
             case ジュウヨ_定値:
-                return builder.set普徴期別金額14(金額);
+                return builder.set普徴期別金額14(金額notNull);
             default:
                 return builder;
         }
