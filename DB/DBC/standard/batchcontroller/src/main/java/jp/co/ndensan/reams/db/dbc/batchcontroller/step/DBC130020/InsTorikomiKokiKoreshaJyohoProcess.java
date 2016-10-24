@@ -62,13 +62,11 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final int INDEX_63 = 63;
     private static final int INDEX_40 = 40;
     private static final int INDEX_103 = 103;
-    private static final int INDEX_110 = 110;
     private static final int INDEX_111 = 111;
     private static final int INDEX_128 = 128;
     private static final int INDEX_100 = 100;
     private static final int INDEX_322 = 322;
     private static final int INDEX_328 = 328;
-    private static final int INDEX_335 = 335;
     private static final int INDEX_0 = 0;
     private static final int INDEX_5 = 5;
     private static final int INDEX_6 = 6;
@@ -96,7 +94,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString 保険者区分_広域保険者 = new RString("2");
     private static final RString アンダーバー = new RString("_");
     private static final RString ファイル名称の拡張子 = new RString(".txt");
-    private static final RString エラーコード_0 = new RString("0");
     private static final RString エラーコード_01 = new RString("01");
     private static final RString エラーコード_02 = new RString("02");
     private static final RString エラーコード_03 = new RString("03");
@@ -104,7 +101,6 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString エラーコード_05 = new RString("05");
     private static final RString エラーコード_06 = new RString("06");
     private static final RString エラーコード_07 = new RString("07");
-
     private static final RString エラーコード_11 = new RString("11");
     private static final RString エラーコード_52 = new RString("52");
     private static final RString エラーコード_53 = new RString("53");
@@ -191,7 +187,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     protected void process(RString result) {
         取込後期高齢者情報Entity = new TorikomiKokiKoreshaJyohoEntity();
         取込後期高齢者情報Entity.setエラー区分(エラー区分_0);
-        if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
+        if (ＩＦ種類_電算.equals(processParameter.getIf種類())) {
             int バイト数 = 0;
             try {
                 バイト数 = result.toString().getBytes(Encode.SJIS.getName()).length;
@@ -208,7 +204,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             エラーチェック処理_電算();
 
-        } else if (ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
+        } else if (ＩＦ種類_電算２.equals(processParameter.getIf種類())) {
             int バイト数 = 0;
             try {
                 バイト数 = result.toString().getBytes(Encode.SJIS.getName()).length;
