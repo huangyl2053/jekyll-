@@ -7,11 +7,9 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd581001;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoHakkouMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoMybatisParameter;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -44,6 +42,7 @@ public class YokaigoJissiJyokyohyoProcessParameter implements IBatchProcessParam
     private RString 集計単位;
     private RString 基準日;
     private FlexibleYear 対象年度;
+    private IShikibetsuTaishoPSMSearchKey key;
 
     /**
      * コンストラクタです。
@@ -101,8 +100,6 @@ public class YokaigoJissiJyokyohyoProcessParameter implements IBatchProcessParam
      * @return YokaigoJissiJyokyohyoMybatisParameter
      */
     public YokaigoJissiJyokyohyoMybatisParameter toYokaigoJissiJyokyohyoMybatisParameter() {
-        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(
-                GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         return new YokaigoJissiJyokyohyoMybatisParameter(
                 導入形態コード,
                 概況調査テキストイメージ区分,
@@ -115,7 +112,7 @@ public class YokaigoJissiJyokyohyoProcessParameter implements IBatchProcessParam
                 開始地区コード,
                 終了地区コード,
                 集計単位,
-                key.build());
+                key);
     }
 
     /**
