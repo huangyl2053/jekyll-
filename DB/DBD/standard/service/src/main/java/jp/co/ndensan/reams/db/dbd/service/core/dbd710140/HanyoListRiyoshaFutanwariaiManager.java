@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbd.business.report.HanyoListRiyoshaFutanwariaiOrd
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710140.HanyoListRiyoshaFutanwariaiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutoriyoshafutanwariai.HanyoRisutoRiyoshaFutanWariaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutoriyoshafutanwariai.HanyoRisutoRiyoshaFutanWariaiEucCsvEntity;
+import jp.co.ndensan.reams.db.dbd.service.core.hanyolist.HanyoListManager;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.Outputs;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
@@ -101,7 +102,9 @@ public class HanyoListRiyoshaFutanwariaiManager {
     public void get情報設定(HanyoRisutoRiyoshaFutanWariaiEucCsvEntity eucCsvEntity, HanyoRisutoRiyoshaFutanWariaiEntity entity,
             Association 地方公共団体情報, HokenshaList 保険者リスト, boolean 日付スラッシュ付加) {
         HanyoListRiyoshaFutanwariaiBusiness bus = new HanyoListRiyoshaFutanwariaiBusiness();
-        bus.setEucCsvEntity(地方公共団体情報, 日付スラッシュ付加, eucCsvEntity, entity, 保険者リスト);
+        RString 市町村名 = HanyoListManager.createInstance().
+                get地方公共団体(new LasdecCode(entity.get被保険者台帳管理_市町村コード())).get市町村名();
+        bus.setEucCsvEntity(地方公共団体情報, 日付スラッシュ付加, eucCsvEntity, entity, 保険者リスト, 市町村名);
     }
 
     /**

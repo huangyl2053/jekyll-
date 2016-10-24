@@ -411,7 +411,7 @@ public class HanyoListFutanGendoGakuNinteiBusiness {
         return eucCsvEntity;
     }
 
-    public void setBlank2(FutanGendoGakuNinteiEucCsvEntity eucCsvEntity) {
+    private void setBlank2(FutanGendoGakuNinteiEucCsvEntity eucCsvEntity) {
         eucCsvEntity.set受給状況(RString.EMPTY);
         eucCsvEntity.set異動事由コード(RString.EMPTY);
         eucCsvEntity.set異動事由追加文(RString.EMPTY);

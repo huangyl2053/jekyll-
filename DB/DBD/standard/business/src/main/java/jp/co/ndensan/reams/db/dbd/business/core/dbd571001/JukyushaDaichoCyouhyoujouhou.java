@@ -90,6 +90,7 @@ public class JukyushaDaichoCyouhyoujouhou {
     private static final RString 円 = new RString("円");
     private static final RString 率 = new RString("%");
     private static final RString 有り = new RString("有り");
+    private static final int NO_100 = 100;
 
     /**
      * set要介護認定情報List
@@ -112,24 +113,7 @@ public class JukyushaDaichoCyouhyoujouhou {
             要介護認定情報.set認定区分(RString.EMPTY);
             要介護認定情報.set認定日(t.get要介護認定情報().get受給者台帳_認定年月日());
             要介護認定情報.set申請事由(JukyuShinseiJiyu.toValue(t.get要介護認定情報().get受給者台帳_受給申請事由().getColumnValue()).get名称());
-            if (t.get要介護認定情報().get受給者台帳_データ区分() != null && !t.get要介護認定情報().get受給者台帳_データ区分().isEmpty()) {
-                要介護認定情報.set異動事由(Datakubun.toValue(t.get要介護認定情報().get受給者台帳_データ区分()).get名称());
-            }
-            set要介護度(要介護認定情報, t);
-            要介護認定情報.set認定開始日(t.get要介護認定情報().get受給者台帳_認定有効期間開始年月日());
-            要介護認定情報.set認定終了日(t.get要介護認定情報().get受給者台帳_認定有効期間終了年月日());
-            if (t.get要介護認定情報().get受給者台帳_支給限度単位数() != null) {
-                要介護認定情報.set訪問限度額(DecimalFormatter.toコンマ区切りRString(t.get要介護認定情報().get受給者台帳_支給限度単位数(), 0)
-                        .concat(new RString("単位")));
-            }
-            要介護認定情報.set訪問開始日(t.get要介護認定情報().get受給者台帳_支給限度有効開始年月日());
-            要介護認定情報.set訪問終了日(t.get要介護認定情報().get受給者台帳_支給限度有効終了年月日());
-            if (t.get要介護認定情報().get受給者台帳_短期入所支給限度日数() != null) {
-                要介護認定情報.set短期限度額(DecimalFormatter.toコンマ区切りRString(t.get要介護認定情報().get受給者台帳_短期入所支給限度日数(), 0)
-                        .concat(new RString("日")));
-            }
-            要介護認定情報.set短期開始日(t.get要介護認定情報().get受給者台帳_短期入所支給限度開始年月日());
-            要介護認定情報.set短期終了日(t.get要介護認定情報().get受給者台帳_短期入所支給限度終了年月日());
+            要介護認定情報設定(要介護認定情報, t);
             if (導入形態コード.equals(DonyuKeitaiCode.事務構成市町村)
                     || 導入形態コード.equals(DonyuKeitaiCode.事務広域)) {
                 set広域(要介護認定情報, t);
@@ -181,7 +165,8 @@ public class JukyushaDaichoCyouhyoujouhou {
      * @param listEntity 負担限度額認定情報EntityList
      * @return 負担限度額認定情報EntityList
      */
-    public List<FutanGendogakuNinteiJohoEntity> set負担限度額認定情報EntityList(IdoChushutsuDaichoNewEntity t, List<FutanGendogakuNinteiJohoEntity> listEntity) {
+    public List<FutanGendogakuNinteiJohoEntity> set負担限度額認定情報EntityList(IdoChushutsuDaichoNewEntity t,
+            List<FutanGendogakuNinteiJohoEntity> listEntity) {
         if (t.get負担限度額認定情報List() != null) {
             FutanGendogakuNinteiJohoEntity 負担限度額認定情報 = new FutanGendogakuNinteiJohoEntity();
             負担限度額認定情報.set負担限度額認定区分(RString.EMPTY);
@@ -263,7 +248,7 @@ public class JukyushaDaichoCyouhyoujouhou {
                     && t.get社福法人軽減List().get社福法人軽減_軽減率_分母() != null
                     && t.get社福法人軽減List().get社福法人軽減_軽減率_分母().equals(Decimal.ZERO)) {
                 社福法人軽減情報.set軽減率(new RString(String.valueOf(t.get社福法人軽減List().get社福法人軽減_軽減率_分子()
-                        .divide(t.get社福法人軽減List().get社福法人軽減_軽減率_分母()).multiply(100))));
+                        .divide(t.get社福法人軽減List().get社福法人軽減_軽減率_分母()).multiply(NO_100))));
             }
             社福法人軽減情報.set居宅限定(t.get社福法人軽減List().is社福法人軽減_居宅サービス限定() ? 有り : RString.EMPTY);
             社福法人軽減情報.set居_食限定(t.get社福法人軽減List().is社福法人軽減_居住費食費のみ() ? 有り : RString.EMPTY);
@@ -378,19 +363,14 @@ public class JukyushaDaichoCyouhyoujouhou {
      * @param listEntity 居宅計画届出情報EntityList
      * @return 居宅計画届出情報EntityList
      */
-    public List<ItakuKeikakuTodokedejohoEntity> set居宅計画届出情報EntityList(IdoChushutsuDaichoNewEntity t, List<ItakuKeikakuTodokedejohoEntity> listEntity) {
+    public List<ItakuKeikakuTodokedejohoEntity> set居宅計画届出情報EntityList(IdoChushutsuDaichoNewEntity t,
+            List<ItakuKeikakuTodokedejohoEntity> listEntity) {
         if (t.get居宅計画届出List() != null) {
             ItakuKeikakuTodokedejohoEntity 居宅計画届出情報 = new ItakuKeikakuTodokedejohoEntity();
             居宅計画届出情報.set居宅計画区分(RString.EMPTY);
             居宅計画届出情報.set対象年月(t.get居宅計画届出List().get居宅計画届出_対象年月());
             if (t.get居宅計画届出List().get居宅計画届出_届出区分() != null && !t.get居宅計画届出List().get居宅計画届出_届出区分().isEmpty()) {
-                if (t.get居宅計画届出List().get居宅計画届出_届出区分().equals(区分_1)) {
-                    居宅計画届出情報.set区分(new RString("新規"));
-                } else if (t.get居宅計画届出List().get居宅計画届出_届出区分().equals(区分_2)) {
-                    居宅計画届出情報.set区分(new RString("変更"));
-                } else if (t.get居宅計画届出List().get居宅計画届出_届出区分().equals(区分_3)) {
-                    居宅計画届出情報.set区分(new RString("暫定"));
-                }
+                区分判定(居宅計画届出情報, t.get居宅計画届出List().get居宅計画届出_届出区分());
             }
             if (t.get居宅計画届出List().get居宅計画届出_作成区分コード() != null
                     && !t.get居宅計画届出List().get居宅計画届出_作成区分コード().isEmpty()) {
@@ -418,7 +398,8 @@ public class JukyushaDaichoCyouhyoujouhou {
      * @param listEntity 特例施設入退所情報EntityList
      * @return 特例施設入退所情報EntityList
      */
-    public List<TokureiShisetuNyutaishojohoEntity> set特例施設入退所情報EntityList(IdoChushutsuDaichoNewEntity t, List<TokureiShisetuNyutaishojohoEntity> listEntity) {
+    public List<TokureiShisetuNyutaishojohoEntity> set特例施設入退所情報EntityList(IdoChushutsuDaichoNewEntity t,
+            List<TokureiShisetuNyutaishojohoEntity> listEntity) {
         if (t.get特例施設入退所List() != null) {
             TokureiShisetuNyutaishojohoEntity 特例施設入退所情報 = new TokureiShisetuNyutaishojohoEntity();
             特例施設入退所情報.set特例施設入退所区分(RString.EMPTY);
@@ -598,6 +579,16 @@ public class JukyushaDaichoCyouhyoujouhou {
         return dbT7022entity;
     }
 
+    private void 区分判定(ItakuKeikakuTodokedejohoEntity 居宅計画届出情報, RString 届出区分) {
+        if (届出区分.equals(区分_1)) {
+            居宅計画届出情報.set区分(new RString("新規"));
+        } else if (届出区分.equals(区分_2)) {
+            居宅計画届出情報.set区分(new RString("変更"));
+        } else if (届出区分.equals(区分_3)) {
+            居宅計画届出情報.set区分(new RString("暫定"));
+        }
+    }
+
     private void set先頭Entity(SentoEntity 先頭Entity, IdoChushutsuDaichoNewEntity t,
             DonyuKeitaiCode 導入形態コード, RString 保険者番号の取得, RString 保険者名称の取得,
             RString 通知文情報通知文) {
@@ -622,6 +613,11 @@ public class JukyushaDaichoCyouhyoujouhou {
         先頭Entity.set世帯コード(t.get要介護認定情報().getPsm_世帯コード());
         先頭Entity.set住民コード((t.get要介護認定情報().getPsm_識別コード() != null
                 && !t.get要介護認定情報().getPsm_識別コード().isEmpty()) ? t.get要介護認定情報().getPsm_識別コード().getColumnValue() : RString.EMPTY);
+        先頭Entity設定(先頭Entity, t);
+        先頭Entity.set備考(通知文情報通知文);
+    }
+
+    private void 先頭Entity設定(SentoEntity 先頭Entity, IdoChushutsuDaichoNewEntity t) {
         if (t.get要介護認定情報().get受給者台帳_データ区分() != null && !t.get要介護認定情報().get受給者台帳_データ区分().isEmpty()) {
             if (t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(区分_1)) {
                 先頭Entity.set現状態(new RString("職権取消者"));
@@ -675,7 +671,6 @@ public class JukyushaDaichoCyouhyoujouhou {
                 && !t.get要介護認定情報().getT4101_訪問調査先電話番号().isEmpty()) {
             先頭Entity.set調査先電話番号(t.get要介護認定情報().getT4101_訪問調査先電話番号());
         }
-        先頭Entity.set備考(通知文情報通知文);
     }
 
     private void set広域(YokaigoNinteiJohoEntity 要介護認定情報, IdoChushutsuDaichoNewEntity t) {
@@ -773,6 +768,27 @@ public class JukyushaDaichoCyouhyoujouhou {
                     ? 要介護状態区分コード.concat(YokaigoJotaiKubun09
                             .toValue(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード()).get名称()) : RString.EMPTY);
         }
+    }
+
+    private void 要介護認定情報設定(YokaigoNinteiJohoEntity 要介護認定情報, IdoChushutsuDaichoNewEntity t) {
+        if (t.get要介護認定情報().get受給者台帳_データ区分() != null && !t.get要介護認定情報().get受給者台帳_データ区分().isEmpty()) {
+            要介護認定情報.set異動事由(Datakubun.toValue(t.get要介護認定情報().get受給者台帳_データ区分()).get名称());
+        }
+        set要介護度(要介護認定情報, t);
+        要介護認定情報.set認定開始日(t.get要介護認定情報().get受給者台帳_認定有効期間開始年月日());
+        要介護認定情報.set認定終了日(t.get要介護認定情報().get受給者台帳_認定有効期間終了年月日());
+        if (t.get要介護認定情報().get受給者台帳_支給限度単位数() != null) {
+            要介護認定情報.set訪問限度額(DecimalFormatter.toコンマ区切りRString(t.get要介護認定情報().get受給者台帳_支給限度単位数(), 0)
+                    .concat(new RString("単位")));
+        }
+        要介護認定情報.set訪問開始日(t.get要介護認定情報().get受給者台帳_支給限度有効開始年月日());
+        要介護認定情報.set訪問終了日(t.get要介護認定情報().get受給者台帳_支給限度有効終了年月日());
+        if (t.get要介護認定情報().get受給者台帳_短期入所支給限度日数() != null) {
+            要介護認定情報.set短期限度額(DecimalFormatter.toコンマ区切りRString(t.get要介護認定情報().get受給者台帳_短期入所支給限度日数(), 0)
+                    .concat(new RString("日")));
+        }
+        要介護認定情報.set短期開始日(t.get要介護認定情報().get受給者台帳_短期入所支給限度開始年月日());
+        要介護認定情報.set短期終了日(t.get要介護認定情報().get受給者台帳_短期入所支給限度終了年月日());
     }
 
     private void set一次要介護度(YokaigoNinteiJohoEntity 要介護認定情報, IdoChushutsuDaichoNewEntity t) {
