@@ -7,16 +7,24 @@ package jp.co.ndensan.reams.db.dbb.service.core.tokuchoinfoshoridatekanri;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchoinfofdownloadinfo.TokuchoInfoFDownloadInfo;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoinfoshoridate.TokuchoInfoShoriDateParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoinfofdownloadinfo.TokuchoInfoDTAEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoinfoshoridate.ITokuchoInfoShoriDateMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.fld.FldReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,6 +47,8 @@ public class TokuchoInfoShoriDateKanri {
     private static final RString Z1A = new RString("Z1A");
     private static final RString 特別徴収異動情報 = new RString("特別徴収異動情報");
     private static final RString 特別徴収依頼情報 = new RString("特別徴収依頼情報");
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_6 = 6;
 
     /**
      * コンストラクタです。
@@ -288,5 +298,47 @@ public class TokuchoInfoShoriDateKanri {
             }
         }
         return null;
+    }
+
+    /**
+     * 状況取得のメソッドです。
+     *
+     * @return List<RString>
+     *
+     */
+    public List<RString> get状況済月() {
+        List<RString> 状況済月 = new ArrayList<>();
+        List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(FILTER_Z1A);
+        for (UzT0885SharedFileEntryEntity uzT0885SharedFileEntryEntity : sharedFiles) {
+            FilesystemPath tempPath = get共有ファイル(
+                    FilesystemPath.fromString(Path.getTmpDirectoryPath()), uzT0885SharedFileEntryEntity);
+            if (tempPath == null) {
+                continue;
+            }
+            RString localFilePath = tempPath.toRString().concat(uzT0885SharedFileEntryEntity.getLocalFileName());
+            TokuchoInfoDTAEntity tokuchoInfoDTAEntity;
+            try (FldReader<TokuchoInfoDTAEntity> reader = new FldReader.InstanceBuilder(localFilePath, TokuchoInfoDTAEntity.class)
+                    .setEncodeShiftJis()
+                    .setNewLine(NewLine.CRLF)
+                    .build()) {
+                tokuchoInfoDTAEntity = reader.readLine();
+                reader.close();
+            }
+            RString 作成年月日 = tokuchoInfoDTAEntity.getCreateDate();
+            状況済月.add(作成年月日.substring(INDEX_4, INDEX_6));
+        }
+        return 状況済月;
+    }
+
+    private FilesystemPath get共有ファイル(FilesystemPath local複写先フォルダパス, UzT0885SharedFileEntryEntity entity) {
+        FilesystemPath copiedPath;
+        try {
+            ReadOnlySharedFileEntryDescriptor ro_entry = ReadOnlySharedFileEntryDescriptor.fromEntity(entity);
+            copiedPath = SharedFile.copyToLocal(ro_entry, local複写先フォルダパス);
+        } catch (Exception ex) {
+            Logger.getLogger(TokuchoInfoShoriDateKanri.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return copiedPath;
     }
 }

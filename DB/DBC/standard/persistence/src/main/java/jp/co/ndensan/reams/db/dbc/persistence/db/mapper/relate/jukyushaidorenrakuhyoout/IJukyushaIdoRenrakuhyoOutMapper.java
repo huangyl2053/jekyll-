@@ -45,6 +45,12 @@ public interface IJukyushaIdoRenrakuhyoOutMapper {
      */
     List<IdouTempEntity> selectTestData();
 
+    /**
+     * 受給者異動送付を削除ます。
+     *
+     * @param myBatisParameter JukyushaIdoRenrakuhyoOutMybatisParameter
+     *
+     */
     void delete受給者異動送付(JukyushaIdoRenrakuhyoOutMybatisParameter myBatisParameter);
 
 }
