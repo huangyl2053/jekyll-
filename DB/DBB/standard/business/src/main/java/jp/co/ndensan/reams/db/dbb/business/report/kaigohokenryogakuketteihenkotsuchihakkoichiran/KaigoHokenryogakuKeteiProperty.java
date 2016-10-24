@@ -13,23 +13,23 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- * 帳票設計_DBBRP43002_5_介護保険料額変更通知書発行一覧表 KaigoHokenryogakuProperty
+ * 帳票設計_DBBRP43002_3_介護保険料額決定通知書発行一覧表のPropertyです。
  *
- * @reamsid_L DBB-0780-120 zhouchuanlin
+ * @reamsid_L DBB-0780-120 yangchenbing
  */
-public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryogakuSource> {
+public class KaigoHokenryogakuKeteiProperty extends ReportPropertyBase<KaigoHokenryogakuSource> {
 
     private static final RString FORMAT = new RString("\"");
 
     /**
      * コンストラクタです。
      */
-    public KaigoHokenryogakuProperty() {
-        super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200030.getReportId());
+    public KaigoHokenryogakuKeteiProperty() {
+        super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200012.getReportId());
     }
 
     /**
-     * 帳票設計_DBBRP43002_5_介護保険料額変更通知書発行一覧表 出力順設定可能項目です。
+     * 帳票設計_DBBRP43002_3_介護保険料額決定通知書発行一覧表の出力順設定可能項目です。
      */
     public enum OutputOrderEnum implements IReportItems {
 
