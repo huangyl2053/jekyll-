@@ -9,12 +9,13 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
  * 不正な動作の原因になります。</br>
  * DBC0300011のイベント名定義クラスです</br>
  *
- * @reamsid_L DBC-2120-010 panhe
+ * @author 自動生成
  */
 public enum DBC0300011TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    事業者選択("事業者選択");
+    事業者選択("事業者選択"),
+    戻る("戻る");
 
     private final RString name;
 
