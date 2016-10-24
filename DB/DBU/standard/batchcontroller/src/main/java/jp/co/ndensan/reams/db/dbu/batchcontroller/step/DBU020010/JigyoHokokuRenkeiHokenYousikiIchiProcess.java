@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,12 +31,10 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -73,8 +70,6 @@ public class JigyoHokokuRenkeiHokenYousikiIchiProcess extends BatchProcessBase<D
 
     @Override
     protected void initialize() {
-        RString spoolWorkPath = processParameter.getSpoolWorkPath();
-        eucFilePath = Path.combinePath(spoolWorkPath, new RString("tmp.csv"));
         mapperProvider = InstanceProvider.create(MapperProvider.class);
         mapper = mapperProvider.create(IJigyoHokokuRenkeiMapper.class);
         保険者番号data = new HashMap<>();
@@ -99,6 +94,14 @@ public class JigyoHokokuRenkeiHokenYousikiIchiProcess extends BatchProcessBase<D
         }
         保険者番号data.put(番号, 保険者番号List);
         保険者名称data.put(名称, 保険者名称List);
+        RString spoolWorkPath = processParameter.getSpoolWorkPath();
+        RStringBuilder filePath = new RStringBuilder();
+        filePath.append("DUJRENF01_");
+        filePath.append(processParameter.get過去集計年月());
+        filePath.append("_");
+        filePath.append(保険者番号data.get(番号).get(0));
+        filePath.append(".csv");
+        eucFilePath = Path.combinePath(spoolWorkPath, filePath.toRString());
     }
 
     @BatchWriter
@@ -127,13 +130,10 @@ public class JigyoHokokuRenkeiHokenYousikiIchiProcess extends BatchProcessBase<D
 
     @Override
     protected void afterExecute() {
-        boolean flag = true;
+        int i = 0;
         RString 保険者番号bak = RString.EMPTY;
         for (RString 保険者番号 : 保険者番号data.get(番号)) {
-            if (!保険者番号bak.equals(保険者番号)) {
-                eucCsvWriter.close();
-                tempCsv(flag);
-                flag = false;
+            if (!保険者番号bak.equals(保険者番号) && i != 0) {
                 RStringBuilder filePath = new RStringBuilder();
                 filePath.append("DUJRENF01_");
                 filePath.append(processParameter.get過去集計年月());
@@ -144,20 +144,9 @@ public class JigyoHokokuRenkeiHokenYousikiIchiProcess extends BatchProcessBase<D
                 保険者番号bak = 保険者番号;
             }
             get様式1のCSV出力(保険者番号);
-        }
-        if (eucCsvWriter != null) {
+            i++;
             eucCsvWriter.close();   
         }
-    }
-
-    private boolean tempCsv(boolean flag) {
-        if (flag) {
-            File tmpfile = new File(eucFilePath.toString());
-            if (tmpfile.exists()) {
-                return tmpfile.delete();
-            }
-        }
-        return true;
     }
 
     private void get様式1のCSV出力(RString 保険者番号) {
