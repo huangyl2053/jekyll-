@@ -855,10 +855,10 @@ WHERE 受給者台帳."logicalDeletedFlag" = false
         OR ('41' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '49')
     </if>
     <if test="is認定結果10length0">
-        AND (('11' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '19') OR 受給者台帳."dataKubun" = '31' OR ('31' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '39'))
+        AND (('11' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '19') OR 受給者台帳."dataKubun" = '31' OR ('33' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '39'))
     </if>
     <if test="is認定結果10length非0">
-        OR (('11' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '19') OR 受給者台帳."dataKubun" = '31' OR ('31' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '39'))
+        OR (('11' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '19') OR 受給者台帳."dataKubun" = '31' OR ('33' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '39'))
     </if>
    <if test="is資格取得者のみ">
        AND (最新被保台帳."shikakuShutokuYMD" IS NOT NULL AND 最新被保台帳."shikakuSoshitsuYMD" IS NULL)

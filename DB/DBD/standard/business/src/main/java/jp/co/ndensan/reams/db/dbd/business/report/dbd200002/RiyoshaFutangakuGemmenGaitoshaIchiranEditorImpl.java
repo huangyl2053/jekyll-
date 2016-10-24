@@ -109,6 +109,7 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
         source.hokenshaName = entity.get導入団体名称();
         set出力順改頁(source);
         source.listUpper_1 = entity.get被保険者番号().getColumnValue();
+        source.hokenshaNoHidden = entity.get被保険者番号().getColumnValue();
         if (null != edit宛名()) {
             source.listUpper_2 = edit宛名().get住所().get郵便番号().getColumnValue();
             source.listUpper_3 = edit宛名().get名称().getName().getColumnValue();
@@ -132,7 +133,7 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
                 source.listUpper_8 = 空白;
             }
         }
-        source.listUpper_9 = eidt空白と課(entity.is所得税課税者());
+        source.listUpper_9 = eidt空白と課(entity.is所得税課税世帯());
         source.listUpper_10 = eidt空白と空白以外(entity.is生活保護受給者());
         source.listUpper_11 = 空白;
         if (entity.get厚労省IF識別コード() != null && !entity.get厚労省IF識別コード().isEmpty()) {
@@ -324,7 +325,7 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
     }
 
     private void setsource世帯員1(RiyoshaFutangakuGemmenGaitoshaIchiranReportSource source, SeteiYouEntity 世帯員情報) {
-        if (世帯員情報.getPsmEntity() != null) {
+        if (世帯員情報.getPsmEntity() != null && 世帯員情報.get識別コード() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(世帯員情報.getPsmEntity());
             if (kojin.get名称() != null) {
                 source.listUpper_14 = kojin.get名称().getName().value();
@@ -344,7 +345,7 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
     }
 
     private void setsource世帯員2(RiyoshaFutangakuGemmenGaitoshaIchiranReportSource source, SeteiYouEntity 世帯員情報) {
-        if (世帯員情報.getPsmEntity() != null) {
+        if (世帯員情報.getPsmEntity() != null && 世帯員情報.get識別コード() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(世帯員情報.getPsmEntity());
             if (kojin.get名称() != null) {
                 source.listCenter_10 = kojin.get名称().getName().value();
@@ -364,7 +365,7 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
     }
 
     private void setsource世帯員3(RiyoshaFutangakuGemmenGaitoshaIchiranReportSource source, SeteiYouEntity 世帯員情報) {
-        if (世帯員情報.getPsmEntity() != null) {
+        if (世帯員情報.getPsmEntity() != null && 世帯員情報.get識別コード() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(世帯員情報.getPsmEntity());
             if (kojin.get名称() != null) {
                 source.listLower_7 = kojin.get名称().getName().value();
