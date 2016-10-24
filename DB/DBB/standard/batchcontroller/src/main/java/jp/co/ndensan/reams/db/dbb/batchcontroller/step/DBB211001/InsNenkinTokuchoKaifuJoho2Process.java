@@ -26,16 +26,16 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
  */
 public class InsNenkinTokuchoKaifuJoho2Process extends BatchProcessBase<UeT0511NenkinTokuchoKaifuJohoEntity> {
 
-    private static final RString 処理対象月が4月_6月_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence"
-            + ".db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.get追加用データ_4月_6月");
-    private static final RString 処理対象月が5月_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence"
-            + ".db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.get追加用データ_5月");
+    private static final RString 処理対象月が4月_6月_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db"
+            + ".mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.get追加用データ_4月_6月");
+    private static final RString 処理対象月が5月_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db."
+            + "mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.get追加用データ_5月");
 
     private static final RString 処理対象月が8月_9月_11月_1月_3月_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence"
             + ".db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.get追加用データ_8_9_11_1_3月");
 
-    private static final RString 処理対象月が10月_12月_2月_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence"
-            + ".db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.get追加用データ_10_12_2月");
+    private static final RString 処理対象月が10月_12月_2月_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence."
+            + "db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper.get追加用データ_10_12_2月");
 
     private static final RString TEMP_TABLE = new RString("特徴異動追加Temp");
     private static final RString 汎用キー_連番 = new RString("連番");

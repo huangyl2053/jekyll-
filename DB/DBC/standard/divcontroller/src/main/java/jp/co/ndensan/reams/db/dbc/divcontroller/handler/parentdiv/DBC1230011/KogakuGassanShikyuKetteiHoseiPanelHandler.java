@@ -490,8 +490,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                         被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
                 KogakuGassanShikyuFushikyuKettei 高額決定result = new KogakuGassanShikyuFushikyuKettei(
                         被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号, 履歴番号);
-                高額決定result = buid高額決定(高額決定result);
-                高額決定result.added();
+                高額決定result = buid高額決定(高額決定result).added();
                 処理モード = ONE;
                 KoshinShoriResult result = new KoshinShoriResult();
                 result.set高額合算支給不支給決定Entity(高額決定result);
@@ -640,12 +639,12 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     /**
      * エラーメッセージ取得
      *
-     * @param Wkメッセージ RString
+     * @param メッセージ RString
      */
-    public void getエラーメッセージ(RString Wkメッセージ) {
-        if (Wkメッセージ != null && !Wkメッセージ.isEmpty() && ResponseHolder.getState().
+    public void getエラーメッセージ(RString メッセージ) {
+        if (メッセージ != null && !メッセージ.isEmpty() && ResponseHolder.getState().
                 equals(DBC1230011StateName.支給決定情報補正.getName())) {
-            getErrorMessage(Wkメッセージ);
+            getErrorMessage(メッセージ);
         }
     }
 

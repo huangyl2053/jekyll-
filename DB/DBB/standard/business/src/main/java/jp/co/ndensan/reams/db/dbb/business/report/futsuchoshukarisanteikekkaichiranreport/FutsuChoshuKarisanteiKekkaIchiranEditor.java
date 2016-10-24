@@ -295,24 +295,30 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
         普徴期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku13());
         普徴期別金額list.add(普徴仮算定計算後賦課.get前年度賦課の情報().getFuKibetsuGaku14());
         if (納期数 > 0) {
-            for (int i = 0; i < 納期数; i = i + 2) {
-                if (i < 納期数 - 1) {
-                    Decimal 月処理区分1 = new Decimal(月処理区分list.get(i).toString());
-                    Decimal 月処理区分2 = new Decimal(月処理区分list.get(i + 1).toString());
-                    Decimal 普徴期別金額1 = 普徴期別金額list.get(i);
-                    Decimal 普徴期別金額2 = 普徴期別金額list.get(i + 1);
-                    if (月処理区分1.compareTo(月処理区分_5) <= 0
-                            && 月処理区分2.compareTo(月処理区分_5) <= 0
-                            && 普徴期別金額1.add(普徴期別金額2).compareTo(Decimal.ZERO) > 0) {
-                        賦課納期数++;
-                    }
-                } else {
-                    Decimal 月処理区分 = new Decimal(月処理区分list.get(i).toString());
-                    Decimal 普徴期別金額 = 普徴期別金額list.get(i);
-                    if (月処理区分.compareTo(月処理区分_5) <= 0
-                            && 普徴期別金額.compareTo(Decimal.ZERO) > 0) {
-                        賦課納期数++;
-                    }
+            賦課納期数 = set賦課納期数(納期数, 月処理区分list, 普徴期別金額list);
+        }
+        return 賦課納期数;
+    }
+
+    private int set賦課納期数(int 納期数, List<RString> 月処理区分list, List<Decimal> 普徴期別金額list) {
+        int 賦課納期数 = 0;
+        for (int i = 0; i < 納期数; i = i + 2) {
+            if (i < 納期数 - 1) {
+                Decimal 月処理区分1 = new Decimal(月処理区分list.get(i).toString());
+                Decimal 月処理区分2 = new Decimal(月処理区分list.get(i + 1).toString());
+                Decimal 普徴期別金額1 = 普徴期別金額list.get(i);
+                Decimal 普徴期別金額2 = 普徴期別金額list.get(i + 1);
+                if (月処理区分1.compareTo(月処理区分_5) <= 0
+                        && 月処理区分2.compareTo(月処理区分_5) <= 0
+                        && 普徴期別金額1.add(普徴期別金額2).compareTo(Decimal.ZERO) > 0) {
+                    賦課納期数++;
+                }
+            } else {
+                Decimal 月処理区分 = new Decimal(月処理区分list.get(i).toString());
+                Decimal 普徴期別金額 = 普徴期別金額list.get(i);
+                if (月処理区分.compareTo(月処理区分_5) <= 0
+                        && 普徴期別金額.compareTo(Decimal.ZERO) > 0) {
+                    賦課納期数++;
                 }
             }
         }
