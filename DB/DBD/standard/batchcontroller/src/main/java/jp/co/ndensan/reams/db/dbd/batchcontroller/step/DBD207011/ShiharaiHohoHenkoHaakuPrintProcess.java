@@ -95,8 +95,9 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
     private static final RString カラ = new RString("～");
     private static final RString 償還申請中者 = new RString("【抽出対象】 償還申請中者");
     private static final RString 償還支給決定日抽出 = new RString("【抽出方法】 償還支給決定日抽出");
-
+    private static final RString バッチ出力条件出力順 = new RString("出力順:");
     private static final int 帳票期別リストSIZE = 3;
+    private static final RString より = new RString("＞");
 
     private static final int NO_0 = 0;
     private static final int NO_1 = 1;
@@ -505,6 +506,16 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
                 list.add(滞納期間.concat(new RString(parameter.get受給支給決定日抽出の滞納期間())).concat(ヵ月経過));
             }
         }
+        RString 設定項目 = RString.EMPTY;
+        if (outputOrder != null) {
+            for (ISetSortItem item : outputOrder.get設定項目リスト()) {
+                設定項目 = 設定項目.concat(より).concat(item.get項目名());
+            }
+        }
+        if (!設定項目.isEmpty()) {
+            設定項目 = 設定項目.substringEmptyOnError(1, 設定項目.length() - 1);
+        }
+        list.add(バッチ出力条件出力順.concat(設定項目));
         return list;
     }
 
