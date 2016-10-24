@@ -18,7 +18,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class JuminkirokuIdojohoTorokuKoikiMybatisParameter implements IMyBatisParameter {
+public final class JuminkirokuIdojohoTorokuKoikiMybatisParameter implements IMyBatisParameter {
 
     private final YMDHMS syorinichiji;
     private final RString shichosonCode;
@@ -28,6 +28,15 @@ public class JuminkirokuIdojohoTorokuKoikiMybatisParameter implements IMyBatisPa
     private final RString 処理名;
     private final RString 年度;
 
+    /**
+     * パラメータを作成します。
+     *
+     * @param syorinichiji YMDHMS
+     * @param shichosonCode RString
+     * @param サブ業務コード RString
+     * @param 処理名 RString
+     * @param 年度 RString
+     */
     private JuminkirokuIdojohoTorokuKoikiMybatisParameter(
             YMDHMS syorinichiji,
             RString shichosonCode,
