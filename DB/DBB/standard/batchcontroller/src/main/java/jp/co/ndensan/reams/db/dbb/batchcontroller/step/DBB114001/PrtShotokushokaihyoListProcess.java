@@ -119,7 +119,6 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
     @Override
     public void initialize() {
         get出力順();
-        出力順 = MyBatisOrderByClauseCreator.create(ShotokushokaihyoHakkoIchiranOutPutOrder.class, 出力順情報);
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         association = finder.getAssociation();
     }
@@ -127,10 +126,11 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
     private void get出力順() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         if (processParameter.get出力順ID() == null) {
-            出力順情報 = null;
+            return;
         } else {
             出力順情報 = finder.get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200024.getReportId(),
                     processParameter.get出力順ID());
+            出力順 = MyBatisOrderByClauseCreator.create(ShotokushokaihyoHakkoIchiranOutPutOrder.class, 出力順情報);
         }
         if (出力順情報 == null) {
             return;
