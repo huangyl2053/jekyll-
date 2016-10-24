@@ -5,8 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080;
 
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.InsShiharaihohoHenkoTempBeforeMyBatisParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.SetFutangakuMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * ビジネス設計_DBCMN62006_自己負担額計算（一括）のプロセスパラメタークラスです。
@@ -16,31 +17,34 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class InsShiharaihohoHenkoTempBeforeProcessParameter implements IBatchProcessParameter {
+public class SetFutangakuProcessParameter implements IBatchProcessParameter {
 
     private boolean 事業分フラグ;
+    private RString 出力対象区分;
 
     /**
      * DBC020080ProcessParameterのコンストラクタです。
      */
-    public InsShiharaihohoHenkoTempBeforeProcessParameter() {
+    public SetFutangakuProcessParameter() {
     }
 
     /**
      * InsShiharaihohoHenkoTempBeforeProcessParameterのコンストラクタです。
      *
      * @param 事業分フラグ boolean
+     * @param 出力対象区分 RString
      */
-    public InsShiharaihohoHenkoTempBeforeProcessParameter(boolean 事業分フラグ) {
+    public SetFutangakuProcessParameter(boolean 事業分フラグ, RString 出力対象区分) {
         this.事業分フラグ = 事業分フラグ;
+        this.出力対象区分 = 出力対象区分;
     }
 
     /**
-     * toInsShiharaihohoHenkoTempBeforeMyBatisParameterのコンストラクタです
+     * toSetFutangakuMyBatisParameterのコンストラクタです
      *
-     * @return InsShiharaihohoHenkoTempBeforeMyBatisParameter
+     * @return SetFutangakuMyBatisParameter
      */
-    public InsShiharaihohoHenkoTempBeforeMyBatisParameter toInsShiharaihohoHenkoTempBeforeMyBatisParameter() {
-        return new InsShiharaihohoHenkoTempBeforeMyBatisParameter(this.事業分フラグ);
+    public SetFutangakuMyBatisParameter toSetFutangakuMyBatisParameter() {
+        return new SetFutangakuMyBatisParameter(this.事業分フラグ);
     }
 }

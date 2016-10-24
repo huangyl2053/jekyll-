@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan;
 
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -41,6 +42,23 @@ public enum KaigoGassan_ErrorKubun {
         this.fullName = new RString(fullName);
         this.キー1 = new RString(キー1);
         this.キー2 = new RString(キー2);
+    }
+
+    /**
+     * toValueのメソッドです。
+     *
+     * @param code RString
+     * @return KaigoGassan_ErrorKubun
+     */
+    public static KaigoGassan_ErrorKubun toValue(RString code) {
+
+        for (KaigoGassan_ErrorKubun type : KaigoGassan_ErrorKubun.values()) {
+            if (type.code.equals(code)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("介護合算_エラー区分"));
+
     }
 
     /**

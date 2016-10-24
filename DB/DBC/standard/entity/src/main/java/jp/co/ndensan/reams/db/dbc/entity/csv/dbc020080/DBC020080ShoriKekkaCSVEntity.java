@@ -26,23 +26,15 @@ public class DBC020080ShoriKekkaCSVEntity {
     private RString 証記載保険者番号;
     @CsvField(order = 4, name = "被保険者番号")
     private RString 被保険者番号;
-    @CsvField(order = 5, name = "被保険者カナ氏名")
-    private RString 被保険者カナ氏名;
-    @CsvField(order = 6, name = "被保険者氏名")
+    @CsvField(order = 5, name = "被保険者氏名")
     private RString 被保険者氏名;
-    @CsvField(order = 7, name = "キー1")
+    @CsvField(order = 6, name = "キー1")
     private RString キー1;
-    @CsvField(order = 8, name = "キー2")
+    @CsvField(order = 7, name = "キー2")
     private RString キー2;
-    @CsvField(order = 9, name = "キー3")
-    private RString キー3;
-    @CsvField(order = 1, name = "キー4")
-    private RString キー4;
-    @CsvField(order = 11, name = "キー5")
-    private RString キー5;
-    @CsvField(order = 12, name = "エラー内容")
+    @CsvField(order = 8, name = "エラー内容")
     private RString エラー内容;
-    @CsvField(order = 13, name = "備考")
+    @CsvField(order = 9, name = "備考")
     private RString 備考;
 
 }

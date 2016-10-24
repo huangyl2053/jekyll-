@@ -8,14 +8,14 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc020080;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080MyBatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.InsShiharaihohoHenkoTempBeforeMyBatisParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.SetFutangakuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.TaishoshaChushuJigyobunMyBatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.TaishoshaChushuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.UpdshafukuKeigenTempMyBatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.CalcKogakuShikyugakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.CalcKogakuShikyugakuRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080ShoriKekkaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080TaishoDataEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DbT3070MatchingEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DbT3170MatchingEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.JissekiFutangakuDataTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.RiyoshaFutanMatchingEntity;
@@ -43,27 +43,6 @@ public interface IJigyobunKogakuGassanJikofutangakuKeisanMapper {
      * @return List< DBC020080TaishoDataEntity>
      */
     List<DBC020080TaishoDataEntity> get対象者抽出事業分データ(TaishoshaChushuJigyobunMyBatisParameter parameter);
-
-    /**
-     * getFutangakuのメソッドです。
-     *
-     * @return List<DbT3070MatchingEntity>
-     */
-    List<DbT3070MatchingEntity> getFutangaku();
-
-    /**
-     * getFutangakuJigyobunのメソッドです。
-     *
-     * @return List<DbT3170MatchingEntity>
-     */
-    List<DbT3170MatchingEntity> getFutangakuJigyobun();
-
-    /**
-     * getCalcKogakuShikyugakuのメソッドです。<br/>
-     *
-     * @return List<CalcKogakuShikyugakuEntity>
-     */
-    List<CalcKogakuShikyugakuEntity> getCalcKogakuShikyugaku();
 
     /**
      * get処理結果のメソッドです。
@@ -124,4 +103,26 @@ public interface IJigyobunKogakuGassanJikofutangakuKeisanMapper {
      * @return List<JissekiFutangakuDataTempEntity>
      */
     List<JissekiFutangakuDataTempEntity> get帳票データ(DBC020080MyBatisParameter parameter);
+
+    /**
+     * テスト用のメソッドです。
+     *
+     * @return List<DbT3017KyufujissekiKihonEntity>
+     */
+    List<DbT3017KyufujissekiKihonEntity> select給付実績基本一時();
+
+    /**
+     * get自己負担額のメソッドです。
+     *
+     * @param parameter SetFutangakuMyBatisParameter
+     * @return List<DbT3170MatchingEntity>
+     */
+    List<DbT3170MatchingEntity> get自己負担額(SetFutangakuMyBatisParameter parameter);
+
+    /**
+     * get高額支給額集計のメソッドです。
+     *
+     * @return List<CalcKogakuShikyugakuRelateEntity>
+     */
+    List<CalcKogakuShikyugakuRelateEntity> get高額支給額集計();
 }

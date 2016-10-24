@@ -27,7 +27,6 @@ public class JissekiFutangakuDataTempEntity
     private RString shinseibiMikeisanKubun;
     private RString chushuTaishoKubun;
     private RString seiriNo;
-    private RString rirekiNo;
     private RString jikoFutanKeisanYMD;
     @PrimaryKey
     private RString hihokenshaNo;
@@ -37,6 +36,8 @@ public class JissekiFutangakuDataTempEntity
     private RString hokenshaNo;
     @PrimaryKey
     private RString shikyuShinseishoSeiriNo;
+    @PrimaryKey
+    private RString rirekiNo;
     private RString rirekiNo2;
     private RString hokenSeidoCode;
     private RString hokenshaMei;
@@ -281,7 +282,6 @@ public class JissekiFutangakuDataTempEntity
     private Decimal jikoFutangakuWork105;
     private Decimal jikoFutangakuWork106;
     private Decimal jikoFutangakuWork107;
-    private RString serviceTeikyoYMs;
     private Decimal uchisuJikoFutanGaku004;
     private Decimal uchisuJikoFutanGaku005;
     private Decimal uchisuJikoFutanGaku006;
@@ -314,5 +314,17 @@ public class JissekiFutangakuDataTempEntity
     private RString biko105;
     private RString biko106;
     private RString biko107;
+    private RString serviceTeikyoYMs;
+
+    /**
+     * JissekiFutangakuDataTempEntityのコンストラクタです。
+     */
+    public JissekiFutangakuDataTempEntity() {
+        this.hihokenshaNo = RString.EMPTY;
+        this.taishoNendo = RString.EMPTY;
+        this.hokenshaNo = RString.EMPTY;
+        this.shikyuShinseishoSeiriNo = RString.EMPTY;
+        this.rirekiNo = RString.EMPTY;
+    }
 
 }

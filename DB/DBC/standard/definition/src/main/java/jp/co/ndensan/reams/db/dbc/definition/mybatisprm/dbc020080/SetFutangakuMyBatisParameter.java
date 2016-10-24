@@ -15,14 +15,14 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class InsShiharaihohoHenkoTempBeforeMyBatisParameter implements IMyBatisParameter {
+public class SetFutangakuMyBatisParameter implements IMyBatisParameter {
 
     private boolean 事業分フラグ;
 
     /**
-     * InsShiharaihohoHenkoTempBeforeMyBatisParameter のコンストラクタです。
+     * SetFutangakuMyBatisParameterのコンストラクタです。
      */
-    public InsShiharaihohoHenkoTempBeforeMyBatisParameter() {
+    public SetFutangakuMyBatisParameter() {
     }
 
     /**
@@ -30,7 +30,7 @@ public class InsShiharaihohoHenkoTempBeforeMyBatisParameter implements IMyBatisP
      *
      * @param 事業者フラグ boolean
      */
-    public InsShiharaihohoHenkoTempBeforeMyBatisParameter(boolean 事業者フラグ) {
+    public SetFutangakuMyBatisParameter(boolean 事業者フラグ) {
         this.事業分フラグ = 事業者フラグ;
     }
 }
