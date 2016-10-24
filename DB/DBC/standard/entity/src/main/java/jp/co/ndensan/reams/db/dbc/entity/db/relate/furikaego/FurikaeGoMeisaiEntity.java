@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.furikaego;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -35,7 +34,7 @@ public class FurikaeGoMeisaiEntity {
     private RString 口座番号;
     private RString 口座名義人;
     private HihokenshaNo 被保険者番号;
-    private AtenaMeisho 被保険者氏名;
+    private RString 氏名漢字;
     private RString 支給申請書整理番号;
     private FlexibleDate 申請年月日;
     private RString 申請区分コード;
