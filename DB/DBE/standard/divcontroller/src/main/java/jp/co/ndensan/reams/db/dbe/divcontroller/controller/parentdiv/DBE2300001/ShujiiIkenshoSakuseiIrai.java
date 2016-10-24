@@ -115,7 +115,9 @@ public class ShujiiIkenshoSakuseiIrai {
     private List<ShujiiIkenshoTeishutsuIraishoItem> 介護保険指定医依頼兼主治医意見書提出意見書ItemList;
     private List<IkenshokinyuyoshiBusiness> 主治医意見書記入用紙List;
     private List<IkenshokinyuyoshiBusiness> 主治医意見書記入用紙OCRList;
-
+    private static final RString CONFIGVALUE1 = new RString("1");
+    private static final RString CONFIGVALUE2 = new RString("2");
+    private static final RString CONFIGVALUE3 = new RString("3");
     /**
      * 主治医意見書作成依頼の初期化です。
      *
@@ -585,7 +587,44 @@ public class ShujiiIkenshoSakuseiIrai {
         return item;
     }
 
-    private IkenshokinyuyoshiBusiness create主治医意見書記入用紙(dgShinseishaIchiran_Row row) {
+    private void create主治医意見書記入用紙(dgShinseishaIchiran_Row row) {
+        RDate date = RDate.getNowDate();
+        if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                主治医意見書記入用紙List.add(SetValueOmote(row));
+                主治医意見書記入用紙List.add(SetValueUra(row));
+            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                主治医意見書記入用紙List.add(SetValueOmote(row));
+                IkenshokinyuyoshiBusiness business = new IkenshokinyuyoshiBusiness();
+                主治医意見書記入用紙List.add(business);
+            }
+        }
+        
+        if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                主治医意見書記入用紙List.add(SetValueOmote(row));
+                主治医意見書記入用紙List.add(SetValueUra(row));
+            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                主治医意見書記入用紙List.add(SetValueOmote(row));
+                IkenshokinyuyoshiBusiness business = new IkenshokinyuyoshiBusiness();
+                主治医意見書記入用紙List.add(business); 
+            }
+        }
+    }
+
+    private void create主治医意見書記入用紙OCR(dgShinseishaIchiran_Row row) {
+        RDate date = RDate.getNowDate();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                主治医意見書記入用紙OCRList.add(SetValueOmote(row));
+                //主治医意見書記入用紙OCRList.add(SetValueUra(row));
+            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                主治医意見書記入用紙OCRList.add(SetValueOmote(row));
+            }
+        }
+    }
+    
+    private IkenshokinyuyoshiBusiness SetValueOmote(dgShinseishaIchiran_Row row) {
         IkenshokinyuyoshiBusiness business = new IkenshokinyuyoshiBusiness();
         business.setHihokenshaNameKana(row.getHihokenshaShimeiKana());
         business.setHihokenshaName(row.getHihokennshaShimei());
@@ -649,11 +688,40 @@ public class ShujiiIkenshoSakuseiIrai {
             business.setShinseiDD1(new RString(String.valueOf(認定申請日.getDayValue() / 数字_10)));
             business.setShinseiDD2(new RString(String.valueOf(認定申請日.getDayValue() % 数字_10)));
         }
+
         return business;
     }
-
-    private IkenshokinyuyoshiBusiness create主治医意見書記入用紙OCR(dgShinseishaIchiran_Row row) {
-        return create主治医意見書記入用紙(row);
+    
+    private IkenshokinyuyoshiBusiness SetValueUra(dgShinseishaIchiran_Row row) {
+        IkenshokinyuyoshiBusiness business = new IkenshokinyuyoshiBusiness();
+        RString hokenshaNo = row.getHokenshaNo().padRight(RString.HALF_SPACE, 数字_6);
+        business.setHokenshaNo1(hokenshaNo.substring(数字_0, 数字_1));
+        business.setHokenshaNo2(hokenshaNo.substring(数字_1, 数字_2));
+        business.setHokenshaNo3(hokenshaNo.substring(数字_2, 数字_3));
+        business.setHokenshaNo4(hokenshaNo.substring(数字_3, 数字_4));
+        business.setHokenshaNo5(hokenshaNo.substring(数字_4, 数字_5));
+        business.setHokenshaNo6(hokenshaNo.substring(数字_5));
+        RString hihokenshaNo = row.getHihokenshaNo().padRight(RString.HALF_SPACE, 数字_10);
+        business.setHihokenshaNo1(hihokenshaNo.substring(数字_0, 数字_1));
+        business.setHihokenshaNo2(hihokenshaNo.substring(数字_1, 数字_2));
+        business.setHihokenshaNo3(hihokenshaNo.substring(数字_2, 数字_3));
+        business.setHihokenshaNo4(hihokenshaNo.substring(数字_3, 数字_4));
+        business.setHihokenshaNo5(hihokenshaNo.substring(数字_4, 数字_5));
+        business.setHihokenshaNo6(hihokenshaNo.substring(数字_5, 数字_6));
+        business.setHihokenshaNo7(hihokenshaNo.substring(数字_6, 数字_7));
+        business.setHihokenshaNo8(hihokenshaNo.substring(数字_7, 数字_8));
+        business.setHihokenshaNo9(hihokenshaNo.substring(数字_8, 数字_9));
+        business.setHihokenshaNo10(hihokenshaNo.substring(数字_9));
+        RDate 認定申請日 = row.getShinseiDay().getValue();
+        if (認定申請日 != null) {
+            business.setShinseiYY1(認定申請日.getYear().wareki().toDateString().substring(数字_0, 数字_1));
+            business.setShinseiYY2(認定申請日.getYear().wareki().toDateString().substring(数字_1, 数字_2));
+            business.setShinseiMM1(new RString(String.valueOf(認定申請日.getMonthValue() / 数字_10)));
+            business.setShinseiMM2(new RString(String.valueOf(認定申請日.getMonthValue() % 数字_10)));
+            business.setShinseiDD1(new RString(String.valueOf(認定申請日.getDayValue() / 数字_10)));
+            business.setShinseiDD2(new RString(String.valueOf(認定申請日.getDayValue() % 数字_10)));
+        }
+        return business;
     }
 
     private ShujiiIkenshoSakuseiRyoSeikyushoItem create主治医意見書作成料請求書(dgShinseishaIchiran_Row row) {
@@ -843,10 +911,10 @@ public class ShujiiIkenshoSakuseiIrai {
                 主治医意見書作成依頼一覧表ItemList.add(create主治医意見書作成依頼一覧表(div, row));
             }
             if (div.getIraiprint().getChkprint().getSelectedKeys().contains(SELECTED_KEY0)) {
-                主治医意見書記入用紙List.add(create主治医意見書記入用紙(row));
+                create主治医意見書記入用紙(row);
             }
             if (div.getIraiprint().getChkprint().getSelectedKeys().contains(SELECTED_KEY1)) {
-                主治医意見書記入用紙OCRList.add(create主治医意見書記入用紙OCR(row));
+                create主治医意見書記入用紙OCR(row);
             }
             if (div.getIraiprint().getChkprint().getSelectedKeys().contains(SELECTED_KEY2)) {
                 主治医意見書作成料請求書ItemList.add(create主治医意見書作成料請求書(row));
@@ -861,6 +929,7 @@ public class ShujiiIkenshoSakuseiIrai {
     }
 
     private void toPrint(ReportManager reportManager) {
+        RDate date = RDate.getNowDate();
         ShujiiIkenshoSakuseiIraiReportOutputService outputService = ShujiiIkenshoSakuseiIraiReportOutputService.createInstance();
         if (!主治医意見書作成依頼情報ItemList.isEmpty()) {
             outputService.print主治医意見書作成依頼情報(主治医意見書作成依頼情報ItemList, reportManager);
@@ -878,10 +947,39 @@ public class ShujiiIkenshoSakuseiIrai {
             outputService.print介護保険指定医依頼兼主治医意見書提出意見書(介護保険指定医依頼兼主治医意見書提出意見書ItemList, reportManager);
         }
         if (!主治医意見書記入用紙List.isEmpty()) {
-            outputService.print主治医意見書記入用紙(主治医意見書記入用紙List, reportManager);
+            if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
+                if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                    outputService.print主治医意見書記入用紙(主治医意見書記入用紙List, reportManager, 
+                            DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面, date, SubGyomuCode.DBE認定支援));
+                } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                    outputService.print主治医意見書記入用紙(主治医意見書記入用紙List, reportManager, 
+                            DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面, date, SubGyomuCode.DBE認定支援));
+                }
+            }
+
+            if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
+                if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                    outputService.print主治医意見書記入用紙(主治医意見書記入用紙List, reportManager, 
+                            DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面, date, SubGyomuCode.DBE認定支援));
+                } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                    outputService.print主治医意見書記入用紙(主治医意見書記入用紙List, reportManager, 
+                            DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面, date, SubGyomuCode.DBE認定支援));
+                }
+            }
         }
+        
         if (!主治医意見書記入用紙OCRList.isEmpty()) {
-            outputService.print主治医意見書記入用紙OCR(主治医意見書記入用紙OCRList, reportManager);
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
+                if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                    outputService.print主治医意見書記入用紙OCR(主治医意見書記入用紙OCRList, reportManager, 
+                            DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, date, SubGyomuCode.DBE認定支援));
+                    outputService.print主治医意見書記入用紙OCR(主治医意見書記入用紙OCRList, reportManager, 
+                            DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, date, SubGyomuCode.DBE認定支援));
+                } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                    outputService.print主治医意見書記入用紙OCR(主治医意見書記入用紙OCRList, reportManager, 
+                            DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面, date, SubGyomuCode.DBE認定支援));
+                }
+            }
         }
     }
 

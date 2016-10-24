@@ -64,6 +64,13 @@ public enum ReportIdDBZ {
      * 要介護認定主治医意見書記入用紙の帳票ＩＤです。
      */
     DBE231001(new ReportId("DBE231001_ikenshokinyuyoshi"), new RString("要介護認定主治医意見書記入用紙")),
+    DBE231001RyomenMono(new ReportId("DBE231001_ikenshokinyuyoshi_Ryomen_Mono"), new RString("要介護認定主治医意見書記入用紙")),
+    DBE231001KatamenMono(new ReportId("DBE231001_ikenshokinyuyoshi_Katamen_Mono"), new RString("要介護認定主治医意見書記入用紙")),
+    DBE231011RyomenColor(new ReportId("DBE231011_ikenshokinyuyoshiOCR_Ryomen_Color"), new RString("要介護認定主治医意見書記入用紙")),
+    DBE231011KatamenColor(new ReportId("DBE231011_ikenshokinyuyoshiOCR_Katamen_Color"), new RString("要介護認定主治医意見書記入用紙")),
+    DBE231012(new ReportId("DBE231012_ikenshokinyuyoshiOCR"), new RString("要介護認定主治医意見書記入用紙")),
+    DBE231014(new ReportId("DBE231014_ikenshokinyuyoshiOCR"), new RString("要介護認定主治医意見書記入用紙")),
+
     /**
      * 要介護認定調査依頼書の帳票ＩＤです。
      */
