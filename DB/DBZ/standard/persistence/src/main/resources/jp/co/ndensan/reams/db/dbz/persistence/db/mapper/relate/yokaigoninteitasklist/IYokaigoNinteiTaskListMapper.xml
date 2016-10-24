@@ -1355,7 +1355,7 @@
             LEFT JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
                 ON  DbT5105."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
         WHERE                                                                                
-                DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+                DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NULL
             AND DbT5105."ninteichosaIraiKanryoYMD" IS NULL
             AND DbT5105."ninteichosaKanryoYMD" IS NULL
             AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NULL
