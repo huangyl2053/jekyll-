@@ -240,8 +240,6 @@ public class ShiharaiHohoHenkoKanrPrintProcess extends BatchProcessBase<Shiharai
             帳票物理名 = new RString("yubinNo");
         } else if (ShiharaiHohoHenkoHaakuOrderKey.町域コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("choikiCode");
-        } else if (ShiharaiHohoHenkoHaakuOrderKey.番地コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("banchi");
         } else if (ShiharaiHohoHenkoHaakuOrderKey.行政区コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("gyoseikuCode");
         } else if (ShiharaiHohoHenkoHaakuOrderKey.世帯コード.get項目ID().equals(項目ID)) {
