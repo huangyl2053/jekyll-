@@ -93,7 +93,6 @@
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbz00001.NinteishaListSakuseiMybatisParameter"
             resultMap="resultMap_get負担限度額認定者リスト"
             fetchSize="500">
-        WITH master AS (
         SELECT
             A.被保険者番号 AS 被保険者番号,
             A.本人課税区分 AS 本人課税区分,
@@ -101,9 +100,9 @@
             A.is所得税課税者 AS is所得税課税者,
             A.is生活保護受給者 AS is生活保護受給者,
             A.利用者負担段階,
-            A."本人識別コード",
             coalesce(A.合計所得金額,0) + coalesce(A.年金収入額,0) + coalesce(A.非課税年金勘案額,0) AS 合計所得_含年金収入,
             A.非課税年金勘案額,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
             施設入所情報.入所施設コード,
             施設入所情報.入所施設名称,
             要介護認定申請情報."koroshoIfShikibetsuCode" AS 要介護認定申請情報_厚労省IF識別コード,
@@ -118,6 +117,9 @@
             認定情報.*
         FROM
             "taishoShaHanteiYoukonkyoItokiTemp" AS A
+            INNER JOIN  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+            ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> ."shikibetsuCode" = A."本人識別コード"
         LEFT JOIN rgdb."DbV4001JukyushaDaicho" AS 受給者台帳Newest
             ON 受給者台帳Newest."hihokenshaNo" = A.被保険者番号
         
@@ -317,19 +319,7 @@
                 AND A.利用者負担段階 = #{利用者負担4段階_高齢者複数世帯} 
                 AND A.is高齢者複数世帯 = true
             </if>
-        </if>)
-        select *from 
-            master 
-            inner join 
-             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
-                (
-                    SELECT 
-                        ARRAY_AGG(CAST ("本人識別コード" AS TEXT))
-                        FROM master
-                        )
-              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
-              AS shikibetsutaisho 
-              ON master."本人識別コード" = shikibetsutaisho."shikibetsuCode";
+        </if>
         ${出力順}
 </select>
 </mapper>
