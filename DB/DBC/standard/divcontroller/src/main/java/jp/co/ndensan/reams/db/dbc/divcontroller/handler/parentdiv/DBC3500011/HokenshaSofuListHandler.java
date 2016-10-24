@@ -126,11 +126,11 @@ public class HokenshaSofuListHandler {
     private static final RString 九 = new RString("2");
     private static final RString H1 = new RString("H1");
     private static final RString D8 = new RString("D8");
-    private static FlexibleYearMonth 審査年月;
+    private FlexibleYearMonth 審査年月;
     private static FlexibleYearMonth 審査年月の翌月;
     private static FlexibleYearMonth 処理年月;
     private static FlexibleYearMonth 処理年月の前月;
-    private static RString 識別番号;
+    private RString 識別番号;
     private static RString 保険者番号;
 
     /**
