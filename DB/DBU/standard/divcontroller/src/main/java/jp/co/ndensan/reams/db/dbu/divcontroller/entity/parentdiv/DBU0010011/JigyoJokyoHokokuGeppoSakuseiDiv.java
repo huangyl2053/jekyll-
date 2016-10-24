@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0010011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,6 +40,8 @@ public class JigyoJokyoHokokuGeppoSakuseiDiv extends Panel {
     private RString kyuShichoson;
     @JsonProperty("hdnJkkoutani")
     private RString hdnJkkoutani;
+    @JsonProperty("kakuteiHokokuYM")
+    private RString kakuteiHokokuYM;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -191,6 +194,24 @@ public class JigyoJokyoHokokuGeppoSakuseiDiv extends Panel {
     }
 
     /*
+     * getkakuteiHokokuYM
+     * @return kakuteiHokokuYM
+     */
+    @JsonProperty("kakuteiHokokuYM")
+    public RString getKakuteiHokokuYM() {
+        return kakuteiHokokuYM;
+    }
+
+    /*
+     * setkakuteiHokokuYM
+     * @param kakuteiHokokuYM kakuteiHokokuYM
+     */
+    @JsonProperty("kakuteiHokokuYM")
+    public void setKakuteiHokokuYM(RString kakuteiHokokuYM) {
+        this.kakuteiHokokuYM = kakuteiHokokuYM;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -204,13 +225,28 @@ public class JigyoJokyoHokokuGeppoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
+    public HokokuNendoDiv getHokokuNendo() {
+        return this.getTblJikkoTani().getHokokuNendo();
+    }
+
+    @JsonIgnore
     public TextBoxDate getTxtHokokuYM() {
-        return this.getTblJikkoTani().getTxtHokokuYM();
+        return this.getTblJikkoTani().getHokokuNendo().getTxtHokokuYM();
+    }
+
+    @JsonIgnore
+    public void  setTxtHokokuYM(TextBoxDate txtHokokuYM) {
+        this.getTblJikkoTani().getHokokuNendo().setTxtHokokuYM(txtHokokuYM);
     }
 
     @JsonIgnore
     public Button getBtnKakutei() {
-        return this.getTblJikkoTani().getBtnKakutei();
+        return this.getTblJikkoTani().getHokokuNendo().getBtnKakutei();
+    }
+
+    @JsonIgnore
+    public void  setBtnKakutei(Button btnKakutei) {
+        this.getTblJikkoTani().getHokokuNendo().setBtnKakutei(btnKakutei);
     }
 
     @JsonIgnore

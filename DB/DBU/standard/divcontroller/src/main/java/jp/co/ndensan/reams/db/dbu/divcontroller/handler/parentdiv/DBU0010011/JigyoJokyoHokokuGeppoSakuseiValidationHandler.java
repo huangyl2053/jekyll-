@@ -65,6 +65,18 @@ public class JigyoJokyoHokokuGeppoSakuseiValidationHandler {
                 "平成12年4月")));
         return validPairs;
     }
+    
+    /**
+     * DBUE00007 「報告年月を確定してください。」
+     *
+     * @return validPairs
+     */
+    public ValidationMessageControlPairs check報告年月を確定() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new JigyoJokyoHokokuGeppoSakuseiValidationHandler.CheckMessages(
+                DbuErrorMessages.報告年月未確定)));
+        return validPairs;
+    }
 
     private static class CheckMessages implements IValidationMessage {
 

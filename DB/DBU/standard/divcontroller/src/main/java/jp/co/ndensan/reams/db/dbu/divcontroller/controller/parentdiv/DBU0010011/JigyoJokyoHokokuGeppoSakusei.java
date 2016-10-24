@@ -38,6 +38,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
     private static final RString 集計のみ = new RString("shukei");
     private static final RString 集計後に印刷 = new RString("shukeiOutput");
     private static final RString 過去の集計結果を印刷 = new RString("kakoShukeiOutput");
+    private static final RString 報告年月_完全未確定 = new RString("default");
 
     /**
      * 事業状況報告（月報）作成 の初期化処理です。
@@ -47,6 +48,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onLoad(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         div.setHdnJkkoutani(集計のみ);
+        div.setKakuteiHokokuYM(報告年月_完全未確定);
         getHandler(div).onLoad(get過去集計情報の取得());
         return ResponseData.of(div).respond();
     }
@@ -142,6 +144,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         }
         getHandler(div).set入力された報告年月より各集計年月の設定(報告年月);
         getHandler(div).setチェックボックス設定();
+        div.setKakuteiHokokuYM(div.getTxtHokokuYM().getValue().toDateString());
         return ResponseData.of(div).respond();
     }
 
@@ -305,9 +308,34 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @param div div
      * @return ResponseData<DBU010010_JigyoHokokuGeppo_MainParameter>
      */
-    public ResponseData<DBU010010_JigyoHokokuGeppo_MainParameter> onClick_Jikou(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+    public ResponseData<DBU010010_JigyoHokokuGeppo_MainParameter> onClick_Jikou(JigyoJokyoHokokuGeppoSakuseiDiv div) { 
         return ResponseData.of(getHandler(div).onClick_Jikou()).respond();
     }
+    
+    /**
+     * 「実行する」を押下場合、入力チェックを実行します。
+     *
+     * @param div 事業報告月報作成Div
+     * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
+     */
+    public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onClick_btnJikkoCheck(JigyoJokyoHokokuGeppoSakuseiDiv div) {        
+        RDate 報告年月 = div.getTxtHokokuYM().getValue();
+        if (報告年月 == null) {
+            if (div.getKakuteiHokokuYM().equals(報告年月_完全未確定)) { 
+                return ResponseData.of(div).addValidationMessages(getValidationHandler().check必須入力項目()).respond();
+            } else {
+                div.getTxtHokokuYM().setValue(new RDate(div.getKakuteiHokokuYM().toString()));
+            }  
+        } else {
+            if (div.getKakuteiHokokuYM().equals(報告年月_完全未確定)) {
+                return ResponseData.of(div).addValidationMessages(getValidationHandler().check報告年月を確定()).respond(); 
+            } else if (!div.getKakuteiHokokuYM().equals(報告年月.toDateString())) {
+                div.getTxtHokokuYM().setValue(new RDate(div.getKakuteiHokokuYM().toString()));
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
 
     private List<ShoriDateKanri> get過去集計情報の取得() {
         ShoriDateKanriManager shoriDateKanriManager = new ShoriDateKanriManager();
