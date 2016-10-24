@@ -206,7 +206,12 @@ public class NinteiShinseiTorokuUketsukeHandler {
             if(表示パターン_申請中.equals(表示パターン)){ //仕様書より、パターンが1=申請中の場合のみ読み取る
                 div.setHdnJukyuShinseiJiyu(result.getEntity().get受給申請事由().getColumnValue());
             }
+        }else{
+            KaigoNinteiShinseiKihonJohoInputDiv 介護認定申請Div
+                = div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv();
+            介護認定申請Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(JukyuShinseiJiyu.初回申請.getコード()));
         }
+        
         div.setHdnRenrakusakiReadOnly(new RString("0"));
         div.setHdnShichosonCode(市町村コード);
         div.setHdnShinseishoKanriNo(申請書管理番号 != null ? 申請書管理番号.getColumnValue() : null);
