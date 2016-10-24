@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.service.report.kaigohokenryogaku;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuKeteiProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
@@ -39,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 public class KaigoHokenryogakuPrintService {
 
     private static final ReportId 決定変更通知書_帳票分類ID = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
+    private static final RString 介護保険料額変更通知書発行一覧表 = new RString("介護保険料額変更通知書発行一覧表");
+    private static final RString 介護保険料額決定通知書発行一覧表 = new RString("介護保険料額決定通知書発行一覧表");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -80,19 +83,39 @@ public class KaigoHokenryogakuPrintService {
             並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                     .get出力順(SubGyomuCode.DBB介護賦課, 決定変更通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
         }
-        KaigoHokenryogakuProperty property = new KaigoHokenryogakuProperty();
-        try (ReportAssembler<KaigoHokenryogakuSource> assembler = createAssembler(property, reportManager)) {
-            ReportSourceWriter<KaigoHokenryogakuSource> reportSourceWriter
-                    = new ReportSourceWriter(assembler);
-            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            Decimal 連番 = Decimal.ONE;
-            if (編集後本算定通知書共通情報List != null && !編集後本算定通知書共通情報List.isEmpty()) {
-                for (EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
-                    List<RString> 並び順List = get出力順(並び順);
-                    KaigoHokenryogakuReport report = new KaigoHokenryogakuReport(編集後本算定通知書共通情報,
-                            帳票作成日時, 地方公共団体, 並び順List, 連番, タイトル);
-                    report.writeBy(reportSourceWriter);
-                    連番 = 連番.add(Decimal.ONE);
+
+        if (介護保険料額変更通知書発行一覧表.equals(タイトル)) {
+            KaigoHokenryogakuProperty property = new KaigoHokenryogakuProperty();
+            try (ReportAssembler<KaigoHokenryogakuSource> assembler = createAssembler(property, reportManager)) {
+                ReportSourceWriter<KaigoHokenryogakuSource> reportSourceWriter
+                        = new ReportSourceWriter(assembler);
+                Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+                Decimal 連番 = Decimal.ONE;
+                if (編集後本算定通知書共通情報List != null && !編集後本算定通知書共通情報List.isEmpty()) {
+                    for (EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
+                        List<RString> 並び順List = get出力順(並び順);
+                        KaigoHokenryogakuReport report = new KaigoHokenryogakuReport(編集後本算定通知書共通情報,
+                                帳票作成日時, 地方公共団体, 並び順List, 連番, タイトル);
+                        report.writeBy(reportSourceWriter);
+                        連番 = 連番.add(Decimal.ONE);
+                    }
+                }
+            }
+        } else if (介護保険料額決定通知書発行一覧表.equals(タイトル)) {
+            KaigoHokenryogakuKeteiProperty property = new KaigoHokenryogakuKeteiProperty();
+            try (ReportAssembler<KaigoHokenryogakuSource> assembler = createAssembler(property, reportManager)) {
+                ReportSourceWriter<KaigoHokenryogakuSource> reportSourceWriter
+                        = new ReportSourceWriter(assembler);
+                Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+                Decimal 連番 = Decimal.ONE;
+                if (編集後本算定通知書共通情報List != null && !編集後本算定通知書共通情報List.isEmpty()) {
+                    for (EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
+                        List<RString> 並び順List = get出力順(並び順);
+                        KaigoHokenryogakuReport report = new KaigoHokenryogakuReport(編集後本算定通知書共通情報,
+                                帳票作成日時, 地方公共団体, 並び順List, 連番, タイトル);
+                        report.writeBy(reportSourceWriter);
+                        連番 = 連番.add(Decimal.ONE);
+                    }
                 }
             }
         }
