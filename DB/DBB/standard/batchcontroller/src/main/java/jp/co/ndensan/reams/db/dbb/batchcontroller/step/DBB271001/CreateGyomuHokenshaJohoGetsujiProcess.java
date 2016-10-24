@@ -117,25 +117,23 @@ public class CreateGyomuHokenshaJohoGetsujiProcess extends BatchProcessBase<Toku
 
     private boolean do資格喪失の判定(DbV1001HihokenshaDaichoEntity 被保険者, FlexibleDate now) {
         return !(ShikakuKubun._１号.getコード().equals(被保険者.getHihokennshaKubunCode())
-                && 被保険者.getIchigoShikakuShutokuYMD().compareTo(now) <= 0
+                && (null != 被保険者.getIchigoShikakuShutokuYMD() && 被保険者.getIchigoShikakuShutokuYMD().isBeforeOrEquals(now))
                 && (null == 被保険者.getShikakuSoshitsuYMD() || FlexibleDate.EMPTY.equals(被保険者.getShikakuSoshitsuYMD())
-                || now.compareTo(被保険者.getShikakuSoshitsuYMD()) <= 0) && !被保険者.getLogicalDeletedFlag());
+                || now.isBeforeOrEquals(被保険者.getShikakuSoshitsuYMD())) && !被保険者.getLogicalDeletedFlag());
     }
 
     private DoteiFuitchiRiyu do他市町村住所地特例者台帳時不一致理由(DbV1003TashichosonJushochiTokureiEntity tokurei,
             DbV1002TekiyoJogaishaEntity jogaisha, boolean 被保険者台帳があるFlag) {
-        //TODO QA882 「UEX_Enum．同定不一致理由．資格なし_他特例者」と「UEX_Enum．同定不一致理由．資格なし_適用除外者」
-        //が実装していませんので、コーディングできません、同じEnumを利用しています
         if (null != tokurei && null != tokurei.getShikibetsuCode()) {
             FlexibleDate 解除年月日 = tokurei.getKaijoYMD();
             if (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY)) {
-                return DoteiFuitchiRiyu.その他;
+                return DoteiFuitchiRiyu.資格なし_他特例者;
             }
             return DoteiFuitchiRiyu.資格なし;
         } else if (null != jogaisha && null != jogaisha.getShikibetsuCode()) {
             FlexibleDate 解除年月日 = jogaisha.getKaijoYMD();
             if (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY)) {
-                return DoteiFuitchiRiyu.その他;
+                return DoteiFuitchiRiyu.資格なし_適用除外者;
             }
             return DoteiFuitchiRiyu.資格なし;
         } else if (被保険者台帳があるFlag) {
