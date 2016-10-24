@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.KozaYotoKubunType;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder;
@@ -118,9 +117,7 @@ public class KougakuKozaJohoProcess extends BatchProcessBase<KozaJohoEntity> {
     @Override
     protected void process(KozaJohoEntity entity) {
         FurikomiDetailTempTableEntity tempTable = entity.get振込明細一時Entity();
-
-        TokuteiKozaRelateEntity tokuteiKozaRelateEntity = new TokuteiKozaRelateEntity();
-        IKoza 口座 = new Koza(tokuteiKozaRelateEntity);
+        IKoza 口座 = new Koza(entity.get口座());
         EditedKoza editorKoza = new EditedKoza(口座);
 
         tempTable.setKozaDataFlag(true);
