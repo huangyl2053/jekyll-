@@ -341,6 +341,14 @@ public class JigyoJokyoHokokuNempoSakuei {
         ValidationMessageControlPairs validateForUpdate = getValidationHandler(div).validateForUpdate(
                 !RString.isNullOrEmpty(div.getHiddenGappei()), !RString.isNullOrEmpty(div.getHiddenKouiki()));
         respinseData(div, validateForUpdate);
+        
+        if (RString.isNullOrEmpty(div.getDdlHokokuNendo().getSelectedValue())
+                || RString.isNullOrEmpty(div.getDdlShukeiFromYM().getSelectedValue())
+                || RString.isNullOrEmpty(div.getDdlShukeiToYM().getSelectedValue())) {
+            return ResponseData.of(div).addValidationMessages(
+                    new JigyoJokyoHokokuNempoSakueiValidationHandler(div).check出力対象の指定を確認()).respond();
+        }   
+        
         if (div.getCblShutsuryokuTaishoYoshiki1().isAllSelected()) {
             ValidationMessageControlPairs 年報報告様式１２ = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
                     Syorimei.月報報告一般状況１_１１.get名称(),

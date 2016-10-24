@@ -118,6 +118,17 @@ public class JigyoJokyoHokokuNempoSakueiValidationHandler {
                 new IdocheckMessages(DbuErrorMessages.月報全て未処理, builder.toString())));
         return validPairs;
     }
+    
+    /**
+     * DBUE00006 「出力対象の指定を確認してください。」
+     *
+     * @return validPairs
+     */
+    public ValidationMessageControlPairs check出力対象の指定を確認() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(DbuErrorMessages.出力対象未選択)));
+        return validPairs;
+    }
 
     private void doチェック(ValidationMessageControlPairs validPairs) {
         if (RString.isNullOrEmpty(div.getDdlHokokuNendo().getSelectedKey())) {
