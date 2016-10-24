@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyuf
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempKyufujissekiTyukannJigyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity2;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @reamsid_L DBC-2010-040 zhouchuanlin
  */
-public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2 extends BatchProcessBase<UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2Entity> {
+public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2 extends BatchProcessBase<UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity2> {
 
     private static final RString MYBATIS_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper."
@@ -52,7 +52,7 @@ public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2 extends BatchProcessB
     }
 
     @Override
-    protected void process(UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2Entity entity) {
+    protected void process(UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity2 entity) {
         TempKyufujissekiTyukannJigyoEntity 給付実績中間事業高額一時５ = entity.get給付実績中間事業高額一時５();
         DbT3057KogakuShikyuHanteiKekkaEntity 支給判定結果 = entity.get高額介護サービス費支給判定結果();
         DbT3058KogakuShikyuShinsaKetteiEntity 支給審査決定 = entity.get高額介護サービス費支給審査決定();
