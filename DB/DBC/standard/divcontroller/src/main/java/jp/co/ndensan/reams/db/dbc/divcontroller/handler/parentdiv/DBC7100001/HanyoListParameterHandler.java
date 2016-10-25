@@ -15,8 +15,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7100001.Hany
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,6 +31,7 @@ public class HanyoListParameterHandler {
 
     private final HanyoListParameterDiv div;
     private static final RString 項目名 = new RString("1");
+    private static final RString 連番 = new RString("2");
     private static final RString 日付 = new RString("3");
     private static final RString 事務広域 = new RString("111");
     private static final RString 全市町村 = new RString("全市町村");
@@ -36,6 +40,19 @@ public class HanyoListParameterHandler {
     private static final RString 公費負担者 = new RString("key2");
     private static final RString 経過措置_総合事業費 = new RString("key3");
     private static final RString 保険者_総合事業費 = new RString("key4");
+    private static final RString 公費負担者_総合事業費 = new RString("key5");
+    private static final RString KEY_項目名付加 = new RString("項目名付加");
+    private static final RString KEY_連番付加 = new RString("連番付加");
+    private static final RString KEY_日付スラッシュ付加 = new RString("日付スラッシュ付加");
+    private static final RString KEY_出力順 = new RString("出力順");
+    private static final RString KEY_サービス提供年月開始 = new RString("サービス提供年月From");
+    private static final RString KEY_サービス提供年月終了 = new RString("サービス提供年月To");
+    private static final RString KEY_国保連取扱年月FROM = new RString("国保連取扱年月From");
+    private static final RString KEY_国保連取扱年月TO = new RString("国保連取扱年月To");
+    private static final RString KEY_保険者区分 = new RString("保険者区分");
+    private static final RString KEY_事業者コード = new RString("事業者コード");
+    private static final RString KEY_事業者名 = new RString("事業者名");
+    private static final RString KEY_保険者コード = new RString("保険者コード");
 
     /**
      * コンストラクタ。
@@ -148,5 +165,89 @@ public class HanyoListParameterHandler {
         }
         parameter.set出力項目(RString.EMPTY);
         return parameter;
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     *
+     */
+    public void pamaRestore() {
+        BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
+        restoreClear();
+        FlexibleYearMonth 国保連取扱年月From = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_国保連取扱年月FROM);
+        if (国保連取扱年月From != null && !国保連取扱年月From.isEmpty()) {
+            div.getTxtKokuhorenToriatukaiNengetu().setFromValue(new RDate(国保連取扱年月From.getYearValue(), 国保連取扱年月From.getMonthValue(), 国保連取扱年月From.getLastDay()));
+        }
+        FlexibleYearMonth 国保連取扱年月To = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_国保連取扱年月TO);
+        if (国保連取扱年月To != null) {
+            div.getTxtKokuhorenToriatukaiNengetu().setToValue(new RDate(国保連取扱年月To.getYearValue(), 国保連取扱年月To.getMonthValue(), 国保連取扱年月To.getLastDay()));
+        }
+        FlexibleYearMonth サービス提供年月F = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_サービス提供年月開始);
+        if (サービス提供年月F != null && !サービス提供年月F.isEmpty()) {
+            div.getTxtSabisuTeikyoNengetu().setFromValue(new RDate(サービス提供年月F.getYearValue(), サービス提供年月F.getMonthValue(), サービス提供年月F.getLastDay()));
+        }
+        FlexibleYearMonth サービス提供年月T = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_サービス提供年月終了);
+        if (サービス提供年月T != null) {
+            div.getTxtSabisuTeikyoNengetu().setToValue(new RDate(サービス提供年月T.getYearValue(), サービス提供年月T.getMonthValue(), サービス提供年月T.getLastDay()));
+        }
+        RString 保険者区分 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_保険者区分);
+        if (保険者区分 != null) {
+            div.getRadHokenshaKubun().setSelectedKey(set保険者区分(保険者区分));
+        }
+        RString 事業者コード = restoreBatchParameterMap.getParameterValue(RString.class, KEY_事業者コード);
+        if (事業者コード != null) {
+            div.getCcdJigyoshaBango().setNyuryokuShisetsuKodo(事業者コード);
+        }
+        RString 事業者名 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_事業者名);
+        if (事業者名 != null) {
+            div.getCcdJigyoshaBango().setShisetsuMeisho(事業者名);
+        }
+        List<RString> csv編集方法リスト = new ArrayList<>();
+        boolean 項目名付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_項目名付加);
+        if (項目名付加) {
+            csv編集方法リスト.add(項目名);
+        }
+        boolean 連番付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_連番付加);
+        if (連番付加) {
+            csv編集方法リスト.add(連番);
+        }
+        boolean 日付スラッシュ付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_日付スラッシュ付加);
+        if (日付スラッシュ付加) {
+            csv編集方法リスト.add(日付);
+        }
+        div.getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
+        LasdecCode 保険者コード = restoreBatchParameterMap.getParameterValue(LasdecCode.class, KEY_保険者コード);
+        if (保険者コード != null && !保険者コード.isEmpty()) {
+            div.getCcdHokenshaList().setSelectedShichosonIfExist(保険者コード);
+        }
+        RString 出力順 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_出力順);
+        if (出力順 != null && !出力順.isEmpty()) {
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701010.getReportId(),
+                    Long.valueOf(出力順.toString()));
+        }
+    }
+
+    private void restoreClear() {
+        div.getTxtKokuhorenToriatukaiNengetu().clearFromValue();
+        div.getTxtKokuhorenToriatukaiNengetu().clearToValue();
+        div.getTxtSabisuTeikyoNengetu().clearFromValue();
+        div.getTxtSabisuTeikyoNengetu().clearToValue();
+        div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
+    }
+
+    private RString set保険者区分(RString 保険者区分) {
+        if (KagoMoshitateKekka_HokenshaKubun.保険者.getコード().equals(保険者区分)) {
+            return 保険者;
+        } else if (KagoMoshitateKekka_HokenshaKubun.公費負担者.getコード().equals(保険者区分)) {
+            return 公費負担者;
+        } else if (KagoMoshitateKekka_HokenshaKubun.経過措置_総合事業費.getコード().equals(保険者区分)) {
+            return 経過措置_総合事業費;
+        } else if (KagoMoshitateKekka_HokenshaKubun.保険者_総合事業費.getコード().equals(保険者区分)) {
+            return 保険者_総合事業費;
+        } else if (KagoMoshitateKekka_HokenshaKubun.公費負担者_総合事業費.getコード().equals(保険者区分)) {
+            return 公費負担者_総合事業費;
+        } else {
+            return すべて;
+        }
     }
 }
