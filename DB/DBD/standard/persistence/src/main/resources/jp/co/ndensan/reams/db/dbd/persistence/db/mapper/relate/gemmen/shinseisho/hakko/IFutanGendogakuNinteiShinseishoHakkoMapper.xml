@@ -30,6 +30,7 @@
                F."kyuSochishaFlag" AS 旧措置者フラグ,
                E."shichosonCode" AS 市町村コード,
                E."koikinaiTokureiSochimotoShichosonCode" AS 広住特措置元市町村コード,
+               G."nyushoShisetsuCode" AS 指定事業者番号,
                G."jigyoshaName" AS 事業者名称,
                G."yubinNo" AS 郵便番号,
                G."jigyoshaAddress" AS 事業者住所,
@@ -83,7 +84,20 @@
                                       AND       G2."daichoShubetsu" ='1'
                     )
         )AS G 
-        ON G."shikibetsuCode" =C."shikibetsuCode" 
+        ON G."shikibetsuCode" =C."shikibetsuCode"
+        LEFT JOIN 
+        (SELECT "hihokenshaNo",
+                "keikakuJigyoshaNo"
+         FROM  (SELECT "hihokenshaNo",                    
+                       "keikakuJigyoshaNo",
+                       "taishoYM",
+                       "rirekiNo",
+                       row_number() OVER (PARTITION BY "hihokenshaNo" ORDER BY "taishoYM" DESC,"rirekiNo" DESC) AS rrkno
+                FROM   rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" 
+                ) AS T3006
+         WHERE rrkno=1
+         )AS Z
+         ON Z."hihokenshaNo" = E."hihokenshaNo"
         WHERE 
             A."hakkoShoriID" = #{発行処理ID}
             )

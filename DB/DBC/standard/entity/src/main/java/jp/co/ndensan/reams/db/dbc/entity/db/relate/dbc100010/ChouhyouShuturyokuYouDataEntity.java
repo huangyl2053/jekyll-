@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100010;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -41,7 +40,7 @@ public class ChouhyouShuturyokuYouDataEntity {
     private ShikibetsuCode 識別コード;
     private YubinNo 郵便番号;
     private AtenaJusho 住所;
-    private AtenaKanaMeisho 事業者名;
+    private RString 事業者名;
     private TelNo 電話番号;
     private AtenaMeisho 代表者名;
 }

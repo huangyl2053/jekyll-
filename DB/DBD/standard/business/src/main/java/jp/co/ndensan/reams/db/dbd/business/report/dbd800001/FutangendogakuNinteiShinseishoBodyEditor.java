@@ -50,6 +50,10 @@ public class FutangendogakuNinteiShinseishoBodyEditor implements IFutangendogaku
         source.pageCnt = new RString("1");
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
         source.hihokenshaNo = item.getHihokenshaNo();
+        source.sisetuYubinNo = item.getSisetuYubinNo();
+        source.sisetuTelNo = item.getSisetuTelNo();
+        source.sisetuJusho = item.getSisetuJusho();
+        source.sisetuName = item.getSisetuName();
         return source;
     }
 }
