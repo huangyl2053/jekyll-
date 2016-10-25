@@ -80,8 +80,6 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString INDEX_111 = new RString("111");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
-    private static final int 開始桁数 = 1;
-    private static final int LENGTH = 6;
 
     /**
      * 主キーで処理日付管理マスタを削除します。
