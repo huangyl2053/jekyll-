@@ -48,7 +48,7 @@ public class DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGet
         KaigoDonyuKubun 介護導入区分 = shichosonSecurityJoho.get介護導入区分();
         List<GappeiCityJyoho> gappeiCityJyohoList;
         DonyuKeitaiCode 導入形態コード = shichosonSecurityJoho.get導入形態コード();
-        if (介護導入区分 != null && KaigoDonyuKubun.未導入.equals(介護導入区分)) {
+        if (介護導入区分 != null && 介護導入区分.equals(KaigoDonyuKubun.未導入)) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage().evaluate());
         } else {
             gappeiCityJyohoList = GappeiCityJohoBFinder.createInstance().getSaishintannitsugappeijoho(表示有無区分).records();
