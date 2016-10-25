@@ -113,6 +113,7 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
         TaishoShaHanteiYoukonkyoItokiTempTableEntity entity = new TaishoShaHanteiYoukonkyoItokiTempTableEntity();
         entity.set世帯課税区分(SetaiKazeiKubun.非課税.getコード());
         entity.set所得税課税世帯(Boolean.FALSE);
+        entity.set所得税課税者(Boolean.FALSE);
         for (TaishouJohoEntity item : recordList) {
             if (本人.equals(item.get本人区分()) && ((item.get識別コード_生活保護受給者() != null
                     && !item.get識別コード_生活保護受給者().isEmpty())
@@ -137,7 +138,7 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
                 entity.set世帯課税区分(SetaiKazeiKubun.課税.getコード());
             }
             if (item.get課税所得額() != null && 0 < item.get課税所得額().longValue()) {
-                entity.set所得税課税者(Boolean.TRUE);
+                entity.set所得税課税世帯(Boolean.TRUE);
             }
         }
         return entity;
@@ -157,7 +158,6 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
                 金額 = 金額.add(list.get非課税年金勘案額());
             }
             金額list.add(金額);
-
         }
     }
 
@@ -232,6 +232,9 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
             entity.set課税所得額(Decimal.ZERO);
         } else {
             entity.set課税所得額(item.get課税所得額());
+        }
+        if (item.get課税所得額() != null && 0 < item.get課税所得額().longValue()) {
+            entity.set所得税課税者(Boolean.TRUE);
         }
     }
 
