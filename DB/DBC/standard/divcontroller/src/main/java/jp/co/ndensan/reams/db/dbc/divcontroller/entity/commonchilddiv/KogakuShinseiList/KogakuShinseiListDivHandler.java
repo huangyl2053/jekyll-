@@ -263,7 +263,7 @@ public class KogakuShinseiListDivHandler {
         boolean flag = false;
         dgShinseiJoho_Row row = div.getDgShinseiJoho().getClickedItem();
         if (row != null && (row.getData14() != null && !row.getData14().isEmpty())
-                && (row.getData15() != null && !row.getData15().isEmpty())) {
+                && (row.getData15() == null || row.getData15().isEmpty())) {
             flag = true;
         }
         return flag;
