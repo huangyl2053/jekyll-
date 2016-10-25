@@ -373,42 +373,45 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
 
     private List<KoikiZenShichosonJoho> creat構成市町村情報リスト() {
         List<KoikiZenShichosonJoho> 構成市町村情報リスト = new ArrayList<>();
-        for (KoikiZenShichosonJohoParameter param : processParameter.get構成市町村情報リスト()) {
-            DbT7051KoseiShichosonMasterEntity entity = new DbT7051KoseiShichosonMasterEntity();
-            entity.setShichosonShokibetsuID(param.getShichosonShokibetsuID());
-            entity.setShichosonCode(param.getShichosonCode());
-            entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(param.getShoKisaiHokenshaNo()));
-            entity.setKokuhorenKoikiShichosonNo(param.getKokuhorenKoikiShichosonNo());
-            entity.setShichosonMeisho(param.getShichosonMeisho());
-            entity.setTodofukenMeisho(param.getTodofukenMeisho());
-            entity.setGunMeisho(param.getGunMeisho());
-            entity.setYubinNo(param.getYubinNo());
-            entity.setJusho(param.getJusho());
-            entity.setTelNo(param.getTelNo());
-            entity.setYusenChikuCode(param.getYusenChikuCode());
-            entity.setTyohyoTodoufukenHyojiUmu(param.getTyohyoTodoufukenHyojiUmu());
-            entity.setTyohyoGunHyojiUmu(param.getTyohyoGunHyojiUmu());
-            entity.setTyohyoShichosonHyojiUmu(param.getTyohyoShichosonHyojiUmu());
-            entity.setTyohyoJushoHenshuHouhou(param.getTyohyoJushoHenshuHouhou());
-            entity.setTyohyoKatagakiHyojiUmu(param.getTyohyoKatagakiHyojiUmu());
-            entity.setGaikokujinHyojiHouhou(param.getGaikokujinHyojiHouhou());
-            entity.setRojinhokenShichosonNo(param.getRojinhokenShichosonNo());
-            entity.setRokenJukyushaNoTaikei(param.getRokenJukyushaNoTaikei());
-            entity.setShotokuHikidashiHoho(param.getShotokuHikidashiHoho());
-            entity.setNofugakuDataRenkeiHoho(param.getNofugakuDataRenkeiHoho());
-            entity.setTokuchoBunpaishuyaku(param.getTokuchoBunpaishuyaku());
-            entity.setIkoYMD(param.getIkoYMD());
-            entity.setKanyuYMD(param.getKanyuYMD());
-            entity.setRidatsuYMD(param.getRidatsuYMD());
-            entity.setGappeiKyuShichosonKubun(param.getGappeiKyuShichosonKubun());
-            entity.setGappeiKyuShichosonHyojiUmu(param.getGappeiKyuShichosonHyojiUmu());
-            entity.setGappeiChiikiNo(param.getGappeiChiikiNo());
-            entity.setUnyoHokenshaNo(new ShoKisaiHokenshaNo(param.getUnyoHokenshaNo()));
-            entity.setUnyoKaishiYMD(param.getUnyoKaishiYMD());
-            entity.setUnyoShuryoYMD(param.getUnyoShuryoYMD());
-            entity.setUnyoKeitaiKubun(param.getUnyoKeitaiKubun());
-            KoikiZenShichosonJoho 構成市町村情報 = new KoikiZenShichosonJoho(entity);
-            構成市町村情報リスト.add(構成市町村情報);
+        List<KoikiZenShichosonJohoParameter> 構成市町村情報List = processParameter.get構成市町村情報リスト();
+        if (構成市町村情報List != null) {
+            for (KoikiZenShichosonJohoParameter param : 構成市町村情報List) {
+                DbT7051KoseiShichosonMasterEntity entity = new DbT7051KoseiShichosonMasterEntity();
+                entity.setShichosonShokibetsuID(param.getShichosonShokibetsuID());
+                entity.setShichosonCode(param.getShichosonCode());
+                entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(param.getShoKisaiHokenshaNo()));
+                entity.setKokuhorenKoikiShichosonNo(param.getKokuhorenKoikiShichosonNo());
+                entity.setShichosonMeisho(param.getShichosonMeisho());
+                entity.setTodofukenMeisho(param.getTodofukenMeisho());
+                entity.setGunMeisho(param.getGunMeisho());
+                entity.setYubinNo(param.getYubinNo());
+                entity.setJusho(param.getJusho());
+                entity.setTelNo(param.getTelNo());
+                entity.setYusenChikuCode(param.getYusenChikuCode());
+                entity.setTyohyoTodoufukenHyojiUmu(param.getTyohyoTodoufukenHyojiUmu());
+                entity.setTyohyoGunHyojiUmu(param.getTyohyoGunHyojiUmu());
+                entity.setTyohyoShichosonHyojiUmu(param.getTyohyoShichosonHyojiUmu());
+                entity.setTyohyoJushoHenshuHouhou(param.getTyohyoJushoHenshuHouhou());
+                entity.setTyohyoKatagakiHyojiUmu(param.getTyohyoKatagakiHyojiUmu());
+                entity.setGaikokujinHyojiHouhou(param.getGaikokujinHyojiHouhou());
+                entity.setRojinhokenShichosonNo(param.getRojinhokenShichosonNo());
+                entity.setRokenJukyushaNoTaikei(param.getRokenJukyushaNoTaikei());
+                entity.setShotokuHikidashiHoho(param.getShotokuHikidashiHoho());
+                entity.setNofugakuDataRenkeiHoho(param.getNofugakuDataRenkeiHoho());
+                entity.setTokuchoBunpaishuyaku(param.getTokuchoBunpaishuyaku());
+                entity.setIkoYMD(param.getIkoYMD());
+                entity.setKanyuYMD(param.getKanyuYMD());
+                entity.setRidatsuYMD(param.getRidatsuYMD());
+                entity.setGappeiKyuShichosonKubun(param.getGappeiKyuShichosonKubun());
+                entity.setGappeiKyuShichosonHyojiUmu(param.getGappeiKyuShichosonHyojiUmu());
+                entity.setGappeiChiikiNo(param.getGappeiChiikiNo());
+                entity.setUnyoHokenshaNo(new ShoKisaiHokenshaNo(param.getUnyoHokenshaNo()));
+                entity.setUnyoKaishiYMD(param.getUnyoKaishiYMD());
+                entity.setUnyoShuryoYMD(param.getUnyoShuryoYMD());
+                entity.setUnyoKeitaiKubun(param.getUnyoKeitaiKubun());
+                KoikiZenShichosonJoho 構成市町村情報 = new KoikiZenShichosonJoho(entity);
+                構成市町村情報リスト.add(構成市町村情報);
+            }
         }
         return 構成市町村情報リスト;
     }
