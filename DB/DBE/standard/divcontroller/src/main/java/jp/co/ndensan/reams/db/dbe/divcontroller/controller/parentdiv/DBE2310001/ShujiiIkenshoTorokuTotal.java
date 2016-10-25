@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibe
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -37,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -65,7 +67,8 @@ public class ShujiiIkenshoTorokuTotal {
     private final ShujiiIkenshoTorokuManager service;
     private final ImageManager imageManager;
     private final NinteiShinseiJohoManager ninteiManager;
-
+    private static final RString COMMON_BUTTON_UPDATE = new RString("btnIkenshoSave");
+    
     /**
      * コンストラクタです。
      *
@@ -89,9 +92,23 @@ public class ShujiiIkenshoTorokuTotal {
         ShujiiIkenshoTorokuMapperParameter param
                 = ShujiiIkenshoTorokuMapperParameter.createShujiiIkenshoTorokuMapperParameter(管理番号, 履歴番号, 市町村コード);
         SearchResult<ShujiiIkenshoTorokuResult> resultList = service.getDataForLoad(param);
+
+        if (resultList.records().isEmpty()) {
+            if (!ResponseHolder.isReRequest()) {
+                div.setDisabled(true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE, true);
+                return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし_データ内容.getMessage().replace("主治医依頼情報未登録のため、")).respond();
+            } else {
+               return ResponseData.of(div).respond(); 
+            }
+        }
+        
+        履歴番号 = resultList.records().get(0).get主治医意見書作成依頼履歴番号();
+        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, new RString(履歴番号));
         Image image = imageManager.getイメージ情報(管理番号);
         NinteiShinseiJoho ninteiShinseiJoho = ninteiManager.get意見書情報(NinteiShinseiJohoMapperParameter.create主治医意見書登録Param(管理番号, 履歴番号));
-        if (resultList.records().isEmpty()) {
+        
+        if (resultList.records().get(0).get主治医意見書記入年月日().isEmpty()) {
             div.setHdnHasChanged(RString.EMPTY);
             div.getRadTakaShinryo().setSelectedKey(SELECT_KEY1);
             ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_ADD);
@@ -109,7 +126,7 @@ public class ShujiiIkenshoTorokuTotal {
         ViewStateHolder.put(ViewStateKeys.イメージ情報, image);
         return ResponseData.of(div).respond();
     }
-
+    
     /**
      * チェック変更した際の選択項目により、他科診療チェックボックスを変更可能にします。
      *
