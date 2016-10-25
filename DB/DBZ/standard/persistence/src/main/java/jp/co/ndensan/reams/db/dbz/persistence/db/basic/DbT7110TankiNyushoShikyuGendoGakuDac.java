@@ -11,7 +11,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7110TankiNyushoShiky
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7110TankiNyushoShikyuGendoGaku.tekiyoKaishiYM;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7110TankiNyushoShikyuGendoGaku.yoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;

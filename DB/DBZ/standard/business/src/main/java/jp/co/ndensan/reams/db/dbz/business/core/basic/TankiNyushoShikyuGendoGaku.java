@@ -5,12 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbz.business.core.basic.TankiNyushoShikyuGendoGakuBuilder;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.TankiNyushoShikyuGendoGakuIdentifier;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -21,10 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 短期入所系支給限度額を管理するクラスです。
  */
-public class TankiNyushoShikyuGendoGaku 
-extends ModelBase<TankiNyushoShikyuGendoGakuIdentifier, 
-        DbT7110TankiNyushoShikyuGendoGakuEntity, 
-        TankiNyushoShikyuGendoGaku> implements Serializable {
+public class TankiNyushoShikyuGendoGaku
+        extends ModelBase<TankiNyushoShikyuGendoGakuIdentifier, DbT7110TankiNyushoShikyuGendoGakuEntity, TankiNyushoShikyuGendoGaku>
+        implements Serializable {
 
     private final DbT7110TankiNyushoShikyuGendoGakuEntity entity;
     private final TankiNyushoShikyuGendoGakuIdentifier id;
@@ -149,8 +146,7 @@ extends ModelBase<TankiNyushoShikyuGendoGakuIdentifier,
     }
 
     /**
-     * 保持する短期入所系支給限度額を削除対象とします。<br/>
-     * {@link DbT7110TankiNyushoShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する短期入所系支給限度額を削除対象とします。<br/> {@link DbT7110TankiNyushoShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link TankiNyushoShikyuGendoGaku}
      */
