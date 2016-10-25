@@ -280,91 +280,75 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
     }
 
     private RString edit一覧表用区分2(KogakugassanJikofutangakuInfoHoseiSubEntity entity) {
-        if (Integer.parseInt(当年4月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getTounen_04_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getTounen_04_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(当年5月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getTounen_05_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getTounen_05_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(当年6月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getTounen_06_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getTounen_06_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(当年7月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getTounen_07_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getTounen_07_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(当年8月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getTounen_08_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getTounen_08_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(当年9月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getTounen_09_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getTounen_09_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(当年10月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getTounen_10_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getTounen_10_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(当年11月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getTounen_11_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getTounen_11_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(当年12月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getTounen_12_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getTounen_12_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
+        if (Integer.parseInt(当年4月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getTounen_04_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getTounen_04_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(当年5月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getTounen_05_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getTounen_05_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(当年6月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getTounen_06_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getTounen_06_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(当年7月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getTounen_07_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getTounen_07_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(当年8月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getTounen_08_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getTounen_08_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(当年9月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getTounen_09_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getTounen_09_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(当年10月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getTounen_10_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getTounen_10_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(当年11月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getTounen_11_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getTounen_11_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(当年12月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getTounen_12_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getTounen_12_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
         }
         return edit一覧表用区分2Sub(entity);
     }
 
     private RString edit一覧表用区分2Sub(KogakugassanJikofutangakuInfoHoseiSubEntity entity) {
-        if (Integer.parseInt(翌年1月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getYokunen_01_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getYokunen_01_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(翌年2月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getYokunen_02_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getYokunen_02_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(翌年3月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getYokunen_03_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getYokunen_03_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(翌年4月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getYokunen_04_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getYokunen_04_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(翌年5月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getYokunen_05_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getYokunen_05_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(翌年6月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getYokunen_06_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getYokunen_06_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
-        } else if (Integer.parseInt(翌年7月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (entity.get中間DBEntity().getYokunen_07_sumi_JikoFutanGaku()
-                    .compareTo(entity.get中間DBEntity().getYokunen_07_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
-                return アステリスク;
-            }
+        if (Integer.parseInt(翌年1月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getYokunen_01_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getYokunen_01_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(翌年2月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getYokunen_02_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getYokunen_02_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(翌年3月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getYokunen_03_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getYokunen_03_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(翌年4月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getYokunen_04_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getYokunen_04_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(翌年5月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getYokunen_05_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getYokunen_05_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(翌年6月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getYokunen_06_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getYokunen_06_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
+        } else if (Integer.parseInt(翌年7月.toString()) == entity.getサービス提供年月().getMonthValue()
+                && entity.get中間DBEntity().getYokunen_07_sumi_JikoFutanGaku()
+                .compareTo(entity.get中間DBEntity().getYokunen_07_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {
+            return アステリスク;
         }
         return RString.EMPTY;
     }
