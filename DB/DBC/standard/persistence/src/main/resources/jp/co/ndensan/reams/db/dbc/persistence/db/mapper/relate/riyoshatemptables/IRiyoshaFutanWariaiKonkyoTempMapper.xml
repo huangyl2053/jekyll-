@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-4950-030 liuyang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IRiyoshaFutanWariaiKonkyoTempMapper">
+
+    <sql id="allColumns_RiyoshaFutanWariaiKonkyoTemp">
+        "RiyoshaFutanWariaiKonkyoTemp"."nendo"as "RiyoshaFutanWariaiKonkyoTemp_nendo"
+        ,"RiyoshaFutanWariaiKonkyoTemp"."hihokenshaNo"as "RiyoshaFutanWariaiKonkyoTemp_hihokenshaNo"
+        ,"RiyoshaFutanWariaiKonkyoTemp"."edaNo"as "RiyoshaFutanWariaiKonkyoTemp_edaNo"
+        ,"RiyoshaFutanWariaiKonkyoTemp"."setaiinHihokenshaNo"as "RiyoshaFutanWariaiKonkyoTemp_setaiinHihokenshaNo"
+        ,"RiyoshaFutanWariaiKonkyoTemp"."setaiinShotokuRirekiNo"as "RiyoshaFutanWariaiKonkyoTemp_setaiinShotokuRirekiNo"
+    </sql>
+
+    <sql id="allColumns">
+        "nendo",
+        "hihokenshaNo",
+        "edaNo",
+        "setaiinHihokenshaNo",
+        "setaiinShotokuRirekiNo"
+    </sql>
+
+    <resultMap id="ResultMap_RiyoshaFutanWariaiKonkyoTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.RiyoshaFutanWariaiKonkyoTempEntity" autoMapping="true">
+        <result property="nendo" column="RiyoshaFutanWariaiKonkyoTemp_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="hihokenshaNo" column="RiyoshaFutanWariaiKonkyoTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="edaNo" column="RiyoshaFutanWariaiKonkyoTemp_edaNo" />
+        <result property="setaiinHihokenshaNo" column="RiyoshaFutanWariaiKonkyoTemp_setaiinHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="setaiinShotokuRirekiNo" column="RiyoshaFutanWariaiKonkyoTemp_setaiinShotokuRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+</mapper>
+
+
