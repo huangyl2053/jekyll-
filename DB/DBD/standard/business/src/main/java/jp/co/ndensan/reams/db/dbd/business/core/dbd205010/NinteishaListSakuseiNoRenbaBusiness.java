@@ -91,6 +91,12 @@ public class NinteishaListSakuseiNoRenbaBusiness {
 
         }
 
+        setEucCsvEntity_2(eucCsvEntity, t, has世帯員情報, 世帯員情報Index);
+
+    }
+
+    private void setEucCsvEntity_2(KakuninListNoRenbanCsvEntity eucCsvEntity,
+            NinteishaListSakuseiEntity t, boolean has世帯員情報, int 世帯員情報Index) {
         if (has世帯員情報) {
             SetaiInRisutoEntity setaEntity = t.get世帯員リスト().get(世帯員情報Index);
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get世帯員リスト().get(世帯員情報Index).get世帯員宛名());
@@ -107,10 +113,10 @@ public class NinteishaListSakuseiNoRenbaBusiness {
                 eucCsvEntity.set世帯員所得税課税区分(RString.EMPTY);
             }
         }
-
     }
 
-    private void edit出力情報_介護保険負担限度額認定(KakuninListNoRenbanCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, boolean is日付スラッシュ編集) {
+    private void edit出力情報_介護保険負担限度額認定(KakuninListNoRenbanCsvEntity eucCsvEntity,
+            NinteishaListSakuseiEntity t, boolean is日付スラッシュ編集) {
         if (t.get介護保険負担限度額認定Entity() != null && t.get介護保険負担限度額認定Entity().getKetteiKubun() != null) {
             eucCsvEntity.set決定区分(t.get介護保険負担限度額認定Entity().getKetteiKubun());
         }
@@ -152,6 +158,11 @@ public class NinteishaListSakuseiNoRenbaBusiness {
                 eucCsvEntity.set居住費負担限度額ユニット型準個室(new RString(居住費負担限度額ユニット型準個室.toString()));
             }
         }
+
+        edit出力情報_介護保険負担限度額認定_2(eucCsvEntity, t);
+    }
+
+    private void edit出力情報_介護保険負担限度額認定_2(KakuninListNoRenbanCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t) {
 
         if (t.get介護保険負担限度額認定Entity() != null && t.get介護保険負担限度額認定Entity().getJuraiTypeKoshitsu_Tokuyo() != null) {
             Decimal 居住費負担限度額従来型個室_特養等 = t.get介護保険負担限度額認定Entity().getJuraiTypeKoshitsu_Tokuyo();
