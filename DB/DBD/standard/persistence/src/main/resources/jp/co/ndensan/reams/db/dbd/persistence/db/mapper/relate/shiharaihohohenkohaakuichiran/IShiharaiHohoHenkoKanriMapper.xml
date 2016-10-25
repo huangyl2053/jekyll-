@@ -99,7 +99,6 @@
                 AND 支払方法変更."torokuKubun" = '01'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
                 AND (支払方法変更."yokoku_TsuchiHakkoYMD" IS NULL OR 支払方法変更."yokoku_TsuchiHakkoYMD" = '')
-                AND 支払方法変更."yokoku_TsuchiSaiHakkoFlag"  =  true
             </if>
             <if test="is2号差止予告登録者の選択_2">
                 AND 支払方法変更."kanriKubun"  = '1'
@@ -124,7 +123,6 @@
                 AND 支払方法変更."torokuKubun" = '02'
                 AND 支払方法変更."logicalDeletedFlag"  =  false
                 AND (支払方法変更."yokoku_TsuchiHakkoYMD" IS NULL OR 支払方法変更."yokoku_TsuchiHakkoYMD" = '')
-                AND 支払方法変更."yokoku_TsuchiSaiHakkoFlag"  = true
             </if>
             <if test="is2号差止登録者の選択_2">
                 AND 支払方法変更."kanriKubun"  = '1'
