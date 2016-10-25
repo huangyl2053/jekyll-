@@ -25,7 +25,7 @@ public enum TokubetsuChoshuMidoteiIchiranOutputOrder implements IReportItems {
      */
     生年月日(new RString("0012"), new RString("生年月日"), new RString("\"dtBirthDay\"")),
     /**
-     * 市町村コード
+     * 性別
      */
     性別(new RString("0013"), new RString("性別"), new RString("\"dtSeibetsu\"")),
     /**
@@ -41,7 +41,7 @@ public enum TokubetsuChoshuMidoteiIchiranOutputOrder implements IReportItems {
      */
     年金コード(new RString("0051"), new RString("年金コード"), new RString("\"nenkinCode\"")),
     /**
-     * 被保険者番号
+     * 年金番号
      */
     年金番号(new RString("0052"), new RString("年金番号"), new RString("\"kisoNenkinNo\""));
 
