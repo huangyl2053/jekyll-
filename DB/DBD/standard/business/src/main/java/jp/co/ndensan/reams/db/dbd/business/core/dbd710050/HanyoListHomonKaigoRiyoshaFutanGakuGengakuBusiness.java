@@ -101,7 +101,8 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuBusiness {
      * @param 市町村名 市町村名
      */
     public void setEucCsvEntity(Association association, boolean csvhitsukesurasyuhensyu,
-            HomonKaigoRiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity, HomonKaigoRiyoshaFutanGakuGengakuEntity entity, HokenshaList hokenshaList, RString 市町村名) {
+            HomonKaigoRiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity, HomonKaigoRiyoshaFutanGakuGengakuEntity entity,
+            HokenshaList hokenshaList, RString 市町村名) {
         isCsvhitsukesurasyuhensyu = csvhitsukesurasyuhensyu;
         if (entity.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());

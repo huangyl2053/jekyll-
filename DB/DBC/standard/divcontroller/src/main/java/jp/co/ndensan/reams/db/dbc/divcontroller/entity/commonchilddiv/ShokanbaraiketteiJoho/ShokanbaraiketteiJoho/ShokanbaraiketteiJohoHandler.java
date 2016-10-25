@@ -136,7 +136,7 @@ public class ShokanbaraiketteiJohoHandler {
                 row.getTaniKingaku().setValue(Decimal.ZERO);
             }
             if (syokanbaraiketteJoho.getShiharaiKingaku() != null) {
-                row.getShiharaiKingaku().setValue(new Decimal(syokanbaraiketteJoho.getShiharaiKingaku()));
+                row.getShiharaiKingaku().setValue(syokanbaraiketteJoho.getShiharaiKingaku());
             } else {
                 row.getShiharaiKingaku().setValue(Decimal.ZERO);
             }

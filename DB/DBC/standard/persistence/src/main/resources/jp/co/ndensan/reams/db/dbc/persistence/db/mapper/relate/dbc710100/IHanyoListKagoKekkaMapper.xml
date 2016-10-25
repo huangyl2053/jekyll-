@@ -151,7 +151,10 @@
                     )             
              ) AS "ShikibetsuTaisho" 
             ON
-                "master"."dbT1001HihokenshaDaicho_shikibetsuCode"= "ShikibetsuTaisho"."shikibetsuCode"              
+                "master"."dbT1001HihokenshaDaicho_shikibetsuCode"= "ShikibetsuTaisho"."shikibetsuCode"    
+            <if test="出力順!=null and !出力順.isEmpty()">
+            ${出力順}
+            </if>            
     </sql>
     
     

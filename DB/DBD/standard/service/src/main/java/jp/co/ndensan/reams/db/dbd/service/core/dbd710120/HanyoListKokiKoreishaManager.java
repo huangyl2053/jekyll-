@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.Soshit
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710120.HanyoListKokiKoreishaProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutokokikoreisha.HanyoRisutoKokiKoreishaEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutokokikoreisha.HanyoRisutoKokiKoreishaEucCsvEntity;
+import jp.co.ndensan.reams.db.dbd.service.core.hanyolist.HanyoListManager;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.Outputs;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
@@ -98,7 +99,9 @@ public class HanyoListKokiKoreishaManager {
     public void get情報設定(HanyoRisutoKokiKoreishaEucCsvEntity eucCsvEntity, HanyoRisutoKokiKoreishaEntity entity,
             Association 地方公共団体情報, HokenshaList 保険者リスト, boolean 日付スラッシュ付加) {
         HanyoListKokiKoreishaBusiness bus = new HanyoListKokiKoreishaBusiness();
-        bus.setEucCsvEntity(地方公共団体情報, 日付スラッシュ付加, eucCsvEntity, entity, 保険者リスト);
+        RString 市町村名 = HanyoListManager.createInstance().
+                get地方公共団体(new LasdecCode(entity.get被保険者台帳管理_市町村コード())).get市町村名();
+        bus.setEucCsvEntity(地方公共団体情報, 日付スラッシュ付加, eucCsvEntity, entity, 保険者リスト, 市町村名);
     }
 
     /**
@@ -119,24 +122,26 @@ public class HanyoListKokiKoreishaManager {
      *
      */
     public void get方法(HanyoRisutoKokiKoreishaEntity entity, HanyoListEntity hanyolistentity) {
-        ChoikiCode 町域コード = entity.getPsmEntity().getChoikiCode();
-        YubinNo 郵便番号 = entity.getPsmEntity().getYubinNo();
-        AtenaBanchi 番地コード = entity.getPsmEntity().getBanchi();
-        GyoseikuCode 行政区コード = entity.getPsmEntity().getGyoseikuCode();
-        ChikuCode 地区１ = entity.getPsmEntity().getChikuCode1();
-        ChikuCode 地区２ = entity.getPsmEntity().getChikuCode2();
-        SetaiCode 世帯コード = entity.getPsmEntity().getSetaiCode();
-        hanyolistentity.set郵便番号(郵便番号 != null ? 郵便番号.getYubinNo() : RString.EMPTY);
-        hanyolistentity.set町域コード(町域コード != null ? 町域コード.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set番地コード(番地コード != null ? 番地コード.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set行政区コード(行政区コード != null ? 行政区コード.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set地区１(地区１ != null ? 地区１.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set地区２(地区２ != null ? 地区２.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set世帯コード(世帯コード != null ? 世帯コード.getColumnValue() : RString.EMPTY);
-        hanyolistentity.set識別コード(entity.get被保険者台帳管理_識別コード());
-        hanyolistentity.set氏名５０音カナ(entity.getPsmEntity().getKanaName());
-        hanyolistentity.set生年月日(entity.getPsmEntity().getSeinengappiYMD());
-        hanyolistentity.set性別(entity.getPsmEntity().getSeibetsuCode());
+        if (entity.getPsmEntity() != null) {
+            ChoikiCode 町域コード = entity.getPsmEntity().getChoikiCode();
+            YubinNo 郵便番号 = entity.getPsmEntity().getYubinNo();
+            AtenaBanchi 番地コード = entity.getPsmEntity().getBanchi();
+            GyoseikuCode 行政区コード = entity.getPsmEntity().getGyoseikuCode();
+            ChikuCode 地区１ = entity.getPsmEntity().getChikuCode1();
+            ChikuCode 地区２ = entity.getPsmEntity().getChikuCode2();
+            SetaiCode 世帯コード = entity.getPsmEntity().getSetaiCode();
+            hanyolistentity.set郵便番号(郵便番号 != null ? 郵便番号.getYubinNo() : RString.EMPTY);
+            hanyolistentity.set町域コード(町域コード != null ? 町域コード.getColumnValue() : RString.EMPTY);
+            hanyolistentity.set番地コード(番地コード != null ? 番地コード.getColumnValue() : RString.EMPTY);
+            hanyolistentity.set行政区コード(行政区コード != null ? 行政区コード.getColumnValue() : RString.EMPTY);
+            hanyolistentity.set地区１(地区１ != null ? 地区１.getColumnValue() : RString.EMPTY);
+            hanyolistentity.set地区２(地区２ != null ? 地区２.getColumnValue() : RString.EMPTY);
+            hanyolistentity.set世帯コード(世帯コード != null ? 世帯コード.getColumnValue() : RString.EMPTY);
+            hanyolistentity.set識別コード(entity.get被保険者台帳管理_識別コード());
+            hanyolistentity.set氏名５０音カナ(entity.getPsmEntity().getKanaName());
+            hanyolistentity.set生年月日(entity.getPsmEntity().getSeinengappiYMD());
+            hanyolistentity.set性別(entity.getPsmEntity().getSeibetsuCode());
+        }
         hanyolistentity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
         hanyolistentity.set被保険者番号(entity.get被保険者台帳管理_被保険者番号());
         hanyolistentity.set資格区分(entity.get被保険者台帳管理_被保険者区分コード());

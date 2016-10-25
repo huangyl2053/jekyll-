@@ -39,12 +39,12 @@ public class RiyoshaFutanGakuGemmenNinteishaListProperty {
         /**
          * 項目ID:0008 フォームフィールド名:世帯コードMyBatis項目名:定義なし
          */
-        世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"ShikibetsuTaisho\".\"setaiCode\"")),
+        世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"ShikibetsuTaisho_setaiCode\"")),
         //    世帯コード("0008", "世帯コード", "shikibetsuCode.\"setaiCode\""),
         /**
          * 項目ID:0009 フォームフィールド名:識別コードMyBatis項目名:定義なし
          */
-        識別コード(new RString("0009"), new RString("識別コード"), new RString("\"ShikibetsuTaisho\".\"shikibetsuCode\"")),
+        識別コード(new RString("0009"), new RString("識別コード"), new RString("\"ShikibetsuTaisho_shikibetsuCode\"")),
         /**
          * 氏名５０音カナ
          */
@@ -52,11 +52,11 @@ public class RiyoshaFutanGakuGemmenNinteishaListProperty {
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("認定情報.\"shichosonCode\"")),
+        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("\"市町村コード\"")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("taishoShaHanteiYoukonkyoItokiTemp\".\"hihokenshaNo\""));
+        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"被保険者番号\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

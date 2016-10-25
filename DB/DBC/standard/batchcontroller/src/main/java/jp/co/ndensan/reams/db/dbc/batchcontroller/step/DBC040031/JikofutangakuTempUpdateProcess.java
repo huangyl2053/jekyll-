@@ -326,12 +326,11 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
                 一覧表用区分2 = アステリスク;
             }
         }
-        一覧表用区分2 = edit一覧表用区分2Sub(entity);
+        一覧表用区分2 = edit一覧表用区分2Sub(entity, 一覧表用区分2);
         return 一覧表用区分2;
     }
 
-    private RString edit一覧表用区分2Sub(KogakugassanJikofutangakuInfoHoseiSubEntity entity) {
-        RString 一覧表用区分2 = RString.EMPTY;
+    private RString edit一覧表用区分2Sub(KogakugassanJikofutangakuInfoHoseiSubEntity entity, RString 一覧表用区分2) {
         if (Integer.parseInt(翌年1月.toString()) == entity.getサービス提供年月().getMonthValue()) {
             if (entity.get中間DBEntity().getYokunen_01_sumi_JikoFutanGaku()
                     .compareTo(entity.get中間DBEntity().getYokunen_01_sumi_under_70KogakuShikyuGaku()) < INT_ZERO) {

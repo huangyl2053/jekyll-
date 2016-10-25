@@ -46,7 +46,7 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0440011",
      "layoutTitle": "高額サービス費支給申請登録",
-     "eventName": "該当者一覧へ",
+     "eventName": "検索に戻る",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150020.KyufujissekiKyotakuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150020.KyufujissekiShukeiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150020.NenreikaikyuRiyojokyoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150020.SyorikekkaCyouHyouProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150020.DBC150020_NenreikaikyuRiyojokyoParameter;
@@ -23,14 +22,12 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 public class DBC150020_NenreikaikyuRiyojokyo extends BatchFlowBase<DBC150020_NenreikaikyuRiyojokyoParameter> {
 
     private static final String KYUFUJISSEKIKYOTAKU_PROCESS = "KyufujissekiKyotakuProcess";
-    private static final String KYUFUJISSEKISHUKEI_PROCESS = "KyufujissekiShukeiProcess";
     private static final String 処理結果確認リストCSV出力 = "SyorikekkaCyouHyouProcess";
     private static final String 年齢階級別利用状況 = "NenreikaikyuRiyojokyoProcess";
 
     @Override
     protected void defineFlow() {
         executeStep(KYUFUJISSEKIKYOTAKU_PROCESS);
-        executeStep(KYUFUJISSEKISHUKEI_PROCESS);
         executeStep(年齢階級別利用状況);
         executeStep(処理結果確認リストCSV出力);
 
@@ -44,17 +41,6 @@ public class DBC150020_NenreikaikyuRiyojokyo extends BatchFlowBase<DBC150020_Nen
     @Step(KYUFUJISSEKIKYOTAKU_PROCESS)
     protected IBatchFlowCommand createKyufujissekiKyotaku() {
         return loopBatch(KyufujissekiKyotakuProcess.class).arguments(
-                getParameter().toNenreikaikyuRiyojokyoProcessParameter()).define();
-    }
-
-    /**
-     * 給付実績集計データ取得、「給付実績データ一時TBL」に登録する。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(KYUFUJISSEKISHUKEI_PROCESS)
-    protected IBatchFlowCommand createKyufujissekiShukei() {
-        return loopBatch(KyufujissekiShukeiProcess.class).arguments(
                 getParameter().toNenreikaikyuRiyojokyoProcessParameter()).define();
     }
 

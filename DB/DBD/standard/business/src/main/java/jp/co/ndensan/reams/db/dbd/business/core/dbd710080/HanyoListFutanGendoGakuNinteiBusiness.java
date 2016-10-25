@@ -411,7 +411,7 @@ public class HanyoListFutanGendoGakuNinteiBusiness {
         return eucCsvEntity;
     }
 
-    public void setBlank2(FutanGendoGakuNinteiEucCsvEntity eucCsvEntity) {
+    private void setBlank2(FutanGendoGakuNinteiEucCsvEntity eucCsvEntity) {
         eucCsvEntity.set受給状況(RString.EMPTY);
         eucCsvEntity.set異動事由コード(RString.EMPTY);
         eucCsvEntity.set異動事由追加文(RString.EMPTY);
@@ -709,9 +709,9 @@ public class HanyoListFutanGendoGakuNinteiBusiness {
 
     private RString set旧措置者(RString 旧措置者) {
         RString 旧措置者new;
-        if (旧措置者.equals(区分_1)) {
+        if (区分_1.equals(旧措置者)) {
             旧措置者new = KyuSochishaKubun.旧措置者.get名称();
-        } else if (旧措置者.equals(区分_2)) {
+        } else if (区分_2.equals(旧措置者)) {
             旧措置者new = KyuSochishaKubun.旧措置者実質的負担軽減者.get名称();
         } else {
             return RString.EMPTY;

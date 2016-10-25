@@ -92,43 +92,43 @@ public class KyokaisoKanriMasterListBusiness {
         /**
          * 行政区コード
          */
-        世帯コード(new RString("0008"), new RString(""), new RString("\"PSM_setaiCode\"")),
+        世帯コード(new RString("0008"), new RString("listLower_3"), new RString("\"PSM_setaiCode\"")),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString(""), new RString("\"PSM_banchiCode\"")),
+        町域コード(new RString("0002"), new RString("choikiCode"), new RString("\"PSM_choikiCode\"")),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"PSM_kanaMeisho\"")),
+        氏名５０音カナ(new RString("0010"), new RString("listUpper_2"), new RString("\"PSM_kanaMeisho\"")),
         /**
          * 住民種別
          */
-        住民種別(new RString("0014"), new RString(""), new RString("\"PSM_juminShubetsu\"")),
+        住民種別(new RString("0014"), new RString("listUpper_4"), new RString("\"PSM_juminShubetsuCode\"")),
         /**
          * 証記載保険者番号
          */
-        性別(new RString("0013"), new RString(""), new RString("\"PSM_seibetsuCode\"")),
+        性別(new RString("0013"), new RString("listUpper_3"), new RString("\"PSM_seibetsuCode\"")),
         /**
          * 生年月日
          */
-        生年月日(new RString("0012"), new RString(""), new RString("\"PSM_seinengappiYMD\"")),
+        生年月日(new RString("0012"), new RString("listUpper_6"), new RString("\"PSM_seinengappiYMD\"")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString(""), new RString("\"DbT1006Kyo.hihokenshaNo\"")),
+        被保険者番号(new RString("0104"), new RString("listUpper_1"), new RString("\"DbT1006Kyo.hihokenshaNo\"")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString(""), new RString("\"DbT1001Hiho.shichosonCode\"")),
+        市町村コード(new RString("0016"), new RString("shichosonCode"), new RString("\"DbT1001Hiho.shichosonCode\"")),
         /**
          * 境界層該当申請日
          */
-        境界層該当申請日(new RString("0117"), new RString(""), new RString("DbT1013Kyo.shinseiYMD\"")),
+        境界層該当申請日(new RString("0117"), new RString("listLower_4"), new RString("DbT1013Kyo.shinseiYMD\"")),
         /**
          * 境界層該当開始日
          */
-        境界層該当開始日(new RString("0118"), new RString(""), new RString("DbT1006Kyo.tekiyoKaishiYMD\""));
+        境界層該当開始日(new RString("0118"), new RString("listLower_5"), new RString("DbT1006Kyo.tekiyoKaishiYMD\""));
         private final RString 項目ID;
         private final RString フォームフィールド名;
         private final RString myBatis項目名;

@@ -485,15 +485,10 @@
               ON 資格情報_識別コード = "ShikibetsuTaisho"."shikibetsuCode"
               ${出力順}
     </select>
-    <resultMap id="resultMap_find最大の履歴番号レコードの情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuFourEntity" autoMapping="true">
-        <collection property="支払方法変更Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity"/>
-        <collection property="支払方法変更差止Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4024ShiharaiHohoHenkoSashitomeMapper.ResultMap_DbT4024ShiharaiHohoHenkoSashitomeEntity"/>
-        <collection property="償還払支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
-        <collection property="償還払支給判定結果Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"/>
-    </resultMap>
 
     <resultMap id="resultMap_find滞納者対策情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuFourEntity" autoMapping="true">
-        <collection property="支払方法変更Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity"/>
+        <id property="支払方法変更Entity.hihokenshaNo" column="dbT4021ShiharaiHohoHenko_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <association property="支払方法変更Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity"/>
         <collection property="支払方法変更差止リスト" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4024ShiharaiHohoHenkoSashitomeMapper.ResultMap_DbT4024ShiharaiHohoHenkoSashitomeEntity"/>
         <collection property="償還情報リスト" resultMap="resultMap_償還情報リスト"/>
     </resultMap>
@@ -536,12 +531,12 @@
         <result property="滞納者対策情報_弁明期限" column="滞納者対策情報_弁明期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="滞納者対策情報_弁明受付日" column="滞納者対策情報_弁明受付日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="滞納者対策情報_償還発行日" column="滞納者対策情報_償還発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="滞納者対策情報_償還証期限" column="滞納者対策情報_償還証期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="滞納者対策情報_償還証期限" column="滞納者対策情報_償還証期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="滞納者対策情報_差止中件数" column="滞納者対策情報_差止中件数" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
         <result property="滞納者対策情報_差止中金額" column="滞納者対策情報_差止中金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="滞納者対策情報_差止納付期日" column="滞納者対策情報_差止納付期日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="滞納者対策情報_控除件数" column="滞納者対策情報_控除件数" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
-        <result property="滞納者対策情報_控除証期限" column="滞納者対策情報_控除証期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="滞納者対策情報_控除証期限" column="滞納者対策情報_控除証期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="滞納者対策情報_登録区分" column="滞納者対策情報_登録区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="滞納者対策情報_終了区分" column="滞納者対策情報_終了区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="認定情報_要介護認定状態区分コード" column="認定情報_要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>

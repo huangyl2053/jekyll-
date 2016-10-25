@@ -54,6 +54,6 @@
                 ${shikibetsuCode}
             </foreach>
         ) as "DbV2502"
-        ORDER BY "DbV2502_shotokuNendo" ASC, "DbV2502_shikibetsuCode" ASC, "DbV2502_rirekino" ASC
+        ORDER BY "DbV2502_shotokuNendo" ASC, "DbV2502_shikibetsuCode" ASC, "DbV2502_rirekino" DESC
     </select>
 </mapper>

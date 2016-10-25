@@ -44,10 +44,10 @@ class KyokaisoKanriMasterListHeaderEditor implements IKyokaisoKanriMasterListEdi
         source.shutsuryokujun4 = headItem.get並び順4();
         source.shutsuryokujun5 = headItem.get並び順5();
         source.kaipage1 = headItem.get改頁1();
-        source.kaipage2 = headItem.get改頁1();
-        source.kaipage3 = headItem.get改頁1();
-        source.kaipage4 = headItem.get改頁1();
-        source.kaipage5 = headItem.get改頁1();
+        source.kaipage2 = headItem.get改頁2();
+        source.kaipage3 = headItem.get改頁3();
+        source.kaipage4 = headItem.get改頁4();
+        source.kaipage5 = headItem.get改頁5();
         source.listUpper_1 = headItem.get被保険者番号();
         source.listUpper_2 = headItem.getカナ氏名();
         source.listUpper_3 = headItem.get性別();
@@ -67,6 +67,7 @@ class KyokaisoKanriMasterListHeaderEditor implements IKyokaisoKanriMasterListEdi
         source.listLower_8 = headItem.get食費軽減後負担額();
         source.listLower_9 = headItem.get高額ｻｰﾋﾞｽ費減額後上限額();
         source.listLower_10 = headItem.get保険料納付減額後保険料段階();
+        source.choikiCode = headItem.get町域コード();
         return source;
     }
 }

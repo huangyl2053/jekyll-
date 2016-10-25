@@ -249,9 +249,11 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         NinteishaListSakuseiResultCsvEntity csvEntity = resultEntity;
         if (SetaiHyoji.表示する.equals(parameter.get世帯表示())) {
             for (SeteiYouEntity entity : t.get世帯員リスト()) {
-                IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
-                csvEntity.set世帯員氏名(kojin.get名称().getName().getColumnValue());
-                csvEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
+                if (entity.get識別コード() != null && !entity.get識別コード().isEmpty()) {
+                    IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
+                    csvEntity.set世帯員氏名(kojin.get名称().getName().getColumnValue());
+                    csvEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
+                }
                 if (entity.get課税区分() != null && KazeiKubun.課税.getコード().equals(entity.get課税区分())) {
                     csvEntity.set世帯員課税区分(課);
                 }
@@ -270,9 +272,11 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         NinteishaListSakuseiCsvEntity csvEntity = resultEntity;
         if (SetaiHyoji.表示する.equals(parameter.get世帯表示())) {
             for (SeteiYouEntity entity : t.get世帯員リスト()) {
-                IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
-                csvEntity.set世帯員氏名(kojin.get名称().getName().getColumnValue());
-                csvEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
+                if (entity.get識別コード() != null && !entity.get識別コード().isEmpty()) {
+                    IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
+                    csvEntity.set世帯員氏名(kojin.get名称().getName().getColumnValue());
+                    csvEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
+                }
                 if (entity.get課税区分() != null && KazeiKubun.課税.getコード().equals(entity.get課税区分())) {
                     csvEntity.set世帯員課税区分(課);
                 }

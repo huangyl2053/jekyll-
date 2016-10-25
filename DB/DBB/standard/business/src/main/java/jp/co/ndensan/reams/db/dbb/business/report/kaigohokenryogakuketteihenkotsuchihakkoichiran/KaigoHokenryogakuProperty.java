@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 帳票設計_DBBRP43002_5_介護保険料額変更通知書発行一覧表 KaigoHokenryogakuProperty
  *
- * @reamsid_L DBB-0780-120 yangchenbing
+ * @reamsid_L DBB-0780-120 zhouchuanlin
  */
 public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryogakuSource> {
 
@@ -25,7 +25,7 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
      * コンストラクタです。
      */
     public KaigoHokenryogakuProperty() {
-        super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200012.getReportId());
+        super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200030.getReportId());
     }
 
     /**

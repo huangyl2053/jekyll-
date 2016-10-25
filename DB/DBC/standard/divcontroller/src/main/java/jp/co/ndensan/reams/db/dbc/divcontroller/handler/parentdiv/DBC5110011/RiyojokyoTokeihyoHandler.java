@@ -75,7 +75,7 @@ public class RiyojokyoTokeihyoHandler {
 
         if (DonyuKeitaiCode.事務単一.getCode().equals(div.getChikushichosonSelect().get導入形態コード())) {
             batchParamter.setSentakuTaisyoKubun(div.getChikushichosonSelect().get選択対象());
-            batchParamter.setSentakuTaisyoList(div.getChikushichosonSelect().get選択結果());
+            batchParamter.setSentakuTaisyoMap(div.getChikushichosonSelect().get選択結果());
             batchParamter.setShichosonCode(Code.EMPTY);
             batchParamter.setShichosonMeisho(RString.EMPTY);
             batchParamter.setKyoShichosonCode(Code.EMPTY);
@@ -86,7 +86,7 @@ public class RiyojokyoTokeihyoHandler {
             batchParamter.setSentakuTaisyoKubun(RString.EMPTY);
             Map<RString, RString> map = new HashMap<>();
             map.put(RString.EMPTY, RString.EMPTY);
-            batchParamter.setSentakuTaisyoList(map);
+            batchParamter.setSentakuTaisyoMap(map);
             batchParamter.setShichosonCode(new Code(div.getChikushichosonSelect().get市町村コード()));
             batchParamter.setShichosonMeisho(div.getChikushichosonSelect().get市町村名称());
             batchParamter.setKyoShichosonCode(new Code(div.getChikushichosonSelect().get旧市町村コード()));

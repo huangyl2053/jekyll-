@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbd.entity.report.dbd200007;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
@@ -338,6 +339,7 @@ public class ShiharaiHohoHenkoKanriIchiranReportSource implements IReportSource 
     public RString shimeiKana;
     @ReportItem(name = "shichosonCode", order = 150)
     public RString shichosonCode;
+    @ReportExpandedInfo(code = "003", name = "被保険者番号")
     @ReportItem(name = "hihokenshaNo", order = 151)
     public RString hihokenshaNo;
 // </editor-fold>

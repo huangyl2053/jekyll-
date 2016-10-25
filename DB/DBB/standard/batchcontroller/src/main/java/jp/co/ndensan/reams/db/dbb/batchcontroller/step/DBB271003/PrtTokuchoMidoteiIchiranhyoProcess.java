@@ -222,6 +222,8 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
                 NenkinHokenshaHantei.createInstance().is厚労省(entity.getTokubetsuChoshuGimushaCode()),
                 entity.getFuichiRiyuCode()
         );
+        target.setHihokenshaNo(entity.getHihokenshaNo());
+        target.setShichosonCode(entity.getGenLasdecCode().code市町村RString());
         TokubetsuChoshuMidoteiIchiranReport report = new TokubetsuChoshuMidoteiIchiranReport(
                 導入団体クラス, 出力順項目リスト, pageBreakKeys, target, parameter.get特別徴収開始月());
         report.writeBy(reportSourceWriter);

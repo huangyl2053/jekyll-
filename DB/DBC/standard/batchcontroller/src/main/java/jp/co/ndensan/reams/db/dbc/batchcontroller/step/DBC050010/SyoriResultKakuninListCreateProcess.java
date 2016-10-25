@@ -20,11 +20,12 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 処理結果確認リスト作成_Process処理クラスです．
@@ -79,7 +80,7 @@ public class SyoriResultKakuninListCreateProcess extends BatchProcessBase<ShoriK
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        //manager.spool(eucFilePath);
+        manager.spool(eucFilePath);
     }
 
     private void edit処理結果確認リスト情報(ShoriKekkaKakuninListCsvEntity eucCsvEntity, ShoriKekkaKakuninListTempTableEntity t, int count) {
@@ -88,8 +89,10 @@ public class SyoriResultKakuninListCreateProcess extends BatchProcessBase<ShoriK
         } else {
             eucCsvEntity.set作成日時(RString.EMPTY);
         }
+        if (t.getErrorKubun() != null && !t.getErrorKubun().isEmpty()) {
+            eucCsvEntity.set処理名(FurikomiDataSakusei_ErrorKubun.get処理名(t.getErrorKubun()));
+        }
 
-        eucCsvEntity.set処理名(FurikomiDataSakusei_ErrorKubun.get処理名(t.getErrorKubun()));
         if (t.getShoKisaiHokenshaNo() != null) {
             eucCsvEntity.set証記載保険者番号(t.getShoKisaiHokenshaNo().value());
         }
@@ -104,11 +107,13 @@ public class SyoriResultKakuninListCreateProcess extends BatchProcessBase<ShoriK
     private RString editシステム作成日時() {
         StringBuilder builder = new StringBuilder();
 
-        FlexibleDate システム日付 = FlexibleDate.getNowDate();
-        RString 編集後日付 = システム日付.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+        RDateTime システム日時 = RDateTime.now();
+        RString 編集後日付 = システム日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
+        RString 作成時 = システム日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
 
         builder.append(編集後日付);
+        builder.append(作成時);
         builder.append(RString.FULL_SPACE);
         builder.append(作成);
         return new RString(builder.toString());

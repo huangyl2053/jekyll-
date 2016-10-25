@@ -125,10 +125,9 @@ public class ShokkenTorikeshiIchibuSoshituValidationHandler {
         return viewControls;
     }
 
-    private List<ViewControl> getみなし更新() {
-        List<ViewControl> viewControls = new ArrayList();
-        // TODO. みなし更新 わからない。
-        return viewControls;
-    }
-
+//    private List<ViewControl> getみなし更新() {
+//        List<ViewControl> viewControls = new ArrayList();
+//        // TODO. みなし更新 わからない。
+//        return viewControls;
+//    }
 }

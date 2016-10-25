@@ -9,17 +9,15 @@ import jp.co.ndensan.reams.db.dba.definition.mybatisprm.juminkirokuidojohotoroku
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 住民異動連携情報登録【広域保険者用】のProcessParameterのパラメータ。
  *
  * @reamsid_L DBA-1390-010 wanghuafeng
  */
+@lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-@Getter
-@Setter
 public class JuminkirokuIdojohoTorokuKoikiProcessParameter implements IBatchProcessParameter {
 
     private YMDHMS syorinichiji;
@@ -29,11 +27,11 @@ public class JuminkirokuIdojohoTorokuKoikiProcessParameter implements IBatchProc
      * コンストラクタ。
      *
      * @param syorinichiji 処理日時
-     * @param shichosoncode 市町村コード
+     * @param shichosonCode 市町村コード
      */
     public JuminkirokuIdojohoTorokuKoikiProcessParameter(
             YMDHMS syorinichiji,
-            RString shichosoncode) {
+            RString shichosonCode) {
         this.syorinichiji = syorinichiji;
         this.shichosonCode = shichosonCode;
     }

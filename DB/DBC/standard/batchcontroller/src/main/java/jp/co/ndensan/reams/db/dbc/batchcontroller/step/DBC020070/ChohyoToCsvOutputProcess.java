@@ -384,26 +384,23 @@ public class ChohyoToCsvOutputProcess extends BatchKeyBreakBase<ShikyugakuUpdate
             csvEntity.set七五に係る支給額(ReportKomokuEditorUtil.金額1(五に係る支給額_事業高額合算小計));
             csvEntity.set八三七(ReportKomokuEditorUtil.金額1(五に係る支給額_事業高額合算小計.add(三一にかかる支給額_事業合算小計)));
         } else {
-            csvEntity.set一七十歳以上負担額(entity.getShikyugakuMeisai_over70_Futangaku());
-            csvEntity.set三一にかかる支給額(entity.getShikyugakuMeisai_over70_Shikyugaku());
-            csvEntity.set四七十歳未満負担額(entity.getShikyugakuMeisai_under70_Futangaku());
-            csvEntity.set五四一三(ReportKomokuEditorUtil.金額1(getDecimal2(entity.getShikyugakuMeisai_over70_Shikyugaku()).minusToZero().
-                    add(getDecimal2(entity.getShikyugakuMeisai_over70_Futangaku())).
-                    add(getDecimal2(entity.getShikyugakuMeisai_under70_Futangaku()))));
-            csvEntity.set七五に係る支給額(entity.getShikyugakuMeisai_under70_Shikyugaku());
-            csvEntity.set八三七(ReportKomokuEditorUtil.金額1(getDecimal2(entity.getShikyugakuMeisai_over70_Shikyugaku()).
-                    add(getDecimal2(entity.getShikyugakuMeisai_under70_Shikyugaku()))));
+            csvEntity.set一七十歳以上負担額(ReportKomokuEditorUtil.金額1(getDecimal2(entity.getShikyugakuMeisai_over70_Futangaku())));
+            csvEntity.set三一にかかる支給額(ReportKomokuEditorUtil.金額1(getDecimal2(entity.getShikyugakuMeisai_over70_Shikyugaku())));
+            csvEntity.set四七十歳未満負担額(ReportKomokuEditorUtil.金額1(getDecimal2(entity.getShikyugakuMeisai_under70_Futangaku())));
+            csvEntity.set五四一三(ReportKomokuEditorUtil.金額1(getDecimal2(entity.getShikyugakuMeisai_futangaku())));
+            csvEntity.set七五に係る支給額(ReportKomokuEditorUtil.金額1(getDecimal2(entity.getShikyugakuMeisai_under70_Shikyugaku())));
+            csvEntity.set八三七(ReportKomokuEditorUtil.金額1(getDecimal2(entity.getShikyugakuMeisai_shikyugaku())));
         }
         csvWriter.writeLine(csvEntity);
     }
 
     private void set区分２３４(ShikyugakuUpdateTempEntity entity, GassanJigyobunShikyugakuKeisanKekkaIchiranEntity csvEntity) {
-        csvEntity.set保険制度コード(entity.getShikyugakuMeisai_hokenSeidoCode());
+        csvEntity.set支給額明細_保険制度コード(entity.getShikyugakuMeisai_hokenSeidoCode());
         csvEntity.set内訳保険者番号(entity.getShikyugakuMeisai_uchiwakeHokenshaNo());
         csvEntity.set国保_被保険者証記号(entity.getShikyugakuMeisai_kokuho_HihokenshaShoKigo());
         csvEntity.set被保険者_証番号(entity.getShikyugakuMeisai_hiHokenshaShoNo());
         csvEntity.set内訳保険者名(entity.getShikyugakuMeisai_uchiwakeHokenshaMei());
-        csvEntity.set自己負担額証明書整理番号(entity.getShikyugakuMeisai_jikoFutanSeiriNo());
+        csvEntity.set支給額明細_自己負担額証明書整理番号(entity.getShikyugakuMeisai_jikoFutanSeiriNo());
         csvEntity.set対象者氏名_漢字(entity.getShikyugakuMeisai_taishoshaShimei());
         csvEntity.set二七十歳以上按分率(entity.getShikyugakuMeisai_over70_AmbunRitsu());
         csvEntity.set按分率(entity.getShikyugakuMeisai_ambunRitsu());

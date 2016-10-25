@@ -230,6 +230,10 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess extends BatchProc
         if (isCSV出力) {
             manager.spool(csvFilePath1, log);
         }
+        if (is帳票出力) {
+            AccessLogUUID reportLog = AccessLogger.logReport(personalDataList);
+            batchReportWrite.addPrivacy(reportLog);
+        }
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
         RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount()));

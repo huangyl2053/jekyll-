@@ -29,6 +29,10 @@ public class KogakuGassanShikyuGakuKeisanKekkaManager {
     private final DbT3072KogakuGassanShikyuGakuKeisanKekkaDac dac;
     private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
     private static final RString メッセージ_対象年度 = new RString("対象年度");
+    private static final RString メッセージ_証記載保険者番号 = new RString("証記載保険者番号");
+    private static final RString メッセージ_支給申請書整理番号 = new RString("支給申請書整理番号");
+    private static final RString メッセージ_履歴番号 = new RString("支給申請書整理番号");
+    private static final RString メッセージ_高額合算支給額計算結果 = new RString("支給申請書整理番号");
 
     /**
      * コンストラクタです。
@@ -65,9 +69,9 @@ public class KogakuGassanShikyuGakuKeisanKekkaManager {
             int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_対象年度.toString()));
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_証記載保険者番号.toString()));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_支給申請書整理番号.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_履歴番号.toString()));
 
         DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity = dac.selectByKey(
                 被保険者番号,
@@ -107,7 +111,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaManager {
      */
     @Transaction
     public boolean save高額合算支給額計算結果(KogakuGassanShikyuGakuKeisanKekka 高額合算支給額計算結果) {
-        requireNonNull(高額合算支給額計算結果, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算支給額計算結果"));
+        requireNonNull(高額合算支給額計算結果, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_高額合算支給額計算結果.toString()));
         if (!高額合算支給額計算結果.hasChanged()) {
             return false;
         }
@@ -148,7 +152,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaManager {
         List<KogakuGassanShikyuGakuKeisanKekka> businessList = new ArrayList<>();
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_対象年度.toString()));
-        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_支給申請書整理番号.toString()));
         for (DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity : dac.selectAll()) {
             entity.initializeMd5();
             businessList.add(new KogakuGassanShikyuGakuKeisanKekka(entity));
@@ -176,8 +180,8 @@ public class KogakuGassanShikyuGakuKeisanKekkaManager {
         List<KogakuGassanShikyuGakuKeisanKekka> businessList = new ArrayList<>();
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_対象年度.toString()));
-        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_支給申請書整理番号.toString()));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_証記載保険者番号.toString()));
         for (DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity : dac.selectByKey(被保険者番号,
                 対象年度,
                 証記載保険者番号,
@@ -203,7 +207,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaManager {
             RString 支給申請書整理番号) {
         List<KogakuGassanShikyuGakuKeisanKekka> businessList = new ArrayList<>();
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
-        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_支給申請書整理番号.toString()));
         for (DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity : dac.selectBySeiriNo(被保険者番号,
                 支給申請書整理番号)) {
             entity.initializeMd5();

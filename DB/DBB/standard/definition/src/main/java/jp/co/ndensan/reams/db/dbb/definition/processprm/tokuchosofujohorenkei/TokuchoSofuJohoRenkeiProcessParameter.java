@@ -29,6 +29,7 @@ public class TokuchoSofuJohoRenkeiProcessParameter implements IBatchProcessParam
 
     private Map<RString, RString> ファイルOutputMap;
     private Map<RString, Integer> レコード件数OutputMap;
+    private Map<RString, RString> 作成年月日OutputMap;
 
     /**
      * 特徴送付情報連携のMybitisParameterを作成する。
