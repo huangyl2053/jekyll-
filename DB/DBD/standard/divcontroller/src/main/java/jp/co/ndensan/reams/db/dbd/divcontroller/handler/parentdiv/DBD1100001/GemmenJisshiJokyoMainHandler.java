@@ -137,10 +137,14 @@ public class GemmenJisshiJokyoMainHandler {
             div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().setDisabled(true);
             div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(true);
             div.getGemmenJisshiJokyoJoken().getRadKijunBi().setSelectedKey(new RString("1"));
+            div.getRadShutsuryokuChohyo().clearSelectedItem();
+            div.getRadShutsuryokuChohyo().setSelectedKey(new RString("1"));
         } else {
             div.getGemmenJisshiJokyoJoken().getRadKijunBi().setDisabled(false);
             div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().setDisabled(false);
             div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(false);
+            div.getRadShutsuryokuChohyo().clearSelectedItem();
+            div.getRadShutsuryokuChohyo().setSelectedKey(new RString("2"));
             if ("1".equals(基準日区分.toString())) {
                 div.getGemmenJisshiJokyoJoken().getRadKijunBi().setSelectedKey(new RString("1"));
                 div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().clearSelectedItem();
