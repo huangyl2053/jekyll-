@@ -164,6 +164,8 @@ public final class JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter implemen
      * @param 旧市町村区分 旧市町村区分
      * @param 旧市町村コードリスト 旧市町村コードリスト
      * @param プリントコントロール区分 プリントコントロール区分
+     * @param 集計開始年月 集計開始年月
+     * @param 集計終了年月 集計終了年月
      * @param 年度 年度
      * @param 作成日時 作成日時
      * @param 処理日時 処理日時
@@ -179,7 +181,9 @@ public final class JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter implemen
             RString プリントコントロール区分,
             RString 年度,
             RString 作成日時,
-            RString 処理日時) {
+            RString 処理日時,
+            RString 集計開始年月,
+            RString 集計終了年月) {
         List<RString> 市町村コードリスト = new ArrayList<>();
         市町村コードリスト.add(市町村コード);
         if (市町村区分_構成市町村.equals(構成市町村区分)) {
@@ -199,8 +203,8 @@ public final class JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter implemen
             基準日時 = 作成日時;
         }
         return new JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter(
-                市町村コードリスト, RString.EMPTY, null, null, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, new RString("DBU"), Syorimei.年報報告一般状況１_１１.get名称(),
+                市町村コードリスト, RString.EMPTY, null, null, RString.EMPTY,
+                集計開始年月, 集計終了年月, new RString("DBU"), Syorimei.年報報告一般状況１_１１.get名称(),
                 new RString("0099"), 年度, 基準年月日, 基準日時);
     }
 
