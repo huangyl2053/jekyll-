@@ -60,7 +60,7 @@ public class KanendoFuka {
                 && 過年度賦課基準日時.get基準日時() != null && !過年度賦課基準日時.get基準日時().isEmpty()
                 && 過年度賦課確定基準日時.get基準日時().isBefore(過年度賦課基準日時.get基準日時()))
                 || ((過年度賦課確定基準日時.get基準日時() == null || 過年度賦課確定基準日時.get基準日時().isEmpty())
-                || (過年度賦課基準日時.get基準日時() == null) || 過年度賦課確定基準日時.get基準日時().isEmpty())) {
+                || (過年度賦課基準日時.get基準日時() == null || 過年度賦課確定基準日時.get基準日時().isEmpty()))) {
             throw new ApplicationException(DbbErrorMessages.前回過年度賦課確定未処理.getMessage());
         }
         List<ShoriDateKanri> 処理状況list = HonsanteiIdoKanendo.createInstance().getShoriJokyo(調定年度);
