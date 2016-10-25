@@ -161,7 +161,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         getHandler(div).set月報報告_一般状況12_14_償還分();
         getHandler(div).set月報報告_保険給付決定_償還分();
         getHandler(div).set月報報告_保険給付決定_高額分();
-        getHandler(div).set月報報告_保険給付決定_高額分算分();
+        getHandler(div).set月報報告_保険給付決定_高額合算分();
         getHandler(div).setチェックボックス設定();
         return ResponseData.of(div).respond();
     }

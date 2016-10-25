@@ -791,14 +791,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         if (月報報告_保険給付決定_高額分 != null) {
             if (div.getTxtShukeiYM6().getValue() != null && !div.getTxtShukeiYM6().getValue().isEmpty()
                     && (!isNullOrEmpty月報報告_年度(月報報告_保険給付決定_高額分))) {
-                div.getTxtShukeiYM6().setReadOnly(false);
-                div.getTxtShukeiYM6().setValue(new FlexibleDate(月報報告_保険給付決定_高額分.get年度().toDateString()
-                        .concat(月報報告_保険給付決定_高額分.get処理枝番().substring(2))));
-                if (div.getTxtShukeiYM6().getValue().isBefore(new FlexibleDate("平成180601"))) {
-                    div.getTxtShukeiYM6().setDisabled(true);
-                } else {
-                    div.getTxtShukeiYM6().setDisabled(false);
-                }
+                set保険給付決定_高額分_処理日付有り(月報報告_保険給付決定_高額分);
             } else {
                 div.getTxtShukeiYM6().setDisabled(true);
                 div.getTxtShukeiYM6().setReadOnly(true);
@@ -809,11 +802,11 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
             }
         }
     }
-
+    
     /**
      * 「月報報告 保険給付決定 高額合算分」の処理日付管理情報を取得する。
      */
-    public void set月報報告_保険給付決定_高額分算分() {
+    public void set月報報告_保険給付決定_高額合算分() {
         RDate 過去報告年月_Date = new RDate(div.getTblJikkoTani().getDdlKakoHokokuYM().getSelectedValue().toString());
         RString 処理枝番 = new RString("00").concat(過去報告年月_Date.minusMonth(2).getYearMonth().toDateString().substring(月別));
         ShoriDateKanri 月報報告_保険給付決定_高額合算分 = shoriDateKanriManager.get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告,
@@ -822,14 +815,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         if (月報報告_保険給付決定_高額合算分 != null) {
             if (div.getTxtShukeiYM7().getValue() != null && !div.getTxtShukeiYM7().getValue().isEmpty()
                     && (!isNullOrEmpty月報報告_年度(月報報告_保険給付決定_高額合算分))) {
-                div.getTxtShukeiYM7().setReadOnly(false);
-                div.getTxtShukeiYM7().setValue(new FlexibleDate(月報報告_保険給付決定_高額合算分.get年度().toDateString()
-                        .concat(月報報告_保険給付決定_高額合算分.get処理枝番().substring(2))));
-                if (div.getTxtShukeiYM7().getValue().isBefore(new FlexibleDate("平成240601"))) {
-                    div.getTxtShukeiYM7().setDisabled(true);
-                } else {
-                    div.getTxtShukeiYM7().setDisabled(false);
-                }
+                set保険給付決定_高額合算分_処理日付有り(月報報告_保険給付決定_高額合算分);
             } else {
                 div.getTxtShukeiYM7().setDisabled(true);
                 div.getTxtShukeiYM7().setReadOnly(true);
@@ -841,6 +827,28 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         }
     }
 
+    private void set保険給付決定_高額分_処理日付有り(ShoriDateKanri 月報報告_保険給付決定_高額分) {
+        div.getTxtShukeiYM6().setReadOnly(false);
+        div.getTxtShukeiYM6().setValue(new FlexibleDate(月報報告_保険給付決定_高額分.get年度().toDateString()
+                .concat(月報報告_保険給付決定_高額分.get処理枝番().substring(2))));
+        if (div.getTxtShukeiYM6().getValue().isBefore(new FlexibleDate("平成180601"))) {
+            div.getTxtShukeiYM6().setDisabled(true);
+        } else {
+            div.getTxtShukeiYM6().setDisabled(false);
+        }  
+    }    
+    
+    private void set保険給付決定_高額合算分_処理日付有り(ShoriDateKanri 月報報告_保険給付決定_高額合算分) {
+        div.getTxtShukeiYM7().setReadOnly(false);
+        div.getTxtShukeiYM7().setValue(new FlexibleDate(月報報告_保険給付決定_高額合算分.get年度().toDateString()
+                .concat(月報報告_保険給付決定_高額合算分.get処理枝番().substring(2))));
+        if (div.getTxtShukeiYM7().getValue().isBefore(new FlexibleDate("平成240601"))) {
+            div.getTxtShukeiYM7().setDisabled(true);
+        } else {
+            div.getTxtShukeiYM7().setDisabled(false);
+        }
+    }
+    
     private boolean isNullOrEmpty月報報告_基準日時(ShoriDateKanri 月報報告) {
         if (月報報告.get基準日時() == null || 月報報告.get基準日時().isEmpty()) {
             return true;
