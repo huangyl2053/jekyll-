@@ -58,6 +58,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource implements IRep
     @ReportItem(name = "hihokenshaName", order = 19)
     public RString hihokenshaName;
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
+    @ReportItem(name = "hihokenshaNo", length = 1, order = 20)
+    public RString hihokenshaNo;
     @ReportItem(name = "hihokenshaNo1", length = 1, order = 20)
     public RString hihokenshaNo1;
     @ReportItem(name = "hihokenshaNo2", length = 1, order = 21)
