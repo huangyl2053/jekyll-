@@ -34,7 +34,9 @@ public class SeikyuMeisaiItiziDataProcess extends BatchProcessBase<SeikyuMeisaiI
     private KaishuriyushoSeikyushoShinseishoProcessParameter processParameter;
     @BatchWriter
     private BatchPermanentTableWriter<DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity> dbT3095EntityWriter;
+    @BatchWriter
     private BatchPermanentTableWriter<DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity> dbT3096EntityWriter;
+    @BatchWriter
     BatchEntityCreatedTempTableWriter 請求明細一時ファイルB;
 
     @Override
