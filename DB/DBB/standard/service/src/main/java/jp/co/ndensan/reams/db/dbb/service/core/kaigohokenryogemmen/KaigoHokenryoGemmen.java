@@ -162,7 +162,8 @@ public class KaigoHokenryoGemmen {
         boolean 決定区分 = 画面情報param.is決定区分();
         int 履歴番号 = 減免情報.toEntity().getRirekiNo();
         boolean 登録flag = false;
-        if (((画面状況_新規.equals(状況) || 画面状況_申請中.equals(状況)) && 決定区分)
+        if (((画面状況_新規.equals(状況) || 画面状況_申請中.equals(状況))
+                && !画面情報param.get決定日().isEmpty() && 画面情報param.get決定日() != null && 決定区分)
                 || (画面状況_決定済.equals(状況) && 決定区分)
                 || (画面状況_決定済.equals(状況) && !決定区分 && 定値_イチR.equals(減免情報.get減免状態区分()))) {
             設定登録用賦課情報(減免情報, 画面情報param);
