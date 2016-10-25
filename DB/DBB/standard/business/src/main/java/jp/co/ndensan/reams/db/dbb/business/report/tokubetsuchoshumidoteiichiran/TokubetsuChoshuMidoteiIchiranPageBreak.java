@@ -49,9 +49,6 @@ public class TokubetsuChoshuMidoteiIchiranPageBreak extends PageBreaker<Tokubets
         } else if (this.breakKeysList.contains(TokubetsuChoshuMidoteiIchiranOutputOrder.市町村コード.get項目ID())
                 && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
             return true;
-        } else if (this.breakKeysList.contains(TokubetsuChoshuMidoteiIchiranOutputOrder.被保険者番号.get項目ID())
-                && !currentSource.getSource().hihokenshaNo.equals(nextSource.getSource().hihokenshaNo)) {
-            return true;
         } else if (this.breakKeysList.contains(TokubetsuChoshuMidoteiIchiranOutputOrder.年金コード.get項目ID())
                 && !currentSource.getSource().nenkinCode.equals(nextSource.getSource().nenkinCode)) {
             return true;
