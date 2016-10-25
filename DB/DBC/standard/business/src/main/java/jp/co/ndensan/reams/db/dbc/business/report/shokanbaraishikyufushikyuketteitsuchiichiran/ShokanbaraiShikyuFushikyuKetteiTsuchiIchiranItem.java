@@ -16,7 +16,6 @@ import lombok.Setter;
  *
  */
 @Getter
-
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
@@ -110,6 +109,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
      * @param kanaMeisho 氏名５０音カナ
      * @param shoKisaiHokenshaNo 証記載保険者番号
      * @param ketteiTsuchiNo 決定通知番号
+     * @param shinseishaKubun 申請者区分
      */
     public ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem(RString printTimeStamp,
             RString hokenshaNo, RString hokenshaName, RString shutsuryokujun1, RString shutsuryokujun2,
