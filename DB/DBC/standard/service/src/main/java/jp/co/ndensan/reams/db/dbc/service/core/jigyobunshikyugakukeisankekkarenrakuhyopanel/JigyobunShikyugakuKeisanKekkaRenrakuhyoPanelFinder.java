@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.jigyobunshikyugakukeisankekkarenrakuhyopanel;
 
+import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanResultEntity;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuPanelListParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanPanelEntity;
@@ -63,12 +65,29 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelFinder {
      *
      * @return List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
      */
-    public List<JigyobunShikyugakuKeisanPanelEntity> getJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelList(
+    public List<JigyobunShikyugakuKeisanResultEntity> getJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelList(
             JigyobunShikyugakuPanelListParameter parameter) {
 
         IJigyobunShikyugakuKeisanPanelMapper mapper = mapperProvider.create(
                 IJigyobunShikyugakuKeisanPanelMapper.class);
-        return mapper.get対象データ(parameter);
+        List<JigyobunShikyugakuKeisanPanelEntity> list = mapper.get対象データ(parameter);
+        List<JigyobunShikyugakuKeisanResultEntity> resultList = new ArrayList<>();
+        if (list != null) {
+            for (JigyobunShikyugakuKeisanPanelEntity entity : list) {
+                JigyobunShikyugakuKeisanResultEntity resultEntity = new JigyobunShikyugakuKeisanResultEntity();
+                resultEntity.setTaishoNendo(entity.getTaishoNendo());
+                resultEntity.setSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD(entity.getSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD());
+                resultEntity.setShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo());
+                resultEntity.setShikyuShinseishoSeiriNo(entity.getShikyuShinseishoSeiriNo());
+                resultEntity.setRirekiNo(entity.getRirekiNo());
+                resultEntity.setHokenSeidoCode(entity.getHokenSeidoCode());
+                resultEntity.setHihokenshaNo(entity.getHihokenshaNo());
+                resultEntity.setDbt3173Entity(entity.getDbt3173Entity());
+                resultEntity.setDbt3172Entity(entity.getDbt3172Entity());
+                resultList.add(resultEntity);
+            }
+        }
+        return resultList;
     }
 
     /**
@@ -79,12 +98,29 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelFinder {
      *
      * @return List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult>
      */
-    public List<JigyobunShikyugakuKeisanPanelEntity> getJigyobunShikyugakuKeisanKekkaRenrakuhyoPanel(
+    public List<JigyobunShikyugakuKeisanResultEntity> getJigyobunShikyugakuKeisanKekkaRenrakuhyoPanel(
             JigyobunShikyugakuPanelListParameter parameter) {
 
         IJigyobunShikyugakuKeisanPanelMapper mapper = mapperProvider.create(
                 IJigyobunShikyugakuKeisanPanelMapper.class);
-        return mapper.get処理対象データ(parameter);
+        List<JigyobunShikyugakuKeisanPanelEntity> list = mapper.get処理対象データ(parameter);
+        List<JigyobunShikyugakuKeisanResultEntity> resultList = new ArrayList<>();
+        if (list != null) {
+            for (JigyobunShikyugakuKeisanPanelEntity entity : list) {
+                JigyobunShikyugakuKeisanResultEntity resultEntity = new JigyobunShikyugakuKeisanResultEntity();
+                resultEntity.setTaishoNendo(entity.getTaishoNendo());
+                resultEntity.setSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD(entity.getSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD());
+                resultEntity.setShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo());
+                resultEntity.setShikyuShinseishoSeiriNo(entity.getShikyuShinseishoSeiriNo());
+                resultEntity.setRirekiNo(entity.getRirekiNo());
+                resultEntity.setHokenSeidoCode(entity.getHokenSeidoCode());
+                resultEntity.setHihokenshaNo(entity.getHihokenshaNo());
+                resultEntity.setDbt3173Entity(entity.getDbt3173Entity());
+                resultEntity.setDbt3172Entity(entity.getDbt3172Entity());
+                resultList.add(resultEntity);
+            }
+        }
+        return resultList;
     }
 
     /**
