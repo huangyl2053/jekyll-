@@ -154,7 +154,12 @@ public class FutangakuTashoshaInsertProcess extends BatchProcessBase<Kogakugassa
         } else if (entity.getTounen_12_JikoFutanGaku() != null
                 && entity.getTounen_12_JikoFutanGaku().compareTo(entity.getTounen_12_sumi_JikoFutanGaku()) != INT_ZERO) {
             return 補正;
-        } else if (entity.getYokunen_01_JikoFutanGaku() != null
+        }
+        return edit自己負担額補正実施Sub(entity);
+    }
+
+    private RString edit自己負担額補正実施Sub(KogakugassanJikofutangakuInfoHoseiTempEntity entity) {
+        if (entity.getYokunen_01_JikoFutanGaku() != null
                 && entity.getYokunen_01_JikoFutanGaku().compareTo(entity.getYokunen_01_sumi_JikoFutanGaku()) != INT_ZERO) {
             return 補正;
         } else if (entity.getYokunen_02_JikoFutanGaku() != null
@@ -178,6 +183,7 @@ public class FutangakuTashoshaInsertProcess extends BatchProcessBase<Kogakugassa
         } else {
             return RString.EMPTY;
         }
+
     }
 
     private RString edit高額支給額補正実施(KogakugassanJikofutangakuInfoHoseiTempEntity entity) {
@@ -208,7 +214,12 @@ public class FutangakuTashoshaInsertProcess extends BatchProcessBase<Kogakugassa
         } else if (entity.getTounen_12_Under_70KogakuShikyuGaku() != null
                 && entity.getTounen_12_Under_70KogakuShikyuGaku().compareTo(entity.getTounen_12_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
             return 補正;
-        } else if (entity.getYokunen_01_Under_70KogakuShikyuGaku() != null
+        }
+        return edit高額支給額補正実施Sub(entity);
+    }
+
+    private RString edit高額支給額補正実施Sub(KogakugassanJikofutangakuInfoHoseiTempEntity entity) {
+        if (entity.getYokunen_01_Under_70KogakuShikyuGaku() != null
                 && entity.getYokunen_01_Under_70KogakuShikyuGaku().compareTo(entity.getYokunen_01_sumi_under_70KogakuShikyuGaku()) != INT_ZERO) {
             return 補正;
         } else if (entity.getYokunen_02_Under_70KogakuShikyuGaku() != null

@@ -28,6 +28,10 @@ public class FutangendogakuNinteiShinseishoBodyItem {
     private final RString hihokenJusho;
     private final RString chuibun;
     private final RString ninshoshaYakushokuMei;
+    private final RString sisetuYubinNo;
+    private final RString sisetuTelNo;
+    private final RString sisetuJusho;
+    private final RString sisetuName;
 
     /**
      * インスタンスを生成します。
@@ -43,6 +47,10 @@ public class FutangendogakuNinteiShinseishoBodyItem {
      * @param hihokenshaTelNo 電話番号
      * @param shiseibun 申請文
      * @param chuibun 注意文
+     * @param sisetuYubinNo 施設郵便番号
+     * @param sisetuTelNo 施設電話番号
+     * @param sisetuJusho 施設住所
+     * @param sisetuName 施設名称
      */
     public FutangendogakuNinteiShinseishoBodyItem(
             RString shiseibun,
@@ -55,7 +63,11 @@ public class FutangendogakuNinteiShinseishoBodyItem {
             RString hihokenshaYubinNo,
             RString hihokenJusho,
             RString chuibun,
-            RString ninshoshaYakushokuMei
+            RString ninshoshaYakushokuMei,
+            RString sisetuYubinNo,
+            RString sisetuTelNo,
+            RString sisetuJusho,
+            RString sisetuName
     ) {
         this.shiseibun = shiseibun;
         this.hihokenshaNameKana = hihokenshaNameKana;
@@ -68,5 +80,9 @@ public class FutangendogakuNinteiShinseishoBodyItem {
         this.hihokenJusho = hihokenJusho;
         this.chuibun = chuibun;
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
+        this.sisetuYubinNo = sisetuYubinNo;
+        this.sisetuTelNo = sisetuTelNo;
+        this.sisetuJusho = sisetuJusho;
+        this.sisetuName = sisetuName;
     }
 }

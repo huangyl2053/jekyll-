@@ -6,16 +6,23 @@
     <select resultOrdered="true" id="get給付費通知減免補正一覧"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufutsuchigenmenhosei.KyufuTsuchiGenmenHoseiMapperParameter" 
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufutsuchigenmenhosei.KyufuTsuchiGenmenHoseiEntity" fetchSize="500">
-        SELECT T1."shokisaiHokenshaNo",
-        T1."hiHokenshaNo",
+        SELECT 
+        T1."shokisaiHokenshaNo" AS "shoKisaiHokenshaNo",
+        T1."hiHokenshaNo" AS hihokenshaNo,
         T1."serviceTeikyoYM",
         T2."jigyoshaName",
         T1."jigyoshoNo",
         T2."jigyoshaName",
         T1."serviceShuruiCode",
         T3."serviceShuruiMeisho",
+        T1."riyoshaFutangaku",
         T1."serviceHiyoTotal",
-        T1."riyoshaFutangaku"
+        PSM."kanaMeisho" AS kanaMeisho,			
+        PSM."setaiCode" AS setaiCode,
+        PSM."yubinNo" AS yubinNo,
+        PSM."choikiCode" AS choikiCode,
+        PSM."gyoseikuCode" AS gyoseikuCode,		
+        CASE WHEN T4."koikinaiJushochiTokureiFlag" = '1' THEN T4."koikinaiTokureiSochimotoShichosonCode" ELSE T4."shichosonCode" END AS shichosonCode
         FROM rgdb."DbT3067KyufuhiTuchiHosei" AS T1
         LEFT JOIN (
         SELECT * FROM (
@@ -38,10 +45,14 @@
         WHERE S2."rank_number2" = 1) AS T3
         ON T1."serviceShuruiCode" = T3."serviceShuruiCd"
         LEFT JOIN (
-        SELECT 
-        rgdb."DbV1001HihokenshaDaicho"."hihokenshaNo",
-        rgdb."DbV1001HihokenshaDaicho"."shikibetsuCode"           
-        FROM rgdb."DbV1001HihokenshaDaicho") AS T4
+        SELECT
+        rgdb."DbV1001HihokenshaDaicho"."hihokenshaNo"
+      , rgdb."DbV1001HihokenshaDaicho"."shikibetsuCode" 
+      ,rgdb."DbV1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" 
+      ,rgdb."DbV1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" 
+      ,rgdb."DbV1001HihokenshaDaicho"."shichosonCode"
+        FROM
+      rgdb."DbV1001HihokenshaDaicho") AS T4
         ON T1."hiHokenshaNo" = T4."hihokenshaNo"
         LEFT JOIN 
         rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
@@ -52,5 +63,6 @@
         AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{サービス終了年月}
         AND T1."shokisaiHokenshaNo" IN 
         <foreach collection="市町村コードList" item="市町村コード" open="(" separator="," close=")"> #{市町村コード} </foreach>
+        ${出力順}
     </select>
 </mapper>

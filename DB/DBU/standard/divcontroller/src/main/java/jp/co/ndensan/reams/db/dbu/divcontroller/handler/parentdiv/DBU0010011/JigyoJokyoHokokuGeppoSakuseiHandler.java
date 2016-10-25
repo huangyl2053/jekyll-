@@ -1052,12 +1052,11 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
             param.setHoukokuNengetu(div.getTxtHokokuYM().getValue().getYearMonth().toDateString());
             param.setHokokuNendo(div.getTxtHokokuYM().getValue().getYear().toDateString());
         }
-        if (過去の集計結果を印刷.equals(div.getRadJikkoTaniKakoShukeiKekka().getSelectedKey())) {
-            if (!RString.isNullOrEmpty(div.getDdlKakoHokokuYM().getSelectedValue())) {
-                RDate 報告年月 = new RDate(div.getDdlKakoHokokuYM().getSelectedValue().toString());
-                param.setHoukokuNengetu(報告年月.getYearMonth().toDateString());
-                param.setHokokuNendo(報告年月.getYear().toDateString());
-            }
+        if (過去の集計結果を印刷.equals(div.getRadJikkoTaniKakoShukeiKekka().getSelectedKey())
+                && !RString.isNullOrEmpty(div.getDdlKakoHokokuYM().getSelectedValue())) {
+            RDate 報告年月 = new RDate(div.getDdlKakoHokokuYM().getSelectedValue().toString());
+            param.setHoukokuNengetu(報告年月.getYearMonth().toDateString());
+            param.setHokokuNendo(報告年月.getYear().toDateString());
         }
         param.setNendo(get年度());
         param.setSakuseiNitizi(get作成日時());
@@ -1373,17 +1372,17 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     }
 
     private List<RString> get決定年月() {
-        List<RString> 決定年月 = new ArrayList<>();
+        List<RString> 決定年月_1 = new ArrayList<>();
         if (div.getTxtShukeiYM4().getValue() != null && !div.getTxtShukeiYM4().getValue().isEmpty()) {
-            決定年月.add(div.getTxtShukeiYM4().getValue().getYearMonth().toDateString());
+            決定年月_1.add(div.getTxtShukeiYM4().getValue().getYearMonth().toDateString());
         } else {
-            決定年月.add(RString.EMPTY);
+            決定年月_1.add(RString.EMPTY);
         }
         if (div.getTxtShukeiYM7().getValue() != null && !div.getTxtShukeiYM7().getValue().isEmpty()) {
-            決定年月.add(div.getTxtShukeiYM7().getValue().getYearMonth().toDateString());
+            決定年月_1.add(div.getTxtShukeiYM7().getValue().getYearMonth().toDateString());
         } else {
-            決定年月.add(RString.EMPTY);
+            決定年月_1.add(RString.EMPTY);
         }
-        return 決定年月;
+        return 決定年月_1;
     }
 }

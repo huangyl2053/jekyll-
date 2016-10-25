@@ -138,7 +138,14 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
         div.getTxtMeisaiJigyoshaNo().setValue(給付実績情報.get事業所番号());
         div.getTxtMeisaiJigyoshaName().setValue(給付実績情報.get事業者名());
         div.getTxtMeisaiMoshitateshaKubun().setValue(KagoMoshitate_MoshitateshaKubun.保険者申立.get名称());
-        div.getTxtMeisaiShokisaiHokenshaNo().setValue(給付実績情報.get証記載保険者番号());
+        RString 証記載保険者番号 = 給付実績情報.get証記載保険者番号();
+        if (証記載保険者番号.length() == 証記載保険者番号_7) {
+            証記載保険者番号 = 証記載保険者番号.substring(1);
+        }
+        if (証記載保険者番号.length() == 証記載保険者番号_8) {
+            証記載保険者番号 = 証記載保険者番号.substring(2);
+        }
+        div.getTxtMeisaiShokisaiHokenshaNo().setValue(証記載保険者番号);
         if (!RString.isNullOrEmpty(給付実績情報.getサービス提供年月())) {
             div.getTxtMeisaiTeikyoYM().setValue(new RDate(給付実績情報.getサービス提供年月().toString()));
         }

@@ -46,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -53,6 +54,10 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -144,31 +149,31 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
     @Override
     protected void process(FutanGendogakuNinteiShinseishoHakkoEntity entity) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
+        RString 郵便番号;
+        RString 電話番号;
+        RString 事業者住所;
+        RString 事業者名称;
+        if (entity.get郵便番号() == null || entity.get郵便番号().isEmpty()) {
+            郵便番号 = RString.EMPTY;
+        } else {
+            郵便番号 = entity.get郵便番号().value();
+        }
+        if (entity.get電話番号() == null || entity.get郵便番号().isEmpty()) {
+            電話番号 = RString.EMPTY;
+        } else {
+            電話番号 = entity.get電話番号().value();
+        }
+        if (entity.get事業者住所() == null || entity.get事業者住所().isEmpty()) {
+            事業者住所 = RString.EMPTY;
+        } else {
+            事業者住所 = entity.get事業者住所().value();
+        }
+        if (entity.get事業者名称() == null || entity.get事業者名称().isEmpty()) {
+            事業者名称 = RString.EMPTY;
+        } else {
+            事業者名称 = entity.get事業者名称().value();
+        }
         if (entity.is旧措置者フラグ()) {
-            RString 郵便番号;
-            RString 電話番号;
-            RString 事業者住所;
-            RString 事業者名称;
-            if (entity.get郵便番号() == null || entity.get郵便番号().isEmpty()) {
-                郵便番号 = RString.EMPTY;
-            } else {
-                郵便番号 = entity.get郵便番号().value();
-            }
-            if (entity.get電話番号() == null || entity.get郵便番号().isEmpty()) {
-                電話番号 = RString.EMPTY;
-            } else {
-                電話番号 = entity.get電話番号().value();
-            }
-            if (entity.get事業者住所() == null || entity.get事業者住所().isEmpty()) {
-                事業者住所 = RString.EMPTY;
-            } else {
-                事業者住所 = entity.get事業者住所().value();
-            }
-            if (entity.get事業者名称() == null || entity.get事業者名称().isEmpty()) {
-                事業者名称 = RString.EMPTY;
-            } else {
-                事業者名称 = entity.get事業者名称().value();
-            }
             TokuteiFutangendogakuShinseishoItem item = new TokuteiFutangendogakuShinseishoItem(
                     get認証者(),
                     kojin.get名称().getKana().value(),
@@ -200,11 +205,16 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
                     kojin.get住所().get郵便番号().getEditedYubinNo(),
                     kojin.get住所().get住所(),
                     通知書定型文.get(2),
-                    get認証者()
+                    get認証者(),
+                    郵便番号,
+                    電話番号,
+                    事業者住所,
+                    事業者名称
             );
             FutangendogakuNinteiShinseishoReport report = FutangendogakuNinteiShinseishoReport.createReport(bodyItem);
             report.writeBy(reportSourceWriter);
         }
+        AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
     }
 
     @Override
@@ -275,5 +285,11 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
         } else {
             return hokenshaList.get(entity.get市町村コード()).get証記載保険者番号().value();
         }
+    }
+
+    private PersonalData toPersonalData(FutanGendogakuNinteiShinseishoHakkoEntity entity) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
+                entity.get被保険者番号().value());
+        return PersonalData.of(entity.get識別コード(), expandedInfo);
     }
 }

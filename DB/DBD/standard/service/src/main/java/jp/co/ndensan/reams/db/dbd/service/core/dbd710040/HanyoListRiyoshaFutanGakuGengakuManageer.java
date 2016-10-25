@@ -144,11 +144,11 @@ public class HanyoListRiyoshaFutanGakuGengakuManageer {
             hanyolistentity.set地区１(地区１ != null ? 地区１.getColumnValue() : RString.EMPTY);
             hanyolistentity.set地区２(地区２ != null ? 地区２.getColumnValue() : RString.EMPTY);
             hanyolistentity.set世帯コード(世帯コード != null ? 世帯コード.getColumnValue() : RString.EMPTY);
+            hanyolistentity.set氏名５０音カナ(entity.getPsmEntity().getKanaName());
+            hanyolistentity.set生年月日(entity.getPsmEntity().getSeinengappiYMD());
+            hanyolistentity.set性別(entity.getPsmEntity().getSeibetsuCode());
         }
         hanyolistentity.set識別コード(entity.get被保険者台帳管理_識別コード());
-        hanyolistentity.set氏名５０音カナ(entity.getPsmEntity().getKanaName());
-        hanyolistentity.set生年月日(entity.getPsmEntity().getSeinengappiYMD());
-        hanyolistentity.set性別(entity.getPsmEntity().getSeibetsuCode());
         hanyolistentity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
         hanyolistentity.set証記載保険者番号(entity.get利用者負担額減額_証記載保険者番号());
         hanyolistentity.set被保険者番号(entity.get被保険者台帳管理_被保険者番号());

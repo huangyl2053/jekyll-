@@ -32,7 +32,7 @@ public class DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter extends Batch
     @BatchParameter(key = "市町村コード", name = "市町村コードList")
     private List<RString> 市町村コードList;
     @BatchParameter(key = "帳票出力順ID", name = "帳票出力順ID")
-    private RString 帳票出力順ID;
+    private long 帳票出力順ID;
 
     /**
      * プロセスパラメータを作成します。
