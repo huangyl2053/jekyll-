@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.SelKyuhuzisseki
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.SelRiyoushaHutanwariaitorigaDataProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.ShoriHidukeKanriTeburuKoshiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.ShoriKekkaKakuninProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.TorikeshiMoziCodeHenkanProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.UpdRiyoshaFutangengakuTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.UpdShiharaihohoHenkoTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180050.DBC180050_KoseiTaishoKyufuJissekiIchiranParameter;
@@ -217,7 +218,7 @@ public class DBC180050_KoseiTaishoKyufuJissekiIchiran extends BatchFlowBase<DBC1
      */
     @Step(MOZICODE_HENKAN)
     protected IBatchFlowCommand 文字コード変換() {
-        return simpleBatch(MoziCodeHenkanProcess.class)
+        return simpleBatch(TorikeshiMoziCodeHenkanProcess.class)
                 .arguments(processParameter).define();
     }
 
