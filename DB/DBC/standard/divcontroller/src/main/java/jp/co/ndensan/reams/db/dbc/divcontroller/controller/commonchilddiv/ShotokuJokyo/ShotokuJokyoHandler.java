@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.divcontroller.controller.commonchilddiv.memo.MemoNyuryoku.MemoNyuryokuHandler;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -51,6 +52,7 @@ public class ShotokuJokyoHandler {
     private static final RString 文字列_識別対象コード = new RString("shikibetsuCode");
     private static final RString メモボタン = new RString("memo");
     private static final RString コンマ = new RString(",");
+    private static final RString 時分秒 = new RString("000000");
     private final ShotokuJokyoDiv div;
 
     /**
@@ -82,6 +84,10 @@ public class ShotokuJokyoHandler {
      */
     public void initialize(RString hdnMode, FlexibleDate hdnKijunYMD, FlexibleDate hdnShoriNendo, ShikibetsuCode hdnShikibetuCode) {
         RString 業務コード = GyomuCode.DB介護保険.getColumnValue();
+        YMDHMS 所得基準年月日 = null;
+        if (null != hdnKijunYMD) {
+            所得基準年月日 = new YMDHMS((hdnKijunYMD.toString().concat(時分秒.toString())));
+        }
         if (照会モード.equals(hdnMode)) {
             div.getBtnKakutei().setDisabled(true);
         } else {
@@ -91,7 +97,7 @@ public class ShotokuJokyoHandler {
         div.getTxtShoriNendo().setValue(hdnShoriNendo);
         div.setHdnGyomuCode(業務コード);
         List<SetaiinShotoku> 世帯員所得情報リスト = SetaiinShotokuJohoFinder.createInstance().
-                get世帯員所得情報(hdnShikibetuCode, hdnShoriNendo.getNendo(), null);
+                get世帯員所得情報(hdnShikibetuCode, hdnShoriNendo.getNendo(), 所得基準年月日);
         List<dgSteaiinShotoku_Row> rowList = set世帯員所得情報Grid(世帯員所得情報リスト, hdnKijunYMD);
         div.getDgSteaiinShotoku().setDataSource(rowList);
         MemoNyuryokuHandler.dataGridupdateImage(new GyomuCode(div.getHdnGyomuCode()), null, div.getDgSteaiinShotoku(),
@@ -110,6 +116,8 @@ public class ShotokuJokyoHandler {
         RString 氏名 = RString.EMPTY;
         RString 氏名カナ = RString.EMPTY;
         RDate 生年月日;
+        RDate 異動年月日;
+        RDate 更正日;
         int length;
         for (dgSteaiinShotoku_Row row : div.getDgSteaiinShotoku().getSelectedItems()) {
             item = new KijunShunyugakuDate();
@@ -129,6 +137,9 @@ public class ShotokuJokyoHandler {
             item.set性別(row.getGender());
             item.set年齢(row.getAge());
             item.set続柄(row.getZokugara());
+            item.set種別(row.getShubetsu());
+            異動年月日 = new RDate(row.getIdoYMD().toString());
+            item.set異動年月日(new FlexibleDate(異動年月日.toDateString()));
             item.set住民税(row.getJuminZei());
             if (!row.getGokeiShotoku().isNullOrEmpty()) {
                 item.set合計所得金額(new Decimal(row.getGokeiShotoku().replace(コンマ, RString.EMPTY).toString()));
@@ -142,6 +153,8 @@ public class ShotokuJokyoHandler {
             if (!row.getKazeiShotoku().isNullOrEmpty()) {
                 item.set課税所得(new Decimal(row.getKazeiShotoku().replace(コンマ, RString.EMPTY).toString()));
             }
+            更正日 = new RDate(row.getKoseiYMD().toString());
+            item.set更正日(new FlexibleDate(更正日.toDateString()));
             list.add(item);
         }
         return list;
@@ -154,6 +167,8 @@ public class ShotokuJokyoHandler {
             div.getDgSteaiinShotoku().setDataSource(rowList);
         } else {
             RString 生年月日 = RString.EMPTY;
+            RString 異動年月日 = RString.EMPTY;
+            RString 更正日 = RString.EMPTY;
             IDateOfBirth dateofbirth;
             RString 年齢;
             RString 合計所得金額;
@@ -175,6 +190,11 @@ public class ShotokuJokyoHandler {
                 年齢 = new AgeCalculator(dateofbirth, JuminJotai.住民, item.get住民情報_異動日(), 世帯員把握基準日).get年齢();
                 row.setAge(年齢);
                 row.setZokugara(item.get続柄());
+                row.setShubetsu(item.get種別());
+                if (null != item.get住民情報_異動日() && !item.get住民情報_異動日().isEmpty()) {
+                    異動年月日 = toWarekiHalf_Zero(item.get住民情報_異動日());
+                }
+                row.setIdoYMD(異動年月日);
                 課税区分_住民税減免後 = item.get課税区分_住民税減免後();
                 if (KazeiKubun.課税.getコード().equals(課税区分_住民税減免後)) {
                     row.setJuminZei(SetaiKazeiKubun.課税.get名称());
@@ -202,6 +222,10 @@ public class ShotokuJokyoHandler {
                 } else if (数値_38万.compareTo(計算結果) <= 0 && new Decimal(年齢.toString()).compareTo(年齢_18) <= 0) {
                     row.setRowBgColor(DataGridCellBgColor.bgColorLightGray);
                 }
+                if (null != item.get更正日() && !item.get更正日().isEmpty()) {
+                    更正日 = toWarekiHalf_Zero(item.get更正日());
+                }
+                row.setKoseiYMD(更正日);
                 rowList.add(row);
             }
         }

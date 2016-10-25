@@ -28,10 +28,13 @@ public class KijunShunyugakuDate implements Serializable {
     private RString 性別;
     private RString 年齢;
     private RString 続柄;
+    private RString 種別;
+    private FlexibleDate 異動年月日;
     private RString 住民税;
     private Decimal 合計所得金額;
     private Decimal 年金等収入;
     private Decimal 年金等所得;
     private Decimal 課税所得;
+    private FlexibleDate 更正日;
 
 }

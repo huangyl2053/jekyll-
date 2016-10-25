@@ -420,7 +420,7 @@ public class HonsanteiIdoHandler {
             List<ChohyoResult> 帳票IDList = HonsanteiIdoGennendo.createInstance().getChohyoID(
                     調定年度, new RString(月の期.get期AsInt()), get各通知書の帳票ID());
             List<ShutsuryokuKiKoho> 出力期;
-            ShutsuryokuKiKohoFactory kohoFactory = new ShutsuryokuKiKohoFactory(調定年度);
+            ShutsuryokuKiKohoFactory kohoFactory = ShutsuryokuKiKohoFactory.createInstance(調定年度);
             RString 算定期 = 月の期.get期();
             if (帳票IDList != null) {
                 boolean flag = false;

@@ -63,8 +63,6 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource implements IRe
     public RString listUpper_6;
     @ReportItem(name = "listUpper_7", length = 20, order = 23)
     public RString listUpper_7;
-    //TODO QA#1274
-//    @ReportPerson(id = "X")
     @ReportItem(name = "listLower_1", length = 20, order = 24)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 15, order = 25)

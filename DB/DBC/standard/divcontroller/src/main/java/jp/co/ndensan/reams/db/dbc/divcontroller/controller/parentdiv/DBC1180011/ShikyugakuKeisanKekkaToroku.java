@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyugakuKeis
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyugakuKeisanKekkaMeisaiIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShikyuGakuKeisanKekkaHosei;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShikyuGakuKeisanKekkaRelate;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011.DBC1180011StateName;
@@ -60,6 +59,8 @@ public class ShikyugakuKeisanKekkaToroku {
     private static final RString CODE_003 = new RString("003");
     private static final int INT_1 = 1;
     private static final RString 名称_被保険者番号 = new RString("被保険者番号");
+    private static final RString RSTRING_1 = new RString("1");
+    private static final RString RSTRING_2 = new RString("2");
     private static final RString 追加 = new RString("追加");
     private static final RString 照会 = new RString("照会");
     private static final RString 修正 = new RString("修正");
@@ -486,9 +487,17 @@ public class ShikyugakuKeisanKekkaToroku {
      * @return ResponseData
      */
     public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onChange_tab(ShikyugakuKeisanKekkaTorokuDiv div) {
-        if (!div.getShikyugakuKeisanKekkaTorokuDetailPanel().isReadOnly()
-                && !div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().isDisplayNone()) {
-            throw new ApplicationException(DbcErrorMessages.内訳入力途中.getMessage());
+        RString 番号 = ViewStateHolder.get(ViewStateKeys.番号, RString.class);
+        if (RSTRING_2.equals(番号)) {
+            ViewStateHolder.put(ViewStateKeys.チェック回数, RSTRING_1);
+            return ResponseData.of(div).respond();
+        }
+        ShikyugakuKeisanKekkaTorokuValidationHandler validationhandler = getValidationHandler(div);
+        ValidationMessageControlPairs 内訳入力途中Pairs = validationhandler.validate内訳入力途中();
+        if (内訳入力途中Pairs.iterator().hasNext()) {
+            div.getTabMeisai().setSelectedItem(div.getTabMeisai().getTabShikyugakuKeisanKekkaTorokuUchiwake());
+            ViewStateHolder.put(ViewStateKeys.チェック回数, RSTRING_2);
+            return ResponseData.of(div).addValidationMessages(内訳入力途中Pairs).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -500,8 +509,11 @@ public class ShikyugakuKeisanKekkaToroku {
      * @return ResponseData
      */
     public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onClick_btnBackToIchiran(ShikyugakuKeisanKekkaTorokuDiv div) {
-        if (!div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().isDisplayNone()) {
-            throw new ApplicationException(DbcErrorMessages.内訳入力途中.getMessage());
+        ShikyugakuKeisanKekkaTorokuValidationHandler validationhandler = getValidationHandler(div);
+        ValidationMessageControlPairs 内訳入力途中Pairs = validationhandler.validate内訳入力途中();
+        if (内訳入力途中Pairs.iterator().hasNext()) {
+            div.getTabMeisai().setSelectedItem(div.getTabMeisai().getTabShikyugakuKeisanKekkaTorokuUchiwake());
+            return ResponseData.of(div).addValidationMessages(内訳入力途中Pairs).respond();
         }
         RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果状態, RString.class);
         if ((追加.equals(状態) || 修正.equals(状態)) && !ResponseHolder.isReRequest()) {
@@ -545,11 +557,13 @@ public class ShikyugakuKeisanKekkaToroku {
      * @return ResponseData
      */
     public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onClick_btnSave(ShikyugakuKeisanKekkaTorokuDiv div) {
-        if (!div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().isDisplayNone()) {
-            throw new ApplicationException(DbcErrorMessages.内訳入力途中.getMessage());
+        ShikyugakuKeisanKekkaTorokuValidationHandler validationhandler = getValidationHandler(div);
+        ValidationMessageControlPairs 内訳入力途中Pairs = validationhandler.validate内訳入力途中();
+        if (内訳入力途中Pairs.iterator().hasNext()) {
+            div.getTabMeisai().setSelectedItem(div.getTabMeisai().getTabShikyugakuKeisanKekkaTorokuUchiwake());
+            return ResponseData.of(div).addValidationMessages(内訳入力途中Pairs).respond();
         }
         RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果状態, RString.class);
-        ShikyugakuKeisanKekkaTorokuValidationHandler validationhandler = getValidationHandler(div);
         if (追加.equals(状態) || 修正.equals(状態)) {
             ValidationMessageControlPairs 保存Pairs = validationhandler.validate計算結果を保存する();
             if (保存Pairs.iterator().hasNext()) {
