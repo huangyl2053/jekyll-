@@ -116,11 +116,29 @@ public class DBC8020001Main {
      * @return ResponseData<DBC8020001MainDiv>
      */
     public ResponseData<DBC8020001MainDiv> onClickCheck_btnBatchRegister(DBC8020001MainDiv div) {
-        ValidationMessageControlPairs pairs = checkInput(div);
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        boolean flag1 = INDEX_1.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+        boolean flag2 = INDEX_2.equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey());
+        boolean flag3 = false;
+        List<RString> list = div.getChkSaisakusei().getSelectedKeys();
+        if (!list.isEmpty() && list.get(0).equals(INDEX_1)) {
+            flag3 = true;
+        }
+        if (flag1) {
+            getValidationHandler(div).validateFor振込指定日休日(pairs);
+            getValidationHandler(div).validateFor振込指定日過去日(pairs);
+        }
+        if (flag2) {
+            getValidationHandler(div).validateFor正振込指定日休日(pairs);
+            getValidationHandler(div).validateFor正振込指定日過去日(pairs);
+            getValidationHandler(div).validateFor修正対象データ存在(pairs);
+        }
+        if (flag1 && flag3) {
+            getValidationHandler(div).validateFor再処理対象データ存在(pairs);
+        }
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-
         if (!(決定者受取年月開始年月未入力value.equals(ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class) == null
                 ? RString.EMPTY : ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class)))) {
             if (!ResponseHolder.isReRequest() && !div.getTxtKonkaiTaishoYmdRange().isDisabled()
@@ -133,23 +151,7 @@ public class DBC8020001Main {
                 return ResponseData.of(div).respond();
             }
         }
-        RString ym = ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class) == null
-                ? RString.EMPTY : ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class);
-        boolean flag5 = (null == ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class)
-                || !決定者受取年月開始年月未入力value.equals(ym));
-        if (flag5 && !div.getTxtKetteishaUketoriYmRange().isDisabled() && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
-            ViewStateHolder.put(ViewStateKeys.決定者受取年月開始年月未入力flag, 決定者受取年月開始年月未入力value);
-            return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
-        } else {
-            if (!ResponseHolder.isReRequest() && !div.getTxtKetteishaUketoriYmRange().isDisabled()
-                    && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
-                return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
-            } else if (null != ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class)
-                    && 決定者受取年月開始年月未入力value.equals(ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class))
-                    && ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).respond();
-            }
-        }
+        checkInput(div);
         return ResponseData.of(div).respond();
     }
 
@@ -212,27 +214,24 @@ public class DBC8020001Main {
         return new DBC8020001MainValidationHandler(div);
     }
 
-    private ValidationMessageControlPairs checkInput(DBC8020001MainDiv div) {
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        boolean flag1 = INDEX_1.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
-        boolean flag2 = INDEX_2.equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey());
-        boolean flag3 = false;
-        List<RString> list = div.getChkSaisakusei().getSelectedKeys();
-        if (!list.isEmpty() && list.get(0).equals(INDEX_1)) {
-            flag3 = true;
+    private ResponseData<DBC8020001MainDiv> checkInput(DBC8020001MainDiv div) {
+        RString ym = ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class) == null
+                ? RString.EMPTY : ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class);
+        boolean flag5 = (null == ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class)
+                || !決定者受取年月開始年月未入力value.equals(ym));
+        if (flag5 && !div.getTxtKetteishaUketoriYmRange().isDisabled() && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
+            ViewStateHolder.put(ViewStateKeys.決定者受取年月開始年月未入力flag, 決定者受取年月開始年月未入力value);
+            return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
+        } else {
+            if (!ResponseHolder.isReRequest() && !div.getTxtKetteishaUketoriYmRange().isDisabled()
+                    && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
+                return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
+            } else if (null != ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class)
+                    && 決定者受取年月開始年月未入力value.equals(ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class))
+                    && ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
+                return ResponseData.of(div).respond();
+            }
         }
-        if (flag1) {
-            getValidationHandler(div).validateFor振込指定日休日(pairs);
-            getValidationHandler(div).validateFor振込指定日過去日(pairs);
-        }
-        if (flag2) {
-            getValidationHandler(div).validateFor正振込指定日休日(pairs);
-            getValidationHandler(div).validateFor正振込指定日過去日(pairs);
-            getValidationHandler(div).validateFor修正対象データ存在(pairs);
-        }
-        if (flag1 && flag3) {
-            getValidationHandler(div).validateFor再処理対象データ存在(pairs);
-        }
-        return pairs;
+        return ResponseData.of(div).respond();
     }
 }
