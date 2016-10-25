@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.tokubetsuchoshudoteimidoteiichiran;
 
 import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -33,4 +34,7 @@ public class TokubetsuChoshuMidoteiIchiranEntity {
     private RString fuichiRiyuCode;
     private ShikibetsuCode shikibetsuCode;
     private RString juminShubetsuCode;
+
+    private RString hihokenshaNo;
+    private LasdecCode genLasdecCode;
 }

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払決定情報Entityクラスです。
@@ -28,7 +29,7 @@ public class SyokanbaraiketeJohoEntity implements Cloneable, Serializable {
     private RString serviceName;
     private RString fukushiYoguShohinName;
     private Integer kounyuKingaku;
-    private Integer shiharaiKingaku;
+    private Decimal shiharaiKingaku;
     private Integer sagakuKingaku;
     private RString tableKbn;
     private RString dekidakaKbn;

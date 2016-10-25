@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.TokuteiKojinJohoHanKanri;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.DataSetNo;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
@@ -15,11 +17,19 @@ import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanr
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.JukyushaTeikyoKihonJohoNNTempEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoManager;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DoitsuninDaihyoshaYusenKubun;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -42,6 +52,24 @@ public class JukyushaKihonJohoTeikyoKihonJohoNNTempUpdateProcess extends BatchPr
     protected void initialize() {
         mybitisParamter = processParameter.toJukyushaKihonJohoMybatisParameter();
         mybitisParamter.setTempTableName(new RString("\"").concat(processParameter.get提供基本情報中間テーブル名()).concat("\""));
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
+        List<JuminShubetsu> 住民種別List = new ArrayList<>();
+        住民種別List.add(JuminShubetsu.日本人);
+        住民種別List.add(JuminShubetsu.外国人);
+        住民種別List.add(JuminShubetsu.住登外個人_外国人);
+        住民種別List.add(JuminShubetsu.住登外個人_日本人);
+        List<JuminJotai> 住民状態List = new ArrayList<>();
+        住民状態List.add(JuminJotai.住民);
+        住民状態List.add(JuminJotai.住登外);
+        住民状態List.add(JuminJotai.消除者);
+        住民状態List.add(JuminJotai.転出者);
+        住民状態List.add(JuminJotai.死亡者);
+        key.set住民種別(住民種別List);
+        key.set住民状態(住民状態List);
+        key.set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない);
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        mybitisParamter.setPsmShikibetsuTaisho(new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
     }
 
     @Override

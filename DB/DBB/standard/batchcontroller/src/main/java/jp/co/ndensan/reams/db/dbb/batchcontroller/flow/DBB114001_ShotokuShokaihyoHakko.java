@@ -107,7 +107,6 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
             }
             executeStep(所得照会票一覧の出力);
         } else if (出力対象_0.equals(出力対象)) {
-            processParameter.set再発行対象リスト(batchParameter.get再発行対象リスト());
             executeStep(所得照会候補者TEMPテーブルに登録);
             executeStep(対象外の住民情報を更新);
             executeStep(再発行対象者TEMPテーブルに登録);
@@ -321,6 +320,7 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
         parameter.set処理年度(batchParameter.get処理年度());
         parameter.set照会年月日(batchParameter.get照会年月日());
         parameter.set出力対象(batchParameter.get出力対象());
+        parameter.set再発行対象リスト(batchParameter.get再発行対象リスト());
         parameter.setテストプリント(batchParameter.isテストプリント());
         parameter.set出力順ID(batchParameter.get出力順ID());
         parameter.set導入形態コード(batchParameter.get導入形態コード());

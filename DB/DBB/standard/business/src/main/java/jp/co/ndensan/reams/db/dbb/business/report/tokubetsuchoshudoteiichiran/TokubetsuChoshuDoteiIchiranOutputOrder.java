@@ -47,19 +47,19 @@ public enum TokubetsuChoshuDoteiIchiranOutputOrder implements IReportItems {
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"kanaShimei\"")),
+    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"dtKanaShimei\"")),
     /**
      * 生年月日
      */
-    生年月日(new RString("0012"), new RString("生年月日"), new RString("\"seinengappiYMD\"")),
+    生年月日(new RString("0012"), new RString("生年月日"), new RString("\"dtBirthDay\"")),
     /**
      * 市町村コード
      */
-    性別(new RString("0013"), new RString("性別"), new RString("\"seibetsuCode\"")),
+    性別(new RString("0013"), new RString("性別"), new RString("\"dtSeibetsu\"")),
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0021"), new RString("市町村コード"), new RString("")),
+    市町村コード(new RString("0021"), new RString("市町村コード"), new RString("\"genLasdecCode\"")),
     /**
      * 被保険者番号
      */

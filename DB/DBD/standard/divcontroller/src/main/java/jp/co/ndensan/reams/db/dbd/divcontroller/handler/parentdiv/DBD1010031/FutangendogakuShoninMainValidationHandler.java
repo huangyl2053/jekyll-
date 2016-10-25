@@ -38,11 +38,15 @@ public class FutangendogakuShoninMainValidationHandler {
                 .ifNot(FutangendogakuShoninMainDivSpec.作成年度の未入力チェック)
                 .thenAdd(Messagescheck.作成年度の未入力チェック)
                 .ifNot(FutangendogakuShoninMainDivSpec.決定日の未入力チェック)
-                .thenAdd(Messagescheck.決定日の未入力チェック).messages()
+                .thenAdd(Messagescheck.決定日の未入力チェック)
+                .ifNot(FutangendogakuShoninMainDivSpec.申請日終了と申請日開始の未入力チェック)
+                .thenAdd(Messagescheck.申請日終了と申請日開始の未入力チェック).messages()
         );
         pairs.add(new ValidationMessageControlDictionaryBuilder()
                 .add(Messagescheck.作成年度の未入力チェック, div.getTxtSakuseiNendo())
-                .add(Messagescheck.決定日の未入力チェック, div.getTxtKetteibi()).build().check(messages));
+                .add(Messagescheck.決定日の未入力チェック, div.getTxtKetteibi())
+                .add(Messagescheck.申請日終了と申請日開始の未入力チェック, div.getTxtShinseibiJoken())
+                .build().check(messages));
         return pairs;
     }
 
@@ -87,7 +91,8 @@ public class FutangendogakuShoninMainValidationHandler {
         作成年度の未入力チェック(UrErrorMessages.必須, "作成年度"),
         決定日の未入力チェック(UrErrorMessages.必須, "決定日"),
         申請日終了と申請日開始の比較チェック(UrErrorMessages.必須, "申請日終了と申請日開始"),
-        発行日の未入力チェック(UrErrorMessages.必須, "発行日");
+        発行日の未入力チェック(UrErrorMessages.必須, "発行日"),
+        申請日終了と申請日開始の未入力チェック(UrErrorMessages.必須, "申請日開始と申請日終了");
 
         private final Message message;
 

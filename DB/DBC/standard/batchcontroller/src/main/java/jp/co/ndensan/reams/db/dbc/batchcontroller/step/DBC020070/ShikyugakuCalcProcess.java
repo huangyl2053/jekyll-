@@ -144,7 +144,6 @@ public class ShikyugakuCalcProcess extends BatchKeyBreakBase<ShikyugakuCalcTempE
         事業高額合算分の明細データの集計(事業高額合算List);
         事業高額合算分の明細データの集計(転入前事業高額合算List);
         insert計算結果の更新用データ();
-        // TODO QA.1604 処理9.3.1のcheck
         insert計算結果明細の更新用データ();
     }
 

@@ -44,10 +44,10 @@ class KyokaisoKanriMasterListHeaderEditor implements IKyokaisoKanriMasterListEdi
         source.shutsuryokujun4 = headItem.get並び順4();
         source.shutsuryokujun5 = headItem.get並び順5();
         source.kaipage1 = headItem.get改頁1();
-        source.kaipage2 = headItem.get改頁1();
-        source.kaipage3 = headItem.get改頁1();
-        source.kaipage4 = headItem.get改頁1();
-        source.kaipage5 = headItem.get改頁1();
+        source.kaipage2 = headItem.get改頁2();
+        source.kaipage3 = headItem.get改頁3();
+        source.kaipage4 = headItem.get改頁4();
+        source.kaipage5 = headItem.get改頁5();
         source.listUpper_1 = headItem.get被保険者番号();
         source.listUpper_2 = headItem.getカナ氏名();
         source.listUpper_3 = headItem.get性別();

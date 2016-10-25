@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.Teikyo
 import jp.co.ndensan.reams.db.dbu.service.core.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
@@ -58,8 +59,12 @@ public class HihokenshaJohoProcess extends BatchProcessBase<HihokenshaJohoRelate
                         DataSetNo._0201受給者基本情報.getコード(), FlexibleDate.getNowDate()).get(0);
         版番号 = 特定個人情報版管理.get版番号();
         特定個人情報名コード = 特定個人情報版管理.get特定個人情報名コード();
+        HihokenshaNo 個人番号付替対象者被保険者番号 = processParameter.get個人番号付替対象者被保険者番号();
+        if (個人番号付替対象者被保険者番号 == null) {
+            個人番号付替対象者被保険者番号 = HihokenshaNo.EMPTY;
+        }
         mybitisParamter = HihokenshaJohoMybatisParameter.createParamter提供情報_候補(新規異動区分, processParameter.get対象開始日時(),
-                processParameter.get対象終了日時(), processParameter.get個人番号付替対象者被保険者番号());
+                processParameter.get対象終了日時(), 個人番号付替対象者被保険者番号.value());
 
     }
 

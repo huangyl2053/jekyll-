@@ -49,6 +49,27 @@ public class NenkinNoCheckListProcess extends BatchProcessBase<JissekiDataIchiji
 
     private NenkinNoCheckListTempTableEntity createNenkinNoCheckListTempTableEntity(JissekiDataIchijiSakuseiTempTableEntity t) {
         NenkinNoCheckListTempTableEntity data = new NenkinNoCheckListTempTableEntity();
+
+        data.setHihokenshaNo(t.getHihokenshaNo());
+        data.setAtenaKanaShimei(t.getAtenaKanaShimei());
+        if (t.getAtenaSeinenngappi() != null && !t.getAtenaSeinenngappi().isEmpty()) {
+            data.setAtenaSeinenngappi(new RString(t.getAtenaSeinenngappi().toString()));
+        }
+
+        data.setAtenaSeibetsu(t.getAtenaSeibetsu());
+        data.setShikibetsuCode(t.getShikibetsuCode());
+        data.setShotaiCode(t.getShotaiCode());
+        data.setAtenaKanjiShimei(t.getAtenaKanjiShimei());
+        data.setAtenaYubinNo(t.getAtenaYubinNo());
+        data.setAtenakanaJusyo(t.getAtenakanaJusyo());
+        data.setNendo(t.getNendo());
+        data.setShoriKubunn(t.getShoriKubunn());
+        data.setTaishoMonth(t.getTaishoMonth());
+        data.setKisoNennkinnNo(t.getKisoNennkinnNo());
+        data.setGenKisoNennkinnNo(t.getGenKisoNennkinnNo());
+        data.setNennkinnCode(t.getNennkinnCode());
+        data.setTourokuKubunn(t.getTourokuKubunn());
+
         data.setDtRekoDoKubunn(t.getDtRekoDoKubunn());
         data.setDtShichosonCode(t.getDtShichosonCode());
         data.setDtNennkinnHokenshaCode(t.getDtNennkinnHokenshaCode());
