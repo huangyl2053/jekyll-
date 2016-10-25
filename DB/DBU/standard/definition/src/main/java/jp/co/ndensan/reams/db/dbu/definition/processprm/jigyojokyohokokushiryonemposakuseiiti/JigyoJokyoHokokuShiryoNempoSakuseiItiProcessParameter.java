@@ -122,7 +122,7 @@ public class JigyoJokyoHokokuShiryoNempoSakuseiItiProcessParameter implements IB
         return JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter.createInsertDataParam(市町村コード,
                 構成市町村区分, 構成市町村コードリスト, 旧市町村区分, 旧市町村コードリスト,
                 プリントコントロール区分, 集計年度,
-                作成日時.format西暦(日付_FORMAT.toString()), 処理日時.format西暦(日付_FORMAT.toString()));
+                作成日時.format西暦(日付_FORMAT.toString()), 処理日時.format西暦(日付_FORMAT.toString()), 集計開始年月, 集計終了年月);
     }
 
     /**
