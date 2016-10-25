@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.service.core.jigyobunshikyugakukeisankekkarenrakuhyopanel;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanPanelEntity;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuPanelListParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanPanelEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigyobunshikyugakukeisankekkarenrakuhyo.IJigyobunShikyugakuKeisanPanelMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
@@ -68,8 +68,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelFinder {
 
         IJigyobunShikyugakuKeisanPanelMapper mapper = mapperProvider.create(
                 IJigyobunShikyugakuKeisanPanelMapper.class);
-        List<JigyobunShikyugakuKeisanPanelEntity> panelentity = mapper.get対象データ(parameter);
-        return panelentity;
+        return mapper.get対象データ(parameter);
     }
 
     /**
@@ -85,8 +84,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelFinder {
 
         IJigyobunShikyugakuKeisanPanelMapper mapper = mapperProvider.create(
                 IJigyobunShikyugakuKeisanPanelMapper.class);
-        List<JigyobunShikyugakuKeisanPanelEntity> panelEntityList = mapper.get処理対象データ(parameter);
-        return panelEntityList;
+        return mapper.get処理対象データ(parameter);
     }
 
     /**

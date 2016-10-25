@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.SakuseiKubun;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710010.DBC710010_HanyoListKyotakuServiceKeikakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7010001.HanyorisutoPanelDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -114,8 +114,8 @@ public class HanyorisutoPanelHandler {
      * @param div HanyorisutoPanelDiv
      * @return HanyoListKyotakuServiceKeikakuBatchParameter
      */
-    public HanyoListKyotakuServiceKeikakuBatchParameter setBatchParameter(HanyorisutoPanelDiv div) {
-        HanyoListKyotakuServiceKeikakuBatchParameter bparam = new HanyoListKyotakuServiceKeikakuBatchParameter();
+    public DBC710010_HanyoListKyotakuServiceKeikakuParameter setBatchParameter(HanyorisutoPanelDiv div) {
+        DBC710010_HanyoListKyotakuServiceKeikakuParameter bparam = new DBC710010_HanyoListKyotakuServiceKeikakuParameter();
         if (div.getCcdHokensya().isVisible()) {
             bparam.set構成市町村コード(div.getCcdHokensya().getSelectedItem().get市町村コード());
         }

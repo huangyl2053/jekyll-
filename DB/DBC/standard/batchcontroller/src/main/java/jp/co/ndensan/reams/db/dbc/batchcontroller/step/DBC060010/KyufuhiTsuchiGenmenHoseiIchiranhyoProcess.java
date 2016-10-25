@@ -17,13 +17,16 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kaigojuminhyo.KyufuTsuchiGenmenHose
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchigenmenhoseiichiran.KyufuhiTuchiGenmenhoseiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufutsuchigenmenhosei.KyufuTsuchiGenmenHoseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhituchigenmenhoseiichiran.KyufuhiTuchiGenmenhoseiIchiranReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -32,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -42,7 +46,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  * @reamsid_L DBC-2270-030 lijia
  *
  */
-public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<KyufuTsuchiGenmenHoseiEntity> {
+public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchKeyBreakBase<KyufuTsuchiGenmenHoseiEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufutsuchigenmenhosei.IKyufuTsuchiGenmenHoseiMapper.get給付費通知減免補正一覧");
@@ -61,9 +65,14 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
     private CsvWriter<KyufuTsuchiGenmenHoseiCsvEntity> eucCsvWriter;
     private BatchReportWriter<KyufuhiTuchiGenmenhoseiIchiranReportSource> reportWriter;
     private ReportSourceWriter<KyufuhiTuchiGenmenhoseiIchiranReportSource> reportSourceWriter;
+    private ShutsuryokujunRelateEntity 出力順entity;
 
     @Override
     protected void initialize() {
+        出力順entity = ReportUtil.get出力順情報(KyufuhiTsuchiGenmenHosei.ShutsuryokujunEnum.class,
+                SubGyomuCode.DBC介護給付,
+                ReportIdDBC.DBC200043.getReportId(),
+                processParameter.get帳票出力順ID());
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         spoolWorkPath = manager.getEucOutputDirectry();
         市町村コードList = processParameter.get市町村コードList();
@@ -84,7 +93,7 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toMapperParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toMapperParameter(出力順entity.get出力順OrderBy()));
     }
 
     @Override
@@ -96,12 +105,24 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
                 setNewLine(NewLine.CRLF).
                 hasHeader(false).
                 build();
-        reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200043.getReportId().value()).create();
-        reportSourceWriter = new ReportSourceWriter<>(reportWriter);
+        if (!出力順entity.getPageBreakKeys().isEmpty()) {
+            reportWriter = BatchReportFactory.
+                    createBatchReportWriter(ReportIdDBC.DBC200043.getReportId().getColumnValue(), SubGyomuCode.DBC介護給付)
+                    .addBreak(new BreakerCatalog<KyufuhiTuchiGenmenhoseiIchiranReportSource>().
+                            simplePageBreaker(出力順entity.getPageBreakKeys())).create();
+        } else {
+            reportWriter = BatchReportFactory.
+                    createBatchReportWriter(ReportIdDBC.DBC200043.getReportId().getColumnValue(), SubGyomuCode.DBC介護給付).create();
+        }
+        reportSourceWriter = new ReportSourceWriter(reportWriter);
     }
 
     @Override
-    protected void process(KyufuTsuchiGenmenHoseiEntity entity) {
+    protected void keyBreakProcess(KyufuTsuchiGenmenHoseiEntity entity) {
+    }
+
+    @Override
+    protected void usualProcess(KyufuTsuchiGenmenHoseiEntity entity) {
         get給付費通知減免補正一覧表のCSV出力(entity);
         get給付費通知減免補正一覧表の帳票出力(entity);
     }
@@ -170,7 +191,10 @@ public class KyufuhiTsuchiGenmenHoseiIchiranhyoProcess extends BatchProcessBase<
         KyufuhiTsuchiGenmenHosei business = new KyufuhiTsuchiGenmenHosei();
         RString 保険者コード = AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().value();
         RString 保険者名 = AssociationFinderFactory.createInstance().getAssociation().get市町村名();
-        KyufuhiTuchiGenmenhoseiIchiranEntity reportEntity = business.get給付費通知減免補正一覧表の帳票情報(entity, 保険者コード, 保険者名);
+        KyufuhiTuchiGenmenhoseiIchiranEntity reportEntity = business.get給付費通知減免補正一覧表の帳票情報(entity,
+                保険者コード,
+                保険者名,
+                出力順entity);
         KyufuhiTuchiGenmenhoseiIchiranReport report = new KyufuhiTuchiGenmenhoseiIchiranReport(reportEntity);
         report.writeBy(reportSourceWriter);
     }

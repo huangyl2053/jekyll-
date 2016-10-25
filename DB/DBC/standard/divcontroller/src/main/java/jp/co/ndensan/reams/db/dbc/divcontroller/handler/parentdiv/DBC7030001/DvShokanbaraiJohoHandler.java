@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.KetteiJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShiharaiHoho;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShoriJokyo;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710020.DBC710020_HanyoListShokanbaraiJokyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.DvKensakuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.DvShokanChushutsuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.DvShokanbaraiJohoDiv;
@@ -169,8 +169,8 @@ public class DvShokanbaraiJohoHandler {
      * @param 市町村判定 RString
      * @return バッチ用パラメータ
      */
-    public HanyoListShokanbaraiJokyoBatchParameter setBatchParamter(RString 市町村判定) {
-        HanyoListShokanbaraiJokyoBatchParameter parameter = new HanyoListShokanbaraiJokyoBatchParameter();
+    public DBC710020_HanyoListShokanbaraiJokyoParameter setBatchParamter(RString 市町村判定) {
+        DBC710020_HanyoListShokanbaraiJokyoParameter parameter = new DBC710020_HanyoListShokanbaraiJokyoParameter();
         DvKensakuJokenDiv panel = div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDvKensakuJoken();
         RDate サービス提供年月F = panel.getTxtShokanServiceTeikyoYM().getFromValue();
         RDate サービス提供年月T = panel.getTxtShokanServiceTeikyoYM().getToValue();

@@ -103,4 +103,19 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
                 .add(ShikyugakuKeisanKekkaTorokuMessage.自己負担額証明書整理番号既に存在, div.getTxtJikoFutanSeiriNom())
                 .build();
     }
+
+    /**
+     * 内訳入力途中チェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validate内訳入力途中() {
+        IValidationMessages message = new ShikyugakuKeisanKekkaTorokuValidator(div).validate内訳入力途中();
+        return create内訳入力途中チェックDictionary().check(message);
+    }
+
+    private ValidationDictionary create内訳入力途中チェックDictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(ShikyugakuKeisanKekkaTorokuMessage.内訳入力途中).build();
+    }
 }
