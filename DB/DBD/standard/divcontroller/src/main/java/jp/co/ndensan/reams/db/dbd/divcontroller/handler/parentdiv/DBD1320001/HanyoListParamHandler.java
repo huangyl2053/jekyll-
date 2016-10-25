@@ -813,6 +813,8 @@ public class HanyoListParamHandler {
 
     private void restore汎用リスト_施設入退所BatchParameter(BatchParameterMap batchParameterMap) {
         ChushutsuHohoKubun 抽出方法区分 = batchParameterMap.getParameterValue(ChushutsuHohoKubun.class, 抽出方法区分パラメータ名称2);
+        div.getRadChushutsuJokenB1().clearSelectedItem();
+        div.getRadChushutsuJokenB2().clearSelectedItem();
         if (抽出方法区分.getコード().equals(ChushutsuHohoKubun.基準日.getコード())) {
             div.getRadChushutsuJokenB1().setSelectedKey(基準日KEY);
         } else {
