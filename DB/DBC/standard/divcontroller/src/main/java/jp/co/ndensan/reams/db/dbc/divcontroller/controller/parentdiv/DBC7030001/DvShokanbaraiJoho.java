@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7030001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710020.DBC710020_HanyoListShokanbaraiJokyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.DvShokanbaraiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7030001.DvShokanbaraiJohoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7030001.DvShokanbaraiJohoValidationHandler;
@@ -118,9 +118,9 @@ public class DvShokanbaraiJoho {
      * @param div 汎用リスト出力(償還払い状況)画面のdiv
      * @return バッチを起動する
      */
-    public ResponseData<HanyoListShokanbaraiJokyoBatchParameter> onClick_btnBatchRegister(DvShokanbaraiJohoDiv div) {
+    public ResponseData<DBC710020_HanyoListShokanbaraiJokyoParameter> onClick_btnBatchRegister(DvShokanbaraiJohoDiv div) {
         RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
-        HanyoListShokanbaraiJokyoBatchParameter parameter = getHandler(div).setBatchParamter(市町村判定);
+        DBC710020_HanyoListShokanbaraiJokyoParameter parameter = getHandler(div).setBatchParamter(市町村判定);
         return ResponseData.of(parameter).respond();
     }
 

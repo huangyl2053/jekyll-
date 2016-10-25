@@ -142,7 +142,7 @@ public class KaigoHokenShotokuJohoIchiranProperty extends ReportPropertyBase<Kai
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), FORMAT.concat(new RString("ShikibetsuTaisho_kanjiShimei")).concat(FORMAT)),
+        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), FORMAT.concat(new RString("meisho")).concat(FORMAT)),
         /**
          * 被保険者番号
          */

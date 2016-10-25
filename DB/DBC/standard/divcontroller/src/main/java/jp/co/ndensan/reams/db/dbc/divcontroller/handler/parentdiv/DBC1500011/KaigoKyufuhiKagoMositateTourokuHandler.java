@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -113,7 +114,11 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
                     KaigoGassan_KyufuJissekiSakuseiKubun.toValue(result.get給付実績作成区分コード()).get名称(),
                     給付区分,
                     deteFormat(result.get審査年月()));
+            if (result.get過誤申立情報() == null) {
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
+            }
             rowList.add(row);
+
         }
         div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().setDataSource(rowList);
         data.set給付実績情報List(resultList);
@@ -133,7 +138,14 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
         div.getTxtMeisaiJigyoshaNo().setValue(給付実績情報.get事業所番号());
         div.getTxtMeisaiJigyoshaName().setValue(給付実績情報.get事業者名());
         div.getTxtMeisaiMoshitateshaKubun().setValue(KagoMoshitate_MoshitateshaKubun.保険者申立.get名称());
-        div.getTxtMeisaiShokisaiHokenshaNo().setValue(給付実績情報.get証記載保険者番号());
+        RString 証記載保険者番号 = 給付実績情報.get証記載保険者番号();
+        if (証記載保険者番号.length() == 証記載保険者番号_7) {
+            証記載保険者番号 = 証記載保険者番号.substring(1);
+        }
+        if (証記載保険者番号.length() == 証記載保険者番号_8) {
+            証記載保険者番号 = 証記載保険者番号.substring(2);
+        }
+        div.getTxtMeisaiShokisaiHokenshaNo().setValue(証記載保険者番号);
         if (!RString.isNullOrEmpty(給付実績情報.getサービス提供年月())) {
             div.getTxtMeisaiTeikyoYM().setValue(new RDate(給付実績情報.getサービス提供年月().toString()));
         }

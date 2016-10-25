@@ -573,6 +573,8 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
             item.setListHonin1_7(entity.get本人更正前().get本人生活保護終了年月日());
             item.setListHonin1_8(entity.get本人更正前().get本人老齢年金開始年月日());
             item.setListHonin1_9(entity.get本人更正前().get本人老齢年金終了年月日());
+            item.setListHonin1_10(entity.get本人更正前().get本人限界層該当開始年月日());
+            item.setListHonin1_11(entity.get本人更正前().get本人限界層該当終了年月日());
             item.setListHonin2_1(entity.get本人更正前().get本人識別コード());
             item.setListHonin2_2(entity.get本人更正前().get本人氏名());
             item.setListHonin2_3(entity.get本人更正前().get本人性別());

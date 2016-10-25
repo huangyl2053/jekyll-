@@ -233,11 +233,17 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
     }
 
     private RString 年号アスタリスク2(RString 年月日) {
-        return 半角アスタリスク1.equals(年月日) ? 半角アスタリスク2 : get年号(new FlexibleDate(年月日));
+        if (年月日 != null) {
+            return 半角アスタリスク1.equals(年月日) ? 半角アスタリスク2 : get年号(new FlexibleDate(年月日));
+        }
+        return RString.EMPTY;
     }
 
     private RString 年月日アスタリスク6(RString 年月日) {
-        return 半角アスタリスク1.equals(年月日) ? 半角アスタリスク6 : get年月日(new FlexibleDate(年月日));
+        if (年月日 != null) {
+            return 半角アスタリスク1.equals(年月日) ? 半角アスタリスク6 : get年月日(new FlexibleDate(年月日));
+        }
+        return RString.EMPTY;
     }
 
     private RString 後文字数分編集(RString 被保険者氏名カナ) {

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.soufujouhou;
 
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -29,4 +30,5 @@ public class SoufuJouhouRelateEntity {
     private RString 申立者区分コード;
     private RString 申立単位数;
     private RString 申立事由コード;
+    private UaFt200FindShikibetsuTaishoEntity psmEntity;
 }

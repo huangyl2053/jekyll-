@@ -125,6 +125,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
         if (帳票情報.get被保険者番号() != null) {
             List<RString> 被保険者番号List = new ArrayList<>();
             RString 保険者番号 = 帳票情報.get被保険者番号().value();
+            source.hihokenshaNo = 保険者番号;
             for (int i = 0; i < 保険者番号.length(); i++) {
                 被保険者番号List.add(保険者番号.substring(i, i + 1));
             }

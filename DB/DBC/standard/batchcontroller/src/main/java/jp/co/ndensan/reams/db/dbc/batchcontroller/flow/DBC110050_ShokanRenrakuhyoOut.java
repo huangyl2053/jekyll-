@@ -546,10 +546,9 @@ public class DBC110050_ShokanRenrakuhyoOut extends BatchFlowBase<DBC110050_Shoka
      */
     @Step(帳票出力_送付済)
     protected IBatchFlowCommand outputReportSofusumi() {
-        Long 出力順ID = getParameter().get出力順ID() == null ? new Long(0L) : new Long(getParameter().get出力順ID().toString());
         ShokanRenrakuhyoOutputReportProcessParam parameter
                 = new ShokanRenrakuhyoOutputReportProcessParam(new FlexibleYearMonth(getParameter().get処理年月().toDateString()),
-                        出力順ID);
+                        Long.valueOf(getParameter().get出力順ID().toString()));
         return loopBatch(ShokanRenrakuhyoOutputReportProcess.class).arguments(parameter).define();
     }
 
@@ -560,10 +559,9 @@ public class DBC110050_ShokanRenrakuhyoOut extends BatchFlowBase<DBC110050_Shoka
      */
     @Step(帳票出力_未送付)
     protected IBatchFlowCommand outputReportMiSofu() {
-        Long 出力順ID = getParameter().get出力順ID() == null ? new Long(0L) : new Long(getParameter().get出力順ID().toString());
         ShokanRenrakuhyoOutputReportProcessParam parameter
                 = new ShokanRenrakuhyoOutputReportProcessParam(new FlexibleYearMonth(getParameter().get処理年月().toDateString()),
-                        出力順ID);
+                        Long.valueOf(getParameter().get出力順ID().toString()));
         return loopBatch(ShokanRenrakuhyoOutputReport2Process.class).arguments(parameter).define();
     }
 
@@ -574,10 +572,9 @@ public class DBC110050_ShokanRenrakuhyoOut extends BatchFlowBase<DBC110050_Shoka
      */
     @Step(DB更新_送付済)
     protected IBatchFlowCommand updateDBSofusumi() {
-        Long 出力順ID = getParameter().get出力順ID() == null ? new Long(0L) : new Long(getParameter().get出力順ID().toString());
         ShokanRenrakuhyoOutputReportProcessParam parameter
                 = new ShokanRenrakuhyoOutputReportProcessParam(new FlexibleYearMonth(getParameter().get処理年月().toDateString()),
-                        出力順ID);
+                        Long.valueOf(getParameter().get出力順ID().toString()));
         return loopBatch(ShokanRenrakuhyoUpdateDBProcess.class).arguments(parameter).define();
     }
 
@@ -588,10 +585,9 @@ public class DBC110050_ShokanRenrakuhyoOut extends BatchFlowBase<DBC110050_Shoka
      */
     @Step(DB更新_未送付)
     protected IBatchFlowCommand updateDBMiSofu() {
-        Long 出力順ID = getParameter().get出力順ID() == null ? new Long(0L) : new Long(getParameter().get出力順ID().toString());
         ShokanRenrakuhyoOutputReportProcessParam parameter
                 = new ShokanRenrakuhyoOutputReportProcessParam(new FlexibleYearMonth(getParameter().get処理年月().toDateString()),
-                        出力順ID);
+                        Long.valueOf(getParameter().get出力順ID().toString()));
         return loopBatch(ShokanRenrakuhyoUpdateDB2Process.class).arguments(parameter).define();
     }
 

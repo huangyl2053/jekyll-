@@ -100,12 +100,11 @@
     <select resultOrdered="true" id="select特別徴収同定候補者一覧"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiMybatisParameter"
             resultMap="resultMap_getTokuchoTaishoKouhosyaListJoho" fetchSize="500">
-        select
-        <include refid="allColumn_UeT0511NenkinTokuchoKaifuJoho" />,
-        <include refid="allColumns_DbT1001HihokenshaDaichoTemp" />,
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2019TokuchoMidoteiJohoMapper.allColumns_DbT2019TokuchoMidoteiJoho" />
-        FROM
+        WITH master AS (
+        select 
+        <include refid="allColumn_UeT0511NenkinTokuchoKaifuJoho" />
+        ,<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2019TokuchoMidoteiJohoMapper.allColumns_DbT2019TokuchoMidoteiJoho" />
+        FROM 
         rgdb."DbT2019TokuchoMidoteiJoho" AS "DbT2019TokuchoMidoteiJoho"
         INNER JOIN rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
         ON "DbT2019TokuchoMidoteiJoho"."shoriNendo" = "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo"
@@ -113,19 +112,27 @@
         AND "DbT2019TokuchoMidoteiJoho"."nenkinCode" = "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode"
         AND "DbT2019TokuchoMidoteiJoho"."hosokuM" = "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki"
         AND "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = #{業務コード}
-        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
+        )
+        select
+        <include refid="allColumns_master" />
+        ,<include refid="allColumns_DbT1001HihokenshaDaichoTemp" />
+        ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        master
+        LEFT JOIN 
+        <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_First"/>    
+        (SELECT ARRAY_AGG(CAST (master."dbT2019TokuchoMidoteiJoho_shikibetsuCode" AS TEXT)) FROM master)
+        <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
         AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON "DbT2019TokuchoMidoteiJoho"."shikibetsuCode" =
+        ON master."dbT2019TokuchoMidoteiJoho_shikibetsuCode" =
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         LEFT JOIN "rgdb"."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
         ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
         WHERE
-        "DbT2019TokuchoMidoteiJoho"."shoriNendo" = #{処理年度}
-        AND "DbT2019TokuchoMidoteiJoho"."kisoNenkinNo" = #{基礎年金番号}
-        AND "DbT2019TokuchoMidoteiJoho"."nenkinCode" = #{年金コード}
-        AND "DbT2019TokuchoMidoteiJoho"."hosokuM" = #{捕捉月}
+        master."dbT2019TokuchoMidoteiJoho_shoriNendo" = #{処理年度}
+        AND master."dbT2019TokuchoMidoteiJoho_kisoNenkinNo" = #{基礎年金番号}
+        AND master."dbT2019TokuchoMidoteiJoho_nenkinCode" = #{年金コード}
+        AND master."dbT2019TokuchoMidoteiJoho_hosokuM" = #{捕捉月}
     </select>
 
     <resultMap id="resultMap_getTokuchoTaishoKouhosyaListJoho" autoMapping="true"
@@ -145,14 +152,11 @@
     <select resultOrdered="true" id="select特別徴収同定候補者詳細"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiMybatisParameter"
             resultMap="resultMap_getTokuchoTaishoKouhosyaDetailJoho" fetchSize="500">
-
-        select
-        <include refid="allColumn_UeT0511NenkinTokuchoKaifuJoho" />,
-        <include refid="allColumns_DbT1001HihokenshaDaichoTemp" />,
-        <include refid="allColumns_DbT2001ChoshuHohoTemp" />,
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2019TokuchoMidoteiJohoMapper.allColumns_DbT2019TokuchoMidoteiJoho" />
-        FROM
+        WITH master AS (
+        select 
+        <include refid="allColumn_UeT0511NenkinTokuchoKaifuJoho" />
+        ,<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2019TokuchoMidoteiJohoMapper.allColumns_DbT2019TokuchoMidoteiJoho" />
+        FROM 
         rgdb."DbT2019TokuchoMidoteiJoho" AS "DbT2019TokuchoMidoteiJoho"
         INNER JOIN rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
         ON "DbT2019TokuchoMidoteiJoho"."shoriNendo" = "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo"
@@ -160,23 +164,32 @@
         AND "DbT2019TokuchoMidoteiJoho"."nenkinCode" = "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode"
         AND "DbT2019TokuchoMidoteiJoho"."hosokuM" = "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki"
         AND "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = #{業務コード}
-        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
+        )
+        SELECT
+        <include refid="allColumns_master" />,
+        <include refid="allColumns_DbT1001HihokenshaDaichoTemp" />,
+        <include refid="allColumns_DbT2001ChoshuHohoTemp" />,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        master
+        LEFT JOIN 
+        <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_First"/>    
+        (SELECT ARRAY_AGG(CAST (master."dbT2019TokuchoMidoteiJoho_shikibetsuCode" AS TEXT)) FROM master)
+        <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
         AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
-        ON "DbT2019TokuchoMidoteiJoho"."shikibetsuCode" =
+        ON master."dbT2019TokuchoMidoteiJoho_shikibetsuCode" =
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
         LEFT JOIN rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
         ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
         LEFT JOIN rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
         ON "DbT1001HihokenshaDaicho"."hihokenshaNo" = "DbT2001ChoshuHoho"."hihokenshaNo"
-        AND "DbT2001ChoshuHoho"."fukaNendo" = "DbT2019TokuchoMidoteiJoho"."shoriNendo"
+        AND "DbT2001ChoshuHoho"."fukaNendo" = master."dbT2019TokuchoMidoteiJoho_shoriNendo"
         WHERE
-        "DbT2019TokuchoMidoteiJoho"."shoriNendo" = #{処理年度}
-        AND "DbT2019TokuchoMidoteiJoho"."kisoNenkinNo" = #{基礎年金番号}
-        AND "DbT2019TokuchoMidoteiJoho"."nenkinCode" = #{年金コード}
-        AND "DbT2019TokuchoMidoteiJoho"."hosokuM" = #{捕捉月}
-        AND "DbT2019TokuchoMidoteiJoho"."shikibetsuCode" = #{識別コード}
+        master."dbT2019TokuchoMidoteiJoho_shoriNendo" = #{処理年度}
+        AND master."dbT2019TokuchoMidoteiJoho_kisoNenkinNo" = #{基礎年金番号}
+        AND master."dbT2019TokuchoMidoteiJoho_nenkinCode" = #{年金コード}
+        AND master."dbT2019TokuchoMidoteiJoho_hosokuM" = #{捕捉月}
+        AND master."dbT2019TokuchoMidoteiJoho_shikibetsuCode" = #{識別コード}
     </select>
 
     <resultMap id="resultMap_getTokuchoTaishoKouhosyaDetailJoho" autoMapping="true"
@@ -196,16 +209,18 @@
     <select resultOrdered="true" id="select被保険者情報取得"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiMybatisParameter"
             resultMap="resultMap_getHihokenshaJoho" fetchSize="500">
-
-        select
+        WITH "DbT1001HihokenshaDaicho" as(
+        select * from rgdb."DbV1001HihokenshaDaicho")
+        SELECT
         <include refid="allColumns_DbT1001HihokenshaDaichoTemp" />,
         <include refid="allColumns_DbT2001ChoshuHohoTemp" />,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
-        rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
-        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
+        "DbT1001HihokenshaDaicho"
+        LEFT JOIN 
+        <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_First"/>    
+        (SELECT ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT)) FROM "DbT1001HihokenshaDaicho")
+        <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
         AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
         ON "DbT1001HihokenshaDaicho"."shikibetsuCode" =
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
@@ -252,7 +267,86 @@
             AND   "DbT2001ChoshuHoho". "yokunendoKariHosokuM"  = #{捕捉月}
         </if>
     </select>
+    <sql id ="tableName_PsmParamClassWithoutShikibetsuCodeList_First">
+        rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',false,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+    </sql>
+    <sql id ="tableName_PsmParamClassWithoutShikibetsuCodeList_Second">
+        )
+    </sql>
 
+    <sql id="allColumns_master">
+        master."ueT0511NenkinTokuchoKaifuJoho_gyomuCode" AS "ueT0511NenkinTokuchoKaifuJoho_gyomuCode"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_shoriNendo" AS "ueT0511NenkinTokuchoKaifuJoho_shoriNendo"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_tsuchiNaiyoCode" AS "ueT0511NenkinTokuchoKaifuJoho_tsuchiNaiyoCode"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_shoriTaishoYM" AS "ueT0511NenkinTokuchoKaifuJoho_shoriTaishoYM"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_kisoNenkinNo" AS "ueT0511NenkinTokuchoKaifuJoho_kisoNenkinNo"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_nenkinCode" AS "ueT0511NenkinTokuchoKaifuJoho_nenkinCode"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_koseiCityCode" AS "ueT0511NenkinTokuchoKaifuJoho_koseiCityCode"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_renban" AS "ueT0511NenkinTokuchoKaifuJoho_renban"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_shoriTimestamp" AS "ueT0511NenkinTokuchoKaifuJoho_shoriTimestamp"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_renkeiShubetsu" AS "ueT0511NenkinTokuchoKaifuJoho_renkeiShubetsu"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_hosokuTsuki" AS "ueT0511NenkinTokuchoKaifuJoho_hosokuTsuki"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_tenbikiTsuki" AS "ueT0511NenkinTokuchoKaifuJoho_tenbikiTsuki"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_ShikibetsuCode" AS "ueT0511NenkinTokuchoKaifuJoho_ShikibetsuCode"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_hihokenshaNo" AS "ueT0511NenkinTokuchoKaifuJoho_hihokenshaNo"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_kokuhoSetaiCode" AS "ueT0511NenkinTokuchoKaifuJoho_kokuhoSetaiCode"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtCityCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtCityCode"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtTsuchiNaiyoCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtTsuchiNaiyoCode"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtBaitaiCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtBaitaiCode"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuSeidoCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuSeidoCode"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtSakuseiYMD" AS "ueT0511NenkinTokuchoKaifuJoho_dtSakuseiYMD"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKisoNenkinNo" AS "ueT0511NenkinTokuchoKaifuJoho_dtKisoNenkinNo"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtNenkinCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtNenkinCode"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtYobi1" AS "ueT0511NenkinTokuchoKaifuJoho_dtYobi1"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtBirthDay" AS "ueT0511NenkinTokuchoKaifuJoho_dtBirthDay"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtSeibetsu" AS "ueT0511NenkinTokuchoKaifuJoho_dtSeibetsu"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKanaShimei" AS "ueT0511NenkinTokuchoKaifuJoho_dtKanaShimei"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtShiftCode1" AS "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode1"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKanjiShimei" AS "ueT0511NenkinTokuchoKaifuJoho_dtKanjiShimei"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtShiftCode2" AS "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode2"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtYubinNo" AS "ueT0511NenkinTokuchoKaifuJoho_dtYubinNo"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKanaJusho" AS "ueT0511NenkinTokuchoKaifuJoho_dtKanaJusho"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtShiftCode3" AS "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode3"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKanjiJusho" AS "ueT0511NenkinTokuchoKaifuJoho_dtKanjiJusho"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtShiftCode4" AS "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode4"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKakushuKubun" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKubun"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtShoriKekka" AS "ueT0511NenkinTokuchoKaifuJoho_dtShoriKekka"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKokiIkanCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtKokiIkanCode"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKakushuYMD" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuYMD"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku1" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku1"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku2" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku2"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku3" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku3"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtYobi2" AS "ueT0511NenkinTokuchoKaifuJoho_dtYobi2"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKyosaiNenkinshoshoKigoNo" AS "ueT0511NenkinTokuchoKaifuJoho_dtKyosaiNenkinshoshoKigoNo"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku4" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku4"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku5" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku5"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku6" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku6"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku7" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku7"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku8" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku8"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtTeishiYM" AS "ueT0511NenkinTokuchoKaifuJoho_dtTeishiYM"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtYobi4Juminzei" AS "ueT0511NenkinTokuchoKaifuJoho_dtYobi4Juminzei"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_dtKojinNo" AS "ueT0511NenkinTokuchoKaifuJoho_dtKojinNo"
+        ,master."ueT0511NenkinTokuchoKaifuJoho_kokuhoYoteiSoshitsuKubun" AS "ueT0511NenkinTokuchoKaifuJoho_kokuhoYoteiSoshitsuKubun"
+        ,master."dbT2019TokuchoMidoteiJoho_shoriNendo" AS "dbT2019TokuchoMidoteiJoho_shoriNendo"
+        ,master."dbT2019TokuchoMidoteiJoho_kisoNenkinNo" AS "dbT2019TokuchoMidoteiJoho_kisoNenkinNo"
+        ,master."dbT2019TokuchoMidoteiJoho_nenkinCode" AS "dbT2019TokuchoMidoteiJoho_nenkinCode"
+        ,master."dbT2019TokuchoMidoteiJoho_hosokuM" AS "dbT2019TokuchoMidoteiJoho_hosokuM"
+        ,master."dbT2019TokuchoMidoteiJoho_shikibetsuCode" AS "dbT2019TokuchoMidoteiJoho_shikibetsuCode"
+        ,master."dbT2019TokuchoMidoteiJoho_insertDantaiCd" AS "dbT2019TokuchoMidoteiJoho_insertDantaiCd"
+        ,master."dbT2019TokuchoMidoteiJoho_insertTimestamp" AS "dbT2019TokuchoMidoteiJoho_insertTimestamp"
+        ,master."dbT2019TokuchoMidoteiJoho_insertReamsLoginId" AS "dbT2019TokuchoMidoteiJoho_insertReamsLoginId"
+        ,master."dbT2019TokuchoMidoteiJoho_insertContextId" AS "dbT2019TokuchoMidoteiJoho_insertContextId"
+        ,master."dbT2019TokuchoMidoteiJoho_isDeleted" AS "dbT2019TokuchoMidoteiJoho_isDeleted"
+        ,master."dbT2019TokuchoMidoteiJoho_updateCount" AS "dbT2019TokuchoMidoteiJoho_updateCount"
+        ,master."dbT2019TokuchoMidoteiJoho_lastUpdateTimestamp" AS "dbT2019TokuchoMidoteiJoho_lastUpdateTimestamp"
+        ,master."dbT2019TokuchoMidoteiJoho_lastUpdateReamsLoginId" AS "dbT2019TokuchoMidoteiJoho_lastUpdateReamsLoginId"
+        ,master."dbT2019TokuchoMidoteiJoho_kaishiM" AS "dbT2019TokuchoMidoteiJoho_kaishiM"
+        ,master."dbT2019TokuchoMidoteiJoho_fuichiRiyuCode" AS "dbT2019TokuchoMidoteiJoho_fuichiRiyuCode"
+        ,master."dbT2019TokuchoMidoteiJoho_kakuninJokyoKbn" AS "dbT2019TokuchoMidoteiJoho_kakuninJokyoKbn"
+    </sql>
     <sql id="allColumns_DbT1001HihokenshaDaichoTemp">
         "DbT1001HihokenshaDaicho"."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
         "DbT1001HihokenshaDaicho"."idoYMD" as "dbT1001HihokenshaDaicho_idoYMD",

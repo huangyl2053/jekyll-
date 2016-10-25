@@ -163,8 +163,12 @@ public class DBC8010001MainHandler {
         div.getRadSiharaihohou().setDataSource(list6);
 
         if (null != dbc) {
-            div.getTxtZenkaiTaishoYmdRange().setFromValue(dbc.getEntity().getTaishoKaishiYMD().toRDate());
-            div.getTxtZenkaiTaishoYmdRange().setToValue(dbc.getEntity().getTaishoShuryoYMD().toRDate());
+            if (null != dbc.getEntity().getTaishoKaishiYMD() && !dbc.getEntity().getTaishoKaishiYMD().isEmpty()) {
+                div.getTxtZenkaiTaishoYmdRange().setFromValue(dbc.getEntity().getTaishoKaishiYMD().toRDate());
+            }
+            if (null != dbc.getEntity().getTaishoShuryoYMD() && !dbc.getEntity().getTaishoShuryoYMD().isEmpty()) {
+                div.getTxtZenkaiTaishoYmdRange().setToValue(dbc.getEntity().getTaishoShuryoYMD().toRDate());
+            }
         }
 
         List<KeyValueDataSource> list7 = new ArrayList<>();

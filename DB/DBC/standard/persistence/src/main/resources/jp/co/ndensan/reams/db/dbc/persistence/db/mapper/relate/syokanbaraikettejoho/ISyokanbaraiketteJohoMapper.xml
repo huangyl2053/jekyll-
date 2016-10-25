@@ -15,7 +15,7 @@
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="fukushiYoguShohinName" column="fukushiYoguShohinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="kounyuKingaku" column="kounyuKingaku" />
-        <result property="shiharaiKingaku" column="shiharaiKingaku" />
+        <result property="shiharaiKingaku" column="shiharaiKingaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="sagakuKingaku" column="sagakuKingaku" />
         <result property="tableKbn" column="tableKbn" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dekidakaKbn" column="dekidakaKbn" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -30,10 +30,10 @@
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="fukushiYoguShohinName" column="fukushiYoguShohinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="tanisuTotal" column="tanisuTotal" />
-        <result property="seikyuKaku" column="seikyuKaku" />
+        <result property="seikyuKaku" column="seikyuKaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="seikyugakuSagakuKingaku" column="seikyugakuSagakuKingaku" />
         <result property="dekidakaIryohiTanisuTotal" column="dekidakaIryohiTanisuTotal" />
-        <result property="dekidakaSeikyukaku" column="dekidakaSeikyukaku" />
+        <result property="dekidakaSeikyukaku" column="dekidakaSeikyukaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="dekidakaSeikyugakuSagaku" column="dekidakaSeikyugakuSagaku" />
         <result property="updateCount" column="updateCount" />
     </resultMap>
@@ -49,7 +49,7 @@
         ,' '                                                                AS  serviceName
         ,DbT3048ShokanFukushiYoguHanbaihi."fukushiYoguShohinName"           AS  fukushiYoguShohinName
         ,DbT3048ShokanFukushiYoguHanbaihi."kounyuKingaku"                   AS kounyuKingaku
-        ,DbT3048ShokanFukushiYoguHanbaihi."kounyuKingaku" * CAST(DbT3038ShokanKihon."hokenKyufuritsu" AS DECIMAL) /100    AS  shiharaiKingaku
+        ,CAST(CAST(DbT3048ShokanFukushiYoguHanbaihi."kounyuKingaku" * CAST(DbT3038ShokanKihon."hokenKyufuritsu" AS DECIMAL) /100  AS Integer) AS Decimal)AS  shiharaiKingaku
         ,DbT3048ShokanFukushiYoguHanbaihi."sagakuKingaku"
         ,'2'               AS      tableKbn
         ,'0'               AS      dekidakaKbn
@@ -84,7 +84,7 @@
         ,DbT7130KaigoServiceShurui."serviceShuruiMeisho"                      AS serviceName
         ,' '                                                                  AS fukushiYoguShohinName
         ,DbT3049ShokanJutakuKaishu."kaishuKingaku"                            AS kounyuKingaku
-        ,DbT3049ShokanJutakuKaishu."kaishuKingaku" * CAST(DbT3038ShokanKihon."hokenKyufuritsu" AS DECIMAL) /100 AS shiharaiKingaku
+        ,CAST (CAST(DbT3049ShokanJutakuKaishu."kaishuKingaku" * CAST(DbT3038ShokanKihon."hokenKyufuritsu" AS DECIMAL) /100 AS Integer)AS Decimal) AS shiharaiKingaku
         ,DbT3049ShokanJutakuKaishu."sagakuKingaku"
         ,'1'               AS tableKbn
         ,'0'               AS dekidakaKbn
@@ -141,7 +141,7 @@
         ,DbT7130KaigoServiceShurui."serviceShuruiMeisho"      AS "serviceName"
         ,' '                                                  AS "fukushiYoguShohinName"
         ,DbT3053ShokanShukei."tanisuTotal"                    AS "kounyuKingaku"
-        ,(CAST(DbT3038ShokanKihon."hokenKyufuritsu" AS DECIMAL)* DbT3053ShokanShukei."tanisuTotal" * DbT3053ShokanShukei."tanisuTanka")/100  AS "shiharaiKingaku"
+        ,CAST(CAST((CAST(DbT3038ShokanKihon."hokenKyufuritsu" AS DECIMAL)* DbT3053ShokanShukei."tanisuTotal" * DbT3053ShokanShukei."tanisuTanka")/100 AS Integer)AS  Decimal) AS "shiharaiKingaku"
         ,DbT3053ShokanShukei."seikyugakuSagakuKingaku"        AS "sagakuKingaku"
         ,'3' AS "tableKbn"
         ,'0' AS "dekidakaKbn"
@@ -173,7 +173,7 @@
         ,'出来高医療費'                                         AS "serviceName"
         ,''                                                   AS "fukushiYoguShohinName"
         ,DbT3053ShokanShukei."dekidakaIryohiTanisuTotal"      AS "kounyuKingaku"
-        ,(CAST(DbT3038ShokanKihon."hokenKyufuritsu" AS DECIMAL) * DbT3053ShokanShukei."dekidakaIryohiTanisuTotal" * 10)/100  AS "shiharaiKingaku"
+        ,CAST(CAST((CAST(DbT3038ShokanKihon."hokenKyufuritsu" AS DECIMAL) * DbT3053ShokanShukei."dekidakaIryohiTanisuTotal" * 10)/100  AS Integer ) AS Decimal )AS "shiharaiKingaku"
         ,DbT3053ShokanShukei."dekidakaSeikyugakuSagaku"       AS "sagakuKingaku"
         ,'3' AS "tableKbn"
         ,'1' AS "dekidakaKbn"
@@ -213,10 +213,10 @@
         ,DbT7130KaigoServiceShurui."serviceShuruiMeisho"      AS "serviceName"
         ,' '                                                  AS "fukushiYoguShohinName"
         ,DbT3053ShokanShukei."tanisuTotal"
-        ,(CAST(DbT3038ShokanKihon."hokenKyufuritsu" AS DECIMAL)* DbT3053ShokanShukei."tanisuTotal" * DbT3053ShokanShukei."tanisuTanka")/100  AS "seikyuKaku"
+        ,CAST(CAST((CAST(DbT3038ShokanKihon."hokenKyufuritsu" AS DECIMAL)* DbT3053ShokanShukei."tanisuTotal" * DbT3053ShokanShukei."tanisuTanka")/100 AS Integer) AS Decimal )AS "seikyuKaku"
         ,DbT3053ShokanShukei."seikyugakuSagakuKingaku"
         ,DbT3053ShokanShukei."dekidakaIryohiTanisuTotal"
-        ,(CAST(DbT3038ShokanKihon."hokenKyufuritsu" AS DECIMAL) * DbT3053ShokanShukei."dekidakaIryohiTanisuTotal" * 10)/100  AS "dekidakaSeikyukaku"
+        ,CAST(CAST((CAST(DbT3038ShokanKihon."hokenKyufuritsu" AS DECIMAL) * DbT3053ShokanShukei."dekidakaIryohiTanisuTotal" * 10)/100 AS Integer)AS Decimal) AS "dekidakaSeikyukaku"
         ,DbT3053ShokanShukei."dekidakaSeikyugakuSagaku"
         ,DbT3053ShokanShukei."updateCount"
         FROM

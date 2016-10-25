@@ -5,13 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC3500011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3500011.JyusinDataBaitaiTorikomuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3500011.JyusinDataList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC3500011.HokenshaSofuListHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
@@ -69,6 +72,11 @@ public class JyusinDataBaitaiTorikomu {
     public ResponseData<JyusinDataBaitaiTorikomuDiv> onClick_torikomu(JyusinDataBaitaiTorikomuDiv div) {
 
         div.getPanelUpload().setVisible(true);
+        List<JyusinDataList_Row> rowList = div.getJyusinDataList().getDataSource();
+        for (JyusinDataList_Row row : rowList) {
+            row.setDeleteButtonState(DataGridButtonState.Disabled);
+        }
+        div.getJyusinDataList().setDataSource(rowList);
         return ResponseData.of(div).respond();
     }
 
@@ -82,6 +90,11 @@ public class JyusinDataBaitaiTorikomu {
     public ResponseData<JyusinDataBaitaiTorikomuDiv> onClick_close(JyusinDataBaitaiTorikomuDiv div) {
 
         div.getPanelUpload().setVisible(false);
+        List<JyusinDataList_Row> rowList = div.getJyusinDataList().getDataSource();
+        for (JyusinDataList_Row row : rowList) {
+            row.setDeleteButtonState(DataGridButtonState.Enabled);
+        }
+        div.getJyusinDataList().setDataSource(rowList);
         return ResponseData.of(div).respond();
     }
 

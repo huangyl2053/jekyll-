@@ -5,6 +5,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.juryoininkeiyakujigyosha.JuryoininKeiyakuJigyoshaParameter;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.DBC0300011TransitionEventName.事業者選択;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.DBC0300011TransitionEventName.戻る;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.PtnTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.dgKeiyakuJigyosya_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0300011.PtnTotalHandler;
@@ -182,15 +183,15 @@ public class PtnTotal {
                         .replace(追加メッセージ1.toString()));
             }
         } else if (KEY_2.equals(div.getPnlCondition().getRdoMeisyo().getSelectedKey())) {
-            if (div.getPnlCondition().getTxtMeisyoKana().getValue().isNullOrEmpty()
-                    && div.getPnlCondition().getTxtMeisyoKanji().getValue().isNullOrEmpty()
-                    && div.getPnlCondition().getDdlKeiyakuSyurui().getSelectedKey().isNullOrEmpty()) {
+            if (RString.isNullOrEmpty(div.getPnlCondition().getTxtMeisyoKana().getValue())
+                    && RString.isNullOrEmpty(div.getPnlCondition().getTxtMeisyoKanji().getValue())
+                    && RString.isNullOrEmpty(div.getPnlCondition().getDdlKeiyakuSyurui().getSelectedKey())) {
                 throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage()
                         .replace(追加メッセージ2.toString()));
             }
         } else {
             if (div.getPnlCondition().getTxtYubin().getValue().isEmpty()
-                    && div.getPnlCondition().getTxtJyusyoKanji().getValue().isNullOrEmpty()) {
+                    && RString.isNullOrEmpty(div.getPnlCondition().getTxtJyusyoKanji().getValue())) {
                 throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage()
                         .replace(追加メッセージ3.toString()));
             }
@@ -254,6 +255,17 @@ public class PtnTotal {
         return responseData;
     }
 
+    /**
+     * 「戻る」ボタン
+     *
+     * @param div PtnTotalDiv
+     * @return ResponseData
+     */
+    public ResponseData<PtnTotalDiv> onClick_btnBack(PtnTotalDiv div) {
+        ViewStateHolder.put(ViewStateKeys.表示モード, null);
+        return ResponseData.of(div).forwardWithEventName(戻る).respond();
+    }
+
     private void click検索(PtnTotalDiv div) {
         div.getPnlCondition().setDisplayNone(true);
         div.getPnlData().setDisplayNone(false);
@@ -277,13 +289,13 @@ public class PtnTotal {
             keiyakuJigyoshaNo = new RString(div.getPnlCondition().getTxtJigyosyakeyakuNo().getValue().toString());
         } else if (KEY_2.equals(div.getPnlCondition().getRdoMeisyo().getSelectedKey())) {
             selectedName = true;
-            if (!div.getPnlCondition().getTxtMeisyoKana().getValue().isNullOrEmpty()) {
+            if (!RString.isNullOrEmpty(div.getPnlCondition().getTxtMeisyoKana().getValue())) {
                 keiyakuJigyoshaKanaName = new AtenaKanaMeisho(div.getPnlCondition().getTxtMeisyoKana().getValue());
             }
             if (div.getPnlCondition().getChkMeisyoKana().isAllSelected()) {
                 sameKanaName = true;
             }
-            if (!div.getPnlCondition().getTxtMeisyoKanji().getValue().isNullOrEmpty()) {
+            if (!RString.isNullOrEmpty(div.getPnlCondition().getTxtMeisyoKanji().getValue())) {
                 keiyakuJigyoshaName = new AtenaMeisho(div.getPnlCondition().getTxtMeisyoKanji().getValue());
             }
             if (div.getPnlCondition().getChkMeisyoKanji().isAllSelected()) {
@@ -297,7 +309,7 @@ public class PtnTotal {
             if (!div.getPnlCondition().getTxtYubin().getValue().isEmpty()) {
                 keiyakuJigyoshaYubinNo = div.getPnlCondition().getTxtYubin().getValue();
             }
-            if (!div.getPnlCondition().getTxtJyusyoKanji().getValue().isNullOrEmpty()) {
+            if (!RString.isNullOrEmpty(div.getPnlCondition().getTxtJyusyoKanji().getValue())) {
                 keiyakuJigyoshaJusho = new AtenaJusho(div.getPnlCondition().getTxtJyusyoKanji().getValue());
             }
             if (div.getPnlCondition().getChkJyusyoKanji().isAllSelected()) {

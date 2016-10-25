@@ -516,7 +516,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
 
     private void エラーチェック処理_電算２用部分3() {
         RString 現住所 = 取込後期高齢者情報Entity.get住所();
-        if (RStringUtil.is全角Only(現住所)
+        if (!RStringUtil.is全角Only(現住所)
                 && !Pattern.compile(正則表現_半角空白.toString()).matcher(現住所).matches()) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_65);
             if (文言設定flag) {

@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshihara
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBCMN43002_高額サービス等支給（不支給）決定通知書のReportSourceクラスです。
@@ -55,6 +57,9 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource implements IRep
     public RString tsuchibun2;
     @ReportItem(name = "hihokenshaName", order = 19)
     public RString hihokenshaName;
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
+    @ReportItem(name = "hihokenshaNo", length = 1, order = 20)
+    public RString hihokenshaNo;
     @ReportItem(name = "hihokenshaNo1", length = 1, order = 20)
     public RString hihokenshaNo1;
     @ReportItem(name = "hihokenshaNo2", length = 1, order = 21)
@@ -377,6 +382,9 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource implements IRep
     public RString ninshoshaShimeiKakeru;
     @ReportItem(name = "koinShoryaku", length = 15, order = 180)
     public RString koinShoryaku;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 15)
+    public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

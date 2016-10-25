@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 共同処理用受給者異動連絡票エラー訂正のCSVEntityクラスです。
  *
- * @reamsid_L DBC-2770-070 jinjue
+ * @reamsid_L DBC-2770-060 jinjue
  */
 @lombok.Getter
 @lombok.Setter

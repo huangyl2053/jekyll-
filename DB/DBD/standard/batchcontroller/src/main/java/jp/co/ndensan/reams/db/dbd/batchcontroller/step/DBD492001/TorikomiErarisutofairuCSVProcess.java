@@ -59,6 +59,7 @@ public class TorikomiErarisutofairuCSVProcess extends BatchProcessBase<Errordata
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
+                hasHeader(true).
                 setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 build();

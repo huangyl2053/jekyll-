@@ -29,7 +29,6 @@ public class SeikatsuhogoRirekiHandler {
     private final SeikatsuhogoRirekiDiv div;
     private final RString 登録 = new RString("登録");
     private final RString 照会 = new RString("照会");
-    private final RString 表示モード_新規 = new RString("新規");
     private final RString 線 = new RString("～");
 
     /**
@@ -106,13 +105,23 @@ public class SeikatsuhogoRirekiHandler {
     /**
      * 生活保護明細ダイアログを表示します。
      *
+     * @param 新規モード 新規モード
+     */
+    public void onbtn_Shiki(RString 新規モード) {
+        SeikaatsuhogoDataModel dataModel = new SeikaatsuhogoDataModel();
+        dataModel.set表示モード(新規モード);
+        div.setHdnDataPass(DataPassingConverter.serialize(dataModel));
+    }
+
+    /**
+     * 生活保護明細ダイアログを表示します。
+     *
      * @param 表示モード 表示モード
      */
     public void onbtn_HiyuoJi(RString 表示モード) {
         SeikaatsuhogoDataModel dataModel = new SeikaatsuhogoDataModel();
         dataModel.set表示モード(表示モード);
-        if (div.getDgSeikatsuhogoRireki().getDataSource() != null && !div.getDgSeikatsuhogoRireki().getDataSource().isEmpty()
-                && !表示モード_新規.equals(表示モード)) {
+        if (div.getDgSeikatsuhogoRireki().getDataSource() != null && !div.getDgSeikatsuhogoRireki().getDataSource().isEmpty()) {
             dgSeikatsuhogoRireki_Row dgRow = div.getDgSeikatsuhogoRireki().getSelectedItems().get(0);
             dataModel.set受給者番号(dgRow.getTxtJukyushaNo().getValue());
             dataModel.set受給開始日(dgRow.getTxtKaishiYMD().getValue());

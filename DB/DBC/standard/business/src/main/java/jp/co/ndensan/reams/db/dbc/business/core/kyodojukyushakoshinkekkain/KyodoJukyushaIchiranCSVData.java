@@ -401,11 +401,11 @@ public class KyodoJukyushaIchiranCSVData {
         if (KyodoJukyushaKoshinkekkaIchiranOutPutOrder.保険者番号.get項目ID().equals(item.get項目ID())) {
             帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.hokenshaNo.name());
         } else if (KyodoJukyushaKoshinkekkaIchiranOutPutOrder.郵便番号.get項目ID().equals(item.get項目ID())) {
-            帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.yubinNo.name());
+            帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.list2_3.name());
         } else if (KyodoJukyushaKoshinkekkaIchiranOutPutOrder.町域コード.get項目ID().equals(item.get項目ID())) {
-            帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.choikiCode.name());
+            帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.list2_4.name());
         } else if (KyodoJukyushaKoshinkekkaIchiranOutPutOrder.行政区コード.get項目ID().equals(item.get項目ID())) {
-            帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.gyoseikuCode.name());
+            帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.list1_9.name());
         } else if (KyodoJukyushaKoshinkekkaIchiranOutPutOrder.氏名５０音カナ.get項目ID().equals(item.get項目ID())) {
             帳票物理名 = new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.shimei50onKana.name());
         } else if (KyodoJukyushaKoshinkekkaIchiranOutPutOrder.市町村コード.get項目ID().equals(item.get項目ID())) {
@@ -429,15 +429,15 @@ public class KyodoJukyushaIchiranCSVData {
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString("yubinNo"), new RString("\"郵便番号\"")),
+        郵便番号(new RString("0001"), new RString("list2_3"), new RString("\"郵便番号\"")),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString("choikiCode"), new RString("\"町域コード\"")),
+        町域コード(new RString("0002"), new RString("list2_4"), new RString("\"町域コード\"")),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString("gyoseikuCode"), new RString("\"行政区コード\"")),
+        行政区コード(new RString("0004"), new RString("list1_9"), new RString("\"行政区コード\"")),
         /**
          * 氏名５０音カナ
          */
@@ -449,7 +449,7 @@ public class KyodoJukyushaIchiranCSVData {
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString("hihokenshaNo"), new RString("\"被保険者番号\""));
+        被保険者番号(new RString("0104"), new RString("hihokenshaNo"), new RString("\"登録被保険者番号\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

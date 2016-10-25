@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc710020;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710020.HanyoListShokanbaraiJokyoNoRenbanProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710020.HanyoListShokanbaraiJokyoProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710020.DBC710020_HanyoListShokanbaraiJokyoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBC-3093-020 chenaoqi
  */
-public class DBC710020_HanyoListShokanbaraiJokyoFlow
-        extends BatchFlowBase<HanyoListShokanbaraiJokyoBatchParameter> {
+public class DBC710020_HanyoListShokanbaraiJokyo
+        extends BatchFlowBase<DBC710020_HanyoListShokanbaraiJokyoParameter> {
 
     private static final String CSV_EUC_PROCESS = "csvEucProcess";
 
@@ -27,7 +27,7 @@ public class DBC710020_HanyoListShokanbaraiJokyoFlow
         executeStep(CSV_EUC_PROCESS);
     }
 
-    @Step(CSV_EUC_PROCESS)
+    @Step (CSV_EUC_PROCESS)
     IBatchFlowCommand csvEucProcess() {
         if (getParameter().is連番付加()) {
             return loopBatch(HanyoListShokanbaraiJokyoProcess.class)

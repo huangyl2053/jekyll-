@@ -13,16 +13,16 @@
         WHERE
         "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<]]> #{shoriYM}
         AND "DbT3017KyufujissekiKihon"."kokanShikibetsuNo" LIKE '113%'
-        <if test="国保連共同処理受託区分_償還 == '1' and saishoriKubun != '1'">
+        <if test="国保連共同処理受託区分_償還 == 1 and saishoriKubun != 1">
             AND ("DbT3017KyufujissekiKihon"."shinsaYM" IS NULL OR "DbT3017KyufujissekiKihon"."shinsaYM" = '')
         </if>
-        <if test="国保連共同処理受託区分_償還 == '1' and saishoriKubun == '1'">
+        <if test="国保連共同処理受託区分_償還 == 1 and saishoriKubun == 1">
             AND ("DbT3017KyufujissekiKihon"."shinsaYM" IS NULL OR "DbT3017KyufujissekiKihon"."shinsaYM" = '' OR "DbT3017KyufujissekiKihon"."shinsaYM" = #{shoriYM})
         </if>
-        <if test="国保連共同処理受託区分_償還 == '2' and saishoriKubun != '1'">
+        <if test="国保連共同処理受託区分_償還 == 2 and saishoriKubun != 1">
             AND ("DbT3017KyufujissekiKihon"."sofuYM" IS NULL OR "DbT3017KyufujissekiKihon"."sofuYM" = '')
         </if>
-        <if test="国保連共同処理受託区分_償還 == '2' and saishoriKubun == '1'">
+        <if test="国保連共同処理受託区分_償還 == 2 and saishoriKubun == 1">
             AND ("DbT3017KyufujissekiKihon"."sofuYM" IS NULL OR "DbT3017KyufujissekiKihon"."sofuYM" = '' OR "DbT3017KyufujissekiKihon"."sofuYM" = #{shoriYM})
         </if>
         ORDER BY
@@ -42,20 +42,20 @@
         rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS "DbT3028KyufujissekiKogakuKaigoServicehi"
         WHERE
         "DbT3028KyufujissekiKogakuKaigoServicehi"."serviceTeikyoYM" <![CDATA[<]]> #{shoriYM}
-        <if test="国保連共同処理受託区分_高額 == '1' and saishoriKubun != '1'">
+        <if test="国保連共同処理受託区分_高額 == 1 and saishoriKubun != 1">
             AND ("DbT3028KyufujissekiKogakuKaigoServicehi"."shinsaYM" IS NULL OR "DbT3028KyufujissekiKogakuKaigoServicehi"."shinsaYM" = '')
             AND "DbT3028KyufujissekiKogakuKaigoServicehi"."kokanJohoShikibetsuNo" LIKE '113%'
         </if>
-        <if test="国保連共同処理受託区分_高額 == '1' and saishoriKubun == '1'">
+        <if test="国保連共同処理受託区分_高額 == 1 and saishoriKubun == 1">
             AND ("DbT3028KyufujissekiKogakuKaigoServicehi"."shinsaYM" IS NULL OR "DbT3028KyufujissekiKogakuKaigoServicehi"."shinsaYM" = '' OR "DbT3028KyufujissekiKogakuKaigoServicehi"."shinsaYM" = #{shoriYM})
             AND "DbT3028KyufujissekiKogakuKaigoServicehi"."kokanJohoShikibetsuNo" LIKE '113%'
         </if>
-        <if test="国保連共同処理受託区分_高額 == '2' and saishoriKubun != '1'">
+        <if test="国保連共同処理受託区分_高額 == 2 and saishoriKubun != 1">
             AND ("DbT3028KyufujissekiKogakuKaigoServicehi"."sofuYM" IS NULL OR "DbT3028KyufujissekiKogakuKaigoServicehi"."sofuYM" = '')
             AND ("DbT3028KyufujissekiKogakuKaigoServicehi"."kokanJohoShikibetsuNo" LIKE '113%'
             OR ("DbT3028KyufujissekiKogakuKaigoServicehi"."kokanJohoShikibetsuNo" LIKE '111%' AND "DbT3028KyufujissekiKogakuKaigoServicehi"."sakuseiKubun" = '1'))
         </if>
-        <if test="国保連共同処理受託区分_高額 == '2' and saishoriKubun == '1'">
+        <if test="国保連共同処理受託区分_高額 == 2 and saishoriKubun == 1">
             AND ("DbT3028KyufujissekiKogakuKaigoServicehi"."sofuYM" IS NULL OR "DbT3028KyufujissekiKogakuKaigoServicehi"."sofuYM" = '' OR "DbT3028KyufujissekiKogakuKaigoServicehi"."sofuYM" = #{shoriYM})
             AND ("DbT3028KyufujissekiKogakuKaigoServicehi"."kokanJohoShikibetsuNo" LIKE '113%'
             OR ("DbT3028KyufujissekiKogakuKaigoServicehi"."kokanJohoShikibetsuNo" LIKE '111%' AND "DbT3028KyufujissekiKogakuKaigoServicehi"."sakuseiKubun" = '1'))
@@ -712,10 +712,10 @@
             "shinsaYM" = #{shoriYM},
             "updateCount" = "updateCount" + 1,
             "lastUpdateTimestamp" = now()
-        <if test="国保連共同処理受託区分_償還 == '1'">
+        <if test="国保連共同処理受託区分_償還 == 1">
             ,"sofuYM" = ''
         </if>
-        <if test="国保連共同処理受託区分_償還 == '2'">
+        <if test="国保連共同処理受託区分_償還 == 2">
             ,"sofuYM" = #{shoriYM}
         </if>
         WHERE A."inputShikibetsuNo" = #{inputShikibetsuNo}
@@ -746,10 +746,10 @@
             "shinsaYM" = #{shoriYM},
             "updateCount" = "updateCount" + 1,
             "lastUpdateTimestamp" = now()
-        <if test="国保連共同処理受託区分_高額 == '1'">
+        <if test="国保連共同処理受託区分_高額 == 1">
             ,"sofuYM" = ''
         </if>
-        <if test="国保連共同処理受託区分_高額 == '2'">
+        <if test="国保連共同処理受託区分_高額 == 2">
             ,"sofuYM" = #{shoriYM}
         </if>
         FROM "DbWT1132KyufujissekiKogakuKaigoServicehi" AS B

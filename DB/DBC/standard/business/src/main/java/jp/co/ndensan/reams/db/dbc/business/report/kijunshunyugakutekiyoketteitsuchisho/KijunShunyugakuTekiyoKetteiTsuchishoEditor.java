@@ -127,6 +127,11 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
         if (基準収入額適用決定通知書パラメータ.get識別コード３() != null) {
             source.shikibetsuCode3 = 基準収入額適用決定通知書パラメータ.get識別コード３().value();
         }
+        set帳票制御共通(source);
+        return source;
+    }
+
+    private void set帳票制御共通(KijunShunyugakuTekiyoKetteiTsuchishoSource source) {
         if (帳票制御共通 != null) {
             if (ChohyoMongonYoshiki.フォント小.getコード().equals(帳票制御共通.get定型文文字サイズ())) {
                 source.tsuchibun1 = 基準収入額適用決定通知書パラメータ.get通知文１();
@@ -141,7 +146,6 @@ public class KijunShunyugakuTekiyoKetteiTsuchishoEditor implements
                 source.tsuchibunMixTwo2 = 基準収入額適用決定通知書パラメータ.get通知文7_下小();
             }
         }
-        return source;
     }
 
     private void set算定基準額(KijunShunyugakuTekiyoKetteiTsuchishoSource source) {

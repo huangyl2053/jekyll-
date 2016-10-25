@@ -59,8 +59,16 @@ public class HanyoRisutoJyukyusyaMybatisParameter implements IMyBatisParameter {
     private FlexibleDate seinengappiYMDFrom;
     private FlexibleDate seinengappiYMDTo;
     private RString hokenshaNo;
-    private RString tiiki_From;
-    private RString tiiki_To;
+    private RString tiiki_From1;
+    private RString tiiki_To1;
+    private RString tiiki_From2;
+    private RString tiiki_To2;
+    private RString tiiki_From3;
+    private RString tiiki_To3;
+    private RString jusyo_From;
+    private RString jusyo_To;
+    private RString gyoseiku_From;
+    private RString gyoseiku_To;
     private RString 出力順;
     private boolean is認定結果0length0;
     private boolean is認定結果1length0;
@@ -83,6 +91,23 @@ public class HanyoRisutoJyukyusyaMybatisParameter implements IMyBatisParameter {
     private boolean is認定結果9length非0;
     private boolean is認定結果10length0;
     private boolean is認定結果10length非0;
+    private RString データ区分_32;
+    private RString データ区分_41;
+    private RString データ区分_49;
+    private RString データ区分_11;
+    private RString データ区分_19;
+    private RString データ区分_31;
+    private RString データ区分_33;
+    private RString データ区分_39;
+    private RString 要介護認定_21;
+    private RString 要介護認定_22;
+    private RString 要介護認定_23;
+    private RString 要介護認定_24;
+    private RString 要介護認定_25;
+    private RString 要介護認定_11;
+    private RString 要介護認定_19;
+    private RString 要介護認定_12;
+    private RString 要介護認定_13;
 
     /**
      * コンストラクタです。
@@ -124,8 +149,16 @@ public class HanyoRisutoJyukyusyaMybatisParameter implements IMyBatisParameter {
      * @param seinengappiYMDFrom FlexibleDate
      * @param hokenshaNo RString
      * @param seinengappiYMDTo FlexibleDate
-     * @param tiiki_From RString
-     * @param tiiki_To RString
+     * @param tiiki_From1 RString
+     * @param tiiki_To1 RString
+     * @param tiiki_From2 RString
+     * @param tiiki_To2 RString
+     * @param tiiki_From3 RString
+     * @param tiiki_To3 RString
+     * @param jusyo_From RString
+     * @param jusyo_To RString
+     * @param gyoseiku_From RString
+     * @param gyoseiku_To RString
      * @param is認定結果0length0 boolean
      * @param is認定結果1length0 boolean
      * @param is認定結果1length非0 boolean
@@ -147,6 +180,23 @@ public class HanyoRisutoJyukyusyaMybatisParameter implements IMyBatisParameter {
      * @param is認定結果9length非0 boolean
      * @param is認定結果10length0 boolean
      * @param is認定結果10length非0 boolean
+     * @param データ区分_32 RString
+     * @param データ区分_41 RString
+     * @param データ区分_49 RString
+     * @param データ区分_11 RString
+     * @param データ区分_19 RString
+     * @param データ区分_31 RString
+     * @param データ区分_33 RString
+     * @param データ区分_39 RString
+     * @param 要介護認定_21 RString
+     * @param 要介護認定_22 RString
+     * @param 要介護認定_23 RString
+     * @param 要介護認定_24 RString
+     * @param 要介護認定_25 RString
+     * @param 要介護認定_12 RString
+     * @param 要介護認定_13 RString
+     * @param 要介護認定_11 RString
+     * @param 要介護認定_19 RString
      * @param 出力順 RString
      */
     public HanyoRisutoJyukyusyaMybatisParameter(
@@ -159,13 +209,18 @@ public class HanyoRisutoJyukyusyaMybatisParameter implements IMyBatisParameter {
             boolean is宛名抽出区分_生年月日From, boolean is宛名抽出区分_生年月日To, boolean is宛名抽出条件_保険者コード_非全部,
             boolean is住所, boolean is行政区, boolean is地区1, boolean is地区2, boolean is地区3, boolean 地区選択From, boolean 地区選択To,
             FlexibleDate kijunYMD, FlexibleDate startYMD, FlexibleDate endYMD, FlexibleDate ageFrom, FlexibleDate ageTo,
-            FlexibleDate seinengappiYMDFrom, FlexibleDate seinengappiYMDTo, RString hokenshaNo, RString tiiki_From,
-            RString tiiki_To, boolean is認定結果0length0, boolean is認定結果1length0, boolean is認定結果1length非0,
+            FlexibleDate seinengappiYMDFrom, FlexibleDate seinengappiYMDTo, RString hokenshaNo, RString tiiki_From1,
+            RString tiiki_To1, RString tiiki_From2, RString tiiki_To2, RString tiiki_From3, RString tiiki_To3, RString jusyo_From,
+            RString jusyo_To, RString gyoseiku_From, RString gyoseiku_To,
+            boolean is認定結果0length0, boolean is認定結果1length0, boolean is認定結果1length非0,
             boolean is認定結果2length0, boolean is認定結果2length非0, boolean is認定結果3length0, boolean is認定結果3length非0,
             boolean is認定結果4length0, boolean is認定結果4length非0, boolean is認定結果5length0, boolean is認定結果5length非0,
             boolean is認定結果6length0, boolean is認定結果6length非0, boolean is認定結果7length0, boolean is認定結果7length非0,
             boolean is認定結果8length0, boolean is認定結果8length非0, boolean is認定結果9length0, boolean is認定結果9length非0,
-            boolean is認定結果10length0, boolean is認定結果10length非0, RString 出力順) {
+            boolean is認定結果10length0, boolean is認定結果10length非0, RString データ区分_32, RString データ区分_41, RString データ区分_49,
+            RString データ区分_11, RString データ区分_19, RString データ区分_31, RString データ区分_33, RString データ区分_39,
+            RString 要介護認定_21, RString 要介護認定_22, RString 要介護認定_23, RString 要介護認定_24, RString 要介護認定_25,
+            RString 要介護認定_12, RString 要介護認定_13, RString 要介護認定_11, RString 要介護認定_19, RString 出力順) {
 
         this.shikibetsutaishoParam = shikibetsutaishoParam;
         this.psmAtesaki = psmAtesaki;
@@ -204,8 +259,16 @@ public class HanyoRisutoJyukyusyaMybatisParameter implements IMyBatisParameter {
         this.seinengappiYMDFrom = seinengappiYMDFrom;
         this.seinengappiYMDTo = seinengappiYMDTo;
         this.hokenshaNo = hokenshaNo;
-        this.tiiki_From = tiiki_From;
-        this.tiiki_To = tiiki_To;
+        this.tiiki_From1 = tiiki_From1;
+        this.tiiki_To1 = tiiki_To1;
+        this.tiiki_From2 = tiiki_From2;
+        this.tiiki_To2 = tiiki_To2;
+        this.tiiki_From3 = tiiki_From3;
+        this.tiiki_To3 = tiiki_To3;
+        this.jusyo_From = jusyo_From;
+        this.jusyo_To = jusyo_To;
+        this.gyoseiku_From = gyoseiku_From;
+        this.gyoseiku_To = gyoseiku_To;
         this.is認定結果0length0 = is認定結果0length0;
         this.is認定結果1length0 = is認定結果1length0;
         this.is認定結果1length非0 = is認定結果1length非0;
@@ -227,6 +290,23 @@ public class HanyoRisutoJyukyusyaMybatisParameter implements IMyBatisParameter {
         this.is認定結果9length非0 = is認定結果9length非0;
         this.is認定結果10length0 = is認定結果10length0;
         this.is認定結果10length非0 = is認定結果10length非0;
+        this.データ区分_32 = データ区分_32;
+        this.データ区分_41 = データ区分_41;
+        this.データ区分_49 = データ区分_49;
+        this.データ区分_11 = データ区分_11;
+        this.データ区分_19 = データ区分_19;
+        this.データ区分_31 = データ区分_31;
+        this.データ区分_33 = データ区分_33;
+        this.データ区分_39 = データ区分_39;
+        this.要介護認定_21 = 要介護認定_21;
+        this.要介護認定_22 = 要介護認定_22;
+        this.要介護認定_23 = 要介護認定_23;
+        this.要介護認定_24 = 要介護認定_24;
+        this.要介護認定_25 = 要介護認定_25;
+        this.要介護認定_11 = 要介護認定_11;
+        this.要介護認定_19 = 要介護認定_19;
+        this.要介護認定_12 = 要介護認定_12;
+        this.要介護認定_13 = 要介護認定_13;
         this.出力順 = 出力順;
     }
 }

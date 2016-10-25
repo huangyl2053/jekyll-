@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.Syokanbar
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払決定情報クラスです。
@@ -105,7 +106,7 @@ public class SyokanbaraiketteJoho {
      *
      * @return 支払金額
      */
-    public Integer getShiharaiKingaku() {
+    public Decimal getShiharaiKingaku() {
         return entity.getShiharaiKingaku();
     }
 

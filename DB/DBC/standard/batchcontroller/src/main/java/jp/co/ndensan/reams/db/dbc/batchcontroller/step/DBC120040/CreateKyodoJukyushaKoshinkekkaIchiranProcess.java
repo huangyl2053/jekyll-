@@ -72,8 +72,8 @@ public class CreateKyodoJukyushaKoshinkekkaIchiranProcess extends BatchKeyBreakB
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString コンマ = new RString(",");
     private static final RString デフォルト出力順 = new RString(" ORDER BY dbWT5C30.\"hokenshaNo\" ASC ");
-    private static final RString デフォルト出力順_1 = new RString("\"登録被保険者番号\"");
-    private static final RString デフォルト出力順_2 = new RString("\"集約異動年月日\"");
+    private static final RString デフォルト出力順_1 = new RString("\"登録被保険者番号\" ASC ");
+    private static final RString デフォルト出力順_2 = new RString("\"集約異動年月日\" ASC ");
     private static final int NUM7 = 7;
     private KyodoJukyushaIchiranCSVData kyodoJukyushaIchiranCSVData;
     private IKyodoJukyushaKoshinKekkaInMapper mapper;
