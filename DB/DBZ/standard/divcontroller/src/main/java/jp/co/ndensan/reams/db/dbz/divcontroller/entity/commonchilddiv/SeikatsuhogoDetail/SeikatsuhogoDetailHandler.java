@@ -178,6 +178,8 @@ public class SeikatsuhogoDetailHandler {
         }
         RStringBuilder 停止開始日 = new RStringBuilder();
         RStringBuilder 停止終了日 = new RStringBuilder();
+        RString 開始日 = RString.EMPTY;
+        RString 終了日 = RString.EMPTY;
         for (dgTeishiRireki_Row row : div.getDgTeishiRireki().getDataSource()) {
             停止開始日.append(row.getTxtTeishiKaishiYMD());
             停止開始日.append(連結);
@@ -185,12 +187,13 @@ public class SeikatsuhogoDetailHandler {
             停止終了日.append(連結);
         }
         if (!RString.isNullOrEmpty(停止開始日.toRString())) {
-            停止開始日.toRString().remove(停止開始日.length() - 1);
+            開始日 = 停止開始日.toRString().remove(停止開始日.length() - 1);
         }
         if (!RString.isNullOrEmpty(停止終了日.toRString())) {
-            停止終了日.toRString().remove(停止終了日.length() - 1);
+            終了日 = 停止終了日.toRString().remove(停止終了日.length() - 1);
         }
-        RString 受給期間 = 停止開始日.append(カラ).append(停止終了日.toRString()).toRString();
+        RString 受給期間;
+        受給期間 = 開始日.concat(カラ).concat(終了日);
         if (カラ.equals(受給期間.toString())) {
             受給期間 = RString.EMPTY;
         }
