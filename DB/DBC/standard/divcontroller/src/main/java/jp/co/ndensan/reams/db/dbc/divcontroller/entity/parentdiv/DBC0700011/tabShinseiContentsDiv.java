@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.IJyutakugaisyunaiyoListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
@@ -122,7 +124,7 @@ public class tabShinseiContentsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTxtJutakuOwner(TextBox txtJutakuOwner) {
+    public void  setTxtJutakuOwner(TextBox txtJutakuOwner) {
         this.getTabShinseiJyoho().setTxtJutakuOwner(txtJutakuOwner);
     }
 
@@ -132,7 +134,7 @@ public class tabShinseiContentsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTxtRelationWithHihokensha(TextBox txtRelationWithHihokensha) {
+    public void  setTxtRelationWithHihokensha(TextBox txtRelationWithHihokensha) {
         this.getTabShinseiJyoho().setTxtRelationWithHihokensha(txtRelationWithHihokensha);
     }
 
@@ -142,7 +144,7 @@ public class tabShinseiContentsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setShinseishaInfo(ShinseishaInfoDiv ShinseishaInfo) {
+    public void  setShinseishaInfo(ShinseishaInfoDiv ShinseishaInfo) {
         this.getTabShinseiJyoho().setShinseishaInfo(ShinseishaInfo);
     }
 
@@ -152,7 +154,7 @@ public class tabShinseiContentsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setJutakuKaishuJizenShinseiReason(JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason) {
+    public void  setJutakuKaishuJizenShinseiReason(JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason) {
         this.getTabShinseiJyoho().setJutakuKaishuJizenShinseiReason(JutakuKaishuJizenShinseiReason);
     }
 
@@ -167,7 +169,7 @@ public class tabShinseiContentsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTotalPanel(TotalPanelDiv TotalPanel) {
+    public void  setTotalPanel(TotalPanelDiv TotalPanel) {
         this.getTabJutakuKaisyuJyoho().setTotalPanel(TotalPanel);
     }
 
@@ -182,7 +184,7 @@ public class tabShinseiContentsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTxtJudgeYMD(TextBoxDate txtJudgeYMD) {
+    public void  setTxtJudgeYMD(TextBoxDate txtJudgeYMD) {
         this.getTabShinsaKakka().setTxtJudgeYMD(txtJudgeYMD);
     }
 
@@ -192,7 +194,7 @@ public class tabShinseiContentsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setRadJudgeKubun(RadioButton radJudgeKubun) {
+    public void  setRadJudgeKubun(RadioButton radJudgeKubun) {
         this.getTabShinsaKakka().setRadJudgeKubun(radJudgeKubun);
     }
 
@@ -202,7 +204,7 @@ public class tabShinseiContentsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTxtShoninCondition(TextBoxMultiLine txtShoninCondition) {
+    public void  setTxtShoninCondition(TextBoxMultiLine txtShoninCondition) {
         this.getTabShinsaKakka().setTxtShoninCondition(txtShoninCondition);
     }
 
@@ -212,7 +214,7 @@ public class tabShinseiContentsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTxtFushoninReason(TextBoxMultiLine txtFushoninReason) {
+    public void  setTxtFushoninReason(TextBoxMultiLine txtFushoninReason) {
         this.getTabShinsaKakka().setTxtFushoninReason(txtFushoninReason);
     }
 
@@ -222,7 +224,7 @@ public class tabShinseiContentsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setJutakuKaishuJizenShoninKetteiTsuchisho(JutakuKaishuJizenShoninKetteiTsuchishoDiv JutakuKaishuJizenShoninKetteiTsuchisho) {
+    public void  setJutakuKaishuJizenShoninKetteiTsuchisho(JutakuKaishuJizenShoninKetteiTsuchishoDiv JutakuKaishuJizenShoninKetteiTsuchisho) {
         this.getTabShinsaKakka().setJutakuKaishuJizenShoninKetteiTsuchisho(JutakuKaishuJizenShoninKetteiTsuchisho);
     }
 
