@@ -141,16 +141,16 @@ public class ShotokuJokyoHandler {
             異動年月日 = new RDate(row.getIdoYMD().toString());
             item.set異動年月日(new FlexibleDate(異動年月日.toDateString()));
             item.set住民税(row.getJuminZei());
-            if (!row.getGokeiShotoku().isNullOrEmpty()) {
+            if (!RString.isNullOrEmpty(row.getGokeiShotoku())) {
                 item.set合計所得金額(new Decimal(row.getGokeiShotoku().replace(コンマ, RString.EMPTY).toString()));
             }
-            if (!row.getNenkinShunyu().isNullOrEmpty()) {
+            if (!RString.isNullOrEmpty(row.getNenkinShunyu())) {
                 item.set年金等収入(new Decimal(row.getNenkinShunyu().replace(コンマ, RString.EMPTY).toString()));
             }
-            if (!row.getNenkinShotoku().isNullOrEmpty()) {
+            if (!RString.isNullOrEmpty(row.getNenkinShotoku())) {
                 item.set年金等所得(new Decimal(row.getNenkinShotoku().replace(コンマ, RString.EMPTY).toString()));
             }
-            if (!row.getKazeiShotoku().isNullOrEmpty()) {
+            if (!RString.isNullOrEmpty(row.getKazeiShotoku())) {
                 item.set課税所得(new Decimal(row.getKazeiShotoku().replace(コンマ, RString.EMPTY).toString()));
             }
             更正日 = new RDate(row.getKoseiYMD().toString());
