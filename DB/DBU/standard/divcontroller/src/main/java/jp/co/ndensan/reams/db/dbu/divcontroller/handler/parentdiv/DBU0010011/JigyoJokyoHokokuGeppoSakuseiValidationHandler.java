@@ -29,13 +29,13 @@ public class JigyoJokyoHokokuGeppoSakuseiValidationHandler {
 
     /**
      * DBZE00002「必須項目を入力してください。:%1」
-     *
+     * @param 項目名 メッセージに付加したい項目名
      * @return check必須入力項目
      */
-    public ValidationMessageControlPairs check必須入力項目() {
+    public ValidationMessageControlPairs check必須入力項目(RString 項目名) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(new ValidationMessageControlPair(new JigyoJokyoHokokuGeppoSakuseiValidationHandler.CheckMessages(
-                UrErrorMessages.必須項目_追加メッセージあり, "報告年月")));
+                UrErrorMessages.必須項目_追加メッセージあり, 項目名.toString())));
         return validPairs;
     }
 
