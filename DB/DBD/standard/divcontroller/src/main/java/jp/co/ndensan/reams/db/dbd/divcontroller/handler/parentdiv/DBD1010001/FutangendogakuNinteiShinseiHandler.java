@@ -469,11 +469,13 @@ public class FutangendogakuNinteiShinseiHandler {
      * 「申請理由」変更時の処理
      */
     public void onChange_ddlShinseiRiyu() {
-        set負担段階();
-        set旧措置();
-        set居室種類();
+        if (!申請メニューID.equals(ResponseHolder.getMenuID())) {
+            set負担段階();
+            set旧措置();
+            set居室種類();
 
-        set負担限度額();
+            set負担限度額();
+        }
     }
 
     /**
@@ -667,14 +669,14 @@ public class FutangendogakuNinteiShinseiHandler {
                 && !div.getDdlTashoshitsu().getDataSource().isEmpty()) {
             div.getDdlTashoshitsu().setSelectedIndex(0);
         }
-        set負担限度額食費DDL使用可不可設定(div.getChkKyokaiso().getSelectedKeys().contains(SELECT_KEY0), 
-                div.getDdlKyusochisha().getSelectedKey(), 
+        set負担限度額食費DDL使用可不可設定(div.getChkKyokaiso().getSelectedKeys().contains(SELECT_KEY0),
+                div.getDdlKyusochisha().getSelectedKey(),
                 div.getDdlKyoshitsuShubetsu().getSelectedKey());
-        set負担限度額居室DDL使用可不可設定(div.getChkKyokaiso().getSelectedKeys().contains(SELECT_KEY0), 
-                div.getDdlKyusochisha().getSelectedKey(), 
+        set負担限度額居室DDL使用可不可設定(div.getChkKyokaiso().getSelectedKeys().contains(SELECT_KEY0),
+                div.getDdlKyusochisha().getSelectedKey(),
                 div.getDdlKyoshitsuShubetsu().getSelectedKey());
     }
-    
+
     private void set負担限度額食費DDL使用可不可設定(boolean 境界層, RString 旧措置者区分, RString 居室種別区分) {
         List<DropDownList> dropDownLists;
         if (!境界層
@@ -684,7 +686,7 @@ public class FutangendogakuNinteiShinseiHandler {
             dropDownLists.add(div.getDdlShokuhi());
             setEmptySourceDropDownLists(dropDownLists);
         } else if (境界層
-                && (KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分) 
+                && (KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分)
                 || KyuSochishaKubun.非該当.getコード().equals(旧措置者区分))
                 && 居室種別区分.equals(RString.EMPTY)) {
             dropDownLists = new ArrayList<>();
@@ -695,16 +697,16 @@ public class FutangendogakuNinteiShinseiHandler {
 
     private void set負担限度額居室DDL使用可不可設定(boolean 境界層, RString 旧措置者区分, RString 居室種別区分) {
         List<DropDownList> dropDownLists;
-        if (!境界層 
-                && KyuSochishaKubun.非該当.getコード().equals(旧措置者区分) 
+        if (!境界層
+                && KyuSochishaKubun.非該当.getコード().equals(旧措置者区分)
                 && 居室種別区分.equals(RString.EMPTY)) {
             div.getDdlUnitGataKoshitsu().setDisabled(false);
             div.getDdlUnitGataJunKoshitsu().setDisabled(false);
             div.getDdlJuraiGataKoshitsuTokuyo().setDisabled(false);
             div.getDdlJuraiGataKoshitsuRoken().setDisabled(false);
             div.getDdlTashoshitsu().setDisabled(false);
-        } else if (!境界層 
-                && KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分) 
+        } else if (!境界層
+                && KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分)
                 && 居室種別区分.equals(RString.EMPTY)) {
             dropDownLists = new ArrayList<>();
             dropDownLists.add(div.getDdlJuraiGataKoshitsuRoken());
