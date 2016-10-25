@@ -63,18 +63,18 @@
                 INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
                 ON "ShikibetsuTaisho"."shikibetsuCode"=DbV2502."shikibetsuCode"
                 <if test="年齢層抽出方法== 1">
-                    <if test="年齢範囲開始 !=null">
+                    <if test="年齢範囲開始 !=null and 生年月日範囲終了 !=null">
                         AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
                     </if>
-                    <if test="年齢範囲終了 !=null">
+                    <if test="年齢範囲終了 !=null and 生年月日範囲開始 !=null">
                         AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[>=]]> #{生年月日範囲開始}
                     </if>
                 </if>
                 <if test="年齢層抽出方法== 2">
-                    <if test="生年月日範囲開始1 !=null">
+                    <if test="生年月日範囲開始1 !=null and 生年月日範囲開始 !=null">
                         AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[>=]]> #{生年月日範囲開始}
                     </if>
-                    <if test="生年月日範囲終了1 !=null">
+                    <if test="生年月日範囲終了1 !=null and 生年月日範囲終了 !=null">
                         AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
                     </if>
                 </if>
