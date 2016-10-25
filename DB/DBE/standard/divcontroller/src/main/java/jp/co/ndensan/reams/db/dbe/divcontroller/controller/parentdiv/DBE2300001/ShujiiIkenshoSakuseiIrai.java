@@ -286,7 +286,14 @@ public class ShujiiIkenshoSakuseiIrai {
     public ResponseData<SourceDataCollection> onClick_btnHakkou(ShujiiIkenshoSakuseiIraiDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
         try (ReportManager reportManager = new ReportManager()) {
+            toHozon(div);
+            ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
+            ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameter();
+            Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
+                    = Models.create(manager.get主治医意見書作成依頼情報(param).records());
+            ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼情報, 主治医意見書作成依頼情報);
             printData(div, reportManager);
+            onClick_btnSearch(div);
             response.data = reportManager.publish();
         }
         return response;
@@ -431,9 +438,14 @@ public class ShujiiIkenshoSakuseiIrai {
 
     private ShujiiIkenshoIraiJoho create主治医意見書作成依頼情報(Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報,
             RString 主治医意見書作成期限設定方法, RString 主治医意見書作成期限日数, ShujiiIkenshoSakuseiIraiDiv div, dgShinseishaIchiran_Row row) {
-
+        int RirekiNo;
+        if (Integer.parseInt(row.getRirekiNo().toString()) == 0) {
+            RirekiNo = 1;
+        } else {
+            RirekiNo = Integer.parseInt(row.getRirekiNo().toString());
+        }
         ShujiiIkenshoIraiJoho ikenshoIraiJoho = 主治医意見書作成依頼情報.get(new ShujiiIkenshoIraiJohoIdentifier(
-                new ShinseishoKanriNo(row.getShiseishoKanriNo()), Integer.parseInt(row.getRirekiNo().toString())));
+                new ShinseishoKanriNo(row.getShiseishoKanriNo()), RirekiNo));
         ShujiiIkenshoIraiJohoBuilder builder = ikenshoIraiJoho.createBuilderForEdit();
         builder.set依頼書出力年月日(FlexibleDate.getNowDate());
         if (主治医意見書作成期限設定方法_1.equals(主治医意見書作成期限設定方法)) {
