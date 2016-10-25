@@ -215,9 +215,11 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
             HihokenshaJohoEntity 被保険者情報Entity = 給付額減額把握リストEntity.get被保険者情報Entity();
             if (被保険者情報Entity.get被保険者番号() != null) {
                 source.listUpper1_1 = 被保険者情報Entity.get被保険者番号();
+                source.hihokenshaNo = 被保険者情報Entity.get被保険者番号();
             }
             if (被保険者情報Entity.get識別コード() != null) {
                 source.listUpper2_1 = 被保険者情報Entity.get識別コード();
+                source.shikibetsuCode = 被保険者情報Entity.get識別コード();
             }
             source.listUpper1_2 = 被保険者情報Entity.get被保険者氏名カナ();
             source.listUpper2_2 = 被保険者情報Entity.get被保険者氏名();
