@@ -301,7 +301,7 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
         List<RString> 高額送付情報追加チェックボックス = div.getChkKogakuSofuAdd().getSelectedKeys();
         boolean 高額送付情報追加チェック = (!高額送付情報追加チェックボックス.isEmpty()
                 && チェックボックス_KEY.equals(高額送付情報追加チェックボックス.get(NUM_ZERO)));
-        List<RString> 高額送付情報削除チェックボックス = div.getChkShokanSofuDelete().getSelectedKeys();
+        List<RString> 高額送付情報削除チェックボックス = div.getChkKogakuSofuDelete().getSelectedKeys();
         boolean 高額送付情報削除チェック = (!高額送付情報削除チェックボックス.isEmpty()
                 && チェックボックス_KEY.equals(高額送付情報削除チェックボックス.get(NUM_ZERO)));
         RString 訂正区分 = div.getRadTeiseiKubunCode().getSelectedKey();

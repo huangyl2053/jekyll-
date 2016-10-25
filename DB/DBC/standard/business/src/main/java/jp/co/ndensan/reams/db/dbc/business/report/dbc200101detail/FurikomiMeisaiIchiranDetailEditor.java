@@ -75,7 +75,6 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     private final RDateTime 作成日時;
     private final RString 設定値;
 
-    private final boolean is空白行;
     private int 毎ページ数 = 0;
     private int 総レコード数 = 0;
     private static Decimal 毎ページ振込金額合算 = Decimal.ZERO;
@@ -91,16 +90,14 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
      * @param 支払方法 Furikomi_ShihraiHohoShitei
      * @param 作成日時 RDateTime
      * @param 設定値 RString
-     * @param is空白行 boolean
      */
     protected FurikomiMeisaiIchiranDetailEditor(MeisaiDataEntity 一覧表用データ, IOutputOrder 出力順,
-            Furikomi_ShihraiHohoShitei 支払方法, RDateTime 作成日時, RString 設定値, boolean is空白行) {
+            Furikomi_ShihraiHohoShitei 支払方法, RDateTime 作成日時, RString 設定値) {
         this.一覧表用データ = 一覧表用データ;
         this.出力順 = 出力順;
         this.支払方法 = 支払方法;
         this.作成日時 = 作成日時;
         this.設定値 = 設定値;
-        this.is空白行 = is空白行;
     }
 
     @Override
@@ -116,12 +113,12 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
             毎ページ振込金額合算 = Decimal.ZERO;
             毎ページ数 = 0;
         }
-        if (!is空白行) {
-            editHeader(source);
-            edit明細1(source);
-            edit明細2(source);
-            editフッター(source);
-        }
+
+        editHeader(source);
+        edit明細1(source);
+        edit明細2(source);
+        editフッター(source);
+
         return source;
     }
 
@@ -205,18 +202,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                 RString 郵便番号2 = 振込明細一時TBL.getYubinNo().getYubinNo().substring(LISTINDEX_3);
                 source.listUpper_3 = 郵便番号1.concat(半角ハイフン).concat(郵便番号2);
             }
-            if (!支払方法_口座.equals(一覧表用データ.get振込明細一時TBL().getShiharaiHohoKubunCode())) {
-                if (振込明細一時TBL.getKinyuKikanCode() != null && 振込明細一時TBL.getKinyuKikanShitenCode() != null) {
-                    source.listUpper_4 = 振込明細一時TBL.getKinyuKikanCode().value().
-                            concat(半角ハイフン).concat(振込明細一時TBL.getKinyuKikanShitenCode().value());
-                }
-                if (振込明細一時TBL.getKinyuKikanCode() != null) {
-                    source.listUpper_5 = 振込明細一時TBL.getKinyuKikanCode().value();
-                }
-
-                source.listUpper_6 = 振込明細一時TBL.getYokinShubetsuName();
-                source.listUpper_7 = 振込明細一時TBL.getKozaNo();
-            }
+            set様式連番_1のUpper支払方法_口座以外情報(source, 振込明細一時TBL);
 
             source.listUpper_8 = 振込明細一時TBL.getKetteiTsuchiNo();
 
@@ -266,17 +252,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
             } else {
                 source.listLower_1 = 振込明細一時Data.getJusho().value().substring(0, LISTINDEX_20);
             }
-
-            if (!支払方法_口座.equals(一覧表用データ.get振込明細一時TBL().getShiharaiHohoKubunCode())) {
-                source.listLower_2 = 振込明細一時Data.getKinyuKikanShitenName();
-                if (振込明細一時Data.getKozaMeiginin() != null) {
-                    if (振込明細一時Data.getKozaMeiginin().value().length() <= LISTINDEX_24) {
-                        source.listLower_3 = 振込明細一時Data.getKozaMeiginin().value();
-                    } else {
-                        source.listLower_3 = 振込明細一時Data.getKozaMeiginin().value().substring(0, LISTINDEX_24);
-                    }
-                }
-            }
+            set様式連番_1のLower支払方法_口座以外情報(source, 振込明細一時Data);
 
             if (振込明細一時Data.isShinseiDataFlag()) {
                 source.listLower_4 = 申請中;
@@ -296,31 +272,14 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                         firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
 
-            if (一覧表用データ.get印字様式名称() != null) {
-                if (一覧表用データ.get印字様式名称().length() <= LISTINDEX_4) {
-                    source.listLower_7 = 一覧表用データ.get印字様式名称();
-                } else {
-                    source.listLower_7 = 一覧表用データ.get印字様式名称().substring(0, LISTINDEX_4);
-                }
-            }
+            set様式連番_1のLower支払方法_印字様式名称(source);
             source.listLower_8 = 左カッコ;
             if (一覧表用データ.get様式別集計金額() != null) {
                 source.listLower_9 = DecimalFormatter.toコンマ区切りRString(一覧表用データ.get様式別集計金額(), 0);
             }
             source.listLower_10 = 右カッコ;
 
-            if (一覧表用データ.get集計様式番号() != null) {
-                RString 集計様式番号 = 一覧表用データ.get集計様式番号();
-                if (集計様式番号.equals(NyuryokuShikibetsuNoShokan3Keta.福祉用具販売費.getコード())) {
-                    source.listLower_11 = 福祉用具;
-                } else if (集計様式番号.equals(NyuryokuShikibetsuNoShokan3Keta.住宅改修費.getコード())) {
-                    source.listLower_11 = 住宅改修;
-                } else if (振込明細一時Data.getDataKubun() != null && データ区分_1.equals(振込明細一時Data.getDataKubun())) {
-                    source.listLower_11 = 償還;
-                } else if (振込明細一時Data.getDataKubun() != null && データ区分_2.equals(振込明細一時Data.getDataKubun())) {
-                    source.listLower_11 = 高額;
-                }
-            }
+            set様式連番_1のLower支払方法_集計様式番号(source, 振込明細一時Data);
         }
     }
 
@@ -442,5 +401,62 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
             source.listLower_9 = DecimalFormatter.toコンマ区切りRString(一覧表用データ.get様式別集計金額(), 0);
         }
         source.listLower_10 = 右カッコ;
+    }
+
+    private void set様式連番_1のUpper支払方法_口座以外情報(FurikomiMeisaiIchiranDetailReportSource source, FurikomiDetailTempTableEntity 振込明細一時TBL) {
+        if (!支払方法_口座.equals(一覧表用データ.get振込明細一時TBL().getShiharaiHohoKubunCode())) {
+            if (振込明細一時TBL.getKinyuKikanCode() != null && 振込明細一時TBL.getKinyuKikanShitenCode() != null) {
+                source.listUpper_4 = 振込明細一時TBL.getKinyuKikanCode().value().
+                        concat(半角ハイフン).concat(振込明細一時TBL.getKinyuKikanShitenCode().value());
+            }
+            if (振込明細一時TBL.getKinyuKikanCode() != null) {
+                source.listUpper_5 = 振込明細一時TBL.getKinyuKikanCode().value();
+            }
+
+            source.listUpper_6 = 振込明細一時TBL.getYokinShubetsuName();
+            source.listUpper_7 = 振込明細一時TBL.getKozaNo();
+        }
+    }
+
+    private void set様式連番_1のLower支払方法_口座以外情報(FurikomiMeisaiIchiranDetailReportSource source, FurikomiDetailTempTableEntity 振込明細一時Data) {
+        if (!支払方法_口座.equals(一覧表用データ.get振込明細一時TBL().getShiharaiHohoKubunCode())) {
+            source.listLower_2 = 振込明細一時Data.getKinyuKikanShitenName();
+            set様式連番_1のLower支払方法_口座名義人(source, 振込明細一時Data);
+        }
+    }
+
+    private void set様式連番_1のLower支払方法_口座名義人(FurikomiMeisaiIchiranDetailReportSource source, FurikomiDetailTempTableEntity 振込明細一時Data) {
+        if (振込明細一時Data.getKozaMeiginin() != null) {
+            if (振込明細一時Data.getKozaMeiginin().value().length() <= LISTINDEX_24) {
+                source.listLower_3 = 振込明細一時Data.getKozaMeiginin().value();
+            } else {
+                source.listLower_3 = 振込明細一時Data.getKozaMeiginin().value().substring(0, LISTINDEX_24);
+            }
+        }
+    }
+
+    private void set様式連番_1のLower支払方法_集計様式番号(FurikomiMeisaiIchiranDetailReportSource source, FurikomiDetailTempTableEntity 振込明細一時Data) {
+        if (一覧表用データ.get集計様式番号() != null) {
+            RString 集計様式番号 = 一覧表用データ.get集計様式番号();
+            if (集計様式番号.equals(NyuryokuShikibetsuNoShokan3Keta.福祉用具販売費.getコード())) {
+                source.listLower_11 = 福祉用具;
+            } else if (集計様式番号.equals(NyuryokuShikibetsuNoShokan3Keta.住宅改修費.getコード())) {
+                source.listLower_11 = 住宅改修;
+            } else if (振込明細一時Data.getDataKubun() != null && データ区分_1.equals(振込明細一時Data.getDataKubun())) {
+                source.listLower_11 = 償還;
+            } else if (振込明細一時Data.getDataKubun() != null && データ区分_2.equals(振込明細一時Data.getDataKubun())) {
+                source.listLower_11 = 高額;
+            }
+        }
+    }
+
+    private void set様式連番_1のLower支払方法_印字様式名称(FurikomiMeisaiIchiranDetailReportSource source) {
+        if (一覧表用データ.get印字様式名称() != null) {
+            if (一覧表用データ.get印字様式名称().length() <= LISTINDEX_4) {
+                source.listLower_7 = 一覧表用データ.get印字様式名称();
+            } else {
+                source.listLower_7 = 一覧表用データ.get印字様式名称().substring(0, LISTINDEX_4);
+            }
+        }
     }
 }

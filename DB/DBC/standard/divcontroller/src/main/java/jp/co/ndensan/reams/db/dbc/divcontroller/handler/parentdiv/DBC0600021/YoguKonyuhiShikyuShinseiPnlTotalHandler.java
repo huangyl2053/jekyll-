@@ -350,7 +350,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtHanbaiJigyosha().clearValue();
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtBuyAmount().clearValue();
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtHinmokuCode().clearValue();
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getDdlShumoku().setSelectedKey(BLANK);
+        if (!div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getDdlShumoku().getDataSource().isEmpty()) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getDdlShumoku().setSelectedKey(BLANK);
+        }
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getRadShinsaMethod().setSelectedKey(NUMB1);
     }
 
@@ -1445,7 +1447,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 new RDate(RDate.getNowDate().getYearMonth().minusMonth(設定値).toString()));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDataSource(
                 get保険者(new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                                getTxtTeikyoYM().getValue().getYearMonth().toString())));
+                        getTxtTeikyoYM().getValue().getYearMonth().toString())));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().clearValue();
         RString 給付率 = DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_保険給付率_標準給付率, RDate.getNowDate(),
                 SubGyomuCode.DBU介護統計報告);

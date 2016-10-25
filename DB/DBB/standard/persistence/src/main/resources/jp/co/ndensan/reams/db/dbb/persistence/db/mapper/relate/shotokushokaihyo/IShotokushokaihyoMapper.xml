@@ -469,54 +469,18 @@
     <!--所得照会票データfrom世帯員所得情報Temp1を取得します。-->
     <select resultOrdered="true" id="select所得照会票データ" parameterType="jp.co.ndensan.reams.db.dbb.definition.core.shotokushokaihyo.InsShotokushokaihyoTmpParameter"
             resultMap="ResultMap_ShotokuShoukaiDataMapbEntity"  fetchSize="500">
+        WITH master AS (
         SELECT
         A."shikibetsuCode",
-        C."genLasdecCode",
-        CASE
-        WHEN B."kouhoshakubun"='1' THEN B."tenyuzenzenkokuJushoCode" 
-        WHEN B."kouhoshakubun"='2' THEN C."zenkokuJushoCode"
-        ELSE ''
-        END AS "zenkokuJushoCode",
         B."setaiCode",
         A."hihokenshaNo",
-        CASE
-        WHEN A."honninKubun"='1' THEN C."meisho"
-        ELSE ''
-        END AS "hihokenshaName",
-        CASE
-        WHEN A."honninKubun"='1' AND B."kouhoshakubun"='1' THEN B."tenyuzenjusho" || B."tenyuzenbanchi" || B."tenyuzenkatagaki"
-        WHEN A."honninKubun"='2' AND B."kouhoshakubun"='2' THEN C."jusho" || C."banchi" || C."katagaki"
-        ELSE ''
-        END AS "hihokenshajusho",
-        CASE
-        WHEN B."kouhoshakubun"='1' THEN B."tenyuzenjusho" || B."tenyuzenbanchi" || B."tenyuzenkatagaki"
-        WHEN B."kouhoshakubun"='2' THEN ''
-        ELSE ''
-        END AS "zenjusho",
-        CASE WHEN B."kouhoshakubun"='1' THEN C."jusho" || C."banchi" || C."katagaki"
-        WHEN B."kouhoshakubun"='2' THEN C."jusho" || C."banchi" || C."katagaki"
-        ELSE ''
-        END AS "genjusho",
-        C."kanaMeisho",
-        C."meisho",
-        C."seinengappiYMD",
-        CASE WHEN B."kouhoshakubun"='1' THEN B."torokuIdoYMD"
-        WHEN B."kouhoshakubun"='2' THEN C."shojoIdoYMD"
-        ELSE ''
-        END AS "idoYMD",
+        B."tenyuzenkatagaki",
+        B."tenyuzenbanchi",
+        B."tenyuzenjusho",
+        B."torokuIdoYMD",
         B."kouhoshakubun",
         A."honninKubun",
-        C."choikiCode",
-        C."gyoseikuCode",
-        CASE WHEN B."kouhoshakubun"='1' THEN B."tenyuzenzenkokuJushoCode"
-        ELSE ''
-        END AS "zenjushoCode",
-        C."yubinNo",
-        C."chikuCode1",
-        C."chikuCode2",
-        C."chikuCode3",
-        C."juminJotaiCode",
-        C."kannaiKangaiKubun",
+        B."tenyuzenzenkokuJushoCode",
         A."hihokennshaKubunCode"
         FROM 
         <if test="出力対象 == 2">
@@ -530,12 +494,73 @@
         </if>
         INNER JOIN "ShotokuShoukaiKouhoshaTemp" AS B
         ON A."shikibetsuCode"=B."shikibetsuCode"
+        )
+        SELECT
+        master."shikibetsuCode",
+        C."genLasdecCode",
+        CASE
+        WHEN master."kouhoshakubun"='1' THEN master."tenyuzenzenkokuJushoCode" 
+        WHEN master."kouhoshakubun"='2' THEN C."zenkokuJushoCode"
+        ELSE ''
+        END AS "zenkokuJushoCode",
+        master."setaiCode",
+        master."hihokenshaNo",
+        CASE
+        WHEN master."honninKubun"='1' THEN C."meisho"
+        ELSE ''
+        END AS "hihokenshaName",
+        CASE
+        WHEN master."honninKubun"='1' AND master."kouhoshakubun"='1' THEN master."tenyuzenjusho" || master."tenyuzenbanchi" || master."tenyuzenkatagaki"
+        WHEN master."honninKubun"='2' AND master."kouhoshakubun"='2' THEN C."jusho" || C."banchi" || C."katagaki"
+        ELSE ''
+        END AS "hihokenshajusho",
+        CASE
+        WHEN master."kouhoshakubun"='1' THEN master."tenyuzenjusho" || master."tenyuzenbanchi" || master."tenyuzenkatagaki"
+        WHEN master."kouhoshakubun"='2' THEN ''
+        ELSE ''
+        END AS "zenjusho",
+        CASE WHEN master."kouhoshakubun"='1' THEN C."jusho" || C."banchi" || C."katagaki"
+        WHEN master."kouhoshakubun"='2' THEN C."jusho" || C."banchi" || C."katagaki"
+        ELSE ''
+        END AS "genjusho",
+        C."kanaMeisho",
+        C."meisho",
+        C."seinengappiYMD",
+        CASE WHEN master."kouhoshakubun"='1' THEN master."torokuIdoYMD"
+        WHEN master."kouhoshakubun"='2' THEN C."shojoIdoYMD"
+        ELSE ''
+        END AS "idoYMD",
+        master."kouhoshakubun",
+        master."honninKubun",
+        C."choikiCode",
+        C."gyoseikuCode",
+        CASE WHEN master."kouhoshakubun"='1' THEN master."tenyuzenzenkokuJushoCode"
+        ELSE ''
+        END AS "zenjushoCode",
+        C."yubinNo",
+        C."chikuCode1",
+        C."chikuCode2",
+        C."chikuCode3",
+        C."juminJotaiCode",
+        C."kannaiKangaiKubun",
+        master."hihokennshaKubunCode"
+        FROM master
         INNER JOIN 
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
         ,'','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','','0','0','','','0','0','0',''
-        ,'','','','','','','','','','','','','','','','','', '{  }' ) AS C
-        ON A."shikibetsuCode"=C."shikibetsuCode"
-        ORDER BY "zenkokuJushoCode" ASC, A."setaiCode" ASC, B."kouhoshakubun" ASC, C."choikiCode" ASC, A."honninKubun", A."shikibetsuCode" ASC
+        ,'','','','','','','','','','','','','','','','','', (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                   )) AS C
+        ON master."shikibetsuCode"=C."shikibetsuCode"
+        ORDER BY "zenkokuJushoCode" ASC, 
+                 master."setaiCode" ASC, 
+                 master."kouhoshakubun" ASC, 
+                 C."choikiCode" ASC, 
+                 master."honninKubun", 
+                 master."shikibetsuCode" ASC
      </select>
      
      <resultMap id="ResultMap_ShotokuShoukaiDataMapbEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataMapbEntity" autoMapping="true">
@@ -752,31 +777,49 @@
     <!--所得照会票データ再発行を取得する。-->
     <select resultOrdered="true" id="select所得照会票データ再発行" resultMap="ResultMap_ShotokuShoukaiDataMapaEntity_bk" 
             fetchSize="500">
+        WITH master AS (
         SELECT
         A."shikibetsuCode",
-        C."genLasdecCode",
-        A."shokaisakiLasdecCode" AS 送付先全国住所コード,
+        A."shokaisakiLasdecCode",
         A."setaiCode",
-        '' AS 被保険者番号, 
-        CASE WHEN B."kouhoshakubun"='1' THEN B."tenyuzenjusho" || B."tenyuzenbanchi" || B."tenyuzenkatagaki"
-        WHEN B."kouhoshakubun"='2' THEN ''
-        ELSE ''
-        END AS 前住所,
-        CASE WHEN B."kouhoshakubun"='1' THEN C."jusho" || C."banchi" || C."katagaki"
-        WHEN B."kouhoshakubun"='2' THEN C."jusho" || C."banchi" || C."katagaki"
-        END AS 現住所,
+        B."kouhoshakubun",
+        B."tenyuzenjusho",
+        B."tenyuzenbanchi",
+        B."tenyuzenkatagaki",
         B."atenaKanaShimei",
         B."atenaShimei",
         B."seinengappiYMD",
-        CASE WHEN B."kouhoshakubun"='1' THEN B."torokuIdoYMD"
-        WHEN B."kouhoshakubun"='2' THEN C."shojoIdoYMD"
+        B."torokuIdoYMD",
+        B."tenyuzenzenkokuJushoCode"
+        FROM "SaihaqkouTaishouTemp" AS A
+        INNER JOIN "ShotokuShoukaiKouhoshaTemp" AS B
+        ON A."shikibetsuCode"=B."shikibetsuCode"
+        )
+        SELECT
+        master."shikibetsuCode",
+        C."genLasdecCode",
+        master."shokaisakiLasdecCode" AS 送付先全国住所コード,
+        master."setaiCode",
+        '' AS 被保険者番号, 
+        CASE WHEN master."kouhoshakubun"='1' THEN master."tenyuzenjusho" || master."tenyuzenbanchi" || master."tenyuzenkatagaki"
+        WHEN master."kouhoshakubun"='2' THEN ''
+        ELSE ''
+        END AS 前住所,
+        CASE WHEN master."kouhoshakubun"='1' THEN C."jusho" || C."banchi" || C."katagaki"
+        WHEN master."kouhoshakubun"='2' THEN C."jusho" || C."banchi" || C."katagaki"
+        END AS 現住所,
+        master."atenaKanaShimei",
+        master."atenaShimei",
+        master."seinengappiYMD",
+        CASE WHEN master."kouhoshakubun"='1' THEN master."torokuIdoYMD"
+        WHEN master."kouhoshakubun"='2' THEN C."shojoIdoYMD"
         ELSE ''
         END AS 異動年月日,
-        B."kouhoshakubun",
+        master."kouhoshakubun",
         '' AS 本人区分,
         C."choikiCode",
         C."gyoseikuCode",
-        CASE WHEN B."kouhoshakubun"='1' THEN B."tenyuzenzenkokuJushoCode"
+        CASE WHEN master."kouhoshakubun"='1' THEN master."tenyuzenzenkokuJushoCode"
         ELSE ''
         END AS 前住所コード,
         C."yubinNo",
@@ -784,20 +827,22 @@
         C."chikuCode2",
         C."chikuCode3",
         C."juminJotaiCode"
-        FROM
-        "SaihaqkouTaishouTemp" AS A
-        INNER JOIN "ShotokuShoukaiKouhoshaTemp" AS B
-        ON A."shikibetsuCode"=B."shikibetsuCode"
+        FROM master
         INNER JOIN 
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
         ,'','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','','0','0','','','0','0','0',''
-        ,'','','','','','','','','','','','','','','','','', '{  }' ) AS C
-        ON A."shikibetsuCode"=C."shikibetsuCode"
-        ORDER BY A."shokaisakiLasdecCode",
-                 A."setaiCode",
-                 B."kouhoshakubun",
+        ,'','','','','','','','','','','','','','','','','', (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                   )) AS C
+        ON master."shikibetsuCode"=C."shikibetsuCode"
+        ORDER BY master."shokaisakiLasdecCode",
+                 master."setaiCode",
+                 master."kouhoshakubun",
                  C."choikiCode",
-                 A."shikibetsuCode"
+                 master."shikibetsuCode"
      </select>
      
      <!--賦課基準日時点の世帯員を取得します。-->

@@ -175,6 +175,15 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
                 public boolean apply(ShikyugakuKeisanKekkaTorokuDiv div) {
                     return SpecHelper.is既に存在のチェック(div);
                 }
+            },
+    /**
+     * 内訳入力途中のチェック。
+     */
+    内訳入力途中のチェック {
+                @Override
+                public boolean apply(ShikyugakuKeisanKekkaTorokuDiv div) {
+                    return SpecHelper.is内訳入力途中のチェック(div);
+                }
             };
 
     /**
@@ -344,6 +353,11 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
                 }
             }
             return true;
+        }
+
+        public static boolean is内訳入力途中のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
+            return div.getShikyugakuKeisanKekkaTorokuDetailPanel().isReadOnly()
+                    || div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().isDisplayNone();
         }
     }
 }

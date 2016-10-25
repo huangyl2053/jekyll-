@@ -65,7 +65,7 @@
             "shikibetsuCode"."choikiCode" as "choikiCode",
             "shikibetsuCode"."chikuCode1" as "chikuCode1",
             "shikibetsuCode"."chikuCode2" as "chikuCode2",
-            "shikibetsuCode"."chikuCode2" as "chikuCode2",
+            "shikibetsuCode"."chikuCode3" as "chikuCode3",
             "shikibetsuCode"."genLasdecCode" as "genLasdecCode"
        FROM
             master

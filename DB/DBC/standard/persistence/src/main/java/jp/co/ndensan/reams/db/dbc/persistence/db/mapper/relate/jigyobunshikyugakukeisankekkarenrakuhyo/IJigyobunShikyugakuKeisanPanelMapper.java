@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigyobunshikyugakukeisankekkarenrakuhyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanPanelEntity;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuPanelListParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanPanelEntity;
 
 /**
  * 事業高額合算・事業分支給額計算結果連絡票（単）のマッパーインタフェースです。
@@ -21,7 +21,7 @@ public interface IJigyobunShikyugakuKeisanPanelMapper {
      * 対象データを取得します
      *
      * @param parameter JigyobunShikyugakuPanelListParameter
-     * @return List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
+     * @return List<JigyobunShikyugakuKeisanPanelEntity>
      */
     List<JigyobunShikyugakuKeisanPanelEntity> get対象データ(JigyobunShikyugakuPanelListParameter parameter);
 
@@ -30,7 +30,7 @@ public interface IJigyobunShikyugakuKeisanPanelMapper {
      * 処理対象のデータを取得します
      *
      * @param parameter JigyobunShikyugakuPanelListParameter
-     * @return List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
+     * @return List<JigyobunShikyugakuKeisanPanelEntity>
      */
     List<JigyobunShikyugakuKeisanPanelEntity> get処理対象データ(JigyobunShikyugakuPanelListParameter parameter);
 }

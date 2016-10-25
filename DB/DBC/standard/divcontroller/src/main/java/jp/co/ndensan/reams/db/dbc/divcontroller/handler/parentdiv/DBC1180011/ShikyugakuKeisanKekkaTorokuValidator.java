@@ -107,4 +107,18 @@ public class ShikyugakuKeisanKekkaTorokuValidator {
                 .messages());
         return messages;
     }
+
+    /**
+     * 内訳入力途中のチェックです。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validate内訳入力途中() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(ShikyugakuKeisanKekkaTorokuSpec.内訳入力途中のチェック)
+                .thenAdd(ShikyugakuKeisanKekkaTorokuMessage.内訳入力途中)
+                .messages());
+        return messages;
+    }
 }

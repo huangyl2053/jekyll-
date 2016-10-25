@@ -53,7 +53,7 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
     private void setShinsaHanteiIraiIchiranhyo(ShinsaHanteiIraiIchiranhyoReportSource source) {
         source.printTimeStamp = get印刷日時();
         source.title = DbBusinessConfig.get(
-                ConfigNameDBD.要介護認定_要支援認定審査判定依頼一覧表, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
+                ConfigNameDBD.介護認定審査依頼一覧表タイトル名, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
         if (null != this.帳票出力用申請情報Entityリスト) {
             get帳票出力用申請情報Entity(source);
             RString 性別 = this.帳票出力用申請情報Entityリスト.get性別();

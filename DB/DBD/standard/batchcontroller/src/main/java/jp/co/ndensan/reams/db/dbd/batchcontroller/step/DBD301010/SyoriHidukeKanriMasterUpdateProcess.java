@@ -82,8 +82,7 @@ public class SyoriHidukeKanriMasterUpdateProcess extends BatchProcessBase<DbT702
         t.setShoriName(処理名);
         t.setShoriEdaban(new RString("2"));
         t.setNendo(processParameter.get処理年度());
-        t.setNendoNaiRenban(processParameter.get処理区分());
-        t.setNendoNaiRenban(processParameter.get対象月());
+        t.setNendoNaiRenban(processParameter.get処理区分().concat(processParameter.get対象月()));
         t.setKijunYMD(processParameter.get処理年月日());
         t.setKijunTimestamp(processParameter.get処理日時());
     }

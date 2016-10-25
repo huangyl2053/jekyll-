@@ -82,7 +82,7 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
     private static final RString 該当あり = new RString("該当あり");
     private static final RString TILDE = new RString("～");
     private static final RString 各異動月の最新情報のみ = new RString("　　　　　■各異動月の最新情報のみ抽出する");
-    private static final RString 削除含める = new RString("	■削除された情報を含める");
+    private static final RString 削除含める = new RString("　　　　■削除された情報を含める");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");

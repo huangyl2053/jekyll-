@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 共同処理用受給者異動連絡票エラー訂正の検証ハンドラクラスです。
  *
- * @reamsid_L DBC-2770-010 chenxiangyu
+ * @reamsid_L DBC-2850-010 chenxiangyu
  */
 public class KyoutsuIdoReanrakuhyoEraTeiseiValidationHandler {
 

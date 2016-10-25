@@ -94,6 +94,7 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
         ShinsainShiharaiMeisaishoEdit edit = new ShinsainShiharaiMeisaishoEdit();
         ShinsainShiharaimeisaisho shinsainshi = edit.getShinsainShiharaimeisaishoEntity(entity);
         shinsainshi = getShinsainShiharaimeisaisho(shinsainshi, entity);
+        shinsainshi.set申請書管理番号(entity.getShinseishoKanriNo().value());
         ShinsainShiharaimeisaishoReport report = new ShinsainShiharaimeisaishoReport(shinsainshi);
         report.writeBy(reportSourceWriter);
         ++index;

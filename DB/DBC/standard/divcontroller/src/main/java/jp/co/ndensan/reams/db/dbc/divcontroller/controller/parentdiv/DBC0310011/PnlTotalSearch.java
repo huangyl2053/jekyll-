@@ -76,7 +76,7 @@ public class PnlTotalSearch {
     public ResponseData<PnlTotalSearchDiv> onLoad(PnlTotalSearchDiv div) {
         RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         RString モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        if (モード == null || モード.isEmpty()) {
+        if (RString.isNullOrEmpty(モード)) {
             if (修正モード.equals(ResponseHolder.getState())) {
                 ViewStateHolder.put(ViewStateKeys.画面モード, 修正);
             } else if (照会モード.equals(ResponseHolder.getState())) {
@@ -85,7 +85,7 @@ public class PnlTotalSearch {
         }
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         getHandler(div).set初期化状態(表示モード, ViewStateHolder.get(ViewStateKeys.画面モード, RString.class));
-        if (表示モード == null || 表示モード.isEmpty()) {
+        if (RString.isNullOrEmpty(表示モード)) {
             div.getPnlSearch().getDdlKeiyakuServiceShurui().setSelectedKey(RString.EMPTY);
             div.getPnlSearch().getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.
                     get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),

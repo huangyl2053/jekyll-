@@ -402,6 +402,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
     private KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity getReportEntity(KetteiTsuchishoInfoTempEntity entity,
             IShikibetsuTaisho 宛名情報, IKoza 口座情報) {
         KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity reportEntity = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity();
+        reportEntity.set識別コード(entity.getShikibetsuCode());
         if (フラグ_TRUE.equals(parameter.getテスト出力フラグ())) {
             reportEntity.setテスト出力フラグ(true);
         } else {

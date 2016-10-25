@@ -33,10 +33,6 @@ public enum TokubetsuChoshuMidoteiIchiranOutputOrder implements IReportItems {
      */
     市町村コード(new RString("0021"), new RString("市町村コード"), new RString("\"genLasdecCode\"")),
     /**
-     * 被保険者番号
-     */
-    被保険者番号(new RString("0031"), new RString("被保険者番号"), new RString("\"hihokenshaNo\"")),
-    /**
      * 年金コード
      */
     年金コード(new RString("0051"), new RString("年金コード"), new RString("\"nenkinCode\"")),

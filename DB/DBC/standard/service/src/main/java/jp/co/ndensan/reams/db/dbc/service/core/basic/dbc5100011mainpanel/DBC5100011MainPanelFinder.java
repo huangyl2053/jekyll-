@@ -52,8 +52,7 @@ public class DBC5100011MainPanelFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiIinHoshuNyuryokuFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiIinHoshuNyuryokuFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiIinHoshuNyuryokuFinder}のインスタンス
      */
     public static DBC5100011MainPanelFinder createInstance() {
         return InstanceProvider.create(DBC5100011MainPanelFinder.class);
@@ -106,11 +105,11 @@ public class DBC5100011MainPanelFinder {
     public SearchResult<KokuhorenInterfaceKanri> get国保連インターフェース管理(KougakuKaigotaiShouMainPanelMapperParameter param) {
         List<KokuhorenInterfaceKanri> businessList = new ArrayList<>();
         IKougakuKaigotaiShouMainPanelMapper mapper = mapperProvider.create(IKougakuKaigotaiShouMainPanelMapper.class);
-        List<DbT3104KokuhorenInterfaceKanriEntity> dbT3104KokuhorenInterfaceKanriList = mapper.get国保連インターフェース管理(param);
-        if (dbT3104KokuhorenInterfaceKanriList.isEmpty()) {
+        List<DbT3104KokuhorenInterfaceKanriEntity> dbT3104EntityList = mapper.get国保連インターフェース管理(param);
+        if (dbT3104EntityList.isEmpty()) {
             return SearchResult.of(Collections.<KokuhorenInterfaceKanri>emptyList(), 0, false);
         }
-        for (DbT3104KokuhorenInterfaceKanriEntity entity : dbT3104KokuhorenInterfaceKanriList) {
+        for (DbT3104KokuhorenInterfaceKanriEntity entity : dbT3104EntityList) {
             businessList.add(new KokuhorenInterfaceKanri(entity));
         }
         return SearchResult.of(businessList, 0, false);

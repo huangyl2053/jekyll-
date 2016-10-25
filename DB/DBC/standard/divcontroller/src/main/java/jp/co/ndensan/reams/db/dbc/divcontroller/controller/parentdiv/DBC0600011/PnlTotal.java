@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class PnlTotal {
 
     private static final RString 登録 = new RString("登録");
-    private static final RString 差額登録 = new RString("差額登録");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 参照 = new RString("参照");
@@ -96,7 +95,7 @@ public class PnlTotal {
         RString seiriNo = 選択行.getTxtSerialNo();
         RString 差止控除区分 = manager.getShashitomeKojyoKubun(修正, hihokenshaNo, serviceTekyoYM, seiriNo);
         if (差止控除区分_20.equals(差止控除区分) || 差止控除区分_21.equals(差止控除区分)) {
-            putViewStateHolder(div, 差額登録);
+            putViewStateHolder(div, 登録);
         } else if (差止控除区分_10.equals(差止控除区分)) {
             putViewStateHolder(div, 参照);
         } else {

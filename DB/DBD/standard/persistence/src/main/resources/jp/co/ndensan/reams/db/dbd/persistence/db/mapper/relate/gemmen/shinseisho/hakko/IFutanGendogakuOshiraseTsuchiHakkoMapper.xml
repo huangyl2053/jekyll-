@@ -26,6 +26,8 @@
              E."shikibetsuCode" AS 識別コード,
              H."kyuSochishaFlag" AS 旧措置者フラグ ,
              E."willBeRenewed" AS 更新認定フラグ,
+             I."nyushoShisetsuCode" AS 指定事業者番号,
+             J."keikakuJigyoshaNo" AS 計画事業者番号,
              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
        FROM  
              rgdb."DbT4032ShinseishoIkkatsuHakkoBatch"	 AS A
@@ -41,7 +43,38 @@
              ON H."hihokenshaNo" =E."hihokenshaNo"
              AND H."ninteiYMD" <![CDATA[<=]]>#{基準日}
              AND H."logicalDeletedFlag" IS FALSE 
-       WHERE 
+       LEFT JOIN (
+       SELECT 
+       I1."shikibetsuCode",
+       I1."nyushoShisetsuCode"
+       FROM 
+       rgdb."DbT1004ShisetsuNyutaisho" AS I1
+       WHERE
+       I1."taishoYMD" IS NULL
+       AND I1."daichoShubetsu" ='1'
+       AND I1."nyushoYMD" =(SELECT MAX(I2."nyushoYMD")
+                            FROM  rgdb."DbT1004ShisetsuNyutaisho" AS I2
+                            WHERE
+                            I1."shikibetsuCode" =I2."shikibetsuCode"
+                            AND I2."taishoYMD" IS NULL 
+                            AND I2."daichoShubetsu" ='1'
+                            )
+        )AS I
+        ON I."shikibetsuCode" = E."shikibetsuCode"
+        LEFT JOIN
+        (SELECT "hihokenshaNo",
+                "keikakuJigyoshaNo"
+         FROM  (SELECT "hihokenshaNo",                    
+                       "keikakuJigyoshaNo",
+                       "taishoYM",
+                       "rirekiNo",
+                       row_number() OVER (PARTITION BY "hihokenshaNo" ORDER BY "taishoYM" DESC,"rirekiNo" DESC) AS rrkno
+                FROM   rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" 
+                ) AS T3006
+         WHERE rrkno=1
+         )AS J
+       ON J."hihokenshaNo" = E."hihokenshaNo"
+       WHERE  
              A."hakkoShoriID" =#{発行処理ID}
              )
        SELECT 

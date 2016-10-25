@@ -32,6 +32,7 @@ public class KyufuTsuchiGenmenHoseiEntity implements Cloneable, Serializable {
     private RString jigyoshaName;
     private ServiceShuruiCode serviceShuruiCode;
     private RString serviceShuruiMeisho;
-    private RString serviceHiyoTotal;
     private RString riyoshaFutangaku;
+    private RString serviceHiyoTotal;
+
 }

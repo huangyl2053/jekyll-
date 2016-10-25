@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7090001
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710090.DBC710090_HanyoListKagoMoshitateParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7090001.HanyoListParameDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7090001.HanyoListParameHandler;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -26,6 +27,29 @@ public class HanyoListParame {
     public ResponseData<HanyoListParameDiv> onLoad(HanyoListParameDiv div) {
         getHandler(div).initialize();
 
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 条件を保存するボタンのメソッドです。
+     *
+     * @param div HanyoListParameDiv
+     * @return ResponseData
+     */
+    public ResponseData<BatchParameterMap> onClick_btnBatchParameterSave(HanyoListParameDiv div) {
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        responseData.data = new BatchParameterMap(getHandler(div).setBatchParameter());
+        return responseData;
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     *
+     * @param div HanyoListParameDiv
+     * @return ResponseData
+     */
+    public ResponseData<HanyoListParameDiv> onClick_btnBatchParameterRestore(HanyoListParameDiv div) {
+        getHandler(div).pamaRestore();
         return ResponseData.of(div).respond();
     }
 

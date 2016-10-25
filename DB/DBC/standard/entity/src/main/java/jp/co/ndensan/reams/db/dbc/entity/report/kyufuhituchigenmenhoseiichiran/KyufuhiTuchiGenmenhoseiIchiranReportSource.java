@@ -58,6 +58,20 @@ public class KyufuhiTuchiGenmenhoseiIchiranReportSource implements IReportSource
     public RString list_8;
     @ReportItem(name = "list_9", length = 11, order = 23)
     public RString list_9;
+    @ReportItem(name = "list_yubinNo", length = 11, order = 24)
+    public RString list_yubinNo;
+    @ReportItem(name = "list_choikiCode", length = 11, order = 25)
+    public RString list_choikiCode;
+    @ReportItem(name = "list_gyoseikuCode", length = 11, order = 26)
+    public RString list_gyoseikuCode;
+    @ReportItem(name = "list_setaiCode", length = 11, order = 27)
+    public RString list_setaiCode;
+    @ReportItem(name = "list_kanaMeisho", length = 11, order = 28)
+    public RString list_kanaShimei;
+    @ReportItem(name = "list_shichosonCode", length = 11, order = 29)
+    public RString list_shichosonCode;
+    @ReportItem(name = "list_shoKisaiHokenshaNo", length = 11, order = 30)
+    public RString list_shoKisaiHokenshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

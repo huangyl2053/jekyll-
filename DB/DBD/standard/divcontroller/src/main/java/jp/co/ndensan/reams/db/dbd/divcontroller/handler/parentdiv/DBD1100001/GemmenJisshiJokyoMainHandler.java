@@ -137,14 +137,10 @@ public class GemmenJisshiJokyoMainHandler {
             div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().setDisabled(true);
             div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(true);
             div.getGemmenJisshiJokyoJoken().getRadKijunBi().setSelectedKey(new RString("1"));
-            div.getRadShutsuryokuChohyo().clearSelectedItem();
-            div.getRadShutsuryokuChohyo().setSelectedKey(new RString("1"));
         } else {
             div.getGemmenJisshiJokyoJoken().getRadKijunBi().setDisabled(false);
             div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().setDisabled(false);
             div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setReadOnly(false);
-            div.getRadShutsuryokuChohyo().clearSelectedItem();
-            div.getRadShutsuryokuChohyo().setSelectedKey(new RString("2"));
             if ("1".equals(基準日区分.toString())) {
                 div.getGemmenJisshiJokyoJoken().getRadKijunBi().setSelectedKey(new RString("1"));
                 div.getGemmenJisshiJokyoJoken().getRadKijunNengetsu().clearSelectedItem();
@@ -160,7 +156,8 @@ public class GemmenJisshiJokyoMainHandler {
             }
 
         }
-        if (new ReportId("DBD300001_JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoCover").equals(帳票ID)) {
+        div.getRadShutsuryokuChohyo().clearSelectedItem();
+        if (new ReportId("DBD300001_JukyushaGemmenTsukibetsuShinseiNinteiJokyohyo").equals(帳票ID)) {
             div.getGemmenJisshiJokyoJoken().getRadShutsuryokuChohyo().setSelectedKey(new RString("1"));
         } else {
             div.getGemmenJisshiJokyoJoken().getRadShutsuryokuChohyo().setSelectedKey(new RString("2"));
@@ -182,6 +179,11 @@ public class GemmenJisshiJokyoMainHandler {
         宛名抽出条件.setChiku3_From(宛名抽出条件.getChiku3_From() != null ? 宛名抽出条件.getChiku3_From() : RString.EMPTY);
         宛名抽出条件.setChiku3_FromMesho(宛名抽出条件.getChiku3_FromMesho() != null ? 宛名抽出条件.getChiku3_FromMesho() : RString.EMPTY);
         宛名抽出条件.setChiku3_To(宛名抽出条件.getChiku3_To() != null ? 宛名抽出条件.getChiku3_To() : RString.EMPTY);
+        rStringpart(宛名抽出条件);
+        parameter.set宛名抽出条件(宛名抽出条件);
+    }
+
+    private void rStringpart(AtenaSelectBatchParameter 宛名抽出条件) {
         宛名抽出条件.setChiku3_ToMesho(宛名抽出条件.getChiku3_ToMesho() != null ? 宛名抽出条件.getChiku3_ToMesho() : RString.EMPTY);
         宛名抽出条件.setGyoseiku_From(宛名抽出条件.getGyoseiku_From() != null ? 宛名抽出条件.getGyoseiku_From() : RString.EMPTY);
         宛名抽出条件.setGyoseiku_FromMesho(宛名抽出条件.getGyoseiku_FromMesho() != null ? 宛名抽出条件.getGyoseiku_FromMesho() : RString.EMPTY);
@@ -192,8 +194,6 @@ public class GemmenJisshiJokyoMainHandler {
         宛名抽出条件.setJusho_To(宛名抽出条件.getJusho_To() != null ? 宛名抽出条件.getJusho_To() : RString.EMPTY);
         宛名抽出条件.setJusho_ToMesho(宛名抽出条件.getJusho_ToMesho() != null ? 宛名抽出条件.getJusho_ToMesho() : RString.EMPTY);
         宛名抽出条件.setShichoson_Mesho(宛名抽出条件.getShichoson_Mesho() != null ? 宛名抽出条件.getShichoson_Mesho() : RString.EMPTY);
-
-        parameter.set宛名抽出条件(宛名抽出条件);
     }
 
     private void 宛名抽出条件復元(BatchParameterMap restoreBatchParameterMap) {
