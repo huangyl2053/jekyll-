@@ -12,6 +12,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200008.KyufuGengakuHaakuIchiranReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbdbt32004.KyufuGakuGengakuTainoShaProcessProperty;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenko.kyufugengakukanrilist.TaishoKubun;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd209011.KyufuGengakuHaakuListSakuseiMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32004.KyufuGakuGengakuTainoShaProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4025ShiharaiHohoHenkoGengakuEntity;
@@ -46,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -159,7 +161,12 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGenga
         key.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
         key.set基準日(processParameter.get基準日());
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        return new BatchDbReader(MAPPERPATH, processParameter.toTaishoShaKanriJohoMybatisParameter(get出力順(), uaFt200Psm));
+        return new BatchDbReader(MAPPERPATH, toTaishoShaKanriJohoMybatisParameter(processParameter.get基準日(), get出力順(), uaFt200Psm));
+    }
+
+    private KyufuGengakuHaakuListSakuseiMybatisParameter toTaishoShaKanriJohoMybatisParameter(
+            FlexibleDate 基準日, RString 出力順, UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam) {
+        return new KyufuGengakuHaakuListSakuseiMybatisParameter(基準日, 出力順, shikibetsutaishoParam);
     }
 
     @Override

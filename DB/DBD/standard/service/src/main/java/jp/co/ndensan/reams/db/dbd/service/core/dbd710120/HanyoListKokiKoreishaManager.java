@@ -540,7 +540,7 @@ public class HanyoListKokiKoreishaManager {
     private RString to帳票物理名(RString 項目ID) {
         RString 帳票物理名 = RString.EMPTY;
         帳票物理名 = 宛名判定(帳票物理名, 項目ID);
-        if (帳票物理名 != null && !帳票物理名.isEmpty()) {
+        if (帳票物理名 == null || 帳票物理名.isEmpty()) {
             if (HanyoListKokiKoreishaOrderby.被保険者番号.get項目ID().equals(項目ID)) {
                 帳票物理名 = new RString("hokenshaNo");
             } else if (HanyoListKokiKoreishaOrderby.資格区分.get項目ID().equals(項目ID)) {

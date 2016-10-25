@@ -262,7 +262,7 @@ public class PtnTotal {
      * @return ResponseData
      */
     public ResponseData<PtnTotalDiv> onClick_btnBack(PtnTotalDiv div) {
-        ViewStateHolder.put(ViewStateKeys.表示モード, null);
+        ViewStateHolder.put(ViewStateKeys.詳細データ, null);
         return ResponseData.of(div).forwardWithEventName(戻る).respond();
     }
 

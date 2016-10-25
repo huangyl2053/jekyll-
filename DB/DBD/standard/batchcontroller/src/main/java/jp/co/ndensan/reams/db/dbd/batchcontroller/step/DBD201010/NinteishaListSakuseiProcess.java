@@ -353,15 +353,16 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
             出力条件.add(世帯非課税等);
         }
         if (null != parameter.getCsv出力設定()) {
-            RString CSV出力設定 = new RString("【CSV出力設定】");
+            RString 出力設定 = new RString("【CSV出力設定】");
             int count = 0;
             for (CSVSettings data : parameter.getCsv出力設定()) {
                 if (count == 0) {
-                    CSV出力設定 = CSV出力設定.concat(data.get名称());
+                    出力設定 = 出力設定.concat(data.get名称());
                 } else {
-                    CSV出力設定 = CSV出力設定.concat(new RString("、")).concat(data.get名称());
+                    出力設定 = 出力設定.concat(new RString("、")).concat(data.get名称());
                 }
             }
+            出力条件.add(出力設定);
         } else {
             出力条件.add(new RString("【CSV出力設定】 指定なし"));
         }
@@ -448,13 +449,13 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     private RString to帳票物理名(RString 項目ID) {
         RString 帳票物理名 = RString.EMPTY;
         if (RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum.郵便番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("listUpper_2");
+            帳票物理名 = new RString("listUpper_2Hidden");
         } else if (RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum.行政区コード.
                 get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("listLower_1");
+            帳票物理名 = new RString("listLower_1Hidden");
         } else if (RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum.被保険者番号.
                 get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("listUpper_1");
+            帳票物理名 = new RString("hokenshaNoHidden");
         } else if (RiyoshaFutanGakuGemmenNinteishaListProperty.DBD200002_ResultListEnum.町域コード.
                 get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("choikiCode");

@@ -83,7 +83,7 @@ public class ShokanbaraiShikyuFinder {
      */
     @Transaction
     public ChohyoBunruiKanri select帳票分類ID() {
-        DbT7068ChohyoBunruiKanriEntity entity = dbt7068Dac.selectByKey(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId());
+        DbT7068ChohyoBunruiKanriEntity entity = dbt7068Dac.selectByKey(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002.getReportId());
         if (entity != null) {
             return new ChohyoBunruiKanri(entity);
         }

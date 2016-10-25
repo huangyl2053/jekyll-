@@ -45,7 +45,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -209,9 +208,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
 
         }
         div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason().getTxtCreatorKanaName()
-                .setDomain(new AtenaKanaMeisho(param.get理由書作成者カナ()));
+                .setValue(param.get理由書作成者カナ());
         div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason().getTxtCreatorName()
-                .setDomain(new AtenaMeisho(param.get理由書作成者()));
+                .setValue(param.get理由書作成者());
         div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason().getTxtCreationJigyoshaNo()
                 .setValue((param.get理由書作成事業者番号() == null || param.get理由書作成事業者番号().isEmpty())
                         ? RString.EMPTY : param.get理由書作成事業者番号().value());
@@ -551,6 +550,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTxtShinseiYMD().getValue() != null) {
             parameter.set申請日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
                     .getTxtShinseiYMD().getValue().toDateString()));
+            parameter.set受付日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo()
+                    .getTxtShinseiYMD().getValue().toDateString()));
         }
         parameter.set判定区分(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                 .getRadJudgeKubun().getSelectedKey());
@@ -564,7 +565,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         }
         parameter.set発行日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                 .getJutakuKaishuJizenShoninKetteiTsuchisho().getTxtHakkoYMD().getValue().toDateString()));
-        parameter.set事業者名(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtJigyoshaNo().getValue());
+        parameter.set事業者名(new RString(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().
+                getTxtJigyoshaName().getPlaceHolder().toString()));
         parameter.set承認年月日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabShinsaKakka().getTxtJudgeYMD().getValue().toDateString()));
         parameter.set不承認の理由(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
@@ -575,7 +577,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getServiceShuruiMeisho(サービス種類コード, サービス提供年月);
         parameter.set給付の種類(給付の種類);
         parameter.set作成者氏名(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
-                .getTxtCreatorName().getDomain().value());
+                .getTxtCreatorName().getValue());
         parameter.setサービス提供年月(new FlexibleYearMonth(div.getKaigoShikakuKihonShaPanel().getTxtServiceYM()
                 .getValue().getYearMonth().toDateString()));
         parameter.set整理番号(整理番号);
@@ -1229,9 +1231,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                     .getTxtCreateYMD().getValue().toDateString()));
         }
         builder.set理由書作成者(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
-                .getTxtCreatorName().getDomain().value());
+                .getTxtCreatorName().getValue());
         builder.set理由書作成者カナ(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
-                .getTxtCreatorKanaName().getDomain().value());
+                .getTxtCreatorKanaName().getValue());
         final JigyoshaNo 理由書作成事業者番号 = new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreationJigyoshaNo().getValue());
         if (!理由書作成事業者番号.isEmpty()) {
@@ -1360,9 +1362,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                     .getTxtCreateYMD().getValue().toDateString()));
         }
         builder.set理由書作成者(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
-                .getTxtCreatorName().getDomain().value());
+                .getTxtCreatorName().getValue());
         builder.set理由書作成者カナ(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
-                .getTxtCreatorKanaName().getDomain().value());
+                .getTxtCreatorKanaName().getValue());
         JigyoshaNo 理由書作成事業者番号 = new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
                 .getTxtCreationJigyoshaNo().getValue());
         if (!理由書作成事業者番号.isEmpty()) {
@@ -1826,7 +1828,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             return true;
         }
         RString 画面入力作成者氏名カナ = div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
-                .getTxtCreatorKanaName().getDomain().getColumnValue();
+                .getTxtCreatorKanaName().getValue();
         if ((oldShinseiData.get理由書作成者カナ() == null && 画面入力作成者氏名カナ != null)
                 || (oldShinseiData.get理由書作成者カナ() != null && !oldShinseiData.get理由書作成者カナ().equals(画面入力作成者氏名カナ))) {
             div.setHidDataChangeFlg(非表示用フラグ_TRUE);
@@ -1834,7 +1836,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         }
 
         RString 画面入力作成者氏名 = div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason().getTxtCreatorName()
-                .getDomain().getColumnValue();
+                .getValue();
         if ((oldShinseiData.get理由書作成者() == null && 画面入力作成者氏名 != null)
                 || (oldShinseiData.get理由書作成者() != null && !oldShinseiData.get理由書作成者().equals(画面入力作成者氏名))) {
             div.setHidDataChangeFlg(非表示用フラグ_TRUE);

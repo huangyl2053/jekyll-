@@ -34,7 +34,6 @@ public final class KyufuGengakuHaakuIchiranReport extends Report<KyufuGengakuHaa
 
     private static final int INT_10 = 10;
     private static final int 行数14 = 14;
-    private static final int 行数28 = 28;
 
     /**
      * インスタンスを生成します。

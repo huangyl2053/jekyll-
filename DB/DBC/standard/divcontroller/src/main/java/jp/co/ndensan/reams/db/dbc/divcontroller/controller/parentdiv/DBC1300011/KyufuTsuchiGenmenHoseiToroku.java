@@ -73,7 +73,7 @@ public class KyufuTsuchiGenmenHoseiToroku {
      * @return ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv>
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonHyouji(KyufuTsuchiGenmenHoseiTorokuDiv div) {
-        //QA1687:給付実績検索画面(DBC0010011)に遷移する
+        //TODO:#100344のご指示によって、ペンディングとする
         // return ResponseData.of(div).forwardWithEventName(DBC1300011TransitionEventName.).respond();
         return ResponseData.of(div).respond();
     }

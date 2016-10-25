@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KagoMoshitate;
 import jp.co.ndensan.reams.db.dbc.business.core.kaigokyufuhikagomositatetouroku.KagoMoshitateCollect;
 import jp.co.ndensan.reams.db.dbc.business.core.kaigokyufuhikagomositatetouroku.KagoMoshitateGamenData;
 import jp.co.ndensan.reams.db.dbc.business.core.kaigokyufuhikagomositatetouroku.KaigoKyufuhiKagoMositateTourokuResult;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigokyufuhikagomositatetouroku.KaigoKyufuhiParamter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1500011.DBC1500011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1500011.DBC1500011TransitionEventName;
@@ -34,6 +35,7 @@ import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaish
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -44,6 +46,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -68,6 +73,10 @@ public class KaigoKyufuhiKagoMositateTouroku {
     private static final RString 総合事業費過誤申立書 = new RString("総合事業費過誤申立書");
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
     private static final RString MESSAGE_REPLACE_コンフィグのキー = new RString("該当の給付実績データ");
+    private static final RString 申立理由_12 = new RString("12");
+    private static final RString 申立理由_49 = new RString("49");
+    private static final RString 申立理由_59 = new RString("59");
+    private static final RString 申立理由_69 = new RString("69");
 
     /**
      * 画面初期化します。
@@ -250,17 +259,56 @@ public class KaigoKyufuhiKagoMositateTouroku {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        int index = div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().getClickedRowId();
-        KaigoKyufuhiKagoMositateTourokuResult 給付実績情報 = ViewStateHolder
-                .get(ViewStateKeys.給付実績一覧, KagoMoshitateCollect.class).get給付実績情報List().get(index);
-        int 最大履歴番号 = getService().selectKyufuKanrihyoList(new JigyoshaNo(給付実績情報.get事業所番号()),
-                new HihokenshaNo(給付実績情報.get被保険者番号()),
-                new FlexibleYearMonth(給付実績情報.getサービス提供年月()));
-        KagoMoshitate data = getHandler(div).setDB出力データ(給付実績情報, 最大履歴番号);
-        KagoMoshitateManager service = new KagoMoshitateManager();
-        service.saveOrdelete過誤申立(data);
-        div.getCommonKiagoKanryoMessageChildDiv1().setSuccessMessage(new RString("保存は正常に終了しました。"));
-        return ResponseData.of(div).setState(DBC1500011StateName.kanryoumessage);
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return setデータ保存(div);
+        }
+        if (new RString(DbcQuestionMessages.同月審査用の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            int index = div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().getClickedRowId();
+            KaigoKyufuhiKagoMositateTourokuResult 給付実績情報 = ViewStateHolder
+                    .get(ViewStateKeys.給付実績一覧, KagoMoshitateCollect.class).get給付実績情報List().get(index);
+            int 最大履歴番号 = getService().selectKyufuKanrihyoList(new JigyoshaNo(給付実績情報.get事業所番号()),
+                    new HihokenshaNo(給付実績情報.get被保険者番号()),
+                    new FlexibleYearMonth(給付実績情報.getサービス提供年月()));
+            KagoMoshitate data = getHandler(div).setDB出力データ(給付実績情報, 最大履歴番号);
+            KagoMoshitateManager service = new KagoMoshitateManager();
+            service.saveOrdelete過誤申立(data);
+            div.getCommonKiagoKanryoMessageChildDiv1().setSuccessMessage(new RString("保存は正常に終了しました。"));
+            return ResponseData.of(div).setState(DBC1500011StateName.kanryoumessage);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> setデータ保存(KaigoKyufuhiKagoMositateTourokuDiv div) {
+        if (div.getChkMeisaiForDogetsuShinsa().getSelectedKeys().contains(new RString("forDogetsuShinsa"))
+                && (申立理由_12.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
+                || 申立理由_49.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey()))
+                || 申立理由_59.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
+                || 申立理由_69.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())) {
+            QuestionMessage message = new QuestionMessage(DbcQuestionMessages.同月審査用の確認.getMessage().getCode(),
+                    DbcQuestionMessages.同月審査用の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        } else {
+            int index = div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().getClickedRowId();
+            KaigoKyufuhiKagoMositateTourokuResult 給付実績情報 = ViewStateHolder
+                    .get(ViewStateKeys.給付実績一覧, KagoMoshitateCollect.class).get給付実績情報List().get(index);
+            int 最大履歴番号 = getService().selectKyufuKanrihyoList(new JigyoshaNo(給付実績情報.get事業所番号()),
+                    new HihokenshaNo(給付実績情報.get被保険者番号()),
+                    new FlexibleYearMonth(給付実績情報.getサービス提供年月()));
+            KagoMoshitate data = getHandler(div).setDB出力データ(給付実績情報, 最大履歴番号);
+            KagoMoshitateManager service = new KagoMoshitateManager();
+            service.saveOrdelete過誤申立(data);
+            div.getCommonKiagoKanryoMessageChildDiv1().setSuccessMessage(new RString("保存は正常に終了しました。"));
+            return ResponseData.of(div).setState(DBC1500011StateName.kanryoumessage);
+        }
     }
 
     /**

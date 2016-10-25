@@ -241,7 +241,7 @@ public class HanyoListRiyoshaFutanwariaiProcess extends BatchProcessBase<HanyoRi
         }
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
-        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount()));
+        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
         RString 出力件数 = new RString(String.valueOf(eucCsvWriter1.getCount()));
         HanyoListRiyoshaFutanwariaiManager.createInstance().バッチ出力条件リストの出力(processParamter, 導入団体コード,
                 市町村名, is帳票出力, 出力ページ数, 出力件数);

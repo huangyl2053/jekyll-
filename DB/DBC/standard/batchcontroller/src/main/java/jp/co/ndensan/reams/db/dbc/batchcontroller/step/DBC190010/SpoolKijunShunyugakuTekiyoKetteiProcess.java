@@ -197,12 +197,6 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
             beforeEntity = entity;
         }
         boolean 改頁Flag = new KijunShunyugakuTekiyoKetteiTsuchiIchiranPageBreak(改頁項目リスト).is改頁(entity, beforeEntity);
-        if (一覧表_世帯コード == null) {
-            一覧表_世帯コード = entity.get世帯コード();
-        }
-        if (一覧表_年度 == null) {
-            一覧表_年度 = entity.get年度();
-        }
         KijunShunyugakuTekiyoKetteiTsuchiIchiran 基準収入額決定通知一覧表パラメータ = get基準収入額決定通知一覧表パラメータ();
         基準収入額決定通知一覧表パラメータ = get基準収入額決定通知一覧表パラメータ2(entity, 改頁Flag, 基準収入額決定通知一覧表パラメータ);
         KijunShunyugakuTekiyoKetteiTsuchiIchiranReport 一覧表report
@@ -487,12 +481,12 @@ public class SpoolKijunShunyugakuTekiyoKetteiProcess extends BatchKeyBreakBase<K
 
     private KijunShunyugakuTekiyoKetteiTsuchiIchiran get基準収入額決定通知一覧表パラメータ2(KijunShunyugakuTekiyoKetteiEntity entity,
             boolean 改頁Flag, KijunShunyugakuTekiyoKetteiTsuchiIchiran 基準収入額決定通知一覧表パラメータ) {
-        if (改頁Flag || !一覧表_世帯コード.equals(entity.get世帯コード())) {
+        if (改頁Flag || 一覧表_世帯コード == null || !一覧表_世帯コード.equals(entity.get世帯コード())) {
             一覧表_通番 = 一覧表_通番 + INT_1;
-            基準収入額決定通知一覧表パラメータ.set通番(一覧表_通番);
+            基準収入額決定通知一覧表パラメータ.set通番(new RString(一覧表_通番));
             基準収入額決定通知一覧表パラメータ.set出力世帯コード(entity.get世帯コード());
         }
-        if (改頁Flag || !一覧表_年度.equals(entity.get年度())) {
+        if (改頁Flag || 一覧表_年度 == null || !一覧表_年度.equals(entity.get年度())) {
             基準収入額決定通知一覧表パラメータ.set年度(entity.get年度());
         }
 

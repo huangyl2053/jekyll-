@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JutakukaishuJizenShinseiShoninKekkaTsuchishoEditor implements IJutakukaishuJizenShinseiShoninKekkaTsuchishoEditor {
 
     private static final RString 承認区分_承認 = new RString("承認");
-    private static final RString 承認区分_未承認 = new RString("未承認");
+    private static final RString 承認区分_未承認 = new RString("不承認");
     private final JutakukaishuJizenShinseiShoninKekkaTsuchishoItem item;
 
     /**

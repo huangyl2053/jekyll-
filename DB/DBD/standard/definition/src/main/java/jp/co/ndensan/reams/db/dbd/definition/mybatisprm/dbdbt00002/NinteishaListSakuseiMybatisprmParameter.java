@@ -70,7 +70,9 @@ public class NinteishaListSakuseiMybatisprmParameter implements IMyBatisParamete
             TargetList 対象リスト, FlexibleDate 基準日, SetaiHyoji 世帯表示,
             List<HihokenshaKeizaiJokyo> 世帯非課税等, UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam, RString 出力順) {
         edit対象リスト(対象リスト);
-        edit世帯表示(世帯表示);
+        if (世帯表示 != null) {
+            edit世帯表示(世帯表示);
+        }
         edit世帯非課税等(世帯非課税等);
         this.出力順 = 出力順;
         this.基準日 = 基準日;
@@ -91,7 +93,7 @@ public class NinteishaListSakuseiMybatisprmParameter implements IMyBatisParamete
 
     private void edit世帯表示(SetaiHyoji 世帯表示) {
 
-        if (世帯表示 != null && SetaiHyoji.表示しない.equals(世帯表示)) {
+        if (SetaiHyoji.表示しない.equals(世帯表示)) {
             is世帯表示しない = true;
         }
     }

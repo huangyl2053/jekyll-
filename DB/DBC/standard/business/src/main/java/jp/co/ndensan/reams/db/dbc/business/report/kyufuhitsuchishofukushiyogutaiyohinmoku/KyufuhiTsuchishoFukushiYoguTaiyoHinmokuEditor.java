@@ -28,9 +28,8 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor implements IKyufuhiTs
      * インスタンスを生成します。
      *
      * @param item {@link KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity}
-     * @param index int
      */
-    protected KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor(KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity item, int index) {
+    protected KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor(KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity item) {
         this.item = item;
     }
 

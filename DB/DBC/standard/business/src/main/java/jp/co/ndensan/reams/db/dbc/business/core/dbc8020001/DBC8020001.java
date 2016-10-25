@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.ux.uxx.entity.db.relate.kozafurikomi.furikomigroup.Fu
 public class DBC8020001 {
 
     private final DbT7022ShoriDateKanriEntity entity;
-    private final FurikomiGroupItakushaRelateEntity furikomiGroupItakushaRelateEntity;
+    private final FurikomiGroupItakushaRelateEntity furikomiRelateEntity;
 
     /**
      * コンストラクタです。
@@ -25,17 +25,17 @@ public class DBC8020001 {
      */
     public DBC8020001(DbT7022ShoriDateKanriEntity entity) {
         this.entity = entity;
-        this.furikomiGroupItakushaRelateEntity = null;
+        this.furikomiRelateEntity = null;
     }
 
     /**
      * コンストラクタです。
      *
-     * @param furikomiGroupItakushaRelateEntity FurikomiGroupItakushaRelateEntity
+     * @param furikomiRelateEntity FurikomiGroupItakushaRelateEntity
      */
-    public DBC8020001(FurikomiGroupItakushaRelateEntity furikomiGroupItakushaRelateEntity) {
+    public DBC8020001(FurikomiGroupItakushaRelateEntity furikomiRelateEntity) {
         this.entity = null;
-        this.furikomiGroupItakushaRelateEntity = furikomiGroupItakushaRelateEntity;
+        this.furikomiRelateEntity = furikomiRelateEntity;
     }
 
     /**
@@ -50,9 +50,9 @@ public class DBC8020001 {
     /**
      * FurikomiGroupItakushaRelateEntityを返します。
      *
-     * @return entity DbT7022ShoriDateKanriEntity
+     * @return FurikomiGroupItakushaRelateEntity
      */
     public FurikomiGroupItakushaRelateEntity getFurikomiGroupItakushaRelateEntity() {
-        return this.furikomiGroupItakushaRelateEntity;
+        return this.furikomiRelateEntity;
     }
 }

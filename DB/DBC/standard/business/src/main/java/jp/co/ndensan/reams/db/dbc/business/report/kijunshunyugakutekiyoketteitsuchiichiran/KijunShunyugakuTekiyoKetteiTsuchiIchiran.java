@@ -40,7 +40,7 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiran {
     private RString 改頁３;
     private RString 改頁４;
     private RString 改頁５;
-    private int 通番;
+    private RString 通番;
     private SetaiCode 出力世帯コード;
     private FlexibleYear 年度;
     private HihokenshaNo 被保険者番号;

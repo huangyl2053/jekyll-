@@ -261,16 +261,7 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
                     .fillType(FillType.ZERO)
                     .toDateString()));
         }
-        if (parameter.is一号被保険者() && parameter.is二号被保険者()) {
-            builder.append(被保険者情報.concat(一号と二号));
-        } else if (parameter.is一号被保険者() && !parameter.is二号被保険者()) {
-            builder.append(被保険者情報.concat(一号));
-        } else if (!parameter.is一号被保険者() && parameter.is二号被保険者()) {
-            builder.append(被保険者情報.concat(二号));
-        }
-        if (parameter.isサービス指定者()) {
-            builder.append(指定サービス);
-        }
+        builder = set出力条件(builder);
         builder = set出力条件1(builder);
         builder = set出力条件2(builder);
         builder = set出力条件3(builder);
@@ -290,6 +281,20 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
                 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
+    }
+
+    private RStringBuilder set出力条件(RStringBuilder builder) {
+        if (parameter.is一号被保険者() && parameter.is二号被保険者()) {
+            builder.append(被保険者情報.concat(一号と二号));
+        } else if (parameter.is一号被保険者() && !parameter.is二号被保険者()) {
+            builder.append(被保険者情報.concat(一号));
+        } else if (!parameter.is一号被保険者() && parameter.is二号被保険者()) {
+            builder.append(被保険者情報.concat(二号));
+        }
+        if (parameter.isサービス指定者()) {
+            builder.append(指定サービス);
+        }
+        return builder;
     }
 
     private RStringBuilder set出力条件1(RStringBuilder builder) {
@@ -526,26 +531,32 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
                         .concat(parameter.get宛名抽出条件().getChiku1_ToMesho() == null ? RString.EMPTY
                                 : parameter.get宛名抽出条件().getChiku1_ToMesho()));
             }
-            if (parameter.get宛名抽出条件().getChiku2_From() != null && parameter.get宛名抽出条件().getChiku2_To() != null) {
-                builder.append(parameter.get宛名抽出条件().getChiku_Kubun().get名称().concat(new RString("： ("))
-                        .concat(parameter.get宛名抽出条件().getChiku2_From()).concat(new RString(") "))
-                        .concat(parameter.get宛名抽出条件().getChiku2_FromMesho() == null ? RString.EMPTY
-                                : parameter.get宛名抽出条件().getChiku2_FromMesho()).concat(波線).concat(new RString(" ("))
-                        .concat(parameter.get宛名抽出条件().getChiku2_To()).concat(new RString(") "))
-                        .concat(parameter.get宛名抽出条件().getChiku2_ToMesho() == null ? RString.EMPTY
-                                : parameter.get宛名抽出条件().getChiku2_ToMesho()));
-            } else if (parameter.get宛名抽出条件().getChiku2_From() != null && parameter.get宛名抽出条件().getChiku2_To() == null) {
-                builder.append(parameter.get宛名抽出条件().getChiku_Kubun().get名称().concat(new RString("： ("))
-                        .concat(parameter.get宛名抽出条件().getChiku2_From()).concat(new RString(") "))
-                        .concat(parameter.get宛名抽出条件().getChiku2_FromMesho() == null ? RString.EMPTY
-                                : parameter.get宛名抽出条件().getChiku2_FromMesho()).concat(波線));
-            } else if (parameter.get宛名抽出条件().getChiku2_From() == null && parameter.get宛名抽出条件().getChiku2_To() != null) {
-                builder.append(parameter.get宛名抽出条件().getChiku_Kubun().get名称().concat(波線).concat(new RString(" ("))
-                        .concat(parameter.get宛名抽出条件().getChiku2_To()).concat(new RString(") "))
-                        .concat(parameter.get宛名抽出条件().getChiku2_ToMesho() == null ? RString.EMPTY
-                                : parameter.get宛名抽出条件().getChiku2_ToMesho()));
-            }
+
             builder = set出力条件7(builder);
+            builder = set出力条件8(builder);
+        }
+        return builder;
+    }
+
+    private RStringBuilder set出力条件8(RStringBuilder builder) {
+        if (parameter.get宛名抽出条件().getChiku2_From() != null && parameter.get宛名抽出条件().getChiku2_To() != null) {
+            builder.append(parameter.get宛名抽出条件().getChiku_Kubun().get名称().concat(new RString("： ("))
+                    .concat(parameter.get宛名抽出条件().getChiku2_From()).concat(new RString(") "))
+                    .concat(parameter.get宛名抽出条件().getChiku2_FromMesho() == null ? RString.EMPTY
+                            : parameter.get宛名抽出条件().getChiku2_FromMesho()).concat(波線).concat(new RString(" ("))
+                    .concat(parameter.get宛名抽出条件().getChiku2_To()).concat(new RString(") "))
+                    .concat(parameter.get宛名抽出条件().getChiku2_ToMesho() == null ? RString.EMPTY
+                            : parameter.get宛名抽出条件().getChiku2_ToMesho()));
+        } else if (parameter.get宛名抽出条件().getChiku2_From() != null && parameter.get宛名抽出条件().getChiku2_To() == null) {
+            builder.append(parameter.get宛名抽出条件().getChiku_Kubun().get名称().concat(new RString("： ("))
+                    .concat(parameter.get宛名抽出条件().getChiku2_From()).concat(new RString(") "))
+                    .concat(parameter.get宛名抽出条件().getChiku2_FromMesho() == null ? RString.EMPTY
+                            : parameter.get宛名抽出条件().getChiku2_FromMesho()).concat(波線));
+        } else if (parameter.get宛名抽出条件().getChiku2_From() == null && parameter.get宛名抽出条件().getChiku2_To() != null) {
+            builder.append(parameter.get宛名抽出条件().getChiku_Kubun().get名称().concat(波線).concat(new RString(" ("))
+                    .concat(parameter.get宛名抽出条件().getChiku2_To()).concat(new RString(") "))
+                    .concat(parameter.get宛名抽出条件().getChiku2_ToMesho() == null ? RString.EMPTY
+                            : parameter.get宛名抽出条件().getChiku2_ToMesho()));
         }
         return builder;
     }

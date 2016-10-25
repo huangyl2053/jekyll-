@@ -111,12 +111,12 @@ public class PnlTotalPanel {
             HihokenshaNo 被保険者番号 = キー.get被保険者番号();
             div.getPnlCommon().getCcdKaigoShikakuKihon().initialize(被保険者番号);
             RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
-            if (事業者検索.equals(表示モード)) {
-                PnlTotalPanelParameter param = ViewStateHolder
-                        .get(ViewStateKeys.契約者詳細データ, PnlTotalPanelParameter.class);
-                getHandler(div).set登録データ(param);
-                JuryoininKeiyakuJigyosha data = ViewStateHolder
-                        .get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
+            JuryoininKeiyakuJigyosha data = ViewStateHolder
+                    .get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
+            PnlTotalPanelParameter param = ViewStateHolder
+                    .get(ViewStateKeys.契約者詳細データ, PnlTotalPanelParameter.class);
+            getHandler(div).set登録データ(param);
+            if (事業者検索.equals(表示モード) && data != null) {
                 ViewStateHolder.put(ViewStateKeys.契約事業者番号, data.get契約事業者番号());
                 ViewStateHolder.put(ViewStateKeys.契約事業者名, data.get契約事業者名称() == null
                         || data.get契約事業者名称().isEmpty() ? null : data.get契約事業者名称().getColumnValue());
