@@ -98,6 +98,12 @@ public class HanyoListJukyushaDaichoBusiness {
     private static final RString SHINKI = new RString("新規");
     private static final RString HENKO = new RString("変更");
     private static final RString ZATEI = new RString("暫定");
+    private static final RString 住基_1 = new RString("1");
+    private static final RString 住基 = new RString("住基");
+    private static final RString 外国人_2 = new RString("2");
+    private static final RString 外国人 = new RString("外国人");
+    private static final RString 住登外_3 = new RString("3");
+    private static final RString 住登外 = new RString("住登外");
 
     /**
      * 連番付加が「True」の時、列を出力する
@@ -378,7 +384,7 @@ public class HanyoListJukyushaDaichoBusiness {
         csvEntity.set後期被保険者番号(entity.get後期高齢者情報_後期高齢被保険者番号());
         csvEntity.set後期取得日(set年月日(日付スラッシュ付加, entity.get後期高齢者情報_資格取得日()));
         csvEntity.set後期喪失日(set年月日(日付スラッシュ付加, entity.get後期高齢者情報_資格喪失日()));
-        csvEntity.set後期登録区分(set登録区分(entity.get後期高齢者情報_登録区分()));
+        csvEntity.set後期登録区分(set後期登録区分(entity.get後期高齢者情報_登録区分()));
         csvEntity.set国保番号(entity.get国保資格情報_国保番号());
         csvEntity.set国保保険者番号(entity.get国保資格情報_国保保険者番号());
         csvEntity.set国保保険証番号(entity.get国保資格情報_国保保険証番号());
@@ -688,7 +694,7 @@ public class HanyoListJukyushaDaichoBusiness {
         csvEntity.set後期被保険者番号(entity.get後期高齢者情報_後期高齢被保険者番号());
         csvEntity.set後期取得日(set年月日(日付スラッシュ付加, entity.get後期高齢者情報_資格取得日()));
         csvEntity.set後期喪失日(set年月日(日付スラッシュ付加, entity.get後期高齢者情報_資格喪失日()));
-        csvEntity.set後期登録区分(set登録区分(entity.get後期高齢者情報_登録区分()));
+        csvEntity.set後期登録区分(set後期登録区分(entity.get後期高齢者情報_登録区分()));
         csvEntity.set国保番号(entity.get国保資格情報_国保番号());
         csvEntity.set国保保険者番号(entity.get国保資格情報_国保保険者番号());
         csvEntity.set国保保険証番号(entity.get国保資格情報_国保保険証番号());
@@ -1030,6 +1036,17 @@ public class HanyoListJukyushaDaichoBusiness {
             return RString.EMPTY;
         }
         return NinteiShinseiHoreiCode.toValue(認定申請区分法令コード).get名称();
+    }
+
+    private RString set後期登録区分(RString 後期登録区分) {
+        if (住基_1.equals(後期登録区分)) {
+            return 住基;
+        } else if (外国人_2.equals(後期登録区分)) {
+            return 外国人;
+        } else if (住登外_3.equals(後期登録区分)) {
+            return 住登外;
+        }
+        return RString.EMPTY;
     }
 
     private RString set登録区分(RString 登録区分) {
