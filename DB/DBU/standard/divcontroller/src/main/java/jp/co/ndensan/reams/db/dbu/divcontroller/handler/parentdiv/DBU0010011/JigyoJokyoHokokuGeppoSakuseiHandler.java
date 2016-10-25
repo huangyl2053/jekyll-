@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0010011;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
@@ -74,6 +76,9 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     private static final RString 給付決定年月で集計 = new RString("keiteiYM5");
     private static final RDate 基準日 = RDate.getNowDate();
     private static final RString 年度内連番 = new RString("0001");
+    private static final int 過去報告年月ソート用_年開始インデックス = 1;
+    private static final int 過去報告年月ソート用_年終了インデックス = 3;
+    private static final int 過去報告年月ソート用_月開始インデックス = 4;
     private final JigyoJokyoHokokuGeppoSakuseiDiv div;
     private final ShoriDateKanriManager shoriDateKanriManager = new ShoriDateKanriManager();
 
@@ -133,18 +138,48 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
      */
     private void set過去報告年月(List<ShoriDateKanri> shoriDateKanriList) {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        List<RStringBuilder> ソート用List = new ArrayList<>();
         int count = 1;
-        for (ShoriDateKanri shoriDateKanri : shoriDateKanriList) {
-            RStringBuilder 過去年月 = new RStringBuilder();
-            過去年月.append(shoriDateKanri.get年度().wareki().toDateString());
-            過去年月.append(点);
-            過去年月.append(shoriDateKanri.get処理枝番().substring(2));
-            KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(count)), 過去年月.toRString());
-            dataSourceList.add(dataSource);
-            count = count + 1;
+        if (!shoriDateKanriList.isEmpty()) {
+            for (ShoriDateKanri shoriDateKanri : shoriDateKanriList) {
+                RStringBuilder 過去年月 = new RStringBuilder();
+                過去年月.append(shoriDateKanri.get年度().wareki().toDateString());
+                過去年月.append(点);
+                過去年月.append(shoriDateKanri.get処理枝番().substring(2));
+                ソート用List.add(過去年月);
+            }
+            Collections.sort(ソート用List, new ComparatorForDescKakoHokokuYM());
+            for (RStringBuilder ソート済み年月 : ソート用List) {
+                KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(count)), ソート済み年月.toRString());
+                dataSourceList.add(dataSource);
+                count = count + 1;
+            }         
         }
         div.getDdlKakoHokokuYM().setDataSource(dataSourceList);
         div.getDdlKakoHokokuYM().setDisabled(true);
+    }
+    
+    private static class ComparatorForDescKakoHokokuYM implements Comparator {
+
+        @Override
+        public int compare(Object arg0, Object arg1) {
+            RStringBuilder data0 = (RStringBuilder) arg0;
+            RStringBuilder data1 = (RStringBuilder) arg1;
+            int year0 = Integer.parseInt(data0.substring(
+                    過去報告年月ソート用_年開始インデックス, 過去報告年月ソート用_年終了インデックス).toString());
+            int year1 = Integer.parseInt(data1.substring(
+                    過去報告年月ソート用_年開始インデックス, 過去報告年月ソート用_年終了インデックス).toString());
+            int month0 = Integer.parseInt(data0.substring(
+                    過去報告年月ソート用_月開始インデックス).toString());
+            int month1 = Integer.parseInt(data1.substring(
+                    過去報告年月ソート用_月開始インデックス).toString());
+
+            if (year0 == year1) {
+                return (month1 - month0);
+            } else {
+                return (year1 - year0);
+            }
+        }
     }
 
     /**
