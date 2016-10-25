@@ -358,6 +358,7 @@ dbe/db/dbe/NinteiChosaIrai/onClick_MiwaritsukeShokai
 dbe/db/dbe/NinteiChosaIrai/onClick_WaritsukeZumiShokai
 dbe/db/dbe/NinteiChosaIrai/onClick_btnBackToChosaItakusakiSentaku
 dbe/db/dbe/NinteiChosaIrai/onClick_btnBackToChosainSentaku
+dbe/db/dbe/NinteiChosaIrai/onClick_btnBackToItakusakiSentaku
 dbe/db/dbe/NinteiChosaIrai/onClick_btnHozon
 dbe/db/dbe/NinteiChosaIrai/onClick_btnKaijo
 dbe/db/dbe/NinteiChosaIrai/onClick_btnWaritsuke
