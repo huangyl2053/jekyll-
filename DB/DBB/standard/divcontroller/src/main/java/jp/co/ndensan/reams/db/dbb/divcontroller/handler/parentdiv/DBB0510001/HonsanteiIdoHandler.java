@@ -255,7 +255,7 @@ public class HonsanteiIdoHandler {
     private boolean set処理状態(FlexibleYear 調定年度, RDate date) {
         dgHonsanteiIdoShoriKakunin_Row row = new dgHonsanteiIdoShoriKakunin_Row();
         List<dgHonsanteiIdoShoriKakunin_Row> rowList = new ArrayList<>();
-        boolean flag = false;
+        boolean flag = true;
         RString 算定月 = div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey();
         if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {
             List<ShoriDateKanri> entityList = HonsanteiIdoGennendo.createInstance().getShoriDateKanriList(
@@ -266,11 +266,11 @@ public class HonsanteiIdoHandler {
             RString 開始月_6月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, date, SubGyomuCode.DBB介護賦課);
             RString 開始月_8月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, date, SubGyomuCode.DBB介護賦課);
             if (算定月_10.equals(算定月) && 開始_12月.equals(開始月_6月)) {
-                flag = set状況と処理日時(entityList, rowList, row, 特別徴収対象同定, flag);
+                flag = set状況と処理日時(entityList, rowList, row, 特別徴収対象同定);
             } else if (算定月_12.equals(算定月) && 開始_2月.equals(開始月_8月)) {
-                flag = set状況と処理日時(entityList, rowList, row, 特別徴収対象同定, flag);
+                flag = set状況と処理日時(entityList, rowList, row, 特別徴収対象同定);
             } else if (算定月_2.equals(算定月)) {
-                flag = set状況と処理日時(entityList, rowList, row, 特別徴収対象同定, flag);
+                flag = set状況と処理日時(entityList, rowList, row, 特別徴収対象同定);
             }
             // TODO QA#85917 処理名＝住民税更正分課税確定処理の場合  この部分についてはTODOとして。
         } else {
@@ -279,7 +279,7 @@ public class HonsanteiIdoHandler {
                     調定年度,
                     遷移元区分_1);
             RString 処理名_異動 = ShoriName.異動賦課.get名称();
-            flag = set状況と処理日時(entityList, rowList, row, 処理名_異動, flag);
+            flag = set状況と処理日時(entityList, rowList, row, 処理名_異動);
         }
         div.getShotiJokyo().getDgHonsanteiIdoShoriKakunin().setDataSource(rowList);
         return flag;
@@ -288,8 +288,8 @@ public class HonsanteiIdoHandler {
     private boolean set状況と処理日時(List<ShoriDateKanri> entityList,
             List<dgHonsanteiIdoShoriKakunin_Row> rowList,
             dgHonsanteiIdoShoriKakunin_Row row,
-            RString 処理名,
-            boolean flag) {
+            RString 処理名) {
+        boolean flag = false;
         if (entityList.isEmpty()) {
             rowList.add(setDgRow(row, 処理名, 未, RString.EMPTY));
         } else {

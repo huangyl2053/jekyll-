@@ -401,7 +401,7 @@ public class NonyuTsuchiShoDataHenshu {
 
     private boolean is処理中の期月の物である(List<SeikyuForPrinting> 請求情報リスト, RString 処理中の期) {
         for (SeikyuForPrinting 請求情報 : 請求情報リスト) {
-            if (処理中の期.equals(請求情報.get請求対象情報().get請求明細リスト().get(0).get収納期別明細().get期別())) {
+            if (Integer.parseInt(処理中の期.toString()) == 請求情報.get請求対象情報().get請求明細リスト().get(0).get収納期別明細().get期別()) {
                 return true;
             }
         }
