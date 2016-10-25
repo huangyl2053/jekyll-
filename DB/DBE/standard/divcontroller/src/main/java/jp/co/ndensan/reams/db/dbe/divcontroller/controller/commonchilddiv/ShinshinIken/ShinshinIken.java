@@ -283,8 +283,7 @@ public class ShinshinIken {
         return new ShinshinIkenHandler(div,
                 ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class),
                 ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.要介護認定主治医意見書情報, ShujiiIkenshoJoho.class));
+                ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class));
     }
 
     private ShinshinIkenValidationHandler getValidationHandler(ShinshinIkenDiv div) {
@@ -295,7 +294,6 @@ public class ShinshinIken {
         return new ShinshinIkenBakHandler(div,
                 ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class),
                 ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.要介護認定主治医意見書情報, ShujiiIkenshoJoho.class));
+                ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class));
     }
 }
