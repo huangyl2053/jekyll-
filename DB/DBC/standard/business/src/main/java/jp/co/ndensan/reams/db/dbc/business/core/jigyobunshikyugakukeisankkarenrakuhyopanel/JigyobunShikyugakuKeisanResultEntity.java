@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel;
+package jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity;
@@ -15,14 +15,14 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 事業高額合算支給額計算結果Resultクラスです。
+ * 事業高額合算支給額計算結果Entityクラスです。
  *
  * @reamsid_L DBC-4840-010 lihang
  */
 @lombok.Setter
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JigyobunShikyugakuKeisanPanelEntity implements Cloneable, Serializable {
+public class JigyobunShikyugakuKeisanResultEntity implements Cloneable, Serializable {
 
     private HihokenshaNo hihokenshaNo;
     private FlexibleYear taishoNendo;
@@ -38,7 +38,7 @@ public class JigyobunShikyugakuKeisanPanelEntity implements Cloneable, Serializa
     /**
      * コンストラクタです。
      */
-    public JigyobunShikyugakuKeisanPanelEntity() {
+    public JigyobunShikyugakuKeisanResultEntity() {
 
     }
 
@@ -47,7 +47,7 @@ public class JigyobunShikyugakuKeisanPanelEntity implements Cloneable, Serializa
      *
      * @param entity DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity
      */
-    public JigyobunShikyugakuKeisanPanelEntity(DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity entity) {
+    public JigyobunShikyugakuKeisanResultEntity(DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity entity) {
         this.dbt3172Entity = entity;
     }
 
@@ -56,7 +56,7 @@ public class JigyobunShikyugakuKeisanPanelEntity implements Cloneable, Serializa
      *
      * @param entity DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity
      */
-    public JigyobunShikyugakuKeisanPanelEntity(DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity entity) {
+    public JigyobunShikyugakuKeisanResultEntity(DbT3173JigyoKogakuGassanShikyugakuKeisanKekkaMeisaiEntity entity) {
         this.dbt3173Entity = entity;
     }
 
@@ -65,7 +65,7 @@ public class JigyobunShikyugakuKeisanPanelEntity implements Cloneable, Serializa
      *
      * @param hokenSeidoCode RString
      */
-    public JigyobunShikyugakuKeisanPanelEntity(RString hokenSeidoCode) {
+    public JigyobunShikyugakuKeisanResultEntity(RString hokenSeidoCode) {
         this.hokenSeidoCode = hokenSeidoCode;
     }
 }

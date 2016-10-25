@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunkeisankekkarenrakuhyo;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanPanelEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjigyobunkeisankekkarenrakuhyo.GassanJigyobunKeisanKekkaRenrakuhyoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
@@ -35,7 +35,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
 
     private final RString 通知書定型文1;
     private final RString 通知書定型文2;
-    private final JigyobunShikyugakuKeisanPanelEntity dataEntity;
+    private final JigyobunShikyugakuKeisanResultEntity dataEntity;
     private final NinshoshaSource 認証者;
     private final IShikibetsuTaisho 宛名データ;
     private final ToiawasesakiSource 問い合わせ先;
@@ -67,7 +67,7 @@ public class GassanJigyobunKeisanKekkaRenrakuhyoEditor implements IGassanJigyobu
      * @param count int
      */
     public GassanJigyobunKeisanKekkaRenrakuhyoEditor(RString 通知書定型文1, RString 通知書定型文2,
-            JigyobunShikyugakuKeisanPanelEntity dataEntity, NinshoshaSource 認証者,
+            JigyobunShikyugakuKeisanResultEntity dataEntity, NinshoshaSource 認証者,
             IShikibetsuTaisho 宛名データ,
             ToiawasesakiSource 問い合わせ先, boolean flag, boolean isBreak, int count) {
         this.通知書定型文1 = 通知書定型文1;
