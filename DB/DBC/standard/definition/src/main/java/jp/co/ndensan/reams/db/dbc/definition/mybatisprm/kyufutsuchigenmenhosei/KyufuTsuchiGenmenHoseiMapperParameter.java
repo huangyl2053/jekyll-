@@ -23,20 +23,24 @@ public class KyufuTsuchiGenmenHoseiMapperParameter implements IMyBatisParameter 
     private final FlexibleYearMonth サービス開始年月;
     private final FlexibleYearMonth サービス終了年月;
     private final List<RString> 市町村コードList;
+    private final RString 出力順;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
-     * @param サービス開始年月 FlexibleYearMonth
-     * @param サービス終了年月 FlexibleYearMonth
-     * @param 市町村コードList List<HokenshaNo>
+     * @param サービス開始年月 サービス開始年月
+     * @param サービス終了年月 サービス終了年月
+     * @param 市町村コードList 市町村コードList
+     * @param 出力順 出力順
      */
     public KyufuTsuchiGenmenHoseiMapperParameter(
             FlexibleYearMonth サービス開始年月,
             FlexibleYearMonth サービス終了年月,
-            List<RString> 市町村コードList) {
+            List<RString> 市町村コードList,
+            RString 出力順) {
         this.サービス開始年月 = サービス開始年月;
         this.サービス終了年月 = サービス終了年月;
         this.市町村コードList = 市町村コードList;
+        this.出力順 = 出力順;
     }
 }
