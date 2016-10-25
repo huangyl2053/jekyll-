@@ -101,6 +101,8 @@ public class JutakuKaishuJizenShinseiToroku {
                     handler.登録以外初期化(被保険者番号, サービス提供年月, 整理番号));
         } else {
             state = 登録モード;
+            RDate サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, RDate.class);
+            div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtShinseiYMD().setValue(サービス年月);
             ViewStateHolder.put(ViewStateKeys.処理モード, 登録モード);
             RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
                     getコード()).nextString();
@@ -155,27 +157,6 @@ public class JutakuKaishuJizenShinseiToroku {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).forwardWithEventName(DBC0700011TransitionEventName.該当者一覧).respond();
-        } else {
-            return ResponseData.of(div).respond();
-        }
-    }
-
-    /**
-     * 「個人検索へ戻る」ボタンクリックメソッドです。
-     *
-     * @param div JutakuKaishuJizenShinseiTorokuDiv
-     * @return ResponseData<JutakuKaishuJizenShinseiTorokuDiv>
-     */
-    public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onClick_btnBackToResult(JutakuKaishuJizenShinseiTorokuDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0700011TransitionEventName.検索条件).respond();
         } else {
             return ResponseData.of(div).respond();
         }
@@ -608,6 +589,8 @@ public class JutakuKaishuJizenShinseiToroku {
         JigyoshaMode jigyoshaMode = DataPassingConverter.deserialize(div.getJigyoshaMode(), JigyoshaMode.class);
         div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtJigyoshaNo().setValue(jigyoshaMode
                 .getJigyoshaNo().value());
+        div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtJigyoshaName().setPlaceHolder(jigyoshaMode
+                .getJigyoshaName().value());
         return ResponseData.of(div).respond();
     }
 

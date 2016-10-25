@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -34,12 +33,14 @@ public class ShinseishaInfoDiv extends Panel {
     private TextBoxCode txtJigyoshaNo;
     @JsonProperty("btnJigyosha")
     private ButtonDialog btnJigyosha;
+    @JsonProperty("txtJigyoshaName")
+    private TextBoxAtenaMeisho txtJigyoshaName;
+    @JsonProperty("txtShinseishaName")
+    private TextBox txtShinseishaName;
     @JsonProperty("btnHonninJohoCopy")
     private Button btnHonninJohoCopy;
     @JsonProperty("txtShinseishaNameKana")
     private TextBox txtShinseishaNameKana;
-    @JsonProperty("txtShinseishaName")
-    private TextBox txtShinseishaName;
     @JsonProperty("txtTelNo")
     private TextBoxTelNo txtTelNo;
     @JsonProperty("ddlShinseiTorikesuJiyu")
@@ -146,6 +147,42 @@ public class ShinseishaInfoDiv extends Panel {
     }
 
     /*
+     * gettxtJigyoshaName
+     * @return txtJigyoshaName
+     */
+    @JsonProperty("txtJigyoshaName")
+    public TextBoxAtenaMeisho getTxtJigyoshaName() {
+        return txtJigyoshaName;
+    }
+
+    /*
+     * settxtJigyoshaName
+     * @param txtJigyoshaName txtJigyoshaName
+     */
+    @JsonProperty("txtJigyoshaName")
+    public void setTxtJigyoshaName(TextBoxAtenaMeisho txtJigyoshaName) {
+        this.txtJigyoshaName = txtJigyoshaName;
+    }
+
+    /*
+     * gettxtShinseishaName
+     * @return txtShinseishaName
+     */
+    @JsonProperty("txtShinseishaName")
+    public TextBox getTxtShinseishaName() {
+        return txtShinseishaName;
+    }
+
+    /*
+     * settxtShinseishaName
+     * @param txtShinseishaName txtShinseishaName
+     */
+    @JsonProperty("txtShinseishaName")
+    public void setTxtShinseishaName(TextBox txtShinseishaName) {
+        this.txtShinseishaName = txtShinseishaName;
+    }
+
+    /*
      * getbtnHonninJohoCopy
      * @return btnHonninJohoCopy
      */
@@ -179,24 +216,6 @@ public class ShinseishaInfoDiv extends Panel {
     @JsonProperty("txtShinseishaNameKana")
     public void setTxtShinseishaNameKana(TextBox txtShinseishaNameKana) {
         this.txtShinseishaNameKana = txtShinseishaNameKana;
-    }
-
-    /*
-     * gettxtShinseishaName
-     * @return txtShinseishaName
-     */
-    @JsonProperty("txtShinseishaName")
-    public TextBox getTxtShinseishaName() {
-        return txtShinseishaName;
-    }
-
-    /*
-     * settxtShinseishaName
-     * @param txtShinseishaName txtShinseishaName
-     */
-    @JsonProperty("txtShinseishaName")
-    public void setTxtShinseishaName(TextBox txtShinseishaName) {
-        this.txtShinseishaName = txtShinseishaName;
     }
 
     /*
