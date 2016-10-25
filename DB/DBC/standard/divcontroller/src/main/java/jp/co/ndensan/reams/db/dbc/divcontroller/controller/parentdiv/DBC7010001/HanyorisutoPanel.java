@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7010001;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710010.DBC710010_HanyoListKyotakuServiceKeikakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7010001.HanyorisutoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7010001.HanyorisutoPanelHandler;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
@@ -41,7 +41,7 @@ public class HanyorisutoPanel {
      */
     public ResponseData<BatchParameterMap> onClick_btnBatchParameterSave(HanyorisutoPanelDiv div) {
         ResponseData<BatchParameterMap> responseData = new ResponseData<>();
-        HanyoListKyotakuServiceKeikakuBatchParameter parameter = getHandler(div).setBatchParameter(div);
+        DBC710010_HanyoListKyotakuServiceKeikakuParameter parameter = getHandler(div).setBatchParameter(div);
         parameter.set改頁出力順ID(div.getCcdChohyoShutsuryokujun().getSelected出力順() == null
                 ? RString.EMPTY : new RString(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID().toString()));
         responseData.data = new BatchParameterMap(parameter);
@@ -91,8 +91,8 @@ public class HanyorisutoPanel {
      * @param div HanyorisutoPanelDiv
      * @return ResponseData
      */
-    public ResponseData<HanyoListKyotakuServiceKeikakuBatchParameter> onClick_btnBatchRegister(HanyorisutoPanelDiv div) {
-        HanyoListKyotakuServiceKeikakuBatchParameter bparam = getHandler(div).setBatchParameter(div);
+    public ResponseData<DBC710010_HanyoListKyotakuServiceKeikakuParameter> onClick_btnBatchRegister(HanyorisutoPanelDiv div) {
+        DBC710010_HanyoListKyotakuServiceKeikakuParameter bparam = getHandler(div).setBatchParameter(div);
         return ResponseData.of(bparam).respond();
     }
 

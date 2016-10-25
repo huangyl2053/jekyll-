@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC10030.HanyoListKogakuKaigoServiceHiJokyoNoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC10030.HanyoListKogakuKaigoServiceHiJokyoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710030.HanyoListKogakuKaigoServiceHiJokyoNoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710030.HanyoListKogakuKaigoServiceHiJokyoProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710030.DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

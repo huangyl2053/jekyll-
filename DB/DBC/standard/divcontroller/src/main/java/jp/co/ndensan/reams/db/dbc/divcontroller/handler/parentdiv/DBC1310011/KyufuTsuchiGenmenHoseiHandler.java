@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1310011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC060010.DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1310011.KyufuTsuchiGenmenHoseiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -19,7 +20,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.ILoginInfo;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -78,15 +78,13 @@ public class KyufuTsuchiGenmenHoseiHandler {
             }
         }
         div.getKyufuTsuchiGenmenHoseiListSakusei().getDdlShichoson().setDataSource(市町村DDL);
-        //TODO 帳票出力順共有子(URZ.ChohyoShutsuryokujun)
-        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, new ReportId(new RString("DBC200043_KyufuhiTuchiGenmenhoseiIchiran")));
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200043.getReportId());
     }
 
     /**
      * 給付費通知減免補正一覧表のバッチ用パラメータです。
      *
-     * @return DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter
-     * 給付費通知減免補正一覧表のバッチ用パラメータ
+     * @return DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter 給付費通知減免補正一覧表のバッチ用パラメータ
      */
     public DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter btnPulish() {
         DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter paramter = new DBC060010_KyufuhiTsuchiGenmenHoseiIchiranhyoParameter();
@@ -112,7 +110,7 @@ public class KyufuTsuchiGenmenHoseiHandler {
         paramter.setサービス開始年月(new FlexibleYearMonth(サービス開始年月));
         paramter.setサービス終了年月(new FlexibleYearMonth(サービス終了年月));
         paramter.set市町村コードList(保険者番号List);
-        paramter.set帳票出力順ID(RString.EMPTY);
+        paramter.set帳票出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
         return paramter;
     }
 

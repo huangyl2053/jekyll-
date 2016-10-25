@@ -72,11 +72,14 @@ public class DBD301010_HikazeiNenkinTaishoshaJohoTorikomi extends BatchFlowBase<
         if (!処理区_1.equals(getParameter().get処理区分()) && !処理区_9.equals(getParameter().get処理区分())) {
             executeStep(非課税年金対象者情報_年金番号CSV);
         }
-        if (処理状態.equals(getParameter().get処理状態())) {
-            executeStep(削除非課税年金対象者);
+
+        if (!処理区_1.equals(getParameter().get処理区分())) {
+            if (処理状態.equals(getParameter().get処理状態())) {
+                executeStep(削除非課税年金対象者);
+            }
+            executeStep(更新非課税年金対象者);
+            executeStep(処理日付管理マスタ更新);
         }
-        executeStep(更新非課税年金対象者);
-        executeStep(処理日付管理マスタ更新);
     }
 
     /**

@@ -75,7 +75,6 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     private final RDateTime 作成日時;
     private final RString 設定値;
 
-    private final boolean is空白行;
     private int 毎ページ数 = 0;
     private int 総レコード数 = 0;
     private static Decimal 毎ページ振込金額合算 = Decimal.ZERO;
@@ -91,16 +90,14 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
      * @param 支払方法 Furikomi_ShihraiHohoShitei
      * @param 作成日時 RDateTime
      * @param 設定値 RString
-     * @param is空白行 boolean
      */
     protected FurikomiMeisaiIchiranDetailEditor(MeisaiDataEntity 一覧表用データ, IOutputOrder 出力順,
-            Furikomi_ShihraiHohoShitei 支払方法, RDateTime 作成日時, RString 設定値, boolean is空白行) {
+            Furikomi_ShihraiHohoShitei 支払方法, RDateTime 作成日時, RString 設定値) {
         this.一覧表用データ = 一覧表用データ;
         this.出力順 = 出力順;
         this.支払方法 = 支払方法;
         this.作成日時 = 作成日時;
         this.設定値 = 設定値;
-        this.is空白行 = is空白行;
     }
 
     @Override
@@ -116,12 +113,12 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
             毎ページ振込金額合算 = Decimal.ZERO;
             毎ページ数 = 0;
         }
-        if (!is空白行) {
-            editHeader(source);
-            edit明細1(source);
-            edit明細2(source);
-            editフッター(source);
-        }
+
+        editHeader(source);
+        edit明細1(source);
+        edit明細2(source);
+        editフッター(source);
+
         return source;
     }
 

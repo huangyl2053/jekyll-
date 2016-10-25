@@ -57,6 +57,8 @@ public class DBB011001_TokuchoKarisanteiFuka extends BatchFlowBase<DBB011001_Tok
     private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("DBB003001_KeisangoJohoSakusei");
     private static final RString FUKAJOHOTOROKUFLOW_FLOWID = new RString("DBB004001_FukaJohoToroku");
     private static final ReportId 特別徴収仮算定結果一覧表_帳票分類ID = new ReportId("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran");
+    private static final String 仮算定異動通知書一括発行 = "call_TokuchoKarisanteiTsuchishoHakkoFlow";
+    private static final RString TOKUCHOKARISANTEITSUSHISHOHAKKO_FLOWID = new RString("DBB011003_TokuchoKarisanteiTsuchishoHakko");
 
     private YMDHMS システム日時;
     private RString 出力順ID;
@@ -94,6 +96,9 @@ public class DBB011001_TokuchoKarisanteiFuka extends BatchFlowBase<DBB011001_Tok
             }
         }
         executeStep(処理日付管理更新);
+        if (getParameter().isFlag()) {
+            executeStep(仮算定異動通知書一括発行);
+        }
     }
 
     /**
@@ -269,6 +274,17 @@ public class DBB011001_TokuchoKarisanteiFuka extends BatchFlowBase<DBB011001_Tok
     @Step(処理日付管理更新)
     protected IBatchFlowCommand updShoriDateKanri() {
         return simpleBatch(UpdShoriDateKanriProcess.class).arguments(setParameter()).define();
+    }
+
+    /**
+     * 特徴仮算定通知書一括発行バッチのメソッドです。
+     *
+     * @return TokuchoKarisanteiTsuchishoHakkoFlow
+     */
+    @Step(仮算定異動通知書一括発行)
+    protected IBatchFlowCommand call_TokuchoKarisanteiTsuchishoHakkoFlow() {
+        return otherBatchFlow(TOKUCHOKARISANTEITSUSHISHOHAKKO_FLOWID, SubGyomuCode.DBB介護賦課,
+                getParameter().getParameter()).define();
     }
 
     private TokuchoKarisanteiFukaProcessParameter setParameter() {

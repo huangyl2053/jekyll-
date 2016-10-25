@@ -1778,6 +1778,8 @@
         ON "ShikibetsuTaisho"."shikibetsuCode" = "DbT2015KeisangoJoho"."shikibetsuCode"
         LEFT JOIN (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON koza."uaT0310Koza_shikibetsuCode"="DbT2015KeisangoJoho"."shikibetsuCode"
+        LEFT JOIN "ShuturyokuTemp" AS "ShuturyokuTemp"
+        ON "ShuturyokuTemp"."tsuchishoNo"="DbT2015KeisangoJoho"."tsuchishoNo"
         WHERE 
         "DbT2015KeisangoJoho"."choteiNendo"=#{調定年度}
         AND "DbT2015KeisangoJoho"."fukaNendo"=#{賦課年度}
@@ -2639,6 +2641,20 @@
         <result property="setai_shikibetsuCode_50" column="setai_shikibetsuCode_50" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="setai_shotokuNendo_50" column="setai_shotokuNendo_50" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
     </resultMap>
+    
+    <select resultOrdered="true" id="select出力順"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.ShuturyokuParameter" 
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity" fetchSize="500">
+        SELECT 
+            *
+        FROM
+            rgdb."DbT2015KeisangoJoho"  AS "DbT2015KeisangoJoho"
+        WHERE 
+           "DbT2015KeisangoJoho"."choteiNendo" =  #{調定年度}
+            AND "DbT2015KeisangoJoho"."fukaNendo" =  #{賦課年度}
+            AND "DbT2015KeisangoJoho"."koseiZengoKubun" = '2'
+            AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '本算定賦課'
+     </select>
     
 </mapper>
     

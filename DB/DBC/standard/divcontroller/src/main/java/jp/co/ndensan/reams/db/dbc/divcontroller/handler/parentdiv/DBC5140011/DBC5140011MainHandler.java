@@ -16,13 +16,11 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5140011.DBC5140011MainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5140011.dgServiceShuruiList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.dbc5140011main.DBC5140011MainFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * サービスコード単位明細リストのHandlerです。
@@ -64,7 +62,6 @@ public class DBC5140011MainHandler {
      */
     public void initialize() {
 
-        ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
         div.getChushutsuJoken1().getCcdJigyoshaNo().initialize();
         div.getChikuShitei().getCcdChikuShichosonSelect().initialize();
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200005.getReportId());
@@ -117,7 +114,7 @@ public class DBC5140011MainHandler {
             list.add(row.getServiceShuruiCode());
         }
         parameter.setサービス種類コードリスト(list);
-        RString serviceKomokuCode = new RString("");
+        RString serviceKomokuCode = RString.EMPTY;
         RString serviceShuruiCode1 = div.getChushutsuJoken2().getTxtServiceKomokuCode1().getValue();
         RString serviceShuruiCode2 = div.getChushutsuJoken2().getTxtServiceKomokuCode2().getValue();
         RString serviceShuruiCode3 = div.getChushutsuJoken2().getTxtServiceKomokuCode3().getValue();
@@ -128,7 +125,7 @@ public class DBC5140011MainHandler {
         listStr.add(serviceShuruiCode3);
         listStr.add(serviceShuruiCode4);
         for (RString serviceShuruiCode : listStr) {
-            if (!serviceShuruiCode.isNullOrEmpty()) {
+            if (!serviceShuruiCode.isNull() && !serviceShuruiCode.isEmpty()) {
                 serviceKomokuCode = serviceKomokuCode.concat(serviceShuruiCode);
             } else {
                 serviceKomokuCode = serviceKomokuCode.concat(アンだライン);

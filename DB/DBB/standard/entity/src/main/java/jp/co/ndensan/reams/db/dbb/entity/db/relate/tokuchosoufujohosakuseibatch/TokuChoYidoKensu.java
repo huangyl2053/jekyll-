@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TokuChoYidoKensu {
 
     private RString 構成市町村コード;
-    private RString DT特別徴収義務者コード;
+    private RString dT特別徴収義務者コード;
     private int 件数;
     private int 資格件数;
     private int 住所地特例件数;

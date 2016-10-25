@@ -12,11 +12,13 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5140011.DBC5
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5140011.dgServiceShuruiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5140011.DBC5140011MainHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * サービスコード単位明細リストのクラスです。
@@ -27,6 +29,7 @@ public class DBC5140011Main {
 
     private static final int 十 = 10;
     private static final RString 十個ゼロ = new RString("0000000000");
+    private static final RString 台帳種別表示有り = new RString("台帳種別表示有り");
 
     /**
      * 画面初期化のメソッドです。
@@ -37,6 +40,7 @@ public class DBC5140011Main {
     public ResponseData<DBC5140011MainDiv> onLoad(DBC5140011MainDiv div) {
 
         getHandler(div).initialize();
+        ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示有り);
         return ResponseData.of(div).respond();
     }
 
