@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JuminkirokuIdojohoTorokuKoikiProcessParameter implements IBatchProcessParameter {
 
-    private final YMDHMS syorinichiji;
-    private final RString shichosonCode;
+    private YMDHMS syorinichiji;
+    private RString shichosonCode;
 
     /**
      * コンストラクタ。

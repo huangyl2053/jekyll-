@@ -71,6 +71,19 @@ public enum FutangendogakuShoninMainDivSpec implements IPredicate<Futangendogaku
                     }
                     return TxtHakkoYMD;
                 }
+            },
+    申請日終了と申請日開始の未入力チェック {
+                /**
+                 * 申請日終了と申請日開始の未入力チェック.
+                 *
+                 * @param div FutangendogakuShoninMainDiv
+                 * @return true: 申請日終了と申請日開始が非空です、false: 申請日終了と申請日開始が空白の場合。
+                 */
+                @Override
+                public boolean apply(FutangendogakuShoninMainDiv div) {
+                    return div.getTxtShinseibiJoken().getFromValue() != null && div.getTxtShinseibiJoken().getToValue() != null;
+                }
+
             };
 
 }

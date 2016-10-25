@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 一括承認結果一覧を管理するクラスです。
  */
-public class FutanyikkatsuShoninList extends ParentModelBase<FutanyikkatsuShoninListIdentifier, DbT4035FutanGendogakuNinteiBatchEntity, FutanyikkatsuShoninList> implements Serializable {
+public class FutanyikkatsuShoninList extends
+        ParentModelBase<FutanyikkatsuShoninListIdentifier, DbT4035FutanGendogakuNinteiBatchEntity, FutanyikkatsuShoninList>
+        implements Serializable {
 
 //TODO NetBeansの機能を使って必ずequalsとhashCodeを追加してください。
     private final DbT4035FutanGendogakuNinteiBatchEntity entity;
@@ -97,7 +99,7 @@ public class FutanyikkatsuShoninList extends ParentModelBase<FutanyikkatsuShonin
      *
      * @return Reamsコンフィグから読み取った団体(市町村)コード
      */
-    public RString getReamsコンフィグから読み取った団体市町村コード() {
+    public RString get団体市町村コード() {
         return entity.getInsertDantaiCd();
     }
 
@@ -106,7 +108,7 @@ public class FutanyikkatsuShoninList extends ParentModelBase<FutanyikkatsuShonin
      *
      * @return 論理削除行であればtrue
      */
-    public boolean get論理削除行であればtrue() {
+    public boolean is論理削除行であればtrue() {
         return entity.getIsDeleted();
     }
 
@@ -142,7 +144,7 @@ public class FutanyikkatsuShoninList extends ParentModelBase<FutanyikkatsuShonin
      *
      * @return テスト処理フラグ
      */
-    public boolean getテスト処理フラグ() {
+    public boolean isテスト処理フラグ() {
         return entity.getIsTest();
     }
 
@@ -151,7 +153,7 @@ public class FutanyikkatsuShoninList extends ParentModelBase<FutanyikkatsuShonin
      *
      * @return 承認済みフラグ
      */
-    public boolean get承認済みフラグ() {
+    public boolean is承認済みフラグ() {
         return entity.getHadApproved();
     }
 

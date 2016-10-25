@@ -94,7 +94,7 @@
                 AND "DbV4001JukyushaDaicho"."ninteiYMD" <![CDATA[<=]]>#{受給認定日抽出の終了}
             </if>
             <if test="is認定有効終了日抽出チェックオン">
-                AND #{認定有効終了日抽出の開始} <![CDATA[<=]]> "DbV4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD"
+                AND #{認定有効終日抽出の開始} <![CDATA[<=]]> "DbV4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD"
                 AND "DbV4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> #{認定有効終日抽出の終了} 	
             </if>
         </if>

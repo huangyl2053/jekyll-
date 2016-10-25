@@ -73,6 +73,8 @@ public class FutanyikkatsuShoninkekkaListHandler {
             div.getDatagridhojipanel().getTxtSakuseiNendo().setDomain(負担限度額一括認定情報.get作成年度());
             div.getDatagridhojipanel().getTxtKettaiYMD().setValue(負担限度額一括認定情報.get決定日());
             if (負担限度額一括認定情報.get承認済みフラグ()) {
+                List<RString> keys = new ArrayList<>();
+                div.getDatagridhojipanel().getChkTestKubun().setSelectedItemsByKey(keys);
                 CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(承認を確定する, true);
                 CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(修正を保存する, false);
             } else {
@@ -115,8 +117,8 @@ public class FutanyikkatsuShoninkekkaListHandler {
      */
     public void ＤＢ処理_負担限度額一括認定(YMDHMS 一括認定バッチ処理日時) {
         IkkatsuShoninKekkaIchiranService ikkatsuservice = IkkatsuShoninKekkaIchiranService.createInstance();
-        FutanyikkatsuShoninList 更新futanlist = ikkatsuservice.get負担限度額一括認定情報(一括認定バッチ処理日時);
-        if (更新futanlist != null) {
+        if (ikkatsuservice.get負担限度額一括認定情報(一括認定バッチ処理日時) != null) {
+            FutanyikkatsuShoninList 更新futanlist = new FutanyikkatsuShoninList(ikkatsuservice.get負担限度額一括認定情報(一括認定バッチ処理日時));
             更新futanlist = 更新futanlist.createBuilderForEdit()
                     .set承認済みフラグ(true)
                     .build()

@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -31,7 +30,8 @@ public class HanyoListKagoKekkaMybatisParameter extends UaFt200FindShikibetsuTai
     private FlexibleYearMonth サービス提供年月From;
     private FlexibleYearMonth サービス提供年月To;
     private JigyoshaNo 事業者コード;
-    private LasdecCode 保険者コード;
+    private RString 保険者コード;
+    private RString 出力順;
 
     /**
      * ンストラクタです。
@@ -47,7 +47,7 @@ public class HanyoListKagoKekkaMybatisParameter extends UaFt200FindShikibetsuTai
      */
     public HanyoListKagoKekkaMybatisParameter(FlexibleYearMonth 国保連取扱年月From, FlexibleYearMonth 国保連取扱年月To,
             RString 保険者区分, FlexibleYearMonth サービス提供年月From, FlexibleYearMonth サービス提供年月To,
-            JigyoshaNo 事業者コード, LasdecCode 保険者コード, IShikibetsuTaishoPSMSearchKey searchKey) {
+            JigyoshaNo 事業者コード, RString 保険者コード, IShikibetsuTaishoPSMSearchKey searchKey) {
         super(searchKey);
         this.国保連取扱年月From = 国保連取扱年月From;
         this.国保連取扱年月To = 国保連取扱年月To;

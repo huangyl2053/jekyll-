@@ -16,8 +16,11 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010032.Fut
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010032.FutanyikkatsuShoninkekkaListValidationHandler;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.IkkatsuShoninKekkaIchiranService;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.ExclusiveLock;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -116,25 +119,17 @@ public class FutanyikkatsuShoninkekkaList {
      * @return ResponseData
      */
     public ResponseData<FutanyikkatsuShoninkekkaListDiv> onClick_shuseyihozonbutton(FutanyikkatsuShoninkekkaListDiv div) {
-        List<FutanGendogakuNinteiBatchResult> 画面更新用情報
-                = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, List.class);
-        //TODO QA
-//        RStringBuilder 前排他ロックキー = new RStringBuilder();
-//        RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ShoKisaiHokenshaNo.class).value();
-//        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, HihokenshaNo.class).value();
-//        RString 履歴番号 = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, RString.class);
-//        前排他ロックキー.append(履歴番号);
-//        前排他ロックキー.append(被保険者番号);
-//        前排他ロックキー.append(証記載保険者番号);
-//        if (!RealInitialLocker.tryGetLock(new LockingKey(前排他ロックキー))) {
-//            div.setReadOnly(true);
-//            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-//        }
+        if (ExclusiveLock.isLocked(ResponseHolder.getUIContainerId())) {
+            div.setReadOnly(true);
+            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+        }
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor修正保存対象存在チェック(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        List<FutanGendogakuNinteiBatchResult> 画面更新用情報
+                = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, List.class);
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(DbdQuestionMessages.負担限度額一括認定_修正反映確認.getMessage().getCode(),
                     DbdQuestionMessages.負担限度額一括認定_修正反映確認.getMessage().evaluate());
@@ -145,7 +140,6 @@ public class FutanyikkatsuShoninkekkaList {
             div.getCcdKaigoKanryoMessage().setMessage(修正保存処理完了, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBD1010032StateName.完了);
         }
-        //RealInitialLocker.release(new LockingKey(前排他ロックキー));
         return ResponseData.of(div).respond();
     }
 

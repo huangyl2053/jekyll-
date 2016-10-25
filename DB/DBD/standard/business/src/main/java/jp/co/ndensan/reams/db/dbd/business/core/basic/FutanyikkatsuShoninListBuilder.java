@@ -42,15 +42,13 @@ public class FutanyikkatsuShoninListBuilder {
     /**
      * Reamsコンフィグから読み取った団体(市町村)コードを設定します。
      *
-     * @param Reamsコンフィグから読み取った団体市町村コード RString
+     * @param 団体市町村コード RString
      * @return {@link FutanyikkatsuShoninListBuilder}
      */
-    public FutanyikkatsuShoninListBuilder setReamsコンフィグから読み取った団体市町村コード(
-            RString Reamsコンフィグから読み取った団体市町村コード) {
-        requireNonNull(Reamsコンフィグから読み取った団体市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("Reamsコンフィグから読み取った団体(市町村)コード")
+    public FutanyikkatsuShoninListBuilder set団体市町村コード(RString 団体市町村コード) {
+        requireNonNull(団体市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("Reamsコンフィグから読み取った団体(市町村)コード")
         );
-        entity.setInsertDantaiCd(Reamsコンフィグから読み取った団体市町村コード
-        );
+        entity.setInsertDantaiCd(団体市町村コード);
         return this;
     }
 

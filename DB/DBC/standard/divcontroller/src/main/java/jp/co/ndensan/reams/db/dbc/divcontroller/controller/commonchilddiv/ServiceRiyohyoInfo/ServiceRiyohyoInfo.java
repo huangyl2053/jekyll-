@@ -366,7 +366,6 @@ public class ServiceRiyohyoInfo {
         handler.合計情報クリア();
         div.getServiceRiyohyoBeppyoList().getBtnBeppyoGokeiNew().setDisabled(false);
         div.getBtnCalcGokei().setDisabled(false);
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RDate 利用年月日 = div.getTxtRiyoYM().getValue();
         FlexibleYearMonth 利用年月 = null;

@@ -37,8 +37,7 @@
           構成市町村マスタ.*,
           認定調査委託先情報.*,
           介護事業者.*,
-          介護保険施設入退所Newest."nyushoShisetsuCode" AS 入所施設コード,
-          居宅給付計画事業者作成.*
+          介護保険施設入退所Newest."nyushoShisetsuCode" AS 入所施設コード
           FROM
           (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.noDeleted_DbT4101NinteiShinseiJoho" />) AS DbT4101NinteiShinseiJoho
           INNER JOIN 

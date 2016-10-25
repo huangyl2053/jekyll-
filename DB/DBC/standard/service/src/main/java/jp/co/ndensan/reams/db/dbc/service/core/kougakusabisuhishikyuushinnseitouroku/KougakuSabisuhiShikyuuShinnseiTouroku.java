@@ -169,10 +169,10 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
                 && !画面DIV.get事業高額介護サービス費支給申請Entity().get申請年月日().isEmpty()) {
             upd事業高額介護支給申請(画面DIV.get事業高額介護サービス費支給申請Entity());
         }
-        if (画面DIV.get事業高額介護サービス費支給申請Entity() != null
+        if (画面DIV.get事業高額介護サービス費支給判定結果Entity() != null
                 && EntityDataState.Deleted.equals(
-                        画面DIV.get事業高額介護サービス費支給申請Entity().toEntity().getState())) {
-            upd事業高額介護支給申請(画面DIV.get事業高額介護サービス費支給申請Entity());
+                        画面DIV.get事業高額介護サービス費支給判定結果Entity().toEntity().getState())) {
+            upd事業高額介護支給判定結果(画面DIV.get事業高額介護サービス費支給判定結果Entity());
         } else if (画面DIV.get事業高額介護サービス費支給判定結果Entity() != null
                 && 画面DIV.get事業高額介護サービス費支給判定結果Entity().get決定年月日() != null
                 && !画面DIV.get事業高額介護サービス費支給判定結果Entity().get決定年月日().isEmpty()) {

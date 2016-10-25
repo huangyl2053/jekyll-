@@ -138,6 +138,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         帳票用データ.set識別コード(nullToEmpty(entity.getShikibetsuCode().value()));
         帳票用データ.setカナ氏名(nullToEmpty(entity.getKanaShimei()));
         帳票用データ.set氏名(nullToEmpty(entity.getMeisho()));
+        帳票用データ.set町域コード(entity.getChoikiCode());
         if (男.equals(nullToEmpty(entity.getSeibetsuCode()))) {
             帳票用データ.set性別(性別_男);
         } else {

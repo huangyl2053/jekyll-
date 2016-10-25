@@ -31,13 +31,7 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
     private static final RString スペース = new RString(" ");
     private static final RString ONESTRING = new RString("1");
     private static final RString TWOSTRING = new RString("2");
-    private static final RString THREESTRING = new RString("３");
-    private static final RString 各種区分01 = new RString("01");
-    private static final RString 特別徴収対象者 = new RString("特別徴収対象者");
-    private static final RString 各種区分02 = new RString("02");
-    private static final RString 特別徴収対象者住所地特例該当 = new RString("特別徴収対象者（住所地特例該当）");
-    private static final RString 各種区分03 = new RString("03");
-    private static final RString 特別徴収非対象者 = new RString("特別徴収非対象者");
+    private static final RString THREESTRING = new RString("3");
     private static final RString 処理結果 = new RString("00");
     private static final RString 合計金額金額 = new RString("00000000000");
     private final TokuchoSofuJohoRenkeiEntity entity;
@@ -57,7 +51,7 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
      * @param 通番 int
      * @return DTAレコード
      */
-    public TokuchoSofuJohoRenkeiKanriEntity edit管理(int 通番) {
+    public TokuchoSofuJohoRenkeiKanriEntity edit管理(long 通番) {
         return new TokuchoSofuJohoRenkeiKanriEntity(entity.get構成市町村コード(),
                 スペース, new RString(通番), editパターン34(RDate.getNowDate()), RString.EMPTY);
     }
@@ -115,7 +109,7 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
                 entity.getシフトコード3DT(),
                 RStringUtil.convert半角to全角(entity.get漢字住所DT()),
                 entity.getシフトコード4DT(),
-                edit各種区分(entity.get各種区分DT()),
+                entity.get各種区分DT(),
                 処理結果,
                 entity.get後期移管コードDT(),
                 editパターン34(entity.get各種年月日DT()),
@@ -154,7 +148,7 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
                 entity.getシフトコード3DT(),
                 RStringUtil.convert半角to全角(entity.get漢字住所DT()),
                 entity.getシフトコード4DT(),
-                edit各種区分(entity.get各種区分DT()),
+                entity.get各種区分DT(),
                 処理結果,
                 entity.get後期移管コードDT(),
                 editパターン34(entity.get各種年月日DT()),
@@ -229,17 +223,5 @@ public class TokuchoSofuJohoRenkeiCsvEntityEditor {
             return 郵便番号.value();
         }
         return RString.EMPTY;
-    }
-
-    private RString edit各種区分(RString string) {
-        if (各種区分01.equals(string)) {
-            return 特別徴収対象者;
-        } else if (各種区分02.equals(string)) {
-            return 特別徴収対象者住所地特例該当;
-        } else if (各種区分03.equals(string)) {
-            return 特別徴収非対象者;
-        } else {
-            return RString.EMPTY;
-        }
     }
 }

@@ -89,8 +89,10 @@ public class SyoriResultKakuninListCreateProcess extends BatchProcessBase<ShoriK
         } else {
             eucCsvEntity.set作成日時(RString.EMPTY);
         }
+        if (t.getErrorKubun() != null && !t.getErrorKubun().isEmpty()) {
+            eucCsvEntity.set処理名(FurikomiDataSakusei_ErrorKubun.get処理名(t.getErrorKubun()));
+        }
 
-        eucCsvEntity.set処理名(FurikomiDataSakusei_ErrorKubun.get処理名(t.getErrorKubun()));
         if (t.getShoKisaiHokenshaNo() != null) {
             eucCsvEntity.set証記載保険者番号(t.getShoKisaiHokenshaNo().value());
         }

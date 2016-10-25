@@ -54,15 +54,15 @@ public enum HanyoListKagoKekkaOutputOrder implements IReportItems {
     /**
      * サービス年月
      */
-    サービス年月(new RString("0301"), new RString(""), new RString("dbT3061KagoKetteiMeisai_serviceTeikyoYM")),
+    サービス年月(new RString("0301"), new RString(""), new RString("\"dbT3061KagoKetteiMeisai_serviceTeikyoYM\"")),
     /**
      * 取り扱い年月
      */
-    取り扱い年月(new RString("0310"), new RString(""), new RString("dbT3061KagoKetteiMeisai_torikomiYM")),
+    取り扱い年月(new RString("0310"), new RString(""), new RString("\"dbT3061KagoKetteiMeisai_torikomiYM\"")),
     /**
      * 保険者区分
      */
-    保険者区分(new RString("0501"), new RString(""), new RString("dbT3061KagoKetteiMeisai_hokenshaKubun"));
+    保険者区分(new RString("0501"), new RString(""), new RString("\"dbT3061KagoKetteiMeisai_hokenshaKubun\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
