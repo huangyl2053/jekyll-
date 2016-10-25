@@ -115,6 +115,7 @@ public class ShiharaiHohoHenkoShunouStatusService {
      * 仮の最古滞納期を取得します．
      *
      * @param entity 情報
+     * @param 基準日 基準日
      * @return 仮の最古滞納期
      */
     public FlexibleDate get仮の最古滞納期(ShiharaiHohoHenkoHaakuOneEntity entity, FlexibleDate 基準日) {
@@ -213,6 +214,12 @@ public class ShiharaiHohoHenkoShunouStatusService {
         return 以前滞納区分;
     }
 
+    /**
+     * 仮の時効起算日を取得します．
+     *
+     * @param 収納情報 収納情報
+     * @return 仮の時効起算日
+     */
     public FlexibleDate edit仮の時効起算日(ShunoJohoEntity 収納情報) {
 
         FlexibleDate 時効起算日 = 収納情報.get時効_時効起算年月日();
@@ -246,19 +253,26 @@ public class ShiharaiHohoHenkoShunouStatusService {
             is納期限の翌日 = true;
             仮の時効起算日 = 納期限の翌日;
         }
+        仮の時効起算日 = edit収入情報_仮の時効起算日(収納情報, 仮の時効起算日, 時効起算日);
+        return 仮の時効起算日;
+    }
+
+    private FlexibleDate edit収入情報_仮の時効起算日(ShunoJohoEntity 収納情報, FlexibleDate 仮の時効起算日, FlexibleDate 時効起算日) {
+        FlexibleDate 収入_仮の時効起算日 = 仮の時効起算日;
         if (収納情報.get収入情報リスト() != null && !収納情報.get収入情報リスト().isEmpty()) {
             for (ShunyuJohoEntity 収入情報 : 収納情報.get収入情報リスト()) {
                 if ((仮の時効起算日 == null || 仮の時効起算日.isEmpty())
                         || 時効起算日 == null || 時効起算日.isEmpty() || 仮の時効起算日.plusYear(2).isBeforeOrEquals(edit日期(収入情報.get収入日()))) {
                     break;
-                } else if (時効起算日 != null && !時効起算日.isEmpty() && edit日期(収入情報.get収入日()).isBefore(時効起算日.plusYear(2))
+                } else if (収入情報.get収入日() != null
+                        && edit日期(収入情報.get収入日()).isBefore(時効起算日.plusYear(2))
                         && 仮の時効起算日.isBeforeOrEquals(edit日期(収入情報.get収入日()))) {
-                    仮の時効起算日 = edit日期(収入情報.get収入日());
+                    収入_仮の時効起算日 = edit日期(収入情報.get収入日());
                     is収入年月日 = true;
                 }
             }
         }
-        return 仮の時効起算日;
+        return 収入_仮の時効起算日;
     }
 
     /**
@@ -334,6 +348,7 @@ public class ShiharaiHohoHenkoShunouStatusService {
      * 以前未納情報_以前納期限を取得します．
      *
      * @param entity sql検索結果情報
+     * @param 基準日 基準日
      * @return 以前未納情報_以前納期限
      */
     public FlexibleDate get以前未納情報_以前納期限(ShiharaiHohoHenkoHaakuOneEntity entity, FlexibleDate 基準日) {
@@ -437,6 +452,15 @@ public class ShiharaiHohoHenkoShunouStatusService {
         return 最長滞納期間;
     }
 
+    /**
+     * 滞納区分を取得します．
+     *
+     * @param 納期限 納期限
+     * @param 時効起算日 時効起算日
+     * @param 未納額 未納額
+     * @param 基準日 基準日
+     * @return 滞納区分
+     */
     public RString edit滞納区分(RDate 納期限, FlexibleDate 時効起算日, Decimal 未納額, FlexibleDate 基準日) {
         RString 滞納区分 = TainoKubun.空白.get名称();
         if ((未納額 != null && !Decimal.ZERO.equals(未納額)) && !is以前未納情報(納期限, 基準日)) {
