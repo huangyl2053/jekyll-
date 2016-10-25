@@ -293,7 +293,7 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuManager {
     private RString to帳票物理名(RString 項目ID) {
         RString 帳票物理名 = RString.EMPTY;
         帳票物理名 = 宛名判定(帳票物理名, 項目ID);
-        if (帳票物理名 != null && !帳票物理名.isEmpty()) {
+        if (帳票物理名 == null || 帳票物理名.isEmpty()) {
             if (HanyoListHomonKaigoRiyoshaFutanGakuGengakuOrderby.証記載保険者番号.get項目ID().equals(項目ID)) {
                 帳票物理名 = new RString("shoKisaiHokenshaNo");
             } else if (HanyoListHomonKaigoRiyoshaFutanGakuGengakuOrderby.被保険者番号.get項目ID().equals(項目ID)) {

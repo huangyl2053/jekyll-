@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.NinteishaListSakus
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.SetaiInRisutoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200001.FutanGendogakuNinteiGaitoshaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
@@ -148,7 +149,9 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
             }
         }
 
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKetteiKubun()) {
+        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity()
+                && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity()
+                && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKetteiKubun()) {
             if (KetteiKubun.承認する.getコード().equals(this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKetteiKubun())) {
                 source.listUpper_4 = 承認;
             } else if (KetteiKubun.承認しない.getコード().equals(this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKetteiKubun())) {
@@ -158,26 +161,35 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
             }
         }
 
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKetteiYMD()) {
+        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity()
+                && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKetteiYMD()) {
             FlexibleDate ketteiYMD = this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKetteiYMD();
             get決定日(source, ketteiYMD);
         }
 
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getRiyoshaFutanDankai()) {
+        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity()
+                && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getRiyoshaFutanDankai()) {
             RString rs = this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getRiyoshaFutanDankai();
             source.listUpper_6 = RiyoshaFutanDankai.toValue(rs).get名称();
         }
 
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKyokaisoGaitoshaKubun()) {
+        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity()
+                && this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKyokaisoGaitoshaKubun()) {
             source.listUpper_7 = 該当;
         } else {
             source.listUpper_7 = RString.EMPTY;
         }
 
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getShinseiYMD()) {
+        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity()
+                && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getShinseiYMD()) {
             FlexibleDate shinseiYMD = this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKetteiYMD();
             get申請日(source, shinseiYMD);
         }
+
+        edit被保険者情報Upper_2(source);
+    }
+
+    private void edit被保険者情報Upper_2(FutanGendogakuNinteiGaitoshaIchiranReportSource source) {
 
         if (this.負担限度額認定者リストEntity.is老齢福祉年金受給者()) {
             source.listUpper_9 = 星;
@@ -192,7 +204,6 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
                 source.listUpper_10 = RString.EMPTY;
             }
         }
-
         if (this.負担限度額認定者リストEntity.is所得税課税者()) {
             source.listUpper_11 = 課;
         } else {
@@ -228,31 +239,42 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
         if (null != 宛名) {
             edit宛名(source, 宛名);
         }
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getTekiyoKaishiYMD()) {
+        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity()
+                && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getTekiyoKaishiYMD()) {
             FlexibleDate tekiyoKaishiYMD = this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getTekiyoKaishiYMD();
             if (null != tekiyoKaishiYMD) {
                 source.listCenter_5 = editTime(tekiyoKaishiYMD);
             }
         }
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getShokuhiFutanGendogaku()) {
+        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity()
+                && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getShokuhiFutanGendogaku()) {
             source.listCenter_6 = editDecimal(this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getShokuhiFutanGendogaku());
         }
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getUnitTypeJunKoshitsu()) {
+        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity()
+                && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getUnitTypeJunKoshitsu()) {
             source.listCenter_7 = editDecimal(this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getUnitTypeJunKoshitsu());
         }
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getJuraiTypeKoshitsu_Roken_Ryoyo()) {
+        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity()
+                && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getJuraiTypeKoshitsu_Roken_Ryoyo()) {
             source.listCenter_8 = editDecimal(this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getJuraiTypeKoshitsu_Roken_Ryoyo());
         }
         if (null != this.負担限度額認定者リストEntity.get利用者負担段階()) {
             source.listCenter_9 = RiyoshaFutanDankai.toValue(this.負担限度額認定者リストEntity.get利用者負担段階()).get名称();
         }
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKyusochishaKubun()) {
-            if (KyuSochishaKubun.旧措置者.getコード().equals(this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKyusochishaKubun())) {
+        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity()
+                && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKyusochishaKubun()) {
+            if (KyuSochishaKubun.旧措置者.getコード()
+                    .equals(this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKyusochishaKubun())) {
                 source.listCenter_10 = 旧措置者;
-            } else if (KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKyusochishaKubun())) {
+            } else if (KyuSochishaKubun.旧措置者実質的負担軽減者.getコード()
+                    .equals(this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getKyusochishaKubun())) {
                 source.listCenter_10 = 旧措軽減;
             }
         }
+        edit被保険者情報Center_2(source);
+    }
+
+    private void edit被保険者情報Center_2(FutanGendogakuNinteiGaitoshaIchiranReportSource source) {
         if (this.負担限度額認定者リストEntity.is受給者台帳Newest_旧措置者フラグ()) {
             source.listCenter_11 = 星;
         } else {
@@ -318,30 +340,33 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
     }
 
     private void edit被保険者情報Lower(FutanGendogakuNinteiGaitoshaIchiranReportSource source) {
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getShoKisaiHokenshaNo()) {
-            source.listLower_1 = this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getShoKisaiHokenshaNo().value();
-        }
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getTekiyoShuryoYMD()) {
-            source.listLower_5 = this.editTime(this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getTekiyoShuryoYMD());
-        }
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getUnitTypeKoshitsu()) {
-            source.listLower_6 = editDecimal(this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getUnitTypeKoshitsu());
-        }
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getJuraiTypeKoshitsu_Tokuyo()) {
-            source.listLower_7 = editDecimal(this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getJuraiTypeKoshitsu_Tokuyo());
-        }
-        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getTashoshitsu()) {
-            source.listLower_8 = editDecimal(this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getTashoshitsu());
-        }
-        if (null != this.負担限度額認定者リストEntity.get入所施設コード()) {
-            source.listLower_9 = this.負担限度額認定者リストEntity.get入所施設コード();
-        }
-        if (null != this.負担限度額認定者リストEntity.get入所施設名称()) {
-            source.listLower_10 = this.負担限度額認定者リストEntity.get入所施設名称();
-        }
-        if (null != this.負担限度額認定者リストEntity.get認定情報Entity() && null != this.負担限度額認定者リストEntity
-                .get認定情報Entity().get認定情報_認定有効期間終了年月日()) {
-            source.listLower_11 = editTime(this.負担限度額認定者リストEntity.get認定情報Entity().get認定情報_認定有効期間終了年月日());
+        if (null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity()) {
+            ShoKisaiHokenshaNo no = 負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getShoKisaiHokenshaNo();
+            if (no != null) {
+                source.listLower_1 = no.value();
+            }
+            FlexibleDate tekiyoShuryoYMD = 負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getTekiyoShuryoYMD();
+            if (tekiyoShuryoYMD != null) {
+                source.listLower_5 = editTime(tekiyoShuryoYMD);
+            }
+            Decimal unitTypeKoshitsu = 負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getUnitTypeKoshitsu();
+            if (unitTypeKoshitsu != null) {
+                source.listLower_6 = editDecimal(unitTypeKoshitsu);
+            }
+            Decimal juraiTypeKoshitsu_Tokuyo = 負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getJuraiTypeKoshitsu_Tokuyo();
+            if (juraiTypeKoshitsu_Tokuyo != null) {
+                source.listLower_7 = editDecimal(負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getJuraiTypeKoshitsu_Tokuyo());
+            }
+            Decimal tashoshitsu = 負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getTashoshitsu();
+            if (tashoshitsu != null) {
+                source.listLower_8 = editDecimal(負担限度額認定者リストEntity.get介護保険負担限度額認定Entity().getTashoshitsu());
+            }
+            source.listLower_9 = 負担限度額認定者リストEntity.get入所施設コード();
+            source.listLower_10 = 負担限度額認定者リストEntity.get入所施設名称();
+            FlexibleDate 認定情報_認定有効期間終了年月日 = 負担限度額認定者リストEntity.get認定情報Entity().get認定情報_認定有効期間終了年月日();
+            if (認定情報_認定有効期間終了年月日 != null) {
+                source.listLower_11 = editTime(認定情報_認定有効期間終了年月日);
+            }
         }
         if ((null != this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity() && null != this.負担限度額認定者リストEntity
                 .get介護保険負担限度額認定Entity()) && (this.負担限度額認定者リストEntity.get介護保険負担限度額認定Entity()

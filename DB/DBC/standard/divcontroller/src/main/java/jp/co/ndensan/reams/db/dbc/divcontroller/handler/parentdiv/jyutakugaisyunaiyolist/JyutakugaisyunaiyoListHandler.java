@@ -54,6 +54,7 @@ public class JyutakugaisyunaiyoListHandler {
         SearchResult<ShokanJutakuKaishu> jyutakugaisyunaiyoList;
         HihokenshaNo 被保険者番号 = model.get被保険者番号();
         FlexibleYearMonth サービス提供年月 = model.getサービス提供年月();
+        ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月, サービス提供年月);
         RString 整理番号 = model.get整理番号();
         RString 様式番号 = model.get様式番号();
         if (被保険者番号 == null || サービス提供年月 == null || 整理番号 == null || 様式番号 == null) {

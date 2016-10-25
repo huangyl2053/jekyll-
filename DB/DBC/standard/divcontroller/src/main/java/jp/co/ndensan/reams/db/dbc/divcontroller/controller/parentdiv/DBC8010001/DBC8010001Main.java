@@ -133,19 +133,32 @@ public class DBC8010001Main {
                 return ResponseData.of(div).respond();
             }
         }
-        RString ym = ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class) == null ? RString.EMPTY : ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class);
-        boolean flag5 = (null == ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class) || !決定者受取年月開始年月未入力value.equals(ym));
+        ResponseData<DBC8010001MainDiv> returnResponseData = onClickCheck_btnBatchRegister_2(div);
+        if (returnResponseData != null) {
+            return returnResponseData;
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<DBC8010001MainDiv> onClickCheck_btnBatchRegister_2(DBC8010001MainDiv div) {
+        RString ym = ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class) == null
+                ? RString.EMPTY : ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class);
+        boolean flag5 = (null == ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class)
+                || !決定者受取年月開始年月未入力value.equals(ym));
         if (flag5 && !div.getTxtKetteishaUketoriYmRange().isDisabled() && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
             ViewStateHolder.put(ViewStateKeys.決定者受取年月開始年月未入力flag, 決定者受取年月開始年月未入力value);
             return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
         } else {
-            if (!ResponseHolder.isReRequest() && !div.getTxtKetteishaUketoriYmRange().isDisabled() && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
+            if (!ResponseHolder.isReRequest() && !div.getTxtKetteishaUketoriYmRange().isDisabled()
+                    && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
                 return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
-            } else if (null != ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class) && 決定者受取年月開始年月未入力value.equals(ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class)) && ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
+            } else if (null != ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class)
+                    && 決定者受取年月開始年月未入力value.equals(ViewStateHolder.get(ViewStateKeys.決定者受取年月開始年月未入力flag, RString.class))
+                    && ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).respond();
             }
         }
-        return ResponseData.of(div).respond();
+        return null;
     }
 
     /**

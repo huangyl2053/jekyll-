@@ -87,6 +87,7 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
     }
 
     private RiyoshaFutangakuGemmenGaitoshaIchiranReportSource edit項目(RiyoshaFutangakuGemmenGaitoshaIchiranReportSource source) {
+        source.shichosonCode = entity.get市町村コード();
         if (index == 1) {
             editHeader(source);
             if (SetaiHyoji.表示する.equals(世帯表示)) {
@@ -95,6 +96,20 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
             edit項目１(source);
             edit項目2(source);
         } else {
+            edit作成日時(source);
+            source.title = entity.get帳票タイトル();
+            source.hokenshaNo = entity.get導入団体コード();
+            source.hokenshaName = entity.get導入団体名称();
+            source.hokenshaNoHidden = entity.get被保険者番号().getColumnValue();
+            set出力順改頁(source);
+            if (null != edit宛名()) {
+                source.listLower_1Hidden = edit宛名().get行政区画().getGyoseiku().getコード().getColumnValue();
+                source.listUpper_2Hidden = edit宛名().get住所().get郵便番号().getColumnValue();
+                source.choikiCode = edit宛名().get住所().get町域コード().getColumnValue();
+                source.setaiCode = edit宛名().get世帯コード().getColumnValue();
+                source.kanaShimei = edit宛名().get名称().getKana().getColumnValue();
+                source.listLower_1Hidden = edit宛名().get行政区画().getGyoseiku().getコード().getColumnValue();
+            }
             if (SetaiHyoji.表示する.equals(世帯表示)) {
                 edit世帯員(source);
             }
@@ -112,8 +127,13 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
         source.hokenshaNoHidden = entity.get被保険者番号().getColumnValue();
         if (null != edit宛名()) {
             source.listUpper_2 = edit宛名().get住所().get郵便番号().getColumnValue();
+            source.listUpper_2Hidden = edit宛名().get住所().get郵便番号().getColumnValue();
+            source.choikiCode = edit宛名().get住所().get町域コード().getColumnValue();
             source.listUpper_3 = edit宛名().get名称().getName().getColumnValue();
             source.listUpper_4 = edit宛名().get年齢算出().get年齢();
+            source.setaiCode = edit宛名().get世帯コード().getColumnValue();
+            source.kanaShimei = edit宛名().get名称().getKana().getColumnValue();
+            source.listLower_1Hidden = edit宛名().get行政区画().getGyoseiku().getコード().getColumnValue();
         }
         if (entity.get利用者負担額減額Entity() != null) {
             FlexibleDate youShinseiYMD = entity.get利用者負担額減額Entity().getShinseiYMD();
@@ -236,6 +256,7 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
             RiyoshaFutangakuGemmenGaitoshaIchiranReportSource source) {
         if (null != edit宛名()) {
             source.listLower_1 = edit宛名().get行政区画().getGyoseiku().getコード().getColumnValue();
+            source.listLower_1Hidden = edit宛名().get行政区画().getGyoseiku().getコード().getColumnValue();
             source.listLower_2 = edit宛名().get行政区画().getGyoseiku().get名称();
         }
         if (entity.get利用者負担額減額Entity() != null && entity.get利用者負担額減額Entity().getKetteiKubun() != null) {
@@ -325,6 +346,7 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl implements IRiyosha
     }
 
     private void setsource世帯員1(RiyoshaFutangakuGemmenGaitoshaIchiranReportSource source, SeteiYouEntity 世帯員情報) {
+
         if (世帯員情報.getPsmEntity() != null && 世帯員情報.get識別コード() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(世帯員情報.getPsmEntity());
             if (kojin.get名称() != null) {

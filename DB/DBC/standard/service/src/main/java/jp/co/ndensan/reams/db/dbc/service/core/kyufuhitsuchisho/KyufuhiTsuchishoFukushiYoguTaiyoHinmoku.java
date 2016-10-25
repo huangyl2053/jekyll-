@@ -57,7 +57,13 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
         }
         builderイトル1.append(new RString("】"));
         coverEntity.set参考資料タイトル1(builderイトル1.toRString());
-        // 実装方式は検討中「費用額(円)、件数(件)、割合(%)、あなたの位置、全国、都道府県、保険者」
+        帳票データ作成1(hakkoEntity);
+        return coverEntity;
+    }
+
+    private void 帳票データ作成1(KyufuhiTuchiHakkoEntity hakkoEntity) {
+        KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity coverEntity = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity();
+        //TODO 「費用額(円)、件数(件)、割合(%)、あなたの位置、全国、都道府県、保険者」の設定値問題、実装方式は検討中。
         RStringBuilder builderイトル2 = new RStringBuilder();
         if (hakkoEntity.getRelateEntity() != null && hakkoEntity.getRelateEntity().getServiceTeikyoYM() != null) {
             builderイトル2.append(new RString(hakkoEntity.getRelateEntity().getServiceTeikyoYM().toString()));
@@ -78,6 +84,5 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmoku {
         }
         builderイトル3.append(new RString("】"));
         coverEntity.set参考資料タイトル3(builderイトル3.toRString());
-        return coverEntity;
     }
 }

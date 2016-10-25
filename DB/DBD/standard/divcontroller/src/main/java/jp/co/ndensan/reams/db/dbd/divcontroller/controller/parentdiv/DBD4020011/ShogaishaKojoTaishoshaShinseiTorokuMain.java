@@ -166,7 +166,9 @@ public class ShogaishaKojoTaishoshaShinseiTorokuMain {
             最初情報 = get書控除申請登録最初情報(情報と状態);
         }
         boolean is承認情報 = 最初情報 != null && 最初情報.get決定区分() != null && !最初情報.get決定区分().isEmpty();
-        getHandler(div).onSelectByModifyButton(情報と状態, is承認情報);
+        if (情報と状態 != null) {
+            getHandler(div).onSelectByModifyButton(情報と状態, is承認情報);
+        }
         return ResponseData.of(div).setState(詳細);
     }
 

@@ -197,7 +197,9 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
                 }
             }
             Integer 最大履歴番号 = finder.get最大履歴番号(serviceCode);
-            最大履歴番号 = 最大履歴番号 == null ? 0 : 最大履歴番号;
+            if (null == 最大履歴番号) {
+                最大履歴番号 = 0;
+            }
             ShichosonTokubetuKyufuService entity = new ShichosonTokubetuKyufuService(serviceCode,
                     有効期間開始年月日,
                     最大履歴番号.intValue() + 1);

@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakuga
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,8 +24,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyun
  * @reamsid_L DBC-0940-010 yaodongsheng
  */
 public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyunaiyoListDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -142,7 +140,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
             State[] enumArray = State.values();
 
             for (State enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -157,11 +155,11 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     public State getMode_State() {
-        return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
+        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
     }
 
-    public void setMode_State(State value) {
-        _CommonChildDivModeUtil.setMode(this.modes, State.class, value);
+    public void setMode_State( State value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
     }
 
     /*
@@ -173,7 +171,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void setBtnDetailAdd(Button btnDetailAdd) {
+    public void  setBtnDetailAdd(Button btnDetailAdd) {
         this.getPnlGaisyuListArea().setBtnDetailAdd(btnDetailAdd);
     }
 
@@ -183,7 +181,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void setDgGaisyuList(DataGrid<dgGaisyuList_Row> dgGaisyuList) {
+    public void  setDgGaisyuList(DataGrid<dgGaisyuList_Row> dgGaisyuList) {
         this.getPnlGaisyuListArea().setDgGaisyuList(dgGaisyuList);
     }
 
@@ -193,7 +191,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void setTxtKaisyunaiyo(TextBoxMultiLine txtKaisyunaiyo) {
+    public void  setTxtKaisyunaiyo(TextBoxMultiLine txtKaisyunaiyo) {
         this.getPnlNyuryokuArea().setTxtKaisyunaiyo(txtKaisyunaiyo);
     }
 
@@ -203,7 +201,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void setTxtJigyosya(TextBox txtJigyosya) {
+    public void  setTxtJigyosya(TextBox txtJigyosya) {
         this.getPnlNyuryokuArea().setTxtJigyosya(txtJigyosya);
     }
 
@@ -213,7 +211,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void setLblTaisyojyutakujyusyo(Label lblTaisyojyutakujyusyo) {
+    public void  setLblTaisyojyutakujyusyo(Label lblTaisyojyutakujyusyo) {
         this.getPnlNyuryokuArea().setLblTaisyojyutakujyusyo(lblTaisyojyutakujyusyo);
     }
 
@@ -223,7 +221,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void setBtnHonnijyusyoCopy(Button btnHonnijyusyoCopy) {
+    public void  setBtnHonnijyusyoCopy(Button btnHonnijyusyoCopy) {
         this.getPnlNyuryokuArea().setBtnHonnijyusyoCopy(btnHonnijyusyoCopy);
     }
 
@@ -233,7 +231,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void setTxtJyusyo(TextBoxJusho txtJyusyo) {
+    public void  setTxtJyusyo(TextBoxJusho txtJyusyo) {
         this.getPnlNyuryokuArea().setTxtJyusyo(txtJyusyo);
     }
 
@@ -243,7 +241,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void setTxtTyakkoyotebi(TextBoxDate txtTyakkoyotebi) {
+    public void  setTxtTyakkoyotebi(TextBoxDate txtTyakkoyotebi) {
         this.getPnlNyuryokuArea().setTxtTyakkoyotebi(txtTyakkoyotebi);
     }
 
@@ -253,7 +251,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void setTxtKanseyotebi(TextBoxDate txtKanseyotebi) {
+    public void  setTxtKanseyotebi(TextBoxDate txtKanseyotebi) {
         this.getPnlNyuryokuArea().setTxtKanseyotebi(txtKanseyotebi);
     }
 
@@ -263,7 +261,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void setTxtKaisyukingaku(TextBoxNum txtKaisyukingaku) {
+    public void  setTxtKaisyukingaku(TextBoxNum txtKaisyukingaku) {
         this.getPnlNyuryokuArea().setTxtKaisyukingaku(txtKaisyukingaku);
     }
 
@@ -273,7 +271,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void setBtnClear(Button btnClear) {
+    public void  setBtnClear(Button btnClear) {
         this.getPnlNyuryokuArea().setBtnClear(btnClear);
     }
 
@@ -283,7 +281,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void setBtnDetailConfirm(Button btnDetailConfirm) {
+    public void  setBtnDetailConfirm(Button btnDetailConfirm) {
         this.getPnlNyuryokuArea().setBtnDetailConfirm(btnDetailConfirm);
     }
 

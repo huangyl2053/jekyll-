@@ -1495,6 +1495,12 @@ public class GemmenJuminKihonHandler {
                 発行パネル.getPritPublish3().getDdlShutsuryokuKi().setSelectedIndex(ゼロ_定値);
             }
         }
+        if (発行パネル.getPritPublish1().isVisible() || 発行パネル.getPritPublish2().isVisible()
+                || 発行パネル.getPritPublish3().isVisible() || 発行パネル.getPritPublish4().isVisible()) {
+            発行パネル.getLblPrintMessage().setVisible(true);
+        } else {
+            発行パネル.getLblPrintMessage().setVisible(false);
+        }
         return show発行ボタン;
     }
 

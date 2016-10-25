@@ -178,7 +178,7 @@ public class NinteishaListSakuseiBusiness {
     private NinteishaListSakuseiCsvEntity setVoidEntity1(NinteishaListSakuseiCsvEntity resultEntity,
             NinteishaListSakuseiResultEntity t, List<CSVSettings> csv出力設定) {
         if (t.get減免減額申請Entity() != null) {
-            resultEntity.set減免事由(t.get減免減額申請Entity().getGemmenGengakuShurui());
+            resultEntity.set減免事由(t.get利用者負担額減額Entity().getShinseiJiyu());
         }
         for (CSVSettings csvsetings : csv出力設定) {
             if (THERE.equals(csvsetings.getコード())) {
@@ -248,7 +248,7 @@ public class NinteishaListSakuseiBusiness {
     private NinteishaListSakuseiResultCsvEntity setVoidEntity(NinteishaListSakuseiResultCsvEntity resultEntity,
             NinteishaListSakuseiResultEntity t, List<CSVSettings> csv出力設定) {
         if (t.get減免減額申請Entity() != null) {
-            resultEntity.set減免事由(t.get減免減額申請Entity().getGemmenGengakuShurui());
+            resultEntity.set減免事由(t.get利用者負担額減額Entity().getShinseiJiyu());
         }
         for (CSVSettings csvsetings : csv出力設定) {
             if (THERE.equals(csvsetings.getコード())) {

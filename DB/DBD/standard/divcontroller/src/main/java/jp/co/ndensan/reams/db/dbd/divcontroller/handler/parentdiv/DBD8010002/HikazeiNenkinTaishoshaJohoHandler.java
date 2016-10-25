@@ -380,7 +380,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             parameter.set処理状態(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriJotai());
         } else {
             parameter.set処理区分(div.getDdlTuki().getSelectedKey().substring(INT_0, INT_1));
-            parameter.set処理区分(div.getDdlTuki().getSelectedKey().substring(INT_1, INT_4));
+            parameter.set対象月(div.getDdlTuki().getSelectedKey().substring(INT_1, INT_4));
             parameter.set処理日時(new YMDHMS(div.getTxtShoriNichiji().getValue()));
             parameter.set処理状態(div.getTxtShoriJotai().getValue());
         }

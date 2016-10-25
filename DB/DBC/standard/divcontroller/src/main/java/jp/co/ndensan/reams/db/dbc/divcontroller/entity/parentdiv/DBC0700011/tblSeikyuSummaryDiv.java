@@ -463,15 +463,13 @@ public class tblSeikyuSummaryDiv extends TablePanel {
 
     // </editor-fold>
 }
-
 /**
- * cell1 のクラスファイル
- *
+ * cell1 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell1AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblSummary")
     private Label lblSummary;
 
@@ -495,15 +493,13 @@ class cell1AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell2 のクラスファイル
- *
+ * cell2 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell2AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblHiyoTotal")
     private Label lblHiyoTotal;
 
@@ -527,15 +523,13 @@ class cell2AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell3 のクラスファイル
- *
+ * cell3 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell3AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblHokenTaishoHiyo")
     private Label lblHokenTaishoHiyo;
 
@@ -559,15 +553,13 @@ class cell3AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell10 のクラスファイル
- *
+ * cell10 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell10AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblHokenKyufuAmount")
     private Label lblHokenKyufuAmount;
 
@@ -591,15 +583,13 @@ class cell10AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell11 のクラスファイル
- *
+ * cell11 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell11AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblRiyoshaFutanAmount")
     private Label lblRiyoshaFutanAmount;
 
@@ -623,15 +613,13 @@ class cell11AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell4 のクラスファイル
- *
+ * cell4 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell4AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblSummaryMae")
     private Label lblSummaryMae;
 
@@ -655,15 +643,13 @@ class cell4AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell5 のクラスファイル
- *
+ * cell5 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell5AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("txtHiyoTotalMae")
     private TextBoxNum txtHiyoTotalMae;
 
@@ -687,15 +673,13 @@ class cell5AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell6 のクラスファイル
- *
+ * cell6 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell6AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("txtHokenTaishoHiyoMae")
     private TextBoxNum txtHokenTaishoHiyoMae;
 
@@ -719,15 +703,13 @@ class cell6AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell12 のクラスファイル
- *
+ * cell12 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell12AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("txtHokenKyufuAmountMae")
     private TextBoxNum txtHokenKyufuAmountMae;
 
@@ -751,15 +733,13 @@ class cell12AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell13 のクラスファイル
- *
+ * cell13 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell13AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("txtRiyoshaFutanAmountMae")
     private TextBoxNum txtRiyoshaFutanAmountMae;
 
@@ -783,15 +763,13 @@ class cell13AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell14 のクラスファイル
- *
+ * cell14 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell14AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("btnRireki")
     private Button btnRireki;
 
@@ -815,15 +793,13 @@ class cell14AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell7 のクラスファイル
- *
+ * cell7 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell7AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("lblSummaryNow")
     private Label lblSummaryNow;
 
@@ -847,15 +823,13 @@ class cell7AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell8 のクラスファイル
- *
+ * cell8 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell8AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("txtHiyoTotalNow")
     private TextBoxNum txtHiyoTotalNow;
 
@@ -879,15 +853,13 @@ class cell8AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell9 のクラスファイル
- *
+ * cell9 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell9AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("txtHokenTaishoHiyoNow")
     private TextBoxNum txtHokenTaishoHiyoNow;
 
@@ -911,15 +883,13 @@ class cell9AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell15 のクラスファイル
- *
+ * cell15 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell15AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("txtHokenKyufuAmountNow")
     private TextBoxNum txtHokenKyufuAmountNow;
 
@@ -943,15 +913,13 @@ class cell15AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell16 のクラスファイル
- *
+ * cell16 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell16AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("txtRiyoshaFutanAmountNow")
     private TextBoxNum txtRiyoshaFutanAmountNow;
 
@@ -975,15 +943,13 @@ class cell16AttblSeikyuSummary extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * cell17 のクラスファイル
- *
+ * cell17 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class cell17AttblSeikyuSummary extends TableCell {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     @JsonProperty("btnLimitOverCheck")
     private Button btnLimitOverCheck;
 

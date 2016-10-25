@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbd.entity.report.dbd00002;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+
 /**
  * 利用者負担額減免認定者リスト発行ReportSourceです。．
  *
@@ -127,12 +128,22 @@ public class RiyoshaFutangakuGemmenGaitoshaIchiranReportSource implements IRepor
     public RString listLower_11;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
+    @ReportItem(name = "choikiCode", length = 1, order = 58)
     public RString choikiCode;
+    @ReportItem(name = "setaiCode", length = 1, order = 59)
     public RString setaiCode;
+    @ReportItem(name = "shikibetsuCode", length = 1, order = 60)
     public RString shikibetsuCode;
+    @ReportItem(name = "kanaShimei", length = 1, order = 61)
     public RString kanaShimei;
+    @ReportItem(name = "shichosonCode", length = 1, order = 62)
     public RString shichosonCode;
+    @ReportItem(name = "hokenshaNoHidden", length = 1, order = 63)
     public RString hokenshaNoHidden;
+    @ReportItem(name = "listUpper_2Hidden", length = 1, order = 64)
+    public RString listUpper_2Hidden;
+    @ReportItem(name = "listLower_1Hidden", length = 1, order = 65)
+    public RString listLower_1Hidden;
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。

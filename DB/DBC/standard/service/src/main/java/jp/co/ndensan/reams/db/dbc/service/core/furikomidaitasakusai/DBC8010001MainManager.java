@@ -72,6 +72,13 @@ public class DBC8010001MainManager {
         return new DBC8010001(fentity);
     }
 
+    /**
+     * 存在の存在。
+     *
+     * @param メニューID RString
+     * @param 振込単位 RString
+     * @return if存在
+     */
     public boolean if存在(RString メニューID, RString 振込単位) {
         List<FurikomiGroupItakushaRelateEntity> list = getFurikomiGroupItakushaRelateEntityList(メニューID, 振込単位);
         return !list.isEmpty();
