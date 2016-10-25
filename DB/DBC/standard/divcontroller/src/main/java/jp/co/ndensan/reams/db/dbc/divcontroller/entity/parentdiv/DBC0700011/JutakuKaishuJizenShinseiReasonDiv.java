@@ -4,11 +4,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * JutakuKaishuJizenShinseiReason のクラスファイル
@@ -16,8 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @reamsid_L DBC-0990-060 panhe
  */
 public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,10 +23,10 @@ public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
      */
     @JsonProperty("txtCreateYMD")
     private TextBoxDate txtCreateYMD;
-    @JsonProperty("txtCreatorKanaName")
-    private TextBoxAtenaKanaMeisho txtCreatorKanaName;
     @JsonProperty("txtCreatorName")
-    private TextBoxAtenaMeisho txtCreatorName;
+    private TextBox txtCreatorName;
+    @JsonProperty("txtCreatorKanaName")
+    private TextBox txtCreatorKanaName;
     @JsonProperty("txtCreationJigyoshaNo")
     private TextBoxCode txtCreationJigyoshaNo;
     @JsonProperty("btnJigyoshaInputGuide")
@@ -62,29 +59,11 @@ public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
     }
 
     /*
-     * gettxtCreatorKanaName
-     * @return txtCreatorKanaName
-     */
-    @JsonProperty("txtCreatorKanaName")
-    public TextBoxAtenaKanaMeisho getTxtCreatorKanaName() {
-        return txtCreatorKanaName;
-    }
-
-    /*
-     * settxtCreatorKanaName
-     * @param txtCreatorKanaName txtCreatorKanaName
-     */
-    @JsonProperty("txtCreatorKanaName")
-    public void setTxtCreatorKanaName(TextBoxAtenaKanaMeisho txtCreatorKanaName) {
-        this.txtCreatorKanaName = txtCreatorKanaName;
-    }
-
-    /*
      * gettxtCreatorName
      * @return txtCreatorName
      */
     @JsonProperty("txtCreatorName")
-    public TextBoxAtenaMeisho getTxtCreatorName() {
+    public TextBox getTxtCreatorName() {
         return txtCreatorName;
     }
 
@@ -93,8 +72,26 @@ public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
      * @param txtCreatorName txtCreatorName
      */
     @JsonProperty("txtCreatorName")
-    public void setTxtCreatorName(TextBoxAtenaMeisho txtCreatorName) {
+    public void setTxtCreatorName(TextBox txtCreatorName) {
         this.txtCreatorName = txtCreatorName;
+    }
+
+    /*
+     * gettxtCreatorKanaName
+     * @return txtCreatorKanaName
+     */
+    @JsonProperty("txtCreatorKanaName")
+    public TextBox getTxtCreatorKanaName() {
+        return txtCreatorKanaName;
+    }
+
+    /*
+     * settxtCreatorKanaName
+     * @param txtCreatorKanaName txtCreatorKanaName
+     */
+    @JsonProperty("txtCreatorKanaName")
+    public void setTxtCreatorKanaName(TextBox txtCreatorKanaName) {
+        this.txtCreatorKanaName = txtCreatorKanaName;
     }
 
     /*
