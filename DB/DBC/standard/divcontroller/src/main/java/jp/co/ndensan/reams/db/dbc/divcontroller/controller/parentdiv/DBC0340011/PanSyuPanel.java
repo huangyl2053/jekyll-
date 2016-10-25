@@ -9,15 +9,15 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC010020.DBC010020_Kogaku
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0340011.PanSyuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0340011.PanSyuPanelHandler;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0340011.PanSyuPanelHandlerValidationHandler;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 高額サービス費受領委任契約承認（不承認）確認書作成のクラスです。
@@ -27,8 +27,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 public class PanSyuPanel {
 
     private static final ReportId 帳票ID = ReportIdDBC.DBC100031.getReportId();
-    private static final RString 契約申請日の範囲 = new RString("契約申請日の範囲");
-    private static final RString 契約決定日の範囲 = new RString("契約決定日の範囲");
     private static final RString 発行する = new RString("Execute");
 
     /**
@@ -77,15 +75,9 @@ public class PanSyuPanel {
      * @return ResponseData PanSyuPanelDiv
      */
     public ResponseData<PanSyuPanelDiv> onBeforeOpenDialog(PanSyuPanelDiv div) {
-        RDate 契約開始申請日 = div.getPanJyoken().getTxtKeyakuSinseibi().getFromValue();
-        RDate 契約終了申請日 = div.getPanJyoken().getTxtKeyakuSinseibi().getToValue();
-        RDate 契約開始決定日 = div.getPanJyoken().getTxtKeiyakuKeteibi().getFromValue();
-        RDate 契約終了決定日 = div.getPanJyoken().getTxtKeiyakuKeteibi().getToValue();
-        if (契約開始申請日 != null && 契約終了申請日 != null && 契約終了申請日.isBefore(契約開始申請日)) {
-            throw new ApplicationException(UrErrorMessages.不正.getMessage().replace(契約申請日の範囲.toString()));
-        }
-        if (契約開始決定日 != null && 契約終了決定日 != null && 契約終了決定日.isBefore(契約開始決定日)) {
-            throw new ApplicationException(UrErrorMessages.不正.getMessage().replace(契約決定日の範囲.toString()));
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validate();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         getHandler(div).前排他を解除する();
         return ResponseData.of(div).respond();
@@ -104,5 +96,9 @@ public class PanSyuPanel {
 
     private PanSyuPanelHandler getHandler(PanSyuPanelDiv div) {
         return PanSyuPanelHandler.of(div);
+    }
+
+    private PanSyuPanelHandlerValidationHandler getValidationHandler(PanSyuPanelDiv div) {
+        return new PanSyuPanelHandlerValidationHandler(div);
     }
 }
