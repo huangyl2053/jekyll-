@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistshokanbaraijokyo;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710020;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HanyoListShokanbaraiJokyoBatchParameter extends BatchParameterBase {
+public class DBC710020_HanyoListShokanbaraiJokyoParameter extends BatchParameterBase {
 
     private static final String HOKENSHACODE = "保険者コード";
     private static final String HOKENSHANAME = "保険者名";
