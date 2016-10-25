@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -50,7 +49,7 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranEditor implements IKijunShu
         source.kaipage3 = 基準収入額決定通知一覧表パラメータ.get改頁３();
         source.kaipage4 = 基準収入額決定通知一覧表パラメータ.get改頁４();
         source.kaipage5 = 基準収入額決定通知一覧表パラメータ.get改頁５();
-        source.listHakkoTaishosha_1 = new RString(String.valueOf(基準収入額決定通知一覧表パラメータ.get通番()));
+        source.listHakkoTaishosha_1 = 基準収入額決定通知一覧表パラメータ.get通番();
         if (基準収入額決定通知一覧表パラメータ.get出力世帯コード() != null) {
             source.listHakkoTaishosha_2 = 基準収入額決定通知一覧表パラメータ.get出力世帯コード().value();
         }
