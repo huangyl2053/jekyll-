@@ -50,6 +50,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
         div.setHdnJkkoutani(集計のみ);
         div.setKakuteiHokokuYM(報告年月_完全未確定);
         getHandler(div).onLoad(get過去集計情報の取得());
+        div.getRadGappeiShichoson().setDisabled(true);
+        div.getRadKoikiRengo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -77,6 +79,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
         div.getTxtHokokuYM().setDisabled(false);
         div.getDdlKakoHokokuYM().setDisabled(true);
         div.setHdnJkkoutani(集計のみ);
+        div.getRadGappeiShichoson().setDisabled(true);
+        div.getRadKoikiRengo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -104,6 +108,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
         div.getTxtHokokuYM().setDisabled(false);
         div.getDdlKakoHokokuYM().setDisabled(true);
         div.setHdnJkkoutani(集計後に印刷);
+        div.getRadGappeiShichoson().setDisabled(true);
+        div.getRadKoikiRengo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -124,6 +130,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
         div.getTxtHokokuYM().setDisabled(true);
         div.getDdlKakoHokokuYM().setDisabled(false);
         div.setHdnJkkoutani(過去の集計結果を印刷);
+        div.getRadGappeiShichoson().setDisabled(false);
+        div.getRadKoikiRengo().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -137,7 +145,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         RDate 報告年月 = div.getTxtHokokuYM().getValue();
         RDate 日付 = new RDate("平成12年5月");
         if (報告年月 == null) {
-            return ResponseData.of(div).addValidationMessages(getValidationHandler().check必須入力項目()).respond();
+            return ResponseData.of(div).addValidationMessages(getValidationHandler().check必須入力項目(new RString("報告年月"))).respond();
         }
         if (!日付.isBefore(報告年月)) {
             return ResponseData.of(div).addValidationMessages(getValidationHandler().check以降の日付を設定()).respond();
@@ -161,7 +169,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
         getHandler(div).set月報報告_一般状況12_14_償還分();
         getHandler(div).set月報報告_保険給付決定_償還分();
         getHandler(div).set月報報告_保険給付決定_高額分();
-        getHandler(div).set月報報告_保険給付決定_高額分算分();
+        getHandler(div).set月報報告_保険給付決定_高額合算分();
         getHandler(div).setチェックボックス設定();
         return ResponseData.of(div).respond();
     }
@@ -176,6 +184,9 @@ public class JigyoJokyoHokokuGeppoSakusei {
         RString 旧市町村分 = new RString("kyuShichoson");
         if (div.getTblJikkoTani().getRadGappeiShichoson().getSelectedKey().equals(旧市町村分)) {
             div.setShichosonKubun(new RString("2"));
+            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(false);
+        } else {
+            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(true);
         }
         return ResponseData.of(div).respond();
     }
@@ -190,6 +201,9 @@ public class JigyoJokyoHokokuGeppoSakusei {
         RString 構成市町村分 = new RString("koseiShichoson");
         if (div.getTblJikkoTani().getRadKoikiRengo().getSelectedKey().equals(構成市町村分)) {
             div.setShichosonKubun(new RString("1"));
+            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(false);
+        } else {
+            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(true);
         }
         return ResponseData.of(div).respond();
     }
@@ -320,22 +334,45 @@ public class JigyoJokyoHokokuGeppoSakusei {
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onClick_btnJikkoCheck(JigyoJokyoHokokuGeppoSakuseiDiv div) {
         RDate 報告年月 = div.getTxtHokokuYM().getValue();
-        if (!div.getHdnJkkoutani().equals(過去の集計結果を印刷)) {
-            if (報告年月 == null) {
-                if (div.getKakuteiHokokuYM().equals(報告年月_完全未確定)) {
-                    return ResponseData.of(div).addValidationMessages(getValidationHandler().check必須入力項目()).respond();
-                } else {
-                    div.getTxtHokokuYM().setValue(new RDate(div.getKakuteiHokokuYM().toString()));
-                }
-            } else {
-                if (div.getKakuteiHokokuYM().equals(報告年月_完全未確定)) {
-                    return ResponseData.of(div).addValidationMessages(getValidationHandler().check報告年月を確定()).respond();
-                } else if (div.getHdnJkkoutani() != 過去の集計結果を印刷 && !div.getKakuteiHokokuYM().equals(報告年月.toDateString())) {
-                    div.getTxtHokokuYM().setValue(new RDate(div.getKakuteiHokokuYM().toString()));
-                }
-            }
+        RString jkkouTani = div.getHdnJkkoutani();
+
+        if (過去の集計結果を印刷.equals(jkkouTani)) {
+            return check過去集計結果印刷(div);
         } else {
-            // TODO:過去の集計結果を印刷する際のチェック
+            return check集計処理(div, 報告年月);
+        }
+    }
+
+    private ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> check過去集計結果印刷(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        if (RString.isNullOrEmpty(div.getDdlKakoHokokuYM().getSelectedValue())) {
+            return ResponseData.of(div).addValidationMessages(getValidationHandler().check必須入力項目(new RString("過去報告年月"))).respond();
+        } else {
+            return ResponseData.of(div).respond();
+        }
+    }
+
+    private ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> check集計処理(JigyoJokyoHokokuGeppoSakuseiDiv div, RDate 報告年月) {
+        if (報告年月 != null) {
+            return check集計処理_報告年月NotNull(div, 報告年月);
+        } else {
+            return check集計処理_報告年月Null(div);
+        }
+    }
+
+    private ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> check集計処理_報告年月Null(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        if (div.getKakuteiHokokuYM().equals(報告年月_完全未確定)) {
+            return ResponseData.of(div).addValidationMessages(getValidationHandler().check必須入力項目(new RString("報告年月"))).respond();
+        } else {
+            div.getTxtHokokuYM().setValue(new RDate(div.getKakuteiHokokuYM().toString()));
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> check集計処理_報告年月NotNull(JigyoJokyoHokokuGeppoSakuseiDiv div, RDate 報告年月) {
+        if (div.getKakuteiHokokuYM().equals(報告年月_完全未確定)) {
+            return ResponseData.of(div).addValidationMessages(getValidationHandler().check報告年月を確定()).respond();
+        } else if (div.getHdnJkkoutani() != 過去の集計結果を印刷 && !div.getKakuteiHokokuYM().equals(報告年月.toDateString())) {
+            div.getTxtHokokuYM().setValue(new RDate(div.getKakuteiHokokuYM().toString()));
         }
         return ResponseData.of(div).respond();
     }

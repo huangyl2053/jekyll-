@@ -6,7 +6,12 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0010011;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
@@ -74,6 +79,9 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     private static final RString 給付決定年月で集計 = new RString("keiteiYM5");
     private static final RDate 基準日 = RDate.getNowDate();
     private static final RString 年度内連番 = new RString("0001");
+    private static final int 過去報告年月ソート用_年開始インデックス = 1;
+    private static final int 過去報告年月ソート用_年終了インデックス = 3;
+    private static final int 過去報告年月ソート用_月開始インデックス = 4;
     private final JigyoJokyoHokokuGeppoSakuseiDiv div;
     private final ShoriDateKanriManager shoriDateKanriManager = new ShoriDateKanriManager();
 
@@ -119,13 +127,14 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     }
 
     private void set市町村選択ダイアログボタン() {
-        if (is合併あり() && is広域()) {
-            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(false);
-        } else if (is単一()) {
+        if (is合併あり() || is広域()) {
+            div.getTblJikkoTani().getBtnShichosonSelect().setVisible(true);
+            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(true);
+        } else {
             div.getTblJikkoTani().getBtnShichosonSelect().setVisible(false);
         }
     }
-
+    
     /**
      * 過去報告年月 DDLのデータソースを設定
      *
@@ -133,18 +142,62 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
      */
     private void set過去報告年月(List<ShoriDateKanri> shoriDateKanriList) {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        List<RStringBuilder> ソート用List = new ArrayList<>();
         int count = 1;
-        for (ShoriDateKanri shoriDateKanri : shoriDateKanriList) {
-            RStringBuilder 過去年月 = new RStringBuilder();
-            過去年月.append(shoriDateKanri.get年度().wareki().toDateString());
-            過去年月.append(点);
-            過去年月.append(shoriDateKanri.get処理枝番().substring(2));
-            KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(count)), 過去年月.toRString());
-            dataSourceList.add(dataSource);
-            count = count + 1;
+        if (!shoriDateKanriList.isEmpty()) {
+            for (ShoriDateKanri shoriDateKanri : shoriDateKanriList) {
+                RStringBuilder 過去年月 = new RStringBuilder();
+                過去年月.append(shoriDateKanri.get年度().wareki().toDateString());
+                過去年月.append(点);
+                過去年月.append(shoriDateKanri.get処理枝番().substring(2));
+                ソート用List.add(過去年月);
+            }
+            delete重複要素(ソート用List);
+            Collections.sort(ソート用List, new ComparatorForDescKakoHokokuYM());
+            for (RStringBuilder ソート済み年月 : ソート用List) {
+                KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(count)), ソート済み年月.toRString());
+                dataSourceList.add(dataSource);
+                count = count + 1;
+            }         
         }
         div.getDdlKakoHokokuYM().setDataSource(dataSourceList);
         div.getDdlKakoHokokuYM().setDisabled(true);
+    }
+    
+    private void delete重複要素(List<RStringBuilder> 過去年月重複List) {
+
+        Set<RStringBuilder> set = new HashSet<>();
+
+        for (Iterator<RStringBuilder> it = 過去年月重複List.iterator(); it.hasNext();) {
+            RStringBuilder i = it.next();
+            if (set.contains(i)) {
+                it.remove();
+            }
+            set.add(i);
+        }
+    }
+    
+    private static class ComparatorForDescKakoHokokuYM implements Comparator {
+
+        @Override
+        public int compare(Object arg0, Object arg1) {
+            RStringBuilder data0 = (RStringBuilder) arg0;
+            RStringBuilder data1 = (RStringBuilder) arg1;
+            int year0 = Integer.parseInt(data0.substring(
+                    過去報告年月ソート用_年開始インデックス, 過去報告年月ソート用_年終了インデックス).toString());
+            int year1 = Integer.parseInt(data1.substring(
+                    過去報告年月ソート用_年開始インデックス, 過去報告年月ソート用_年終了インデックス).toString());
+            int month0 = Integer.parseInt(data0.substring(
+                    過去報告年月ソート用_月開始インデックス).toString());
+            int month1 = Integer.parseInt(data1.substring(
+                    過去報告年月ソート用_月開始インデックス).toString());
+
+            if (year0 == year1) {
+                return (month1 - month0);
+            } else {
+                return (year1 - year0);
+            }
+        }
     }
 
     /**
@@ -791,14 +844,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         if (月報報告_保険給付決定_高額分 != null) {
             if (div.getTxtShukeiYM6().getValue() != null && !div.getTxtShukeiYM6().getValue().isEmpty()
                     && (!isNullOrEmpty月報報告_年度(月報報告_保険給付決定_高額分))) {
-                div.getTxtShukeiYM6().setReadOnly(false);
-                div.getTxtShukeiYM6().setValue(new FlexibleDate(月報報告_保険給付決定_高額分.get年度().toDateString()
-                        .concat(月報報告_保険給付決定_高額分.get処理枝番().substring(2))));
-                if (div.getTxtShukeiYM6().getValue().isBefore(new FlexibleDate("平成180601"))) {
-                    div.getTxtShukeiYM6().setDisabled(true);
-                } else {
-                    div.getTxtShukeiYM6().setDisabled(false);
-                }
+                set保険給付決定_高額分_処理日付有り(月報報告_保険給付決定_高額分);
             } else {
                 div.getTxtShukeiYM6().setDisabled(true);
                 div.getTxtShukeiYM6().setReadOnly(true);
@@ -809,11 +855,11 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
             }
         }
     }
-
+    
     /**
      * 「月報報告 保険給付決定 高額合算分」の処理日付管理情報を取得する。
      */
-    public void set月報報告_保険給付決定_高額分算分() {
+    public void set月報報告_保険給付決定_高額合算分() {
         RDate 過去報告年月_Date = new RDate(div.getTblJikkoTani().getDdlKakoHokokuYM().getSelectedValue().toString());
         RString 処理枝番 = new RString("00").concat(過去報告年月_Date.minusMonth(2).getYearMonth().toDateString().substring(月別));
         ShoriDateKanri 月報報告_保険給付決定_高額合算分 = shoriDateKanriManager.get処理日付管理マスタ(SubGyomuCode.DBU介護統計報告,
@@ -822,14 +868,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         if (月報報告_保険給付決定_高額合算分 != null) {
             if (div.getTxtShukeiYM7().getValue() != null && !div.getTxtShukeiYM7().getValue().isEmpty()
                     && (!isNullOrEmpty月報報告_年度(月報報告_保険給付決定_高額合算分))) {
-                div.getTxtShukeiYM7().setReadOnly(false);
-                div.getTxtShukeiYM7().setValue(new FlexibleDate(月報報告_保険給付決定_高額合算分.get年度().toDateString()
-                        .concat(月報報告_保険給付決定_高額合算分.get処理枝番().substring(2))));
-                if (div.getTxtShukeiYM7().getValue().isBefore(new FlexibleDate("平成240601"))) {
-                    div.getTxtShukeiYM7().setDisabled(true);
-                } else {
-                    div.getTxtShukeiYM7().setDisabled(false);
-                }
+                set保険給付決定_高額合算分_処理日付有り(月報報告_保険給付決定_高額合算分);
             } else {
                 div.getTxtShukeiYM7().setDisabled(true);
                 div.getTxtShukeiYM7().setReadOnly(true);
@@ -841,6 +880,28 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         }
     }
 
+    private void set保険給付決定_高額分_処理日付有り(ShoriDateKanri 月報報告_保険給付決定_高額分) {
+        div.getTxtShukeiYM6().setReadOnly(false);
+        div.getTxtShukeiYM6().setValue(new FlexibleDate(月報報告_保険給付決定_高額分.get年度().toDateString()
+                .concat(月報報告_保険給付決定_高額分.get処理枝番().substring(2))));
+        if (div.getTxtShukeiYM6().getValue().isBefore(new FlexibleDate("平成180601"))) {
+            div.getTxtShukeiYM6().setDisabled(true);
+        } else {
+            div.getTxtShukeiYM6().setDisabled(false);
+        }  
+    }    
+    
+    private void set保険給付決定_高額合算分_処理日付有り(ShoriDateKanri 月報報告_保険給付決定_高額合算分) {
+        div.getTxtShukeiYM7().setReadOnly(false);
+        div.getTxtShukeiYM7().setValue(new FlexibleDate(月報報告_保険給付決定_高額合算分.get年度().toDateString()
+                .concat(月報報告_保険給付決定_高額合算分.get処理枝番().substring(2))));
+        if (div.getTxtShukeiYM7().getValue().isBefore(new FlexibleDate("平成240601"))) {
+            div.getTxtShukeiYM7().setDisabled(true);
+        } else {
+            div.getTxtShukeiYM7().setDisabled(false);
+        }
+    }
+    
     private boolean isNullOrEmpty月報報告_基準日時(ShoriDateKanri 月報報告) {
         if (月報報告.get基準日時() == null || 月報報告.get基準日時().isEmpty()) {
             return true;

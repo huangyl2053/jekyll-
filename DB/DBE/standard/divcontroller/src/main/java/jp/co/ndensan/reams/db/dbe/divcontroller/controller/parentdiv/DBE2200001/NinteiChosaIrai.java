@@ -350,6 +350,27 @@ public class NinteiChosaIrai {
     }
 
     /**
+     * 「調査委託先選択に戻る」ボタンのclick処理です。
+     *
+     * @param div NinteiChosaIraiDiv
+     * @return ResponseData<NinteiChosaIraiDiv>
+     */
+    public ResponseData<NinteiChosaIraiDiv> onClick_btnBackToItakusakiSentaku(NinteiChosaIraiDiv div) {
+        getHandler(div).load(false);
+        ShoKisaiHokenshaNo 保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
+        RString 支所コード = ShishoSecurityJoho.createInstance().getShishoCode(ControlDataHolder.getUserId());
+        ViewStateHolder.put(ViewStateKeys.支所コード, 支所コード);
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 保険者番号);
+        List<NinnteiChousairaiBusiness> 認定調査委託先List = NinnteiChousairaiFinder.createInstance().getNinnteiChousaItaku(
+                NinnteiChousairaiParameter.createParam調査委託先Or未割付申請者(保険者番号, 支所コード)).records();
+        boolean コード取得結果 = getHandler(div).set認定調査委託先一覧(認定調査委託先List);
+        if (!コード取得結果) {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
+        }
+        return ResponseData.of(div).setState(DBE2200001StateName.初期表示);
+    }
+
+    /**
      * 「認定調査員選択へ戻る」ボタンのclick処理です。
      *
      * @param div NinteiChosaIraiDiv
@@ -367,6 +388,20 @@ public class NinteiChosaIrai {
                 return ResponseData.of(div).respond();
             }
         }
+        dgChosaItakusakiIchiran_Row row = div.getDgChosaItakusakiIchiran().getActiveRow();
+        ChosaItakusakiCode chosaItakusakiCode = new ChosaItakusakiCode(row.getChosaItakusakiCode().getValue());
+        ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, row.getChosaItakusakiCode().getValue());
+
+        ViewStateHolder.put(ViewStateKeys.保険者名称, row.getHokenshaName());
+        ViewStateHolder.put(ViewStateKeys.認定調査委託先割付定員, row.getWaritsukeTeiin().getText());
+        RString 支所コード = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
+        ShoKisaiHokenshaNo 保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
+        NinnteiChousairaiParameter parameter = NinnteiChousairaiParameter.createParamfor調査員情報(
+                保険者番号, 支所コード, chosaItakusakiCode);
+        List<NinnteiChousairaiBusiness> 調査員情報一覧 = NinnteiChousairaiFinder.createInstance().getChousaIn(parameter).records();
+        getHandler(div).set調査員情報一覧(調査員情報一覧, row);
+        setData(div, null);
+        div.getChoisaItakusakiIchiran().setIsOpen(false);
         return ResponseData.of(div).setState(DBE2200001StateName.委託先選択後);
     }
 
