@@ -88,6 +88,16 @@ public class TokubetsuChoshuMidoteiIchiranSource implements IReportSource {
     @ReportItem(name = "kisoNenkinNo", order = 33)
     public RString kisoNenkinNo;
 
+    public TokubetsuChoshuMidoteiIchiranSource() {
+        kanaShimei = RString.EMPTY;
+        seinengappiYMD = RString.EMPTY;
+        seibetsuCode = RString.EMPTY;
+        shichosonCode = RString.EMPTY;
+        hihokenshaNo = RString.EMPTY;
+        nenkinCode = RString.EMPTY;
+        kisoNenkinNo = RString.EMPTY;
+    }
+
     /**
      * ReportSourceFields
      */
