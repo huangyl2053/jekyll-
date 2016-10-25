@@ -84,20 +84,10 @@
             ON 被保険者台帳."hihokenshaNo" = 給付実績情報.被保険者番号 
           LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS 介護事業者A 
             ON 給付実績情報."事業所番号" = 介護事業者A."jigyoshaNo" 
-            AND substring(介護事業者A."yukoKaishiYMD", 0, 7) <![CDATA[<=]]> 給付実績情報.サービス提供年月 
-            AND CASE 
-              WHEN 介護事業者A."yukoShuryoYMD" IS NOT NULL 
-              THEN 給付実績情報.サービス提供年月 <![CDATA[<=]]> substring(介護事業者A."yukoShuryoYMD", 0, 7) 
-              END 
-            AND NOT EXISTS ( 
-              SELECT
-                1 
-              FROM
-                rgdb."DbT7060KaigoJigyosha" AS 介護事業者B 
-              WHERE
-                介護事業者A."jigyoshaNo" = 介護事業者B."jigyoshaNo" 
-                AND 介護事業者A."yukoKaishiYMD" <![CDATA[<]]> 介護事業者B."yukoKaishiYMD"
-            ) 
+            AND substr(介護事業者A."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> 給付実績情報.サービス提供年月 
+            AND (介護事業者A."yukoShuryoYMD" = ''
+	    OR 給付実績情報.サービス提供年月 <![CDATA[<=]]> substr(介護事業者A."yukoShuryoYMD", 1, 6)
+	    ) 
         WHERE
          
         <if test="被保番号NOTEMPTY">
