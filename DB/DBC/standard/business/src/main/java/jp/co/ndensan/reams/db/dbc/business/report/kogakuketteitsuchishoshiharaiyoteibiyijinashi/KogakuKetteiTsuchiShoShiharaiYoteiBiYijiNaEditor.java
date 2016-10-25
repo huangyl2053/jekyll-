@@ -104,6 +104,9 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
 
     @Override
     public KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource edit(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource source) {
+        if (帳票情報.get識別コード() != null) {
+            source.shikibetsuCode = 帳票情報.get識別コード().value();
+        }
         source.bunshoNo = 帳票情報.get文書番号();
         if (帳票情報.isテスト出力フラグ()) {
             source.testPrint = テスト印刷;
