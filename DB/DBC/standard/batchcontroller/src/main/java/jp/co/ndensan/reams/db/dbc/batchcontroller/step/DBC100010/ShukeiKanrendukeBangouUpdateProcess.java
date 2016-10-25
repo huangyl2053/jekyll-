@@ -54,7 +54,9 @@ public class ShukeiKanrendukeBangouUpdateProcess extends BatchProcessBase<TempSe
     @Override
     protected void process(TempSeikyuMeisaiItiziDataEntity entity) {
         for (TempSeikyuShukeiItiziDataEntity tempEntity : tempEntityList) {
-            if (entity.get証記載保険者番号().equals(tempEntity.get証記載保険者番号())
+            if (entity.get証記載保険者番号() != null
+                    && entity.get介護住宅改修理由書作成事業者番号() != null
+                    && entity.get証記載保険者番号().equals(tempEntity.get証記載保険者番号())
                     && entity.get介護住宅改修理由書作成事業者番号().equals(tempEntity.get介護住宅改修理由書作成事業者番号())) {
                 SeikyuMeisaiItiziEUCEntity eucEntity = new SeikyuMeisaiItiziEUCEntity();
                 eucEntity.set証記載保険者番号(entity.get証記載保険者番号());
