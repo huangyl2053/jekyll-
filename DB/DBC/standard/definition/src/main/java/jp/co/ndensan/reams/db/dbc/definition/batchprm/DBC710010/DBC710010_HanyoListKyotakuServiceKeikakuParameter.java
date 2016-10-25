@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistkyotakuservicekeikaku;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710010;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuProcessParameter;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HanyoListKyotakuServiceKeikakuBatchParameter extends BatchParameterBase {
+public class DBC710010_HanyoListKyotakuServiceKeikakuParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
 
