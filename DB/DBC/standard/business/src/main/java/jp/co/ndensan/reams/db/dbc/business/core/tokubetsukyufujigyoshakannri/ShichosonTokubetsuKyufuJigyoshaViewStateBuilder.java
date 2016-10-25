@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.core.tokubetsukyufujigyoshakannri;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShichosonTokubetsuKyufuJigyosha;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuChiikiKasanGemmenViewState;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
