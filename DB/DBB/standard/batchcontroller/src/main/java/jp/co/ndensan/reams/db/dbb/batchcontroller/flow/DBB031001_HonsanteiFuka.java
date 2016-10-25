@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001.HonsanteiKekkaI
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001.HonsanteiTokuchoChushishaTuikaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001.InsFukaKeisanTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001.InsSetaiTempProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001.InsShuturyokuTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001.KeisanTaishoshaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001.SetaiinHaakuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001.SystemTimeUpdateHonsanteiProcess;
@@ -43,6 +44,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
     private static final String 賦課計算_賦課 = "insFukaKeisanTemp";
     private static final String 賦課計算_世帯員 = "insSetaiTempProcess";
     private static final String 賦課計算 = "caluculateFuka";
+    private static final String 出力順登録 = "insShuturyokuTempProcess";
     private static final String 本算定結果一覧表出力 = "spoolHonsanteiKekkaIchiran";
     private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
@@ -87,6 +89,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
             if (帳票分類ID.equals(entity.get帳票分類ID())) {
                 processParameter.set出力帳票(entity);
                 executeStep(計算後情報作成);
+                executeStep(出力順登録);
                 executeStep(本算定結果一覧表出力);
                 break;
             }
@@ -102,7 +105,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
      *
      * @return バッチコマンド
      */
-    @Step (本算定特徴中止者の追加)
+    @Step(本算定特徴中止者の追加)
     protected IBatchFlowCommand insertHonsanteiTokuchoChushisha() {
         return loopBatch(HonsanteiTokuchoChushishaTuikaProcess.class).arguments(processParameter).define();
     }
@@ -112,7 +115,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
      *
      * @return バッチコマンド
      */
-    @Step (計算対象者抽出_通知書番号発番)
+    @Step(計算対象者抽出_通知書番号発番)
     protected IBatchFlowCommand selectKeisanTaishosha() {
         return loopBatch(KeisanTaishoshaProcess.class).arguments(processParameter).define();
     }
@@ -122,7 +125,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
      *
      * @return バッチコマンド
      */
-    @Step (世帯員把握)
+    @Step(世帯員把握)
     protected IBatchFlowCommand collectSetaiin() {
         return loopBatch(SetaiinHaakuProcess.class).define();
     }
@@ -132,7 +135,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
      *
      * @return バッチコマンド
      */
-    @Step (世帯員把握フロー)
+    @Step(世帯員把握フロー)
     protected IBatchFlowCommand setaiinBatchFlow() {
         return otherBatchFlow(世帯員把握BATCH_ID, SubGyomuCode.DBB介護賦課,
                 new DBB002001_SetaiinHaakuParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード())).define();
@@ -143,7 +146,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
      *
      * @return バッチコマンド
      */
-    @Step (賦課計算_賦課)
+    @Step(賦課計算_賦課)
     protected IBatchFlowCommand insFukaKeisanTemp() {
         return loopBatch(InsFukaKeisanTempProcess.class).define();
     }
@@ -153,7 +156,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
      *
      * @return バッチコマンド
      */
-    @Step (賦課計算_世帯員)
+    @Step(賦課計算_世帯員)
     protected IBatchFlowCommand insSetaiTemp() {
         return loopBatch(InsSetaiTempProcess.class).define();
     }
@@ -163,7 +166,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
      *
      * @return バッチコマンド
      */
-    @Step (賦課計算)
+    @Step(賦課計算)
     protected IBatchFlowCommand caluculateFuka() {
         return loopBatch(CaluculateFukaProcess.class).arguments(processParameter).define();
     }
@@ -173,7 +176,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
      *
      * @return バッチコマンド
      */
-    @Step (賦課情報登録)
+    @Step(賦課情報登録)
     protected IBatchFlowCommand callChoteiToroku() {
         return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
                 new DBB004001_FukaJohoTorokuParameter(true)).define();
@@ -184,7 +187,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
      *
      * @return バッチコマンド
      */
-    @Step (計算後情報作成)
+    @Step(計算後情報作成)
     protected IBatchFlowCommand keisangoJohoSakusei() {
         return otherBatchFlow(計算後情報作成BATCH_ID, SubGyomuCode.DBB介護賦課,
                 getKeisangoJohoSakuseiBatchParamter(RString.EMPTY)).define();
@@ -198,11 +201,21 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
     }
 
     /**
+     * 出力順に登録のメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(出力順登録)
+    protected IBatchFlowCommand insShuturyokuTempProcess() {
+        return loopBatch(InsShuturyokuTempProcess.class).arguments(processParameter).define();
+    }
+
+    /**
      * 本算定結果一覧表出力のメソッドです。
      *
      * @return バッチコマンド
      */
-    @Step (本算定結果一覧表出力)
+    @Step(本算定結果一覧表出力)
     protected IBatchFlowCommand spoolHonsanteiKekkaIchiran() {
         return loopBatch(HonsanteiKekkaIchiranProcess.class).arguments(processParameter).define();
     }
@@ -212,7 +225,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
      *
      * @return バッチコマンド
      */
-    @Step (処理日付管理テーブル更新)
+    @Step(処理日付管理テーブル更新)
     protected IBatchFlowCommand updateSystemTimeProcess() {
         return loopBatch(SystemTimeUpdateHonsanteiProcess.class).arguments(processParameter).define();
     }
@@ -222,7 +235,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
      *
      * @return バッチコマンド
      */
-    @Step (本算定通知書一括発行フロー)
+    @Step(本算定通知書一括発行フロー)
     protected IBatchFlowCommand honsanteiTsuchishoIkkatsuHakkoFlow() {
         return otherBatchFlow(本算定通知書一括発行BATCH_ID, SubGyomuCode.DBB介護賦課, create本算定通知書パラメータ()).define();
     }
