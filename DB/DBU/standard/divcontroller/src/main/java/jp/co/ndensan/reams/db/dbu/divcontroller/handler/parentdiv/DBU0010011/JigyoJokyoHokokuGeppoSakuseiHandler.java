@@ -8,7 +8,10 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0010011;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
@@ -124,13 +127,14 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
     }
 
     private void set市町村選択ダイアログボタン() {
-        if (is合併あり() && is広域()) {
-            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(false);
-        } else if (is単一()) {
+        if (is合併あり() || is広域()) {
+            div.getTblJikkoTani().getBtnShichosonSelect().setVisible(true);
+            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(true);
+        } else {
             div.getTblJikkoTani().getBtnShichosonSelect().setVisible(false);
         }
     }
-
+    
     /**
      * 過去報告年月 DDLのデータソースを設定
      *
@@ -148,6 +152,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
                 過去年月.append(shoriDateKanri.get処理枝番().substring(2));
                 ソート用List.add(過去年月);
             }
+            delete重複要素(ソート用List);
             Collections.sort(ソート用List, new ComparatorForDescKakoHokokuYM());
             for (RStringBuilder ソート済み年月 : ソート用List) {
                 KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(count)), ソート済み年月.toRString());
@@ -157,6 +162,19 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         }
         div.getDdlKakoHokokuYM().setDataSource(dataSourceList);
         div.getDdlKakoHokokuYM().setDisabled(true);
+    }
+    
+    private void delete重複要素(List<RStringBuilder> 過去年月重複List) {
+
+        Set<RStringBuilder> set = new HashSet<>();
+
+        for (Iterator<RStringBuilder> it = 過去年月重複List.iterator(); it.hasNext();) {
+            RStringBuilder i = it.next();
+            if (set.contains(i)) {
+                it.remove();
+            }
+            set.add(i);
+        }
     }
     
     private static class ComparatorForDescKakoHokokuYM implements Comparator {
