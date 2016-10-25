@@ -798,67 +798,67 @@ WHERE 受給者台帳."logicalDeletedFlag" = false
             </if>
     </if>
     <if test="is認定結果0length0">
-        AND 受給者台帳."yokaigoJotaiKubunCode" = '21'
+        AND 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_21}
     </if>
     <if test="is認定結果1length0">
-        AND 受給者台帳."yokaigoJotaiKubunCode" = '22'
+        AND 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_22}
     </if>
     <if test="is認定結果1length非0">
-        OR 受給者台帳."yokaigoJotaiKubunCode" = '22'
+        OR 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_22}
     </if>
     <if test="is認定結果2length0">
-        AND 受給者台帳."yokaigoJotaiKubunCode" = '23'
+        AND 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_23}
     </if>
     <if test="is認定結果2length非0">
-        OR 受給者台帳."yokaigoJotaiKubunCode" = '23'
+        OR 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_23}
     </if>
     <if test="is認定結果3length0">
-        AND 受給者台帳."yokaigoJotaiKubunCode" = '24'
+        AND 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_24}
     </if>
     <if test="is認定結果3length非0">
-        OR 受給者台帳."yokaigoJotaiKubunCode" = '24'
+        OR 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_24}
     </if>
     <if test="is認定結果4length0">
-        AND 受給者台帳."yokaigoJotaiKubunCode" = '25'
+        AND 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_25}
     </if>
     <if test="is認定結果4length非0">
-        OR 受給者台帳."yokaigoJotaiKubunCode" = '25'
+        OR 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_25}
     </if>
     <if test="is認定結果5length0">
-        AND 受給者台帳."yokaigoJotaiKubunCode" = '12'
+        AND 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_12}
     </if>
     <if test="is認定結果5length非0">
-        OR 受給者台帳."yokaigoJotaiKubunCode" = '12'
+        OR 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_12}
     </if>
     <if test="is認定結果6length0">
-        AND 受給者台帳."yokaigoJotaiKubunCode" = '13'
+        AND 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_13}
     </if>
     <if test="is認定結果6length非0">
-        OR 受給者台帳."yokaigoJotaiKubunCode" = '13'
+        OR 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_13}
     </if>
     <if test="is認定結果7length0">
-        AND (受給者台帳."yokaigoJotaiKubunCode" = '11' OR 受給者台帳."yokaigoJotaiKubunCode" = '19')
+        AND (受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_11} OR 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_19})
     </if>
     <if test="is認定結果7length非0">
-        OR (受給者台帳."yokaigoJotaiKubunCode" = '11' OR 受給者台帳."yokaigoJotaiKubunCode" = '19')
+        OR (受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_11} OR 受給者台帳."yokaigoJotaiKubunCode" = #{要介護認定_19})
     </if>
     <if test="is認定結果8length0">
-        AND 受給者台帳."dataKubun" = '32'
+        AND 受給者台帳."dataKubun" = #{データ区分_32}
     </if>
     <if test="is認定結果8length非0">
-        OR 受給者台帳."dataKubun" = '32'
+        OR 受給者台帳."dataKubun" = #{データ区分_32}
     </if>
     <if test="is認定結果9length0">
-        AND ('41' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '49')
+        AND (#{データ区分_41} <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> #{データ区分_49})
     </if>
     <if test="is認定結果9length非0">
-        OR ('41' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '49')
+        OR (#{データ区分_41} <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> #{データ区分_49})
     </if>
     <if test="is認定結果10length0">
-        AND (('11' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '19') OR 受給者台帳."dataKubun" = '31' OR ('33' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '39'))
+        AND ((#{データ区分_11} <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> #{データ区分_19}) OR 受給者台帳."dataKubun" = #{データ区分_31} OR (#{データ区分_33} <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> #{データ区分_39}))
     </if>
     <if test="is認定結果10length非0">
-        OR (('11' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '19') OR 受給者台帳."dataKubun" = '31' OR ('33' <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> '39'))
+        OR ((#{データ区分_11} <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> #{データ区分_19}) OR 受給者台帳."dataKubun" = #{データ区分_31} OR (#{データ区分_33} <![CDATA[<=]]> 受給者台帳."dataKubun" AND 受給者台帳."dataKubun" <![CDATA[<=]]> #{データ区分_39}))
     </if>
    <if test="is資格取得者のみ">
        AND (最新被保台帳."shikakuShutokuYMD" IS NOT NULL AND 最新被保台帳."shikakuSoshitsuYMD" IS NULL)
@@ -880,6 +880,7 @@ WHERE 受給者台帳."logicalDeletedFlag" = false
     </if>
     <if test="isサービス指定者true">
         AND 受給者台帳."shiteiServiceShurui01" IS NOT NULL
+        AND 受給者台帳."shiteiServiceShurui01" != ''
     </if>
     <if test="is宛名抽出条件_保険者コード_非全部">
      AND (最新被保台帳."shichosonCode" = #{hokenshaNo} OR 最新被保台帳."koikinaiTokureiSochimotoShichosonCode" = #{hokenshaNo})
@@ -914,42 +915,42 @@ WHERE 受給者台帳."logicalDeletedFlag" = false
     </if>
     <if test ="is住所">
          <if test="地区選択From">
-             AND #{tiiki_From} <![CDATA[<=]]> "ShikibetsuTaisho"."choikiCode"
+             AND #{jusyo_From} <![CDATA[<=]]> "ShikibetsuTaisho"."choikiCode"
          </if>
           <if test="地区選択To">
-             AND "ShikibetsuTaisho"."choikiCode" <![CDATA[<=]]> #{tiiki_To}
+             AND "ShikibetsuTaisho"."choikiCode" <![CDATA[<=]]> #{jusyo_To}
          </if>
     </if>
     <if test ="is行政区">
          <if test="地区選択From">
-             AND #{tiiki_From} <![CDATA[<=]]> "ShikibetsuTaisho"."gyoseikuCode"
+             AND #{gyoseiku_From} <![CDATA[<=]]> "ShikibetsuTaisho"."gyoseikuCode"
          </if>
           <if test="地区選択To">
-             AND "ShikibetsuTaisho"."gyoseikuCode" <![CDATA[<=]]> #{tiiki_To}
+             AND "ShikibetsuTaisho"."gyoseikuCode" <![CDATA[<=]]> #{gyoseiku_To}
          </if>
     </if>
     <if test ="is地区1">
          <if test="地区選択From">
-             AND #{tiiki_From} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode1"
+             AND #{tiiki_From1} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode1"
          </if>
           <if test="地区選択To">
-             AND "ShikibetsuTaisho"."chikuCode1" <![CDATA[<=]]> #{tiiki_To}
+             AND "ShikibetsuTaisho"."chikuCode1" <![CDATA[<=]]> #{tiiki_To1}
          </if>
     </if>
     <if test ="is地区2">
          <if test="地区選択From">
-             AND #{tiiki_From} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode2"
+             AND #{tiiki_From2} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode2"
          </if>
           <if test="地区選択To">
-             AND "ShikibetsuTaisho"."chikuCode2" <![CDATA[<=]]> #{tiiki_To}
+             AND "ShikibetsuTaisho"."chikuCode2" <![CDATA[<=]]> #{tiiki_To2}
          </if>
     </if>
     <if test ="is地区3">
          <if test="地区選択From">
-             AND #{tiiki_From} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode3"
+             AND #{tiiki_From3} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode3"
          </if>
           <if test="地区選択To">
-             AND "ShikibetsuTaisho"."chikuCode3" <![CDATA[<=]]> #{tiiki_To}
+             AND "ShikibetsuTaisho"."chikuCode3" <![CDATA[<=]]> #{tiiki_To3}
          </if>
     </if>
         ${出力順}

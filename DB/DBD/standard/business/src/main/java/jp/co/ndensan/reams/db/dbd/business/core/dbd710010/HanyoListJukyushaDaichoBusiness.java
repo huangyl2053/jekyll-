@@ -806,6 +806,9 @@ public class HanyoListJukyushaDaichoBusiness {
     }
 
     private RString setNinteShinseiKubun(RString 情報区分, RString 要支援者認定申請区分) {
+        if (要支援者認定申請区分 == null || 要支援者認定申請区分.isEmpty()) {
+            return RString.EMPTY;
+        }
         if (情報区分.equals(情報区分_受給)) {
             if (NinteiShienShinseiKubun.認定支援申請.get名称().equals(
                     NinteiShienShinseiKubun.toValue(要支援者認定申請区分).get名称())) {
