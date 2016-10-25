@@ -60,5 +60,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity {
     private RString 決定通知書番号;
     private Decimal 支給額;
     private RString 文書番号;
+    private ShikibetsuCode 識別コード;
 
 }
