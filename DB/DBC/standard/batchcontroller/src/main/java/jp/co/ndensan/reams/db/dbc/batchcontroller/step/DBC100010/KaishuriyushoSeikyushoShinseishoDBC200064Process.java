@@ -50,6 +50,9 @@ public class KaishuriyushoSeikyushoShinseishoDBC200064Process extends BatchKeyBr
     private static final List<RString> PAGE_BREAK_KEYS = Collections
             .unmodifiableList(Arrays.asList(
                             new RString(JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReportSource.ReportSourceFields.jigyoshaMeisho.name())));
+    private int index = 1;
+    private static final int INDEX_20 = 20;
+    private RString jigyoshaMeisho = RString.EMPTY;
     private KaishuriyushoSeikyushoShinseishoProcessParameter processParameter;
     @BatchWriter
     private BatchReportWriter<JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReportSource> batchWrite;
@@ -97,6 +100,7 @@ public class KaishuriyushoSeikyushoShinseishoDBC200064Process extends BatchKeyBr
     @Override
     protected void usualProcess(ChouhyouShuturyokuYouDataEntity entity) {
         JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranData data = new JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranData();
+        data.set連番(new RString(index));
         data.set作成年月日(processParameter.get作成日());
         data.set事業者名(entity.get介護住宅改修事業者名称());
         data.set集計期間開始(new FlexibleDate(processParameter.get作成申請年月日開始().toString()));
@@ -107,10 +111,15 @@ public class KaishuriyushoSeikyushoShinseishoDBC200064Process extends BatchKeyBr
         data.set改修先住所(entity.get改修対象住宅住所());
         data.set工事の種類(entity.get改修内容箇所及び規模());
         data.set理由書作成者(entity.get介護住宅改修理由書作成者名());
-        data.set備考(RString.EMPTY);
         data.set識別コード(entity.get識別コード());
         JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReport report = new JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReport(data);
         report.writeBy(reportSourceWriter);
+        index++;
+        if (!jigyoshaMeisho.equals(entity.get介護住宅改修事業者名称())
+                || index % INDEX_20 == 1) {
+            index = 1;
+            jigyoshaMeisho = entity.get介護住宅改修事業者名称();
+        }
     }
 
     @Override

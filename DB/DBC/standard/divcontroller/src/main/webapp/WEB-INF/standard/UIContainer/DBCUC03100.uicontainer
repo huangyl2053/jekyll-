@@ -94,7 +94,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0300011",
      "toLayoutTitle": "受領委任契約事業者登録・修正",
-     "toState": "default"
+     "toState": "sub検索"
     },
     {
      "id": "8",
@@ -103,7 +103,21 @@
      "layoutName": "DBC0300011",
      "layoutTitle": "受領委任契約事業者登録・修正",
      "eventName": "事業者選択",
-     "destroy": false,
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0310011",
+     "toLayoutTitle": "受領委任契約申請登録・修正",
+     "toState": "検索条件"
+    },
+    {
+     "id": "9",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0300011",
+     "layoutTitle": "受領委任契約事業者登録・修正",
+     "eventName": "戻る",
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0310011",

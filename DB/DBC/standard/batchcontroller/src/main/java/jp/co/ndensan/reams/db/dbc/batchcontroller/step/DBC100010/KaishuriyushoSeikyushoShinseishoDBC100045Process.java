@@ -99,7 +99,7 @@ public class KaishuriyushoSeikyushoShinseishoDBC100045Process extends BatchProce
             data.set請求者_所在地(entity.get住所().value());
         }
         if (entity.get事業者名() != null) {
-            data.set請求者_名称(entity.get事業者名().value());
+            data.set請求者_名称(entity.get事業者名());
         }
         if (entity.get代表者名() != null) {
             data.set請求者_代表者氏名(entity.get代表者名().value());
@@ -117,13 +117,13 @@ public class KaishuriyushoSeikyushoShinseishoDBC100045Process extends BatchProce
         }
         data.set件数(new RString(entity.get介護住宅改修理由書作成件数()));
         data.set発行日(get認証者().hakkoYMD);
-        data.set認証者役職名(get認証者().ninshoshaYakushokuMei);
+        data.set認証者役職名(get認証者().ninshoshaYakushokuMei1);
         JutakuKaishuRiyushoSakuseiTesuryoSeikyuKenShinseishoReport report = new JutakuKaishuRiyushoSakuseiTesuryoSeikyuKenShinseishoReport(data);
         report.writeBy(reportSourceWriter);
     }
 
     private NinshoshaSource get認証者() {
-        return ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+        return ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付,
                 REPORT_ID,
                 FlexibleDate.getNowDate(),
                 NinshoshaDenshikoinshubetsuCode.認定用印.getコード(),
@@ -137,6 +137,6 @@ public class KaishuriyushoSeikyushoShinseishoDBC100045Process extends BatchProce
      * @return 通知文
      */
     public static Map<Integer, RString> get通知文() {
-        return ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, パターン番号);
+        return ReportUtil.get通知文(SubGyomuCode.DBC介護給付, REPORT_ID, KamokuCode.EMPTY, パターン番号);
     }
 }

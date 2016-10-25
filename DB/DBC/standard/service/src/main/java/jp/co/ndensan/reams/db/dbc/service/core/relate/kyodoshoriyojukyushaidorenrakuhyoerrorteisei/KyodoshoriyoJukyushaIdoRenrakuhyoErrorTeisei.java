@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 共同処理用受給者異動連絡票エラー訂正のクラスです。
  *
- * @reamsid_L DBC-2770-070 jinjue
+ * @reamsid_L DBC-2770-060 jinjue
  */
 public class KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeisei {
 

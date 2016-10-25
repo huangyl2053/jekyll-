@@ -19,6 +19,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinsainShiharaimeisaisho {
 
+    private RString 申請書管理番号;
     private RString タイトル;
     private RString 対象期間;
     private RString 保険者名;

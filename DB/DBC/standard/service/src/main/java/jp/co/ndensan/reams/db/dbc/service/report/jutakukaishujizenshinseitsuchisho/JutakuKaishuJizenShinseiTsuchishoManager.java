@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinseitsuch
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishujizenshinseitsuchisho.IJutakuKaishuJizenShinseiTsuchishoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.report.jutakukaishujizenshinseishoninkekkatsuchisho.JutakukaishuJizenShinseiShoninKekkaTsuchishoService;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
@@ -30,8 +31,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -104,29 +103,10 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
         if (bunshoNo != null) {
             文書番号 = get文書番号(bunshoNo);
         }
-        RString 通知文 = RString.EMPTY;
-        RString 注意文 = RString.EMPTY;
-        int koumokuNo = 0;
-        TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
-        TsuchishoTeikeibunInfo teikeibun
-                = manager.get通知書定型文パターン(ReportIdDBC.DBC100001.getReportId(), SubGyomuCode.DBC介護給付);
-        if (teikeibun != null) {
-            koumokuNo = teikeibun.get更新用_パターン番号();
-        }
-        if (koumokuNo == 1) {
-            TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = manager.get通知書定形文検索(SubGyomuCode.DBC介護給付,
-                    ReportIdDBC.DBC100001.getReportId(), KamokuCode.EMPTY, koumokuNo, 1,
-                    new FlexibleDate(RDate.getNowDate().toDateString()));
-            if (tsuchishoTeikeibunInfo != null) {
-                通知文 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
-            }
-            tsuchishoTeikeibunInfo = manager.get通知書定形文検索(SubGyomuCode.DBC介護給付,
-                    ReportIdDBC.DBC100001.getReportId(), KamokuCode.EMPTY, koumokuNo, 2,
-                    new FlexibleDate(RDate.getNowDate().toDateString()));
-            if (tsuchishoTeikeibunInfo != null) {
-                注意文 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
-            }
-        }
+        RString 通知文 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100001.getReportId(),
+                KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate());
+        RString 注意文 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100001.getReportId(),
+                KamokuCode.EMPTY, 1, 2, FlexibleDate.getNowDate());
         GyomuKoyuKeyRiyoKubun 業務固有キー利用区分 = GyomuKoyuKeyRiyoKubun.利用しない;
         SofusakiRiyoKubun 送付先利用区分 = SofusakiRiyoKubun.利用する;
         IAtesakiGyomuHanteiKey 宛先業務判定キー
