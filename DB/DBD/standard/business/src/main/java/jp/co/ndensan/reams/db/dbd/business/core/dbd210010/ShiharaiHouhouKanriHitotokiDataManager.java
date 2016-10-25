@@ -33,8 +33,10 @@ import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -171,8 +173,7 @@ public class ShiharaiHouhouKanriHitotokiDataManager {
         }
         tempTable.set氏名(entity.get氏名().value());
         tempTable.setカナ氏名(entity.getカナ氏名().value());
-        //TODO QA:615
-        tempTable.set生年月日(new RString(entity.get生年月日().toString()));
+        tempTable.set生年月日(new RString(entity.get生年月日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         tempTable.set性別コード(entity.get性別コード());
         if (NUM1.equals(entity.get性別コード())) {
             tempTable.set性別(new RString("男"));
@@ -184,13 +185,13 @@ public class ShiharaiHouhouKanriHitotokiDataManager {
         tempTable.set行政区コード(entity.get行政区コード().value());
         tempTable.set世帯コード(entity.get世帯コード());
         tempTable.set住所(entity.get住所());
-        tempTable.set資格取得日(new RString(entity.get資格取得日().toString()));
+        tempTable.set資格取得日(new RString(entity.get資格取得日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         if (NINE.toString().equals(entity.get資格喪失日().toString())) {
             tempTable.set資格喪失日(RString.EMPTY);
         } else {
-            tempTable.set資格喪失日(new RString(entity.get資格取得日().toString()));
+            tempTable.set資格喪失日(new RString(entity.get資格取得日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         }
-        tempTable.set認定申請日(new RString(entity.get認定申請日().toString()));
+        tempTable.set認定申請日(new RString(entity.get認定申請日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         tempTable.set要介護状態区分(entity.get要介護状態区分().value());
         if (entity.get要介護状態区分() == null || entity.get要介護状態区分().isEmpty()) {
             tempTable.set要介護状態名称(RString.EMPTY);
@@ -198,9 +199,9 @@ public class ShiharaiHouhouKanriHitotokiDataManager {
             tempTable.set要介護状態名称(YokaigoJotaiKubun.toValue(entity.get要介護状態区分().value()).get名称());
         }
 
-        tempTable.set認定有効開始年月日(new RString(entity.get認定有効開始年月日().toString()));
-        tempTable.set認定有効終了年月日(new RString(entity.get認定有効終了年月日().toString()));
-        tempTable.set認定日(new RString(entity.get認定日().toString()));
+        tempTable.set認定有効開始年月日(new RString(entity.get認定有効開始年月日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
+        tempTable.set認定有効終了年月日(new RString(entity.get認定有効終了年月日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
+        tempTable.set認定日(new RString(entity.get認定日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         tempTable.set管理区分(entity.get管理区分());
         if (entity.get管理区分() == null || entity.get管理区分().isEmpty()) {
             tempTable.set管理区分名称(RString.EMPTY);
@@ -214,29 +215,28 @@ public class ShiharaiHouhouKanriHitotokiDataManager {
         } else {
             tempTable.set登録区分名称(ShiharaiHenkoTorokuKubun.toValue(entity.get登録区分()).get名称());
         }
-        tempTable.set適用開始日(new RString(entity.get適用開始日().toString()));
-        tempTable.set適用終了日(new RString(entity.get適用終了日().toString()));
+        tempTable.set適用開始日(new RString(entity.get適用開始日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
+        tempTable.set適用終了日(new RString(entity.get適用終了日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         tempTable.set終了区分(entity.get終了区分());
         if (entity.get終了区分() == null || entity.get終了区分().isEmpty()) {
             tempTable.set終了区分名称(RString.EMPTY);
         } else {
             tempTable.set終了区分名称(ShiharaiHenkoShuryoKubun.toValue(entity.get終了区分()).get名称());
         }
-        tempTable.set予告登録日(new RString(entity.get予告登録日().toString()));
-        tempTable.set差止依頼書受理日(new RString(entity.get差止依頼書受理日().toString()));
+        tempTable.set予告登録日(new RString(entity.get予告登録日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
+        tempTable.set差止依頼書受理日(new RString(entity.get差止依頼書受理日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         tempTable.set予告通知書出力日(RString.EMPTY);
-        tempTable.set予告通知書発行日(new RString(entity.get予告通知書発行日().toString()));
+        tempTable.set予告通知書発行日(new RString(entity.get予告通知書発行日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         tempTable.set弁明書提出期限(new RString(entity.get弁明書提出期限().toString()));
-        tempTable.set弁明書受付日(new RString(entity.get弁明書受付日().toString()));
+        tempTable.set弁明書受付日(new RString(entity.get弁明書受付日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         tempTable.set弁明理由(entity.get弁明理由());
         if (entity.get弁明理由() == null) {
             tempTable.set弁明理由名称(RString.EMPTY);
         } else {
-            //TODO
             tempTable.set弁明理由名称(ShiharaiHenkoBenmeiRiyuCode.toValue(new RString(entity.get弁明理由().toString())).get名称());
         }
 
-        tempTable.set弁明内容決定日(new RString(entity.get弁明内容決定日().toString()));
+        tempTable.set弁明内容決定日(new RString(entity.get弁明内容決定日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         tempTable.set弁明審査結果(entity.get弁明審査結果());
 
         if (entity.get弁明審査結果() == null || entity.get弁明審査結果().isEmpty()) {
@@ -244,29 +244,29 @@ public class ShiharaiHouhouKanriHitotokiDataManager {
         } else {
             tempTable.set弁明審査結果名称(ShiharaiHenkoBenmeiShinsaKekkaKubun.toValue(entity.get弁明審査結果()).getコード());
         }
-        tempTable.set償還払化決定日(new RString(entity.get償還払化決定日().toString()));
+        tempTable.set償還払化決定日(new RString(entity.get償還払化決定日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         tempTable.set償還払化通知書出力日(RString.EMPTY);
-        tempTable.set償還払化通知書発行日(new RString(entity.get償還払化通知書発行日().toString()));
+        tempTable.set償還払化通知書発行日(new RString(entity.get償還払化通知書発行日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
 
         tempTable.set被保険者証提出期限(new RString(entity.get被保険者証提出期限().toString()));
         tempTable.set差止対象フラグ(entity.get差止対象フラグ());
-        tempTable.set差止決定日(new RString(entity.get差止決定日().toString()));
-        tempTable.set差止解除日(new RString(entity.get差止解除日().toString()));
-        tempTable.set控除決定日(new RString(entity.get控除決定日().toString()));
-        tempTable.set減額決定日(new RString(entity.get減額決定日().toString()));
+        tempTable.set差止決定日(new RString(entity.get差止決定日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
+        tempTable.set差止解除日(new RString(entity.get差止解除日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
+        tempTable.set控除決定日(new RString(entity.get控除決定日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
+        tempTable.set減額決定日(new RString(entity.get減額決定日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         tempTable.set減額通知書出力日(RString.EMPTY);
-        tempTable.set減額通知書発行日(new RString(entity.get減額通知書発行日().toString()));
+        tempTable.set減額通知書発行日(new RString(entity.get減額通知書発行日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
 
         tempTable.set給付率(new RString(entity.get給付率().value().toString()));
-        tempTable.set終了申請書受付日(new RString(entity.get終了申請書受付日().toString()));
-        tempTable.set終了申請年月日(new RString(entity.get終了申請年月日().toString()));
+        tempTable.set終了申請書受付日(new RString(entity.get終了申請書受付日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
+        tempTable.set終了申請年月日(new RString(entity.get終了申請年月日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         tempTable.set終了申請理由(entity.get終了申請理由());
         if (entity.get終了申請理由() == null || entity.get終了申請理由().isEmpty()) {
             tempTable.set終了申請理由名称(RString.EMPTY);
         } else {
             tempTable.set終了申請理由名称(ShiharaiHenkoShuryoShinseiRiyuCode.toValue(entity.get終了申請理由()).get名称());
         }
-        tempTable.set終了申請内容決定日(new RString(entity.get終了申請内容決定日().toString()));
+        tempTable.set終了申請内容決定日(new RString(entity.get終了申請内容決定日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toString()));
         tempTable.set終了申請審査結果(entity.get終了申請審査結果());
         if (entity.get終了申請審査結果() == null) {
             tempTable.set終了申請審査結果名称(RString.EMPTY);
