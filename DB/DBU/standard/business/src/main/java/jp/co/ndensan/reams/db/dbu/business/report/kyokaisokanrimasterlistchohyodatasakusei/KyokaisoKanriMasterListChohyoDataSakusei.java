@@ -138,6 +138,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         帳票用データ.set識別コード(nullToEmpty(entity.getShikibetsuCode().value()));
         帳票用データ.setカナ氏名(nullToEmpty(entity.getKanaShimei()));
         帳票用データ.set氏名(nullToEmpty(entity.getMeisho()));
+        帳票用データ.set町域コード(entity.getChoikiCode());
         if (男.equals(nullToEmpty(entity.getSeibetsuCode()))) {
             帳票用データ.set性別(性別_男);
         } else {
@@ -164,14 +165,14 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         if (entity.getHyojunFutanKeigengoFutangaku() != null) {
             帳票用データ.set標準負担減額後負担額(new RString(DecimalFormatter.toコンマ区切りRString(entity.getHyojunFutanKeigengoFutangaku(), 0).toString()));
         } else {
-            帳票用データ.set標準負担減額後負担額(null);
+            帳票用データ.set標準負担減額後負担額(RString.EMPTY);
         }
         UzT0007CodeEntity 居室種類 = CodeMaster.getCode(SubGyomuCode.DBZ介護共通,
                 DBZCodeShubetsu.居室種類.getコード(), new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode()), FlexibleDate.getNowDate());
         if (居室種類 != null) {
             帳票用データ.set居住費軽減後居室種類(new RString(居室種類.getコード名称().toString()));
         } else {
-            帳票用データ.set居住費軽減後居室種類(null);
+            帳票用データ.set居住費軽減後居室種類(RString.EMPTY);
         }
         setlist(entity, 帳票用データ);
 

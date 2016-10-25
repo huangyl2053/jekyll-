@@ -13,7 +13,7 @@
     FROM "DbWT0510FurikomiMeisai" AS 振込明細
     INNER JOIN rgdb."DbT4001JukyushaDaicho" AS 受給者台帳TBL
         ON 受給者台帳TBL."hihokenshaNo" = 振込明細."hihokenshaNo"
-        AND 受給者台帳TBL."jukyuShinseiYMD" <![CDATA[<=]]> 振込明細."serviceTeikyoYM"
+        AND substr(受給者台帳TBL."jukyuShinseiYMD",1,6) <![CDATA[<=]]> 振込明細."serviceTeikyoYM"
         AND 受給者台帳TBL."rirekiNo" = '0000'
     </select>
 </mapper>

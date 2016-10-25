@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanShikyuGakuKeisanKekka;
-import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanPanelEntity;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuPanelListParameter;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120012.DBC8120012TransitionEventName.完了;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120012.DBC8120012TransitionEventName.対象者検索に戻る;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120012.DBC8120012TransitionEventName.検索結果一覧に戻る;
@@ -58,7 +58,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
         TaishoshaKey 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保険者番号();
         ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
-        JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter parameter
+        JigyobunShikyugakuPanelListParameter parameter
                 = createHandler(div).setJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter(被保険者番号, null, null, null);
         createHandler(div).initialize(被保険者番号, 識別コード, parameter);
         return ResponseData.of(div).respond();
@@ -138,14 +138,14 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
             JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv div) {
         TaishoshaKey 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保険者番号();
-        JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter parameter
+        JigyobunShikyugakuPanelListParameter parameter
                 = createHandler(div).setJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter(被保険者番号,
                         new FlexibleYear(div.getDdlTaishoNendo().getSelectedKey()),
                         div.getDdlShikyuShinseishoSeiriNo().getSelectedValue(),
                         new HokenshaNo(div.getDdlShoKisaiHokenshaNo().getSelectedValue()));
-        List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> panelResultList = createHandler(div).処理対象データ取得(parameter);
+        List<JigyobunShikyugakuKeisanPanelEntity> panelResultList = createHandler(div).処理対象データ取得(parameter);
         List<JigyoKogakuGassanShikyuGakuKeisanKekka> list = new ArrayList();
-        for (JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity entity : panelResultList) {
+        for (JigyobunShikyugakuKeisanPanelEntity entity : panelResultList) {
             int i = 0;
             for (JigyoKogakuGassanShikyuGakuKeisanKekka kekka : list) {
                 if (kekka.toEntity().equalsPrimaryKeys(entity.getDbt3172Entity())) {

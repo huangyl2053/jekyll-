@@ -79,6 +79,7 @@
 		A."is老齢福祉年金受給者" AS is老齢福祉年金受給者,
 		A."is所得税課税者" AS is所得税課税者,
 		A."is生活保護受給者" AS is生活保護受給者,
+                A."is所得税課税世帯" AS is所得税課税世帯,
 		施設入所情報."nyushoShisetsuCode" AS 入所施設コード,
 		施設入所情報."jigyoshaName" AS 入所施設名称,
                 認定情報."認定情報の被保険者番号" AS 認定情報の被保険者番号,
@@ -88,6 +89,7 @@
                 認定情報."認定有効期間終了年月日" AS 認定情報の認定有効期間終了年月日,
 		要介護認定申請情報子."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
 		受給者台帳Newest."kyuSochishaFlag" AS 旧措置者フラグ,
+                受給者台帳Newest."shichosonCode" AS 市町村コード,
                 総合事業対象者情報."総者の被保険者番号",
                 総合事業対象者情報."総者のチェックリスト実施日",
                 総合事業対象者情報."総者の適用開始年月日",
@@ -244,6 +246,7 @@
         <result property="is老齢福祉年金受給者" column="is老齢福祉年金受給者" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
         <result property="is所得税課税者" column="is所得税課税者" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
         <result property="is生活保護受給者" column="is生活保護受給者" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="is所得税課税世帯" column="is所得税課税世帯" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
         <result property="入所施設コード" column="入所施設コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="入所施設名称" column="入所施設名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="厚労省IF識別コード" column="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

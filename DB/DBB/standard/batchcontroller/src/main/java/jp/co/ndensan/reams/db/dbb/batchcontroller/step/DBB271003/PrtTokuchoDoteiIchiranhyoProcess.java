@@ -220,6 +220,11 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
                 entity.getYubinNo(),
                 entity.getKanjiJusho()
         );
+        target.setChokiCode(entity.getChoikiCode().getColumnValue());
+        target.setChiku1(entity.getChikuCode1() == null ? RString.EMPTY : entity.getChikuCode1().getColumnValue());
+        target.setChiku2(entity.getChikuCode2() == null ? RString.EMPTY : entity.getChikuCode2().getColumnValue());
+        target.setChiku3(entity.getChikuCode3() == null ? RString.EMPTY : entity.getChikuCode3().getColumnValue());
+        target.setShichosonCode(entity.getGenLasdecCode().code市町村RString());
         TokubetsuChoshuDoteiIchiranReport report = new TokubetsuChoshuDoteiIchiranReport(
                 導入団体クラス, 出力順項目リスト, pageBreakKeys, target, parameter.get特別徴収開始月());
         report.writeBy(reportSourceWriter);

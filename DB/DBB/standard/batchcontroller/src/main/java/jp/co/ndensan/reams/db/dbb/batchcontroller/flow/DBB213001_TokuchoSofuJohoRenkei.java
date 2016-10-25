@@ -35,6 +35,7 @@ public class DBB213001_TokuchoSofuJohoRenkei extends BatchFlowBase<DBB213001_Tok
                 CreateRenkeiFileProcess.PARAMETER_OUT_RETURNENTITY);
         processParameter.setファイルOutputMap(returnEntity.getファイル());
         processParameter.setレコード件数OutputMap(returnEntity.getレコード件数());
+        processParameter.set作成年月日OutputMap(returnEntity.get作成年月日OutputMap());
         executeStep(チェックファイル作成);
     }
 
@@ -47,5 +48,4 @@ public class DBB213001_TokuchoSofuJohoRenkei extends BatchFlowBase<DBB213001_Tok
     IBatchFlowCommand creatCheckFile() {
         return loopBatch(CreateCheckFileProcess.class).arguments(processParameter).define();
     }
-
 }

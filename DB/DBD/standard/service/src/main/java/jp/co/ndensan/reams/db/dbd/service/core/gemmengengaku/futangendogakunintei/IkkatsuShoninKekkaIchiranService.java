@@ -11,12 +11,12 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.FutanyikkatsuShoninList;
 import jp.co.ndensan.reams.db.dbd.business.core.futangendogakunintei.FutanGendogakuNinteiBatchResult;
 import jp.co.ndensan.reams.db.dbd.business.core.futangendogakuyikkatsushonin.FutangendogakuyikkatsuShoninEntity;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futanyikkatsulist.FutanyikkatsuShoninListMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4010GemmenGengakuShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4035FutanGendogakuNinteiBatchEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakunintei.FutanGendogakuNinteiBatchResultEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4010GemmenGengakuShinseiDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4018FutanGendogakuNinteiDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4035FutanyikkatsuShoninListDac;
@@ -40,18 +40,18 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class IkkatsuShoninKekkaIchiranService {
 
     private final MapperProvider mapperProvider;
-    private final DbT4035FutanyikkatsuShoninListDac DbT4035dac;
-    private final DbT4018FutanGendogakuNinteiDac DbT4018dac;
-    private final DbT4010GemmenGengakuShinseiDac DbT4010dac;
+    private final DbT4035FutanyikkatsuShoninListDac dbT4035dac;
+    private final DbT4018FutanGendogakuNinteiDac dbT4018dac;
+    private final DbT4010GemmenGengakuShinseiDac dbT4010dac;
 
     /**
      * コンストラクタです。
      */
     IkkatsuShoninKekkaIchiranService() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.DbT4035dac = InstanceProvider.create(DbT4035FutanyikkatsuShoninListDac.class);
-        this.DbT4018dac = InstanceProvider.create(DbT4018FutanGendogakuNinteiDac.class);
-        this.DbT4010dac = InstanceProvider.create(DbT4010GemmenGengakuShinseiDac.class);
+        this.dbT4035dac = InstanceProvider.create(DbT4035FutanyikkatsuShoninListDac.class);
+        this.dbT4018dac = InstanceProvider.create(DbT4018FutanGendogakuNinteiDac.class);
+        this.dbT4010dac = InstanceProvider.create(DbT4010GemmenGengakuShinseiDac.class);
     }
 
     /**
@@ -59,13 +59,13 @@ public class IkkatsuShoninKekkaIchiranService {
      *
      */
     IkkatsuShoninKekkaIchiranService(MapperProvider mapperProvider,
-            DbT4035FutanyikkatsuShoninListDac DbT4035dac,
-            DbT4018FutanGendogakuNinteiDac DbT4018dac,
-            DbT4010GemmenGengakuShinseiDac DbT4010dac) {
+            DbT4035FutanyikkatsuShoninListDac dbT4035dac,
+            DbT4018FutanGendogakuNinteiDac dbT4018dac,
+            DbT4010GemmenGengakuShinseiDac dbT4010dac) {
         this.mapperProvider = mapperProvider;
-        this.DbT4035dac = DbT4035dac;
-        this.DbT4018dac = DbT4018dac;
-        this.DbT4010dac = DbT4010dac;
+        this.dbT4035dac = dbT4035dac;
+        this.dbT4018dac = dbT4018dac;
+        this.dbT4010dac = dbT4010dac;
     }
 
     /**
@@ -106,7 +106,7 @@ public class IkkatsuShoninKekkaIchiranService {
      */
     @Transaction
     public FutangendogakuyikkatsuShoninEntity load負担限度額一括認定情報(YMDHMS 一括認定バッチ処理日時) {
-        DbT4035FutanGendogakuNinteiBatchEntity dbd4035ENtity = DbT4035dac.select負担限度額一括認定情報(一括認定バッチ処理日時);
+        DbT4035FutanGendogakuNinteiBatchEntity dbd4035ENtity = dbT4035dac.select負担限度額一括認定情報(一括認定バッチ処理日時);
         FutangendogakuyikkatsuShoninEntity 負担限度額一括認定情報entity = new FutangendogakuyikkatsuShoninEntity();
         if (dbd4035ENtity != null) {
             負担限度額一括認定情報entity.set作成年度(dbd4035ENtity.getSakuseiNendo());
@@ -132,19 +132,16 @@ public class IkkatsuShoninKekkaIchiranService {
         IFutanyikkatsuShoninkekkaListMapper mapper = mapperProvider.create(IFutanyikkatsuShoninkekkaListMapper.class);
         IFutanyikkatsuShoninkekkaListFalseMapper mapperfalse = mapperProvider.create(IFutanyikkatsuShoninkekkaListFalseMapper.class);
         if (承認済みフラグ) {
-            List<FutanGendogakuNinteiBatchResultEntity> EntityList = mapper.get一括承認結果情報を取得_承認済みフラグTRUE(検索条件);
-            if (EntityList != null && !EntityList.isEmpty()) {
-                for (FutanGendogakuNinteiBatchResultEntity entity : EntityList) {
-                    FutanGendogakuNinteiEntity futanentity = new FutanGendogakuNinteiEntity();
-                    futanentity.set介護保険負担限度額認定Entity(entity.get負担限度額認定());
-                    futanentity.set減免減額申請Entity(entity.get減免減額申請());
+            List<FutanGendogakuNinteiBatchResultEntity> entityList = mapper.get一括承認結果情報を取得_承認済みフラグTRUE(検索条件);
+            if (entityList != null && !entityList.isEmpty()) {
+                for (FutanGendogakuNinteiBatchResultEntity entity : entityList) {
                     負担限度額認定バッチ結果.add(new FutanGendogakuNinteiBatchResult(entity));
                 }
             }
         } else {
-            List<FutanGendogakuNinteiBatchResultEntity> EntityList = mapperfalse.get一括承認結果情報を取得_承認済みフラグFALSE(検索条件2);
-            if (EntityList != null && !EntityList.isEmpty()) {
-                for (FutanGendogakuNinteiBatchResultEntity entity : EntityList) {
+            List<FutanGendogakuNinteiBatchResultEntity> entityList = mapperfalse.get一括承認結果情報を取得_承認済みフラグFALSE(検索条件2);
+            if (entityList != null && !entityList.isEmpty()) {
+                for (FutanGendogakuNinteiBatchResultEntity entity : entityList) {
                     負担限度額認定バッチ結果.add(new FutanGendogakuNinteiBatchResult(entity));
                 }
             }
@@ -163,7 +160,7 @@ public class IkkatsuShoninKekkaIchiranService {
     @Transaction
     public DbT4018KaigoHokenFutanGendogakuNinteiEntity get介護保険負担限度額認定情報(ShoKisaiHokenshaNo shikisaihokenno,
             HihokenshaNo hihokenshano, int 履歴番号) {
-        DbT4018KaigoHokenFutanGendogakuNinteiEntity dbt4018entity = DbT4018dac.selectByKey(shikisaihokenno, hihokenshano, 履歴番号);
+        DbT4018KaigoHokenFutanGendogakuNinteiEntity dbt4018entity = dbT4018dac.selectByKey(shikisaihokenno, hihokenshano, 履歴番号);
         dbt4018entity.initializeMd5();
         return dbt4018entity;
     }
@@ -181,7 +178,7 @@ public class IkkatsuShoninKekkaIchiranService {
     public DbT4010GemmenGengakuShinseiEntity get減免減額申請情報(ShoKisaiHokenshaNo shokisaihokenno, HihokenshaNo hihokenshano,
             RString 減免減額種類,
             int 履歴番号) {
-        DbT4010GemmenGengakuShinseiEntity dbt4010entity = DbT4010dac.selectByKey(shokisaihokenno, hihokenshano, 減免減額種類, 履歴番号);
+        DbT4010GemmenGengakuShinseiEntity dbt4010entity = dbT4010dac.selectByKey(shokisaihokenno, hihokenshano, 減免減額種類, 履歴番号);
         dbt4010entity.initializeMd5();
         return dbt4010entity;
     }
@@ -193,31 +190,30 @@ public class IkkatsuShoninKekkaIchiranService {
      * @return FutanyikkatsuShoninList
      */
     @Transaction
-    public FutanyikkatsuShoninList get負担限度額一括認定情報(YMDHMS 一括認定バッチ処理日時) {
-        DbT4035FutanGendogakuNinteiBatchEntity DbT4035entity = DbT4035dac.select負担限度額一括認定情報(一括認定バッチ処理日時);
-        DbT4035entity.initializeMd5();
-        FutanyikkatsuShoninList futanlist = new FutanyikkatsuShoninList(DbT4035entity);
-        return futanlist;
+    public DbT4035FutanGendogakuNinteiBatchEntity get負担限度額一括認定情報(YMDHMS 一括認定バッチ処理日時) {
+        DbT4035FutanGendogakuNinteiBatchEntity dbT4035entity = dbT4035dac.select負担限度額一括認定情報(一括認定バッチ処理日時);
+        dbT4035entity.initializeMd5();
+        return dbT4035entity;
     }
 
     /**
      * saveDbT4018処理を行う。
      *
-     * @param KaigoHoken画面情報 DbT4035FutanGendogakuNinteiBatchEntity
+     * @param kaigoHoken画面情報 DbT4035FutanGendogakuNinteiBatchEntity
      */
     @Transaction
-    public void saveDbT4018dac(DbT4018KaigoHokenFutanGendogakuNinteiEntity KaigoHoken画面情報) {
-        DbT4018dac.save(KaigoHoken画面情報);
+    public void saveDbT4018dac(DbT4018KaigoHokenFutanGendogakuNinteiEntity kaigoHoken画面情報) {
+        dbT4018dac.save(kaigoHoken画面情報);
     }
 
     /**
      * saveDbT4010処理を行う。
      *
-     * @param GemmenGen画面情報 GemmenGengakuShinsei
+     * @param gemmenGen画面情報 GemmenGengakuShinsei
      */
     @Transaction
-    public void saveDbT4010dac(DbT4010GemmenGengakuShinseiEntity GemmenGen画面情報) {
-        DbT4010dac.save(GemmenGen画面情報);
+    public void saveDbT4010dac(GemmenGengakuShinsei gemmenGen画面情報) {
+        dbT4010dac.save(gemmenGen画面情報.toEntity());
     }
 
     /**
@@ -227,7 +223,7 @@ public class IkkatsuShoninKekkaIchiranService {
      */
     @Transaction
     public void saveDbT4035dac(FutanyikkatsuShoninList futan画面情報) {
-        DbT4035dac.save(futan画面情報.toEntity());
+        dbT4035dac.save(futan画面情報.toEntity());
     }
 
     /**
@@ -291,10 +287,12 @@ public class IkkatsuShoninKekkaIchiranService {
     public void get減免減額申請処理(List<FutanGendogakuNinteiBatchResult> 画面更新用情報) {
         for (FutanGendogakuNinteiBatchResult futanresult : 画面更新用情報) {
             List<GemmenGengakuShinsei> gemmengengakulist = futanresult.get介護保険負担限度額認定の情報().getGemmenGengakuShinseiList();
-            if (futanresult.get介護保険負担限度額認定の情報() != null
-                    && futanresult.get介護保険負担限度額認定の情報().getState().equals(EntityDataState.Modified)
-                    && gemmengengakulist != null && !gemmengengakulist.isEmpty()) {
-                get減免減額リスト(futanresult, gemmengengakulist);
+            if (futanresult.get介護保険負担限度額認定の情報() != null) {
+                EntityDataState entitystate = futanresult.get介護保険負担限度額認定の情報().getState();
+                if (entitystate.equals(EntityDataState.Modified)
+                        && gemmengengakulist != null && !gemmengengakulist.isEmpty()) {
+                    get減免減額リスト(futanresult, gemmengengakulist);
+                }
             }
         }
     }
@@ -339,39 +337,44 @@ public class IkkatsuShoninKekkaIchiranService {
 
     private void get減免減額リスト(FutanGendogakuNinteiBatchResult futanresult, List<GemmenGengakuShinsei> gemmengengakulist) {
         for (GemmenGengakuShinsei gemmenshinsei : gemmengengakulist) {
-            DbT4010GemmenGengakuShinseiEntity dbt4010gemmengen = get減免減額申請情報(
+            GemmenGengakuShinsei dbt4010gemmengen = new GemmenGengakuShinsei(
                     futanresult.get介護保険負担限度額認定の情報().get証記載保険者番号(),
                     futanresult.get介護保険負担限度額認定の情報().get被保険者番号(),
                     gemmenshinsei.get減免減額種類(),
                     futanresult.get介護保険負担限度額認定の情報().get履歴番号());
-            if (dbt4010gemmengen != null) {
-                dbt4010gemmengen.setShinseiTodokedeDaikoKubun(gemmenshinsei.get申請届出代行区分());
-                dbt4010gemmengen.setShinseiTodokedeshaShimei(gemmenshinsei.get申請届出者氏名());
-                dbt4010gemmengen.setShinseiTodokedeshaKanaShimei(gemmenshinsei.get申請届出者氏名カナ());
-                dbt4010gemmengen.setShinseiTodokedeshaTsuzukigara(gemmenshinsei.get申請届出者続柄());
-                dbt4010gemmengen.setShinseiTodokedeDaikoJigyoshaNo(gemmenshinsei.get申請届出代行事業者番号());
-                dbt4010gemmengen.setJigyoshaKubun(gemmenshinsei.get事業者区分());
-                dbt4010gemmengen.setShinseiTodokedeshaYubinNo(gemmenshinsei.get申請届出者郵便番号());
-                dbt4010gemmengen.setShinseiTodokedeshaJusho(gemmenshinsei.get申請届出者住所());
-                dbt4010gemmengen.setShinseiTodokedeshaTelNo(gemmenshinsei.get申請届出者電話番号());
-                saveDbT4010dac(dbt4010gemmengen);
-            } else {
-                DbT4010GemmenGengakuShinseiEntity gemmgengakuentity = new DbT4010GemmenGengakuShinseiEntity();
-                gemmgengakuentity.setShoKisaiHokenshaNo(gemmenshinsei.get証記載保険者番号());
-                gemmgengakuentity.setHihokenshaNo(gemmenshinsei.get被保険者番号());
-                gemmgengakuentity.setGemmenGengakuShurui(gemmenshinsei.get減免減額種類());
-                gemmgengakuentity.setShinseiRirekiNo(gemmenshinsei.get履歴番号());
-                gemmgengakuentity.setShinseiTodokedeDaikoKubun(gemmenshinsei.get申請届出代行区分());
-                gemmgengakuentity.setShinseiTodokedeshaKanaShimei(gemmenshinsei.get申請届出者氏名カナ());
-                gemmgengakuentity.setShinseiTodokedeshaShimei(gemmenshinsei.get申請届出者氏名());
-                gemmgengakuentity.setShinseiTodokedeshaTsuzukigara(gemmenshinsei.get申請届出者続柄());
-                gemmgengakuentity.setShinseiTodokedeDaikoJigyoshaNo(gemmenshinsei.get申請届出代行事業者番号());
-                gemmgengakuentity.setJigyoshaKubun(gemmenshinsei.get事業者区分());
-                gemmgengakuentity.setShinseiTodokedeshaYubinNo(gemmenshinsei.get申請届出者郵便番号());
-                gemmgengakuentity.setShinseiTodokedeshaJusho(gemmenshinsei.get申請届出者住所());
-                gemmgengakuentity.setShinseiTodokedeshaTelNo(gemmenshinsei.get申請届出者電話番号());
-                saveDbT4010dac(gemmgengakuentity);
-            }
+            saveDbT4010dac(set減免減額(dbt4010gemmengen, gemmenshinsei).build().modifiedModel());
         }
+    }
+
+    private GemmenGengakuShinseiBuilder set減免減額(GemmenGengakuShinsei dbt4010gemmengen, GemmenGengakuShinsei gemmenshinsei) {
+        GemmenGengakuShinseiBuilder gemmenbuilder = dbt4010gemmengen.createBuilderForEdit();
+        if (gemmenshinsei.get申請届出代行区分() != null && !gemmenshinsei.get申請届出代行区分().isEmpty()) {
+            gemmenbuilder.set申請届出代行区分(gemmenshinsei.get申請届出代行区分());
+        }
+        if (gemmenshinsei.get申請届出者氏名() != null && !gemmenshinsei.get申請届出者氏名().isEmpty()) {
+            gemmenbuilder.set申請届出者氏名(gemmenshinsei.get申請届出者氏名());
+        }
+        if (gemmenshinsei.get申請届出者氏名カナ() != null && !gemmenshinsei.get申請届出者氏名カナ().isEmpty()) {
+            gemmenbuilder.set申請届出者氏名カナ(gemmenshinsei.get申請届出者氏名カナ());
+        }
+        if (gemmenshinsei.get申請届出者続柄() != null && !gemmenshinsei.get申請届出者続柄().isEmpty()) {
+            gemmenbuilder.set申請届出者続柄(gemmenshinsei.get申請届出者続柄());
+        }
+        if (gemmenshinsei.get申請届出代行事業者番号() != null && !gemmenshinsei.get申請届出代行事業者番号().isEmpty()) {
+            gemmenbuilder.set申請届出代行事業者番号(gemmenshinsei.get申請届出代行事業者番号());
+        }
+        if (gemmenshinsei.get事業者区分() != null && !gemmenshinsei.get事業者区分().isEmpty()) {
+            gemmenbuilder.set事業者区分(gemmenshinsei.get事業者区分());
+        }
+        if (gemmenshinsei.get申請届出者郵便番号() != null && !gemmenshinsei.get申請届出者郵便番号().isEmpty()) {
+            gemmenbuilder.set申請届出者郵便番号(gemmenshinsei.get申請届出者郵便番号());
+        }
+        if (gemmenshinsei.get申請届出者住所() != null && !gemmenshinsei.get申請届出者住所().isEmpty()) {
+            gemmenbuilder.set申請届出者住所(gemmenshinsei.get申請届出者住所());
+        }
+        if (gemmenshinsei.get申請届出者電話番号() != null && !gemmenshinsei.get申請届出者電話番号().isEmpty()) {
+            gemmenbuilder.set申請届出者電話番号(gemmenshinsei.get申請届出者電話番号());
+        }
+        return gemmenbuilder;
     }
 }

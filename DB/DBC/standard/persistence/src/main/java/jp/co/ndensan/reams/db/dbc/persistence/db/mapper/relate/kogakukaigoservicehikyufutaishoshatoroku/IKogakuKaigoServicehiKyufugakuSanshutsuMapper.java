@@ -36,8 +36,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutais
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.SetaiHihokenshaResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.TyukannJigyoKogakuRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.TyukannKogakuRelateEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2Entity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity2;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity3;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
@@ -446,7 +446,7 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
      * @param param KyufuJissekiKihonKogakuMybatisParameter
      * @return {@link  List<UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2Entity>}
      */
-    List<UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2Entity> select高額介護サービス費支給判定結果と支給審査決定(KyufuJissekiKihonKogakuMybatisParameter param);
+    List<UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity2> select高額介護サービス費支給判定結果と支給審査決定(KyufuJissekiKihonKogakuMybatisParameter param);
 
     /**
      * データの取得（高額介護サービス費給付対象者合計）のメソッドです。
@@ -454,7 +454,7 @@ public interface IKogakuKaigoServicehiKyufugakuSanshutsuMapper {
      * @param param KyufuJissekiKihonKogakuMybatisParameter
      * @return {@link  List<UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity>}
      */
-    List<UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity> select高額介護サービス費給付対象者合計(KyufuJissekiKihonKogakuMybatisParameter param);
+    List<UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity3> select高額介護サービス費給付対象者合計(KyufuJissekiKihonKogakuMybatisParameter param);
 
     /**
      * DB出力(給付実績中間事業高額一時）の更新メッソドです。

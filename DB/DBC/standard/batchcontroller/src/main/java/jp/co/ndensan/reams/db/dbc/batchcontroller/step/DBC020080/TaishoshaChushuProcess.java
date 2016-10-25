@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020080;
 
 import jp.co.ndensan.reams.db.dbc.business.core.dbc020080.DBC020080DataUtil;
-import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ErrorListType;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.TaishoshaChushuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080ShoriKekkaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080TaishoDataEntity;
@@ -46,6 +46,7 @@ public class TaishoshaChushuProcess extends BatchProcessBase<DBC020080TaishoData
 
     @Override
     protected void initialize() {
+        isデータがあり = new OutputParameter<>();
         isデータがあり.setValue(Boolean.FALSE);
         beforeKey = RString.EMPTY;
         util = new DBC020080DataUtil();
@@ -71,11 +72,11 @@ public class TaishoshaChushuProcess extends BatchProcessBase<DBC020080TaishoData
         isデータがあり.setValue(Boolean.TRUE);
         JissekiFutangakuDataTempEntity result = util.toJissekiTempEntityTaishoChuShu(entity, parameter.get処理日時(), 市町村名);
         実績負担額データ.insert(result);
-        if (entity.getDaichoHihokenshaNo() == null) {
+        if (entity.getDaichoHihokenshaNo() != null) {
             return;
         }
         DBC020080ShoriKekkaTempEntity errorEntity
-                = util.toShoriKekkaTempEntity(result, KaigoGassan_ErrorListType.リストタイプ0);
+                = util.toShoriKekkaTempEntity(result, KaigoGassan_ErrorKubun.被保険者情報取得エラー);
         RString nowKey = util.getKeyOfShoriKekkaTemp(errorEntity);
         if (nowKey.equals(beforeKey)) {
             return;

@@ -48,8 +48,8 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
     private final RString 有 = new RString("有");
     private final RString 数字 = new RString("1");
     private static final RString 文_被保険者番号 = new RString("被保険者番号");
-    private final int INT_1 = 1;
-    private final int INT_2 = 2;
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
 
     /**
      * コンストラクタです
@@ -190,6 +190,12 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
             FlexibleYearMonth 決定年月 = 振込明細.getKetteiYMD().getYearMonth();
             source.list2_3 = パターン54(決定年月);
         }
+        edit1(振込明細, source);
+
+    }
+
+    private void edit1(DbWT0510FurikomiMeisaiTempEntity 振込明細, FurikomiMeisaiIchiranJigyoKogakuSource source)
+            throws IllegalStateException, IllegalArgumentException {
         if (振込明細.getYokaigoJotaiKubunCode() != null) {
             if (!振込明細.getYokaigoJotaiKubunCode().isEmpty()) {
                 source.list1_6 = パターン4(振込明細.getNinteiYukoKikanKaishiYMD());
@@ -218,7 +224,6 @@ public class FurikomiMeisaiIchiranJigyoKogakuEditor implements IFurikomiMeisaiIc
         } else if (INT_2 <= target.get名寄せ件数()) {
             source.list5_1 = 有;
         }
-
     }
 
     private RString パターン12(YMDHMS 作成日時) {

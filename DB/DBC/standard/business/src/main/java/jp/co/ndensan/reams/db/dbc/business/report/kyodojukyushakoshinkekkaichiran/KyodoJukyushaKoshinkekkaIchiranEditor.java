@@ -166,6 +166,13 @@ public class KyodoJukyushaKoshinkekkaIchiranEditor implements IKyodoJukyushaKosh
             source.list5_12 = get支給申請書出力の有無コードと名称(帳票用データ.get共同処理一時TBL().get高_支給申請書出力の有無());
             source.list6_1 = get老齢福祉年金受給の有無コードと名称(帳票用データ.get共同処理一時TBL().get高_老齢福祉年金受給の有無());
         }
+        source.shimei50onKana = 帳票用データ.get被保険者一時TBL().get氏名50音カナ();
+        if (帳票用データ.get被保険者一時TBL().get市町村コード() != null && !帳票用データ.get被保険者一時TBL().get市町村コード().isEmpty()) {
+            source.shichosonCode = 帳票用データ.get被保険者一時TBL().get市町村コード().value();
+        }
+        if (帳票用データ.get被保険者一時TBL().get被保険者番号() != null && !帳票用データ.get被保険者一時TBL().get被保険者番号().isEmpty()) {
+            source.hihokenshaNo = 帳票用データ.get被保険者一時TBL().get被保険者番号().value();
+        }
         if (帳票用データ.get被保険者一時TBL() != null && 帳票用データ.get被保険者一時TBL().get識別コード() != null
                 && 帳票用データ.get被保険者一時TBL().get被保険者番号() != null) {
             source.shikibetuCode = 帳票用データ.get被保険者一時TBL().get識別コード();

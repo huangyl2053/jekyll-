@@ -141,12 +141,6 @@ public class KyodoJukyushaKoshinkekkaIchiranReportSource implements IReportSourc
     @ReportItem(name = "list8_1", length = 64, order = 62)
     public RString list8_1;
 
-    @ReportItem(name = "yubinNo", length = 64, order = 63)
-    public RString yubinNo;
-    @ReportItem(name = "choikiCode", length = 64, order = 64)
-    public RString choikiCode;
-    @ReportItem(name = "gyoseikuCode", length = 64, order = 65)
-    public RString gyoseikuCode;
     @ReportItem(name = "shimei50onKana", length = 64, order = 66)
     public RString shimei50onKana;
     @ReportItem(name = "shichosonCode", length = 64, order = 67)
@@ -171,9 +165,9 @@ public class KyodoJukyushaKoshinkekkaIchiranReportSource implements IReportSourc
     public enum ReportSourceFields {
 
         hokenshaNo,
-        yubinNo,
-        choikiCode,
-        gyoseikuCode,
+        list2_3,
+        list2_4,
+        list1_9,
         shimei50onKana,
         shichosonCode,
         hihokenshaNo,

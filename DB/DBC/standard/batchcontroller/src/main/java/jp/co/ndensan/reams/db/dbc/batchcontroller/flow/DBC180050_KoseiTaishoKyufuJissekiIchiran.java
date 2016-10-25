@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.KoseiTaishoKyuh
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.KoseiTaishoKyuhuzissekiJohouSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.KyuhuzissekiJohoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.KyuhuzissekiJohoSakuseiYoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.MoziCodeHenkanProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.SelKyuhuzissekiKihonTorigaDataProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.SelRiyoushaHutanwariaitorigaDataProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050.ShoriHidukeKanriTeburuKoshiProcess;
@@ -28,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * バッチ設計_DBCMNK4001_更正対象給付実績一覧Flow
@@ -37,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 public class DBC180050_KoseiTaishoKyufuJissekiIchiran extends BatchFlowBase<DBC180050_KoseiTaishoKyufuJissekiIchiranParameter> {
 
     private RDateTime バッチ起動時処理日時;
+    private KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcessParameter processParameter;
 
     private static final String SEL_RIYOUSHAHUTANWARIAITORIGA = "SelRiyoushaHutanwariaitorigaDataProcess";
     private static final String SEL_KYUHUZISSEKIKIHONTORIGA = "SelKyuhuzissekiKihonTorigaDataProcess";
@@ -46,10 +49,12 @@ public class DBC180050_KoseiTaishoKyufuJissekiIchiran extends BatchFlowBase<DBC1
     private static final String KYUHUZISSEKI_JOHOSAKUSEIYO = "KyuhuzissekiJohoSakuseiYoProcess";
     private static final String KYUHUZISSEKI_JOHOSAKUSEI = "KyuhuzissekiJohoSakuseiProcess";
     private static final String INS_FUTANWARIAIYMTEMP = "InsFutanWariaiYMTempProcess";
-    private static final String KOSEITAISHO_KYUHUZISSEKIJOHOUSAKUSEI = "KoseiTaishoKyuhuzissekiJohouSakusei";
+    private static final String KYUHUZISSEKIJOHO_USAKUSEI = "KoseiTaishoKyuhuzissekiJohouSakusei";
     private static final String KOSEITAISHO_KYUHUZISSEKII = "KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess";
     private static final String SHORIHIDUKE_KANRITEBURUKOSHI = "ShoriHidukeKanriTeburuKoshiProcess";
     private static final String SHORIKEKKA_KAKUNINLIST = "ShoriKekkaKakuninListProcess";
+    private static final String MOZICODE_HENKAN = "MoziCodeHenkanProcess";
+    private static final String TORIKESHI_MOZICODE_HENKAN = "TorikeshiMoziCodeHenkanProcess";
 
     @Override
     protected void initialize() {
@@ -66,10 +71,16 @@ public class DBC180050_KoseiTaishoKyufuJissekiIchiran extends BatchFlowBase<DBC1
         executeStep(KYUHUZISSEKI_JOHOSAKUSEIYO);
         executeStep(KYUHUZISSEKI_JOHOSAKUSEI);
         executeStep(INS_FUTANWARIAIYMTEMP);
-        executeStep(KOSEITAISHO_KYUHUZISSEKIJOHOUSAKUSEI);
+        executeStep(KYUHUZISSEKIJOHO_USAKUSEI);
         executeStep(KOSEITAISHO_KYUHUZISSEKII);
+        boolean 変換flag = getResult(boolean.class, new RString(KOSEITAISHO_KYUHUZISSEKII),
+                KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess.OUT_HAS_TARGET_DATA);
         executeStep(SHORIHIDUKE_KANRITEBURUKOSHI);
         executeStep(SHORIKEKKA_KAKUNINLIST);
+        if (変換flag) {
+            executeStep(MOZICODE_HENKAN);
+            executeStep(TORIKESHI_MOZICODE_HENKAN);
+        }
     }
 
     /**
@@ -161,7 +172,7 @@ public class DBC180050_KoseiTaishoKyufuJissekiIchiran extends BatchFlowBase<DBC1
      *
      * @return IBatchFlowCommand
      */
-    @Step(KOSEITAISHO_KYUHUZISSEKIJOHOUSAKUSEI)
+    @Step(KYUHUZISSEKIJOHO_USAKUSEI)
     protected IBatchFlowCommand 更正対象給付実績情報の作成() {
         return loopBatch(KoseiTaishoKyuhuzissekiJohouSakuseiProcess.class).define();
     }
@@ -199,6 +210,28 @@ public class DBC180050_KoseiTaishoKyufuJissekiIchiran extends BatchFlowBase<DBC1
                 .arguments(toShoriKekkaKakuninListProcessParameter()).define();
     }
 
+    /**
+     * 文字コード変換
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(MOZICODE_HENKAN)
+    protected IBatchFlowCommand 文字コード変換() {
+        return simpleBatch(MoziCodeHenkanProcess.class)
+                .arguments(processParameter).define();
+    }
+
+    /**
+     * 給付実績取消一覧文字コード変換
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(TORIKESHI_MOZICODE_HENKAN)
+    protected IBatchFlowCommand 給付実績取消一覧文字コード変換() {
+        return simpleBatch(MoziCodeHenkanProcess.class)
+                .arguments(processParameter).define();
+    }
+
     private SelRiyoushaHutanwariaitorigaDataProcessParameter toSelRiyoushaHutanwariaitorigaDataProcessParameter() {
         return new SelRiyoushaHutanwariaitorigaDataProcessParameter(getParameter().get抽出期間開始日時().getRDateTime(),
                 getParameter().get抽出期間終了日時().getRDateTime());
@@ -210,8 +243,9 @@ public class DBC180050_KoseiTaishoKyufuJissekiIchiran extends BatchFlowBase<DBC1
     }
 
     private KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcessParameter toKoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcessParameter() {
-        return new KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcessParameter(getParameter().get出力順ID(),
+        processParameter = new KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcessParameter(getParameter().get出力順ID(),
                 getParameter().get抽出期間開始日時().getRDateTime(), getParameter().get抽出期間終了日時().getRDateTime());
+        return processParameter;
     }
 
     private ShoriHidukeKanriTeburuKoshiProcessParameter toShoriHidukeKanriTeburuKoshiProcessParameter() {

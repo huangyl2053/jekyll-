@@ -389,6 +389,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             getHandler(div).set状態_Two(false);
             getHandler(div).clear決定情報();
             getHandler(div).set画面tap();
+            getHandler(div).release支払方法タブ();
             return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報一覧);
         }
         if (!ResponseHolder.isReRequest()) {
@@ -404,6 +405,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
             getHandler(div).前排他キーの解除(被保険者番号);
             getHandler(div).set状態_Two(false);
             getHandler(div).set画面tap();
+            getHandler(div).release支払方法タブ();
             return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報一覧);
         } else {
             return ResponseData.of(div).respond();

@@ -480,7 +480,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
             KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果, RString 状態) {
         return 支給額計算結果.createBuilderForEdit()
                 .set保険制度コード(追加.equals(状態) ? KaigoGassan_HokenSeido.介護.getCode()
-                        : div.getDdlHokenSeido().getSelectedKey())
+                        : 支給額計算結果.get保険制度コード())
                 .set自己負担額証明書整理番号(div.getTxtJikoFutanSeiriNo().getValue())
                 .set対象計算期間開始年月日(rDateToFixibleDate(div.getTxtTaishoKeisanKikan().getFromValue()))
                 .set対象計算期間終了年月日(rDateToFixibleDate(div.getTxtTaishoKeisanKikan().getToValue()))

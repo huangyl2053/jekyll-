@@ -49,7 +49,7 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
     private RString filePath;
     private RDateTime 抽出開始日時;
     private RDateTime 処理日時;
-    private KaigojuminHyotrukuProcess process;
+    private KaigojuminHyotrukuProcess kaigojum;
     private static final RString FILENAME = new RString("fuseigoList.csv");
     private DbT7022ShoriDateKanriEntity 処理日付情報;
     @BatchWriter
@@ -58,7 +58,7 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
     @Override
     protected void beforeExecute() {
         処理日時 = RDate.getNowDateTime();
-        process = new KaigojuminHyotrukuProcess();
+        kaigojum = new KaigojuminHyotrukuProcess();
     }
 
     @Override
@@ -89,7 +89,7 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
     }
 
     private void 宛名識別対象異動分取得PSM(RDateTime 抽出開始日時) {
-        ShikibetsuTaishoIdoSearchKeyBuilder keyBuilder = process.宛名識別対象異動分取得PSM(抽出開始日時);
+        ShikibetsuTaishoIdoSearchKeyBuilder keyBuilder = kaigojum.宛名識別対象異動分取得PSM(抽出開始日時);
         ShikibetsuTaishoIdoFinder finder = ShikibetsuTaishoIdoFinder.createInstance();
         List<ShikibetsuTaishoIdoJoho> 宛名識別対象list = finder.get宛名識別対象異動(keyBuilder.build());
         JuminIdoRendoShikakuToroku juminidorendoshikakutoroku = new JuminIdoRendoShikakuToroku();
@@ -104,9 +104,9 @@ public class KaigojuminHyotrukuDBUpdateProcess extends BatchProcessBase<DbT7022S
     @Override
     protected void afterExecute() {
         if (市町村コード == null) {
-            tableWrite.insert(process.データ更新(processParameter, 処理日時, 処理日付情報));
+            tableWrite.insert(kaigojum.データ更新(processParameter, 処理日時, 処理日付情報));
         } else {
-            tableWrite.update(process.データ編集(processParameter, 処理日時, 処理日付情報));
+            tableWrite.update(kaigojum.データ編集(processParameter, 処理日時, 処理日付情報));
         }
         宛名識別対象異動分取得PSM(抽出開始日時);
     }

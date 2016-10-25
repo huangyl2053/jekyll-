@@ -85,7 +85,7 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
     private static final RString DATANAME_被保険者番号 = new RString("被保険者番号");
     private static final RString 定数_ORDERBY = new RString("order by");
     private static final RString コンマ = new RString(",");
-    private static final RString 項目名_履歴番号 = new RString("\"3061KagoKetteiMeisai_rirekiNo\"");
+    private static final RString 項目名_事業所番号 = new RString("\"dbT3061KagoKetteiMeisai_jigyoshoNo\"");
     private IOutputOrder 出力順;
     private HanyoListKagoKekkaProcessParameter parameter;
     private Association 地方公共団体情報;
@@ -108,12 +108,12 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
                 parameter.set出力項目(MyBatisOrderByClauseCreator.create(HanyoListKagoKekkaOutputOrder.class, 出力順).
                         concat(コンマ).concat(HanyoListKagoKekkaOutputOrder.被保険者番号.getMyBatis項目名()).
                         concat(コンマ).concat(HanyoListKagoKekkaOutputOrder.サービス年月.getMyBatis項目名()).
-                        concat(コンマ).concat(項目名_履歴番号));
+                        concat(コンマ).concat(項目名_事業所番号));
             }
         } else {
             parameter.set出力項目(定数_ORDERBY.concat(HanyoListKagoKekkaOutputOrder.被保険者番号.getMyBatis項目名()).
                     concat(コンマ).concat(HanyoListKagoKekkaOutputOrder.サービス年月.getMyBatis項目名()).
-                    concat(コンマ).concat(項目名_履歴番号));
+                    concat(コンマ).concat(項目名_事業所番号));
         }
         構成市町村マスタ = new HashMap<>();
         連番 = 0;
@@ -172,7 +172,6 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
         } else {
             spoolManager.spool(eucFilePath);
         }
-        spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 地方公共団体情報.getLasdecCode_().value(),

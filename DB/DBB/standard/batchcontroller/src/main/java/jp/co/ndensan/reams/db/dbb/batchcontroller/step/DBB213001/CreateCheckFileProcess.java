@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -32,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -61,6 +59,7 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
     private static final int INT_ZERO = 0;
     private static final int INT_FIVE = 5;
     private TokuchoSofuJohoRenkeiProcessParameter proParameter;
+    private RString 構成市町村コード;
     private FlexibleYear 処理年度;
     private RYearMonth 処理対象年月;
     private List<RString> 市町村コードリスト;
@@ -81,6 +80,7 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
         処理年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         処理対象年月 = RDate.getNowDate().getYearMonth();
+        構成市町村コード = RString.EMPTY;
         市町村コードリスト = new ArrayList<>();
         市町村コードリスト全 = new HashMap<>();
         ファイル出力CHKZ12List = new ArrayList<>();
@@ -144,28 +144,30 @@ public class CreateCheckFileProcess extends BatchProcessBase<TokuchoSofuJohoRenk
 
     @Override
     protected void process(TokuchoSofuJohoRenkeiEntity entity) {
-        if (七月.equals(new RString(処理対象年月.getMonthValue()))) {
-            ファイル出力Z12Map.get(entity.get構成市町村コード()).writeLine(new CheckFileCsvEntity(
-                    proParameter.getファイルOutputMap().get(entity.get構成市町村コード()),
-                    new RString(YMDHMS.now().toString()).concat(new RString(RDateTime.now().getMillisOfSecond())),
-                    Z12,
-                    処理対象年月.toDateString(),
-                    entity.get市町村コードDT(),
-                    entity.get作成年月日DT(),
-                    new RString(proParameter.getレコード件数OutputMap().get(entity.get構成市町村コード()))
-            ));
-        } else {
-            ファイル出力Z1AMap.get(entity.get構成市町村コード()).writeLine(new CheckFileCsvEntity(
-                    proParameter.getファイルOutputMap().get(entity.get構成市町村コード()),
-                    new RString(YMDHMS.now().toString()).concat(new RString(RDateTime.now().getMillisOfSecond())),
-                    Z1A,
-                    処理対象年月.toDateString(),
-                    entity.get市町村コードDT(),
-                    entity.get作成年月日DT(),
-                    new RString(proParameter.getレコード件数OutputMap().get(entity.get構成市町村コード()))
-            ));
+        if (!構成市町村コード.equals(entity.get構成市町村コード())) {
+            if (七月.equals(new RString(処理対象年月.getMonthValue()))) {
+                ファイル出力Z12Map.get(entity.get構成市町村コード()).writeLine(new CheckFileCsvEntity(
+                        proParameter.getファイルOutputMap().get(entity.get構成市町村コード()),
+                        proParameter.get作成年月日OutputMap().get(entity.get構成市町村コード()),
+                        Z12,
+                        処理対象年月.toDateString(),
+                        entity.get構成市町村コード().substring(INT_ZERO, INT_FIVE),
+                        entity.get作成年月日DT(),
+                        new RString(proParameter.getレコード件数OutputMap().get(entity.get構成市町村コード()))
+                ));
+            } else {
+                ファイル出力Z1AMap.get(entity.get構成市町村コード()).writeLine(new CheckFileCsvEntity(
+                        proParameter.getファイルOutputMap().get(entity.get構成市町村コード()),
+                        proParameter.get作成年月日OutputMap().get(entity.get構成市町村コード()),
+                        Z1A,
+                        処理対象年月.toDateString(),
+                        entity.get構成市町村コード().substring(INT_ZERO, INT_FIVE),
+                        entity.get作成年月日DT(),
+                        new RString(proParameter.getレコード件数OutputMap().get(entity.get構成市町村コード()))
+                ));
+            }
         }
-
+        構成市町村コード = entity.get構成市町村コード();
     }
 
     @Override

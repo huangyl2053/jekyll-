@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShokaiTeikyoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TeikyoYohi;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.TokuteiKojinJohomeiCode;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.RiyoshaFutanwariaiMybatisParameter;
-import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.RiyoshaFutanwariaiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7301TokuteiKojinJohoHanKanriEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeyikyouTayisyousyaJyohouRelateEntity;
@@ -45,7 +44,6 @@ public class RiyoshaFutanwariaiUpdateProcess extends BatchProcessBase<TeyikyouTa
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate."
             + "tokuteikojinjohoteikyo.IRiyoshaFutanwariaiMapper.get提供対象者");
     private static final RString TABLE_中間DB提供基本情報 = new RString("TeikyoKihonJohoNNTemp");
-    private RiyoshaFutanwariaiProcessParameter processParameter;
     private RiyoshaFutanwariaiMybatisParameter mybatisParameter;
 
     @BatchWriter

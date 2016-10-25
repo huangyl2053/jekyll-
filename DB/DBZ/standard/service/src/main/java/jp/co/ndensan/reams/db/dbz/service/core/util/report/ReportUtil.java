@@ -254,7 +254,8 @@ public final class ReportUtil {
         space = RString.HALF_SPACE;
         comma = new RString(",");
         commaCount = 0;
-
+        int shutsuryokujunCount = 0;
+        int kaiPeijiCount = 0;
         List<RString> 出力順List = new ArrayList<>();
         List<RString> 改頁List = new ArrayList<>();
         List<RString> pagebreakList = new ArrayList<>();
@@ -267,10 +268,14 @@ public final class ReportUtil {
         }
         for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
             getOrderByClause(reportItems, setSortItem);
-            出力順List.set(commaCount, setSortItem.get項目名());
-            if (setSortItem.is改頁項目() && 改頁List.size() == INT5) {
+            if (INT5 > shutsuryokujunCount) {
+                出力順List.set(commaCount, setSortItem.get項目名());
+                shutsuryokujunCount++;
+            }
+            if (setSortItem.is改頁項目() && INT5 > kaiPeijiCount) {
                 pagebreakList.add(reportItems.getフォームフィールド名(setSortItem.get項目ID()));
                 改頁List.set(commaCount, setSortItem.get項目名());
+                kaiPeijiCount++;
             }
             commaCount++;
         }

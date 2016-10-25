@@ -35,7 +35,7 @@ public class SeikatsuhogoRireki {
      * @return ResponseData<SeikatsuhogoRirekiDiv>
      */
     public ResponseData<SeikatsuhogoRirekiDiv> onbtn_AddRow(SeikatsuhogoRirekiDiv div) {
-        getHandler(div).onbtn_HiyuoJi(表示モード_新規);
+        getHandler(div).onbtn_Shiki(表示モード_新規);
         return ResponseData.of(div).respond();
     }
 
@@ -46,6 +46,9 @@ public class SeikatsuhogoRireki {
      * @return ResponseData<SeikatsuhogoRirekiDiv>
      */
     public ResponseData<SeikatsuhogoRirekiDiv> onbtn_Modify(SeikatsuhogoRirekiDiv div) {
+        if (RowState.Added.equals(div.getDgSeikatsuhogoRireki().getSelectedItems().get(0).getRowState())) {
+            div.setState(表示モード_新規);
+        }
         getHandler(div).onbtn_HiyuoJi(表示モード_修正);
         return ResponseData.of(div).respond();
     }
@@ -57,6 +60,9 @@ public class SeikatsuhogoRireki {
      * @return ResponseData<SeikatsuhogoRirekiDiv>
      */
     public ResponseData<SeikatsuhogoRirekiDiv> onbtn_Delete(SeikatsuhogoRirekiDiv div) {
+        if (RowState.Added.equals(div.getDgSeikatsuhogoRireki().getSelectedItems().get(0).getRowState())) {
+            div.setState(表示モード_新規);
+        }
         getHandler(div).onbtn_HiyuoJi(表示モード_削除);
         return ResponseData.of(div).respond();
     }
@@ -100,11 +106,22 @@ public class SeikatsuhogoRireki {
             dgRow.setTxtJukyuTeishiKikan(判定モデル.get受給停止期間());
             rowList.add(dgRow);
         } else if (表示モード_削除.equals(判定モデル.get表示モード())) {
+            List<dgSeikatsuhogoRireki_Row> dgList = div.getDgSeikatsuhogoRireki().getDataSource();
             dgSeikatsuhogoRireki_Row dgRow = div.getDgSeikatsuhogoRireki().getSelectedItems().get(0);
-            dgRow.setRowState(RowState.Deleted);
+            if (表示モード_新規.equals(div.getState())) {
+                dgList.remove(dgRow);
+                div.setState(RString.EMPTY);
+            } else {
+                dgRow.setRowState(RowState.Deleted);
+            }
         } else if (表示モード_修正.equals(判定モデル.get表示モード())) {
             dgSeikatsuhogoRireki_Row dgRow = div.getDgSeikatsuhogoRireki().getSelectedItems().get(0);
-            dgRow.setRowState(RowState.Modified);
+            if (表示モード_新規.equals(div.getState())) {
+                dgRow.setRowState(RowState.Added);
+                div.setState(RString.EMPTY);
+            } else {
+                dgRow.setRowState(RowState.Modified);
+            }
             dgRow.getTxtJukyushaNo().setValue(判定モデル.get受給者番号());
             dgRow.getTxtKaishiYMD().setValue(判定モデル.get受給開始日());
             dgRow.getTxtHaishiYMD().setValue(判定モデル.get受給廃止日());

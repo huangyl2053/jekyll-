@@ -44,7 +44,6 @@ public class InsKyufuJissekiChukanKogakuTmpProcess2 extends BatchProcessBase<Kyu
 
     @Override
     protected void beforeExecute() {
-        super.beforeExecute();
     }
 
     @Override

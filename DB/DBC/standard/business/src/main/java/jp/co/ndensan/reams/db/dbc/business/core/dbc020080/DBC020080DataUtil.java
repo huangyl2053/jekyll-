@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -16,8 +17,16 @@ import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.DBC020080ProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.SetFutangakuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc020080.DBC020080ShoriKekkaCSVEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3071KogakuGassanJikoFutanGakuMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3170JigyoKogakuGassanJikoFutanGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.CalcKogakuShikyugakuRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080ShoriKekkaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080TaishoDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.JissekiFutangakuDataTempEntity;
@@ -27,6 +36,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
@@ -42,6 +52,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -66,20 +77,30 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class DBC020080DataUtil {
 
-    private static final int ERRORINDEX = -1;
+    private static final int ERRORLISTINDEX = -1;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_8 = 8;
-    private static final int NUM_15 = 15;
     private static final int NUM_70 = 70;
     private static final int NUM_75 = 75;
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_15 = 15;
+    private static final int INDEX_16 = 16;
+    private static final RString 定数_受付年月 = new RString("1");
+    private static final RString 平成20年度 = new RString("2008");
+    private static final RString 審査依頼 = new RString("1");
+    private static final RString 審査済み = new RString("2");
+    private static final RString 支給 = new RString("1");
+    private static final RString 不支給 = new RString("2");
     private static final RString INITSERVICETEIKYOYMS = new RString("0000000000000000");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
     private static final RString LINE = new RString("|");
+    private static final RString GET = new RString("get");
     private static final RString SET = new RString("set");
     private static final RString JIKOFUTANGAKU = new RString("JikoFutanGaku");
     private static final RString UCHISU_70_74JIKOFUTANGAKU = new RString("Uchisu_70_74JikoFutanGaku");
@@ -127,7 +148,6 @@ public class DBC020080DataUtil {
     private static final RString 処理名 = new RString("処理名");
     private static final RString 証記載保険者番号 = new RString("証記載保険者番号");
     private static final RString 被保険者番号 = new RString("被保険者番号");
-    private static final RString 被保険者カナ氏名 = new RString("被保険者カナ氏名");
     private static final RString 被保険者氏名 = new RString("被保険者氏名");
     private static final RString エラー内容 = new RString("エラー内容");
     private static final RString 備考 = new RString("備考");
@@ -344,7 +364,7 @@ public class DBC020080DataUtil {
         RString suffix = suffixList.get(index);
         Method method;
         try {
-            method = CLS.getMethod(SET.concat(tokenGet).concat(suffix).toString());
+            method = CLS.getMethod(GET.concat(tokenGet).concat(suffix).toString());
             Decimal dec = (Decimal) method.invoke(実績負担額);
             method = CLS.getMethod(SET.concat(tokenSet).concat(suffix).toString(), DECIMALCLS);
             method.invoke(実績負担額, dec);
@@ -357,7 +377,7 @@ public class DBC020080DataUtil {
         Method method;
         try {
             for (RString suffix : suffixList) {
-                method = CLS.getMethod(SET.concat(tokenGet).concat(suffix).toString());
+                method = CLS.getMethod(GET.concat(tokenGet).concat(suffix).toString());
                 Decimal dec = (Decimal) method.invoke(実績負担額);
                 method = CLS.getMethod(SET.concat(tokenSet).concat(suffix).toString(), DECIMALCLS);
                 method.invoke(実績負担額, dec);
@@ -371,7 +391,7 @@ public class DBC020080DataUtil {
         Method method;
         try {
             for (RString suffix : suffixList) {
-                method = CLS.getMethod(SET.concat(tokenGet).concat(suffix).toString());
+                method = CLS.getMethod(GET.concat(tokenGet).concat(suffix).toString());
                 RString str = (RString) method.invoke(実績負担額);
                 method = CLS.getMethod(SET.concat(tokenSet).concat(suffix).toString(), RSTRINGCLS);
                 method.invoke(実績負担額, str);
@@ -386,7 +406,7 @@ public class DBC020080DataUtil {
         Method method;
         try {
             for (RString suffix : suffixList) {
-                method = CLS.getMethod(SET.concat(tokenGet).concat(suffix).toString());
+                method = CLS.getMethod(GET.concat(tokenGet).concat(suffix).toString());
                 Decimal dec = (Decimal) method.invoke(実績負担額Get);
                 method = CLS.getMethod(SET.concat(tokenSet).concat(suffix).toString(), DECIMALCLS);
                 method.invoke(実績負担額Set, dec);
@@ -401,7 +421,7 @@ public class DBC020080DataUtil {
         Method method;
         try {
             for (RString suffix : suffixList) {
-                method = CLS.getMethod(SET.concat(tokenGet).concat(suffix).toString());
+                method = CLS.getMethod(GET.concat(tokenGet).concat(suffix).toString());
                 Decimal dec = (Decimal) method.invoke(実績負担額Get);
                 sum = sum.add(dec);
             }
@@ -416,7 +436,7 @@ public class DBC020080DataUtil {
         Method method;
         try {
             for (RString suffix : suffixList) {
-                method = CLS.getMethod(SET.concat(tokenGet).concat(suffix).toString());
+                method = CLS.getMethod(GET.concat(tokenGet).concat(suffix).toString());
                 RString str = (RString) method.invoke(実績負担額Get);
                 method = CLS.getMethod(SET.concat(tokenSet).concat(suffix).toString(), RSTRINGCLS);
                 method.invoke(実績負担額Set, str);
@@ -426,39 +446,51 @@ public class DBC020080DataUtil {
         }
     }
 
+    private Decimal getDecimalFromToken(JissekiFutangakuDataTempEntity 実績負担額, RString tokenGet, RString suffix) {
+        Method method;
+        Decimal dec = Decimal.ZERO;
+        try {
+            method = CLS.getMethod(GET.concat(tokenGet).concat(suffix).toString());
+            dec = (Decimal) method.invoke(実績負担額);
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dec;
+    }
+
+    private RString getRStringFromToken(JissekiFutangakuDataTempEntity 実績負担額, RString tokenGet, RString suffix) {
+        Method method;
+        RString str = RString.EMPTY;
+        try {
+            method = CLS.getMethod(GET.concat(tokenGet).concat(suffix).toString());
+            str = (RString) method.invoke(実績負担額);
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
+        }
+        return str;
+    }
+
     /**
      * 処理結果リスト一時表のデータを取得のメソッドです。
      *
      * @param entity DBC020080TaishoDataEntity
-     * @param errorType KaigoGassan_ErrorListType
+     * @param errorKubun KaigoGassan_ErrorListType
      * @return JissekiFutangakuDataTempEntity
      */
     public DBC020080ShoriKekkaTempEntity toShoriKekkaTempEntity(
-            JissekiFutangakuDataTempEntity entity, KaigoGassan_ErrorListType errorType) {
+            JissekiFutangakuDataTempEntity entity, KaigoGassan_ErrorKubun errorKubun) {
         DBC020080ShoriKekkaTempEntity result = new DBC020080ShoriKekkaTempEntity();
-        result.setErrorKubun(errorType.getコード());
+        result.setErrorKubun(errorKubun.getCode());
         result.setShoHokenshaNo(nonullRStr(entity.getHokenshaNo()));
         result.setHihokenshaNo(nonullRStr(entity.getHihokenshaNo()));
-        result.setHihokenshaKanaShimei(nonullRStr(entity.getHihokenshaShimeiKana()));
         result.setHihokenshaShimei(nonullRStr(entity.getHihokenshaShimei()));
         result.setKey1(nonullRStr(entity.getHihokenshaNo()));
-        if (KaigoGassan_ErrorListType.リストタイプ2.equals(errorType)) {
+        if (KaigoGassan_ErrorKubun.高額支給額集計エラー.equals(errorKubun)) {
             result.setKey2(entity.getTaishoNendo());
         }
         result.setKey3(RString.EMPTY);
         result.setKey4(RString.EMPTY);
         result.setKey5(RString.EMPTY);
-        KaigoGassan_ErrorKubun errorKubun;
-        if (KaigoGassan_ErrorListType.リストタイプ0.equals(errorType)) {
-            errorKubun = KaigoGassan_ErrorKubun.被保険者情報取得エラー;
-        } else if (KaigoGassan_ErrorListType.リストタイプ3.equals(errorType)) {
-            errorKubun = KaigoGassan_ErrorKubun.資格期間エラー;
-        } else if (KaigoGassan_ErrorListType.リストタイプ2.equals(errorType)) {
-            errorKubun = KaigoGassan_ErrorKubun.高額支給額集計エラー;
-        } else {
-            errorKubun = KaigoGassan_ErrorKubun.宛名取得エラー;
-        }
-        result.setErrorNaiyo(errorKubun.getキー1());
         result.setBiko(errorKubun.getキー2());
         return result;
     }
@@ -507,7 +539,8 @@ public class DBC020080DataUtil {
     }
 
     /**
-     * getErrorMessageのメソッドです。
+     * getErrorMessageのメソッドです。 <br/>
+     * TODO QA
      *
      * @param 実績負担額 JissekiFutangakuDataTempEntity
      * @return RString
@@ -547,7 +580,7 @@ public class DBC020080DataUtil {
         if (!judgeAgeLessThan75(実績負担額)) {
             return false;
         }
-        List<Integer> indexs = getSuffixIndexs(実績負担額);
+        List<Integer> indexs = getSuffixIndexs(実績負担額.getServiceTeikyoYMs());
         if (indexs.isEmpty()) {
             return false;
         }
@@ -617,7 +650,7 @@ public class DBC020080DataUtil {
     }
 
     private FlexibleYearMonth getYMFromIndex(int index, FlexibleYear taishoNendo) {
-        if (index == ERRORINDEX) {
+        if (index == ERRORLISTINDEX) {
             return null;
         }
         RString suffix = suffixList.get(index);
@@ -626,13 +659,12 @@ public class DBC020080DataUtil {
         return new FlexibleYearMonth(年.toDateString().concat(月));
     }
 
-    private List<Integer> getSuffixIndexs(JissekiFutangakuDataTempEntity 実績負担額) {
+    private List<Integer> getSuffixIndexs(RString サービス提供年月s) {
         List<Integer> indexs = new ArrayList<>();
-        RString yms = 実績負担額.getServiceTeikyoYMs();
-        int index = ERRORINDEX;
-        for (int i = 0; i < yms.length(); i++) {
-            index = yms.indexOf(ONE, index + 1);
-            if (index == ERRORINDEX) {
+        int index = ERRORLISTINDEX;
+        for (int i = 0; i < サービス提供年月s.length(); i++) {
+            index = サービス提供年月s.indexOf(ONE, index + 1);
+            if (index == ERRORLISTINDEX) {
                 break;
             }
             indexs.add(index);
@@ -640,22 +672,6 @@ public class DBC020080DataUtil {
         return indexs;
     }
 
-//    private int getSuffixIndex(JissekiFutangakuDataTempEntity 実績負担額) {
-//        FlexibleYearMonth 翌月前日 = get70歳年齢到達日前日の翌月(実績負担額);
-//        int 翌月前日年 = 翌月前日.getYearValue();
-//        int 翌月前日月 = 翌月前日.getMonthValue();
-//        RString 対象年度 = 実績負担額.getTaishoNendo();
-//        boolean is翌年 = is翌年(対象年度, 翌月前日年);
-//        boolean is当年 = is当年(対象年度, 翌月前日年);
-//        if (!is当年 && !is翌年) {
-//            return ERRORINDEX;
-//        }
-//        int index = is当年 ? 翌月前日月 - NUM_4 : 翌月前日月 + NUM_8;
-//        if (index > NUM_15 || index < 0) {
-//            return ERRORINDEX;
-//        }
-//        return index;
-//    }
     private boolean judgeAgeLessThan75(JissekiFutangakuDataTempEntity 実績負担額) {
         RString umareYMD = 実績負担額.getUmareYMD();
         RString hihokenshaShuryoYMD = 実績負担額.getHihokenshaShuryoYMD();
@@ -673,8 +689,7 @@ public class DBC020080DataUtil {
         Calendar 前到達70翌月;
         前到達70翌月 = getRealDateCalendar(age);
         前到達70翌月.set(前到達70翌月.get(Calendar.YEAR), 前到達70翌月.get(Calendar.MONTH) + 1, 1);
-        FlexibleYearMonth ym = new FlexibleDate(前到達70翌月.get(Calendar.YEAR), 前到達70翌月.get(Calendar.MONTH), 1).getYearMonth();
-        return ym;
+        return new FlexibleDate(前到達70翌月.get(Calendar.YEAR), 前到達70翌月.get(Calendar.MONTH), 1).getYearMonth();
     }
 
     private Calendar getRealDateCalendar(FlexibleDate date) {
@@ -802,8 +817,8 @@ public class DBC020080DataUtil {
         if (該当する年月 == null) {
             return;
         }
-        int index = getSuffixIndex(insEntity.getTaishoNendo(), 該当する年月);
-        if (index == ERRORINDEX) {
+        int index = getSuffixListIndexFrom年月(insEntity.getTaishoNendo(), 該当する年月);
+        if (index == ERRORLISTINDEX) {
             return;
         }
         RString suffix = suffixList.get(index);
@@ -831,8 +846,8 @@ public class DBC020080DataUtil {
         if (RString.isNullOrEmpty(対象年度) || RString.isNullOrEmpty(該当する年月)) {
             return;
         }
-        int index = getSuffixIndex(対象年度, 該当する年月);
-        if (index == ERRORINDEX) {
+        int index = getSuffixListIndexFrom年月(対象年度, 該当する年月);
+        if (index == ERRORLISTINDEX) {
             return;
         }
         RStringBuilder ymsBuilder = new RStringBuilder(updEntity.getServiceTeikyoYMs());
@@ -856,12 +871,476 @@ public class DBC020080DataUtil {
     }
 
     /**
-     * init高額支給額ワークエリアのメソッドです。
+     * cal高額支給額加算額のメソッドです。
      *
-     * @param 実績負担額 JissekiFutangakuDataTempEntity
+     * @param entity CalcKogakuShikyugakuRelateEntity
+     * @param wK_KogakuShikyugaku List<Decimal>
+     * @return KogakuShikyugakuJoho
      */
-    public void init高額支給額ワークエリア(JissekiFutangakuDataTempEntity 実績負担額) {
-//        TODO QA
+    public KogakuShikyugakuJoho cal高額支給額加算額(CalcKogakuShikyugakuRelateEntity entity, List<Decimal> wK_KogakuShikyugaku) {
+        JissekiFutangakuDataTempEntity 実績負担額データEntity = entity.get実績負担額データEntity();
+        DbT3056KogakuShikyuShinseiEntity 支給申請Entity = entity.get支給申請Entity();
+        RString 対象年度 = 実績負担額データEntity.getTaishoNendo();
+        FlexibleYearMonth サービス提供年月 = 支給申請Entity.getServiceTeikyoYM();
+        if (サービス提供年月 == null || サービス提供年月.isEmpty()) {
+            return null;
+        }
+        int index = getSuffixListIndexFrom年月(対象年度, サービス提供年月.toDateString());
+        if (outOfBoundListIndex(index)) {
+            return null;
+        }
+        KogakuShikyugakuJoho joho = editor高額支給額加算額(entity);
+        wK_KogakuShikyugaku.set(index, addDecimalNonull(wK_KogakuShikyugaku.get(index), joho.get高額支給額加算額()));
+        return joho;
+    }
+
+    /**
+     * isマイナス値の月が存在のメソッドです。
+     *
+     * @param wK_KogakuShikyugaku List<Decimal>
+     * @return boolean
+     */
+    public boolean isマイナス値の月が存在(List<Decimal> wK_KogakuShikyugaku) {
+        for (Decimal 高額支給額 : wK_KogakuShikyugaku) {
+            if (nonullDecimal(高額支給額).compareTo(Decimal.ZERO) < 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * is１件でも存在するのメソッドです。
+     *
+     * @param 実績負担額データEntity JissekiFutangakuDataTempEntity
+     * @param wK_KogakuShikyugaku List<Decimal>
+     * @return boolean
+     */
+    public boolean is１件でも存在する(JissekiFutangakuDataTempEntity 実績負担額データEntity,
+            List<Decimal> wK_KogakuShikyugaku) {
+        Method method;
+        Decimal dec;
+        RString suffix;
+        try {
+            for (int index = 0; index < INDEX_16; index++) {
+                suffix = suffixList.get(index);
+                method = CLS.getMethod(GETSUMI_JIKOFUTANGAKU.concat(suffix).toString());
+                dec = (Decimal) method.invoke(実績負担額データEntity);
+                if (compareDecimalNonull(dec, wK_KogakuShikyugaku.get(index)) < 0) {
+                    return true;
+                }
+            }
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
+            Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    /**
+     * is警告判定有無のメソッドです。
+     *
+     * @param 実績負担額データEntity JissekiFutangakuDataTempEntity
+     * @return boolean
+     */
+    public boolean is警告判定有無(JissekiFutangakuDataTempEntity 実績負担額データEntity) {
+        Method method;
+        Decimal dec1;
+        Decimal dec2;
+        try {
+            for (RString suffix : suffixList) {
+                method = CLS.getMethod(GETSUMI_JIKOFUTANGAKU.concat(suffix).toString());
+                dec1 = (Decimal) method.invoke(実績負担額データEntity);
+                method = CLS.getMethod(GET.concat(SUMI_UNDER_70KOGAKUSHIKYUGAKU).concat(suffix).toString());
+                dec2 = (Decimal) method.invoke(実績負担額データEntity);
+                if (compareDecimalNonull(dec1, dec2) < 0) {
+                    return true;
+                }
+            }
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
+            Logger.getLogger(DATAUTILCLS.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    private KogakuShikyugakuJoho editor高額支給額加算額(CalcKogakuShikyugakuRelateEntity entity) {
+        DbT3057KogakuShikyuHanteiKekkaEntity 支給判定結果Entity = entity.get支給判定結果Entity();
+        DbT3058KogakuShikyuShinsaKetteiEntity 支給審査決定Entity = entity.get支給審査決定Entity();
+        DbT3055KogakuKyufuTaishoshaGokeiEntity 給付対象者合計Entity = entity.get給付対象者合計Entity();
+        RString 審査支払区分コード = 支給判定結果Entity.getShinsaHohoKubun();
+        Decimal 高額支給額加算額 = Decimal.ZERO;
+        boolean wKm_blnIchiranKBN1 = false;
+        boolean wKm_blnIchiranKBN2 = false;
+        if (RString.isNullOrEmpty(審査支払区分コード)) {
+            高額支給額加算額 = 給付対象者合計Entity.getKogakuShikyuGaku();
+            wKm_blnIchiranKBN1 = true;
+        } else if (審査依頼.equals(審査支払区分コード)) {
+            if (支給審査決定Entity.getShikyuKubunCode() == null
+                    && 支給.equals(支給判定結果Entity.getShikyuKubunCode())) {
+                高額支給額加算額 = 支給判定結果Entity.getShikyuKingaku();
+            } else if (支給審査決定Entity.getShikyuKubunCode() == null
+                    && 不支給.equals(支給判定結果Entity.getShikyuKubunCode())) {
+                高額支給額加算額 = Decimal.ZERO;
+            } else if (支給.equals(支給審査決定Entity.getShikyuKubunCode())) {
+                高額支給額加算額 = 支給審査決定Entity.getKogakuShikyuGaku();
+            } else if (不支給.equals(支給審査決定Entity.getShikyuKubunCode())) {
+                高額支給額加算額 = Decimal.ZERO;
+            }
+        } else if (審査済み.equals(審査支払区分コード)) {
+            if (支給.equals(支給判定結果Entity.getShikyuKubunCode())) {
+                高額支給額加算額 = 支給判定結果Entity.getShikyuKingaku();
+            } else if (不支給.equals(支給判定結果Entity.getShikyuKubunCode())) {
+                高額支給額加算額 = Decimal.ZERO;
+            }
+        }
+        高額支給額加算額 = nonullDecimal(高額支給額加算額);
+        if (高額支給額加算額.compareTo(Decimal.ZERO) < 0) {
+            高額支給額加算額 = Decimal.ZERO;
+            wKm_blnIchiranKBN2 = true;
+        }
+        KogakuShikyugakuJoho joho = new KogakuShikyugakuJoho();
+        joho.set高額支給額加算額(高額支給額加算額);
+        joho.setWKm_blnIchiranKBN1(wKm_blnIchiranKBN1);
+        joho.setWKm_blnIchiranKBN2(wKm_blnIchiranKBN2);
+        return joho;
+    }
+
+    /**
+     * hasSetFutangaku更新処理のメソッドです。
+     *
+     * @param entity JissekiFutangakuDataTempEntity
+     * @param 抽出対象自己負担基準額 Decimal
+     * @param parameter SetFutangakuProcessParameter
+     * @return boolean
+     */
+    public boolean hasSetFutangaku更新処理(JissekiFutangakuDataTempEntity entity,
+            Decimal 抽出対象自己負担基準額, SetFutangakuProcessParameter parameter) {
+        Decimal 補正済合計自己負担額 = entity.getSumi_Gokei_JikoFutanGaku();
+        Decimal 補正済合計70未満高額支給額 = entity.getSumi_Gokei_Under70KogakuShikyuGaku();
+        Decimal sub = subDecimalNonull(補正済合計自己負担額, 補正済合計70未満高額支給額);
+        RString 出力対象区分 = parameter.get出力対象区分();
+        boolean 事業分フラグ = parameter.is事業分フラグ();
+        return (sub.compareTo(抽出対象自己負担基準額) >= 0) && (!事業分フラグ || 定数_受付年月.equals(出力対象区分));
+    }
+
+    /**
+     * getIns高額合算自己負担額のメソッドです。
+     *
+     * @param 実績負担額データ JissekiFutangakuDataTempEntity
+     * @param entity DbT3070KogakuGassanJikoFutanGakuEntity
+     * @param is更新処理 boolean
+     * @return DbT3170JigyoKogakuGassanJikoFutanGakuEntity
+     */
+    public DbT3070KogakuGassanJikoFutanGakuEntity getIns高額合算自己負担額(
+            JissekiFutangakuDataTempEntity 実績負担額データ, DbT3070KogakuGassanJikoFutanGakuEntity entity, boolean is更新処理) {
+        if (!is更新処理) {
+            entity = new DbT3070KogakuGassanJikoFutanGakuEntity();
+            entity.setHihokenshaNo(setHihokenshaNoDataFromRString(実績負担額データ.getHihokenshaNo()));
+            entity.setTaishoNendo(setFlexibleYearDataFromRString(実績負担額データ.getTaishoNendo()));
+            entity.setHokenshaNo(setHokenshaNoDataFromRString(実績負担額データ.getHokenshaNo()));
+            entity.setShikyuShinseishoSeiriNo(実績負担額データ.getShikyuShinseishoSeiriNo());
+            entity.setRirekiNo(setintDataFromRString(実績負担額データ.getRirekiNo()));
+            entity.setHokenSeidoCode(実績負担額データ.getHokenSeidoCode());
+            entity.setHokenshaMei(実績負担額データ.getHokenshaMei());
+            entity.setKokuho_HihokenshaShoKigo(実績負担額データ.getKokuho_HihokenshaShoKigo());
+            entity.setHihokenshaShimeiKana(setAtenaKanaMeishoDataFromRString(実績負担額データ.getHihokenshaShimeiKana()));
+            entity.setHihokenshaShimei(setAtenaMeishoDataFromRString(実績負担額データ.getHihokenshaShimei()));
+            entity.setUmareYMD(setFlexibleDateDataFromRString(実績負担額データ.getUmareYMD()));
+            entity.setSeibetsuCode(setCodeDataFromRString(実績負担額データ.getSeibetsuCode()));
+            entity.setShotokuKubun(実績負担額データ.getShotokuKubun());
+            entity.setOver70_ShotokuKubun(実績負担額データ.getOver70_ShotokuKubun());
+            entity.setJikoFutanSeiriNo(実績負担額データ.getJikoFutanSeiriNo());
+            entity.setKoki_HokenshaNo(実績負担額データ.getKoki_HokenshaNo());
+            entity.setKoki_HihokenshaNo(実績負担額データ.getKoki_HihokenshaNo());
+            entity.setKokuho_HokenshaNo(実績負担額データ.getKokuho_HokenshaNo());
+            entity.setKokuho_HihokenshaShoNo(実績負担額データ.getKokuho_HihokenshaShoNo());
+            entity.setKokuho_KojinNo(実績負担額データ.getKokuho_KojinNo());
+            entity.setIdoKubun(実績負担額データ.getIdoKubun());
+            entity.setHoseiZumiSofuKubun(実績負担額データ.getHoseiZumiSofuKubun());
+            entity.setTaishoKeisanKaishiYMD(setFlexibleDateDataFromRString(実績負担額データ.getTaishoKeisanKaishiYMD()));
+            entity.setTaishoKeisanShuryoYMD(setFlexibleDateDataFromRString(実績負担額データ.getTaishoKeisanShuryoYMD()));
+            entity.setHihokenshaKaishiYMD(setFlexibleDateDataFromRString(実績負担額データ.getHihokenshaKaishiYMD()));
+            entity.setHihokenshaShuryoYMD(setFlexibleDateDataFromRString(実績負担額データ.getHihokenshaShuryoYMD()));
+            entity.setShinseiYMD(setFlexibleDateDataFromRString(実績負担額データ.getShinseiYMD()));
+            entity.setAtesakiShimei(setAtenaMeishoDataFromRString(実績負担額データ.getAtesakiShimei()));
+            entity.setAtesakiYubinNo(setYubinNoDataFromRString(実績負担額データ.getAtesakiYubinNo()));
+            entity.setAtesakiJusho(実績負担額データ.getAtesakiJusho());
+            entity.setMadoguchi_TaishoshaHanteiCode(実績負担額データ.getMadoguchi_TaishoshaHanteiCode());
+            entity.setShiharaiBasho(実績負担額データ.getShiharaiBasho());
+            entity.setShikaraiKaishiYMD(setFlexibleDateDataFromRString(実績負担額データ.getShikaraiKaishiYMD()));
+            entity.setShiharaiShuryoYMD(setFlexibleDateDataFromRString(実績負担額データ.getShiharaiShuryoYMD()));
+            entity.setHeichoNaiyo(RString.EMPTY);
+            entity.setShiharaiKaishiTime(実績負担額データ.getShikaraiKaishiYMDJikan());
+            entity.setShiharaiShuryoTime(実績負担額データ.getShiharaiShuryoYMDJikan());
+            entity.setBiko(実績負担額データ.getBiko());
+            entity.setDataSakuseiKubun(実績負担額データ.getDataSakuseiKubun());
+            entity.setKakunin_UketoriYM(setFlexibleYearMonthDataFromRString(実績負担額データ.getKakunin_UketoriYM()));
+            entity.setHoseiZumi_SofuYM(setFlexibleYearMonthDataFromRString(実績負担額データ.getHoseiZumi_SofuYM()));
+            entity.setShomeisho_UketoriYM(setFlexibleYearMonthDataFromRString(実績負担額データ.getShomeisho_UketoriYM()));
+            entity.setSaisoFlag(実績負担額データ.getSaisoFlag());
+            entity.setSofuTaishoGaiFlag(実績負担額データ.getSofuTaishoGaiFlag());
+            entity.setShomeiShoSakuseiYMD(setFlexibleDateDataFromRString(実績負担額データ.getShomeiShoSakuseiYMD()));
+            entity.setKoki_KokuhoShoriKubun(実績負担額データ.getKoki_KokuhoShoriKubun());
+            entity.setJikoFutangakuShomeishoRealHakkoFlag(実績負担額データ.getShomeiShoHakoflag());
+            entity.setRealHoseiJissiYMD(setFlexibleDateDataFromRString(実績負担額データ.getRealHoseiJissiYMD()));
+        }
+        set高額合算自己負担額(entity, 実績負担額データ);
+        return entity;
+    }
+
+    /**
+     * getIns高額合算自己負担額のメソッドです。
+     *
+     * @param 実績負担額データ JissekiFutangakuDataTempEntity
+     * @param entity DbT3170JigyoKogakuGassanJikoFutanGakuEntity
+     * @param is更新処理 boolean
+     * @return DbT3170JigyoKogakuGassanJikoFutanGakuEntity
+     */
+    public DbT3170JigyoKogakuGassanJikoFutanGakuEntity getIns高額合算自己負担額事業分(
+            JissekiFutangakuDataTempEntity 実績負担額データ, DbT3170JigyoKogakuGassanJikoFutanGakuEntity entity, boolean is更新処理) {
+        if (!is更新処理) {
+            entity = new DbT3170JigyoKogakuGassanJikoFutanGakuEntity();
+            entity.setHihokenshaNo(setHihokenshaNoDataFromRString(実績負担額データ.getHihokenshaNo()));
+            entity.setTaishoNendo(setFlexibleYearDataFromRString(実績負担額データ.getTaishoNendo()));
+            entity.setHokenshaNo(setHokenshaNoDataFromRString(実績負担額データ.getHokenshaNo()));
+            entity.setShikyuShinseishoSeiriNo(実績負担額データ.getShikyuShinseishoSeiriNo());
+            entity.setRirekiNo(setintDataFromRString(実績負担額データ.getRirekiNo()));
+            entity.setHokenSeidoCode(実績負担額データ.getHokenSeidoCode());
+            entity.setHokenshaMei(実績負担額データ.getHokenshaMei());
+            entity.setKokuho_HihokenshaShoKigo(実績負担額データ.getKokuho_HihokenshaShoKigo());
+            entity.setHihokenshaShimeiKana(setAtenaKanaMeishoDataFromRString(実績負担額データ.getHihokenshaShimeiKana()));
+            entity.setHihokenshaShimei(setAtenaMeishoDataFromRString(実績負担額データ.getHihokenshaShimei()));
+            entity.setUmareYMD(setFlexibleDateDataFromRString(実績負担額データ.getUmareYMD()));
+            entity.setSeibetsuCode(setCodeDataFromRString(実績負担額データ.getSeibetsuCode()));
+            entity.setShotokuKubun(実績負担額データ.getShotokuKubun());
+            entity.setOver70_ShotokuKubun(実績負担額データ.getOver70_ShotokuKubun());
+            entity.setJikoFutanSeiriNo(実績負担額データ.getJikoFutanSeiriNo());
+            entity.setKoki_HokenshaNo(実績負担額データ.getKoki_HokenshaNo());
+            entity.setKoki_HihokenshaNo(実績負担額データ.getKoki_HihokenshaNo());
+            entity.setKokuho_HokenshaNo(実績負担額データ.getKokuho_HokenshaNo());
+            entity.setKokuho_HihokenshaShoNo(実績負担額データ.getKokuho_HihokenshaShoNo());
+            entity.setKokuho_KojinNo(実績負担額データ.getKokuho_KojinNo());
+            entity.setIdoKubun(実績負担額データ.getIdoKubun());
+            entity.setHoseiZumiSofuKubun(実績負担額データ.getHoseiZumiSofuKubun());
+            entity.setTaishoKeisanKaishiYMD(setFlexibleDateDataFromRString(実績負担額データ.getTaishoKeisanKaishiYMD()));
+            entity.setTaishoKeisanShuryoYMD(setFlexibleDateDataFromRString(実績負担額データ.getTaishoKeisanShuryoYMD()));
+            entity.setHihokenshaKaishiYMD(setFlexibleDateDataFromRString(実績負担額データ.getHihokenshaKaishiYMD()));
+            entity.setHihokenshaShuryoYMD(setFlexibleDateDataFromRString(実績負担額データ.getHihokenshaShuryoYMD()));
+            entity.setShinseiYMD(setFlexibleDateDataFromRString(実績負担額データ.getShinseiYMD()));
+            entity.setAtesakiShimei(setAtenaMeishoDataFromRString(実績負担額データ.getAtesakiShimei()));
+            entity.setAtesakiYubinNo(setYubinNoDataFromRString(実績負担額データ.getAtesakiYubinNo()));
+            entity.setAtesakiJusho(実績負担額データ.getAtesakiJusho());
+            entity.setMadoguchi_TaishoshaHanteiCode(実績負担額データ.getMadoguchi_TaishoshaHanteiCode());
+            entity.setShiharaiBasho(実績負担額データ.getShiharaiBasho());
+            entity.setShikaraiKaishiYMD(setFlexibleDateDataFromRString(実績負担額データ.getShikaraiKaishiYMD()));
+            entity.setShiharaiShuryoYMD(setFlexibleDateDataFromRString(実績負担額データ.getShiharaiShuryoYMD()));
+            entity.setHeichoNaiyo(RString.EMPTY);
+            entity.setShiharaiKaishiTime(実績負担額データ.getShikaraiKaishiYMDJikan());
+            entity.setShiharaiShuryoTime(実績負担額データ.getShiharaiShuryoYMDJikan());
+            entity.setBiko(実績負担額データ.getBiko());
+            entity.setDataSakuseiKubun(実績負担額データ.getDataSakuseiKubun());
+            entity.setKakunin_UketoriYM(setFlexibleYearMonthDataFromRString(実績負担額データ.getKakunin_UketoriYM()));
+            entity.setHoseiZumi_SofuYM(setFlexibleYearMonthDataFromRString(実績負担額データ.getHoseiZumi_SofuYM()));
+            entity.setShomeisho_UketoriYM(setFlexibleYearMonthDataFromRString(実績負担額データ.getShomeisho_UketoriYM()));
+            entity.setSaisoFlag(実績負担額データ.getSaisoFlag());
+            entity.setSofuTaishoGaiFlag(実績負担額データ.getSofuTaishoGaiFlag());
+            entity.setShomeiShoSakuseiYMD(setFlexibleDateDataFromRString(実績負担額データ.getShomeiShoSakuseiYMD()));
+            entity.setKoki_KokuhoShoriKubun(実績負担額データ.getKoki_KokuhoShoriKubun());
+            entity.setJikoFutangakuShomeishoRealHakkoFlag(実績負担額データ.getShomeiShoHakoflag());
+            entity.setRealHoseiJissiYMD(setFlexibleDateDataFromRString(実績負担額データ.getRealHoseiJissiYMD()));
+            entity.setShoumeishoyouDataKubun(実績負担額データ.getDataKubun());
+        }
+        set高額合算自己負担額(entity, 実績負担額データ);
+        return entity;
+    }
+
+    private void set高額合算自己負担額(DbT3070KogakuGassanJikoFutanGakuEntity entity, JissekiFutangakuDataTempEntity 実績負担額データ) {
+        entity.setGokei_JikoFutanGaku(実績負担額データ.getGokei_JikoFutanGaku());
+        entity.setGokei_70_74JikoFutanGaku(実績負担額データ.getGokei_70_74JikoFutanGaku());
+        entity.setGokei_Under70KogakuShikyuGaku(実績負担額データ.getGokei_Under70KogakuShikyuGaku());
+        entity.setGokei_70_74KogakuShikyuGaku(実績負担額データ.getGokei_70_74KogakuShikyuGaku());
+        entity.setSumi_Gokei_JikoFutanGaku(実績負担額データ.getSumi_Gokei_JikoFutanGaku());
+        entity.setSumi_Gokei_70_74JikoFutanGaku(実績負担額データ.getSumi_Gokei_70_74JikoFutanGaku());
+        entity.setSumi_Gokei_Under70KogakuShikyuGaku(実績負担額データ.getSumi_Gokei_Under70KogakuShikyuGaku());
+        entity.setSumi_Gokei_70_74KogakuShikyuGaku(実績負担額データ.getSumi_Gokei_70_74KogakuShikyuGaku());
+        entity.setJikoFutanKeisanYMD(setFlexibleDateDataFromRString(実績負担額データ.getJikoFutanKeisanYMD2()));
+        entity.setBatchHoseiJissiYMD(setFlexibleDateDataFromRString(実績負担額データ.getBatchHoseiJissiYMD()));
+    }
+
+    private void set高額合算自己負担額(DbT3170JigyoKogakuGassanJikoFutanGakuEntity entity, JissekiFutangakuDataTempEntity 実績負担額データ) {
+        entity.setGokei_JikoFutanGaku(実績負担額データ.getGokei_JikoFutanGaku());
+        entity.setGokei_70_74JikoFutanGaku(実績負担額データ.getGokei_70_74JikoFutanGaku());
+        entity.setGokei_Under70KogakuShikyuGaku(実績負担額データ.getGokei_Under70KogakuShikyuGaku());
+        entity.setGokei_70_74KogakuShikyuGaku(実績負担額データ.getGokei_70_74KogakuShikyuGaku());
+        entity.setSumi_Gokei_JikoFutanGaku(実績負担額データ.getSumi_Gokei_JikoFutanGaku());
+        entity.setSumi_Gokei_70_74JikoFutanGaku(実績負担額データ.getSumi_Gokei_70_74JikoFutanGaku());
+        entity.setSumi_Gokei_Under70KogakuShikyuGaku(実績負担額データ.getSumi_Gokei_Under70KogakuShikyuGaku());
+        entity.setSumi_Gokei_70_74KogakuShikyuGaku(実績負担額データ.getSumi_Gokei_70_74KogakuShikyuGaku());
+        entity.setJikoFutanKeisanYMD(setFlexibleDateDataFromRString(実績負担額データ.getJikoFutanKeisanYMD2()));
+        entity.setBatchHoseiJissiYMD(setFlexibleDateDataFromRString(実績負担額データ.getBatchHoseiJissiYMD()));
+    }
+
+    /**
+     * getIns高額合算自己負担額のメソッドです。
+     *
+     * @param 実績負担額データ JissekiFutangakuDataTempEntity
+     * @param suffixListIndex int
+     * @return DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity
+     */
+    public List<DbT3071KogakuGassanJikoFutanGakuMeisaiEntity> getIns高額合算自己負担額明細(
+            JissekiFutangakuDataTempEntity 実績負担額データ, int suffixListIndex) {
+        List<DbT3071KogakuGassanJikoFutanGakuMeisaiEntity> insertEntities = new ArrayList<>();
+        DbT3071KogakuGassanJikoFutanGakuMeisaiEntity insertEntity = new DbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
+        int startIndex;
+        RString taishoNendo = 実績負担額データ.getTaishoNendo();
+        if (平成20年度.equals(実績負担額データ.getTaishoNendo())) {
+            startIndex = 0;
+        } else if (平成20年度.compareTo(taishoNendo) < 0) {
+            startIndex = INDEX_4;
+        } else {
+            return Collections.EMPTY_LIST;
+        }
+        for (int index = startIndex; index < suffixList.size(); index++) {
+            insertEntity.setHihokenshaNo(new HihokenshaNo(実績負担額データ.getHihokenshaNo()));
+            insertEntity.setTaishoNendo(new FlexibleYear(実績負担額データ.getTaishoNendo()));
+            insertEntity.setHokenshaNo(new HokenshaNo(実績負担額データ.getHokenshaNo()));
+            insertEntity.setShikyuShinseishoSeiriNo(実績負担額データ.getShikyuShinseishoSeiriNo());
+            insertEntity.setRirekiNo(1);
+            insertEntity.setTaishoM(suffixList.get(index));
+            set高額合算自己負担額明細項目(insertEntity, 実績負担額データ, index);
+        }
+        return insertEntities;
+    }
+
+    /**
+     * getIns高額合算自己負担額のメソッドです。
+     *
+     * @param 実績負担額データ JissekiFutangakuDataTempEntity
+     * @param suffixListIndex int
+     * @return DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity
+     */
+    public List<DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity> getIns高額合算自己負担額明細事業分(
+            JissekiFutangakuDataTempEntity 実績負担額データ, int suffixListIndex) {
+        List<DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity> insertEntities = new ArrayList<>();
+        DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity insertEntity = new DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity();
+        int startIndex;
+        RString taishoNendo = 実績負担額データ.getTaishoNendo();
+        if (平成20年度.equals(実績負担額データ.getTaishoNendo())) {
+            startIndex = 0;
+        } else if (平成20年度.compareTo(taishoNendo) < 0) {
+            startIndex = INDEX_4;
+        } else {
+            return Collections.EMPTY_LIST;
+        }
+        for (int index = startIndex; index < suffixList.size(); index++) {
+            insertEntity.setHihokenshaNo(new HihokenshaNo(実績負担額データ.getHihokenshaNo()));
+            insertEntity.setTaishoNendo(new FlexibleYear(実績負担額データ.getTaishoNendo()));
+            insertEntity.setHokenshaNo(new HokenshaNo(実績負担額データ.getHokenshaNo()));
+            insertEntity.setShikyuShinseishoSeiriNo(実績負担額データ.getShikyuShinseishoSeiriNo());
+            insertEntity.setRirekiNo(1);
+            insertEntity.setTaishoM(suffixList.get(index));
+            set高額合算自己負担額明細項目(insertEntity, 実績負担額データ, index);
+        }
+        return insertEntities;
+    }
+
+    private void set高額合算自己負担額明細項目(
+            DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity, JissekiFutangakuDataTempEntity 実績負担額データ, int index) {
+        entity.setJikoFutanGaku(getDecimalFromToken(実績負担額データ, JIKOFUTANGAKU, suffixList.get(index)));
+        entity.setUchisu_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, UCHISU_70_74JIKOFUTANGAKU, suffixList.get(index)));
+        entity.setUnder_70KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, UNDER_70KOGAKUSHIKYUGAKU, suffixList.get(index)));
+        entity.setOver_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, OVER_70_74KOGAKUSHIKYUGAKU, suffixList.get(index)));
+        entity.setTekiyo(getRStringFromToken(実績負担額データ, TEKIYO, suffixList.get(index)));
+        entity.setSumi_JikoFutanGaku(getDecimalFromToken(実績負担額データ, SUMI_JIKOFUTANGAKU, suffixList.get(index)));
+        entity.setSumi_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74JIKOFUTANGAKU, suffixList.get(index)));
+        entity.setSumi_under_70KogakuShikyuGaku(
+                getDecimalFromToken(実績負担額データ, SUMI_UNDER_70KOGAKUSHIKYUGAKU, suffixList.get(index)));
+        entity.setSumi_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74KOGAKUSHIKYUGAKU, suffixList.get(index)));
+        entity.setSumi_Tekiyo(getRStringFromToken(実績負担額データ, SUMI_TEKIYO, suffixList.get(index)));
+    }
+
+    private void set高額合算自己負担額明細項目(
+            DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity entity, JissekiFutangakuDataTempEntity 実績負担額データ, int index) {
+        entity.setJikoFutanGaku(getDecimalFromToken(実績負担額データ, JIKOFUTANGAKU, suffixList.get(index)));
+        entity.setUchisu_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, UCHISU_70_74JIKOFUTANGAKU, suffixList.get(index)));
+        entity.setUnder_70KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, UNDER_70KOGAKUSHIKYUGAKU, suffixList.get(index)));
+        entity.setOver_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, OVER_70_74KOGAKUSHIKYUGAKU, suffixList.get(index)));
+        entity.setTekiyo(getRStringFromToken(実績負担額データ, TEKIYO, suffixList.get(index)));
+        entity.setSumi_JikoFutanGaku(getDecimalFromToken(実績負担額データ, SUMI_JIKOFUTANGAKU, suffixList.get(index)));
+        entity.setSumi_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74JIKOFUTANGAKU, suffixList.get(index)));
+        entity.setSumi_under_70KogakuShikyuGaku(
+                getDecimalFromToken(実績負担額データ, SUMI_UNDER_70KOGAKUSHIKYUGAKU, suffixList.get(index)));
+        entity.setSumi_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74KOGAKUSHIKYUGAKU, suffixList.get(index)));
+        entity.setSumi_Tekiyo(getRStringFromToken(実績負担額データ, SUMI_TEKIYO, suffixList.get(index)));
+    }
+
+    private HihokenshaNo setHihokenshaNoDataFromRString(RString data) {
+        if (RString.isNullOrEmpty(data)) {
+            return HihokenshaNo.EMPTY;
+        }
+        return new HihokenshaNo(data);
+    }
+
+    private FlexibleYear setFlexibleYearDataFromRString(RString data) {
+        if (RString.isNullOrEmpty(data)) {
+            return null;
+        }
+        return new FlexibleYear(data);
+    }
+
+    private HokenshaNo setHokenshaNoDataFromRString(RString data) {
+        if (RString.isNullOrEmpty(data)) {
+            return HokenshaNo.EMPTY;
+        }
+        return new HokenshaNo(data);
+    }
+
+    private int setintDataFromRString(RString data) {
+        if (RString.isNullOrEmpty(data)) {
+            return 0;
+        }
+        return Integer.parseInt(data.toString());
+    }
+
+    private AtenaKanaMeisho setAtenaKanaMeishoDataFromRString(RString data) {
+        if (RString.isNullOrEmpty(data)) {
+            return null;
+        }
+        return new AtenaKanaMeisho(data);
+    }
+
+    private AtenaMeisho setAtenaMeishoDataFromRString(RString data) {
+        if (RString.isNullOrEmpty(data)) {
+            return null;
+        }
+        return new AtenaMeisho(data);
+    }
+
+    private FlexibleDate setFlexibleDateDataFromRString(RString data) {
+        if (RString.isNullOrEmpty(data)) {
+            return null;
+        }
+        return new FlexibleDate(data);
+    }
+
+    private Code setCodeDataFromRString(RString data) {
+        if (RString.isNullOrEmpty(data)) {
+            return null;
+        }
+        return new Code(data);
+    }
+
+    private YubinNo setYubinNoDataFromRString(RString data) {
+        if (RString.isNullOrEmpty(data)) {
+            return null;
+        }
+        return new YubinNo(data);
+    }
+
+    private FlexibleYearMonth setFlexibleYearMonthDataFromRString(RString data) {
+        if (RString.isNullOrEmpty(data)) {
+            return null;
+        }
+        return new FlexibleYearMonth(data);
     }
 
     /**
@@ -888,21 +1367,21 @@ public class DBC020080DataUtil {
         return 該当SuffixList;
     }
 
-    private int getSuffixIndex(RString 対象年度, RString 該当する年月) {
+    private int getSuffixListIndexFrom年月(RString 対象年度, RString 該当する年月) {
         if (RString.isNullOrEmpty(対象年度) || RString.isNullOrEmpty(該当する年月)) {
-            return ERRORINDEX;
+            return ERRORLISTINDEX;
         }
         int 該当する月 = Integer.parseInt(該当する年月.substring(NUM_4, NUM_6).toString());
         RString 該当する年 = 該当する年月.substring(0, NUM_4);
         boolean is当年 = is当年(該当する年, 対象年度);
         boolean is翌年 = is翌年(該当する年, 対象年度);
         if (!is当年 && !is翌年) {
-            return ERRORINDEX;
+            return ERRORLISTINDEX;
 
         }
         int index = is当年 ? 該当する月 - NUM_4 : 該当する月 + NUM_8;
-        if (index < 0 || index > NUM_15) {
-            return ERRORINDEX;
+        if (outOfBoundListIndex(index)) {
+            return ERRORLISTINDEX;
         }
         return index;
     }
@@ -943,7 +1422,7 @@ public class DBC020080DataUtil {
         Decimal 高額支給額 = new Decimal(nonullRStr(entity.getGokei_Under70KogakuShikyuGaku()).toString());
         result.set自己負担額(自己負担額);
         result.set高額支給額(高額支給額);
-        result.setOneTwo(addDecimalNonull(自己負担額, 高額支給額));
+        result.setOneTwo(subDecimalNonull(自己負担額, 高額支給額));
         result.set自己負担額内数(nonullDecimal(entity.getGokei_70_74JikoFutanGaku()));
         result.set備考資格期間不正(entity.getIchiranBiko());
         result.set備考高額支給額確認データ(entity.getIchiranKakuninKubun());
@@ -1008,42 +1487,35 @@ public class DBC020080DataUtil {
      */
     public DBC020080ShoriKekkaCSVEntity toDBC020080ShoriKekkaCSVEntity(DBC020080ShoriKekkaTempEntity entity,
             boolean isTitle, boolean isFirst, DBC020080ProcessParameter parameter) {
-        KaigoGassan_ErrorListType errorType = KaigoGassan_ErrorListType.toValue(entity.getErrorKubun());
         if (isTitle) {
-            return getTitle(errorType);
+            return getTitle();
         }
         DBC020080ShoriKekkaCSVEntity result = new DBC020080ShoriKekkaCSVEntity();
         if (!isTitle && isFirst) {
             result.set作成日時(DateConverter.getDate12Time142(parameter.get処理日時()));
         }
-        result.set処理名(entity.getErrorKubun());
+        KaigoGassan_ErrorKubun errorKubun = KaigoGassan_ErrorKubun.toValue(entity.getErrorKubun());
+        result.set処理名(errorKubun.get名称());
         result.set証記載保険者番号(entity.getShoHokenshaNo());
         result.set被保険者番号(entity.getHihokenshaNo());
-        result.set被保険者カナ氏名(entity.getHihokenshaKanaShimei());
         result.set被保険者氏名(entity.getHihokenshaShimei());
         result.setキー1(entity.getKey1());
         result.setキー2(entity.getKey2());
-        result.setキー3(entity.getKey3());
-        result.setキー4(entity.getKey4());
-        result.setキー5(entity.getKey5());
-        result.setエラー内容(entity.getErrorNaiyo());
+        result.setエラー内容(errorKubun.getキー1());
         result.set備考(entity.getBiko());
         return result;
     }
 
-    private DBC020080ShoriKekkaCSVEntity getTitle(KaigoGassan_ErrorListType errorType) {
+    private DBC020080ShoriKekkaCSVEntity getTitle() {
         DBC020080ShoriKekkaCSVEntity title = new DBC020080ShoriKekkaCSVEntity();
         title.set作成日時(作成日時);
         title.set処理名(処理名);
         title.set証記載保険者番号(証記載保険者番号);
         title.set被保険者番号(被保険者番号);
-        title.set被保険者カナ氏名(被保険者カナ氏名);
         title.set被保険者氏名(被保険者氏名);
+        KaigoGassan_ErrorListType errorType = KaigoGassan_ErrorListType.リストタイプ2;
         title.setキー1(errorType.getキー1());
         title.setキー2(errorType.getキー2());
-        title.setキー3(errorType.getキー3());
-        title.setキー4(errorType.getキー4());
-        title.setキー5(errorType.getキー5());
         title.setエラー内容(エラー内容);
         title.set備考(備考);
         return title;
@@ -1192,18 +1664,20 @@ public class DBC020080DataUtil {
         return new Decimal(rstring.trim().toString());
     }
 
-    private Decimal nonullDecimal(Integer integer) {
-        if (integer == null) {
-            return Decimal.ZERO;
-        }
-        return new Decimal(integer);
-    }
-
-    private RString addDecimalNonull(RString dec1, Decimal dec2) {
-        return nonullRStr(nonullDecimal(dec2).add(nonullDecimal(dec1)));
-    }
-
     private Decimal addDecimalNonull(Decimal dec1, Decimal dec2) {
+        return nonullDecimal(dec1).add(nonullDecimal(dec2));
+    }
+
+    private Decimal subDecimalNonull(Decimal dec1, Decimal dec2) {
         return nonullDecimal(dec1).subtract(nonullDecimal(dec2));
     }
+
+    private int compareDecimalNonull(Decimal dec1, Decimal dec2) {
+        return nonullDecimal(dec1).compareTo(nonullDecimal(dec2));
+    }
+
+    private boolean outOfBoundListIndex(int listIndex) {
+        return listIndex < INDEX_0 || listIndex > INDEX_15;
+    }
+
 }

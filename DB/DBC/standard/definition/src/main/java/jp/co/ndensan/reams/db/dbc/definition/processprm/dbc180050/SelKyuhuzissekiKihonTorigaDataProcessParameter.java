@@ -26,8 +26,8 @@ public class SelKyuhuzissekiKihonTorigaDataProcessParameter implements IBatchPro
 
     /**
      *
-     * @param 抽出期間開始日時
-     * @param 抽出期間終了日時
+     * @param 抽出期間開始日時 RDateTime
+     * @param 抽出期間終了日時 RDateTime
      */
     public SelKyuhuzissekiKihonTorigaDataProcessParameter(RDateTime 抽出期間開始日時, RDateTime 抽出期間終了日時) {
 

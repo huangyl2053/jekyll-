@@ -125,12 +125,12 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
     private static final RString エラー内容_48 = new RString("資格・総合事業対象者整合性エラー");
     private static final RString エラーコード_49 = new RString("49");
     private static final RString エラー内容_49 = new RString("総合事業受給の終了日を事業対象者に登録してください");
-    private static final RString エラーコード_50 = new RString("50");
-    private static final RString エラー内容_50 = new RString("住所地特例者の施設情報に誤りがあります");
+//    private static final RString エラーコード_50 = new RString("50");
+//    private static final RString エラー内容_50 = new RString("住所地特例者の施設情報に誤りがあります");
     private static final RString エラーコード_51 = new RString("51");
     private static final RString エラー内容_51 = new RString("事業対象者：居宅計画サービス届出日エラー");
     private static final RString エラーあり = new RString("1");
-    private static final RString エラーなし = new RString("0");
+//    private static final RString エラーなし = new RString("0");
 
     private List<IdouTblEntity> 異動一時List;
     private int 履歴番号 = 1;
@@ -205,7 +205,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
             社会福祉法人軽減期間不整合Check(受給者台帳List, 被保険者台帳List, 社福減免List, 宛名情報);
             資格_総合事業対象者整合性Check(受給者台帳List, 被保険者台帳List, 総合事業対象者List, 宛名情報);
             総合事業受給の終了日Check(受給者台帳List, 被保険者台帳List, 総合事業対象者List, 宛名情報);
-            住所地特例者の施設情報Check(受給者台帳List, 被保険者台帳List, 住所地特例List, 宛名情報);
+//            住所地特例者の施設情報Check(受給者台帳List, 被保険者台帳List, 住所地特例List, 宛名情報);
             居宅計画サービス届出日Check(受給者台帳List, 被保険者台帳List, 総合事業対象者List, 居宅計画List, 宛名情報);
         }
         IdoTblTmpEntity idoTblTmpEntity = new IdoTblTmpEntity();
@@ -1110,10 +1110,10 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
         return true;
     }
 
-    private void 住所地特例者の施設情報Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
-            List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List, List<JushochitokureiInfoEntity> 住所地特例List,
-            PSMInfoEntity 宛名情報) {
-        //TODO QA
+//    private void 住所地特例者の施設情報Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
+//            List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List, List<JushochitokureiInfoEntity> 住所地特例List,
+//            PSMInfoEntity 宛名情報) {
+    //TODO QA
 //        if (受給者台帳List.isEmpty() || 被保険者台帳List.isEmpty() || 住所地特例List.isEmpty()) {
 //            return;
 //        }
@@ -1136,8 +1136,7 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
 //        if (hasError) {
 //            送付エラー新規18(受給者台帳List.get(ORDER_0), 被保険者台帳List.get(ORDER_0), 宛名情報);
 //        }
-    }
-
+//    }
     private void 居宅計画サービス届出日Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
             List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List, List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List,
             List<KyotakuEntity> 居宅計画List,
@@ -1167,8 +1166,8 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
                 if (isDateEmpty(居宅計画.get適用開始日()) || isDateEmpty(居宅計画.get届出年月日())) {
                     continue;
                 }
-                if (総合事業対象者entity.getTekiyoKaishiYMD().equals(居宅計画.get適用開始日())
-                        && 総合事業対象者entity.getTekiyoKaishiYMD().equals(居宅計画.get届出年月日())
+                if (isBeforeDate(総合事業対象者entity.getTekiyoKaishiYMD(), 居宅計画.get適用開始日())
+                        && isBeforeDate(総合事業対象者entity.getTekiyoKaishiYMD(), 居宅計画.get届出年月日())
                         && 区分_4.equals(居宅計画.get居宅サービス計画作成区分コード())) {
                     hasError = false;
                 }
@@ -1194,12 +1193,16 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
                 if (isDateEmpty(居宅計画.get適用開始日()) || isDateEmpty(居宅計画.get届出年月日())) {
                     continue;
                 }
-                RString 適用終了日 = new RString(総合事業対象者entity.getTekiyoShuryoYMD().toString());
-                if (総合事業対象者entity.getTekiyoKaishiYMD().equals(居宅計画.get適用開始日())
-                        && 総合事業対象者entity.getTekiyoKaishiYMD().equals(居宅計画.get届出年月日())
+                RString 適用終了日 = null;
+                FlexibleDate tekiyoShuryoYMD = 総合事業対象者entity.getTekiyoShuryoYMD();
+                if (tekiyoShuryoYMD != null) {
+                    適用終了日 = new RString(tekiyoShuryoYMD.toString());
+                }
+                if (isBeforeDate(総合事業対象者entity.getTekiyoKaishiYMD(), 居宅計画.get適用開始日())
+                        && isBeforeDate(総合事業対象者entity.getTekiyoKaishiYMD(), 居宅計画.get届出年月日())
                         && 区分_4.equals(居宅計画.get居宅サービス計画作成区分コード())
                         && MAX_DATE.equals(適用終了日)
-                        && 総合事業対象者entity.getTekiyoShuryoYMD().isBeforeOrEquals(居宅計画.get届出年月日())) {
+                        && isBeforeOrEqDate(総合事業対象者entity.getTekiyoShuryoYMD(), 居宅計画.get届出年月日())) {
                     hasError = false;
                 }
             }
@@ -1626,6 +1629,13 @@ public class InsShiharaihohoTemp1Process extends BatchProcessBase<IdouTblEntity>
     }
 
     private boolean isBeforeDate(FlexibleDate date1, FlexibleDate date2) {
+        if (isDateEmpty(date1) || isDateEmpty(date2)) {
+            return false;
+        }
+        return date1.isBefore(date2);
+    }
+
+    private boolean isBeforeOrEqDate(FlexibleDate date1, FlexibleDate date2) {
         if (isDateEmpty(date1) || isDateEmpty(date2)) {
             return false;
         }

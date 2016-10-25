@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 振込エラーリスト作成_Process処理クラスです．
@@ -43,7 +44,7 @@ public class FurikomiErrorListCreateProcess extends BatchProcessBase<FurikomiDet
 
     private static final int 先頭_作成日時_アカウント = 1;
     private static final RString 作成 = new RString("作成");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBU900002");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200099");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
 
@@ -71,7 +72,7 @@ public class FurikomiErrorListCreateProcess extends BatchProcessBase<FurikomiDet
     @Override
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBU900002_ShoriKekkaKakuninList.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("DBC200099_FurikomiErrorList.csv"));
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .alwaysWriteHeader(FurikomiErrorListCsvEntity.class)
                 .setEncode(Encode.SJIS)
@@ -132,11 +133,13 @@ public class FurikomiErrorListCreateProcess extends BatchProcessBase<FurikomiDet
     private RString editシステム作成日時() {
         StringBuilder builder = new StringBuilder();
 
-        FlexibleDate システム日付 = FlexibleDate.getNowDate();
-        RString 編集後日付 = システム日付.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+        RDateTime システム日時 = RDateTime.now();
+        RString 編集後日付 = システム日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
+        RString 作成時 = システム日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
 
         builder.append(編集後日付);
+        builder.append(作成時);
         builder.append(RString.FULL_SPACE);
         builder.append(作成);
         return new RString(builder.toString());

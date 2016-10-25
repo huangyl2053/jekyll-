@@ -50,4 +50,5 @@ public class KyokaisogGaitoshaRelateEntity implements IDbAccessable {
     private RString kanaShimei;
     private RString juminShubetsuCode;
     private RString juminJotaiCode;
+    private RString choikiCode;
 }

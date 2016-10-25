@@ -1066,7 +1066,7 @@
             "TempKyufujissekiTyukannJigyo"."toshiNo"
     </select>
     <resultMap id="高額介護サービス費支給判定結果と支給審査決定ResultMap" 
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_2Entity" autoMapping="true">
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity2" autoMapping="true">
         <association property="給付実績中間事業高額一時５"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempKyufujissekiTyukannJigyo"/>
         <association property="高額介護サービス費支給判定結果" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity"/>
@@ -1109,7 +1109,7 @@
             "TempKyufujissekiTyukannJigyo"."toshiNo"
     </select>
     <resultMap id="高額介護サービス費給付対象者合計ResultMap" 
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3Entity" autoMapping="true">
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufutaishoshatoroku.UpdKyufuJissekiChukanJigyoKogakuTmpProcessEntity3" autoMapping="true">
         <association property="給付実績中間事業高額一時５"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.IKogakuKaigoServicehiKyufugakuSanshutsuMapper.ResultMap_TempKyufujissekiTyukannJigyo"/>
         <association property="高額介護サービス費給付対象者合計" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3055KogakuKyufuTaishoshaGokeiEntity"/>
@@ -2566,34 +2566,49 @@
             resultMap="ResultMap_KogakuKaigoServicehiReportEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
             fetchSize="500">
-        SELECT   A."hiHokenshaNo" AS 被保険者番号,
-        A."shotokuHantei_shikibetsuCode" AS 識別コード,
-        A."serviceTeikyoYM" AS サービス提供年月,
-        A."shotokuHantei_setaiCode" AS 世帯コード,
-        A."hokenRiyoshaFutangaku" AS 利用者負担額,
-        '' AS 高額判定結果,
-        A."sikyugaku" AS 支給予定金額,
-        A."shotokuHantei_shichosonCode" AS 市町村コード,    
-        A."beikoKojinshotokuKubun" AS 備考欄個人所得区分,
-        A."shokisaiHokenshaNo" AS 証記載保険者番号,
+        WITH master AS
+        ( 
+            SELECT  
+                A."hiHokenshaNo" AS 被保険者番号,
+                A."shotokuHantei_shikibetsuCode" AS 識別コード,
+                A."serviceTeikyoYM" AS サービス提供年月,
+                A."shotokuHantei_setaiCode" AS 世帯コード,
+                A."hokenRiyoshaFutangaku" AS 利用者負担額,
+                '' AS 高額判定結果,
+                A."sikyugaku" AS 支給予定金額,
+                A."shotokuHantei_shichosonCode" AS 市町村コード,    
+                A."beikoKojinshotokuKubun" AS 備考欄個人所得区分,
+                A."shokisaiHokenshaNo" AS 証記載保険者番号,
+                C."yokaigoJotaiKubunCode" AS 要介護認定状態区分コード,
+                C."kyuSochishaFlag" AS 旧措置者フラグ,
+                C."ninteiYukoKikanKaishiYMD" AS 認定有効期間開始年月日,
+                C."ninteiYukoKikanShuryoYMD" AS 認定有効期間終了年月日
+            FROM 
+                "TempKyufujissekiTyukann5" AS A
+            INNER JOIN rgdb."DbT4001JukyushaDaicho" AS C
+            ON A."hiHokenshaNo" = C."hihokenshaNo"
+            WHERE 
+                C."yukoMukoKubun" = '1'
+            AND C."chokkinFlag" = true
+        )
+        SELECT 
+        master.*,
         "ShikibetsuTaisho"."meisho" AS 名称,
-        C."yokaigoJotaiKubunCode" AS 要介護認定状態区分コード,
-        C."kyuSochishaFlag" AS 旧措置者フラグ,
-        C."ninteiYukoKikanKaishiYMD" AS 認定有効期間開始年月日,
-        C."ninteiYukoKikanShuryoYMD" AS 認定有効期間終了年月日,
         "ShikibetsuTaisho"."kanaMeisho" AS カナ名称,
         "ShikibetsuTaisho"."yubinNo" AS 郵便番号,
         "ShikibetsuTaisho"."choikiCode" AS 町域コード,
         "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード
-        FROM "TempKyufujissekiTyukann9" AS A
-        INNER JOIN rgdb."DbT4001JukyushaDaicho" AS C
-        ON A."hiHokenshaNo" = C."hihokenshaNo"
+        FROM master
         LEFT OUTER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,'','','','',
         '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
-        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }') AS "ShikibetsuTaisho"
-        ON A."shotokuHantei_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
-        WHERE C."yukoMukoKubun" = '1'
-        AND C."chokkinFlag" = true
+        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', 
+        (
+             SELECT
+                   ARRAY_AGG(CAST (master.識別コード AS TEXT))
+             FROM
+                  master
+         )      ) AS "ShikibetsuTaisho" 
+        ON master.識別コード = "ShikibetsuTaisho"."shikibetsuCode"
         <if test="出力順 != null">
             ${出力順}
         </if>
@@ -2603,34 +2618,49 @@
             resultMap="ResultMap_KogakuKaigoServicehiReportEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter"
             fetchSize="500">
-        SELECT   A."hiHokenshaNo" AS 被保険者番号,
-        A."shotokuHantei_shikibetsuCode" AS 識別コード,
-        A."serviceTeikyoYM" AS サービス提供年月,
-        A."shotokuHantei_setaiCode" AS 世帯コード,
-        A."hokenRiyoshaFutangaku" AS 利用者負担額,
-        A."kogakuHanteiKekka" AS 高額判定結果,
-        A."sikyugaku" AS 支給予定金額,
-        A."shotokuHantei_shichosonCode" AS 市町村コード,
-        A."beikoKojinshotokuKubun" AS 備考欄個人所得区分,
-        A."shokisaiHokenshaNo" AS 証記載保険者番号,
-        C."yokaigoJotaiKubunCode" AS 要介護認定状態区分コード,
-        C."kyuSochishaFlag" AS 旧措置者フラグ,
-        C."ninteiYukoKikanKaishiYMD" AS 認定有効期間開始年月日,
-        C."ninteiYukoKikanShuryoYMD" AS 認定有効期間終了年月日,
-        "ShikibetsuTaisho"."meisho" AS 名称,
-        "ShikibetsuTaisho"."kanaMeisho" AS カナ名称,
-        "ShikibetsuTaisho"."yubinNo" AS 郵便番号,
-        "ShikibetsuTaisho"."choikiCode" AS 町域コード,
-        "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード
-        FROM "TempKyufujissekiTyukannJigyo9" AS A
-        INNER JOIN rgdb."DbT4001JukyushaDaicho" AS C
-        ON A."hiHokenshaNo" = C."hihokenshaNo"
+        WITH master AS
+         (
+            SELECT  
+               A."hiHokenshaNo" AS 被保険者番号,
+               A."shotokuHantei_shikibetsuCode" AS 識別コード,
+               A."serviceTeikyoYM" AS サービス提供年月,
+               A."shotokuHantei_setaiCode" AS 世帯コード,
+               A."hokenRiyoshaFutangaku" AS 利用者負担額,
+               A."kogakuHanteiKekka" AS 高額判定結果,
+               A."sikyugaku" AS 支給予定金額,
+               A."shotokuHantei_shichosonCode" AS 市町村コード,
+               A."beikoKojinshotokuKubun" AS 備考欄個人所得区分,
+               A."shokisaiHokenshaNo" AS 証記載保険者番号,
+               C."yokaigoJotaiKubunCode" AS 要介護認定状態区分コード,
+               C."kyuSochishaFlag" AS 旧措置者フラグ,
+               C."ninteiYukoKikanKaishiYMD" AS 認定有効期間開始年月日,
+               C."ninteiYukoKikanShuryoYMD" AS 認定有効期間終了年月日
+             FROM 
+               "TempKyufujissekiTyukannJigyo5" AS A
+             INNER JOIN rgdb."DbT4001JukyushaDaicho" AS C
+             ON A."hiHokenshaNo" = C."hihokenshaNo"
+             WHERE 
+                 C."yukoMukoKubun" = '1'
+             AND C."chokkinFlag" = true
+         )
+         SELECT 
+            master.*,
+            "ShikibetsuTaisho"."meisho" AS 名称,
+            "ShikibetsuTaisho"."kanaMeisho" AS カナ名称,
+            "ShikibetsuTaisho"."yubinNo" AS 郵便番号,
+            "ShikibetsuTaisho"."choikiCode" AS 町域コード,
+            "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード
+         FROM master
          LEFT OUTER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,'','','','',
-        '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
-        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }') AS "ShikibetsuTaisho"
-        ON A."shotokuHantei_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
-        WHERE C."yukoMukoKubun" = '1'
-        AND C."chokkinFlag" = true
+            '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
+            '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', 
+         (
+             SELECT
+                   ARRAY_AGG(CAST (master.識別コード AS TEXT))
+             FROM
+                  master
+         )      ) AS "ShikibetsuTaisho" 
+        ON master.識別コード = "ShikibetsuTaisho"."shikibetsuCode"
         <if test="出力順 != null">
             ${出力順}
         </if>
@@ -2638,44 +2668,71 @@
     
     <select resultOrdered="true" id="select高額介護サービス費判定エラーリスト"
             resultMap="ResultMap_HanteiEraaResultEntity" fetchSize="500">
-        SELECT A."hiHokenshaNo" AS 被保険者番号,
-        A."shikibetsuCode" AS  識別コード,
-        A."shichosonCode" AS 市町村コード,
-        A."serviceTeikyoYM" AS サービス提供年月,
-        A."eraaCode" AS エラーコード,
-        A."setaiCode" AS 世帯コード,
-        A."setaiinShikibetsuCode" AS 世帯員識別コード,
-        宛名."meisho" AS 被保険者名
-        FROM "TempKogakuHanteiEraa" AS A
-        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,'','',
+        WITH master AS
+        (
+            SELECT 
+                A."hiHokenshaNo" AS 被保険者番号,
+                A."shikibetsuCode" AS  識別コード,
+                A."shichosonCode" AS 市町村コード,
+                A."serviceTeikyoYM" AS サービス提供年月,
+                A."eraaCode" AS エラーコード,
+                A."setaiCode" AS 世帯コード,
+                A."setaiinShikibetsuCode" AS 世帯員識別コード
+             FROM 
+                "TempKogakuHanteiEraa" AS A
+        )
+        SELECT 
+        master.*,
+        "ShikibetsuTaisho"."meisho" AS 被保険者名
+        FROM master
+            INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,'','',
         '','','','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
-        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{ }') AS 宛名
-        ON A."shikibetsuCode" = 宛名."shikibetsuCode"
-        ORDER BY A."hiHokenshaNo" ASC,
-                 A."shikibetsuCode" ASC,
-                 A."eraaCode" ASC,
-                 A."setaiCode" ASC
+        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', 
+        (
+             SELECT
+                   ARRAY_AGG(CAST (master.識別コード AS TEXT))
+             FROM
+                  master
+         )      ) AS "ShikibetsuTaisho" 
+        ON master.識別コード = "ShikibetsuTaisho"."shikibetsuCode"
+        ORDER BY master.被保険者番号 ASC,
+                 master.識別コード ASC,
+                 master.エラーコード ASC,
+                 master.世帯コード ASC
     </select> 
     
      <select resultOrdered="true" id="select高額総合事業サービス費判定エラーリスト"
             resultMap="ResultMap_HanteiEraaResultEntity" fetchSize="500">
-        SELECT A."hiHokenshaNo" AS 被保険者番号,
-        A."shikibetsuCode" AS  識別コード,
-        A."shichosonCode" AS 市町村コード,
-        A."serviceTeikyoYM" AS サービス提供年月,
-        A."eraaCode" AS エラーコード,
-        A."setaiCode" AS 世帯コード,
-        A."setaiinShikibetsuCode" AS 世帯員識別コード,
-        宛名."meisho" AS 被保険者名
-        FROM "TempJigyoKogakuHanteiEraa" AS A
-        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,'','',
+        WITH master AS
+         (
+            SELECT 
+               A."hiHokenshaNo" AS 被保険者番号,
+               A."shikibetsuCode" AS  識別コード,
+               A."shichosonCode" AS 市町村コード,
+               A."serviceTeikyoYM" AS サービス提供年月,
+               A."eraaCode" AS エラーコード,
+               A."setaiCode" AS 世帯コード,
+               A."setaiinShikibetsuCode" AS 世帯員識別コード
+             FROM 
+               "TempJigyoKogakuHanteiEraa" AS A
+         )
+         SELECT 
+         master.*,
+         "ShikibetsuTaisho"."meisho" AS 被保険者名
+         FROM master
+            INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,'','',
         '','','','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
-        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{ }') AS 宛名
-        ON A."shikibetsuCode" = 宛名."shikibetsuCode"
-        ORDER BY A."hiHokenshaNo" ASC,
-                 A."shikibetsuCode" ASC,
-                 A."eraaCode" ASC,
-                 A."setaiCode" ASC
+        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', (
+             SELECT
+                   ARRAY_AGG(CAST (master.識別コード AS TEXT))
+             FROM
+                  master
+         )      ) AS "ShikibetsuTaisho" 
+        ON master.識別コード = "ShikibetsuTaisho"."shikibetsuCode"
+        ORDER BY master.被保険者番号 ASC,
+                 master.識別コード ASC,
+                 master.エラーコード ASC,
+                 master.世帯コード ASC
     </select> 
     
    <resultMap id="ResultMap_KogakuFlowReturnEntity" 

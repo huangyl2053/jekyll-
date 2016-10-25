@@ -190,7 +190,11 @@ public class SeikatsuhogoDetailHandler {
         if (!RString.isNullOrEmpty(停止終了日.toRString())) {
             停止終了日.toRString().remove(停止終了日.length() - 1);
         }
-        dataModel.set受給停止期間(停止開始日.append(カラ).append(停止終了日.toRString()).toRString());
+        RString 受給期間 = 停止開始日.append(カラ).append(停止終了日.toRString()).toRString();
+        if (カラ.equals(受給期間.toString())) {
+            受給期間 = RString.EMPTY;
+        }
+        dataModel.set受給停止期間(受給期間);
         div.setHdnDataPass(DataPassingConverter.serialize(dataModel));
     }
 

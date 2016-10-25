@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ErrordataIchijiTeburubusiness {
 
-    private final static int NUM_2 = 2;
+    private static final int NUM_2 = 2;
     private RString エラーメッセージ;
 
     /**
@@ -35,104 +35,62 @@ public class ErrordataIchijiTeburubusiness {
     public void editErrordata(RString errormessage, List<RString> list, ErrordataIchijiTeburuEntity entity) {
         int index = NUM_2;
         エラーメッセージ = errormessage;
-        if (!list.get(index++).isNullOrEmpty()) {
+        if (!list.get(index++).isNull()) {
             entity.setShikibetsukodo(list.get(index - 1));
         } else {
             entity.setShikibetsukodo(RString.EMPTY);
         }
-        if (!list.get(index++).isNullOrEmpty()) {
+        if (!list.get(index++).isNull()) {
             entity.setHokenshabango(list.get(index - 1));
         } else {
             entity.setHokenshabango(RString.EMPTY);
         }
-        if (!list.get(index++).isNullOrEmpty()) {
+        if (!list.get(index++).isNull()) {
             entity.setHihokenjabango(list.get(index - 1));
         } else {
             entity.setHihokenjabango(RString.EMPTY);
         }
-        if (!list.get(index++).isNullOrEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setNinteishinseibi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setNinteishinseibi(FlexibleDate.EMPTY);
         }
-        if (!list.get(index++).isNullOrEmpty()) {
+        if (!list.get(index++).isNull()) {
             entity.setEdaban(list.get(index - 1));
         } else {
             entity.setEdaban(RString.EMPTY);
         }
-        if (!list.get(index++).isNullOrEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setShinseikubunhorei(new Code(list.get(index - 1)));
         } else {
             entity.setShinseikubunhorei(Code.EMPTY);
         }
-        if (!list.get(index++).isNullOrEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setShinseikubunshinseiji(new Code(list.get(index - 1)));
         } else {
             entity.setShinseikubunshinseiji(Code.EMPTY);
         }
-        if (!list.get(index++).isNullOrEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setTorisakubunkodo(new Code(list.get(index - 1)));
         } else {
             entity.setTorisakubunkodo(Code.EMPTY);
         }
-        if (!list.get(index++).isNullOrEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setHihokenjakubun(new Code(list.get(index - 1)));
         } else {
             entity.setHihokenjakubun(Code.EMPTY);
         }
-        if (!list.get(index++).isNullOrEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setShinseidaikokubun(new Code(list.get(index - 1)));
         } else {
             entity.setShinseidaikokubun(Code.EMPTY);
         }
-        if (!list.get(index++).isNullOrEmpty()) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
             entity.setSeinengappi(new FlexibleDate(list.get(index - 1)));
         } else {
             entity.setSeinengappi(FlexibleDate.EMPTY);
         }
-        if (!list.get(index++).isNullOrEmpty()) {
-            entity.setNenrei(Integer.parseInt(list.get(index - 1).toString()));
-        }
-        if (!list.get(index++).isNullOrEmpty()) {
-            entity.setSeibetsukodo(new Code(list.get(index - 1)));
-        } else {
-            entity.setSeibetsukodo(Code.EMPTY);
-        }
-        if (!list.get(index++).isNullOrEmpty()) {
-            entity.setHihokenjakanashimei(new AtenaKanaMeisho(list.get(index - 1)));
-        } else {
-            entity.setHihokenjakanashimei(AtenaKanaMeisho.EMPTY);
-        }
-        if (!list.get(index++).isNullOrEmpty()) {
-            entity.setHihokenjakanjishimei(new AtenaMeisho(list.get(index - 1)));
-        } else {
-            entity.setHihokenjakanjishimei(AtenaMeisho.EMPTY);
-        }
-        if (!list.get(index++).isNullOrEmpty()) {
-            entity.setYubenbango(list.get(index - 1));
-        } else {
-            entity.setYubenbango(RString.EMPTY);
-        }
-        if (!list.get(index++).isNullOrEmpty()) {
-            entity.setJusho(new AtenaJusho(list.get(index - 1)));
-        } else {
-            entity.setJusho(AtenaJusho.EMPTY);
-        }
-        if (!list.get(index++).isNullOrEmpty()) {
-            entity.setTenwabango(list.get(index - 1));
-        } else {
-            entity.setTenwabango(RString.EMPTY);
-        }
-        if (!list.get(index++).isNullOrEmpty()) {
-            entity.setByoinshisetsutonomeisho(list.get(index - 1));
-        } else {
-            entity.setByoinshisetsutonomeisho(RString.EMPTY);
-        }
-        if (!list.get(index++).isNullOrEmpty()) {
-            entity.setByoinshisetsutonoshozaichi(list.get(index - 1));
-        } else {
-            entity.setByoinshisetsutonoshozaichi(RString.EMPTY);
-        }
+        editErrordata2(list, entity, index);
         entity.setEramesseji(エラーメッセージ);
     }
 
@@ -166,6 +124,52 @@ public class ErrordataIchijiTeburubusiness {
         entity.setByoinshisetsutonomeisho(hokouentity.get病院施設等の名称());
         entity.setByoinshisetsutonoshozaichi(hokouentity.get病院施設等の所在地());
         entity.setEramesseji(エラーメッセージ);
+    }
+
+    private void editErrordata2(List<RString> list, ErrordataIchijiTeburuEntity entity, int index) {
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
+            entity.setNenrei(Integer.parseInt(list.get(index - 1).toString()));
+        }
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
+            entity.setSeibetsukodo(new Code(list.get(index - 1)));
+        } else {
+            entity.setSeibetsukodo(Code.EMPTY);
+        }
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
+            entity.setHihokenjakanashimei(new AtenaKanaMeisho(list.get(index - 1)));
+        } else {
+            entity.setHihokenjakanashimei(AtenaKanaMeisho.EMPTY);
+        }
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
+            entity.setHihokenjakanjishimei(new AtenaMeisho(list.get(index - 1)));
+        } else {
+            entity.setHihokenjakanjishimei(AtenaMeisho.EMPTY);
+        }
+        if (!list.get(index++).isNull()) {
+            entity.setYubenbango(list.get(index - 1));
+        } else {
+            entity.setYubenbango(RString.EMPTY);
+        }
+        if (!list.get(index++).isNull() && !list.get(index - 1).isEmpty()) {
+            entity.setJusho(new AtenaJusho(list.get(index - 1)));
+        } else {
+            entity.setJusho(AtenaJusho.EMPTY);
+        }
+        if (!list.get(index++).isNull()) {
+            entity.setTenwabango(list.get(index - 1));
+        } else {
+            entity.setTenwabango(RString.EMPTY);
+        }
+        if (!list.get(index++).isNull()) {
+            entity.setByoinshisetsutonomeisho(list.get(index - 1));
+        } else {
+            entity.setByoinshisetsutonomeisho(RString.EMPTY);
+        }
+        if (!list.get(index++).isNull()) {
+            entity.setByoinshisetsutonoshozaichi(list.get(index - 1));
+        } else {
+            entity.setByoinshisetsutonoshozaichi(RString.EMPTY);
+        }
     }
 
 }

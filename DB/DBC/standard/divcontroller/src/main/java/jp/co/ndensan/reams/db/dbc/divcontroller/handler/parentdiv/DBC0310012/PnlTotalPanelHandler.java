@@ -7,8 +7,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0310012;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakushaBuilder;
+import jp.co.ndensan.reams.db.dbc.business.core.kaigokyufujuryoininkeiyakutoroku.KaigoKyufuJuryoininKeiyakuTorokuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ChkKeiyakuNoParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ChkTorokuzumiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuservice.KeiyakuServiceShurui;
@@ -17,7 +18,10 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310011.PnlTotalSearchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310012.PnlTotalPanelParameter;
+import jp.co.ndensan.reams.db.dbc.service.core.kaigokyufujuryoininkeiyakutoroku.KaigoKyufuJuryoininKeiyakuToroku;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
+import jp.co.ndensan.reams.db.dbc.service.report.jyuryoitakukeiyakukakuninsho.JyuryoItakuKeiyakuKakuninShoPrintService;
+import jp.co.ndensan.reams.db.dbc.service.report.jyuryoitakukeiyakukakuninshokeiyakujigyoshayo.JyuryoItakuKeiyakuKakuninShoKeiyakuPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -26,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -44,7 +47,6 @@ public class PnlTotalPanelHandler {
     private final PnlTotalPanelDiv div;
     private static final RString 参照 = new RString("参照");
     private static final RString 修正 = new RString("修正");
-    private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 保存する = new RString("btnUpdate");
     private static final RString 承認通知書再発行区分キー_0 = new RString("0");
@@ -577,103 +579,22 @@ public class PnlTotalPanelHandler {
     }
 
     /**
-     * 保存処理メソッド
+     * 帳票発行メソッドです。
      *
-     * @param 画面モード RString
-     * @param キー TaishoshaKey
-     * @param shokan ShokanJuryoininKeiyakusha
+     * @param 償還受領委任契約者 ShokanJuryoininKeiyakusha
      */
-    public void 保存処理(RString 画面モード, TaishoshaKey キー, ShokanJuryoininKeiyakusha shokan) {
+    public void publish帳票(ShokanJuryoininKeiyakusha 償還受領委任契約者) {
         ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
-        if (登録.equals(画面モード)) {
-            ShokanJuryoininKeiyakusha newShokan = new ShokanJuryoininKeiyakusha(
-                    キー.get被保険者番号(),
-                    new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
-                    div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
-                    div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey());
-            newShokan = build契約者情報(newShokan);
-            finder.insShokanJuryoininKeiyakusha(newShokan);
-        } else {
-            if (修正.equals(画面モード)) {
-                finder.updShokanJuryoininKeiyakusha(build契約者情報(shokan));
-            } else if (削除.equals(画面モード)) {
-                finder.delShokanJuryoininKeiyakusha(shokan);
-            }
+        JuryoininKeiyakuJigyosha 受領委任契約事業者 = finder.get受領委任契約事業者(償還受領委任契約者.get契約事業者番号());
+        if (受領委任契約事業者 == null) {
+            return;
         }
-    }
+        RString 文書番号 = div.getPnlMsgPrint().getPnlPrint().getCcdBunshoBangoInput().get文書番号();
+        KaigoKyufuJuryoininKeiyakuToroku toroku = KaigoKyufuJuryoininKeiyakuToroku.createInstance();
+        KaigoKyufuJuryoininKeiyakuTorokuResult result = toroku.setJuryoininShouninkakuninshoChouhyouSakusei(償還受領委任契約者,
+                受領委任契約事業者, 文書番号);
+        new JyuryoItakuKeiyakuKakuninShoPrintService().printSingle(result.get利用者向けEntity());
 
-    /**
-     * 契約者情報build
-     *
-     * @param shokan ShokanJuryoininKeiyakusha
-     * @return ShokanJuryoininKeiyakusha
-     */
-    private ShokanJuryoininKeiyakusha build契約者情報(ShokanJuryoininKeiyakusha shokan) {
-        ShokanJuryoininKeiyakushaBuilder builder = shokan.createBuilderForEdit();
-        builder.set受付年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi()
-                .getValue().toDateString()));
-        if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() == null) {
-            builder.set決定年月日(null);
-            builder.set承認結果区分(null);
-            builder.set受領委任払適用開始年月日(null);
-            builder.set契約番号(null);
-            builder.set不承認理由(null);
-            builder.set費用額合計(null);
-            builder.set保険対象費用額(null);
-            builder.set利用者自己負担額(null);
-            builder.set保険給付費額(null);
-        } else {
-            builder.set決定年月日(new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi()
-                    .getValue().toDateString()));
-            if (ShoninKubun.承認しない.getコード().equals(div.getPnlCommon().getPnlDetail()
-                    .getRdoKettekubun().getSelectedKey())) {
-                builder.set承認結果区分(null);
-                builder.set受領委任払適用開始年月日(null);
-                builder.set契約番号(null);
-                builder.set不承認理由(div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue());
-                builder.set費用額合計(null);
-                builder.set保険対象費用額(null);
-                builder.set利用者自己負担額(null);
-                builder.set保険給付費額(null);
-            } else if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
-                    .getRdoKettekubun().getSelectedKey())) {
-                builder.set承認結果区分(ShoninKubun.承認する.getコード());
-                builder.set受領委任払適用開始年月日(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan()
-                        .getFromValue() == null ? null : new FlexibleDate(div.getPnlCommon().getPnlDetail()
-                                .getPnlHidari().getTxtSyoninkikan().getFromValue().toDateString()));
-                builder.set受領委任払適用終了年月日(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan()
-                        .getToValue() == null ? null : new FlexibleDate(div.getPnlCommon().getPnlDetail().getPnlHidari()
-                                .getTxtSyoninkikan().getToValue().toDateString()));
-                RStringBuilder rsb = new RStringBuilder();
-                rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedValue());
-                rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue());
-                rsb.append(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue());
-                builder.set契約番号(rsb.toRString());
-                builder.set不承認理由(null);
-                builder.set承認結果通知書再発行区分(get承認結果通知書再発行区分());
-                builder.set費用額合計(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                        .getTxtHiyogakugokei().getValue());
-                builder.set保険対象費用額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                        .getTxtHokentaisyohiyogaku().getValue());
-                builder.set利用者自己負担額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                        .getTxtRiyosyajikofutangaku().getValue());
-                builder.set保険給付費額(div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
-                        .getTxtHokenkyufuhiyogaku().getValue());
-            }
-        }
-        if (div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtBikou().getValue().isNullOrEmpty()) {
-            builder.set備考(null);
-        } else {
-            builder.set備考(div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtBikou().getValue());
-        }
-        return builder.build();
-    }
-
-    private RString get承認結果通知書再発行区分() {
-        if (div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().isAllSelected()) {
-            return 承認通知書再発行区分キー_1;
-        } else {
-            return 承認通知書再発行区分キー_0;
-        }
+        new JyuryoItakuKeiyakuKakuninShoKeiyakuPrintService().printSingle(result.get事業者用Entity());
     }
 }

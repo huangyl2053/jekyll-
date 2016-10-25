@@ -690,6 +690,14 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
     }
 
     /**
+     * 支払方法タブ設定です。
+     *
+     */
+    public void release支払方法タブ() {
+        div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getTplShiharai().setDisabled(false);
+    }
+
+    /**
      * 支給区分連動の設定です。
      */
     public void set支給区分連動() {
@@ -1066,7 +1074,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         } else if (修正.equals(処理モデル)) {
             para.setKozaId(Long.parseLong(row.getKozaID().toString()));
             para.setHihokenshaNo(new HihokenshaNo(row.getHihokenshaNo()));
-            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 修正);
+            div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 登録);
         } else if (削除.equals(処理モデル) || 照会.equals(処理モデル)) {
             para.setHihokenshaNo(new HihokenshaNo(row.getHihokenshaNo()));
             para.setKozaId(Long.parseLong(row.getKozaID().toString()));

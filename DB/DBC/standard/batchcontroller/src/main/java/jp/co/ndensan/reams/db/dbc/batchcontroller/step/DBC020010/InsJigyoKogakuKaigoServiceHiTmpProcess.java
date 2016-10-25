@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020010;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
@@ -44,7 +43,6 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
     private static final RString TABLE_事業高額介護サービス費支給判定結果全件一時 = new RString("TempJigyoKogakuShikyuHanteiKekkaZen");
     private static final RString TABLE_事業高額介護サービス費支給審査決定全件一時 = new RString("TempJigyoKogakuShikyuShinsaKetteiZen");
     private static final RString TABLE_事業高額介護サービス費給付対象者合計全件一時 = new RString("TempJigyoKogakuKyufuTaishoshaGokeiZen");
-    private static final RString TABLE_事業高額介護サービス費給付対象者明細全件一時 = new RString("TempJigyoKogakuKyufuTaishoshaMeisaiZen");
     private static final RString TABLE_事業高額介護サービス費給付対象者明細全件更新一時 = new RString("TempJigyoKogakuKyufuTaishoshaMeisaiZenUpdate");
     private static final RString TABLE_給付実績中間事業高額一時9 = new RString("TempKyufujissekiTyukannJigyo9");
     private static final RString DELIMITER = new RString("～");
@@ -62,8 +60,6 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
     BatchEntityCreatedTempTableWriter 審査決定全件一時Writer;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 合計全件一時Writer;
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter 明細全件一時Writer;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 中間高額一時Writer;
     @BatchWriter
@@ -96,8 +92,6 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
                 TABLE_事業高額介護サービス費支給審査決定全件一時, DbT3112KogakuShikyuShinsaKetteiEntity.class);
         合計全件一時Writer = new BatchEntityCreatedTempTableWriter(
                 TABLE_事業高額介護サービス費給付対象者合計全件一時, DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity.class);
-        明細全件一時Writer = new BatchEntityCreatedTempTableWriter(
-                TABLE_事業高額介護サービス費給付対象者明細全件一時, DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity.class);
         中間高額一時Writer = new BatchEntityCreatedTempTableWriter(
                 TABLE_給付実績中間事業高額一時9, TempKyufujissekiTyukannJigyoEntity.class);
         明細全件更新一時Writer = new BatchEntityCreatedTempTableWriter(

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -132,7 +133,10 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
 
     private boolean is期間(FlexibleYear 年度, UpdShiharaihohoHenkoTempResultEntity entity, int 開始年月から_月数) {
         FlexibleYearMonth 対象年月 = new FlexibleYearMonth(年度.toDateString().concat(開始月)).plusMonth(開始年月から_月数);
-        return 対象年月.isBeforeOrEquals(entity.get支払方法変更().getTekiyoShuryoYMD().getYearMonth())
-                && entity.get支払方法変更().getTekiyoKaishiYMD().getYearMonth().isBeforeOrEquals(対象年月);
+        FlexibleDate tekiyoShuryoYMD = entity.get支払方法変更().getTekiyoShuryoYMD();
+        FlexibleDate tekiyoKaishiYMD = entity.get支払方法変更().getTekiyoKaishiYMD();
+        return 対象年月 != null && tekiyoShuryoYMD != null && tekiyoKaishiYMD != null
+                && 対象年月.isBeforeOrEquals(tekiyoShuryoYMD.getYearMonth())
+                && tekiyoKaishiYMD.getYearMonth().isBeforeOrEquals(対象年月);
     }
 }

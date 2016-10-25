@@ -29,6 +29,8 @@ public class NinteiBatchKekkaListShutsuryokuMybatisParameter extends UaFt200Find
     /**
      * コンストラクタです。
      *
+     * @param searchKey IShikibetsuTaishoPSMSearchKey
+     * @param 出力順 RString
      * @param 認定期間_開始日 認定期間_開始日
      * @param 認定期間_終了日 認定期間_終了日
      */

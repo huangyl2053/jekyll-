@@ -26,8 +26,8 @@ public class DBD210010_KyufuSeigenTaishoshaListParameter extends BatchParameterB
     private static final String NIGOUSASHITOUROKUSHA = "nigousashitometourokusha";
     private static final String YITIGOUSHOUKANYOKOTOUROKUSHA = "nigoushoukantomeyokotourokusha";
     private static final String YITIGOUSHOUKANKEITETOUROKUSHA = "nigoushoukantomekeitetourokusha";
-    private static final String YITIGOUSHOUKANKEITETOUROKUSHA_SASHIARI = "nigoushoukantomekeitetourokusha_sashiari";
-    private static final String YITIGOUSHOUKANKEITETOUROKUSHA_HOKENARI = "nigoushoukantomekeitetourokusha_hokenari";
+    private static final String YITIGOUSHOUKANKEI_SASHIARI = "nigoushoukantomekei_sashiari";
+    private static final String YITIGOUSHOUKANKEI_HOKENARI = "nigoushoukantomekei_hokenari";
     private static final String YITIGOUSKIFUTOUROKUSHA = "nigoukifutourokusha";
     private static final String OUTPUTJUNNID = "outputJunnId";
     private static final String KYUFUJOTAI = "kyufujotai";
@@ -42,9 +42,9 @@ public class DBD210010_KyufuSeigenTaishoshaListParameter extends BatchParameterB
     private boolean 一号償還予告登録者;
     @BatchParameter(key = YITIGOUSHOUKANKEITETOUROKUSHA, name = "一号償還決定登録者")
     private boolean 一号償還決定登録者;
-    @BatchParameter(key = YITIGOUSHOUKANKEITETOUROKUSHA_SASHIARI, name = "一号償還決定登録者_差止中あり")
+    @BatchParameter(key = YITIGOUSHOUKANKEI_SASHIARI, name = "一号償還決定登録者_差止中あり")
     private boolean 一号償還決定登録者_差止中あり;
-    @BatchParameter(key = YITIGOUSHOUKANKEITETOUROKUSHA_HOKENARI, name = "一号償還決定登録者_保険料控除あり")
+    @BatchParameter(key = YITIGOUSHOUKANKEI_HOKENARI, name = "一号償還決定登録者_保険料控除あり")
     private boolean 一号償還決定登録者_保険料控除あり;
     @BatchParameter(key = YITIGOUSKIFUTOUROKUSHA, name = "一号給付制限登録者")
     private boolean 一号給付制限登録者;

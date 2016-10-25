@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -64,7 +65,7 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
     private LasdecCode 保険者番号;
     private RString 保険者番名;
     private int 連番;
-    private int CSV連番;
+    private int csv連番;
     private int 給付実績取消一覧CSV連番;
     private static final RString 給付実績情報作成区分_削除 = new RString("3");
     private List<RString> 改頁List;
@@ -80,6 +81,17 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
     private static final RString データ区分_明細 = new RString("M");
     private static final RString データ区分_合計 = new RString("G");
     private static List<PersonalData> hojinShikibetsuCodeList;
+    /**
+     * プロセス戻り値：対象月データありなしフラグ
+     */
+    public static final RString OUT_HAS_TARGET_DATA;
+
+    private OutputParameter<Boolean> 変換_FLAG;
+    private boolean 変換flag;
+
+    static {
+        OUT_HAS_TARGET_DATA = new RString("変換_FLAG");
+    }
 
     @BatchWriter
     private BatchReportWriter<KoseiTaishoJissekiIchiranSource> 給付実績一覧表ReportWriter;
@@ -125,7 +137,7 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         保険者番号 = 導入団体クラス.get地方公共団体コード();
         保険者番名 = 導入団体クラス.get市町村名();
         連番 = 0;
-        CSV連番 = 0;
+        csv連番 = 0;
         給付実績取消一覧CSV連番 = 0;
         改頁List = new ArrayList<>();
         get改頁List();
@@ -137,6 +149,8 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         hojinShikibetsuCodeList = new ArrayList<>();
         KaigoToiawasesakiConfig config = new KaigoToiawasesakiConfig();
         共通_文字コード = config.getEUC共通_文字コード();
+        変換flag = false;
+        変換_FLAG = new OutputParameter<>();
     }
 
     @Override
@@ -163,9 +177,11 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         } else if (文字コード_2.equals(共通_文字コード)) {
             文字コード = Encode.SJIS;
         } else if (文字コード_3.equals(共通_文字コード)) {
-            文字コード = Encode.JIS;
+            文字コード = Encode.UTF_8withBOM;
+            変換flag = true;
         }
 
+        変換_FLAG.setValue(変換flag);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, 給付実績一覧表EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         this.給付実績一覧表eucFilePath = Path.combinePath(spoolWorkPath, 給付実績一覧表CSVファイル名);
@@ -184,7 +200,7 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         給付実績取消一覧表csvWriter = new CsvWriter.InstanceBuilder(this.給付実績取消一覧eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8withBOM).
+                setEncode(文字コード).
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).
                 build();
@@ -268,6 +284,8 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         給付実績取消一覧表csvWriter.close();
         manager.spool(SubGyomuCode.DBC介護給付, 給付実績一覧表eucFilePath);
         給付実績取消一覧manager.spool(SubGyomuCode.DBC介護給付, 給付実績取消一覧eucFilePath);
+        processParameter.set給付実績ファイルパス(給付実績一覧表eucFilePath);
+        processParameter.set給付実績ファイルパス(給付実績取消一覧eucFilePath);
     }
 
     private List<RString> get出力条件() {
@@ -359,7 +377,7 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
     private KoseiTaishoKyufuJissekiIchiranCsvEntity get明細CSVEntity(KoseitaishoKyuhuzissekiJohoTempEntity entity) {
         KoseiTaishoKyufuJissekiIchiranCsvEntity csvEntity = new KoseiTaishoKyufuJissekiIchiranCsvEntity();
         csvEntity.setデータ区分(データ区分_明細);
-        csvEntity.set連番(new RString(CSV連番++));
+        csvEntity.set連番(new RString(csv連番++));
         csvEntity.set被保険者氏名(entity.get氏名());
         csvEntity.set被保険者番号(entity.get被保険者番号());
         csvEntity.set年度(entity.get年度());

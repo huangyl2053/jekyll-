@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
@@ -38,6 +39,7 @@ public class TorikomiErarisutofairuCSVProcess extends BatchProcessBase<Errordata
     private RendingJieguoLianxieProcessParameter processParameter;
     private RString eucFilePath;
     private Association association;
+    private boolean flag = true;
 
     @BatchWriter
     private CsvWriter<TorikomiErarisutofairuCSVEntity> eucCsvWriter;
@@ -57,6 +59,7 @@ public class TorikomiErarisutofairuCSVProcess extends BatchProcessBase<Errordata
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
+                hasHeader(true).
                 setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 build();
@@ -69,6 +72,7 @@ public class TorikomiErarisutofairuCSVProcess extends BatchProcessBase<Errordata
 
     @Override
     protected void process(ErrordataIchijiTeburuEntity error) {
+        flag = false;
         TorikomiErarisutofairuCSVEntity csventity = new TorikomiErarisutofairuCSVEntity();
         NinteiKekkaRenkeiDataTorikomiManager.createInstance().ファイル出力進捗の取込みエラーリストファイル(csventity, error);
         eucCsvWriter.writeLine(csventity);
@@ -79,5 +83,8 @@ public class TorikomiErarisutofairuCSVProcess extends BatchProcessBase<Errordata
         eucCsvWriter.close();
         EucFileOutputJokenhyoFactory.createInstance(NinteiKekkaRenkeiDataTorikomiManager.createInstance().エラーバッチ出力条件リストの出力(association,
                 processParameter, eucCsvWriter.getCount())).print();
+        if (flag) {
+            File.deleteIfExists(eucFilePath);
+        }
     }
 }

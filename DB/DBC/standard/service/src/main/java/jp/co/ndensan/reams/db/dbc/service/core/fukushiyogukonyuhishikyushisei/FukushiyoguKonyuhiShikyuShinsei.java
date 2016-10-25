@@ -87,7 +87,6 @@ public class FukushiyoguKonyuhiShikyuShinsei {
 
     private static final RString 状態_登録 = new RString("登録");
     private static final RString 状態_削除 = new RString("削除");
-    private static final RString 支給区分_支給 = new RString("1");
     private static final RString 支給区分_不支給 = new RString("0");
     private static final RString メッセージ_集計 = new RString("償還払請求集計");
     private static final RString メッセージ_販売費 = new RString("償還払請求福祉用具販売費");
@@ -598,7 +597,6 @@ public class FukushiyoguKonyuhiShikyuShinsei {
         DbT3038ShokanKihonEntity dbT3038Entity = 福祉用具購入費支給申請明細登録画面.get償還払請求基本().toEntity();
         dbT3038Entity.setState(EntityDataState.Modified);
         償還払請求基本Dac.save(dbT3038Entity);
-        List<DbT3048ShokanFukushiYoguHanbaihiEntity> dbT3048EntityList = new ArrayList<>();
         DbT3048ShokanFukushiYoguHanbaihiEntity max連番 = 償還払請求福祉用具販売費Dac.getMAX連番(
                 福祉用具購入費支給申請明細登録画面.get被保険者番号(),
                 福祉用具購入費支給申請明細登録画面.get提供_購入_年月(),
@@ -617,21 +615,18 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                     = 登録福祉用具販売費.createBuilderForEdit().set連番(
                             new RString(String.format("%02d", 最大枝番 + 登録数))).build().toEntity();
             dbT3048Entity.setState(EntityDataState.Added);
-            dbT3048EntityList.add(dbT3048Entity);
             償還払請求福祉用具販売費Dac.save(dbT3048Entity);
         }
         for (ShokanFukushiYoguHanbaihi 償還払請求福祉用具販売費
                 : 福祉用具購入費支給申請明細登録画面.get修正福祉用具販売費リスト()) {
             DbT3048ShokanFukushiYoguHanbaihiEntity dbT3048Entity = 償還払請求福祉用具販売費.toEntity();
             dbT3048Entity.setState(EntityDataState.Modified);
-            dbT3048EntityList.add(dbT3048Entity);
             償還払請求福祉用具販売費Dac.save(dbT3048Entity);
         }
         for (ShokanFukushiYoguHanbaihi 償還払請求福祉用具販売費
                 : 福祉用具購入費支給申請明細登録画面.get削除福祉用具販売費リスト()) {
             DbT3048ShokanFukushiYoguHanbaihiEntity dbT3048Entity = 償還払請求福祉用具販売費.toEntity();
             dbT3048Entity.setState(EntityDataState.Deleted);
-            dbT3048EntityList.add(dbT3048Entity);
             償還払請求福祉用具販売費Dac.delete(dbT3048Entity);
         }
 

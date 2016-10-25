@@ -31,6 +31,9 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class HanyoListManager {
 
+    private static final int NO_3 = 3;
+    private static final int NO_6 = 6;
+
     /**
      * HanyoListManagerのインスタンス化
      *
@@ -51,11 +54,14 @@ public class HanyoListManager {
     public RString 項目内容new編集(int i, RString 項目内容new, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku) {
         if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分() != null) {
             if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("02"))) {
-                項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki().firstYear(FirstYear.ICHI_NEN).toDateString().substring(0, 3);
+                項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki()
+                        .firstYear(FirstYear.ICHI_NEN).toDateString().substring(0, NO_3);
             } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("03"))) {
-                項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki().firstYear(FirstYear.ICHI_NEN).toDateString().substring(0, 6);
+                項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki().
+                        firstYear(FirstYear.ICHI_NEN).toDateString().substring(0, NO_6);
             } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get出力項目日付区分().value().code().equals(new RString("04"))) {
-                項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki().toDateString().substring(0, 6);
+                項目内容new = new FlexibleDate(項目内容new.replace("/", "").toString()).wareki()
+                        .toDateString().substring(0, NO_6);
             }
         }
         if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get金額編集().equals(KingakuEditingNecessity.必要.getコード())) {
@@ -79,6 +85,13 @@ public class HanyoListManager {
         set地区コード3(atenacyusyutsujyoken, key);
     }
 
+    /**
+     * get地方公共団体
+     *
+     * @param 市町村コード 市町村コード
+     * @return get地方公共団体 get地方公共団体
+     *
+     */
     public Association get地方公共団体(LasdecCode 市町村コード) {
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         return finder.getAssociation(市町村コード);

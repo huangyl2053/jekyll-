@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -113,7 +114,11 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
                     KaigoGassan_KyufuJissekiSakuseiKubun.toValue(result.get給付実績作成区分コード()).get名称(),
                     給付区分,
                     deteFormat(result.get審査年月()));
+            if (result.get過誤申立情報() == null) {
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
+            }
             rowList.add(row);
+
         }
         div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().setDataSource(rowList);
         data.set給付実績情報List(resultList);

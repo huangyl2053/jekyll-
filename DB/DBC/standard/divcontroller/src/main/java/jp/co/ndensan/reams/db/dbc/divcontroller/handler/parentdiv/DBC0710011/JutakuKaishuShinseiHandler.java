@@ -69,8 +69,10 @@ public final class JutakuKaishuShinseiHandler {
         if (事前申請一覧 != null) {
             for (JutakukaishuJizenShinseiResult result : 事前申請一覧) {
                 dgJutakuKaishuShinseiList_Row row = new dgJutakuKaishuShinseiList_Row();
-                row.setTxtShinseiKubun(JutakukaishuShinseiKubun.toValue(
-                        result.getEntity().getKaishuShinseiKubun()).get名称());
+                if (!RString.isNullOrEmpty(result.getEntity().getKaishuShinseiKubun())) {
+                    row.setTxtShinseiKubun(JutakukaishuShinseiKubun.toValue(
+                            result.getEntity().getKaishuShinseiKubun()).get名称());
+                }
                 row.getTxtTeikyoYM().setValue(new RDate(result.getEntity().getServiceTeikyoYM().toString()));
                 row.getTxtShinseiDate().setValue(new RDate(result.getEntity().getShinseiYMD().toString()));
                 row.getTxtSeiriNo().setValue(result.getEntity().getSeiriNo());
@@ -86,8 +88,10 @@ public final class JutakuKaishuShinseiHandler {
         if (支給申請一覧 != null) {
             for (JutakukaishuSikyuShinseiResult result : 支給申請一覧) {
                 dgJutakuKaishuShinseiList_Row row = new dgJutakuKaishuShinseiList_Row();
-                row.setTxtShinseiKubun(JutakukaishuShinseiKubun.toValue(
-                        result.getEntity().getKaishuShinseiKubun()).get名称());
+                if (!RString.isNullOrEmpty(result.getEntity().getKaishuShinseiKubun())) {
+                    row.setTxtShinseiKubun(JutakukaishuShinseiKubun.toValue(
+                            result.getEntity().getKaishuShinseiKubun()).get名称());
+                }
                 row.getTxtTeikyoYM().setValue(new RDate(result.getEntity().getServiceTeikyoYM().toString()));
                 row.getTxtShinseiDate().setValue(new RDate(result.getEntity().getShinseiYMD().toString()));
                 if (result.getEntity().getShinsaYMD() != null) {
@@ -96,7 +100,7 @@ public final class JutakuKaishuShinseiHandler {
                 } else {
                     row.setTxtShinsaResult(未審査);
                 }
-                if (result.getEntity().getShikyuHushikyuKetteiKubun() != null) {
+                if (!RString.isNullOrEmpty(result.getEntity().getShikyuHushikyuKetteiKubun())) {
                     row.setTxtShikyuKubun(ShikyuFushikyuKubun.toValue(
                             result.getEntity().getShikyuHushikyuKetteiKubun()).get名称());
                 }

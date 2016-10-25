@@ -9,12 +9,15 @@ import jp.co.ndensan.reams.db.dbd.business.core.dbd519001.ModifyNinteiShinseiJoh
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd519001.ModifyNinteiShinseiJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519001.ModifyNinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd519001.temp.KouikiyoukaigoNinteishinseiJouhouTempEntity;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -50,10 +53,12 @@ public class ModifyNinteiShinseiJohoProcess extends BatchProcessBase<ModifyNinte
 
     @Override
     protected IBatchReader createReader() {
+        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(
+                GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
         if (parameter.get認定申請IF種類().equals(new RString("3")) || parameter.get認定申請IF種類().equals(new RString("5"))) {
-            return new BatchDbReader(MYBATIS_MAPPER_ID3, parameter.toModifyNinteiShinseiJohoMybatisParameter());
+            return new BatchDbReader(MYBATIS_MAPPER_ID3, parameter.toModifyNinteiShinseiJohoMybatisParameter(key.build()));
         } else {
-            return new BatchDbReader(MYBATIS_MAPPER_ID4, parameter.toModifyNinteiShinseiJohoMybatisParameter());
+            return new BatchDbReader(MYBATIS_MAPPER_ID4, parameter.toModifyNinteiShinseiJohoMybatisParameter(key.build()));
         }
     }
 

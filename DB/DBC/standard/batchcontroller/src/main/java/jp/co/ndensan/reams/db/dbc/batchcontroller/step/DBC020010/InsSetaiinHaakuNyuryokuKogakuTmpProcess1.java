@@ -68,8 +68,7 @@ public class InsSetaiinHaakuNyuryokuKogakuTmpProcess1 extends BatchProcessBase<I
     @Override
     protected void initialize() {
         mapper = getMapper(IKogakuKaigoServicehiKyufugakuSanshutsuMapper.class);
-        InsSetaiinHaakuNyuryokuKogakuFlowEntity1 flowEntity = new InsSetaiinHaakuNyuryokuKogakuFlowEntity1();
-        flowEntity = mapper.getサービス提供年月_高額一時();
+        InsSetaiinHaakuNyuryokuKogakuFlowEntity1 flowEntity = mapper.getサービス提供年月_高額一時();
         returnEntity = new OutputParameter<>();
         returnEntity.setValue(flowEntity);
     }

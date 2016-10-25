@@ -37,7 +37,6 @@ public class DBC020080ShoriKekkaTempEntity
     private RString shoHokenshaNo;
     @PrimaryKey
     private RString hihokenshaNo;
-    private RString hihokenshaKanaShimei;
     private RString hihokenshaShimei;
     @PrimaryKey
     private RString key1;
@@ -49,7 +48,6 @@ public class DBC020080ShoriKekkaTempEntity
     private RString key4;
     @PrimaryKey
     private RString key5;
-    private RString errorNaiyo;
     private RString biko;
 
     /**

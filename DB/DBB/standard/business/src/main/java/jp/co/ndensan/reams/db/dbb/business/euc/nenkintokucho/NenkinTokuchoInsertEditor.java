@@ -115,7 +115,7 @@ public class NenkinTokuchoInsertEditor {
 
     private RString get天引月(FlexibleYearMonth 処理対象年月) {
         RString 天引月 = RString.EMPTY;
-        if (処理対象年月.getMonthValue() % INT_2 == INT_1) {
+        if (処理対象年月.getMonthValue() % INT_2 != INT_0) {
             if (処理対象年月.getMonthValue() == INT_1) {
                 天引月 = RSTRING_12;
             } else {

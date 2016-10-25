@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_IdoKubunCode;
-import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_JukyushaIdoJiyu;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710050.HanyoListKyodoJukyushaProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710050.KyodoJukyushaKihonEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
@@ -246,8 +245,9 @@ public class HanyoListKyodoJukyushaCsvEntityEditor {
             } else {
                 bodyList.add(RString.EMPTY);
             }
+//        bodyList.add(JukyushaIF_JukyushaIdoJiyu.toValue(entity.get共同処理用受給者異動基本送付().getJukyushaIdoJiyu()).get名称());
         }
-        bodyList.add(JukyushaIF_JukyushaIdoJiyu.toValue(entity.get共同処理用受給者異動基本送付().getJukyushaIdoJiyu()).get名称());
+        bodyList.add(RString.EMPTY);
         bodyList.add(entity.get共同処理用受給者異動基本送付().getShoKisaiHokenshaNo().getColumnValue());
         bodyList.add(entity.get共同処理用受給者異動基本送付().getHiHokenshaName());
         YubinNo 郵便番号 = entity.get共同処理用受給者異動基本送付().getYubinNo();

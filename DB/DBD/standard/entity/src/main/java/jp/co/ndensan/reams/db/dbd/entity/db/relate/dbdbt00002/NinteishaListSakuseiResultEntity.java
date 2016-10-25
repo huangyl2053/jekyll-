@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002;
 
 import java.util.List;
@@ -26,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteishaListSakuseiResultEntity extends DbTableEntityBase<TaishoshaJohoTempTableEntity> implements IDbAccessable {
+
     private HihokenshaNo 被保険者番号;
     private RString 本人識別コード;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
@@ -33,6 +33,7 @@ public class NinteishaListSakuseiResultEntity extends DbTableEntityBase<Taishosh
     private boolean is老齢福祉年金受給者;
     private boolean is所得税課税者;
     private boolean is生活保護受給者;
+    private boolean is所得税課税世帯;
     private RString 厚労省IF識別コード;
     private boolean 旧措置者フラグ;
     private DbT4014RiyoshaFutangakuGengakuEntity 利用者負担額減額Entity;

@@ -181,9 +181,7 @@ public class RiyoshaFutanWariaiHanteiManager {
                     createInstance().futanWariaiHanteiMerge(利用者負担割合明細Tempのマージデータ, 利用者負担割合割合Tempのマージデータ, 年度);
             DbT3113RiyoshaFutanWariaiEntity 利用者負担割合entity = new DbT3113RiyoshaFutanWariaiEntity();
             List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報 = マージResult.get利用者負担割合明細情報();
-            if (利用者負担割合明細情報 != null && !利用者負担割合明細情報.isEmpty()) {
-                get利用者負担割合entity(年度, 被保険者番号, 利用者負担割合entity, 利用者負担割合明細情報.get(0));
-            }
+            get利用者負担割合entity(年度, 被保険者番号, 利用者負担割合entity, 利用者負担割合明細情報.get(0));
             判定結果.set利用者負担割合entity(利用者負担割合entity);
             List<DbT3114RiyoshaFutanWariaiMeisaiEntity> 利用者負担割合明細list
                     = get利用者負担割合明細list(年度, 被保険者番号, 利用者負担割合明細情報);

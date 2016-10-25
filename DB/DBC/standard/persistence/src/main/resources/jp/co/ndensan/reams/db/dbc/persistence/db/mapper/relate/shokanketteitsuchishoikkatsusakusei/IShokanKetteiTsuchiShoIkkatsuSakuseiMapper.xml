@@ -11,6 +11,7 @@
         <id property="kinyuKikanShitenCode" column="kinyuKikanShitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="uketsukeYMD" column="uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinseishaKubun" column="shinseishaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiHohoKubunCode" column="shiharaiHohoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiBasho" column="shiharaiBasho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiKaishiYMD" column="shiharaiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -46,6 +47,7 @@
         <id property="yoshikiNo" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="serviceCode" column="serviceCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="shinseishaKubun" column="shinseishaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="uketsukeYMD" column="uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shiharaiHohoKubunCode" column="shiharaiHohoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiharaiBasho" column="shiharaiBasho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -116,6 +118,46 @@
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="serviceShuruiCode" column="serviceCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
+    <resultMap id="resultMap_決定通知一覧表chohyoData" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharaiRelateEntity" autoMapping="true">
+        <result property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ketteiTsuchiNo" column="ketteiTsuchiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="hiHokenshaShimei" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="banchi" column="banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="yokaigoJotaiKubunCode" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninteiYukoKikanKaishiYMD" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoKikanShuryoYMD" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="uketsukeYMD" column="uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiYMD" column="ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shiharaiKingakuUchiwakeRiyoshabun" column="shiharaiKingakuUchiwakeRiyoshabun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shiharaiKingaku" column="shiharaiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="ryakusho" column="yoshikiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kingaku" column="kaishuKingaku" />
+        <result property="tuika" column="tuika" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceNameRyaku" column="serviceShuruiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikyuHushikyuKetteiKubun" column="shikyuHushikyuKetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="zougenRiyu" column="zougenRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kinyuKikanCode" column="kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
+        <result property="kinyuKikanName" column="kinyuKikanCodeName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shideMeisho" column="kinyuKikanShitenName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokinShubetsuMeisho" column="yokinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaBango" column="kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaMeigininKanji" column="kozaMeigininKanji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiHohoKubunCode" column="shiharaiHohoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiKaishiYMD" column="shiharaiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shiharaiShuryoYMD" column="shiharaiShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shiharaiKaishiTime" column="shiharaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiShuryoTime" column="shiharaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="serviceShuruiCode" column="serviceCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choikiCode" column="choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler" />
+        <result property="gyoseikuCode" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler" />
+        <result property="kanaMeisho" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="genLasdecCode" column="genLasdecCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+    </resultMap>
 
     <sql id="selectKetteiTsuchiSho">
         ShokanKetteiTsuchiShoTemp."hiHokenshaNo"
@@ -123,6 +165,7 @@
         ,ShokanKetteiTsuchiShoTemp."seiriNo"
         ,ShokanKetteiTsuchiShoTemp."shoKisaiHokenshaNo"
         ,ShokanKetteiTsuchiShoTemp."uketsukeYMD"
+        ,ShokanKetteiTsuchiShoTemp."shinseishaKubun"
         ,ShokanKetteiTsuchiShoTemp."shiharaiHohoKubunCode"
         ,ShokanKetteiTsuchiShoTemp."shiharaiBasho"
         ,ShokanKetteiTsuchiShoTemp."shiharaiKaishiYMD"
@@ -157,6 +200,7 @@
         ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
         ,ShokanKetteiTsuchiShoMeisaiTemp."shoKisaiHokenshaNo"
         ,ShokanKetteiTsuchiShoMeisaiTemp."uketsukeYMD"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."shinseishaKubun"
         ,ShokanKetteiTsuchiShoMeisaiTemp."shiharaiHohoKubunCode"
         ,ShokanKetteiTsuchiShoMeisaiTemp."shiharaiBasho"
         ,ShokanKetteiTsuchiShoMeisaiTemp."shiharaiKaishiYMD"
@@ -195,6 +239,7 @@
         ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
         ,ShokanKetteiTsuchiShoMeisaiTemp."shoKisaiHokenshaNo"
         ,ShokanKetteiTsuchiShoMeisaiTemp."uketsukeYMD"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."shinseishaKubun"
         ,ShokanKetteiTsuchiShoMeisaiTemp."shiharaiHohoKubunCode"
         ,ShokanKetteiTsuchiShoMeisaiTemp."shiharaiBasho"
         ,ShokanKetteiTsuchiShoMeisaiTemp."shiharaiKaishiYMD"
@@ -243,6 +288,7 @@
         ,DbT3034ShokanShinsei."seiriNo"
         ,DbT3034ShokanShinsei."shoKisaiHokenshaNo"
         ,DbT3034ShokanShinsei."uketsukeYMD"
+        ,DbT3034ShokanShinsei."shinseishaKubun"
         ,DbT3034ShokanShinsei."shiharaiHohoKubunCode"
         ,DbT3034ShokanShinsei."shiharaiBasho"
         ,DbT3034ShokanShinsei."shiharaiKaishiYMD"
@@ -841,9 +887,38 @@
         SELECT
         <include refid="selectChouhyouData" />
         ,'' AS tuika
+        ,'' AS "choikiCode"
+        ,'' AS "gyoseikuCode"
+        ,'' AS "kanaMeisho"
+        ,'' AS "genLasdecCode"
         FROM
         "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
         ORDER BY
+        ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
+        ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
+    </select>
+
+    <select resultOrdered="true" id="get決定通知一覧表帳票データ"
+            resultMap="resultMap_chohyoData"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter"
+            fetchSize="500">
+        SELECT
+        <include refid="selectChouhyouData" />
+        ,'' AS tuika
+        ,"ShikibetsuTaisho"."choikiCode"
+        ,"ShikibetsuTaisho"."gyoseikuCode"
+        ,"ShikibetsuTaisho"."kanaMeisho"
+        ,"ShikibetsuTaisho"."genLasdecCode"
+        FROM
+        "ShokanKetteiTsuchiShoMeisaiTemp" AS ShokanKetteiTsuchiShoMeisaiTemp
+        LEFT JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" /> AS "ShikibetsuTaisho"
+        ON ShokanKetteiTsuchiShoMeisaiTemp."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+        ORDER BY
+        <if test="has出力順">
+            ${出力順},
+        </if>
         ShokanKetteiTsuchiShoMeisaiTemp."hiHokenshaNo"
         ,ShokanKetteiTsuchiShoMeisaiTemp."serviceTeikyoYM"
         ,ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"

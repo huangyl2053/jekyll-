@@ -64,9 +64,8 @@ public class FurikomiMeisaiIchiranBodyEditor implements IFurikomiMeisaiIchiranEd
         if (振込明細一覧Entity.get被保険者番号() != null) {
             source.list1_1 = 振込明細一覧Entity.get被保険者番号().value();
         }
-        if (振込明細一覧Entity.get被保険者氏名() != null) {
-            source.list1_2 = 振込明細一覧Entity.get被保険者氏名().value();
-        }
+
+        source.list1_2 = 振込明細一覧Entity.get氏名漢字();
 
         source.list1_3 = 振込明細一覧Entity.get支給申請書整理番号();
 

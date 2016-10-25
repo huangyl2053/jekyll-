@@ -154,23 +154,7 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         if (!entityList.isEmpty()) {
             for (IdoChushutsuDaichoEntity entity : entityList) {
                 if (entity != null) {
-                    if (!被保険者番号KEY.equals(entity.get被保険者番号())) {
-                        被保険者番号KEY = entity.get被保険者番号();
-                        if (entity.get被保険者番号() == null) {
-                            被保険者番号リスト.add(HihokenshaNo.EMPTY);
-                        } else {
-                            被保険者番号リスト.add(entity.get被保険者番号());
-                        }
-                    }
-                    if (!識別コードKEY.equals(entity.get識別コード())) {
-                        識別コードKEY = entity.get識別コード();
-                        if (entity.get識別コード() == null) {
-                            識別コードリスト.add(ShikibetsuCode.EMPTY);
-                        } else {
-                            識別コードリスト.add(entity.get識別コード());
-                        }
-                    }
-
+                    被保険者番号と識別コード設値(entity);
                 }
             }
         }
@@ -185,7 +169,8 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
 
     @Override
     protected void createWriter() {
-        batchReportWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBD.DBD100026.getReportId().getColumnValue(), SubGyomuCode.DBD介護受給).create();
+        batchReportWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBD.DBD100026.getReportId().
+                getColumnValue(), SubGyomuCode.DBD介護受給).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
     }
 
@@ -270,7 +255,7 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         支払方法変更情報EntityList = 帳票出力用受給者台帳.set支払方法変更情報EntityList(t, 支払方法変更情報EntityList);
         給付額減額情報EntityList = 帳票出力用受給者台帳.set給付額減額情報EntityList(t, 給付額減額情報EntityList);
         資格情報EntityList = 帳票出力用受給者台帳.set資格情報EntityList(t, 資格情報EntityList);
-        老齢福祉年金情報EntityList = 老齢福祉年金情報EntityList = 帳票出力用受給者台帳.set老齢福祉年金情報EntityList(t, 老齢福祉年金情報EntityList);
+        老齢福祉年金情報EntityList = 帳票出力用受給者台帳.set老齢福祉年金情報EntityList(t, 老齢福祉年金情報EntityList);
         生活保護情報EntityList = 帳票出力用受給者台帳.set生活保護情報EntityList(t, 生活保護情報EntityList);
     }
 
@@ -278,5 +263,24 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         Map<Integer, RString> 通知文情報 = ReportUtil.get通知文(SubGyomuCode.DBD介護受給,
                 reportId, KamokuCode.EMPTY, パターン番号);
         return null != 通知文情報 ? 通知文情報.get(項目番号) : RString.EMPTY;
+    }
+
+    private void 被保険者番号と識別コード設値(IdoChushutsuDaichoEntity entity) {
+        if (!被保険者番号KEY.equals(entity.get被保険者番号())) {
+            被保険者番号KEY = entity.get被保険者番号();
+            if (entity.get被保険者番号() == null) {
+                被保険者番号リスト.add(HihokenshaNo.EMPTY);
+            } else {
+                被保険者番号リスト.add(entity.get被保険者番号());
+            }
+        }
+        if (!識別コードKEY.equals(entity.get識別コード())) {
+            識別コードKEY = entity.get識別コード();
+            if (entity.get識別コード() == null) {
+                識別コードリスト.add(ShikibetsuCode.EMPTY);
+            } else {
+                識別コードリスト.add(entity.get識別コード());
+            }
+        }
     }
 }

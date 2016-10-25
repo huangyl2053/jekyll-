@@ -14,6 +14,31 @@
         FROM rgdb."DbT7301TokuteiKojinJohoHanKanri"
     </select>
 
+    <select id="getKijunYMD"
+            resultOrdered="true"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoMybatisParamater"
+            fetchSize="500">
+        SELECT
+        "subGyomuCode"
+        , "shichosonCode"
+        , "shoriName"
+        , "shoriEdaban"
+        , "nendo"
+        , "nendoNaiRenban"
+        , "kijunYMD"
+        , "kijunTimestamp"
+        , "taishoKaishiYMD"
+        , "taishoShuryoYMD"
+        , "taishoKaishiTimestamp"
+        , "taishoShuryoTimestamp"
+        FROM rgdb."DbT7022ShoriDateKanri"
+        WHERE "DbT7022ShoriDateKanri"."subGyomuCode" = #{subGyomuCode}
+        AND "DbT7022ShoriDateKanri"."shoriName" = #{shoriName}
+        ORDER BY "DbT7022ShoriDateKanri"."kijunTimestamp" DESC
+        LIMIT 1
+    </select>
+
     <select id="getJukyushaDaichoTeikyoJohoKoho"
             resultOrdered="true"
             resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.JukyushaTeikyoJohoKohoEntity"
@@ -35,8 +60,8 @@
         , dbT4001."logicalDeletedFlag"
         , dbT4102."shinseishoKanriNo" AS ninteiShinseishoKanriNo
         , dbT4102."ninteishinsakaiIkenShurui"
-        , dbT4102."lastUpdateTimestamp"　AS ninteiLastUpdateTimestamp
-        , dbT4102."isDeleted"　AS ninteiLogicalDeletedFlag
+        , dbT4102."lastUpdateTimestamp" AS ninteiLastUpdateTimestamp
+        , dbT4102."isDeleted" AS ninteiLogicalDeletedFlag
         FROM rgdb."DbT4001JukyushaDaicho" dbT4001
         LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" dbT4102
         ON dbT4102."shinseishoKanriNo" = dbT4001."shinseishoKanriNo"
@@ -66,8 +91,8 @@
             , dbT4001."logicalDeletedFlag"
             , dbT4102."shinseishoKanriNo" AS ninteiShinseishoKanriNo
             , dbT4102."ninteishinsakaiIkenShurui"
-            , dbT4102."lastUpdateTimestamp"　AS ninteiLastUpdateTimestamp
-            , dbT4102."isDeleted"　AS ninteiLogicalDeletedFlag
+            , dbT4102."lastUpdateTimestamp" AS ninteiLastUpdateTimestamp
+            , dbT4102."isDeleted" AS ninteiLogicalDeletedFlag
             FROM rgdb."DbT4001JukyushaDaicho" dbT4001
             LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" dbT4102
             ON dbT4102."shinseishoKanriNo" = dbT4001."shinseishoKanriNo"
@@ -126,7 +151,7 @@
         , teiKyoKihonJoho."teikyoNaiyo10"
         , teiKyoKihonJoho."misetteiJiyu10"
         , teiKyoKihonJoho."kokaiYMD"
-        FROM #{tempTableName} teiKyoKihonJoho
+        FROM ${tempTableName} teiKyoKihonJoho
         INNER JOIN rgua.${psmShikibetsuTaisho} AS PSM
         ON teiKyoKihonJoho."shikibetsuCode" = PSM."shikibetsuCode"
         <if test="isShinkiIdo">

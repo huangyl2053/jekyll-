@@ -837,11 +837,15 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             if (TokuchoNengakuKijunNendo8Gatsu.当年度.getコード().equals(特別徴収_年額基準年度_8月開始)) {
                 前年度の保険料段階リスト = HokenryoDankaiSettings.createInstance()
                         .get保険料段階ListIn(調定年度.minusYear(NUM_1));
-                保険料率 = 前年度の保険料段階リスト.getBy段階区分(特徴仮算定Entity.get前年度保険料段階()).get保険料率();
+                if (前年度の保険料段階リスト != null && !RString.isNullOrEmpty(特徴仮算定Entity.get前年度保険料段階())) {
+                    保険料率 = 前年度の保険料段階リスト.getBy段階区分(特徴仮算定Entity.get前年度保険料段階()).get保険料率();
+                }
             } else if (TokuchoNengakuKijunNendo8Gatsu.翌年度.getコード().equals(特別徴収_年額基準年度_8月開始)) {
                 前年度の保険料段階リスト = HokenryoDankaiSettings.createInstance()
                         .get保険料段階ListIn(調定年度);
-                保険料率 = 前年度の保険料段階リスト.getBy段階区分(編集後賦課の情報.get保険料段階_仮算定時()).get保険料率();
+                if (前年度の保険料段階リスト != null && !RString.isNullOrEmpty(編集後賦課の情報.get保険料段階_仮算定時())) {
+                    保険料率 = 前年度の保険料段階リスト.getBy段階区分(編集後賦課の情報.get保険料段階_仮算定時()).get保険料率();
+                }
             }
             TokuchoKarisanteiKiwariOutput 特徴仮算定期割 = get特徴仮算定期割(調定年度, 保険料率);
             Decimal 特徴期別額 = Decimal.ZERO;
@@ -983,6 +987,15 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             }
         }
         賦課根拠.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
+        // TODO
+        List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
+        if (!RString.isNullOrEmpty(課税区分)) {
+            setaiinKazeiKubunList.add(KazeiKubun.toValue(課税区分));
+        }
+        if (!RString.isNullOrEmpty(世帯課税区分)) {
+            setaiinKazeiKubunList.add(KazeiKubun.toValue(世帯課税区分));
+        }
+        賦課根拠.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         賦課根拠.setGokeiShotoku(前年度合計所得金額);
         賦課根拠.setKotekiNenkinShunyu(前年度公的年金収入額);
         HokenryoDankaiHanteiParameter parameter = new HokenryoDankaiHanteiParameter();
@@ -991,7 +1004,10 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         parameter.setSeigyoJoho(月別保険料制御情報);
         HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
         TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(parameter);
-        RString 保険料段階 = 月別保険料段階.get保険料段階04月().getHokenryoDankai();
+        RString 保険料段階 = RString.EMPTY;
+        if (月別保険料段階 != null && 月別保険料段階.get保険料段階04月() != null) {
+            保険料段階 = 月別保険料段階.get保険料段階04月().getHokenryoDankai();
+        }
         builder.set保険料段階_仮算定時(保険料段階);
         builder.set賦課市町村コード(get賦課市町村コード(資格情報));
         builder.set調定事由1(ChoteiJiyuCode.仮算定賦課.getコード());

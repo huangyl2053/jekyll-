@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigokyufuhitaishoshatoroku;
 
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc710100.HanyoListKagoKekkaMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.KyufuJissekiKihonKogakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.UpdKogakuKokuhorenIFMstMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
@@ -74,7 +73,7 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatch
     /**
      * toMyBatisParameterのメソッドです。
      *
-     * @return {@link HanyoListKagoKekkaMybatisParameter}
+     * @return {@link KyufuJissekiKihonKogakuMybatisParameter}
      */
     public KyufuJissekiKihonKogakuMybatisParameter toMybatisParameter() {
         KyufuJissekiKihonKogakuMybatisParameter parameter = new KyufuJissekiKihonKogakuMybatisParameter();

@@ -20,5 +20,6 @@ public class FlowEntity {
 
     private Map<RString, RString> ファイル;
     private Map<RString, Integer> レコード件数;
+    private Map<RString, RString> 作成年月日OutputMap;
 
 }

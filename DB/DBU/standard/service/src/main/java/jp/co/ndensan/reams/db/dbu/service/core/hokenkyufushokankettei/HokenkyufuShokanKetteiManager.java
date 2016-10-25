@@ -160,6 +160,40 @@ public class HokenkyufuShokanKetteiManager {
     private static final RString 保険者分 = new RString("1");
     private static final RString 構成市町村分 = new RString("2");
     private static final RString 旧市町村分 = new RString("3");
+    private static final RString 食費福祉施設 = new RString("511");
+    private static final RString 食費保健施設 = new RString("521");
+    private static final RString 食費医療施設 = new RString("531");
+    private static final RString 食費地密特入生介 = new RString("541");
+    private static final RString 食費短入生介_1 = new RString("211");
+    private static final RString 食費短入生介_2 = new RString("241");
+    private static final RString 食費短入療介_保健施設_1 = new RString("221");
+    private static final RString 食費短入療介_保健施設_2 = new RString("251");
+    private static final RString 食費短入療介_医療施設等_1 = new RString("231");
+    private static final RString 食費短入療介_医療施設等_2 = new RString("261");
+    private static final RString 居住費福祉施設 = new RString("512");
+    private static final RString 居住費保健施設 = new RString("522");
+    private static final RString 居住費医療施設 = new RString("532");
+    private static final RString 居住費地密型入生介 = new RString("542");
+    private static final RString 居住費短入生介_1 = new RString("212");
+    private static final RString 居住費短入生介_2 = new RString("242");
+    private static final RString 居住費短入生介_保健施設_1 = new RString("222");
+    private static final RString 居住費短入生介_保健施設_2 = new RString("252");
+    private static final RString 居住費短入生介_医療施設等_1 = new RString("232");
+    private static final RString 居住費短入生介_医療施設等_2 = new RString("262");
+    private static final RString 縦の番号_NO2 = new RString("04");
+    private static final RString 縦の番号_NO3 = new RString("05");
+    private static final RString 縦の番号_NO4 = new RString("06");
+    private static final RString 縦の番号_NO5 = new RString("16");
+    private static final RString 縦の番号_NO6 = new RString("07");
+    private static final RString 縦の番号_NO7 = new RString("08");
+    private static final RString 縦の番号_NO8 = new RString("09");
+    private static final RString 縦の番号_NO10 = new RString("10");
+    private static final RString 縦の番号_NO11 = new RString("11");
+    private static final RString 縦の番号_NO12 = new RString("12");
+    private static final RString 縦の番号_NO13 = new RString("17");
+    private static final RString 縦の番号_NO14 = new RString("13");
+    private static final RString 縦の番号_NO15 = new RString("14");
+    private static final RString 縦の番号_NO16 = new RString("15");
 
     private RString setCSV用縦番号(RString 縦番号) {
         RStringBuilder builder = new RStringBuilder();
@@ -620,117 +654,47 @@ public class HokenkyufuShokanKetteiManager {
     }
 
     private void set縦番号2(TempDwbTKyufujissekiShukeiKonkyo2Entity entity) {
-        if (ServiceCategoryShurui.訪問介護.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予訪介護.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO3);
-        } else if (ServiceCategoryShurui.訪問入浴.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予訪入浴.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO4);
-        } else if (ServiceCategoryShurui.訪問看護.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予訪看護.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO5);
-        } else if (ServiceCategoryShurui.訪問リハ.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予訪リハ.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO6);
-        } else if (ServiceCategoryShurui.療養指導.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予療養指.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO7);
-        } else if (ServiceCategoryShurui.通所介護.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予通介護.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO9);
-        } else if (ServiceCategoryShurui.通所リハ.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予通リハ.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO10);
-        } else if (ServiceCategoryShurui.短期生活.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予短介護.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO12);
-        } else if (ServiceCategoryShurui.短期老健.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予短老健.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO13);
+        if (食費福祉施設.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO2);
+        } else if (食費保健施設.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO3);
+        } else if (食費医療施設.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO4);
+        } else if (食費地密特入生介.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO5);
+        } else if (食費短入生介_1.equals(entity.getServiceKomokuCode())
+                || 食費短入生介_2.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO6);
+        } else if (食費短入療介_保健施設_1.equals(entity.getServiceKomokuCode())
+                || 食費短入療介_保健施設_2.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO7);
+        } else if (食費短入療介_医療施設等_1.equals(entity.getServiceKomokuCode())
+                || 食費短入療介_医療施設等_2.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO8);
         } else {
-            setSub縦番号2(entity);
+            set縦番号2_Sub1(entity);
         }
     }
 
-    private void setSub縦番号2(TempDwbTKyufujissekiShukeiKonkyo2Entity entity) {
-        if (ServiceCategoryShurui.短期医療.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予短医療.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO14);
-        } else if (ServiceCategoryShurui.用具貸与.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予用貸与.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO16);
-        } else if (ServiceCategoryShurui.用具販売.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予用販売.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO17);
-        } else if (ServiceCategoryShurui.住宅改修.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予住改修.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO18);
-        } else if (ServiceCategoryShurui.特施短外.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.予特施設.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.特施短期.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO19);
-        } else if (ServiceCategoryShurui.定期随時.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO22);
-        } else if (ServiceCategoryShurui.地夜間訪.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO23);
-        } else if (ServiceCategoryShurui.地域通所.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO24);
-        } else if (ServiceCategoryShurui.地通所介.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.地予通所.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO25);
-        } else {
-            setSub縦番号のSub1_2(entity);
+    private void set縦番号2_Sub1(TempDwbTKyufujissekiShukeiKonkyo2Entity entity) {
+        if (居住費福祉施設.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO10);
+        } else if (居住費保健施設.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO11);
+        } else if (居住費医療施設.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO12);
+        } else if (居住費地密型入生介.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO13);
+        } else if (居住費短入生介_1.equals(entity.getServiceKomokuCode())
+                || 居住費短入生介_2.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO14);
+        } else if (居住費短入生介_保健施設_1.equals(entity.getServiceKomokuCode())
+                || 居住費短入生介_保健施設_2.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO15);
+        } else if (居住費短入生介_医療施設等_1.equals(entity.getServiceKomokuCode())
+                || 居住費短入生介_医療施設等_2.equals(entity.getServiceKomokuCode())) {
+            entity.setTateNo(縦の番号_NO16);
         }
-    }
-
-    private void setSub縦番号のSub1_2(TempDwbTKyufujissekiShukeiKonkyo2Entity entity) {
-        if (ServiceCategoryShurui.地小規単.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.地予小外.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.地小規単.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.地予小短.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO26);
-        } else if (ServiceCategoryShurui.地共同介.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.地予共同.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.地共同短.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.地予共短.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO27);
-        } else if (ServiceCategoryShurui.地施短外.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO28);
-        } else if (ServiceCategoryShurui.地福祉生.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO29);
-        } else if (ServiceCategoryShurui.看小短外.getコード().equals(entity.getServiceSyuruiCode())
-                || ServiceCategoryShurui.看小規短.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO30);
-        } else if (ServiceCategoryShurui.福祉施設.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO32);
-        } else if (ServiceCategoryShurui.老健施設.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO33);
-        } else if (ServiceCategoryShurui.医療施設.getコード().equals(entity.getServiceSyuruiCode())) {
-            entity.setTateNo(縦番号_NO34);
-        } else {
-            setSub縦番号のSub2_2(entity);
-        }
-    }
-
-    private void setSub縦番号のSub2_2(TempDwbTKyufujissekiShukeiKonkyo2Entity entity) {
-        if (入力識別番号_812.equals(entity.getInputShikibetsuNo())
-                || 入力識別番号_21B.equals(entity.getInputShikibetsuNo())) {
-            entity.setTateNo(縦番号_NO20);
-        }
-        // TODO 内部QA:1901 Redmine# 「食事費用」がなし、集計できない。
-//        if (entity.getShokujiHiyosikyuGaku() != null
-//                && (入力識別番号_718.equals(entity.getInputShikibetsuNo())
-//                || 入力識別番号_218.equals(entity.getInputShikibetsuNo()))) {
-//            entity.setTateNo(縦番号_NO36);
-//        } else if (entity.getShokujiHiyosikyuGaku() != null
-//                && (入力識別番号_719.equals(entity.getInputShikibetsuNo())
-//                || 入力識別番号_219.equals(entity.getInputShikibetsuNo()))) {
-//            entity.setTateNo(縦番号_NO37);
-//        } else if (entity.getShokujiHiyosikyuGaku() != null
-//                && (入力識別番号_71A.equals(entity.getInputShikibetsuNo())
-//                || 入力識別番号_21A.equals(entity.getInputShikibetsuNo()))) {
-//            entity.setTateNo(縦番号_NO38);
-//        }
     }
 
     private void set横番号(TempDwbTKyufujissekiShukeiKonkyo1Entity tempEntity) {

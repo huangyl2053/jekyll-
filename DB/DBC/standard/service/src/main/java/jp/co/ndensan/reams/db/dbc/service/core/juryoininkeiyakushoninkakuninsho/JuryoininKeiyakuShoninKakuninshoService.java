@@ -197,6 +197,12 @@ public class JuryoininKeiyakuShoninKakuninshoService {
         }
         事業者用Entity.set名称付与1(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_宛先敬称));
         事業者用Entity.setカスタマバーコード(editカスタマバーコード(entity));
+        edit事業者用EntitySub(entity, 事業者用Entity);
+        return 事業者用Entity;
+    }
+
+    private void edit事業者用EntitySub(JuryoininKeiyakuShoninKakuninshoEntity entity,
+            JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEntity 事業者用Entity) {
         if (entity.get名称() != null) {
             事業者用Entity.set被保険者氏名(entity.get名称().value());
         }
@@ -229,7 +235,6 @@ public class JuryoininKeiyakuShoninKakuninshoService {
         事業者用Entity.set利用者負担額(decimalFormat(entity.get償還受領委任契約者().getRiyoshaJikoFutanGaku()));
         事業者用Entity.set保険給付額(decimalFormat(entity.get償還受領委任契約者().getHokenKyufuhiGaku()));
         事業者用Entity.setページ(new RString(entity.getページ()));
-        return 事業者用Entity;
     }
 
     private JuryoIninShoninKakuninshoIchiranEntity edit一覧表Entity(JuryoininKeiyakuShoninKakuninshoEntity entity) {
