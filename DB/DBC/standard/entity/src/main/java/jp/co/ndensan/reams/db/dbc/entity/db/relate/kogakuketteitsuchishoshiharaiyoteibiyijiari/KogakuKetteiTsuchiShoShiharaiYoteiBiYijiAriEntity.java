@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity {
 
-    private ShikibetsuCode 識別コード;
     private HihokenshaNo 被保険者番号;
     private boolean テスト出力フラグ;
     private RString 被保険者氏名;
