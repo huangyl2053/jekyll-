@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1180011;
 
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -82,7 +83,11 @@ public enum ShikyugakuKeisanKekkaTorokuMessage implements IValidationMessage {
     /**
      * 自己負担額証明書整理番号既に存在
      */
-    自己負担額証明書整理番号既に存在(UrErrorMessages.既に存在, "自己負担額証明書整理番号");
+    自己負担額証明書整理番号既に存在(UrErrorMessages.既に存在, "自己負担額証明書整理番号"),
+    /**
+     * 内訳入力途中
+     */
+    内訳入力途中(DbcErrorMessages.内訳入力途中);
 
     private final Message message;
 
