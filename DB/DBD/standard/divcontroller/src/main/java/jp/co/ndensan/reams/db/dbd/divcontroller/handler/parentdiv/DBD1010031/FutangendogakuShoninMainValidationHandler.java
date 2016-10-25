@@ -90,7 +90,7 @@ public class FutangendogakuShoninMainValidationHandler {
 
         作成年度の未入力チェック(UrErrorMessages.必須, "作成年度"),
         決定日の未入力チェック(UrErrorMessages.必須, "決定日"),
-        申請日終了と申請日開始の比較チェック(UrErrorMessages.必須, "申請日終了と申請日開始"),
+        申請日終了と申請日開始の比較チェック(UrErrorMessages.大小関係が不正, "申請日開始と申請日終了"),
         発行日の未入力チェック(UrErrorMessages.必須, "発行日"),
         申請日終了と申請日開始の未入力チェック(UrErrorMessages.必須, "申請日開始と申請日終了");
 
