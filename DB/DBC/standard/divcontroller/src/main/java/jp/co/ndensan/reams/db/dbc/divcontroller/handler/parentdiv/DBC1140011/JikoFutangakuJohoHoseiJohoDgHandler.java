@@ -157,12 +157,9 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
             row.setTxtRirekiNo(new RString(result.get履歴番号()));
             row.setTxtUketoriNengetsu(result.get自己負担額証明書情報受取年月() == null ? RString.EMPTY
                     : result.get自己負担額証明書情報受取年月().toDateString());
-            row.setTxtHoseiYMDTan(result.getバッチ補正実施年月日() == null ? RString.EMPTY
+            row.setTxtHoseiYMDTan(result.getバッチ補正実施年月日() == null && result.getバッチ補正実施年月日().isEmpty() ? RString.EMPTY
                     : DateConverter.toWarekiHalf_Zero(
                             new RDate(result.getバッチ補正実施年月日().toString())));
-            row.setTxtHoseiYMDTan(result.getリアル補正実施年月日() == null ? RString.EMPTY
-                    : DateConverter.toWarekiHalf_Zero(
-                            new RDate(result.getリアル補正実施年月日().toString())));
             row.setTxtSofuNengetsu(result.get補正済自己負担額情報送付年月() == null ? RString.EMPTY
                     : new RString(result.get補正済自己負担額情報送付年月().toString()));
             row.setTxtDataKBN(result.getデータ作成区分() == null ? RString.EMPTY
