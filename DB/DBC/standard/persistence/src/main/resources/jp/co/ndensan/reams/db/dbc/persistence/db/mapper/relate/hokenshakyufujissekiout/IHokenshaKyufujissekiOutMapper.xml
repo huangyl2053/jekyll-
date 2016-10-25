@@ -141,19 +141,28 @@
     </resultMap>
     
     <select resultOrdered="true" id="select被保険者_宛名" resultMap="resultMap_HokenshaKyufujissekiOutGetHihokenshaAtenaEntity" fetchSize="500">
+         WITH master AS (
         SELECT 
            TEMP.* ,
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukyufutaishosha.IKogakuKyufuTaishoshaMapper.allColumns_DbV1001HihokenshaDaicho" />,
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukyufutaishosha.IKogakuKyufuTaishoshaMapper.allColumns_DbV1001HihokenshaDaicho" />
         FROM "DbWT1001Hihokensha" AS TEMP
         INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS HIHOKENSHA
         ON TEMP."exHihokenshaNo" = HIHOKENSHA."hihokenshaNo"
+        ) SELECT master.*,
+          <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+         FROM 
+             master 
         INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',FALSE,'','','','','','','','','','','',FALSE,         
         '','','','','','','',FALSE,'','','','','','','','','','','',true,true,true,true,false,false,true,true,true,true,         
-         true,'','','','','','','','',FALSE,'','',FALSE,false,FALSE,'','','','','','','','','','','','','','','','','','','{}') AS  "ShikibetsuTaisho"
-        ON HIHOKENSHA."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+         true,'','','','','','','','',FALSE,'','',FALSE,false,FALSE,'','','','','','','','','','','','','','','','','','',(
+                    SELECT
+                        ARRAY_AGG(CAST (master.HIHOKENSHA_shikibetsuCode AS TEXT))
+                    FROM
+                        master
+                   )) AS "ShikibetsuTaisho"
+        ON master.HIHOKENSHA_shikibetsuCode = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
-    
+
      <resultMap id="resultMap_HokenshaKyufujissekiOutGetHihokenshaAtenaEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaAtenaEntity" autoMapping="true">
         <id column="exRenban" />
         <association property="dbWT1001Entity" resultMap="resultMap_DbWT1001HihokenshaTempEntity"/>
