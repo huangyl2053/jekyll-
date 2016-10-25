@@ -46,7 +46,7 @@ public class JigyoJokyoHokokuGeppoHandler {
     private static final List<RString> 決定状況合算 = new ArrayList<>();
     private static final List<RString> 保険給付決定状況_現物分 = new ArrayList<>();
     private static final List<RString> 決定状況合算_償還分 = new ArrayList<>();
-    private static final List<RString> emptyKey = new ArrayList<>();
+    private static final List<RString> EMPTY_KEY = new ArrayList<>();
     private final JigyoJokyoHokokuGeppoDiv div;
 
     /**
@@ -349,7 +349,7 @@ public class JigyoJokyoHokokuGeppoHandler {
             div.getCblHokenKyufuShokan().setDisabled(false);
         } else {
             if (div.getTxtShukeiYM1().getValue() == null || div.getTxtShukeiYM1().getValue().isEmpty()) {
-                div.getCblIppan1to10().setSelectedItemsByKey(emptyKey);
+                div.getCblIppan1to10().setSelectedItemsByKey(EMPTY_KEY);
                 div.getCblIppan1to10().setDisabled(true);
                 div.getTxtShukeiYM1().setDisabled(true);
             } else {
@@ -357,7 +357,7 @@ public class JigyoJokyoHokokuGeppoHandler {
                 div.getTxtShukeiYM1().setDisabled(false);
             }
             if (div.getTxtShukeiYM2().getValue() == null || div.getTxtShukeiYM2().getValue().isEmpty()) {
-                div.getCblIppanGembutsu().setSelectedItemsByKey(emptyKey);
+                div.getCblIppanGembutsu().setSelectedItemsByKey(EMPTY_KEY);
                 div.getCblIppanGembutsu().setDisabled(true);
                 div.getTxtShukeiYM2().setDisabled(true);
             } else {
@@ -365,7 +365,7 @@ public class JigyoJokyoHokokuGeppoHandler {
                 div.getTxtShukeiYM2().setDisabled(false);
             }
             if (div.getTxtShukeiYM3().getValue() == null || div.getTxtShukeiYM3().getValue().isEmpty()) {
-                div.getCblIppanShokan().setSelectedItemsByKey(emptyKey);
+                div.getCblIppanShokan().setSelectedItemsByKey(EMPTY_KEY);
                 div.getCblIppanShokan().setDisabled(true);
                 div.getTxtShukeiYM3().setDisabled(true);
             } else {
@@ -374,7 +374,7 @@ public class JigyoJokyoHokokuGeppoHandler {
             }
             if ((div.getTxtShukeiYM2().getValue() == null || div.getTxtShukeiYM2().getValue().isEmpty())
                     && (div.getTxtShukeiYM3().getValue() == null || div.getTxtShukeiYM3().getValue().isEmpty())) {
-                div.getCblGassan1().setSelectedItemsByKey(emptyKey);
+                div.getCblGassan1().setSelectedItemsByKey(EMPTY_KEY);
                 div.getCblGassan1().setDisabled(true);
             } else {
                 div.getCblGassan1().setDisabled(false);
@@ -382,7 +382,7 @@ public class JigyoJokyoHokokuGeppoHandler {
             getShutsuryoku();
         }
         if (new FlexibleDate("平26.07").isBeforeOrEquals((new FlexibleDate(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedValue())))) {
-            div.getCblGassan2().setSelectedItemsByKey(emptyKey);
+            div.getCblGassan2().setSelectedItemsByKey(EMPTY_KEY);
             div.getCblHokenKyufuGembutsu().setDisabled(true);
             div.getCblGassan2().setDisabled(true);
         } 
@@ -393,7 +393,7 @@ public class JigyoJokyoHokokuGeppoHandler {
      */
     public void getShutsuryoku() {
         if (div.getTxtShukeiYM4().getValue() == null || div.getTxtShukeiYM4().getValue().isEmpty()) {
-            div.getCblHokenKyufuGembutsu().setSelectedItemsByKey(emptyKey);
+            div.getCblHokenKyufuGembutsu().setSelectedItemsByKey(EMPTY_KEY);
             div.getCblHokenKyufuGembutsu().setDisabled(true);
             div.getTxtShukeiYM4().setDisabled(true);
         } else {
@@ -401,7 +401,7 @@ public class JigyoJokyoHokokuGeppoHandler {
             div.getTxtShukeiYM4().setDisabled(false);
         }
         if (div.getTxtShukeiYM5().getValue() == null || div.getTxtShukeiYM5().getValue().isEmpty()) {
-            div.getCblHokenKyufuShokan().setSelectedItemsByKey(emptyKey);
+            div.getCblHokenKyufuShokan().setSelectedItemsByKey(EMPTY_KEY);
             div.getCblHokenKyufuShokan().setDisabled(true);
             div.getTxtShukeiYM5().setDisabled(true);
         } else {
@@ -410,7 +410,7 @@ public class JigyoJokyoHokokuGeppoHandler {
         }
         if ((div.getTxtShukeiYM4().getValue() == null || div.getTxtShukeiYM4().getValue().isEmpty())
                 && (div.getTxtShukeiYM5().getValue() == null || div.getTxtShukeiYM5().getValue().isEmpty())) {
-            div.getCblGassan2().setSelectedItemsByKey(emptyKey);
+            div.getCblGassan2().setSelectedItemsByKey(EMPTY_KEY);
             div.getCblGassan2().setDisabled(true);
         } else {
             div.getCblGassan2().setDisabled(false);

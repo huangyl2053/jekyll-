@@ -42,13 +42,13 @@ public class KobetsuJikoRenkeiInfoSakusei {
                 = KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder.createInstance().getChushutsukikanJoho();
         getHandler(div).initialize(chushutsuKikanJohoData);
         
-        if(chushutsuKikanJohoData == null){
+        if (chushutsuKikanJohoData == null) {
             Map 処理日付Map = new HashMap();
-            処理日付Map.put("TxtZenkaiChushutsuToYMD",div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().getValue());
-            処理日付Map.put("TxtZenkaiChushutsuToTime",div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().getValue());
-            処理日付Map.put("TxtKonkaiChushutsuFromYMD",div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().getValue());
-            処理日付Map.put("TxtKonkaiChushutsuFromTime",div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().getValue());
-            ViewStateHolder.put(ViewStateKeys.発行日時Map ,(Serializable)処理日付Map);
+            処理日付Map.put("TxtZenkaiChushutsuToYMD", div.getTblChushutsuKikan().getTxtZenkaiChushutsuToYMD().getValue());
+            処理日付Map.put("TxtZenkaiChushutsuToTime", div.getTblChushutsuKikan().getTxtZenkaiChushutsuToTime().getValue());
+            処理日付Map.put("TxtKonkaiChushutsuFromYMD", div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromYMD().getValue());
+            処理日付Map.put("TxtKonkaiChushutsuFromTime", div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().getValue());
+            ViewStateHolder.put(ViewStateKeys.発行日時Map, (Serializable) 処理日付Map);
         }
         
         ViewStateHolder.put(ViewStateKeys.退避用データ, chushutsuKikanJohoData);
