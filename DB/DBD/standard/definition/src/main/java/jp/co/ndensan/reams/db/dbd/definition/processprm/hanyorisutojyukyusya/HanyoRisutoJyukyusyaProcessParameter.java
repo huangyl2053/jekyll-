@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.hanyorisutojyukyusya;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.ChushutsuHohoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutojyukyusya.HanyoRisutoJyukyusyaMybatisParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
@@ -65,8 +66,16 @@ public class HanyoRisutoJyukyusyaProcessParameter implements IBatchProcessParame
     private FlexibleDate seinengappiYMDFrom;
     private FlexibleDate seinengappiYMDTo;
     private RString hokenshaNo;
-    private RString tiiki_From;
-    private RString tiiki_To;
+    private RString tiiki_From1;
+    private RString tiiki_To1;
+    private RString tiiki_From2;
+    private RString tiiki_To2;
+    private RString tiiki_From3;
+    private RString tiiki_To3;
+    private RString jusyo_From;
+    private RString jusyo_To;
+    private RString gyoseiku_From;
+    private RString gyoseiku_To;
     private boolean 認定結果_0;
     private boolean 認定結果_1;
     private boolean 認定結果_2;
@@ -109,6 +118,23 @@ public class HanyoRisutoJyukyusyaProcessParameter implements IBatchProcessParame
     private boolean is認定結果9length非0;
     private boolean is認定結果10length0;
     private boolean is認定結果10length非0;
+    private RString データ区分_32;
+    private RString データ区分_41;
+    private RString データ区分_49;
+    private RString データ区分_11;
+    private RString データ区分_19;
+    private RString データ区分_31;
+    private RString データ区分_33;
+    private RString データ区分_39;
+    private RString 要介護認定_21;
+    private RString 要介護認定_22;
+    private RString 要介護認定_23;
+    private RString 要介護認定_24;
+    private RString 要介護認定_25;
+    private RString 要介護認定_11;
+    private RString 要介護認定_19;
+    private RString 要介護認定_12;
+    private RString 要介護認定_13;
 
     /**
      * コンストラクタです。
@@ -254,13 +280,17 @@ public class HanyoRisutoJyukyusyaProcessParameter implements IBatchProcessParame
                 is宛名抽出区分_年齢To, is宛名抽出区分_生年月日, is宛名抽出区分_生年月日From,
                 is宛名抽出区分_生年月日To, is宛名抽出条件_保険者コード_非全部,
                 is住所, is行政区, is地区1, is地区2, is地区3, 地区選択From, 地区選択To, kijunYMD, startYMD,
-                endYMD, ageFrom, ageTo, seinengappiYMDFrom, seinengappiYMDTo, hokenshaNo, tiiki_From, tiiki_To,
+                endYMD, ageFrom, ageTo, seinengappiYMDFrom, seinengappiYMDTo, hokenshaNo, tiiki_From1, tiiki_To1,
+                tiiki_From2, tiiki_To2, tiiki_From3, tiiki_To3, jusyo_From, jusyo_To, gyoseiku_From, gyoseiku_To,
                 is認定結果0length0, is認定結果1length0, is認定結果1length非0, is認定結果2length0, is認定結果2length非0,
                 is認定結果3length0, is認定結果3length非0, is認定結果4length0, is認定結果4length非0,
                 is認定結果5length0, is認定結果5length非0, is認定結果6length0, is認定結果6length非0,
                 is認定結果7length0, is認定結果7length非0, is認定結果8length0, is認定結果8length非0,
                 is認定結果9length0, is認定結果9length非0, is認定結果10length0, is認定結果10length非0,
-                出力順);
+                データ区分_32, データ区分_41, データ区分_49, データ区分_11, データ区分_19, データ区分_31, データ区分_33, データ区分_39,
+                要介護認定_21, 要介護認定_22, 要介護認定_23, 要介護認定_24, 要介護認定_25, 要介護認定_12, 要介護認定_13, 要介護認定_11,
+                要介護認定_19, 出力順
+        );
     }
 
     private void set項目(int count) {
@@ -300,18 +330,29 @@ public class HanyoRisutoJyukyusyaProcessParameter implements IBatchProcessParame
         }
         if (認定結果_8 && count == 0) {
             is認定結果8length0 = true;
+            データ区分_32 = Datakubun.自立による却下.getコード();
             count++;
         } else if (認定結果_8 && count != 0) {
             is認定結果8length非0 = true;
+            データ区分_32 = Datakubun.自立による却下.getコード();
         }
         if (認定結果_9 && count == 0) {
             is認定結果9length0 = true;
+            データ区分_41 = Datakubun.過誤による申請取消.getコード();
+            データ区分_49 = Datakubun.その他の理由による申請取消.getコード();
             count++;
         } else if (認定結果_9 && count != 0) {
             is認定結果9length非0 = true;
+            データ区分_41 = Datakubun.過誤による申請取消.getコード();
+            データ区分_49 = Datakubun.その他の理由による申請取消.getコード();
         }
         if (認定結果_10 && count == 0) {
             is認定結果10length0 = true;
+            データ区分_11 = Datakubun.職権による認定取消.getコード();
+            データ区分_19 = Datakubun.その他の理由による認定取消.getコード();
+            データ区分_31 = Datakubun.要介護度の変更無しによる却下.getコード();
+            データ区分_33 = Datakubun.訪問調査未実施による却下.getコード();
+            データ区分_39 = Datakubun.その他の理由による却下.getコード();
             count++;
         } else if (認定結果_10 && count != 0) {
             is認定結果10length非0 = true;
@@ -371,22 +412,22 @@ public class HanyoRisutoJyukyusyaProcessParameter implements IBatchProcessParame
             is住所 = true;
             if (宛名抽出条件.getJusho_From() != null && !宛名抽出条件.getJusho_From().isEmpty()) {
                 地区選択From = true;
-                tiiki_From = 宛名抽出条件.getJusho_From();
+                jusyo_From = 宛名抽出条件.getJusho_From();
             }
             if (宛名抽出条件.getJusho_To() != null && !宛名抽出条件.getJusho_To().isEmpty()) {
                 地区選択To = true;
-                tiiki_To = 宛名抽出条件.getJusho_To();
+                jusyo_To = 宛名抽出条件.getJusho_To();
             }
         }
         if (Chiku.行政区.equals(宛名抽出条件.getChiku_Kubun())) {
             is行政区 = true;
             if (宛名抽出条件.getGyoseiku_From() != null && !宛名抽出条件.getGyoseiku_From().isEmpty()) {
                 地区選択From = true;
-                tiiki_From = 宛名抽出条件.getGyoseiku_From();
+                gyoseiku_From = 宛名抽出条件.getGyoseiku_From();
             }
             if (宛名抽出条件.getGyoseiku_To() != null && !宛名抽出条件.getGyoseiku_To().isEmpty()) {
                 地区選択To = true;
-                tiiki_To = 宛名抽出条件.getGyoseiku_To();
+                gyoseiku_To = 宛名抽出条件.getGyoseiku_To();
             }
         }
     }
@@ -398,27 +439,27 @@ public class HanyoRisutoJyukyusyaProcessParameter implements IBatchProcessParame
             is地区3 = true;
             if (宛名抽出条件.getChiku1_From() != null && !宛名抽出条件.getChiku1_From().isEmpty()) {
                 地区選択From = true;
-                tiiki_From = 宛名抽出条件.getChiku1_From();
+                tiiki_From1 = 宛名抽出条件.getChiku1_From();
             }
             if (宛名抽出条件.getChiku1_To() != null && !宛名抽出条件.getChiku1_To().isEmpty()) {
                 地区選択To = true;
-                tiiki_To = 宛名抽出条件.getChiku1_To();
+                tiiki_To1 = 宛名抽出条件.getChiku1_To();
             }
             if (宛名抽出条件.getChiku2_From() != null && !宛名抽出条件.getChiku2_From().isEmpty()) {
                 地区選択From = true;
-                tiiki_From = 宛名抽出条件.getChiku2_From();
+                tiiki_From2 = 宛名抽出条件.getChiku2_From();
             }
             if (宛名抽出条件.getChiku2_To() != null && !宛名抽出条件.getChiku2_To().isEmpty()) {
                 地区選択To = true;
-                tiiki_To = 宛名抽出条件.getChiku2_To();
+                tiiki_To2 = 宛名抽出条件.getChiku2_To();
             }
             if (宛名抽出条件.getChiku3_From() != null && !宛名抽出条件.getChiku3_From().isEmpty()) {
                 地区選択From = true;
-                tiiki_From = 宛名抽出条件.getChiku3_From();
+                tiiki_From3 = 宛名抽出条件.getChiku3_From();
             }
             if (宛名抽出条件.getChiku3_To() != null && !宛名抽出条件.getChiku3_To().isEmpty()) {
                 地区選択To = true;
-                tiiki_To = 宛名抽出条件.getChiku3_To();
+                tiiki_To3 = 宛名抽出条件.getChiku3_To();
             }
         }
     }

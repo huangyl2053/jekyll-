@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanShikyuGakuKeisanKekka;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanPanelEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanResultEntity;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuPanelListParameter;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120012.DBC8120012TransitionEventName.完了;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120012.DBC8120012TransitionEventName.対象者検索に戻る;
@@ -143,9 +143,9 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
                         new FlexibleYear(div.getDdlTaishoNendo().getSelectedKey()),
                         div.getDdlShikyuShinseishoSeiriNo().getSelectedValue(),
                         new HokenshaNo(div.getDdlShoKisaiHokenshaNo().getSelectedValue()));
-        List<JigyobunShikyugakuKeisanPanelEntity> panelResultList = createHandler(div).処理対象データ取得(parameter);
+        List<JigyobunShikyugakuKeisanResultEntity> panelResultList = createHandler(div).処理対象データ取得(parameter);
         List<JigyoKogakuGassanShikyuGakuKeisanKekka> list = new ArrayList();
-        for (JigyobunShikyugakuKeisanPanelEntity entity : panelResultList) {
+        for (JigyobunShikyugakuKeisanResultEntity entity : panelResultList) {
             int i = 0;
             for (JigyoKogakuGassanShikyuGakuKeisanKekka kekka : list) {
                 if (kekka.toEntity().equalsPrimaryKeys(entity.getDbt3172Entity())) {

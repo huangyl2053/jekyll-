@@ -82,7 +82,7 @@ public class InsJyukyushaTmpProcess extends BatchProcessBase<JukyuusyaEntity> {
             entity.setShikibetsuCode(t.get識別コード());
             entity.setKijunYMD(基準日時点.get(i));
             entity.setShotokuNendo(processParameter.get処理年度());
-            if (t.get適用年月日() != null && t.get解除年月日() != null
+            if (t.get適用年月日() != null && t.get解除年月日() != null && !t.get適用年月日().isEmpty()
                     && (基準日時点.get(i).compareTo(t.get適用年月日()) < INDEX_0) && (t.get解除年月日().isEmpty()
                     || t.get解除年月日().compareTo(基準日時点.get(i)) > INDEX_0)) {
                 entity.setJushochiTokureiFlag(住所地特例フラグ);

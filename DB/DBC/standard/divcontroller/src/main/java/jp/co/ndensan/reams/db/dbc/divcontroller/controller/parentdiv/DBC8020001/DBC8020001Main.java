@@ -36,11 +36,11 @@ public class DBC8020001Main {
 
     private final RString 今回対象日開始日未入力value = new RString("今回対象日開始日未入力flag");
     private final RString 決定者受取年月開始年月未入力value = new RString("決定者受取年月開始年月未入力value");
-    private final static RString INDEX_1 = new RString("1");
-    private final static RString INDEX_2 = new RString("2");
-    private final static RString メニューID_DBCMN63005 = new RString("DBCMN63005");
-    private final static RString メニューID_DBCMNL3003 = new RString("DBCMNL3003");
-    private final static RString メニューID_DBCMNN2004 = new RString("DBCMNN2004");
+    private static final RString INDEX_1 = new RString("1");
+    private static final RString INDEX_2 = new RString("2");
+    private static final RString メニューID_DBCMN63005 = new RString("DBCMN63005");
+    private static final RString メニューID_DBCMNL3003 = new RString("DBCMNL3003");
+    private static final RString メニューID_DBCMNN2004 = new RString("DBCMNN2004");
 
     /**
      * 画面初期化です。
@@ -116,27 +116,7 @@ public class DBC8020001Main {
      * @return ResponseData<DBC8020001MainDiv>
      */
     public ResponseData<DBC8020001MainDiv> onClickCheck_btnBatchRegister(DBC8020001MainDiv div) {
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        boolean flag1 = INDEX_1.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
-        boolean flag2 = INDEX_2.equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey());
-        boolean flag3 = false;
-        List<RString> list = div.getChkSaisakusei().getSelectedKeys();
-        if (!list.isEmpty() && list.get(0).equals(INDEX_1)) {
-            flag3 = true;
-        }
-        if (flag1) {
-            getValidationHandler(div).validateFor振込指定日休日(pairs);
-            getValidationHandler(div).validateFor振込指定日過去日(pairs);
-        }
-        if (flag2) {
-            getValidationHandler(div).validateFor正振込指定日休日(pairs);
-            getValidationHandler(div).validateFor正振込指定日過去日(pairs);
-            getValidationHandler(div).validateFor修正対象データ存在(pairs);
-        }
-        if (flag1 && flag3) {
-            getValidationHandler(div).validateFor再処理対象データ存在(pairs);
-        }
-
+        ValidationMessageControlPairs pairs = checkInput(div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
@@ -230,5 +210,29 @@ public class DBC8020001Main {
 
     private DBC8020001MainValidationHandler getValidationHandler(DBC8020001MainDiv div) {
         return new DBC8020001MainValidationHandler(div);
+    }
+
+    private ValidationMessageControlPairs checkInput(DBC8020001MainDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        boolean flag1 = INDEX_1.equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey());
+        boolean flag2 = INDEX_2.equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey());
+        boolean flag3 = false;
+        List<RString> list = div.getChkSaisakusei().getSelectedKeys();
+        if (!list.isEmpty() && list.get(0).equals(INDEX_1)) {
+            flag3 = true;
+        }
+        if (flag1) {
+            getValidationHandler(div).validateFor振込指定日休日(pairs);
+            getValidationHandler(div).validateFor振込指定日過去日(pairs);
+        }
+        if (flag2) {
+            getValidationHandler(div).validateFor正振込指定日休日(pairs);
+            getValidationHandler(div).validateFor正振込指定日過去日(pairs);
+            getValidationHandler(div).validateFor修正対象データ存在(pairs);
+        }
+        if (flag1 && flag3) {
+            getValidationHandler(div).validateFor再処理対象データ存在(pairs);
+        }
+        return pairs;
     }
 }

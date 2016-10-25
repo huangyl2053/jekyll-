@@ -57,10 +57,11 @@ and open the template in the editor.
     resultMap="resultMap_FutanGendogakuNinteiBatchResultEntity"
     parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futanyikkatsulist.FutanyikkatsuShoninListMapperParameter"
     fetchSize="500">
+        WITH master AS(
         SELECT
            DbT4018KaigoHokenFutanGendogakuNintei.*,
-           DbT4010GemmenGengakuShinsei.*,        
-           <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+           DbT4010GemmenGengakuShinsei.*,
+           C."shikibetsuCode"
         FROM
              (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.noDeleted_DbT4018KaigoHokenFutanGendogakuNintei" />) AS DbT4018KaigoHokenFutanGendogakuNintei 
         LEFT JOIN 
@@ -73,13 +74,25 @@ and open the template in the editor.
             rgdb."DbV1001HihokenshaDaicho" AS C
             ON C."hihokenshaNo" = dbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigohFutanGengkNint_hihokenshaNo"
             AND C."logicalDeletedFlag" IS FALSE
+        WHERE
+            dbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigohFutanGengkNint_ninteiBatchExecutedTimestamp" = #{一括認定バッチ処理日時}
+             )
+        SELECT
+             master.*,
+              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+             master
         INNER JOIN  
             rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
             '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"    
-            ON "ShikibetsuTaisho"."shikibetsuCode" = C."shikibetsuCode"    
-        WHERE
-            dbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigohFutanGengkNint_ninteiBatchExecutedTimestamp" = #{一括認定バッチ処理日時}
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+              (
+              SELECT ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+              FROM 
+              master
+              )
+              ) AS "ShikibetsuTaisho"    
+            ON "ShikibetsuTaisho"."shikibetsuCode" = master."shikibetsuCode"
     </select>
 </mapper>
   

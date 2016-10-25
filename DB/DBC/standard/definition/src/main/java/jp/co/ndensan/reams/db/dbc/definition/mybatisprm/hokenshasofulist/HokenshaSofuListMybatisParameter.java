@@ -20,7 +20,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HokenshaSofuListMybatisParameter implements IMyBatisParameter {
 
-    private Boolean 同月過誤取下分フラグ;
+    private boolean 同月過誤取下分フラグ;
     private RString 審査年月;
 
     /**
@@ -35,7 +35,7 @@ public class HokenshaSofuListMybatisParameter implements IMyBatisParameter {
      *
      * @param 同月過誤取下分フラグ Boolean
      */
-    public HokenshaSofuListMybatisParameter(Boolean 同月過誤取下分フラグ) {
+    public HokenshaSofuListMybatisParameter(boolean 同月過誤取下分フラグ) {
 
         this.同月過誤取下分フラグ = 同月過誤取下分フラグ;
     }

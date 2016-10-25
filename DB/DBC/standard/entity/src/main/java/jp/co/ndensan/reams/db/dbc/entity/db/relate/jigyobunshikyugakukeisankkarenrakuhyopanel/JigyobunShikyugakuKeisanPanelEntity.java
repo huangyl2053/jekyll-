@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 事業高額合算支給額計算結果Entityクラスです。
+ * 事業高額合算支給額計算結果Resultクラスです。
  *
  * @reamsid_L DBC-4840-010 lihang
  */

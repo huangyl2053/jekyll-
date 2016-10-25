@@ -57,8 +57,8 @@ public class ShinsainShiharaimeisaishoEditor implements IShinsainShiharaimeisais
         source.shinsakaiIinCode = item.get審査委員コード();
         source.gokeiSeikyuKingaku = kinngakuFormat(item.get合計請求額());
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (item.get被保険者番号() != null) {
-            source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.get被保険者番号());
+        if (item.get申請書管理番号() != null) {
+            source.hihokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }
         return source;
     }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajohotoroku;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -20,4 +21,9 @@ public class FukaJohoTorokuMybatisParameter {
 
     private RString syoriName;
     private FlexibleYear nendo;
+    private FlexibleYear choteiNendo;
+    private FlexibleYear fukaNendo;
+    private TsuchishoNo tsuchishoNo;
+    private RString choshuHouhou;
+    private int ki;
 }

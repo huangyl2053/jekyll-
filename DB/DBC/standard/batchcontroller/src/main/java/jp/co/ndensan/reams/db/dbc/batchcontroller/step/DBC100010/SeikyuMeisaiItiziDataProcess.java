@@ -34,7 +34,9 @@ public class SeikyuMeisaiItiziDataProcess extends BatchProcessBase<SeikyuMeisaiI
     private KaishuriyushoSeikyushoShinseishoProcessParameter processParameter;
     @BatchWriter
     private BatchPermanentTableWriter<DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity> dbT3095EntityWriter;
+    @BatchWriter
     private BatchPermanentTableWriter<DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity> dbT3096EntityWriter;
+    @BatchWriter
     BatchEntityCreatedTempTableWriter 請求明細一時ファイルB;
 
     @Override
@@ -56,25 +58,27 @@ public class SeikyuMeisaiItiziDataProcess extends BatchProcessBase<SeikyuMeisaiI
         dbT3095EntityWriter.update(entity.getDbT3095());
         entity.getDbT3096().setIsDeleted(true);
         dbT3096EntityWriter.update(entity.getDbT3096());
-        SeikyuMeisaiItiziEUCEntity eucEntity = new SeikyuMeisaiItiziEUCEntity();
-        eucEntity.set証記載保険者番号(hokenshaNoToShoKisaiHokenshaNo(entity.getDbT3095().getShoKisaiHokenshaNo()));
-        eucEntity.set被保険者番号(entity.getDbT3095().getHihokenshaNo());
-        eucEntity.set履歴番号(entity.getDbT3095().getRirekiNo());
-        eucEntity.setサービスコード(entity.getサービスコード());
-        eucEntity.set介護住宅改修事業者名称(entity.get住宅改修事業者名());
-        eucEntity.set介護住宅改修着工年月日(entity.get住宅改修着工年月日());
-        eucEntity.set介護住宅改修住宅所有者(entity.get住宅所有者());
-        eucEntity.set改修対象住宅住所(entity.get住宅改修住宅住所());
-        eucEntity.set改修内容箇所及び規模(entity.get住宅改修内容());
-        eucEntity.set介護住宅改修理由書作成年月日(entity.get理由書作成日());
-        eucEntity.set介護住宅改修理由書作成事業者番号(entity.get理由書作成事業者番号());
-        eucEntity.set介護住宅改修理由書作成者名(entity.get理由書作成者());
-        eucEntity.set介護住宅改修理由書作成者名カナ(entity.get理由書作成者カナ());
-        eucEntity.set介護住宅改修理由書作成申請年月日(entity.get申請年月日());
-        eucEntity.set介護住宅改修理由書作成受付年月日(entity.get受付年月日());
-        eucEntity.set集計関連付け番号(RString.EMPTY);
-        eucEntity.set対象外フラグ(false);
-        請求明細一時ファイルB.insert(eucEntity);
+        if (entity.get理由書作成事業者番号() != null) {
+            SeikyuMeisaiItiziEUCEntity eucEntity = new SeikyuMeisaiItiziEUCEntity();
+            eucEntity.set証記載保険者番号(hokenshaNoToShoKisaiHokenshaNo(entity.getDbT3095().getShoKisaiHokenshaNo()));
+            eucEntity.set被保険者番号(entity.getDbT3095().getHihokenshaNo());
+            eucEntity.set履歴番号(entity.getDbT3095().getRirekiNo());
+            eucEntity.setサービスコード(entity.getサービスコード());
+            eucEntity.set介護住宅改修事業者名称(entity.get住宅改修事業者名());
+            eucEntity.set介護住宅改修着工年月日(entity.get住宅改修着工年月日());
+            eucEntity.set介護住宅改修住宅所有者(entity.get住宅所有者());
+            eucEntity.set改修対象住宅住所(entity.get住宅改修住宅住所());
+            eucEntity.set改修内容箇所及び規模(entity.get住宅改修内容());
+            eucEntity.set介護住宅改修理由書作成年月日(entity.get理由書作成日());
+            eucEntity.set介護住宅改修理由書作成事業者番号(entity.get理由書作成事業者番号());
+            eucEntity.set介護住宅改修理由書作成者名(entity.get理由書作成者());
+            eucEntity.set介護住宅改修理由書作成者名カナ(entity.get理由書作成者カナ());
+            eucEntity.set介護住宅改修理由書作成申請年月日(entity.get申請年月日());
+            eucEntity.set介護住宅改修理由書作成受付年月日(entity.get受付年月日());
+            eucEntity.set集計関連付け番号(RString.EMPTY);
+            eucEntity.set対象外フラグ(false);
+            請求明細一時ファイルB.insert(eucEntity);
+        }
     }
 
     private ShoKisaiHokenshaNo hokenshaNoToShoKisaiHokenshaNo(HokenshaNo date) {

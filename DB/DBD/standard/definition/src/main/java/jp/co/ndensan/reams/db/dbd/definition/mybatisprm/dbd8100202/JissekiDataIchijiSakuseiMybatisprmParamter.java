@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100202;
 
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import lombok.Getter;
@@ -25,9 +26,9 @@ public class JissekiDataIchijiSakuseiMybatisprmParamter implements IMyBatisParam
     /**
      * 実績データ一時Mybatisパラメータ
      *
-     * @param shikibetsutaishoParam shikibetsutaishoParam
+     * @param searchKey 検索キー
      */
-    public JissekiDataIchijiSakuseiMybatisprmParamter(UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam) {
-        this.shikibetsutaishoParam = shikibetsutaishoParam;
+    public JissekiDataIchijiSakuseiMybatisprmParamter(IShikibetsuTaishoPSMSearchKey searchKey) {
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
     }
 }

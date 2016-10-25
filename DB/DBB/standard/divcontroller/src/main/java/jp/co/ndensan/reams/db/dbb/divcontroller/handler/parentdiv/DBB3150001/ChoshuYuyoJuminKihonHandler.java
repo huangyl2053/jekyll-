@@ -712,7 +712,7 @@ public class ChoshuYuyoJuminKihonHandler {
             普通徴収猶予情報パネル.getTxtYuyoKikanKaishi14().setReadOnly(false);
             普通徴収猶予情報パネル.getTxtYuyoKikanShuryo14().setReadOnly(false);
         } else {
-            普通徴収猶予情報パネル.getTxtYuyoKikanKaishi1().setReadOnly(true);
+            普通徴収猶予情報パネル.getTxtYuyoKikanKaishi14().setReadOnly(true);
             普通徴収猶予情報パネル.getTxtYuyoKikanShuryo14().setReadOnly(true);
         }
     }

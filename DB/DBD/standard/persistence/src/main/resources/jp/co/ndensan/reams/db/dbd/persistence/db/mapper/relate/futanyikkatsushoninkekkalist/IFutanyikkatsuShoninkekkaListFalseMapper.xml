@@ -16,6 +16,7 @@ and open the template in the editor.
     resultMap="resultMap_FutanGendogakuNinteiBatchResultEntityfalse"
     parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futanyikkatsulist.FutanyikkatsuShoninListMapperParameter"
     fetchSize="500">
+       WITH master AS ( 
         SELECT
             E."insertDantaiCd" AS "dbT4018KaigohFutanGengkNint_insertDantaiCd",
             E."insertTimestamp" AS "dbT4018KaigohFutanGengkNint_insertTimestamp",
@@ -60,8 +61,8 @@ and open the template in the editor.
             A."yochokinGaku" AS "dbT4018KaigohFutanGengkNint_yochokinGaku",
             A."yukashoukenGaisangaku" AS "dbT4018KaigohFutanGengkNint_yukashoukenGaisangaku",
             A."sonotaKingaku" AS "dbT4018KaigohFutanGengkNint_sonotaKingaku",
-            DbT4010GemmenGengakuShinsei.*,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+            C."shikibetsuCode",
+            DbT4010GemmenGengakuShinsei.*           
         FROM 
             rgdb."DbT4036FutanGendogakuNinteiBatchTestResults" AS A
             INNER JOIN 
@@ -76,10 +77,23 @@ and open the template in the editor.
             INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS C
             ON C."hihokenshaNo" = A."hihokenshaNo"
             AND C."logicalDeletedFlag" = A."isDeleted"
+            )
+            SELECT
+            master.*,
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+             FROM
+             master
             INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
             '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-            ON "ShikibetsuTaisho"."shikibetsuCode" = C."shikibetsuCode"
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+             (
+             SELECT
+               ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+             FROM
+             master
+             )
+             ) AS "ShikibetsuTaisho"
+            ON "ShikibetsuTaisho"."shikibetsuCode" = master."shikibetsuCode"
     </select>
 </mapper>
   

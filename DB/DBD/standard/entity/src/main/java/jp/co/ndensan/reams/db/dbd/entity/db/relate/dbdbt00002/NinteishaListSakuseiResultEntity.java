@@ -47,6 +47,7 @@ public class NinteishaListSakuseiResultEntity extends DbTableEntityBase<Taishosh
     private FlexibleDate 総者の適用終了年月日;
     private HihokenshaNo 認定情報の被保険者番号;
     private RString 認定情報の要介護状態区分コード;
+    private RString 市町村コード;
     private FlexibleDate 認定情報の認定年月日;
     private FlexibleDate 認定情報の認定有効期間開始年月日;
     private FlexibleDate 認定情報の認定有効期間終了年月日;

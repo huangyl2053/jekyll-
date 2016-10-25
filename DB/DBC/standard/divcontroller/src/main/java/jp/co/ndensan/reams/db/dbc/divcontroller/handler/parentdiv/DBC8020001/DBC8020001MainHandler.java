@@ -53,24 +53,24 @@ public class DBC8020001MainHandler {
     private final DBC8020001MainDiv div;
     private KinyuKikanCode 代表金融機関コード;
     private RString 振込グループコード;
-    private final static RString TITLE_高額合算 = new RString("高額合算振込明細・振込データ作成");
-    private final static RString TITLE_事業高額 = new RString("総合事業振込明細・振込データ作成");
-    private final static RString TITLE_事業高額合算 = new RString("事業分振込明細・振込データ作成");
-    private final static RString メニューID_DBCMN63005 = new RString("DBCMN63005");
-    private final static RString メニューID_DBCMNL3003 = new RString("DBCMNL3003");
-    private final static RString メニューID_DBCMNN2004 = new RString("DBCMNN2004");
-    private final static RString 実行するボタン_高額合算 = new RString("btnBatchRegisterKogakuGassan");
-    private final static RString 実行するボタン_事業高額 = new RString("btnBatchRegisterJigyoKogaku");
-    private final static RString 実行するボタン_事業高額合算 = new RString("btnBatchRegisterJigyoKogakuGassan");
-    private final static LasdecCode 市町村コード = new LasdecCode("000000");
-    private final static RString 処理枝番 = new RString("0000");
-    private final static FlexibleYear 年度 = new FlexibleYear("0000");
-    private final static RString 年度内連番 = new RString("0001");
-    private final static RString メッセージ = new RString("委託者情報の取得");
-    private final static RString INDEX_1 = new RString("1");
-    private final static RString INDEX_2 = new RString("2");
-    private final static int INDEXSTART = 0;
-    private final static int INDEXEND = 6;
+    private static final RString TITLE_高額合算 = new RString("高額合算振込明細・振込データ作成");
+    private static final RString TITLE_事業高額 = new RString("総合事業振込明細・振込データ作成");
+    private static final RString TITLE_事業高額合算 = new RString("事業分振込明細・振込データ作成");
+    private static final RString メニューID_DBCMN63005 = new RString("DBCMN63005");
+    private static final RString メニューID_DBCMNL3003 = new RString("DBCMNL3003");
+    private static final RString メニューID_DBCMNN2004 = new RString("DBCMNN2004");
+    private static final RString 実行するボタン_高額合算 = new RString("btnBatchRegisterKogakuGassan");
+    private static final RString 実行するボタン_事業高額 = new RString("btnBatchRegisterJigyoKogaku");
+    private static final RString 実行するボタン_事業高額合算 = new RString("btnBatchRegisterJigyoKogakuGassan");
+    private static final LasdecCode 市町村コード = new LasdecCode("000000");
+    private static final RString 処理枝番 = new RString("0000");
+    private static final FlexibleYear 年度 = new FlexibleYear("0000");
+    private static final RString 年度内連番 = new RString("0001");
+    private static final RString メッセージ = new RString("委託者情報の取得");
+    private static final RString INDEX_1 = new RString("1");
+    private static final RString INDEX_2 = new RString("2");
+    private static final int INDEXSTART = 0;
+    private static final int INDEXEND = 6;
 
     /**
      * コンストラクターです。
@@ -249,7 +249,7 @@ public class DBC8020001MainHandler {
      * @param メニューID RString
      * @return RString
      */
-    public RString prepare処理名(RString メニューID) {
+    private RString prepare処理名(RString メニューID) {
         RString 処理名 = RString.EMPTY;
         switch (メニューID.toString()) {
             case "DBCMN63005":

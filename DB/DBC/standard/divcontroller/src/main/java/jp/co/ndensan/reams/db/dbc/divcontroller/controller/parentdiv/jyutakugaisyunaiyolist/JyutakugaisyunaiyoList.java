@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -21,10 +22,12 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -120,8 +123,11 @@ public class JyutakugaisyunaiyoList {
      * @return JyutakugaisyunaiyoListDivのResponseData
      */
     public ResponseData<JyutakugaisyunaiyoListDiv> onClick_ClearButton(JyutakugaisyunaiyoListDiv requestDiv) {
-        requestDiv = clear内容(requestDiv);
-        requestDiv = clear制御非活性(requestDiv);
+        if (モード_追加.equals(requestDiv.getPnlNyuryokuArea().getState())) {
+            requestDiv = clear内容(requestDiv);
+        } else if (モード_修正.equals(requestDiv.getPnlNyuryokuArea().getState())) {
+            set入力内容(requestDiv, requestDiv.getDgGaisyuList().getActiveRow());
+        }
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -133,6 +139,14 @@ public class JyutakugaisyunaiyoList {
      */
     public ResponseData<JyutakugaisyunaiyoListDiv> onClick_ConfirmButton(JyutakugaisyunaiyoListDiv requestDiv) {
         List<dgGaisyuList_Row> list = requestDiv.getDgGaisyuList().getDataSource();
+        if ((モード_追加.equals(requestDiv.getPnlNyuryokuArea().getState()) || モード_修正.equals(requestDiv.getPnlNyuryokuArea().getState()))) {
+            JyutakugaisyunaiyoListValidationHandler validationHandler = getValidationHandler(requestDiv);
+            FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_サービス年月, FlexibleYearMonth.class);
+            ValidationMessageControlPairs validPairs = validationHandler.validateFor着工日とサービス年月提供着工年月のチェック(サービス年月);
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
+            }
+        }
         dgGaisyuList_Row dgGaisyuListRow;
         if (モード_追加.equals(requestDiv.getPnlNyuryokuArea().getState())) {
             ValidationMessageControlPairs validPairs = getCheck(requestDiv);
@@ -164,10 +178,16 @@ public class JyutakugaisyunaiyoList {
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
             }
-            dgGaisyuListRow.setTxtJyotai(モード_修正);
+            if (!モード_追加.equals(dgGaisyuListRow.getTxtJyotai())) {
+                dgGaisyuListRow.setTxtJyotai(モード_修正);
+            }
             listRowSet(dgGaisyuListRow, requestDiv);
         } else if (モード_削除.equals(requestDiv.getPnlNyuryokuArea().getState())) {
-            dgGaisyuListRow.setTxtJyotai(モード_削除);
+            if (モード_追加.equals(dgGaisyuListRow.getTxtJyotai())) {
+                requestDiv.getDgGaisyuList().getDataSource().remove(dgGaisyuListRow);
+            } else {
+                dgGaisyuListRow.setTxtJyotai(モード_削除);
+            }
         }
         return null;
     }
@@ -188,21 +208,7 @@ public class JyutakugaisyunaiyoList {
     private JyutakugaisyunaiyoListDiv setPnlNyuryokuArea(RString 状態, JyutakugaisyunaiyoListDiv requestDiv) {
         requestDiv.getDgGaisyuList().getGridSetting().selectedRowCount();
         dgGaisyuList_Row dgGaisyuListRow = requestDiv.getDgGaisyuList().getSelectedItems().get(0);
-        requestDiv.getTxtKaisyunaiyo().setValue(dgGaisyuListRow.getTxtKaishuNaiyo());
-        requestDiv.getTxtJigyosya().setValue(dgGaisyuListRow.getTxtJigyosha());
-        if (dgGaisyuListRow.getTxtJutakuAddress() != null) {
-            AtenaJusho domain = new AtenaJusho(dgGaisyuListRow.getTxtJutakuAddress());
-            requestDiv.getTxtJyusyo().setDomain(domain);
-        }
-        if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtChakkoYoteibi())) {
-            requestDiv.getTxtTyakkoyotebi().setValue(new RDate(dgGaisyuListRow.getTxtChakkoYoteibi().toString()));
-        }
-        if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtKanseiYoteibi())) {
-            requestDiv.getTxtKanseyotebi().setValue(new RDate(dgGaisyuListRow.getTxtKanseiYoteibi().toString()));
-        }
-        if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtKaishuKingaku())) {
-            requestDiv.getTxtKaisyukingaku().setValue(new Decimal(dgGaisyuListRow.getTxtKaishuKingaku().toString().trim()));
-        }
+        set入力内容(requestDiv, dgGaisyuListRow);
         if (モード_修正.equals(状態)) {
             requestDiv = clear制御活性(requestDiv);
             requestDiv.getPnlNyuryokuArea().setState(モード_修正);
@@ -223,6 +229,24 @@ public class JyutakugaisyunaiyoList {
 
     private JyutakugaisyunaiyoListValidationHandler getValidationHandler(JyutakugaisyunaiyoListDiv div) {
         return new JyutakugaisyunaiyoListValidationHandler(div);
+    }
+
+    private void set入力内容(JyutakugaisyunaiyoListDiv requestDiv, dgGaisyuList_Row dgGaisyuListRow) {
+        requestDiv.getTxtKaisyunaiyo().setValue(dgGaisyuListRow.getTxtKaishuNaiyo());
+        requestDiv.getTxtJigyosya().setValue(dgGaisyuListRow.getTxtJigyosha());
+        if (dgGaisyuListRow.getTxtJutakuAddress() != null) {
+            AtenaJusho domain = new AtenaJusho(dgGaisyuListRow.getTxtJutakuAddress());
+            requestDiv.getTxtJyusyo().setDomain(domain);
+        }
+        if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtChakkoYoteibi())) {
+            requestDiv.getTxtTyakkoyotebi().setValue(new RDate(dgGaisyuListRow.getTxtChakkoYoteibi().toString()));
+        }
+        if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtKanseiYoteibi())) {
+            requestDiv.getTxtKanseyotebi().setValue(new RDate(dgGaisyuListRow.getTxtKanseiYoteibi().toString()));
+        }
+        if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtKaishuKingaku())) {
+            requestDiv.getTxtKaisyukingaku().setValue(new Decimal(dgGaisyuListRow.getTxtKaishuKingaku().toString().trim()));
+        }
     }
 
     private JyutakugaisyunaiyoListDiv clearAll(JyutakugaisyunaiyoListDiv div) {

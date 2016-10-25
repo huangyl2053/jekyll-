@@ -236,6 +236,13 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
     protected void afterExecute() {
         if (processParamter.isCsvkomokumeifuka() && eucCsvWriter.getCount() == 0) {
             eucCsvWriter.writeLine(HanyoListTokubetsuChiikiKasanGemmenManager.createInstance().setBlank());
+            if (hanyoListShutsuryokuKomoku != null) {
+                for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
+                    RString get項目名称 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目名称();
+                    帳票出力とCSV出力編集new(i, hanyoListShutsuryokuKomoku, get項目名称);
+                }
+                帳票出力とCSV出力();
+            }
         }
         eucCsvWriter.close();
         eucCsvWriter1.close();
@@ -249,7 +256,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         }
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
-        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount()));
+        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
         RString 出力件数 = new RString(String.valueOf(eucCsvWriter1.getCount()));
         HanyoListTokubetsuChiikiKasanGemmenManager.createInstance().バッチ出力条件リストの出力(processParamter, 導入団体コード,
                 市町村名, is帳票出力, 出力ページ数, 出力件数);
@@ -265,6 +272,72 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
             is帳票出力 = true;
         }
 
+    }
+
+    private void 帳票出力とCSV出力編集new(int i, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku, RString get項目名称) {
+        if (is帳票出力) {
+            帳票出力編集new(i, hanyoListShutsuryokuKomoku, get項目名称);
+        }
+        if (isCSV出力) {
+            出力編集new(i, get項目名称);
+        }
+    }
+
+    private void 帳票出力編集new(int i, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku, RString get項目名称) {
+        int get項目桁数 = hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get項目桁数();
+        if (get項目名称.length()
+                > get項目桁数) {
+            get項目名称 = get項目名称.substring(0, get項目桁数);
+        } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.左詰め.getコード())) {
+            int 桁数 = get項目桁数 - get項目名称.length();
+            for (int j = 0; j < 桁数; j++) {
+                get項目名称 = get項目名称.concat(RString.HALF_SPACE);
+            }
+        } else if (hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().get(i).get編集方法().equals(ShutsuryokuKomokuPosition.右詰め.getコード())) {
+            int 桁数 = get項目桁数 - get項目名称.length();
+            for (int j = 0; j < 桁数; j++) {
+                get項目名称 = RString.HALF_SPACE.concat(get項目名称);
+            }
+        }
+        if (i == 0) {
+            項目見出し = 項目見出し.concat(get項目名称);
+            出力桁数 = get項目桁数;
+            項目名称 = 出力文字の開始位置 + get項目名称.length();
+
+        } else {
+            出力文字の開始位置 = 出力桁数 + hanyoListShutsuryokuKomoku.get項目間スペース数();
+            項目見出し = get項目見出し(項目見出し, 出力文字の開始位置 - 項目名称);
+            項目見出し = 項目見出し.concat(get項目名称);
+            出力桁数 = 出力文字の開始位置 + get項目桁数;
+            項目名称 = 出力文字の開始位置 + get項目名称.length();
+        }
+    }
+
+    private void 出力編集new(int i, RString get項目名称) {
+        if (processParamter.isCsvrenbanfuka()) {
+            連番ありnew(i, get項目名称);
+        } else {
+            csvHeader.add(get項目名称);
+        }
+    }
+
+    private void 連番ありnew(int i, RString get項目名称) {
+        if (i == 0) {
+            csvHeader.add(new RString("連番"));
+        }
+        csvHeader.add(get項目名称);
+    }
+
+    private void 帳票出力とCSV出力() {
+        if (is帳票出力) {
+            HanyoListEntity hanyolistentity = new HanyoListEntity();
+            HanyoListReport report = new HanyoListReport(hanyolistentity, processParamter.getHyoudai(),
+                    processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
+            report.writeBy(reportSourceWriter);
+        }
+        if (isCSV出力) {
+            eucCsvWriter1.writeLine(csvHeader);
+        }
     }
 
     private void 帳票出力とCSV出力編集(int i, HanyoListShutsuryokuKomoku hanyoListShutsuryokuKomoku, RString get項目名称, RString 項目内容new) {

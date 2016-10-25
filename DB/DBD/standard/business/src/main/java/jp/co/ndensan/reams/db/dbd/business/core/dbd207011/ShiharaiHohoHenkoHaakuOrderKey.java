@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 支払方法変更滞納者把握リスト作成事前準備のEnumクラスです。
  *
- * @reamsid_LDBD-3650-050 x_lilh
+ * @reamsid_L DBD-3650-050 x_lilh
  */
 public enum ShiharaiHohoHenkoHaakuOrderKey implements IReportItems {
 

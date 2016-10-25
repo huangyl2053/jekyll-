@@ -57,7 +57,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource implements IRep
     public RString tsuchibun2;
     @ReportItem(name = "hihokenshaName", order = 19)
     public RString hihokenshaName;
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "hihokenshaNo1", length = 1, order = 20)
     public RString hihokenshaNo1;
     @ReportItem(name = "hihokenshaNo2", length = 1, order = 21)
@@ -380,6 +379,9 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource implements IRep
     public RString ninshoshaShimeiKakeru;
     @ReportItem(name = "koinShoryaku", length = 15, order = 180)
     public RString koinShoryaku;
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
+    @ReportItem(name = "hihokenshaNo", length = 10, order = 181)
+    public RString hihokenshaNo;
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
