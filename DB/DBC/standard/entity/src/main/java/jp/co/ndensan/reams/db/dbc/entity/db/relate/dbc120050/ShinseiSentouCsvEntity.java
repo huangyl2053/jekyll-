@@ -214,10 +214,10 @@ public class ShinseiSentouCsvEntity implements IShinseiJoho {
 
     @Override
     public RString get入力識別番号() {
-        if (KyufuJissekiRecordShubetsu.介護給付費_高額介護サービス費情報レコード.getコード().equals(レコード種別)) {
+        if (KyufuJissekiRecordShubetsu.介護給付費_高額介護サービス費情報レコード.getコード().equals(レコード種別コード)) {
             return new RString("3411");
         }
-        if (KyufuJissekiRecordShubetsu.総合事業費_高額介護サービス費情報レコード.getコード().equals(レコード種別)) {
+        if (KyufuJissekiRecordShubetsu.総合事業費_高額介護サービス費情報レコード.getコード().equals(レコード種別コード)) {
             return new RString("3421");
         }
         return 入力識別番号;
@@ -235,8 +235,8 @@ public class ShinseiSentouCsvEntity implements IShinseiJoho {
 
     @Override
     public RString get事業所番号() {
-        if (KyufuJissekiRecordShubetsu.介護給付費_高額介護サービス費情報レコード.getコード().equals(レコード種別)
-                || KyufuJissekiRecordShubetsu.総合事業費_高額介護サービス費情報レコード.getコード().equals(レコード種別)) {
+        if (KyufuJissekiRecordShubetsu.介護給付費_高額介護サービス費情報レコード.getコード().equals(レコード種別コード)
+                || KyufuJissekiRecordShubetsu.総合事業費_高額介護サービス費情報レコード.getコード().equals(レコード種別コード)) {
             return RString.EMPTY;
         }
         return 項目１;
@@ -244,8 +244,8 @@ public class ShinseiSentouCsvEntity implements IShinseiJoho {
 
     @Override
     public RString get整理番号() {
-        if (KyufuJissekiRecordShubetsu.介護給付費_高額介護サービス費情報レコード.getコード().equals(レコード種別)
-                || KyufuJissekiRecordShubetsu.総合事業費_高額介護サービス費情報レコード.getコード().equals(レコード種別)) {
+        if (KyufuJissekiRecordShubetsu.介護給付費_高額介護サービス費情報レコード.getコード().equals(レコード種別コード)
+                || KyufuJissekiRecordShubetsu.総合事業費_高額介護サービス費情報レコード.getコード().equals(レコード種別コード)) {
             return RString.EMPTY;
         }
         return 項目２;

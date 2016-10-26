@@ -64,13 +64,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
-import jp.co.ndensan.reams.uz.uza.report.IReportSource;
-import jp.co.ndensan.reams.uz.uza.report.Report;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
-import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -125,11 +118,11 @@ public class IryoHiKojoKakuninSinsei {
      * @return boolean
      */
     public boolean checkuJukyusha(HihokenshaNo 被保険者番号) {
-        List<DbV4001JukyushaDaichoEntity> dbV4001JukyushaDaichoEntityList = dbV4001JukyushaDaichoAliveDac.
+        List<DbV4001JukyushaDaichoEntity> dbV4001EntityList = dbV4001JukyushaDaichoAliveDac.
                 selectBy被保険者番号AND有効無効区分(被保険者番号, YukoMukoKubun.有効.getコード());
         Integer レコード数 = 0;
-        if (dbV4001JukyushaDaichoEntityList != null) {
-            レコード数 = dbV4001JukyushaDaichoEntityList.size();
+        if (dbV4001EntityList != null) {
+            レコード数 = dbV4001EntityList.size();
         }
         return レコード数 > 0;
     }
@@ -242,9 +235,13 @@ public class IryoHiKojoKakuninSinsei {
         }
 
         IKojin 宛名情報 = getAtena_Iryohikojyo(識別コード);
-        if (宛名情報 == null || JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(管内住所編集_編集方法)) {
-            EditedJusho 編集後住所 = null;
-            return setおむつ使用証明書Entity(宛名情報, 編集後住所);
+        if (null == 宛名情報) {
+            return new OmutsusiyoSyomeishoEntity();
+        }
+        OmutsusiyoSyomeishoEntity おむつ使用証明書Entity = new OmutsusiyoSyomeishoEntity();
+        setおむつ使用証明書_宛名情報(おむつ使用証明書Entity, 宛名情報);
+        if (JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(管内住所編集_編集方法)) {
+            return おむつ使用証明書Entity;
         }
         JushoEditorBuilder jushoEditorBuilder = new JushoEditorBuilder(宛名情報.get住所());
         if (表示する.equals(管内住所編集_都道府県名付与有無)) {
@@ -278,8 +275,9 @@ public class IryoHiKojoKakuninSinsei {
         }
         jushoEditorBuilder.set行政区(宛名情報.get行政区画().getGyoseiku());
         EditedJusho 編集後住所 = jushoEditorBuilder.build().editJusho();
+        setおむつ使用証明書_編集後住所(おむつ使用証明書Entity, 編集後住所, 宛名情報);
 
-        return setおむつ使用証明書Entity(宛名情報, 編集後住所);
+        return おむつ使用証明書Entity;
     }
 
     /**
@@ -525,19 +523,41 @@ public class IryoHiKojoKakuninSinsei {
         return MeishoFuyoTypeEnum.無し.getMeishoFuyoType();
     }
 
-    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
-            IReportProperty<T> property, ReportManager manager) {
-        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
-        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
-            builder.addBreak(breaker);
+    private void setおむつ使用証明書_宛名情報(OmutsusiyoSyomeishoEntity おむつ使用証明書Entity, IKojin 宛名情報) {
+        RString 氏名 = RString.EMPTY;
+        if (宛名情報.get住民種別().equals(JuminShubetsu.日本人) || 宛名情報.get住民種別().equals(JuminShubetsu.住登外個人_日本人)) {
+            氏名 = 宛名情報.get日本人氏名().getName().value();
+            おむつ使用証明書Entity.set生年月日(宛名情報.get生年月日().toFlexibleDate()
+                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        } else if (宛名情報.get住民種別().equals(JuminShubetsu.外国人) || 宛名情報.get住民種別().equals(JuminShubetsu.住登外個人_外国人)) {
+            氏名 = 宛名情報.get外国人氏名().getName().value();
+            おむつ使用証明書Entity.set生年月日(宛名情報.get生年月日().toFlexibleDate().seireki()
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
-        builder.isHojinNo(property.containsHojinNo());
-        builder.isKojinNo(property.containsKojinNo());
-        return builder.<T>create();
+        if (氏名.length() <= サーティ) {
+            おむつ使用証明書Entity.set氏名(氏名);
+            おむつ使用証明書Entity.set氏名１(RString.EMPTY);
+            おむつ使用証明書Entity.set氏名２(RString.EMPTY);
+        } else if (氏名.length() <= シックスティ) {
+            おむつ使用証明書Entity.set氏名(RString.EMPTY);
+            おむつ使用証明書Entity.set氏名１(氏名.substring(0, サーティ));
+            おむつ使用証明書Entity.set氏名２(氏名.substring(サーティ));
+        } else {
+            おむつ使用証明書Entity.set氏名(RString.EMPTY);
+            おむつ使用証明書Entity.set氏名１(氏名.substring(0, サーティ));
+            おむつ使用証明書Entity.set氏名２(氏名.substring(サーティ, シックスティ));
+        }
+        if (宛名情報.get性別().getCode().equals(性別男)) {
+            おむつ使用証明書Entity.set性別男(選択する);
+            おむつ使用証明書Entity.set性別女(RString.EMPTY);
+        } else {
+            おむつ使用証明書Entity.set性別男(RString.EMPTY);
+            おむつ使用証明書Entity.set性別女(選択する);
+        }
     }
 
-    private OmutsusiyoSyomeishoEntity setおむつ使用証明書Entity(IKojin 宛名情報, EditedJusho 編集後住所) {
-        OmutsusiyoSyomeishoEntity おむつ使用証明書Entity = new OmutsusiyoSyomeishoEntity();
+    private void setおむつ使用証明書_編集後住所(OmutsusiyoSyomeishoEntity おむつ使用証明書Entity, EditedJusho 編集後住所, IKojin 宛名情報) {
         if (編集後住所 != null) {
             RString 完全な住所 = 編集後住所.get編集後住所All();
             RString 方書より前までの住所 = 編集後住所.get編集後住所方書前();
@@ -588,6 +608,5 @@ public class IryoHiKojoKakuninSinsei {
             おむつ使用証明書Entity.set性別男(RString.EMPTY);
             おむつ使用証明書Entity.set性別女(選択する);
         }
-        return おむつ使用証明書Entity;
     }
 }

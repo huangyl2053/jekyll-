@@ -7,9 +7,12 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710010;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.hanyolistshokanbaraijokyo.HanyoListKyotakuServiceKeikakuOutputOrders;
+import jp.co.ndensan.reams.db.dbc.business.core.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoOutputOrders;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.SakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuKijunYMDParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity;
@@ -19,14 +22,18 @@ import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
-import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -41,11 +48,11 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -60,7 +67,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 汎用リスト 居宅サービス計画Processクラスです。
@@ -97,11 +103,10 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     private List<PersonalData> personalDataList;
     private RString eucFilePath;
     private Decimal 連番;
-    private final MapperProvider mapperProvider = InstanceProvider.create(MapperProvider.class);
     private IHanyoListKyotakuServiceKeikakuMapper mapper;
 
     @BatchWriter
-    private EucCsvWriter<HanyoListKyotakuServiceKeikakuCsvEntity> eucCsvWriter;
+    private CsvWriter<HanyoListKyotakuServiceKeikakuCsvEntity> eucCsvWriter;
 
     @Override
     protected void beforeExecute() {
@@ -109,6 +114,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         csvEntityEditor = new HanyoListKyotakuServiceKeikakuCsvEntityEditor();
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        mapper = getMapper(IHanyoListKyotakuServiceKeikakuMapper.class);
 
     }
 
@@ -121,9 +127,30 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         builder.set識別コードリスト(list);
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         parameter.set宛名検索条件(searchKey);
-//        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        mapper = mapperProvider.create(IHanyoListKyotakuServiceKeikakuMapper.class);
-        return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParameter());
+        IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder outputOrder = null;
+        if (parameter.get改頁出力順ID() != null) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBC介護給付, parameter.get帳票ID(),
+                    Long.valueOf(parameter.get改頁出力順ID().toString()));
+        }
+        RString 様式番号Order = RString.EMPTY;
+        RString orderByClause = null;
+        if (outputOrder != null) {
+            for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
+                if (HanyoListShokanbaraiJokyoOutputOrders.様式番号.get項目ID().equals(setSortItem.get項目ID())) {
+                    様式番号Order = new RString(setSortItem.get昇降順().getOrder());
+                } else {
+                    様式番号Order = RString.EMPTY;
+                }
+            }
+            orderByClause = MyBatisOrderByClauseCreator.create(HanyoListKyotakuServiceKeikakuOutputOrders.class,
+                    outputOrder);
+        }
+        HanyoListKyotakuServiceKeikakuMybatisParameter mabatisParam = parameter.toMybatisParameter();
+        mabatisParam.setOrderByClause(orderByClause);
+        mabatisParam.set様式番号Order(様式番号Order);
+
+        return new BatchDbReader(READ_DATA_ID, mabatisParam);
     }
 
     @Override
@@ -131,7 +158,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, CSVNAME);
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).

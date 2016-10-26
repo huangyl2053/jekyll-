@@ -69,7 +69,7 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
         "ShikibetsuTaisho"."gyoseikuCode" AS 行政区コード,
-        "ShikibetsuTaisho"."setaiCode"AS 世帯コード,
+        "ShikibetsuTaisho"."setaiCode" AS 世帯コード,
         DbV1001."shikibetsuCode" AS 識別コード,
         "ShikibetsuTaisho"."katakanaHyoki" AS 氏名５０音カナ,
         DbT3034."dbT3034ShokanShinsei_shoKisaiHokenshaNo" AS 証記載保険者番号,

@@ -59,7 +59,7 @@ public class ShokanBaraiKa1GoManager {
         ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
         ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
         ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (市町村情報 != null) {
+        if (市町村情報 != null && 市町村情報.get市町村情報() != null) {
             証記載保険者番号 = 市町村情報.get市町村情報().get証記載保険者番号();
         }
         支払方法変更Entity.set支払方法変更Entity(get1号予告者登録の登録Entity(
@@ -98,7 +98,7 @@ public class ShokanBaraiKa1GoManager {
         ShiharaiHohoHenkoEntity 支払方法変更Entity = new ShiharaiHohoHenkoEntity();
         ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
         ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (市町村情報 != null) {
+        if (市町村情報 != null && 市町村情報.get市町村情報() != null) {
             証記載保険者番号 = 市町村情報.get市町村情報().get証記載保険者番号();
         }
         支払方法変更Entity.set支払方法変更Entity(get償還払い化登録の登録Entity(

@@ -90,6 +90,7 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGenga
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
+    private final RString 帳票タイトル = new RString("給付額減額管理リスト");
     private HihokenshaNo 当該被保険者番号;
     private KyufuGengakuHaakuListSakuseiService service;
     private Map<FlexibleYear, Decimal> 調定額Map;
@@ -182,7 +183,7 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGenga
                 KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity = service.edit給付額減額把握リストEntity(
                         把握情報Map, 調定額Map, 収入額Map, 未納額Map, 徴収権消滅期間Map, 納付済み期間Map, 把握情報List, 支払方法変更減額List);
                 KyufuGengakuHaakuIchiranReport report = new KyufuGengakuHaakuIchiranReport(RDateTime.now(),
-                        保険者番号, 保険者名称, 給付額減額把握リストEntity, outputOrder);
+                        保険者番号, 保険者名称, 給付額減額把握リストEntity, outputOrder, 帳票タイトル);
                 report.writeBy(reportSourceWriter);
 
             }
@@ -219,7 +220,7 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGenga
             KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity = service.edit給付額減額把握リストEntity(
                     把握情報Map, 調定額Map, 収入額Map, 未納額Map, 徴収権消滅期間Map, 納付済み期間Map, 把握情報List, 支払方法変更減額List);
             KyufuGengakuHaakuIchiranReport report = new KyufuGengakuHaakuIchiranReport(RDateTime.now(),
-                    保険者番号, 保険者名称, 給付額減額把握リストEntity, outputOrder);
+                    保険者番号, 保険者名称, 給付額減額把握リストEntity, outputOrder, 帳票タイトル);
             report.writeBy(reportSourceWriter);
         }
         バッチ出力条件リストの出力();
@@ -236,7 +237,8 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGenga
         RString csvファイル名 = RString.EMPTY;
 
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(基準日.concat(processParameter.get基準日().toString()));
+        出力条件.add(基準日.concat(processParameter.get基準日().wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()));
         出力条件.add(対象区分.concat(processParameter.get対象区分().get名称()));
         if (TaishoKubun.全登録者以外.getコード().equals(processParameter.get対象区分().getコード())) {
             if (processParameter.is通知書未発行者抽出()) {

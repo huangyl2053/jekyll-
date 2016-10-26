@@ -390,7 +390,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
                 資格の情報年度minus1.add(new HihokenshaDaicho(entity.get被保険者台帳管理()));
             }
             if (null != entity.get賦課Newest().get介護賦課Entity().getChoteiNendo()) {
-                賦課の情報年度minus1.add(new FukaJoho(entity.get賦課Newest()));
+                add賦課の情報年度(賦課の情報年度minus1, new FukaJoho(entity.get賦課Newest()));
             }
         }
 
@@ -406,11 +406,20 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
                 資格の情報年度minus2.add(new HihokenshaDaicho(entity.get被保険者台帳管理()));
             }
             if (null != entity.get賦課Newest().get介護賦課Entity().getChoteiNendo()) {
-                賦課の情報年度minus2.add(new FukaJoho(entity.get賦課Newest()));
+                add賦課の情報年度(賦課の情報年度minus2, new FukaJoho(entity.get賦課Newest()));
             }
         }
 
         dbの処理(資格の情報年度minus2, 賦課の情報年度minus2, param);
+    }
+
+    private void add賦課の情報年度(List<FukaJoho> 賦課の情報年度, FukaJoho 賦課) {
+        for (FukaJoho tmp : 賦課の情報年度) {
+            if (tmp.identifier().equals(賦課.identifier())) {
+                return;
+            }
+        }
+        賦課の情報年度.add(賦課);
     }
 
     private void dbの処理(List<HihokenshaDaicho> 資格の情報年度, List<FukaJoho> 賦課の情報年度, KanendoFukaParameter param) {

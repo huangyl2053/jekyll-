@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -66,8 +65,6 @@ public class HanyoListJukyushaDaichoBusiness {
     private static final RString ARI = new RString("有効");
     private static final RString MURI = new RString("無効");
     private static final RString 住所地特例 = new RString("住特");
-    private static final RString 情報区分_受給 = new RString("受給");
-    private static final RString 情報区分_申請 = new RString("申請");
     private static final RString SHIKAKUSYUTOKU = new RString("資格取得前申請");
     private static final RString 旧措置 = new RString("旧措置者");
     private static final RString MINASHI = new RString("みなし");
@@ -214,7 +211,7 @@ public class HanyoListJukyushaDaichoBusiness {
         csvEntity.set特定疾病(RString.isNullOrEmpty(entity.get受給者台帳_2号特定疾病コード()) ? RString.EMPTY
                 : TokuteiShippei.toValue(entity.get受給者台帳_2号特定疾病コード()).get名称());
         csvEntity.set受給申請事由(set受給申請事由(
-                entity.get受給者台帳_受給申請事由(), entity.get受給者台帳_要支援者認定申請区分(), 情報区分_受給));
+                entity.get受給者台帳_受給申請事由(), entity.get受給者台帳_要支援者認定申請区分()));
         csvEntity.set申請理由(entity.get受給者台帳_申請理由());
         csvEntity.set申請関係者(RString.isNullOrEmpty(entity.get受給者台帳_申請者関係コード()) ? RString.EMPTY
                 : ShinseishaKankeiCode.toValue(entity.get受給者台帳_申請者関係コード()).get名称());
@@ -312,7 +309,7 @@ public class HanyoListJukyushaDaichoBusiness {
         csvEntity.set初回認定開始日(set年月日(日付スラッシュ付加, entity.get初回受給情報_認定有効期間開始年月日()));
         csvEntity.set初回認定終了日(set年月日(日付スラッシュ付加, entity.get初回受給情報_認定有効期間終了年月日()));
         csvEntity.set初回申請事由(set受給申請事由(
-                entity.get初回受給情報_受給申請事由(), entity.get初回申請_要支援者認定申請区分(), 情報区分_申請));
+                entity.get初回受給情報_受給申請事由(), entity.get初回申請_要支援者認定申請区分()));
         csvEntity.set初回みなし更新(setみなし更新認定(entity.get初回受給情報_みなし要介護区分コード()));
         csvEntity.set初回当初認定有効開始日(set年月日(日付スラッシュ付加, entity.get初回受給情報_当初認定有効開始年月日()));
         csvEntity.set初回当初認定有効終了日(set年月日(日付スラッシュ付加, entity.get初回受給情報_当初認定有効終了年月日()));
@@ -324,7 +321,7 @@ public class HanyoListJukyushaDaichoBusiness {
         csvEntity.set前回認定開始日(set年月日(日付スラッシュ付加, entity.get前回受給情報_認定有効期間開始年月日()));
         csvEntity.set前回認定終了日(set年月日(日付スラッシュ付加, entity.get前回受給情報_認定有効期間終了年月日()));
         csvEntity.set前回受給申請事由(set受給申請事由(entity.get前回受給情報_受給申請事由(),
-                entity.get前回申請_要支援者認定申請区分(), 情報区分_申請));
+                entity.get前回申請_要支援者認定申請区分()));
         csvEntity.set前回みなし更新(setみなし更新認定(entity.get前回受給情報_みなし要介護区分コード()));
         csvEntity.set前回当初認定有効開始日(set年月日(日付スラッシュ付加, entity.get前回受給情報_当初認定有効開始年月日()));
         csvEntity.set前回当初認定有効終了日(set年月日(日付スラッシュ付加, entity.get前回受給情報_当初認定有効終了年月日()));
@@ -340,7 +337,7 @@ public class HanyoListJukyushaDaichoBusiness {
         csvEntity.set前々回認定開始日(set年月日(日付スラッシュ付加, entity.get前々回受給情報_認定有効期間開始年月日()));
         csvEntity.set前々回認定終了日(set年月日(日付スラッシュ付加, entity.get前々回受給情報_認定有効期間終了年月日()));
         csvEntity.set前々回受給申請事由(set受給申請事由(entity.get前々回受給情報_受給申請事由(),
-                entity.get前々回申請_要支援者認定申請区分(), 情報区分_申請));
+                entity.get前々回申請_要支援者認定申請区分()));
         csvEntity.set前々回みなし更新(setみなし更新認定(entity.get前々回受給情報_みなし要介護区分コード()));
         csvEntity.set前々回当初認定有効開始日(set年月日(日付スラッシュ付加, entity.get前々回受給情報_当初認定有効開始年月日()));
         csvEntity.set前々回当初認定有効終了日(set年月日(日付スラッシュ付加, entity.get前々回受給情報_当初認定有効終了年月日()));
@@ -524,7 +521,7 @@ public class HanyoListJukyushaDaichoBusiness {
         csvEntity.set特定疾病(RString.isNullOrEmpty(entity.get受給者台帳_2号特定疾病コード()) ? RString.EMPTY
                 : TokuteiShippei.toValue(entity.get受給者台帳_2号特定疾病コード()).get名称());
         csvEntity.set受給申請事由(set受給申請事由(
-                entity.get受給者台帳_受給申請事由(), entity.get受給者台帳_要支援者認定申請区分(), 情報区分_受給));
+                entity.get受給者台帳_受給申請事由(), entity.get受給者台帳_要支援者認定申請区分()));
         csvEntity.set申請理由(entity.get受給者台帳_申請理由());
         csvEntity.set申請関係者(RString.isNullOrEmpty(entity.get受給者台帳_申請者関係コード()) ? RString.EMPTY
                 : ShinseishaKankeiCode.toValue(entity.get受給者台帳_申請者関係コード()).get名称());
@@ -622,7 +619,7 @@ public class HanyoListJukyushaDaichoBusiness {
         csvEntity.set初回認定開始日(set年月日(日付スラッシュ付加, entity.get初回受給情報_認定有効期間開始年月日()));
         csvEntity.set初回認定終了日(set年月日(日付スラッシュ付加, entity.get初回受給情報_認定有効期間終了年月日()));
         csvEntity.set初回申請事由(set受給申請事由(
-                entity.get初回受給情報_受給申請事由(), entity.get初回申請_要支援者認定申請区分(), 情報区分_申請));
+                entity.get初回受給情報_受給申請事由(), entity.get初回申請_要支援者認定申請区分()));
         csvEntity.set初回みなし更新(setみなし更新認定(entity.get初回受給情報_みなし要介護区分コード()));
         csvEntity.set初回当初認定有効開始日(set年月日(日付スラッシュ付加, entity.get初回受給情報_当初認定有効開始年月日()));
         csvEntity.set初回当初認定有効終了日(set年月日(日付スラッシュ付加, entity.get初回受給情報_当初認定有効終了年月日()));
@@ -634,7 +631,7 @@ public class HanyoListJukyushaDaichoBusiness {
         csvEntity.set前回認定開始日(set年月日(日付スラッシュ付加, entity.get前回受給情報_認定有効期間開始年月日()));
         csvEntity.set前回認定終了日(set年月日(日付スラッシュ付加, entity.get前回受給情報_認定有効期間終了年月日()));
         csvEntity.set前回受給申請事由(set受給申請事由(entity.get前回受給情報_受給申請事由(),
-                entity.get前回申請_要支援者認定申請区分(), 情報区分_申請));
+                entity.get前回申請_要支援者認定申請区分()));
         csvEntity.set前回みなし更新(setみなし更新認定(entity.get前回受給情報_みなし要介護区分コード()));
         csvEntity.set前回当初認定有効開始日(set年月日(日付スラッシュ付加, entity.get前回受給情報_当初認定有効開始年月日()));
         csvEntity.set前回当初認定有効終了日(set年月日(日付スラッシュ付加, entity.get前回受給情報_当初認定有効終了年月日()));
@@ -650,7 +647,7 @@ public class HanyoListJukyushaDaichoBusiness {
         csvEntity.set前々回認定開始日(set年月日(日付スラッシュ付加, entity.get前々回受給情報_認定有効期間開始年月日()));
         csvEntity.set前々回認定終了日(set年月日(日付スラッシュ付加, entity.get前々回受給情報_認定有効期間終了年月日()));
         csvEntity.set前々回受給申請事由(set受給申請事由(entity.get前々回受給情報_受給申請事由(),
-                entity.get前々回申請_要支援者認定申請区分(), 情報区分_申請));
+                entity.get前々回申請_要支援者認定申請区分()));
         csvEntity.set前々回みなし更新(setみなし更新認定(entity.get前々回受給情報_みなし要介護区分コード()));
         csvEntity.set前々回当初認定有効開始日(set年月日(日付スラッシュ付加, entity.get前々回受給情報_当初認定有効開始年月日()));
         csvEntity.set前々回当初認定有効終了日(set年月日(日付スラッシュ付加, entity.get前々回受給情報_当初認定有効終了年月日()));
@@ -774,16 +771,12 @@ public class HanyoListJukyushaDaichoBusiness {
         return RString.EMPTY;
     }
 
-    private RString set受給申請事由(RString 受給申請事由原, RString 要支援者認定申請区分, RString 情報区分) {
+    private RString set受給申請事由(RString 受給申請事由原, RString 要支援者認定申請区分) {
         if (RString.isNullOrEmpty(受給申請事由原) || RString.isNullOrEmpty(要支援者認定申請区分)) {
             return RString.EMPTY;
         }
-        RString 受給申請事由;
-        try {
-            受給申請事由 = JukyuShinseiJiyu.toValue(受給申請事由原).get名称();
-        } catch (IllegalArgumentException e) {
-            return RString.EMPTY;
-        }
+        RString 受給申請事由 = JukyuShinseiJiyu.toValue(受給申請事由原).get名称();
+
         if (JukyuShinseiJiyu.初回申請.get名称().equals(受給申請事由)) {
             return 初回申請;
         } else if (JukyuShinseiJiyu.再申請_有効期限内.get名称().equals(受給申請事由)) {
@@ -791,9 +784,7 @@ public class HanyoListJukyushaDaichoBusiness {
         } else if (JukyuShinseiJiyu.再申請_有効期限外.get名称().equals(受給申請事由)) {
             return 再申請外;
         } else if (JukyuShinseiJiyu.要介護度変更申請.get名称().equals(受給申請事由)) {
-            if (要支援者認定申請区分 != null && !要支援者認定申請区分.trim().isEmpty()) {
-                return setNinteShinseiKubun(情報区分, 要支援者認定申請区分);
-            }
+            return setNinteShinseiKubun(要支援者認定申請区分);
         } else if (JukyuShinseiJiyu.指定サービス種類変更申請.get名称().equals(受給申請事由)) {
             return サ変更申請;
         } else if (JukyuShinseiJiyu.申請_法施行前.get名称().equals(受給申請事由)) {
@@ -811,19 +802,17 @@ public class HanyoListJukyushaDaichoBusiness {
         return YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(koroshoIfCode), code).getName();
     }
 
-    private RString setNinteShinseiKubun(RString 情報区分, RString 要支援者認定申請区分) {
-        if (要支援者認定申請区分 == null || 要支援者認定申請区分.isEmpty()) {
-            return RString.EMPTY;
-        }
-        if (情報区分.equals(情報区分_受給)) {
-            if (NinteiShienShinseiKubun.認定支援申請.get名称().equals(
-                    NinteiShienShinseiKubun.toValue(要支援者認定申請区分).get名称())) {
+    private RString setNinteShinseiKubun(RString 要支援者認定申請区分) {
+        if (要支援者認定申請区分 != null && !要支援者認定申請区分.isEmpty()) {
+            RString 認定申請区分 = 要支援者認定申請区分;
+            if (NinteiShienShinseiKubun.認定支援申請.getコード().equals(
+                    認定申請区分)) {
                 return 支援から申請;
             } else {
                 return 区分変更申請;
             }
         } else {
-            return ShienShinseiKubun.toValue(要支援者認定申請区分).get名称();
+            return 区分変更申請;
         }
     }
 
@@ -1083,7 +1072,7 @@ public class HanyoListJukyushaDaichoBusiness {
         if (日付スラッシュ付加) {
             return 年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         } else {
-            return 年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+            return 年月日.seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString();
         }
 
     }

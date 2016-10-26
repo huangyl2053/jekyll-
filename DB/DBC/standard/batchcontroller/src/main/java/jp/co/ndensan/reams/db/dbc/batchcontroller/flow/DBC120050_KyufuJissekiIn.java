@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120050.DBC120050_KyufuJissekiInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
+import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc120050.KyufuJissekiInMasterTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukyufuketteiin.KogakuKyufuKetteiReadCsvFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
@@ -140,7 +141,13 @@ public class DBC120050_KyufuJissekiIn extends BatchFlowBase<DBC120050_KyufuJisse
             } else {
                 executeStep(事業者名称取得);
                 executeStep(入力識別名称取得);
+                if (SaiShoriKubun.再処理.equals(getParameter().getSaishoriKubun())) {
+                    executeStep(再処理準備);
+                }
                 executeStep(返却データ削除_H1更新);
+                executeStep(返却データ削除_H1取消);
+                executeStep(返却データ削除_D8更新);
+                executeStep(返却データ削除_D8取消);
                 executeStep(通し番号の採番);
                 Long 番号 = getResult(Long.class, new RString(通し番号の採番),
                         KyufuJissekiInGetToosibangoProcess.PARAMETER_OUT_BANGO);
@@ -454,7 +461,7 @@ public class DBC120050_KyufuJissekiIn extends BatchFlowBase<DBC120050_KyufuJisse
     protected IBatchFlowCommand callDoSaiShoriJunbiProcess() {
         KyufuJissekiInMasterTorokuProcessParameter parameter = new KyufuJissekiInMasterTorokuProcessParameter();
         parameter.set処理年月(getParameter().getShoriYM());
-        return simpleBatch(KyufuJissekiInDoSaiShoriJunbiProcess.class).define();
+        return simpleBatch(KyufuJissekiInDoSaiShoriJunbiProcess.class).arguments(parameter).define();
     }
 
     /**

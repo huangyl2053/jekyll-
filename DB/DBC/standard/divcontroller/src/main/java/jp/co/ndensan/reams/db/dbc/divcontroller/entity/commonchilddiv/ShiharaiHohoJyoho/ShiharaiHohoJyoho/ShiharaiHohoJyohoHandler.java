@@ -164,7 +164,7 @@ public class ShiharaiHohoJyohoHandler {
             RString 口座 = new RString(String.valueOf(kozaId.get口座ID()));
             口座IDリスト.add(new KeyValueDataSource(口座, 口座));
         }
-        if (list.isEmpty()) {
+        if (list.isEmpty() && 口座ID != 0L) {
             RString 口座 = new RString(String.valueOf(口座ID));
             口座IDリスト.add(new KeyValueDataSource(口座, 口座));
         }
@@ -646,7 +646,7 @@ public class ShiharaiHohoJyohoHandler {
     public void 受領委任払いエリアの初期化(SikyuSinseiJyohoParameter 支給申請情報,
             JuryoininKeiyakuJigyosha 受領委任契約事業者, RString 表示フラグ) {
 
-        if (!表示フラグ.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(表示フラグ)) {
             div.getTxtKeiyakuNo().setValue(支給申請情報.getKeiyakuNo());
         }
         div.getRadJyryoinin().setSelectedKey(new RString("3"));
@@ -817,15 +817,15 @@ public class ShiharaiHohoJyohoHandler {
      */
     public RString getShiharaiHoho() {
 
-        if (!div.getRadMadoguti().getSelectedKey().isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(div.getRadMadoguti().getSelectedKey())) {
 
             return div.getRadMadoguti().getSelectedKey();
         }
-        if (!div.getRadKoza().getSelectedKey().isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(div.getRadKoza().getSelectedKey())) {
 
             return div.getRadKoza().getSelectedKey();
         }
-        if (!div.getRadJyryoinin().getSelectedKey().isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(div.getRadJyryoinin().getSelectedKey())) {
 
             return div.getRadJyryoinin().getSelectedKey();
         }

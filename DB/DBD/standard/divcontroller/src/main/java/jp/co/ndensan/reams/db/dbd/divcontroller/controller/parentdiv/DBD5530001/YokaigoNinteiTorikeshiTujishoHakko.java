@@ -166,7 +166,7 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
                 getShichosonSecurityJoho(GyomuBunrui.介護事務);
         LasdecCode 市町村コード;
         ShoKisaiHokenshaNo 証記載保険者番号;
-        if (shichosonSecurityJoho != null) {
+        if (shichosonSecurityJoho != null && shichosonSecurityJoho.get市町村情報() != null) {
             市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
             証記載保険者番号 = shichosonSecurityJoho.get市町村情報().get証記載保険者番号();
         } else {

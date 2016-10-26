@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChohyoShutsuryokuSijiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,14 +26,14 @@ public class ChohyoShutsuryokuSijiDiv extends Panel {
      */
     @JsonProperty("ChohyoShutsuryokuUmu")
     private ChohyoShutsuryokuUmuDiv ChohyoShutsuryokuUmu;
-    @JsonProperty("ccdChohyoSyuturyokuJun3")
-    private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun3;
-    @JsonProperty("ccdChohyoSyuturyokuJun1")
-    private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun1;
     @JsonProperty("ccdChohyoSyuturyokuJun2")
     private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun2;
     @JsonProperty("ccdChohyoSyuturyokuJun4")
     private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun4;
+    @JsonProperty("ccdChohyoSyuturyokuJun3")
+    private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun3;
+    @JsonProperty("ccdChohyoSyuturyokuJun1")
+    private ChohyoShutsuryokujunDiv ccdChohyoSyuturyokuJun1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -60,24 +60,6 @@ public class ChohyoShutsuryokuSijiDiv extends Panel {
     }
 
     /*
-     * getccdChohyoSyuturyokuJun3
-     * @return ccdChohyoSyuturyokuJun3
-     */
-    @JsonProperty("ccdChohyoSyuturyokuJun3")
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun3() {
-        return ccdChohyoSyuturyokuJun3;
-    }
-
-    /*
-     * getccdChohyoSyuturyokuJun1
-     * @return ccdChohyoSyuturyokuJun1
-     */
-    @JsonProperty("ccdChohyoSyuturyokuJun1")
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
-        return ccdChohyoSyuturyokuJun1;
-    }
-
-    /*
      * getccdChohyoSyuturyokuJun2
      * @return ccdChohyoSyuturyokuJun2
      */
@@ -93,6 +75,24 @@ public class ChohyoShutsuryokuSijiDiv extends Panel {
     @JsonProperty("ccdChohyoSyuturyokuJun4")
     public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun4() {
         return ccdChohyoSyuturyokuJun4;
+    }
+
+    /*
+     * getccdChohyoSyuturyokuJun3
+     * @return ccdChohyoSyuturyokuJun3
+     */
+    @JsonProperty("ccdChohyoSyuturyokuJun3")
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun3() {
+        return ccdChohyoSyuturyokuJun3;
+    }
+
+    /*
+     * getccdChohyoSyuturyokuJun1
+     * @return ccdChohyoSyuturyokuJun1
+     */
+    @JsonProperty("ccdChohyoSyuturyokuJun1")
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
+        return ccdChohyoSyuturyokuJun1;
     }
 
     /*

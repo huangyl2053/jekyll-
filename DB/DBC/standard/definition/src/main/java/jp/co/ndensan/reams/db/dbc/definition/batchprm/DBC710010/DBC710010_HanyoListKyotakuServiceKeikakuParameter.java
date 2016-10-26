@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -22,7 +23,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class DBC710010_HanyoListKyotakuServiceKeikakuParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
@@ -38,29 +39,32 @@ public class DBC710010_HanyoListKyotakuServiceKeikakuParameter extends BatchPara
     private static final String KEY_NINE = "CSV連番付加";
     private static final String KEY_TEN = "CSV日付スラッシュ編集";
     private static final String KEY_ELEVEN = "宛名検索条件";
+    private static final String KEY_REPORTID = "帳票ID";
 
-    @BatchParameter(key = KEY_ONE, name = "構成市町村コード")
+    @BatchParameter (key = KEY_ONE, name = "構成市町村コード")
     private LasdecCode 構成市町村コード;
-    @BatchParameter(key = KEY_TWO, name = "作成区分")
+    @BatchParameter (key = KEY_TWO, name = "作成区分")
     private RString 作成区分;
-    @BatchParameter(key = KEY_THREE, name = "抽出区分")
+    @BatchParameter (key = KEY_THREE, name = "抽出区分")
     private RString 抽出区分;
-    @BatchParameter(key = KEY_FOUR, name = "基準年月日")
+    @BatchParameter (key = KEY_FOUR, name = "基準年月日")
     private FlexibleDate 基準年月日;
-    @BatchParameter(key = KEY_FIVE, name = "支援事業者番号")
+    @BatchParameter (key = KEY_FIVE, name = "支援事業者番号")
     private RString 支援事業者番号;
-    @BatchParameter(key = KEY_SIX, name = "改頁出力順ID")
+    @BatchParameter (key = KEY_SIX, name = "改頁出力順ID")
     private RString 改頁出力順ID;
-    @BatchParameter(key = KEY_SEVEN, name = "出力項目ID")
+    @BatchParameter (key = KEY_SEVEN, name = "出力項目ID")
     private RString 出力項目ID;
-    @BatchParameter(key = KEY_EIGHT, name = "CSV項目名付加")
+    @BatchParameter (key = KEY_EIGHT, name = "CSV項目名付加")
     private boolean csv項目名付加;
-    @BatchParameter(key = KEY_NINE, name = "CSV連番付加")
+    @BatchParameter (key = KEY_NINE, name = "CSV連番付加")
     private boolean csv連番付加;
-    @BatchParameter(key = KEY_TEN, name = "CSV日付スラッシュ編集")
+    @BatchParameter (key = KEY_TEN, name = "CSV日付スラッシュ編集")
     private boolean csv日付スラッシュ編集;
-    @BatchParameter(key = KEY_ELEVEN, name = "宛名検索条件")
+    @BatchParameter (key = KEY_ELEVEN, name = "宛名検索条件")
     private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
+    @BatchParameter (key = KEY_REPORTID, name = "帳票ID")
+    private ReportId 帳票ID;
 
     /**
      * toProcessParameter
@@ -69,6 +73,6 @@ public class DBC710010_HanyoListKyotakuServiceKeikakuParameter extends BatchPara
      */
     public HanyoListKyotakuServiceKeikakuProcessParameter toProcessParameter() {
         return new HanyoListKyotakuServiceKeikakuProcessParameter(構成市町村コード, 作成区分, 抽出区分, 基準年月日, 支援事業者番号,
-                改頁出力順ID, 出力項目ID, csv項目名付加, csv連番付加, csv日付スラッシュ編集, 宛名検索条件);
+                改頁出力順ID, 出力項目ID, csv項目名付加, csv連番付加, csv日付スラッシュ編集, 宛名検索条件, 帳票ID);
     }
 }

@@ -62,6 +62,7 @@
         <result property="is老齢福祉年金受給者" column="is老齢福祉年金受給者"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="is所得税課税者" column="is所得税課税者"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="is生活保護受給者" column="is生活保護受給者"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="is所得税課税世帯" column="is所得税課税世帯" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
         <result property="利用者負担段階" column="利用者負担段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="非課税年金勘案額" column="非課税年金勘案額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="要介護認定申請情報_厚労省IF識別コード" column="要介護認定申請情報_厚労省IF識別コード"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -100,6 +101,7 @@
             A.is所得税課税者 AS is所得税課税者,
             A.is生活保護受給者 AS is生活保護受給者,
             A.利用者負担段階,
+            A."is所得税課税世帯" AS is所得税課税世帯,
             coalesce(A.合計所得金額,0) + coalesce(A.年金収入額,0) + coalesce(A.非課税年金勘案額,0) AS 合計所得_含年金収入,
             A.非課税年金勘案額,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,

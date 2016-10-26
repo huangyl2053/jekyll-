@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkyotakuservicek
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -21,7 +22,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class HanyoListKyotakuServiceKeikakuProcessParameter implements IBatchProcessParameter {
 
     private LasdecCode 構成市町村コード;
@@ -35,6 +36,7 @@ public class HanyoListKyotakuServiceKeikakuProcessParameter implements IBatchPro
     private boolean csv連番付加;
     private boolean csv日付スラッシュ編集;
     private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
+    private ReportId 帳票ID;
 
     /**
      * コンストラクタ
@@ -50,11 +52,12 @@ public class HanyoListKyotakuServiceKeikakuProcessParameter implements IBatchPro
      * @param csv連番付加 boolean
      * @param csv日付スラッシュ編集 boolean
      * @param 宛名検索条件 IShikibetsuTaishoPSMSearchKey
+     * @param 帳票ID ReportId
      */
     public HanyoListKyotakuServiceKeikakuProcessParameter(LasdecCode 構成市町村コード,
             RString 作成区分, RString 抽出区分, FlexibleDate 基準年月日, RString 支援事業者番号, RString 改頁出力順ID,
             RString 出力項目ID, boolean csv項目名付加, boolean csv連番付加, boolean csv日付スラッシュ編集,
-            IShikibetsuTaishoPSMSearchKey 宛名検索条件) {
+            IShikibetsuTaishoPSMSearchKey 宛名検索条件, ReportId 帳票ID) {
 
         this.構成市町村コード = 構成市町村コード;
         this.作成区分 = 作成区分;
@@ -67,6 +70,7 @@ public class HanyoListKyotakuServiceKeikakuProcessParameter implements IBatchPro
         this.csv連番付加 = csv連番付加;
         this.csv日付スラッシュ編集 = csv日付スラッシュ編集;
         this.宛名検索条件 = 宛名検索条件;
+        this.帳票ID = 帳票ID;
 
     }
 

@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4102NinteiKekkaJohoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5150RenrakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -40,7 +39,6 @@ public class YokaigoNinteiJohoManager {
 
     private final MapperProvider mapperProvider;
     private final DbT4101NinteiShinseiJohoDac 要介護認定申請情報受給Dac;
-    private final DbT5101NinteiShinseiJohoDac 要介護認定申請情報認定Dac;
     private final DbT4001JukyushaDaichoDac 受給者台帳Dac;
     private final DbT4102NinteiKekkaJohoDac 要介護認定結果情報Dac;
     private final DbT7908KaigoDonyuKeitaiDac 介護導入形態Dac;
@@ -52,7 +50,6 @@ public class YokaigoNinteiJohoManager {
     YokaigoNinteiJohoManager() {
         mapperProvider = InstanceProvider.create(MapperProvider.class);
         要介護認定申請情報受給Dac = InstanceProvider.create(DbT4101NinteiShinseiJohoDac.class);
-        要介護認定申請情報認定Dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
         受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         要介護認定結果情報Dac = InstanceProvider.create(DbT4102NinteiKekkaJohoDac.class);
         連絡先Dac = InstanceProvider.create(DbT5150RenrakusakiJohoDac.class);
@@ -67,7 +64,6 @@ public class YokaigoNinteiJohoManager {
     YokaigoNinteiJohoManager(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
         要介護認定申請情報受給Dac = InstanceProvider.create(DbT4101NinteiShinseiJohoDac.class);
-        要介護認定申請情報認定Dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
         受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         要介護認定結果情報Dac = InstanceProvider.create(DbT4102NinteiKekkaJohoDac.class);
         連絡先Dac = InstanceProvider.create(DbT5150RenrakusakiJohoDac.class);
