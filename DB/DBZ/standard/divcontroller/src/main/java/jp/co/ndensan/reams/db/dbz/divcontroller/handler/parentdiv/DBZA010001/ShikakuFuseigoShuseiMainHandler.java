@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJ
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tatokureiidojiyu.TatokureiKaijoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tatokureiidojiyu.TatokureiTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.ShikakuFuseigoShuseiMainDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.ShikakuFuseigoShuseiPanelDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.dgShikakuFuseigoIchiran_Row;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -57,7 +57,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class ShikakuFuseigoShuseiMainHandler {
 
-    private final ShikakuFuseigoShuseiMainDiv div;
+    private final ShikakuFuseigoShuseiPanelDiv div;
 
     private static final RString GRID_BR = new RString("<br/>");
     private static final int NUMBER_FLAG_1 = 1;
@@ -73,7 +73,7 @@ public class ShikakuFuseigoShuseiMainHandler {
      *
      * @param div 資格不整合修正Div
      */
-    public ShikakuFuseigoShuseiMainHandler(ShikakuFuseigoShuseiMainDiv div) {
+    public ShikakuFuseigoShuseiMainHandler(ShikakuFuseigoShuseiPanelDiv div) {
         this.div = div;
         第１号被保険者到達基準年齢 = Integer.valueOf(DbBusinessConfig.get(
                 ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢,

@@ -866,7 +866,7 @@
             AND (最新被保台帳."shikakuShutokuYMD" IS NOT NULL AND 最新被保台帳."shikakuShutokuYMD" != '' AND (最新被保台帳."shikakuSoshitsuYMD" IS NULL OR 最新被保台帳."shikakuSoshitsuYMD" = ''))
         </if>
         <if test="is資格喪失者のみ">
-            AND (最新被保台帳."shikakuShutokuYMD" IS NOT NULL AND 最新被保台帳."shikakuShutokuYMD" != '' AND 最新被保台帳."shikakuSoshitsuYMD" IS NOT NULL AND 最新被保台帳."shikakuSoshitsuYMD" != ''))
+            AND (最新被保台帳."shikakuShutokuYMD" IS NOT NULL AND 最新被保台帳."shikakuShutokuYMD" != '' AND 最新被保台帳."shikakuSoshitsuYMD" IS NOT NULL AND 最新被保台帳."shikakuSoshitsuYMD" != '')
         </if>
         <if test="is旧措置者">
             AND 受給者台帳."kyuSochishaFlag" = true

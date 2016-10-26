@@ -23,7 +23,7 @@ public class KyufukanrihyoOutGetjigyoshaNameProcess extends BatchProcessBase<Shi
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110010.IKyufukanrihyoOutMapper."
-                    + "select事業者名称");
+                    + "select介護事業者名称");
     private static final RString 自己作成管理一時TBL_NAME = new RString("DbWT8211KyotakuKeikakuJikosakuseiKanri");
 
     @BatchWriter

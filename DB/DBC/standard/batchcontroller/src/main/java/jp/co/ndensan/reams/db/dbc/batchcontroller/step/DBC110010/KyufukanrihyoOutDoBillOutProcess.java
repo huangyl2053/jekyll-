@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -42,6 +43,7 @@ public class KyufukanrihyoOutDoBillOutProcess extends BatchKeyBreakBase<Kyufukan
             new RString(KyufuKanrihyoKyotakuYoboSogoJigyoServiceReportSource.ReportSourceFields.kyotakuServiceKubun.name())
     ));
     private KyufukanrihyoOutProcessParameter parameter;
+    @BatchWriter
     private BatchReportWriter<KyufuKanrihyoKyotakuYoboSogoJigyoServiceReportSource> batchReportWriter;
     private ReportSourceWriter<KyufuKanrihyoKyotakuYoboSogoJigyoServiceReportSource> reportSourceWriter;
 

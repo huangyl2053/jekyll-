@@ -77,8 +77,8 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 
     private int 毎ページ数 = 0;
     private int 総レコード数 = 0;
-    private static Decimal 毎ページ振込金額合算 = Decimal.ZERO;
-    private static Decimal 振込金額合算 = Decimal.ZERO;
+    private Decimal 毎ページ振込金額合算;
+    private Decimal 振込金額合算;
     private static final int ページ件数 = 15;
     private static final int 様式連番_1 = 1;
 
