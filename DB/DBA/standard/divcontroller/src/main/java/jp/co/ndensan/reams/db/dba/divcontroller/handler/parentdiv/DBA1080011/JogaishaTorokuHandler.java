@@ -270,6 +270,15 @@ public class JogaishaTorokuHandler {
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiTekiyoYMD().clearValue();
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiKaijyoYMD().clearValue();
     }
+    
+    /**
+     * 識別コードLostFocusの場合、入力チェック実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs shikibetsuCodeCheck() {
+        return createValidationHandler(div).shikibetsuCodeCheck();
+    }
 
     /**
      * 確定するボタン押下の場合、入力チェック実行します。
