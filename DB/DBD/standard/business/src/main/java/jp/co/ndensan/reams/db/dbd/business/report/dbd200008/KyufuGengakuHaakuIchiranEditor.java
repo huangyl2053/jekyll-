@@ -281,7 +281,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
                         firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
                 RString 認定有効期間終了年月日 = 被保険者情報Entity.get認定有効期間終了年月日().wareki().eraType(EraType.KANJI_RYAKU).
                         firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-                source.listUpper1_12 = 認定有効期間開始年月日.concat("~").concat(認定有効期間終了年月日);
+                source.listUpper1_12 = 認定有効期間開始年月日.concat("～").concat(認定有効期間終了年月日);
             }
             if (被保険者情報Entity.get認定日() != null) {
                 source.listUpper2_7 = 被保険者情報Entity.get認定日().wareki().eraType(EraType.KANJI_RYAKU).
