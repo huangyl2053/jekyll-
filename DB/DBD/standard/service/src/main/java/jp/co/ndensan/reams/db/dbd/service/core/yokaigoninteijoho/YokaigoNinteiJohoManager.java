@@ -40,7 +40,6 @@ public class YokaigoNinteiJohoManager {
 
     private final MapperProvider mapperProvider;
     private final DbT4101NinteiShinseiJohoDac 要介護認定申請情報受給Dac;
-    private final DbT5101NinteiShinseiJohoDac 要介護認定申請情報認定Dac;
     private final DbT4001JukyushaDaichoDac 受給者台帳Dac;
     private final DbT4102NinteiKekkaJohoDac 要介護認定結果情報Dac;
     private final DbT7908KaigoDonyuKeitaiDac 介護導入形態Dac;
