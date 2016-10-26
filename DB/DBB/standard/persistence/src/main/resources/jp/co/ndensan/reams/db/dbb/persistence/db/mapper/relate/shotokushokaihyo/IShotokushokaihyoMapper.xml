@@ -646,7 +646,7 @@
         LEFT OUTER JOIN (SELECT M.* FROM rgdb."DbT2020ShotokuShokaihyoHakkoRireki" AS M
         WHERE NOT (EXISTS (
         SELECT * 
-        FROM rgdb."DbT2008ShotokuKanri" AS N 
+        FROM rgdb."DbT2020ShotokuShokaihyoHakkoRireki" AS N 
         WHERE M."shoriNendo" = N."shotokuNendo" 
         AND M."shikibetsuCode" = N."shikibetsuCode" 
         AND M."rirekiNo" <![CDATA[<]]> N."rirekiNo")))
