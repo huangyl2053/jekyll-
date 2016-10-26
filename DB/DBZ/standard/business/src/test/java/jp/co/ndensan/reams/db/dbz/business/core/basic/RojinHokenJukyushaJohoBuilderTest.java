@@ -64,7 +64,7 @@ public class RojinHokenJukyushaJohoBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の老人保健市町村コードは_設定した値と同じ老人保健市町村コードを返す() {
             business = sut.set老人保健市町村コード(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_老人保健市町村コード).build();
-            assertThat(business.get老人保健市町村コード().getColumnValue(), is(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_老人保健市町村コード));
+            assertThat(business.get老人保健市町村コード(), is(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_老人保健市町村コード));
         }
 
         @Test

@@ -3,23 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakuteisei;
+package jp.co.ndensan.reams.db.dbz.service.core.hihokenshashikakuteisei;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.IryoHokenJoho;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.RoreiFukushiJoho;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshashisaku.HihokenshaShisaku;
-import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJoho;
-import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashisaku.HihokenshaShisakuRelateEntity;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshashisaku.IHihokenshaShisakuMapper;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuteisei.IryoHokenJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuteisei.RoreiFukushiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashisaku.HihokenshaShisaku;
+import jp.co.ndensan.reams.db.dbz.business.core.sikakuidouteisei.ShikakuRirekiJoho;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshashisaku.HihokenshaShisakuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshashisaku.IHihokenshaShisakuMapper;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -32,6 +31,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuTe
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.SikakuKikan;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokuso.ShikakuTokusoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
@@ -651,15 +651,15 @@ public class HihokenshaShikakuTeiseiManager {
         if (ShikakuShutokuJiyu.年齢到達.getコード().equals(取得事由コード)) {
             FlexibleDate 年齢到達日 = getAge.get年齢到達日(AGE_65);
             if (取得日.isBefore(年齢到達日) || 年齢到達日.isBefore(取得日)) {
-                throw new ApplicationException(DbaErrorMessages.資格取得日１号年齢到達日不一致.getMessage());
+                throw new ApplicationException(DbzErrorMessages.資格取得日１号年齢到達日不一致.getMessage());
             }
         } else if (age < AGE_40) {
-            throw new ApplicationException(DbaErrorMessages.資格取得日時点２号被保険者年齢未到達.getMessage());
+            throw new ApplicationException(DbzErrorMessages.資格取得日時点２号被保険者年齢未到達.getMessage());
         }
         if (被保区分コード.equals(RSTRING_1) && age < AGE_65) {
-            throw new ApplicationException(DbaErrorMessages.資格取得日時点１号被保険者年齢でない.getMessage());
+            throw new ApplicationException(DbzErrorMessages.資格取得日時点１号被保険者年齢でない.getMessage());
         } else if (被保区分コード.equals(RSTRING_2) && age < AGE_40) {
-            throw new ApplicationException(DbaErrorMessages.資格取得日時点２号被保険者年齢でない.getMessage());
+            throw new ApplicationException(DbzErrorMessages.資格取得日時点２号被保険者年齢でない.getMessage());
         }
     }
 
@@ -677,13 +677,13 @@ public class HihokenshaShikakuTeiseiManager {
             IDateOfBirth 当該識別対象の生年月日,
             List<ShikakuTokuso> 得喪履歴List) {
         if (最新データ == null) {
-            throw new ApplicationException(DbaErrorMessages.資格喪失登録不可.getMessage());
+            throw new ApplicationException(DbzErrorMessages.資格喪失登録不可.getMessage());
         }
         FlexibleDate 第1号資格取得年月日 = 最新データ.getIchigoShikakuShutokuYMD();
         if (第1号資格取得年月日 == null || 第1号資格取得年月日.isEmpty()) {
             int age = Integer.valueOf(get年齢(当該識別対象の生年月日, 喪失年月日).toString());
             if (age >= AGE_65) {
-                throw new ApplicationException(DbaErrorMessages.年齢到達取得異動未登録.getMessage());
+                throw new ApplicationException(DbzErrorMessages.年齢到達取得異動未登録.getMessage());
             }
         }
         if (喪失年月日.isBefore(最新データ.getShikakuShutokuYMD())) {
@@ -714,15 +714,15 @@ public class HihokenshaShikakuTeiseiManager {
             IDateOfBirth 当該識別対象の生年月日) {
         //TODO 城間 この条件をチェックする理由が不明。場合によってはどんなデータでもエラーを返してしまう。
 //        if (変更日.isBefore(最新データ.getIdoYMD())) {
-//            throw new ApplicationException(DbaErrorMessages.変更日移行新資格異動有り.getMessage());
+//            throw new ApplicationException(DbzErrorMessages.変更日移行新資格異動有り.getMessage());
 //        }
         int age = Integer.valueOf(get年齢(当該識別対象の生年月日, 変更日).toString());
         if (RSTRING_1.equals(最新データ.getHihokennshaKubunCode())) {
             if (age >= AGE_65 && ShikakuHenkoJiyu._１号到達.getコード().equals(変更事由コード)) {
-                throw new ApplicationException(DbaErrorMessages._１号被保険者対象外資格変更事由.getMessage());
+                throw new ApplicationException(DbzErrorMessages._１号被保険者対象外資格変更事由.getMessage());
             }
             if (age < AGE_65) {
-                throw new ApplicationException(DbaErrorMessages.変更日１号年齢到達日以前.getMessage());
+                throw new ApplicationException(DbzErrorMessages.変更日１号年齢到達日以前.getMessage());
             }
         }
         資格変更チェック処理2(最新データ, 変更日, 変更事由コード, age);
@@ -731,25 +731,25 @@ public class HihokenshaShikakuTeiseiManager {
     private void 資格変更チェック処理2(DbT1001HihokenshaDaichoEntity 最新データ, FlexibleDate 変更日, RString 変更事由コード, int age) {
         if (RSTRING_2.equals(最新データ.getHihokennshaKubunCode()) && age >= AGE_65) {
             if (!ShikakuHenkoJiyu._１号到達.getコード().equals(変更事由コード)) {
-                throw new ApplicationException(DbaErrorMessages.年齢到達変更異動未登録.getMessage());
+                throw new ApplicationException(DbzErrorMessages.年齢到達変更異動未登録.getMessage());
             }
             if (ShikakuHenkoJiyu._１号到達.getコード().equals(変更事由コード)
                     && 変更日.isBefore(getAge.get年齢到達日(AGE_65)) || getAge.get年齢到達日(AGE_65).isBefore(変更日)) {
-                throw new ApplicationException(DbaErrorMessages.変更日１号年齢到達日不一致.getMessage());
+                throw new ApplicationException(DbzErrorMessages.変更日１号年齢到達日不一致.getMessage());
             }
         }
         if (RSTRING_2.equals(最新データ.getHihokennshaKubunCode()) && age < AGE_65
                 && ShikakuHenkoJiyu._１号到達.getコード().equals(変更事由コード)) {
-            throw new ApplicationException(DbaErrorMessages.変更日１号年齢到達日不一致.getMessage());
+            throw new ApplicationException(DbzErrorMessages.変更日１号年齢到達日不一致.getMessage());
         }
         if (ShikakuHenkoJiyu.広住特転入.getコード().equals(変更事由コード)
                 || ShikakuHenkoJiyu.広住特居住.getコード().equals(変更事由コード)
                 && RSTRING_1.equals(最新データ.getKoikinaiJushochiTokureiFlag())) {
-            throw new ApplicationException(DbaErrorMessages.広域内住所地特例者でない.getMessage());
+            throw new ApplicationException(DbzErrorMessages.広域内住所地特例者でない.getMessage());
         }
         if (RSTRING_1.equals(最新データ.getKoikinaiJushochiTokureiFlag())
                 && ShikakuHenkoJiyu.広住特適用.getコード().equals(変更事由コード)) {
-            throw new ApplicationException(DbaErrorMessages.住特者のため広住特適用登録不可.getMessage());
+            throw new ApplicationException(DbzErrorMessages.住特者のため広住特適用登録不可.getMessage());
         }
     }
 
@@ -766,11 +766,11 @@ public class HihokenshaShikakuTeiseiManager {
         //TODO 本来は住所地特例の入力時に行うチェックか？ ここでは不要
 //        if (!RString.isNullOrEmpty(前適用事由) && RString.isNullOrEmpty(前解除事由)
 //                && !RString.isNullOrEmpty(適用事由コード) && RString.isNullOrEmpty(解除事由コード)) {
-//            throw new ApplicationException(DbaErrorMessages.住所地特例適用異動が未登録.getMessage());
+//            throw new ApplicationException(DbzErrorMessages.住所地特例適用異動が未登録.getMessage());
 //        }
         if (!RString.isNullOrEmpty(適用事由コード) && !RString.isNullOrEmpty(解除事由コード)
                 && !RString.isNullOrEmpty(前適用事由) && !RString.isNullOrEmpty(前解除事由)) {
-            throw new ApplicationException(DbaErrorMessages.住所地特例解除異動が未登録.getMessage());
+            throw new ApplicationException(DbzErrorMessages.住所地特例解除異動が未登録.getMessage());
         }
     }
 
@@ -785,7 +785,7 @@ public class HihokenshaShikakuTeiseiManager {
         List<HihokenshaShutokuJyoho> saishin = new ArrayList<>();
         saishin.add(hihokenshaShutokuJyoho);
         if (saishin.isEmpty()) {
-            throw new ApplicationException(DbaErrorMessages.該当資格異動情報なし.getMessage());
+            throw new ApplicationException(DbzErrorMessages.該当資格異動情報なし.getMessage());
         }
     }
 
