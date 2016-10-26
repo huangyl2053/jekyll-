@@ -16,6 +16,8 @@ public final class HokenryoDankaiHanteiHohoHozonFactory {
 
     private static final int SEIREKI_2012 = 2012;
     private static final int SEIREKI_2014 = 2014;
+    private static final int SEIREKI_2015 = 2015;
+    private static final int SEIREKI_2017 = 2017;
 
     private HokenryoDankaiHanteiHohoHozonFactory() {
     }
@@ -37,8 +39,10 @@ public final class HokenryoDankaiHanteiHohoHozonFactory {
         HokenryoDankaiHanteiHohoHozon ret;
 
         if (SEIREKI_2012 <= seireki && seireki <= SEIREKI_2014) {
-            ret = new Dai4Ki(hokenryoDankaiHanteiParameter);
+            ret = new Dai5Ki(hokenryoDankaiHanteiParameter);
 
+        } else if (SEIREKI_2015 <= seireki && seireki <= SEIREKI_2017) {
+            ret = new Dai6Ki(hokenryoDankaiHanteiParameter);
         } else {
             ret = null;
         }

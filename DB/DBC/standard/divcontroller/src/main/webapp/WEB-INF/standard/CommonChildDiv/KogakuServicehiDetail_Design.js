@@ -92,8 +92,16 @@ var DBC;
                 return new UZA.TabPanel(this.convFiledName("tplKoza"));
             };
 
+            Controls.prototype.ccdShiharaiHohoJyoho = function () {
+                return new DBC.ShiharaiHohoJyoho.ModeController(this.convFiledName("ccdShiharaiHohoJyoho"));
+            };
+
             Controls.prototype.tplJudgementResult = function () {
                 return new UZA.TabPanel(this.convFiledName("tplJudgementResult"));
+            };
+
+            Controls.prototype.ccdKogakuKyufuTaishoList = function () {
+                return new DBC.KogakuKyufuTaishoList.ModeController(this.convFiledName("ccdKogakuKyufuTaishoList"));
             };
 
             Controls.prototype.txtUketsukeYMD = function () {

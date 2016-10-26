@@ -124,6 +124,7 @@ public class SeigyoJohoTest {
 
     public static SeigyoJoho setHokenryoDankaiHantei(int jyunban) {
         SeigyoJoho seigyojoho = new SeigyoJoho();
+        seigyojoho.setShotokuChosachuKazeiKubun(KazeiKubun.valueOf("課税"));
 
         seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
         seigyojoho.setKijunNenkinShunyu02(new Decimal(1200000));
@@ -131,6 +132,19 @@ public class SeigyoJohoTest {
 
         seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
+        seigyojoho.setKijunShotokuKingaku03(new Decimal(2600000));
+        seigyojoho.setKijunShotokuKingaku04(new Decimal(3000000));
+        seigyojoho.setKijunShotokuKingaku05(new Decimal(3100000));
+        seigyojoho.setKijunShotokuKingaku06(new Decimal(3200000));
+        seigyojoho.setKijunShotokuKingaku07(new Decimal(3300000));
+        seigyojoho.setKijunShotokuKingaku08(new Decimal(3400000));
+        seigyojoho.setKijunShotokuKingaku09(new Decimal(3500000));
+        seigyojoho.setKijunShotokuKingaku10(new Decimal(3600000));
+        seigyojoho.setKijunShotokuKingaku11(new Decimal(3700000));
+        seigyojoho.setKijunShotokuKingaku12(new Decimal(3800000));
+        seigyojoho.setKijunShotokuKingaku13(new Decimal(3900000));
+        seigyojoho.setKijunShotokuKingaku14(new Decimal(4000000));
+        seigyojoho.setKijunShotokuKingaku15(new Decimal(4100000));
 
         List<HokenryoDankai> dankais = new ArrayList<>();
         DbT2013HokenryoDankaiEntity dankaiEntity01 = new DbT2013HokenryoDankaiEntity();

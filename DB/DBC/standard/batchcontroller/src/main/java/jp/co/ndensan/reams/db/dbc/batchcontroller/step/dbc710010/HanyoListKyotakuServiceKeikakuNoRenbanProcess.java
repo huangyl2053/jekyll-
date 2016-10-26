@@ -95,7 +95,6 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
     private FileSpoolManager manager;
     private List<PersonalData> personalDataList;
     private RString eucFilePath;
-    private FlexibleDate システム日付;
     private final MapperProvider mapperProvider = InstanceProvider.create(MapperProvider.class);
     private IHanyoListKyotakuServiceKeikakuMapper mapper;
 
@@ -104,8 +103,7 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
 
     @Override
     protected void beforeExecute() {
-        システム日付 = FlexibleDate.getNowDate();
-        csvEntityEditor = new HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor(システム日付);
+        csvEntityEditor = new HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor();
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
@@ -126,7 +124,7 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
 
     @Override
     protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, CSVNAME);
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
@@ -151,9 +149,9 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
                 personalDataList.add(toPersonalData(entity));
             }
         } else {
-               eucCsvWriter.writeLine(csvEntityEditor.editor(entity, parameter));
-               personalDataList.add(toPersonalData(entity));
-           }
+            eucCsvWriter.writeLine(csvEntityEditor.editor(entity, parameter));
+            personalDataList.add(toPersonalData(entity));
+        }
 
     }
 
@@ -172,7 +170,7 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
         if (personalDataList == null || personalDataList.isEmpty()) {
             manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
         } else {
-            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
         }
         バッチ出力条件リストの出力();

@@ -60,7 +60,7 @@ var DBC;
             };
 
             Controls.prototype.YoguKonyuhiShikyuShinseiSeikyuDetailInput = function () {
-                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiSeikyuDetail_YoguKonyuhiShikyuShinseiSeikyuDetailInput"));
+                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiSeikyuDetailInput"));
             };
 
             Controls.prototype.txtBuyYMD = function () {
@@ -104,7 +104,7 @@ var DBC;
             };
 
             Controls.prototype.SeikyuSummary = function () {
-                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiSeikyuDetail_SeikyuSummary"));
+                return new UZA.Panel(this.convFiledName("SeikyuSummary"));
             };
 
             Controls.prototype.tblSeikyuSummary = function () {
@@ -252,7 +252,7 @@ var DBC;
             };
 
             Controls.prototype.YoguKonyuhiShikyuShinseisha = function () {
-                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseishaJoho_YoguKonyuhiShikyuShinseisha"));
+                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseisha"));
             };
 
             Controls.prototype.radShinseishaKubun = function () {
@@ -292,7 +292,7 @@ var DBC;
             };
 
             Controls.prototype.URKoza = function () {
-                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiPaymentMethod_URKoza"));
+                return new UZA.Panel(this.convFiledName("URKoza"));
             };
 
             Controls.prototype.txtKari1 = function () {
@@ -300,7 +300,7 @@ var DBC;
             };
 
             Controls.prototype.DBZJuryoinin = function () {
-                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiPaymentMethod_DBZJuryoinin"));
+                return new UZA.Panel(this.convFiledName("DBZJuryoinin"));
             };
 
             Controls.prototype.txtKari2 = function () {

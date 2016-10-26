@@ -40,7 +40,7 @@ public class HokenryoDankaiHanteiHohoHozonTest {
 
         hokenryoDankaiHanteiParameter.setSeigyoJoho(SeigyoJohoTest.setCreateHokenryoDankaiHanteiHoho());
 
-        HokenryoDankaiHanteiHohoHozon instance = new Dai4Ki(hokenryoDankaiHanteiParameter);
+        HokenryoDankaiHanteiHohoHozon instance = new Dai5Ki(hokenryoDankaiHanteiParameter);
         RString expResult = new RString("4");
         RString result = instance.世帯非課税最大段階数取得();
         assertEquals(expResult, result);
@@ -56,7 +56,7 @@ public class HokenryoDankaiHanteiHohoHozonTest {
 
         hokenryoDankaiHanteiParameter.setSeigyoJoho(SeigyoJohoTest.setCreateHokenryoDankaiHanteiHoho());
 
-        HokenryoDankaiHanteiHohoHozon instance = new Dai4Ki(hokenryoDankaiHanteiParameter);
+        HokenryoDankaiHanteiHohoHozon instance = new Dai5Ki(hokenryoDankaiHanteiParameter);
         RString expResult = new RString("6");
         RString result = instance.本人非課税最大段階数取得();
         assertEquals(expResult, result);

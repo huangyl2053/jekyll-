@@ -78,20 +78,6 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0700011",
      "layoutTitle": "住宅改修費事前申請登録",
-     "eventName": "検索条件",
-     "destroy": true,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0200001",
-     "toLayoutTitle": "対象者検索",
-     "toState": "検索条件"
-    },
-    {
-     "id": "7",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0700011",
-     "layoutTitle": "住宅改修費事前申請登録",
      "eventName": "該当者一覧",
      "destroy": true,
      "condition": "",
@@ -101,7 +87,7 @@
      "toState": "事前申請モード"
     },
     {
-     "id": "8",
+     "id": "7",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0700011",
@@ -109,6 +95,48 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0700011",
+     "layoutTitle": "住宅改修費事前申請登録",
+     "eventName": "契約事業者検索",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0300011",
+     "toLayoutTitle": "受領委任契約事業者登録・修正",
+     "toState": "sub検索"
+    },
+    {
+     "id": "9",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0300011",
+     "layoutTitle": "受領委任契約事業者登録・修正",
+     "eventName": "事業者選択",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0700011",
+     "toLayoutTitle": "住宅改修費事前申請登録",
+     "toState": ""
+    },
+    {
+     "id": "10",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0300011",
+     "layoutTitle": "受領委任契約事業者登録・修正",
+     "eventName": "戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0700011",
+     "toLayoutTitle": "住宅改修費事前申請登録",
+     "toState": ""
     }
    ]
   }

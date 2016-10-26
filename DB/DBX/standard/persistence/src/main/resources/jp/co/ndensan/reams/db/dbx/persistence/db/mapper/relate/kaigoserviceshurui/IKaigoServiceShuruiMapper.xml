@@ -22,7 +22,7 @@
         AS dbT7130KaigoServiceShurui
         LEFT JOIN
         (
-        SELECT 
+        SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.allColumns_DbT7131KaigoServiceNaiyou"/>
         FROM
         rgdb."DbT7131KaigoServiceNaiyou"

@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dba.service.core.shikakuido;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAliveDac;
@@ -61,7 +61,8 @@ public class GappeijiJutokuKaijoRirekiCreator {
     /**
      * {@link InstanceProvider#create}にて生成した{@link GappeijiJutokuKaijoRirekiCreator}のインスタンスを戻します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link GappeijiJutokuKaijoRirekiCreator}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link GappeijiJutokuKaijoRirekiCreator}のインスタンス
      */
     public static GappeijiJutokuKaijoRirekiCreator createInstance() {
         return InstanceProvider.create(GappeijiJutokuKaijoRirekiCreator.class);
