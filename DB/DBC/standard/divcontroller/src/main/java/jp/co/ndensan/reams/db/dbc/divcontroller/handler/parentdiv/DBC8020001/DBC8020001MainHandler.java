@@ -119,14 +119,14 @@ public class DBC8020001MainHandler {
         DBC8020001 dbc;
         dbc = manager.get前回処理情報(SubGyomuCode.DBC介護給付, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
 
-        init画面表示内容(メニューID, 振込単位, dbc);
+        init画面表示内容(メニューID, dbc);
         init表示制御(メニューID, dbc);
         return pairs;
     }
 
-    private void init画面表示内容(RString メニューID, RString 振込単位, DBC8020001 dbc) {
+    private void init画面表示内容(RString メニューID, DBC8020001 dbc) {
         DBC8020001MainManager manager = new DBC8020001MainManager();
-        DBC8020001 entity = manager.getFurikomiGroupItakushaRelateEntity(メニューID, 振込単位);
+        DBC8020001 entity = manager.getFurikomiGroupItakushaRelateEntity(メニューID);
         this.代表金融機関コード = entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().
                 get(0).get振込委託者Entity().getKinyuKikanCode();
         this.振込グループコード = entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode();
@@ -245,10 +245,6 @@ public class DBC8020001MainHandler {
 
     }
 
-    /**
-     * @param メニューID RString
-     * @return RString
-     */
     private RString prepare処理名(RString メニューID) {
         RString 処理名 = RString.EMPTY;
         switch (メニューID.toString()) {

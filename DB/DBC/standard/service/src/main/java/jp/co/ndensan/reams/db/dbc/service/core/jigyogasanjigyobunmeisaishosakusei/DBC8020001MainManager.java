@@ -58,13 +58,13 @@ public class DBC8020001MainManager {
     }
 
     /**
+     * 委託者情報取得のメソッドです。
      *
      * @param メニューID RString
-     * @param 振込単位 RString
      * @return DBC8020001
      */
-    public DBC8020001 getFurikomiGroupItakushaRelateEntity(RString メニューID, RString 振込単位) {
-        List<FurikomiGroupItakushaRelateEntity> list = getFurikomiGroupItakushaRelateEntityList(メニューID, 振込単位);
+    public DBC8020001 getFurikomiGroupItakushaRelateEntity(RString メニューID) {
+        List<FurikomiGroupItakushaRelateEntity> list = getFurikomiGroupItakushaRelateEntityList(メニューID);
         FurikomiGroupItakushaRelateEntity fentity = new FurikomiGroupItakushaRelateEntity();
         if (list != null && !list.isEmpty()) {
             fentity = list.get(0);
@@ -76,15 +76,14 @@ public class DBC8020001MainManager {
      * 委託者情報存在チェックのメソッドです。
      *
      * @param メニューID RString
-     * @param 振込単位 RString
      * @return boolean
      */
-    public boolean if存在(RString メニューID, RString 振込単位) {
-        List<FurikomiGroupItakushaRelateEntity> list = getFurikomiGroupItakushaRelateEntityList(メニューID, 振込単位);
+    public boolean if存在(RString メニューID) {
+        List<FurikomiGroupItakushaRelateEntity> list = getFurikomiGroupItakushaRelateEntityList(メニューID);
         return (list != null && !list.isEmpty());
     }
 
-    private List<FurikomiGroupItakushaRelateEntity> getFurikomiGroupItakushaRelateEntityList(RString メニューID, RString 振込単位) {
+    private List<FurikomiGroupItakushaRelateEntity> getFurikomiGroupItakushaRelateEntityList(RString メニューID) {
         List<FurikomiGroupItakushaRelateEntity> list;
         RString 業務内区分 = RString.EMPTY;
         switch (メニューID.toString()) {
