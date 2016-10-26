@@ -18,7 +18,7 @@ public enum TokubetsuChiikiKasanGemmenCsvEnumEntity {
     /**
      * コード:20 名称:get識別コード 略称:定義なし
      */
-    get識別コード("10", "get識別コード"),
+    get識別コード("20", "get識別コード"),
     /**
      * コード:30 名称:get住民種別 略称:定義なし
      */
