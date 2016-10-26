@@ -288,7 +288,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
     }
 
     private ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> setデータ保存(KaigoKyufuhiKagoMositateTourokuDiv div) {
-        if (div.getChkMeisaiForDogetsuShinsa().getSelectedKeys().contains(new RString("forDogetsuShinsa"))
+        if (!div.getChkMeisaiForDogetsuShinsa().getSelectedKeys().contains(new RString("forDogetsuShinsa"))
                 && (申立理由_12.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
                 || 申立理由_49.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey()))
                 || 申立理由_59.equals(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())
