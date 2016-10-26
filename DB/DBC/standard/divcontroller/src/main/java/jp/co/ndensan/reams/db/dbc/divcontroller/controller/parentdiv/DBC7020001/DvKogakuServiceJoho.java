@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKo
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7020001.DvKogakuServiceJohoHandler;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -54,7 +55,7 @@ public class DvKogakuServiceJoho {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJohoFinder.createInstance()
                 .getShichosonSecurityJoho(GyomuBunrui.介護事務);
         DvKogakuChushutsuJokenDiv panel = div.getDvKogakuServiceParam().getDvKogakuChushutsuJoken();
-        if (市町村セキュリティ情報 == null) {
+        if (市町村セキュリティ情報 == null || KaigoDonyuKubun.未導入.code().equals(市町村セキュリティ情報.get介護導入区分().code())) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
         if (市町村セキュリティ情報.get導入形態コード() != null

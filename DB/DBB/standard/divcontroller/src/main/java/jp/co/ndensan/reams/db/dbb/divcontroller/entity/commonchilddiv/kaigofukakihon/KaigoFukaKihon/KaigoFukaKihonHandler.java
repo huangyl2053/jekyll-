@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon;
 
-import jp.co.ndensan.reams.db.dbb.business.util.HokenryoDankaiUtil;
-import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.business.util.HokenryoDankaiUtil;
 import jp.co.ndensan.reams.db.dbb.service.core.FukaMiscManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
@@ -69,13 +69,13 @@ public class KaigoFukaKihonHandler {
     public void load(KaigoFukaKihonSearchKey searchKey) {
         div.setMode(照会モード);
         if (searchKey.get賦課年度() == null || searchKey.get通知書番号() == null
-            || searchKey.get賦課年度().isEmpty() || searchKey.get通知書番号().isEmpty()) {
+                || searchKey.get賦課年度().isEmpty() || searchKey.get通知書番号().isEmpty()) {
             div.getBtnHihoRireki().setDisabled(true);
         } else {
             div.getTxtTsuchishoNo().setValue(searchKey.get通知書番号().value());
 
             Optional<Fuka> fuka = fukaMiscManager.get最新介護賦課(searchKey.get賦課年度(), searchKey.get通知書番号());
-            if (fuka.isPresent()) {
+            if (fuka.isPresent() && fuka.get().get保険料段階() != null) {
                 Optional<HokenryoDankai> dankai = hokenryoDankaiManager.get保険料段階(searchKey.get賦課年度(), fuka.get().get保険料段階());
                 if (dankai.isPresent()) {
                     div.getTxtHokenryoDankai().setValue(HokenryoDankaiUtil.edit表示用保険料段階(dankai.get()));

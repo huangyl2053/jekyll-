@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.sogojigyoshikakushogohyoin.Sogoj
 import jp.co.ndensan.reams.db.dbc.service.core.sogojigyoshikakushogohyoin.SogojigyohiShikakuShogohyoDoSakuseiService;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
@@ -93,7 +94,7 @@ public class SogojigyohiShikakuDoIchiranhyoSakuseiProcess
         service = SogojigyohiShikakuShogohyoDoSakuseiService.createInstance();
         ShichosonSecurityJohoFinder 市町村finder = ShichosonSecurityJohoFinder.createInstance();
         市町村セキュリティ = 市町村finder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (null == 市町村セキュリティ) {
+        if (null == 市町村セキュリティ || KaigoDonyuKubun.未導入.code().equals(市町村セキュリティ.get介護導入区分().code())) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(市町村セキュリティ情報の取得実行不可.toString()).toString());
         }

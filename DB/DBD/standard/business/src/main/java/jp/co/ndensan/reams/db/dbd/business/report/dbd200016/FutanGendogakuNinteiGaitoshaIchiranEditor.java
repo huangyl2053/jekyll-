@@ -67,8 +67,8 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
     private static final RString 該当 = new RString("該当");
     private static final RString 旧措置者 = new RString("旧措置者");
     private static final RString 旧措軽減 = new RString("旧措軽減");
-    private static final RString 認定者リスト = new RString("介護保険 負担限度額認定者リスト");
-    private static final RString 該当者リスト = new RString("介護保険 負担限度額該当者リスト");
+    private static final RString 認定者リスト = new RString("負担限度額認定者リスト");
+    private static final RString 該当者リスト = new RString("負担限度額該当者リスト");
     private static final RString 課 = new RString("課");
     private static final RString 星 = new RString("＊");
     private static final RString 有 = new RString("有");
@@ -204,7 +204,7 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
                 source.listUpper_10 = RString.EMPTY;
             }
         }
-        if (this.負担限度額認定者リストEntity.is所得税課税者()) {
+        if (this.負担限度額認定者リストEntity.is所得税課税世帯()) {
             source.listUpper_11 = 課;
         } else {
             source.listUpper_11 = RString.EMPTY;
@@ -363,6 +363,8 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
             }
             source.listLower_9 = 負担限度額認定者リストEntity.get入所施設コード();
             source.listLower_10 = 負担限度額認定者リストEntity.get入所施設名称();
+        }
+        if (負担限度額認定者リストEntity.get認定情報Entity() != null) {
             FlexibleDate 認定情報_認定有効期間終了年月日 = 負担限度額認定者リストEntity.get認定情報Entity().get認定情報_認定有効期間終了年月日();
             if (認定情報_認定有効期間終了年月日 != null) {
                 source.listLower_11 = editTime(認定情報_認定有効期間終了年月日);

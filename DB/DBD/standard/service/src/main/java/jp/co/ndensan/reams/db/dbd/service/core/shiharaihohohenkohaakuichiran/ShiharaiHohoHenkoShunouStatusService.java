@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * DBDMN32001_2_支払方法変更滞納者把握リスト作成サービスクラスです．
  *
- * @reamsid_L DBD-36500-040 x_lilh
+ * @reamsid_L DBD-3650-040 x_lilh
  */
 public class ShiharaiHohoHenkoShunouStatusService {
 
@@ -84,7 +84,7 @@ public class ShiharaiHohoHenkoShunouStatusService {
     public RString edit時効区分(RString 完納_未納区分, FlexibleDate 時効起算日, FlexibleDate 基準日) {
 
         FlexibleDate 時効起算日2年後 = FlexibleDate.EMPTY;
-        if (時効起算日 != null && FlexibleDate.EMPTY.equals(時効起算日)) {
+        if (時効起算日 != null && !FlexibleDate.EMPTY.equals(時効起算日)) {
             時効起算日2年後 = 時効起算日.plusYear(2);
         }
 
@@ -178,10 +178,9 @@ public class ShiharaiHohoHenkoShunouStatusService {
     public Decimal edit以前未納情報_以前滞納額(RString 完納_未納区分, RString 時効区分, Decimal 未納額) {
 
         Decimal 以前滞納額 = Decimal.ZERO;
-        if (MinoKannoKubun.未納あり.getコード().equals(完納_未納区分) && JikoKubun.時効未到来.getコード().equals(時効区分)) {
-            if (未納額 != null) {
-                以前滞納額 = 以前滞納額.add(未納額);
-            }
+        if (MinoKannoKubun.未納あり.getコード().equals(完納_未納区分) && JikoKubun.時効未到来.getコード().equals(時効区分)
+                && 未納額 != null) {
+            以前滞納額 = 以前滞納額.add(未納額);
         }
         return 以前滞納額;
     }

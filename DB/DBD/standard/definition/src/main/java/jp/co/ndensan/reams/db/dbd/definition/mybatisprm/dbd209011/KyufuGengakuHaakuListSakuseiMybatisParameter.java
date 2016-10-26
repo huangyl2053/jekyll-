@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd209011;
 
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -24,7 +24,7 @@ import lombok.Setter;
 public class KyufuGengakuHaakuListSakuseiMybatisParameter implements IMyBatisParameter {
 
     private RString 出力順;
-    private final UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
     private RString 基準日;
     private RDate 基準日RDATE;
 
@@ -33,10 +33,10 @@ public class KyufuGengakuHaakuListSakuseiMybatisParameter implements IMyBatisPar
      *
      * @param 基準日 基準日
      * @param 出力順 出力順
-     * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoFunction
+     * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoParam
      */
     public KyufuGengakuHaakuListSakuseiMybatisParameter(FlexibleDate 基準日, RString 出力順,
-            UaFt200FindShikibetsuTaishoFunction shikibetsutaishoParam) {
+            UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam) {
         if (基準日 != null && !基準日.isEmpty()) {
             this.基準日 = new RString(基準日.toString());
             this.基準日RDATE = new RDate(基準日.toString());

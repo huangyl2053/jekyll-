@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7030001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710020.DBC710020_HanyoListShokanbaraiJokyoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.KetteiJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShiharaiHoho;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShoriJokyo;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710020.DBC710020_HanyoListShokanbaraiJokyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.DvKensakuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.DvShokanChushutsuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.DvShokanbaraiJohoDiv;
@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.dvshokanbaraijoho.DvShokanbaraiJo
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
@@ -108,7 +109,7 @@ public class DvShokanbaraiJohoHandler {
                 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         DvShokanChushutsuJokenDiv panel = div.getDvShokanbaraiParam().getDvShokanChushutsuJoken();
         RString 市町村判定 = 単一;
-        if (市町村セキュリティ情報 == null) {
+        if (市町村セキュリティ情報 == null || KaigoDonyuKubun.未導入.code().equals(市町村セキュリティ情報.get介護導入区分().code())) {
             throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
         if (市町村セキュリティ情報.get導入形態コード() != null

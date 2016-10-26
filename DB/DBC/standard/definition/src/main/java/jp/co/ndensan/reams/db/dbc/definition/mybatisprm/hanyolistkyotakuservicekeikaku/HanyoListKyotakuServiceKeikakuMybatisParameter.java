@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 汎用リスト 居宅サービス計画のMybatisParameterクラスです。
@@ -19,20 +20,25 @@ import lombok.Getter;
  * @reamsid_L DBC-3091-020 surun
  */
 @Getter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@Setter
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class HanyoListKyotakuServiceKeikakuMybatisParameter extends UaFt200FindShikibetsuTaishoParam
         implements IMyBatisParameter {
 
-    private final LasdecCode 構成市町村コード;
-    private final RString 作成区分;
-    private final RString 抽出区分;
-    private final FlexibleDate 基準年月日;
-    private final RString 支援事業者番号;
-    private final RString 改頁出力順ID;
-    private final RString 出力項目ID;
-    private final boolean csv項目名付加;
-    private final boolean csv連番付加;
-    private final boolean csv日付スラッシュ編集;
+    private LasdecCode 構成市町村コード;
+    private RString 作成区分;
+    private RString 抽出区分;
+    private FlexibleDate 基準年月日;
+    private RString 支援事業者番号;
+    private RString 改頁出力順ID;
+    private RString 出力項目ID;
+    private boolean csv項目名付加;
+    private boolean csv連番付加;
+    private boolean csv日付スラッシュ編集;
+    private RString 帳票ID;
+    private RString reamsLoginId;
+    private RString orderByClause;
+    private RString 様式番号Order;
 
     /**
      * コンストラクタ

@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper.TaishoshaSearc
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.IHihokenshaFinderDiv;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001StateName.検索条件;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001StateName.該当者一覧;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001StateName.検索条件sub;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.TaishoshaSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.dgGaitoshaList_Row;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.DBZ0300001TransitionEventName.対象者特定;
@@ -94,6 +95,8 @@ public class TaishoshaSearch {
 
         div.getSearchCondition().setIsOpen(true);
         div.getGaitoshaList().setIsOpen(false);
+        
+        ViewStateHolder.put(ViewStateKeys.モード, ResponseHolder.getState());
 
         return ResponseDatas.newResponseData(div);
     }
@@ -284,8 +287,28 @@ public class TaishoshaSearch {
         div.getGaitoshaList().getDgGaitoshaList().setDataSource(Collections.EMPTY_LIST);
         div.getGaitoshaList().getDgGaitoshaList().getGridSetting().setLimitRowCount(最大取得件数);
         div.getGaitoshaList().getDgGaitoshaList().getGridSetting().setSelectedRowCount(最大取得件数);
+        
         // 画面状態遷移
-        return ResponseData.of(div).setState(検索条件);
+       RString fromState = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
+        if (検索条件.getName().equals(fromState)) {
+            return ResponseData.of(div).setState(検索条件);
+        } else if (検索条件sub.getName().equals(fromState)) {
+            return ResponseData.of(div).setState(検索条件sub);
+        } else {
+            return ResponseData.of(div).setState(検索条件);
+        }
+        
+    }
+    
+    /**
+     * 「戻る」ボタンクリック時に呼び出される処理です。
+     *
+     * @param div TaishoshaSearchDiv
+     * @return ResponseData<TaishoshaSearchDiv>
+     */
+    public ResponseData<TaishoshaSearchDiv> onClick_Back(TaishoshaSearchDiv div) {
+         ViewStateHolder.clear();
+         return ResponseData.of(div).forwardWithEventName(対象者特定).respond(); 
     }
 
     private SearchResult<TaishoshaRelateBusiness> get対象者(IHihokenshaFinderDiv div) {

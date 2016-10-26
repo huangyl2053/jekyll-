@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
@@ -334,7 +335,7 @@ public class GappeiCityJohoBFinder {
     public FlexibleDate getHihokenshaBangoHenkanKijunbi(GyomuBunrui gyomubunrui) {
         requireNonNull(gyomubunrui, UrSystemErrorMessages.値がnull.getReplacedMessage(業務分類.toString()));
         ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(gyomubunrui);
-        if (shichosonsecurityjoho == null) {
+        if (shichosonsecurityjoho == null || KaigoDonyuKubun.未導入.code().equals(shichosonsecurityjoho.get介護導入区分().code())) {
             return null;
         }
         DonyuKeitaiCode donyukeitaicode = shichosonsecurityjoho.get導入形態コード();
@@ -390,7 +391,7 @@ public class GappeiCityJohoBFinder {
         requireNonNull(合併市町村情報検索キー, UrSystemErrorMessages.値がnull.getReplacedMessage(RS_合併市町村情報検索キー.toString()));
         requireNonNull(gyomubunrui, UrSystemErrorMessages.値がnull.getReplacedMessage(業務分類.toString()));
         ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(gyomubunrui);
-        if (shichosonsecurityjoho == null) {
+        if (shichosonsecurityjoho == null || KaigoDonyuKubun.未導入.code().equals(shichosonsecurityjoho.get介護導入区分().code())) {
             return null;
         }
         DonyuKeitaiCode donyukeitaicode = shichosonsecurityjoho.get導入形態コード();
@@ -412,7 +413,7 @@ public class GappeiCityJohoBFinder {
     public SearchResult<GappeiCityJyoho> getSaishingappeijoho(RString 表示有無区分, GyomuBunrui gyomubunrui) {
         requireNonNull(gyomubunrui, UrSystemErrorMessages.値がnull.getReplacedMessage(業務分類.toString()));
         ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(gyomubunrui);
-        if (shichosonsecurityjoho == null) {
+        if (shichosonsecurityjoho == null || KaigoDonyuKubun.未導入.code().equals(shichosonsecurityjoho.get介護導入区分().code())) {
             return null;
         }
         DonyuKeitaiCode donyukeitaicode = shichosonsecurityjoho.get導入形態コード();
