@@ -816,8 +816,8 @@ public class HanyoListJukyushaDaichoBusiness {
             return RString.EMPTY;
         }
         if (情報区分.equals(情報区分_受給)) {
-            if (NinteiShienShinseiKubun.認定支援申請.get名称().equals(
-                    NinteiShienShinseiKubun.toValue(要支援者認定申請区分).get名称())) {
+            if (NinteiShienShinseiKubun.認定支援申請.getコード().equals(
+                    要支援者認定申請区分)) {
                 return 支援から申請;
             } else {
                 return 区分変更申請;
@@ -1083,7 +1083,7 @@ public class HanyoListJukyushaDaichoBusiness {
         if (日付スラッシュ付加) {
             return 年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         } else {
-            return 年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+            return 年月日.seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString();
         }
 
     }
