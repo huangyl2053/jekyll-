@@ -799,7 +799,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
 
         for (KoseiShichosonMaster master : 市町村情報リスト) {
             dgKoikiTaishoShoriItiran_Row row = new dgKoikiTaishoShoriItiran_Row();
-            row.setHdnShichosonCode(master.get市町村コード().code市町村RString());
+            row.setHdnShichosonCode(master.get市町村コード().getColumnValue());
             row.setTxtShichoson(master.get市町村名称());
 
             RString 年次月次 = RString.EMPTY;
@@ -816,7 +816,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             if (result == null || result.isEmpty()) {
                 this.setチェックボックスfor共有フォルダ無(master.get市町村コード(), row);
             } else {
-                取込対象市町村コードリスト.add(master.get市町村コード().code市町村RString());
+                取込対象市町村コードリスト.add(master.get市町村コード().getColumnValue());
                 row.setTxtTorikomi(Boolean.TRUE);
             }
             対象市町村Grid.add(row);
