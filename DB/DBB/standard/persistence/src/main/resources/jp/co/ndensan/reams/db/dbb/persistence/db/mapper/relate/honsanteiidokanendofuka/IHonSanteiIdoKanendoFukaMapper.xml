@@ -367,6 +367,7 @@
         LEFT JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
         ON "DbT2003Kibetsu"."dbT2003Kibetsu_choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
         LEFT JOIN rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
+        ON A."dbT2002Fuka_shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
             INNER JOIN 
             rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
             ON "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"

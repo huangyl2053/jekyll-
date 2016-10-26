@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5710001.Jyu
 import jp.co.ndensan.reams.db.dbd.service.core.basic.shoridatekanri.JyukyushaDaichoshoridatekanriService;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
@@ -44,7 +45,7 @@ public class JyukyushaDaicho {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(
                 GyomuBunrui.介護事務);
         ShoriDateKanri shoriDateKanri = null;
-        if (shichosonSecurityJoho != null) {
+        if (shichosonSecurityJoho != null && !KaigoDonyuKubun.未導入.code().equals(shichosonSecurityJoho.get介護導入区分().code())) {
             市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
             jyukyushoriDateKanriService = JyukyushaDaichoshoridatekanriService.createInstance();
             shoriDateKanri = jyukyushoriDateKanriService.get一件取得(市町村コード);

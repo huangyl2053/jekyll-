@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.GappeiKyuShichosonKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
@@ -79,7 +80,7 @@ public class HokenshaListLoader {
      */
     public HokenshaList getShichosonCodeNameList(GyomuBunrui gyomuBunrui) {
         ShichosonSecurityJoho shichosonJoho = shichosonSecurityJohoFinder.getShichosonSecurityJoho(gyomuBunrui);
-        if (shichosonJoho == null) {
+        if (shichosonJoho == null || KaigoDonyuKubun.未導入.code().equals(shichosonJoho.get介護導入区分().code())) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("市町村セキュリティ情報"));
         }
 

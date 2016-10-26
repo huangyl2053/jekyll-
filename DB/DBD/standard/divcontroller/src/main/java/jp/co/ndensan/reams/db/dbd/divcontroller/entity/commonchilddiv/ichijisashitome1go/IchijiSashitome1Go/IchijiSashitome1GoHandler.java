@@ -1344,7 +1344,7 @@ public class IchijiSashitome1GoHandler {
         ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
         ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJohoFinder.createInstance()
                 .getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (市町村情報 != null) {
+        if (市町村情報 != null && 市町村情報.get市町村情報() != null) {
             証記載保険者番号 = 市町村情報.get市町村情報().get証記載保険者番号();
         }
         return 証記載保険者番号;

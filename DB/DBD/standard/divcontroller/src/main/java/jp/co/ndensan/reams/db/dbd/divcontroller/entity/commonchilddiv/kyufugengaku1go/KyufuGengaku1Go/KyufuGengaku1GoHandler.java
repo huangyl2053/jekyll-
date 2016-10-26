@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShiharaiHoh
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShiharaiHohoHenkoGengakuEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -641,7 +642,7 @@ public class KyufuGengaku1GoHandler {
         ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
         ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJohoFinder.createInstance()
                 .getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (市町村情報 != null) {
+        if (市町村情報 != null && !KaigoDonyuKubun.未導入.code().equals(市町村情報.get介護導入区分().code())) {
             証記載保険者番号 = 市町村情報.get市町村情報().get証記載保険者番号();
         }
 
