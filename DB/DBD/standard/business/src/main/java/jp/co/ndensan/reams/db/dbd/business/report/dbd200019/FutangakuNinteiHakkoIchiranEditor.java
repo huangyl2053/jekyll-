@@ -119,10 +119,10 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
             }
             source.list_8 = get適用日有効期限();
             KetteiKubun 決定 = this.帳票情報.get決定();
-            if (null != 決定 && KetteiKubun.承認する.equals(決定)) {
+            if (KetteiKubun.承認する.equals(決定) && 決定 != null) {
                 source.list_9 = 承認;
                 source.list_10 = this.帳票情報.get負担段階();
-            } else if (null != 決定 && KetteiKubun.承認しない.equals(決定)) {
+            } else if (KetteiKubun.承認しない.equals(決定) && 決定 != null) {
                 source.list_9 = 却下;
                 source.list_10 = RString.EMPTY;
             }
