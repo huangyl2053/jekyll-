@@ -223,26 +223,6 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
                 }
             }
         }
-        if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面, date, SubGyomuCode.DBE認定支援))) {
-            IkenshokinyuyoshiRyomenColorProperty property = new IkenshokinyuyoshiRyomenColorProperty();
-            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙List));
-            try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
-                for (IkenshokinyuyoshiReport report : list) {
-                    ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                    report.writeBy(reportSourceWriter);
-                }
-            }
-        }
-        if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面, date, SubGyomuCode.DBE認定支援))) {
-            IkenshokinyuyoshiKatamenColorProperty property = new IkenshokinyuyoshiKatamenColorProperty();
-            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙List));
-            try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
-                for (IkenshokinyuyoshiReport report : list) {
-                    ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                    report.writeBy(reportSourceWriter);
-                }
-            }
-        }
     }
     
     /**
@@ -256,9 +236,41 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             ReportManager reportManager, RString reportID) {
         List<IkenshokinyuyoshiReport> list = new ArrayList<>();
         RDate date = RDate.getNowDate();
+        if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面, date, SubGyomuCode.DBE認定支援))) {
+            IkenshokinyuyoshiRyomenColorProperty property = new IkenshokinyuyoshiRyomenColorProperty();
+            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙OCRList));
+            try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
+                for (IkenshokinyuyoshiReport report : list) {
+                    ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                    report.writeBy(reportSourceWriter);
+                }
+            }
+        }
+        if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面, date, SubGyomuCode.DBE認定支援))) {
+            IkenshokinyuyoshiKatamenColorProperty property = new IkenshokinyuyoshiKatamenColorProperty();
+            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙OCRList));
+            try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
+                for (IkenshokinyuyoshiReport report : list) {
+                    ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                    report.writeBy(reportSourceWriter);
+                }
+            }
+        }
+    }
+    
+    /**
+     * 主治医意見書記入用紙を出力します。
+     *
+     * @param 主治医意見書記入用紙DList 主治医意見書記入用紙List
+     * @param reportManager 帳票印刷Manager
+     * @param reportID 帳票ID
+     */
+    public void print主治医意見書記入用紙D(List<IkenshokinyuyoshiBusiness> 主治医意見書記入用紙DList, ReportManager reportManager, RString reportID) {
+        List<IkenshokinyuyoshiReport> list = new ArrayList<>();
+        RDate date = RDate.getNowDate();
         if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, date, SubGyomuCode.DBE認定支援))) {
             IkenshokinyuyoshiDBE231012Property property = new IkenshokinyuyoshiDBE231012Property();
-            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙OCRList));
+            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙DList));
             try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
                 for (IkenshokinyuyoshiReport report : list) {
                     ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
@@ -268,7 +280,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         }
         if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面2, date, SubGyomuCode.DBE認定支援))) {
             IkenshokinyuyoshiDBE231014Property property = new IkenshokinyuyoshiDBE231014Property();
-            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙OCRList));
+            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙DList));
             try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
                 for (IkenshokinyuyoshiReport report : list) {
                     ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
@@ -278,7 +290,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         }
         if (reportID.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面, date, SubGyomuCode.DBE認定支援))) {
             IkenshokinyuyoshiDBE231012Property property = new IkenshokinyuyoshiDBE231012Property();
-            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙OCRList));
+            list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙DList));
             try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
                 for (IkenshokinyuyoshiReport report : list) {
                     ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
