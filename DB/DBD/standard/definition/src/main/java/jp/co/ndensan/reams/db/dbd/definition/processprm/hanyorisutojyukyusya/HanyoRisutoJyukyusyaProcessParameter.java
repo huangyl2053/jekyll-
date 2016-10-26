@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -271,6 +273,7 @@ public class HanyoRisutoJyukyusyaProcessParameter implements IBatchProcessParame
         set項目1();
         set項目2();
         set項目3();
+        set受給者台帳要介護認定状態区分コード();
         return new HanyoRisutoJyukyusyaMybatisParameter(shikibetsutaishoParam,
                 psmAtesaki, is直近, is有効データ内最新, is抽出方法区分_基準日,
                 is抽出方法区分_範囲, is日付範囲From, is日付範囲To,
@@ -462,5 +465,17 @@ public class HanyoRisutoJyukyusyaProcessParameter implements IBatchProcessParame
                 tiiki_To3 = 宛名抽出条件.getChiku3_To();
             }
         }
+    }
+
+    private void set受給者台帳要介護認定状態区分コード() {
+        要介護認定_21 = IchijiHanteiKekkaCode99.要介護1.getコード();
+        要介護認定_22 = IchijiHanteiKekkaCode99.要介護2.getコード();
+        要介護認定_23 = IchijiHanteiKekkaCode99.要介護3.getコード();
+        要介護認定_24 = IchijiHanteiKekkaCode99.要介護4.getコード();
+        要介護認定_25 = IchijiHanteiKekkaCode99.要介護5.getコード();
+        要介護認定_11 = IchijiHanteiKekkaCode99.経過的要介護.getコード();
+        要介護認定_19 = IchijiHanteiKekkaCode99.みなし要支援.getコード();
+        要介護認定_12 = IchijiHanteiKekkaCode06.要支援1.getコード();
+        要介護認定_13 = IchijiHanteiKekkaCode06.要支援2.getコード();
     }
 }
