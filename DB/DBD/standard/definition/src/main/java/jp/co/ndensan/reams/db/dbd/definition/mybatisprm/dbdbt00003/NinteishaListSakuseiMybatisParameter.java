@@ -166,7 +166,7 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     }
 
     private void edit世帯表示_表示しない(SetaiHyoji 世帯表示) {
-        世帯表示_表示しない = 世帯表示 != null && SetaiHyoji.表示しない.equals(世帯表示);
+        世帯表示_表示しない = SetaiHyoji.表示しない.equals(世帯表示);
     }
 
     private void edit対象期間指定(TaishoKikan 対象期間指定) {
