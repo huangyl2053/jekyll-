@@ -123,6 +123,9 @@ public final class KyufuGengakuHaakuIchiranReport extends Report<KyufuGengakuHaa
     private ShunoJohoEntity get収納情報By期別(ShunoJohoEntity 収納情報) {
         List<ShunoKibetsuEntity> 期別情報 = 収納情報.get期別情報();
         List<ShunoKibetsuEntity> new期別情報 = new ArrayList<>();
+        if (null == 期別情報) {
+            return 収納情報;
+        }
         for (ShunoKibetsuEntity 期別 : 期別情報) {
             add期別情報(new期別情報, 期別);
         }

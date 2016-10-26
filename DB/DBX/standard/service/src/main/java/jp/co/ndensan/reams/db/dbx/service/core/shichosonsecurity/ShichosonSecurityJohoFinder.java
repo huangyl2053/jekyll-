@@ -73,8 +73,7 @@ public class ShichosonSecurityJohoFinder {
     /**
      * 業務分類で{@link ShichosonSecurityJoho 市町村セキュリティ情報}を取得します。
      * <br/>
-     * 市町村セキュリティ情報が取得できなかった場合、{@code null}を返却します。
-     * 取得後は、かならず、{@code null}かどうかを検査してください。
+     * 市町村セキュリティ情報が取得できなかった場合、{@code null}を返却します。 取得後は、かならず、{@code null}かどうかを検査してください。
      *
      * @param gyomuBunrui 業務分類
      * @return {@link ShichosonSecurityJoho}
@@ -83,7 +82,7 @@ public class ShichosonSecurityJohoFinder {
     public ShichosonSecurityJoho getShichosonSecurityJoho(GyomuBunrui gyomuBunrui) {
         List<KaigoDonyuKeitai> list = this.donyuKeitaiManager.get介護導入形態By業務分類(gyomuBunrui);
         if (list.isEmpty()) {
-            return null;
+            return new ShichosonSecurityJoho.Builder().build();
         }
         KaigoDonyuKeitai 介護導入形態 = list.get(0);
         return createShichosonSecurityJoho(
