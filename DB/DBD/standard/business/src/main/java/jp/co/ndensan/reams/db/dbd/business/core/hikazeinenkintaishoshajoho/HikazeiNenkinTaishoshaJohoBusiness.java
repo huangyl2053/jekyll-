@@ -24,5 +24,6 @@ public class HikazeiNenkinTaishoshaJohoBusiness {
     private RString 処理状態コード;
     private RString 処理状態;
     private RString 処理日時;
+    private RString hdn処理日時;
     private RString 対象ファイル;
 }

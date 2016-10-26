@@ -89,6 +89,7 @@ public final class NushiJuminJohoHandler {
     private static final RString 村 = new RString("村");
     private static final RString 役所 = new RString("役所");
     private static final RString 役場 = new RString("役場");
+    private static final RString 住民 = new RString("住民");
 
     private NushiJuminJohoHandler(NushiJuminJohoDiv div) {
         this.div = div;
@@ -155,7 +156,9 @@ public final class NushiJuminJohoHandler {
                 row.setTxtShubetsu(住民種別);
                 RString 性別 = 識別対象.to個人().get性別().getCommonName();
                 row.setTxtSeibetsu(性別);
-                row.setTxtKetsugo02(住民種別.concat("<br>").concat(性別));
+                RString 住民状態 = 住民.equals(識別対象.to個人().get住民状態().住民状態略称())
+                        ? RString.EMPTY : 識別対象.to個人().get住民状態().住民状態略称();
+                row.setTxtKetsugo02(住民状態.concat("<br>").concat(性別));
                 RString 続柄 = 識別対象.to個人().get続柄();
                 row.setTxtZokugara(続柄);
                 FlexibleDate 生年月日 = 識別対象.to個人().get生年月日() != null ? 識別対象.to個人().get生年月日().toFlexibleDate() : FlexibleDate.EMPTY;
