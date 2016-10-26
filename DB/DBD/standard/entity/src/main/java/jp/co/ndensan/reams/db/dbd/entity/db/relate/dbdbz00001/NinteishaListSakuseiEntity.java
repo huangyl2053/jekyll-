@@ -28,6 +28,7 @@ public class NinteishaListSakuseiEntity {
     private boolean is老齢福祉年金受給者;
     private boolean is所得税課税者;
     private boolean is生活保護受給者;
+    private boolean is所得税課税世帯;
     private RString 利用者負担段階;
     private Decimal 非課税年金勘案額;
     private Decimal 合計所得_含年金収入;

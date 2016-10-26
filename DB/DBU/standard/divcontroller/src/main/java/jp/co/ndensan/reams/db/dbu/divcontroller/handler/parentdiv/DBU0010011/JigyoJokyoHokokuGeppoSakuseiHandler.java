@@ -1314,7 +1314,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
             バッチID.add(RString.EMPTY);
             出力区分List.add(RString.EMPTY);
         }
-        if (div.getCblOutputTaisho6().getSelectedKeys().contains(保険給付決定状況_高額合算分)) {
+        if (div.getCblOutputTaisho7().getSelectedKeys().contains(保険給付決定状況_高額合算分)) {
             出力区分List.add(合併あり);
             バッチID.add(DBU010100);
         } else {
