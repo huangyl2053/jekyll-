@@ -99,6 +99,18 @@ public class TankiNyushoShikyuGendoGakuBuilder {
     }
 
     /**
+     * 基準期間を設定します。
+     *
+     * @param 基準期間 基準期間
+     * @return {@link TankiNyushoShikyuGendoGakuBuilder}
+     */
+    public TankiNyushoShikyuGendoGakuBuilder set基準期間(RString 基準期間) {
+        requireNonNull(基準期間, UrSystemErrorMessages.値がnull.getReplacedMessage("基準期間"));
+        entity.setKijunKikan(基準期間);
+        return this;
+    }
+
+    /**
      * {@link TankiNyushoShikyuGendoGaku}のインスタンスを生成します。
      *
      * @return {@link TankiNyushoShikyuGendoGaku}のインスタンス

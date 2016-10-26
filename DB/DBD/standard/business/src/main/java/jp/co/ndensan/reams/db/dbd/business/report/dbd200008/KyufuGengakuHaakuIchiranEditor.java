@@ -58,7 +58,6 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
     private static final int NUM_20 = 20;
     private static final RString ホシ = new RString("有");
     private static final RString 作成 = new RString("作成");
-    private static final RString タイトル = new RString("給付額減額把握リスト");
     private static final RString 申請中 = new RString("申請中");
     private static final RString 度 = new RString("度");
     private static final RString 特徴 = new RString("特徴");
@@ -85,6 +84,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
     private final KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity;
     private final IOutputOrder iOutputOrder;
     private final int count;
+    private final RString タイトル;
 
     /**
      * インスタンスを生成します。
@@ -94,16 +94,18 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
      * @param 保険者名称 保険者名称
      * @param 給付額減額把握リストEntity KyufuGengakuHaakuIchiranEntity
      * @param iOutputOrder IOutputOrder
+     * @param タイトル タイトル
      * @param count 印刷回数
      */
     protected KyufuGengakuHaakuIchiranEditor(RDateTime 作成日時, HokenshaNo 保険者番号, RString 保険者名称,
-            KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity, IOutputOrder iOutputOrder, int count) {
+            KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity, IOutputOrder iOutputOrder, int count, RString タイトル) {
         this.作成日時 = 作成日時;
         this.保険者名称 = 保険者名称;
         this.保険者番号 = 保険者番号;
         this.給付額減額把握リストEntity = 給付額減額把握リストEntity;
         this.iOutputOrder = iOutputOrder;
         this.count = count;
+        this.タイトル = タイトル;
     }
 
     @Override
@@ -168,7 +170,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
         }
         return 減額対象情報.get確定減額期間開始年月日().wareki().eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString()
-                .concat("~")
+                .concat("～")
                 .concat(減額対象情報.get確定減額期間終了年月日().wareki().eraType(EraType.KANJI_RYAKU).
                         firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
     }

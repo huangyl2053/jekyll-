@@ -186,9 +186,9 @@
         (
                 SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3028KyufujissekiKogakuKaigoServicehiMapper.allColumns_DbT3028KyufujissekiKogakuKaigoServicehi" />
                 FROM rgdb."DbT3028KyufujissekiKogakuKaigoServicehi"
-                WHERE "DbT3028KyufujissekiKogakuKaigoServicehi"."kokanShikibetsuNo" LIKE '113%'
+                WHERE "DbT3028KyufujissekiKogakuKaigoServicehi"."kokanJohoShikibetsuNo" LIKE '113%'
                 OR (
-                	"DbT3028KyufujissekiKogakuKaigoServicehi"."kokanShikibetsuNo" LIKE '111%'
+                	"DbT3028KyufujissekiKogakuKaigoServicehi"."kokanJohoShikibetsuNo" LIKE '111%'
                 	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."sakuseiKubun" = '1'
                 )
         ) AS 高額
@@ -215,14 +215,14 @@
         (
                 SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3028KyufujissekiKogakuKaigoServicehiMapper.allColumns_DbT3028KyufujissekiKogakuKaigoServicehi" />
                 FROM rgdb."DbT3028KyufujissekiKogakuKaigoServicehi"
-                WHERE "DbT3028KyufujissekiKogakuKaigoServicehi"."kokanShikibetsuNo" LIKE '113%'
+                WHERE "DbT3028KyufujissekiKogakuKaigoServicehi"."kokanJohoShikibetsuNo" LIKE '113%'
                 OR (
-                	"DbT3028KyufujissekiKogakuKaigoServicehi"."kokanShikibetsuNo" LIKE '111%'
+                	"DbT3028KyufujissekiKogakuKaigoServicehi"."kokanJohoShikibetsuNo" LIKE '111%'
                 	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."sakuseiKubun" = '1'
                 )
                 AND NOT EXISTS (
                 	SELECT 'X' FROM rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS 高額2
-                	WHERE "DbT3028KyufujissekiKogakuKaigoServicehi"."kokanShikibetsuNo" = 高額2."kokanShikibetsuNo"
+                	WHERE "DbT3028KyufujissekiKogakuKaigoServicehi"."kokanJohoShikibetsuNo" = 高額2."kokanJohoShikibetsuNo"
                 	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."inputShikibetsuNo" = 高額2."inputShikibetsuNo"
                 	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."recodeShubetsuCode" = 高額2."recodeShubetsuCode"
                 	AND "DbT3028KyufujissekiKogakuKaigoServicehi"."hiHokenshaNo" = 高額2."hiHokenshaNo"
