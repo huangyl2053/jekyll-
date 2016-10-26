@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshotoroku;
 
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShujiiIkenshoTorokuRelateEntity {
 
+    private DbT5301ShujiiIkenshoIraiJohoEntity dbt5301Entity;
     private DbT5302ShujiiIkenshoJohoEntity dbt5302Entity;
     private DbT5912ShujiiJohoEntity dbt5912Entity;
     private DbT5911ShujiiIryoKikanJohoEntity dbt5911Entity;

@@ -6,14 +6,13 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1040011;
 
 import jp.co.ndensan.reams.db.dba.business.core.exclusivekey.DbaExclusiveKey;
-import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
-import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1040011.DBA1040011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1040011.DBA1040011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1040011.ShikakuHenkouIdouDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1040011.ShikakuHenkouIdouHandler;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
-import jp.co.ndensan.reams.db.dba.service.core.shikakuhenkouidou.HihokenshaShikakuHenkoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.shikakuhenkouidou.HihokenshaShikakuHenkoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
@@ -105,7 +104,7 @@ public class ShikakuHenkouIdou {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             saveGamenData(div);
             RealInitialLocker.release(create排他キー());
             div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
@@ -163,12 +162,12 @@ public class ShikakuHenkouIdou {
     private void saveGamenData(ShikakuHenkouIdouDiv div) {
         for (HihokenshaDaicho hihokensha : div.getCcdHihosyosai().getGridData().records()) {
             if (hihokensha.isAdded()) {
-                DbaErrorMessages error = henkoManager.shikakuHenkoTorokuCheck(
+                Message error = henkoManager.shikakuHenkoTorokuCheck(
                         hihokensha.get識別コード(), hihokensha.get被保険者番号(), hihokensha.get資格変更年月日(),
                         ShikakuHenkoJiyu.toValue(hihokensha.get資格変更事由コード()),
                         div.getCcdKaigoAtenaInfo().getShokaiData().getTxtSeinengappiYMD().getValue());
                 if (error != null) {
-                    throw new ApplicationException(error.getMessage());
+                    throw new ApplicationException(error.evaluate());
                 }
                 henkoManager.saveHihokenshaHenko(hihokensha);
             }

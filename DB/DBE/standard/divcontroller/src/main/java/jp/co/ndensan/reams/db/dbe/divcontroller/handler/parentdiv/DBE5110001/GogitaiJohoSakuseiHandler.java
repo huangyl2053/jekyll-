@@ -223,7 +223,7 @@ public class GogitaiJohoSakuseiHandler {
                       && strToTime(result.get合議体開始予定時刻()).compareTo(div.getTxtKaishiYoteiTime().getValue()) == 0
                       && strToTime(result.get合議体終了予定時刻()).compareTo(div.getTxtShuryoYoteiTime().getValue()) == 0
                       && result.get介護認定審査会予定定員() == div.getTxtYoteiTeiin().getValue().intValue()
-                      && result.get介護認定審査会自動割当定員() == div.getTxtJidoWariateTeiin().getValue().intValue()
+                      && div.getTxtJidoWariateTeiin().getText().equals(result.get介護認定審査会自動割当定員())
                       && result.get介護認定審査会委員定員() == div.getTxtIinTeiin().getValue().intValue()
                       && result.is合議体精神科医存在フラグ() == div.getRadSeishinkaiSonzai().getSelectedKey().equals(SEISHINKAI_SONZAI_SURU)
                       && result.is合議体ダミーフラグ() == div.getRadDummyFlag().getSelectedKey().equals(DUMMY_FLAG_DAMI);
@@ -380,9 +380,12 @@ public class GogitaiJohoSakuseiHandler {
      * 合議体情報一覧の修正場合、部品活性状態を変化します。
      *
      */
-    public void setDisableByUpd() {
+    public void setDisableByUpd(dgGogitaiIchiran_Row row) {
         div.getBtnTsuika().setDisabled(false);
         div.getDdlkaisaibasho().setDisabled(false);
+        if (!RString.EMPTY.equals(row.getJyotai())) {
+            div.getTxtYukoKaishiYMD().setDisabled(false);
+        }
         div.getTxtYukoShuryoYMD().setDisabled(false);
         div.getTxtYoteiTeiin().setDisabled(false);
         div.getTxtShuryoYoteiTime().setDisabled(false);

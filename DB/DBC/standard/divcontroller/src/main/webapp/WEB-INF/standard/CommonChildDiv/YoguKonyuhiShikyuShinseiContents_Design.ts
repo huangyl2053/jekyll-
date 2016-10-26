@@ -66,7 +66,7 @@ module DBC {
             }
 
             public YoguKonyuhiShikyuShinseiSeikyuDetailInput(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiSeikyuDetail_YoguKonyuhiShikyuShinseiSeikyuDetailInput"));
+                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiSeikyuDetailInput"));
             }
 
             public txtBuyYMD(): UZA.TextBoxDate {
@@ -110,7 +110,7 @@ module DBC {
             }
 
             public SeikyuSummary(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiSeikyuDetail_SeikyuSummary"));
+                return new UZA.Panel(this.convFiledName("SeikyuSummary"));
             }
 
             public tblSeikyuSummary(): UZA.TablePanel {
@@ -258,7 +258,7 @@ module DBC {
             }
 
             public YoguKonyuhiShikyuShinseisha(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseishaJoho_YoguKonyuhiShikyuShinseisha"));
+                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseisha"));
             }
 
             public radShinseishaKubun(): UZA.RadioButton {
@@ -298,7 +298,7 @@ module DBC {
             }
 
             public URKoza(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiPaymentMethod_URKoza"));
+                return new UZA.Panel(this.convFiledName("URKoza"));
             }
 
             public txtKari1(): UZA.TextBox {
@@ -306,7 +306,7 @@ module DBC {
             }
 
             public DBZJuryoinin(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiPaymentMethod_DBZJuryoinin"));
+                return new UZA.Panel(this.convFiledName("DBZJuryoinin"));
             }
 
             public txtKari2(): UZA.TextBox {

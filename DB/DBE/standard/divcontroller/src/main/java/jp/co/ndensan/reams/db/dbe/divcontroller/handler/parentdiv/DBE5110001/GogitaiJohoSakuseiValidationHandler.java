@@ -241,6 +241,45 @@ public class GogitaiJohoSakuseiValidationHandler {
         return validationMessages;
     }
 
+    /**
+     * 保存するボタンを押下するとき、バリデーションチェックを行う。
+     *
+     * @return validPairs バリデーション結果
+     */
+    public ValidationMessageControlPairs validateForUpdate() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+
+        List<dgGogitaiIchiran_Row> ichiranList = div.getDgGogitaiIchiran().getDataSource();
+        boolean notUpdate = true;
+        for (dgGogitaiIchiran_Row row : ichiranList) {
+            if (!RString.EMPTY.equals(row.getJyotai())) {
+                notUpdate = false;
+                break;
+            }
+        }
+        if (notUpdate) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new IdocheckMessages(UrErrorMessages.編集なしで更新不可),
+                    div.getDgGogitaiIchiran()));
+        }
+
+        return validPairs;
+    }
+    
+    private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
+        
     private static enum GogitaiJohoSakuseiMessages implements IValidationMessage {
 
         桁数が不正(UrErrorMessages.桁数が不正, "合議体No", "2"),

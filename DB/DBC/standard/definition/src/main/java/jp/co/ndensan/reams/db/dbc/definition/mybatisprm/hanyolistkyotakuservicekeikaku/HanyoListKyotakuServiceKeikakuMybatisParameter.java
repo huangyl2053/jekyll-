@@ -57,8 +57,8 @@ public class HanyoListKyotakuServiceKeikakuMybatisParameter extends UaFt200FindS
             boolean csv日付スラッシュ編集, IShikibetsuTaishoPSMSearchKey searchKey) {
         super(searchKey);
         this.構成市町村コード = 構成市町村コード;
-        this.作成区分 = 作成区分;
-        this.抽出区分 = 抽出区分;
+        this.作成区分 = 作成区分 == null ? RString.EMPTY : 作成区分;
+        this.抽出区分 = 抽出区分 == null ? RString.EMPTY : 抽出区分;
         this.基準年月日 = 基準年月日;
         this.支援事業者番号 = 支援事業者番号;
         this.改頁出力順ID = 改頁出力順ID;

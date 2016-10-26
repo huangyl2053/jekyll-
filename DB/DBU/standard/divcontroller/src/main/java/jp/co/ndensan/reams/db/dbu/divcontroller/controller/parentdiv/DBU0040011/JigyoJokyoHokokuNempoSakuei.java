@@ -354,7 +354,7 @@ public class JigyoJokyoHokokuNempoSakuei {
                     Syorimei.月報報告一般状況１_１１.get名称(),
                     div.getTxttxtShukeiNendo1().getValue().getYear(), div.getTxtShukeiFromYM1().getValue().getMonthValue(),
                     div.getTxtShukeiToYM1().getValue().getMonthValue()), Syorimei.月報報告一般状況１_１１.get名称(),
-                    div.getTxtShukeiFromYM1().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM1().getValue().getYearMonth().wareki().toDateString());
+                    div.getTxtShukeiFromYM1().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM1().getValue().getYearMonth().toDateString());
             return respinseData(div, 年報報告様式１２);
         }
         if (div.getCblShutsuryokuTaishoIppan1to11().isAllSelected()) {
@@ -362,7 +362,7 @@ public class JigyoJokyoHokokuNempoSakuei {
                     Syorimei.月報報告一般状況１_１１.get名称(),
                     div.getTxtShukeiNendo2().getValue().getYear(), div.getTxtShukeiFromYM2().getValue().getMonthValue(),
                     div.getTxtShukeiToYM2().getValue().getMonthValue()), Syorimei.月報報告一般状況１_１１.get名称(),
-                    div.getTxtShukeiFromYM2().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM2().getValue().getYearMonth().wareki().toDateString());
+                    div.getTxtShukeiFromYM2().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM2().getValue().getYearMonth().toDateString());
             return respinseData(div, 年報報告一般状況１１１);
         }
         if (div.getCblShutsuryokuTaishoIppanGembutsu().isAllSelected()) {
@@ -370,7 +370,7 @@ public class JigyoJokyoHokokuNempoSakuei {
                     Syorimei.月報報告一般状況１２_１４現物分.get名称(),
                     div.getTxtShukeiNendo3().getValue().getYear(), div.getTxtShukeiFromYM3().getValue().getMonthValue(),
                     div.getTxtShukeiToYM3().getValue().getMonthValue()), Syorimei.月報報告一般状況１２_１４現物分.get名称(),
-                    div.getTxtShukeiFromYM3().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM3().getValue().getYearMonth().wareki().toDateString());
+                    div.getTxtShukeiFromYM3().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM3().getValue().getYearMonth().toDateString());
             return respinseData(div, 年報報告一般状況１２１４現物分);
         }
         if (div.getCblShutsuryokuTaishoHokenGembutsu().isAllSelected()) {
@@ -378,7 +378,7 @@ public class JigyoJokyoHokokuNempoSakuei {
                     Syorimei.月報報告保険給付決定現物分.get名称(),
                     div.getTxtShukeiNendo4().getValue().getYear(), div.getTxtShukeiFromYM4().getValue().getMonthValue(),
                     div.getTxtShukeiToYM4().getValue().getMonthValue()), Syorimei.月報報告保険給付決定現物分.get名称(),
-                    div.getTxtShukeiFromYM4().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM4().getValue().getYearMonth().wareki().toDateString());
+                    div.getTxtShukeiFromYM4().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM4().getValue().getYearMonth().toDateString());
             return respinseData(div, 年報報告保険給付決定現物分);
         }
         if (div.getCblShutsuryokuTaishoIppanShokan().isAllSelected()) {
@@ -387,14 +387,14 @@ public class JigyoJokyoHokokuNempoSakuei {
                         Syorimei.月報報告一般状況１２_１４償還分審査.get名称(),
                         div.getTxtShukeiNendo5().getValue().getYear(), div.getTxtShukeiFromYM5().getValue().getMonthValue(),
                         div.getTxtShukeiToYM5().getValue().getMonthValue()), Syorimei.月報報告一般状況１２_１４償還分審査.get名称(),
-                        div.getTxtShukeiFromYM5().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM5().getValue().getYearMonth().wareki().toDateString());
+                        div.getTxtShukeiFromYM5().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM5().getValue().getYearMonth().toDateString());
                 return respinseData(div, 一般状況1214償還分);
             } else {
                 ValidationMessageControlPairs 一般状況1214償還分 = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
                         Syorimei.月報報告一般状況１２_１４償還分決定.get名称(),
                         div.getTxtShukeiNendo5().getValue().getYear(), div.getTxtShukeiFromYM5().getValue().getMonthValue(),
                         div.getTxtShukeiToYM5().getValue().getMonthValue()), Syorimei.月報報告一般状況１２_１４償還分決定.get名称(),
-                        div.getTxtShukeiFromYM5().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM5().getValue().getYearMonth().wareki().toDateString());
+                        div.getTxtShukeiFromYM5().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM5().getValue().getYearMonth().toDateString());
                 return respinseData(div, 一般状況1214償還分);
             }
         }
@@ -478,14 +478,14 @@ public class JigyoJokyoHokokuNempoSakuei {
                         Syorimei.月報報告保険給付決定償還分審査.get名称(),
                         div.getTxtShukeiNendo6().getValue().getYear(), div.getTxtShukeiFromYM6().getValue().getMonthValue(),
                         div.getTxtShukeiToYM6().getValue().getMonthValue()), Syorimei.月報報告保険給付決定償還分審査.get名称(),
-                        div.getTxtShukeiFromYM6().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM6().getValue().getYearMonth().wareki().toDateString());
+                        div.getTxtShukeiFromYM6().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM6().getValue().getYearMonth().toDateString());
                 return respinseData(div, 給付決定償還分);
             } else {
                 ValidationMessageControlPairs 給付決定償還分 = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
                         Syorimei.月報報告保険給付決定償還分決定.get名称(),
                         div.getTxtShukeiNendo6().getValue().getYear(), div.getTxtShukeiFromYM6().getValue().getMonthValue(),
                         div.getTxtShukeiToYM6().getValue().getMonthValue()), Syorimei.月報報告保険給付決定償還分決定.get名称(),
-                        div.getTxtShukeiFromYM6().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM6().getValue().getYearMonth().wareki().toDateString());
+                        div.getTxtShukeiFromYM6().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM6().getValue().getYearMonth().toDateString());
                 return respinseData(div, 給付決定償還分);
             }
         }
@@ -494,7 +494,7 @@ public class JigyoJokyoHokokuNempoSakuei {
                     Syorimei.月報報告保険給付決定高額分.get名称(),
                     div.getTxtShukeiNendo7().getValue().getYear(), div.getTxtShukeiFromYM7().getValue().getMonthValue(),
                     div.getTxtShukeiToYM7().getValue().getMonthValue()), Syorimei.月報報告保険給付決定高額分.get名称(),
-                    div.getTxtShukeiFromYM7().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM7().getValue().getYearMonth().wareki().toDateString());
+                    div.getTxtShukeiFromYM7().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM7().getValue().getYearMonth().toDateString());
             return respinseData(div, 給付決定高額分);
         }
         if (div.getCblShutsuryokuTaishoHokenKogakuGassan().isAllSelected()) {
@@ -502,7 +502,7 @@ public class JigyoJokyoHokokuNempoSakuei {
                     Syorimei.月報報告保険給付決定高額合算分.get名称(),
                     div.getTxtShukeiNendo8().getValue().getYear(), div.getTxtShukeiFromYM8().getValue().getMonthValue(),
                     div.getTxtShukeiToYM8().getValue().getMonthValue()), Syorimei.月報報告保険給付決定高額合算分.get名称(),
-                    div.getTxtShukeiFromYM8().getValue().getYearMonth().wareki().toDateString(), div.getTxtShukeiToYM8().getValue().getYearMonth().wareki().toDateString());
+                    div.getTxtShukeiFromYM8().getValue().getYearMonth().toDateString(), div.getTxtShukeiToYM8().getValue().getYearMonth().toDateString());
             return respinseData(div, 給付決定高額合算分);
         }
         return ResponseData.of(div).respond();

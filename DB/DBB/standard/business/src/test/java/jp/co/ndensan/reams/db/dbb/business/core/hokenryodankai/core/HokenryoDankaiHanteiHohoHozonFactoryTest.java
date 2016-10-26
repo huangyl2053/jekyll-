@@ -37,7 +37,7 @@ public class HokenryoDankaiHanteiHohoHozonFactoryTest {
         hokenryoDankaiHanteiParameter.setSeigyoJoho(SeigyoJohoTest.setCreateHokenryoDankaiHanteiHoho());
 
         HokenryoDankaiHanteiHohoHozon result = HokenryoDankaiHanteiHohoHozonFactory.createHokenryoDankaiHanteiHoho(hokenryoDankaiHanteiParameter);
-        if (result instanceof Dai4Ki) {
+        if (result instanceof Dai5Ki) {
         } else {
             fail("CreateHokenryoDankaiHanteiHoho1 failed");
         }
@@ -52,7 +52,7 @@ public class HokenryoDankaiHanteiHohoHozonFactoryTest {
         hokenryoDankaiHanteiParameter.setSeigyoJoho(SeigyoJohoTest.setCreateHokenryoDankaiHanteiHoho());
 
         HokenryoDankaiHanteiHohoHozon result = HokenryoDankaiHanteiHohoHozonFactory.createHokenryoDankaiHanteiHoho(hokenryoDankaiHanteiParameter);
-        if (result instanceof Dai4Ki) {
+        if (result instanceof Dai5Ki) {
         } else {
             fail("CreateHokenryoDankaiHanteiHoho1 failed");
         }

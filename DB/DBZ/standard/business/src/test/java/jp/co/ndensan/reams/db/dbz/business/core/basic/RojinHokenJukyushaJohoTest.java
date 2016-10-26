@@ -122,7 +122,7 @@ public class RojinHokenJukyushaJohoTest extends DbzTestBase {
 
         @Test
         public void get老人保健市町村コードは_entityが持つ老人保健市町村コードを返す() {
-            assertThat(sut.get老人保健市町村コード().getColumnValue(), is(RojinHokenJukyushaJohoEntity.getRojinHokenShichosonCode()));
+            assertThat(sut.get老人保健市町村コード(), is(RojinHokenJukyushaJohoEntity.getRojinHokenShichosonCode()));
         }
 
         @Test

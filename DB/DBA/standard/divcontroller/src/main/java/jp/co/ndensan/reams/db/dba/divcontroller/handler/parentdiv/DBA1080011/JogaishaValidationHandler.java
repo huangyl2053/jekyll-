@@ -39,6 +39,24 @@ public class JogaishaValidationHandler {
     public JogaishaValidationHandler(JogaishaTorokuDiv div) {
         this.div = div;
     }
+    
+       /**
+     * 識別コードLostFocusの場合、入力チェック実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs shikibetsuCodeCheck() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        TextBoxShikibetsuCode txtShikibetsuCode = div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCode();
+        if (txtShikibetsuCode == null || txtShikibetsuCode.getText().isNullOrEmpty()) {
+            validationMessages.add(
+                    new ValidationMessageControlPair(
+                            new JogaishaValidationHandler.RRVMessages(UrErrorMessages.必須項目),
+                            txtShikibetsuCode
+                    ));
+        }
+        return validationMessages;
+    }
 
     /**
      * 確定するボタン押下の場合、入力チェック実行します。

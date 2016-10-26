@@ -50,6 +50,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
         div.setHdnJkkoutani(集計のみ);
         div.setKakuteiHokokuYM(報告年月_完全未確定);
         getHandler(div).onLoad(get過去集計情報の取得());
+        div.getRadGappeiShichoson().setDisabled(true);
+        div.getRadKoikiRengo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -77,6 +79,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
         div.getTxtHokokuYM().setDisabled(false);
         div.getDdlKakoHokokuYM().setDisabled(true);
         div.setHdnJkkoutani(集計のみ);
+        div.getRadGappeiShichoson().setDisabled(true);
+        div.getRadKoikiRengo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -104,6 +108,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
         div.getTxtHokokuYM().setDisabled(false);
         div.getDdlKakoHokokuYM().setDisabled(true);
         div.setHdnJkkoutani(集計後に印刷);
+        div.getRadGappeiShichoson().setDisabled(true);
+        div.getRadKoikiRengo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -124,6 +130,8 @@ public class JigyoJokyoHokokuGeppoSakusei {
         div.getTxtHokokuYM().setDisabled(true);
         div.getDdlKakoHokokuYM().setDisabled(false);
         div.setHdnJkkoutani(過去の集計結果を印刷);
+        div.getRadGappeiShichoson().setDisabled(false);
+        div.getRadKoikiRengo().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -176,6 +184,9 @@ public class JigyoJokyoHokokuGeppoSakusei {
         RString 旧市町村分 = new RString("kyuShichoson");
         if (div.getTblJikkoTani().getRadGappeiShichoson().getSelectedKey().equals(旧市町村分)) {
             div.setShichosonKubun(new RString("2"));
+            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(false);
+        } else {
+            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(true);
         }
         return ResponseData.of(div).respond();
     }
@@ -190,6 +201,9 @@ public class JigyoJokyoHokokuGeppoSakusei {
         RString 構成市町村分 = new RString("koseiShichoson");
         if (div.getTblJikkoTani().getRadKoikiRengo().getSelectedKey().equals(構成市町村分)) {
             div.setShichosonKubun(new RString("1"));
+            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(false);
+        } else {
+            div.getTblJikkoTani().getBtnShichosonSelect().setDisabled(true);
         }
         return ResponseData.of(div).respond();
     }
