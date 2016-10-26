@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7010001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710010.DBC710010_HanyoListKyotakuServiceKeikakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.SakuseiKubun;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710010.DBC710010_HanyoListKyotakuServiceKeikakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7010001.HanyorisutoPanelDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -137,6 +137,7 @@ public class HanyorisutoPanelHandler {
         bparam.setCsv項目名付加(list.contains(ONE));
         bparam.setCsv連番付加(list.contains(TWO));
         bparam.setCsv日付スラッシュ編集(list.contains(THREE));
+        bparam.set帳票ID(REPORTID);
         return bparam;
     }
 

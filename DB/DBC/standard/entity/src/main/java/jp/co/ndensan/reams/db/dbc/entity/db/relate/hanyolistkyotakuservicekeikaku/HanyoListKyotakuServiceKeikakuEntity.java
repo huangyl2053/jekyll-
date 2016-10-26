@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class HanyoListKyotakuServiceKeikakuEntity {
 
     private HihokenshaNo dbV1001被保険者番号;
@@ -82,19 +82,21 @@ public class HanyoListKyotakuServiceKeikakuEntity {
     private FlexibleDate dbT3006適用開始年月日;
     private FlexibleDate dbT3006適用終了年月日;
     private FlexibleDate dbT3006事業者変更年月日;
+    private RString dbT3006事業者変更事由;
     private HihokenshaNo dbT3007被保険者番号;
     private RString dbT3007作成区分コード;
     private FlexibleDate dbT3007適用開始年月日;
     private FlexibleDate dbT3007適用終了年月日;
     private FlexibleDate dbT3007計画作成年月日;
     private FlexibleDate dbT3007計画変更年月日;
-    private RString dbT3007変更理由;
     private JigyoshaNo dbT3006計画事業者番号;
-    private AtenaMeisho dbT7060_Keikaku事業者名称;
-    private AtenaKanaMeisho dbT7060_Keikaku事業者カナ名称;
+    private AtenaMeisho dbT7063_Keikaku事業者名称;
+    private AtenaKanaMeisho dbT7063_Keikaku事業者カナ名称;
+    private AtenaMeisho dbT7063_Keikaku管理者氏名;
+    private AtenaKanaMeisho dbT7063_Keikaku管理者氏名カナ;
     private JigyoshaNo dbT3006委託先事業者番号;
-    private AtenaMeisho dbT7060_Itaku事業者名称;
-    private AtenaKanaMeisho dbT7060_Itaku事業者カナ名称;
+    private AtenaMeisho dbT7063_Itaku事業者名称;
+    private AtenaKanaMeisho dbT7063_Itaku事業者カナ名称;
     private Code dbV4001受給申請事由;
     private FlexibleDate dbV4001受給申請年月日;
     private Code dbV4001要介護認定状態区分コード;
