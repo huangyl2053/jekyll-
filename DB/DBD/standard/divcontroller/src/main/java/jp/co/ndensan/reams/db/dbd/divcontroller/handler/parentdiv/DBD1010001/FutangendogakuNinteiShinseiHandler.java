@@ -248,10 +248,12 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getTxtHiShoninRiyu().clearValue();
             init旧措置DDL();
             init居室種別DDL();
-            if (is負担段階を設定) {
+            RiyoshaFutanDankai 利用者負担段階 = service.judge利用者負担段階(資格対象者.get被保険者番号(), 資格対象者.get識別コード());
+            if (利用者負担段階 == RiyoshaFutanDankai.第四段階) {
+                onChange_ddlShinseiRiyu();
+            } else if (is負担段階を設定 && 利用者負担段階 != RiyoshaFutanDankai.第四段階) {
                 init負担段階DDL();
-                div.getDdlRiyoshaFutanDankai().setSelectedKey(
-                        service.judge利用者負担段階(資格対象者.get被保険者番号(), 資格対象者.get識別コード()).getコード());
+                div.getDdlRiyoshaFutanDankai().setSelectedKey(利用者負担段階.getコード());
                 onChange_ddlRiyoshaFutanDankai();
             } else {
                 div.getDdlKyusochisha().setSelectedKey(SELECT_EMPTYKEY);
@@ -1202,7 +1204,7 @@ public class FutangendogakuNinteiShinseiHandler {
                     決定日,
                     適用日,
                     有効期限,
-                    KyuSochishaKubun.非該当.getコード().equals(futanGendogakuNintei.get旧措置者区分()),
+                    !KyuSochishaKubun.非該当.getコード().equals(futanGendogakuNintei.get旧措置者区分()),
                     SELECT_EMPTYKEY.equals(futanGendogakuNintei.get利用者負担段階())
                     ? RString.EMPTY : RiyoshaFutanDankai.toValue(futanGendogakuNintei.get利用者負担段階()).get略称(),
                     SELECT_EMPTYKEY.equals(futanGendogakuNintei.get居室種別())
