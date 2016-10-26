@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.Fuka
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320002.DBB0320002TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.DBB0320003TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.DBB0320004TransitionEventName;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.DBB0320005TransitionEventName;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -34,7 +35,8 @@ public class FukaShokaiMain {
     private static final RString RAML_ID_賦課照会_世帯員所得 = new RString("DBB0320002");
     private static final RString RAML_ID_賦課照会_特別徴収 = new RString("DBB0320003");
     private static final RString RAML_ID_賦課照会_減免徴収猶予 = new RString("DBB0320004");
-
+    private static final RString RAML_ID_賦課照会_賦課比較 = new RString("DBB0320005");
+    
     /**
      * @param div {@link FukaShokaiMainDiv}
      * @return レスポンス
@@ -81,6 +83,9 @@ public class FukaShokaiMain {
             return ResponseData.of(div).forwardWithEventName(DBB0320001TransitionEventName.検索に戻る).respond();
         }
         if (comesFrom(RAML_ID_賦課照会_減免徴収猶予.toString(), DBB0320004TransitionEventName.履歴一覧)) {
+            return onClick_btnRirekiHyoji(div);
+        }
+        if (comesFrom(RAML_ID_賦課照会_賦課比較.toString(), DBB0320005TransitionEventName.選択画面に戻る)) {
             return onClick_btnRirekiHyoji(div);
         }
         return ResponseData.of(div).setState(DBB0320001StateName.賦課根拠期割);

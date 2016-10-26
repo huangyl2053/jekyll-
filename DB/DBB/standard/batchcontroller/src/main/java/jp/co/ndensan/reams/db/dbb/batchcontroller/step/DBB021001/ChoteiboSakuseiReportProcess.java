@@ -1093,7 +1093,11 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     }
 
     private RString changeDecimalToRString(Decimal val) {
-        return null == val ? RString.EMPTY : new RString(String.valueOf(val.intValue()));
+        if (null == val || val.equals(Decimal.ZERO)) {
+            return RString.EMPTY;
+        } else {
+            return new RString(String.valueOf(val.intValue()));
+        }
     }
 
     private Decimal changeNULLToZero(Decimal val) {
