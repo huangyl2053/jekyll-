@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5610001.Kosh
 import jp.co.ndensan.reams.db.dbd.service.core.basic.shoridatekanri.ShoriDateKanriService;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -42,7 +43,7 @@ public class KoshinTaishoshaKanriHandler {
     public void onLoad() {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
                 getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (shichosonSecurityJoho != null) {
+        if (shichosonSecurityJoho != null && !KaigoDonyuKubun.未導入.code().equals(shichosonSecurityJoho.get介護導入区分().code())) {
             LasdecCode 市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
             ShoriDateKanriService shoriDateKanriService = ShoriDateKanriService.createInstance();
             ShoriDateKanri shoriDateKanri = shoriDateKanriService.getDbT7022ShoriDateKanriEntity(市町村コード);
@@ -75,7 +76,7 @@ public class KoshinTaishoshaKanriHandler {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
                 getShichosonSecurityJoho(GyomuBunrui.介護事務);
         LasdecCode 市町村コード;
-        if (shichosonSecurityJoho != null) {
+        if (shichosonSecurityJoho != null && !KaigoDonyuKubun.未導入.code().equals(shichosonSecurityJoho.get介護導入区分().code())) {
             市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
         } else {
             市町村コード = LasdecCode.EMPTY;

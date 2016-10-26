@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.IShichosonJoho
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -45,7 +46,7 @@ final class KaigoNinteiHokenshaListLoader {
     HokenshaList getShichosonCodeNameList() {
         ShichosonSecurityJoho shichosonSecurity = ShichosonSecurityJohoFinder.createInstance()
                 .getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        if (shichosonSecurity == null) {
+        if (shichosonSecurity == null || KaigoDonyuKubun.未導入.code().equals(shichosonSecurity.get介護導入区分().code())) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("市町村セキュリティ情報"));
         }
 

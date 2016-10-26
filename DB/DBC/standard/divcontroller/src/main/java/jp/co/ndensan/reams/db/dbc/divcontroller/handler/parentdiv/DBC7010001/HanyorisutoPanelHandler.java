@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.SakuseiK
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7010001.HanyorisutoPanelDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
@@ -65,7 +66,7 @@ public class HanyorisutoPanelHandler {
     public void initialize(HanyorisutoPanelDiv div) {
         ShichosonSecurityJoho shichosonsecurityjoho
                 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (shichosonsecurityjoho == null) {
+        if (shichosonsecurityjoho == null || KaigoDonyuKubun.未導入.code().equals(shichosonsecurityjoho.get介護導入区分().code())) {
             throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
         if (shichosonsecurityjoho.get導入形態コード() != null
