@@ -128,22 +128,7 @@ public class KyufuJissekiInReadCsvProcess extends BatchProcessBase<List<RString>
         returnEntity = new FlowEntity();
         flowEntity = new OutputParameter<>();
         連番 = INDEX_0;
-        件数_H1 = INDEX_0;
-        件数_D1 = INDEX_0;
-        件数_DD = INDEX_0;
-        件数_D2 = INDEX_0;
-        件数_DC = INDEX_0;
-        件数_D3 = INDEX_0;
-        件数_D4 = INDEX_0;
-        件数_D5 = INDEX_0;
-        件数_D6 = INDEX_0;
-        件数_D7 = INDEX_0;
-        件数_D8 = INDEX_0;
-        件数_DE = INDEX_0;
-        件数_T1 = INDEX_0;
-        件数_D9 = INDEX_0;
-        件数_DA = INDEX_0;
-        件数_DB = INDEX_0;
+        reset件数();
     }
 
     @Override
