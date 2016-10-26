@@ -70,27 +70,27 @@ public enum ReportIdDBZ {
     /**
      * 要介護認定調査票（特記事項）項目有りの帳票ＩＤです。
      */
-    DBE221022_1(new ReportId("DBE221022_ChosahyoTokkijikoKomokuAri"), new RString("要介護認定調査票（特記事項）項目有り")),
+    DBE221021(new ReportId("DBE221021_ChosahyoTokkijikoKomokuAri"), new RString("要介護認定調査票（特記事項）項目有り")),
     /**
      * 要介護認定調査票（特記事項）項目無しの帳票ＩＤです。
      */
-    DBE221022_2(new ReportId("DBE221022_ChosahyoTokkijikoKomokuNashi"), new RString("要介護認定調査票（特記事項）項目無し")),
+    DBE221022(new ReportId("DBE221022_ChosahyoTokkijikoKomokuNashi"), new RString("要介護認定調査票（特記事項）項目無し")),
     /**
      * 要介護認定調査票（特記事項）フリー様式の帳票ＩＤです。
      */
-    DBE221022_3(new ReportId("DBE221022_ChosahyoTokkijikoFree"), new RString("要介護認定調査票（特記事項）フリー様式")),
+    DBE221023(new ReportId("DBE221023_ChosahyoTokkijikoFree"), new RString("要介護認定調査票（特記事項）フリー様式")),
     /**
      * 要介護認定調査票（特記事項）項目有り（手入力）の帳票ＩＤです。
      */
-    DBE221022_4(new ReportId("DBE221022_ChosahyoTokkijikoKomokuAriTenyuryoku"), new RString("要介護認定調査票（特記事項）項目有り")),
+    DBE221024(new ReportId("DBE221024_ChosahyoTokkijikoKomokuAriTenyuryoku"), new RString("要介護認定調査票（特記事項）項目有り")),
     /**
      * 要介護認定調査票（特記事項）項目無し（手入力）の帳票ＩＤです。
      */
-    DBE221022_5(new ReportId("DBE221022_ChosahyoTokkijikoKomokuNashiTenyuryoku"), new RString("要介護認定調査票（特記事項）項目無し")),
+    DBE221025(new ReportId("DBE221025_ChosahyoTokkijikoKomokuNashiTenyuryoku"), new RString("要介護認定調査票（特記事項）項目無し")),
     /**
      * 要介護認定調査票（特記事項）フリー様式（手入力）の帳票ＩＤです。
      */
-    DBE221022_6(new ReportId("DBE221022_ChosahyoTokkijikoFreeTenyuryoku"), new RString("要介護認定調査票（特記事項）フリー様式")),
+    DBE221026(new ReportId("DBE221026_ChosahyoTokkijikoFreeTenyuryoku"), new RString("要介護認定調査票（特記事項）フリー様式")),
     /**
      * 介護保険診断命令書の帳票ＩＤです。
      */

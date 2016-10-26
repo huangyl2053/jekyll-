@@ -49,7 +49,7 @@ public class ChosahyoTokkijiko_221022Process extends BatchProcessBase<HomonChosa
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書");
-    private static final ReportId 帳票ID = ReportIdDBZ.DBE221022_1.getReportId();
+    private static final ReportId 帳票ID = ReportIdDBZ.DBE221003.getReportId();
     private static final RString CONFIGVALUE = new RString("1");
     private static final RString IRAIFROMYMD = new RString("【依頼開始日】");
     private static final RString IRAITOYMD = new RString("【依頼終了日】");
@@ -365,7 +365,7 @@ public class ChosahyoTokkijiko_221022Process extends BatchProcessBase<HomonChosa
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
-                ReportIdDBZ.DBE221022_1.getReportName(),
+                ReportIdDBZ.DBE221003.getReportName(),
                 出力ページ数,
                 csv出力有無,
                 csvファイル名,

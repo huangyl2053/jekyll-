@@ -21,6 +21,6 @@ public class ChosahyoTokkijikoFreeProperty extends ReportPropertyBase<ChosahyoTo
      * インスタンスを生成します。
      */
     public ChosahyoTokkijikoFreeProperty() {
-        super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE221022_3.getReportId());
+        super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE221023.getReportId());
     }
 }
