@@ -126,6 +126,15 @@ public class TankiNyushoShikyuGendoGaku
     }
 
     /**
+     * 基準期間を返します。
+     *
+     * @return 基準期間
+     */
+    public RString getKijunKikan() {
+        return entity.getKijunKikan();
+    }
+
+    /**
      * {@link DbT7110TankiNyushoShikyuGendoGakuEntity}のクローンを返します。
      *
      * @return {@link DbT7110TankiNyushoShikyuGendoGakuEntity}のクローン

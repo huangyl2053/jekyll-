@@ -1,21 +1,22 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 短期入所系支給限度額テーブルのエンティティクラスです。
  */
 public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<DbT7110TankiNyushoShikyuGendoGakuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7110TankiNyushoShikyuGendoGaku");
 
@@ -35,10 +36,11 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
     private int rirekiNo;
     private FlexibleYearMonth tekiyoShuryoYM;
     private Decimal shikyuGendoNissu;
+    private RString kijunKikan;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -47,7 +49,7 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -56,7 +58,7 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -65,17 +67,16 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -84,7 +85,7 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * 要介護状態区分のgetメソッドです。
-     * 
+     *
      * @return 要介護状態区分
      */
     public RString getYoKaigoJotaiKubun() {
@@ -93,7 +94,7 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * 要介護状態区分のsetメソッドです。
-     * 
+     *
      * @param yoKaigoJotaiKubun 要介護状態区分
      */
     public void setYoKaigoJotaiKubun(RString yoKaigoJotaiKubun) {
@@ -102,7 +103,7 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * 適用開始年月のgetメソッドです。
-     * 
+     *
      * @return 適用開始年月
      */
     public FlexibleYearMonth getTekiyoKaishiYM() {
@@ -111,7 +112,7 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * 適用開始年月のsetメソッドです。
-     * 
+     *
      * @param tekiyoKaishiYM 適用開始年月
      */
     public void setTekiyoKaishiYM(FlexibleYearMonth tekiyoKaishiYM) {
@@ -120,7 +121,7 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -129,7 +130,7 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -138,7 +139,7 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * 適用終了年月のgetメソッドです。
-     * 
+     *
      * @return 適用終了年月
      */
     public FlexibleYearMonth getTekiyoShuryoYM() {
@@ -147,7 +148,7 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * 適用終了年月のsetメソッドです。
-     * 
+     *
      * @param tekiyoShuryoYM 適用終了年月
      */
     public void setTekiyoShuryoYM(FlexibleYearMonth tekiyoShuryoYM) {
@@ -156,7 +157,7 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * 支給限度日数のgetメソッドです。
-     * 
+     *
      * @return 支給限度日数
      */
     public Decimal getShikyuGendoNissu() {
@@ -165,7 +166,7 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * 支給限度日数のsetメソッドです。
-     * 
+     *
      * @param shikyuGendoNissu 支給限度日数
      */
     public void setShikyuGendoNissu(Decimal shikyuGendoNissu) {
@@ -173,11 +174,28 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
     }
 
     /**
+     * 基準期間のgetメソッドです。
+     *
+     * @return 基準期間
+     */
+    public RString getKijunKikan() {
+        return kijunKikan;
+    }
+
+    /**
+     * 基準期間のsetメソッドです。
+     *
+     * @param kijunKikan 基準期間
+     */
+    public void setKijunKikan(RString kijunKikan) {
+        this.kijunKikan = kijunKikan;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT7110TankiNyushoShikyuGendoGakuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT7110TankiNyushoShikyuGendoGakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7110TankiNyushoShikyuGendoGakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7110TankiNyushoShikyuGendoGakuEntity other) {
@@ -210,6 +228,7 @@ public class DbT7110TankiNyushoShikyuGendoGakuEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
