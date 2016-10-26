@@ -61,8 +61,9 @@ public final class ShichosonSecurityJoho {
         private RString 市町村ID有効桁数;
         private ShichosonJoho 市町村情報;
 
-        Builder() {
-            throw new UnsupportedOperationException("Not supported yet."); //TODO ツールでは生成できない。手で実装する。
+        public Builder() {
+            this.介護導入区分 = KaigoDonyuKubun.未導入;
+            this.導入形態コード = null;
         }
 
         /**
