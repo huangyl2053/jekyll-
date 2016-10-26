@@ -194,31 +194,31 @@ public class KyufuGengakuHaakuIchiranReportSource implements IReportSource {
     public RString hokenryogakuGokei1;
     @ReportItem(name = "tainogakuGokei1", length = 7, order = 80)
     public RString tainogakuGokei1;
-    @ReportItem(name = "soGokei1", length = 10, order = 81)
+    @ReportItem(name = "SoGokei1", length = 10, order = 81)
     public RString soGokei1;
     @ReportItem(name = "hokenryogakuGokei2", length = 7, order = 82)
     public RString hokenryogakuGokei2;
     @ReportItem(name = "tainogakuGokei2", length = 7, order = 83)
     public RString tainogakuGokei2;
-    @ReportItem(name = "soGokei2", length = 10, order = 84)
+    @ReportItem(name = "SoGokei2", length = 10, order = 84)
     public RString soGokei2;
     @ReportItem(name = "hokenryogakuGokei3", length = 7, order = 85)
     public RString hokenryogakuGokei3;
     @ReportItem(name = "tainogakuGokei3", length = 7, order = 86)
     public RString tainogakuGokei3;
-    @ReportItem(name = "soGokei3", length = 10, order = 87)
+    @ReportItem(name = "SoGokei3", length = 10, order = 87)
     public RString soGokei3;
     @ReportItem(name = "hokenryogakuGokei4", length = 7, order = 88)
     public RString hokenryogakuGokei4;
     @ReportItem(name = "tainogakuGokei4", length = 7, order = 89)
     public RString tainogakuGokei4;
-    @ReportItem(name = "soGokei4", length = 10, order = 90)
+    @ReportItem(name = "SoGokei4", length = 10, order = 90)
     public RString soGokei4;
     @ReportItem(name = "hokenryogakuGokei5", length = 7, order = 91)
     public RString hokenryogakuGokei5;
     @ReportItem(name = "tainogakuGokei5", length = 7, order = 92)
     public RString tainogakuGokei5;
-    @ReportItem(name = "soGokei5", length = 10, order = 93)
+    @ReportItem(name = "SoGokei5", length = 10, order = 93)
     public RString soGokei5;
     @ReportItem(name = "nendoLower1", length = 19, order = 94)
     public RString nendoLower1;
@@ -304,31 +304,31 @@ public class KyufuGengakuHaakuIchiranReportSource implements IReportSource {
     public RString hokenryogakuGokei6;
     @ReportItem(name = "tainogakuGokei6", length = 7, order = 135)
     public RString tainogakuGokei6;
-    @ReportItem(name = "soGokei6", length = 10, order = 136)
+    @ReportItem(name = "SoGokei6", length = 10, order = 136)
     public RString soGokei6;
     @ReportItem(name = "hokenryogakuGokei7", length = 7, order = 137)
     public RString hokenryogakuGokei7;
     @ReportItem(name = "tainogakuGokei7", length = 7, order = 138)
     public RString tainogakuGokei7;
-    @ReportItem(name = "soGokei7", length = 10, order = 139)
+    @ReportItem(name = "SoGokei7", length = 10, order = 139)
     public RString soGokei7;
     @ReportItem(name = "hokenryogakuGokei8", length = 7, order = 140)
     public RString hokenryogakuGokei8;
     @ReportItem(name = "tainogakuGokei8", length = 7, order = 141)
     public RString tainogakuGokei8;
-    @ReportItem(name = "soGokei8", length = 10, order = 142)
+    @ReportItem(name = "SoGokei8", length = 10, order = 142)
     public RString soGokei8;
     @ReportItem(name = "hokenryogakuGokei9", length = 7, order = 143)
     public RString hokenryogakuGokei9;
     @ReportItem(name = "tainogakuGokei9", length = 7, order = 144)
     public RString tainogakuGokei9;
-    @ReportItem(name = "soGokei9", length = 10, order = 145)
+    @ReportItem(name = "SoGokei9", length = 10, order = 145)
     public RString soGokei9;
     @ReportItem(name = "hokenryogakuGokei10", length = 7, order = 146)
     public RString hokenryogakuGokei10;
     @ReportItem(name = "tainogakuGokei10", length = 7, order = 147)
     public RString tainogakuGokei10;
-    @ReportItem(name = "soGokei10", length = 10, order = 148)
+    @ReportItem(name = "SoGokei10", length = 10, order = 148)
     public RString soGokei10;
     @ReportItem(name = "listGengakuJohoUpper_1", length = 2, order = 149)
     public RString listGengakuJohoUpper_1;

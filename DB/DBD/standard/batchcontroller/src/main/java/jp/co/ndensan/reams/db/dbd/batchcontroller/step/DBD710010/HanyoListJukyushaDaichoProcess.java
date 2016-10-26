@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder._SetSortItem;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportoutputorder.PageBreakType;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportoutputorder.SortOrder;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportyamawake.NewpageType;
@@ -41,8 +41,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.reportyamawake.YamawakeType;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -158,19 +157,39 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
 
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         if (parameter.is連番付加()) {
-            csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(parameter.is項目名付加()).
-                    build();
+            if (parameter.is項目名付加()) {
+                csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
+                        alwaysWriteHeader(HanyoRisutoJyukyusyaCsvEntity.class).
+                        setDelimiter(EUC_WRITER_DELIMITER).
+                        setEncode(Encode.UTF_8withBOM).
+                        setNewLine(NewLine.CRLF).
+                        hasHeader(true).
+                        build();
+            } else {
+                csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
+                        setDelimiter(EUC_WRITER_DELIMITER).
+                        setEncode(Encode.UTF_8withBOM).
+                        setNewLine(NewLine.CRLF).
+                        hasHeader(false).
+                        build();
+            }
         } else {
-            csv2Writer = new CsvWriter.InstanceBuilder(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(parameter.is項目名付加()).
-                    build();
+            if (parameter.is項目名付加()) {
+                csv2Writer = new CsvWriter.InstanceBuilder(eucFilePath).
+                        alwaysWriteHeader(HanyoRisutoJyukyusyaCsvEntity.class).
+                        setDelimiter(EUC_WRITER_DELIMITER).
+                        setEncode(Encode.UTF_8withBOM).
+                        setNewLine(NewLine.CRLF).
+                        hasHeader(parameter.is項目名付加()).
+                        build();
+            } else {
+                csv2Writer = new CsvWriter.InstanceBuilder(eucFilePath).
+                        setDelimiter(EUC_WRITER_DELIMITER).
+                        setEncode(Encode.UTF_8withBOM).
+                        setNewLine(NewLine.CRLF).
+                        hasHeader(parameter.is項目名付加()).
+                        build();
+            }
         }
     }
 
@@ -224,7 +243,8 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
                     0, YamawakeType.設定不可, SubGyomuCode.DBD介護受給, CodeShubetsu.EMPTY, 0, SortOrder.ASCENDING,
                     true, true, PageBreakType.設定なし, 0, 0));
         }
-        return MyBatisOrderByClauseCreator.create(HanyoListJukyusha.class, order);
+        RString getSyotsuRyoKu = MyBatisOrderByClauseCreator.create(HanyoListJukyusha.class, order);
+        return getSyotsuRyoKu.concat(",履歴番号").concat(",枝番");
     }
 
     private void バッチ出力条件リストの出力() {
@@ -241,7 +261,6 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
         } else {
             出力ページ数 = new RString(String.valueOf(csvWriter.getCount()));
         }
-        RString csv出力有無 = new RString("あり");
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(抽出対象者);
@@ -261,6 +280,27 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
                     .fillType(FillType.ZERO)
                     .toDateString()));
         }
+        builder = set出力条件(builder);
+        builder = set出力条件1(builder);
+        builder = set出力条件2(builder);
+        builder = set出力条件3(builder);
+        builder = set出力条件4(builder);
+        builder = set出力条件5(builder);
+        builder = set出力条件6(builder);
+        出力条件.add(builder.toRString());
+        EucFileOutputJokenhyoItem reportOutputJokenhyoItem = new EucFileOutputJokenhyoItem(
+                EUC_ENTITY_ID.toRString(),
+                導入団体コード,
+                市町村名,
+                ジョブ番号,
+                日本語ファイル名,
+                英数字ファイル名,
+                出力ページ数,
+                出力条件);
+        EucFileOutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem).print();
+    }
+
+    private RStringBuilder set出力条件(RStringBuilder builder) {
         if (parameter.is一号被保険者() && parameter.is二号被保険者()) {
             builder.append(被保険者情報.concat(一号と二号));
         } else if (parameter.is一号被保険者() && !parameter.is二号被保険者()) {
@@ -271,25 +311,7 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
         if (parameter.isサービス指定者()) {
             builder.append(指定サービス);
         }
-        builder = set出力条件1(builder);
-        builder = set出力条件2(builder);
-        builder = set出力条件3(builder);
-        builder = set出力条件4(builder);
-        builder = set出力条件5(builder);
-        builder = set出力条件6(builder);
-        出力条件.add(builder.toRString());
-        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
-                導入団体コード,
-                市町村名,
-                ジョブ番号,
-                日本語ファイル名,
-                英数字ファイル名,
-                出力ページ数,
-                csv出力有無,
-                出力条件);
-        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
-        printer.print();
+        return builder;
     }
 
     private RStringBuilder set出力条件1(RStringBuilder builder) {
@@ -526,26 +548,32 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
                         .concat(parameter.get宛名抽出条件().getChiku1_ToMesho() == null ? RString.EMPTY
                                 : parameter.get宛名抽出条件().getChiku1_ToMesho()));
             }
-            if (parameter.get宛名抽出条件().getChiku2_From() != null && parameter.get宛名抽出条件().getChiku2_To() != null) {
-                builder.append(parameter.get宛名抽出条件().getChiku_Kubun().get名称().concat(new RString("： ("))
-                        .concat(parameter.get宛名抽出条件().getChiku2_From()).concat(new RString(") "))
-                        .concat(parameter.get宛名抽出条件().getChiku2_FromMesho() == null ? RString.EMPTY
-                                : parameter.get宛名抽出条件().getChiku2_FromMesho()).concat(波線).concat(new RString(" ("))
-                        .concat(parameter.get宛名抽出条件().getChiku2_To()).concat(new RString(") "))
-                        .concat(parameter.get宛名抽出条件().getChiku2_ToMesho() == null ? RString.EMPTY
-                                : parameter.get宛名抽出条件().getChiku2_ToMesho()));
-            } else if (parameter.get宛名抽出条件().getChiku2_From() != null && parameter.get宛名抽出条件().getChiku2_To() == null) {
-                builder.append(parameter.get宛名抽出条件().getChiku_Kubun().get名称().concat(new RString("： ("))
-                        .concat(parameter.get宛名抽出条件().getChiku2_From()).concat(new RString(") "))
-                        .concat(parameter.get宛名抽出条件().getChiku2_FromMesho() == null ? RString.EMPTY
-                                : parameter.get宛名抽出条件().getChiku2_FromMesho()).concat(波線));
-            } else if (parameter.get宛名抽出条件().getChiku2_From() == null && parameter.get宛名抽出条件().getChiku2_To() != null) {
-                builder.append(parameter.get宛名抽出条件().getChiku_Kubun().get名称().concat(波線).concat(new RString(" ("))
-                        .concat(parameter.get宛名抽出条件().getChiku2_To()).concat(new RString(") "))
-                        .concat(parameter.get宛名抽出条件().getChiku2_ToMesho() == null ? RString.EMPTY
-                                : parameter.get宛名抽出条件().getChiku2_ToMesho()));
-            }
+
             builder = set出力条件7(builder);
+            builder = set出力条件8(builder);
+        }
+        return builder;
+    }
+
+    private RStringBuilder set出力条件8(RStringBuilder builder) {
+        if (parameter.get宛名抽出条件().getChiku2_From() != null && parameter.get宛名抽出条件().getChiku2_To() != null) {
+            builder.append(parameter.get宛名抽出条件().getChiku_Kubun().get名称().concat(new RString("： ("))
+                    .concat(parameter.get宛名抽出条件().getChiku2_From()).concat(new RString(") "))
+                    .concat(parameter.get宛名抽出条件().getChiku2_FromMesho() == null ? RString.EMPTY
+                            : parameter.get宛名抽出条件().getChiku2_FromMesho()).concat(波線).concat(new RString(" ("))
+                    .concat(parameter.get宛名抽出条件().getChiku2_To()).concat(new RString(") "))
+                    .concat(parameter.get宛名抽出条件().getChiku2_ToMesho() == null ? RString.EMPTY
+                            : parameter.get宛名抽出条件().getChiku2_ToMesho()));
+        } else if (parameter.get宛名抽出条件().getChiku2_From() != null && parameter.get宛名抽出条件().getChiku2_To() == null) {
+            builder.append(parameter.get宛名抽出条件().getChiku_Kubun().get名称().concat(new RString("： ("))
+                    .concat(parameter.get宛名抽出条件().getChiku2_From()).concat(new RString(") "))
+                    .concat(parameter.get宛名抽出条件().getChiku2_FromMesho() == null ? RString.EMPTY
+                            : parameter.get宛名抽出条件().getChiku2_FromMesho()).concat(波線));
+        } else if (parameter.get宛名抽出条件().getChiku2_From() == null && parameter.get宛名抽出条件().getChiku2_To() != null) {
+            builder.append(parameter.get宛名抽出条件().getChiku_Kubun().get名称().concat(波線).concat(new RString(" ("))
+                    .concat(parameter.get宛名抽出条件().getChiku2_To()).concat(new RString(") "))
+                    .concat(parameter.get宛名抽出条件().getChiku2_ToMesho() == null ? RString.EMPTY
+                            : parameter.get宛名抽出条件().getChiku2_ToMesho()));
         }
         return builder;
     }

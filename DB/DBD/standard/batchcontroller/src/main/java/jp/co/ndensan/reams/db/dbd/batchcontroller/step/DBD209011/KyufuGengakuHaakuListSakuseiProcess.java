@@ -80,6 +80,8 @@ public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufuG
     private List<KyufuGengakuHaakuListSakuseiEntity> 把握情報List;
     private Map<FlexibleYear, List<KyufuGengakuHaakuListSakuseiEntity>> 把握情報Map;
 
+    private final RString 帳票タイトル = new RString("給付額減額把握リスト");
+
     @Override
     protected void initialize() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
@@ -153,7 +155,7 @@ public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufuG
             KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity = service.edit給付額減額把握リストEntity(
                     把握情報Map, 調定額Map, 収入額Map, 未納額Map, 徴収権消滅期間Map, 納付済み期間Map, 把握情報List, 支払方法変更減額List);
             KyufuGengakuHaakuIchiranReport report = new KyufuGengakuHaakuIchiranReport(RDateTime.now(),
-                    保険者番号, 保険者名称, 給付額減額把握リストEntity, outputOrder);
+                    保険者番号, 保険者名称, 給付額減額把握リストEntity, outputOrder, 帳票タイトル);
             report.writeBy(reportSourceWriter);
         }
 
@@ -169,7 +171,7 @@ public class KyufuGengakuHaakuListSakuseiProcess extends BatchProcessBase<KyufuG
                 KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity = service.edit給付額減額把握リストEntity(
                         把握情報Map, 調定額Map, 収入額Map, 未納額Map, 徴収権消滅期間Map, 納付済み期間Map, 把握情報List, 支払方法変更減額List);
                 KyufuGengakuHaakuIchiranReport report = new KyufuGengakuHaakuIchiranReport(RDateTime.now(),
-                        保険者番号, 保険者名称, 給付額減額把握リストEntity, outputOrder);
+                        保険者番号, 保険者名称, 給付額減額把握リストEntity, outputOrder, 帳票タイトル);
                 report.writeBy(reportSourceWriter);
             }
             当該被保険者番号 = entity.get対象者TmpTblEntity().getHihokenshaNo2();

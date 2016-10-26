@@ -73,7 +73,7 @@ public class KyufuTsuchiGenmenHoseiToroku {
      * @return ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv>
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonHyouji(KyufuTsuchiGenmenHoseiTorokuDiv div) {
-        //QA1687:給付実績検索画面(DBC0010011)に遷移する
+        //#100344のご指示によって、ペンディングとする
         // return ResponseData.of(div).forwardWithEventName(DBC1300011TransitionEventName.).respond();
         return ResponseData.of(div).respond();
     }
@@ -115,6 +115,8 @@ public class KyufuTsuchiGenmenHoseiToroku {
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonTuika(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().setState(状態_追加);
+        div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(true);
+        div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(true);
         div.getTextBoxDateSaabisu().setDisabled(false);
         div.getCcdHokenshaList().setDisabled(false);
         div.getCcdJigyoshaInput().setDisabled(false);
@@ -137,6 +139,8 @@ public class KyufuTsuchiGenmenHoseiToroku {
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonModify(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().setState(状態_修正);
+        div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(true);
+        div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(true);
         div.getTextBoxDateSaabisu().setDisabled(true);
         div.getCcdHokenshaList().setDisabled(true);
         div.getCcdJigyoshaInput().setDisabled(true);
@@ -188,6 +192,8 @@ public class KyufuTsuchiGenmenHoseiToroku {
             ViewStateHolder.put(ViewStateKeys.給付費通知補正, models);
             getHandler(div).delete();
         }
+        div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(true);
+        div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -246,7 +252,8 @@ public class KyufuTsuchiGenmenHoseiToroku {
      * @return ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv>
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonKakutei(KyufuTsuchiGenmenHoseiTorokuDiv div) {
-
+        div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(false);
+        div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(false);
         if (changeCheck(div)) {
             return ResponseData.of(div).respond();
         }

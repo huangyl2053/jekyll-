@@ -79,6 +79,7 @@
                                         WHERE mst."hiHokenshaNo" = slv."hiHokenshaNo"
                                               AND mst."serviceTeikyoYM" = slv."serviceTeikyoYM"
                                               AND mst."seiriNo" = slv."seiriNo"
+                                              AND mst."jigyoshaNo" = slv."jigyoshaNo"
                                               AND mst."yoshikiNo" = slv."yoshikiNo"
                                               AND mst."meisaiNo" = slv."meisaiNo"
                                               AND mst."renban" <![CDATA[<]]> slv."renban"

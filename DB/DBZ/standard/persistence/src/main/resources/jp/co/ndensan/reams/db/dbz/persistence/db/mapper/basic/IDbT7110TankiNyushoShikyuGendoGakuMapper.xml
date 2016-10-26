@@ -29,7 +29,8 @@
          "DbT7110TankiNyushoShikyuGendoGaku"."lastUpdateTimestamp" as "dbT7110TankiNyushoShikyuGendoGaku_lastUpdateTimestamp",
          "DbT7110TankiNyushoShikyuGendoGaku"."lastUpdateReamsLoginId" as "dbT7110TankiNyushoShikyuGendoGaku_lastUpdateReamsLoginId",
          "DbT7110TankiNyushoShikyuGendoGaku"."tekiyoShuryoYM" as "dbT7110TankiNyushoShikyuGendoGaku_tekiyoShuryoYM",
-         "DbT7110TankiNyushoShikyuGendoGaku"."shikyuGendoNissu" as "dbT7110TankiNyushoShikyuGendoGaku_shikyuGendoNissu"
+         "DbT7110TankiNyushoShikyuGendoGaku"."shikyuGendoNissu" as "dbT7110TankiNyushoShikyuGendoGaku_shikyuGendoNissu",
+         "DbT7110TankiNyushoShikyuGendoGaku"."kijunKikan" as "dbT7110TankiNyushoShikyuGendoGaku_kijunKikan"
     </sql>
 
 
@@ -48,6 +49,7 @@
         <result property="lastUpdateReamsLoginId" column="dbT7110TankiNyushoShikyuGendoGaku_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tekiyoShuryoYM" column="dbT7110TankiNyushoShikyuGendoGaku_tekiyoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="shikyuGendoNissu" column="dbT7110TankiNyushoShikyuGendoGaku_shikyuGendoNissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kijunKikan" column="dbT7110TankiNyushoShikyuGendoGaku_kijunKikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
 </mapper>

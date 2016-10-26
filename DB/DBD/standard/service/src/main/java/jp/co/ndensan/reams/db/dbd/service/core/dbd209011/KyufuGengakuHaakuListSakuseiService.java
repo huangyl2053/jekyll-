@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFa
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -96,6 +97,7 @@ public class KyufuGengakuHaakuListSakuseiService {
     private static final int NUM_8 = 8;
     private static final int NUM_9 = 9;
     private static final int NUM_12 = 12;
+    private static final int NUM_18 = 18;
     private static final RString SIGN = new RString(" ＞ ");
 
     /**
@@ -261,6 +263,20 @@ public class KyufuGengakuHaakuListSakuseiService {
                 is調定年度コンフィングequal収納存在 = true;
             }
         }
+        edit収納情報なし(is調定年度コンフィングminus9収納存在, is調定年度コンフィングminus8収納存在,
+                is調定年度コンフィングminus7収納存在, is調定年度コンフィングminus6収納存在,
+                is調定年度コンフィングminus5収納存在, is調定年度コンフィングminus4収納存在,
+                is調定年度コンフィングminus3収納存在, is調定年度コンフィングminus2収納存在,
+                is調定年度コンフィングminus1収納存在, is調定年度コンフィングequal収納存在,
+                日付関連_調定年度, 給付額減額把握リストEntity, 収納情報リスト);
+    }
+
+    private void edit収納情報なし(boolean is調定年度コンフィングminus9収納存在, boolean is調定年度コンフィングminus8収納存在,
+            boolean is調定年度コンフィングminus7収納存在, boolean is調定年度コンフィングminus6収納存在,
+            boolean is調定年度コンフィングminus5収納存在, boolean is調定年度コンフィングminus4収納存在,
+            boolean is調定年度コンフィングminus3収納存在, boolean is調定年度コンフィングminus2収納存在,
+            boolean is調定年度コンフィングminus1収納存在, boolean is調定年度コンフィングequal収納存在,
+            FlexibleYear 日付関連_調定年度, KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity, List<ShunoJohoEntity> 収納情報リスト) {
 
         if (!is調定年度コンフィングminus9収納存在) {
             ShunoJohoEntity shunoJohoEntity = new ShunoJohoEntity();
@@ -401,7 +417,7 @@ public class KyufuGengakuHaakuListSakuseiService {
         if (new RString("1").equals(parameter.get保険料完納者も出力())) {
             保険料完納者も出力builder.append("　　　　・保険料完納者も出力");
         }
-        帳票作成日時builder.append(出力条件_帳票作成日時).append(RString.HALF_SPACE).append(parameter.get帳票作成日時().substring(0, 18));
+        帳票作成日時builder.append(出力条件_帳票作成日時).append(RString.HALF_SPACE).append(parameter.get帳票作成日時().substring(0, NUM_18));
 
         出力条件.add(基準日builder.toRString());
         出力条件.add(時効起算日登録者の選択builder.toRString());
@@ -582,10 +598,11 @@ public class KyufuGengakuHaakuListSakuseiService {
         }
         ShikibetsuCode 識別コード = 宛名Entity.getShikibetsuCode();
         AtenaMeisho 被保険者氏名 = 宛名Entity.getKanjiShimei();
-        GyoseikuCode 行政区ｺｰﾄﾞ = 宛名Entity.getGyoseikuCode();
+        GyoseikuCode 行政区コードﾞ = 宛名Entity.getGyoseikuCode();
         AtenaJusho 住所 = 宛名Entity.getJusho();
         ZenkokuJushoCode 住所コード = 宛名Entity.getZenkokuJushoCode();
         YubinNo 郵便番号 = 宛名Entity.getYubinNo();
+        ChoikiCode 町域コード = 宛名Entity.getChoikiCode();
 
         if (識別コード != null) {
             被保険者情報Entity.set識別コード(識別コード.getColumnValue());
@@ -596,8 +613,8 @@ public class KyufuGengakuHaakuListSakuseiService {
         被保険者情報Entity.set被保険者氏名カナ(宛名Entity.getKanaName());
         被保険者情報Entity.set世帯番号(宛名Entity.getSeibetsuCode());
         被保険者情報Entity.set行政区(宛名Entity.getGyoseikuName());
-        if (行政区ｺｰﾄﾞ != null) {
-            被保険者情報Entity.set行政区ｺｰﾄﾞ(行政区ｺｰﾄﾞ.getColumnValue());
+        if (行政区コードﾞ != null) {
+            被保険者情報Entity.set行政区ｺｰﾄﾞ(行政区コードﾞ.getColumnValue());
         }
         if (住所 != null) {
             被保険者情報Entity.set住所(住所.getColumnValue());
@@ -608,8 +625,8 @@ public class KyufuGengakuHaakuListSakuseiService {
         if (郵便番号 != null) {
             被保険者情報Entity.set郵便番号(郵便番号.getColumnValue());
         }
-        if (宛名Entity.getChoikiCode() != null) {
-            被保険者情報Entity.set町域コード(宛名Entity.getChoikiCode().getColumnValue());
+        if (町域コード != null) {
+            被保険者情報Entity.set町域コード(町域コード.getColumnValue());
         }
     }
 

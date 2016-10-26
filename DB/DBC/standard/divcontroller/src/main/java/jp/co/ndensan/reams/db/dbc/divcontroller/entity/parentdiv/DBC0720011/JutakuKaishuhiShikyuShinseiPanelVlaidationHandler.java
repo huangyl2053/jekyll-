@@ -6,13 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011;
 
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
-import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0720011.MishinsaShikyuShinseiListPanelValidator;
-import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0720011.SearchConditionToMishinsaShikyuShinseiPanelValidator;
-import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0720011.ShinsaButtonDivValidator;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationDictionary;
-import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionary;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -48,7 +47,14 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs volidate支給申請日() {
-        IValidationMessages messages = new SearchConditionToMishinsaShikyuShinseiPanelValidator(div).validate();
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(JutakuKaishuhiShikyuShinseiPanelSpec.支給申請日入力)
+                .thenAdd(JutakuKaishuhiShikyuShinseiErrorMessages.支給申請日FROMと支給申請日TOの必須チェック)
+                .ifNot(JutakuKaishuhiShikyuShinseiPanelSpec.支給申請日有効性)
+                .thenAdd(JutakuKaishuhiShikyuShinseiErrorMessages.支給申請日FROMと支給申請日TOの有効性チェック)
+                .messages());
+
         return createSearchConditionToMishinsaShikyuShinseiPanelValidatorDictionary().check(messages);
     }
 
@@ -58,7 +64,13 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs volidateデータ選択と決定日() {
-        IValidationMessages messages = new MishinsaShikyuShinseiListPanelValidator(div).validate();
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(JutakuKaishuhiShikyuShinseiPanelSpec.データ選択のチェック)
+                .thenAdd(JutakuKaishuhiShikyuShinseiErrorMessages.データ選択のチェック)
+                .ifNot(JutakuKaishuhiShikyuShinseiPanelSpec.決定日のチェック)
+                .thenAdd(JutakuKaishuhiShikyuShinseiErrorMessages.決定日のチェック)
+                .messages());
         return createMishinsaShikyuShinseiListPanelValidatorDictionary().check(messages);
     }
 
@@ -68,7 +80,15 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs volidateデータ選択と未審査と決定日() {
-        IValidationMessages messages = new ShinsaButtonDivValidator(div).validate();
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(JutakuKaishuhiShikyuShinseiPanelSpec.データ選択のチェック)
+                .thenAdd(JutakuKaishuhiShikyuShinseiErrorMessages.データ選択のチェック)
+                .ifNot(JutakuKaishuhiShikyuShinseiPanelSpec.未審査のチェック)
+                .thenAdd(JutakuKaishuhiShikyuShinseiErrorMessages.未審査のチェック)
+                .ifNot(JutakuKaishuhiShikyuShinseiPanelSpec.決定日のチェック)
+                .thenAdd(JutakuKaishuhiShikyuShinseiErrorMessages.決定日のチェック)
+                .messages());
         return createMishinsaShinsaButtonDivValidatorDictionary().check(messages);
     }
 
@@ -77,8 +97,8 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
      *
      * @return ValidationDictionary
      */
-    private ValidationDictionary createSearchConditionToMishinsaShikyuShinseiPanelValidatorDictionary() {
-        return new ValidationDictionaryBuilder()
+    private ValidationMessageControlDictionary createSearchConditionToMishinsaShikyuShinseiPanelValidatorDictionary() {
+        return new ValidationMessageControlDictionaryBuilder()
                 .add(JutakuKaishuhiShikyuShinseiErrorMessages.支給申請日FROMと支給申請日TOの有効性チェック,
                         div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate())
                 .add(JutakuKaishuhiShikyuShinseiErrorMessages.支給申請日FROMと支給申請日TOの必須チェック,
@@ -90,8 +110,8 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
      *
      * @return ValidationDictionary
      */
-    private ValidationDictionary createMishinsaShikyuShinseiListPanelValidatorDictionary() {
-        return new ValidationDictionaryBuilder()
+    private ValidationMessageControlDictionary createMishinsaShikyuShinseiListPanelValidatorDictionary() {
+        return new ValidationMessageControlDictionaryBuilder()
                 .add(JutakuKaishuhiShikyuShinseiErrorMessages.データ選択のチェック,
                         div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei())
                 .add(JutakuKaishuhiShikyuShinseiErrorMessages.決定日のチェック,
@@ -103,8 +123,8 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
      *
      * @return ValidationDictionary
      */
-    private ValidationDictionary createMishinsaShinsaButtonDivValidatorDictionary() {
-        return new ValidationDictionaryBuilder()
+    private ValidationMessageControlDictionary createMishinsaShinsaButtonDivValidatorDictionary() {
+        return new ValidationMessageControlDictionaryBuilder()
                 .add(JutakuKaishuhiShikyuShinseiErrorMessages.データ選択のチェック,
                         div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei())
                 .add(JutakuKaishuhiShikyuShinseiErrorMessages.未審査のチェック,

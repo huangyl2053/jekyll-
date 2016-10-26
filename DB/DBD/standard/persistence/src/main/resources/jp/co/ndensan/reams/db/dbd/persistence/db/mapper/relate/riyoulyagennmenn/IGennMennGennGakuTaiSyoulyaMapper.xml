@@ -251,6 +251,7 @@
         <result property="入所施設名称" column="入所施設名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="厚労省IF識別コード" column="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="旧措置者フラグ" column="旧措置者フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="認定情報の被保険者番号" column="認定情報の被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="認定情報の要介護状態区分コード" column="認定情報の要介護状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="認定情報の認定年月日" column="認定情報の認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

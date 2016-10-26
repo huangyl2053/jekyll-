@@ -67,6 +67,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -126,18 +128,28 @@ public class KyufuJissekiShokai {
      * @return 給付実績照会検索一覧
      */
     public ResponseData<KyufuJissekiShokaiDiv> onLoad(KyufuJissekiShokaiDiv div) {
-        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
-        ShikibetsuCode 識別コード = 資格対象者.get識別コード();
-        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
-            div.getCcdKaigoShikakuKihon().setVisible(false);
-            return ResponseData.of(div).addMessage(new InformationMessage(
+        if (!ResponseHolder.isReRequest()) {
+            InformationMessage message = new InformationMessage(
                     DbcInformationMessages.被保険者でないデータ.getMessage().getCode(),
-                    DbcInformationMessages.被保険者でないデータ.getMessage().evaluate())).respond();
+                    DbcInformationMessages.被保険者でないデータ.getMessage().evaluate());
+            TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
+            ShikibetsuCode 識別コード = 資格対象者.get識別コード();
+            if (被保険者番号 == null || 被保険者番号.isEmpty()) {
+                div.getCcdKaigoShikakuKihon().setVisible(false);
+                return ResponseData.of(div).addMessage(message).respond();
+            } else {
+                setアクセスログ(識別コード, 被保険者番号);
+                getHandler(div).onLoad(被保険者番号, 識別コード);
+                return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会検索);
+            }
         }
-        setアクセスログ(識別コード, 被保険者番号);
-        getHandler(div).onLoad(被保険者番号, 識別コード);
-        return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会検索);
+        if (ResponseHolder.getMessageCode().equals(new RString(DbcInformationMessages.被保険者でないデータ.getMessage().getCode()))
+                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.対象者検索).respond();
+        } else {
+            return ResponseData.of(div).respond();
+        }
     }
 
     /**

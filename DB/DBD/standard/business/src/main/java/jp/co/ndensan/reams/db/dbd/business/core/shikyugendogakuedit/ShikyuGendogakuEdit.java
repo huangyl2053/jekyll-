@@ -165,8 +165,11 @@ public class ShikyuGendogakuEdit {
         if (月数wk.isEmpty()) {
             月数wk = new RString(get月数(短期入所限度額Entity.get適用開始年月(), 短期入所限度額Entity.get適用終了年月()));
         }
-        //TODO 基準額wkに（該当データの短期入所系限度日数　* 月数wk　／　該当データの基準期間）を設定
-        基準額wk = 小数点以下切り(短期入所系支給限度額.get支給限度単位数().multiply(new Decimal(月数wk.toString())));
+        基準額wk = 短期入所系支給限度額.get支給限度単位数().multiply(new Decimal(月数wk.toString()));
+        if (!RString.isNullOrEmpty(短期入所系支給限度額.getKijunKikan())) {
+            基準額wk = 基準額wk.divide(new Decimal(短期入所系支給限度額.getKijunKikan().toString()));
+        }
+        基準額wk = 小数点以下切り(基準額wk);
         if (null == 短期入所限度額Entity.get拡大倍数()) {
             return 基準額wk;
         }
@@ -465,7 +468,7 @@ public class ShikyuGendogakuEdit {
         }
         for (int i = 0; i < 受給者情報リスト.size(); i++) {
             for (int j = i + 1; j < 受給者情報リスト.size(); j++) {
-                JukyushaDaicho temp = null;
+                JukyushaDaicho temp;
                 if (受給者情報リスト.get(i).get履歴番号().compareTo(受給者情報リスト.get(j).get履歴番号()) > 0) {
                     temp = 受給者情報リスト.get(i);
                     受給者情報リスト.set(i, 受給者情報リスト.get(j));

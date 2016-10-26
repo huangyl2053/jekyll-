@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200016.FutanGendogakuNinteiGaitoshaIchiranReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty;
+import jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbz00001.NinteishaListSakuseiProcessParameter;
@@ -358,20 +359,23 @@ public class NinteishaListSakuseiProcess extends BatchKeyBreakBase<NinteishaList
         RString csvファイル名 = new RString("FutanGendogakuNinteiGaitoshaIchiran.csv");
 
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(対象期間指定.concat(parameter.get対象期間指定().get名称()));
-        if (TaishoKikan.対象年度.getコード() == parameter.get対象期間指定().getコード()) {
-            出力条件.add(対象年度.concat(edit日期(parameter.get対象年度の開始年月日()))
-                    .concat(EUC_WRITER_LIAN)
-                    .concat(edit日期(parameter.get対象年度の終了年月日())));
-            出力条件.add(課税判定等基準日.concat(parameter.get課税判定等基準日().toString()));
-        } else if (TaishoKikan.基準日.getコード() == parameter.get対象期間指定().getコード()) {
-            出力条件.add(基準日.concat(edit日期(parameter.get基準日())));
+        if (TargetList.認定者リスト.equals(parameter.get対象リスト())) {
+            出力条件.add(対象期間指定.concat(parameter.get対象期間指定().get名称()));
+            if (TaishoKikan.対象年度.getコード() == parameter.get対象期間指定().getコード()) {
+                出力条件.add(対象年度.concat(edit日期(parameter.get対象年度の開始年月日()))
+                        .concat(EUC_WRITER_LIAN)
+                        .concat(edit日期(parameter.get対象年度の終了年月日())));
+                出力条件.add(課税判定等基準日.concat(parameter.get課税判定等基準日().toString()));
+            } else if (TaishoKikan.基準日.getコード() == parameter.get対象期間指定().getコード()) {
+                出力条件.add(基準日.concat(edit日期(parameter.get基準日())));
+            }
+        } else {
+            出力条件.add(受給者区分.concat(parameter.get受給者区分().get名称()));
+            出力条件.add(利用者負担段階.concat(parameter.get利用者負担段階().get名称()));
         }
         出力条件.add(所得年度.concat(edit年度(parameter.get所得年度())));
         出力条件.add(旧措置者区分.concat(parameter.get旧措置者区分().get名称()));
         出力条件.add(世帯表示.concat(parameter.get世帯表示().get名称()));
-        出力条件.add(受給者区分.concat(parameter.get受給者区分().get名称()));
-        出力条件.add(利用者負担段階.concat(parameter.get利用者負担段階().get名称()));
         if (parameter.get出力設定() == null || parameter.get出力設定().isEmpty()) {
             出力条件.add(CSV出力設定指定なし);
         } else {
@@ -455,23 +459,23 @@ public class NinteishaListSakuseiProcess extends BatchKeyBreakBase<NinteishaList
 
         RString 帳票物理名 = RString.EMPTY;
 
-        if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.郵便番号.get項目ID().equals(項目ID)) {
+        if (DBD200001_FutanGendogakuNinteiGaitoshaIchiran.郵便番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("listCenter_2");
-        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.行政区コード.
+        } else if (DBD200001_FutanGendogakuNinteiGaitoshaIchiran.行政区コード.
                 get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("listLower_2");
-        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.被保険者番号.
+        } else if (DBD200001_FutanGendogakuNinteiGaitoshaIchiran.被保険者番号.
                 get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("listUpper_1");
-        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.世帯コード.get項目ID().equals(項目ID)) {
+        } else if (DBD200001_FutanGendogakuNinteiGaitoshaIchiran.世帯コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("setaiCode");
-        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.市町村コード.get項目ID().equals(項目ID)) {
+        } else if (DBD200001_FutanGendogakuNinteiGaitoshaIchiran.市町村コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("shichosonCode");
-        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.氏名５０音カナ.get項目ID().equals(項目ID)) {
+        } else if (DBD200001_FutanGendogakuNinteiGaitoshaIchiran.氏名５０音カナ.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("gaikokujinKanaShimei");
-        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.町域コード.get項目ID().equals(項目ID)) {
+        } else if (DBD200001_FutanGendogakuNinteiGaitoshaIchiran.町域コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("choikiCode");
-        } else if (jp.co.ndensan.reams.db.dbd.business.report.dbdbz00001.NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.識別コード.get項目ID().equals(項目ID)) {
+        } else if (DBD200001_FutanGendogakuNinteiGaitoshaIchiran.識別コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString("shikibetsuCodeKai");
         }
         return 帳票物理名;

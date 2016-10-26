@@ -10,13 +10,12 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4037HikazeNenkinTaishoshaEn
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.JissekiDataIchijiSakuseiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.JissekiDataIchijiSakuseiTempTableEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -45,11 +44,11 @@ public class JissekiDataIchijiSakuseiProcess extends BatchProcessBase<JissekiDat
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(
+                GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toJissekiDataIchijiSakuseiMybatisprmParamter(uaFt200Psm));
+        IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho = key.build();
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toJissekiDataIchijiSakuseiMybatisprmParamter(psmShikibetsuTaisho));
     }
 
     @Override

@@ -102,6 +102,8 @@ public class PnlTotalSearch {
                     .get(ViewStateKeys.最大件数, Decimal.class);
             div.getPnlSearch().getTxtMaxCount().setValue(最大取得件数);
 
+            JuryoininKeiyakuJigyosha data = ViewStateHolder
+                    .get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
             if (対象者検索.equals(表示モード)) {
                 TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
                 HihokenshaNo 被保険者番号 = key.get被保険者番号();
@@ -110,9 +112,7 @@ public class PnlTotalSearch {
                 div.getPnlSearch().getTxtHihokenshaNo().setValue(被保険者番号.getColumnValue());
                 div.getPnlSearch().getTxtName().setValue(被保険者名 == null ? RString.EMPTY
                         : 被保険者名.getName().getColumnValue());
-            } else if (事業者検索.equals(表示モード)) {
-                JuryoininKeiyakuJigyosha data = ViewStateHolder
-                        .get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
+            } else if (事業者検索.equals(表示モード) && data != null) {
                 ViewStateHolder.put(ViewStateKeys.契約事業者番号, data.get契約事業者番号());
                 ViewStateHolder.put(ViewStateKeys.契約事業者名, data.get契約事業者名称().getColumnValue());
                 div.getPnlSearch().getTxtJigyoshakeiyakuNo().setValue(data.get契約事業者番号());

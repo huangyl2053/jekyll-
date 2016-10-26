@@ -93,6 +93,11 @@ public class NinteishaListSakuseiBusiness {
 
         }
 
+        setEucCsvEntity_2(eucCsvEntity, t, has世帯員情報, 世帯員情報Index);
+
+    }
+
+    private void setEucCsvEntity_2(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, boolean has世帯員情報, int 世帯員情報Index) {
         if (has世帯員情報) {
             SetaiInRisutoEntity setaEntity = t.get世帯員リスト().get(世帯員情報Index);
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get世帯員リスト().get(世帯員情報Index).get世帯員宛名());
@@ -155,6 +160,11 @@ public class NinteishaListSakuseiBusiness {
             }
         }
 
+        edit出力情報_介護保険負担限度額認定_2(eucCsvEntity, t);
+
+    }
+
+    private void edit出力情報_介護保険負担限度額認定_2(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t) {
         if (t.get介護保険負担限度額認定Entity() != null && t.get介護保険負担限度額認定Entity().getJuraiTypeKoshitsu_Roken_Ryoyo() != null) {
             Decimal 居住費負担限度額従来型個室_老健療養等 = t.get介護保険負担限度額認定Entity().getJuraiTypeKoshitsu_Roken_Ryoyo();
             if (null != 居住費負担限度額従来型個室_老健療養等) {

@@ -197,19 +197,23 @@ public class FuchoKariSanteiFukaBatch {
         賦課情報.setFuKibetsuGaku13(Decimal.ZERO);
         賦課情報.setFuKibetsuGaku14(Decimal.ZERO);
         賦課情報.setFukaYMD(FukaKeisan.createInstance().findOut賦課基準日(調定年度, 資格情報));
-        List<Decimal> 普徴期別金額リスト = 調定計算(更正前賦課情報, 計算用保険料, 区分);
-        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(調定年度);
-        KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
-        期月リスト.filtered仮算定期間().toList().get(NUM_1);
-        賦課情報.setFuKibetsuGaku01(普徴期別金額リスト.get(0));
-        賦課情報.setFuKibetsuGaku02(普徴期別金額リスト.get(1));
-        賦課情報.setFuKibetsuGaku03(普徴期別金額リスト.get(2));
-        Decimal 普徴期別金額合計 = sum普徴期別金額(普徴期別金額リスト);
-        if (0 < 普徴期別金額合計.intValue() && 口座Entity != null) {
-            賦課情報.setKozaKubun(KozaKubun.口座振替.getコード());
-        } else if (0 < 普徴期別金額合計.intValue() && 口座Entity == null) {
-            賦課情報.setKozaKubun(KozaKubun.現金納付.getコード());
-        } else if (Decimal.ZERO.equals(普徴期別金額合計)) {
+        if (更正前賦課情報 != null && 計算用保険料 != null && !RString.isNullOrEmpty(区分)) {
+            List<Decimal> 普徴期別金額リスト = 調定計算(更正前賦課情報, 計算用保険料, 区分);
+            FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(調定年度);
+            KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
+            期月リスト.filtered仮算定期間().toList().get(NUM_1);
+            賦課情報.setFuKibetsuGaku01(普徴期別金額リスト.get(0));
+            賦課情報.setFuKibetsuGaku02(普徴期別金額リスト.get(1));
+            賦課情報.setFuKibetsuGaku03(普徴期別金額リスト.get(2));
+            Decimal 普徴期別金額合計 = sum普徴期別金額(普徴期別金額リスト);
+            if (0 < 普徴期別金額合計.intValue() && 口座Entity != null) {
+                賦課情報.setKozaKubun(KozaKubun.口座振替.getコード());
+            } else if (0 < 普徴期別金額合計.intValue() && 口座Entity == null) {
+                賦課情報.setKozaKubun(KozaKubun.現金納付.getコード());
+            } else if (Decimal.ZERO.equals(普徴期別金額合計)) {
+                賦課情報.setKozaKubun(KozaKubun.現金納付.getコード());
+            }
+        } else {
             賦課情報.setKozaKubun(KozaKubun.現金納付.getコード());
         }
         return 賦課情報;
