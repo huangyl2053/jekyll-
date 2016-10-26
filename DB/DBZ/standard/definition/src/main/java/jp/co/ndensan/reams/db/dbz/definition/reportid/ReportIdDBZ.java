@@ -36,21 +36,61 @@ public enum ReportIdDBZ {
      */
     DBE292001(new ReportId("DBE292001_SaiChekkuhyo"), new RString("要介護認定調査票差異チェック票")),
     /**
-     * 要介護認定調査票（特記事項）フリー様式の帳票ＩＤです。
-     */
-    DBE221022_2(new ReportId("DBE221022_chosahyoTokkijiko"), new RString("要介護認定調査票（特記事項）フリー様式")),
-    /**
-     * 要介護認定調査票（特記事項）の帳票ＩＤです。
-     */
-    DBE221022_1(new ReportId("DBE221022_chosahyoTokkijiko"), new RString("要介護認定調査票（特記事項）")),
-    /**
      * 要介護認定調査票（概況特記）の帳票ID。
      */
     DBE221051(new ReportId("DBE221051_GaikyotokkiA4"), new RString("要介護認定調査票（概況特記）")),
     /**
-     * 要介護認定調査票（概況調査）の帳票ＩＤです。
+     * 要介護認定調査票（デザイン）両面の帳票ＩＤです。
      */
-    DBE221011(new ReportId("DBE221011_chosahyoGaikyochosa"), new RString("要介護認定調査票（概況調査）")),
+    DBE221001(new ReportId("DBE221001_ChosahyoDesignRyomen"), new RString("要介護認定調査票（デザイン用紙）")),
+    /**
+     * 要介護認定調査票（デザイン）片面の帳票ＩＤです。
+     */
+    DBE221002(new ReportId("DBE221002_ChosahyoDesignKatamen"), new RString("要介護認定調査票（デザイン用紙）")),
+    /**
+     * 要介護認定調査票OCR両面の帳票ＩＤです。
+     */
+    DBE221011(new ReportId("DBE221011_ChosahyoOcrRyomen"), new RString("要介護認定調査票（OCR）")),
+    /**
+     * 要介護認定調査票OCR片面の帳票ＩＤです。
+     */
+    DBE221012(new ReportId("DBE221012_ChosahyoOcrKatamen"), new RString("要介護認定調査票（OCR）")),
+    /**
+     * 要介護認定調査票（特記事項）デザイン用紙の帳票ＩＤです。
+     */
+    DBE221003(new ReportId("DBE221003_ChosahyoTokkijikoDesign"), new RString("要介護認定調査票（特記事項）")),
+    /**
+     * 要介護認定調査票（特記事項）OCR両面の帳票ＩＤです。
+     */
+    DBE221031(new ReportId("DBE221031_ChosahyoTokkijikoOcrRyomen"), new RString("要介護認定調査票（特記事項）")),
+    /**
+     * 要介護認定調査票（特記事項）OCR片面の帳票ＩＤです。
+     */
+    DBE221032(new ReportId("DBE221032_ChosahyoTokkijikoOcrKatamen"), new RString("要介護認定調査票（特記事項）")),
+    /**
+     * 要介護認定調査票（特記事項）項目有りの帳票ＩＤです。
+     */
+    DBE221022_1(new ReportId("DBE221022_ChosahyoTokkijikoKomokuAri"), new RString("要介護認定調査票（特記事項）項目有り")),
+    /**
+     * 要介護認定調査票（特記事項）項目無しの帳票ＩＤです。
+     */
+    DBE221022_2(new ReportId("DBE221022_ChosahyoTokkijikoKomokuNashi"), new RString("要介護認定調査票（特記事項）項目無し")),
+    /**
+     * 要介護認定調査票（特記事項）フリー様式の帳票ＩＤです。
+     */
+    DBE221022_3(new ReportId("DBE221022_ChosahyoTokkijikoFree"), new RString("要介護認定調査票（特記事項）フリー様式")),
+    /**
+     * 要介護認定調査票（特記事項）項目有り（手入力）の帳票ＩＤです。
+     */
+    DBE221022_4(new ReportId("DBE221022_ChosahyoTokkijikoKomokuAriTenyuryoku"), new RString("要介護認定調査票（特記事項）項目有り")),
+    /**
+     * 要介護認定調査票（特記事項）項目無し（手入力）の帳票ＩＤです。
+     */
+    DBE221022_5(new ReportId("DBE221022_ChosahyoTokkijikoKomokuNashiTenyuryoku"), new RString("要介護認定調査票（特記事項）項目無し")),
+    /**
+     * 要介護認定調査票（特記事項）フリー様式（手入力）の帳票ＩＤです。
+     */
+    DBE221022_6(new ReportId("DBE221022_ChosahyoTokkijikoFreeTenyuryoku"), new RString("要介護認定調査票（特記事項）フリー様式")),
     /**
      * 介護保険診断命令書の帳票ＩＤです。
      */
@@ -70,7 +110,6 @@ public enum ReportIdDBZ {
     DBE231011KatamenColor(new ReportId("DBE231011_ikenshokinyuyoshiOCR_Katamen_Color"), new RString("要介護認定主治医意見書記入用紙")),
     DBE231012(new ReportId("DBE231012_ikenshokinyuyoshiOCR"), new RString("要介護認定主治医意見書記入用紙")),
     DBE231014(new ReportId("DBE231014_ikenshokinyuyoshiOCR"), new RString("要介護認定主治医意見書記入用紙")),
-
     /**
      * 要介護認定調査依頼書の帳票ＩＤです。
      */
@@ -81,10 +120,6 @@ public enum ReportIdDBZ {
      */
     DBE220002(
             new ReportId("DBE220002_ChosaIraiIchiranhyo"), new RString("認定調査依頼一覧表")),
-    /**
-     * 要介護認定調査票（基本調査）の帳票ＩＤです。
-     */
-    DBE221012(new ReportId("DBE221012_chosahyoKihonchosa"), new RString("要介護認定調査票（基本調査）")),
     /**
      * 宛名シールの帳票ＩＤです。
      */

@@ -23,8 +23,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyogaikyotokki.GaikyotokkiA4Business;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
-import jp.co.ndensan.reams.db.dbz.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
 import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoItem;
@@ -773,7 +773,7 @@ public class NinteiChosaIraiHandler {
                         RString.EMPTY,
                         RString.EMPTY,
                         RString.EMPTY,
-                        郵便番号 == null ? RString.EMPTY : 郵便番号.value(),
+                        郵便番号 == null ? RString.EMPTY : 郵便番号.getEditedYubinNo(),
                         住所 == null ? RString.EMPTY : 住所.value(),
                         調査員情報.get所属機関名称(),
                         調査員情報.get調査員氏名(),
@@ -845,11 +845,11 @@ public class NinteiChosaIraiHandler {
     }
 
     /**
-     * 認定調査票_概況調査印刷用パラメータを作成します。
+     * 認定調査票_概況調査_基本調査の印刷用パラメータを作成します。
      *
      * @return 認定調査票_概況調査パラメータ
      */
-    public List<ChosahyoGaikyochosaItem> create認定調査票_概況調査パラメータ() {
+    public List<ChosahyoGaikyochosaItem> create認定調査票_概況調査_基本調査パラメータ() {
         List<ChosahyoGaikyochosaItem> itemList = new ArrayList<>();
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
@@ -943,10 +943,113 @@ public class NinteiChosaIraiHandler {
                     要支援,
                     get要支援詳細(前回要介護状態区分コード),
                     get要介護(前回要介護状態区分コード),
-                    get要介護詳細(前回要介護状態区分コード));
+                    get要介護詳細(前回要介護状態区分コード),
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY);
+            itemList.add(item);
+            List<RString> 証記載保険者番号リスト = get被保険者番号(row.getHokenshaNo());
+            item = createChosahyoKihonchosa(証記載保険者番号リスト, ninteiShinseiDay, 被保険者番号リスト);
             itemList.add(item);
         }
         return itemList;
+    }
+
+    private ChosahyoGaikyochosaItem createChosahyoKihonchosa(List<RString> 証記載保険者番号リスト, RString ninteiShinseiDay, List<RString> 被保険者番号リスト) {
+        ChosahyoGaikyochosaItem item;
+        item = new ChosahyoGaikyochosaItem(
+                証記載保険者番号リスト.get(0),
+                証記載保険者番号リスト.get(1),
+                証記載保険者番号リスト.get(2),
+                証記載保険者番号リスト.get(INDEX_3),
+                証記載保険者番号リスト.get(INDEX_4),
+                証記載保険者番号リスト.get(INDEX_5),
+                ninteiShinseiDay.substring(1, 2),
+                ninteiShinseiDay.substring(2, INDEX_3),
+                ninteiShinseiDay.substring(INDEX_4, INDEX_5),
+                ninteiShinseiDay.substring(INDEX_5, INDEX_6),
+                ninteiShinseiDay.substring(INDEX_7, INDEX_8),
+                ninteiShinseiDay.substring(INDEX_8),
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                被保険者番号リスト.get(0),
+                被保険者番号リスト.get(1),
+                被保険者番号リスト.get(2),
+                被保険者番号リスト.get(INDEX_3),
+                被保険者番号リスト.get(INDEX_4),
+                被保険者番号リスト.get(INDEX_5),
+                被保険者番号リスト.get(INDEX_6),
+                被保険者番号リスト.get(INDEX_7),
+                被保険者番号リスト.get(INDEX_8),
+                被保険者番号リスト.get(INDEX_9));
+        return item;
     }
 
     private RString get要支援詳細(RString yokaigoJotaiKubun) {
@@ -988,53 +1091,12 @@ public class NinteiChosaIraiHandler {
     }
 
     /**
-     * 認定調査票_基本調査印刷用パラメータを作成します。
-     *
-     * @return 認定調査票_基本調査パラメータ
-     */
-    public List<ChosahyoKihonchosaKatamenItem> create認定調査票_基本調査パラメータ() {
-        List<ChosahyoKihonchosaKatamenItem> itemList = new ArrayList<>();
-        List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
-
-        for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
-            RString ninteiShinseiDay = row.getNinteiShinseiDay().getValue().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
-                    .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-            List<RString> 証記載保険者番号リスト = get被保険者番号(row.getHokenshaNo());
-            List<RString> 被保険者番号リスト = get被保険者番号(row.getHihokenshaNo());
-            ChosahyoKihonchosaKatamenItem item = new ChosahyoKihonchosaKatamenItem(
-                    ninteiShinseiDay.substring(1, 2),
-                    ninteiShinseiDay.substring(2, INDEX_3),
-                    ninteiShinseiDay.substring(INDEX_4, INDEX_5),
-                    ninteiShinseiDay.substring(INDEX_5, INDEX_6),
-                    ninteiShinseiDay.substring(INDEX_7, INDEX_8),
-                    ninteiShinseiDay.substring(INDEX_8),
-                    証記載保険者番号リスト.get(0),
-                    証記載保険者番号リスト.get(1),
-                    証記載保険者番号リスト.get(2),
-                    証記載保険者番号リスト.get(INDEX_3),
-                    証記載保険者番号リスト.get(INDEX_4),
-                    証記載保険者番号リスト.get(INDEX_5),
-                    被保険者番号リスト.get(0),
-                    被保険者番号リスト.get(1),
-                    被保険者番号リスト.get(2),
-                    被保険者番号リスト.get(INDEX_3),
-                    被保険者番号リスト.get(INDEX_4),
-                    被保険者番号リスト.get(INDEX_5),
-                    被保険者番号リスト.get(INDEX_6),
-                    被保険者番号リスト.get(INDEX_7),
-                    被保険者番号リスト.get(INDEX_8),
-                    被保険者番号リスト.get(INDEX_9));
-            itemList.add(item);
-        }
-        return itemList;
-    }
-
-    /**
      * 認定調査票_特記事項印刷用パラメータを作成します。
      *
+     * @param 両面出力フラグ 両面出力フラグ
      * @return 認定調査票_特記事項パラメータ
      */
-    public List<ChosahyoTokkijikoBusiness> create認定調査票_特記事項パラメータ() {
+    public List<ChosahyoTokkijikoBusiness> create認定調査票_特記事項パラメータ(boolean 両面出力フラグ) {
         List<ChosahyoTokkijikoBusiness> itemList = new ArrayList<>();
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
 
@@ -1068,6 +1130,9 @@ public class NinteiChosaIraiHandler {
                     被保険者番号リスト.get(1),
                     row.getHihokenshaShimei());
             itemList.add(item);
+            if (両面出力フラグ) {
+                itemList.add(item);
+            }
         }
         return itemList;
     }
@@ -1109,6 +1174,49 @@ public class NinteiChosaIraiHandler {
                     被保険者番号リスト.get(INDEX_9),
                     被保険者番号リスト.get(1),
                     row.getHihokenshaShimei());
+            itemList.add(item);
+        }
+        return itemList;
+    }
+
+    /**
+     * 概況特記パラメータを作成します。
+     *
+     * @return 概況特記パラメータ
+     */
+    public List<GaikyotokkiA4Business> create概況特記_パラメータ() {
+        List<GaikyotokkiA4Business> itemList = new ArrayList<>();
+        List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
+        for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
+            RString ninteiShinseiDay = row.getNinteiShinseiDay().getValue().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
+                    .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+            List<RString> 証記載保険者番号リスト = get被保険者番号(row.getHokenshaNo());
+            List<RString> 被保険者番号リスト = get被保険者番号(row.getHihokenshaNo());
+            GaikyotokkiA4Business item = new GaikyotokkiA4Business();
+
+            item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
+            item.setShinseiYY2(ninteiShinseiDay.substring(2, INDEX_3));
+            item.setShinseiMM1(ninteiShinseiDay.substring(INDEX_4, INDEX_5));
+            item.setShinseiMM2(ninteiShinseiDay.substring(INDEX_5, INDEX_6));
+            item.setShinseiDD1(ninteiShinseiDay.substring(INDEX_7, INDEX_8));
+            item.setShinseiDD2(ninteiShinseiDay.substring(INDEX_8));
+            item.setHokenshaNo1(証記載保険者番号リスト.get(0));
+            item.setHokenshaNo2(証記載保険者番号リスト.get(1));
+            item.setHokenshaNo3(証記載保険者番号リスト.get(2));
+            item.setHokenshaNo4(証記載保険者番号リスト.get(INDEX_3));
+            item.setHokenshaNo5(証記載保険者番号リスト.get(INDEX_4));
+            item.setHokenshaNo6(証記載保険者番号リスト.get(INDEX_5));
+            item.setHihokenshaNo1(被保険者番号リスト.get(0));
+            item.setHihokenshaNo2(被保険者番号リスト.get(1));
+            item.setHihokenshaNo3(被保険者番号リスト.get(2));
+            item.setHihokenshaNo4(被保険者番号リスト.get(INDEX_3));
+            item.setHihokenshaNo5(被保険者番号リスト.get(INDEX_4));
+            item.setHihokenshaNo6(被保険者番号リスト.get(INDEX_5));
+            item.setHihokenshaNo7(被保険者番号リスト.get(INDEX_6));
+            item.setHihokenshaNo8(被保険者番号リスト.get(INDEX_7));
+            item.setHihokenshaNo9(被保険者番号リスト.get(INDEX_8));
+            item.setHihokenshaNo10(被保険者番号リスト.get(INDEX_9));
+            item.setShinseishaName(row.getHihokenshaShimei());
             itemList.add(item);
         }
         return itemList;

@@ -286,7 +286,17 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
                 要支援,
                 要支援詳細,
                 get要介護詳細(entity),
-                get要介護詳細(entity.get前回要介護状態区分コード()));
+                get要介護詳細(entity.get前回要介護状態区分コード()),
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY);
     }
 
     private void get年月日(RString 生年月日) {
