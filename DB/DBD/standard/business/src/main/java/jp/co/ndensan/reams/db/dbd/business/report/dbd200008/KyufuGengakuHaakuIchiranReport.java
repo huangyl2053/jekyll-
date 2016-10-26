@@ -32,6 +32,7 @@ public final class KyufuGengakuHaakuIchiranReport extends Report<KyufuGengakuHaa
     private final RString 保険者名称;
     private final KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity;
     private final IOutputOrder iOutputOrder;
+    private final RString タイトル;
 
     private static final int INT_10 = 10;
     private static final int 行数14 = 14;
@@ -44,14 +45,16 @@ public final class KyufuGengakuHaakuIchiranReport extends Report<KyufuGengakuHaa
      * @param 保険者名称 保険者名称
      * @param 給付額減額把握リストEntity KyufuGengakuHaakuIchiranEntity
      * @param iOutputOrder IOutputOrder
+     * @param タイトル タイトル
      */
     public KyufuGengakuHaakuIchiranReport(RDateTime 作成日時, HokenshaNo 保険者番号, RString 保険者名称,
-            KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity, IOutputOrder iOutputOrder) {
+            KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity, IOutputOrder iOutputOrder, RString タイトル) {
         this.作成日時 = 作成日時;
         this.保険者名称 = 保険者名称;
         this.保険者番号 = 保険者番号;
         this.給付額減額把握リストEntity = 給付額減額把握リストEntity;
         this.iOutputOrder = iOutputOrder;
+        this.タイトル = タイトル;
     }
 
     /**
@@ -69,7 +72,7 @@ public final class KyufuGengakuHaakuIchiranReport extends Report<KyufuGengakuHaa
         int 総行数 = 行数14 * ページ;
         for (int 行数 = 0; 行数 < 総行数; 行数++) {
             IKyufuGengakuHaakuIchiranEditor bodyEditor = new KyufuGengakuHaakuIchiranEditor(
-                    作成日時, 保険者番号, 保険者名称, 給付額減額把握リストEntity, iOutputOrder, 行数);
+                    作成日時, 保険者番号, 保険者名称, 給付額減額把握リストEntity, iOutputOrder, 行数, タイトル);
             IKyufuGengakuHaakuIchiranBuilder builder = new KyufuGengakuHaakuIchiranBuilder(bodyEditor);
             writer.writeLine(builder);
         }
