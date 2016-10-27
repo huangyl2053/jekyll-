@@ -50,6 +50,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
     private static final RString 即時賦課更正 = new RString("DBBMN13001");
     private static final RString 通知書発行後異動把握_仮算定 = new RString("DBBMN42001");
     private static final RString 通知書発行後異動把握_本算定 = new RString("DBBMN32001");
+    private static final RString メニューID_特殊処理 = new RString("DBBMNC3001");
     private static final RString 戻る = new RString("btnBack");
     private static final RString 再検索する = new RString("btnToResearch");
     private static final RString 検索結果一覧へ = new RString("btnToSearchResult");
@@ -68,7 +69,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
         LasdecCode 市町村コード;
         ShikibetsuCode 識別コード;
         HihokenshaNo 被保険者番号;
-        if (即時賦課更正.equals(ResponseHolder.getMenuID())) {
+        if (即時賦課更正.equals(ResponseHolder.getMenuID()) || メニューID_特殊処理.equals(ResponseHolder.getMenuID())) {
             通知書番号 = ViewStateHolder.get(ViewStateKeys.通知書番号, TsuchishoNo.class);
             賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
             市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class);
@@ -77,23 +78,21 @@ public class KakushuTsuchishoSakuseiKobetsu {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索する, true);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
         } else if (通知書発行後異動把握_仮算定.equals(ResponseHolder.getMenuID())
-                   || 通知書発行後異動把握_本算定.equals(ResponseHolder.getMenuID())) {
+                || 通知書発行後異動把握_本算定.equals(ResponseHolder.getMenuID())) {
             RString parameter = ViewStateHolder.get(ViewStateKeys.各種通知書作成戻るフラグ, RString.class);
             if (戻るフラグ.equals(parameter)) {
-                // TODO
-                List<IdoTaishoshaIchiranparameter> listPar = ViewStateHolder.get(ViewStateKeys.異動者一覧Par, List.class);
-                通知書番号 = listPar.get(0).getTsuchishoNo();
-                賦課年度 = listPar.get(0).getFukaNendo();
+                IdoTaishoshaIchiranparameter par = ViewStateHolder.get(ViewStateKeys.異動者一覧Par, IdoTaishoshaIchiranparameter.class);
+                通知書番号 = par.getTsuchishoNo();
+                賦課年度 = par.getFukaNendo();
                 市町村コード = LasdecCode.EMPTY;
-                識別コード = listPar.get(0).getShikibetsuCode();
-                被保険者番号 = HihokenshaNo.EMPTY;
+                識別コード = par.getShikibetsuCode();
+                被保険者番号 = par.getHihokenshaNo();
             } else {
-                // TODO この画面が実装できない。
-                通知書番号 = TsuchishoNo.EMPTY;
-                賦課年度 = FlexibleYear.EMPTY;
-                市町村コード = LasdecCode.EMPTY;
-                識別コード = ShikibetsuCode.EMPTY;
-                被保険者番号 = HihokenshaNo.EMPTY;
+                通知書番号 = ViewStateHolder.get(ViewStateKeys.通知書番号, TsuchishoNo.class);
+                賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
+                市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class);
+                識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+                被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             }
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索する, true);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
@@ -323,7 +322,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
      */
     public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onClick_btnBack(KakushuTsuchishoSakuseiKobetsuDiv div) {
         if (通知書発行後異動把握_仮算定.equals(ResponseHolder.getMenuID())
-            || 通知書発行後異動把握_本算定.equals(ResponseHolder.getMenuID())) {
+                || 通知書発行後異動把握_本算定.equals(ResponseHolder.getMenuID())) {
             RString parameter = ViewStateHolder.get(ViewStateKeys.各種通知書作成戻るフラグ, RString.class);
             return ResponseData.of(div).forwardWithEventName(DBB8110001TransitionEventName.戻る).parameter(parameter);
         }

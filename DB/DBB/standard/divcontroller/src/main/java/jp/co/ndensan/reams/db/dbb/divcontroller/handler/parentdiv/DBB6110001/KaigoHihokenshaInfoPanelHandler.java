@@ -31,7 +31,9 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 連帯納付義務者登録Handlerです。
@@ -144,6 +146,15 @@ public class KaigoHihokenshaInfoPanelHandler {
         List<PersonalData> personalDataList = new ArrayList<>();
         for (RentaiGimushaAtenaJouhou result : rentaiList) {
             dgRentaiNofuGimushaIchiran_Row row = new dgRentaiNofuGimushaIchiran_Row();
+            if (EntityDataState.Added.equals(result.get状態())) {
+                row.setRowState(RowState.Added);
+            }
+            if (EntityDataState.Deleted.equals(result.get状態())) {
+                row.setRowState(RowState.Deleted);
+            }
+            if (EntityDataState.Modified.equals(result.get状態())) {
+                row.setRowState(RowState.Modified);
+            }
             row.getTxtKaishiYMD().setValue(result.get開始日() == null ? null
                     : new RDate(result.get開始日().toString()));
             row.getTxtShuryoYMD().setValue(result.get終了日() == null ? null
@@ -184,6 +195,8 @@ public class KaigoHihokenshaInfoPanelHandler {
      * @param row dgSetaiIchiran_Row
      */
     public void setRentaiNofuGimushaInfo(dgSetaiIchiran_Row row) {
+        div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().setValue(RDate.getNowDate());
+        div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().setValue(null);
         div.getRentaiNofuGimushaInfo().getTxtShikibetsuCode().setDomain(row.getTxtShikibetsuCode() == null ? null
                 : new ShikibetsuCode(row.getTxtShikibetsuCode().getValue()));
         div.getRentaiNofuGimushaInfo().getTxtShimei().setValue(row.getTxtShimei() == null ? RString.EMPTY

@@ -33,73 +33,72 @@ public enum TokuteiNyushoServiceHiShinseiPanelDivSpec implements IPredicate<Toku
          */
         @Override
         public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
-            return div.getShinseiDetail().getTxtShinseiYMD().getValue() != null && !div.getShinseiDetail().getTxtShinseiYMD().getValue().isEmpty()
-                    && div.getShinseiDetail().getTxtShinseiYMD().getValue().isValid();
+            return div.getShinseiDetail().getTxtShinseiYMD().getText() != null && !div.getShinseiDetail().getTxtShinseiYMD().getText().isEmpty();
         }
     },
-    //    決定区分の非空チェック {
-    //        /**
-    //         * 決定区分の非空チェックです。
-    //         *
-    //         * @param div 特別地域加算減免申請Div
-    //         * @return true:決定区分が非空です、false:決定区分が空です。
-    //         */
-    //        @Override
-    //        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
-    //            return div.getShinseiDetail().getRadKettaiKubun().getSelectedKey() != null;
-    //        }
-    //    },
-    //    決定日の非空チェック {
-    //        /**
-    //         * 決定日の非空チェックです。
-    //         *
-    //         * @param div 特別地域加算減免申請Div
-    //         * @return true:決定日が非空です、false:決定日が空です。
-    //         */
-    //        @Override
-    //        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
-    //            return div.getShinseiDetail().getTxtKettaiYMD().getValue() != null && !div.getShinseiDetail().getTxtKettaiYMD().getValue().isEmpty()
-    //                    && div.getShinseiDetail().getTxtKettaiYMD().getValue().isValid();
-    //        }
-    //    },
-    //    適用日の非空チェック {
-    //        /**
-    //         * 適用日の非空チェックです。
-    //         *
-    //         * @param div 特別地域加算減免申請Div
-    //         * @return true:適用日が非空です、false:適用日が空です。
-    //         */
-    //        @Override
-    //        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
-    //            return div.getShinseiDetail().getTxtTekiyoYMD().getValue() != null && !div.getShinseiDetail().getTxtTekiyoYMD().getValue().isEmpty()
-    //                    && div.getShinseiDetail().getTxtTekiyoYMD().getValue().isValid();
-    //        }
-    //    },
-    //    有効期限の非空チェック {
-    //        /**
-    //         * 有効期限の非空チェックです。
-    //         *
-    //         * @param div 特別地域加算減免申請Div
-    //         * @return true:有効期限が非空です、false:有効期限が空です。
-    //         */
-    //        @Override
-    //        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
-    //            return div.getShinseiDetail().getTxtYukoKigenYMD().getValue() != null && !div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isEmpty()
-    //                    && div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isValid();
-    //        }
-    //    },
-    //    軽減率の非空チェック {
-    //        /**
-    //         * 軽減率の非空チェックです。
-    //         *
-    //         * @param div 特別地域加算減免申請Div
-    //         * @return true:軽減率が非空です、false:軽減率が空です。
-    //         */
-    //        @Override
-    //        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
-    //            return div.getShinseiDetail().getTxtKeigenRitsu().getValue() != null;
-    //        }
-    //    };
+    決定区分の非空チェック {
+        /**
+         * 決定区分の非空チェックです。
+         *
+         * @param div 特別地域加算減免申請Div
+         * @return true:決定区分が非空です、false:決定区分が空です。
+         */
+        @Override
+        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
+            return div.getShinseiDetail().getRadKettaiKubun().getSelectedKey() != null && !div.getShinseiDetail().getRadKettaiKubun().getSelectedKey().isEmpty();
+        }
+    },
+    決定日の非空チェック {
+        /**
+         * 決定日の非空チェックです。
+         *
+         * @param div 特別地域加算減免申請Div
+         * @return true:決定日が非空です、false:決定日が空です。
+         */
+        @Override
+        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
+            return div.getShinseiDetail().getTxtKettaiYMD().getValue() != null && !div.getShinseiDetail().getTxtKettaiYMD().getValue().isEmpty()
+                    && div.getShinseiDetail().getTxtKettaiYMD().getValue().isValid();
+        }
+    },
+    適用日の非空チェック {
+        /**
+         * 適用日の非空チェックです。
+         *
+         * @param div 特別地域加算減免申請Div
+         * @return true:適用日が非空です、false:適用日が空です。
+         */
+        @Override
+        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
+            return div.getShinseiDetail().getTxtTekiyoYMD().getValue() != null && !div.getShinseiDetail().getTxtTekiyoYMD().getValue().isEmpty()
+                    && div.getShinseiDetail().getTxtTekiyoYMD().getValue().isValid();
+        }
+    },
+    有効期限の非空チェック {
+        /**
+         * 有効期限の非空チェックです。
+         *
+         * @param div 特別地域加算減免申請Div
+         * @return true:有効期限が非空です、false:有効期限が空です。
+         */
+        @Override
+        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
+            return div.getShinseiDetail().getTxtYukoKigenYMD().getValue() != null && !div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isEmpty()
+                    && div.getShinseiDetail().getTxtYukoKigenYMD().getValue().isValid();
+        }
+    },
+    軽減率の非空チェック {
+        /**
+         * 軽減率の非空チェックです。
+         *
+         * @param div 特別地域加算減免申請Div
+         * @return true:軽減率が非空です、false:軽減率が空です。
+         */
+        @Override
+        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
+            return div.getShinseiDetail().getTxtKeigenRitsu().getValue() != null;
+        }
+    },
     特別地域加算減免_適用日が法施行以前のチェック {
         /**
          * 特別地域加算減免_適用日が法施行以前のチェック。
@@ -157,11 +156,11 @@ public enum TokuteiNyushoServiceHiShinseiPanelDivSpec implements IPredicate<Toku
         @Override
         public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
             TokubetsuChiikiKasanGemmenService service = TokubetsuChiikiKasanGemmenService.createIntance();
-            return service.exists確認番号In同一年度(div.getShinseiDetail().getTxtTekiyoYMD().getValue(),
+            return !service.exists確認番号In同一年度(div.getShinseiDetail().getTxtTekiyoYMD().getValue(),
                     div.getShinseiDetail().getTxtKakuninNo().getValue());
         }
     },
-    特別地域加算減免_軽減率範囲外のチェック {
+    特別地域加算減免_軽減率範囲81外のチェック {
         /**
          * 特別地域加算減免_軽減率範囲外のチェック。
          *
@@ -171,21 +170,30 @@ public enum TokuteiNyushoServiceHiShinseiPanelDivSpec implements IPredicate<Toku
         @Override
         public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
             Decimal 給付率_81 = new Decimal(81);
-            Decimal 給付率_91 = new Decimal(91);
             Decimal 給付率_100 = new Decimal(100);
-
-            HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getCcdKaigoKihon().get被保険者番号());
-            TokubetsuChiikiKasanGemmenService service = TokubetsuChiikiKasanGemmenService.createIntance();
-
-            FutanwariaiKubun 負担割合区分 = service.get利用者負担割合(被保険者番号, div.getShinseiDetail().getTxtShinseiYMD().getValue());
             Decimal 軽減率 = Decimal.ZERO;
             if (div.getShinseiDetail().getTxtKeigenRitsu() != null && div.getShinseiDetail().getTxtKeigenRitsu().getValue() != null) {
                 軽減率 = div.getShinseiDetail().getTxtKeigenRitsu().getValue();
             }
-            return !((FutanwariaiKubun._２割.getコード().equals(負担割合区分.getコード())
-                    && (軽減率.compareTo(給付率_81) < 0 || 軽減率.compareTo(給付率_100) > 0))
-                    || (FutanwariaiKubun._１割.getコード().equals(負担割合区分.getコード())
-                    && (軽減率.compareTo(給付率_91) < 0 || 軽減率.compareTo(給付率_100) > 0)));
+            return !(軽減率.compareTo(給付率_81) < 0 || 軽減率.compareTo(給付率_100) > 0);
+        }
+    },
+    特別地域加算減免_軽減率範囲91外のチェック {
+        /**
+         * 特別地域加算減免_軽減率範囲外のチェック。
+         *
+         * @param div 特別地域加算減免申請Div
+         * @return true:特別地域加算減免_軽減率範囲外ではないです、false:特別地域加算減免_軽減率範囲外です。
+         */
+        @Override
+        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
+            Decimal 給付率_91 = new Decimal(91);
+            Decimal 給付率_100 = new Decimal(100);
+            Decimal 軽減率 = Decimal.ZERO;
+            if (div.getShinseiDetail().getTxtKeigenRitsu() != null && div.getShinseiDetail().getTxtKeigenRitsu().getValue() != null) {
+                軽減率 = div.getShinseiDetail().getTxtKeigenRitsu().getValue();
+            }
+            return !(軽減率.compareTo(給付率_91) < 0 || 軽減率.compareTo(給付率_100) > 0);
         }
     },
     受給共通_受給者登録なしのチェック {

@@ -38,7 +38,7 @@ public class _RenkeiDataShutsuryokuSikakuSakuseiSoshitsuValidator implements IVa
                 .ifNot(RenkeiDataShutsuryokuSikakuSakuseiSoshitsuSpec.今回開始チェック_年月日)
                 .thenAdd(RenkeiDataShutsuryokuSikakuSakuseiSoshitsuValidationMessage.今回開始チェック_年月日)
                 .ifNot(RenkeiDataShutsuryokuSikakuSakuseiSoshitsuSpec.今回開始チェック_時分秒)
-                .thenAdd(RenkeiDataShutsuryokuSikakuSakuseiSoshitsuValidationMessage.今回終了チェック_時分秒)
+                .thenAdd(RenkeiDataShutsuryokuSikakuSakuseiSoshitsuValidationMessage.今回開始チェック_時分秒)
                 .ifNot(RenkeiDataShutsuryokuSikakuSakuseiSoshitsuSpec.今回終了チェック_年月日)
                 .thenAdd(RenkeiDataShutsuryokuSikakuSakuseiSoshitsuValidationMessage.今回終了チェック_年月日)
                 .ifNot(RenkeiDataShutsuryokuSikakuSakuseiSoshitsuSpec.今回終了チェック_時分秒)

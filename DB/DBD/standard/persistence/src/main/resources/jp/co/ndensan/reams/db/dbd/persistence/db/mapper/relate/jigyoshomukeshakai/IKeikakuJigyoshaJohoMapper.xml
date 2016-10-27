@@ -151,7 +151,7 @@ and open the template in the editor.-->
         社福軽減."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準日} AND
         ( #{基準日}  <![CDATA[<=]]> 社福軽減."tekiyoShuryoYMD" OR
         社福軽減."tekiyoShuryoYMD" = '')
-        ${出力順}
+    
     </select>
 
     <resultMap id="ResultMap_KeikakuJigyoshaJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd206010.KeikakuJigyoshaJohoEntity" autoMapping="true">

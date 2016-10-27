@@ -53,11 +53,11 @@ public enum HikazeiNenkinTaishoshaJohoDivSpec implements IPredicate<HikazeiNenki
         @Override
         public boolean apply(HikazeiNenkinTaishoshaJohoDiv div) {
 
-            return div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShori()
+            return div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriJotai()
                     .equals(SyoriJyoutaiCode.未処理.get名称())
-                    || div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShori()
+                    || div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriJotai()
                     .equals(SyoriJyoutaiCode.再処理前.get名称())
-                    || div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShori()
+                    || div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriJotai()
                     .equals(SyoriJyoutaiCode.追加取込前.get名称());
 
         }

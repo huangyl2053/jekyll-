@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.NinteiShinseiJohoBusiness;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.YokaigoNinteiGaibuDataOutputHistory;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519001.DBD519001_NinteishinseiInfoIfParameter;
+import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.Datakubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190001.RenkeiDataSakuseiShinseiJohoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbd.service.core.dbd5190001.RenkeiDataSakuseiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -41,6 +42,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class RenkeiDataSakuseiShinseiJohoHandler {
 
     private final RenkeiDataSakuseiShinseiJohoDiv div;
+    private static final RString 対象期間 = new RString("対象期間");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
+    private static final Code データ区分 = new Code(Datakubun.申請情報.getコード());
 
     /**
      * コンストラクタです。
@@ -59,57 +63,10 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
      *
      */
     public void get保険者リスト取得(RenkeiDataSakuseiShinseiJohoDiv div, Code dataKubun) {
-        div.getCommonChildDiv1().loadHokenshaList();
-        YokaigoNinteiGaibuDataOutputHistory outPutHistory = get介護認定外部データ出力履歴(dataKubun);
-        RDate zenkaikaishiday = null;
-        RTime zenkaikaishitime = null;
-        RDate zenkaishuryoday = null;
-        RTime zenkaishuryotime = null;
         RString 新ファイル名 = get要介護認定申請連携データ送信ファイル名();
         RString 最大表示件数 = get最大表示件数();
         Decimal saidikensu = new Decimal(最大表示件数.toString());
-        if (outPutHistory != null) {
-            if (outPutHistory.getDataOutputKaishiYMDHMS() != null) {
-                zenkaikaishiday = outPutHistory.getDataOutputKaishiYMDHMS().getDate();
-                zenkaikaishitime = outPutHistory.getDataOutputKaishiYMDHMS().getRDateTime().getTime();
-            }
-            if (outPutHistory.getDataOutputShuryoYMDHMS() != null) {
-                zenkaishuryoday = outPutHistory.getDataOutputShuryoYMDHMS().getDate();
-                zenkaishuryotime = outPutHistory.getDataOutputShuryoYMDHMS().getRDateTime().getTime();
-            }
-            if (zenkaikaishiday != null) {
-                div.getTxtZenkaiKaishiDay().setValue(zenkaikaishiday);
-                div.getTxtKonkaiKaishiDay().setValue(zenkaikaishiday);
-            }
-            if (zenkaikaishitime != null) {
-                div.getTxtZenkaiKaishiTime().setValue(zenkaikaishitime);
-                div.getTxtKonkaiKaishiTime().setValue(zenkaikaishitime.plusSeconds(1));
-            }
-            if (zenkaishuryoday != null) {
-                div.getTxtZenkaiShuryoDay().setValue(zenkaishuryoday);
-            }
-            if (zenkaishuryotime != null) {
-                div.getTxtZenkaiShuryoTime().setValue(zenkaishuryotime);
-            }
-            if (zenkaikaishiday == null) {
-                div.getTxtKonkaiKaishiDay().setValue(RDate.getNowDate());
-            }
-            if (zenkaikaishitime == null) {
-                div.getTxtKonkaiKaishiTime().setValue(RTime.now());
-            }
-            if (zenkaikaishiday != null && zenkaikaishitime.toString().equals("23:59:59")) {
-                div.getTxtKonkaiKaishiDay().setValue(zenkaikaishiday.plusDay(1));
-            }
-            div.getTxtKonkaiShuryoDay().setValue(RDate.getNowDate());
-            div.getTxtKonkaiShuryoTime().setValue(RTime.now());
-        } else {
-            div.getTxtKonkaiKaishiDay().setValue(RDate.getNowDate());
-            div.getTxtKonkaiKaishiTime().setValue(RTime.now());
-            div.getTxtKonkaiShuryoDay().setValue(RDate.getNowDate());
-            div.getTxtKonkaiShuryoTime().setValue(RTime.now());
-
-        }
-
+        条件初期化処理(div, dataKubun);
         div.getTxtMaxKensu().setValue(saidikensu);
         div.getTxtNewFileName().setValue(新ファイル名);
         div.getDgTaishoshaIchiran().getGridSetting().setLimitRowCount(saidikensu.intValue());
@@ -130,23 +87,18 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
      */
     public void checkRadioButton() {
         RString radChushutsu = div.getChushutsuJoken().getRadChushutsuJoken().getSelectedValue();
-        RString 対象期間 = new RString("対象期間");
-        RString 被保険者番号 = new RString("被保険者番号");
-        if (radChushutsu.equals(対象期間)) {
+        if (対象期間.equals(radChushutsu)) {
             div.getTxtHihokenshaNo().clearValue();
             div.getTxtHihokenshaNo().setDisabled(true);
             div.getBtnhihokensha().setDisabled(true);
-            div.getTxtKonkaiKaishiDay().clearValue();
-            div.getTxtKonkaiKaishiTime().clearValue();
-            div.getTxtKonkaiShuryoDay().clearValue();
-            div.getTxtKonkaiShuryoTime().clearValue();
+            条件初期化処理(div, データ区分);
             div.getTxtKonkaiKaishiDay().setDisabled(false);
             div.getTxtKonkaiKaishiTime().setDisabled(false);
             div.getTxtKonkaiShuryoDay().setDisabled(false);
             div.getTxtKonkaiShuryoTime().setDisabled(false);
             div.getBtnhihokensha().setDisabled(true);
         }
-        if (radChushutsu.equals(被保険者番号)) {
+        if (被保険者番号.equals(radChushutsu)) {
             div.getTxtHihokenshaNo().clearValue();
             div.getTxtKonkaiKaishiDay().clearValue();
             div.getTxtKonkaiKaishiTime().clearValue();
@@ -160,6 +112,52 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
             div.getBtnhihokensha().setDisabled(false);
             div.getBtnhihokensha().setDisabled(false);
         }
+    }
+
+    /**
+     * バッチパラメターを保存処理です。
+     *
+     * @return バッチパラメター
+     */
+    public DBD519001_NinteishinseiInfoIfParameter batchParameterSave() {
+        DBD519001_NinteishinseiInfoIfParameter parameter = new DBD519001_NinteishinseiInfoIfParameter();
+        RString radChushutsu = div.getChushutsuJoken().getRadChushutsuJoken().getSelectedValue();
+        if (対象期間.equals(radChushutsu)) {
+            RDate fromdate = RDate.getNowDate();
+            RDate todate = RDate.getNowDate().plusDay(1);
+            RTime fromtime = RTime.of(0, 0, 0);
+            RTime totime = RTime.of(0, 0, 0);
+            if (div.getTxtKonkaiKaishiDay().getValue() != null) {
+                fromdate = div.getTxtKonkaiKaishiDay().getValue();
+            }
+            if (div.getTxtKonkaiShuryoDay().getValue() != null) {
+                todate = div.getTxtKonkaiShuryoDay().getValue();
+            }
+            if (div.getTxtKonkaiKaishiTime().getValue() != null) {
+                fromtime = div.getTxtKonkaiKaishiTime().getValue();
+            }
+            if (div.getTxtKonkaiShuryoTime().getValue() != null) {
+                totime = div.getTxtKonkaiShuryoTime().getValue();
+            }
+            RDateTime konkaikaishiFrom = RDateTime.of(fromdate.getYearValue(), fromdate.getMonthValue(), fromdate.getDayValue(),
+                    fromtime.getHour(), fromtime.getMinute(), fromtime.getSecond());
+            RDateTime konkaikaishiTo = RDateTime.of(todate.getYearValue(), todate.getMonthValue(), todate.getDayValue(),
+                    totime.getHour(), totime.getMinute(), totime.getSecond());
+            parameter.set今回開始期間FROM(konkaikaishiFrom);
+            parameter.set今回開始期間TO(konkaikaishiTo);
+            parameter.set被保険者番号(RString.EMPTY);
+        }
+        if (被保険者番号.equals(radChushutsu)) {
+            parameter.set今回開始期間FROM(null);
+            parameter.set今回開始期間TO(null);
+            parameter.set被保険者番号(div.getTxtHihokenshaNo().getValue());
+        }
+        parameter.set証記載保険者番号(div.getCommonChildDiv1().getSelectedItem().get証記載保険者番号().value());
+        parameter.set市町村コード(div.getCommonChildDiv1().getSelectedItem().get市町村コード());
+        parameter.set新ファイル名(div.getTxtNewFileName().getValue());
+        List<RString> hihokenshaNoList = getHihokenshaNoList(div);
+        parameter.set対象外被保険者番号リスト(hihokenshaNoList);
+        return parameter;
     }
 
     /**
@@ -218,10 +216,10 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
      */
     public void 条件をクリア(RenkeiDataSakuseiShinseiJohoDiv div) {
         if (div.getChushutsuJoken().getRadChushutsuJoken().getSelectedKey().equals(new RString("key0"))) {
-            div.getTxtKonkaiShuryoDay().clearValue();
-            div.getTxtKonkaiShuryoTime().clearValue();
+            条件初期化処理(div, データ区分);
         }
         if (div.getChushutsuJoken().getRadChushutsuJoken().getSelectedKey().equals(new RString("key1"))) {
+            div.getCommonChildDiv1().loadHokenshaList();
             div.getTxtHihokenshaNo().clearValue();
         }
     }
@@ -233,14 +231,65 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
      *
      * @return List<HihokenshaNo>
      */
-    public List<HihokenshaNo> getHihokenshaNoList(RenkeiDataSakuseiShinseiJohoDiv div) {
+    public List<RString> getHihokenshaNoList(RenkeiDataSakuseiShinseiJohoDiv div) {
         List<dgTaishoshaIchiran_Row> taishoList = div.getDgTaishoshaIchiran().getDataSource();
-        List<HihokenshaNo> hihokenshaNoList = new ArrayList<>();
+        List<RString> hihokenshaNoList = new ArrayList<>();
         for (dgTaishoshaIchiran_Row row : taishoList) {
-            HihokenshaNo hihokenshano = new HihokenshaNo(row.getHihokenshaNo());
-            hihokenshaNoList.add(hihokenshano);
+            if (!row.getSelected()) {
+                hihokenshaNoList.add(row.getHihokenshaNo());
+            }
         }
         return hihokenshaNoList;
+    }
+
+    private void 条件初期化処理(RenkeiDataSakuseiShinseiJohoDiv div, Code dataKubun) {
+        div.getCommonChildDiv1().loadHokenshaList();
+        YokaigoNinteiGaibuDataOutputHistory outPutHistory = get介護認定外部データ出力履歴(dataKubun);
+        RDate zenkaikaishiday = null;
+        RTime zenkaikaishitime = null;
+        RDate zenkaishuryoday = null;
+        RTime zenkaishuryotime = null;
+        if (outPutHistory != null) {
+            if (outPutHistory.getDataOutputKaishiYMDHMS() != null) {
+                zenkaikaishiday = outPutHistory.getDataOutputKaishiYMDHMS().getDate();
+                zenkaikaishitime = outPutHistory.getDataOutputKaishiYMDHMS().getRDateTime().getTime();
+            }
+            if (outPutHistory.getDataOutputShuryoYMDHMS() != null) {
+                zenkaishuryoday = outPutHistory.getDataOutputShuryoYMDHMS().getDate();
+                zenkaishuryotime = outPutHistory.getDataOutputShuryoYMDHMS().getRDateTime().getTime();
+            }
+            if (zenkaikaishiday != null) {
+                div.getTxtZenkaiKaishiDay().setValue(zenkaikaishiday);
+                div.getTxtKonkaiKaishiDay().setValue(zenkaikaishiday);
+            }
+            if (zenkaikaishitime != null) {
+                div.getTxtZenkaiKaishiTime().setValue(zenkaikaishitime);
+                div.getTxtKonkaiKaishiTime().setValue(zenkaikaishitime.plusSeconds(1));
+            }
+            if (zenkaishuryoday != null) {
+                div.getTxtZenkaiShuryoDay().setValue(zenkaishuryoday);
+            }
+            if (zenkaishuryotime != null) {
+                div.getTxtZenkaiShuryoTime().setValue(zenkaishuryotime);
+            }
+            if (zenkaikaishiday == null) {
+                div.getTxtKonkaiKaishiDay().setValue(RDate.getNowDate());
+            }
+            if (zenkaikaishitime == null) {
+                div.getTxtKonkaiKaishiTime().setValue(RTime.now());
+            }
+            if (zenkaikaishiday != null && zenkaikaishitime.toString().equals("23:59:59")) {
+                div.getTxtKonkaiKaishiDay().setValue(zenkaikaishiday.plusDay(1));
+            }
+            div.getTxtKonkaiShuryoDay().setValue(RDate.getNowDate());
+            div.getTxtKonkaiShuryoTime().setValue(RTime.now());
+        } else {
+            div.getTxtKonkaiKaishiDay().setValue(RDate.getNowDate());
+            div.getTxtKonkaiKaishiTime().setValue(RTime.now());
+            div.getTxtKonkaiShuryoDay().setValue(RDate.getNowDate());
+            div.getTxtKonkaiShuryoTime().setValue(RTime.now());
+
+        }
     }
 
     private List<NinteiShinseiJohoBusiness> get検索対象者一覧情報(RString shoKisaiHokenshaNo,
@@ -283,9 +332,13 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
                 row.setHihokenshaNo(joho.get被保険者番号());
                 row.setHihokenshaKanaShimei(joho.get被保険者カナ().value());
                 row.setHihokenshaShimei(joho.get被保険者名前().value());
-                row.getBirthYMD().setValue(new RDate(joho.get生年月日().toString()));
+                if (joho.get生年月日() != null && !joho.get生年月日().isEmpty()) {
+                    row.getBirthYMD().setValue(new RDate(joho.get生年月日().toString()));
+                }
                 row.setSeibetsu(Seibetsu.toValue(joho.get性別().value()).get名称());
-                row.getShinseiDay().setValue(new RDate(joho.get認定申請年月日().toString()));
+                if (joho.get認定申請年月日() != null && !joho.get認定申請年月日().isEmpty()) {
+                    row.getShinseiDay().setValue(new RDate(joho.get認定申請年月日().toString()));
+                }
                 row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(joho.get認定申請区分申請時コード()
                         .value()).get名称());
                 rowList.add(row);

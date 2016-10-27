@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0030011
 
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.TaishoshaKensakuHoho;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuSearch;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.DBC0030011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.DBC0030011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiTaishoshaKensakuMainDiv;
@@ -41,6 +42,8 @@ public class KogakuServicehiTaishoshaKensakuMain {
     private static final RString 提供年月R = new RString("提供年月");
     private static final RString 申請年月R = new RString("申請年月");
     private static final RString 決定年月R = new RString("決定年月");
+    private static final RString 画面ステート_該当者 = new RString("0");
+    private static final RString 画面ステート_本 = new RString("1");
 
     /**
      * 画面の初期化メソッドです。
@@ -50,9 +53,21 @@ public class KogakuServicehiTaishoshaKensakuMain {
      */
     public ResponseData<KogakuServicehiTaishoshaKensakuMainDiv> onLoad(KogakuServicehiTaishoshaKensakuMainDiv div) {
         KogakuServicehiTaishoshaKensakuMainHandler handler = getHandler(div);
-        handler.load検索条件エリア();
-        handler.click条件をクリアする();
-        return ResponseData.of(div).setState(DBC0030011StateName.検索条件);
+        if (画面ステート_該当者.equals(ViewStateHolder.get(ViewStateKeys.画面ステート, RString.class))) {
+            ViewStateHolder.put(ViewStateKeys.画面ステート, 画面ステート_本);
+            TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            if (資格対象者 != null) {
+                handler.load該当者検索(資格対象者);
+            }
+            KogakuShokaiTaishoshaKensakuSearch searchCondition = set検索条件(div);
+            KogakuServiceData 該当者一覧キー = handler.検索(searchCondition);
+            ViewStateHolder.put(ViewStateKeys.該当者一覧キー, 該当者一覧キー);
+            return 該当者一覧キー == null ? ResponseData.of(div).setState(DBC0030011StateName.該当者一覧)
+                    : ResponseData.of(div).forwardWithEventName(DBC0030011TransitionEventName.選択).respond();
+        } else {
+            handler.load検索条件エリア();
+            return ResponseData.of(div).setState(DBC0030011StateName.検索条件);
+        }
     }
 
     /**
@@ -61,21 +76,12 @@ public class KogakuServicehiTaishoshaKensakuMain {
      * @param div KogakuServicehiTaishoshaKensakuMainDiv
      * @return 該当者検索画面
      */
-    public ResponseData<KogakuServicehiTaishoshaKensakuMainDiv> onBeforeOpenDialog_btnSearchHihokensha(KogakuServicehiTaishoshaKensakuMainDiv div) {
+    public ResponseData<KogakuServicehiTaishoshaKensakuMainDiv> onClick_btnSearchHihokensha(KogakuServicehiTaishoshaKensakuMainDiv div) {
         putViewState(div);
-        return createResponse(div);
-    }
-
-    /**
-     * 該当者検索画面から対象を選択して戻ってきた場合、onOkClose事件です。
-     *
-     * @param div KogakuServicehiTaishoshaKensakuMainDiv
-     * @return 高額介護サービス費照会（対象者検索）画面
-     */
-    public ResponseData<KogakuServicehiTaishoshaKensakuMainDiv> onOkClose_btnSearchHihokensha(KogakuServicehiTaishoshaKensakuMainDiv div) {
-        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        getHandler(div).load該当者検索(資格対象者);
-        return createResponse(div);
+        ViewStateHolder.put(ViewStateKeys.画面ステート, 画面ステート_該当者);
+        ViewStateHolder.put(ViewStateKeys.資格対象者, null);
+        // TODO zheliyou wenti tiaodao lingyige huam
+        return ResponseData.of(div).forwardWithEventName(DBC0030011TransitionEventName.選択).respond();
     }
 
     /**
@@ -135,6 +141,7 @@ public class KogakuServicehiTaishoshaKensakuMain {
      * @return 高額介護サービス費照会（対象者検索）画面
      */
     public ResponseData<KogakuServicehiTaishoshaKensakuMainDiv> onClick_btnResearch(KogakuServicehiTaishoshaKensakuMainDiv div) {
+        getHandler(div).clear一覧エリア();
         return ResponseData.of(div).setState(DBC0030011StateName.検索条件);
     }
 
@@ -172,33 +179,34 @@ public class KogakuServicehiTaishoshaKensakuMain {
         ViewStateHolder.put(ViewStateKeys.決定年月, mapRDate.get(決定年月R));
     }
 
-//    private KogakuShokaiTaishoshaKensakuSearch set検索条件(KogakuServicehiTaishoshaKensakuMainDiv div) {
-//        KogakuServicehiTaishoshaKensakuMainHandler handler = getHandler(div);
-//        KogakuShokaiTaishoshaKensakuSearch searchCondition;
-//        RString メニューID = ResponseHolder.getMenuID();
-//        RString 指定_被保険者 = TaishoshaKensakuHoho.被保険者指定.getコード();
-//        RString ラジオ_指定 = ViewStateHolder.get(ViewStateKeys.ラジオ_指定, RString.class);
-//        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
-//        RString 被保険者名 = ViewStateHolder.get(ViewStateKeys.被保険者名, RString.class);
-//        RDate 提供年月From = ViewStateHolder.get(ViewStateKeys.提供年月From, RDate.class);
-//        RDate 提供年月To = ViewStateHolder.get(ViewStateKeys.提供年月To, RDate.class);
-//        RDate 申請年月From = ViewStateHolder.get(ViewStateKeys.申請年月From, RDate.class);
-//        RDate 申請年月To = ViewStateHolder.get(ViewStateKeys.申請年月To, RDate.class);
-//        RDate 決定年月From = ViewStateHolder.get(ViewStateKeys.決定年月From, RDate.class);
-//        RDate 決定年月To = ViewStateHolder.get(ViewStateKeys.決定年月To, RDate.class);
-//        RDate 提供年月 = ViewStateHolder.get(ViewStateKeys.提供年月, RDate.class);
-//        RDate 申請年月 = ViewStateHolder.get(ViewStateKeys.申請年月, RDate.class);
-//        RDate 決定年月 = ViewStateHolder.get(ViewStateKeys.決定年月, RDate.class);
-//        handler.set検索条件(指定_被保険者, 被保険者番号, 被保険者名, 提供年月From,
-//                提供年月To, 申請年月From, 申請年月To, 決定年月From, 決定年月To, 提供年月, 申請年月, 決定年月);
-//        if (指定_被保険者.equals(ラジオ_指定)) {
-//            searchCondition = handler.getパラメータ(メニューID, 被保険者番号,
-//                    提供年月From, 提供年月To, 申請年月From, 申請年月To, 決定年月From, 決定年月To);
-//        } else {
-//            searchCondition = handler.getパラメータ(メニューID, RString.EMPTY, 提供年月, 提供年月, 申請年月, 申請年月, 決定年月, 決定年月);
-//        }
-//        return searchCondition;
-//    }
+    private KogakuShokaiTaishoshaKensakuSearch set検索条件(KogakuServicehiTaishoshaKensakuMainDiv div) {
+        KogakuServicehiTaishoshaKensakuMainHandler handler = getHandler(div);
+        KogakuShokaiTaishoshaKensakuSearch searchCondition;
+        RString メニューID = ResponseHolder.getMenuID();
+        RString 指定_被保険者 = TaishoshaKensakuHoho.被保険者指定.getコード();
+        RString ラジオ_指定 = ViewStateHolder.get(ViewStateKeys.ラジオ_指定, RString.class);
+        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        RString 被保険者名 = ViewStateHolder.get(ViewStateKeys.被保険者名, RString.class);
+        RDate 提供年月From = ViewStateHolder.get(ViewStateKeys.サービス提供年月From, RDate.class);
+        RDate 提供年月To = ViewStateHolder.get(ViewStateKeys.サービス提供年月To, RDate.class);
+        RDate 申請年月From = ViewStateHolder.get(ViewStateKeys.申請年月From, RDate.class);
+        RDate 申請年月To = ViewStateHolder.get(ViewStateKeys.申請年月To, RDate.class);
+        RDate 決定年月From = ViewStateHolder.get(ViewStateKeys.決定年月From, RDate.class);
+        RDate 決定年月To = ViewStateHolder.get(ViewStateKeys.決定年月To, RDate.class);
+        RDate 提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, RDate.class);
+        RDate 申請年月 = ViewStateHolder.get(ViewStateKeys.申請年月, RDate.class);
+        RDate 決定年月 = ViewStateHolder.get(ViewStateKeys.決定年月, RDate.class);
+        handler.set検索条件(指定_被保険者, 被保険者番号, 被保険者名, 提供年月From,
+                提供年月To, 申請年月From, 申請年月To, 決定年月From, 決定年月To, 提供年月, 申請年月, 決定年月);
+        if (指定_被保険者.equals(ラジオ_指定)) {
+            searchCondition = handler.getパラメータ(メニューID, 被保険者番号,
+                    提供年月From, 提供年月To, 申請年月From, 申請年月To, 決定年月From, 決定年月To);
+        } else {
+            searchCondition = handler.getパラメータ(メニューID, RString.EMPTY, 提供年月, 提供年月, 申請年月, 申請年月, 決定年月, 決定年月);
+        }
+        return searchCondition;
+    }
+
     private KogakuServicehiTaishoshaKensakuMainHandler getHandler(KogakuServicehiTaishoshaKensakuMainDiv div) {
         return new KogakuServicehiTaishoshaKensakuMainHandler(div);
     }

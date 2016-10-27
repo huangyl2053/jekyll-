@@ -127,8 +127,10 @@ public class KyufuJissekiMeisaiProcess
             エラー結果.setKey1(parameter.get開始年月());
             エラー結果.setKey2(parameter.get終了年月());
             RString 対象サービス種類 = RString.EMPTY;
-            for (RString code : parameter.getサービス種類コードリスト()) {
-                対象サービス種類.concat(code != null ? code : RString.EMPTY);
+            if (parameter.getサービス種類コードリスト() != null) {
+                for (RString code : parameter.getサービス種類コードリスト()) {
+                    対象サービス種類.concat(code != null ? code : RString.EMPTY);
+                }
             }
             エラー結果.setKey3(対象サービス種類);
             エラー結果.setKey4(parameter.get地区指定());

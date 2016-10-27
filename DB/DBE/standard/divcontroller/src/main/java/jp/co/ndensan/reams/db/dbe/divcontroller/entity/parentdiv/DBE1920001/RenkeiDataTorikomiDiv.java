@@ -4,24 +4,20 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 
 /**
- * RenkeiDataTorikomi のクラスファイル
- *
+ * RenkeiDataTorikomi のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class RenkeiDataTorikomiDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -37,6 +33,8 @@ public class RenkeiDataTorikomiDiv extends Panel {
     private uploadAreaDiv uploadArea;
     @JsonProperty("path")
     private RString path;
+    @JsonProperty("hiddenFileId")
+    private RString hiddenFileId;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -117,6 +115,24 @@ public class RenkeiDataTorikomiDiv extends Panel {
     }
 
     /*
+     * gethiddenFileId
+     * @return hiddenFileId
+     */
+    @JsonProperty("hiddenFileId")
+    public RString getHiddenFileId() {
+        return hiddenFileId;
+    }
+
+    /*
+     * sethiddenFileId
+     * @param hiddenFileId hiddenFileId
+     */
+    @JsonProperty("hiddenFileId")
+    public void setHiddenFileId(RString hiddenFileId) {
+        this.hiddenFileId = hiddenFileId;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -125,7 +141,7 @@ public class RenkeiDataTorikomiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadHoKaisei(RadioButton radHoKaisei) {
+    public void  setRadHoKaisei(RadioButton radHoKaisei) {
         this.getRenkeiDataTorikomiBatchParameter().setRadHoKaisei(radHoKaisei);
     }
 
@@ -135,7 +151,7 @@ public class RenkeiDataTorikomiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgTorikomiTaisho(DataGrid<dgTorikomiTaisho_Row> dgTorikomiTaisho) {
+    public void  setDgTorikomiTaisho(DataGrid<dgTorikomiTaisho_Row> dgTorikomiTaisho) {
         this.getRenkeiDataTorikomiBatchParameter().setDgTorikomiTaisho(dgTorikomiTaisho);
     }
 
@@ -145,7 +161,7 @@ public class RenkeiDataTorikomiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnDataTorikomi(Button btnDataTorikomi) {
+    public void  setBtnDataTorikomi(Button btnDataTorikomi) {
         this.getRenkeiDataTorikomiBatchParameter().setBtnDataTorikomi(btnDataTorikomi);
     }
 
@@ -160,7 +176,7 @@ public class RenkeiDataTorikomiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgtorikomidataichiran(DataGrid<dgtorikomidataichiran_Row> dgtorikomidataichiran) {
+    public void  setDgtorikomidataichiran(DataGrid<dgtorikomidataichiran_Row> dgtorikomidataichiran) {
         this.getTorikomiichiran().setDgtorikomidataichiran(dgtorikomidataichiran);
     }
 
@@ -170,7 +186,7 @@ public class RenkeiDataTorikomiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setUploadTool(UploadPanel uploadTool) {
+    public void  setUploadTool(UploadPanel uploadTool) {
         this.getUploadArea().setUploadTool(uploadTool);
     }
 
@@ -180,7 +196,7 @@ public class RenkeiDataTorikomiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnUpload(Button btnUpload) {
+    public void  setBtnUpload(Button btnUpload) {
         this.getUploadArea().setBtnUpload(btnUpload);
     }
 

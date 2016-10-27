@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.business.core.hanyolisttashichosonjushochitok
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.common.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tatoku.HaniChushutsubiKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tatoku.JiyuChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tatoku.KijunbiKubun;
@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -555,5 +556,121 @@ public class HanyoListTaShichosonJushochiTokureishaResult {
             return RString.EMPTY;
         }
         return new YubinNo(郵便番号).getEditedYubinNo();
+    }
+
+    /**
+     * 帳票分類ID「DBA701002_HanyoListTaShichosonJushochiTokureisha」（汎用リスト 他市町村住所地特例者）出力順設定可能項目です。
+     */
+    public enum ShutsuryokujunEnum implements IReportItems {
+
+        /**
+         * 郵便番号
+         */
+        郵便番号(new RString("0001"), new RString(""), new RString("\"ShikibetsuTaisho_yubinNo\"")),
+        /**
+         * 郵便番号
+         */
+        町域コード(new RString("0002"), new RString(""), new RString("\"ShikibetsuTaisho_choikiCode\"")),
+        /**
+         * 番地コード
+         */
+        番地コード(new RString("0003"), new RString(""), new RString("\"番地コード\"")),
+        /**
+         * 行政区コード
+         */
+        行政区コード(new RString("0004"), new RString(""), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
+        /**
+         * 地区１
+         */
+        地区１(new RString("0005"), new RString(""), new RString("\"ShikibetsuTaisho_chikuCode1\"")),
+        /**
+         * 地区２
+         */
+        地区２(new RString("0006"), new RString(""), new RString("\"ShikibetsuTaisho_chikuCode2\"")),
+        /**
+         * 地区３
+         */
+        地区３(new RString("0007"), new RString(""), new RString("\"ShikibetsuTaisho_chikuCode3\"")),
+        /**
+         * 世帯コード
+         */
+        世帯コード(new RString("0008"), new RString(""), new RString("\"ShikibetsuTaisho_setaiCode\"")),
+        /**
+         * 識別コード
+         */
+        識別コード(new RString("0009"), new RString(""), new RString("\"ShikibetsuTaisho_shikibetsuCode\"")),
+        /**
+         * 氏名５０音カナ
+         */
+        氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"ShikibetsuTaisho_kanaShimei\"")),
+        /**
+         * 生年月日
+         */
+        生年月日(new RString("0012"), new RString(""), new RString("\"ShikibetsuTaisho_seinengappiYMD\"")),
+        /**
+         * 性別
+         */
+        性別(new RString("0013"), new RString(""), new RString("\"ShikibetsuTaisho_seibetsuCode\"")),
+        /**
+         * 市町村コード
+         */
+        市町村コード(new RString("0016"), new RString(""), new RString("\"市町村コード\"")),
+        /**
+         * 資格取得事由
+         */
+        資格取得事由(new RString("0101"), new RString(""), new RString("\"資格取得事由\"")),
+        /**
+         * 資格喪失事由
+         */
+        資格喪失事由(new RString("0102"), new RString(""), new RString("\"喪失事由\"")),
+        /**
+         * 証記載保険者番号
+         */
+        証記載保険者番号(new RString("0103"), new RString(""), new RString("\"証記載保険者番号\"")),
+        /**
+         * 被保険者番号
+         */
+        被保険者番号(new RString("0104"), new RString(""), new RString("\"被保険者番号\"")),
+        /**
+         * 資格取得日
+         */
+        資格取得日(new RString("0105"), new RString(""), new RString("\"資格取得日\"")),
+        /**
+         * 資格喪失日
+         */
+        資格喪失日(new RString("0106"), new RString(""), new RString("\"資格喪失日\"")),
+        /**
+         * 資格取得届出日
+         */
+        資格取得届出日(new RString("0109"), new RString(""), new RString("\"資格取得届出日\"")),
+        /**
+         * 資格喪失届出日
+         */
+        資格喪失届出日(new RString("0132"), new RString(""), new RString("\"資格喪失届日\""));
+
+        private final RString 項目ID;
+        private final RString フォームフィールド名;
+        private final RString myBatis項目名;
+
+        private ShutsuryokujunEnum(RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
+            this.項目ID = 項目ID;
+            this.フォームフィールド名 = フォームフィールド名;
+            this.myBatis項目名 = myBatis項目名;
+        }
+
+        @Override
+        public RString get項目ID() {
+            return 項目ID;
+        }
+
+        @Override
+        public RString getフォームフィールド名() {
+            return フォームフィールド名;
+        }
+
+        @Override
+        public RString getMyBatis項目名() {
+            return myBatis項目名;
+        }
     }
 }

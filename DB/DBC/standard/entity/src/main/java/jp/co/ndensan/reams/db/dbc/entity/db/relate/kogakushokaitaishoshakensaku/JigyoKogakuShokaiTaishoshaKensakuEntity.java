@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishos
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3112KogakuShikyuShinsaKetteiEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 事業高額介護サービス費一覧Entity
@@ -19,6 +20,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3112KogakuShikyuShinsaKette
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyoKogakuShokaiTaishoshaKensakuEntity {
+
+    private ShikibetsuCode 識別コード;
 
     /**
      * -- GETTER -- 事業高額介護サービス費支給申請Entityを返します。
@@ -32,8 +35,7 @@ public class JigyoKogakuShokaiTaishoshaKensakuEntity {
     /**
      * -- GETTER -- 事業高額介護サービス費支給判定結果Entityを返します。
      *
-     * @return 事業高額介護サービス費支給判定結果Entity -- SETTER --
-     * 事業高額介護サービス費支給判定結果Entityを設定します。
+     * @return 事業高額介護サービス費支給判定結果Entity -- SETTER -- 事業高額介護サービス費支給判定結果Entityを設定します。
      *
      * @param 事業高額介護サービス費支給判定結果Entity 事業高額介護サービス費支給判定結果Entity
      */
@@ -42,8 +44,7 @@ public class JigyoKogakuShokaiTaishoshaKensakuEntity {
     /**
      * -- GETTER -- 事業高額介護サービス費支給審査決定Entityを返します。
      *
-     * @return 事業高額介護サービス費支給審査決定Entity -- SETTER --
-     * 事業高額介護サービス費支給審査決定Entityを設定します。
+     * @return 事業高額介護サービス費支給審査決定Entity -- SETTER -- 事業高額介護サービス費支給審査決定Entityを設定します。
      *
      * @param 事業高額介護サービス費支給審査決定Entity 事業高額介護サービス費支給審査決定Entity
      */
@@ -52,8 +53,7 @@ public class JigyoKogakuShokaiTaishoshaKensakuEntity {
     /**
      * -- GETTER -- 事業高額介護サービス費給付対象者合計Entityを返します。
      *
-     * @return 事業高額介護サービス費給付対象者合計Entity -- SETTER --
-     * 事業高額介護サービス費給付対象者合計Entityを設定します。
+     * @return 事業高額介護サービス費給付対象者合計Entity -- SETTER -- 事業高額介護サービス費給付対象者合計Entityを設定します。
      *
      * @param 事業高額介護サービス費給付対象者合計Entity 事業高額介護サービス費給付対象者合計Entity
      */

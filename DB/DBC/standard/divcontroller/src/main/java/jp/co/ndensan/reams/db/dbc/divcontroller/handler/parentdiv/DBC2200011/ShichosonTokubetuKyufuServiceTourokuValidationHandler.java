@@ -46,14 +46,13 @@ public class ShichosonTokubetuKyufuServiceTourokuValidationHandler {
 
     private ValidationDictionary createDictionary() {
         return new ValidationDictionaryBuilder()
-                .add(ShichosonTokubetuKyufuServiceTourokuValidationMessage.選択されていない, new ArrayList<ViewControl>())
+                .add(ShichosonTokubetuKyufuServiceTourokuValidationMessage.更新不可, new ArrayList<ViewControl>())
+                .add(ShichosonTokubetuKyufuServiceTourokuValidationMessage.削除不可, new ArrayList<ViewControl>())
                 .add(ShichosonTokubetuKyufuServiceTourokuValidationMessage.有効開始日と有効終了日の前後関係が不正, get有効開始日と有効終了日())
                 .add(ShichosonTokubetuKyufuServiceTourokuValidationMessage.前回の有効開始日以降の入力不正, get有効開始日())
                 .add(ShichosonTokubetuKyufuServiceTourokuValidationMessage.前回の有効終了日以前の入力不正, get有効開始日())
                 .add(ShichosonTokubetuKyufuServiceTourokuValidationMessage.名称入力内容が不正, get名称())
-                .add(ShichosonTokubetuKyufuServiceTourokuValidationMessage.名称入力文字数が不正, get名称())
                 .add(ShichosonTokubetuKyufuServiceTourokuValidationMessage.略称入力内容が不正, get略称())
-                .add(ShichosonTokubetuKyufuServiceTourokuValidationMessage.略称入力文字数が不正, get略称())
                 .build();
     }
 

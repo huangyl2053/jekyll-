@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KogakuHantei_TandokuGassanKubun {
 
     /**
-     * コード:1 名称:被保険者単独 略称:定義なし 表示名称:単
+     * コード:1 名称:被保険者単独 略称:単
      */
     被保険者単独("1", "被保険者単独", "単"),
     /**
-     * コード:2 名称:世帯合算 略称:定義なし 表示名称:合
+     * コード:2 名称:世帯合算 略称:合
      */
     世帯合算("2", "世帯合算", "合");
 
@@ -48,11 +48,11 @@ public enum KogakuHantei_TandokuGassanKubun {
     }
 
     /**
-     * 高額判定根拠_単独合算区分の表示名称を返します。
+     * 高額判定根拠_単独合算区分の略称を返します。
      *
-     * @return 高額判定根拠_単独合算区分の表示名称
+     * @return 高額判定根拠_単独合算区分の略称
      */
-    public RString get表示名称() {
+    public RString get略称() {
         return hyojiName;
     }
 

@@ -7,10 +7,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1320011;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.IPrintContentsSettingDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.PrintContentsSettingDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -27,12 +26,10 @@ public class KyufuTsuchiSakuseiPrintDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
     @JsonProperty("ccdBunsyobango")
     private BunshoBangoInputDiv ccdBunsyobango;
     @JsonProperty("KyufuTsuchiSakuseiSetting")
-    private IPrintContentsSettingDiv KyufuTsuchiSakuseiSetting;
+    private PrintContentsSettingDiv KyufuTsuchiSakuseiSetting;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,15 +37,6 @@ public class KyufuTsuchiSakuseiPrintDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdChohyoShutsuryokujun
-     * @return ccdChohyoShutsuryokujun
-     */
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
-        return ccdChohyoShutsuryokujun;
-    }
-
     /*
      * getccdBunsyobango
      * @return ccdBunsyobango

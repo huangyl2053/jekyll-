@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushada
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 要介護認定情報Entity
@@ -29,10 +28,10 @@ public class YokaigoNinteiJohoEntity {
     private RString 要介護度;
     private FlexibleDate 認定開始日;
     private FlexibleDate 認定終了日;
-    private Decimal 訪問限度額;
+    private RString 訪問限度額;
     private FlexibleDate 訪問開始日;
     private FlexibleDate 訪問終了日;
-    private Decimal 短期限度額;
+    private RString 短期限度額;
     private FlexibleDate 短期開始日;
     private FlexibleDate 短期終了日;
     private FlexibleDate 調査依頼日;

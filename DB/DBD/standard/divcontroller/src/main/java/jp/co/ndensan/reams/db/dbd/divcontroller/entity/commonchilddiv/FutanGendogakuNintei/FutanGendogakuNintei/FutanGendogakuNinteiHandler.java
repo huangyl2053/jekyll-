@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.FutanGend
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
-import jp.co.ndensan.reams.db.dbd.business.core.hikazenenkintaishosha.HikazeNenkinTaishosha;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KyoshitsuShubetsu;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
@@ -56,7 +55,7 @@ public class FutanGendogakuNinteiHandler {
     public List<FutanGendogakuNintei> 表示リスト取得(HihokenshaNo 被保険者番号) {
         return FutanGendogakuNinteiManager.createInstance().get負担限度額認定リストBy被保険者番号(被保険者番号);
     }
-    
+
     /**
      * 共有子Divの状態を初期化します。
      *
@@ -177,7 +176,7 @@ public class FutanGendogakuNinteiHandler {
                     setValue(futanGendogakuNintei.get適用終了年月日());
             try {
                 div.getFutanGendogakuNinteiDetail().getFutanGendogakuNinteiRiyoshaFutan().getTxtKyushochisha().
-                        setValue(KyuSochishaKubun.toValue(futanGendogakuNintei.get旧措置者区分()).get名称());
+                        setValue(KyuSochishaKubun.toValue(futanGendogakuNintei.get旧措置者区分()).get略称());
             } catch (IllegalArgumentException e) {
                 div.getFutanGendogakuNinteiDetail().getFutanGendogakuNinteiRiyoshaFutan().getTxtKyushochisha().
                         setValue(RString.EMPTY);

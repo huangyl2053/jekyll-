@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReport extends Report<KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource> {
 
     private final KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEntity entity;
-    private int index;
 
     /**
      * インスタンスを生成します。
@@ -37,8 +36,7 @@ public class KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReport extends Report<Kyufuh
      */
     @Override
     public void writeBy(ReportSourceWriter<KyufuhiTsuchishoFukushiYoguTaiyoHinmokuReportSource> reportSourceWriter) {
-        index = index + 1;
-        IKyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor editor = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor(entity, index);
+        IKyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor editor = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuEditor(entity);
         IKyufuhiTsuchishoFukushiYoguTaiyoHinmokuBuilder builder = new KyufuhiTsuchishoFukushiYoguTaiyoHinmokuBuilder(editor);
         reportSourceWriter.writeLine(builder);
     }

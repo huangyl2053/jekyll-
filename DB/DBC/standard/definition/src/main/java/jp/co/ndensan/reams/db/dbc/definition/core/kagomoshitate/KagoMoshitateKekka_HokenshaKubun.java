@@ -16,34 +16,32 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KagoMoshitateKekka_HokenshaKubun {
 
     /**
-     * コード:1 名称:保険者 略称:保険者分
+     * コード:1 名称:保険者 略称:定義なし
      */
-    保険者("1", "保険者", "保険者分"),
+    保険者("1", "保険者分"),
     /**
-     * コード:2 名称:公費負担者　略称:公費負担者分
+     * コード:2 名称:公費負担者分　略称:定義なし
      */
-    公費負担者("2", "公費負担者", "公費負担者分"),
+    公費負担者("2", "公費負担者分"),
     /**
-     * コード:3 名称:経過措置_総合事業費 略称:総合事業費(経過措置)分
+     * コード:3 名称:総合事業費(経過措置)分 略称:定義なし
      */
-    経過措置_総合事業費("3", "経過措置_総合事業費", "総合事業費(経過措置)分"),
+    経過措置_総合事業費("3", "総合事業費(経過措置)分"),
     /**
-     * コード:4 名称:保険者_総合事業費 略称:総合事業費(保険者)分
+     * コード:4 名称:総合事業費(保険者)分 略称:定義なし
      */
-    保険者_総合事業費("4", "保険者_総合事業費", "総合事業費(保険者)分"),
+    保険者_総合事業費("4", "総合事業費(保険者)分"),
     /**
-     * コード:5 名称:公費負担者_総合事業費 略称:総合事業費(公費負担者)分
+     * コード:5 名称:総合事業費(公費負担者)分 略称:定義なし
      */
-    公費負担者_総合事業費("5", "公費負担者_総合事業費", "総合事業費(公費負担者)分");
+    公費負担者_総合事業費("5", "総合事業費(公費負担者)分");
 
     private final RString code;
     private final RString fullName;
-    private final RString shortName;
 
-    private KagoMoshitateKekka_HokenshaKubun(String code, String fullname, String shortName) {
+    private KagoMoshitateKekka_HokenshaKubun(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
-        this.shortName = new RString(shortName);
     }
 
     /**
@@ -62,15 +60,6 @@ public enum KagoMoshitateKekka_HokenshaKubun {
      */
     public RString get名称() {
         return fullName;
-    }
-
-    /**
-     * 保険者区分の略称を返します。
-     *
-     * @return 保険者区分の略称
-     */
-    public RString get略称() {
-        return shortName;
     }
 
     /**

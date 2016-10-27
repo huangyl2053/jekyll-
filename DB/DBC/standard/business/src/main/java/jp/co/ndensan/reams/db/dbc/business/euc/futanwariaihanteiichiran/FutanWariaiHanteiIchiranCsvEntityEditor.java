@@ -151,7 +151,7 @@ public class FutanWariaiHanteiIchiranCsvEntityEditor {
     }
 
     private RString edit要介護度() {
-        if (entity.get要介護認定状態区分コード() != null) {
+        if (!RString.isNullOrEmpty(entity.get要介護認定状態区分コード())) {
             return YokaigoJotaiKubunSupport.toValue(entity.get認定有効期間開始年月日(),
                     entity.get要介護認定状態区分コード()).getName();
         } else {

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KijunShunyugakuTekiyoKanri
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KijunShunyugakuTekiyoKanriBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugaku.KijunShunyuShinseiDate;
 import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugaku.KijunShunyugakuDate;
-import jp.co.ndensan.reams.db.dbc.definition.core.santeikijungaku.SanteiKijungaku;
+import jp.co.ndensan.reams.db.dbc.definition.core.juryoininbarai.SanteiKijungaku;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.DBC1000062TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.KijunShunyuShinseiTourokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.dgIchiran_Row;
@@ -534,6 +534,7 @@ public class KijunShunyuShinseiTourokuHandler {
         List<dgMeisai_Row> rowList = new ArrayList<>();
         dgMeisai_Row row;
         int count = NUM_0;
+        List<PersonalData> personalDataList = new ArrayList();
         for (KijunShunyuShinseiDate 基準収入額データ : 基準収入額データList) {
             row = new dgMeisai_Row();
             ShikibetsuCode 識別コード = 基準収入額データ.get識別コード();
@@ -595,9 +596,10 @@ public class KijunShunyuShinseiTourokuHandler {
             row.setShikibetsuTaishoKubun(識別対象区分);
             row.setCancelButtonState(DataGridButtonState.Disabled);
             rowList.add(row);
-            AccessLogger.log(AccessLogType.照会, toPersonalData(基準収入額データ.get識別コード(),
+            personalDataList.add(toPersonalData(基準収入額データ.get識別コード(),
                     基準収入額データ.get被保険者番号().getColumnValue()));
         }
+        AccessLogger.log(AccessLogType.照会, personalDataList);
         MemoNyuryokuHandler.dataGridupdateImage(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付, div.getMeisai().getDgMeisai(),
                 MemoShikibetsuTaisho.識別コード.get識別対象(), 識別対象コード, RString.EMPTY, RString.EMPTY, メモ);
         div.getMeisai().getDgMeisai().setDataSource(rowList);
@@ -915,7 +917,7 @@ public class KijunShunyuShinseiTourokuHandler {
                 row.getKazeiShotokuKojogo().setValue(課税所得_控除後);
             }
         } else {
-            row.getKazeiShotokuKojogo().setValue(Decimal.ZERO);
+            row.getKazeiShotokuKojogo().setValue(課税所得額);
         }
     }
 

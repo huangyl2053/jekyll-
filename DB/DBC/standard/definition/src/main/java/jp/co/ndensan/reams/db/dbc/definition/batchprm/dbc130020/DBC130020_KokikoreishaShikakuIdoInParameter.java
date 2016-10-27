@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc130020;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC130020;
 
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
+import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBC130020_KokikoreishaShikakuIdoInParameter {
+public class DBC130020_KokikoreishaShikakuIdoInParameter extends BatchParameterBase {
 
     private static final String KEY_INSURERDISTINCTION = "insurerDistinction";
     private static final String KEY_TABLENAME = "tableName";

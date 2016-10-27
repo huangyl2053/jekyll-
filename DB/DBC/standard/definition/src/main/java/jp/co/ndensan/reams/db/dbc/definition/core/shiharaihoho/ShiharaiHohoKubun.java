@@ -11,24 +11,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShiharaiHohoKubun {
 
     /**
-     * コード:1 名称:窓口払 略称:定義なし
+     * コード:1 名称:窓口払 略称:窓口
      */
-    窓口払("1", "窓口払"),
+    窓口払("1", "窓口払", "窓口"),
     /**
-     * コード:2 名称:口座払 略称:定義なし
+     * コード:2 名称:口座払 略称:口座
      */
-    口座払("2", "口座払"),
+    口座払("2", "口座払", "口座"),
     /**
-     * コード:3 名称:受領委任払 略称:定義なし
+     * コード:3 名称:受領委任払 略称:受領委任
      */
-    受領委任払("3", "受領委任払");
+    受領委任払("3", "受領委任払", "受領委任");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private ShiharaiHohoKubun(String code, String fullname) {
+    private ShiharaiHohoKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -47,6 +49,15 @@ public enum ShiharaiHohoKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 支払方法区分の略称を返します。
+     *
+     * @return 支払方法区分の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

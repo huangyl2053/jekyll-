@@ -43,6 +43,7 @@ public class KyufujissekiKoshinkekkaIchiranPrintService {
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
 
     /**
      * 給付実績更新結果情報一覧表を印刷します。
@@ -82,26 +83,26 @@ public class KyufujissekiKoshinkekkaIchiranPrintService {
                     = new ReportSourceWriter(assembler);
             int i = 0;
             List<RString> 改頁項目List = new ArrayList<>();
-            RString 並び順の１件目 = RString.EMPTY;
-            RString 並び順の２件目 = RString.EMPTY;
-            RString 並び順の３件目 = RString.EMPTY;
-            RString 並び順の４件目 = RString.EMPTY;
-            RString 並び順の５件目 = RString.EMPTY;
+            RString 並び順の2件目 = RString.EMPTY;
+            RString 並び順の3件目 = RString.EMPTY;
+            RString 並び順の4件目 = RString.EMPTY;
+            RString 並び順の5件目 = RString.EMPTY;
+            RString 並び順の6件目 = RString.EMPTY;
             if (並び順 != null) {
                 for (ISetSortItem item : 並び順.get設定項目リスト()) {
                     if (item.is改頁項目()) {
                         改頁項目List.add(item.get項目名());
                     }
-                    if (i == INDEX_0) {
-                        並び順の１件目 = item.get項目名();
-                    } else if (i == INDEX_1) {
-                        並び順の２件目 = item.get項目名();
+                    if (i == INDEX_1) {
+                        並び順の2件目 = item.get項目名();
                     } else if (i == INDEX_2) {
-                        並び順の３件目 = item.get項目名();
+                        並び順の3件目 = item.get項目名();
                     } else if (i == INDEX_3) {
-                        並び順の４件目 = item.get項目名();
+                        並び順の4件目 = item.get項目名();
                     } else if (i == INDEX_4) {
-                        並び順の５件目 = item.get項目名();
+                        並び順の5件目 = item.get項目名();
+                    } else if (i == INDEX_5) {
+                        並び順の6件目 = item.get項目名();
                     }
                     i = i + 1;
                 }
@@ -128,8 +129,8 @@ public class KyufujissekiKoshinkekkaIchiranPrintService {
                     flag = true;
                     合計 = count;
                 }
-                new KyufujissekiKoshinkekkaIchiranReport(処理年月, entityList.get(j), 並び順の１件目, 並び順の２件目,
-                        並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List, システム日時, k, flag, 合計).writeBy(reportSourceWriter);
+                new KyufujissekiKoshinkekkaIchiranReport(処理年月, entityList.get(j), 並び順の2件目, 並び順の3件目,
+                        並び順の4件目, 並び順の5件目, 並び順の6件目, 改頁項目List, システム日時, k, flag, 合計).writeBy(reportSourceWriter);
                 k = k + INDEX_1;
                 flag = false;
             }

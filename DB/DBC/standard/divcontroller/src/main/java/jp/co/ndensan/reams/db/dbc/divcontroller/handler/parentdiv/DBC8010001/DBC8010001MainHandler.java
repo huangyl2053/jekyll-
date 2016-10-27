@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -51,6 +52,8 @@ public class DBC8010001MainHandler {
     private final DBC8010001MainDiv div;
     private KinyuKikanCode 代表金融機関コード;
     private RString 振込グループコード;
+    private static final int INDEXSTART = 0;
+    private static final int INDEXEND = 6;
 
     /**
      * コンストラクターです。
@@ -79,34 +82,31 @@ public class DBC8010001MainHandler {
                 .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage,
                 div.getItakusha()).build().check(messages));
-        //TODO メソードFurikomiGroupItakushaItakushaKoseiFinder.getFurikomiGroupItakushItakushKosei利用できるなら、コメントを解除する。
-//        if (pairs.iterator().hasNext()) {
-//            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBatchRegister"), true);
-//            return pairs;
-//        }
+        if (pairs.iterator().hasNext()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBatchRegister"), true);
+            return pairs;
+        }
 
         RString 処理名 = prepare処理名(メニューID, 振込単位);
         DBC8010001MainManager manager = new DBC8010001MainManager();
         DBC8010001 dbc;
         dbc = manager.get前回処理情報(SubGyomuCode.DBC介護給付, new LasdecCode("000000"), 処理名, new RString("0000"), new FlexibleYear("0000"), new RString("0001"));
 
-        init画面表示内容(dbc);
+        init画面表示内容(メニューID, 振込単位, dbc);
         init表示制御(メニューID, 振込単位, dbc);
         return pairs;
     }
 
-    private void init画面表示内容(DBC8010001 dbc) {
-        //TODO 1.13.0 ※委託者情報が取得できなかった場合、委託者情報の各項目にはEMPTYセット
-        //        List<FurikomiGroupItakushaRelateEntity> list = getFurikomiGroupItakushaRelateEntityList();
-        //        FurikomiGroupItakushaRelateEntity fentity = list.get(0);
-        this.代表金融機関コード = new KinyuKikanCode("2323");
-        this.振込グループコード = new RString("54321");
-        div.getItakusha().getTxtItakushaCode().setValue(new RString("1234567890"));
-        div.getItakusha().getTxtItakushamei().setValue(new RString("劉偉"));
-        div.getItakusha().setItakushaId(new RString("0987654321"));
-        div.getItakusha().getTxtFurikomiGroupCode().setValue(new RString("9439239239no233242"));
-        div.getItakusha().getTxtFurikomiGroupMeisho().setValue(new RString("abcd"));
-
+    private void init画面表示内容(RString メニューID, RString 振込単位, DBC8010001 dbc) {
+        DBC8010001MainManager manager = new DBC8010001MainManager();
+        DBC8010001 entity = manager.getFurikomiGroupItakushaRelateEntity(メニューID, 振込単位);
+        this.代表金融機関コード = entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode();
+        this.振込グループコード = entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode();
+        div.getItakusha().getTxtItakushaCode().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaCode());
+        div.getItakusha().getTxtItakushamei().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushamei());
+        div.getItakusha().setItakushaId(new RString(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaId().toString()));
+        div.getItakusha().getTxtFurikomiGroupCode().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode());
+        div.getItakusha().getTxtFurikomiGroupMeisho().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupMeisho());
         List<KeyValueDataSource> list1 = new ArrayList<>();
         KeyValueDataSource source1 = new KeyValueDataSource();
         source1.setKey(Furikomi_ShoriTaisho.償還高額.getコード());
@@ -163,8 +163,12 @@ public class DBC8010001MainHandler {
         div.getRadSiharaihohou().setDataSource(list6);
 
         if (null != dbc) {
-            div.getTxtZenkaiTaishoYmdRange().setFromValue(dbc.getEntity().getTaishoKaishiYMD().toRDate());
-            div.getTxtZenkaiTaishoYmdRange().setToValue(dbc.getEntity().getTaishoShuryoYMD().toRDate());
+            if (null != dbc.getEntity().getTaishoKaishiYMD() && !dbc.getEntity().getTaishoKaishiYMD().isEmpty()) {
+                div.getTxtZenkaiTaishoYmdRange().setFromValue(dbc.getEntity().getTaishoKaishiYMD().toRDate());
+            }
+            if (null != dbc.getEntity().getTaishoShuryoYMD() && !dbc.getEntity().getTaishoShuryoYMD().isEmpty()) {
+                div.getTxtZenkaiTaishoYmdRange().setToValue(dbc.getEntity().getTaishoShuryoYMD().toRDate());
+            }
         }
 
         List<KeyValueDataSource> list7 = new ArrayList<>();
@@ -279,54 +283,19 @@ public class DBC8010001MainHandler {
     }
 
     /**
-     * 委託者情報の取得。
-     *
-     * @return List<FurikomiGroupItakushaRelateEntity>
-     */
-    //TODO メソードFurikomiGroupItakushaItakushaKoseiFinder.getFurikomiGroupItakushItakushKosei利用できるなら、コメントを解除する。
-//    public List<FurikomiGroupItakushaRelateEntity> getFurikomiGroupItakushaRelateEntityList(RString メニューID,RString 振込単位) {
-//        List<FurikomiGroupItakushaRelateEntity> list = new ArrayList<FurikomiGroupItakushaRelateEntity>();
-//        RString 業務内区分 = new RString("");
-//        switch (メニューID.toString()) {
-//            case "DBCMN43003":
-//                switch (振込単位.toString()) {
-//                    case "1":
-//                        業務内区分 = FurikomiGyomunaiKubun.償還高額.getコード();
-//                        break;
-//                    case "2":
-//                        業務内区分 = FurikomiGyomunaiKubun.高額.getコード();
-//                        break;
-//                }
-//                break;
-//            case "DBCMN54002":
-//                switch (振込単位.toString()) {
-//                    case "1":
-//                        業務内区分 = FurikomiGyomunaiKubun.償還高額.getコード();
-//                        break;
-//                    case "2":
-//                        業務内区分 = FurikomiGyomunaiKubun.償還.getコード();
-//                        break;
-//                }
-//                break;
-//        }
-//        FurikomiItakushaKoseiMapperParameter parameter;
-//        parameter = FurikomiItakushaKoseiMapperParameter.createSelectByKeyParam(null,SubGyomuCode.DBC介護給付,業務内区分,null,null,null);
-//
-//        list = FurikomiGroupItakushaItakushaKoseiFinder.getFurikomiGroupItakushItakushKosei(parameter);
-//        return list;
-//    }
-    /**
      * 処理選択ラジオボタンonChange。
      */
     public void onChange_RadShoriSentaku() {
         if (null != div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey() && new RString("1").equals(div.getRadShoriSentakuFurikomiDataSakusei().getSelectedKey())) {
             div.getTxtFurikomiShiteiYMD().setDisabled(false);
             div.getChkSaisakusei().setDisabled(false);
-            div.getTxtWrongFurikomiShiteiYMD().clearValue();
+            div.getFurikomiDataModifyShiji().setDisabled(true);
             div.getTxtWrongFurikomiShiteiYMD().setDisabled(true);
-            div.getTxtCorrectFurikomiShiteiYMD().clearValue();
             div.getTxtCorrectFurikomiShiteiYMD().setDisabled(true);
+            div.getTxtWrongFurikomiShiteiYMD().clearValue();
+            div.getTxtCorrectFurikomiShiteiYMD().clearValue();
             div.getRadSiharaihohou().setSelectedKey(Furikomi_ShihraiHohoShitei.口座.getコード());
+            div.getIchiranhyoSakuseiShiji().setDisabled(true);
             div.getRadSiharaihohou().setDisabled(true);
             div.getTxtKonkaiTaishoYmdRange().setDisabled(false);
             div.getTxtKetteishaUketoriYmRange().setDisabled(false);
@@ -336,11 +305,13 @@ public class DBC8010001MainHandler {
             div.getTxtTaishoSakuseiYMD().setDisabled(true);
         } else if (null != div.getRadShoriSentakuFurikomiDataModify().getSelectedKey() && new RString("2").equals(div.getRadShoriSentakuFurikomiDataModify().getSelectedKey())) {
             div.getTxtFurikomiShiteiYMD().setDisabled(true);
-            div.getChkSaisakusei().setSelectedItems(null);
+            div.getChkSaisakusei().setSelectedItems(new ArrayList<KeyValueDataSource>());
             div.getChkSaisakusei().setDisabled(true);
+            div.getFurikomiDataModifyShiji().setDisabled(false);
             div.getTxtWrongFurikomiShiteiYMD().setDisabled(false);
             div.getTxtCorrectFurikomiShiteiYMD().setDisabled(false);
             div.getRadSiharaihohou().setSelectedKey(Furikomi_ShihraiHohoShitei.口座.getコード());
+            div.getIchiranhyoSakuseiShiji().setDisabled(true);
             div.getRadSiharaihohou().setDisabled(true);
             div.getTxtKonkaiTaishoYmdRange().setDisabled(true);
             div.getTxtKetteishaUketoriYmRange().setDisabled(true);
@@ -350,12 +321,14 @@ public class DBC8010001MainHandler {
             div.getTxtTaishoSakuseiYMD().setRequired(true);
         } else {
             div.getTxtFurikomiShiteiYMD().setDisabled(true);
-            div.getChkSaisakusei().setSelectedItems(null);
+            div.getChkSaisakusei().setSelectedItems(new ArrayList<KeyValueDataSource>());
             div.getChkSaisakusei().setDisabled(true);
+            div.getFurikomiDataModifyShiji().setDisabled(true);
+            div.getTxtWrongFurikomiShiteiYMD().setDisabled(false);
+            div.getTxtCorrectFurikomiShiteiYMD().setDisabled(false);
             div.getTxtWrongFurikomiShiteiYMD().clearValue();
-            div.getTxtWrongFurikomiShiteiYMD().setDisabled(true);
             div.getTxtCorrectFurikomiShiteiYMD().clearValue();
-            div.getTxtCorrectFurikomiShiteiYMD().setDisabled(true);
+            div.getIchiranhyoSakuseiShiji().setDisabled(false);
             div.getRadSiharaihohou().setDisabled(false);
             div.getTxtKonkaiTaishoYmdRange().setDisabled(false);
             div.getTxtKetteishaUketoriYmRange().setDisabled(false);
@@ -370,7 +343,7 @@ public class DBC8010001MainHandler {
      * 再作成するチェックボックスonClick。
      */
     public void onClick_ChkSaisakusei() {
-        if (null != div.getChkSaisakusei().getSelectedKeys() && div.getChkSaisakusei().getSelectedKeys().get(0).equals(new RString("1"))) {
+        if (!div.getChkSaisakusei().getSelectedKeys().isEmpty() && div.getChkSaisakusei().getSelectedKeys().get(0).equals(new RString("1"))) {
             div.getRadChushutsuTaisho().setSelectedKey(Furikomi_MeisaiIchiranChushutsuTaisho.全て.getコード());
             div.getRadChushutsuTaisho().setDisabled(true);
             div.getTxtTaishoSakuseiYMD().setDisabled(false);
@@ -425,17 +398,35 @@ public class DBC8010001MainHandler {
         parameter.set処理対象(Furikomi_ShoriTaisho.toValue(div.getDdlShoriTaisho().getSelectedKey()));
         parameter.set出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
         parameter.set委託者コード(div.getTxtItakushaCode().getValue());
-        parameter.set対象作成年月日(new FlexibleDate(div.getTxtTaishoSakuseiYMD().getValue().toDateString()));
+        if (null != div.getTxtTaishoSakuseiYMD().getValue()) {
+            parameter.set対象作成年月日(new FlexibleDate(div.getTxtTaishoSakuseiYMD().getValue().toDateString()));
+        }
+        if (null != div.getTxtFurikomiShiteiYMD().getValue()) {
+            parameter.set振込指定年月日(div.getTxtFurikomiShiteiYMD().getValue());
+        }
+        if (null != div.getTxtCorrectFurikomiShiteiYMD().getValue()) {
+            parameter.set正振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
+        }
+        if (null != div.getTxtKonkaiTaishoYmdRange().getToValue()) {
+            parameter.set終了年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getToValue().toDateString()));
+        }
         parameter.set抽出対象(Furikomi_MeisaiIchiranChushutsuTaisho.toValue(div.getRadChushutsuTaisho().getSelectedKey()));
         parameter.set振込グループコード(振込グループコード);
-        parameter.set振込指定年月日(div.getTxtFurikomiShiteiYMD().getValue());
+
         parameter.set支払方法(Furikomi_ShihraiHohoShitei.toValue(div.getRadSiharaihohou().getSelectedKey()));
-        parameter.set正振込指定年月日(div.getTxtCorrectFurikomiShiteiYMD().getValue());
-        parameter.set終了受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getToValue().toDateString()));
-        parameter.set終了年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getToValue().toDateString()));
-        parameter.set誤振込指定年月日(div.getTxtWrongFurikomiShiteiYMD().getValue());
-        parameter.set開始受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getFromValue().toDateString()));
-        parameter.set開始年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getFromValue().toDateString()));
+        if (null != div.getTxtKetteishaUketoriYmRange().getToValue()) {
+            parameter.set終了受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getToValue().toDateString().substring(INDEXSTART, INDEXEND)));
+        }
+        if (null != div.getTxtWrongFurikomiShiteiYMD().getValue()) {
+            parameter.set誤振込指定年月日(div.getTxtWrongFurikomiShiteiYMD().getValue());
+
+        }
+        if (null != div.getTxtKetteishaUketoriYmRange().getFromValue()) {
+            parameter.set開始受取年月(new FlexibleYearMonth(div.getTxtKetteishaUketoriYmRange().getFromValue().toDateString().substring(INDEXSTART, INDEXEND)));
+        }
+        if (null != div.getTxtKonkaiTaishoYmdRange().getFromValue()) {
+            parameter.set開始年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getFromValue().toDateString()));
+        }
         return parameter;
     }
 

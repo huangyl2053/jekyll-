@@ -11,20 +11,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KijunbiKubun {
 
     /**
-     * コード:1 名称:適用開始日 略称:定義なし
+     * コード:1 名称:適用開始日 略称:適用開始日
      */
-    適用開始日("1", "適用開始日"),
+    適用開始日("1", "適用開始日", "適用開始日"),
     /**
-     * コード:2 名称:適用開始届出日 略称:定義なし
+     * コード:2 名称:適用開始届出日 略称:適用開始届出日
      */
-    適用開始届出日("2", "適用開始届出日");
+    適用開始届出日("2", "適用開始届出日", "適用開始届出日");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private KijunbiKubun(String code, String fullname) {
+    private KijunbiKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -43,6 +45,15 @@ public enum KijunbiKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 基準日区分の略称を返します。
+     *
+     * @return 基準日区分の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

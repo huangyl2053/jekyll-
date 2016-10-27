@@ -13,6 +13,11 @@
     </select>
 
     <resultMap id="resultMap_RirekiShuseiDataRelateEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.rirekishusei.RirekiShuseiRelateEntity" autoMapping="true">
+        <id property="dbt4001Entity.shichosonCode" column="dbT4001JukyushaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="dbt4001Entity.hihokenshaNo" column="dbT4001JukyushaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="dbt4001Entity.rirekiNo" column="dbT4001JukyushaDaicho_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dbt4001Entity.edaban" column="dbT4001JukyushaDaicho_edaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dbt4001Entity.jukyuShinseiJiyu" column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <association property="dbt4001Entity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
         <association property="dbt4101Entity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
         <association property="dbt4121Entity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4121ShinseiRirekiJohoMapper.ResultMap_DbT4121ShinseiRirekiJohoEntity"/>
@@ -51,7 +56,8 @@
               rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho" 
               INNER JOIN rgdb."DbT4101NinteiShinseiJoho" AS "DbT4101NinteiShinseiJoho" 
                 ON "DbT4101NinteiShinseiJoho"."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" 
-                AND "DbT4101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE 
+                AND "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4001JukyushaDaicho"."shinseishoKanriNo"
+                AND "DbT4101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
               INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051 
                 ON "DbT4101NinteiShinseiJoho"."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo" 
               LEFT JOIN rgdb."DbT4201NinteichosaIraiJoho" AS "DbT4201NinteichosaIraiJoho" 

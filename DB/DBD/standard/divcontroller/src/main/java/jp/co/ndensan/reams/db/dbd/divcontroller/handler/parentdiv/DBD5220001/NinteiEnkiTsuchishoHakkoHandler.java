@@ -434,7 +434,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
      * @param 要介護認定申請情報List 要介護認定申請情報List
      */
     public void 更新処理(List<NinteiShinseiJohoChild> 要介護認定申請情報List) {
-        List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getDataSource();
+        List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getSelectedItems();
         List<DgHakkotaishoshaRow> rowEntityList = new ArrayList<>();
         for (dgHakkotaishosha_Row row : rowList) {
             DgHakkotaishoshaRow rowEntity = getRowEntity(row);
@@ -468,6 +468,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
      */
     public DBD522001_EnkitsuchiParameter getバッチパラメータ() {
         DBD522001_EnkitsuchiParameter parameter = new DBD522001_EnkitsuchiParameter();
+        List<FlexibleDate> 通知書発行日List = new ArrayList<>();
         if (検索.getName().equals(ResponseHolder.getState())) {
             parameter.set画面モード(画面モード_1);
             if (div.getTxtMikomiDateIchiran().getFromValue() != null) {
@@ -477,23 +478,25 @@ public class NinteiEnkiTsuchishoHakkoHandler {
                 parameter.set処理見込み日To(new FlexibleDate(div.getTxtMikomiDateIchiran().getToValue().toDateString()));
             }
             if (div.getTxtInsatsuDate().getValue() != null) {
-                parameter.set通知書発行日(new FlexibleDate(div.getTxtInsatsuDate().getValue().toDateString()));
+                通知書発行日List.add(new FlexibleDate(div.getTxtInsatsuDate().getValue().toDateString()));
+                parameter.set通知書発行日(通知書発行日List);
             }
         } else if (通知書.getName().equals(ResponseHolder.getState())) {
             parameter.set画面モード(画面モード_2);
-            parameter.set申請書管理番号リスト(get申請書管理番号リスト());
+            parameter.set申請書管理番号リスト(get申請書管理番号リスト(通知書発行日List));
             parameter.set処理見込み日From(FlexibleDate.EMPTY);
             parameter.set処理見込み日To(FlexibleDate.EMPTY);
-            parameter.set通知書発行日(new FlexibleDate(RDate.getNowDate().toDateString()));
+            parameter.set通知書発行日(通知書発行日List);
         }
         return parameter;
     }
 
-    private List<RString> get申請書管理番号リスト() {
+    private List<RString> get申請書管理番号リスト(List<FlexibleDate> 通知書発行日List) {
         List<RString> 申請書管理番号リスト = new ArrayList<>();
         List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getSelectedItems();
         for (dgHakkotaishosha_Row row : rowList) {
             申請書管理番号リスト.add(row.getShinseishokanrino());
+            通知書発行日List.add(new FlexibleDate(row.getTsuchishohakkoymd().getValue().toDateString()));
         }
         return 申請書管理番号リスト;
     }

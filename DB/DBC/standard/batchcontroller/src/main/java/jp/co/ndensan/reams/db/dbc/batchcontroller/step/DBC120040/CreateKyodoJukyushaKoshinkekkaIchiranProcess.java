@@ -6,19 +6,28 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120040;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodojukyushakoshinkekkain.KyodoJukyushaIchiranCSVData;
 import jp.co.ndensan.reams.db.dbc.business.report.kyodojukyushakoshinkekkaichiran.KyodoJukyushaKoshinkekkaIchiranReport;
 import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushakoshinkekkain.KyodoJukyushaKoshinKekkaInMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kyodojukyushainsub.KyufuJissekiInProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyodojukyushakoshinkekkain.KyodoJukyushaIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkaichiran.KyodoJukyushaKoshinkekkaIchiranReportData;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkain.KyodoJukyushaKoshinkekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyodojukyushakoshinkekkaichiran.KyodoJukyushaKoshinkekkaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyodojukyushakoshinkekkain.IKyodoJukyushaKoshinKekkaInMapper;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -56,14 +65,19 @@ public class CreateKyodoJukyushaKoshinkekkaIchiranProcess extends BatchKeyBreakB
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kyodojukyushakoshinkekkain.IKyodoJukyushaKoshinKekkaInMapper.帳票出力対象データ取得");
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.hokenshaNo.name())));
     private static final ReportId REPORT_DBC200057 = ReportIdDBC.DBC200057.getReportId();
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC200056"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
+    private static final RString コンマ = new RString(",");
+    private static final RString デフォルト出力順 = new RString(" ORDER BY dbWT5C30.\"hokenshaNo\" ASC ");
+    private static final RString デフォルト出力順_1 = new RString("\"登録被保険者番号\" ASC ");
+    private static final RString デフォルト出力順_2 = new RString("\"集約異動年月日\" ASC ");
+    private static final int NUM7 = 7;
     private KyodoJukyushaIchiranCSVData kyodoJukyushaIchiranCSVData;
     private IKyodoJukyushaKoshinKekkaInMapper mapper;
+    private KyufuJissekiInProcessParameter processParameter;
     private RString eucFilename;
     private RString spoolWorkPath;
     private FileSpoolManager manager;
@@ -72,6 +86,8 @@ public class CreateKyodoJukyushaKoshinkekkaIchiranProcess extends BatchKeyBreakB
     private RDateTime 作成日時;
     private boolean is1行目;
     private RString 帳票タイトル;
+    private RString 出力順;
+    private IOutputOrder outputOrder;
     @BatchWriter
     private BatchReportWriter<KyodoJukyushaKoshinkekkaIchiranReportSource> batchWrite;
     private ReportSourceWriter<KyodoJukyushaKoshinkekkaIchiranReportSource> reportSourceWriter;
@@ -80,7 +96,17 @@ public class CreateKyodoJukyushaKoshinkekkaIchiranProcess extends BatchKeyBreakB
 
     @Override
     protected void initialize() {
-        //TODO 出力順情報取得　関連展開待ち
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        if (!RString.isNullOrEmpty(processParameter.get出力順ID())) {
+            outputOrder = finder.get出力順(SubGyomuCode.DBC介護給付, REPORT_DBC200057, Long.parseLong(processParameter.get出力順ID().toString()));
+        }
+        出力順 = RString.EMPTY;
+        if (outputOrder == null) {
+            throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage().replace(実行不可MESSAGE.toString()).toString());
+        } else {
+            出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.
+                    create(KyodoJukyushaIchiranCSVData.KyodoJukyushaKoshinkekkaIchiranOutPutOrder.class, outputOrder), NUM7);
+        }
         mapper = getMapper(IKyodoJukyushaKoshinKekkaInMapper.class);
         KyodoJukyushaKoshinKekkaInMybatisParameter parameter = new KyodoJukyushaKoshinKekkaInMybatisParameter();
         parameter.setSubGyomuCode(SubGyomuCode.DBC介護給付);
@@ -107,13 +133,32 @@ public class CreateKyodoJukyushaKoshinkekkaIchiranProcess extends BatchKeyBreakB
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID);
+        KyodoJukyushaKoshinKekkaInMybatisParameter parameter = new KyodoJukyushaKoshinKekkaInMybatisParameter();
+        RString 出力順条件 = デフォルト出力順;
+        if (RString.isNullOrEmpty(出力順)) {
+            出力順 = new RString(" ORDER BY dbWT5C30.\"hokenshaNo\"");
+        } else {
+            出力順条件 = 出力順条件.concat(出力順.replace(new RString("order by"), コンマ));
+        }
+        出力順条件 = 出力順条件.concat(コンマ).concat(デフォルト出力順_1);
+        出力順条件 = 出力順条件.concat(コンマ).concat(デフォルト出力順_2);
+        parameter.set出力順(出力順条件);
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter);
     }
 
     @Override
     protected void createWriter() {
+        outputOrder.get改頁項目IDリスト();
+        List<RString> 帳票物理名List = new ArrayList<>();
+        Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(outputOrder);
+        for (Map.Entry<Integer, ISetSortItem> entry : 改頁Map.entrySet()) {
+            if (entry.getValue() != null) {
+                帳票物理名List.add(kyodoJukyushaIchiranCSVData.get帳票物理名(entry.getValue()));
+            }
+        }
+        List<RString> pageBreakKeys = Collections.unmodifiableList(帳票物理名List);
         batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBC200057.value())
-                .addBreak(new BreakerCatalog<KyodoJukyushaKoshinkekkaIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .addBreak(new BreakerCatalog<KyodoJukyushaKoshinkekkaIchiranReportSource>().simplePageBreaker(pageBreakKeys))
                 .create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
     }
@@ -124,7 +169,7 @@ public class CreateKyodoJukyushaKoshinkekkaIchiranProcess extends BatchKeyBreakB
         data.set帳票タイトル(帳票タイトル);
         KyodoJukyushaKoshinkekkaIchiranReport report = new KyodoJukyushaKoshinkekkaIchiranReport(data,
                 ChohyoSeigyoHanyoKomokuMei.帳票タイトル_定期.get名称(),
-                作成日時, null);
+                作成日時, outputOrder);
         report.writeBy(reportSourceWriter);
         KyodoJukyushaIchiranCSVEntity csvEntity = new KyodoJukyushaIchiranCSVData().getCSVEntity(data, is1行目, 作成日時);
         eucCsvWriterJunitoJugo.writeLine(csvEntity);
@@ -142,11 +187,6 @@ public class CreateKyodoJukyushaKoshinkekkaIchiranProcess extends BatchKeyBreakB
 
     @Override
     protected void keyBreakProcess(KyodoJukyushaKoshinkekkaIchiranEntity current) {
-        hasBreak(getBefore(), current);
-    }
-
-    private boolean hasBreak(KyodoJukyushaKoshinkekkaIchiranEntity before, KyodoJukyushaKoshinkekkaIchiranEntity current) {
-        return before.get保険者番号() != current.get保険者番号();
     }
 
     @Override

@@ -1,0 +1,25 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050;
+
+import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
+
+/**
+ * 償還払請求特定入所者介護サービス費用情報取得のEntityクラスです。
+ *
+ * @reamsid_L DBC-2570-030 wangxue
+ */
+@lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
+public class InsTokuteiNyushoTempEntity implements Serializable {
+
+    private DbWT2111ShokanShinseiTempEntity 償還払支給申請一時Entity;
+    private DbWT1001HihokenshaTempEntity 被保険者一時Entity;
+    private DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity 特定入所者介護サービス費用Entity;
+}

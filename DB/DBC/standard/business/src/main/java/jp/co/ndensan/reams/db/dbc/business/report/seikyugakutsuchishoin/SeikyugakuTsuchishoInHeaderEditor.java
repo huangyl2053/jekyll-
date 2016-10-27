@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.seikyugakutsuchishoin.Seikyug
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -51,8 +52,7 @@ public class SeikyugakuTsuchishoInHeaderEditor implements ISeikyugakuTsuchishoIn
         RString 作成時 = 作成日時.getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
-        source.shinsaYM = 帳票出力対象データ.get審査年月().wareki()
-                .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.shinsaYM = パターン52(帳票出力対象データ.get審査年月());
         source.hokenshaNo = getColumnValue(帳票出力対象データ.get保険者番号());
         source.hokenshaName = 帳票出力対象データ.get保険者名();
         if (!款コード_99.equals(帳票出力対象データ.get款コード())) {
@@ -77,6 +77,14 @@ public class SeikyugakuTsuchishoInHeaderEditor implements ISeikyugakuTsuchishoIn
             return entity.getColumnValue();
         }
         return RString.EMPTY;
+    }
+
+    private RString パターン52(FlexibleYearMonth 年月) {
+        if (null == 年月) {
+            return RString.EMPTY;
+        }
+        return 年月.wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
 }

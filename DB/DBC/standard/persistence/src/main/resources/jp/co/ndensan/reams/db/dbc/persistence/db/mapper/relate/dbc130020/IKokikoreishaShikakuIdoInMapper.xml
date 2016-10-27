@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3020-040 qinzhen -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130020.IKokikoreishaShikakuIdoInMapper">
+    <select resultOrdered="true" id = "get取込後期高齢者情報" resultMap="後期高齢者情報ResultMap" fetchSize="500">
+        SELECT
+        T1.*,
+        T2.件数
+        FROM
+        "tempTorikomiKokuhoJyoho" AS T1
+        LEFT OUTER JOIN
+        (SELECT
+        T1."住民コード",
+        COUNT(T1."住民コード") AS 件数
+        FROM
+        "tempTorikomiKokuhoJyoho" AS T1
+        GROUP BY
+        T1."住民コード") AS T2
+        ON T1."住民コード" = T2."住民コード"
+        ORDER BY
+        T1."住民コード" ASC
+    </select>
+    
+    <select resultOrdered="true" id = "get構成市町村マスタ" resultType="jp.co.ndensan.reams.uz.uza.biz.LasdecCode" fetchSize="500">
+        SELECT
+        D1."shichosonCode"
+        FROM
+        rgdb."DbT5051KoseiShichosonMaster" as D1
+    </select>
+    
+    <select resultOrdered="true" id = "get後期高齢者情報作成用データ" 
+            resultMap="後期高齢者情報作成用データResultMap" fetchSize="500">
+        WITH master AS(
+        SELECT
+        データ件数,
+        T1.*
+        FROM
+        "tempTorikomiKokuhoJyoho" AS T1
+        LEFT OUTER JOIN
+        (
+        SELECT
+        COUNT (D2.*) AS データ件数
+        ,D2."shikibetsuCd"
+        FROM
+        "tempTorikomiKokuhoJyoho" AS T1,
+        rgdb. "DbT7124KokiKoreishaInfo" AS D2
+        WHERE D2."shikibetsuCd" = T1. "住民コード"
+        GROUP BY D2."shikibetsuCd"
+        ) AS D3
+        ON D3."shikibetsuCd" = T1. "住民コード"
+        )
+
+        SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        master AS master
+        LEFT OUTER JOIN
+        rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',(  
+        SELECT
+        ARRAY_AGG(CAST (master."住民コード" AS TEXT))
+        FROM
+        master
+        )) AS "ShikibetsuTaisho"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = master."住民コード"
+    </select>
+    
+    <select resultOrdered="true" id = "get後期高齢者情報インポート用データ" 
+            resultMap="後期高齢者情報インポート用データResultMap" fetchSize="500">
+        (SELECT
+        T1.*,
+        DbT7124KokiKoreishaInfo.*
+        FROM
+        "tempTorikomiKokuhoJyoho" AS T1
+        LEFT OUTER JOIN
+        rgdb."DbT7124KokiKoreishaInfo" AS DbT7124KokiKoreishaInfo
+        ON DbT7124KokiKoreishaInfo."shikibetsuCd" = T1."住民コード")
+        UNION
+        (SELECT
+        T1.*,
+        DbT7124KokiKoreishaInfo.*
+        FROM
+        rgdb."DbT7124KokiKoreishaInfo" AS DbT7124KokiKoreishaInfo
+        LEFT OUTER JOIN
+        "tempTorikomiKokuhoJyoho" AS T1
+        ON DbT7124KokiKoreishaInfo."shikibetsuCd" = T1."住民コード")        
+    </select>
+    
+    <select resultOrdered="true" id = "get取込後期高齢者情報インポート用Entityリスト" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.TorikomiKokiKoreshaJyohoImportEntity" fetchSize="500">
+        SELECT
+        *
+        FROM
+        "tempKokuhoShikakuJyohoInpotoyo"
+    </select>
+    
+    <select resultOrdered="true" id = "get取込後期高齢者情報インポート用Entitｙ件数" 
+            resultType="java.lang.Integer" fetchSize="500">
+        SELECT
+        COUNT(*)
+        FROM
+        "tempKokuhoShikakuJyohoInpotoyo"
+    </select>
+    
+    <delete id = "delete国保資格情報">
+        DELETE FROM rgdb."DbT7124KokiKoreishaInfo"
+    </delete>
+        
+    <resultMap  id="後期高齢者情報ResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoRealEntity" autoMapping="false">
+        <result property="件数" column="件数"/>
+        <association property="取込後期高齢者情報Entity" resultMap="ResultMap_取込後期高齢者情報"/>
+    </resultMap>
+    
+    <resultMap  id="後期高齢者情報作成用データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoDataYoEntity" autoMapping="false">
+        <result property="データ件数" column="データ件数"/>
+        <association property="取込後期高齢者情報Entity" resultMap="ResultMap_取込後期高齢者情報"/>
+        <association property="宛名識別対象Entity"  resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+    
+    <resultMap  id="後期高齢者情報インポート用データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoResultEntity" autoMapping="false">
+        <association property="取込後期高齢者情報Entity" resultMap="ResultMap_取込後期高齢者情報"/>
+        <association property="現在後期高齢者情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7124KokiKoreishaInfoMapper.ResultMap_DbT7124KokiKoreishaInfoEntity"/>
+    </resultMap>
+    
+    <resultMap id="ResultMap_取込後期高齢者情報" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.TorikomiKokiKoreshaJyohoEntity" autoMapping="true">
+        <result property="後期高齢保険者番号（市町村）" column="後期高齢保険者番号（市町村）" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後期高齢保険者番号（広域）" column="後期高齢保険者番号（広域）" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後期高齢被保険者番号" column="後期高齢被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得事由コード" column="資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得年月日" column="資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失事由コード" column="資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失年月日" column="資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険者適用開始年月日" column="保険者適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険者適用終了年月日" column="保険者適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="個人区分コード" column="個人区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="登録区分" column="登録区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="更新コード" column="更新コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="カナ氏名" column="カナ氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="性別コード" column="性別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所コード" column="住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区" column="行政区" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区コード" column="行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="エラーコード" column="エラーコード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="エラー文言" column="エラー文言" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="エラー区分" column="エラー区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+</mapper>

@@ -38,8 +38,8 @@
 			rgdb."DbT3001JukyushaIdoRenrakuhyo" AS DbT3001
 		WHERE
 			DbT3001."logicalDeletedFlag" = FALSE
-			AND DbT3001."ninteiYukoKikankaishiYMD" <![CDATA[<=]]> #{ninteiNengetu}
-			AND #{ninteiNengetu} <![CDATA[<=]]> DbT3001."ninteiYukoKikanShuryoYMD"
+			AND  substring(DbT3001."ninteiYukoKikankaishiYMD" from 0 for 7) <![CDATA[<=]]> #{ninteiNengetu}
+			AND #{ninteiNengetu} <![CDATA[<=]]> substring(DbT3001."ninteiYukoKikanShuryoYMD" from 0 for 7)
     </select>
     
     <select id="get一定期間内最新情報"

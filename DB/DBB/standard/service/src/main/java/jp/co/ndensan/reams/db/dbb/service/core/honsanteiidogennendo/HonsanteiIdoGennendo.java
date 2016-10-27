@@ -221,9 +221,9 @@ public class HonsanteiIdoGennendo {
      */
     public void setEntity(Shoriku entity, int countLog) {
         if (countLog == 1) {
-            entity.set計算処理区分(oneRS);
+            entity.set計算処理区分(twoRS);
         } else {
-            entity.set計算処理区分(zeroRS);
+            entity.set計算処理区分(oneRS);
         }
     }
 
@@ -232,63 +232,53 @@ public class HonsanteiIdoGennendo {
      *
      * @param 算定月 算定月
      * @param 調定年度 調定年度
-     * @return Shoriku
+     * @return 計算処理区分
      */
-    public Shoriku setShorikubun(RString 算定月, FlexibleYear 調定年度) {
+    public RString setShorikubun(RString 算定月, FlexibleYear 調定年度) {
         List<DbT7022ShoriDateKanriEntity> entityFir;
         List<DbT7022ShoriDateKanriEntity> entitySec;
         Shoriku entity = new Shoriku();
         entityFir = 処理日付管理Dac.selectShorikubun(SubGyomuCode.DBB介護賦課,
                 ShoriName.特徴対象者同定.get名称(), 調定年度);
         if (entityFir == null || entityFir.isEmpty()) {
-            return null;
+            entity.set計算処理区分(zeroRS);
+            return entity.get計算処理区分();
         }
         entitySec = 処理日付管理Dac.selectShorikubun(SubGyomuCode.DBB介護賦課,
                 ShoriName.依頼金額計算.get名称(), 調定年度);
-
-        if (entitySec == null || entitySec.isEmpty()) {
-            return null;
-        }
-
         if (tenRS.equals(算定月)) {
             countLog = this.getCountFlag(entityFir, zThrRS);
             if (countLog == 0) {
-                entity.set特徴同定区分(zeroRS);
                 entity.set計算処理区分(zeroRS);
-                return entity;
+                return entity.get計算処理区分();
             } else {
-                entity.set特徴同定区分(oneRS);
                 countLog = this.getCountFlag(entitySec, zFourRS);
                 this.setEntity(entity, countLog);
-                return entity;
+                return entity.get計算処理区分();
             }
         }
 
         if (twlRS.equals(算定月)) {
             countLog = this.getCountFlag(entityFir, zFourRS);
             if (countLog == 0) {
-                entity.set特徴同定区分(zeroRS);
                 entity.set計算処理区分(zeroRS);
-                return entity;
+                return entity.get計算処理区分();
             } else {
-                entity.set特徴同定区分(oneRS);
                 countLog = this.getCountFlag(entitySec, zFiveRS);
                 this.setEntity(entity, countLog);
-                return entity;
+                return entity.get計算処理区分();
             }
         }
 
         if (twoRS.equals(算定月)) {
             countLog = this.getCountFlag(entityFir, zFiveRS);
             if (countLog == 0) {
-                entity.set特徴同定区分(zeroRS);
                 entity.set計算処理区分(zeroRS);
-                return entity;
+                return entity.get計算処理区分();
             } else {
-                entity.set特徴同定区分(oneRS);
                 countLog = this.getCountFlag(entitySec, zSixRS);
                 this.setEntity(entity, countLog);
-                return entity;
+                return entity.get計算処理区分();
             }
         }
         return null;

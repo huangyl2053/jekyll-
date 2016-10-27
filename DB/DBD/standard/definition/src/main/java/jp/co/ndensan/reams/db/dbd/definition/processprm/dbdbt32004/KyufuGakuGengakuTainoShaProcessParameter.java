@@ -6,12 +6,10 @@
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32004;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenko.kyufugengakukanrilist.TaishoKubun;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt32004.KyufuGakuGengakuTainoShaMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 給付額減額滞納者把握情報取得_process処理のパラメタークラスです。
@@ -76,16 +74,6 @@ public class KyufuGakuGengakuTainoShaProcessParameter implements IBatchProcessPa
         this.改頁出力順ID = 改頁出力順ID;
         this.帳票ID = 帳票ID;
         this.帳票作成日時 = 帳票作成日時;
-    }
-
-    /**
-     * ＳＱＬ使用された情報を作成します．
-     *
-     * @param 出力順 出力順
-     * @return ＳＱＬ使用された情報を作成します．
-     */
-    public KyufuGakuGengakuTainoShaMybatisParameter toTaishoShaKanriJohoMybatisParameter(RString 出力順) {
-        return new KyufuGakuGengakuTainoShaMybatisParameter(出力順);
     }
 
 }

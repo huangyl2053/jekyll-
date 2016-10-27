@@ -40,6 +40,13 @@ public interface IServiceTypeInputCommonChildDiv extends ICommonChildDivBaseProp
     void clear();
 
     /**
+     * この共有子Divに設定されているデータを全てクリアします。
+     *
+     * @param flag boolean
+     */
+    void setRequired(boolean flag);
+
+    /**
      * サービス種類コードを取得します。
      *
      * @return RString

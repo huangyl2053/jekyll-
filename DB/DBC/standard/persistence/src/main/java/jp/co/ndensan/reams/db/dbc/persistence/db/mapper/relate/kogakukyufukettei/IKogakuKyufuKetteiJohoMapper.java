@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukyufukette
 
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3058KogakuShikyuShinsaKetteiTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3511KogakuShikyuShinsaKetteiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiChohyoDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiHanteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiTorokuEntity;
@@ -27,9 +27,9 @@ public interface IKogakuKyufuKetteiJohoMapper {
     /**
      * 高額介護サービス費支給審査決定一時TBLに登録する。
      *
-     * @param entity DbWT3058KogakuShikyuShinsaKetteiTempEntity
+     * @param entity DbWT3511KogakuShikyuShinsaKetteiTempEntity
      */
-    void do高額介護サービス費支給審査決定一時TBLに登録(DbWT3058KogakuShikyuShinsaKetteiTempEntity entity);
+    void do高額介護サービス費支給審査決定一時TBLに登録(DbWT3511KogakuShikyuShinsaKetteiTempEntity entity);
 
     /**
      * 審査決定一時データを更新済にする。更新済フラグFALSE->TRUE

@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsury
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 
@@ -69,9 +71,9 @@ public class KyufuKanrihyoPanelHandler {
             }
             DBC110010_KyufukanrihyoOutParameter parameter = new DBC110010_KyufukanrihyoOutParameter();
             parameter.set再処理区分(再処理区分);
-            parameter.set処理年月(処理年月);
+            parameter.set処理年月(new FlexibleYearMonth(処理年月.toString()));
             parameter.set出力順ID(new RString(出力順ID.toString()));
-            parameter.set最終更新年月日(div.getTxtSaishuKoshinbi().getValue());
+            parameter.set最終更新年月日(new FlexibleDate(div.getTxtSaishuKoshinbi().getValue().toString()));
             return parameter;
         }
         return null;

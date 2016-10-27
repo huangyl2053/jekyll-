@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki271;
 
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +26,7 @@ public class JigyohokokuCompYoshiki271Change {
     private RString listLower_1;
     private RString listLower_2;
     private RString listLower_3;
-    private RString 作成日時;
+    private RDateTime 作成日時;
     private RString 集計範囲;
     private RString 集計区分;
     private RString 保険者番号;
@@ -40,7 +41,7 @@ public class JigyohokokuCompYoshiki271Change {
      * @param listLower_1 給付額（世帯合算）
      * @param listLower_2 給付額（その他）
      * @param listLower_3 給付額（計）
-     * @param 作成日時 RString
+     * @param 作成日時 RDateTime
      * @param 集計範囲 RString
      * @param 集計区分 RString
      * @param 保険者番号 RString
@@ -52,7 +53,7 @@ public class JigyohokokuCompYoshiki271Change {
             RString listLower_1,
             RString listLower_2,
             RString listLower_3,
-            RString 作成日時,
+            RDateTime 作成日時,
             RString 集計範囲,
             RString 集計区分,
             RString 保険者番号,

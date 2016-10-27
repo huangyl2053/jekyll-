@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5720001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD572001.DBD572001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD572001.DBD572001_JukyushaDaichoIdoCheckListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5720001.JyukyushaDaichoIdoCheckListDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5720001.JyukyushaDaichoIdoCheckListHandler;
@@ -85,8 +85,8 @@ public class JyukyushaDaichoIdoCheckList {
      * @param div JyukyushaDaichoIdoCheckListDiv
      * @return ResponseData<JyukyushaDaichoIdoCheckListParameter>
      */
-    public ResponseData<DBD572001Parameter> onClick_btnBatchJiko(JyukyushaDaichoIdoCheckListDiv div) {
-        DBD572001Parameter parameter = getHandler(div).getParameter();
+    public ResponseData<DBD572001_JukyushaDaichoIdoCheckListParameter> onClick_btnBatchJiko(JyukyushaDaichoIdoCheckListDiv div) {
+        DBD572001_JukyushaDaichoIdoCheckListParameter parameter = getHandler(div).getParameter();
         return ResponseData.of(parameter).respond();
     }
 

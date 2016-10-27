@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd582001;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd582001.YokaigoNinteiTsukibetsuJukyushaMybatisParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -26,26 +27,70 @@ public class DBD582001ProcessParameter implements IBatchProcessParameter {
 
     private RString 基準フラグ;
     private FlexibleDate 年齢基準日;
-    private FlexibleDate 基準年月日;
-    private RString 基準年月;
+    private FlexibleDate 基準年月日04;
+    private FlexibleDate 基準年月日05;
+    private FlexibleDate 基準年月日06;
+    private FlexibleDate 基準年月日07;
+    private FlexibleDate 基準年月日08;
+    private FlexibleDate 基準年月日09;
+    private FlexibleDate 基準年月日10;
+    private FlexibleDate 基準年月日11;
+    private FlexibleDate 基準年月日12;
+    private FlexibleDate 基準年月日01;
+    private FlexibleDate 基準年月日02;
+    private FlexibleDate 基準年月日03;
+    private RString 基準年月04;
+    private RString 基準年月05;
+    private RString 基準年月06;
+    private RString 基準年月07;
+    private RString 基準年月08;
+    private RString 基準年月09;
+    private RString 基準年月10;
+    private RString 基準年月11;
+    private RString 基準年月12;
+    private RString 基準年月01;
+    private RString 基準年月02;
+    private RString 基準年月03;
     private FlexibleDate 生年月日From;
     private FlexibleDate 生年月日To;
     private RString 地区区分;
     private Code 開始地区コード;
     private Code 終了地区コード;
     private RString 集計単位;
-    private RString psmShikibetsuTaisho;
     private int 年齢From;
     private int 年齢To;
     private FlexibleYear 対象年度;
+    private IShikibetsuTaishoPSMSearchKey key;
 
     /**
      * コンストラクタです。
      *
      * @param 基準フラグ 基準フラグ
      * @param 年齢基準日 年齢基準日
-     * @param 基準年月日 基準年月日
-     * @param 基準年月 基準年月
+     * @param 基準年月日04 基準年月日04
+     * @param 基準年月日05 基準年月日05
+     * @param 基準年月日06 基準年月日06
+     * @param 基準年月日07 基準年月日07
+     * @param 基準年月日08 基準年月日08
+     * @param 基準年月日09 基準年月日09
+     * @param 基準年月日10 基準年月日10
+     * @param 基準年月日11 基準年月日11
+     * @param 基準年月日12 基準年月日12
+     * @param 基準年月日01 基準年月日01
+     * @param 基準年月日02 基準年月日02
+     * @param 基準年月日03 基準年月日03
+     * @param 基準年月04 基準年月04
+     * @param 基準年月05 基準年月05
+     * @param 基準年月06 基準年月06
+     * @param 基準年月07 基準年月07
+     * @param 基準年月08 基準年月08
+     * @param 基準年月09 基準年月09
+     * @param 基準年月10 基準年月10
+     * @param 基準年月11 基準年月11
+     * @param 基準年月12 基準年月12
+     * @param 基準年月01 基準年月01
+     * @param 基準年月02 基準年月02
+     * @param 基準年月03 基準年月03
      * @param 生年月日From 生年月日From
      * @param 生年月日To 生年月日To
      * @param 地区区分 地区区分
@@ -59,8 +104,30 @@ public class DBD582001ProcessParameter implements IBatchProcessParameter {
     public DBD582001ProcessParameter(
             RString 基準フラグ,
             FlexibleDate 年齢基準日,
-            FlexibleDate 基準年月日,
-            RString 基準年月,
+            FlexibleDate 基準年月日04,
+            FlexibleDate 基準年月日05,
+            FlexibleDate 基準年月日06,
+            FlexibleDate 基準年月日07,
+            FlexibleDate 基準年月日08,
+            FlexibleDate 基準年月日09,
+            FlexibleDate 基準年月日10,
+            FlexibleDate 基準年月日11,
+            FlexibleDate 基準年月日12,
+            FlexibleDate 基準年月日01,
+            FlexibleDate 基準年月日02,
+            FlexibleDate 基準年月日03,
+            RString 基準年月04,
+            RString 基準年月05,
+            RString 基準年月06,
+            RString 基準年月07,
+            RString 基準年月08,
+            RString 基準年月09,
+            RString 基準年月10,
+            RString 基準年月11,
+            RString 基準年月12,
+            RString 基準年月01,
+            RString 基準年月02,
+            RString 基準年月03,
             FlexibleDate 生年月日From,
             FlexibleDate 生年月日To,
             RString 地区区分,
@@ -72,8 +139,30 @@ public class DBD582001ProcessParameter implements IBatchProcessParameter {
             FlexibleYear 対象年度) {
         this.基準フラグ = 基準フラグ;
         this.年齢基準日 = 年齢基準日;
-        this.基準年月日 = 基準年月日;
-        this.基準年月 = 基準年月;
+        this.基準年月日04 = 基準年月日04;
+        this.基準年月日05 = 基準年月日05;
+        this.基準年月日06 = 基準年月日06;
+        this.基準年月日07 = 基準年月日07;
+        this.基準年月日08 = 基準年月日08;
+        this.基準年月日09 = 基準年月日09;
+        this.基準年月日10 = 基準年月日10;
+        this.基準年月日11 = 基準年月日11;
+        this.基準年月日12 = 基準年月日12;
+        this.基準年月日01 = 基準年月日01;
+        this.基準年月日02 = 基準年月日02;
+        this.基準年月日03 = 基準年月日03;
+        this.基準年月04 = 基準年月04;
+        this.基準年月05 = 基準年月05;
+        this.基準年月06 = 基準年月06;
+        this.基準年月07 = 基準年月07;
+        this.基準年月08 = 基準年月08;
+        this.基準年月09 = 基準年月09;
+        this.基準年月10 = 基準年月10;
+        this.基準年月11 = 基準年月11;
+        this.基準年月12 = 基準年月12;
+        this.基準年月01 = 基準年月01;
+        this.基準年月02 = 基準年月02;
+        this.基準年月03 = 基準年月03;
         this.生年月日From = 生年月日From;
         this.生年月日To = 生年月日To;
         this.地区区分 = 地区区分;
@@ -95,8 +184,30 @@ public class DBD582001ProcessParameter implements IBatchProcessParameter {
         return new YokaigoNinteiTsukibetsuJukyushaMybatisParameter(
                 基準フラグ,
                 年齢基準日,
-                基準年月日,
-                基準年月,
+                基準年月日04,
+                基準年月日05,
+                基準年月日06,
+                基準年月日07,
+                基準年月日08,
+                基準年月日09,
+                基準年月日10,
+                基準年月日11,
+                基準年月日12,
+                基準年月日01,
+                基準年月日02,
+                基準年月日03,
+                基準年月04,
+                基準年月05,
+                基準年月06,
+                基準年月07,
+                基準年月08,
+                基準年月09,
+                基準年月10,
+                基準年月11,
+                基準年月12,
+                基準年月01,
+                基準年月02,
+                基準年月03,
                 生年月日From,
                 生年月日To,
                 地区区分,
@@ -105,6 +216,6 @@ public class DBD582001ProcessParameter implements IBatchProcessParameter {
                 集計単位,
                 年齢From,
                 年齢To,
-                psmShikibetsuTaisho);
+                key);
     }
 }

@@ -13,29 +13,7 @@
         WHERE rgdb."DbT7022ShoriDateKanri"."nendo" = #{調定年度}
         AND   rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBB'
     </select>
-<!--    <resultMap id="ResultMap_DbT7022ShoriDateKanriEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" autoMapping="true">
-        <id property="subGyomuCode" column="dbT7022ShoriDateKanri_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
-        <id property="shichosonCode" column="dbT7022ShoriDateKanri_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <id property="shoriName" column="dbT7022ShoriDateKanri_shoriName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="shoriEdaban" column="dbT7022ShoriDateKanri_shoriEdaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="nendo" column="dbT7022ShoriDateKanri_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="nendoNaiRenban" column="dbT7022ShoriDateKanri_nendoNaiRenban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="insertDantaiCd" column="dbT7022ShoriDateKanri_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="insertTimestamp" column="dbT7022ShoriDateKanri_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="insertReamsLoginId" column="dbT7022ShoriDateKanri_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="insertContextId" column="dbT7022ShoriDateKanri_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
-        <result property="isDeleted" column="dbT7022ShoriDateKanri_isDeleted" />
-        <result property="updateCount" column="dbT7022ShoriDateKanri_updateCount" />
-        <result property="lastUpdateTimestamp" column="dbT7022ShoriDateKanri_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="lastUpdateReamsLoginId" column="dbT7022ShoriDateKanri_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kijunYMD" column="dbT7022ShoriDateKanri_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="kijunTimestamp" column="dbT7022ShoriDateKanri_kijunTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
-        <result property="taishoKaishiYMD" column="dbT7022ShoriDateKanri_taishoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="taishoShuryoYMD" column="dbT7022ShoriDateKanri_taishoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="taishoKaishiTimestamp" column="dbT7022ShoriDateKanri_taishoKaishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
-        <result property="taishoShuryoTimestamp" column="dbT7022ShoriDateKanri_taishoShuryoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
-    </resultMap>-->
-    
+  
     <select resultOrdered="true" id="select徴収方法Newest" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nendokirikae.NendoKirikaeMybatisParameter"
             resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity" fetchSize="500">
@@ -49,28 +27,30 @@
     </select>
     
     <select resultOrdered="true" id="select業務コンフィグ" 
-            resultMap="ResultMap_UzT0001StandardConfigEntity" fetchSize="500">
+            resultMap="ResultMap_UzT0002CustomConfigEntity" fetchSize="500">
         SELECT *
         FROM
-        rgdb."UzT0001StandardConfig"
-        WHERE rgdb."UzT0001StandardConfig"."configName" = '日付関連_調定年度'
+        rgdb."UzT0002CustomConfig"
+        WHERE rgdb."UzT0002CustomConfig"."configName" = '日付関連_調定年度'
     </select>
-    <resultMap id="ResultMap_UzT0001StandardConfigEntity" type="jp.co.ndensan.reams.uz.uza.util.config.entity.UzT0001StandardConfigEntity" autoMapping="true">
+    <resultMap id="ResultMap_UzT0002CustomConfigEntity" type="jp.co.ndensan.reams.uz.uza.util.config.entity.UzT0002CustomConfigEntity" autoMapping="true">
         <id property="schemaName" column="schemaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="subGyomuCode" column="subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
         <id property="configName" column="configName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="insertDantaiCd" column="insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="insertTimestamp" column="insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <id property="insertTimestamp" column="insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <id property="lasdecCode" column="lasdecCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="optionKeyword" column="optionKeyword" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="effectiveDate" column="effectiveDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
+        <result property="insertDantaiCd" column="insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>  
         <result property="insertReamsLoginId" column="insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertContextId" column="insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
         <result property="isDeleted" column="isDeleted" />
         <result property="updateCount" column="updateCount" />
         <result property="lastUpdateTimestamp" column="lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="javaType" column="javaType" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="theyCanChange" column="theyCanChange" />
         <result property="configValue" column="configValue" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="configDesc" column="configDesc" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="changeLog" column="changeLog" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seq" column="seq" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.BigSerialTypeHandler"/>
     </resultMap>
     
     <select resultOrdered="true" id="select処理日付管理マスタ更新" 

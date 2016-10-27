@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-1510-020 x_xuliang -->
+<!-- ファイルデータ一時テーブル検索 -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteikekkarenkeidetatorikomi.IFairudetaIchijiTeburuMapper">
+    <select id="getファイルデータ一時テーブル"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu.FairudetaIchijiTeburuEntity" 
+            fetchSize="500" resultOrdered="true">
+        SELECT *
+        FROM "FairudetaIchijiTeburuTemp"
+    </select>
+</mapper>

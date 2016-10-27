@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1300011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuhiTuchiHosei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuhiTuchiHoseiIdentifier;
@@ -33,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -47,6 +49,8 @@ public class KyufuTsuchiGenmenHoseiToroku {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
+    private static final RString ADDED = new RString("Added");
+    private static final RString BTN_HOZON = new RString("btnHozon");
     private static final int NUM_6 = 6;
     private static final RString 完了メッセージ = new RString("給付費通知減免情報の更新が正常に行われました");
 
@@ -69,7 +73,7 @@ public class KyufuTsuchiGenmenHoseiToroku {
      * @return ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv>
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonHyouji(KyufuTsuchiGenmenHoseiTorokuDiv div) {
-        //QA1687:給付実績検索画面(DBC0010011)に遷移する
+        //#100344のご指示によって、ペンディングとする
         // return ResponseData.of(div).forwardWithEventName(DBC1300011TransitionEventName.).respond();
         return ResponseData.of(div).respond();
     }
@@ -111,7 +115,19 @@ public class KyufuTsuchiGenmenHoseiToroku {
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonTuika(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().setState(状態_追加);
+        div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(true);
+        div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(true);
+        div.getTextBoxDateSaabisu().setDisabled(false);
+        div.getCcdHokenshaList().setDisabled(false);
+        div.getCcdJigyoshaInput().setDisabled(false);
+        div.getCcdServiceTypeInput().setDisabled(false);
+        div.getTextBoxFudangoukei().setDisabled(false);
+        div.getTextBoxNumHiyouGoukei().setDisabled(false);
+        div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(RString.EMPTY);
+        div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdJigyoshaInput().setShisetsuMeisho(RString.EMPTY);
+        div.getCcdServiceTypeInput().clear();
         getHandler(div).tuika();
+        div.getKyufuTsuchiGenmenHoseiTorokuDetail().setHiddenInputDiv(getHandler(div).getInputDiv());
         return ResponseData.of(div).respond();
     }
 
@@ -123,7 +139,16 @@ public class KyufuTsuchiGenmenHoseiToroku {
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonModify(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().setState(状態_修正);
+        div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(true);
+        div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(true);
+        div.getTextBoxDateSaabisu().setDisabled(true);
+        div.getCcdHokenshaList().setDisabled(true);
+        div.getCcdJigyoshaInput().setDisabled(true);
+        div.getCcdServiceTypeInput().setDisabled(true);
+        div.getTextBoxFudangoukei().setDisabled(false);
+        div.getTextBoxNumHiyouGoukei().setDisabled(false);
         getHandler(div).modify();
+        div.getKyufuTsuchiGenmenHoseiTorokuDetail().setHiddenInputDiv(getHandler(div).getInputDiv());
         return ResponseData.of(div).respond();
     }
 
@@ -139,19 +164,36 @@ public class KyufuTsuchiGenmenHoseiToroku {
         Models<KyufuhiTuchiHoseiIdentifier, KyufuhiTuchiHosei> models
                 = ViewStateHolder.get(ViewStateKeys.給付費通知補正, Models.class);
         div.getKyufuTsuchiGenmenHoseiTorokuDetail().setState(状態_削除);
+        div.getTextBoxDateSaabisu().setDisabled(true);
+        div.getCcdHokenshaList().setDisabled(true);
+        div.getCcdJigyoshaInput().setDisabled(true);
+        div.getCcdServiceTypeInput().setDisabled(true);
+        div.getTextBoxFudangoukei().setDisabled(true);
+        div.getTextBoxNumHiyouGoukei().setDisabled(true);
         DataGridItiran_Row row = div.getDataGridItiran().getActiveRow();
-        row.setRowState(RowState.Deleted);
+        int index = div.getDataGridItiran().getClickedRowId();
+        RString jotai = new RString(row.getRowState().toString());
         KyufuhiTuchiHoseiIdentifier key = new KyufuhiTuchiHoseiIdentifier(new HokenshaNo(row.getTxtShokisaiNo()),
                 hiHokenshaNo,
                 new FlexibleYearMonth(row.getTxtServiceNengetsu()),
                 new JigyoshaNo(row.getTxtJigyoshaNo()),
                 new ServiceShuruiCode(row.getTxtServiceShurui().substring(0, 2)),
                 Decimal.ONE);
-        KyufuhiTuchiHosei kyufuhiTuchiHosei = models.get(key).deleted();
-        models.deleteOrRemove(key);
-        models.add(kyufuhiTuchiHosei);
-        ViewStateHolder.put(ViewStateKeys.給付費通知補正, models);
-        getHandler(div).delete();
+        if (ADDED.equals(jotai)) {
+            models.deleteOrRemove(key);
+            div.getDataGridItiran().getDataSource().remove(index);
+            getHandler(div).back();
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_HOZON, true);
+        } else {
+            row.setRowState(RowState.Deleted);
+            KyufuhiTuchiHosei kyufuhiTuchiHosei = models.get(key).deleted();
+            models.deleteOrRemove(key);
+            models.add(kyufuhiTuchiHosei);
+            ViewStateHolder.put(ViewStateKeys.給付費通知補正, models);
+            getHandler(div).delete();
+        }
+        div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(true);
+        div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -173,7 +215,7 @@ public class KyufuTsuchiGenmenHoseiToroku {
                     get(ViewStateKeys.給付費通知補正, Models.class);
             KyufuhiTuchiHoseiManager kyufuhiTuchiHoseiManager = KyufuhiTuchiHoseiManager.createInstance();
             for (KyufuhiTuchiHosei kyufuhiTuchiHosei : models) {
-                kyufuhiTuchiHoseiManager.save給付費通知補正(kyufuhiTuchiHosei);
+                kyufuhiTuchiHoseiManager.saveOrdelete給付費通知補正(kyufuhiTuchiHosei);
             }
             TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             HihokenshaNo hiHokenshaNo = 資格対象者.get被保険者番号();
@@ -210,7 +252,11 @@ public class KyufuTsuchiGenmenHoseiToroku {
      * @return ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv>
      */
     public ResponseData<KyufuTsuchiGenmenHoseiTorokuDiv> onClick_ButtonKakutei(KyufuTsuchiGenmenHoseiTorokuDiv div) {
-
+        div.getKyufuTsuchiGenmenHoseiTorokuSearch().setDisabled(false);
+        div.getKyufuTsuchiGenmenHoseiTorokuList().setDisabled(false);
+        if (changeCheck(div)) {
+            return ResponseData.of(div).respond();
+        }
         if (kakutei(div)) {
             addDataGrid(div);
         } else {
@@ -301,6 +347,10 @@ public class KyufuTsuchiGenmenHoseiToroku {
                     new ServiceShuruiCode(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdServiceTypeInput().getサービス種類コード()),
                     Decimal.ONE);
             kyufuhiTuchiHosei = getHandler(div).edit(kyufuhiTuchiHosei);
+            if (models == null) {
+                List<KyufuhiTuchiHosei> list = new ArrayList<>();
+                models = Models.create(list);
+            }
             models.add(kyufuhiTuchiHosei);
         } else if (状態_修正.equals(イベント状態)) {
             KyufuhiTuchiHoseiIdentifier key = new KyufuhiTuchiHoseiIdentifier(new HokenshaNo(div.getKyufuTsuchiGenmenHoseiTorokuDetail().
@@ -338,5 +388,17 @@ public class KyufuTsuchiGenmenHoseiToroku {
 
     private KyufuTsuchiGenmenHoseiTorokuHandler getHandler(KyufuTsuchiGenmenHoseiTorokuDiv div) {
         return new KyufuTsuchiGenmenHoseiTorokuHandler(div);
+    }
+
+    private boolean changeCheck(KyufuTsuchiGenmenHoseiTorokuDiv div) {
+        RString state = div.getKyufuTsuchiGenmenHoseiTorokuDetail().getState();
+        if ((状態_追加.equals(state) || 状態_修正.equals(state)) && (状態_修正.equals(state) && !isUpdate(div))) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isUpdate(KyufuTsuchiGenmenHoseiTorokuDiv div) {
+        return !getHandler(div).getInputDiv().equals(div.getKyufuTsuchiGenmenHoseiTorokuDetail().getHiddenInputDiv());
     }
 }

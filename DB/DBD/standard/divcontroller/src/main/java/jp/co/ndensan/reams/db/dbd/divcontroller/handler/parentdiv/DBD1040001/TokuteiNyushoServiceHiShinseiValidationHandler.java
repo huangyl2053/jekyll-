@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1040001;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040001.TokuteiNyushoServiceHiShinseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040001.TokuteiNyushoServiceHiShinseiPanelDivSpec;
+import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuChiikiKasanGemmenService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
@@ -42,90 +45,91 @@ public class TokuteiNyushoServiceHiShinseiValidationHandler {
         return pairs;
     }
 
-//    /**
-//     * 決定区分の必須入力チェックを行います。
-//     *
-//     * @param pairs バリデーションコントロール
-//     * @param div RiyoshaFutangakuGengakuPanelDiv
-//     * @return バリデーション結果
-//     */
-//    public ValidationMessageControlPairs validateFor決定区分の必須入力(ValidationMessageControlPairs pairs, TokuteiNyushoServiceHiShinseiDiv div) {
-//
-//        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-//        messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.決定区分の非空チェック)
-//                .thenAdd(TokuteiNyushoServiceHiShinseiMessages.決定区分の必須入力).messages());
-//        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-//                TokuteiNyushoServiceHiShinseiMessages.決定区分の必須入力, div.getShinseiDetail().getRadKettaiKubun()).build().check(messages));
-//        return pairs;
-//    }
-//
-//    /**
-//     * 決定日の必須入力チェックを行います。
-//     *
-//     * @param pairs バリデーションコントロール
-//     * @param div RiyoshaFutangakuGengakuPanelDiv
-//     * @return バリデーション結果
-//     */
-//    public ValidationMessageControlPairs validateFor決定日の必須入力(ValidationMessageControlPairs pairs, TokuteiNyushoServiceHiShinseiDiv div) {
-//
-//        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-//        messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.決定日の非空チェック)
-//                .thenAdd(TokuteiNyushoServiceHiShinseiMessages.決定日の必須入力).messages());
-//        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-//                TokuteiNyushoServiceHiShinseiMessages.決定日の必須入力, div.getShinseiDetail().getTxtKettaiYMD()).build().check(messages));
-//        return pairs;
-//    }
-//
-//    /**
-//     * 適用日の必須入力チェックを行います。
-//     *
-//     * @param pairs バリデーションコントロール
-//     * @param div RiyoshaFutangakuGengakuPanelDiv
-//     * @return バリデーション結果
-//     */
-//    public ValidationMessageControlPairs validateFor適用日の必須入力(ValidationMessageControlPairs pairs, TokuteiNyushoServiceHiShinseiDiv div) {
-//
-//        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-//        messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.適用日の非空チェック)
-//                .thenAdd(TokuteiNyushoServiceHiShinseiMessages.適用日の必須入力).messages());
-//        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-//                TokuteiNyushoServiceHiShinseiMessages.適用日の必須入力, div.getShinseiDetail().getTxtTekiyoYMD()).build().check(messages));
-//        return pairs;
-//    }
-//
-//    /**
-//     * 有効期限の必須入力チェックを行います。
-//     *
-//     * @param pairs バリデーションコントロール
-//     * @param div RiyoshaFutangakuGengakuPanelDiv
-//     * @return バリデーション結果
-//     */
-//    public ValidationMessageControlPairs validateFor有効期限の必須入力(ValidationMessageControlPairs pairs, TokuteiNyushoServiceHiShinseiDiv div) {
-//
-//        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-//        messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.有効期限の非空チェック)
-//                .thenAdd(TokuteiNyushoServiceHiShinseiMessages.有効期限の必須入力).messages());
-//        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-//                TokuteiNyushoServiceHiShinseiMessages.有効期限の必須入力, div.getShinseiDetail().getTxtYukoKigenYMD()).build().check(messages));
-//        return pairs;
-//    }
-//
-//    /**
-//     * 軽減率の必須入力チェックを行います。
-//     *
-//     * @param pairs バリデーションコントロール
-//     * @param div RiyoshaFutangakuGengakuPanelDiv
-//     * @return バリデーション結果
-//     */
-//    public ValidationMessageControlPairs validateFor軽減率の必須入力(ValidationMessageControlPairs pairs, TokuteiNyushoServiceHiShinseiDiv div) {
-//
-//        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-//        messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.軽減率の非空チェック)
-//                .thenAdd(TokuteiNyushoServiceHiShinseiMessages.軽減率の必須入力).messages());
-//        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-//                TokuteiNyushoServiceHiShinseiMessages.軽減率の必須入力, div.getShinseiDetail().getTxtKeigenRitsu()).build().check(messages));
-//        return pairs;
-//    }
+    /**
+     * 決定区分の必須入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div RiyoshaFutangakuGengakuPanelDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor決定区分の必須入力(ValidationMessageControlPairs pairs, TokuteiNyushoServiceHiShinseiDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.決定区分の非空チェック)
+                .thenAdd(TokuteiNyushoServiceHiShinseiMessages.決定区分の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                TokuteiNyushoServiceHiShinseiMessages.決定区分の必須入力, div.getShinseiDetail().getRadKettaiKubun()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 決定日の必須入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div RiyoshaFutangakuGengakuPanelDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor決定日の必須入力(ValidationMessageControlPairs pairs, TokuteiNyushoServiceHiShinseiDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.決定日の非空チェック)
+                .thenAdd(TokuteiNyushoServiceHiShinseiMessages.決定日の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                TokuteiNyushoServiceHiShinseiMessages.決定日の必須入力, div.getShinseiDetail().getTxtKettaiYMD()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 適用日の必須入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div RiyoshaFutangakuGengakuPanelDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor適用日の必須入力(ValidationMessageControlPairs pairs, TokuteiNyushoServiceHiShinseiDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.適用日の非空チェック)
+                .thenAdd(TokuteiNyushoServiceHiShinseiMessages.適用日の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                TokuteiNyushoServiceHiShinseiMessages.適用日の必須入力, div.getShinseiDetail().getTxtTekiyoYMD()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 有効期限の必須入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div RiyoshaFutangakuGengakuPanelDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor有効期限の必須入力(ValidationMessageControlPairs pairs, TokuteiNyushoServiceHiShinseiDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.有効期限の非空チェック)
+                .thenAdd(TokuteiNyushoServiceHiShinseiMessages.有効期限の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                TokuteiNyushoServiceHiShinseiMessages.有効期限の必須入力, div.getShinseiDetail().getTxtYukoKigenYMD()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 軽減率の必須入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div RiyoshaFutangakuGengakuPanelDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor軽減率の必須入力(ValidationMessageControlPairs pairs, TokuteiNyushoServiceHiShinseiDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.軽減率の非空チェック)
+                .thenAdd(TokuteiNyushoServiceHiShinseiMessages.軽減率の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                TokuteiNyushoServiceHiShinseiMessages.軽減率の必須入力, div.getShinseiDetail().getTxtKeigenRitsu()).build().check(messages));
+        return pairs;
+    }
+
     /**
      * 特別地域加算減免_適用開始日が法施行以前のチェックを行います。
      *
@@ -206,12 +210,24 @@ public class TokuteiNyushoServiceHiShinseiValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateFor特別地域加算減免_軽減率範囲外(ValidationMessageControlPairs pairs, TokuteiNyushoServiceHiShinseiDiv div) {
-
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.特別地域加算減免_軽減率範囲外のチェック)
-                .thenAdd(TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲外).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲外, div.getShinseiDetail().getTxtKeigenRitsu()).build().check(messages));
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getCcdKaigoKihon().get被保険者番号());
+        TokubetsuChiikiKasanGemmenService service = TokubetsuChiikiKasanGemmenService.createIntance();
+        FutanwariaiKubun 負担割合区分 = service.get利用者負担割合(被保険者番号, div.getShinseiDetail().getTxtShinseiYMD().getValue());
+        if (負担割合区分.getコード().equals(FutanwariaiKubun._２割.getコード())) {
+            messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.特別地域加算減免_軽減率範囲81外のチェック)
+                    .thenAdd(TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲81外).messages());
+            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                    TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲81外, div.getShinseiDetail().getTxtKeigenRitsu()).build().check(messages));
+            return pairs;
+        }
+        if (負担割合区分.getコード().equals(FutanwariaiKubun._１割.getコード())) {
+            messages.add(ValidateChain.validateStart(div).ifNot(TokuteiNyushoServiceHiShinseiPanelDivSpec.特別地域加算減免_軽減率範囲91外のチェック)
+                    .thenAdd(TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲91外).messages());
+            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                    TokuteiNyushoServiceHiShinseiMessages.特別地域加算減免_軽減率範囲91外, div.getShinseiDetail().getTxtKeigenRitsu()).build().check(messages));
+            return pairs;
+        }
         return pairs;
     }
 
@@ -253,13 +269,14 @@ public class TokuteiNyushoServiceHiShinseiValidationHandler {
 
     private static enum TokuteiNyushoServiceHiShinseiMessages implements IValidationMessage {
 
-        申請日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "申請日"),
-        //        決定区分の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "決定区分"),
-        //        決定日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "決定日"),
-        //        適用日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "適用日"),
-        //        有効期限の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "有効期限"),
-        //        軽減率の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "給付率");
-        特別地域加算減免_軽減率範囲外(DbdErrorMessages.特別地域加算減免_軽減率範囲外),
+        申請日の必須入力(UrErrorMessages.必須, "申請日"),
+        決定区分の必須入力(UrErrorMessages.必須, "決定区分"),
+        決定日の必須入力(UrErrorMessages.必須, "決定日"),
+        適用日の必須入力(UrErrorMessages.必須, "適用日"),
+        有効期限の必須入力(UrErrorMessages.必須, "有効期限"),
+        軽減率の必須入力(UrErrorMessages.必須, "軽減率"),
+        特別地域加算減免_軽減率範囲81外(DbdErrorMessages.特別地域加算減免_軽減率範囲外, "81"),
+        特別地域加算減免_軽減率範囲91外(DbdErrorMessages.特別地域加算減免_軽減率範囲外, "91"),
         減免減額_適用日が法施行前(DbdErrorMessages.減免減額_適用日が法施行前),
         減免減額_有効期限が年度外(DbdErrorMessages.減免減額_有効期限が年度外),
         減免減額_有効期限が適用日以前(DbdErrorMessages.減免減額_有効期限が適用日以前),

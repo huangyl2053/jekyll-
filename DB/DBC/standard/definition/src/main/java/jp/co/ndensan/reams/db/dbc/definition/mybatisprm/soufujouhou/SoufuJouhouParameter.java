@@ -21,6 +21,7 @@ public final class SoufuJouhouParameter implements IMyBatisParameter {
     private final RString 証記載保険者番号;
     private final boolean 送付年月フラグ;
     private final boolean 保険者番号フラグ;
+    private final RString psmShikibetsuTaisho;
 
     /**
      * コンストラクタです。
@@ -29,13 +30,15 @@ public final class SoufuJouhouParameter implements IMyBatisParameter {
      * @param 証記載保険者番号 証記載保険者番号
      * @param 送付年月フラグ 送付年月フラグ
      * @param 保険者番号フラグ 保険者番号フラグ
+     * @param psmShikibetsuTaisho PSM宛名
      */
     protected SoufuJouhouParameter(RString 送付年月, RString 証記載保険者番号,
-            boolean 送付年月フラグ, boolean 保険者番号フラグ) {
+            boolean 送付年月フラグ, boolean 保険者番号フラグ, RString psmShikibetsuTaisho) {
         this.送付年月 = 送付年月;
         this.証記載保険者番号 = 証記載保険者番号;
         this.送付年月フラグ = 送付年月フラグ;
         this.保険者番号フラグ = 保険者番号フラグ;
+        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
     /**
@@ -45,11 +48,11 @@ public final class SoufuJouhouParameter implements IMyBatisParameter {
      * @param 証記載保険者番号 証記載保険者番号
      * @param 送付年月フラグ 送付年月フラグ
      * @param 保険者番号フラグ 保険者番号フラグ
+     * @param psmShikibetsuTaisho PSM宛名
      * @return SoufuJouhouParameter
      */
     public static SoufuJouhouParameter creatParameter(RString 送付年月, RString 証記載保険者番号,
-            boolean 送付年月フラグ, boolean 保険者番号フラグ) {
-        return new SoufuJouhouParameter(送付年月, 証記載保険者番号, 送付年月フラグ, 保険者番号フラグ);
+            boolean 送付年月フラグ, boolean 保険者番号フラグ, RString psmShikibetsuTaisho) {
+        return new SoufuJouhouParameter(送付年月, 証記載保険者番号, 送付年月フラグ, 保険者番号フラグ, psmShikibetsuTaisho);
     }
-
 }

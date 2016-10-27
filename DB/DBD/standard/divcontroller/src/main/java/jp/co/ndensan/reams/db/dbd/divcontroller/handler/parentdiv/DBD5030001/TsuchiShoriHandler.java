@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
@@ -101,11 +100,6 @@ public class TsuchiShoriHandler {
         for (dgtsuchishohakko_Row row : 画面更新情報) {
             for (TsuchishoHakkoJoho tsuchishoHakkoJoho : tsuchishoHakkoJohoList) {
                 if (row.getShinseishoKanriNo().equals(tsuchishoHakkoJoho.get申請書管理番号().value())) {
-                    tsuchishoHakkoJoho = tsuchishoHakkoJoho.createBuilderForEdit()
-                            .set通知完了年月日(new FlexibleDate(RDate.getNowDate().toString()))
-                            .build()
-                            .modifiedModel();
-                    manager.save(tsuchishoHakkoJoho);
                     更新Flag = true;
                 }
             }

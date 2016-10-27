@@ -21,6 +21,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoJogaiTokureiTaishoShisetsuEntity {
 
+    private RString 特例施設入退所_事業者種別;
     private ShikibetsuCode 特例施設入退所_識別コード;
     private FlexibleDate 特例施設入退所_有効開始年月日;
     private FlexibleDate 特例施設入退所_有効終了年月日;

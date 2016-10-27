@@ -114,7 +114,6 @@ public class KogakuServicehiHanteiErrorIchiranEditor implements IKogakuServicehi
                 source.listHanteiError_3 = new RString(entity.getサービス提供年月().toString());
             }
             source.listHanteiError_4 = entity.get被保険者名();
-            //TODO エラーコードより、.エラーコード内容を出力する (QA#989)
             source.listHanteiError_5 = entity.getエラーコード();
             source.listHanteiError_6 = entity.get世帯コード();
             source.listHanteiError_7 = entity.get世帯員識別コード();

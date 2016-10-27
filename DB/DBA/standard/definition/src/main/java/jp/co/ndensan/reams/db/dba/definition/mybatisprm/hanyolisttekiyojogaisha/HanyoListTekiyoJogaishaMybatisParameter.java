@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.definition.mybatisprm.hanyolisttekiyojogaisha;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.common.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tekiyojogaisha.HaniChushutsubiKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tekiyojogaisha.JiyuChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tekiyojogaisha.KijunbiKubun;
@@ -60,6 +60,7 @@ public class HanyoListTekiyoJogaishaMybatisParameter implements IMyBatisParamete
     private final List<RString> kaijoJiyu;
     private final RString psmShikibetsuTaisho;
     private final RString psmAtesaki;
+    private final RString 出力順;
 
     /**
      * コンストラクタです。
@@ -96,6 +97,7 @@ public class HanyoListTekiyoJogaishaMybatisParameter implements IMyBatisParamete
      * @param has生年月日範囲開始 has生年月日範囲開始
      * @param psmShikibetsuTaisho 宛名識別対象抽出PSM
      * @param psmAtesaki 宛先抽出PSM
+     * @param 出力順 出力順
      */
     protected HanyoListTekiyoJogaishaMybatisParameter(
             RString kijunYMD,
@@ -129,7 +131,8 @@ public class HanyoListTekiyoJogaishaMybatisParameter implements IMyBatisParamete
             boolean has生年月日範囲終了,
             boolean has生年月日範囲開始,
             RString psmShikibetsuTaisho,
-            RString psmAtesaki
+            RString psmAtesaki,
+            RString 出力順
     ) {
         this.kijunYMD = kijunYMD;
         this.haniChushutsunichiFrom = haniChushutsunichiFrom;
@@ -171,6 +174,7 @@ public class HanyoListTekiyoJogaishaMybatisParameter implements IMyBatisParamete
         this.has生年月日範囲開始 = has生年月日範囲開始;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
+        this.出力順 = 出力順;
     }
 
     /**
@@ -195,6 +199,7 @@ public class HanyoListTekiyoJogaishaMybatisParameter implements IMyBatisParamete
      * @param is施設変更なし is施設変更なし
      * @param psmShikibetsuTaisho 宛名識別対象抽出PSM
      * @param psmAtesaki 宛先抽出PSM
+     * @param 出力順 出力順
      * @return SeikatsuhogoJukyushaMybatisParameter
      */
     public static HanyoListTekiyoJogaishaMybatisParameter creatParameter(
@@ -216,7 +221,8 @@ public class HanyoListTekiyoJogaishaMybatisParameter implements IMyBatisParamete
             boolean is施設変更あり,
             boolean is施設変更なし,
             RString psmShikibetsuTaisho,
-            RString psmAtesaki) {
+            RString psmAtesaki,
+            RString 出力順) {
         boolean is年齢 = false;
         boolean is生年月日 = false;
         boolean is直近 = false;
@@ -310,7 +316,8 @@ public class HanyoListTekiyoJogaishaMybatisParameter implements IMyBatisParamete
                 has生年月日範囲終了,
                 has生年月日範囲開始,
                 psmShikibetsuTaisho,
-                psmAtesaki);
+                psmAtesaki,
+                出力順);
     }
 
     private static boolean nullHandan(Decimal 宛名抽出年齢) {

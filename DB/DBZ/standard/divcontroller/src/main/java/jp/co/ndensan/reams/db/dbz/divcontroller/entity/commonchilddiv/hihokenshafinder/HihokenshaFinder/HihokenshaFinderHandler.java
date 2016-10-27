@@ -8,24 +8,21 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensh
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
 import static jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke.日付関連_当初年度;
 import static jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke.日付関連_所得年度;
 import static jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke.日付関連_調定年度;
 import static jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke.日付関連_遡及年度;
+import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper.FukaTaishoshaSearchValidationHelper;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ur.urz.definition.core.saikinshoririreki.ScopeCode;
 import jp.co.ndensan.reams.ur.urz.definition.core.saikinshoririreki.ScopeCodeType;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.SaikinShorishaRireki.RecentUsedDdlValue;
 import jp.co.ndensan.reams.ur.urz.service.core.saikinshoririreki.ISaikinShorishaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.saikinshoririreki.RecentUsedManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -110,7 +107,7 @@ public class HihokenshaFinderHandler {
     FlexibleYear get賦課年度() {
         DropDownList item = div.getKaigoFinder().getDdlFukaNendo();
         return (item != null && item.getSelectedKey() != null && !item.getSelectedKey().equals(FlexibleYear.MAX.toDateString()))
-               ? new FlexibleYear(item.getSelectedKey().toString()) : FlexibleYear.MAX;
+                ? new FlexibleYear(item.getSelectedKey().toString()) : FlexibleYear.MAX;
     }
 
     /**
@@ -164,7 +161,7 @@ public class HihokenshaFinderHandler {
      * 最近処理者を読み込みます。
      */
     void load最近処理者() {
-        div.getCcdSaikinShorisha().setInitialLoad(new ScopeCode(ScopeCodeType.識別対象.getCode()));
+        div.getCcdSaikinShorisha().setInitialLoad(new ScopeCode(ScopeCodeType.個人.getCode()));
     }
 
     /**
@@ -174,7 +171,7 @@ public class HihokenshaFinderHandler {
      * @param 名称 名称
      */
     void save最近処理者(ShikibetsuCode 識別コード, AtenaMeisho 名称) {
-        saikinShorishaManager.save(new ScopeCode(ScopeCodeType.識別対象.getCode()), 識別コード.value(), 名称.value());
+        saikinShorishaManager.save(new ScopeCode(ScopeCodeType.個人.getCode()), 識別コード.value(), 名称.value());
     }
 
     /**
@@ -211,7 +208,7 @@ public class HihokenshaFinderHandler {
             開始年度 = 所得年度;
             終了年度 = 当初年度;
             firstIndex = 0;
-        } else if (menu.is(FukaSearchMenuGroup.照会系)) {
+        } else if (menu.is(FukaSearchMenuGroup.照会系) || menu.uIContainerId().isEmpty()) {
             開始年度 = 調定年度;
             終了年度 = 当初年度;
             firstIndex = 1;

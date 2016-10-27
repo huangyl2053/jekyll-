@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushichosonselect.ChikuShichosonSelect.ChikuShichosonSelectDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushichosonselect.ChikuShichosonSelect.IChikuShichosonSelectDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +36,8 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     private ButtonBatchParameterRestore btnParameterRestore;
     @JsonProperty("btnParameterSave")
     private ButtonBatchParameterSave btnParameterSave;
+    @JsonProperty("hdnDonyuKeitaiCode")
+    private RString hdnDonyuKeitaiCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -130,6 +133,24 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     @JsonProperty("btnParameterSave")
     public void setBtnParameterSave(ButtonBatchParameterSave btnParameterSave) {
         this.btnParameterSave = btnParameterSave;
+    }
+
+    /*
+     * gethdnDonyuKeitaiCode
+     * @return hdnDonyuKeitaiCode
+     */
+    @JsonProperty("hdnDonyuKeitaiCode")
+    public RString getHdnDonyuKeitaiCode() {
+        return hdnDonyuKeitaiCode;
+    }
+
+    /*
+     * sethdnDonyuKeitaiCode
+     * @param hdnDonyuKeitaiCode hdnDonyuKeitaiCode
+     */
+    @JsonProperty("hdnDonyuKeitaiCode")
+    public void setHdnDonyuKeitaiCode(RString hdnDonyuKeitaiCode) {
+        this.hdnDonyuKeitaiCode = hdnDonyuKeitaiCode;
     }
 
     /*
@@ -276,8 +297,18 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
+    public ChikuShichosonDiv getChikuShichoson() {
+        return this.getChushutsuJoken().getChikuShichoson();
+    }
+
+    @JsonIgnore
+    public void  setChikuShichoson(ChikuShichosonDiv ChikuShichoson) {
+        this.getChushutsuJoken().setChikuShichoson(ChikuShichoson);
+    }
+
+    @JsonIgnore
     public IChikuShichosonSelectDiv getCcdChikuShichosonSelect() {
-        return this.getChushutsuJoken().getCcdChikuShichosonSelect();
+        return this.getChushutsuJoken().getChikuShichoson().getCcdChikuShichosonSelect();
     }
 
     // </editor-fold>

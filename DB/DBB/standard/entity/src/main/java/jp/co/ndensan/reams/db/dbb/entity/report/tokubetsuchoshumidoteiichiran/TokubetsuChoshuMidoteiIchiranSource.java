@@ -60,7 +60,7 @@ public class TokubetsuChoshuMidoteiIchiranSource implements IReportSource {
     public RString listList1_8;
     @ReportItem(name = "listList1_9", length = 3, order = 23)
     public RString listList1_9;
-    @ReportItem(name = "listList2_1", length = 9, order = 24)
+    @ReportItem(name = "listList2_1", length = 10, order = 24)
     public RString listList2_1;
     @ReportItem(name = "listList2_2", length = 30, order = 25)
     public RString listList2_2;
@@ -73,6 +73,30 @@ public class TokubetsuChoshuMidoteiIchiranSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportPerson(id = "A")
     public ShikibetsuCode shikibetsuCode;
+    @ReportItem(name = "kanaShimei", order = 27)
+    public RString kanaShimei;
+    @ReportItem(name = "seinengappiYMD", order = 28)
+    public RString seinengappiYMD;
+    @ReportItem(name = "seibetsuCode", order = 29)
+    public RString seibetsuCode;
+    @ReportItem(name = "shichosonCode", order = 30)
+    public RString shichosonCode;
+    @ReportItem(name = "hihokenshaNo", order = 31)
+    public RString hihokenshaNo;
+    @ReportItem(name = "nenkinCode", order = 32)
+    public RString nenkinCode;
+    @ReportItem(name = "kisoNenkinNo", order = 33)
+    public RString kisoNenkinNo;
+
+    public TokubetsuChoshuMidoteiIchiranSource() {
+        kanaShimei = RString.EMPTY;
+        seinengappiYMD = RString.EMPTY;
+        seibetsuCode = RString.EMPTY;
+        shichosonCode = RString.EMPTY;
+        hihokenshaNo = RString.EMPTY;
+        nenkinCode = RString.EMPTY;
+        kisoNenkinNo = RString.EMPTY;
+    }
 
     /**
      * ReportSourceFields

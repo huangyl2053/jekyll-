@@ -9,20 +9,22 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
+import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC6100011.DBC6100011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC6100011.DBC6100011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC6100011.KyufuTaishoshaScheduleSetteiPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC6100011.dgScheduleList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC6100011.KyufuTaishoshaScheduleSetteiPanelHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiKyufuTaishoshaScheduleSettei;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -119,14 +121,32 @@ public class KyufuTaishoshaScheduleSetteiPanel {
             KyufuTaishoshaScheduleSetteiPanelDiv div) {
         List<KokuhorenInterfaceKanri> スケジュール履歴情報List
                 = ViewStateHolder.get(ViewStateKeys.スケジュール履歴情報, List.class);
-        getHandler(div).to起動中チェック();
+        List<dgScheduleList_Row> rowList = div.getDgScheduleList().getDataSource();
+        if (new RString(DbcErrorMessages.設定不能状態への変更.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
+        if (!new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && !new RString(DbcErrorMessages.設定不能状態への変更.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
+            for (dgScheduleList_Row row : rowList) {
+                if (ShoriJotaiKubun.起動.getコード().equals(row.getDdlShoriJokyo().getSelectedKey())) {
+                    WarningMessage message = new WarningMessage(DbcErrorMessages.設定不能状態への変更.getMessage().getCode(),
+                            DbcErrorMessages.設定不能状態への変更.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                }
+            }
+        }
         RString 交換情報識別番号 = null;
         if (高額介護_メニューID.equals(ResponseHolder.getMenuID())) {
             交換情報識別番号 = 高額介護場合;
         } else if (総合事業高額介護_メニューID.equals(ResponseHolder.getMenuID())) {
             交換情報識別番号 = 総合事業高額介護場合;
         }
-        if (!ResponseHolder.isReRequest()) {
+        if (!new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
@@ -158,13 +178,27 @@ public class KyufuTaishoshaScheduleSetteiPanel {
      * 処理状況変更のイベント処理です。
      *
      * @param div 画面Div
-     * @return ResponseData
+     * @return ResponseData KyufuTaishoshaScheduleSetteiPanelDiv
      */
     public ResponseData<KyufuTaishoshaScheduleSetteiPanelDiv> onChange_ddlShoriJokyo(
             KyufuTaishoshaScheduleSetteiPanelDiv div) {
         Map<Integer, RString> map = ViewStateHolder.get(ViewStateKeys.変更前処理状況, Map.class);
         if (getHandler(div).to処理状況変更チェック(map)) {
-            throw new ApplicationException(DbcErrorMessages.設定不能状態への変更.getMessage().evaluate());
+            if (!ResponseHolder.isReRequest()) {
+                WarningMessage message = new WarningMessage(DbcErrorMessages.設定不能状態への変更.getMessage().getCode(),
+                        DbcErrorMessages.設定不能状態への変更.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbcErrorMessages.設定不能状態への変更.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                List<dgScheduleList_Row> rowList = div.getDgScheduleList().getDataSource();
+                for (int i = 0; i < rowList.size(); i++) {
+                    rowList.get(i).getDdlShoriJokyo().setSelectedKey(map.get(rowList.get(i).getId()));
+                }
+                div.getDgScheduleList().setDataSource(rowList);
+                return ResponseData.of(div).respond();
+            }
         }
         ViewStateHolder.put(ViewStateKeys.変更前処理状況, (Serializable) getHandler(div).get変更前処理状況());
         return ResponseData.of(div).respond();

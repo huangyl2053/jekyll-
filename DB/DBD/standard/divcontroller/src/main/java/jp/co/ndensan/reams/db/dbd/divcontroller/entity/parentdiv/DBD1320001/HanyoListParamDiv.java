@@ -33,6 +33,8 @@ public class HanyoListParamDiv extends PanelBatchParameter {
     private JokenFukugenHozonDiv JokenFukugenHozon;
     @JsonProperty("txtHyodaiMeisho")
     private TextBox txtHyodaiMeisho;
+    @JsonProperty("radShuturyokuHoho")
+    private RadioButton radShuturyokuHoho;
     @JsonProperty("ChushutsuJoken")
     private ChushutsuJokenDiv ChushutsuJoken;
     @JsonProperty("CsvHenshuHoho")
@@ -84,6 +86,24 @@ public class HanyoListParamDiv extends PanelBatchParameter {
     @JsonProperty("txtHyodaiMeisho")
     public void setTxtHyodaiMeisho(TextBox txtHyodaiMeisho) {
         this.txtHyodaiMeisho = txtHyodaiMeisho;
+    }
+
+    /*
+     * getradShuturyokuHoho
+     * @return radShuturyokuHoho
+     */
+    @JsonProperty("radShuturyokuHoho")
+    public RadioButton getRadShuturyokuHoho() {
+        return radShuturyokuHoho;
+    }
+
+    /*
+     * setradShuturyokuHoho
+     * @param radShuturyokuHoho radShuturyokuHoho
+     */
+    @JsonProperty("radShuturyokuHoho")
+    public void setRadShuturyokuHoho(RadioButton radShuturyokuHoho) {
+        this.radShuturyokuHoho = radShuturyokuHoho;
     }
 
     /*

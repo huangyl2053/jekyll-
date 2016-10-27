@@ -47,6 +47,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRel
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.CalculateFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.CalculateFukaTmpEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.DbT1001AndFukaJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.HonsanteiShotokuTmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.IdoTmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.KeisangojohoToKozaEntity;
@@ -84,7 +85,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
 import static jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.CustomerBarcodeShiyoUmu.使用しない;
 import static jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.CustomerBarcodeShiyoUmu.使用する;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
@@ -381,31 +381,45 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
     public void createTsuchishoBango(KanendoFukaParameter param) {
         IHonSanteiIdoKanendoFukaMapper mapper = mapperProvider.create(IHonSanteiIdoKanendoFukaMapper.class);
         param.set賦課年度(param.get調定年度().minusYear(INT_1));
-        List<DbT1001HihokenshaDaichoEntity> daichoEntityList = mapper.select資格情報(param);
+
+        List<DbT1001AndFukaJohoEntity> daichoEntityList = mapper.select被保険者台帳管理と賦課(param);
         List<HihokenshaDaicho> 資格の情報年度minus1 = new ArrayList<>();
-        for (DbT1001HihokenshaDaichoEntity entity : daichoEntityList) {
-            資格の情報年度minus1.add(new HihokenshaDaicho(entity));
-        }
-        List<FukaJohoRelateEntity> fukaJohoList = mapper.select賦課情報(param);
         List<FukaJoho> 賦課の情報年度minus1 = new ArrayList<>();
-        for (FukaJohoRelateEntity entity : fukaJohoList) {
-            賦課の情報年度minus1.add(new FukaJoho(entity));
+        for (DbT1001AndFukaJohoEntity entity : daichoEntityList) {
+            if (null != entity.get被保険者台帳管理()) {
+                資格の情報年度minus1.add(new HihokenshaDaicho(entity.get被保険者台帳管理()));
+            }
+            if (null != entity.get賦課Newest().get介護賦課Entity().getChoteiNendo()) {
+                add賦課の情報年度(賦課の情報年度minus1, new FukaJoho(entity.get賦課Newest()));
+            }
         }
+
         mapper.createKanendoHonSanteiChushutsuTmp();
         mapper.createTsukibetsuRankuTmp();
         dbの処理(資格の情報年度minus1, 賦課の情報年度minus1, param);
         param.set賦課年度(param.get調定年度().minusYear(INT_2));
-        daichoEntityList = mapper.select資格情報(param);
+        daichoEntityList = mapper.select被保険者台帳管理と賦課(param);
         List<HihokenshaDaicho> 資格の情報年度minus2 = new ArrayList<>();
-        for (DbT1001HihokenshaDaichoEntity entity : daichoEntityList) {
-            資格の情報年度minus2.add(new HihokenshaDaicho(entity));
-        }
-        fukaJohoList = mapper.select賦課情報(param);
         List<FukaJoho> 賦課の情報年度minus2 = new ArrayList<>();
-        for (FukaJohoRelateEntity entity : fukaJohoList) {
-            賦課の情報年度minus2.add(new FukaJoho(entity));
+        for (DbT1001AndFukaJohoEntity entity : daichoEntityList) {
+            if (null != entity.get被保険者台帳管理()) {
+                資格の情報年度minus2.add(new HihokenshaDaicho(entity.get被保険者台帳管理()));
+            }
+            if (null != entity.get賦課Newest().get介護賦課Entity().getChoteiNendo()) {
+                add賦課の情報年度(賦課の情報年度minus2, new FukaJoho(entity.get賦課Newest()));
+            }
         }
+
         dbの処理(資格の情報年度minus2, 賦課の情報年度minus2, param);
+    }
+
+    private void add賦課の情報年度(List<FukaJoho> 賦課の情報年度, FukaJoho 賦課) {
+        for (FukaJoho tmp : 賦課の情報年度) {
+            if (tmp.identifier().equals(賦課.identifier())) {
+                return;
+            }
+        }
+        賦課の情報年度.add(賦課);
     }
 
     private void dbの処理(List<HihokenshaDaicho> 資格の情報年度, List<FukaJoho> 賦課の情報年度, KanendoFukaParameter param) {
@@ -752,7 +766,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
     private void 賦課の情報登録(FukaJoho 更新後, CalculateFukaEntity 賦課計算の情報, CalculateFukaParameter param) {
         IHonSanteiIdoKanendoFukaMapper mapper = mapperProvider.create(IHonSanteiIdoKanendoFukaMapper.class);
         DbT2002FukaJohoTempTableEntity entity = new DbT2002FukaJohoTempTableEntity();
-        entity.setChoteiNendo(param.get調定年度());
+        entity.setChoteiNendo(更新後.get調定年度());
         entity.setFukaNendo(賦課計算の情報.get賦課年度());
         entity.setTsuchishoNo(賦課計算の情報.get通知書番号());
         entity.setRirekiNo(0);
@@ -835,7 +849,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
     private void 賦課の情報登録(FukaJoho 更新前, FukaJoho 更新後, CalculateFukaParameter param, int 履歴番号, boolean is調定計算, boolean has口座) {
         IHonSanteiIdoKanendoFukaMapper mapper = mapperProvider.create(IHonSanteiIdoKanendoFukaMapper.class);
         DbT2002FukaJohoTempTableEntity entity = new DbT2002FukaJohoTempTableEntity();
-        entity.setChoteiNendo(更新前.get調定年度());
+        entity.setChoteiNendo(更新後.get調定年度());
         entity.setFukaNendo(更新前.get賦課年度());
         entity.setTsuchishoNo(更新前.get通知書番号());
         entity.setRirekiNo(履歴番号);
@@ -892,12 +906,10 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         entity.setChoshuHohoRirekiNo(更新後.get徴収方法履歴番号());
         if (!is普徴期別金額あり(更新後)) {
             entity.setKozaKubun(KozaKubun.現金納付.getコード());
+        } else if (has口座) {
+            entity.setKozaKubun(KozaKubun.口座振替.getコード());
         } else {
-            if (has口座) {
-                entity.setKozaKubun(KozaKubun.口座振替.getコード());
-            } else {
-                entity.setKozaKubun(KozaKubun.現金納付.getコード());
-            }
+            entity.setKozaKubun(KozaKubun.現金納付.getコード());
         }
         entity.setFukaShichosonCode(更新後.get賦課市町村コード());
         entity.setTkKibetsuGaku01(更新後.get特徴期別金額01());
@@ -1315,6 +1327,9 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         parameter.set更正後徴収方法(調定計算Result.getChoshuHoho());
         parameter.set現年度(入力_現年度);
         FukaJoho 更正後_過年度 = get賦課情報_過年度(賦課情報リスト_結果);
+        更正後賦課.set過年度(更正後_過年度);
+        更正後賦課List.add(更正後賦課);
+        parameter.set更正後賦課リスト(更正後賦課List);
         FukaJoho 更正前_過年度 = null;
         if (更正後_過年度 != null && 賦課の情報リスト != null && !賦課の情報リスト.isEmpty()) {
             for (FukaJoho 賦課情報 : 賦課の情報リスト) {
@@ -1325,13 +1340,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         }
         if ((更正後_年額 == null && 更正前_年額 != null && Decimal.ZERO.compareTo(更正前_年額) < ゼロ_定値)
                 || (更正前_年額 != null && 更正後_年額 != null && 更正後_年額.compareTo(更正前_年額) < ゼロ_定値)) {
-            更正後賦課.set過年度(更正後_過年度);
-            更正後賦課List.add(更正後賦課);
-            parameter.set更正後賦課リスト(更正後賦課List);
             parameter.set過年度(更正前_過年度);
-        } else {
-            更正後賦課List.add(更正後賦課);
-            parameter.set更正後賦課リスト(更正後賦課List);
         }
 
         List<FukaJohoList> 調定事由 = ChoteiJiyuHantei.createInstance().set調定事由(parameter);

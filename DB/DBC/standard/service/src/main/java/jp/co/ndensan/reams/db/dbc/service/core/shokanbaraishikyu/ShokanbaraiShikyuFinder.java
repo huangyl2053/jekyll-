@@ -52,7 +52,8 @@ public class ShokanbaraiShikyuFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShokanbaraiShikyuFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShokanbaraiShikyuFinder}のインスタンス
+     * @return *
+     * {@link InstanceProvider#create}にて生成した{@link ShokanbaraiShikyuFinder}のインスタンス
      */
     public static ShokanbaraiShikyuFinder createInstance() {
         return InstanceProvider.create(ShokanbaraiShikyuFinder.class);

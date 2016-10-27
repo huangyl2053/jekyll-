@@ -83,12 +83,13 @@ public class KougakuKetteiTuutisyoHandler {
      */
     public void onLoad_txtZennkaiHakkoubi(KougakuKetteiTuutisyoDiv div, HihokenshaNo 被保険者番号) {
         KougakuKetteiTuutisyoManager manager = KougakuKetteiTuutisyoManager.createInstance();
-        div.getTxtZennkaiHakkoubi().setValue(new RDate(
-                manager.get前回発行日(
-                        被保険者番号,
-                        new FlexibleYearMonth(div.getDdlServiceYearMonth().getSelectedKey()),
-                        Integer.valueOf(div.getDdlKanliBanngou().getSelectedValue().toString()))
-                .toString()));
+        FlexibleDate dateValue = manager.get前回発行日(
+                被保険者番号,
+                new FlexibleYearMonth(div.getDdlServiceYearMonth().getSelectedKey()),
+                Integer.valueOf(div.getDdlKanliBanngou().getSelectedValue().toString()));
+        if (!dateValue.isEmpty()) {
+            div.getTxtZennkaiHakkoubi().setValue(new RDate(dateValue.toString()));
+        }
     }
 
     /**

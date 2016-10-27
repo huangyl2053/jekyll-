@@ -93,7 +93,11 @@ public class KougakuKetteiTuutisyoManager {
      * @return FlexibleDate
      */
     public FlexibleDate get前回発行日(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, int 履歴番号) {
-        return 高額介護サービス費支給判定結果dac.select前回発行日(被保険者番号, サービス提供年月, 履歴番号).getKetteiTsuchishoSakuseiYMD();
+        if (高額介護サービス費支給判定結果dac.select前回発行日(被保険者番号, サービス提供年月, 履歴番号).getKetteiTsuchishoSakuseiYMD() != null) {
+            return 高額介護サービス費支給判定結果dac.select前回発行日(被保険者番号, サービス提供年月, 履歴番号).getKetteiTsuchishoSakuseiYMD();
+        } else {
+            return FlexibleDate.EMPTY;
+        }
     }
 
     /**

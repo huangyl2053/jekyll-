@@ -107,16 +107,6 @@ public class JukyushaKyufuJissekiDaichoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnHihokenshaNoFromSearch() {
-        return this.getTabChushutsuJoken().getTplChushutsuJoken1().getBtnHihokenshaNoFromSearch();
-    }
-
-    @JsonIgnore
-    public void  setBtnHihokenshaNoFromSearch(Button btnHihokenshaNoFromSearch) {
-        this.getTabChushutsuJoken().getTplChushutsuJoken1().setBtnHihokenshaNoFromSearch(btnHihokenshaNoFromSearch);
-    }
-
-    @JsonIgnore
     public TextBoxCode getTxtRangeHihokenshaNoTo() {
         return this.getTabChushutsuJoken().getTplChushutsuJoken1().getTxtRangeHihokenshaNoTo();
     }
@@ -124,6 +114,16 @@ public class JukyushaKyufuJissekiDaichoDiv extends Panel {
     @JsonIgnore
     public void  setTxtRangeHihokenshaNoTo(TextBoxCode txtRangeHihokenshaNoTo) {
         this.getTabChushutsuJoken().getTplChushutsuJoken1().setTxtRangeHihokenshaNoTo(txtRangeHihokenshaNoTo);
+    }
+
+    @JsonIgnore
+    public Button getBtnHihokenshaNoFromSearch() {
+        return this.getTabChushutsuJoken().getTplChushutsuJoken1().getBtnHihokenshaNoFromSearch();
+    }
+
+    @JsonIgnore
+    public void  setBtnHihokenshaNoFromSearch(Button btnHihokenshaNoFromSearch) {
+        this.getTabChushutsuJoken().getTplChushutsuJoken1().setBtnHihokenshaNoFromSearch(btnHihokenshaNoFromSearch);
     }
 
     @JsonIgnore

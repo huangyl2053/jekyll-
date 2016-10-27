@@ -5,20 +5,35 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC8120012;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelBatchParameter;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanShikyuGakuKeisanKekka;
+import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanResultEntity;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuPanelListParameter;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120012.DBC8120012TransitionEventName.完了;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120012.DBC8120012TransitionEventName.対象者検索に戻る;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120012.DBC8120012TransitionEventName.検索結果一覧に戻る;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8120012.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8120012.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelHandler;
+import jp.co.ndensan.reams.db.dbc.service.report.gassanjigyobunkeisankekkarenrakuhyo.GassanJigyobunKeisanKekkaRenrakuhyoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaishoFinder;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -43,7 +58,7 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
         TaishoshaKey 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保険者番号();
         ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
-        JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter parameter
+        JigyobunShikyugakuPanelListParameter parameter
                 = createHandler(div).setJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter(被保険者番号, null, null, null);
         createHandler(div).initialize(被保険者番号, 識別コード, parameter);
         return ResponseData.of(div).respond();
@@ -114,16 +129,59 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
     }
 
     /**
-     * バッチ処理をします
+     * 「発行する」ボタンのメソッドです。
      *
      * @param div JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv
-     *
      * @return ResponseData
      */
-    public ResponseData<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelBatchParameter> onClick_btnPrint(
+    public ResponseData<SourceDataCollection> onClick_reportPublish(
             JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv div) {
-        return ResponseData.of(createHandler(div).onClick発行する(ViewStateHolder.get(
-                ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号())).respond();
+        TaishoshaKey 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保険者番号();
+        JigyobunShikyugakuPanelListParameter parameter
+                = createHandler(div).setJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter(被保険者番号,
+                        new FlexibleYear(div.getDdlTaishoNendo().getSelectedKey()),
+                        div.getDdlShikyuShinseishoSeiriNo().getSelectedValue(),
+                        new HokenshaNo(div.getDdlShoKisaiHokenshaNo().getSelectedValue()));
+        List<JigyobunShikyugakuKeisanResultEntity> panelResultList = createHandler(div).処理対象データ取得(parameter);
+        List<JigyoKogakuGassanShikyuGakuKeisanKekka> list = new ArrayList();
+        for (JigyobunShikyugakuKeisanResultEntity entity : panelResultList) {
+            int i = 0;
+            for (JigyoKogakuGassanShikyuGakuKeisanKekka kekka : list) {
+                if (kekka.toEntity().equalsPrimaryKeys(entity.getDbt3172Entity())) {
+                    i++;
+                }
+            }
+            if (i == 0) {
+                list.add(new JigyoKogakuGassanShikyuGakuKeisanKekka(entity.getDbt3172Entity()));
+            }
+        }
+        ViewStateHolder.put(ViewStateKeys.事業高額合算支給額計算結果データ, (Serializable) list);
+        IShikibetsuTaishoFinder findler = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
+        IShikibetsuTaisho 宛名識別対象情報 = findler.get識別対象(GyomuCode.DB介護保険, new ShikibetsuCode(
+                div.getCclKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtShikibetsuCode()), KensakuYusenKubun.住登外優先);
+        FlexibleDate 作成日 = div.getSakuseiPanel().getTxtSakuseiYMD().getValue();
+        GassanJigyobunKeisanKekkaRenrakuhyoPrintService printService = new GassanJigyobunKeisanKekkaRenrakuhyoPrintService();
+        return ResponseData.of(printService.print(panelResultList, 宛名識別対象情報, 作成日)).respond();
+    }
+
+    /**
+     * 「発行する」ボタンのメソッドです。
+     *
+     * @param div JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv> onClick_afterprint(
+            JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelDiv div) {
+
+        List<JigyoKogakuGassanShikyuGakuKeisanKekka> list = ViewStateHolder.get(
+                ViewStateKeys.事業高額合算支給額計算結果データ, List.class);
+        if (list != null) {
+            for (JigyoKogakuGassanShikyuGakuKeisanKekka panelResult : list) {
+                createHandler(div).afterprint(new JigyoKogakuGassanShikyuGakuKeisanKekka(panelResult.toEntity()));
+            }
+        }
+        return ResponseData.of(div).forwardWithEventName(完了).respond();
     }
 
     /**

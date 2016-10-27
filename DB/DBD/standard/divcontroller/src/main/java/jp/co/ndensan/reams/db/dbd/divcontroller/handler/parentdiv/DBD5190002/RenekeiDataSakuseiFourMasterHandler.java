@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -37,6 +36,8 @@ public class RenekeiDataSakuseiFourMasterHandler {
     private static final RString 対象期間キー = new RString("key0");
     private static final RString 新キー = new RString("key0");
     private static final RString 旧キー = new RString("key1");
+    private static final int 新INDEX = 1;
+    private static final int 旧INDEX = 0;
     private static final int HOUR_23 = 23;
     private static final int MINUTE_59 = 59;
     private static final int SECOND_59 = 59;
@@ -94,7 +95,16 @@ public class RenekeiDataSakuseiFourMasterHandler {
         DBD519002_YokaigoNinteiKanrenDataSakuseiParameter paramter = new DBD519002_YokaigoNinteiKanrenDataSakuseiParameter();
         paramter.setKonkaishoriymdtime_from(div.getTxtkonkaishoriymdtime().getFromValue());
         paramter.setKonkaishoriymdtime_to(div.getTxtkonkaishoriymdtime().getToValue());
-        paramter.setShikibetsucode(get法改正施行年月日と厚労省IF識別コード().get厚労省IF識別コード());
+        if (新キー.equals(div.getRadIfShubetu().getSelectedKey())) {
+            if (div.getRadIfShubetu().isDisabled()) {
+                paramter.setShikibetsucode(get旧法改正施行年月日と厚労省IF識別コード().get厚労省IF識別コード());
+            } else {
+                paramter.setShikibetsucode(get新法改正施行年月日と厚労省IF識別コード().get厚労省IF識別コード());
+            }
+        } else {
+            paramter.setShikibetsucode(get旧法改正施行年月日と厚労省IF識別コード().get厚労省IF識別コード());
+        }
+
         paramter.setChosaitakusakifilename(div.getDropDownListChosaItakusakiFileName().getSelectedValue());
         paramter.setChosainfilename(div.getDropDownListChosainFileName().getSelectedValue());
         paramter.setShujiiIryokikanfilename(div.getDropDownListShujiiIryoKikanFileName().getSelectedValue());
@@ -102,8 +112,12 @@ public class RenekeiDataSakuseiFourMasterHandler {
         return paramter;
     }
 
-    private HokaiseiShikoYMDToKoroshoIfShikibetsuCode get法改正施行年月日と厚労省IF識別コード() {
-        return RenekeiDataSakuseiFourMasterManager.createInstance().get法改正施行年月日と厚労省IF識別コード();
+    private HokaiseiShikoYMDToKoroshoIfShikibetsuCode get旧法改正施行年月日と厚労省IF識別コード() {
+        return RenekeiDataSakuseiFourMasterManager.createInstance().get法改正施行年月日と厚労省IF識別コード().get(旧INDEX);
+    }
+
+    private HokaiseiShikoYMDToKoroshoIfShikibetsuCode get新法改正施行年月日と厚労省IF識別コード() {
+        return RenekeiDataSakuseiFourMasterManager.createInstance().get法改正施行年月日と厚労省IF識別コード().get(新INDEX);
     }
 
     private YokaigoNinteiGaibuDataOutputHistory get要介護認定外部データ出力履歴() {
@@ -176,8 +190,8 @@ public class RenekeiDataSakuseiFourMasterHandler {
     }
 
     private void 出力対象IFエリア表示制御() {
-        HokaiseiShikoYMDToKoroshoIfShikibetsuCode 法改正施行年月日と厚労省IF識別コード = get法改正施行年月日と厚労省IF識別コード();
-        if (法改正施行年月日と厚労省IF識別コード.get法改正施行年月日().isBefore(FlexibleDate.getNowDate())) {
+        HokaiseiShikoYMDToKoroshoIfShikibetsuCode 新法改正施行年月日と厚労省IF識別コード = get新法改正施行年月日と厚労省IF識別コード();
+        if (新法改正施行年月日と厚労省IF識別コード.get法改正施行年月日().isEmpty()) {
             div.getRadIfShubetu().setSelectedKey(新キー);
             div.getRadIfShubetu().setDisabled(true);
             iF種別ラジオボタン新表示();

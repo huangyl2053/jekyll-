@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokubetsuchoshudoteimidoteiichiran;
 
 import java.util.List;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -23,12 +21,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
+public class TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter implements IMyBatisParameter {
 
     private RString shoriNendo;
     private RString kaishuTsuki;
     private List<RString> hosokuTsukiList;
     private RString tsuchiNaiyoCode;
+    private RString doteiOutput;
+    private RString midoteiOutput;
 
     /**
      *
@@ -36,15 +36,17 @@ public class TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter extends UaFt200F
      * @param kaishuTsuki 開始月
      * @param hosokuTsukiList 捕捉月リスト
      * @param tsuchiNaiyoCode 通知内容コード
-     * @param searchKey 宛名検索条件
+     * @param doteiOutput 同定出力順
+     * @param midoteiOutput 未同定出力順
      */
     public TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter(RString shoriNendo, RString kaishuTsuki,
-            List<RString> hosokuTsukiList, RString tsuchiNaiyoCode, IShikibetsuTaishoPSMSearchKey searchKey) {
-        super(searchKey);
+            List<RString> hosokuTsukiList, RString tsuchiNaiyoCode, RString doteiOutput, RString midoteiOutput) {
         this.shoriNendo = shoriNendo;
         this.kaishuTsuki = kaishuTsuki;
         this.hosokuTsukiList = hosokuTsukiList;
         this.tsuchiNaiyoCode = tsuchiNaiyoCode;
+        this.doteiOutput = doteiOutput;
+        this.midoteiOutput = midoteiOutput;
     }
 
 }

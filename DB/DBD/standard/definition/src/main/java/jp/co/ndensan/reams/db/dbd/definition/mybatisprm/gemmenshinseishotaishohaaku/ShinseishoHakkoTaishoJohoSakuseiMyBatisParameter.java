@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.RiyoshaFutanDankaiHanni;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
@@ -43,6 +44,11 @@ public class ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter implements IMyBati
     private static final RString CODE_利用者負担2段階 = RiyoshaFutanDankaiHanni.利用者負担2段階.getコード();
     private static final RString CODE_利用者負担3段階 = RiyoshaFutanDankaiHanni.利用者負担3段階.getコード();
     private static final RString CODE_利用者負担4段階 = RiyoshaFutanDankaiHanni.利用者負担4段階_高齢者複数世帯.getコード();
+
+    private static final RString 利用者負担1段階 = RiyoshaFutanDankai.第一段階.getコード();
+    private static final RString 利用者負担2段階 = RiyoshaFutanDankai.第二段階.getコード();
+    private static final RString 利用者負担3段階 = RiyoshaFutanDankai.第三段階.getコード();
+    private static final RString 利用者負担4段階 = RiyoshaFutanDankai.第四段階.getコード();
 
     private static final RString CODE_世帯課税区分_課税 = SetaiKazeiKubun.課税.getコード();
     private static final RString CODE_世帯課税区分_非課税 = SetaiKazeiKubun.非課税.getコード();

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 
 /**
  * 給付費単位数表標準マスタ取込画面バリデーションクラスです。
- * 
+ *
  * @reamsid_L DBC-3400-010 x_zhaowen
  */
 public enum TorikomiFuairuDivSpec implements IPredicate<TorikomiFuairuDiv> {
@@ -20,6 +20,16 @@ public enum TorikomiFuairuDivSpec implements IPredicate<TorikomiFuairuDiv> {
         @Override
         public boolean apply(TorikomiFuairuDiv div) {
             return div.getUplAppurodoFuairu().getRemainUnUploadedFiles().size() > 0;
+        }
+    },
+    /**
+     * アップロードファイル項目数チェック。
+     */
+    アップロードファイル項目数チェック {
+        @Override
+        public boolean apply(TorikomiFuairuDiv div) {
+            long number = Long.parseLong(div.getHdNumber().getValue().toString());
+            return number == 0;
         }
     };
 }

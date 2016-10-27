@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32004;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenko.kyufugengakukanrilist.TaishoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt32004.TaishoShaKanriJohoMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 対象者管理情報の取得_process処理のパラメタークラスです。
@@ -70,7 +70,7 @@ public class TaishoShaKanriJohoProcessParameter implements IBatchProcessParamete
      * @param システム日付 システム日付
      * @return ＳＱＬ使用された情報を作成します．
      */
-    public TaishoShaKanriJohoMybatisParameter toTaishoShaKanriJohoProcessParameter(YMDHMS システム日付) {
+    public TaishoShaKanriJohoMybatisParameter toTaishoShaKanriJohoProcessParameter(RDate システム日付) {
         return new TaishoShaKanriJohoMybatisParameter(基準日,
                 対象区分,
                 通知書未発行者抽出,

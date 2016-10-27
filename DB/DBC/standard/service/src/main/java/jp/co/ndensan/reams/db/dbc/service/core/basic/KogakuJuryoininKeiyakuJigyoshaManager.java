@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 高額受領委任契約事業者を管理するクラスです。
+ *
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 public class KogakuJuryoininKeiyakuJigyoshaManager {
 

@@ -8,9 +8,7 @@ package jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.choteijiyu.ChoteiJiyuParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.choteijiyu.FukaJohoList;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.CalculateChoteiParameter;
@@ -38,22 +36,16 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKo
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyojohoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.kanendokoseikeisan.KoseigoFukaResult;
-import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.MonthShichoson;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.NengakuHokenryo;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.NengakuHokenryoKeisan;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuFukaKonkyo;
-import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuFukaKonkyoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuHokenryoKeisanParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJoho;
-import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJohoFactory;
-import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKijunKingaku;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiHoho;
-import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTaisho;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KyokaisoKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
@@ -70,7 +62,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
@@ -82,9 +73,10 @@ import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshuru
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
 import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisan;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanInput;
+import jp.co.ndensan.reams.dz.dzx.business.core.kiwarikeisan.KiwariKeisanOutput;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -106,7 +98,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBB-0660-030 cuilin
  */
-public class FukaKeisan {
+public class FukaKeisan extends FukaKeisanFath {
 
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -114,18 +106,10 @@ public class FukaKeisan {
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
     private static final int INT_6 = 6;
-    private static final int INT_7 = 7;
-    private static final int INT_8 = 8;
-    private static final int INT_9 = 9;
-    private static final int INT_10 = 10;
-    private static final int INT_11 = 11;
     private static final int INT_12 = 12;
-    private static final int INT_13 = 13;
     private static final int INT_14 = 14;
     private static final int DAY = 31;
     private static final RString エラーメッセージ = new RString("賦課の情報しか存在しない");
-    private static final RString 使用する = new RString("1");
-    private static final RString 使用しない = new RString("0");
     private static final RString 汎用キー_通知書番号 = new RString("通知書番号");
     private static final RString ゼロ_0000 = new RString("0000");
 
@@ -628,8 +612,10 @@ public class FukaKeisan {
         調定計算用年度分賦課リスト.set賦課年度(賦課の情報.get賦課年度());
         調定計算用年度分賦課リスト.set通知書番号(賦課の情報.get通知書番号());
         調定計算用年度分賦課リスト.set賦課期日(賦課基準日);
+        Boolean isHas過年度賦課 = false;
         if (調定年度.equals(param.get賦課年度())) {
             調定計算用年度分賦課リスト.set現年度(賦課の情報);
+            isHas過年度賦課 = true;
         } else if (調定年度.equals(param.get賦課年度().plusYear(INT_1))) {
             調定計算用年度分賦課リスト.set過年度1(賦課の情報);
         } else if (調定年度.equals(param.get賦課年度().plusYear(INT_2))) {
@@ -642,6 +628,7 @@ public class FukaKeisan {
             調定計算用年度分賦課リスト.set過年度5(賦課の情報);
         }
         調定計算用年度分賦課リスト.set最新賦課の情報(賦課の情報);
+        調定計算用年度分賦課リスト.setHas過年度賦課(isHas過年度賦課);
 
         調定計算パラメータ.set年度分賦課リスト_更正前(調定計算用年度分賦課リスト);
         KoseiShorikoaResult 調定計算 = do調定計算(調定計算パラメータ);
@@ -672,12 +659,10 @@ public class FukaKeisan {
                 .set徴収方法履歴番号(調定計算.get徴収方法の情報_更正後().get履歴番号() + INT_1);
         if (!is普徴期別金額あり(賦課の情報)) {
             builder.set口座区分(KozaKubun.現金納付.getコード());
+        } else if (!param.get口座のリスト().isEmpty()) {
+            builder.set口座区分(KozaKubun.口座振替.getコード());
         } else {
-            if (!param.get口座のリスト().isEmpty()) {
-                builder.set口座区分(KozaKubun.口座振替.getコード());
-            } else {
-                builder.set口座区分(KozaKubun.現金納付.getコード());
-            }
+            builder.set口座区分(KozaKubun.現金納付.getコード());
         }
         builder.set職権区分(ShokkenKubun.非該当.getコード());
         賦課の情報 = builder.build();
@@ -790,12 +775,10 @@ public class FukaKeisan {
         builder.set徴収方法履歴番号(出力徴収方法の情報.get履歴番号() + INT_1);
         if (!is普徴期別金額あり(賦課の情報_更正後)) {
             builder.set口座区分(KozaKubun.現金納付.getコード());
+        } else if (!param.get口座のリスト().isEmpty()) {
+            builder.set口座区分(KozaKubun.口座振替.getコード());
         } else {
-            if (!param.get口座のリスト().isEmpty()) {
-                builder.set口座区分(KozaKubun.口座振替.getコード());
-            } else {
-                builder.set口座区分(KozaKubun.現金納付.getコード());
-            }
+            builder.set口座区分(KozaKubun.現金納付.getコード());
         }
         builder.set職権区分(ShokkenKubun.非該当.getコード());
         賦課の情報_更正後 = builder.build();
@@ -821,181 +804,6 @@ public class FukaKeisan {
 
     private boolean is金額あり(Decimal 金額) {
         return 金額 != null && !Decimal.ZERO.equals(金額);
-    }
-
-    private boolean is変化有り(FukaJoho 更正前, FukaJoho 更正後) {
-        return is変化有り1(更正前, 更正後)
-                || is変化有り2(更正前, 更正後)
-                || is変化有り3(更正前, 更正後)
-                || is変化有り4(更正前, 更正後);
-    }
-
-    private boolean is変化有り1(FukaJoho 更正前, FukaJoho 更正後) {
-        return isTsuchishoNo変更(更正前.get通知書番号(), 更正後.get通知書番号())
-                || isHihokenshaNo変更(更正前.get被保険者番号(), 更正後.get被保険者番号())
-                || isShikibetsuCode変更(更正前.get識別コード(), 更正後.get識別コード())
-                || isSetaiCode変更(更正前.get世帯コード(), 更正後.get世帯コード())
-                || isInt変更(更正前.get世帯員数(), 更正後.get世帯員数())
-                || isFlexibleDate変更(更正前.get資格取得日(), 更正後.get資格取得日())
-                || isRString変更(更正前.get資格取得事由(), 更正後.get資格取得事由())
-                || isFlexibleDate変更(更正前.get資格喪失日(), 更正後.get資格喪失日())
-                || isRString変更(更正前.get資格喪失事由(), 更正後.get資格喪失事由())
-                || isRString変更(更正前.get生活保護扶助種類(), 更正後.get生活保護扶助種類())
-                || isFlexibleDate変更(更正前.get生保開始日(), 更正後.get生保開始日())
-                || isFlexibleDate変更(更正前.get生保廃止日(), 更正後.get生保廃止日())
-                || isFlexibleDate変更(更正前.get老年開始日(), 更正後.get老年開始日())
-                || isFlexibleDate変更(更正前.get老年廃止日(), 更正後.get老年廃止日())
-                || isFlexibleDate変更(更正前.get賦課期日(), 更正後.get賦課期日())
-                || isRString変更(更正前.get課税区分(), 更正後.get課税区分())
-                || isRString変更(更正前.get世帯課税区分(), 更正後.get世帯課税区分())
-                || isDecimal変更(更正前.get合計所得金額(), 更正後.get合計所得金額());
-    }
-
-    private boolean is変化有り2(FukaJoho 更正前, FukaJoho 更正後) {
-        return isDecimal変更(更正前.get公的年金収入額(), 更正後.get公的年金収入額())
-                || isRString変更(更正前.get保険料段階(), 更正後.get保険料段階())
-                || isRString変更(更正前.get保険料算定段階1(), 更正後.get保険料算定段階1())
-                || isDecimal変更(更正前.get算定年額保険料1(), 更正後.get算定年額保険料1())
-                || isFlexibleYearMonth変更(更正前.get月割開始年月1(), 更正後.get月割開始年月1())
-                || isFlexibleYearMonth変更(更正前.get月割終了年月1(), 更正後.get月割終了年月1())
-                || isRString変更(更正前.get保険料算定段階2(), 更正後.get保険料算定段階2())
-                || isDecimal変更(更正前.get算定年額保険料2(), 更正後.get算定年額保険料2())
-                || isFlexibleYearMonth変更(更正前.get月割開始年月2(), 更正後.get月割開始年月2())
-                || isFlexibleYearMonth変更(更正前.get月割終了年月2(), 更正後.get月割終了年月2())
-                || isRString変更(更正前.get調定事由1(), 更正後.get調定事由1())
-                || isRString変更(更正前.get調定事由2(), 更正後.get調定事由2())
-                || isRString変更(更正前.get調定事由3(), 更正後.get調定事由3())
-                || isRString変更(更正前.get調定事由4(), 更正後.get調定事由4())
-                || isDecimal変更(更正前.get減免前介護保険料_年額(), 更正後.get減免前介護保険料_年額())
-                || isDecimal変更(更正前.get減免額(), 更正後.get減免額())
-                || isDecimal変更(更正前.get確定介護保険料_年額(), 更正後.get確定介護保険料_年額())
-                || isRString変更(更正前.get保険料段階_仮算定時(), 更正後.get保険料段階_仮算定時())
-                || isRString変更(更正前.get口座区分(), 更正後.get口座区分());
-    }
-
-    private boolean is変化有り3(FukaJoho 更正前, FukaJoho 更正後) {
-        return isRString変更(更正前.get境界層区分(), 更正後.get境界層区分())
-                || isRString変更(更正前.get職権区分(), 更正後.get職権区分())
-                || isLasdecCode変更(更正前.get賦課市町村コード(), 更正後.get賦課市町村コード())
-                || isDecimal変更(更正前.get特徴歳出還付額(), 更正後.get特徴歳出還付額())
-                || isDecimal変更(更正前.get普徴歳出還付額(), 更正後.get普徴歳出還付額())
-                || isDecimal変更(更正前.get特徴期別金額01(), 更正後.get特徴期別金額01())
-                || isDecimal変更(更正前.get特徴期別金額02(), 更正後.get特徴期別金額02())
-                || isDecimal変更(更正前.get特徴期別金額03(), 更正後.get特徴期別金額03())
-                || isDecimal変更(更正前.get特徴期別金額04(), 更正後.get特徴期別金額04())
-                || isDecimal変更(更正前.get特徴期別金額05(), 更正後.get特徴期別金額05())
-                || isDecimal変更(更正前.get特徴期別金額06(), 更正後.get特徴期別金額06());
-    }
-
-    private boolean is変化有り4(FukaJoho 更正前, FukaJoho 更正後) {
-        return isDecimal変更(更正前.get普徴期別金額01(), 更正後.get普徴期別金額01())
-                || isDecimal変更(更正前.get普徴期別金額02(), 更正後.get普徴期別金額02())
-                || isDecimal変更(更正前.get普徴期別金額03(), 更正後.get普徴期別金額03())
-                || isDecimal変更(更正前.get普徴期別金額04(), 更正後.get普徴期別金額04())
-                || isDecimal変更(更正前.get普徴期別金額05(), 更正後.get普徴期別金額05())
-                || isDecimal変更(更正前.get普徴期別金額06(), 更正後.get普徴期別金額06())
-                || isDecimal変更(更正前.get普徴期別金額07(), 更正後.get普徴期別金額07())
-                || isDecimal変更(更正前.get普徴期別金額08(), 更正後.get普徴期別金額08())
-                || isDecimal変更(更正前.get普徴期別金額09(), 更正後.get普徴期別金額09())
-                || isDecimal変更(更正前.get普徴期別金額10(), 更正後.get普徴期別金額10())
-                || isDecimal変更(更正前.get普徴期別金額11(), 更正後.get普徴期別金額11())
-                || isDecimal変更(更正前.get普徴期別金額12(), 更正後.get普徴期別金額12())
-                || isDecimal変更(更正前.get普徴期別金額13(), 更正後.get普徴期別金額13())
-                || isDecimal変更(更正前.get普徴期別金額14(), 更正後.get普徴期別金額14());
-    }
-
-    private boolean isTsuchishoNo変更(TsuchishoNo 更正前, TsuchishoNo 更正後) {
-        if (更正前 == null) {
-            更正前 = TsuchishoNo.EMPTY;
-        }
-        if (更正後 == null) {
-            更正後 = TsuchishoNo.EMPTY;
-        }
-        return !更正後.equals(更正前);
-    }
-
-    private boolean isHihokenshaNo変更(HihokenshaNo 更正前, HihokenshaNo 更正後) {
-        if (更正前 == null) {
-            更正前 = HihokenshaNo.EMPTY;
-        }
-        if (更正後 == null) {
-            更正後 = HihokenshaNo.EMPTY;
-        }
-        return !更正後.equals(更正前);
-    }
-
-    private boolean isShikibetsuCode変更(ShikibetsuCode 更正前, ShikibetsuCode 更正後) {
-        if (更正前 == null) {
-            更正前 = ShikibetsuCode.EMPTY;
-        }
-        if (更正後 == null) {
-            更正後 = ShikibetsuCode.EMPTY;
-        }
-        return !更正後.equals(更正前);
-    }
-
-    private boolean isSetaiCode変更(SetaiCode 更正前, SetaiCode 更正後) {
-        if (更正前 == null) {
-            更正前 = SetaiCode.EMPTY;
-        }
-        if (更正後 == null) {
-            更正後 = SetaiCode.EMPTY;
-        }
-        return !更正後.equals(更正前);
-    }
-
-    private boolean isInt変更(int 更正前, int 更正後) {
-        return 更正前 != 更正後;
-    }
-
-    private boolean isFlexibleDate変更(FlexibleDate 更正前, FlexibleDate 更正後) {
-        if (更正前 == null) {
-            更正前 = FlexibleDate.EMPTY;
-        }
-        if (更正後 == null) {
-            更正後 = FlexibleDate.EMPTY;
-        }
-        return !更正後.equals(更正前);
-    }
-
-    private boolean isRString変更(RString 更正前, RString 更正後) {
-        if (更正前 == null) {
-            更正前 = RString.EMPTY;
-        }
-        if (更正後 == null) {
-            更正後 = RString.EMPTY;
-        }
-        return !更正後.equals(更正前);
-    }
-
-    private boolean isFlexibleYearMonth変更(FlexibleYearMonth 更正前, FlexibleYearMonth 更正後) {
-        if (更正前 == null) {
-            更正前 = FlexibleYearMonth.EMPTY;
-        }
-        if (更正後 == null) {
-            更正後 = FlexibleYearMonth.EMPTY;
-        }
-        return !更正後.equals(更正前);
-    }
-
-    private boolean isLasdecCode変更(LasdecCode 更正前, LasdecCode 更正後) {
-        if (更正前 == null) {
-            更正前 = LasdecCode.EMPTY;
-        }
-        if (更正後 == null) {
-            更正後 = LasdecCode.EMPTY;
-        }
-        return !更正後.equals(更正前);
-    }
-
-    private boolean isDecimal変更(Decimal 更正前, Decimal 更正後) {
-        if (更正前 == null) {
-            更正前 = Decimal.ZERO;
-        }
-        if (更正後 == null) {
-            更正後 = Decimal.ZERO;
-        }
-        return !更正後.equals(更正前);
     }
 
     /**
@@ -1090,17 +898,59 @@ public class FukaKeisan {
         FukaJohoRelateEntity 賦課RelateEntity = new FukaJohoRelateEntity();
         賦課RelateEntity.set介護賦課Entity(賦課の情報.toEntity());
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
-        for (Kibetsu kibetsu : 賦課の情報.getKibetsuList()) {
-            KibetsuEntity entity = new KibetsuEntity();
-            List<UrT0705ChoteiKyotsuEntity> 調定共通Entity = new ArrayList<>();
-            for (ChoteiKyotsu choteiKyotsu : kibetsu.getChoteiKyotsuList()) {
-                調定共通Entity.add(choteiKyotsu.toEntity());
+
+        if (!賦課の情報.getKibetsuList().isEmpty()) {
+            for (Kibetsu kibetsu : 賦課の情報.getKibetsuList()) {
+                KibetsuEntity entity = new KibetsuEntity();
+                List<UrT0705ChoteiKyotsuEntity> 調定共通Entity = new ArrayList<>();
+                for (ChoteiKyotsu choteiKyotsu : kibetsu.getChoteiKyotsuList()) {
+                    調定共通Entity.add(choteiKyotsu.toEntity());
+                }
+                entity.set介護期別Entity(kibetsu.toEntity());
+                entity.set調定共通Entity(調定共通Entity);
+                介護期別RelateEntity.add(entity);
             }
-            entity.set介護期別Entity(kibetsu.toEntity());
-            entity.set調定共通Entity(調定共通Entity);
-            介護期別RelateEntity.add(entity);
+            賦課RelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
+        } else {
+            for (int i = 0; i < INT_6; i++) {
+                KibetsuEntity entity = new KibetsuEntity();
+                Kibetsu kibetsu = new Kibetsu(
+                        賦課の情報.get調定年度(),
+                        賦課の情報.get賦課年度(),
+                        賦課の情報.get通知書番号(),
+                        賦課の情報.get履歴番号(),
+                        ChoshuHohoKibetsu.特別徴収.getコード(),
+                        i + 1);
+                kibetsu = kibetsu.createBuilderForEdit().set調定ID(Decimal.ZERO).build();
+                List<UrT0705ChoteiKyotsuEntity> choteiEntity = new ArrayList<>();
+                ChoteiKyotsu 調定共通 = new ChoteiKyotsu(Long.valueOf("0"));
+                調定共通 = 調定共通.createBuilderForEdit().set調定額(Decimal.ZERO).build();
+                choteiEntity.add(調定共通.toEntity());
+                entity.set調定共通Entity(choteiEntity);
+                entity.set介護期別Entity(kibetsu.toEntity());
+                介護期別RelateEntity.add(entity);
+            }
+            for (int i = 0; i < INT_14; i++) {
+                KibetsuEntity entity = new KibetsuEntity();
+                Kibetsu kibetsu = new Kibetsu(
+                        賦課の情報.get調定年度(),
+                        賦課の情報.get賦課年度(),
+                        賦課の情報.get通知書番号(),
+                        賦課の情報.get履歴番号(),
+                        ChoshuHohoKibetsu.普通徴収.getコード(),
+                        i + 1);
+                kibetsu = kibetsu.createBuilderForEdit().set調定ID(Decimal.ZERO).build();
+                List<UrT0705ChoteiKyotsuEntity> choteiEntity = new ArrayList<>();
+                ChoteiKyotsu 調定共通 = new ChoteiKyotsu(Long.valueOf("0"));
+                調定共通 = 調定共通.createBuilderForEdit().set調定額(Decimal.ZERO).build();
+                choteiEntity.add(調定共通.toEntity());
+                entity.set調定共通Entity(choteiEntity);
+                entity.set介護期別Entity(kibetsu.toEntity());
+                介護期別RelateEntity.add(entity);
+            }
+            賦課RelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
         }
-        賦課RelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
+
         return new FukaJoho(賦課RelateEntity);
     }
 
@@ -1246,7 +1096,7 @@ public class FukaKeisan {
                     break;
                 }
             }
-            builder.set世帯員数(param.get世帯員所得情報List().size());
+            builder.set世帯員数(param.get世帯員所得情報List().size() - INT_1);
         } else {
             builder.set課税区分(null).set合計所得金額(null).set公的年金収入額(null);
         }
@@ -1500,22 +1350,18 @@ public class FukaKeisan {
     }
 
     private KoseiShorikoaResult get調定計算_現年度(CalculateChoteiParameter param) {
-        // TODO QAのNo.933(Redmine#91256)
-        List<Decimal> 特徴期別金額 = new ArrayList<>();
-        for (int i = 0; i < INT_6; i++) {
-            特徴期別金額.add(Decimal.ONE);
-        }
-        List<Decimal> 普徴期別金額 = new ArrayList<>();
-        for (int i = 0; i < INT_14; i++) {
-            普徴期別金額.add(Decimal.TEN);
-        }
-        RString 特徴停止事由コード = new RString("01");
+        KiwariKeisanInput inputEntity = new KiwariKeisanInput();
+        setInputEntity(inputEntity, param);
+        KiwariKeisan kiwariKeisan = new KiwariKeisan();
+        KiwariKeisanOutput kiwariKeisanOutputEntity = kiwariKeisan.getKibetsuGaku(inputEntity);
+        List<Decimal> 特徴期別金額 = kiwariKeisanOutputEntity.get調定年度期別クラス().get(0).get特徴期別額();
+        List<Decimal> 普徴期別金額 = kiwariKeisanOutputEntity.get調定年度期別クラス().get(0).get普徴期別額();
 
-        FukaJoho 現年度 = param.get年度分賦課リスト_更正前().get現年度();
+        FukaJoho 更正前 = param.get年度分賦課リスト_更正前().get現年度();
         FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
-        fukaJohoRelateEntity.set介護賦課Entity(現年度.toEntity());
+        fukaJohoRelateEntity.set介護賦課Entity(更正前.toEntity());
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
-        List<Kibetsu> kibetsuList = 現年度.getKibetsuList();
+        List<Kibetsu> kibetsuList = 更正前.getKibetsuList();
         for (Kibetsu kibetsu : kibetsuList) {
             if (ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.get徴収方法())) {
                 set特徴期別金額(kibetsu, 特徴期別金額, 介護期別RelateEntity);
@@ -1524,9 +1370,9 @@ public class FukaKeisan {
             }
         }
         fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
-        現年度 = new FukaJoho(fukaJohoRelateEntity);
+        FukaJoho 現年度 = new FukaJoho(fukaJohoRelateEntity);
 
-        FukaJoho 更正前 = param.get年度分賦課リスト_更正前().get現年度();
+        RString 特徴停止事由コード = ChoteiJiyuCode.保険料額の減額変更.getコード();
         ChoshuHoho 出力用徴収方法の情報 = get出力用徴収方法の情報(更正前, 現年度, param, param.get徴収方法の情報_更正前(),
                 特徴期別金額, 特徴停止事由コード);
 
@@ -1554,94 +1400,9 @@ public class FukaKeisan {
         return result;
     }
 
-    private void set特徴期別金額(Kibetsu kibetsu, List<Decimal> 特徴期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
-        switch (kibetsu.get期()) {
-            case INT_1:
-                set期別金額(kibetsu, 特徴期別金額.get(0), 介護期別RelateEntity);
-                break;
-            case INT_2:
-                set期別金額(kibetsu, 特徴期別金額.get(INT_1), 介護期別RelateEntity);
-                break;
-            case INT_3:
-                set期別金額(kibetsu, 特徴期別金額.get(INT_2), 介護期別RelateEntity);
-                break;
-            case INT_4:
-                set期別金額(kibetsu, 特徴期別金額.get(INT_3), 介護期別RelateEntity);
-                break;
-            case INT_5:
-                set期別金額(kibetsu, 特徴期別金額.get(INT_4), 介護期別RelateEntity);
-                break;
-            case INT_6:
-                set期別金額(kibetsu, 特徴期別金額.get(INT_5), 介護期別RelateEntity);
-                break;
-            default:
-        }
-    }
-
-    private void set普徴期別金額(Kibetsu kibetsu, List<Decimal> 普徴期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
-        switch (kibetsu.get期()) {
-            case INT_1:
-                set期別金額(kibetsu, 普徴期別金額.get(0), 介護期別RelateEntity);
-                break;
-            case INT_2:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_1), 介護期別RelateEntity);
-                break;
-            case INT_3:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_2), 介護期別RelateEntity);
-                break;
-            case INT_4:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_3), 介護期別RelateEntity);
-                break;
-            case INT_5:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_4), 介護期別RelateEntity);
-                break;
-            case INT_6:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_5), 介護期別RelateEntity);
-                break;
-            case INT_7:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_6), 介護期別RelateEntity);
-                break;
-            case INT_8:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_7), 介護期別RelateEntity);
-                break;
-            case INT_9:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_8), 介護期別RelateEntity);
-                break;
-            case INT_10:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_9), 介護期別RelateEntity);
-                break;
-            case INT_11:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_10), 介護期別RelateEntity);
-                break;
-            case INT_12:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_11), 介護期別RelateEntity);
-                break;
-            case INT_13:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_12), 介護期別RelateEntity);
-                break;
-            case INT_14:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_13), 介護期別RelateEntity);
-                break;
-            default:
-        }
-    }
-
-    private void set期別金額(Kibetsu kibetsu, Decimal 期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
-        if (kibetsu.getChoteiKyotsuList() != null && !kibetsu.getChoteiKyotsuList().isEmpty()) {
-            KibetsuEntity kibetsuEntity = new KibetsuEntity();
-            kibetsuEntity.set介護期別Entity(kibetsu.toEntity());
-            UrT0705ChoteiKyotsuEntity entity = kibetsu.getChoteiKyotsuList().get(0).toEntity();
-            entity.setChoteigaku(期別金額);
-            List<UrT0705ChoteiKyotsuEntity> entityList = new ArrayList<>();
-            entityList.add(entity);
-            kibetsuEntity.set調定共通Entity(entityList);
-            介護期別RelateEntity.add(kibetsuEntity);
-        }
-    }
-
     private ChoshuHoho get出力用徴収方法の情報(FukaJoho 更正前, FukaJoho 現年度, CalculateChoteiParameter param,
             ChoshuHoho 出力用徴収方法の情報, List<Decimal> 特徴期別金額, RString 特徴停止事由コード) {
-        if (Integer.parseInt(Tsuki._3月.getコード().toString()) != param.get調定日時().getMonthValue()) {
+        if (!Tsuki._3月.getコード().equals(get算定月(param.get調定日時()))) {
             Decimal 更正前の特別徴収額 = Decimal.ZERO;
             if (更正前.get特徴期別金額01() != null) {
                 更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額01());
@@ -1771,174 +1532,5 @@ public class FukaKeisan {
             fukaJohoBuilder.setKibetsu(介護期別);
         }
         return fukaJohoBuilder.build();
-    }
-
-    private SeigyoJoho get月別保険料制御情報(HokenryoDankaiList 保険料段階リスト) {
-        RDate nowDate = RDate.getNowDate();
-        Decimal 基準年金収入額01 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入1,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準年金収入額02 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入2,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準年金収入額03 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入3,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額01 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額1,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額02 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額2,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額03 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額3,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額04 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額4,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額05 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額5,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額06 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額6,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額07 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額7,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額08 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額8,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額09 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額9,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額10 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額10,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額11 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額11,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額12 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額12,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額13 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額13,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額14 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額14,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額15 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額15,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        RString 課税層所得段階 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税層保険料段階インデックス,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 未申告段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告保険料段階使用,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        boolean 未申告段階使用有無 = false;
-        if (使用する.equals(未申告段階使用)) {
-            未申告段階使用有無 = true;
-        } else if (使用しない.equals(未申告段階使用)) {
-            未申告段階使用有無 = false;
-        }
-        RString 未申告段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告保険料段階インデックス,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 未申告課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告課税区分,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 所得調査中段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中保険料段階使用,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        boolean 所得調査中段階使用有無 = false;
-        if (使用する.equals(所得調査中段階使用)) {
-            所得調査中段階使用有無 = true;
-        } else if (使用しない.equals(所得調査中段階使用)) {
-            所得調査中段階使用有無 = false;
-        }
-        RString 所得調査中段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中保険料段階インデックス,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 所得調査中課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中課税区分,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 課税取消段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消保険料段階使用,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        boolean 課税取消段階使用有無 = false;
-        if (使用する.equals(課税取消段階使用)) {
-            課税取消段階使用有無 = true;
-        } else if (使用しない.equals(課税取消段階使用)) {
-            課税取消段階使用有無 = false;
-        }
-        RString 課税取消段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消保険料段階インデックス,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 課税取消課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分,
-                nowDate, SubGyomuCode.DBB介護賦課);
-
-        SeigyojohoFactory seigyojohoFactory = InstanceProvider.create(SeigyojohoFactory.class);
-        SeigyoJoho 月別保険料制御情報 = seigyojohoFactory.createSeigyojoho(
-                保険料段階リスト, 基準年金収入額01, 基準年金収入額02, 基準年金収入額03,
-                基準所得金額01, 基準所得金額02, 基準所得金額03, 基準所得金額04, 基準所得金額05, 基準所得金額06,
-                基準所得金額07, 基準所得金額08, 基準所得金額09, 基準所得金額10, 基準所得金額11, 基準所得金額12,
-                基準所得金額13, 基準所得金額14, 基準所得金額15, 課税層所得段階,
-                未申告段階使用有無, 未申告段階インデックス, KazeiKubun.toValue(未申告課税区分),
-                所得調査中段階使用有無, 所得調査中段階インデックス, KazeiKubun.toValue(所得調査中課税区分),
-                課税取消段階使用有無, 課税取消段階インデックス, KazeiKubun.toValue(課税取消課税区分));
-        return 月別保険料制御情報;
-    }
-
-    private NengakuFukaKonkyo get年額賦課根拠(FlexibleDate 賦課基準日, FlexibleDate 資格取得日,
-            FlexibleDate 資格喪失日, TsukibetsuHokenryoDankai 月別保険料段階, List<MonthShichoson> 月別ランク情報) {
-        RString ランク_4月 = RString.EMPTY;
-        RString ランク_5月 = RString.EMPTY;
-        RString ランク_6月 = RString.EMPTY;
-        RString ランク_7月 = RString.EMPTY;
-        RString ランク_8月 = RString.EMPTY;
-        RString ランク_9月 = RString.EMPTY;
-        RString ランク_10月 = RString.EMPTY;
-        RString ランク_11月 = RString.EMPTY;
-        RString ランク_12月 = RString.EMPTY;
-        RString ランク_1月 = RString.EMPTY;
-        RString ランク_2月 = RString.EMPTY;
-        RString ランク_3月 = RString.EMPTY;
-        for (MonthShichoson 月別ランク : 月別ランク情報) {
-            if (Tsuki._4月.getコード().equals(月別ランク.get月().getコード())) {
-                ランク_4月 = 月別ランク.getランク区分();
-            } else if (Tsuki._5月.getコード().equals(月別ランク.get月().getコード())) {
-                ランク_5月 = 月別ランク.getランク区分();
-            } else if (Tsuki._6月.getコード().equals(月別ランク.get月().getコード())) {
-                ランク_6月 = 月別ランク.getランク区分();
-            } else if (Tsuki._7月.getコード().equals(月別ランク.get月().getコード())) {
-                ランク_7月 = 月別ランク.getランク区分();
-            } else if (Tsuki._8月.getコード().equals(月別ランク.get月().getコード())) {
-                ランク_8月 = 月別ランク.getランク区分();
-            } else if (Tsuki._9月.getコード().equals(月別ランク.get月().getコード())) {
-                ランク_9月 = 月別ランク.getランク区分();
-            } else if (Tsuki._10月.getコード().equals(月別ランク.get月().getコード())) {
-                ランク_10月 = 月別ランク.getランク区分();
-            } else if (Tsuki._11月.getコード().equals(月別ランク.get月().getコード())) {
-                ランク_11月 = 月別ランク.getランク区分();
-            } else if (Tsuki._12月.getコード().equals(月別ランク.get月().getコード())) {
-                ランク_12月 = 月別ランク.getランク区分();
-            } else if (Tsuki._1月.getコード().equals(月別ランク.get月().getコード())) {
-                ランク_1月 = 月別ランク.getランク区分();
-            } else if (Tsuki._2月.getコード().equals(月別ランク.get月().getコード())) {
-                ランク_2月 = 月別ランク.getランク区分();
-            } else if (Tsuki._3月.getコード().equals(月別ランク.get月().getコード())) {
-                ランク_3月 = 月別ランク.getランク区分();
-            }
-        }
-        NengakuFukaKonkyoFactory nengakuFukaKonkyo = InstanceProvider.create(NengakuFukaKonkyoFactory.class);
-        NengakuFukaKonkyo 年額賦課根拠 = nengakuFukaKonkyo.createNengakuFukaKonkyo(
-                賦課基準日, 資格取得日, 資格喪失日, 月別保険料段階,
-                ランク_4月, ランク_5月, ランク_6月, ランク_7月, ランク_8月, ランク_9月,
-                ランク_10月, ランク_11月, ランク_12月, ランク_1月, ランク_2月, ランク_3月);
-        return 年額賦課根拠;
-    }
-
-    private NengakuSeigyoJoho get年額制御情報() {
-        RDate nowDate = RDate.getNowDate();
-        Decimal 端数単位 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整単位_通常,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        RString 端数調整方法 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整方法_通常,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        Decimal 端数単位_ランク用 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整単位_ランク変更のみ,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        RString 端数調整方法_ランク用 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整方法_通常,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 端数調整対象 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整対象,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<>();
-
-        // TODO QAのNo.957　「ランク別制御情報」の設定方法がない。
-//        RankBetsuKijunKingaku gaku = new RankBetsuKijunKingaku();
-//        gaku.setランク基準金額1(Decimal.ONE);
-//        gaku.setランク基準金額2(Decimal.ONE);
-//        ランク別制御情報.put(new RString("01"), gaku);
-//        ランク別制御情報.put(new RString("1"), gaku);
-        NengakuSeigyoJohoFactory nengakuSeigyoJohoFactory = InstanceProvider.create(NengakuSeigyoJohoFactory.class);
-        NengakuSeigyoJoho 年額制御情報 = nengakuSeigyoJohoFactory.createNengakuSeigyoJoho(
-                端数単位,
-                HasuChoseiHoho.toValue(端数調整方法),
-                端数単位_ランク用,
-                HasuChoseiHoho.toValue(端数調整方法_ランク用),
-                HasuChoseiTaisho.toValue(端数調整対象),
-                ランク別制御情報);
-        return 年額制御情報;
     }
 }

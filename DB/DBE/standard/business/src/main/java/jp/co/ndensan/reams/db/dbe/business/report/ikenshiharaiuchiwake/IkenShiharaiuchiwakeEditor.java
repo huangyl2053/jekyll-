@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 
 /**
  * 帳票設計_DBE622004_主治医意見書作成料支払内訳確認書のIkenShiharaiuchiwakeEditorです。
@@ -33,7 +34,7 @@ public class IkenShiharaiuchiwakeEditor implements IIkenShiharaiuchiwakeEditor {
 
     @Override
     public IkenShiharaiuchiwakeReportSource edit(IkenShiharaiuchiwakeReportSource source) {
-        source.layoutBreakItem = item.getLayoutBreakItem();
+        source.layout = Layouts.鑑;
         source.denshiKoin = item.get電子公印();
         source.hakkoYMD1 = item.get発行日();
         source.ninshoshaYakushokuMei = item.get認証者役職名();
@@ -74,8 +75,8 @@ public class IkenShiharaiuchiwakeEditor implements IIkenShiharaiuchiwakeEditor {
     }
 
     private IkenShiharaiuchiwakeReportSource edit2(IkenShiharaiuchiwakeReportSource source) {
-        if (item.get被保険者番号() != null) {
-            source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.get被保険者番号());
+        if (item.get申請書管理番号() != null) {
+            source.hihokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }
         return source;
     }

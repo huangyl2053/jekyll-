@@ -64,6 +64,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
     private List<KamokuCode> list;
     private List<KamokuCode> kamokuCodelist;
     private RString reamsLoginId;
+    private RString 出力順;
 
     private static final int 基準額_ONE = 15000;
     private static final int 基準額_TWO = 26400;
@@ -239,6 +240,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
                 hizukeHeshu,
                 国保連IFなし区分,
                 事業高額分,
+                出力順,
                 searchkey,
                 list,
                 kamokuCodelist);

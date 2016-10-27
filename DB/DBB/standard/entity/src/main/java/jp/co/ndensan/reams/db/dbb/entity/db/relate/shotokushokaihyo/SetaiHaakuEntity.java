@@ -10,17 +10,18 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
- * 世帯員把握入力Table
+ * 世帯員把握入力Tableのクラスです。
  *
  * @reamsid_L DBB-1720-050 lijunjun
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SetaiHaakuEntity {
+public class SetaiHaakuEntity implements IDbAccessable {
 
     @TempTableColumnOrder(1)
     private HihokenshaNo hihokenshaNo;

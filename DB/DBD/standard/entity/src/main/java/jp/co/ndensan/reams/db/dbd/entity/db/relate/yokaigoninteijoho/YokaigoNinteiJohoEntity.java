@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4912ShujiiJohoEntity;
@@ -18,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**
  * 介護認定処理情報Entityのクラスです。
@@ -41,6 +44,9 @@ public class YokaigoNinteiJohoEntity implements Cloneable, Serializable {
     private DbT4102NinteiKekkaJohoEntity 要介護認定結果情報Entity;
     private DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity;
     private DbT7051KoseiShichosonMasterEntity 構成市町村マスタEntity;
+    private DbT4120ShinseitodokedeJohoEntity 申請届出情報Entity;
+    private DbT7060KaigoJigyoshaEntity 介護事業者Entity;
+    private UaFt200FindShikibetsuTaishoEntity 識別対象取得PSMEntity;
 
     /**
      * コンストラクタです。
@@ -58,6 +64,9 @@ public class YokaigoNinteiJohoEntity implements Cloneable, Serializable {
         要介護認定結果情報Entity = new DbT4102NinteiKekkaJohoEntity();
         要介護認定インターフェース情報Entity = new DbT4003YokaigoNinteiInterfaceEntity();
         構成市町村マスタEntity = new DbT7051KoseiShichosonMasterEntity();
+        申請届出情報Entity = new DbT4120ShinseitodokedeJohoEntity();
+        介護事業者Entity = new DbT7060KaigoJigyoshaEntity();
+        識別対象取得PSMEntity = new UaFt200FindShikibetsuTaishoEntity();
     }
 
     /**
@@ -78,6 +87,9 @@ public class YokaigoNinteiJohoEntity implements Cloneable, Serializable {
         this.要介護認定結果情報Entity.initializeMd5();
         this.要介護認定インターフェース情報Entity.initializeMd5();
         this.構成市町村マスタEntity.initializeMd5();
+        this.申請届出情報Entity.initializeMd5();
+        this.介護事業者Entity.initializeMd5();
+        this.識別対象取得PSMEntity.initializeMd5();
     }
 
     /**
@@ -97,5 +109,8 @@ public class YokaigoNinteiJohoEntity implements Cloneable, Serializable {
         this.要介護認定結果情報Entity.initializeMd5();
         this.要介護認定インターフェース情報Entity.initializeMd5();
         this.構成市町村マスタEntity.initializeMd5();
+        this.申請届出情報Entity.initializeMd5();
+        this.介護事業者Entity.initializeMd5();
+        this.識別対象取得PSMEntity.initializeMd5();
     }
 }

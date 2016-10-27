@@ -55,22 +55,14 @@ public class RiyoshaFutanGakuGemmenNinteishaListEditor {
                 TorikomiRecordPunctuation.性別.get終了位置()).trim());
         dataRecordEntity.setカナ氏名(record.substringEmptyOnError(TorikomiRecordPunctuation.カナ氏名.get開始位置(),
                 TorikomiRecordPunctuation.カナ氏名.get終了位置()).trim());
-        dataRecordEntity.setシフトコード1(record.substringEmptyOnError(TorikomiRecordPunctuation.シフトコード1.get開始位置(),
-                TorikomiRecordPunctuation.シフトコード1.get終了位置()).trim());
         dataRecordEntity.set漢字氏名(record.substringEmptyOnError(TorikomiRecordPunctuation.漢字氏名.get開始位置(),
                 TorikomiRecordPunctuation.漢字氏名.get終了位置()).trim());
-        dataRecordEntity.setシフトコード2(record.substringEmptyOnError(TorikomiRecordPunctuation.シフトコード2.get開始位置(),
-                TorikomiRecordPunctuation.シフトコード2.get終了位置()).trim());
         dataRecordEntity.set郵便番号(toYubinNo(record.substringEmptyOnError(TorikomiRecordPunctuation.郵便番号.get開始位置(),
                 TorikomiRecordPunctuation.郵便番号.get終了位置()).trim()));
         dataRecordEntity.setカナ住所(record.substringEmptyOnError(TorikomiRecordPunctuation.カナ住所.get開始位置(),
                 TorikomiRecordPunctuation.カナ住所.get終了位置()).trim());
-        dataRecordEntity.setシフトコード3(record.substringEmptyOnError(TorikomiRecordPunctuation.シフトコード3.get開始位置(),
-                TorikomiRecordPunctuation.シフトコード3.get終了位置()).trim());
         dataRecordEntity.set漢字住所(record.substringEmptyOnError(TorikomiRecordPunctuation.漢字住所.get開始位置(),
                 TorikomiRecordPunctuation.漢字住所.get終了位置()).trim());
-        dataRecordEntity.setシフトコード4(record.substringEmptyOnError(TorikomiRecordPunctuation.シフトコード4.get開始位置(),
-                TorikomiRecordPunctuation.シフトコード4.get終了位置()).trim());
         dataRecordEntity.set対象年(toFlexibleYear(record.substringEmptyOnError(TorikomiRecordPunctuation.対象年.get開始位置(),
                 TorikomiRecordPunctuation.対象年.get終了位置()).trim()));
         dataRecordEntity.set訂正表示(record.substringEmptyOnError(TorikomiRecordPunctuation.訂正表示.get開始位置(),

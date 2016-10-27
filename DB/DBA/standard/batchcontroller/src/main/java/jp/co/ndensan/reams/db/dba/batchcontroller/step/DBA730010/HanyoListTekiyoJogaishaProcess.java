@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaResult;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba730010.HanyoListTekiyoJogaishaProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaCsvEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaRelateEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMas
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
@@ -26,9 +28,13 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -68,6 +74,7 @@ public class HanyoListTekiyoJogaishaProcess extends BatchProcessBase<HanyoListTe
     private static final RString FILENAME = new RString("HanyoList_TekiyoJogaisha.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final int NUM5 = 5;
     private HanyoListTekiyoJogaishaProcessParameter processParamter;
     private FileSpoolManager manager;
     private RString eucFilePath;
@@ -140,7 +147,8 @@ public class HanyoListTekiyoJogaishaProcess extends BatchProcessBase<HanyoListTe
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBA介護資格));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toHanyoListTekiyoJogaishaMybatisParameter(psmShikibetsuTaisho, psmAtesaki));
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toHanyoListTekiyoJogaishaMybatisParameter(
+                psmShikibetsuTaisho, psmAtesaki, get出力順()));
     }
 
     @Override
@@ -165,91 +173,91 @@ public class HanyoListTekiyoJogaishaProcess extends BatchProcessBase<HanyoListTe
 
     @Override
     protected void afterExecute() {
-        if (eucCsvWriter.getCount() == 0) {
-            eucCsvWriter.writeLine(setBlank());
-        }
+//        if (eucCsvWriter.getCount() == 0) {
+//            eucCsvWriter.writeLine(setBlank());
+//        }
         eucCsvWriter.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         manager.spool(eucFilePath, log);
         バッチ出力条件リストの出力();
     }
 
-    private HanyoListTekiyoJogaishaCsvEntity setBlank() {
-        HanyoListTekiyoJogaishaCsvEntity entity = new HanyoListTekiyoJogaishaCsvEntity();
-        entity.set識別コード(RString.EMPTY);
-        entity.set住民種別(RString.EMPTY);
-        entity.set氏名(RString.EMPTY);
-        entity.set氏名カナ(RString.EMPTY);
-        entity.set生年月日(RString.EMPTY);
-        entity.set年齢(RString.EMPTY);
-        entity.set性別(RString.EMPTY);
-        entity.set続柄コード(RString.EMPTY);
-        entity.set世帯コード(RString.EMPTY);
-        entity.set世帯主名(RString.EMPTY);
-        entity.set住所コード(RString.EMPTY);
-        entity.set郵便番号(RString.EMPTY);
-        entity.set住所番地方書(RString.EMPTY);
-        entity.set住所(RString.EMPTY);
-        entity.set番地(RString.EMPTY);
-        entity.set方書(RString.EMPTY);
-        entity.set行政区コード(RString.EMPTY);
-        entity.set行政区名(RString.EMPTY);
-        entity.set地区１(RString.EMPTY);
-        entity.set地区２(RString.EMPTY);
-        entity.set地区３(RString.EMPTY);
-        entity.set連絡先１(RString.EMPTY);
-        entity.set連絡先２(RString.EMPTY);
-        entity.set登録異動日(RString.EMPTY);
-        entity.set登録事由(RString.EMPTY);
-        entity.set登録届出日(RString.EMPTY);
-        entity.set住定異動日(RString.EMPTY);
-        entity.set住定事由(RString.EMPTY);
-        entity.set住定届出日(RString.EMPTY);
-        entity.set消除異動日(RString.EMPTY);
-        entity.set消除事由(RString.EMPTY);
-        entity.set消除届出日(RString.EMPTY);
-        entity.set転出入理由(RString.EMPTY);
-        entity.set前住所郵便番号(RString.EMPTY);
-        entity.set前住所番地方書(RString.EMPTY);
-        entity.set前住所(RString.EMPTY);
-        entity.set前住所番地(RString.EMPTY);
-        entity.set前住所方書(RString.EMPTY);
-        entity.set市町村コード(RString.EMPTY);
-        entity.set市町村名(RString.EMPTY);
-        entity.set保険者コード(RString.EMPTY);
-        entity.set保険者名(RString.EMPTY);
-        entity.set空白(RString.EMPTY);
-        entity.set被保険者番号(RString.EMPTY);
-        entity.set資格取得事由(RString.EMPTY);
-        entity.set資格取得日(RString.EMPTY);
-        entity.set資格取得届出日(RString.EMPTY);
-        entity.set喪失事由(RString.EMPTY);
-        entity.set資格喪失日(RString.EMPTY);
-        entity.set資格喪失届日(RString.EMPTY);
-        entity.set資格区分(RString.EMPTY);
-        entity.set住所地特例状態(RString.EMPTY);
-        entity.set資格証記載保険者番号(RString.EMPTY);
-        entity.set適用除外適用事由(RString.EMPTY);
-        entity.set適用除外適用日(RString.EMPTY);
-        entity.set適用除外適用届出日(RString.EMPTY);
-        entity.set適用除外解除事由(RString.EMPTY);
-        entity.set適用除外解除日(RString.EMPTY);
-        entity.set適用除外解除届出日(RString.EMPTY);
-        entity.set適用除外施設コード(RString.EMPTY);
-        entity.set適用除外施設名称(RString.EMPTY);
-        entity.set適用除外入所日(RString.EMPTY);
-        entity.set適用除外退所日(RString.EMPTY);
-        entity.set適用除外施設郵便番号(RString.EMPTY);
-        entity.set適用除外施設住所(RString.EMPTY);
-        entity.set適用除外施設電話番号(RString.EMPTY);
-        entity.set施設退所通知発行日(RString.EMPTY);
-        entity.set施設変更通知発行日(RString.EMPTY);
-        entity.set医療保険種別(RString.EMPTY);
-        entity.set医療保険番号(RString.EMPTY);
-        entity.set医療保険者名(RString.EMPTY);
-        entity.set医療保険記号番号(RString.EMPTY);
-        return entity;
-    }
+//    private HanyoListTekiyoJogaishaCsvEntity setBlank() {
+//        HanyoListTekiyoJogaishaCsvEntity entity = new HanyoListTekiyoJogaishaCsvEntity();
+//        entity.set識別コード(RString.EMPTY);
+//        entity.set住民種別(RString.EMPTY);
+//        entity.set氏名(RString.EMPTY);
+//        entity.set氏名カナ(RString.EMPTY);
+//        entity.set生年月日(RString.EMPTY);
+//        entity.set年齢(RString.EMPTY);
+//        entity.set性別(RString.EMPTY);
+//        entity.set続柄コード(RString.EMPTY);
+//        entity.set世帯コード(RString.EMPTY);
+//        entity.set世帯主名(RString.EMPTY);
+//        entity.set住所コード(RString.EMPTY);
+//        entity.set郵便番号(RString.EMPTY);
+//        entity.set住所番地方書(RString.EMPTY);
+//        entity.set住所(RString.EMPTY);
+//        entity.set番地(RString.EMPTY);
+//        entity.set方書(RString.EMPTY);
+//        entity.set行政区コード(RString.EMPTY);
+//        entity.set行政区名(RString.EMPTY);
+//        entity.set地区１(RString.EMPTY);
+//        entity.set地区２(RString.EMPTY);
+//        entity.set地区３(RString.EMPTY);
+//        entity.set連絡先１(RString.EMPTY);
+//        entity.set連絡先２(RString.EMPTY);
+//        entity.set登録異動日(RString.EMPTY);
+//        entity.set登録事由(RString.EMPTY);
+//        entity.set登録届出日(RString.EMPTY);
+//        entity.set住定異動日(RString.EMPTY);
+//        entity.set住定事由(RString.EMPTY);
+//        entity.set住定届出日(RString.EMPTY);
+//        entity.set消除異動日(RString.EMPTY);
+//        entity.set消除事由(RString.EMPTY);
+//        entity.set消除届出日(RString.EMPTY);
+//        entity.set転出入理由(RString.EMPTY);
+//        entity.set前住所郵便番号(RString.EMPTY);
+//        entity.set前住所番地方書(RString.EMPTY);
+//        entity.set前住所(RString.EMPTY);
+//        entity.set前住所番地(RString.EMPTY);
+//        entity.set前住所方書(RString.EMPTY);
+//        entity.set市町村コード(RString.EMPTY);
+//        entity.set市町村名(RString.EMPTY);
+//        entity.set保険者コード(RString.EMPTY);
+//        entity.set保険者名(RString.EMPTY);
+//        entity.set空白(RString.EMPTY);
+//        entity.set被保険者番号(RString.EMPTY);
+//        entity.set資格取得事由(RString.EMPTY);
+//        entity.set資格取得日(RString.EMPTY);
+//        entity.set資格取得届出日(RString.EMPTY);
+//        entity.set喪失事由(RString.EMPTY);
+//        entity.set資格喪失日(RString.EMPTY);
+//        entity.set資格喪失届日(RString.EMPTY);
+//        entity.set資格区分(RString.EMPTY);
+//        entity.set住所地特例状態(RString.EMPTY);
+//        entity.set資格証記載保険者番号(RString.EMPTY);
+//        entity.set適用除外適用事由(RString.EMPTY);
+//        entity.set適用除外適用日(RString.EMPTY);
+//        entity.set適用除外適用届出日(RString.EMPTY);
+//        entity.set適用除外解除事由(RString.EMPTY);
+//        entity.set適用除外解除日(RString.EMPTY);
+//        entity.set適用除外解除届出日(RString.EMPTY);
+//        entity.set適用除外施設コード(RString.EMPTY);
+//        entity.set適用除外施設名称(RString.EMPTY);
+//        entity.set適用除外入所日(RString.EMPTY);
+//        entity.set適用除外退所日(RString.EMPTY);
+//        entity.set適用除外施設郵便番号(RString.EMPTY);
+//        entity.set適用除外施設住所(RString.EMPTY);
+//        entity.set適用除外施設電話番号(RString.EMPTY);
+//        entity.set施設退所通知発行日(RString.EMPTY);
+//        entity.set施設変更通知発行日(RString.EMPTY);
+//        entity.set医療保険種別(RString.EMPTY);
+//        entity.set医療保険番号(RString.EMPTY);
+//        entity.set医療保険者名(RString.EMPTY);
+//        entity.set医療保険記号番号(RString.EMPTY);
+//        return entity;
+//    }
 
     private void バッチ出力条件リストの出力() {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
@@ -272,5 +280,17 @@ public class HanyoListTekiyoJogaishaProcess extends BatchProcessBase<HanyoListTe
                     entity.get被保険者番号());
             return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode(), expandedInfo);
         }
+    }
+
+    private RString get出力順() {
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701003.getReportId(),
+                processParamter.getShutsuryokujunId());
+        RString 出力順 = RString.EMPTY;
+        if (outputOrder != null) {
+            出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(
+                    HanyoListTekiyoJogaishaResult.ShutsuryokujunEnum.class, outputOrder), NUM5);
+        }
+        return 出力順;
     }
 }

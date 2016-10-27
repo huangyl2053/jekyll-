@@ -128,5 +128,7 @@ public class YokaigoninteiIntafesumasutaEntity extends DbTableEntityBase<NinteiK
     private RString yobikubun5;
     @TempTableColumnOrder(47)
     private RString rizabu;
+    @TempTableColumnOrder(48)
+    private RString shinseishoKanriNo;
 
 }

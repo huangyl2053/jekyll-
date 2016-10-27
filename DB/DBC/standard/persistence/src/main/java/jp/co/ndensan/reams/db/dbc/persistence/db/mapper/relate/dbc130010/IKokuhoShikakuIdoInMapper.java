@@ -9,10 +9,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc130010.UpdShoriDateKanriMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoKannriDataYoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoShikakuJyohoInpotoyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.TorikomiKokuhoJyohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7123KokuhoShikakuInfoEntity;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoShikakuJyohoYoResultEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.TorikomiKokuhoJyohoResultEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * バッチ設計_DBC130010_国保資格異動情報取込
@@ -22,26 +21,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface IKokuhoShikakuIdoInMapper {
 
     /**
-     * 宛名識別コードリスト取得。
-     *
-     * @return List<ShikibetsuCode>
-     */
-    List<ShikibetsuCode> get宛名識別コードリスト();
-
-    /**
      * 取込国保情報一時表のデータ取得。
      *
-     * @return List<TorikomiKokuhoJyohoEntity>
+     * @return List<TorikomiKokuhoJyohoResultEntity>
      */
-    List<TorikomiKokuhoJyohoEntity> get取込国保情報Temp();
+    List<TorikomiKokuhoJyohoResultEntity> get取込国保情報Temp();
 
     /**
      * 引数相同市町村コードなデータ件数を取得する。
      *
-     * @param 市町村コード RString
-     * @return Integer
+     * @return List<LasdecCode>
      */
-    Integer get構成市町村マスタ(RString 市町村コード);
+    List<LasdecCode> get構成市町村マスタ();
 
     /**
      * 国保管理データ作成用データを取得。
@@ -53,9 +44,9 @@ public interface IKokuhoShikakuIdoInMapper {
     /**
      * 国保管理データ作成用データを取得。
      *
-     * @return List<KokuhoKannriDataYoEntity>
+     * @return List<KokuhoShikakuJyohoYoResultEntity>
      */
-    List<KokuhoKannriDataYoEntity> get国保資格情報インポート用データ();
+    List<KokuhoShikakuJyohoYoResultEntity> get国保資格情報インポート用データ();
 
     /**
      * 一時表国保資格情報インポート用Entitｙリストデータを取得。
@@ -65,11 +56,17 @@ public interface IKokuhoShikakuIdoInMapper {
     List<KokuhoShikakuJyohoInpotoyoEntity> get国保資格情報インポート用Entitｙリスト();
 
     /**
-     * 国保資格情報の全データを取得。
+     * 一時表国保資格情報インポート用Entitｙリストデータ件数を取得。
      *
-     * @return List<DbT7123KokuhoShikakuInfoEntity>
+     * @return Integer
      */
-    List<DbT7123KokuhoShikakuInfoEntity> get国保資格情報の全データ();
+    Integer get国保資格情報インポート用Entitｙ件数();
+
+    /**
+     * 国保資格情報を削除する。
+     *
+     */
+    void delete国保資格情報();
 
     /**
      * 処理管理日付マスタデータを取得。

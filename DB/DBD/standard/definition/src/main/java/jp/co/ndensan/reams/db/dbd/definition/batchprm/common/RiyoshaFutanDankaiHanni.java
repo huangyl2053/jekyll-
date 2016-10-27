@@ -71,4 +71,19 @@ public enum RiyoshaFutanDankaiHanni {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("利用者負担段階範囲"));
     }
+
+    /**
+     * 利用者負担段階範囲の名称と一致する内容を探します。
+     *
+     * @param name 利用者負担段階範囲の名称
+     * @return {@code name} に対応する利用者負担段階範囲
+     */
+    public static RiyoshaFutanDankaiHanni nameToValue(RString name) {
+        for (RiyoshaFutanDankaiHanni riyoshaFutanDankaiHanni : RiyoshaFutanDankaiHanni.values()) {
+            if (riyoshaFutanDankaiHanni.fullName.equals(name)) {
+                return riyoshaFutanDankaiHanni;
+            }
+        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("利用者負担段階範囲"));
+    }
 }

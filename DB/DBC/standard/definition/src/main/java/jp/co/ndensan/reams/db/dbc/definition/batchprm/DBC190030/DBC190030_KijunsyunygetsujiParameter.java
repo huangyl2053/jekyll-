@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190030;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc190030.DBC190030ProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -85,4 +86,26 @@ public class DBC190030_KijunsyunygetsujiParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_市町村名, name = NAME_市町村名)
     private RString 市町村名;
 
+    /**
+     * toDBC190030ProcessParameterのメソッドです。
+     *
+     * @return DBC190030ProcessParameter
+     */
+    public DBC190030ProcessParameter toDBC190030ProcessParameter() {
+        return new DBC190030ProcessParameter(抽出条件,
+                抽出対象,
+                処理年度,
+                被保険者番号,
+                世帯員把握基準日,
+                世帯員把握基準日2,
+                提出期限,
+                作成日,
+                申請書出力フラグ,
+                お知らせ通知書出力フラグ,
+                一覧表CSV出力フラグ,
+                文書番号,
+                帳票出力順ID,
+                市町村コード,
+                市町村名);
+    }
 }

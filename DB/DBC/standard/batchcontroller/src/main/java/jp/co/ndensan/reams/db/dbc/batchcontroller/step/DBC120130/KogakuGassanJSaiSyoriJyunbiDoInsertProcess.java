@@ -41,14 +41,8 @@ public class KogakuGassanJSaiSyoriJyunbiDoInsertProcess extends BatchProcessBase
     @Override
     protected void process(DbWT37H1KogakuGassanaJikofutangakuTempEntity entity) {
         if (entity != null) {
-            update高額合算自己負担額一時();
+            entity.setJikoFutangakuSaiFlag(true);
+            高額合算自己負担額一時tableWriter.update(entity);
         }
     }
-
-    private void update高額合算自己負担額一時() {
-        DbWT37H1KogakuGassanaJikofutangakuTempEntity entity = new DbWT37H1KogakuGassanaJikofutangakuTempEntity();
-        entity.setJikoFutangakuSaiFlag(true);
-        高額合算自己負担額一時tableWriter.update(entity);
-    }
-
 }

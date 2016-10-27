@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki152;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki152.JigyohokokuCompYoshiki152Data;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki152.JigyohokokuCompYoshiki152ReportSource;
-import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.HokenshaJohoConfig;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -35,17 +34,12 @@ public class JigyohokokuCompYoshiki152Editor implements IJigyohokokuCompYoshiki1
     }
 
     private JigyohokokuCompYoshiki152ReportSource editSource(JigyohokokuCompYoshiki152ReportSource source) {
-        HokenshaJohoConfig hokenshaJohoConfig = new HokenshaJohoConfig();
         source.printTimeStamp = data.get処理日時();
         source.shukeiKubun = data.get集計区分();
         source.shuukeiHani = set集計範囲(data.get集計範囲());
-        if (hokenshaJohoConfig.get保険者番号() != null) {
-            source.hokenshaNo = hokenshaJohoConfig.get保険者番号().value();
-        }
+        source.hokenshaNo = data.get保険者番号();
         source.kyufuKubun = data.get給付実績区分コード();
-        if (hokenshaJohoConfig.get保険者名() != null) {
-            source.hokenshaName = hokenshaJohoConfig.get保険者名().value();
-        }
+        source.hokenshaName = data.get保険者名();
         return source;
     }
 

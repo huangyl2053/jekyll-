@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblShikakuShosaiDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -402,7 +402,7 @@ public class tblShikakuShosaiDiv extends TablePanel {
  * @author 自動生成
  */
 class celShutokuDateAttblShikakuShosai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblShutokuDate")
     private Label lblShutokuDate;
     @JsonProperty("txtShutokuDate")
@@ -452,7 +452,7 @@ class celShutokuDateAttblShikakuShosai extends TableCell {
  * @author 自動生成
  */
 class celShutokuTodokedeDateAttblShikakuShosai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblShutokuTodokedeDate")
     private Label lblShutokuTodokedeDate;
     @JsonProperty("txtShutokuTodokedeDate")
@@ -502,7 +502,7 @@ class celShutokuTodokedeDateAttblShikakuShosai extends TableCell {
  * @author 自動生成
  */
 class celShutokuJiyuAttblShikakuShosai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblShutokuJiyu")
     private Label lblShutokuJiyu;
     @JsonProperty("ddlShutokuJiyu")
@@ -552,7 +552,7 @@ class celShutokuJiyuAttblShikakuShosai extends TableCell {
  * @author 自動生成
  */
 class celHihoKubunAttblShikakuShosai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblHihoKubun")
     private Label lblHihoKubun;
     @JsonProperty("ddlHihoKubun")
@@ -602,7 +602,7 @@ class celHihoKubunAttblShikakuShosai extends TableCell {
  * @author 自動生成
  */
 class celShutokuShozaiHokenshaAttblShikakuShosai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblShutokuShozaiHokensha")
     private Label lblShutokuShozaiHokensha;
     @JsonProperty("ddlShutokuShozaiHokensha")
@@ -652,7 +652,7 @@ class celShutokuShozaiHokenshaAttblShikakuShosai extends TableCell {
  * @author 自動生成
  */
 class celShutokuSochimotoHokenshaAttblShikakuShosai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblShutokuSochimotoHokensha")
     private Label lblShutokuSochimotoHokensha;
     @JsonProperty("ddlShutokuSochimotoHokensha")
@@ -702,7 +702,7 @@ class celShutokuSochimotoHokenshaAttblShikakuShosai extends TableCell {
  * @author 自動生成
  */
 class celKyuHokenshaAttblShikakuShosai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblKyuHokensha")
     private Label lblKyuHokensha;
     @JsonProperty("ddlShutokuKyuHokensha")
@@ -752,7 +752,7 @@ class celKyuHokenshaAttblShikakuShosai extends TableCell {
  * @author 自動生成
  */
 class celShutokuShoriDateAttblShikakuShosai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblShutokuShoriDate")
     private Label lblShutokuShoriDate;
     @JsonProperty("txtShutokuShoriDate")
@@ -802,7 +802,7 @@ class celShutokuShoriDateAttblShikakuShosai extends TableCell {
  * @author 自動生成
  */
 class celSoshitsuDateAttblShikakuShosai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblSoshitsuDate")
     private Label lblSoshitsuDate;
     @JsonProperty("txtSoshitsuDate")
@@ -852,7 +852,7 @@ class celSoshitsuDateAttblShikakuShosai extends TableCell {
  * @author 自動生成
  */
 class celSoshitsuTodokedeDateAttblShikakuShosai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblSoshitsuTodokedeDate")
     private Label lblSoshitsuTodokedeDate;
     @JsonProperty("txtSoshitsuTodokedeDate")
@@ -902,7 +902,7 @@ class celSoshitsuTodokedeDateAttblShikakuShosai extends TableCell {
  * @author 自動生成
  */
 class celSoshitsuJiyuAttblShikakuShosai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblSoshitsuJiyu")
     private Label lblSoshitsuJiyu;
     @JsonProperty("ddlSoshitsuJiyu")
@@ -952,7 +952,7 @@ class celSoshitsuJiyuAttblShikakuShosai extends TableCell {
  * @author 自動生成
  */
 class celSoshitsuShoriDateAttblShikakuShosai extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     @JsonProperty("lblSoshitsuShoriDate")
     private Label lblSoshitsuShoriDate;
     @JsonProperty("txtSoshitsuShoriDate")

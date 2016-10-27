@@ -139,4 +139,13 @@ public interface ISetaiiShotokuKazeiHanteiMapper {
      */
     void insert世帯員所得情報事業高額一時に一括(List<TmpSetaiJigyoHaakuNyuryokuEntity> list);
 
+    /**
+     * create世帯員所得情報高額一時メソッドです。
+     */
+    void createTmpSetaiHaakuNyuryoku();
+
+    /**
+     * create世帯員所得情報事業高額一時メソッドです。
+     */
+    void createTmpSetaiJigyoHaakuNyuryoku();
 }

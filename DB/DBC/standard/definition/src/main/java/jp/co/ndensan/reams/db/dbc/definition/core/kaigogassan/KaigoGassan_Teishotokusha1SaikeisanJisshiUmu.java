@@ -20,7 +20,7 @@ public enum KaigoGassan_Teishotokusha1SaikeisanJisshiUmu {
      */
     無し("1", "無し"),
     /**
-     * コード:2 名称:上位所得者 略称:定義なし
+     * コード:2 名称:有り 略称:定義なし
      */
     有り("2", "有り");
 

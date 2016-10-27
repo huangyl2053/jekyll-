@@ -11,7 +11,10 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.BatchFuchoKariSanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.FuchoKariSanteiFukaEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014001.DBB014001_FuchoKarisanteiFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003.BatchFuchoKariSanteiEntity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003.DBB014003_FuchoKarisanteiTsuchishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
 import jp.co.ndensan.reams.db.dbb.definition.core.fucho.ZanteiKeisanHasuChosei;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.FuchoZanteiKeisanHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoKaishiMaeFucho6Gatsu;
@@ -26,11 +29,13 @@ import jp.co.ndensan.reams.db.dbb.service.core.fuchokarisanteifuka.FuchoKariSant
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.IOutputChohyoIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -179,14 +184,25 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         RString 端数調整有無code = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定端数調整有無, 調定年月日, SubGyomuCode.DBB介護賦課);
         row2.setTxtNaiyo(ZanteiKeisanHasuChosei.toValue(端数調整有無code).get略称());
         row3.setTxtKoumoku(項目列_納期限);
-        KoseiTsukiHantei 更正月判定 = new KoseiTsukiHantei();
-        RDate 法定納期限 = FukaNokiResearcher.createInstance().get普徴納期(更正月判定.find更正月(RDate.getNowDate()).get期AsInt()).get法定納期限();
-        if (法定納期限 != null) {
-            row3.setTxtNaiyo(法定納期限.wareki().toDateString());
+        RString 法定納期限 = RString.EMPTY;
+        List<Noki> 賦課納期リスト = FukaNokiResearcher.createInstance().get普徴納期ALL();
+        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
+        KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
+        List<Kitsuki> 期月リスト = 期月リスト_普徴.filtered仮算定期間().toList();
+        for (Kitsuki 期月 : 期月リスト) {
+            int 期 = 期月.get期AsInt();
+            for (Noki 賦課納期 : 賦課納期リスト) {
+                if (期 == 賦課納期.get期別()) {
+                    法定納期限 = 法定納期限.concat(賦課納期.get納期限().wareki().toDateString()).concat(スペース);
+                    break;
+                }
+            }
         }
+        法定納期限.trim();
+        row3.setTxtNaiyo(法定納期限);
         row4.setTxtKoumoku(項目列_6月特徴開始者);
         RString 列_6月特徴開始者code = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, システム日と時, SubGyomuCode.DBB介護賦課);
-        row4.setTxtNaiyo(TokuchoKaishiMaeFucho6Gatsu.toValue(列_6月特徴開始者code).get略称());
+        row4.setTxtNaiyo(TokuchoKaishiMaeFucho6Gatsu.toValue(列_6月特徴開始者code).get名称());
         dataSource.add(row1);
         dataSource.add(row2);
         dataSource.add(row3);
@@ -261,7 +277,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     }
 
     /**
-     * バッチパラメータを作成する。
+     * 普徴仮算定通知書一括発行バッチパラメータを作成する。
      *
      * @return バッチパラメータ DBB014003_FuchoKarisanteiTsuchishoHakkoParameter
      */
@@ -321,6 +337,53 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
     }
 
     /**
+     * 普徴仮算定賦課バッチパラメータを作成する。
+     *
+     * @return バッチパラメータ DBB014001_FuchoKarisanteiFukaParameter
+     */
+    public DBB014001_FuchoKarisanteiFukaParameter getバッチパラメータ1() {
+        DBB014001_FuchoKarisanteiFukaParameter param = new DBB014001_FuchoKarisanteiFukaParameter();
+        FuchoKariSanteiFuka fuchoKariSanteiFuka = new FuchoKariSanteiFuka();
+        Map<RString, RString> 出力帳票一覧 = div.getMainPanelBatchParameter()
+                .getFuchoKarisanteiChohyoHakko2().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        List<BatchFuchoKariSanteiResult> list = new ArrayList<>();
+        for (Map.Entry<RString, RString> map : 出力帳票一覧.entrySet()) {
+            RString 帳票Id = map.getKey();
+            RString 出力順Id = map.getValue();
+            if (帳票Id != null && !帳票Id.isEmpty() && 出力順Id != null && !出力順Id.isEmpty()) {
+                BatchFuchoKariSanteiResult result = new BatchFuchoKariSanteiResult(
+                        new ReportId(map.getKey()), Long.valueOf(map.getValue().toString()));
+                list.add(result);
+            }
+        }
+        FuchoKarisanteiShoriNaiyoDiv panel = div.getMainPanelBatchParameter()
+                .getFuchoKarisanteiFukaKakunin().getShoriJokyo().getFuchoKarisanteiShoriNaiyo();
+        RYear 調定年度 = panel.getTxtChoteiNendo().getDomain();
+        param.set調定年度(new FlexibleYear(調定年度.toString()));
+        RYear 賦課年度 = panel.getTxtFukaNendo().getDomain();
+        if (賦課年度 != null) {
+            param.set賦課年度(new FlexibleYear(賦課年度.toString()));
+        }
+        FuchoTsuchiKobetsuJohoDiv 帳票作成個別情報Panel = div
+                .getMainPanelBatchParameter().getFuchoKarisanteiChohyoHakko2().getFuchoTsuchiKobetsuJoho();
+        RString 出力期R = 帳票作成個別情報Panel.getDdlNotsuShuturyokuki2().getSelectedValue();
+        RString 出力期 = 出力期R.substring(ゼロ_定値, 出力期R.indexOf(期RSTRING));
+        List<BatchFuchoKariSanteiEntity> batchList = fuchoKariSanteiFuka.getChohyoIchiran(list, new FlexibleYear(調定年度.toString()), 出力期);
+        List<HonsanteifukaBatchTyouhyou> honsanteiList = new ArrayList<>();
+        HonsanteifukaBatchTyouhyou honsanteifuka;
+        for (BatchFuchoKariSanteiEntity entity : batchList) {
+            honsanteifuka = new HonsanteifukaBatchTyouhyou();
+            honsanteifuka.set帳票分類ID(entity.get帳票分類ID());
+            honsanteifuka.set帳票ID(entity.get帳票ID());
+            honsanteifuka.set出力順ID(new RString(entity.get出力順ID()));
+            honsanteiList.add(honsanteifuka);
+        }
+        param.set出力帳票一覧(honsanteiList);
+        return param;
+
+    }
+
+    /**
      * 「実行する」ボタンを押下すると、ボタンを行する。
      *
      * @return ValidationMessageControlPairs
@@ -348,7 +411,6 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
                 } else if (納入通知書の型_銀振型5期タイプ.equals(納付書の型の設定値)) {
                     has型5期 = true;
                 }
-                // TODO QA880 普徴開始通知書（仮算定）のチェックがオンの場合
             } else if (普通徴収仮算定結果一覧表_帳票分類ID.equals(帳票分類Id)) {
                 has普徴 = true;
             }

@@ -15,9 +15,9 @@ public enum TokuchoKaishiTsuki10GatsuHosoku {
      */
     特別徴収しない("00", "特別徴収しない", ""),
     /**
-     * コード:04 名称:_4月開始 略称:04月
+     * コード:04 名称:4月開始 略称:04月
      */
-    _04月("04", "_4月開始", "04月");
+    _4月開始("04", "4月開始", "04月");
 
     private final RString code;
     private final RString fullName;

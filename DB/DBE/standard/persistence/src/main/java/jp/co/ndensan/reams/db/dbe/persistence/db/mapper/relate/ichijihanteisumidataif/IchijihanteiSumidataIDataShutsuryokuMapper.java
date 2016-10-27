@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.Ichiji
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7211GaibuRenkeiDataoutputJohoEntity;
 
 /**
+ * 一次判定データ出力Mapperです。
  *
- * @author soft863
+ * @reamsid_L DBE-1610-020 wanghui
  */
 public interface IchijihanteiSumidataIDataShutsuryokuMapper {
 

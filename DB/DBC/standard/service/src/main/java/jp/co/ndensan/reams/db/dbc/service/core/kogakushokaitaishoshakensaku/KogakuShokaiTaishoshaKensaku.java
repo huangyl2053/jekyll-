@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuResultEntity;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuSearch;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
@@ -21,14 +20,23 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaitaishoshakensaku.
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaitaishoshakensaku.KogakuShokaiTaishoshaKensakuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakushokaitaishoshakensaku.IKogakuShokaiTaishoshaKensakuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -67,6 +75,9 @@ public class KogakuShokaiTaishoshaKensaku {
      * @return list＜高額介護サービス費一覧＞
      */
     public List<KogakuShokaiTaishoshaKensakuResultEntity> selectTaishosha(KogakuShokaiTaishoshaKensakuSearch condition) {
+        RString 措置先区分 = DbBusinessConfig
+                .get(ConfigNameDBU.広域内住所地特例者検索制御_措置元_措置先区分_介護給付, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        condition.set措置先区分(措置先区分);
         IKogakuShokaiTaishoshaKensakuMapper mapper = mapperProvider.create(IKogakuShokaiTaishoshaKensakuMapper.class);
         List<KogakuShokaiTaishoshaKensakuResultEntity> resultList = new ArrayList<>();
         if (メニューID_高額介護.equals(condition.getメニューID())) {
@@ -79,6 +90,7 @@ public class KogakuShokaiTaishoshaKensaku {
                 DbT3057KogakuShikyuHanteiKekkaEntity 判定結果Entity = entity.get高額介護サービス費支給判定結果Entity();
                 DbT3058KogakuShikyuShinsaKetteiEntity 審査決定Entity = entity.get高額介護サービス費支給審査決定Entity();
                 DbT3055KogakuKyufuTaishoshaGokeiEntity 対象者合計Entity = entity.get高額介護サービス費給付対象者合計Entity();
+                ShikibetsuCode 識別コード = entity.get識別コード();
                 KogakuShokaiTaishoshaKensakuResultEntity result = new KogakuShokaiTaishoshaKensakuResultEntity();
                 result.set被保険者番号(支給申請Entity.getHihokenshaNo());
                 result.setサービス提供年月(支給申請Entity.getServiceTeikyoYM());
@@ -101,8 +113,13 @@ public class KogakuShokaiTaishoshaKensaku {
                     result.set支給区分コード(RString.EMPTY);
                     result.set支給金額(null);
                 }
-                // TODO QAあり。
-//                result.get識別対象();
+                if (識別コード != null && !識別コード.isEmpty()) {
+                    IShikibetsuTaisho 識別対象 = ShikibetsuTaishoService.getShikibetsuTaishoFinder()
+                            .get識別対象(GyomuCode.DB介護保険, 識別コード, KensakuYusenKubun.住登外優先);
+                    result.set識別対象(識別対象);
+                } else {
+                    result.set識別対象(null);
+                }
                 resultList.add(result);
             }
         } else if (メニューID_総合事業高額介護.equals(condition.getメニューID())) {
@@ -115,6 +132,7 @@ public class KogakuShokaiTaishoshaKensaku {
                 DbT3111JigyoKogakuShikyuHanteiKekkaEntity 判定結果Entity = entity.get事業高額介護サービス費支給判定結果Entity();
                 DbT3112KogakuShikyuShinsaKetteiEntity 審査決定Entity = entity.get事業高額介護サービス費支給審査決定Entity();
                 DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity 対象者合計Entity = entity.get事業高額介護サービス費給付対象者合計Entity();
+                ShikibetsuCode 識別コード = entity.get識別コード();
                 KogakuShokaiTaishoshaKensakuResultEntity result = new KogakuShokaiTaishoshaKensakuResultEntity();
                 result.set被保険者番号(支給申請Entity.getHihokenshaNo());
                 result.setサービス提供年月(支給申請Entity.getServiceTeikyoYM());
@@ -137,8 +155,20 @@ public class KogakuShokaiTaishoshaKensaku {
                     result.set支給区分コード(RString.EMPTY);
                     result.set支給金額(null);
                 }
-                // TODO QAあり。
-//                result.get識別対象();
+                if (識別コード != null && !識別コード.isEmpty()) {
+                    IShikibetsuTaisho 識別対象 = ShikibetsuTaishoService.getShikibetsuTaishoFinder()
+                            .get識別対象(GyomuCode.DB介護保険, 識別コード, KensakuYusenKubun.住登外優先);
+                    result.set識別対象(識別対象);
+                } else {
+                    result.set識別対象(null);
+                }
+                if (識別コード != null && !識別コード.isEmpty()) {
+                    IShikibetsuTaisho 識別対象 = ShikibetsuTaishoService.getShikibetsuTaishoFinder()
+                            .get識別対象(GyomuCode.DB介護保険, 識別コード, KensakuYusenKubun.住登外優先);
+                    result.set識別対象(識別対象);
+                } else {
+                    result.set識別対象(null);
+                }
                 resultList.add(result);
             }
         }

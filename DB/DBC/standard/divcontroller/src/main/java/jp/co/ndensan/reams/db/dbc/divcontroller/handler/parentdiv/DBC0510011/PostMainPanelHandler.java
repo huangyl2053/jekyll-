@@ -87,6 +87,8 @@ public class PostMainPanelHandler {
     public RString initialize() {
         RString 場合 = null;
         div.setHdnModl(DataPassingConverter.serialize(単一モード));
+        div.setHdnModl1(DataPassingConverter.serialize(RString.EMPTY));
+        div.setHdnModl2(DataPassingConverter.serialize(RString.EMPTY));
         if (導入形態コード.toString().equals(NUM_120.toString())) {
             div.getMeisaiPanel().setVisible(false);
             div.getSp1().setWrap(false);

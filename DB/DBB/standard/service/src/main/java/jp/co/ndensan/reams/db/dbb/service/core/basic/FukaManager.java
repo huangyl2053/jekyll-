@@ -27,8 +27,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護賦課を管理するクラスです。
- *
- * @reamsid_L DBB-9999-022 三浦 凌
  */
 public class FukaManager {
 

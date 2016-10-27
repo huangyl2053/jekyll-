@@ -294,9 +294,15 @@ public class SaishinsaMoshitateTourokuPanelHandler {
             div.setHdn識別コード(給付実績情報.get識別コード());
             div.getKagoMoshitatePanel().getTextBox11().setValue(給付実績情報.get証記載保険者名());
             div.getKagoMoshitatePanel().getRadioButton1().setSelectedIndex(ZERO);
-            div.getKagoMoshitatePanel().getDropDownList3().setSelectedIndex(ZERO);
-            div.getKagoMoshitatePanel().getDropDownList6().setSelectedIndex(ZERO);
-            div.getKagoMoshitatePanel().getDropDownList7().setSelectedIndex(ZERO);
+            if (!div.getKagoMoshitatePanel().getDropDownList3().getDataSource().isEmpty()) {
+                div.getKagoMoshitatePanel().getDropDownList3().setSelectedIndex(ZERO);
+            }
+            if (!div.getKagoMoshitatePanel().getDropDownList6().getDataSource().isEmpty()) {
+                div.getKagoMoshitatePanel().getDropDownList6().setSelectedIndex(ZERO);
+            }
+            if (!div.getKagoMoshitatePanel().getDropDownList7().getDataSource().isEmpty()) {
+                div.getKagoMoshitatePanel().getDropDownList7().setSelectedIndex(ZERO);
+            }
             div.getTextBoxDate1().setReadOnly(false);
             div.getTextBox12().setReadOnly(false);
             div.getDropDownList2().setReadOnly(false);
@@ -376,7 +382,7 @@ public class SaishinsaMoshitateTourokuPanelHandler {
      */
     public RString get保険者リストの値() {
         if (is広域保険者()) {
-            return div.getSearchToKyufujissekiPanel().getHokenshaList().getSelectedItem().get市町村コード().value();
+            return div.getSearchToKyufujissekiPanel().getHokenshaList().getSelectedItem().get証記載保険者番号().value();
         } else {
             return null;
         }
@@ -457,6 +463,12 @@ public class SaishinsaMoshitateTourokuPanelHandler {
         div.getTextBox12().clearValue();
         div.getRadioButton1().clearSelectedItem();
         div.getTextBoxDate1().clearValue();
+        div.getDropDownList2().getDataSource().clear();
+        div.getDropDownList3().getDataSource().clear();
+        div.getDropDownList4().getDataSource().clear();
+        div.getDropDownList5().getDataSource().clear();
+        div.getDropDownList6().getDataSource().clear();
+        div.getDropDownList7().getDataSource().clear();
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {

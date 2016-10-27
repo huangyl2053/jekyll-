@@ -24,6 +24,8 @@ import lombok.Getter;
 @Getter
 public class IdoChushutsuDaichoNewMybatisParameter implements IMyBatisParameter {
 
+    private static final RString COMMA = new RString(",");
+    private static final int NO_9 = 9;
     private final RString 抽出条件設定区分;
     private final HihokenshaNo 被保険者番号From;
     private final HihokenshaNo 被保険者番号To;
@@ -78,14 +80,23 @@ public class IdoChushutsuDaichoNewMybatisParameter implements IMyBatisParameter 
         this.今回抽出終了時分秒 = 今回抽出終了時分秒;
         this.被保険者番号リスト = 被保険者番号リスト;
         this.識別コードリスト = 識別コードリスト;
-        this.出力順 = 出力順;
+        this.出力順 = COMMA.concat(出力順.substring(NO_9));
         this.is広域 = is広域;
         this.is単一 = is単一;
         get今回抽出日付();
     }
 
     private void get今回抽出日付() {
-        今回抽出開始日付 = RDateTime.convertFrom(今回抽出開始年月日, 今回抽出開始時分秒);
-        今回抽出終了日付 = RDateTime.convertFrom(今回抽出終了年月日, 今回抽出終了時分秒);
+        if (今回抽出開始年月日 == null || 今回抽出開始時分秒 == null) {
+            今回抽出開始日付 = RDateTime.now();
+        } else {
+            今回抽出開始日付 = RDateTime.convertFrom(今回抽出開始年月日, 今回抽出開始時分秒);
+        }
+        if (今回抽出終了年月日 == null || 今回抽出終了時分秒 == null) {
+            今回抽出終了日付 = RDateTime.now();
+        } else {
+            今回抽出終了日付 = RDateTime.convertFrom(今回抽出終了年月日, 今回抽出終了時分秒);
+        }
+
     }
 }

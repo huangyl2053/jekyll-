@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbd.business.core.dbd560001.NinteiTanitsuProcessDa
 import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.YokaigoInterfaceShurui;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd560001.DBD560001ProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd560001.YokaigoNinteiInterfaceEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninteidetaikatsukousin.INinteidetaikkatsukousinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -44,13 +44,17 @@ public class NinteidetaikkatsukousinKoukiProcess extends BatchProcessBase<Yokaig
     private final RString 厚労省 = YokaigoInterfaceShurui.厚労省.getコード();
     private final RString 電算 = YokaigoInterfaceShurui.電算.getコード();
     private final RString 富士通2 = YokaigoInterfaceShurui.富士通２.getコード();
+    private INinteidetaikkatsukousinMapper mapper;
 
-    @BatchWriter
-    private BatchPermanentTableWriter<DbT4001JukyushaDaichoEntity> dbt4001tableWriter;
     @BatchWriter
     private BatchPermanentTableWriter<DbT4101NinteiShinseiJohoEntity> dbt4101tableWriter;
     @BatchWriter
     private BatchPermanentTableWriter<DbT4102NinteiKekkaJohoEntity> dbt4102tableWriter;
+
+    @Override
+    protected void initialize() {
+        mapper = getMapper(INinteidetaikkatsukousinMapper.class);
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -59,7 +63,6 @@ public class NinteidetaikkatsukousinKoukiProcess extends BatchProcessBase<Yokaig
 
     @Override
     protected void createWriter() {
-        dbt4001tableWriter = new BatchPermanentTableWriter<>(DbT4001JukyushaDaichoEntity.class);
         dbt4101tableWriter = new BatchPermanentTableWriter<>(DbT4101NinteiShinseiJohoEntity.class);
         dbt4102tableWriter = new BatchPermanentTableWriter<>(DbT4102NinteiKekkaJohoEntity.class);
     }
@@ -138,8 +141,7 @@ public class NinteidetaikkatsukousinKoukiProcess extends BatchProcessBase<Yokaig
     }
 
     private void upDate受給者台帳Detial(YokaigoNinteiInterfaceEntity entity, NinteiTanitsuProcessDataManager manager) {
-        dbt4001tableWriter.delete(entity.get受給者台帳Entity());
-        dbt4001tableWriter.insert(manager.upDate受給者台帳Detial(entity, 認定日));
+        mapper.upDate受給者台帳(manager.upDate受給者台帳Detial(entity, 認定日));
     }
 
     private boolean get要介護認定更新比較結果(YokaigoNinteiInterfaceEntity entity, NinteiTanitsuProcessDataManager manager) {

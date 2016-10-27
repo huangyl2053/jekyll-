@@ -367,37 +367,12 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
 
     private int get山分け用スプール数_銀振型(List<NokiJoho> 期月List, KitsukiList 本算定期間) {
         int 山分け用スプール数 = 0;
-        //TODO セルフ業務決定436　確認中
         本算定期間.toList();
-//        List<Kitsuki> 銀振計算期月リスト = 本算定期間.toList();
-//        int 最初の月 = 銀振計算期月リスト.get(銀振計算期月リスト.size() - INT_1).get月AsInt();
-//        RString 印字位置 = get印字位置(最初の月);
-//        boolean is昇順 = false;
-//        if (定値区分_1.equals(印字位置)) {
-//            is昇順 = true;
-//        } else if (INT_1 < Integer.parseInt(印字位置.toString())) {
-//            is昇順 = false;
-//        }
         for (NokiJoho 期月 : 期月List) {
             if (定値区分_0.equals(get印字位置(期月.get期月().get月AsInt()))) {
                 期月List.remove(期月);
             }
         }
-//        if (is昇順) {
-//        for (int i = 0; i < 期月List.size() - 1; i++) {
-//            if (Integer.parseInt(get印字位置(期月List.get(i).get期月().get月AsInt()).toString())
-//                    < Integer.parseInt(get印字位置(期月List.get(i + INT_1).get期月().get月AsInt()).toString())) {
-//                山分け用スプール数 = 山分け用スプール数 + 1;
-//            }
-//        }
-//        } else {
-//            for (int i = 期月List.size() - 1; 0 < i; i--) {
-//                if (Integer.parseInt(get印字位置(期月List.get(i).get期月().get月AsInt()).toString())
-//                        < Integer.parseInt(get印字位置(期月List.get(i - INT_1).get期月().get月AsInt()).toString())) {
-//                    山分け用スプール数 = 山分け用スプール数 + 1;
-//                }
-//            }
-//        }
         Collections.sort(期月List, new Comparator<NokiJoho>() {
             @Override
             public int compare(NokiJoho arg0, NokiJoho arg1) {

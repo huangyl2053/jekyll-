@@ -6,21 +6,13 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc010020.IKogakuServicehiJuryoininKeiyakuShoninKakuninshoMapper">
    <select id="get高額受領委任契約事業者情報データ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc010020.KogakuServicehiJuryoininKeiyakuShoninKakuninshoMybatisParameter"
            resultMap="高額介護事業者情報データResultMap" resultOrdered="true" fetchSize="500">
-       SELECT 
+       WITH master AS(
+        SELECT 
            高額介護事業者.*,
            介護事業者.*,
            介護事業者代表者.*,
            被保険者台帳管理NEWEST."shichosonCode" AS "shichosonCode",
            被保険者台帳管理NEWEST."shikibetsuCode" AS "shikibetsuCode",
-           宛名PSM."meisho" AS "meisho",
-           宛名PSM."kanaMeisho" AS "kanaMeisho",
-           宛名PSM."seinengappiYMD" AS "seinengappiYMD",
-           宛名PSM."seibetsuCode" AS "seibetsuCode",
-           宛名PSM."yubinNo" AS "yubinNo",
-           宛名PSM."zenkokuJushoCode" AS "zenkokuJushoCode",
-           宛名PSM."gyoseikuCode" AS "gyoseikuCode",
-           宛名PSM."juminShubetsuCode" AS "juminShubetsuCode",
-           宛名PSM."jusho" AS "jusho",
            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
        FROM
            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3076KogakuJuryoininKeiyakuJigyoshaMapper.noDeleted_DbT3076KogakuJuryoininKeiyakuJigyosha" />) AS 高額介護事業者
@@ -37,11 +29,6 @@
        LEFT JOIN 
            rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理NEWEST
        ON  高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_hihokenshaNo" = 被保険者台帳管理NEWEST."hihokenshaNo"
-       LEFT JOIN
-           rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年月日},true,'DB',false,'','','','','','','','','','','',true,
-           '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-           true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名PSM  
-       ON  宛名PSM."shikibetsuCode" = 被保険者台帳管理NEWEST."shikibetsuCode"
        LEFT JOIN 
            rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
        ON  "Atesaki"."shikibetsuCode" = 被保険者台帳管理NEWEST."shikibetsuCode"
@@ -63,10 +50,34 @@
         </if>
        AND  (高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_ketteiYMD" <![CDATA[<>]]> ''
             AND 高額介護事業者."dbT3076KogakuJuryoininKeiyakuJigyosha_ketteiYMD" is not null)
-            <if test="改頁出力順 != null and !改頁出力順.isEmpty()">
-                ORDER BY
-                ${改頁出力順}
-            </if>
+       )
+       SELECT 
+           master.*,
+           宛名PSM."meisho" AS "meisho",
+           宛名PSM."kanaMeisho" AS "kanaMeisho",
+           宛名PSM."seinengappiYMD" AS "seinengappiYMD",
+           宛名PSM."seibetsuCode" AS "seibetsuCode",
+           宛名PSM."yubinNo" AS "yubinNo",
+           宛名PSM."zenkokuJushoCode" AS "zenkokuJushoCode",
+           宛名PSM."gyoseikuCode" AS "gyoseikuCode",
+           宛名PSM."juminShubetsuCode" AS "juminShubetsuCode",
+           宛名PSM."jusho" AS "jusho"
+       FROM master
+       LEFT JOIN
+       rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年月日},true,'DB',false,'','','','','','','','','','','',true,
+           '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+           true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                 )      ) AS 宛名PSM 
+        ON master."shikibetsuCode" = 宛名PSM."shikibetsuCode"
+        <if test="改頁出力順 != null and !改頁出力順.isEmpty()">
+            ORDER BY
+            ${改頁出力順}
+        </if>
    </select>
      <resultMap id="高額介護事業者情報データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc010020.KogakuServicehiJuryoininKeiyakuShoninKakuninshoEntity" autoMapping="true">
         <id column="dbT3076KogakuJuryoininKeiyakuJigyosha_hihokenshaNo"/>

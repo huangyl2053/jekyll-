@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 高額合算自己負担額証明書情報取込のの帳票CSVEntity
+ * 高額合算自己負担額証明書情報取込の帳票CSVEntity
  *
  * @reamsid_L DBC-2640-010 zhengshenlei
  */
@@ -45,7 +45,7 @@ public class KogakuGassanJikofutangakuCsvEntity {
     @CsvField(order = 120, name = "支給申請書整理番号")
     private RString 支給申請書整理番号;
     @CsvField(order = 130, name = "履歴番号")
-    private RString 履歴番号;
+    private int 履歴番号;
     @CsvField(order = 140, name = "申請年月日")
     private RString 申請年月日;
     @CsvField(order = 150, name = "異動区分コード")

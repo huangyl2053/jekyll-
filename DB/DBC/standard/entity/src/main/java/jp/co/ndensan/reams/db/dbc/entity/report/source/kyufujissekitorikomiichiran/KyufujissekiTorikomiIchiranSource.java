@@ -111,10 +111,79 @@ public class KyufujissekiTorikomiIchiranSource implements IReportSource {
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
+    @ReportItem(name = "yubinNo", length = 10, order = 68)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 10, order = 69)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 10, order = 70)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 10, order = 71)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 10, order = 72)
+    public RString shichosonCode;
+    @ReportItem(name = "kyufuJissekiKubun", length = 10, order = 73)
+    public RString kyufuJissekiKubun;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSourceのenum
+     */
+    public enum ReportSourceFields {
+
+        printTimeStamp,
+        torikomiYM,
+        hokenshaNo,
+        hokenshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        listUpper_1,
+        listUpper_2,
+        listUpper_3,
+        listUpper_4,
+        listUpper_5,
+        listUpper_6,
+        listUpper_7,
+        listUpper_8,
+        listUpper_9,
+        listUpper_10,
+        listUpper_11,
+        listUpper_12,
+        listUpper_13,
+        listUpper_14,
+        listUpper_15,
+        listUpper_16,
+        listUpper_17,
+        listUpper_18,
+        listUpper_19,
+        listUpper_20,
+        listUpper_21,
+        listUpper_22,
+        listUpper_23,
+        listUpper_24,
+        listUpper_25,
+        listLower_1,
+        listLower_2,
+        listLower_3,
+        gokeiKensuTitle,
+        gokeiKensu,
+        kyufuJissekiKubun,
+        yubinNo,
+        choikiCode,
+        gyoseikuCode,
+        shimei50onKana,
+        shichosonCode
+    }
 }

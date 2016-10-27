@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho;
 
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -20,6 +21,7 @@ public class ShinseiJohoChohyoTempRelateEntity {
     private ShinseiJohoChohyoTempEntity 申請情報;
     private UaFt250FindAtesakiEntity 宛先;
     private RString 市町村名称;
+    private DbT4021ShiharaiHohoHenkoEntity 支払方法変更;
 
     /**
      * コンストラクタです。

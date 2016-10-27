@@ -41,13 +41,13 @@ public enum ShichosonTokubetuKyufuServiceTourokuSpec implements IPredicate<Shich
                 public boolean apply(ShichosonTokubetuKyufuServiceTourokuDiv div) {
                     RDate 有効期間開始年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue();
                     RDate 有効期間終了年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue();
-                    return 有効期間開始年月日.isBeforeOrEquals(有効期間終了年月日);
+                    return 有効期間終了年月日 == null || 有効期間開始年月日.isBeforeOrEquals(有効期間終了年月日);
                 }
             },
     /**
-     * 有効開始日が前回の有効開始日以降の日付のチェック
+     * 有効開始日が前回の有効開始日以前の日付のチェック
      */
-    有効開始日が前回の有効開始日以降の日付のチェック {
+    有効開始日が前回の有効開始日以前の日付のチェック {
                 @Override
                 public boolean apply(ShichosonTokubetuKyufuServiceTourokuDiv div) {
                     if (CommonButtonHolder.isDisplayNone(追加やめる)) {
@@ -62,7 +62,7 @@ public enum ShichosonTokubetuKyufuServiceTourokuSpec implements IPredicate<Shich
                         }
                     }
                     if (直近データ != null && 直近データ.getServiceYukoKikanShuryoYMD().isNullOrEmpty()) {
-                        return !直近データ.getServiceYukoKikanKaishiYMDSeireki().getValue().isBefore(有効期間開始年月日);
+                        return 直近データ.getServiceYukoKikanKaishiYMDSeireki().getValue().isBefore(有効期間開始年月日);
                     }
                     return true;
                 }
@@ -85,10 +85,9 @@ public enum ShichosonTokubetuKyufuServiceTourokuSpec implements IPredicate<Shich
                         }
                     }
                     if (直近データ != null && !直近データ.getServiceYukoKikanShuryoYMD().isNullOrEmpty()) {
-                        return !有効期間開始年月日.isBefore(直近データ.getServiceYukoKikanShuryoYMDSeireki().getValue());
+                        return 直近データ.getServiceYukoKikanShuryoYMDSeireki().getValue().isBeforeOrEquals(有効期間開始年月日);
                     }
                     return true;
-
                 }
             },
     /**
@@ -105,19 +104,6 @@ public enum ShichosonTokubetuKyufuServiceTourokuSpec implements IPredicate<Shich
                 }
             },
     /**
-     * 名称入力文字数チェック
-     */
-    名称入力文字数チェック {
-                @Override
-                public boolean apply(ShichosonTokubetuKyufuServiceTourokuDiv div) {
-                    if (!CommonButtonHolder.isDisplayNone(削除やめる)) {
-                        return true;
-                    }
-                    RString 名称 = div.getKubunShikyuGendogakuShosai().getTxtServiceMeisho().getValue();
-                    return 名称.length() <= 名称最大桁数;
-                }
-            },
-    /**
      * 略称入力内容チェック
      */
     略称入力内容チェック {
@@ -129,23 +115,9 @@ public enum ShichosonTokubetuKyufuServiceTourokuSpec implements IPredicate<Shich
                     RString 略称 = div.getKubunShikyuGendogakuShosai().getTxtServiceRyakusho().getValue();
                     return RStringUtil.is全角Only(略称);
                 }
-            },
-    /**
-     * 略称入力文字数チェック
-     */
-    略称入力文字数チェック {
-                @Override
-                public boolean apply(ShichosonTokubetuKyufuServiceTourokuDiv div) {
-                    if (!CommonButtonHolder.isDisplayNone(削除やめる)) {
-                        return true;
-                    }
-                    RString 略称 = div.getKubunShikyuGendogakuShosai().getTxtServiceRyakusho().getValue();
-                    return 略称.length() <= 略称最大桁数;
-                }
             };
+
     private static final RString 追加やめる = new RString("btnTsuikaCancel");
     private static final RString 直近フラグ = new RString("1");
-    private static final int 名称最大桁数 = 32;
-    private static final int 略称最大桁数 = 5;
     private static final RString 削除やめる = new RString("btnSaikujoCancel");
 }

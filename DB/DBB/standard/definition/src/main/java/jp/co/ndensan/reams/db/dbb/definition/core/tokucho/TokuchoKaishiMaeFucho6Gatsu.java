@@ -11,22 +11,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum TokuchoKaishiMaeFucho6Gatsu {
 
     /**
-     * コード:0 名称:なし 略称:特別徴収開始前の仮算定納期で普通徴収しない
+     * コード:0 名称:特別徴収開始前の仮算定納期で普通徴収しない 略称:定義なし
      */
-    特別徴収開始前の仮算定納期で普通徴収しない("0", "なし", "特別徴収開始前の仮算定納期で普通徴収しない"),
+    なし("0", "特別徴収開始前の仮算定納期で普通徴収しない"),
     /**
-     * コード:1 名称:あり 略称:特別徴収開始前の仮算定納期で普通徴収する
+     * コード:1 名称:特別徴収開始前の仮算定納期で普通徴収する 略称:定義なし
      */
-    特別徴収開始前の仮算定納期で普通徴収する("1", "あり", "特別徴収開始前の仮算定納期で普通徴収する");
+    あり("1", "特別徴収開始前の仮算定納期で普通徴収する");
 
     private final RString code;
     private final RString fullName;
-    private final RString shortName;
 
-    private TokuchoKaishiMaeFucho6Gatsu(String code, String fullname, String shortName) {
+    private TokuchoKaishiMaeFucho6Gatsu(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
-        this.shortName = new RString(shortName);
     }
 
     /**
@@ -45,15 +43,6 @@ public enum TokuchoKaishiMaeFucho6Gatsu {
      */
     public RString get名称() {
         return fullName;
-    }
-
-    /**
-     * 特徴開始前普通徴収6月の略称を返します。
-     *
-     * @return 特徴開始前普通徴収6月の略称
-     */
-    public RString get略称() {
-        return shortName;
     }
 
     /**

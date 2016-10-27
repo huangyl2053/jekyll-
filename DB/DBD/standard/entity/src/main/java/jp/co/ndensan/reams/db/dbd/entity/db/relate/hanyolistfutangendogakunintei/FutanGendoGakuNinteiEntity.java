@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class FutanGendoGakuNinteiEntity {
 
+    private RString 被保険者台帳管理_識別コード;
     private RString 被保険者台帳管理_市町村コード;
     private RString 被保険者台帳管理_広域内住所地特例フラグ;
     private RString 被保険者台帳管理_広住特措置元市町村コード;

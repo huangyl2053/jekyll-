@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonShikibetsuIDniYoruShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -94,7 +95,7 @@ public class KaigoJushoEditor {
     private RString 導入形態を判断(SubGyomuCode subGyomuCode, RString 帳票分類ID, IJusho 住所クラス, Gyoseiku 行政区, RString 市町村コード) {
         RString 住所 = RString.EMPTY;
         ShichosonSecurityJoho shichosonSecurity = shichosonSecurityJohoFinder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (shichosonSecurity != null) {
+        if (shichosonSecurity != null && !KaigoDonyuKubun.未導入.code().equals(shichosonSecurity.get介護導入区分().code())) {
             if (DonyuKeitaiCode.事務単一.getCode().equals(shichosonSecurity.get導入形態コード().getCode())
                     || DonyuKeitaiCode.認定単一.getCode().equals(shichosonSecurity.get導入形態コード().getCode())) {
                 住所 = 単一市町村の住所編集処理(subGyomuCode, 帳票分類ID, 住所クラス, 行政区);

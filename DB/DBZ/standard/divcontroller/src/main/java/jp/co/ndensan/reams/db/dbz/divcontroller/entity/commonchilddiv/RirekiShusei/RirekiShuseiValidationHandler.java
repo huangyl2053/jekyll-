@@ -127,10 +127,11 @@ public class RirekiShuseiValidationHandler {
     public ValidationMessageControlPairs validate削除事由必須のチェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         RString deleteKey = div.getHdnDeleteKey();
-        RirekiShuseiDataPass zenkai = DataPassingConverter.deserialize(div.getHdnZenkaiJohoSerialized(),
+        RirekiShuseiDataPass zenkai = DataPassingConverter.deserialize(div.getHdnKonkaiJohoSerialized(),
                 RirekiShuseiDataPass.class);
         RString 削除事由コード = div.getCcdShinseiSonotaJohoInput().get削除事由();
-        if ((RString.isNullOrEmpty(deleteKey) || zenkai.get削除事由コード() == null) && RString.isNullOrEmpty(削除事由コード)) {
+        if ((!RString.isNullOrEmpty(deleteKey) || (zenkai.get削除事由コード() != null && !zenkai.get削除事由コード().isEmpty()))
+                && RString.isNullOrEmpty(削除事由コード)) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.選択されていない,
                             "削除事由")));

@@ -47,14 +47,14 @@ public class KogakuOshiraseTsuchiTeshutsuKigenAriEditor implements IKogakuOshira
             source.hokenshaNo = ReportKomokuEditorUtil.get証記載保険者番号(target.get申請情報帳票発行一時().getShoKisaiHokenshaNoChohyo());
             source.hihokenshaNo = ReportKomokuEditorUtil.get被保険者番号(target.get申請情報帳票発行一時().getHihokenshaNoChohyo());
             source.taishoYM = ReportKomokuEditorUtil.パターン62(target.get申請情報帳票発行一時().getServiceTeikyoYMChohyo());
-            // TODO QA.1189あり 利用者負担額と高額支給額は、一時表に存在しない
-//        source.zikoFutanGaku = ReportKomokuEditorUtil.金額1(target.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo());
+
+            source.zikoFutanGaku = ReportKomokuEditorUtil.金額1(target.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo());
             if (Decimal.ZERO.compareTo(target.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo()) > 0) {
                 source.ketteiGaku = 調整予定金額;
             } else {
                 source.ketteiGaku = 支給予定金額;
             }
-//        source.shikyuGaku =
+            source.shikyuGaku = ReportKomokuEditorUtil.金額1(target.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo());
             source.kigenYMD = ReportKomokuEditorUtil.パターン12(target.get申請書提出期限());
             source.remban = target.get連番();
 

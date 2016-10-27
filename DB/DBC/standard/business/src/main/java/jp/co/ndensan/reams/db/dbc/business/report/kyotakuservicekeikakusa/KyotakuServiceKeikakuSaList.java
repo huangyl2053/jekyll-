@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyotakuServiceKeikakuSaList {
 
     private HihokenshaNo 被保険者番号;
-    private ShikibetsuCode 住民コード;
+    private ShikibetsuCode 識別コード;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
     private FlexibleDate 資格取得日;
     private FlexibleDate 資格喪失日;

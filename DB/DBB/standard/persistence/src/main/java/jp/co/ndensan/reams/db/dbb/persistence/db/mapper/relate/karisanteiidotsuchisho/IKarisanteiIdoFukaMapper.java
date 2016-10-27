@@ -10,6 +10,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdoOrZenkenFukaSelectParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho.IdofukaJohoTempParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * ビジネス_仮算定異動通知書一括発行（バッチ）のMapperインタフェースです。
@@ -17,6 +18,30 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteitsuchishoikkatsuhakk
  * @reamsid_L DBB-0890-040 xicongwang
  */
 public interface IKarisanteiIdoFukaMapper {
+
+    /**
+     * 最新調定日時を取得するメソッドです。
+     *
+     * @param parameter Map<String, Object>
+     * @return DbT7022ShoriDateKanriEntity 処理日付管理
+     */
+    DbT7022ShoriDateKanriEntity select最新調定日時(Map<String, Object> parameter);
+
+    /**
+     * 計算後情報一時テーブルからデータを抽出するメソッドです。
+     *
+     * @param parameter IdofukaJohoTempParameter
+     * @return HonsanteiTsuchishoTempEntity 計算後情報一時テーブルから抽出したデータ
+     */
+    HonsanteiTsuchishoTempEntity select計算後情報一時(IdofukaJohoTempParameter parameter);
+
+    /**
+     * 計算後情報テーブルからデータを抽出するメソッドです。
+     *
+     * @param parameter IdofukaJohoTempParameter
+     * @return HonsanteiTsuchishoTempEntity 計算後情報一時テーブルから抽出したデータ
+     */
+    HonsanteiTsuchishoTempEntity select計算後情報(IdofukaJohoTempParameter parameter);
 
     /**
      * 計算後情報中間一時テーブル削除メソッドです。
@@ -82,20 +107,20 @@ public interface IKarisanteiIdoFukaMapper {
     /**
      * 全件賦課情報の抽出です。
      *
-     * @param parameter Map<String, Object>
+     * @param parameter IdoOrZenkenFukaSelectParameter
      *
      * @return List<HonsanteiTsuchishoTempEntity> 全件賦課情報
      */
-    List<HonsanteiTsuchishoTempEntity> select全件賦課情報(Map<String, Object> parameter);
+    List<HonsanteiTsuchishoTempEntity> select全件賦課情報(IdoOrZenkenFukaSelectParameter parameter);
 
     /**
      * 全件賦課情報の抽出です。
      *
-     * @param parameter Map<String, Object>
+     * @param parameter IdoOrZenkenFukaSelectParameter
      *
      * @return List<HonsanteiTsuchishoTempEntity> 全件賦課情報
      */
-    List<HonsanteiTsuchishoTempEntity> select全件賦課情報_変更(Map<String, Object> parameter);
+    List<HonsanteiTsuchishoTempEntity> select全件賦課情報_変更(IdoOrZenkenFukaSelectParameter parameter);
 
     /**
      * 異動賦課情報一時テーブルの全項目取得する

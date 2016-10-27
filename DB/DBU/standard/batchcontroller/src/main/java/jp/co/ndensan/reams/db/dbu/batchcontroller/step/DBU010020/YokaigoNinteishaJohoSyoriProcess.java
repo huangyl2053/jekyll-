@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020;
 
+import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.ShukeiNo;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.YokaigoNinteishaJohoSyoriMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.YokaigoNinteishaJohoSyoriProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.YokaigoNinteishaJohoKonkyoCSVEntity;
@@ -35,26 +36,25 @@ public class YokaigoNinteishaJohoSyoriProcess extends BatchProcessBase<YokaigoNi
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence."
             + "db.mapper.relate.jigyohokokugeppoippan.IJigyoHokokuGeppoIppanMapper.getYokaigoNinteishaJohoKonkyoCSV");
     private static final RString 拡張子 = new RString(".CSV");
+    private static final RString CSVファイル名_前部 = new RString("DBU01");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
 
     private YokaigoNinteishaJohoSyoriProcessParameter processParameter;
     private YokaigoNinteishaJohoSyoriMybatisParameter mybatisParameter;
     private IJigyoHokokuGeppoIppanMapper mapper;
-//    private FileSpoolManager manager;
-//    private RString filename;
+    private RString 集計番号;
 
     @BatchWriter
     private CsvWriter<YokaigoNinteishaJohoKonkyoCSVEntity> csvWriter;
 
     @Override
     protected void initialize() {
+        集計番号 = ShukeiNo.一般状況_11_要介護_要支援_認定者数.getコード();
         mybatisParameter = processParameter.toYokaigoNinteishaJohoSyoriMybatisParameter();
+        mybatisParameter.setShukeiNo(new Code(集計番号));
         mapper = getMapper(IJigyoHokokuGeppoIppanMapper.class);
-//        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc,
-//                new EucEntityId(processParameter.get作成CSVファイルID()), UzUDE0831EucAccesslogFileType.Csv);
-//        filename = Path.combinePath(manager.getEucOutputDirectry(), processParameter.get作成CSVファイルID().concat(拡張子));
-        RString filename = Path.combinePath(processParameter.get出力ファイルPATH(), processParameter.get作成CSVファイルID().concat(拡張子));
+        RString filename = Path.combinePath(processParameter.get出力ファイルPATH(), CSVファイル名_前部.concat(集計番号).concat(拡張子));
         csvWriter = new CsvWriter.InstanceBuilder(filename).
                 setEncode(Encode.UTF_8withBOM)
                 .canAppend(true)
@@ -76,16 +76,11 @@ public class YokaigoNinteishaJohoSyoriProcess extends BatchProcessBase<YokaigoNi
 
     @Override
     protected void process(YokaigoNinteishaJohoKonkyoCSVEntity entity) {
-        if (mybatisParameter.getShukeiNo().value().equals(entity.get集計番号())) {
+        if (集計番号.equals(entity.get集計番号())) {
             csvWriter.writeLine(entity);
             AccessLogger.log(AccessLogType.照会, toPersonalData(entity.get被保険者番号()));
         }
     }
-//
-//    @Override
-//    protected void afterExecute() {
-//        manager.spool(filename);
-//    }
 
     private PersonalData toPersonalData(RString 被保険者番号) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号);

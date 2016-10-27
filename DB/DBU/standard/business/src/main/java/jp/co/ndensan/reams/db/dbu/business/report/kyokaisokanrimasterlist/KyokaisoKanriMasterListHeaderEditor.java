@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist;
 
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoKanriMasterListChohyoDataSakuseiEntity;
 import jp.co.ndensan.reams.db.dbu.entity.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReportSource;
 
 /**
@@ -14,14 +15,14 @@ import jp.co.ndensan.reams.db.dbu.entity.report.kyokaisokanrimasterlist.Kyokaiso
  */
 class KyokaisoKanriMasterListHeaderEditor implements IKyokaisoKanriMasterListEditor {
 
-    private final KyokaisoKanriMasterListHeadItem headItem;
+    private final KyokaisoKanriMasterListChohyoDataSakuseiEntity headItem;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link KyokaisoKanriMasterListItem}
      */
-    protected KyokaisoKanriMasterListHeaderEditor(KyokaisoKanriMasterListHeadItem headItem) {
+    protected KyokaisoKanriMasterListHeaderEditor(KyokaisoKanriMasterListChohyoDataSakuseiEntity headItem) {
         this.headItem = headItem;
     }
 
@@ -32,21 +33,41 @@ class KyokaisoKanriMasterListHeaderEditor implements IKyokaisoKanriMasterListEdi
 
     private KyokaisoKanriMasterListReportSource editHeader(KyokaisoKanriMasterListReportSource source) {
 
-        source.printTimeStamp = headItem.getPrintTimeStamp();
+        source.printTimeStamp = headItem.get印刷日時();
         // TODO 袁献輝 QA608、rseファイルにpageCountを存在しない　2016/02/20。
 //        source.pageCount = item.getPageCount();
-        source.shichosonCode = headItem.getShichosonCode();
-        source.shichosonName = headItem.getShichosonName();
-        source.shutsuryokujun1 = headItem.getShutsuryokujun1();
-        source.shutsuryokujun2 = headItem.getShutsuryokujun2();
-        source.shutsuryokujun3 = headItem.getShutsuryokujun3();
-        source.shutsuryokujun4 = headItem.getShutsuryokujun4();
-        source.shutsuryokujun5 = headItem.getShutsuryokujun5();
-        source.kaipage1 = headItem.getKaipage1();
-        source.kaipage2 = headItem.getKaipage2();
-        source.kaipage3 = headItem.getKaipage3();
-        source.kaipage4 = headItem.getKaipage4();
-        source.kaipage5 = headItem.getKaipage5();
+        source.shichosonCode = headItem.get市町村コード();
+        source.shichosonName = headItem.get市町村名();
+        source.shutsuryokujun1 = headItem.get並び順1();
+        source.shutsuryokujun2 = headItem.get並び順2();
+        source.shutsuryokujun3 = headItem.get並び順3();
+        source.shutsuryokujun4 = headItem.get並び順4();
+        source.shutsuryokujun5 = headItem.get並び順5();
+        source.kaipage1 = headItem.get改頁1();
+        source.kaipage2 = headItem.get改頁2();
+        source.kaipage3 = headItem.get改頁3();
+        source.kaipage4 = headItem.get改頁4();
+        source.kaipage5 = headItem.get改頁5();
+        source.listUpper_1 = headItem.get被保険者番号();
+        source.listUpper_2 = headItem.getカナ氏名();
+        source.listUpper_3 = headItem.get性別();
+        source.listUpper_4 = headItem.get種別();
+        source.listUpper_5 = headItem.get状態();
+        source.listUpper_6 = headItem.get生年月日();
+        source.listUpper_7 = headItem.get該当開始日();
+        source.listUpper_8 = headItem.get給付額減額解除();
+        source.listUpper_9 = headItem.get居住費軽減後居室種類();
+        source.listLower_1 = headItem.get識別コード();
+        source.listLower_2 = headItem.get氏名();
+        source.listLower_3 = headItem.get世帯コード();
+        source.listLower_4 = headItem.get該当申請日();
+        source.listLower_5 = headItem.get該当終了日();
+        source.listLower_6 = headItem.get標準負担減額後負担額();
+        source.listLower_7 = headItem.get居住費軽減後負担額();
+        source.listLower_8 = headItem.get食費軽減後負担額();
+        source.listLower_9 = headItem.get高額ｻｰﾋﾞｽ費減額後上限額();
+        source.listLower_10 = headItem.get保険料納付減額後保険料段階();
+        source.choikiCode = headItem.get町域コード();
         return source;
     }
 }

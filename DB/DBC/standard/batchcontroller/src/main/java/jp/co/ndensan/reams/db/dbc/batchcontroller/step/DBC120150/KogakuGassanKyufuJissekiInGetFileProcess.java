@@ -151,7 +151,7 @@ public class KogakuGassanKyufuJissekiInGetFileProcess extends BatchProcessBase<L
             if (被保険者番号 != null && !被保険者番号.isEmpty()) {
                 dbWT38P1TempEntity.setHihokenshaNoIn(new HihokenshaNo(被保険者番号));
             }
-            dbWT38P1TempEntity.setShikyuShinseiSeiriNo(csvEntity.get支給申請書整理番号());
+            dbWT38P1TempEntity.setShikyuShinseishoSeiriNo(csvEntity.get支給申請書整理番号());
             dbWT38P1TempEntity.setSeiriNo(RString.EMPTY);
             dbWT38P1TempEntity.setJikoFutanSeiriNo(csvEntity.get自己負担額証明書整理番号());
             dbWT38P1TempEntity.setHokenSeidoCode(csvEntity.get保険制度コード());

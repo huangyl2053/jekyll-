@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
@@ -33,5 +34,6 @@ public class TaishoshaJohoTempTableEntity extends DbTableEntityBase<TaishoshaJoh
     }
 
     @TempTableColumnOrder(1)
-    private HihokenshaNo hihokenshaNo;
+    @PrimaryKey
+    private HihokenshaNo hihokenshaNo2;
 }

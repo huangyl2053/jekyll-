@@ -44,7 +44,7 @@
          "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."tsuinKikanName" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_tsuinKikanName",
          "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."kinkyuChiryoKanriTanisu" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_kinkyuChiryoKanriTanisu",
          "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."kinkyuChiryoKanriNissu" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_kinkyuChiryoKanriNissu",
-         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."kinkyuChiryoKanriSubTotal" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_kinkyuChiryoKanriSubTotal",
+         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."kinkyuChiryoKanriSubTotal" as "dbT3052_kinkyuChiryoKanriSubTotal",
          "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."rehabilitationTanisu" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_rehabilitationTanisu",
          "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shochiTanisu" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_shochiTanisu",
          "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shujutsuTanisu" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_shujutsuTanisu",
@@ -70,13 +70,13 @@
          "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."tekiyo18" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_tekiyo18",
          "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."tekiyo19" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_tekiyo19",
          "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."tekiyo20" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_tekiyo20",
-         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."kinkyuShisetsuRyoyohiTotalTanisu" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_kinkyuShisetsuRyoyohiTotalTanisu",
-         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanShobyoName1" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanShobyoName1",
-         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanShobyoName2" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanShobyoName2",
-         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanShobyoName3" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanShobyoName3",
-         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanShobyoKaishiYMD1" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanShobyoKaishiYMD1",
-         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanShobyoKaishiYMD2" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanShobyoKaishiYMD2",
-         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanShobyoKaishiYMD3" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanShobyoKaishiYMD3",
+         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."kinkyuShisetsuRyoyohiTotalTanisu" as "dbT3052_kinkyuShisetsuRyoyohiTotalTanisu",
+         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanShobyoName1" as "dbT3052_shoteiShikkanShobyoName1",
+         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanShobyoName2" as "dbT3052_shoteiShikkanShobyoName2",
+         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanShobyoName3" as "dbT3052_shoteiShikkanShobyoName3",
+         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanShobyoKaishiYMD1" as "dbT3052_shoteiShikkanShobyoKaishiYMD1",
+         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanShobyoKaishiYMD2" as "dbT3052_shoteiShikkanShobyoKaishiYMD2",
+         "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanShobyoKaishiYMD3" as "dbT3052_shoteiShikkanShobyoKaishiYMD3",
          "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanTanisu" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanTanisu",
          "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanNissu" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanNissu",
          "DbT3052ShokanShoteiShikkanShisetsuRyoyo"."shoteiShikkanSubTotal" as "dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanSubTotal"
@@ -112,7 +112,7 @@
         <result property="tsuinKikanName" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_tsuinKikanName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kinkyuChiryoKanriTanisu" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_kinkyuChiryoKanriTanisu" />
         <result property="kinkyuChiryoKanriNissu" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_kinkyuChiryoKanriNissu" />
-        <result property="kinkyuChiryoKanriSubTotal" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_kinkyuChiryoKanriSubTotal" />
+        <result property="kinkyuChiryoKanriSubTotal" column="dbT3052_kinkyuChiryoKanriSubTotal" />
         <result property="rehabilitationTanisu" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_rehabilitationTanisu" />
         <result property="shochiTanisu" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_shochiTanisu" />
         <result property="shujutsuTanisu" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_shujutsuTanisu" />
@@ -138,13 +138,13 @@
         <result property="tekiyo18" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_tekiyo18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tekiyo19" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_tekiyo19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tekiyo20" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_tekiyo20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kinkyuShisetsuRyoyohiTotalTanisu" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_kinkyuShisetsuRyoyohiTotalTanisu" />
-        <result property="shoteiShikkanShobyoName1" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanShobyoName1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shoteiShikkanShobyoName2" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanShobyoName2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shoteiShikkanShobyoName3" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanShobyoName3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shoteiShikkanShobyoKaishiYMD1" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanShobyoKaishiYMD1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shoteiShikkanShobyoKaishiYMD2" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanShobyoKaishiYMD2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shoteiShikkanShobyoKaishiYMD3" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanShobyoKaishiYMD3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kinkyuShisetsuRyoyohiTotalTanisu" column="dbT3052_kinkyuShisetsuRyoyohiTotalTanisu" />
+        <result property="shoteiShikkanShobyoName1" column="dbT3052_shoteiShikkanShobyoName1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoteiShikkanShobyoName2" column="dbT3052_shoteiShikkanShobyoName2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoteiShikkanShobyoName3" column="dbT3052_shoteiShikkanShobyoName3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoteiShikkanShobyoKaishiYMD1" column="dbT3052_shoteiShikkanShobyoKaishiYMD1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shoteiShikkanShobyoKaishiYMD2" column="dbT3052_shoteiShikkanShobyoKaishiYMD2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shoteiShikkanShobyoKaishiYMD3" column="dbT3052_shoteiShikkanShobyoKaishiYMD3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shoteiShikkanTanisu" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanTanisu" />
         <result property="shoteiShikkanNissu" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanNissu" />
         <result property="shoteiShikkanSubTotal" column="dbT3052ShokanShoteiShikkanShisetsuRyoyo_shoteiShikkanSubTotal" />

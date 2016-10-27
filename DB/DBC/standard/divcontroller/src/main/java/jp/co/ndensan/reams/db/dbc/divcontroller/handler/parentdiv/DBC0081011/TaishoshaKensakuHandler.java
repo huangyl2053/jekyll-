@@ -353,6 +353,9 @@ public class TaishoshaKensakuHandler {
     }
 
     private PersonalData toPersonalData(RString 被保険者番号) {
+        if (RString.isNullOrEmpty(被保険者番号)) {
+            被保険者番号 = RString.EMPTY;
+        }
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }

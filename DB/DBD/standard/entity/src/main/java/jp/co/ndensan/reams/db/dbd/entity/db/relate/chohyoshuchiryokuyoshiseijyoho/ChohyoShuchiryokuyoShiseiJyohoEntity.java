@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.chohyoshuchiryokuyoshiseijyoho;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -35,12 +36,13 @@ public class ChohyoShuchiryokuyoShiseiJyohoEntity {
     private Code 認定申請区分_申請時コード;
     private RString 被保険者区分コード;
     private FlexibleDate 認定申請年月日;
-    private Code 前回要介護状態区分コード;
+    private RString 前回要介護状態区分コード;
     private FlexibleDate 前回認定有効期間開始;
     private FlexibleDate 前回認定有効期間終了;
-    private RString 枝番;
     private ShikibetsuCode 識別コード;
     private Code 申請届出代行区分コード;
     private RString 出力CSV状況申請;
     private int index;
+    private RString 枝番;
+    private ShinseishoKanriNo 申請書管理番号;
 }

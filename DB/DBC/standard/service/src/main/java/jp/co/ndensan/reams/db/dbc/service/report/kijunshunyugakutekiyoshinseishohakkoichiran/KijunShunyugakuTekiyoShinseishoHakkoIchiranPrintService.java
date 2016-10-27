@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugakutekiyoshinseishoh
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranSource;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -36,6 +37,7 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranPrintService {
      * @param 市町村名 RString
      * @param 出力順リスト List<RString>
      * @param 改頁リスト List<RString>
+     * @param 処理年度 FlexibleYear
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
@@ -43,10 +45,11 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranPrintService {
             RString 市町村番号,
             RString 市町村名,
             List<RString> 出力順リスト,
-            List<RString> 改頁リスト) {
+            List<RString> 改頁リスト,
+            FlexibleYear 処理年度) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(発行対象者, 市町村番号, 市町村名, 出力順リスト, 改頁リスト, reportManager);
+            print(発行対象者, 市町村番号, 市町村名, 出力順リスト, 改頁リスト, 処理年度, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -60,6 +63,7 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranPrintService {
      * @param 市町村名 RString
      * @param 出力順リスト List<RString>
      * @param 改頁リスト List<RString>
+     * @param 処理年度 FlexibleYear
      * @param reportManager ReportManager
      */
     public void print(
@@ -68,6 +72,7 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranPrintService {
             RString 市町村名,
             List<RString> 出力順リスト,
             List<RString> 改頁リスト,
+            FlexibleYear 処理年度,
             ReportManager reportManager) {
         KijunShunyugakuTekiyoShinseishoHakkoIchiranProperty property = new KijunShunyugakuTekiyoShinseishoHakkoIchiranProperty();
 
@@ -75,7 +80,7 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranPrintService {
             ReportSourceWriter<KijunShunyugakuTekiyoShinseishoHakkoIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
 
-            new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(発行対象者, 市町村番号, 市町村名, 出力順リスト, 改頁リスト).writeBy(reportSourceWriter);
+            new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(発行対象者, 市町村番号, 市町村名, 出力順リスト, 改頁リスト, 処理年度).writeBy(reportSourceWriter);
         }
     }
 

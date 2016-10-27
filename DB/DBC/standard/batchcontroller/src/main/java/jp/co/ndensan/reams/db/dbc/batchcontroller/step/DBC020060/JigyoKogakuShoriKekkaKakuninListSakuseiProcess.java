@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -62,8 +61,6 @@ public class JigyoKogakuShoriKekkaKakuninListSakuseiProcess extends BatchProcess
     private List<RString> headerList;
     private RString csvFilePath;
     private FileSpoolManager manager;
-
-    @BatchWriter
     private CsvListWriter csvListWriter;
 
     @Override
@@ -88,31 +85,31 @@ public class JigyoKogakuShoriKekkaKakuninListSakuseiProcess extends BatchProcess
     }
 
     @Override
-    protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
-                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
-        csvFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        csvListWriter = new CsvListWriter.InstanceBuilder(csvFilePath)
-                .setDelimiter(コンマ)
-                .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
-                .hasHeader(true)
-                .setHeader(headerList)
-                .setNewLine(NewLine.CRLF)
-                .build();
-    }
-
-    @Override
     protected void process(DbWT0203ShoriKekkaKakuninListTempEntity entity) {
+        if (null == csvListWriter) {
+            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+                    EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+            RString spoolWorkPath = manager.getEucOutputDirectry();
+            csvFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
+            csvListWriter = new CsvListWriter.InstanceBuilder(csvFilePath)
+                    .setDelimiter(コンマ)
+                    .setEnclosure(ダブル引用符)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .hasHeader(true)
+                    .setHeader(headerList)
+                    .setNewLine(NewLine.CRLF)
+                    .build();
+        }
         List<RString> csvList = getCsvList(entity);
         csvListWriter.writeLine(csvList);
     }
 
     @Override
     protected void afterExecute() {
-        csvListWriter.close();
-        manager.spool(csvFilePath);
+        if (null != csvListWriter) {
+            csvListWriter.close();
+            manager.spool(csvFilePath);
+        }
     }
 
     private List<RString> getCsvList(DbWT0203ShoriKekkaKakuninListTempEntity entity) {

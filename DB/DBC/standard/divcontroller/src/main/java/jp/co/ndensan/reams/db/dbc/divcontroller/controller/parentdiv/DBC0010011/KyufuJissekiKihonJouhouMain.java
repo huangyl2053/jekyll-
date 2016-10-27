@@ -5,11 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCommonHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKihonJyohou;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010011.KyufuJissekiKihonJouhouMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010011.KyufuJissekiKihonJouhouMainHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
@@ -57,7 +60,7 @@ public class KyufuJissekiKihonJouhouMain {
         KyufujissekiKihon 給付実績基本 = get給付実績基本情報(給付実績基本情報, サービス提供年月,
                 new JigyoshaNo(div.getCcdKyufuJissekiHeader().get事業者番号()), 整理番号,
                 div.getCcdKyufuJissekiHeader().get様式番号(), div.getCcdKyufuJissekiHeader().get実績区分コード());
-        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2();
+        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2(サービス提供年月, 整理番号, 識別番号検索キー);
         getHandler(div).onLoad(サービス提供年月,
                 識別番号検索キー, 識別番号管理データ, 給付実績基本情報,
                 給付実績ヘッダ情報2, 給付実績基本, get事業所名称(給付実績基本, サービス提供年月),
@@ -86,8 +89,10 @@ public class KyufuJissekiKihonJouhouMain {
     public ResponseData<KyufuJissekiKihonJouhouMainDiv> onClick_MaeJigyosha(KyufuJissekiKihonJouhouMainDiv div) {
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().
                 getサービス提供年月().getYearMonth().toDateString());
-        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2();
         List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
+        RString 整理番号 = get整理番号(給付実績基本情報);
+        NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
+        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2(サービス提供年月, 整理番号, 識別番号検索キー);
         int 事業者番号の位置 = get事業者番号の位置(給付実績ヘッダ情報2, div, サービス提供年月);
         if (事業者番号の位置 != 0) {
             KyufuJissekiHedajyoho2 給付実績ヘッダ情報 = 給付実績ヘッダ情報2.get(事業者番号の位置 - INT_ITI);
@@ -109,8 +114,10 @@ public class KyufuJissekiKihonJouhouMain {
     public ResponseData<KyufuJissekiKihonJouhouMainDiv> onClick_AtoJigyosha(KyufuJissekiKihonJouhouMainDiv div) {
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().
                 getサービス提供年月().getYearMonth().toDateString());
-        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2();
         List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
+        RString 整理番号 = get整理番号(給付実績基本情報);
+        NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
+        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2(サービス提供年月, 整理番号, 識別番号検索キー);
         int 事業者番号の位置 = get事業者番号の位置(給付実績ヘッダ情報2, div, サービス提供年月);
         if (事業者番号の位置 + INT_ITI < 給付実績ヘッダ情報2.size()) {
             KyufuJissekiHedajyoho2 給付実績ヘッダ情報 = 給付実績ヘッダ情報2.get(事業者番号の位置 + INT_ITI);
@@ -134,9 +141,11 @@ public class KyufuJissekiKihonJouhouMain {
                 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         KyufuJissekiPrmBusiness 給付実績情報照会情報
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        List<KyufujissekiKihon> 給付実績基本情報 = 給付実績情報照会情報.getCsData_A();
+        List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         HihokenshaNo 被保険者番号 = 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号();
-        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2();
+        RString 整理番号 = get整理番号(給付実績基本情報);
+        NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
+        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2(サービス提供年月, 整理番号, 識別番号検索キー);
         int 事業者番号の位置 = get事業者番号の位置(給付実績ヘッダ情報2, div, サービス提供年月);
         if (事業者番号の位置 != 0) {
             KyufuJissekiHedajyoho2 給付実績ヘッダ情報 = 給付実績ヘッダ情報2.get(事業者番号の位置 - INT_ITI);
@@ -166,9 +175,11 @@ public class KyufuJissekiKihonJouhouMain {
                 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         KyufuJissekiPrmBusiness 給付実績情報照会情報
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        List<KyufujissekiKihon> 給付実績基本情報 = 給付実績情報照会情報.getCsData_A();
+        List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         HihokenshaNo 被保険者番号 = 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号();
-        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2();
+        RString 整理番号 = get整理番号(給付実績基本情報);
+        NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
+        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2(サービス提供年月, 整理番号, 識別番号検索キー);
         int 事業者番号の位置 = get事業者番号の位置(給付実績ヘッダ情報2, div, サービス提供年月);
         if (事業者番号の位置 + INT_ITI < 給付実績ヘッダ情報2.size()) {
             KyufuJissekiHedajyoho2 給付実績ヘッダ情報 = 給付実績ヘッダ情報2.get(事業者番号の位置 + INT_ITI);
@@ -244,16 +255,22 @@ public class KyufuJissekiKihonJouhouMain {
         return KyufuJissekiShokaiFinder.createInstance().get給付分類区分(給付実績基本.get入力識別番号(), サービス提供年月);
     }
 
-    private List<KyufuJissekiHedajyoho2> get給付実績ヘッダ情報2() {
+    private List<KyufuJissekiHedajyoho2> get給付実績ヘッダ情報2(FlexibleYearMonth サービス提供年月,
+            RString 整理番号, NyuryokuShikibetsuNo 識別番号検索キー) {
         KyufuJissekiPrmBusiness 給付実績情報照会情報
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
+        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報 = new ArrayList<>();
+        KyufuJissekiCommonHeader commonHeader = new KyufuJissekiCommonHeader();
+        給付実績ヘッダ情報.addAll(KyufuJissekiShokaiFinder.createInstance().getKyufuJissekiHeaderJoho2(
+                給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(), サービス提供年月, 整理番号, 識別番号検索キー).records());
+        commonHeader.set給付実績ヘッダ情報2(給付実績ヘッダ情報);
+        給付実績情報照会情報.setCommonHeader(commonHeader);
+        ViewStateHolder.put(ViewStateKeys.給付実績情報照会情報, 給付実績情報照会情報);
         return 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2();
     }
 
     private List<KyufujissekiKihon> get給付実績基本情報() {
-        KyufuJissekiPrmBusiness 給付実績情報照会情報
-                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
-        return 給付実績情報照会情報.getCsData_A();
+        return ViewStateHolder.get(ViewStateKeys.給付実績基本情報, KyufujissekiKihonJyohou.class).getCsData_A();
     }
 
     private void set画面の表示(KyufuJissekiHedajyoho2 給付実績ヘッダ情報, KyufuJissekiKihonJouhouMainDiv div,

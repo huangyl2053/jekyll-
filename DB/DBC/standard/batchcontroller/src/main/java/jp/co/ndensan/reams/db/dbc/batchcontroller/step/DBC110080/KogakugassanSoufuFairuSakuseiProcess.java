@@ -53,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -72,6 +73,9 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
     private static final RString ファイル名_後 = new RString(".csv");
     private static final RString 国保連送付外字_変換区分_1 = new RString("1");
     private static final int INT_0 = 0;
+    private static final int INT_25 = 25;
+    private static final int INT_40 = 40;
+    private static final int INT_128 = 128;
     private static final RString RSTRING_0 = new RString("0");
     private static final RString 囲みの文字 = new RString("\"");
     /**
@@ -228,13 +232,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         AtenaKanaMeisho 被保険者氏名カナ = 高額合算自己負担額一時Entity.getHihokenshaShimeiKana();
         RString 被保険者氏名カナR
                 = 被保険者氏名カナ == null || 被保険者氏名カナ.isEmpty() ? RString.EMPTY : 被保険者氏名カナ.getColumnValue().trim();
-        // TODO 25バイト QA1430
-        meisaiEntity.set被保険者氏名_カナ(囲み文字(被保険者氏名カナR));
+        meisaiEntity.set被保険者氏名_カナ(囲み文字(getバイト分(被保険者氏名カナR, INT_25)));
         AtenaMeisho 被保険者氏名_漢字 = 高額合算自己負担額一時Entity.getHihokenshaShimei();
         RString 被保険者氏名_漢字R
                 = 被保険者氏名_漢字 == null || 被保険者氏名_漢字.isEmpty() ? RString.EMPTY : 被保険者氏名_漢字.getColumnValue().trim();
-        // TODO 40バイト QA1430
-        meisaiEntity.set被保険者氏名_漢字(囲み文字(被保険者氏名_漢字R));
+        meisaiEntity.set被保険者氏名_漢字(囲み文字(getバイト分(被保険者氏名_漢字R, INT_40)));
         meisaiEntity.set生年月日(trimDate(高額合算自己負担額一時Entity.getUmareYMD()));
         Code 性別 = 高額合算自己負担額一時Entity.getSeibetsuCode();
         RString 性別R = 性別 == null || 性別.isEmpty() ? RString.EMPTY : 性別.getColumnValue().trim();
@@ -264,13 +266,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
 
         AtenaMeisho 宛先氏名 = 高額合算自己負担額一時Entity.getAtesakiShimei();
         RString 宛先氏名R = 宛先氏名 == null || 宛先氏名.isEmpty() ? RString.EMPTY : 宛先氏名.getColumnValue().trim();
-        // TODO 40バイト QA1430
-        meisaiEntity.set宛先氏名(囲み文字(宛先氏名R));
+        meisaiEntity.set宛先氏名(囲み文字(getバイト分(宛先氏名R, INT_40)));
         YubinNo 宛先郵便番号 = 高額合算自己負担額一時Entity.getAtesakiYubinNo();
         RString 宛先郵便番号R = 宛先郵便番号 == null || 宛先郵便番号.isEmpty() ? RString.EMPTY : 宛先郵便番号.getColumnValue().trim();
         meisaiEntity.set宛先郵便番号(宛先郵便番号R);
-        // TODO 128バイト QA1430
-        meisaiEntity.set宛先住所(囲み文字(trimRString(高額合算自己負担額一時Entity.getAtesakiJusho())));
+        meisaiEntity.set宛先住所(囲み文字(getバイト分(trimRString(高額合算自己負担額一時Entity.getAtesakiJusho()), INT_128)));
         meisaiEntity.set証明書発行年月日(RString.EMPTY);
         meisaiEntity.set証明書発行者名(RString.EMPTY);
         meisaiEntity.set証明書発行者郵便番号(RString.EMPTY);
@@ -615,5 +615,27 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         controlEntity.set処理対象年月(processParameter.getShoriYM().toDateString());
         controlEntity.setファイル管理番号(RSTRING_0);
         return controlEntity;
+    }
+
+    private RString getバイト分(RString str, int byteNum) {
+        if (str == null || str.isEmpty()) {
+            return RString.EMPTY;
+        }
+        if (str.length() * 2 <= byteNum) {
+            return str;
+        }
+        int byteLenght = 0;
+        int i;
+        for (i = 0; i < str.length() && byteLenght < byteNum; i++) {
+            if (RStringUtil.is全角Only(str.substring(i, i + 1))) {
+                if (byteLenght == byteNum - 1) {
+                    break;
+                }
+                byteLenght = byteLenght + 2;
+            } else {
+                byteLenght = byteLenght + 1;
+            }
+        }
+        return str.substring(0, i + 1);
     }
 }

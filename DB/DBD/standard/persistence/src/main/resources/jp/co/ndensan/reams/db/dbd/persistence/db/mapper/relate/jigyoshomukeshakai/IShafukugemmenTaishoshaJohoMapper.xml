@@ -13,6 +13,7 @@ and open the template in the editor.-->
         id="get社福減免対象者情報"
         parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd206010.DBD206010TyohyoMybatisParameter"
         resultMap="ResultMap_ShafukugemmenTaishoshaJohoEntity" fetchSize="500">
+        WITH master AS (
         SELECT
         A."jigyoshaNo",
         A."jigyoshaName",
@@ -28,6 +29,18 @@ and open the template in the editor.-->
         A."kakuninNo",
         A."tekiyoKaishiYMD",
         A."tekiyoShuryoYMD",
+        A."shikibetsuCode",
+        (case when 被保台帳."koikinaiTokureiSochimotoShichosonCode" IS NOT NULL THEN  被保台帳."koikinaiTokureiSochimotoShichosonCode"
+        WHEN 被保台帳."koikinaiTokureiSochimotoShichosonCode"  = '' THEN 被保台帳."koikinaiTokureiSochimotoShichosonCode"
+        ELSE 被保台帳."shichosonCode" END) AS shichosoncode
+
+        FROM "tyohyoShutuyukuItokiTemp" AS A
+        INNER JOIN
+        rgdb."DbV1001HihokenshaDaicho" AS 被保台帳
+        ON 被保台帳."hihokenshaNo" = A."hihokenshaNo"
+        )
+        SELECT
+        master.*,
         B."juminShubetsuCode",
         B."meisho",
         B."kanaMeisho",
@@ -36,16 +49,23 @@ and open the template in the editor.-->
         B."choikiCode",
         B."gyoseikuCode",
         B."gaikokujinKanaShimei"
-
-        FROM "tyohyoShutuyukuItokiTemp" AS A
+        FROM
+        master
         INNER JOIN
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho"/>
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+        (
+        SELECT
+        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
         AS B
-        ON
-        B."shikibetsuCode" = A."shikibetsuCode"
+        ON master."shikibetsuCode" = B."shikibetsuCode"
+
         ORDER BY
-        A."jigyoshaNo",
-        A."shoKisaiHokenshaNo"
+        master."jigyoshaNo",
+        master."shoKisaiHokenshaNo"
         ${出力順}
     </select>
     <resultMap id="ResultMap_ShafukugemmenTaishoshaJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd206010.ShafukugemmenTaishoshaJohoEntity" autoMapping="true">

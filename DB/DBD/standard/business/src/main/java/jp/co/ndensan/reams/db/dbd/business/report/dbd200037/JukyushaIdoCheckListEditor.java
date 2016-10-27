@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.entity.report.dbd200037.JukyushaIdoCheckListRe
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
@@ -40,6 +42,7 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
     private static final int LISTINDEX_5 = 5;
+    private static final RString 申請書管理番号 = new RString("申請書管理番号");
 
     /**
      * インスタンスを生成します。
@@ -70,6 +73,7 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
         editリスト一覧表上(source);
         edit出力順改頁(source);
         editリスト一覧表下(source);
+        setAccessLogEditor(source);
         return source;
     }
 
@@ -176,5 +180,12 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
         source.kaipage3 = 改頁list.get(LISTINDEX_2);
         source.kaipage4 = 改頁list.get(LISTINDEX_3);
         source.kaipage5 = 改頁list.get(LISTINDEX_4);
+    }
+
+    private void setAccessLogEditor(JukyushaIdoCheckListReportSource source) {
+        source.shikibetsuCode = upperEntity.get識別コード();
+        if (upperEntity.get申請書管理番号() != null && !upperEntity.get申請書管理番号().isEmpty()) {
+            source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), 申請書管理番号, upperEntity.get申請書管理番号().value());
+        }
     }
 }

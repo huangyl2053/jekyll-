@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
  */
 public class tabKogakuGassanShikyuFushikyuKetteiDiv extends TabContainer {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -166,6 +166,16 @@ public class tabKogakuGassanShikyuFushikyuKetteiDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public Label getLabel1() {
+        return this.getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().getLabel1();
+    }
+
+    @JsonIgnore
+    public void setLabel1(Label Label1) {
+        this.getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().setLabel1(Label1);
+    }
+
+    @JsonIgnore
     public TextBoxMultiLine getTxtKyufuShurui() {
         return this.getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().getTxtKyufuShurui();
     }
@@ -173,6 +183,16 @@ public class tabKogakuGassanShikyuFushikyuKetteiDiv extends TabContainer {
     @JsonIgnore
     public void setTxtKyufuShurui(TextBoxMultiLine txtKyufuShurui) {
         this.getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().setTxtKyufuShurui(txtKyufuShurui);
+    }
+
+    @JsonIgnore
+    public Label getLabel2() {
+        return this.getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().getLabel2();
+    }
+
+    @JsonIgnore
+    public void setLabel2(Label Label2) {
+        this.getTplKettei().getKogakuGassanShikyuKetteiHoseiDetail2().setLabel2(Label2);
     }
 
     @JsonIgnore

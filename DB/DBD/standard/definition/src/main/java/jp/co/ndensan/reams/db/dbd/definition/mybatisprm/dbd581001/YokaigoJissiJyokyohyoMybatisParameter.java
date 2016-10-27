@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001;
 
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -48,7 +50,7 @@ public class YokaigoJissiJyokyohyoMybatisParameter implements IMyBatisParameter 
     private static final RString 集計単位法令 = new RString("HOUREI");
     private FlexibleDate 対象年月日From;
     private FlexibleDate 対象年月日To;
-    private RString psmShikibetsuTaisho;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタです。
@@ -64,7 +66,7 @@ public class YokaigoJissiJyokyohyoMybatisParameter implements IMyBatisParameter 
      * @param 開始地区コード 開始地区コード
      * @param 終了地区コード 終了地区コード
      * @param 集計単位 集計単位
-     * @param psmShikibetsuTaisho psmShikibetsuTaisho
+     * @param searchKey IShikibetsuTaishoPSMSearchKey
      */
     public YokaigoJissiJyokyohyoMybatisParameter(
             RString 導入形態コード,
@@ -78,7 +80,7 @@ public class YokaigoJissiJyokyohyoMybatisParameter implements IMyBatisParameter 
             Code 開始地区コード,
             Code 終了地区コード,
             RString 集計単位,
-            RString psmShikibetsuTaisho) {
+            IShikibetsuTaishoPSMSearchKey searchKey) {
         if (導入形態コード.equals(導入形態111)) {
             this.is導入形態コード111 = true;
         } else if (導入形態コード.equals(導入形態112)) {
@@ -110,6 +112,6 @@ public class YokaigoJissiJyokyohyoMybatisParameter implements IMyBatisParameter 
         } else if (集計単位.equals(集計単位法令)) {
             this.is申請区分法令 = true;
         }
-        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
     }
 }

@@ -11,6 +11,8 @@ and open the template in the editor.-->
             resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter"
             resultMap="ResultMap_GemmenGengakuTaishoGaiShaEntity" fetchSize="500">
+        WITH master AS (
+
         SELECT
         B."honninKubun" AS "honninKubun",
         B."hihokenshaNo" AS "hihokenshaNo",
@@ -39,8 +41,7 @@ and open the template in the editor.-->
         H."kyuSochishaFlag" AS "kyuSochishaFlag",
         H."ninteiYMD" AS "ninteiYMD",
         H."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
-        H."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        H."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD"
         FROM "TmpSetaiShotoku" B
         INNER JOIN
         ( SELECT
@@ -67,15 +68,11 @@ and open the template in the editor.-->
         rgdb."DbV1001HihokenshaDaicho" C
         ON C."hihokenshaNo" = B."hihokenshaNo"
         AND C."logicalDeletedFlag" = FALSE
-        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
-        AS  "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode" = B."shikibetsuCode"
+
         INNER JOIN "taishoShaHanteiYoukonkyoItokiTemp" E
         ON E."被保険者番号" = B."hihokenshaNo"
         LEFT JOIN
-        rgdb."DbV1004HihokenshaShisetsuNyutaisho" F
+        rgdb."DbV1004ShisetsuNyutaisho" F
         ON F."shikibetsuCode" = B."shikibetsuCode"
         AND F."daichoShubetsu" = '1'
         LEFT JOIN
@@ -139,11 +136,30 @@ and open the template in the editor.-->
         ORDER BY
         B."hihokenshaNo",
         B."honninKubun"
+        )
+        SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        master
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"(
+        '',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+        (
+        SELECT
+        ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )
+        ) AS "ShikibetsuTaisho"
+        ON master."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
     <select id="get減免減額更新申請対象外者一覧CSV情報_利用者負担額減額"
             resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter"
             resultMap="ResultMap_GemmenGengakuTaishoGaiShaEntity" fetchSize="500">
+        WITH master AS (
         SELECT
         B."honninKubun" AS "honninKubun",
         B."hihokenshaNo" AS "hihokenshaNo",
@@ -172,8 +188,7 @@ and open the template in the editor.-->
         H."kyuSochishaFlag" AS "kyuSochishaFlag",
         H."ninteiYMD" AS "ninteiYMD",
         H."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
-        H."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        H."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD"
         FROM "TmpSetaiShotoku" B
         INNER JOIN
         ( SELECT
@@ -200,15 +215,11 @@ and open the template in the editor.-->
         rgdb."DbV1001HihokenshaDaicho" C
         ON C."hihokenshaNo" = B."hihokenshaNo"
         AND C."logicalDeletedFlag" = FALSE
-        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
-        AS  "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode" = B."shikibetsuCode"
+
         INNER JOIN "taishoShaHanteiYoukonkyoItokiTemp" E
         ON E."被保険者番号" = B."hihokenshaNo"
         LEFT JOIN
-        rgdb."DbV1004HihokenshaShisetsuNyutaisho" F
+        rgdb."DbV1004ShisetsuNyutaisho" F
         ON F."shikibetsuCode" = B."shikibetsuCode"
         AND F."daichoShubetsu" = '1'
         LEFT JOIN
@@ -272,11 +283,30 @@ and open the template in the editor.-->
         ORDER BY
         B."hihokenshaNo",
         B."honninKubun"
+        )
+        SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        master
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"(
+        '',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+        (
+        SELECT
+        ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )
+        ) AS "ShikibetsuTaisho"
+        ON master."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
     <select id="get減免減額更新申請対象外者一覧CSV情報_訪問介護利用者負担額減額"
             resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter"
             resultMap="ResultMap_GemmenGengakuTaishoGaiShaEntity" fetchSize="500">
+        WITH master AS (
         SELECT
         B."honninKubun" AS "honninKubun",
         B."hihokenshaNo" AS "hihokenshaNo",
@@ -305,8 +335,7 @@ and open the template in the editor.-->
         H."kyuSochishaFlag" AS "kyuSochishaFlag",
         H."ninteiYMD" AS "ninteiYMD",
         H."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
-        H."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        H."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD"
         FROM "TmpSetaiShotoku" B
         INNER JOIN
         ( SELECT
@@ -333,15 +362,11 @@ and open the template in the editor.-->
         rgdb."DbV1001HihokenshaDaicho" C
         ON C."hihokenshaNo" = B."hihokenshaNo"
         AND C."logicalDeletedFlag" = FALSE
-        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
-        AS  "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode" = B."shikibetsuCode"
+
         INNER JOIN "taishoShaHanteiYoukonkyoItokiTemp" E
         ON E."被保険者番号" = B."hihokenshaNo"
         LEFT JOIN
-        rgdb."DbV1004HihokenshaShisetsuNyutaisho" F
+        rgdb."DbV1004ShisetsuNyutaisho" F
         ON F."shikibetsuCode" = B."shikibetsuCode"
         AND F."daichoShubetsu" = '1'
         LEFT JOIN
@@ -405,11 +430,30 @@ and open the template in the editor.-->
         ORDER BY
         B."hihokenshaNo",
         B."honninKubun"
+        )
+        SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        master
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"(
+        '',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+        (
+        SELECT
+        ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )
+        ) AS "ShikibetsuTaisho"
+        ON master."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
     <select id="get減免減額更新申請対象外者一覧CSV情報_社会福祉法人等利用者負担軽減"
             resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter"
             resultMap="ResultMap_GemmenGengakuTaishoGaiShaEntity" fetchSize="500">
+        WITH master AS (
         SELECT
         B."honninKubun" AS "honninKubun",
         B."hihokenshaNo" AS "hihokenshaNo",
@@ -438,8 +482,7 @@ and open the template in the editor.-->
         H."kyuSochishaFlag" AS "kyuSochishaFlag",
         H."ninteiYMD" AS "ninteiYMD",
         H."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMD",
-        H."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD",
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        H."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD"
         FROM "TmpSetaiShotoku" B
         INNER JOIN
         ( SELECT
@@ -466,15 +509,11 @@ and open the template in the editor.-->
         rgdb."DbV1001HihokenshaDaicho" C
         ON C."hihokenshaNo" = B."hihokenshaNo"
         AND C."logicalDeletedFlag" = FALSE
-        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
-        AS  "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode" = B."shikibetsuCode"
+
         INNER JOIN "taishoShaHanteiYoukonkyoItokiTemp" E
         ON E."被保険者番号" = B."hihokenshaNo"
         LEFT JOIN
-        rgdb."DbV1004HihokenshaShisetsuNyutaisho" F
+        rgdb."DbV1004ShisetsuNyutaisho" F
         ON F."shikibetsuCode" = B."shikibetsuCode"
         AND F."daichoShubetsu" = '1'
         LEFT JOIN
@@ -538,6 +577,24 @@ and open the template in the editor.-->
         ORDER BY
         B."hihokenshaNo",
         B."honninKubun"
+        )
+        SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        master
+        INNER JOIN rgua."UaFt200FindShikibetsuTaisho"(
+        '',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+        (
+        SELECT
+        ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+        FROM
+        master
+        )
+        ) AS "ShikibetsuTaisho"
+        ON master."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
     <resultMap id="ResultMap_GemmenGengakuTaishoGaiShaEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaEntity" autoMapping="true">
         <result property="本人区分" column="honninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

@@ -19,6 +19,8 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyohokokuCompYoshiki153Variables {
 
+    private RString 保険者番号;
+    private RString 保険者名;
     private RString 処理日時;
     private RString 集計区分;
     private RString 年報月報区分;

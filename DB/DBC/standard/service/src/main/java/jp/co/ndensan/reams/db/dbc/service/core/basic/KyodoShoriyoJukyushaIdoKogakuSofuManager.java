@@ -83,6 +83,34 @@ public class KyodoShoriyoJukyushaIdoKogakuSofuManager {
     }
 
     /**
+     * 主キーに合致する共同処理用受給者高額償還送付を返します。
+     *
+     * @param 被保険者番号 HiHokenshaNo
+     * @param 異動年月日 IdoYMD
+     * @param 履歴番号 RirekiNo
+     * @return KyodoShoriyoJukyushaIdoKogakuSofu
+     */
+    @Transaction
+    public KyodoShoriyoJukyushaIdoKogakuSofu select高額送付ByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 異動年月日,
+            int 履歴番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+
+        DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity entity = dac.select高額送付ByKey(
+                被保険者番号,
+                異動年月日,
+                履歴番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new KyodoShoriyoJukyushaIdoKogakuSofu(entity);
+    }
+
+    /**
      * 共同処理用受給者異動高額送付を全件返します。
      *
      * @return List<KyodoShoriyoJukyushaIdoKogakuSofu>

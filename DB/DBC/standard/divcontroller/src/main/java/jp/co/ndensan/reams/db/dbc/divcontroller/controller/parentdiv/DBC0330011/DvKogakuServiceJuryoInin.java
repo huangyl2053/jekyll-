@@ -10,14 +10,17 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuJuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuJuryoininKeiyakuJigyoshaHolder;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakujuryoininkeiyakujigyosha.KogakuJuryoininKeiyakuJigyoshaResult;
+import jp.co.ndensan.reams.db.dbc.business.core.kogakuservicehijuryoininkeiyakukakuninsho.KogakuServiceHiJuryoininKeiyakuKakuninshoResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakujuryoininkeiyakujigyosha.KogakuJuryoininKeiyakuJigyoshaParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0330011.DBC0330011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0330011.DBC0330011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0330011.DvKogakuServiceJuryoIninDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0330011.DvKogakuServiceJuryoIninHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0330011.DvKogakuServiceJuryoIninValidationHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0030011.KogakuServiceData;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuJuryoininKeiyakuJigyoshaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakujuryoininkeiyakujigyosha.KogakuJuryoininKeiyakuJigyoshaFinder;
+import jp.co.ndensan.reams.db.dbc.service.report.dbc100031.KogakuServiceJyuryoKakuninShoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
@@ -36,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -140,7 +144,7 @@ public class DvKogakuServiceJuryoInin {
         if (DBC0330011StateName.発行.getName().equals(ResponseHolder.getState())) {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(BUTTONID_発行する, 削除.equals(div.getOperateState()));
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).rootTitle(div.getRootTitle()).respond();
     }
 
     /**
@@ -163,6 +167,18 @@ public class DvKogakuServiceJuryoInin {
     public ResponseData<DvKogakuServiceJuryoIninDiv> onClick_dgDelete(DvKogakuServiceJuryoIninDiv div) {
         getHandler(div).onClick_dgDelete();
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * ｢世帯一覧を表示する｣ボタンの変更を処理します。
+     *
+     * @param div KaigoSienSenmonkaTorokuDiv
+     * @return 画面
+     */
+    public ResponseData<DvKogakuServiceJuryoIninDiv> onClick_btnSeitaiIchiran(DvKogakuServiceJuryoIninDiv div) {
+        KogakuServiceData 引き継ぎ情報 = getHandler(div).onClick_btnSeitaiIchiran();
+        ViewStateHolder.put(ViewStateKeys.該当者一覧キー, 引き継ぎ情報);
+        return ResponseData.of(div).forwardWithEventName(DBC0330011TransitionEventName.世帯情報表示).respond();
     }
 
     /**
@@ -227,16 +243,14 @@ public class DvKogakuServiceJuryoInin {
         RString state1 = ResponseHolder.getState();
         if (追加.equals(state1)) {
             if ((!ResponseHolder.isReRequest()) && getHandler(div).onClick_btnShuseiBack(state1)) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
+                return ResponseData.of(div).addMessage(new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate())).respond();
             }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            if (MessageDialogSelectedResult.No == ResponseHolder.getButtonType()) {
                 return ResponseData.of(div).respond();
             }
         }
-        LockingKey 前排他ロックキー = new LockingKey(div.getDvKyotsuJoho().getCddShikakuKihon().get被保険者番号());
-        RealInitialLocker.release(前排他ロックキー);
+        RealInitialLocker.release(new LockingKey(div.getDvKyotsuJoho().getCddShikakuKihon().get被保険者番号()));
         return ResponseData.of(div).forwardWithEventName(DBC0330011TransitionEventName.対象検索へ戻る).respond();
     }
 
@@ -308,13 +322,13 @@ public class DvKogakuServiceJuryoInin {
      * 「発行する」ボタンを処理します。
      *
      * @param div KaigoSienSenmonkaTorokuDiv
-     * @return 画面
+     * @return ResponseData
      */
-    public ResponseData<DvKogakuServiceJuryoIninDiv> onClick_btnHakko(DvKogakuServiceJuryoIninDiv div) {
+    public ResponseData<SourceDataCollection> onClick_btnHakko(DvKogakuServiceJuryoIninDiv div) {
         KogakuJuryoininKeiyakuJigyoshaManager manager = new KogakuJuryoininKeiyakuJigyoshaManager();
         KogakuJuryoininKeiyakuJigyosha business
                 = manager.get高額受領委任契約事業者(new HihokenshaNo(div.getCddShikakuKihon().get被保険者番号().toString()),
-                        Integer.parseInt(div.getDvHaraiKetteiShusei().getRirekiNo().getValue().toString()));
+                        Integer.parseInt(div.getDvHaraiKetteiShusei().getTxtRirekiNo().getValue().toString()));
         List<KogakuJuryoininKeiyakuJigyosha> businessList = new ArrayList<>();
         businessList.add(business);
         if (!businessList.isEmpty()) {
@@ -322,7 +336,18 @@ public class DvKogakuServiceJuryoInin {
         }
         KogakuJuryoininKeiyakuJigyoshaHolder holder = ViewStateHolder.get(
                 ViewStateHolderName.高額受領委任契約事業者, KogakuJuryoininKeiyakuJigyoshaHolder.class);
-        getHandler(div).onClick_btnHakko(holder);
+        KogakuServiceHiJuryoininKeiyakuKakuninshoResult result = getHandler(div).onClick_btnHakko(holder);
+        KogakuServiceJyuryoKakuninShoPrintService printService = new KogakuServiceJyuryoKakuninShoPrintService();
+        return ResponseData.of(printService.print(result)).respond();
+    }
+
+    /**
+     * 「発行する」ボタンを押下後に画面を処理します。
+     *
+     * @param div KaigoSienSenmonkaTorokuDiv
+     * @return 画面
+     */
+    public ResponseData<DvKogakuServiceJuryoIninDiv> onClick_btnHakkoAfter(DvKogakuServiceJuryoIninDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0330011TransitionEventName.完了).respond();
     }
 }

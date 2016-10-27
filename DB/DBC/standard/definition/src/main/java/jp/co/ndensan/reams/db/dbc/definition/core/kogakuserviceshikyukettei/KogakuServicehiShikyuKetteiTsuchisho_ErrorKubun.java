@@ -11,12 +11,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 高額サービス費支給決定通知書_エラー区分を表す列挙型です。
  *
- * @reamsid_L DBC-2000-030 wangxue
+ * @reamsid_L DBC-9999-022 wangxue
  */
 public enum KogakuServicehiShikyuKetteiTsuchisho_ErrorKubun {
 
     /**
-     * コード:H1 名称:基本情報レコード 略称:定義なし
+     * コード:H1 名称:宛名取得 略称:定義なし
      */
     宛名取得("01", "宛名取得");
 
@@ -29,18 +29,18 @@ public enum KogakuServicehiShikyuKetteiTsuchisho_ErrorKubun {
     }
 
     /**
-     * 給付実績レコード種別のコードを返します。
+     * 高額サービス費支給決定通知書_エラー区分のコードを返します。
      *
-     * @return 給付実績レコード種別のコード
+     * @return 高額サービス費支給決定通知書_エラー区分のコード
      */
     public RString getコード() {
         return code;
     }
 
     /**
-     * 給付実績レコード種別の名称を返します。
+     * 高額サービス費支給決定通知書_エラー区分の名称を返します。
      *
-     * @return 給付実績レコード種別の名称
+     * @return 高額サービス費支給決定通知書_エラー区分の名称
      */
     public RString get名称() {
         return fullName;
@@ -73,10 +73,10 @@ public enum KogakuServicehiShikyuKetteiTsuchisho_ErrorKubun {
     }
 
     /**
-     * 国保連情報作成エラー区分のコードと一致する内容を探します。
+     * 高額サービス費支給決定通知書_エラー区分のコードと一致する内容を探します。
      *
-     * @param code 国保連情報作成エラー区分のコード
-     * @return {@code code} に対応する国保連情報作成エラー区分
+     * @param code 高額サービス費支給決定通知書_エラー区分のコード
+     * @return {@code code} に対応する高額サービス費支給決定通知書_エラー区分
      */
     public static KogakuServicehiShikyuKetteiTsuchisho_ErrorKubun toValue(RString code) {
         for (KogakuServicehiShikyuKetteiTsuchisho_ErrorKubun errorKubun : KogakuServicehiShikyuKetteiTsuchisho_ErrorKubun.values()) {

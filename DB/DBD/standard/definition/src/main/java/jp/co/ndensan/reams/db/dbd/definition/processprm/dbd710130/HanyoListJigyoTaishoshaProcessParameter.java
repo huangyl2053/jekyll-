@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710130;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutojigyotaishosha.HanyoRisutoJigyoTaishoshaMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,13 +24,15 @@ import lombok.Setter;
 @Setter
 public class HanyoListJigyoTaishoshaProcessParameter implements IBatchProcessParameter {
 
+    private RString hyoudai;
+    private RString detasyubetsumesyo;
+    private RString syutsuryoku;
     private RString cyusyutsuhohokubun;
     private RString cyusyutsukomokukubun;
     private FlexibleDate kizyunnichi;
     private FlexibleDate hitsukehanifrom;
     private FlexibleDate hitsukehanito;
     private boolean isJigyotaishoshadatacyusyutsu;
-    private RString soshitsukubun;
     private boolean isCsvkomokumeifuka;
     private boolean isCsvrenbanfuka;
     private boolean isCsvhitsukesurasyuhensyu;
@@ -41,13 +44,15 @@ public class HanyoListJigyoTaishoshaProcessParameter implements IBatchProcessPar
     /**
      * コンストラクタです。
      *
+     * @param hyoudai 表題
+     * @param detasyubetsumesyo データ種別名
+     * @param syutsuryoku 出力方法
      * @param cyusyutsuhohokubun 抽出方法区分
      * @param cyusyutsukomokukubun 抽出項目区分
      * @param kizyunnichi 基準日
      * @param hitsukehanifrom 日付範囲From
      * @param hitsukehanito 日付範囲To
      * @param isJigyotaishoshadatacyusyutsu 事業対象者データ抽出
-     * @param soshitsukubun 喪失区分
      * @param isCsvkomokumeifuka CSV項目名付加
      * @param isCsvrenbanfuka CSV連番付加
      * @param isCsvhitsukesurasyuhensyu CSV日付スラッシュ編集
@@ -56,17 +61,20 @@ public class HanyoListJigyoTaishoshaProcessParameter implements IBatchProcessPar
      * @param syutsuryokujun 出力順
      * @param syutsuryokukomoku 出力項目
      */
-    public HanyoListJigyoTaishoshaProcessParameter(RString cyusyutsuhohokubun, RString cyusyutsukomokukubun,
+    public HanyoListJigyoTaishoshaProcessParameter(RString hyoudai, RString detasyubetsumesyo,
+            RString syutsuryoku, RString cyusyutsuhohokubun, RString cyusyutsukomokukubun,
             FlexibleDate kizyunnichi, FlexibleDate hitsukehanifrom, FlexibleDate hitsukehanito, boolean isJigyotaishoshadatacyusyutsu,
-            RString soshitsukubun, boolean isCsvkomokumeifuka, boolean isCsvrenbanfuka, boolean isCsvhitsukesurasyuhensyu,
+            boolean isCsvkomokumeifuka, boolean isCsvrenbanfuka, boolean isCsvhitsukesurasyuhensyu,
             AtenaSelectBatchParameter atenacyusyutsujyoken, RString cyohyoid, Long syutsuryokujun, RString syutsuryokukomoku) {
+        this.hyoudai = hyoudai;
+        this.detasyubetsumesyo = detasyubetsumesyo;
+        this.syutsuryoku = syutsuryoku;
         this.cyusyutsuhohokubun = cyusyutsuhohokubun;
         this.cyusyutsukomokukubun = cyusyutsukomokukubun;
         this.kizyunnichi = kizyunnichi;
         this.hitsukehanifrom = hitsukehanifrom;
         this.hitsukehanito = hitsukehanito;
         this.isJigyotaishoshadatacyusyutsu = isJigyotaishoshadatacyusyutsu;
-        this.soshitsukubun = soshitsukubun;
         this.isCsvkomokumeifuka = isCsvkomokumeifuka;
         this.isCsvrenbanfuka = isCsvrenbanfuka;
         this.isCsvhitsukesurasyuhensyu = isCsvhitsukesurasyuhensyu;
@@ -84,7 +92,8 @@ public class HanyoListJigyoTaishoshaProcessParameter implements IBatchProcessPar
      * @param syutsuryokujun 出力順
      * @return HanyoRisutoKokiKoreishaMybatisParameter
      */
-    public HanyoRisutoJigyoTaishoshaMybatisParameter toHanyoRisutoJigyoTaishoshaMybatisParameter(RString psmShikibetsuTaisho,
+    public HanyoRisutoJigyoTaishoshaMybatisParameter toHanyoRisutoJigyoTaishoshaMybatisParameter(
+            IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
             RString psmAtesaki, RString syutsuryokujun) {
         return new HanyoRisutoJigyoTaishoshaMybatisParameter(cyusyutsuhohokubun,
                 cyusyutsukomokukubun,
@@ -92,7 +101,6 @@ public class HanyoListJigyoTaishoshaProcessParameter implements IBatchProcessPar
                 hitsukehanifrom,
                 hitsukehanito,
                 isJigyotaishoshadatacyusyutsu,
-                soshitsukubun,
                 atenacyusyutsujyoken,
                 syutsuryokujun,
                 syutsuryokukomoku,

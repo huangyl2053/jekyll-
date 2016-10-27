@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1731011.Sogo
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1731011.dgShikyuGendogaku_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.SogoJigyoShuruiShikyuGendoGakuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -94,10 +93,10 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
     /**
      * サービス種類DDLのDataSource設定です。
      *
-     * @param manager KaigoServiceShuruiManager
+     * @param dataSource List<KeyValueDataSource>
      */
-    public void setDataSource(KaigoServiceShuruiManager manager) {
-        List<KeyValueDataSource> dataSource = manager.getサービス種類DDLのDataSource();
+    public void setDataSource(List<KeyValueDataSource> dataSource) {
+
         div.getDdlServiceShurui().setDataSource(dataSource);
         div.getDdlServiceShurui().setSelectedKey(RString.EMPTY);
     }
@@ -176,7 +175,14 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
      */
     private void set選択行内容表示() {
         dgShikyuGendogaku_Row row = div.getDgShikyuGendogaku().getClickedItem();
-        div.getDdlServiceShurui().setSelectedValue(row.getDefaultDataName0());
+        List<KeyValueDataSource> dataSource = div.getDdlServiceShurui().getDataSource();
+        List<RString> valueList = new ArrayList<>();
+        for (KeyValueDataSource item : dataSource) {
+            valueList.add(item.getValue());
+        }
+        if (valueList.contains(row.getDefaultDataName0())) {
+            div.getDdlServiceShurui().setSelectedValue(row.getDefaultDataName0());
+        }
         div.getTxtTekiyoKaishiYM().setValue(row.getDefaultDataName1().getValue());
         if (!row.getDefaultDataName2().getText().isNullOrEmpty()) {
             div.getTxtTekiyoShuryoYM().setValue(row.getDefaultDataName2().getValue());

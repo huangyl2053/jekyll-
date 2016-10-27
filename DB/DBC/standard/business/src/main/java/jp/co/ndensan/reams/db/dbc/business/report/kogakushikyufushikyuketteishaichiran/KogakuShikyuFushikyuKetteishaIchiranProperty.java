@@ -53,6 +53,11 @@ public class KogakuShikyuFushikyuKetteishaIchiranProperty
 
 
 
+
+
+
+
+
             pageBreakKeys) {
             @Override
             public ReportLineRecord<KogakuShikyuFushikyuKetteishaIchiranSource> occuredBreak(
@@ -75,7 +80,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranProperty
         /**
          * 証記載保険者番号
          */
-        証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("SHINSAKETTEITEMP.\"shokisaiHokenshaNo\"")),
+        証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("SHINSAKETTEITEMP.\"shoKisaiHokenshaNo\"")),
         /**
          * 郵便番号
          */
@@ -99,7 +104,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranProperty
         /**
          * サービス提供年月
          */
-        サービス提供年月(new RString("0364"), new RString("listUpper_3"), new RString("SHINSAKETTEITEMP.\"serviceTeikyoYm\"")),
+        サービス提供年月(new RString("0364"), new RString("listUpper_3"), new RString("SHINSAKETTEITEMP.\"serviceTeikyoYM\"")),
         /**
          * 通知書番号
          */

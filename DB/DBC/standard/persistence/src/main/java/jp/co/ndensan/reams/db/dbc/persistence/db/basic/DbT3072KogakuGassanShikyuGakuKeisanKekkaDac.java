@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 高額合算支給額計算結果のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 huzongcheng
  */
 public class DbT3072KogakuGassanShikyuGakuKeisanKekkaDac implements ISaveable<DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity> {
 
@@ -121,6 +123,31 @@ public class DbT3072KogakuGassanShikyuGakuKeisanKekkaDac implements ISaveable<Db
                                 eq(shikyuShinseishoSeiriNo, 支給申請書整理番号),
                                 eq(isDeleted, false))).
                 order(by(taishoNendo, Order.DESC), by(shikyuShinseishoSeiriNo, Order.DESC), by(rirekiNo, Order.DESC))
+                .toList(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity.class);
+    }
+
+    /**
+     * 支給申請書整理番号で高額合算支給額計算結果を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 支給申請書整理番号 ShikyuShinseishoSeiriNo
+     * @return DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity> selectBySeiriNo(
+            HihokenshaNo 被保険者番号,
+            RString 支給申請書整理番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3072KogakuGassanShikyuGakuKeisanKekka.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(shikyuShinseishoSeiriNo, 支給申請書整理番号)))
                 .toList(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity.class);
     }
 

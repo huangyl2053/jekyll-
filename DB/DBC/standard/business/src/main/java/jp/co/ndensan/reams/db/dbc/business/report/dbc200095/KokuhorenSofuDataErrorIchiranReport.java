@@ -22,18 +22,21 @@ public class KokuhorenSofuDataErrorIchiranReport
     private final KokuhorenSofuDataErrorIchiranEntity 帳票出力対象データ;
     private final RString 市町村コード;
     private final RString 市町村名称;
+    private final int 連番;
 
     /**
      *
      * @param 帳票出力対象データ KokuhorenSofuDataErrorIchiranEntity
      * @param 市町村コード RString
      * @param 市町村名称 RString
+     * @param 連番 int
      */
     public KokuhorenSofuDataErrorIchiranReport(
-            KokuhorenSofuDataErrorIchiranEntity 帳票出力対象データ, RString 市町村コード, RString 市町村名称) {
+            KokuhorenSofuDataErrorIchiranEntity 帳票出力対象データ, RString 市町村コード, RString 市町村名称, int 連番) {
         this.帳票出力対象データ = 帳票出力対象データ;
         this.市町村コード = 市町村コード;
         this.市町村名称 = 市町村名称;
+        this.連番 = 連番;
     }
 
     @Override
@@ -44,7 +47,7 @@ public class KokuhorenSofuDataErrorIchiranReport
     private void writeLine(ReportSourceWriter<KokuhorenSofuDataErrorIchiranSource> writer,
             KokuhorenSofuDataErrorIchiranEntity 帳票出力対象データ) {
         IKokuhorenSofuDataErrorIchiranEditor bodyEditor
-                = new KokuhorenSofuDataErrorIchiranEditor(帳票出力対象データ, 市町村コード, 市町村名称);
+                = new KokuhorenSofuDataErrorIchiranEditor(帳票出力対象データ, 市町村コード, 市町村名称, 連番);
         IKokuhorenSofuDataErrorIchiranBuilder builder
                 = new KokuhorenSofuDataErrorIchiranBuilder(bodyEditor);
         writer.writeLine(builder);

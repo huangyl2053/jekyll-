@@ -100,7 +100,7 @@ public class JuminIdoRendoShikakuSoshitsu {
      * @param 資格喪失事由 RString
      * @param entity JuminIdoRendoShikakuTorokuEntity
      */
-    public void getShiKakuSousituJogai(UaFt200FindShikibetsuTaishoEntity 住民異動情報,
+    public void getShikakuSousituJogai(UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             StoreConfigParamter pRM,
             RString 資格喪失事由,
             JuminIdoRendoShikakuTorokuEntity entity) {
@@ -417,7 +417,7 @@ public class JuminIdoRendoShikakuSoshitsu {
      */
     public void getSearchHihodaicho(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
 
-        tsuchiJuri.searchHihodaicho(entity, データ抽出ＰＴＮ);
+        tsuShiboKyoTu.searchHihodaicho(entity, データ抽出ＰＴＮ);
     }
 
     /**
@@ -449,13 +449,17 @@ public class JuminIdoRendoShikakuSoshitsu {
      * 異動年月日、異動届出年月日、資格喪失日、資格喪失届出日の中で最大の異動日、届出日を取得する。
      *
      * @param entity JuminIdoRendoShikakuTorokuEntity
+     * @param 資格喪失日 資格喪失日
+     * @param 資格喪失届出日 資格喪失届出日
      * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
      * @param paramter TemParamter
      */
     public void getMaxKaijoYmd(
             JuminIdoRendoShikakuTorokuEntity entity,
+            FlexibleDate 資格喪失日,
+            FlexibleDate 資格喪失届出日,
             UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             TemParamter paramter) {
-        tsuShiboKyoTu.getMaxKaijoYmd(entity, 住民異動情報, paramter);
+        tsuShiboKyoTu.getMaxKaijoYmd(entity, 資格喪失日, 資格喪失届出日, 住民異動情報, paramter);
     }
 }

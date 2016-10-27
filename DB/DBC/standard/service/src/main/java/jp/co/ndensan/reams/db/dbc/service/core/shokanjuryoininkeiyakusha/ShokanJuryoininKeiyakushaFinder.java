@@ -7,14 +7,17 @@ package jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ChkKeiyakuNoParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ChkTorokuzumiParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaListParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakushaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3077JuryoininKeiyakuJigyoshaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3078ShokanJuryoininKeiyakushaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanjuryoininkeiyakusha.IShokanJuryoininKeiyakushaMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
@@ -48,6 +51,7 @@ public class ShokanJuryoininKeiyakushaFinder {
     private final MapperProvider mapperProvider;
     private final DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac;
     private final DbT3078ShokanJuryoininKeiyakushaDac 償還受領委任契約者Dac;
+    private final DbT3077JuryoininKeiyakuJigyoshaDac 受領委任契約事業者Dac;
 
     /**
      * コンストラクタです。
@@ -56,6 +60,7 @@ public class ShokanJuryoininKeiyakushaFinder {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.被保険者台帳管理Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
         this.償還受領委任契約者Dac = InstanceProvider.create(DbT3078ShokanJuryoininKeiyakushaDac.class);
+        this.受領委任契約事業者Dac = InstanceProvider.create(DbT3077JuryoininKeiyakuJigyoshaDac.class);
     }
 
     /**
@@ -64,13 +69,16 @@ public class ShokanJuryoininKeiyakushaFinder {
      * @param mapperProvider mapperProvider
      * @param 被保険者台帳管理Dac 被保険者台帳管理Dac
      * @param 償還受領委任契約者Dac 償還受領委任契約者Dac
+     * @param 受領委任契約事業者Dac 受領委任契約事業者Dac
      */
     ShokanJuryoininKeiyakushaFinder(MapperProvider mapperProvider,
             DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac,
-            DbT3078ShokanJuryoininKeiyakushaDac 償還受領委任契約者Dac) {
+            DbT3078ShokanJuryoininKeiyakushaDac 償還受領委任契約者Dac,
+            DbT3077JuryoininKeiyakuJigyoshaDac 受領委任契約事業者Dac) {
         this.mapperProvider = mapperProvider;
         this.被保険者台帳管理Dac = 被保険者台帳管理Dac;
         this.償還受領委任契約者Dac = 償還受領委任契約者Dac;
+        this.受領委任契約事業者Dac = 受領委任契約事業者Dac;
     }
 
     /**
@@ -204,6 +212,7 @@ public class ShokanJuryoininKeiyakushaFinder {
         if (entity == null) {
             return null;
         }
+        entity.initializeMd5();
         return new ShokanJuryoininKeiyakusha(entity);
     }
 
@@ -264,5 +273,20 @@ public class ShokanJuryoininKeiyakushaFinder {
                 && entity.getShinseiYMD().equals(parameter.get修正前_申請年月日())
                 && entity.getKeiyakuJigyoshaNo().equals(parameter.get修正前_契約事業者番号())
                 && entity.getKeiyakuServiceShurui().equals(parameter.get修正前_契約サービス種類()));
+    }
+
+    /**
+     * 受領委任契約事業者情報を取得します。
+     *
+     * @param 契約事業者番号 RString
+     * @return JuryoininKeiyakuJigyosha
+     */
+    public JuryoininKeiyakuJigyosha get受領委任契約事業者(RString 契約事業者番号) {
+        DbT3077JuryoininKeiyakuJigyoshaEntity entity = 受領委任契約事業者Dac.selectByKey(契約事業者番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new JuryoininKeiyakuJigyosha(entity);
     }
 }

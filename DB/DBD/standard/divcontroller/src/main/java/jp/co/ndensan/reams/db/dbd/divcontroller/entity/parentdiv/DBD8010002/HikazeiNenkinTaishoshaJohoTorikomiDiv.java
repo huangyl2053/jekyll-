@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HikazeiNenkinTaishoshaJohoTorikomiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -396,16 +396,6 @@ public class HikazeiNenkinTaishoshaJohoTorikomiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun3() {
-        return this.getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun3();
-    }
-
-    @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
-        return this.getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun1();
-    }
-
-    @JsonIgnore
     public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun2() {
         return this.getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun2();
     }
@@ -413,6 +403,16 @@ public class HikazeiNenkinTaishoshaJohoTorikomiDiv extends Panel {
     @JsonIgnore
     public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun4() {
         return this.getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun4();
+    }
+
+    @JsonIgnore
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun3() {
+        return this.getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun3();
+    }
+
+    @JsonIgnore
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
+        return this.getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun1();
     }
 
     // </editor-fold>

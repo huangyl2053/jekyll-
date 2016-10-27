@@ -62,6 +62,13 @@ public class KaigoHokenShotokuCSVEntity {
 
     /**
      * コンストラクタです。
+     */
+    public KaigoHokenShotokuCSVEntity() {
+
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param 識別コード ShikibetsuCode
      * @param 氏名カナ AtenaKanaMeisho

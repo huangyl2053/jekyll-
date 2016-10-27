@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 給付費通知補正を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 xuyongchao
  */
 public class KyufuhiTuchiHoseiManager {
 
@@ -123,5 +125,20 @@ public class KyufuhiTuchiHoseiManager {
             return false;
         }
         return 1 == dac.save(給付費通知補正.toEntity());
+    }
+
+    /**
+     * 給付費通知補正{@link KyufuhiTuchiHosei}を保存します。
+     *
+     * @param 給付費通知補正 {@link KyufuhiTuchiHosei}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean saveOrdelete給付費通知補正(KyufuhiTuchiHosei 給付費通知補正) {
+        requireNonNull(給付費通知補正, UrSystemErrorMessages.値がnull.getReplacedMessage("給付費通知補正"));
+        if (!給付費通知補正.hasChanged()) {
+            return false;
+        }
+        return 1 == dac.saveOrDelete(給付費通知補正.toEntity());
     }
 }

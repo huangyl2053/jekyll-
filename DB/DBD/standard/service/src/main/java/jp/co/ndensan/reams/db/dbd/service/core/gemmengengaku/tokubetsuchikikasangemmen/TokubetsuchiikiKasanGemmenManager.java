@@ -148,7 +148,9 @@ public class TokubetsuchiikiKasanGemmenManager {
 
     private void delete減免減額申請リストBy減免減額種類(List<GemmenGengakuShinsei> 減免減額申請List, RString 減免減額種類) {
         for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請List) {
-            if (減免減額種類.equals(減免減額申請.get減免減額種類())) {
+            GemmenGengakuShinsei 減免減額申請DB = 減免減額申請Manager.get減免減額申請(
+                    減免減額申請.get証記載保険者番号(), 減免減額申請.get被保険者番号(), 減免減額申請.get減免減額種類(), 減免減額申請.get履歴番号());
+            if (減免減額申請DB != null && 減免減額種類.equals(減免減額申請.get減免減額種類())) {
                 減免減額申請Manager.delete減免減額申請(減免減額申請);
             }
         }

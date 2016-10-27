@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.hiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.idoKubunCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.idoYMD;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.isDeleted;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.jukyushaIdoJiyu;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyo.rirekiNo;
@@ -171,7 +170,7 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 lt(idoYMD, 異動日),
-                                eq(isDeleted, true))).
+                                eq(logicalDeletedFlag, true))).
                 order(by(DbT3001JukyushaIdoRenrakuhyo.idoYMD, Order.DESC)).
                 limit(1).
                 toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);

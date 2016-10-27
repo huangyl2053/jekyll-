@@ -50,7 +50,7 @@ public enum KogakuGassanKyufuJissekiInOutputOrder implements IReportItems {
     /**
      * 申請書整理番号
      */
-    申請書整理番号(new RString("0337"), new RString("申請書整理番号"), new RString("DbWT38P1.\"shikyuShinseiSeiriNo\""));
+    申請書整理番号(new RString("0337"), new RString("申請書整理番号"), new RString("DbWT38P1.\"shikyuShinseishoSeiriNo\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

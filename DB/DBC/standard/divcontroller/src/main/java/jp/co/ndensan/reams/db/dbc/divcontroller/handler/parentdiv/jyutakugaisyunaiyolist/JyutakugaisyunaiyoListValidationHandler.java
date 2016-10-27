@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist;
 
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -37,6 +39,33 @@ public class JyutakugaisyunaiyoListValidationHandler {
      */
     public JyutakugaisyunaiyoListValidationHandler(JyutakugaisyunaiyoListDiv div) {
         this.div = div;
+    }
+
+    /**
+     * 確定ボタンを押下するとき、バリデーションチェックを行う。
+     *
+     * @param サービス年月 サービス年月
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor着工日とサービス年月提供着工年月のチェック(FlexibleYearMonth サービス年月) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (サービス年月 == null) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, "提供（着工）年月")));
+            return validPairs;
+        }
+        FlexibleDate 比較着工日 = new FlexibleDate(div.getTxtTyakkoyotebi().getValue().toDateString().toString());
+        if (!サービス年月.equals(比較着工日.getYearMonth())) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    DbcErrorMessages.着工日不一致), div.getTxtTyakkoyotebi()));
+            return validPairs;
+        }
+        if (div.getDgGaisyuList().getDataSource().size() > 1
+                && !div.getDgGaisyuList().getDataSource().get(0).getTxtJutakuAddress().equals(div.getTxtJyusyo().getDomain().value())) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    DbcErrorMessages.対象住宅住所不一致), div.getTxtJyusyo()));
+        }
+        return validPairs;
     }
 
     /**

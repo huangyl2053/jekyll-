@@ -116,7 +116,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         Collections.sort(businessList, new Comparator<ShokanKetteiTsuchiShoShiharai>() {
             @Override
             public int compare(ShokanKetteiTsuchiShoShiharai o1, ShokanKetteiTsuchiShoShiharai o2) {
-                return getJufukuKey(o1).compareTo(getJufukuKey(o2));
+                return getJufukuKey(o1, true).compareTo(getJufukuKey(o2, true));
             }
         });
         return 伝送データ作成(businessList, batchPram, reportSourceWriter);
@@ -155,8 +155,9 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 sealer = new ShokanKetteiTsuchiShoSealer();
                 帳票ソースデータ.add(sealer);
                 pageCount++;
+                count = ZERO;
             } else {
-                if (key.equals(getJufukuKey(shiharai))) {
+                if (key.equals(getJufukuKey(shiharai, false))) {
                     continue;
                 }
                 if (count == FOUR) {
@@ -169,7 +170,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
             sealer = create帳票ソースデータ(sealer, count, ninshoshaSource, shiharai, batchPram, 文書番号, 通知文,
                     情報文, タイトル, atesakiSource, pageCount);
             count++;
-            key = getJufukuKey(shiharai);
+            key = getJufukuKey(shiharai, false);
             hiHokenshaNo = shiharai.get被保険者番号().value();
         }
         List<RString> 帳票名 = new ArrayList<>();
@@ -247,12 +248,14 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         return new TensoData(帳票ソースデータ, daikoPrint);
     }
 
-    private RString getJufukuKey(ShokanKetteiTsuchiShoShiharai shiharai) {
+    private RString getJufukuKey(ShokanKetteiTsuchiShoShiharai shiharai, boolean is整理番号) {
         RStringBuilder key = new RStringBuilder();
         key.append(shiharai.get被保険者番号().value());
         key.append(shiharai.get提供年月().wareki().toDateString());
         key.append(shiharai.getサービス種類コード());
-        key.append(shiharai.get整理番号().padLeft(new RString(ZERO), TEN));
+        if (is整理番号) {
+            key.append(shiharai.get整理番号().padLeft(new RString(ZERO), TEN));
+        }
         return key.toRString();
     }
 
@@ -470,9 +473,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.setSamabunShimeiSmall1(atesaki.samabunShimeiSmall1);
         ketteiTsuchiShoSealer.setCustomerBarCode(atesaki.customerBarCode);
         ketteiTsuchiShoSealer.setShoHokenshaNo(business.get証記載保険者番号().value());
-        // TODO QA1101 サービス年月の設定不明
-        ketteiTsuchiShoSealer.setServiceYM(business.get提供年月() == null ? RString.EMPTY : business.get提供年月().seireki().
-                separator(Separator.NONE).fillType(FillType.NONE).toDateString());
         ketteiTsuchiShoSealer.setTsuban2(RString.EMPTY);
         if (ShiharaiHohoKubun.窓口払.getコード().equals(business.get支払方法区分コード())) {
             ketteiTsuchiShoSealer.setTorikeshi1(RString.EMPTY);

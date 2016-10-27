@@ -17,8 +17,6 @@ import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoRepor
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReport;
-import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoProperty;
-import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReport;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijikofree.ChosahyoTokkijikoFreeProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijikofree.ChosahyoTokkijikoFreeReport;
 import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoItem;
@@ -177,17 +175,17 @@ public class NinteiChosaIraiPrintService {
      * @param 認定調査票_特記事項List 認定調査票_概況調査List
      */
     public void print認定調査票_特記事項(List<ChosahyoTokkijikoBusiness> 認定調査票_特記事項List) {
-        List<ChosahyoTokkijikoReport> list = new ArrayList<>();
-        if (!認定調査票_特記事項List.isEmpty()) {
-            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List));
-        }
-        ChosahyoTokkijikoProperty property = new ChosahyoTokkijikoProperty();
-        try (ReportAssembler<ChosahyoTokkijikoReportSource> assembler = createAssembler(property, reportManager)) {
-            for (ChosahyoTokkijikoReport report : list) {
-                ReportSourceWriter<ChosahyoTokkijikoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                report.writeBy(reportSourceWriter);
-            }
-        }
+//        List<ChosahyoTokkijikoReport> list = new ArrayList<>();
+//        if (!認定調査票_特記事項List.isEmpty()) {
+//            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List));
+//        }
+//        ChosahyoTokkijikoProperty property = new ChosahyoTokkijikoProperty();
+//        try (ReportAssembler<ChosahyoTokkijikoReportSource> assembler = createAssembler(property, reportManager)) {
+//            for (ChosahyoTokkijikoReport report : list) {
+//                ReportSourceWriter<ChosahyoTokkijikoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+//                report.writeBy(reportSourceWriter);
+//            }
+//        }
     }
 
     /**

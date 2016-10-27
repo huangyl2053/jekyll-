@@ -38,6 +38,6 @@ public class DBC120041_KyodoJukyushaInSubParameter extends BatchParameterBase {
      * @return CreateTmptableProcessパラメータ
      */
     public KyufuJissekiInProcessParameter toKyufuJissekiInProcessParameter(RString csvファイル名) {
-        return new KyufuJissekiInProcessParameter(保存先フォルダ, csvファイル名);
+        return new KyufuJissekiInProcessParameter(保存先フォルダ, csvファイル名, RString.EMPTY);
     }
 }

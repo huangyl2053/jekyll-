@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,8 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 住宅改修理由書作成手数料請求集計を管理するクラスです。
  */
 public class JutakuKaishuRiyushoTesuryoShukei
-       extends ModelBase<JutakuKaishuRiyushoTesuryoShukeiIdentifier, DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity, JutakuKaishuRiyushoTesuryoShukei>
-       implements Serializable {
+        extends ModelBase<JutakuKaishuRiyushoTesuryoShukeiIdentifier, DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity, JutakuKaishuRiyushoTesuryoShukei>
+        implements Serializable {
 
     private final DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity entity;
     private final JutakuKaishuRiyushoTesuryoShukeiIdentifier id;
@@ -163,7 +164,6 @@ public class JutakuKaishuRiyushoTesuryoShukei
 //    public FlexibleDate get介護住宅改修理由書作成申請年月日() {
 //        return entity.getRiyushoSakuseiShinseiYMD();
 //    }
-
     /**
      * 介護住宅改修理由書作成受付年月日を返します。
      *
@@ -172,7 +172,6 @@ public class JutakuKaishuRiyushoTesuryoShukei
 //    public FlexibleDate get介護住宅改修理由書作成受付年月日() {
 //        return entity.getRiyushoSakuseiUketsukeYMD();
 //    }
-
     /**
      * 介護支払方法区分を返します。
      *
@@ -189,6 +188,69 @@ public class JutakuKaishuRiyushoTesuryoShukei
      */
     public ShikibetsuCode get識別コード() {
         return entity.getShikibetsuNo();
+    }
+
+    /**
+     * 介護住宅改修事業者名称を返します。
+     *
+     * @return 介護住宅改修事業者名称
+     */
+    public AtenaMeisho get介護住宅改修事業者名称() {
+        return entity.getJutakuKaishuJigyoshaMeisho();
+    }
+
+    /**
+     * 口座種別を返します。
+     *
+     * @return 口座種別
+     */
+    public RString get口座種別() {
+        return entity.getKozaShubetsu();
+    }
+
+    /**
+     * 口座番号を返します。
+     *
+     * @return 口座番号
+     */
+    public RString get口座番号() {
+        return entity.getKozaNo();
+    }
+
+    /**
+     * 口座名義人を返します。
+     *
+     * @return 口座名義人
+     */
+    public RString get口座名義人() {
+        return entity.getKozaMeigininKana();
+    }
+
+    /**
+     * 口座名義人カナを返します。
+     *
+     * @return 口座名義人カナ
+     */
+    public RString get口座名義人カナ() {
+        return entity.getKozaMeiginin();
+    }
+
+    /**
+     * 金融機関コードを返します。
+     *
+     * @return 金融機関コード
+     */
+    public RString get金融機関コード() {
+        return entity.getKinyuKikanCode();
+    }
+
+    /**
+     * 支店コードを返します。
+     *
+     * @return 支店コード
+     */
+    public RString get支店コード() {
+        return entity.getShitenCode();
     }
 
     /**
@@ -212,8 +274,7 @@ public class JutakuKaishuRiyushoTesuryoShukei
     }
 
     /**
-     * 保持する住宅改修理由書作成手数料請求集計を削除対象とします。<br/>
-     * {@link DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する住宅改修理由書作成手数料請求集計を削除対象とします。<br/> {@link DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link JutakuKaishuRiyushoTesuryoShukei}
      */
@@ -241,7 +302,7 @@ public class JutakuKaishuRiyushoTesuryoShukei
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -269,6 +330,20 @@ public class JutakuKaishuRiyushoTesuryoShukei
      */
     public JutakuKaishuRiyushoTesuryoShukeiBuilder createBuilderForEdit() {
         return new JutakuKaishuRiyushoTesuryoShukeiBuilder(entity, id);
+    }
+
+    /**
+     * 住宅改修理由書事業者情報を変更対象とします。<br/> {@link DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link JutakuKaishuRiyushoTesuryoShukei}
+     */
+    public JutakuKaishuRiyushoTesuryoShukei modifiedModel() {
+        DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new JutakuKaishuRiyushoTesuryoShukei(
+                modifiedEntity);
     }
 
 //TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。

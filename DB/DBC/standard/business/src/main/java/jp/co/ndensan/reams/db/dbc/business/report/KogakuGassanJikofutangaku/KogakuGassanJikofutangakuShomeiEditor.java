@@ -6,20 +6,20 @@
 package jp.co.ndensan.reams.db.dbc.business.report.KogakuGassanJikofutangaku;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.GassanJikofutangakuShomeishoTorikomiIchiranSource;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoDateEntity;
-import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBC200034_高額合算自己負担額証明書情報取込一覧表のEntityです。
@@ -30,13 +30,9 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
 
     private final FlexibleYearMonth 処理年月;
     private final KogakuGassanJikofutangakuShomeishoDateEntity entity;
-    private final RString 並び順の１件目;
-    private final RString 並び順の２件目;
-    private final RString 並び順の３件目;
-    private final RString 並び順の４件目;
-    private final RString 並び順の５件目;
     private final List<RString> 改頁項目List;
-    private final YMDHMS システム日時;
+    private final List<RString> 出力順リスト;
+    private final RDateTime システム日時;
     private final int 連番;
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
@@ -46,112 +42,123 @@ public class KogakuGassanJikofutangakuShomeiEditor implements IKogakuGassanJikof
     private static final RString SAKUSEI = new RString("作成");
     private static final RString 図形 = new RString("～");
     private static final RString 差異有り = new RString("差異有り");
+    private final RString 保険者番号;
+    private final RString 保険者名称;
 
     /**
      * コンストラクタです
      *
      * @param 処理年月 FlexibleYearMonth
      * @param entity ChohyoShutsuryokuTaishoDateEntity
-     * @param 並び順の１件目 RString
-     * @param 並び順の２件目 RString
-     * @param 並び順の３件目 RString
-     * @param 並び順の４件目 RString
-     * @param 並び順の５件目 RString
      * @param 改頁項目List List<RString>
-     * @param システム日時 YMDHMS
+     * @param 出力順リスト List<RString>
+     * @param システム日時 RDateTime
      * @param 連番 int
+     * @param 保険者番号 RString
+     * @param 保険者名称 RString
      */
     public KogakuGassanJikofutangakuShomeiEditor(
             FlexibleYearMonth 処理年月,
             KogakuGassanJikofutangakuShomeishoDateEntity entity,
-            RString 並び順の１件目,
-            RString 並び順の２件目,
-            RString 並び順の３件目,
-            RString 並び順の４件目,
-            RString 並び順の５件目,
             List<RString> 改頁項目List,
-            YMDHMS システム日時,
-            int 連番) {
+            List<RString> 出力順リスト,
+            RDateTime システム日時,
+            int 連番,
+            RString 保険者番号,
+            RString 保険者名称) {
         this.処理年月 = 処理年月;
         this.entity = entity;
-        this.並び順の１件目 = 並び順の１件目;
-        this.並び順の２件目 = 並び順の２件目;
-        this.並び順の３件目 = 並び順の３件目;
-        this.並び順の４件目 = 並び順の４件目;
-        this.並び順の５件目 = 並び順の５件目;
         this.改頁項目List = 改頁項目List;
+        this.出力順リスト = 出力順リスト;
         this.システム日時 = システム日時;
         this.連番 = 連番;
+        this.保険者番号 = 保険者番号;
+        this.保険者名称 = 保険者名称;
     }
 
     @Override
     public GassanJikofutangakuShomeishoTorikomiIchiranSource edit(GassanJikofutangakuShomeishoTorikomiIchiranSource source) {
         RString 帳票作成年月日 = システム日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        RString 帳票作成日時 = システム日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+        RString 帳票作成日時 = システム日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成日時)
                 .concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.shoriYM = 処理年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        source.hokenshaNo = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        source.hokenshaName = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        if (entity != null) {
-            source.shoKisaiHokenshaNo = entity.get高額合算自己負担額_保険者番号();
-            source.shoKisaiHokenshaName = entity.get高額合算自己負担額_保険者名();
-            set出力順And改ページ(source);
-            source.list_1 = new RString(連番);
-            source.list_2 = entity.get高額合算自己負担額_対象年度();
-            source.list_3 = entity.get被保険者_登録被保険者番号();
-            source.list_4 = entity.get被保険者_宛名名称();
-            source.list_5 = entity.get高額合算自己負担額_支給申請書整理番号();
-            source.list_6 = entity.get高額合算自己負担額_履歴番号();
-            source.list_7 = entity.get高額合算自己負担額_申請年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            source.list_8 = entity.get高額合算自己負担額_異動区分();
-            RString 被保険者期間開始年月日 = entity.get高額合算自己負担額_被保険者期間開始年月日().wareki()
-                    .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            RString 被保険者期間終了年月日 = entity.get高額合算自己負担額_被保険者期間終了年月日().wareki()
-                    .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            RString 対象計算期間開始年月日 = entity.get高額合算自己負担額_対象計算期間開始年月日().wareki()
-                    .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            RString 対象計算期間終了年月日 = entity.get高額合算自己負担額_対象計算期間終了年月日().wareki()
-                    .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            source.list_9 = 被保険者期間開始年月日.concat(図形).concat(被保険者期間終了年月日);
-            source.list_10 = 対象計算期間開始年月日.concat(図形).concat(対象計算期間終了年月日);
-            source.list_11 = entity.get高額合算自己負担額_自己負担額証明書整理番号();
-            source.list_12 = entity.get高額合算自己負担額_合計_自己負担額();
-            source.list_13 = entity.get高額合算自己負担額_合計_70_74自己負担額_内訳();
-            if (entity.is高額合算自己負担額_自己負担額差異フラグ()) {
-                source.list_14 = 差異有り;
-            } else {
-                source.list_14 = RString.EMPTY;
-            }
+        source.hokenshaNo = 保険者番号;
+        source.hokenshaName = 保険者名称;
+        source.shoKisaiHokenshaNo = entity.get高額合算自己負担額_保険者番号();
+        source.shoKisaiHokenshaName = entity.get高額合算自己負担額_保険者名();
+        set出力順And改ページ(source);
+        source.list_1 = new RString(連番);
+        source.list_2 = entity.get高額合算自己負担額_対象年度().wareki().firstYear(FirstYear.ICHI_NEN)
+                .fillType(FillType.BLANK).toDateString();
+        source.list_3 = entity.get被保険者_登録被保険者番号();
+        source.list_4 = entity.get被保険者_宛名名称();
+        source.list_5 = entity.get高額合算自己負担額_支給申請書整理番号();
+        source.list_6 = new RString(entity.get高額合算自己負担額_履歴番号());
+        source.list_7 = entity.get高額合算自己負担額_申請年月日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        source.list_8 = KaigoGassan_Idokubun.toValue(entity.get高額合算自己負担額_異動区分()).get名称();
+        RString 被保険者期間開始年月日 = 年月日編集(entity.get高額合算自己負担額_被保険者期間開始年月日());
+        RString 被保険者期間終了年月日 = 年月日編集(entity.get高額合算自己負担額_被保険者期間終了年月日());
+        RString 対象計算期間開始年月日 = 年月日編集(entity.get高額合算自己負担額_対象計算期間開始年月日());
+        RString 対象計算期間終了年月日 = 年月日編集(entity.get高額合算自己負担額_対象計算期間終了年月日());
+        source.list_9 = 被保険者期間開始年月日.concat(図形).concat(被保険者期間終了年月日);
+        source.list_10 = 対象計算期間開始年月日.concat(図形).concat(対象計算期間終了年月日);
+        source.list_11 = entity.get高額合算自己負担額_自己負担額証明書整理番号();
+        source.list_12 = doカンマ編集(entity.get高額合算自己負担額_合計_自己負担額());
+        source.list_13 = doカンマ編集(entity.get高額合算自己負担額_合計_70_74自己負担額_内訳());
+        if (entity.is高額合算自己負担額_自己負担額差異フラグ()) {
+            source.list_14 = 差異有り;
+        } else {
+            source.list_14 = RString.EMPTY;
         }
+        source.yubinNo = entity.get被保険者_郵便番号();
+        source.choikiCode = entity.get被保険者_町域コード();
+        source.gyoseikuCode = entity.get被保険者_行政区コード();
+        source.shimei50onKana = entity.get被保険者_氏名50音カナ();
+        source.shichosonCode = entity.get被保険者_市町村コード();
         return source;
     }
 
     private void set出力順And改ページ(GassanJikofutangakuShomeishoTorikomiIchiranSource source) {
-        source.shutsuryokujun1 = 並び順の１件目;
-        source.shutsuryokujun2 = 並び順の２件目;
-        source.shutsuryokujun3 = 並び順の３件目;
-        source.shutsuryokujun4 = 並び順の４件目;
-        source.shutsuryokujun5 = 並び順の５件目;
-        if (null != 改頁項目List && !改頁項目List.isEmpty()) {
-            if (改頁項目List.size() > NUM_0) {
-                source.kaipage1 = 改頁項目List.get(NUM_0);
-            }
-            if (改頁項目List.size() > NUM_1) {
-                source.kaipage2 = 改頁項目List.get(NUM_1);
-            }
-            if (改頁項目List.size() > NUM_2) {
-                source.kaipage3 = 改頁項目List.get(NUM_2);
-            }
-            if (改頁項目List.size() > NUM_3) {
-                source.kaipage4 = 改頁項目List.get(NUM_3);
-            }
-            if (改頁項目List.size() > NUM_4) {
-                source.kaipage5 = 改頁項目List.get(NUM_4);
-            }
+
+        if (出力順リスト != null && !出力順リスト.isEmpty()) {
+            source.shutsuryokujun1 = get出力順(NUM_0);
+            source.shutsuryokujun2 = get出力順(NUM_1);
+            source.shutsuryokujun3 = get出力順(NUM_2);
+            source.shutsuryokujun4 = get出力順(NUM_3);
+            source.shutsuryokujun5 = get出力順(NUM_4);
         }
+
+        if (null != 改頁項目List && !改頁項目List.isEmpty()) {
+            source.kaipage1 = get改頁順(NUM_0);
+            source.kaipage2 = get改頁順(NUM_1);
+            source.kaipage3 = get改頁順(NUM_2);
+            source.kaipage4 = get改頁順(NUM_3);
+            source.kaipage5 = get改頁順(NUM_4);
+        }
+
+    }
+
+    private RString get出力順(int index) {
+        return index < 出力順リスト.size() ? 出力順リスト.get(index) : RString.EMPTY;
+    }
+
+    private RString get改頁順(int index) {
+        return index < 改頁項目List.size() ? 改頁項目List.get(index) : RString.EMPTY;
+    }
+
+    private RString 年月日編集(FlexibleDate 年月日) {
+        return 年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString doカンマ編集(Decimal decimal) {
+        if (null != decimal) {
+            return DecimalFormatter.toコンマ区切りRString(decimal, 0);
+        }
+        return RString.EMPTY;
     }
 }

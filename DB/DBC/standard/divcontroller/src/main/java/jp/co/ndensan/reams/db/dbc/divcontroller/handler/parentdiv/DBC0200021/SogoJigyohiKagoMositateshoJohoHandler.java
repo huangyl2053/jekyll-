@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0200021;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110140.DBC110140_SogojigyohiKagoMoshitateshoOutParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110100.DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOutParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200021.SogoJigyohiKagoMositateshoJohoDiv;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -52,9 +52,9 @@ public class SogoJigyohiKagoMositateshoJohoHandler {
      *
      * @param 再処理区分 RString
      * @param 処理年月 RYearMonth
-     * @return DBC110140_SogojigyohiKagoMoshitateshoOutParameter
+     * @return DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOutParameter
      */
-    public DBC110140_SogojigyohiKagoMoshitateshoOutParameter setBatchParameter(RString 再処理区分,
+    public DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOutParameter setBatchParameter(RString 再処理区分,
             RYearMonth 処理年月) {
         if (div.getCcdShutsuryokujun().get出力順ID() != null) {
             Long 出力順ID = div.getCcdShutsuryokujun().get出力順ID();
@@ -67,7 +67,7 @@ public class SogoJigyohiKagoMositateshoJohoHandler {
                 IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
                 manager.save前回出力順(iOutputOrder);
             }
-            DBC110140_SogojigyohiKagoMoshitateshoOutParameter parameter = new DBC110140_SogojigyohiKagoMoshitateshoOutParameter();
+            DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOutParameter parameter = new DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOutParameter();
             parameter.set再処理区分(再処理区分);
             parameter.set処理年月(処理年月);
             parameter.set出力順ID(new RString(出力順ID.toString()));

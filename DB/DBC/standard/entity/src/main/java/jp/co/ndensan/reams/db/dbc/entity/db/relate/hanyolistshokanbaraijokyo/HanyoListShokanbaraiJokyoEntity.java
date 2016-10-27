@@ -5,18 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -35,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressWarnings ("PMD.UnusedPrivateField")
 public class HanyoListShokanbaraiJokyoEntity {
 
     private HihokenshaNo 被保険者番号;
@@ -88,6 +86,7 @@ public class HanyoListShokanbaraiJokyoEntity {
     private RString 旧措置者フラグ;
     private Code みなし要介護区分コード;
     private Code 直近異動事由コード;
+    private RString 様式番号s;
 
     /**
      * -- GETTER -- 支給申請Entity。
@@ -113,14 +112,7 @@ public class HanyoListShokanbaraiJokyoEntity {
      * @param 判定結果情報Entity 判定結果情報Entity
      */
     private DbT3036ShokanHanteiKekkaEntity 判定結果情報Entity;
-    /**
-     * -- GETTER -- 請求基本Entity。
-     *
-     * @return 請求基本Entity -- SETTER -- 請求基本Entity。
-     *
-     * @param 請求基本Entity 請求基本Entity
-     */
-    private List<DbT3038ShokanKihonEntity> 請求基本List;
+
     /**
      * -- GETTER -- 福祉用具Entity。
      *
@@ -144,7 +136,7 @@ public class HanyoListShokanbaraiJokyoEntity {
      *
      * @param 口座情報Entity 口座情報Entity
      */
-    private KozaRelateEntity 口座情報Entity;
+    private TokuteiKozaRelateEntity 口座情報Entity;
     /**
      * -- GETTER -- 宛名Entity。
      *

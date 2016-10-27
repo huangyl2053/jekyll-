@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020090;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020090;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiHaakuNyuryokuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiJigyoHaakuNyuryokuEntity;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.setaiinhaakunyuryoku.SetaiinHaakuNyuryokuProcessParameter;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.ISetaiiShotokuKazeiHanteiMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -19,17 +17,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SetaiinHaakuNyuryokuTempCreatProcess extends SimpleBatchProcessBase {
 
-    private static final RString TABLE_世帯員所得情報高額一時 = new RString("TmpSetaiHaakuNyuryoku");
-    private static final RString TABLE_世帯員所得情報事業高額一時 = new RString("TmpSetaiJigyoHaakuNyuryoku");
+    private static final RString メニューID_高額介護サービス = new RString("DBCMN41002");
+    private static final RString メニューID_事業高額介護サービス = new RString("DBCMNL1002");
 
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter setaiinShotokuWriter;
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter setaiinShotokuJigyoWriter;
+    private SetaiinHaakuNyuryokuProcessParameter processParameter;
+    private ISetaiiShotokuKazeiHanteiMapper mapper;
 
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
+        mapper = getMapper(ISetaiiShotokuKazeiHanteiMapper.class);
         createTempTable();
     }
 
@@ -42,9 +39,19 @@ public class SetaiinHaakuNyuryokuTempCreatProcess extends SimpleBatchProcessBase
     }
 
     private void createTempTable() {
-        setaiinShotokuWriter = new BatchEntityCreatedTempTableWriter(
-                TABLE_世帯員所得情報高額一時, TmpSetaiHaakuNyuryokuEntity.class);
-        setaiinShotokuJigyoWriter = new BatchEntityCreatedTempTableWriter(
-                TABLE_世帯員所得情報事業高額一時, TmpSetaiJigyoHaakuNyuryokuEntity.class);
+        if (is高額介護サービス(processParameter.getメニューID())) {
+            mapper.createTmpSetaiHaakuNyuryoku();
+        }
+        if (is事業高額介護サービス(processParameter.getメニューID())) {
+            mapper.createTmpSetaiJigyoHaakuNyuryoku();
+        }
+    }
+
+    private boolean is高額介護サービス(RString メニューID) {
+        return メニューID_高額介護サービス.equals(メニューID);
+    }
+
+    private boolean is事業高額介護サービス(RString メニューID) {
+        return メニューID_事業高額介護サービス.equals(メニューID);
     }
 }

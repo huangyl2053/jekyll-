@@ -9,9 +9,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -44,7 +41,7 @@ public class FairudetaIchijiTeburuEntity extends DbTableEntityBase<FairudetaIchi
     @TempTableColumnOrder(2)
     private RString sutetasu;
     @TempTableColumnOrder(3)
-    private ShikibetsuCode shikibetsukodo;
+    private RString shikibetsukodo;
     @TempTableColumnOrder(4)
     private RString hokenshabango;
     @TempTableColumnOrder(5)
@@ -74,11 +71,11 @@ public class FairudetaIchijiTeburuEntity extends DbTableEntityBase<FairudetaIchi
     @TempTableColumnOrder(17)
     private AtenaMeisho hihokenjakanjishimei;
     @TempTableColumnOrder(18)
-    private YubinNo yubenbango;
+    private RString yubenbango;
     @TempTableColumnOrder(19)
     private AtenaJusho jusho;
     @TempTableColumnOrder(20)
-    private TelNo tenwabango;
+    private RString tenwabango;
     @TempTableColumnOrder(21)
     private RString byoinshisetsutonomeisho;
     @TempTableColumnOrder(22)
@@ -398,20 +395,24 @@ public class FairudetaIchijiTeburuEntity extends DbTableEntityBase<FairudetaIchi
     @TempTableColumnOrder(179)
     private RString resupireta;
     @TempTableColumnOrder(180)
-    private RString kikansekkainoshochitotsunokango;
-    @TempTableColumnOrder(181)
-    private RString keikaneiyo;
+    private RString kikansekkainoshochi;
+
+    @TempTableColumnOrder(181)//tianjia
+    private RString totsunokango;
+
     @TempTableColumnOrder(182)
-    private RString monitasokutei;
+    private RString keikaneiyo;
     @TempTableColumnOrder(183)
-    private RString jiyokusounoshochi;
+    private RString monitasokutei;
     @TempTableColumnOrder(184)
-    private RString kateteru;
+    private RString jiyokusounoshochi;
     @TempTableColumnOrder(185)
-    private RString shogaikorei;
+    private RString kateteru;
+
     @TempTableColumnOrder(186)
-    private RString shajiritsudo;
-    @TempTableColumnOrder(187)
+    private RString shogaikoreishajiritsudo;
+
+    @TempTableColumnOrder(187)    //zhengchang
     private RString ninshishokoreishajiritsudo;
     @TempTableColumnOrder(188)
     private RString zenkaikekka_mahi_hidari_joshi01;
@@ -551,18 +552,23 @@ public class FairudetaIchijiTeburuEntity extends DbTableEntityBase<FairudetaIchi
     private RString zenkaikekka_resupireta;
     @TempTableColumnOrder(256)
     private RString zenkaikekka_kikansekkainoshochitotsunokango;
-    @TempTableColumnOrder(257)
-    private RString zenkaikekka_keikaneiyo;
+
+    @TempTableColumnOrder(257)             //tianjai
+    private RString zenkaikekka_totsunokango;
+
     @TempTableColumnOrder(258)
-    private RString zenkaikekka_monitasokutei;
+    private RString zenkaikekka_keikaneiyo;
     @TempTableColumnOrder(259)
-    private RString zenkaikekka_jiyokusounoshochi;
+    private RString zenkaikekka_monitasokutei;
     @TempTableColumnOrder(260)
-    private RString zenkaikekka_kateteru;
+    private RString zenkaikekka_jiyokusounoshochi;
     @TempTableColumnOrder(261)
-    private RString zenkaikekka_shogaikorei;
+    private RString zenkaikekka_kateteru;
+
+//    @TempTableColumnOrder(261)
+//    private RString zenkaikekka_shogaikorei;
     @TempTableColumnOrder(262)
-    private RString zenkaikekka_shajiritsudo;
+    private RString zenkaikekka_shogaikoreishajiritsudo;
     @TempTableColumnOrder(263)
     private RString zenkaikekka_ninshishokoreishajiritsudo;
     @TempTableColumnOrder(264)
@@ -577,11 +583,13 @@ public class FairudetaIchijiTeburuEntity extends DbTableEntityBase<FairudetaIchi
     private RString zenkaikekka_yokaigojikan_haisetsu;
     @TempTableColumnOrder(269)
     private RString zenkaikekka_yokaigojikan_ldo;
+
     @TempTableColumnOrder(270)
     private RString zenkaikekka_yokaigojikan_seiketsuhoji;
     @TempTableColumnOrder(271)
     private RString zenkaikekka_yokaigojikan_kansetsukea;
     @TempTableColumnOrder(272)
+
     private RString zenkaikekka_yokaigojikan_kanren;
     @TempTableColumnOrder(273)
     private RString zenkaikekka_yokaigojikan_kinokunren;
@@ -695,4 +703,6 @@ public class FairudetaIchijiTeburuEntity extends DbTableEntityBase<FairudetaIchi
     private RString ninteishinsakaiikento;
     @TempTableColumnOrder(328)
     private RString komentoto;
+    @TempTableColumnOrder(329)
+    private RString shinseishoKanriNo;
 }

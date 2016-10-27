@@ -67,6 +67,7 @@ public class TokuchoInfoFDownloadHandler {
     private static final int INT_0 = 0;
     private static final int INT_6 = 6;
     private static final int INT_4 = 4;
+    private static final RString STR_済 = new RString("済");
     private static final RString STR_1 = new RString("1");
     private static final RString STR_2 = new RString("2");
     private static final RString STR_3 = new RString("3");
@@ -76,6 +77,15 @@ public class TokuchoInfoFDownloadHandler {
     private static final RString STR_7 = new RString("7");
     private static final RString STR_8 = new RString("8");
     private static final RString STR_9 = new RString("9");
+    private static final RString STR_01 = new RString("01");
+    private static final RString STR_02 = new RString("02");
+    private static final RString STR_03 = new RString("03");
+    private static final RString STR_04 = new RString("04");
+    private static final RString STR_05 = new RString("05");
+    private static final RString STR_06 = new RString("06");
+    private static final RString STR_07 = new RString("07");
+    private static final RString STR_08 = new RString("08");
+    private static final RString STR_09 = new RString("09");
     private static final RString STR_10 = new RString("10");
     private static final RString STR_11 = new RString("11");
     private static final RString STR_12 = new RString("12");
@@ -115,23 +125,26 @@ public class TokuchoInfoFDownloadHandler {
         RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().getKey();
         AuthorityItem 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(
                 ControlDataHolder.getUserId()).get(INT_0);
+        処理対象月制御();
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)) {
-            処理対象月制御();
             市町村制御(市町村識別ID.getItemId());
             div.getTokuchoInfoDownloadShoriNaiyo().getDdlTsuki().setDisabled(true);
-            市町村処理対象グリッド設定(市町村識別ID.getItemId());
+            RString selectKey = div.getShoriTaishoShichoshonTsuki().getDdlShichosonSelect().getSelectedKey();
+            市町村処理対象グリッド設定(selectKey);
+            市町村処理状況グリッド設定(selectKey, year);
         } else {
             div.getTokuchoInfoDownloadShoriNaiyo().getRadShichosonSelect().setVisible(false);
             div.getTokuchoInfoDownloadShoriNaiyo().getDdlShichosonSelect().setVisible(false);
-            div.getTokuchoInfoDownloadShoriNaiyo().getRadTsukiSelect().setVisible(false);
-            div.getTokuchoInfoDownloadShoriNaiyo().getDdlTsuki().setVisible(false);
+            div.getTokuchoInfoDownloadShoriNaiyo().getRadTsukiSelect().setSelectedKey(KEY0);
             単一処理対象グリッド設定();
+            単一処理状況グリッド設定(year);
         }
-        市町村処理状況グリッド設定(市町村識別ID.getItemId(), year);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, true);
     }
 
     private void 市町村処理状況グリッド設定(RString 市町村ID, FlexibleYear year) {
+        List<RString> 状況済月 = TokuchoInfoShoriDateKanri.createInstance().get状況済月();
+        Map<RString, RString> 処理月Map = get処理月Map();
         List<dgShoriKakunin_Row> 処理状況Rows = new ArrayList<>();
         List<RString> 処理月List = get処理状況グリッド処理月List();
         for (RString 処理月 : 処理月List) {
@@ -143,8 +156,35 @@ public class TokuchoInfoFDownloadHandler {
                 row.getTxtShoriMei().setValue(特徴異動情報作成);
             }
             row.getTxtShoriNichiji().setValue(get市町村ID処理日付(市町村ID, year));
-            //TODO QA1412
-            row.getTxtJokyo().setValue(RString.EMPTY);
+            if (状況済月.contains(処理月Map.get(処理月))) {
+                row.getTxtJokyo().setValue(STR_済);
+            } else {
+                row.getTxtJokyo().setValue(RString.EMPTY);
+            }
+            処理状況Rows.add(row);
+        }
+        div.getTokuchoInfoDownloadShoriKakunin().getDgShoriKakunin().setDataSource(処理状況Rows);
+    }
+
+    private void 単一処理状況グリッド設定(FlexibleYear year) {
+        List<RString> 状況済月 = TokuchoInfoShoriDateKanri.createInstance().get状況済月();
+        Map<RString, RString> 処理月Map = get処理月Map();
+        List<dgShoriKakunin_Row> 処理状況Rows = new ArrayList<>();
+        List<RString> 処理月List = get処理状況グリッド処理月List();
+        for (RString 処理月 : 処理月List) {
+            dgShoriKakunin_Row row = new dgShoriKakunin_Row();
+            row.getTxtTsuki().setValue(処理月);
+            if (月_7.equals(処理月)) {
+                row.getTxtShoriMei().setValue(特徴依頼情報作成);
+            } else {
+                row.getTxtShoriMei().setValue(特徴異動情報作成);
+            }
+            row.getTxtShoriNichiji().setValue(get単一月処理日付(year));
+            if (状況済月.contains(処理月Map.get(処理月))) {
+                row.getTxtJokyo().setValue(STR_済);
+            } else {
+                row.getTxtJokyo().setValue(RString.EMPTY);
+            }
             処理状況Rows.add(row);
         }
         div.getTokuchoInfoDownloadShoriKakunin().getDgShoriKakunin().setDataSource(処理状況Rows);
@@ -156,6 +196,23 @@ public class TokuchoInfoFDownloadHandler {
         処理名List.add(ShoriName.特徴依頼情報作成.get名称());
         ShoriDateKanri shoriDateKanri = TokuchoInfoShoriDateKanri.createInstance().
                 get市町村処理日付(year, new RString(STR_00.toString() + 市町村ID.toString()), 処理名List);
+        return get処理日時パターン(shoriDateKanri);
+    }
+
+    private RString get単一月処理日付(FlexibleYear year) {
+        RString 処理名;
+        RString 年度内連番;
+        Map<RString, RString> 処理月Map = get処理状況グリッド処理月();
+        RString 選択月 = div.getTokuchoInfoDownloadShoriNaiyo().getDdlTsuki().getSelectedValue();
+        if (STR_7.equals(div.getTokuchoInfoDownloadShoriNaiyo().getDdlTsuki().getSelectedKey())) {
+            処理名 = ShoriName.特徴依頼情報作成.get名称();
+            年度内連番 = STR_0001;
+        } else {
+            処理名 = ShoriName.特徴異動情報作成.get名称();
+            年度内連番 = 処理月Map.get(選択月);
+        }
+        ShoriDateKanri shoriDateKanri = TokuchoInfoShoriDateKanri.createInstance().
+                get単一処理日付(処理名, year, 年度内連番);
         return get処理日時パターン(shoriDateKanri);
     }
 
@@ -237,18 +294,30 @@ public class TokuchoInfoFDownloadHandler {
                         + SPACE.toString() + 市町村セキュリティ情報.get市町村情報().get市町村名称().toString());
                 市町村DataSourceList.add(new KeyValueDataSource(市町村ID, コード名称));
             }
-        } else {
-            List<KoikiZenShichosonJoho> 構成市町村List = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho().records();
-            if (構成市町村List != null && !構成市町村List.isEmpty()) {
-                for (KoikiZenShichosonJoho 構成市町村 : 構成市町村List) {
-                    RString 市町村ID = 構成市町村.get市町村識別ID();
-                    RString コード名称 = new RString(構成市町村.get市町村コード().getColumnValue().toString()
-                            + SPACE.toString() + 構成市町村.get市町村名称().toString());
-                    市町村DataSourceList.add(new KeyValueDataSource(市町村ID, コード名称));
+            div.getShoriTaishoShichoshonTsuki().getDdlShichosonSelect().setDataSource(市町村DataSourceList);
+            if (!市町村DataSourceList.isEmpty()) {
+                div.getShoriTaishoShichoshonTsuki().getDdlShichosonSelect().setSelectedIndex(INT_0);
+            }
+            return;
+        }
+        List<KoikiZenShichosonJoho> 構成市町村List = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho().records();
+        List<RString> 市町村IDList = new ArrayList<>();
+        if (構成市町村List != null && !構成市町村List.isEmpty()) {
+            for (KoikiZenShichosonJoho 構成市町村 : 構成市町村List) {
+                RString 市町村ID = 構成市町村.get市町村識別ID();
+                if (市町村IDList.contains(市町村ID)) {
+                    continue;
                 }
+                市町村IDList.add(市町村ID);
+                RString コード名称 = new RString(構成市町村.get市町村コード().getColumnValue().toString()
+                        + SPACE.toString() + 構成市町村.get市町村名称().toString());
+                市町村DataSourceList.add(new KeyValueDataSource(市町村ID, コード名称));
             }
         }
         div.getShoriTaishoShichoshonTsuki().getDdlShichosonSelect().setDataSource(市町村DataSourceList);
+        if (!市町村DataSourceList.isEmpty()) {
+            div.getShoriTaishoShichoshonTsuki().getDdlShichosonSelect().setSelectedIndex(INT_0);
+        }
     }
 
     private List<RString> get構成市町村IDList() {
@@ -324,6 +393,9 @@ public class TokuchoInfoFDownloadHandler {
             return RString.EMPTY;
         }
         YMDHMS 基準日時 = shoriDateKanri.get基準日時();
+        if (基準日時.isEmpty()) {
+            return RString.EMPTY;
+        }
         RDate 年月日 = 基準日時.getDate();
         RTime 時刻 = 基準日時.getRDateTime().getTime();
         RString 前回処理日時 = new RString(年月日.wareki().toDateString().toString() + SPACE
@@ -362,6 +434,15 @@ public class TokuchoInfoFDownloadHandler {
                 getRadTsukiSelect().getSelectedKey())) {
             return;
         }
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().getKey();
+        if (!DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)) {
+            RDate 調定年度 = new RDate(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
+                    SubGyomuCode.DBB介護賦課).toString());
+            FlexibleYear year = new FlexibleYear(調定年度.getYear().toDateString());
+            単一処理状況グリッド設定(year);
+            return;
+        }
         div.getTokuchoInfoDownloadShoriNaiyo().getRadShichosonSelect().clearSelectedItem();
         div.getTokuchoInfoDownloadShoriNaiyo().getDdlShichosonSelect().setDisabled(true);
         div.getTokuchoInfoDownloadShoriNaiyo().getDdlTsuki().setDisabled(false);
@@ -393,6 +474,8 @@ public class TokuchoInfoFDownloadHandler {
         }
         List<dgShoriKakunin_Row> 処理状況Rows = new ArrayList<>();
         List<RString> 処理月List = get処理状況グリッド処理月List();
+        List<RString> 状況済月 = TokuchoInfoShoriDateKanri.createInstance().get状況済月();
+        Map<RString, RString> map = get処理月Map();
         for (RString 処理月 : 処理月List) {
             dgShoriKakunin_Row row = new dgShoriKakunin_Row();
             row.getTxtTsuki().setValue(処理月);
@@ -402,8 +485,11 @@ public class TokuchoInfoFDownloadHandler {
                 row.getTxtShoriMei().setValue(特徴異動情報作成);
             }
             row.getTxtShoriNichiji().setValue(処理日時);
-            //TODO QA1412
-            row.getTxtJokyo().setValue(RString.EMPTY);
+            if (状況済月.contains(map.get(処理月))) {
+                row.getTxtJokyo().setValue(STR_済);
+            } else {
+                row.getTxtJokyo().setValue(RString.EMPTY);
+            }
             処理状況Rows.add(row);
         }
         div.getTokuchoInfoDownloadShoriKakunin().getDgShoriKakunin().setDataSource(処理状況Rows);
@@ -459,9 +545,14 @@ public class TokuchoInfoFDownloadHandler {
      *
      */
     public void onChange_dgkoikiShoriSelect() {
-        if (div.getKoikiShoriSelect().getDgkoikiShoriSelect().getSelectedItems().isEmpty()) {
+        List<dgkoikiShoriSelect_Row> 処理対象Rows = div.getKoikiShoriSelect().getDgkoikiShoriSelect().getSelectedItems();
+        if (処理対象Rows.isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, true);
         } else {
+            dgkoikiShoriSelect_Row 選択Row = div.getKoikiShoriSelect().getDgkoikiShoriSelect().getActiveRow();
+            処理対象Rows.clear();
+            処理対象Rows.add(選択Row);
+            div.getKoikiShoriSelect().getDgkoikiShoriSelect().setSelectedItems(処理対象Rows);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, false);
         }
     }
@@ -471,11 +562,32 @@ public class TokuchoInfoFDownloadHandler {
      *
      */
     public void onChange_dgTsukiShoriSelect() {
-        if (div.getTsukiShoriSelect().getDgTsukiShoriSelect().getSelectedItems().isEmpty()) {
+        List<dgTsukiShoriSelect_Row> 処理対象Rows = div.getTsukiShoriSelect().getDgTsukiShoriSelect().getSelectedItems();
+        if (処理対象Rows.isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, true);
         } else {
+            dgTsukiShoriSelect_Row 選択Row = div.getTsukiShoriSelect().getDgTsukiShoriSelect().getActiveRow();
+            処理対象Rows.clear();
+            処理対象Rows.add(選択Row);
+            div.getTsukiShoriSelect().getDgTsukiShoriSelect().setSelectedItems(処理対象Rows);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, false);
         }
     }
 
+    private Map<RString, RString> get処理月Map() {
+        Map<RString, RString> 処理月Map = new HashMap<>();
+        処理月Map.put(月_4, STR_04);
+        処理月Map.put(月_5, STR_05);
+        処理月Map.put(月_6, STR_06);
+        処理月Map.put(月_7, STR_07);
+        処理月Map.put(月_8, STR_08);
+        処理月Map.put(月_9, STR_09);
+        処理月Map.put(月_10, STR_10);
+        処理月Map.put(月_11, STR_11);
+        処理月Map.put(月_12, STR_12);
+        処理月Map.put(月_1, STR_01);
+        処理月Map.put(月_2, STR_02);
+        処理月Map.put(月_3, STR_03);
+        return 処理月Map;
+    }
 }

@@ -52,6 +52,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 主治医意見書作成報酬支払内訳確認書のprocessです。
@@ -98,7 +100,32 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
     @Override
     protected void createWriter() {
         batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
-                .addBreak(new BreakerCatalog<IkenShiharaiuchiwakeReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .addBreak(new BreakerCatalog<IkenShiharaiuchiwakeReportSource>().new SimpleLayoutBreaker(
+
+
+
+
+
+
+
+
+
+
+                    IkenShiharaiuchiwakeReportSource.LAYOUT_BREAK_KEYS) {
+            @Override
+                    public ReportLineRecord<IkenShiharaiuchiwakeReportSource> occuredBreak(
+                            ReportLineRecord<IkenShiharaiuchiwakeReportSource> currentRecord,
+                            ReportLineRecord<IkenShiharaiuchiwakeReportSource> nextRecord,
+                            ReportDynamicChart dynamicChart) {
+                                int layout = currentRecord.getSource().layout.index();
+                                currentRecord.setFormGroupIndex(layout);
+                                if (nextRecord != null && nextRecord.getSource() != null) {
+                                    layout = nextRecord.getSource().layout.index();
+                                    nextRecord.setFormGroupIndex(layout);
+                                }
+                                return currentRecord;
+                            }
+                }).addBreak(new BreakerCatalog<IkenShiharaiuchiwakeReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
@@ -122,18 +149,19 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
                 ChosaHoshuShiharaiProcess.get通知文(), ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("002"), 業務固有キー));
         shumeisaiEntity.setCount(index_tmp);
         shumeisaiEntity = editIkenShiharaiuchiwakeEntity(shumeisaiEntity, entity);
+        shumeisaiEntity.set申請書管理番号(entity.getShinseishoKanriNo().value());
         IkenShiharaiuchiwakeReport report = new IkenShiharaiuchiwakeReport(shumeisaiEntity);
         report.writeBy(reportSourceWriter);
         index_tmp++;
     }
 
     private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
-        RString hihokenshaNo = RString.EMPTY;
-        if (entity.getHihokenshaNo() != null) {
-            hihokenshaNo = entity.getHihokenshaNo();
+        RString shinseishoKanriNo = RString.EMPTY;
+        if (entity.getShinseishoKanriNo() != null && !entity.getShinseishoKanriNo().isEmpty()) {
+            shinseishoKanriNo = entity.getShinseishoKanriNo().value();
         }
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                hihokenshaNo);
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
+                shinseishoKanriNo);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 

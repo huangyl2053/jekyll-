@@ -102,4 +102,19 @@ public class IryohiKojoManager {
         }
         return 1 == dac.save(医療費控除.toEntity());
     }
+
+    /**
+     * 医療費控除{@link IryohiKojo}を削除します。
+     *
+     * @param 医療費控除 {@link IryohiKojo}
+     * @return 削除件数 削除結果の件数を返します。
+     */
+    @Transaction
+    public boolean delete医療費控除(IryohiKojo 医療費控除) {
+        requireNonNull(医療費控除, UrSystemErrorMessages.値がnull.getReplacedMessage("医療費控除"));
+        if (!医療費控除.hasChanged()) {
+            return false;
+        }
+        return 1 == dac.delete(医療費控除.toEntity());
+    }
 }

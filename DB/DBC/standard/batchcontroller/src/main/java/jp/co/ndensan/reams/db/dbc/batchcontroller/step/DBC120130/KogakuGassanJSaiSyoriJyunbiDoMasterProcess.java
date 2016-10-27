@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 高額合算自己負担額証明書情報取込ののマスタ登録です。
@@ -68,28 +69,38 @@ public class KogakuGassanJSaiSyoriJyunbiDoMasterProcess extends BatchProcessBase
     protected void process(KogakuGassanJSaiSyoriJyunbiEntity entity) {
         DbWT37H1KogakuGassanaJikofutangakuTempEntity 高額合算自己負担額一時entity = entity.get高額合算自己負担額一時entity();
         DbT3070KogakuGassanJikoFutanGakuEntity 高額合算自己負担額entity = entity.get高額合算自己負担額entity();
-        if (高額合算自己負担額一時entity != null && 高額合算自己負担額entity != null) {
-            高額合算自己負担額TBLマスタ更新(高額合算自己負担額一時entity);
-            高額合算自己負担額一時TBLマスタ更新(高額合算自己負担額entity);
+        if (高額合算自己負担額entity != null) {
+            高額合算自己負担額TBLマスタ更新(高額合算自己負担額一時entity, 高額合算自己負担額entity);
+            高額合算自己負担額一時TBLマスタ更新(高額合算自己負担額entity, 高額合算自己負担額一時entity);
         } else {
             処理結果リスト一時に登録(高額合算自己負担額一時entity);
         }
     }
 
-    private void 高額合算自己負担額TBLマスタ更新(DbWT37H1KogakuGassanaJikofutangakuTempEntity tempEntity) {
-        DbT3070KogakuGassanJikoFutanGakuEntity updateEntity = new DbT3070KogakuGassanJikoFutanGakuEntity();
+    private void 高額合算自己負担額TBLマスタ更新(
+            DbWT37H1KogakuGassanaJikofutangakuTempEntity tempEntity,
+            DbT3070KogakuGassanJikoFutanGakuEntity updateEntity) {
         updateEntity.setJikoFutanSeiriNo(tempEntity.getJikoFutanSeiriNo());
         updateEntity.setShomeisho_UketoriYM(parameter.get処理年月());
         高額合算自己負担額TBLWriter.update(updateEntity);
     }
 
     private void 高額合算自己負担額一時TBLマスタ更新(
-            DbT3070KogakuGassanJikoFutanGakuEntity dbt3070Entity) {
-        DbWT37H1KogakuGassanaJikofutangakuTempEntity entity = new DbWT37H1KogakuGassanaJikofutangakuTempEntity();
-        entity.setRirekiNo(dbt3070Entity.getRirekiNo());
-        entity.setKoshinFlag(true);
-        entity.setJikoFutangakuSaiFlag(true);
-        高額合算自己負担額一時tableWriter.update(entity);
+            DbT3070KogakuGassanJikoFutanGakuEntity dbt3070Entity,
+            DbWT37H1KogakuGassanaJikofutangakuTempEntity dbwt37h1entity) {
+        dbwt37h1entity.setRirekiNo(dbt3070Entity.getRirekiNo());
+        dbwt37h1entity.setKoshinFlag(true);
+        Decimal 処理結果 = null;
+        Decimal 高額合算自己負担額TBL_補正済_合計_自己負担額 = dbt3070Entity.getSumi_Gokei_JikoFutanGaku();
+        if (高額合算自己負担額TBL_補正済_合計_自己負担額 != null) {
+            処理結果 = 高額合算自己負担額TBL_補正済_合計_自己負担額.subtract(dbt3070Entity.getSumi_Gokei_Under70KogakuShikyuGaku());
+        }
+        if (dbwt37h1entity.getGokei_JikoFutanGaku().compareTo(処理結果) == 0) {
+            dbwt37h1entity.setJikoFutangakuSaiFlag(false);
+        } else {
+            dbwt37h1entity.setJikoFutangakuSaiFlag(true);
+        }
+        高額合算自己負担額一時tableWriter.update(dbwt37h1entity);
     }
 
     private void 処理結果リスト一時に登録(DbWT37H1KogakuGassanaJikofutangakuTempEntity tempEntity) {
@@ -97,13 +108,17 @@ public class KogakuGassanJSaiSyoriJyunbiDoMasterProcess extends BatchProcessBase
         処理結果リスト一時entity.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.更新対象データなし.getコード());
         処理結果リスト一時entity.setShoHokanehshaNo(tempEntity.getShoKisaiHokenshaNo());
         処理結果リスト一時entity.setHihokenshaNo(tempEntity.getHokenshaNoIn());
-        処理結果リスト一時entity.setKey1(new RString(tempEntity.getTaishoNendo().toString()));
+        処理結果リスト一時entity.setKey1(tempEntity.getTaishoNendo().toDateString());
         処理結果リスト一時entity.setKey2(tempEntity.getShikyuShinseishoSeiriNo());
         処理結果リスト一時entity.setKey3(tempEntity.getJikoFutanSeiriNo());
         処理結果リスト一時entity.setKey4(RString.EMPTY);
         処理結果リスト一時entity.setKey5(RString.EMPTY);
-        処理結果リスト一時entity.setHihokenshaKanaShimei(new RString(tempEntity.getHihokenshaShimeiKana().toString()));
-        処理結果リスト一時entity.setHihokenshaShimei(new RString(tempEntity.getHihokenshaShimei().toString()));
+        if (tempEntity.getHihokenshaShimeiKana() != null) {
+            処理結果リスト一時entity.setHihokenshaKanaShimei(tempEntity.getHihokenshaShimeiKana().value());
+        }
+        if (tempEntity.getHihokenshaShimei() != null) {
+            処理結果リスト一時entity.setHihokenshaShimei(tempEntity.getHihokenshaShimei().value());
+        }
         処理結果リスト一時entity.setBiko(RString.EMPTY);
         処理結果リスト一時tbWriter.insert(処理結果リスト一時entity);
     }

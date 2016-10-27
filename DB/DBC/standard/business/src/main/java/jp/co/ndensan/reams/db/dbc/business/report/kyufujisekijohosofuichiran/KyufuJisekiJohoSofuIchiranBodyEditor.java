@@ -41,6 +41,7 @@ public class KyufuJisekiJohoSofuIchiranBodyEditor implements IKyufuJisekiJohoSof
     private static final int レコード値_ZERO = 0;
     private final boolean 合計フラグ;
     private final Decimal 合計件数;
+    private final int 連番;
 
     /**
      * コンストラクタです。
@@ -48,15 +49,18 @@ public class KyufuJisekiJohoSofuIchiranBodyEditor implements IKyufuJisekiJohoSof
      * @param 給付実績更新結果一覧表データ KyuufuJisekiKoshinnKekkaEntity
      * @param 合計フラグ boolean
      * @param 合計件数 Decimal
+     * @param 連番 int
      */
     public KyufuJisekiJohoSofuIchiranBodyEditor(
             KyuufuJisekiKoshinnKekkaEntity 給付実績更新結果一覧表データ,
             boolean 合計フラグ,
-            Decimal 合計件数) {
+            Decimal 合計件数,
+            int 連番) {
 
         this.給付実績更新結果一覧表データ = 給付実績更新結果一覧表データ;
         this.合計フラグ = 合計フラグ;
         this.合計件数 = 合計件数;
+        this.連番 = 連番;
     }
 
     @Override
@@ -64,7 +68,7 @@ public class KyufuJisekiJohoSofuIchiranBodyEditor implements IKyufuJisekiJohoSof
 
         DbWT1111KyufuJissekiTempEntity 給付実績一時 = 給付実績更新結果一覧表データ.get給付実績一時Entity();
 
-        source.listUpper_1 = new RString(給付実績一時.get連番());
+        source.listUpper_1 = new RString(連番);
 
         set入力識別名称と明細(給付実績一時, source);
 
@@ -127,6 +131,14 @@ public class KyufuJisekiJohoSofuIchiranBodyEditor implements IKyufuJisekiJohoSof
         if (合計フラグ) {
             source.gokeiKensuTitle = 合計件数タイトル;
             source.gokeiKensu = doカンマ編集(合計件数).concat(件数);
+        }
+
+        source.yubinNo = 被保険者一時.getYubinNo();
+        source.choikiCode = 被保険者一時.getChoikiCode();
+        source.gyoseikuCode = 被保険者一時.getGyoseikuCode();
+        source.shimei50onKana = 被保険者一時.getShimei50onKana();
+        if (被保険者一時.getShichosonCode() != null) {
+            source.shichosonCode = 被保険者一時.getShichosonCode().value();
         }
 
         return source;

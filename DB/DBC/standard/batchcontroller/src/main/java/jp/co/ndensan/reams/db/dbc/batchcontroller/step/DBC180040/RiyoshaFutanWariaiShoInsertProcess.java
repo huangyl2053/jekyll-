@@ -92,7 +92,7 @@ public class RiyoshaFutanWariaiShoInsertProcess extends BatchProcessBase<Riyosha
     protected void createWriter() {
         shoKofuKaishuWriter = new BatchPermanentTableWriter(DbT7037ShoKofuKaishuEntity.class);
         tableWriter = new BatchEntityCreatedTempTableWriter(TABLE_NAME, RiyoshaFutanwariaishoEntity.class);
-        shoriKekkaKakuninListManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, SHORIKEKKA_EUC_ENTITY_ID,
+        shoriKekkaKakuninListManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, SHORIKEKKA_EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
         shoriKekkaKakuninEucFilePath = Path.combinePath(shoriKekkaKakuninListManager.getEucOutputDirectry(),
                 shoriKekkaKakuninListFileName);

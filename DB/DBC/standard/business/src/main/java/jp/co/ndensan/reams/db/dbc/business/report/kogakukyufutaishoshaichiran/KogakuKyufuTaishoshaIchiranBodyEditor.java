@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kogakukyufutaishoshaichiran;
 
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3054KogakuKyufuTaishoshaTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3311KogakuKyufuTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.KyuufuTaishoshaHihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufutaishoshaichiran.KogakuKyufuTaishoshaIchiranSource;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -49,7 +49,7 @@ public class KogakuKyufuTaishoshaIchiranBodyEditor implements IKogakuKyufuTaisho
 
     @Override
     public KogakuKyufuTaishoshaIchiranSource edit(KogakuKyufuTaishoshaIchiranSource source) {
-        DbWT3054KogakuKyufuTaishoshaTempEntity 対象者 = 帳票出力対象データ.get対象者();
+        DbWT3311KogakuKyufuTaishoshaTempEntity 対象者 = 帳票出力対象データ.get対象者();
         DbWT0001HihokenshaTempEntity 被保険者一時 = 帳票出力対象データ.get被保険者一時();
         if (!集計Flag) {
             source.listUpper_1 = 対象者.getNo();

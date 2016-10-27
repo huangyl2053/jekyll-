@@ -39,5 +39,10 @@ public class KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity {
     private RString 要介護度;
     private FlexibleDate 認定開始日;
     private FlexibleDate 認定終了日;
+    private RString 郵便番号;
+    private RString 町域コード;
+    private RString 行政区コード;
+    private RString 世帯コード;
+    private RString 市町村コード;
 
 }

@@ -5,15 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209011;
 
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.KyufuGengakuHaakuListSakuseiProcessParameter;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.KyufuGengakuHaakuListTaishoTokuteiProcessParameter;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.ShunoJokyoHaakuProcessParameter;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.ShunoTainoJokyoHaakuProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd209011.KyufuGengakuHaakuListSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd209011.KyufuGengakuHaakuListTaishoTokuteiProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd209011.ShunoJokyoHaakuProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd209011.ShunoTainoJokyoHaakuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -78,7 +77,7 @@ public class DBD209011_KyufuGakuGengakuTainoshaHaakuListParameter extends BatchP
      * @param バッチ起動時処理日時 バッチ起動時処理日時
      * @return 給付額減額滞納者把握情報の取得_Process処理パラメター
      */
-    public KyufuGengakuHaakuListSakuseiProcessParameter toKyufuGengakuHaakuListSakuseiProcessParameter(RDateTime バッチ起動時処理日時) {
+    public KyufuGengakuHaakuListSakuseiProcessParameter toKyufuGengakuHaakuListSakuseiProcessParameter(RString バッチ起動時処理日時) {
         return new KyufuGengakuHaakuListSakuseiProcessParameter(基準日,
                 時効起算日登録者の選択,
                 被保険者全員の選択,

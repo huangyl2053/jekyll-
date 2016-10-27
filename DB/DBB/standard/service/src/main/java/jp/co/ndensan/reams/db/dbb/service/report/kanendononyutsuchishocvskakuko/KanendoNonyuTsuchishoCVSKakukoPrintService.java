@@ -84,27 +84,71 @@ public class KanendoNonyuTsuchishoCVSKakukoPrintService {
     }
 
     /**
-     * 帳票を出力します。
+     * 保険料納入通知書（本算定過年度）【コンビニ角公タイプ】 printメソッド
      *
-     * @param 本算定納入通知書情報 HonSanteiNonyuTsuchiShoJoho
-     * @return SourceDataCollection
+     * @param 本算定納入通知書情報List List<HonSanteiNonyuTsuchiShoJoho>
+     * @param reportManager ReportManager
      */
-    public SourceDataCollection devidedByPage(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報) {
+    public void print_修正(List<HonSanteiNonyuTsuchiShoJoho> 本算定納入通知書情報List, ReportManager reportManager) {
         KanendoNonyuTsuchishoCVSKakukoProperty property = new KanendoNonyuTsuchishoCVSKakukoProperty();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<KanendoNonyuTsuchishoCVSKakukoSource> assembler = createAssembler(property, reportManager)) {
-                ReportSourceWriter<KanendoNonyuTsuchishoCVSKakukoSource> reportSourceWriter = new ReportSourceWriter(assembler);
-
+        try (ReportAssembler<KanendoNonyuTsuchishoCVSKakukoSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KanendoNonyuTsuchishoCVSKakukoSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+            for (HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 : 本算定納入通知書情報List) {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+                KanendoNonyuTsuchishoCVSKakukoReport report
+                        = new KanendoNonyuTsuchishoCVSKakukoReport(本算定納入通知書情報, ninshoshaSource);
+                report.writeBy(reportSourceWriter);
+            }
+        }
+    }
+
+    /**
+     * 帳票を出力します。
+     *
+     * @param 本算定納入通知書情報 HonSanteiNonyuTsuchiShoJoho
+     * @param reportManager ReportManager
+     */
+    public void devidedByPage(
+            HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, ReportManager reportManager) {
+        KanendoNonyuTsuchishoCVSKakukoProperty property = new KanendoNonyuTsuchishoCVSKakukoProperty();
+        try (ReportAssembler<KanendoNonyuTsuchishoCVSKakukoSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KanendoNonyuTsuchishoCVSKakukoSource> reportSourceWriter = new ReportSourceWriter(assembler);
+
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
+                    new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
+                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            List<NonyuTsuchisho<KanendoNonyuTsuchishoCVSKakukoSource>> reportList
+                    = new KanendoNonyuTsuchishoCVSKakukoReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
+            for (NonyuTsuchisho report : reportList) {
+                report.writeBy(reportSourceWriter);
+            }
+        }
+    }
+
+    /**
+     * 帳票を出力します。
+     *
+     * @param 本算定納入通知書情報List List<HonSanteiNonyuTsuchiShoJoho>
+     * @param reportManager ReportManager
+     */
+    public void devidedByPage_修正(
+            List<HonSanteiNonyuTsuchiShoJoho> 本算定納入通知書情報List, ReportManager reportManager) {
+        KanendoNonyuTsuchishoCVSKakukoProperty property = new KanendoNonyuTsuchishoCVSKakukoProperty();
+        try (ReportAssembler<KanendoNonyuTsuchishoCVSKakukoSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KanendoNonyuTsuchishoCVSKakukoSource> reportSourceWriterCover = new ReportSourceWriter(assembler);
+            ReportSourceWriter<KanendoNonyuTsuchishoCVSKakukoSource> reportSourceWriterDetail = new ReportSourceWriter(assembler);
+            for (HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 : 本算定納入通知書情報List) {
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
+                        new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriterCover);
                 List<NonyuTsuchisho<KanendoNonyuTsuchishoCVSKakukoSource>> reportList
                         = new KanendoNonyuTsuchishoCVSKakukoReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
-                for (NonyuTsuchisho report : reportList) {
-                    report.writeBy(reportSourceWriter);
-                }
+                reportList.get(0).writeBy(reportSourceWriterCover);
+                reportList.get(0).writeBy(reportSourceWriterDetail);
             }
-            return reportManager.publish();
         }
     }
 

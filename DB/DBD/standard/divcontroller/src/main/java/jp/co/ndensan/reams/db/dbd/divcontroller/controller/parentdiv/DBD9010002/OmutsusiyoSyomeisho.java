@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD9010002
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.IryohiKojo;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010002.DBD9010002StateName;
@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -45,13 +46,16 @@ public class OmutsusiyoSyomeisho {
      * @return ResponseData<OmutsusiyoSyomeishoDiv>
      */
     public ResponseData<OmutsusiyoSyomeishoDiv> onLoad(OmutsusiyoSyomeishoDiv div) {
-        TaishoshaKey 引き継ぎEntity = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        if (引き継ぎEntity.get被保険者番号() == null || 引き継ぎEntity.get被保険者番号().isEmpty()) {
-            return ResponseData.of(div).addMessage(DbdInformationMessages.被保険者でないデータ.getMessage()).respond();
+        if (!ResponseHolder.isReRequest()) {
+            TaishoshaKey 引き継ぎEntity = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            if (引き継ぎEntity.get被保険者番号() == null || 引き継ぎEntity.get被保険者番号().isEmpty()) {
+                return ResponseData.of(div).addMessage(DbdInformationMessages.被保険者でないデータ.getMessage()).respond();
+            }
+            List<IryohiKojo> 医療費控除リスト = getHandler(div).onLoad(引き継ぎEntity);
+            ViewStateHolder.put(ViewStateKeys.医療費控除情報, new ArrayList(医療費控除リスト));
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("reportPublishi"), false);
         }
-        List<IryohiKojoEntityResult> 医療費控除リスト = getHandler(div).onLoad(引き継ぎEntity);
-        ViewStateHolder.put(ViewStateKeys.医療費控除情報, new ArrayList(医療費控除リスト));
-        return ResponseData.of(div).setState(DBD9010002StateName.初期状態);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -61,7 +65,7 @@ public class OmutsusiyoSyomeisho {
      * @return ResponseData<OmutsusiyoSyomeishoDiv>
      */
     public ResponseData<OmutsusiyoSyomeishoDiv> onChange_ddlTaishonen(OmutsusiyoSyomeishoDiv div) {
-        List<IryohiKojoEntityResult> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
+        List<IryohiKojo> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
         getHandler(div).onChange対象年(医療費控除リスト);
         return ResponseData.of(div).respond();
     }
@@ -97,7 +101,7 @@ public class OmutsusiyoSyomeisho {
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(OmutsusiyoSyomeishoDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
-        List<IryohiKojoEntityResult> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
+        List<IryohiKojo> 医療費控除リスト = ViewStateHolder.get(ViewStateKeys.医療費控除情報, ArrayList.class);
         response.data = getHandler(div).publishReport(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class), 医療費控除リスト);
         return response;
     }

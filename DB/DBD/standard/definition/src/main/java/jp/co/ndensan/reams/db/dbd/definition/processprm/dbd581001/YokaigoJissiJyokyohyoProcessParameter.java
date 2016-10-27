@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd581001;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoHakkouMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoMybatisParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -39,9 +40,9 @@ public class YokaigoJissiJyokyohyoProcessParameter implements IBatchProcessParam
     private Code 終了地区コード;
     private RString 概況調査テキストイメージ区分;
     private RString 集計単位;
-    private RString psmShikibetsuTaisho;
     private RString 基準日;
     private FlexibleYear 対象年度;
+    private IShikibetsuTaishoPSMSearchKey key;
 
     /**
      * コンストラクタです。
@@ -111,7 +112,7 @@ public class YokaigoJissiJyokyohyoProcessParameter implements IBatchProcessParam
                 開始地区コード,
                 終了地区コード,
                 集計単位,
-                psmShikibetsuTaisho);
+                key);
     }
 
     /**

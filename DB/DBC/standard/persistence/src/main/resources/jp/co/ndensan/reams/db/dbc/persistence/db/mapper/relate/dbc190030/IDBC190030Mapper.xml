@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-4640-030 jianglaisheng -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc190030.IDBC190030Mapper">
+    
+    <resultMap id="ResultMap_HihokenshaDaichoTempSixColumnEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kijunsyunyunenji.HihokenshaDaichoTempSixColumnEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="TEMP_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+         <result property="shikibetsuCode" column="TEMP_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+         <result property="jushochiTokureiFlag" column="TEMP_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+         <result property="shichosonCode" column="TEMP_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+         <result property="kyuShichosonCode" column="TEMP_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+         <result property="koikinaiTokureiSochimotoShichosonCode" column="TEMP_koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="get被保険者台帳1"
+            resultMap="ResultMap_HihokenshaDaichoTempSixColumnEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc190030.DBC190030MyBatisParameter" fetchSize="500">
+        SELECT * 
+            FROM   
+                (SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
+                FROM rgdb."DbV1001HihokenshaDaicho" AS A
+                INNER JOIN rgdb."DbT4001JukyushaDaicho" AS B
+                ON A."hihokenshaNo" = B."hihokenshaNo"
+                WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日}
+                AND #{世帯員把握基準日} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+                UNION																							
+                SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
+                FROM rgdb."DbV1001HihokenshaDaicho" AS A
+                INNER JOIN rgdb."DbT3100NijiYoboJigyoTaishosha" AS C
+                ON A."hihokenshaNo" = C."hihokenshaNo"
+                WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日}
+                AND #{世帯員把握基準日} <![CDATA[<]]> A."shikakuSoshitsuYMD") AS A
+            ORDER BY A.TEMP_hihokenshaNo
+    </select>
+    
+    <select resultOrdered="true" id="get被保険者台帳2"
+            resultMap="ResultMap_HihokenshaDaichoTempSixColumnEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc190030.DBC190030MyBatisParameter" fetchSize="500">
+        SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
+        FROM rgdb."DbT1001HihokenshaDaicho" AS A
+        WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日}
+        AND #{世帯員把握基準日} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+        ORDER BY A."hihokenshaNo"
+    </select>
+    
+    <select resultOrdered="true" id="get被保険者台帳3"
+            resultMap="ResultMap_HihokenshaDaichoTempSixColumnEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc190030.DBC190030MyBatisParameter" fetchSize="500">
+        SELECT * 
+            FROM   
+                (SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
+                FROM rgdb."DbV1001HihokenshaDaicho" AS A
+                INNER JOIN rgdb."DbT4001JukyushaDaicho" AS B
+                ON A."hihokenshaNo" = B."hihokenshaNo"
+                WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日2}
+                AND #{世帯員把握基準日2} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+                UNION																							
+                SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
+                FROM rgdb."DbV1001HihokenshaDaicho" AS A
+                INNER JOIN rgdb."DbT3100NijiYoboJigyoTaishosha" AS C
+                ON A."hihokenshaNo" = C."hihokenshaNo"
+                WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日2}
+                AND #{世帯員把握基準日2}<![CDATA[<]]>A."shikakuSoshitsuYMD") AS A
+            ORDER BY A.TEMP_hihokenshaNo
+    </select>
+    
+    <select resultOrdered="true" id="get被保険者台帳4"
+            resultMap="ResultMap_HihokenshaDaichoTempSixColumnEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc190030.DBC190030MyBatisParameter" fetchSize="500">
+        SELECT <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kijunsyunyunenji.IKijunsyunyunenjiMapper.Columns_DbV1001HihokenshaDaicho" />
+        FROM rgdb."DbT1001HihokenshaDaicho" AS A
+        WHERE A."shikakuShutokuYMD" <![CDATA[<=]]> #{世帯員把握基準日2}
+        AND #{世帯員把握基準日2} <![CDATA[<]]> A."shikakuSoshitsuYMD"
+        ORDER BY A."hihokenshaNo"
+    </select>
+
+    <select resultOrdered="true" id="select基準収入額管理マスタ" 
+              parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.inssetaiyinshotokujyoho.InsSetaiyin3MybatisParameter"
+              resultType="java.lang.Integer"
+              fetchSize="500">
+         SELECT 
+            COUNT(*)
+         FROM
+          rgdb."DbT3116KijunShunyugakuTekiyoKanri"  AS "DbT3116KijunShunyugakuTekiyoKanri"
+         WHERE 
+               "DbT3116KijunShunyugakuTekiyoKanri"."setaiCode" = #{世帯コード}
+         AND
+               "DbT3116KijunShunyugakuTekiyoKanri"."nendo" = #{年度}
+         AND
+               "DbT3116KijunShunyugakuTekiyoKanri"."rirekiNo" = #{履歴番号}
+         AND
+               "DbT3116KijunShunyugakuTekiyoKanri"."hihokenshaNo" = #{被保険者番号}
+     </select>
+     
+</mapper>

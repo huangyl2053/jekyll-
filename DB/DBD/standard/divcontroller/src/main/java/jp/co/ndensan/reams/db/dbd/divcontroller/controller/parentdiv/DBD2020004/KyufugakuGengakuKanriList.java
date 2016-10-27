@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020004;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.kyufugakugengakukanrilist.KyufugakuGengakuKanriListFlowParameter;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020004.DBD2020004StateName;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD209012.DBD209012_KyufuGakuGengakuKanriListParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020004.KyufugakuGengakuKanriListDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020004.KyufugakuGengakuKanriListHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020004.KyufugakuGengakuKanriListValidationHandler;
@@ -75,8 +74,8 @@ public class KyufugakuGengakuKanriList {
      * @param div KyufugakuGengakuKanriListDiv のクラスファイル
      * @return ResponseData
      */
-    public ResponseData<KyufugakuGengakuKanriListFlowParameter> onClick_batchParameter(KyufugakuGengakuKanriListDiv div) {
-        ResponseData<KyufugakuGengakuKanriListFlowParameter> responseData = new ResponseData<>();
+    public ResponseData<DBD209012_KyufuGakuGengakuKanriListParameter> onClick_batchParameter(KyufugakuGengakuKanriListDiv div) {
+        ResponseData<DBD209012_KyufuGakuGengakuKanriListParameter> responseData = new ResponseData<>();
         responseData.data = createHandler(div).batchParameter();
         return responseData;
     }
@@ -88,14 +87,12 @@ public class KyufugakuGengakuKanriList {
      * @return ResponseData
      */
     public ResponseData<KyufugakuGengakuKanriListDiv> onClick_btnCheck(KyufugakuGengakuKanriListDiv div) {
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        getValidationHandler().validateFor基準日の必須入力(pairs, div);
-        getValidationHandler().validateFor減額終了日抽出_終了日が開始日以前(pairs, div);
+        ValidationMessageControlPairs pairs = getValidationHandler().validateForバッチ実行前チェック(div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
 
-        return ResponseData.of(div).setState(DBD2020004StateName.Default);
+        return ResponseData.of(div).respond();
     }
 
     private KyufugakuGengakuKanriListValidationHandler getValidationHandler() {

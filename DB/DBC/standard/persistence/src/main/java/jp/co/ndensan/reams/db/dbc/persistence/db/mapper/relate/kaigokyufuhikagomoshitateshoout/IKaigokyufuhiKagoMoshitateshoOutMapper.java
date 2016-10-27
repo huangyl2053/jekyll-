@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaigokyufuhikago
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigokyufuhikagomoshitateshoout.KagoMoshitateMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3059KagoMoshitateEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.DbWT1731KagoMoshitateTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutDoErrorEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutGetHihokenshaNoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutGetjigyoshaNameEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutgetCitySingleEntity;
@@ -77,7 +77,7 @@ public interface IKaigokyufuhiKagoMoshitateshoOutMapper {
      *
      * @return List<DbWT1731KagoMoshitateTempEntity>
      */
-    List<DbWT1731KagoMoshitateTempEntity> select保険者番号Error();
+    List<KaigokyufuhiKagoMoshitateshoOutDoErrorEntity> select保険者番号Error();
 
     /**
      * 送付ファイルの取得

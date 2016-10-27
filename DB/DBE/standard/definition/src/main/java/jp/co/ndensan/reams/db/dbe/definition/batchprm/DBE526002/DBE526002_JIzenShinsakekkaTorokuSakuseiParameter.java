@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE526002;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai.ShiryoShinsakaiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517002.DBE517002_ShinsakaiShiryoIinParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.jizenshinsakekka.JizenShinsakekkaProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -186,7 +186,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
      *
      * @return ShiryoShinsakaiBatchParameter
      */
-    public ShiryoShinsakaiBatchParameter toShiryoShinsakaiBatchParameter() {
+    public DBE517002_ShinsakaiShiryoIinParameter toShiryoShinsakaiBatchParameter() {
         int bangoStart = Integer.MIN_VALUE;
         int bangoEnd = Integer.MIN_VALUE;
         RString 作成条件 = new RString("範囲指定");
@@ -194,7 +194,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
             bangoStart = Integer.valueOf(kaishisiyoBangou.toString());
             bangoEnd = Integer.valueOf(shuryosiyoBangou.toString());
         }
-        return new ShiryoShinsakaiBatchParameter(shinsakaiKaisaiNo,
+        return new DBE517002_ShinsakaiShiryoIinParameter(shinsakaiKaisaiNo,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
                 gogitaiNo,
@@ -205,15 +205,6 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
                 sakuseiJyoken,
                 bangoStart,
                 bangoEnd,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
                 RString.EMPTY,
                 tokkiJikouFlag,
                 itiHenteiKekkaFlag,

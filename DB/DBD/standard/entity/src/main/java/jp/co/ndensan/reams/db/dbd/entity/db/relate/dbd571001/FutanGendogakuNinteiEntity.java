@@ -22,7 +22,9 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class FutanGendogakuNinteiEntity {
 
+    private RString 負担限度額_証記載保険者番号;
     private HihokenshaNo 負担限度額_被保険者番号;
+    private int 負担限度額_履歴番号;
     private FlexibleDate 負担限度額_申請年月日;
     private RString 負担限度額_申請理由区分;
     private FlexibleDate 負担限度額_決定年月日;

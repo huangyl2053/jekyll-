@@ -20,9 +20,15 @@
         AND "DbT2008ShotokuKanri"."shotokuNendo" = "DbT2020ShotokuShokaihyoHakkoRireki"."shoriNendo"
         JOIN "rgdb"."DbT1001HihokenshaDaicho" ON
         "DbT2008ShotokuKanri"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
-        JOIN "rgua"."UaFt200FindShikibetsuTaisho"('2',#{システム日付},TRUE,'DB',false,"DbT2008ShotokuKanri"."shikibetsuCode",'','','','','','','','','','',true,
+        JOIN "rgua"."UaFt200FindShikibetsuTaisho"('2',#{システム日付},TRUE,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') as ATENA
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','', 
+                (SELECT 
+               ARRAY_AGG(CAST(rgdb."DbT2008ShotokuKanri"."shikibetsuCode" AS TEXT))
+               FROM 
+               rgdb."DbT2008ShotokuKanri"
+               )
+        ) as ATENA
         ON "DbT2008ShotokuKanri"."shikibetsuCode" = ATENA."shikibetsuCode"
         WHERE 
         (

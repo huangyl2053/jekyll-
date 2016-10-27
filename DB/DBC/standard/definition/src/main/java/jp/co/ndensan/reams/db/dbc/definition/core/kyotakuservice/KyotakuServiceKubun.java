@@ -16,24 +16,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KyotakuServiceKubun {
 
     /**
-     * コード:1 名称:訪問通所 略称:定義なし
+     * コード:1 名称:訪問通所 略称:訪問
      */
-    訪問通所("1", "訪問通所"),
+    訪問通所("1", "訪問通所", "訪問"),
     /**
-     * コード:2 名称:短期入所 略称:定義なし
+     * コード:2 名称:短期入所 略称:短期
      */
-    短期入所("2", "短期入所"),
+    短期入所("2", "短期入所", "短期"),
     /**
-     * コード:3 名称:居宅サービス 略称:定義なし
+     * コード:3 名称:居宅サービス 略称:居宅
      */
-    居宅サービス("3", "居宅サービス");
+    居宅サービス("3", "居宅サービス", "居宅");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private KyotakuServiceKubun(String code, String fullname) {
+    private KyotakuServiceKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -52,6 +54,15 @@ public enum KyotakuServiceKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 居宅サービス区分の略称を返します。
+     *
+     * @return 居宅サービス区分の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

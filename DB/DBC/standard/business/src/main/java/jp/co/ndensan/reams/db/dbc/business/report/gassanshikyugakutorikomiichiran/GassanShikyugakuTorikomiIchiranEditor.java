@@ -115,7 +115,9 @@ public class GassanShikyugakuTorikomiIchiranEditor implements
         source.shoKisaiHokenshaNo = getColumnValue(計算結果entity.getShoKisaiHokenshaNo());
         source.hihokenshaNo = getColumnValue(計算結果entity.getHihokenshaNoIn());
 
-        source.shikibetsuCode = entity.get帳票用データ().get被保険者entity().getShikibetsuCode().value();
+        if (null != entity.get帳票用データ().get被保険者entity().getShikibetsuCode()) {
+            source.shikibetsuCode = entity.get帳票用データ().get被保険者entity().getShikibetsuCode().value();
+        }
 
         return source;
 

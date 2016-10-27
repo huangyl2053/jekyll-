@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki271;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +23,7 @@ import lombok.Setter;
 public class JigyohokokuCompYoshiki271Data {
 
     private RString 年報月報区分;
-    private RString 作成日時;
+    private RDateTime 作成日時;
     private RString 集計年月;
     private RString 過去集計分旧市町村区分;
     private List<DbT7021JigyoHokokuTokeiDataEntity> 事業報告統計データ;

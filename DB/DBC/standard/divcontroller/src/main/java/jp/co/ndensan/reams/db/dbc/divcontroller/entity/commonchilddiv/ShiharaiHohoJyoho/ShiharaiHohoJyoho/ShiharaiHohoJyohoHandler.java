@@ -54,6 +54,7 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 住宅改修費事前申請 = new RString("DBCUC07000");
     private final RString 償還払い費支給申請 = new RString("DBCUC08100");
     private final RString 高額サービス費支給申請 = new RString("DBCUC04400");
+    private final RString 総合事業高額サービス費支給申請 = new RString("DBCUC04401");
     private final RString 高額合算支給申請 = new RString("DBCUC11000");
     private final RString 高額合算支給決定情報補正 = new RString("DBCUC12300");
     private final RString 自己負担額証明書交付申請書登録 = new RString("DBCUC11100");
@@ -97,7 +98,7 @@ public class ShiharaiHohoJyohoHandler {
                 div.getRadKoza().setSelectedKey(支払方法区分.getコード());
                 List<Koza> koza = ShiharaiHohoJyohoFinder.createInstance()
                         .getKozaJyoho(KozaParameter.createParam(支給申請情報.
-                                        getKozaId(), null, null)).records();
+                                getKozaId(), null, null)).records();
                 if (!koza.isEmpty()) {
 
                     口座払いエリアの初期化(koza.get(0), 支給申請情報.getKozaId());
@@ -163,7 +164,7 @@ public class ShiharaiHohoJyohoHandler {
             RString 口座 = new RString(String.valueOf(kozaId.get口座ID()));
             口座IDリスト.add(new KeyValueDataSource(口座, 口座));
         }
-        if (list.isEmpty()) {
+        if (list.isEmpty() && 口座ID != 0L) {
             RString 口座 = new RString(String.valueOf(口座ID));
             口座IDリスト.add(new KeyValueDataSource(口座, 口座));
         }
@@ -645,7 +646,7 @@ public class ShiharaiHohoJyohoHandler {
     public void 受領委任払いエリアの初期化(SikyuSinseiJyohoParameter 支給申請情報,
             JuryoininKeiyakuJigyosha 受領委任契約事業者, RString 表示フラグ) {
 
-        if (!表示フラグ.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(表示フラグ)) {
             div.getTxtKeiyakuNo().setValue(支給申請情報.getKeiyakuNo());
         }
         div.getRadJyryoinin().setSelectedKey(new RString("3"));
@@ -692,12 +693,17 @@ public class ShiharaiHohoJyohoHandler {
     }
 
     private void 口座払いエリアの初期化Private(KinyuKikan kinyuKikan, KinyuKikanShiten kinyuKikanShiten) {
-        if (kinyuKikan != null && kinyuKikanShiten != null) {
-            StringBuilder builder = new StringBuilder();
-            builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString())
-                    .append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
+        StringBuilder builder = new StringBuilder();
+        if (kinyuKikan != null) {
+            builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString());
+        }
+        if (kinyuKikanShiten != null) {
+            builder.append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
+        }
+        if (builder != null) {
             div.getTxtKinyuKikanName().setValue(new RString(builder.toString()));
         }
+
     }
 
     private UzT0007CodeBusiness 預金種別に対する名称(RString 口座種別) {
@@ -816,15 +822,15 @@ public class ShiharaiHohoJyohoHandler {
      */
     public RString getShiharaiHoho() {
 
-        if (!div.getRadMadoguti().getSelectedKey().isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(div.getRadMadoguti().getSelectedKey())) {
 
             return div.getRadMadoguti().getSelectedKey();
         }
-        if (!div.getRadKoza().getSelectedKey().isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(div.getRadKoza().getSelectedKey())) {
 
             return div.getRadKoza().getSelectedKey();
         }
-        if (!div.getRadJyryoinin().getSelectedKey().isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(div.getRadJyryoinin().getSelectedKey())) {
 
             return div.getRadJyryoinin().getSelectedKey();
         }
@@ -964,6 +970,9 @@ public class ShiharaiHohoJyohoHandler {
         }
         if (高額サービス費支給申請.equals(uiContainerId)) {
 
+            return ShunoKamokuShubetsu.介護給付_高額;
+        }
+        if (総合事業高額サービス費支給申請.equals(uiContainerId)) {
             return ShunoKamokuShubetsu.介護給付_高額;
         }
         // TODO QA.1583

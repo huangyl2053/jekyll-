@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 世帯員把握入力Temp2のパラメタ
  *
- * @reamsid_L DBB-1720-050 lijunjun
+ * @reamsid_L DBB-1720-040 lijunjun
  */
 @lombok.Getter
 @lombok.Setter

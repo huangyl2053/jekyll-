@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1320011;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC060020.DBC060020_KyufuhiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -15,18 +16,18 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1320011.grdT
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -50,6 +51,7 @@ public class KyufuTsuchiSakuseiIkatuHandler {
     private static final RString すべて選択 = new RString("すべて");
     private static final RString TWO = new RString("2");
     private static final RString ONE = new RString("1");
+    private static final int NUM_ZERO = 0;
     private static final RString ZERO = new RString("0");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
@@ -58,16 +60,22 @@ public class KyufuTsuchiSakuseiIkatuHandler {
     private static final RString KEY4 = new RString("key4");
     private static final RString KEY5 = new RString("key5");
     private static final RString KEY6 = new RString("key6");
+    private static final RString 自立 = new RString("自立");
+    private static final RString 経過介護 = new RString("経過介護");
+    private static final RString 要支援１ = new RString("要支援１");
+    private static final RString 要支援２ = new RString("要支援２");
+    private static final RString 要介護１ = new RString("要介護１");
+    private static final RString 要介護２ = new RString("要介護２");
+    private static final RString 要介護３ = new RString("要介護３");
+    private static final RString 要介護４ = new RString("要介護４");
+    private static final RString 要介護５ = new RString("要介護５");
     private static final RString 介護導入区分_未導入 = new RString("0");
     private static final RString 介護導入区分_導入済 = new RString("1");
-    // TODO Redmine#98349(1602) バッチパラメータ「一括処理制御（合併区分）」の設定値の処理方がありません。
-//    private static final RString KEY9 = new RString("key9");
-//    private static final RString 非該当 = new RString("01");
     private static final RString 帳票レコード種別 = new RString("F1");
     private static final RString 広域の場合市町村コード = new RString("000000");
-    private static final RString 国保連IF取込レコードファイル名 = new RString("32200000.CSV");
+    private static final RString SHARED_FILE_NAME = new RString("1_322");
     private static final RString 共有ファイル名 = new RString("国保連IF取込レコードファイル");
-    private static final RString 共有ファイルPATH = Path.combinePath(Path.getUserHomePath(), new RString("shared/sharedFiles/DB/"));
+    private static final RString FILTER = new RString("1_322*.CSV");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
 
     /**
@@ -91,7 +99,7 @@ public class KyufuTsuchiSakuseiIkatuHandler {
             }
             if (DonyuKeitaiCode.事務単一.getCode().equals(joho.get導入形態コード().getKey())) {
                 div.getKyufuTsuchiSakusei().setHdn市町村コード(
-                        new LasdecCode(Association.getLasdecCode().code市町村()).code市町村RString());
+                        AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().value());
             }
             div.getKyufuTsuchiSakusei().setHdn保険者構成key(joho.get導入形態コード().getKey());
         }
@@ -101,8 +109,9 @@ public class KyufuTsuchiSakuseiIkatuHandler {
                 initialize(true, RDate.getNowDate(), true, false, null, false);
         div.getCcdBunsyobango().initialize(ReportIdDBC.DBC100041_２ページ目以降.getReportId());
         div.getOptServiceType().setSelectedValue(すべて選択);
-        div.getKyufuTsuchiSakuseiPrint().getCcdChohyoShutsuryokujun().load(
-                SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100041_２ページ目以降.getReportId());
+        // TODO 出力順の相関方針が確定しないので、実装ができません。
+//        div.getKyufuTsuchiSakuseiPrint().getCcdChohyoShutsuryokujun().load(
+//                SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100041_２ページ目以降.getReportId());
     }
 
     /**
@@ -132,13 +141,26 @@ public class KyufuTsuchiSakuseiIkatuHandler {
         if (ONE.equals(parameter.get福祉用具貸与ページ出力区分())) {
             if (DonyuKeitaiCode.事務広域.getCode().equals(div.getKyufuTsuchiSakusei().getHdn保険者構成key())) {
                 parameter.set保険者構成(TWO);
-                parameter.set証記載保険者番号(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value());
             } else if (DonyuKeitaiCode.事務単一.getCode().equals(div.getKyufuTsuchiSakusei().getHdn保険者構成key())) {
                 parameter.set保険者構成(ONE);
-                parameter.set証記載保険者番号(広域の場合市町村コード);
             }
         }
-        parameter.set要介護度(div.getKyufuTsuchiSakusei().getHdn要介護度());
+        if (DonyuKeitaiCode.事務広域.getCode().equals(div.getKyufuTsuchiSakusei().getHdn保険者構成key())) {
+            parameter.set証記載保険者番号(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value());
+        } else if (DonyuKeitaiCode.事務単一.getCode().equals(div.getKyufuTsuchiSakusei().getHdn保険者構成key())) {
+            parameter.set証記載保険者番号(広域の場合市町村コード);
+        }
+        if (div.getKyufuTsuchiSakusei().getChkYokaigodo().getSelectedItems().isEmpty()) {
+            div.getKyufuTsuchiSakusei().setHdn要介護度(null);
+        } else {
+            RStringBuilder 要介護度 = new RStringBuilder();
+            for (RString key : div.getKyufuTsuchiSakusei().getChkYokaigodo().getSelectedKeys()) {
+                要介護度.append(key);
+                要介護度.append(EUC_WRITER_DELIMITER);
+            }
+            要介護度.deleteCharAt(要介護度.lastIndexOf(EUC_WRITER_DELIMITER));
+            parameter.set要介護度(要介護度.toRString());
+        }
         List<KeyValueDataSource> chkTyusyutuJokenList = div.getKyufuTsuchiSakusei().getChkTyusyutuJoken().getSelectedItems();
         for (KeyValueDataSource dataSource : chkTyusyutuJokenList) {
             if (KEY0.equals(dataSource.getKey())) {
@@ -164,35 +186,32 @@ public class KyufuTsuchiSakuseiIkatuHandler {
     }
 
     /**
-     * 「要介護度」「すべて選択」チェックボックスを変更します。
-     */
-    public void onChange_cbxYokaigoJotai() {
-        if (div.getKyufuTsuchiSakusei().getChkYokaigodo().isAllSelected()
-                || div.getKyufuTsuchiSakusei().getChkYokaigodo().getSelectedItems().isEmpty()) {
-            div.getKyufuTsuchiSakusei().setHdn要介護度(null);
-        } else {
-            List<RString> 要介護度きーリスト = div.getKyufuTsuchiSakusei().getChkYokaigodo().getSelectedKeys();
-            RStringBuilder 要介護度 = new RStringBuilder();
-            for (RString key : 要介護度きーリスト) {
-                要介護度.append(key);
-                要介護度.append(EUC_WRITER_DELIMITER);
-            }
-            div.getKyufuTsuchiSakusei().setHdn要介護度(
-                    要介護度.substring(Integer.parseInt(ZERO.toString()), 要介護度.lastIndexOf(EUC_WRITER_DELIMITER)));
-        }
-    }
-
-    /**
      * 給付費通知情報を取り込むします。
      */
     public void setRowFileData() {
-        List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(共有ファイル名);
+        RString localFilePath = RString.EMPTY;
+        List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(SHARED_FILE_NAME);
         for (UzT0885SharedFileEntryEntity sharedfile : sharedFiles) {
-            SharedFile.copyToLocal(FilesystemName.fromString(sharedfile.getSharedFileName()), FilesystemPath.fromString(共有ファイルPATH));
+            FilesystemPath tempPath = get共有ファイル(
+                    FilesystemPath.fromString(Path.getTmpDirectoryPath()), sharedfile);
+            if (tempPath != null) {
+                localFilePath = tempPath.toRString();
+            }
+        }
+        if (RString.isNullOrEmpty(localFilePath)) {
+            div.getKyufuTsuchiSakusei().getGrdTuuchiJoho().setDataSource(new ArrayList());
+            return;
+        }
+        RString localFileName;
+        List<RString> localFiles = Arrays.asList(Directory.getFiles(localFilePath, FILTER, false));
+        if (localFiles != null && !localFiles.isEmpty()) {
+            localFileName = localFiles.get(NUM_ZERO);
+        } else {
+            return;
         }
         List<grdTuuchiJoho_Row> list = new ArrayList();
         try (CsvReader<KyufuTsuchiSakuseiIkatuCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                Path.combinePath(共有ファイルPATH, 国保連IF取込レコードファイル名),
+                Path.combinePath(localFilePath, localFileName),
                 KyufuTsuchiSakuseiIkatuCsvEntity.class)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEncode(Encode.SJIS)
@@ -217,8 +236,7 @@ public class KyufuTsuchiSakuseiIkatuHandler {
                             && サービス提供年月.isBeforeOrEquals(
                                     div.getKyufuTsuchiSakusei().getTdrServiceYM().getToValue().getYearMonth())) {
                         rowData.setTxtFileName(共有ファイル名);
-                        rowData.setTxtHokenshaName(HokenshaNyuryokuHojoFinder.createInstance().getHokensha(
-                                new HokenjaNo(entity.get保険者番号())).get保険者名());
+                        rowData.setTxtHokenshaName(get保険者名(entity.get保険者番号()));
                         rowData.setTxtServiceNengetsu(entity.getサービス提供年月());
                         list.add(rowData);
                     }
@@ -228,30 +246,43 @@ public class KyufuTsuchiSakuseiIkatuHandler {
         div.getKyufuTsuchiSakusei().getGrdTuuchiJoho().setDataSource(list);
     }
 
+    private RString get保険者名(RString 保険者番号) {
+        if (RString.isNullOrEmpty(保険者番号)) {
+            return RString.EMPTY;
+        }
+        Hokensha 保険者 = HokenshaNyuryokuHojoFinder.createInstance().getHokensha(new HokenjaNo(保険者番号));
+        if (保険者 == null) {
+            return RString.EMPTY;
+        }
+        return 保険者.get保険者名();
+    }
+
     private void setChk要介護度() {
         List<KeyValueDataSource> dataSourceList = div.getChkYokaigodo().getDataSource();
+        List<KeyValueDataSource> newDataSourceList = new ArrayList();
         for (KeyValueDataSource dataSource : dataSourceList) {
-            if (dataSource.getValue().equals(YokaigoJotaiKubun.要介護1.get名称())) {
+            if (要介護１.equals(dataSource.getValue())) {
                 dataSource.setKey(YokaigoJotaiKubun.要介護1.getコード());
-            } else if (dataSource.getValue().equals(YokaigoJotaiKubun.要介護2.get名称())) {
+            } else if (要介護２.equals(dataSource.getValue())) {
                 dataSource.setKey(YokaigoJotaiKubun.要介護2.getコード());
-            } else if (dataSource.getValue().equals(YokaigoJotaiKubun.要介護3.get名称())) {
+            } else if (要介護３.equals(dataSource.getValue())) {
                 dataSource.setKey(YokaigoJotaiKubun.要介護3.getコード());
-            } else if (dataSource.getValue().equals(YokaigoJotaiKubun.要介護4.get名称())) {
+            } else if (要介護４.equals(dataSource.getValue())) {
                 dataSource.setKey(YokaigoJotaiKubun.要介護4.getコード());
-            } else if (dataSource.getValue().equals(YokaigoJotaiKubun.要介護5.get名称())) {
+            } else if (要介護５.equals(dataSource.getValue())) {
                 dataSource.setKey(YokaigoJotaiKubun.要介護5.getコード());
-            } else if (dataSource.getValue().equals(YokaigoJotaiKubun.要支援1.get名称())) {
+            } else if (要支援１.equals(dataSource.getValue())) {
                 dataSource.setKey(YokaigoJotaiKubun.要支援1.getコード());
-            } else if (dataSource.getValue().equals(YokaigoJotaiKubun.要支援2.get名称())) {
+            } else if (要支援２.equals(dataSource.getValue())) {
                 dataSource.setKey(YokaigoJotaiKubun.要支援2.getコード());
-            } else if (dataSource.getValue().equals(YokaigoJotaiKubun.非該当.get名称())) {
+            } else if (自立.equals(dataSource.getValue())) {
                 dataSource.setKey(YokaigoJotaiKubun.非該当.getコード());
-            } else if (dataSource.getValue().equals(YokaigoJotaiKubun.要支援_経過的要介護.get名称())) {
+            } else if (経過介護.equals(dataSource.getValue())) {
                 dataSource.setKey(YokaigoJotaiKubun.要支援_経過的要介護.getコード());
             }
+            newDataSourceList.add(dataSource);
         }
-        div.getChkYokaigodo().setDataSource(dataSourceList);
+        div.getChkYokaigodo().setDataSource(newDataSourceList);
     }
 
     private void set保険者リスト() {
@@ -269,5 +300,11 @@ public class KyufuTsuchiSakuseiIkatuHandler {
                 div.getCcdHokenshaList().setDisplayNone(false);
             }
         }
+    }
+
+    private FilesystemPath get共有ファイル(FilesystemPath local複写先フォルダパス, UzT0885SharedFileEntryEntity entity) {
+        ReadOnlySharedFileEntryDescriptor ro_entry = ReadOnlySharedFileEntryDescriptor.fromEntity(entity);
+        FilesystemPath copiedPath = SharedFile.copyToLocal(ro_entry, local複写先フォルダパス);
+        return copiedPath;
     }
 }

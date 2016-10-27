@@ -16,27 +16,29 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KaigoGassan_KyufuJissekiDataKubun {
 
     /**
-     * コード:1 名称:後期分 略称:定義なし
+     * コード:1 名称:国保連からの返却データ以外 略称:返却データ以外
      */
-    国保連からの返却データ以外("0", "返却データ以外"),
+    国保連からの返却データ以外("0", "国保連からの返却データ以外", "返却データ以外"),
     /**
-     * コード:1 名称:後期分 略称:定義なし
+     * コード:1 名称:国保連からの返却データ 略称:返却データ
      */
-    国保連からの返却データ("1", "返却データ"),
+    国保連からの返却データ("1", "国保連からの返却データ", "返却データ"),
     /**
-     * コード:1 名称:後期分 略称:定義なし
+     * コード:1 名称:国保連からの送付データ後期分 略称:後期分
      */
-    国保連からの送付データ後期分("2", "後期分"),
+    国保連からの送付データ後期分("2", "国保連からの送付データ後期分", "後期分"),
     /**
-     * コード:2 名称:国保分 略称:定義なし
+     * コード:2 名称:国保連からの送付データ国保分 略称:国保分
      */
-    国保連からの送付データ国保分("3", "国保分");
+    国保連からの送付データ国保分("3", "国保連からの送付データ国保分", "国保分");
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private KaigoGassan_KyufuJissekiDataKubun(String code, String fullName) {
+    private KaigoGassan_KyufuJissekiDataKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
-        this.fullName = new RString(fullName);
+        this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -58,6 +60,15 @@ public enum KaigoGassan_KyufuJissekiDataKubun {
     }
 
     /**
+     * 介護合算_給付実績データ区分の略称を返します。
+     *
+     * @return 介護合算_給付実績データ区分の略称
+     */
+    public RString get略称() {
+        return shortName;
+    }
+
+    /**
      * 介護合算_給付実績データ区分のコードと一致する内容を探します。
      *
      * @param code 介護合算_給付実績データ区分のコード
@@ -69,7 +80,7 @@ public enum KaigoGassan_KyufuJissekiDataKubun {
                 return kyufujisski;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("介護合算_後期国保処理区分"));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("介護合算_給付実績データ区分"));
     }
 
 }

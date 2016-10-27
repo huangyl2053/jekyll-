@@ -44,6 +44,30 @@ public enum ReportIdDBZ {
      */
     DBE221022_1(new ReportId("DBE221022_chosahyoTokkijiko"), new RString("要介護認定調査票（特記事項）")),
     /**
+     * 認定調査票（特記事項）-調査項目有り-白黒の帳票ＩＤです。
+     */
+    DBE221021_Ari_Mono(new ReportId("DBE221021_chosahyoTokkijiko_Ari_Mono"), getReportName複数()),
+    /**
+     * 認定調査票（特記事項）-調査項目有り-カラーの帳票ＩＤです。
+     */
+    DBE221021_Ari_Color(new ReportId("DBE221021_chosahyoTokkijiko_Ari_Color"), getReportName複数()),
+    /**
+     * 認定調査票（特記事項）-調査項目なし-白黒の帳票ＩＤです。
+     */
+    DBE221024_Nashi_Mono(new ReportId("DBE221024_chosahyoTokkijiko_Nashi_Mono"), getReportName複数()),
+    /**
+     * 認定調査票（特記事項）-調査項目なし-カラーの帳票ＩＤです。
+     */
+    DBE221024_Nashi_Color(new ReportId("DBE221024_chosahyoTokkijiko_Nashi_Color"), getReportName複数()),
+    /**
+     * 認定調査票OCR（特記事項）-両面の帳票ＩＤです。
+     */
+    DBE221042_Ryomen(new ReportId("DBE221042_tokkijikoOCR_Ryomen"), new RString("認定調査票OCR（特記事項）")),
+    /**
+     * 認定調査票OCR（特記事項）-片面の帳票ＩＤです。
+     */
+    DBE221042_Katamen(new ReportId("DBE221042_tokkijikoOCR_Katamen"), new RString("認定調査票OCR（特記事項）")),
+    /**
      * 要介護認定調査票（概況特記）の帳票ID。
      */
     DBE221051(new ReportId("DBE221051_GaikyotokkiA4"), new RString("要介護認定調査票（概況特記）")),
@@ -65,6 +89,22 @@ public enum ReportIdDBZ {
      */
     DBE231001(new ReportId("DBE231001_ikenshokinyuyoshi"), new RString("要介護認定主治医意見書記入用紙")),
     /**
+     * 要介護認定主治医意見書記入用紙の帳票ＩＤです。
+     */
+    DBE231001_Ryomen_Mono(new ReportId("DBE231001_ikenshokinyuyoshi_Ryomen_Mono"), new RString("主治医意見書記入用紙")),
+    /**
+     * 要介護認定主治医意見書記入用紙の帳票ＩＤです。
+     */
+    DBE231001_Katamen_Mono(new ReportId("DBE231001_ikenshokinyuyoshi_Katamen_Mono"), new RString("主治医意見書記入用紙")),
+    /**
+     * 要介護認定主治医意見書記入用紙の帳票ＩＤです。
+     */
+    DBE231011_Ryomen_Color(new ReportId("DBE231011_ikenshokinyuyoshiOCR_Ryomen_Color"), new RString("主治医意見書記入用紙OCR")),
+    /**
+     * 要介護認定主治医意見書記入用紙の帳票ＩＤです。
+     */
+    DBE231011_Katamen_Color(new ReportId("DBE231011_ikenshokinyuyoshiOCR_Katamen_Color"), new RString("主治医意見書記入用紙OCR")),
+    /**
      * 要介護認定調査依頼書の帳票ＩＤです。
      */
     DBE220001(
@@ -81,7 +121,11 @@ public enum ReportIdDBZ {
     /**
      * 宛名シールの帳票ＩＤです。
      */
-    DBZ100001(new ReportId("DBZ100001_AtenaSeal"), new RString("宛名シール"));
+    DBZ100001(new ReportId("DBZ100001_AtenaSeal"), new RString("宛名シール")),
+    /**
+     * 汎用リストの帳票ＩＤです。
+     */
+    DBZ700001(new ReportId("DBZ700001_HanyoList"), new RString("汎用リスト"));
 
     private final ReportId reportId;
     private final RString reportName;
@@ -89,6 +133,10 @@ public enum ReportIdDBZ {
     private ReportIdDBZ(ReportId reportId, RString reportName) {
         this.reportId = reportId;
         this.reportName = reportName;
+    }
+
+    private static RString getReportName複数() {
+        return new RString("認定調査票（特記事項）");
     }
 
     /**

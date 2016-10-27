@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.message;
 
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 
 /**
  * DBUのエラーメッセージ定義列挙型です。
@@ -22,7 +22,8 @@ public enum DbuErrorMessages implements IMessageGettable {
     保険者番号都道府県エラー(4, "選択された都道府県と異なります。"),
     月報全て未処理(5, "集計範囲内で、月報未処理の月があります。?"),
     出力対象未選択(6, "出力対象の指定を確認してください。"),
-    報告年月未確定(7, "報告年月を確定してください。");
+    報告年月未確定(7, "報告年月を確定してください。"),
+    特定個人情報保存エラー(8, "更新できる特定個人情報はありません。");
 
     private final Message message;
 

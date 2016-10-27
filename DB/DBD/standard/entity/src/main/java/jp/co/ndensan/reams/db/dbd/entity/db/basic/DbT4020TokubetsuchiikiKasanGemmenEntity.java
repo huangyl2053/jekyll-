@@ -58,6 +58,15 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
     }
 
     /**
+     * insertDantaiCdのgetメソッドです。
+     *
+     * @return insertDantaiCd
+     */
+    public RDateTime getLastUpdateTimestamp() {
+        return lastUpdateTimestamp;
+    }
+
+    /**
      * insertDantaiCdのsetメソッドです。
      *
      * @param insertDantaiCd insertDantaiCd
@@ -322,8 +331,7 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
      * このエンティティの主キーが他の{@literal DbT4020TokubetsuchiikiKasanGemmenEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT4020TokubetsuchiikiKasanGemmenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT4020TokubetsuchiikiKasanGemmenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4020TokubetsuchiikiKasanGemmenEntity other) {

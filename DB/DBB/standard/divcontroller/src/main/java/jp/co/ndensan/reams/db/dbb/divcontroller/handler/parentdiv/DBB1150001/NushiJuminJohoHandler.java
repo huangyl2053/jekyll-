@@ -89,6 +89,7 @@ public final class NushiJuminJohoHandler {
     private static final RString 村 = new RString("村");
     private static final RString 役所 = new RString("役所");
     private static final RString 役場 = new RString("役場");
+    private static final RString 住民 = new RString("住民");
 
     private NushiJuminJohoHandler(NushiJuminJohoDiv div) {
         this.div = div;
@@ -150,20 +151,26 @@ public final class NushiJuminJohoHandler {
             if (識別対象 != null) {
                 row.setTxtShikibetsuCode(識別対象.get識別コード().value());
                 row.setTxtShimei(識別対象.get名称().getName().value());
-                row.setTxtKetsugo01(識別対象.get名称().getName().value());
-                RString 住民種別 = 識別対象.get住民種別().toRString();
+                row.setTxtKetsugo01(識別対象.get識別コード().value().concat("<br>").concat(識別対象.get名称().getName().value()));
+                RString 住民種別 = 識別対象.get住民種別() != null ? 識別対象.get住民種別().toRString() : RString.EMPTY;
                 row.setTxtShubetsu(住民種別);
-                RString 性別 = 識別対象.to個人().get性別().toRString();
+                RString 性別 = 識別対象.to個人().get性別().getCommonName();
                 row.setTxtSeibetsu(性別);
-                row.setTxtKetsugo02(性別);
-                row.setTxtZokugara(識別対象.to個人().get続柄());
-                FlexibleDate 生年月日 = 識別対象.to個人().get生年月日().toFlexibleDate();
+                RString 住民状態 = 住民.equals(識別対象.to個人().get住民状態().住民状態略称())
+                        ? RString.EMPTY : 識別対象.to個人().get住民状態().住民状態略称();
+                row.setTxtKetsugo02(住民状態.concat("<br>").concat(性別));
+                RString 続柄 = 識別対象.to個人().get続柄();
+                row.setTxtZokugara(続柄);
+                FlexibleDate 生年月日 = 識別対象.to個人().get生年月日() != null ? 識別対象.to個人().get生年月日().toFlexibleDate() : FlexibleDate.EMPTY;
                 row.getTxtSeinenGappi().setValue(生年月日);
-                row.setTxtKetsugo03(new RString(生年月日.toString()));
-                RString 転入異動日 = 識別対象.to個人().get登録異動年月日().wareki().toDateString();
-                row.setTxtTennyuTodokedeBi(転入異動日);
-                RString 転入届出日 = 識別対象.to個人().get登録届出年月日().wareki().toDateString();
+                row.setTxtKetsugo03(続柄.concat("<br>").concat(生年月日.wareki().toDateString()));
+                RString 転入異動日 = 識別対象.to個人().get登録異動年月日() != null && !識別対象.to個人().get登録異動年月日().isEmpty()
+                        ? 識別対象.to個人().get登録異動年月日().wareki().toDateString() : RString.EMPTY;
+                row.setTxtIdouka(転入異動日);
+                RString 転入届出日 = 識別対象.to個人().get登録届出年月日() != null && !識別対象.to個人().get登録届出年月日().isEmpty()
+                        ? 識別対象.to個人().get登録届出年月日().wareki().toDateString() : RString.EMPTY;
                 row.setTxtTennyuTodokedeBi(転入届出日);
+                row.setTxtKetsugo06(転入異動日.concat("<br>").concat(転入届出日));
                 ITennyuMae 転入前住所 = 識別対象.to個人().get転入前();
                 if (転入前住所 != null) {
                     RString 住所 = 転入前住所.get住所();
@@ -205,7 +212,7 @@ public final class NushiJuminJohoHandler {
         if (atesaki != null) {
             所得照会票発行対象世帯員.set送付先郵便番号(atesaki.get郵便番号());
             RString 名称 = atesaki.get名称();
-            if (!名称.isNullOrEmpty()) {
+            if (名称 != null && !名称.isEmpty()) {
                 役所_役場名 = set役所_役場名(名称, 役所_役場名, atesaki);
             }
             if (整数_TEN <= 役所_役場名.length()) {
@@ -255,7 +262,7 @@ public final class NushiJuminJohoHandler {
                 dgShuseiSetaiIn_Row setaiIn_Row = new dgShuseiSetaiIn_Row();
                 setaiIn_Row.setTxtShikibetsuCodeShuseiYo(row.getTxtShikibetsuCode());
                 setaiIn_Row.setTxtShimeiShuseiYo(row.getTxtShimei());
-                setaiIn_Row.setTxtKetsugoShuseiYo(row.getTxtShimei());
+                setaiIn_Row.setTxtKetsugoShuseiYo(row.getTxtShikibetsuCode().concat("<br>").concat(row.getTxtShimei()));
                 setaiIn_RowList.add(setaiIn_Row);
             }
         }
@@ -297,7 +304,7 @@ public final class NushiJuminJohoHandler {
         RString 住所;
         if (atesaki != null) {
             RString 名称 = atesaki.get名称();
-            if (!名称.isNullOrEmpty()) {
+            if (名称 != null && !名称.isEmpty()) {
                 役所_役場名 = set役所_役場名(名称, 役所_役場名, atesaki);
             }
             if (整数_TEN <= 役所_役場名.length()) {
@@ -326,9 +333,11 @@ public final class NushiJuminJohoHandler {
             div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel().getSofusakiNyuryokuPanel()
                     .getTxtSofusakiOnchu().setValue(役所_役場名の下段);
             KaigoToiawasesaki 介護問合せ先 = new KaigoToiawasesakiManager().get介護問合せ先(SubGyomuCode.DBB介護賦課, 差出人情報帳票ＩＤ);
-            RString 担当課名 = 介護問合せ先.get部署名();
-            div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
-                    .getSofusakiNyuryokuPanel().getTxtSofusakiSama().setValue(担当課名);
+            if (介護問合せ先 != null) {
+                RString 担当課名 = 介護問合せ先.get部署名();
+                div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
+                        .getSofusakiNyuryokuPanel().getTxtSofusakiSama().setValue(担当課名);
+            }
             RString 前住所 = get住所(所得照会票発行対象世帯員);
             div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
                     .getGenJushoNyuryokuPanel().getTxtZenJusho().setValue(前住所);
@@ -408,8 +417,10 @@ public final class NushiJuminJohoHandler {
             前住所_都道府県表示有無 = 表示;
             前住所_市町村名表示有無 = 表示;
             前住所_方書表示有無 = 表示;
-            前住所_都道府県名称 = 単一市町村情報.records().get(整数_ZERO).get都道府県名称();
-            前住所_市町村名称 = 単一市町村情報.records().get(整数_ZERO).get市町村名称();
+            前住所_都道府県名称 = 単一市町村情報.records() != null && !単一市町村情報.records().isEmpty()
+                    ? 単一市町村情報.records().get(整数_ZERO).get都道府県名称() : RString.EMPTY;
+            前住所_市町村名称 = 単一市町村情報.records() != null && !単一市町村情報.records().isEmpty()
+                    ? 単一市町村情報.records().get(整数_ZERO).get市町村名称() : RString.EMPTY;
         }
         if (転出者フラグ && 広域市町村.equals(単一市町村と広域市町村モード)) {
             前住所_管内_管外区分 = 管内;
@@ -422,7 +433,8 @@ public final class NushiJuminJohoHandler {
             前住所_都道府県表示有無 = 表示;
             前住所_市町村名表示有無 = 非表示;
             前住所_方書表示有無 = 表示;
-            前住所_都道府県名称 = 広域市町村情報.records().get(整数_ZERO).get都道府県名称();
+            前住所_都道府県名称 = 広域市町村情報.records() != null && !広域市町村情報.records().isEmpty()
+                    ? 広域市町村情報.records().get(整数_ZERO).get都道府県名称() : RString.EMPTY;
         }
         前住所 = set現住所(前住所_管内_管外区分, 前住所_都道府県表示有無, 前住所, 前住所_都道府県名称, 前住所_市町村名表示有無, 前住所_市町村名称,
                 前住所_住所編集方法, 前住所_住所, 前住所_番地, 前住所_行政区);
@@ -498,8 +510,8 @@ public final class NushiJuminJohoHandler {
             現住所_都道府県表示有無 = 表示;
             現住所_市町村名表示有無 = 表示;
             現住所_方書表示有無 = 表示;
-            現住所_都道府県名称 = 単一市町村情報.records().get(整数_ZERO).get都道府県名称();
-            現住所_市町村名称 = 単一市町村情報.records().get(整数_ZERO).get市町村名称();
+            現住所_都道府県名称 = set都道府県名称(単一市町村情報);
+            現住所_市町村名称 = set市町村名称(単一市町村情報);
         }
         if (!転出者フラグ && 広域市町村.equals(単一市町村と広域市町村モード)) {
             現住所_管内_管外区分 = 管内管外区分;
@@ -510,7 +522,7 @@ public final class NushiJuminJohoHandler {
             現住所_都道府県表示有無 = 表示;
             現住所_市町村名表示有無 = 非表示;
             現住所_方書表示有無 = 表示;
-            現住所_都道府県名称 = 広域市町村情報.records().get(整数_ZERO).get都道府県名称();
+            現住所_都道府県名称 = set広域_都道府県名称(広域市町村情報);
         }
         if (転出者フラグ && 管内.equals(管内管外区分) && 単一市町村.equals(単一市町村と広域市町村モード)) {
             現住所_管内_管外区分 = 管内管外区分;
@@ -524,8 +536,8 @@ public final class NushiJuminJohoHandler {
             現住所_都道府県表示有無 = 表示;
             現住所_市町村名表示有無 = 表示;
             現住所_方書表示有無 = 表示;
-            現住所_都道府県名称 = 単一市町村情報.records().get(整数_ZERO).get都道府県名称();
-            現住所_市町村名称 = 単一市町村情報.records().get(整数_ZERO).get市町村名称();
+            現住所_都道府県名称 = set都道府県名称(単一市町村情報);
+            現住所_市町村名称 = set市町村名称(単一市町村情報);
         }
         if (転出者フラグ && 管内.equals(管内管外区分) && 広域市町村.equals(単一市町村と広域市町村モード)) {
             現住所_管内_管外区分 = 管内管外区分;
@@ -539,7 +551,7 @@ public final class NushiJuminJohoHandler {
             現住所_都道府県表示有無 = 表示;
             現住所_市町村名表示有無 = 非表示;
             現住所_方書表示有無 = 表示;
-            現住所_都道府県名称 = 広域市町村情報.records().get(整数_ZERO).get都道府県名称();
+            現住所_都道府県名称 = set広域_都道府県名称(広域市町村情報);
         }
         if (転出者フラグ && 管外.equals(管内管外区分)) {
             現住所_管内_管外区分 = 管内管外区分;
@@ -564,6 +576,27 @@ public final class NushiJuminJohoHandler {
         }
         return 現住所;
 
+    }
+
+    private RString set広域_都道府県名称(SearchResult<ShichosonCodeYoriShichoson> 広域市町村情報) {
+        RString 現住所_都道府県名称;
+        現住所_都道府県名称 = 広域市町村情報.records() != null && !広域市町村情報.records().isEmpty()
+                ? 広域市町村情報.records().get(整数_ZERO).get都道府県名称() : RString.EMPTY;
+        return 現住所_都道府県名称;
+    }
+
+    private RString set市町村名称(SearchResult<KoikiZenShichosonJoho> 単一市町村情報) {
+        RString 現住所_市町村名称;
+        現住所_市町村名称 = 単一市町村情報.records() != null && !単一市町村情報.records().isEmpty()
+                ? 単一市町村情報.records().get(整数_ZERO).get市町村名称() : RString.EMPTY;
+        return 現住所_市町村名称;
+    }
+
+    private RString set都道府県名称(SearchResult<KoikiZenShichosonJoho> 単一市町村情報) {
+        RString 現住所_都道府県名称;
+        現住所_都道府県名称 = 単一市町村情報.records() != null && !単一市町村情報.records().isEmpty()
+                ? 単一市町村情報.records().get(整数_ZERO).get都道府県名称() : RString.EMPTY;
+        return 現住所_都道府県名称;
     }
 
     private RString set現住所_方書(Katagaki 方書, RString 現住所_方書) {
@@ -652,10 +685,7 @@ public final class NushiJuminJohoHandler {
             ShotokushokaihyoTaishoSetaiin 所得照会票発行対象世帯員 = 所得照会票発行対象世帯員リスト.get(no);
             ZenkokuJushoCode 全国住所コード = 所得照会票発行対象世帯員.get送付先全国住所コード();
             if (全国住所コード != null && !全国住所コード.isEmpty()) {
-                ShichosonAtesaki atesaki = finder.get市町村宛先(new LasdecCode(全国住所コード.getShichosonCode6()),
-                        SofusakiGroup.所得照会関連.getCode());
-                RString 住所 = atesaki.get住所().concat(RString.FULL_SPACE).concat(atesaki.get番地().value());
-                row.setTxtSofusaki(住所);
+                setTxtSofusaki(finder, 全国住所コード, row);
             }
             row.setTxtTennyuuOrTenshutsu(所得照会票発行対象世帯員.get前住所());
             row.setTxtGenJusho(所得照会票発行対象世帯員.get現住所());
@@ -663,6 +693,15 @@ public final class NushiJuminJohoHandler {
             rowList.add(row);
         }
         div.getHakkoKakuninPanel().getDgHakkoKakunin().setDataSource(rowList);
+    }
+
+    private void setTxtSofusaki(ICityAtesakiFinder finder, ZenkokuJushoCode 全国住所コード, dgHakkoKakunin_Row row) {
+        ShichosonAtesaki atesaki = finder.get市町村宛先(new LasdecCode(全国住所コード.getShichosonCode6()),
+                SofusakiGroup.所得照会関連.getCode());
+        RString atesaki_住所 = atesaki.get住所() != null ? atesaki.get住所() : RString.EMPTY;
+        RString atesaki_番地 = atesaki.get番地() != null ? atesaki.get番地().value() : RString.EMPTY;
+        RString 住所 = atesaki_住所.concat(RString.FULL_SPACE).concat(atesaki_番地);
+        row.setTxtSofusaki(住所);
     }
 
     /**
@@ -740,13 +779,15 @@ public final class NushiJuminJohoHandler {
         }
         所得照会票.set世帯員リスト(世帯員リスト);
         KaigoToiawasesaki 介護問合せ先 = new KaigoToiawasesakiManager().get介護問合せ先(SubGyomuCode.DBB介護賦課, 差出人情報帳票ＩＤ);
-        所得照会票.set担当部署名(介護問合せ先.get部署名());
-        所得照会票.set担当者名(介護問合せ先.get担当者名());
-        所得照会票.set庁舎名(介護問合せ先.get庁舎名());
-        所得照会票.set所在地(介護問合せ先.get所在地());
-        所得照会票.set内線番号(介護問合せ先.get内線番号());
-        所得照会票.set差出人_郵便番号(介護問合せ先.get郵便番号());
-        所得照会票.set電話番号(介護問合せ先.get電話番号());
+        if (介護問合せ先 != null) {
+            所得照会票.set担当部署名(介護問合せ先.get部署名());
+            所得照会票.set担当者名(介護問合せ先.get担当者名());
+            所得照会票.set庁舎名(介護問合せ先.get庁舎名());
+            所得照会票.set所在地(介護問合せ先.get所在地());
+            所得照会票.set内線番号(介護問合せ先.get内線番号());
+            所得照会票.set差出人_郵便番号(介護問合せ先.get郵便番号());
+            所得照会票.set電話番号(介護問合せ先.get電話番号());
+        }
         return 所得照会票;
     }
 
@@ -770,7 +811,7 @@ public final class NushiJuminJohoHandler {
         ShichosonAtesaki atesaki = finder.get市町村宛先(全国住所コード, SofusakiGroup.所得照会関連.getCode());
         if (atesaki != null) {
             RString 名称 = atesaki.get名称();
-            if (!名称.isNullOrEmpty()) {
+            if (名称 != null && !名称.isEmpty()) {
                 役所_役場名 = set役所_役場名(名称, 役所_役場名, atesaki);
             }
             if (整数_TEN <= 役所_役場名.length()) {

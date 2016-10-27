@@ -25,42 +25,32 @@ public class TokuchoKaishiMaeFucho8GatsuTest extends DbbTestBase {
 
     @Test
     public void 引数に0を指定した場合_toValueは_特別徴収開始前の本算定納期で普通徴収しないを返す() {
-        assertThat(TokuchoKaishiMaeFucho8Gatsu.toValue(new RString("0")), is(TokuchoKaishiMaeFucho8Gatsu.特別徴収開始前の本算定納期で普通徴収しない));
+        assertThat(TokuchoKaishiMaeFucho8Gatsu.toValue(new RString("0")), is(TokuchoKaishiMaeFucho8Gatsu.なし));
     }
 
     @Test
     public void 引数に1を指定した場合_toValueは_特別徴収開始前の本算定納期で普通徴収するを返す() {
-        assertThat(TokuchoKaishiMaeFucho8Gatsu.toValue(new RString("1")), is(TokuchoKaishiMaeFucho8Gatsu.特別徴収開始前の本算定納期で普通徴収する));
+        assertThat(TokuchoKaishiMaeFucho8Gatsu.toValue(new RString("1")), is(TokuchoKaishiMaeFucho8Gatsu.あり));
     }
 
     @Test
     public void 特別徴収開始前の本算定納期で普通徴収しないを指定した場合_getコードは_0を返す() {
-        assertThat(TokuchoKaishiMaeFucho8Gatsu.特別徴収開始前の本算定納期で普通徴収しない.getコード(), is(new RString("0")));
+        assertThat(TokuchoKaishiMaeFucho8Gatsu.なし.getコード(), is(new RString("0")));
     }
 
     @Test
     public void 特別徴収開始前の本算定納期で普通徴収するを指定した場合_getコードは_1を返す() {
-        assertThat(TokuchoKaishiMaeFucho8Gatsu.特別徴収開始前の本算定納期で普通徴収する.getコード(), is(new RString("1")));
+        assertThat(TokuchoKaishiMaeFucho8Gatsu.あり.getコード(), is(new RString("1")));
     }
 
     @Test
     public void 特別徴収開始前の本算定納期で普通徴収しないを指定した場合_get名称は_なしを返す() {
-        assertThat(TokuchoKaishiMaeFucho8Gatsu.特別徴収開始前の本算定納期で普通徴収しない.get名称(), is(new RString("なし")));
+        assertThat(TokuchoKaishiMaeFucho8Gatsu.なし.get名称(), is(new RString("特別徴収開始前の本算定納期で普通徴収しない")));
     }
 
     @Test
     public void 特別徴収開始前の本算定納期で普通徴収するを指定した場合_get名称は_ありを返す() {
-        assertThat(TokuchoKaishiMaeFucho8Gatsu.特別徴収開始前の本算定納期で普通徴収する.get名称(), is(new RString("あり")));
-    }
-
-    @Test
-    public void 特別徴収開始前の本算定納期で普通徴収しないを指定した場合_get略称は_特別徴収開始前の本算定納期で普通徴収しないを返す() {
-        assertThat(TokuchoKaishiMaeFucho8Gatsu.特別徴収開始前の本算定納期で普通徴収しない.get略称(), is(new RString("特別徴収開始前の本算定納期で普通徴収しない")));
-    }
-
-    @Test
-    public void 特別徴収開始前の本算定納期で普通徴収するを指定した場合_get略称は_特別徴収開始前の本算定納期で普通徴収するを返す() {
-        assertThat(TokuchoKaishiMaeFucho8Gatsu.特別徴収開始前の本算定納期で普通徴収する.get略称(), is(new RString("特別徴収開始前の本算定納期で普通徴収する")));
+        assertThat(TokuchoKaishiMaeFucho8Gatsu.あり.get名称(), is(new RString("特別徴収開始前の本算定納期で普通徴収する")));
     }
 
 }

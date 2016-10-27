@@ -5,7 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200031;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,7 +29,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class GassanJikofutangakuHoseiIchiranEntity {
 
-    private HokenshaNo 被保険者番号;
+    private HihokenshaNo 被保険者番号;
     private RString 被保険者氏名;
     private FlexibleDate 生年月日;
     private RString 性別;
@@ -42,5 +48,13 @@ public class GassanJikofutangakuHoseiIchiranEntity {
     private RString 警告;
     private RString 警告2;
     private RString 宛名ﾃﾞｰﾀ種別;
+
+    private FlexibleDate 申請年月日;
+    private LasdecCode 市町村コード;
+    private AtenaKanaMeisho 氏名５０音カナ;
+    private ChoikiCode 町域コード;
+    private GyoseikuCode 行政区コード;
+    private YubinNo 郵便番号;
+    private HokenshaNo 証記載保険者番号;
 
 }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5530001;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5530001.YokaigoNinteiTorikeshiTujishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
@@ -65,7 +66,7 @@ public class YokaigoNinteiTorikeshiTujishoHakkoHandler {
                 getShichosonSecurityJoho(GyomuBunrui.介護事務);
         LasdecCode 市町村コード;
         RString 介護導入形態;
-        if (shichosonSecurityJoho != null) {
+        if (shichosonSecurityJoho != null && !KaigoDonyuKubun.未導入.code().equals(shichosonSecurityJoho.get介護導入区分().code())) {
             市町村コード = shichosonSecurityJoho.get市町村情報().get市町村コード();
             介護導入形態 = shichosonSecurityJoho.get導入形態コード().getCode();
         } else {

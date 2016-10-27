@@ -99,7 +99,7 @@ public class DBC120070_KogakuKyufuTaishoshaIn extends BatchFlowBase<DBC120070_Ko
      *
      * @return KokuhorenkyoutsuGetFileProcess
      */
-    @Step (ファイル取得)
+    @Step(ファイル取得)
     protected IBatchFlowCommand callGetFileProcess() {
         KokuhorenkyotsuGetFileProcessParameter parameter = new KokuhorenkyotsuGetFileProcessParameter();
         parameter.set交換情報識別番号(交換情報識別番号);
@@ -112,7 +112,7 @@ public class DBC120070_KogakuKyufuTaishoshaIn extends BatchFlowBase<DBC120070_Ko
      *
      * @return KohifutanshaReadCsvFileProcess
      */
-    @Step (CSVファイル取込)
+    @Step(CSVファイル取込)
     protected IBatchFlowCommand callReadCsvFileProcess() {
         KohifutanshaReadCsvFileProcessParameter parameter = new KohifutanshaReadCsvFileProcessParameter();
         parameter.set処理年月(getParameter().get処理年月());
@@ -126,7 +126,7 @@ public class DBC120070_KogakuKyufuTaishoshaIn extends BatchFlowBase<DBC120070_Ko
      *
      * @return KokuhorenkyoutsuDoHihokenshaKanrenProcess
      */
-    @Step (被保険者関連処理)
+    @Step(被保険者関連処理)
     protected IBatchFlowCommand callDoHihokenshaKanrenProcess() {
         return simpleBatch(KokuhorenkyoutsuDoHihokenshaKanrenProcess.class).define();
     }
@@ -136,7 +136,7 @@ public class DBC120070_KogakuKyufuTaishoshaIn extends BatchFlowBase<DBC120070_Ko
      *
      * @return KohifutanshaDoMasterTorokuProcess
      */
-    @Step (世帯集約番号設定)
+    @Step(世帯集約番号設定)
     protected IBatchFlowCommand callSetSedaiShuuyakuBangoProcess() {
         return loopBatch(KogakuKyufuTaishoshaInSetSedaiShuuyakuBangoProcess.class).define();
     }
@@ -146,11 +146,15 @@ public class DBC120070_KogakuKyufuTaishoshaIn extends BatchFlowBase<DBC120070_Ko
      *
      * @return KogakuKyufuTaishoshaInSetSedaiShuuyakuBangoProcess
      */
-    @Step (マスタ登録)
+    @Step(マスタ登録)
     protected IBatchFlowCommand callDoMasterTorokuProcess() {
         KohifutanshaDoMasterTorokuProcessParameter parameter = new KohifutanshaDoMasterTorokuProcessParameter();
         parameter.set処理年月(getParameter().get処理年月());
-        parameter.set再処理区分(SaiShoriKubun.toValue(getParameter().get再処理区分()));
+        if (RString.isNullOrEmpty(getParameter().get再処理区分())) {
+            parameter.set再処理区分(SaiShoriKubun.空白);
+        } else {
+            parameter.set再処理区分(SaiShoriKubun.toValue(getParameter().get再処理区分()));
+        }
         parameter.set交換情報識別番号(交換情報識別番号);
         return simpleBatch(KogakuKyufuTaishoshaInDoMasterTorokuProcess.class).arguments(parameter).define();
     }
@@ -160,7 +164,7 @@ public class DBC120070_KogakuKyufuTaishoshaIn extends BatchFlowBase<DBC120070_Ko
      *
      * @return KokuhorenkyoutsuDoInterfaceKanriKousinProcess
      */
-    @Step (国保連インタフェース管理更新)
+    @Step(国保連インタフェース管理更新)
     protected IBatchFlowCommand callDoInterfaceKanriKousinProcess() {
         KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter parameter
                 = new KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter();
@@ -177,7 +181,7 @@ public class DBC120070_KogakuKyufuTaishoshaIn extends BatchFlowBase<DBC120070_Ko
      *
      * @return KohifutanshaDoIchiranhyoSakuseiProcess
      */
-    @Step (一覧表作成)
+    @Step(一覧表作成)
     protected IBatchFlowCommand callDoIchiranhyoSakuseiProcess() {
         KohifutanshaDoIchiranhyoSakuseiProcessParameter parameter
                 = new KohifutanshaDoIchiranhyoSakuseiProcessParameter();
@@ -195,7 +199,7 @@ public class DBC120070_KogakuKyufuTaishoshaIn extends BatchFlowBase<DBC120070_Ko
      *
      * @return KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess
      */
-    @Step (処理結果リスト作成)
+    @Step(処理結果リスト作成)
     protected IBatchFlowCommand callDoShoriKekkaListSakuseiProcess() {
         KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter
                 = new KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter();
@@ -208,7 +212,7 @@ public class DBC120070_KogakuKyufuTaishoshaIn extends BatchFlowBase<DBC120070_Ko
      *
      * @return KokuhorenkyoutsuDeleteReveicedFileProcess
      */
-    @Step (取込済ファイル削除)
+    @Step(取込済ファイル削除)
     protected IBatchFlowCommand callDeleteReveicedFileProcess() {
         KokuhorenkyotsuDeleteReveicedFileProcessParameter parameter
                 = new KokuhorenkyotsuDeleteReveicedFileProcessParameter();

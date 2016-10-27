@@ -32,11 +32,11 @@ public enum RenkeiDataShutsuryokuSikakuSakuseiSoshitsuValidationMessage implemen
     /**
      * 今回終了チェック（年月日）
      */
-    今回終了チェック_年月日(UrErrorMessages.必須項目_追加メッセージあり, "今回開始チェック_時分秒"),
+    今回終了チェック_年月日(UrErrorMessages.必須項目_追加メッセージあり, "今回終了チェック_年月日"),
     /**
      * 今回終了チェック（時分秒）
      */
-    今回終了チェック_時分秒(UrErrorMessages.必須項目_追加メッセージあり, "今回開始チェック_時分秒");
+    今回終了チェック_時分秒(UrErrorMessages.必須項目_追加メッセージあり, "今回終了チェック_時分秒");
     private final Message message;
 
     private RenkeiDataShutsuryokuSikakuSakuseiSoshitsuValidationMessage(IMessageGettable message) {

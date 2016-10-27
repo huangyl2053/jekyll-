@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220013.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220013.JukyushaIdoRenrakuhyoSakuseiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0220013.JukyushaIdoRenrakuhyoSakuseiPanelHandler;
 import jp.co.ndensan.reams.db.dbc.service.report.jukyushaidorenrakuhyo.JukyushaIdoRenrakuhyoPrintSevice;
-import jp.co.ndensan.reams.db.dbc.service.report.jukyushateiseirenrakuhyo.JukyushaTeiseiRenrakuhyoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
@@ -109,18 +108,10 @@ public class JukyushaIdoRenrakuhyoSakuseiPanel {
         if (div.getJukyushaIdoRenrakuhyoHenkoPrint().getChkJukyushaIdoRenrakuhyo().isAllSelected()) {
             氏名性別生年月日を印字する = ONE;
         }
-        int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
-        if (履歴番号 == 1) {
-            JukyushaIdoRenrakuhyoTorokuEntity 受給者異動連絡票Entity = getHandler(div).
-                    get受給者異動連絡票Entity(作成年月日, 氏名性別生年月日を印字する);
-            JukyushaIdoRenrakuhyoPrintSevice 異動連絡票service = new JukyushaIdoRenrakuhyoPrintSevice();
-            return ResponseData.of(異動連絡票service.printSingle(受給者異動連絡票Entity)).respond();
-        } else {
-            JukyushaIdoRenrakuhyoTorokuEntity 受給者訂正連絡票Entity = getHandler(div).get受給者訂正連絡票Entity(
-                    作成年月日, 氏名性別生年月日を印字する);
-            JukyushaTeiseiRenrakuhyoPrintService 訂正連絡票service = new JukyushaTeiseiRenrakuhyoPrintService();
-            return ResponseData.of(訂正連絡票service.printSingle(受給者訂正連絡票Entity)).respond();
-        }
+        JukyushaIdoRenrakuhyoTorokuEntity 受給者異動連絡票Entity = getHandler(div).
+                get受給者異動連絡票Entity(作成年月日, 氏名性別生年月日を印字する);
+        JukyushaIdoRenrakuhyoPrintSevice 異動連絡票service = new JukyushaIdoRenrakuhyoPrintSevice();
+        return ResponseData.of(異動連絡票service.printSingle(受給者異動連絡票Entity)).respond();
     }
 
     /**

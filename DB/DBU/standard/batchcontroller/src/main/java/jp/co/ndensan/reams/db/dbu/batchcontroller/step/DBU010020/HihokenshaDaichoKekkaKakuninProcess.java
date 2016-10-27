@@ -21,13 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -41,15 +35,10 @@ public class HihokenshaDaichoKekkaKakuninProcess extends BatchProcessBase<ShoriK
             + "db.mapper.relate.jigyohokokugeppoippan.IJigyoHokokuGeppoIppanMapper.getIchigoHihokenshaSyoriKakuninRisuto");
     private static final RString 過去集計分旧市町村区分 = new RString("1");
     private static final RString 固定文字列_旧 = new RString("（旧）");
-    private static final RString DATE_時 = new RString("時");
-    private static final RString DATE_分 = new RString("分");
-    private static final RString DATE_秒 = new RString("秒");
-    private static final RString DATE_作成 = new RString("作成");
 
     private JigyoHokokuGeppoShoriKekkaKakuninListProcessParameter processParameter;
     private RString 保険者番号;
     private RString 保険者名;
-    private RString 作成日時;
 
     @BatchWriter
     private BatchReportWriter<ShoriKekkaKakuninListReportSource> batchWrite;
@@ -64,7 +53,6 @@ public class HihokenshaDaichoKekkaKakuninProcess extends BatchProcessBase<ShoriK
         } else {
             保険者名 = 地方公共団体.get市町村名();
         }
-        作成日時 = get作成日時(processParameter.get処理日時().getRDateTime());
     }
 
     @Override
@@ -81,7 +69,7 @@ public class HihokenshaDaichoKekkaKakuninProcess extends BatchProcessBase<ShoriK
     @Override
     protected void process(ShoriKekkaKakuninListRelateEntity entity) {
         ShoriKekkaKakuninListEntity reportData = new ShoriKekkaKakuninListEntity();
-        reportData.set作成日時(作成日時);
+        reportData.set作成日時(processParameter.get処理日時().getRDateTime());
         reportData.set保険者名(保険者名);
         reportData.set保険者番号(保険者番号);
         reportData.setプログラムID(processParameter.getバッチID());
@@ -100,20 +88,4 @@ public class HihokenshaDaichoKekkaKakuninProcess extends BatchProcessBase<ShoriK
         report.writeBy(reportSourceWriter);
     }
 
-    private RString get作成日時(RDateTime 処理日時) {
-        RStringBuilder printTimeStamp = new RStringBuilder();
-        printTimeStamp.append(処理日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString());
-        printTimeStamp.append(RString.HALF_SPACE);
-        printTimeStamp.append(String.format("%02d", 処理日時.getHour()));
-        printTimeStamp.append(DATE_時);
-        printTimeStamp.append(String.format("%02d", 処理日時.getMinute()));
-        printTimeStamp.append(DATE_分);
-        printTimeStamp.append(String.format("%02d", 処理日時.getSecond()));
-        printTimeStamp.append(DATE_秒);
-        printTimeStamp.append(RString.HALF_SPACE);
-        printTimeStamp.append(DATE_作成);
-        return printTimeStamp.toRString();
-    }
 }

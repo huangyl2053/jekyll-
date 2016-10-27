@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.definition.processprm.tokubetsuchoshudoteimid
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -31,7 +30,8 @@ public class TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter implements IBatc
     private RString 出力対象;
     private YMDHMS 処理日時;
     private RString 通知内容コード;
-    private IShikibetsuTaishoPSMSearchKey atenaKey;
+    private RString 同定出力順;
+    private RString 未同定出力順;
 
     /**
      * コンストラクタです。
@@ -41,14 +41,18 @@ public class TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter implements IBatc
      * @param 特別徴収開始月 特別徴収開始月
      * @param 出力対象 出力対象
      * @param 処理日時 処理日時
+     * @param 同定出力順 同定出力順
+     * @param 未同定出力順 未同定出力順
      */
     public TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter(FlexibleYear 処理年度, List<RString> 捕捉月, RString 特別徴収開始月,
-            RString 出力対象, YMDHMS 処理日時) {
+            RString 出力対象, YMDHMS 処理日時, RString 同定出力順, RString 未同定出力順) {
         this.処理年度 = 処理年度;
         this.捕捉月 = 捕捉月;
         this.特別徴収開始月 = 特別徴収開始月;
         this.出力対象 = 出力対象;
         this.処理日時 = 処理日時;
+        this.同定出力順 = 同定出力順;
+        this.未同定出力順 = 未同定出力順;
     }
 
     /**
@@ -57,7 +61,8 @@ public class TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter implements IBatc
      * @return {@link TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter}
      */
     public TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter getMybatisParameter() {
-        return new TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter(処理年度.toDateString(), 特別徴収開始月, 捕捉月, 通知内容コード, atenaKey);
+        return new TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter(処理年度.toDateString(), 特別徴収開始月, 捕捉月, 通知内容コード,
+                同定出力順, 未同定出力順);
     }
 
 }

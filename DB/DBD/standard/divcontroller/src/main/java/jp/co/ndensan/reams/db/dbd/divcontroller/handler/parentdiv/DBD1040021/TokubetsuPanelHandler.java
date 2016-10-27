@@ -10,8 +10,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040021.Toku
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChikuNyuryokuGuide.ChikuNyuryokuGuideDiv;
-import jp.co.ndensan.reams.ur.urz.definition.core.chiku.ChikuShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -47,22 +45,20 @@ public class TokubetsuPanelHandler {
                 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (shichosonsecurityjoho != null && shichosonsecurityjoho.get導入形態コード() != null) {
             if (shichosonsecurityjoho.get導入形態コード().is広域()) {
-                div.getChushutsuJoken4().setEraseBorder(true);
-                div.getChushutsuJoken().setVisible(false);
+                div.getChushutsuJoken4().setEraseBorder(false);
+                div.getChushutsuJoken().setDisplayNone(true);
+                div.getShichosonPanel().setDisplayNone(false);
             } else {
-                div.getChushutsuJoken4().setEraseBorder(true);
-                div.getShichosonPanel().setVisible(false);
-                div.getBtnChikuGyoseikuCodeFrom().setDisplayNone(true);
-                div.getBtnChikuGyoseikuCodeTo().setDisplayNone(true);
-                div.getBtnChikuJushoCodeFrom().setDisabled(true);
-                div.getBtnChikuJushoCodeTo().setDisabled(true);
+                div.getChushutsuJoken4().setEraseBorder(false);
+                div.getShichosonPanel().setDisplayNone(true);
+                div.getChushutsuJoken().setDisplayNone(false);
+                set地区DDL非表示();
             }
         } else {
             throw new ApplicationException("市町村セキュリティ情報の取得に失敗しました。");
         }
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200012.getReportId());
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
-        clearvalue();
     }
 
     /**
@@ -72,59 +68,53 @@ public class TokubetsuPanelHandler {
      */
     public void onChange_ddlChiku() {
         if (div.getChushutsuJoken().getDdlChiku().getSelectedKey().equals(住所)) {
-            div.getBtnChikuJushoCodeFrom().setDisplayNone(false);
-            div.getBtnChikuJushoCodeTo().setDisplayNone(false);
-            div.getTxtChikuCodeFrom().setDisabled(false);
-            div.getTxtChikuCodeTo().setDisabled(false);
-            div.getBtnChikuGyoseikuCodeFrom().setDisplayNone(true);
-            div.getBtnChikuGyoseikuCodeTo().setDisplayNone(true);
-            div.getBtnChikuJushoCodeFrom().setDisabled(false);
-            div.getBtnChikuJushoCodeTo().setDisabled(false);
-            clearvalue();
+            div.getChushutsuJoken().getCcdJyuusyoStart().setDisplayNone(false);
+            div.getChushutsuJoken().getCcdJyuusyoEnd().setDisplayNone(false);
+            div.getChushutsuJoken().getCcdChikuStart().setDisplayNone(true);
+            div.getChushutsuJoken().getCcdChikuEnd().setDisplayNone(true);
+            div.getChushutsuJoken().getCcdGyouseiStart().setDisplayNone(true);
+            div.getChushutsuJoken().getCcdGyouseiEnd().setDisplayNone(true);
+            div.getChushutsuJoken().getLblJushoKara().setDisplayNone(false);
+            div.getChushutsuJoken().getLblChiku2Kara().setDisplayNone(true);
+            div.getChushutsuJoken().getLblGyoseikuKara().setDisplayNone(true);
         } else if (div.getChushutsuJoken().getDdlChiku().getSelectedKey().equals(行政区)) {
-            div.getBtnChikuJushoCodeFrom().setDisplayNone(true);
-            div.getBtnChikuJushoCodeTo().setDisplayNone(true);
-            div.getBtnChikuGyoseikuCodeFrom().setDisplayNone(false);
-            div.getBtnChikuGyoseikuCodeTo().setDisplayNone(false);
-            div.getBtnChikuGyoseikuCodeFrom().setDisabled(false);
-            div.getBtnChikuGyoseikuCodeTo().setDisabled(false);
-            div.getTxtChikuCodeFrom().setDisabled(false);
-            div.getTxtChikuCodeTo().setDisabled(false);
-            clearvalue();
-            div.setHdnChikuShubetsuName(ChikuShubetsu.行政区.getShubetsu());
-            div.setHdnIsMultiSelected(new RString(ChikuNyuryokuGuideDiv.SelectableType.Single.toString()));
+            div.getChushutsuJoken().getCcdGyouseiStart().setDisplayNone(false);
+            div.getChushutsuJoken().getCcdGyouseiEnd().setDisplayNone(false);
+            div.getChushutsuJoken().getCcdJyuusyoStart().setDisplayNone(true);
+            div.getChushutsuJoken().getCcdJyuusyoEnd().setDisplayNone(true);
+            div.getChushutsuJoken().getCcdChikuStart().setDisplayNone(true);
+            div.getChushutsuJoken().getCcdChikuEnd().setDisplayNone(true);
+            div.getChushutsuJoken().getLblGyoseikuKara().setDisplayNone(false);
+            div.getChushutsuJoken().getLblChiku2Kara().setDisplayNone(true);
+            div.getChushutsuJoken().getLblJushoKara().setDisplayNone(true);
         } else if (div.getChushutsuJoken().getDdlChiku().getSelectedKey().equals(地区)) {
-            div.getTxtChikuCodeFrom().setDisabled(false);
-            div.getTxtChikuCodeTo().setDisabled(false);
-            set活性();
-            clearvalue();
+            div.getChushutsuJoken().getCcdChikuStart().setDisplayNone(false);
+            div.getChushutsuJoken().getCcdChikuEnd().setDisplayNone(false);
+            div.getChushutsuJoken().getCcdGyouseiStart().setDisplayNone(true);
+            div.getChushutsuJoken().getCcdGyouseiEnd().setDisplayNone(true);
+            div.getChushutsuJoken().getCcdJyuusyoStart().setDisplayNone(true);
+            div.getChushutsuJoken().getCcdJyuusyoEnd().setDisplayNone(true);
+            div.getChushutsuJoken().getLblChiku2Kara().setDisplayNone(false);
+            div.getChushutsuJoken().getLblGyoseikuKara().setDisplayNone(true);
+            div.getChushutsuJoken().getLblJushoKara().setDisplayNone(true);
         } else {
-            set活性();
-            clearvalue();
+            set地区DDL非表示();
         }
-    }
-
-    /**
-     * 画面のHandlerのclearvalue
-     *
-     * cleartext
-     */
-    public void clearvalue() {
-        div.getTxtChikuCodeFrom().clearValue();
-        div.getTxtChikuCodeTo().clearValue();
-        div.getTxtChikuNameFrom().clearValue();
-        div.getTxtChikuNameTo().clearValue();
     }
 
     /**
      * 画面のHandlerのset活性
      *
-     * set活性
      */
-    public void set活性() {
-        div.getBtnChikuGyoseikuCodeFrom().setDisabled(true);
-        div.getBtnChikuGyoseikuCodeTo().setDisabled(true);
-        div.getBtnChikuJushoCodeFrom().setDisabled(true);
-        div.getBtnChikuJushoCodeTo().setDisabled(true);
+    public void set地区DDL非表示() {
+        div.getChushutsuJoken().getCcdChikuStart().setDisplayNone(true);
+        div.getChushutsuJoken().getCcdChikuEnd().setDisplayNone(true);
+        div.getChushutsuJoken().getCcdGyouseiStart().setDisplayNone(true);
+        div.getChushutsuJoken().getCcdGyouseiEnd().setDisplayNone(true);
+        div.getChushutsuJoken().getCcdJyuusyoStart().setDisplayNone(true);
+        div.getChushutsuJoken().getCcdJyuusyoEnd().setDisplayNone(true);
+        div.getChushutsuJoken().getLblChiku2Kara().setDisplayNone(true);
+        div.getChushutsuJoken().getLblGyoseikuKara().setDisplayNone(true);
+        div.getChushutsuJoken().getLblJushoKara().setDisplayNone(true);
     }
 }

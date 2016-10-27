@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * Kiwarigaku のクラスファイル
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class KiwarigakuDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -100,13 +101,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi13() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi13();
+    public TextBoxDate getTxtYuyoKikanKaishi4() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi4();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo13() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo13();
+    public TextBoxDate getTxtYuyoKikanShuryo4() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo4();
     }
 
     @JsonIgnore
@@ -125,13 +126,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi14() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi14();
+    public TextBoxDate getTxtYuyoKikanKaishi5() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi5();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo14() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo14();
+    public TextBoxDate getTxtYuyoKikanShuryo5() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo5();
     }
 
     @JsonIgnore
@@ -150,13 +151,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi1() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi1();
+    public TextBoxDate getTxtYuyoKikanKaishi6() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi6();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo1() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo1();
+    public TextBoxDate getTxtYuyoKikanShuryo6() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo6();
     }
 
     @JsonIgnore
@@ -175,13 +176,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi2() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi2();
+    public TextBoxDate getTxtYuyoKikanKaishi7() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi7();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo2() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo2();
+    public TextBoxDate getTxtYuyoKikanShuryo7() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo7();
     }
 
     @JsonIgnore
@@ -200,13 +201,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi3() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi3();
+    public TextBoxDate getTxtYuyoKikanKaishi8() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi8();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo3() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo3();
+    public TextBoxDate getTxtYuyoKikanShuryo8() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo8();
     }
 
     @JsonIgnore
@@ -225,13 +226,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi4() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi4();
+    public TextBoxDate getTxtYuyoKikanKaishi9() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi9();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo4() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo4();
+    public TextBoxDate getTxtYuyoKikanShuryo9() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo9();
     }
 
     @JsonIgnore
@@ -250,13 +251,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi5() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi5();
+    public TextBoxDate getTxtYuyoKikanKaishi10() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi10();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo5() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo5();
+    public TextBoxDate getTxtYuyoKikanShuryo10() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo10();
     }
 
     @JsonIgnore
@@ -275,13 +276,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi6() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi6();
+    public TextBoxDate getTxtYuyoKikanKaishi11() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi11();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo6() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo6();
+    public TextBoxDate getTxtYuyoKikanShuryo11() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo11();
     }
 
     @JsonIgnore
@@ -300,13 +301,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi7() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi7();
+    public TextBoxDate getTxtYuyoKikanKaishi12() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi12();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo7() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo7();
+    public TextBoxDate getTxtYuyoKikanShuryo12() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo12();
     }
 
     @JsonIgnore
@@ -325,13 +326,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi8() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi8();
+    public TextBoxDate getTxtYuyoKikanKaishi1() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi1();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo8() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo8();
+    public TextBoxDate getTxtYuyoKikanShuryo1() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo1();
     }
 
     @JsonIgnore
@@ -350,13 +351,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi9() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi9();
+    public TextBoxDate getTxtYuyoKikanKaishi2() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi2();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo9() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo9();
+    public TextBoxDate getTxtYuyoKikanShuryo2() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo2();
     }
 
     @JsonIgnore
@@ -375,13 +376,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi10() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi10();
+    public TextBoxDate getTxtYuyoKikanKaishi3() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi3();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo10() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo10();
+    public TextBoxDate getTxtYuyoKikanShuryo3() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo3();
     }
 
     @JsonIgnore
@@ -400,13 +401,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi11() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi11();
+    public TextBoxDate getTxtYuyoKikanKaishi13() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi13();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo11() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo11();
+    public TextBoxDate getTxtYuyoKikanShuryo13() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo13();
     }
 
     @JsonIgnore
@@ -425,13 +426,13 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanKaishi12() {
-        return this.getFuchoTablePanel().getLblYuyoKikanKaishi12();
+    public TextBoxDate getTxtYuyoKikanKaishi14() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanKaishi14();
     }
 
     @JsonIgnore
-    public Label getLblYuyoKikanShuryo12() {
-        return this.getFuchoTablePanel().getLblYuyoKikanShuryo12();
+    public TextBoxDate getTxtYuyoKikanShuryo14() {
+        return this.getFuchoTablePanel().getTxtYuyoKikanShuryo14();
     }
 
     @JsonIgnore

@@ -140,6 +140,13 @@ public class KyodoJukyushaKoshinkekkaIchiranReportSource implements IReportSourc
     public RString list7_1;
     @ReportItem(name = "list8_1", length = 64, order = 62)
     public RString list8_1;
+
+    @ReportItem(name = "shimei50onKana", length = 64, order = 66)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 64, order = 67)
+    public RString shichosonCode;
+    @ReportItem(name = "hihokenshaNo", length = 64, order = 68)
+    public RString hihokenshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -158,6 +165,11 @@ public class KyodoJukyushaKoshinkekkaIchiranReportSource implements IReportSourc
     public enum ReportSourceFields {
 
         hokenshaNo,
-
+        list2_3,
+        list2_4,
+        list1_9,
+        shimei50onKana,
+        shichosonCode,
+        hihokenshaNo,
     }
 }

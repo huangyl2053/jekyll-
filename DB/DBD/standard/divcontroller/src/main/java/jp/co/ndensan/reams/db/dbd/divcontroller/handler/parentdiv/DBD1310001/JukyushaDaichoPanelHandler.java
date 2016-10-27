@@ -127,11 +127,14 @@ public class JukyushaDaichoPanelHandler {
         div.getCcdAtenaJoken().set保険者();
         div.getCcdAtenaJoken().set地区(Chiku.全て.getコード());
         div.getCcdAtenaJoken().get宛名抽出条件子Div().getCcdGyoseikuFrom().setDisabled(false);
+        div.getCcdAtenaJoken().get宛名抽出条件子Div().getCcdJushoFrom().setDisabled(false);
+        div.getCcdAtenaJoken().get宛名抽出条件子Div().getCcdJushoTo().setDisabled(false);
         setCSV編集条件();
         div.getCcdShutsuryokujun().setDisabled(false);
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(帳票ID));
+        div.getCcdShutsuryokuKoumoku().load(帳票ID, SubGyomuCode.DBD介護受給);
         div.getCcdShutsuryokuKoumoku().setDisabled(true);
-
+        onChange_chkSaisin();
     }
 
     /**
@@ -183,6 +186,8 @@ public class JukyushaDaichoPanelHandler {
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(帳票ID), 出力順ID);
         RString 出力項目 = map.getParameterValue(RString.class, 出力項目名);
         div.getCcdShutsuryokuKoumoku().load(帳票ID, SubGyomuCode.DBD介護受給, 出力項目);
+        onChange_chkSaisin();
+        onSelect_radChushutsuTaisho();
     }
 
     /**
@@ -287,12 +292,15 @@ public class JukyushaDaichoPanelHandler {
     private void restore宛名抽出条件(BatchParameterMap map) {
         AtenaSelectBatchParameter 宛名抽出条件 = map.getParameterValue(AtenaSelectBatchParameter.class, 宛名抽出条件名);
         get宛名抽出条件div().set年齢層抽出方法(宛名抽出条件.getAgeSelectKijun().getコード());
+        get宛名抽出条件div().onChange_SelectKijun();
         get宛名抽出条件div().set年齢開始(宛名抽出条件.getNenreiRange().getFrom());
         get宛名抽出条件div().set年齢終了(宛名抽出条件.getNenreiRange().getTo());
         get宛名抽出条件div().set年齢基準日(宛名抽出条件.getNenreiKijunbi());
         get宛名抽出条件div().set生年月日開始(宛名抽出条件.getSeinengappiRange().getFrom());
         get宛名抽出条件div().set生年月日終了(宛名抽出条件.getSeinengappiRange().getTo());
         get宛名抽出条件div().set地区(宛名抽出条件.getChiku_Kubun().getコード());
+        get宛名抽出条件div().set保険者(宛名抽出条件.getShichoson_Code());
+        get宛名抽出条件div().onChange_SelectChiku();
         get宛名抽出条件div().set住所開始(new ChoikiCode(宛名抽出条件.getJusho_From()));
         get宛名抽出条件div().set住所終了(new ChoikiCode(宛名抽出条件.getJusho_To()));
         get宛名抽出条件div().set行政区開始(new GyoseikuCode(宛名抽出条件.getGyoseiku_From()));
@@ -303,7 +311,6 @@ public class JukyushaDaichoPanelHandler {
         get宛名抽出条件div().set地区２終了(new ChikuCode(宛名抽出条件.getChiku2_To()));
         get宛名抽出条件div().set地区３開始(new ChikuCode(宛名抽出条件.getChiku3_From()));
         get宛名抽出条件div().set地区３終了(new ChikuCode(宛名抽出条件.getChiku2_To()));
-        //get宛名抽出条件div().set保険者(宛名抽出条件.getShichoson_Code());
     }
 
     private IHanyoListAtenaSelectDiv get宛名抽出条件div() {
@@ -326,7 +333,7 @@ public class JukyushaDaichoPanelHandler {
     }
 
     private RDate flexibleDateToRDate(FlexibleDate date) {
-        if (date != null) {
+        if (date != null && date.isValid()) {
             return new RDate(date.getYearValue(), date.getMonthValue(), date.getDayValue());
         }
         return null;

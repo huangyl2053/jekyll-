@@ -70,6 +70,14 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranSource implements IReportSo
     @ReportPerson(id = "X")
     @ReportItem(name = "listHakkoTaishosha_11", length = 30, order = 24)
     public RString listHakkoTaishosha_11;
+    @ReportItem(name = "yubinNo", length = 20, order = 25)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 20, order = 26)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 20, order = 27)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shichosonCode", length = 20, order = 28)
+    public RString shichosonCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

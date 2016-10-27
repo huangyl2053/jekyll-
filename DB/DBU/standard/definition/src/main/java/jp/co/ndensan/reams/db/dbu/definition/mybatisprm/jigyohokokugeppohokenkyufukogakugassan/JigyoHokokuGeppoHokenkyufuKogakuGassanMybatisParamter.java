@@ -88,9 +88,6 @@ public final class JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter impleme
      * @return JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter
      */
     public static JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter createInsertKougakuCSVDataParam(RString 集計番号, RString 決定年月) {
-        if (RString.isNullOrEmpty(決定年月)) {
-            決定年月 = RString.EMPTY;
-        }
         return new JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter(RString.EMPTY, RString.EMPTY, null, 決定年月, 集計番号, null,
                 RString.EMPTY, null, null, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, null);
     }

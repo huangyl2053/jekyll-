@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -320,13 +319,32 @@ public class JigyoKogakuShikyuShinsei
     @Override
     public JigyoKogakuShikyuShinsei deleted() {
         DbT3110JigyoKogakuShikyuShinseiEntity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+        deletedEntity.setState(EntityDataState.Deleted);
         return new JigyoKogakuShikyuShinsei(deletedEntity, id);
+    }
+
+    /**
+     * add JigyoKogakuShikyuShinsei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public JigyoKogakuShikyuShinsei added() {
+        DbT3110JigyoKogakuShikyuShinseiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new JigyoKogakuShikyuShinsei(addedEntity, id);
+    }
+
+    /**
+     * 修正 ShokanMeisaiJushochiTokurei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public JigyoKogakuShikyuShinsei modified() {
+        DbT3110JigyoKogakuShikyuShinseiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new JigyoKogakuShikyuShinsei(modifiedEntity, id);
     }
 
     /**

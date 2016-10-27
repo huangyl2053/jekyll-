@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyoRisutoRiyoshaFutanWariaiEntity {
 
+    private RString 被保険者台帳管理_識別コード;
     private RString 被保険者台帳管理_被保険者番号;
     private RString 被保険者台帳管理_資格取得事由コード;
     private FlexibleDate 被保険者台帳管理_資格取得年月日;

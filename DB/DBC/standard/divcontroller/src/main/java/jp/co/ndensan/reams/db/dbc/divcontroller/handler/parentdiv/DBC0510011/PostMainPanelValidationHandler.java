@@ -102,19 +102,16 @@ public class PostMainPanelValidationHandler {
         グリッドのファイル日時が空白 {
                     @Override
                     public boolean apply(PostMainPanelDiv div) {
-                        if (!div.getDgShichoson().getSelectedItems().isEmpty()
-                        && div.getDgShichoson().getSelectedItems() != null) {
-                            int i = 0;
+                        if (div.getDgShichoson().getSelectedItems() != null
+                        && !div.getDgShichoson().getSelectedItems().isEmpty()) {
                             for (dgShichoson_Row row : div.getDgShichoson().getSelectedItems()) {
-                                if (row.getFileNitiji().isEmpty() || row.getFileNitiji() == null) {
-                                    i = i + 1;
+                                if (row.getFileNitiji() == null || row.getFileNitiji().isEmpty()) {
+                                    return false;
                                 }
                             }
-                            return 0 < i;
-
-                        } else {
                             return true;
                         }
+                        return true;
                     }
                 };
     }

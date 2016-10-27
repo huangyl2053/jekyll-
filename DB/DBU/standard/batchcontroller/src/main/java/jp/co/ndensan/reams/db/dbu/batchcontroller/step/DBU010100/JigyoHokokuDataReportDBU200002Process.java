@@ -65,7 +65,7 @@ public class JigyoHokokuDataReportDBU200002Process extends BatchProcessBase<Shor
     @Override
     protected void process(ShoriKekkaKakuninListRelateEntity entity) {
         ShoriKekkaKakuninListEntity reportData = new ShoriKekkaKakuninListEntity();
-        reportData.set作成日時(processParameter.get処理日時());
+        reportData.set作成日時(processParameter.get処理日時().getRDateTime());
         reportData.set保険者名(保険者名);
         reportData.set保険者番号(保険者番号);
         reportData.setプログラムID(processParameter.getバッチID());

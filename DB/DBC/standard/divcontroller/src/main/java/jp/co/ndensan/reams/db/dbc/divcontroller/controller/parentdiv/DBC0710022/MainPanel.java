@@ -22,6 +22,9 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -48,6 +51,7 @@ public class MainPanel {
     private static final RString MSG_決定日 = new RString("決定日");
     private static final RString MSG_理由 = new RString("不支給理由等");
     private static final RString 申請を保存する = new RString("btnAddShikyuShinsei");
+    private static final RString 被保険者番号KEY = new RString("DBCHihokenshaNo");
 
     /**
      * 住宅改修費支給申請_償還払決定情報登録のonLoad
@@ -66,7 +70,10 @@ public class MainPanel {
         Decimal 給付率 = parameter.get給付率();
         RString 証明書 = parameter.get証明書();
         RString 画面モード = parameter.get画面モード();
-
+        LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(被保険者番号.getColumnValue()));
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
+            throw new PessimisticLockingException();
+        }
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().initialize(識別コード);
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().initialize(被保険者番号);
 
@@ -105,7 +112,7 @@ public class MainPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 ViewStateHolder.put(ViewStateKeys.識別コード, parameter.get識別コード());
-                ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月());
+                ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月().toDateString());
                 ViewStateHolder.put(ViewStateKeys.被保険者番号, parameter.get被保険者番号());
                 ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
                 ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());
@@ -113,7 +120,7 @@ public class MainPanel {
             }
         } else {
             ViewStateHolder.put(ViewStateKeys.識別コード, parameter.get識別コード());
-            ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月());
+            ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月().toDateString());
             ViewStateHolder.put(ViewStateKeys.被保険者番号, parameter.get被保険者番号());
             ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
             ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());
@@ -162,9 +169,9 @@ public class MainPanel {
             ShokanharaKeteiJyohoParameter parameter = ViewStateHolder.get(ViewStateKeys.検索キー,
                     ShokanharaKeteiJyohoParameter.class);
             if (照会.equals(parameter.get画面モード())) {
-                return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報).respond();
+                return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.一覧に戻る).respond();
             } else if (審査.equals(parameter.get画面モード())) {
-                return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.検索に戻る).respond();
+                return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.一覧に戻る).respond();
             } else {
                 return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.一覧に戻る).respond();
             }
@@ -189,7 +196,7 @@ public class MainPanel {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(MSG_決定日.toString()));
         }
         if (ShikyuFushikyuKubun.不支給.getコード().equals(shokanbaraiketteiJohoDiv.getRdoShikyukubun().getSelectedKey())
-                && shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().getValue().isNullOrEmpty()) {
+                && RString.isNullOrEmpty(shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().getValue())) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(MSG_理由.toString()));
         }
         ShoukanFutsuKetteiJouhouTourokuParameter parameter = ViewStateHolder.get(
@@ -204,17 +211,15 @@ public class MainPanel {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                try {
-                    ShokanharaKeteiJyohoParameter 検索情報キー = ViewStateHolder.get(ViewStateKeys.検索キー,
-                            ShokanharaKeteiJyohoParameter.class);
-                    boolean flags = getHandler(div).保存処理(検索情報キー);
-                    setMessages(div, flags);
-                } catch (Exception e) {
-                    div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(UrErrorMessages.異常終了,
-                            ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class).value(),
-                            div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().get氏名漢字(), false);
-                    return ResponseData.of(div).setState(DBC0710022StateName.KanryoMessage);
-                }
+                RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class).value();
+                RString 氏名漢字 = div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().get氏名漢字();
+                ShokanharaKeteiJyohoParameter 検索情報キー = ViewStateHolder.get(ViewStateKeys.検索キー,
+                        ShokanharaKeteiJyohoParameter.class);
+                getHandler(div).保存処理(検索情報キー);
+                LockingKey 排他キー = new LockingKey(被保険者番号KEY.concat(被保険者番号));
+                RealInitialLocker.release(排他キー);
+                div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(UrInformationMessages.保存終了,
+                        被保険者番号, 氏名漢字, true);
                 return ResponseData.of(div).setState(DBC0710022StateName.KanryoMessage);
             }
         } else {
@@ -228,17 +233,5 @@ public class MainPanel {
             }
         }
         return ResponseData.of(div).respond();
-    }
-
-    private void setMessages(MainPanelDiv div, boolean flags) {
-        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class).value();
-        RString 氏名漢字 = div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().get氏名漢字();
-        if (flags) {
-            div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(UrInformationMessages.保存終了,
-                    被保険者番号, 氏名漢字, true);
-        } else {
-            div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(UrErrorMessages.異常終了,
-                    被保険者番号, 氏名漢字, false);
-        }
     }
 }

@@ -7,21 +7,19 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
- * 所得照会票データTemp
+ * 所得照会票データTempのクラスです。
  *
  * @reamsid_L DBB-1720-050 lijunjun
  */
@@ -35,15 +33,15 @@ public class ShotokuShoukaiDataTempEntity implements IDbAccessable, Serializable
     @TempTableColumnOrder(2)
     private LasdecCode genLasdecCode;
     @TempTableColumnOrder(3)
-    private ZenkokuJushoCode shokaisakiLasdecCode;
+    private RString zenkokuJushoCode;
     @TempTableColumnOrder(4)
     private SetaiCode setaiCode;
     @TempTableColumnOrder(5)
     private HihokenshaNo hihokenshaNo;
     @TempTableColumnOrder(6)
-    private AtenaMeisho hihokenshaName;
+    private RString hihokenshaName;
     @TempTableColumnOrder(7)
-    private AtenaJusho hihokenshajusho;
+    private RString hihokenshajusho;
     @TempTableColumnOrder(8)
     private RString zenjusho;
     @TempTableColumnOrder(9)
@@ -87,32 +85,3 @@ public class ShotokuShoukaiDataTempEntity implements IDbAccessable, Serializable
     @TempTableColumnOrder(28)
     private RString juminShubetsuCode;
 }
-//    private ShikibetsuCode 識別コード;
-//    private LasdecCode 現全国地方公共団体コード;
-//    private ZenkokuJushoCode 送付先全国住所コード;
-//    private SetaiCode 世帯コード;
-//    private HihokenshaNo 被保険者番号;
-//    private AtenaMeisho 被保険者氏名;
-//    private AtenaJusho 被保険者住所;
-//    private RString 前住所;
-//    private RString 現住所;
-//    private AtenaKanaMeisho カナ氏名;
-//    private AtenaMeisho 名称;
-//    private FlexibleDate 生年月日;
-//    private FlexibleDate 異動年月日;
-//    private RString 候補者区分;
-//    private RString 本人区分;
-//    private RString 町域コード;
-//    private RString 行政区コード;
-//    private LasdecCode 市町村コード;
-//    private RString 前住所コード;
-//    private YubinNo 郵便番号;
-//    private RString 地区コード１;
-//    private RString 地区コード２;
-//    private RString 地区コード３;
-//    private RString 住民状態コード;
-//    private RString 管内管外区分;
-//    private RString 被保険者区分コード;
-//    private RString 性別コード;
-//    private RString 住民種別コード;
-

@@ -15,10 +15,12 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 資格取得者不整合リストのデータ処理クラスです。
@@ -60,7 +62,7 @@ public class ShikakuShutokushaFuseigoListHenSyu {
         if (entity.getShichosonCode() != null && !entity.getShichosonCode().isEmpty()) {
             ichiranhyoEntity.set市町村コードList(entity.getShichosonCode().value());
         }
-        ichiranhyoEntity.set資格区分(HihokenshaJoho.toValue(entity.getHihokennshaKubunCode()).get名称());
+        ichiranhyoEntity.set資格区分(get被保険者情報(entity.getHihokennshaKubunCode()));
         if (住所地特例フラグ.equals(entity.getJushochiTokureiFlag())) {
             ichiranhyoEntity.set住特(new RString("*"));
         } else {
@@ -102,7 +104,7 @@ public class ShikakuShutokushaFuseigoListHenSyu {
         if (entity.getShichosonCode() != null && !entity.getShichosonCode().isEmpty()) {
             csvDataEntity.setShichosonCode(entity.getShichosonCode().value());
         }
-        csvDataEntity.setShikaKubun(HihokenshaJoho.toValue(entity.getHihokennshaKubunCode()).get名称());
+        csvDataEntity.setShikaKubun(get被保険者情報(entity.getHihokennshaKubunCode()));
         if (住所地特例フラグ.equals(entity.getJushochiTokureiFlag())) {
             csvDataEntity.setJuutoku(new RString("*"));
         } else {
@@ -118,7 +120,7 @@ public class ShikakuShutokushaFuseigoListHenSyu {
 
     private RString get生年月日(FlexibleDate 生年月日) {
         if (生年月日 != null && !生年月日.isEmpty()) {
-            return 生年月日.wareki().toDateString();
+            return 生年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
         return RString.EMPTY;
     }
@@ -135,5 +137,12 @@ public class ShikakuShutokushaFuseigoListHenSyu {
             前住所.append(方書.value());
         }
         return 前住所.toRString();
+    }
+
+    private RString get被保険者情報(RString code) {
+        if (!RString.isNullOrEmpty(code)) {
+            HihokenshaJoho.toValue(code).get名称();
+        }
+        return RString.EMPTY;
     }
 }

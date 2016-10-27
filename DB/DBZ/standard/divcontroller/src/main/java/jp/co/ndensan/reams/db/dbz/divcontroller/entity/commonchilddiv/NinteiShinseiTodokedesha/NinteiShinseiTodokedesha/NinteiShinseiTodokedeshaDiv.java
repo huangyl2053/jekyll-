@@ -1,25 +1,25 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha;
-
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaDataPassModel;
-import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaNaiyo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinseitodokedesha.NinteiShinseiTodokedeshaHandler;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.ChoikiInputDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.IChoikiInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.IZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+
+import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaNaiyo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinseitodokedesha.NinteiShinseiTodokedeshaHandler;
 
 /**
  * NinteiShinseiTodokedesha のクラスファイル。
@@ -27,8 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinseiTodokedeshaDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -98,12 +97,11 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
- /*
+    /*
      * getddlTodokledeDaikoKubun
      * @return ddlTodokledeDaikoKubun
      */
     @JsonProperty("ddlTodokledeDaikoKubun")
-    @Override
     public DropDownList getDdlTodokledeDaikoKubun() {
         return ddlTodokledeDaikoKubun;
     }
@@ -113,7 +111,6 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @param ddlTodokledeDaikoKubun ddlTodokledeDaikoKubun
      */
     @JsonProperty("ddlTodokledeDaikoKubun")
-    @Override
     public void setDdlTodokledeDaikoKubun(DropDownList ddlTodokledeDaikoKubun) {
         this.ddlTodokledeDaikoKubun = ddlTodokledeDaikoKubun;
     }
@@ -186,7 +183,6 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @param txtJigyoshaCode txtJigyoshaCode
      */
     @JsonProperty("txtJigyoshaCode")
-    @Override
     public void setTxtJigyoshaCode(TextBox txtJigyoshaCode) {
         this.txtJigyoshaCode = txtJigyoshaCode;
     }
@@ -232,7 +228,6 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @return ddlShinseiKankeisha
      */
     @JsonProperty("ddlShinseiKankeisha")
-    @Override
     public DropDownList getDdlShinseiKankeisha() {
         return ddlShinseiKankeisha;
     }
@@ -242,7 +237,6 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @param ddlShinseiKankeisha ddlShinseiKankeisha
      */
     @JsonProperty("ddlShinseiKankeisha")
-    @Override
     public void setDdlShinseiKankeisha(DropDownList ddlShinseiKankeisha) {
         this.ddlShinseiKankeisha = ddlShinseiKankeisha;
     }
@@ -261,7 +255,6 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @param txtShimei txtShimei
      */
     @JsonProperty("txtShimei")
-    @Override
     public void setTxtShimei(TextBox txtShimei) {
         this.txtShimei = txtShimei;
     }
@@ -280,7 +273,6 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @param txtKanaShimei txtKanaShimei
      */
     @JsonProperty("txtKanaShimei")
-    @Override
     public void setTxtKanaShimei(TextBox txtKanaShimei) {
         this.txtKanaShimei = txtKanaShimei;
     }
@@ -299,7 +291,6 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @param txtHonninKankeisei txtHonninKankeisei
      */
     @JsonProperty("txtHonninKankeisei")
-    @Override
     public void setTxtHonninKankeisei(TextBox txtHonninKankeisei) {
         this.txtHonninKankeisei = txtHonninKankeisei;
     }
@@ -309,7 +300,6 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @return radKannaiKangai
      */
     @JsonProperty("radKannaiKangai")
-    @Override
     public RadioButton getRadKannaiKangai() {
         return radKannaiKangai;
     }
@@ -337,7 +327,6 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @param txtTelNo txtTelNo
      */
     @JsonProperty("txtTelNo")
-    @Override
     public void setTxtTelNo(TextBoxTelNo txtTelNo) {
         this.txtTelNo = txtTelNo;
     }
@@ -356,7 +345,6 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @param txtYubinNo txtYubinNo
      */
     @JsonProperty("txtYubinNo")
-    @Override
     public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
         this.txtYubinNo = txtYubinNo;
     }
@@ -366,7 +354,6 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @return ccdChoikiInput
      */
     @JsonProperty("ccdChoikiInput")
-    @Override
     public IChoikiInputDiv getCcdChoikiInput() {
         return ccdChoikiInput;
     }
@@ -376,7 +363,6 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * @return ccdZenkokuJushoInput
      */
     @JsonProperty("ccdZenkokuJushoInput")
-    @Override
     public IZenkokuJushoInputDiv getCcdZenkokuJushoInput() {
         return ccdZenkokuJushoInput;
     }
@@ -618,7 +604,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -633,11 +619,11 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     }
 
     public ShoriType getMode_ShoriType() {
-        return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
+        return (ShoriType) _CommonChildDivModeUtil.getMode( this.modes, ShoriType.class );
     }
 
-    public void setMode_ShoriType(ShoriType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
+    public void setMode_ShoriType( ShoriType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, ShoriType.class , value );
     }
 
     public static enum AtenaType implements ICommonChildDivMode {
@@ -655,7 +641,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
             AtenaType[] enumArray = AtenaType.values();
 
             for (AtenaType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -670,11 +656,11 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     }
 
     public AtenaType getMode_AtenaType() {
-        return (AtenaType) _CommonChildDivModeUtil.getMode(this.modes, AtenaType.class);
+        return (AtenaType) _CommonChildDivModeUtil.getMode( this.modes, AtenaType.class );
     }
 
-    public void setMode_AtenaType(AtenaType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, AtenaType.class, value);
+    public void setMode_AtenaType( AtenaType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, AtenaType.class , value );
     }
 
     public static enum DisplayType implements ICommonChildDivMode {
@@ -692,7 +678,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
             DisplayType[] enumArray = DisplayType.values();
 
             for (DisplayType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -707,11 +693,11 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     }
 
     public DisplayType getMode_DisplayType() {
-        return (DisplayType) _CommonChildDivModeUtil.getMode(this.modes, DisplayType.class);
+        return (DisplayType) _CommonChildDivModeUtil.getMode( this.modes, DisplayType.class );
     }
 
-    public void setMode_DisplayType(DisplayType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DisplayType.class, value);
+    public void setMode_DisplayType( DisplayType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayType.class , value );
     }
 
     // </editor-fold>

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0150011;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -133,7 +132,7 @@ public class ServiceTeikyohyoBeppyoPrintMainHandler {
                         get(result.get事業者コード()).get(0).get全額利用者負担額().subtract(result.get全額利用者負担額()));
             }
         }
-        return sortMapByKey逆順(事業者別マップ);
+        return 事業者別マップ;
     }
 
     private KyufuJikoSakuseiEntityResult result新規(KyufuJikoSakuseiEntityResult result) {
@@ -167,29 +166,6 @@ public class ServiceTeikyohyoBeppyoPrintMainHandler {
         新規Result.set適用開始年月日(result.get適用開始年月日());
         新規Result.set適用終了年月日(result.get適用終了年月日());
         return 新規Result;
-    }
-
-    private Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> sortMapByKey逆順(
-            Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 事業者別Map) {
-        if (事業者別Map == null || 事業者別Map.isEmpty()) {
-            return null;
-        }
-        Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 事業者別Map逆順 = new TreeMap<
-                JigyoshaNo, List<KyufuJikoSakuseiEntityResult>>(new MapKeyComparator());
-        事業者別Map逆順.putAll(事業者別Map);
-        return 事業者別Map逆順;
-    }
-
-}
-
-/**
- * カスタムの比較器クラスです。
- */
-class MapKeyComparator implements Comparator<JigyoshaNo> {
-
-    @Override
-    public int compare(JigyoshaNo arg0, JigyoshaNo arg1) {
-        return arg1.compareTo(arg0);
     }
 
 }

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5520001.RirekiShuseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5520001.dgRirekiIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
-import jp.co.ndensan.reams.db.dbz.business.core.rirekishusei.RirekiShuseiDataPass;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -29,6 +29,9 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class RirekiShuseiValidationHandler {
 
     private final RirekiShuseiDiv div;
+
+    private static final RString KU_BUN_追 = new RString("追");
+    private static final RString KU_BUN_直 = new RString("直");
 
     /**
      * コンストラクタです。
@@ -49,7 +52,7 @@ public class RirekiShuseiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         boolean hasFlag = false;
         for (dgRirekiIchiran_Row row : div.getDgRirekiIchiran().getDataSource()) {
-            if (!RString.isNullOrEmpty(row.getKubun()) && !new RString("直").equals(row.getKubun())) {
+            if (!RString.isNullOrEmpty(row.getKubun()) && !KU_BUN_直.equals(row.getKubun())) {
                 hasFlag = true;
                 break;
             }
@@ -72,12 +75,16 @@ public class RirekiShuseiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         boolean hasFlag = false;
         int count = 0;
+        if (KU_BUN_追.equals(compareRow.getKubun()) || compareRow.getTsuikaKubun().isValue()) {
+            count = 1;
+        }
         for (dgRirekiIchiran_Row row : div.getDgRirekiIchiran().getDataSource()) {
-            if (compareRow.getNinteiNaiyo().equals(row.getNinteiNaiyo())
-                    && compareRow.getDataKubun().equals(row.getDataKubun())
-                    && compareRow.getNiteiDay().getValue().compareTo(row.getNiteiDay().getValue()) == 0
-                    && compareRow.getYokaigodo().equals(row.getYokaigodo())
-                    && compareRow.getYukoKaishi().getValue().compareTo(row.getYukoKaishi().getValue()) == 0
+            RirekiShuseiBusiness business
+                    = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
+            if (business == null || !YukoMukoKubun.有効.getコード().equals(business.get受給者台帳().get有効無効区分().value())) {
+                continue;
+            }
+            if (compareRow.getYukoKaishi().getValue().compareTo(row.getYukoKaishi().getValue()) == 0
                     && compareRow.getYukoShuryo().getValue().compareTo(row.getYukoShuryo().getValue()) == 0) {
                 count = count + 1;
             }
@@ -87,7 +94,7 @@ public class RirekiShuseiValidationHandler {
             }
         }
         if (hasFlag) {
-            validationMessages.add(new ValidationMessageControlPair(RirekiShuseiMessages.既に登録済));
+            validationMessages.add(new ValidationMessageControlPair(RirekiShuseiMessages.既に登録済, div.getDgRirekiIchiran()));
             return validationMessages;
         }
         return validationMessages;
@@ -97,29 +104,20 @@ public class RirekiShuseiValidationHandler {
      *
      * 申請中のデータが存在
      *
+     * @param rstList 受給履歴
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 申請中のデータが存在() {
+    public ValidationMessageControlPairs 申請中のデータが存在(List<RirekiShuseiBusiness> rstList) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         boolean hasFlag = false;
-        for (dgRirekiIchiran_Row row : div.getDgRirekiIchiran().getDataSource()) {
-            if (new RString("追").equals(row.getKubun())) {
-                RirekiShuseiDataPass pass = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiDataPass.class);
-                if (ShinseiJokyoKubun.申請中.getコード().equals(pass.get申請状況区分())) {
-                    hasFlag = true;
-                    break;
-                }
-            } else {
-                RirekiShuseiBusiness business = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
-                if (ShinseiJokyoKubun.申請中.getコード().equals(business.get受給者台帳().get申請状況区分())) {
-                    hasFlag = true;
-                    break;
-                }
+        for (RirekiShuseiBusiness business : rstList) {
+            if (ShinseiJokyoKubun.申請中.getコード().equals(business.get受給者台帳().get申請状況区分())) {
+                hasFlag = true;
+                break;
             }
         }
         if (hasFlag) {
-            validationMessages.add(new ValidationMessageControlPair(RirekiShuseiMessages.更新不可_汎用));
-            return validationMessages;
+            validationMessages.add(new ValidationMessageControlPair(RirekiShuseiMessages.更新不可_汎用, div.getDgRirekiIchiran()));
         }
         return validationMessages;
     }
@@ -146,6 +144,7 @@ public class RirekiShuseiValidationHandler {
         更新不可_汎用(UrErrorMessages.更新不可_汎用, "受給申請中のデータが存在する"),
         受給共通_受給者登録なし(DbdErrorMessages.受給共通_受給者登録なし),
         編集なしで更新不可(UrErrorMessages.編集なしで更新不可);
+
         private final Message message;
 
         private RirekiShuseiMessages(IMessageGettable message, String... replaceParam) {

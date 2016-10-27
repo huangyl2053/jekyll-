@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.JukyushaDaichoManager;
-import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -75,6 +74,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     private static final Code CODE_0003 = new Code("0003");
     private static final Code CODE_003 = new Code("003");
     private static final RString 発行する = new RString("btnReportPublish");
+    private static final RString 発行済 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -294,8 +294,8 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
             HihokenshaNo 被保険者番号) {
         if (div.getTxtHakkouYMD().getValue() != null) {
             FlexibleDate 発行日 = new FlexibleDate(div.getTxtHakkouYMD().getValue().toDateString());
-            事業高額合算支給不支給決定 = 事業高額合算支給不支給決定.createBuilderForEdit().set決定通知書作成年月日(発行日).build();
-            //TODO 決定通知リアル発行フラグ QA1241
+            事業高額合算支給不支給決定 = 事業高額合算支給不支給決定.createBuilderForEdit()
+                    .set決定通知書作成年月日(発行日).set決定通知リアル発行フラグ(発行済).build();
             事業高額合算支給不支給決定.toEntity().setState(EntityDataState.Modified);
             JigyoKogakuGassanShikyuFushikyuKetteiManager manage = new JigyoKogakuGassanShikyuFushikyuKetteiManager();
             manage.save事業高額合算支給不支給決定(事業高額合算支給不支給決定);
@@ -462,7 +462,6 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
     public KougakugassanShikyuketteiTsuuchishoOutputEntity editKougakugassanShikyuketteiTsuuchisho(
             JigyoKogakuGassanShikyuFushikyuKettei 事業高額合算支給不支給決定, ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
             RString 支払予定日印字有無) {
-        Koza koza = KougakuGassanShikyuKetteiTsuchisho.createInstance().getKozaJyoho(事業高額合算支給不支給決定.get口座ID());
         ReportId reportId;
         FlexibleDate 発行日 = div.getTxtHakkouYMD().getValue() != null
                 ? new FlexibleDate(div.getTxtHakkouYMD().getValue().toDateString()) : FlexibleDate.EMPTY;
@@ -479,7 +478,7 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         int 履歴番号 = Integer.parseInt(div.getDdlRirekiNO().getSelectedKey().toString());
         KougakugassanShikyuketteiTsuuchishoOutputEntity outputEntity = KougakuGassanShikyuKetteiTsuchisho.createInstance()
                 .editKougakugassanShikyuketteiTsuuchisho(識別コード, 被保険者番号, reportId, 対象年度, 連絡票整理番号, 履歴番号,
-                        文書番号, 発行日, 支払予定日, koza);
+                        文書番号, 発行日, 支払予定日, 事業高額合算支給不支給決定.get口座ID());
         return outputEntity;
     }
 

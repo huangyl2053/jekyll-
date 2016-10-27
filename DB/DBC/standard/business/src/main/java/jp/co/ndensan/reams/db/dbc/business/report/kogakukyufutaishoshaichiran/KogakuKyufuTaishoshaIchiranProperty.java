@@ -122,6 +122,7 @@ public class KogakuKyufuTaishoshaIchiranProperty extends ReportPropertyBase<Koga
             BreakerCatalog<KogakuKyufuTaishoshaIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
+
             pageBreakKeys) {
             @Override
             public ReportLineRecord<KogakuKyufuTaishoshaIchiranSource> occuredBreak(
@@ -144,7 +145,7 @@ public class KogakuKyufuTaishoshaIchiranProperty extends ReportPropertyBase<Koga
         /**
          * 証記載保険者番号
          */
-        証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("対象者TBL.\"shokisaiHokenshaNo\"")),
+        証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("対象者TBL.\"shoKisaiHokenshaNo\"")),
         /**
          * 被保険者番号
          */
@@ -168,7 +169,7 @@ public class KogakuKyufuTaishoshaIchiranProperty extends ReportPropertyBase<Koga
         /**
          * サービス提供年月
          */
-        サービス提供年月(new RString("0364"), new RString("listUpper_3"), new RString("対象者TBL.\"serviceTeikyoYm\"")),
+        サービス提供年月(new RString("0364"), new RString("listUpper_3"), new RString("対象者TBL.\"serviceTeikyoYM\"")),
         /**
          * 通知書番号
          */

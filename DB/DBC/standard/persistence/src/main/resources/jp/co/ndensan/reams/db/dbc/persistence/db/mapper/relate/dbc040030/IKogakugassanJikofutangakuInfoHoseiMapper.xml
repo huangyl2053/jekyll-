@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2320-060 chenyadong -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040030.IKogakugassanJikofutangakuInfoHoseiMapper">
+    <select id="get高額合算自己負担額情報" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
+            resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiEntity" fetchSize="500">
+        SELECT
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.allColumns_DbT3070KogakuGassanJikoFutanGaku" />,
+               "DbV1001HihokenshaDaicho"."shichosonCode" AS "DbV1001_shichosonCode",
+               "DbV1001HihokenshaDaicho"."shikibetsuCode" AS "DbV1001_shikibetsuCode",
+               "ShikibetsuTaisho"."kanjiShimei" AS "DbV1001_kanjiShimei",
+               "ShikibetsuTaisho"."kanaShimei" AS "DbV1001_kanaShimei",
+               "ShikibetsuTaisho"."seinengappiYMD" AS "DbV1001_seinengappiYMD",
+               "ShikibetsuTaisho"."seibetsuCode" AS "DbV1001_seibetsuCode",
+               "ShikibetsuTaisho"."yubinNo" AS "DbV1001_yubinNo",
+               "ShikibetsuTaisho"."choikiCode" AS "DbV1001_choikiCode",
+               "ShikibetsuTaisho"."gyoseikuCode" AS "DbV1001_gyoseikuCode",
+               "ShikibetsuTaisho"."juminShubetsuCode" AS "DbV1001_juminShubetsuCode",
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
+        FROM 
+               rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070KogakuGassanJikoFutanGaku"
+        LEFT JOIN   rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
+        ON     "DbV1001HihokenshaDaicho"."hihokenshaNo" = "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo"
+        LEFT JOIN
+               rgua."UaFt200FindShikibetsuTaisho"('2',#{基準年月日},true,'DB',FALSE,'','','','','','','','','','','',true,
+               '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+               true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+               ON "ShikibetsuTaisho"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"
+        LEFT JOIN rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai" AS "DbT3071KogakuGassanJikoFutanGakuMeisai"
+        ON     "DbT3071KogakuGassanJikoFutanGakuMeisai"."hihokenshaNo" = "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoNendo" = "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."hokenshaNo" = "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo" = "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo" = "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."isDeleted" = false
+        WHERE 
+               "DbT3070KogakuGassanJikoFutanGaku"."kakunin_UketoriYM" = #{確認情報受取年月}
+               AND ("DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" = ''
+                    OR "DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" IS NULL
+                   )
+               AND ("DbT3070KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" = ''
+                    OR "DbT3070KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" IS NULL
+                   )
+               AND "DbT3070KogakuGassanJikoFutanGaku"."isDeleted" = false
+        ORDER BY
+               "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo",
+               "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo",
+               "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo",
+               "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo",
+               "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo",
+               "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoM"
+    </select>
+    
+    <resultMap id="resultMap_KogakugassanJikofutangakuInfoHoseiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3070KogakuGassanJikoFutanGaku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="taishoNendo" column="dbT3070KogakuGassanJikoFutanGaku_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hokenshaNo" column="dbT3070KogakuGassanJikoFutanGaku_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="shikyuShinseishoSeiriNo" column="3070KogakuGassanJikoFutanGaku_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_rirekiNo" />
+        <id property="taishoM" column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kanjiShimei" column="DbV1001_kanjiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="kanaShimei" column="DbV1001_kanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="seinengappiYMD" column="DbV1001_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="seibetsuCode" column="DbV1001_seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="juminShubetsuCode" column="DbV1001_juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="DbV1001_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="yubinNo" column="DbV1001_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="choikiCode" column="DbV1001_choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
+        <result property="gyoseikuCode" column="DbV1001_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
+        <association property="dbt3070Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"/>
+        <association property="dbt3071Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity"/>
+    </resultMap>
+     
+    <resultMap id="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiTempEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="taishoNendo" column="taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hokenshaNo" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="shikyuShinseishoSeiriNo" column="shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo2" column="rirekiNo2" />
+        <result property="sourceArea" column="sourceArea" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaipejiArea" column="kaipejiArea" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiYMDShiteiMikeisanKubun" column="shinseiYMDShiteiMikeisanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tyushutuTaishouKubun" column="tyushutuTaishouKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rirekiNo1" column="rirekiNo1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutan_KeisanYM" column="jikoFutan_KeisanYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="hokenSeidoCode" column="hokenSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaMei" column="hokenshaMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuho_HihokenshaShoKigo" column="kokuho_HihokenshaShoKigo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaShimeiKana" column="hihokenshaShimeiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="hihokenshaShimei" column="hihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="umareYMD" column="umareYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="seibetsuCode" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shotokuKubun" column="shotokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="over70_ShotokuKubun" column="over70_ShotokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutanSeiriNo" column="jikoFutanSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koki_HokenshaNo" column="koki_HokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koki_HihokenshaNo" column="koki_HihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuho_HokenshaNo" column="kokuho_HokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuho_HihokenshaShoNo" column="kokuho_HihokenshaShoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuho_KojinNo" column="kokuho_KojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="idoKubun" column="idoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hoseiZumiSofuKubun" column="hoseiZumiSofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taishoKeisanKaishiYMD" column="taishoKeisanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoKeisanShuryoYMD" column="taishoKeisanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hihokenshaKaishiYMD" column="hihokenshaKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hihokenshaShuryoYMD" column="hihokenshaShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinseiYMD" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tounen_04_JikoFutanGaku" column="tounen_04_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_04_Uchisu_70_74JikoFutanGaku" column="tounen_04_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_04_Under_70KogakuShikyuGaku" column="tounen_04_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_04_Over_70_74KogakuShikyuGaku" column="tounen_04_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_04_Tekiyo" column="tounen_04_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_05_JikoFutanGaku" column="tounen_05_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_05_Uchisu_70_74JikoFutanGaku" column="tounen_05_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_05_Under_70KogakuShikyuGaku" column="tounen_05_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_05_Over_70_74KogakuShikyuGaku" column="tounen_05_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_05_Tekiyo" column="tounen_05_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_06_JikoFutanGaku" column="tounen_06_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_06_Uchisu_70_74JikoFutanGaku" column="tounen_06_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_06_Under_70KogakuShikyuGaku" column="tounen_06_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_06_Over_70_74KogakuShikyuGaku" column="tounen_06_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_06_Tekiyo" column="tounen_06_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_07_JikoFutanGaku" column="tounen_07_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_07_Uchisu_70_74JikoFutanGaku" column="tounen_07_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_07_Under_70KogakuShikyuGaku" column="tounen_07_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_07_Over_70_74KogakuShikyuGaku" column="tounen_07_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_07_Tekiyo" column="tounen_07_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_08_JikoFutanGaku" column="tounen_08_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_08_Uchisu_70_74JikoFutanGaku" column="tounen_08_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_08_Under_70KogakuShikyuGaku" column="tounen_08_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_08_Over_70_74KogakuShikyuGaku" column="tounen_08_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_08_Tekiyo" column="tounen_08_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_09_JikoFutanGaku" column="tounen_09_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_09_Uchisu_70_74JikoFutanGaku" column="tounen_09_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_09_Under_70KogakuShikyuGaku" column="tounen_09_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_09_Over_70_74KogakuShikyuGaku" column="tounen_09_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_09_Tekiyo" column="tounen_09_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_10_JikoFutanGaku" column="tounen_10_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_10_Uchisu_70_74JikoFutanGaku" column="tounen_10_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_10_Under_70KogakuShikyuGaku" column="tounen_10_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_10_Over_70_74KogakuShikyuGaku" column="tounen_10_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_10_Tekiyo" column="tounen_10_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_11_JikoFutanGaku" column="tounen_11_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_11_Uchisu_70_74JikoFutanGaku" column="tounen_11_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_11_Under_70KogakuShikyuGaku" column="tounen_11_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_11_Over_70_74KogakuShikyuGaku" column="tounen_11_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_11_Tekiyo" column="tounen_11_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_12_JikoFutanGaku" column="tounen_12_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_12_Uchisu_70_74JikoFutanGaku" column="tounen_12_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_12_Under_70KogakuShikyuGaku" column="tounen_12_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_12_Over_70_74KogakuShikyuGaku" column="tounen_12_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_12_Tekiyo" column="tounen_12_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_01_JikoFutanGaku" column="yokunen_01_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_01_Uchisu_70_74JikoFutanGaku" column="yokunen_01_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_01_Under_70KogakuShikyuGaku" column="yokunen_01_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_01_Over_70_74KogakuShikyuGaku" column="yokunen_01_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_01_Tekiyo" column="yokunen_01_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_02_JikoFutanGaku" column="yokunen_02_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_02_Uchisu_70_74JikoFutanGaku" column="yokunen_02_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_02_Under_70KogakuShikyuGaku" column="yokunen_02_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_02_Over_70_74KogakuShikyuGaku" column="yokunen_02_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_02_Tekiyo" column="yokunen_02_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_03_JikoFutanGaku" column="yokunen_03_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_03_Uchisu_70_74JikoFutanGaku" column="yokunen_03_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_03_Under_70KogakuShikyuGaku" column="yokunen_03_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_03_Over_70_74KogakuShikyuGaku" column="yokunen_03_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_03_Tekiyo" column="yokunen_03_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_04_JikoFutanGaku" column="yokunen_04_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_04_Uchisu_70_74JikoFutanGaku" column="yokunen_04_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_04_Under_70KogakuShikyuGaku" column="yokunen_04_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_04_Over_70_74KogakuShikyuGaku" column="yokunen_04_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_04_Tekiyo" column="yokunen_04_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_05_JikoFutanGaku" column="yokunen_05_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_05_Uchisu_70_74JikoFutanGaku" column="yokunen_05_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_05_Under_70KogakuShikyuGaku" column="yokunen_05_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_05_Over_70_74KogakuShikyuGaku" column="yokunen_05_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_05_Tekiyo" column="yokunen_05_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_06_JikoFutanGaku" column="yokunen_06_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_06_Uchisu_70_74JikoFutanGaku" column="yokunen_06_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_06_Under_70KogakuShikyuGaku" column="yokunen_06_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_06_Over_70_74KogakuShikyuGaku" column="yokunen_06_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_06_Tekiyo" column="yokunen_06_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_07_JikoFutanGaku" column="yokunen_07_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_07_Uchisu_70_74JikoFutanGaku" column="yokunen_07_Uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_07_Under_70KogakuShikyuGaku" column="yokunen_07_Under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_07_Over_70_74KogakuShikyuGaku" column="yokunen_07_Over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_07_Tekiyo" column="yokunen_07_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokei_JikoFutanGaku" column="gokei_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gokei_70_74JikoFutanGaku" column="gokei_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gokei_Under70KogakuShikyuGaku" column="gokei_Under70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gokei_70_74KogakuShikyuGaku" column="gokei_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_04_sumi_JikoFutanGaku" column="tounen_04_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_04_sumi_70_74JikoFutanGaku" column="tounen_04_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_04_sumi_under_70KogakuShikyuGaku" column="tounen_04_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_04_sumi_70_74KogakuShikyuGaku" column="tounen_04_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_04_sumi_Tekiyo" column="tounen_04_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_05_sumi_JikoFutanGaku" column="tounen_05_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_05_sumi_70_74JikoFutanGaku" column="tounen_05_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_05_sumi_under_70KogakuShikyuGaku" column="tounen_05_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_05_sumi_70_74KogakuShikyuGaku" column="tounen_05_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_05_sumi_Tekiyo" column="tounen_05_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_06_sumi_JikoFutanGaku" column="tounen_06_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_06_sumi_70_74JikoFutanGaku" column="tounen_06_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_06_sumi_under_70KogakuShikyuGaku" column="tounen_06_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_06_sumi_70_74KogakuShikyuGaku" column="tounen_06_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_06_sumi_Tekiyo" column="tounen_06_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_07_sumi_JikoFutanGaku" column="tounen_07_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_07_sumi_70_74JikoFutanGaku" column="tounen_07_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_07_sumi_under_70KogakuShikyuGaku" column="tounen_07_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_07_sumi_70_74KogakuShikyuGaku" column="tounen_07_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_07_sumi_Tekiyo" column="tounen_07_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_08_sumi_JikoFutanGaku" column="tounen_08_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_08_sumi_70_74JikoFutanGaku" column="tounen_08_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_08_sumi_under_70KogakuShikyuGaku" column="tounen_08_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_08_sumi_70_74KogakuShikyuGaku" column="tounen_08_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_08_sumi_Tekiyo" column="tounen_08_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_09_sumi_JikoFutanGaku" column="tounen_09_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_09_sumi_70_74JikoFutanGaku" column="tounen_09_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_09_sumi_under_70KogakuShikyuGaku" column="tounen_09_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_09_sumi_70_74KogakuShikyuGaku" column="tounen_09_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_09_sumi_Tekiyo" column="tounen_09_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_10_sumi_JikoFutanGaku" column="tounen_10_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_10_sumi_70_74JikoFutanGaku" column="tounen_10_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_10_sumi_under_70KogakuShikyuGaku" column="tounen_10_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_10_sumi_70_74KogakuShikyuGaku" column="tounen_10_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_10_sumi_Tekiyo" column="tounen_10_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_11_sumi_JikoFutanGaku" column="tounen_11_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_11_sumi_70_74JikoFutanGaku" column="tounen_11_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_11_sumi_under_70KogakuShikyuGaku" column="tounen_11_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_11_sumi_70_74KogakuShikyuGaku" column="tounen_11_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_11_sumi_Tekiyo" column="tounen_11_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tounen_12_sumi_JikoFutanGaku" column="tounen_12_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_12_sumi_70_74JikoFutanGaku" column="tounen_12_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_12_sumi_under_70KogakuShikyuGaku" column="tounen_12_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_12_sumi_70_74KogakuShikyuGaku" column="tounen_12_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tounen_12_sumi_Tekiyo" column="tounen_12_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_01_sumi_JikoFutanGaku" column="yokunen_01_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_01_sumi_70_74JikoFutanGaku" column="yokunen_01_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_01_sumi_under_70KogakuShikyuGaku" column="yokunen_01_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_01_sumi_70_74KogakuShikyuGaku" column="yokunen_01_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_01_sumi_Tekiyo" column="yokunen_01_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_02_sumi_JikoFutanGaku" column="yokunen_02_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_02_sumi_70_74JikoFutanGaku" column="yokunen_02_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_02_sumi_under_70KogakuShikyuGaku" column="yokunen_02_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_02_sumi_70_74KogakuShikyuGaku" column="yokunen_02_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_02_sumi_Tekiyo" column="yokunen_02_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_03_sumi_JikoFutanGaku" column="yokunen_03_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_03_sumi_70_74JikoFutanGaku" column="yokunen_03_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_03_sumi_under_70KogakuShikyuGaku" column="yokunen_03_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_03_sumi_70_74KogakuShikyuGaku" column="yokunen_03_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_03_sumi_Tekiyo" column="yokunen_03_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_04_sumi_JikoFutanGaku" column="yokunen_04_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_04_sumi_70_74JikoFutanGaku" column="yokunen_04_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_04_sumi_under_70KogakuShikyuGaku" column="yokunen_04_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_04_sumi_70_74KogakuShikyuGaku" column="yokunen_04_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_04_sumi_Tekiyo" column="yokunen_04_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_05_sumi_JikoFutanGaku" column="yokunen_05_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_05_sumi_70_74JikoFutanGaku" column="yokunen_05_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_05_sumi_under_70KogakuShikyuGaku" column="yokunen_05_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_05_sumi_70_74KogakuShikyuGaku" column="yokunen_05_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_05_sumi_Tekiyo" column="yokunen_05_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_06_sumi_JikoFutanGaku" column="yokunen_06_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_06_sumi_70_74JikoFutanGaku" column="yokunen_06_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_06_sumi_under_70KogakuShikyuGaku" column="yokunen_06_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_06_sumi_70_74KogakuShikyuGaku" column="yokunen_06_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_06_sumi_Tekiyo" column="yokunen_06_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yokunen_07_sumi_JikoFutanGaku" column="yokunen_07_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_07_sumi_70_74JikoFutanGaku" column="yokunen_07_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_07_sumi_under_70KogakuShikyuGaku" column="yokunen_07_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_07_sumi_70_74KogakuShikyuGaku" column="yokunen_07_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="yokunen_07_sumi_Tekiyo" column="yokunen_07_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sumi_Gokei_JikoFutanGaku" column="sumi_Gokei_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sumi_Gokei_70_74JikoFutanGaku" column="sumi_Gokei_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sumi_Gokei_Under70KogakuShikyuGaku" column="sumi_Gokei_Under70" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sumi_Gokei_70_74KogakuShikyuGaku" column="sumi_Gokei_70_74" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="atesakiShimei" column="atesakiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="atesakiYubinNo" column="atesakiYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="atesakiJusho" column="atesakiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="madoguchi_TaishoshaHanteiCode" column="madoguchi_TaishoshaHanteiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiBasho" column="shiharaiBasho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikaraiKaishiYMD" column="shikaraiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shiharaiShuryoYMD" column="shiharaiShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikaraiKaishiYMD_Yoobi" column="shikaraiKaishiYMD_Yoobi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiShuryoYMD_Yoobi" column="shiharaiShuryoYMD_Yoobi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiKaishiTime" column="shiharaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiharaiShuryoTime" column="shiharaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="biko" column="biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dataSakuseiKubun" column="dataSakuseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kakunin_UketoriYM" column="kakunin_UketoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="hoseiZumi_SofuYM" column="hoseiZumi_SofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="shomeisho_UketoriYM" column="shomeisho_UketoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="saisoFlag" column="saisoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sofuTaishoGaiFlag" column="sofuTaishoGaiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutanKeisanYMD" column="jikoFutanKeisanYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shomeiShoSakuseiYMD" column="shomeiShoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="koki_KokuhoShoriKubun" column="koki_KokuhoShoriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutangakuShomeishoRealHakkoFlag" column="jikoFutangakuFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="batchHoseiJissiYMD" column="batchHoseiJissiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="realHoseiJissiYMD" column="realHoseiJissiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="juminShubetsuCode" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="choikiCode" column="choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
+        <result property="gyoseikuCode" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
+        <result property="ichiranBiko" column="ichiranBiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutanGakuHoseiJissi" column="jikoFutanGakuHoseiJissi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kogakuShikyuGakuGakuHoseiJissi" column="kogakuShikyuGakuGakuHoseiJissi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichiranKakuninKubun" column="ichiranKakuninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichiranKakuninKubun2" column="ichiranKakuninKubun2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+    </resultMap>
+    
+    <select id="select中間DB" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
+            resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity" fetchSize="500">
+        SELECT 
+               "KogakugassanJikofutangakuInfoHoseiTemp".*
+        FROM   
+               "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
+        WHERE  
+               "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo" = #{hihokenshaNo}
+               AND "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo" = #{taishoNendo}
+               AND "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo" = #{hokenshaNo}
+               AND "KogakugassanJikofutangakuInfoHoseiTemp"."shikyuShinseishoSeiriNo" = #{shikyuShinseishoSeiriNo}
+               AND "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2" = #{rirekiNo}
+    </select>
+    
+    
+    <delete id="delete中間DB">
+        DELETE FROM "KogakugassanJikofutangakuInfoHoseiTemp"
+    </delete>
+    
+    
+    <select id="get高額合算自己負担額明細データ" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
+            resultMap="resultMap_KogakugassanJikofutangakuInfoHosei" fetchSize="500">
+        SELECT "KogakugassanJikofutangakuInfoHoseiTemp".*,
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
+        FROM   "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
+        LEFT JOIN ( SELECT * FROM rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai"
+                    WHERE 
+                           rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai"."isDeleted" = false
+                   )AS "DbT3071KogakuGassanJikoFutanGakuMeisai"                    
+        ON     "DbT3071KogakuGassanJikoFutanGakuMeisai"."hihokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoNendo" = "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."hokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."shikyuShinseishoSeiriNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2"
+        WHERE  "DbT3071KogakuGassanJikoFutanGakuMeisai"."isDeleted" = false
+        ORDER BY
+               "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo",
+               "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo",
+               "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo",
+               "KogakugassanJikofutangakuInfoHoseiTemp"."shikyuShinseishoSeiriNo",
+               "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2",
+               "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoM"
+    </select>
+    
+    <resultMap id="resultMap_KogakugassanJikofutangakuInfoHosei" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="taishoNendo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hokenshaNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="shikyuShinseishoSeiriNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_rirekiNo" />
+        <id property="taishoM" column="dbT3071KogakuGassanJikoFutanGakuMeisai_taishoM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="中間DBEntity" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
+        <association property="dbt3071Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity"/>
+    </resultMap>
+     <select id="get中間DB" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
+            resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity" fetchSize="500">
+        SELECT 
+               <include refid="allColumns_KogakugassanJikofutangakuInfoHoseiTemp" />
+        FROM   
+               "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
+        <if test="改頁出力順 != null">
+            ORDER BY
+             ${改頁出力順}
+       </if>
+    </select>
+    
+    <select id="get負担額補正対象者データ" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
+            resultMap="resultMap_FutangakuTashoshaEntity" fetchSize="500">
+        SELECT 
+               "FutangakuTaishoshaTemp".*
+        FROM   
+               "FutangakuTaishoshaTemp" AS "FutangakuTaishoshaTemp"
+        <if test="改頁出力順 != null">
+            ORDER BY
+             ${改頁出力順}
+       </if>
+    </select>
+    
+    <resultMap id="resultMap_FutangakuTashoshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.FutangakuTashoshaEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="taishoNendo" column="taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hokenshaNo" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="shikyuShinseishoSeiriNo" column="shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo2" column="rirekiNo2" />
+        <result property="sourceKey" column="sourceKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sourceKeName" column="sourceKeName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaipejiKey" column="kaipejiKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaipejiKeyName" column="kaipejiKeyName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenSeidoCode" column="hokenSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaMei" column="hokenshaMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuho_HihokenshaShoKigo" column="kokuho_HihokenshaShoKigo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaShimeiKana" column="hihokenshaShimeiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="hihokenshaShimei" column="hihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="umareYMD" column="umareYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="seibetsuCode" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="taishoKeisanKaishiYMD" column="taishoKeisanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoKeisanShuryoYMD" column="taishoKeisanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hihokenshaKaishiYMD" column="hihokenshaKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hihokenshaShuryoYMD" column="hihokenshaShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinseiYMD" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="gokei_JikoFutanGaku" column="gokei_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gokei_70_74JikoFutanGaku" column="gokei_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gokei_Under70KogakuShikyuGaku" column="gokei_Under70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gokei_70_74KogakuShikyuGaku" column="gokei_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sumi_Gokei_JikoFutanGaku" column="sumi_Gokei_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sumi_Gokei_70_74JikoFutanGaku" column="sumi_Gokei_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sumi_Gokei_Under70KogakuShikyuGaku" column="sumi_Gokei_Under70" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sumi_Gokei_70_74KogakuShikyuGaku" column="sumi_Gokei_70_74" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="dataSakuseiKubun" column="dataSakuseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kakunin_UketoriYM" column="kakunin_UketoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="hoseiZumi_SofuYM" column="hoseiZumi_SofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="shomeisho_UketoriYM" column="shomeisho_UketoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="saisoFlag" column="saisoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sofuTaishoGaiFlag" column="sofuTaishoGaiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutanKeisanYMD" column="jikoFutanKeisanYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shomeiShoSakuseiYMD" column="shomeiShoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jikoFutangakuShomeishoRealHakkoFlag" column="jikoFutangakuFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="batchHoseiJissiYMD" column="batchHoseiJissiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="realHoseiJissiYMD" column="realHoseiJissiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="juminShubetsuCode" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="choikiCode" column="choikiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
+        <result property="gyoseikuCode" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
+        <result property="ichiranBiko" column="ichiranBiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutanGakuHoseiJissi" column="jikoFutanGakuHoseiJissi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kogakuShikyuGakuGakuHoseiJissi" column="kogakuShikyuGakuGakuHoseiJissi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichiranKakuninKubun" column="ichiranKakuninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichiranKakuninKubun2" column="ichiranKakuninKubun2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+    </resultMap>
+    
+     <select id="select高額合算自己負担額データ" resultOrdered="true"
+            resultMap="resultMap_高額合算自己負担額" fetchSize="500">
+        SELECT  <include refid="allColumns_KogakugassanJikofutangakuInfoHoseiTemp" />,
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.allColumns_DbT3070KogakuGassanJikoFutanGaku" />
+        FROM   "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
+        LEFT JOIN rgdb."DbT3070KogakuGassanJikoFutanGaku" AS "DbT3070KogakuGassanJikoFutanGaku"
+        ON     "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo"
+        AND    "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo" = "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo"
+        AND    "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo"
+        AND    "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."shikyuShinseishoSeiriNo"
+        AND    "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2"
+        WHERE  "DbT3070KogakuGassanJikoFutanGaku"."isDeleted" = false
+    </select>
+    
+     <resultMap id="resultMap_高額合算自己負担額" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakuGassanUpdateEntity" autoMapping="true">
+         <id column="hihokenshaNo"/>
+         <id column="taishoNendo"/>
+         <id column="hokenshaNo"/>
+         <id column="shikyuShinseishoSeiriNo"/>
+         <id column="rirekiNo2"/>
+         <association property="中間DBEntity" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
+        <association property="高額合算自己負担額" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3070KogakuGassanJikoFutanGakuMapper.ResultMap_DbT3070KogakuGassanJikoFutanGakuEntity"/>
+    </resultMap>
+    
+  <select id="select高額合算自己負担額明細データ" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc040030.KogakugassanJikofutangakuMybatisParameter"
+            resultMap="resultMap_高額合算自己負担額明細" fetchSize="500">
+        SELECT  <include refid="allColumns_KogakugassanJikofutangakuInfoHoseiTemp" />,
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.allColumns_DbT3071KogakuGassanJikoFutanGakuMeisai" />
+        FROM   "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
+        LEFT JOIN ( SELECT * FROM rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai"
+                    WHERE 
+                           rgdb."DbT3071KogakuGassanJikoFutanGakuMeisai"."isDeleted" = false
+                   )AS "DbT3071KogakuGassanJikoFutanGakuMeisai"                    
+        ON     "DbT3071KogakuGassanJikoFutanGakuMeisai"."hihokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."taishoNendo" = "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."hokenshaNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."shikyuShinseishoSeiriNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."shikyuShinseishoSeiriNo"
+        AND    "DbT3071KogakuGassanJikoFutanGakuMeisai"."rirekiNo" = "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2"
+        WHERE  "DbT3071KogakuGassanJikoFutanGakuMeisai"."isDeleted" = false
+    </select>
+    
+    <resultMap id="resultMap_高額合算自己負担額明細" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakuGassanUpdateEntity" autoMapping="true">
+          <id column="hihokenshaNo"/>
+         <id column="taishoNendo"/>
+         <id column="hokenshaNo"/>
+         <id column="shikyuShinseishoSeiriNo"/>
+         <id column="rirekiNo2"/>
+        <association property="中間DBEntity" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity"/>
+        <association property="高額合算自己負担額明細" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3071KogakuGassanJikoFutanGakuMeisaiMapper.ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiEntity"/>
+    </resultMap>
+    <sql id="allColumns_KogakugassanJikofutangakuInfoHoseiTemp">
+         "KogakugassanJikofutangakuInfoHoseiTemp"."sourceArea" as "sourceArea",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kaipejiArea" as "kaipejiArea",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shinseiYMDShiteiMikeisanKubun" as "shinseiYMDShiteiMikeisanKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tyushutuTaishouKubun" as "tyushutuTaishouKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."seiriNo" as "seiriNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo1" as "rirekiNo1",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."jikoFutan_KeisanYM" as "jikoFutan_KeisanYM",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo" as "hihokenshaNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo" as "taishoNendo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo" as "hokenshaNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shikyuShinseishoSeiriNo" as "shikyuShinseishoSeiriNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."rirekiNo2" as "rirekiNo2",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hokenSeidoCode" as "hokenSeidoCode",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaMei" as "hokenshaMei",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kokuho_HihokenshaShoKigo" as "kokuho_HihokenshaShoKigo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaShimeiKana" as "hihokenshaShimeiKana",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaShimei" as "hihokenshaShimei",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."umareYMD" as "umareYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."seibetsuCode" as "seibetsuCode",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shotokuKubun" as "shotokuKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."over70_ShotokuKubun" as "over70_ShotokuKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."jikoFutanSeiriNo" as "jikoFutanSeiriNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."koki_HokenshaNo" as "koki_HokenshaNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."koki_HihokenshaNo" as "koki_HihokenshaNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kokuho_HokenshaNo" as "kokuho_HokenshaNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kokuho_HihokenshaShoNo" as "kokuho_HihokenshaShoNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kokuho_KojinNo" as "kokuho_KojinNo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."idoKubun" as "idoKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hoseiZumiSofuKubun" as "hoseiZumiSofuKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."taishoKeisanKaishiYMD" as "taishoKeisanKaishiYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."taishoKeisanShuryoYMD" as "taishoKeisanShuryoYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaKaishiYMD" as "hihokenshaKaishiYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaShuryoYMD" as "hihokenshaShuryoYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shinseiYMD" as "shinseiYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_JikoFutanGaku" as "tounen_04_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_Uchisu_70_74JikoFutanGaku" as "tounen_04_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_Under_70KogakuShikyuGaku" as "tounen_04_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_Over_70_74KogakuShikyuGaku" as "tounen_04_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_Tekiyo" as "tounen_04_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_JikoFutanGaku" as "tounen_05_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_Uchisu_70_74JikoFutanGaku" as "tounen_05_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_Under_70KogakuShikyuGaku" as "tounen_05_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_Over_70_74KogakuShikyuGaku" as "tounen_05_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_Tekiyo" as "tounen_05_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_JikoFutanGaku" as "tounen_06_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_Uchisu_70_74JikoFutanGaku" as "tounen_06_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_Under_70KogakuShikyuGaku" as "tounen_06_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_Over_70_74KogakuShikyuGaku" as "tounen_06_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_Tekiyo" as "tounen_06_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_JikoFutanGaku" as "tounen_07_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_Uchisu_70_74JikoFutanGaku" as "tounen_07_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_Under_70KogakuShikyuGaku" as "tounen_07_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_Over_70_74KogakuShikyuGaku" as "tounen_07_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_Tekiyo" as "tounen_07_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_JikoFutanGaku" as "tounen_08_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_Uchisu_70_74JikoFutanGaku" as "tounen_08_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_Under_70KogakuShikyuGaku" as "tounen_08_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_Over_70_74KogakuShikyuGaku" as "tounen_08_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_Tekiyo" as "tounen_08_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_JikoFutanGaku" as "tounen_09_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_Uchisu_70_74JikoFutanGaku" as "tounen_09_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_Under_70KogakuShikyuGaku" as "tounen_09_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_Over_70_74KogakuShikyuGaku" as "tounen_09_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_Tekiyo" as "tounen_09_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_JikoFutanGaku" as "tounen_10_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_Uchisu_70_74JikoFutanGaku" as "tounen_10_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_Under_70KogakuShikyuGaku" as "tounen_10_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_Over_70_74KogakuShikyuGaku" as "tounen_10_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_Tekiyo" as "tounen_10_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_JikoFutanGaku" as "tounen_11_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_Uchisu_70_74JikoFutanGaku" as "tounen_11_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_Under_70KogakuShikyuGaku" as "tounen_11_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_Over_70_74KogakuShikyuGaku" as "tounen_11_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_Tekiyo" as "tounen_11_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_JikoFutanGaku" as "tounen_12_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_Uchisu_70_74JikoFutanGaku" as "tounen_12_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_Under_70KogakuShikyuGaku" as "tounen_12_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_Over_70_74KogakuShikyuGaku" as "tounen_12_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_Tekiyo" as "tounen_12_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_Uchisu_70_74JikoFutanGaku" as "yokunen_01_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_JikoFutanGaku" as "yokunen_01_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_Under_70KogakuShikyuGaku" as "yokunen_01_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_Over_70_74KogakuShikyuGaku" as "tounen_07_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_Tekiyo" as "yokunen_01_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_JikoFutanGaku" as "yokunen_02_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_Uchisu_70_74JikoFutanGaku" as "yokunen_02_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_Under_70KogakuShikyuGaku" as "yokunen_02_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_Over_70_74KogakuShikyuGaku" as "yokunen_02_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_Tekiyo" as "yokunen_02_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_JikoFutanGaku" as "yokunen_03_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_Uchisu_70_74JikoFutanGaku" as "yokunen_03_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_Under_70KogakuShikyuGaku" as "yokunen_03_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_Over_70_74KogakuShikyuGaku" as "yokunen_03_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_Tekiyo" as "yokunen_03_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_JikoFutanGaku" as "yokunen_04_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_Uchisu_70_74JikoFutanGaku" as "yokunen_04_Uchisu_70_74JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_Under_70KogakuShikyuGaku" as "yokunen_04_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_Over_70_74KogakuShikyuGaku" as "yokunen_04_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_Tekiyo" as "yokunen_04_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_JikoFutanGaku" as "yokunen_05_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_Uchisu_70_74JikoFutanGaku" as "yokunen_05_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_Under_70KogakuShikyuGaku" as "yokunen_05_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_Over_70_74KogakuShikyuGaku" as "yokunen_05_Over_70_74KogakuShikyuGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_Tekiyo" as "yokunen_05_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_JikoFutanGaku" as "yokunen_06_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_Uchisu_70_74JikoFutanGaku" as "yokunen_06_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_Under_70KogakuShikyuGaku" as "yokunen_06_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_Over_70_74KogakuShikyuGaku" as "yokunen_06_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_Tekiyo" as "yokunen_06_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_JikoFutanGaku" as "yokunen_07_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_Uchisu_70_74JikoFutanGaku" as "yokunen_07_Uchisu_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_Under_70KogakuShikyuGaku" as "yokunen_07_Under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_Over_70_74KogakuShikyuGaku" as "yokunen_07_Over_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_Tekiyo" as "yokunen_07_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."gokei_JikoFutanGaku" as "gokei_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."gokei_70_74JikoFutanGaku" as "gokei_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."gokei_Under70KogakuShikyuGaku" as "gokei_Under70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."gokei_70_74KogakuShikyuGaku" as "gokei_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_sumi_JikoFutanGaku" as "tounen_04_sumi_JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_sumi_70_74JikoFutanGaku" as "tounen_04_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_sumi_under_70KogakuShikyuGaku" as "tounen_04_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_sumi_70_74KogakuShikyuGaku" as "tounen_04_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_04_sumi_Tekiyo" as "tounen_04_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_sumi_JikoFutanGaku" as "tounen_05_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_sumi_70_74JikoFutanGaku" as "tounen_05_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_sumi_under_70KogakuShikyuGaku" as "tounen_05_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_sumi_70_74KogakuShikyuGaku" as "tounen_05_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_05_sumi_Tekiyo" as "tounen_05_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_sumi_JikoFutanGaku" as "tounen_06_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_sumi_70_74JikoFutanGaku" as "tounen_06_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_sumi_under_70KogakuShikyuGaku" as "tounen_06_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_sumi_70_74KogakuShikyuGaku" as "tounen_06_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_06_sumi_Tekiyo" as "tounen_06_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_sumi_JikoFutanGaku" as "tounen_07_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_sumi_70_74JikoFutanGaku" as "tounen_07_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_sumi_under_70KogakuShikyuGaku" as "tounen_07_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_sumi_70_74KogakuShikyuGaku" as "tounen_07_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_07_sumi_Tekiyo" as "tounen_07_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_sumi_JikoFutanGaku" as "tounen_08_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_sumi_70_74JikoFutanGaku" as "tounen_08_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_sumi_under_70KogakuShikyuGaku" as "tounen_08_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_sumi_70_74KogakuShikyuGaku" as "tounen_08_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_08_sumi_Tekiyo" as "tounen_08_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_sumi_JikoFutanGaku" as "tounen_09_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_sumi_70_74JikoFutanGaku" as "tounen_09_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_sumi_under_70KogakuShikyuGaku" as "tounen_09_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_sumi_70_74KogakuShikyuGaku" as "tounen_09_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_09_sumi_Tekiyo" as "tounen_09_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_sumi_JikoFutanGaku" as "tounen_10_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_sumi_70_74JikoFutanGaku" as "tounen_10_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_sumi_under_70KogakuShikyuGaku" as "tounen_10_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_sumi_70_74KogakuShikyuGaku" as "tounen_10_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_10_sumi_Tekiyo" as "tounen_10_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_sumi_JikoFutanGaku" as "tounen_11_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_sumi_70_74JikoFutanGaku" as "tounen_11_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_sumi_under_70KogakuShikyuGaku" as "tounen_11_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_sumi_70_74KogakuShikyuGaku" as "tounen_11_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_11_sumi_Tekiyo" as "tounen_11_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_sumi_JikoFutanGaku" as "tounen_12_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_sumi_70_74JikoFutanGaku" as "tounen_12_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_sumi_under_70KogakuShikyuGaku" as "tounen_12_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_sumi_70_74KogakuShikyuGaku" as "tounen_12_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."tounen_12_sumi_Tekiyo" as "tounen_12_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_sumi_JikoFutanGaku" as "yokunen_01_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_sumi_70_74JikoFutanGaku" as "yokunen_01_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_sumi_under_70KogakuShikyuGaku" as "yokunen_01_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_sumi_70_74KogakuShikyuGaku" as "yokunen_01_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_01_sumi_Tekiyo" as "yokunen_01_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_sumi_JikoFutanGaku" as "yokunen_02_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_sumi_70_74JikoFutanGaku" as "yokunen_02_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_sumi_under_70KogakuShikyuGaku" as "yokunen_02_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_sumi_70_74KogakuShikyuGaku" as "yokunen_02_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_02_sumi_Tekiyo" as "yokunen_02_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_sumi_JikoFutanGaku" as "yokunen_03_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_sumi_70_74JikoFutanGaku" as "yokunen_03_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_sumi_under_70KogakuShikyuGaku" as "yokunen_03_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_sumi_70_74KogakuShikyuGaku" as "yokunen_03_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_03_sumi_Tekiyo" as "yokunen_03_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_sumi_JikoFutanGaku" as "yokunen_04_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_sumi_70_74JikoFutanGaku" as "yokunen_04_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_sumi_under_70KogakuShikyuGaku" as "yokunen_04_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_sumi_70_74KogakuShikyuGaku" as "yokunen_04_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_04_sumi_Tekiyo" as "yokunen_04_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_sumi_JikoFutanGaku" as "yokunen_05_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_sumi_70_74JikoFutanGaku" as "yokunen_05_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_sumi_under_70KogakuShikyuGaku" as "yokunen_05_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_sumi_70_74KogakuShikyuGaku" as "yokunen_05_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_05_sumi_Tekiyo" as "yokunen_05_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_sumi_JikoFutanGaku" as "yokunen_06_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_sumi_70_74JikoFutanGaku" as "yokunen_06_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_sumi_under_70KogakuShikyuGaku" as "yokunen_06_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_sumi_70_74KogakuShikyuGaku" as "yokunen_06_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_06_sumi_Tekiyo" as "yokunen_06_sumi_Tekiyo",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_sumi_JikoFutanGaku" as "yokunen_07_sumi_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_sumi_70_74JikoFutanGaku" as "yokunen_07_sumi_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_sumi_under_70KogakuShikyuGaku" as "yokunen_07_sumi_under_70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_sumi_70_74KogakuShikyuGaku" as "yokunen_07_sumi_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."yokunen_07_sumi_Tekiyo" as "yokunen_07_sumi_Tekiyo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."sumi_Gokei_JikoFutanGaku" as "sumi_Gokei_JikoFutanGaku",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."sumi_Gokei_70_74JikoFutanGaku" as "sumi_Gokei_70_74JikoFutanGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."sumi_Gokei_Under70KogakuShikyuGaku" as "sumi_Gokei_Under70KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."sumi_Gokei_70_74KogakuShikyuGaku" as "sumi_Gokei_70_74KogakuShikyuGaku",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."atesakiShimei" as "atesakiShimei",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."atesakiYubinNo" as "atesakiYubinNo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."atesakiJusho" as "atesakiJusho",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."madoguchi_TaishoshaHanteiCode" as "madoguchi_TaishoshaHanteiCode",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shiharaiBasho" as "shiharaiBasho",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shikaraiKaishiYMD" as "shikaraiKaishiYMD",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."shiharaiShuryoYMD" as "shiharaiShuryoYMD",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."shikaraiKaishiYMD_Yoobi" as "shikaraiKaishiYMD_Yoobi",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shiharaiShuryoYMD_Yoobi" as "shiharaiShuryoYMD_Yoobi",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shiharaiKaishiTime" as "shiharaiKaishiTime",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shiharaiShuryoTime" as "shiharaiShuryoTime",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."biko" as "biko",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."dataSakuseiKubun" as "dataSakuseiKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kakunin_UketoriYM" as "kakunin_UketoriYM",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."hoseiZumi_SofuYM" as "hoseiZumi_SofuYM",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shomeisho_UketoriYM" as "shomeisho_UketoriYM",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."saisoFlag" as "saisoFlag",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."sofuTaishoGaiFlag" as "sofuTaishoGaiFlag",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."jikoFutanKeisanYMD" as "jikoFutanKeisanYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shomeiShoSakuseiYMD" as "shomeiShoSakuseiYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."koki_KokuhoShoriKubun" as "koki_KokuhoShoriKubun",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."jikoFutangakuShomeishoRealHakkoFlag" as "jikoFutangakuShomeishoRealHakkoFlag",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."batchHoseiJissiYMD" as "batchHoseiJissiYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."realHoseiJissiYMD" as "realHoseiJissiYMD",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."juminShubetsuCode" as "juminShubetsuCode",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."shichosonCode" as "shichosonCode",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."yubinNo" as "yubinNo",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."choikiCode" as "choikiCode",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."gyoseikuCode" as "gyoseikuCode",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."jikoFutanGakuHoseiJissi" as "jikoFutanGakuHoseiJissi",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."kogakuShikyuGakuGakuHoseiJissi" as "kogakuShikyuGakuGakuHoseiJissi",
+        "KogakugassanJikofutangakuInfoHoseiTemp"."ichiranKakuninKubun" as "ichiranKakuninKubun",
+         "KogakugassanJikofutangakuInfoHoseiTemp"."ichiranKakuninKubun2" as "ichiranKakuninKubun2"
+        
+    </sql>
+</mapper>

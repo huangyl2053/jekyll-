@@ -33,25 +33,27 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiHeaderEditor implements IJigyoK
 
     @Override
     public JigyoKogakuShikyuFushikyuKetteTsuchiSource edit(JigyoKogakuShikyuFushikyuKetteTsuchiSource source) {
-        if (entity.getテスト出力フラグ().equals(TRUE)) {
-            source.testPrint = テスト印刷;
+        if (null != entity) {
+
+            if (TRUE.equals(entity.getテスト出力フラグ())) {
+                source.testPrint = テスト印刷;
+            } else if (FLASE.equals(entity.getテスト出力フラグ())) {
+                source.testPrint = null;
+            }
+            source.printTimeStamp = entity.get作成日時();
+            source.hokenshaNo = entity.get市町村コード();
+            source.hokenshaName = entity.get市町村名称();
+            source.shutsuryokujun1 = entity.get並び順１();
+            source.shutsuryokujun2 = entity.get並び順２();
+            source.shutsuryokujun3 = entity.get並び順３();
+            source.shutsuryokujun4 = entity.get並び順４();
+            source.shutsuryokujun5 = entity.get並び順５();
+            source.kaipage1 = entity.get改頁１();
+            source.kaipage2 = entity.get改頁２();
+            source.kaipage3 = entity.get改頁３();
+            source.kaipage4 = entity.get改頁４();
+            source.kaipage5 = entity.get改頁５();
         }
-        if (entity.getテスト出力フラグ().equals(FLASE)) {
-            source.testPrint = null;
-        }
-        source.printTimeStamp = entity.get作成日時();
-        source.hokenshaNo = entity.get市町村コード();
-        source.hokenshaName = entity.get市町村名称();
-        source.shutsuryokujun1 = entity.get並び順１();
-        source.shutsuryokujun1 = entity.get並び順２();
-        source.shutsuryokujun1 = entity.get並び順３();
-        source.shutsuryokujun1 = entity.get並び順４();
-        source.shutsuryokujun1 = entity.get並び順５();
-        source.kaipage1 = entity.get改頁１();
-        source.kaipage2 = entity.get改頁２();
-        source.kaipage3 = entity.get改頁３();
-        source.kaipage4 = entity.get改頁４();
-        source.kaipage5 = entity.get改頁５();
         return source;
     }
 }

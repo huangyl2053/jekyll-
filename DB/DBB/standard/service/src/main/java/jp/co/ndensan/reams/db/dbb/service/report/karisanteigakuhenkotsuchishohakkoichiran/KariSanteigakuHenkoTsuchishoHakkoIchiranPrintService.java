@@ -6,14 +6,10 @@
 package jp.co.ndensan.reams.db.dbb.service.report.karisanteigakuhenkotsuchishohakkoichiran;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty;
-import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200014.KariSanteigakuHenkoTsuchishoHakkoIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200014.KariSanteigakuHenkoTsuchishoHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200014.KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -80,49 +76,6 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranPrintService {
 
             KariSanteigakuHenkoTsuchishoHakkoIchiranReport report = new KariSanteigakuHenkoTsuchishoHakkoIchiranReport(editedDataList,
                     出力順１, 出力順２, 出力順３, 出力順４, 出力順５, 帳票作成日時);
-            report.writeBy(reportSourceWriter);
-        }
-    }
-
-    /**
-     * 帳票「特別徴収平準化_仮算定額変更通知書_発行一覧表」<br>
-     * （DBB200004_TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiran.rse）を出力します。
-     *
-     * @param editedDataList 編集後仮算定通知書共通情報entityのリスト
-     * @param outputOrder outputOrder
-     * @param 帳票作成日時 帳票作成日時
-     * @return SourceDataCollection SourceDataCollection
-     */
-    public SourceDataCollection print特別徴収平準化_仮算定額変更通知書_発行一覧表(List<EditedKariSanteiTsuchiShoKyotsu> editedDataList,
-            IOutputOrder outputOrder, RDateTime 帳票作成日時) {
-
-        SourceDataCollection collection;
-        try (ReportManager reportManager = new ReportManager()) {
-            print特別徴収平準化_仮算定額変更通知書_発行一覧表(editedDataList, outputOrder, 帳票作成日時, reportManager);
-            collection = reportManager.publish();
-        }
-        return collection;
-    }
-
-    /**
-     * 帳票「特別徴収平準化_仮算定額変更通知書_発行一覧表」<br>
-     * （DBB200004_TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiran.rse）を出力します。
-     *
-     * @param editedDataList 編集後仮算定通知書共通情報entityのリスト
-     * @param outputOrder outputOrder
-     * @param 帳票作成日時 帳票作成日時
-     * @param reportManager reportManager
-     */
-    public void print特別徴収平準化_仮算定額変更通知書_発行一覧表(List<EditedKariSanteiTsuchiShoKyotsu> editedDataList,
-            IOutputOrder outputOrder, RDateTime 帳票作成日時, ReportManager reportManager) {
-
-        TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty property
-                = new TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty(outputOrder);
-        try (ReportAssembler<TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource> assembler = createAssembler(property, reportManager)) {
-            ReportSourceWriter<TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-
-            TokuChoHeijunkaKariSanteigakuHakkoIchiranReport report = new TokuChoHeijunkaKariSanteigakuHakkoIchiranReport(editedDataList,
-                    outputOrder, 帳票作成日時);
             report.writeBy(reportSourceWriter);
         }
     }

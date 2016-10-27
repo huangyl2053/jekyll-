@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>jp.co.ndensan.reams.db</groupId>
@@ -45,10 +45,13 @@
         <!-- 公開系 -->
         <jp.co.ndensan.reams.urVersion>1.13.2</jp.co.ndensan.reams.urVersion>
         <jp.co.ndensan.reams.uaxVersion>1.12.0</jp.co.ndensan.reams.uaxVersion>
-        <jp.co.ndensan.reams.uexVersion>1.12.0</jp.co.ndensan.reams.uexVersion>
-        <jp.co.ndensan.reams.uxxVersion>1.12.0</jp.co.ndensan.reams.uxxVersion>
+        <jp.co.ndensan.reams.uexVersion>1.12.2</jp.co.ndensan.reams.uexVersion>
+        <jp.co.ndensan.reams.uxxVersion>1.13.2</jp.co.ndensan.reams.uxxVersion>
         <jp.co.ndensan.reams.caxVersion>1.13.1</jp.co.ndensan.reams.caxVersion>
         <jp.co.ndensan.reams.aaxVersion>1.12.0</jp.co.ndensan.reams.aaxVersion>
+        <jp.co.ndensan.reams.dzxVersion>1.12.0</jp.co.ndensan.reams.dzxVersion>
+        <jp.co.ndensan.reams.uaVersion>1.12.3</jp.co.ndensan.reams.uaVersion>
+        <jp.co.ndensan.reams.bbVersion>1.12.1</jp.co.ndensan.reams.bbVersion>
         <!-- other -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -167,6 +170,11 @@
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+                <artifactId>UxxBatchController</artifactId>
+                <version>${jp.co.ndensan.reams.uxxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
                 <artifactId>UxxService</artifactId>
                 <version>${jp.co.ndensan.reams.uxxVersion}</version>
             </dependency>
@@ -196,6 +204,12 @@
                 <version>${jp.co.ndensan.reams.caxVersion}</version>
             </dependency>
             <dependency>
+                <groupId>jp.co.ndensan.reams.ca.cax</groupId>
+                <artifactId>CaxDivController</artifactId>
+                <version>${jp.co.ndensan.reams.caxVersion}</version>
+                <classifier>classes</classifier>
+            </dependency>
+            <dependency>
                 <groupId>jp.co.ndensan.reams.aa.aax</groupId>
                 <artifactId>AaxBusiness</artifactId>
                 <version>${jp.co.ndensan.reams.aaxVersion}</version>
@@ -204,6 +218,22 @@
                 <groupId>jp.co.ndensan.reams.aa.aax</groupId>
                 <artifactId>AaxService</artifactId>
                 <version>${jp.co.ndensan.reams.aaxVersion}</version>
+            </dependency>
+            <!-- DZX -->
+            <dependency>
+                <groupId>jp.co.ndensan.reams.dz.dzx</groupId>
+                <artifactId>DzxDefinition</artifactId>
+                <version>${jp.co.ndensan.reams.dzxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.dz.dzx</groupId>
+                <artifactId>DzxEntity</artifactId>
+                <version>${jp.co.ndensan.reams.dzxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.dz.dzx</groupId>
+                <artifactId>DzxBusiness</artifactId>
+                <version>${jp.co.ndensan.reams.dzxVersion}</version>
             </dependency>
             <!-- ツール -->
             <dependency>
@@ -215,123 +245,43 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    
+
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
+                    <artifactId>myBatis-maven-plugin</artifactId>
+                    <version>1.11.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
+                    <artifactId>myBatisValidator-maven-plugin</artifactId>
+                    <version>1.10.0</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>jp.co.ndensan.reams.uz</groupId>
+                            <artifactId>framework</artifactId>
+                            <version>1.9.0</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                    <compilerArguments>
-                        <endorseddirs>${endorsed.dir}</endorseddirs>
-                        <encoding>${project.build.sourceEncoding}</encoding>
-                    </compilerArguments>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.12.4</version>
-                <configuration>
-                    <argLine>-XX:+UseG1GC -XX:G1HeapRegionSize=8m -Xmx2048m -XX:MaxPermSize=1024m -XX:ReservedCodeCacheSize=256m -noverify</argLine>
-                    <forkCount>1</forkCount>
-                    <reuseForks>false</reuseForks>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <attachClasses>true</attachClasses>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.6</version>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${endorsed.dir}</outputDirectory>
-                            <silent>true</silent>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>javax</groupId>
-                                    <artifactId>javaee-endorsed-api</artifactId>
-                                    <version>7.0</version>
-                                    <type>jar</type>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.4.3</version>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.6.3.201306030806</version>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
                 <artifactId>myBatis-maven-plugin</artifactId>
-                <version>1.9.1</version>
-            </plugin>
-            <plugin>
-                <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
-                <artifactId>myBatisValidator-maven-plugin</artifactId>
-                <version>1.10.0</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>jp.co.ndensan.reams.uz</groupId>
-                        <artifactId>framework</artifactId>
-                        <version>1.9.0</version>
-                    </dependency>
-                </dependencies>
+                <version>1.11.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>createMyBatisSettings</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
@@ -346,24 +296,9 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <checkmode>full</checkmode>  
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>2.1</version>
-                <configuration>
-                    <generateBackupPoms>false</generateBackupPoms>
+                    <checkmode>full</checkmode>
                 </configuration>
             </plugin>
         </plugins>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-webdav-jackrabbit</artifactId>
-                <version>2.4</version>
-            </extension>
-        </extensions>
     </build>
 </project>

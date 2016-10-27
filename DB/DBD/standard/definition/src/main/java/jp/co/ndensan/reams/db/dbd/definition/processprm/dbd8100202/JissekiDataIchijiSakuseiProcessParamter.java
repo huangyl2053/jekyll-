@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100202.JissekiDataIchijiSakuseiMybatisprmParamter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,10 +24,11 @@ public class JissekiDataIchijiSakuseiProcessParamter implements IBatchProcessPar
     /**
      * 実績データ一時の引数を返します
      *
-     * @param psmShikibetsuTaisho psmShikibetsuTaisho
+     * @param searchKey 検索キー
      * @return JissekiDataIchijiSakuseiMybatisprmParamter
      */
-    public JissekiDataIchijiSakuseiMybatisprmParamter toJissekiDataIchijiSakuseiMybatisprmParamter(RString psmShikibetsuTaisho) {
-        return new JissekiDataIchijiSakuseiMybatisprmParamter(psmShikibetsuTaisho);
+    public JissekiDataIchijiSakuseiMybatisprmParamter toJissekiDataIchijiSakuseiMybatisprmParamter(
+            IShikibetsuTaishoPSMSearchKey searchKey) {
+        return new JissekiDataIchijiSakuseiMybatisprmParamter(searchKey);
     }
 }

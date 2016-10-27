@@ -7,8 +7,13 @@ package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokugeppoyoshiki212016
 
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokucompyoshiki201.JigyohokokuCompYoshiki201Business;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokugeppoyoshiki2120161.JigyohokokuGeppoYoshiki2120161ReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 事業報告月報様式_03のHeadEditorのクラスです。
@@ -28,6 +33,11 @@ public class JigyohokokuGeppoYoshiki2120161HeadEditor implements IJigyohokokuGep
     private static final RString 集計番号_0110 = new RString("0110");
     private static final RString 総数_再掲 = new RString("②総　数（再掲：第１号被保険者の２割負担対象者分）");
     private static final RString 様式内容２ = new RString("（様式２）");
+    private static final RString DATE_時 = new RString("時");
+    private static final RString DATE_分 = new RString("分");
+    private static final RString DATE_秒 = new RString("秒");
+    private static final RString 月報区分 = new RString("1");
+    private static final RString 年報月報 = new RString("月報");
     private final RString title3;
     private final RString 集計番号;
     private final RString 給付実績区分コード;
@@ -55,8 +65,10 @@ public class JigyohokokuGeppoYoshiki2120161HeadEditor implements IJigyohokokuGep
     }
 
     private JigyohokokuGeppoYoshiki2120161ReportSource editSource(JigyohokokuGeppoYoshiki2120161ReportSource source) {
-        source.sakuseinichiji = business.get処理日時();
-        source.shorikbn = business.get年報月報区分();
+        source.sakuseinichiji = set処理日時();
+        if (月報区分.equals(business.get年報月報区分())) {
+            source.shorikbn = 年報月報;
+        }
         source.shukeihani = business.get集計年月();
         source.hokenjano = business.get保険者コード();
         RStringBuilder builder = new RStringBuilder();
@@ -92,4 +104,19 @@ public class JigyohokokuGeppoYoshiki2120161HeadEditor implements IJigyohokokuGep
         return title;
     }
 
+    private RString set処理日時() {
+        RStringBuilder printTimeStampSb = new RStringBuilder();
+        RDateTime printdate = business.get処理日時();
+        printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
+        printTimeStampSb.append(DATE_時);
+        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
+        printTimeStampSb.append(DATE_分);
+        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
+        printTimeStampSb.append(DATE_秒);
+        return printTimeStampSb.toRString();
+    }
 }

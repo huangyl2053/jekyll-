@@ -88,7 +88,9 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
             get合計金額(list);
         } else {
             TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable = editorTaishouJohoEntity(被保険者番号list, 課税区分list, 金額list);
-            youkonkyoItokiTemp.insert(tempTable);
+            if (tempTable.get被保険者番号() != null) {
+                youkonkyoItokiTemp.insert(tempTable);
+            }
             被保険者番号list.clear();
             課税区分list.clear();
             金額list.clear();
@@ -100,15 +102,18 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
 
     @Override
     protected void afterExecute() {
-        TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable = editorTaishouJohoEntity(被保険者番号list, 課税区分list, 金額list);
-        youkonkyoItokiTemp.insert(tempTable);
+        if (!被保険者番号list.isEmpty() || !課税区分list.isEmpty() || !金額list.isEmpty()) {
+            TaishoShaHanteiYoukonkyoItokiTempTableEntity tempTable = editorTaishouJohoEntity(被保険者番号list, 課税区分list, 金額list);
+            youkonkyoItokiTemp.insert(tempTable);
+        }
     }
 
     private TaishoShaHanteiYoukonkyoItokiTempTableEntity editorTaishouJohoEntity(List<TaishouJohoEntity> recordList,
             List<RString> kuBunList, List<Decimal> kingakuList) {
         TaishoShaHanteiYoukonkyoItokiTempTableEntity entity = new TaishoShaHanteiYoukonkyoItokiTempTableEntity();
         entity.set世帯課税区分(SetaiKazeiKubun.非課税.getコード());
-        entity.setIs所得税課税世帯(Boolean.FALSE);
+        entity.set所得税課税世帯(Boolean.FALSE);
+        entity.set所得税課税者(Boolean.FALSE);
         for (TaishouJohoEntity item : recordList) {
             if (本人.equals(item.get本人区分()) && ((item.get識別コード_生活保護受給者() != null
                     && !item.get識別コード_生活保護受給者().isEmpty())
@@ -133,24 +138,26 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
                 entity.set世帯課税区分(SetaiKazeiKubun.課税.getコード());
             }
             if (item.get課税所得額() != null && 0 < item.get課税所得額().longValue()) {
-                entity.setIs所得税課税者(Boolean.TRUE);
+                entity.set所得税課税世帯(Boolean.TRUE);
             }
         }
         return entity;
     }
 
     private void get合計金額(TaishouJohoEntity list) {
-        if (list.get合計所得金額() == null) {
-            list.set合計所得金額(Decimal.ZERO);
-        }
-        if (list.get年金収入額() == null) {
-            list.set年金収入額(Decimal.ZERO);
-        }
-        if (list.get非課税年金勘案額() == null) {
-            list.set非課税年金勘案額(Decimal.ZERO);
-        }
-        if (!本人.equals(list.get本人区分())) {
-            金額list.add(list.get合計所得金額().add(list.get年金収入額()).add(list.get非課税年金勘案額()));
+
+        if (本人.equals(list.get本人区分())) {
+            Decimal 金額 = Decimal.ZERO;
+            if (list.get合計所得金額() != null) {
+                金額 = 金額.add(list.get合計所得金額());
+            }
+            if (list.get年金収入額() != null) {
+                金額 = 金額.add(list.get年金収入額());
+            }
+            if (list.get非課税年金勘案額() != null) {
+                金額 = 金額.add(list.get非課税年金勘案額());
+            }
+            金額list.add(金額);
         }
     }
 
@@ -193,31 +200,24 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
         }
 
         if (item.get識別コード_生活保護受給者() != null && !item.get識別コード_生活保護受給者().isEmpty()) {
-            entity.setIs生活保護受給者(Boolean.TRUE);
+            entity.set生活保護受給者(Boolean.TRUE);
         } else {
-            entity.setIs生活保護受給者(Boolean.FALSE);
+            entity.set生活保護受給者(Boolean.FALSE);
         }
         if (item.get識別コード_老齢福祉年金受給者() != null && !item.get識別コード_老齢福祉年金受給者().isEmpty()) {
-            entity.setIs老齢福祉年金受給者(Boolean.TRUE);
+            entity.set老齢福祉年金受給者(Boolean.TRUE);
         } else {
-            entity.setIs老齢福祉年金受給者(Boolean.FALSE);
+            entity.set老齢福祉年金受給者(Boolean.FALSE);
         }
 
-        if (entity.get合計所得金額() == null) {
-            entity.set合計所得金額(Decimal.ZERO);
-        } else {
+        if (item.get合計所得金額() != null) {
             entity.set合計所得金額(item.get合計所得金額());
         }
-
-        if (entity.get年金収入額() == null) {
-            entity.set年金収入額(Decimal.ZERO);
-        } else {
+        if (item.get年金収入額() != null) {
             entity.set年金収入額(item.get年金収入額());
         }
 
-        if (entity.get非課税年金勘案額() == null) {
-            entity.set非課税年金勘案額(Decimal.ZERO);
-        } else {
+        if (item.get非課税年金勘案額() != null) {
             entity.set非課税年金勘案額(item.get非課税年金勘案額());
         }
 
@@ -228,10 +228,13 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
             set識別コードValue(entity, item);
         }
         setis高齢者複数世帯(entity, item.get識別コード(), item.get基準日());
-        if (entity.get課税所得額() == null) {
+        if (item.get課税所得額() == null) {
             entity.set課税所得額(Decimal.ZERO);
         } else {
             entity.set課税所得額(item.get課税所得額());
+        }
+        if (item.get課税所得額() != null && 0 < item.get課税所得額().longValue()) {
+            entity.set所得税課税者(Boolean.TRUE);
         }
     }
 
@@ -243,9 +246,9 @@ public class GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei extends BatchProcessBa
         RString up年齢範囲 = DbBusinessConfig.get(ConfigNameDBU.年齢到達基準_第１号被保険者到達基準年齢, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         Range<Integer> 年齢範囲 = new Range(Integer.parseInt(up年齢範囲.toString()), Integer.parseInt("200"));
         if (!date.isEmpty() && 1 < get世帯(shikibetsuCode, date).get世帯員リスト(年齢範囲, new RDate(date.toString())).size()) {
-            tempTable.setIs高齢者複数世帯(Boolean.TRUE);
+            tempTable.set高齢者複数世帯(Boolean.TRUE);
         } else {
-            tempTable.setIs高齢者複数世帯(Boolean.FALSE);
+            tempTable.set高齢者複数世帯(Boolean.FALSE);
         }
     }
 

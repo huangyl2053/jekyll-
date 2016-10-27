@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraijohoichiran;
 
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokubetsuchoshuiraijohoichiran.TokubetsuChoshuIraiJohoIchiranEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tokubetsuchoshuiraijohoichiran.TokubetsuChoshuIraiJohoIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -25,21 +24,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class TokubetsuChoshuIraiJohoIchiranHeaderEditor implements ITokubetsuChoshuIraiJohoIchiranEditor {
 
     private final TokubetsuChoshuIraiJohoIchiranEntity 帳票出力対象データ;
-    private final Map<RString, RString> 出力順Map;
+    private final List<RString> 出力順;
     private final List<RString> 改頁項目;
     private final RDateTime 作成日時;
 
-    private static final RString KEY_並び順の1件目 = new RString("KEY_並び順の１件目");
-    private static final RString KEY_並び順の2件目 = new RString("KEY_並び順の２件目");
-    private static final RString KEY_並び順の3件目 = new RString("KEY_並び順の３件目");
-    private static final RString KEY_並び順の4件目 = new RString("KEY_並び順の４件目");
-    private static final RString KEY_並び順の5件目 = new RString("KEY_並び順の５件目");
-
-    private static final int INDEX_1 = 1;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
-    private static final int INDEX_5 = 5;
+    private static final int INDEX_1 = 0;
+    private static final int INDEX_2 = 1;
+    private static final int INDEX_3 = 2;
+    private static final int INDEX_4 = 3;
+    private static final int INDEX_5 = 4;
 
     private static final RString SAKUSEI = new RString("作成");
 
@@ -47,17 +40,17 @@ public class TokubetsuChoshuIraiJohoIchiranHeaderEditor implements ITokubetsuCho
      * コンストラクタです
      *
      * @param 帳票出力対象データ ShokanFushikyuKetteiInEntity
-     * @param 出力順Map Map<RString, RString>
+     * @param 出力順 List<RString>
      * @param 改頁項目 List<RString>
      * @param 作成日時 RDateTime
      */
     protected TokubetsuChoshuIraiJohoIchiranHeaderEditor(
             TokubetsuChoshuIraiJohoIchiranEntity 帳票出力対象データ,
-            Map<RString, RString> 出力順Map,
+            List<RString> 出力順,
             List<RString> 改頁項目,
             RDateTime 作成日時) {
         this.帳票出力対象データ = 帳票出力対象データ;
-        this.出力順Map = 出力順Map;
+        this.出力順 = 出力順;
         this.改頁項目 = 改頁項目;
         this.作成日時 = 作成日時;
     }
@@ -74,11 +67,11 @@ public class TokubetsuChoshuIraiJohoIchiranHeaderEditor implements ITokubetsuCho
         source.shichosonName = 帳票出力対象データ.get市町村名称();
         source.hokenshaNo = 帳票出力対象データ.get保険者番号();
         source.hokenshaName = 帳票出力対象データ.get保険者名称();
-        source.shutsuryokujun1 = get並び順(KEY_並び順の1件目);
-        source.shutsuryokujun2 = get並び順(KEY_並び順の2件目);
-        source.shutsuryokujun3 = get並び順(KEY_並び順の3件目);
-        source.shutsuryokujun4 = get並び順(KEY_並び順の4件目);
-        source.shutsuryokujun5 = get並び順(KEY_並び順の5件目);
+        source.shutsuryokujun1 = get並び順(INDEX_1);
+        source.shutsuryokujun2 = get並び順(INDEX_2);
+        source.shutsuryokujun3 = get並び順(INDEX_3);
+        source.shutsuryokujun4 = get並び順(INDEX_4);
+        source.shutsuryokujun5 = get並び順(INDEX_5);
         source.kaipage1 = get改頁(INDEX_1);
         source.kaipage2 = get改頁(INDEX_2);
         source.kaipage3 = get改頁(INDEX_3);
@@ -88,8 +81,8 @@ public class TokubetsuChoshuIraiJohoIchiranHeaderEditor implements ITokubetsuCho
         return source;
     }
 
-    private RString get並び順(RString 並び順Key) {
-        return 出力順Map.containsKey(並び順Key) ? 出力順Map.get(並び順Key) : RString.EMPTY;
+    private RString get並び順(int index) {
+        return 出力順.size() > index ? 出力順.get(index) : RString.EMPTY;
     }
 
     private RString get改頁(int index) {

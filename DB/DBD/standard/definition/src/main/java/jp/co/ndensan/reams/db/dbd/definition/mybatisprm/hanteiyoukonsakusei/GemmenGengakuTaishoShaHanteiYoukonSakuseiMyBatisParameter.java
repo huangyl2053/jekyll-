@@ -32,7 +32,7 @@ public class GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter implement
     public GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter(FlexibleYear 所得年度) {
         this.所得年度 = 所得年度;
         this.年度 = new FlexibleYear(Integer.toString(所得年度.getYearValue() - 1));
-        this.介護賦課 = new RString(SubGyomuCode.DBB介護賦課.getGyomuCode().toString());
+        this.介護賦課 = new RString(SubGyomuCode.DBB介護賦課.getColumnValue().toString());
         this.介護保険 = new RString(GyomuCode.DB介護保険.getColumnValue().toString());
     }
 }

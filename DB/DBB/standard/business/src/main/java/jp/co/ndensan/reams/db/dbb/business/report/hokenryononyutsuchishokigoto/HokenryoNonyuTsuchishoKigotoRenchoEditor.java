@@ -425,7 +425,7 @@ public class HokenryoNonyuTsuchishoKigotoRenchoEditor implements IHokenryoNonyuT
     }
 
     private boolean is納期限出力方法が0() {
-        return NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(本算定納入通知書制御情報.get納入通知書制御情報().get納期限出力方法());
+        return NokigenShutsuryokuHoho.対象の期.equals(本算定納入通知書制御情報.get納入通知書制御情報().get納期限出力方法());
     }
 
     private RString get納期開始日(AfterEditInformation data) {

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -85,8 +87,10 @@ public class ShakaiFukushiHojinKeigenMybatisParameter implements IMyBatisParamet
     private boolean has地区2To;
     private boolean has地区3From;
     private boolean has地区3To;
-    private final RString psmShikibetsuTaisho;
+    private final IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho;
     private final RString psmAtesaki;
+    private final RString 出力順;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタです。
@@ -102,6 +106,7 @@ public class ShakaiFukushiHojinKeigenMybatisParameter implements IMyBatisParamet
      * @param atenacyusyutsujyoken 宛名抽出条件
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛名識別対象PSM
+     * @param 出力順 出力順
      */
     public ShakaiFukushiHojinKeigenMybatisParameter(
             RString cyusyutsuhohokubun,
@@ -113,8 +118,9 @@ public class ShakaiFukushiHojinKeigenMybatisParameter implements IMyBatisParamet
             RString soshitsukubun,
             RString kyakasha,
             AtenaSelectBatchParameter atenacyusyutsujyoken,
-            RString psmShikibetsuTaisho,
-            RString psmAtesaki) {
+            IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
+            RString psmAtesaki,
+            RString 出力順) {
         this.cyusyutsuhohokubun = cyusyutsuhohokubun;
         this.cyusyutsukomokukubun = cyusyutsukomokukubun;
         this.kizyunnichi = kizyunnichi;
@@ -128,6 +134,8 @@ public class ShakaiFukushiHojinKeigenMybatisParameter implements IMyBatisParamet
         this.psmAtesaki = psmAtesaki;
         this.決定区分_承認しない = KetteiKubun.承認しない.getコード();
         this.決定区分_承認する = KetteiKubun.承認する.getコード();
+        shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(psmShikibetsuTaisho);
+        this.出力順 = 出力順;
         set抽出方法区分();
         set年齢層抽出方法();
         set地区区分();

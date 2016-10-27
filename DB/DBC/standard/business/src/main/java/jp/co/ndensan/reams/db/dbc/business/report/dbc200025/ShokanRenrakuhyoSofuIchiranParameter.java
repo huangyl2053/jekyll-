@@ -26,5 +26,6 @@ public class ShokanRenrakuhyoSofuIchiranParameter {
     private RString 帳票タイトル;
     private FlexibleYearMonth 処理年月;
     private Map<RString, RString> 出力順Map;
+    private int 連番;
 
 }

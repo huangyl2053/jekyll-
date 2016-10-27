@@ -75,12 +75,12 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranBodyEditor implements ISo
         source.listUpper_8 = jiyuCode;
 
         RString 申立事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
-                DBCCodeShubetsu.過誤申立事由_上２桁_様式番号.getコード(),
+                DBCCodeShubetsu.総合事業_経過措置_過誤申立事由_様式_.getコード(),
                 new Code(jiyuCode.substringEmptyOnError(0, 2)));
         source.listUpper_9 = 申立事由;
 
         申立事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
-                DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード(),
+                DBCCodeShubetsu.総合事業_経過措置_過誤申立理由_理由.getコード(),
                 new Code(jiyuCode.substringEmptyOnError(jiyuCode.length() - 2, jiyuCode.length())));
         source.listLower_2 = 申立事由;
         source.listUpper_11 = 被保険者一時TBL.getYubinNo();

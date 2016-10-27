@@ -40,11 +40,12 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -53,6 +54,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
@@ -74,11 +77,12 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     private LasdecCode 市町村コード;
     private RString 市町村名称;
     private RString eucFilePath;
+    private FileSpoolManager manager;
     @BatchWriter
     private BatchReportWriter<KoikinaiTenkyoKekkaIchiranhyoReportSource> batchReportWriter;
     private ReportSourceWriter<KoikinaiTenkyoKekkaIchiranhyoReportSource> reportSourceWriter;
     @BatchWriter
-    private EucCsvWriter<HiroshimaDomainEucCsvEntity> eucCsvWriter;
+    private CsvWriter<HiroshimaDomainEucCsvEntity> eucCsvWriter;
     private HiroshimaDomainProcessParameter processParameter;
     private List<KoikinaiTenkyoEntity> list;
     private boolean flag;
@@ -114,9 +118,10 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     protected void createWriter() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(DBU200004.value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-        RString spoolWorkPath = Path.getTmpDirectoryPath();
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, new RString("DBU200004_KoikinaiTenkyoKekkaIchiranhyo.csv"));
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).
@@ -187,6 +192,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
         report.writeBy(reportSourceWriter);
         List<KoikinaiTenkyoCSVDataEntity> 広域内転居結果CSV = get広域内転居結果CSV(list);
         get広域内転居結果のCSV出力(広域内転居結果CSV);
+        manager.spool(eucFilePath);
 
     }
 

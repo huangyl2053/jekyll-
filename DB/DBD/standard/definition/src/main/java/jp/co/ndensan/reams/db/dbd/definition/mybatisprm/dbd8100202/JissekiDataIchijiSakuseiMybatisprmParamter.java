@@ -5,8 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd8100202;
 
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,14 +21,14 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JissekiDataIchijiSakuseiMybatisprmParamter implements IMyBatisParameter {
 
-    private RString psmShikibetsuTaisho;
+    private UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * 実績データ一時Mybatisパラメータ
      *
-     * @param psmShikibetsuTaisho psmShikibetsuTaisho
+     * @param searchKey 検索キー
      */
-    public JissekiDataIchijiSakuseiMybatisprmParamter(RString psmShikibetsuTaisho) {
-        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+    public JissekiDataIchijiSakuseiMybatisprmParamter(IShikibetsuTaishoPSMSearchKey searchKey) {
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
     }
 }

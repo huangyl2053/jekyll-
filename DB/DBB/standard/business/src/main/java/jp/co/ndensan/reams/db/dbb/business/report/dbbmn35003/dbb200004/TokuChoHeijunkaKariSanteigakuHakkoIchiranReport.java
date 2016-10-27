@@ -5,10 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KarisanteiGakuHenkoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -28,14 +27,15 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 特別徴収平準化_仮算定額変更通知書_発行一覧表のReportです。
+ * 特別徴収平準化_仮算定額変更通知書_発行一覧表のReportです。（バッチ側用）
  *
  * @reamsid_L DBB-0820-060 xuyue
  */
 public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReport
         extends Report<TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource> {
 
-    private final List<EditedKariSanteiTsuchiShoKyotsu> editedDataList;
+    private final KarisanteiGakuHenkoEntity entity;
+    private final EditedKariSanteiTsuchiShoKyotsu editedData;
     private final IOutputOrder outputOrder;
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
@@ -45,37 +45,38 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReport
     private static final int INDEX_5 = 5;
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
-
+    private final int 連番;
     private final RDateTime 帳票作成日時;
 
     /**
      * コンストラクタです。
      *
-     * @param editedDataList 編集後仮算定通知書共通情報entityのリスト
+     * @param entity 仮算定額変更情報一時テーブル情報entity
+     * @param editedData 編集後仮算定通知書共通情報entity
      * @param outputOrder outputOrder
      * @param 帳票作成日時 帳票作成日時
+     * @param 連番 バッチから渡す連番
      */
-    public TokuChoHeijunkaKariSanteigakuHakkoIchiranReport(List<EditedKariSanteiTsuchiShoKyotsu> editedDataList,
-            IOutputOrder outputOrder, RDateTime 帳票作成日時) {
-        this.editedDataList = editedDataList != null ? editedDataList : new ArrayList<EditedKariSanteiTsuchiShoKyotsu>();
+    public TokuChoHeijunkaKariSanteigakuHakkoIchiranReport(KarisanteiGakuHenkoEntity entity,
+            EditedKariSanteiTsuchiShoKyotsu editedData,
+            IOutputOrder outputOrder, RDateTime 帳票作成日時, int 連番) {
+        this.entity = entity;
+        this.editedData = editedData != null ? editedData : new EditedKariSanteiTsuchiShoKyotsu();
         this.outputOrder = outputOrder;
         this.帳票作成日時 = 帳票作成日時;
+        this.連番 = 連番;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource> reportSourceWriter) {
-        int 連番 = 1;
-        for (EditedKariSanteiTsuchiShoKyotsu editedData : editedDataList) {
-            TokuChoHeijunkaKariSanteigakuHakkoIchiranItem item = new TokuChoHeijunkaKariSanteigakuHakkoIchiranItem();
-            setHeader(editedData, item, outputOrder);
-            setBody(editedData, item, 連番);
-            ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor headerEditor = new TokuChoHeijunkaKariSanteigakuHakkoIchiranHeaderEditor(item);
-            ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor hyojiBodyEditor = new TokuChoHeijunkaKariSanteigakuHakkoIchiranBodyEditor(item);
-            ITokuChoHeijunkaKariSanteigakuHakkoIchiranBuilder builder
-                    = new TokuChoHeijunkaKariSanteigakuHakkoIchiranBuilderImpl(headerEditor, hyojiBodyEditor);
-            reportSourceWriter.writeLine(builder);
-            連番++;
-        }
+        TokuChoHeijunkaKariSanteigakuHakkoIchiranItem item = new TokuChoHeijunkaKariSanteigakuHakkoIchiranItem();
+        setHeader(editedData, item, outputOrder);
+        setBody(editedData, item, 連番);
+        ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor headerEditor = new TokuChoHeijunkaKariSanteigakuHakkoIchiranHeaderEditor(item);
+        ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor hyojiBodyEditor = new TokuChoHeijunkaKariSanteigakuHakkoIchiranBodyEditor(entity, item);
+        ITokuChoHeijunkaKariSanteigakuHakkoIchiranBuilder builder
+                = new TokuChoHeijunkaKariSanteigakuHakkoIchiranBuilderImpl(headerEditor, hyojiBodyEditor);
+        reportSourceWriter.writeLine(builder);
     }
 
     private void setHeader(EditedKariSanteiTsuchiShoKyotsu editedData, TokuChoHeijunkaKariSanteigakuHakkoIchiranItem item, IOutputOrder outputOrder) {
@@ -148,79 +149,81 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReport
         item.setShutsuryokujun4(出力順４);
         item.setShutsuryokujun5(出力順５);
         item.setKaipage1(改頁１);
-        item.setKaipage1(改頁２);
-        item.setKaipage1(改頁３);
-        item.setKaipage1(改頁４);
-        item.setKaipage1(改頁５);
+        item.setKaipage2(改頁２);
+        item.setKaipage3(改頁３);
+        item.setKaipage4(改頁４);
+        item.setKaipage5(改頁５);
     }
 
     private void setBody(EditedKariSanteiTsuchiShoKyotsu editedData, TokuChoHeijunkaKariSanteigakuHakkoIchiranItem item, int 連番) {
 
-        item.setListUpper_1(new RString(String.valueOf(連番)));
+        item.set連番(new RString(String.valueOf(連番)));
         if (editedData.get編集後宛先() != null) {
-            item.setListUpper_2(editedData.get編集後宛先().get郵便番号());
-            item.setListUpper_3(editedData.get編集後宛先().get編集後住所());
+            item.set郵便番号(editedData.get編集後宛先().get郵便番号());
+            item.set住所(editedData.get編集後宛先().get編集後住所());
             if (editedData.get編集後宛先().get行政区() != null) {
-                item.setListUpper_4(editedData.get編集後宛先().get行政区().get名称());
+                item.set行政区名称(editedData.get編集後宛先().get行政区().get名称());
+                item.set行政区コード(editedData.get編集後宛先().get行政区().getコード().getColumnValue());
+
             }
         }
         if (editedData.get編集後個人() != null) {
-            item.setListUpper_5(editedData.get編集後個人().get性別());
-            item.setListUpper_6(editedData.get編集後個人().get生年月日());
+            item.set性別(editedData.get編集後個人().get性別());
+            item.set生年月日(editedData.get編集後個人().get生年月日());
         }
 
         try {
             IKingakuFormatter 更正前特徴期別金額01formatter = KingakuFormatter.create(editedData.get更正前().get更正前特徴期別金額01());
-            item.setListUpper_7(new RString(更正前特徴期別金額01formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
+            item.set変更前特徴額_１期(new RString(更正前特徴期別金額01formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
         } catch (Exception e) {
-            item.setListUpper_7(RString.EMPTY);
+            item.set変更前特徴額_１期(RString.EMPTY);
         }
         try {
             IKingakuFormatter 更正前特徴期別金額02formatter = KingakuFormatter.create(editedData.get更正前().get更正前特徴期別金額02());
-            item.setListUpper_8(new RString(更正前特徴期別金額02formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
+            item.set変更前特徴額_２期(new RString(更正前特徴期別金額02formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
         } catch (Exception e) {
-            item.setListUpper_8(RString.EMPTY);
+            item.set変更前特徴額_２期(RString.EMPTY);
         }
         try {
             IKingakuFormatter 更正前特徴期別金額03formatter = KingakuFormatter.create(editedData.get更正前().get更正前特徴期別金額03());
-            item.setListUpper_9(new RString(更正前特徴期別金額03formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
+            item.set変更前特徴額_３期(new RString(更正前特徴期別金額03formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
         } catch (Exception e) {
-            item.setListUpper_9(RString.EMPTY);
+            item.set変更前特徴額_３期(RString.EMPTY);
         }
 
         if (editedData.get通知書番号() != null) {
-            item.setListLower_1(editedData.get通知書番号().getColumnValue());
+            item.set通知書番号(editedData.get通知書番号().getColumnValue());
         }
 
         if (editedData.get編集後個人() != null && editedData.get編集後個人().get世帯コード() != null) {
-            item.setListLower_2(editedData.get編集後個人().get世帯コード().getColumnValue());
+            item.set世帯コード(editedData.get編集後個人().get世帯コード().getColumnValue());
         }
 
         if (editedData.get編集後個人() != null && editedData.get編集後個人().get名称() != null && editedData.get編集後個人().get名称().getName() != null) {
-            item.setListLower_3(editedData.get編集後個人().get名称().getName().getColumnValue());
+            item.set被保険者氏名(editedData.get編集後個人().get名称().getName().getColumnValue());
         }
 
         if (editedData.get更正後() != null) {
-            item.setListLower_4(editedData.get更正後().get更正後特別徴収義務者());
-            item.setListLower_5(editedData.get更正後().get更正後特別徴収対象年金());
+            item.set特別徴収義務者(editedData.get更正後().get更正後特別徴収義務者());
+            item.set特別徴対象年金(editedData.get更正後().get更正後特別徴収対象年金());
         }
         try {
             IKingakuFormatter 更正後特徴期別金額01formatter = KingakuFormatter.create(editedData.get更正後().get更正後特徴期別金額01());
-            item.setListLower_6(new RString(更正後特徴期別金額01formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
+            item.set変更後特徴額_１期(new RString(更正後特徴期別金額01formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
         } catch (Exception e) {
-            item.setListLower_6(RString.EMPTY);
+            item.set変更後特徴額_１期(RString.EMPTY);
         }
         try {
             IKingakuFormatter 更正後特徴期別金額02formatter = KingakuFormatter.create(editedData.get更正後().get更正後特徴期別金額02());
-            item.setListLower_7(new RString(更正後特徴期別金額02formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
+            item.set変更後特徴額_２期(new RString(更正後特徴期別金額02formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
         } catch (Exception e) {
-            item.setListLower_7(RString.EMPTY);
+            item.set変更後特徴額_２期(RString.EMPTY);
         }
         try {
             IKingakuFormatter 更正後特徴期別金額03formatter = KingakuFormatter.create(editedData.get更正後().get更正後特徴期別金額03());
-            item.setListLower_8(new RString(更正後特徴期別金額03formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
+            item.set変更後特徴額_３期(new RString(更正後特徴期別金額03formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
         } catch (Exception e) {
-            item.setListLower_8(RString.EMPTY);
+            item.set変更後特徴額_３期(RString.EMPTY);
         }
     }
 

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020090.ConvertGappeinaiJutokushaShinKyuNoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020090.GetJuminShotokuJohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020090.GetSetaiinHaakuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020090.SetaiinHaakuNyuryokuTempCreatProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020090.SetaiinHaakuNyuryokuTempCreatProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020090.DBC020090_KogakuKaigoServicehiSetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.setaiinhaakunyuryoku.SetaiinHaakuNyuryokuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -49,7 +49,8 @@ public class DBC020090_KogakuKaigoServicehiSetaiinHaaku extends BatchFlowBase<DB
      */
     @Step(CREAT_PROCESS)
     protected IBatchFlowCommand creatTmpProcess() {
-        return simpleBatch(SetaiinHaakuNyuryokuTempCreatProcess.class).define();
+        processParameter = new SetaiinHaakuNyuryokuProcessParameter(parameter.get管理識別区分(), parameter.getメニューID());
+        return simpleBatch(SetaiinHaakuNyuryokuTempCreatProcess.class).arguments(processParameter).define();
     }
 
     /**

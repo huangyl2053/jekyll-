@@ -8,8 +8,6 @@ package jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
-import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
-import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -91,18 +89,17 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
             this.未同定年金情報_年金コード = resultEntity.getDbt2019entity().getNenkinCode();
         }
         if (resultEntity != null && resultEntity.getUet0511entity() != null) {
-            TokubetsuChoshuGimushaCode gimushaCode = resultEntity.getUet0511entity().getDtTokubetsuChoshuGimushaCode();
-            Code code = gimushaCode == null ? null : gimushaCode.value();
-            if (code != null) {
-                this.未同定年金情報_特別徴収義務者コード = code.value();
+            Code gimushaCode = resultEntity.getUet0511entity().getDtTokubetsuChoshuGimushaCode();
+            if (gimushaCode != null) {
+                this.未同定年金情報_特別徴収義務者コード = gimushaCode.value();
             }
             this.未同定年金情報_氏名漢字 = resultEntity.getUet0511entity().getDtKanjiShimei();
             this.未同定年金情報_氏名カナ = resultEntity.getUet0511entity().getDtKanaShimei();
             this.未同定年金情報_住所カナ = resultEntity.getUet0511entity().getDtKanaJusho();
             this.未同定年金情報_住所漢字 = resultEntity.getUet0511entity().getDtKanjiJusho();
             this.未同定年金情報_生年月日 = resultEntity.getUet0511entity().getDtBirthDay();
-            SeibetsuCodeNenkinTokucho seibetsu = resultEntity.getUet0511entity().getDtSeibetsu();
-            this.未同定年金情報_性別 = seibetsu == null ? RString.EMPTY : seibetsu.value().get性別コード();
+            RString seibetsu = resultEntity.getUet0511entity().getDtSeibetsu();
+            this.未同定年金情報_性別 = seibetsu;
             this.未同定年金情報_連番 = new RString(resultEntity.getUet0511entity().getRenban());
             if (resultEntity.getUet0511entity().getShoriNendo() != null) {
                 this.未同定年金情報_処理年度 = resultEntity.getUet0511entity().getShoriNendo().toDateString();
@@ -159,7 +156,7 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
             }
             this.登録済年金情報_仮徴収基礎年金番号 = resultEntity.getDbt2001entity().getKariNenkinNo();
             this.登録済年金情報_仮徴収年金コード = resultEntity.getDbt2001entity().getKariNenkinCode();
-            this.登録済年金情報_捕捉月 = resultEntity.getDbt2001entity().getKariHosokuM();
+            this.登録済年金情報_仮徴収捕捉月 = resultEntity.getDbt2001entity().getKariHosokuM();
             this.登録済年金情報_本徴収基礎年金番号 = resultEntity.getDbt2001entity().getHonNenkinNo();
             this.登録済年金情報_本徴収年金コード = resultEntity.getDbt2001entity().getHonNenkinCode();
             this.登録済年金情報_本徴収捕捉月 = resultEntity.getDbt2001entity().getHonHosokuM();

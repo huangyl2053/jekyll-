@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho;
 
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Setter
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class IdoOrZenkenFukaSelectParameter {
+public final class IdoOrZenkenFukaSelectParameter implements IMyBatisParameter {
 
     private final int 出力期;
     private final RString 口座区分;

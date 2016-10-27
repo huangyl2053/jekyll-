@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha;
 
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3054KogakuKyufuTaishoshaTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3311KogakuKyufuTaishoshaTempEntity;
 
 /**
  * 被保険者一時TBLと高額介護サービス費給付対象者一時TBL結びついたエンティティ。
@@ -19,6 +19,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3054Kogaku
 public class KyuufuTaishoshaHihokenshaEntity {
 
     private DbWT0001HihokenshaTempEntity 被保険者一時;
-    private DbWT3054KogakuKyufuTaishoshaTempEntity 対象者;
+    private DbWT3311KogakuKyufuTaishoshaTempEntity 対象者;
 
 }

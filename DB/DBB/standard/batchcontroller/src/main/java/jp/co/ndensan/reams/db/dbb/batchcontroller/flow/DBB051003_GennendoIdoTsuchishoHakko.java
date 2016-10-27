@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB051003.HonsanteiIdoGen
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB051003.IdoSystemTimeSakuseiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB051003.InsIdoTsuchishoHakkogoIdoshaHenkoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB051003.InsIdoTsuchishoHakkogoIdoshaKetteiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB051003.InsIdoTsuchishoHakkogoIdoshaNonyuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB051003.InsIdoTsuchishoHakkogoIdoshaTokuchoKaishiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB051003.PrtIdoHenkoTsuchishoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB051003.PrtIdoKetteTsuchishoProcess;
@@ -79,7 +78,6 @@ public class DBB051003_GennendoIdoTsuchishoHakko extends BatchFlowBase<DBB051003
     private static final String 変更通知書の発行 = "prtIdoHenkoTsuchishoProcess";
     private static final String 変更通知書発行後異動者登録 = "insIdoTsuchishoHakkogoIdoshaHenkoProcess";
     private static final String 納入通知書の発行 = "prtIdoNonyuTsuchishoProcess";
-    private static final String 納入通知書発行後異動者登録 = "insIdoTsuchishoHakkogoIdoshaNonyuProcess";
 
     private static final RString チェックボックス_出力 = new RString("1");
     private static final RString BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
@@ -142,7 +140,6 @@ public class DBB051003_GennendoIdoTsuchishoHakko extends BatchFlowBase<DBB051003
                     executeStep(計算後情報作成);
                 }
                 executeStep(納入通知書の発行);
-                executeStep(納入通知書発行後異動者登録);
             }
             if (計算後情報作成区分) {
                 executeStep(計算後情報一時テーブル削除);
@@ -281,17 +278,7 @@ public class DBB051003_GennendoIdoTsuchishoHakko extends BatchFlowBase<DBB051003
      */
     @Step(納入通知書の発行)
     protected IBatchFlowCommand prtIdoNonyuTsuchishoProcess() {
-        return simpleBatch(PrtIdoNonyuTsuchishoProcess.class).arguments(processParameter).define();
-    }
-
-    /**
-     * 納入通知書発行後異動者登録するメソッドです。
-     *
-     * @return バッチコマンド
-     */
-    @Step(納入通知書発行後異動者登録)
-    protected IBatchFlowCommand insIdoTsuchishoHakkogoIdoshaNonyuProcess() {
-        return simpleBatch(InsIdoTsuchishoHakkogoIdoshaNonyuProcess.class).arguments(processParameter).define();
+        return loopBatch(PrtIdoNonyuTsuchishoProcess.class).arguments(processParameter).define();
     }
 
     private boolean publish特徴開始通知書(ChohyoResult 出力帳票一覧) {

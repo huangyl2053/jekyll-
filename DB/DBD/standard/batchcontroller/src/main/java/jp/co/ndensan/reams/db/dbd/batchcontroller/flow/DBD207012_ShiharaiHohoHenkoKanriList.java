@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoHaakuFourProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoHaakuOneProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoHaakuThreeProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoHaakuTwoProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoKanrFiveProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoKanriTempTableInsertProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoHaakuShoukanProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoHaakuTainouTaisakuProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207011.ShiharaiHohoHenkoShunouStatusProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207012.ShiharaiHohoHenkoKanrPrintProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207012.ShiharaiHohoHenkoKanriTempTableInsertProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD207012.ShiharaiHohoHenkoMaxTainouTaisakuKanrProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD207012.DBD207012_ShiharaiHohoHenkoKanriListParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -59,7 +59,7 @@ public class DBD207012_ShiharaiHohoHenkoKanriList extends BatchFlowBase<DBD20701
      */
     @Step(支払方法変更_収納情報テーブル_PROCESS)
     protected IBatchFlowCommand shiharaiHohoHenkoHaakuOneProcess() {
-        return loopBatch(ShiharaiHohoHenkoHaakuOneProcess.class)
+        return loopBatch(ShiharaiHohoHenkoShunouStatusProcess.class)
                 .arguments(getParameter().toShiharaiHohoHenkoHaakuOneProcessParameter())
                 .define();
     }
@@ -71,7 +71,7 @@ public class DBD207012_ShiharaiHohoHenkoKanriList extends BatchFlowBase<DBD20701
      */
     @Step(償還未払い情報一時テーブル_PROCESS)
     protected IBatchFlowCommand shiharaiHohoHenkoHaakuTwoProcess() {
-        return loopBatch(ShiharaiHohoHenkoHaakuTwoProcess.class)
+        return loopBatch(ShiharaiHohoHenkoHaakuShoukanProcess.class)
                 .define();
     }
 
@@ -82,7 +82,7 @@ public class DBD207012_ShiharaiHohoHenkoKanriList extends BatchFlowBase<DBD20701
      */
     @Step(滞納者対策最大履歴一時テーブル_PROCESS)
     protected IBatchFlowCommand shiharaiHohoHenkoHaakuThreeProcess() {
-        return loopBatch(ShiharaiHohoHenkoHaakuThreeProcess.class)
+        return loopBatch(ShiharaiHohoHenkoMaxTainouTaisakuKanrProcess.class)
                 .define();
     }
 
@@ -93,7 +93,7 @@ public class DBD207012_ShiharaiHohoHenkoKanriList extends BatchFlowBase<DBD20701
      */
     @Step(滞納者対策情報一時テーブル_PROCESS)
     protected IBatchFlowCommand shiharaiHohoHenkoHaakuFourProcess() {
-        return loopBatch(ShiharaiHohoHenkoHaakuFourProcess.class)
+        return loopBatch(ShiharaiHohoHenkoHaakuTainouTaisakuProcess.class)
                 .define();
     }
 
@@ -104,7 +104,7 @@ public class DBD207012_ShiharaiHohoHenkoKanriList extends BatchFlowBase<DBD20701
      */
     @Step(帳票印字用データ_PROCESS)
     protected IBatchFlowCommand shiharaiHohoHenkoHaakuFiveProcess() {
-        return loopBatch(ShiharaiHohoHenkoKanrFiveProcess.class)
+        return loopBatch(ShiharaiHohoHenkoKanrPrintProcess.class)
                 .arguments(getParameter().toShiharaiHohoHenkoHaakuFiveProcessParameter())
                 .define();
     }

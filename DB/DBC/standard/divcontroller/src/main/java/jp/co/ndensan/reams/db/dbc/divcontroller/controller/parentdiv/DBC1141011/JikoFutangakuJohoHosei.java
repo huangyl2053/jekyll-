@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1141011;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc040030.DBC040030_KogakugassanJikofutangakuInfoHoseiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040030.DBC040030_KogakugassanJikofutangakuInfoHoseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1141011.DBC1141011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1141011.JikoFutangakuJohoHoseiDiv;
@@ -147,6 +147,7 @@ public class JikoFutangakuJohoHosei {
                 SubGyomuCode.DBC介護給付);
         parameter.setTreatmentType(国保連共同処理受託区分);
         parameter.setHandleTimestamp(RDate.getNowDateTime());
+        parameter.set出力フラグが(div.getJikoFutangakuHoseiPrint().isIsPublish());
         return parameter;
     }
 

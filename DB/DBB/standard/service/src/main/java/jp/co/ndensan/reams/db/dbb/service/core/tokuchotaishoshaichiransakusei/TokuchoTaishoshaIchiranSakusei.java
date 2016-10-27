@@ -93,6 +93,7 @@ public class TokuchoTaishoshaIchiranSakusei {
     private static final RString 開始月_翌6月 = new RString("06");
     private static final int NUM0 = 0;
     private static final int NUM1 = 1;
+    private static final int NUM2 = 2;
     private static final int NUM4 = 4;
     private static final int NUM6 = 6;
 
@@ -399,55 +400,23 @@ public class TokuchoTaishoshaIchiranSakusei {
         if (resultEntityList.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
-        RString 分配集約_基礎年金番号;
-        RString 分配集約_年金コード;
-        RString 分配集約_捕捉月;
-        FlexibleYear 分配集約_処理年度;
         NenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
         List<TokuchoDouteiKouhoshaShousaiJoho> 同定候補者詳細情報List = new ArrayList();
         if (開始月_8月.compareTo(開始月数) == NUM0) {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
                 TokuchoDouteiKouhoshaShousaiJoho result = new TokuchoDouteiKouhoshaShousaiJoho(entity);
-                if (entity.getDbt2001entity() != null) {
-                    分配集約_処理年度 = entity.getDbt2001entity().getFukaNendo();
-                    分配集約_基礎年金番号 = entity.getDbt2001entity().getKariNenkinNo();
-                    分配集約_年金コード = entity.getDbt2001entity().getKariNenkinCode();
-                    分配集約_捕捉月 = entity.getDbt2001entity().getKariHosokuM();
-                    NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(GyomuCode.DB介護保険,
-                            分配集約_処理年度, 分配集約_基礎年金番号, 分配集約_年金コード, 分配集約_捕捉月);
-                    get年金特徴回付情報value(nenkintokuchokaifujoho, result);
-                }
-                同定候補者詳細情報List.add(result);
+                get仮徴収(entity, manager, result, 同定候補者詳細情報List);
             }
         } else if (開始月_10月.compareTo(開始月数) == NUM0 || 開始月_12月.compareTo(開始月数) == NUM0
                 || 開始月_2月.compareTo(開始月数) == NUM0) {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
                 TokuchoDouteiKouhoshaShousaiJoho result = new TokuchoDouteiKouhoshaShousaiJoho(entity);
-                if (entity.getDbt2001entity() != null) {
-                    分配集約_処理年度 = entity.getDbt2001entity().getFukaNendo();
-                    分配集約_基礎年金番号 = entity.getDbt2001entity().getHonNenkinNo();
-                    分配集約_年金コード = entity.getDbt2001entity().getHonNenkinCode();
-                    分配集約_捕捉月 = entity.getDbt2001entity().getHonHosokuM();
-                    NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(GyomuCode.DB介護保険,
-                            分配集約_処理年度, 分配集約_基礎年金番号, 分配集約_年金コード,
-                            分配集約_捕捉月);
-                    get年金特徴回付情報value(nenkintokuchokaifujoho, result);
-                }
-                同定候補者詳細情報List.add(result);
+                get本徴収(entity, manager, result, 同定候補者詳細情報List);
             }
         } else if (開始月_翌4月.compareTo(開始月数) == NUM0 || 開始月_翌6月.compareTo(開始月数) == NUM0) {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
                 TokuchoDouteiKouhoshaShousaiJoho result = new TokuchoDouteiKouhoshaShousaiJoho(entity);
-                if (entity.getDbt2001entity() != null) {
-                    分配集約_処理年度 = entity.getDbt2001entity().getFukaNendo();
-                    分配集約_基礎年金番号 = entity.getDbt2001entity().getYokunendoKariNenkinNo();
-                    分配集約_年金コード = entity.getDbt2001entity().getYokunendoKariNenkinCode();
-                    分配集約_捕捉月 = entity.getDbt2001entity().getYokunendoKariHosokuM();
-                    NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(GyomuCode.DB介護保険,
-                            分配集約_処理年度, 分配集約_基礎年金番号, 分配集約_年金コード, 分配集約_捕捉月);
-                    get年金特徴回付情報value(nenkintokuchokaifujoho, result);
-                }
-                同定候補者詳細情報List.add(result);
+                get翌年度仮徴収(entity, manager, result, 同定候補者詳細情報List);
             }
         } else {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
@@ -456,6 +425,90 @@ public class TokuchoTaishoshaIchiranSakusei {
             }
         }
         return 同定候補者詳細情報List;
+    }
+
+    private void get仮徴収(TokuchoTaishoshaIchiranSakuseiEntity entity,
+            NenkinTokuchoKaifuJohoManager manager,
+            TokuchoDouteiKouhoshaShousaiJoho result,
+            List<TokuchoDouteiKouhoshaShousaiJoho> 同定候補者詳細情報List) {
+        FlexibleYear 分配集約_処理年度;
+        RString 分配集約_基礎年金番号;
+        RString 分配集約_年金コード;
+        RString 分配集約_捕捉月;
+        if (entity.getDbt2001entity() != null) {
+            分配集約_処理年度 = entity.getDbt2001entity().getFukaNendo();
+            分配集約_基礎年金番号 = entity.getDbt2001entity().getKariNenkinNo();
+            分配集約_年金コード = entity.getDbt2001entity().getKariNenkinCode();
+            分配集約_捕捉月 = entity.getDbt2001entity().getKariHosokuM();
+            if (分配集約_捕捉月 != null && !分配集約_捕捉月.isEmpty() && Integer.valueOf(分配集約_捕捉月.toString()) == NUM2) {
+                分配集約_処理年度 = 分配集約_処理年度.minusYear(NUM1);
+            }
+            if (分配集約_処理年度 != null && !分配集約_処理年度.isEmpty()
+                    && 分配集約_基礎年金番号 != null && !分配集約_基礎年金番号.isEmpty()
+                    && 分配集約_年金コード != null && !分配集約_年金コード.isEmpty()
+                    && 分配集約_捕捉月 != null && !分配集約_捕捉月.isEmpty()) {
+                NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(GyomuCode.DB介護保険,
+                        分配集約_処理年度, 分配集約_基礎年金番号, 分配集約_年金コード, 分配集約_捕捉月);
+                get年金特徴回付情報value(nenkintokuchokaifujoho, result);
+            }
+        }
+        同定候補者詳細情報List.add(result);
+    }
+
+    private void get本徴収(TokuchoTaishoshaIchiranSakuseiEntity entity,
+            NenkinTokuchoKaifuJohoManager manager,
+            TokuchoDouteiKouhoshaShousaiJoho result,
+            List<TokuchoDouteiKouhoshaShousaiJoho> 同定候補者詳細情報List) {
+        FlexibleYear 分配集約_処理年度;
+        RString 分配集約_基礎年金番号;
+        RString 分配集約_年金コード;
+        RString 分配集約_捕捉月;
+        if (entity.getDbt2001entity() != null) {
+            分配集約_処理年度 = entity.getDbt2001entity().getFukaNendo();
+            分配集約_基礎年金番号 = entity.getDbt2001entity().getHonNenkinNo();
+            分配集約_年金コード = entity.getDbt2001entity().getHonNenkinCode();
+            分配集約_捕捉月 = entity.getDbt2001entity().getHonHosokuM();
+            if (分配集約_捕捉月 != null && !分配集約_捕捉月.isEmpty() && Integer.valueOf(分配集約_捕捉月.toString()) == NUM2) {
+                分配集約_処理年度 = 分配集約_処理年度.minusYear(NUM1);
+            }
+            if (分配集約_処理年度 != null && !分配集約_処理年度.isEmpty()
+                    && 分配集約_基礎年金番号 != null && !分配集約_基礎年金番号.isEmpty()
+                    && 分配集約_年金コード != null && !分配集約_年金コード.isEmpty()
+                    && 分配集約_捕捉月 != null && !分配集約_捕捉月.isEmpty()) {
+                NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(GyomuCode.DB介護保険,
+                        分配集約_処理年度, 分配集約_基礎年金番号, 分配集約_年金コード, 分配集約_捕捉月);
+                get年金特徴回付情報value(nenkintokuchokaifujoho, result);
+            }
+        }
+        同定候補者詳細情報List.add(result);
+    }
+
+    private void get翌年度仮徴収(TokuchoTaishoshaIchiranSakuseiEntity entity,
+            NenkinTokuchoKaifuJohoManager manager,
+            TokuchoDouteiKouhoshaShousaiJoho result,
+            List<TokuchoDouteiKouhoshaShousaiJoho> 同定候補者詳細情報List) {
+        FlexibleYear 分配集約_処理年度;
+        RString 分配集約_基礎年金番号;
+        RString 分配集約_年金コード;
+        RString 分配集約_捕捉月;
+        if (entity.getDbt2001entity() != null) {
+            分配集約_処理年度 = entity.getDbt2001entity().getFukaNendo();
+            分配集約_基礎年金番号 = entity.getDbt2001entity().getYokunendoKariNenkinNo();
+            分配集約_年金コード = entity.getDbt2001entity().getYokunendoKariNenkinCode();
+            分配集約_捕捉月 = entity.getDbt2001entity().getYokunendoKariHosokuM();
+            if (分配集約_捕捉月 != null && !分配集約_捕捉月.isEmpty() && Integer.valueOf(分配集約_捕捉月.toString()) == NUM2) {
+                分配集約_処理年度 = 分配集約_処理年度.minusYear(NUM1);
+            }
+            if (分配集約_処理年度 != null && !分配集約_処理年度.isEmpty()
+                    && 分配集約_基礎年金番号 != null && !分配集約_基礎年金番号.isEmpty()
+                    && 分配集約_年金コード != null && !分配集約_年金コード.isEmpty()
+                    && 分配集約_捕捉月 != null && !分配集約_捕捉月.isEmpty()) {
+                NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(GyomuCode.DB介護保険,
+                        分配集約_処理年度, 分配集約_基礎年金番号, 分配集約_年金コード, 分配集約_捕捉月);
+                get年金特徴回付情報value(nenkintokuchokaifujoho, result);
+            }
+        }
+        同定候補者詳細情報List.add(result);
     }
 
     private void get年金特徴回付情報value(NenkinTokuchoKaifuJoho nenkintokuchokaifujoho,
@@ -744,17 +797,6 @@ public class TokuchoTaishoshaIchiranSakusei {
         徴収方法entity.setTsuikaIraiSohuzumiFlag(false);
         徴収方法entity.setTokuchoTeishiNichiji(null);
         徴収方法entity.setTokuchoTeishiJiyuCode(null);
-//        徴収方法entity.setKariNenkinNo(null);
-//        徴収方法entity.setKariNenkinCode(null);
-//        徴収方法entity.setKariHosokuM(null);
-//        徴収方法entity.setHonNenkinNo(null);
-//        徴収方法entity.setHonNenkinCode(null);
-//        徴収方法entity.setHonHosokuM(null);
-//        徴収方法entity.setYokunendoKariNenkinNo(null);
-//        徴収方法entity.setYokunendoKariNenkinCode(null);
-//        徴収方法entity.setYokunendoKariHosokuM(null);
-//        徴収方法entity.setTokuchoTeishiNichiji(null);
-//        徴収方法entity.setTokuchoTeishiJiyuCode(null);
         徴収方法entity.setState(EntityDataState.Added);
         徴収方法Dac.save(徴収方法entity);
     }
@@ -783,6 +825,8 @@ public class TokuchoTaishoshaIchiranSakusei {
         param.setShuturyokuTaisho(result.get出力対象());
         param.setShoriNichiji(new YMDHMS(nowDateTime));
         param.setKakuninJokyoKubun(result.is確認状況区分());
+        param.setDoteiOutputID(result.get同定出力順ID());
+        param.setMidoteiOutputID(result.get未同定出力順ID());
         return param;
     }
 
@@ -796,63 +840,43 @@ public class TokuchoTaishoshaIchiranSakusei {
     /**
      * 被保険者情報が変わった場合、それに付随して住基情報、登録済年金情報のデータを取得する.
      *
+     * @param 被保険者番号 RString
      * @param 処理年度 FlexibleYear
      * @param 開始月 RString
      * @return List<TokuchoDouteiKouhoshaShousaiJoho>
      */
-    public List<TokuchoDouteiKouhoshaShousaiJoho> getHihokenshaJoho(FlexibleYear 処理年度, RString 開始月) {
+    public List<TokuchoDouteiKouhoshaShousaiJoho> getHihokenshaJoho(RString 被保険者番号, FlexibleYear 処理年度, RString 開始月) {
         TokuchoTaishoshaIchiranSakuseiMybatisParameter param = new TokuchoTaishoshaIchiranSakuseiMybatisParameter();
         param.set処理年度(処理年度);
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+            param.set被保険者番号(new HihokenshaNo(被保険者番号));
+        } else {
+            param.set被保険者番号(HihokenshaNo.EMPTY);
+        }
         mapper = mapperProvider.create(ITokuchoTaishoshaIchiranSakuseiMapper.class);
         List<TokuchoTaishoshaIchiranSakuseiEntity> resultEntityList = mapper.select被保険者情報取得(param);
         if (resultEntityList.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
-        RString ue基礎年金番号;
-        RString ue年金コード;
-        RString ue捕捉月;
         FlexibleYear ue処理年度 = 処理年度;
         NenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
         List<TokuchoDouteiKouhoshaShousaiJoho> 同定候補者詳細情報List = new ArrayList();
         if (開始月_8月.compareTo(開始月) == NUM0) {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
                 TokuchoDouteiKouhoshaShousaiJoho result = new TokuchoDouteiKouhoshaShousaiJoho(entity);
-                if (entity.getDbt2001entity() != null) {
-                    ue基礎年金番号 = entity.getDbt2001entity().getKariNenkinNo();
-                    ue年金コード = entity.getDbt2001entity().getKariNenkinCode();
-                    ue捕捉月 = entity.getDbt2001entity().getKariHosokuM();
-                    NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(
-                            GyomuCode.DB介護保険, ue処理年度, ue基礎年金番号, ue年金コード, ue捕捉月);
-                    get年金特徴回付情報value(nenkintokuchokaifujoho, result);
-                }
-                同定候補者詳細情報List.add(result);
+                getUe仮徴収(entity, manager, result, 同定候補者詳細情報List, ue処理年度);
             }
         } else if (開始月_10月.compareTo(開始月) == NUM0 || 開始月_12月.compareTo(開始月) == NUM0
                 || 開始月_2月.compareTo(開始月) == NUM0) {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
                 TokuchoDouteiKouhoshaShousaiJoho result = new TokuchoDouteiKouhoshaShousaiJoho(entity);
-                if (entity.getDbt2001entity() != null) {
-                    ue基礎年金番号 = entity.getDbt2001entity().getHonNenkinNo();
-                    ue年金コード = entity.getDbt2001entity().getHonNenkinCode();
-                    ue捕捉月 = entity.getDbt2001entity().getHonHosokuM();
-                    NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(
-                            GyomuCode.DB介護保険, ue処理年度, ue基礎年金番号, ue年金コード, ue捕捉月);
-                    get年金特徴回付情報value(nenkintokuchokaifujoho, result);
-                }
+                getUe本徴収(entity, manager, result, 同定候補者詳細情報List, ue処理年度);
                 同定候補者詳細情報List.add(result);
             }
         } else if (開始月_翌4月.compareTo(開始月) == NUM0 || 開始月_翌6月.compareTo(開始月) == NUM0) {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
                 TokuchoDouteiKouhoshaShousaiJoho result = new TokuchoDouteiKouhoshaShousaiJoho(entity);
-                if (entity.getDbt2001entity() != null) {
-                    ue基礎年金番号 = entity.getDbt2001entity().getYokunendoKariNenkinNo();
-                    ue年金コード = entity.getDbt2001entity().getYokunendoKariNenkinCode();
-                    ue捕捉月 = entity.getDbt2001entity().getYokunendoKariHosokuM();
-                    NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(
-                            GyomuCode.DB介護保険, ue処理年度, ue基礎年金番号, ue年金コード, ue捕捉月);
-                    get年金特徴回付情報value(nenkintokuchokaifujoho, result);
-                }
-                同定候補者詳細情報List.add(result);
+                getUe翌年度仮徴収(entity, manager, result, 同定候補者詳細情報List, ue処理年度);
             }
         } else {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
@@ -861,6 +885,87 @@ public class TokuchoTaishoshaIchiranSakusei {
             }
         }
         return 同定候補者詳細情報List;
+    }
+
+    private void getUe仮徴収(TokuchoTaishoshaIchiranSakuseiEntity entity,
+            NenkinTokuchoKaifuJohoManager manager,
+            TokuchoDouteiKouhoshaShousaiJoho result,
+            List<TokuchoDouteiKouhoshaShousaiJoho> 同定候補者詳細情報List,
+            FlexibleYear ue処理年度) {
+        RString ue基礎年金番号;
+        RString ue年金コード;
+        RString ue捕捉月;
+        if (entity.getDbt2001entity() != null) {
+            ue基礎年金番号 = entity.getDbt2001entity().getKariNenkinNo();
+            ue年金コード = entity.getDbt2001entity().getKariNenkinCode();
+            ue捕捉月 = entity.getDbt2001entity().getKariHosokuM();
+            if (ue捕捉月 != null && !ue捕捉月.isEmpty() && Integer.valueOf(ue捕捉月.toString()) == NUM2) {
+                ue処理年度 = ue処理年度.minusYear(NUM1);
+            }
+            if (ue処理年度 != null && !ue処理年度.isEmpty()
+                    && ue基礎年金番号 != null && !ue基礎年金番号.isEmpty()
+                    && ue年金コード != null && !ue年金コード.isEmpty()
+                    && ue捕捉月 != null && !ue捕捉月.isEmpty()) {
+                NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(
+                        GyomuCode.DB介護保険, ue処理年度, ue基礎年金番号, ue年金コード, ue捕捉月);
+                get年金特徴回付情報value(nenkintokuchokaifujoho, result);
+            }
+        }
+        同定候補者詳細情報List.add(result);
+    }
+
+    private void getUe本徴収(TokuchoTaishoshaIchiranSakuseiEntity entity,
+            NenkinTokuchoKaifuJohoManager manager,
+            TokuchoDouteiKouhoshaShousaiJoho result,
+            List<TokuchoDouteiKouhoshaShousaiJoho> 同定候補者詳細情報List,
+            FlexibleYear ue処理年度) {
+        RString ue基礎年金番号;
+        RString ue年金コード;
+        RString ue捕捉月;
+        if (entity.getDbt2001entity() != null) {
+            ue基礎年金番号 = entity.getDbt2001entity().getHonNenkinNo();
+            ue年金コード = entity.getDbt2001entity().getHonNenkinCode();
+            ue捕捉月 = entity.getDbt2001entity().getHonHosokuM();
+            if (ue捕捉月 != null && !ue捕捉月.isEmpty() && Integer.valueOf(ue捕捉月.toString()) == NUM2) {
+                ue処理年度 = ue処理年度.minusYear(NUM1);
+            }
+            if (ue処理年度 != null && !ue処理年度.isEmpty()
+                    && ue基礎年金番号 != null && !ue基礎年金番号.isEmpty()
+                    && ue年金コード != null && !ue年金コード.isEmpty()
+                    && ue捕捉月 != null && !ue捕捉月.isEmpty()) {
+                NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(
+                        GyomuCode.DB介護保険, ue処理年度, ue基礎年金番号, ue年金コード, ue捕捉月);
+                get年金特徴回付情報value(nenkintokuchokaifujoho, result);
+            }
+        }
+        同定候補者詳細情報List.add(result);
+    }
+
+    private void getUe翌年度仮徴収(TokuchoTaishoshaIchiranSakuseiEntity entity,
+            NenkinTokuchoKaifuJohoManager manager,
+            TokuchoDouteiKouhoshaShousaiJoho result,
+            List<TokuchoDouteiKouhoshaShousaiJoho> 同定候補者詳細情報List,
+            FlexibleYear ue処理年度) {
+        RString ue基礎年金番号;
+        RString ue年金コード;
+        RString ue捕捉月;
+        if (entity.getDbt2001entity() != null) {
+            ue基礎年金番号 = entity.getDbt2001entity().getYokunendoKariNenkinNo();
+            ue年金コード = entity.getDbt2001entity().getYokunendoKariNenkinCode();
+            ue捕捉月 = entity.getDbt2001entity().getYokunendoKariHosokuM();
+            if (ue捕捉月 != null && !ue捕捉月.isEmpty() && Integer.valueOf(ue捕捉月.toString()) == NUM2) {
+                ue処理年度 = ue処理年度.minusYear(NUM1);
+            }
+            if (ue処理年度 != null && !ue処理年度.isEmpty()
+                    && ue基礎年金番号 != null && !ue基礎年金番号.isEmpty()
+                    && ue年金コード != null && !ue年金コード.isEmpty()
+                    && ue捕捉月 != null && !ue捕捉月.isEmpty()) {
+                NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(
+                        GyomuCode.DB介護保険, ue処理年度, ue基礎年金番号, ue年金コード, ue捕捉月);
+                get年金特徴回付情報value(nenkintokuchokaifujoho, result);
+            }
+        }
+        同定候補者詳細情報List.add(result);
     }
 
     private DbT2001ChoshuHohoEntity get徴収方法entity(DbV2001ChoshuHohoEntity dbvEntity) {

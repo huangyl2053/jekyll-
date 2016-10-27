@@ -33,18 +33,29 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
     private final List<RString> インフォlist;
     private final NinshoshaSource 認証者ソースデータ;
     private final List<RString> titleList;
+    private final int 通番;
     private static final RString テスト印刷 = new RString("テスト印刷");
-    private static final RString 審査依頼 = new RString("1");
-    private static final RString 審査済み = new RString("2");
+    private static final RString 金融機関コード = new RString("9900");
     private static final RString 口座種別 = new RString("口座種別");
     private static final RString 通帳記号 = new RString("通帳記号");
     private static final RString 通帳番号 = new RString("通帳番号");
     private static final RString 口座番号 = new RString("口座番号");
-    private static final RString 窓口払い = new RString("窓口払い");
-    private static final RString 口座払いでゆうちょ = new RString("口座払いでゆうちょ");
+    private static final RString 窓口払い値 = new RString("1");
+    private static final RString 口座払い値 = new RString("2");
     private static final RString 支給 = new RString("1");
     private static final RString 不支給 = new RString("2");
     private static final RString 定量_円 = new RString("円");
+    private static final int NUM_ONE = 1;
+    private static final int NUM_TWO = 2;
+    private static final int NUM_THREE = 3;
+    private static final int NUM_FOUR = 4;
+    private static final int NUM_FIVE = 5;
+    private static final int NUM_SIX = 6;
+    private static final int NUM_SEVEN = 7;
+    private static final int NUM_EIGHT = 8;
+    private static final int NUM_NINE = 9;
+    private static final int NUM_TEN = 10;
+
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_ONE = 1;
     private static final int INDEX_TWO = 2;
@@ -79,6 +90,7 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
      * @param インフォlist List<RString>
      * @param 認証者ソースデータ NinshoshaSource
      * @param titleList List<RString>
+     * @param 通番 int
      */
     public KogakuKetteiTsuchiShoSealerEditor(
             KogakuKetteiTsuchiShoEntity 帳票情報,
@@ -86,7 +98,8 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
             List<RString> 通知書定型文list,
             List<RString> インフォlist,
             NinshoshaSource 認証者ソースデータ,
-            List<RString> titleList) {
+            List<RString> titleList,
+            int 通番) {
 
         this.帳票情報 = 帳票情報;
         this.文書番号 = 文書番号;
@@ -94,6 +107,7 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
         this.インフォlist = インフォlist;
         this.認証者ソースデータ = 認証者ソースデータ;
         this.titleList = titleList;
+        this.通番 = 通番;
     }
 
     @Override
@@ -103,7 +117,7 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
             source.shikibetsuCode = 帳票情報.get識別コード().value();
         }
 
-        source.tsuban = new RString(帳票情報.get通番());
+        source.tsuban = new RString(通番);
         source.bunshoNo = 文書番号;
         setValueFrom帳票情報(source);
         set円(source);
@@ -123,7 +137,6 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
             source.testPrint = RString.EMPTY;
         }
         source.hihokenshaName = 帳票情報.get被保険者氏名();
-        source.hihokenshaName2 = 帳票情報.get被保険者氏名();
 
         if (帳票情報.get被保険者番号() != null) {
             source.hihokenshaNo = 帳票情報.get被保険者番号().value();
@@ -131,46 +144,36 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
 
         source.ketteiYMD = 年月日編集(帳票情報.get決定年月日());
         source.shiharaiYoteiYMD = 年月日編集(帳票情報.get支払予定日());
-        source.taishoYM1 = 年月編集(帳票情報.get提供年月IDX1());
-        source.taishoYM2 = 年月編集(帳票情報.get提供年月IDX2());
-        source.taishoYM3 = 年月編集(帳票情報.get提供年月IDX3());
-        source.taishoYM4 = 年月編集(帳票情報.get提供年月IDX4());
+        source.taishoYM1 = 年月編集(帳票情報.get対象年月1());
+        source.taishoYM2 = RString.EMPTY;
+        source.taishoYM3 = RString.EMPTY;
+        source.taishoYM4 = RString.EMPTY;
 
-        source.shiharaiGaku = get変換値金額(帳票情報.get本人支払額());
+        source.shiharaiGaku = 金額編集(new RString(帳票情報.get支払金額合計().toString()),
+                new RString(帳票情報.get支払金額合計().toString()).length());
 
-        if (審査依頼.equals(帳票情報.get審査方法区分())) {
-
-            source.shikyuGaku1 = doカンマ編集(帳票情報.get支給額IDX1());
-            source.shikyuGaku2 = doカンマ編集(帳票情報.get支給額IDX2());
-            source.shikyuGaku3 = doカンマ編集(帳票情報.get支給額IDX3());
-            source.shikyuGaku4 = doカンマ編集(帳票情報.get支給額IDX4());
-
-        } else if (審査済み.equals(帳票情報.get審査方法区分())) {
-
-            source.shikyuGaku1 = doカンマ編集(帳票情報.get決定額IDX1());
-            source.shikyuGaku2 = doカンマ編集(帳票情報.get決定額IDX2());
-            source.shikyuGaku3 = doカンマ編集(帳票情報.get決定額IDX3());
-            source.shikyuGaku4 = doカンマ編集(帳票情報.get決定額IDX4());
-
-        }
+        source.shikyuGaku1 = doカンマ編集(帳票情報.get支給金額1());
+        source.shikyuGaku2 = RString.EMPTY;
+        source.shikyuGaku3 = RString.EMPTY;
+        source.shikyuGaku4 = RString.EMPTY;
 
         source.bankName = 帳票情報.get金融機関上段();
         source.branchBankName = 帳票情報.get金融機関下段();
 
-        if (支給.equals(帳票情報.get支給不支給区分()) && 窓口払い.equals(帳票情報.get支払方法())) {
-            source.shumokuTitle = 口座種別;
-            source.bangoTitle = 口座番号;
+        if (支給.equals(帳票情報.get支給不支給決定区分())) {
+            if (窓口払い値.equals(帳票情報.get支払方法区分())) {
+                source.shumokuTitle = 口座種別;
+                source.bangoTitle = 口座番号;
+            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && 金融機関コード.equals(帳票情報.get金融機関コード())) {
+                source.shumokuTitle = 通帳記号;
+                source.bangoTitle = 通帳番号;
+            } else {
+                source.shumokuTitle = 口座種別;
+                source.bangoTitle = 口座番号;
+            }
         }
-        if (支給.equals(帳票情報.get支給不支給区分()) && 口座払いでゆうちょ.equals(帳票情報.get支払方法())) {
-            source.shumokuTitle = 通帳記号;
-            source.bangoTitle = 通帳番号;
-        }
-        if (支給.equals(帳票情報.get支給不支給区分()) && !口座払いでゆうちょ.equals(帳票情報.get支払方法())) {
-            source.shumokuTitle = 口座種別;
-            source.bangoTitle = 口座番号;
-        }
-        if ((支給.equals(帳票情報.get支給不支給区分()) && 帳票情報.get支給額() != null && 帳票情報.get支給額().compareTo(Decimal.ZERO) < 0)
-                || 不支給.equals(帳票情報.get支給不支給区分())) {
+        if ((支給.equals(帳票情報.get支給不支給決定区分()) && 帳票情報.get支給金額() != null && 帳票情報.get支給金額().compareTo(Decimal.ZERO) < 0)
+                || 不支給.equals(帳票情報.get支給不支給決定区分())) {
             source.shumokuTitle = 口座種別;
             source.bangoTitle = 口座番号;
 
@@ -187,11 +190,49 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
 
     }
 
+    private RString 金額編集(RString 金額, int length) {
+
+        switch (length) {
+            case NUM_TEN:
+                return 金額;
+            case NUM_NINE:
+                return スプライス(金額, length);
+            case NUM_EIGHT:
+                return スプライス(金額, length);
+            case NUM_SEVEN:
+                return スプライス(金額, length);
+            case NUM_SIX:
+                return スプライス(金額, length);
+            case NUM_FIVE:
+                return スプライス(金額, length);
+            case NUM_FOUR:
+                return スプライス(金額, length);
+            case NUM_THREE:
+                return スプライス(金額, length);
+            case NUM_TWO:
+                return スプライス(金額, length);
+            case NUM_ONE:
+                return スプライス(金額, length);
+            default:
+                return 金額;
+
+        }
+
+    }
+
+    private RString スプライス(RString 金額, int length) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = NUM_TEN; i > length; i--) {
+            sb.append(RString.HALF_SPACE);
+        }
+        return new RString(sb.toString()).concat(金額);
+    }
+
     private void set円(KogakuKetteiTsuchiShoSealerSource source) {
         source.yen1 = 定量_円;
-        source.yen2 = 定量_円;
-        source.yen3 = 定量_円;
-        source.yen4 = 定量_円;
+        source.yen2 = RString.EMPTY;
+        source.yen3 = RString.EMPTY;
+        source.yen4 = RString.EMPTY;
     }
 
     private void setインフォ(KogakuKetteiTsuchiShoSealerSource source) {
@@ -258,10 +299,6 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
             return DecimalFormatter.toコンマ区切りRString(decimal, 0);
         }
         return RString.EMPTY;
-    }
-
-    private RString get変換値金額(Decimal 金額) {
-        return 金額 != null ? new RString(金額.toString()) : RString.EMPTY;
     }
 
     private RString getインフォ(int index) {

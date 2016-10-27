@@ -102,6 +102,36 @@ public class ChikuShichosonSelectHandler {
         div.setHdnTxtTitle(RString.EMPTY);
     }
 
+    /**
+     * 共有子Div画面の初期表示です。
+     *
+     * @param 導入形態コード 導入形態コード
+     */
+    public void initialize(Code 導入形態コード) {
+        RDate 適用基準日 = RDate.getNowDate();
+        if (導入形態コード != null && !導入形態コード.isEmpty() && !導入形態コード.value().isNullOrEmpty()) {
+            div.setHdnTxtDonyuKeitaiCode(導入形態コード.value());
+            if (コード_事務単一.equals(導入形態コード.value())) {
+                div.getTanitsuShichoson().setDisplayNone(false);
+                div.getBtnChoikiGuide().setDisplayNone(true);
+                div.getBtnChikuNyuryokuGuide().setDisplayNone(true);
+                div.getDdlCodeList().init();
+                div.getKoikiShichoson().setDisplayNone(true);
+                set選択対象DDL(適用基準日);
+            }
+            if (コード_事務広域.equals(導入形態コード.value()) || コード_事務構成市町村.equals(導入形態コード.value())) {
+                div.getTanitsuShichoson().setDisplayNone(true);
+                div.getKoikiShichoson().setDisplayNone(false);
+                div.getDdlKyushichosonKoiki().setDisplayNone(true);
+                set市町村DDL(導入形態コード);
+            }
+        }
+        div.setHdnTxtIsMultiSelected(文字_TRUE);
+        div.setHdnTxtChikuShubetsu(RString.EMPTY);
+        div.setHdnMapMultiSelect(RString.EMPTY);
+        div.setHdnTxtTitle(RString.EMPTY);
+    }
+
     private void set市町村DDL(Code 導入形態Code) {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
@@ -115,7 +145,7 @@ public class ChikuShichosonSelectHandler {
                     RString 市町村名称 = item.get市町村名称();
                     if (!keyList.contains(市町村Code)) {
                         dataSource.add(new KeyValueDataSource(市町村Code, 市町村Code.concat(全角空白).concat(市町村名称)));
-                        keyList.add(item.get市町村コード().getColumnValue());
+                        keyList.add(市町村Code);
                     }
                 }
             }
@@ -128,9 +158,9 @@ public class ChikuShichosonSelectHandler {
                 AuthorityItem 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(UserId).get(0);
                 List<ShichosonShikibetsuIDniYoruShichosonJoho> 構成市町村情報list = finder.
                         loginUserShichosonJoho(市町村識別ID.getItemId()).records();
-                if (!構成市町村情報list.isEmpty() && 構成市町村情報list.size() > 1) {
-                    RString 市町村Code = 構成市町村情報list.get(1).get市町村コード().value();
-                    RString 市町村名称 = 構成市町村情報list.get(1).get市町村名称();
+                if (!構成市町村情報list.isEmpty()) {
+                    RString 市町村Code = 構成市町村情報list.get(0).get市町村コード().value();
+                    RString 市町村名称 = 構成市町村情報list.get(0).get市町村名称();
                     dataSource.add(new KeyValueDataSource(市町村Code, 市町村Code.concat(全角空白).concat(市町村名称)));
                     div.getDdlShichoson().setDataSource(dataSource);
                     div.getDdlShichoson().setSelectedKey(市町村Code);
@@ -203,9 +233,9 @@ public class ChikuShichosonSelectHandler {
                 div.getBtnChikuNyuryokuGuide().setText(div.getDdlChiku().getSelectedValue().concat(文字_を選択する));
             }
             div.getDdlCodeList().getDataSource().clear();
-            div.setHdnTxtChikuShubetsu(div.getDdlChiku().getSelectedValue());
+            div.setHdnTxtChikuShubetsu(div.getDdlChiku().getSelectedKey());
             div.setHdnMapMultiSelect(RString.EMPTY);
-            div.setHdnTxtTitle(div.getDdlChiku().getSelectedValue());
+            div.setHdnTxtTitle(div.getDdlChiku().getSelectedKey());
         }
     }
 
@@ -263,14 +293,18 @@ public class ChikuShichosonSelectHandler {
                 List<KyuShichosonCode> 旧市町村コード情報List = 旧市町村情報.get旧市町村コード情報List();
                 if (旧市町村コード情報List != null && !旧市町村コード情報List.isEmpty()) {
                     List<KeyValueDataSource> dataSource = new ArrayList<>();
+                    dataSource.add(new KeyValueDataSource(KEY, 文字_全市町村));
+                    List<RString> keyList = new ArrayList<>();
                     for (KyuShichosonCode item : 旧市町村コード情報List) {
-                        dataSource.add(new KeyValueDataSource(item.get旧市町村コード().getColumnValue(),
-                                item.get旧市町村名称()));
+                        RString 旧市町村Code = item.get旧市町村コード().getColumnValue();
+                        RString 旧市町村名称 = item.get旧市町村名称();
+                        if (!keyList.contains(旧市町村Code)) {
+                            dataSource.add(new KeyValueDataSource(旧市町村Code, 旧市町村名称));
+                            keyList.add(旧市町村Code);
+                        }
                     }
                     div.getDdlKyushichosonKoiki().setDataSource(setDdlDataSource昇順ByKey(dataSource));
-                    if (dataSource.size() > 1) {
-                        div.getDdlKyushichosonKoiki().setSelectedIndex(1);
-                    }
+                    div.getDdlKyushichosonKoiki().setSelectedIndex(0);
                 }
             } else {
                 div.getDdlKyushichosonKoiki().setDisplayNone(true);

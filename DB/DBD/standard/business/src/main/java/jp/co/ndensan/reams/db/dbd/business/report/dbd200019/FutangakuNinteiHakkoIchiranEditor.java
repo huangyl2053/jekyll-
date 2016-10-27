@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200019;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.futangakuninteihakkoichiran.FutangakuNinteiHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200019.FutangakuNinteiHakkoIchiranReportSource;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -29,11 +32,20 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoIchiranEditor {
 
+    private static final RString タイトル = new RString("負担限度額認定証・決定通知書発行一覧表");
+    private static final RString ホシ = new RString("*");
+    private static final RString 承認 = new RString("承認");
+    private static final RString 却下 = new RString("却下");
+    private static final RString 作成 = new RString("作成");
+    private static final RString 丸 = new RString("○");
+    private static final RString 記号 = new RString("~");
+
     private static final int LISTINDEX_0 = 0;
     private static final int LISTINDEX_1 = 1;
     private static final int LISTINDEX_2 = 2;
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
+    private static final int LISTINDEX_5 = 5;
 
     private final FutangakuNinteiHakkoIchiranEntity 帳票情報;
     private final Association association;
@@ -69,19 +81,20 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
 
     private void setLayer1Step1(FutangakuNinteiHakkoIchiranReportSource source) {
         source.printTimeStamp = get印刷日時();
-        source.title = new RString("負担限度額認定証・決定通知書発行一覧表");
+        source.title = タイトル;
         if (null != association) {
             source.hokenshaNo = this.association.get地方公共団体コード().value();
             source.hokenshaName = this.association.get市町村名();
         }
         if (null != iOutputOrder) {
-            source = set出力順改頁(source);
+            setiOutputOrder(source);
+            setBreakIoutputOrder(source);
         }
         source.list_1 = new RString(String.valueOf(index + 1));
         if (null != 帳票情報) {
             FlexibleDate 喪失年月日 = this.帳票情報.get喪失年月日();
             if (null != 喪失年月日 && !喪失年月日.isEmpty()) {
-                source.list_2 = new RString("*");
+                source.list_2 = ホシ;
             }
             if (null != this.帳票情報.get被保険者番号()) {
                 source.list_3 = this.帳票情報.get被保険者番号().value();
@@ -105,27 +118,25 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
                 source.list_7 = this.帳票情報.get決定日().wareki().toDateString();
             }
             source.list_8 = get適用日有効期限();
-            if (this.帳票情報.get決定().equals(KetteiKubun.承認する)) {
-                source.list_9 = new RString("承認");
-            } else if (this.帳票情報.get決定().equals(KetteiKubun.承認しない)) {
-                source.list_9 = new RString("却下");
-            }
-            if (this.帳票情報.get決定().equals(KetteiKubun.承認する)) {
+            KetteiKubun 決定 = this.帳票情報.get決定();
+            if (KetteiKubun.承認する.equals(決定) && 決定 != null) {
+                source.list_9 = 承認;
                 source.list_10 = this.帳票情報.get負担段階();
-            } else if (this.帳票情報.get決定().equals(KetteiKubun.承認しない)) {
+            } else if (KetteiKubun.承認しない.equals(決定) && 決定 != null) {
+                source.list_9 = 却下;
                 source.list_10 = RString.EMPTY;
             }
             if (this.帳票情報.is認定証発行フラグ() && this.帳票情報.is認定証発行済み()) {
-                source.list_11 = new RString("○");
+                source.list_11 = 丸;
             }
             if (this.帳票情報.is認定証発行フラグ() && !this.帳票情報.is認定証発行済み()) {
-                source.list_11 = new RString("却下");
+                source.list_11 = 却下;
             }
             if (!this.帳票情報.is認定証発行フラグ()) {
                 source.list_11 = RString.EMPTY;
             }
             if (this.帳票情報.is通知書発行フラグ()) {
-                source.list_12 = new RString("○");
+                source.list_12 = 丸;
             }
             if (null != this.帳票情報.get入所施設CD()) {
                 source.list_13 = this.帳票情報.get入所施設CD().getColumnValue();
@@ -145,47 +156,56 @@ public class FutangakuNinteiHakkoIchiranEditor implements IFutangakuNinteiHakkoI
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        return 年月日.concat(" ").concat(時分秒).concat(" ").concat("作成");
+        return 年月日.concat(RString.HALF_SPACE).concat(時分秒).concat(RString.HALF_SPACE).concat(作成);
     }
 
     private RString get適用日有効期限() {
         RString 適用日 = this.帳票情報.get適用日().wareki().toDateString();
         RString 有効期限 = this.帳票情報.get有効期限().wareki().toDateString();
-        return 適用日.concat(new RString("~")).concat(有効期限);
+        return 適用日.concat(記号).concat(有効期限);
     }
 
-    private FutangakuNinteiHakkoIchiranReportSource set出力順改頁(FutangakuNinteiHakkoIchiranReportSource source) {
-        List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
-        if (設定項目リスト.size() > LISTINDEX_0) {
-            source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-            if (設定項目リスト.get(LISTINDEX_0).is改頁項目()) {
-                source.kaipage1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
+    private void setiOutputOrder(FutangakuNinteiHakkoIchiranReportSource source) {
+
+        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(iOutputOrder);
+        if (出力順Map.get(LISTINDEX_1) != null) {
+            source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_1).get項目名();
+
+        }
+        if (出力順Map.get(LISTINDEX_2) != null) {
+            source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_2).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_3) != null) {
+            source.shutsuryokujun3 = 出力順Map.get(LISTINDEX_3).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_4) != null) {
+            source.shutsuryokujun4 = 出力順Map.get(LISTINDEX_4).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_5) != null) {
+            source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_5).get項目名();
+        }
+    }
+
+    private void setBreakIoutputOrder(FutangakuNinteiHakkoIchiranReportSource source) {
+        int index1 = 0;
+        List<RString> 改頁list = new ArrayList<>();
+        List<ISetSortItem> list = iOutputOrder.get設定項目リスト();
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        for (int i = 0; i < LISTINDEX_5; i++) {
+            if (list.size() > i && list.get(i).is改頁項目()) {
+                改頁list.add(list.get(i).get項目名());
+                index1++;
             }
         }
-        if (設定項目リスト.size() > LISTINDEX_1) {
-            source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-            if (設定項目リスト.get(LISTINDEX_1).is改頁項目()) {
-                source.kaipage2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-            }
+        for (int i = index1; i < LISTINDEX_5; i++) {
+            改頁list.add(RString.EMPTY);
         }
-        if (設定項目リスト.size() > LISTINDEX_2) {
-            source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-            if (設定項目リスト.get(LISTINDEX_2).is改頁項目()) {
-                source.kaipage3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-            }
-        }
-        if (設定項目リスト.size() > LISTINDEX_3) {
-            source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            if (設定項目リスト.get(LISTINDEX_3).is改頁項目()) {
-                source.kaipage4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            }
-        }
-        if (設定項目リスト.size() > LISTINDEX_4) {
-            source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            if (設定項目リスト.get(LISTINDEX_4).is改頁項目()) {
-                source.kaipage5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            }
-        }
-        return source;
+        source.kaipage1 = 改頁list.get(LISTINDEX_0);
+        source.kaipage2 = 改頁list.get(LISTINDEX_1);
+        source.kaipage3 = 改頁list.get(LISTINDEX_2);
+        source.kaipage4 = 改頁list.get(LISTINDEX_3);
+        source.kaipage5 = 改頁list.get(LISTINDEX_4);
     }
 }

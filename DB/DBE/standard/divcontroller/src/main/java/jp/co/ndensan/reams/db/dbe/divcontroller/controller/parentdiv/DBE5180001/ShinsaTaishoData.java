@@ -91,7 +91,6 @@ public class ShinsaTaishoData {
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(zipPath), opts);
         SharedFileDirectAccessDescriptor sfdad = new SharedFileDirectAccessDescriptor(entry, 書庫化ファイル名);
-        //SharedFile.undefineSharedFile(entry.getFileDescriptor());
         return SharedFileDirectAccessDownload.directAccessDownload(sfdad, response);
     }
 

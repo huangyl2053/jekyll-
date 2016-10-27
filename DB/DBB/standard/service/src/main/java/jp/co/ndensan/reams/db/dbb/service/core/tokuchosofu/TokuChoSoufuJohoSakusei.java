@@ -11,6 +11,7 @@ import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchosofu.TokuChoSoufuJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB211001.DBB211001_TokuchoSofuJohoSakuseiParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -31,18 +32,6 @@ public class TokuChoSoufuJohoSakusei {
 
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac;
 
-    private static final RString 対象月_1月 = new RString("1月");
-    private static final RString 対象月_2月 = new RString("2月");
-    private static final RString 対象月_3月 = new RString("3月");
-    private static final RString 対象月_4月 = new RString("4月");
-    private static final RString 対象月_5月 = new RString("5月");
-    private static final RString 対象月_6月 = new RString("6月");
-    private static final RString 対象月_7月 = new RString("7月");
-    private static final RString 対象月_8月 = new RString("8月");
-    private static final RString 対象月_9月 = new RString("9月");
-    private static final RString 対象月_10月 = new RString("10月");
-    private static final RString 対象月_11月 = new RString("11月");
-    private static final RString 対象月_12月 = new RString("12月");
     private static final RString 年度内連番_1 = new RString("0001");
     private static final RString 年度内連番_2 = new RString("0002");
     private static final RString 年度内連番_3 = new RString("0003");
@@ -84,17 +73,17 @@ public class TokuChoSoufuJohoSakusei {
     }
 
     private void init対象月連番Map() {
-        対象月連番MAP.put(年度内連番_1, 対象月_4月);
-        対象月連番MAP.put(年度内連番_2, 対象月_5月);
-        対象月連番MAP.put(年度内連番_3, 対象月_6月);
-        対象月連番MAP.put(年度内連番_5, 対象月_8月);
-        対象月連番MAP.put(年度内連番_6, 対象月_9月);
-        対象月連番MAP.put(年度内連番_7, 対象月_10月);
-        対象月連番MAP.put(年度内連番_8, 対象月_11月);
-        対象月連番MAP.put(年度内連番_9, 対象月_12月);
-        対象月連番MAP.put(年度内連番_10, 対象月_1月);
-        対象月連番MAP.put(年度内連番_11, 対象月_2月);
-        対象月連番MAP.put(年度内連番_12, 対象月_3月);
+        対象月連番MAP.put(年度内連番_1, Tsuki._4月.getコード());
+        対象月連番MAP.put(年度内連番_2, Tsuki._5月.getコード());
+        対象月連番MAP.put(年度内連番_3, Tsuki._6月.getコード());
+        対象月連番MAP.put(年度内連番_5, Tsuki._8月.getコード());
+        対象月連番MAP.put(年度内連番_6, Tsuki._9月.getコード());
+        対象月連番MAP.put(年度内連番_7, Tsuki._10月.getコード());
+        対象月連番MAP.put(年度内連番_8, Tsuki._11月.getコード());
+        対象月連番MAP.put(年度内連番_9, Tsuki._12月.getコード());
+        対象月連番MAP.put(年度内連番_10, Tsuki._1月.getコード());
+        対象月連番MAP.put(年度内連番_11, Tsuki._2月.getコード());
+        対象月連番MAP.put(年度内連番_12, Tsuki._3月.getコード());
     }
 
     /**
@@ -118,9 +107,9 @@ public class TokuChoSoufuJohoSakusei {
         DbT7022ShoriDateKanriEntity 特徴依頼情報作成 = 処理日付管理Dac.get特徴依頼情報作成の基準日時含みエンティティ(
                 SubGyomuCode.DBB介護賦課, ShoriName.特徴依頼情報作成.get名称(), 賦課年度, 年度内連番_1);
         if (null != 特徴依頼情報作成) {
-            処理日時Map.put(対象月_7月, 特徴依頼情報作成.getKijunTimestamp());
+            処理日時Map.put(Tsuki._7月.getコード(), 特徴依頼情報作成.getKijunTimestamp());
         } else {
-            処理日時Map.put(対象月_7月, null);
+            処理日時Map.put(Tsuki._7月.getコード(), null);
         }
         List<DbT7022ShoriDateKanriEntity> entityList = 処理日付管理Dac.selectShorikubun(SubGyomuCode.DBB介護賦課,
                 ShoriName.特徴異動情報作成.get名称(), 賦課年度);
@@ -152,7 +141,7 @@ public class TokuChoSoufuJohoSakusei {
         parameter.set賦課年度(divParam.get賦課年度());
         RString 処理対象月 = divParam.get処理対象月();
         parameter.set処理対象月(処理対象月);
-        if (対象月_7月.equals(処理対象月)) {
+        if (Tsuki._7月.getコード().equals(処理対象月)) {
             parameter.set帳票ID(帳票ID_1);
             parameter.set件数表帳票ID(件数表帳票ID_1);
         } else {

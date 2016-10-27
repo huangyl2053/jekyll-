@@ -16,19 +16,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum GendogakuTaisyogaiFlg {
 
     /**
-     * コード:0 名称:限度額対象 略称:定義なし
+     * コード:0 名称:限度額対象 略称:対象
      */
-    新規("0", "限度額対象"),
+    新規("0", "限度額対象", "対象"),
     /**
-     * コード:1 名称:限度額対象外 略称:定義なし
+     * コード:1 名称:限度額対象外 略称:対象外
      */
-    修正("1", "限度額対象外");
+    修正("1", "限度額対象外", "対象外");
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private GendogakuTaisyogaiFlg(String code, String fullname) {
+    private GendogakuTaisyogaiFlg(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -47,6 +49,15 @@ public enum GendogakuTaisyogaiFlg {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 限度額対象外フラグの略称を返します。
+     *
+     * @return 限度額対象外フラグの略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

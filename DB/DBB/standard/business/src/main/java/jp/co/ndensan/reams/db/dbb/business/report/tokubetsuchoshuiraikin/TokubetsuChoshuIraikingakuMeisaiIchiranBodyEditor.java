@@ -5,15 +5,23 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin;
 
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin.param.TokubetsuChoshuIraikingakuMeisaiIchiranInputParam;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsuAfterCorrection;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.PrecedingFiscalYearInformation;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranSource;
-import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
-import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NenkinTokuchoKaifuJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -24,8 +32,16 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
         implements ITokubetsuChoshuIraikingakuMeisaiIchiranEditor {
 
-    private final KariTokuchoKaishiTsuchisyoJoho 通知書情報;
-    private static final RString 特徴開始月 = new RString("４月");
+    private final DbT2002FukaJohoTempTableEntity 賦課の情報一時Entity;
+    private final IKojin 宛名;
+    private final ChoshuHoho 徴収方法;
+    private final NenkinTokuchoKaifuJoho 年金特徴回付情報;
+    private final HokenryoDankai 保険料段階;
+    private final ChohyoSeigyoKyotsu 帳票制御共通;
+    private final boolean 本算定Flag;
+    private final Association 地方公共団体;
+    private static final RString 特徴開始月4 = new RString("4月");
+    private static final RString 特徴開始月8 = new RString("8月");
 
     /**
      * インスタンスを生成します。
@@ -34,89 +50,79 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
      */
     public TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor(
             TokubetsuChoshuIraikingakuMeisaiIchiranInputParam inputEntity) {
-        this.通知書情報 = inputEntity.get通知書情報();
+        this.賦課の情報一時Entity = inputEntity.get賦課の情報一時Entity();
+        this.宛名 = inputEntity.get宛名();
+        this.徴収方法 = inputEntity.get徴収方法();
+        this.年金特徴回付情報 = inputEntity.get年金特徴回付情報();
+        this.保険料段階 = inputEntity.get保険料段階();
+        this.帳票制御共通 = inputEntity.get帳票制御共通();
+        this.本算定Flag = inputEntity.is本算定Flag();
+        this.地方公共団体 = inputEntity.get地方公共団体();
 
     }
 
     @Override
     public TokubetsuChoshuIraikingakuMeisaiIchiranSource edit(TokubetsuChoshuIraikingakuMeisaiIchiranSource source) {
-        if (null != 通知書情報) {
-            source.listCenter_4 = 通知書情報.get特徴捕捉月();
+        if (賦課の情報一時Entity != null) {
+            source.listUpper_1 = getColumnValue(賦課の情報一時Entity.getTsuchishoNo());
+            source.listUpper_2 = getColumnValue(賦課の情報一時Entity.getShikibetsuCode());
+            if (保険料段階 != null) {
+                source.listCenter_1 = 保険料段階.get表記();
+                source.listCenter_2 = doカンマ編集(保険料段階.get保険料率());
+            }
+            source.listCenter_6 = doカンマ編集(賦課の情報一時Entity.getTkKibetsuGaku03());
+            source.listLower_1 = getColumnValue(賦課の情報一時Entity.getHihokenshaNo());
+            source.listLower_2 = getColumnValue(賦課の情報一時Entity.getSetaiCode());
         }
-        if (null != 通知書情報 && null != 通知書情報.get編集後仮算定通知書共通情報()) {
-            EditedKariSanteiTsuchiShoKyotsu 編集後共通情報 = 通知書情報.get編集後仮算定通知書共通情報();
-            if (null != 編集後共通情報.get通知書番号()) {
-                source.listUpper_1 = 編集後共通情報.get通知書番号().getColumnValue();
-            }
-            if (null != 編集後共通情報.get識別コード()) {
-                source.listUpper_2 = 編集後共通情報.get識別コード().getColumnValue();
-            }
-            if (null != 編集後共通情報.get被保険者番号()) {
-                source.listLower_1 = 編集後共通情報.get被保険者番号().getColumnValue();
-            }
-            if (null != 編集後共通情報.get編集後宛先()) {
-                set編集後宛先(source, 編集後共通情報.get編集後宛先());
-            }
-            if (null != 編集後共通情報.get編集後個人()) {
-                set編集後個人(source, 編集後共通情報.get編集後個人());
-            }
-            if (null != 編集後共通情報.get前年度情報()) {
-                set前年度情報(source, 編集後共通情報.get前年度情報());
-            }
-            if (null != 編集後共通情報.get更正後()) {
-                set更正後(source, 編集後共通情報.get更正後());
+        if (宛名 != null) {
+            source.listUpper_3 = getColumnValue(宛名.get行政区画().getGyoseiku().getコード());
+            RString 住所編集 = JushoHenshu.editJusho(帳票制御共通, 宛名,
+                    地方公共団体);
+            source.listUpper_5 = 住所編集;
+            source.listLower_3 = getColumnValue(宛名.get住所().get町域コード());
+            if (宛名.get名称() != null) {
+                source.listLower_5 = getColumnValue(宛名.get名称().getName());
             }
         }
-        source.listCenter_5 = 特徴開始月;
+        if (徴収方法 != null) {
+            if (本算定Flag) {
+                source.listUpper_4 = 徴収方法.get本徴収_年金コード();
+                source.listLower_4 = 徴収方法.get本徴収_基礎年金番号();
+                source.listLower_6 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                        UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(徴収方法.get本徴収_年金コード()));
+            } else {
+                source.listUpper_4 = 徴収方法.get仮徴収_年金コード();
+                source.listLower_4 = 徴収方法.get仮徴収_基礎年金番号();
+                source.listLower_6 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                        UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(徴収方法.get仮徴収_年金コード()));
+            }
+        }
+        if (年金特徴回付情報 != null) {
+            source.listUpper_6 = getColumnValue(年金特徴回付情報.getDT特別徴収義務者コード());
+        }
+        if (本算定Flag) {
+            source.listCenter_5 = 特徴開始月4;
+        } else {
+            source.listCenter_5 = 特徴開始月8;
+        }
         source.listCenter_7 = RString.EMPTY;
         source.keisanHoho = RString.EMPTY;
 
         return source;
     }
 
-    private void set編集後宛先(TokubetsuChoshuIraikingakuMeisaiIchiranSource source,
-            EditedAtesaki 編集後宛先) {
-        if (null != 編集後宛先.get行政区コード()) {
-            source.listUpper_3 = 編集後宛先.get行政区コード().getColumnValue();
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
         }
-        source.listUpper_5 = 編集後宛先.get編集後住所();
-        if (null != 編集後宛先.get住所コード()) {
-            source.listLower_3 = 編集後宛先.get住所コード().getColumnValue();
-        }
+        return RString.EMPTY;
     }
 
-    private void set編集後個人(TokubetsuChoshuIraikingakuMeisaiIchiranSource source,
-            EditedKojin 編集後個人) {
-        if (null != 編集後個人.get世帯コード()) {
-            source.listLower_2 = 編集後個人.get世帯コード().getColumnValue();
+    private RString doカンマ編集(Decimal number) {
+        if (null == number) {
+            return RString.EMPTY;
         }
-        if (null != 編集後個人.get名称() && null != 編集後個人.get名称().getName()) {
-            source.listLower_5 = 編集後個人.get名称().getName().getColumnValue();
-        }
-    }
-
-    private void set前年度情報(TokubetsuChoshuIraikingakuMeisaiIchiranSource source,
-            PrecedingFiscalYearInformation 前年度情報) {
-        if (null != 前年度情報.get前年度保険料率()) {
-            source.listCenter_2 = new RString(前年度情報.get前年度保険料率().toString());
-        }
-        if (null != 前年度情報.get前年度最終期特徴期別介護保険料()) {
-            source.listCenter_3 = DecimalFormatter.toコンマ区切りRString(
-                    前年度情報.get前年度最終期特徴期別介護保険料(), 0);
-        }
-    }
-
-    private void set更正後(TokubetsuChoshuIraikingakuMeisaiIchiranSource source,
-            EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後) {
-        source.listUpper_4 = 更正後.get更正後特別徴収対象年金コード();
-        source.listUpper_6 = 更正後.get更正後特別徴収義務者();
-        source.listCenter_1 = 更正後.get保険料段階();
-        if (null != 更正後.get更正後特徴期別金額01()) {
-            source.listCenter_6 = DecimalFormatter.toコンマ区切りRString(
-                    更正後.get更正後特徴期別金額01(), 0);
-        }
-        source.listLower_4 = 更正後.get更正後特別徴収対象年金コード();
-        source.listLower_6 = 更正後.get更正後特別徴収対象年金();
+        return DecimalFormatter.toコンマ区切りRString(number, 0);
     }
 
 }

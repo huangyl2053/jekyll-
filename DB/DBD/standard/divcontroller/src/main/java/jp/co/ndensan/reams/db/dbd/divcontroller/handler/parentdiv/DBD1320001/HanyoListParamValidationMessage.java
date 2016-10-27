@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 /**
  * 汎用リスト出力(介護受給共通)の入力チェックのメッセージクラスです。
  *
- * @reamsid_L DBD-3930-011 liwul
+ * @reamsid_L DBD-3930-010 liwul
  */
 public enum HanyoListParamValidationMessage implements IValidationMessage {
 
@@ -33,15 +33,7 @@ public enum HanyoListParamValidationMessage implements IValidationMessage {
     /**
      * 基準日RbG・範囲Rbが選択されている場合、範囲条件・範囲From、範囲条件・範囲Toが共に入力されている場合、From-Toの大小関係をチェックする。 範囲From > 範囲Toの場合、エラーとする。
      */
-    実行するボタンクリック5(UrErrorMessages.期間が不正_追加メッセージあり１, "範囲To", "範囲From"),
-    /**
-     * 宛名抽出項目区分RDB・年齢が選択されている場合、年齢From、年齢Toが共に入力されている場合、From-Toの大小関係をチェックする。 年齢From > 年齢Toの場合、エラーとする。
-     */
     実行するボタンクリック7(UrErrorMessages.大小関係が不正, "年齢"),
-    /**
-     * 宛名抽出項目区分RDB・生年月日が選択されている場合、生年月日From、生年月日Toが共に入力されている場合、From-Toの大小関係をチェックする。 生年月日From > 生年月日Toの場合、エラーとする。
-     */
-    実行するボタンクリック10(UrErrorMessages.期間が不正_追加メッセージあり１, "日付範囲From", "日付範囲To"),
     /**
      * 帳票・CSV出力が「True」または帳票のみ出力が「True」の時、 表題が未入力（Empty)であればWarningMessage、警告MSGを表示する ※条件保存の場合はチェック不要
      */

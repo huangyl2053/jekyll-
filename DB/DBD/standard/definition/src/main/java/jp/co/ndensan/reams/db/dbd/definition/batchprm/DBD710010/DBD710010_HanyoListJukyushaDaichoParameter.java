@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710010;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.ChushutsuHohoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.hanyorisutojyukyusya.HanyoRisutoJyukyusyaProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -108,4 +109,38 @@ public class DBD710010_HanyoListJukyushaDaichoParameter extends BatchParameterBa
     @BatchParameter(key = SYUTSURYOKUKOMOKU, name = "出力項目")
     private RString syutsuryokukomoku;
 
+    /**
+     * バーチのパラメータを作成します。
+     *
+     * @return HanyoRisutoJyukyusyaDaichoProcessParameter
+     */
+    public HanyoRisutoJyukyusyaProcessParameter toHanyoRisutoJyukyusyaProcessParameter() {
+        return new HanyoRisutoJyukyusyaProcessParameter(cyusyutsuhohokubun,
+                isYukoudatasaisin,
+                kizyunnichi,
+                hitsukehanifrom,
+                hitsukehanito,
+                isNinteikekka0,
+                isNinteikekka1,
+                isNinteikekka2,
+                isNinteikekka3,
+                isNinteikekka4,
+                isNinteikekka5,
+                isNinteikekka6,
+                isNinteikekka7,
+                isNinteikekka8,
+                isNinteikekka9,
+                isNinteikekka10,
+                soshitsukubun,
+                isKyusochisha,
+                isHihokensya1,
+                isHihokensya2,
+                isNinteiSabisu,
+                isCsvkomokumeifuka,
+                isCsvrenbanfuka,
+                isCsvhitsukesurasyuhensyu,
+                atenacyusyutsujyoken,
+                syutsuryokujunparameter,
+                syutsuryokukomoku);
+    }
 }

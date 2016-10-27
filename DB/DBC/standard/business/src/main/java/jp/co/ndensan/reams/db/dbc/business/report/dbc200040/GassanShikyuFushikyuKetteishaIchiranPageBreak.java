@@ -49,10 +49,34 @@ public class GassanShikyuFushikyuKetteishaIchiranPageBreak extends PageBreaker<G
             } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.対象年度.get項目ID())
                     && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
                 flag = true;
-            } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請書整理番号.get項目ID())
-                    && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
-                flag = true;
+            } else {
+                setFlag(currentSource, nextSource);
             }
+        }
+        return flag;
+    }
+
+    private boolean setFlag(ReportLineRecord<GassanShikyuFushikyuKetteishaIchiranSource> currentSource,
+            ReportLineRecord<GassanShikyuFushikyuKetteishaIchiranSource> nextSource) {
+        boolean flag = false;
+        if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.証記載保険者番号.get項目ID())
+                && !currentSource.getSource().add_hokenshaNo.equals(nextSource.getSource().add_hokenshaNo)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.市町村コード.get項目ID())
+                && !currentSource.getSource().add_shichosonCode.equals(nextSource.getSource().add_shichosonCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().add_kanaMeisho.equals(nextSource.getSource().add_kanaMeisho)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.町域コード.get項目ID())
+                && !currentSource.getSource().add_choikiCode.equals(nextSource.getSource().add_choikiCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.行政区コード.get項目ID())
+                && !currentSource.getSource().add_gyoseikuCode.equals(nextSource.getSource().add_gyoseikuCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.郵便番号.get項目ID())
+                && !currentSource.getSource().add_yubinNo.equals(nextSource.getSource().add_yubinNo)) {
+            flag = true;
         }
         return flag;
     }

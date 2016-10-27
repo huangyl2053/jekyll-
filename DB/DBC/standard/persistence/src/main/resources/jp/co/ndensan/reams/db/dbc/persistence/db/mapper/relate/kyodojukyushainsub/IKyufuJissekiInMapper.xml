@@ -12,6 +12,7 @@
             COALESCE(dbWT5C31."hokenshaNo", dbWT5C32."hokenshaNo", dbWT5C33."hokenshaNo") AS "集約保険者番号",
             COALESCE(dbWT5C31."hokenshaName", dbWT5C32."hokenshaName", dbWT5C33."hokenshaName") AS "集約保険者名",
             COALESCE(dbWT5C31."hiHokenshaNo", dbWT5C32."hiHokenshaNo", dbWT5C33."hiHokenshaNo") AS "集約被保険者番号",
+            COALESCE(dbWT5C31."shoKisaiHokenshaNo", dbWT5C32."shoKisaiHokenshaNo", dbWT5C33."shoKisaiHokenshaNo") AS "集約証記載保険者番号",
             COALESCE(dbWT5C31."idoYMD", dbWT5C32."idoYMD", dbWT5C33."idoYMD") AS "集約異動年月日",
             dbWT5C31."hokenshaNo" AS "基_保険者番号",
             dbWT5C31."hokenshaName" AS "基_保険者名",

@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200002;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.ChohyoShutsuryokuJohoShutokuResultEntity;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00002.NinteishaListSakuseiResultEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd00002.RiyoshaFutangakuGemmenGaitoshaIchiranReportSource;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -19,35 +21,53 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class RiyoshaFutangakuGemmenGaitoshaIchiranReport extends Report<RiyoshaFutangakuGemmenGaitoshaIchiranReportSource> {
 
-    private final ChohyoShutsuryokuJohoShutokuResultEntity target;
+    private final NinteishaListSakuseiResultEntity target;
+    private final IOutputOrder outputOrder;
+    private static final int NUM_0 = 0;
+    private static final int NUM_3 = 3;
+    private final SetaiHyoji 世帯表示;
 
     /**
      * インスタンスを生成します。
      *
      * @param target target
      * @param 帳票作成日時 帳票作成日時
-     * @param 出力順 出力順
+     * @param 出力順 IOutputOrder
      * @param 導入団体コード 導入団体コード
      * @param 導入団体名称 導入団体名称
      * @param 帳票タイトル 帳票タイトル
      * @param 改ページ 改ページ
+     * @param 世帯表示 SetaiHyoji
      */
-    public RiyoshaFutangakuGemmenGaitoshaIchiranReport(ChohyoShutsuryokuJohoShutokuResultEntity target, FlexibleDate 帳票作成日時,
-            RString 出力順, RString 導入団体コード, RString 導入団体名称, RString 帳票タイトル, RString 改ページ) {
+    public RiyoshaFutangakuGemmenGaitoshaIchiranReport(NinteishaListSakuseiResultEntity target, FlexibleDate 帳票作成日時,
+            IOutputOrder 出力順, RString 導入団体コード, RString 導入団体名称, RString 帳票タイトル, RString 改ページ, SetaiHyoji 世帯表示) {
         this.target = target;
         this.target.set帳票作成日時(帳票作成日時);
-        this.target.set出力順(出力順);
+        this.outputOrder = 出力順;
         this.target.set導入団体コード(導入団体コード);
         this.target.set導入団体名称(導入団体名称);
         this.target.set帳票タイトル(帳票タイトル);
         this.target.set改ページ(改ページ);
+        this.世帯表示 = 世帯表示;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<RiyoshaFutangakuGemmenGaitoshaIchiranReportSource> writer) {
-        IRiyoshaFutangakuGemmenGaitoshaIchiranEditor editor = new RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl(target);
-        IRiyoshaFutangakuGemmenGaitoshaIchiranBuilder builder = new RiyoshaFutangakuGemmenGaitoshaIchiranBuilderImpl(editor);
-        writer.writeLine(builder);
 
+        int index = 1;
+        if (target.get世帯員リスト() == null || target.get世帯員リスト().isEmpty()) {
+            IRiyoshaFutangakuGemmenGaitoshaIchiranEditor editor = new RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl(target,
+                    outputOrder, index, 世帯表示);
+            IRiyoshaFutangakuGemmenGaitoshaIchiranBuilder builder = new RiyoshaFutangakuGemmenGaitoshaIchiranBuilderImpl(editor);
+            writer.writeLine(builder);
+        } else {
+            for (int i = NUM_0; i < target.get世帯員リスト().size(); i += NUM_3) {
+                    IRiyoshaFutangakuGemmenGaitoshaIchiranEditor editor = new RiyoshaFutangakuGemmenGaitoshaIchiranEditorImpl(target,
+                        outputOrder, index, 世帯表示);
+                    IRiyoshaFutangakuGemmenGaitoshaIchiranBuilder builder = new RiyoshaFutangakuGemmenGaitoshaIchiranBuilderImpl(editor);
+                    writer.writeLine(builder);
+                    index++;
+            }
+        }
     }
 }

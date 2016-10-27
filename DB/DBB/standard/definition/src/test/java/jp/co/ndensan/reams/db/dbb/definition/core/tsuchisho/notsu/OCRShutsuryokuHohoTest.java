@@ -25,66 +25,50 @@ public class OCRShutsuryokuHohoTest extends DbbTestBase {
 
     @Test
     public void 引数に0を指定した場合_toValueは_口座振替_ならOCR欄を印字しないを返す() {
-        assertThat(OCRShutsuryokuHoho.toValue(new RString("0")), is(OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない));
+        assertThat(OCRShutsuryokuHoho.toValue(new RString("0")), is(OCRShutsuryokuHoho.印字しない));
     }
 
     @Test
     public void 引数に1を指定した場合_toValueは_口座振替_ならOCR欄を_星印_でつぶすを返す() {
-        assertThat(OCRShutsuryokuHoho.toValue(new RString("1")), is(OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす
+        assertThat(OCRShutsuryokuHoho.toValue(new RString("1")), is(OCRShutsuryokuHoho.マスクでつぶす
         ));
     }
 
     @Test
     public void 引数に2を指定した場合_toValueは_口座振替_ならOCR欄を印字するを返す() {
-        assertThat(OCRShutsuryokuHoho.toValue(new RString("2")), is(OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する));
+        assertThat(OCRShutsuryokuHoho.toValue(new RString("2")), is(OCRShutsuryokuHoho.印字する));
     }
 
     @Test
     public void _口座振替_ならOCR欄を印字しないを指定した場合_getコードは_0を返す() {
-        assertThat(OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない.getコード(), is(new RString("0")));
+        assertThat(OCRShutsuryokuHoho.印字しない.getコード(), is(new RString("0")));
     }
 
     @Test
     public void _口座振替_ならOCR欄を_星印_でつぶすを指定した場合_getコードは_1を返す() {
-        assertThat(OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす.getコード(), is(new RString("1"))
+        assertThat(OCRShutsuryokuHoho.マスクでつぶす.getコード(), is(new RString("1"))
         );
     }
 
     @Test
     public void _口座振替_ならOCR欄を印字するを指定した場合_getコードは_2を返す() {
-        assertThat(OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する.getコード(), is(new RString("2")));
+        assertThat(OCRShutsuryokuHoho.印字する.getコード(), is(new RString("2")));
     }
 
     @Test
     public void _口座振替_ならOCR欄を印字しないを指定した場合_get名称は_印字しないを返す() {
-        assertThat(OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない.get名称(), is(new RString("印字しない")));
+        assertThat(OCRShutsuryokuHoho.印字しない.get名称(), is(new RString("「口座振替」ならOCR欄を印字しない")));
     }
 
     @Test
     public void _口座振替_ならOCR欄を_星印_でつぶすを指定した場合_get名称は_マスクでつぶすを返す() {
-        assertThat(OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす.get名称(), is(new RString("マスクでつぶす"))
+        assertThat(OCRShutsuryokuHoho.マスクでつぶす.get名称(), is(new RString("「口座振替」ならOCR欄を「＊」でつぶす"))
         );
     }
 
     @Test
     public void _口座振替_ならOCR欄を印字するを指定した場合_get名称は_印字するを返す() {
-        assertThat(OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する.get名称(), is(new RString("印字する")));
-    }
-
-    @Test
-    public void _口座振替_ならOCR欄を印字しないを指定した場合_get略称は__口座振替_ならOCR欄を印字しないを返す() {
-        assertThat(OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない.get略称(), is(new RString("「口座振替」ならOCR欄を印字しない")));
-    }
-
-    @Test
-    public void _口座振替_ならOCR欄を_星印_でつぶすを指定した場合_get略称は__口座振替_ならOCR欄を_星印_でつぶすを返す() {
-        assertThat(OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす.get略称(), is(new RString("「口座振替」ならOCR欄を「星印」でつぶす"))
-        );
-    }
-
-    @Test
-    public void _口座振替_ならOCR欄を印字するを指定した場合_get略称は__口座振替_ならOCR欄を印字するを返す() {
-        assertThat(OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する.get略称(), is(new RString("「口座振替」ならOCR欄を印字する")));
+        assertThat(OCRShutsuryokuHoho.印字する.get名称(), is(new RString("「口座振替」ならOCR欄を印字する")));
     }
 
 }

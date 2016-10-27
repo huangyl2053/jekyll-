@@ -7,8 +7,12 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchishoshihara
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -36,6 +40,7 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private FlexibleDate ninteiYukoKikanKaishiYMD;
     private FlexibleDate ninteiYukoKikanShuryoYMD;
     private FlexibleDate uketsukeYMD;
+    private RString shinseishaKubun;
     private FlexibleDate ketteiYMD;
     private Decimal shiharaiKingakuUchiwakeRiyoshabun;
     private Decimal shiharaiKingaku;
@@ -58,4 +63,8 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private RString shiharaiShuryoTime;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString serviceShuruiCode;
+    private ChoikiCode choikiCode;
+    private GyoseikuCode gyoseikuCode;
+    private AtenaKanaMeisho kanaMeisho;
+    private LasdecCode genLasdecCode;
 }

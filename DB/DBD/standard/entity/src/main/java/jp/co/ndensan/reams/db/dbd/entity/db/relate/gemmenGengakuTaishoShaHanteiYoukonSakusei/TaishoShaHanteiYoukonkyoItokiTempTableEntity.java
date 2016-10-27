@@ -51,9 +51,9 @@ public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends
     @TempTableColumnOrder(7)
     private RString 世帯課税区分;
     @TempTableColumnOrder(8)
-    private Boolean is生活保護受給者;
+    private boolean is生活保護受給者;
     @TempTableColumnOrder(9)
-    private Boolean is老齢福祉年金受給者;
+    private boolean is老齢福祉年金受給者;
     @TempTableColumnOrder(10)
     private Decimal 合計所得金額;
     @TempTableColumnOrder(11)
@@ -61,11 +61,12 @@ public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends
     @TempTableColumnOrder(12)
     private Decimal 非課税年金勘案額;
     @TempTableColumnOrder(13)
-    private Boolean is高齢者複数世帯;
+    private boolean is高齢者複数世帯;
     @TempTableColumnOrder(14)
-    private Boolean is所得税課税世帯;
+    private boolean is所得税課税世帯;
     @TempTableColumnOrder(15)
-    private Boolean is所得税課税者;
+    private boolean is所得税課税者;
+
     @TempTableColumnOrder(16)
     private Decimal 課税所得額;
 
@@ -104,14 +105,14 @@ public class TaishoShaHanteiYoukonkyoItokiTempTableEntity extends
         this.set配偶者識別コード(entity.get配偶者識別コード());
         this.set配偶者課税区分(entity.get配偶者課税区分());
         this.set世帯課税区分(entity.get世帯課税区分());
-        this.setIs生活保護受給者(entity.getIs生活保護受給者());
-        this.setIs老齢福祉年金受給者(entity.getIs老齢福祉年金受給者());
+        this.set生活保護受給者(entity.is生活保護受給者());
+        this.set老齢福祉年金受給者(entity.is老齢福祉年金受給者());
         this.set合計所得金額(entity.get合計所得金額());
         this.set年金収入額(entity.get年金収入額());
         this.set非課税年金勘案額(entity.get非課税年金勘案額());
-        this.setIs高齢者複数世帯(entity.getIs高齢者複数世帯());
-        this.setIs所得税課税世帯(entity.getIs所得税課税世帯());
-        this.setIs所得税課税者(entity.getIs所得税課税者());
+        this.set高齢者複数世帯(entity.is高齢者複数世帯());
+        this.set所得税課税世帯(entity.is所得税課税世帯());
+        this.set所得税課税者(entity.is所得税課税者());
         this.set課税所得額(entity.get課税所得額());
     }
 

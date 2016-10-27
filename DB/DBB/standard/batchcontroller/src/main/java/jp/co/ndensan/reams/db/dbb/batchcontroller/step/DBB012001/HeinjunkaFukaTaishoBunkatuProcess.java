@@ -61,8 +61,10 @@ public class HeinjunkaFukaTaishoBunkatuProcess extends BatchProcessBase<FukaJoho
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         KitsukiList 普徴仮算定期間 = 期月リスト_普徴.filtered仮算定期間();
         List<Kitsuki> 普徴仮算定期間リスト = 普徴仮算定期間.toList();
-        仮算定期間_最大期 = 普徴仮算定期間リスト.get(0).get期AsInt();
-        仮算定期間_最小期 = 普徴仮算定期間リスト.get(普徴仮算定期間リスト.size() - 1).get期AsInt();
+        if (!普徴仮算定期間リスト.isEmpty()) {
+            仮算定期間_最大期 = 普徴仮算定期間リスト.get(0).get期AsInt();
+            仮算定期間_最小期 = 普徴仮算定期間リスト.get(普徴仮算定期間リスト.size() - 1).get期AsInt();
+        }
     }
 
     @Override

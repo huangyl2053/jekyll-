@@ -4,7 +4,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchotaishoshadotei.ITokuchoTaishoshaDoteiMapper">
      <!--介護の３つのテーブルの全件対象者一覧データ取得-->
     <select resultOrdered="true" id="get介護の３つのテーブルの全件" resultMap="resultMap_TokuchoTaishoshaDoteiCombineEntity" fetchSize="500">
-        SELECT row_number() OVER (PARTITION BY HIHOKENSHA."shikibetsuCode" ORDER BY HIHOKENSHA."idoYMD" DESC, HIHOKENSHA."edaNo" DESC) AS rrkno,
+        SELECT row_number() OVER (ORDER BY HIHOKENSHA."shikibetsuCode", HIHOKENSHA."idoYMD" DESC, HIHOKENSHA."edaNo" DESC) AS rrkno,
         <include refid="allColumns_DbV1001HihokenshaDaicho"/>,
         <include refid="allColumns_DbV1002TekiyoJogaisha"/>,
         <include refid="allColumns_DbV1003TashichosonJushochiTokurei"/>
@@ -25,7 +25,7 @@
     </select>
     <!--介護の３つのテーブルと徴収方法の全件取得-->
     <select resultOrdered="true" id="get介護の３つのテーブルと徴収方法の全件" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshadotei.TokuchoTaishoshaDoteiMybatisParameter" resultMap="resultMap_TokuchoTaishoshaDoteiCombineEntity" fetchSize="500">
-        SELECT row_number() OVER (PARTITION BY HIHOKENSHA."shikibetsuCode" ORDER BY HIHOKENSHA."idoYMD" DESC, HIHOKENSHA."edaNo" DESC) AS rrkno,
+        SELECT row_number() OVER (ORDER BY HIHOKENSHA."shikibetsuCode", TOKUREI."shikibetsuCode" , CHOSHUHOHO."hihokenshaNo") AS rrkno,
         <include refid="allColumns_DbV1001HihokenshaDaicho"/>,
         <include refid="allColumns_DbV1002TekiyoJogaisha"/>,
         <include refid="allColumns_DbV1003TashichosonJushochiTokurei"/>,
@@ -49,7 +49,7 @@
     
     <!--介護の３つのテーブルと徴収方法の全件取得-->
     <select resultOrdered="true" id="get徴収方法情報" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshadotei.TokuchoTaishoshaDoteiMybatisParameter" resultMap="resultMap_TokuchoTaishoshaDoteiCombineEntity" fetchSize="500">
-        SELECT row_number() OVER (PARTITION BY CHOSHUHOHO."hihokenshaNo" ORDER BY CHOSHUHOHO."fukaNendo" DESC, CHOSHUHOHO."rirekiNo" ASC) AS rrkno,
+        SELECT row_number() OVER (ORDER BY DOTEI."shikibetsuCode") AS rrkno,
         <include refid="allColumns_DoteiTemp"/>,
         <include refid="allColumns_DbV1001HihokenshaDaicho"/>,
         <include refid="allColumns_DbV2001ChoshuHoho"/>
@@ -63,7 +63,7 @@
             "rgdb"."DbV2001ChoshuHoho" AS CHOSHUHOHO 
         ON 
             HIHOKENSHA."hihokenshaNo" = CHOSHUHOHO."hihokenshaNo"
-        WHERE								
+        AND								
             CHOSHUHOHO."fukaNendo" = #{処理年度}							
         ORDER BY							
             HIHOKENSHA."hihokenshaNo"

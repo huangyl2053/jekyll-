@@ -95,32 +95,7 @@ public class SanteiKisoTest extends DbbTestBase {
 
     @Test
     public void 保険料率_今年度を指定した場合_get名称は_保険料率_今年度を返す() {
-        assertThat(SanteiKiso.保険料率_今年度.get名称(), is(new RString("保険料率_今年度")));
-    }
-
-    @Test
-    public void 空白を指定した場合_get略称は_空文字列を返す() {
-        assertThat(SanteiKiso.空白.get略称(), is(RString.EMPTY));
-    }
-
-    @Test
-    public void 保険料率を指定した場合_get略称は_保険料率を返す() {
-        assertThat(SanteiKiso.保険料率.get略称(), is(new RString("保険料率")));
-    }
-
-    @Test
-    public void 年額保険料を指定した場合_get略称は_年額保険料を返す() {
-        assertThat(SanteiKiso.年額保険料.get略称(), is(new RString("年額保険料")));
-    }
-
-    @Test
-    public void 最終期保険料額を指定した場合_get略称は_最終期保険料額を返す() {
-        assertThat(SanteiKiso.最終期保険料額.get略称(), is(new RString("最終期保険料額")));
-    }
-
-    @Test
-    public void 保険料率_今年度を指定した場合_get略称は_保険料率_今年度を返す() {
-        assertThat(SanteiKiso.保険料率_今年度.get略称(), is(new RString("保険料率（今年度）")));
+        assertThat(SanteiKiso.保険料率_今年度.get名称(), is(new RString("保険料率（今年度）")));
     }
 
 }

@@ -77,163 +77,219 @@ public class JukyushaIdoRenrakuhyoTorokuPanelHandler {
      * Save時DB出力(受給者異動送付)ます。
      *
      * @param result result
+     * @param entity entity
      * @return JukyushaIdoRenrakuhyo
      */
-    public JukyushaIdoRenrakuhyo editResult(JukyushaIdoRenrakuhyo result) {
+    public JukyushaIdoRenrakuhyo editResult(JukyushaIdoRenrakuhyo result, JukyushaIdoRenrakuhyo entity) {
         JukyushaIdoRenrakuhyoBuilder resultEdit = result.createBuilderForEdit();
-        if (RString.isNullOrEmpty(result.get居宅サービス計画作成区分コード())) {
+        if ((!RString.isNullOrEmpty(entity.get居宅サービス計画作成区分コード()))
+                && RString.isNullOrEmpty(result.get居宅サービス計画作成区分コード())) {
             resultEdit = resultEdit.set居宅サービス計画作成区分コード(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get利用者負担区分コード())) {
+        if ((!RString.isNullOrEmpty(entity.get利用者負担区分コード()))
+                && RString.isNullOrEmpty(result.get利用者負担区分コード())) {
             resultEdit = resultEdit.set利用者負担区分コード(半角アスタリスク);
         }
-        if (result.get給付率() == null) {
+        if (entity.get給付率() != null && result.get給付率() == null) {
             resultEdit = resultEdit.set給付率(ZERO);
         }
-        if (RString.isNullOrEmpty(result.get標準負担区分コード())) {
+        if ((!RString.isNullOrEmpty(entity.get標準負担区分コード()))
+                && RString.isNullOrEmpty(result.get標準負担区分コード())) {
             resultEdit = resultEdit.set標準負担区分コード(半角アスタリスク);
         }
-        if (result.get負担額() == null) {
+        if (entity.get負担額() != null && result.get負担額() == null) {
             resultEdit = resultEdit.set負担額(ZERO);
         }
-        if (RString.isNullOrEmpty(result.get特定入所者介護サービス区分コード())) {
+        if ((!RString.isNullOrEmpty(entity.get特定入所者介護サービス区分コード()))
+                && RString.isNullOrEmpty(result.get特定入所者介護サービス区分コード())) {
             resultEdit = resultEdit.set特定入所者介護サービス区分コード(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.is課税層の特例減額措置対象フラグ())) {
+        if ((!RString.isNullOrEmpty(entity.is課税層の特例減額措置対象フラグ()))
+                && RString.isNullOrEmpty(result.is課税層の特例減額措置対象フラグ())) {
             resultEdit = resultEdit.set特定入所者介護サービス区分コード(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get軽減率())) {
+        if ((!RString.isNullOrEmpty(entity.get軽減率()))
+                && RString.isNullOrEmpty(result.get軽減率())) {
             resultEdit = resultEdit.set軽減率(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get住所地特例対象者区分コード())) {
+        if ((!RString.isNullOrEmpty(entity.get住所地特例対象者区分コード()))
+                && RString.isNullOrEmpty(result.get住所地特例対象者区分コード())) {
             resultEdit = resultEdit.set住所地特例対象者区分コード(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get住所地特例適用開始日())) {
-            resultEdit = resultEdit.set住所地特例適用開始日(半角アスタリスク);
-        }
-        if (RString.isNullOrEmpty(result.get住所地特例適用終了日())) {
-            resultEdit = resultEdit.set住所地特例適用終了日(半角アスタリスク);
-        }
-        if (RString.isNullOrEmpty(result.get利用者負担割合有効開始日())) {
-            resultEdit = resultEdit.set利用者負担割合有効開始日(半角アスタリスク);
-        }
-        if (RString.isNullOrEmpty(result.get利用者負担割合有効終了日())) {
-            resultEdit = resultEdit.set利用者負担割合有効終了日(半角アスタリスク);
-        }
-        resultEdit = edit番号(result, resultEdit);
-        resultEdit = edit開始終了年月日(result, resultEdit);
-        resultEdit = edit限度額(result, resultEdit);
+        resultEdit = edit開始終了日(result, resultEdit, entity);
+        resultEdit = edit番号(result, resultEdit, entity);
+        resultEdit = edit適用開始終了年月日(result, resultEdit, entity);
+        resultEdit = edit限度額(result, resultEdit, entity);
+        resultEdit = edit開始終了年月日(result, resultEdit, entity);
         result = resultEdit.build();
         return result;
     }
 
-    private JukyushaIdoRenrakuhyoBuilder edit限度額(JukyushaIdoRenrakuhyo result, JukyushaIdoRenrakuhyoBuilder resultEdit) {
-        if (RString.isNullOrEmpty(result.get食費負担限度額())) {
+    private JukyushaIdoRenrakuhyoBuilder edit開始終了日(JukyushaIdoRenrakuhyo result,
+            JukyushaIdoRenrakuhyoBuilder resultEdit, JukyushaIdoRenrakuhyo entity) {
+        if ((!RString.isNullOrEmpty(entity.get住所地特例適用開始日()))
+                && RString.isNullOrEmpty(result.get住所地特例適用開始日())) {
+            resultEdit = resultEdit.set住所地特例適用開始日(半角アスタリスク);
+        }
+        if ((!RString.isNullOrEmpty(entity.get住所地特例適用終了日()))
+                && RString.isNullOrEmpty(result.get住所地特例適用終了日())) {
+            resultEdit = resultEdit.set住所地特例適用終了日(半角アスタリスク);
+        }
+        if ((!RString.isNullOrEmpty(entity.get利用者負担割合有効開始日()))
+                && RString.isNullOrEmpty(result.get利用者負担割合有効開始日())) {
+            resultEdit = resultEdit.set利用者負担割合有効開始日(半角アスタリスク);
+        }
+        if ((!RString.isNullOrEmpty(entity.get利用者負担割合有効終了日()))
+                && RString.isNullOrEmpty(result.get利用者負担割合有効終了日())) {
+            resultEdit = resultEdit.set利用者負担割合有効終了日(半角アスタリスク);
+        }
+        return resultEdit;
+    }
+
+    private JukyushaIdoRenrakuhyoBuilder edit限度額(JukyushaIdoRenrakuhyo result,
+            JukyushaIdoRenrakuhyoBuilder resultEdit, JukyushaIdoRenrakuhyo entity) {
+        if ((!RString.isNullOrEmpty(entity.get食費負担限度額()))
+                && RString.isNullOrEmpty(result.get食費負担限度額())) {
             resultEdit = resultEdit.set食費負担限度額(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get居住費ユニット型個室負担限度額())) {
+        if ((!RString.isNullOrEmpty(entity.get居住費ユニット型個室負担限度額()))
+                && RString.isNullOrEmpty(result.get居住費ユニット型個室負担限度額())) {
             resultEdit = resultEdit.set居住費ユニット型個室負担限度額(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get居住費ユニット型準個室負担限度額())) {
+        if ((!RString.isNullOrEmpty(entity.get居住費ユニット型準個室負担限度額()))
+                && RString.isNullOrEmpty(result.get居住費ユニット型準個室負担限度額())) {
             resultEdit = resultEdit.set居住費ユニット型準個室負担限度額(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get居住費従来型個室特養等負担限度額())) {
+        if ((!RString.isNullOrEmpty(entity.get居住費従来型個室特養等負担限度額()))
+                && RString.isNullOrEmpty(result.get居住費従来型個室特養等負担限度額())) {
             resultEdit = resultEdit.set居住費従来型個室特養等負担限度額(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get居住費従来型個室老健療養等負担限度額())) {
+        if ((!RString.isNullOrEmpty(entity.get居住費従来型個室老健療養等負担限度額()))
+                && RString.isNullOrEmpty(result.get居住費従来型個室老健療養等負担限度額())) {
             resultEdit = resultEdit.set居住費従来型個室老健療養等負担限度額(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get居住費多床室負担限度額())) {
+        if ((!RString.isNullOrEmpty(entity.get居住費多床室負担限度額()))
+                && RString.isNullOrEmpty(result.get居住費多床室負担限度額())) {
             resultEdit = resultEdit.set居住費多床室負担限度額(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get居宅費_新１_負担限度額())) {
+        if ((!RString.isNullOrEmpty(entity.get居宅費_新１_負担限度額()))
+                && RString.isNullOrEmpty(result.get居宅費_新１_負担限度額())) {
             resultEdit = resultEdit.set居宅費_新１_負担限度額(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get居宅費_新２_負担限度額())) {
+        if ((!RString.isNullOrEmpty(entity.get居宅費_新２_負担限度額()))
+                && RString.isNullOrEmpty(result.get居宅費_新２_負担限度額())) {
             resultEdit = resultEdit.set居宅費_新２_負担限度額(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get居宅費_新３_負担限度額())) {
+        if ((!RString.isNullOrEmpty(entity.get居宅費_新３_負担限度額()))
+                && RString.isNullOrEmpty(result.get居宅費_新３_負担限度額())) {
             resultEdit = resultEdit.set居宅費_新３_負担限度額(半角アスタリスク);
         }
         return resultEdit;
     }
 
-    private JukyushaIdoRenrakuhyoBuilder edit番号(JukyushaIdoRenrakuhyo result, JukyushaIdoRenrakuhyoBuilder resultEdit) {
-        if (RString.isNullOrEmpty(result.get居宅介護支援事業所番号())) {
+    private JukyushaIdoRenrakuhyoBuilder edit番号(JukyushaIdoRenrakuhyo result,
+            JukyushaIdoRenrakuhyoBuilder resultEdit, JukyushaIdoRenrakuhyo entity) {
+        if ((!RString.isNullOrEmpty(entity.get居宅介護支援事業所番号()))
+                && RString.isNullOrEmpty(result.get居宅介護支援事業所番号())) {
             resultEdit = resultEdit.set居宅介護支援事業所番号(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get後期高齢者医療保険者番号())) {
+        if ((!RString.isNullOrEmpty(entity.get後期高齢者医療保険者番号()))
+                && RString.isNullOrEmpty(result.get後期高齢者医療保険者番号())) {
             resultEdit = resultEdit.set後期高齢者医療保険者番号(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get後期高齢者医療被保険者番号())) {
+        if ((!RString.isNullOrEmpty(entity.get後期高齢者医療被保険者番号()))
+                && RString.isNullOrEmpty(result.get後期高齢者医療被保険者番号())) {
             resultEdit = resultEdit.set後期高齢者医療被保険者番号(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get国民健康保険保険者番号())) {
+        if ((!RString.isNullOrEmpty(entity.get国民健康保険保険者番号()))
+                && RString.isNullOrEmpty(result.get国民健康保険保険者番号())) {
             resultEdit = resultEdit.set国民健康保険保険者番号(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get国民健康保険被保険者証番号())) {
+        if ((!RString.isNullOrEmpty(entity.get国民健康保険被保険者証番号()))
+                && RString.isNullOrEmpty(result.get国民健康保険被保険者証番号())) {
             resultEdit = resultEdit.set国民健康保険被保険者証番号(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get国民健康保険個人番号())) {
+        if ((!RString.isNullOrEmpty(entity.get国民健康保険個人番号()))
+                && RString.isNullOrEmpty(result.get国民健康保険個人番号())) {
             resultEdit = resultEdit.set国民健康保険個人番号(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get施設所在保険者番号())) {
+        if ((!RString.isNullOrEmpty(entity.get施設所在保険者番号()))
+                && RString.isNullOrEmpty(result.get施設所在保険者番号())) {
             resultEdit = resultEdit.set施設所在保険者番号(半角アスタリスク);
         }
         return resultEdit;
     }
 
-    private JukyushaIdoRenrakuhyoBuilder edit開始終了年月日(JukyushaIdoRenrakuhyo result, JukyushaIdoRenrakuhyoBuilder resultEdit) {
-        if (RString.isNullOrEmpty(result.get認定有効期間終了年月日())) {
-            resultEdit = resultEdit.set認定有効期間終了年月日(半角アスタリスク);
-        }
-        if (RString.isNullOrEmpty(result.get認定有効期間終了年月日())) {
-            resultEdit = resultEdit.set認定有効期間終了年月日(半角アスタリスク);
-        }
-        if (RString.isNullOrEmpty(result.get居宅サービス計画適用開始年月日())) {
+    private JukyushaIdoRenrakuhyoBuilder edit適用開始終了年月日(JukyushaIdoRenrakuhyo result,
+            JukyushaIdoRenrakuhyoBuilder resultEdit, JukyushaIdoRenrakuhyo entity) {
+        if ((!RString.isNullOrEmpty(entity.get居宅サービス計画適用開始年月日()))
+                && RString.isNullOrEmpty(result.get居宅サービス計画適用開始年月日())) {
             resultEdit = resultEdit.set居宅サービス計画適用開始年月日(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get居宅サービス計画適用終了年月日())) {
+        if ((!RString.isNullOrEmpty(entity.get居宅サービス計画適用終了年月日()))
+                && RString.isNullOrEmpty(result.get居宅サービス計画適用終了年月日())) {
             resultEdit = resultEdit.set居宅サービス計画適用終了年月日(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get訪問通所サービス上限管理適用期間終了年月日())) {
+        if ((!RString.isNullOrEmpty(entity.get訪問通所サービス上限管理適用期間終了年月日()))
+                && RString.isNullOrEmpty(result.get訪問通所サービス上限管理適用期間終了年月日())) {
             resultEdit = resultEdit.set訪問通所サービス上限管理適用期間終了年月日(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get償還払化開始年月日())) {
-            resultEdit = resultEdit.set償還払化開始年月日(半角アスタリスク);
-        }
-        if (RString.isNullOrEmpty(result.get償還払化終了年月日())) {
-            resultEdit = resultEdit.set償還払化終了年月日(半角アスタリスク);
-        }
-        if (RString.isNullOrEmpty(result.get適用開始年月日())) {
+        if ((!RString.isNullOrEmpty(entity.get適用開始年月日()))
+                && RString.isNullOrEmpty(result.get適用開始年月日())) {
             resultEdit = resultEdit.set適用開始年月日(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get適用終了年月日())) {
+        if ((!RString.isNullOrEmpty(entity.get適用終了年月日()))
+                && RString.isNullOrEmpty(result.get適用終了年月日())) {
             resultEdit = resultEdit.set適用終了年月日(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get負担額適用開始年月日())) {
+        if ((!RString.isNullOrEmpty(entity.get負担額適用開始年月日()))
+                && RString.isNullOrEmpty(result.get負担額適用開始年月日())) {
             resultEdit = resultEdit.set負担額適用開始年月日(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get負担額適用終了年月日())) {
+        if ((!RString.isNullOrEmpty(entity.get負担額適用終了年月日()))
+                && RString.isNullOrEmpty(result.get負担額適用終了年月日())) {
             resultEdit = resultEdit.set負担額適用終了年月日(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get負担限度額適用開始年月日())) {
-            resultEdit = resultEdit.set負担限度額適用開始年月日(半角アスタリスク);
+        return resultEdit;
+    }
+
+    private JukyushaIdoRenrakuhyoBuilder edit開始終了年月日(JukyushaIdoRenrakuhyo result,
+            JukyushaIdoRenrakuhyoBuilder resultEdit, JukyushaIdoRenrakuhyo entity) {
+        if ((!RString.isNullOrEmpty(entity.get認定有効期間終了年月日()))
+                && RString.isNullOrEmpty(result.get認定有効期間終了年月日())) {
+            resultEdit = resultEdit.set認定有効期間終了年月日(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get負担限度額適用終了年月日())) {
-            resultEdit = resultEdit.set負担限度額適用終了年月日(半角アスタリスク);
+        if ((!RString.isNullOrEmpty(entity.get償還払化開始年月日()))
+                && RString.isNullOrEmpty(result.get償還払化開始年月日())) {
+            resultEdit = resultEdit.set償還払化開始年月日(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get軽減率適用開始年月日())) {
-            resultEdit = resultEdit.set軽減率適用開始年月日(半角アスタリスク);
+        if ((!RString.isNullOrEmpty(entity.get償還払化終了年月日()))
+                && RString.isNullOrEmpty(result.get償還払化終了年月日())) {
+            resultEdit = resultEdit.set償還払化終了年月日(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get軽減率適用終了年月日())) {
-            resultEdit = resultEdit.set軽減率適用終了年月日(半角アスタリスク);
-        }
-        if (RString.isNullOrEmpty(result.get給付率引下げ開始年月日())) {
+        if ((!RString.isNullOrEmpty(entity.get給付率引下げ開始年月日()))
+                && RString.isNullOrEmpty(result.get給付率引下げ開始年月日())) {
             resultEdit = resultEdit.set給付率引下げ開始年月日(半角アスタリスク);
         }
-        if (RString.isNullOrEmpty(result.get給付率引下げ終了年月日())) {
+        if ((!RString.isNullOrEmpty(entity.get給付率引下げ終了年月日()))
+                && RString.isNullOrEmpty(result.get給付率引下げ終了年月日())) {
             resultEdit = resultEdit.set給付率引下げ終了年月日(半角アスタリスク);
+        }
+        if ((!RString.isNullOrEmpty(entity.get負担限度額適用開始年月日()))
+                && RString.isNullOrEmpty(result.get負担限度額適用開始年月日())) {
+            resultEdit = resultEdit.set負担限度額適用開始年月日(半角アスタリスク);
+        }
+        if ((!RString.isNullOrEmpty(entity.get負担限度額適用終了年月日()))
+                && RString.isNullOrEmpty(result.get負担限度額適用終了年月日())) {
+            resultEdit = resultEdit.set負担限度額適用終了年月日(半角アスタリスク);
+        }
+        if ((!RString.isNullOrEmpty(entity.get軽減率適用開始年月日()))
+                && RString.isNullOrEmpty(result.get軽減率適用開始年月日())) {
+            resultEdit = resultEdit.set軽減率適用開始年月日(半角アスタリスク);
+        }
+        if ((!RString.isNullOrEmpty(entity.get軽減率適用終了年月日()))
+                && RString.isNullOrEmpty(result.get軽減率適用終了年月日())) {
+            resultEdit = resultEdit.set軽減率適用終了年月日(半角アスタリスク);
         }
         return resultEdit;
     }

@@ -103,8 +103,8 @@ public class HikazeiNenkinTaishoshaJohoValidationHandler {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
 
-        RString syoriJyotai = div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShori().isEmpty()
-                ? new RString("空白") : div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShori();
+        RString syoriJyotai = div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriJotai().isEmpty()
+                ? new RString("空白") : div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriJotai();
 
         NoInputMessages checkMessage = new NoInputMessages(DbdErrorMessages.処理状態不正, syoriJyotai.toString());
         messages.add(ValidateChain.validateStart(div).ifNot(HikazeiNenkinTaishoshaJohoDivSpec.処理状態単一チェック)

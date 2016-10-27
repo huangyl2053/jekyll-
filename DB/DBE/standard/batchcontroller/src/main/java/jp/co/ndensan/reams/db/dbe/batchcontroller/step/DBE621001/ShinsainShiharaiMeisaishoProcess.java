@@ -94,18 +94,19 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
         ShinsainShiharaiMeisaishoEdit edit = new ShinsainShiharaiMeisaishoEdit();
         ShinsainShiharaimeisaisho shinsainshi = edit.getShinsainShiharaimeisaishoEntity(entity);
         shinsainshi = getShinsainShiharaimeisaisho(shinsainshi, entity);
+        shinsainshi.set申請書管理番号(entity.getShinseishoKanriNo().value());
         ShinsainShiharaimeisaishoReport report = new ShinsainShiharaimeisaishoReport(shinsainshi);
         report.writeBy(reportSourceWriter);
         ++index;
     }
 
     private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
-        RString hihokenshaNo = RString.EMPTY;
-        if (entity.getHihokenshaNo() != null) {
-            hihokenshaNo = entity.getHihokenshaNo();
+        RString shinseishoKanriNo = RString.EMPTY;
+        if (entity.getShinseishoKanriNo() != null && !entity.getShinseishoKanriNo().isEmpty()) {
+            shinseishoKanriNo = entity.getShinseishoKanriNo().value();
         }
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                hihokenshaNo);
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
+                shinseishoKanriNo);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 

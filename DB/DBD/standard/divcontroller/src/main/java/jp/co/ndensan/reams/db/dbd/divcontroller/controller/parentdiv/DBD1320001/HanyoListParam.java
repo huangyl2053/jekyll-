@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 画面設計_DBD1320001_汎用リスト出力(介護受給共通)。
  *
- * @reamsid_L DBD-3930-011 liwul
+ * @reamsid_L DBD-3930-010 liwul
  */
 public class HanyoListParam {
 
@@ -81,6 +81,17 @@ public class HanyoListParam {
     }
 
     /**
+     * 出力方法選択ラジオボタンonSelect画面項目制御
+     *
+     * @param div ドメインオブジェクトを取り出したい {@link HanyoListParamDiv}
+     * @return ResponseData<HanyoListParamDiv>
+     */
+    public ResponseData<HanyoListParamDiv> onSelect_radShuturyokuHoho(HanyoListParamDiv div) {
+        getHandler(div).onSelect_radShuturyokuHoho();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 年度RbGr onclick画面項目制御
      *
      * @param div ドメインオブジェクトを取り出したい {@link HanyoListParamDiv}
@@ -124,10 +135,6 @@ public class HanyoListParam {
             ValidationMessageControlPairs 帳票出力項目MessagePairs = getValidationHandler(div).validate帳票出力項目チェック();
             if (帳票出力項目MessagePairs.existsError()) {
                 return ResponseData.of(div).addValidationMessages(帳票出力項目MessagePairs).respond();
-            }
-            ValidationMessageControlPairs 実行するボタンMessagePairs = getValidationHandler(div).validate実行するボタンクリック();
-            if (実行するボタンMessagePairs.existsError()) {
-                return ResponseData.of(div).addValidationMessages(実行するボタンMessagePairs).respond();
             }
             ValidationMessageControlPairs warningMessagePairs = getValidationHandler(div).validate表題();
             if (warningMessagePairs.existsError()) {

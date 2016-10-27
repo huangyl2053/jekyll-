@@ -16,6 +16,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 住宅改修理由書作成手数料請求書兼申請書
+     *
+     */
+    DBC100045(new ReportId("DBC100045_JutakuKaishuRiyushoSakuseiTesuryoSeikyuKenShinseisho"), new RString("住宅改修理由書作成手数料請求書兼申請書")),
+    /**
      * DBC701019_HanyoListJigyoKogakuServiceHiJokyo
      *
      */
@@ -31,7 +36,7 @@ public enum ReportIdDBC {
      */
     DBC100055(new ReportId("DBC100055_JukyushaKyufuJissekidaicho"), new RString("受給者給付実績台帳作成")),
     /**
-     * 利用状況統計表
+     * 住宅改修理由書作成手数料請求書兼申請書作成
      */
     DBC200064(new ReportId("DBC200064_JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiran"), new RString("住宅改修理由書作成手数料請求書兼申請書作成")),
     /**
@@ -70,6 +75,10 @@ public enum ReportIdDBC {
      * 更正対象給付実績一覧表
      */
     DBC200096(new ReportId("DBC200096_KoseiTaishoKyufuJissekiIchiran"), new RString("更正対象給付実績一覧表")),
+    /**
+     * 給付実績取消一覧表
+     */
+    DBC200097(new ReportId("DBC200097_KyufuJissekiTorikeshiIchiran"), new RString("給付実績取消一覧表")),
     /**
      * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）
      */
@@ -142,6 +151,10 @@ public enum ReportIdDBC {
      * 受給者情報更新結果一覧表
      */
     DBC200055(new ReportId("DBC200055_JukyushaKoshinkekkaIchiran"), new RString("受給者情報更新結果一覧表")),
+    /**
+     * 共同処理用受給者情報更新結果一覧表
+     */
+    DBC200056(new ReportId("DBC200056_KyodoJukyushaKoshinkekkaIchiran"), new RString("共同処理用受給者情報更新結果一覧表")),
     /**
      * 共同処理用受給者情報一覧表
      */
@@ -437,7 +450,7 @@ public enum ReportIdDBC {
     /**
      * 振込明細一覧表帳票ＩＤです。
      */
-    DBC200003(new ReportId("DBC200003_FurikomiMeisaiIchiran"), new RString("振込明細一覧表")),
+    DBC200003(new ReportId("DBC200003_FurikomiMeisaiIchiranKogakuGassan"), new RString("振込明細一覧表")),
     /**
      * （高額合算支給（不支給）決定通知書）支払予定日あり帳票ＩＤです。
      */
@@ -538,6 +551,10 @@ public enum ReportIdDBC {
      * 償還連絡票送付一覧表帳票ＩＤです。
      */
     DBC200025(new ReportId("DBC200025_ShokanRenrakuhyoSofuIchiran"), new RString("償還連絡票送付一覧表")),
+    /**
+     * 償還連絡票送付情報エラーリスト帳票ＩＤです。
+     */
+    DBC200026(new ReportId("DBC200026_ShokanRenrakuhyoSofuJohoErrorIchiran"), new RString("償還連絡票送付情報エラーリスト")),
     /**
      * 償高額合算自己負担額確認情報取込一覧表帳票ＩＤです。
      */
@@ -713,7 +730,7 @@ public enum ReportIdDBC {
     /**
      * 振込明細一覧表（明細）帳票ＩＤです。
      */
-    DBC200101_明細(new ReportId("DBC200101_FurikomiMeisaiIchiranDetail"), new RString("振込明細一覧表（明細）")),
+    DBC200101_明細(new ReportId("DBC200101_FurikomiMeisaiIchiran"), new RString("振込明細一覧表（明細）")),
     /**
      * 帳票設計_DBC200039_高額合算支給不支給決定通知書情報取込一覧表 ＩＤです。
      */
@@ -745,7 +762,15 @@ public enum ReportIdDBC {
     /**
      * 住宅改修理由書作成手数料支給（不支給）決定通知書 帳票ＩＤです。
      */
-    DBC100044(new ReportId("DBC100044_JutakuKaishuRiyushoSakuseiTesuryoKetteiTsuchisho"), new RString("住宅改修理由書作成手数料支給（不支給）決定通知書"));
+    DBC100044(new ReportId("DBC100044_JutakuKaishuRiyushoSakuseiTesuryoKetteiTsuchisho"), new RString("住宅改修理由書作成手数料支給（不支給）決定通知書")),
+    /**
+     * 振込明細一覧表（事業高額） 帳票ＩＤです。
+     */
+    DBC200102(new ReportId("DBC200102_FurikomiMeisaiIchiranJigyoKogaku"), new RString("振込明細一覧表（事業高額）")),
+    /**
+     * 振込明細一覧表（事業高額合算） 帳票ＩＤです。
+     */
+    DBC200103(new ReportId("DBC200103_FurikomiMeisaiIchiranJigyoKogakuGassan"), new RString("振込明細一覧表（事業高額合算）"));
 
     private final ReportId reportId;
 

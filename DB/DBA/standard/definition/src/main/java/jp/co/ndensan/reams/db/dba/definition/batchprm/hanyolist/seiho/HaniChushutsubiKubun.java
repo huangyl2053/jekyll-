@@ -11,20 +11,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum HaniChushutsubiKubun {
 
     /**
-     * コード:1 名称:生保開始日 略称:定義なし
+     * コード:1 名称:生保開始日 略称:生保開始日
      */
-    生保開始日("1", "生保開始日"),
+    生保開始日("1", "生保開始日", "生保開始日"),
     /**
-     * コード:2 名称:生保終了日 略称:定義なし
+     * コード:2 名称:生保終了日 略称:生保終了日
      */
-    生保終了日("2", "生保終了日");
+    生保終了日("2", "生保終了日", "生保終了日");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private HaniChushutsubiKubun(String code, String fullname) {
+    private HaniChushutsubiKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -43,6 +45,15 @@ public enum HaniChushutsubiKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 範囲抽出日区分の略称を返します。
+     *
+     * @return 範囲抽出日区分の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

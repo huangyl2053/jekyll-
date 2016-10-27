@@ -50,16 +50,8 @@ module DBC {
                 return "onClick_btnDelete";
             }
 
-            public static onBlur_txtTani(): string {
-                return "onBlur_txtTani";
-            }
-
-            public static onBlur_txtWaribikigoRitsu(): string {
-                return "onBlur_txtWaribikigoRitsu";
-            }
-
-            public static onBlur_txtKaisu(): string {
-                return "onBlur_txtKaisu";
+            public static onClick_btnKakutei(): string {
+                return "onClick_btnKakutei";
             }
 
             public static onClick_btnBeppyoMeisaiKakutei(): string {
@@ -76,30 +68,6 @@ module DBC {
 
             public static onClick_btnCalcMeisai(): string {
                 return "onClick_btnCalcMeisai";
-            }
-
-            public static onBlur_txtShuruiGendoChokaTani(): string {
-                return "onBlur_txtShuruiGendoChokaTani";
-            }
-
-            public static onBlur_txtShuruiGendonaiTani(): string {
-                return "onBlur_txtShuruiGendonaiTani";
-            }
-
-            public static onBlur_txtTanisuTanka(): string {
-                return "onBlur_txtTanisuTanka";
-            }
-
-            public static onBlur_txtKubunGendoChokaTani(): string {
-                return "onBlur_txtKubunGendoChokaTani";
-            }
-
-            public static onBlur_txtKubunGendonaiTani(): string {
-                return "onBlur_txtKubunGendonaiTani";
-            }
-
-            public static onBlur_txtKyufuritsu(): string {
-                return "onBlur_txtKyufuritsu";
             }
 
             public static onClick_btnBeppyoGokeiKakutei(): string {
@@ -238,6 +206,10 @@ module DBC {
             //public ccdServiceTypeInput(): DBZ.ServiceTypeInputCommonChildDiv.ModeController {
             //    return new DBZ.ServiceTypeInputCommonChildDiv.ModeController(this.convFiledName("ccdServiceTypeInput"));
             //}
+
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            }
 
             public ServiceRiyohyoBeppyoMeisai(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ServiceRiyohyoBeppyoMeisai"));

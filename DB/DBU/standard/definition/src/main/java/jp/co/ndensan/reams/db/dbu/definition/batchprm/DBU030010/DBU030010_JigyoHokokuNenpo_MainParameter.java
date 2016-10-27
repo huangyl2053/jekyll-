@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030070.DBU030070_JigyoH
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030100.DBU030100_JigyoHokokuNenpo_HokenkyufuKogakuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -220,8 +221,7 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
         parameter.set集計終了年月(集計終了年月.get(INDEX_8));
         parameter.set作成日時(作成日時.get(INDEX_8).getDate().toDateString().concat(getDate(作成日時.get(INDEX_8).getHour())).
                 concat(getDate(作成日時.get(INDEX_8).getMinute())).concat(getDate(作成日時.get(INDEX_8).getSecond())));
-        parameter.set処理日時(処理日時.getDate().toDateString().concat(getDate(処理日時.getHour())).
-                concat(getDate(処理日時.getMinute())).concat(getDate(処理日時.getSecond())));
+        parameter.set処理日時(new YMDHMS(処理日時));
         parameter.set市町村コード(市町村コード);
         parameter.set構成市町村区分(構成市町村区分);
         parameter.set旧市町村区分(旧市町村区分);

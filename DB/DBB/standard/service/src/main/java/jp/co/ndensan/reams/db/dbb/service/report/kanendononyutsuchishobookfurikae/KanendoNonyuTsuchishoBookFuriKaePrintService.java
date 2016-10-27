@@ -123,7 +123,6 @@ public class KanendoNonyuTsuchishoBookFuriKaePrintService {
             try (ReportAssembler<KanendoNonyuTsuchishoBookFuriKaeAriSource> assembler = createAssembler(property, reportManager)) {
                 ReportSourceWriter<KanendoNonyuTsuchishoBookFuriKaeAriSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
-
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
@@ -134,6 +133,60 @@ public class KanendoNonyuTsuchishoBookFuriKaePrintService {
                 }
             }
             return reportManager.publish();
+        }
+    }
+
+    /**
+     * 帳票を出力します。
+     *
+     * @param 本算定納入通知書情報List List<HonSanteiNonyuTsuchiShoJoho>
+     * @param reportManager ReportManager
+     */
+    public void print全てページDBB100071printDevidedByPage_修正(
+            List<HonSanteiNonyuTsuchiShoJoho> 本算定納入通知書情報List, ReportManager reportManager) {
+        KanendoNonyuTsuchishoBookFuriKaeAriProperty property = new KanendoNonyuTsuchishoBookFuriKaeAriProperty();
+        try (ReportAssembler<KanendoNonyuTsuchishoBookFuriKaeAriSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KanendoNonyuTsuchishoBookFuriKaeAriSource> reportSourceWriterCover
+                    = new ReportSourceWriter(assembler);
+            ReportSourceWriter<KanendoNonyuTsuchishoBookFuriKaeAriSource> reportSourceWriterDetail
+                    = new ReportSourceWriter(assembler);
+            for (HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 : 本算定納入通知書情報List) {
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
+                        new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriterCover);
+                List<NonyuTsuchisho<KanendoNonyuTsuchishoBookFuriKaeAriSource>> reportList
+                        = new KanendoNonyuTsuchishoBookFuriKaeAriReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
+                reportList.get(0).writeBy(reportSourceWriterCover);
+                reportList.get(1).writeBy(reportSourceWriterDetail);
+            }
+        }
+
+    }
+
+    /**
+     * 帳票を出力します。
+     *
+     * @param 本算定納入通知書情報List List<HonSanteiNonyuTsuchiShoJoho>
+     * @param reportManager ReportManager
+     */
+    public void print全てページDBB100072printDevidedByPage_修正(
+            List<HonSanteiNonyuTsuchiShoJoho> 本算定納入通知書情報List, ReportManager reportManager) {
+        KanendoNonyuTsuchishoBookFuriKaeNashiProperty property = new KanendoNonyuTsuchishoBookFuriKaeNashiProperty();
+        try (ReportAssembler<KanendoNonyuTsuchishoBookFuriKaeNashiSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KanendoNonyuTsuchishoBookFuriKaeNashiSource> reportSourceWriterCover
+                    = new ReportSourceWriter(assembler);
+            ReportSourceWriter<KanendoNonyuTsuchishoBookFuriKaeNashiSource> reportSourceWriterDetail
+                    = new ReportSourceWriter(assembler);
+            for (HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 : 本算定納入通知書情報List) {
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
+                        new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriterCover);
+                KanendoNonyuTsuchishoBookFuriKaeNashiReport report
+                        = new KanendoNonyuTsuchishoBookFuriKaeNashiReport(本算定納入通知書情報, ninshoshaSource);
+                List<NonyuTsuchisho<KanendoNonyuTsuchishoBookFuriKaeNashiSource>> reportList = report.devidedByPage();
+                reportList.get(0).writeBy(reportSourceWriterCover);
+                reportList.get(1).writeBy(reportSourceWriterDetail);
+            }
         }
     }
 
@@ -166,6 +219,50 @@ public class KanendoNonyuTsuchishoBookFuriKaePrintService {
             KanendoNonyuTsuchishoBookFuriKaeAriReport report
                     = new KanendoNonyuTsuchishoBookFuriKaeAriReport(本算定納入通知書情報, ninshoshaSource);
             report.writeBy(reportSourceWriter);
+        }
+    }
+
+    /**
+     * 帳票を出力します。
+     *
+     * @param 本算定納入通知書情報List List<HonSanteiNonyuTsuchiShoJoho>
+     * @param reportManager ReportManager
+     */
+    public void print全てページDBB100072_修正(List<HonSanteiNonyuTsuchiShoJoho> 本算定納入通知書情報List, ReportManager reportManager) {
+        KanendoNonyuTsuchishoBookFuriKaeNashiProperty property = new KanendoNonyuTsuchishoBookFuriKaeNashiProperty();
+        try (ReportAssembler<KanendoNonyuTsuchishoBookFuriKaeNashiSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KanendoNonyuTsuchishoBookFuriKaeNashiSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+            for (HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 : 本算定納入通知書情報List) {
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
+                        new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+                KanendoNonyuTsuchishoBookFuriKaeNashiReport report
+                        = new KanendoNonyuTsuchishoBookFuriKaeNashiReport(本算定納入通知書情報, ninshoshaSource);
+                report.writeBy(reportSourceWriter);
+            }
+        }
+    }
+
+    /**
+     * 帳票を出力します。
+     *
+     * @param 本算定納入通知書情報List List<HonSanteiNonyuTsuchiShoJoho>
+     * @param reportManager ReportManager
+     */
+    public void print全てページDBB100071_修正(List<HonSanteiNonyuTsuchiShoJoho> 本算定納入通知書情報List, ReportManager reportManager) {
+        KanendoNonyuTsuchishoBookFuriKaeAriProperty property = new KanendoNonyuTsuchishoBookFuriKaeAriProperty();
+        try (ReportAssembler<KanendoNonyuTsuchishoBookFuriKaeAriSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KanendoNonyuTsuchishoBookFuriKaeAriSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+            for (HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 : 本算定納入通知書情報List) {
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
+                        new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+                KanendoNonyuTsuchishoBookFuriKaeAriReport report
+                        = new KanendoNonyuTsuchishoBookFuriKaeAriReport(本算定納入通知書情報, ninshoshaSource);
+                report.writeBy(reportSourceWriter);
+            }
         }
     }
 

@@ -13,8 +13,6 @@ import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.InsuranceInformation;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.Shichoson;
-import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050011.TaishokensakuJyouken;
-import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050011.TaishokensakuJyouken.ViewStateKey;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031TransitionEventName;
@@ -22,6 +20,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.Vali
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.YoshikiYonnoniDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -300,6 +299,9 @@ public class YoshikiYonnoni {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         ValidationHandler validationHandler = new ValidationHandler(div);
         validationHandler.報告年度の必須チェック(validationMessages);
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
 
         List<Shichoson> shichosonList = manager.getShichosonCodeNameList();
         TokeiTaishoKubun tokeiTaishoKubun = TokeiTaishoKubun.空;
@@ -345,7 +347,7 @@ public class YoshikiYonnoni {
         if (this.入力項目いずれか空白ではない(div)) {
             return this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
         }
-        ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+        ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
     }
 
@@ -359,17 +361,17 @@ public class YoshikiYonnoni {
 
         if (内部処理モード_修正.equals(div.getShoriMode())) {
             if (!is編集あり(div)) {
-                ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+                ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
                 return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
             } else {
                 return this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
             }
         } else if (内部処理モード_修正追加.equals(div.getShoriMode())
                 && this.入力項目いずれか空白ではない(div)) {
-            ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+            ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
             return this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
         }
-        ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+        ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
     }
 
@@ -381,8 +383,32 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnDelete(YoshikiYonnoniDiv div) {
 
-        ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+        ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
+    }
+
+    private ResponseData<YoshikiYonnoniDiv> get追加ResponseData(YoshikiYonnoniDiv div,
+            InsuranceInformation insuranceInf, KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager) {
+        Map<RString, Decimal> 詳細データエリア = new HashMap<>();
+
+        this.put詳細データエリア(詳細データエリア, div);
+
+        KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo = new KaigoHokenJigyoHokokuNenpo(
+                new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().toString()).toString()).getYear(),
+                new RString("00"),
+                new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtShukeiYM().getText().toString()).toString()).getYear(),
+                new RString("00"),
+                insuranceInf.get統計対象区分(),
+                new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
+                new Code("09"),
+                CODE_0200,
+                new Code("1"),
+                div.getShoriMode(),
+                Code.EMPTY,
+                Code.EMPTY,
+                詳細データエリア);
+
+        return this.regKaigoHokenTokubetuKaikeiKeiriJyokyo(kaigoHokenJigyoHokokuNenpo, manager, div);
     }
 
     /**
@@ -393,6 +419,16 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnSave(YoshikiYonnoniDiv div) {
 
+        if (!内部処理モード_削除.equals(div.getShoriMode())) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            ValidationHandler validationHandler = new ValidationHandler(div);
+            validationHandler.合計値チェック_合計１(validationMessages);
+            validationHandler.合計値チェック_合計２(validationMessages);
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+        }
+
         InsuranceInformation insuranceInf = get引き継ぎデータ(div);
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
 
@@ -401,26 +437,7 @@ public class YoshikiYonnoni {
 
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             } else {
-                Map<RString, Decimal> 詳細データエリア = new HashMap<>();
-
-                this.put詳細データエリア(詳細データエリア, div);
-
-                KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo = new KaigoHokenJigyoHokokuNenpo(
-                        new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().toString()).toString()).getYear(),
-                        new RString("00"),
-                        new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtShukeiYM().getText().toString()).toString()).getYear(),
-                        new RString("00"),
-                        insuranceInf.get統計対象区分(),
-                        new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
-                        new Code("09"),
-                        CODE_0200,
-                        new Code("1"),
-                        div.getShoriMode(),
-                        Code.EMPTY,
-                        Code.EMPTY,
-                        詳細データエリア);
-
-                return this.regKaigoHokenTokubetuKaikeiKeiriJyokyo(kaigoHokenJigyoHokokuNenpo, manager, div);
+                return get追加ResponseData(div, insuranceInf, manager);
             }
         } else if (内部処理モード_修正.equals(div.getShoriMode())) {
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
@@ -536,6 +553,8 @@ public class YoshikiYonnoni {
             int 集計年度 = Integer.parseInt(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().substring(0, INT_4).toString()) - 1;
             shukeiY.setValue(new FlexibleDate(new StringBuilder(String.valueOf(集計年度)).append("0101").toString()));
             div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
+        } else {
+            div.getYoshikiYonnoniMeisai().getTxtShukeiYM().clearValue();
         }
 
         return ResponseData.of(div).respond();
@@ -583,7 +602,7 @@ public class YoshikiYonnoni {
      */
     private InsuranceInformation get引き継ぎデータ(YoshikiYonnoniDiv div) {
         InsuranceInformation 引き継ぎデータ
-                = ViewStateHolder.get(ViewStateKey.様式４, InsuranceInformation.class);
+                = ViewStateHolder.get(ViewStateKeys.様式４, InsuranceInformation.class);
         if (null == 引き継ぎデータ) {
             if (div.getYoshikiYonnoniMeisai().getDdlShicyoson().isDisplayNone()) {
                 引き継ぎデータ = new InsuranceInformation(
@@ -629,7 +648,7 @@ public class YoshikiYonnoni {
                 .equals(ResponseHolder.getMessageCode())
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             if (DBU0050031TransitionEventName.検索に戻る.equals(events) || DBU0050031TransitionEventName.処理完了.equals(events)) {
-                ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
+                ViewStateHolder.put(ViewStateKeys.is詳細画面から, Boolean.TRUE);
                 return ResponseData.of(div).forwardWithEventName(events).respond();
             } else if (内部処理モード_修正追加.equals(div.getShoriMode()) || RString.isNullOrEmpty(div.getShoriMode())) {
                 return ResponseData.of(div).forwardWithEventName(events).parameter(内部処理モード_修正);
@@ -1214,5 +1233,29 @@ public class YoshikiYonnoni {
         div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().setValue(詳細データエリア.get(座標19_2));
         div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().setValue(詳細データエリア.get(座標20_1));
         div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().setValue(詳細データエリア.get(座標21_1));
+    }
+
+    /**
+     * 歳入歳出差引残額自動計算します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<YoshikiYonnoniDiv>
+     */
+    public ResponseData<YoshikiYonnoniDiv> onBlur_calculation(YoshikiYonnoniDiv div) {
+        Decimal 合計1 = div.getYoshikiYonnoniMeisai().getTxtsainyugokei().getValue();
+        Decimal 合計2 = div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue();
+        if (null == 合計1 && null == 合計2) {
+            div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().clearValue();
+        } else {
+            div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().setValue(get額(合計1).subtract(get額(合計2)));
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private Decimal get額(Decimal 額) {
+        if (null == 額) {
+            return Decimal.ZERO;
+        }
+        return 額;
     }
 }

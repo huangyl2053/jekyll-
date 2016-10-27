@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HihokenshaShisakuPanalDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -255,13 +255,13 @@ public class HihokenshaShisakuPanalDiv extends Panel {
     }
 
     @JsonIgnore
-    public IJushochiTokureiDialogButtonDiv getCcdJutokuDialogButton() {
-        return this.getShikakuShosai().getShikakuShosaiDialogs().getCcdJutokuDialogButton();
+    public IShikakuHenkoRirekiDialogButtonDiv getCcdShikakuHenkoDialogButton() {
+        return this.getShikakuShosai().getShikakuShosaiDialogs().getCcdShikakuHenkoDialogButton();
     }
 
     @JsonIgnore
-    public IShikakuHenkoRirekiDialogButtonDiv getCcdShikakuHenkoDialogButton() {
-        return this.getShikakuShosai().getShikakuShosaiDialogs().getCcdShikakuHenkoDialogButton();
+    public IJushochiTokureiDialogButtonDiv getCcdJutokuDialogButton() {
+        return this.getShikakuShosai().getShikakuShosaiDialogs().getCcdJutokuDialogButton();
     }
 
     @JsonIgnore

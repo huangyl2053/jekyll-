@@ -37,8 +37,6 @@ import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoRank;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -73,12 +71,9 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.CountedItem;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -107,7 +102,6 @@ public class SokujiFukaKoseiService {
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
-    private static final RString 汎用キー_通知書番号 = new RString("通知書番号");
     private static final RString ゼロ_0000 = new RString("0000");
 
     /**
@@ -200,11 +194,8 @@ public class SokujiFukaKoseiService {
         } else {
             HihokenshaDaicho 資格の情報 = get資格の情報(被保険者番号);
 
-            FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
-                    RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
-            CountedItem saiban = Saiban.get(SubGyomuCode.DBB介護賦課, 汎用キー_通知書番号, FlexibleDate.getNowDate().getNendo());
-            TsuchishoNo 通知書番号 = create通知書番号(被保険者番号.getColumnValue(), saiban.nextString().trim());
-            FukaJoho fukaJoho = new FukaJoho(調定年度, 賦課年度, 通知書番号, 0);
+            TsuchishoNo 通知書番号 = create通知書番号(被保険者番号.getColumnValue(), INT_1);
+            FukaJoho fukaJoho = new FukaJoho(賦課年度, 賦課年度, 通知書番号, 0);
             賦課の情報 = get根拠反映後賦課の情報(fukaJoho, 資格の情報, 賦課年度);
             FukaJohoBuilder builder = 賦課の情報.createBuilderForEdit();
             builder.set調定事由1(ChoteiJiyuCode.仮徴収額の変更.getコード())
@@ -242,11 +233,11 @@ public class SokujiFukaKoseiService {
         return result;
     }
 
-    private TsuchishoNo create通知書番号(RString 被保険者番号, RString 枝番号) {
+    private TsuchishoNo create通知書番号(RString 被保険者番号, int 枝番号) {
         RStringBuilder rst = new RStringBuilder();
         rst.append(ゼロ_0000);
         rst.append(被保険者番号);
-        rst.append(枝番号.padZeroToLeft(INT_2));
+        rst.append(new RString(枝番号).padZeroToLeft(INT_2));
         return new TsuchishoNo(rst.toRString());
     }
 
@@ -652,9 +643,23 @@ public class SokujiFukaKoseiService {
         年度分賦課リスト.set賦課年度(賦課の情報.get賦課年度());
         年度分賦課リスト.set通知書番号(賦課の情報.get通知書番号());
         年度分賦課リスト.set賦課期日(賦課の情報.get賦課期日());
-        年度分賦課リスト.set現年度(賦課の情報);
+        Boolean isHas過年度賦課 = false;
+        if (賦課の情報.get調定年度().equals(賦課の情報.get賦課年度())) {
+            年度分賦課リスト.set現年度(賦課の情報);
+            isHas過年度賦課 = true;
+        } else if (賦課の情報.get調定年度().equals(賦課の情報.get賦課年度().plusYear(INT_1))) {
+            年度分賦課リスト.set過年度1(賦課の情報);
+        } else if (賦課の情報.get調定年度().equals(賦課の情報.get賦課年度().plusYear(INT_2))) {
+            年度分賦課リスト.set過年度2(賦課の情報);
+        } else if (賦課の情報.get調定年度().equals(賦課の情報.get賦課年度().plusYear(INT_3))) {
+            年度分賦課リスト.set過年度3(賦課の情報);
+        } else if (賦課の情報.get調定年度().equals(賦課の情報.get賦課年度().plusYear(INT_4))) {
+            年度分賦課リスト.set過年度4(賦課の情報);
+        } else if (賦課の情報.get調定年度().equals(賦課の情報.get賦課年度().plusYear(INT_5))) {
+            年度分賦課リスト.set過年度5(賦課の情報);
+        }
         年度分賦課リスト.set最新賦課の情報(賦課の情報);
-        年度分賦課リスト.setHas過年度賦課(false);
+        年度分賦課リスト.setHas過年度賦課(isHas過年度賦課);
         return 年度分賦課リスト;
 
     }

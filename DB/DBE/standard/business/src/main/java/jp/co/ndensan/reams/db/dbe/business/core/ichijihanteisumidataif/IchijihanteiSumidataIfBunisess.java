@@ -69,7 +69,7 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set主治医番号(entity.get主治医コード());
         eucEntity.set意見書依頼日(nullchck(entity.get主治医意見書作成依頼年月日()));
         eucEntity.set意見書入手日(nullchck(entity.get主治医意見書受領年月日()));
-        eucEntity.set意見書短期記憶(entity.get短期記憶15());
+        eucEntity.set意見書短期記憶(entity.get意見書短期記憶());
         eucEntity.set意見書認知能力(entity.get日常の意思決定を行うための認知能力());
         eucEntity.set意見書伝達能力(entity.get自分の意思の伝達能力());
         eucEntity.set意見書食事行為(entity.get食事行為());
@@ -91,6 +91,7 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set要介護認定等基準時間間接ケア(entity.get要介護認定等基準時間間接ケア());
         eucEntity.set要介護認定等基準時間BPSD関連(entity.get要介護認定等基準時間BPSD関連());
         eucEntity.set要介護認定等基準時間医療関連(entity.get要介護認定等基準時間医療関連());
+        eucEntity.set要介護認定等基準時間機能訓練(entity.get要介護認定等基準時間機能訓練());
         eucEntity.set要介護認定等基準時間認知症加算(entity.get要介護認定等基準時間認知症加算());
         eucEntity.set中間評価項目得点第１群(entity.get中間評価項目得点第1群());
         eucEntity.set中間評価項目得点第２群(entity.get中間評価項目得点第2群());
@@ -120,25 +121,27 @@ public class IchijihanteiSumidataIfBunisess {
         set前回結果認定調査票調査項目(entity, eucEntity);
         eucEntity.set前回結果障害高齢者自立度(entity.get前回結果障害高齢者自立度日常生活自立度());
         eucEntity.set前回結果認知症高齢者自立度(entity.get前回結果認知症高齢者自立度日常生活自立度());
-        eucEntity.set前回結果一次判定結果(entity.get一次判定結果());
-        eucEntity.set前回結果一次判定結果認知症加算(entity.get一次判定結果認知症加算());
-        eucEntity.set前回結果要介護認定等基準時間(entity.get要介護認定等基準時間());
-        eucEntity.set前回結果要介護認定等基準時間食事(entity.get要介護認定等基準時間食事());
-        eucEntity.set前回結果要介護認定等基準時間排泄(entity.get要介護認定等基準時間排泄());
-        eucEntity.set前回結果要介護認定等基準時間移動(entity.get要介護認定等基準時間移動());
-        eucEntity.set前回結果要介護認定等基準時間清潔保持(entity.get要介護認定等基準時間清潔保持());
-        eucEntity.set前回結果要介護認定等基準時間間接ケア(entity.get要介護認定等基準時間間接ケア());
-        eucEntity.set前回結果要介護認定等基準時間BPSD関連(entity.get要介護認定等基準時間BPSD関連());
-        eucEntity.set前回結果要介護認定等基準時間医療関連(entity.get要介護認定等基準時間医療関連());
-        eucEntity.set前回結果要介護認定等基準時間認知症加算(entity.get要介護認定等基準時間認知症加算());
-        eucEntity.set前回結果中間評価項目得点第１群(entity.get中間評価項目得点第1群());
-        eucEntity.set前回結果中間評価項目得点第２群(entity.get中間評価項目得点第2群());
-        eucEntity.set前回結果中間評価項目得点第３群(entity.get中間評価項目得点第3群());
-        eucEntity.set前回結果中間評価項目得点第４群(entity.get中間評価項目得点第4群());
-        eucEntity.set前回結果中間評価項目得点第５群(entity.get中間評価項目得点第5群());
+        eucEntity.set前回結果一次判定結果(entity.get前回結果一次判定結果());
+        eucEntity.set前回結果一次判定結果認知症加算(entity.get前回結果一次判定結果認知症加算());
+        eucEntity.set前回結果要介護認定等基準時間(entity.get前回結果要介護認定等基準時間());
+        eucEntity.set前回結果要介護認定等基準時間食事(entity.get前回結果要介護認定等基準時間食事());
+        eucEntity.set前回結果要介護認定等基準時間排泄(entity.get前回結果要介護認定等基準時間排泄());
+        eucEntity.set前回結果要介護認定等基準時間移動(entity.get前回結果要介護認定等基準時間移動());
+        eucEntity.set前回結果要介護認定等基準時間清潔保持(entity.get前回結果要介護認定等基準時間清潔保持());
+        eucEntity.set前回結果要介護認定等基準時間間接ケア(entity.get前回結果要介護認定等基準時間間接ケア());
+        eucEntity.set前回結果要介護認定等基準時間BPSD関連(entity.get前回結果要介護認定等基準時間BPSD関連());
+        eucEntity.set前回結果要介護認定等基準時間医療関連(entity.get前回結果要介護認定等基準時間医療関連());
+        eucEntity.set前回結果要介護認定等基準時間機能訓練(entity.get前回結果要介護認定等基準時間機能訓練());
+        eucEntity.set前回結果要介護認定等基準時間認知症加算(entity.get前回結果要介護認定等基準時間認知症加算());
+        eucEntity.set前回結果中間評価項目得点第１群(entity.get前回結果中間評価項目得点第1群());
+        eucEntity.set前回結果中間評価項目得点第２群(entity.get前回結果中間評価項目得点第2群());
+        eucEntity.set前回結果中間評価項目得点第３群(entity.get前回結果中間評価項目得点第3群());
+        eucEntity.set前回結果中間評価項目得点第４群(entity.get前回結果中間評価項目得点第4群());
+        eucEntity.set前回結果中間評価項目得点第５群(entity.get前回結果中間評価項目得点第5群());
         eucEntity.set前回結果状態の安定性(entity.get前回結果状態の安定性());
         eucEntity.set前回結果認知症自立度Ⅱ以上の蓋然性(entity.get前回結果認知症自立度Ⅱ以上の蓋然性());
         eucEntity.set前回結果認知機能及び状態安定性から推定される給付区分(entity.get給付区分());
+        eucEntity.set前回結果一次判定警告コード(entity.get前回結果警告コード());
         eucEntity.set前回結果申請日(nullchck(entity.get前回結果申請日()));
         eucEntity.set前回結果二次判定日(nullchck(entity.get前回結果二次判定日()));
         eucEntity.set前回結果現在のサービス区分コード(entity.get前回結果サービス区分コード());
@@ -185,7 +188,7 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set主治医番号(entity.get主治医コード());
         eucEntity.set意見書依頼日(nullchck(entity.get主治医意見書作成依頼年月日()));
         eucEntity.set意見書入手日(nullchck(entity.get主治医意見書受領年月日()));
-        eucEntity.set意見書短期記憶(entity.get短期記憶15());
+        eucEntity.set意見書短期記憶(entity.get意見書短期記憶());
         eucEntity.set意見書認知能力(entity.get日常の意思決定を行うための認知能力());
         eucEntity.set意見書伝達能力(entity.get自分の意思の伝達能力());
         eucEntity.set意見書食事行為(entity.get食事行為());
@@ -207,6 +210,7 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set要介護認定等基準時間間接ケア(entity.get要介護認定等基準時間間接ケア());
         eucEntity.set要介護認定等基準時間BPSD関連(entity.get要介護認定等基準時間BPSD関連());
         eucEntity.set要介護認定等基準時間医療関連(entity.get要介護認定等基準時間医療関連());
+        eucEntity.set要介護認定等基準時間機能訓練(entity.get要介護認定等基準時間機能訓練());
         eucEntity.set要介護認定等基準時間認知症加算(entity.get要介護認定等基準時間認知症加算());
         eucEntity.set中間評価項目得点第１群(entity.get中間評価項目得点第1群());
         eucEntity.set中間評価項目得点第２群(entity.get中間評価項目得点第2群());
@@ -228,39 +232,41 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set要介護１の場合の状態像(RString.EMPTY);
         eucEntity.set現在のサービス区分コード(entity.getサービス区分コード());
         eucEntity.set現在の状況(entity.get施設利用());
-        set介護給付サービス(entity, eucEntity);
-        set予防給付サービス(entity, eucEntity);
+        set09A介護給付サービス(entity, eucEntity);
+        set09A予防給付サービス(entity, eucEntity);
         set認定調査票調査項目(entity, eucEntity);
         eucEntity.set障害高齢者自立度(entity.get障害高齢者自立度日常生活自立度());
         eucEntity.set認知症高齢者自立度(entity.get認知症高齢者自立度日常生活自立度());
         set前回結果認定調査票調査項目(entity, eucEntity);
         eucEntity.set前回結果障害高齢者自立度(entity.get前回結果障害高齢者自立度日常生活自立度());
         eucEntity.set前回結果認知症高齢者自立度(entity.get前回結果認知症高齢者自立度日常生活自立度());
-        eucEntity.set前回結果一次判定結果(entity.get一次判定結果());
-        eucEntity.set前回結果一次判定結果認知症加算(entity.get一次判定結果認知症加算());
-        eucEntity.set前回結果要介護認定等基準時間(entity.get要介護認定等基準時間());
-        eucEntity.set前回結果要介護認定等基準時間食事(entity.get要介護認定等基準時間食事());
-        eucEntity.set前回結果要介護認定等基準時間排泄(entity.get要介護認定等基準時間排泄());
-        eucEntity.set前回結果要介護認定等基準時間移動(entity.get要介護認定等基準時間移動());
-        eucEntity.set前回結果要介護認定等基準時間清潔保持(entity.get要介護認定等基準時間清潔保持());
-        eucEntity.set前回結果要介護認定等基準時間間接ケア(entity.get要介護認定等基準時間間接ケア());
-        eucEntity.set前回結果要介護認定等基準時間BPSD関連(entity.get要介護認定等基準時間BPSD関連());
-        eucEntity.set前回結果要介護認定等基準時間医療関連(entity.get要介護認定等基準時間医療関連());
-        eucEntity.set前回結果要介護認定等基準時間認知症加算(entity.get要介護認定等基準時間認知症加算());
-        eucEntity.set前回結果中間評価項目得点第１群(entity.get中間評価項目得点第1群());
-        eucEntity.set前回結果中間評価項目得点第２群(entity.get中間評価項目得点第2群());
-        eucEntity.set前回結果中間評価項目得点第３群(entity.get中間評価項目得点第3群());
-        eucEntity.set前回結果中間評価項目得点第４群(entity.get中間評価項目得点第4群());
-        eucEntity.set前回結果中間評価項目得点第５群(entity.get中間評価項目得点第5群());
+        eucEntity.set前回結果一次判定結果(entity.get前回結果一次判定結果());
+        eucEntity.set前回結果一次判定結果認知症加算(entity.get前回結果一次判定結果認知症加算());
+        eucEntity.set前回結果要介護認定等基準時間(entity.get前回結果要介護認定等基準時間());
+        eucEntity.set前回結果要介護認定等基準時間食事(entity.get前回結果要介護認定等基準時間食事());
+        eucEntity.set前回結果要介護認定等基準時間排泄(entity.get前回結果要介護認定等基準時間排泄());
+        eucEntity.set前回結果要介護認定等基準時間移動(entity.get前回結果要介護認定等基準時間移動());
+        eucEntity.set前回結果要介護認定等基準時間清潔保持(entity.get前回結果要介護認定等基準時間清潔保持());
+        eucEntity.set前回結果要介護認定等基準時間間接ケア(entity.get前回結果要介護認定等基準時間間接ケア());
+        eucEntity.set前回結果要介護認定等基準時間BPSD関連(entity.get前回結果要介護認定等基準時間BPSD関連());
+        eucEntity.set前回結果要介護認定等基準時間医療関連(entity.get前回結果要介護認定等基準時間医療関連());
+        eucEntity.set前回結果要介護認定等基準時間機能訓練(entity.get前回結果要介護認定等基準時間機能訓練());
+        eucEntity.set前回結果要介護認定等基準時間認知症加算(entity.get前回結果要介護認定等基準時間認知症加算());
+        eucEntity.set前回結果中間評価項目得点第１群(entity.get前回結果中間評価項目得点第1群());
+        eucEntity.set前回結果中間評価項目得点第２群(entity.get前回結果中間評価項目得点第2群());
+        eucEntity.set前回結果中間評価項目得点第３群(entity.get前回結果中間評価項目得点第3群());
+        eucEntity.set前回結果中間評価項目得点第４群(entity.get前回結果中間評価項目得点第4群());
+        eucEntity.set前回結果中間評価項目得点第５群(entity.get前回結果中間評価項目得点第5群());
         eucEntity.set前回結果状態の安定性(entity.get前回結果状態の安定性());
         eucEntity.set前回結果認知症自立度Ⅱ以上の蓋然性(entity.get前回結果認知症自立度Ⅱ以上の蓋然性());
         eucEntity.set前回結果認知機能及び状態安定性から推定される給付区分(entity.get給付区分());
+        eucEntity.set前回結果一次判定警告コード(entity.get前回結果警告コード());
         eucEntity.set前回結果申請日(nullchck(entity.get前回結果申請日()));
         eucEntity.set前回結果二次判定日(nullchck(entity.get前回結果二次判定日()));
         eucEntity.set前回結果現在のサービス区分コード(entity.get前回結果サービス区分コード());
         eucEntity.set前回結果現在の状況(entity.get前回結果施設利用());
-        set前回結果介護給付サービス(entity, eucEntity);
-        set前回結果予防給付サービス(entity, eucEntity);
+        set前回09A介護給付サービス(entity, eucEntity);
+        set前回09A予防給付サービス(entity, eucEntity);
         eucEntity.set前回識別コード(entity.get前回識別コード());
         eucEntity.set認定審査会意見等(RString.EMPTY);
         eucEntity.setコメント等(entity.getコメント等());
@@ -288,7 +294,7 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set小規模多機能型居宅介護(entity.get介護小規模多機能型居宅介護());
             eucEntity.set認知症対応型共同生活介護グループホーム(entity.get介護認知症対応型共同生活介護グループホーム());
             eucEntity.set地域密着型特定施設入居者生活介護(entity.get介護地域密着型特定施設入居者生活介護());
-            eucEntity.set地域密着型介護老人福祉施設入所者生活介護(entity.get介護地域密着型介護老人福祉施設入所者生活介護());
+            eucEntity.set地域密着型介護老人福祉施設入所者生活介護(entity.get老人福祉施設入所者生活介護());
             eucEntity.set定期巡回随時対応型訪問介護看護(entity.get介護定期巡回随時対応型訪問介護看護());
             eucEntity.set複合型サービス(entity.get介護複合型サービス());
         } else {
@@ -298,6 +304,7 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set訪問リハビリテーション(項目);
             eucEntity.set居宅療養管理指導(項目);
             eucEntity.set通所介護デイサービス(項目);
+            eucEntity.set通所リハビリテーション(項目);
             eucEntity.set短期入所生活介護ショートステイ(項目);
             eucEntity.set短期入所療養介護(項目);
             eucEntity.set特定施設入居者生活介護(項目);
@@ -318,39 +325,39 @@ public class IchijihanteiSumidataIfBunisess {
     private void set予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIfEucEntity eucEntity) {
         if (予防給付サービス.equals(entity.getサービス区分コード())) {
-            eucEntity.set訪問介護ホームヘルプサービス(entity.get予防訪問介護ホームヘルプ());
-            eucEntity.set訪問入浴介護(entity.get予防訪問入浴介護());
-            eucEntity.set訪問看護(entity.get予防訪問看護());
-            eucEntity.set訪問リハビリテーション(entity.get予防訪問リハビリテーション());
-            eucEntity.set居宅療養管理指導(entity.get予防居宅療養管理指導());
-            eucEntity.set通所介護デイサービス(entity.get予防通所介護デイサービス());
+            eucEntity.set介護予防訪問介護ホームヘルプサービス(entity.get予防訪問介護ホームヘルプ());
+            eucEntity.set介護予防訪問入浴介護(entity.get予防訪問入浴介護());
+            eucEntity.set介護予防訪問看護(entity.get予防訪問看護());
+            eucEntity.set介護予防訪問リハビリテーション(entity.get予防訪問リハビリテーション());
+            eucEntity.set介護予防居宅療養管理指導(entity.get予防居宅療養管理指導());
+            eucEntity.set介護予防通所介護デイサービス(entity.get予防通所介護デイサービス());
             eucEntity.set介護予防通所リハビリテーション(entity.get予防通所リハビリテーションデイケア());
-            eucEntity.set短期入所生活介護ショートステイ(entity.get予防短期入所生活介護ショートステイ());
-            eucEntity.set短期入所療養介護(entity.get予防短期入所療養介護());
-            eucEntity.set特定施設入居者生活介護(entity.get予防特定施設入居者生活介護());
-            eucEntity.set福祉用具貸与(entity.get予防福祉用具貸与());
-            eucEntity.set特定福祉用具販売(entity.get予防特定福祉用具販売());
-            eucEntity.set住宅改修介護給付(entity.get住宅改修予防給付());
-            eucEntity.set認知症対応型通所介護(entity.get予防認知症対応型通所介護());
-            eucEntity.set小規模多機能型居宅介護(entity.get予防小規模多機能型居宅介護());
-            eucEntity.set認知症対応型共同生活介護グループホーム(entity.get予防認知症対応型共同生活介護グループホーム());
+            eucEntity.set介護予防短期入所生活介護ショートステイ(entity.get予防短期入所生活介護ショートステイ());
+            eucEntity.set介護予防短期入所療養介護(entity.get予防短期入所療養介護());
+            eucEntity.set介護予防特定施設入居者生活介護(entity.get予防特定施設入居者生活介護());
+            eucEntity.set介護予防福祉用具貸与(entity.get予防福祉用具貸与());
+            eucEntity.set特定介護予防福祉用具販売(entity.get予防特定福祉用具販売());
+            eucEntity.set住宅改修予防給付(entity.get住宅改修予防給付());
+            eucEntity.set介護予防認知症対応型通所介護(entity.get予防認知症対応型通所介護());
+            eucEntity.set介護予防小規模多機能型居宅介護(entity.get予防小規模多機能型居宅介護());
+            eucEntity.set介護予防認知症対応型共同生活介護グループホーム(entity.get予防認知症対応型共同生活介護グループホーム());
         } else {
-            eucEntity.set訪問介護ホームヘルプサービス(項目);
-            eucEntity.set訪問入浴介護(項目);
-            eucEntity.set訪問看護(項目);
-            eucEntity.set訪問リハビリテーション(項目);
-            eucEntity.set居宅療養管理指導(項目);
-            eucEntity.set通所介護デイサービス(項目);
+            eucEntity.set介護予防訪問介護ホームヘルプサービス(項目);
+            eucEntity.set介護予防訪問入浴介護(項目);
+            eucEntity.set介護予防訪問看護(項目);
+            eucEntity.set介護予防訪問リハビリテーション(項目);
+            eucEntity.set介護予防居宅療養管理指導(項目);
+            eucEntity.set介護予防通所介護デイサービス(項目);
             eucEntity.set介護予防通所リハビリテーション(項目);
-            eucEntity.set短期入所生活介護ショートステイ(項目);
-            eucEntity.set短期入所療養介護(項目);
-            eucEntity.set特定施設入居者生活介護(項目);
-            eucEntity.set福祉用具貸与(項目);
-            eucEntity.set特定福祉用具販売(項目);
-            eucEntity.set住宅改修介護給付(項目);
-            eucEntity.set認知症対応型通所介護(項目);
-            eucEntity.set小規模多機能型居宅介護(項目);
-            eucEntity.set認知症対応型共同生活介護グループホーム(項目);
+            eucEntity.set介護予防短期入所生活介護ショートステイ(項目);
+            eucEntity.set介護予防短期入所療養介護(項目);
+            eucEntity.set介護予防特定施設入居者生活介護(項目);
+            eucEntity.set介護予防福祉用具貸与(項目);
+            eucEntity.set特定介護予防福祉用具販売(項目);
+            eucEntity.set住宅改修予防給付(項目);
+            eucEntity.set介護予防認知症対応型通所介護(項目);
+            eucEntity.set介護予防小規模多機能型居宅介護(項目);
+            eucEntity.set介護予防認知症対応型共同生活介護グループホーム(項目);
         }
     }
 
@@ -519,7 +526,8 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set前回結果訪問リハビリテーション(entity.get前回介護訪問リハビリテーション());
             eucEntity.set前回結果居宅療養管理指導(entity.get前回介護居宅療養管理指導());
             eucEntity.set前回結果通所介護デイサービス(entity.get前回介護通所介護デイサービス());
-            eucEntity.set前回結果短期入所生活介護ショートステイ(entity.get前回介護短期入所生活介護ショートステイ());
+            eucEntity.set前回結果通所リハビリテーション(entity.get前回介護通所リハビリ());
+            eucEntity.set前回結果短期入所生活介護ショートステイ(entity.get前回介護短期入所生活介護());
             eucEntity.set前回結果短期入所療養介護(entity.get前回介護短期入所療養介護());
             eucEntity.set前回結果特定施設入居者生活介護(entity.get前回介護特定施設入居者生活介護());
             eucEntity.set前回結果福祉用具貸与(entity.get前回介護福祉用具貸与());
@@ -528,10 +536,10 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set前回結果夜間対応型訪問介護(entity.get前回介護夜間対応型訪問介護());
             eucEntity.set前回結果認知症対応型通所介護(entity.get前回介護認知症対応型通所介護());
             eucEntity.set前回結果小規模多機能型居宅介護(entity.get前回介護小規模多機能型居宅介護());
-            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(entity.get前回介護認知症対応型共同生活介護グループホーム());
-            eucEntity.set前回結果地域密着型特定施設入居者生活介護(entity.get前回介護地域密着型特定施設入居者生活介護());
-            eucEntity.set前回結果地域密着型介護老人福祉施設入所者生活介護(entity.get前回介護地域密着型介護老人福祉施設入所者生活介護());
-            eucEntity.set前回結果定期巡回随時対応型訪問介護看護(entity.get前回介護定期巡回随時対応型訪問介護看護());
+            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(entity.get前回介護グループホーム());
+            eucEntity.set前回結果地域密着型特定施設入居者生活介護(entity.get前回介護施設入居者生活介護());
+            eucEntity.set前回結果地域密着型介護老人福祉施設入所者生活介護(entity.get前回老人福祉施設入所者生活介護());
+            eucEntity.set前回結果定期巡回随時対応型訪問介護看護(entity.get前回介護訪問介護看護());
             eucEntity.set前回結果複合型サービス(entity.get前回介護複合型サービス());
         } else {
             eucEntity.set前回結果訪問介護ホームヘルプサービス(項目);
@@ -540,6 +548,7 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set前回結果訪問リハビリテーション(項目);
             eucEntity.set前回結果居宅療養管理指導(項目);
             eucEntity.set前回結果通所介護デイサービス(項目);
+            eucEntity.set前回結果通所リハビリテーション(項目);
             eucEntity.set前回結果短期入所生活介護ショートステイ(項目);
             eucEntity.set前回結果短期入所療養介護(項目);
             eucEntity.set前回結果特定施設入居者生活介護(項目);
@@ -560,41 +569,43 @@ public class IchijihanteiSumidataIfBunisess {
     private void set前回結果予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIfEucEntity eucEntity) {
         if (予防給付サービス.equals(entity.get前回結果サービス区分コード())) {
-            eucEntity.set前回結果訪問介護ホームヘルプサービス(entity.get前回予防訪問介護ホームヘルプ());
-            eucEntity.set前回結果訪問入浴介護(entity.get前回予防訪問入浴介護());
-            eucEntity.set前回結果訪問看護(entity.get前回予防訪問看護());
-            eucEntity.set前回結果訪問リハビリテーション(entity.get前回予防訪問リハビリテーション());
-            eucEntity.set前回結果居宅療養管理指導(entity.get前回予防居宅療養管理指導());
-            eucEntity.set前回結果通所介護デイサービス(entity.get前回予防通所介護デイサービス());
-            eucEntity.set前回結果短期入所生活介護ショートステイ(entity.get前回予防短期入所生活介護ショートステイ());
-            eucEntity.set前回結果短期入所療養介護(entity.get前回予防短期入所療養介護());
-            eucEntity.set前回結果特定施設入居者生活介護(entity.get前回予防特定施設入居者生活介護());
-            eucEntity.set前回結果福祉用具貸与(entity.get前回予防福祉用具貸与());
-            eucEntity.set前回結果特定福祉用具販売(entity.get前回予防特定福祉用具販売());
-            eucEntity.set前回結果住宅改修介護給付(entity.get前回住宅改修予防給付());
-            eucEntity.set前回結果認知症対応型通所介護(entity.get前回予防認知症対応型通所介護());
-            eucEntity.set前回結果小規模多機能型居宅介護(entity.get前回予防小規模多機能型居宅介護());
-            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(entity.get前回予防認知症対応型共同生活介護グループホーム());
+            eucEntity.set前回結果介護予防訪問介護ホームヘルプサービス(entity.get前回予防訪問介護ホームヘルプ());
+            eucEntity.set前回結果介護予防訪問入浴介護(entity.get前回予防訪問入浴介護());
+            eucEntity.set前回結果介護予防訪問看護(entity.get前回予防訪問看護());
+            eucEntity.set前回結果介護予防訪問リハビリテーション(entity.get前回予防訪問リハビリテーション());
+            eucEntity.set前回結果介護予防居宅療養管理指導(entity.get前回予防居宅療養管理指導());
+            eucEntity.set前回結果介護予防通所介護デイサービス(entity.get前回予防通所介護デイサービス());
+            eucEntity.set前回結果介護予防通所リハビリテーション(entity.get前回予防通所リハビリ());
+            eucEntity.set前回結果介護予防短期入所生活介護ショートステイ(entity.get前回予防短期入所生活介護());
+            eucEntity.set前回結果介護予防短期入所療養介護(entity.get前回予防短期入所療養介護());
+            eucEntity.set前回結果介護予防特定施設入居者生活介護(entity.get前回予防特定施設入居者生活介護());
+            eucEntity.set前回結果介護予防福祉用具貸与(entity.get前回予防福祉用具貸与());
+            eucEntity.set前回結果特定介護予防福祉用具販売(entity.get前回予防特定福祉用具販売());
+            eucEntity.set前回結果住宅改修予防給付(entity.get前回住宅改修予防給付());
+            eucEntity.set前回結果介護予防認知症対応型通所介護(entity.get前回予防認知症対応型通所介護());
+            eucEntity.set前回結果介護予防小規模多機能型居宅介護(entity.get前回予防小規模多機能型居宅介護());
+            eucEntity.set前回結果介護予防認知症対応型共同生活介護グループホーム(entity.get前回予防グループホーム());
         } else {
-            eucEntity.set前回結果訪問介護ホームヘルプサービス(項目);
-            eucEntity.set前回結果訪問入浴介護(項目);
-            eucEntity.set前回結果訪問看護(項目);
-            eucEntity.set前回結果訪問リハビリテーション(項目);
-            eucEntity.set前回結果居宅療養管理指導(項目);
-            eucEntity.set前回結果通所介護デイサービス(項目);
-            eucEntity.set前回結果短期入所生活介護ショートステイ(項目);
-            eucEntity.set前回結果短期入所療養介護(項目);
-            eucEntity.set前回結果特定施設入居者生活介護(項目);
-            eucEntity.set前回結果福祉用具貸与(項目);
-            eucEntity.set前回結果特定福祉用具販売(項目);
-            eucEntity.set前回結果住宅改修介護給付(項目);
-            eucEntity.set前回結果認知症対応型通所介護(項目);
-            eucEntity.set前回結果小規模多機能型居宅介護(項目);
-            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(項目);
+            eucEntity.set前回結果介護予防訪問介護ホームヘルプサービス(項目);
+            eucEntity.set前回結果介護予防訪問入浴介護(項目);
+            eucEntity.set前回結果介護予防訪問看護(項目);
+            eucEntity.set前回結果介護予防訪問リハビリテーション(項目);
+            eucEntity.set前回結果介護予防居宅療養管理指導(項目);
+            eucEntity.set前回結果介護予防通所介護デイサービス(項目);
+            eucEntity.set前回結果介護予防通所リハビリテーション(項目);
+            eucEntity.set前回結果介護予防短期入所生活介護ショートステイ(項目);
+            eucEntity.set前回結果介護予防短期入所療養介護(項目);
+            eucEntity.set前回結果介護予防特定施設入居者生活介護(項目);
+            eucEntity.set前回結果介護予防福祉用具貸与(項目);
+            eucEntity.set前回結果特定介護予防福祉用具販売(項目);
+            eucEntity.set前回結果住宅改修予防給付(項目);
+            eucEntity.set前回結果介護予防認知症対応型通所介護(項目);
+            eucEntity.set前回結果介護予防小規模多機能型居宅介護(項目);
+            eucEntity.set前回結果介護予防認知症対応型共同生活介護グループホーム(項目);
         }
     }
 
-    private void set介護給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
+    private void set09A介護給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIf09AEucEntity eucEntity) {
         if (介護給付サービス.equals(entity.getサービス区分コード())) {
             eucEntity.set訪問介護ホームヘルプサービス(entity.get介護訪問介護ホームヘルプ());
@@ -603,6 +614,7 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set訪問リハビリテーション(entity.get介護訪問リハビリテーション());
             eucEntity.set居宅療養管理指導(entity.get介護居宅療養管理指導());
             eucEntity.set通所介護デイサービス(entity.get介護通所介護デイサービス());
+            eucEntity.set通所リハビリテーション(entity.get介護通所リハビリテーションデイケア());
             eucEntity.set短期入所生活介護ショートステイ(entity.get介護短期入所生活介護ショートステイ());
             eucEntity.set短期入所療養介護(entity.get介護短期入所療養介護());
             eucEntity.set特定施設入居者生活介護(entity.get介護特定施設入居者生活介護());
@@ -614,7 +626,7 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set小規模多機能型居宅介護(entity.get介護小規模多機能型居宅介護());
             eucEntity.set認知症対応型共同生活介護グループホーム(entity.get介護認知症対応型共同生活介護グループホーム());
             eucEntity.set地域密着型特定施設入居者生活介護(entity.get介護地域密着型特定施設入居者生活介護());
-            eucEntity.set地域密着型介護老人福祉施設入所者生活介護(entity.get介護地域密着型介護老人福祉施設入所者生活介護());
+            eucEntity.set地域密着型介護老人福祉施設入所者生活介護(entity.get老人福祉施設入所者生活介護());
         } else {
             eucEntity.set訪問介護ホームヘルプサービス(項目);
             eucEntity.set訪問入浴介護(項目);
@@ -622,6 +634,7 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set訪問リハビリテーション(項目);
             eucEntity.set居宅療養管理指導(項目);
             eucEntity.set通所介護デイサービス(項目);
+            eucEntity.set通所リハビリテーション(項目);
             eucEntity.set短期入所生活介護ショートステイ(項目);
             eucEntity.set短期入所療養介護(項目);
             eucEntity.set特定施設入居者生活介護(項目);
@@ -637,210 +650,56 @@ public class IchijihanteiSumidataIfBunisess {
         }
     }
 
-    private void set予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
+    private void set09A予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIf09AEucEntity eucEntity) {
         if (予防給付サービス.equals(entity.getサービス区分コード())) {
-            eucEntity.set訪問介護ホームヘルプサービス(entity.get予防訪問介護ホームヘルプ());
-            eucEntity.set訪問入浴介護(entity.get予防訪問入浴介護());
-            eucEntity.set訪問看護(entity.get予防訪問看護());
-            eucEntity.set訪問リハビリテーション(entity.get予防訪問リハビリテーション());
-            eucEntity.set居宅療養管理指導(entity.get予防居宅療養管理指導());
-            eucEntity.set通所介護デイサービス(entity.get予防通所介護デイサービス());
-            eucEntity.set短期入所生活介護ショートステイ(entity.get予防短期入所生活介護ショートステイ());
-            eucEntity.set短期入所療養介護(entity.get予防短期入所療養介護());
-            eucEntity.set特定施設入居者生活介護(entity.get予防特定施設入居者生活介護());
-            eucEntity.set福祉用具貸与(entity.get予防福祉用具貸与());
-            eucEntity.set特定福祉用具販売(entity.get予防特定福祉用具販売());
-            eucEntity.set住宅改修介護給付(entity.get住宅改修予防給付());
-            eucEntity.set認知症対応型通所介護(entity.get予防認知症対応型通所介護());
-            eucEntity.set小規模多機能型居宅介護(entity.get予防小規模多機能型居宅介護());
-            eucEntity.set認知症対応型共同生活介護グループホーム(entity.get予防認知症対応型共同生活介護グループホーム());
+            eucEntity.set介護予防訪問介護ホームヘルプサービス(entity.get予防訪問介護ホームヘルプ());
+            eucEntity.set介護予防訪問入浴介護(entity.get予防訪問入浴介護());
+            eucEntity.set介護予防訪問看護(entity.get予防訪問看護());
+            eucEntity.set介護予防訪問リハビリテーション(entity.get予防訪問リハビリテーション());
+            eucEntity.set介護予防居宅療養管理指導(entity.get予防居宅療養管理指導());
+            eucEntity.set介護予防通所介護デイサービス(entity.get予防通所介護デイサービス());
+            eucEntity.set介護予防通所リハビリテーション(entity.get予防通所リハビリテーションデイケア());
+            eucEntity.set介護予防短期入所生活介護ショートステイ(entity.get予防短期入所生活介護ショートステイ());
+            eucEntity.set介護予防短期入所療養介護(entity.get予防短期入所療養介護());
+            eucEntity.set介護予防特定施設入居者生活介護(entity.get予防特定施設入居者生活介護());
+            eucEntity.set介護予防福祉用具貸与(entity.get予防福祉用具貸与());
+            eucEntity.set特定介護予防福祉用具販売(entity.get予防特定福祉用具販売());
+            eucEntity.set住宅改修予防給付(entity.get住宅改修予防給付());
+            eucEntity.set介護予防認知症対応型通所介護(entity.get予防認知症対応型通所介護());
+            eucEntity.set介護予防小規模多機能型居宅介護(entity.get予防小規模多機能型居宅介護());
+            eucEntity.set介護予防認知症対応型共同生活介護グループホーム(entity.get予防認知症対応型共同生活介護グループホーム());
         } else {
-            eucEntity.set訪問介護ホームヘルプサービス(項目);
-            eucEntity.set訪問入浴介護(項目);
-            eucEntity.set訪問看護(項目);
-            eucEntity.set訪問リハビリテーション(項目);
-            eucEntity.set居宅療養管理指導(項目);
-            eucEntity.set通所介護デイサービス(項目);
-            eucEntity.set短期入所生活介護ショートステイ(項目);
-            eucEntity.set短期入所療養介護(項目);
-            eucEntity.set特定施設入居者生活介護(項目);
-            eucEntity.set福祉用具貸与(項目);
-            eucEntity.set特定福祉用具販売(項目);
-            eucEntity.set住宅改修介護給付(項目);
-            eucEntity.set認知症対応型通所介護(項目);
-            eucEntity.set小規模多機能型居宅介護(項目);
-            eucEntity.set認知症対応型共同生活介護グループホーム(項目);
+            eucEntity.set介護予防訪問介護ホームヘルプサービス(項目);
+            eucEntity.set介護予防訪問入浴介護(項目);
+            eucEntity.set介護予防訪問看護(項目);
+            eucEntity.set介護予防訪問リハビリテーション(項目);
+            eucEntity.set介護予防居宅療養管理指導(項目);
+            eucEntity.set介護予防通所介護デイサービス(項目);
+            eucEntity.set介護予防通所リハビリテーション(項目);
+            eucEntity.set介護予防短期入所生活介護ショートステイ(項目);
+            eucEntity.set介護予防短期入所療養介護(項目);
+            eucEntity.set介護予防特定施設入居者生活介護(項目);
+            eucEntity.set介護予防福祉用具貸与(項目);
+            eucEntity.set特定介護予防福祉用具販売(項目);
+            eucEntity.set住宅改修予防給付(項目);
+            eucEntity.set介護予防認知症対応型通所介護(項目);
+            eucEntity.set介護予防小規模多機能型居宅介護(項目);
+            eucEntity.set介護予防認知症対応型共同生活介護グループホーム(項目);
         }
     }
 
-    private void set認定調査票調査項目(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
-            IchijihanteiSumidataIf09AEucEntity eucEntity) {
-        eucEntity.set麻痺左上肢(entity.get麻痺左上肢());
-        eucEntity.set麻痺左下肢(entity.get麻痺左下肢());
-        eucEntity.set麻痺右上肢(entity.get麻痺右上肢());
-        eucEntity.set麻痺右下肢(entity.get麻痺右下肢());
-        eucEntity.set麻痺その他(entity.get麻痺その他());
-        eucEntity.set拘縮肩関節(entity.get拘縮肩関節());
-        eucEntity.set拘縮股関節(entity.get拘縮股関節());
-        eucEntity.set拘縮膝関節(entity.get拘縮膝関節());
-        eucEntity.set拘縮その他(entity.get拘縮その他());
-        eucEntity.set寝返り(entity.get寝返り());
-        eucEntity.set起き上がり(entity.get起き上がり());
-        eucEntity.set座位保持(entity.get座位保持());
-        eucEntity.set両足での立位(entity.get両足での立位());
-        eucEntity.set歩行(entity.get歩行());
-        eucEntity.set立ち上がり(entity.get立ち上がり());
-        eucEntity.set片足での立位(entity.get片足での立位());
-        eucEntity.set洗身(entity.get洗身());
-        eucEntity.setつめ切り(entity.getつめ切り());
-        eucEntity.set視力(entity.get視力());
-        eucEntity.set聴力(entity.get聴力());
-        eucEntity.set移乗(entity.get移乗());
-        eucEntity.set移動(entity.get移動());
-        eucEntity.setえん下(entity.getえん下());
-        eucEntity.set食事摂取(entity.get食事摂取());
-        eucEntity.set排尿(entity.get排尿());
-        eucEntity.set排便(entity.get排便());
-        eucEntity.set口腔清潔(entity.get口腔清潔());
-        eucEntity.set洗顔(entity.get洗顔());
-        eucEntity.set整髪(entity.get整髪());
-        eucEntity.set上衣の着脱(entity.get上衣の着脱());
-        eucEntity.setズボン等の着脱(entity.getズボン等の着脱());
-        eucEntity.set外出頻度(entity.get外出頻度());
-        eucEntity.set意思の伝達(entity.get意思の伝達());
-        eucEntity.set毎日の日課を理解(entity.get毎日の日課を理解());
-        eucEntity.set生年月日をいう(entity.get生年月日をいう());
-        eucEntity.set短期記憶(entity.get短期記憶());
-        eucEntity.set自分の名前をいう(entity.get自分の名前をいう());
-        eucEntity.set今の季節を理解(entity.get今の季節を理解());
-        eucEntity.set場所の理解(entity.get場所の理解());
-        eucEntity.set徘徊(entity.get徘徊());
-        eucEntity.set外出して戻れない(entity.get外出して戻れない());
-        eucEntity.set被害的(entity.get被害的());
-        eucEntity.set作話(entity.get作話());
-        eucEntity.set感情が不安定(entity.get感情が不安定());
-        eucEntity.set昼夜逆転(entity.get昼夜逆転());
-        eucEntity.set同じ話をする(entity.get同じ話をする());
-        eucEntity.set大声を出す(entity.get大声を出す());
-        eucEntity.set介護に抵抗(entity.get介護に抵抗());
-        eucEntity.set落ち着きなし(entity.get落ち着きなし());
-        eucEntity.set一人で出たがる(entity.get一人で出たがる());
-        eucEntity.set収集癖(entity.get収集癖());
-        eucEntity.set物や衣類を壊す(entity.get物や衣類を壊す());
-        eucEntity.setひどい物忘れ(entity.getひどい物忘れ());
-        eucEntity.set独り言独り笑い(entity.get独り言独り笑い());
-        eucEntity.set自分勝手に行動する(entity.get自分勝手に行動する());
-        eucEntity.set話がまとまらない(entity.get話がまとまらない());
-        eucEntity.set薬の内服(entity.get薬の内服());
-        eucEntity.set金銭の管理(entity.get金銭の管理());
-        eucEntity.set日常の意思決定(entity.get日常の意思決定());
-        eucEntity.set集団への不適応(entity.get集団への不適応());
-        eucEntity.set買い物(entity.get買い物());
-        eucEntity.set簡単な調理(entity.get簡単な調理());
-        eucEntity.set点滴の管理(entity.get点滴の管理());
-        eucEntity.set中心静脈栄養(entity.get中心静脈栄養());
-        eucEntity.set透析(entity.get透析());
-        eucEntity.setストーマの処置(entity.getストーマの処置());
-        eucEntity.set酸素療法(entity.get酸素療法());
-        eucEntity.setレスピレーター(entity.getレスピレーター());
-        eucEntity.set気管切開の処置(entity.get気管切開の処置());
-        eucEntity.set疼痛の看護(entity.get疼痛の看護());
-        eucEntity.set経管栄養(entity.get経管栄養());
-        eucEntity.setモニター測定(entity.getモニター測定());
-        eucEntity.setじょくそうの処置(entity.getじょくそうの処置());
-        eucEntity.setカテーテル(entity.getカテーテル());
-    }
-
-    private void set前回結果認定調査票調査項目(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
-            IchijihanteiSumidataIf09AEucEntity eucEntity) {
-        eucEntity.set前回結果麻痺左上肢(entity.get前回結果麻痺左上肢());
-        eucEntity.set前回結果麻痺左下肢(entity.get前回結果麻痺左下肢());
-        eucEntity.set前回結果麻痺右上肢(entity.get前回結果麻痺右上肢());
-        eucEntity.set前回結果麻痺右下肢(entity.get前回結果麻痺右下肢());
-        eucEntity.set前回結果麻痺その他(entity.get前回結果麻痺その他());
-        eucEntity.set前回結果拘縮肩関節(entity.get前回結果拘縮肩関節());
-        eucEntity.set前回結果拘縮股関節(entity.get前回結果拘縮股関節());
-        eucEntity.set前回結果拘縮膝関節(entity.get前回結果拘縮膝関節());
-        eucEntity.set前回結果拘縮その他(entity.get前回結果拘縮その他());
-        eucEntity.set前回結果寝返り(entity.get前回結果寝返り());
-        eucEntity.set前回結果起き上がり(entity.get前回結果起き上がり());
-        eucEntity.set前回結果座位保持(entity.get前回結果座位保持());
-        eucEntity.set前回結果両足での立位(entity.get前回結果両足での立位());
-        eucEntity.set前回結果歩行(entity.get前回結果歩行());
-        eucEntity.set前回結果立ち上がり(entity.get前回結果立ち上がり());
-        eucEntity.set前回結果片足での立位(entity.get前回結果片足での立位());
-        eucEntity.set前回結果洗身(entity.get前回結果洗身());
-        eucEntity.set前回結果つめ切り(entity.get前回結果つめ切り());
-        eucEntity.set前回結果視力(entity.get前回結果視力());
-        eucEntity.set前回結果聴力(entity.get前回結果聴力());
-        eucEntity.set前回結果移乗(entity.get前回結果移乗());
-        eucEntity.set前回結果移動(entity.get前回結果移動());
-        eucEntity.set前回結果えん下(entity.get前回結果えん下());
-        eucEntity.set前回結果食事摂取(entity.get前回結果食事摂取());
-        eucEntity.set前回結果排尿(entity.get前回結果排尿());
-        eucEntity.set前回結果排便(entity.get前回結果排便());
-        eucEntity.set前回結果口腔清潔(entity.get前回結果口腔清潔());
-        eucEntity.set前回結果洗顔(entity.get前回結果洗顔());
-        eucEntity.set前回結果整髪(entity.get前回結果整髪());
-        eucEntity.set前回結果上衣の着脱(entity.get前回結果上衣の着脱());
-        eucEntity.set前回結果ズボン等の着脱(entity.get前回結果ズボン等の着脱());
-        eucEntity.set前回結果外出頻度(entity.get前回結果外出頻度());
-        eucEntity.set前回結果意思の伝達(entity.get前回結果意思の伝達());
-        eucEntity.set前回結果毎日の日課を理解(entity.get前回結果毎日の日課を理解());
-        eucEntity.set前回結果生年月日をいう(entity.get前回結果生年月日をいう());
-        eucEntity.set前回結果短期記憶(entity.get前回結果短期記憶());
-        eucEntity.set前回結果自分の名前をいう(entity.get前回結果自分の名前をいう());
-        eucEntity.set前回結果今の季節を理解(entity.get前回結果今の季節を理解());
-        eucEntity.set前回結果場所の理解(entity.get前回結果場所の理解());
-        eucEntity.set前回結果徘徊(entity.get前回結果徘徊());
-        eucEntity.set前回結果外出して戻れない(entity.get前回結果外出して戻れない());
-        eucEntity.set前回結果被害的(entity.get前回結果被害的());
-        eucEntity.set前回結果作話(entity.get前回結果作話());
-        eucEntity.set前回結果感情が不安定(entity.get前回結果感情が不安定());
-        eucEntity.set前回結果昼夜逆転(entity.get前回結果昼夜逆転());
-        eucEntity.set前回結果同じ話をする(entity.get前回結果同じ話をする());
-        eucEntity.set前回結果大声を出す(entity.get前回結果大声を出す());
-        eucEntity.set前回結果介護に抵抗(entity.get前回結果介護に抵抗());
-        eucEntity.set前回結果落ち着きなし(entity.get前回結果落ち着きなし());
-        eucEntity.set前回結果一人で出たがる(entity.get前回結果一人で出たがる());
-        eucEntity.set前回結果収集癖(entity.get前回結果収集癖());
-        eucEntity.set前回結果物や衣類を壊す(entity.get前回結果物や衣類を壊す());
-        eucEntity.set前回結果ひどい物忘れ(entity.get前回結果ひどい物忘れ());
-        eucEntity.set前回結果独り言独り笑い(entity.get前回結果独り言独り笑い());
-        eucEntity.set前回結果自分勝手に行動する(entity.get前回結果自分勝手に行動する());
-        eucEntity.set前回結果話がまとまらない(entity.get前回結果話がまとまらない());
-        eucEntity.set前回結果薬の内服(entity.get前回結果薬の内服());
-        eucEntity.set前回結果金銭の管理(entity.get前回結果金銭の管理());
-        eucEntity.set前回結果日常の意思決定(entity.get前回結果日常の意思決定());
-        eucEntity.set前回結果集団への不適応(entity.get前回結果集団への不適応());
-        eucEntity.set前回結果買い物(entity.get前回結果買い物());
-        eucEntity.set前回結果簡単な調理(entity.get前回結果簡単な調理());
-        eucEntity.set前回結果点滴の管理(entity.get前回結果点滴の管理());
-        eucEntity.set前回結果中心静脈栄養(entity.get前回結果中心静脈栄養());
-        eucEntity.set前回結果透析(entity.get前回結果透析());
-        eucEntity.set前回結果ストーマの処置(entity.get前回結果ストーマの処置());
-        eucEntity.set前回結果酸素療法(entity.get前回結果酸素療法());
-        eucEntity.set前回結果レスピレーター(entity.get前回結果レスピレーター());
-        eucEntity.set前回結果気管切開の処置(entity.get前回結果気管切開の処置());
-        eucEntity.set前回結果疼痛の看護(entity.get前回結果疼痛の看護());
-        eucEntity.set前回結果経管栄養(entity.get前回結果経管栄養());
-        eucEntity.set前回結果モニター測定(entity.get前回結果モニター測定());
-        eucEntity.set前回結果じょくそうの処置(entity.get前回結果じょくそうの処置());
-        eucEntity.set前回結果カテーテル(entity.get前回結果カテーテル());
-    }
-
-    private void set前回結果介護給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
+    private void set前回09A介護給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIf09AEucEntity eucEntity) {
         if (介護給付サービス.equals(entity.get前回結果サービス区分コード())) {
-            eucEntity.set前回結果訪問介護ホームヘルプサービス(entity.get前回介護訪問介護ホームヘルプ());
+            eucEntity.set前回結果訪問介護ホームヘルプサービス(entity.get介護訪問介護ホームヘルプ());
             eucEntity.set前回結果訪問入浴介護(entity.get前回介護訪問入浴介護());
             eucEntity.set前回結果訪問看護(entity.get前回介護訪問看護());
             eucEntity.set前回結果訪問リハビリテーション(entity.get前回介護訪問リハビリテーション());
             eucEntity.set前回結果居宅療養管理指導(entity.get前回介護居宅療養管理指導());
             eucEntity.set前回結果通所介護デイサービス(entity.get前回介護通所介護デイサービス());
-            eucEntity.set前回結果通所リハビリテーション(entity.get介護通所リハビリテーションデイケア());
-            eucEntity.set前回結果短期入所生活介護ショートステイ(entity.get前回介護短期入所生活介護ショートステイ());
+            eucEntity.set前回結果通所リハビリテーション(entity.get前回介護通所リハビリ());
+            eucEntity.set前回結果短期入所生活介護ショートステイ(entity.get前回介護短期入所生活介護());
             eucEntity.set前回結果短期入所療養介護(entity.get前回介護短期入所療養介護());
             eucEntity.set前回結果特定施設入居者生活介護(entity.get前回介護特定施設入居者生活介護());
             eucEntity.set前回結果福祉用具貸与(entity.get前回介護福祉用具貸与());
@@ -849,9 +708,9 @@ public class IchijihanteiSumidataIfBunisess {
             eucEntity.set前回結果夜間対応型訪問介護(entity.get前回介護夜間対応型訪問介護());
             eucEntity.set前回結果認知症対応型通所介護(entity.get前回介護認知症対応型通所介護());
             eucEntity.set前回結果小規模多機能型居宅介護(entity.get前回介護小規模多機能型居宅介護());
-            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(entity.get前回介護認知症対応型共同生活介護グループホーム());
-            eucEntity.set前回結果地域密着型特定施設入居者生活介護(entity.get前回介護地域密着型特定施設入居者生活介護());
-            eucEntity.set前回結果地域密着型介護老人福祉施設入所者生活介護(entity.get前回介護地域密着型介護老人福祉施設入所者生活介護());
+            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(entity.get前回介護グループホーム());
+            eucEntity.set前回結果地域密着型特定施設入居者生活介護(entity.get前回介護施設入居者生活介護());
+            eucEntity.set前回結果地域密着型介護老人福祉施設入所者生活介護(entity.get前回老人福祉施設入所者生活介護());
         } else {
             eucEntity.set前回結果訪問介護ホームヘルプサービス(項目);
             eucEntity.set前回結果訪問入浴介護(項目);
@@ -875,41 +734,199 @@ public class IchijihanteiSumidataIfBunisess {
         }
     }
 
-    private void set前回結果予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
+    private void set前回09A予防給付サービス(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
             IchijihanteiSumidataIf09AEucEntity eucEntity) {
         if (予防給付サービス.equals(entity.get前回結果サービス区分コード())) {
-            eucEntity.set前回結果訪問介護ホームヘルプサービス(entity.get前回予防訪問介護ホームヘルプ());
-            eucEntity.set前回結果訪問入浴介護(entity.get前回予防訪問入浴介護());
-            eucEntity.set前回結果訪問看護(entity.get前回予防訪問看護());
-            eucEntity.set前回結果訪問リハビリテーション(entity.get前回予防訪問リハビリテーション());
-            eucEntity.set前回結果居宅療養管理指導(entity.get前回予防居宅療養管理指導());
-            eucEntity.set前回結果通所介護デイサービス(entity.get前回予防通所介護デイサービス());
-            eucEntity.set前回結果短期入所生活介護ショートステイ(entity.get前回予防短期入所生活介護ショートステイ());
-            eucEntity.set前回結果短期入所療養介護(entity.get前回予防短期入所療養介護());
-            eucEntity.set前回結果特定施設入居者生活介護(entity.get前回予防特定施設入居者生活介護());
-            eucEntity.set前回結果福祉用具貸与(entity.get前回予防福祉用具貸与());
-            eucEntity.set前回結果特定福祉用具販売(entity.get前回予防特定福祉用具販売());
-            eucEntity.set前回結果住宅改修介護給付(entity.get前回住宅改修予防給付());
-            eucEntity.set前回結果認知症対応型通所介護(entity.get前回予防認知症対応型通所介護());
-            eucEntity.set前回結果小規模多機能型居宅介護(entity.get前回予防小規模多機能型居宅介護());
-            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(entity.get前回予防認知症対応型共同生活介護グループホーム());
+            eucEntity.set前回結果介護予防訪問介護ホームヘルプサービス(entity.get前回予防訪問介護ホームヘルプ());
+            eucEntity.set前回結果介護予防訪問入浴介護(entity.get前回予防訪問入浴介護());
+            eucEntity.set前回結果介護予防訪問看護(entity.get前回予防訪問看護());
+            eucEntity.set前回結果介護予防訪問リハビリテーション(entity.get前回予防訪問リハビリテーション());
+            eucEntity.set前回結果介護予防居宅療養管理指導(entity.get前回予防居宅療養管理指導());
+            eucEntity.set前回結果介護予防通所介護デイサービス(entity.get前回予防通所介護デイサービス());
+            eucEntity.set前回結果介護予防通所リハビリテーション(entity.get前回予防通所リハビリ());
+            eucEntity.set前回結果介護予防短期入所生活介護ショートステイ(entity.get前回予防短期入所生活介護());
+            eucEntity.set前回結果介護予防短期入所療養介護(entity.get前回予防短期入所療養介護());
+            eucEntity.set前回結果介護予防特定施設入居者生活介護(entity.get前回予防特定施設入居者生活介護());
+            eucEntity.set前回結果介護予防福祉用具貸与(entity.get前回予防福祉用具貸与());
+            eucEntity.set前回結果特定介護予防福祉用具販売(entity.get前回予防特定福祉用具販売());
+            eucEntity.set前回結果住宅改修予防給付(entity.get前回住宅改修予防給付());
+            eucEntity.set前回結果介護予防認知症対応型通所介護(entity.get前回予防認知症対応型通所介護());
+            eucEntity.set前回結果介護予防小規模多機能型居宅介護(entity.get前回予防小規模多機能型居宅介護());
+            eucEntity.set前回結果介護予防認知症対応型共同生活介護グループホーム(entity.get前回予防グループホーム());
         } else {
-            eucEntity.set前回結果訪問介護ホームヘルプサービス(項目);
-            eucEntity.set前回結果訪問入浴介護(項目);
-            eucEntity.set前回結果訪問看護(項目);
-            eucEntity.set前回結果訪問リハビリテーション(項目);
-            eucEntity.set前回結果居宅療養管理指導(項目);
-            eucEntity.set前回結果通所介護デイサービス(項目);
-            eucEntity.set前回結果短期入所生活介護ショートステイ(項目);
-            eucEntity.set前回結果短期入所療養介護(項目);
-            eucEntity.set前回結果特定施設入居者生活介護(項目);
-            eucEntity.set前回結果福祉用具貸与(項目);
-            eucEntity.set前回結果特定福祉用具販売(項目);
-            eucEntity.set前回結果住宅改修介護給付(項目);
-            eucEntity.set前回結果認知症対応型通所介護(項目);
-            eucEntity.set前回結果小規模多機能型居宅介護(項目);
-            eucEntity.set前回結果認知症対応型共同生活介護グループホーム(項目);
+            eucEntity.set前回結果介護予防訪問介護ホームヘルプサービス(項目);
+            eucEntity.set前回結果介護予防訪問入浴介護(項目);
+            eucEntity.set前回結果介護予防訪問看護(項目);
+            eucEntity.set前回結果介護予防訪問リハビリテーション(項目);
+            eucEntity.set前回結果介護予防居宅療養管理指導(項目);
+            eucEntity.set前回結果介護予防通所介護デイサービス(項目);
+            eucEntity.set前回結果介護予防通所リハビリテーション(項目);
+            eucEntity.set前回結果介護予防短期入所生活介護ショートステイ(項目);
+            eucEntity.set前回結果介護予防短期入所療養介護(項目);
+            eucEntity.set前回結果介護予防特定施設入居者生活介護(entity.get前回予防特定施設入居者生活介護());
+            eucEntity.set前回結果介護予防福祉用具貸与(項目);
+            eucEntity.set前回結果特定介護予防福祉用具販売(項目);
+            eucEntity.set前回結果住宅改修予防給付(項目);
+            eucEntity.set前回結果介護予防認知症対応型通所介護(項目);
+            eucEntity.set前回結果介護予防小規模多機能型居宅介護(項目);
+            eucEntity.set前回結果介護予防認知症対応型共同生活介護グループホーム(項目);
         }
+    }
+
+    private void set認定調査票調査項目(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
+            IchijihanteiSumidataIf09AEucEntity eucEntity) {
+        eucEntity.set麻痺左上肢(entity.get麻痺左上肢());
+        eucEntity.set麻痺左下肢(entity.get麻痺左下肢());
+        eucEntity.set麻痺右上肢(entity.get麻痺右上肢());
+        eucEntity.set麻痺右下肢(entity.get麻痺右下肢());
+        eucEntity.set麻痺その他(entity.get麻痺その他());
+        eucEntity.set拘縮肩関節(entity.get拘縮肩関節());
+        eucEntity.set拘縮股関節(entity.get拘縮股関節());
+        eucEntity.set拘縮膝関節(entity.get拘縮膝関節());
+        eucEntity.set拘縮その他(entity.get拘縮その他());
+        eucEntity.set寝返り(entity.get寝返り());
+        eucEntity.set起き上がり(entity.get起き上がり());
+        eucEntity.set座位保持(entity.get座位保持());
+        eucEntity.set両足での立位(entity.get両足での立位());
+        eucEntity.set歩行(entity.get歩行());
+        eucEntity.set立ち上がり(entity.get立ち上がり());
+        eucEntity.set片足での立位(entity.get片足での立位());
+        eucEntity.set洗身(entity.get洗身());
+        eucEntity.setつめ切り(entity.getつめ切り());
+        eucEntity.set視力(entity.get視力());
+        eucEntity.set聴力(entity.get聴力());
+        eucEntity.set移乗(entity.get移乗());
+        eucEntity.set移動(entity.get移動());
+        eucEntity.setえん下(entity.getえん下());
+        eucEntity.set食事摂取(entity.get食事摂取());
+        eucEntity.set排尿(entity.get排尿());
+        eucEntity.set排便(entity.get排便());
+        eucEntity.set口腔清潔(entity.get口腔清潔());
+        eucEntity.set洗顔(entity.get洗顔());
+        eucEntity.set整髪(entity.get整髪());
+        eucEntity.set上衣の着脱(entity.get上衣の着脱());
+        eucEntity.setズボン等の着脱(entity.getズボン等の着脱());
+        eucEntity.set外出頻度(entity.get外出頻度());
+        eucEntity.set意思の伝達(entity.get意思の伝達());
+        eucEntity.set毎日の日課を理解(entity.get毎日の日課を理解());
+        eucEntity.set生年月日をいう(entity.get生年月日をいう());
+        eucEntity.set短期記憶(entity.get短期記憶());
+        eucEntity.set自分の名前をいう(entity.get自分の名前をいう());
+        eucEntity.set今の季節を理解(entity.get今の季節を理解());
+        eucEntity.set場所の理解(entity.get場所の理解());
+        eucEntity.set徘徊(entity.get徘徊());
+        eucEntity.set外出して戻れない(entity.get外出して戻れない());
+        eucEntity.set被害的(entity.get被害的());
+        eucEntity.set作話(entity.get作話());
+        eucEntity.set感情が不安定(entity.get感情が不安定());
+        eucEntity.set昼夜逆転(entity.get昼夜逆転());
+        eucEntity.set同じ話をする(entity.get同じ話をする());
+        eucEntity.set大声を出す(entity.get大声を出す());
+        eucEntity.set介護に抵抗(entity.get介護に抵抗());
+        eucEntity.set落ち着きなし(entity.get落ち着きなし());
+        eucEntity.set一人で出たがる(entity.get一人で出たがる());
+        eucEntity.set収集癖(entity.get収集癖());
+        eucEntity.set物や衣類を壊す(entity.get物や衣類を壊す());
+        eucEntity.setひどい物忘れ(entity.getひどい物忘れ());
+        eucEntity.set独り言独り笑い(entity.get独り言独り笑い());
+        eucEntity.set自分勝手に行動する(entity.get自分勝手に行動する());
+        eucEntity.set話がまとまらない(entity.get話がまとまらない());
+        eucEntity.set薬の内服(entity.get薬の内服());
+        eucEntity.set金銭の管理(entity.get金銭の管理());
+        eucEntity.set日常の意思決定(entity.get日常の意思決定());
+        eucEntity.set集団への不適応(entity.get集団への不適応());
+        eucEntity.set買い物(entity.get買い物());
+        eucEntity.set簡単な調理(entity.get簡単な調理());
+        eucEntity.set点滴の管理(entity.get点滴の管理());
+        eucEntity.set中心静脈栄養(entity.get中心静脈栄養());
+        eucEntity.set透析(entity.get透析());
+        eucEntity.setストーマの処置(entity.getストーマの処置());
+        eucEntity.set酸素療法(entity.get酸素療法());
+        eucEntity.setレスピレーター(entity.getレスピレーター());
+        eucEntity.set気管切開の処置(entity.get気管切開の処置());
+        eucEntity.set疼痛の看護(entity.get疼痛の看護());
+        eucEntity.set経管栄養(entity.get経管栄養());
+        eucEntity.setモニター測定(entity.getモニター測定());
+        eucEntity.setじょくそうの処置(entity.getじょくそうの処置());
+        eucEntity.setカテーテル(entity.getカテーテル());
+    }
+
+    private void set前回結果認定調査票調査項目(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity,
+            IchijihanteiSumidataIf09AEucEntity eucEntity) {
+        eucEntity.set前回結果麻痺左上肢(entity.get前回結果麻痺左上肢());
+        eucEntity.set前回結果麻痺左下肢(entity.get前回結果麻痺左下肢());
+        eucEntity.set前回結果麻痺右上肢(entity.get前回結果麻痺右上肢());
+        eucEntity.set前回結果麻痺右下肢(entity.get前回結果麻痺右下肢());
+        eucEntity.set前回結果麻痺その他(entity.get前回結果麻痺その他());
+        eucEntity.set前回結果拘縮肩関節(entity.get前回結果拘縮肩関節());
+        eucEntity.set前回結果拘縮股関節(entity.get前回結果拘縮股関節());
+        eucEntity.set前回結果拘縮膝関節(entity.get前回結果拘縮膝関節());
+        eucEntity.set前回結果拘縮その他(entity.get前回結果拘縮その他());
+        eucEntity.set前回結果寝返り(entity.get前回結果寝返り());
+        eucEntity.set前回結果起き上がり(entity.get前回結果起き上がり());
+        eucEntity.set前回結果座位保持(entity.get前回結果座位保持());
+        eucEntity.set前回結果両足での立位(entity.get前回結果両足での立位());
+        eucEntity.set前回結果歩行(entity.get前回結果歩行());
+        eucEntity.set前回結果立ち上がり(entity.get前回結果立ち上がり());
+        eucEntity.set前回結果片足での立位(entity.get前回結果片足での立位());
+        eucEntity.set前回結果洗身(entity.get前回結果洗身());
+        eucEntity.set前回結果つめ切り(entity.get前回結果つめ切り());
+        eucEntity.set前回結果視力(entity.get前回結果視力());
+        eucEntity.set前回結果聴力(entity.get前回結果聴力());
+        eucEntity.set前回結果移乗(entity.get前回結果移乗());
+        eucEntity.set前回結果移動(entity.get前回結果移動());
+        eucEntity.set前回結果えん下(entity.get前回結果えん下());
+        eucEntity.set前回結果食事摂取(entity.get前回結果食事摂取());
+        eucEntity.set前回結果排尿(entity.get前回結果排尿());
+        eucEntity.set前回結果排便(entity.get前回結果排便());
+        eucEntity.set前回結果口腔清潔(entity.get前回結果口腔清潔());
+        eucEntity.set前回結果洗顔(entity.get前回結果洗顔());
+        eucEntity.set前回結果整髪(entity.get前回結果整髪());
+        eucEntity.set前回結果上衣の着脱(entity.get前回結果上衣の着脱());
+        eucEntity.set前回結果ズボン等の着脱(entity.get前回結果ズボン等の着脱());
+        eucEntity.set前回結果外出頻度(entity.get前回結果外出頻度());
+        eucEntity.set前回結果意思の伝達(entity.get前回結果意思の伝達());
+        eucEntity.set前回結果毎日の日課を理解(entity.get前回結果毎日の日課を理解());
+        eucEntity.set前回結果生年月日をいう(entity.get前回結果生年月日をいう());
+        eucEntity.set前回結果短期記憶(entity.get前回結果短期記憶());
+        eucEntity.set前回結果自分の名前をいう(entity.get前回結果自分の名前をいう());
+        eucEntity.set前回結果今の季節を理解(entity.get前回結果今の季節を理解());
+        eucEntity.set前回結果場所の理解(entity.get前回結果場所の理解());
+        eucEntity.set前回結果徘徊(entity.get前回結果徘徊());
+        eucEntity.set前回結果外出して戻れない(entity.get前回結果外出して戻れない());
+        eucEntity.set前回結果被害的(entity.get前回結果被害的());
+        eucEntity.set前回結果作話(entity.get前回結果作話());
+        eucEntity.set前回結果感情が不安定(entity.get前回結果感情が不安定());
+        eucEntity.set前回結果昼夜逆転(entity.get前回結果昼夜逆転());
+        eucEntity.set前回結果同じ話をする(entity.get前回結果同じ話をする());
+        eucEntity.set前回結果大声を出す(entity.get前回結果大声を出す());
+        eucEntity.set前回結果介護に抵抗(entity.get前回結果介護に抵抗());
+        eucEntity.set前回結果落ち着きなし(entity.get前回結果落ち着きなし());
+        eucEntity.set前回結果一人で出たがる(entity.get前回結果一人で出たがる());
+        eucEntity.set前回結果収集癖(entity.get前回結果収集癖());
+        eucEntity.set前回結果物や衣類を壊す(entity.get前回結果物や衣類を壊す());
+        eucEntity.set前回結果ひどい物忘れ(entity.get前回結果ひどい物忘れ());
+        eucEntity.set前回結果独り言独り笑い(entity.get前回結果独り言独り笑い());
+        eucEntity.set前回結果自分勝手に行動する(entity.get前回結果自分勝手に行動する());
+        eucEntity.set前回結果話がまとまらない(entity.get前回結果話がまとまらない());
+        eucEntity.set前回結果薬の内服(entity.get前回結果薬の内服());
+        eucEntity.set前回結果金銭の管理(entity.get前回結果金銭の管理());
+        eucEntity.set前回結果日常の意思決定(entity.get前回結果日常の意思決定());
+        eucEntity.set前回結果集団への不適応(entity.get前回結果集団への不適応());
+        eucEntity.set前回結果買い物(entity.get前回結果買い物());
+        eucEntity.set前回結果簡単な調理(entity.get前回結果簡単な調理());
+        eucEntity.set前回結果点滴の管理(entity.get前回結果点滴の管理());
+        eucEntity.set前回結果中心静脈栄養(entity.get前回結果中心静脈栄養());
+        eucEntity.set前回結果透析(entity.get前回結果透析());
+        eucEntity.set前回結果ストーマの処置(entity.get前回結果ストーマの処置());
+        eucEntity.set前回結果酸素療法(entity.get前回結果酸素療法());
+        eucEntity.set前回結果レスピレーター(entity.get前回結果レスピレーター());
+        eucEntity.set前回結果気管切開の処置(entity.get前回結果気管切開の処置());
+        eucEntity.set前回結果疼痛の看護(entity.get前回結果疼痛の看護());
+        eucEntity.set前回結果経管栄養(entity.get前回結果経管栄養());
+        eucEntity.set前回結果モニター測定(entity.get前回結果モニター測定());
+        eucEntity.set前回結果じょくそうの処置(entity.get前回結果じょくそうの処置());
+        eucEntity.set前回結果カテーテル(entity.get前回結果カテーテル());
     }
 
     /**
@@ -935,7 +952,6 @@ public class IchijihanteiSumidataIfBunisess {
     public RString get出力件数(Decimal 出力件数) {
         RStringBuilder builder = new RStringBuilder();
         builder.append(DecimalFormatter.toコンマ区切りRString(出力件数, 0));
-        builder.append(new RString("件"));
         return builder.toRString();
     }
 

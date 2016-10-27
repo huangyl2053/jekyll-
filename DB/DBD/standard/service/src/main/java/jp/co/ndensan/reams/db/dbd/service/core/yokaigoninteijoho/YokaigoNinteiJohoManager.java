@@ -20,12 +20,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4102NinteiKekkaJohoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5150RenrakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -39,7 +39,6 @@ public class YokaigoNinteiJohoManager {
 
     private final MapperProvider mapperProvider;
     private final DbT4101NinteiShinseiJohoDac 要介護認定申請情報受給Dac;
-    private final DbT5101NinteiShinseiJohoDac 要介護認定申請情報認定Dac;
     private final DbT4001JukyushaDaichoDac 受給者台帳Dac;
     private final DbT4102NinteiKekkaJohoDac 要介護認定結果情報Dac;
     private final DbT7908KaigoDonyuKeitaiDac 介護導入形態Dac;
@@ -51,7 +50,6 @@ public class YokaigoNinteiJohoManager {
     YokaigoNinteiJohoManager() {
         mapperProvider = InstanceProvider.create(MapperProvider.class);
         要介護認定申請情報受給Dac = InstanceProvider.create(DbT4101NinteiShinseiJohoDac.class);
-        要介護認定申請情報認定Dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
         受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         要介護認定結果情報Dac = InstanceProvider.create(DbT4102NinteiKekkaJohoDac.class);
         連絡先Dac = InstanceProvider.create(DbT5150RenrakusakiJohoDac.class);
@@ -66,7 +64,6 @@ public class YokaigoNinteiJohoManager {
     YokaigoNinteiJohoManager(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
         要介護認定申請情報受給Dac = InstanceProvider.create(DbT4101NinteiShinseiJohoDac.class);
-        要介護認定申請情報認定Dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
         受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         要介護認定結果情報Dac = InstanceProvider.create(DbT4102NinteiKekkaJohoDac.class);
         連絡先Dac = InstanceProvider.create(DbT5150RenrakusakiJohoDac.class);
@@ -89,13 +86,14 @@ public class YokaigoNinteiJohoManager {
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 認定広域フラグ 認定広域フラグ
+     * @param psm情報 RString
      * @return 今回認定情報 YokaigoNinteiJoho
      */
-    public YokaigoNinteiJoho get今回認定情報(RString 申請書管理番号, boolean 認定広域フラグ) {
+    public YokaigoNinteiJoho get今回認定情報(RString 申請書管理番号, boolean 認定広域フラグ, RString psm情報) {
         IYokaigoNinteiJohoMapper mapper = mapperProvider.create(IYokaigoNinteiJohoMapper.class);
         List<YokaigoNinteiJohoEntity> entities = 認定広域フラグ
-                ? mapper.get今回認定情報WITHOUT結果情報(申請書管理番号)
-                : mapper.get今回認定情報WITH結果情報(申請書管理番号);
+                ? mapper.get今回認定情報WITHOUT結果情報(申請書管理番号, psm情報, FlexibleDate.getNowDate())
+                : mapper.get今回認定情報WITH結果情報(申請書管理番号, psm情報, FlexibleDate.getNowDate());
         if (null != entities && !entities.isEmpty()) {
             YokaigoNinteiJohoEntity entity = entities.get(0);
             entity.initializeMd5ToEntitiesWithoutJukyusha();
@@ -196,20 +194,14 @@ public class YokaigoNinteiJohoManager {
      * 介護認定申請情報を保存する。
      *
      * @param 認定情報 YokaigoNinteiJoho
-     * @param is受給 boolean
      *
      */
     @Transaction
-    public void save介護認定申請情報(YokaigoNinteiJoho 認定情報, boolean is受給) {
-        if (is受給) {
-            if (認定情報.hasChanged受給認定情報()) {
-                受給者台帳Dac.save(認定情報.get受給者台帳Entity());
-                要介護認定申請情報受給Dac.save(認定情報.get要介護認定申請情報受給Entity());
-            }
-        } else {
-            if (認定情報.hasChanged認定認定情報()) {
-                要介護認定申請情報認定Dac.save(認定情報.get要介護認定申請情報認定Entity());
-            }
+    public void save介護認定申請情報(YokaigoNinteiJoho 認定情報) {
+
+        if (認定情報.hasChanged受給認定情報()) {
+            受給者台帳Dac.save(認定情報.get受給者台帳Entity());
+            要介護認定申請情報受給Dac.save(認定情報.get要介護認定申請情報受給Entity());
         }
     }
 

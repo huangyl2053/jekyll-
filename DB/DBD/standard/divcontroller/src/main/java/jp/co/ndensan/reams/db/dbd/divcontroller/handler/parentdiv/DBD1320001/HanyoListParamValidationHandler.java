@@ -6,14 +6,20 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1320001;
 
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1320001.HanyoListParamDiv;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 汎用リスト出力(介護受給共通)のバリデーションハンドラークラスです。
  *
- * @reamsid_L DBD-3930-011 liwul
+ * @reamsid_L DBD-3930-010 liwul
  */
 public class HanyoListParamValidationHandler {
 
@@ -37,6 +43,7 @@ public class HanyoListParamValidationHandler {
         ValidationMessageControlPairs validateResult = new ValidationMessageControlPairs();
         _HanyoListParamValidator validator = new _HanyoListParamValidator(div);
         validateResult.add(createDictionary実行するボタンクリック().check(validator.validate()));
+        validateResult = 範囲From_Toの大小Check(validateResult);
         return validateResult;
 
     }
@@ -50,6 +57,8 @@ public class HanyoListParamValidationHandler {
         ValidationMessageControlPairs validateResult = new ValidationMessageControlPairs();
         _HanyoListParamValidator validator = new _HanyoListParamValidator(div);
         validateResult.add(createDictionary帳票出力項目チェック().check(validator.validate帳票出力項目チェック()));
+        validateResult.add(createDictionary実行するボタンクリック().check(validator.validate()));
+        validateResult = 範囲From_Toの大小Check(validateResult);
         return validateResult;
 
     }
@@ -73,16 +82,61 @@ public class HanyoListParamValidationHandler {
                 .add(HanyoListParamValidationMessage.実行するボタンクリック1, div.getDdlKijunNendo())
                 .add(HanyoListParamValidationMessage.実行するボタンクリック2, div.getTxtKijunDateA())
                 .add(HanyoListParamValidationMessage.実行するボタンクリック3, div.getTxtKijunDateB())
-                .add(HanyoListParamValidationMessage.実行するボタンクリック5, div.getTxtChushutsuHani())
                 .add(HanyoListParamValidationMessage.実行するボタンクリック7, div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getTxtNenrei())
-                .add(HanyoListParamValidationMessage.実行するボタンクリック10, div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getTxtSeinengappi())
                 .build();
     }
 
     private ValidationMessageControlDictionary createDictionary帳票出力項目チェック() {
         return new ValidationMessageControlDictionaryBuilder()
-                .add(HanyoListParamValidationMessage.帳票出力項目チェック２, div)
-                .add(HanyoListParamValidationMessage.帳票出力項目チェック３, div)
+                .add(HanyoListParamValidationMessage.帳票出力項目チェック２)
+                .add(HanyoListParamValidationMessage.帳票出力項目チェック３)
                 .build();
     }
+
+    private ValidationMessageControlPairs 範囲From_Toの大小Check(ValidationMessageControlPairs validateResult) {
+        if (!check範囲()) {
+            validateResult.add(new ValidationMessageControlPair(new ReplaceErrorMessage(UrErrorMessages.期間が不正_追加メッセージあり１,
+                    div.getTxtChushutsuHani().getToValue().toDateString().toString(),
+                    div.getTxtChushutsuHani().getFromValue().toDateString().toString()),
+                    div.getTxtChushutsuHani()));
+        }
+        if (!check生年月日()) {
+            validateResult.add(new ValidationMessageControlPair(new ReplaceErrorMessage(UrErrorMessages.期間が不正_追加メッセージあり１,
+                    div.getCcdHanyoListAtenaSelect().get生年月日開始().toDateString().toString(),
+                    div.getCcdHanyoListAtenaSelect().get生年月日終了().toDateString().toString()),
+                    div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div().getTxtSeinengappi()));
+        }
+        return validateResult;
+    }
+
+    private boolean check範囲() {
+        if (div.getTxtChushutsuHani().getFromValue() != null && div.getTxtChushutsuHani().getToValue() != null) {
+            return div.getTxtChushutsuHani().getFromValue().isBeforeOrEquals(div.getTxtChushutsuHani().getToValue());
+        }
+        return true;
+    }
+
+    private boolean check生年月日() {
+        if (div.getCcdHanyoListAtenaSelect().get年齢層抽出方法().getコード().equals(NenreiSoChushutsuHoho.生年月日範囲.getコード())
+                && div.getCcdHanyoListAtenaSelect().get生年月日開始() != null
+                && div.getCcdHanyoListAtenaSelect().get生年月日終了() != null) {
+            return div.getCcdHanyoListAtenaSelect().get生年月日開始().isBeforeOrEquals(div.getCcdHanyoListAtenaSelect().get生年月日終了());
+        }
+        return true;
+    }
+
+    private static class ReplaceErrorMessage implements IValidationMessage {
+
+        private final Message message;
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+
+        public ReplaceErrorMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+    }
+
 }

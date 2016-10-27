@@ -62,6 +62,10 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBatchController</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+            <artifactId>UxxBatchController</artifactId>
+        </dependency>
         <!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>

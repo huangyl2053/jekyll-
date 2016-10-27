@@ -11,24 +11,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KyufuJissekiSetteiKubun {
 
     /**
-     * コード:0 名称:設定不可 略称:定義なし
+     * コード:0 名称:設定不可 略称:不可
      */
-    設定不可("0", "設定不可"),
+    設定不可("0", "設定不可", "不可"),
     /**
-     * コード:1 名称:設定可（必須） 略称:定義なし
+     * コード:1 名称:設定可（必須） 略称:必須
      */
-    必須("1", "設定可（必須）"),
+    必須("1", "設定可（必須）", "必須"),
     /**
-     * コード:2 名称:設定可（任意） 略称:定義なし
+     * コード:2 名称:設定可（任意） 略称:任意
      */
-    任意("2", "設定可（任意）");
+    任意("2", "設定可（任意）", "任意");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private KyufuJissekiSetteiKubun(String code, String fullname) {
+    private KyufuJissekiSetteiKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -47,6 +49,15 @@ public enum KyufuJissekiSetteiKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 給付実績設定区分の略称を返します。
+     *
+     * @return 給付実績設定区分の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

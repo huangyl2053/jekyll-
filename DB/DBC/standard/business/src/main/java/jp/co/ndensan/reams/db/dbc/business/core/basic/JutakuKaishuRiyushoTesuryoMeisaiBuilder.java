@@ -211,7 +211,6 @@ public class JutakuKaishuRiyushoTesuryoMeisaiBuilder {
 //        entity.setRiyushoSakuseishaShikaku(介護住宅改修理由書作成者資格);
 //        return this;
 //    }
-
     /**
      * 介護住宅改修理由書作成申請年月日を設定します。
      *
@@ -233,6 +232,18 @@ public class JutakuKaishuRiyushoTesuryoMeisaiBuilder {
     public JutakuKaishuRiyushoTesuryoMeisaiBuilder set介護住宅改修理由書作成受付年月日(FlexibleDate 介護住宅改修理由書作成受付年月日) {
         requireNonNull(介護住宅改修理由書作成受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("介護住宅改修理由書作成受付年月日"));
         entity.setRiyushoSakuseiUketsukeYMD(介護住宅改修理由書作成受付年月日);
+        return this;
+    }
+
+    /**
+     * 介護住宅改修理由書作成受付年月日を設定します。
+     *
+     * @param 対象外フラグ 対象外フラグ
+     * @return {@link JutakuKaishuRiyushoTesuryoMeisaiBuilder}
+     */
+    public JutakuKaishuRiyushoTesuryoMeisaiBuilder set対象外フラグ(boolean 対象外フラグ) {
+        requireNonNull(対象外フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("対象外フラグ"));
+        entity.setTaishogaiFlag(対象外フラグ);
         return this;
     }
 

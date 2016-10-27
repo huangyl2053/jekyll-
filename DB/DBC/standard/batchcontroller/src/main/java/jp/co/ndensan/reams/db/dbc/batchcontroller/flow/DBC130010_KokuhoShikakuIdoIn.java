@@ -5,21 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010.InsKokuhoShikakuJyohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010.InsKokuhoShikakuJyohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010.InsTorikomiKokuhoJyohoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010.InsertKokuhoShikakuJyohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010.KokuhoCsvFyiiruSyutuRyokuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010.UpdShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010.UpdTorikomiKokuhoJyohoTemp2Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010.UpdTorikomiKokuhoJyohoTemp3Process;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc130010.DBC130010_KokuhoShikakuIdoInParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC130010.DBC130010_KokuhoShikakuIdoInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130010.InsKokuhoShikakuJyohoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130010.InsKokuhoShikakuJyohoTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130010.InsTorikomiKokuhoJyohoTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130010.UpdShoriDateKanriProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130010.UpdTorikomiKokuhoJyohoTemp2ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130010.UpdTorikomiKokuhoJyohoTemp3ProcessParameter;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -32,8 +31,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_KokuhoShikakuIdoInParameter> {
 
-    private IKokuhoShikakuIdoInMapper mapper;
     private RString 市町村識別ID;
+    private static final RString 処理名 = new RString("国保情報取り込み");
 
     private static final String INS_TORIKOMIKOKUHOJYOHOTEMP = "InsTorikomiKokuhoJyohoTempProcess";
     private static final String UPD_TORIKOMIKOKUHOJYOHOTEMP2 = "UpdTorikomiKokuhoJyohoTemp2Process";
@@ -45,8 +44,6 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
 
     @Override
     protected void initialize() {
-        mapper = getMapper(IKokuhoShikakuIdoInMapper.class);
-        mapper.get宛名識別コードリスト();
         市町村識別ID = RString.EMPTY;
     }
 
@@ -119,7 +116,7 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
      */
     @Step(INS_KOKUHOSHIKAKUJYOHO)
     protected IBatchFlowCommand 国保資格情報に登録() {
-        return loopBatch(InsKokuhoShikakuJyohoProcess.class)
+        return loopBatch(InsertKokuhoShikakuJyohoProcess.class)
                 .arguments(getInsKokuhoShikakuJyohoProcessParameter())
                 .define();
     }
@@ -196,6 +193,7 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
                 getParameter().getShoriShichoson(),
                 getParameter().getIfType(),
                 getParameter().getTorikomiKeishiki(),
-                getParameter().getShoriTimestamp());
+                getParameter().getShoriTimestamp(),
+                処理名);
     }
 }

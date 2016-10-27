@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020020.DBC020020_KogakuKaigoServicehiKyufuOshirasetsuchishoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.shunyugaku.ShutsuryokuJoken;
+import jp.co.ndensan.reams.db.dbc.definition.core.kogakukyufu.KogakuKyufu_OshiraseTsuchi_ChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0430011.KogakuShikyuShinseishoIkkatsuHakkoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
@@ -207,14 +207,14 @@ public class KogakuShikyuShinseishoIkkatsuHakkoHandler {
         if (!div.getShinseishoHakkoParameters().getRadShinsaYM().getSelectedKey().isEmpty()) {
             FlexibleDate 処理年月日 = div.getShinseishoHakkoParameters().getTxtShinsaYM().getValue();
             処理年月 = new FlexibleYearMonth(処理年月日.toString().substring(BEGININDEX, ENDINDEX));
-            parameter.setChushutsuJoken(ShutsuryokuJoken.審査年月);
+            parameter.setChushutsuJoken(KogakuKyufu_OshiraseTsuchi_ChushutsuJoken.審査年月);
         } else if (!div.getShinseishoHakkoParameters().getRadHihokenshaNo().getSelectedKey().isEmpty()) {
             RString 年月 = div.getShinseishoHakkoParameters().getDdlServiceYM().getSelectedKey();
             処理年月 = new FlexibleYearMonth(年月.toString().substring(BEGININDEX, ENDINDEX));
-            parameter.setChushutsuJoken(ShutsuryokuJoken.被保険者番号);
+            parameter.setChushutsuJoken(KogakuKyufu_OshiraseTsuchi_ChushutsuJoken.被保険者番号);
         } else if (!div.getShinseishoHakkoParameters().getRadHakushiInsatsu().getSelectedKey().isEmpty()) {
             処理年月 = FlexibleYearMonth.EMPTY;
-            parameter.setChushutsuJoken(ShutsuryokuJoken.白紙);
+            parameter.setChushutsuJoken(KogakuKyufu_OshiraseTsuchi_ChushutsuJoken.白紙);
         }
         parameter.setShoriYm(処理年月);
 

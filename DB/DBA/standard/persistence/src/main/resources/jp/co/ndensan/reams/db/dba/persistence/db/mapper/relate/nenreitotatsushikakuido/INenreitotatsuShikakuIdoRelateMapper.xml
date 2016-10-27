@@ -63,7 +63,7 @@
     </select>
 
     <!-- DbT1003TashichosonJushochiTokureiEntityの項目にマッピングします。-->
-    <select id="select他市町村住所地特例" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity"
+    <select resultOrdered="true" id="select他市町村住所地特例" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.NenreiIdoHanteiMybatisParameter"
             fetchSize="500">
         SELECT
@@ -84,7 +84,7 @@
 
 
     <!-- DbT1002TekiyoJogaishaEntityの項目にマッピングします。-->
-    <select id="select適用除外者" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity"
+    <select resultOrdered="true" id="select適用除外者" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.NenreiIdoHanteiMybatisParameter"
             fetchSize="500">
         SELECT
@@ -105,7 +105,7 @@
 
 
     <!-- DbT1009ShikakuShutokuJogaishaEntityの項目にマッピングします。-->
-    <select id="select資格取得除外者" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity"
+    <select resultOrdered="true" id="select資格取得除外者" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.NenreiIdoHanteiMybatisParameter"
             fetchSize="500">
         SELECT
@@ -118,7 +118,7 @@
 
 
     <!-- DbT1010TennyushutsuHoryuTaishoshaEntityの項目にマッピングします。-->
-    <select id="select転入保留対象者" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity"
+    <select resultOrdered="true" id="select転入保留対象者" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.NenreiIdoHanteiMybatisParameter"
             fetchSize="500">
         SELECT

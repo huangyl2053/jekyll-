@@ -575,6 +575,7 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             List<KoikiZenShichosonJoho> 現市町村情報, List<GappeiCityJyoho> 合併市町村情報) {
         DBU030010_JigyoHokokuNenpo_MainParameter parameter = new DBU030010_JigyoHokokuNenpo_MainParameter();
         List<RString> 構成市町村コードリスト = new ArrayList<>();
+        List<RString> 旧市町村コードリスト = new ArrayList<>();
         RString 市町村コード = RString.EMPTY;
         parameter.set報告開始年月(RString.EMPTY);
         parameter.set報告終了年月(RString.EMPTY);
@@ -614,6 +615,8 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         }
         if (!RString.isNullOrEmpty(div.getHiddenGappei())) {
             parameter.set旧市町村コードリスト(get旧市町村コードリスト(合併市町村情報));
+        } else {
+            parameter.set旧市町村コードリスト(旧市町村コードリスト);
         }
         if (引き継ぎデータ != null) {
             if (引き継ぎデータ.getList() != null && !引き継ぎデータ.getList().isEmpty()) {

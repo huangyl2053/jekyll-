@@ -47,7 +47,7 @@ public class ServiceTypeCommonChildDiv {
      * @return ResponseData<ServiceTypeCommonChildDivDiv>
      */
     public ResponseData<ServiceTypeCommonChildDivDiv> onLoad(ServiceTypeCommonChildDivDiv div) {
-        ServiceTypeModel model = DataPassingConverter.deserialize(div.getHdnServiceType(), ServiceTypeModel.class);
+        ServiceTypeModel model = DataPassingConverter.deserialize(div.getHdnServiceModel(), ServiceTypeModel.class);
         SearchResult<KaigoServiceShurui> list;
         if (!RString.isNullOrEmpty(model.getサービス種類コード())) {
             list = service.getServiceTypeList(KaigoServiceShuruiMapperParameter.createSelectByKeyParam(

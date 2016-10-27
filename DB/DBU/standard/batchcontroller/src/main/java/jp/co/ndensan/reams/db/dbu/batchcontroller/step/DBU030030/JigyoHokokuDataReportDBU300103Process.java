@@ -278,7 +278,6 @@ public class JigyoHokokuDataReportDBU300103Process extends BatchProcessBase<Jigy
         reportData.set利用者負担減額_免除認定表の利用者負担_3(getValue(syukeiNo0600, 数値_301));
         reportData.set利用者負担減額_免除認定表の利用者負担_4(getValue(syukeiNo0600, 数値_401));
         reportData.set利用者負担減額_免除認定表の利用者負担_5(getValue(syukeiNo0600, 数値_501));
-        reportData.set利用者負担減額_免除認定表の利用者負担_6(getValue(syukeiNo0600, 数値_601));
 
         reportData.set特定負担限度額の申請件数(getValue(syukeiNo0720, 数値_101));
         reportData.set減免認定表の特定負担限度額_食費_1(getValue(syukeiNo0720, 数値_201));
@@ -299,7 +298,6 @@ public class JigyoHokokuDataReportDBU300103Process extends BatchProcessBase<Jigy
         reportData.set免除認定表の利用者負担_3(getValue(syukeiNo0702, 数値_301));
         reportData.set免除認定表の利用者負担_4(getValue(syukeiNo0702, 数値_401));
         reportData.set免除認定表の利用者負担_5(getValue(syukeiNo0702, 数値_501));
-        reportData.set免除認定表の利用者負担_6(getValue(syukeiNo0702, 数値_601));
         JigyohokokuCompYoshiki300103Report report = new JigyohokokuCompYoshiki300103Report(reportData);
         report.writeBy(reportSourceWriter);
     }

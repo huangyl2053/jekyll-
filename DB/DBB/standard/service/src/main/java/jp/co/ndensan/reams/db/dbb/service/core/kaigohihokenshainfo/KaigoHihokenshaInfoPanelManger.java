@@ -7,14 +7,17 @@ package jp.co.ndensan.reams.db.dbb.service.core.kaigohihokenshainfo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.RentaiGimusha;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2009RentaiGimushaEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2009RentaiGimushaDac;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -57,6 +60,20 @@ public class KaigoHihokenshaInfoPanelManger {
     }
 
     /**
+     * 連帯納付義務者登録を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return 履歴番号
+     */
+    public Decimal get最新履歴番号(HihokenshaNo 被保険者番号) {
+        DbT2009RentaiGimushaEntity entity = rentaiGimushaDac.selectBy連帯納付義務者_履歴番号(被保険者番号);
+        if (entity != null) {
+            return entity.getRirekiNo();
+        }
+        return null;
+    }
+
+    /**
      * 画面．宛名情報を取得する。
      *
      * @param parameter IShikibetsuTaishoPSMSearchKey
@@ -71,5 +88,18 @@ public class KaigoHihokenshaInfoPanelManger {
         } else {
             return ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名PSMlist.get(0));
         }
+    }
+
+    /**
+     * 修正処理を保存します。
+     *
+     * @param entity RentaiGimusha
+     */
+    public void saveModify(RentaiGimusha entity) {
+        rentaiGimushaDac.save(entity.deleted().toEntity());
+        DbT2009RentaiGimushaEntity 計算結果Entity = entity.toEntity();
+        計算結果Entity.setRirekiNo(new Decimal(計算結果Entity.getRirekiNo().intValue() + 1));
+        rentaiGimushaDac.save(計算結果Entity);
+
     }
 }

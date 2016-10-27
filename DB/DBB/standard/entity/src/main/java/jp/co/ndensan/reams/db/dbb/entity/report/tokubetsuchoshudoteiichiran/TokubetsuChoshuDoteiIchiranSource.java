@@ -75,6 +75,49 @@ public class TokubetsuChoshuDoteiIchiranSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportPerson(id = "A")
     public ShikibetsuCode shikibetsuCode;
+    @ReportItem(name = "chokiCode", order = 28)
+    public RString chokiCode;
+    @ReportItem(name = "gyoseikuCode", order = 29)
+    public RString gyoseikuCode;
+    @ReportItem(name = "chiku1", order = 30)
+    public RString chiku1;
+    @ReportItem(name = "chiku2", order = 31)
+    public RString chiku2;
+    @ReportItem(name = "chiku3", order = 32)
+    public RString chiku3;
+    @ReportItem(name = "setaiCode", order = 33)
+    public RString setaiCode;
+    @ReportItem(name = "kanaShimei", order = 34)
+    public RString kanaShimei;
+    @ReportItem(name = "seinengappiYMD", order = 35)
+    public RString seinengappiYMD;
+    @ReportItem(name = "seibetsuCode", order = 36)
+    public RString seibetsuCode;
+    @ReportItem(name = "shichosonCode", order = 37)
+    public RString shichosonCode;
+    @ReportItem(name = "hihokenshaNo", order = 38)
+    public RString hihokenshaNo;
+    @ReportItem(name = "nenkinCode", order = 39)
+    public RString nenkinCode;
+    @ReportItem(name = "kisoNenkinNo", order = 40)
+    public RString kisoNenkinNo;
+
+    public TokubetsuChoshuDoteiIchiranSource() {
+        chokiCode = RString.EMPTY;
+        gyoseikuCode = RString.EMPTY;
+        chiku1 = RString.EMPTY;
+        chiku2 = RString.EMPTY;
+        chiku3 = RString.EMPTY;
+        setaiCode = RString.EMPTY;
+        shikibetsuCode = ShikibetsuCode.EMPTY;
+        kanaShimei = RString.EMPTY;
+        seinengappiYMD = RString.EMPTY;
+        seibetsuCode = RString.EMPTY;
+        shichosonCode = RString.EMPTY;
+        hihokenshaNo = RString.EMPTY;
+        nenkinCode = RString.EMPTY;
+        kisoNenkinNo = RString.EMPTY;
+    }
 
     /**
      * ReportSourceFields

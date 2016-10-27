@@ -30,7 +30,7 @@ public class KogakuShinseiListDivHandler {
 
     private final KogakuShinseiListDiv div;
     private static final RString 高額サービス費支給申請書登録 = new RString("DBCMN42001");
-    private static final RString 総合事業高額サービス費支給申請書登録 = new RString("DBCMN42002");
+    private static final RString 総合事業高額サービス費支給申請書登録 = new RString("DBCMNL2001");
     private static final RString 高額介護サービス費照会 = new RString("DBCMN11004");
     private static final RString 総合事業高額介護サービス費照会 = new RString("DBCMN11016");
     private static final RString 審査年月 = new RString("審査年月");
@@ -186,28 +186,46 @@ public class KogakuShinseiListDivHandler {
                 div.getDgShinseiJoho().getGridSetting().getColumns().get(EIGHT).setVisible(true);
                 div.getDgShinseiJoho().getGridSetting().getColumns().get(NINE).setColumnName(判定送付年月);
                 div.getDgShinseiJoho().getGridSetting().getColumns().get(TEN).setColumnName(判定取込年月);
-                if (koga.getEntity().get対象取込年月() != null) {
+                if (koga.getEntity().get対象取込年月() != null && !koga.getEntity().get対象取込年月().isEmpty()) {
                     row.setData9(koga.getEntity().get対象取込年月().wareki().toDateString());
                 }
-                if (koga.getEntity().get判定送付年月() != null) {
+                if (koga.getEntity().get判定送付年月() != null && !koga.getEntity().get判定送付年月().isEmpty()) {
                     row.setData10(koga.getEntity().get判定送付年月().wareki().toDateString());
                 }
-                if (koga.getEntity().get判定取込年月() != null) {
+                if (koga.getEntity().get判定取込年月() != null && !koga.getEntity().get判定取込年月().isEmpty()) {
                     row.setData11(koga.getEntity().get判定取込年月().wareki().toDateString());
+                }
+                if (koga.getEntity().get判定送付年月() != null && !koga.getEntity().get判定送付年月().isEmpty()) {
+                    row.setData14(koga.getEntity().get判定送付年月().wareki().toDateString());
+                }
+                if (koga.getEntity().get判定取込年月() != null && !koga.getEntity().get判定取込年月().isEmpty()) {
+                    row.setData15(koga.getEntity().get判定取込年月().wareki().toDateString());
+                }
+                if (koga.getEntity().get決定年月日() != null && !koga.getEntity().get決定年月日().isEmpty()) {
+                    row.setData16(koga.getEntity().get決定年月日().wareki().toDateString());
                 }
             } else if (受託区分.equals(ONE)) {
                 div.getDgShinseiJoho().getGridSetting().getColumns().get(EIGHT).setVisible(false);
                 div.getDgShinseiJoho().getGridSetting().getColumns().get(NINE).setColumnName(審査年月);
                 div.getDgShinseiJoho().getGridSetting().getColumns().get(TEN).setColumnName(登録年月日);
-                if (koga.getEntity().get対象者判定審査年月() != null) {
+                if (koga.getEntity().get対象者判定審査年月() != null && !koga.getEntity().get対象者判定審査年月().isEmpty()) {
                     row.setData10(koga.getEntity().get対象者判定審査年月().wareki().toDateString());
                 }
-                if (koga.getEntity().get決定年月日() != null) {
+                if (koga.getEntity().get決定年月日() != null && !koga.getEntity().get決定年月日().isEmpty()) {
                     row.setData11(koga.getEntity().get決定年月日().wareki().toDateString());
                 }
             }
             if (koga.getEntity().get証記載番号() != null && !koga.getEntity().get証記載番号().isEmpty()) {
                 row.setData12(koga.getEntity().get証記載番号().value());
+            }
+            if (koga.getEntity().get判定送付年月() != null && !koga.getEntity().get判定送付年月().isEmpty()) {
+                row.setData14(koga.getEntity().get判定送付年月().wareki().toDateString());
+            }
+            if (koga.getEntity().get判定取込年月() != null && !koga.getEntity().get判定取込年月().isEmpty()) {
+                row.setData15(koga.getEntity().get判定取込年月().wareki().toDateString());
+            }
+            if (koga.getEntity().get決定年月日() != null && !koga.getEntity().get決定年月日().isEmpty()) {
+                row.setData16(koga.getEntity().get決定年月日().wareki().toDateString());
             }
             rowList.add(row);
         }
@@ -244,8 +262,8 @@ public class KogakuShinseiListDivHandler {
     public boolean is審査決定フラグ() {
         boolean flag = false;
         dgShinseiJoho_Row row = div.getDgShinseiJoho().getClickedItem();
-        if (row != null && (row.getData10() != null && !row.getData10().isEmpty())
-                && (row.getData11() != null && !row.getData11().isEmpty())) {
+        if (row != null && (row.getData14() != null && !row.getData14().isEmpty())
+                && (row.getData15() == null || row.getData15().isEmpty())) {
             flag = true;
         }
         return flag;
@@ -259,7 +277,7 @@ public class KogakuShinseiListDivHandler {
     public boolean is決定情報フラグ() {
         boolean flag = false;
         dgShinseiJoho_Row row = div.getDgShinseiJoho().getClickedItem();
-        if (row != null && (row.getData11() != null && !row.getData11().isEmpty())) {
+        if (row != null && (row.getData16() != null && !row.getData16().isEmpty())) {
             flag = true;
         }
         return flag;

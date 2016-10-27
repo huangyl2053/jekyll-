@@ -10,7 +10,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKihonJyohou;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKyotakuServiceBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKyotakuServiceJyohou;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010017.KyotakuServiceKeikakuhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010017.KyotakuServiceKeikakuhiHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
@@ -50,14 +52,13 @@ public class KyotakuServiceKeikakuhi {
         if (!識別番号管理.isEmpty()) {
             getHandler(div).setButton(識別番号管理.get(0));
         }
-        List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費list = 引き継ぎ情報.getCsData_F();
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         RDate サービス提供 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = 引き継ぎ情報.getCommonHeader().get給付実績ヘッダ情報2();
         getHandler(div).check事業者btn(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供.getYearMonth().toDateString(), 実績区分コード);
-        getHandler(div).setDataGrid(給付実績居宅サービス計画費list, サービス提供年月);
+        getHandler(div).setDataGrid(getCsData_F(), サービス提供年月);
         return createResponse(div);
     }
 
@@ -69,13 +70,11 @@ public class KyotakuServiceKeikakuhi {
      */
     public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnZengetsu(KyotakuServiceKeikakuhiDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
-        List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費list = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
-                KyufuJissekiPrmBusiness.class).getCsData_F();
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
-        getHandler(div).change年月(new RString("前月"), 給付実績居宅サービス計画費list, サービス提供年月,
+        getHandler(div).change年月(new RString("前月"), getCsData_F(), サービス提供年月,
                 整理番号, 被保険者番号, 識別番号検索キー);
         FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
@@ -96,13 +95,11 @@ public class KyotakuServiceKeikakuhi {
      */
     public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnJigetsu(KyotakuServiceKeikakuhiDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
-        List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費list = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
-                KyufuJissekiPrmBusiness.class).getCsData_F();
         List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
-        getHandler(div).change年月(new RString("次月"), 給付実績居宅サービス計画費list, サービス提供年月, 整理番号,
+        getHandler(div).change年月(new RString("次月"), getCsData_F(), サービス提供年月, 整理番号,
                 被保険者番号, 識別番号検索キー);
         FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
@@ -124,9 +121,7 @@ public class KyotakuServiceKeikakuhi {
     public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnMaeJigyosha(KyotakuServiceKeikakuhiDiv div) {
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
-        List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費list = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
-                KyufuJissekiPrmBusiness.class).getCsData_F();
-        getHandler(div).change事業者(new RString("前事業者"), 事業者番号リスト, 給付実績居宅サービス計画費list);
+        getHandler(div).change事業者(new RString("前事業者"), 事業者番号リスト, getCsData_F());
         return createResponse(div);
     }
 
@@ -139,9 +134,7 @@ public class KyotakuServiceKeikakuhi {
     public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnAtoJigyosha(KyotakuServiceKeikakuhiDiv div) {
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
-        List<KyufujissekiKyotakuServiceBusiness> 給付実績居宅サービス計画費list = ViewStateHolder
-                .get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCsData_F();
-        getHandler(div).change事業者(new RString("後事業者"), 事業者番号リスト, 給付実績居宅サービス計画費list);
+        getHandler(div).change事業者(new RString("後事業者"), 事業者番号リスト, getCsData_F());
         return createResponse(div);
     }
 
@@ -154,7 +147,11 @@ public class KyotakuServiceKeikakuhi {
     }
 
     private List<KyufujissekiKihon> get給付実績基本情報() {
-        return ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCsData_A();
+        return ViewStateHolder.get(ViewStateKeys.給付実績基本情報, KyufujissekiKihonJyohou.class).getCsData_A();
+    }
+
+    private List<KyufujissekiKyotakuServiceBusiness> getCsData_F() {
+        return ViewStateHolder.get(ViewStateKeys.給付実績計画費情報, KyufujissekiKyotakuServiceJyohou.class).getCsData_F();
     }
 
     private RString get整理番号(List<KyufujissekiKihon> 給付実績基本情報) {
@@ -164,5 +161,4 @@ public class KyotakuServiceKeikakuhi {
     private NyuryokuShikibetsuNo get識別番号(List<KyufujissekiKihon> 給付実績基本情報) {
         return 給付実績基本情報.get(INT_ZERO).get入力識別番号();
     }
-
 }

@@ -31,7 +31,7 @@ public class JigyoHokokuGeppoHokenkyufuKogakuProcessParamter implements IBatchPr
     private final RString 報告年月;
     private final RString 年度;
     private final RString 作成日時;
-    private final RString 処理日時;
+    private final YMDHMS 処理日時;
     private final RString 市町村コード;
     private final RString 構成市町村区分;
     private final RString 旧市町村区分;
@@ -69,7 +69,7 @@ public class JigyoHokokuGeppoHokenkyufuKogakuProcessParamter implements IBatchPr
      * @param manager manager
      */
     public JigyoHokokuGeppoHokenkyufuKogakuProcessParamter(RString プリントコントロール区分, RString 集計年月, RString 報告年月,
-            RString 年度, RString 作成日時, RString 処理日時, RString 市町村コード, RString 構成市町村区分, RString 旧市町村区分,
+            RString 年度, RString 作成日時, YMDHMS 処理日時, RString 市町村コード, RString 構成市町村区分, RString 旧市町村区分,
             List<RString> 構成市町村コードリスト, List<RString> 旧市町村コードリスト, List<RString> 過去集計分市町村コードリスト,
             RString 過去集計分旧市町村区分, RString バッチID, RString csvFilePath, FileSpoolManager manager) {
         this.プリントコントロール区分 = プリントコントロール区分;
@@ -175,8 +175,8 @@ public class JigyoHokokuGeppoHokenkyufuKogakuProcessParamter implements IBatchPr
         YMDHMS 基準日時 = YMDHMS.now();
         if (PrintControlKubun.集計のみ.getコード().equals(プリントコントロール区分)
                 || PrintControlKubun.集計後印刷.getコード().equals(プリントコントロール区分)) {
-            基準年月日 = 処理日時.substring(0, INDEX);
-            基準日時 = new YMDHMS(処理日時);
+            基準年月日 = 処理日時.getDate().toDateString();
+            基準日時 = 処理日時;
         } else if (PrintControlKubun.過去分の印刷.getコード().equals(プリントコントロール区分)) {
             基準年月日 = 作成日時.substring(0, INDEX);
             基準日時 = new YMDHMS(作成日時);

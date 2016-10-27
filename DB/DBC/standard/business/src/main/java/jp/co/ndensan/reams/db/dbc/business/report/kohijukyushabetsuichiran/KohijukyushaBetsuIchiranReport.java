@@ -18,20 +18,23 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KohijukyushaBetsuIchiranReport extends Report<KohijukyushaBetsuIchiranReportSource> {
 
     private final KohijukyushaBetsuIchiranBusiness business;
+    private final boolean 集計Flag;
 
     /**
      * インスタンスを生成します。
      *
      * @param business 介護給付費公費受給者別一覧表のBusiness
+     * @param 集計Flag 集計Flag
      */
     public KohijukyushaBetsuIchiranReport(
-            KohijukyushaBetsuIchiranBusiness business) {
+            KohijukyushaBetsuIchiranBusiness business, boolean 集計Flag) {
         this.business = business;
+        this.集計Flag = 集計Flag;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KohijukyushaBetsuIchiranReportSource> reportSourceWriter) {
-        IKohijukyushaBetsuIchiranEditor editor = new KohijukyushaBetsuIchiranEditor(business);
+        IKohijukyushaBetsuIchiranEditor editor = new KohijukyushaBetsuIchiranEditor(business, 集計Flag);
         IKohijukyushaBetsuIchiranBuilder builder = new KohijukyushaBetsuIchiranBuilder(editor);
         reportSourceWriter.writeLine(builder);
     }

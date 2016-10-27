@@ -7,12 +7,10 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshik
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaParameter;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaUpdateParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.ShoriModeHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity;
 
 /**
  * ビジネス設計_DBCMN62004_DBCMNN1005_支給決定情報補正（単）(事業分兼)
@@ -22,30 +20,12 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyu
 public interface IKogakuGassanShikyuKetteiHoseiMapper {
 
     /**
-     * 高額合算支給不支給決定取得です。
-     *
-     * @param 高額合算支給不支給決定 KogakuGassanShikyuKetteiHoseiParameter
-     * @return List<KogakuGassanShikyuKetteiHoseiEntity>
-     */
-    List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> get高額合算list(
-            KogakuGassanShikyuKetteiHoseiParameter 高額合算支給不支給決定);
-
-    /**
-     * 事業高額合算支給不支給決定取得です。
-     *
-     * @param 事業高額合算支給不支給決定 KogakuGassanShikyuKetteiHoseiParameter
-     * @return List<KogakuGassanShikyuKetteiHoseiEntity>
-     */
-    List<DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity> get事業高額合算list(
-            KogakuGassanShikyuKetteiHoseiParameter 事業高額合算支給不支給決定);
-
-    /**
      * 高額合算給付実績取得です。
      *
      * @param 高額合算給付実績 ShoriModeHanteiParameter
      * @return DbT3075KogakuGassanKyufuJissekiEntity
      */
-    DbT3075KogakuGassanKyufuJissekiEntity get高額合算給付実績(
+    List<DbT3075KogakuGassanKyufuJissekiEntity> get高額合算給付実績(
             ShoriModeHanteiParameter 高額合算給付実績);
 
     /**
@@ -56,5 +36,26 @@ public interface IKogakuGassanShikyuKetteiHoseiMapper {
      */
     DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity get高額合算支給額計算結果(
             KogakuGassanShikyuGakuKeisanKekkaParameter 高額合算支給額計算結果);
+
+    /**
+     *
+     * 高額合算給付実績論理削除
+     *
+     */
+    void logicalDelete高額合算給付実績();
+
+    /**
+     * 高額合算給付実績物理削除
+     *
+     * @param 高額合算給付実績 KogakuGassanShikyuGakuKeisanKekkaUpdateParameter
+     */
+    void physicalDelete高額合算給付実績(KogakuGassanShikyuGakuKeisanKekkaUpdateParameter 高額合算給付実績);
+
+    /**
+     * 高額合算給付実績更新
+     *
+     * @param 高額合算給付実績 KogakuGassanShikyuGakuKeisanKekkaUpdateParameter
+     */
+    void update高額合算給付実績(KogakuGassanShikyuGakuKeisanKekkaUpdateParameter 高額合算給付実績);
 
 }

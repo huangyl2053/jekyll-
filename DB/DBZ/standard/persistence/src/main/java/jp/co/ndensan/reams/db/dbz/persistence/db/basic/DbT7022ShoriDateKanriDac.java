@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -44,7 +43,6 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -67,6 +65,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString 処理日付管理マスタエンティティ = new RString("処理日付管理マスタエンティティ");
     private static final RString 介護住民票個別事項連携情報作成_他社住基 = new RString("介護住民票個別事項連携情報作成【他社住基】");
     private static final RString 定数_基準収入額適用申請書発行 = new RString("基準収入額適用申請書発行");
+    private static final RString 基準収入額適用申請書異動 = new RString("基準収入額適用申請書異動");
     private static final RString 年度内連番_0 = new RString("0000");
     private static final RString 年度内連番_1 = new RString("0001");
     private static final RString 年度内連番_2 = new RString("0002");
@@ -81,8 +80,6 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString INDEX_111 = new RString("111");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
-    private static final int 開始桁数 = 1;
-    private static final int LENGTH = 6;
 
     /**
      * 主キーで処理日付管理マスタを削除します。
@@ -323,6 +320,25 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBC介護給付),
                                 eq(shoriName, 定数_基準収入額適用申請書発行),
+                                eq(nendo, 年度))).getCount();
+    }
+
+    /**
+     * 処理日付管理マスタ取得件数情報作成するメソッドです。
+     *
+     * @param 年度 FlexibleYear
+     * @return int 取得件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int select処理日付管理マスタ取得件数(FlexibleYear 年度) throws NullPointerException {
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBC介護給付),
+                                eq(shoriName, 基準収入額適用申請書異動),
                                 eq(nendo, 年度))).getCount();
     }
 
@@ -643,7 +659,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(subGyomuCode, SubGyomuCode.DBD介護受給),
                                 eq(shichosonCode, 市町村コード),
                                 eq(shoriName, ShoriName.受給者台帳.get名称()),
-                                eq(nendoNaiRenban, 年度内連番_1))).
+                                eq(nendoNaiRenban, 年度内連番_1))).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 
@@ -1256,7 +1272,6 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
-                                // TODO 設計書に処理名称不正
                                 eq(shoriName, ShoriName.依頼金額計算.get名称()),
                                 eq(nendo, 調定年度),
                                 eq(shoriEdaban, 処理枝番),
@@ -1880,26 +1895,22 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
-     * 月次処理状況の取得です。
+     * 処理日付管理マスタテーブルから、処理状況取得する。
      *
-     * @param 口座振替年月 FlexibleYearMonth
-     * @return List<DbT7022ShoriDateKanriEntity>
-     * @throws NullPointerException 引数のいずれかがnullの場合
+     * @param 処理名 処理名
+     * @param 年度内連番 年度内連番
+     * @return DbT7022ShoriDateKanriEntity
      */
     @Transaction
-    public List<DbT7022ShoriDateKanriEntity> get月次処理状況(FlexibleYearMonth 口座振替年月) throws NullPointerException {
+    public DbT7022ShoriDateKanriEntity get処理状況(RString 処理名, RString 年度内連番) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.selectSpecific(kijunTimestamp).
+        return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
-                                eq(substr(kijunTimestamp, 開始桁数, LENGTH), 口座振替年月),
-                                in(shoriName, ShoriName.普徴仮算定賦課確定.get名称(),
-                                        ShoriName.仮算定異動賦課確定.get名称(),
-                                        ShoriName.本算定賦課確定.get名称(),
-                                        ShoriName.異動賦課確定.get名称(),
-                                        ShoriName.過年度賦課確定.get名称()))).
-                toList(DbT7022ShoriDateKanriEntity.class);
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriName, 処理名),
+                                eq(nendoNaiRenban, 年度内連番))).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
     }
-
 }

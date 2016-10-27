@@ -259,4 +259,65 @@
         dbT2002."fukaNendo",
         dbT2002."tsuchishoNo"
     </select>
+
+    <select id="getSyoriDate"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            fetchSize="500">
+        SELECT shoriDate."nendo"
+        , shoriDate."kijunTimestamp"
+        FROM rgdb."DbT7022ShoriDateKanri" shoriDate
+        WHERE shoriDate."shoriName" = #{syoriName}
+        AND shoriDate."subGyomuCode" = 'DBB'
+        AND shoriDate."nendo" IN (
+        SELECT fukaJohoTemp."fukaNendo"
+        FROM "DbT2002FukaJohoTemp" fukaJohoTemp
+        GROUP BY fukaJohoTemp."fukaNendo")
+    </select>
+
+    <select id="getSyoriDateForManager"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajohotoroku.FukaJohoTorokuMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            fetchSize="500">
+        SELECT shoriDate."nendo"
+        , shoriDate."kijunTimestamp"
+        FROM rgdb."DbT7022ShoriDateKanri" shoriDate
+        WHERE shoriDate."shoriName" = #{syoriName}
+        AND shoriDate."subGyomuCode" = 'DBB'
+        AND shoriDate."nendo" = #{nendo}
+    </select>
+
+    <select id="getChoteiKyotsuByFukaJoho"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajohotoroku.FukaJohoTorokuMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity"
+            fetchSize="500">
+        SELECT "choteiId",
+        "rirekiNo",
+        "shunoId",
+        "kaikeiNendo",
+        "shoriNendo",
+        "shoriNo",
+        "koseiKaisu",
+        "choteiJiyuCode",
+        "choteiYMD",
+        "choteigaku",
+        "shohizei",
+        "nokigenYMD",
+        "hoteiNokigenToYMD",
+        "fukaShoriJokyo"
+        FROM rgdb."UrT0705ChoteiKyotsu" UrT0705
+        WHERE UrT0705."choteiId" IN (
+        SELECT "choteiId"
+        FROM rgdb."DbT2003Kibetsu" DbT2003
+        WHERE DbT2003."choteiNendo" = #{choteiNendo}
+        AND DbT2003."fukaNendo" = #{fukaNendo}
+        AND DbT2003."tsuchishoNo" = #{tsuchishoNo}
+        AND DbT2003."choshuHouhou" = #{choshuHouhou}
+        AND DbT2003."ki" = #{ki})
+        LIMIT 1
+    </select>
+
 </mapper>

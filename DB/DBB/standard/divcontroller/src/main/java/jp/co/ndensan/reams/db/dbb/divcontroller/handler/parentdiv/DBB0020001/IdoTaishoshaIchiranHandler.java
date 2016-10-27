@@ -90,7 +90,7 @@ public final class IdoTaishoshaIchiranHandler {
         RString 帳票作成日時 = div.getDdlSakuseiYMD().getSelectedKey();
         YMDHMS par帳票作成日時 = new YMDHMS(帳票作成日時);
         YMDHMS 最終計算処理日時 = TsuchiShoHakkogoIdoHaaku.createInstance().get計算処理日時(par帳票ID, par帳票作成日時);
-        if (最終計算処理日時 != null && 最終計算処理日時.isEmpty()) {
+        if (最終計算処理日時 != null && !最終計算処理日時.isEmpty()) {
             RString hh = new RString(最終計算処理日時.toString().substring(EIGHT, TEN));
             RString mm = new RString(最終計算処理日時.toString().substring(TEN, TWELVE));
             RString ss = new RString(最終計算処理日時.toString().substring(TWELVE, FOURTEEN));
@@ -134,7 +134,6 @@ public final class IdoTaishoshaIchiranHandler {
                 idoYMD = new RString(ymd.wareki().toDateString().toString());
             }
             row.setTxtIdoYMD(idoYMD);
-            // TODO QA340(Redmine#78346)
             row.setTxtIdoNaiyo(entity.get異動内容().get名称());
             row.setTexYSeireki(entity.get賦課年度().toDateString());
             rowList.add(row);

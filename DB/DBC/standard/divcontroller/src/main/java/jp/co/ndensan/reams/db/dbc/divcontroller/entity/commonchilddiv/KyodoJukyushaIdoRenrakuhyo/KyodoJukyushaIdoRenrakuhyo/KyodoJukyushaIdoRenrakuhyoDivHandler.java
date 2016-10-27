@@ -152,25 +152,25 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         List<KeyValueDataSource> 世帯所得区分 = new ArrayList<>();
         世帯所得区分.add(new KeyValueDataSource(SPACE, RString.EMPTY));
         世帯所得区分.add(new KeyValueDataSource(JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.一般.getコード(),
-                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.一般.get表示名称()));
+                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.一般.get略称()));
         世帯所得区分.add(new KeyValueDataSource(JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.市町村民税世帯非課税者等.getコード(),
-                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.市町村民税世帯非課税者等.get表示名称()));
+                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.市町村民税世帯非課税者等.get略称()));
         世帯所得区分.add(new KeyValueDataSource(JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.生活保護.getコード(),
-                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.生活保護.get表示名称()));
+                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.生活保護.get略称()));
         世帯所得区分.add(new KeyValueDataSource(JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.現役並み所得相当.getコード(),
-                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.現役並み所得相当.get表示名称()));
+                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.現役並み所得相当.get略称()));
         div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlSetaiShotokuKubun().setDataSource(世帯所得区分);
 
         List<KeyValueDataSource> 所得区分 = new ArrayList<>();
         所得区分.add(new KeyValueDataSource(SPACE, RString.EMPTY));
         所得区分.add(new KeyValueDataSource(JukyushaIF_KyodoKogakuShotokuKubunCode.一般.getコード(),
-                JukyushaIF_KyodoKogakuShotokuKubunCode.一般.get表示名称()));
+                JukyushaIF_KyodoKogakuShotokuKubunCode.一般.get略称()));
         所得区分.add(new KeyValueDataSource(JukyushaIF_KyodoKogakuShotokuKubunCode.市町村民税世帯非課税者等.getコード(),
-                JukyushaIF_KyodoKogakuShotokuKubunCode.市町村民税世帯非課税者等.get表示名称()));
+                JukyushaIF_KyodoKogakuShotokuKubunCode.市町村民税世帯非課税者等.get略称()));
         所得区分.add(new KeyValueDataSource(JukyushaIF_KyodoKogakuShotokuKubunCode.生活保護.getコード(),
-                JukyushaIF_KyodoKogakuShotokuKubunCode.生活保護.get表示名称()));
+                JukyushaIF_KyodoKogakuShotokuKubunCode.生活保護.get略称()));
         所得区分.add(new KeyValueDataSource(JukyushaIF_KyodoKogakuShotokuKubunCode.現役並み所得相当.getコード(),
-                JukyushaIF_KyodoKogakuShotokuKubunCode.現役並み所得相当.get表示名称()));
+                JukyushaIF_KyodoKogakuShotokuKubunCode.現役並み所得相当.get略称()));
         div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlShotokuKubun().setDataSource(所得区分);
     }
 
@@ -273,12 +273,10 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
             div.getChkShokanSofuAdd().setSelectedItems(add_償還);
             div.getChkShokanSofuAdd().setDisabled(true);
             div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(true);
+        } else if (div.getChkShokanSofuAdd().getSelectedItems().isEmpty()) {
+            div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(true);
         } else {
-            if (div.getChkShokanSofuAdd().getSelectedItems().isEmpty()) {
-                div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(true);
-            } else {
-                div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(false);
-            }
+            div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(false);
         }
 
         RString config高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
@@ -288,17 +286,17 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
             div.getChkKogakuSofuAdd().setSelectedItems(add_高額);
             div.getChkKogakuSofuAdd().setDisabled(true);
             div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(true);
+        } else if (div.getChkKogakuSofuAdd().getSelectedItems().isEmpty()) {
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(true);
         } else {
-            if (div.getChkKogakuSofuAdd().getSelectedItems().isEmpty()) {
-                div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(true);
-            } else {
-                div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(false);
-            }
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(false);
         }
     }
 
     private void set初期値_削除(KyodoshoriyoJukyushaIdoRenrakuhyoParam entity) {
         if (entity.get基本情報Entity() != null) {
+            List<KeyValueDataSource> delete_基本 = div.getChkKihonSofuDelete().getDataSource();
+            div.getChkKihonSofuDelete().setSelectedItems(delete_基本);
             if (entity.get基本情報Entity().get履歴番号() == 1) {
                 div.getTxtTeiseiYMD().setDisplayNone(true);
                 div.getRadTeiseiKubunCode().setDisabled(true);
@@ -309,6 +307,8 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
             set基本送付情報エリア(entity);
         }
         if (entity.get償還情報Entity() != null) {
+            List<KeyValueDataSource> delete_償還 = div.getChkShokanSofuDelete().getDataSource();
+            div.getChkShokanSofuDelete().setSelectedItems(delete_償還);
             if (entity.get償還情報Entity().get履歴番号() == 1) {
                 div.getTxtTeiseiYMD().setDisplayNone(true);
                 div.getRadTeiseiKubunCode().setDisabled(true);
@@ -319,6 +319,8 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
             set償還送付情報エリア(entity);
         }
         if (entity.get高額情報Entity() != null) {
+            List<KeyValueDataSource> delete_高額 = div.getChkKogakuSofuDelete().getDataSource();
+            div.getChkKogakuSofuDelete().setSelectedItems(delete_高額);
             if (entity.get高額情報Entity().get履歴番号() == 1) {
                 div.getTxtTeiseiYMD().setDisplayNone(true);
                 div.getRadTeiseiKubunCode().setDisabled(true);
@@ -494,12 +496,10 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         if (受託なし.equals(config償還)) {
             div.getChkShokanSofuAdd().setDisabled(true);
             div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(true);
+        } else if (div.getChkShokanSofuAdd().getSelectedItems().isEmpty()) {
+            div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(true);
         } else {
-            if (div.getChkShokanSofuAdd().getSelectedItems().isEmpty()) {
-                div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(true);
-            } else {
-                div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(false);
-            }
+            div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(false);
         }
 
         RString config高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
@@ -507,12 +507,10 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         if (受託なし.equals(config高額)) {
             div.getChkKogakuSofuAdd().setDisabled(true);
             div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(true);
+        } else if (div.getChkKogakuSofuAdd().getSelectedItems().isEmpty()) {
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(true);
         } else {
-            if (div.getChkKogakuSofuAdd().getSelectedItems().isEmpty()) {
-                div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(true);
-            } else {
-                div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(false);
-            }
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(false);
         }
         setRequired();
     }
@@ -697,33 +695,33 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         if (div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlSetaiShotokuKubun().getSelectedValue().equals(RString.EMPTY)) {
             高額.set世帯所得区分コード(null);
         } else if (div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlSetaiShotokuKubun().getSelectedValue().equals(
-                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.一般.get表示名称())) {
+                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.一般.get略称())) {
             高額.set世帯所得区分コード(JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.一般.getコード());
         } else if (div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlSetaiShotokuKubun().getSelectedValue().equals(
-                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.市町村民税世帯非課税者等.get表示名称())) {
+                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.市町村民税世帯非課税者等.get略称())) {
             高額.set世帯所得区分コード(
                     JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.市町村民税世帯非課税者等.getコード());
         } else if (div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlSetaiShotokuKubun().getSelectedValue().equals(
-                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.現役並み所得相当.get表示名称())) {
+                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.現役並み所得相当.get略称())) {
             高額.set世帯所得区分コード(JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.現役並み所得相当.getコード());
         } else if (div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlSetaiShotokuKubun().getSelectedValue().equals(
-                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.生活保護.get表示名称())) {
+                JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.生活保護.get略称())) {
             高額.set世帯所得区分コード(JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.生活保護.getコード());
         }
 
         if (div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlShotokuKubun().getSelectedValue().equals(RString.EMPTY)) {
             高額.set所得区分コード(null);
         } else if (div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlShotokuKubun().getSelectedValue().equals(
-                JukyushaIF_KyodoKogakuShotokuKubunCode.一般.get表示名称())) {
+                JukyushaIF_KyodoKogakuShotokuKubunCode.一般.get略称())) {
             高額.set所得区分コード(JukyushaIF_KyodoKogakuShotokuKubunCode.一般.getコード());
         } else if (div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlShotokuKubun().getSelectedValue().equals(
-                JukyushaIF_KyodoKogakuShotokuKubunCode.市町村民税世帯非課税者等.get表示名称())) {
+                JukyushaIF_KyodoKogakuShotokuKubunCode.市町村民税世帯非課税者等.get略称())) {
             高額.set所得区分コード(JukyushaIF_KyodoKogakuShotokuKubunCode.市町村民税世帯非課税者等.getコード());
         } else if (div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlShotokuKubun().getSelectedValue().equals(
-                JukyushaIF_KyodoKogakuShotokuKubunCode.現役並み所得相当.get表示名称())) {
+                JukyushaIF_KyodoKogakuShotokuKubunCode.現役並み所得相当.get略称())) {
             高額.set所得区分コード(JukyushaIF_KyodoKogakuShotokuKubunCode.現役並み所得相当.getコード());
         } else if (div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlShotokuKubun().getSelectedValue().equals(
-                JukyushaIF_KyodoKogakuShotokuKubunCode.生活保護.get表示名称())) {
+                JukyushaIF_KyodoKogakuShotokuKubunCode.生活保護.get略称())) {
             高額.set所得区分コード(JukyushaIF_KyodoKogakuShotokuKubunCode.生活保護.getコード());
         }
 

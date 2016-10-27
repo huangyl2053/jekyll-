@@ -155,7 +155,7 @@
 	WHERE
 		介護期別."choshuHouhou" = '2' AND
 		(認定情報."soshitsuYMD" IS null OR 認定情報."soshitsuYMD" = '')
-		<!-- AND 調定共通_介護継承."choteigaku" <![CDATA[>]]> 収入."shunyugaku" -->
+		AND 調定共通_介護継承."choteigaku" <![CDATA[>]]> 収入."shunyugaku" 
                <if test="is被保険者選択_被保険者全員_0">
                    AND (#{被保険者全員の滞納期間} + 調定共通_介護継承."nokigenYMD") <![CDATA[<=]]> #{基準日}
                 </if>

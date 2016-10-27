@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB112001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.shutokujohoshuchutsurenkei.ShutokuJohoShuchutsuRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigoshoto.KaigoShotoTempTableEntity;
+import jp.co.ndensan.reams.db.dbb.service.core.toushoshotokujohochushutsurenkei.ToushoShotokuJohoChushutsuRenkeiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
@@ -15,11 +17,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -33,10 +31,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  *
  * @reamsid_L DBB-1690-060 gongliang
  */
-public class UpdShoriHidukeKanriProcess extends BatchProcessBase<KaigoShotoTempTableEntity> {
+public class UpdShoriHidukeKanriProcess extends SimpleBatchProcessBase {
 
-    private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
-            + "toushoshotokujohochushutsurenkei.IToushoShotokuJohoChushutsuRenkeiMapper.get介護所得Temp");
     private static final RString 当初_広域_1 = new RString("1");
     private static final RString 異動_広域_2 = new RString("2");
     private static final RString 当初_単一_3 = new RString("3");
@@ -52,11 +48,8 @@ public class UpdShoriHidukeKanriProcess extends BatchProcessBase<KaigoShotoTempT
     private FlexibleYear 処理年度;
     private LasdecCode 市町村コード;
 
-    @BatchWriter
-    BatchPermanentTableWriter 処理日付管理7022tableWriter;
-
     @Override
-    protected void initialize() {
+    protected void beforeExecute() {
         処理区分 = processParameter.get処理区分();
         バッチ起動処理日時 = processParameter.get処理日時();
         処理年度 = processParameter.get処理年度();
@@ -65,26 +58,19 @@ public class UpdShoriHidukeKanriProcess extends BatchProcessBase<KaigoShotoTempT
     }
 
     @Override
-    protected IBatchReader createReader() {
-        return new BatchDbReader(READ_DATA_ID);
-    }
-
-    @Override
-    protected void createWriter() {
-        処理日付管理7022tableWriter
-                = new BatchPermanentTableWriter(DbT7022ShoriDateKanriEntity.class);
-    }
-
-    @Override
-    protected void process(KaigoShotoTempTableEntity entity) {
-        if (当初_広域_1.equals(処理区分) || 当初_単一_3.equals(処理区分)) {
-            DbT7022ShoriDateKanriEntity dbt7022Entity = get処理日付管理_当初(entity);
-            if (dbt7022Entity != null) {
-                処理日付管理7022tableWriter.update(dbt7022Entity);
+    protected void process() {
+        ToushoShotokuJohoChushutsuRenkeiFinder finder = ToushoShotokuJohoChushutsuRenkeiFinder.createInstance();
+        List<KaigoShotoTempTableEntity> list = finder.get介護所得Temp();
+        for (KaigoShotoTempTableEntity entity : list) {
+            if (当初_広域_1.equals(処理区分) || 当初_単一_3.equals(処理区分)) {
+                DbT7022ShoriDateKanriEntity dbt7022Entity = get処理日付管理_当初(entity);
+                if (dbt7022Entity != null) {
+                    finder.update(dbt7022Entity);
+                }
+            } else if (異動_広域_2.equals(処理区分) || 異動_単一_4.equals(処理区分)) {
+                DbT7022ShoriDateKanriEntity dbt7022Entity = get処理日付管理_異動(entity);
+                finder.insert(dbt7022Entity);
             }
-        } else if (異動_広域_2.equals(処理区分) || 異動_単一_4.equals(処理区分)) {
-            DbT7022ShoriDateKanriEntity dbt7022Entity = get処理日付管理_異動(entity);
-            処理日付管理7022tableWriter.insert(dbt7022Entity);
         }
     }
 

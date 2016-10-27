@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * を表す列挙型です。
+ * 介護合算_自己負担額証明書リアル発行フラグを表す列挙型です。
  *
  * @reamsid_L DBC-9999-022 qinzhen
  */
@@ -34,37 +34,37 @@ public enum KaigoGassan_JikofutangakuShomeishoRealHakkoFlag {
     }
 
     /**
-     * 基準収入額適用申請書登録_抽出対象のコードを返します。
+     * 介護合算_自己負担額証明書リアル発行フラグのコードを返します。
      *
-     * @return 基準収入額適用申請書登録_抽出対象のコード
+     * @return 介護合算_自己負担額証明書リアル発行フラグのコード
      */
     public RString getコード() {
         return code;
     }
 
     /**
-     * 基準収入額適用申請書登録_抽出対象の名称を返します。
+     * 介護合算_自己負担額証明書リアル発行フラグの名称を返します。
      *
-     * @return 基準収入額適用申請書登録_抽出対象の名称
+     * @return 介護合算_自己負担額証明書リアル発行フラグの名称
      */
     public RString get名称() {
         return fullName;
     }
 
     /**
-     * 基準収入額適用申請書登録_抽出対象の名称を返します。
+     * 介護合算_自己負担額証明書リアル発行フラグを返します。
      *
-     * @return 基準収入額適用申請書登録_抽出対象の名称
+     * @return 介護合算_自己負担額証明書リアル発行フラグの略称
      */
     public RString get略称() {
         return shortName;
     }
 
     /**
-     * 基準収入額適用申請書登録_抽出対象のコードと一致する内容を探します。
+     * 介護合算_自己負担額証明書リアル発行フラグのコードと一致する内容を探します。
      *
-     * @param code 基準収入額適用申請書登録_抽出対象のコード
-     * @return {@code code} に対応する基準収入額適用申請書登録_抽出対象
+     * @param code 介護合算_自己負担額証明書リアル発行フラグのコード
+     * @return {@code code} に対応する介護合算_自己負担額証明書リアル発行フラグ
      */
     public static KaigoGassan_JikofutangakuShomeishoRealHakkoFlag toValue(RString code) {
 
@@ -73,6 +73,6 @@ public enum KaigoGassan_JikofutangakuShomeishoRealHakkoFlag {
                 return realHakkoFlag;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("申請書登録_抽出対象"));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("介護合算_自己負担額証明書リアル発行フラグ"));
     }
 }

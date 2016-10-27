@@ -31,6 +31,7 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
     private static final RString メニューID_DBCMNL3001 = new RString("DBCMNL3001");
     private static final RString 高額サービス費給付お知らせ通知書作成 = new RString("高額サービス費給付お知らせ通知書作成");
     private static final RString 事業高額サービス費給付お知らせ通知書作成 = new RString("事業高額サービス費給付お知らせ通知書作成");
+    private static final int INT_10 = 10;
 
     /**
      * 画面初期化のメソッドです。
@@ -109,6 +110,18 @@ public class KogakuShikyuShinseishoIkkatsuHakko {
      * @return ResponseData
      */
     public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> onCancelClose(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 被保険者番号入力onBlurのメソッドです
+     *
+     * @param div KogakuShikyuShinseishoIkkatsuHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuShikyuShinseishoIkkatsuHakkoDiv> txtHihokenshaNo_onBlur(KogakuShikyuShinseishoIkkatsuHakkoDiv div) {
+        RString 被保険者番号入力 = div.getTxtHihokenshaNo().getValue();
+        div.getTxtHihokenshaNo().setValue(被保険者番号入力.padZeroToLeft(INT_10));
         return ResponseData.of(div).respond();
     }
 

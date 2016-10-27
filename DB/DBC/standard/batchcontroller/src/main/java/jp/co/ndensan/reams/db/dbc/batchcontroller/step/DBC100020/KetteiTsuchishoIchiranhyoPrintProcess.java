@@ -70,12 +70,16 @@ public class KetteiTsuchishoIchiranhyoPrintProcess extends BatchKeyBreakBase<Kai
     HokenshaNo 証記載保険者番号;
     JigyoshaNo 介護住宅改修理由書作成事業者番号;
     Decimal count;
+    int 連番;
+    JigyoshaNo 事業者番号;
 
     @Override
     protected IBatchReader createReader() {
 
         isExists = false;
         count = Decimal.ZERO;
+        事業者番号 = JigyoshaNo.EMPTY;
+        連番 = 0;
         住宅改修理由書作成手数料請求明細tableWriter
                 = new BatchEntityCreatedTempTableWriter(住宅改修理由書作成手数料請求明細_TABLE_NAME, DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity.class);
         住宅改修理由書作成手数料請求集計tableWriter
@@ -91,6 +95,12 @@ public class KetteiTsuchishoIchiranhyoPrintProcess extends BatchKeyBreakBase<Kai
     @Override
     protected void usualProcess(KaishuriyushoShikyuKetteitsuchishoEntity entity) {
 
+        entity.getRiyushoSakuseiJigyoshaNo();
+        if (事業者番号.equals(entity.getRiyushoSakuseiJigyoshaNo())) {
+            連番 = 連番 + 1;
+        } else {
+            連番 = 1;
+        }
         isExists = true;
         count = count.add(Decimal.ONE);
         // TODO 1782確認中
@@ -100,8 +110,10 @@ public class KetteiTsuchishoIchiranhyoPrintProcess extends BatchKeyBreakBase<Kai
         data.set作成年月日(processParameter.get作成日());
         data.set集計期間開始(processParameter.get決定開始日());
         data.set集計期間終了(processParameter.get決定終了日());
+        data.set連番(new RString(String.valueOf(連番)));
         JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReport report = new JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReport(data);
         report.writeBy(reportSourceWriter);
+        事業者番号 = entity.getRiyushoSakuseiJigyoshaNo();
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
     }
 
@@ -111,7 +123,7 @@ public class KetteiTsuchishoIchiranhyoPrintProcess extends BatchKeyBreakBase<Kai
     }
 
     private boolean hasBreak(KaishuriyushoShikyuKetteitsuchishoEntity before, KaishuriyushoShikyuKetteitsuchishoEntity current) {
-        return before.getHihokenshaNo() != current.getHihokenshaNo();
+        return !before.getRiyushoSakuseiJigyoshaNo().equals(current.getRiyushoSakuseiJigyoshaNo());
     }
 
     @Override

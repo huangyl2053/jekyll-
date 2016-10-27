@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.FukaKijunSet
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.JukyuusyaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.KouhoshaTenyuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.NendoNaiyuSikakuMonoTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.SaihaqkouTaishouTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.SetaiShotokuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.SetaiSudeTempEntity;
@@ -110,6 +111,28 @@ public interface IShotokushokaihyoMapper {
      * @param 識別コード ShikibetsuCode
      */
     void delete住民情報(ShikibetsuCode 識別コード);
+
+    /**
+     * 所得照会候補者を削除します。
+     *
+     * @param 処理年度 FlexibleYear
+     */
+    void delete所得照会候補者(FlexibleYear 処理年度);
+
+    /**
+     * 所得照会候補者を削除します。
+     *
+     * @param myBaticParameter ShotokuNendoParameter
+     */
+    void delete所得照会候補者1(ShotokuNendoParameter myBaticParameter);
+
+    /**
+     * 年度内有資格者抽出のメソッドです。
+     *
+     * @param parameter ShotokuNendoParameter
+     * @return List<NendoNaiyuSikakuMonoTempEntity>
+     */
+    List<NendoNaiyuSikakuMonoTempEntity> select年度内有資格者抽出(ShotokuNendoParameter parameter);
 
     /**
      * select所得情報
@@ -217,7 +240,7 @@ public interface IShotokushokaihyoMapper {
      *
      * @return List<SetaiShotokuTempEntity>
      */
-    List<SetaiShotokuTempEntity> select世帯員所得_年度内有資格者();
+    List<SetaiShotokuTempEntity> select世帯員所得();
 
     /**
      * 世帯員所得情報Tempを出力します。

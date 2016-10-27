@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -50,8 +52,6 @@ public class KyufujissekiTorikomiIchiranEditor implements
     private static final int LENGTH_9 = 9;
     private static final int LENGTH_17 = 17;
 
-    private static final RString 警告なし = new RString("1");
-    private static final RString 警告あり = new RString("2");
     private static final RString 中空まる = new RString("○");
     private static final RString 環まる = new RString("◎");
     private static final RString ソリッドまる = new RString("●");
@@ -61,48 +61,67 @@ public class KyufujissekiTorikomiIchiranEditor implements
     private static final RString 事業者名不明タイトル = new RString(" 事業者名不明");
 
     private final List<RString> 改頁リスト;
-    private final List<RString> 並び順リスト;
+    private final RString 並び順の１件目;
+    private final RString 並び順の２件目;
+    private final RString 並び順の３件目;
+    private final RString 並び順の４件目;
+    private final RString 並び順の５件目;
     private final FlexibleYearMonth 処理年月;
-    private final RDateTime 作成日時;
+    private final YMDHMS 作成日時;
     private final int 連番;
+    private final boolean 集計flag;
+    private final int 合計件数;
     private final KyufujissekiTorikomiIchiranEntity entity;
 
     /**
      * コンストラクタです
      *
      * @param entity KogakuGassanDataEntity
-     * @param 並び順リスト List<RString>
+     * @param 並び順の１件目 RString
+     * @param 並び順の２件目 RString
+     * @param 並び順の３件目 RString
+     * @param 並び順の４件目 RString
+     * @param 並び順の５件目 RString
      * @param 改頁リスト List<RString>
      * @param 処理年月 FlexibleYearMonth
      * @param 作成日時 RDateTime
      * @param 連番 int
+     * @param 集計flag boolean
+     * @param 合計件数 int
      */
-    public KyufujissekiTorikomiIchiranEditor(KyufujissekiTorikomiIchiranEntity entity, List<RString> 並び順リスト,
-            List<RString> 改頁リスト, FlexibleYearMonth 処理年月, RDateTime 作成日時, int 連番) {
+    public KyufujissekiTorikomiIchiranEditor(KyufujissekiTorikomiIchiranEntity entity, RString 並び順の１件目, RString 並び順の２件目,
+            RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目,
+            List<RString> 改頁リスト, FlexibleYearMonth 処理年月, YMDHMS 作成日時, int 連番, boolean 集計flag, int 合計件数) {
         this.entity = entity;
-        this.並び順リスト = 並び順リスト;
+        this.並び順の１件目 = 並び順の１件目;
+        this.並び順の２件目 = 並び順の２件目;
+        this.並び順の３件目 = 並び順の３件目;
+        this.並び順の４件目 = 並び順の４件目;
+        this.並び順の５件目 = 並び順の５件目;
         this.改頁リスト = 改頁リスト;
         this.処理年月 = 処理年月;
         this.作成日時 = 作成日時;
         this.連番 = 連番;
+        this.集計flag = 集計flag;
+        this.合計件数 = 合計件数;
 
     }
 
     @Override
     public KyufujissekiTorikomiIchiranSource edit(KyufujissekiTorikomiIchiranSource source) {
 
-        source.printTimeStamp = getSakuseiYmhm(作成日時);
+        source.printTimeStamp = getSakuseiYmhm(作成日時.getRDateTime());
         source.torikomiYM = 処理年月.wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
 
         source.hokenshaNo = entity.get給付実績_保険者番号().value();
         source.hokenshaName = entity.get給付実績_保険者名();
 
-        source.shutsuryokujun1 = get並び順(INDEX_1);
-        source.shutsuryokujun2 = get並び順(INDEX_2);
-        source.shutsuryokujun3 = get並び順(INDEX_3);
-        source.shutsuryokujun4 = get並び順(INDEX_4);
-        source.shutsuryokujun5 = get並び順(INDEX_5);
+        source.shutsuryokujun1 = 並び順の１件目;
+        source.shutsuryokujun2 = 並び順の２件目;
+        source.shutsuryokujun3 = 並び順の３件目;
+        source.shutsuryokujun4 = 並び順の４件目;
+        source.shutsuryokujun5 = 並び順の５件目;
         source.kaiPege1 = get改頁(INDEX_1);
         source.kaiPege2 = get改頁(INDEX_2);
         source.kaiPege3 = get改頁(INDEX_3);
@@ -167,8 +186,8 @@ public class KyufujissekiTorikomiIchiranEditor implements
         source.listUpper_22 = getレコード種別(entity.get給付実績_レコード件数DA());
         source.listUpper_23 = getレコード種別(entity.get給付実績_レコード件数DB());
         source.listUpper_24 = getレコード種別(entity.get給付実績_レコード件数DC());
-        if (!entity.get給付実績_警告区分コード().equals(警告なし)) {
-            source.listUpper_25 = KeikokuKubun.toValue(警告あり).get略称();
+        if (!KeikokuKubun.警告なし.getコード().equals(entity.get給付実績_警告区分コード())) {
+            source.listUpper_25 = KeikokuKubun.警告あり.get略称();
         }
 
         source.listLower_2 = entity.get被保険者_宛名名称();
@@ -182,11 +201,9 @@ public class KyufujissekiTorikomiIchiranEditor implements
         } else {
             source.listLower_3 = RString.EMPTY;
         }
-        if (entity.isコントロール()) {
+        if (集計flag) {
             source.gokeiKensuTitle = 合計件数タイトル;
-            if (entity.get給付実績_出力データ件数() != null) {
-                source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(entity.get給付実績_出力データ件数(), 0).concat(件タイトル);
-            }
+            source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(new Decimal(合計件数), 0).concat(件タイトル);
         }
 
         source.shikibetsuCode = entity.get識別コード();
@@ -230,10 +247,6 @@ public class KyufujissekiTorikomiIchiranEditor implements
             return 中空まる;
         }
         return RString.EMPTY;
-    }
-
-    private RString get並び順(int index) {
-        return index < 並び順リスト.size() ? 並び順リスト.get(index) : RString.EMPTY;
     }
 
     private RString get改頁(int index) {

@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4101NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4102NinteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4120ShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4121ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoModel;
@@ -242,15 +243,19 @@ public class ShokkenTorikeshiIchibuNintei {
             ShinseishoKanriNo 採番申請書管理番号 = get申請書管理番号(今回情報.get市町村コード());
             DbT4101NinteiShinseiJoho 登録用要介護認定申請情報 = null;
             JukyushaDaicho 登録用受給者台帳 = null;
+            DbT4120ShinseitodokedeJoho 登録用申請届出者 = null;
             if (メニュID_職権修正.equals(menuId) || メニュID_職権取消一部喪失.equals(menuId)) {
                 登録用要介護認定申請情報 = handler.create登録用要介護認定申請情報(採番申請書管理番号, menuId, 今回情報);
                 登録用受給者台帳 = handler.create登録用受給者台帳(採番申請書管理番号, 今回情報, menuId);
+                登録用申請届出者 = handler.create登録用申請届出者(採番申請書管理番号, menuId, 今回情報);
             }
             DbT4101NinteiShinseiJoho 更新用介護認定申請情報 = handler.create更新用介護認定申請情報(menuId, 今回情報);
             JukyushaDaicho 更新用受給者台帳 = handler.create更新用受給者台帳(menuId, 今回情報);
             DbT4102NinteiKekkaJoho 認定結果情報 = handler.create認定結果情報(menuId, 今回情報);
             DbT4121ShinseiRirekiJoho 申請履歴情報 = createHandler(div).create申請履歴情報(採番申請書管理番号, menuId, 今回情報);
-            manager.save(登録用要介護認定申請情報, 登録用受給者台帳, 更新用介護認定申請情報, 更新用受給者台帳, 認定結果情報, 申請履歴情報);
+            DbT4102NinteiKekkaJoho 登録用認定結果情報 = handler.create登録用認定結果情報(menuId, 今回情報, 採番申請書管理番号);
+            manager.save(登録用要介護認定申請情報, 登録用受給者台帳, 更新用介護認定申請情報, 更新用受給者台帳,
+                    認定結果情報, 申請履歴情報, 登録用申請届出者, 登録用認定結果情報);
         } else {
             return ResponseData.of(div).respond();
         }

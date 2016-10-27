@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.nenreikaikyuriyojokyo;
 
-import java.util.Map;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.nenreikaikyuriyojokyo.NenreikaikyuRiyojokyoMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -29,7 +29,7 @@ public class NenreikaikyuRiyojokyoProcessParameter implements IBatchProcessParam
     private final FlexibleDate sinsaYM;
     private final FlexibleDate nenreiSansyutuKijyubi;
     private final RString sentakuTaisyoKubun;
-    private final Map<RString, RString> sentakuTaisyoList;
+    private final List<RString> sentakuTaisyoList;
     private final Code shichosonCode;
     private final RString shichosonMeisho;
     private final Code kyoShichosonCode;
@@ -52,7 +52,7 @@ public class NenreikaikyuRiyojokyoProcessParameter implements IBatchProcessParam
             FlexibleDate sinsaYM,
             FlexibleDate nenreiSansyutuKijyubi,
             RString sentakuTaisyoKubun,
-            Map<RString, RString> sentakuTaisyoList,
+            List<RString> sentakuTaisyoList,
             Code shichosonCode,
             RString shichosonMeisho,
             Code kyoShichosonCode,

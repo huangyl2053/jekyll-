@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710050;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyolisthomonkaigoriyoshafutangakugengaku.HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -99,11 +100,13 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcessParameter implemen
      *
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛先PSM
+     * @param 出力順 出力順
      * @return HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter
      */
     public HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter toTokubetsuChiikiKasanGemmenMybatisParameter(
-            RString psmShikibetsuTaisho,
-            RString psmAtesaki) {
+            IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
+            RString psmAtesaki,
+            RString 出力順) {
         return new HomonKaigoRiyoshaFutanGakuGengakuMybatisParameter(
                 cyusyutsuhohokubun,
                 cyusyutsukomokukubun,
@@ -116,6 +119,7 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcessParameter implemen
                 kyakasha,
                 atenacyusyutsujyoken,
                 psmShikibetsuTaisho,
-                psmAtesaki);
+                psmAtesaki,
+                出力順);
     }
 }

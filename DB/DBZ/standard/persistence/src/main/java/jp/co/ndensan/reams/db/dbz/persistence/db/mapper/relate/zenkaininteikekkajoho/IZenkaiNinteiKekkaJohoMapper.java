@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.zenkaininteikekkajoho;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
@@ -26,7 +27,7 @@ public interface IZenkaiNinteiKekkaJohoMapper {
      * @param shinseishoKanriNo 申請書管理番号
      * @return DbT4101NinteiShinseiJohoEntity
      */
-    DbT4101NinteiShinseiJohoEntity get要介護度_前回受給(ShinseishoKanriNo shinseishoKanriNo);
+    List<DbT4101NinteiShinseiJohoEntity> get要介護度_前回受給(ShinseishoKanriNo shinseishoKanriNo);
 
     /**
      * 前回認定の要介護度を取得します。
@@ -34,7 +35,7 @@ public interface IZenkaiNinteiKekkaJohoMapper {
      * @param shinseishoKanriNo 申請書管理番号
      * @return DbT5101NinteiShinseiJohoEntity
      */
-    DbT5101NinteiShinseiJohoEntity get要介護度_前回認定(ShinseishoKanriNo shinseishoKanriNo);
+    List<DbT5101NinteiShinseiJohoEntity> get要介護度_前回認定(ShinseishoKanriNo shinseishoKanriNo);
 
     /**
      * 今回受給の要介護度を取得します。

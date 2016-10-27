@@ -35,16 +35,16 @@
                 AND 受給者台帳."logicalDeletedFlag" = false
                 AND 受給者台帳."yukoMukoKubun" = #{有効無効区分_有効})
             </if>
-            <if test="is旧措置者区分_旧措置者">
+        </if>
+        <if test="is旧措置者区分_旧措置者">
                 AND (受給者台帳."logicalDeletedFlag" = false
                 AND 受給者台帳."kyuSochishaFlag" = true )
-            </if>
-            <if test="is旧措置者区分_旧措置者以外">
+        </if>
+        <if test="is旧措置者区分_旧措置者以外">
                 AND NOT EXISTS(SELECT 1 FROM rgdb."DbT4001JukyushaDaicho" J
                 WHERE J."hihokenshaNo" = A."hihokenshaNo"
                 AND J."logicalDeletedFlag" = false 
                 AND J."kyuSochishaFlag" = true)
-            </if>
         </if>
         <if test="is対象リスト_認定者リスト">
             <if test="is対象期間指定_対象年度">
@@ -210,7 +210,7 @@
 
                         <if test="is対象期間指定_基準日">
                             AND (訪問介護利用者負担額減額."ketteiKubun" = #{決定区分_承認する}
-                            訪問介護利用者負担額減額."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準日}
+                            AND 訪問介護利用者負担額減額."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準日}
                             AND #{基準日} <![CDATA[<=]]> 訪問介護利用者負担額減額."tekiyoShuryoYMD")
                             OR (訪問介護利用者負担額減額."ketteiKubun" IS NULL 
                             AND 訪問介護利用者負担額減額."shinseiYMD" <![CDATA[<=]]> #{基準日} )
@@ -225,7 +225,7 @@
                 AND A.is所得税課税世帯 = FALSE 
             </if>
             <if test="is世帯非課税等_市町村民税本人非課税者">
-                AND A.本人課税区分 = '1'
+                AND A.本人課税区分 = #{課税区分_非課税}
             </if>
             <if test="is世帯非課税等_老齢福祉年金受給者">
                 AND A.is老齢福祉年金受給者 = TRUE

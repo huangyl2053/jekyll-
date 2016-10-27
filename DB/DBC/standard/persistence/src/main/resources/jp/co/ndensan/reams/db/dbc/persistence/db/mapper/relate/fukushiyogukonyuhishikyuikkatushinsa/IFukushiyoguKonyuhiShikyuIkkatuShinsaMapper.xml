@@ -25,7 +25,6 @@
         ON  "dbT3038ShokanKihon_hiHokenshaNo" = "dbT3034ShokanShinsei_hiHokenshaNo"
         AND "dbT3038ShokanKihon_serviceTeikyoYM" = "dbT3034ShokanShinsei_serviceTeikyoYM"
         AND "dbT3038ShokanKihon_seiriNo" = "dbT3034ShokanShinsei_seiriNo"
-        AND "dbT3034ShokanShinsei_shikyuShinseiShinsaKubun" = '1'
         LEFT OUTER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
         AS ShikibetsuTaisho
         on temp1."shikibetsuCode" = ShikibetsuTaisho."shikibetsuCode"

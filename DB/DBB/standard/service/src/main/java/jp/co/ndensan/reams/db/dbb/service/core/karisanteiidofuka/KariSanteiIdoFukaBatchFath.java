@@ -86,9 +86,6 @@ public class KariSanteiIdoFukaBatchFath {
     private static final RString 併用徴収 = new RString("併用徴収");
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString HYPHEN = new RString("-");
-    private static final RString 西暦 = new RString("西暦");
-    private static final RString LEFTBRACKET = new RString("（");
-    private static final RString RIGHTBRACKET = new RString("）");
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -553,7 +550,7 @@ public class KariSanteiIdoFukaBatchFath {
         KarisanteiIdoKekkaIchiranCSVEntity entity = new KarisanteiIdoKekkaIchiranCSVEntity();
         entity.set作成年月日(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
         entity.set作成時刻(調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
-        entity.set賦課年度(西暦.concat(LEFTBRACKET).concat(賦課年度.seireki().toDateString()).concat(RIGHTBRACKET));
+        entity.set賦課年度(賦課年度.seireki().toDateString());
         AtenaMeisho atenaMeisho = 更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity().getKanjiShimei();
         if (atenaMeisho != null) {
             entity.set氏名(atenaMeisho.value());

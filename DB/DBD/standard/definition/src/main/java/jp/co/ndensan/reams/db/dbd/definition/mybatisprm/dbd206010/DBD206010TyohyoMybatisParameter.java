@@ -20,10 +20,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBD206010TyohyoMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
+public class DBD206010TyohyoMybatisParameter implements IMyBatisParameter {
 
     private IShikibetsuTaishoPSMSearchKey searchKey;
     private RString 出力順;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      *
@@ -31,7 +32,8 @@ public class DBD206010TyohyoMybatisParameter extends UaFt200FindShikibetsuTaisho
      * @param orderBy RString
      */
     public DBD206010TyohyoMybatisParameter(IShikibetsuTaishoPSMSearchKey searchKey, RString orderBy) {
-        super(searchKey);
+//        super(searchKey);
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
         this.出力順 = orderBy;
     }
 }

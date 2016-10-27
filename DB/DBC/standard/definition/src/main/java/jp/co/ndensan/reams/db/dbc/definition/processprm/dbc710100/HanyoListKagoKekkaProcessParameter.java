@@ -52,8 +52,13 @@ public class HanyoListKagoKekkaProcessParameter implements IBatchProcessParamete
      * @return {@link HanyoListKagoKekkaMybatisParameter}
      */
     public HanyoListKagoKekkaMybatisParameter toMybatisParameter() {
-        return new HanyoListKagoKekkaMybatisParameter(国保連取扱年月From, 国保連取扱年月To, 保険者区分,
-                サービス提供年月From, サービス提供年月To, 事業者コード, 保険者コード, searchKey);
+        RString temp = RString.EMPTY;
+        if (保険者コード != null) {
+            temp = 保険者コード.getColumnValue();
+        }
+        HanyoListKagoKekkaMybatisParameter param = new HanyoListKagoKekkaMybatisParameter(国保連取扱年月From, 国保連取扱年月To, 保険者区分,
+                サービス提供年月From, サービス提供年月To, 事業者コード, temp, searchKey);
+        param.set出力順(出力項目);
+        return param;
     }
-
 }

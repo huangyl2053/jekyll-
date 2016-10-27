@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3054KogakuKyufuTaishoshaTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.DbWT3311KogakuKyufuTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.KyuufuTaishoshaHihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.RirikiNoKanrenEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.SaishoriFukaEntity;
@@ -35,7 +35,7 @@ public interface IKogakuKyufuTaishoshaMapper {
      * @param entity DbWT3054KogakuKyufuTaishoshaTempEntity
      * @return int 登録成功の件数
      */
-    int 高額介護サービス費給付対象者一時TBLに登録(DbWT3054KogakuKyufuTaishoshaTempEntity entity);
+    int 高額介護サービス費給付対象者一時TBLに登録(DbWT3311KogakuKyufuTaishoshaTempEntity entity);
 
     /**
      * 被保険者一時TBLに登録する。
@@ -58,7 +58,7 @@ public interface IKogakuKyufuTaishoshaMapper {
      *
      * @param entity DbWT3054KogakuKyufuTaishoshaTempEntity
      */
-    void 高額介護サービス費給付対象者一時TBLに再処理不可登録(DbWT3054KogakuKyufuTaishoshaTempEntity entity);
+    void 高額介護サービス費給付対象者一時TBLに再処理不可登録(DbWT3311KogakuKyufuTaishoshaTempEntity entity);
 
     /**
      * 登録済の該当被保険者の件数を取ります。

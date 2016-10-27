@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -44,8 +45,25 @@ public class HihokenshaAtenaJohoProcess extends BatchProcessBase<HihokenshaAtena
             + "relate.dbc050010.IHihokenshaAtenaJohoMapper.get被保険者台帳と宛名情報");
     private HihokenshaAtenaProcessParameter parameter;
 
+    private int count = 0;
+    private OutputParameter<Integer> outputCount;
+
+    /**
+     * データ検索検索件数を返却
+     */
+    public static final RString PARAMETER_OUT_COUNT;
+
+    static {
+        PARAMETER_OUT_COUNT = new RString("outputCount");
+    }
+
     @BatchWriter
     BatchEntityCreatedTempTableWriter furikomiDetailTempTable;
+
+    @Override
+    protected void initialize() {
+        outputCount = new OutputParameter<>();
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -68,7 +86,7 @@ public class HihokenshaAtenaJohoProcess extends BatchProcessBase<HihokenshaAtena
 
     @Override
     protected void process(HihokenshaAtenaResultEntity entity) {
-
+        count++;
         IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
         ChohyoJushoEditor 住所Editor = new ChohyoJushoEditor(SubGyomuCode.DBC介護給付, 帳票分類ID, GyomuBunrui.介護事務);
         RString 管内管外区分 = 識別対象.get住所().get管内管外().toRString();
@@ -98,6 +116,11 @@ public class HihokenshaAtenaJohoProcess extends BatchProcessBase<HihokenshaAtena
 
         furikomiDetailTempTable.update(tempTableEntity);
 
+    }
+
+    @Override
+    protected void afterExecute() {
+        outputCount.setValue(count);
     }
 
     private List<JuminShubetsu> get住民種別(List<JuminShubetsu> 住民種別List) {

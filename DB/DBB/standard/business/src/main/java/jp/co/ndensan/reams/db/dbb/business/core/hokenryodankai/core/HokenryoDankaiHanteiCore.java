@@ -35,7 +35,7 @@ public class HokenryoDankaiHanteiCore {
         Iterator<Map.Entry<RString, List<IHanteiHoho>>> it = set.iterator();
 
         //mapからkey(段階数)を取得
-        if (it.hasNext()) {
+        while (it.hasNext()) {
 
             Map.Entry<RString, List<IHanteiHoho>> entry = it.next();
             RString key = entry.getKey();

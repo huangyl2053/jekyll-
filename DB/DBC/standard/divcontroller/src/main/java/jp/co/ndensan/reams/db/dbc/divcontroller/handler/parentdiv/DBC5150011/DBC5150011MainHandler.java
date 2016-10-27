@@ -75,7 +75,8 @@ public class DBC5150011MainHandler {
                 radDataSource.clear();
             }
         }
-        div.getCcdServiceCodeInput().initialize();
+        div.getCcdServiceShurui().initialize();
+        div.getCcdServiceShurui().setRequired(false);
         div.getRadChushutsuJokenAll().setSelectedIndex(INT_0);
         List<KeyValueDataSource> chkDataSource = new ArrayList<>();
         for (ShutsuryokuHoho 出力方法 : ShutsuryokuHoho.values()) {
@@ -100,8 +101,10 @@ public class DBC5150011MainHandler {
             div.getDgServiceBunruiList().setSelectedItems(Collections.EMPTY_LIST);
         } else if (div.getRadChushutsuJokenServiceCode().getSelectedKey() != null
                 && !div.getRadChushutsuJokenServiceCode().getSelectedKey().isEmpty()) {
-            div.getCcdServiceCodeInput().setDisabled(false);
+            div.getCcdServiceShurui().setDisabled(false);
+            div.getCcdServiceShurui().setRequired(true);
             div.getTxtKijunYM().setRequired(false);
+            div.get項目().setDisabled(false);
             div.getDgServiceBunruiList().setDisabled(true);
             div.getDgServiceBunruiList().setSelectedItems(Collections.EMPTY_LIST);
         } else if (div.getRadChushutsuJokenServiceBunrui().getSelectedKey() != null
@@ -144,8 +147,8 @@ public class DBC5150011MainHandler {
         } else if (div.getRadChushutsuJokenServiceCode().getSelectedKey() != null
                 && !div.getRadChushutsuJokenServiceCode().getSelectedKey().isEmpty()) {
             parameter.set抽出条件区分(div.getRadChushutsuJokenServiceCode().getSelectedValue());
-            parameter.setサービス種類コード(div.getCcdServiceCodeInput().getサービスコード1());
-            parameter.setサービス項目コード(div.getCcdServiceCodeInput().getサービスコード2());
+            parameter.setサービス種類コード(div.getCcdServiceShurui().getサービス種類コード());
+            parameter.setサービス項目コード(div.get項目().getValue());
         } else {
             parameter.set抽出条件区分(div.getRadChushutsuJokenServiceBunrui().getSelectedValue());
             List<Code> サービス分類List = new ArrayList<>();
@@ -195,7 +198,10 @@ public class DBC5150011MainHandler {
     }
 
     private void set抽出条件エリア状態() {
-        div.getCcdServiceCodeInput().setDisabled(true);
-        div.getCcdServiceCodeInput().setサービス名称(RString.EMPTY);
+        div.getCcdServiceShurui().setDisabled(true);
+        div.getCcdServiceShurui().setRequired(false);
+        div.getCcdServiceShurui().clear();
+        div.get項目().setDisabled(true);
+        div.get項目().setValue(RString.EMPTY);
     }
 }

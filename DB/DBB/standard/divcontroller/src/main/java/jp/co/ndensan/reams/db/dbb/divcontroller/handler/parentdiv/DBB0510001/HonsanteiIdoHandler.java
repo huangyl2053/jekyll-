@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.ChohyoMeter;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.SanteiIdoGennen;
-import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.Shoriku;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.tsuchisho.notsu.ShutsuryokuKiKoho;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
@@ -70,6 +69,7 @@ public class HonsanteiIdoHandler {
     private static final RString 済 = new RString("済");
     private static final RString 遷移元区分_0 = new RString("0");
     private static final RString 遷移元区分_1 = new RString("1");
+    private static final RString チェックボックス_0 = new RString("0");
     private static final RString 口座異動のみ通知書_出力否 = new RString("0");
     private static final RString 口座異動のみ通知書_出力要 = new RString("1");
     private static final RString 算定月_2 = new RString("02");
@@ -98,8 +98,8 @@ public class HonsanteiIdoHandler {
     private static final RString 納入通知書_63 = new RString("DBB100063_NonyuTsuchishoCVSKigoto");
     private static final RString 納入通知書_64 = new RString("DBB100064_NonyuTsuchishoCVSKigotoRencho");
     private static final RString 特徴同定未完了 = new RString("0");
-    private static final RString 計算未完了 = new RString("0");
-    private static final RString 計算完了 = new RString("1");
+    private static final RString 計算未完了 = new RString("1");
+    private static final RString 計算完了 = new RString("2");
     private static final RString 処理月10月 = new RString("10");
     private static final RString 処理月12月 = new RString("12");
     private static final RString 処理月2月 = new RString("02");
@@ -137,10 +137,7 @@ public class HonsanteiIdoHandler {
      */
     public boolean initialize(FlexibleYear 調定年度) {
 
-        // TODO TEST
-//        RDate date = RDate.getNowDate();
-        RString testDate = DbBusinessConfig.get(ConfigNameDBB.収納状況照会_速報取込区分, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        RDate date = new RDate(testDate.toString());
+        RDate date = RDate.getNowDate();
         int 境界日付 = date.getLastDay() - Integer.valueOf(DbBusinessConfig.get(
                 ConfigNameDBB.日付関連_更正月判定日数, date, SubGyomuCode.DBB介護賦課).toString());
         int 日 = date.getDayValue();
@@ -165,13 +162,13 @@ public class HonsanteiIdoHandler {
         return flag;
     }
 
-    private void set対象補足月テキストボックス(Shoriku 処理区分, RDate date) {
-        if (特徴同定未完了.equals(処理区分.get特徴同定区分())) {
+    private void set対象補足月テキストボックス(RString 処理区分, RDate date) {
+        if (特徴同定未完了.equals(処理区分)) {
             throw new ApplicationException(DbbErrorMessages.特徴対象者同定処理未完了.getMessage());
         }
-        if (計算未完了.equals(処理区分.get計算処理区分())) {
+        if (計算未完了.equals(処理区分)) {
             set対象特徴開始月テキストボックス(date);
-        } else if (計算完了.equals(処理区分.get計算処理区分())) {
+        } else if (計算完了.equals(処理区分)) {
             div.getXtTaishoTokuchoKaishiTsuki().setVisible(false);
             div.getRadTokuchoHosokuIraiKingakuKeisan().setDisabled(false);
         }
@@ -258,7 +255,7 @@ public class HonsanteiIdoHandler {
     private boolean set処理状態(FlexibleYear 調定年度, RDate date) {
         dgHonsanteiIdoShoriKakunin_Row row = new dgHonsanteiIdoShoriKakunin_Row();
         List<dgHonsanteiIdoShoriKakunin_Row> rowList = new ArrayList<>();
-        boolean flag = false;
+        boolean flag = true;
         RString 算定月 = div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey();
         if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {
             List<ShoriDateKanri> entityList = HonsanteiIdoGennendo.createInstance().getShoriDateKanriList(
@@ -269,11 +266,11 @@ public class HonsanteiIdoHandler {
             RString 開始月_6月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, date, SubGyomuCode.DBB介護賦課);
             RString 開始月_8月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, date, SubGyomuCode.DBB介護賦課);
             if (算定月_10.equals(算定月) && 開始_12月.equals(開始月_6月)) {
-                flag = set状況と処理日時(entityList, rowList, row, 特別徴収対象同定, flag);
+                flag = set状況と処理日時(entityList, rowList, row, 特別徴収対象同定);
             } else if (算定月_12.equals(算定月) && 開始_2月.equals(開始月_8月)) {
-                flag = set状況と処理日時(entityList, rowList, row, 特別徴収対象同定, flag);
+                flag = set状況と処理日時(entityList, rowList, row, 特別徴収対象同定);
             } else if (算定月_2.equals(算定月)) {
-                flag = set状況と処理日時(entityList, rowList, row, 特別徴収対象同定, flag);
+                flag = set状況と処理日時(entityList, rowList, row, 特別徴収対象同定);
             }
             // TODO QA#85917 処理名＝住民税更正分課税確定処理の場合  この部分についてはTODOとして。
         } else {
@@ -282,7 +279,7 @@ public class HonsanteiIdoHandler {
                     調定年度,
                     遷移元区分_1);
             RString 処理名_異動 = ShoriName.異動賦課.get名称();
-            flag = set状況と処理日時(entityList, rowList, row, 処理名_異動, flag);
+            flag = set状況と処理日時(entityList, rowList, row, 処理名_異動);
         }
         div.getShotiJokyo().getDgHonsanteiIdoShoriKakunin().setDataSource(rowList);
         return flag;
@@ -291,8 +288,8 @@ public class HonsanteiIdoHandler {
     private boolean set状況と処理日時(List<ShoriDateKanri> entityList,
             List<dgHonsanteiIdoShoriKakunin_Row> rowList,
             dgHonsanteiIdoShoriKakunin_Row row,
-            RString 処理名,
-            boolean flag) {
+            RString 処理名) {
+        boolean flag = false;
         if (entityList.isEmpty()) {
             rowList.add(setDgRow(row, 処理名, 未, RString.EMPTY));
         } else {
@@ -336,10 +333,18 @@ public class HonsanteiIdoHandler {
         div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getTxtFukaNendo().setDomain(調定年度);
         ShoriDateKanri dbT7022Entity = HonsanteiIdoGennendo.createInstance().getMax基準日時(
                 年度, ShoriName.異動賦課.get名称());
-        YMDHMS 異動賦課の基準日時 = dbT7022Entity.get基準日時();
-        dbT7022Entity = HonsanteiIdoGennendo.createInstance().getMax基準日時(年度, ShoriName.異動賦課確定.get名称());
-        YMDHMS 異動賦課確定の基準日時 = dbT7022Entity.get基準日時();
-        return 異動賦課確定の基準日時.isBefore(異動賦課の基準日時);
+        YMDHMS 異動賦課の基準日時;
+        if (dbT7022Entity.get基準日時() != null) {
+            異動賦課の基準日時 = dbT7022Entity.get基準日時();
+            dbT7022Entity = HonsanteiIdoGennendo.createInstance().getMax基準日時(年度, ShoriName.異動賦課確定.get名称());
+            if (dbT7022Entity.get基準日時() != null) {
+                return dbT7022Entity.get基準日時().isBefore(異動賦課の基準日時);
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -363,7 +368,7 @@ public class HonsanteiIdoHandler {
                         SubGyomuCode.DBB介護賦課, 本算定異動現年度_通常月);
             }
             RString 算定月 = div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey();
-            Shoriku 処理区分 = HonsanteiIdoGennendo.createInstance().setShorikubun(
+            RString 処理区分 = HonsanteiIdoGennendo.createInstance().setShorikubun(
                     new RString(Integer.valueOf(算定月.toString())), new FlexibleYear(調定年度.toString()));
             if (処理区分 != null) {
                 set対象補足月テキストボックス(処理区分, date);
@@ -423,7 +428,7 @@ public class HonsanteiIdoHandler {
             List<ChohyoResult> 帳票IDList = HonsanteiIdoGennendo.createInstance().getChohyoID(
                     調定年度, new RString(月の期.get期AsInt()), get各通知書の帳票ID());
             List<ShutsuryokuKiKoho> 出力期;
-            ShutsuryokuKiKohoFactory kohoFactory = new ShutsuryokuKiKohoFactory(調定年度);
+            ShutsuryokuKiKohoFactory kohoFactory = ShutsuryokuKiKohoFactory.createInstance(調定年度);
             RString 算定期 = 月の期.get期();
             if (帳票IDList != null) {
                 boolean flag = false;
@@ -554,6 +559,8 @@ public class HonsanteiIdoHandler {
             if (決定_発行日 != null) {
                 paramter.set決定_発行日(new FlexibleDate(決定_発行日.toString()));
             }
+        } else {
+            paramter.set決定_チェックボックス(チェックボックス_0);
         }
         List<RString> 変更_チェックボックス = div.getChkHenkoTsuchi().getSelectedKeys();
         if (変更_チェックボックス != null && !変更_チェックボックス.isEmpty()) {
@@ -568,6 +575,8 @@ public class HonsanteiIdoHandler {
             if (変更_発行日 != null) {
                 paramter.set変更_発行日(new FlexibleDate(変更_発行日.toString()));
             }
+        } else {
+            paramter.set変更_チェックボックス(チェックボックス_0);
         }
         List<RString> 納入_対象者 = div.getChkNotsuTaishoSha().getSelectedValues();
         if (納入_対象者 != null && !納入_対象者.isEmpty()) {

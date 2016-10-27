@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbd.definition.core.hikazeinenkin.TorokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.ChofukuTorikomiDataDeleteShoriProcessParmeter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.ChofukuTorikomiDataDeleteShoriJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity;
-import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hikazenenkintaishoshadoutei.IChofukuTorikomiDataDeleteShoriMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -62,7 +61,6 @@ public class ChofukuTorikomiDataDeleteShoriProcess extends BatchProcessBase<Chof
 
     @Override
     protected void afterExecute() {
-        getMapper(IChofukuTorikomiDataDeleteShoriMapper.class).deleteデータを削除処理();
     }
 
     private HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity create重複処理(ChofukuTorikomiDataDeleteShoriJohoEntity t) {

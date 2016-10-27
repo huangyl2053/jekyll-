@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.kogakushikyufushikyuketteitsuchi
 public class KogakuShikyuFushikyuKetteiTsuchiHakkoHeaderEditor
         implements IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor {
 
-    private KogakuShikyuFushikyuKetteiTsuchiHakkoEntity entity;
+    private final KogakuShikyuFushikyuKetteiTsuchiHakkoEntity entity;
 
     /**
      * コンストラクタです
@@ -29,20 +29,22 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoHeaderEditor
 
     @Override
     public KogakuShikyuFushikyuKetteiTsuchiHakkoSource edit(KogakuShikyuFushikyuKetteiTsuchiHakkoSource source) {
-        source.ｔestPrint = entity.getテスト印刷();
-        source.printTimeStamp = entity.get作成日時();
-        source.hokenshaNo = entity.get市町村コード();
-        source.hokenshaName = entity.get市町村名称();
-        source.shutsuryokujun1 = entity.get並び順1();
-        source.shutsuryokujun2 = entity.get並び順2();
-        source.shutsuryokujun3 = entity.get並び順3();
-        source.shutsuryokujun4 = entity.get並び順4();
-        source.shutsuryokujun5 = entity.get並び順5();
-        source.kaipage1 = entity.get改頁1();
-        source.kaipage2 = entity.get改頁2();
-        source.kaipage3 = entity.get改頁3();
-        source.kaipage4 = entity.get改頁4();
-        source.kaipage5 = entity.get改頁5();
+        if (entity != null) {
+            source.ｔestPrint = entity.getテスト印刷();
+            source.printTimeStamp = entity.get作成日時();
+            source.hokenshaNo = entity.get市町村コード();
+            source.hokenshaName = entity.get市町村名称();
+            source.shutsuryokujun1 = entity.get並び順1();
+            source.shutsuryokujun2 = entity.get並び順2();
+            source.shutsuryokujun3 = entity.get並び順3();
+            source.shutsuryokujun4 = entity.get並び順4();
+            source.shutsuryokujun5 = entity.get並び順5();
+            source.kaipage1 = entity.get改頁1();
+            source.kaipage2 = entity.get改頁2();
+            source.kaipage3 = entity.get改頁3();
+            source.kaipage4 = entity.get改頁4();
+            source.kaipage5 = entity.get改頁5();
+        }
         return source;
 
     }

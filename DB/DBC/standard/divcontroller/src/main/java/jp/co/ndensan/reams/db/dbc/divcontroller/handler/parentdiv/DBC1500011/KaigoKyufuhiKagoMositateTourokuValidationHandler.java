@@ -42,16 +42,29 @@ public class KaigoKyufuhiKagoMositateTourokuValidationHandler {
      */
     public ValidationMessageControlPairs check必須項目を入力(RString msg) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!new RString("被保番号、支援事業者番号").equals(msg)) {
+        if (new RString("被保番号、支援事業者番号").equals(msg)) {
             validationMessages.add(new ValidationMessageControlPair(new KaigoKyufuhiKagoMositateTourokuValidationHandler.CheckMessages(
                     UrErrorMessages.必須項目_追加メッセージあり,
-                    msg.toString()), div.getTxtHihoNo()));
+                    msg.toString()), div.getCcdJigyoshaSentaku().getTxtNyuryokuShisetsuKodo(), div.getTxtHihoNo()));
         } else {
             validationMessages.add(new ValidationMessageControlPair(new KaigoKyufuhiKagoMositateTourokuValidationHandler.CheckMessages(
                     UrErrorMessages.必須項目_追加メッセージあり,
                     msg.toString()), div.getTxtTeikyoYMRange()));
         }
 
+        return validationMessages;
+    }
+
+    /**
+     * データが存在したチェックを行う。
+     *
+     * @param msg メッセージの引数
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs check存在しない(RString msg) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(new KaigoKyufuhiKagoMositateTourokuValidationHandler.CheckMessages(
+                UrErrorMessages.存在しない, msg.toString())));
         return validationMessages;
     }
 

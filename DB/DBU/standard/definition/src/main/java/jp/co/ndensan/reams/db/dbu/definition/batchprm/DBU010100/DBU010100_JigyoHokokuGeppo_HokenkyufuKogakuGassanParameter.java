@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppohokenkyufukogakugassan.JigyoHokokuGeppoHokenkyufuKogakuGassanProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 
@@ -66,7 +67,7 @@ public class DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter extends 
     @BatchParameter(key = SAKUSEIDATE, name = "作成日時")
     private RString 作成日時;
     @BatchParameter(key = SHORIDATE, name = "処理日時")
-    private RString 処理日時;
+    private YMDHMS 処理日時;
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
     private RString 市町村コード;
     @BatchParameter(key = KOSEISHICHOSONKBN, name = "構成市町村区分")

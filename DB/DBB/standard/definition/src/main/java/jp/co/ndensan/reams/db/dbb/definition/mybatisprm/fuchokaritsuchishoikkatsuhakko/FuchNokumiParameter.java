@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuchokaritsuchishoikkat
 import java.util.List;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 異動賦課情報一時テーブルInsertパラメータ
  *
- * @reamsid_L DBB-0710-040 yebangqiang
+ * @reamsid_L DBB-0710-030 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter
@@ -28,6 +29,7 @@ public class FuchNokumiParameter extends KozaSearchParameter implements IMyBatis
     private FlexibleYear 賦課年度;
     private RString 科目コード;
     private RString 処理日;
+    private UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタです。
@@ -39,6 +41,7 @@ public class FuchNokumiParameter extends KozaSearchParameter implements IMyBatis
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
      * @param 科目コード RString
+     * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoParam
      */
     public FuchNokumiParameter(
             FlexibleYear 調定年度,
@@ -47,13 +50,15 @@ public class FuchNokumiParameter extends KozaSearchParameter implements IMyBatis
             RString 処理日,
             IKozaSearchKey searchkey,
             List<KamokuCode> list,
-            RString 科目コード) {
+            RString 科目コード,
+            UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam) {
         super(searchkey, list);
         this.科目コード = 科目コード;
         this.調定年度 = 調定年度;
         this.調定前年度 = 調定前年度;
         this.賦課年度 = 賦課年度;
         this.処理日 = 処理日;
+        this.shikibetsutaishoParam = shikibetsutaishoParam;
     }
 
     /**
@@ -66,6 +71,7 @@ public class FuchNokumiParameter extends KozaSearchParameter implements IMyBatis
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
      * @param 科目コード RString
+     * @param shikibetsutaishoParam UaFt200FindShikibetsuTaishoParam
      * @return パラメータ
      */
     public static FuchNokumiParameter createSelectByKeyParam(
@@ -75,7 +81,8 @@ public class FuchNokumiParameter extends KozaSearchParameter implements IMyBatis
             RString 処理日,
             IKozaSearchKey searchkey,
             List<KamokuCode> list,
-            RString 科目コード) {
-        return new FuchNokumiParameter(調定年度, 調定前年度, 賦課年度, 処理日, searchkey, list, 科目コード);
+            RString 科目コード,
+            UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam) {
+        return new FuchNokumiParameter(調定年度, 調定前年度, 賦課年度, 処理日, searchkey, list, 科目コード, shikibetsutaishoParam);
     }
 }

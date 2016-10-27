@@ -42,6 +42,9 @@ public class KogakuFurikomiProcess extends BatchProcessBase<GdaekomiDetaiResultE
             + "IGdaekomimeisaiFurikomiMapper.get高額データ取得");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
+    private static final int 桁数_10 = 10;
+    private static final int 桁数_4 = 4;
+
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
 
@@ -70,12 +73,12 @@ public class KogakuFurikomiProcess extends BatchProcessBase<GdaekomiDetaiResultE
         data.setRirekiNo(fdre.get高額介護サービス費支給判定結果Entity().getRirekiNo());
         data.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(fdre.get高額介護サービス費支給判定結果Entity().getShoKisaiHokenshaNo().getColumnValue()));
         if (ONE.equals(fdre.get高額介護サービス費支給判定結果Entity().getShinsaHohoKubun())) {
-            data.setKetteiTsuchiNo(fdre.get高額介護サービス費支給審査決定list().get(0).getTsuchishoNo());
+            data.setKetteiTsuchiNo(fdre.get高額介護サービス費支給審査決定Entity().getTsuchishoNo());
         } else if (!ONE.equals(fdre.get高額介護サービス費支給判定結果Entity().getShinsaHohoKubun())) {
             data.setKetteiTsuchiNo(RString.EMPTY);
         }
         if (ONE.equals(fdre.get高額介護サービス費支給判定結果Entity().getShinsaHohoKubun())) {
-            data.setFurikomiKingaku(fdre.get高額介護サービス費支給審査決定list().get(0).getKogakuShikyuGaku());
+            data.setFurikomiKingaku(fdre.get高額介護サービス費支給審査決定Entity().getKogakuShikyuGaku());
         } else if (!ONE.equals(fdre.get高額介護サービス費支給判定結果Entity().getShinsaHohoKubun())) {
             data.setFurikomiKingaku(fdre.get高額介護サービス費支給判定結果Entity().getShikyuKingaku());
         }
@@ -117,10 +120,10 @@ public class KogakuFurikomiProcess extends BatchProcessBase<GdaekomiDetaiResultE
         data.setKozaMeiginin(AtenaKanaMeisho.EMPTY);
         data.setKozaMeigininKanji(AtenaMeisho.EMPTY);
         if (TWO.equals(parameter.get支払方法().getコード())) {
-            data.setKozaNayoseKey(fdre.get高額介護サービス費支給判定結果Entity().getHihokenshaNo().getColumnValue().
+            data.setKozaNayoseKey(fdre.get高額介護サービス費支給判定結果Entity().getHihokenshaNo().getColumnValue().padZeroToLeft(桁数_10).
                     concat(fdre.get高額介護サービス費支給判定結果Entity().getServiceTeikyoYM().toDateString()).
                     concat(new RString("0000000000")).
-                    concat(new RString(fdre.get高額介護サービス費支給判定結果Entity().getRirekiNo())));
+                    concat(new RString(fdre.get高額介護サービス費支給判定結果Entity().getRirekiNo()).padZeroToLeft(桁数_4)));
         } else if (!TWO.equals(parameter.get支払方法().getコード())) {
             data.setKozaNayoseKey(RString.EMPTY);
         }

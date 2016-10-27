@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -82,12 +81,12 @@ public class FurikomiDataProcess extends BatchProcessBase<FurikomiDataEntity> {
     private KozaFurikomiTempTableEntity setKozaFurikomiTempTableEntity(FurikomiDataEntity entity) {
 
         KozaFurikomiTempTableEntity tempTable1 = new KozaFurikomiTempTableEntity();
-        tempTable1.setFurikomiId(Long.valueOf(""));
-        tempTable1.setItakushaId(new Decimal(""));
+        tempTable1.setFurikomiId(Long.valueOf("0"));
+        tempTable1.setItakushaId(Decimal.ZERO);
         tempTable1.setFurikomiYMD(parameter.get振込指定年月日());
         tempTable1.setSakuseiKaisu(Decimal.ONE);
         tempTable1.setSubGyomuCode(SubGyomuCode.DBC介護給付);
-        tempTable1.setGyomunaiKubun(parameter.get振込業務内区分().get名称());
+        tempTable1.setGyomunaiKubun(parameter.get振込業務内区分().getコード());
         tempTable1.setKamokuCode(KamokuCode.EMPTY);
         tempTable1.setKamokuEdabanCode(EdabanCode.EMPTY);
         tempTable1.setRyokinShubetsuCode(Code.EMPTY);
@@ -102,7 +101,7 @@ public class FurikomiDataProcess extends BatchProcessBase<FurikomiDataEntity> {
             tempTable1.setKinyuKikanShitenCode(furikomiDetailEntity.getKinyuKikanShitenCode());
             tempTable1.setKinyuKikanShitenName(furikomiDetailEntity.getKinyuKikanShitenName());
             tempTable1.setKinyuKikanShitenKanaName(furikomiDetailEntity.getKinyuKikanShitenKanaName());
-            tempTable1.setYokinShubetsuCode(furikomiDetailEntity.getYokinShubetsuCode());
+            tempTable1.setYokinShubetsu(furikomiDetailEntity.getYokinShubetsuCode());
             tempTable1.setKozaNo(furikomiDetailEntity.getKozaNo());
             tempTable1.setKozaMeiginin(furikomiDetailEntity.getKozaMeiginin());
             tempTable1.setKozaMeigininKanji(furikomiDetailEntity.getKozaMeigininKanji());
@@ -133,7 +132,7 @@ public class FurikomiDataProcess extends BatchProcessBase<FurikomiDataEntity> {
         tempTable1.setTesuryoFutanKubun(RString.EMPTY);
         tempTable1.setTesuryo(Decimal.ZERO);
         tempTable1.setFurikomiSakuseiKubun(new Code("0"));
-        tempTable1.setFurikomiSakuseiYMDHMS(new YMDHMS(RDate.getNowDate().toDateString()));
+        tempTable1.setFurikomiSakuseiYMDHMS(YMDHMS.now());
 
         tempTable1.setBaitaiSakuseizumiFlag(false);
         tempTable1.setIraishoSakuseizumiFlag(false);

@@ -28,5 +28,5 @@ public interface IShichosonTokubetuKyufuServiceMapper {
      * @param serviceCode serviceCode
      * @return 最大履歴番号
      */
-    int get最大履歴番号(RString serviceCode);
+    Integer get最大履歴番号(RString serviceCode);
 }

@@ -254,11 +254,18 @@ public class KaigoServiceShuruiManager {
     @Transaction
     public List<KeyValueDataSource> getサービス種類DDLのDataSource() {
 
-        List<DbT7130KaigoServiceShuruiEntity> サービス種類情報リスト = 介護サービス種類Dac.getサービス種類コードと名称();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        for (DbT7130KaigoServiceShuruiEntity entity : サービス種類情報リスト) {
-            dataSource.add(new KeyValueDataSource(entity.getServiceShuruiCd().value(),
-                    entity.getServiceShuruiCd().value().concat(符号).concat(entity.getServiceShuruiMeisho())));
+        List<DbT7130KaigoServiceShuruiEntity> サービス種類情報List = 介護サービス種類Dac.getサービス種類コードと名称();
+        if (!サービス種類情報List.isEmpty()) {
+            List<RString> keyList = new ArrayList<>();
+            for (DbT7130KaigoServiceShuruiEntity entity : サービス種類情報List) {
+                RString サービスCode = entity.getServiceShuruiCd().getColumnValue();
+                RString サービス名称 = entity.getServiceShuruiMeisho();
+                if (!keyList.contains(サービスCode)) {
+                    dataSource.add(new KeyValueDataSource(サービスCode, サービスCode.concat(符号).concat(サービス名称)));
+                    keyList.add(サービスCode);
+                }
+            }
         }
         return dataSource;
     }

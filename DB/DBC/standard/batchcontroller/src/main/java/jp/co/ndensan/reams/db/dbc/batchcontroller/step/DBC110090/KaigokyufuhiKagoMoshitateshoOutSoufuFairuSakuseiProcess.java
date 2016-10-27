@@ -180,7 +180,7 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
         eucCsvWriter.writeLine(endEntity);
         eucCsvWriter.close();
         do外字類似変換();
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名.replace(拡張子_TEMP, RString.EMPTY)));
         sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
         SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);

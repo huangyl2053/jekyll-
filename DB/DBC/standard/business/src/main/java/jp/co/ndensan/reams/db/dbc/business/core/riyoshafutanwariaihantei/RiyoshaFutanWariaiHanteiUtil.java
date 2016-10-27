@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180022.DBC180022_RiyoshaFutanwariaiHanteiSubParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiHanteiJohoEntity;
@@ -184,12 +184,12 @@ public class RiyoshaFutanWariaiHanteiUtil {
     /**
      * DBC180020ProcessParameterを取得します。
      *
-     * @param param DBC180020_IdoRiyoshaFutanwariaiHanteiParameter
+     * @param param DBC180022_RiyoshaFutanwariaiHanteiSubParameter
      * @param 異動 boolean
      * @param index int
      * @return DBC180020ProcessParameter
      */
-    public DBC180020ProcessParameter toProcessParameter(DBC180020_IdoRiyoshaFutanwariaiHanteiParameter param,
+    public DBC180020ProcessParameter toProcessParameter(DBC180022_RiyoshaFutanwariaiHanteiSubParameter param,
             boolean 異動, int index) {
         if (異動) {
             return new DBC180020ProcessParameter(
@@ -213,11 +213,11 @@ public class RiyoshaFutanWariaiHanteiUtil {
     /**
      * DBC180020ProcessParameterを取得します。
      *
-     * @param param DBC180020_IdoRiyoshaFutanwariaiHanteiParameter
+     * @param param DBC180022_RiyoshaFutanwariaiHanteiSubParameter
      * @param index int
      * @return DBC180020ProcessParameter
      */
-    public DBC180020ProcessParameter toProcessParameter(DBC180020_IdoRiyoshaFutanwariaiHanteiParameter param,
+    public DBC180020ProcessParameter toProcessParameter(DBC180022_RiyoshaFutanwariaiHanteiSubParameter param,
             int index) {
         return new DBC180020ProcessParameter(
                 getFlexibleYearRYear(param.getTaishoNendo()),
@@ -235,10 +235,10 @@ public class RiyoshaFutanWariaiHanteiUtil {
     /**
      * DBC180020ProcessParameterを取得します。
      *
-     * @param param DBC180020_IdoRiyoshaFutanwariaiHanteiParameter
+     * @param param DBC180022_RiyoshaFutanwariaiHanteiSubParameter
      * @return DBC180020ProcessParameter
      */
-    public DBC180020ProcessParameter toProcessParameter(DBC180020_IdoRiyoshaFutanwariaiHanteiParameter param) {
+    public DBC180020ProcessParameter toProcessParameter(DBC180022_RiyoshaFutanwariaiHanteiSubParameter param) {
         return new DBC180020ProcessParameter(
                 getFlexibleYearRYear(param.getTaishoNendo()),
                 getFlexibleDateString(param.getKijunbi()),

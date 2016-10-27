@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.karisanteiidofuk
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaPsmParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.FukaJohoPsmChoshuRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.KarisanteiIdoKekkaEntity;
 
 /**
@@ -23,4 +25,12 @@ public interface IKarisanteiIdoKekkaMapper {
      * @return List<KarisanteiIdoKekkaIchiranEntity> 仮算定異動賦課情報
      */
     List<KarisanteiIdoKekkaEntity> select仮算定異動賦課(KariSanteiIdoFukaMybatisParameter parameter);
+
+    /**
+     * select特別徴収依頼金額明細
+     *
+     * @param parameter KariSanteiIdoFukaPsmParameter
+     * @return FukaJohoPsmChoshuRelateEntity
+     */
+    List<FukaJohoPsmChoshuRelateEntity> select特別徴収依頼金額明細(KariSanteiIdoFukaPsmParameter parameter);
 }
