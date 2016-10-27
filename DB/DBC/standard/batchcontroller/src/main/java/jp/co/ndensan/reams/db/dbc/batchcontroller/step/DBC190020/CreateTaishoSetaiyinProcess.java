@@ -99,7 +99,6 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     private InsTaishoSeitaiyinTempProcessParameter parameter;
 
-    private static final RString TABLE_NAME = new RString("TaishoSetaiin");
     private static final RString 首長名印字位置_1 = new RString("1");
     private static final RString MESSAGE = new RString("基準収入額適用申請のお知らせ");
     private static final RString MESSAGE_その他 = new RString("その他");
@@ -167,15 +166,18 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     private int 通番 = 1;
     private NinshoshaSource 確認書認証者情報;
     private List<CreateTaishoSetaiyinEntity> createTaishoSetaiyinList;
+    private boolean 文字切れflag = false;
+    private boolean flag = false;
+    private boolean 対象世帯員fla = false;
 
     private IBatchReportWriterWithCheckList<KijunShunyugakuTekiyoOshiraseTsuchishoSource> dBC100063ReportWriter1;
     private ReportSourceWriter<KijunShunyugakuTekiyoOshiraseTsuchishoSource> dBC100063SourceWriter1;
 
-    private BatchReportWriter<KijunShunyugakuTekiyoShinseishoSource> dBC100064ReportWriter1;
-    private ReportSourceWriter<KijunShunyugakuTekiyoShinseishoSource> dBC100064SourceWriter1;
-
-    private IBatchReportWriterWithCheckList<KijunShunyugakuTekiyoOshiraseTsuchishoSource> dBC100063ReportWriter0;
+    private BatchReportWriter<KijunShunyugakuTekiyoOshiraseTsuchishoSource> dBC100063ReportWriter0;
     private ReportSourceWriter<KijunShunyugakuTekiyoOshiraseTsuchishoSource> dBC100063SourceWriter0;
+
+    private IBatchReportWriterWithCheckList<KijunShunyugakuTekiyoShinseishoSource> dBC100064ReportWriter1;
+    private ReportSourceWriter<KijunShunyugakuTekiyoShinseishoSource> dBC100064SourceWriter1;
 
     private BatchReportWriter<KijunShunyugakuTekiyoShinseishoSource> dBC100064ReportWriter0;
     private ReportSourceWriter<KijunShunyugakuTekiyoShinseishoSource> dBC100064SourceWriter0;
@@ -204,8 +206,8 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         if (!帳票制御共通.is電子公印印字有無()) {
             is公印を省略 = true;
         }
-        index = 0;
-        index164 = 0;
+        index = 1;
+        index164 = 1;
 
         RString 市町村コード = Association.getLasdecCode().getColumnValue();
         出力ファイル名 = ファイル名_前.concat(parameter.get処理年月日().toString()).concat(記号_).concat(市町村コード).concat(ファイル名_後);
@@ -238,26 +240,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     protected void createWriter() {
 
         if (ShinseishoHakkoChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())) {
-            ICheckListInfo info = CheckListInfoFactory.createInstance(SubGyomuCode.DBC介護給付,
-                    parameter.get市町村コード(), parameter.get市町村名());
-            CheckListLineItemSet pairs = CheckListLineItemSet.of(特定項目.class, チェック項目.class);
-            dBC100063ReportWriter1 = BatchWriters
-                    .batchReportWriterWithCheckList(KijunShunyugakuTekiyoOshiraseTsuchishoSource.class)
-                    .checkListInfo(info)
-                    .checkListLineItemSet(pairs)
-                    .reportId(ReportIdDBC.DBC100063.getReportId().value())
-                    .build();
-
-            dBC100063SourceWriter1 = new ReportSourceWriter<>(dBC100063ReportWriter1);
-            dBC100064ReportWriter1 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
-            dBC100064SourceWriter1 = new ReportSourceWriter<>(dBC100064ReportWriter1);
-
-            dBC100063ReportWriter0 = BatchWriters
-                    .batchReportWriterWithCheckList(KijunShunyugakuTekiyoOshiraseTsuchishoSource.class)
-                    .checkListInfo(info)
-                    .checkListLineItemSet(pairs)
-                    .reportId(ReportIdDBC.DBC100063.getReportId().value())
-                    .build();
+            dBC100063ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100063.getReportId().value()).create();
             dBC100063SourceWriter0 = new ReportSourceWriter<>(dBC100063ReportWriter0);
 
             dBC100064ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
@@ -291,111 +274,113 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     @Override
     protected void process(CreateTaishoSetaiyinEntity entity) {
-        if (!ShinseishoHakkoChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())
-                && (null == dBC100063SourceWriter1 && null == dBC100064SourceWriter1)
-                && RSTRING_1.equals(entity.get対象世帯員().getShuturyokuUmu())) {
-            ICheckListInfo info = CheckListInfoFactory.createInstance(SubGyomuCode.DBC介護給付,
-                    parameter.get市町村コード(), parameter.get市町村名());
-            CheckListLineItemSet pairs = CheckListLineItemSet.of(特定項目.class, チェック項目.class);
-
-            dBC100063ReportWriter1 = BatchWriters
-                    .batchReportWriterWithCheckList(KijunShunyugakuTekiyoOshiraseTsuchishoSource.class)
-                    .checkListInfo(info)
-                    .checkListLineItemSet(pairs)
-                    .reportId(ReportIdDBC.DBC100063.getReportId().value())
-                    .build();
-
-            dBC100063SourceWriter1 = new ReportSourceWriter<>(dBC100063ReportWriter1);
-            dBC100064ReportWriter1 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
-            dBC100064SourceWriter1 = new ReportSourceWriter<>(dBC100064ReportWriter1);
-
-            dBC100063ReportWriter0 = BatchWriters
-                    .batchReportWriterWithCheckList(KijunShunyugakuTekiyoOshiraseTsuchishoSource.class)
-                    .checkListInfo(info)
-                    .checkListLineItemSet(pairs)
-                    .reportId(ReportIdDBC.DBC100063.getReportId().value())
-                    .build();
-            dBC100063SourceWriter0 = new ReportSourceWriter<>(dBC100063ReportWriter0);
-
-            dBC100064ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
-            dBC100064SourceWriter0 = new ReportSourceWriter<>(dBC100064ReportWriter0);
-
-            Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
-                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), this.parameter.get作成日());
-            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            確認書認証者情報 = NinshoshaSourceBuilderFactory.createInstance(認証者, 地方公共団体, dBC100063SourceWriter1.getImageFolderPath(),
-                    new RDate(this.parameter.get作成日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし).buildSource();
-
-        }
-
-        KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 申請一覧Entity;
-        if (0 == index) {
-            this.exEntity = entity;
-            index++;
-            index164++;
+        IAtesaki 宛先 = AtesakiFactory.createInstance(entity.get宛先());
+        IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
+        TaishoSetaiinEntity 対象世帯員 = entity.get対象世帯員();
+        対象世帯員.setAtenaInnjiKubun(null == 宛先 ? RString.EMPTY : RSTRING_1);
+        IJusho 住所 = 宛名.get住所();
+        int 文字列長 = 住所.get住所().length() + 住所.get方書().getColumnValue().length() + 住所.get番地().toString().length();
+        if (INT_80 < 文字列長) {
+            文字切れflag = true;
+            対象世帯員.setInnjiGirisiamojiKubun(true);
         } else {
-            createTaishoSetaiyinList.add(this.exEntity);
-            if (isChangeShotaiCode(exEntity.get対象世帯員(), entity.get対象世帯員())) {
-                this.write帳票();
-
-            }
-            this.exEntity = entity;
-
+            対象世帯員.setInnjiGirisiamojiKubun(false);
         }
+        if (RSTRING_1.equals(entity.get対象世帯員().getShuturyokuUmu())) {
+            対象世帯員fla = true;
+        }
+
         if (this.parameter.get一覧表CSV出力フラグ() && ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(this.parameter.get抽出条件())) {
-            申請一覧Entity = this.set申請一覧Entity(entity);
+            KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 申請一覧Entity = this.set申請一覧Entity(entity);
             KijunShunyugakuTekiyoShinseishoHakkoIchiranReport 申請一覧Report = new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(
-                    申請一覧Entity, parameter.get市町村コード().code市町村RString(), parameter.get市町村名(), 出力順リスト, 改頁項目リスト, parameter.get処理年度());
+                    申請一覧Entity, parameter.get市町村コード().code市町村RString(), parameter.get市町村名(), 出力順リスト, 改頁項目名リスト, parameter.get処理年度());
             申請一覧Report.writeBy(dBC200088SourceWriter);
             TaishoSetaiyinCsvEntity 申請書発行一覧CSV = this.get申請書発行一覧CSV(entity.get対象世帯員());
             eucCsvWriter.writeLine(申請書発行一覧CSV);
         }
 
+        flag = true;
+        this.createTaishoSetaiyinList.add(entity);
+        this.exEntity = entity;
+
     }
 
     @Override
     protected void afterExecute() {
-        if (null != this.exEntity) {
-            createTaishoSetaiyinList.add(this.exEntity);
-            KijunShunyugakuTekiyoShinseishoEntity kijunEntity = new KijunShunyugakuTekiyoShinseishoEntity();
-            KijunShunyugakuTekiyoShinseishoEntity kijunEntity1 = new KijunShunyugakuTekiyoShinseishoEntity();
-            int 文字列長 = INT_0;
-            for (CreateTaishoSetaiyinEntity taiEntity : createTaishoSetaiyinList) {
-                IAtesaki 宛先 = AtesakiFactory.createInstance(taiEntity.get宛先());
-                IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createKojin(taiEntity.get宛名());
-                TaishoSetaiinEntity 対象世帯員 = taiEntity.get対象世帯員();
 
-                対象世帯員.setAtenaInnjiKubun(null == 宛先 ? RString.EMPTY : RSTRING_1);
+        if (!ShinseishoHakkoChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())
+                && (null == dBC100063SourceWriter1 && null == dBC100064SourceWriter1)
+                && 対象世帯員fla) {
+            if (文字切れflag) {
+                ICheckListInfo info = CheckListInfoFactory.createInstance(SubGyomuCode.DBC介護給付,
+                        parameter.get市町村コード(), parameter.get市町村名());
+                CheckListLineItemSet pairs = CheckListLineItemSet.of(特定項目.class, チェック項目.class);
 
-                IJusho 住所 = 宛名.get住所();
-                文字列長 = 住所.get住所().length() + 住所.get方書().getColumnValue().length() + 住所.get番地().toString().length();
-                this.基準収入額適用お知ら(kijunEntity, 宛先, createTaishoSetaiyinList.size());
-                this.基準収入額適用申請書(kijunEntity1, 宛名);
-                if (INT_3 < createTaishoSetaiyinList.size() && index164 == INT_3) {
-                    this.write申請書出力帳票(文字列長, createTaishoSetaiyinList.get(0).get対象世帯員(), kijunEntity1);
-                    kijunEntity1 = new KijunShunyugakuTekiyoShinseishoEntity();
-                    index164 = INT_0;
-                }
-                index++;
-                index164++;
+                dBC100063ReportWriter1 = BatchWriters
+                        .batchReportWriterWithCheckList(KijunShunyugakuTekiyoOshiraseTsuchishoSource.class)
+                        .checkListInfo(info)
+                        .checkListLineItemSet(pairs)
+                        .reportId(ReportIdDBC.DBC100063.getReportId().value())
+                        .build();
+
+                dBC100063SourceWriter1 = new ReportSourceWriter<>(dBC100063ReportWriter1);
+
+                Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), this.parameter.get作成日());
+                Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+                確認書認証者情報 = NinshoshaSourceBuilderFactory.createInstance(認証者, 地方公共団体, dBC100063SourceWriter1.getImageFolderPath(),
+                        new RDate(this.parameter.get作成日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし).buildSource();
+
+                dBC100064ReportWriter1 = BatchWriters
+                        .batchReportWriterWithCheckList(KijunShunyugakuTekiyoShinseishoSource.class)
+                        .checkListInfo(info)
+                        .checkListLineItemSet(pairs)
+                        .reportId(ReportIdDBC.DBC100064.getReportId().value())
+                        .build();
+                dBC100064SourceWriter1 = new ReportSourceWriter<>(dBC100064ReportWriter1);
+            } else {
+                dBC100063ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100063.getReportId().value()).create();
+                dBC100063SourceWriter0 = new ReportSourceWriter<>(dBC100063ReportWriter0);
+
+                dBC100064ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100064.getReportId().value()).create();
+                dBC100064SourceWriter0 = new ReportSourceWriter<>(dBC100064ReportWriter0);
+
+                Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), this.parameter.get作成日());
+                Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+                確認書認証者情報 = NinshoshaSourceBuilderFactory.createInstance(認証者, 地方公共団体, dBC100063ReportWriter0.getImageFolderPath(),
+                        new RDate(this.parameter.get作成日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし).buildSource();
+
             }
-            if (index164 != INT_3) {
-                this.write申請書出力帳票(文字列長, createTaishoSetaiyinList.get(0).get対象世帯員(), kijunEntity1);
-            }
-            this.writeお知らせ通知書帳票(文字列長, createTaishoSetaiyinList.get(0).get対象世帯員(), kijunEntity);
 
-        } else {
+        }
+
+        if (!flag) {
             if (this.parameter.get一覧表CSV出力フラグ() && ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(this.parameter.get抽出条件())) {
                 TaishoSetaiyinCsvEntity 申請書発行一覧CSV = this.get申請書発行一覧CSV(null);
                 eucCsvWriter.writeLine(申請書発行一覧CSV);
-                KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 申請一覧Entity = this.set申請一覧Entity(null);
+                KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 収入額適用申請書一覧表 = this.set申請一覧Entity(null);
                 KijunShunyugakuTekiyoShinseishoHakkoIchiranReport 申請一覧Report = new KijunShunyugakuTekiyoShinseishoHakkoIchiranReport(
-                        申請一覧Entity, parameter.get市町村コード().code市町村RString(), parameter.get市町村名(), 出力順リスト, 改頁項目リスト, parameter.get処理年度());
+                        収入額適用申請書一覧表, parameter.get市町村コード().code市町村RString(), parameter.get市町村名(), 出力順リスト, 改頁項目名リスト, parameter.get処理年度());
                 申請一覧Report.writeBy(dBC200088SourceWriter);
 
             }
 
         }
+
+        List<CreateTaishoSetaiyinEntity> taishoSetaiyinList = new ArrayList();
+        for (int i = 0; i < this.createTaishoSetaiyinList.size(); i++) {
+            taishoSetaiyinList.add(createTaishoSetaiyinList.get(i));
+            if (i == this.createTaishoSetaiyinList.size() - 1) {
+                this.write帳票(taishoSetaiyinList);
+
+            } else if (isChangeShotaiCode(this.createTaishoSetaiyinList.get(i).get対象世帯員(),
+                    this.createTaishoSetaiyinList.get(i + 1).get対象世帯員())) {
+                this.write帳票(taishoSetaiyinList);
+                taishoSetaiyinList.clear();
+            }
+        }
+
         if (null != dBC200088ReportWriter) {
             dBC200088ReportWriter.close();
         }
@@ -418,24 +403,18 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         }
     }
 
-    private void write帳票() {
+    private void write帳票(List<CreateTaishoSetaiyinEntity> taishoSetaiyinList) {
 
         KijunShunyugakuTekiyoShinseishoEntity kijunEntity = new KijunShunyugakuTekiyoShinseishoEntity();
         KijunShunyugakuTekiyoShinseishoEntity kijunEntity1 = new KijunShunyugakuTekiyoShinseishoEntity();
-        int 文字列長 = INT_0;
-        for (CreateTaishoSetaiyinEntity taiEntity : createTaishoSetaiyinList) {
+
+        for (CreateTaishoSetaiyinEntity taiEntity : taishoSetaiyinList) {
             IAtesaki 宛先 = AtesakiFactory.createInstance(taiEntity.get宛先());
             IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createKojin(taiEntity.get宛名());
-            TaishoSetaiinEntity 対象世帯員 = taiEntity.get対象世帯員();
-
-            対象世帯員.setAtenaInnjiKubun(null == 宛先 ? RString.EMPTY : RSTRING_1);
-
-            IJusho 住所 = 宛名.get住所();
-            文字列長 = 住所.get住所().length() + 住所.get方書().getColumnValue().length() + 住所.get番地().toString().length();
-            this.基準収入額適用お知ら(kijunEntity, 宛先, createTaishoSetaiyinList.size());
+            this.基準収入額適用お知ら(kijunEntity, 宛先, taishoSetaiyinList.size());
             this.基準収入額適用申請書(kijunEntity1, 宛名);
-            if (INT_3 < createTaishoSetaiyinList.size() && index164 == INT_3) {
-                this.write申請書出力帳票(文字列長, createTaishoSetaiyinList.get(0).get対象世帯員(), kijunEntity1);
+            if (INT_3 < taishoSetaiyinList.size() && index164 == INT_3) {
+                this.write申請書出力帳票(taishoSetaiyinList.get(0).get対象世帯員(), kijunEntity1);
                 kijunEntity1 = new KijunShunyugakuTekiyoShinseishoEntity();
                 index164 = INT_0;
             }
@@ -443,19 +422,17 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             index164++;
         }
         if (index164 != INT_3) {
-            this.write申請書出力帳票(文字列長, createTaishoSetaiyinList.get(0).get対象世帯員(), kijunEntity1);
+            this.write申請書出力帳票(taishoSetaiyinList.get(0).get対象世帯員(), kijunEntity1);
         }
-        this.writeお知らせ通知書帳票(文字列長, createTaishoSetaiyinList.get(0).get対象世帯員(), kijunEntity);
+        this.writeお知らせ通知書帳票(taishoSetaiyinList.get(0).get対象世帯員(), kijunEntity);
         index = 1;
         index164 = 1;
 
     }
 
-    private void writeお知らせ通知書帳票(int 文字列長, TaishoSetaiinEntity 対象世帯員,
+    private void writeお知らせ通知書帳票(TaishoSetaiinEntity 対象世帯員,
             KijunShunyugakuTekiyoShinseishoEntity kijunEntity) {
-
-        if (INT_80 < 文字列長) {
-            対象世帯員.setInnjiGirisiamojiKubun(true);
+        if (文字切れflag) {
             if (this.parameter.getお知らせ通知書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
                 KijunShunyugakuTekiyoOshiraseTsuchishoReport kijunReport
                         = new KijunShunyugakuTekiyoOshiraseTsuchishoReport(kijunEntity);
@@ -463,7 +440,6 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 index++;
             }
         } else {
-            対象世帯員.setInnjiGirisiamojiKubun(false);
             if (this.parameter.getお知らせ通知書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
                 KijunShunyugakuTekiyoOshiraseTsuchishoReport kijunReport
                         = new KijunShunyugakuTekiyoOshiraseTsuchishoReport(kijunEntity);
@@ -475,11 +451,9 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     }
 
-    private void write申請書出力帳票(int 文字列長, TaishoSetaiinEntity 対象世帯員,
+    private void write申請書出力帳票(TaishoSetaiinEntity 対象世帯員,
             KijunShunyugakuTekiyoShinseishoEntity kijunEntity1) {
-
-        if (INT_80 < 文字列長) {
-            対象世帯員.setInnjiGirisiamojiKubun(true);
+        if (文字切れflag) {
             if (this.parameter.get申請書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
                 KijunShunyugakuTekiyoShinseishoReport dbc64Report = new KijunShunyugakuTekiyoShinseishoReport(kijunEntity1);
                 dbc64Report.writeBy(dBC100064SourceWriter1);
@@ -494,18 +468,6 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
         }
 
-    }
-
-    private boolean isChangeShotaiCode(TaishoSetaiinEntity ex対象世帯員, TaishoSetaiinEntity 対象世帯員) {
-        return !ex対象世帯員.getShotaiCode().equals(対象世帯員.getShotaiCode());
-
-    }
-
-    private RString getColumnValue(IDbColumnMappable entity) {
-        if (null != entity) {
-            return entity.getColumnValue();
-        }
-        return RString.EMPTY;
     }
 
     private void 基準収入額適用お知ら(KijunShunyugakuTekiyoShinseishoEntity kijunEntity, IAtesaki 宛先, int 世帯員情報件数) {
@@ -624,60 +586,6 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     }
 
-    private enum 特定項目 implements ISpecificKey {
-
-        key1(KijunShunyugakuTekiyoOshiraseTsuchishoSource.ITEM_HIHOKENSHANO1, 定数_被保険者番号.toString());
-
-        private final RString itemName;
-
-        private final RString printName;
-
-        private 特定項目(String itemName, String printName) {
-            this.itemName = new RString(itemName);
-            this.printName = new RString(printName);
-        }
-
-        @Override
-        public RString getItemName() {
-            return this.itemName;
-        }
-
-        @Override
-        public RString getPrintName() {
-            return this.printName;
-        }
-    }
-
-    private enum チェック項目 implements ICheckTarget {
-
-        target1(チェック項目名.toString(), 定数_住所.toString(), CheckShubetsu.文字切れ);
-
-        private final RString itemName;
-        private final RString printName;
-        private final CheckShubetsu checkShubetsu;
-
-        private チェック項目(String itemName, String printName, CheckShubetsu checkShubetsu) {
-            this.itemName = new RString(itemName);
-            this.printName = new RString(printName);
-            this.checkShubetsu = checkShubetsu;
-        }
-
-        @Override
-        public RString getItemName() {
-            return this.itemName;
-        }
-
-        @Override
-        public RString getPrintName() {
-            return this.printName;
-        }
-
-        @Override
-        public CheckShubetsu getCheckShubetsu() {
-            return this.checkShubetsu;
-        }
-    }
-
     private TaishoSetaiyinCsvEntity get申請書発行一覧CSV(TaishoSetaiinEntity 対象世帯員) {
         TaishoSetaiyinCsvEntity csvEntity = new TaishoSetaiyinCsvEntity();
         if (null != 対象世帯員) {
@@ -726,56 +634,6 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         return csvEntity;
     }
 
-    private RString doDecimal編集(Decimal number) {
-        if (null == number) {
-            return RString.EMPTY;
-        }
-        return DecimalFormatter.toRString(number, 0);
-    }
-
-    private RString doFlexibleDate編集(FlexibleDate day) {
-        if (null == day) {
-            return RString.EMPTY;
-        }
-        return new RString(day.toString());
-    }
-
-    private RString doFlexibleYear編集(FlexibleYear year) {
-        if (null == year) {
-            return RString.EMPTY;
-        }
-        return new RString(year.toString());
-    }
-
-    private IOutputOrder get並び順(ReportId 帳票分類ID, RString 出力順ID) {
-        if (RString.isNullOrEmpty(出力順ID)) {
-            return null;
-        }
-        IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBC介護給付, 帳票分類ID, Long.parseLong(出力順ID.toString()));
-        return outputOrder;
-    }
-
-    private boolean is改頁(CreateTaishoSetaiyinEntity exEntity, CreateTaishoSetaiyinEntity entity) {
-        boolean flag = false;
-        if (exEntity.get宛名() != null && entity.get宛名() != null) {
-            IShikibetsuTaisho ex宛名 = ShikibetsuTaishoFactory.createKojin(exEntity.get宛名());
-            IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
-            if (!ex宛名.get住所().get郵便番号().equals(宛名.get住所().get郵便番号())) {
-                flag = true;
-            } else if (!ex宛名.get住所().get町域コード().equals(宛名.get住所().get町域コード())) {
-                flag = true;
-            } else if (!ex宛名.get行政区画().getGyoseiku().getコード().equals(宛名.get行政区画().getGyoseiku().getコード())) {
-                flag = true;
-            } else if (!ex宛名.get世帯コード().equals(宛名.get世帯コード())) {
-                flag = true;
-            }
-        } else if (!exEntity.get対象世帯員().getShichosonCode().equals(entity.get対象世帯員().getShichosonCode())) {
-            flag = true;
-        }
-        return flag;
-    }
-
     private KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity set申請一覧Entity(CreateTaishoSetaiyinEntity entity) {
         KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity 申請一覧Entity = new KijunShunyugakuTekiyoShinseishoHakkoIchiranEntity();
         if (null != entity) {
@@ -810,14 +668,130 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
                 申請一覧Entity.set郵便番号(宛名.get住所().get郵便番号().getColumnValue());
                 申請一覧Entity.set町域コード(宛名.get住所().get町域コード().getColumnValue());
                 申請一覧Entity.set行政区コード(宛名.get行政区画().getGyoseiku().getコード().getColumnValue());
-                申請一覧Entity.set世帯コード(宛名.get世帯コード().getColumnValue());
-                申請一覧Entity.set市町村コード(entity.get対象世帯員().getShichosonCode());
             }
+            申請一覧Entity.set市町村コード(entity.get対象世帯員().getShichosonCode());
+            申請一覧Entity.set世帯コード(entity.get対象世帯員().getShotaiCode());
         } else {
             申請一覧Entity.set氏名(MESSAGE_該当データなし);
         }
         return 申請一覧Entity;
 
+    }
+
+    private IOutputOrder get並び順(ReportId 帳票分類ID, RString 出力順ID) {
+        if (RString.isNullOrEmpty(出力順ID)) {
+            return null;
+        }
+        IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBC介護給付, 帳票分類ID, Long.parseLong(出力順ID.toString()));
+        return outputOrder;
+    }
+
+    private boolean is改頁(CreateTaishoSetaiyinEntity exEntity, CreateTaishoSetaiyinEntity entity) {
+        boolean flag = false;
+        if (exEntity.get宛名() != null && entity.get宛名() != null) {
+            IShikibetsuTaisho ex宛名 = ShikibetsuTaishoFactory.createKojin(exEntity.get宛名());
+            IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
+            if (!ex宛名.get住所().get郵便番号().equals(宛名.get住所().get郵便番号())) {
+                flag = true;
+            } else if (!ex宛名.get住所().get町域コード().equals(宛名.get住所().get町域コード())) {
+                flag = true;
+            } else if (!ex宛名.get行政区画().getGyoseiku().getコード().equals(宛名.get行政区画().getGyoseiku().getコード())) {
+                flag = true;
+            } else if (!ex宛名.get世帯コード().equals(宛名.get世帯コード())) {
+                flag = true;
+            }
+        } else if (!exEntity.get対象世帯員().getShichosonCode().equals(entity.get対象世帯員().getShichosonCode())) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    private boolean isChangeShotaiCode(TaishoSetaiinEntity ex対象世帯員, TaishoSetaiinEntity 対象世帯員) {
+        return !ex対象世帯員.getShotaiCode().equals(対象世帯員.getShotaiCode());
+
+    }
+
+    private enum チェック項目 implements ICheckTarget {
+
+        target1(チェック項目名.toString(), 定数_住所.toString(), CheckShubetsu.文字切れ);
+
+        private final RString itemName;
+        private final RString printName;
+        private final CheckShubetsu checkShubetsu;
+
+        private チェック項目(String itemName, String printName, CheckShubetsu checkShubetsu) {
+            this.itemName = new RString(itemName);
+            this.printName = new RString(printName);
+            this.checkShubetsu = checkShubetsu;
+        }
+
+        @Override
+        public RString getItemName() {
+            return this.itemName;
+        }
+
+        @Override
+        public RString getPrintName() {
+            return this.printName;
+        }
+
+        @Override
+        public CheckShubetsu getCheckShubetsu() {
+            return this.checkShubetsu;
+        }
+    }
+
+    private enum 特定項目 implements ISpecificKey {
+
+        key1(KijunShunyugakuTekiyoOshiraseTsuchishoSource.ITEM_HIHOKENSHANO1, 定数_被保険者番号.toString());
+
+        private final RString itemName;
+
+        private final RString printName;
+
+        private 特定項目(String itemName, String printName) {
+            this.itemName = new RString(itemName);
+            this.printName = new RString(printName);
+        }
+
+        @Override
+        public RString getItemName() {
+            return this.itemName;
+        }
+
+        @Override
+        public RString getPrintName() {
+            return this.printName;
+        }
+    }
+
+    private RString doDecimal編集(Decimal number) {
+        if (null == number) {
+            return RString.EMPTY;
+        }
+        return DecimalFormatter.toRString(number, 0);
+    }
+
+    private RString doFlexibleDate編集(FlexibleDate day) {
+        if (null == day) {
+            return RString.EMPTY;
+        }
+        return new RString(day.toString());
+    }
+
+    private RString doFlexibleYear編集(FlexibleYear year) {
+        if (null == year) {
+            return RString.EMPTY;
+        }
+        return new RString(year.toString());
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
+        }
+        return RString.EMPTY;
     }
 
     private Decimal 合計(Decimal a, Decimal b) {
