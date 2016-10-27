@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihyoShokaiDataModel;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060012.DBC0060012TransitionEventName.検索結果一覧へ;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060012.KagoMoshitatePanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060012.KyotakuServiceKagoMoshitatePanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0060012.KagoMoshitatePanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0060012.KagoMoshitatePanelValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  * @reamsid_L DBC-2960-030 chenxiangyu
  */
-public class KagoMoshitatePanel {
+public class KyotakuServiceKagoMoshitatePanel {
 
     /**
      * 画面の初期化メソッドです。
@@ -38,7 +38,7 @@ public class KagoMoshitatePanel {
      * @param div 居宅サービスの給付管理照会のDIVです。
      * @return 居宅サービスの給付管理照会
      */
-    public ResponseData<KagoMoshitatePanelDiv> onLoad(KagoMoshitatePanelDiv div) {
+    public ResponseData<KyotakuServiceKagoMoshitatePanelDiv> onLoad(KyotakuServiceKagoMoshitatePanelDiv div) {
         KyufuKanrihyoShokaiDataModel 給付管理票 = ViewStateHolder.get(
                 ViewStateKeys.給付管理票200604Entity, KyufuKanrihyoShokaiDataModel.class);
         div.getCommonKaigpAtenainfoChildDiv1().initialize(new ShikibetsuCode(給付管理票.get識別コード()));
@@ -65,7 +65,7 @@ public class KagoMoshitatePanel {
      * @param div 居宅サービスの給付管理照会のDIVです
      * @return 居宅サービスの給付管理照会
      */
-    public ResponseData<KagoMoshitatePanelDiv> onClick_btnSave(KagoMoshitatePanelDiv div) {
+    public ResponseData<KyotakuServiceKagoMoshitatePanelDiv> onClick_btnSave(KyotakuServiceKagoMoshitatePanelDiv div) {
         return ResponseData.of(div).forwardWithEventName(検索結果一覧へ).respond();
     }
 
@@ -78,7 +78,7 @@ public class KagoMoshitatePanel {
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
-    private KagoMoshitatePanelHandler getHandler(KagoMoshitatePanelDiv div) {
+    private KagoMoshitatePanelHandler getHandler(KyotakuServiceKagoMoshitatePanelDiv div) {
         return new KagoMoshitatePanelHandler(div);
     }
 

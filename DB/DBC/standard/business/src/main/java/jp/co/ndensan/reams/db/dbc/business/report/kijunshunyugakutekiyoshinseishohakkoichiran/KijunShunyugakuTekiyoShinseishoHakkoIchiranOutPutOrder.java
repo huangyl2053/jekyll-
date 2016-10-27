@@ -31,11 +31,11 @@ public enum KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder implements IR
     /**
      * 世帯コード
      */
-    世帯コード("0008", "世帯コード", "\"ShikibetsuTaisho\".\"setaiCode\""),
+    世帯コード("0008", "世帯コード", "T2.\"shotaiCode\""),
     /**
      * 市町村コード
      */
-    市町村コード("0016", "市町村コード", "\"T2\".\"shichosonCode\"");
+    市町村コード("0016", "市町村コード", "T2.\"shichosonCode\"");
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
