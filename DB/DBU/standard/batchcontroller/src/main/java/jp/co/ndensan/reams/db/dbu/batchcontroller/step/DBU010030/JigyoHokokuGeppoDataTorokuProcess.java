@@ -36,6 +36,12 @@ public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<JigyouHo
     @BatchWriter
     private BatchPermanentTableWriter<DbT7021JigyoHokokuTokeiDataEntity> dbT7021EntityWriter;
     private static final int INDEX_4 = 4;
+    private static final RString 構成市町村区分_1 = new RString("1");
+    private static final RString 旧市町村区分_1 = new RString("1");
+    private static final RString 構成市町村区分_0 = new RString("0");
+    private static final RString 旧市町村区分_0 = new RString("0");
+    private static final RString 給付集計区分_1 = new RString("1");
+    private static final RString 給付集計区分_2 = new RString("2");
 
     @Override
     protected void initialize() {
@@ -63,7 +69,31 @@ public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<JigyouHo
             dbT7021Entity.setShukeiTaishoYSeireki(new FlexibleYear(processParameter.get集計年月().substring(0, INDEX_4)));
             dbT7021Entity.setShukeiTaishoM(processParameter.get集計年月().substring(INDEX_4));
         }
-        // TODO  内部QA：1757 Redmine：#102256(統計対象区分,市町村コード,表番号の取得方式が知らない、一時固定値を使用します)
+        if ((構成市町村区分_1.equals(processParameter.get構成市町村区分()))
+                || (構成市町村区分_1.equals(processParameter.get構成市町村区分())
+                && 旧市町村区分_1.equals(processParameter.get旧市町村区分()))) {
+            dbT7021Entity.setToukeiTaishoKubun(new RString("2"));
+        }
+        if (旧市町村区分_1.equals(processParameter.get旧市町村区分())) {
+            dbT7021Entity.setToukeiTaishoKubun(new RString("3"));
+        }
+        if (構成市町村区分_0.equals(processParameter.get構成市町村区分())
+                && 旧市町村区分_0.equals(processParameter.get旧市町村区分())) {
+            dbT7021Entity.setToukeiTaishoKubun(new RString("1"));
+        }
+        if (旧市町村区分_1.equals(processParameter.get旧市町村区分())) {
+            if (給付集計区分_1.equals(processParameter.get給付集計区分())) {
+                dbT7021Entity.setHyoNo(new Code("11"));
+            } else if (給付集計区分_2.equals(processParameter.get給付集計区分())) {
+                dbT7021Entity.setHyoNo(new Code("13"));
+            }
+        } else {
+            if (給付集計区分_1.equals(processParameter.get給付集計区分())) {
+                dbT7021Entity.setHyoNo(new Code("01"));
+            } else if (給付集計区分_2.equals(processParameter.get給付集計区分())) {
+                dbT7021Entity.setHyoNo(new Code("03"));
+            }
+        }
         dbT7021Entity.setToukeiTaishoKubun(new RString("1"));
         dbT7021Entity.setShichosonCode(new LasdecCode("123456"));
         dbT7021Entity.setHyoNo(new Code("2"));
