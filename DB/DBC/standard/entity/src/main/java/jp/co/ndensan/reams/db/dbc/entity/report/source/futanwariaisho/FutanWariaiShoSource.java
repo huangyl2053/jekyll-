@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.futanwariaisho;
 
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
@@ -24,6 +25,7 @@ public class FutanWariaiShoSource implements IReportSource {
     @ReportItem(name = "kofuYmd", length = 20, order = 1)
     public RString kofuYmd;
     @ReportPerson(id = "A")
+    public ShikibetsuCode shikibetsuCode;
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "hihokenshaNo", length = 25, order = 2)
     public RString hihokenshaNo;
