@@ -431,9 +431,11 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
                 ? RString.EMPTY : 喪失事由);
         csvEntity.set資格喪失日(dataToRString(entity.getDbV1001資格喪失年月日(), parameter));
         csvEntity.set資格喪失届日(dataToRString(entity.getDbV1001資格喪失届出年月日(), parameter));
-        HihokenshaKubunCode hihokenshaKubunCode = HihokenshaKubunCode.toValue(entity.getDbV1001被保険者区分コード());
-        csvEntity.set資格区分(isNull(hihokenshaKubunCode)
-                ? RString.EMPTY : hihokenshaKubunCode.get名称());
+        if (entity.getDbV1001被保険者区分コード() != null && !entity.getDbV1001被保険者区分コード().isEmpty()) {
+            HihokenshaKubunCode hihokenshaKubunCode = HihokenshaKubunCode.toValue(entity.getDbV1001被保険者区分コード());
+            csvEntity.set資格区分(isNull(hihokenshaKubunCode)
+                    ? RString.EMPTY : hihokenshaKubunCode.get名称());
+        }
         if (FLAG.equals(entity.getDbV1001住所地特例フラグ())) {
             csvEntity.set住所地特例状態(特例状態住特);
         } else {
