@@ -141,7 +141,7 @@ public class RenkeiDataShutsuryokuSikakuSakuseiSoshitsuHandler {
 
     private void 出力対象IF制御() {
         FlexibleDate 法改正施行年月日 = get法改正施行年月日と厚労省IF識別コード().get法改正施行年月日();
-        if (法改正施行年月日.isBefore(FlexibleDate.getNowDate())) {
+        if (法改正施行年月日.isEmpty()) {
             div.getRadIfShubetu().setSelectedKey(IF種別_新);
             div.getRadIfShubetu().setDisabled(true);
             iF種別新画面表示();
