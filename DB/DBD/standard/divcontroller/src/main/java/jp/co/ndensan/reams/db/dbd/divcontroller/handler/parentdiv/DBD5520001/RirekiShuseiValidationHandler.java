@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5520001.RirekiShuseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5520001.dgRirekiIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 特殊修正画面のバリデーションハンドラークラスです。
@@ -73,12 +75,16 @@ public class RirekiShuseiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         boolean hasFlag = false;
         int count = 0;
+        if (KU_BUN_追.equals(compareRow.getKubun()) || compareRow.getTsuikaKubun().isValue()) {
+            count = 1;
+        }
         for (dgRirekiIchiran_Row row : div.getDgRirekiIchiran().getDataSource()) {
-            if (compareRow.getNinteiNaiyo().equals(row.getNinteiNaiyo())
-                    && compareRow.getDataKubun().equals(row.getDataKubun())
-                    && compareRow.getNiteiDay().getValue().compareTo(row.getNiteiDay().getValue()) == 0
-                    && compareRow.getYokaigodo().equals(row.getYokaigodo())
-                    && compareRow.getYukoKaishi().getValue().compareTo(row.getYukoKaishi().getValue()) == 0
+            RirekiShuseiBusiness business
+                    = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
+            if (business == null || !YukoMukoKubun.有効.getコード().equals(business.get受給者台帳().get有効無効区分().value())) {
+                continue;
+            }
+            if (compareRow.getYukoKaishi().getValue().compareTo(row.getYukoKaishi().getValue()) == 0
                     && compareRow.getYukoShuryo().getValue().compareTo(row.getYukoShuryo().getValue()) == 0) {
                 count = count + 1;
             }
