@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shikyushinseishinsa.Shikyushin
 import jp.co.ndensan.reams.db.dbc.definition.core.shinnsanaiyo.ShinsaNaiyoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011.DBC0720011StateName;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011.DBC0720011StateName.申請審査;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011.DBC0720011StateName.申請検索;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011.DBC0720011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011.JutakuKaishuhiShikyuShinseiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011.JutakuKaishuhiShikyuShinseiPanelVlaidationHandler;
@@ -186,7 +187,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      * @param div JutakuKaishuhiShikyuShinseiPanelDiv
      * @return ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv>
      */
-    public ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv> onClick_btnReSearch(JutakuKaishuhiShikyuShinseiPanelDiv div) {
+    public ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv> onClick_btnResearch(JutakuKaishuhiShikyuShinseiPanelDiv div) {
 
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage("URZQ00070", "入力内容を破棄してよいか確認する");
@@ -195,7 +196,8 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
-        return ResponseData.of(div).setState(申請審査);
+        return ResponseData.of(div).setState(申請検索);
+
     }
 
     /**
