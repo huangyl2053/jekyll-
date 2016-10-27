@@ -64,9 +64,9 @@ public class SogoJigyoTaishoshaToroku {
                 .put(DBC1720011ViewStateKey.申請一覧情報, 総合事業対象者一覧ArrayList);
         ViewStateHolder
                 .put(DBC1720011ViewStateKey.申請一覧情報と状態, handler.onLoad(識別コード, 被保険者番号, 総合事業対象者一覧));
-        return ResponseData.of(div)
-                .rootTitle(menuID.equals(ResponseHolder.getMenuID()) ? ROOTTITLE_申請メニュ : ROOTTITLE_承認メニュ)
-                .addMessage(message).respond();
+        return ResponseData.of(div).respond();
+//                .rootTitle(menuID.equals(ResponseHolder.getMenuID()) ? ROOTTITLE_申請メニュ : ROOTTITLE_承認メニュ)
+//                .addMessage(message).respond();  TODO
     }
 
     /**
