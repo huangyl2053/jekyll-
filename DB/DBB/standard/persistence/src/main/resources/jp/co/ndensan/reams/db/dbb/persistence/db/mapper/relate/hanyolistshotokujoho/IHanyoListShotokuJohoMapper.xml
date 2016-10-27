@@ -52,7 +52,6 @@
 	B."fukaNendo"                                                       AS 賦課年度,
 	B."hihokenshaNo"                                                    AS 被保険者番号,
 	B."hokenryoDankai"                                                  AS 保険料段階,
-	B."hokenryoDankaiKarisanntei"                                       AS 保険料段階仮算定時,
 	<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
 
@@ -84,8 +83,7 @@
                         SELECT
                                 DbT2002."fukaNendo",
                                 DbT2002."hihokenshaNo",
-                                DbT2002."hokenryoDankai",
-                                DbT2002."hokenryoDankaiKarisanntei"
+                                DbT2002."hokenryoDankai"
                         FROM
                                 rgdb."DbT2002Fuka" AS DbT2002
                         INNER JOIN (
@@ -186,7 +184,6 @@
         <result property="賦課年度" column="賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="保険料段階" column="保険料段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="保険料段階仮算定時" column="保険料段階仮算定時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="宛名Entity"
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先Entity"
