@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.core.memo.MemoShikibetsuTaisho;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.divcontroller.controller.commonchilddiv.memo.MemoNyuryoku.MemoNyuryokuHandler;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -206,11 +207,18 @@ public class NushiJuminJoho {
      * @return NushiJuminJohoDiv
      */
     public ResponseData<NushiJuminJohoDiv> onClick_btnHozonBack(NushiJuminJohoDiv div) {
-        List<ShotokushokaihyoTaishoSetaiin> 所得照会票発行対象世帯員リスト = ViewStateHolder
-                .get(ViewStateKeys.所得照会票発行対象世帯員, List.class);
-        所得照会票発行対象世帯員リスト = getHandler(div).save所得照会票発行対象世帯員(所得照会票発行対象世帯員リスト);
-        ViewStateHolder.put(ViewStateKeys.所得照会票発行対象世帯員, (Serializable) 所得照会票発行対象世帯員リスト);
-        return ResponseData.of(div).setState(DBB1150001StateName.所得照会票個別発行個人一覧);
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+        }
+        if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.保存の確認.getMessage().getCode()))
+                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            List<ShotokushokaihyoTaishoSetaiin> 所得照会票発行対象世帯員リスト = ViewStateHolder
+                    .get(ViewStateKeys.所得照会票発行対象世帯員, List.class);
+            所得照会票発行対象世帯員リスト = getHandler(div).save所得照会票発行対象世帯員(所得照会票発行対象世帯員リスト);
+            ViewStateHolder.put(ViewStateKeys.所得照会票発行対象世帯員, (Serializable) 所得照会票発行対象世帯員リスト);
+            return ResponseData.of(div).setState(DBB1150001StateName.所得照会票個別発行個人一覧);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
