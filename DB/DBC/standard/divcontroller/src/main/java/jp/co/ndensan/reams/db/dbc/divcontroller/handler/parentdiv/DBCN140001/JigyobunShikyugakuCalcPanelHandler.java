@@ -19,8 +19,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -106,6 +111,24 @@ public class JigyobunShikyugakuCalcPanelHandler {
     }
 
     /**
+     * 被保険者氏名の取得
+     *
+     * @param 識別コード ShikibetsuCode
+     */
+    public void get被保険者氏名(ShikibetsuCode 識別コード) {
+        if (識別コード != null && !識別コード.isEmpty()) {
+            IShikibetsuTaisho 宛名識別対象情報 = ShikibetsuTaishoService.getShikibetsuTaishoFinder().get識別対象(
+                    GyomuCode.DB介護保険, 識別コード, KensakuYusenKubun.住登外優先);
+            if (宛名識別対象情報 != null && 宛名識別対象情報.get名称() != null && 宛名識別対象情報.get名称().getName() != null
+                    && !宛名識別対象情報.get名称().getName().isEmpty()) {
+                div.getChushutsuJoken().getTxtHihokenshaMei().setValue(宛名識別対象情報.get名称().getName().value());
+            }
+        } else {
+            div.getChushutsuJoken().getTxtHihokenshaMei().setValue(RString.EMPTY);
+        }
+    }
+
+    /**
      * 受取年月指定RAD状態設定です。
      */
     public void set受取年月指定RAD状態() {
@@ -114,6 +137,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
         div.getChushutsuJoken().getTxtZenkaiUketoriTime().setDisabled(false);
         div.getChushutsuJoken().getTxtUketoriYM().setRequired(true);
         div.getChushutsuJoken().getTxtHihokenshaNo().setDisabled(true);
+        div.getChushutsuJoken().getTxtHihokenshaMei().setDisabled(true);
         div.getChushutsuJoken().getDdlNendo().setDisabled(true);
         div.getChushutsuJoken().getBtnHihokenshaSearch().setDisabled(true);
     }
@@ -127,6 +151,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
         div.getChushutsuJoken().getTxtZenkaiUketoriTime().setDisabled(true);
         div.getChushutsuJoken().getTxtUketoriYM().setRequired(false);
         div.getChushutsuJoken().getTxtHihokenshaNo().setDisabled(false);
+        div.getChushutsuJoken().getTxtHihokenshaMei().setDisabled(false);
         div.getChushutsuJoken().getDdlNendo().setDisabled(false);
         div.getChushutsuJoken().getBtnHihokenshaSearch().setDisabled(false);
     }
