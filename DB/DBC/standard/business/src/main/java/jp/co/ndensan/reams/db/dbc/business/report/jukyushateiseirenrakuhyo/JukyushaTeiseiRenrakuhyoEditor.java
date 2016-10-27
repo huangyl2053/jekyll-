@@ -67,6 +67,7 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
     public JukyushaTeiseiRenrakuhyoSource edit(JukyushaTeiseiRenrakuhyoSource source) {
 
         set年月日(source);
+        set文字編集(source);
         source.hokenshaName = 市町村名称;
         source.shoHokenshaNo = 出力用受給者訂正情報Entity.get証記載保険者番号();
         source.hihokenshaNo = 出力用受給者訂正情報Entity.get被保険者番号();
@@ -93,19 +94,12 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
         source.ninteiShinseiKbn = 出力用受給者訂正情報Entity.get認定申請中区分();
         source.serviceKbn = 出力用受給者訂正情報Entity.getｻｰﾋﾞｽ区分();
         source.tokuGenTaisho = 出力用受給者訂正情報Entity.get特例減額措置対象();
-        source.shokuFutanGendoGaKu = 文字編集(出力用受給者訂正情報Entity.get食費負担限度額());
-        source.unitKoshitsu = 文字編集(出力用受給者訂正情報Entity.getﾕﾆｯﾄ型個室());
-        source.unitJunKoshitsu = 文字編集(出力用受給者訂正情報Entity.getﾕﾆｯﾄ型準個室());
-        source.juraiKoshitsuT = 文字編集(出力用受給者訂正情報Entity.get従来型個室特());
-        source.juraiKishitsuR = 文字編集(出力用受給者訂正情報Entity.get従来型個室老療());
-        source.tashoshitsu = 文字編集(出力用受給者訂正情報Entity.get多床室());
-        source.shin1 = 文字編集(出力用受給者訂正情報Entity.get新１());
-        source.shin2 = 文字編集(出力用受給者訂正情報Entity.get新２());
-        source.shin3 = 文字編集(出力用受給者訂正情報Entity.get新３());
         source.koikiHokenshaNO = 出力用受給者訂正情報Entity.get広域保険者番号();
         source.rokenShichosonNo = 出力用受給者訂正情報Entity.get老人保健市町村番号();
         source.rokenJukyushaNO = 出力用受給者訂正情報Entity.get老人保健受給者番号();
-        source.shaKyufuritsu = 軽減率編集(出力用受給者訂正情報Entity.get軽減率());
+        if (出力用受給者訂正情報Entity.get軽減率() != null) {
+            source.shaKyufuritsu = 軽減率編集(出力用受給者訂正情報Entity.get軽減率());
+        }
         if (出力用受給者訂正情報Entity.get小規模居宅ｻｰﾋﾞｽ利用() != null) {
             source.shokiboKyotakuUmu = new RString(出力用受給者訂正情報Entity.get小規模居宅ｻｰﾋﾞｽ利用().toString());
         }
@@ -247,65 +241,116 @@ public class JukyushaTeiseiRenrakuhyoEditor implements IJukyushaTeiseiRenrakuhyo
     }
 
     private RString 後文字数分編集(RString 被保険者氏名カナ) {
-        StringBuilder sb = new StringBuilder();
-        if (LENGTH_TWENTYFIVE <= 被保険者氏名カナ.length()) {
-            return 被保険者氏名カナ.substring(LENGTH_ZERO, LENGTH_TWENTYFIVE);
-        } else {
-            for (int i = 被保険者氏名カナ.length(); i < LENGTH_TWENTYFIVE; i++) {
-                sb.append(RString.HALF_SPACE);
+        if (被保険者氏名カナ != null) {
+            StringBuilder sb = new StringBuilder();
+            if (LENGTH_TWENTYFIVE <= 被保険者氏名カナ.length()) {
+                return 被保険者氏名カナ.substring(LENGTH_ZERO, LENGTH_TWENTYFIVE);
+            } else {
+                for (int i = 被保険者氏名カナ.length(); i < LENGTH_TWENTYFIVE; i++) {
+                    sb.append(RString.HALF_SPACE);
+                }
+                return 被保険者氏名カナ.concat(sb.toString());
             }
-            return 被保険者氏名カナ.concat(sb.toString());
         }
+        return RString.EMPTY;
     }
 
     private RString 前文字数分編集１(RString 支給限度基準額1) {
-        StringBuilder sb = new StringBuilder();
-        if (支給限度基準額1.length() <= LENGTH_SIX) {
-            for (int i = 支給限度基準額1.length(); i < LENGTH_SIX; i++) {
-                sb.append(RString.HALF_SPACE);
+        if (支給限度基準額1 != null) {
+            StringBuilder sb = new StringBuilder();
+            if (支給限度基準額1.length() <= LENGTH_SIX) {
+                for (int i = 支給限度基準額1.length(); i < LENGTH_SIX; i++) {
+                    sb.append(RString.HALF_SPACE);
+                }
             }
+            return new RString(sb.append(支給限度基準額1).toString());
         }
-        return new RString(sb.append(支給限度基準額1).toString());
+        return RString.EMPTY;
     }
 
     private RString 前文字数分編集２(RString 支給限度基準額2) {
-        StringBuilder sb = new StringBuilder();
-        if (支給限度基準額2.length() <= LENGTH_TWO) {
-            for (int i = 支給限度基準額2.length(); i < LENGTH_TWO; i++) {
-                sb.append(RString.HALF_SPACE);
+        if (支給限度基準額2 != null) {
+            StringBuilder sb = new StringBuilder();
+            if (支給限度基準額2.length() <= LENGTH_TWO) {
+                for (int i = 支給限度基準額2.length(); i < LENGTH_TWO; i++) {
+                    sb.append(RString.HALF_SPACE);
+                }
             }
+            return new RString(sb.append(支給限度基準額2).toString());
         }
-        return new RString(sb.append(支給限度基準額2).toString());
+        return RString.EMPTY;
     }
 
     private RString 負担額編集(RString 負担額) {
-        StringBuilder sb = new StringBuilder();
-        if (負担額.length() <= LENGTH_FIVE) {
-            for (int i = 負担額.length(); i < LENGTH_FIVE; i++) {
-                sb.append(RString.HALF_SPACE);
+        if (負担額 != null) {
+            StringBuilder sb = new StringBuilder();
+            if (負担額.length() <= LENGTH_FIVE) {
+                for (int i = 負担額.length(); i < LENGTH_FIVE; i++) {
+                    sb.append(RString.HALF_SPACE);
+                }
             }
+            return new RString(sb.append(負担額).toString());
         }
-        return new RString(sb.append(負担額).toString());
+        return RString.EMPTY;
     }
 
     private RString 給付率編集(RString 給付率) {
-        StringBuilder sb = new StringBuilder();
-        if (給付率.length() <= LENGTH_THREE) {
-            for (int i = 給付率.length(); i < LENGTH_THREE; i++) {
-                sb.append(RString.HALF_SPACE);
+        if (給付率 != null) {
+            StringBuilder sb = new StringBuilder();
+            if (給付率.length() <= LENGTH_THREE) {
+                for (int i = 給付率.length(); i < LENGTH_THREE; i++) {
+                    sb.append(RString.HALF_SPACE);
+                }
             }
+            return new RString(sb.append(給付率).toString());
         }
-        return new RString(sb.append(給付率).toString());
+        return RString.EMPTY;
     }
 
     private RString 軽減率編集(RString 軽減率) {
-        StringBuilder sb = new StringBuilder();
-        if (軽減率.length() <= LENGTH_FOUR) {
-            for (int i = 軽減率.length(); i < LENGTH_FOUR; i++) {
-                sb.append(RString.HALF_SPACE);
+        if (半角アスタリスク1.equals(軽減率)) {
+            return 半角アスタリスク4;
+        } else {
+            StringBuilder sb = new StringBuilder();
+            if (軽減率.length() <= LENGTH_FOUR) {
+                for (int i = 軽減率.length(); i < LENGTH_FOUR; i++) {
+                    sb.append(RString.HALF_SPACE);
+                }
             }
+            return new RString(sb.append(軽減率).toString());
         }
-        return new RString(sb.append(軽減率).toString());
+    }
+
+    private void set文字編集(JukyushaTeiseiRenrakuhyoSource source) {
+
+        if (出力用受給者訂正情報Entity.get食費負担限度額() != null) {
+            source.shokuFutanGendoGaKu = 文字編集(出力用受給者訂正情報Entity.get食費負担限度額());
+        }
+        if (出力用受給者訂正情報Entity.getﾕﾆｯﾄ型個室() != null) {
+            source.unitKoshitsu = 文字編集(出力用受給者訂正情報Entity.getﾕﾆｯﾄ型個室());
+        }
+        if (出力用受給者訂正情報Entity.getﾕﾆｯﾄ型準個室() != null) {
+            source.unitJunKoshitsu = 文字編集(出力用受給者訂正情報Entity.getﾕﾆｯﾄ型準個室());
+        }
+        if (出力用受給者訂正情報Entity.get従来型個室特() != null) {
+            source.juraiKoshitsuT = 文字編集(出力用受給者訂正情報Entity.get従来型個室特());
+        }
+        if (出力用受給者訂正情報Entity.get従来型個室老療() != null) {
+            source.juraiKishitsuR = 文字編集(出力用受給者訂正情報Entity.get従来型個室老療());
+        }
+        if (出力用受給者訂正情報Entity.get多床室() != null) {
+            source.tashoshitsu = 文字編集(出力用受給者訂正情報Entity.get多床室());
+        }
+        if (出力用受給者訂正情報Entity.get新１() != null) {
+            source.shin1 = 文字編集(出力用受給者訂正情報Entity.get新１());
+        }
+        if (出力用受給者訂正情報Entity.get新２() != null) {
+            source.shin2 = 文字編集(出力用受給者訂正情報Entity.get新２());
+        }
+        if (出力用受給者訂正情報Entity.get新３() != null) {
+            source.shin3 = 文字編集(出力用受給者訂正情報Entity.get新３());
+        }
+
     }
 
     private RString 文字編集(RString 文字) {
