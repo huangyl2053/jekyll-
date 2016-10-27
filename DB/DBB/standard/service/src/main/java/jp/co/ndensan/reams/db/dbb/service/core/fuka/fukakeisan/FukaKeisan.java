@@ -565,7 +565,7 @@ public class FukaKeisan extends FukaKeisanFath {
                 param.get資格の情報().get資格喪失年月日(), 月別保険料段階, 月別ランク情報);
         年額保険料パラメータ.set年額賦課根拠(年額賦課根拠);
 
-        NengakuSeigyoJoho 年額制御情報 = get年額制御情報();
+        NengakuSeigyoJoho 年額制御情報 = get年額制御情報(param.get賦課年度());
         年額保険料パラメータ.set年額制御情報(年額制御情報);
 
         NengakuHokenryoKeisan 年額保険料の計算 = InstanceProvider.create(NengakuHokenryoKeisan.class);
