@@ -19,8 +19,6 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8020001.DBC8020001MainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8020001.DBC8020001MainDivSpec;
 import jp.co.ndensan.reams.db.dbc.service.core.jigyogasanjigyobunmeisaishosakusei.DBC8020001MainManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
@@ -96,7 +94,6 @@ public class DBC8020001MainHandler {
         } else if (メニューID_DBCMNL3003.equals(メニューID)) {
             div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200102.getReportId());
         }
-        RString 振込単位 = DbBusinessConfig.get(ConfigNameDBC.振込単位, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         NoInputMessages checkMessage = new NoInputMessages(UrErrorMessages.実行不可, メッセージ.toString());

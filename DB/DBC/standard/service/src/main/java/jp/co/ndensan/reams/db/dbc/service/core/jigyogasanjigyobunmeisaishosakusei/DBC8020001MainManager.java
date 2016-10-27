@@ -36,6 +36,7 @@ public class DBC8020001MainManager {
     }
 
     /**
+     * 前回処理情報取得のメソッドです。
      *
      * @param サブ業務コード SubGyomuCode
      * @param 市町村コード LasdecCode
