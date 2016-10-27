@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class TokuchoDoteiShori {
 
     private static final RString モード_単一保険者 = new RString("1");
+    private static final RString ROOTTITLE = new RString("特徴対象者同定（一括）");
 
     /**
      * 画面のonLoadイベント
@@ -32,13 +33,20 @@ public class TokuchoDoteiShori {
      * @return div
      */
     public ResponseData<TokuchoDoteiShoriDiv> onLoad(TokuchoDoteiShoriDiv div) {
+        ResponseData<TokuchoDoteiShoriDiv> responseData;
         Entry<RString, Boolean> result = getHandler(div).onload();
         ViewStateHolder.put(ViewStateKeys.特徴対象者同定実行FLAG, result.getValue());
         ViewStateHolder.put(ViewStateKeys.特徴対象者同定STATE, result.getKey());
+
         if (モード_単一保険者.equals(result.getKey())) {
-            return ResponseData.of(div).setState(DBB2710001StateName.単一市町村);
+            responseData = ResponseData.of(div).setState(DBB2710001StateName.単一市町村);
+            responseData.setRootTitle(ROOTTITLE);
+            return responseData;
+        } else {
+            responseData = ResponseData.of(div).setState(DBB2710001StateName.広域保険者);
+            responseData.setRootTitle(ROOTTITLE);
+            return responseData;
         }
-        return ResponseData.of(div).setState(DBB2710001StateName.広域保険者);
     }
 
     /**
