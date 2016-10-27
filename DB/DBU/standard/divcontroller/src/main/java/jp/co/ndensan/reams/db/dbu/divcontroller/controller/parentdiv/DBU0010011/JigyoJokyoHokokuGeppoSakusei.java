@@ -47,6 +47,7 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onLoad(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        div.setKijun(new RString("nashi"));
         div.setHdnJkkoutani(集計のみ);
         div.setKakuteiHokokuYM(報告年月_完全未確定);
         getHandler(div).onLoad(get過去集計情報の取得());
@@ -132,6 +133,9 @@ public class JigyoJokyoHokokuGeppoSakusei {
         div.setHdnJkkoutani(過去の集計結果を印刷);
         div.getRadGappeiShichoson().setDisabled(false);
         div.getRadKoikiRengo().setDisabled(false);
+        if (new RString(div.getRadGappeiShichoson().getControlValue().toString()).equals(new RString("旧市町村分")) || new RString(div.getRadKoikiRengo().getControlValue().toString()).equals(new RString("構成市町村分"))) {
+            div.getBtnShichosonSelect().setDisabled(false);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -163,14 +167,19 @@ public class JigyoJokyoHokokuGeppoSakusei {
      * @return ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoSakuseiDiv> onChange_ddlKakoHokokuYM(JigyoJokyoHokokuGeppoSakuseiDiv div) {
-        getHandler(div).set月報報告_一般状況1_11onClick();
-        getHandler(div).set月報報告_一般状況12_14_現物分onClick();
-        getHandler(div).set月報報告_保険給付決定_現物分_onClick();
-        getHandler(div).set月報報告_一般状況12_14_償還分();
-        getHandler(div).set月報報告_保険給付決定_償還分();
-        getHandler(div).set月報報告_保険給付決定_高額分();
-        getHandler(div).set月報報告_保険給付決定_高額合算分();
-        getHandler(div).setチェックボックス設定();
+        if (!RString.isNullOrEmpty(new RString(div.getTblJikkoTani().getDdlKakoHokokuYM().getSelectedValue().toString()))) {
+            getHandler(div).set月報報告_一般状況1_11onClick();
+            getHandler(div).set月報報告_一般状況12_14_現物分onClick();
+            getHandler(div).set月報報告_保険給付決定_現物分_onClick();
+            getHandler(div).set月報報告_一般状況12_14_償還分();
+            getHandler(div).set月報報告_保険給付決定_償還分();
+            getHandler(div).set月報報告_保険給付決定_高額分();
+            getHandler(div).set月報報告_保険給付決定_高額合算分();
+            getHandler(div).setチェックボックス設定();
+        } else {
+            getHandler(div).set日付時刻の空白設定();
+            onChange_cblOutputTaishoAll(div);
+        }
         return ResponseData.of(div).respond();
     }
 

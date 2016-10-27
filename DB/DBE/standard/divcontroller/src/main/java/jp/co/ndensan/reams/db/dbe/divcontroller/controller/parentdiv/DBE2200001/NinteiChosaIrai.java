@@ -437,7 +437,7 @@ public class NinteiChosaIrai {
         for (dgWaritsukeZumiShinseishaIchiran_Row row : waritsukeZumiShinseishaIchiran) {
             if (MIWARITSUKE.equals(row.getJotai())) {
                 ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
-                int 認定調査依頼履歴番号 = 1;
+                int 認定調査依頼履歴番号 = Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString());
                 RString 調査員コード = div.getTxtChosainCode().getValue();
                 RString 認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class);
 
@@ -457,7 +457,8 @@ public class NinteiChosaIrai {
                             .set認定調査回数(0)
                             .set認定調査依頼年月日(認定調査依頼年月日)
                             .set認定調査期限年月日(認定調査期限年月日)
-                            .set論理削除フラグ(false).build();
+                            .set論理削除フラグ(false)
+                            .set認定調査依頼履歴番号(認定調査依頼履歴番号 + 1).build();
                     ninteichosaIraiJohoManager.save認定調査依頼情報(ninteichosaIraiJoho);
                     update要介護認定申請情報(申請書管理番号, 調査員コード, 認定調査委託先コード);
                 }
@@ -472,7 +473,8 @@ public class NinteiChosaIrai {
                             .set認定調査回数(1)
                             .set認定調査依頼年月日(認定調査依頼年月日)
                             .set認定調査期限年月日(認定調査期限年月日)
-                            .set論理削除フラグ(false).build();
+                            .set論理削除フラグ(false)
+                            .set認定調査依頼履歴番号(認定調査依頼履歴番号 + 1).build();
                     ninteichosaIraiJohoManager.save認定調査依頼情報(ninteichosaIraiJoho);
                 }
 

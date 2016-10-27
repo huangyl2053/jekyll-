@@ -394,6 +394,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * {@inheritDoc}
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT7056GappeiShichosonEntity entity) {

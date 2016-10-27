@@ -44,7 +44,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @reamsid_L DBU-5600-010 linghuhang
  */
 public class JigyoJokyoHokokuNempoSakuei {
-
+    
     private static final int INT_ITTI = 1;
     private static final int INT_NI = 2;
     private static final int INT_YOU = 4;
@@ -68,6 +68,7 @@ public class JigyoJokyoHokokuNempoSakuei {
         枝番.add(処理枝番);
         RString 合併情報区分 = GappeiCityJohoBFinder.createInstance().getGappeijohokubun();
         div.setHiddenGappeiKoseiKubun(合併情報区分);
+        div.setKijun(new RString("nashi"));
         KanriJoho 管理情報 = ShichosonSecurityJoho.getKanriJoho(GyomuBunrui.介護事務);
         if (管理情報 != null && 管理情報.get導入形態コード() != null && !管理情報.get導入形態コード().isEmpty()) {
             導入形態コード = 管理情報.get導入形態コード().value();
@@ -341,14 +342,20 @@ public class JigyoJokyoHokokuNempoSakuei {
         ValidationMessageControlPairs validateForUpdate = getValidationHandler(div).validateForUpdate(
                 !RString.isNullOrEmpty(div.getHiddenGappei()), !RString.isNullOrEmpty(div.getHiddenKouiki()));
         respinseData(div, validateForUpdate);
-        
-        if (RString.isNullOrEmpty(div.getDdlHokokuNendo().getSelectedValue())
-                || RString.isNullOrEmpty(div.getDdlShukeiFromYM().getSelectedValue())
-                || RString.isNullOrEmpty(div.getDdlShukeiToYM().getSelectedValue())) {
-            return ResponseData.of(div).addValidationMessages(
-                    new JigyoJokyoHokokuNempoSakueiValidationHandler(div).check出力対象の指定を確認()).respond();
-        }   
-        
+        if (!RString.isNullOrEmpty(div.getRadJikkoTaniShukeiOnly().getSelectedKey())
+                || !RString.isNullOrEmpty(div.getRadJikkoTani2().getSelectedKey())) {
+            if (RString.isNullOrEmpty(div.getDdlHokokuNendo().getSelectedValue())
+                    || RString.isNullOrEmpty(div.getDdlShukeiFromYM().getSelectedValue())
+                    || RString.isNullOrEmpty(div.getDdlShukeiToYM().getSelectedValue())) {
+                return ResponseData.of(div).addValidationMessages(
+                        new JigyoJokyoHokokuNempoSakueiValidationHandler(div).check出力対象の指定を確認()).respond();
+            }
+        } else {
+            if (RString.isNullOrEmpty(div.getDdlKakoHokokuNendo().getSelectedValue())) {
+                return ResponseData.of(div).addValidationMessages(
+                        new JigyoJokyoHokokuNempoSakueiValidationHandler(div).check出力対象の指定を確認()).respond();
+            }
+        }
         if (div.getCblShutsuryokuTaishoYoshiki1().isAllSelected()) {
             ValidationMessageControlPairs 年報報告様式１２ = getValidationHandler(div).check月報未処理(get処理日付管理情報(SubGyomuCode.DBU介護統計報告,
                     Syorimei.月報報告一般状況１_１１.get名称(),
@@ -423,7 +430,7 @@ public class JigyoJokyoHokokuNempoSakuei {
                 HyojiUmu.表示する.getコード(), div.getHiddenDonyuKeitaiCode()).records();
         return ResponseData.of(getHandler(div).onClick_btnBatchParamSave(市町村情報, 引き継ぎデータ, 市町村識別, 現市町村情報, 合併市町村情報)).respond();
     }
-
+    
     private List<RString> get処理名() {
         List<RString> 処理名リスト = new ArrayList<>();
         for (Syorimei 処理名 : Syorimei.values()) {
@@ -431,7 +438,7 @@ public class JigyoJokyoHokokuNempoSakuei {
         }
         return 処理名リスト;
     }
-
+    
     private List<ShoriDateKanri> get処理日付管理情報(SubGyomuCode サブ業務コード, RString 処理名, FlexibleYear 年度, int 集計開始月, int 集計終了月) {
         List<ShoriDateKanri> 処理日付管理情報 = new ArrayList<>();
         for (int i = 集計開始月; i != 集計終了月;) {
@@ -470,7 +477,7 @@ public class JigyoJokyoHokokuNempoSakuei {
         }
         return 処理日付管理情報;
     }
-
+    
     private ResponseData<JigyoJokyoHokokuNempoSakueiDiv> check月報未処理(JigyoJokyoHokokuNempoSakueiDiv div) {
         if (div.getCblShutsuryokuTaishoHokenShokan().isAllSelected()) {
             if (審査年月.equals(div.getRadlblShukeiType5().getSelectedKey())) {
@@ -507,20 +514,20 @@ public class JigyoJokyoHokokuNempoSakuei {
         }
         return ResponseData.of(div).respond();
     }
-
+    
     private ResponseData<JigyoJokyoHokokuNempoSakueiDiv> respinseData(JigyoJokyoHokokuNempoSakueiDiv div, ValidationMessageControlPairs validateForUpdate) {
         if (validateForUpdate.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validateForUpdate).respond();
         }
         return ResponseData.of(div).respond();
     }
-
+    
     private JigyoJokyoHokokuNempoSakueiHandler getHandler(JigyoJokyoHokokuNempoSakueiDiv div) {
         return new JigyoJokyoHokokuNempoSakueiHandler(div);
     }
-
+    
     private JigyoJokyoHokokuNempoSakueiValidationHandler getValidationHandler(JigyoJokyoHokokuNempoSakueiDiv div) {
         return new JigyoJokyoHokokuNempoSakueiValidationHandler(div);
     }
-
+    
 }

@@ -72,6 +72,25 @@ public class ShichosonSentakuFinder {
         }
         return SearchResult.of(kenCodeList, 0, false);
     }
+    /**
+     * 合併市町村選択情報を取得する。
+     *
+     * @return 旧市町村選択情報取得
+     */
+    public SearchResult<ShichosonSelectorResult> getGapeiShichosonSentaku() {
+        List<DbT7056GappeiShichosonEntity> entityList = dac.selectfor合併市町村選択情報の取得();
+        if (entityList.isEmpty()) {
+            return SearchResult.of(Collections.<ShichosonSelectorResult>emptyList(), 0, false);
+        }
+        List<ShichosonSelectorResult> kenCodeList = new ArrayList();
+        for (DbT7056GappeiShichosonEntity entity : entityList) {
+            ShichosonSelectorResult result = new ShichosonSelectorResult();
+            result.set市町村コード(entity.getKyuShichosonCode());
+            result.set市町村名(entity.getKyuShichosonMeisho());
+            kenCodeList.add(result);
+        }
+        return SearchResult.of(kenCodeList, 0, false);
+    }
 
     /**
      * 構成市町村選択情報を取得する。

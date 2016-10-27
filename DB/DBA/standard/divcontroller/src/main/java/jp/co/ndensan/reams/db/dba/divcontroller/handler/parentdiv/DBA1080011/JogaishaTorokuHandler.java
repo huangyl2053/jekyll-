@@ -272,15 +272,6 @@ public class JogaishaTorokuHandler {
     }
     
     /**
-     * 識別コードLostFocusの場合、入力チェック実行します。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs shikibetsuCodeCheck() {
-        return createValidationHandler(div).shikibetsuCodeCheck();
-    }
-
-    /**
      * 確定するボタン押下の場合、入力チェック実行します。
      *
      * @return ValidationMessageControlPairs

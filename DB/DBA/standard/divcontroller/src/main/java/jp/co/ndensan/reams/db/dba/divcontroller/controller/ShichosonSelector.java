@@ -47,11 +47,15 @@ public class ShichosonSelector {
         RString 構成市町村モード = model.getShichosonModel();
         ResponseData<ShichosonSelectorDiv> response = new ResponseData<>();
         SearchResult<ShichosonSelectorResult> resultList = SearchResult.of(Collections.<ShichosonSelectorResult>emptyList(), 0, false);
+        if (RString.isNullOrEmpty(div.getKijun())) {
         if (KOUSEI_MODO_KYU.equals(構成市町村モード)) {
             resultList = service.getGapeiShichosonSentaku(FlexibleDate.getNowDate());
         }
         if (KOUSEI_MODO_KOUSEI.equals(構成市町村モード)) {
             resultList = service.getKouseiShichosonSentaku(FlexibleDate.getNowDate());
+        }
+        } else {
+            resultList = service.getGapeiShichosonSentaku();
         }
         getHandler(div).set一覧表示グリッド(resultList.records());
         response.data = div;

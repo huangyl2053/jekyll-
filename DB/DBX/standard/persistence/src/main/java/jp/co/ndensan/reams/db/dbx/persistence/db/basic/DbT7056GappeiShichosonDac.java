@@ -93,6 +93,23 @@ public class DbT7056GappeiShichosonDac implements ISaveable<DbT7056GappeiShichos
                         by(kyuShichosonCode)).
                 toList(DbT7056GappeiShichosonEntity.class);
     }
+ 
+    /**
+     * 合併市町村選択情報を取得します。
+     *
+     * @return List<DbT7056GappeiShichosonEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */    
+    @Transaction
+    public List<DbT7056GappeiShichosonEntity> selectfor合併市町村選択情報の取得() throws NullPointerException {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7056GappeiShichoson.class).
+                where(eq(hyojiUmu, new RString("1"))).
+                order(by(gappeiYMD, Order.DESC),
+                        by(kyuShichosonCode)).
+                toList(DbT7056GappeiShichosonEntity.class);
+    }
 
     /**
      * 合併市町村を全件返します。
