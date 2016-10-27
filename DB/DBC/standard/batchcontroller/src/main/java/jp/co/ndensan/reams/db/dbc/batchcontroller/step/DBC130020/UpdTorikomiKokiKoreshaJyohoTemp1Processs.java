@@ -52,18 +52,22 @@ public class UpdTorikomiKokiKoreshaJyohoTemp1Processs extends BatchProcessBase<K
     @Override
     protected void process(KokiKoreshaJyohoRealEntity entity) {
         文言設定flag = entity.get取込後期高齢者情報Entity().is文言設定flag();
-        if (entity.get件数() > 1) {
-            if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
-                entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_13);
+        if (entity.get件数() > 1 && ＩＦ種類_電算.equals(processParameter.getIF種類())) {
+            entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_13);
+            if (文言設定flag) {
                 entity.get取込後期高齢者情報Entity().setエラー文言(コード文言_住民コード);
-                entity.get取込後期高齢者情報Entity().setエラー区分(エラー区分);
+                文言設定flag = false;
             }
+            entity.get取込後期高齢者情報Entity().setエラー区分(エラー区分);
+        }
 
-            if (ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
-                entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_72);
+        if (entity.get件数() > 1 && ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
+            entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_72);
+            if (文言設定flag) {
                 entity.get取込後期高齢者情報Entity().setエラー文言(コード文言_住民コード);
-                entity.get取込後期高齢者情報Entity().setエラー区分(エラー区分);
+                文言設定flag = false;
             }
+            entity.get取込後期高齢者情報Entity().setエラー区分(エラー区分);
         }
         entity.get取込後期高齢者情報Entity().set文言設定flag(文言設定flag);
         一時tableWriter.update(entity.get取込後期高齢者情報Entity());

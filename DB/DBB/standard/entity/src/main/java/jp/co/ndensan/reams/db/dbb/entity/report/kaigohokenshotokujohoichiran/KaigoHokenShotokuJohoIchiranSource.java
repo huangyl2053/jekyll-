@@ -52,7 +52,7 @@ public class KaigoHokenShotokuJohoIchiranSource implements IReportSource {
     public RString kazeiKubunGemmenGo;
     @ReportItem(name = "listIchiranhyoUpper_1", length = 6, order = 17)
     public RString listIchiranhyoUpper_1;
-    @ReportPerson
+    @ReportPerson(id = "A")
     @ReportItem(name = "listIchiranhyoUpper_2", length = 15, order = 18)
     public RString listIchiranhyoUpper_2;
     @ReportItem(name = "listIchiranhyoUpper_3", length = 25, order = 19)
