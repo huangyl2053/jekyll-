@@ -52,4 +52,5 @@ public class KyokaisoKanriMasterListChohyoDataSakuseiEntity {
     private RString 高額ｻｰﾋﾞｽ費減額後上限額;
     private RString 保険料納付減額後保険料段階;
     private RString 町域コード;
+    private RString 改頁市町村コード;
 }
