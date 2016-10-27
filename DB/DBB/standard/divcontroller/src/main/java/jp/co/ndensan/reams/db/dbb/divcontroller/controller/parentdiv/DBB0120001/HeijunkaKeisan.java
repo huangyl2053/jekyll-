@@ -28,6 +28,7 @@ public class HeijunkaKeisan {
 
     private final RString 特徴平準化_特徴6月分_メニュー = new RString("DBBMN35001");
     private final RString 帳票分類ID_DBB100012 = new RString("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
+    private final RString 特徴平準化_平準化 = new RString("特徴平準化（6・8月分）");
 
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード)<br/>
@@ -37,10 +38,16 @@ public class HeijunkaKeisan {
      */
     public ResponseData<HeijunkaKeisanDiv> onLoad(HeijunkaKeisanDiv div) {
         getHandler(div).initialize();
+        ResponseData<HeijunkaKeisanDiv> responseData;
         if (ResponseHolder.getMenuID().equals(特徴平準化_特徴6月分_メニュー)) {
-            return ResponseData.of(div).setState(DBB0120001StateName.平準化計算);
+            responseData = ResponseData.of(div).setState(DBB0120001StateName.平準化計算);
+            responseData.setRootTitle(特徴平準化_平準化);
+            return responseData;
+        } else {
+            responseData = ResponseData.of(div).setState(DBB0120001StateName.通知書一括発行);
+            responseData.setRootTitle(特徴平準化_平準化);
+            return responseData;
         }
-        return ResponseData.of(div).setState(DBB0120001StateName.通知書一括発行);
     }
 
     /**

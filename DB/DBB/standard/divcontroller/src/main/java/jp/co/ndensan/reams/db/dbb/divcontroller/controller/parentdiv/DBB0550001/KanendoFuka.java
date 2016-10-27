@@ -39,6 +39,8 @@ public class KanendoFuka {
     private static final RString 過年度賦課 = new RString("過年度賦課");
     private static final RString 過年度賦課確定 = new RString("過年度賦課確定");
     private final RString 過年度異動通知書作成 = new RString("DBBMN45002");
+    private static final RString 過年度異動賦課 = new RString("過年度異動賦課");
+    private static final RString 過年度異動通知書 = new RString("過年度異動通知書作成");
 
     /**
      * onLoad事件
@@ -47,6 +49,7 @@ public class KanendoFuka {
      * @return ResponseData
      */
     public ResponseData<KanendoFukaDiv> onLoad(KanendoFukaDiv div) {
+        ResponseData<KanendoFukaDiv> responseData;
         FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
         ShoriDateKanri 過年度賦課基準日時 = HonsanteiIdoKanendo.createInstance().get最大基準日時(過年度賦課, 調定年度);
@@ -70,9 +73,13 @@ public class KanendoFuka {
         RString menuID = controlData.getMenuID();
         if (過年度異動通知書作成.equals(menuID)) {
             div.getKanendoFukaChushutsuJoken().setDisplayNone(true);
-            return ResponseData.of(div).setState(DBB0550001StateName.過年度通知書一括発行);
+            responseData = ResponseData.of(div).setState(DBB0550001StateName.過年度通知書一括発行);
+            responseData.setRootTitle(過年度異動賦課);
+            return responseData;
         } else {
-            return ResponseData.of(div).setState(DBB0550001StateName.Default);
+            responseData = ResponseData.of(div).setState(DBB0550001StateName.Default);
+            responseData.setRootTitle(過年度異動通知書);
+            return responseData;
         }
     }
 
