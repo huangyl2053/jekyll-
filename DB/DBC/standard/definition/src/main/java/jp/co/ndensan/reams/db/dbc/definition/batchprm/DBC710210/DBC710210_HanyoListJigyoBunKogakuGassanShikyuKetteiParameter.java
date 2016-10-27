@@ -35,7 +35,7 @@ public class DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter extend
     private static final String KEY_KIKANCODE = "金融機関コード";
     private static final String KEY_KIKANMEI = "金融機関名";
     private static final String KEY_TAISHONENDO = "対象年度";
-
+    private static final String KEY_KINYUKI = "支店コード";
     @BatchParameter(key = KEY_REPORTID, name = "帳票ID")
     private RString 帳票ID;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = "出力順ID")
@@ -60,6 +60,8 @@ public class DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter extend
     private RString 金融機関名;
     @BatchParameter(key = KEY_TAISHONENDO, name = "対象年度")
     private RString 対象年度;
+    @BatchParameter(key = KEY_KINYUKI, name = "支店コード")
+    private RString 支店コード;
 
     /**
      * プロセスパラメータを作成します。
