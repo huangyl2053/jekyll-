@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.ca.cax.entity.db.basic.CaT0701ShunyuEntity;
 import jp.co.ndensan.reams.db.dbd.definition.core.jikokisanbikanri.JikoKisanbiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.KibetsuJohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.ShunoJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.ShunoJokyoHaakuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.ShunoJokyoTempTableEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -41,20 +42,28 @@ public class ShunoJokyoHaakuBusiness {
         List<ShunoJokyoTempTableEntity> insertEnList = new ArrayList<>();
 
         HihokenshaNo 被保険者番号 = shunoJokyoEntity.get資格情報Entity().getHihokenshaNo();
-        FlexibleYear 賦課年度 = shunoJokyoEntity.get収納情報().get賦課Entity().getFukaNendo();
-        FlexibleYear 調定年度 = shunoJokyoEntity.get収納情報().get賦課Entity().getChoteiNendo();
 
-        List<KibetsuJohoEntity> 期別情報List = shunoJokyoEntity.get収納情報().get期別();
-        if (null == 期別情報List || 期別情報List.isEmpty()) {
-            return null;
-        }
-        ShunoJokyoTempTableEntity tmpTblEntity = new ShunoJokyoTempTableEntity();
-        tmpTblEntity.setTmp_hihokenshaNo(被保険者番号);
-        tmpTblEntity.setTmp_choteiNendo(調定年度);
-        tmpTblEntity.setTmp_fukaNendo(賦課年度);
+        FlexibleYear 賦課年度;
+        FlexibleYear 調定年度;
+        ShunoJokyoTempTableEntity tmpTblEntity;
+        List<ShunoJohoEntity> 収納情報List = shunoJokyoEntity.get収納情報List();
+        for (ShunoJohoEntity 年度収納情報 : 収納情報List) {
 
-        for (KibetsuJohoEntity 期別 : 期別情報List) {
-            set期別情報(tmpTblEntity, 期別, insertEnList, 基準日);
+            賦課年度 = 年度収納情報.get賦課Entity().getFukaNendo();
+            調定年度 = 年度収納情報.get賦課Entity().getChoteiNendo();
+
+            List<KibetsuJohoEntity> 期別情報List = 年度収納情報.get期別();
+            if (null == 期別情報List || 期別情報List.isEmpty()) {
+                return null;
+            }
+            tmpTblEntity = new ShunoJokyoTempTableEntity();
+            tmpTblEntity.setTmp_hihokenshaNo(被保険者番号);
+            tmpTblEntity.setTmp_choteiNendo(調定年度);
+            tmpTblEntity.setTmp_fukaNendo(賦課年度);
+
+            for (KibetsuJohoEntity 期別 : 期別情報List) {
+                set期別情報(tmpTblEntity, 期別, insertEnList, 基準日);
+            }
         }
 
         return insertEnList;

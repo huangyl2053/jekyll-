@@ -34,6 +34,7 @@ public class FukaKakutei {
     private static final RString 本算定賦課確定 = new RString("本算定賦課確定");
     private static final RString 異動賦課確定 = new RString("異動賦課確定");
     private static final RString 共通ボタン = new RString("btnFukaKakutei");
+    private static final RString 現年度異動賦課確定 = new RString("現年度異動賦課確定");
 
     /**
      * コンストラクタです。
@@ -52,22 +53,21 @@ public class FukaKakutei {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
         getHandler(div).賦課年度の設定();
         if (getHandler(div).処理名_特徴仮算定賦課(基準日時取得(div, 特徴仮算定賦課), 基準日時取得(div, 特徴仮算定賦課確定))) {
-
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();
         }
         if (getHandler(div).処理名_普徴仮算定賦課(基準日時取得(div, 普徴仮算定賦課), 基準日時取得(div, 普徴仮算定賦課確定))) {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();
         }
         if (getHandler(div).処理名_仮算定異動賦課(基準日時取得(div, 仮算定異動賦課), 基準日時取得(div, 仮算定異動賦課確定))) {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();
         }
         if (getHandler(div).処理名_本算定賦課(基準日時取得(div, 本算定賦課), 基準日時取得(div, 本算定賦課確定))) {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();
         }
         if (getHandler(div).処理名_異動賦課(基準日時取得(div, 異動賦課), 基準日時取得(div, 異動賦課確定))) {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).rootTitle(現年度異動賦課確定).respond();
     }
 
     /**

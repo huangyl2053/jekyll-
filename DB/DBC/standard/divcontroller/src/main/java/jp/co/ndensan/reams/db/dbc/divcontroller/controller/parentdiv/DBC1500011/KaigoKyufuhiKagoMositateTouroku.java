@@ -69,7 +69,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
     private static final RString MENUID_DBCMN91003 = new RString("DBCMN91003");
     private static final List<RString> 同月審査用_EMPTY = new ArrayList<>();
     private static final RString 介護給付費過誤申立書 = new RString("介護給付費過誤申立書");
-    private static final RString 総合事業費過誤申立書_経過措置 = new RString("総合事業費過誤申立書（経過措置）");
+    private static final RString 総合事業費過誤申立書_経過措置 = new RString("総合事業費過誤申立書情報作成（経過措置）");
     private static final RString 総合事業費過誤申立書 = new RString("総合事業費過誤申立書");
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
     private static final RString MESSAGE_REPLACE_コンフィグのキー = new RString("該当の給付実績データ");

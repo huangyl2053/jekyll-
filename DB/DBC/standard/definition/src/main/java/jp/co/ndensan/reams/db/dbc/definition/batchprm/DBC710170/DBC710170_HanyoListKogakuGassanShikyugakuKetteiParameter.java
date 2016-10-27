@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,6 +39,8 @@ public class DBC710170_HanyoListKogakuGassanShikyugakuKetteiParameter extends Ba
     private RString 支払方法区分;
     @BatchParameter(key = "金融機関コード", name = "金融機関コード")
     private KinyuKikanCode 金融機関コード;
+    @BatchParameter(key = "支店コード", name = "支店コード")
+    private KinyuKikanShitenCode 支店コード;
     @BatchParameter(key = "金融機関名称", name = "金融機関名称")
     private RString 金融機関名称;
     @BatchParameter(key = "対象年度", name = "対象年度")
