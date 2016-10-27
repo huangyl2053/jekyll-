@@ -290,6 +290,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
             List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
             UrT0705ChoteiKyotsuEntity 調定共通Entity = new UrT0705ChoteiKyotsuEntity();
             調定共通Entity.setChoteiId(new Decimal(index).longValue());
+            調定共通Entity.setShunoId(new Decimal(index).longValue());
             調定共通Entity.setChoteigaku(get特徴調定額(計算後情報, index));
             調定共通EntityList.add(調定共通Entity);
             介護期別Relate.set介護期別Entity(介護期別Entity);
@@ -309,6 +310,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
             List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
             UrT0705ChoteiKyotsuEntity 調定共通Entity = new UrT0705ChoteiKyotsuEntity();
             調定共通Entity.setChoteiId(new Decimal(index).add(Decimal.TEN).longValue());
+            調定共通Entity.setShunoId(new Decimal(index).add(Decimal.TEN).longValue());
             調定共通Entity.setChoteigaku(get普通調定額(計算後情報, index));
             調定共通EntityList.add(調定共通Entity);
             介護期別Relate.set介護期別Entity(介護期別Entity);
