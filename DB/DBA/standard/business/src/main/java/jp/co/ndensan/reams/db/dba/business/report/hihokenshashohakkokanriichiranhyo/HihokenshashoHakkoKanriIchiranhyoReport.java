@@ -5,11 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkokanriichiranhyo;
 
-import java.util.List;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihokenshashoHakkoKanriIchiranhyoEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 被保険者証発行管理一覧表のReportです。
@@ -18,37 +17,16 @@ import lombok.NonNull;
  */
 public class HihokenshashoHakkoKanriIchiranhyoReport extends Report<HihokenshashoHakkoKanriIchiranhyoReportSource> {
 
-    private final List<HihokenshashoHakkoKanriIchiranhyoBodyItem> bodyItemList;
-    private final HihokenshashoHakkoKanriIchiranhyoHeadItem headItem;
+    private final HihokenshashoHakkoKanriIchiranhyoEntity headEntity;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 被保険者証発行管理一覧表ヘッダのITEM
-     * @param bodyItemList 被保険者証発行管理一覧表ボディのITEMリスト
-     * @return 被保険者証発行管理一覧表のReport
+     * @param headEntity 被保険者証発行管理一覧表ヘッダのEntity
      */
-    public static HihokenshashoHakkoKanriIchiranhyoReport createFrom(
-            HihokenshashoHakkoKanriIchiranhyoHeadItem headItem,
-            @NonNull List<HihokenshashoHakkoKanriIchiranhyoBodyItem> bodyItemList) {
-
-        return new HihokenshashoHakkoKanriIchiranhyoReport(
-                headItem,
-                bodyItemList);
-    }
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param headItem 被保険者証発行管理一覧表ヘッダのITEM
-     * @param bodyItemList 被保険者証発行管理一覧表ボディのITEMリスト
-     */
-    protected HihokenshashoHakkoKanriIchiranhyoReport(
-            HihokenshashoHakkoKanriIchiranhyoHeadItem headItem,
-            List<HihokenshashoHakkoKanriIchiranhyoBodyItem> bodyItemList) {
-
-        this.headItem = headItem;
-        this.bodyItemList = bodyItemList;
+    public HihokenshashoHakkoKanriIchiranhyoReport(
+            HihokenshashoHakkoKanriIchiranhyoEntity headEntity) {
+        this.headEntity = headEntity;
     }
 
     /**
@@ -58,11 +36,8 @@ public class HihokenshashoHakkoKanriIchiranhyoReport extends Report<Hihokenshash
      */
     @Override
     public void writeBy(ReportSourceWriter<HihokenshashoHakkoKanriIchiranhyoReportSource> reportSourceWriter) {
-        for (HihokenshashoHakkoKanriIchiranhyoBodyItem bodyItem : bodyItemList) {
-            IHihokenshashoHakkoKanriIchiranhyoEditor headEditor = new HihokenshashoHakkoKanriIchiranhyoHeaderEditor(headItem);
-            IHihokenshashoHakkoKanriIchiranhyoEditor bodyEditor = new HihokenshashoHakkoKanriIchiranhyoBodyEditor(bodyItem);
-            IHihokenshashoHakkoKanriIchiranhyoBuilder builder = new HihokenshashoHakkoKanriIchiranhyoBuilderItem(headEditor, bodyEditor);
-            reportSourceWriter.writeLine(builder);
-        }
+        IHihokenshashoHakkoKanriIchiranhyoEditor headEditor = new HihokenshashoHakkoKanriIchiranhyoEditor(headEntity);
+        IHihokenshashoHakkoKanriIchiranhyoBuilder builder = new HihokenshashoHakkoKanriIchiranhyoBuilder(headEditor);
+        reportSourceWriter.writeLine(builder);
     }
 }

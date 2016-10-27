@@ -59,10 +59,10 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBA-0600-020 zhangguopeng
  */
-public class HihokenshashoHakkoKanriboNoRenbanProcess extends BatchKeyBreakBase<AkasiHakouKanriEntity> {
+public class HihokenshashoHakkoKanriboNoRenbanSaisinProcess extends BatchKeyBreakBase<AkasiHakouKanriEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshashohakkokanribo."
-            + "IHihokenshashoHakkoKanriboMapper.get証発行管理リスト情報");
+            + "IHihokenshashoHakkoKanriboMapper.get証発行管理リスト最新情報");
     private static final RString 証発行モード_001 = new RString("001");
     private static final RString 証発行モード_002 = new RString("002");
     private static final RString 被保険者証発行 = new RString("介護保険　被保険者証発行管理一覧表");
