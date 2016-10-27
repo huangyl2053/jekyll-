@@ -105,9 +105,9 @@ public class TokuteiKojinJohoTeikyoSetParameterProcess extends SimpleBatchProces
         mapper = getMapper(ITokuteiKojinJohoTeikyoMapper.class);
         TokuteiKojinJohoTeikyoMybatisParamater parameter = new TokuteiKojinJohoTeikyoMybatisParamater();
         parameter.setSubGyomuCode(SubGyomuCode.DBU介護統計報告.value());
-        parameter.setShoriName(処理日付管理マスタ_全件版改定用);
+        parameter.setShoriName1(処理日付管理マスタ_全件版改定用);
         処理日付管理_全件版改定用 = mapper.getKijunYMD(parameter);
-        parameter.setShoriName(処理日付管理マスタ_異動用);
+        parameter.setShoriName1(処理日付管理マスタ_異動用);
         処理日付管理_異動用 = mapper.getKijunYMD(parameter);
     }
 
