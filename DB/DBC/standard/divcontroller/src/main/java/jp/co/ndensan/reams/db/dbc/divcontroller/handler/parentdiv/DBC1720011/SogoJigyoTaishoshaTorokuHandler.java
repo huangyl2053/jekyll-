@@ -15,12 +15,17 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1720011.dgKi
 import jp.co.ndensan.reams.db.dbc.service.core.basic.SogoJigyoTaishoshaManager;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.SogoJigyoTaishoshaIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -33,9 +38,12 @@ public class SogoJigyoTaishoshaTorokuHandler {
 
     private final SogoJigyoTaishoshaTorokuDiv div;
     private final RString 保存する = new RString("btnHozonn");
+    private final RString 完了メッセージ = new RString("総合事業情報の登録が完了しました。");
     private final RString 状態_追加 = new RString("追加");
     private final RString 状態_修正 = new RString("修正");
     private final RString 状態_削除 = new RString("削除");
+    private static final Code CODE_0003 = new Code("0003");
+    private static final RString NAME_被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです。
@@ -60,7 +68,11 @@ public class SogoJigyoTaishoshaTorokuHandler {
         div.getKaiigoShikakCommonChildDiv2().initialize(被保険者番号);
         ArrayList<SogoJigyoTaishoshaToJotai> 情報と状態List = 情報と状態初期化(総合事業対象者一覧);
         div.getSougouZigyouTaishouItiran().getDgKihonInfo().setDataSource(getDataSource(情報と状態List));
-        RealInitialLocker.lock(new LockingKey(new RString("DBCHihokenshaNo").concat(被保険者番号.getColumnValue())));
+        if (!被保険者番号.isEmpty()) {
+            RealInitialLocker.lock(new LockingKey(new RString("DBCHihokenshaNo").concat(被保険者番号.getColumnValue())));
+        }
+        PersonalData personalData = PersonalData.of(識別コード, new ExpandedInformation(CODE_0003, NAME_被保険者番号, 被保険者番号.getColumnValue()));
+        AccessLogger.log(AccessLogType.照会, personalData);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
         return 情報と状態List;
     }
@@ -85,12 +97,16 @@ public class SogoJigyoTaishoshaTorokuHandler {
     }
 
     private List<dgKihonInfo_Row> getDataSource(ArrayList<SogoJigyoTaishoshaToJotai> 情報と状態List) {
+        boolean is適用終了日EMPTY = false;
         List<dgKihonInfo_Row> rowList = new ArrayList<>();
         for (SogoJigyoTaishoshaToJotai 情報と状態 : 情報と状態List) {
             if (!情報と状態.get状態().isEmpty()) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
             }
             SogoJigyoTaishosha 総合事業対象者 = 情報と状態.get総合事業対象();
+            if (null == 総合事業対象者.get適用終了年月日() || 総合事業対象者.get適用終了年月日().isEmpty()) {
+                is適用終了日EMPTY = true;
+            }
             dgKihonInfo_Row row = new dgKihonInfo_Row();
             row.setJyoutai(情報と状態.get状態());
             if (!isNullOrEmpty(総合事業対象者.get適用開始年月日())) {
@@ -112,6 +128,7 @@ public class SogoJigyoTaishoshaTorokuHandler {
             row.setDataId(DataPassingConverter.serialize(総合事業対象者.identifier()));
             rowList.add(row);
         }
+        div.getSougouZigyouTaishouItiran().getBtnAdd().setDisabled(is適用終了日EMPTY);
         return rowList;
     }
 
@@ -159,62 +176,15 @@ public class SogoJigyoTaishoshaTorokuHandler {
                 div.getSougouZigyouTaishouShousai().getTxtKetteibi().clearValue();
             }
         }
-        総合事業対象詳細制御(状態);
+        総合事業対象詳細制御();
     }
 
-    private void 総合事業対象詳細制御(RString 状態) {
-        if (状態_削除.equals(状態)) {
-            div.getSougouZigyouTaishouShousai().getTxtymfromto().setDisabled(true);
-            div.getSougouZigyouTaishouShousai().getTxtChekkurisutoZisshibi().setDisabled(true);
-            div.getSougouZigyouTaishouShousai().getTxtKetteibi().setDisabled(true);
-            div.getSougouZigyouTaishouShousai().getBtnCancel().setDisabled(false);
-            div.getSougouZigyouTaishouShousai().getBtnConfirm().setDisabled(false);
-        } else {
-            div.getSougouZigyouTaishouShousai().getTxtymfromto().setDisabled(false);
-            div.getSougouZigyouTaishouShousai().getTxtChekkurisutoZisshibi().setDisabled(false);
-            div.getSougouZigyouTaishouShousai().getTxtKetteibi().setDisabled(false);
-            div.getSougouZigyouTaishouShousai().getBtnConfirm().setDisabled(false);
-            div.getSougouZigyouTaishouShousai().getBtnCancel().setDisabled(false);
-        }
-    }
-
-    /**
-     * 確定する制御します。
-     *
-     * @param 情報と状態 情報と状態
-     */
-    public void 確定する制御(SogoJigyoTaishoshaToJotai 情報と状態) {
-        RDate 画面適用開始日 = div.getSougouZigyouTaishouShousai().getTxtymfromto().getFromValue();
-        if (null == 画面適用開始日) {
-            div.getSougouZigyouTaishouShousai().getBtnConfirm().setDisabled(true);
-            return;
-        }
-        List<dgKihonInfo_Row> rowList = div.getSougouZigyouTaishouItiran().getDgKihonInfo().getDataSource();
-        for (dgKihonInfo_Row row : rowList) {
-            if (null == 情報と状態) {
-                if (is適用開始日と登録済みの適用期間が重(画面適用開始日, row)) {
-                    div.getSougouZigyouTaishouShousai().getBtnConfirm().setDisabled(true);
-                    return;
-                }
-            } else {
-                SogoJigyoTaishoshaIdentifier id = 情報と状態.get総合事業対象().identifier();
-                if (!id.equals(DataPassingConverter.deserialize(row.getDataId(), SogoJigyoTaishoshaIdentifier.class))
-                        && is適用開始日と登録済みの適用期間が重(画面適用開始日, row)) {
-                    div.getSougouZigyouTaishouShousai().getBtnConfirm().setDisabled(true);
-                    return;
-                }
-            }
-        }
+    private void 総合事業対象詳細制御() {
+        div.getSougouZigyouTaishouShousai().getTxtymfromto().setDisabled(false);
+        div.getSougouZigyouTaishouShousai().getTxtChekkurisutoZisshibi().setDisabled(false);
+        div.getSougouZigyouTaishouShousai().getTxtKetteibi().setDisabled(false);
         div.getSougouZigyouTaishouShousai().getBtnConfirm().setDisabled(false);
-    }
-
-    private boolean is適用開始日と登録済みの適用期間が重(RDate 画面適用開始日, dgKihonInfo_Row row) {
-        if (null == row.getShuuryoubi() || row.getShuuryoubi().isEmpty()) {
-            return new RDate(row.getKaishibi().toString()).isBeforeOrEquals(画面適用開始日);
-        } else {
-            return 画面適用開始日.isBeforeOrEquals(new RDate(row.getShuuryoubi().toString()))
-                    && new RDate(row.getKaishibi().toString()).isBeforeOrEquals(画面適用開始日);
-        }
+        div.getSougouZigyouTaishouShousai().getBtnCancel().setDisabled(false);
     }
 
     /**
@@ -230,8 +200,6 @@ public class SogoJigyoTaishoshaTorokuHandler {
         RString 状態 = div.getSougouZigyouTaishouShousai().getHiddenModel();
         if (状態_追加.equals(状態)) {
             追加_確定(情報と状態List, 被保険者番号);
-        } else if (状態_削除.equals(状態)) {
-            削除_確定(情報と状態List, 編集情報と状態);
         } else {
             if (状態_追加.equals(編集情報と状態.get状態())) {
                 修正_追加_確定(情報と状態List, 編集情報と状態);
@@ -324,8 +292,14 @@ public class SogoJigyoTaishoshaTorokuHandler {
         return flexibleDate.equals(new FlexibleDate(rDate.toDateString()));
     }
 
-    private void 削除_確定(ArrayList<SogoJigyoTaishoshaToJotai> 情報と状態List, SogoJigyoTaishoshaToJotai 編集情報と状態) {
-        SogoJigyoTaishoshaIdentifier id = 編集情報と状態.get総合事業対象().identifier();
+    /**
+     * データグリッド上の削除アイコンを押下します。
+     *
+     * @param 情報と状態List 情報と状態List
+     */
+    public void onClick_dgMeisai_delete(ArrayList<SogoJigyoTaishoshaToJotai> 情報と状態List) {
+        SogoJigyoTaishoshaIdentifier id = DataPassingConverter
+                .deserialize(div.getSougouZigyouTaishouItiran().getDgKihonInfo().getActiveRow().getDataId(), SogoJigyoTaishoshaIdentifier.class);
         for (int index = 0; index < 情報と状態List.size(); index++) {
             SogoJigyoTaishoshaToJotai 情報と状態 = 情報と状態List.get(index);
             if (id.equals(情報と状態.get総合事業対象().identifier())) {
@@ -334,6 +308,7 @@ public class SogoJigyoTaishoshaTorokuHandler {
                 } else {
                     情報と状態.set状態(状態_削除);
                 }
+                div.getSougouZigyouTaishouItiran().getDgKihonInfo().setDataSource(getDataSource(情報と状態List));
                 return;
             }
         }
@@ -378,6 +353,17 @@ public class SogoJigyoTaishoshaTorokuHandler {
     public void 保存処理(List<SogoJigyoTaishoshaToJotai> 情報と状態List, HihokenshaNo 被保険者番号) {
         SogoJigyoTaishoshaManager manager = new SogoJigyoTaishoshaManager();
         manager.save総合事業対象者(情報と状態List);
+        前排他解除(被保険者番号);
+        div.getCcdKaigoKanryoMessage()
+                .setMessage(完了メッセージ, 被保険者番号.getColumnValue(), div.getKaigoAtenaInfoChildDiv1().get氏名漢字(), true);
+    }
+
+    /**
+     * 前排他解除します。
+     *
+     * @param 被保険者番号 被保険者番号
+     */
+    public void 前排他解除(HihokenshaNo 被保険者番号) {
         RealInitialLocker.release(new LockingKey(new RString("DBCHihokenshaNo").concat(被保険者番号.getColumnValue())));
     }
 
