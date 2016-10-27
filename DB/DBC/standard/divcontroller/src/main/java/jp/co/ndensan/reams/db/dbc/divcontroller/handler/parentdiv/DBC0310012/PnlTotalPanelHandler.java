@@ -64,6 +64,8 @@ public class PnlTotalPanelHandler {
     private static final RYear 過年度 = new RYear(2000);
     private static final Decimal 一割 = new Decimal(0.1);
     private static final Decimal 九割 = new Decimal(0.9);
+    private static final Decimal 番号_0 = new Decimal(0);
+    private static final Decimal 番号_1 = new Decimal(1);
     private static final int 四 = 4;
     private static final int 五 = 5;
     private static final int 八 = 8;
@@ -256,9 +258,11 @@ public class PnlTotalPanelHandler {
         div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName().setValue(param.get契約事業者名称());
         div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().setSelectedKey(param.get契約ｻｰﾋﾞｽ種類());
         div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().setValue(param.get契約決定日());
+        onBlur決定年月日();
         if (param.get決定区分() != null && !param.get決定区分().isEmpty()) {
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(param.get決定区分());
         }
+        click決定区分();
         div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setValue(param.get承認しない理由());
         div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setSelectedKey(param.get年度());
         div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setValue(param.get番号1());
@@ -364,11 +368,26 @@ public class PnlTotalPanelHandler {
     }
 
     /**
+     * 番号１を設定
+     */
+    public void setTxtBango1() {
+        RString コード = div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey();
+        if (KeiyakuServiceShurui.住宅改修.getコード().equals(コード)
+                || KeiyakuServiceShurui.予防住宅改修.getコード().equals(コード)) {
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setValue(番号_0);
+        } else if (KeiyakuServiceShurui.福祉用具.getコード().equals(コード)
+                || KeiyakuServiceShurui.予防福祉用具.getコード().equals(コード)) {
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setValue(番号_1);
+        }
+    }
+
+    /**
      * click決定区分
      */
     public void click決定区分() {
         if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
                 .getRdoKettekubun().getSelectedKey())) {
+            setTxtBango1();
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().clearValue();
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(false);
@@ -384,6 +403,7 @@ public class PnlTotalPanelHandler {
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(false);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setSelectedKey(RString.EMPTY);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().clearValue();
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().clearValue();
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().clearFromValue();
