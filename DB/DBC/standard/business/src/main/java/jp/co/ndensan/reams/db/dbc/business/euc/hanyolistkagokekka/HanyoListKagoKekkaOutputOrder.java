@@ -30,7 +30,7 @@ public enum HanyoListKagoKekkaOutputOrder implements IReportItems {
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString(""), new RString("")),
+    氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"ShikibetsuTaisho_kanaShimei\"")),
     /**
      * 市町村コード
      */
@@ -46,11 +46,11 @@ public enum HanyoListKagoKekkaOutputOrder implements IReportItems {
     /**
      * 要介護度
      */
-    要介護度(new RString("0403"), new RString(""), new RString("")),
+    要介護度(new RString("0403"), new RString(""), new RString("\"JukyushaDaicho_yokaigoJotaiKubunCode\"")),
     /**
      * 認定開始日
      */
-    認定開始日(new RString("0411"), new RString(""), new RString("")),
+    認定開始日(new RString("0411"), new RString(""), new RString("\"JukyushaDaicho_ninteiYukoKikanKaishiYMD\"")),
     /**
      * サービス年月
      */

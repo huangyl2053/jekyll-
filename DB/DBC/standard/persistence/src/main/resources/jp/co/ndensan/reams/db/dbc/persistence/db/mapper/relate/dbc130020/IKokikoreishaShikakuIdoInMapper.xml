@@ -39,12 +39,12 @@
         LEFT OUTER JOIN
         (
         SELECT
-        COUNT (D2.*) AS データ件数
+        COUNT (D2."shikibetsuCd") AS データ件数
         ,D2."shikibetsuCd"
         FROM
-        "tempTorikomiKokuhoJyoho" AS T1,
+
         rgdb. "DbT7124KokiKoreishaInfo" AS D2
-        WHERE D2."shikibetsuCd" = T1. "住民コード"
+
         GROUP BY D2."shikibetsuCd"
         ) AS D3
         ON D3."shikibetsuCd" = T1. "住民コード"
@@ -149,5 +149,6 @@
         <result property="エラーコード" column="エラーコード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="エラー文言" column="エラー文言" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="エラー区分" column="エラー区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="文言設定flag" column="文言設定flag"/>
     </resultMap>
 </mapper>

@@ -76,7 +76,9 @@
                    AND #{サービス年月開始} <![CDATA[<=]]> 給付実績基本データ."serviceTeikyoYM" 
                   AND 給付実績基本データ."serviceTeikyoYM" <![CDATA[<=]]> #{サービス年月終了} 
                   AND 給付実績基本データ."yoKaigoJotaiKubunCode" IN <foreach collection="list要介護度" item="values" open="(" separator="," close=")"> #{values} </foreach>
+                  <if test="全市町村フラグ">
                   AND 給付実績基本データ."shokisaiHokenshaNo" = #{証記載保険者番号}
+                  </if>
               ) AS 給付実績基本抽出データ 
               LEFT JOIN rgdb."DbT3018KyufujissekiMeisai" AS 給付実績明細 
                 ON 給付実績明細."inputShikibetsuNo" = 給付実績基本抽出データ."inputShikibetsuNo" 

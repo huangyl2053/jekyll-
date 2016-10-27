@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbb.entity.report.shotokushokaihyo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBBPR51002_所得照会票
@@ -50,12 +51,16 @@ public class ShotokuShokaihyoYokoSource implements IReportSource {
     public RString tennyuYMD3;
     @ReportItem(name = "tennyuYMD4", length = 11, order = 19)
     public RString tennyuYMD4;
+    @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode1", length = 15, order = 20)
     public RString shikibetsuCode1;
+    @ReportPerson(id = "B")
     @ReportItem(name = "shikibetsuCode2", length = 15, order = 21)
     public RString shikibetsuCode2;
+    @ReportPerson(id = "C")
     @ReportItem(name = "shikibetsuCode3", length = 15, order = 22)
     public RString shikibetsuCode3;
+    @ReportPerson(id = "D")
     @ReportItem(name = "shikibetsuCode4", length = 15, order = 23)
     public RString shikibetsuCode4;
     @ReportItem(name = "shimeiKana1", length = 26, order = 24)

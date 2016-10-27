@@ -87,7 +87,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString 処理枝番_単一時 = new RString("0000");
     private static final RString 処理枝番_広域時 = new RString("00");
     private static final RString TEMP_TABLE = new RString("tempTorikomiKokuhoJyoho");
-    private static final RString 正則表現 = new RString("[0-9]*");
+    private static final RString 正則表現_数値 = new RString("[0-9]*");
     private static final RString 正則表現_半角空白 = new RString("[ ]*");
     private static final RString 正則表現_全角空白 = new RString("/[^uFF00-uFFFF]/g");
     private static final RString 保険者区分_単独保険者 = new RString("1");
@@ -101,9 +101,11 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString エラーコード_05 = new RString("05");
     private static final RString エラーコード_06 = new RString("06");
     private static final RString エラーコード_07 = new RString("07");
-    private static final RString エラーコード_11 = new RString("11");
+    private static final RString エラーコード_08 = new RString("08");
+    private static final RString エラーコード_09 = new RString("09");
     private static final RString エラーコード_52 = new RString("52");
     private static final RString エラーコード_53 = new RString("53");
+    private static final RString エラーコード_55 = new RString("55");
     private static final RString エラーコード_56 = new RString("56");
     private static final RString エラーコード_57 = new RString("57");
     private static final RString エラーコード_58 = new RString("58");
@@ -115,11 +117,13 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString エラーコード_64 = new RString("64");
     private static final RString エラーコード_65 = new RString("65");
     private static final RString エラーコード_66 = new RString("66");
+    private static final RString エラーコード_67 = new RString("67");
     private static final RString エラーコード_68 = new RString("68");
     private static final RString エラーコード_69 = new RString("69");
     private static final RString コード文言_フォーマットエラー = new RString("フォーマットエラー");
     private static final RString コード文言_市町村コード = new RString("項目設定エラー：市町村コード");
     private static final RString コード文言_住民コード = new RString("項目設定エラー：住民コード");
+    private static final RString コード文言_保険者番号 = new RString("項目設定エラー：保険者番号");
     private static final RString コード文言_履歴番号 = new RString("項目設定エラー：履歴番号");
     private static final RString コード文言_被保険者番号 = new RString("項目設定エラー：被保険者番号");
     private static final RString コード文言_資格取得日 = new RString("項目設定エラー：資格取得日");
@@ -261,9 +265,10 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
 
     private void エラーチェック処理_電算() {
         RString 市町村コード = 取込後期高齢者情報Entity.get市町村コード();
-        if (is空白(市町村コード) || !Pattern.compile(正則表現.toString()).matcher(市町村コード).matches()
+        if (is空白(市町村コード) || !Pattern.compile(正則表現_数値.toString()).matcher(市町村コード).matches()
                 || (市町村コード.length() != INDEX_5 && 市町村コード.length() != INDEX_6)
-                || (保険者区分_広域保険者.equals(processParameter.get保険者区分())) && !is構成市町村マスタあり(市町村コード)) {
+                || (保険者区分_広域保険者.equals(processParameter.get保険者区分())
+                && !is構成市町村マスタあり(市町村コード))) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_02);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_市町村コード);
@@ -273,7 +278,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         }
 
         RString 住民コード = 取込後期高齢者情報Entity.get住民コード();
-        if (住民コード.isEmpty() || !Pattern.compile(正則表現.toString()).matcher(住民コード).matches()) {
+        if (住民コード.isEmpty() || !Pattern.compile(正則表現_数値.toString()).matcher(住民コード).matches()) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_03);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_住民コード);
@@ -293,7 +298,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         }
         RString 被保険者番号 = 取込後期高齢者情報Entity.get後期高齢被保険者番号();
         if (!Pattern.compile(正則表現_半角空白.toString()).matcher(被保険者番号).matches()
-                && !Pattern.compile(正則表現.toString()).matcher(被保険者番号).matches()) {
+                && !Pattern.compile(正則表現_数値.toString()).matcher(被保険者番号).matches()) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_05);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_被保険者番号);
@@ -303,8 +308,8 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         }
         RString 保険者番号_市町村 = 取込後期高齢者情報Entity.get後期高齢保険者番号_市町村();
         if (!Pattern.compile(正則表現_半角空白.toString()).matcher(保険者番号_市町村).matches()
-                && !Pattern.compile(正則表現.toString()).matcher(保険者番号_市町村).matches()) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_05);
+                && !Pattern.compile(正則表現_数値.toString()).matcher(保険者番号_市町村).matches()) {
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_06);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_保険者番号_市町村);
                 文言設定flag = false;
@@ -318,8 +323,8 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private void エラーチェック処理_電算用() {
         RString 保険者番号_広域 = 取込後期高齢者情報Entity.get後期高齢保険者番号_広域();
         if (!Pattern.compile(正則表現_半角空白.toString()).matcher(保険者番号_広域).matches()
-                && !Pattern.compile(正則表現.toString()).matcher(保険者番号_広域).matches()) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_05);
+                && !Pattern.compile(正則表現_数値.toString()).matcher(保険者番号_広域).matches()) {
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_07);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_保険者番号_広域);
                 文言設定flag = false;
@@ -328,30 +333,19 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         }
         RString 資格取得日 = 取込後期高齢者情報Entity.get資格取得年月日();
         if (資格取得日 == null || !new FlexibleDate(資格取得日).isValid()) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_06);
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_08);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_資格取得日);
                 文言設定flag = false;
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
-
         RString 資格喪失日 = 取込後期高齢者情報Entity.get資格喪失年月日();
         if (!日付_99999999.equals(資格喪失日)
                 && (資格喪失日 == null || !new FlexibleDate(資格喪失日).isValid())) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_07);
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_09);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_資格喪失日);
-                文言設定flag = false;
-            }
-            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
-        }
-        if (!日付_99999999.equals(資格喪失日) && 資格喪失日 != null && new FlexibleDate(資格喪失日).isValid()
-                && 資格取得日 != null && new FlexibleDate(資格取得日).isValid() && new FlexibleDate(資格喪失日)
-                .isBefore(new FlexibleDate(資格喪失日))) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_11);
-            if (文言設定flag) {
-                取込後期高齢者情報Entity.setエラー文言(文言_資格取得日資格喪失日);
                 文言設定flag = false;
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
@@ -378,16 +372,18 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
-        RString 氏名カナ = 取込後期高齢者情報Entity.getカナ氏名();
-        if (!RStringUtil.is全角Only(氏名カナ)
-                || Pattern.compile(正則表現_全角空白.toString()).matcher(氏名カナ).matches()) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_62);
+        RString 被保険者番号 = 取込後期高齢者情報Entity.get後期高齢被保険者番号();
+        if (!Pattern.compile(正則表現_半角空白.toString()).matcher(被保険者番号).matches()
+                && !Pattern.compile(正則表現_数値.toString()).matcher(被保険者番号).matches()) {
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_55);
             if (文言設定flag) {
-                取込後期高齢者情報Entity.setエラー文言(コード文言_氏名カナ);
+                取込後期高齢者情報Entity.setエラー文言(コード文言_被保険者番号);
                 文言設定flag = false;
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
+        エラーチェック処理_電算２用部分();
+        エラーチェック処理_電算２用部分1();
         RString 生年月日 = 取込後期高齢者情報Entity.get生年月日();
         if (生年月日 == null || 生年月日.isEmpty()
                 || !new FlexibleDate(生年月日).isValid()) {
@@ -398,9 +394,15 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
-
-        エラーチェック処理_電算２用部分();
-        エラーチェック処理_電算２用部分1();
+        RString 性別コード = 取込後期高齢者情報Entity.get性別コード();
+        if (!性別コード_1.equals(性別コード) && !性別コード_2.equals(性別コード) && !性別コード_3.equals(性別コード)) {
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_64);
+            if (文言設定flag) {
+                取込後期高齢者情報Entity.setエラー文言(コード文言_性別コード);
+                文言設定flag = false;
+            }
+            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
+        }
         エラーチェック処理_電算２用部分2();
         エラーチェック処理_電算２用部分3();
     }
@@ -466,11 +468,12 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
-        RString 性別コード = 取込後期高齢者情報Entity.get性別コード();
-        if (!性別コード_1.equals(性別コード) && !性別コード_2.equals(性別コード) && !性別コード_3.equals(性別コード)) {
-            取込後期高齢者情報Entity.setエラーコード(エラーコード_64);
+        RString 氏名カナ = 取込後期高齢者情報Entity.getカナ氏名();
+        if (!RStringUtil.is全角Only(氏名カナ)
+                || Pattern.compile(正則表現_全角空白.toString()).matcher(氏名カナ).matches()) {
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_62);
             if (文言設定flag) {
-                取込後期高齢者情報Entity.setエラー文言(コード文言_性別コード);
+                取込後期高齢者情報Entity.setエラー文言(コード文言_氏名カナ);
                 文言設定flag = false;
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
@@ -478,12 +481,10 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     }
 
     private void エラーチェック処理_電算２用部分2() {
-        RString 資格喪失日 = 取込後期高齢者情報Entity.get資格喪失年月日();
-        RString 資格取得日 = 取込後期高齢者情報Entity.get資格取得年月日();
         RString 保険者開始日 = 取込後期高齢者情報Entity.get保険者適用開始年月日();
         if (保険者開始日 != null && !保険者開始日.isEmpty()
                 && (!Pattern.compile(正則表現_半角空白.toString()).matcher(保険者開始日).matches()
-                && !new FlexibleDate(資格取得日).isValid())) {
+                && !new FlexibleDate(保険者開始日).isValid())) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_60);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_保険者開始日);
@@ -494,7 +495,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
         RString 保険者終了日 = 取込後期高齢者情報Entity.get保険者適用終了年月日();
         if (保険者終了日 != null && !保険者終了日.isEmpty()
                 && (!Pattern.compile(正則表現_半角空白.toString()).matcher(保険者開始日).matches()
-                && !new FlexibleDate(資格取得日).isValid())) {
+                && !new FlexibleDate(保険者終了日).isValid())) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_61);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_保険者終了日);
@@ -502,9 +503,10 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
-        if (保険者終了日 != null && !保険者終了日.isEmpty()
-                && new FlexibleDate(保険者終了日).isValid() && 保険者開始日 != null && !保険者開始日.isEmpty()
-                && new FlexibleDate(保険者開始日).isValid() && new FlexibleDate(保険者終了日).isBefore(new FlexibleDate(資格喪失日))) {
+        if (保険者開始日 != null && new FlexibleDate(保険者開始日).isValid()
+                && 保険者終了日 != null && new FlexibleDate(保険者終了日).isValid()
+                && new FlexibleDate(保険者終了日)
+                .isBefore(new FlexibleDate(保険者開始日))) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_69);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(文言_保険者開始日保険者終了日);
@@ -526,11 +528,22 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
         }
         RString 市町村コード = 取込後期高齢者情報Entity.get市町村コード();
-        if (!RStringUtil.is全角Only(市町村コード)
-                && !Pattern.compile(正則表現_半角空白.toString()).matcher(市町村コード).matches() && !is構成市町村マスタあり(市町村コード)) {
+        if (is空白(市町村コード) || !Pattern.compile(正則表現_数値.toString()).matcher(市町村コード).matches()
+                || (市町村コード.length() != INDEX_5 && 市町村コード.length() != INDEX_6)
+                || (保険者区分_広域保険者.equals(processParameter.get保険者区分())
+                && !is構成市町村マスタあり(市町村コード))) {
             取込後期高齢者情報Entity.setエラーコード(エラーコード_66);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_市町村コード);
+                文言設定flag = false;
+            }
+            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
+        }
+        RString 後期高齢保険者番号_市町村 = 取込後期高齢者情報Entity.get後期高齢保険者番号_市町村();
+        if (is空白(市町村コード) || !Pattern.compile(正則表現_数値.toString()).matcher(後期高齢保険者番号_市町村).matches()) {
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_67);
+            if (文言設定flag) {
+                取込後期高齢者情報Entity.setエラー文言(コード文言_保険者番号);
                 文言設定flag = false;
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);

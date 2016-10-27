@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanji
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkogakugassanjikofutangaku.HanyoListKogakuGassanJikoFutangakuMybatisParameter;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -45,6 +47,8 @@ public class HanyoListKogakuGassanJikoFutangakuProcessParameter implements IBatc
     private Long 出力順;
     private RString 出力項目;
     private IShikibetsuTaishoPSMSearchKey searchKey;
+    private ReportId 帳票ID;
+    private SubGyomuCode サブ業務コード;
 
     /**
      * コンストラクタです。

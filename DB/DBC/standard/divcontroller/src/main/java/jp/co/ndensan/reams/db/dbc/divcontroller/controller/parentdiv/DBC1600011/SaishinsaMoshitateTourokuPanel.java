@@ -81,8 +81,8 @@ public class SaishinsaMoshitateTourokuPanel {
     private static final RString サービスコード = new RString("サービスコード");
     private static final RString MESSAGE = new RString("再審査申立テーブルを更新しました。");
     private static final RString 排他キー = new RString("DBCHihokenshaNo");
+    private static final RString FOUR_SPACES = new RString("    ");
     private static final int ONE = 1;
-    private static final int SIX = 6;
 
     /**
      * 画面初期化します。
@@ -108,6 +108,7 @@ public class SaishinsaMoshitateTourokuPanel {
                 List<SaishinsaMoshitateJohoBusiness> 再審査申立情報一覧 = SaishinsaMoshitateTouroku.createInstance()
                         .selectSaishinsaMoshitateJohoList(parameter);
                 getHandler(div).set再審査申立情報一覧(再審査申立情報一覧);
+                getHandler(div).set一時検索条件(再審査申立情報一覧, null);
             }
         } else if (対象者検索戻る状態.equals(collect.get画面状態())) {
             TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
@@ -356,6 +357,18 @@ public class SaishinsaMoshitateTourokuPanel {
     }
 
     /**
+     * 再審査申立書登録画面「再審査対象」ラジオボタンを押します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<SaishinsaMoshitateTourokuPanelDiv>
+     */
+    public ResponseData<SaishinsaMoshitateTourokuPanelDiv> onChange_btnSaishinsaTaishou(
+            SaishinsaMoshitateTourokuPanelDiv div) {
+        getHandler(div).onChange_btnSaishinsaTaishou();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 再審査申立書登録画面の「検索結果一覧へ」ボタンをを押します。
      *
      * @param div 画面情報
@@ -448,29 +461,33 @@ public class SaishinsaMoshitateTourokuPanel {
         boolean flag;
         SaishinsaMoshitateManager manager = new SaishinsaMoshitateManager();
         RString サービス種類コード = RString.EMPTY;
-        RString サービス項目コード = RString.EMPTY;
+        ServiceKomokuCode サービス項目コード = ServiceKomokuCode.EMPTY;
+        RString tempサービス項目コード = RString.EMPTY;
         if (サービス種類.equals(div.getKagoMoshitatePanel().getRadioButton1().getSelectedValue())) {
             if (!div.getKagoMoshitatePanel().getDropDownList3().getDataSource().isEmpty()) {
                 サービス種類コード = div.getKagoMoshitatePanel().getDropDownList3().getSelectedKey().substring(0, 2);
-                サービス項目コード = div.getKagoMoshitatePanel().getDropDownList3().getSelectedKey().substring(2);
+                tempサービス項目コード = div.getKagoMoshitatePanel().getDropDownList3().getSelectedKey().substring(2);
             }
         } else if (サービスコード.equals(div.getKagoMoshitatePanel().getRadioButton1().getSelectedValue())) {
             if (!div.getKagoMoshitatePanel().getDropDownList6().getDataSource().isEmpty()) {
                 サービス種類コード = div.getKagoMoshitatePanel().getDropDownList6().getSelectedKey().substring(0, 2);
-                サービス項目コード = div.getKagoMoshitatePanel().getDropDownList6().getSelectedKey().substring(2);
+                tempサービス項目コード = div.getKagoMoshitatePanel().getDropDownList6().getSelectedKey().substring(2);
             }
         } else {
             if (!div.getKagoMoshitatePanel().getDropDownList7().getDataSource().isEmpty()) {
                 サービス種類コード = div.getKagoMoshitatePanel().getDropDownList7().getSelectedKey().substring(0, 2);
-                サービス項目コード = div.getKagoMoshitatePanel().getDropDownList7().getSelectedKey().substring(2);
+                tempサービス項目コード = div.getKagoMoshitatePanel().getDropDownList7().getSelectedKey().substring(2);
             }
+        }
+        if (!RString.isNullOrEmpty(tempサービス項目コード) && !FOUR_SPACES.equals(tempサービス項目コード)) {
+            サービス項目コード = new ServiceKomokuCode(tempサービス項目コード);
         }
         SaishinsaMoshitate data = new SaishinsaMoshitate(
                 new JigyoshaNo(div.getKagoMoshitatePanel().getTextBox2().getValue()),
                 new HihokenshaNo(div.getCommonKaigoshikakuKihonChildDiv2().get被保険者番号()),
                 new FlexibleYearMonth(new RYearMonth(div.getKagoMoshitatePanel().getTextBox5().getValue()).toDateString()),
                 new ServiceShuruiCode(サービス種類コード),
-                new ServiceKomokuCode(サービス項目コード),
+                サービス項目コード,
                 Integer.parseInt(div.getHdn履歴番号().toString()));
         SaishinsaMoshitateBuilder builder = data.createBuilderForEdit();
         SaishinsaMoshitateTourokuBusiness business;
@@ -487,12 +504,8 @@ public class SaishinsaMoshitateTourokuPanel {
             builder.set履歴番号(履歴番号);
             builder.set申立年月日(new FlexibleDate(div.getKagoMoshitatePanel().getTextBoxDate1().getValue().toDateString()));
             builder.set申立者区分コード(div.getKagoMoshitatePanel().getDropDownList2().getSelectedKey());
-            RString 証記載保険者番号 = div.getKagoMoshitatePanel().getTextBox7().getValue();
-            if (!RString.isNullOrEmpty(証記載保険者番号) && 証記載保険者番号.length() > SIX) {
-                証記載保険者番号 = 証記載保険者番号.substring(証記載保険者番号.length() - SIX, 証記載保険者番号.length());
-            }
-            builder.set証記載保険者番号(new ShoKisaiHokenshaNo(証記載保険者番号));
-            builder.set申立単位数(Integer.parseInt(div.getKagoMoshitatePanel().getTextBox12().getValue().toString()));
+            builder.set証記載保険者番号(new ShoKisaiHokenshaNo(div.getKagoMoshitatePanel().getTextBox7().getValue()));
+            builder.set申立単位数(div.getKagoMoshitatePanel().getTextBoxNum12().getValue().intValue());
             builder.set申立事由コード(div.getKagoMoshitatePanel().getDropDownList4().getSelectedKey().concat(
                     div.getKagoMoshitatePanel().getDropDownList5().getSelectedKey()));
             if (!RString.isNullOrEmpty(div.getKagoMoshitatePanel().getTextBox6().getValue())) {
@@ -515,7 +528,7 @@ public class SaishinsaMoshitateTourokuPanel {
                             Integer.parseInt(div.getHdnActiveRowId().toString()));
             builder.set申立年月日(new FlexibleDate(div.getKagoMoshitatePanel().getTextBoxDate1().getValue().toDateString()));
             builder.set申立者区分コード(div.getKagoMoshitatePanel().getDropDownList2().getSelectedKey());
-            builder.set申立単位数(Integer.parseInt(div.getKagoMoshitatePanel().getTextBox12().getValue().toString()));
+            builder.set申立単位数(div.getKagoMoshitatePanel().getTextBoxNum12().getValue().intValue());
             builder.set申立事由コード(div.getKagoMoshitatePanel().getDropDownList4().getSelectedKey().concat(
                     div.getKagoMoshitatePanel().getDropDownList5().getSelectedKey()));
             boolean 国保連再送付有フラグ = true;
@@ -536,7 +549,7 @@ public class SaishinsaMoshitateTourokuPanel {
             flag = manager.update再審査申立(
                     new SaishinsaMoshitate(business.getEntity()),
                     new ServiceShuruiCode(サービス種類コード),
-                    new ServiceKomokuCode(サービス項目コード));
+                    サービス項目コード);
         } else {
             SaishinsaMoshitateJohoBusiness 再審査申立情報 = DataPassingConverter.deserialize(
                     div.getHdn一覧検索条件(),
