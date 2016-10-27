@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBB-4270-020 chenyadong -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendo.IHonsanteiIdoKanendoMapper">
+    <resultMap id="resultMap_HonsanteiIdoKanendoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendo.HonsanteiIdoKanendoEntity" autoMapping="true">
+        <result property="確定日時" column="確定日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="select確定日時"  resultMap="resultMap_HonsanteiIdoKanendoEntity"  fetchSize="500">
+        SELECT
+        MAX(A."kakuteiTimeStamp") AS 確定日時
+        FROM
+        rgdb."DbV2501JuminzeiShotoku" AS A
+    </select>
+</mapper>
