@@ -21,7 +21,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@SuppressWarnings ("PMD.UnusedPrivateField")
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyoListKyotakuServiceKeikakuMybatisParameter extends UaFt200FindShikibetsuTaishoParam
         implements IMyBatisParameter {
 
@@ -36,7 +36,6 @@ public class HanyoListKyotakuServiceKeikakuMybatisParameter extends UaFt200FindS
     private boolean csv連番付加;
     private boolean csv日付スラッシュ編集;
     private RString 帳票ID;
-    private RString reamsLoginId;
     private RString orderByClause;
     private RString 様式番号Order;
 
