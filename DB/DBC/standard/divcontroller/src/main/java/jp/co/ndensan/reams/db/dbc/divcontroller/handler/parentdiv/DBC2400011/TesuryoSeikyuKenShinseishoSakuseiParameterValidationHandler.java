@@ -72,7 +72,9 @@ public class TesuryoSeikyuKenShinseishoSakuseiParameterValidationHandler {
      */
     public ValidationMessageControlPairs 前回作成期間重複チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getFromValue().
+        if (div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getFromValue() != null
+                && div.getChushutsuJokenPanel().getTxtZenkaiRiyushoSakuseiShinseiYMD().getToValue() != null
+                && div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getFromValue().
                 isBefore(div.getChushutsuJokenPanel().getTxtZenkaiRiyushoSakuseiShinseiYMD().getToValue())) {
             validPairs.add(new ValidationMessageControlPair(new TesuryoSeikyuKenShinseishoSakuseiParameterValidationHandler.IdocheckMessages(
                     UrWarningMessages.日付の前後関係逆転, div.getChushutsuJokenPanel().getTxtRiyushoSakuseiShinseiYMD().getFromValue().toString(),
