@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 合議体情報作成のサービスクラスです。
  *
@@ -208,8 +210,8 @@ public class GogitaiJohoSakuseiFinder {
             GogitaiJohoSakuseiCSVEntity tmpEntity = new GogitaiJohoSakuseiCSVEntity();
             tmpEntity.setGogitaiNo(new RString(entity.getGogitaiNo()));
             tmpEntity.setGogitaiMei(entity.getGogitaiMei());
-            tmpEntity.setGogitaiYukoKikanKaishiYMD(new RString(entity.getGogitaiYukoKikanKaishiYMD().toString()));
-            tmpEntity.setGogitaiYukoKikanShuryoYMD(new RString(entity.getGogitaiYukoKikanShuryoYMD().toString()));
+            tmpEntity.setGogitaiYukoKikanKaishiYMD(entity.getGogitaiYukoKikanKaishiYMD().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+            tmpEntity.setGogitaiYukoKikanShuryoYMD(entity.getGogitaiYukoKikanShuryoYMD().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
             tmpEntity.setGogitaiKaishiYoteiTime(new RString(entity.getGogitaiKaishiYoteiTime().toString()));
             tmpEntity.setGogitaiShuryoYoteiTime(new RString(entity.getGogitaiShuryoYoteiTime().toString()));
             tmpEntity.setShinsakaiKaisaiBashoCode(entity.getShinsakaiKaisaiBashoCode());

@@ -39,7 +39,6 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -276,7 +275,7 @@ public class GogitaiJohoSakusei {
         }
         if (!flag) {
             div.getDgShinsainList().getDataSource().add(
-                    new dgShinsainList_Row(Boolean.TRUE, Boolean.TRUE, 介護認定審査会委員コード, 審査会委員名称, JYOTAI_CODE_ADD));
+                    new dgShinsainList_Row(Boolean.FALSE, Boolean.FALSE, 介護認定審査会委員コード, 審査会委員名称, JYOTAI_CODE_ADD));
         }
 
         return ResponseData.of(div).respond();
