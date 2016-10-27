@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC4510011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.DBC4510011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4510011.DBC4510011TransitionEventName;
@@ -16,13 +17,18 @@ import jp.co.ndensan.reams.db.dbc.service.core.kubunshikyugendogaku.KubunShikyuG
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiHolder;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiIdentifier;
+import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -38,6 +44,7 @@ public class KubunShikyuGendogaku {
     private static final RString MESSAGEMAIN = new RString("サービス種類の登録が完了しました。");
     private static final RString MESSAGETAISHO1 = new RString("サービス種類コード：");
     private static final RString MESSAGETAISHO2 = new RString("サービス名称：");
+    private static final RString DBCKAIGOSERVICETABLEDBT7130 = new RString("DBCKaigoServiceTableDbT7130");
 
     /**
      * 画面初期化のメソッドます。
@@ -46,7 +53,17 @@ public class KubunShikyuGendogaku {
      * @return ResponseData
      */
     public ResponseData<KubunShikyuGendogakuDiv> onLoad(KubunShikyuGendogakuDiv div) {
+        RString 前排他キー = DBCKAIGOSERVICETABLEDBT7130;
+        LockingKey key = new LockingKey(前排他キー);
+        if (!RealInitialLocker.tryGetLock(key)) {
+            throw new PessimisticLockingException();
+        }
         div.getDgServiceShurui().init();
+        List<KeyValueDataSource> list = new ArrayList<>();
+        for (ServiceBunrui serviceBunrui : ServiceBunrui.values()) {
+            list.add(new KeyValueDataSource(serviceBunrui.getコード(), serviceBunrui.get名称()));
+        }
+        div.getServiceShuruiShousai().getDdlServiceBunruiCode().setDataSource(list);
         KubunShikyuGendogakuHandler handler = getHandler(div);
         handler.setServiceShuruiShousaiEnable(true);
         handler.clearValue();
@@ -76,6 +93,7 @@ public class KubunShikyuGendogaku {
         handler.setServiceShuruiShousaiEnable(false);
         div.getServiceShuruiShousai().getTxtServiceCode().setDisabled(true);
         div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().setDisabled(true);
+        div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().setDisabled(true);
         handler.setDisable();
         handler.modify(row);
         handler.setCommonButtonVisible(true);
@@ -92,6 +110,7 @@ public class KubunShikyuGendogaku {
             KubunShikyuGendogakuDiv div) {
         KubunShikyuGendogakuHandler handler = getHandler(div);
         handler.setServiceShuruiShousaiEnable(false);
+        div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().setDisabled(true);
         handler.setDisable();
         handler.setCommonButtonVisible(true);
         return ResponseData.of(div).respond();
@@ -122,11 +141,16 @@ public class KubunShikyuGendogaku {
      */
     public ResponseData<KubunShikyuGendogakuDiv> onSelect_Back(
             KubunShikyuGendogakuDiv div) {
-        KubunShikyuGendogakuHandler handler = getHandler(div);
-        handler.setEnable();
-        handler.clearValue();
-        handler.setServiceShuruiShousaiEnable(true);
-        handler.setCommonButtonVisible(false);
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            KubunShikyuGendogakuHandler handler = getHandler(div);
+            handler.setEnable();
+            handler.clearValue();
+            handler.setServiceShuruiShousaiEnable(true);
+            handler.setCommonButtonVisible(false);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -158,18 +182,27 @@ public class KubunShikyuGendogaku {
             KaigoServiceShuruiIdentifier identifier = new KaigoServiceShuruiIdentifier(
                     new ServiceShuruiCode(サービス種類コード), new FlexibleYearMonth(提供開始年月));
             KaigoServiceShurui result = holder.getKogakuGassanJikoFutanGaku(identifier);
+            FlexibleYearMonth 提供終了年月 = result.get提供終了年月();
             if (result == null) {
                 result = new KaigoServiceShurui(
                         new ServiceShuruiCode(サービス種類コード), new FlexibleYearMonth(提供開始年月));
                 result = handler.setResult追加(result);
             } else {
-                if (div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().isDisabled()) {
-                    result = result.deleted();
+                if (div.getServiceShuruiShousai().getTxtTeikyoShuryoYM().isDisabled()
+                        && div.getServiceShuruiShousai().getTxtServiceMeisho().isDisabled()) {
+                    result = 削除(result, manager, サービス種類コード, 提供開始年月);
                 } else {
-                    result = handler.setResult修正(result);
+                    if ((!div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().isDisabled())
+                            && 提供終了年月 != null && 提供終了年月.isEmpty()) {
+                        result = result.createBuilderForEdit()
+                                .set提供終了年月(new FlexibleYearMonth(提供開始年月).minusMonth(1)).build();
+                    } else {
+                        result = handler.setResult修正(result);
+                    }
                 }
             }
             manager.save(result);
+            前排他キーの解除();
             RString messageTaisho1 = MESSAGETAISHO1.concat(div.getServiceShuruiShousai().getTxtServiceCode().getValue());
             RString messageTaisho2 = MESSAGETAISHO2.concat(div.getServiceShuruiShousai().getTxtServiceMeisho().getValue());
             div.getKanryo().getKanryoMessage().setSuccessMessage(MESSAGEMAIN, messageTaisho1, messageTaisho2);
@@ -212,6 +245,26 @@ public class KubunShikyuGendogaku {
     public ResponseData<KubunShikyuGendogakuDiv> onSelect_Compelete(
             KubunShikyuGendogakuDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC4510011TransitionEventName.処理完了).respond();
+    }
+
+    /**
+     * 前排他キーの解除のンメソッドです。
+     *
+     */
+    public void 前排他キーの解除() {
+        LockingKey 排他キー = new LockingKey(DBCKAIGOSERVICETABLEDBT7130);
+        RealInitialLocker.release(排他キー);
+    }
+
+    private KaigoServiceShurui 削除(KaigoServiceShurui result, KubunShikyuGendogakuManager manager,
+            RString サービス種類コード, RString 提供開始年月) {
+        if (result.get提供開始年月().minusMonth(1) == result.get提供終了年月()) {
+            result = result.createBuilderForEdit()
+                    .set提供終了年月(new FlexibleYearMonth(RString.EMPTY)).build();
+        } else {
+            manager.データを物理削除する(new ServiceShuruiCode(サービス種類コード), new FlexibleYearMonth(提供開始年月));
+        }
+        return result;
     }
 
     private KubunShikyuGendogakuHandler getHandler(KubunShikyuGendogakuDiv div) {

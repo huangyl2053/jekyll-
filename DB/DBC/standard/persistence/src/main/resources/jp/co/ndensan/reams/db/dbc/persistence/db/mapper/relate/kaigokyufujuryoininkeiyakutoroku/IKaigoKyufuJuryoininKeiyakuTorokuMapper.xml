@@ -8,22 +8,31 @@
        <result property="名称漢字" column="名称漢字" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="get被保険者情報" resultMap="resultMap_HihokenshaJohoEntity" parameterType="java.util.Map" fetchSize="500">
+     WITH master AS(
+        SELECT 
+            A.*
+        FROM
+           rgdb."DbV1001HihokenshaDaicho" AS A
+        WHERE
+            A."logicalDeletedFlag" = FALSE
+        AND A."hihokenshaNo" = #{被保険者番号}
+        ORDER BY 
+            A."idoYMD" DESC, A."edaNo" DESC 
+        LIMIT 1
+       )
      SELECT
         A."shikibetsuCode" AS 識別コード,
         宛名."kanjiShimei" AS 名称漢字
      FROM
-        rgdb."DbV1001HihokenshaDaicho" AS A
-        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('2','#{処理年月日}',true,'DB',false,'','','','','','','','','','','',true,
+        master AS A
+        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年月日},true,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
-        AS 宛名
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+        (SELECT 
+           ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT)) 
+         FROM master)
+        ) AS 宛名
         ON 宛名."shikibetsuCode" = A."shikibetsuCode"
-     WHERE
-        A."logicalDeletedFlag" = FALSE
-     AND A."hihokenshaNo" = #{被保険者番号}
-     ORDER BY 
-        A."idoYMD" DESC, A."edaNo" DESC 
-     LIMIT 1
     </select>
 
 </mapper>
