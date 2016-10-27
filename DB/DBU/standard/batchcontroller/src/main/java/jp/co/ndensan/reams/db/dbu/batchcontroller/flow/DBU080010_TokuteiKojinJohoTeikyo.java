@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.KyuufuJyohouPro
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.KyuufuJyohouUpdateProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.RiyoshaFutanwariaiProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.RiyoshaFutanwariaiUpdateProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.ShoriDateKanriUpdateProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.SougouJigyouJyohouProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.SougouJigyouJyohouUpdateProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010.TokuteiKojinJohoTeikyoKanriUpdateProcess;
@@ -31,6 +32,7 @@ import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.J
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.RiyoshaFutanwariaiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.SougouJigyouJyohouProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoKanriUpdateProcessParameter;
+import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinKadouKahiHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -50,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_TokuteiKojinJohoTeikyoParameter> {
 
     private static final String バッチパラメータの取得 = "TokuteiKojinJohoTeikyoSetParameter";
+    private static final String 処理日付管理マスタの更新 = "ShoriDateKanriUpdate";
     private static final String 稼働可否の判定 = "TokuteiKojinKadouKahiHantei";
     private static final String 被保険者 = "HihokenshaJoho";
     private static final String 被保険者_更新用 = "HihokenshaJohoNNTempUpdateProcess";
@@ -88,6 +91,7 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
             boolean is未来基準日 = getResult(Boolean.class, バッチパラメータの取得,
                     TokuteiKojinJohoTeikyoSetParameterProcess.ISMIRAIDATE);
             if (!is未来基準日) {
+                executeStep(処理日付管理マスタの更新);
                 setバッチパラメータ();
                 exeバッチ処理();
             }
@@ -118,6 +122,17 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
     @Step(バッチパラメータの取得)
     protected IBatchFlowCommand exeHanKanriNoHantei() {
         return simpleBatch(TokuteiKojinJohoTeikyoSetParameterProcess.class).define();
+    }
+
+    /**
+     * バッチパラメータを取得します。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(処理日付管理マスタの更新)
+    protected IBatchFlowCommand exeShoriDateKanriUpdate() {
+        TokuteiKojinJohoTeikyoProcessParameter processParameter = parameter.toTokuteiKojinJohoTeikyoProcessParameter();
+        return loopBatch(ShoriDateKanriUpdateProcess.class).arguments(processParameter).define();
     }
 
     /**
