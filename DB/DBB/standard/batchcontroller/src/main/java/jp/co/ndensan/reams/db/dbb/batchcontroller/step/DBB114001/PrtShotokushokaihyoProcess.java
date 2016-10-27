@@ -247,6 +247,7 @@ public class PrtShotokushokaihyoProcess extends BatchKeyBreakBase<ShotokuShoukai
         builder = new RStringBuilder();
         builder.append((FORMAT_LEFT).concat(定数_出力対象).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
                 .concat(processParameter.get出力対象()));
+        出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         RString 有無し;
         if (processParameter.isテストプリント()) {
