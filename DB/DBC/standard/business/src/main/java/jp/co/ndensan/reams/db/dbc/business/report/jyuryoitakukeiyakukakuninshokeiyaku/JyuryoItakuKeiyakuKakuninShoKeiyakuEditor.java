@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.business.report.jyuryoitakukeiyakukakuninshok
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufujuryoininkeiyakutoroku.KaigoKyufuJuryoininKeiyakuTorokuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jyuryoitakukeiyakukakuninshokeiyaku.JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票設計_DBCMN31003_介護保険受領委任契約承認（不承認）確認書（事業者用）Editor
@@ -45,49 +44,19 @@ public class JyuryoItakuKeiyakuKakuninShoKeiyakuEditor
         source.yubinNo = entity.get郵便番号();
         source.gyoseiku1 = entity.get行政区();
         source.jushoText = entity.get住所Text();
-        if (!entity.get住所1().isNull()) {
-            source.jusho4 = entity.get住所1();
-        }
-        if (!entity.get住所2().isNull()) {
-            source.jusho5 = entity.get住所2();
-        }
-        if (entity.get住所3().isNull()) {
-            source.jusho6 = RString.EMPTY;
-        } else {
-            source.jusho6 = entity.get住所3();
-        }
-        if (entity.get方書Text().isNull()) {
-            source.katagakiText = RString.EMPTY;
-        } else {
-            source.katagakiText = entity.get方書Text();
-        }
-        if (entity.get方書1().isNull()) {
-            source.katagaki3 = RString.EMPTY;
-        } else {
-            source.katagaki3 = entity.get方書1();
-        }
-        if (!entity.get方書2().isNull()) {
-            source.katagaki4 = entity.get方書2();
-        }
-        if (!entity.get方書Small1().isNull()) {
-            source.katagakiSmall1 = entity.get方書Small1();
-        }
-        if (!entity.get方書Small2().isNull()) {
-            source.katagakiSmall2 = entity.get方書Small2();
-        }
-        if (!entity.get代納人区分().isNull()) {
-            source.dainoKubunMei = entity.get代納人区分();
-        }
-        if (!entity.get氏名Text().isNull()) {
-            source.shimeiText = entity.get氏名Text();
-        }
-        if (!entity.get氏名1().isNull()) {
-            source.shimei5 = entity.get氏名1();
-        }
+        source.jusho4 = entity.get住所1();
+        source.jusho5 = entity.get住所2();
+        source.jusho6 = entity.get住所3();
+        source.katagakiText = entity.get方書Text();
+        source.katagaki3 = entity.get方書1();
+        source.katagaki4 = entity.get方書2();
+        source.katagakiSmall1 = entity.get方書Small1();
+        source.katagakiSmall2 = entity.get方書Small2();
+        source.dainoKubunMei = entity.get代納人区分();
+        source.shimeiText = entity.get氏名Text();
+        source.shimei5 = entity.get氏名1();
         source.shimei6 = entity.get氏名2();
-        if (!entity.get氏名Small1().isNull()) {
-            source.shimeiSmall1 = entity.get氏名Small1();
-        }
+        source.shimeiSmall1 = entity.get氏名Small1();
         if (!entity.get氏名Small2().isNull()) {
             source.shimeiSmall2 = entity.get氏名Small2();
         }
@@ -135,11 +104,21 @@ public class JyuryoItakuKeiyakuKakuninShoKeiyakuEditor
         source.shoninYMD = entity.get承認年月日();
         source.fushoninRiyu = entity.get不承認理由();
         source.kyufuShurui = entity.get給付の種類();
-        source.jigyoshaName = entity.get事業所名().value();
-        source.daihyoshaName = entity.get代表者氏名().value();
-        source.jigyoshaYubinNo = entity.get事業所郵便番号().value();
-        source.jigyoshoJusho = entity.get事業所所在地().value();
-        source.jigyoshoTelNo = entity.get事業所電話番号().value();
+        if (entity.get事業所名() != null && !entity.get事業所名().isEmpty()) {
+            source.jigyoshaName = entity.get事業所名().value();
+        }
+        if (entity.get代表者氏名() != null && !entity.get代表者氏名().isEmpty()) {
+            source.daihyoshaName = entity.get代表者氏名().value();
+        }
+        if (entity.get事業所郵便番号() != null && !entity.get事業所郵便番号().isEmpty()) {
+            source.jigyoshaYubinNo = entity.get事業所郵便番号().value();
+        }
+        if (entity.get事業所所在地() != null && !entity.get事業所所在地().isEmpty()) {
+            source.jigyoshoJusho = entity.get事業所所在地().value();
+        }
+        if (entity.get事業所電話番号() != null && !entity.get事業所電話番号().isEmpty()) {
+            source.jigyoshoTelNo = entity.get事業所電話番号().value();
+        }
         source.hiyogakuGokei = entity.get費用額合計();
         source.hokenHiyogaku = entity.get保険対象費用額();
         source.riyoFutangaku = entity.get利用者負担額();
