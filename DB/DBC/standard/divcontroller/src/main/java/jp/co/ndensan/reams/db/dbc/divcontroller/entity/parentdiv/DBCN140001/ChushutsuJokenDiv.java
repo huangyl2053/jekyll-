@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN140001;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
  */
 public class ChushutsuJokenDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -44,7 +44,9 @@ public class ChushutsuJokenDiv extends Panel {
     @JsonProperty("txtHihokenshaNo")
     private TextBox txtHihokenshaNo;
     @JsonProperty("btnHihokenshaSearch")
-    private ButtonDialog btnHihokenshaSearch;
+    private Button btnHihokenshaSearch;
+    @JsonProperty("txtHihokenshaMei")
+    private TextBox txtHihokenshaMei;
     @JsonProperty("ddlNendo")
     private DropDownList ddlNendo;
     @JsonProperty("hihokenshaNo")
@@ -187,7 +189,7 @@ public class ChushutsuJokenDiv extends Panel {
      * @return btnHihokenshaSearch
      */
     @JsonProperty("btnHihokenshaSearch")
-    public ButtonDialog getBtnHihokenshaSearch() {
+    public Button getBtnHihokenshaSearch() {
         return btnHihokenshaSearch;
     }
 
@@ -196,8 +198,26 @@ public class ChushutsuJokenDiv extends Panel {
      * @param btnHihokenshaSearch btnHihokenshaSearch
      */
     @JsonProperty("btnHihokenshaSearch")
-    public void setBtnHihokenshaSearch(ButtonDialog btnHihokenshaSearch) {
+    public void setBtnHihokenshaSearch(Button btnHihokenshaSearch) {
         this.btnHihokenshaSearch = btnHihokenshaSearch;
+    }
+
+    /*
+     * gettxtHihokenshaMei
+     * @return txtHihokenshaMei
+     */
+    @JsonProperty("txtHihokenshaMei")
+    public TextBox getTxtHihokenshaMei() {
+        return txtHihokenshaMei;
+    }
+
+    /*
+     * settxtHihokenshaMei
+     * @param txtHihokenshaMei txtHihokenshaMei
+     */
+    @JsonProperty("txtHihokenshaMei")
+    public void setTxtHihokenshaMei(TextBox txtHihokenshaMei) {
+        this.txtHihokenshaMei = txtHihokenshaMei;
     }
 
     /*

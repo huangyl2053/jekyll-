@@ -195,10 +195,10 @@
             AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
             AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" =#{tsuchiNaiyoCode}
             <choose>
-                <when test="hosokuTsuki=='10' and 四月待機フラグ==true ">
-                    AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" ='06'
-                    AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" ='08'
-                    AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" ='10'
+                <when test="hosokuTsuki==10 and 四月待機フラグ">
+                    AND ("UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" ='06'
+                    OR "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" ='08'
+                    OR "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" ='10')
                 </when>
                 <otherwise>
                     AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" =#{hosokuTsuki}
