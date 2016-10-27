@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710130;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.core.hanyolistsogojigyohi.HanyoListSogoJigyoHi;
 import jp.co.ndensan.reams.db.dbc.business.core.tankinyushokakudaigaitosha.TankiNyushoKakudaiGaitosha;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.tankinyushokakudaigaitosha.TankiNyushoKakudaiGaitoshaProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -154,8 +153,8 @@ public class TankiNyushoKakudaiGaitoshaProcess extends BatchProcessBase<TankiNyu
     }
 
     private RString get出力順() {
-        ShutsuryokujunRelateEntity shutsuryokujunrelateentity = ReportUtil.get出力順情報(HanyoListSogoJigyoHi.ShutsuryokujunEnum.class,
-                SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701018.getReportId(),
+        ShutsuryokujunRelateEntity shutsuryokujunrelateentity = ReportUtil.get出力順情報(TankiNyushoKakudaiGaitosha.ShutsuryokujunEnum.class,
+                SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701013.getReportId(),
                 processParameter.get出力順ID());
         RString 出力順 = RString.EMPTY;
         if (shutsuryokujunrelateentity != null) {
