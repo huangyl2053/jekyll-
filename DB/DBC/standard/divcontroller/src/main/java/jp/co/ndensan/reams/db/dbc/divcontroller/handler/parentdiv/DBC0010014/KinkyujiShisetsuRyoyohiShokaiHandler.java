@@ -383,12 +383,10 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
             }
         }
         FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
-        if (INT_ZERO < index && index < サービス提供年月リスト.size() - 1) {
-            if (前月.equals(data)) {
-                今提供年月 = サービス提供年月リスト.get(index + 1);
-            } else {
-                今提供年月 = サービス提供年月リスト.get(index - 1);
-            }
+        if (前月.equals(data) && index < サービス提供年月リスト.size() - 1) {
+            今提供年月 = サービス提供年月リスト.get(index + 1);
+        } else if (INT_ZERO < index && !前月.equals(data)) {
+            今提供年月 = サービス提供年月リスト.get(index - 1);
         }
         List<KyufujissekiShoteiShikkanShisetsuRyoyo> 所定疾患施設療養費等データ取得
                 = get給付実績データ(所定疾患施設療養費等データ取得リスト, div.getCcdKyufuJissekiHeader().get整理番号(),
