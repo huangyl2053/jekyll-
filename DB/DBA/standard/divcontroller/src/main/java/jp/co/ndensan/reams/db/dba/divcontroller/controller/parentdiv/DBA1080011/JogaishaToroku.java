@@ -156,10 +156,6 @@ public class JogaishaToroku {
      * @return ResponseData<JogaishaTorokuDiv>
      */
     public ResponseData<JogaishaTorokuDiv> onFocus_shikibetsuCode(JogaishaTorokuDiv requestDiv) {
-        ValidationMessageControlPairs validationMessageControlPairs = getHandler(requestDiv).shikibetsuCodeCheck();
-        if (validationMessageControlPairs.iterator().hasNext()) {
-            return ResponseData.of(requestDiv).addValidationMessages(validationMessageControlPairs).respond();
-        }
         getHandler(requestDiv).onFocus_shikibetsuCode();
         return ResponseData.of(requestDiv).setState(DBA1080011StateName.初期状態);
     }
