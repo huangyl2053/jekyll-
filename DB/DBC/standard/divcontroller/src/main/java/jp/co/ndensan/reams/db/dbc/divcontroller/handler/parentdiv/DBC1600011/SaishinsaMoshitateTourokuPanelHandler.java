@@ -435,7 +435,9 @@ public class SaishinsaMoshitateTourokuPanelHandler {
             List<KyufuJissekiGaitoshaBusiness> 給付実績一覧) {
         SaishinsaMoshitateTourokuCollect collect = new SaishinsaMoshitateTourokuCollect();
         collect.set被保険者番号(div.getSearchToKyufujissekiPanel().getTxtHihoNo().getValue());
+        collect.set被保険者名称(div.getSearchToKyufujissekiPanel().getTxtHihoName().getValue());
         collect.set事業所番号(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo());
+        collect.set事業者名称(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuMeisho());
         collect.set保険者番号(get保険者リストの値());
         if (div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue() != null) {
             collect.set提供年月開始(div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue()
