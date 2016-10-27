@@ -606,11 +606,8 @@ public class ShujiiIkenshoSakuseiIrai {
         RDate date = RDate.getNowDate();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             主治医意見書記入用紙List.add(SetValueOmote(row));
-            //主治医意見書記入用紙List.add(SetValueUra(row));
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             主治医意見書記入用紙List.add(SetValueOmote(row));
-            IkenshokinyuyoshiBusiness business = new IkenshokinyuyoshiBusiness();
-            主治医意見書記入用紙List.add(business);
         }
     }
     
@@ -627,11 +624,8 @@ public class ShujiiIkenshoSakuseiIrai {
          RDate date = RDate.getNowDate();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             主治医意見書記入用紙OCRList.add(SetValueOmote(row));
-            主治医意見書記入用紙OCRList.add(SetValueUra(row));
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             主治医意見書記入用紙OCRList.add(SetValueOmote(row));
-            IkenshokinyuyoshiBusiness business = new IkenshokinyuyoshiBusiness();
-            主治医意見書記入用紙OCRList.add(business); 
         }
     }
     
@@ -703,37 +697,37 @@ public class ShujiiIkenshoSakuseiIrai {
         return business;
     }
     
-    private IkenshokinyuyoshiBusiness SetValueUra(dgShinseishaIchiran_Row row) {
-        IkenshokinyuyoshiBusiness business = new IkenshokinyuyoshiBusiness();
-        RString hokenshaNo = row.getHokenshaNo().padRight(RString.HALF_SPACE, 数字_6);
-        business.setHokenshaNo1(hokenshaNo.substring(数字_0, 数字_1));
-        business.setHokenshaNo2(hokenshaNo.substring(数字_1, 数字_2));
-        business.setHokenshaNo3(hokenshaNo.substring(数字_2, 数字_3));
-        business.setHokenshaNo4(hokenshaNo.substring(数字_3, 数字_4));
-        business.setHokenshaNo5(hokenshaNo.substring(数字_4, 数字_5));
-        business.setHokenshaNo6(hokenshaNo.substring(数字_5));
-        RString hihokenshaNo = row.getHihokenshaNo().padRight(RString.HALF_SPACE, 数字_10);
-        business.setHihokenshaNo1(hihokenshaNo.substring(数字_0, 数字_1));
-        business.setHihokenshaNo2(hihokenshaNo.substring(数字_1, 数字_2));
-        business.setHihokenshaNo3(hihokenshaNo.substring(数字_2, 数字_3));
-        business.setHihokenshaNo4(hihokenshaNo.substring(数字_3, 数字_4));
-        business.setHihokenshaNo5(hihokenshaNo.substring(数字_4, 数字_5));
-        business.setHihokenshaNo6(hihokenshaNo.substring(数字_5, 数字_6));
-        business.setHihokenshaNo7(hihokenshaNo.substring(数字_6, 数字_7));
-        business.setHihokenshaNo8(hihokenshaNo.substring(数字_7, 数字_8));
-        business.setHihokenshaNo9(hihokenshaNo.substring(数字_8, 数字_9));
-        business.setHihokenshaNo10(hihokenshaNo.substring(数字_9));
-        RDate 認定申請日 = row.getShinseiDay().getValue();
-        if (認定申請日 != null) {
-            business.setShinseiYY1(認定申請日.getYear().wareki().toDateString().substring(数字_0, 数字_1));
-            business.setShinseiYY2(認定申請日.getYear().wareki().toDateString().substring(数字_1, 数字_2));
-            business.setShinseiMM1(new RString(String.valueOf(認定申請日.getMonthValue() / 数字_10)));
-            business.setShinseiMM2(new RString(String.valueOf(認定申請日.getMonthValue() % 数字_10)));
-            business.setShinseiDD1(new RString(String.valueOf(認定申請日.getDayValue() / 数字_10)));
-            business.setShinseiDD2(new RString(String.valueOf(認定申請日.getDayValue() % 数字_10)));
-        }
-        return business;
-    }
+//    private IkenshokinyuyoshiBusiness SetValueUra(dgShinseishaIchiran_Row row) {
+//        IkenshokinyuyoshiBusiness business = new IkenshokinyuyoshiBusiness();
+//        RString hokenshaNo = row.getHokenshaNo().padRight(RString.HALF_SPACE, 数字_6);
+//        business.setHokenshaNo1(hokenshaNo.substring(数字_0, 数字_1));
+//        business.setHokenshaNo2(hokenshaNo.substring(数字_1, 数字_2));
+//        business.setHokenshaNo3(hokenshaNo.substring(数字_2, 数字_3));
+//        business.setHokenshaNo4(hokenshaNo.substring(数字_3, 数字_4));
+//        business.setHokenshaNo5(hokenshaNo.substring(数字_4, 数字_5));
+//        business.setHokenshaNo6(hokenshaNo.substring(数字_5));
+//        RString hihokenshaNo = row.getHihokenshaNo().padRight(RString.HALF_SPACE, 数字_10);
+//        business.setHihokenshaNo1(hihokenshaNo.substring(数字_0, 数字_1));
+//        business.setHihokenshaNo2(hihokenshaNo.substring(数字_1, 数字_2));
+//        business.setHihokenshaNo3(hihokenshaNo.substring(数字_2, 数字_3));
+//        business.setHihokenshaNo4(hihokenshaNo.substring(数字_3, 数字_4));
+//        business.setHihokenshaNo5(hihokenshaNo.substring(数字_4, 数字_5));
+//        business.setHihokenshaNo6(hihokenshaNo.substring(数字_5, 数字_6));
+//        business.setHihokenshaNo7(hihokenshaNo.substring(数字_6, 数字_7));
+//        business.setHihokenshaNo8(hihokenshaNo.substring(数字_7, 数字_8));
+//        business.setHihokenshaNo9(hihokenshaNo.substring(数字_8, 数字_9));
+//        business.setHihokenshaNo10(hihokenshaNo.substring(数字_9));
+//        RDate 認定申請日 = row.getShinseiDay().getValue();
+//        if (認定申請日 != null) {
+//            business.setShinseiYY1(認定申請日.getYear().wareki().toDateString().substring(数字_0, 数字_1));
+//            business.setShinseiYY2(認定申請日.getYear().wareki().toDateString().substring(数字_1, 数字_2));
+//            business.setShinseiMM1(new RString(String.valueOf(認定申請日.getMonthValue() / 数字_10)));
+//            business.setShinseiMM2(new RString(String.valueOf(認定申請日.getMonthValue() % 数字_10)));
+//            business.setShinseiDD1(new RString(String.valueOf(認定申請日.getDayValue() / 数字_10)));
+//            business.setShinseiDD2(new RString(String.valueOf(認定申請日.getDayValue() % 数字_10)));
+//        }
+//        return business;
+//    }
 
     private ShujiiIkenshoSakuseiRyoSeikyushoItem create主治医意見書作成料請求書(dgShinseishaIchiran_Row row) {
         RString hihokenshaNo = row.getHihokenshaNo().padRight(RString.HALF_SPACE, 数字_10);
