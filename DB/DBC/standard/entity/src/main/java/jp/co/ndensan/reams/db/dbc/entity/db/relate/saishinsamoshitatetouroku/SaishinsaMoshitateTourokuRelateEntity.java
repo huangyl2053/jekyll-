@@ -20,7 +20,6 @@ public class SaishinsaMoshitateTourokuRelateEntity implements Serializable {
     private RString 氏名;
     private RString 証記載保険者名;
     private RString 事業者名;
-    private RString 行番号;
     private RString サービス種類コード;
     private RString サービス種類略称;
     private RString サービス項目コード;
