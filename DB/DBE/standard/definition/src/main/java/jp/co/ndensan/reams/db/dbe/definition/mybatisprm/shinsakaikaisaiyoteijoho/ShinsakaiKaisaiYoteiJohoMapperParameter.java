@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 public final class ShinsakaiKaisaiYoteiJohoMapperParameter {
 
+    private final RString shinsakaiKaisaiNo;
+
     /**
      * コンストラクタです。
      *
@@ -24,7 +26,7 @@ public final class ShinsakaiKaisaiYoteiJohoMapperParameter {
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private ShinsakaiKaisaiYoteiJohoMapperParameter(RString shinsakaiKaisaiNo) {
-
+        this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         requireNonNull(shinsakaiKaisaiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
     }
 
