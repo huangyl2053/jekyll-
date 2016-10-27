@@ -716,10 +716,9 @@ public class HanyoListSogoJigyoHi {
     /**
      * 出力条件を作成するメッソドです。
      *
-     * @param 市町村名 RString
      * @return List<RString>
      */
-    public List<RString> set出力条件(RString 市町村名) {
+    public List<RString> set出力条件() {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(new RString("【抽出対象者】"));
@@ -733,8 +732,9 @@ public class HanyoListSogoJigyoHi {
         } else {
             jokenBuilder.append(new RString("保険者："));
             RStringBuilder 市町村名builder = new RStringBuilder();
+            市町村名builder.append(processParameter.get保険者コード());
             市町村名builder.append(RString.HALF_SPACE);
-            市町村名builder.append(市町村名);
+            市町村名builder.append(processParameter.get保険者名());
             jokenBuilder.append(市町村名builder.toRString());
         }
         出力条件List.add(jokenBuilder.toRString());
@@ -1001,7 +1001,23 @@ public class HanyoListSogoJigyoHi {
         /**
          * 有効開始年月
          */
-        整理番号(new RString("0305"), new RString(""), new RString("\"seiriNo\""));
+        整理番号(new RString("0305"), new RString(""), new RString("\"seiriNo\"")),
+        /**
+         * 要介護度
+         */
+        給付実績事業者(new RString("0352"), new RString(""), new RString("\"kyufuJissekiJigyosha\"")),
+        /**
+         * 要介護度
+         */
+        サービス種類(new RString("0308"), new RString(""), new RString("\"serviceShuruiCode\"")),
+        /**
+         * 要介護度
+         */
+        サービス項目(new RString("0350"), new RString(""), new RString("\"serviceKomoku\"")),
+        /**
+         * 要介護度
+         */
+        サービスコード(new RString("0351"), new RString(""), new RString("\"ketteiServiceCode\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

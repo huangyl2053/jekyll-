@@ -19,24 +19,18 @@ import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistsogojigyohi.HanyoListSogoJ
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistsogojigyohi.IHanyoListSogoJigyoHiEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
-import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -70,13 +64,19 @@ public class HanyoListSogoJigyoHiRenbanNashiProcess extends BatchProcessBase<Han
     private static final RString 被保険者番号 = new RString("0104");
     private static final RString サービス年月 = new RString("0301");
     private static final RString 整理番号 = new RString("0305");
+    private static final RString サービス種類 = new RString("0308");
+    private static final RString サービス項目 = new RString("0350");
+    private static final RString サービスコード = new RString("0351");
+    private static final RString 給付実績事業者 = new RString("0352");
     private static final RString HIHOKENSHANO = new RString(",\"hihokenshaNo\"");
     private static final RString SERVICEYM = new RString(",\"serviceYM\"");
     private static final RString SEIRINO = new RString(",\"seiriNo\"");
-    private static final int NUM5 = 5;
+    private static final RString SERVICESHURUICODE = new RString(",\"serviceShuruiCode\"");
+    private static final RString SERVICEKOMOKU = new RString(",\"serviceKomoku\"");
+    private static final RString KETTEISERVICECODE = new RString(",\"ketteiServiceCode\"");
+    private static final RString KYUFUJISSEKIJIGYOSHA = new RString(",\"kyufuJissekiJigyosha\"");
     private FileSpoolManager manager;
     private RString eucFilePath;
-    private RString 市町村名;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
     private HanyoListSogoJigyoHiProcessParameter processParameter;
     private HanyoListSogoJigyoHi hanyolistsogojigyohi;
@@ -149,16 +149,6 @@ public class HanyoListSogoJigyoHiRenbanNashiProcess extends BatchProcessBase<Han
     }
 
     private void get市町村名() {
-        RString 保険者コード = processParameter.get保険者コード();
-        if (new RString("000000").equals(保険者コード)) {
-            市町村名 = new RString("全市町村");
-        } else if (!RString.isNullOrEmpty(保険者コード)) {
-            IAssociationFinder finder = AssociationFinderFactory.createInstance();
-            association = finder.getAssociation(new LasdecCode(保険者コード));
-            市町村名 = association.get市町村名();
-        } else {
-            市町村名 = RString.EMPTY;
-        }
         市町村名MasterMap = new HashMap<>();
         List<KoseiShichosonMaster> 市町村名Master = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         for (KoseiShichosonMaster koseiShichosonMaster : 市町村名Master) {
@@ -176,7 +166,7 @@ public class HanyoListSogoJigyoHiRenbanNashiProcess extends BatchProcessBase<Han
                 new RString("HanyoList_SogoJigyoHi.csv"),
                 EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
-                hanyolistsogojigyohi.set出力条件(市町村名));
+                hanyolistsogojigyohi.set出力条件());
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
@@ -193,55 +183,127 @@ public class HanyoListSogoJigyoHiRenbanNashiProcess extends BatchProcessBase<Han
     }
 
     private RString get出力順() {
-        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701018.getReportId(), processParameter.get出力順ID());
+        ShutsuryokujunRelateEntity shutsuryokujunrelateentity = new ShutsuryokujunRelateEntity();
+        if (基本情報.equals(processParameter.get抽出方法())) {
+            shutsuryokujunrelateentity = ReportUtil.get出力順情報(HanyoListSogoJigyoHi.ShutsuryokujunEnum.class,
+                    SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701018.getReportId(),
+                    processParameter.get出力順ID());
+        } else if (基本明細情報.equals(processParameter.get抽出方法())) {
+            shutsuryokujunrelateentity = ReportUtil.get出力順情報(HanyoListSogoJigyoHi.ShutsuryokujunEnum.class,
+                    SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701022.getReportId(),
+                    processParameter.get出力順ID());
+        } else if (基本集計情報.equals(processParameter.get抽出方法())) {
+            shutsuryokujunrelateentity = ReportUtil.get出力順情報(HanyoListSogoJigyoHi.ShutsuryokujunEnum.class,
+                    SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701023.getReportId(),
+                    processParameter.get出力順ID());
+        } else if (基本ケアマネジメント情報.equals(processParameter.get抽出方法())) {
+            shutsuryokujunrelateentity = ReportUtil.get出力順情報(HanyoListSogoJigyoHi.ShutsuryokujunEnum.class,
+                    SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701024.getReportId(),
+                    processParameter.get出力順ID());
+        }
+
         RString 出力順 = RString.EMPTY;
-        if (outputOrder != null) {
-            出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(
-                    HanyoListSogoJigyoHi.ShutsuryokujunEnum.class, outputOrder), NUM5);
-            for (ISetSortItem item : outputOrder.get設定項目リスト()) {
-                return set出力順(item, 出力順);
+        if (shutsuryokujunrelateentity != null) {
+            出力順 = shutsuryokujunrelateentity.get出力順OrderBy();
+            for (RString item : shutsuryokujunrelateentity.get出力順項目()) {
+                if (基本情報.equals(processParameter.get抽出方法())) {
+                    return set出力順(item, 出力順);
+                } else if (基本明細情報.equals(processParameter.get抽出方法())) {
+                    return set出力順基本明細(item, set出力順(item, 出力順));
+                } else if (基本集計情報.equals(processParameter.get抽出方法())) {
+                    return set出力順基本集計(item, set出力順(item, 出力順));
+                } else if (基本ケアマネジメント情報.equals(processParameter.get抽出方法())) {
+                    return set出力順基本ケアマ(item, set出力順(item, 出力順));
+                }
             }
         }
         return 出力順;
     }
 
-    private RString set出力順(ISetSortItem item, RString 出力順) {
-        if (被保険者番号.equals(item.get項目ID())) {
+    private RString set出力順(RString item, RString 出力順) {
+        if (被保険者番号.equals(item)) {
             return set被保険者番号ARi(item, 出力順);
         } else {
             return set被保険者番号NaShi(item, 出力順);
         }
     }
 
-    private RString set被保険者番号ARi(ISetSortItem item, RString 出力順) {
-        if (サービス年月.equals(item.get項目ID())) {
-            if (整理番号.equals(item.get項目ID())) {
+    private RString set被保険者番号ARi(RString item, RString 出力順) {
+        if (サービス年月.equals(item)) {
+            return setサービス年月ARI(item, 出力順);
+        } else {
+            return setサービス年月NASHI(item, 出力順);
+        }
+    }
+
+    private RString set被保険者番号NaShi(RString item, RString 出力順) {
+        if (サービス年月.equals(item)) {
+            return setサービス年月ARI(item, 出力順).concat(HIHOKENSHANO);
+        } else {
+            return setサービス年月NASHI(item, 出力順).concat(HIHOKENSHANO);
+        }
+    }
+
+    private RString set出力順基本明細(RString item, RString 出力順) {
+        if (サービス種類.equals(item)) {
+            if (サービス項目.equals(item)) {
                 return 出力順;
             } else {
-                return 出力順.concat(SEIRINO);
+                return 出力順.concat(SERVICEKOMOKU);
             }
         } else {
-            if (整理番号.equals(item.get項目ID())) {
-                return 出力順.concat(SERVICEYM);
+            if (サービス項目.equals(item)) {
+                return 出力順.concat(SERVICESHURUICODE);
             } else {
-                return 出力順.concat(SERVICEYM).concat(SEIRINO);
+                return 出力順.concat(SERVICEKOMOKU).concat(SERVICESHURUICODE);
             }
         }
     }
 
-    private RString set被保険者番号NaShi(ISetSortItem item, RString 出力順) {
-        if (サービス年月.equals(item.get項目ID())) {
-            if (整理番号.equals(item.get項目ID())) {
-                return 出力順.concat(HIHOKENSHANO);
+    private RString set出力順基本集計(RString item, RString 出力順) {
+        if (サービス種類.equals(item)) {
+            return 出力順;
+        } else {
+            return 出力順.concat(SERVICESHURUICODE);
+        }
+    }
+
+    private RString set出力順基本ケアマ(RString item, RString 出力順) {
+        if (サービスコード.equals(item)) {
+            return 出力順;
+        } else {
+            return 出力順.concat(KETTEISERVICECODE);
+        }
+    }
+
+    private RString setサービス年月ARI(RString item, RString 出力順) {
+        if (整理番号.equals(item)) {
+            if (給付実績事業者.equals(item)) {
+                return 出力順;
             } else {
-                return 出力順.concat(HIHOKENSHANO).concat(SEIRINO);
+                return 出力順.concat(KYUFUJISSEKIJIGYOSHA);
             }
         } else {
-            if (整理番号.equals(item.get項目ID())) {
-                return 出力順.concat(HIHOKENSHANO).concat(SERVICEYM);
+            if (給付実績事業者.equals(item)) {
+                return 出力順.concat(SEIRINO);
             } else {
-                return 出力順.concat(HIHOKENSHANO).concat(SERVICEYM).concat(SEIRINO);
+                return 出力順.concat(SEIRINO).concat(KYUFUJISSEKIJIGYOSHA);
+            }
+        }
+    }
+
+    private RString setサービス年月NASHI(RString item, RString 出力順) {
+        if (整理番号.equals(item)) {
+            if (給付実績事業者.equals(item)) {
+                return 出力順.concat(SERVICEYM);
+            } else {
+                return 出力順.concat(SERVICEYM).concat(KYUFUJISSEKIJIGYOSHA);
+            }
+        } else {
+            if (給付実績事業者.equals(item)) {
+                return 出力順.concat(SERVICEYM).concat(SEIRINO);
+            } else {
+                return 出力順.concat(SERVICEYM).concat(SEIRINO).concat(KYUFUJISSEKIJIGYOSHA);
             }
         }
     }
