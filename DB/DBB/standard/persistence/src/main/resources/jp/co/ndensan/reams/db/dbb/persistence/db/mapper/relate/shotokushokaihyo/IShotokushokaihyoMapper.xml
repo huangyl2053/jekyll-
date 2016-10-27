@@ -647,7 +647,7 @@
         WHERE NOT (EXISTS (
         SELECT * 
         FROM rgdb."DbT2020ShotokuShokaihyoHakkoRireki" AS N 
-        WHERE M."shoriNendo" = N."shotokuNendo" 
+        WHERE M."shoriNendo" = N."shoriNendo" 
         AND M."shikibetsuCode" = N."shikibetsuCode" 
         AND M."rirekiNo" <![CDATA[<]]> N."rirekiNo")))
         AS "DbT2020ShotokuShokaihyoHakkoRireki"

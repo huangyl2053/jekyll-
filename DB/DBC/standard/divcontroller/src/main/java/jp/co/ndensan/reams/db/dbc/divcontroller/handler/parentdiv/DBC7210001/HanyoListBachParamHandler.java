@@ -146,7 +146,12 @@ public class HanyoListBachParamHandler {
             支払方法区分list.add(div.getRadSiharaiHohoKubun().getSelectedKey());
         }
         parameter.set支払方法区分List(支払方法区分list);
-        parameter.set金融機関コード(div.getCcdKinyuKikan().getKinyuKikanCode().value());
+        if (div.getCcdKinyuKikan().getKinyuKikanCode() != null) {
+            parameter.set金融機関コード(div.getCcdKinyuKikan().getKinyuKikanCode().value());
+        }
+        if (div.getCcdKinyuKikan().getKinyuKikanShitenCode() != null) {
+            parameter.set支店コード(div.getCcdKinyuKikan().getKinyuKikanShitenCode().value());
+        }
         parameter.set金融機関名(div.getCcdKinyuKikan().get金融機関名());
         parameter.set対象年度(div.getDdlTaishoNendo().getSelectedKey());
         return parameter;

@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
@@ -498,7 +498,7 @@ public class HanyoListCsvNoRenbanDataCreate {
         if (entity.get要介護認定状態区分コード() == null || entity.get要介護認定状態区分コード().isEmpty()) {
             csvEntity.set受給要介護度(RString.EMPTY);
         } else {
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, codeToRString(entity.get要介護認定状態区分コード())).getName());
+            csvEntity.set受給要介護度(YokaigoJotaiKubun.toValue(codeToRString(entity.get要介護認定状態区分コード())).get名称());
         }
         csvEntity.set受給認定開始日(dataToRString(entity.get認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(dataToRString(entity.get認定有効期間終了日(), parameter));
