@@ -10,9 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraishikyuketteky
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3027KyufujissekiJutakuKaishuhiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinsei.GeifuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraishikyukettekyufujssekihensyu.DealKyufujissekiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3017KyufujissekiKihonDac;
@@ -20,6 +18,8 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3027KyufujissekiJutaku
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3033KyufujissekiShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraishikyukettekyufujssekihensyu.ISyokanbaraiShikyuKetteKyufuJssekiHensyuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
@@ -82,6 +82,8 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
     private static final RString DATA_1137 = new RString("1137");
     private static final RString DATA_1138 = new RString("1138");
 
+    private static final int 通し番号_LEN = 10;
+
     JutakuKaishuKetteiKyufujissekiHennsyuManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
@@ -137,7 +139,7 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         }
         KokanShikibetsuNo 交換情報識別番号 = getKokanShikibetsuNo(サービス提供年月);
         DbT3017KyufujissekiKihonEntity 給付実績基本entity = new DbT3017KyufujissekiKihonEntity();
-        RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.実績管理番号.getコード()).nextString();
+        RString 通し番号 = Saiban.get(SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.実績管理番号.getコード()).nextString();
         給付実績基本entity.setKokanShikibetsuNo(交換情報識別番号);
         if (償還払請求基本Entity.getYoshikiNo() != null) {
             給付実績基本entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求基本Entity.getYoshikiNo()));
@@ -149,7 +151,7 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         給付実績基本entity.setServiceTeikyoYM(償還払請求基本Entity.getServiceTeikyoYM());
         給付実績基本entity.setKyufuJissekiKubunCode(DATA_2);
         給付実績基本entity.setJigyoshoNo(償還払請求基本Entity.getJigyoshaNo());
-        給付実績基本entity.setToshiNo(通し番号);
+        給付実績基本entity.setToshiNo(通し番号.padZeroToLeft(通し番号_LEN));
         給付実績基本entity.setUmareYMD(宛名.get生年月日());
         給付実績基本entity.setSeibetsuCode(宛名.get性別コード());
         Code yoKaigoJotaiKubunCode = 受給者台帳entity.getYokaigoJotaiKubunCode();
