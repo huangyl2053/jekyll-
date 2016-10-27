@@ -251,7 +251,7 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
             } else if (口座払い値.equals(帳票情報.get支払方法区分()) && 金融機関コード.equals(帳票情報.get金融機関コード())) {
                 source.shumokuTitle = 通帳記号;
                 source.bangoTitle = 通帳番号;
-            } else {
+            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && !金融機関コード.equals(帳票情報.get金融機関コード())) {
                 source.shumokuTitle = 口座種別;
                 source.bangoTitle = 口座番号;
             }
