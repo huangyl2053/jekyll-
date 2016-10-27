@@ -48,7 +48,6 @@ public class HihokenshaTempUpdateKouikiProcess extends BatchProcessBase<Kakohore
     private static final RString 変換対象フラグ_FALSE = new RString("0");
     private static final RString 変換対象フラグ_TRUE = new RString("1");
     private static final RString 編集区分_2 = new RString("2");
-    private static final RString 変換 = new RString("1");
     private HihokenshaTempUpdateProcessParameter parameter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 被保険者一時TBL;
@@ -65,7 +64,7 @@ public class HihokenshaTempUpdateKouikiProcess extends BatchProcessBase<Kakohore
         RString 保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告);
         RString 保険者発足情報_認定有効期間_編集区分 = DbBusinessConfig.get(ConfigNameDBU.保険者発足情報_認定有効期間_編集区分, 基準日, SubGyomuCode.DBU介護統計報告);
         if (編集区分_2.equals(保険者発足情報_認定有効期間_編集区分)) {
-            変換対象フラグ = 変換;
+            変換対象フラグ = 変換対象フラグ_TRUE;
         }
         IKakohorenJyohoSakuseiCommonMapper mapper = getMapper(IKakohorenJyohoSakuseiCommonMapper.class);
         List<KakohorenJyohoSakuseiCommonEntity> 合併情報リスト
@@ -74,17 +73,25 @@ public class HihokenshaTempUpdateKouikiProcess extends BatchProcessBase<Kakohore
             HihokenshaTempEntity hihokenshaTempEntity = commonEntity.getHihokenshaTempEntity();
             DbT7056GappeiShichosonEntity dbT7056Entity = commonEntity.getDbT7056Entity();
             RString henkanFlag = hihokenshaTempEntity.getHenkanFlag();
-            if (!変換.equals(henkanFlag)) {
+            FlexibleDate unyoKaishiYMD = dbT7056Entity.getUnyoKaishiYMD();
+            FlexibleDate unyoShuryoYMD = dbT7056Entity.getUnyoShuryoYMD();
+            if (!変換対象フラグ_TRUE.equals(henkanFlag)) {
                 HokenshaNo kyuHokenshaNo = dbT7056Entity.getKyuHokenshaNo();
                 if (kyuHokenshaNo != null) {
                     hihokenshaTempEntity.setExHokenshaNo(kyuHokenshaNo.value());
                     hihokenshaTempEntity.setExShoHokenshaNo(kyuHokenshaNo.value());
                 }
-
-                hihokenshaTempEntity.setShichosonKanyuYmd(dbT7056Entity.getUnyoKaishiYMD());
-                hihokenshaTempEntity.setShichosonDattaiYmd(dbT7056Entity.getUnyoKaishiYMD());
-                被保険者一時TBL.update(hihokenshaTempEntity);
+                hihokenshaTempEntity.setHenkanFlag(変換対象フラグ_FALSE);
+                hihokenshaTempEntity.setShichosonKanyuYmd(unyoKaishiYMD);
+                hihokenshaTempEntity.setShichosonDattaiYmd(unyoKaishiYMD);
+            } else {
+                 hihokenshaTempEntity.setHenkanFlag(変換対象フラグ_TRUE);
+                if (unyoShuryoYMD != null) {
+                    hihokenshaTempEntity.setShichosonKanyuYmd(unyoShuryoYMD.plusDay(1));
+                }
+                hihokenshaTempEntity.setShichosonDattaiYmd(FlexibleDate.EMPTY);
             }
+            被保険者一時TBL.update(hihokenshaTempEntity);
         }
         List<HihokenshaTempEntity> 被保険者一時TBLリスト
                 = mapper.select被保険者一時TBL情報By証記載保険者番号();
