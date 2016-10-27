@@ -32,7 +32,7 @@
             (SELECT 
                  <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.allColumns_DbT4021ShiharaiHohoHenko"/>
              FROM rgdb."DbT4021ShiharaiHohoHenko"
-             WHERE rgdb."DbT4021ShiharaiHohoHenko"."isDeleted" = FALSE
+        WHERE rgdb."DbT4021ShiharaiHohoHenko"."isDeleted" = FALSE
                 AND rgdb."DbT4021ShiharaiHohoHenko"."kanriKubun" = '2'
                 AND rgdb."DbT4021ShiharaiHohoHenko"."torokuKubun" = '12') AS "DbT4021ShiharaiHohoHenko"
         ON "HihoNoTemp"."hihokenshaNo" = "DbT4021ShiharaiHohoHenko"."dbT4021ShiharaiHohoHenko_hihokenshaNo"
@@ -93,6 +93,8 @@
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
         WHERE "DbT7124KokiKoreishaInfo"."shikibetsuCd" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
+         AND "DbT7124KokiKoreishaInfo"."rirekiNo" = 
+        (SELECT MAX (C. "rirekiNo") FROM rgdb. "DbT7124KokiKoreishaInfo" AS C WHERE "DbT7124KokiKoreishaInfo" . "shikibetsuCd" = C. "shikibetsuCd")
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" DESC
     </select>
     <resultMap id="resultMap_後期高齢者" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
@@ -122,6 +124,8 @@
             ) AS "TEMPCOUNT1"
         ON "IdouTemp"."被保険者番号" = "TEMPCOUNT1". "被保険者番号"
         WHERE "DbT7123KokuhoShikakuInfo"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
+          AND "DbT7123KokuhoShikakuInfo"."rirekiNo" = 
+        (SELECT MAX (C. "rirekiNo") FROM rgdb. "DbT7123KokuhoShikakuInfo" AS C WHERE "DbT7123KokuhoShikakuInfo" . "shikibetsuCode" = C. "shikibetsuCode")
         ORDER BY "IdouTemp". "被保険者番号","IdouTemp". "連番" DESC
     </select>
     <resultMap id="resultMap_国保資格" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdouTempEntity" autoMapping="false">
@@ -349,6 +353,7 @@
             B1."itakusakiJigyoshaNo" AS "委託先事業者番号",
             B1."sakuseiKubunCode" AS "居宅サービス計画作成区分コード",
             A1."zanteiKubun" AS "暫定区分",
+            A1."rirekiNo" AS "履歴番号",
             A1."todokedeYMD" AS "届出年月日"
         FROM rgdb."DbT3005KyotakuKeikakuTodokede" A1
             INNER JOIN rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" B1
@@ -363,6 +368,7 @@
             ' ' AS "委託先事業者番号",
             C1."sakuseiKubunCode" AS "居宅サービス計画作成区分コード",
             A2."zanteiKubun" AS "暫定区分",
+            A2."rirekiNo" AS "履歴番号",
             A2."todokedeYMD" AS "届出年月日"
         FROM rgdb."DbT3005KyotakuKeikakuTodokede" A2
             INNER JOIN rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" C1
@@ -651,7 +657,8 @@
         "IdouTemp"."受給者台帳" as "idouTemp_受給者台帳",
         "IdouTemp"."二次予防事業対象者" as "idouTemp_二次予防事業対象者",
         "IdouTemp"."総合事業対象者" as "idouTemp_総合事業対象者",
-        "IdouTemp"."被保険者台帳管理" as "idouTemp_被保険者台帳管理"
+        "IdouTemp"."被保険者台帳管理" as "idouTemp_被保険者台帳管理",
+        "IdouTemp"."エラーフラグ" as "idouTemp_エラーフラグ"
     </sql>
     <sql id="allColumns_UrT0508SeikatsuHogoJukyusha">
          "UrT0508SeikatsuHogoJukyusha"."insertDantaiCd" as "urT0508SeikatsuHogoJukyusha_insertDantaiCd",
@@ -694,6 +701,7 @@
         <result property="二次予防事業対象者" column="idouTemp_二次予防事業対象者" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="総合事業対象者" column="idouTemp_総合事業対象者" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="被保険者台帳管理" column="idouTemp_被保険者台帳管理" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="エラーフラグ" column="idouTemp_エラーフラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_社福減免Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.ShafukugemmenEntity" autoMapping="true">
         <id property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
@@ -713,6 +721,7 @@
         <result property="適用終了日" column="適用終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="負担額" column="負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="申請日" column="申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="決定区分" column="決定区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_居宅計画Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.KyotakuEntity" autoMapping="true">
         <result property="居宅計画種類" column="居宅計画種類" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -726,6 +735,7 @@
         <result property="申請日" column="申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="サービス種類コード" column="サービス種類コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="有効終了日" column="有効終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="履歴番号" column="履歴番号"/>
     </resultMap>
     <resultMap id="resultMap_住所地特例Entity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.JushochitokureiInfoEntity" autoMapping="true">
         <result property="転出先保険者番号" column="転出先保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
