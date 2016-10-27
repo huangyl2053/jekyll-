@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkogakugassanshi
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -44,6 +46,8 @@ public class HanyoListKogakuGassanShinseishoJohoProcessParameter implements IBat
     private IKozaSearchKey searchkey;
     private List<KamokuCode> list;
     private RString reamsLoginId;
+    private ReportId 帳票ID;
+    private SubGyomuCode サブ業務コード;
 
     /**
      * コンストラクタです

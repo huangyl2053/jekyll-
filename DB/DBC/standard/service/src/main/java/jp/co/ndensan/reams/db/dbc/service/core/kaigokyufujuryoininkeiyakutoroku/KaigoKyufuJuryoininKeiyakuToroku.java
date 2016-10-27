@@ -11,6 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.business.core.kaigokyufujuryoininkeiyakutoroku.KaigoKyufuJuryoininKeiyakuTorokuResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuservice.KeiyakuServiceShurui;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufujuryoininkeiyakutoroku.HihokenshaJohoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufujuryoininkeiyakutoroku.KaigoKyufuJuryoininKeiyakuTorokuJigyoshaEntity;
@@ -46,7 +47,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -73,7 +74,6 @@ public class KaigoKyufuJuryoininKeiyakuToroku {
     private static final RString 宛先敬称 = new RString("宛先敬称");
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
-    private static final RString 定値_0 = new RString("0");
 
     /**
      * コンストラクタです。
@@ -124,7 +124,7 @@ public class KaigoKyufuJuryoininKeiyakuToroku {
         IKaigoKyufuJuryoininKeiyakuTorokuMapper mapper = mapperProvider.create(IKaigoKyufuJuryoininKeiyakuTorokuMapper.class);
         Map<String, Object> map = new HashMap<>();
         map.put(KEY_HIHOKENSHANO.toString(), 償還受領委任契約者データ.get被保険者番号());
-        map.put(KEY_SHORIYMD.toString(), RDate.getNowDate());
+        map.put(KEY_SHORIYMD.toString(), FlexibleDate.getNowDate());
         HihokenshaJohoEntity 被保険者情報 = mapper.get被保険者情報(map);
         set利用者向けEntity(利用者向けEntity, 文書番号, 償還受領委任契約者データ, 受領委任契約事業者データ, 被保険者情報);
         set事業者用Entity(事業者用Entity, 文書番号, 償還受領委任契約者データ, 受領委任契約事業者データ, 被保険者情報);
@@ -157,9 +157,9 @@ public class KaigoKyufuJuryoininKeiyakuToroku {
         利用者向けEntity.set承認年月日(償還受領委任契約者データ.get決定年月日() == null || 償還受領委任契約者データ.get決定年月日().isEmpty()
                 ? RString.EMPTY : 償還受領委任契約者データ.get決定年月日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString());
-        利用者向けEntity.set不承認理由(定値_0.equals(償還受領委任契約者データ.get承認結果区分()) ? RString.EMPTY
-                : 償還受領委任契約者データ.get不承認理由());
-        利用者向けEntity.set給付の種類(償還受領委任契約者データ.get契約サービス種類());
+        利用者向けEntity.set不承認理由(ShoninKubun.承認しない.getコード().equals(償還受領委任契約者データ.get承認結果区分())
+                ? RString.EMPTY : 償還受領委任契約者データ.get不承認理由());
+        利用者向けEntity.set給付の種類(KeiyakuServiceShurui.toValue(償還受領委任契約者データ.get契約サービス種類()).get名称());
         利用者向けEntity.set事業所名(受領委任契約事業者データ.get契約事業者名称());
         利用者向けEntity.set代表者氏名(受領委任契約事業者データ.get契約代表者氏名());
         利用者向けEntity.set事業所郵便番号(受領委任契約事業者データ.get契約事業者郵便番号());
@@ -241,9 +241,9 @@ public class KaigoKyufuJuryoininKeiyakuToroku {
         事業者用Entity.set承認年月日(償還受領委任契約者データ.get決定年月日() == null || 償還受領委任契約者データ.get決定年月日().isEmpty()
                 ? RString.EMPTY : 償還受領委任契約者データ.get決定年月日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString());
-        事業者用Entity.set不承認理由(定値_0.equals(償還受領委任契約者データ.get承認結果区分()) ? RString.EMPTY
-                : 償還受領委任契約者データ.get不承認理由());
-        事業者用Entity.set給付の種類(償還受領委任契約者データ.get契約サービス種類());
+        事業者用Entity.set不承認理由(ShoninKubun.承認しない.getコード().equals(償還受領委任契約者データ.get承認結果区分())
+                ? RString.EMPTY : 償還受領委任契約者データ.get不承認理由());
+        事業者用Entity.set給付の種類(KeiyakuServiceShurui.toValue(償還受領委任契約者データ.get契約サービス種類()).get名称());
         事業者用Entity.set事業所名(受領委任契約事業者データ.get契約事業者名称());
         事業者用Entity.set代表者氏名(受領委任契約事業者データ.get契約代表者氏名());
         事業者用Entity.set事業所郵便番号(受領委任契約事業者データ.get契約事業者郵便番号());

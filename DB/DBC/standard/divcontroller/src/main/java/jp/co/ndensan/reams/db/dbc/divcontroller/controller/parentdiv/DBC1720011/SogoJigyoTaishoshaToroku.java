@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.SogoJigyoTaishoshaIdentifi
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -41,6 +43,7 @@ public class SogoJigyoTaishoshaToroku {
     private final RString 状態_修正 = new RString("修正");
     private final RString 状態_削除 = new RString("削除");
     private final RString 保存する = new RString("btnHozonn");
+    private static final RString MENUID_DBCMN11002 = new RString("DBCMN11002");
 
     /**
      * 画面初期化します。
@@ -49,6 +52,8 @@ public class SogoJigyoTaishoshaToroku {
      * @return ResponseData<SogoJigyoTaishoshaTorokuDiv>
      */
     public ResponseData<SogoJigyoTaishoshaTorokuDiv> onLoad(SogoJigyoTaishoshaTorokuDiv div) {
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString menuID = controlData.getMenuID();
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
@@ -59,7 +64,9 @@ public class SogoJigyoTaishoshaToroku {
                 .put(DBC1720011ViewStateKey.申請一覧情報, 総合事業対象者一覧ArrayList);
         ViewStateHolder
                 .put(DBC1720011ViewStateKey.申請一覧情報と状態, handler.onLoad(識別コード, 被保険者番号, 総合事業対象者一覧));
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div)
+                .rootTitle(menuID.equals(ResponseHolder.getMenuID()) ? ROOTTITLE_申請メニュ : ROOTTITLE_承認メニュ)
+                .addMessage(message).respond();
     }
 
     /**

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0310012
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakushaBuilder;
-import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuservice.KeiyakuServiceShurui;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.deleted;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.saved;
@@ -33,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -52,8 +50,6 @@ public class PnlTotalPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 参照 = new RString("参照");
     private static final RString 事業者検索 = new RString("事業者検索");
-    private static final Decimal 番号_0 = new Decimal(0);
-    private static final Decimal 番号_1 = new Decimal(1);
     private static final RString 照会タイトル = new RString("受領委任契約申請照会");
     private static final RString 修正タイトル = new RString("受領委任契約申請登録・修正");
     private static final RString 追加タイトル = new RString("受領委任契約申請登録・追加");
@@ -204,14 +200,7 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onChange_ddlKeiyakuServiceType(PnlTotalPanelDiv div) {
-        RString コード = div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey();
-        if (KeiyakuServiceShurui.住宅改修.getコード().equals(コード)
-                || KeiyakuServiceShurui.予防住宅改修.getコード().equals(コード)) {
-            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setValue(番号_0);
-        } else if (KeiyakuServiceShurui.福祉用具.getコード().equals(コード)
-                || KeiyakuServiceShurui.予防福祉用具.getコード().equals(コード)) {
-            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setValue(番号_1);
-        }
+        getHandler(div).setTxtBango1();
         return ResponseData.of(div).respond();
     }
 
@@ -354,7 +343,7 @@ public class PnlTotalPanel {
         } else {
             if (修正.equals(画面モード)) {
                 ShokanJuryoininKeiyakusha 契約者情報 = build契約者情報(契約者一覧情報, div);
-                finder.updShokanJuryoininKeiyakusha(契約者一覧情報);
+                finder.updShokanJuryoininKeiyakusha(契約者情報);
                 ViewStateHolder.put(ViewStateKeys.契約者一覧情報, 契約者情報);
             } else if (削除.equals(画面モード)) {
                 finder.delShokanJuryoininKeiyakusha(契約者一覧情報);
@@ -388,7 +377,7 @@ public class PnlTotalPanel {
                     .getValue().toDateString()));
             if (ShoninKubun.承認しない.getコード().equals(div.getPnlCommon().getPnlDetail()
                     .getRdoKettekubun().getSelectedKey())) {
-                builder.set承認結果区分(null);
+                builder.set承認結果区分(ShoninKubun.承認しない.getコード());
                 builder.set受領委任払適用開始年月日(null);
                 builder.set契約番号(null);
                 builder.set不承認理由(div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue());

@@ -142,6 +142,7 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
             } else {
                 source.umareYmd = entity.get生年月日().seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
+            source.shikibetsuCode = 個人.get識別コード();
         }
     }
 
