@@ -27,7 +27,7 @@ public class KyufuTsuchiGenmenHoseiEntity implements Cloneable, Serializable {
     private HokenshaNo shokisaiHokenshaNo;
     private HihokenshaNo hiHokenshaNo;
     private FlexibleYearMonth serviceTeikyoYM;
-    private RString psmName;
+    private RString meisho;
     private JigyoshaNo jigyoshoNo;
     private RString jigyoshaName;
     private ServiceShuruiCode serviceShuruiCode;
