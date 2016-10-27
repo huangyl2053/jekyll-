@@ -84,7 +84,7 @@
             支払方法変更減額.*,
             申請中情報."申請中被保険者"
         FROM
-            "ShunoJokyoTemp" AS 収納滞納状況一時テーブル
+            "ShunoTainoJokyoTemp" AS 収納滞納状況一時テーブル
         INNER JOIN "TaishoshaJohoTemp" AS 対象者情報一時テーブル
         ON  収納滞納状況一時テーブル."tmp_hihokenshaNo" = 対象者情報一時テーブル."hihokenshaNo2"
         INNER JOIN  

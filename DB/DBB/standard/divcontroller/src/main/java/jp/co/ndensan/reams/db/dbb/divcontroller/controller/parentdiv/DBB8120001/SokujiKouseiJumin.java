@@ -32,6 +32,7 @@ public class SokujiKouseiJumin {
     private static final RString メニューID_特徴仮算定賦課エラー一覧 = new RString("DBBMN33004");
     private static final RString メニューID_即時賦課更正 = new RString("DBBMN13001");
     private static final RString メニューID_特殊処理 = new RString("DBBMNC3001");
+    private static final RString 即時賦課更正_更正 = new RString("即時賦課更正");
 
     /**
      * 画面の初期化メソッドです。
@@ -70,6 +71,6 @@ public class SokujiKouseiJumin {
         sokujiKouseiJuminDiv.getSokujiKouseiAtena().initialize(識別コード);
         ViewStateHolder.put(ViewStateKeys.氏名, sokujiKouseiJuminDiv.getSokujiKouseiAtena().get氏名漢字());
         ViewStateHolder.put(ViewStateKeys.市町村コード, 市町村コード);
-        return ResponseData.of(sokujiKouseiJuminDiv).respond();
+        return ResponseData.of(sokujiKouseiJuminDiv).rootTitle(即時賦課更正_更正).respond();
     }
 }
