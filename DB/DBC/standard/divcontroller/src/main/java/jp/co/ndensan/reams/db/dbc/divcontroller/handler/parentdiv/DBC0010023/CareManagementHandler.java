@@ -159,12 +159,14 @@ public class CareManagementHandler {
 
     private void setGetsuBtn(List<KyufuJissekiCareManagementHiBusiness> 給付実績ケアマネジメント費データリスト, FlexibleYearMonth サービス提供年月) {
         List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績ケアマネジメント費データリスト);
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
-            div.getBtnZengetsu().setDisabled(true);
-        }
-        if (サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnJigetsu().setDisabled(true);
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+            if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
+                div.getBtnZengetsu().setDisabled(true);
+            }
+            if (サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
+                div.getBtnJigetsu().setDisabled(true);
+            }
         }
     }
 
