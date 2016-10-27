@@ -458,7 +458,7 @@
         <result property="dbT3006計画事業者番号" column="dbT3006計画事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="dbT7063_Keikaku事業者名称" column="dbT7063_Keikaku事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="dbT7063_Keikaku事業者カナ名称" column="dbT7063_Keikaku事業者カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
-        <result property="dbT7063_Keikaku管理者氏名" column="dbT7063_Keikaku管理者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="dbT7063_Keikaku管理者氏名" column="dbT7063_Keikaku管理者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="dbT7063_Keikaku管理者氏名カナ" column="dbT7063_Keikaku管理者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="dbT3006委託先事業者番号" column="dbT3006委託先事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="dbT7063_Itaku事業者名称" column="dbT7063_Itaku事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
