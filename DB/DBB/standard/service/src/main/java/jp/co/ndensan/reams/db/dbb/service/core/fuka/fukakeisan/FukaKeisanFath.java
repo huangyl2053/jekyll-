@@ -184,12 +184,12 @@ public class FukaKeisanFath {
         RString 特徴定例納期数 = DbBusinessConfig.get(ConfigNameDBB.特徴期情報_設定納期数, 適用基準日, SubGyomuCode.DBB介護賦課);
         業務コンフィグ情報.set特徴定例納期数(Integer.parseInt(特徴定例納期数.toString()));
         List<FlexibleDate> 年金支払日List = new ArrayList<>();
-        RString 年金支払日_4月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_4月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        RString 年金支払日_6月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_6月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        RString 年金支払日_8月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_8月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        RString 年金支払日_10月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_10月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        RString 年金支払日_12月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_12月, 適用基準日, SubGyomuCode.DBB介護賦課);
-        RString 年金支払日_2月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年金支払日_2月, 適用基準日, SubGyomuCode.DBB介護賦課);
+        RString 年金支払日_4月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_4月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigDesc();
+        RString 年金支払日_6月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_6月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigDesc();
+        RString 年金支払日_8月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_8月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigDesc();
+        RString 年金支払日_10月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_10月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigDesc();
+        RString 年金支払日_12月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_12月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigDesc();
+        RString 年金支払日_2月 = DbBusinessConfig.getConfigInfo(ConfigNameDBB.特別徴収_年金支払日_2月, 適用基準日, SubGyomuCode.DBB介護賦課).getConfigDesc();
         年金支払日List.add(new FlexibleDate(年金支払日_4月));
         年金支払日List.add(new FlexibleDate(年金支払日_6月));
         年金支払日List.add(new FlexibleDate(年金支払日_8月));
