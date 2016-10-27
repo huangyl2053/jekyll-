@@ -59,6 +59,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
@@ -106,6 +107,19 @@ public class NinteiChosaIraiHandler {
     private static final RString 文字列3 = new RString("3");
     private static final RString 文字列4 = new RString("4");
     private static final RString 文字列5 = new RString("5");
+    private static final RString CONFIGVALUE1 = new RString("1");
+    private static final RString CHKNAME_認定調査票デザイン用紙 = new RString("認定調査票（デザイン用紙）");
+    private static final RString CHKNAME_特記事項デザイン用紙 = new RString("特記事項（デザイン用紙）");
+    private static final RString CHKNAME_特記事項_項目有り = new RString("特記事項（項目有り）");
+    private static final RString CHKNAME_特記事項_項目無し = new RString("特記事項（項目無し）");
+    private static final RString CHKNAME_特記事項_フリータイプ = new RString("特記事項（フリータイプ）");
+    private static final RString CHKNAME_認定調査票OCR = new RString("認定調査票OCR");
+    private static final RString CHKNAME_特記事項OCR = new RString("特記事項OCR");
+    private static final RString CHKNAME_差異チェック票 = new RString("認定調査差異チェック票");
+    private static final RString CHKNAME_概況特記 = new RString("概況特記");
+    private static final RString DDL_KEY0 = new RString("key0");
+    private static final RString DDL_KEY1 = new RString("key1");
+    private static final RString DDL_KEY2 = new RString("key2");
     private final NinteiChosaIraiDiv div;
 
     /**
@@ -710,6 +724,103 @@ public class NinteiChosaIraiHandler {
         RDate nowDate = RDate.getNowDate();
         div.getTxthokkoymd().setValue(nowDate);
         div.getTxtkigenymd().setValue(nowDate);
+        createPrintItemList(nowDate);
+
+        List<RString> selectedItemList = new ArrayList();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査依頼書, nowDate, SubGyomuCode.DBE認定支援))) {
+            selectedItemList.add(DDL_KEY0);
+        }
+        div.getChkirai().setSelectedItemsByKey(selectedItemList);
+        selectedItemList = new ArrayList();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票, nowDate, SubGyomuCode.DBE認定支援))) {
+            selectedItemList.add(DDL_KEY0);
+        }
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項, nowDate, SubGyomuCode.DBE認定支援))) {
+            selectedItemList.add(DDL_KEY1);
+        }
+        div.getChkchosa().setSelectedItemsByKey(selectedItemList);
+        selectedItemList = new ArrayList();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR, nowDate, SubGyomuCode.DBE認定支援))) {
+            selectedItemList.add(DDL_KEY0);
+        }
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_特記事項, nowDate, SubGyomuCode.DBE認定支援))) {
+            selectedItemList.add(DDL_KEY1);
+        }
+        div.getChkchosaOcr().setSelectedItemsByKey(selectedItemList);
+        selectedItemList = new ArrayList();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目有り, nowDate, SubGyomuCode.DBE認定支援))) {
+            selectedItemList.add(DDL_KEY0);
+        }
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目無し, nowDate, SubGyomuCode.DBE認定支援))) {
+            selectedItemList.add(DDL_KEY1);
+        }
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_フリー様式, nowDate, SubGyomuCode.DBE認定支援))) {
+            selectedItemList.add(DDL_KEY2);
+        }
+        div.getChkChosahyoTokkijiko().setSelectedItemsByKey(selectedItemList);
+        selectedItemList = new ArrayList();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票差異チェック票, nowDate, SubGyomuCode.DBE認定支援))) {
+            selectedItemList.add(DDL_KEY0);
+        }
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_調査特記_概況特記, nowDate, SubGyomuCode.DBE認定支援))) {
+            selectedItemList.add(DDL_KEY1);
+        }
+        div.getChkchosaSonota().setSelectedItemsByKey(selectedItemList);
+    }
+
+    private void createPrintItemList(RDate nowDate) {
+        List<KeyValueDataSource> dataSourceList = new ArrayList();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_デザイン用紙_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+            dataSourceList.add(new KeyValueDataSource(DDL_KEY0, CHKNAME_認定調査票デザイン用紙));
+        }
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_デザイン用紙_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+            dataSourceList.add(new KeyValueDataSource(DDL_KEY1, CHKNAME_特記事項デザイン用紙));
+        }
+        if (dataSourceList.isEmpty()) {
+            div.getChkchosa().setDisplayNone(true);
+        } else {
+            div.getChkchosa().setDataSource(dataSourceList);
+        }
+        dataSourceList = new ArrayList();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_OCR_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+            dataSourceList.add(new KeyValueDataSource(DDL_KEY0, CHKNAME_認定調査票OCR));
+        }
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_OCR_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+            dataSourceList.add(new KeyValueDataSource(DDL_KEY1, CHKNAME_特記事項OCR));
+        }
+        if (dataSourceList.isEmpty()) {
+            div.getChkchosaOcr().setDisplayNone(true);
+        } else {
+            div.getChkchosaOcr().setDataSource(dataSourceList);
+        }
+        dataSourceList = new ArrayList();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_項目有り_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+            dataSourceList.add(new KeyValueDataSource(DDL_KEY0, CHKNAME_特記事項_項目有り));
+        }
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_項目無し_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+            dataSourceList.add(new KeyValueDataSource(DDL_KEY1, CHKNAME_特記事項_項目無し));
+        }
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_フリータイプ_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+            dataSourceList.add(new KeyValueDataSource(DDL_KEY2, CHKNAME_特記事項_フリータイプ));
+        }
+        if (dataSourceList.isEmpty()) {
+            div.getChosahyoTokkijikoSelect().setDisplayNone(true);
+        } else {
+            div.getChkChosahyoTokkijiko().setDataSource(dataSourceList);
+        }
+
+        dataSourceList = new ArrayList();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査差異チェック票_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+            dataSourceList.add(new KeyValueDataSource(DDL_KEY0, CHKNAME_差異チェック票));
+        }
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+            dataSourceList.add(new KeyValueDataSource(DDL_KEY1, CHKNAME_概況特記));
+        }
+        if (dataSourceList.isEmpty()) {
+            div.getChkchosaSonota().setDisplayNone(true);
+        } else {
+            div.getChkchosaSonota().setDataSource(dataSourceList);
+        }
     }
 
     /**

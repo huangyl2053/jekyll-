@@ -230,6 +230,18 @@ public class NinteichosaIraiJohoBuilder {
     }
 
     /**
+     * 認定調査依頼履歴番号を設定します。
+     *
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @return {@link NinteichosaIraiJohoBuilder}
+     */
+    public NinteichosaIraiJohoBuilder set認定調査依頼履歴番号(int 認定調査依頼履歴番号) {
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        entity.setNinteichosaIraiRirekiNo(認定調査依頼履歴番号);
+        return this;
+    }
+
+    /**
      * {@link NinteichosaIraiJoho}のインスタンスを生成します。
      *
      * @return {@link NinteichosaIraiJoho}のインスタンス
