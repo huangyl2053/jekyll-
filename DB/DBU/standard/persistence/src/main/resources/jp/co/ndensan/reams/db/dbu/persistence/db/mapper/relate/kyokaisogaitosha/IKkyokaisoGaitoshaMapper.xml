@@ -119,19 +119,19 @@
             DbT1006Kyo."kyuufugakuGengakuKisaiKiajoFlag" = #{iskyuufugakuFlag}
         </if>
         <if test = "hyojunFutanFlag">
-           AND DbT1006Kyo."hyojunFutanGengakuGaitoFlag" = #{ishyojunFutanFlag}
+           OR DbT1006Kyo."hyojunFutanGengakuGaitoFlag" = #{ishyojunFutanFlag}
         </if>
         <if test = "kyojuhinadoFutangFlag">
-          AND  DbT1006Kyo."kyojuhinadoFutangakugengakuGaitoFlag" = #{iskyojuhinadoFutangFlag}
+          OR  DbT1006Kyo."kyojuhinadoFutangakugengakuGaitoFlag" = #{iskyojuhinadoFutangFlag}
         </if>
         <if test = "shokuhiKeiFlag">
-          AND  DbT1006Kyo."shokuhiKeigengoHutangakuGaitoFlag" = #{isshokuhiKeiFlag}
+          OR  DbT1006Kyo."shokuhiKeigengoHutangakuGaitoFlag" = #{isshokuhiKeiFlag}
         </if>
         <if test = "kogakuFlag">
-           AND DbT1006Kyo."kogakuServicehiJogengakuGengakuGaitoFlag" = #{iskogakuFlag}
+           OR DbT1006Kyo."kogakuServicehiJogengakuGengakuGaitoFlag" = #{iskogakuFlag}
         </if>
         <if test = "hokenFlag">
-           AND DbT1006Kyo."hokenryoNofuGengakuFlag" = #{ishokenFlag}
+           OR DbT1006Kyo."hokenryoNofuGengakuFlag" = #{ishokenFlag}
         </if>
         AND
         DbT1006Kyo."isDeleted" <![CDATA[<>]]> TRUE
