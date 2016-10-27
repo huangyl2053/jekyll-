@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0130002.Hei
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -21,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class HeijunkaKakutei {
 
+    private final RString 特徴平準化_平準化 = new RString("特徴平準化（6・8月分）確定");
+
     /**
      * 画面初期化のメソッドます。
      *
@@ -29,9 +32,12 @@ public class HeijunkaKakutei {
      */
     public ResponseData<HeijunkaKakuteiDiv> onLoad(HeijunkaKakuteiDiv div) {
         getHandler(div).check基準日時();
+        ResponseData<HeijunkaKakuteiDiv> responseData;
         ShoriDateKanri 処理日付管理 = getHandler(div).initialize();
         ViewStateHolder.put(ViewStateKeys.処理日付管理, 処理日付管理);
-        return ResponseData.of(div).setState(DBB0130002StateName.平準化確定リアル);
+        responseData = ResponseData.of(div).setState(DBB0130002StateName.平準化確定リアル);
+        responseData.setRootTitle(特徴平準化_平準化);
+        return responseData;
     }
 
     /**

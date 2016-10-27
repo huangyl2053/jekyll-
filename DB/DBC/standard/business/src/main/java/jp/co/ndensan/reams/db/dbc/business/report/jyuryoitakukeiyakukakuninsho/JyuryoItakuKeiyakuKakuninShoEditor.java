@@ -92,11 +92,21 @@ public class JyuryoItakuKeiyakuKakuninShoEditor
         source.shoninYMD = entity.get承認年月日();
         source.fushoninRiyu = entity.get不承認理由();
         source.kyufuShurui = entity.get給付の種類();
-        source.jigyoshaName = entity.get事業所名().value();
-        source.daihyoshaName = entity.get代表者氏名().value();
-        source.jigyoshaYubinNo = entity.get事業所郵便番号().value();
-        source.jigyoshoJusho = entity.get事業所所在地().value();
-        source.jigyoshoTelNo = entity.get事業所電話番号().value();
+        if (entity.get事業所名() != null && !entity.get事業所名().isEmpty()) {
+            source.jigyoshaName = entity.get事業所名().value();
+        }
+        if (entity.get代表者氏名() != null && !entity.get代表者氏名().isEmpty()) {
+            source.daihyoshaName = entity.get代表者氏名().value();
+        }
+        if (entity.get事業所郵便番号() != null && !entity.get事業所郵便番号().isEmpty()) {
+            source.jigyoshaYubinNo = entity.get事業所郵便番号().value();
+        }
+        if (entity.get事業所所在地() != null && !entity.get事業所所在地().isEmpty()) {
+            source.jigyoshoJusho = entity.get事業所所在地().value();
+        }
+        if (entity.get事業所電話番号() != null && !entity.get事業所電話番号().isEmpty()) {
+            source.jigyoshoTelNo = entity.get事業所電話番号().value();
+        }
         source.hiyogakuGokei = entity.get費用額合計();
         source.hokenHiyogaku = entity.get保険対象費用額();
         source.riyoFutangaku = entity.get利用者負担額();

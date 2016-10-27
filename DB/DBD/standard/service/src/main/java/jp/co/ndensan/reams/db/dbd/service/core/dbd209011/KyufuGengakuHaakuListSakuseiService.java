@@ -6,9 +6,11 @@
 package jp.co.ndensan.reams.db.dbd.service.core.dbd209011;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200008.KyufuGengakuHaakuIchiranProerty.DBD200008ShutsuryokujunEnum;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd209011.KyufuGengakuHaakuListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -714,10 +716,21 @@ public class KyufuGengakuHaakuListSakuseiService {
                 }
                 期別情報List.add(期別情報);
             }
-            shunoEntity.set期別情報(期別情報List);
+            shunoEntity.set期別情報(remove重複期別情報(期別情報List));
             収納情報リスト.add(shunoEntity);
         }
         給付額減額把握リストEntity.set収納情報リスト(収納情報リスト);
+    }
+
+    private List<ShunoKibetsuEntity> remove重複期別情報(List<ShunoKibetsuEntity> enList) {
+        List<ShunoKibetsuEntity> newList = new ArrayList<>();
+        Set<RString> set = new HashSet<>();
+        for (ShunoKibetsuEntity element : enList) {
+            if (set.add(element.get期別())) {
+                newList.add(element);
+            }
+        }
+        return newList;
     }
 
     private void set減額対象情報(KyufuGengakuHaakuIchiranEntity 給付額減額把握リストEntity,

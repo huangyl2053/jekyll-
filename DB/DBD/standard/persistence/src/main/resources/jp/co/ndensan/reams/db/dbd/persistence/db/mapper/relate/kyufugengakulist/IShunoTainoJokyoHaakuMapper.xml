@@ -9,7 +9,7 @@
         <id column="dbT1001HihokenshaDaicho_idoYMD" />
         <id column="dbT1001HihokenshaDaicho_edaNo" />
         <association property="資格情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
-        <association property="収納情報" resultMap="ResultMap_ShunoJohoEntity"/>
+        <collection property="収納情報List" resultMap="ResultMap_ShunoJohoEntity"/>
     </resultMap>
     
     <resultMap id="ResultMap_ShunoJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.ShunoJohoEntity" autoMapping="true">
