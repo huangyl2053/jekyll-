@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -66,7 +67,7 @@ public class ChohyoJushoEditor {
             throw new NullPointerException();
         }
         ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(gyomubunrui);
-        if (shichosonsecurityjoho != null) {
+        if (shichosonsecurityjoho != null && !KaigoDonyuKubun.未導入.code().equals(shichosonsecurityjoho.get介護導入区分().code())) {
             導入形態コード = shichosonsecurityjoho.get導入形態コード();
             if (導入形態コード != null && 導入形態コード.is単一()) {
                 step帳票独自の場合(subgyomucode, 帳票分類ID, shichosonsecurityjoho, nowDate);

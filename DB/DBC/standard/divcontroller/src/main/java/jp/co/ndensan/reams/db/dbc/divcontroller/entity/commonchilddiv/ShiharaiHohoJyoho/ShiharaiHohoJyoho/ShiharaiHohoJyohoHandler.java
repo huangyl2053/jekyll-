@@ -98,7 +98,7 @@ public class ShiharaiHohoJyohoHandler {
                 div.getRadKoza().setSelectedKey(支払方法区分.getコード());
                 List<Koza> koza = ShiharaiHohoJyohoFinder.createInstance()
                         .getKozaJyoho(KozaParameter.createParam(支給申請情報.
-                                        getKozaId(), null, null)).records();
+                                getKozaId(), null, null)).records();
                 if (!koza.isEmpty()) {
 
                     口座払いエリアの初期化(koza.get(0), 支給申請情報.getKozaId());
@@ -164,7 +164,7 @@ public class ShiharaiHohoJyohoHandler {
             RString 口座 = new RString(String.valueOf(kozaId.get口座ID()));
             口座IDリスト.add(new KeyValueDataSource(口座, 口座));
         }
-        if (list.isEmpty()) {
+        if (list.isEmpty() && 口座ID != 0L) {
             RString 口座 = new RString(String.valueOf(口座ID));
             口座IDリスト.add(new KeyValueDataSource(口座, 口座));
         }
@@ -646,7 +646,7 @@ public class ShiharaiHohoJyohoHandler {
     public void 受領委任払いエリアの初期化(SikyuSinseiJyohoParameter 支給申請情報,
             JuryoininKeiyakuJigyosha 受領委任契約事業者, RString 表示フラグ) {
 
-        if (!表示フラグ.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(表示フラグ)) {
             div.getTxtKeiyakuNo().setValue(支給申請情報.getKeiyakuNo());
         }
         div.getRadJyryoinin().setSelectedKey(new RString("3"));
@@ -693,12 +693,17 @@ public class ShiharaiHohoJyohoHandler {
     }
 
     private void 口座払いエリアの初期化Private(KinyuKikan kinyuKikan, KinyuKikanShiten kinyuKikanShiten) {
-        if (kinyuKikan != null && kinyuKikanShiten != null) {
-            StringBuilder builder = new StringBuilder();
-            builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString())
-                    .append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
+        StringBuilder builder = new StringBuilder();
+        if (kinyuKikan != null) {
+            builder.append(kinyuKikan.get金融機関名称() == null ? RString.EMPTY.toString() : kinyuKikan.get金融機関名称().toString());
+        }
+        if (kinyuKikanShiten != null) {
+            builder.append(kinyuKikanShiten.get支店名称() == null ? RString.EMPTY.toString() : kinyuKikanShiten.get支店名称().toString());
+        }
+        if (builder != null) {
             div.getTxtKinyuKikanName().setValue(new RString(builder.toString()));
         }
+
     }
 
     private UzT0007CodeBusiness 預金種別に対する名称(RString 口座種別) {
@@ -817,15 +822,15 @@ public class ShiharaiHohoJyohoHandler {
      */
     public RString getShiharaiHoho() {
 
-        if (!div.getRadMadoguti().getSelectedKey().isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(div.getRadMadoguti().getSelectedKey())) {
 
             return div.getRadMadoguti().getSelectedKey();
         }
-        if (!div.getRadKoza().getSelectedKey().isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(div.getRadKoza().getSelectedKey())) {
 
             return div.getRadKoza().getSelectedKey();
         }
-        if (!div.getRadJyryoinin().getSelectedKey().isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(div.getRadJyryoinin().getSelectedKey())) {
 
             return div.getRadJyryoinin().getSelectedKey();
         }

@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.sogojigyohishikakushogohyokeikas
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
@@ -109,7 +110,7 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
         改頁リスト = new ArrayList<>();
         ShichosonSecurityJohoFinder finder = ShichosonSecurityJohoFinder.createInstance();
         this.市町村セキュリティ情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (null == this.市町村セキュリティ情報) {
+        if (null == this.市町村セキュリティ情報 || KaigoDonyuKubun.未導入.code().equals(市町村セキュリティ情報.get介護導入区分().code())) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
         }

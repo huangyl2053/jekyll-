@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710150.DBC710150_HanyoListKogakuGassanJikoFutangakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataSakuseiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7150001.ChushutsuJokenPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7150001.HanyoListParamKougakuGassanJikoFudanDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
@@ -16,6 +17,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -48,6 +51,28 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     private static final int INDEX_ゼロ = 0;
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
+    private static final RString THREE = new RString("3");
+    private static final RString KEY_CHUSHUTSU_KUBUN = new RString("chushutsuKubun");
+    private static final RString KEY_DETA_SAKUSEI_KUBUN = new RString("detaSakuseiKubun");
+    private static final RString KEY_DATA_SHURUI = new RString("dataShurui");
+    private static final RString KEY_HOSEU_JOKYO = new RString("hoseuJokyo");
+    private static final RString KEY_FLEXIBLE_YEAR = new RString("flexibleYear");
+    private static final RString KEY_FLEXIBLE_DATE_FROM = new RString("flexibleDateFrom");
+    private static final RString KEY_FLEXIBLE_DATE_TO = new RString("flexibleDateTo");
+    private static final RString KEY_SHIKYU_FROM = new RString("shikyuShinseishoSeiriNoFrom");
+    private static final RString KEY_SHIKYU_TO = new RString("shikyuShinseishoSeiriNoTo");
+    private static final RString KEY_SOFU_TAISHOGAI_FUKUMU = new RString("sofuTaishogaiFukumu");
+    private static final RString KEY_JIKO_FROM = new RString("jikoFutangakuKakuninFrom");
+    private static final RString KEY_JIKO_TO = new RString("sofuTaishogaiFukumuTo");
+    private static final RString KEY_HOSEIZUMI_FROM = new RString("hoseizumiJikoFutangakuFrom");
+    private static final RString KEY_HOSEIZUMI_TO = new RString("hoseizumiJikoFutangakuTo");
+    private static final RString KEY_JIKO_FUTANNGAKU_FROM = new RString("jikoFutanngakuShoumeishoFrom");
+    private static final RString KEY_JIKO_FUTANNGAKU_TO = new RString("jikoFutanngakuShoumeishoTo");
+    private static final RString KEY_TOMOKUME_FUKA = new RString("tomokumeFuka");
+    private static final RString KEY_REBAN_FUKA = new RString("rebanFuka");
+    private static final RString KEY_SLASH_DATE = new RString("slashDate");
+    private static final RString KEY_HOKENSHA_NO = new RString("hokenshaNo");
+    private static final RString KEY_SHUTSURYOKUJU = new RString("shutsuryokuju");
 
     /**
      * コンストラクタです。
@@ -86,6 +111,155 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         panel.getDdlDetaSakuseiKubun().setDataSource(getデータ作成区分());
         div.getChushutsuJokenPanel().getDdlDetaSakuseiKubun().setSelectedIndex(INDEX_ゼロ);
         set調定年度();
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     *
+     */
+    public void pamaRestore() {
+        BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
+        restoreClear();
+        pamaRestore2(restoreBatchParameterMap);
+        pamaRestore3(restoreBatchParameterMap);
+        pamaRestore4(restoreBatchParameterMap);
+        List<RString> csv編集方法リスト = new ArrayList<>();
+        boolean 項目名付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_TOMOKUME_FUKA);
+        if (項目名付加) {
+            csv編集方法リスト.add(ONE);
+        }
+        boolean 連番付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_REBAN_FUKA);
+        if (連番付加) {
+            csv編集方法リスト.add(TWO);
+        }
+        boolean 日付スラッシュ付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_SLASH_DATE);
+        if (日付スラッシュ付加) {
+            csv編集方法リスト.add(THREE);
+        }
+        if (!csv編集方法リスト.isEmpty()) {
+            div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
+        }
+        Long 出力順 = restoreBatchParameterMap.getParameterValue(Long.class, KEY_SHUTSURYOKUJU);
+        if (出力順 != null) {
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701015.getReportId(), 出力順);
+        }
+        RString 保険者コード = restoreBatchParameterMap.getParameterValue(RString.class, KEY_HOKENSHA_NO);
+        if (保険者コード != null && !保険者コード.isEmpty()) {
+            div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(new LasdecCode(保険者コード));
+        }
+    }
+
+    private void pamaRestore4(BatchParameterMap restoreBatchParameterMap) throws IllegalArgumentException {
+        FlexibleDate 自己負担額確認情報受取年月From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_JIKO_FROM);
+        if (自己負担額確認情報受取年月From != null && !自己負担額確認情報受取年月From.isEmpty()) {
+            div.getChushutsuJokenPanel().getTxtJikoFutangakuKakunin().setFromValue(new RDate(自己負担額確認情報受取年月From.toString()));
+        }
+        FlexibleDate 自己負担額確認情報受取年月To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_JIKO_TO);
+        if (自己負担額確認情報受取年月To != null && !自己負担額確認情報受取年月To.isEmpty()) {
+            div.getChushutsuJokenPanel().getTxtJikoFutangakuKakunin().setToValue(new RDate(自己負担額確認情報受取年月To.toString()));
+        }
+        FlexibleDate 補正済自己負担額情報送付年月From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_HOSEIZUMI_FROM);
+        if (補正済自己負担額情報送付年月From != null && !補正済自己負担額情報送付年月From.isEmpty()) {
+            div.getChushutsuJokenPanel().getTxtHoseizumiJikoFutangaku().setFromValue(new RDate(補正済自己負担額情報送付年月From.toString()));
+        }
+        FlexibleDate 補正済自己負担額情報送付年月To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_HOSEIZUMI_TO);
+        if (補正済自己負担額情報送付年月To != null && !補正済自己負担額情報送付年月To.isEmpty()) {
+            div.getChushutsuJokenPanel().getTxtHoseizumiJikoFutangaku().setToValue(new RDate(補正済自己負担額情報送付年月To.toString()));
+        }
+        FlexibleDate 自己負担額証明書情報受取年月From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_JIKO_FUTANNGAKU_FROM);
+        if (自己負担額証明書情報受取年月From != null && !自己負担額証明書情報受取年月From.isEmpty()) {
+            div.getChushutsuJokenPanel().getTxtJikoFutanngakuShoumeisho().setFromValue(new RDate(自己負担額証明書情報受取年月From.toString()));
+        }
+        FlexibleDate 自己負担額証明書情報受取年月To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_JIKO_FUTANNGAKU_TO);
+        if (自己負担額証明書情報受取年月To != null && !自己負担額証明書情報受取年月To.isEmpty()) {
+            div.getChushutsuJokenPanel().getTxtJikoFutanngakuShoumeisho().setToValue(new RDate(自己負担額証明書情報受取年月To.toString()));
+        }
+    }
+
+    private void pamaRestore3(BatchParameterMap restoreBatchParameterMap) throws IllegalArgumentException {
+        RString 対象年度 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_FLEXIBLE_YEAR);
+        if (対象年度 != null && !対象年度.isEmpty()) {
+            div.getChushutsuJokenPanel().getDdlTaishoNendo().setSelectedKey(対象年度);
+        }
+        FlexibleDate 申請年月日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_FLEXIBLE_DATE_FROM);
+        if (申請年月日From != null && !申請年月日From.isEmpty()) {
+            div.getChushutsuJokenPanel().getTxtSinseibi().setFromValue(new RDate(申請年月日From.toString()));
+        }
+        FlexibleDate 申請年月日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_FLEXIBLE_DATE_TO);
+        if (申請年月日To != null && !申請年月日To.isEmpty()) {
+            div.getChushutsuJokenPanel().getTxtSinseibi().setToValue(new RDate(申請年月日To.toString()));
+        }
+        RString 支給申請書整理番号From = restoreBatchParameterMap.getParameterValue(RString.class, KEY_SHIKYU_FROM);
+        if (支給申請書整理番号From != null && !支給申請書整理番号From.isEmpty()) {
+            div.getChushutsuJokenPanel().getTxtSikyuSinseishoSeiriBangoKaishi().setValue(支給申請書整理番号From);
+        }
+        RString 支給申請書整理番号To = restoreBatchParameterMap.getParameterValue(RString.class, KEY_SHIKYU_TO);
+        if (支給申請書整理番号To != null && !支給申請書整理番号To.isEmpty()) {
+            div.getChushutsuJokenPanel().getTxtSikyuSinseishoSeiriBangoShuryo().setValue(支給申請書整理番号To);
+        }
+        List<RString> 送付対象外リスト = new ArrayList<>();
+        boolean 送付対象外 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_SOFU_TAISHOGAI_FUKUMU);
+        if (送付対象外) {
+            送付対象外リスト.add(KEY0);
+        }
+        if (!送付対象外リスト.isEmpty()) {
+            div.getChushutsuJokenPanel().getChkSofuTaishogaiFukumu().setSelectedItemsByKey(送付対象外リスト);
+        }
+    }
+
+    private void pamaRestore2(BatchParameterMap restoreBatchParameterMap) {
+        RString 抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_CHUSHUTSU_KUBUN);
+        if (抽出区分 != null) {
+            if (ONE.equals(抽出区分)) {
+                div.getChushutsuJokenPanel().getRadChushutsuKubun().setSelectedKey(KEY1);
+            } else {
+                div.getChushutsuJokenPanel().getRadChushutsuKubun().setSelectedKey(KEY0);
+            }
+        }
+        RString データ作成区分 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_DETA_SAKUSEI_KUBUN);
+        if (データ作成区分 != null && !データ作成区分.isEmpty()) {
+            div.getChushutsuJokenPanel().getDdlDetaSakuseiKubun().setSelectedKey(データ作成区分);
+        }
+        RString データ種類 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_DATA_SHURUI);
+        if (データ種類 != null) {
+            if (ONE.equals(データ種類)) {
+                div.getChushutsuJokenPanel().getRadDataShurui().setSelectedKey(KEY1);
+            } else if (TWO.equals(データ種類)) {
+                div.getChushutsuJokenPanel().getRadDataShurui().setSelectedKey(KEY2);
+            } else {
+                div.getChushutsuJokenPanel().getRadDataShurui().setSelectedKey(KEY0);
+            }
+        }
+        RString 補正状況 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_HOSEU_JOKYO);
+        if (補正状況 != null) {
+            if (ONE.equals(補正状況)) {
+                div.getChushutsuJokenPanel().getRadHoseuJokyo().setSelectedKey(KEY1);
+            }
+            if (TWO.equals(補正状況)) {
+                div.getChushutsuJokenPanel().getRadHoseuJokyo().setSelectedKey(KEY2);
+            } else {
+                div.getChushutsuJokenPanel().getRadHoseuJokyo().setSelectedKey(KEY0);
+            }
+        }
+    }
+
+    private void restoreClear() {
+
+        div.getChushutsuJokenPanel().getRadChushutsuKubun().clearSelectedItem();
+        div.getChushutsuJokenPanel().getRadDataShurui().clearSelectedItem();
+        div.getChushutsuJokenPanel().getRadHoseuJokyo().clearSelectedItem();
+        div.getChushutsuJokenPanel().getTxtSinseibi().clearFromValue();
+        div.getChushutsuJokenPanel().getTxtSinseibi().clearToValue();
+        div.getChushutsuJokenPanel().getTxtSikyuSinseishoSeiriBangoKaishi().clearValue();
+        div.getChushutsuJokenPanel().getTxtSikyuSinseishoSeiriBangoShuryo().clearValue();
+        div.getChushutsuJokenPanel().getTxtJikoFutangakuKakunin().clearFromValue();
+        div.getChushutsuJokenPanel().getTxtJikoFutangakuKakunin().clearToValue();
+        div.getChushutsuJokenPanel().getTxtHoseizumiJikoFutangaku().clearFromValue();
+        div.getChushutsuJokenPanel().getTxtHoseizumiJikoFutangaku().clearToValue();
+        div.getChushutsuJokenPanel().getTxtJikoFutanngakuShoumeisho().clearFromValue();
+        div.getChushutsuJokenPanel().getTxtJikoFutanngakuShoumeisho().clearToValue();
+        div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
+
     }
 
     /**
@@ -131,8 +305,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     /**
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
      *
-     * @return DBC710150_HanyoListKogakuGassanJikoFutangakuParameter
-     * 汎用リスト(高額合算自己負担額情報))_バッチパラメータクラスです
+     * @return DBC710150_HanyoListKogakuGassanJikoFutangakuParameter 汎用リスト(高額合算自己負担額情報))_バッチパラメータクラスです
      */
     public DBC710150_HanyoListKogakuGassanJikoFutangakuParameter getBatchParamter() {
 

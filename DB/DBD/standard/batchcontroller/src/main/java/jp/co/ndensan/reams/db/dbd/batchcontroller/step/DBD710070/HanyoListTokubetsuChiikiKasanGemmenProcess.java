@@ -56,12 +56,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -155,16 +152,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         key.set住民種別(get住民種別(住民種別List));
         key.set住民状態(get住民状態(住民状態List));
-        key.set町域コード開始値(new ChoikiCode(processParamter.getAtenacyusyutsujyoken().getJusho_From()));
-        key.set町域コード終了値(new ChoikiCode(processParamter.getAtenacyusyutsujyoken().getJusho_To()));
-        key.set行政区コード開始値(new GyoseikuCode(processParamter.getAtenacyusyutsujyoken().getGyoseiku_From()));
-        key.set行政区コード終了値(new GyoseikuCode(processParamter.getAtenacyusyutsujyoken().getGyoseiku_To()));
-        key.set地区コード1開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku1_From()));
-        key.set地区コード1終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku1_To()));
-        key.set地区コード2開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_From()));
-        key.set地区コード2終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_To()));
-        key.set地区コード3開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku3_From()));
-        key.set地区コード3終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku3_To()));
+        HanyoListManager.createInstance().地区区分編集(processParamter.getAtenacyusyutsujyoken(), key);
         IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho = key.build();
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
@@ -234,7 +222,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
 
     @Override
     protected void afterExecute() {
-        if (processParamter.isCsvkomokumeifuka() && eucCsvWriter.getCount() == 0) {
+        if (eucCsvWriter.getCount() == 0) {
             eucCsvWriter.writeLine(HanyoListTokubetsuChiikiKasanGemmenManager.createInstance().setBlank());
             if (hanyoListShutsuryokuKomoku != null) {
                 for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
@@ -246,7 +234,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         }
         eucCsvWriter.close();
         eucCsvWriter1.close();
-        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         if (isCSV出力) {
             manager.spool(csvFilePath1, log);
         }
@@ -278,7 +266,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         if (is帳票出力) {
             帳票出力編集new(i, hanyoListShutsuryokuKomoku, get項目名称);
         }
-        if (isCSV出力) {
+        if (processParamter.isCsvkomokumeifuka() && isCSV出力) {
             出力編集new(i, get項目名称);
         }
     }
@@ -335,7 +323,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
                     processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
             report.writeBy(reportSourceWriter);
         }
-        if (isCSV出力) {
+        if (processParamter.isCsvkomokumeifuka() && isCSV出力) {
             eucCsvWriter1.writeLine(csvHeader);
         }
     }

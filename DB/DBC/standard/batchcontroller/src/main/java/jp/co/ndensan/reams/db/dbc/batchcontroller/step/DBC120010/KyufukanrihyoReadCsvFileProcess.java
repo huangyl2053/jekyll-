@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
@@ -179,7 +180,7 @@ public class KyufukanrihyoReadCsvFileProcess extends BatchProcessBase<List<RStri
     private void 証記載保険者番号取得の判断基準の取得() {
         ShichosonSecurityJohoFinder 市町村finder = ShichosonSecurityJohoFinder.createInstance();
         ShichosonSecurityJoho joho = 市町村finder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (null == joho) {
+        if (null == joho || KaigoDonyuKubun.未導入.code().equals(joho.get介護導入区分().code())) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(市町村セキュリティ情報の取得実行不可.toString()).toString());
         }

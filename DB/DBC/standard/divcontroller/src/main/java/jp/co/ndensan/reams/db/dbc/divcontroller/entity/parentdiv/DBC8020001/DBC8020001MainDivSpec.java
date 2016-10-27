@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8020001;
 
 import jp.co.ndensan.reams.db.dbc.service.core.jigyogasanjigyobunmeisaishosakusei.DBC8020001MainManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ux.uxx.definition.mybatisprm.kozafurikomi.kozafurikomi.KozaFurikomiMapperParameter;
 import jp.co.ndensan.reams.ux.uxx.service.core.kozafurikomi.kozafurikomi.KozaFurikomiManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -32,9 +30,8 @@ public enum DBC8020001MainDivSpec implements IPredicate<DBC8020001MainDiv> {
                 public boolean apply(DBC8020001MainDiv div
                 ) {
                     RString メニューID = ResponseHolder.getMenuID();
-                    RString 振込単位 = DbBusinessConfig.get(ConfigNameDBC.振込単位, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
                     DBC8020001MainManager manager = new DBC8020001MainManager();
-                    return manager.if存在(メニューID, 振込単位);
+                    return manager.if存在(メニューID);
                 }
             },
     /**

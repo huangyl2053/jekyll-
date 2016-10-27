@@ -333,10 +333,18 @@ public class HonsanteiIdoHandler {
         div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getTxtFukaNendo().setDomain(調定年度);
         ShoriDateKanri dbT7022Entity = HonsanteiIdoGennendo.createInstance().getMax基準日時(
                 年度, ShoriName.異動賦課.get名称());
-        YMDHMS 異動賦課の基準日時 = dbT7022Entity.get基準日時();
-        dbT7022Entity = HonsanteiIdoGennendo.createInstance().getMax基準日時(年度, ShoriName.異動賦課確定.get名称());
-        YMDHMS 異動賦課確定の基準日時 = dbT7022Entity.get基準日時();
-        return 異動賦課確定の基準日時.isBefore(異動賦課の基準日時);
+        YMDHMS 異動賦課の基準日時;
+        if (dbT7022Entity.get基準日時() != null) {
+            異動賦課の基準日時 = dbT7022Entity.get基準日時();
+            dbT7022Entity = HonsanteiIdoGennendo.createInstance().getMax基準日時(年度, ShoriName.異動賦課確定.get名称());
+            if (dbT7022Entity.get基準日時() != null) {
+                return dbT7022Entity.get基準日時().isBefore(異動賦課の基準日時);
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
     }
 
     /**

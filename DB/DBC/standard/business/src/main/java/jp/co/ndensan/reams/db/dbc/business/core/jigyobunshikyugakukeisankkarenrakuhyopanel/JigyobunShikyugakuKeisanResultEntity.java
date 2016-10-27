@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Setter
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JigyobunShikyugakuKeisanResultEntity implements Cloneable, Serializable {
+public class JigyobunShikyugakuKeisanResultEntity implements Serializable {
 
     private HihokenshaNo hihokenshaNo;
     private FlexibleYear taishoNendo;

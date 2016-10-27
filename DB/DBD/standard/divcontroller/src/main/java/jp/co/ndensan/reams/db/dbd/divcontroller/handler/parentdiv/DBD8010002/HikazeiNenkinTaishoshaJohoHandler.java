@@ -203,6 +203,8 @@ public class HikazeiNenkinTaishoshaJohoHandler {
                             .firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).toDateString()
                             .concat(空白).concat(基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
                             : RString.EMPTY);
+                    div.setHdnShoriNichiji(null != 基準日時 && !基準日時.isEmpty()
+                            ? new RString(基準日時.toString()) : RString.EMPTY);
                     break;
                 }
                 div.getTxtShoriJotai().setValue(SyoriJyoutaiCode.未処理.get名称());
@@ -241,11 +243,19 @@ public class HikazeiNenkinTaishoshaJohoHandler {
         対象処理年次.set処理(年次);
         if (年次処理情報 == null) {
             対象処理年次.set処理日時(RString.EMPTY);
+            対象処理年次.setHdn処理日時(RString.EMPTY);
             対象処理年次.set処理状態コード(RSTRING_1);
             対象処理年次.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
         } else {
             更新用List.add(年次処理情報);
-            対象処理年次.set処理日時(年次処理情報.get基準日時() == null ? RString.EMPTY : 年次処理情報.get基準日時().toDateString());
+            YMDHMS 基準日時 = 年次処理情報.get基準日時();
+            対象処理年次.set処理日時(null != 基準日時 && !基準日時.isEmpty()
+                    ? 基準日時.getDate().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).toDateString()
+                    .concat(空白).concat(基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
+                    : RString.EMPTY);
+            対象処理年次.setHdn処理日時(null != 基準日時 && !基準日時.isEmpty()
+                    ? new RString(基準日時.toString()) : RString.EMPTY);
             対象処理年次.set処理状態コード(年次処理情報.get処理枝番());
             対象処理年次.set処理状態(SyoriJyoutaiCode.toValue(年次処理情報.get処理枝番()).get名称());
         }
@@ -263,11 +273,19 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             対象処理.set処理(月次);
             if (月次処理情報 == null) {
                 対象処理.set処理日時(RString.EMPTY);
+                対象処理.setHdn処理日時(RString.EMPTY);
                 対象処理.set処理状態コード(RSTRING_1);
                 対象処理.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
             } else {
                 更新用List.add(月次処理情報);
-                対象処理.set処理日時(月次処理情報.get基準日時() == null ? RString.EMPTY : 月次処理情報.get基準日時().toDateString());
+                YMDHMS 基準日時 = 月次処理情報.get基準日時();
+                対象処理年次.set処理日時(null != 基準日時 && !基準日時.isEmpty()
+                        ? 基準日時.getDate().wareki().eraType(EraType.KANJI)
+                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).toDateString()
+                        .concat(空白).concat(基準日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
+                        : RString.EMPTY);
+                対象処理年次.setHdn処理日時(null != 基準日時 && !基準日時.isEmpty()
+                        ? new RString(基準日時.toString()) : RString.EMPTY);
                 対象処理.set処理状態コード(月次処理情報.get処理枝番());
                 対象処理.set処理状態(SyoriJyoutaiCode.toValue(月次処理情報.get処理枝番()).get名称());
             }
@@ -376,12 +394,12 @@ public class HikazeiNenkinTaishoshaJohoHandler {
         if (単一保険者.equals(広域と市町村判断())) {
             parameter.set処理区分(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnShoriCode());
             parameter.set対象月(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnTukiCode());
-            parameter.set処理日時(new YMDHMS(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriNichiji()));
+            parameter.set処理日時(new YMDHMS(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnShoriNichiji()));
             parameter.set処理状態(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriJotai());
         } else {
             parameter.set処理区分(div.getDdlTuki().getSelectedKey().substring(INT_0, INT_1));
             parameter.set対象月(div.getDdlTuki().getSelectedKey().substring(INT_1, INT_4));
-            parameter.set処理日時(new YMDHMS(div.getTxtShoriNichiji().getValue()));
+            parameter.set処理日時(new YMDHMS(div.getHdnShoriNichiji()));
             parameter.set処理状態(div.getTxtShoriJotai().getValue());
         }
         parameter.setテスト処理(div.getHeddaeria().getChkTesutoShoriTorikomi().isAllSelected() ? RSTRING_1 : RSTRING_0);
@@ -586,6 +604,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
         対象処理年次.set対象ファイル(対象ファイル_Z51);
         if (年次処理情報 == null) {
             対象処理年次.set処理日時(RString.EMPTY);
+            対象処理年次.setHdn処理日時(RString.EMPTY);
             対象処理年次.set処理状態コード(RSTRING_1);
             対象処理年次.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
         } else {
@@ -595,6 +614,8 @@ public class HikazeiNenkinTaishoshaJohoHandler {
                     .concat(空白).concat(年次処理情報.get基準日時().getRDateTime().getTime().
                     toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
                     : RString.EMPTY);
+            対象処理年次.setHdn処理日時(null != 年次処理情報.get基準日時() && !年次処理情報.get基準日時().isEmpty()
+                    ? new RString(年次処理情報.get基準日時().toString()) : RString.EMPTY);
             対象処理年次.set処理状態コード(年次処理情報.get処理枝番());
             対象処理年次.set処理状態(SyoriJyoutaiCode.toValue(年次処理情報.get処理枝番()).get名称());
         }
@@ -613,6 +634,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             対象処理.set対象ファイル(対象ファイル_Z52);
             if (月次処理情報 == null) {
                 対象処理.set処理日時(RString.EMPTY);
+                対象処理.setHdn処理日時(RString.EMPTY);
                 対象処理.set処理状態コード(RSTRING_1);
                 対象処理.set処理状態(SyoriJyoutaiCode.toValue(RSTRING_1).get名称());
             } else {
@@ -622,6 +644,8 @@ public class HikazeiNenkinTaishoshaJohoHandler {
                         .concat(空白).concat(月次処理情報.get基準日時().getRDateTime().getTime().
                         toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
                         : RString.EMPTY);
+                対象処理.setHdn処理日時(null != 月次処理情報.get基準日時() && !月次処理情報.get基準日時().isEmpty()
+                        ? new RString(月次処理情報.get基準日時().toString()) : RString.EMPTY);
                 対象処理.set処理状態コード(月次処理情報.get処理枝番());
                 対象処理.set処理状態(SyoriJyoutaiCode.toValue(月次処理情報.get処理枝番()).get名称());
             }
@@ -640,6 +664,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             row.setTxtTaishoFuairu(対象処理.get対象ファイル());
             row.setTxtShoriJotai(対象処理.get処理状態());
             row.setTxtShoriNichiji(対象処理.get処理日時());
+            row.setHdnShoriNichiji(対象処理.getHdn処理日時());
 
             rowList.add(row);
         }
@@ -799,7 +824,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
 
         for (KoseiShichosonMaster master : 市町村情報リスト) {
             dgKoikiTaishoShoriItiran_Row row = new dgKoikiTaishoShoriItiran_Row();
-            row.setHdnShichosonCode(master.get市町村コード().code市町村RString());
+            row.setHdnShichosonCode(master.get市町村コード().getColumnValue());
             row.setTxtShichoson(master.get市町村名称());
 
             RString 年次月次 = RString.EMPTY;
@@ -816,7 +841,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             if (result == null || result.isEmpty()) {
                 this.setチェックボックスfor共有フォルダ無(master.get市町村コード(), row);
             } else {
-                取込対象市町村コードリスト.add(master.get市町村コード().code市町村RString());
+                取込対象市町村コードリスト.add(master.get市町村コード().getColumnValue());
                 row.setTxtTorikomi(Boolean.TRUE);
             }
             対象市町村Grid.add(row);

@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.fuseigoriyu.FuseigoRiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakufuseigo.DaichoFuseigoJotai;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.DBZA010001StateName;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.ShikakuFuseigoShuseiMainDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.ShikakuFuseigoShuseiPanelDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.DBZA010001.ShikakuFuseigoShuseiMainHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.DBZA010001.ShikakuFuseigoShuseiMainValidationHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo.ShikakuFuseigoShuseiService;
@@ -47,7 +47,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  *
  * @reamsid_L DBB-0630-010 chengsanyuan
  */
-public class ShikakuFuseigoShuseiMain {
+public class ShikakuFuseigoShuseiPanel {
 
     private final ShikakuSeigoseiCheckJohoManager manager;
     private final ShikakuFuseigoShuseiService serivce;
@@ -59,7 +59,7 @@ public class ShikakuFuseigoShuseiMain {
      * コンストラクタです。
      *
      */
-    public ShikakuFuseigoShuseiMain() {
+    public ShikakuFuseigoShuseiPanel() {
         this.manager = ShikakuSeigoseiCheckJohoManager.createInstance();
         this.serivce = ShikakuFuseigoShuseiService.createInstance();
     }
@@ -68,9 +68,9 @@ public class ShikakuFuseigoShuseiMain {
      * 資格不整合修正初期化の設定します。
      *
      * @param div 資格不整合修正Div
-     * @return ResponseData<ShikakuFuseigoShuseiMainDiv>
+     * @return ResponseData<ShikakuFuseigoShuseiPanelDiv>
      */
-    public ResponseData<ShikakuFuseigoShuseiMainDiv> onLoad(ShikakuFuseigoShuseiMainDiv div) {
+    public ResponseData<ShikakuFuseigoShuseiPanelDiv> onLoad(ShikakuFuseigoShuseiPanelDiv div) {
         SearchResult<ShikakuFuseigoBusiness> resultList = manager.get被保険者資格不整合一覧();
         ShikakuFuseigoShusei business = new ShikakuFuseigoShusei();
         business.setBusinessList(resultList.records());
@@ -83,9 +83,9 @@ public class ShikakuFuseigoShuseiMain {
      * DDLの選択項目に合わせてグリッドの表示を変更します。
      *
      * @param div 資格不整合修正Div
-     * @return ResponseData<ShikakuFuseigoShuseiMainDiv>
+     * @return ResponseData<ShikakuFuseigoShuseiPanelDiv>
      */
-    public ResponseData<ShikakuFuseigoShuseiMainDiv> onChange_ddlDaichoShubetsu(ShikakuFuseigoShuseiMainDiv div) {
+    public ResponseData<ShikakuFuseigoShuseiPanelDiv> onChange_ddlDaichoShubetsu(ShikakuFuseigoShuseiPanelDiv div) {
         ShikakuFuseigoShusei business = ViewStateHolder.get(
                 ViewStateKeys.整合性チェックの情報_宛名, ShikakuFuseigoShusei.class);
         getHandler(div).setDataGridByDaichoType(business.getBusinessList(), div.getDdlDaichoShubetsu().getSelectedKey(),
@@ -97,9 +97,9 @@ public class ShikakuFuseigoShuseiMain {
      * 資格不整合一覧表示結果の連動を変更します。
      *
      * @param div 資格不整合修正Div
-     * @return ResponseData<ShikakuFuseigoShuseiMainDiv>
+     * @return ResponseData<ShikakuFuseigoShuseiPanelDiv>
      */
-    public ResponseData<ShikakuFuseigoShuseiMainDiv> onChange_chkTaishoGaiHyoji(ShikakuFuseigoShuseiMainDiv div) {
+    public ResponseData<ShikakuFuseigoShuseiPanelDiv> onChange_chkTaishoGaiHyoji(ShikakuFuseigoShuseiPanelDiv div) {
         ShikakuFuseigoShusei business = ViewStateHolder.get(
                 ViewStateKeys.整合性チェックの情報_宛名, ShikakuFuseigoShusei.class);
         getHandler(div).setDataGridByDaichoType(business.getBusinessList(), div.getDdlDaichoShubetsu().getSelectedKey(),
@@ -111,9 +111,9 @@ public class ShikakuFuseigoShuseiMain {
      * 「資格不整合一覧の修正」アイコンをクリックの場合、資格修正エリアのデータを設定します。
      *
      * @param div 資格不整合修正Div
-     * @return ResponseData<ShikakuFuseigoShuseiMainDiv>
+     * @return ResponseData<ShikakuFuseigoShuseiPanelDiv>
      */
-    public ResponseData<ShikakuFuseigoShuseiMainDiv> onSelectByModifyButton_dgShikakuFuseigoIchiran(ShikakuFuseigoShuseiMainDiv div) {
+    public ResponseData<ShikakuFuseigoShuseiPanelDiv> onSelectByModifyButton_dgShikakuFuseigoIchiran(ShikakuFuseigoShuseiPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
             ShikakuFuseigoShusei business = ViewStateHolder.get(
                     ViewStateKeys.整合性チェックの情報_宛名, ShikakuFuseigoShusei.class);
@@ -173,9 +173,9 @@ public class ShikakuFuseigoShuseiMain {
      * 資格修正明細エリア表示の連動
      *
      * @param div 資格不整合修正Div
-     * @return ResponseData<ShikakuFuseigoShuseiMainDiv>
+     * @return ResponseData<ShikakuFuseigoShuseiPanelDiv>
      */
-    public ResponseData<ShikakuFuseigoShuseiMainDiv> onChange_chkToTaishoGai(ShikakuFuseigoShuseiMainDiv div) {
+    public ResponseData<ShikakuFuseigoShuseiPanelDiv> onChange_chkToTaishoGai(ShikakuFuseigoShuseiPanelDiv div) {
         if (div.getChkToTaishoGai().isAllSelected()) {
             div.getShikakuShutokuJogaiSettei().setDisabled(true);
             div.getTekiyoJogaiKaijo().setDisabled(true);
@@ -210,9 +210,9 @@ public class ShikakuFuseigoShuseiMain {
      * 住所地特例適用エリア、資格喪失エリアの表示切替
      *
      * @param div 資格不整合修正Div
-     * @return ResponseData<ShikakuFuseigoShuseiMainDiv>
+     * @return ResponseData<ShikakuFuseigoShuseiPanelDiv>
      */
-    public ResponseData<ShikakuFuseigoShuseiMainDiv> onChange_chkJutoku(ShikakuFuseigoShuseiMainDiv div) {
+    public ResponseData<ShikakuFuseigoShuseiPanelDiv> onChange_chkJutoku(ShikakuFuseigoShuseiPanelDiv div) {
         FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.不整合理由, FuseigoRiyu.class);
         getHandler(div).setShikakuSoushitu(不整合理由);
         return ResponseData.of(div).respond();
@@ -222,9 +222,9 @@ public class ShikakuFuseigoShuseiMain {
      * 資格取得エリア、取得除外エリアの表示切替
      *
      * @param div 資格不整合修正Div
-     * @return ResponseData<ShikakuFuseigoShuseiMainDiv>
+     * @return ResponseData<ShikakuFuseigoShuseiPanelDiv>
      */
-    public ResponseData<ShikakuFuseigoShuseiMainDiv> onChange_chkShutokuJogai(ShikakuFuseigoShuseiMainDiv div) {
+    public ResponseData<ShikakuFuseigoShuseiPanelDiv> onChange_chkShutokuJogai(ShikakuFuseigoShuseiPanelDiv div) {
         FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.不整合理由, FuseigoRiyu.class);
         getHandler(div).setSyutokuJogai(不整合理由);
         return ResponseData.of(div).respond();
@@ -234,9 +234,9 @@ public class ShikakuFuseigoShuseiMain {
      * 資格情報の更新処理
      *
      * @param div 資格不整合修正Div
-     * @return ResponseData<ShikakuFuseigoShuseiMainDiv>
+     * @return ResponseData<ShikakuFuseigoShuseiPanelDiv>
      */
-    public ResponseData<ShikakuFuseigoShuseiMainDiv> onClick_btnCommitDialog(ShikakuFuseigoShuseiMainDiv div) {
+    public ResponseData<ShikakuFuseigoShuseiPanelDiv> onClick_btnCommitDialog(ShikakuFuseigoShuseiPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
@@ -297,7 +297,7 @@ public class ShikakuFuseigoShuseiMain {
     }
 
     private void save修正後の情報By被保険者(ShikakuFuseigoBusiness shikakuFusei,
-            ShikakuFuseigoShuseiMainDiv div, HihokenshaDaicho 修正後の資格の情報, ShikakuShutokuJogaisha 取得除外の情報) {
+            ShikakuFuseigoShuseiPanelDiv div, HihokenshaDaicho 修正後の資格の情報, ShikakuShutokuJogaisha 取得除外の情報) {
         if (div.getChkShutokuJogai().isAllSelected()) {
             manager.save取得除外情報(取得除外の情報,
                     shikakuFusei.get整合性チェック情報());
@@ -313,9 +313,9 @@ public class ShikakuFuseigoShuseiMain {
      * 画面初期化検索を実施して、画面再表示する。
      *
      * @param div 資格不整合修正Div
-     * @return ResponseData<ShikakuFuseigoShuseiMainDiv>
+     * @return ResponseData<ShikakuFuseigoShuseiPanelDiv>
      */
-    public ResponseData<ShikakuFuseigoShuseiMainDiv> onClick_btnCancel(ShikakuFuseigoShuseiMainDiv div) {
+    public ResponseData<ShikakuFuseigoShuseiPanelDiv> onClick_btnCancel(ShikakuFuseigoShuseiPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
@@ -326,11 +326,11 @@ public class ShikakuFuseigoShuseiMain {
         return ResponseData.of(div).respond();
     }
 
-    private ShikakuFuseigoShuseiMainHandler getHandler(ShikakuFuseigoShuseiMainDiv div) {
+    private ShikakuFuseigoShuseiMainHandler getHandler(ShikakuFuseigoShuseiPanelDiv div) {
         return new ShikakuFuseigoShuseiMainHandler(div);
     }
 
-    private ShikakuFuseigoShuseiMainValidationHandler getValidationHandler(ShikakuFuseigoShuseiMainDiv div) {
+    private ShikakuFuseigoShuseiMainValidationHandler getValidationHandler(ShikakuFuseigoShuseiPanelDiv div) {
         return new ShikakuFuseigoShuseiMainValidationHandler(div);
     }
 

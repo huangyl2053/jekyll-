@@ -18,11 +18,11 @@ public enum HanyoListShokanbaraiJokyoOutputOrders implements IReportItems {
     /**
      * 行政区コード
      */
-    行政区コード(new RString("0004"), new RString("行政区コード"), new RString("\"shikibetsuTaisho_gyoseikuCode\"")),
+    行政区コード(new RString("0004"), new RString("行政区コード"), new RString("\"ShikibetsuTaisho\".\"gyoseikuCode\"")),
     /**
      * 世帯コード
      */
-    世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"shikibetsuTaisho_setaiCode\"")),
+    世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"ShikibetsuTaisho\".\"setaiCode\"")),
     /**
      * 識別コード
      */
@@ -30,7 +30,7 @@ public enum HanyoListShokanbaraiJokyoOutputOrders implements IReportItems {
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"shikibetsuTaisho_katakanaHyoki\"")),
+    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho\".\"katakanaHyoki\"")),
     /**
      * 市町村コード
      */

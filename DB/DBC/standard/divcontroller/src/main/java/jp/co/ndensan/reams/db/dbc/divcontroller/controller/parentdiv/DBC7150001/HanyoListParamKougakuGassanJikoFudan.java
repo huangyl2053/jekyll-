@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710150.DBC710150_HanyoL
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7150001.HanyoListParamKougakuGassanJikoFudanDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7150001.HanyoListParamKougakuGassanJikoFudanHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7150001.HanyoListParamKougakuGassanJikoFudanValidationHandler;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -34,6 +35,29 @@ public class HanyoListParamKougakuGassanJikoFudan {
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
         div.getCcdShutsuryokuKoumoku().load(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付);
         return createResponse(div);
+    }
+
+    /**
+     * 条件を保存するボタンのメソッドです。
+     *
+     * @param div HanyoListParamKougakuGassanJikoFudanDiv
+     * @return ResponseData
+     */
+    public ResponseData<BatchParameterMap> onClick_btnBatchParamSave(HanyoListParamKougakuGassanJikoFudanDiv div) {
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        responseData.data = new BatchParameterMap(getHandler(div).getBatchParamter());
+        return responseData;
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     *
+     * @param div HanyoListParamKougakuGassanJikoFudanDiv
+     * @return ResponseData
+     */
+    public ResponseData<HanyoListParamKougakuGassanJikoFudanDiv> onClick_btnBatchParamRestore(HanyoListParamKougakuGassanJikoFudanDiv div) {
+        getHandler(div).pamaRestore();
+        return ResponseData.of(div).respond();
     }
 
     /**

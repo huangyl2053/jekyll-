@@ -79,8 +79,8 @@
                 WHERE((rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" = '1'
                     AND 振込明細一時TBL."serviceTeikyoYM" <![CDATA[<=]]> substr(rgdb."DbT4001JukyushaDaicho"."shikyuGendoShuryoYMD",1,6))
                     OR  (rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" =  '2'
-                    AND (rgdb."DbT4001JukyushaDaicho"."soshitsuYMD" IS NULL OR (rgdb."DbT4001JukyushaDaicho"."soshitsuYMD" = '')
-                    AND rgdb."DbT4001JukyushaDaicho"."yokaigoJotaiKubunCode" = '01' ))
+                    AND (rgdb."DbT4001JukyushaDaicho"."soshitsuYMD" IS NULL OR (rgdb."DbT4001JukyushaDaicho"."soshitsuYMD" = ''))
+                    AND rgdb."DbT4001JukyushaDaicho"."yokaigoJotaiKubunCode" = '01' )
                     )
                 )
     SELECT

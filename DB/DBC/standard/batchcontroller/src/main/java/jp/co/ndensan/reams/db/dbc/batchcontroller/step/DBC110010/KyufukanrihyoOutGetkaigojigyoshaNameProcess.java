@@ -23,15 +23,15 @@ public class KyufukanrihyoOutGetkaigojigyoshaNameProcess extends BatchProcessBas
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110010.IKyufukanrihyoOutMapper"
-                    + ".select介護事業者名称");
+                    + ".select事業者名称");
     private static final RString 自己作成管理一時TBL_NAME = new RString("DbWT8211KyotakuKeikakuJikosakuseiKanri");
 
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter dbWT7063TableWriter;
+    private BatchEntityCreatedTempTableWriter dbWT7060TableWriter;
 
     @Override
     protected void createWriter() {
-        this.dbWT7063TableWriter = new BatchEntityCreatedTempTableWriter(自己作成管理一時TBL_NAME, KyotakuKeikakuJikosakuseiKanriTempEntity.class);
+        this.dbWT7060TableWriter = new BatchEntityCreatedTempTableWriter(自己作成管理一時TBL_NAME, KyotakuKeikakuJikosakuseiKanriTempEntity.class);
     }
 
     @Override
@@ -41,12 +41,10 @@ public class KyufukanrihyoOutGetkaigojigyoshaNameProcess extends BatchProcessBas
 
     @Override
     protected void process(ShikyuGendoGakuEntity entity) {
-        if (entity != null) {
-            KyotakuKeikakuJikosakuseiKanriTempEntity kyotakuKeikakuTempEntity = entity.get居宅給付計画自己作成管理一時Entity();
-            if (entity.get介護事業者Entity() != null) {
-                kyotakuKeikakuTempEntity.setServiceTeikyoJigyoshaName(entity.get介護事業者Entity().getJigyoshaName().getColumnValue());
-                dbWT7063TableWriter.update(kyotakuKeikakuTempEntity);
-            }
+        KyotakuKeikakuJikosakuseiKanriTempEntity kyotakuKeikakuTempEntity = entity.get居宅給付計画自己作成管理一時Entity();
+        if (null != entity.get介護事業者Entity()) {
+            kyotakuKeikakuTempEntity.setServiceTeikyoJigyoshaName(entity.get介護事業者Entity().getJigyoshaName().getColumnValue());
         }
+        dbWT7060TableWriter.update(kyotakuKeikakuTempEntity);
     }
 }

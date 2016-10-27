@@ -6,13 +6,15 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD4940001;
 
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJoho;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4940001.DBD4940001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4940001.NinteiShinseiTorokuTorikeshiShosaiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4940001.NinteiShinseiTorokuTorikeshiShosaiHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4940001.NinteiShinseiTorokuTorikeshiShosaiValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.core.view.DisplayMode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -63,6 +65,12 @@ public class NinteiShinseiTorokuTorikeshiShosai {
         }
 
         YokaigoNinteiJoho 画面更新用情報 = getHandler(div).onLoad(被保険者番号);
+        if (!ResponseHolder.isReRequest()
+                && 画面更新用情報 != null
+                && !画面更新用情報.get申請状況区分().equals(ShinseiJokyoKubun.申請中.getコード())) {
+            return ResponseData.of(div).addMessage(DbdInformationMessages.受給申請中データなし.getMessage()).respond();
+        }
+
         ViewStateHolder.put(要介護認定取消画面キー.画面更新用情報, 画面更新用情報);
 
         boolean gotLock = 前排他キーのセット();
@@ -103,7 +111,7 @@ public class NinteiShinseiTorokuTorikeshiShosai {
      */
     public ResponseData<NinteiShinseiTorokuTorikeshiShosaiDiv> onBeforeOpenDialog_btnNyuinAndShisetsuNyusho(NinteiShinseiTorokuTorikeshiShosaiDiv div) {
 
-        div.setHdnSyokikaMode(new RString(ShisetsuNyutaishoRirekiKanriDiv.DisplayMode.照会.toString()));
+        div.setHdnSyokikaMode(new RString(DisplayMode.照会.toString()));
 
         return ResponseData.of(div).respond();
     }

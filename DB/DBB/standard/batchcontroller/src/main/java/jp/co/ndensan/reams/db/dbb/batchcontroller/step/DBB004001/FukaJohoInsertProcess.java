@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.FukaJohoToroku
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.service.core.kamoku.shunokamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -61,12 +62,14 @@ public class FukaJohoInsertProcess extends BatchProcessBase<FukaJohoTorokuRelate
     private RString get徴収方法(FukaJohoTorokuRelateEntity entity) {
         ShunoKamokuFinder manager = ShunoKamokuFinder.createInstance();
         RString 徴収方法 = RString.EMPTY;
-        if (entity.get科目コード() != null
-                && manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収).getコード().value().contains(entity.get科目コード().value())) {
+        IShunoKamoku 科目_特別徴収 = manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
+        if (entity.get科目コード() != null && 科目_特別徴収 != null
+                && 科目_特別徴収.getコード().value().contains(entity.get科目コード().value())) {
             徴収方法 = ChoshuHohoKibetsu.特別徴収.getコード();
         }
-        if (entity.get科目コード() != null
-                && manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収).getコード().value().contains(entity.get科目コード().value())) {
+        IShunoKamoku 科目_普通徴収 = manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
+        if (entity.get科目コード() != null && 科目_普通徴収 != null
+                && 科目_普通徴収.getコード().value().contains(entity.get科目コード().value())) {
             徴収方法 = ChoshuHohoKibetsu.普通徴収.getコード();
         }
         return 徴収方法;

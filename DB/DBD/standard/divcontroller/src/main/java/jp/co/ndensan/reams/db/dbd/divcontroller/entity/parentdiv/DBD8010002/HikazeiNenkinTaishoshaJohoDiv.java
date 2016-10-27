@@ -1,4 +1,5 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -7,19 +8,18 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
- * HikazeiNenkinTaishoshaJoho のクラスファイル 
- * 
+ * HikazeiNenkinTaishoshaJoho のクラスファイル
+ *
  * @author 自動生成
  */
 public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,6 +36,8 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     private RString hdnLine;
     @JsonProperty("hdnFilePath")
     private RString hdnFilePath;
+    @JsonProperty("hdnShoriNichiji")
+    private RString hdnShoriNichiji;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,7 +45,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * getHikazeiNenkinTaishoshaJohoTorikomi
      * @return HikazeiNenkinTaishoshaJohoTorikomi
      */
@@ -134,6 +136,24 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     /*
+     * gethdnShoriNichiji
+     * @return hdnShoriNichiji
+     */
+    @JsonProperty("hdnShoriNichiji")
+    public RString getHdnShoriNichiji() {
+        return hdnShoriNichiji;
+    }
+
+    /*
+     * sethdnShoriNichiji
+     * @param hdnShoriNichiji hdnShoriNichiji
+     */
+    @JsonProperty("hdnShoriNichiji")
+    public void setHdnShoriNichiji(RString hdnShoriNichiji) {
+        this.hdnShoriNichiji = hdnShoriNichiji;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -142,7 +162,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setHeddaeria(HeddaeriaDiv Heddaeria) {
+    public void setHeddaeria(HeddaeriaDiv Heddaeria) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().setHeddaeria(Heddaeria);
     }
 
@@ -152,7 +172,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setShoriNendo(ShoriNendoDiv ShoriNendo) {
+    public void setShoriNendo(ShoriNendoDiv ShoriNendo) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getHeddaeria().setShoriNendo(ShoriNendo);
     }
 
@@ -162,7 +182,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setDdlShoriNendo(DropDownList ddlShoriNendo) {
+    public void setDdlShoriNendo(DropDownList ddlShoriNendo) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getHeddaeria().getShoriNendo().setDdlShoriNendo(ddlShoriNendo);
     }
 
@@ -172,7 +192,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setKoikiHeddaJoho1(KoikiHeddaJoho1Div KoikiHeddaJoho1) {
+    public void setKoikiHeddaJoho1(KoikiHeddaJoho1Div KoikiHeddaJoho1) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getHeddaeria().setKoikiHeddaJoho1(KoikiHeddaJoho1);
     }
 
@@ -182,7 +202,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setDdlTuki(DropDownList ddlTuki) {
+    public void setDdlTuki(DropDownList ddlTuki) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getHeddaeria().getKoikiHeddaJoho1().setDdlTuki(ddlTuki);
     }
 
@@ -192,7 +212,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setKoikiHeddaJoho2(KoikiHeddaJoho2Div KoikiHeddaJoho2) {
+    public void setKoikiHeddaJoho2(KoikiHeddaJoho2Div KoikiHeddaJoho2) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getHeddaeria().setKoikiHeddaJoho2(KoikiHeddaJoho2);
     }
 
@@ -202,7 +222,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtTaishoFuairu(TextBox txtTaishoFuairu) {
+    public void setTxtTaishoFuairu(TextBox txtTaishoFuairu) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getHeddaeria().getKoikiHeddaJoho2().setTxtTaishoFuairu(txtTaishoFuairu);
     }
 
@@ -212,7 +232,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtShoriJotai(TextBox txtShoriJotai) {
+    public void setTxtShoriJotai(TextBox txtShoriJotai) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getHeddaeria().getKoikiHeddaJoho2().setTxtShoriJotai(txtShoriJotai);
     }
 
@@ -222,7 +242,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtShoriNichiji(TextBox txtShoriNichiji) {
+    public void setTxtShoriNichiji(TextBox txtShoriNichiji) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getHeddaeria().getKoikiHeddaJoho2().setTxtShoriNichiji(txtShoriNichiji);
     }
 
@@ -232,7 +252,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setChkTesutoShoriTorikomi(CheckBoxList chkTesutoShoriTorikomi) {
+    public void setChkTesutoShoriTorikomi(CheckBoxList chkTesutoShoriTorikomi) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getHeddaeria().setChkTesutoShoriTorikomi(chkTesutoShoriTorikomi);
     }
 
@@ -242,7 +262,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setShoriSetteibotan(ShoriSetteibotanDiv ShoriSetteibotan) {
+    public void setShoriSetteibotan(ShoriSetteibotanDiv ShoriSetteibotan) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().setShoriSetteibotan(ShoriSetteibotan);
     }
 
@@ -252,7 +272,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setBtnShoriSettei(Button btnShoriSettei) {
+    public void setBtnShoriSettei(Button btnShoriSettei) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getShoriSetteibotan().setBtnShoriSettei(btnShoriSettei);
     }
 
@@ -262,7 +282,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTaishoIchiranRain(TaishoIchiranRainDiv TaishoIchiranRain) {
+    public void setTaishoIchiranRain(TaishoIchiranRainDiv TaishoIchiranRain) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().setTaishoIchiranRain(TaishoIchiranRain);
     }
 
@@ -272,7 +292,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLinTaishoIchiran(HorizontalLine linTaishoIchiran) {
+    public void setLinTaishoIchiran(HorizontalLine linTaishoIchiran) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getTaishoIchiranRain().setLinTaishoIchiran(linTaishoIchiran);
     }
 
@@ -282,7 +302,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTanitsuTaishoShoriIchiran(TanitsuTaishoShoriIchiranDiv TanitsuTaishoShoriIchiran) {
+    public void setTanitsuTaishoShoriIchiran(TanitsuTaishoShoriIchiranDiv TanitsuTaishoShoriIchiran) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().setTanitsuTaishoShoriIchiran(TanitsuTaishoShoriIchiran);
     }
 
@@ -292,7 +312,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setDgTanitsuTaishoShoriItchiran(DataGrid<dgTanitsuTaishoShoriItchiran_Row> dgTanitsuTaishoShoriItchiran) {
+    public void setDgTanitsuTaishoShoriItchiran(DataGrid<dgTanitsuTaishoShoriItchiran_Row> dgTanitsuTaishoShoriItchiran) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getTanitsuTaishoShoriIchiran().setDgTanitsuTaishoShoriItchiran(dgTanitsuTaishoShoriItchiran);
     }
 
@@ -302,7 +322,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setFuairuAppurodo(FuairuAppurodoDiv FuairuAppurodo) {
+    public void setFuairuAppurodo(FuairuAppurodoDiv FuairuAppurodo) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getTanitsuTaishoShoriIchiran().setFuairuAppurodo(FuairuAppurodo);
     }
 
@@ -312,7 +332,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtShoriNendo(TextBox txtShoriNendo) {
+    public void setTxtShoriNendo(TextBox txtShoriNendo) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getTanitsuTaishoShoriIchiran().setTxtShoriNendo(txtShoriNendo);
     }
 
@@ -322,7 +342,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtTuki(TextBox txtTuki) {
+    public void setTxtTuki(TextBox txtTuki) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getTanitsuTaishoShoriIchiran().setTxtTuki(txtTuki);
     }
 
@@ -332,7 +352,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtShori(TextBox txtShori) {
+    public void setTxtShori(TextBox txtShori) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getTanitsuTaishoShoriIchiran().setTxtShori(txtShori);
     }
 
@@ -342,7 +362,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtFuairuMei(TextBox txtFuairuMei) {
+    public void setTxtFuairuMei(TextBox txtFuairuMei) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getTanitsuTaishoShoriIchiran().setTxtFuairuMei(txtFuairuMei);
     }
 
@@ -352,7 +372,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setKoikiTaishoShoriIchiran(KoikiTaishoShoriIchiranDiv KoikiTaishoShoriIchiran) {
+    public void setKoikiTaishoShoriIchiran(KoikiTaishoShoriIchiranDiv KoikiTaishoShoriIchiran) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().setKoikiTaishoShoriIchiran(KoikiTaishoShoriIchiran);
     }
 
@@ -362,7 +382,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setDgKoikiTaishoShoriItiran(DataGrid<dgKoikiTaishoShoriItiran_Row> dgKoikiTaishoShoriItiran) {
+    public void setDgKoikiTaishoShoriItiran(DataGrid<dgKoikiTaishoShoriItiran_Row> dgKoikiTaishoShoriItiran) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getKoikiTaishoShoriIchiran().setDgKoikiTaishoShoriItiran(dgKoikiTaishoShoriItiran);
     }
 
@@ -372,7 +392,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLinChohyoShutsuryoku(HorizontalLine linChohyoShutsuryoku) {
+    public void setLinChohyoShutsuryoku(HorizontalLine linChohyoShutsuryoku) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().setLinChohyoShutsuryoku(linChohyoShutsuryoku);
     }
 
@@ -382,7 +402,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setChohyoShutsuryokuSiji(ChohyoShutsuryokuSijiDiv ChohyoShutsuryokuSiji) {
+    public void setChohyoShutsuryokuSiji(ChohyoShutsuryokuSijiDiv ChohyoShutsuryokuSiji) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().setChohyoShutsuryokuSiji(ChohyoShutsuryokuSiji);
     }
 
@@ -392,7 +412,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setChohyoShutsuryokuUmu(ChohyoShutsuryokuUmuDiv ChohyoShutsuryokuUmu) {
+    public void setChohyoShutsuryokuUmu(ChohyoShutsuryokuUmuDiv ChohyoShutsuryokuUmu) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().setChohyoShutsuryokuUmu(ChohyoShutsuryokuUmu);
     }
 
@@ -402,7 +422,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLblItiranhyo(Label lblItiranhyo) {
+    public void setLblItiranhyo(Label lblItiranhyo) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getChohyoShutsuryokuUmu().setLblItiranhyo(lblItiranhyo);
     }
 
@@ -412,7 +432,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLblShutsuryoku(Label lblShutsuryoku) {
+    public void setLblShutsuryoku(Label lblShutsuryoku) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getChohyoShutsuryokuUmu().setLblShutsuryoku(lblShutsuryoku);
     }
 
@@ -422,18 +442,8 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setRadSonotaChohyo(RadioButton radSonotaChohyo) {
+    public void setRadSonotaChohyo(RadioButton radSonotaChohyo) {
         this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getChohyoShutsuryokuUmu().setRadSonotaChohyo(radSonotaChohyo);
-    }
-
-    @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun3() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun3();
-    }
-
-    @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
-        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun1();
     }
 
     @JsonIgnore
@@ -447,12 +457,22 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun3() {
+        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun3();
+    }
+
+    @JsonIgnore
+    public IChohyoShutsuryokujunDiv getCcdChohyoSyuturyokuJun1() {
+        return this.getHikazeiNenkinTaishoshaJohoTorikomi().getChohyoShutsuryokuSiji().getCcdChohyoSyuturyokuJun1();
+    }
+
+    @JsonIgnore
     public TextBox getTxtShoriSetteiNendo() {
         return this.getShoriSettei().getTxtShoriSetteiNendo();
     }
 
     @JsonIgnore
-    public void  setTxtShoriSetteiNendo(TextBox txtShoriSetteiNendo) {
+    public void setTxtShoriSetteiNendo(TextBox txtShoriSetteiNendo) {
         this.getShoriSettei().setTxtShoriSetteiNendo(txtShoriSetteiNendo);
     }
 
@@ -462,7 +482,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLinShoriSettei(HorizontalLine linShoriSettei) {
+    public void setLinShoriSettei(HorizontalLine linShoriSettei) {
         this.getShoriSettei().setLinShoriSettei(linShoriSettei);
     }
 
@@ -472,7 +492,7 @@ public class HikazeiNenkinTaishoshaJohoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setDgShoriSettei(DataGrid<dgShoriSettei_Row> dgShoriSettei) {
+    public void setDgShoriSettei(DataGrid<dgShoriSettei_Row> dgShoriSettei) {
         this.getShoriSettei().setDgShoriSettei(dgShoriSettei);
     }
 

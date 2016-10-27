@@ -10,14 +10,16 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugai
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.jusho.JushoEditorBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IAtenaSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.JushoKangaiEditPattern;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.JushoKannaiEditPattern;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
-import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.kojin.IKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -98,22 +100,25 @@ public class JyutakugaisyunaiyoList {
     public ResponseData<JyutakugaisyunaiyoListDiv> onClick_CopyButton(JyutakugaisyunaiyoListDiv requestDiv) {
         ShikibetsuCode shikibetsuCode = DataPassingConverter.deserialize(
                 requestDiv.getJushoData(), ShikibetsuCode.class);
-        IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory.
-                createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
-        ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー);
-        builder.set識別コード(shikibetsuCode);
-        IShikibetsuTaishoSearchKey 識別対象検索キー = builder.build();
 
-        IKojinFinder finder = ShikibetsuTaishoService.getKojinFinder();
-        List<IKojin> kojinList = finder.get個人s(識別対象検索キー);
-        if (!kojinList.isEmpty()) {
-            IKojin kojin = kojinList.get(0);
-            requestDiv.getTxtJyusyo().setDomain(new AtenaJusho(kojin.get住所().get住所()));
-        }
+        requestDiv.getTxtJyusyo().setDomain(new AtenaJusho(get連結住所(shikibetsuCode)));
         requestDiv.getBtnClear().setDisabled(false);
         requestDiv.getBtnDetailConfirm().setDisabled(false);
         requestDiv.getBtnHonnijyusyoCopy().setDisabled(false);
         return ResponseData.of(requestDiv).respond();
+    }
+
+    private RString get連結住所(ShikibetsuCode 識別コード) {
+        IShikibetsuTaisho 識別対象 = ShikibetsuTaishoService.getShikibetsuTaishoFinder().
+                get識別対象(GyomuCode.DB介護保険, 識別コード, KensakuYusenKubun.住登外優先);
+        IAtesakiGyomuHanteiKey 業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険);
+        IAtenaSearchKey 宛名検索キー = new AtenaSearchKeyBuilder(KensakuYusenKubun.住登外優先, 業務判定キー).set識別コード(識別コード).build();
+
+        JushoEditorBuilder jushobuilder = new JushoEditorBuilder(識別対象.get住所());
+        jushobuilder.set管内住所編集パターン(JushoKannaiEditPattern.toValue(宛名検索キー.get住所編集方法().code()));
+        jushobuilder.set管外住所編集パターン(JushoKangaiEditPattern.space方書);
+
+        return jushobuilder.build().editJusho().get編集後住所All();
     }
 
     /**
