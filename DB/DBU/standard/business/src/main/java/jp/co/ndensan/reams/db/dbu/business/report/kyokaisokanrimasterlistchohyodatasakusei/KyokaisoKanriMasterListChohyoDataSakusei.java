@@ -150,8 +150,6 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                 ? RString.EMPTY : JuminJotai.toValue(entity.getJuminJotaiCode()).住民状態略称());
         if (entity.getSetaiCode() != null) {
             帳票用データ.set世帯コード(nullToEmpty(entity.getSetaiCode().value()));
-        } else {
-            帳票用データ.set世帯コード(nullToEmpty(entity.getSetaiCode().value()));
         }
         帳票用データ.set生年月日(共通ポリシfomart(entity.getSeinengappiYMD()));
         帳票用データ.set該当申請日(共通ポリシfomart(entity.getShinseiYMD()));
