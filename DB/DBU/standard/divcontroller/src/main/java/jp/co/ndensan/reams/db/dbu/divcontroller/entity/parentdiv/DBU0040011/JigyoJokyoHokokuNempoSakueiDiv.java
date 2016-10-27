@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JigyoJokyoHokokuNempoSakueiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -54,6 +54,8 @@ public class JigyoJokyoHokokuNempoSakueiDiv extends Panel {
     private RString hiddenDonyuKeitaiCode;
     @JsonProperty("hiddenTanitsu")
     private RString hiddenTanitsu;
+    @JsonProperty("kijun")
+    private RString kijun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -329,6 +331,24 @@ public class JigyoJokyoHokokuNempoSakueiDiv extends Panel {
     @JsonProperty("hiddenTanitsu")
     public void setHiddenTanitsu(RString hiddenTanitsu) {
         this.hiddenTanitsu = hiddenTanitsu;
+    }
+
+    /*
+     * getkijun
+     * @return kijun
+     */
+    @JsonProperty("kijun")
+    public RString getKijun() {
+        return kijun;
+    }
+
+    /*
+     * setkijun
+     * @param kijun kijun
+     */
+    @JsonProperty("kijun")
+    public void setKijun(RString kijun) {
+        this.kijun = kijun;
     }
 
     /*
