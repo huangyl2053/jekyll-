@@ -42,6 +42,8 @@ public class JigyoJokyoHokokuGeppoSakuseiDiv extends Panel {
     private RString hdnJkkoutani;
     @JsonProperty("kakuteiHokokuYM")
     private RString kakuteiHokokuYM;
+    @JsonProperty("kijun")
+    private RString kijun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -209,6 +211,24 @@ public class JigyoJokyoHokokuGeppoSakuseiDiv extends Panel {
     @JsonProperty("kakuteiHokokuYM")
     public void setKakuteiHokokuYM(RString kakuteiHokokuYM) {
         this.kakuteiHokokuYM = kakuteiHokokuYM;
+    }
+
+    /*
+     * getkijun
+     * @return kijun
+     */
+    @JsonProperty("kijun")
+    public RString getKijun() {
+        return kijun;
+    }
+
+    /*
+     * setkijun
+     * @param kijun kijun
+     */
+    @JsonProperty("kijun")
+    public void setKijun(RString kijun) {
+        this.kijun = kijun;
     }
 
     /*
