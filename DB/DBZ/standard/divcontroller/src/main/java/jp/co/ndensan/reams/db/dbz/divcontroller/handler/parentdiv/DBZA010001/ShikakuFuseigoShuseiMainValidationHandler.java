@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.ShikakuFuseigoBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.ShikakuFuseigoShuseiMainDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.ShikakuFuseigoShuseiPanelDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo.ShikakuFuseigoShuseiService;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class ShikakuFuseigoShuseiMainValidationHandler {
 
-    private final ShikakuFuseigoShuseiMainDiv div;
+    private final ShikakuFuseigoShuseiPanelDiv div;
     private final ShikakuFuseigoShuseiService service;
     private static final RString 対象項目_資格取得日 = new RString("資格取得日");
     private static final RString 対象項目_資格喪失日 = new RString("資格喪失日");
@@ -41,7 +41,7 @@ public class ShikakuFuseigoShuseiMainValidationHandler {
      *
      * @param div 資格不整合修正Div
      */
-    public ShikakuFuseigoShuseiMainValidationHandler(ShikakuFuseigoShuseiMainDiv div) {
+    public ShikakuFuseigoShuseiMainValidationHandler(ShikakuFuseigoShuseiPanelDiv div) {
         this.div = div;
         this.service = ShikakuFuseigoShuseiService.createInstance();
     }

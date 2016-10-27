@@ -247,7 +247,11 @@ public class PanelnlTotalHandler {
         paramter.set支払期間To(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get支払期間TO());
         paramter.set開始時間(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get開始時間());
         paramter.set終了時間(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get終了時間());
-        paramter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
+        if (div.getCcdChohyoShutsuryokujun().get出力順ID() != null) {
+            paramter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
+        } else {
+            paramter.set出力順ID(RString.EMPTY);
+        }
         return shokanbarai.getShokanbaraiShikyuFushikyuKetteiTsuchishoBatchParameter(paramter);
     }
 

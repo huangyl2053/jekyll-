@@ -60,11 +60,10 @@ public class JyutakugaisyunaiyoListValidationHandler {
                     DbcErrorMessages.着工日不一致), div.getTxtTyakkoyotebi()));
             return validPairs;
         }
-        if (div.getDgGaisyuList().getDataSource().size() > 1) {
-            if (!div.getDgGaisyuList().getDataSource().get(0).getTxtJutakuAddress().equals(div.getTxtJyusyo().getDomain().value())) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                        DbcErrorMessages.対象住宅住所不一致), div.getTxtJyusyo()));
-            }
+        if (div.getDgGaisyuList().getDataSource().size() > 1
+                && !div.getDgGaisyuList().getDataSource().get(0).getTxtJutakuAddress().equals(div.getTxtJyusyo().getDomain().value())) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    DbcErrorMessages.対象住宅住所不一致), div.getTxtJyusyo()));
         }
         return validPairs;
     }

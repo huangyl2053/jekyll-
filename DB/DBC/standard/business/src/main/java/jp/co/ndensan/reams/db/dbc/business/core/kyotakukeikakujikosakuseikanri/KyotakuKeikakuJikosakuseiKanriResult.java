@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class KyotakuKeikakuJikosakuseiKanriResult {
 
-    private static final RString 值0 = new RString("0");
+    private static final RString 値0 = new RString("0");
 
     /**
      * edit居宅給付計画自己作成管理Entity
@@ -82,7 +82,7 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
         tempEntity.setShikyuGendoKaishiYM(FlexibleYearMonth.EMPTY);
         tempEntity.setShikyuGendoShuryoYM(FlexibleYearMonth.EMPTY);
         tempEntity.setTankiYokaigoJotaiKubunCode(RString.EMPTY);
-        tempEntity.setTankiSikyuGendoNissu(值0);
+        tempEntity.setTankiSikyuGendoNissu(値0);
         tempEntity.setTankiShikyuGendoKaishiYM(FlexibleYearMonth.EMPTY);
         tempEntity.setTankiShikyuGendoShuryoYM(FlexibleYearMonth.EMPTY);
         tempEntity.setServiceTeikyoJigyoshaName(RString.EMPTY);
@@ -111,21 +111,24 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
         hihokenshaTempEntity.setExShoHokenshaNo(RString.EMPTY);
         hihokenshaTempEntity.setExHihokenshaNo(getColumnValue(kyoEntity.getHihokenshaNo()));
         hihokenshaTempEntity.setExServiceTeikyoYm(居宅給付計画自己作成短期入所利用日数entity.getRiyoYM());
-        hihokenshaTempEntity.setHenkanFlag(值0);
+        hihokenshaTempEntity.setHenkanFlag(値0);
         hihokenshaTempEntity.setOldShichosonCode(RString.EMPTY);
         hihokenshaTempEntity.setSofuHihokenshaNo(getColumnValue(kyoEntity.getHihokenshaNo()));
         hihokenshaTempEntity.setShichosonCode(RString.EMPTY);
         hihokenshaTempEntity.setKannaiKangaiKubun(RString.EMPTY);
         hihokenshaTempEntity.setYubinNo(RString.EMPTY);
         hihokenshaTempEntity.setChoikiCode(RString.EMPTY);
+        hihokenshaTempEntity.setGyoseikuCode(RString.EMPTY);
         hihokenshaTempEntity.setGyoseikuMei(RString.EMPTY);
         hihokenshaTempEntity.setJusho(RString.EMPTY);
         hihokenshaTempEntity.setBanchi(RString.EMPTY);
         hihokenshaTempEntity.setBanchi(RString.EMPTY);
         hihokenshaTempEntity.setKatagaki(RString.EMPTY);
         hihokenshaTempEntity.setKanaMeisho(RString.EMPTY);
+        hihokenshaTempEntity.setShimei50onKana(RString.EMPTY);
         hihokenshaTempEntity.setMeisho(RString.EMPTY);
         hihokenshaTempEntity.setShikibetsuCode(ShikibetsuCode.EMPTY);
+        hihokenshaTempEntity.setShikakuShutokuJiyuCode(RString.EMPTY);
         hihokenshaTempEntity.setShikakuShutokuYmd(FlexibleDate.EMPTY);
         hihokenshaTempEntity.setShikibetsuCode(ShikibetsuCode.EMPTY);
         hihokenshaTempEntity.setShikakuSoshitsuYmd(FlexibleDate.EMPTY);
@@ -187,7 +190,7 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
         tempEntity.setShikyuGendoKaishiYM(FlexibleYearMonth.EMPTY);
         tempEntity.setShikyuGendoShuryoYM(FlexibleYearMonth.EMPTY);
         tempEntity.setTankiYokaigoJotaiKubunCode(RString.EMPTY);
-        tempEntity.setTankiSikyuGendoNissu(值0);
+        tempEntity.setTankiSikyuGendoNissu(値0);
         tempEntity.setTankiShikyuGendoKaishiYM(FlexibleYearMonth.EMPTY);
         tempEntity.setTankiShikyuGendoShuryoYM(FlexibleYearMonth.EMPTY);
         tempEntity.setServiceTeikyoJigyoshaName(RString.EMPTY);
@@ -215,7 +218,7 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
         hihokenshaTempEntity.setExShoHokenshaNo(RString.EMPTY);
         hihokenshaTempEntity.setExHihokenshaNo(getColumnValue(kyoEntity.getHihokenshaNo()));
         hihokenshaTempEntity.setExServiceTeikyoYm(予防給付計画自己作成短期利用日数entity.getRiyoYM());
-        hihokenshaTempEntity.setHenkanFlag(值0);
+        hihokenshaTempEntity.setHenkanFlag(値0);
         hihokenshaTempEntity.setOldShichosonCode(RString.EMPTY);
         hihokenshaTempEntity.setSofuHihokenshaNo(getColumnValue(kyoEntity.getHihokenshaNo()));
         hihokenshaTempEntity.setShichosonCode(RString.EMPTY);
@@ -226,6 +229,9 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
         hihokenshaTempEntity.setJusho(RString.EMPTY);
         hihokenshaTempEntity.setBanchi(RString.EMPTY);
         hihokenshaTempEntity.setBanchi(RString.EMPTY);
+        hihokenshaTempEntity.setGyoseikuCode(RString.EMPTY);
+        hihokenshaTempEntity.setShimei50onKana(RString.EMPTY);
+        hihokenshaTempEntity.setShikakuShutokuJiyuCode(RString.EMPTY);
         hihokenshaTempEntity.setKatagaki(RString.EMPTY);
         hihokenshaTempEntity.setKanaMeisho(RString.EMPTY);
         hihokenshaTempEntity.setMeisho(RString.EMPTY);
@@ -252,8 +258,8 @@ public class KyotakuKeikakuJikosakuseiKanriResult {
         errorEntity.setErrorKubun(KokuhorenJoho_SakuseiErrorKubun.送付対象データなし.getコード());
         errorEntity.setShoHokanehshaNo(RString.EMPTY);
         errorEntity.setHihokenshaNo(RString.EMPTY);
-        errorEntity.setKey1(FlexibleYearMonth.EMPTY);
-        errorEntity.setKey2(FlexibleYearMonth.EMPTY);
+        errorEntity.setKey1(RString.EMPTY);
+        errorEntity.setKey2(RString.EMPTY);
         errorEntity.setKey3(RString.EMPTY);
         errorEntity.setKey4(RString.EMPTY);
         errorEntity.setKey5(RString.EMPTY);

@@ -21,7 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * @reamsid_L DBU-9999-013 wangchao
  */
 public class TokuteiKojinJohoKoumokuHanKanri
-        extends ModelBase<TokuteiKojinJohoKoumokuHanKanriIdentifier, DbT7302TokuteiKojinJohoKoumokuHanKanriEntity, TokuteiKojinJohoKoumokuHanKanri> implements Serializable {
+        extends ModelBase<TokuteiKojinJohoKoumokuHanKanriIdentifier, DbT7302TokuteiKojinJohoKoumokuHanKanriEntity, TokuteiKojinJohoKoumokuHanKanri>
+        implements Serializable {
 
     private final DbT7302TokuteiKojinJohoKoumokuHanKanriEntity entity;
     private final TokuteiKojinJohoKoumokuHanKanriIdentifier id;

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110010.KyufukanrihyoOu
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110010.KyufukanrihyoOutGetjigyoshaNameProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110010.KyufukanrihyoOutGetkaigojigyoshaNameProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110010.KyufukanrihyoOutHokenshaNoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110010.ShikyuGendoGakuJohoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110010.YoboKeikakuJikoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110010.UpdateKyotakuNissuprocess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110010.UpdateYoboKeikakuNissuProcess;
@@ -46,7 +47,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC110010_KyufukanrihyoOut extends BatchFlowBase<DBC110010_KyufukanrihyoOutParameter> {
 
     private static final String 送付対象データ取得 = "getSofuTaishoData";
-    private static final String 支給限度額情報取得 = "getYoboKeikakuJikoSakuseiData";
+    private static final String 送付対象データ取得_予防給付計画自己作成情報 = "getYoboKeikakuJikoSakuseiData";
+    private static final String 支給限度額情報取得 = "callShikyuGendoGakuJohoProcess";
     private static final String 介護事業者指定サービス事業者名称取得 = "callGetjigyoshaServiceNameProcess";
     private static final String 事業者名称取得 = "callGetjigyoshaNameProcess";
     private static final String エラー登録 = "callDoErrorrProcess";
@@ -76,10 +78,11 @@ public class DBC110010_KyufukanrihyoOut extends BatchFlowBase<DBC110010_Kyufukan
         連番 = getResult(Integer.class, new RString(送付対象データ取得),
                 KyotakuKeikakuJikosakuseiKanriProcess.PARAMETER_OUT_OUTCOUNT);
 
-        executeStep(支給限度額情報取得);
+        executeStep(送付対象データ取得_予防給付計画自己作成情報);
         int 登録件数 = getResult(Integer.class, new RString(送付対象データ取得),
                 YoboKeikakuJikoSakuseiProcess.PARAMETER_OUT_OUTCOUNT);
         if (登録件数 != 0) {
+            executeStep(支給限度額情報取得);
             executeStep(証記載保険者番号取得);
             executeStep(保険者番号取込);
             executeStep(被保険者_宛名情報取得);
@@ -117,10 +120,20 @@ public class DBC110010_KyufukanrihyoOut extends BatchFlowBase<DBC110010_Kyufukan
      *
      * @return YoboKeikakuJikoSakuseiProcess
      */
-    @Step(支給限度額情報取得)
+    @Step(送付対象データ取得_予防給付計画自己作成情報)
     protected IBatchFlowCommand getYoboKeikakuJikoSakuseiData() {
         getParameter().set連番(連番);
         return loopBatch(YoboKeikakuJikoSakuseiProcess.class).arguments(getParameter().toKyufukanrihyoOutProcessParameter()).define();
+    }
+
+    /**
+     * 支給限度額情報データ取得です。
+     *
+     * @return YoboKeikakuJikoSakuseiProcess
+     */
+    @Step(支給限度額情報取得)
+    protected IBatchFlowCommand callShikyuGendoGakuJohoProcess() {
+        return loopBatch(ShikyuGendoGakuJohoProcess.class).arguments(getParameter().toKyufukanrihyoOutProcessParameter()).define();
     }
 
     /**
