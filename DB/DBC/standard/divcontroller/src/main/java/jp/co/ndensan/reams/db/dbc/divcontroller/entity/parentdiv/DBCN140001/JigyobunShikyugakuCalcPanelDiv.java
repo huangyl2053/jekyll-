@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
  */
 public class JigyobunShikyugakuCalcPanelDiv extends PanelBatchParameter {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -165,13 +165,23 @@ public class JigyobunShikyugakuCalcPanelDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnHihokenshaSearch() {
+    public Button getBtnHihokenshaSearch() {
         return this.getChushutsuJoken().getBtnHihokenshaSearch();
     }
 
     @JsonIgnore
-    public void setBtnHihokenshaSearch(ButtonDialog btnHihokenshaSearch) {
+    public void setBtnHihokenshaSearch(Button btnHihokenshaSearch) {
         this.getChushutsuJoken().setBtnHihokenshaSearch(btnHihokenshaSearch);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtHihokenshaMei() {
+        return this.getChushutsuJoken().getTxtHihokenshaMei();
+    }
+
+    @JsonIgnore
+    public void setTxtHihokenshaMei(TextBox txtHihokenshaMei) {
+        this.getChushutsuJoken().setTxtHihokenshaMei(txtHihokenshaMei);
     }
 
     @JsonIgnore

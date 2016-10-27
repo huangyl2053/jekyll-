@@ -10,10 +10,19 @@ import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN140001.JigyobunShikyugakuCalcPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBCN140001.JigyobunShikyugakuCalcPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBCN140001.JigyobunShikyugakuCalcPanelValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBCMNN1004_事業分支給額計算
@@ -21,6 +30,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBC-4830-010 quxiaodong
  */
 public class JigyobunShikyugakuCalcPanel {
+
+    private static final RString イベント_対象者特定 = new RString("DBZ0200001_対象者特定");
+    private static final RString イベント_終了 = new RString("DBZ0200001_終了");
+    private static final RString 被保険者台帳TXT = new RString("被保険者台帳");
 
     /**
      * 画面初期化です。
@@ -30,6 +43,25 @@ public class JigyobunShikyugakuCalcPanel {
      */
     public ResponseData<JigyobunShikyugakuCalcPanelDiv> onLoad(JigyobunShikyugakuCalcPanelDiv div) {
         getHandler(div).initialize画面();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * onActionイベントです。
+     *
+     * @param div JigyobunShikyugakuCalcPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<JigyobunShikyugakuCalcPanelDiv> onActive(JigyobunShikyugakuCalcPanelDiv div) {
+        RString イベント名 = ResponseHolder.getBeforeEvent();
+        if (イベント_対象者特定.equals(イベント名) || イベント_終了.equals(イベント名)) {
+            TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            HihokenshaNo 被保番号 = 資格対象者.get被保険者番号();
+            if (被保番号 != null && !被保番号.isEmpty()) {
+                div.getChushutsuJoken().getTxtHihokenshaNo().setValue(資格対象者.get被保険者番号().getColumnValue());
+                getHandler(div).get被保険者氏名(資格対象者.get識別コード());
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -82,16 +114,22 @@ public class JigyobunShikyugakuCalcPanel {
     }
 
     /**
-     * 「被保険者番号入力補助」ボタンです。
+     * 「被保険者番号TXT」ボタンです。
      *
      * @param div JukyushaIdoRenrakuhyoHenkoMainPanelDiv
      * @return ResponseData
      */
-    public ResponseData<JigyobunShikyugakuCalcPanelDiv> onClick_btnHihokenshaSearch(
+    public ResponseData<JigyobunShikyugakuCalcPanelDiv> onBlur_TxtHihokenshaNo(
             JigyobunShikyugakuCalcPanelDiv div) {
-        //TODO QA1458
         if (div.getChushutsuJoken().getHihokenshaNo() != null && !div.getChushutsuJoken().getHihokenshaNo().isEmpty()) {
-            div.getChushutsuJoken().getTxtHihokenshaNo().setValue(div.getChushutsuJoken().getHihokenshaNo());
+            HihokenshaDaicho 被保険者台帳 = HihokenshaDaichoManager.createInstance().selectByHihokenshaNo(
+                    new HihokenshaNo(div.getChushutsuJoken().getHihokenshaNo()));
+            if (被保険者台帳 == null) {
+                throw new ApplicationException(
+                        UrErrorMessages.存在しない.getMessage().replace(被保険者台帳TXT.toString()));
+            } else {
+                getHandler(div).get被保険者氏名(被保険者台帳.get識別コード());
+            }
         }
         return ResponseData.of(div).respond();
     }

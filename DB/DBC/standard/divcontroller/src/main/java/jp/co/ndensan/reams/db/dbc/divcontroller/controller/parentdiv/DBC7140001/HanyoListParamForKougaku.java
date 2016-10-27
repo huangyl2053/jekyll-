@@ -38,6 +38,29 @@ public class HanyoListParamForKougaku {
     }
 
     /**
+     * 条件を保存するボタンのメソッドです。
+     *
+     * @param div HanyoListParamForKougakuDiv
+     * @return ResponseData
+     */
+    public ResponseData<BatchParameterMap> onClick_btnBatchParamSave(HanyoListParamForKougakuDiv div) {
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        responseData.data = new BatchParameterMap(getHandler(div).getBatchParamter());
+        return responseData;
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     *
+     * @param div HanyoListParamForKougakuDiv
+     * @return ResponseData
+     */
+    public ResponseData<HanyoListParamForKougakuDiv> onClick_btnBatchParamRestore(HanyoListParamForKougakuDiv div) {
+        getHandler(div).pamaRestore();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 入力項目チェックです。
      *
      * @param div HanyoListParamDiv

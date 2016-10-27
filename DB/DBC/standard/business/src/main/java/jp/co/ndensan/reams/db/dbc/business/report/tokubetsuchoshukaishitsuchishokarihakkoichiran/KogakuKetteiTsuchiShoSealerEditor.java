@@ -149,8 +149,10 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
         source.taishoYM3 = RString.EMPTY;
         source.taishoYM4 = RString.EMPTY;
 
-        source.shiharaiGaku = 金額編集(new RString(帳票情報.get支払金額合計().toString()),
-                new RString(帳票情報.get支払金額合計().toString()).length());
+        if (帳票情報.get支払金額合計() != null) {
+            source.shiharaiGaku = 金額編集(new RString(帳票情報.get支払金額合計().toString()),
+                    new RString(帳票情報.get支払金額合計().toString()).length());
+        }
 
         source.shikyuGaku1 = doカンマ編集(帳票情報.get支給金額1());
         source.shikyuGaku2 = RString.EMPTY;
@@ -167,7 +169,7 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
             } else if (口座払い値.equals(帳票情報.get支払方法区分()) && 金融機関コード.equals(帳票情報.get金融機関コード())) {
                 source.shumokuTitle = 通帳記号;
                 source.bangoTitle = 通帳番号;
-            } else {
+            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && !金融機関コード.equals(帳票情報.get金融機関コード())) {
                 source.shumokuTitle = 口座種別;
                 source.bangoTitle = 口座番号;
             }
