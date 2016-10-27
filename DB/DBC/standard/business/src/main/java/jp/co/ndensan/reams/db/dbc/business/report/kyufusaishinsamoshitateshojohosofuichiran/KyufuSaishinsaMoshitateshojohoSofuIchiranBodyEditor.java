@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -33,6 +32,8 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranBodyEditor implements IKyu
     private final SaishinsaMoshitateIchiranhyoTaisyoEntity 送付一覧表データ;
     private static final RString 合計件数タイトル = new RString("合計件数");
     private static final RString 件数 = new RString("件");
+    private static final int NUM_ZERO = 0;
+    private static final int NUM_TWO = 2;
     private static final int LENGTH_ZERO = 0;
     private static final int LENGTH_TWENTY = 20;
     private static final int LENGTH_FORTY = 40;
@@ -112,13 +113,19 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranBodyEditor implements IKyu
 
         source.listUpper_9 = get年月日(送付一覧表データ.get再審査申立_申立年月日());
         source.listUpper_10 = doカンマ編集(new Decimal(送付一覧表データ.get再審査申立_申立単位数()));
-        source.listUpper_11 = 送付一覧表データ.get再審査申立_申立事由コード();
+        RString 申立事由コード = 送付一覧表データ.get再審査申立_申立事由コード();
+        source.listUpper_11 = 申立事由コード;
+        if (申立事由コード != null) {
+            source.listUpper_12 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
+                    DBCCodeShubetsu.再審査申立事由コード_上２桁_申立対象項目コード.getコード(),
+                    new Code(申立事由コード.substringEmptyOnError(NUM_ZERO, NUM_TWO)));
 
-        source.listUpper_12 = get申立事由(DBCCodeShubetsu.再審査申立事由コード_上２桁_申立対象項目コード.getコード());
+            source.listLower_4 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
+                    DBCCodeShubetsu.再審査申立事由コード_下２桁_申立理由番号.getコード(),
+                    new Code(申立事由コード.substringEmptyOnError(申立事由コード.length() - NUM_TWO, 申立事由コード.length())));
+        }
 
         source.listLower_2 = 送付一覧表データ.get被保険者_宛名名称();
-
-        source.listLower_4 = get申立事由(DBCCodeShubetsu.再審査申立事由コード_下２桁_申立理由番号.getコード());
 
         if (合計フラグ) {
             source.gokeiKensuTitle = 合計件数タイトル;
@@ -126,14 +133,6 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranBodyEditor implements IKyu
         }
 
         return source;
-    }
-
-    private RString get申立事由(CodeShubetsu code) {
-        if (送付一覧表データ.get再審査申立_申立事由コード() != null) {
-            return CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, code,
-                    new Code(送付一覧表データ.get再審査申立_申立事由コード()));
-        }
-        return RString.EMPTY;
     }
 
     private RString get年月日(FlexibleDate date) {

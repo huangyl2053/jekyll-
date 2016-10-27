@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010020;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCommonHeader;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKihonJyohou;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKogakuKaigoServicehiJyohou;
@@ -48,6 +51,7 @@ public class KogakuKaigoServiceMain {
         div.getCcdKyufuJissekiHeader().initialize(
                 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(), サービス提供年月,
                 整理番号, 識別番号検索キー);
+        set給付実績ヘッダ情報2(サービス提供年月, 整理番号, 識別番号検索キー);
         List<ShikibetsuNoKanri> 識別番号管理データリスト = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
                 サービス提供年月, 識別番号検索キー).records();
         if (!識別番号管理データリスト.isEmpty()) {
@@ -237,6 +241,19 @@ public class KogakuKaigoServiceMain {
 
     private KogakuKaigoServiceHandler getHandler(KogakuKaigoServiceMainDiv div) {
         return new KogakuKaigoServiceHandler(div);
+    }
+
+    private void set給付実績ヘッダ情報2(FlexibleYearMonth サービス提供年月,
+            RString 整理番号, NyuryokuShikibetsuNo 識別番号検索キー) {
+        KyufuJissekiPrmBusiness 給付実績情報照会情報
+                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
+        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報 = new ArrayList<>();
+        KyufuJissekiCommonHeader commonHeader = new KyufuJissekiCommonHeader();
+        給付実績ヘッダ情報.addAll(KyufuJissekiShokaiFinder.createInstance().getKyufuJissekiHeaderJoho2(
+                給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(), サービス提供年月, 整理番号, 識別番号検索キー).records());
+        commonHeader.set給付実績ヘッダ情報2(給付実績ヘッダ情報);
+        給付実績情報照会情報.setCommonHeader(commonHeader);
+        ViewStateHolder.put(ViewStateKeys.給付実績情報照会情報, 給付実績情報照会情報);
     }
 
     private ResponseData<KogakuKaigoServiceMainDiv> createResponse(KogakuKaigoServiceMainDiv div) {

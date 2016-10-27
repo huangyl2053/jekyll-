@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -158,6 +160,26 @@ public class DbT2013HokenryoDankaiDac implements ISaveable<DbT2013HokenryoDankai
         return accessor.select().
                 table(DbT2013HokenryoDankai.class).
                 where((eq(fukaNendo, 賦課年度))).
+                toList(DbT2013HokenryoDankaiEntity.class);
+    }
+
+    /**
+     * 保険料段階を全件返します。
+     *
+     * @param 賦課年度 FlexibleYear
+     * @return List<DbT2013HokenryoDankaiEntity>
+     */
+    @Transaction
+    public List<DbT2013HokenryoDankaiEntity> get保険料ランク別制御情報(
+            FlexibleYear 賦課年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2013HokenryoDankai.class).
+                where((eq(fukaNendo, 賦課年度))).
+                order(by(fukaNendo, Order.DESC),
+                        by(rankuKubun, Order.DESC),
+                        by(dankaiIndex, Order.DESC)).
                 toList(DbT2013HokenryoDankaiEntity.class);
     }
 }
