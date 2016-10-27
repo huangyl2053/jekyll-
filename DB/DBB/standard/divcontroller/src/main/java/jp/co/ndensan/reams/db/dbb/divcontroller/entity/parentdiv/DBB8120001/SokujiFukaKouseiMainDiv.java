@@ -56,10 +56,10 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     private RString tokuchoNofugakuValue06;
     @JsonProperty("tokuchoNofugakuValue08")
     private RString tokuchoNofugakuValue08;
-    @JsonProperty("isDataChange")
-    private RString isDataChange;
     @JsonProperty("initData")
     private RString initData;
+    @JsonProperty("isDataChange")
+    private RString isDataChange;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -302,24 +302,6 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     }
 
     /*
-     * getisDataChange
-     * @return isDataChange
-     */
-    @JsonProperty("isDataChange")
-    public RString getIsDataChange() {
-        return isDataChange;
-    }
-
-    /*
-     * setisDataChange
-     * @param isDataChange isDataChange
-     */
-    @JsonProperty("isDataChange")
-    public void setIsDataChange(RString isDataChange) {
-        this.isDataChange = isDataChange;
-    }
-
-    /*
      * getinitData
      * @return initData
      */
@@ -335,6 +317,24 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     @JsonProperty("initData")
     public void setInitData(RString initData) {
         this.initData = initData;
+    }
+
+    /*
+     * getisDataChange
+     * @return isDataChange
+     */
+    @JsonProperty("isDataChange")
+    public RString getIsDataChange() {
+        return isDataChange;
+    }
+
+    /*
+     * setisDataChange
+     * @param isDataChange isDataChange
+     */
+    @JsonProperty("isDataChange")
+    public void setIsDataChange(RString isDataChange) {
+        this.isDataChange = isDataChange;
     }
 
     /*
