@@ -186,7 +186,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getKijuntsukiShichosonjohos(基準年月, 導入形態);
         for (IKoseiShichosonMaster list : kilist) {
             KeyValueDataSource dataSource = new KeyValueDataSource(
-                    list.get市町村コード().value(), list.get市町村名称());
+                    list.get証記載保険者番号().getColumnValue(), list.get市町村名称());
             dataSourceList.add(dataSource);
         }
         return dataSourceList;
@@ -448,8 +448,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 new RDate(shokanshinsei.get申請年月日().toString()));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtUkechikebi().setValue(
                 new RDate(shokanshinsei.get受付年月日().toString()));
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtRyosyuYMD().setValue(
-                new RDate(shokanshinsei.get領収年月日().toString()));
+        if (null != shokanshinsei.get領収年月日() && !shokanshinsei.get領収年月日().isEmpty()) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtRyosyuYMD().setValue(
+                    new RDate(shokanshinsei.get領収年月日().toString()));
+        }
         if (shokanshinsei.get申請者区分() != null && !shokanshinsei.get申請者区分().isEmpty()) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getDdlShinseisyakubun().setSelectedKey(
                     shokanshinsei.get申請者区分());
