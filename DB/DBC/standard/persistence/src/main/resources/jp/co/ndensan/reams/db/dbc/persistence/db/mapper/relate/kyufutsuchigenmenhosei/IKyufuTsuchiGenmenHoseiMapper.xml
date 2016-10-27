@@ -10,7 +10,7 @@
         T1."shokisaiHokenshaNo" AS "shoKisaiHokenshaNo",
         T1."hiHokenshaNo" AS hihokenshaNo,
         T1."serviceTeikyoYM",
-        T2."jigyoshaName",
+        PSM."meisho",
         T1."jigyoshoNo",
         T2."jigyoshaName",
         T1."serviceShuruiCode",

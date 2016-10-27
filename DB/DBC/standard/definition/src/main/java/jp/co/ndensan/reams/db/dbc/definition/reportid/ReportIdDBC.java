@@ -678,15 +678,15 @@ public enum ReportIdDBC {
     /**
      * 汎用リスト出力(総合事業費情報2)帳票ＩＤです。
      */
-    DBC701022(new ReportId("DBC701022_HanyoList_SogoJigyoHi_Meisai"), new RString("汎用リスト出力(総合事業費情報)")),
+    DBC701022(new ReportId("DBC701022_HanyoListSogoJigyoHiMeisai"), new RString("汎用リスト出力(総合事業費情報)")),
     /**
      * 汎用リスト出力(総合事業費情報3)帳票ＩＤです。
      */
-    DBC701023(new ReportId("DBC701023_HanyoList_SogoJigyoHi_Syukei"), new RString("汎用リスト出力(総合事業費情報)")),
+    DBC701023(new ReportId("DBC701023_HanyoListSogoJigyoHiShukei"), new RString("汎用リスト出力(総合事業費情報)")),
     /**
      * 汎用リスト出力(総合事業費情報4)帳票ＩＤです。
      */
-    DBC701024(new ReportId("DBC701024_HanyoList_SogoJigyoHi_Care"), new RString("汎用リスト出力(総合事業費情報)")),
+    DBC701024(new ReportId("DBC701024_HanyoListSogoJigyoHiCare"), new RString("汎用リスト出力(総合事業費情報)")),
     /**
      * 居宅サービス計画作成依頼届出状況一覧表帳票ＩＤです。
      */
