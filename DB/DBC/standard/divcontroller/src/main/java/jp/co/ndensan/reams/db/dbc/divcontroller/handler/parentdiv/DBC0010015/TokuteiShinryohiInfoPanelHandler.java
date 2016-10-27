@@ -564,10 +564,10 @@ public class TokuteiShinryohiInfoPanelHandler {
                 break;
             }
         }
-        FlexibleYearMonth 今提供年月;
+        FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
         if (前月.equals(data) && index < サービス提供年月リスト.size() - 1) {
             今提供年月 = サービス提供年月リスト.get(index + 1);
-        } else {
+        } else if (INT_ZERO < index && !前月.equals(data)) {
             今提供年月 = サービス提供年月リスト.get(index - 1);
         }
         div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(to日期変換(今提供年月).toString()));

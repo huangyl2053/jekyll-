@@ -132,18 +132,20 @@ public class JyutakuKayisyuHiHandler {
      *
      * @param 引き継ぎ情報 KyufuJissekiPrmBusiness
      * @param 給付実績住宅改修費List 給付実績住宅改修費List
+     * @param サービス提供年月 サービス提供年月
      */
     public void setデータグリッド(KyufuJissekiPrmBusiness 引き継ぎ情報,
-            List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List) {
+            List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List,
+            FlexibleYearMonth サービス提供年月,
+            List<KyufuJissekiHedajyoho2> ヘッダ情報2) {
         List<dgJutakuKaishuhi_Row> rowList = new ArrayList<>();
-        RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         for (KyufujissekiJutakuKaishuhiBusiness business : 給付実績住宅改修費List) {
             KyufujissekiJutakuKaishuhi kyufujissekiJutakuKaishuhi = business.get給付実績住宅改修費情報();
-            if (kyufujissekiJutakuKaishuhi.getサービス提供年月().equals(new FlexibleYearMonth(サービス提供年月.getYearMonth().toString()))
+            if (kyufujissekiJutakuKaishuhi.getサービス提供年月().equals(サービス提供年月)
                     && check事業所番号Null(kyufujissekiJutakuKaishuhi.get事業所番号()).equals(事業者番号)
                     && nullToEMPTY(kyufujissekiJutakuKaishuhi.get整理番号()).equals(整理番号)
                     && check入力識別番号Null(kyufujissekiJutakuKaishuhi.get入力識別番号()).equals(様式番号)) {
@@ -158,9 +160,8 @@ public class JyutakuKayisyuHiHandler {
             }
         }
         div.getDgJutakuKaishuhi().setDataSource(rowList);
-        set前月と次月の状態(給付実績住宅改修費List, new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()));
-        List<KyufuJissekiHedajyoho2> ヘッダ情報2 = 引き継ぎ情報.getCommonHeader().get給付実績ヘッダ情報2();
-        set前事業者と後事業者の状態(ヘッダ情報2, new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()),
+        set前月と次月の状態(給付実績住宅改修費List, サービス提供年月);
+        set前事業者と後事業者の状態(ヘッダ情報2, サービス提供年月,
                 事業者番号, 実績区分コード, 整理番号, 様式番号);
     }
 
