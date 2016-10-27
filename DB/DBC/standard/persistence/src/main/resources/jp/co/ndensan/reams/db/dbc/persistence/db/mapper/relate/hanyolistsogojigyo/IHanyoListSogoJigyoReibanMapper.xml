@@ -93,7 +93,7 @@
         ,給付実績基本."kyufuJissekiKubunCode" AS "給付実績区分"
         ,給付実績基本."shokisaiHokenshaNo" AS "証記載保険者番号"
         ,給付実績基本."serviceTeikyoYM" AS "serviceYM"
-        ,給付実績基本."jigyoshoNo" AS "事業所番号"
+        ,給付実績基本."jigyoshoNo" AS "kyufuJissekiJigyosha"
         ,介護事業者."jigyoshaName" AS "事業者名称"
         ,給付実績基本."seiriNo" AS "seiriNo"
         ,給付実績基本."umareYMD" AS "生年月日"
@@ -147,8 +147,8 @@
         <if test="is基本情報明細情報">
         RIGHT JOIN ( 
             SELECT
-                給付実績明細."serviceShuruiCode" AS "明細サービス種類コード"
-                , 給付実績明細."serviceKomokuCode" AS "明細サービス項目コード"
+                給付実績明細."serviceShuruiCode" AS "serviceShuruiCode"
+                , 給付実績明細."serviceKomokuCode" AS "serviceKomoku"
                 , 給付実績明細."tanisu" AS "明細単位数"
                 , 給付実績明細."nissuKaisu" AS "明細日数回数"
                 , 給付実績明細."serviceTanisu" AS "明細サービス単位数"
@@ -198,7 +198,7 @@
        <if test="is基本情報集計情報">
        RIGHT JOIN( 
            SELECT
-           給付実績集計."serviceSyuruiCode" AS "集計サービス種類コード"
+           給付実績集計."serviceSyuruiCode" AS "serviceShuruiCode"
            , 給付実績集計."serviceJitsunissu" AS "集計サービス実日数"
            , 給付実績集計."planTanisu" AS "集計計画単位数"
            , 給付実績集計."gendogakuKanriTaishoTanisu" AS "集計限度額管理対象単位数"
@@ -246,7 +246,7 @@
          SELECT
              給付実績ケアマネジメント費."shiteiKijungaitoJigyoshoKubunCode" AS "指定基準該当事業所区分"
            , 給付実績ケアマネジメント費."tanisuTanka" AS "マネジメント単位数単価"
-           , 給付実績ケアマネジメント費."serviceCode" AS "マネジメントサービスコード"
+           , 給付実績ケアマネジメント費."serviceCode" AS "ketteiServiceCode"
            , 給付実績ケアマネジメント費."tanisu" AS "マネジメント単位数"
            , 給付実績ケアマネジメント費."kaisu" AS "マネジメント回数"
            , 給付実績ケアマネジメント費."serviceTanisu" AS "マネジメントサービス単位数"

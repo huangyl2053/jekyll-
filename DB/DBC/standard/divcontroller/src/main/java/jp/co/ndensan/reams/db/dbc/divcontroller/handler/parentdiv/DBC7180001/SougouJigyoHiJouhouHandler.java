@@ -38,6 +38,9 @@ public class SougouJigyoHiJouhouHandler {
     private static final RString 作成区分_KEY3 = new RString("key3");
     private static final RString 全て市町村 = new RString("000000");
     private static final RString 基本情報 = new RString("基本情報のみ");
+    private static final RString 基本明細情報 = new RString("基本情報＋明細情報");
+    private static final RString 基本集計情報 = new RString("基本情報＋集計情報");
+    private static final RString 基本ケアマネジメント情報 = new RString("基本情報＋ケアマネジメント費情報");
     private final SougouJigyoHiJouhouDiv div;
 
     /**
@@ -68,7 +71,7 @@ public class SougouJigyoHiJouhouHandler {
         ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示無し"));
         div.getCcdJigyoshaBango().initialize();
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701018.getReportId());
-        div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701018.getReportId().value(), SubGyomuCode.DBC介護給付);
+//        div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701018.getReportId().value(), SubGyomuCode.DBC介護給付);
     }
 
     /**
@@ -228,6 +231,18 @@ public class SougouJigyoHiJouhouHandler {
         }
         if (!RString.isNullOrEmpty(取込年月終了年月)) {
             div.getChushutsuJokenPanel().getTxtTorikomiNengetsu().setToValue(new RDate(取込年月終了年月.toString()));
+        }
+        Long 出力順ID = restoreBatchParameterMap.getParameterValue(Long.class, new RString("出力順ID"));
+        if (出力順ID != null) {
+            if (基本情報.equals(抽出方法)) {
+                div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701018.getReportId(), 出力順ID);
+            } else if (基本明細情報.equals(抽出方法)) {
+                div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701022.getReportId(), 出力順ID);
+            } else if (基本集計情報.equals(抽出方法)) {
+                div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701023.getReportId(), 出力順ID);
+            } else if (基本ケアマネジメント情報.equals(抽出方法)) {
+                div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701024.getReportId(), 出力順ID);
+            }
         }
     }
 
