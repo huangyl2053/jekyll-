@@ -171,11 +171,15 @@
             AND
             DbT1006Kyo."tekiyoShuryoYMD"  <![CDATA[<=]]> #{date_TO}
         </if>
-        <if test = "ismodenayi">
-        </if>
         </where>
-        ORDER BY
-        DbT1006Kyo."hihokenshaNo",${order_ID}
+         <if test = "order_ID">
+             ${order_ID},
+             DbT1006Kyo."hihokenshaNo"
+         </if>
+         <if test = "!order_ID">
+            ORDER BY
+             DbT1006Kyo."hihokenshaNo"
+         </if>
         ) DbT1006Kyokaiso
         WHERE
         rank_number1= 1
