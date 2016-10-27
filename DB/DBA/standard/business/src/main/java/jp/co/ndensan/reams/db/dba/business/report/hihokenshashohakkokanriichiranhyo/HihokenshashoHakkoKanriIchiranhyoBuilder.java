@@ -13,21 +13,17 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  *
  * @reamsid_L DBA-0600-070 lishengli
  */
-public class HihokenshashoHakkoKanriIchiranhyoBuilderItem implements IHihokenshashoHakkoKanriIchiranhyoBuilder {
+public class HihokenshashoHakkoKanriIchiranhyoBuilder implements IHihokenshashoHakkoKanriIchiranhyoBuilder {
 
     private final IHihokenshashoHakkoKanriIchiranhyoEditor headEditor;
-    private final IHihokenshashoHakkoKanriIchiranhyoEditor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
      * @param headEditor {@link IHihokenshashoHakkoKanriIchiranhyoEditor}
-     * @param bodyEditor {@link IHihokenshashoHakkoKanriIchiranhyoEditor}
      */
-    HihokenshashoHakkoKanriIchiranhyoBuilderItem(IHihokenshashoHakkoKanriIchiranhyoEditor headEditor,
-            IHihokenshashoHakkoKanriIchiranhyoEditor bodyEditor) {
+    HihokenshashoHakkoKanriIchiranhyoBuilder(IHihokenshashoHakkoKanriIchiranhyoEditor headEditor) {
         this.headEditor = headEditor;
-        this.bodyEditor = bodyEditor;
     }
 
     /**
@@ -38,6 +34,6 @@ public class HihokenshashoHakkoKanriIchiranhyoBuilderItem implements IHihokensha
     @Override
     public HihokenshashoHakkoKanriIchiranhyoReportSource build() {
         return ReportEditorJoiner.from(new HihokenshashoHakkoKanriIchiranhyoReportSource())
-                .join(headEditor).join(bodyEditor).buildSource();
+                .join(headEditor).buildSource();
     }
 }
