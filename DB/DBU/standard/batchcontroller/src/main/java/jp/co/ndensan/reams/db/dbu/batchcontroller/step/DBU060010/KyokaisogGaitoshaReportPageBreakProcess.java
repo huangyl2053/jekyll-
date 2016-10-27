@@ -147,6 +147,9 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<K
 
     @Override
     protected void afterExecute() {
+        sakuseiEntity = dataSakusei.getcreateNenreiToutatsuYoteishaCheckListChohyo(kyokaisokanrimasterList, null);
+        KyokaisoKanriMasterListReport report = new KyokaisoKanriMasterListReport(sakuseiEntity);
+        report.writeBy(reportSourceWriter);
         outputJokenhyoFactory();
     }
 

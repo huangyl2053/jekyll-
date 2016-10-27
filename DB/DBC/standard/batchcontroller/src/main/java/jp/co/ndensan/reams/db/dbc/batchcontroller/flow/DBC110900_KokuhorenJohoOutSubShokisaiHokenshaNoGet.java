@@ -34,7 +34,6 @@ public class DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGet
         extends BatchFlowBase<DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGetParameter> {
 
     private static final String FLOW_WORK1 = "work1";
-    private static final String FLOW_WORK2 = "work2";
     private static final String FLOW_WORK3 = "work3";
     private static final RString 表示有無区分 = new RString("1");
     private HihokenshaTempUpdateProcessParameter loopPrm;
@@ -56,15 +55,13 @@ public class DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGet
         if (導入形態コード != null
                 && (DonyuKeitaiCode.事務単一.equals(導入形態コード) || DonyuKeitaiCode.認定単一.equals(導入形態コード))) {
             loopPrm = new HihokenshaTempUpdateProcessParameter();
-            if (gappeiCityJyohoList.isEmpty()) {
-                executeStep(FLOW_WORK1);
-            } else {
+            if (!gappeiCityJyohoList.isEmpty()) {
                 FlexibleYearMonth サービス提供年月 = gappeiCityJyohoList.get(0).get国保連データ連携開始年月日().getYearMonth();
                 loopPrm.setサービス提供年月(サービス提供年月);
                 loopPrm.set合併年月日(gappeiCityJyohoList.get(0).get合併日());
                 loopPrm.set地域番号(gappeiCityJyohoList.get(0).get合併情報番号());
-                executeStep(FLOW_WORK2);
             }
+            executeStep(FLOW_WORK1);
         } else {
             executeStep(FLOW_WORK3);
         }
@@ -72,11 +69,6 @@ public class DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGet
 
     @Step(FLOW_WORK1)
     IBatchFlowCommand work1() {
-        return loopBatch(HihokenshaTempUpdateProcess.class).arguments(loopPrm).define();
-    }
-
-    @Step(FLOW_WORK2)
-    IBatchFlowCommand work2() {
         return loopBatch(HihokenshaTempUpdateProcess.class).arguments(loopPrm).define();
     }
 

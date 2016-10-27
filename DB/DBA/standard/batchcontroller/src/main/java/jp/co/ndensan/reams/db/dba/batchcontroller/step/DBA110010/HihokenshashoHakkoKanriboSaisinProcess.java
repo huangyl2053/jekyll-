@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dba.definition.processprm.dba110010.HihokenshashoH
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriRelateEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakoKanriboCsvDataSakuseiEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
@@ -59,17 +59,17 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBA-0600-020 zhangguopeng
  */
-public class HihokenshashoHakkoKanriboNoRenbanProcess extends BatchKeyBreakBase<AkasiHakouKanriEntity> {
+public class HihokenshashoHakkoKanriboSaisinProcess extends BatchKeyBreakBase<AkasiHakouKanriEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshashohakkokanribo."
-            + "IHihokenshashoHakkoKanriboMapper.get証発行管理リスト情報");
+            + "IHihokenshashoHakkoKanriboMapper.get証発行管理リスト最新情報");
     private static final RString 証発行モード_001 = new RString("001");
     private static final RString 証発行モード_002 = new RString("002");
     private static final RString 被保険者証発行 = new RString("介護保険　被保険者証発行管理一覧表");
     private static final RString 資格者証発行 = new RString("介護保険　資格者証発行管理一覧表");
     private static final RString CSV名称_被保険者証発行 = new RString("被保険者証発行管理簿.csv");
     private static final RString CSV名称_資格者証発行 = new RString("資格者証発行管理簿.csv");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBA200004"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBA210004"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString ORDERBYCLAUSE = new RString("order by");
@@ -82,11 +82,12 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends BatchKeyBreakBase<
     private FileSpoolManager manager;
     private RString csvName;
     private List<PersonalData> personalDataList;
+    private int renban;
     private ShutsuryokujunRelateEntity 出力順Entity;
     private AkasiHakouKanriRelateEntity relateEntity;
 
     @BatchWriter
-    private CsvWriter<HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity> csvWriter;
+    private CsvWriter<HihohenshashoHakoKanriboCsvDataSakuseiEntity> csvWriter;
     @BatchWriter
     private BatchReportWriter<HihokenshashoHakkoKanriIchiranhyoReportSource> batchReportWriter;
     private ReportSourceWriter<HihokenshashoHakkoKanriIchiranhyoReportSource> reportSourceWriter;
@@ -155,11 +156,12 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends BatchKeyBreakBase<
 
     @Override
     protected void usualProcess(AkasiHakouKanriEntity entity) {
+        renban++;
         personalDataList = new ArrayList<>();
         HihohenshashoHakoKanriboCsvDataSakusei checkListCsv = new HihohenshashoHakoKanriboCsvDataSakusei();
-        csvWriter.writeLine(checkListCsv.getShohakkoKanriCSVDataList(
+        csvWriter.writeLine(checkListCsv.getShohakkoKanriCSVDataListAddRenban(
                 entity, processParameter.isKoumukumeyifukaflg(),
-                processParameter.isHizikehensyuuflg()));
+                processParameter.isHizikehensyuuflg(), renban));
         ExpandedInformation expandedInformations = new ExpandedInformation(new Code(ログコード),
                 ログ表示名, entity.getHihokenshaNo());
         personalDataList.add(PersonalData.of(entity.getShikibetsuCode(), expandedInformations));

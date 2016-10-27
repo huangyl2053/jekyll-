@@ -91,7 +91,7 @@ public final class MishinsaShikyuShinseiListHandler {
     public static boolean is支給申請日有効(JutakuKaishuhiShikyuShinseiPanelDiv div) {
         if (is支給申請日入力(div)) {
             if (div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue() == null) {
-                return true;
+                return false;
             } else if (div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue() == null) {
                 return false;
             } else {

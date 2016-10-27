@@ -32,4 +32,5 @@ public class HyojunFutanEntity {
     private Decimal 負担額;
     private FlexibleDate 申請日;
     private FlexibleDate 決定年月日;
+    private RString 決定区分;
 }

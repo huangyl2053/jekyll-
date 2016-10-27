@@ -140,8 +140,9 @@ public class BatchPanelHandler {
             回収事由コード.add(kaishuJiyu.getTxtKaishuJiyuCode());
         }
         parameter.setKasyuujiyuulist(回収事由コード);
-        parameter.setSyuturyokujunid(div.getCcdChohyoShutsuryokujun().getFocusPositionID());
-
+        if (div.getCcdChohyoShutsuryokujun().get出力順ID() != null) {
+            parameter.setSyuturyokujunid(div.getCcdChohyoShutsuryokujun().get出力順ID());
+        }
         return parameter;
     }
 }

@@ -124,11 +124,11 @@ public class KyokaisoKanriMasterListBusiness {
         /**
          * 境界層該当申請日
          */
-        境界層該当申請日(new RString("0117"), new RString("listLower_4"), new RString("DbT1013Kyo_shinseiYMD\"")),
+        境界層該当申請日(new RString("0117"), new RString("listLower_4"), new RString("\"DbT1013Kyo_shinseiYMD\"")),
         /**
          * 境界層該当開始日
          */
-        境界層該当開始日(new RString("0118"), new RString("listLower_5"), new RString("DbT1006Kyo_tekiyoKaishiYMD\""));
+        境界層該当開始日(new RString("0118"), new RString("listLower_5"), new RString("\"DbT1006Kyo_tekiyoKaishiYMD\""));
         private final RString 項目ID;
         private final RString フォームフィールド名;
         private final RString myBatis項目名;

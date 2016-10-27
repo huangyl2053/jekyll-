@@ -155,11 +155,10 @@ public class UpdRiyoshaFutangengakuTempProcess extends BatchProcessBase<UpdRiyos
     }
 
     private boolean is期間中(UpdRiyoshaFutangengakuTempResultEntity entity, FlexibleYearMonth 年月) {
-        FlexibleDate 年月の月末日 = new FlexibleDate(年月.plusMonth(1).toDateString().concat(零壱)).minusDay(1);
         FlexibleDate 適用開始年月日 = entity.get利用者負担減額().getTekiyoKaishiYMD();
         FlexibleDate 適用終了年月日 = entity.get利用者負担減額().getTekiyoShuryoYMD();
         if (適用開始年月日 != null && 適用終了年月日 != null) {
-            return 年月の月末日.isBeforeOrEquals(適用終了年月日) && 適用開始年月日.isBeforeOrEquals(年月の月末日);
+            return 年月.isBeforeOrEquals(適用終了年月日.getYearMonth()) && 適用開始年月日.getYearMonth().isBeforeOrEquals(年月);
         }
         return false;
     }

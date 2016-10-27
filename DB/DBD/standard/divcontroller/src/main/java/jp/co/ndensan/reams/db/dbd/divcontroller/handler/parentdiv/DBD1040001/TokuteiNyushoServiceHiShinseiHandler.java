@@ -366,9 +366,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
                 = setGemmenGengakuShinseiBuilderBy入力データ(gemmenGengakuShinsei.createBuilderForEdit());
         builder.set申請事由(div.getShinseiDetail().getTxtShinseiRiyu().getValue());
         builder.set申請年月日(div.getShinseiDetail().getTxtShinseiYMD().getValue());
-        if (gemmenGengakuShinseiBuilder != null) {
-            builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
-        }
+        builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
         TokubetsuChiikiKasanGemmenViewState inputView = new TokubetsuChiikiKasanGemmenViewState(builder.build(), state, 履歴番号);
 
         newViewStateList.add(inputView);
@@ -464,9 +462,7 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         builder.set非承認理由(非承認理由);
         builder.set申請事由(div.getShinseiDetail().getTxtShinseiRiyu().getValue());
         builder.set申請年月日(div.getShinseiDetail().getTxtShinseiYMD().getValue());
-        if (gemmenGengakuShinseiBuilder != null) {
-            builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
-        }
+        builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
         TokubetsuChiikiKasanGemmenViewState inputView = new TokubetsuChiikiKasanGemmenViewState(builder.build(), state, 履歴番号);
 
         newViewStateList.add(inputView);
@@ -592,48 +588,26 @@ public class TokuteiNyushoServiceHiShinseiHandler {
     }
 
     private GemmenGengakuShinseiBuilder setGemmenGengakuShinseiBuilderBy入力データ(GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder) {
-        ShinseiTodokedeDaikoKubunCode 申請届出代行区分 = div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行区分();
-        AtenaMeisho 申請届出者氏名 = div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名();
-        AtenaKanaMeisho 申請届出者氏名カナ = div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名カナ();
-        RString 申請届出者続柄 = div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者続柄();
-        JigyoshaNo 事業者番号 = div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行事業者番号();
-        JigyoshaKubun 事業者区分 = div.getCcdShinseiJoho().get減免減額申請情報().get事業者区分();
-        YubinNo 申請届出者郵便番号 = div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者郵便番号();
-        AtenaJusho 申請届出者住所 = div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者住所();
-        TelNo 申請届出者電話番号 = div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者電話番号();
-        if (申請届出代行区分 == null && (申請届出者氏名 == null || 申請届出者氏名.isEmpty()) && (申請届出者氏名カナ == null || 申請届出者氏名カナ.isEmpty())
-                && (申請届出者続柄 == null || 申請届出者続柄.isEmpty()) && (事業者番号 == null || 事業者番号.isEmpty()) && 事業者区分 == null
-                && (申請届出者郵便番号 == null || 申請届出者郵便番号.isEmpty()) && (申請届出者住所 == null || 申請届出者住所.isEmpty())
-                && (申請届出者電話番号 == null || 申請届出者電話番号.isEmpty())) {
-            return null;
-        } else {
-            return set入力データ(gemmenGengakuShinseiBuilder, 申請届出代行区分, 申請届出者氏名, 申請届出者氏名カナ, 申請届出者続柄, 事業者番号, 事業者区分,
-                    申請届出者郵便番号, 申請届出者住所, 申請届出者電話番号);
-        }
-    }
-
-    private GemmenGengakuShinseiBuilder set入力データ(GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder, ShinseiTodokedeDaikoKubunCode 申請届出代行区分,
-            AtenaMeisho 申請届出者氏名, AtenaKanaMeisho 申請届出者氏名カナ, RString 申請届出者続柄, JigyoshaNo 事業者番号, JigyoshaKubun 事業者区分,
-            YubinNo 申請届出者郵便番号, AtenaJusho 申請届出者住所, TelNo 申請届出者電話番号) {
-        if (申請届出代行区分 != null) {
-            gemmenGengakuShinseiBuilder.set申請届出代行区分(申請届出代行区分.getCode());
+        if (div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行区分() != null) {
+            gemmenGengakuShinseiBuilder.set申請届出代行区分(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行区分().getCode());
         } else {
             gemmenGengakuShinseiBuilder.set申請届出代行区分(RString.EMPTY);
         }
-        gemmenGengakuShinseiBuilder.set申請届出者氏名(申請届出者氏名);
-        gemmenGengakuShinseiBuilder.set申請届出者氏名カナ(申請届出者氏名カナ);
-        gemmenGengakuShinseiBuilder.set申請届出者続柄(申請届出者続柄);
-        if (事業者番号 != null && !事業者番号.isEmpty()) {
+        gemmenGengakuShinseiBuilder.set申請届出者氏名(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名());
+        gemmenGengakuShinseiBuilder.set申請届出者氏名カナ(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名カナ());
+        gemmenGengakuShinseiBuilder.set申請届出者続柄(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者続柄());
+        JigyoshaNo 事業者番号 = div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行事業者番号();
+        if (!事業者番号.isEmpty()) {
             gemmenGengakuShinseiBuilder.set申請届出代行事業者番号(事業者番号);
         }
-        if (事業者区分 != null) {
-            gemmenGengakuShinseiBuilder.set事業者区分(事業者区分.getCode());
+        if (div.getCcdShinseiJoho().get減免減額申請情報().get事業者区分() != null) {
+            gemmenGengakuShinseiBuilder.set事業者区分(div.getCcdShinseiJoho().get減免減額申請情報().get事業者区分().getCode());
         } else {
             gemmenGengakuShinseiBuilder.set事業者区分(RString.EMPTY);
         }
-        gemmenGengakuShinseiBuilder.set申請届出者郵便番号(申請届出者郵便番号);
-        gemmenGengakuShinseiBuilder.set申請届出者住所(申請届出者住所);
-        gemmenGengakuShinseiBuilder.set申請届出者電話番号(申請届出者電話番号);
+        gemmenGengakuShinseiBuilder.set申請届出者郵便番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者郵便番号());
+        gemmenGengakuShinseiBuilder.set申請届出者住所(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者住所());
+        gemmenGengakuShinseiBuilder.set申請届出者電話番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者電話番号());
         return gemmenGengakuShinseiBuilder;
     }
 

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiGyomunaiK
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050021.FurikomimeisaiFurikomiDataMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -38,6 +39,8 @@ public class FurikomimeisaiFurikomiDataProcessParameter implements IBatchProcess
     private RString 出力順ID;
     private RString batchKunbun;
     private RString 処理区分;
+    private YMDHMS システム日時;
+    private int 出力ページ数;
 
     /**
      * コンストラクタ。
@@ -75,6 +78,6 @@ public class FurikomimeisaiFurikomiDataProcessParameter implements IBatchProcess
      */
     public FurikomimeisaiFurikomiDataMybatisParameter toMybatisParameter() {
         return new FurikomimeisaiFurikomiDataMybatisParameter(
-                支払方法, 抽出対象, 対象作成年月日, 再処理フラグ, 開始年月日, 終了年月日, 開始受取年月, 終了受取年月);
+                支払方法, 抽出対象, 対象作成年月日, 再処理フラグ, 開始年月日, 終了年月日, 開始受取年月, 終了受取年月, 処理名.get名称());
     }
 }

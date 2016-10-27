@@ -219,16 +219,16 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             entityList = 徴収方法NewestDac.get特別徴収開始者_4月(賦課年度);
         }
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
+        mapper.createTmpTokuChoKaishi();
         if (!entityList.isEmpty()) {
-            mapper.createTmpTokuChoKaishi();
             for (DbV2001ChoshuHohoEntity entity : entityList) {
                 TokuChoKaishiEntity tokuChoKaishiEntity = new TokuChoKaishiEntity();
                 tokuChoKaishiEntity.setHihokenshaNo(entity.getHihokenshaNo());
                 mapper.insertTmpTokuChoKaishi(tokuChoKaishiEntity);
             }
         }
+        mapper.createTmpTokuKarisantei();
         if (!entityList.isEmpty() && Tsuki._2月.getコード().equals(算定月)) {
-            mapper.createTmpTokuKarisantei();
             Map<String, Object> map = new HashMap<>();
             map.put(KEY_FUKANENDO.toString(), 賦課年度.minusYear(INT_1));
             List<TokuKarisanteiEntity> 特徴仮算定情報リスト = mapper.get特徴4月開始者の特徴仮算定対象データ(map);

@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.CountedItem;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
@@ -38,13 +39,13 @@ public class TempSeikyuShukeiItiziDataProcess extends BatchProcessBase<SeikyuShu
     @BatchWriter
     BatchEntityCreatedTempTableWriter 請求集計一時ファイルB;
     private int 採番件数;
-    private RString 集計関連付け番号;
+    private CountedItem 集計関連付け番号;
 
     @Override
     protected void initialize() {
         mapper = getMapper(IKaishuriyushoSeikyushoShinseishoMapper.class);
         採番件数 = mapper.select採番件数();
-        集計関連付け番号 = Saiban.get(SubGyomuCode.DBC介護給付, new RString("53"), 採番件数).nextString();
+        集計関連付け番号 = Saiban.get(SubGyomuCode.DBC介護給付, new RString("53"), 採番件数);
     }
 
     @Override
@@ -63,7 +64,9 @@ public class TempSeikyuShukeiItiziDataProcess extends BatchProcessBase<SeikyuShu
         SeikyuShukeiItiziEUCEntity eucEntity = new SeikyuShukeiItiziEUCEntity();
         eucEntity.set証記載保険者番号(entity.get証記載保険者番号());
         eucEntity.set介護住宅改修理由書作成事業者番号(entity.get介護住宅改修理由書作成事業者番号());
-        eucEntity.set集計関連付け番号(集計関連付け番号);
+        if (集計関連付け番号.hasNext()) {
+            eucEntity.set集計関連付け番号(集計関連付け番号.nextString());
+        }
         eucEntity.set履歴番号(1);
         eucEntity.set集計開始年月(processParameter.get作成申請年月日開始());
         eucEntity.set集計終了年月(processParameter.get作成申請年月日終了());

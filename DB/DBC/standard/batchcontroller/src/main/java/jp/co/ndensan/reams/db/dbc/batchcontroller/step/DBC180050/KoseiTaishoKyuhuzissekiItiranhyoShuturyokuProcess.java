@@ -243,13 +243,12 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
             KoseiTaishoJissekiIchiranEntity 給付実績一覧entity = new KoseiTaishoJissekiIchiranEntity();
             給付実績一覧entity.set氏名(文言_対象データがありません);
             KoseiTaishoJissekiIchiranReport 給付実績一覧report = new KoseiTaishoJissekiIchiranReport(給付実績一覧entity,
-                    processParameter.get抽出期間開始日時(), processParameter.get抽出期間終了日時(), processParameter.get出力順(), 1);
+                    processParameter.get抽出期間開始日時(), processParameter.get抽出期間終了日時(), RString.EMPTY, 0);
             給付実績一覧report.writeBy(給付実績一覧表SourceWriter);
             KoseitaishoKyuhuzissekiJohoTempEntity tempentity = new KoseitaishoKyuhuzissekiJohoTempEntity();
             tempentity.set氏名(文言_対象データがありません);
             KyufuJissekiTorikeshiIchiranReport report = new KyufuJissekiTorikeshiIchiranReport(tempentity, processParameter.get抽出期間開始日時(),
-                    processParameter.get抽出期間終了日時(), processParameter.get出力順(),
-                    AssociationFinderFactory.createInstance().getAssociation(), 1);
+                    processParameter.get抽出期間終了日時(), RString.EMPTY, null, 0);
             report.writeBy(給付実績取消一覧表SourceWriter);
         }
 
@@ -285,7 +284,7 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
         manager.spool(SubGyomuCode.DBC介護給付, 給付実績一覧表eucFilePath);
         給付実績取消一覧manager.spool(SubGyomuCode.DBC介護給付, 給付実績取消一覧eucFilePath);
         processParameter.set給付実績ファイルパス(給付実績一覧表eucFilePath);
-        processParameter.set給付実績ファイルパス(給付実績取消一覧eucFilePath);
+        processParameter.set給付実績取消ファイルパス(給付実績取消一覧eucFilePath);
     }
 
     private List<RString> get出力条件() {

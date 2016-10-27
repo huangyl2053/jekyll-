@@ -273,7 +273,7 @@ public class PrtShotokushokaihyoListProcess extends BatchKeyBreakBase<ShotokuSho
         RString 性別 = set性別コード(tempEntity);
         entity.set性別(性別);
         entity.set転出日(tempEntity.getIdoYMD());
-        entity.set被保険者番号(tempEntity.getHihokenshaNo());
+        entity.set被保険者番号(tempEntity.getHihokenshaNo().getColumnValue());
         eucCsvWriter.writeLine(entity);
     }
 

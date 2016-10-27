@@ -10,7 +10,7 @@
         FROM
         rgdb."DbT3113RiyoshaFutanWariai" AS D1
         WHERE
-        D1."insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+        #{抽出期間開始日時} <![CDATA[<=]]> D1."insertTimestamp"AND
         D1."insertTimestamp" <![CDATA[<]]> #{抽出期間終了日時} AND
         D1."hanteiKubun" <![CDATA[<>]]> '1' AND
         D1."logicalDeletedFlag" <![CDATA[<>]]> TRUE
@@ -24,10 +24,16 @@
         FROM
         rgdb."DbT3017KyufujissekiKihon" AS D2
         WHERE
-        D2."insertTimestamp" <![CDATA[>=]]> #{抽出期間開始日時} AND
+        #{抽出期間開始日時} <![CDATA[<=]]> D2."insertTimestamp" AND
         D2."insertTimestamp" <![CDATA[<]]> #{抽出期間終了日時} AND
-        D2."serviceTeikyoYM" <![CDATA[>=]]> '201508' AND
+        '201508' <![CDATA[<=]]> D2."serviceTeikyoYM" AND
         SUBSTRING(D2."inputShikibetsuNo" FROM 1 FOR 3) NOT IN ('21B','812','817')
+        AND NOT EXISTS (
+            SELECT 1
+            FROM "torigaDataTemp" AS T1
+            WHERE T1."被保険者番号" = 被保険者番号 AND
+            T1."年月" = サービス提供年月
+        )
     </select>
     
     <select resultOrdered="true" id="getトリガデータTemp" 
@@ -96,12 +102,13 @@
         "DbT4014RiyoshaFutangakuGengaku"."ketteiYMD" IS NOT NULL AND
         "DbT4014RiyoshaFutangakuGengaku"."ketteiYMD" <![CDATA[<>]]> '' AND
         "DbT4014RiyoshaFutangakuGengaku"."ketteiKubun" = '1' AND
-        ("DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" <![CDATA[>=]]> '20150801' OR
-        "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD" <![CDATA[>=]]> '20150801') AND
+        ('20150801' <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoKaishiYMD" OR
+        '20150801' <![CDATA[<=]]> "DbT4014RiyoshaFutangakuGengaku"."tekiyoShuryoYMD") AND
         "DbT4014RiyoshaFutangakuGengaku"."isDeleted" <![CDATA[<>]]> TRUE
         ORDER BY
         F1."被保険者番号",
-        F1."年度" ASC
+        F1."年度",
+        "dbT4014RiyoshaFutangakuGengaku_tekiyoKaishiYMD" ASC
     </select>
     
     <select resultOrdered="true" id="get支払方法変更" resultMap="支払方法変更_resultMap" fetchSize="500">
@@ -115,12 +122,13 @@
         ON "DbT4021ShiharaiHohoHenko"."hihokenshaNo" = F1."被保険者番号" AND
         "DbT4021ShiharaiHohoHenko"."kanriKubun" = '3' AND
         "DbT4021ShiharaiHohoHenko"."mukoKubun" = '0' AND
-        ("DbT4021ShiharaiHohoHenko"."tekiyoKaishiYMD" <![CDATA[>=]]> '20150801' OR
-        "DbT4021ShiharaiHohoHenko"."tekiyoShuryoYMD" <![CDATA[>=]]> '20150801') AND
+        ('20150801' <![CDATA[<=]]> "DbT4021ShiharaiHohoHenko"."tekiyoKaishiYMD" OR
+        '20150801' <![CDATA[<=]]> "DbT4021ShiharaiHohoHenko"."tekiyoShuryoYMD") AND
         "DbT4021ShiharaiHohoHenko"."isDeleted" <![CDATA[<>]]> TRUE
         ORDER BY
         F1."被保険者番号",
-        F1."年度" ASC
+        F1."年度",
+        "dbT4021ShiharaiHohoHenko_tekiyoKaishiYMD" ASC
     </select>
     
     <select resultOrdered="true" id="get給付実績情報作成用データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.KyuhuzissekiJohoSakuseiYoResultEntity" fetchSize="500">
@@ -143,7 +151,7 @@
         rgdb."DbT3017KyufujissekiKihon" AS D1
         ON T1."被保険者番号" = D1."hiHokenshaNo" AND
         T1."年月" = D1."serviceTeikyoYM" AND
-        D1."serviceTeikyoYM" <![CDATA[>]]> '201508' AND
+        '201508' <![CDATA[<=]]> D1."serviceTeikyoYM"  AND
         SUBSTRING(D1."inputShikibetsuNo" FROM 1 FOR 3) NOT IN ('21B','812','817')
         ORDER BY
         被保険者番号, サービス提供年月, 入力識別番号, 事業所番号, 通し番号
@@ -314,6 +322,7 @@
         FROM
         rgdb."DbT7022ShoriDateKanri" AS D1
         WHERE
+        D1."subGyomuCode" = 'DBC' AND
         D1."shoriName" = #{処理名}
     </select>
     
@@ -362,8 +371,8 @@
     </resultMap>
     
     <resultMap  id="利用者負担割合明細最新_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.InsFutanwariaiJohoTempResultEntity" autoMapping="true">
-        <id column="nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id column="rirekiNo" />
         <id column="edaNo" />
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>

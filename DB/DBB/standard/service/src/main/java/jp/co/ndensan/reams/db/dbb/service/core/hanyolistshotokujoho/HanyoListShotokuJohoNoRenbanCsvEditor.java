@@ -398,10 +398,6 @@ public class HanyoListShotokuJohoNoRenbanCsvEditor {
                 && 保険料段階リスト.getBy段階区分(entity.get保険料段階()) != null) {
             csvEntity.set保険料段階(保険料段階リスト.getBy段階区分(entity.get保険料段階()).get表記());
         }
-        if (保険料段階リスト != null && entity.get保険料段階仮算定時() != null
-                && 保険料段階リスト.getBy段階区分(entity.get保険料段階仮算定時()) != null) {
-            csvEntity.set保険料段階仮算定時(保険料段階リスト.getBy段階区分(entity.get保険料段階仮算定時()).get表記());
-        }
         if (entity.get所得年度() != null) {
             csvEntity.set賦課年度(entity.get所得年度().toDateString());
         }
