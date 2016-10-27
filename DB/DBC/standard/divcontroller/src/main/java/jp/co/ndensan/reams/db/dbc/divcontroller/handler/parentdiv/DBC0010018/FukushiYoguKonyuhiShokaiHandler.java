@@ -344,12 +344,10 @@ public class FukushiYoguKonyuhiShokaiHandler {
             }
         }
         FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
-        if (INT_ZERO < index && index < サービス提供年月リスト.size() - 1) {
-            if (前月.equals(data)) {
-                今提供年月 = サービス提供年月リスト.get(index + 1);
-            } else {
-                今提供年月 = サービス提供年月リスト.get(index - 1);
-            }
+        if (前月.equals(data) && index < サービス提供年月リスト.size() - 1) {
+            今提供年月 = サービス提供年月リスト.get(index + 1);
+        } else if (INT_ZERO < index && !前月.equals(data)) {
+            今提供年月 = サービス提供年月リスト.get(index - 1);
         }
         List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具販売費等データ取得リスト
                 = get給付実績のデータ(給付実績福祉用具販売費リスト, div.getCcdKyufuJissekiHeader().get整理番号(),

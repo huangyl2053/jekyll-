@@ -14,6 +14,9 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055001.DBB055001_KanendoIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055003.DBB055003_KanendoIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendo.HonsanteiIdoKanendoEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendo.IHonsanteiIdoKanendoMapper;
+import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
@@ -30,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -61,6 +65,7 @@ public class HonsanteiIdoKanendo {
     private static final ReportId 納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac;
     private final DbT7067ChohyoSeigyoHanyoDac 帳票制御汎用Dac;
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
@@ -68,6 +73,7 @@ public class HonsanteiIdoKanendo {
     public HonsanteiIdoKanendo() {
         this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         this.帳票制御汎用Dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
@@ -92,6 +98,19 @@ public class HonsanteiIdoKanendo {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(定数調定年度.toString()));
         DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select最大基準日時(サブ業務コード, 処理名, zOneOneRS, 調定年度);
         return new ShoriDateKanri(entity);
+    }
+
+    /**
+     *
+     * @return RDateTime
+     */
+    public RDateTime get処理日時() {
+        IHonsanteiIdoKanendoMapper mapper = mapperProvider.create(IHonsanteiIdoKanendoMapper.class);
+        HonsanteiIdoKanendoEntity entity = mapper.select確定日時();
+        if (entity != null) {
+            return entity.get確定日時();
+        }
+        return null;
     }
 
     /**

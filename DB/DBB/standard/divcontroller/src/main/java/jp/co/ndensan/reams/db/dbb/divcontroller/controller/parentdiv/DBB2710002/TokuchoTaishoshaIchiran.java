@@ -179,7 +179,7 @@ public class TokuchoTaishoshaIchiran {
         if (taishoshaKey == null || taishoshaKey.get被保険者番号() == null) {
             return;
         }
-        getHandler(div).対象者検索戻る値の処理(taishoshaKey, ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class));
+        getHandler(div).対象者検索戻る値の処理(taishoshaKey, 特徴開始月);
         ViewStateHolder.put(ViewStateKeys.資格対象者, null);
     }
 

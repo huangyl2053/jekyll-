@@ -214,7 +214,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
 
     @Override
     protected void afterExecute() {
-        if (processParamter.isCsvkomokumeifuka() && eucCsvWriter.getCount() == 0) {
+        if (eucCsvWriter.getCount() == 0) {
             eucCsvWriter.writeLine(HanyoListJigyoTaishoshaManager.createInstance().setBlank());
             if (hanyoListShutsuryokuKomoku != null) {
                 for (int i = 0; i < hanyoListShutsuryokuKomoku.get汎用リスト出力項目リスト().size(); i++) {
@@ -226,7 +226,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
         }
         eucCsvWriter.close();
         eucCsvWriter1.close();
-        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         if (isCSV出力) {
             manager.spool(csvFilePath1, log);
         }
@@ -258,7 +258,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
         if (is帳票出力) {
             帳票出力編集new(i, hanyoListShutsuryokuKomoku, get項目名称);
         }
-        if (isCSV出力) {
+        if (processParamter.isCsvkomokumeifuka() && isCSV出力) {
             出力編集new(i, get項目名称);
         }
     }
@@ -315,7 +315,7 @@ public class HanyoListJigyoTaishoshaProcess extends BatchProcessBase<HanyoRisuto
                     processParamter.getDetasyubetsumesyo(), 項目見出し, 項目内容, association, outputOrder);
             report.writeBy(reportSourceWriter);
         }
-        if (isCSV出力) {
+        if (processParamter.isCsvkomokumeifuka() && isCSV出力) {
             eucCsvWriter1.writeLine(csvHeader);
         }
     }
