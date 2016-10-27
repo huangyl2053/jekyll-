@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.shinsahanteijokyo;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.shinsahanteijokyo.ShinsaHanteiJokyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.shinsahanteijokyo.ShinsaHanteiJokyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,16 +18,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShinsaHanteiJokyoReport extends Report<ShinsaHanteiJokyoReportSource> {
 
-    private final List<ShinsaHanteiJokyoItem> itemList;
+    private ShinsaHanteiJokyoEntity item;
+    private List<ShinsaHanteiJokyoEntity> itemList;
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 介護認定審査会スケジュール表かがみのItem
-     * @return 介護認定審査会スケジュール表かがみのReport
+     * @param item ShinsaHanteiJokyoEntity
      */
-    public static ShinsaHanteiJokyoReport createFrom(List<ShinsaHanteiJokyoItem> itemList) {
-        return new ShinsaHanteiJokyoReport(itemList);
+    protected ShinsaHanteiJokyoReport(ShinsaHanteiJokyoEntity item) {
+        this.item = item;
     }
 
     /**
@@ -34,19 +35,25 @@ public class ShinsaHanteiJokyoReport extends Report<ShinsaHanteiJokyoReportSourc
      *
      * @param itemList 介護認定審査会スケジュール表かがみのItem
      */
-    protected ShinsaHanteiJokyoReport(List<ShinsaHanteiJokyoItem> itemList) {
+    public ShinsaHanteiJokyoReport(List<ShinsaHanteiJokyoEntity> itemList) {
         this.itemList = itemList;
     }
 
     /**
-     * 介護認定審査会スケジュール表かがみを生成します。
+     * 介護認定審査会判定状況表を生成します。
      *
      * @param reportSourceWriter 帳票Writer
      */
     @Override
     public void writeBy(ReportSourceWriter<ShinsaHanteiJokyoReportSource> reportSourceWriter) {
-        for (ShinsaHanteiJokyoItem item : itemList) {
-            IShinsaHanteiJokyoEditor editor = new ShinsaHanteiJokyoEditorImpl(item);
+        for (ShinsaHanteiJokyoEntity dataBody : itemList) {
+            ShinsaHanteiJokyoEditorImpl editor = new ShinsaHanteiJokyoEditorImpl(dataBody);
+            IShinsaHanteiJokyoBuilder builder = new ShinsaHanteiJokyoBuilderImpl(editor);
+            reportSourceWriter.writeLine(builder);
+        }
+        if (item != null) {
+            ShinsaHanteiJokyoEntity entity = new ShinsaHanteiJokyoEntity();
+            ShinsaHanteiJokyoEditorImpl editor = new ShinsaHanteiJokyoEditorImpl(entity);
             IShinsaHanteiJokyoBuilder builder = new ShinsaHanteiJokyoBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);
         }
