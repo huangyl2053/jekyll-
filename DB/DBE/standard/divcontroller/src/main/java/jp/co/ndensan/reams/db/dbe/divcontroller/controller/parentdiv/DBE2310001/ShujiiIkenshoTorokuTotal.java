@@ -68,7 +68,7 @@ public class ShujiiIkenshoTorokuTotal {
     private final ImageManager imageManager;
     private final NinteiShinseiJohoManager ninteiManager;
     private static final RString COMMON_BUTTON_UPDATE = new RString("btnIkenshoSave");
-    
+
     /**
      * コンストラクタです。
      *
@@ -99,16 +99,16 @@ public class ShujiiIkenshoTorokuTotal {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE, true);
                 return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし_データ内容.getMessage().replace("主治医依頼情報未登録のため、")).respond();
             } else {
-               return ResponseData.of(div).respond(); 
+                return ResponseData.of(div).respond();
             }
         }
-        
+
         履歴番号 = resultList.records().get(0).get主治医意見書作成依頼履歴番号();
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, new RString(履歴番号));
         Image image = imageManager.getイメージ情報(管理番号);
         NinteiShinseiJoho ninteiShinseiJoho = ninteiManager.get意見書情報(NinteiShinseiJohoMapperParameter.create主治医意見書登録Param(管理番号, 履歴番号));
-        
-        if (resultList.records().get(0).get主治医意見書記入年月日().isEmpty()) {
+
+        if (resultList.records().get(0).get主治医意見書記入年月日() == null) {
             div.setHdnHasChanged(RString.EMPTY);
             div.getRadTakaShinryo().setSelectedKey(SELECT_KEY1);
             ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_ADD);
@@ -126,7 +126,7 @@ public class ShujiiIkenshoTorokuTotal {
         ViewStateHolder.put(ViewStateKeys.イメージ情報, image);
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * チェック変更した際の選択項目により、他科診療チェックボックスを変更可能にします。
      *
