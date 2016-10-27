@@ -346,7 +346,7 @@ public class DvShokanbaraiJohoHandler {
             div.getTxtShokanServiceTeikyoYM().setFromValue(new RDate(サービス提供年月F.getYearValue(), サービス提供年月F.getMonthValue(), サービス提供年月F.getLastDay()));
         }
         FlexibleYearMonth サービス提供年月T = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_サービス提供年月終了);
-        if (サービス提供年月T != null) {
+        if (サービス提供年月T != null && !サービス提供年月T.isEmpty()) {
             div.getTxtShokanServiceTeikyoYM().setToValue(new RDate(サービス提供年月T.getYearValue(), サービス提供年月T.getMonthValue(), サービス提供年月T.getLastDay()));
         }
         RString 処理状況 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_処理状況);
@@ -371,27 +371,27 @@ public class DvShokanbaraiJohoHandler {
             }
         }
         FlexibleDate 申請日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_申請日開始);
-        if (申請日From != null) {
+        if (申請日From != null && !申請日From.isEmpty()) {
             div.getTxtShokanShinseiDate().setFromValue(new RDate(申請日From.toString()));
         }
         FlexibleDate 申請日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_申請日終了);
-        if (申請日To != null) {
+        if (申請日To != null && !申請日To.isEmpty()) {
             div.getTxtShokanShinseiDate().setToValue(new RDate(申請日To.toString()));
         }
         FlexibleDate 住宅改修支給届出日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_住宅改修支給届出日開始);
-        if (住宅改修支給届出日From != null) {
+        if (住宅改修支給届出日From != null && !住宅改修支給届出日From.isEmpty()) {
             div.getTxtShokanHokenshaKetteiDate().setFromValue(new RDate(住宅改修支給届出日From.toString()));
         }
         FlexibleDate 住宅改修支給届出日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_住宅改修支給届出日終了);
-        if (住宅改修支給届出日To != null) {
+        if (住宅改修支給届出日To != null && !住宅改修支給届出日To.isEmpty()) {
             div.getTxtShokanHokenshaKetteiDate().setToValue(new RDate(住宅改修支給届出日To.toString()));
         }
         FlexibleDate 決定日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_決定日開始);
-        if (決定日From != null) {
+        if (決定日From != null && !決定日From.isEmpty()) {
             div.getTxtShokanKetteiDate().setFromValue(new RDate(決定日From.toString()));
         }
         FlexibleDate 決定日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, KEY_決定日終了);
-        if (決定日To != null) {
+        if (決定日To != null && !決定日To.isEmpty()) {
             div.getTxtShokanKetteiDate().setToValue(new RDate(決定日To.toString()));
         }
         pamaRestorePart2(restoreBatchParameterMap);
@@ -424,7 +424,7 @@ public class DvShokanbaraiJohoHandler {
             div.getTxtShokanKokuhorenSofuYM().setFromValue(new RDate(国保連送付年月From.getYearValue(), 国保連送付年月From.getMonthValue(), 国保連送付年月From.getLastDay()));
         }
         FlexibleYearMonth 国保連送付年月To = restoreBatchParameterMap.getParameterValue(FlexibleYearMonth.class, KEY_国保連送付年月終了);
-        if (国保連送付年月To != null) {
+        if (国保連送付年月To != null && !国保連送付年月To.isEmpty()) {
             div.getTxtShokanKokuhorenSofuYM().setToValue(new RDate(国保連送付年月To.getYearValue(), 国保連送付年月To.getMonthValue(), 国保連送付年月To.getLastDay()));
         }
         RString 様式番号 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_様式番号);
