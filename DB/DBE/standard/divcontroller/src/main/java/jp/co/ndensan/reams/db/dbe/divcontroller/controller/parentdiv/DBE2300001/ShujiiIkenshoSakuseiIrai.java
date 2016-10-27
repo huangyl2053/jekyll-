@@ -1026,4 +1026,28 @@ public class ShujiiIkenshoSakuseiIrai {
         parameter.setShujiiIryokikanCode(row.getShujiiIryoKikanCode());
         return manager.get宛先情報(parameter);
     }
+    
+    /**
+     * 受診日チェック。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onBlur_txtjyushinymd(ShujiiIkenshoSakuseiIraiDiv div) {
+        if (!RString.isNullOrEmpty(div.getTxtjyushinymd().getText())) {
+            if (div.getTxtjyushinymd().getValue().isBefore(RDate.getNowDate())) {
+                if (!ResponseHolder.isReRequest()) {
+                    return ResponseData.of(div).addMessage(UrQuestionMessages.確認_汎用.getMessage().replace("申請日より過去の日付けが設定されていますが")).respond();
+                }
+                if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).
+                        equals(ResponseHolder.getMessageCode()) && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+                } else {
+                    div.getTxtjyushinymd().clearValue();
+                }
+            }
+        }
+  
+        return ResponseData.of(div).respond();
+    }
+    
 }
