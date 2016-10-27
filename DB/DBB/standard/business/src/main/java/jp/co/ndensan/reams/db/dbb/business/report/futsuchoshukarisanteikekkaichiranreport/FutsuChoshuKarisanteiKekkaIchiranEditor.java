@@ -247,7 +247,10 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
         Kitsuki 最終法定納期 = 普徴期月リスト.get最終法定納期();
         int 納期数 = 最終法定納期.get期AsInt();
         source.listLower_5 = new RString(納期数);
-        int 賦課納期数 = get賦課納期数(納期数);
+        int 賦課納期数 = 0;
+        if (普徴仮算定計算後賦課 != null && 普徴仮算定計算後賦課.get前年度賦課の情報() != null) {
+            賦課納期数 = get賦課納期数(納期数);
+        }
         source.listLower_6 = new RString(賦課納期数);
         if (普徴仮算定計算後賦課 != null) {
             Decimal 合計値 = 普徴仮算定計算後賦課.get特徴期別金額01().add(普徴仮算定計算後賦課.get特徴期別金額02()).
