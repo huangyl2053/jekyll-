@@ -22,8 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter extends KozaSearchParameter implements IMyBatisParameter {
 
-    private final RString 保険者コード;
-    private final boolean is保険者コード;
+    private final RString 市町村コード;
+    private final boolean is市町村コード;
     private final RString 対象年度;
     private final boolean is対象年度NULL;
     private final List<RString> 支給区分List;
@@ -40,8 +40,8 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter extends Koza
     private JigyoBunKogakuGassanShikyuKetteiMybatisParameter(
             IKozaSearchKey key,
             List<KamokuCode> list,
-            RString 保険者コード,
-            boolean is保険者コード,
+            RString 市町村コード,
+            boolean is市町村コード,
             RString 対象年度,
             boolean is対象年度NULL,
             List<RString> 支給区分List,
@@ -52,8 +52,8 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter extends Koza
             RString psmAtesaki,
             RString 出力順) {
         super(key, list);
-        this.保険者コード = 保険者コード;
-        this.is保険者コード = is保険者コード;
+        this.市町村コード = 市町村コード;
+        this.is市町村コード = is市町村コード;
         this.対象年度 = 対象年度;
         this.is対象年度NULL = is対象年度NULL;
         this.支給区分List = 支給区分List;
@@ -68,7 +68,7 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter extends Koza
     /**
      * MybatisParameterの作成です。
      *
-     * @param 保険者コード 保険者コード
+     * @param 市町村コード 市町村コード
      * @param list 科目コード
      * @param 支給区分List 支給区分List
      * @param 支払方法区分List 支払方法区分List
@@ -83,7 +83,7 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter extends Koza
     public static JigyoBunKogakuGassanShikyuKetteiMybatisParameter createMybatisParameter(
             IKozaSearchKey key,
             List<KamokuCode> list,
-            RString 保険者コード,
+            RString 市町村コード,
             RString 対象年度,
             List<RString> 支給区分List,
             List<RString> 支払方法区分List,
@@ -91,16 +91,16 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter extends Koza
             RString psmShikibetsuTaisho,
             RString psmAtesaki,
             RString 出力順) {
-        boolean is保険者コード = false;
-        if (!RString.isNullOrEmpty(保険者コード) && !new RString("000000").equals(保険者コード)) {
-            is保険者コード = true;
+        boolean is市町村コード = false;
+        if (!RString.isNullOrEmpty(市町村コード) && !new RString("000000").equals(市町村コード)) {
+            is市町村コード = true;
         }
 
         return new JigyoBunKogakuGassanShikyuKetteiMybatisParameter(
                 key,
                 list,
-                保険者コード,
-                is保険者コード,
+                市町村コード,
+                is市町村コード,
                 対象年度,
                 isnull(対象年度),
                 支給区分List,

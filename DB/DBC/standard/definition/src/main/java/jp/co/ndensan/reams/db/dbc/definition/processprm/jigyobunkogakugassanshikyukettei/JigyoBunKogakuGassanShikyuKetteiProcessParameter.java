@@ -26,6 +26,8 @@ public class JigyoBunKogakuGassanShikyuKetteiProcessParameter implements IBatchP
     private final boolean is連番付加;
     private final boolean is日付編集;
     private final RString 保険者コード;
+    private final RString 保険者名;
+    private final RString 市町村コード;
     private final List<RString> 支給区分List;
     private final List<RString> 支払方法区分List;
     private final RString 金融機関コード;
@@ -42,6 +44,8 @@ public class JigyoBunKogakuGassanShikyuKetteiProcessParameter implements IBatchP
      * @param is連番付加 is連番付加
      * @param is日付編集 is日付編集
      * @param 保険者コード 保険者コード
+     * @param 保険者名 保険者名
+     * @param 市町村コード 市町村コード
      * @param 支給区分List 支給区分List
      * @param 支払方法区分List 支払方法区分List
      * @param 金融機関コード 金融機関コード
@@ -55,6 +59,8 @@ public class JigyoBunKogakuGassanShikyuKetteiProcessParameter implements IBatchP
             boolean is連番付加,
             boolean is日付編集,
             RString 保険者コード,
+            RString 保険者名,
+            RString 市町村コード,
             List<RString> 支給区分List,
             List<RString> 支払方法区分List,
             RString 金融機関コード,
@@ -67,6 +73,8 @@ public class JigyoBunKogakuGassanShikyuKetteiProcessParameter implements IBatchP
         this.is連番付加 = is連番付加;
         this.is日付編集 = is日付編集;
         this.保険者コード = 保険者コード;
+        this.保険者名 = 保険者名;
+        this.市町村コード = 市町村コード;
         this.支給区分List = 支給区分List;
         this.支払方法区分List = 支払方法区分List;
         this.金融機関コード = 金融機関コード;
