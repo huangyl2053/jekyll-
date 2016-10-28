@@ -71,11 +71,11 @@ public class TokuchoSofuJohoRenkeiDataEntity {
     private RString データ後期移管コード;
     @FldField(order = 40, length = 8)
     private RString データ各種年月日;
-    @FldField(order = 41, length = 11, align = Align.Left, paddingChar = "0")
+    @FldField(order = 41, length = 11, align = Align.Right, paddingChar = "0")
     private RString データ各種金額欄金額1;
-    @FldField(order = 42, length = 11, align = Align.Left, paddingChar = "0")
+    @FldField(order = 42, length = 11, align = Align.Right, paddingChar = "0")
     private RString データ各種金額欄金額2;
-    @FldField(order = 43, length = 11, align = Align.Left, paddingChar = "0")
+    @FldField(order = 43, length = 11, align = Align.Right, paddingChar = "0")
     private RString データ各種金額欄金額3;
     @FldField(order = 44, length = 58)
     private RString データ予備3;
