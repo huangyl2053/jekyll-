@@ -63,7 +63,6 @@ public class KogakuShikyuShinseishoHakkoIchiranEditor
         this.出力順 = parameter.get出力順();
         this.システム日付 = parameter.getシステム日付();
         this.count = parameter.get連番();
-        this.市町村名 = parameter.get市町村名();
     }
 
     @Override
