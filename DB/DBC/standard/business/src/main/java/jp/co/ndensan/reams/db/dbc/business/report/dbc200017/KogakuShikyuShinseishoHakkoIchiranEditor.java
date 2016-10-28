@@ -10,13 +10,17 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakujigyoshinseishohakkoichiran.KogakuJigyoShinseishoHakkoIchiranParamter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200017.KogakuShikyuShinseishoHakkoIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -37,7 +41,6 @@ public class KogakuShikyuShinseishoHakkoIchiranEditor
     private final IOutputOrder 出力順;
     private final RDateTime システム日付;
     private final RString count;
-    private final RString 市町村名;
     private static final RString 措 = new RString("措");
     private static final RString 丸 = new RString("○");
     private static final int INDEX_0 = 0;
@@ -71,9 +74,8 @@ public class KogakuShikyuShinseishoHakkoIchiranEditor
     }
 
     private void editSource(KogakuShikyuShinseishoHakkoIchiranSource source) {
-
-        source.shichosonNo = getColumnValue(entity.getShichosonCodeChohyo());
-        source.shichosonName = 市町村名;
+        source.shichosonNo = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        source.shichosonName = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         editIOutputOrder(source);
         RTime time = システム日付.getTime();
         RString hour = new RString(time.toString()).substringReturnAsPossible(INDEX_0, INDEX_2);
