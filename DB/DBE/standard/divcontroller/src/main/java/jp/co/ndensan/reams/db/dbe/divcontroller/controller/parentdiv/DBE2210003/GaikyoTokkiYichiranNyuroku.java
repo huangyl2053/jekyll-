@@ -66,14 +66,18 @@ public class GaikyoTokkiYichiranNyuroku {
         RString 調査実施日 = ViewStateHolder.get(ViewStateKeys.調査実施日, RString.class);
         RString 調査実施場所 = ViewStateHolder.get(ViewStateKeys.調査実施場所, RString.class);
         RString 実施場所名称 = ViewStateHolder.get(ViewStateKeys.実施場所名称, RString.class);
-        RString 所属機関 = ViewStateHolder.get(ViewStateKeys.所属機関, RString.class);
-        RString 記入者 = ViewStateHolder.get(ViewStateKeys.記入者, RString.class);
+        RString 所属機関コード = ViewStateHolder.get(ViewStateKeys.所属機関コード, RString.class);
+        RString 所属機関名称 = ViewStateHolder.get(ViewStateKeys.所属機関名称, RString.class);
+        RString 記入者コード = ViewStateHolder.get(ViewStateKeys.記入者コード, RString.class);
+        RString 記入者名称 = ViewStateHolder.get(ViewStateKeys.記入者名称, RString.class);
         RString 調査区分 = ViewStateHolder.get(ViewStateKeys.調査区分, RString.class);
         model.set調査実施日(調査実施日);
         model.set調査実施場所(調査実施場所);
         model.set実施場所名称(実施場所名称);
-        model.set所属機関(所属機関);
-        model.set記入者(記入者);
+        model.set所属機関コード(所属機関コード);
+        model.set所属機関名称(所属機関名称);
+        model.set記入者コード(記入者コード);
+        model.set記入者名称(記入者名称);
         model.set調査区分(調査区分);
         model.set申請書管理番号(temp_申請書管理番号.getColumnValue());
 

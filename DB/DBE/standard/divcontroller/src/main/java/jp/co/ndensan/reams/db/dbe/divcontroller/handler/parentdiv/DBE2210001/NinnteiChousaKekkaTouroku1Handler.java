@@ -219,17 +219,31 @@ public class NinnteiChousaKekkaTouroku1Handler {
     public NinnteiChousaKekkaTouroku1Handler(NinnteiChousaKekkaTouroku1Div div) {
         this.div = div;
     }
-
+    
     /**
-     * 共有子DIV初期化の処理です。
+     * 認定申請者基本情報子DIV初期化の処理です。
      *
      * @param 申請書管理番号 申請書管理番号
+     */
+    public void 認定申請者基本情報子DIV初期化(ShinseishoKanriNo 申請書管理番号) {
+        div.getCcdNinteiShinseishaKihonInfo().initialize(申請書管理番号);
+    }
+    
+    /**
+     * 認定申請者連絡先基本子DIV初期化の処理です。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     */
+    public void 認定申請者連絡先基本子DIV初期化(ShinseishoKanriNo 申請書管理番号) {
+        div.getCcdNinteiShinseiRenrakusakiKihon().initialize(申請書管理番号);
+    }
+    
+    /**
+     * 調査実施者情報子DIV初期化の処理です。
+     *
      * @param model 調査実施者情報に渡すパラメータ
      */
-    public void 共有子DIV初期化(ShinseishoKanriNo 申請書管理番号, ChosaJisshishaJohoModel model) {
-
-        div.getCcdNinteiShinseishaKihonInfo().initialize(申請書管理番号);
-        div.getCcdNinteiShinseiRenrakusakiKihon().initialize(申請書管理番号);
+    public void 調査実施者情報子DIV初期化(ChosaJisshishaJohoModel model) {
         div.getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Input);
         div.getCcdChosaJisshishaJoho().intialize(model);
     }
@@ -242,7 +256,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
      * @return 認定調査情報
      */
     public TempData 認定調査情報を取得(ShinseishoKanriNo 申請書管理番号, Integer 認定調査履歴番号) {
-        RString 認定調査委託先コード = div.getCcdChosaJisshishaJoho().getDdlShozokuKikan().getSelectedValue();
+        RString 認定調査委託先コード = div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText();
 
         NinnteiChousaKekkaTouroku1Finder finder = NinnteiChousaKekkaTouroku1Finder.createInstance();
         return finder.get認定調査情報(認定調査履歴番号, 認定調査委託先コード, 申請書管理番号);
@@ -1138,8 +1152,8 @@ public class NinnteiChousaKekkaTouroku1Handler {
         boolean is調査実施場所等しい = is等しい(調査実施場所, div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedValue());
         boolean is実施場所名称等しい = is等しい(実施場所名称, div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getText());
 
-        boolean is所属機関等しい = is等しい(所属機関, div.getCcdChosaJisshishaJoho().getDdlShozokuKikan().getSelectedValue());
-        boolean is記入者等しい = is等しい(記入者, div.getCcdChosaJisshishaJoho().getDdlKinyusha().getSelectedValue());
+        boolean is所属機関等しい = is等しい(所属機関, div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText());
+        boolean is記入者等しい = is等しい(記入者, div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText());
 
         return is調査実施日等しい && is調査実施場所等しい && is実施場所名称等しい && is所属機関等しい && is記入者等しい;
     }

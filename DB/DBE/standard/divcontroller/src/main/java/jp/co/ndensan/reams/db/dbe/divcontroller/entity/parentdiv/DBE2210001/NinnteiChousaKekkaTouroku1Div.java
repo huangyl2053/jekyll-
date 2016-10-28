@@ -7,9 +7,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.IChosaJisshishaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihon.INinteiShinseiRenrakusakiKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -21,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinnteiChousaKekkaTouroku1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -336,6 +339,21 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     @JsonIgnore
     public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
         return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
+    }
+
+    @JsonIgnore
+    public ChosaJisshishaDiv getChosaJisshisha() {
+        return this.getNinteiChosaNyuryoku().getChosaJisshisha();
+    }
+
+    @JsonIgnore
+    public void  setChosaJisshisha(ChosaJisshishaDiv ChosaJisshisha) {
+        this.getNinteiChosaNyuryoku().setChosaJisshisha(ChosaJisshisha);
+    }
+
+    @JsonIgnore
+    public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
+        return this.getNinteiChosaNyuryoku().getChosaJisshisha().getCcdChosaJisshishaJoho();
     }
 
     @JsonIgnore
@@ -686,11 +704,6 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     @JsonIgnore
     public void  setBtnKihonchosa7(ButtonDialog btnKihonchosa7) {
         this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplKihonChosa().getKihonchosaSelect().setBtnKihonchosa7(btnKihonchosa7);
-    }
-
-    @JsonIgnore
-    public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
-        return this.getNinteiChosaNyuryoku().getCcdChosaJisshishaJoho();
     }
 
     // </editor-fold>

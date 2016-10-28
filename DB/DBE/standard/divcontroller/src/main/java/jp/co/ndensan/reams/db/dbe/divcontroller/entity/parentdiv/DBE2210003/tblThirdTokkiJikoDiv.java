@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblThirdTokkiJikoDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -232,7 +232,7 @@ public class tblThirdTokkiJikoDiv extends TablePanel {
  * @author 自動生成
  */
 class celTableCell18AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     @JsonProperty("txtThirdChosaKomokuNo")
     private TextBox txtThirdChosaKomokuNo;
 
@@ -262,7 +262,7 @@ class celTableCell18AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell19AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     @JsonProperty("lblThirdHyphen")
     private Label lblThirdHyphen;
 
@@ -292,7 +292,7 @@ class celTableCell19AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell20AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     @JsonProperty("txtThirdTokkiRenban")
     private TextBoxNum txtThirdTokkiRenban;
 
@@ -322,7 +322,7 @@ class celTableCell20AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell21AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     @JsonProperty("txtThirdTokkiJikoMeisho")
     private TextBox txtThirdTokkiJikoMeisho;
 
@@ -352,7 +352,7 @@ class celTableCell21AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell22AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
 
     // </editor-fold>
 }
@@ -362,7 +362,7 @@ class celTableCell22AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell23AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     @JsonProperty("txtThirdTokkiJiko")
     private TextBoxMultiLine txtThirdTokkiJiko;
 
@@ -392,7 +392,7 @@ class celTableCell23AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell24AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
 
     // </editor-fold>
 }
@@ -402,7 +402,7 @@ class celTableCell24AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell26AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     @JsonProperty("imgThirdTokkiJiko")
     private StaticImage imgThirdTokkiJiko;
 

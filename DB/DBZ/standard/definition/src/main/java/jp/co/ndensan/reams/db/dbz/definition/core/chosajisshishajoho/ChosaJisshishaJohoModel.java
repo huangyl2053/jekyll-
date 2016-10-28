@@ -19,11 +19,14 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosaJisshishaJohoModel {
 
+    private RString 認定申請日;
     private RString 調査実施日;
     private RString 調査実施場所;
     private RString 実施場所名称;
-    private RString 所属機関;
-    private RString 記入者;
+    private RString 所属機関コード;
+    private RString 所属機関名称;
+    private RString 記入者コード;
+    private RString 記入者名称;
     private RString 調査区分;
     private RString 申請書管理番号;
 

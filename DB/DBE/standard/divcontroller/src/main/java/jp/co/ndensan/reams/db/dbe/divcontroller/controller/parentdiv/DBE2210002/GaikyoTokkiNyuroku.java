@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
@@ -52,16 +53,20 @@ public class GaikyoTokkiNyuroku {
 
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int 認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+        
+        ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
+        model.set申請書管理番号(申請書管理番号.getColumnValue());
+        model.set認定申請日(ViewStateHolder.get(ViewStateKeys.申請日, RString.class));
+        model.set調査実施日(ViewStateHolder.get(ViewStateKeys.調査実施日, RString.class));
+        model.set調査実施場所(ViewStateHolder.get(ViewStateKeys.調査実施場所, RString.class));
+        model.set調査実施場所(ViewStateHolder.get(ViewStateKeys.実施場所名称, RString.class));
+        model.set所属機関コード(ViewStateHolder.get(ViewStateKeys.所属機関コード, RString.class));
+        model.set所属機関名称(ViewStateHolder.get(ViewStateKeys.所属機関名称, RString.class));
+        model.set記入者コード(ViewStateHolder.get(ViewStateKeys.記入者コード, RString.class));
+        model.set記入者名称(ViewStateHolder.get(ViewStateKeys.記入者名称, RString.class));
+        model.set調査区分(ViewStateHolder.get(ViewStateKeys.調査区分, RString.class));
 
-        RString 調査実施日 = ViewStateHolder.get(ViewStateKeys.調査実施日, RString.class);
-        RString 調査実施場所 = ViewStateHolder.get(ViewStateKeys.調査実施場所, RString.class);
-        RString 実施場所名称 = ViewStateHolder.get(ViewStateKeys.実施場所名称, RString.class);
-        RString 所属機関 = ViewStateHolder.get(ViewStateKeys.所属機関, RString.class);
-        RString 記入者 = ViewStateHolder.get(ViewStateKeys.記入者, RString.class);
-        RString 調査区分 = ViewStateHolder.get(ViewStateKeys.調査区分, RString.class);
-
-        GaikyoTokki gaikyoTokki = getHandler(div).initialize(申請書管理番号, 認定調査履歴番号,
-                調査実施日, 調査実施場所, 実施場所名称, 所属機関, 記入者, 調査区分);
+        GaikyoTokki gaikyoTokki = getHandler(div).initialize(申請書管理番号, 認定調査履歴番号, model);
         ViewStateHolder.put(ViewStateKeys.初期の概況特記, gaikyoTokki);
 
         boolean gotLock = 前排他キーのセット();
