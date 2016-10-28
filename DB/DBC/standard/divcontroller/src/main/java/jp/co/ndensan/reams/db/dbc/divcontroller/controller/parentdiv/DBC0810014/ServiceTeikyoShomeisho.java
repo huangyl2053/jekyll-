@@ -62,7 +62,7 @@ public class ServiceTeikyoShomeisho {
         }
         getHandler(div).initialize(serviceTeikyoShomeishoList);
         getHandler(div).setヘッダ_エリア(new RDate(サービス年月.toString()), 整理番号);
-        if (決定日.isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(決定日)) {
             div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(true);
         }
         return createResponse(div);
