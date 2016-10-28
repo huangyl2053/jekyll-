@@ -133,6 +133,7 @@ public class JyutakuKayisyuHiHandler {
      * @param 引き継ぎ情報 KyufuJissekiPrmBusiness
      * @param 給付実績住宅改修費List 給付実績住宅改修費List
      * @param サービス提供年月 サービス提供年月
+     * @param ヘッダ情報2 List<KyufuJissekiHedajyoho2>
      */
     public void setデータグリッド(KyufuJissekiPrmBusiness 引き継ぎ情報,
             List<KyufujissekiJutakuKaishuhiBusiness> 給付実績住宅改修費List,
