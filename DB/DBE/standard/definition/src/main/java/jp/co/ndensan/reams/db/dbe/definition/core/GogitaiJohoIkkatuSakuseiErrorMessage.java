@@ -14,7 +14,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBE-0090-020 chengsanyuan
  */
 public enum GogitaiJohoIkkatuSakuseiErrorMessage {
-
+    /**
+     * 合議体Noが空
+     */
+    合議体Noが空("合議体Noは必須入力項目です。"),
     /**
      * 合議体Noの桁数≠２
      */
