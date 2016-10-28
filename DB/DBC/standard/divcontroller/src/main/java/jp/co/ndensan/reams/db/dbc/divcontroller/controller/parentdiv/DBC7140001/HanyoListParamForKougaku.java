@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class HanyoListParamForKougaku {
 
-    private static final ReportId 帳票ID = new ReportId("DBC701014_HanyoList_KogakuGassanShinseishoJoho");
+    private static final ReportId 帳票ID = new ReportId("DBC701014_HanyoListKogakuGassanShinseishoJoho");
 
     /**
      * 画面の初期化メソッドです。
