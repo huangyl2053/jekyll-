@@ -154,6 +154,7 @@
             WHERE
             DbV1004."daichoShubetsu" = '1'
             AND DbV1004."nyushoShisetsuShurui" = '11'
+            AND DbV1004sub."shikibetsuCode" = DbV1001."shikibetsuCode"
             ORDER BY
             DbV1004sub."rirekiNo" DESC
             LIMIT 1
@@ -169,6 +170,8 @@
             WHERE
             DbV1004."daichoShubetsu" = '1'
             AND DbV1004."nyushoShisetsuShurui" = '11'
+            AND DbV1004sub."shikibetsuCode" = DbV1001."shikibetsuCode"
+            AND
             DbV1004sub."nyushoYMD" <![CDATA[<=]]> #{基準年月日} AND
             (
             DbV1004sub."taishoYMD" <![CDATA[>=]]> #{基準年月日}
@@ -366,7 +369,6 @@
 
     <resultMap id="resultMapHanyoListKyotakuServiceKeikakuEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity">
-        <id column="row"/>
         <result property="dbV1001被保険者番号" column="dbv1001被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbV1001市町村コード" column="dbV1001市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="dbV1001資格取得事由コード" column="dbV1001資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
