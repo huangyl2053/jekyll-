@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.dbc150050.DbWT3470chohyouShutsuryok
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150050.DbWT3470chohyouShutsuryokuTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
@@ -164,7 +164,6 @@ public class IchiranServicecodeTaniMeisaiProcess
     }
 
     private void setCSVヘッダー(DbWT3470chohyouShutsuryokuyouCSVEntity csvEntity) {
-        csvEntity.set送付年月(パターン56(parameter.get開始年月()));
         RDateTime 作成日時 = RDateTime.now();
         RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
@@ -219,7 +218,7 @@ public class IchiranServicecodeTaniMeisaiProcess
         csvEntity.set事業所番号(getColumnValue(entity.getJigyoshoNo()));
         csvEntity.set事業所名(entity.getJigyoshoName());
         csvEntity.set要介護状態区分コード(entity.getYoKaigoJotaiKubunCode());
-        csvEntity.set要介護状態区分名称(YokaigoJotaiKubun.toValue(entity.getYoKaigoJotaiKubunCode()).getName());
+        csvEntity.set要介護状態区分名称(YokaigoJotaiKubun.toValue(entity.getYoKaigoJotaiKubunCode()).get名称());
         csvEntity.set旧措置入所者特例コード(entity.getKyuSochiNyushoshaTokureiCode());
         csvEntity.set旧措置入所者特例名称(KyuSochiNyushoshaTokureiCode.
                 toValue(entity.getKyuSochiNyushoshaTokureiCode()).get名称());
@@ -270,14 +269,6 @@ public class IchiranServicecodeTaniMeisaiProcess
             return entity.getColumnValue();
         }
         return RString.EMPTY;
-    }
-
-    private RString パターン56(FlexibleYearMonth 年月) {
-        if (null == 年月) {
-            return RString.EMPTY;
-        }
-        return 年月.wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private RString doパターン4(FlexibleDate 年月日) {

@@ -18,8 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DbWT3470chohyouShutsuryokuyouCSVEntity {
 
-    @CsvField(order = 10, name = "送付年月")
-    private RString 送付年月;
     @CsvField(order = 20, name = "作成日時")
     private RString 作成日時;
     @CsvField(order = 30, name = "保険者番号")
