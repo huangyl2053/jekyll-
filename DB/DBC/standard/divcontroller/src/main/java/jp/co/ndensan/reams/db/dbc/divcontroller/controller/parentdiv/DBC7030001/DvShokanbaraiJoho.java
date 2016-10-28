@@ -67,7 +67,7 @@ public class DvShokanbaraiJoho {
         DBC710020_HanyoListShokanbaraiJokyoParameter parameter = getHandler(div).setBatchParamter(市町村判定);
         parameter.setKinyuKikanShitenCode(div.getCcdKogakuKinyuKikan()
                 .getKinyuKikanShitenCode() == null ? KinyuKikanShitenCode.EMPTY : div
-                .getCcdKogakuKinyuKikan().getKinyuKikanShitenCode());
+                        .getCcdKogakuKinyuKikan().getKinyuKikanShitenCode());
         responseData.data = new BatchParameterMap(parameter);
         return responseData;
     }
@@ -144,6 +144,7 @@ public class DvShokanbaraiJoho {
         pairs.add(validationHandler.validate決定日());
         pairs.add(validationHandler.validate申請日());
         pairs.add(validationHandler.validate金融機関コード());
+        pairs.add(validationHandler.validate出力順未設定());
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }

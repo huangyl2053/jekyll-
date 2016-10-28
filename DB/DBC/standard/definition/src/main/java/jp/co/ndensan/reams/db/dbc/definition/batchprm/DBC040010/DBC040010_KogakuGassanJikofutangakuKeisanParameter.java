@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020080;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040010;
 
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020080.*;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040010.DBC040010ProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -21,7 +23,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter extends BatchParameterBase {
+public class DBC040010_KogakuGassanJikofutangakuKeisanParameter extends BatchParameterBase {
 
     private static final String KEY_SHORITIMESTAMP = "shoriTimestamp";
     private static final String KEY_TAISHOKAISHIDAY = "taishoKaishiDay";
@@ -43,4 +45,13 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter extends 
     @BatchParameter(key = KEY_DANTAICD, name = "市町村コード")
     private LasdecCode dantaiCd;
 
+    /**
+     * toDBC020080ProcessParameter のメソッドです。
+     *
+     * @return DBC020080ProcessParameter
+     */
+    public DBC040010ProcessParameter toDBC040010ProcessParameter() {
+        return new DBC040010ProcessParameter(
+                shoriTimestamp, taishoKaishiDay, taishoShuryoDay, shuturyokuFlg, shutsuryokujunId, dantaiCd);
+    }
 }
