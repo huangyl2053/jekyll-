@@ -26,7 +26,6 @@ public class ShotokushokaihyoIkkatu {
     private static final RString MSG_再発行処理を実行します = new RString("再発行処理を実行します");
     private static final RString MSG_所得調査中 = new RString(
             "テストプリントで発行するため、発行対象者が「所得調査中」として管理されません。<br>一括処理を実行します");
-    private static final RString 所得照会票作成_一括 = new RString("所得照会票作成（一括）");
 
     /**
      * 初期化のメソッドです。
@@ -36,7 +35,7 @@ public class ShotokushokaihyoIkkatu {
      */
     public ResponseData<ShotokushokaihyoIkkatuDiv> onLoad(ShotokushokaihyoIkkatuDiv div) {
         getHandler(div).initialize();
-        return ResponseData.of(div).rootTitle(所得照会票作成_一括).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
