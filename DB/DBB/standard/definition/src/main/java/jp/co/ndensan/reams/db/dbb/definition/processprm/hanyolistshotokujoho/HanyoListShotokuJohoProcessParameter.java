@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -50,8 +51,8 @@ public class HanyoListShotokuJohoProcessParameter implements IBatchProcessParame
     private Decimal 年齢範囲終了;
     private RDate 生年月日範囲開始1;
     private RDate 生年月日範囲終了1;
-    private RDate 生年月日範囲開始;
-    private RDate 生年月日範囲終了;
+    private FlexibleDate 生年月日範囲開始;
+    private FlexibleDate 生年月日範囲終了;
     private LasdecCode 保険者コード;
 
     /**

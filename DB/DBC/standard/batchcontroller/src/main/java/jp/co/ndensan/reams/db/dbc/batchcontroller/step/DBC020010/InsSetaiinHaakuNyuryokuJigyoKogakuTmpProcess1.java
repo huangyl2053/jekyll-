@@ -140,11 +140,14 @@ public class InsSetaiinHaakuNyuryokuJigyoKogakuTmpProcess1 extends BatchProcessB
                 && 基準年月日 != null && !基準年月日.isEmpty()) {
             if (適用年月日.isBeforeOrEquals(基準年月日)
                     && (解除年月日 == null
+                    || 解除年月日.isEmpty()
                     || 基準年月日.isBefore(解除年月日))) {
                 insertEntity.setJushochiTokureiFlag(RS_1);
             } else {
                 insertEntity.setJushochiTokureiFlag(RS_0);
             }
+        } else {
+            insertEntity.setJushochiTokureiFlag(RS_0);
         }
     }
 

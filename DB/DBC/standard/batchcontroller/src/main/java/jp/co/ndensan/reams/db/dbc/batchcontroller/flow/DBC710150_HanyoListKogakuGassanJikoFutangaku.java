@@ -40,9 +40,9 @@ public class DBC710150_HanyoListKogakuGassanJikoFutangaku
         processParam.set出力順(getParameter().getShutsuryokuju());
         if (getParameter().isRebanFuka()) {
             return loopBatch(HanyoListKogakuGassanJikoFutangakuProcess.class)
-                    .arguments(getParameter().toProcessParam()).define();
+                    .arguments(processParam).define();
         }
         return loopBatch(HanyoListKogakuGassanJikoFutangakuNoProcess.class)
-                .arguments(getParameter().toProcessParam()).define();
+                .arguments(processParam).define();
     }
 }

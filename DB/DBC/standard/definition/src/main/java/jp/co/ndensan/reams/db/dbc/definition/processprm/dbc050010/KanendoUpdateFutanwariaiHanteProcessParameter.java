@@ -41,6 +41,7 @@ public class KanendoUpdateFutanwariaiHanteProcessParameter implements IBatchProc
     private FlexibleYearMonth 終了受取年月;
     private Furikomi_MeisaiIchiranChushutsuTaisho 抽出対象;
     private FlexibleDate 対象作成年月日;
+    private RString 帳票ページCount;
 
     /**
      * コンストラクタです。
@@ -59,6 +60,7 @@ public class KanendoUpdateFutanwariaiHanteProcessParameter implements IBatchProc
      * @param 終了受取年月 終了受取年月
      * @param 抽出対象 抽出対象
      * @param 対象作成年月日 対象作成年月日
+     * @param 帳票ページCount 帳票ページCount
      */
     public KanendoUpdateFutanwariaiHanteProcessParameter(FlexibleDate 開始年月日,
             FlexibleDate 終了年月日, ShoriName 処理名,
@@ -72,7 +74,8 @@ public class KanendoUpdateFutanwariaiHanteProcessParameter implements IBatchProc
             FlexibleYearMonth 開始受取年月,
             FlexibleYearMonth 終了受取年月,
             Furikomi_MeisaiIchiranChushutsuTaisho 抽出対象,
-            FlexibleDate 対象作成年月日) {
+            FlexibleDate 対象作成年月日,
+            RString 帳票ページCount) {
         this.開始年月日 = 開始年月日;
         this.終了年月日 = 終了年月日;
         this.処理名 = 処理名;
@@ -87,7 +90,7 @@ public class KanendoUpdateFutanwariaiHanteProcessParameter implements IBatchProc
         this.終了受取年月 = 終了受取年月;
         this.抽出対象 = 抽出対象;
         this.対象作成年月日 = 対象作成年月日;
-
+        this.帳票ページCount = 帳票ページCount;
     }
 
     /**

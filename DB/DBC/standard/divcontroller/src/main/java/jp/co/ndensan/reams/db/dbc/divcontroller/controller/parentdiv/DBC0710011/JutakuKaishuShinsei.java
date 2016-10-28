@@ -13,12 +13,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710011.Jut
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710011.JutakuKaishuShinseiValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -34,16 +32,17 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class JutakuKaishuShinsei {
 
     private static final RString 申請区分事前申請 = new RString("1");
-    private final RString 申請区分取消 = new RString("取消");
     private final RString 事前申請モード = new RString("事前申請モード");
     private final RString 登録モード = new RString("登録モード");
     private final RString 事前申請登録モード = new RString("事前申請登録モード");
     private final RString 修正モード = new RString("修正モード");
     private final RString 取消モード = new RString("取消モード");
     private final RString 削除モード = new RString("削除モード");
+    private final RString 照会モード = new RString("照会モード");
     private final RString 処理モード_修正 = new RString("修正");
     private final RString 処理モード_取消 = new RString("取消");
     private final RString 処理モード_削除 = new RString("削除");
+    private final RString 処理モード_照会 = new RString("照会");
 
     /**
      * 画面ロードメソッド
@@ -127,11 +126,6 @@ public class JutakuKaishuShinsei {
      * @return 本画面
      */
     public ResponseData<JutakuKaishuShinseiDiv> onClick_btnCancel(JutakuKaishuShinseiDiv div) {
-        RString 申請区分 = div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList().getClickedItem()
-                .getTxtShinseiKubun();
-        if (申請区分取消.equals(申請区分)) {
-            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace("該当データが既に取消されている", "取消").evaluate());
-        }
         setCancelMode(div);
         return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.to申請登録)
                 .parameter(ResponseHolder.getState());
@@ -180,15 +174,15 @@ public class JutakuKaishuShinsei {
             } else if (JutakukaishuShinseiKubun.支給申請.get名称().equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 修正モード);
             } else if (JutakukaishuShinseiKubun.取消.get名称().equals(申請区分)) {
-                ViewStateHolder.put(ViewStateKeys.表示モード, 取消モード);
+                ViewStateHolder.put(ViewStateKeys.表示モード, 照会モード);
             }
         } else if (画面モード.equals(DBC0710011StateName.事前申請モード.getName())) {
             if (JutakukaishuShinseiKubun.事前申請.get名称().equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 修正モード);
                 ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード_修正);
             } else if (JutakukaishuShinseiKubun.取消.get名称().equals(申請区分)) {
-                ViewStateHolder.put(ViewStateKeys.表示モード, 取消モード);
-                ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード_取消);
+                ViewStateHolder.put(ViewStateKeys.表示モード, 照会モード);
+                ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード_照会);
             }
         }
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(div.getJutakuKaishuShinseiList()

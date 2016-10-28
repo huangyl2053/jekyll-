@@ -121,7 +121,7 @@ public class DvShokanbaraiJohoHandler {
             panel.getCcdShokanHokenshaList().loadHokenshaList();
         } else {
             panel.getCcdShokanHokenshaList().setDisabled(true);
-            panel.getCcdShokanHokenshaList().setVisible(false);
+            panel.getCcdShokanHokenshaList().setDisplayNone(true);
         }
         List<ShikibetsuNoKanri> 様式番号一覧 = DvShokanbaraiJohoManager.createInstance().select様式名称とコード();
         set様式番号一覧(様式番号一覧);
@@ -402,7 +402,7 @@ public class DvShokanbaraiJohoHandler {
             div.getCcdShokanHokenshaList().loadHokenshaList();
         } else {
             div.getCcdShokanHokenshaList().setDisabled(true);
-            div.getCcdShokanHokenshaList().setVisible(false);
+            div.getCcdShokanHokenshaList().setDisplayNone(true);
         }
         div.getTxtShokanServiceTeikyoYM().clearFromValue();
         div.getTxtShokanServiceTeikyoYM().clearToValue();

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,4 +36,5 @@ public class FuchoKarisanteiFukaMybatisParameter implements IMyBatisParameter {
     private RString 作成処理名;
     private RString 特別徴収対象者情報;
     private RString 特別徴収追加候補者情報;
+    private RDateTime 処理日時;
 }

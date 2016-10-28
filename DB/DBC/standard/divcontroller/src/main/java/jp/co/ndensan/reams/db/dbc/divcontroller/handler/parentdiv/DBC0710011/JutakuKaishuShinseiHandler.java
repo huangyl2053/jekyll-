@@ -15,7 +15,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.JutakuKaishuShinseiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.dgJutakuKaishuShinseiList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -56,10 +59,12 @@ public final class JutakuKaishuShinseiHandler {
         List<dgJutakuKaishuShinseiList_Row> rows = new ArrayList<>();
         if (画面モード.equals(DBC0710011StateName.支給申請モード.getName())) {
             set支給申請一覧(manager, 被保険者番号, rows);
-            div.getJutakuKaishuShinseiList().getTxtServiceYM().setVisible(false);
         } else if (画面モード.equals(DBC0710011StateName.事前申請モード.getName())) {
             set事前申請一覧(manager, 被保険者番号, rows);
         }
+        RString month = DbBusinessConfig.get(ConfigNameDBC.初期表示_償還支給申請登録初期, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        RDate yearMonth = RDate.getNowDate().minusMonth(Integer.parseInt(month.toString()));
+        div.getJutakuKaishuShinseiList().getTxtServiceYM().setValue(yearMonth);
         div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList().setDataSource(rows);
     }
 

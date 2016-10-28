@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.ShoriKekkaKakuninLi
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.YoshikiNoJohoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.gokeidata.GokeiDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata.MeisaiDataEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata.PrintNoKingakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200101detail.FurikomiMeisaiIchiranDetailReportSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200101gokei.FurikomiMeisaiIchiranGokeiReportSource;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IShikyugakuJohoMapper;
@@ -44,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -117,6 +119,16 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
     private static final int NUM13 = 13;
     private int 様式連番 = 0;
 
+    private OutputParameter<RString> outputPageCount;
+    /**
+     * 検索件数を返却
+     */
+    public static final RString PARAMETER_OUT_PAGE_COUNT;
+
+    static {
+        PARAMETER_OUT_PAGE_COUNT = new RString("outputPageCount");
+    }
+
     @BatchWriter
     private BatchEntityCreatedTempTableWriter shoriKekkaKakuninListTempTable;
     private BatchReportWriter<FurikomiMeisaiIchiranDetailReportSource> batchReportWriter_明細一覧表;
@@ -184,49 +196,25 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         RString 制度改正施行年月日
                 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         FlexibleYearMonth 制度改正施行日 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 区分));
-        boolean flag = false;
 
         if (t.get様式番号別金額EntityList().isEmpty()) {
             t.set様式番号別金額EntityList(Collections.EMPTY_LIST);
         }
         if (t.get振込明細一時Entity().getDataKubun().equals(処理区分1)) {
-            FurikomiMeisaiYoshikiBetsuKingakuShukei bisness = new FurikomiMeisaiYoshikiBetsuKingakuShukei();
-            List<InjiYoushikiBangouBetuKingaku> 印字様式番号別金額List = bisness.sumKingakuBy印字様式番号(t.get様式番号別金額EntityList());
-            MeisaiDataEntity 振込明細一覧表明細 = new MeisaiDataEntity();
-            振込明細一覧表明細.set様式別集計金額(Decimal.ZERO);
-            for (InjiYoushikiBangouBetuKingaku 印字様式番号別金額 : 印字様式番号別金額List) {
-                様式連番++;
-                振込明細一覧表明細.set様式連番(様式連番);
-                振込明細一覧表明細.set名寄せ件数(t.get名寄せ件数());
-                振込明細一覧表明細.set印字様式名称(様式名称MAP.get(印字様式番号別金額.get印字様式番号()));
-                振込明細一覧表明細.set集計様式番号(印字様式番号別金額.get集計様式番号());
-                振込明細一覧表明細.set振込明細一時TBL(t.get振込明細一時Entity());
-                振込明細一覧表明細.set印字様式番号(印字様式番号別金額.get印字様式番号());
-                if (t.get振込明細一時Entity().getSagakuKingakuGokei().intValue() == 0) {
-                    振込明細一覧表明細.set様式別集計金額(印字様式番号別金額.get支給金額計());
-                    flag = true;
-                } else {
-                    振込明細一覧表明細.set様式別集計金額(印字様式番号別金額.get差額金額計());
-                    flag = false;
-                }
-                FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, outputOrder, parameter.get支払方法(),
-                        RDateTime.now(), 設定値);
-                report.writeBy(reportSourceWriter_明細一覧表);
-                if (t.get振込明細一時Entity().getServiceTeikyoYM().isBefore(制度改正施行日)) {
-                    set件数加算before制度改正施行日(t.get振込明細一時Entity().getYokaigoJotaiKubunCode().value(), flag, 印字様式番号別金額);
-                } else {
-                    set件数加算after制度改正施行日(t.get振込明細一時Entity().getYokaigoJotaiKubunCode().value(), flag, 印字様式番号別金額);
-                }
-            }
+            edit処理区分が1の場合_帳票データ作成(t, 制度改正施行日);
         } else if (t.get振込明細一時Entity().getDataKubun().equals(処理区分2)) {
             MeisaiDataEntity 振込明細一覧表明細 = new MeisaiDataEntity();
             振込明細一覧表明細.set振込明細一時TBL(t.get振込明細一時Entity());
-            振込明細一覧表明細.set様式連番(NUM1);
-            振込明細一覧表明細.set印字様式名称(様式名称MAP.get(KyufuJissekiYoshikiKubun._3411_高額介護給付費.getコード()));
-            振込明細一覧表明細.set集計様式番号(NyuryokuShikibetsuNoShokan3Keta.高額介護サービス.getコード());
-            振込明細一覧表明細.set様式別集計金額(t.get振込明細一時Entity().getFurikomiKingaku());
-            振込明細一覧表明細.set印字様式番号(KyufuJissekiYoshikiKubun._3411_高額介護給付費.getコード());
-            振込明細一覧表明細.set名寄せ件数(t.get名寄せ件数());
+            List<PrintNoKingakuEntity> 印字様式番号別金額List = new ArrayList<>();
+            PrintNoKingakuEntity printNoKingakuEntity = new PrintNoKingakuEntity();
+            printNoKingakuEntity.set様式連番(NUM1);
+            printNoKingakuEntity.set印字様式名称(様式名称MAP.get(KyufuJissekiYoshikiKubun._3411_高額介護給付費.getコード()));
+            printNoKingakuEntity.set集計様式番号(NyuryokuShikibetsuNoShokan3Keta.高額介護サービス.getコード());
+            printNoKingakuEntity.set様式別集計金額(t.get振込明細一時Entity().getFurikomiKingaku());
+            printNoKingakuEntity.set印字様式番号(KyufuJissekiYoshikiKubun._3411_高額介護給付費.getコード());
+            printNoKingakuEntity.set名寄せ件数(t.get名寄せ件数());
+            印字様式番号別金額List.add(printNoKingakuEntity);
+            振込明細一覧表明細.set印字様式番号別金額List(印字様式番号別金額List);
             FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, outputOrder, parameter.get支払方法(),
                     RDateTime.now(), 設定値);
             report.writeBy(reportSourceWriter_明細一覧表);
@@ -240,8 +228,79 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         }
     }
 
+    private void edit処理区分が1の場合_帳票データ作成(ShikyugakuJohoEntity t, FlexibleYearMonth 制度改正施行日) {
+        boolean flag = false;
+        FurikomiMeisaiYoshikiBetsuKingakuShukei bisness = new FurikomiMeisaiYoshikiBetsuKingakuShukei();
+        List<InjiYoushikiBangouBetuKingaku> 印字様式番号別金額List = bisness.sumKingakuBy印字様式番号(t.get様式番号別金額EntityList());
+        MeisaiDataEntity 振込明細一覧表明細 = new MeisaiDataEntity();
+        List<PrintNoKingakuEntity> list = new ArrayList<>();
+        for (int i = 1; i <= 印字様式番号別金額List.size(); i++) {
+            InjiYoushikiBangouBetuKingaku 印字様式番号別金額 = 印字様式番号別金額List.get(i);
+            様式連番++;
+
+            int count = 0;
+            if (1 == 様式連番) {
+                振込明細一覧表明細.set振込明細一時TBL(t.get振込明細一時Entity());
+
+                list.add(create印字様式番号別金額(t, 様式名称MAP, 印字様式番号別金額));
+                振込明細一覧表明細.set印字様式番号別金額List(list);
+                FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, outputOrder, parameter.get支払方法(),
+                        RDateTime.now(), 設定値);
+                report.writeBy(reportSourceWriter_明細一覧表);
+                list.clear();
+            } else {
+                count++;
+                if (印字様式番号別金額List.size() % 2 == 0 && i == 印字様式番号別金額List.size()) {
+                    list.add(new PrintNoKingakuEntity());
+                    count++;
+                }
+                list.add(create印字様式番号別金額(t, 様式名称MAP, 印字様式番号別金額));
+                振込明細一覧表明細.set印字様式番号別金額List(list);
+                振込明細一覧表明細.set振込明細一時TBL(t.get振込明細一時Entity());
+                if (2 == count) {
+                    FurikomiMeisaiIchiranDetailReport report = new FurikomiMeisaiIchiranDetailReport(振込明細一覧表明細, outputOrder, parameter.get支払方法(),
+                            RDateTime.now(), 設定値);
+                    report.writeBy(reportSourceWriter_明細一覧表);
+                    count = 0;
+                }
+            }
+
+            flag = is支給金額計(t);
+
+            if (t.get振込明細一時Entity().getServiceTeikyoYM().isBefore(制度改正施行日)) {
+                set件数加算before制度改正施行日(t.get振込明細一時Entity().getYokaigoJotaiKubunCode().value(), flag, 印字様式番号別金額);
+            } else {
+                set件数加算after制度改正施行日(t.get振込明細一時Entity().getYokaigoJotaiKubunCode().value(), flag, 印字様式番号別金額);
+            }
+        }
+    }
+
+    private PrintNoKingakuEntity create印字様式番号別金額(ShikyugakuJohoEntity t, Map<RString, RString> 様式名称MAP,
+            InjiYoushikiBangouBetuKingaku 印字様式番号別金額) {
+        PrintNoKingakuEntity data = new PrintNoKingakuEntity();
+
+        data.set様式連番(様式連番);
+        data.set名寄せ件数(t.get名寄せ件数());
+        data.set印字様式名称(様式名称MAP.get(印字様式番号別金額.get印字様式番号()));
+        data.set集計様式番号(印字様式番号別金額.get集計様式番号());
+
+        data.set印字様式番号(印字様式番号別金額.get印字様式番号());
+        if (t.get振込明細一時Entity().getSagakuKingakuGokei().intValue() == 0) {
+            data.set様式別集計金額(印字様式番号別金額.get支給金額計());
+        } else {
+            data.set様式別集計金額(印字様式番号別金額.get差額金額計());
+        }
+        return data;
+    }
+
+    private boolean is支給金額計(ShikyugakuJohoEntity t) {
+        return 0 == t.get振込明細一時Entity().getSagakuKingakuGokei().intValue();
+    }
+
     @Override
     protected void afterExecute() {
+        outputPageCount.setValue(new RString(batchReportWriter_明細一覧表.getCount()));
+
         if (parameter.get処理区分().getコード().equals(処理区分3)) {
             ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = new ShoriKekkaKakuninListTempTableEntity();
             shoriKekkaKakuninList.setBiko(処理区分3);

@@ -171,12 +171,12 @@
             DbV1004."daichoShubetsu" = '1'
             AND DbV1004."nyushoShisetsuShurui" = '11'
             AND DbV1004sub."shikibetsuCode" = DbV1001."shikibetsuCode"
-            AND DbV1004sub."nyushoYMD" <![CDATA[<=]]> #{基準年月日}
-            AND (
-            DbV1004sub."taishoYMD" <![CDATA[>=]]> #{基準年月日}
-            OR DbV1004sub."taishoYMD" IS NULL
+            AND ((DbV1004sub."nyushoYMD" <![CDATA[<=]]> #{基準年月日}
+            AND  DbV1004sub."taishoYMD" <![CDATA[>=]]> #{基準年月日})
+            OR (DbV1004sub."nyushoYMD" <![CDATA[<=]]> #{基準年月日}
+            AND (DbV1004sub."taishoYMD" IS NULL
             OR DbV1004sub."taishoYMD" = ''
-            )
+            )))
             ORDER BY
             DbV1004sub."rirekiNo" DESC
             LIMIT 1

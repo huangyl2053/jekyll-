@@ -252,7 +252,6 @@ public class FuchoKariSanteiFukaBatch {
                 納期数 = 期月リスト.get最終法定納期().get期AsInt();
             } else {
                 納期数 = 期月リスト.get最終法定納期().get期AsInt();
-//                QA #105593
 //                int 最終法定納期の期 = 期月リスト.get最終法定納期().get期AsInt();
 //                for (int i = NUM_1; i <= 最終法定納期の期; i++) {
 //                    int 普徴期別金額

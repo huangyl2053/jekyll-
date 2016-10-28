@@ -124,12 +124,12 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         pamaRestore3(restoreBatchParameterMap);
         pamaRestore4(restoreBatchParameterMap);
         List<RString> csv編集方法リスト = new ArrayList<>();
-        boolean 項目名付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_TOMOKUME_FUKA);
-        if (項目名付加) {
+        boolean 項目名付加1 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_TOMOKUME_FUKA);
+        if (項目名付加1) {
             csv編集方法リスト.add(ONE);
         }
-        boolean 連番付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_REBAN_FUKA);
-        if (連番付加) {
+        boolean 連番付加1 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_REBAN_FUKA);
+        if (連番付加1) {
             csv編集方法リスト.add(TWO);
         }
         boolean 日付スラッシュ付加 = restoreBatchParameterMap.getParameterValue(boolean.class, KEY_SLASH_DATE);
@@ -147,6 +147,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (保険者コード != null && !保険者コード.isEmpty()) {
             div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(new LasdecCode(保険者コード));
         }
+        getEditDdlDetaSakuseiKubun();
     }
 
     private void pamaRestore4(BatchParameterMap restoreBatchParameterMap) throws IllegalArgumentException {
@@ -375,22 +376,22 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     }
 
     private DBC710150_HanyoListKogakuGassanJikoFutangakuParameter setChkCsvHenshuHoho(DBC710150_HanyoListKogakuGassanJikoFutangakuParameter batchparam) {
-        if (null != div.getTxtJikoFutangakuKakunin().getFromValue()) {
+        if (!div.getTxtJikoFutangakuKakunin().isDisabled() && null != div.getTxtJikoFutangakuKakunin().getFromValue()) {
             batchparam.setJikoFutangakuKakuninFrom(new FlexibleYearMonth(div.getTxtJikoFutangakuKakunin().getFromValue().getYearMonth().toString()));
         }
-        if (null != div.getTxtJikoFutangakuKakunin().getToValue()) {
+        if (!div.getTxtJikoFutangakuKakunin().isDisabled() && null != div.getTxtJikoFutangakuKakunin().getToValue()) {
             batchparam.setSofuTaishogaiFukumuTo(new FlexibleYearMonth(div.getTxtJikoFutangakuKakunin().getToValue().getYearMonth().toString()));
         }
-        if (null != div.getTxtHoseizumiJikoFutangaku().getFromValue()) {
+        if (!div.getTxtHoseizumiJikoFutangaku().isDisabled() && null != div.getTxtHoseizumiJikoFutangaku().getFromValue()) {
             batchparam.setHoseizumiJikoFutangakuFrom(new FlexibleYearMonth(div.getTxtHoseizumiJikoFutangaku().getFromValue().getYearMonth().toString()));
         }
-        if (null != div.getTxtHoseizumiJikoFutangaku().getToValue()) {
+        if (!div.getTxtHoseizumiJikoFutangaku().isDisabled() && null != div.getTxtHoseizumiJikoFutangaku().getToValue()) {
             batchparam.setHoseizumiJikoFutangakuTo(new FlexibleYearMonth(div.getTxtHoseizumiJikoFutangaku().getToValue().getYearMonth().toString()));
         }
-        if (null != div.getTxtJikoFutanngakuShoumeisho().getFromValue()) {
+        if (!div.getTxtJikoFutanngakuShoumeisho().isDisabled() && null != div.getTxtJikoFutanngakuShoumeisho().getFromValue()) {
             batchparam.setJikoFutanngakuShoumeishoFrom(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getFromValue().getYearMonth().toString()));
         }
-        if (null != div.getTxtJikoFutanngakuShoumeisho().getToValue()) {
+        if (!div.getTxtJikoFutanngakuShoumeisho().isDisabled() && null != div.getTxtJikoFutanngakuShoumeisho().getToValue()) {
             batchparam.setJikoFutanngakuShoumeishoTo(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getToValue().getYearMonth().toString()));
         }
         List<RString> selectKey = div.getChkCsvHenshuHoho().getSelectedKeys();

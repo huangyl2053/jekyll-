@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.dbc100053;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
@@ -222,6 +223,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiSource implements IRep
     public RString tsuchiNo;
     @ReportItem(name = "tsuban", length = 6, order = 104)
     public RString tsuban;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "hihokenshaNo", length = 6, order = 105)
     public RString hihokenshaNo;
 // </editor-fold>

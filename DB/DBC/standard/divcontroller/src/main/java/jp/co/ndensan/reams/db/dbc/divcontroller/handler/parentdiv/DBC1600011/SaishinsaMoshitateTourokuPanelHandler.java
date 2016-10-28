@@ -320,9 +320,6 @@ public class SaishinsaMoshitateTourokuPanelHandler {
             div.getKagoMoshitatePanel().getDropDownList3().setReadOnly(false);
             div.getKagoMoshitatePanel().getDropDownList6().setReadOnly(true);
             div.getKagoMoshitatePanel().getDropDownList7().setReadOnly(true);
-            div.getKagoMoshitatePanel().getDropDownList2().setSelectedIndex(ZERO);
-            div.getKagoMoshitatePanel().getDropDownList4().setSelectedIndex(ZERO);
-            div.getKagoMoshitatePanel().getDropDownList5().setSelectedIndex(ZERO);
             div.getKagoMoshitatePanel().getTextBoxDate1().setValue(null);
             div.getKagoMoshitatePanel().getCheckBoxList1().setSelectedItemsByKey(new ArrayList());
             if (RString.isNullOrEmpty(div.getKagoMoshitatePanel().getTextBox6().getValue())) {
@@ -554,6 +551,10 @@ public class SaishinsaMoshitateTourokuPanelHandler {
         }
         div.getKagoMoshitatePanel().getDropDownList5().setDataSource(申立理由DateSource);
         div.getKagoMoshitatePanel().getDropDownList5().setIsBlankLine(true);
+        if (!申立理由DateSource.isEmpty()) {
+            div.getKagoMoshitatePanel().getDropDownList5().setSelectedIndex(ZERO);
+        }
+
     }
 
     private void set申立対象項目DDL() {
@@ -571,6 +572,9 @@ public class SaishinsaMoshitateTourokuPanelHandler {
         }
         div.getKagoMoshitatePanel().getDropDownList4().setDataSource(申立対象項目DateSource);
         div.getKagoMoshitatePanel().getDropDownList4().setIsBlankLine(true);
+        if (!申立対象項目DateSource.isEmpty()) {
+            div.getKagoMoshitatePanel().getDropDownList4().setSelectedIndex(ZERO);
+        }
     }
 
     private void set申立者区分DDL() {
@@ -584,6 +588,9 @@ public class SaishinsaMoshitateTourokuPanelHandler {
         }
         div.getKagoMoshitatePanel().getDropDownList2().setDataSource(申立者区分DateSource);
         div.getKagoMoshitatePanel().getDropDownList2().setIsBlankLine(true);
+        if (!申立者区分DateSource.isEmpty()) {
+            div.getKagoMoshitatePanel().getDropDownList2().setSelectedIndex(ZERO);
+        }
     }
 
     /**

@@ -174,9 +174,11 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         div.getMishinsaShikyuShinseiListPanel().getTxtKetteiYMD().setValue(RDate.getNowDate());
         if (resultList.isEmpty()) {
             div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.TRUE);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, Boolean.TRUE);
             return ResponseData.of(div).setState(申請審査);
         } else {
             div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.FALSE);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, Boolean.FALSE);
             return ResponseData.of(div).setState(申請審査);
         }
     }
@@ -189,8 +191,20 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      */
     public ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv> onClick_btnResearch(JutakuKaishuhiShikyuShinseiPanelDiv div) {
 
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage("URZQ00070", "入力内容を破棄してよいか確認する");
+        boolean is入力内容の破棄 = false;
+        List<dgMishinsaShikyuShinsei_Row> list = div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getSelectedItems();
+        if (list != null && !list.isEmpty()) {
+            for (dgMishinsaShikyuShinsei_Row row : list) {
+                if (row.getTxtShinsaResult() != null && !row.getTxtShinsaResult().isEmpty()) {
+                    is入力内容の破棄 = true;
+                    break;
+                }
+            }
+        }
+
+        if (!ResponseHolder.isReRequest() && is入力内容の破棄) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {

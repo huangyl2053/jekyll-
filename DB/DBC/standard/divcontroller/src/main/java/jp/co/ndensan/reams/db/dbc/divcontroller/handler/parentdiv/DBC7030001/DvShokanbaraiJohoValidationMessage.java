@@ -48,7 +48,11 @@ public enum DvShokanbaraiJohoValidationMessage implements IValidationMessage {
     /**
      * 対象のデータがありません
      */
-    対象のデータがありません(UrErrorMessages.対象ファイルが存在しない, "識別番号管理");
+    対象のデータがありません(UrErrorMessages.対象ファイルが存在しない, "識別番号管理"),
+    /**
+     * 出力順未設定
+     */
+    出力順未設定(UrErrorMessages.出力順序を指定);
 
     private final Message message;
 

@@ -155,9 +155,9 @@ public class FukaTaishoshaSearch {
         // 検索条件未指定チェック
         HihokenshaFinderDiv 検索条件Div = div.getSearchCondition().getCcdSearchCondition();
         boolean 検索条件Flag = 検索条件Div.getKaigoFinder().getTxtHihokenshaNo().getValue().isEmpty()
-                           && 検索条件Div.getKaigoFinder().getTxtTuchishoNo().getValue().isEmpty()
-                           && 検索条件Div.getKaigoFinder().getDdlFukaNendo().getSelectedKey().isEmpty()
-                           && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
+                && 検索条件Div.getKaigoFinder().getTxtTuchishoNo().getValue().isEmpty()
+                && 検索条件Div.getKaigoFinder().getDdlFukaNendo().getSelectedKey().isEmpty()
+                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
 
         boolean 宛名条件修正Flag = 検索条件Div.getCcdAtenaFinder().hasChanged();
         if (検索条件Flag && !宛名条件修正Flag) {
@@ -179,7 +179,6 @@ public class FukaTaishoshaSearch {
             list = editList(result, is全年度);
         }
         SearchResult<FukaTaishoshaRelateBusiness> newResult = SearchResult.of(list);
-
         // 検索結果の件数判定
         int 検索結果件数 = newResult.totalCount();
         // 検索結果が０件の場合
@@ -204,6 +203,7 @@ public class FukaTaishoshaSearch {
         } else {
             // 最大表示件数チェック
             int 最大表示件数 = div.getSearchCondition().getCcdSearchCondition().get最大表示件数();
+            int 表示件数 = 最大表示件数;
             DataGridSetting dataGridSetting = div.getGaitoshaList().getDgFukaGaitoshaList().getGridSetting();
             if (検索結果件数 > 最大表示件数) {
                 dataGridSetting.setLimitRowCount(最大表示件数);
@@ -211,10 +211,15 @@ public class FukaTaishoshaSearch {
             } else {
                 dataGridSetting.setLimitRowCount(最大取得件数);
                 dataGridSetting.setSelectedRowCount(最大取得件数);
+                表示件数 = 検索結果件数;
             }
             // 検索結果の表示
             set賦課年度(div);
-            div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(newResult));
+            SearchResult<FukaTaishoshaRelateBusiness> limitResut = SearchResult.of(ItemList.empty());
+            for (int i = 0; i < 表示件数; i++) {
+                limitResut = SearchResult.of(limitResut.records().added(newResult.records().toList().get(i)));
+            }
+            div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(limitResut));
             div.getSearchCondition().getCcdSearchCondition().getButtonsForHihokenshaFinder()
                     .getTxtMaxNumber().setValue(new Decimal(最大表示件数));
             ViewStateHolder.put(ViewStateKeys.is経由該当者一覧画面, Boolean.TRUE);
@@ -258,7 +263,7 @@ public class FukaTaishoshaSearch {
                     通知書番号_絞り込み前 = entity.get賦課検索エンティティ().getTsuchishoNo().value();
                 }
                 if (!(被保険者番号.equals(被保険者番号_絞り込み前) && 賦課年度.equals(賦課年度_絞り込み前)
-                      && 通知書番号.equals(通知書番号_絞り込み前))) {
+                        && 通知書番号.equals(通知書番号_絞り込み前))) {
                     list.add(entity);
                     被保険者番号 = 被保険者番号_絞り込み前;
                     賦課年度 = 賦課年度_絞り込み前;
@@ -532,8 +537,8 @@ public class FukaTaishoshaSearch {
                     個人.get性別() != null ? (個人.get性別().getName() != null ? 個人.get性別().getName().getShortJapanese() : RString.EMPTY) : RString.EMPTY,
                     個人.get住民状態() != null ? 個人.get住民状態().住民状態略称() : RString.EMPTY,
                     識別対象.get住所() != null ? ((識別対象.get住所().get住所() != null && 識別対象.get住所().get番地() != null)
-                                            ? 識別対象.get住所().get住所().concat(識別対象.get住所().get番地().getBanchi().value())
-                                            : 識別対象.get住所().get住所()) : RString.EMPTY,
+                    ? 識別対象.get住所().get住所().concat(識別対象.get住所().get番地().getBanchi().value())
+                    : 識別対象.get住所().get住所()) : RString.EMPTY,
                     識別対象.get識別コード() != null ? 識別対象.get識別コード().value() : RString.EMPTY,
                     個人.get世帯コード() != null ? 個人.get世帯コード().value() : RString.EMPTY));
         }

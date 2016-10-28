@@ -100,7 +100,7 @@ public class ShiharaiHohoJyohoHandler {
                 div.getRadKoza().setSelectedKey(支払方法区分.getコード());
                 List<Koza> koza = ShiharaiHohoJyohoFinder.createInstance()
                         .getKozaJyoho(KozaParameter.createParam(支給申請情報.
-                                        getKozaId(), null, null)).records();
+                                getKozaId(), null, null)).records();
                 if (!koza.isEmpty()) {
 
                     口座払いエリアの初期化(koza.get(0), 支給申請情報.getKozaId());
@@ -612,11 +612,7 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtYokinShubetsu().setDisplayNone(false);
             div.getTxtTenban().setDisplayNone(true);
         }
-        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する名称(nullToEmpty(口座情報.get預金種別().get預金種別コード()));
-        if (uzT0007CodeBusiness != null) {
-
-            div.getTxtYokinShubetsu().setValue(uzT0007CodeBusiness.getコード名称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード名称());
-        }
+        div.getTxtYokinShubetsu().setValue(口座情報.get預金種別名称() == null ? RString.EMPTY : 口座情報.get預金種別名称());
         div.getTxtKozaNo().setValue(口座情報.get口座番号());
         div.getTxtMeigininKana().setDomain(口座情報.get口座名義人());
         div.getTtxtMeigininKanji().setDomain(口座情報.get口座名義人漢字());

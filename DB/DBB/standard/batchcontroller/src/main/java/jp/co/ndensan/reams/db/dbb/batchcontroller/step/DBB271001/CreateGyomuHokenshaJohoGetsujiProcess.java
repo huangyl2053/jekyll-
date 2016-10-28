@@ -117,7 +117,9 @@ public class CreateGyomuHokenshaJohoGetsujiProcess extends BatchProcessBase<Toku
 
     private boolean do資格喪失の判定(DbV1001HihokenshaDaichoEntity 被保険者, FlexibleDate now) {
         return !(ShikakuKubun._１号.getコード().equals(被保険者.getHihokennshaKubunCode())
-                && (null != 被保険者.getIchigoShikakuShutokuYMD() && 被保険者.getIchigoShikakuShutokuYMD().isBeforeOrEquals(now))
+                && (null != 被保険者.getIchigoShikakuShutokuYMD()
+                && !FlexibleDate.EMPTY.equals(被保険者.getIchigoShikakuShutokuYMD())
+                && 被保険者.getIchigoShikakuShutokuYMD().isBeforeOrEquals(now))
                 && (null == 被保険者.getShikakuSoshitsuYMD() || FlexibleDate.EMPTY.equals(被保険者.getShikakuSoshitsuYMD())
                 || now.isBeforeOrEquals(被保険者.getShikakuSoshitsuYMD())) && !被保険者.getLogicalDeletedFlag());
     }

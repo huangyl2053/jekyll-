@@ -46,7 +46,7 @@ public enum ShiharaiHohoHenkoHaakuOrderKey implements IReportItems {
     /**
      * 項目ID:0104 フォームフィールド名:被保険者番号 MyBatis項目名:定義なし
      */
-    被保険者番号("0104", "被保険者番号", "被保険者台帳管理_被保険者番号");
+    被保険者番号("0104", "被保険者番号", "対象者情報_被保険者番号");
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
