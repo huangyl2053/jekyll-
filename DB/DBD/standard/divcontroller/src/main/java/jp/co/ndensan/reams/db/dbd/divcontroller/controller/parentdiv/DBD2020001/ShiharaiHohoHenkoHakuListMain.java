@@ -77,16 +77,44 @@ public class ShiharaiHohoHenkoHakuListMain {
         div.getChkShokanKetteiYMD().setDisabled(false);
 
         div.getTxtTainoKikanHihokenshaAll().setDisabled(true);
-        div.getTxtTainoKikanJukyushaAll().setDisabled(true);
-        div.getTxtTainoKikanNinteiShinseisha().setDisabled(true);
-        div.getTxtNinteiDateFrom().setDisabled(true);
-        div.getTxtNinteiYMDTo().setDisabled(true);
-        div.getTxtTainoKikanNinteiYMD().setDisabled(true);
-        div.getTxtTainoKikanShokanShinseisha().setDisabled(true);
-        div.getTxtShokanKetteiYMDFrom().setDisabled(true);
-        div.getTxtShokanKetteiYMDTo().setDisabled(true);
-        div.getTxtTainoKikanShokanKettei().setDisabled(true);
+        if (div.getChkJukyushaAll().getSelectedKeys() != null && !div.getChkJukyushaAll().getSelectedKeys().isEmpty()) {
+            div.getTxtTainoKikanJukyushaAll().setDisabled(false);
+        } else {
+            div.getTxtTainoKikanJukyushaAll().setDisabled(true);
+        }
 
+        if (div.getChkNinteiShinseisha().getSelectedKeys() != null && !div.getChkNinteiShinseisha().getSelectedKeys().isEmpty()) {
+            div.getTxtTainoKikanNinteiShinseisha().setDisabled(false);
+        } else {
+            div.getTxtTainoKikanNinteiShinseisha().setDisabled(true);
+        }
+
+        if (div.getChkNinteiYMD().getSelectedKeys() != null && !div.getChkNinteiYMD().getSelectedKeys().isEmpty()) {
+            div.getTxtTainoKikanNinteiYMD().setDisabled(false);
+            div.getTxtNinteiDateFrom().setDisabled(false);
+            div.getTxtNinteiYMDTo().setDisabled(false);
+        } else {
+
+            div.getTxtTainoKikanNinteiYMD().setDisabled(true);
+            div.getTxtNinteiDateFrom().setDisabled(true);
+            div.getTxtNinteiYMDTo().setDisabled(true);
+        }
+
+        if (div.getChkShokanShinseisha().getSelectedKeys() != null && !div.getChkShokanShinseisha().getSelectedKeys().isEmpty()) {
+            div.getTxtTainoKikanShokanShinseisha().setDisabled(false);
+        } else {
+            div.getTxtTainoKikanShokanShinseisha().setDisabled(true);
+        }
+
+        if (div.getChkShokanKetteiYMD().getSelectedKeys() != null && !div.getChkShokanKetteiYMD().getSelectedKeys().isEmpty()) {
+            div.getTxtTainoKikanShokanKettei().setDisabled(false);
+            div.getTxtShokanKetteiYMDFrom().setDisabled(false);
+            div.getTxtShokanKetteiYMDTo().setDisabled(false);
+        } else {
+            div.getTxtTainoKikanShokanKettei().setDisabled(true);
+            div.getTxtShokanKetteiYMDFrom().setDisabled(true);
+            div.getTxtShokanKetteiYMDTo().setDisabled(true);
+        }
         div.getRadHihokenshaAll().clearSelectedItem();
         return ResponseData.of(div).respond();
     }
