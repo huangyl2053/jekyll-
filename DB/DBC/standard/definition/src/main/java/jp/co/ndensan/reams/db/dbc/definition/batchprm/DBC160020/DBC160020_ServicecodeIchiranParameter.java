@@ -31,7 +31,6 @@ public class DBC160020_ServicecodeIchiranParameter extends BatchParameterBase {
     private static final String KEY_SERVICESHURUICODE = "サービス種類コード";
     private static final String KEY_SERVICEKOUMOKUCD = "サービス項目コード";
     private static final String KEY_SERVICEBUNRRUICDLIST = "サービス分類s";
-    private static final String KEY_TABLENAME = "表題";
     private static final String KEY_ISTYOUHYOUSHUTURYOKU = "is帳票で出力";
     private static final String KEY_ISCSVFAIRUSHUTURYOKU = "isＣＳＶファイルで出力";
 
@@ -49,8 +48,6 @@ public class DBC160020_ServicecodeIchiranParameter extends BatchParameterBase {
     private boolean is帳票で出力;
     @BatchParameter(key = KEY_ISCSVFAIRUSHUTURYOKU, name = "isＣＳＶファイルで出力")
     private boolean isＣＳＶファイルで出力;
-    @BatchParameter(key = KEY_TABLENAME, name = "表題")
-    private RString 表題;
     @BatchParameter(key = KEY_KOMOUKUMEI, name = "is項目名付加")
     private boolean is項目名付加;
     @BatchParameter(key = KEY_RENBANFUKA, name = "is連番付加")
