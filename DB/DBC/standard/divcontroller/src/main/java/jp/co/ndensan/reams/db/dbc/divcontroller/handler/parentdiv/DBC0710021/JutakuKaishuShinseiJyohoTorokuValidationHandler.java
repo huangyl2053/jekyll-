@@ -93,7 +93,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
             builder = builder.add(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力,
                     div.getCommHeadPanel().getTxtKyufuritsu());
         }
-        if (住宅改修内容チェックエラーメッセージ != null && !住宅改修内容チェックエラーメッセージ.isNullOrEmpty()) {
+        if (住宅改修内容チェックエラーメッセージ != null && !住宅改修内容チェックエラーメッセージ.isEmpty()) {
             if (メッセージ_1.equals(住宅改修内容チェックエラーメッセージ)) {
                 builder = builder.add(JutakuKaishuShinseiJyohoTorokuValidationMessages.メッセージ_1);
             } else if (メッセージ_2.equals(住宅改修内容チェックエラーメッセージ)) {
@@ -182,7 +182,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
                         .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力)
                         .messages());
             }
-            if (住宅改修内容チェックエラーメッセージ != null && !住宅改修内容チェックエラーメッセージ.isNullOrEmpty()) {
+            if (住宅改修内容チェックエラーメッセージ != null && !住宅改修内容チェックエラーメッセージ.isEmpty()) {
                 if (メッセージ_1.equals(住宅改修内容チェックエラーメッセージ)) {
                     messages.add(ValidateChain.validateStart(div)
                             .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.住宅改修内容一覧が妥当)

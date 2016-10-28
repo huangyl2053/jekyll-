@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -6,16 +6,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.IShokanbaraiketteiJohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * ShokanbaraiKetteiJyohoPanel のクラスファイル
+ * tabKozaJyoho のクラスファイル
  *
- * @reamsid_L DBC-0992-110 yangchenbing
+ * @reamsid_L DBC-0992-120 yebangqiang
  */
-public class ShokanbaraiKetteiJyohoPanelDiv extends Panel {
+public class tabKozaJyohoDiv extends TabPanel {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
@@ -24,8 +24,8 @@ public class ShokanbaraiKetteiJyohoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdShokanbaraiketteiJoho")
-    private ShokanbaraiketteiJohoDiv ccdShokanbaraiketteiJoho;
+    @JsonProperty("ccdShiharaiHohoJyoho")
+    private ShiharaiHohoJyohoDiv ccdShiharaiHohoJyoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,12 +34,12 @@ public class ShokanbaraiKetteiJyohoPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdShokanbaraiketteiJoho
-     * @return ccdShokanbaraiketteiJoho
+     * getccdShiharaiHohoJyoho
+     * @return ccdShiharaiHohoJyoho
      */
-    @JsonProperty("ccdShokanbaraiketteiJoho")
-    public IShokanbaraiketteiJohoDiv getCcdShokanbaraiketteiJoho() {
-        return ccdShokanbaraiketteiJoho;
+    @JsonProperty("ccdShiharaiHohoJyoho")
+    public IShiharaiHohoJyohoDiv getCcdShiharaiHohoJyoho() {
+        return ccdShiharaiHohoJyoho;
     }
 
     // </editor-fold>

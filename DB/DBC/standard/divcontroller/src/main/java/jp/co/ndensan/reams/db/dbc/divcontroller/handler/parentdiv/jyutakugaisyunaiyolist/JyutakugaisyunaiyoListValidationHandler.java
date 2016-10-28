@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -14,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -60,10 +63,15 @@ public class JyutakugaisyunaiyoListValidationHandler {
                     DbcErrorMessages.着工日不一致), div.getTxtTyakkoyotebi()));
             return validPairs;
         }
-        if (div.getDgGaisyuList().getDataSource().size() > 1
-                && !div.getDgGaisyuList().getDataSource().get(0).getTxtJutakuAddress().equals(div.getTxtJyusyo().getDomain().value())) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    DbcErrorMessages.対象住宅住所不一致), div.getTxtJyusyo()));
+        List<dgGaisyuList_Row> rowList = div.getDgGaisyuList().getDataSource();
+        if (rowList != null && rowList.isEmpty()) {
+            for (dgGaisyuList_Row row : rowList) {
+                if (!row.getRowState().equals(RowState.Deleted)
+                        && row.getTxtJutakuAddress().equals(div.getTxtJyusyo().getDomain().value())) {
+                    validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                            DbcErrorMessages.対象住宅住所不一致), div.getTxtJyusyo()));
+                }
+            }
         }
         return validPairs;
     }
