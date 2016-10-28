@@ -458,7 +458,7 @@ public class HonsanteiIdoKanendo {
                 return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100073.getReportId().value(), 出力順ID);
             }
         } else if (oneRS.equals(帳票_コンビニ期毎出力.get設定値())) {
-            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100063.getReportId().value(), 出力順ID);
+            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100076.getReportId().value(), 出力順ID);
         }
         return null;
     }
