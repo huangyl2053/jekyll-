@@ -178,6 +178,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
             return ResponseData.of(div).setState(申請審査);
         } else {
             div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.FALSE);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, Boolean.FALSE);
             return ResponseData.of(div).setState(申請審査);
         }
     }
