@@ -890,6 +890,11 @@
      
      <resultMap id="result_ShokanRenrakuhyoOutputReportEntity" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanrenrakuhyooutputreport.ShokanRenrakuhyoOutputReportEntity" autoMapping="true">
+        <id column="renban" />
+        <id column="hiHokenshaNo" />
+        <id column="serviceTeikyoYM" />
+        <id column="seiriNo" />
+        <id column="exRenban" />
         <result property="基本_事業者番号" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="基本_様式番号" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="識別番号_略称" column="ryakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
