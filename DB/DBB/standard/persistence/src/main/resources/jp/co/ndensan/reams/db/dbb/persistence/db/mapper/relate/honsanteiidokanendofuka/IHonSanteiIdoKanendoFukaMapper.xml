@@ -1426,7 +1426,14 @@
         "DbT2002Fuka"."rirekiNo" )  AS "DbT2002Fuka" 
         ON
         資格."hihokenshaNo" = "DbT2002Fuka"."dbT2002Fuka_hihokenshaNo"
-       
+        ORDER BY 
+            資格."hihokenshaNo",
+            資格."idoYMD",
+            資格."edaNo",
+            "DbT2002Fuka"."dbT2002Fuka_choteiNendo",
+            "DbT2002Fuka"."dbT2002Fuka_fukaNendo",
+            "DbT2002Fuka"."dbT2002Fuka_tsuchishoNo",
+            "DbT2002Fuka"."dbT2002Fuka_rirekiNo"
     </select>
     
       <resultMap id="resultMap_DbT1001AndFukaJohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.DbT1001AndFukaJohoEntity" autoMapping="true">
