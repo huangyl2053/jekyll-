@@ -60,8 +60,6 @@ public class KobetsuHyojiAreaDiv extends Panel {
     private Label lblShinsakaiIken;
     @JsonProperty("ddlShinsakaiIkenShurui")
     private DropDownList ddlShinsakaiIkenShurui;
-    @JsonProperty("btnShinsakiIkenTeikeibunGuide")
-    private ButtonDialog btnShinsakiIkenTeikeibunGuide;
     @JsonProperty("txtShinsakaiMemo")
     private TextBoxMultiLine txtShinsakaiMemo;
     @JsonProperty("txtShinsakaiIken")
@@ -74,6 +72,8 @@ public class KobetsuHyojiAreaDiv extends Panel {
     private TextBoxMultiLine txtIchijiHanteiKekkaHenkoRiyu;
     @JsonProperty("btnNinteiChosaJokyoShokai")
     private ButtonDialog btnNinteiChosaJokyoShokai;
+    @JsonProperty("btnShinsakiIkenTeikeibunGuide")
+    private ButtonDialog btnShinsakiIkenTeikeibunGuide;
     @JsonProperty("btnToroku")
     private Button btnToroku;
     @JsonProperty("btnIchigoHantei")
@@ -430,24 +430,6 @@ public class KobetsuHyojiAreaDiv extends Panel {
     }
 
     /*
-     * getbtnShinsakiIkenTeikeibunGuide
-     * @return btnShinsakiIkenTeikeibunGuide
-     */
-    @JsonProperty("btnShinsakiIkenTeikeibunGuide")
-    public ButtonDialog getBtnShinsakiIkenTeikeibunGuide() {
-        return btnShinsakiIkenTeikeibunGuide;
-    }
-
-    /*
-     * setbtnShinsakiIkenTeikeibunGuide
-     * @param btnShinsakiIkenTeikeibunGuide btnShinsakiIkenTeikeibunGuide
-     */
-    @JsonProperty("btnShinsakiIkenTeikeibunGuide")
-    public void setBtnShinsakiIkenTeikeibunGuide(ButtonDialog btnShinsakiIkenTeikeibunGuide) {
-        this.btnShinsakiIkenTeikeibunGuide = btnShinsakiIkenTeikeibunGuide;
-    }
-
-    /*
      * gettxtShinsakaiMemo
      * @return txtShinsakaiMemo
      */
@@ -553,6 +535,24 @@ public class KobetsuHyojiAreaDiv extends Panel {
     @JsonProperty("btnNinteiChosaJokyoShokai")
     public void setBtnNinteiChosaJokyoShokai(ButtonDialog btnNinteiChosaJokyoShokai) {
         this.btnNinteiChosaJokyoShokai = btnNinteiChosaJokyoShokai;
+    }
+
+    /*
+     * getbtnShinsakiIkenTeikeibunGuide
+     * @return btnShinsakiIkenTeikeibunGuide
+     */
+    @JsonProperty("btnShinsakiIkenTeikeibunGuide")
+    public ButtonDialog getBtnShinsakiIkenTeikeibunGuide() {
+        return btnShinsakiIkenTeikeibunGuide;
+    }
+
+    /*
+     * setbtnShinsakiIkenTeikeibunGuide
+     * @param btnShinsakiIkenTeikeibunGuide btnShinsakiIkenTeikeibunGuide
+     */
+    @JsonProperty("btnShinsakiIkenTeikeibunGuide")
+    public void setBtnShinsakiIkenTeikeibunGuide(ButtonDialog btnShinsakiIkenTeikeibunGuide) {
+        this.btnShinsakiIkenTeikeibunGuide = btnShinsakiIkenTeikeibunGuide;
     }
 
     /*

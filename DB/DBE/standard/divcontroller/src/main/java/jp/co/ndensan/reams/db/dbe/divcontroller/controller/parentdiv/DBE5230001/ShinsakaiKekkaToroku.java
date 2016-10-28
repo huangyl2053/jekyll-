@@ -588,15 +588,24 @@ public class ShinsakaiKekkaToroku {
      * @param div 介護認定審査会審査結果登録Div
      * @return ResponseData<ShinsakaiKekkaTorokuDiv>
      */
+    
     public ResponseData<ShinsakaiKekkaTorokuDiv> onBefore_btnIchigoHantei(ShinsakaiKekkaTorokuDiv div) {
-
+        if(!div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().isEmpty()){
+            if(div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().size()==1){
+                 ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().get(0).getShinseishoKanriNo());
+          
+        }else{
+                ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().getShinseishoKanriNo());
+        }
+        }
+       
         return ResponseData.of(div).respond();
     }
 
     private boolean 前排他キーのセット(RString 申請書管理番号) {
         LockingKey 排他キー = new LockingKey(申請書管理番号);
         return RealInitialLocker.tryGetLock(排他キー);
-    }
+    }   
 
     private void 前排他キーの解除(RString 申請書管理番号) {
         LockingKey 排他キー = new LockingKey(申請書管理番号);

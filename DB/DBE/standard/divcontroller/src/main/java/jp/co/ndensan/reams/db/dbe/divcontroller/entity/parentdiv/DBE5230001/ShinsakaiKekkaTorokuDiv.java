@@ -39,6 +39,8 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     private RString hdnSubGyomuCd;
     @JsonProperty("hdnGroupCd")
     private RString hdnGroupCd;
+    @JsonProperty("hdnShinseishoKanriNo")
+    private RString hdnShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -188,6 +190,24 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     @JsonProperty("hdnGroupCd")
     public void setHdnGroupCd(RString hdnGroupCd) {
         this.hdnGroupCd = hdnGroupCd;
+    }
+
+    /*
+     * gethdnShinseishoKanriNo
+     * @return hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public RString getHdnShinseishoKanriNo() {
+        return hdnShinseishoKanriNo;
+    }
+
+    /*
+     * sethdnShinseishoKanriNo
+     * @param hdnShinseishoKanriNo hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
+        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
     }
 
     /*
@@ -514,16 +534,6 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnShinsakiIkenTeikeibunGuide() {
-        return this.getKobetsuHyojiArea().getBtnShinsakiIkenTeikeibunGuide();
-    }
-
-    @JsonIgnore
-    public void  setBtnShinsakiIkenTeikeibunGuide(ButtonDialog btnShinsakiIkenTeikeibunGuide) {
-        this.getKobetsuHyojiArea().setBtnShinsakiIkenTeikeibunGuide(btnShinsakiIkenTeikeibunGuide);
-    }
-
-    @JsonIgnore
     public TextBoxMultiLine getTxtShinsakaiMemo() {
         return this.getKobetsuHyojiArea().getTxtShinsakaiMemo();
     }
@@ -581,6 +591,16 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     @JsonIgnore
     public void  setBtnNinteiChosaJokyoShokai(ButtonDialog btnNinteiChosaJokyoShokai) {
         this.getKobetsuHyojiArea().setBtnNinteiChosaJokyoShokai(btnNinteiChosaJokyoShokai);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnShinsakiIkenTeikeibunGuide() {
+        return this.getKobetsuHyojiArea().getBtnShinsakiIkenTeikeibunGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnShinsakiIkenTeikeibunGuide(ButtonDialog btnShinsakiIkenTeikeibunGuide) {
+        this.getKobetsuHyojiArea().setBtnShinsakiIkenTeikeibunGuide(btnShinsakiIkenTeikeibunGuide);
     }
 
     @JsonIgnore
