@@ -502,11 +502,11 @@ public enum ReportIdDBC {
     /**
      * 汎用リスト　高額合算申請書情報帳票ＩＤです。
      */
-    DBC701014(new ReportId("DBC701014_HanyoList_KogakuGassanShinseishoJoho"), new RString("汎用リスト　高額合算申請書情報")),
+    DBC701014(new ReportId("DBC701014_HanyoListKogakuGassanShinseishoJoho"), new RString("汎用リスト　高額合算申請書情報")),
     /**
      * 汎用リスト　高額合算自己負担額情報帳票ＩＤです。
      */
-    DBC701015(new ReportId("DBC701015_HanyoList_KogakuGassanJikoFutangaku"), new RString("汎用リスト　高額合算自己負担額情報")),
+    DBC701015(new ReportId("DBC701015_HanyoListKogakuGassanJikoFutangaku"), new RString("汎用リスト　高額合算自己負担額情報")),
     /**
      * 汎用リスト　基準収入額適用情報帳票ＩＤです。
      */

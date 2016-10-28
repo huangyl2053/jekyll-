@@ -368,9 +368,9 @@
         "ninteiYukoKikanKaishiYMD",
         "ninteiYukoKikanShuryoYMD"
         FROM rgdb."DbT4001JukyushaDaicho"
-        WHERE COALESCE("ninteiYukoKikanKaishiYMD",'00000000')<![CDATA[<=]]>#{処理年度_0801}
+        WHERE #{処理年度_0801}<![CDATA[<=]]>COALESCE("ninteiYukoKikanKaishiYMD",'00000000')
         AND ("ninteiYukoKikanShuryoYMD"='' OR "ninteiYukoKikanShuryoYMD" IS NULL 
-        OR #{処理年度_plus1_0731}<![CDATA[<=]]>"ninteiYukoKikanShuryoYMD")
+        OR "ninteiYukoKikanShuryoYMD"<![CDATA[<=]]>#{処理年度_plus1_0731})
         AND "logicalDeletedFlag" IS FALSE
         ) AS A
         INNER JOIN 

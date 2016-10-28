@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkokanriichira
 
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihokenshashoHakkoKanriIchiranhyoEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 被保険者証発行管理一覧表ヘッダEditorクラスです。
@@ -70,6 +74,11 @@ public class HihokenshashoHakkoKanriIchiranhyoEditor implements IHihokenshashoHa
         source.choikiCode = entity.getChoikiCode();
         source.gyoseikuCode = entity.getGyoseikuCode();
         source.kanaMeisho = entity.getKanaMeisho();
+
+        source.shikibetuCode = new ShikibetsuCode(entity.getListUpper_2());
+        if (!RString.isNullOrEmpty(entity.getListUpper_1())) {
+            source.shinseishoKanriNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), entity.getListUpper_1());
+        }
         return source;
     }
 }
