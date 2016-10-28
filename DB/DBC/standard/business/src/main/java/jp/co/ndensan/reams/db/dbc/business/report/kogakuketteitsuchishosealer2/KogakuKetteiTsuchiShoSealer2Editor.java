@@ -146,8 +146,8 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
 
         set窓口払と口座払(source);
 
-        if (支給.equals(帳票情報.get支給不支給決定区分()) && !窓口払い値.equals(帳票情報.get支払方法区分())
-                || 不支給.equals(帳票情報.get支給不支給決定区分())) {
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && 窓口払い値.equals(帳票情報.get支払方法区分())
+                && 帳票情報.get支給金額() != null && 帳票情報.get支給金額().compareTo(Decimal.ZERO) <= 0) {
             source.torikeshiMochimono1 = 半角アスタリスク;
             source.torikeshiMochimono2 = 半角アスタリスク;
             source.torikeshiShiharaibasho = 半角アスタリスク;
@@ -165,7 +165,9 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
         if (帳票情報.get被保険者番号() != null) {
             source.hihokenshaNo = 帳票情報.get被保険者番号().value();
         }
-        source.serviceYM = 年月編集(帳票情報.get提供年月());
+        if (帳票情報.get提供年月() != null) {
+            source.serviceYM = 帳票情報.get提供年月().toDateString();
+        }
 
         if (帳票情報.is自動償還対象フラグ()) {
             source.jidoshokanfg = 対象;
@@ -196,7 +198,9 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
 
     private void set種別と番号と口座名義(KogakuKetteiTsuchiShoSealer2Source source) {
 
-        if (支給.equals(帳票情報.get支給不支給決定区分()) && !窓口払い値.equals(帳票情報.get支払方法区分())) {
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && !窓口払い値.equals(帳票情報.get支払方法区分())
+                && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
+
             source.kouzaMeigi = 帳票情報.get口座名義人();
 
             if (!帳票情報.isゆうちょ銀行フラグ()) {
@@ -211,7 +215,8 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
     }
 
     private void set金融機関(KogakuKetteiTsuchiShoSealer2Source source) {
-        if (支給.equals(帳票情報.get支給不支給決定区分()) && !支払方法区分ONE.equals(帳票情報.get支払方法区分())) {
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && !支払方法区分ONE.equals(帳票情報.get支払方法区分())
+                && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
             source.bankName = 帳票情報.get金融機関上段();
             source.branchBankName = 帳票情報.get金融機関下段();
         }
@@ -219,13 +224,16 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
 
     private void setTitle(KogakuKetteiTsuchiShoSealer2Source source) {
         if (支給.equals(帳票情報.get支給不支給決定区分())) {
-            if (窓口払い値.equals(帳票情報.get支払方法区分())) {
+            if (窓口払い値.equals(帳票情報.get支払方法区分())
+                    && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
                 source.shumokuTitle = 口座種別;
                 source.bangoTitle = 口座番号;
-            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && 金融機関コード.equals(帳票情報.get金融機関コード())) {
+            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && 金融機関コード.equals(帳票情報.get金融機関コード())
+                    && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
                 source.shumokuTitle = 通帳記号;
                 source.bangoTitle = 通帳番号;
-            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && !金融機関コード.equals(帳票情報.get金融機関コード())) {
+            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && !金融機関コード.equals(帳票情報.get金融機関コード())
+                    && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
                 source.shumokuTitle = 口座種別;
                 source.bangoTitle = 口座番号;
             }
@@ -239,7 +247,8 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
     }
 
     private void set持ちものと支払場所と期間(KogakuKetteiTsuchiShoSealer2Source source) {
-        if (支給.equals(帳票情報.get支給不支給決定区分()) && 支払方法区分ONE.equals(帳票情報.get支払方法区分())) {
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && 支払方法区分ONE.equals(帳票情報.get支払方法区分())
+                && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
             source.mochimono = 帳票情報.get持ちもの();
             source.shiharaiBasho = 帳票情報.get支払場所();
             RString 開始週間 = 週間編集(帳票情報.get支払期間開始年月日());
@@ -260,12 +269,14 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
 
         if (帳票情報.get支払方法区分() != null) {
 
-            if (支払方法区分コードONE.equals(ShiharaiHohoKubun.toValue(帳票情報.get支払方法区分()).getコード())) {
+            if (支払方法区分コードONE.equals(ShiharaiHohoKubun.toValue(帳票情報.get支払方法区分()).getコード())
+                    && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
                 source.torikeshi1 = RString.EMPTY;
             } else {
                 source.torikeshi1 = 半角アスタリスク2;
             }
-            if (支払方法区分コードTWO.equals(ShiharaiHohoKubun.toValue(帳票情報.get支払方法区分()).getコード())) {
+            if (支払方法区分コードTWO.equals(ShiharaiHohoKubun.toValue(帳票情報.get支払方法区分()).getコード())
+                    && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
                 source.torikeshi2 = RString.EMPTY;
             } else {
                 source.torikeshi2 = 半角アスタリスク2;
