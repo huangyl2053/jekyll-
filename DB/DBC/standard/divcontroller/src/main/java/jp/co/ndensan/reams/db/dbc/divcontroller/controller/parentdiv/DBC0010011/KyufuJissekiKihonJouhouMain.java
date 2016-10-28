@@ -152,7 +152,7 @@ public class KyufuJissekiKihonJouhouMain {
      */
     public ResponseData<KyufuJissekiKihonJouhouMainDiv> onClick_Zengetsu(KyufuJissekiKihonJouhouMainDiv div) {
         FlexibleYearMonth サービス提供年月
-                = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
+                = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         KyufuJissekiPrmBusiness 給付実績情報照会情報
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         FlexibleYearMonth 今提供年月;
@@ -187,7 +187,7 @@ public class KyufuJissekiKihonJouhouMain {
      */
     public ResponseData<KyufuJissekiKihonJouhouMainDiv> onClick_Jigetsu(KyufuJissekiKihonJouhouMainDiv div) {
         FlexibleYearMonth サービス提供年月
-                = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
+                = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         KyufuJissekiPrmBusiness 給付実績情報照会情報
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         FlexibleYearMonth 今提供年月;
