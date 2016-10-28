@@ -263,10 +263,10 @@ public class DvKogakuServiceJohoHandler {
                 .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedKey());
         batchparam.setKiyuKikanCode(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
                 .getKinyuKikanCode() == null ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().value());
+                        .getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().value());
         batchparam.setKiyuKikanName(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
                 .get金融機関() == null ? RString.EMPTY : div.getDvKogakuChushutsuJoken()
-                .getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関().get金融機関名称());
+                        .getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関().get金融機関名称());
         batchparam.setReamsLoginId(ControlDataHolder.getUserId());
         batchParamterHandleParentAdd(batchparam);
         batchParamterHandleSubAdd(batchparam);
@@ -324,6 +324,12 @@ public class DvKogakuServiceJohoHandler {
             pairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     UrErrorMessages.終了日が開始日以前),
                     div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKetteiJohoUketoriYM()));
+            return pairs;
+        }
+
+        if (div.getCcdKogakuShutsuryokujun().get出力順ID() == null) {
+            pairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.出力順序を指定)));
             return pairs;
         }
         return pairs;
@@ -409,7 +415,7 @@ public class DvKogakuServiceJohoHandler {
         batchparam.setShutsuryokuju(div.getCcdKogakuShutsuryokujun().get出力順ID());
         batchparam.setShutsuryokuTomoku(div.getCcdKogakuShutsuryokuKomoku().get出力項目ID()
                 .isEmpty() ? RString.EMPTY : div
-                .getCcdKogakuShutsuryokuKomoku().get出力項目ID());
+                        .getCcdKogakuShutsuryokuKomoku().get出力項目ID());
         batchparam.setTomokumeFuka(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(項目名));
         batchparam.setRebanFuka(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(連番));
         batchparam.setHizukeHeshu(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(日付スラッシュ));
