@@ -50,7 +50,7 @@ public class IdoTblTmpEntity extends DbTableEntityBase<IdoTblTmpEntity> implemen
     private RString みなし要介護状態区分コード;
     private RString 要介護状態区分コード;
     private FlexibleDate 認定有効期間開始年月日;
-    private FlexibleDate 認定有効期間終了年月日;
+    private RString 認定有効期間終了年月日;
     private RString 居宅サービス計画作成区分コード;
     private RString 居宅介護支援事業所番号;
     private RString 居宅サービス計画適用開始年月日;
@@ -58,7 +58,7 @@ public class IdoTblTmpEntity extends DbTableEntityBase<IdoTblTmpEntity> implemen
     private int 訪問通所サービス支給限度基準額;
     private FlexibleDate 訪問通所サービス上限管理適用期間開始年月日;
     private RString 訪問通所サービス上限管理適用期間終了年月日;
-    private RString 短期入所サービス支給限度基準額;
+    private int 短期入所サービス支給限度基準額;
     private FlexibleDate 短期入所サービス上限管理適用期間開始年月日;
     private FlexibleDate 短期入所サービス上限管理適用期間終了年月日;
     private boolean 公費負担上限額減額有フラグ;
