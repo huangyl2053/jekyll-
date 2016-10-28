@@ -7,9 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.IJyutakugaisyunaiyoListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
@@ -23,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 
@@ -33,37 +31,31 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
  */
 public class JutakuKaishuShinseiContentsDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnShowJizenShinsei")
-    private ButtonDialog btnShowJizenShinsei;
     @JsonProperty("txtJutakuOwner")
     private TextBox txtJutakuOwner;
     @JsonProperty("txtRelationWithHihokensha")
     private TextBox txtRelationWithHihokensha;
+    @JsonProperty("btnShowJizenShinsei")
+    private Button btnShowJizenShinsei;
     @JsonProperty("txtRyoshuYMD")
     private TextBoxDate txtRyoshuYMD;
     @JsonProperty("ddlHokensha")
     private DropDownList ddlHokensha;
     @JsonProperty("chkKokubo")
     private CheckBoxList chkKokubo;
-    @JsonProperty("JutakuKaishuShinseiResetInfo")
-    private JutakuKaishuShinseiResetInfoDiv JutakuKaishuShinseiResetInfo;
-    @JsonProperty("shinsaKekkaPanel")
-    private shinsaKekkaPanelDiv shinsaKekkaPanel;
     @JsonProperty("ShinseishaInfo")
     private ShinseishaInfoDiv ShinseishaInfo;
     @JsonProperty("JutakuKaishuShinseiReason")
     private JutakuKaishuShinseiReasonDiv JutakuKaishuShinseiReason;
-    @JsonProperty("shiharaiHohoJyohoPanle")
-    private shiharaiHohoJyohoPanleDiv shiharaiHohoJyohoPanle;
-    @JsonProperty("ccdJutakugaisyunaiyoList")
-    private JyutakugaisyunaiyoListDiv ccdJutakugaisyunaiyoList;
+    @JsonProperty("shinsaKekkaPanel")
+    private shinsaKekkaPanelDiv shinsaKekkaPanel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -71,24 +63,6 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getbtnShowJizenShinsei
-     * @return btnShowJizenShinsei
-     */
-    @JsonProperty("btnShowJizenShinsei")
-    public ButtonDialog getBtnShowJizenShinsei() {
-        return btnShowJizenShinsei;
-    }
-
-    /*
-     * setbtnShowJizenShinsei
-     * @param btnShowJizenShinsei btnShowJizenShinsei
-     */
-    @JsonProperty("btnShowJizenShinsei")
-    public void setBtnShowJizenShinsei(ButtonDialog btnShowJizenShinsei) {
-        this.btnShowJizenShinsei = btnShowJizenShinsei;
-    }
-
     /*
      * gettxtJutakuOwner
      * @return txtJutakuOwner
@@ -123,6 +97,24 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
     @JsonProperty("txtRelationWithHihokensha")
     public void setTxtRelationWithHihokensha(TextBox txtRelationWithHihokensha) {
         this.txtRelationWithHihokensha = txtRelationWithHihokensha;
+    }
+
+    /*
+     * getbtnShowJizenShinsei
+     * @return btnShowJizenShinsei
+     */
+    @JsonProperty("btnShowJizenShinsei")
+    public Button getBtnShowJizenShinsei() {
+        return btnShowJizenShinsei;
+    }
+
+    /*
+     * setbtnShowJizenShinsei
+     * @param btnShowJizenShinsei btnShowJizenShinsei
+     */
+    @JsonProperty("btnShowJizenShinsei")
+    public void setBtnShowJizenShinsei(Button btnShowJizenShinsei) {
+        this.btnShowJizenShinsei = btnShowJizenShinsei;
     }
 
     /*
@@ -180,42 +172,6 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
     }
 
     /*
-     * getJutakuKaishuShinseiResetInfo
-     * @return JutakuKaishuShinseiResetInfo
-     */
-    @JsonProperty("JutakuKaishuShinseiResetInfo")
-    public JutakuKaishuShinseiResetInfoDiv getJutakuKaishuShinseiResetInfo() {
-        return JutakuKaishuShinseiResetInfo;
-    }
-
-    /*
-     * setJutakuKaishuShinseiResetInfo
-     * @param JutakuKaishuShinseiResetInfo JutakuKaishuShinseiResetInfo
-     */
-    @JsonProperty("JutakuKaishuShinseiResetInfo")
-    public void setJutakuKaishuShinseiResetInfo(JutakuKaishuShinseiResetInfoDiv JutakuKaishuShinseiResetInfo) {
-        this.JutakuKaishuShinseiResetInfo = JutakuKaishuShinseiResetInfo;
-    }
-
-    /*
-     * getshinsaKekkaPanel
-     * @return shinsaKekkaPanel
-     */
-    @JsonProperty("shinsaKekkaPanel")
-    public shinsaKekkaPanelDiv getShinsaKekkaPanel() {
-        return shinsaKekkaPanel;
-    }
-
-    /*
-     * setshinsaKekkaPanel
-     * @param shinsaKekkaPanel shinsaKekkaPanel
-     */
-    @JsonProperty("shinsaKekkaPanel")
-    public void setShinsaKekkaPanel(shinsaKekkaPanelDiv shinsaKekkaPanel) {
-        this.shinsaKekkaPanel = shinsaKekkaPanel;
-    }
-
-    /*
      * getShinseishaInfo
      * @return ShinseishaInfo
      */
@@ -252,75 +208,26 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
     }
 
     /*
-     * getshiharaiHohoJyohoPanle
-     * @return shiharaiHohoJyohoPanle
+     * getshinsaKekkaPanel
+     * @return shinsaKekkaPanel
      */
-    @JsonProperty("shiharaiHohoJyohoPanle")
-    public shiharaiHohoJyohoPanleDiv getShiharaiHohoJyohoPanle() {
-        return shiharaiHohoJyohoPanle;
+    @JsonProperty("shinsaKekkaPanel")
+    public shinsaKekkaPanelDiv getShinsaKekkaPanel() {
+        return shinsaKekkaPanel;
     }
 
     /*
-     * setshiharaiHohoJyohoPanle
-     * @param shiharaiHohoJyohoPanle shiharaiHohoJyohoPanle
+     * setshinsaKekkaPanel
+     * @param shinsaKekkaPanel shinsaKekkaPanel
      */
-    @JsonProperty("shiharaiHohoJyohoPanle")
-    public void setShiharaiHohoJyohoPanle(shiharaiHohoJyohoPanleDiv shiharaiHohoJyohoPanle) {
-        this.shiharaiHohoJyohoPanle = shiharaiHohoJyohoPanle;
-    }
-
-    /*
-     * getccdJutakugaisyunaiyoList
-     * @return ccdJutakugaisyunaiyoList
-     */
-    @JsonProperty("ccdJutakugaisyunaiyoList")
-    public IJyutakugaisyunaiyoListDiv getCcdJutakugaisyunaiyoList() {
-        return ccdJutakugaisyunaiyoList;
+    @JsonProperty("shinsaKekkaPanel")
+    public void setShinsaKekkaPanel(shinsaKekkaPanelDiv shinsaKekkaPanel) {
+        this.shinsaKekkaPanel = shinsaKekkaPanel;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public Space getTemp1Space() {
-        return this.getShinsaKekkaPanel().getTemp1Space();
-    }
-
-    @JsonIgnore
-    public void setTemp1Space(Space temp1Space) {
-        this.getShinsaKekkaPanel().setTemp1Space(temp1Space);
-    }
-
-    @JsonIgnore
-    public Label getLblShinseiNaiyoyo() {
-        return this.getShinsaKekkaPanel().getLblShinseiNaiyoyo();
-    }
-
-    @JsonIgnore
-    public void setLblShinseiNaiyoyo(Label lblShinseiNaiyoyo) {
-        this.getShinsaKekkaPanel().setLblShinseiNaiyoyo(lblShinseiNaiyoyo);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadShinseiNaiyoyo() {
-        return this.getShinsaKekkaPanel().getRadShinseiNaiyoyo();
-    }
-
-    @JsonIgnore
-    public void setRadShinseiNaiyoyo(RadioButton radShinseiNaiyoyo) {
-        this.getShinsaKekkaPanel().setRadShinseiNaiyoyo(radShinseiNaiyoyo);
-    }
-
-    @JsonIgnore
-    public Space getTemp2Space() {
-        return this.getShinsaKekkaPanel().getTemp2Space();
-    }
-
-    @JsonIgnore
-    public void setTemp2Space(Space temp2Space) {
-        this.getShinsaKekkaPanel().setTemp2Space(temp2Space);
-    }
-
     @JsonIgnore
     public TextBoxDate getTxtShinseiYMD() {
         return this.getShinseishaInfo().getTxtShinseiYMD();
@@ -372,6 +279,26 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxAtenaMeisho getTxtJigyoshaName() {
+        return this.getShinseishaInfo().getTxtJigyoshaName();
+    }
+
+    @JsonIgnore
+    public void setTxtJigyoshaName(TextBoxAtenaMeisho txtJigyoshaName) {
+        this.getShinseishaInfo().setTxtJigyoshaName(txtJigyoshaName);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShinseishaName() {
+        return this.getShinseishaInfo().getTxtShinseishaName();
+    }
+
+    @JsonIgnore
+    public void setTxtShinseishaName(TextBox txtShinseishaName) {
+        this.getShinseishaInfo().setTxtShinseishaName(txtShinseishaName);
+    }
+
+    @JsonIgnore
     public Button getBtnHonninJohoCopy() {
         return this.getShinseishaInfo().getBtnHonninJohoCopy();
     }
@@ -389,16 +316,6 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
     @JsonIgnore
     public void setTxtShinseishaNameKana(TextBox txtShinseishaNameKana) {
         this.getShinseishaInfo().setTxtShinseishaNameKana(txtShinseishaNameKana);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShinseishaName() {
-        return this.getShinseishaInfo().getTxtShinseishaName();
-    }
-
-    @JsonIgnore
-    public void setTxtShinseishaName(TextBox txtShinseishaName) {
-        this.getShinseishaInfo().setTxtShinseishaName(txtShinseishaName);
     }
 
     @JsonIgnore
@@ -442,8 +359,43 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
     }
 
     @JsonIgnore
-    public IShiharaiHohoJyohoDiv getCcdShiharaiHohoJyoho() {
-        return this.getShiharaiHohoJyohoPanle().getCcdShiharaiHohoJyoho();
+    public Space getTemp1Space() {
+        return this.getShinsaKekkaPanel().getTemp1Space();
+    }
+
+    @JsonIgnore
+    public void setTemp1Space(Space temp1Space) {
+        this.getShinsaKekkaPanel().setTemp1Space(temp1Space);
+    }
+
+    @JsonIgnore
+    public Label getLblShinseiNaiyoyo() {
+        return this.getShinsaKekkaPanel().getLblShinseiNaiyoyo();
+    }
+
+    @JsonIgnore
+    public void setLblShinseiNaiyoyo(Label lblShinseiNaiyoyo) {
+        this.getShinsaKekkaPanel().setLblShinseiNaiyoyo(lblShinseiNaiyoyo);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadShinseiNaiyoyo() {
+        return this.getShinsaKekkaPanel().getRadShinseiNaiyoyo();
+    }
+
+    @JsonIgnore
+    public void setRadShinseiNaiyoyo(RadioButton radShinseiNaiyoyo) {
+        this.getShinsaKekkaPanel().setRadShinseiNaiyoyo(radShinseiNaiyoyo);
+    }
+
+    @JsonIgnore
+    public Space getTemp2Space() {
+        return this.getShinsaKekkaPanel().getTemp2Space();
+    }
+
+    @JsonIgnore
+    public void setTemp2Space(Space temp2Space) {
+        this.getShinsaKekkaPanel().setTemp2Space(temp2Space);
     }
 
     // </editor-fold>
