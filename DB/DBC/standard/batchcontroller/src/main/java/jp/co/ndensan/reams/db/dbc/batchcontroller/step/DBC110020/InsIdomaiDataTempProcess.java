@@ -84,6 +84,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
     private static final Code コート_2 = new Code("2");
     private static final Code コート_3 = new Code("3");
     private static final Code コート_4 = new Code("4");
+    private static final Code コート_5 = new Code("5");
     private static final Code コート_6 = new Code("6");
     private static final Code コート_12 = new Code("12");
     private static final Code コート_13 = new Code("13");
@@ -132,7 +133,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         }
         FlexibleYearMonth 処理年月 = new FlexibleYearMonth(processParameter.get処理年月().toDateString());
         List<DbT4001JukyushaDaichoEntity> 受給者台帳List = get受給者台帳();
-        受給者台帳処理(受給者台帳List, 処理年月);
+        List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List = get総合事業対象者();
+        受給者台帳処理(受給者台帳List, 処理年月, 総合事業対象者List);
         List<DbT3100NijiYoboJigyoTaishoshaEntity> 二次予防List = get二次予防();
         二次予防処理(二次予防List, 処理年月);
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = get被保険者台帳();
@@ -143,7 +145,6 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         List<DbT4021ShiharaiHohoHenkoEntity> 給付額減額List = get支払方法(給付額減額);
         List<TokuteiNyusyoshaInfoEntity> 特定入所者List = get特定入所者();
         List<ShafukugemmenEntity> 社福減免List = get社福減免();
-        List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List = get総合事業対象者();
         List<JushochitokureiInfoEntity> 住所地特例List = get住所地特例();
         PSMInfoEntity 宛名情報 = get宛名();
         List<DbT7124KokiKoreishaInfoEntity> 後期高齢者情報List = get後期高齢者情報();
@@ -153,13 +154,15 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         異動一時Map.clear();
     }
 
-    private void 受給者台帳処理(List<DbT4001JukyushaDaichoEntity> 受給者台帳List, FlexibleYearMonth 処理年月) {
+    private void 受給者台帳処理(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
+            FlexibleYearMonth 処理年月, List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List) {
         boolean 無効データFlag = false;
         異動一時2By受給者台帳パターン1Check(受給者台帳List, 処理年月);
         異動一時2By受給者台帳パターン2Check(受給者台帳List, 処理年月);
         異動一時2By受給者台帳パターン3Check(受給者台帳List, 処理年月, 無効データFlag);
         異動一時2By受給者台帳パターン4Check(受給者台帳List, 処理年月, 無効データFlag);
         異動一時2By受給者台帳パターン5Check(受給者台帳List, 処理年月, 無効データFlag);
+        異動一時2By総合事業対象者パターン5Check(受給者台帳List, 総合事業対象者List, 処理年月, 無効データFlag);
     }
 
     private void 二次予防処理(List<DbT3100NijiYoboJigyoTaishoshaEntity> 二次予防List, FlexibleYearMonth 処理年月) {
@@ -251,10 +254,8 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
             if (!コート_2.equals(受給者台帳.getYukoMukoKubun())) {
                 continue;
             }
-            if (!isBeforeYearMonth(受給者台帳.getNinteiYMD(), 処理年月)) {
-                continue;
-            }
-            if (!コート_01.equals(受給者台帳.getYokaigoJotaiKubunCode())) {
+            if (コート_4.equals(受給者台帳.getJukyuShinseiJiyu())
+                    || コート_5.equals(受給者台帳.getJukyuShinseiJiyu())) {
                 continue;
             }
             if (前後履歴の有効Check(受給者台帳List, 受給者台帳)) {
@@ -281,6 +282,39 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
                 break;
             }
             if (!コート_2.equals(受給者台帳.getYukoMukoKubun())) {
+                continue;
+            }
+            if (!isBeforeYearMonth(受給者台帳.getSoshitsuYMD(), 処理年月)) {
+                continue;
+            }
+            if (!コート_14.equals(受給者台帳.getDataKubun())) {
+                continue;
+            }
+            if (前後履歴の有効Check(受給者台帳List, 受給者台帳)) {
+                IdoTblTmpEntity insertEntity;
+                FlexibleDate 異動年月日 = 受給者台帳.getSoshitsuYMD();
+                if (異動一時Map.containsKey(異動年月日)) {
+                    insertEntity = 異動一時Map.get(異動年月日);
+                } else {
+                    insertEntity = new IdoTblTmpEntity();
+                }
+                set異動一時2By受給者台帳パターン3(insertEntity, 受給者台帳, 異動年月日);
+                異動一時Map.put(異動年月日, insertEntity);
+            }
+        }
+    }
+
+    private void 異動一時2By総合事業対象者パターン5Check(List<DbT4001JukyushaDaichoEntity> 受給者台帳List,
+            List<DbT3105SogoJigyoTaishoshaEntity> 総合事業対象者List,
+            FlexibleYearMonth 処理年月, boolean 無効データFlag) {
+        if (無効データFlag) {
+            return;
+        }
+        for (DbT4001JukyushaDaichoEntity 受給者台帳 : 受給者台帳List) {
+            if (無効データFlag) {
+                break;
+            }
+            if (!コート_0.equals(受給者台帳.getYukoMukoKubun())) {
                 continue;
             }
             if (!isBeforeYearMonth(受給者台帳.getSoshitsuYMD(), 処理年月)) {

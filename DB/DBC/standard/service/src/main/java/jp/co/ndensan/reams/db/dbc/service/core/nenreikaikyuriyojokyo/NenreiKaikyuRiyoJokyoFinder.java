@@ -147,12 +147,12 @@ public class NenreiKaikyuRiyoJokyoFinder {
             集計番号 = entityList.get(0).getShuukeibangou();
         }
         for (int i = 0; i < entityList.size(); i++) {
+            edit対象レコード(updateParEntityList, entityList.get(i), mapper);
             if (!集計番号.equals(entityList.get(i).getShuukeibangou())) {
                 updateDB出力出力用一時TBL(updateParEntityList, mapper);
                 updateParEntityList = createntitylist();
                 集計番号 = entityList.get(i).getShuukeibangou();
             }
-            edit対象レコード(updateParEntityList, entityList.get(i), mapper);
         }
     }
 

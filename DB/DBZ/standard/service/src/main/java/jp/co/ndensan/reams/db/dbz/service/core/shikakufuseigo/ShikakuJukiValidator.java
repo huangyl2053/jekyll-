@@ -100,7 +100,6 @@ public class ShikakuJukiValidator {
             } else if (資格の情報.get資格喪失年月日().compareTo(個人情報.get消除異動年月日()) != 0) {
                 不整合理由 = FuseigoRiyu.資格喪失日_住基不一致;
             }
-
         }
         if (JukiIdoJiyu.転出.get異動事由コード().equals(個人情報.get消除事由().get異動事由コード())) {
             不整合理由 = is転出の判定(資格の情報.get適用年月日(), 資格の情報.get解除年月日(),
@@ -299,7 +298,8 @@ public class ShikakuJukiValidator {
 
     private void setMsg(Map<RString, DbzErrorMessages> retMap, IKojin 個人情報, FuseigoRiyu 不整合理由, FlexibleDate 資格喪失日) {
         if (不整合理由 == FuseigoRiyu.資格取得者_転出者) {
-            if (isNullOrEmpty(個人情報.get転出確定().get異動年月日()) && 資格喪失日.compareTo(個人情報.get転出予定().get異動年月日()) != 0) {
+            if (isNullOrEmpty(個人情報.get転出確定().get異動年月日())
+                    && 資格喪失日.compareTo(個人情報.get転出予定().get異動年月日().plusDay(1)) != 0) {
                 retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出予定日);
             } else if (個人情報.get転出確定().get異動年月日().compareTo(資格喪失日) != 0) {
                 retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出確定日);
@@ -361,7 +361,7 @@ public class ShikakuJukiValidator {
                 不整合理由 = FuseigoRiyu.資格喪失日_転出確定者;
             }
             if (isNullOrEmpty(転出確定)
-                    && 資格喪失年月日.compareTo(転出予定) != 0) {
+                    && 資格喪失年月日.compareTo(転出予定.plusDay(1)) != 0) {
                 不整合理由 = FuseigoRiyu.資格喪失日_転出予定者;
             }
         }

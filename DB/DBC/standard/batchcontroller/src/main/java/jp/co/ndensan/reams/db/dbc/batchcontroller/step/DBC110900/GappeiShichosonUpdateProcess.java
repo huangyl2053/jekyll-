@@ -40,9 +40,9 @@ public class GappeiShichosonUpdateProcess extends BatchProcessBase<KakohorenJyoh
     private static final RString 変換対象フラグ_TRUE = new RString("1");
     private HihokenshaTempUpdateProcessParameter parameter;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 被保険者一時TBL;
+    private BatchEntityCreatedTempTableWriter 被保険者一時TBL;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 処理結果リスト一時TBL;
+    private BatchEntityCreatedTempTableWriter 処理結果リスト一時TBL;
     private RString 保険者番号 = RString.EMPTY;
     private RString 変換対象フラグ = new RString("0");
 

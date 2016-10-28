@@ -32,7 +32,7 @@
             SELECT 1
             FROM "torigaDataTemp" AS T1
             WHERE T1."被保険者番号" = 被保険者番号 AND
-            T1."年月" = サービス提供年月
+            T1."年月" = D2."serviceTeikyoYM"
         )
     </select>
     
@@ -92,7 +92,20 @@
     
     <select resultOrdered="true" id="利用者負担減額情報の取得" resultMap="利用者負担減額情報の取得_resultMap" fetchSize="500">
         SELECT
-        F1."年度",
+        F1."年度" AS 年度,
+        F1."被保険者番号" AS 被保険者番号,
+        F1."給付率01" AS 給付率01,
+        F1."給付率02" AS 給付率02,
+        F1."給付率03" AS 給付率03,
+        F1."給付率04" AS 給付率04,
+        F1."給付率05" AS 給付率05,
+        F1."給付率06" AS 給付率06,
+        F1."給付率07" AS 給付率07,
+        F1."給付率08" AS 給付率08,
+        F1."給付率09" AS 給付率09,
+        F1."給付率10" AS 給付率10,
+        F1."給付率11" AS 給付率11,
+        F1."給付率12" AS 給付率12,
         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.allColumns_DbT4014RiyoshaFutangakuGengaku" />
         FROM
         "futanWariaiTemp" F1
@@ -113,7 +126,20 @@
     
     <select resultOrdered="true" id="get支払方法変更" resultMap="支払方法変更_resultMap" fetchSize="500">
         SELECT
-        F1."年度",
+        F1."年度" AS 年度,
+        F1."被保険者番号" AS 被保険者番号,
+        F1."給付率01" AS 給付率01,
+        F1."給付率02" AS 給付率02,
+        F1."給付率03" AS 給付率03,
+        F1."給付率04" AS 給付率04,
+        F1."給付率05" AS 給付率05,
+        F1."給付率06" AS 給付率06,
+        F1."給付率07" AS 給付率07,
+        F1."給付率08" AS 給付率08,
+        F1."給付率09" AS 給付率09,
+        F1."給付率10" AS 給付率10,
+        F1."給付率11" AS 給付率11,
+        F1."給付率12" AS 給付率12,
         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.allColumns_DbT4021ShiharaiHohoHenko" />
         FROM
         "futanWariaiTemp" F1
@@ -361,12 +387,16 @@
     </sql>
     
     <resultMap  id="支払方法変更_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.UpdShiharaihohoHenkoTempResultEntity" autoMapping="true">
-        <result property="年度" column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <association property="負担割合TempEntity" resultMap="負担割合Temp_resultMap"/>
         <association property="支払方法変更" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity"/>
     </resultMap>
     
     <resultMap  id="利用者負担減額情報の取得_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.UpdRiyoshaFutangengakuTempResultEntity" autoMapping="true">
-        <result property="年度" column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <association property="負担割合TempEntity" resultMap="負担割合Temp_resultMap"/>
         <association property="利用者負担減額" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.ResultMap_DbT4014RiyoshaFutangakuGengakuEntity"/>
     </resultMap>
     
@@ -405,5 +435,22 @@
         <result property="koseiRiyu" column="koseiRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="setaiCd" column="setaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <result property="meisailogicalDeletedFlag" column="meisailogicalDeletedFlag" />
+    </resultMap>
+    
+    <resultMap id="負担割合Temp_resultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.FutanWariaiTempEntity" autoMapping="true">
+        <id property="年度" column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="給付率01" column="給付率01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率02" column="給付率02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率03" column="給付率03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率04" column="給付率04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率05" column="給付率05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率06" column="給付率06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率07" column="給付率07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率08" column="給付率08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率09" column="給付率09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率10" column="給付率10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率11" column="給付率11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率12" column="給付率12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 </mapper>

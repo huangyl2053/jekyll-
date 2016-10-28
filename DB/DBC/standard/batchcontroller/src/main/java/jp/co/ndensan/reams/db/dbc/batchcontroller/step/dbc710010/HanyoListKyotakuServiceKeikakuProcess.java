@@ -125,7 +125,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         parameter.set宛名検索条件(searchKey);
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
         IOutputOrder outputOrder = null;
-        if (parameter.get改頁出力順ID() != null) {
+        if (parameter.get改頁出力順ID() != null && !parameter.get改頁出力順ID().isEmpty()) {
             outputOrder = fider.get出力順(SubGyomuCode.DBC介護給付, parameter.get帳票ID(),
                     Long.valueOf(parameter.get改頁出力順ID().toString()));
         }
