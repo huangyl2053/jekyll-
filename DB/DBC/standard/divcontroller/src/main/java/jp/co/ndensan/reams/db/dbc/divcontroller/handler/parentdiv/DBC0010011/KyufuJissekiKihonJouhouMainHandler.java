@@ -188,6 +188,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
         }
         set合計エリア閉();
         set月ボタン(サービス提供年月リスト, サービス提供年月);
+        set事業者ボタン(給付実績ヘッダ情報２, 整理番号, サービス提供年月);
     }
 
     /**
@@ -216,6 +217,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
         }
         set合計エリア閉();
         set月ボタン(サービス提供年月リスト, サービス提供年月);
+        set事業者ボタン(給付実績ヘッダ情報２, 整理番号, サービス提供年月);
     }
 
     private void set各ボタン活性非活性設定(ShikibetsuNoKanri 識別番号管理データ) {
