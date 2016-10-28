@@ -191,7 +191,7 @@ public class DbT7112ShokanShuruiShikyuGendoGakuDac implements
                 where(and(
                                 eq(serviceShuruiCode, サービス種類コード),
                                 or(and(
-                                                isNULL(tekiyoShuryoYM),
+                                                or(isNULL(tekiyoShuryoYM), eq(tekiyoShuryoYM, RString.EMPTY)),
                                                 leq(tekiyoKaishiYM, サービス提供年月)),
                                         and(
                                                 leq(tekiyoKaishiYM, サービス提供年月),
