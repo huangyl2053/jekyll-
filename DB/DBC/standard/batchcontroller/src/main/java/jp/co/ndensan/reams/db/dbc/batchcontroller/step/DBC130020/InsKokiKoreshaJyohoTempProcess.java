@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130020;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130020.UpdTorikomiKokuhoJyohoTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.KokiKoreshaJyohoResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130020.TorikomiKokiKoreshaJyohoImportEntity;
-import jp.co.ndensan.reams.db.dbd.definition.core.hikazeinenkin.TorokuKubun;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -67,7 +66,8 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
         }
         if (entity.get取込後期高齢者情報Entity() != null
                 && entity.get現在後期高齢者情報() != null
-                && 登録区分_画面登録.equals(entity.get現在後期高齢者情報().getTorokuKubun())) {
+                && 登録区分_画面登録.equals(entity.get現在後期高齢者情報().getTorokuKubun())
+                && ＩＦ種類_電算.equals(processParameter.getIF種類())) {
             entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_32);
             if (文言設定flag) {
                 entity.get取込後期高齢者情報Entity().setエラー文言(エラーコード文言);
@@ -76,7 +76,7 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
             entity.get取込後期高齢者情報Entity().setエラー区分(エラー区分);
         }
         if (entity.get取込後期高齢者情報Entity() != null
-                && entity.get取込後期高齢者情報Entity() != null
+                && entity.get現在後期高齢者情報() != null
                 && 登録区分_画面登録.equals(entity.get現在後期高齢者情報().getTorokuKubun())
                 && ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
             entity.get取込後期高齢者情報Entity().setエラーコード(エラーコード_82);
@@ -107,7 +107,7 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
             }
             if (entity.get取込後期高齢者情報Entity() == null
                     && entity.get現在後期高齢者情報() != null
-                    && TorokuKubun.画面登録.getコード().equals(entity.get現在後期高齢者情報().getTorokuKubun())) {
+                    && 登録区分_画面登録.equals(entity.get現在後期高齢者情報().getTorokuKubun())) {
                 現在後期高齢者情報より_項目設定(entity);
             }
         }
@@ -132,7 +132,7 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
 
     private void get後期高齢者情報インポート用Entitｙ(KokiKoreshaJyohoResultEntity entity) {
         if (entity.get取込後期高齢者情報Entity() != null) {
-            if (!TorokuKubun.画面登録.getコード().equals(entity.get現在後期高齢者情報().getTorokuKubun())) {
+            if (!登録区分_画面登録.equals(entity.get現在後期高齢者情報().getTorokuKubun())) {
                 取込後期高齢者情報より_項目設定(entity);
             } else {
                 現在後期高齢者情報より_項目設定(entity);
@@ -141,7 +141,7 @@ public class InsKokiKoreshaJyohoTempProcess extends BatchProcessBase<KokiKoresha
     }
 
     private void 取込後期高齢者情報より_項目設定(KokiKoreshaJyohoResultEntity entity) {
-        if (!TorokuKubun.画面登録.getコード().equals(entity.get取込後期高齢者情報Entity().get登録区分())) {
+        if (!登録区分_画面登録.equals(entity.get取込後期高齢者情報Entity().get登録区分())) {
             後期高齢者情報インポート用Entity.set識別コード(entity.get取込後期高齢者情報Entity().get住民コード());
             後期高齢者情報インポート用Entity.set個人区分コード(entity.get取込後期高齢者情報Entity().get個人区分コード());
             後期高齢者情報インポート用Entity.set後期高齢保険者番号_市町村(entity.get取込後期高齢者情報Entity().get後期高齢保険者番号_市町村());

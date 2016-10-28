@@ -16,9 +16,11 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710100.HanyoListKagoK
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710100.HanyoListKagoKekkaCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710100.HanyoListKagoKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc710100.IHanyoListKagoKekkaMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -54,6 +56,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 汎用リスト出力(過誤結果情報)のバッチ用パラメータフロークラスです。
@@ -95,6 +98,7 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
     private int 連番;
     private RString csv出力Flag;
     FileSpoolManager spoolManager;
+    private IHanyoListKagoKekkaMapper mapper;
     @BatchWriter
     private CsvWriter<HanyoListKagoKekkaCsvEntity> csvWriter;
 
@@ -123,7 +127,10 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
         for (int i = 0; i < 現市町村情報.size(); i++) {
             構成市町村マスタ.put(現市町村情報.get(i).get市町村コード(), 現市町村情報.get(i));
         }
+        List<HanyoListKagoKekkaEntity> entity = InstanceProvider
+                .create(MapperProvider.class).create(IHanyoListKagoKekkaMapper.class).select過誤結果情報(parameter.toMybatisParameter());
         personalDataList = new ArrayList<>();
+
     }
 
     @Override
