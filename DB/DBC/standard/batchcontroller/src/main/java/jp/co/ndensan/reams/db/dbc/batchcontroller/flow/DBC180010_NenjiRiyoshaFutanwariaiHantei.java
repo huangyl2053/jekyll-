@@ -15,8 +15,9 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.ShoriDateKanriP
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.ShoriKekkaKakuninListProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.SinseicyuDateDeleteProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.SogoJigyoTaishoshaTempProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180010.DBC180010_NenjiRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180011.DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180022.DBC180022_RiyoshaFutanwariaiHanteiSubParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -40,8 +41,8 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
     private static final String 利用者負担割合世帯員を削除する = "deleteRiyoshaFutanWariaiKonkyo";
     private static final String 利用者負担割合判定 = "riyoshaFutanWariaiHantei";
     private static final String 負担割合判定一覧出力 = "futanwariaiHantei";
-    private static final RString 負担割合判定一覧BATCH_ID = new RString("FutanWariaiIchiranFlow");
-    private static final RString 利用者負担割合判定BATCH_ID = new RString("RiyoshaFutanwariaiHanteiCommonFlow");
+    private static final RString 負担割合判定一覧BATCH_ID = new RString("DBC180011_RiyoshaFutanwariaiHanteiIchiranSub");
+    private static final RString 利用者負担割合判定BATCH_ID = new RString("DBC180022_RiyoshaFutanwariaiHanteiSub");
     private static final String 処理日付管理マスタAND受給管理情報の更新 = "updateDate";
     private static final String 処理結果確認リストCSV出力 = "outPutShoriKekkaKakunin";
     private static final RString 再処理前 = new RString("2");
@@ -114,7 +115,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
      */
     @Step(利用者負担割合判定)
     protected IBatchFlowCommand riyoshaFutanWariaiHantei() {
-        DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180020_IdoRiyoshaFutanwariaiHanteiParameter();
+        DBC180022_RiyoshaFutanwariaiHanteiSubParameter parameter = new DBC180022_RiyoshaFutanwariaiHanteiSubParameter();
         parameter.setTaishoNendo(getParameter().get対象年度());
         parameter.setKijunbi(getParameter().get基準日());
         parameter.setShoriKubun(getParameter().get処理区分());
@@ -131,7 +132,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
      */
     @Step(負担割合判定一覧出力)
     protected IBatchFlowCommand futanwariaiHantei() {
-        DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180020_IdoRiyoshaFutanwariaiHanteiParameter();
+        DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter parameter = new DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter();
         parameter.setTaishoNendo(getParameter().get対象年度());
         parameter.setKijunbi(getParameter().get基準日());
         parameter.setShoriKubun(getParameter().get処理区分());
