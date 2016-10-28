@@ -173,6 +173,7 @@ public class KyufuJissekiKihonJouhouMain {
                     整理番号, 識別番号検索キー, get事業所名称(給付実績基本, 今提供年月),
                     get給付分類区分(給付実績基本, 今提供年月),
                     給付実績基本情報, 給付実績ヘッダ情報2, サービス提供年月リスト);
+            get給付実績ヘッダ情報2(今提供年月, 整理番号, 識別番号検索キー);
             ViewStateHolder.put(ViewStateKeys.サービス提供年月, 今提供年月);
         }
         return ResponseData.of(div).respond();
@@ -207,6 +208,7 @@ public class KyufuJissekiKihonJouhouMain {
                     整理番号, 識別番号検索キー, get事業所名称(給付実績基本, 今提供年月),
                     get給付分類区分(給付実績基本, 今提供年月),
                     給付実績基本情報, 給付実績ヘッダ情報2, サービス提供年月リスト);
+            get給付実績ヘッダ情報2(今提供年月, 整理番号, 識別番号検索キー);
             ViewStateHolder.put(ViewStateKeys.サービス提供年月, 今提供年月);
         }
         return ResponseData.of(div).respond();
