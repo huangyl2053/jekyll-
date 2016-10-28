@@ -277,7 +277,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             handler.set画面遷移パラメータ(引き継ぎデータEntity.get識別コード(),
                     引き継ぎデータEntity.get被保険者番号(), 画面モード_修正, param);
             ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
-            return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報).respond();
+            return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報).parameter(画面モード_登録);
         }
         if (確認_汎用 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             set完了状態(div);
