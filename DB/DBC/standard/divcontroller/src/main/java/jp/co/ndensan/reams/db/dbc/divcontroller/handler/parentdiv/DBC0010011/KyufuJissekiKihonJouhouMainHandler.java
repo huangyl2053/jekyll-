@@ -124,6 +124,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set合計内容エリア(給付実績基本);
         }
         set合計エリア閉();
+        set事業者ボタン(給付実績ヘッダ情報２, 後整理番号, サービス提供年月);
     }
 
     /**
@@ -160,6 +161,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set合計内容エリア(給付実績基本);
         }
         set合計エリア閉();
+        set事業者ボタン(給付実績ヘッダ情報２, 後整理番号, サービス提供年月);
     }
 
     /**
