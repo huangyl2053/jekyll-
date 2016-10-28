@@ -109,7 +109,7 @@ public class HonSanteiIdoKanendoFukaFath {
         DbT2013HokenryoDankaiEntity 段階 = 保険料段階List.get(0);
         段階List.add(段階);
         for (int i = INT_1; i < 保険料段階List.size(); i++) {
-            if (段階.getRankuKubun().equals(保険料段階List.get(i))) {
+            if (段階.getRankuKubun().equals(保険料段階List.get(i).getRankuKubun())) {
                 段階List.add(保険料段階List.get(i));
             } else {
                 RankBetsuKijunKingaku gagu = createRankBetsuKijunKingaku(段階List);
