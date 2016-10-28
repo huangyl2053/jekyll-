@@ -203,7 +203,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
     }
 
     private RString commonEra(FlexibleDate 年月日) {
-        if (年月日 != null) {
+        if (年月日 != null && !年月日.isEmpty()) {
             return 年月日.wareki()
                     .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.PERIOD).fillType(FillType.ZERO).getEra();
@@ -212,7 +212,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
     }
 
     private RString commonYMD(FlexibleDate 年月日) {
-        if (年月日 != null) {
+        if (年月日 != null && !年月日.isEmpty()) {
             return 年月日.wareki()
                     .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.PERIOD).fillType(FillType.ZERO)
