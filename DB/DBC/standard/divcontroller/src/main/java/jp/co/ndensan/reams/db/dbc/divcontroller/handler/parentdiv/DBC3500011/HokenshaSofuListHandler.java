@@ -52,7 +52,6 @@ public class HokenshaSofuListHandler {
     private final JyusinDataBaitaiTorikomuDiv div;
     private final RString searchSharedFile = new RString("1\\_%");
     private static final int ゼロ = 0;
-    private static final int 一1 = 1;
     private static final int 二2 = 2;
     private static final int 三 = 3;
     private static final int 四 = 4;
@@ -117,7 +116,7 @@ public class HokenshaSofuListHandler {
     private static final RString 一 = new RString("1");
     private static final RString ゼロゼロ = new RString("0");
     private static final RString 二 = new RString("2");
-    private static final RString 九 = new RString("2");
+    private static final RString 九 = new RString("9");
     private static final RString H1 = new RString("H1");
     private static final RString D8 = new RString("D8");
     private static RString 保険者番号;
