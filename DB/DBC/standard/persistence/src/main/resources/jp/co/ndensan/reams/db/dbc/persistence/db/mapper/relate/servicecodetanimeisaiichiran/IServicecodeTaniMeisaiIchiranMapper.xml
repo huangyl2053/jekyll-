@@ -54,7 +54,7 @@
             "DbT3017KyufujissekiKihon"."hiHokenshaNo" AS "DbT3017_hiHokenshaNo",
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM" AS "DbT3017_serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo" AS "DbT3017_jigyoshoNo",
-            "DbT3017KyufujissekiKihon"."toshiNo" AS "DbT3017_toshiNo"
+            "DbT3017KyufujissekiKihon"."seiriNo" AS "DbT3017_seiriNo"
             FROM
             rgdb."DbT3017KyufujissekiKihon"
             GROUP BY
@@ -62,13 +62,13 @@
             "DbT3017KyufujissekiKihon"."hiHokenshaNo",
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo",
-            "DbT3017KyufujissekiKihon"."toshiNo") AS T0
+            "DbT3017KyufujissekiKihon"."seiriNo") AS T0
             ON T9."shinsaYM" = 最新審査年月
             AND T9."inputShikibetsuNo" = T0."DbT3017_inputShikibetsuNo"
             AND T9."hiHokenshaNo" = T0."DbT3017_hiHokenshaNo"
             AND T9."serviceTeikyoYM" = T0."DbT3017_serviceTeikyoYM"
             AND T9."jigyoshoNo" = T0."DbT3017_jigyoshoNo"
-            AND T9."toshiNo" = T0."DbT3017_toshiNo") AS T1
+            AND T9."seiriNo" = T0."DbT3017_seiriNo") AS T1
             LEFT OUTER JOIN
             (SELECT
             T11."inputShikibetsuNo",
@@ -203,7 +203,7 @@
             "DbT3017KyufujissekiKihon"."hiHokenshaNo" AS "DbT3017_hiHokenshaNo",
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM" AS "DbT3017_serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo" AS "DbT3017_jigyoshoNo",
-            "DbT3017KyufujissekiKihon"."toshiNo" AS "DbT3017_toshiNo"
+            "DbT3017KyufujissekiKihon"."seiriNo" AS "DbT3017_seiriNo"
             FROM
             rgdb."DbT3017KyufujissekiKihon"
             GROUP BY
@@ -211,13 +211,13 @@
             "DbT3017KyufujissekiKihon"."hiHokenshaNo",
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo",
-            "DbT3017KyufujissekiKihon"."toshiNo") AS T0
+            "DbT3017KyufujissekiKihon"."seiriNo") AS T0
             ON T9."shinsaYM" = 最新審査年月
             AND T9."inputShikibetsuNo" = T0."DbT3017_inputShikibetsuNo"
             AND T9."hiHokenshaNo" = T0."DbT3017_hiHokenshaNo"
             AND T9."serviceTeikyoYM" = T0."DbT3017_serviceTeikyoYM"
             AND T9."jigyoshoNo" = T0."DbT3017_jigyoshoNo"
-            AND T9."toshiNo" = T0."DbT3017_toshiNo") AS T1
+            AND T9."seiriNo" = T0."DbT3017_seiriNo") AS T1
             LEFT OUTER JOIN
             rgdb."DbT3018KyufujissekiMeisai" AS T2
             ON T1."inputShikibetsuNo" = T2."inputShikibetsuNo"
