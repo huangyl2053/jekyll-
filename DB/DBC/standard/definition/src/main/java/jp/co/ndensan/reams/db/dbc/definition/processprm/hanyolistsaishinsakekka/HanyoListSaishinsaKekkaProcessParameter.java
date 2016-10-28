@@ -28,6 +28,8 @@ public class HanyoListSaishinsaKekkaProcessParameter implements IBatchProcessPar
     private boolean renbanFuka;
     private boolean hitsukeHenshu;
     private LasdecCode hokenshacode;
+    private RString hokensyamei;
+    private RString shichosoncode;
     private RString kokuhorentoriatsukaiFrom;
     private RString kokuhorentoriatsukaiNengetsuTo;
     private List<RString> hokenshaKubunList;
@@ -45,6 +47,8 @@ public class HanyoListSaishinsaKekkaProcessParameter implements IBatchProcessPar
      * @param renbanFuka renbanFuka
      * @param hitsukeHenshu hitsukeHenshu
      * @param hokenshacode hokenshacode
+     * @param hokensyamei kokensyamei
+     * @param shichosoncode shichosoncode
      * @param kokuhorensouhunengetsufrom kokuhorensouhunengetsufrom
      * @param kokuhorensouhunengetsuto kokuhorensouhunengetsuto
      * @param hokenshaKubunList hokenshaKubunList
@@ -61,6 +65,8 @@ public class HanyoListSaishinsaKekkaProcessParameter implements IBatchProcessPar
             boolean renbanFuka,
             boolean hitsukeHenshu,
             LasdecCode hokenshacode,
+            RString hokensyamei,
+            RString shichosoncode,
             RString kokuhorensouhunengetsufrom,
             RString kokuhorensouhunengetsuto,
             List<RString> hokenshaKubunList,
@@ -75,6 +81,8 @@ public class HanyoListSaishinsaKekkaProcessParameter implements IBatchProcessPar
         this.renbanFuka = renbanFuka;
         this.hitsukeHenshu = hitsukeHenshu;
         this.hokenshacode = hokenshacode;
+        this.hokensyamei = hokensyamei;
+        this.shichosoncode = shichosoncode;
         this.kokuhorentoriatsukaiFrom = kokuhorensouhunengetsufrom;
         this.kokuhorentoriatsukaiNengetsuTo = kokuhorensouhunengetsuto;
         this.hokenshaKubunList = hokenshaKubunList;

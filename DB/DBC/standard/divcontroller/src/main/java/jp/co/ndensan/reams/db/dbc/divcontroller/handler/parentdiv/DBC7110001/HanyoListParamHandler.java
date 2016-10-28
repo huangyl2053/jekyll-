@@ -149,6 +149,10 @@ public class HanyoListParamHandler {
         if (is日付編集) {
             編集方法.add(CSVSettings.日付スラッシュ編集.getコード());
         }
+        Long 出力順ID = restoreBatchParameterMap.getParameterValue(Long.class, new RString("shutsuryokujunId"));
+        if (出力順ID != null) {
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701011.getReportId(), 出力順ID);
+        }
         div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
         if (広域.equals(導入形態)) {
             if (restoreBatchParameterMap.getParameterValue(LasdecCode.class, 保険者コード).isEmpty()) {
@@ -226,6 +230,10 @@ public class HanyoListParamHandler {
             編集方法.add(CSVSettings.日付スラッシュ編集.getコード());
         }
         div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
+        Long 出力順ID = restoreBatchParameterMap.getParameterValue(Long.class, new RString("shutsuryokujunId"));
+        if (出力順ID != null) {
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701012.getReportId(), 出力順ID);
+        }
         List<RString> list保険者区分 = new ArrayList<>();
         for (Object hokenshakubun : restoreBatchParameterMap.getParameterValue(List.class, new RString("hokenshakubun"))) {
             list保険者区分.add(new RString(hokenshakubun.toString()));
@@ -256,6 +264,8 @@ public class HanyoListParamHandler {
         boolean has連番付加 = false;
         boolean has日付編集 = false;
         LasdecCode 保険者コード;
+        RString 保険者名 = RString.EMPTY;
+        RString 市町村コード = RString.EMPTY;
         if (list.contains(CSVSettings.項目名付加.getコード())) {
             has項目名付加 = true;
         }
@@ -266,7 +276,9 @@ public class HanyoListParamHandler {
             has日付編集 = true;
         }
         if (広域.equals(導入形態)) {
-            保険者コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
+            保険者コード = new LasdecCode(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value());
+            保険者名 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
+            市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
             if (保険者コード.isEmpty()) {
                 保険者コード = 保険者コード_全市町村;
             }
@@ -286,6 +298,8 @@ public class HanyoListParamHandler {
                 has連番付加,
                 has日付編集,
                 保険者コード,
+                保険者名,
+                市町村コード,
                 国保連送付年月From,
                 国保連送付年月To,
                 サービス提供年月From,
@@ -307,6 +321,8 @@ public class HanyoListParamHandler {
         boolean has連番付加 = false;
         boolean has日付編集 = false;
         LasdecCode 保険者コード;
+        RString 保険者名 = RString.EMPTY;
+        RString 市町村コード = RString.EMPTY;
         List<RString> list = div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys();
         if (list.contains(CSVSettings.項目名付加.getコード())) {
             has項目名付加 = true;
@@ -318,7 +334,9 @@ public class HanyoListParamHandler {
             has日付編集 = true;
         }
         if (広域.equals(導入形態)) {
-            保険者コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
+            保険者コード = new LasdecCode(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value());
+            保険者名 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
+            市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
             if (保険者コード.isEmpty()) {
                 保険者コード = 保険者コード_全市町村;
             }
@@ -339,6 +357,8 @@ public class HanyoListParamHandler {
                 has連番付加,
                 has日付編集,
                 保険者コード,
+                保険者名,
+                市町村コード,
                 国保連取扱年月From,
                 国保連取扱年月To,
                 list保険者区分,
