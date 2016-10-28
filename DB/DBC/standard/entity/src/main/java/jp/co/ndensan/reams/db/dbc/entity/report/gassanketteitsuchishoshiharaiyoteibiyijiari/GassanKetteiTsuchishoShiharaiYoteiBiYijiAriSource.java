@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.gassanketteitsuchishoshiharaiyo
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
@@ -224,6 +225,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriSource implements IRepor
     public RString tsuchi_no;
     @ReportItem(name = "tsuban", length = 6, order = 105)
     public RString tsuban;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "hihokenshaNo", length = 6, order = 106)
     public RString hihokenshaNo;
 // </editor-fold>

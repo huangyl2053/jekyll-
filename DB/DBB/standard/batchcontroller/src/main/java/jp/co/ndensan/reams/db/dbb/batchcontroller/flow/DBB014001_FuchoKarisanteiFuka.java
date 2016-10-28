@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -69,8 +70,8 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
         executeStep(賦課計算);
         executeStep(賦課情報登録);
         executeStep(計算後情報作成);
-        executeStep(普徴仮算定結果);
         executeStep(出力順設定);
+        executeStep(普徴仮算定結果);
         executeStep(処理日付管理テーブル更新);
     }
 
@@ -183,7 +184,7 @@ public class DBB014001_FuchoKarisanteiFuka extends BatchFlowBase<DBB014001_Fucho
     private DBB003001_KeisangoJohoSakuseiParameter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
         return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度().toDateString(),
                 getParameter().get賦課年度().toDateString(),
-                new RString(バッチ起動日時.toString()),
+                new RString(new YMDHMS(バッチ起動日時).toString()),
                 ShoriName.本算定賦課.get名称(), 帳票分類ID);
     }
 }

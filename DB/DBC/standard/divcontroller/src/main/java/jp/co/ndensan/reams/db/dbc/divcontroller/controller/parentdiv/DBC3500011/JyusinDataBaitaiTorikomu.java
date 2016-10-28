@@ -7,12 +7,15 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC3500011
 
 import java.io.Serializable;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.hokenshasofulist.HokenshaSofuResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.config.ConfigKeysKokuhorenTorikomi;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hokenshasofulist.HokenshaSofuListMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3500011.JyusinDataBaitaiTorikomuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3500011.JyusinDataList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC3500011.HokenshaSofuListHandler;
+import jp.co.ndensan.reams.db.dbc.service.core.hokenshasofu.HokenshaSofuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -200,12 +203,26 @@ public class JyusinDataBaitaiTorikomu {
                 処理年月の前月 = 処理年月.minusMonth(一1);
             }
 
-            RString 二重取込チェック = getHandler(div).二重取込チェック(file, データ種別, 処理年月, myBatisParameter, コントロールレコード);
+            HokenshaSofuResult entity = HokenshaSofuFinder.createInstance().get国保連管理(データ種別, 処理年月);
+            RString 二重取込チェック = getHandler(div).二重取込チェック(file, データ種別, myBatisParameter, コントロールレコード, entity);
             if (二重取込チェック != null) {
                 return getHandler(div).二重取込message(二重取込チェック, 処理年月, データ種別);
             }
 
-            RString 審査年月チェック = getHandler(div).審査年月チェック(file, データ種別, 処理年月の前月, 審査年月の翌月, 審査年月);
+            entity = HokenshaSofuFinder.createInstance().get国保連管理2(データ種別, 処理年月の前月);
+            KokuhorenInterfaceKanri kanri = null;
+            if (entity != null && entity.getKokuhorenInterfaceKanriList() != null && !entity.getKokuhorenInterfaceKanriList().isEmpty()) {
+                kanri = entity.getKokuhorenInterfaceKanriList().get(ゼロ);
+
+            }
+            if (kanri != null && kanri.get実績データ上審査年月() != null) {
+                if (!kanri.get実績データ上審査年月().isEmpty()) {
+                    審査年月の翌月 = kanri.get実績データ上審査年月().plusMonth(一1);
+                } else {
+                    審査年月の翌月 = FlexibleYearMonth.EMPTY;
+                }
+            }
+            RString 審査年月チェック = getHandler(div).審査年月チェック(file, データ種別, 審査年月の翌月, 審査年月, kanri);
             if (審査年月チェック != null) {
                 return getHandler(div).審査年月message(審査年月チェック, 処理年月の前月, 審査年月の翌月, 審査年月);
             }

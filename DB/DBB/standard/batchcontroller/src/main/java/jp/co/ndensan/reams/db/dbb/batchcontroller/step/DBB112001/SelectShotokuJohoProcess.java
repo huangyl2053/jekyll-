@@ -54,13 +54,13 @@ public class SelectShotokuJohoProcess extends BatchProcessBase<RString> {
     protected void initialize() {
         RString 処理区分 = parameter.get処理区分();
         if (当初_広域_1.equals(処理区分) || 異動_広域_2.equals(処理区分)) {
-            ReadOnlySharedFileEntryDescriptor descriptor = new ReadOnlySharedFileEntryDescriptor(
-                    FilesystemName.fromString(parameter.get共有ファイル名()), parameter.get共有ファイルID());
+            ReadOnlySharedFileEntryDescriptor descriptor = ReadOnlySharedFileEntryDescriptor.fromString(ファイル名.toString());
             path = SharedFile.getDirectAccessPath(descriptor);
             FilesystemPath filesystemPath = SharedFile.copyToLocal(descriptor, FilesystemPath.fromString(path));
             csvReaderPath = Path.combinePath(filesystemPath.toRString(), parameter.getファイル名());
         } else if (当初_単一_3.equals(処理区分) || 異動_単一_4.equals(処理区分)) {
-            ReadOnlySharedFileEntryDescriptor descriptor = ReadOnlySharedFileEntryDescriptor.fromString(ファイル名.toString());
+            ReadOnlySharedFileEntryDescriptor descriptor = new ReadOnlySharedFileEntryDescriptor(
+                    FilesystemName.fromString(parameter.get共有ファイル名()), parameter.get共有ファイルID());
             path = SharedFile.getDirectAccessPath(descriptor);
             FilesystemPath filesystemPath = SharedFile.copyToLocal(descriptor, FilesystemPath.fromString(path));
             csvReaderPath = Path.combinePath(filesystemPath.toRString(), parameter.getファイル名());

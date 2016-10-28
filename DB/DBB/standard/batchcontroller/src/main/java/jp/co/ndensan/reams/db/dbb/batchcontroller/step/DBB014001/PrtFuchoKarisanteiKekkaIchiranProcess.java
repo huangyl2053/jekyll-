@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -86,6 +87,8 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
     private Association 地方公共団体情報;
     private int 連番;
     private IOutputOrder 出力順;
+    private List<RString> 出力項目リスト;
+    private List<RString> 改頁項目リスト;
 
     @BatchWriter
     private BatchReportWriter<FutsuChoshuKarisanteiKekkaIchiranSource> batchReportWriter;
@@ -95,6 +98,8 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
 
     @Override
     protected void initialize() {
+        出力項目リスト = new ArrayList<>();
+        改頁項目リスト = new ArrayList<>();
         mybatisParameter = parameter.toMybatisParameter();
         mybatisParameter.set特別徴収対象者情報(TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード());
         mybatisParameter.set特別徴収追加候補者情報(TsuchiNaiyoCodeType.特別徴収追加候補者情報.get通知内容コード());
@@ -271,7 +276,8 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         普徴仮算定計算後賦課Entity.set資格適用対象の通知書番号(計算後情報.getTsuchishoNo());
         普徴仮算定計算後賦課Entity.set前年度賦課の情報(entity.get介護賦課前年度());
         FutsuChoshuKarisanteiKekkaIchiranReport report = new FutsuChoshuKarisanteiKekkaIchiranReport(普徴仮算定計算後賦課Entity,
-                parameter.get調定年度(), parameter.get賦課年度(), null, 地方公共団体情報, null, null, 連番);
+                parameter.get調定年度(), parameter.get賦課年度(), new YMDHMS(parameter.getバッチ起動日時()),
+                地方公共団体情報, 出力項目リスト, 改頁項目リスト, 連番);
         report.writeBy(reportSourceWriter);
         FutyoKarisanteiKekkaIcihiranDataCSVEntity csvEntity = getCsvEntity(普徴仮算定計算後賦課Entity);
         csvWriter.writeLine(csvEntity);
@@ -301,7 +307,9 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(TITLE_調定年度.concat(dateFormat308(parameter.get調定年度())).concat(定数_年度));
         出力条件.add(TITLE_賦課年度.concat(dateFormat308(parameter.get賦課年度())).concat(定数_年度));
-        出力条件.add(出力順.getFormated出力順名());
+        if (出力順 != null) {
+            出力条件.add(出力順.getFormated出力順名());
+        }
         return 出力条件;
     }
 
@@ -333,13 +341,15 @@ public class PrtFuchoKarisanteiKekkaIchiranProcess extends BatchProcessBase<Fuch
         csvEntity.set特別徴収仮徴収額_6月(new RString(普徴仮算定計算後賦課Entity.get特徴期別金額02().toString()));
         csvEntity.set特別徴収仮徴収額_8月(new RString(普徴仮算定計算後賦課Entity.get特徴期別金額03().toString()));
         //csvEntity.set前年度情報の最終所得段階(普徴仮算定計算後賦課Entity.get特別徴収業務者コード());
-        if (普徴仮算定計算後賦課Entity.get前年度賦課の情報().getNengakuHokenryo2() != null) {
+        if (普徴仮算定計算後賦課Entity.get前年度賦課の情報() != null && 普徴仮算定計算後賦課Entity.get前年度賦課の情報().getNengakuHokenryo2() != null) {
             csvEntity.set前年度情報の最終月別年額(new RString(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getNengakuHokenryo2().toString()));
-        } else {
+        } else if (普徴仮算定計算後賦課Entity.get前年度賦課の情報() != null) {
             csvEntity.set前年度情報の最終月別年額(new RString(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getNengakuHokenryo1().toString()));
         }
         csvEntity.set前年度情報の最終普徴額(get前年度情報の最終普徴額(普徴仮算定計算後賦課Entity));
-        csvEntity.set前年度情報の確定保険料額(new RString(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getKakuteiHokenryo().toString()));
+        if (普徴仮算定計算後賦課Entity.get前年度賦課の情報() != null) {
+            csvEntity.set前年度情報の確定保険料額(new RString(普徴仮算定計算後賦課Entity.get前年度賦課の情報().getKakuteiHokenryo().toString()));
+        }
         csvEntity.set前年度情報の計算納期数(普徴仮算定計算後賦課Entity.get特別徴収業務者コード());
         csvEntity.set前年度情報の賦課納期数(普徴仮算定計算後賦課Entity.get特別徴収業務者コード());
         csvEntity.set特別徴収業務者コード(普徴仮算定計算後賦課Entity.get特別徴収業務者コード());

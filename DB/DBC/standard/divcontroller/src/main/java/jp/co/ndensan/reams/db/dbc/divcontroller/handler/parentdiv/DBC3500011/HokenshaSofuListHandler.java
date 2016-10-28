@@ -359,14 +359,13 @@ public class HokenshaSofuListHandler {
      *
      * @param file FileData
      * @param データ種別 RString
-     * @param 処理年月 FlexibleYearMonth
      * @param myBatisParameter HokenshaSofuListMybatisParameter
      * @param コントロールレコード List<RString>
+     * @param entity HokenshaSofuResult
      * @return RString
      */
-    public RString 二重取込チェック(FileData file, RString データ種別, FlexibleYearMonth 処理年月,
-            HokenshaSofuListMybatisParameter myBatisParameter, List<RString> コントロールレコード) {
-        HokenshaSofuResult entity = HokenshaSofuFinder.createInstance().get国保連管理(データ種別, 処理年月);
+    public RString 二重取込チェック(FileData file, RString データ種別, HokenshaSofuListMybatisParameter myBatisParameter,
+            List<RString> コントロールレコード, HokenshaSofuResult entity) {
         for (KokuhorenInterfaceKanri faceKanri : entity.getKokuhorenInterfaceKanriList()) {
             if (!myBatisParameter.is同月過誤取下分フラグ()
                     && faceKanri.getコントロール上処理年月() != null
@@ -422,26 +421,13 @@ public class HokenshaSofuListHandler {
      *
      * @param file FileData
      * @param データ種別 RString
-     * @param 処理年月の前月 FlexibleYearMonth
      * @param 審査年月の翌月 FlexibleYearMonth
      * @param 審査年月 FlexibleYearMonth
+     * @param kanri KokuhorenInterfaceKanri
      * @return RString
      */
-    public RString 審査年月チェック(FileData file, RString データ種別, FlexibleYearMonth 処理年月の前月,
-            FlexibleYearMonth 審査年月の翌月, FlexibleYearMonth 審査年月) {
-        HokenshaSofuResult entity = HokenshaSofuFinder.createInstance().get国保連管理2(データ種別, 処理年月の前月);
-        KokuhorenInterfaceKanri kanri = null;
-        if (entity != null && entity.getKokuhorenInterfaceKanriList() != null && !entity.getKokuhorenInterfaceKanriList().isEmpty()) {
-            kanri = entity.getKokuhorenInterfaceKanriList().get(ゼロ);
-
-        }
-        if (kanri != null && kanri.get実績データ上審査年月() != null) {
-            if (!kanri.get実績データ上審査年月().isEmpty()) {
-                審査年月の翌月 = kanri.get実績データ上審査年月().plusMonth(一1);
-            } else {
-                審査年月の翌月 = FlexibleYearMonth.EMPTY;
-            }
-        }
+    public RString 審査年月チェック(FileData file, RString データ種別, FlexibleYearMonth 審査年月の翌月,
+            FlexibleYearMonth 審査年月, KokuhorenInterfaceKanri kanri) {
         if (審査年月の翌月 != null && kanri != null && !(審査年月の翌月.isEmpty() && kanri.get処理状態区分().equals(取消3))) {
             if (new RString(DbcQuestionMessages.国保連先月処理なし取込漏れ確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())

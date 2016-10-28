@@ -32,7 +32,7 @@ public class InsShiharaihohoHenkoTempProcess extends BatchKeyBreakBase<DbT3017Ma
     private JissekiFutangakuDataTempEntity insertEntity;
     private boolean isあり;
     @BatchWriter
-    private IBatchTableWriter 実績負担額Writer;
+    private IBatchTableWriter 実績負担額2Writer;
 
     @Override
     protected void initialize() {
@@ -42,7 +42,7 @@ public class InsShiharaihohoHenkoTempProcess extends BatchKeyBreakBase<DbT3017Ma
 
     @Override
     protected void createWriter() {
-        実績負担額Writer = new BatchEntityCreatedTempTableWriter(TABLE_NAME2, JissekiFutangakuDataTempEntity.class);
+        実績負担額2Writer = new BatchEntityCreatedTempTableWriter(TABLE_NAME2, JissekiFutangakuDataTempEntity.class);
     }
 
     @Override
@@ -54,6 +54,10 @@ public class InsShiharaihohoHenkoTempProcess extends BatchKeyBreakBase<DbT3017Ma
     protected void usualProcess(DbT3017MatchingEntity entity) {
         isあり = true;
         JissekiFutangakuDataTempEntity 実績負担額 = entity.get実績負担額データ();
+        if (entity.get給付実績基本() == null) {
+            insertEntity = null;
+            return;
+        }
         if (getBefore() == null) {
             insertEntity = 実績負担額;
             loopHandle(entity);
@@ -63,7 +67,7 @@ public class InsShiharaihohoHenkoTempProcess extends BatchKeyBreakBase<DbT3017Ma
             loopHandle(entity);
             return;
         }
-        実績負担額Writer.insert(insertEntity);
+        実績負担額2Writer.insert(insertEntity);
         insertEntity = 実績負担額;
         loopHandle(entity);
     }
@@ -83,10 +87,10 @@ public class InsShiharaihohoHenkoTempProcess extends BatchKeyBreakBase<DbT3017Ma
 
     @Override
     protected void afterExecute() {
-        if (!isあり) {
+        if (!isあり || insertEntity == null) {
             return;
         }
-        実績負担額Writer.insert(insertEntity);
+        実績負担額2Writer.insert(insertEntity);
     }
 
 }

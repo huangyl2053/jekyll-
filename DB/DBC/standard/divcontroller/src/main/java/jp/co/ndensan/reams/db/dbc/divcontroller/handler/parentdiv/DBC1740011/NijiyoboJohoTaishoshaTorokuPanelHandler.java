@@ -33,7 +33,6 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
     private static final RString 空白 = RString.EMPTY;
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
-    private static final RString ZERO = new RString("0");
     private final NijiyoboJohoTaishoshaTorokuPanelDiv div;
 
     /**
@@ -104,7 +103,6 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
     public void onClick_btnAdd() {
         div.setOperateState(追加);
         二次予防情報対象詳細パネルにクリアする();
-        二次予防情報対象詳細パネルに確定するボタン制御を設定する();
     }
 
     private void 二次予防情報対象詳細パネルにクリアする() {
@@ -115,26 +113,6 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
         div.getNijiyoboJohoShosai().getBtnConfirm().setDisabled(false);
     }
 
-    private void 二次予防情報対象詳細パネルに確定するボタン制御を設定する() {
-        List<dgNijiyoboJohoTaishoIchiran_Row> rowList = div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getDataSource();
-        boolean is適用開始日と登録済みの適用期間が重なる = false;
-        RDate 適用開始日 = div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().getFromValue();
-        RString clickRirekiNo = 追加.equals(div.getOperateState()) ? ZERO
-                : div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getClickedItem().getRirekiNo();
-        for (dgNijiyoboJohoTaishoIchiran_Row row : rowList) {
-            RDate 登録済みの適用期間開始日 = row.getTekiyoKaishiYMD().getValue();
-            RDate 登録済みの適用期間終了日 = row.getTekiyoShuryoYMD().getValue();
-            if (null == 適用開始日) {
-                is適用開始日と登録済みの適用期間が重なる = true;
-            } else if ((!clickRirekiNo.equals(row.getRirekiNo()))
-                    && (null != 登録済みの適用期間開始日 && 登録済みの適用期間開始日.isBeforeOrEquals(適用開始日)
-                    && null != 登録済みの適用期間終了日 && 適用開始日.isBeforeOrEquals(登録済みの適用期間終了日))) {
-                is適用開始日と登録済みの適用期間が重なる = true;
-            }
-        }
-        div.getNijiyoboJohoShosai().getBtnConfirm().setDisabled(is適用開始日と登録済みの適用期間が重なる);
-    }
-
     /**
      * 「追加する」ボタンを処理します。
      */
@@ -142,7 +120,6 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
         div.setOperateState(修正);
         二次予防情報対象詳細パネルにクリアする();
         二次予防情報対象詳細パネルに表示する();
-        二次予防情報対象詳細パネルに確定するボタン制御を設定する();
     }
 
     private void 二次予防情報対象詳細パネルに表示する() {
@@ -175,13 +152,6 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
             div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getDataSource().remove(
                     div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getClickedRowId());
         }
-    }
-
-    /**
-     * 総合事業（経過措置）対象者登録画面 適用期間の変更を処理します。
-     */
-    public void onChange_dateRange() {
-        二次予防情報対象詳細パネルに確定するボタン制御を設定する();
     }
 
     /**
@@ -236,8 +206,10 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
      * @param rowList List<dgNijiyoboJohoTaishoIchiran_Row>
      * @param 被保険者番号 HihokenshaNo
      * @param holder NijiYoboJigyoTaishoshaHolder
+     *
+     * @return boolean
      */
-    public void 二次予防情報対象一覧のデータを保存する(List<dgNijiyoboJohoTaishoIchiran_Row> rowList,
+    public boolean 二次予防情報対象一覧のデータを保存する(List<dgNijiyoboJohoTaishoIchiran_Row> rowList,
             HihokenshaNo 被保険者番号, NijiYoboJigyoTaishoshaHolder holder) {
         int 履歴番号MAX = 0;
         for (dgNijiyoboJohoTaishoIchiran_Row row : rowList) {
@@ -285,20 +257,22 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
                 changeItems.add(changeItem);
             }
         }
-        二次予防情報対象一覧のデータ更新する(changeItems);
+        return 二次予防情報対象一覧のデータ更新する(changeItems);
     }
 
-    private void 二次予防情報対象一覧のデータ更新する(List<NijiYoboJigyoTaishosha> changeItems) {
+    private boolean 二次予防情報対象一覧のデータ更新する(List<NijiYoboJigyoTaishosha> changeItems) {
         boolean isSuccess = true;
         if (null != changeItems && (!changeItems.isEmpty())) {
             NijiYoboJigyoTaishoshaManager manager = new NijiYoboJigyoTaishoshaManager();
             for (NijiYoboJigyoTaishosha changeItem : changeItems) {
                 if (!manager.saveOrDeletePhysicalBy二次予防事業対象者(changeItem)) {
                     isSuccess = false;
+                    return isSuccess;
                 }
             }
         }
         div.getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
                 div.get被保険者番号(), div.getNijiyoboTaishosha().getCcdKaigoAtenaInfo().get氏名漢字(), isSuccess);
+        return isSuccess;
     }
 }

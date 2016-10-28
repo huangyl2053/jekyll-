@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiH
 import jp.co.ndensan.reams.db.dbc.definition.core.nyuryokushikibetsuno.NyuryokuShikibetsuNoShokan3Keta;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata.MeisaiDataEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata.PrintNoKingakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200101detail.FurikomiMeisaiIchiranDetailReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -45,8 +46,6 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     private static final int LISTINDEX_24 = 24;
     private static final RString 作成 = new RString("作成");
     private static final Decimal ZERO = new Decimal("0");
-    private static final int 様式連番_ONE = 1;
-    private static final int 様式連番_TWO = 2;
     private static final RString データ区分_1 = new RString("1");
     private static final RString データ区分_2 = new RString("2");
     private static final RString 支払方法_口座 = new RString("1");
@@ -103,8 +102,11 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     @Override
     public FurikomiMeisaiIchiranDetailReportSource edit(FurikomiMeisaiIchiranDetailReportSource source) {
         毎ページ数++;
+        List<PrintNoKingakuEntity> list = 一覧表用データ.get印字様式番号別金額List();
 
-        if (様式連番_1 == 一覧表用データ.get様式連番()) {
+        int 様式連番 = list.get(0).get様式連番();
+
+        if (様式連番_1 == 様式連番) {
             総レコード数++;
             毎ページ振込金額合算 = 毎ページ振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
             振込金額合算 = 振込金額合算.add(一覧表用データ.get振込明細一時TBL().getFurikomiKingaku());
@@ -115,8 +117,11 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
         }
 
         editHeader(source);
-        edit明細1(source);
-        edit明細2(source);
+        if (様式連番_1 == 様式連番) {
+            edit明細1(source);
+        } else {
+            edit明細2(source);
+        }
         editフッター(source);
 
         return source;
@@ -174,19 +179,15 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     }
 
     private void edit明細1(FurikomiMeisaiIchiranDetailReportSource source) {
-        if (一覧表用データ != null && 様式連番_ONE == 一覧表用データ.get様式連番()) {
-            set様式連番_1のUpper帳票データ(source);
-            set様式連番_1のLower帳票データ(source);
-            set様式連番_1のその他帳票データ(source);
-        }
+        set様式連番_1のUpper帳票データ(source);
+        set様式連番_1のLower帳票データ(source);
+        set様式連番_1のその他帳票データ(source);
     }
 
     private void edit明細2(FurikomiMeisaiIchiranDetailReportSource source) {
-        if (一覧表用データ != null && (一覧表用データ.get様式連番() - 様式連番_TWO >= 0)) {
-            set様式連番_1以外のUpper帳票データ(source);
-            set様式連番_1以外のLower帳票データ(source);
-            set様式連番_1以外のその他帳票データ(source);
-        }
+        set様式連番_1以外のUpper帳票データ(source);
+        set様式連番_1以外のLower帳票データ(source);
+        set様式連番_1以外のその他帳票データ(source);
     }
 
     private void set様式連番_1のUpper帳票データ(FurikomiMeisaiIchiranDetailReportSource source) {
@@ -238,7 +239,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                     && !振込明細一時TBL.getZenkaiShiharaiKingaku().equals(ZERO)) {
                 source.listUpper_16 = 丸;
             }
-            if (1 < 一覧表用データ.get名寄せ件数()) {
+            if (1 < 一覧表用データ.get印字様式番号別金額List().get(0).get名寄せ件数()) {
                 source.listUpper_17 = 名寄せ;
             }
         }
@@ -272,14 +273,16 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                         firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
 
-            set様式連番_1のLower支払方法_印字様式名称(source);
+            PrintNoKingakuEntity data = 一覧表用データ.get印字様式番号別金額List().get(0);
+            set様式連番_1のLower支払方法_印字様式名称(source, data);
             source.listLower_8 = 左カッコ;
-            if (一覧表用データ.get様式別集計金額() != null) {
-                source.listLower_9 = DecimalFormatter.toコンマ区切りRString(一覧表用データ.get様式別集計金額(), 0);
+            if (一覧表用データ.get印字様式番号別金額List().get(0).get様式別集計金額() != null) {
+                source.listLower_9 = DecimalFormatter.toコンマ区切りRString(
+                        一覧表用データ.get印字様式番号別金額List().get(0).get様式別集計金額(), 0);
             }
             source.listLower_10 = 右カッコ;
 
-            set様式連番_1のLower支払方法_集計様式番号(source, 振込明細一時Data);
+            set様式連番_1のLower支払方法_集計様式番号(source, 振込明細一時Data, data);
         }
     }
 
@@ -334,14 +337,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
         source.listLower_4 = RString.EMPTY;
         source.listLower_5 = RString.EMPTY;
         source.listLower_6 = RString.EMPTY;
-        if (様式連番_ONE != 一覧表用データ.get様式連番()) {
-            get印字様式名称(source);
-        } else {
-            source.listLower_7 = RString.EMPTY;
-            source.listLower_8 = RString.EMPTY;
-            source.listLower_9 = RString.EMPTY;
-            source.listLower_10 = RString.EMPTY;
-        }
+        get印字様式名称(source);
         source.listLower_11 = RString.EMPTY;
     }
 
@@ -370,11 +366,12 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     }
 
     private void get印字様式(FurikomiMeisaiIchiranDetailReportSource source) {
-        if (一覧表用データ.get印字様式名称() != null) {
-            if (一覧表用データ.get印字様式名称().length() <= LISTINDEX_4) {
-                source.listUpper_12 = 一覧表用データ.get印字様式名称();
+        PrintNoKingakuEntity data = 一覧表用データ.get印字様式番号別金額List().get(0);
+        if (data.get印字様式名称() != null) {
+            if (data.get印字様式名称().length() <= LISTINDEX_4) {
+                source.listUpper_12 = data.get印字様式名称();
             } else {
-                source.listUpper_12 = 一覧表用データ.get印字様式名称().substring(0, LISTINDEX_4);
+                source.listUpper_12 = data.get印字様式名称().substring(0, LISTINDEX_4);
             }
         }
     }
@@ -389,16 +386,18 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
     }
 
     private void get印字様式名称(FurikomiMeisaiIchiranDetailReportSource source) {
-        if (一覧表用データ.get印字様式名称() != null) {
-            if (一覧表用データ.get印字様式名称().length() <= LISTINDEX_4) {
-                source.listLower_7 = this.一覧表用データ.get印字様式名称();
+        List<PrintNoKingakuEntity> 印字様式番号別金額List = 一覧表用データ.get印字様式番号別金額List();
+        PrintNoKingakuEntity data = 印字様式番号別金額List.get(1);
+        if (data.get印字様式名称() != null) {
+            if (data.get印字様式名称().length() <= LISTINDEX_4) {
+                source.listLower_7 = data.get印字様式名称();
             } else {
-                source.listLower_7 = this.一覧表用データ.get印字様式名称().substring(0, LISTINDEX_4);
+                source.listLower_7 = data.get印字様式名称().substring(0, LISTINDEX_4);
             }
         }
         source.listLower_8 = 左カッコ;
-        if (一覧表用データ.get様式別集計金額() != null) {
-            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(一覧表用データ.get様式別集計金額(), 0);
+        if (data.get様式別集計金額() != null) {
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(data.get様式別集計金額(), 0);
         }
         source.listLower_10 = 右カッコ;
     }
@@ -435,9 +434,10 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
         }
     }
 
-    private void set様式連番_1のLower支払方法_集計様式番号(FurikomiMeisaiIchiranDetailReportSource source, FurikomiDetailTempTableEntity 振込明細一時Data) {
-        if (一覧表用データ.get集計様式番号() != null) {
-            RString 集計様式番号 = 一覧表用データ.get集計様式番号();
+    private void set様式連番_1のLower支払方法_集計様式番号(FurikomiMeisaiIchiranDetailReportSource source,
+            FurikomiDetailTempTableEntity 振込明細一時Data, PrintNoKingakuEntity data) {
+        if (data.get集計様式番号() != null) {
+            RString 集計様式番号 = data.get集計様式番号();
             if (集計様式番号.equals(NyuryokuShikibetsuNoShokan3Keta.福祉用具販売費.getコード())) {
                 source.listLower_11 = 福祉用具;
             } else if (集計様式番号.equals(NyuryokuShikibetsuNoShokan3Keta.住宅改修費.getコード())) {
@@ -450,12 +450,12 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
         }
     }
 
-    private void set様式連番_1のLower支払方法_印字様式名称(FurikomiMeisaiIchiranDetailReportSource source) {
-        if (一覧表用データ.get印字様式名称() != null) {
-            if (一覧表用データ.get印字様式名称().length() <= LISTINDEX_4) {
-                source.listLower_7 = 一覧表用データ.get印字様式名称();
+    private void set様式連番_1のLower支払方法_印字様式名称(FurikomiMeisaiIchiranDetailReportSource source, PrintNoKingakuEntity data) {
+        if (data.get印字様式名称() != null) {
+            if (data.get印字様式名称().length() <= LISTINDEX_4) {
+                source.listLower_7 = data.get印字様式名称();
             } else {
-                source.listLower_7 = 一覧表用データ.get印字様式名称().substring(0, LISTINDEX_4);
+                source.listLower_7 = data.get印字様式名称().substring(0, LISTINDEX_4);
             }
         }
     }

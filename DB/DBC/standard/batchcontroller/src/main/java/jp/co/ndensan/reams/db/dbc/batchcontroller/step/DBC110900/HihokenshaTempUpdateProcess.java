@@ -5,15 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kakohorenjyohosakusei.HihokenshaTempUpdateProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kakohorenjyohosakuseicommon.KakohorenJyohoSakuseiCommonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.KokuhorenSakuseiErrorTempEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenkanEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -66,24 +62,5 @@ public class HihokenshaTempUpdateProcess extends BatchProcessBase<HihokenshaTemp
         entity.setExShoHokenshaNo(保険者番号);
         entity.setHenkanFlag(変換対象フラグ);
         被保険者一時TBL.update(entity);
-    }
-
-    @Override
-    protected void afterExecute() {
-        if (parameter.toMybatisParamterByサービス提供年月() == null) {
-            return;
-        }
-        IKakohorenJyohoSakuseiCommonMapper mapper = getMapper(IKakohorenJyohoSakuseiCommonMapper.class);
-        List<KakohorenJyohoSakuseiCommonEntity> 新旧被保険者番号変換情報リスト
-                = mapper.select新旧被保険者番号変換情報(parameter.toMybatisParamterByサービス提供年月());
-        for (KakohorenJyohoSakuseiCommonEntity commonEntity : 新旧被保険者番号変換情報リスト) {
-            HihokenshaTempEntity hihokenshaTempEntity = commonEntity.getHihokenshaTempEntity();
-            DbT7026ShinKyuHihokenshaNoHenkanEntity dbT7026Entity = commonEntity.getDbT7026Entity();
-            if (dbT7026Entity.getShichosonCode() != null) {
-                hihokenshaTempEntity.setOldShichosonCode(dbT7026Entity.getShichosonCode().value());
-            }
-            hihokenshaTempEntity.setSofuHihokenshaNo(dbT7026Entity.getKyuNo());
-            被保険者一時TBL.update(hihokenshaTempEntity);
-        }
     }
 }

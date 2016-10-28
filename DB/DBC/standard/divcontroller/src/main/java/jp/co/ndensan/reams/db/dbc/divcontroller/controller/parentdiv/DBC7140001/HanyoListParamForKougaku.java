@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class HanyoListParamForKougaku {
 
-    private static final ReportId 帳票ID = new ReportId("DBC701014_HanyoList_KogakuGassanShinseishoJoho");
+    private static final ReportId 帳票ID = new ReportId("DBC701014_HanyoListKogakuGassanShinseishoJoho");
 
     /**
      * 画面の初期化メソッドです。
@@ -73,29 +73,6 @@ public class HanyoListParamForKougaku {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         return createResponse(div);
-    }
-
-    /**
-     * 条件を保存するボタン押下です。
-     *
-     * @param div HanyoListParamDiv
-     * @return ResponseData<BatchParameterMap>
-     */
-    public ResponseData<BatchParameterMap> onClick_btnSeikatsuKogakuParamSave(HanyoListParamForKougakuDiv div) {
-        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
-        DBC710140_HanyoListKogakuGassanShinseishoJohoParameter parameter = getHandler(div).onClick_btnKogakuParamSave();
-        responseData.data = new BatchParameterMap(parameter);
-        return responseData;
-    }
-
-    /**
-     * 条件を復元するボタン押下です。
-     *
-     * @param div HanyoListParamDiv
-     * @return ResponseData<HanyoListParamDiv>
-     */
-    public ResponseData<HanyoListParamForKougakuDiv> onClick_tekiyoJyokenFukugen(HanyoListParamForKougakuDiv div) {
-        return ResponseData.of(div).respond();
     }
 
     /**
