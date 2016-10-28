@@ -970,6 +970,20 @@ public class NinteiTsuchishoHakkoHandler {
                 パネル.getChohyoId(), KamokuCode.EMPTY, パターン番号);
         return null != 通知文情報 ? 通知文情報.get(項目番号) : RString.EMPTY;
     }
+    private RString get通知文情報通知文(PanelType パネル, int パターン番号, int 項目番号,  FlexibleDate 発行日) {
+        Map<Integer, RString> 通知文情報 = ReportUtil.get通知文(SubGyomuCode.DBD介護受給,
+                パネル.getChohyoId(), KamokuCode.EMPTY, パターン番号);
+        // ＠の部分を発行日に置き換える
+        if (通知文情報 != null && 通知文情報.get(項目番号) != null) {
+            StringBuilder sb = new StringBuilder();
+            return new RString(通知文情報.get(項目番号).toString().replaceAll("＠+",
+                    sb.append(発行日.getYearValue()).append("年")
+                      .append(発行日.getMonthValue()).append("月")
+                      .append(発行日.getDayValue()).append("日").toString()));
+        }
+        return RString.EMPTY;
+    }
+    
 
     private SourceDataCollection print個別発行認定結果通知書(YokaigoNinteiTsutisho 画面選択データ, PanelType パネル) {
         SourceDataCollection collection = null;
@@ -1060,8 +1074,8 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setHakkoYMD(発行日);
         printEntity.setBunshoNo(div.getCcdKobetsuNinteiKekkaBunshoBango().get文書番号());
         printEntity.setTitle(getタイトル(ConfigNameDBA.要介護認定結果通知書));
-        printEntity.setTsuchibun1(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_1)
-                .concat(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_2)));
+        printEntity.setTsuchibun1(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_1, 発行日)
+                .concat(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_2, 発行日)));
         printEntity.setTsuchibun2(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_3));
         AtenaMeisho 被保険者氏名 = 画面選択データ.get被保険者氏名();
         printEntity.setHihokenshaName(null != 被保険者氏名 ? 被保険者氏名.value() : RString.EMPTY);
@@ -1107,7 +1121,7 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setHakkoYMD(発行日);
         printEntity.setBunshoNo(div.getCcdKobetsuServiceHenkoBunshoBango().get文書番号());
         printEntity.setTitle(getタイトル(ConfigNameDBA.サービス変更通知書));
-        printEntity.setTsuchibun1(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_1));
+        printEntity.setTsuchibun1(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_1, 発行日));
         printEntity.setTsuchibun2(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_2));
 
         AtenaMeisho 被保険者氏名 = 画面選択データ.get被保険者氏名();
@@ -1197,7 +1211,7 @@ public class NinteiTsuchishoHakkoHandler {
         printEntity.setHakkoYMD(発行日);
         printEntity.setBunshoNo(div.getCcdKobetsuNinteiKyakkaBunshoBango().get文書番号());
         printEntity.setTitle1(getタイトル(ConfigNameDBA.要介護認定却下通知書));
-        printEntity.setTsuchibun1(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_1));
+        printEntity.setTsuchibun1(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_1, 発行日));
         printEntity.setTsuchibun2(get通知文情報通知文(パネル, 通知文_パターン番号_1, 通知文_項目番号_2));
         AtenaMeisho 被保険者氏名 = 画面選択データ.get被保険者氏名();
         printEntity.setHihokenshaName(null != 被保険者氏名 ? 被保険者氏名.value() : RString.EMPTY);
