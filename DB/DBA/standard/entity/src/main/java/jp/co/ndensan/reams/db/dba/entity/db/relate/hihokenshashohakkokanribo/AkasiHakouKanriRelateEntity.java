@@ -5,13 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo;
 
-import java.util.List;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 証発行管理リスト情報EntityListです。
+ * 証発行管理リスト情報RelateEntityです。
  *
  * @reamsid_L DBA-0600-020 zhangguopeng
  */
@@ -29,6 +28,6 @@ public class AkasiHakouKanriRelateEntity {
     private boolean koumukumeyifukaflg;
     private boolean renbanfukaflg;
     private boolean hizikehensyuuflg;
-    private List<AkasiHakouKanriEntity> akasiHakouKanriEntityList;
+    private AkasiHakouKanriEntity akasiHakouKanriEntity;
 
 }

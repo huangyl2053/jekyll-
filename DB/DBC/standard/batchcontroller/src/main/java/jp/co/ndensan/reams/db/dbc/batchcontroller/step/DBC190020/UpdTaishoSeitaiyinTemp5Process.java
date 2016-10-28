@@ -93,6 +93,7 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
                     this.課税区分flg = false;
                     this.課税所得flg = false;
                     this.世帯出力flg = false;
+                    this.総収入額 = Decimal.ZERO;
                 }
             } else if (RSTRING_1.equals(parameter.get抽出条件())) {
                 this.entityList.add(exEntity);
@@ -104,6 +105,7 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
                     this.課税区分flg = false;
                     this.課税所得flg = false;
                     this.世帯出力flg = false;
+                    this.総収入額 = Decimal.ZERO;
                 }
             }
         }

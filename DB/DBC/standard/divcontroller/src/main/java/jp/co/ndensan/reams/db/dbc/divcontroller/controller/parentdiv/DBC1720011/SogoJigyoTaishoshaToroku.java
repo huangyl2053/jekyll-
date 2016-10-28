@@ -10,7 +10,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.core.sogojigyotaishoshatoroku.SogoJigyoTaishoshaToJotai;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1720011.DBC1720011StateName.Default;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1720011.DBC1720011StateName.Kanryo;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1720011.DBC1720011StateName.alter;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1720011.DBC1720011TransitionEventName.再検索;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1720011.DBC1720011TransitionEventName.検索結果一覧へ;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1720011.SogoJigyoTaishoshaTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1720011.dgKihonInfo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1720011.SogoJigyoTaishoshaTorokuHandler;
@@ -19,8 +22,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.SogoJigyoTaishoshaIdentifi
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -43,7 +44,6 @@ public class SogoJigyoTaishoshaToroku {
     private final RString 状態_修正 = new RString("修正");
     private final RString 状態_削除 = new RString("削除");
     private final RString 保存する = new RString("btnHozonn");
-    private static final RString MENUID_DBCMN11002 = new RString("DBCMN11002");
 
     /**
      * 画面初期化します。
@@ -52,8 +52,6 @@ public class SogoJigyoTaishoshaToroku {
      * @return ResponseData<SogoJigyoTaishoshaTorokuDiv>
      */
     public ResponseData<SogoJigyoTaishoshaTorokuDiv> onLoad(SogoJigyoTaishoshaTorokuDiv div) {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
@@ -61,12 +59,12 @@ public class SogoJigyoTaishoshaToroku {
         List<SogoJigyoTaishosha> 総合事業対象者一覧 = handler.get総合事業対象者一覧(被保険者番号);
         ArrayList<SogoJigyoTaishosha> 総合事業対象者一覧ArrayList = new ArrayList<>(総合事業対象者一覧);
         ViewStateHolder
-                .put(DBC1720011ViewStateKey.申請一覧情報, 総合事業対象者一覧ArrayList);
+                .put(ViewStateKeys.申請一覧情報, 総合事業対象者一覧ArrayList);
         ViewStateHolder
-                .put(DBC1720011ViewStateKey.申請一覧情報と状態, handler.onLoad(識別コード, 被保険者番号, 総合事業対象者一覧));
-        return ResponseData.of(div)
-                .rootTitle(menuID.equals(ResponseHolder.getMenuID()) ? ROOTTITLE_申請メニュ : ROOTTITLE_承認メニュ)
-                .addMessage(message).respond();
+                .put(ViewStateKeys.申請一覧情報と状態, handler.onLoad(識別コード, 被保険者番号, 総合事業対象者一覧));
+        ViewStateHolder
+                .put(ViewStateKeys.isロック, Boolean.TRUE);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -77,7 +75,7 @@ public class SogoJigyoTaishoshaToroku {
      */
     public ResponseData<SogoJigyoTaishoshaTorokuDiv> onClick_btnAdd(SogoJigyoTaishoshaTorokuDiv div) {
         getHandler(div).総合事業対象詳細表示(状態_追加, null);
-        ViewStateHolder.put(DBC1720011ViewStateKey.編集総合事業対象者の情報, null);
+        ViewStateHolder.put(ViewStateKeys.編集総合事業対象者の情報, null);
         return ResponseData.of(div).setState(alter);
     }
 
@@ -90,7 +88,7 @@ public class SogoJigyoTaishoshaToroku {
     public ResponseData<SogoJigyoTaishoshaTorokuDiv> onClick_dgMeisai_modify(SogoJigyoTaishoshaTorokuDiv div) {
         SogoJigyoTaishoshaToJotai 編集情報と状態 = get総合事業対象者(div);
         getHandler(div).総合事業対象詳細表示(状態_修正, 編集情報と状態);
-        ViewStateHolder.put(DBC1720011ViewStateKey.編集総合事業対象者の情報, 編集情報と状態);
+        ViewStateHolder.put(ViewStateKeys.編集総合事業対象者の情報, 編集情報と状態);
         return ResponseData.of(div).setState(alter);
     }
 
@@ -101,10 +99,12 @@ public class SogoJigyoTaishoshaToroku {
      * @return ResponseData<SogoJigyoTaishoshaTorokuDiv>
      */
     public ResponseData<SogoJigyoTaishoshaTorokuDiv> onClick_dgMeisai_delete(SogoJigyoTaishoshaTorokuDiv div) {
-        SogoJigyoTaishoshaToJotai 編集情報と状態 = get総合事業対象者(div);
-        getHandler(div).総合事業対象詳細表示(状態_削除, 編集情報と状態);
-        ViewStateHolder.put(DBC1720011ViewStateKey.編集総合事業対象者の情報, 編集情報と状態);
-        return ResponseData.of(div).setState(alter);
+        ArrayList<SogoJigyoTaishoshaToJotai> 一覧情報と状態
+                = ViewStateHolder.get(ViewStateKeys.申請一覧情報と状態, ArrayList.class);
+        getHandler(div).onClick_dgMeisai_delete(一覧情報と状態);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, !getHandler(div).is保存可());
+        ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, 一覧情報と状態);
+        return ResponseData.of(div).respond();
     }
 
     private SogoJigyoTaishoshaToJotai get総合事業対象者(SogoJigyoTaishoshaTorokuDiv div) {
@@ -112,7 +112,7 @@ public class SogoJigyoTaishoshaToroku {
         SogoJigyoTaishoshaIdentifier id
                 = DataPassingConverter.deserialize(row.getDataId(), SogoJigyoTaishoshaIdentifier.class);
         ArrayList<SogoJigyoTaishoshaToJotai> 一覧情報と状態
-                = ViewStateHolder.get(DBC1720011ViewStateKey.申請一覧情報と状態, ArrayList.class);
+                = ViewStateHolder.get(ViewStateKeys.申請一覧情報と状態, ArrayList.class);
         for (SogoJigyoTaishoshaToJotai 情報と状態 : 一覧情報と状態) {
             if (id.equals(情報と状態.get総合事業対象().identifier())) {
                 return 情報と状態;
@@ -128,7 +128,14 @@ public class SogoJigyoTaishoshaToroku {
      * @return ResponseData<SogoJigyoTaishoshaTorokuDiv>
      */
     public ResponseData<SogoJigyoTaishoshaTorokuDiv> onClick_btnCancel(SogoJigyoTaishoshaTorokuDiv div) {
-        return ResponseData.of(div).setState(Default);
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            return ResponseData.of(div).setState(Default);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -141,19 +148,6 @@ public class SogoJigyoTaishoshaToroku {
         if (Default.getName().equals(ResponseHolder.getState())) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, !getHandler(div).is保存可());
         }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「確定する」ボタンを制御します。
-     *
-     * @param div 画面情報div
-     * @return ResponseData<SogoJigyoTaishoshaTorokuDiv>
-     */
-    public ResponseData<SogoJigyoTaishoshaTorokuDiv> onBlur_txtymfromto(SogoJigyoTaishoshaTorokuDiv div) {
-        SogoJigyoTaishoshaToJotai 編集総合事業対象者の情報
-                = ViewStateHolder.get(DBC1720011ViewStateKey.編集総合事業対象者の情報, SogoJigyoTaishoshaToJotai.class);
-        getHandler(div).確定する制御(編集総合事業対象者の情報);
         return ResponseData.of(div).respond();
     }
 
@@ -176,11 +170,11 @@ public class SogoJigyoTaishoshaToroku {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         SogoJigyoTaishoshaToJotai 編集総合事業対象者の情報
-                = ViewStateHolder.get(DBC1720011ViewStateKey.編集総合事業対象者の情報, SogoJigyoTaishoshaToJotai.class);
+                = ViewStateHolder.get(ViewStateKeys.編集総合事業対象者の情報, SogoJigyoTaishoshaToJotai.class);
         ArrayList<SogoJigyoTaishoshaToJotai> 一覧情報と状態
-                = ViewStateHolder.get(DBC1720011ViewStateKey.申請一覧情報と状態, ArrayList.class);
+                = ViewStateHolder.get(ViewStateKeys.申請一覧情報と状態, ArrayList.class);
         getHandler(div).onClick_btnConfirm(get最初総合事業対象者(編集総合事業対象者の情報), 被保険者番号, 編集総合事業対象者の情報, 一覧情報と状態);
-        ViewStateHolder.put(DBC1720011ViewStateKey.申請一覧情報と状態, 一覧情報と状態);
+        ViewStateHolder.put(ViewStateKeys.申請一覧情報と状態, 一覧情報と状態);
         return ResponseData.of(div).setState(Default);
     }
 
@@ -199,9 +193,9 @@ public class SogoJigyoTaishoshaToroku {
             TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
             ArrayList<SogoJigyoTaishoshaToJotai> 一覧情報と状態
-                    = ViewStateHolder.get(DBC1720011ViewStateKey.申請一覧情報と状態, ArrayList.class);
+                    = ViewStateHolder.get(ViewStateKeys.申請一覧情報と状態, ArrayList.class);
             getHandler(div).保存処理(一覧情報と状態, 被保険者番号);
-            return onLoad(div);
+            return ResponseData.of(div).setState(Kanryo);
         }
         return ResponseData.of(div).respond();
     }
@@ -221,7 +215,7 @@ public class SogoJigyoTaishoshaToroku {
         SogoJigyoTaishoshaIdentifier id
                 = 編集総合事業対象者の情報.get総合事業対象().identifier();
         ArrayList<SogoJigyoTaishosha> 一覧情報
-                = ViewStateHolder.get(DBC1720011ViewStateKey.申請一覧情報, ArrayList.class);
+                = ViewStateHolder.get(ViewStateKeys.申請一覧情報, ArrayList.class);
         for (SogoJigyoTaishosha 情報 : 一覧情報) {
             if (id.equals(情報.identifier())) {
                 return 情報;
@@ -231,23 +225,47 @@ public class SogoJigyoTaishoshaToroku {
     }
 
     /**
-     * 引数定義<br/>
+     * 「検索結果一覧へ」ボタンを押下します。
      *
+     * @param div 画面情報div
+     * @return ResponseData<SogoJigyoTaishoshaTorokuDiv>
      */
-    private enum DBC1720011ViewStateKey {
+    public ResponseData<SogoJigyoTaishoshaTorokuDiv> onClick_btnSearchResult(SogoJigyoTaishoshaTorokuDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            Boolean isロック = ViewStateHolder.get(ViewStateKeys.isロック, Boolean.class);
+            if (isロック != null && !isロック) {
+                TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                getHandler(div).前排他解除(taishoshaKey.get被保険者番号());
+            }
+            return ResponseData.of(div).forwardWithEventName(検索結果一覧へ).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
 
-        /**
-         * 申請一覧情報です。
-         */
-        申請一覧情報,
-        /**
-         * 申請一覧情報と状態です。
-         */
-        申請一覧情報と状態,
-        /**
-         * 編集総合事業対象者の情報です。
-         */
-        編集総合事業対象者の情報;
+    /**
+     * 「再検索する」ボタンを押下します。
+     *
+     * @param div 画面情報div
+     * @return ResponseData<SogoJigyoTaishoshaTorokuDiv>
+     */
+    public ResponseData<SogoJigyoTaishoshaTorokuDiv> onClick_btnOnSearch(SogoJigyoTaishoshaTorokuDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            Boolean isロック = ViewStateHolder.get(ViewStateKeys.isロック, Boolean.class);
+            if (isロック != null && !isロック) {
+                TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                getHandler(div).前排他解除(taishoshaKey.get被保険者番号());
+            }
+            return ResponseData.of(div).forwardWithEventName(再検索).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
 }

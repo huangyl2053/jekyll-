@@ -488,13 +488,14 @@ public class FukaKeisanFath {
             map.put(定数_10, 定数_5);
             map.put(定数_11, 定数_6);
             map.put(定数_12, 定数_6);
-            for (int i = 0; i < 徴収方法リスト.size(); i++) {
-                int 特徴開始停止期 = Integer.parseInt(map.get(new RString(i + INT_1)).toString());
+            for (int i = 0; i < 徴収方法リスト.size() - INT_2; i++) {
+                int 特徴開始停止期 = Integer.parseInt(map.get(new RString(i + INT_2)).toString());
                 Decimal 特徴期別金額 = param.get年度分賦課リスト_更正前().get現年度().get特徴期別金額(特徴開始停止期);
                 if (特徴期別金額 == null) {
                     特徴期別金額 = Decimal.ZERO;
                 }
-                if (定数_3.equals(徴収方法リスト.get(i)) && Decimal.ZERO.compareTo(特徴期別金額) < 0) {
+                if ((定数_1.equals(徴収方法リスト.get(i)) || 定数_2.equals(徴収方法リスト.get(i)))
+                        && 定数_3.equals(徴収方法リスト.get(i + INT_1)) && Decimal.ZERO.compareTo(特徴期別金額) < 0) {
                     kiwariKeisanInput.set特徴開始停止期(特徴開始停止期);
                     break;
                 }

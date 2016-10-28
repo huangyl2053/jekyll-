@@ -1322,39 +1322,32 @@ public class GemmenJuminKihonHandler {
      * @return 更新確認メッセージの判断
      */
     public RString メッセージ判断(GemmenJoho 最新減免の情報) {
+        KeteiinfoDiv 決定情報パネル = div.getGemmenMain().getKeteiinfo();
+        TorikeshiInfoDiv 取消情報パネル = div.getGemmenMain().getTorikeshiInfo();
         RString 状況 = div.getGemmenMain().getShinseiJokyo().getTxtShinseiJokyo().getValue();
+        RDate 取消日 = 取消情報パネル.getTxtTorikeshiYMD().getValue();
+        FlexibleDate 決定日 = 決定情報パネル.getTxtKetteiYMD().getValue();
         if (状況_新規.equals(状況)) {
-            boolean 申請_入力 = is申請情報入力(最新減免の情報);
-            boolean 決定_入力 = is決定情報入力(最新減免の情報);
-            if (申請_入力 && !決定_入力) {
+            if (決定日 == null || 決定日.isEmpty()) {
                 return 入力状況_新規申請;
-            } else if (決定_入力) {
+            } else {
                 return 入力状況_新規決定;
             }
         } else if (状況_申請中.equals(状況)) {
-            boolean is取消_入力 = is取消情報入力();
-            if (is取消_入力) {
+            if (取消日 == null && (決定日 == null || 決定日.isEmpty())) {
+                return 入力状況_申請中申請;
+            } else if (取消日 == null && (決定日 != null && !決定日.isEmpty())) {
+                return 入力状況_申請中決定;
+            } else {
                 return 入力状況_申請中取消;
             }
-            boolean 申請_入力 = is申請情報入力(最新減免の情報);
-            boolean 決定_入力 = is決定情報入力(最新減免の情報);
-            if (申請_入力 && !決定_入力) {
-                return 入力状況_申請中申請;
-            } else if (決定_入力) {
-                return 入力状況_申請中決定;
-            }
-        } else if (状況_決定済.equals(状況)) {
-            boolean is取消_入力 = is取消情報入力();
-            if (is取消_入力) {
+        } else {
+            if (取消日 == null) {
+                return 入力状況_決定済訂正;
+            } else {
                 return 入力状況_決定済取消;
             }
-            boolean 申請_入力 = is申請情報入力(最新減免の情報);
-            boolean 決定_入力 = is決定情報入力(最新減免の情報);
-            if (申請_入力 || 決定_入力) {
-                return 入力状況_決定済訂正;
-            }
         }
-        return 空;
     }
 
     /**
@@ -1696,74 +1689,6 @@ public class GemmenJuminKihonHandler {
         }
     }
 
-    private boolean is申請情報入力(GemmenJoho 最新減免の情報) {
-        List<Gemmen> 介護賦課減免List = 最新減免の情報.getGemmenList();
-        ShinseiinfoDiv 申請情報パネル = div.getGemmenMain().getShinseiinfo();
-        if (介護賦課減免List != null && !介護賦課減免List.isEmpty()) {
-            Gemmen 介護賦課減免 = 介護賦課減免List.get(0);
-            boolean flag1 = checkDate(介護賦課減免.get減免申請日(), 申請情報パネル.getTxtShinseiYMD().getValue());
-            boolean flag2 = checkDecimal(介護賦課減免.get申請減免額(), 申請情報パネル.getTxtShinseiGemmengaku().getValue());
-            Code 減免種類コード = 介護賦課減免.get減免種類コード();
-            boolean flag3 = checkRString(減免種類コード == null || 減免種類コード.isEmpty()
-                    ? null : CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.保険料減免種類.getコード(),
-                            減免種類コード, FlexibleDate.getNowDate()), 申請情報パネル.getTxtGemmenShurui().getValue());
-            boolean flag4 = checkRString(介護賦課減免.get申請事由(), 申請情報パネル.getTxtShinseiRiyu().getValue());
-            return flag1 || flag2 || flag3 || flag4;
-        } else {
-            RDate 申請日 = 申請情報パネル.getTxtShinseiYMD().getValue();
-            boolean flag1 = 申請日 != null;
-            boolean flag2 = 申請情報パネル.getTxtShinseiGemmengaku().getValue() != null;
-            RString 取消種類 = 申請情報パネル.getTxtGemmenShurui().getValue();
-            boolean flag3 = !(取消種類 == null || 取消種類.isEmpty());
-            RString 申請事由 = 申請情報パネル.getTxtShinseiRiyu().getValue();
-            boolean flag4 = !(申請事由 == null || 申請事由.isEmpty());
-            return flag1 || flag2 || flag3 || flag4;
-        }
-    }
-
-    private boolean is決定情報入力(GemmenJoho 最新減免の情報) {
-        List<Gemmen> 介護賦課減免List = 最新減免の情報.getGemmenList();
-        KeteiinfoDiv 決定情報パネル = div.getGemmenMain().getKeteiinfo();
-        boolean flag1;
-        boolean flag2;
-        boolean flag3;
-        boolean flag4;
-        if (介護賦課減免List != null && !介護賦課減免List.isEmpty()) {
-            Gemmen 介護賦課減免 = 介護賦課減免List.get(0);
-            flag1 = checkDate(介護賦課減免.get減免決定日(), 決定情報パネル.getTxtKetteiYMD().getValue());
-
-            RString 決定区分 = 決定情報パネル.getRadKetteiKubun().getSelectedValue();
-            if (承認.equals(決定区分)) {
-                flag3 = checkRString(定値_イチ, 介護賦課減免.get減免状態区分());
-            } else {
-                flag3 = checkRString(定値_二, 介護賦課減免.get減免状態区分());
-            }
-            flag4 = checkRString(介護賦課減免.get減免事由(), 決定情報パネル.getTxtKetteiRiyu().getValue());
-        } else {
-            FlexibleDate 減免決定日 = 決定情報パネル.getTxtKetteiYMD().getValue();
-            flag1 = !(減免決定日 == null || 減免決定日.isEmpty());
-            flag3 = !承認.equals(決定情報パネル.getRadKetteiKubun().getSelectedValue());
-            RString 減免事由 = 決定情報パネル.getTxtKetteiRiyu().getValue();
-            flag4 = !(減免事由 == null || 減免事由.isEmpty());
-        }
-        if (最新減免の情報.toEntity() != null) {
-            flag2 = checkDecimal(最新減免の情報.get減免額(), 決定情報パネル.getTxtZenkaiGemmengaku().getValue());
-        } else {
-            flag2 = 最新減免の情報.get減免額() != null;
-        }
-        return flag1 || flag2 || flag3 || flag4;
-    }
-
-    private boolean is取消情報入力() {
-        TorikeshiInfoDiv 取消情報パネル = div.getGemmenMain().getTorikeshiInfo();
-        boolean flag1 = 取消情報パネル.getTxtTorikeshiYMD().getValue() != null;
-        RString 取消種類 = 取消情報パネル.getTxtTorikeshiShurui().getValue();
-        boolean flag2 = !(取消種類 == null || 取消種類.isEmpty());
-        RString 取消理由 = 取消情報パネル.getTxtTorikeshiRiyu().getValue();
-        boolean flag3 = !(取消理由 == null || 取消理由.isEmpty());
-        return flag1 || flag2 || flag3;
-    }
-
     /**
      * 取消種類ボタンの事件です。
      *
@@ -1879,42 +1804,6 @@ public class GemmenJuminKihonHandler {
         RString 状況 = div.getGemmenMain().getShinseiJokyo().getTxtShinseiJokyo().getValue();
         if (!状況_決定済.equals(状況)) {
             div.getGemmenMain().getShinseiinfo().getTxtShinseiYMD().setRequired(true);
-        }
-    }
-
-    private boolean checkDate(FlexibleDate fDate, RDate rDate) {
-        if (fDate == null || fDate.isEmpty()) {
-            return !(rDate == null);
-        } else {
-            return !(new RDate(fDate.toString()).equals(rDate));
-        }
-    }
-
-    private boolean checkDate(FlexibleDate date1, FlexibleDate date2) {
-        if (date1 == null || date1.isEmpty()) {
-            return (date2 == null);
-        } else {
-            return !(date1.equals(date2));
-        }
-    }
-
-    private boolean checkDecimal(Decimal dec1, Decimal dec2) {
-        if (dec1 == null) {
-            return !(dec2 == null);
-        } else {
-            if (dec2 == null) {
-                return true;
-            } else {
-                return !(dec1.compareTo(dec2) == ゼロ_定値);
-            }
-        }
-    }
-
-    private boolean checkRString(RString str1, RString str2) {
-        if (str1 == null || str1.isEmpty()) {
-            return !(str2 == null || str2.isEmpty());
-        } else {
-            return !str1.equals(str2);
         }
     }
 }

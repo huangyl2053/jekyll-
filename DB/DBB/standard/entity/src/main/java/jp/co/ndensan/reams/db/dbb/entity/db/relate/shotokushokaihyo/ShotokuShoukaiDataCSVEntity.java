@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -49,6 +48,6 @@ public class ShotokuShoukaiDataCSVEntity {
     @CsvField(order = 120, name = "転出日")
     private FlexibleDate 転出日;
     @CsvField(order = 130, name = "被保険者番号")
-    private HihokenshaNo 被保険者番号;
+    private RString 被保険者番号;
 
 }

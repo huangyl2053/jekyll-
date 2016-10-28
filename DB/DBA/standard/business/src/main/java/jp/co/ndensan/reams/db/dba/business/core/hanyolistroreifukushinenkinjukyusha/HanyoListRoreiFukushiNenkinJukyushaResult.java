@@ -507,39 +507,39 @@ public class HanyoListRoreiFukushiNenkinJukyushaResult {
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString(""), new RString("\"市町村コード\"")),
+        市町村コード(new RString("0016"), new RString(""), new RString("shichosonCode")),
         /**
          * 資格取得事由
          */
-        資格取得事由(new RString("0101"), new RString(""), new RString("\"資格取得事由\"")),
+        資格取得事由(new RString("0101"), new RString(""), new RString("shikakuShutokuJiyuCode")),
         /**
          * 資格喪失事由
          */
-        資格喪失事由(new RString("0102"), new RString(""), new RString("\"喪失事由\"")),
+        資格喪失事由(new RString("0102"), new RString(""), new RString("shikakuSoshitsuJiyuCode")),
         /**
          * 証記載保険者番号
          */
-        証記載保険者番号(new RString("0103"), new RString(""), new RString("\"証記載保険者番号\"")),
+        証記載保険者番号(new RString("0103"), new RString(""), new RString("証記載保険者番号")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString(""), new RString("\"被保険者番号\"")),
+        被保険者番号(new RString("0104"), new RString(""), new RString("hihokenshaNo")),
         /**
          * 資格取得日
          */
-        資格取得日(new RString("0105"), new RString(""), new RString("\"資格取得日\"")),
+        資格取得日(new RString("0105"), new RString(""), new RString("shikakuShutokuYMD")),
         /**
          * 資格喪失日
          */
-        資格喪失日(new RString("0106"), new RString(""), new RString("\"資格喪失日\"")),
+        資格喪失日(new RString("0106"), new RString(""), new RString("shikakuSoshitsuYMD")),
         /**
          * 資格取得届出日
          */
-        資格取得届出日(new RString("0109"), new RString(""), new RString("\"資格取得届出日\"")),
+        資格取得届出日(new RString("0109"), new RString(""), new RString("shikakuShutokuTodokedeYMD")),
         /**
          * 資格喪失届出日
          */
-        資格喪失届出日(new RString("0132"), new RString(""), new RString("\"資格喪失届日\""));
+        資格喪失届出日(new RString("0132"), new RString(""), new RString("shikakuSoshitsuTodokedeYMD"));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

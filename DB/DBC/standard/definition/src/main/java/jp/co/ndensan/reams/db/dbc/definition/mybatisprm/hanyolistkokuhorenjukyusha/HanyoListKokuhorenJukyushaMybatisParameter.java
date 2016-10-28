@@ -23,6 +23,7 @@ import lombok.Setter;
 public final class HanyoListKokuhorenJukyushaMybatisParameter implements IMyBatisParameter {
 
     private final RString 保険者コード;
+    private final RString 市町村コード;
     private final RString 日付抽出区分;
     private final RString 処理対象年月From;
     private final RString 処理対象年月To;
@@ -52,6 +53,7 @@ public final class HanyoListKokuhorenJukyushaMybatisParameter implements IMyBati
      */
     private HanyoListKokuhorenJukyushaMybatisParameter(
             RString 保険者コード,
+            RString 市町村コード,
             RString 日付抽出区分,
             RString 処理対象年月From,
             RString 処理対象年月To,
@@ -77,6 +79,7 @@ public final class HanyoListKokuhorenJukyushaMybatisParameter implements IMyBati
             RString 出力順
     ) {
         this.保険者コード = 保険者コード;
+        this.市町村コード = 市町村コード;
         this.日付抽出区分 = 日付抽出区分;
         this.処理対象年月From = 処理対象年月From;
         this.処理対象年月To = 処理対象年月To;
@@ -106,6 +109,7 @@ public final class HanyoListKokuhorenJukyushaMybatisParameter implements IMyBati
      * MybatisParameterの作成です。
      *
      * @param 保険者コード 保険者コード
+     * @param 市町村コード 市町村コード
      * @param 日付抽出区分 日付抽出区分
      * @param 処理対象年月From 処理対象年月From
      * @param 処理対象年月To 処理対象年月To
@@ -124,6 +128,7 @@ public final class HanyoListKokuhorenJukyushaMybatisParameter implements IMyBati
      * @return KijunShunyugakuTekiyoMybatisParameter
      */
     public static HanyoListKokuhorenJukyushaMybatisParameter createMybatisParameter(RString 保険者コード,
+            RString 市町村コード,
             RString 日付抽出区分,
             RString 処理対象年月From,
             RString 処理対象年月To,
@@ -152,10 +157,11 @@ public final class HanyoListKokuhorenJukyushaMybatisParameter implements IMyBati
         } else if (HizukeChushutsuKubun.範囲指定.getコード().equals(日付抽出区分)) {
             is範囲指定 = true;
         }
-        if (!RString.isNullOrEmpty(保険者コード) && !new RString("000000").equals(保険者コード)) {
+        if (!RString.isNullOrEmpty(市町村コード) && !new RString("000000").equals(保険者コード)) {
             has保険者コード = true;
         }
         return new HanyoListKokuhorenJukyushaMybatisParameter(保険者コード,
+                市町村コード,
                 日付抽出区分,
                 処理対象年月From,
                 処理対象年月To,

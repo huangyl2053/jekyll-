@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihy
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.ServiceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyotakuServiceKubun;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060012.KagoMoshitatePanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060012.KyotakuServiceKagoMoshitatePanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060012.dgServive_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -24,14 +24,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KagoMoshitatePanelHandler {
 
-    private final KagoMoshitatePanelDiv div;
+    private final KyotakuServiceKagoMoshitatePanelDiv div;
 
     /**
      * コンストラクタです。
      *
-     * @param div {@link KagoMoshitatePanelDiv}
+     * @param div {@link KyotakuServiceKagoMoshitatePanelDiv}
      */
-    public KagoMoshitatePanelHandler(KagoMoshitatePanelDiv div) {
+    public KagoMoshitatePanelHandler(KyotakuServiceKagoMoshitatePanelDiv div) {
         this.div = div;
     }
 

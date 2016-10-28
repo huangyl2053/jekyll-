@@ -49,7 +49,6 @@ public class HihokenshaTempUpdateKouikiProcess extends BatchProcessBase<Kakohore
     BatchEntityCreatedTempTableWriter 被保険者一時TBL;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 処理結果リスト一時TBL;
-
     @Override
     protected IBatchReader createReader() {
         被保険者一時TBL = new BatchEntityCreatedTempTableWriter(被保険者一時TBL_NAME,
@@ -75,6 +74,7 @@ public class HihokenshaTempUpdateKouikiProcess extends BatchProcessBase<Kakohore
 
     @Override
     protected void afterExecute() {
+        
         IKakohorenJyohoSakuseiCommonMapper mapper = getMapper(IKakohorenJyohoSakuseiCommonMapper.class);
         List<KakohorenJyohoSakuseiCommonEntity> 合併なし市町村情報リスト = mapper.select合併なし市町村情報();
         RDate 基準日 = RDate.getNowDate();

@@ -32,6 +32,7 @@ public class TempDwbTKyufujissekiShukeiKonkyo1Entity extends DbTableEntityBase<T
 
     @TempTableColumnOrder(1)
     private RString dataKubun;
+    @PrimaryKey
     @TempTableColumnOrder(2)
     private RString shukeiKubun;
     @TempTableColumnOrder(3)

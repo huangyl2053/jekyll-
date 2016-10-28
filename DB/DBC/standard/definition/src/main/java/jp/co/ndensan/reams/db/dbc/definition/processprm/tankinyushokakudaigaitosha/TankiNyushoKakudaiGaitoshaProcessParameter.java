@@ -25,6 +25,8 @@ public class TankiNyushoKakudaiGaitoshaProcessParameter implements IBatchProcess
     private final boolean is連番付加;
     private final boolean is日付編集;
     private final RString 保険者コード;
+    private final RString 保険者名;
+    private final RString 市町村コード;
     private final RString 抽出区分;
     private final RString 適用開始年月From;
     private final RString 適用開始年月To;
@@ -42,6 +44,8 @@ public class TankiNyushoKakudaiGaitoshaProcessParameter implements IBatchProcess
      * @param is連番付加 is連番付加
      * @param is日付編集 is日付編集
      * @param 保険者コード 保険者コード
+     * @param 保険者名 保険者名
+     * @param 市町村コード 市町村コード
      * @param 抽出区分 適用開始年月From
      * @param 適用開始年月From 適用開始年月From
      * @param 適用開始年月To 適用開始年月To
@@ -56,6 +60,8 @@ public class TankiNyushoKakudaiGaitoshaProcessParameter implements IBatchProcess
             boolean is連番付加,
             boolean is日付編集,
             RString 保険者コード,
+            RString 保険者名,
+            RString 市町村コード,
             RString 抽出区分,
             RString 適用開始年月From,
             RString 適用開始年月To,
@@ -69,6 +75,8 @@ public class TankiNyushoKakudaiGaitoshaProcessParameter implements IBatchProcess
         this.is連番付加 = is連番付加;
         this.is日付編集 = is日付編集;
         this.保険者コード = 保険者コード;
+        this.保険者名 = 保険者名;
+        this.市町村コード = 市町村コード;
         this.抽出区分 = 抽出区分;
         this.適用開始年月From = 適用開始年月From;
         this.適用開始年月To = 適用開始年月To;

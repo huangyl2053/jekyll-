@@ -47,6 +47,18 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     private HihokenshaNo 被保険者番号;
     private FutanWariaiTempEntity 負担割合情報一時表;
     private boolean 開始Flag;
+    private boolean 八月違い期間存在Flag;
+    private boolean 九月違い期間存在Flag;
+    private boolean 十月違い期間存在Flag;
+    private boolean 十一月違い期間存在Flag;
+    private boolean 十二月違い期間存在Flag;
+    private boolean 一月違い期間存在Flag;
+    private boolean 二月違い期間存在Flag;
+    private boolean 三月違い期間存在Flag;
+    private boolean 四月違い期間存在Flag;
+    private boolean 五月違い期間存在Flag;
+    private boolean 六月違い期間存在Flag;
+    private boolean 七月違い期間存在Flag;
 
     @Override
     protected void initialize() {
@@ -54,6 +66,19 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
         年度 = FlexibleYear.EMPTY;
         被保険者番号 = HihokenshaNo.EMPTY;
         負担割合情報一時表 = new FutanWariaiTempEntity();
+        八月違い期間存在Flag = false;
+        八月違い期間存在Flag = false;
+        九月違い期間存在Flag = false;
+        十月違い期間存在Flag = false;
+        十一月違い期間存在Flag = false;
+        十二月違い期間存在Flag = false;
+        一月違い期間存在Flag = false;
+        二月違い期間存在Flag = false;
+        三月違い期間存在Flag = false;
+        四月違い期間存在Flag = false;
+        五月違い期間存在Flag = false;
+        六月違い期間存在Flag = false;
+        七月違い期間存在Flag = false;
     }
 
     @Override
@@ -62,9 +87,11 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     @Override
-    protected void createWriter() {
+    protected
+            void createWriter() {
         負担割合情報一時表Writer = BatchWriters.batchEntityCreatedTempTableWriter(
-                FutanWariaiTempEntity.class).tempTableName(TEMP_TABLE).build();
+                FutanWariaiTempEntity.class
+        ).tempTableName(TEMP_TABLE).build();
     }
 
     @Override
@@ -92,43 +119,167 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     private void get負担割合情報一時表(UpdShiharaihohoHenkoTempResultEntity entity) {
         負担割合情報一時表.set被保険者番号(entity.get支払方法変更().getHihokenshaNo());
         負担割合情報一時表.set年度(entity.get年度());
-        if (is期間(entity.get年度(), entity, 0)) {
+        if (is全て該当する(entity.get年度(), entity)) {
             負担割合情報一時表.set給付率01(給付率);
-        }
-
-        if (is期間(entity.get年度(), entity, 1)) {
             負担割合情報一時表.set給付率02(給付率);
-        }
-        if (is期間(entity.get年度(), entity, 二)) {
             負担割合情報一時表.set給付率03(給付率);
-        }
-        if (is期間(entity.get年度(), entity, 三)) {
             負担割合情報一時表.set給付率04(給付率);
-        }
-        if (is期間(entity.get年度(), entity, 四)) {
             負担割合情報一時表.set給付率05(給付率);
-        }
-        if (is期間(entity.get年度(), entity, 五)) {
             負担割合情報一時表.set給付率06(給付率);
-        }
-        if (is期間(entity.get年度(), entity, 六)) {
             負担割合情報一時表.set給付率07(給付率);
-        }
-        if (is期間(entity.get年度(), entity, 七)) {
             負担割合情報一時表.set給付率08(給付率);
-        }
-        if (is期間(entity.get年度(), entity, 八)) {
             負担割合情報一時表.set給付率09(給付率);
-        }
-        if (is期間(entity.get年度(), entity, 九)) {
             負担割合情報一時表.set給付率10(給付率);
-        }
-        if (is期間(entity.get年度(), entity, 十)) {
             負担割合情報一時表.set給付率11(給付率);
-        }
-        if (is期間(entity.get年度(), entity, 十一)) {
             負担割合情報一時表.set給付率12(給付率);
+        } else {
+            RString 支払給付率 = null;
+            if (entity.get支払方法変更().getKyufuRitsu() != null) {
+                支払給付率 = new RString(entity.get支払方法変更().getKyufuRitsu().value().toString());
+            }
+            set給付率01(entity, 支払給付率);
+            set給付率02(entity, 支払給付率);
+            set給付率03(entity, 支払給付率);
+            set給付率04(entity, 支払給付率);
+            set給付率05(entity, 支払給付率);
+            set給付率06(entity, 支払給付率);
+            set給付率07(entity, 支払給付率);
+            set給付率08(entity, 支払給付率);
+            set給付率09(entity, 支払給付率);
+            set給付率10(entity, 支払給付率);
+            set給付率11(entity, 支払給付率);
+            set給付率12(entity, 支払給付率);
         }
+    }
+
+    private void set給付率01(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
+        if (is期間(entity.get年度(), entity, 0)) {
+            負担割合情報一時表.set給付率01(支払給付率);
+            if (八月違い期間存在Flag) {
+                負担割合情報一時表.set給付率01(給付率);
+            }
+            八月違い期間存在Flag = true;
+        }
+    }
+
+    private void set給付率02(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
+        if (is期間(entity.get年度(), entity, 1)) {
+            負担割合情報一時表.set給付率02(支払給付率);
+            if (九月違い期間存在Flag) {
+                負担割合情報一時表.set給付率02(給付率);
+            }
+            九月違い期間存在Flag = true;
+        }
+    }
+
+    private void set給付率03(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
+        if (is期間(entity.get年度(), entity, 二)) {
+            負担割合情報一時表.set給付率03(支払給付率);
+            if (十月違い期間存在Flag) {
+                負担割合情報一時表.set給付率03(給付率);
+            }
+            十月違い期間存在Flag = true;
+        }
+    }
+
+    private void set給付率04(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
+        if (is期間(entity.get年度(), entity, 三)) {
+            負担割合情報一時表.set給付率04(支払給付率);
+            if (十一月違い期間存在Flag) {
+                負担割合情報一時表.set給付率04(給付率);
+            }
+            十一月違い期間存在Flag = true;
+        }
+    }
+
+    private void set給付率05(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
+        if (is期間(entity.get年度(), entity, 四)) {
+            負担割合情報一時表.set給付率05(支払給付率);
+            if (十二月違い期間存在Flag) {
+                負担割合情報一時表.set給付率05(給付率);
+            }
+            十二月違い期間存在Flag = true;
+        }
+    }
+
+    private void set給付率06(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
+        if (is期間(entity.get年度(), entity, 五)) {
+            負担割合情報一時表.set給付率06(支払給付率);
+            if (一月違い期間存在Flag) {
+                負担割合情報一時表.set給付率06(給付率);
+            }
+            一月違い期間存在Flag = true;
+        }
+    }
+
+    private void set給付率07(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
+        if (is期間(entity.get年度(), entity, 六)) {
+            負担割合情報一時表.set給付率07(支払給付率);
+            if (二月違い期間存在Flag) {
+                負担割合情報一時表.set給付率07(給付率);
+            }
+            二月違い期間存在Flag = true;
+        }
+    }
+
+    private void set給付率08(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
+        if (is期間(entity.get年度(), entity, 七)) {
+            負担割合情報一時表.set給付率08(支払給付率);
+            if (三月違い期間存在Flag) {
+                負担割合情報一時表.set給付率08(給付率);
+            }
+            三月違い期間存在Flag = true;
+        }
+    }
+
+    private void set給付率09(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
+        if (is期間(entity.get年度(), entity, 八)) {
+            負担割合情報一時表.set給付率09(支払給付率);
+            if (四月違い期間存在Flag) {
+                負担割合情報一時表.set給付率09(給付率);
+            }
+            四月違い期間存在Flag = true;
+        }
+    }
+
+    private void set給付率10(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
+        if (is期間(entity.get年度(), entity, 九)) {
+            負担割合情報一時表.set給付率10(支払給付率);
+            if (五月違い期間存在Flag) {
+                負担割合情報一時表.set給付率10(給付率);
+            }
+            五月違い期間存在Flag = true;
+        }
+    }
+
+    private void set給付率11(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
+        if (is期間(entity.get年度(), entity, 十)) {
+            負担割合情報一時表.set給付率11(支払給付率);
+            if (六月違い期間存在Flag) {
+                負担割合情報一時表.set給付率11(給付率);
+            }
+            六月違い期間存在Flag = true;
+        }
+    }
+
+    private void set給付率12(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
+        if (is期間(entity.get年度(), entity, 十一)) {
+            負担割合情報一時表.set給付率12(支払給付率);
+            if (七月違い期間存在Flag) {
+                負担割合情報一時表.set給付率12(給付率);
+            }
+            七月違い期間存在Flag = true;
+        }
+    }
+
+    private boolean is全て該当する(FlexibleYear 年度, UpdShiharaihohoHenkoTempResultEntity entity) {
+        FlexibleYearMonth 対象開始年月 = new FlexibleYearMonth(年度.toDateString().concat(開始月));
+        FlexibleYearMonth 対象終了年月 = new FlexibleYearMonth(年度.toDateString().concat(開始月)).plusMonth(十一);
+        FlexibleDate tekiyoShuryoYMD = entity.get支払方法変更().getTekiyoShuryoYMD();
+        FlexibleDate tekiyoKaishiYMD = entity.get支払方法変更().getTekiyoKaishiYMD();
+        return 対象開始年月 != null && 対象終了年月 != null && tekiyoShuryoYMD != null && tekiyoKaishiYMD != null
+                && 対象終了年月.isBeforeOrEquals(tekiyoShuryoYMD.getYearMonth())
+                && tekiyoKaishiYMD.getYearMonth().isBeforeOrEquals(対象開始年月);
     }
 
     private boolean is期間(FlexibleYear 年度, UpdShiharaihohoHenkoTempResultEntity entity, int 開始年月から_月数) {
@@ -139,4 +290,5 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
                 && 対象年月.isBeforeOrEquals(tekiyoShuryoYMD.getYearMonth())
                 && tekiyoKaishiYMD.getYearMonth().isBeforeOrEquals(対象年月);
     }
+
 }

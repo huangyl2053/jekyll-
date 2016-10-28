@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaiiinwaritsuke.ShinsaschedulekagamiItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaiiinwaritsuke.ShinsaschedulekagamiReport;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.kaigoninteishinsakaischedulekagami.KaigoNinteiShinsakaiScheduleKagamiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kaigoninteishinsakaischedulekagami.KaigoNinteiShinsakaiScheduleKagamiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaiiinwaritsuke.ShinsaschedulekagamiReportSource;
@@ -50,6 +50,8 @@ public class ShinsakaiScheduleKagamiProcess extends BatchProcessBase<KaigoNintei
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.kaigoninteishinsakaischedulekagami."
             + "IKaigoNinteiShinsakaiScheduleKagamiMapper.get出力明細一覧");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE514002.getReportId();
+    private NinshoshaSource compNinshosha;
+    private Map<Integer, RString> 通知文Map;
     private IKaigoNinteiShinsakaiScheduleKagamiMapper kagamiMapper;
     private List<ShinsaschedulekagamiItem> itemList;
     private KaigoNinteiShinsakaiScheduleKagamiProcessParamter processParamter;
@@ -61,7 +63,9 @@ public class ShinsakaiScheduleKagamiProcess extends BatchProcessBase<KaigoNintei
     protected void initialize() {
         itemList = new ArrayList<>();
         kagamiMapper = getMapper(IKaigoNinteiShinsakaiScheduleKagamiMapper.class);
-
+        compNinshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(),
+                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 1);
     }
 
     @Override
@@ -99,9 +103,6 @@ public class ShinsakaiScheduleKagamiProcess extends BatchProcessBase<KaigoNintei
         }
         CustomerBarCode barcode = new CustomerBarCode();
         RString customerBarCode = barcode.convertCustomerBarCode(entity.getYubinNo(), entity.getJushoText()).getCustomerBarCode();
-        NinshoshaSource compNinshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(),
-                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-        Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 1);
         return new ShinsaschedulekagamiItem(DbBusinessConfig.get(ConfigNameDBE.介護認定審査会スケジュール表鑑,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援),
                 processParamter.getShinsakaiKaisaiKikanFrom(), processParamter.getShinsakaiKaisaiKikanTo(), compNinshosha.denshiKoin,

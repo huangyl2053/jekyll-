@@ -13,14 +13,15 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.NijiYoboJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.NijiYoboJigyoTaishoshaIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.nijiyobojigyotaishosha.NijiYoboJigyoTaishoshaHolder;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1740011.NijiyoboJohoTaishoshaTorokuPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1740011.dgKihonInfo_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1740011.dgNijiyoboJohoTaishoIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.NijiYoboJigyoTaishoshaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
  * 総合事業（経過措置）対象者登録画面
@@ -32,8 +33,6 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
     private static final RString 空白 = RString.EMPTY;
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
-    private static final RString 削除 = new RString("削除");
-    private static final RString BTN_保存する = new RString("btnHozonn");
     private static final RString ZERO = new RString("0");
     private final NijiyoboJohoTaishoshaTorokuPanelDiv div;
 
@@ -54,47 +53,47 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
      */
     public void onLoad(TaishoshaKey 資格対象者, List<NijiYoboJigyoTaishosha> 二次予防情報対象一覧List) {
         div.set被保険者番号(資格対象者.get被保険者番号().getColumnValue());
+        div.set識別コード(資格対象者.get識別コード().getColumnValue());
         initialize(資格対象者);
         二次予防情報対象一覧グリッドを表示する(二次予防情報対象一覧List);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_保存する, true);
     }
 
     private void initialize(TaishoshaKey 資格対象者) {
-        div.getKaigoAtenaInfoChildDiv1().initialize(資格対象者.get識別コード());
-        div.getKaiigoShikakCommonChildDiv2().initialize(資格対象者.get被保険者番号());
+        div.getCcdKaigoAtenaInfo().initialize(資格対象者.get識別コード());
+        div.getCcdKaiigoShikakuKihon().initialize(資格対象者.get被保険者番号());
     }
 
     private void 二次予防情報対象一覧グリッドを表示する(List<NijiYoboJigyoTaishosha> 二次予防情報対象一覧List) {
-        List<dgKihonInfo_Row> rowList = new ArrayList<>();
+        List<dgNijiyoboJohoTaishoIchiran_Row> rowList = new ArrayList<>();
         if (null != 二次予防情報対象一覧List && (!二次予防情報対象一覧List.isEmpty())) {
             for (NijiYoboJigyoTaishosha 二次予防情報 : 二次予防情報対象一覧List) {
-                dgKihonInfo_Row row = new dgKihonInfo_Row();
-                row.setJoutai(空白);
+                dgNijiyoboJohoTaishoIchiran_Row row = new dgNijiyoboJohoTaishoIchiran_Row();
+                row.setRowState(RowState.Unchanged);
                 if (null != 二次予防情報.get適用開始年月日() && (!FlexibleDate.EMPTY.equals(二次予防情報.get適用開始年月日()))) {
-                    row.getTekiyouKaishiBi().setValue(new RDate(二次予防情報.get適用開始年月日().toString()));
+                    row.getTekiyoKaishiYMD().setValue(new RDate(二次予防情報.get適用開始年月日().toString()));
                 }
                 if (null != 二次予防情報.get適用終了年月日() && (!FlexibleDate.EMPTY.equals(二次予防情報.get適用終了年月日()))) {
-                    row.getTekiyouShuuryouBi().setValue(new RDate(二次予防情報.get適用終了年月日().toString()));
+                    row.getTekiyoShuryoYMD().setValue(new RDate(二次予防情報.get適用終了年月日().toString()));
                 }
                 if (null != 二次予防情報.get調査実施日() && (!FlexibleDate.EMPTY.equals(二次予防情報.get調査実施日()))) {
-                    row.getChousaZisshiBi().setValue(new RDate(二次予防情報.get調査実施日().toString()));
+                    row.getChosaJisshiYMD().setValue(new RDate(二次予防情報.get調査実施日().toString()));
                 }
                 if (null != 二次予防情報.get決定年月日() && (!FlexibleDate.EMPTY.equals(二次予防情報.get決定年月日()))) {
-                    row.getKetteiBi().setValue(new RDate(二次予防情報.get決定年月日().toString()));
+                    row.getKetteiYMD().setValue(new RDate(二次予防情報.get決定年月日().toString()));
                 }
                 row.setRirekiNo(new RString(二次予防情報.get履歴番号()));
                 rowList.add(row);
             }
             sortDg二次予防情報対象一覧(rowList);
         }
-        div.getKihonnInfo().getDgKihonInfo().setDataSource(rowList);
+        div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().setDataSource(rowList);
     }
 
-    private void sortDg二次予防情報対象一覧(List<dgKihonInfo_Row> rowList) {
-        Collections.sort(rowList, new Comparator<dgKihonInfo_Row>() {
+    private void sortDg二次予防情報対象一覧(List<dgNijiyoboJohoTaishoIchiran_Row> rowList) {
+        Collections.sort(rowList, new Comparator<dgNijiyoboJohoTaishoIchiran_Row>() {
             @Override
-            public int compare(dgKihonInfo_Row row1, dgKihonInfo_Row row2) {
-                return row1.getTekiyouKaishiBi().getValue().isBefore(row2.getTekiyouKaishiBi().getValue()) ? -1 : 1;
+            public int compare(dgNijiyoboJohoTaishoIchiran_Row row1, dgNijiyoboJohoTaishoIchiran_Row row2) {
+                return row1.getTekiyoKaishiYMD().getValue().isBefore(row2.getTekiyoKaishiYMD().getValue()) ? -1 : 1;
             }
         });
     }
@@ -105,37 +104,26 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
     public void onClick_btnAdd() {
         div.setOperateState(追加);
         二次予防情報対象詳細パネルにクリアする();
-        二次予防情報対象詳細パネルに制御を設定する();
+        二次予防情報対象詳細パネルに確定するボタン制御を設定する();
     }
 
     private void 二次予防情報対象詳細パネルにクリアする() {
-        div.getSoukoinfo().getTxtymfromto().clearFromValue();
-        div.getSoukoinfo().getTxtymfromto().clearToValue();
-        div.getSoukoinfo().getTxtChousaZisshibi().clearValue();
-        div.getSoukoinfo().getTxtKetteibi().clearValue();
-        div.getSoukoinfo().getBtnConfirm().setDisabled(false);
-    }
-
-    private void 二次予防情報対象詳細パネルに制御を設定する() {
-        boolean is削除状態 = 削除.equals(div.getOperateState());
-        div.getSoukoinfo().getTxtymfromto().setDisabled(is削除状態);
-        div.getSoukoinfo().getTxtChousaZisshibi().setDisabled(is削除状態);
-        div.getSoukoinfo().getTxtKetteibi().setDisabled(is削除状態);
-
-        if (!is削除状態) {
-            二次予防情報対象詳細パネルに確定するボタン制御を設定する();
-        }
+        div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().clearFromValue();
+        div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().clearToValue();
+        div.getNijiyoboJohoShosai().getTxtChosaJisshiYMD().clearValue();
+        div.getNijiyoboJohoShosai().getTxtKetteiYMD().clearValue();
+        div.getNijiyoboJohoShosai().getBtnConfirm().setDisabled(false);
     }
 
     private void 二次予防情報対象詳細パネルに確定するボタン制御を設定する() {
-        List<dgKihonInfo_Row> rowList = div.getKihonnInfo().getDgKihonInfo().getDataSource();
+        List<dgNijiyoboJohoTaishoIchiran_Row> rowList = div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getDataSource();
         boolean is適用開始日と登録済みの適用期間が重なる = false;
-        RDate 適用開始日 = div.getSoukoinfo().getTxtymfromto().getFromValue();
+        RDate 適用開始日 = div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().getFromValue();
         RString clickRirekiNo = 追加.equals(div.getOperateState()) ? ZERO
-                : div.getKihonnInfo().getDgKihonInfo().getClickedItem().getRirekiNo();
-        for (dgKihonInfo_Row row : rowList) {
-            RDate 登録済みの適用期間開始日 = row.getTekiyouKaishiBi().getValue();
-            RDate 登録済みの適用期間終了日 = row.getTekiyouShuuryouBi().getValue();
+                : div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getClickedItem().getRirekiNo();
+        for (dgNijiyoboJohoTaishoIchiran_Row row : rowList) {
+            RDate 登録済みの適用期間開始日 = row.getTekiyoKaishiYMD().getValue();
+            RDate 登録済みの適用期間終了日 = row.getTekiyoShuryoYMD().getValue();
             if (null == 適用開始日) {
                 is適用開始日と登録済みの適用期間が重なる = true;
             } else if ((!clickRirekiNo.equals(row.getRirekiNo()))
@@ -144,7 +132,7 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
                 is適用開始日と登録済みの適用期間が重なる = true;
             }
         }
-        div.getSoukoinfo().getBtnConfirm().setDisabled(is適用開始日と登録済みの適用期間が重なる);
+        div.getNijiyoboJohoShosai().getBtnConfirm().setDisabled(is適用開始日と登録済みの適用期間が重なる);
     }
 
     /**
@@ -154,26 +142,26 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
         div.setOperateState(修正);
         二次予防情報対象詳細パネルにクリアする();
         二次予防情報対象詳細パネルに表示する();
-        二次予防情報対象詳細パネルに制御を設定する();
+        二次予防情報対象詳細パネルに確定するボタン制御を設定する();
     }
 
     private void 二次予防情報対象詳細パネルに表示する() {
-        dgKihonInfo_Row row = div.getKihonnInfo().getDgKihonInfo().getClickedItem();
-        div.getSoukoinfo().getTxtymfromto().clearFromValue();
-        div.getSoukoinfo().getTxtymfromto().clearToValue();
-        if (null != row.getTekiyouKaishiBi().getValue()) {
-            div.getSoukoinfo().getTxtymfromto().setFromValue(row.getTekiyouKaishiBi().getValue());
+        dgNijiyoboJohoTaishoIchiran_Row row = div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getClickedItem();
+        div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().clearFromValue();
+        div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().clearToValue();
+        if (null != row.getTekiyoKaishiYMD().getValue()) {
+            div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().setFromValue(row.getTekiyoKaishiYMD().getValue());
         }
-        if (null != row.getTekiyouShuuryouBi().getValue()) {
-            div.getSoukoinfo().getTxtymfromto().setToValue(row.getTekiyouShuuryouBi().getValue());
+        if (null != row.getTekiyoShuryoYMD().getValue()) {
+            div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().setToValue(row.getTekiyoShuryoYMD().getValue());
         }
-        div.getSoukoinfo().getTxtChousaZisshibi().clearValue();
-        if (null != row.getChousaZisshiBi().getValue()) {
-            div.getSoukoinfo().getTxtChousaZisshibi().setValue(row.getChousaZisshiBi().getValue());
+        div.getNijiyoboJohoShosai().getTxtChosaJisshiYMD().clearValue();
+        if (null != row.getChosaJisshiYMD().getValue()) {
+            div.getNijiyoboJohoShosai().getTxtChosaJisshiYMD().setValue(row.getChosaJisshiYMD().getValue());
         }
-        div.getSoukoinfo().getTxtKetteibi().clearValue();
-        if (null != row.getKetteiBi().getValue()) {
-            div.getSoukoinfo().getTxtKetteibi().setValue(row.getKetteiBi().getValue());
+        div.getNijiyoboJohoShosai().getTxtKetteiYMD().clearValue();
+        if (null != row.getKetteiYMD().getValue()) {
+            div.getNijiyoboJohoShosai().getTxtKetteiYMD().setValue(row.getKetteiYMD().getValue());
         }
     }
 
@@ -181,10 +169,12 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
      * 「追加する」ボタンを処理します。
      */
     public void onClick_dgDelete() {
-        div.setOperateState(削除);
-        二次予防情報対象詳細パネルにクリアする();
-        二次予防情報対象詳細パネルに表示する();
-        二次予防情報対象詳細パネルに制御を設定する();
+        if (RowState.Added != div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getClickedItem().getRowState()) {
+            div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getClickedItem().setRowState(RowState.Deleted);
+        } else {
+            div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getDataSource().remove(
+                    div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getClickedRowId());
+        }
     }
 
     /**
@@ -199,39 +189,29 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
      */
     public void onClick_btnConfim() {
         if (追加.equals(div.getOperateState())) {
-            dgKihonInfo_Row row = new dgKihonInfo_Row();
-            row.setJoutai(追加);
+            dgNijiyoboJohoTaishoIchiran_Row row = new dgNijiyoboJohoTaishoIchiran_Row();
+            row.setRowState(RowState.Added);
             二次予防情報対象一覧に修正された行の内容を変更する(row);
-            div.getKihonnInfo().getDgKihonInfo().getDataSource().add(row);
+            div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getDataSource().add(row);
 
-            List<dgKihonInfo_Row> rowList = div.getKihonnInfo().getDgKihonInfo().getDataSource();
+            List<dgNijiyoboJohoTaishoIchiran_Row> rowList = div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getDataSource();
             sortDg二次予防情報対象一覧(rowList);
-            div.getKihonnInfo().getDgKihonInfo().setDataSource(rowList);
+            div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().setDataSource(rowList);
         }
         if (修正.equals(div.getOperateState())) {
-            dgKihonInfo_Row row = div.getKihonnInfo().getDgKihonInfo().getClickedItem();
-            if (!追加.equals(row.getJoutai())) {
-                row.setJoutai(修正);
+            dgNijiyoboJohoTaishoIchiran_Row row = div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getClickedItem();
+            if (RowState.Added != row.getRowState()) {
+                row.setRowState(RowState.Modified);
             }
             二次予防情報対象一覧に修正された行の内容を変更する(row);
-        }
-        if (削除.equals(div.getOperateState())) {
-            dgKihonInfo_Row row = div.getKihonnInfo().getDgKihonInfo().getClickedItem();
-            if (追加.equals(row.getJoutai())) {
-                div.getKihonnInfo().getDgKihonInfo().getDataSource().remove(
-                        div.getKihonnInfo().getDgKihonInfo().getClickedRowId());
-            } else {
-                row.setJoutai(削除);
-                二次予防情報対象一覧に修正された行の内容を変更する(row);
-            }
         }
     }
 
-    private void 二次予防情報対象一覧に修正された行の内容を変更する(dgKihonInfo_Row row) {
-        row.getTekiyouKaishiBi().setValue(div.getSoukoinfo().getTxtymfromto().getFromValue());
-        row.getTekiyouShuuryouBi().setValue(div.getSoukoinfo().getTxtymfromto().getToValue());
-        row.getChousaZisshiBi().setValue(div.getSoukoinfo().getTxtChousaZisshibi().getValue());
-        row.getKetteiBi().setValue(div.getSoukoinfo().getTxtKetteibi().getValue());
+    private void 二次予防情報対象一覧に修正された行の内容を変更する(dgNijiyoboJohoTaishoIchiran_Row row) {
+        row.getTekiyoKaishiYMD().setValue(div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().getFromValue());
+        row.getTekiyoShuryoYMD().setValue(div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().getToValue());
+        row.getChosaJisshiYMD().setValue(div.getNijiyoboJohoShosai().getTxtChosaJisshiYMD().getValue());
+        row.getKetteiYMD().setValue(div.getNijiyoboJohoShosai().getTxtKetteiYMD().getValue());
     }
 
     /**
@@ -242,78 +222,83 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
     }
 
     /**
-     * 総合事業（経過措置）対象者登録画面 「保存する」ボタンの制御を処理します。
+     * 総合事業（経過措置）対象者登録画面ボタンの制御を処理します。
+     *
+     * @param is非活性_追加するボタン boolean
      */
-    public void onState_btnSave() {
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_保存する, true);
-        List<dgKihonInfo_Row> rowList = div.getKihonnInfo().getDgKihonInfo().getDataSource();
-        for (dgKihonInfo_Row row : rowList) {
-            if (!空白.equals(row.getJoutai())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_保存する, false);
-            }
-        }
+    public void onState(boolean is非活性_追加するボタン) {
+        div.getNijiyoboJohoTaishoIchiran().getBtnAdd().setDisabled(is非活性_追加するボタン);
     }
 
     /**
      * 二次予防情報対象一覧のデータを保存します。
      *
-     * @param rowList List<dgKihonInfo_Row>
+     * @param rowList List<dgNijiyoboJohoTaishoIchiran_Row>
      * @param 被保険者番号 HihokenshaNo
      * @param holder NijiYoboJigyoTaishoshaHolder
      */
-    public void 二次予防情報対象一覧のデータを保存する(List<dgKihonInfo_Row> rowList,
+    public void 二次予防情報対象一覧のデータを保存する(List<dgNijiyoboJohoTaishoIchiran_Row> rowList,
             HihokenshaNo 被保険者番号, NijiYoboJigyoTaishoshaHolder holder) {
         int 履歴番号MAX = 0;
-        for (dgKihonInfo_Row row : rowList) {
-            if ((!追加.equals(row.getJoutai())) && (!RString.isNullOrEmpty(row.getRirekiNo()))
+        for (dgNijiyoboJohoTaishoIchiran_Row row : rowList) {
+            if ((RowState.Added != row.getRowState()) && (!RString.isNullOrEmpty(row.getRirekiNo()))
                     && 履歴番号MAX < Integer.parseInt(row.getRirekiNo().toString())) {
                 履歴番号MAX = Integer.parseInt(row.getRirekiNo().toString());
             }
         }
         List<NijiYoboJigyoTaishosha> changeItems = new ArrayList<>();
-        for (dgKihonInfo_Row row : rowList) {
-            if (追加.equals(row.getJoutai())) {
+        for (dgNijiyoboJohoTaishoIchiran_Row row : rowList) {
+            if (RowState.Added == row.getRowState()) {
                 履歴番号MAX++;
                 NijiYoboJigyoTaishosha changeItem = new NijiYoboJigyoTaishosha(被保険者番号, 履歴番号MAX).createBuilderForEdit()
-                        .set適用開始年月日(null == row.getTekiyouKaishiBi().getValue() ? FlexibleDate.EMPTY
-                                : new FlexibleDate(row.getTekiyouKaishiBi().getValue().toString()))
-                        .set適用終了年月日(null == row.getTekiyouShuuryouBi().getValue() ? FlexibleDate.EMPTY
-                                : new FlexibleDate(row.getTekiyouShuuryouBi().getValue().toString()))
-                        .set調査実施日(null == row.getChousaZisshiBi().getValue() ? FlexibleDate.EMPTY
-                                : new FlexibleDate(row.getChousaZisshiBi().getValue().toString()))
-                        .set決定年月日(null == row.getKetteiBi().getValue() ? FlexibleDate.EMPTY
-                                : new FlexibleDate(row.getKetteiBi().getValue().toString()))
+                        .set適用開始年月日(null == row.getTekiyoKaishiYMD().getValue() ? FlexibleDate.EMPTY
+                                : new FlexibleDate(row.getTekiyoKaishiYMD().getValue().toString()))
+                        .set適用終了年月日(null == row.getTekiyoShuryoYMD().getValue() ? FlexibleDate.EMPTY
+                                : new FlexibleDate(row.getTekiyoShuryoYMD().getValue().toString()))
+                        .set調査実施日(null == row.getChosaJisshiYMD().getValue() ? FlexibleDate.EMPTY
+                                : new FlexibleDate(row.getChosaJisshiYMD().getValue().toString()))
+                        .set決定年月日(null == row.getKetteiYMD().getValue() ? FlexibleDate.EMPTY
+                                : new FlexibleDate(row.getKetteiYMD().getValue().toString()))
                         .set受付年月日(FlexibleDate.EMPTY)
                         .build();
                 changeItems.add(changeItem);
             }
-            if (修正.equals(row.getJoutai())) {
+            if (RowState.Modified == row.getRowState()) {
                 int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());
                 NijiYoboJigyoTaishosha changeItem
                         = holder.getNijiYoboJigyoTaishosha(new NijiYoboJigyoTaishoshaIdentifier(被保険者番号, 履歴番号)).createBuilderForEdit()
-                        .set適用開始年月日(null == row.getTekiyouKaishiBi().getValue() ? FlexibleDate.EMPTY
-                                : new FlexibleDate(row.getTekiyouKaishiBi().getValue().toString()))
-                        .set適用終了年月日(null == row.getTekiyouShuuryouBi().getValue() ? FlexibleDate.EMPTY
-                                : new FlexibleDate(row.getTekiyouShuuryouBi().getValue().toString()))
-                        .set調査実施日(null == row.getChousaZisshiBi().getValue() ? FlexibleDate.EMPTY
-                                : new FlexibleDate(row.getChousaZisshiBi().getValue().toString()))
-                        .set決定年月日(null == row.getKetteiBi().getValue() ? FlexibleDate.EMPTY
-                                : new FlexibleDate(row.getKetteiBi().getValue().toString()))
+                        .set適用開始年月日(null == row.getTekiyoKaishiYMD().getValue() ? FlexibleDate.EMPTY
+                                : new FlexibleDate(row.getTekiyoKaishiYMD().getValue().toString()))
+                        .set適用終了年月日(null == row.getTekiyoShuryoYMD().getValue() ? FlexibleDate.EMPTY
+                                : new FlexibleDate(row.getTekiyoShuryoYMD().getValue().toString()))
+                        .set調査実施日(null == row.getChosaJisshiYMD().getValue() ? FlexibleDate.EMPTY
+                                : new FlexibleDate(row.getChosaJisshiYMD().getValue().toString()))
+                        .set決定年月日(null == row.getKetteiYMD().getValue() ? FlexibleDate.EMPTY
+                                : new FlexibleDate(row.getKetteiYMD().getValue().toString()))
                         .build();
                 changeItems.add(changeItem);
             }
-            if (削除.equals(row.getJoutai())) {
+            if (RowState.Deleted == row.getRowState()) {
                 int 履歴番号 = Integer.parseInt(row.getRirekiNo().toString());
                 NijiYoboJigyoTaishosha changeItem
                         = holder.getNijiYoboJigyoTaishosha(new NijiYoboJigyoTaishoshaIdentifier(被保険者番号, 履歴番号)).deleted();
                 changeItems.add(changeItem);
             }
         }
-        if (!changeItems.isEmpty()) {
+        二次予防情報対象一覧のデータ更新する(changeItems);
+    }
+
+    private void 二次予防情報対象一覧のデータ更新する(List<NijiYoboJigyoTaishosha> changeItems) {
+        boolean isSuccess = true;
+        if (null != changeItems && (!changeItems.isEmpty())) {
             NijiYoboJigyoTaishoshaManager manager = new NijiYoboJigyoTaishoshaManager();
             for (NijiYoboJigyoTaishosha changeItem : changeItems) {
-                manager.saveOrDeletePhysicalBy二次予防事業対象者(changeItem);
+                if (!manager.saveOrDeletePhysicalBy二次予防事業対象者(changeItem)) {
+                    isSuccess = false;
+                }
             }
         }
+        div.getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                div.get被保険者番号(), div.getNijiyoboTaishosha().getCcdKaigoAtenaInfo().get氏名漢字(), isSuccess);
     }
 }

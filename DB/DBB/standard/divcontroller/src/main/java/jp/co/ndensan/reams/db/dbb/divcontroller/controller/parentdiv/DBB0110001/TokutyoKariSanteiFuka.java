@@ -27,7 +27,7 @@ public class TokutyoKariSanteiFuka {
     private static final RString DBBMN33001 = new RString("DBBMN33001");
     private static final RString DBBMN33002 = new RString("DBBMN33002");
     private static final RString 特徴仮算定賦課 = new RString("特徴仮算定賦課");
-    private static final RString 特徴仮算定通知書一括発行 = new RString("特徴仮算定通知書一括発行");
+    private static final RString 特徴仮算定通知書一括発行 = new RString("特徴仮算定通知書作成");
 
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード) .

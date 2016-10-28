@@ -436,19 +436,19 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             if (行状態_削除.equals(tmpRow.getTxtJyotai())) {
                 削除レコード数 = 削除レコード数 + 1;
             } else {
-                RString tmp著工日 = tmpRow.getTxtChakkoYoteibi().isNullOrEmpty() ? RString.EMPTY
+                RString tmp著工日 = RString.isNullOrEmpty(tmpRow.getTxtChakkoYoteibi()) ? RString.EMPTY
                         : new FlexibleDate(new RDate(tmpRow.getTxtChakkoYoteibi().toString()).toDateString())
                         .getYearMonth().toDateString();
-                RString tmp完成日 = tmpRow.getTxtKanseiYoteibi().isNullOrEmpty() ? RString.EMPTY
+                RString tmp完成日 = RString.isNullOrEmpty(tmpRow.getTxtKanseiYoteibi()) ? RString.EMPTY
                         : new FlexibleDate(new RDate(tmpRow.getTxtKanseiYoteibi().toString()).toDateString())
                         .getYearMonth().toDateString();
                 著工日リスト.add(tmp著工日);
                 完成日リスト.add(tmp完成日);
                 if (!著工日に対する年月.equals(tmp著工日)) {
-                    著工日に対する年月不一致レコード = 著工日に対する年月不一致レコード + 1;
+                    著工日に対する年月不一致レコード++;
                 }
                 if (!対象住宅住所.equals(tmpRow.getTxtJutakuAddress())) {
-                    対象住宅住所が不一致レコード = 対象住宅住所が不一致レコード + 1;
+                    対象住宅住所が不一致レコード++;
                 }
             }
         }
@@ -473,7 +473,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
      * @return チェック結果
      */
     public boolean 入力チェック(RString 画面モード, HihokenshaNo hihokenshaNo) {
-        if (div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho().getTxtJutakuOwner().getValue().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(div.getKaigoShikakuKihonShaPanel().getTabShinseiJyoho().getTxtJutakuOwner().getValue())) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(住宅所有者.toString()));
         }
         if (div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
@@ -484,8 +484,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         }
         if (ShoninKubun.承認しない.getコード().equals(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabShinsaKakka().getRadJudgeKubun().getSelectedKey())
-                && div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtFushoninReason()
-                .getValue().isNullOrEmpty()) {
+                && RString.isNullOrEmpty(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
+                        .getTxtFushoninReason().getValue())) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(不承認理由.toString()));
         }
         if (div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
@@ -611,15 +611,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         Code 要介護認定状態区分コード = result.get要介護認定状態区分コード();
 
         List<RString> 要介護認定状態区分コードリスト = new ArrayList<>();
-        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.非該当.getCode());
-        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援_経過的要介護.getCode());
-        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援1.getCode());
-        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要支援2.getCode());
-        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護1.getCode());
-        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護2.getCode());
-        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護3.getCode());
-        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護4.getCode());
-        要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護5.getCode());
+        for (YoKaigoJotaiKubun 状態区分 : YoKaigoJotaiKubun.values()) {
+            要介護認定状態区分コードリスト.add(状態区分.getCode());
+        }
         if (!要介護認定状態区分コードリスト.contains(要介護認定状態区分コード.getKey())) {
             throw new ApplicationException(DbcErrorMessages.要介護状態_事前申請不可.getMessage());
         }

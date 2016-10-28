@@ -45,4 +45,5 @@ public class IdouTblEntity extends DbTableEntityBase<IdouTblEntity> implements I
     private RString 二次予防事業対象者;
     private RString 総合事業対象者;
     private RString 被保険者台帳管理;
+    private RString エラーフラグ;
 }

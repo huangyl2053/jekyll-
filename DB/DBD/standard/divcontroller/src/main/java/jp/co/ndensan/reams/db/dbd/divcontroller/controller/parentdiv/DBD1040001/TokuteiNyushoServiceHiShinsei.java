@@ -370,7 +370,7 @@ public class TokuteiNyushoServiceHiShinsei {
                 builder = 特別地域加算減免ViewState.getTokubetsuchiikiKasanGemmen().createBuilderForEdit();
             } else {
                 Integer 新規履歴番号 = ViewStateHolder.get(ViewStateKeys.新規履歴番号, Integer.class);
-                履歴番号 = 新規履歴番号 - 1; //TODO
+                履歴番号 = 新規履歴番号 - 1;
                 ViewStateHolder.put(ViewStateKeys.新規履歴番号, 履歴番号);
                 gemmenGengakuShinsei = new GemmenGengakuShinsei(
                         証記載保険者番号, 被保険者番号, GemmenGengakuShurui.特別地域加算減免.getコード(), 履歴番号);

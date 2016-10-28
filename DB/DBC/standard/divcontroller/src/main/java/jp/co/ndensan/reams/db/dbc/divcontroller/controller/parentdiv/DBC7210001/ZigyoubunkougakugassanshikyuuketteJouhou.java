@@ -8,12 +8,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7210001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710210.DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7210001.ZigyoubunkougakugassanshikyuuketteJouhouDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7210001.HanyoListBachParamHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -61,19 +68,13 @@ public class ZigyoubunkougakugassanshikyuuketteJouhou {
      */
     public ResponseData<ZigyoubunkougakugassanshikyuuketteJouhouDiv> onClick_btnBatchParameterRestore(ZigyoubunkougakugassanshikyuuketteJouhouDiv div) {
         BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
-        // TODO 出力項目ID 改頁出力順ID
-//        RString 帳票ID = restoreBatchParameterMap.getParameterValue(RString.class, new RString("帳票ID"));
-//        if (!RString.isNullOrEmpty(帳票ID)) {
-//
-//        }
-//        RString 出力順ID = restoreBatchParameterMap.getParameterValue(RString.class, new RString("出力順ID"));
-//        if (!RString.isNullOrEmpty(出力順ID)) {
-//
-//        }
-//        RString 出力順項目ID = restoreBatchParameterMap.getParameterValue(RString.class, new RString("出力順項目ID"));
-//        if (!RString.isNullOrEmpty(出力順項目ID)) {
-//
-//        }
+
+        RString 出力順ID = restoreBatchParameterMap.getParameterValue(RString.class, new RString("出力順ID"));
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701021.getReportId(),
+                    Long.valueOf(出力順ID.toString()));
+        }
+
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("is項目名付加"));
         if (is項目名付加) {
@@ -114,11 +115,15 @@ public class ZigyoubunkougakugassanshikyuuketteJouhou {
         } else {
             div.getRadSiharaiHohoKubun().setSelectedKey(すべて);
         }
-        //TODO QA1619提出する。
-//        RString 金融機関コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("金融機関コード"));
-//        div.getCcdKinyuKikan().set金融機関(金融機関コード)
-//        RString 金融機関名 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("金融機関名"));
-//        div.getCcdKinyuKikan().set金融機関TextLeftラベル(金融機関名);
+        RString 金融機関コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("金融機関コード"));
+        RString 支店コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("支店コード"));
+        FlexibleDate kijunYMD = FlexibleDate.getNowDate();
+        KinyuKikan kinyuKikan = new KinyuKikan(new KinyuKikanCode(金融機関コード), kijunYMD);
+        KinyuKikanShiten kinyuKikanShiten = new KinyuKikanShiten(kinyuKikan.get金融機関コード(), new KinyuKikanShitenCode(支店コード), kijunYMD);
+        div.getCcdKinyuKikan().set金融機関(kinyuKikan.createBuilderForEdit().
+                set金融機関支店(kinyuKikanShiten).build(), kinyuKikanShiten.get支店コード(), kijunYMD);
+        div.getCcdKinyuKikan().search(kinyuKikan.
+                get金融機関コード(), new KinyuKikanShitenCode(支店コード), kijunYMD);
         RString 対象年度 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("対象年度"));
         if (!RString.isNullOrEmpty(対象年度)) {
             div.getDdlTaishoNendo().setSelectedKey(対象年度);

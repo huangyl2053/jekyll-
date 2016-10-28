@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110050.DbWT2112ShokanMeisa
 import jp.co.ndensan.reams.db.dbc.service.core.shokanrenrakuhyoout.ShokanRenrakuhyoOutManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -139,6 +141,12 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
     private int 利用者負担額合計;
     private int サービス単位数合計;
     private int 請求金額;
+    private HihokenshaNo 被保険者番号;
+    private FlexibleYearMonth サービス提供年月;
+    private RString 整理番号;
+    private JigyoshaNo 事業者番号;
+    private RString 様式番号;
+    private RString 明細番号;
 
     @BatchWriter
     private CsvListWriter csvWriter;
@@ -194,16 +202,23 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
                 レコード番号 = レコード番号 + INDEX_1;
                 csvWriter.writeLine(getHeadEntity(entity));
                 総出力件数 = 総出力件数 + INDEX_1;
-            } else {
+            } else if (is償還明細キー(beforeEntity)) {
                 addMeisaiEntityWriter(beforeEntity, lastFlag);
             }
+            beforeEntity = entity;
+            被保険者番号 = entity.getHiHokenshaNo();
+            サービス提供年月 = entity.getServiceTeikyoYM();
+            整理番号 = entity.getSeiriNo();
+            事業者番号 = entity.getJigyoshaNo();
+            様式番号 = entity.getYoshikiNo();
+            明細番号 = entity.getMeisaiNo();
         } else {
-            if (entity.getDataKubun().equals(beforeEntity.getDataKubun())) {
-                lastFlag = false;
+            if (beforeEntity != null && entity.getDataKubun() != null && is償還明細キー(beforeEntity)) {
+                lastFlag = !entity.getDataKubun().equals(beforeEntity.getDataKubun());
+                addMeisaiEntityWriter(beforeEntity, lastFlag);
+                beforeEntity = entity;
             }
-            addMeisaiEntityWriter(beforeEntity, lastFlag);
         }
-        beforeEntity = entity;
     }
 
     @Override
@@ -221,6 +236,18 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         }
         outputCount.setValue(総出力件数);
         outputEntry.setValue(entryList);
+    }
+
+    private boolean is償還明細キー(DbWT2112ShokanMeisaiTempEntity entity) {
+        if (被保険者番号 == null || サービス提供年月 == null || 整理番号 == null || 事業者番号 == null
+                || 様式番号 == null || 明細番号 == null) {
+            return false;
+        } else if (被保険者番号.equals(entity.getHiHokenshaNo()) && サービス提供年月.equals(entity.getServiceTeikyoYM())
+                && 整理番号.equals(entity.getSeiriNo()) && 事業者番号.equals(entity.getJigyoshaNo())
+                && 様式番号.equals(entity.getYoshikiNo()) && 明細番号.equals(entity.getMeisaiNo())) {
+            return true;
+        }
+        return false;
     }
 
     private void addMeisaiEntityWriter(DbWT2112ShokanMeisaiTempEntity entity, boolean lastFlag) {

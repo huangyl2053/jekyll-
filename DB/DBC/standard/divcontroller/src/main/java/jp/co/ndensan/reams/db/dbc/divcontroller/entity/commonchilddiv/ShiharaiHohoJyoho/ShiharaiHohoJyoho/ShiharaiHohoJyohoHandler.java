@@ -53,6 +53,8 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 住宅改修費支給申請 = new RString("DBCUC07100");
     private final RString 住宅改修費事前申請 = new RString("DBCUC07000");
     private final RString 償還払い費支給申請 = new RString("DBCUC08100");
+    private final RString 住宅改修費支給申請一括審査_決定 = new RString("DBCUC07200");
+    private final RString 福祉用具購入費支給申請一括審査_決定 = new RString("DBCUC06100");
     private final RString 高額サービス費支給申請 = new RString("DBCUC04400");
     private final RString 総合事業高額サービス費支給申請 = new RString("DBCUC04401");
     private final RString 高額合算支給申請 = new RString("DBCUC11000");
@@ -98,7 +100,7 @@ public class ShiharaiHohoJyohoHandler {
                 div.getRadKoza().setSelectedKey(支払方法区分.getコード());
                 List<Koza> koza = ShiharaiHohoJyohoFinder.createInstance()
                         .getKozaJyoho(KozaParameter.createParam(支給申請情報.
-                                getKozaId(), null, null)).records();
+                                        getKozaId(), null, null)).records();
                 if (!koza.isEmpty()) {
 
                     口座払いエリアの初期化(koza.get(0), 支給申請情報.getKozaId());
@@ -963,7 +965,9 @@ public class ShiharaiHohoJyohoHandler {
                 || 福祉用具購入費支給申請.equals(uiContainerId)
                 || 住宅改修費支給申請.equals(uiContainerId)
                 || 住宅改修費事前申請.equals(uiContainerId)
-                || 償還払い費支給申請.equals(uiContainerId)) {
+                || 償還払い費支給申請.equals(uiContainerId)
+                || 住宅改修費支給申請一括審査_決定.equals(uiContainerId)
+                || 福祉用具購入費支給申請一括審査_決定.equals(uiContainerId)) {
 
             return ShunoKamokuShubetsu.介護給付_償還;
 

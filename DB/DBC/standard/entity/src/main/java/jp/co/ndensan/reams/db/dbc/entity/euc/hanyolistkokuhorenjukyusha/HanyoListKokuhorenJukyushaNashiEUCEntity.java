@@ -112,14 +112,6 @@ public class HanyoListKokuhorenJukyushaNashiEUCEntity implements IHanyoListKokuh
     private RString 保険者名;
     @CsvField(order = 43, name = "空白")
     private RString 空白;
-    @CsvField(order = 44, name = "二次予防適用開始日")
-    private RString 二次予防適用開始日;
-    @CsvField(order = 45, name = "二次予防適用終了日")
-    private RString 二次予防適用終了日;
-    @CsvField(order = 46, name = "二次予防調査実施日")
-    private RString 二次予防調査実施日;
-    @CsvField(order = 47, name = "二次予防決定日")
-    private RString 二次予防決定日;
     @CsvField(order = 48, name = "処理対象年月")
     private RString 処理対象年月;
     @CsvField(order = 49, name = "被保険者番号")
@@ -262,4 +254,23 @@ public class HanyoListKokuhorenJukyushaNashiEUCEntity implements IHanyoListKokuh
     private RString 二次予防事業終了日;
     @CsvField(order = 118, name = "二次予防事業区分")
     private RString 二次予防事業区分;
+    @CsvField(order = 119, name = "住所地特例対象者区分コード")
+    private RString 住所地特例対象者区分コード;
+    @CsvField(order = 120, name = "施設所在保険者番号")
+    private RString 施設所在保険者番号;
+    @CsvField(order = 121, name = "住所地特例適用開始日")
+    private RString 住所地特例適用開始日;
+    @CsvField(order = 122, name = "住所地特例適用終了日")
+    private RString 住所地特例適用終了日;
+    @CsvField(order = 123, name = "居宅費（新１）負担限度額")
+    private RString 居宅費新１負担限度額;
+    @CsvField(order = 124, name = "居宅費（新２）負担限度額")
+    private RString 居宅費新２負担限度額;
+    @CsvField(order = 125, name = "居宅費（新３）負担限度額")
+    private RString 居宅費新３負担限度額;
+    @CsvField(order = 126, name = "利用者負担割合有効開始日")
+    private RString 利用者負担割合有効開始日;
+    @CsvField(order = 127, name = "利用者負担割合有効終了日")
+    private RString 利用者負担割合有効終了日;
+
 }

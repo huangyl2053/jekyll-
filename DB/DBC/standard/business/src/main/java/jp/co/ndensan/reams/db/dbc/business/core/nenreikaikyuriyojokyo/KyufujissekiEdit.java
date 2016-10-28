@@ -12,9 +12,13 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.Syorike
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.TmpKyufujissekiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.TmpSyuturyokuYoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -123,6 +127,9 @@ public class KyufujissekiEdit {
     private static final RString RSTRING_43 = new RString("43");
     private static final RString RSTRING_51 = new RString("51");
     private static final RString RSTRING_52 = new RString("52");
+    private static final RString DATE_時 = new RString("時");
+    private static final RString DATE_分 = new RString("分");
+    private static final RString DATE_秒 = new RString("秒");
     private boolean first = true;
 
     /**
@@ -507,7 +514,7 @@ public class KyufujissekiEdit {
         SyorikekkaCyouHyouEucCsvEntity csvEntity = new SyorikekkaCyouHyouEucCsvEntity();
         if (first) {
             first = false;
-            csvEntity.set作成日時(setDateFormat(new RString(RDateTime.now().toString())));
+            csvEntity.set作成日時(setDateFormat(RDateTime.now()));
         }
         csvEntity.set処理名(entity.getShoriMei());
         csvEntity.set証記載保険者番号(RString.EMPTY);
@@ -524,11 +531,21 @@ public class KyufujissekiEdit {
 
     }
 
-    private RString setDateFormat(RString date) {
-        RString formatDate = RString.EMPTY;
-        if (!RString.isNullOrEmpty(date)) {
-            formatDate = new FlexibleDate(date).wareki().toDateString();
-        }
-        return formatDate;
+    private RString setDateFormat(RDateTime printdate) {
+        RStringBuilder printTimeStampSb = new RStringBuilder();
+        printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
+        printTimeStampSb.append(DATE_時);
+        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
+        printTimeStampSb.append(DATE_分);
+        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
+        printTimeStampSb.append(DATE_秒);
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append("作成");
+
+        return printTimeStampSb.toRString();
     }
 }

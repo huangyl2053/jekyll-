@@ -34,9 +34,24 @@
         , "taishoShuryoTimestamp"
         FROM rgdb."DbT7022ShoriDateKanri"
         WHERE "DbT7022ShoriDateKanri"."subGyomuCode" = #{subGyomuCode}
-        AND "DbT7022ShoriDateKanri"."shoriName" = #{shoriName}
+        AND "DbT7022ShoriDateKanri"."shoriName" = #{shoriName1}
         ORDER BY "DbT7022ShoriDateKanri"."kijunTimestamp" DESC
         LIMIT 1
+    </select>
+
+    <select id="getShoriDateKanriByShoriName"
+            resultOrdered="true"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoMybatisParamater"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri"/>
+        FROM rgdb."DbT7022ShoriDateKanri"
+        WHERE "DbT7022ShoriDateKanri"."subGyomuCode" = #{subGyomuCode}
+        AND "DbT7022ShoriDateKanri"."shoriName" = #{shoriName1}
+        <if test="isTosyo">
+            AND "DbT7022ShoriDateKanri"."shoriName" = #{shoriName2}
+        </if>
     </select>
 
     <select id="getJukyushaDaichoTeikyoJohoKoho"

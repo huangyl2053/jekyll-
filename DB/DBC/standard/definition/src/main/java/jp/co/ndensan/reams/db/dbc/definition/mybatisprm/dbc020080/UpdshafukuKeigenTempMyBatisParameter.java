@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 @lombok.Setter
 public class UpdshafukuKeigenTempMyBatisParameter implements IMyBatisParameter {
 
-    private boolean 事業者フラグ;
+    private boolean 事業分フラグ;
 
     /**
      * UpdshafukuKeigenTempMyBatisParameter のコンストラクタです。
@@ -28,9 +28,9 @@ public class UpdshafukuKeigenTempMyBatisParameter implements IMyBatisParameter {
     /**
      * UpdshafukuKeigenTempMyBatisParameter のコンストラクタです。
      *
-     * @param 事業者フラグ boolean
+     * @param 事業分フラグ boolean
      */
-    public UpdshafukuKeigenTempMyBatisParameter(boolean 事業者フラグ) {
-        this.事業者フラグ = 事業者フラグ;
+    public UpdshafukuKeigenTempMyBatisParameter(boolean 事業分フラグ) {
+        this.事業分フラグ = 事業分フラグ;
     }
 }

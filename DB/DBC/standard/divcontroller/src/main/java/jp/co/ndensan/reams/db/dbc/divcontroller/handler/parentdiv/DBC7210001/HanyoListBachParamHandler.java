@@ -35,6 +35,7 @@ public class HanyoListBachParamHandler {
     private static final RString 日付_編集 = new RString("8");
     private static final int 固定 = 2014;
     private static final int 固定_月 = 8;
+    private static final RString 全市町村 = new RString("000000");
     private static final RString すべて = new RString("0");
     private static final RString 窓口払 = new RString("1");
     private static final RString 口座払 = new RString("2");
@@ -118,16 +119,28 @@ public class HanyoListBachParamHandler {
                 日付スラッシュ編集 = true;
             }
         }
+        RString 市町村コード = RString.EMPTY;
+        RString 保険者コード = RString.EMPTY;
+        RString 保険者名 = RString.EMPTY;
+        if (!div.getCcdHokenshaList().isDisplayNone()) {
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
+                市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            }
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().isEmpty()) {
+                保険者コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
+            } else {
+                保険者コード = 全市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称())) {
+                保険者名 = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称();
+            }
+        }
+        parameter.set保険者コード(保険者コード);
+        parameter.set保険者名(保険者名);
+        parameter.set市町村コード(市町村コード);
         parameter.set日付編集(日付スラッシュ編集);
         parameter.set連番付加(連番の付加);
         parameter.set項目名付加(項目付加);
-        if (!div.getCcdHokenshaList().isDisplayNone()) {
-            if (div.getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
-                parameter.set保険者コード(new RString("000000"));
-            } else {
-                parameter.set保険者コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
-            }
-        }
         List<RString> 支給区分list = new ArrayList<>();
         if (すべて.equals(div.getRadShikyuKubun().getSelectedKey())) {
             支給区分list.add(すべて);
@@ -146,7 +159,12 @@ public class HanyoListBachParamHandler {
             支払方法区分list.add(div.getRadSiharaiHohoKubun().getSelectedKey());
         }
         parameter.set支払方法区分List(支払方法区分list);
-        parameter.set金融機関コード(div.getCcdKinyuKikan().getKinyuKikanCode().value());
+        if (div.getCcdKinyuKikan().getKinyuKikanCode() != null) {
+            parameter.set金融機関コード(div.getCcdKinyuKikan().getKinyuKikanCode().value());
+        }
+        if (div.getCcdKinyuKikan().getKinyuKikanShitenCode() != null) {
+            parameter.set支店コード(div.getCcdKinyuKikan().getKinyuKikanShitenCode().value());
+        }
         parameter.set金融機関名(div.getCcdKinyuKikan().get金融機関名());
         parameter.set対象年度(div.getDdlTaishoNendo().getSelectedKey());
         return parameter;

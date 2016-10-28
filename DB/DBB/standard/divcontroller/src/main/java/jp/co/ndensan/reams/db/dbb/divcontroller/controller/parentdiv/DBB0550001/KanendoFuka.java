@@ -74,11 +74,11 @@ public class KanendoFuka {
         if (過年度異動通知書作成.equals(menuID)) {
             div.getKanendoFukaChushutsuJoken().setDisplayNone(true);
             responseData = ResponseData.of(div).setState(DBB0550001StateName.過年度通知書一括発行);
-            responseData.setRootTitle(過年度異動賦課);
+            responseData.setRootTitle(過年度異動通知書);
             return responseData;
         } else {
             responseData = ResponseData.of(div).setState(DBB0550001StateName.Default);
-            responseData.setRootTitle(過年度異動通知書);
+            responseData.setRootTitle(過年度異動賦課);
             return responseData;
         }
     }

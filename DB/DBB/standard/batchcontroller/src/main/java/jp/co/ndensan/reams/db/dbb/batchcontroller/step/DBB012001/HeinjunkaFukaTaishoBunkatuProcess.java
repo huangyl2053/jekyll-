@@ -84,18 +84,10 @@ public class HeinjunkaFukaTaishoBunkatuProcess extends BatchProcessBase<FukaJoho
     protected void process(FukaJohoTmpEntity fukaTmpEntity) {
         RString 備考コード = RString.EMPTY;
         Decimal 特徴期別金額合計 = Decimal.ZERO;
-        final Decimal 特徴期別金額01 = fukaTmpEntity.getTkKibetsuGaku01();
-        final Decimal 特徴期別金額02 = fukaTmpEntity.getTkKibetsuGaku02();
-        final Decimal 特徴期別金額03 = fukaTmpEntity.getTkKibetsuGaku03();
-        if (特徴期別金額01 != null) {
-            特徴期別金額合計 = 特徴期別金額合計.add(特徴期別金額01);
-        }
-        if (特徴期別金額02 != null) {
-            特徴期別金額合計 = 特徴期別金額合計.add(特徴期別金額02);
-        }
-        if (特徴期別金額03 != null) {
-            特徴期別金額合計 = 特徴期別金額合計.add(特徴期別金額03);
-        }
+        final Decimal 特徴期別金額01 = fukaTmpEntity.getTkKibetsuGaku01() == null ? Decimal.ZERO : fukaTmpEntity.getTkKibetsuGaku01();
+        final Decimal 特徴期別金額02 = fukaTmpEntity.getTkKibetsuGaku02() == null ? Decimal.ZERO : fukaTmpEntity.getTkKibetsuGaku02();
+        final Decimal 特徴期別金額03 = fukaTmpEntity.getTkKibetsuGaku03() == null ? Decimal.ZERO : fukaTmpEntity.getTkKibetsuGaku03();
+        特徴期別金額合計 = 特徴期別金額合計.add(特徴期別金額01).add(特徴期別金額02).add(特徴期別金額03);
         Decimal 普徴期別金額合計 = Decimal.ZERO;
         for (int i = 仮算定期間_最小期; i <= 仮算定期間_最大期; i++) {
             普徴期別金額合計 = 普徴期別金額合計.add(普徴期別金額取得(i, fukaTmpEntity));
@@ -182,9 +174,8 @@ public class HeinjunkaFukaTaishoBunkatuProcess extends BatchProcessBase<FukaJoho
     }
 
     private Decimal get普徴期別金額合計(Decimal 普徴期別金額合計, Decimal 普徴期別金額) {
-        if (普徴期別金額 != null) {
-            普徴期別金額合計 = 普徴期別金額合計.add(普徴期別金額);
-        }
+        普徴期別金額 = 普徴期別金額 == null ? Decimal.ZERO : 普徴期別金額;
+        普徴期別金額合計 = 普徴期別金額合計.add(普徴期別金額);
         return 普徴期別金額合計;
     }
 }
