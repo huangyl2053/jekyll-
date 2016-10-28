@@ -4,20 +4,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1740011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KihonnInfo のクラスファイル
- *
- * @reamsid_L DBC-2400-010 yuqingzhang
+ * NijiyoboJohoTaishoIchiran のクラスファイル 
+ * 
+ * @author 自動生成
  */
-public class KihonnInfoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+public class NijiyoboJohoTaishoIchiranDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,8 +23,8 @@ public class KihonnInfoDiv extends Panel {
      */
     @JsonProperty("btnAdd")
     private Button btnAdd;
-    @JsonProperty("dgKihonInfo")
-    private DataGrid<dgKihonInfo_Row> dgKihonInfo;
+    @JsonProperty("dgNijiyoboJohoTaishoIchiran")
+    private DataGrid<dgNijiyoboJohoTaishoIchiran_Row> dgNijiyoboJohoTaishoIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,21 +51,21 @@ public class KihonnInfoDiv extends Panel {
     }
 
     /*
-     * getdgKihonInfo
-     * @return dgKihonInfo
+     * getdgNijiyoboJohoTaishoIchiran
+     * @return dgNijiyoboJohoTaishoIchiran
      */
-    @JsonProperty("dgKihonInfo")
-    public DataGrid<dgKihonInfo_Row> getDgKihonInfo() {
-        return dgKihonInfo;
+    @JsonProperty("dgNijiyoboJohoTaishoIchiran")
+    public DataGrid<dgNijiyoboJohoTaishoIchiran_Row> getDgNijiyoboJohoTaishoIchiran() {
+        return dgNijiyoboJohoTaishoIchiran;
     }
 
     /*
-     * setdgKihonInfo
-     * @param dgKihonInfo dgKihonInfo
+     * setdgNijiyoboJohoTaishoIchiran
+     * @param dgNijiyoboJohoTaishoIchiran dgNijiyoboJohoTaishoIchiran
      */
-    @JsonProperty("dgKihonInfo")
-    public void setDgKihonInfo(DataGrid<dgKihonInfo_Row> dgKihonInfo) {
-        this.dgKihonInfo = dgKihonInfo;
+    @JsonProperty("dgNijiyoboJohoTaishoIchiran")
+    public void setDgNijiyoboJohoTaishoIchiran(DataGrid<dgNijiyoboJohoTaishoIchiran_Row> dgNijiyoboJohoTaishoIchiran) {
+        this.dgNijiyoboJohoTaishoIchiran = dgNijiyoboJohoTaishoIchiran;
     }
 
     // </editor-fold>

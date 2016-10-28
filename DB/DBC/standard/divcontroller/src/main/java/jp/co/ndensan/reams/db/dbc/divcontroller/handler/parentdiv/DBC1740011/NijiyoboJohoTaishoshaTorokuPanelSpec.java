@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1740011;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1740011.NijiyoboJohoTaishoshaTorokuPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1740011.dgKihonInfo_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1740011.dgNijiyoboJohoTaishoIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum NijiyoboJohoTaishoshaTorokuPanelSpec implements IPredicate<NijiyoboJohoTaishoshaTorokuPanelDiv> {
 
     /**
-     * 適用期間重複のチェックです。
+     * 適用期間開始日重複のチェックです。
      */
     適用期間重複 {
                 @Override
@@ -47,16 +47,16 @@ public enum NijiyoboJohoTaishoshaTorokuPanelSpec implements IPredicate<NijiyoboJ
         private static final RString ZERO = new RString("0");
 
         public static boolean is適用期間重複(NijiyoboJohoTaishoshaTorokuPanelDiv div) {
-            List<dgKihonInfo_Row> rowList = div.getKihonnInfo().getDgKihonInfo().getDataSource();
+            List<dgNijiyoboJohoTaishoIchiran_Row> rowList = div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getDataSource();
             RString clickRirekiNo = 追加.equals(div.getOperateState()) ? ZERO
-                    : div.getKihonnInfo().getDgKihonInfo().getClickedItem().getRirekiNo();
-            RDate 適用期間の開始日 = div.getSoukoinfo().getTxtymfromto().getFromValue();
-            RDate 適用期間の終了日 = div.getSoukoinfo().getTxtymfromto().getToValue();
+                    : div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getClickedItem().getRirekiNo();
+            RDate 適用期間の開始日 = div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().getFromValue();
+            RDate 適用期間の終了日 = div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().getToValue();
             boolean is適用期間重複 = false;
-            for (dgKihonInfo_Row row : rowList) {
+            for (dgNijiyoboJohoTaishoIchiran_Row row : rowList) {
                 if ((!clickRirekiNo.equals(row.getRirekiNo()))
-                        && !((null != row.getTekiyouKaishiBi().getValue() && 適用期間の終了日.isBefore(row.getTekiyouKaishiBi().getValue()))
-                        || (null != row.getTekiyouKaishiBi().getValue() && row.getTekiyouKaishiBi().getValue().isBefore(適用期間の開始日)))) {
+                        && (!((null != row.getTekiyoShuryoYMD().getValue() && row.getTekiyoShuryoYMD().getValue().isBefore(適用期間の開始日))
+                        || (null != row.getTekiyoKaishiYMD().getValue() && 適用期間の終了日.isBefore(row.getTekiyoKaishiYMD().getValue()))))) {
                     is適用期間重複 = true;
                 }
             }
@@ -64,8 +64,8 @@ public enum NijiyoboJohoTaishoshaTorokuPanelSpec implements IPredicate<NijiyoboJ
         }
 
         public static boolean is開始日と終了日の前後順(NijiyoboJohoTaishoshaTorokuPanelDiv div) {
-            RDate 適用期間の開始日 = div.getSoukoinfo().getTxtymfromto().getFromValue();
-            RDate 適用期間の終了日 = div.getSoukoinfo().getTxtymfromto().getToValue();
+            RDate 適用期間の開始日 = div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().getFromValue();
+            RDate 適用期間の終了日 = div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD().getToValue();
             return !適用期間の終了日.isBefore(適用期間の開始日);
         }
     }
