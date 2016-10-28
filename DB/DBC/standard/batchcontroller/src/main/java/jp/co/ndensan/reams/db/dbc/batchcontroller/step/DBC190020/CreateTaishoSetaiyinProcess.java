@@ -411,8 +411,8 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         for (CreateTaishoSetaiyinEntity taiEntity : taishoSetaiyinList) {
             IAtesaki 宛先 = AtesakiFactory.createInstance(taiEntity.get宛先());
             IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createKojin(taiEntity.get宛名());
-            this.基準収入額適用お知ら(kijunEntity, 宛先, taishoSetaiyinList.size());
-            this.基準収入額適用申請書(kijunEntity1, 宛名);
+            this.基準収入額適用お知ら(taiEntity, kijunEntity, 宛先, taishoSetaiyinList.size());
+            this.基準収入額適用申請書(taiEntity, kijunEntity1, 宛名);
             if (INT_3 < taishoSetaiyinList.size() && index164 == INT_3) {
                 this.write申請書出力帳票(taishoSetaiyinList.get(0).get対象世帯員(), kijunEntity1);
                 kijunEntity1 = new KijunShunyugakuTekiyoShinseishoEntity();
@@ -470,7 +470,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     }
 
-    private void 基準収入額適用お知ら(KijunShunyugakuTekiyoShinseishoEntity kijunEntity, IAtesaki 宛先, int 世帯員情報件数) {
+    private void 基準収入額適用お知ら(CreateTaishoSetaiyinEntity taiEntity, KijunShunyugakuTekiyoShinseishoEntity kijunEntity, IAtesaki 宛先, int 世帯員情報件数) {
         if (index == 1) {
             ReportAtesakiEditor editor = new SofubutsuAtesakiEditorBuilder(宛先).build();
             SofubutsuAtesakiSource compSofubutsuAtesakiソース = new SofubutsuAtesakiSourceBuilder(editor).buildSource();
@@ -478,10 +478,10 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             kijunEntity.setNinshoshaSource(確認書認証者情報);
             kijunEntity.set文書番号(this.parameter.get文書番号());
             kijunEntity.setタイトル(MESSAGE);
-            kijunEntity.set被保険者番号１(getColumnValue(exEntity.get対象世帯員().getHihokenshaNo()));
-            kijunEntity.set被保険者名カナ１(exEntity.get対象世帯員().getHihokenshaKana());
-            kijunEntity.set被保険者氏名１(exEntity.get対象世帯員().getHihokenshaName());
-            kijunEntity.set識別コード１(exEntity.get対象世帯員().getShikibetsuCode());
+            kijunEntity.set被保険者番号１(getColumnValue(taiEntity.get対象世帯員().getHihokenshaNo()));
+            kijunEntity.set被保険者名カナ１(taiEntity.get対象世帯員().getHihokenshaKana());
+            kijunEntity.set被保険者氏名１(taiEntity.get対象世帯員().getHihokenshaName());
+            kijunEntity.set識別コード１(taiEntity.get対象世帯員().getShikibetsuCode());
             RString 通知文１ = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
                     ReportIdDBC.DBC100063.getReportId(), KamokuCode.EMPTY, INT_1, INT_1, parameter.get世帯員把握基準日());
             kijunEntity.set通知文１(通知文１.substringReturnAsPossible(INT_0, INT_1));
@@ -516,22 +516,22 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             kijunEntity.set通知文２８(通知文２.substringReturnAsPossible(INT_23, INT_24));
             kijunEntity.set通知文２９(通知文２.substringReturnAsPossible(INT_24, INT_25));
         } else if (index == INT_2) {
-            kijunEntity.set被保険者番号２(getColumnValue(exEntity.get対象世帯員().getHihokenshaNo()));
-            kijunEntity.set被保険者名カナ２(exEntity.get対象世帯員().getHihokenshaKana());
-            kijunEntity.set被保険者氏名２(exEntity.get対象世帯員().getHihokenshaName());
-            kijunEntity.set識別コード２(exEntity.get対象世帯員().getShikibetsuCode());
+            kijunEntity.set被保険者番号２(getColumnValue(taiEntity.get対象世帯員().getHihokenshaNo()));
+            kijunEntity.set被保険者名カナ２(taiEntity.get対象世帯員().getHihokenshaKana());
+            kijunEntity.set被保険者氏名２(taiEntity.get対象世帯員().getHihokenshaName());
+            kijunEntity.set識別コード２(taiEntity.get対象世帯員().getShikibetsuCode());
         } else if (index == INT_3) {
-            kijunEntity.set被保険者番号３(getColumnValue(exEntity.get対象世帯員().getHihokenshaNo()));
-            kijunEntity.set被保険者名カナ３(exEntity.get対象世帯員().getHihokenshaKana());
-            kijunEntity.set被保険者氏名３(exEntity.get対象世帯員().getHihokenshaName());
-            kijunEntity.set識別コード３(exEntity.get対象世帯員().getShikibetsuCode());
+            kijunEntity.set被保険者番号３(getColumnValue(taiEntity.get対象世帯員().getHihokenshaNo()));
+            kijunEntity.set被保険者名カナ３(taiEntity.get対象世帯員().getHihokenshaKana());
+            kijunEntity.set被保険者氏名３(taiEntity.get対象世帯員().getHihokenshaName());
+            kijunEntity.set識別コード３(taiEntity.get対象世帯員().getShikibetsuCode());
         } else if (INT_4 == index) {
             kijunEntity.setその他被保険者(MESSAGE_その他.concat(new RString(世帯員情報件数 - INT_3)).concat(MESSAGE_人));
         }
 
     }
 
-    private void 基準収入額適用申請書(KijunShunyugakuTekiyoShinseishoEntity kijunEntity1, IShikibetsuTaisho 宛名) {
+    private void 基準収入額適用申請書(CreateTaishoSetaiyinEntity taiEntity, KijunShunyugakuTekiyoShinseishoEntity kijunEntity1, IShikibetsuTaisho 宛名) {
         if (index164 == INT_1) {
             Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), this.parameter.get作成日());
@@ -539,17 +539,17 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             RString 申請先 = 認証者.get市町村付与名称(地方公共団体);
             kijunEntity1.set申請先(申請先);
 
-            kijunEntity1.set被保険者番号１(getColumnValue(exEntity.get対象世帯員().getHihokenshaNo()));
-            kijunEntity1.set被保険者名カナ１(exEntity.get対象世帯員().getHihokenshaKana());
-            kijunEntity1.set被保険者氏名１(exEntity.get対象世帯員().getHihokenshaName());
-            kijunEntity1.set被保険者生年月日１(exEntity.get対象世帯員().getSeinengappiYMD());
-            kijunEntity1.set被保険者性別１(exEntity.get対象世帯員().getSex());
+            kijunEntity1.set被保険者番号１(getColumnValue(taiEntity.get対象世帯員().getHihokenshaNo()));
+            kijunEntity1.set被保険者名カナ１(taiEntity.get対象世帯員().getHihokenshaKana());
+            kijunEntity1.set被保険者氏名１(taiEntity.get対象世帯員().getHihokenshaName());
+            kijunEntity1.set被保険者生年月日１(taiEntity.get対象世帯員().getSeinengappiYMD());
+            kijunEntity1.set被保険者性別１(taiEntity.get対象世帯員().getSex());
             IJusho 宛名住所 = 宛名.get住所();
             RString 住所 = 宛名住所.get住所()
                     .concat(宛名住所.get方書().getColumnValue()).concat(宛名住所.get番地().toString());
             kijunEntity1.set住所１(住所.substringReturnAsPossible(INT_0, INT_50));
             kijunEntity1.set住所２(住所.substringReturnAsPossible(INT_50));
-            kijunEntity1.set連絡先(exEntity.get対象世帯員().getRennrakusaki());
+            kijunEntity1.set連絡先(taiEntity.get対象世帯員().getRennrakusaki());
             RString 通知文１ = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100064.getReportId(), KamokuCode.EMPTY, INT_1).get(INT_1);
             kijunEntity1.set通知文１(通知文１);
             RString 通知文２ = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100064.getReportId(), KamokuCode.EMPTY, INT_1).get(INT_2);
@@ -571,17 +571,17 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             kijunEntity1.set収入元号(年度.substringReturnAsPossible(INT_0, INT_2));
             kijunEntity1.set収入年(年度.substringReturnAsPossible(INT_2));
         } else if (index164 == INT_2) {
-            kijunEntity1.set被保険者番号２(getColumnValue(exEntity.get対象世帯員().getHihokenshaNo()));
-            kijunEntity1.set被保険者名カナ２(exEntity.get対象世帯員().getHihokenshaKana());
-            kijunEntity1.set被保険者氏名２(exEntity.get対象世帯員().getHihokenshaName());
-            kijunEntity1.set被保険者生年月日２(exEntity.get対象世帯員().getSeinengappiYMD());
-            kijunEntity1.set被保険者性別２(exEntity.get対象世帯員().getSex());
+            kijunEntity1.set被保険者番号２(getColumnValue(taiEntity.get対象世帯員().getHihokenshaNo()));
+            kijunEntity1.set被保険者名カナ２(taiEntity.get対象世帯員().getHihokenshaKana());
+            kijunEntity1.set被保険者氏名２(taiEntity.get対象世帯員().getHihokenshaName());
+            kijunEntity1.set被保険者生年月日２(taiEntity.get対象世帯員().getSeinengappiYMD());
+            kijunEntity1.set被保険者性別２(taiEntity.get対象世帯員().getSex());
         } else if (index164 == INT_3) {
-            kijunEntity1.set被保険者番号３(getColumnValue(exEntity.get対象世帯員().getHihokenshaNo()));
-            kijunEntity1.set被保険者名カナ３(exEntity.get対象世帯員().getHihokenshaKana());
-            kijunEntity1.set被保険者氏名３(exEntity.get対象世帯員().getHihokenshaName());
-            kijunEntity1.set被保険者生年月日３(exEntity.get対象世帯員().getSeinengappiYMD());
-            kijunEntity1.set被保険者性別３(exEntity.get対象世帯員().getSex());
+            kijunEntity1.set被保険者番号３(getColumnValue(taiEntity.get対象世帯員().getHihokenshaNo()));
+            kijunEntity1.set被保険者名カナ３(taiEntity.get対象世帯員().getHihokenshaKana());
+            kijunEntity1.set被保険者氏名３(taiEntity.get対象世帯員().getHihokenshaName());
+            kijunEntity1.set被保険者生年月日３(taiEntity.get対象世帯員().getSeinengappiYMD());
+            kijunEntity1.set被保険者性別３(taiEntity.get対象世帯員().getSex());
         }
 
     }

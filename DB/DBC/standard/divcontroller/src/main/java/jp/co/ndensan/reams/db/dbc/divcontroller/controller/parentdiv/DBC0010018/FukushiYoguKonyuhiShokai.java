@@ -116,6 +116,7 @@ public class FukushiYoguKonyuhiShokai {
                 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
                 識別番号検索キー);
         FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        get給付実績ヘッダ情報2(提供年月, 整理番号, 識別番号検索キー);
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return ResponseData.of(div).respond();
     }
@@ -138,6 +139,7 @@ public class FukushiYoguKonyuhiShokai {
                 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
                 識別番号検索キー);
         FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        get給付実績ヘッダ情報2(提供年月, 整理番号, 識別番号検索キー);
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return ResponseData.of(div).respond();
     }

@@ -227,12 +227,14 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
                 世帯出力有無設定flag2 = false;
 
             } else if (世帯出力有無設定flag1 && 世帯出力有無設定flag2
-                    && 対象世帯員クラスlist.size() == 1 && !(temp_対象世帯員クラス.getSoushuu().compareTo(DATA_383) < 0)) {
+                    && 対象世帯員クラスlist.size() == 1
+                    && !(getDecimal(temp_対象世帯員クラス.getSoushuu()).compareTo(DATA_383) < 0)) {
                 temp_対象世帯員クラス.setMessage(DATA_単独世帯);
                 temp_対象世帯員クラス.setShuturyokuUmu(出力しない);
                 世帯出力有無設定flag3 = false;
             } else if (世帯出力有無設定flag1 && 世帯出力有無設定flag2 && 世帯出力有無設定flag3
-                    && (!(対象世帯員クラスlist.size() < TWO)) && (!(temp_対象世帯員クラス.getSoushuu().compareTo(DATA_520) < 0))) {
+                    && (!(対象世帯員クラスlist.size() < TWO))
+                    && (!(getDecimal(temp_対象世帯員クラス.getSoushuu()).compareTo(DATA_520) < 0))) {
                 temp_対象世帯員クラス.setMessage(DATA_複数世帯);
                 temp_対象世帯員クラス.setShuturyokuUmu(出力しない);
             }
@@ -248,11 +250,11 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
             TaishoSetaiinIdoMybatisParameter mybatiParameter = TaishoSetaiinIdoMybatisParameter
                     .createMybatisParam(対象世帯員クラス.getShotaiCode(), 対象世帯員クラス.getShoriNendo());
 
-            TaishoSetaiinIdoEntity entity = mapper.select管理マスタ(mybatiParameter);
-            if (entity == null) {
+            List<TaishoSetaiinIdoEntity> entityList = mapper.select管理マスタ(mybatiParameter);
+            if (entityList == null || entityList.isEmpty()) {
                 set更新時履歴番号(temp_対象世帯員クラス, 対象世帯員クラス.getKoushinnNo());
             } else {
-                set対象世帯員(entity, 対象世帯員クラス,
+                set対象世帯員(entityList.get(0), 対象世帯員クラス,
                         temp_対象世帯員クラス, 世帯員把握基準日);
             }
 
@@ -274,16 +276,17 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
             temp_対象世帯員クラス.setSetaikazeiKubun(非課税);
         }
         RString rs資格区分 = 対象世帯員クラス.getHihokennshaKubun();
-        if ((資格区分_1.equals(rs資格区分) || 資格区分_3.equals(rs資格区分)) && (!(対象世帯員クラス.getKazeiShotokuGakuAfter().compareTo(DATA_145) < 0))) {
+        if ((資格区分_1.equals(rs資格区分) || 資格区分_3.equals(rs資格区分))
+                && (!(getDecimal(対象世帯員クラス.getKazeiShotokuGakuAfter()).compareTo(DATA_145) < 0))) {
             temp_対象世帯員クラス.setKazeiShotokuKubun(第１号被保険者あり);
             課税所得設定flag = false;
         } else if (課税所得設定flag) {
             temp_対象世帯員クラス.setKazeiShotokuKubun(第１号被保険者なし);
         }
         if (資格区分_1.equals(rs資格区分) || 資格区分_3.equals(rs資格区分)) {
-            年金収入 = 年金収入.add(対象世帯員クラス.getNenkinShunyuGaku());
+            年金収入 = 年金収入.add(getDecimal(対象世帯員クラス.getNenkinShunyuGaku()));
         }
-        合計所得 = 合計所得.add(対象世帯員クラス.getSonotanoGoukeiShotokuKingakuGoukei());
+        合計所得 = 合計所得.add(getDecimal(対象世帯員クラス.getSonotanoGoukeiShotokuKingakuGoukei()));
     }
 
     private void set総収入額(TaishoSetaiinEntity temp_対象世帯員クラス) {
@@ -309,5 +312,12 @@ public class UpdTaishoSeitaiyinTemp5Process extends BatchProcessBase<TaishoSetai
             temp_対象世帯員クラス.setMessage(DATA_世帯把握基準日が遡);
             temp_対象世帯員クラス.setShuturyokuUmu(出力しない);
         }
+    }
+
+    private Decimal getDecimal(Decimal decimal) {
+        if (decimal == null) {
+            return Decimal.ZERO;
+        }
+        return decimal;
     }
 }

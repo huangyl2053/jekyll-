@@ -5,13 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kakohorenjyohosakusei.HihokenshaTempUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kakohorenjyohosakuseicommon.KakohorenJyohoSakuseiCommonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.KokuhorenSakuseiErrorTempEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -43,9 +40,9 @@ public class GappeiShichosonUpdateProcess extends BatchProcessBase<KakohorenJyoh
     private static final RString 変換対象フラグ_TRUE = new RString("1");
     private HihokenshaTempUpdateProcessParameter parameter;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 被保険者一時TBL;
+    private BatchEntityCreatedTempTableWriter 被保険者一時TBL;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 処理結果リスト一時TBL;
+    private BatchEntityCreatedTempTableWriter 処理結果リスト一時TBL;
     private RString 保険者番号 = RString.EMPTY;
     private RString 変換対象フラグ = new RString("0");
 
@@ -88,22 +85,5 @@ public class GappeiShichosonUpdateProcess extends BatchProcessBase<KakohorenJyoh
             hihokenshaTempEntity.setShichosonDattaiYmd(FlexibleDate.EMPTY);
         }
         被保険者一時TBL.update(hihokenshaTempEntity);
-    }
-
-    @Override
-    protected void afterExecute() {
-        IKakohorenJyohoSakuseiCommonMapper mapper = getMapper(IKakohorenJyohoSakuseiCommonMapper.class);
-        List<HihokenshaTempEntity> 被保険者一時TBLリスト
-                = mapper.select被保険者一時TBL情報By証記載保険者番号();
-        for (HihokenshaTempEntity entity : 被保険者一時TBLリスト) {
-            entity.setExHihokenshaNo(保険者番号);
-            entity.setExShoHokenshaNo(保険者番号);
-            entity.setHenkanFlag(変換対象フラグ);
-            被保険者一時TBL.update(entity);
-            KokuhorenSakuseiErrorTempEntity tempEntity = new KokuhorenSakuseiErrorTempEntity();
-            tempEntity.setErrorKubun(KokuhorenJoho_SakuseiErrorKubun.証記載保険者番号取得エラー.getコード());
-            tempEntity.setHihokenshaNo(entity.getExHihokenshaNo());
-            処理結果リスト一時TBL.insert(tempEntity);
-        }
     }
 }

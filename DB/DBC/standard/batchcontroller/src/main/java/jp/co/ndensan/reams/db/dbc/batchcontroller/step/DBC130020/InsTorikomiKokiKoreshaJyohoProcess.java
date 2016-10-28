@@ -103,6 +103,7 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
     private static final RString エラーコード_07 = new RString("07");
     private static final RString エラーコード_08 = new RString("08");
     private static final RString エラーコード_09 = new RString("09");
+    private static final RString エラーコード_10 = new RString("10");
     private static final RString エラーコード_52 = new RString("52");
     private static final RString エラーコード_53 = new RString("53");
     private static final RString エラーコード_55 = new RString("55");
@@ -346,6 +347,15 @@ public class InsTorikomiKokiKoreshaJyohoProcess extends BatchProcessBase<RString
             取込後期高齢者情報Entity.setエラーコード(エラーコード_09);
             if (文言設定flag) {
                 取込後期高齢者情報Entity.setエラー文言(コード文言_資格喪失日);
+                文言設定flag = false;
+            }
+            取込後期高齢者情報Entity.setエラー区分(エラー区分_1);
+        }
+        if (!日付_99999999.equals(資格喪失日) && 資格喪失日 != null && new FlexibleDate(資格喪失日).isValid() && 資格取得日 != null
+                && new FlexibleDate(資格取得日).isValid() && new FlexibleDate(資格喪失日).isBefore(new FlexibleDate(資格喪失日))) {
+            取込後期高齢者情報Entity.setエラーコード(エラーコード_10);
+            if (文言設定flag) {
+                取込後期高齢者情報Entity.setエラー文言(文言_資格取得日資格喪失日);
                 文言設定flag = false;
             }
             取込後期高齢者情報Entity.setエラー区分(エラー区分_1);

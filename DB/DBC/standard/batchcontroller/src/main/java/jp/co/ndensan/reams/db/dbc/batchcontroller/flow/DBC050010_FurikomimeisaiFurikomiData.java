@@ -67,6 +67,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
     private int レコード件数 = 0;
     private int 振込明細レコード件数 = 0;
     private int 被保険者台帳_宛名情報レコード件数 = 0;
+    private RString 帳票ページCount = new RString("0");
 
     private static final String 口座振込データの登録処理 = "kouzaFurikomiDataInsert";
     private static final String 一時テーブル作成_振込明細 = "tempTableCreateMaisai";
@@ -412,7 +413,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
     @Step(処理日付管理マスタの更新と出力条件表作成)
     protected IBatchFlowCommand kanendoUpdateFutanwariaiHantei() {
         return loopBatch(KanendoUpdateFutanwariaiHanteiProcess.class)
-                .arguments(getParameter().toKanendoUpdateFutanwariaiHanteProcessParameter(処理名)).define();
+                .arguments(getParameter().toKanendoUpdateFutanwariaiHanteProcessParameter(処理名, 帳票ページCount)).define();
     }
 
     private UXX000A10_KozaFurikomiRegisterParameter createKozaFurikomiRegisterParameter() {
@@ -434,6 +435,9 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
         executeStep(振込明細一覧表作成_受給取得状況);
         executeStep(振込明細一覧表作成_申請データ有無確認);
         executeStep(振込明細一覧表作成);
+        帳票ページCount = getResult(
+                RString.class, new RString(振込明細一覧表作成),
+                ShikyugakuJohoProcess.PARAMETER_OUT_PAGE_COUNT);
 
         if (!(Furikomi_ShoriKubun.明細一覧表作成.equals(getParameter().get処理区分())
                 && Furikomi_ShihraiHohoShitei.窓口.equals(getParameter().get支払方法()))) {

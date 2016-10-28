@@ -100,7 +100,8 @@ public class FukaErrorReportViewHandler {
                 || ErrorCode.資格と住基に不整合あり.getコード().equals(row.getErrorCode())) {
             buttonDiv.getBtnShikakuFuseigo().setDisplayNone(false);
         } else if (ErrorCode.世帯員所得データなし.getコード().equals(row.getErrorCode())
-                || ErrorCode.賦課に減免あり.getコード().equals(row.getErrorCode())) {
+                || ErrorCode.賦課に減免あり.getコード().equals(row.getErrorCode())
+                || ErrorCode.職権変更該当.getコード().equals(row.getErrorCode())) {
             buttonDiv.getBtnFukaKosei().setDisplayNone(false);
         } else {
             setButtonDisplayNone();
