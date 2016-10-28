@@ -1,0 +1,2032 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 受給者給付実績台帳取得のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-3080-030 dongyabin -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushakyufujissekidaicho.IJukyushaKyufujissekiDaichoMapper">
+    
+    <select resultOrdered="true" id="get基本" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KihonRelateEntity" fetchSize="500">
+        SELECT
+              DbT3017."insertDantaiCd" as "dbT3017_insertDantaiCd"
+            , DbT3017."insertTimestamp" as "dbT3017_insertTimestamp"
+            , DbT3017."insertReamsLoginId" as "dbT3017_insertReamsLoginId"
+            , DbT3017."insertContextId" as "dbT3017_insertContextId"
+            , DbT3017."isDeleted" as "dbT3017_isDeleted"
+            , DbT3017."updateCount" as "dbT3017_updateCount"
+            , DbT3017."lastUpdateTimestamp" as "dbT3017_lastUpdateTimestamp"
+            , DbT3017."lastUpdateReamsLoginId" as "dbT3017_lastUpdateReamsLoginId"
+            , DbT3017."kokanShikibetsuNo" as "dbT3017_kokanShikibetsuNo"
+            , DbT3017."inputShikibetsuNo" as "dbT3017_inputShikibetsuNo"
+            , DbT3017."recodeShubetsuCode" as "dbT3017_recodeShubetsuCode"
+            , DbT3017."shokisaiHokenshaNo" as "dbT3017_shokisaiHokenshaNo"
+            , DbT3017."hiHokenshaNo" as "dbT3017_hiHokenshaNo"
+            , DbT3017."serviceTeikyoYM" as "dbT3017_serviceTeikyoYM"
+            , DbT3017."jigyoshoNo" as "dbT3017_jigyoshoNo"
+            , DbT3017."kyufuSakuseiKubunCode" as "dbT3017_kyufuSakuseiKubunCode"
+            , DbT3017."kyufuJissekiKubunCode" as "dbT3017_kyufuJissekiKubunCode"
+            , DbT3017."toshiNo" as "dbT3017_toshiNo"
+            , DbT3017."kohi1FutanshaNo" as "dbT3017_kohi1FutanshaNo"
+            , DbT3017."kohi1JukyushaNo" as "dbT3017_kohi1JukyushaNo"
+            , DbT3017."kohi2FutanshaNo" as "dbT3017_kohi2FutanshaNo"
+            , DbT3017."kohi2JukyushaNo" as "dbT3017_kohi2JukyushaNo"
+            , DbT3017."kohi3FutanshaNo" as "dbT3017_kohi3FutanshaNo"
+            , DbT3017."kohi3JukyushaNo" as "dbT3017_kohi3JukyushaNo"
+            , DbT3017."umareYMD" as "dbT3017_umareYMD"
+            , DbT3017."seibetsuCode" as "dbT3017_seibetsuCode"
+            , DbT3017."yoKaigoJotaiKubunCode" as "dbT3017_yoKaigoJotaiKubunCode"
+            , DbT3017."kyuSochiNyushoshaTokureiCode" as "dbT3017_kyuSochiNyushoshaTokureiCode"
+            , DbT3017."ninteiYukoKaishiYMD" as "dbT3017_ninteiYukoKaishiYMD"
+            , DbT3017."ninteiYukoShuryoYMD" as "dbT3017_ninteiYukoShuryoYMD"
+            , DbT3017."rojinHokenShichosonNo" as "dbT3017_rojinHokenShichosonNo"
+            , DbT3017."rojinhokenJukyushaNo" as "dbT3017_rojinhokenJukyushaNo"
+            , DbT3017."kokiHokenshaNo" as "dbT3017_kokiHokenshaNo"
+            , DbT3017."kokiHiHokenshaNo" as "dbT3017_kokiHiHokenshaNo"
+            , DbT3017."kokuhoHokenshaNo" as "dbT3017_kokuhoHokenshaNo"
+            , DbT3017."kokuhoHiHokenshashoNo" as "dbT3017_kokuhoHiHokenshashoNo"
+            , DbT3017."kokuhoKojinNo" as "dbT3017_kokuhoKojinNo"
+            , DbT3017."kyotakuServiceSakuseiKubunCode" as "dbT3017_kyotakuServiceSakuseiKubunCode"
+            , DbT3017."kyotakuKaigoShienJigyoshoNo" as "dbT3017_kyotakuKaigoShienJigyoshoNo"
+            , DbT3017."kaishiYMD" as "dbT3017_kaishiYMD"
+            , DbT3017."chushiYMD" as "dbT3017_chushiYMD"
+            , DbT3017."chushiRiyuNyushomaeJyokyoCode" as "dbT3017_chushiRiyuNyushomaeJyokyoCode"
+            , DbT3017."nyushoYMD" as "dbT3017_nyushoYMD"
+            , DbT3017."taishoYMD" as "dbT3017_taishoYMD"
+            , DbT3017."nyushoJitsunissu" as "dbT3017_nyushoJitsunissu"
+            , DbT3017."gaihakuNissu" as "dbT3017_gaihakuNissu"
+            , DbT3017."taishogoJotaiCode" as "dbT3017_taishogoJotaiCode"
+            , DbT3017."hokenKyufuritsu" as "dbT3017_hokenKyufuritsu"
+            , DbT3017."kohi1Kyufuritsu" as "dbT3017_kohi1Kyufuritsu"
+            , DbT3017."kohi2Kyufuritsu" as "dbT3017_kohi2Kyufuritsu"
+            , DbT3017."kohi3Kyufuritsu" as "dbT3017_kohi3Kyufuritsu"
+            , DbT3017."maeHokenServiceTanisu" as "dbT3017_maeHokenServiceTanisu"
+            , DbT3017."maeHokenSeikyugaku" as "dbT3017_maeHokenSeikyugaku"
+            , DbT3017."maeHokenRiyoshaFutangaku" as "dbT3017_maeHokenRiyoshaFutangaku"
+            , DbT3017."maeHokenKinkyuShisetsuRyoyoSeikyugaku" as "dbT3017_maeHokenKinkyuShisetsuRyoyoSeikyugaku"
+            , DbT3017."maeHokenTokuteiShinryohiSeikyugaku" as "dbT3017_maeHokenTokuteiShinryohiSeikyugaku"
+            , DbT3017."maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017_maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku"
+            , DbT3017."maeKohi1ServiceTanisu" as "dbT3017_maeKohi1ServiceTanisu"
+            , DbT3017."maeKohi1Seikyugaku" as "dbT3017_maeKohi1Seikyugaku"
+            , DbT3017."maeKohi1RiyoshaFutangaku" as "dbT3017_maeKohi1RiyoshaFutangaku"
+            , DbT3017."maeKohi1KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017_maeKohi1KinkyuShisetsuRyoyoSeikyugaku"
+            , DbT3017."maeKohi1TokuteiShinryohiSeikyugaku" as "dbT3017_maeKohi1TokuteiShinryohiSeikyugaku"
+            , DbT3017."maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017_maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku"
+            , DbT3017."maeKohi2ServiceTanisu" as "dbT3017_maeKohi2ServiceTanisu"
+            , DbT3017."maeKohi2Seikyugaku" as "dbT3017_maeKohi2Seikyugaku"
+            , DbT3017."maeKohi2RiyoshaFutangaku" as "dbT3017_maeKohi2RiyoshaFutangaku"
+            , DbT3017."maeKohi2KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017_maeKohi2KinkyuShisetsuRyoyoSeikyugaku"
+            , DbT3017."maeKohi2TokuteiShinryohiSeikyugaku" as "dbT3017_maeKohi2TokuteiShinryohiSeikyugaku"
+            , DbT3017."maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017_maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku"
+            , DbT3017."maeKohi3ServiceTanisu" as "dbT3017_maeKohi3ServiceTanisu"
+            , DbT3017."maeKohi3Seikyugaku" as "dbT3017_maeKohi3Seikyugaku"
+            , DbT3017."maeKohi3RiyoshaFutangaku" as "dbT3017_maeKohi3RiyoshaFutangaku"
+            , DbT3017."maeKohi3KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017_maeKohi3KinkyuShisetsuRyoyoSeikyugaku"
+            , DbT3017."maeKohi3TokuteiShinryohiSeikyugaku" as "dbT3017_maeKohi3TokuteiShinryohiSeikyugaku"
+            , DbT3017."maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017_maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku"
+            , DbT3017."atoHokenServiceTanisu" as "dbT3017_atoHokenServiceTanisu"
+            , DbT3017."atoHokenSeikyugaku" as "dbT3017_atoHokenSeikyugaku"
+            , DbT3017."atoHokenRiyoshaFutangaku" as "dbT3017_atoHokenRiyoshaFutangaku"
+            , DbT3017."atoHokenKinkyuShisetsuRyoyoSeikyugaku" as "dbT3017_atoHokenKinkyuShisetsuRyoyoSeikyugaku"
+            , DbT3017."atoHokenTokuteiShinryohiSeikyugaku" as "dbT3017_atoHokenTokuteiShinryohiSeikyugaku"
+            , DbT3017."atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017_atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku"
+            , DbT3017."atoKohi1ServiceTanisu" as "dbT3017_atoKohi1ServiceTanisu"
+            , DbT3017."atoKohi1Seikyugaku" as "dbT3017_atoKohi1Seikyugaku"
+            , DbT3017."atoKohi1RiyoshaFutangaku" as "dbT3017_atoKohi1RiyoshaFutangaku"
+            , DbT3017."atoKohi1KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017_atoKohi1KinkyuShisetsuRyoyoSeikyugaku"
+            , DbT3017."atoKohi1TokuteiShinryohiSeikyugaku" as "dbT3017_atoKohi1TokuteiShinryohiSeikyugaku"
+            , DbT3017."atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017_atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku"
+            , DbT3017."atoKohi2ServiceTanisu" as "dbT3017_atoKohi2ServiceTanisu"
+            , DbT3017."atoKohi2Seikyugaku" as "dbT3017_atoKohi2Seikyugaku"
+            , DbT3017."atoKohi2RiyoshaFutangaku" as "dbT3017_atoKohi2RiyoshaFutangaku"
+            , DbT3017."atoKohi2KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017_atoKohi2KinkyuShisetsuRyoyoSeikyugaku"
+            , DbT3017."atoKohi2TokuteiShinryohiSeikyugaku" as "dbT3017_atoKohi2TokuteiShinryohiSeikyugaku"
+            , DbT3017."atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017_atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku"
+            , DbT3017."atoKohi3ServiceTanisu" as "dbT3017_atoKohi3ServiceTanisu"
+            , DbT3017."atoKohi3Seikyugaku" as "dbT3017_atoKohi3Seikyugaku"
+            , DbT3017."atoKohi3RiyoshaFutangaku" as "dbT3017_atoKohi3RiyoshaFutangaku"
+            , DbT3017."atoKohi3KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017_atoKohi3KinkyuShisetsuRyoyoSeikyugaku"
+            , DbT3017."atoKohi3TokuteiShinryohiSeikyugaku" as "dbT3017_atoKohi3TokuteiShinryohiSeikyugaku"
+            , DbT3017."atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017_atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku"
+            , DbT3017."keikaiKubunCode" as "dbT3017_keikaiKubunCode"
+            , DbT3017."shinsaYM" as "dbT3017_shinsaYM"
+            , DbT3017."seiriNo" as "dbT3017_seiriNo"
+            , DbT3017."sofuYM" as "dbT3017_sofuYM"
+            , DbT3017."torikomiYM" as "dbT3017_torikomiYM"
+            , DbT3017."dokujiSakuseiKubun" as "dbT3017_dokujiSakuseiKubun"
+            , DbT3017."hokenshaHoyuKyufujissekiJohoSakujoFlag" as "dbT3017_hokenshaHoyuKyufujissekiJohoSakujoFlag"
+            , DbT1001_tmp2."DbT1001_tmp1_hihokenshaNo" as "dbT1001_tmp2_hihokenshaNo"
+            , DbT1001_tmp2."DbT1001_tmp1_idoYMD" as "dbT1001_tmp2_idoYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_edaNo" as "dbT1001_tmp2_edaNo"
+            , DbT1001_tmp2."DbT1001_tmp1_insertDantaiCd" as "dbT1001_tmp2_insertDantaiCd"
+            , DbT1001_tmp2."DbT1001_tmp1_insertTimestamp" as "dbT1001_tmp2_insertTimestamp"
+            , DbT1001_tmp2."DbT1001_tmp1_insertReamsLoginId" as "dbT1001_tmp2_insertReamsLoginId"
+            , DbT1001_tmp2."DbT1001_tmp1_insertContextId" as "dbT1001_tmp2_insertContextId"
+            , DbT1001_tmp2."DbT1001_tmp1_isDeleted" as "dbT1001_tmp2_isDeleted"
+            , DbT1001_tmp2."DbT1001_tmp1_updateCount" as "dbT1001_tmp2_updateCount"
+            , DbT1001_tmp2."DbT1001_tmp1_lastUpdateTimestamp" as "dbT1001_tmp2_lastUpdateTimestamp"
+            , DbT1001_tmp2."DbT1001_tmp1_lastUpdateReamsLoginId" as "dbT1001_tmp2_lastUpdateReamsLoginId"
+            , DbT1001_tmp2."DbT1001_tmp1_idoJiyuCode" as "dbT1001_tmp2_idoJiyuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shichosonCode" as "dbT1001_tmp2_shichosonCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shikibetsuCode" as "dbT1001_tmp2_shikibetsuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuShutokuJiyuCode" as "dbT1001_tmp2_shikakuShutokuJiyuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuShutokuYMD" as "dbT1001_tmp2_shikakuShutokuYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuShutokuTodokedeYMD" as "dbT1001_tmp2_shikakuShutokuTodokedeYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_ichigoShikakuShutokuYMD" as "dbT1001_tmp2_ichigoShikakuShutokuYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_hihokennshaKubunCode" as "dbT1001_tmp2_hihokennshaKubunCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuSoshitsuJiyuCode" as "dbT1001_tmp2_shikakuSoshitsuJiyuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuSoshitsuYMD" as "dbT1001_tmp2_shikakuSoshitsuYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuSoshitsuTodokedeYMD" as "dbT1001_tmp2_shikakuSoshitsuTodokedeYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuHenkoJiyuCode" as "dbT1001_tmp2_shikakuHenkoJiyuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuHenkoYMD" as "dbT1001_tmp2_shikakuHenkoYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuHenkoTodokedeYMD" as "dbT1001_tmp2_shikakuHenkoTodokedeYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochitokureiTekiyoJiyuCode" as "dbT1001_tmp2_jushochitokureiTekiyoJiyuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochitokureiTekiyoYMD" as "dbT1001_tmp2_jushochitokureiTekiyoYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochitokureiTekiyoTodokedeYMD" as "dbT1001_tmp2_jushochitokureiTekiyoTodokedeYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochitokureiKaijoJiyuCode" as "dbT1001_tmp2_jushochitokureiKaijoJiyuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochitokureiKaijoYMD" as "dbT1001_tmp2_jushochitokureiKaijoYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochitokureiKaijoTodokedeYMD" as "dbT1001_tmp2_jushochitokureiKaijoTodokedeYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochiTokureiFlag" as "dbT1001_tmp2_jushochiTokureiFlag"
+            , DbT1001_tmp2."DbT1001_tmp1_koikinaiJushochiTokureiFlag" as "dbT1001_tmp2_koikinaiJushochiTokureiFlag"
+            , DbT1001_tmp2."DbT1001_tmp1_koikinaiTokureiSochimotoShichosonCode" as "dbT1001_tmp2_koikinaiTokureiSochimotoShichosonCode"
+            , DbT1001_tmp2."DbT1001_tmp1_kyuShichosonCode" as "dbT1001_tmp2_kyuShichosonCode"
+            , DbT1001_tmp2."DbT1001_tmp1_logicalDeletedFlag" as "dbT1001_tmp2_logicalDeletedFlag"
+            , DbT1001_tmp2."PSM_shikibetsuCode" as "psm_tmp2_shikibetsuCode"
+            , DbT1001_tmp2."PSM_genLasdecCode" as "psm_tmp2_genLasdecCode"
+            , DbT1001_tmp2."PSM_kyuLasdecCode" as "psm_tmp2_kyuLasdecCode"
+            , DbT1001_tmp2."PSM_kyuLasdecCodeRenban" as "psm_tmp2_kyuLasdecCodeRenban"
+            , DbT1001_tmp2."PSM_gyomuCode" as "psm_tmp2_gyomuCode"
+            , DbT1001_tmp2."PSM_rirekiNo" as "psm_tmp2_rirekiNo"
+            , DbT1001_tmp2."PSM_currentFlag" as "psm_tmp2_currentFlag"
+            , DbT1001_tmp2."PSM_juminShubetsuCode" as "psm_tmp2_juminShubetsuCode"
+            , DbT1001_tmp2."PSM_kojinNo" as "psm_tmp2_kojinNo"
+            , DbT1001_tmp2."PSM_hojinNo" as "psm_tmp2_hojinNo"
+            , DbT1001_tmp2."PSM_shoriYMD" as "psm_tmp2_shoriYMD"
+            , DbT1001_tmp2."PSM_idoJiyuCode" as "psm_tmp2_idoJiyuCode"
+            , DbT1001_tmp2."PSM_idoYMD" as "psm_tmp2_idoYMD"
+            , DbT1001_tmp2."PSM_todokedeJiyuCode" as "psm_tmp2_todokedeJiyuCode"
+            , DbT1001_tmp2."PSM_todokedeYMD" as "psm_tmp2_todokedeYMD"
+            , DbT1001_tmp2."PSM_idoRiyuCode" as "psm_tmp2_idoRiyuCode"
+            , DbT1001_tmp2."PSM_meisho" as "psm_tmp2_meisho"
+            , DbT1001_tmp2."PSM_kanaMeisho" as "psm_tmp2_kanaMeisho"
+            , DbT1001_tmp2."PSM_shimeiRiyoKubun" as "psm_tmp2_shimeiRiyoKubun"
+            , DbT1001_tmp2."PSM_kannaiKangaiKubun" as "psm_tmp2_kannaiKangaiKubun"
+            , DbT1001_tmp2."PSM_yubinNo" as "psm_tmp2_yubinNo"
+            , DbT1001_tmp2."PSM_choikiCode" as "psm_tmp2_choikiCode"
+            , DbT1001_tmp2."PSM_zenkokuJushoCode" as "psm_tmp2_zenkokuJushoCode"
+            , DbT1001_tmp2."PSM_jusho" as "psm_tmp2_jusho"
+            , DbT1001_tmp2."PSM_banchiCode1" as "psm_tmp2_banchiCode1"
+            , DbT1001_tmp2."PSM_banchiCode2" as "psm_tmp2_banchiCode2"
+            , DbT1001_tmp2."PSM_banchiCode3" as "psm_tmp2_banchiCode3"
+            , DbT1001_tmp2."PSM_banchiCode4" as "psm_tmp2_banchiCode4"
+            , DbT1001_tmp2."PSM_banchi" as "psm_tmp2_banchi"
+            , DbT1001_tmp2."PSM_katagaki" as "psm_tmp2_katagaki"
+            , DbT1001_tmp2."PSM_katagakiInjiFlag" as "psm_tmp2_katagakiInjiFlag"
+            , DbT1001_tmp2."PSM_gyoseikuCode" as "psm_tmp2_gyoseikuCode"
+            , DbT1001_tmp2."PSM_gyoseikuName" as "psm_tmp2_gyoseikuName"
+            , DbT1001_tmp2."PSM_chikuCode1" as "psm_tmp2_chikuCode1"
+            , DbT1001_tmp2."PSM_chikuName1" as "psm_tmp2_chikuName1"
+            , DbT1001_tmp2."PSM_chikuCode2" as "psm_tmp2_chikuCode2"
+            , DbT1001_tmp2."PSM_chikuName2" as "psm_tmp2_chikuName2"
+            , DbT1001_tmp2."PSM_chikuCode3" as "psm_tmp2_chikuCode3"
+            , DbT1001_tmp2."PSM_chikuName3" as "psm_tmp2_chikuName3"
+            , DbT1001_tmp2."PSM_shogakkokuCode" as "psm_tmp2_shogakkokuCode"
+            , DbT1001_tmp2."PSM_shogakkokuName" as "psm_tmp2_shogakkokuName"
+            , DbT1001_tmp2."PSM_chugakkokuCode" as "psm_tmp2_chugakkokuCode"
+            , DbT1001_tmp2."PSM_chugakkokuName" as "psm_tmp2_chugakkokuName"
+            , DbT1001_tmp2."PSM_tohyokuCode" as "psm_tmp2_tohyokuCode"
+            , DbT1001_tmp2."PSM_tohyokuName" as "psm_tmp2_tohyokuName"
+            , DbT1001_tmp2."PSM_juminJotaiCode" as "psm_tmp2_juminJotaiCode"
+            , DbT1001_tmp2."PSM_setaiCode" as "psm_tmp2_setaiCode"
+            , DbT1001_tmp2."PSM_seinengappiYMD" as "psm_tmp2_seinengappiYMD"
+            , DbT1001_tmp2."PSM_seinengappiFushoKubun" as "psm_tmp2_seinengappiFushoKubun"
+            , DbT1001_tmp2."PSM_seibetsuCode" as "psm_tmp2_seibetsuCode"
+            , DbT1001_tmp2."PSM_tsuzukigaraCode" as "psm_tmp2_tsuzukigaraCode"
+            , DbT1001_tmp2."PSM_tsuzukigara" as "psm_tmp2_tsuzukigara"
+            , DbT1001_tmp2."PSM_kazokuNo" as "psm_tmp2_kazokuNo"
+            , DbT1001_tmp2."PSM_juminhyoHyojijun" as "psm_tmp2_juminhyoHyojijun"
+            , DbT1001_tmp2."PSM_kikaYMD" as "psm_tmp2_kikaYMD"
+            , DbT1001_tmp2."PSM_kanjiShimei" as "psm_tmp2_kanjiShimei"
+            , DbT1001_tmp2."PSM_kanaShimei" as "psm_tmp2_kanaShimei"
+            , DbT1001_tmp2."PSM_juminhyoCode" as "psm_tmp2_juminhyoCode"
+            , DbT1001_tmp2."PSM_honsekiZenkokuJushoCode" as "psm_tmp2_honsekiZenkokuJushoCode"
+            , DbT1001_tmp2."PSM_honsekiChoikiCode" as "psm_tmp2_honsekiChoikiCode"
+            , DbT1001_tmp2."PSM_honsekiJusho" as "psm_tmp2_honsekiJusho"
+            , DbT1001_tmp2."PSM_honsekiBanchi" as "psm_tmp2_honsekiBanchi"
+            , DbT1001_tmp2."PSM_hittosha" as "psm_tmp2_hittosha"
+            , DbT1001_tmp2."PSM_gaikokujinShimei" as "psm_tmp2_gaikokujinShimei"
+            , DbT1001_tmp2."PSM_gaikokujinHeikimei" as "psm_tmp2_gaikokujinHeikimei"
+            , DbT1001_tmp2."PSM_gaikokujinKanaShimei" as "psm_tmp2_gaikokujinKanaShimei"
+            , DbT1001_tmp2."PSM_katakanaHyoki" as "psm_tmp2_katakanaHyoki"
+            , DbT1001_tmp2."PSM_tsushomei" as "psm_tmp2_tsushomei"
+            , DbT1001_tmp2."PSM_kanaTsushomei" as "psm_tmp2_kanaTsushomei"
+            , DbT1001_tmp2."PSM_kokusekiChiikiCode" as "psm_tmp2_kokusekiChiikiCode"
+            , DbT1001_tmp2."PSM_zairyuShikakuCode" as "psm_tmp2_zairyuShikakuCode"
+            , DbT1001_tmp2."PSM_zairyuKikanCode" as "psm_tmp2_zairyuKikanCode"
+            , DbT1001_tmp2."PSM_zairyuKikantoManryoYMD" as "psm_tmp2_zairyuKikantoManryoYMD"
+            , DbT1001_tmp2."PSM_zairyuCardtoNo" as "psm_tmp2_zairyuCardtoNo"
+            , DbT1001_tmp2."PSM_zairyuCardtoYukoYMD" as "psm_tmp2_zairyuCardtoYukoYMD"
+            , DbT1001_tmp2."PSM_dai30Jono45niKiteisuruKubun" as "psm_tmp2_dai30Jono45niKiteisuruKubun"
+            , DbT1001_tmp2."PSM_setainushiShikibetsuCode" as "psm_tmp2_setainushiShikibetsuCode"
+            , DbT1001_tmp2."PSM_setainushiMei" as "psm_tmp2_setainushiMei"
+            , DbT1001_tmp2."PSM_hojinKeitaiCode" as "psm_tmp2_hojinKeitaiCode"
+            , DbT1001_tmp2."PSM_hojinKeitaiMeisho" as "psm_tmp2_hojinKeitaiMeisho"
+            , DbT1001_tmp2."PSM_hojinKeitaiRyakusho" as "psm_tmp2_hojinKeitaiRyakusho"
+            , DbT1001_tmp2."PSM_hojinMeishoHenshuKubun" as "psm_tmp2_hojinMeishoHenshuKubun"
+            , DbT1001_tmp2."PSM_hojinKeitaiRyakushoKubun" as "psm_tmp2_hojinKeitaiRyakushoKubun"
+            , DbT1001_tmp2."PSM_hojinMeisho" as "psm_tmp2_hojinMeisho"
+            , DbT1001_tmp2."PSM_hojinKanaMeisho" as "psm_tmp2_hojinKanaMeisho"
+            , DbT1001_tmp2."PSM_hojinShitenMeisho" as "psm_tmp2_hojinShitenMeisho"
+            , DbT1001_tmp2."PSM_hojinShitenKanaMeisho" as "psm_tmp2_hojinShitenKanaMeisho"
+            , DbT1001_tmp2."PSM_daihyoshaShikibetsuCode" as "psm_tmp2_daihyoshaShikibetsuCode"
+            , DbT1001_tmp2."PSM_daihyoshaShimei" as "psm_tmp2_daihyoshaShimei"
+            , DbT1001_tmp2."PSM_daihyoshaKanaShimei" as "psm_tmp2_daihyoshaKanaShimei"
+            , DbT1001_tmp2."PSM_daihyoshaJuminShubetsu" as "psm_tmp2_daihyoshaJuminShubetsu"
+            , DbT1001_tmp2."PSM_daihyoshaNihonjinShimei" as "psm_tmp2_daihyoshaNihonjinShimei"
+            , DbT1001_tmp2."PSM_daihyoshaNihonjinKanaShimei" as "psm_tmp2_daihyoshaNihonjinKanaShimei"
+            , DbT1001_tmp2."PSM_daihyoshaGaikokujinShimei" as "psm_tmp2_daihyoshaGaikokujinShimei"
+            , DbT1001_tmp2."PSM_daihyoshaGaikokujinHeikimei" as "psm_tmp2_daihyoshaGaikokujinHeikimei"
+            , DbT1001_tmp2."PSM_daihyoshaGaikokujinKanaShimei" as "psm_tmp2_daihyoshaGaikokujinKanaShimei"
+            , DbT1001_tmp2."PSM_daihyoshaTsushomei" as "psm_tmp2_daihyoshaTsushomei"
+            , DbT1001_tmp2."PSM_daihyoshaShimeiRiyoKubun" as "psm_tmp2_daihyoshaShimeiRiyoKubun"
+            , DbT1001_tmp2."PSM_daihyoshaKanaTsushomei" as "psm_tmp2_daihyoshaKanaTsushomei"
+            , DbT1001_tmp2."PSM_daihyoshaKannaiKangaiKubun" as "psm_tmp2_daihyoshaKannaiKangaiKubun"
+            , DbT1001_tmp2."PSM_daihyoshaYubinNo" as "psm_tmp2_daihyoshaYubinNo"
+            , DbT1001_tmp2."PSM_daihyoshaChoikiCode" as "psm_tmp2_daihyoshaChoikiCode"
+            , DbT1001_tmp2."PSM_daihyoshaZenkokuJushoCode" as "psm_tmp2_daihyoshaZenkokuJushoCode"
+            , DbT1001_tmp2."PSM_daihyoshaJusho" as "psm_tmp2_daihyoshaJusho"
+            , DbT1001_tmp2."PSM_daihyoshaBanchiCode1" as "psm_tmp2_daihyoshaBanchiCode1"
+            , DbT1001_tmp2."PSM_daihyoshaBanchiCode2" as "psm_tmp2_daihyoshaBanchiCode2"
+            , DbT1001_tmp2."PSM_daihyoshaBanchiCode3" as "psm_tmp2_daihyoshaBanchiCode3"
+            , DbT1001_tmp2."PSM_daihyoshaBanchiCode4" as "psm_tmp2_daihyoshaBanchiCode4"
+            , DbT1001_tmp2."PSM_daihyoshaBanchi" as "psm_tmp2_daihyoshaBanchi"
+            , DbT1001_tmp2."PSM_daihyoshaKatagaki" as "psm_tmp2_daihyoshaKatagaki"
+            , DbT1001_tmp2."PSM_ninkachiendantaiTorokuShikakuKubun" as "psm_tmp2_ninkachiendantaiTorokuShikakuKubun"
+            , DbT1001_tmp2."PSM_ninkachiendantaiNinkaYMD" as "psm_tmp2_ninkachiendantaiNinkaYMD"
+            , DbT1001_tmp2."PSM_kojinHojinKBN" as "psm_tmp2_kojinHojinKBN"
+            , DbT1001_tmp2."PSM_kyoyushaMeisho" as "psm_tmp2_kyoyushaMeisho"
+            , DbT1001_tmp2."PSM_kyoyushaKanaMeisho" as "psm_tmp2_kyoyushaKanaMeisho"
+            , DbT1001_tmp2."PSM_torokuJiyuCode" as "psm_tmp2_torokuJiyuCode"
+            , DbT1001_tmp2."PSM_torokuIdoYMD" as "psm_tmp2_torokuIdoYMD"
+            , DbT1001_tmp2."PSM_torokuTodokedeYMD" as "psm_tmp2_torokuTodokedeYMD"
+            , DbT1001_tmp2."PSM_juteiJiyuCode" as "psm_tmp2_juteiJiyuCode"
+            , DbT1001_tmp2."PSM_juteiIdoYMD" as "psm_tmp2_juteiIdoYMD"
+            , DbT1001_tmp2."PSM_juteiTodokedeYMD" as "psm_tmp2_juteiTodokedeYMD"
+            , DbT1001_tmp2."PSM_shojoJiyuCode" as "psm_tmp2_shojoJiyuCode"
+            , DbT1001_tmp2."PSM_shojoIdoYMD" as "psm_tmp2_shojoIdoYMD"
+            , DbT1001_tmp2."PSM_shojoTodokedeYMD" as "psm_tmp2_shojoTodokedeYMD"
+            , DbT1001_tmp2."PSM_jutonaiYubinNo" as "psm_tmp2_jutonaiYubinNo"
+            , DbT1001_tmp2."PSM_jutonaiChoikiCode" as "psm_tmp2_jutonaiChoikiCode"
+            , DbT1001_tmp2."PSM_jutonaiJusho" as "psm_tmp2_jutonaiJusho"
+            , DbT1001_tmp2."PSM_jutonaiBanchiCode1" as "psm_tmp2_jutonaiBanchiCode1"
+            , DbT1001_tmp2."PSM_jutonaiBanchiCode2" as "psm_tmp2_jutonaiBanchiCode2"
+            , DbT1001_tmp2."PSM_jutonaiBanchiCode3" as "psm_tmp2_jutonaiBanchiCode3"
+            , DbT1001_tmp2."PSM_jutonaiBanchiCode4" as "psm_tmp2_jutonaiBanchiCode4"
+            , DbT1001_tmp2."PSM_jutonaiBanchi" as "psm_tmp2_jutonaiBanchi"
+            , DbT1001_tmp2."PSM_jutonaiKatagaki" as "psm_tmp2_jutonaiKatagaki"
+            , DbT1001_tmp2."PSM_jutonaiKatagakiInjiFlag" as "psm_tmp2_jutonaiKatagakiInjiFlag"
+            , DbT1001_tmp2."PSM_tennyumaeYubinNo" as "psm_tmp2_tennyumaeYubinNo"
+            , DbT1001_tmp2."PSM_tennyumaeZenkokuJushoCode" as "psm_tmp2_tennyumaeZenkokuJushoCode"
+            , DbT1001_tmp2."PSM_tennyumaeJusho" as "psm_tmp2_tennyumaeJusho"
+            , DbT1001_tmp2."PSM_tennyumaeBanchi" as "psm_tmp2_tennyumaeBanchi"
+            , DbT1001_tmp2."PSM_tennyumaeKatagaki" as "psm_tmp2_tennyumaeKatagaki"
+            , DbT1001_tmp2."PSM_tennyumaeSetainushimei" as "psm_tmp2_tennyumaeSetainushimei"
+            , DbT1001_tmp2."PSM_tennyumaeKyusei" as "psm_tmp2_tennyumaeKyusei"
+            , DbT1001_tmp2."PSM_saishuJutochiYubinNo" as "psm_tmp2_saishuJutochiYubinNo"
+            , DbT1001_tmp2."PSM_saishuJutochiZenkokuJushoCode" as "psm_tmp2_saishuJutochiZenkokuJushoCode"
+            , DbT1001_tmp2."PSM_saishuJutochiJusho" as "psm_tmp2_saishuJutochiJusho"
+            , DbT1001_tmp2."PSM_saishuJutochiBanchi" as "psm_tmp2_saishuJutochiBanchi"
+            , DbT1001_tmp2."PSM_saishuJutochiKatagaki" as "psm_tmp2_saishuJutochiKatagaki"
+            , DbT1001_tmp2."PSM_saishuJutochiSetainushimei" as "psm_tmp2_saishuJutochiSetainushimei"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiIdoYMD" as "psm_tmp2_tenshutsuYoteiIdoYMD"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiYubinNo" as "psm_tmp2_tenshutsuYoteiYubinNo"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiZenkokuJushoCode" as "psm_tmp2_tenshutsuYoteiZenkokuJushoCode"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiJusho" as "psm_tmp2_tenshutsuYoteiJusho"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiBanchi" as "psm_tmp2_tenshutsuYoteiBanchi"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiKatagaki" as "psm_tmp2_tenshutsuYoteiKatagaki"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiSetainushimei" as "psm_tmp2_tenshutsuYoteiSetainushimei"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiIdoYMD" as "psm_tmp2_tenshutsuKakuteiIdoYMD"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiTsuchiYMD" as "psm_tmp2_tenshutsuKakuteiTsuchiYMD"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiYubinNo" as "psm_tmp2_tenshutsuKakuteiYubinNo"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiZenkokuJushoCode" as "psm_tmp2_tenshutsuKakuteiZenkokuJushoCode"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiJusho" as "psm_tmp2_tenshutsuKakuteiJusho"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiBanchi" as "psm_tmp2_tenshutsuKakuteiBanchi"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiKatagaki" as "psm_tmp2_tenshutsuKakuteiKatagaki"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiSetainushimei" as "psm_tmp2_tenshutsuKakuteiSetainushimei"
+            , DbT1001_tmp2."PSM_juminhyoUtsushiHakkoSeigyoKubun" as "psm_tmp2_juminhyoUtsushiHakkoSeigyoKubun"
+            , DbT1001_tmp2."PSM_renrakusaki1" as "psm_tmp2_renrakusaki1"
+            , DbT1001_tmp2."PSM_kensakuRenrakusaki1" as "psm_tmp2_kensakuRenrakusaki1"
+            , DbT1001_tmp2."PSM_renrakusakiKubun1" as "psm_tmp2_renrakusakiKubun1"
+            , DbT1001_tmp2."PSM_renrakusaki2" as "psm_tmp2_renrakusaki2"
+            , DbT1001_tmp2."PSM_kensakuRenrakusaki2" as "psm_tmp2_kensakuRenrakusaki2"
+            , DbT1001_tmp2."PSM_renrakusakiKubun2" as "psm_tmp2_renrakusakiKubun2"
+            , DbT1001_tmp2."PSM_renrakusaki3" as "psm_tmp2_renrakusaki3"
+            , DbT1001_tmp2."PSM_kensakuRenrakusaki3" as "psm_tmp2_kensakuRenrakusaki3"
+            , DbT1001_tmp2."PSM_renrakusakiKubun3" as "psm_tmp2_renrakusakiKubun3"
+            , DbT1001_tmp2."PSM_mailAddress" as "psm_tmp2_mailAddress"
+            , DbT1001_tmp2."PSM_biko" as "psm_tmp2_biko"
+            , DbT1001_tmp2."PSM_lastUpdateTimestamp" as "psm_tmp2_lastUpdateTimestamp"
+            , DbT1001_tmp2."PSM_lastUpdateReamsLoginId" as "psm_tmp2_lastUpdateReamsLoginId"
+            , DbT1001_tmp2."PSM_jutogaiKanriUpdateCount" as "psm_tmp2_jutogaiKanriUpdateCount"
+            , DbT1001_tmp2."PSM_jutogaiKanriTorokuNo" as "psm_tmp2_jutogaiKanriTorokuNo"
+            , DbT1001_tmp2."PSM_jutogaiKojinKihonUpdateCount" as "psm_tmp2_jutogaiKojinKihonUpdateCount"
+            , DbT1001_tmp2."PSM_jutogaiKojinKihonTorokuNo" as "psm_tmp2_jutogaiKojinKihonTorokuNo"
+            , DbT1001_tmp2."PSM_hojinUpdateCount" as "psm_tmp2_hojinUpdateCount"
+            , DbT1001_tmp2."PSM_hojinTorokuNo" as "psm_tmp2_hojinTorokuNo"
+            , DbT1001_tmp2."PSM_kyoyushaUpdateCount" as "psm_tmp2_kyoyushaUpdateCount"
+            , DbT1001_tmp2."PSM_kyoyushaTorokuNo" as "psm_tmp2_kyoyushaTorokuNo"
+            , DbT1001_tmp2."PSM_jutogaiNihonjinUpdateCount" as "psm_tmp2_jutogaiNihonjinUpdateCount"
+            , DbT1001_tmp2."PSM_jutogaiNihonjinTorokuNo" as "psm_tmp2_jutogaiNihonjinTorokuNo"
+            , DbT1001_tmp2."PSM_jutogaiGaikokujinUpdateCount" as "psm_tmp2_jutogaiGaikokujinUpdateCount"
+            , DbT1001_tmp2."PSM_jutogaiGaikokujinTorokuNo" as "psm_tmp2_jutogaiGaikokujinTorokuNo"
+            , DbT1001_tmp2."PSM_shimeiSearchTorokuNo" as "psm_tmp2_shimeiSearchTorokuNo"
+            , DbT1001_tmp2."PSM_yusenShimeiUpdateCount" as "psm_tmp2_yusenShimeiUpdateCount"
+            , DbT1001_tmp2."PSM_yusenShimeiTimestamp" as "psm_tmp2_yusenShimeiTimestamp"
+            , DbT1001_tmp2."PSM_kanaName" as "psm_tmp2_kanaName"
+            , DbT1001_tmp2."PSM_gaikokujinKanaName" as "psm_tmp2_gaikokujinKanaName"
+            , DbT1001_tmp2."PSM_kanaTsushoName" as "psm_tmp2_kanaTsushoName"
+            , DbT1001_tmp2."PSM_jukiTorokuNo" as "psm_tmp2_jukiTorokuNo"
+          FROM
+            rgdb."DbT3017KyufujissekiKihon" AS DbT3017
+            INNER JOIN(
+                        SELECT
+                                  DbT1001_tmp1."hihokenshaNo" as "DbT1001_tmp1_hihokenshaNo"
+                                , DbT1001_tmp1."idoYMD" as "DbT1001_tmp1_idoYMD"
+                                , DbT1001_tmp1."edaNo" as "DbT1001_tmp1_edaNo"
+                                , DbT1001_tmp1."insertDantaiCd" as "DbT1001_tmp1_insertDantaiCd"
+                                , DbT1001_tmp1."insertTimestamp" as "DbT1001_tmp1_insertTimestamp"
+                                , DbT1001_tmp1."insertReamsLoginId" as "DbT1001_tmp1_insertReamsLoginId"
+                                , DbT1001_tmp1."insertContextId" as "DbT1001_tmp1_insertContextId"
+                                , DbT1001_tmp1."isDeleted" as "DbT1001_tmp1_isDeleted"
+                                , DbT1001_tmp1."updateCount" as "DbT1001_tmp1_updateCount"
+                                , DbT1001_tmp1."lastUpdateTimestamp" as "DbT1001_tmp1_lastUpdateTimestamp"
+                                , DbT1001_tmp1."lastUpdateReamsLoginId" as "DbT1001_tmp1_lastUpdateReamsLoginId"
+                                , DbT1001_tmp1."idoJiyuCode" as "DbT1001_tmp1_idoJiyuCode"
+                                , DbT1001_tmp1."shichosonCode" as "DbT1001_tmp1_shichosonCode"
+                                , DbT1001_tmp1."shikibetsuCode" as "DbT1001_tmp1_shikibetsuCode"
+                                , DbT1001_tmp1."shikakuShutokuJiyuCode" as "DbT1001_tmp1_shikakuShutokuJiyuCode"
+                                , DbT1001_tmp1."shikakuShutokuYMD" as "DbT1001_tmp1_shikakuShutokuYMD"
+                                , DbT1001_tmp1."shikakuShutokuTodokedeYMD" as "DbT1001_tmp1_shikakuShutokuTodokedeYMD"
+                                , DbT1001_tmp1."ichigoShikakuShutokuYMD" as "DbT1001_tmp1_ichigoShikakuShutokuYMD"
+                                , DbT1001_tmp1."hihokennshaKubunCode" as "DbT1001_tmp1_hihokennshaKubunCode"
+                                , DbT1001_tmp1."shikakuSoshitsuJiyuCode" as "DbT1001_tmp1_shikakuSoshitsuJiyuCode"
+                                , DbT1001_tmp1."shikakuSoshitsuYMD" as "DbT1001_tmp1_shikakuSoshitsuYMD"
+                                , DbT1001_tmp1."shikakuSoshitsuTodokedeYMD" as "DbT1001_tmp1_shikakuSoshitsuTodokedeYMD"
+                                , DbT1001_tmp1."shikakuHenkoJiyuCode" as "DbT1001_tmp1_shikakuHenkoJiyuCode"
+                                , DbT1001_tmp1."shikakuHenkoYMD" as "DbT1001_tmp1_shikakuHenkoYMD"
+                                , DbT1001_tmp1."shikakuHenkoTodokedeYMD" as "DbT1001_tmp1_shikakuHenkoTodokedeYMD"
+                                , DbT1001_tmp1."jushochitokureiTekiyoJiyuCode" as "DbT1001_tmp1_jushochitokureiTekiyoJiyuCode"
+                                , DbT1001_tmp1."jushochitokureiTekiyoYMD" as "DbT1001_tmp1_jushochitokureiTekiyoYMD"
+                                , DbT1001_tmp1."jushochitokureiTekiyoTodokedeYMD" as "DbT1001_tmp1_jushochitokureiTekiyoTodokedeYMD"
+                                , DbT1001_tmp1."jushochitokureiKaijoJiyuCode" as "DbT1001_tmp1_jushochitokureiKaijoJiyuCode"
+                                , DbT1001_tmp1."jushochitokureiKaijoYMD" as "DbT1001_tmp1_jushochitokureiKaijoYMD"
+                                , DbT1001_tmp1."jushochitokureiKaijoTodokedeYMD" as "DbT1001_tmp1_jushochitokureiKaijoTodokedeYMD"
+                                , DbT1001_tmp1."jushochiTokureiFlag" as "DbT1001_tmp1_jushochiTokureiFlag"
+                                , DbT1001_tmp1."koikinaiJushochiTokureiFlag" as "DbT1001_tmp1_koikinaiJushochiTokureiFlag"
+                                , DbT1001_tmp1."koikinaiTokureiSochimotoShichosonCode" as "DbT1001_tmp1_koikinaiTokureiSochimotoShichosonCode"
+                                , DbT1001_tmp1."kyuShichosonCode" as "DbT1001_tmp1_kyuShichosonCode"
+                                , DbT1001_tmp1."logicalDeletedFlag" as "DbT1001_tmp1_logicalDeletedFlag"
+                                , PSM."shikibetsuCode" as "PSM_shikibetsuCode"
+                                , PSM."genLasdecCode" as "PSM_genLasdecCode"
+                                , PSM."kyuLasdecCode" as "PSM_kyuLasdecCode"
+                                , PSM."kyuLasdecCodeRenban" as "PSM_kyuLasdecCodeRenban"
+                                , PSM."gyomuCode" as "PSM_gyomuCode"
+                                , PSM."rirekiNo" as "PSM_rirekiNo"
+                                , PSM."currentFlag" as "PSM_currentFlag"
+                                , PSM."juminShubetsuCode" as "PSM_juminShubetsuCode"
+                                , PSM."kojinNo" as "PSM_kojinNo"
+                                , PSM."hojinNo" as "PSM_hojinNo"
+                                , PSM."shoriYMD" as "PSM_shoriYMD"
+                                , PSM."idoJiyuCode" as "PSM_idoJiyuCode"
+                                , PSM."idoYMD" as "PSM_idoYMD"
+                                , PSM."todokedeJiyuCode" as "PSM_todokedeJiyuCode"
+                                , PSM."todokedeYMD" as "PSM_todokedeYMD"
+                                , PSM."idoRiyuCode" as "PSM_idoRiyuCode"
+                                , PSM."meisho" as "PSM_meisho"
+                                , PSM."kanaMeisho" as "PSM_kanaMeisho"
+                                , PSM."shimeiRiyoKubun" as "PSM_shimeiRiyoKubun"
+                                , PSM."kannaiKangaiKubun" as "PSM_kannaiKangaiKubun"
+                                , PSM."yubinNo" as "PSM_yubinNo"
+                                , PSM."choikiCode" as "PSM_choikiCode"
+                                , PSM."zenkokuJushoCode" as "PSM_zenkokuJushoCode"
+                                , PSM."jusho" as "PSM_jusho"
+                                , PSM."banchiCode1" as "PSM_banchiCode1"
+                                , PSM."banchiCode2" as "PSM_banchiCode2"
+                                , PSM."banchiCode3" as "PSM_banchiCode3"
+                                , PSM."banchiCode4" as "PSM_banchiCode4"
+                                , PSM."banchi" as "PSM_banchi"
+                                , PSM."katagaki" as "PSM_katagaki"
+                                , PSM."katagakiInjiFlag" as "PSM_katagakiInjiFlag"
+                                , PSM."gyoseikuCode" as "PSM_gyoseikuCode"
+                                , PSM."gyoseikuName" as "PSM_gyoseikuName"
+                                , PSM."chikuCode1" as "PSM_chikuCode1"
+                                , PSM."chikuName1" as "PSM_chikuName1"
+                                , PSM."chikuCode2" as "PSM_chikuCode2"
+                                , PSM."chikuName2" as "PSM_chikuName2"
+                                , PSM."chikuCode3" as "PSM_chikuCode3"
+                                , PSM."chikuName3" as "PSM_chikuName3"
+                                , PSM."shogakkokuCode" as "PSM_shogakkokuCode"
+                                , PSM."shogakkokuName" as "PSM_shogakkokuName"
+                                , PSM."chugakkokuCode" as "PSM_chugakkokuCode"
+                                , PSM."chugakkokuName" as "PSM_chugakkokuName"
+                                , PSM."tohyokuCode" as "PSM_tohyokuCode"
+                                , PSM."tohyokuName" as "PSM_tohyokuName"
+                                , PSM."juminJotaiCode" as "PSM_juminJotaiCode"
+                                , PSM."setaiCode" as "PSM_setaiCode"
+                                , PSM."seinengappiYMD" as "PSM_seinengappiYMD"
+                                , PSM."seinengappiFushoKubun" as "PSM_seinengappiFushoKubun"
+                                , PSM."seibetsuCode" as "PSM_seibetsuCode"
+                                , PSM."tsuzukigaraCode" as "PSM_tsuzukigaraCode"
+                                , PSM."tsuzukigara" as "PSM_tsuzukigara"
+                                , PSM."kazokuNo" as "PSM_kazokuNo"
+                                , PSM."juminhyoHyojijun" as "PSM_juminhyoHyojijun"
+                                , PSM."kikaYMD" as "PSM_kikaYMD"
+                                , PSM."kanjiShimei" as "PSM_kanjiShimei"
+                                , PSM."kanaShimei" as "PSM_kanaShimei"
+                                , PSM."juminhyoCode" as "PSM_juminhyoCode"
+                                , PSM."honsekiZenkokuJushoCode" as "PSM_honsekiZenkokuJushoCode"
+                                , PSM."honsekiChoikiCode" as "PSM_honsekiChoikiCode"
+                                , PSM."honsekiJusho" as "PSM_honsekiJusho"
+                                , PSM."honsekiBanchi" as "PSM_honsekiBanchi"
+                                , PSM."hittosha" as "PSM_hittosha"
+                                , PSM."gaikokujinShimei" as "PSM_gaikokujinShimei"
+                                , PSM."gaikokujinHeikimei" as "PSM_gaikokujinHeikimei"
+                                , PSM."gaikokujinKanaShimei" as "PSM_gaikokujinKanaShimei"
+                                , PSM."katakanaHyoki" as "PSM_katakanaHyoki"
+                                , PSM."tsushomei" as "PSM_tsushomei"
+                                , PSM."kanaTsushomei" as "PSM_kanaTsushomei"
+                                , PSM."kokusekiChiikiCode" as "PSM_kokusekiChiikiCode"
+                                , PSM."zairyuShikakuCode" as "PSM_zairyuShikakuCode"
+                                , PSM."zairyuKikanCode" as "PSM_zairyuKikanCode"
+                                , PSM."zairyuKikantoManryoYMD" as "PSM_zairyuKikantoManryoYMD"
+                                , PSM."zairyuCardtoNo" as "PSM_zairyuCardtoNo"
+                                , PSM."zairyuCardtoYukoYMD" as "PSM_zairyuCardtoYukoYMD"
+                                , PSM."dai30Jono45niKiteisuruKubun" as "PSM_dai30Jono45niKiteisuruKubun"
+                                , PSM."setainushiShikibetsuCode" as "PSM_setainushiShikibetsuCode"
+                                , PSM."setainushiMei" as "PSM_setainushiMei"
+                                , PSM."hojinKeitaiCode" as "PSM_hojinKeitaiCode"
+                                , PSM."hojinKeitaiMeisho" as "PSM_hojinKeitaiMeisho"
+                                , PSM."hojinKeitaiRyakusho" as "PSM_hojinKeitaiRyakusho"
+                                , PSM."hojinMeishoHenshuKubun" as "PSM_hojinMeishoHenshuKubun"
+                                , PSM."hojinKeitaiRyakushoKubun" as "PSM_hojinKeitaiRyakushoKubun"
+                                , PSM."hojinMeisho" as "PSM_hojinMeisho"
+                                , PSM."hojinKanaMeisho" as "PSM_hojinKanaMeisho"
+                                , PSM."hojinShitenMeisho" as "PSM_hojinShitenMeisho"
+                                , PSM."hojinShitenKanaMeisho" as "PSM_hojinShitenKanaMeisho"
+                                , PSM."daihyoshaShikibetsuCode" as "PSM_daihyoshaShikibetsuCode"
+                                , PSM."daihyoshaShimei" as "PSM_daihyoshaShimei"
+                                , PSM."daihyoshaKanaShimei" as "PSM_daihyoshaKanaShimei"
+                                , PSM."daihyoshaJuminShubetsu" as "PSM_daihyoshaJuminShubetsu"
+                                , PSM."daihyoshaNihonjinShimei" as "PSM_daihyoshaNihonjinShimei"
+                                , PSM."daihyoshaNihonjinKanaShimei" as "PSM_daihyoshaNihonjinKanaShimei"
+                                , PSM."daihyoshaGaikokujinShimei" as "PSM_daihyoshaGaikokujinShimei"
+                                , PSM."daihyoshaGaikokujinHeikimei" as "PSM_daihyoshaGaikokujinHeikimei"
+                                , PSM."daihyoshaGaikokujinKanaShimei" as "PSM_daihyoshaGaikokujinKanaShimei"
+                                , PSM."daihyoshaTsushomei" as "PSM_daihyoshaTsushomei"
+                                , PSM."daihyoshaShimeiRiyoKubun" as "PSM_daihyoshaShimeiRiyoKubun"
+                                , PSM."daihyoshaKanaTsushomei" as "PSM_daihyoshaKanaTsushomei"
+                                , PSM."daihyoshaKannaiKangaiKubun" as "PSM_daihyoshaKannaiKangaiKubun"
+                                , PSM."daihyoshaYubinNo" as "PSM_daihyoshaYubinNo"
+                                , PSM."daihyoshaChoikiCode" as "PSM_daihyoshaChoikiCode"
+                                , PSM."daihyoshaZenkokuJushoCode" as "PSM_daihyoshaZenkokuJushoCode"
+                                , PSM."daihyoshaJusho" as "PSM_daihyoshaJusho"
+                                , PSM."daihyoshaBanchiCode1" as "PSM_daihyoshaBanchiCode1"
+                                , PSM."daihyoshaBanchiCode2" as "PSM_daihyoshaBanchiCode2"
+                                , PSM."daihyoshaBanchiCode3" as "PSM_daihyoshaBanchiCode3"
+                                , PSM."daihyoshaBanchiCode4" as "PSM_daihyoshaBanchiCode4"
+                                , PSM."daihyoshaBanchi" as "PSM_daihyoshaBanchi"
+                                , PSM."daihyoshaKatagaki" as "PSM_daihyoshaKatagaki"
+                                , PSM."ninkachiendantaiTorokuShikakuKubun" as "PSM_ninkachiendantaiTorokuShikakuKubun"
+                                , PSM."ninkachiendantaiNinkaYMD" as "PSM_ninkachiendantaiNinkaYMD"
+                                , PSM."kojinHojinKBN" as "PSM_kojinHojinKBN"
+                                , PSM."kyoyushaMeisho" as "PSM_kyoyushaMeisho"
+                                , PSM."kyoyushaKanaMeisho" as "PSM_kyoyushaKanaMeisho"
+                                , PSM."torokuJiyuCode" as "PSM_torokuJiyuCode"
+                                , PSM."torokuIdoYMD" as "PSM_torokuIdoYMD"
+                                , PSM."torokuTodokedeYMD" as "PSM_torokuTodokedeYMD"
+                                , PSM."juteiJiyuCode" as "PSM_juteiJiyuCode"
+                                , PSM."juteiIdoYMD" as "PSM_juteiIdoYMD"
+                                , PSM."juteiTodokedeYMD" as "PSM_juteiTodokedeYMD"
+                                , PSM."shojoJiyuCode" as "PSM_shojoJiyuCode"
+                                , PSM."shojoIdoYMD" as "PSM_shojoIdoYMD"
+                                , PSM."shojoTodokedeYMD" as "PSM_shojoTodokedeYMD"
+                                , PSM."jutonaiYubinNo" as "PSM_jutonaiYubinNo"
+                                , PSM."jutonaiChoikiCode" as "PSM_jutonaiChoikiCode"
+                                , PSM."jutonaiJusho" as "PSM_jutonaiJusho"
+                                , PSM."jutonaiBanchiCode1" as "PSM_jutonaiBanchiCode1"
+                                , PSM."jutonaiBanchiCode2" as "PSM_jutonaiBanchiCode2"
+                                , PSM."jutonaiBanchiCode3" as "PSM_jutonaiBanchiCode3"
+                                , PSM."jutonaiBanchiCode4" as "PSM_jutonaiBanchiCode4"
+                                , PSM."jutonaiBanchi" as "PSM_jutonaiBanchi"
+                                , PSM."jutonaiKatagaki" as "PSM_jutonaiKatagaki"
+                                , PSM."jutonaiKatagakiInjiFlag" as "PSM_jutonaiKatagakiInjiFlag"
+                                , PSM."tennyumaeYubinNo" as "PSM_tennyumaeYubinNo"
+                                , PSM."tennyumaeZenkokuJushoCode" as "PSM_tennyumaeZenkokuJushoCode"
+                                , PSM."tennyumaeJusho" as "PSM_tennyumaeJusho"
+                                , PSM."tennyumaeBanchi" as "PSM_tennyumaeBanchi"
+                                , PSM."tennyumaeKatagaki" as "PSM_tennyumaeKatagaki"
+                                , PSM."tennyumaeSetainushimei" as "PSM_tennyumaeSetainushimei"
+                                , PSM."tennyumaeKyusei" as "PSM_tennyumaeKyusei"
+                                , PSM."saishuJutochiYubinNo" as "PSM_saishuJutochiYubinNo"
+                                , PSM."saishuJutochiZenkokuJushoCode" as "PSM_saishuJutochiZenkokuJushoCode"
+                                , PSM."saishuJutochiJusho" as "PSM_saishuJutochiJusho"
+                                , PSM."saishuJutochiBanchi" as "PSM_saishuJutochiBanchi"
+                                , PSM."saishuJutochiKatagaki" as "PSM_saishuJutochiKatagaki"
+                                , PSM."saishuJutochiSetainushimei" as "PSM_saishuJutochiSetainushimei"
+                                , PSM."tenshutsuYoteiIdoYMD" as "PSM_tenshutsuYoteiIdoYMD"
+                                , PSM."tenshutsuYoteiYubinNo" as "PSM_tenshutsuYoteiYubinNo"
+                                , PSM."tenshutsuYoteiZenkokuJushoCode" as "PSM_tenshutsuYoteiZenkokuJushoCode"
+                                , PSM."tenshutsuYoteiJusho" as "PSM_tenshutsuYoteiJusho"
+                                , PSM."tenshutsuYoteiBanchi" as "PSM_tenshutsuYoteiBanchi"
+                                , PSM."tenshutsuYoteiKatagaki" as "PSM_tenshutsuYoteiKatagaki"
+                                , PSM."tenshutsuYoteiSetainushimei" as "PSM_tenshutsuYoteiSetainushimei"
+                                , PSM."tenshutsuKakuteiIdoYMD" as "PSM_tenshutsuKakuteiIdoYMD"
+                                , PSM."tenshutsuKakuteiTsuchiYMD" as "PSM_tenshutsuKakuteiTsuchiYMD"
+                                , PSM."tenshutsuKakuteiYubinNo" as "PSM_tenshutsuKakuteiYubinNo"
+                                , PSM."tenshutsuKakuteiZenkokuJushoCode" as "PSM_tenshutsuKakuteiZenkokuJushoCode"
+                                , PSM."tenshutsuKakuteiJusho" as "PSM_tenshutsuKakuteiJusho"
+                                , PSM."tenshutsuKakuteiBanchi" as "PSM_tenshutsuKakuteiBanchi"
+                                , PSM."tenshutsuKakuteiKatagaki" as "PSM_tenshutsuKakuteiKatagaki"
+                                , PSM."tenshutsuKakuteiSetainushimei" as "PSM_tenshutsuKakuteiSetainushimei"
+                                , PSM."juminhyoUtsushiHakkoSeigyoKubun" as "PSM_juminhyoUtsushiHakkoSeigyoKubun"
+                                , PSM."renrakusaki1" as "PSM_renrakusaki1"
+                                , PSM."kensakuRenrakusaki1" as "PSM_kensakuRenrakusaki1"
+                                , PSM."renrakusakiKubun1" as "PSM_renrakusakiKubun1"
+                                , PSM."renrakusaki2" as "PSM_renrakusaki2"
+                                , PSM."kensakuRenrakusaki2" as "PSM_kensakuRenrakusaki2"
+                                , PSM."renrakusakiKubun2" as "PSM_renrakusakiKubun2"
+                                , PSM."renrakusaki3" as "PSM_renrakusaki3"
+                                , PSM."kensakuRenrakusaki3" as "PSM_kensakuRenrakusaki3"
+                                , PSM."renrakusakiKubun3" as "PSM_renrakusakiKubun3"
+                                , PSM."mailAddress" as "PSM_mailAddress"
+                                , PSM."biko" as "PSM_biko"
+                                , PSM."lastUpdateTimestamp" as "PSM_lastUpdateTimestamp"
+                                , PSM."lastUpdateReamsLoginId" as "PSM_lastUpdateReamsLoginId"
+                                , PSM."jutogaiKanriUpdateCount" as "PSM_jutogaiKanriUpdateCount"
+                                , PSM."jutogaiKanriTorokuNo" as "PSM_jutogaiKanriTorokuNo"
+                                , PSM."jutogaiKojinKihonUpdateCount" as "PSM_jutogaiKojinKihonUpdateCount"
+                                , PSM."jutogaiKojinKihonTorokuNo" as "PSM_jutogaiKojinKihonTorokuNo"
+                                , PSM."hojinUpdateCount" as "PSM_hojinUpdateCount"
+                                , PSM."hojinTorokuNo" as "PSM_hojinTorokuNo"
+                                , PSM."kyoyushaUpdateCount" as "PSM_kyoyushaUpdateCount"
+                                , PSM."kyoyushaTorokuNo" as "PSM_kyoyushaTorokuNo"
+                                , PSM."jutogaiNihonjinUpdateCount" as "PSM_jutogaiNihonjinUpdateCount"
+                                , PSM."jutogaiNihonjinTorokuNo" as "PSM_jutogaiNihonjinTorokuNo"
+                                , PSM."jutogaiGaikokujinUpdateCount" as "PSM_jutogaiGaikokujinUpdateCount"
+                                , PSM."jutogaiGaikokujinTorokuNo" as "PSM_jutogaiGaikokujinTorokuNo"
+                                , PSM."shimeiSearchTorokuNo" as "PSM_shimeiSearchTorokuNo"
+                                , PSM."yusenShimeiUpdateCount" as "PSM_yusenShimeiUpdateCount"
+                                , PSM."yusenShimeiTimestamp" as "PSM_yusenShimeiTimestamp"
+                                , PSM."kanaName" as "PSM_kanaName"
+                                , PSM."gaikokujinKanaName" as "PSM_gaikokujinKanaName"
+                                , PSM."kanaTsushoName" as "PSM_kanaTsushoName"
+                                , PSM."jukiTorokuNo" as "PSM_jukiTorokuNo" 
+                        FROM
+                                (
+                                    SELECT
+                                            *
+                                    FROM 
+                                            rgdb."DbT1001HihokenshaDaicho" AS DbT1001
+                                    WHERE
+                                            #{被保険者番号_開始} <![CDATA[<=]]> DbT1001."hihokenshaNo"
+                                            AND DbT1001."hihokenshaNo" <![CDATA[<=]]> #{被保険者番号_終了}
+                                    ORDER BY
+                                            DbT1001."idoYMD" DESC,
+                                            DbT1001."edaNo" DESC
+                                ) AS DbT1001_tmp1
+                        INNER JOIN 
+                                rgua.${psmShikibetsuTaisho} AS PSM
+                        ON 
+                                PSM."shikibetsuCode" = DbT1001_tmp1."shikibetsuCode" 
+                                          ) AS DbT1001_tmp2
+              ON DbT3017."hiHokenshaNo" = DbT1001_tmp2."DbT1001_tmp1_hihokenshaNo"
+          WHERE
+              '201204' <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
+              <if test="対象年月flag">
+                  AND 
+                     #{年月範囲_開始} <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
+                  AND 
+                     DbT3017."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲_終了}
+              </if>
+              <if test="!対象年月flag">
+                 AND
+                    #{年月範囲_開始} <![CDATA[<=]]> DbT3017."shinsaYM"
+                 AND
+                    DbT3017."shinsaYM" <![CDATA[<=]]> #{年月範囲_終了}
+              </if>
+              <if test="給付実績区分flag">
+                  AND
+                     DbT3017."kyufuJissekiKubunCode" = '1'
+              </if>
+              <if test="!給付実績区分flag">
+                  AND
+                     DbT3017."kyufuJissekiKubunCode" = '2'
+              </if>
+              <if test="すべて選択flag">
+                  AND
+                     DbT3017."yoKaigoJotaiKubunCode" IN ('06','11','12','13','21','22','23','24','25')
+              </if>
+              <if test="要介護1flag">
+                  OR
+                     DbT3017."yoKaigoJotaiKubunCode" IN ('21')
+              </if>
+              <if test="要介護2flag">
+                  OR
+                     DbT3017."yoKaigoJotaiKubunCode" IN ('22')
+              </if>
+              <if test="要介護3flag">
+                  OR
+                     DbT3017."yoKaigoJotaiKubunCode" IN ('23')
+              </if>
+              <if test="要介護4flag">
+                  OR
+                     DbT3017."yoKaigoJotaiKubunCode" IN ('24')
+              </if>
+              <if test="要介護5flag">
+                  OR
+                     DbT3017."yoKaigoJotaiKubunCode" IN ('25')
+              </if>
+              <if test="要支援1flag">
+                  OR
+                     DbT3017."yoKaigoJotaiKubunCode" IN ('12')
+              </if>
+              <if test="要支援2flag">
+                  OR
+                     DbT3017."yoKaigoJotaiKubunCode" IN ('13')
+              </if>
+              <if test="経過的要介護flag">
+                  OR
+                     DbT3017."yoKaigoJotaiKubunCode" IN ('11')
+              </if>
+              <if test="事業対象者flag">
+                  OR
+                     DbT3017."yoKaigoJotaiKubunCode" IN ('06')
+              </if>
+              <if test="訪問通所他flag">
+                  AND
+                     DbT3017."inputShikibetsuNo" IN ('7131','2131')
+              </if>
+              <if test="短期入所生活介護flag">
+                  AND
+                     DbT3017."inputShikibetsuNo" IN ('7143','2143')
+              </if>
+              <if test="短期入所療養介護_老健施設flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7155','2155')
+              </if>
+              <if test="短期入所療養介護_医療施設flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7164','2164')
+              </if>
+              <if test="認知症対応型共同生活flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7171','2171')
+              </if>
+              <if test="特定施設入居者生活介護flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7173','2173')
+              </if>
+              <if test="認知症対応型共同生活_短期flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7175','2175')
+              </if>
+              <if test="特定施設入居生活介護_短期flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7177','2177')
+              </if>
+              <if test="居宅介護支援flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('8124','21B4')
+              </if>
+              <if test="介護老人福祉施設サービスflag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7183','2183')
+              </if>
+              <if test="介護老人保健施設サービスflag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7195','2195')
+              </if>
+              <if test="介護療養型医療施設サービスflag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('71A3','21A3')
+              </if>
+              <if test="特定福祉用具販売費flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('21C1')
+              </if>
+              <if test="住宅改修費flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('21D1')
+              </if>
+              <if test="高額介護サービス費flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('3411')
+              </if>
+              <if test="予防訪問通所他flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7132','2132')
+              </if>
+              <if test="予防短期入所生活介護flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7144','2144')
+              </if>
+              <if test="予防短期入所療養介護_老健施設flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7156','2156')
+              </if>
+              <if test="予防短期入所療養介護_医療施設flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7165','2165')
+              </if>
+              <if test="予防認知症対応型共同生活flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7172','2172')
+              </if>
+              <if test="予防特定施設入居者生活介護flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('7174','2174')
+              </if>
+               <if test="予防認知症対応型共同生活_短期flag">
+                   AND
+                  DbT3017."inputShikibetsuNo" IN ('7176','2176')
+              </if>
+              <if test="予防支援flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('8125','21B5')
+              </if>
+              <if test="予防特定福祉用具販売費flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('21C2')
+              </if>
+              <if test="予防住宅改修費flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('21D2')
+              </if>
+              <if test="介護予防_生活支援_経過flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('71P1')
+              </if>
+              <if test="経過措置ケアマネジメントflag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('8161')
+              </if>
+              <if test="介護予防_生活支援総合事業flag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('71R1')
+              </if>
+              <if test="総合事業ケアマネジメントflag">
+                  AND
+                  DbT3017."inputShikibetsuNo" IN ('8171')
+              </if>
+              <if test="旧措置特定有無flag">
+                  AND
+                  DbT3017."kyuSochiNyushoshaTokureiCode" = '1'
+              </if>
+              <if test="!旧措置特定有無flag">
+                  AND
+                  DbT3017."kyuSochiNyushoshaTokureiCode" = '2'
+              </if>
+              <if test="老人保健市町村番号有無flag">
+                  AND
+                  DbT3017."rojinHokenShichosonNo" = ''
+              </if>
+              <if test="!老人保健市町村番号有無flag">
+                  AND
+                    #{老人保健市町村番号有_開始} <![CDATA[<=]]> DbT3017."rojinHokenShichosonNo" 
+                  AND
+                    DbT3017."rojinHokenShichosonNo" <![CDATA[<=]]> #{老人保健市町村番号有_終了}
+              </if>
+              <if test="老人保健受給者番号有無flag">
+                AND
+                    DbT3017."rojinhokenJukyushaNo" = ''
+              </if>
+              <if test="!老人保健受給者番号有無flag">
+                AND
+                    #{老人保健受給者番号有_開始} <![CDATA[<=]]> DbT3017."rojinhokenJukyushaNo" 
+                AND
+                    DbT3017."rojinhokenJukyushaNo" <![CDATA[<=]]> #{老人保健受給者番号有_終了}
+              </if>
+              <if test="!公費負担者番号flag">
+                  AND
+                  DbT3017."kohi1FutanshaNo" = #{公費負担者番号} OR DbT3017."kohi2FutanshaNo" = #{公費負担者番号} OR DbT3017."kohi3FutanshaNo" = #{公費負担者番号}
+              </if>
+              <if test="!公費受給者番号flag">
+                  AND
+                  DbT3017."kohi1JukyushaNo" = #{公費受給者番号} OR DbT3017."kohi2JukyushaNo" = #{公費受給者番号} OR DbT3017."kohi3JukyushaNo" = #{公費受給者番号}
+              </if>
+              <if test="事業者番号flag">
+                  AND
+                  #{事業者番号_開始} <![CDATA[<=]]> DbT3017."jigyoshoNo"
+                  AND 
+                  DbT3017."jigyoshoNo" <![CDATA[<=]]> #{事業者番号_終了}
+              </if>
+              <if test="!計画作成事業者番号flag">
+                  AND
+                  DbT3017."kyotakuKaigoShienJigyoshoNo" = #{計画作成事業者番号}
+              </if>
+              <if test="!給付率flag">
+                  AND
+                  <if test="給付率区分flag1">
+                      DbT3017."hokenKyufuritsu" = #{給付率}
+                  </if>
+                  <if test="給付率区分flag2">
+                      #{給付率} <![CDATA[<]]> DbT3017."hokenKyufuritsu"
+                  </if>
+                  <if test="給付率区分flag3">
+                      DbT3017."hokenKyufuritsu" <![CDATA[<]]> #{給付率}
+                  </if>
+              </if>
+          ORDER BY 
+                    DbT3017."inputShikibetsuNo" ASC, 
+                    DbT3017."hiHokenshaNo" ASC, 
+                    DbT3017."serviceTeikyoYM" ASC,
+                    DbT3017."kyufuJissekiKubunCode" ASC,
+                    DbT3017."jigyoshoNo" ASC, 
+                    DbT3017."toshiNo" ASC
+    </select>
+    
+    <sql id="subsql">
+        <if test="対象年月flag">
+            AND 
+                #{年月範囲_開始} <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+            AND 
+                "DbT3017KyufujissekiKihon"."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲_終了}
+	</if>
+	<if test="!対象年月flag">
+            AND
+                #{年月範囲_開始} <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."shinsaYM"
+            AND
+                "DbT3017KyufujissekiKihon"."shinsaYM" <![CDATA[<=]]> #{年月範囲_終了}
+        </if>
+	<if test="訪問通所他flag">
+            AND
+               "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7131','2131')
+        </if>
+        <if test="短期入所生活介護flag">
+            AND
+               "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7143','2143')
+        </if>
+        <if test="短期入所療養介護_老健施設flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7155','2155')
+        </if>
+        <if test="短期入所療養介護_医療施設flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7164','2164')
+        </if>
+        <if test="認知症対応型共同生活flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7171','2171')
+        </if>
+        <if test="特定施設入居者生活介護flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7173','2173')
+        </if>
+        <if test="認知症対応型共同生活_短期flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7175','2175')
+        </if>
+        <if test="特定施設入居生活介護_短期flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7177','2177')
+        </if>
+        <if test="居宅介護支援flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('8124','21B4')
+        </if>
+        <if test="介護老人福祉施設サービスflag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7183','2183')
+        </if>
+        <if test="介護老人保健施設サービスflag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7195','2195')
+        </if>
+        <if test="介護療養型医療施設サービスflag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('71A3','21A3')
+        </if>
+        <if test="特定福祉用具販売費flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('21C1')
+        </if>
+        <if test="住宅改修費flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('21D1')
+        </if>
+        <if test="高額介護サービス費flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('3411')
+        </if>
+        <if test="予防訪問通所他flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7132','2132')
+        </if>
+        <if test="予防短期入所生活介護flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7144','2144')
+        </if>
+        <if test="予防短期入所療養介護_老健施設flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7156','2156')
+        </if>
+        <if test="予防短期入所療養介護_医療施設flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7165','2165')
+        </if>
+        <if test="予防認知症対応型共同生活flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7172','2172')
+        </if>
+        <if test="予防特定施設入居者生活介護flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7174','2174')
+        </if>
+         <if test="予防認知症対応型共同生活_短期flag">
+             AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('7176','2176')
+        </if>
+        <if test="予防支援flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('8125','21B5')
+        </if>
+        <if test="予防特定福祉用具販売費flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('21C2')
+        </if>
+        <if test="予防住宅改修費flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('21D2')
+        </if>
+        <if test="介護予防_生活支援_経過flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('71P1')
+        </if>
+        <if test="経過措置ケアマネジメントflag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('8161')
+        </if>
+        <if test="介護予防_生活支援総合事業flag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('71R1')
+        </if>
+        <if test="総合事業ケアマネジメントflag">
+            AND
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" IN ('8171')
+        </if>
+    </sql>
+    
+    <resultMap id="resultMap_MeisaiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.MeisaiRelateEntity" autoMapping="true">
+        <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tanisuShikibetsuCode" column="tanisuShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
+        <association property="dbt3018" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3018KyufujissekiMeisaiMapper.ResultMap_DbT3018KyufujissekiMeisaiEntity"/>
+    </resultMap>   
+    <select resultOrdered="true" id="get明細" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultMap="resultMap_MeisaiEntity" fetchSize="500">
+        SELECT 
+                 DbT7131."serviceName" AS "serviceName",
+                 DbT7131."tanisuShikibetsuCode" AS "tanisuShikibetsuCode",
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3018KyufujissekiMeisaiMapper.allColumns_DbT3018KyufujissekiMeisai" />
+        FROM		
+                rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+        INNER JOIN rgdb."DbT3018KyufujissekiMeisai" AS "DbT3018KyufujissekiMeisai"
+                        ON	"DbT3018KyufujissekiMeisai"."inputShikibetsuNo"="DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+                        AND	"DbT3018KyufujissekiMeisai"."hiHokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
+                        AND	"DbT3018KyufujissekiMeisai"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                        AND	"DbT3018KyufujissekiMeisai"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
+                        AND	"DbT3018KyufujissekiMeisai"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+        LEFT JOIN rgdb."DbT7131KaigoServiceNaiyou" AS DbT7131
+                        ON      DbT7131."serviceShuruiCd" = "DbT3018KyufujissekiMeisai"."serviceShuruiCode"
+                        AND     DbT7131."serviceKoumokuCd" = "DbT3018KyufujissekiMeisai"."serviceKomokuCode"
+        WHERE
+	'201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+	<include refid="subsql"/>
+        ORDER BY
+                "DbT3018KyufujissekiMeisai"."inputShikibetsuNo" ASC,
+                "DbT3018KyufujissekiMeisai"."hiHokenshaNo" ASC,
+                "DbT3018KyufujissekiMeisai"."serviceTeikyoYM" ASC,
+                "DbT3018KyufujissekiMeisai"."jigyoshoNo" ASC,
+                "DbT3018KyufujissekiMeisai"."toshiNo" ASC,
+                "DbT3018KyufujissekiMeisai"."serviceShuruiCode" ASC,
+                "DbT3018KyufujissekiMeisai"."serviceKomokuCode" ASC
+    </select>
+    
+    <resultMap id="resultMap_KinkyuuziShisetuRyouyouRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KinkyuuziShisetuRyouyouRelateEntity" autoMapping="true">
+        <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
+        <association property="dbt3019" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3019KyufujissekiKinkyuShisetsuRyoyoMapper.ResultMap_DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity"/>
+    </resultMap>    
+    <select resultOrdered="true" id="get緊急時施設療養" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultMap="resultMap_KinkyuuziShisetuRyouyouRelateEntity" fetchSize="500">
+        SELECT
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3019KyufujissekiKinkyuShisetsuRyoyoMapper.allColumns_DbT3019KyufujissekiKinkyuShisetsuRyoyo" />
+        FROM
+                rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+                INNER JOIN rgdb."DbT3019KyufujissekiKinkyuShisetsuRyoyo" AS "DbT3019KyufujissekiKinkyuShisetsuRyoyo"
+                ON	"DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo"="DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+                AND	"DbT3019KyufujissekiKinkyuShisetsuRyoyo"."hiHokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
+                AND	"DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                AND	"DbT3019KyufujissekiKinkyuShisetsuRyoyo"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
+                AND	"DbT3019KyufujissekiKinkyuShisetsuRyoyo"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+        WHERE
+	'201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+	<include refid="subsql"/>
+        ORDER BY		
+                "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."inputShikibetsuNo" ASC,
+                "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."hiHokenshaNo" ASC,
+                "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."serviceTeikyoYM" ASC,
+                "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode" ASC,
+                "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."jigyoshoNo" ASC,
+                "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."toshiNo" ASC,
+                "DbT3019KyufujissekiKinkyuShisetsuRyoyo"."recodeJunjiNo" ASC
+    </select>
+    
+    <resultMap id="resultMap_TokuteiShinryouHiRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.TokuteiShinryouHiRelateEntity" autoMapping="true">
+        <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
+        <association property="dbt3021" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoMapper.ResultMap_DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity"/>
+    </resultMap>   
+    <select resultOrdered="true" id="get特定診療費" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultMap="resultMap_TokuteiShinryouHiRelateEntity" fetchSize="500">
+        SELECT 
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoMapper.allColumns_DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo" />
+        FROM		
+                rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+        INNER JOIN rgdb."DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo" AS "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"
+                        ON	"DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."inputShikibetsuNo"="DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+                        AND	"DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."hiHokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
+                        AND	"DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                        AND	"DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
+                        AND	"DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+        WHERE
+	'201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+	<include refid="subsql"/>
+        ORDER BY
+                "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."inputShikibetsuNo" ASC,
+                "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."hiHokenshaNo" ASC,
+                "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."serviceTeikyoYM" ASC,
+                "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."jigyoshoNo" ASC,
+                "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."toshiNo" ASC,
+                "DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo"."recodeJunjiNo" ASC
+    </select>
+    
+    <resultMap id="resultMap_KeikakuHiRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KeikakuHiRelateEntity" autoMapping="true">
+        <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
+        <association property="dbt3025" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3025KyufujissekiKyotakuServiceMapper.ResultMap_DbT3025KyufujissekiKyotakuServiceEntity"/>
+    </resultMap>   
+    <select resultOrdered="true" id="get計画費" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultMap="resultMap_KeikakuHiRelateEntity" fetchSize="500">
+        SELECT 
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3025KyufujissekiKyotakuServiceMapper.allColumns_DbT3025KyufujissekiKyotakuService" />
+        FROM		
+                rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+        INNER JOIN rgdb."DbT3025KyufujissekiKyotakuService" AS "DbT3025KyufujissekiKyotakuService"
+                        ON	"DbT3025KyufujissekiKyotakuService"."inputShikibetsuNo"="DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+                        AND	"DbT3025KyufujissekiKyotakuService"."hiHokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
+                        AND	"DbT3025KyufujissekiKyotakuService"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                        AND	"DbT3025KyufujissekiKyotakuService"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
+                        AND	"DbT3025KyufujissekiKyotakuService"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+        WHERE
+            '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+            <include refid="subsql"/>
+        ORDER BY
+                "DbT3025KyufujissekiKyotakuService"."inputShikibetsuNo" ASC,
+                "DbT3025KyufujissekiKyotakuService"."hiHokenshaNo" ASC,
+                "DbT3025KyufujissekiKyotakuService"."serviceTeikyoYM" ASC,
+                "DbT3025KyufujissekiKyotakuService"."jigyoshoNo" ASC,
+                "DbT3025KyufujissekiKyotakuService"."toshiNo" ASC,
+                "DbT3025KyufujissekiKyotakuService"."servicePlanhiMeisaiLineNo" ASC
+    </select>
+    
+    <resultMap id="resultMap_HukushiYouguRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.HukushiYouguRelateEntity" autoMapping="true">
+        <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
+        <association property="dbt3026" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3026KyufujissekiFukushiYoguHanbaihiMapper.ResultMap_DbT3026KyufujissekiFukushiYoguHanbaihiEntity"/>
+    </resultMap>   
+    <select resultOrdered="true" id="get福祉用具" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultMap="resultMap_HukushiYouguRelateEntity" fetchSize="500">
+        SELECT 
+               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3026KyufujissekiFukushiYoguHanbaihiMapper.allColumns_DbT3026KyufujissekiFukushiYoguHanbaihi" />
+        FROM		
+                rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+        INNER JOIN rgdb."DbT3026KyufujissekiFukushiYoguHanbaihi" AS "DbT3026KyufujissekiFukushiYoguHanbaihi"
+                        ON	"DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo"="DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+                        AND	"DbT3026KyufujissekiFukushiYoguHanbaihi"."hiHokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
+                        AND	"DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                        AND	"DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
+                        AND	"DbT3026KyufujissekiFukushiYoguHanbaihi"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+        WHERE
+            '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+            <include refid="subsql"/>
+        ORDER BY
+                "DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo" ASC,
+                "DbT3026KyufujissekiFukushiYoguHanbaihi"."hiHokenshaNo" ASC,
+                "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM" ASC,
+                "DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo" ASC,
+                "DbT3026KyufujissekiFukushiYoguHanbaihi"."toshiNo" ASC,
+                "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceCode" ASC
+    </select>
+    
+    <resultMap id="resultMap_JuutakuKaishuuRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.JuutakuKaishuuRelateEntity" autoMapping="true">
+        <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
+        <association property="dbt3027" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3027KyufujissekiJutakuKaishuhiMapper.ResultMap_DbT3027KyufujissekiJutakuKaishuhiEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get住宅改修" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultMap="resultMap_JuutakuKaishuuRelateEntity" fetchSize="500">
+        SELECT 
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3027KyufujissekiJutakuKaishuhiMapper.allColumns_DbT3027KyufujissekiJutakuKaishuhi" />
+        FROM		
+                rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+        INNER JOIN rgdb."DbT3027KyufujissekiJutakuKaishuhi" AS "DbT3027KyufujissekiJutakuKaishuhi"
+                        ON	"DbT3027KyufujissekiJutakuKaishuhi"."inputShikibetsuNo"="DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+                        AND	"DbT3027KyufujissekiJutakuKaishuhi"."hiHokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
+                        AND	"DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                        AND	"DbT3027KyufujissekiJutakuKaishuhi"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
+                        AND	"DbT3027KyufujissekiJutakuKaishuhi"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+        WHERE
+            '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+            <include refid="subsql"/>
+        ORDER BY
+                "DbT3027KyufujissekiJutakuKaishuhi"."inputShikibetsuNo" ASC,
+                "DbT3027KyufujissekiJutakuKaishuhi"."hiHokenshaNo" ASC,
+                "DbT3027KyufujissekiJutakuKaishuhi"."serviceTeikyoYM" ASC,
+                "DbT3027KyufujissekiJutakuKaishuhi"."jigyoshoNo" ASC,
+                "DbT3027KyufujissekiJutakuKaishuhi"."toshiNo" ASC,
+                "DbT3027KyufujissekiJutakuKaishuhi"."meisaiNo" ASC,
+                "DbT3027KyufujissekiJutakuKaishuhi"."serviceCode" ASC
+    </select>
+    
+    <resultMap id="resultMap_TokuteiServiceHiRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.TokuteiServiceHiRelateEntity" autoMapping="true">
+         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
+        <association property="dbt3029" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoMapper.ResultMap_DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get特定入所者介護サービス費用" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultMap="resultMap_TokuteiServiceHiRelateEntity" fetchSize="500">
+        SELECT 
+                DbT7131."serviceName" AS "serviceName",
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoMapper.allColumns_DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" />
+        FROM		
+                rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+        INNER JOIN rgdb."DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" AS "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"
+                        ON	"DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."inputShikibetsuNo"="DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+                        AND	"DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."hiHokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
+                        AND	"DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                        AND	"DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
+                        AND	"DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+        LEFT JOIN rgdb."DbT7131KaigoServiceNaiyou" AS DbT7131
+                        ON      DbT7131."serviceShuruiCd" = "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."serviceSyuruiCode"
+                        AND     DbT7131."serviceKoumokuCd" = "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."serviceKomokuCode"
+        WHERE
+            '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+            <include refid="subsql"/>
+        ORDER BY
+                "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."inputShikibetsuNo" ASC,
+                "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."hiHokenshaNo" ASC,
+                "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."serviceTeikyoYM" ASC,
+                "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."jigyoshoNo" ASC,
+                "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."toshiNo" ASC,
+                "DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo"."recodeJunjiNo" ASC
+    </select>
+    
+    <resultMap id="resultMap_ShakaiHukushiHouzinKeigenRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShakaiHukushiHouzinKeigenRelateEntity" autoMapping="true">
+        <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
+        <association property="dbt3030" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuMapper.ResultMap_DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get社会福祉法人軽減額" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultMap="resultMap_ShakaiHukushiHouzinKeigenRelateEntity" fetchSize="500">
+        SELECT 
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuMapper.allColumns_DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" />
+        FROM		
+                rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+        INNER JOIN rgdb."DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" AS "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"
+                        ON	"DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."inputShikibetsuNo"="DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+                        AND	"DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."hiHokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
+                        AND	"DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                        AND	"DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
+                        AND	"DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+        WHERE
+            '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+            <include refid="subsql"/>
+        ORDER BY
+                "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."inputShikibetsuNo" ASC,
+                "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."hiHokenshaNo" ASC,
+                "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceTeikyoYM" ASC,
+                "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."jigyoshoNo" ASC,
+                "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."toshiNo" ASC,
+                "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"."serviceSyuruiCode" ASC
+    </select>
+    
+    <resultMap id="resultMap_CareManagementRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.CareManagementRelateEntity" autoMapping="true">
+        <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
+        <association property="dbt3031" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3031KyufuJissekiCareManagementHiMapper.ResultMap_DbT3031KyufuJissekiCareManagementHiEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="getケアマネジメント費" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultMap="resultMap_CareManagementRelateEntity" fetchSize="500">
+        SELECT 
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3031KyufuJissekiCareManagementHiMapper.allColumns_DbT3031KyufuJissekiCareManagementHi" />
+        FROM		
+                rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+        INNER JOIN rgdb."DbT3031KyufuJissekiCareManagementHi" AS "DbT3031KyufuJissekiCareManagementHi"
+                        ON	"DbT3031KyufuJissekiCareManagementHi"."inputShikibetsuNo"="DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+                        AND	"DbT3031KyufuJissekiCareManagementHi"."hiHokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
+                        AND	"DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                        AND	"DbT3031KyufuJissekiCareManagementHi"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
+                        AND	"DbT3031KyufuJissekiCareManagementHi"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+        WHERE
+            '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+            <include refid="subsql"/>
+        ORDER BY
+                "DbT3031KyufuJissekiCareManagementHi"."inputShikibetsuNo" ASC,
+                "DbT3031KyufuJissekiCareManagementHi"."hiHokenshaNo" ASC,
+                "DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM" ASC,
+                "DbT3031KyufuJissekiCareManagementHi"."jigyoshoNo" ASC,
+                "DbT3031KyufuJissekiCareManagementHi"."toshiNo" ASC
+    </select>
+    
+    <resultMap id="resultMap_ShoteiShikkanRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShoteiShikkanRelateEntity" autoMapping="true">
+        <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
+        <association property="dbt3032" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3032KyufujissekiShoteiShikkanShisetsuRyoyoMapper.ResultMap_DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get所定疾患施設療養費" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultMap="resultMap_ShoteiShikkanRelateEntity" fetchSize="500">
+        SELECT 
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3032KyufujissekiShoteiShikkanShisetsuRyoyoMapper.allColumns_DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo" />
+        FROM		
+                rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+        INNER JOIN rgdb."DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo" AS "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"
+                        ON	"DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."inputShikibetsuNo"="DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+                        AND	"DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."hiHokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
+                        AND	"DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                        AND	"DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
+                        AND	"DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+        WHERE
+            '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+            <include refid="subsql"/>
+        ORDER BY
+                "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."inputShikibetsuNo" ASC,
+                "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."hiHokenshaNo" ASC,
+                "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."serviceTeikyoYM" ASC,
+                "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."jigyoshoNo" ASC,
+                "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."toshiNo" ASC,
+                "DbT3032KyufujissekiShoteiShikkanShisetsuRyoyo"."recodeJunjiNo" ASC
+    </select>
+    
+    <resultMap id="resultMap_MeisaiJuushoRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.MeisaiJuushoRelateEntity" autoMapping="true">
+        <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
+        <association property="dbt3106" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3106KyufujissekiMeisaiJushochiTokureiMapper.ResultMap_DbT3106KyufujissekiMeisaiJushochiTokureiEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get明細住所地特例" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultMap="resultMap_MeisaiJuushoRelateEntity" fetchSize="500">
+        SELECT 
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3106KyufujissekiMeisaiJushochiTokureiMapper.allColumns_DbT3106KyufujissekiMeisaiJushochiTokurei" />
+        FROM		
+                rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+        INNER JOIN rgdb."DbT3106KyufujissekiMeisaiJushochiTokurei" AS "DbT3106KyufujissekiMeisaiJushochiTokurei"
+                        ON	"DbT3106KyufujissekiMeisaiJushochiTokurei"."inputShikibetsuNo"="DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+                        AND	"DbT3106KyufujissekiMeisaiJushochiTokurei"."hiHokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
+                        AND	"DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                        AND	"DbT3106KyufujissekiMeisaiJushochiTokurei"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
+                        AND	"DbT3106KyufujissekiMeisaiJushochiTokurei"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+        WHERE
+            '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+            <include refid="subsql"/>
+        ORDER BY
+                "DbT3106KyufujissekiMeisaiJushochiTokurei"."inputShikibetsuNo" ASC,
+                "DbT3106KyufujissekiMeisaiJushochiTokurei"."hiHokenshaNo" ASC,
+                "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceTeikyoYM" ASC,
+                "DbT3106KyufujissekiMeisaiJushochiTokurei"."jigyoshoNo" ASC,
+                "DbT3106KyufujissekiMeisaiJushochiTokurei"."toshiNo" ASC,
+                "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceShuruiCode" ASC,
+                "DbT3106KyufujissekiMeisaiJushochiTokurei"."serviceKomokuCode" ASC
+
+    </select>
+    
+    <resultMap id="resultMap_ShuukeiRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.ShuukeiRelateEntity" autoMapping="true">
+        <association property="dbt3017" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.ResultMap_DbT3017KyufujissekiKihonEntity"/>
+        <association property="dbt3033" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.ResultMap_DbT3033KyufujissekiShukeiEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get集計" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultMap="resultMap_ShuukeiRelateEntity" fetchSize="500">
+        SELECT 
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />,
+                <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3033KyufujissekiShukeiMapper.allColumns_DbT3033KyufujissekiShukei" />
+        FROM		
+                rgdb."DbT3017KyufujissekiKihon" AS "DbT3017KyufujissekiKihon"
+        INNER JOIN rgdb."DbT3033KyufujissekiShukei" AS "DbT3033KyufujissekiShukei"
+                        ON	"DbT3033KyufujissekiShukei"."inputShikibetsuNo"="DbT3017KyufujissekiKihon"."inputShikibetsuNo"
+                        AND	"DbT3033KyufujissekiShukei"."hiHokenshaNo"="DbT3017KyufujissekiKihon"."hiHokenshaNo"
+                        AND	"DbT3033KyufujissekiShukei"."serviceTeikyoYM"="DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+                        AND	"DbT3033KyufujissekiShukei"."jigyoshoNo"="DbT3017KyufujissekiKihon"."jigyoshoNo"
+                        AND	"DbT3033KyufujissekiShukei"."toshiNo"="DbT3017KyufujissekiKihon"."toshiNo"
+        WHERE
+            '201204' <![CDATA[<=]]> "DbT3017KyufujissekiKihon"."serviceTeikyoYM"
+            <include refid="subsql"/>
+        ORDER BY
+                "DbT3033KyufujissekiShukei"."inputShikibetsuNo" ASC,
+                "DbT3033KyufujissekiShukei"."hiHokenshaNo" ASC,
+                "DbT3033KyufujissekiShukei"."serviceTeikyoYM" ASC,
+                "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode" ASC,
+                "DbT3033KyufujissekiShukei"."jigyoshoNo" ASC,
+                "DbT3033KyufujissekiShukei"."toshiNo" ASC,
+                "DbT3033KyufujissekiShukei"."serviceSyuruiCode" ASC
+    </select>
+    
+    <select resultOrdered="true" id="get給付実績高額" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekidaicho.JukyushaKyufujissekiDaichoMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KyuuhuZissekiKougakuRelateEntity" fetchSize="500">
+        SELECT
+              DbT3028."insertDantaiCd" as "dbt3028_insertDantaiCd"
+            , DbT3028."insertTimestamp" as "dbt3028_insertTimestamp"
+            , DbT3028."insertReamsLoginId" as "dbt3028_insertReamsLoginId"
+            , DbT3028."insertContextId" as "dbt3028_insertContextId"
+            , DbT3028."isDeleted" as "dbt3028_isDeleted"
+            , DbT3028."updateCount" as "dbt3028_updateCount"
+            , DbT3028."lastUpdateTimestamp" as "dbt3028_lastUpdateTimestamp"
+            , DbT3028."lastUpdateReamsLoginId" as "dbt3028_lastUpdateReamsLoginId"
+            , DbT3028."kokanJohoShikibetsuNo" as "dbt3028_kokanJohoShikibetsuNo"
+            , DbT3028."inputShikibetsuNo" as "dbt3028_inputShikibetsuNo"
+            , DbT3028."recodeShubetsuCode" as "dbt3028_recodeShubetsuCode"
+            , DbT3028."shokisaiHokenshaNo" as "dbt3028_shokisaiHokenshaNo"
+            , DbT3028."hiHokenshaNo" as "dbt3028_hiHokenshaNo"
+            , DbT3028."serviceTeikyoYM" as "dbt3028_serviceTeikyoYM"
+            , DbT3028."kyufuSakuseiKubunCode" as "dbt3028_kyufuSakuseiKubunCode"
+            , DbT3028."kyufuJissekiKubunCode" as "dbt3028_kyufuJissekiKubunCode"
+            , DbT3028."toshiNo" as "dbt3028_toshiNo"
+            , DbT3028."uketsukeYMD" as "dbt3028_uketsukeYMD"
+            , DbT3028."ketteiYMD" as "dbt3028_ketteiYMD"
+            , DbT3028."kohi1FutanNo" as "dbt3028_kohi1FutanNo"
+            , DbT3028."kohi2FutanNo" as "dbt3028_kohi2FutanNo"
+            , DbT3028."kohi3FutanNo" as "dbt3028_kohi3FutanNo"
+            , DbT3028."riyoshaFutangaku" as "dbt3028_riyoshaFutangaku"
+            , DbT3028."kohi1Futangaku" as "dbt3028_kohi1Futangaku"
+            , DbT3028."kohi2Futangaku" as "dbt3028_kohi2Futangaku"
+            , DbT3028."kohi3Futangaku" as "dbt3028_kohi3Futangaku"
+            , DbT3028."shikyugaku" as "dbt3028_shikyugaku"
+            , DbT3028."kohi1Shikyugaku" as "dbt3028_kohi1Shikyugaku"
+            , DbT3028."kohi2Shikyugaku" as "dbt3028_kohi2Shikyugaku"
+            , DbT3028."kohi3Shikyugaku" as "dbt3028_kohi3Shikyugaku"
+            , DbT3028."shinsaYM" as "dbt3028_shinsaYM"
+            , DbT3028."seiriNo" as "dbt3028_seiriNo"
+            , DbT3028."sofuYM" as "dbt3028_sofuYM"
+            , DbT3028."torikomiYM" as "dbt3028_torikomiYM"
+            , DbT3028."sakuseiKubun" as "dbt3028_sakuseiKubun"
+            , DbT3028."kanriNo" as "dbt3028_kanriNo"
+            , DbT3028."hokenshaHoyuKyufujissekiJohoSakujoZumiFlag" as "dbT3028clu_hokenshaHoyuKyufujissekiJohoSakujoZumiFlag"
+            , DbT1001_tmp2."DbT1001_tmp1_hihokenshaNo" as "dbt1001_tmp2_hihokenshaNo"
+            , DbT1001_tmp2."DbT1001_tmp1_idoYMD" as "dbt1001_tmp2_idoYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_edaNo" as "dbt1001_tmp2_edaNo"
+            , DbT1001_tmp2."DbT1001_tmp1_insertDantaiCd" as "dbt1001_tmp2_insertDantaiCd"
+            , DbT1001_tmp2."DbT1001_tmp1_insertTimestamp" as "dbt1001_tmp2_insertTimestamp"
+            , DbT1001_tmp2."DbT1001_tmp1_insertReamsLoginId" as "dbt1001_tmp2_insertReamsLoginId"
+            , DbT1001_tmp2."DbT1001_tmp1_insertContextId" as "dbt1001_tmp2_insertContextId"
+            , DbT1001_tmp2."DbT1001_tmp1_isDeleted" as "dbt1001_tmp2_isDeleted"
+            , DbT1001_tmp2."DbT1001_tmp1_updateCount" as "dbt1001_tmp2_updateCount"
+            , DbT1001_tmp2."DbT1001_tmp1_lastUpdateTimestamp" as "dbt1001_tmp2_lastUpdateTimestamp"
+            , DbT1001_tmp2."DbT1001_tmp1_lastUpdateReamsLoginId" as "dbt1001_tmp2_lastUpdateReamsLoginId"
+            , DbT1001_tmp2."DbT1001_tmp1_idoJiyuCode" as "dbt1001_tmp2_idoJiyuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shichosonCode" as "dbt1001_tmp2_shichosonCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shikibetsuCode" as "dbt1001_tmp2_shikibetsuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuShutokuJiyuCode" as "dbt1001_tmp2_shikakuShutokuJiyuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuShutokuYMD" as "dbt1001_tmp2_shikakuShutokuYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuShutokuTodokedeYMD" as "dbt1001_tmp2_shikakuShutokuTodokedeYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_ichigoShikakuShutokuYMD" as "dbt1001_tmp2_ichigoShikakuShutokuYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_hihokennshaKubunCode" as "dbt1001_tmp2_hihokennshaKubunCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuSoshitsuJiyuCode" as "dbt1001_tmp2_shikakuSoshitsuJiyuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuSoshitsuYMD" as "dbt1001_tmp2_shikakuSoshitsuYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuSoshitsuTodokedeYMD" as "dbt1001_tmp2_shikakuSoshitsuTodokedeYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuHenkoJiyuCode" as "dbt1001_tmp2_shikakuHenkoJiyuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuHenkoYMD" as "dbt1001_tmp2_shikakuHenkoYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_shikakuHenkoTodokedeYMD" as "dbt1001_tmp2_shikakuHenkoTodokedeYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochitokureiTekiyoJiyuCode" as "dbt1001_tmp2_jushochitokureiTekiyoJiyuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochitokureiTekiyoYMD" as "dbt1001_tmp2_jushochitokureiTekiyoYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochitokureiTekiyoTodokedeYMD" as "dbt1001_tmp2_jushochitokureiTekiyoTodokedeYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochitokureiKaijoJiyuCode" as "dbt1001_tmp2_jushochitokureiKaijoJiyuCode"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochitokureiKaijoYMD" as "dbt1001_tmp2_jushochitokureiKaijoYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochitokureiKaijoTodokedeYMD" as "dbt1001_tmp2_jushochitokureiKaijoTodokedeYMD"
+            , DbT1001_tmp2."DbT1001_tmp1_jushochiTokureiFlag" as "dbt1001_tmp2_jushochiTokureiFlag"
+            , DbT1001_tmp2."DbT1001_tmp1_koikinaiJushochiTokureiFlag" as "dbt1001_tmp2_koikinaiJushochiTokureiFlag"
+            , DbT1001_tmp2."DbT1001_tmp1_koikinaiTokureiSochimotoShichosonCode" as "dbt1001_tmp2_koikinaiTokureiSochimotoShichosonCode"
+            , DbT1001_tmp2."DbT1001_tmp1_kyuShichosonCode" as "dbt1001_tmp2_kyuShichosonCode"
+            , DbT1001_tmp2."DbT1001_tmp1_logicalDeletedFlag" as "dbt1001_tmp2_logicalDeletedFlag"
+            , DbT1001_tmp2."PSM_shikibetsuCode" as "psm_tmp2_shikibetsuCode"
+            , DbT1001_tmp2."PSM_genLasdecCode" as "psm_tmp2_genLasdecCode"
+            , DbT1001_tmp2."PSM_kyuLasdecCode" as "psm_tmp2_kyuLasdecCode"
+            , DbT1001_tmp2."PSM_kyuLasdecCodeRenban" as "psm_tmp2_kyuLasdecCodeRenban"
+            , DbT1001_tmp2."PSM_gyomuCode" as "psm_tmp2_gyomuCode"
+            , DbT1001_tmp2."PSM_rirekiNo" as "psm_tmp2_rirekiNo"
+            , DbT1001_tmp2."PSM_currentFlag" as "psm_tmp2_currentFlag"
+            , DbT1001_tmp2."PSM_juminShubetsuCode" as "psm_tmp2_juminShubetsuCode"
+            , DbT1001_tmp2."PSM_kojinNo" as "psm_tmp2_kojinNo"
+            , DbT1001_tmp2."PSM_hojinNo" as "psm_tmp2_hojinNo"
+            , DbT1001_tmp2."PSM_shoriYMD" as "psm_tmp2_shoriYMD"
+            , DbT1001_tmp2."PSM_idoJiyuCode" as "psm_tmp2_idoJiyuCode"
+            , DbT1001_tmp2."PSM_idoYMD" as "psm_tmp2_idoYMD"
+            , DbT1001_tmp2."PSM_todokedeJiyuCode" as "psm_tmp2_todokedeJiyuCode"
+            , DbT1001_tmp2."PSM_todokedeYMD" as "psm_tmp2_todokedeYMD"
+            , DbT1001_tmp2."PSM_idoRiyuCode" as "psm_tmp2_idoRiyuCode"
+            , DbT1001_tmp2."PSM_meisho" as "psm_tmp2_meisho"
+            , DbT1001_tmp2."PSM_kanaMeisho" as "psm_tmp2_kanaMeisho"
+            , DbT1001_tmp2."PSM_shimeiRiyoKubun" as "psm_tmp2_shimeiRiyoKubun"
+            , DbT1001_tmp2."PSM_kannaiKangaiKubun" as "psm_tmp2_kannaiKangaiKubun"
+            , DbT1001_tmp2."PSM_yubinNo" as "psm_tmp2_yubinNo"
+            , DbT1001_tmp2."PSM_choikiCode" as "psm_tmp2_choikiCode"
+            , DbT1001_tmp2."PSM_zenkokuJushoCode" as "psm_tmp2_zenkokuJushoCode"
+            , DbT1001_tmp2."PSM_jusho" as "psm_tmp2_jusho"
+            , DbT1001_tmp2."PSM_banchiCode1" as "psm_tmp2_banchiCode1"
+            , DbT1001_tmp2."PSM_banchiCode2" as "psm_tmp2_banchiCode2"
+            , DbT1001_tmp2."PSM_banchiCode3" as "psm_tmp2_banchiCode3"
+            , DbT1001_tmp2."PSM_banchiCode4" as "psm_tmp2_banchiCode4"
+            , DbT1001_tmp2."PSM_banchi" as "psm_tmp2_banchi"
+            , DbT1001_tmp2."PSM_katagaki" as "psm_tmp2_katagaki"
+            , DbT1001_tmp2."PSM_katagakiInjiFlag" as "psm_tmp2_katagakiInjiFlag"
+            , DbT1001_tmp2."PSM_gyoseikuCode" as "psm_tmp2_gyoseikuCode"
+            , DbT1001_tmp2."PSM_gyoseikuName" as "psm_tmp2_gyoseikuName"
+            , DbT1001_tmp2."PSM_chikuCode1" as "psm_tmp2_chikuCode1"
+            , DbT1001_tmp2."PSM_chikuName1" as "psm_tmp2_chikuName1"
+            , DbT1001_tmp2."PSM_chikuCode2" as "psm_tmp2_chikuCode2"
+            , DbT1001_tmp2."PSM_chikuName2" as "psm_tmp2_chikuName2"
+            , DbT1001_tmp2."PSM_chikuCode3" as "psm_tmp2_chikuCode3"
+            , DbT1001_tmp2."PSM_chikuName3" as "psm_tmp2_chikuName3"
+            , DbT1001_tmp2."PSM_shogakkokuCode" as "psm_tmp2_shogakkokuCode"
+            , DbT1001_tmp2."PSM_shogakkokuName" as "psm_tmp2_shogakkokuName"
+            , DbT1001_tmp2."PSM_chugakkokuCode" as "psm_tmp2_chugakkokuCode"
+            , DbT1001_tmp2."PSM_chugakkokuName" as "psm_tmp2_chugakkokuName"
+            , DbT1001_tmp2."PSM_tohyokuCode" as "psm_tmp2_tohyokuCode"
+            , DbT1001_tmp2."PSM_tohyokuName" as "psm_tmp2_tohyokuName"
+            , DbT1001_tmp2."PSM_juminJotaiCode" as "psm_tmp2_juminJotaiCode"
+            , DbT1001_tmp2."PSM_setaiCode" as "psm_tmp2_setaiCode"
+            , DbT1001_tmp2."PSM_seinengappiYMD" as "psm_tmp2_seinengappiYMD"
+            , DbT1001_tmp2."PSM_seinengappiFushoKubun" as "psm_tmp2_seinengappiFushoKubun"
+            , DbT1001_tmp2."PSM_seibetsuCode" as "psm_tmp2_seibetsuCode"
+            , DbT1001_tmp2."PSM_tsuzukigaraCode" as "psm_tmp2_tsuzukigaraCode"
+            , DbT1001_tmp2."PSM_tsuzukigara" as "psm_tmp2_tsuzukigara"
+            , DbT1001_tmp2."PSM_kazokuNo" as "psm_tmp2_kazokuNo"
+            , DbT1001_tmp2."PSM_juminhyoHyojijun" as "psm_tmp2_juminhyoHyojijun"
+            , DbT1001_tmp2."PSM_kikaYMD" as "psm_tmp2_kikaYMD"
+            , DbT1001_tmp2."PSM_kanjiShimei" as "psm_tmp2_kanjiShimei"
+            , DbT1001_tmp2."PSM_kanaShimei" as "psm_tmp2_kanaShimei"
+            , DbT1001_tmp2."PSM_juminhyoCode" as "psm_tmp2_juminhyoCode"
+            , DbT1001_tmp2."PSM_honsekiZenkokuJushoCode" as "psm_tmp2_honsekiZenkokuJushoCode"
+            , DbT1001_tmp2."PSM_honsekiChoikiCode" as "psm_tmp2_honsekiChoikiCode"
+            , DbT1001_tmp2."PSM_honsekiJusho" as "psm_tmp2_honsekiJusho"
+            , DbT1001_tmp2."PSM_honsekiBanchi" as "psm_tmp2_honsekiBanchi"
+            , DbT1001_tmp2."PSM_hittosha" as "psm_tmp2_hittosha"
+            , DbT1001_tmp2."PSM_gaikokujinShimei" as "psm_tmp2_gaikokujinShimei"
+            , DbT1001_tmp2."PSM_gaikokujinHeikimei" as "psm_tmp2_gaikokujinHeikimei"
+            , DbT1001_tmp2."PSM_gaikokujinKanaShimei" as "psm_tmp2_gaikokujinKanaShimei"
+            , DbT1001_tmp2."PSM_katakanaHyoki" as "psm_tmp2_katakanaHyoki"
+            , DbT1001_tmp2."PSM_tsushomei" as "psm_tmp2_tsushomei"
+            , DbT1001_tmp2."PSM_kanaTsushomei" as "psm_tmp2_kanaTsushomei"
+            , DbT1001_tmp2."PSM_kokusekiChiikiCode" as "psm_tmp2_kokusekiChiikiCode"
+            , DbT1001_tmp2."PSM_zairyuShikakuCode" as "psm_tmp2_zairyuShikakuCode"
+            , DbT1001_tmp2."PSM_zairyuKikanCode" as "psm_tmp2_zairyuKikanCode"
+            , DbT1001_tmp2."PSM_zairyuKikantoManryoYMD" as "psm_tmp2_zairyuKikantoManryoYMD"
+            , DbT1001_tmp2."PSM_zairyuCardtoNo" as "psm_tmp2_zairyuCardtoNo"
+            , DbT1001_tmp2."PSM_zairyuCardtoYukoYMD" as "psm_tmp2_zairyuCardtoYukoYMD"
+            , DbT1001_tmp2."PSM_dai30Jono45niKiteisuruKubun" as "psm_tmp2_dai30Jono45niKiteisuruKubun"
+            , DbT1001_tmp2."PSM_setainushiShikibetsuCode" as "psm_tmp2_setainushiShikibetsuCode"
+            , DbT1001_tmp2."PSM_setainushiMei" as "psm_tmp2_setainushiMei"
+            , DbT1001_tmp2."PSM_hojinKeitaiCode" as "psm_tmp2_hojinKeitaiCode"
+            , DbT1001_tmp2."PSM_hojinKeitaiMeisho" as "psm_tmp2_hojinKeitaiMeisho"
+            , DbT1001_tmp2."PSM_hojinKeitaiRyakusho" as "psm_tmp2_hojinKeitaiRyakusho"
+            , DbT1001_tmp2."PSM_hojinMeishoHenshuKubun" as "psm_tmp2_hojinMeishoHenshuKubun"
+            , DbT1001_tmp2."PSM_hojinKeitaiRyakushoKubun" as "psm_tmp2_hojinKeitaiRyakushoKubun"
+            , DbT1001_tmp2."PSM_hojinMeisho" as "psm_tmp2_hojinMeisho"
+            , DbT1001_tmp2."PSM_hojinKanaMeisho" as "psm_tmp2_hojinKanaMeisho"
+            , DbT1001_tmp2."PSM_hojinShitenMeisho" as "psm_tmp2_hojinShitenMeisho"
+            , DbT1001_tmp2."PSM_hojinShitenKanaMeisho" as "psm_tmp2_hojinShitenKanaMeisho"
+            , DbT1001_tmp2."PSM_daihyoshaShikibetsuCode" as "psm_tmp2_daihyoshaShikibetsuCode"
+            , DbT1001_tmp2."PSM_daihyoshaShimei" as "psm_tmp2_daihyoshaShimei"
+            , DbT1001_tmp2."PSM_daihyoshaKanaShimei" as "psm_tmp2_daihyoshaKanaShimei"
+            , DbT1001_tmp2."PSM_daihyoshaJuminShubetsu" as "psm_tmp2_daihyoshaJuminShubetsu"
+            , DbT1001_tmp2."PSM_daihyoshaNihonjinShimei" as "psm_tmp2_daihyoshaNihonjinShimei"
+            , DbT1001_tmp2."PSM_daihyoshaNihonjinKanaShimei" as "psm_tmp2_daihyoshaNihonjinKanaShimei"
+            , DbT1001_tmp2."PSM_daihyoshaGaikokujinShimei" as "psm_tmp2_daihyoshaGaikokujinShimei"
+            , DbT1001_tmp2."PSM_daihyoshaGaikokujinHeikimei" as "psm_tmp2_daihyoshaGaikokujinHeikimei"
+            , DbT1001_tmp2."PSM_daihyoshaGaikokujinKanaShimei" as "psm_tmp2_daihyoshaGaikokujinKanaShimei"
+            , DbT1001_tmp2."PSM_daihyoshaTsushomei" as "psm_tmp2_daihyoshaTsushomei"
+            , DbT1001_tmp2."PSM_daihyoshaShimeiRiyoKubun" as "psm_tmp2_daihyoshaShimeiRiyoKubun"
+            , DbT1001_tmp2."PSM_daihyoshaKanaTsushomei" as "psm_tmp2_daihyoshaKanaTsushomei"
+            , DbT1001_tmp2."PSM_daihyoshaKannaiKangaiKubun" as "psm_tmp2_daihyoshaKannaiKangaiKubun"
+            , DbT1001_tmp2."PSM_daihyoshaYubinNo" as "psm_tmp2_daihyoshaYubinNo"
+            , DbT1001_tmp2."PSM_daihyoshaChoikiCode" as "psm_tmp2_daihyoshaChoikiCode"
+            , DbT1001_tmp2."PSM_daihyoshaZenkokuJushoCode" as "psm_tmp2_daihyoshaZenkokuJushoCode"
+            , DbT1001_tmp2."PSM_daihyoshaJusho" as "psm_tmp2_daihyoshaJusho"
+            , DbT1001_tmp2."PSM_daihyoshaBanchiCode1" as "psm_tmp2_daihyoshaBanchiCode1"
+            , DbT1001_tmp2."PSM_daihyoshaBanchiCode2" as "psm_tmp2_daihyoshaBanchiCode2"
+            , DbT1001_tmp2."PSM_daihyoshaBanchiCode3" as "psm_tmp2_daihyoshaBanchiCode3"
+            , DbT1001_tmp2."PSM_daihyoshaBanchiCode4" as "psm_tmp2_daihyoshaBanchiCode4"
+            , DbT1001_tmp2."PSM_daihyoshaBanchi" as "psm_tmp2_daihyoshaBanchi"
+            , DbT1001_tmp2."PSM_daihyoshaKatagaki" as "psm_tmp2_daihyoshaKatagaki"
+            , DbT1001_tmp2."PSM_ninkachiendantaiTorokuShikakuKubun" as "psm_tmp2_ninkachiendantaiTorokuShikakuKubun"
+            , DbT1001_tmp2."PSM_ninkachiendantaiNinkaYMD" as "psm_tmp2_ninkachiendantaiNinkaYMD"
+            , DbT1001_tmp2."PSM_kojinHojinKBN" as "psm_tmp2_kojinHojinKBN"
+            , DbT1001_tmp2."PSM_kyoyushaMeisho" as "psm_tmp2_kyoyushaMeisho"
+            , DbT1001_tmp2."PSM_kyoyushaKanaMeisho" as "psm_tmp2_kyoyushaKanaMeisho"
+            , DbT1001_tmp2."PSM_torokuJiyuCode" as "psm_tmp2_torokuJiyuCode"
+            , DbT1001_tmp2."PSM_torokuIdoYMD" as "psm_tmp2_torokuIdoYMD"
+            , DbT1001_tmp2."PSM_torokuTodokedeYMD" as "psm_tmp2_torokuTodokedeYMD"
+            , DbT1001_tmp2."PSM_juteiJiyuCode" as "psm_tmp2_juteiJiyuCode"
+            , DbT1001_tmp2."PSM_juteiIdoYMD" as "psm_tmp2_juteiIdoYMD"
+            , DbT1001_tmp2."PSM_juteiTodokedeYMD" as "psm_tmp2_juteiTodokedeYMD"
+            , DbT1001_tmp2."PSM_shojoJiyuCode" as "psm_tmp2_shojoJiyuCode"
+            , DbT1001_tmp2."PSM_shojoIdoYMD" as "psm_tmp2_shojoIdoYMD"
+            , DbT1001_tmp2."PSM_shojoTodokedeYMD" as "psm_tmp2_shojoTodokedeYMD"
+            , DbT1001_tmp2."PSM_jutonaiYubinNo" as "psm_tmp2_jutonaiYubinNo"
+            , DbT1001_tmp2."PSM_jutonaiChoikiCode" as "psm_tmp2_jutonaiChoikiCode"
+            , DbT1001_tmp2."PSM_jutonaiJusho" as "psm_tmp2_jutonaiJusho"
+            , DbT1001_tmp2."PSM_jutonaiBanchiCode1" as "psm_tmp2_jutonaiBanchiCode1"
+            , DbT1001_tmp2."PSM_jutonaiBanchiCode2" as "psm_tmp2_jutonaiBanchiCode2"
+            , DbT1001_tmp2."PSM_jutonaiBanchiCode3" as "psm_tmp2_jutonaiBanchiCode3"
+            , DbT1001_tmp2."PSM_jutonaiBanchiCode4" as "psm_tmp2_jutonaiBanchiCode4"
+            , DbT1001_tmp2."PSM_jutonaiBanchi" as "psm_tmp2_jutonaiBanchi"
+            , DbT1001_tmp2."PSM_jutonaiKatagaki" as "psm_tmp2_jutonaiKatagaki"
+            , DbT1001_tmp2."PSM_jutonaiKatagakiInjiFlag" as "psm_tmp2_jutonaiKatagakiInjiFlag"
+            , DbT1001_tmp2."PSM_tennyumaeYubinNo" as "psm_tmp2_tennyumaeYubinNo"
+            , DbT1001_tmp2."PSM_tennyumaeZenkokuJushoCode" as "psm_tmp2_tennyumaeZenkokuJushoCode"
+            , DbT1001_tmp2."PSM_tennyumaeJusho" as "psm_tmp2_tennyumaeJusho"
+            , DbT1001_tmp2."PSM_tennyumaeBanchi" as "psm_tmp2_tennyumaeBanchi"
+            , DbT1001_tmp2."PSM_tennyumaeKatagaki" as "psm_tmp2_tennyumaeKatagaki"
+            , DbT1001_tmp2."PSM_tennyumaeSetainushimei" as "psm_tmp2_tennyumaeSetainushimei"
+            , DbT1001_tmp2."PSM_tennyumaeKyusei" as "psm_tmp2_tennyumaeKyusei"
+            , DbT1001_tmp2."PSM_saishuJutochiYubinNo" as "psm_tmp2_saishuJutochiYubinNo"
+            , DbT1001_tmp2."PSM_saishuJutochiZenkokuJushoCode" as "psm_tmp2_saishuJutochiZenkokuJushoCode"
+            , DbT1001_tmp2."PSM_saishuJutochiJusho" as "psm_tmp2_saishuJutochiJusho"
+            , DbT1001_tmp2."PSM_saishuJutochiBanchi" as "psm_tmp2_saishuJutochiBanchi"
+            , DbT1001_tmp2."PSM_saishuJutochiKatagaki" as "psm_tmp2_saishuJutochiKatagaki"
+            , DbT1001_tmp2."PSM_saishuJutochiSetainushimei" as "psm_tmp2_saishuJutochiSetainushimei"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiIdoYMD" as "psm_tmp2_tenshutsuYoteiIdoYMD"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiYubinNo" as "psm_tmp2_tenshutsuYoteiYubinNo"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiZenkokuJushoCode" as "psm_tmp2_tenshutsuYoteiZenkokuJushoCode"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiJusho" as "psm_tmp2_tenshutsuYoteiJusho"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiBanchi" as "psm_tmp2_tenshutsuYoteiBanchi"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiKatagaki" as "psm_tmp2_tenshutsuYoteiKatagaki"
+            , DbT1001_tmp2."PSM_tenshutsuYoteiSetainushimei" as "psm_tmp2_tenshutsuYoteiSetainushimei"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiIdoYMD" as "psm_tmp2_tenshutsuKakuteiIdoYMD"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiTsuchiYMD" as "psm_tmp2_tenshutsuKakuteiTsuchiYMD"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiYubinNo" as "psm_tmp2_tenshutsuKakuteiYubinNo"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiZenkokuJushoCode" as "psm_tmp2_tenshutsuKakuteiZenkokuJushoCode"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiJusho" as "psm_tmp2_tenshutsuKakuteiJusho"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiBanchi" as "psm_tmp2_tenshutsuKakuteiBanchi"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiKatagaki" as "psm_tmp2_tenshutsuKakuteiKatagaki"
+            , DbT1001_tmp2."PSM_tenshutsuKakuteiSetainushimei" as "psm_tmp2_tenshutsuKakuteiSetainushimei"
+            , DbT1001_tmp2."PSM_juminhyoUtsushiHakkoSeigyoKubun" as "psm_tmp2_juminhyoUtsushiHakkoSeigyoKubun"
+            , DbT1001_tmp2."PSM_renrakusaki1" as "psm_tmp2_renrakusaki1"
+            , DbT1001_tmp2."PSM_kensakuRenrakusaki1" as "psm_tmp2_kensakuRenrakusaki1"
+            , DbT1001_tmp2."PSM_renrakusakiKubun1" as "psm_tmp2_renrakusakiKubun1"
+            , DbT1001_tmp2."PSM_renrakusaki2" as "psm_tmp2_renrakusaki2"
+            , DbT1001_tmp2."PSM_kensakuRenrakusaki2" as "psm_tmp2_kensakuRenrakusaki2"
+            , DbT1001_tmp2."PSM_renrakusakiKubun2" as "psm_tmp2_renrakusakiKubun2"
+            , DbT1001_tmp2."PSM_renrakusaki3" as "psm_tmp2_renrakusaki3"
+            , DbT1001_tmp2."PSM_kensakuRenrakusaki3" as "psm_tmp2_kensakuRenrakusaki3"
+            , DbT1001_tmp2."PSM_renrakusakiKubun3" as "psm_tmp2_renrakusakiKubun3"
+            , DbT1001_tmp2."PSM_mailAddress" as "psm_tmp2_mailAddress"
+            , DbT1001_tmp2."PSM_biko" as "psm_tmp2_biko"
+            , DbT1001_tmp2."PSM_lastUpdateTimestamp" as "psm_tmp2_lastUpdateTimestamp"
+            , DbT1001_tmp2."PSM_lastUpdateReamsLoginId" as "psm_tmp2_lastUpdateReamsLoginId"
+            , DbT1001_tmp2."PSM_jutogaiKanriUpdateCount" as "psm_tmp2_jutogaiKanriUpdateCount"
+            , DbT1001_tmp2."PSM_jutogaiKanriTorokuNo" as "psm_tmp2_jutogaiKanriTorokuNo"
+            , DbT1001_tmp2."PSM_jutogaiKojinKihonUpdateCount" as "psm_tmp2_jutogaiKojinKihonUpdateCount"
+            , DbT1001_tmp2."PSM_jutogaiKojinKihonTorokuNo" as "psm_tmp2_jutogaiKojinKihonTorokuNo"
+            , DbT1001_tmp2."PSM_hojinUpdateCount" as "psm_tmp2_hojinUpdateCount"
+            , DbT1001_tmp2."PSM_hojinTorokuNo" as "psm_tmp2_hojinTorokuNo"
+            , DbT1001_tmp2."PSM_kyoyushaUpdateCount" as "psm_tmp2_kyoyushaUpdateCount"
+            , DbT1001_tmp2."PSM_kyoyushaTorokuNo" as "psm_tmp2_kyoyushaTorokuNo"
+            , DbT1001_tmp2."PSM_jutogaiNihonjinUpdateCount" as "psm_tmp2_jutogaiNihonjinUpdateCount"
+            , DbT1001_tmp2."PSM_jutogaiNihonjinTorokuNo" as "psm_tmp2_jutogaiNihonjinTorokuNo"
+            , DbT1001_tmp2."PSM_jutogaiGaikokujinUpdateCount" as "psm_tmp2_jutogaiGaikokujinUpdateCount"
+            , DbT1001_tmp2."PSM_jutogaiGaikokujinTorokuNo" as "psm_tmp2_jutogaiGaikokujinTorokuNo"
+            , DbT1001_tmp2."PSM_shimeiSearchTorokuNo" as "psm_tmp2_shimeiSearchTorokuNo"
+            , DbT1001_tmp2."PSM_yusenShimeiUpdateCount" as "psm_tmp2_yusenShimeiUpdateCount"
+            , DbT1001_tmp2."PSM_yusenShimeiTimestamp" as "psm_tmp2_yusenShimeiTimestamp"
+            , DbT1001_tmp2."PSM_kanaName" as "psm_tmp2_kanaName"
+            , DbT1001_tmp2."PSM_gaikokujinKanaName" as "psm_tmp2_gaikokujinKanaName"
+            , DbT1001_tmp2."PSM_kanaTsushoName" as "psm_tmp2_kanaTsushoName"
+            , DbT1001_tmp2."PSM_jukiTorokuNo" as "psm_tmp2_jukiTorokuNo"
+        FROM
+                rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS DbT3028
+                INNER JOIN(
+                        SELECT
+                                  DbT1001_tmp1."hihokenshaNo" as "DbT1001_tmp1_hihokenshaNo"
+                                , DbT1001_tmp1."idoYMD" as "DbT1001_tmp1_idoYMD"
+                                , DbT1001_tmp1."edaNo" as "DbT1001_tmp1_edaNo"
+                                , DbT1001_tmp1."insertDantaiCd" as "DbT1001_tmp1_insertDantaiCd"
+                                , DbT1001_tmp1."insertTimestamp" as "DbT1001_tmp1_insertTimestamp"
+                                , DbT1001_tmp1."insertReamsLoginId" as "DbT1001_tmp1_insertReamsLoginId"
+                                , DbT1001_tmp1."insertContextId" as "DbT1001_tmp1_insertContextId"
+                                , DbT1001_tmp1."isDeleted" as "DbT1001_tmp1_isDeleted"
+                                , DbT1001_tmp1."updateCount" as "DbT1001_tmp1_updateCount"
+                                , DbT1001_tmp1."lastUpdateTimestamp" as "DbT1001_tmp1_lastUpdateTimestamp"
+                                , DbT1001_tmp1."lastUpdateReamsLoginId" as "DbT1001_tmp1_lastUpdateReamsLoginId"
+                                , DbT1001_tmp1."idoJiyuCode" as "DbT1001_tmp1_idoJiyuCode"
+                                , DbT1001_tmp1."shichosonCode" as "DbT1001_tmp1_shichosonCode"
+                                , DbT1001_tmp1."shikibetsuCode" as "DbT1001_tmp1_shikibetsuCode"
+                                , DbT1001_tmp1."shikakuShutokuJiyuCode" as "DbT1001_tmp1_shikakuShutokuJiyuCode"
+                                , DbT1001_tmp1."shikakuShutokuYMD" as "DbT1001_tmp1_shikakuShutokuYMD"
+                                , DbT1001_tmp1."shikakuShutokuTodokedeYMD" as "DbT1001_tmp1_shikakuShutokuTodokedeYMD"
+                                , DbT1001_tmp1."ichigoShikakuShutokuYMD" as "DbT1001_tmp1_ichigoShikakuShutokuYMD"
+                                , DbT1001_tmp1."hihokennshaKubunCode" as "DbT1001_tmp1_hihokennshaKubunCode"
+                                , DbT1001_tmp1."shikakuSoshitsuJiyuCode" as "DbT1001_tmp1_shikakuSoshitsuJiyuCode"
+                                , DbT1001_tmp1."shikakuSoshitsuYMD" as "DbT1001_tmp1_shikakuSoshitsuYMD"
+                                , DbT1001_tmp1."shikakuSoshitsuTodokedeYMD" as "DbT1001_tmp1_shikakuSoshitsuTodokedeYMD"
+                                , DbT1001_tmp1."shikakuHenkoJiyuCode" as "DbT1001_tmp1_shikakuHenkoJiyuCode"
+                                , DbT1001_tmp1."shikakuHenkoYMD" as "DbT1001_tmp1_shikakuHenkoYMD"
+                                , DbT1001_tmp1."shikakuHenkoTodokedeYMD" as "DbT1001_tmp1_shikakuHenkoTodokedeYMD"
+                                , DbT1001_tmp1."jushochitokureiTekiyoJiyuCode" as "DbT1001_tmp1_jushochitokureiTekiyoJiyuCode"
+                                , DbT1001_tmp1."jushochitokureiTekiyoYMD" as "DbT1001_tmp1_jushochitokureiTekiyoYMD"
+                                , DbT1001_tmp1."jushochitokureiTekiyoTodokedeYMD" as "DbT1001_tmp1_jushochitokureiTekiyoTodokedeYMD"
+                                , DbT1001_tmp1."jushochitokureiKaijoJiyuCode" as "DbT1001_tmp1_jushochitokureiKaijoJiyuCode"
+                                , DbT1001_tmp1."jushochitokureiKaijoYMD" as "DbT1001_tmp1_jushochitokureiKaijoYMD"
+                                , DbT1001_tmp1."jushochitokureiKaijoTodokedeYMD" as "DbT1001_tmp1_jushochitokureiKaijoTodokedeYMD"
+                                , DbT1001_tmp1."jushochiTokureiFlag" as "DbT1001_tmp1_jushochiTokureiFlag"
+                                , DbT1001_tmp1."koikinaiJushochiTokureiFlag" as "DbT1001_tmp1_koikinaiJushochiTokureiFlag"
+                                , DbT1001_tmp1."koikinaiTokureiSochimotoShichosonCode" as "DbT1001_tmp1_koikinaiTokureiSochimotoShichosonCode"
+                                , DbT1001_tmp1."kyuShichosonCode" as "DbT1001_tmp1_kyuShichosonCode"
+                                , DbT1001_tmp1."logicalDeletedFlag" as "DbT1001_tmp1_logicalDeletedFlag"
+                                , PSM."shikibetsuCode" as "PSM_shikibetsuCode"
+                                , PSM."genLasdecCode" as "PSM_genLasdecCode"
+                                , PSM."kyuLasdecCode" as "PSM_kyuLasdecCode"
+                                , PSM."kyuLasdecCodeRenban" as "PSM_kyuLasdecCodeRenban"
+                                , PSM."gyomuCode" as "PSM_gyomuCode"
+                                , PSM."rirekiNo" as "PSM_rirekiNo"
+                                , PSM."currentFlag" as "PSM_currentFlag"
+                                , PSM."juminShubetsuCode" as "PSM_juminShubetsuCode"
+                                , PSM."kojinNo" as "PSM_kojinNo"
+                                , PSM."hojinNo" as "PSM_hojinNo"
+                                , PSM."shoriYMD" as "PSM_shoriYMD"
+                                , PSM."idoJiyuCode" as "PSM_idoJiyuCode"
+                                , PSM."idoYMD" as "PSM_idoYMD"
+                                , PSM."todokedeJiyuCode" as "PSM_todokedeJiyuCode"
+                                , PSM."todokedeYMD" as "PSM_todokedeYMD"
+                                , PSM."idoRiyuCode" as "PSM_idoRiyuCode"
+                                , PSM."meisho" as "PSM_meisho"
+                                , PSM."kanaMeisho" as "PSM_kanaMeisho"
+                                , PSM."shimeiRiyoKubun" as "PSM_shimeiRiyoKubun"
+                                , PSM."kannaiKangaiKubun" as "PSM_kannaiKangaiKubun"
+                                , PSM."yubinNo" as "PSM_yubinNo"
+                                , PSM."choikiCode" as "PSM_choikiCode"
+                                , PSM."zenkokuJushoCode" as "PSM_zenkokuJushoCode"
+                                , PSM."jusho" as "PSM_jusho"
+                                , PSM."banchiCode1" as "PSM_banchiCode1"
+                                , PSM."banchiCode2" as "PSM_banchiCode2"
+                                , PSM."banchiCode3" as "PSM_banchiCode3"
+                                , PSM."banchiCode4" as "PSM_banchiCode4"
+                                , PSM."banchi" as "PSM_banchi"
+                                , PSM."katagaki" as "PSM_katagaki"
+                                , PSM."katagakiInjiFlag" as "PSM_katagakiInjiFlag"
+                                , PSM."gyoseikuCode" as "PSM_gyoseikuCode"
+                                , PSM."gyoseikuName" as "PSM_gyoseikuName"
+                                , PSM."chikuCode1" as "PSM_chikuCode1"
+                                , PSM."chikuName1" as "PSM_chikuName1"
+                                , PSM."chikuCode2" as "PSM_chikuCode2"
+                                , PSM."chikuName2" as "PSM_chikuName2"
+                                , PSM."chikuCode3" as "PSM_chikuCode3"
+                                , PSM."chikuName3" as "PSM_chikuName3"
+                                , PSM."shogakkokuCode" as "PSM_shogakkokuCode"
+                                , PSM."shogakkokuName" as "PSM_shogakkokuName"
+                                , PSM."chugakkokuCode" as "PSM_chugakkokuCode"
+                                , PSM."chugakkokuName" as "PSM_chugakkokuName"
+                                , PSM."tohyokuCode" as "PSM_tohyokuCode"
+                                , PSM."tohyokuName" as "PSM_tohyokuName"
+                                , PSM."juminJotaiCode" as "PSM_juminJotaiCode"
+                                , PSM."setaiCode" as "PSM_setaiCode"
+                                , PSM."seinengappiYMD" as "PSM_seinengappiYMD"
+                                , PSM."seinengappiFushoKubun" as "PSM_seinengappiFushoKubun"
+                                , PSM."seibetsuCode" as "PSM_seibetsuCode"
+                                , PSM."tsuzukigaraCode" as "PSM_tsuzukigaraCode"
+                                , PSM."tsuzukigara" as "PSM_tsuzukigara"
+                                , PSM."kazokuNo" as "PSM_kazokuNo"
+                                , PSM."juminhyoHyojijun" as "PSM_juminhyoHyojijun"
+                                , PSM."kikaYMD" as "PSM_kikaYMD"
+                                , PSM."kanjiShimei" as "PSM_kanjiShimei"
+                                , PSM."kanaShimei" as "PSM_kanaShimei"
+                                , PSM."juminhyoCode" as "PSM_juminhyoCode"
+                                , PSM."honsekiZenkokuJushoCode" as "PSM_honsekiZenkokuJushoCode"
+                                , PSM."honsekiChoikiCode" as "PSM_honsekiChoikiCode"
+                                , PSM."honsekiJusho" as "PSM_honsekiJusho"
+                                , PSM."honsekiBanchi" as "PSM_honsekiBanchi"
+                                , PSM."hittosha" as "PSM_hittosha"
+                                , PSM."gaikokujinShimei" as "PSM_gaikokujinShimei"
+                                , PSM."gaikokujinHeikimei" as "PSM_gaikokujinHeikimei"
+                                , PSM."gaikokujinKanaShimei" as "PSM_gaikokujinKanaShimei"
+                                , PSM."katakanaHyoki" as "PSM_katakanaHyoki"
+                                , PSM."tsushomei" as "PSM_tsushomei"
+                                , PSM."kanaTsushomei" as "PSM_kanaTsushomei"
+                                , PSM."kokusekiChiikiCode" as "PSM_kokusekiChiikiCode"
+                                , PSM."zairyuShikakuCode" as "PSM_zairyuShikakuCode"
+                                , PSM."zairyuKikanCode" as "PSM_zairyuKikanCode"
+                                , PSM."zairyuKikantoManryoYMD" as "PSM_zairyuKikantoManryoYMD"
+                                , PSM."zairyuCardtoNo" as "PSM_zairyuCardtoNo"
+                                , PSM."zairyuCardtoYukoYMD" as "PSM_zairyuCardtoYukoYMD"
+                                , PSM."dai30Jono45niKiteisuruKubun" as "PSM_dai30Jono45niKiteisuruKubun"
+                                , PSM."setainushiShikibetsuCode" as "PSM_setainushiShikibetsuCode"
+                                , PSM."setainushiMei" as "PSM_setainushiMei"
+                                , PSM."hojinKeitaiCode" as "PSM_hojinKeitaiCode"
+                                , PSM."hojinKeitaiMeisho" as "PSM_hojinKeitaiMeisho"
+                                , PSM."hojinKeitaiRyakusho" as "PSM_hojinKeitaiRyakusho"
+                                , PSM."hojinMeishoHenshuKubun" as "PSM_hojinMeishoHenshuKubun"
+                                , PSM."hojinKeitaiRyakushoKubun" as "PSM_hojinKeitaiRyakushoKubun"
+                                , PSM."hojinMeisho" as "PSM_hojinMeisho"
+                                , PSM."hojinKanaMeisho" as "PSM_hojinKanaMeisho"
+                                , PSM."hojinShitenMeisho" as "PSM_hojinShitenMeisho"
+                                , PSM."hojinShitenKanaMeisho" as "PSM_hojinShitenKanaMeisho"
+                                , PSM."daihyoshaShikibetsuCode" as "PSM_daihyoshaShikibetsuCode"
+                                , PSM."daihyoshaShimei" as "PSM_daihyoshaShimei"
+                                , PSM."daihyoshaKanaShimei" as "PSM_daihyoshaKanaShimei"
+                                , PSM."daihyoshaJuminShubetsu" as "PSM_daihyoshaJuminShubetsu"
+                                , PSM."daihyoshaNihonjinShimei" as "PSM_daihyoshaNihonjinShimei"
+                                , PSM."daihyoshaNihonjinKanaShimei" as "PSM_daihyoshaNihonjinKanaShimei"
+                                , PSM."daihyoshaGaikokujinShimei" as "PSM_daihyoshaGaikokujinShimei"
+                                , PSM."daihyoshaGaikokujinHeikimei" as "PSM_daihyoshaGaikokujinHeikimei"
+                                , PSM."daihyoshaGaikokujinKanaShimei" as "PSM_daihyoshaGaikokujinKanaShimei"
+                                , PSM."daihyoshaTsushomei" as "PSM_daihyoshaTsushomei"
+                                , PSM."daihyoshaShimeiRiyoKubun" as "PSM_daihyoshaShimeiRiyoKubun"
+                                , PSM."daihyoshaKanaTsushomei" as "PSM_daihyoshaKanaTsushomei"
+                                , PSM."daihyoshaKannaiKangaiKubun" as "PSM_daihyoshaKannaiKangaiKubun"
+                                , PSM."daihyoshaYubinNo" as "PSM_daihyoshaYubinNo"
+                                , PSM."daihyoshaChoikiCode" as "PSM_daihyoshaChoikiCode"
+                                , PSM."daihyoshaZenkokuJushoCode" as "PSM_daihyoshaZenkokuJushoCode"
+                                , PSM."daihyoshaJusho" as "PSM_daihyoshaJusho"
+                                , PSM."daihyoshaBanchiCode1" as "PSM_daihyoshaBanchiCode1"
+                                , PSM."daihyoshaBanchiCode2" as "PSM_daihyoshaBanchiCode2"
+                                , PSM."daihyoshaBanchiCode3" as "PSM_daihyoshaBanchiCode3"
+                                , PSM."daihyoshaBanchiCode4" as "PSM_daihyoshaBanchiCode4"
+                                , PSM."daihyoshaBanchi" as "PSM_daihyoshaBanchi"
+                                , PSM."daihyoshaKatagaki" as "PSM_daihyoshaKatagaki"
+                                , PSM."ninkachiendantaiTorokuShikakuKubun" as "PSM_ninkachiendantaiTorokuShikakuKubun"
+                                , PSM."ninkachiendantaiNinkaYMD" as "PSM_ninkachiendantaiNinkaYMD"
+                                , PSM."kojinHojinKBN" as "PSM_kojinHojinKBN"
+                                , PSM."kyoyushaMeisho" as "PSM_kyoyushaMeisho"
+                                , PSM."kyoyushaKanaMeisho" as "PSM_kyoyushaKanaMeisho"
+                                , PSM."torokuJiyuCode" as "PSM_torokuJiyuCode"
+                                , PSM."torokuIdoYMD" as "PSM_torokuIdoYMD"
+                                , PSM."torokuTodokedeYMD" as "PSM_torokuTodokedeYMD"
+                                , PSM."juteiJiyuCode" as "PSM_juteiJiyuCode"
+                                , PSM."juteiIdoYMD" as "PSM_juteiIdoYMD"
+                                , PSM."juteiTodokedeYMD" as "PSM_juteiTodokedeYMD"
+                                , PSM."shojoJiyuCode" as "PSM_shojoJiyuCode"
+                                , PSM."shojoIdoYMD" as "PSM_shojoIdoYMD"
+                                , PSM."shojoTodokedeYMD" as "PSM_shojoTodokedeYMD"
+                                , PSM."jutonaiYubinNo" as "PSM_jutonaiYubinNo"
+                                , PSM."jutonaiChoikiCode" as "PSM_jutonaiChoikiCode"
+                                , PSM."jutonaiJusho" as "PSM_jutonaiJusho"
+                                , PSM."jutonaiBanchiCode1" as "PSM_jutonaiBanchiCode1"
+                                , PSM."jutonaiBanchiCode2" as "PSM_jutonaiBanchiCode2"
+                                , PSM."jutonaiBanchiCode3" as "PSM_jutonaiBanchiCode3"
+                                , PSM."jutonaiBanchiCode4" as "PSM_jutonaiBanchiCode4"
+                                , PSM."jutonaiBanchi" as "PSM_jutonaiBanchi"
+                                , PSM."jutonaiKatagaki" as "PSM_jutonaiKatagaki"
+                                , PSM."jutonaiKatagakiInjiFlag" as "PSM_jutonaiKatagakiInjiFlag"
+                                , PSM."tennyumaeYubinNo" as "PSM_tennyumaeYubinNo"
+                                , PSM."tennyumaeZenkokuJushoCode" as "PSM_tennyumaeZenkokuJushoCode"
+                                , PSM."tennyumaeJusho" as "PSM_tennyumaeJusho"
+                                , PSM."tennyumaeBanchi" as "PSM_tennyumaeBanchi"
+                                , PSM."tennyumaeKatagaki" as "PSM_tennyumaeKatagaki"
+                                , PSM."tennyumaeSetainushimei" as "PSM_tennyumaeSetainushimei"
+                                , PSM."tennyumaeKyusei" as "PSM_tennyumaeKyusei"
+                                , PSM."saishuJutochiYubinNo" as "PSM_saishuJutochiYubinNo"
+                                , PSM."saishuJutochiZenkokuJushoCode" as "PSM_saishuJutochiZenkokuJushoCode"
+                                , PSM."saishuJutochiJusho" as "PSM_saishuJutochiJusho"
+                                , PSM."saishuJutochiBanchi" as "PSM_saishuJutochiBanchi"
+                                , PSM."saishuJutochiKatagaki" as "PSM_saishuJutochiKatagaki"
+                                , PSM."saishuJutochiSetainushimei" as "PSM_saishuJutochiSetainushimei"
+                                , PSM."tenshutsuYoteiIdoYMD" as "PSM_tenshutsuYoteiIdoYMD"
+                                , PSM."tenshutsuYoteiYubinNo" as "PSM_tenshutsuYoteiYubinNo"
+                                , PSM."tenshutsuYoteiZenkokuJushoCode" as "PSM_tenshutsuYoteiZenkokuJushoCode"
+                                , PSM."tenshutsuYoteiJusho" as "PSM_tenshutsuYoteiJusho"
+                                , PSM."tenshutsuYoteiBanchi" as "PSM_tenshutsuYoteiBanchi"
+                                , PSM."tenshutsuYoteiKatagaki" as "PSM_tenshutsuYoteiKatagaki"
+                                , PSM."tenshutsuYoteiSetainushimei" as "PSM_tenshutsuYoteiSetainushimei"
+                                , PSM."tenshutsuKakuteiIdoYMD" as "PSM_tenshutsuKakuteiIdoYMD"
+                                , PSM."tenshutsuKakuteiTsuchiYMD" as "PSM_tenshutsuKakuteiTsuchiYMD"
+                                , PSM."tenshutsuKakuteiYubinNo" as "PSM_tenshutsuKakuteiYubinNo"
+                                , PSM."tenshutsuKakuteiZenkokuJushoCode" as "PSM_tenshutsuKakuteiZenkokuJushoCode"
+                                , PSM."tenshutsuKakuteiJusho" as "PSM_tenshutsuKakuteiJusho"
+                                , PSM."tenshutsuKakuteiBanchi" as "PSM_tenshutsuKakuteiBanchi"
+                                , PSM."tenshutsuKakuteiKatagaki" as "PSM_tenshutsuKakuteiKatagaki"
+                                , PSM."tenshutsuKakuteiSetainushimei" as "PSM_tenshutsuKakuteiSetainushimei"
+                                , PSM."juminhyoUtsushiHakkoSeigyoKubun" as "PSM_juminhyoUtsushiHakkoSeigyoKubun"
+                                , PSM."renrakusaki1" as "PSM_renrakusaki1"
+                                , PSM."kensakuRenrakusaki1" as "PSM_kensakuRenrakusaki1"
+                                , PSM."renrakusakiKubun1" as "PSM_renrakusakiKubun1"
+                                , PSM."renrakusaki2" as "PSM_renrakusaki2"
+                                , PSM."kensakuRenrakusaki2" as "PSM_kensakuRenrakusaki2"
+                                , PSM."renrakusakiKubun2" as "PSM_renrakusakiKubun2"
+                                , PSM."renrakusaki3" as "PSM_renrakusaki3"
+                                , PSM."kensakuRenrakusaki3" as "PSM_kensakuRenrakusaki3"
+                                , PSM."renrakusakiKubun3" as "PSM_renrakusakiKubun3"
+                                , PSM."mailAddress" as "PSM_mailAddress"
+                                , PSM."biko" as "PSM_biko"
+                                , PSM."lastUpdateTimestamp" as "PSM_lastUpdateTimestamp"
+                                , PSM."lastUpdateReamsLoginId" as "PSM_lastUpdateReamsLoginId"
+                                , PSM."jutogaiKanriUpdateCount" as "PSM_jutogaiKanriUpdateCount"
+                                , PSM."jutogaiKanriTorokuNo" as "PSM_jutogaiKanriTorokuNo"
+                                , PSM."jutogaiKojinKihonUpdateCount" as "PSM_jutogaiKojinKihonUpdateCount"
+                                , PSM."jutogaiKojinKihonTorokuNo" as "PSM_jutogaiKojinKihonTorokuNo"
+                                , PSM."hojinUpdateCount" as "PSM_hojinUpdateCount"
+                                , PSM."hojinTorokuNo" as "PSM_hojinTorokuNo"
+                                , PSM."kyoyushaUpdateCount" as "PSM_kyoyushaUpdateCount"
+                                , PSM."kyoyushaTorokuNo" as "PSM_kyoyushaTorokuNo"
+                                , PSM."jutogaiNihonjinUpdateCount" as "PSM_jutogaiNihonjinUpdateCount"
+                                , PSM."jutogaiNihonjinTorokuNo" as "PSM_jutogaiNihonjinTorokuNo"
+                                , PSM."jutogaiGaikokujinUpdateCount" as "PSM_jutogaiGaikokujinUpdateCount"
+                                , PSM."jutogaiGaikokujinTorokuNo" as "PSM_jutogaiGaikokujinTorokuNo"
+                                , PSM."shimeiSearchTorokuNo" as "PSM_shimeiSearchTorokuNo"
+                                , PSM."yusenShimeiUpdateCount" as "PSM_yusenShimeiUpdateCount"
+                                , PSM."yusenShimeiTimestamp" as "PSM_yusenShimeiTimestamp"
+                                , PSM."kanaName" as "PSM_kanaName"
+                                , PSM."gaikokujinKanaName" as "PSM_gaikokujinKanaName"
+                                , PSM."kanaTsushoName" as "PSM_kanaTsushoName"
+                                , PSM."jukiTorokuNo" as "PSM_jukiTorokuNo" 
+                        FROM
+                                (
+                                    SELECT
+                                            *
+                                    FROM 
+                                            rgdb."DbT1001HihokenshaDaicho" AS DbT1001
+                                    WHERE
+                                            #{被保険者番号_開始} <![CDATA[<=]]> DbT1001."hihokenshaNo"
+                                            AND DbT1001."hihokenshaNo" <![CDATA[<=]]> #{被保険者番号_終了}
+                                    ORDER BY
+                                            DbT1001."idoYMD" DESC,
+                                            DbT1001."edaNo" DESC
+                                ) AS DbT1001_tmp1
+                        INNER JOIN 
+                                rgua.${psmShikibetsuTaisho} AS PSM
+                        ON 
+                                PSM."shikibetsuCode" = DbT1001_tmp1."shikibetsuCode" 
+                                          ) AS DbT1001_tmp2
+        ON DbT3028."hiHokenshaNo"=DbT1001_tmp2."DbT1001_tmp1_hihokenshaNo"
+        WHERE
+             '201204' <![CDATA[<=]]> DbT3028."serviceTeikyoYM"
+	<if test="対象年月flag">
+            AND 
+                #{年月範囲_開始} <![CDATA[<=]]> DbT3028."serviceTeikyoYM"
+	    AND 
+	        DbT3028."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲_終了}
+	</if>
+	<if test="!対象年月flag">
+        AND
+            #{年月範囲_開始} <![CDATA[<=]]> DbT3028."shinsaYM"
+        AND
+            DbT3028."shinsaYM" <![CDATA[<=]]> #{年月範囲_終了}
+        </if>
+        <if test="給付実績区分flag">
+            AND
+               DbT3028."kyufuJissekiKubunCode" = '1'
+        </if>
+        <if test="!給付実績区分flag">
+            AND
+               DbT3028."kyufuJissekiKubunCode" = '2'
+        </if>
+        <if test="訪問通所他flag">
+            AND
+               DbT3028."inputShikibetsuNo" IN ('7131','2131')
+        </if>
+        <if test="短期入所生活介護flag">
+            AND
+               DbT3028."inputShikibetsuNo" IN ('7143','2143')
+        </if>
+        <if test="短期入所療養介護_老健施設flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7155','2155')
+        </if>
+        <if test="短期入所療養介護_医療施設flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7164','2164')
+        </if>
+        <if test="認知症対応型共同生活flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7171','2171')
+        </if>
+        <if test="特定施設入居者生活介護flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7173','2173')
+        </if>
+        <if test="認知症対応型共同生活_短期flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7175','2175')
+        </if>
+        <if test="特定施設入居生活介護_短期flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7177','2177')
+        </if>
+        <if test="居宅介護支援flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('8124','21B4')
+        </if>
+        <if test="介護老人福祉施設サービスflag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7183','2183')
+        </if>
+        <if test="介護老人保健施設サービスflag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7195','2195')
+        </if>
+        <if test="介護療養型医療施設サービスflag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('71A3','21A3')
+        </if>
+        <if test="特定福祉用具販売費flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('21C1')
+        </if>
+        <if test="住宅改修費flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('21D1')
+        </if>
+        <if test="高額介護サービス費flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('3411')
+        </if>
+        <if test="予防訪問通所他flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7132','2132')
+        </if>
+        <if test="予防短期入所生活介護flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7144','2144')
+        </if>
+        <if test="予防短期入所療養介護_老健施設flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7156','2156')
+        </if>
+        <if test="予防短期入所療養介護_医療施設flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7165','2165')
+        </if>
+        <if test="予防認知症対応型共同生活flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7172','2172')
+        </if>
+        <if test="予防特定施設入居者生活介護flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('7174','2174')
+        </if>
+         <if test="予防認知症対応型共同生活_短期flag">
+             AND
+            DbT3028."inputShikibetsuNo" IN ('7176','2176')
+        </if>
+        <if test="予防支援flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('8125','21B5')
+        </if>
+        <if test="予防特定福祉用具販売費flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('21C2')
+        </if>
+        <if test="予防住宅改修費flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('21D2')
+        </if>
+        <if test="介護予防_生活支援_経過flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('71P1')
+        </if>
+        <if test="経過措置ケアマネジメントflag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('8161')
+        </if>
+        <if test="介護予防_生活支援総合事業flag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('71R1')
+        </if>
+        <if test="総合事業ケアマネジメントflag">
+            AND
+            DbT3028."inputShikibetsuNo" IN ('8171')
+        </if>
+        <if test="!公費負担者番号flag">
+            AND
+            DbT3028."kohi1FutanNo" = #{公費負担者番号} OR DbT3028."kohi2FutanNo" = #{公費負担者番号} OR DbT3028."kohi3FutanNo" = #{公費負担者番号}
+        </if>
+    ORDER BY
+            DbT3028."inputShikibetsuNo" ASC,
+            DbT3028."hiHokenshaNo" ASC,
+            DbT3028."serviceTeikyoYM" ASC,
+            DbT3028."kyufuJissekiKubunCode" ASC,
+            DbT3028."toshiNo" ASC
+    </select>
+</mapper>
