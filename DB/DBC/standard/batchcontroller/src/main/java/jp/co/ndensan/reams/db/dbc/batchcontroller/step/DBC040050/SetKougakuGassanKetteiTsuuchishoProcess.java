@@ -562,6 +562,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
             if (被保険者氏名 != null) {
                 高額合算支給決定通知書Entity.set被保険者氏名(被保険者氏名.value());
             }
+            高額合算支給決定通知書Entity.set識別コード(高額合算支給決定通知書データ.get宛名().getShikibetsuCode());
         }
         高額合算支給決定通知書Entity.set被保険者番号(高額合算支給決定通知書データ.getHihokenshaNo());
         高額合算支給決定通知書Entity.set対象計算期間開始年月日(高額合算支給決定通知書データ.getKeisanKaishiYMD());
