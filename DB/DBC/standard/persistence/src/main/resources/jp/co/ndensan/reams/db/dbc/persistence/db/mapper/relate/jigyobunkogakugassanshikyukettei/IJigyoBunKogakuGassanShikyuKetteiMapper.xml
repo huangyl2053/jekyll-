@@ -122,6 +122,7 @@
             AND "taishoNendo" = #{対象年度}
         </if>
         )
+        
         SELECT
         <include refid="事業高額合算情報" />,
         口座.*,
@@ -152,7 +153,7 @@
         受給者台帳."kyuSochishaFlag",
         受給者台帳."minashiCode",
         受給者台帳."chokkinIdoJiyuCode",
-        受給者台帳."kozaid",
+        事業高額合算支給不支給決定."kozaid",
         事業高額合算支給不支給決定."taishoNendo",
         事業高額合算支給不支給決定."hokenshaNo",
         事業高額合算支給不支給決定."shikyuSeiriNo",
@@ -191,65 +192,17 @@
         ON
         抽出対象."hihokenshaNo" = 被保険者台帳管理."hihokenshaNo"
         LEFT JOIN
-        (SELECT
-        有効履歴."hihokenshaNo",
-        有効履歴."taishoNendo",
-        有効履歴."hokenshaNo",
-        有効履歴."shikyuSeiriNo",
-        有効履歴."rirekiNo",
-        有効履歴."kozaid",
-        有効履歴."jukyuShinseiJiyu",
-        有効履歴."jukyuShinseiYMD",
-        有効履歴."yokaigoJotaiKubunCode",
-        有効履歴."ninteiYukoKikanKaishiYMD",
-        有効履歴."ninteiYukoKikanShuryoYMD",
-        有効履歴."ninteiYMD",
-        有効履歴."kyuSochishaFlag",
-        有効履歴."minashiCode",
-        有効履歴."chokkinIdoJiyuCode"
-        FROM
-        (SELECT
-        抽出対象."hihokenshaNo",
-        抽出対象."taishoNendo",
-        抽出対象."hokenshaNo",
-        抽出対象."shikyuSeiriNo",
-        抽出対象."rirekiNo",
-        抽出対象."kozaid",
-        DbT4001."jukyuShinseiJiyu",
-        DbT4001."jukyuShinseiYMD",
-        DbT4001."yokaigoJotaiKubunCode",
-        DbT4001."ninteiYukoKikanKaishiYMD",
-        DbT4001."ninteiYukoKikanShuryoYMD",
-        DbT4001."ninteiYMD",
-        DbT4001."kyuSochishaFlag",
-        DbT4001."minashiCode",
-        DbT4001."chokkinIdoJiyuCode",
-        ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
-        FROM
-        抽出対象 AS 抽出対象
-        INNER JOIN rgdb."DbT4001JukyushaDaicho" AS DbT4001
-        ON DbT4001."hihokenshaNo" = 抽出対象."hihokenshaNo"
-        AND DbT4001."logicalDeletedFlag" = false
-        AND DbT4001."yukoMukoKubun" = '1'
-        AND DbT4001."toshoNinteiYukoKaishiYMD" <![CDATA[<=]]> (抽出対象."taishoNendo"||'0701')
-        AND (cast(抽出対象."taishoNendo" as int) +1 ||'0831') <![CDATA[<=]]> DbT4001."toshoNinteiYukoShuryoYMD"
-        ) AS 有効履歴
-        WHERE
-        有効履歴.番号 = 1)AS 受給者台帳
+            rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
         ON  抽出対象."hihokenshaNo" = 受給者台帳."hihokenshaNo"
-        AND 抽出対象."taishoNendo" = 受給者台帳."taishoNendo"
-        AND 抽出対象."hokenshaNo" = 受給者台帳."hokenshaNo"
-        AND 抽出対象."shikyuSeiriNo" = 受給者台帳."shikyuSeiriNo"
-        AND 抽出対象."rirekiNo" = 受給者台帳."rirekiNo"
         WHERE
         1=1
-        <if test="is保険者コード">
+        <if test="is市町村コード">
             AND (
             (被保険者台帳管理."koikinaiJushochiTokureiFlag" <![CDATA[<>]]> '1'
-            AND 被保険者台帳管理."shichosonCode" = #{保険者コード})
+            AND 被保険者台帳管理."shichosonCode" = #{市町村コード})
             OR
             (被保険者台帳管理."koikinaiJushochiTokureiFlag" = '1'
-            AND 被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode" = #{保険者コード})
+            AND 被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード})
             )
         </if>
         )AS 事業高額合算情報
