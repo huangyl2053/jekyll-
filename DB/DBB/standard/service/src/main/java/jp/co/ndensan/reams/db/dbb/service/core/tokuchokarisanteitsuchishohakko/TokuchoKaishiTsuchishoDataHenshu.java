@@ -81,7 +81,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
     private static final RString 定値_3 = new RString("3");
     private static final RString 定値_4 = new RString("4");
     private static final ReportId 帳票分類ID = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
-    private static final ReportId 代行プリント送付票_帳票ID = new ReportId("URU000A10_DaikoPrintCheck");
+    private static final ReportId 代行プリント送付票_帳票ID = new ReportId("URU000A20_DaikoPrintNoCheck");
     private static final int INT_1 = 1;
     private static final int INT_5 = 5;
     private static final int INT_7 = 7;

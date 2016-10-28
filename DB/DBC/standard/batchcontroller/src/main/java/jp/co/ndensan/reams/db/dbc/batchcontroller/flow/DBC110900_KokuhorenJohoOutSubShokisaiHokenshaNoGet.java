@@ -8,6 +8,12 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.GappeiShichosonUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.HihokenshaTempUpdateKouikiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.HihokenshaTempUpdateKouikiProcess1;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.HihokenshaTempUpdateKouikiProcess2;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.HihokenshaTempUpdateKouikiProcess3;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.HihokenshaTempUpdateKouikiProcess4;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.HihokenshaTempUpdateKouikiProcess5;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.HihokenshaTempUpdateKouikiProcess6;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.HihokenshaTempUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.ShikyoHihokenshaUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.ShoHokenshaNoUpdateProcess;
@@ -41,6 +47,12 @@ public class DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGet
     private static final String FLOW_WORK3 = "work3";
     private static final String FLOW_WORK4 = "work4";
     private static final String FLOW_WORK5 = "work5";
+    private static final String FLOW_WORK6 = "work6";
+    private static final String FLOW_WORK7 = "work7";
+    private static final String FLOW_WORK8 = "work8";
+    private static final String FLOW_WORK9 = "work9";
+    private static final String FLOW_WORK10 = "work10";
+    private static final String FLOW_WORK11 = "work11";
     private static final RString 表示有無区分 = new RString("1");
     private HihokenshaTempUpdateProcessParameter loopPrm;
 
@@ -75,7 +87,14 @@ public class DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGet
             }
         } else {
             executeStep(FLOW_WORK5);
+            executeStep(FLOW_WORK6);
+            executeStep(FLOW_WORK7);
+            executeStep(FLOW_WORK8);
+            executeStep(FLOW_WORK9);
+            executeStep(FLOW_WORK10);
+
         }
+        executeStep(FLOW_WORK11);
     }
 
     @Step(FLOW_WORK1)
@@ -101,5 +120,35 @@ public class DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGet
     @Step(FLOW_WORK5)
     IBatchFlowCommand work5() {
         return loopBatch(HihokenshaTempUpdateKouikiProcess.class).define();
+    }
+
+    @Step(FLOW_WORK6)
+    IBatchFlowCommand work6() {
+        return loopBatch(HihokenshaTempUpdateKouikiProcess1.class).define();
+    }
+
+    @Step(FLOW_WORK7)
+    IBatchFlowCommand work7() {
+        return loopBatch(HihokenshaTempUpdateKouikiProcess2.class).define();
+    }
+
+    @Step(FLOW_WORK8)
+    IBatchFlowCommand work8() {
+        return loopBatch(HihokenshaTempUpdateKouikiProcess3.class).define();
+    }
+
+    @Step(FLOW_WORK9)
+    IBatchFlowCommand work9() {
+        return loopBatch(HihokenshaTempUpdateKouikiProcess4.class).define();
+    }
+
+    @Step(FLOW_WORK10)
+    IBatchFlowCommand work10() {
+        return loopBatch(HihokenshaTempUpdateKouikiProcess5.class).define();
+    }
+
+    @Step(FLOW_WORK11)
+    IBatchFlowCommand work11() {
+        return loopBatch(HihokenshaTempUpdateKouikiProcess6.class).define();
     }
 }
