@@ -232,7 +232,7 @@ public class KyufuJissekiKihonJouhouMain {
                     && 事業者番号.equals(給付実績基本.get事業者番号())
                     && 整理番号.equals(給付実績基本.get整理番号())
                     && 様式番号.equals(給付実績基本.get入力識別番号().value())
-                    && 実績区分コード.equals(給付実績基本.get給付実績区分コード())) {
+                    && 実績区分コード.equals(給付実績基本.get給付実績情報作成区分コード())) {
                 return 給付実績基本;
             }
         }
