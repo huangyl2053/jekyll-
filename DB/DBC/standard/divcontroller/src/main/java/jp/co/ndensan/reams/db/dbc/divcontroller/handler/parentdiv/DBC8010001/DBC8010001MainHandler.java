@@ -54,6 +54,7 @@ public class DBC8010001MainHandler {
     private RString 振込グループコード;
     private static final int INDEXSTART = 0;
     private static final int INDEXEND = 6;
+    private static final int INDEX_4 = 4;
 
     /**
      * コンストラクターです。
@@ -105,7 +106,9 @@ public class DBC8010001MainHandler {
         div.getItakusha().getTxtItakushaCode().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaCode());
         div.getItakusha().getTxtItakushamei().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushamei());
         div.getItakusha().setItakushaId(new RString(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaId().toString()));
-        div.getItakusha().getTxtFurikomiGroupCode().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode());
+        div.getItakusha().getTxtFurikomiGroupCode().setValue(
+                entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode().value()
+                .concat(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode()));
         div.getItakusha().getTxtFurikomiGroupMeisho().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupMeisho());
         List<KeyValueDataSource> list1 = new ArrayList<>();
         KeyValueDataSource source1 = new KeyValueDataSource();
@@ -392,7 +395,7 @@ public class DBC8010001MainHandler {
      */
     public DBC050010_FurikomimeisaiFurikomiDataParameter setBatchParameter() {
         DBC050010_FurikomimeisaiFurikomiDataParameter parameter = new DBC050010_FurikomimeisaiFurikomiDataParameter();
-        parameter.set代表金融機関コード(代表金融機関コード);
+        parameter.set代表金融機関コード(new KinyuKikanCode(div.getItakusha().getTxtFurikomiGroupCode().getValue().substring(0, INDEX_4)));
         parameter.set再処理フラグ(div.getChkSaisakusei().isAllSelected());
         parameter.set処理区分(Furikomi_ShoriKubun.toValue(div.getDdlShoriTaisho().getSelectedKey()));
         parameter.set処理対象(Furikomi_ShoriTaisho.toValue(div.getDdlShoriTaisho().getSelectedKey()));
@@ -411,7 +414,7 @@ public class DBC8010001MainHandler {
             parameter.set終了年月日(new FlexibleDate(div.getTxtKonkaiTaishoYmdRange().getToValue().toDateString()));
         }
         parameter.set抽出対象(Furikomi_MeisaiIchiranChushutsuTaisho.toValue(div.getRadChushutsuTaisho().getSelectedKey()));
-        parameter.set振込グループコード(振込グループコード);
+        parameter.set振込グループコード(div.getItakusha().getTxtFurikomiGroupCode().getValue().substring(INDEX_4));
 
         parameter.set支払方法(Furikomi_ShihraiHohoShitei.toValue(div.getRadSiharaihohou().getSelectedKey()));
         if (null != div.getTxtKetteishaUketoriYmRange().getToValue()) {
