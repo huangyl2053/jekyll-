@@ -8,9 +8,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kakohorenjyohosakusei.HihokenshaTempUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kakohorenjyohosakuseicommon.KakohorenJyohoSakuseiCommonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.HihokenshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.KokuhorenSakuseiErrorTempEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -18,9 +15,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -41,23 +36,11 @@ public class GappeiShichosonUpdateProcess extends BatchProcessBase<KakohorenJyoh
     private HihokenshaTempUpdateProcessParameter parameter;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 被保険者一時TBL;
-    @BatchWriter
-    private BatchEntityCreatedTempTableWriter 処理結果リスト一時TBL;
-    private RString 保険者番号 = RString.EMPTY;
-    private RString 変換対象フラグ = new RString("0");
 
     @Override
     protected IBatchReader createReader() {
         被保険者一時TBL = new BatchEntityCreatedTempTableWriter(被保険者一時TBL_NAME,
                 HihokenshaTempEntity.class);
-        処理結果リスト一時TBL = new BatchEntityCreatedTempTableWriter(処理結果リスト一時TBL_NAME,
-                KokuhorenSakuseiErrorTempEntity.class);
-        RDate 基準日 = RDate.getNowDate();
-        保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告);
-        RString 保険者発足情報_認定有効期間_編集区分 = DbBusinessConfig.get(ConfigNameDBU.保険者発足情報_認定有効期間_編集区分, 基準日, SubGyomuCode.DBU介護統計報告);
-        if (編集区分_2.equals(保険者発足情報_認定有効期間_編集区分)) {
-            変換対象フラグ = 変換対象フラグ_TRUE;
-        }
         return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toMybatisParamterBy合併年月日());
     }
 
@@ -74,11 +57,11 @@ public class GappeiShichosonUpdateProcess extends BatchProcessBase<KakohorenJyoh
                 hihokenshaTempEntity.setExHokenshaNo(kyuHokenshaNo.value());
                 hihokenshaTempEntity.setExShoHokenshaNo(kyuHokenshaNo.value());
             }
-            hihokenshaTempEntity.setHenkanFlag(変換対象フラグ_FALSE);
+            hihokenshaTempEntity.setHenkanFlag(変換対象フラグ_TRUE);
             hihokenshaTempEntity.setShichosonKanyuYmd(unyoKaishiYMD);
             hihokenshaTempEntity.setShichosonDattaiYmd(unyoKaishiYMD);
         } else {
-            hihokenshaTempEntity.setHenkanFlag(変換対象フラグ_TRUE);
+            hihokenshaTempEntity.setHenkanFlag(変換対象フラグ_FALSE);
             if (unyoShuryoYMD != null) {
                 hihokenshaTempEntity.setShichosonKanyuYmd(unyoShuryoYMD.plusDay(1));
             }
