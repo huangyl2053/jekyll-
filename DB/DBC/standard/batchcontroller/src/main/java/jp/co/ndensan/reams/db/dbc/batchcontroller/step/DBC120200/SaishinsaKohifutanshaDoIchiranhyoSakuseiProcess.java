@@ -138,7 +138,7 @@ public class SaishinsaKohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatch
             SaishinsaKohifutanshaIchiranCSVEntity output = createOutput(list.get(index));
             SaishinsaKetteiTsuchishoChohyoEntity 出力対象 = list.get(index);
             if (index == 0) {
-                output.set処理年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                output.set取込年月(処理年月.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
                 RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
@@ -149,7 +149,7 @@ public class SaishinsaKohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatch
                 output.set国保連合会名(出力対象.get国保連合会名());
                 output.set審査委員会名(出力対象.get審査委員会名());
             } else {
-                output.set処理年月(RString.EMPTY);
+                output.set取込年月(RString.EMPTY);
                 output.set作成日時(RString.EMPTY);
                 output.set国保連合会名(RString.EMPTY);
                 output.set審査委員会名(RString.EMPTY);
