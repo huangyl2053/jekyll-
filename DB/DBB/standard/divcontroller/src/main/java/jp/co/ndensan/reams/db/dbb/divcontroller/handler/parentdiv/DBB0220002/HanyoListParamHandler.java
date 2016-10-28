@@ -298,7 +298,7 @@ public class HanyoListParamHandler {
         long 条件保存の出力順ID = restoreBatchParameterMap.getParameterValue(long.class, KEY_出力順ID);
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBB介護賦課, 条件保存の帳票ID, 条件保存の出力順ID);
         RString 条件保存の出力項目ID = restoreBatchParameterMap.getParameterValue(RString.class, KEY_出力項目ID);
-        div.getCcdShutsuryokuKoumoku().load(条件保存の出力項目ID, SubGyomuCode.DBB介護賦課);
+        div.getCcdShutsuryokuKoumoku().load(条件保存の帳票ID.getColumnValue(), SubGyomuCode.DBB介護賦課, 条件保存の出力項目ID);
         RString 表示区分 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_住民税減免前後表示区分);
         if (表示区分.equals(表示しない)) {
             div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().setDisabled(false);

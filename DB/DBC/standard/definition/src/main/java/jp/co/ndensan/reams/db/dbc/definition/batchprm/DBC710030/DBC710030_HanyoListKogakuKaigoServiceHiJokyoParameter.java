@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710030;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -57,6 +58,7 @@ public class DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter extends Batch
     private static final String KEY_REBAN_FUKA = "rebanFuka";
     private static final String KEY_HIZUKE_HESHU = "hizukeHeshu";
     private static final String KEY_REAMS_LOGIN_ID = "reamsLoginId";
+    private static final String KEY_KINYUKIKANSHITENCODE = "kinyuKikanShitenCode";
 
     @BatchParameter(key = KEY_MODO, name = "モード")
     private int modo;
@@ -122,6 +124,8 @@ public class DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter extends Batch
     private boolean hizukeHeshu;
     @BatchParameter(key = KEY_REAMS_LOGIN_ID, name = "reamsLoginId")
     private RString reamsLoginId;
+    @BatchParameter(key = KEY_KINYUKIKANSHITENCODE, name = "kinyuKikanShitenCode")
+    private KinyuKikanShitenCode kinyuKikanShitenCode;
 
     /**
      * 汎用リスト_高額介護サービス費状況のProcessParamterパラメータ作成です。
