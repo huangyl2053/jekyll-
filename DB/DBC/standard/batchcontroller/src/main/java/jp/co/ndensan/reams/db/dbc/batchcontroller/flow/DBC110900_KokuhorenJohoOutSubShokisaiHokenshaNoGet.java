@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.GappeiShichosonUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.HihokenshaTempUpdateKouikiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110900.HihokenshaTempUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110900.DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGetParameter;
@@ -34,6 +35,7 @@ public class DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGet
         extends BatchFlowBase<DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGetParameter> {
 
     private static final String FLOW_WORK1 = "work1";
+    private static final String FLOW_WORK2 = "work2";
     private static final String FLOW_WORK3 = "work3";
     private static final RString 表示有無区分 = new RString("1");
     private HihokenshaTempUpdateProcessParameter loopPrm;
@@ -60,8 +62,11 @@ public class DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGet
                 loopPrm.setサービス提供年月(サービス提供年月);
                 loopPrm.set合併年月日(gappeiCityJyohoList.get(0).get合併日());
                 loopPrm.set地域番号(gappeiCityJyohoList.get(0).get合併情報番号());
+                executeStep(FLOW_WORK1);
+                executeStep(FLOW_WORK2);
+            } else {
+                executeStep(FLOW_WORK1);
             }
-            executeStep(FLOW_WORK1);
         } else {
             executeStep(FLOW_WORK3);
         }
@@ -70,6 +75,11 @@ public class DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGet
     @Step(FLOW_WORK1)
     IBatchFlowCommand work1() {
         return loopBatch(HihokenshaTempUpdateProcess.class).arguments(loopPrm).define();
+    }
+
+    @Step(FLOW_WORK2)
+    IBatchFlowCommand work2() {
+        return loopBatch(GappeiShichosonUpdateProcess.class).arguments(loopPrm).define();
     }
 
     @Step(FLOW_WORK3)
