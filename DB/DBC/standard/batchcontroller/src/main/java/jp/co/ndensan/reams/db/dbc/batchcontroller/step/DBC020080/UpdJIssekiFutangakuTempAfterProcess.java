@@ -30,14 +30,12 @@ public class UpdJIssekiFutangakuTempAfterProcess extends BatchProcessBase<Jissek
             + "dbc020080.IJigyobunKogakuGassanJikofutangakuKeisanMapper.get実績負担額データ2");
     private DBC020080DataUtil util;
     private UpdJIssekiFutangakuTempAfterProcessParameter parameter;
-    private RString 処理区分;
     @BatchWriter
     private IBatchTableWriter 実績負担額Writer;
 
     @Override
     protected void initialize() {
         util = new DBC020080DataUtil();
-        処理区分 = parameter.get処理区分();
     }
 
     @Override
@@ -53,11 +51,11 @@ public class UpdJIssekiFutangakuTempAfterProcess extends BatchProcessBase<Jissek
     @Override
     protected void process(JissekiFutangakuDataTempEntity 実績負担額get) {
         JissekiFutangakuDataTempEntity 実績負担額set = 実績負担額get.clone();
-        if (償還受託あり.equals(処理区分)) {
+        if (償還受託あり.equals(parameter.get処理区分())) {
             util.updJIssekiFutangakuTemp償還受託あり(実績負担額set, 実績負担額get, parameter.get処理日時());
             実績負担額Writer.update(実績負担額set);
         }
-        if (呼び出し元自己負担額計算.equals(処理区分)) {
+        if (呼び出し元自己負担額計算.equals(parameter.get処理区分())) {
             util.updJIssekiFutangakuTemp呼び出し元自己負担額計算(実績負担額set, 実績負担額get, parameter.get処理日時());
             実績負担額Writer.update(実績負担額set);
         }
