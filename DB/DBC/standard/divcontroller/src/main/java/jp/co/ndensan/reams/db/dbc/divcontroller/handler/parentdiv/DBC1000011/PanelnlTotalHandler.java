@@ -217,7 +217,7 @@ public class PanelnlTotalHandler {
             paramter.set印書(抽出条件_3);
         }
         paramter.set発行日(div.getPnlShokanbaraiShikyuKeteiTuchisho().getTxtHakkobi().getValue());
-        paramter.set文書番号(div.getPnlShokanbaraiShikyuKeteiTuchisho().getTxtBunshoNo().getValue());
+        paramter.set文書番号(div.getBunshoBangoInput().get文書番号());
         if (div.getPnlShokanbaraiShikyuKeteiTuchisho().getChkTestShutsuryoku().getSelectedKeys().isEmpty()) {
             paramter.setテスト出力フラグ(フラグ_FALSE);
         } else {
