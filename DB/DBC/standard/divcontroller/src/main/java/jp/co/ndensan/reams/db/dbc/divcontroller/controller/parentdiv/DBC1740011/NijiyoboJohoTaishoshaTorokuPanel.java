@@ -135,17 +135,7 @@ public class NijiyoboJohoTaishoshaTorokuPanel {
      */
     public ResponseData<NijiyoboJohoTaishoshaTorokuPanelDiv> onClick_dgDelete(NijiyoboJohoTaishoshaTorokuPanelDiv div) {
         getHandler(div).onClick_dgDelete();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 総合事業（経過措置）対象者登録画面 適用期間の変更を処理します。
-     *
-     * @param div NijiyoboJohoTaishoshaTorokuPanelDiv
-     * @return 画面
-     */
-    public ResponseData<NijiyoboJohoTaishoshaTorokuPanelDiv> onChange_dateRange(NijiyoboJohoTaishoshaTorokuPanelDiv div) {
-        getHandler(div).onChange_dateRange(); //QA1796
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_保存する, false);
         return ResponseData.of(div).respond();
     }
 
@@ -190,12 +180,14 @@ public class NijiyoboJohoTaishoshaTorokuPanel {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             NijiYoboJigyoTaishoshaHolder holder = ViewStateHolder.get(ViewStateHolderName.二次予防情報対象情報, NijiYoboJigyoTaishoshaHolder.class);
-            getHandler(div).二次予防情報対象一覧のデータを保存する(
+            boolean isSuccess = getHandler(div).二次予防情報対象一覧のデータを保存する(
                     div.getNijiyoboJohoTaishoIchiran().getDgNijiyoboJohoTaishoIchiran().getDataSource(),
                     new HihokenshaNo(div.get被保険者番号()), holder);
-            前排他のロックを解除し(div);
-            アクセスログの出力_更新(new ShikibetsuCode(div.get識別コード()), new HihokenshaNo(div.get被保険者番号()));
-            return ResponseData.of(div).setState(DBC1740011StateName.kanryo);
+            if (isSuccess) {
+                前排他のロックを解除し(div);
+                アクセスログの出力_更新(new ShikibetsuCode(div.get識別コード()), new HihokenshaNo(div.get被保険者番号()));
+                return ResponseData.of(div).setState(DBC1740011StateName.kanryo);
+            }
         }
         return ResponseData.of(div).respond();
     }
