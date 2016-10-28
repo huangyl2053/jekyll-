@@ -37,6 +37,7 @@
         SELECT
         DbT5502."shinsakaiOrder" AS 介護認定審査会審査順,
         DbT5502."shinsakaiOrderKakuteiFlag" AS 介護認定審査会審査順確定フラグ,
+        DbT5101."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
         DbT5101."shinsakaiYusenWaritsukeKubunCode" AS 介護認定審査会優先振分区分コード,
         DbT5101."hihokenshaNo" AS 被保険者番号,
         DbT5101."hihokenshaName" AS 被保険者氏名,
@@ -47,6 +48,9 @@
         DbT5101."zenkaiYukoKikanStart" AS 前回認定有効期間_開始,
         DbT5101."zenkaiYukoKikanEnd" AS 前回認定有効期間_終了,
         DbT5116."ichijiHanteiYMD" AS 要介護認定一次判定年月日,
+        DbT5116."ichijiHanteiKekkaCode" AS 要介護認定一次判定結果コード,
+        DbT5116_Zenkai."ichijiHanteiKekkaCode" AS 要介護認定前回一次判定結果コード,
+        DbT5102_Zenkai."nijiHanteiYokaigoJotaiKubunCode" AS 二次判定要介護状態区分コード,
         DbT5105."maskingKanryoYMD" AS マスキング完了年月日,
         DbT7051."shichosonMeisho" AS 市町村名称,
         DbT7051."shoKisaiHokenshaNo" AS 証記載保険者番号,
@@ -109,6 +113,14 @@
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911_2
         ON DbT5911_2."shujiiIryokikanCode"=DbT5101."nyushoShisetsuCode"
         AND DbT5911_2."shichosonCode"=DbT7051."shichosonCode"
+        INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
+        ON DbT5101."shinseishoKanriNo"=DbT5121."shinseishoKanriNo"
+        LEFT OUTER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_Zenkai
+        ON DbT5121."shinseishoKanriNo"=DbT5101_Zenkai."shinseishoKanriNo"
+        LEFT OUTER JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102_Zenkai
+        ON DbT5101_Zenkai."shinseishoKanriNo"=DbT5102_Zenkai."shinseishoKanriNo"
+        LEFT OUTER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116_Zenkai
+        ON DbT5101_Zenkai."shinseishoKanriNo"=DbT5116_Zenkai."shinseishoKanriNo"
         WHERE
         DbT5502."shinsakaiKaisaiNo" = #{kaisaiNo}
         <if test="!isButtonPushed">
@@ -124,6 +136,7 @@
     <select id="getKohoshaIchiran"  resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.KohoshaIchiranEntity" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.KohoshaIchiranMapperParameter" resultOrdered="true">
         SELECT
         DbT5101."shinsakaiYusenWaritsukeKubunCode" AS 介護認定審査会優先振分区分コード,
+        DbT5101."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
         DbT5101."hihokenshaNo" AS 被保険者番号,
         DbT5101."hihokenshaName" AS 被保険者氏名,
         DbT5101."seibetsu" AS 性別,
@@ -133,6 +146,9 @@
         DbT5101."zenkaiYukoKikanStart" AS 前回認定有効期間_開始,
         DbT5101."zenkaiYukoKikanEnd" AS 前回認定有効期間_終了,
         DbT5116."ichijiHanteiYMD" AS 要介護認定一次判定年月日,
+        DbT5116."ichijiHanteiKekkaCode" AS 要介護認定一次判定結果コード,
+        DbT5116_Zenkai."ichijiHanteiKekkaCode" AS 要介護認定前回一次判定結果コード,
+        DbT5102_Zenkai."nijiHanteiYokaigoJotaiKubunCode" AS 二次判定要介護状態区分コード,
         DbT5105."maskingKanryoYMD" AS マスキング完了年月日,
         DbT7051."shichosonMeisho" AS 市町村名称,
         DbT7051."shoKisaiHokenshaNo" AS 証記載保険者番号,
@@ -183,6 +199,14 @@
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911_2
         ON DbT5911_2."shujiiIryokikanCode"=DbT5101."nyushoShisetsuCode"
         AND DbT5911_2."shichosonCode"=DbT7051."shichosonCode"
+        INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
+        ON DbT5101."shinseishoKanriNo"=DbT5121."shinseishoKanriNo"
+        LEFT OUTER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_Zenkai
+        ON DbT5121."shinseishoKanriNo"=DbT5101_Zenkai."shinseishoKanriNo"
+        LEFT OUTER JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102_Zenkai
+        ON DbT5101_Zenkai."shinseishoKanriNo"=DbT5102_Zenkai."shinseishoKanriNo"
+        LEFT OUTER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116_Zenkai
+        ON DbT5101_Zenkai."shinseishoKanriNo"=DbT5116_Zenkai."shinseishoKanriNo"
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL

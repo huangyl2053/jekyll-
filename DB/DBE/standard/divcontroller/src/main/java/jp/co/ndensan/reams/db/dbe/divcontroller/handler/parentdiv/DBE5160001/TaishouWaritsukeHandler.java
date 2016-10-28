@@ -33,8 +33,16 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.definition.core.config.DbeConfigKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
@@ -69,6 +77,10 @@ public class TaishouWaritsukeHandler {
     private static final RString 審査順確定フラグ_確定しない = new RString("0");
     private static final RString 一次判定後 = new RString("1");
     private static final RString 機関まで = new RString("1");
+    private static final RString 厚労省IF識別コード_09 = new RString("09");
+    private static final RString 厚労省IF識別コード_06 = new RString("06");
+    private static final RString 厚労省IF識別コード_02 = new RString("02");
+    private static final RString 厚労省IF識別コード_99 = new RString("99");
 
     /**
      * コンストラクタです。
@@ -301,7 +313,6 @@ public class TaishouWaritsukeHandler {
 
     private void set対象者一覧(List<Taishouichiran> ichiranList) {
         List<dgTaishoshaIchiran_Row> rows = new ArrayList<>();
-        TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
         RString 優先;
         RString 性別;
         RString 被保区分;
@@ -314,6 +325,9 @@ public class TaishouWaritsukeHandler {
         RString 意見書_寝たきり度;
         RString 意見書_認知度;
         RString 再調査;
+        RString 今回一次判定 = RString.EMPTY;
+        RString 前回一次判定 = RString.EMPTY;
+        RString 前回二次判定 = RString.EMPTY;
         dgTaishoshaIchiran_Row row;
         for (Taishouichiran taishouichiran : ichiranList) {
             RString no = new RString(Integer.toString(taishouichiran.get介護認定審査会審査順()));
@@ -367,6 +381,12 @@ public class TaishouWaritsukeHandler {
                 意見書_認知度 = RString.EMPTY;
             }
             再調査 = new RString(Integer.toString(taishouichiran.get再調査依頼回数()));
+            if (taishouichiran.get厚労省IF識別コード() != null || !taishouichiran.get厚労省IF識別コード().isEmpty()) {
+                RString 厚労省IF識別コード = taishouichiran.get厚労省IF識別コード().value().substring(0, 2);
+                今回一次判定 = set今回一次判定区分(taishouichiran.get要介護認定一次判定結果コード(), 厚労省IF識別コード, 今回一次判定);
+                前回一次判定 = set前回一次判定区分(taishouichiran.get要介護認定前回一次判定結果コード(), 厚労省IF識別コード, 前回一次判定);
+                前回二次判定 = set前回二次判定区分(taishouichiran.get二次判定要介護状態区分コード(), 厚労省IF識別コード, 前回二次判定);
+            }
             row = new dgTaishoshaIchiran_Row(
                     対象者一覧状態フラグ,
                     taishouichiran.get介護認定審査会審査順確定フラグ() ? 審査順確定フラグ_確定 : 審査順確定フラグ_確定しない,
@@ -381,12 +401,12 @@ public class TaishouWaritsukeHandler {
                     認定申請日,
                     前回有効期間開始日,
                     前回有効期間終了日,
-                    taishouichiran.get要介護認定一次判定年月日().wareki().toDateString(),
+                    今回一次判定,
                     taishouichiran.getマスキング完了年月日().wareki().toDateString(),
                     taishouichiran.get証記載保険者番号().getColumnValue(),
                     taishouichiran.get市町村名称(),
-                    taishouichiran.get要介護認定一次判定年月日().wareki().toDateString(),
-                    finder.get二次判定年月日(taishouichiran.get申請書管理番号()).wareki().toDateString(),
+                    前回一次判定,
+                    前回二次判定,
                     調査票_寝たきり度,
                     調査票_認知度,
                     意見書_寝たきり度,
@@ -403,10 +423,54 @@ public class TaishouWaritsukeHandler {
         div.getDgTaishoshaIchiran().setDataSource(rows);
     }
 
+    private RString set前回二次判定区分(Code code, RString 厚労省IF識別コード, RString 前回二次判定) {
+        if (!code.isEmpty()) {
+            if (厚労省IF識別コード.equals(厚労省IF識別コード_09)) {
+                前回二次判定 = YokaigoJotaiKubun09.toValue(code.value()).get名称();
+            } else if (厚労省IF識別コード.equals(厚労省IF識別コード_06)) {
+                前回二次判定 = YokaigoJotaiKubun06.toValue(code.value()).get名称();
+            } else if (厚労省IF識別コード.equals(厚労省IF識別コード_02)) {
+                前回二次判定 = YokaigoJotaiKubun02.toValue(code.value()).get名称();
+            } else if (厚労省IF識別コード.equals(厚労省IF識別コード_99)) {
+                前回二次判定 = YokaigoJotaiKubun99.toValue(code.value()).get名称();
+            }
+        }
+        return 前回二次判定;
+    }
+
+    private RString set前回一次判定区分(Code code, RString 厚労省IF識別コード, RString 前回一次判定) {
+        if (!code.isEmpty()) {
+            if (厚労省IF識別コード.equals(厚労省IF識別コード_09)) {
+                前回一次判定 = IchijiHanteiKekkaCode09.toValue(code.value()).get名称();
+            } else if (厚労省IF識別コード.equals(厚労省IF識別コード_06)) {
+                前回一次判定 = IchijiHanteiKekkaCode06.toValue(code.value()).get名称();
+            } else if (厚労省IF識別コード.equals(厚労省IF識別コード_02)) {
+                前回一次判定 = IchijiHanteiKekkaCode02.toValue(code.value()).get名称();
+            } else if (厚労省IF識別コード.equals(厚労省IF識別コード_99)) {
+                前回一次判定 = IchijiHanteiKekkaCode99.toValue(code.value()).get名称();
+            }
+        }
+        return 前回一次判定;
+    }
+
+    private RString set今回一次判定区分(Code code, RString 厚労省IF識別コード, RString 今回一次判定) {
+        if (!code.isEmpty()) {
+            if (厚労省IF識別コード.equals(厚労省IF識別コード_09)) {
+                今回一次判定 = IchijiHanteiKekkaCode09.toValue(code.value()).get名称();
+            } else if (厚労省IF識別コード.equals(厚労省IF識別コード_06)) {
+                今回一次判定 = IchijiHanteiKekkaCode06.toValue(code.value()).get名称();
+            } else if (厚労省IF識別コード.equals(厚労省IF識別コード_02)) {
+                今回一次判定 = IchijiHanteiKekkaCode02.toValue(code.value()).get名称();
+            } else if (厚労省IF識別コード.equals(厚労省IF識別コード_99)) {
+                今回一次判定 = IchijiHanteiKekkaCode99.toValue(code.value()).get名称();
+            }
+        }
+        return 今回一次判定;
+    }
+
     private void set候補者一覧(List<KohoshaIchiran> ichiranList) {
         int no = 1;
         List<dgWaritsukeKohoshaIchiran_Row> rows = new ArrayList<>();
-        TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
         RString 優先;
         RString 性別;
         RString 被保区分;
@@ -419,6 +483,9 @@ public class TaishouWaritsukeHandler {
         RString 意見書_寝たきり度;
         RString 意見書_認知度;
         RString 再調査;
+        RString 今回一次判定 = RString.EMPTY;
+        RString 前回一次判定 = RString.EMPTY;
+        RString 前回二次判定 = RString.EMPTY;
         dgWaritsukeKohoshaIchiran_Row row;
         for (KohoshaIchiran kohoshaIchiran : ichiranList) {
             try {
@@ -471,6 +538,12 @@ public class TaishouWaritsukeHandler {
                 意見書_認知度 = RString.EMPTY;
             }
             再調査 = new RString(Integer.toString(kohoshaIchiran.get再調査依頼回数()));
+            if (kohoshaIchiran.get厚労省IF識別コード() != null || !kohoshaIchiran.get厚労省IF識別コード().isEmpty()) {
+                RString 厚労省IF識別コード = kohoshaIchiran.get厚労省IF識別コード().value().substring(0, 2);
+                今回一次判定 = set今回一次判定区分(kohoshaIchiran.get要介護認定一次判定結果コード(), 厚労省IF識別コード, 今回一次判定);
+                前回一次判定 = set前回一次判定区分(kohoshaIchiran.get要介護認定前回一次判定結果コード(), 厚労省IF識別コード, 前回一次判定);
+                前回二次判定 = set前回二次判定区分(kohoshaIchiran.get二次判定要介護状態区分コード(), 厚労省IF識別コード, 前回二次判定);
+            }
             row = new dgWaritsukeKohoshaIchiran_Row(
                     候補者一覧状態フラグ,
                     審査順確定フラグ_確定しない,
@@ -485,12 +558,12 @@ public class TaishouWaritsukeHandler {
                     認定申請日,
                     前回有効期間開始日,
                     前回有効期間終了日,
-                    kohoshaIchiran.get要介護認定一次判定年月日().wareki().toDateString(),
+                    今回一次判定,
                     kohoshaIchiran.getマスキング完了年月日().wareki().toDateString(),
                     kohoshaIchiran.get証記載保険者番号().getColumnValue(),
                     kohoshaIchiran.get市町村名称(),
-                    kohoshaIchiran.get要介護認定一次判定年月日().wareki().toDateString(),
-                    finder.get二次判定年月日(kohoshaIchiran.get申請書管理番号()).wareki().toDateString(),
+                    前回一次判定,
+                    前回二次判定,
                     調査票_寝たきり度,
                     調査票_認知度,
                     意見書_寝たきり度,
