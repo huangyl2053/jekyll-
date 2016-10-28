@@ -42,6 +42,7 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
     private static final RString 一 = new RString("1");
     private static final RString 二 = new RString("2");
     private static final int ぜろ = 0;
+    private static final int WK申請状況_１ = 1;
     private static final int 十一 = 11;
     private static final int 十七 = 17;
     private static final RString 高額合算支給申請書訂正_メニューID = new RString("DBCMN61004");
@@ -96,6 +97,9 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
         RString メニューID = UrControlDataFactory.createInstance().getMenuID();
         RString タイトル = switchFor(メニューID);
         getHandler(div).initialize();
+        if (WK申請状況_１ != get申請状況()) {
+            div.getBtnSaikensaku().setVisible(false);
+        }
         return ResponseData.of(div).rootTitle(タイトル).respond();
     }
 
