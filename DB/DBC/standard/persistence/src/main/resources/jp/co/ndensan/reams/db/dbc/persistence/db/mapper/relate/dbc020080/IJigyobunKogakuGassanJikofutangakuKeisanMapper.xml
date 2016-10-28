@@ -100,9 +100,9 @@
         LEFT JOIN  rgdb."DbV1001HihokenshaDaicho"  AS "V1001"
         ON "V1001"."hihokenshaNo"= "B"."hihokenshaNo"
         LEFT JOIN
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamShikibetsuTaisho" />
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
         AS "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode"="B"."shikibetsuCode"
+        ON "ShikibetsuTaisho"."shikibetsuCode"="V1001"."shikibetsuCode"
         WHERE "B"."isDeleted" =False
         AND #{申請対象日開始} <![CDATA[<=]]> "B"."shinseiYMD"
         AND "B"."shinseiYMD"<![CDATA[<=]]>#{申請対象日終了}
@@ -110,7 +110,7 @@
         AND ("B"."shikyuShinseiKubun" ='1' or "B"."shikyuShinseiKubun"='2')
         AND (("B"."jikoFutan_KeisanYM"= '' OR "B"."jikoFutan_KeisanYM" is NULL)  OR ("B"."jikoFutan_KeisanYM" <![CDATA[<>]]>'' AND "B"."saiKeisanKubun" = '1'))
         ORDER BY
-        "B"."taishoHihokenshaNo","B"."hokenshaNo","B"."taishoNendo","B"."seiriNo"
+        "B"."hihokenshaNo","B"."hokenshaNo","B"."taishoNendo","B"."seiriNo"
     </select>
 
     <!--シート「対象者抽出事業分」-->
@@ -213,9 +213,9 @@
         LEFT JOIN  rgdb."DbV1001HihokenshaDaicho"  AS "V1001"
         ON      "V1001"."hihokenshaNo"= "B"."hihokenshaNo"
         LEFT JOIN
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamShikibetsuTaisho" />
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
         AS "ShikibetsuTaisho"
-        ON "ShikibetsuTaisho"."shikibetsuCode"="B"."shikibetsuCode"
+        ON "ShikibetsuTaisho"."shikibetsuCode"="V1001"."shikibetsuCode"
         WHERE "B"."isDeleted" = False
         AND     '2014'<![CDATA[<=]]>"B"."taishoNendo"
         AND "B"."dataSakuseiKubun"='1'
@@ -227,7 +227,7 @@
             AND "B"."hihokenshaNo" =#{被保険者番号}
         </if>
         ORDER BY
-        "B"."taishoHihokenshaNo","B"."hokenshaNo","B"."taishoNendo","B"."shikyuShinseishoSeiriNo"
+        "B"."hihokenshaNo","B"."hokenshaNo","B"."taishoNendo","B"."shikyuShinseishoSeiriNo"
     </select>
     
     <!--BatchStep2.3<変更>-->
