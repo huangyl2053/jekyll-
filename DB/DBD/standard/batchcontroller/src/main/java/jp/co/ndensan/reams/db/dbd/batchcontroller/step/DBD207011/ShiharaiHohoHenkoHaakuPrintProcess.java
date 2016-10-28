@@ -336,7 +336,11 @@ public class ShiharaiHohoHenkoHaakuPrintProcess extends BatchProcessBase<Shihara
 
         RStringBuilder builder = new RStringBuilder();
 
-        builder.append(t.get認定情報_認定有効期間開始年月日()).append("～").append(t.get認定情報_認定有効期間終了年月日());
+        if (t.get認定情報_認定有効期間開始年月日() != null && !t.get認定情報_認定有効期間開始年月日().isEmpty()
+                || (t.get認定情報_認定有効期間終了年月日() != null && t.get認定情報_認定有効期間終了年月日().isEmpty())) {
+            builder.append(t.get認定情報_認定有効期間開始年月日()).append("～").append(t.get認定情報_認定有効期間終了年月日());
+        }
+
         reportDataEntity.set認定有効期間(builder.toRString());
         reportDataEntity.set認定日(t.get償還未払い_申請日());
 
