@@ -134,8 +134,8 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
         }
 
         public static boolean is申請取消事由が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
-            return !div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu()
-                    .getSelectedKey().isNullOrEmpty();
+            return !RString.isNullOrEmpty(div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu()
+                    .getSelectedKey());
         }
 
         public static boolean is給付率が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
@@ -144,7 +144,7 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
 
         public static boolean is住宅改修内容一覧妥当(JutakuKaishuShinseiJyohoTorokuDiv div) {
             RString 住宅改修_状態 = new RString("Unchanged");
-            List<dgGaisyuList_Row> gridList = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
+            List<dgGaisyuList_Row> gridList = div.getCcdJutakugaisyunaiyoList()
                     .get住宅改修内容一覧();
             List<JyutakuGaisyunaiyoListParameter> paramList = new ArrayList<>();
             JyutakuGaisyunaiyoListParameter param;
@@ -158,7 +158,7 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
             RString 住宅改修内容一覧チェック = JutakukaishuSikyuShinseiManager.createInstance()
                     .checkJyutakuGaisyunaiyoList(paramList,
                             new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth().toDateString()));
-            return 住宅改修内容一覧チェック.isNullOrEmpty();
+            return RString.isNullOrEmpty(住宅改修内容一覧チェック);
         }
 
         public static boolean is提供着工年月が申請日の年月と一致しない(JutakuKaishuShinseiJyohoTorokuDiv div) {
