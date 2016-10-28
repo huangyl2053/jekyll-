@@ -29,8 +29,6 @@ public class GappeiShichosonUpdateProcess extends BatchProcessBase<KakohorenJyoh
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper."
             + "select合併市町村情報");
     private static final RString 被保険者一時TBL_NAME = new RString("DbWT1001Hihokensha");
-    private static final RString 処理結果リスト一時TBL_NAME = new RString("DbWT1002KokuhorenSakuseiError");
-    private static final RString 編集区分_2 = new RString("2");
     private static final RString 変換対象フラグ_FALSE = new RString("0");
     private static final RString 変換対象フラグ_TRUE = new RString("1");
     private HihokenshaTempUpdateProcessParameter parameter;
