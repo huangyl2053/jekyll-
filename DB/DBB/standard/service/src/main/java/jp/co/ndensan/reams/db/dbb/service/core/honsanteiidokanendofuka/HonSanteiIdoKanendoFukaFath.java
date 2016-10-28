@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.honsanteiidokanendofuka;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -15,14 +16,18 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJohoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKijunKingaku;
+import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKijunKingakuFactory;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTaisho;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.KeisangojohoToKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.KeisangojohoAtenaKozaEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -35,12 +40,42 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class HonSanteiIdoKanendoFukaFath {
 
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
+    private static final int INT_6 = 6;
+    private static final int INT_7 = 7;
+    private static final int INT_8 = 8;
+    private static final int INT_9 = 9;
+    private static final int INT_10 = 10;
+    private static final int INT_11 = 11;
+    private static final int INT_12 = 12;
+    private static final int INT_13 = 13;
+    private static final int INT_14 = 14;
+    private static final int INT_15 = 15;
+    private static final int INT_16 = 16;
+    private static final int INT_17 = 17;
+    private static final int INT_18 = 18;
+    private static final int INT_19 = 19;
+    private static final int INT_20 = 20;
+    private final DbT2013HokenryoDankaiDac 保険料段階Dac;
+
+    /**
+     * コンストラクタです
+     */
+    HonSanteiIdoKanendoFukaFath() {
+        this.保険料段階Dac = InstanceProvider.create(DbT2013HokenryoDankaiDac.class);
+    }
+
     /**
      * 年額制御情報を取得します。
      *
+     * @param 賦課年度 賦課年度
      * @return 年額制御情報
      */
-    protected NengakuSeigyoJoho get年額制御情報() {
+    protected NengakuSeigyoJoho get年額制御情報(FlexibleYear 賦課年度) {
         RDate nowDate = RDate.getNowDate();
         Decimal 端数単位 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整単位_通常,
                 nowDate, SubGyomuCode.DBB介護賦課).toString());
@@ -53,7 +88,7 @@ public class HonSanteiIdoKanendoFukaFath {
         RString 端数調整対象 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整対象,
                 nowDate, SubGyomuCode.DBB介護賦課);
         Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<>();
-        // TODO QAのNo.957　「ランク別制御情報」の設定方法がない。
+        setランク別制御情報(ランク別制御情報, 賦課年度);
         NengakuSeigyoJohoFactory nengakuSeigyoJohoFactory = InstanceProvider.create(NengakuSeigyoJohoFactory.class);
         NengakuSeigyoJoho 年額制御情報 = nengakuSeigyoJohoFactory.createNengakuSeigyoJoho(
                 端数単位,
@@ -63,6 +98,64 @@ public class HonSanteiIdoKanendoFukaFath {
                 HasuChoseiTaisho.toValue(端数調整対象),
                 ランク別制御情報);
         return 年額制御情報;
+    }
+
+    private void setランク別制御情報(Map<RString, RankBetsuKijunKingaku> ランク別制御情報, FlexibleYear 賦課年度) {
+        List<DbT2013HokenryoDankaiEntity> 保険料段階List = 保険料段階Dac.get保険料ランク別制御情報(賦課年度);
+        if (保険料段階List.isEmpty()) {
+            return;
+        }
+        List<DbT2013HokenryoDankaiEntity> 段階List = new ArrayList<>();
+        DbT2013HokenryoDankaiEntity 段階 = 保険料段階List.get(0);
+        段階List.add(段階);
+        for (int i = INT_1; i < 保険料段階List.size(); i++) {
+            if (段階.getRankuKubun().equals(保険料段階List.get(i))) {
+                段階List.add(保険料段階List.get(i));
+            } else {
+                RankBetsuKijunKingaku gagu = createRankBetsuKijunKingaku(段階List);
+                ランク別制御情報.put(段階.getRankuKubun(), gagu);
+                段階List.clear();
+                段階List.add(保険料段階List.get(i));
+            }
+            段階 = 保険料段階List.get(i);
+        }
+        RankBetsuKijunKingaku gagu = createRankBetsuKijunKingaku(段階List);
+        ランク別制御情報.put(段階.getRankuKubun(), gagu);
+    }
+
+    private RankBetsuKijunKingaku createRankBetsuKijunKingaku(List<DbT2013HokenryoDankaiEntity> 段階List) {
+        RankBetsuKijunKingakuFactory factory = InstanceProvider.create(RankBetsuKijunKingakuFactory.class);
+        RankBetsuKijunKingaku 基準金額 = factory.createRankBetsuKijunKingaku(get基準金額(段階List, INT_1),
+                get基準金額(段階List, INT_2),
+                get基準金額(段階List, INT_3),
+                get基準金額(段階List, INT_4),
+                get基準金額(段階List, INT_5),
+                get基準金額(段階List, INT_6),
+                get基準金額(段階List, INT_7),
+                get基準金額(段階List, INT_8),
+                get基準金額(段階List, INT_9),
+                get基準金額(段階List, INT_10),
+                get基準金額(段階List, INT_11),
+                get基準金額(段階List, INT_12),
+                get基準金額(段階List, INT_13),
+                get基準金額(段階List, INT_14),
+                get基準金額(段階List, INT_15),
+                get基準金額(段階List, INT_16),
+                get基準金額(段階List, INT_17),
+                get基準金額(段階List, INT_18),
+                get基準金額(段階List, INT_19),
+                get基準金額(段階List, INT_20));
+        return 基準金額;
+    }
+
+    private Decimal get基準金額(List<DbT2013HokenryoDankaiEntity> 段階List, int index) {
+        if (段階List.isEmpty()) {
+            return Decimal.ZERO;
+        }
+        if (段階List.size() > index) {
+            return 段階List.get(index - INT_1).getHokenryoRitsu();
+        }
+        return Decimal.ZERO;
     }
 
     /**

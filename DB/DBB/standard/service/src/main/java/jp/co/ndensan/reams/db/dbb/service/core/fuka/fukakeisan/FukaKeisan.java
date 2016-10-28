@@ -1330,15 +1330,15 @@ public class FukaKeisan extends FukaKeisanFath {
         for (FukaJohoList fukaJoho : fukaJohoList) {
             年度分賦課リスト.set現年度(fukaJoho.get現年度());
             if (fukaJoho.get過年度() != null) {
-                if (fukaJoho.get過年度().get賦課年度().equals(fukaJoho.get過年度().get調定年度().plusYear(INT_1))) {
+                if (fukaJoho.get過年度().get賦課年度().equals(fukaJoho.get過年度().get調定年度().minusYear(INT_1))) {
                     年度分賦課リスト.set過年度1(fukaJoho.get過年度());
-                } else if (fukaJoho.get過年度().get賦課年度().equals(fukaJoho.get過年度().get調定年度().plusYear(INT_2))) {
+                } else if (fukaJoho.get過年度().get賦課年度().equals(fukaJoho.get過年度().get調定年度().minusYear(INT_2))) {
                     年度分賦課リスト.set過年度2(fukaJoho.get過年度());
-                } else if (fukaJoho.get過年度().get賦課年度().equals(fukaJoho.get過年度().get調定年度().plusYear(INT_3))) {
+                } else if (fukaJoho.get過年度().get賦課年度().equals(fukaJoho.get過年度().get調定年度().minusYear(INT_3))) {
                     年度分賦課リスト.set過年度3(fukaJoho.get過年度());
-                } else if (fukaJoho.get過年度().get賦課年度().equals(fukaJoho.get過年度().get調定年度().plusYear(INT_4))) {
+                } else if (fukaJoho.get過年度().get賦課年度().equals(fukaJoho.get過年度().get調定年度().minusYear(INT_4))) {
                     年度分賦課リスト.set過年度4(fukaJoho.get過年度());
-                } else if (fukaJoho.get過年度().get賦課年度().equals(fukaJoho.get過年度().get調定年度().plusYear(INT_5))) {
+                } else if (fukaJoho.get過年度().get賦課年度().equals(fukaJoho.get過年度().get調定年度().minusYear(INT_5))) {
                     年度分賦課リスト.set過年度5(fukaJoho.get過年度());
                 }
             }
@@ -1426,7 +1426,7 @@ public class FukaKeisan extends FukaKeisanFath {
             for (Decimal decimal : 特徴期別金額) {
                 更正後の特別徴収額.add(decimal);
             }
-            if (更正前の特別徴収額.compareTo(更正後の特別徴収額) < 0 || !RString.isNullOrEmpty(特徴停止事由コード)) {
+            if (更正前の特別徴収額.compareTo(更正後の特別徴収額) > 0) {
                 ChoshuHohoBuilder builder = 出力用徴収方法の情報.createBuilderForEdit();
                 builder.set特別徴収停止事由コード(特徴停止事由コード)
                         .set特別徴収停止日時(param.get調定日時());

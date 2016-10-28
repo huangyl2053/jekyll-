@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsJukyushaIdoR
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsShiharaihohoTemp1Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.InsShiharaihohoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.SoufuErrorOutProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdAtenaTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdFutanWariaiTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020.UpdGengakuTempProcess;
@@ -67,6 +68,7 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     private static final String 受給者異動送付削除産 = "delJukyushaIdoRenrakuhyo";
     private static final String 受給者異動の抽出 = "insJukyushaIdoRenrakuhyoTemp";
     private static final String データ比較処理 = "dataCompareShori";
+    private static final String 国保連インタフェース管理更新 = "upDoInterfaceKanriKousin";
 
     @Override
     protected void defineFlow() {
@@ -96,6 +98,7 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
         }
         executeStep(受給者異動の抽出);
 //        executeStep(データ比較処理);
+        executeStep(国保連インタフェース管理更新);
 
     }
 
@@ -263,6 +266,13 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
     @Step(データ比較処理)
     IBatchFlowCommand dataCompareShori() {
         return loopBatch(DataCompareShoriProcess.class).arguments(getParameter().
+                toProcessParameter())
+                .define();
+    }
+
+    @Step(国保連インタフェース管理更新)
+    IBatchFlowCommand upDoInterfaceKanriKousin() {
+        return simpleBatch(UpDoInterfaceKanriKousinProcess.class).arguments(getParameter().
                 toProcessParameter())
                 .define();
     }

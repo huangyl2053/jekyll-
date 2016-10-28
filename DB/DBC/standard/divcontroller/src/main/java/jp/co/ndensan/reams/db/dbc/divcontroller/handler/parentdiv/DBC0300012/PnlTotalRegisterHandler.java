@@ -132,20 +132,6 @@ public final class PnlTotalRegisterHandler {
         } else {
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
         }
-//        div.getPnlKeyakuJigyosya().getCcdKinyukikan().search(record.get金融機関コード(),
-//                record.get支店コード(), FlexibleDate.getNowDate());
-//        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
-//                new CodeShubetsu(預金種別コード), FlexibleDate.getNowDate());
-//        List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
-//        if (codeList != null && !codeList.isEmpty()) {
-//            for (UzT0007CodeEntity code : codeList) {
-//                keyValueDataSource.add(new KeyValueDataSource(code.getコード().getColumnValue(), code.getコード名称()));
-//            }
-//            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
-//            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setSelectedKey(record.get口座種別());
-//        } else {
-//            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
-//        }
         if (div.getPnlKeyakuJigyosya().getCcdKinyukikan().isゆうちょ銀行()) {
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setVisible(false);
         }

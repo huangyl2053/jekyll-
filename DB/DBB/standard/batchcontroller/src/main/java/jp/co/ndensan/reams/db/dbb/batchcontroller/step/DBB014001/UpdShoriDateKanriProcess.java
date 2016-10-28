@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb014001.FuchoKarisante
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb014001.FuchoKarisanteiFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuchokarisanteifuka.IFuchoKarisanteiFukaMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
  * 処理日付管理のクラスです。
@@ -30,7 +29,7 @@ public class UpdShoriDateKanriProcess extends SimpleBatchProcessBase {
     protected void process() {
         FuchoKarisanteiFukaMybatisParameter mybatisParameter = new FuchoKarisanteiFukaMybatisParameter();
         mybatisParameter.set調定年度(parameter.get調定年度());
-        mybatisParameter.set処理日付(new YMDHMS(parameter.getバッチ起動日時()));
+        mybatisParameter.set処理日時(parameter.getバッチ起動日時());
         mapper.update処理日付管理(mybatisParameter);
     }
 

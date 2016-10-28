@@ -235,7 +235,9 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
                 source.listLower_2 = DecimalFormatter.toコンマ区切りRString(普徴仮算定計算後賦課.get前年度賦課の情報().getNengakuHokenryo1(), 0);
             }
         }
-        source.listLower_3 = 最後の普徴期別金額();
+        if (普徴仮算定計算後賦課.get前年度賦課の情報() != null) {
+            source.listLower_3 = 最後の普徴期別金額();
+        }
         if (普徴仮算定計算後賦課 != null && 普徴仮算定計算後賦課.get前年度賦課の情報() != null
                 && 普徴仮算定計算後賦課.get前年度賦課の情報().getGemmenMaeHokenryo() != null) {
             source.listLower_4 = DecimalFormatter.toコンマ区切りRString(普徴仮算定計算後賦課.get前年度賦課の情報().getGemmenMaeHokenryo(), 0);

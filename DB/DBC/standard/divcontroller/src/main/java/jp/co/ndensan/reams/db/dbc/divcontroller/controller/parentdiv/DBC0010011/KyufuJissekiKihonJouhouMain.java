@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010011;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
@@ -94,13 +97,18 @@ public class KyufuJissekiKihonJouhouMain {
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2(サービス提供年月, 整理番号, 識別番号検索キー);
         int 事業者番号の位置 = get事業者番号の位置(給付実績ヘッダ情報2, div, サービス提供年月);
+        clear画面(div);
         if (事業者番号の位置 != 0) {
             KyufuJissekiHedajyoho2 給付実績ヘッダ情報 = 給付実績ヘッダ情報2.get(事業者番号の位置 - INT_ITI);
             set画面の表示(給付実績ヘッダ情報, div, 給付実績基本情報, 給付実績ヘッダ情報2, new RString("前事業者"));
         }
         div.getBtnMaeJigyosha().setDisabled(true);
-        if (0 < 事業者番号の位置 - INT_NI && 事業者番号の位置 - INT_NI < 給付実績ヘッダ情報2.size()) {
+        div.getBtnAtoJigyosha().setDisabled(true);
+        if (0 < 事業者番号の位置 - INT_ITI) {
             div.getBtnMaeJigyosha().setDisabled(false);
+        }
+        if (事業者番号の位置 + INT_ITI < 給付実績ヘッダ情報2.size()) {
+            div.getBtnAtoJigyosha().setDisabled(false);
         }
         return ResponseData.of(div).respond();
     }
@@ -119,11 +127,17 @@ public class KyufuJissekiKihonJouhouMain {
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2(サービス提供年月, 整理番号, 識別番号検索キー);
         int 事業者番号の位置 = get事業者番号の位置(給付実績ヘッダ情報2, div, サービス提供年月);
+        clear画面(div);
         if (事業者番号の位置 + INT_ITI < 給付実績ヘッダ情報2.size()) {
             KyufuJissekiHedajyoho2 給付実績ヘッダ情報 = 給付実績ヘッダ情報2.get(事業者番号の位置 + INT_ITI);
             set画面の表示(給付実績ヘッダ情報, div, 給付実績基本情報, 給付実績ヘッダ情報2, new RString("後事業者"));
         }
+
+        div.getBtnMaeJigyosha().setDisabled(true);
         div.getBtnAtoJigyosha().setDisabled(true);
+        if (0 < 事業者番号の位置 + INT_ITI) {
+            div.getBtnMaeJigyosha().setDisabled(false);
+        }
         if (事業者番号の位置 + INT_NI < 給付実績ヘッダ情報2.size()) {
             div.getBtnAtoJigyosha().setDisabled(false);
         }
@@ -141,25 +155,25 @@ public class KyufuJissekiKihonJouhouMain {
                 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         KyufuJissekiPrmBusiness 給付実績情報照会情報
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
+        FlexibleYearMonth 今提供年月;
         List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         HihokenshaNo 被保険者番号 = 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2(サービス提供年月, 整理番号, 識別番号検索キー);
-        int 事業者番号の位置 = get事業者番号の位置(給付実績ヘッダ情報2, div, サービス提供年月);
-        if (事業者番号の位置 != 0) {
-            KyufuJissekiHedajyoho2 給付実績ヘッダ情報 = 給付実績ヘッダ情報2.get(事業者番号の位置 - INT_ITI);
-            FlexibleYearMonth サービス年月 = 給付実績ヘッダ情報.getサービス提供年月();
-            RString 給付実績区分コード = 給付実績ヘッダ情報.get給付実績区分コード();
-            RString 後整理番号 = 給付実績ヘッダ情報.get整理番号();
-            JigyoshaNo 事業所番号 = 給付実績ヘッダ情報.get事業所番号();
-            RString 識別番号 = 給付実績ヘッダ情報.get識別番号();
-            KyufujissekiKihon 給付実績基本 = get給付実績基本情報(給付実績基本情報, サービス年月,
-                    事業所番号, 後整理番号, 識別番号, 給付実績区分コード);
-            getHandler(div).onClick_Zengetsu(サービス年月, 給付実績基本, 被保険者番号,
-                    後整理番号, new NyuryokuShikibetsuNo(識別番号), get事業所名称(給付実績基本, サービス提供年月),
-                    get給付分類区分(給付実績基本, サービス提供年月), 給付実績基本情報, 給付実績ヘッダ情報2);
-            ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス年月);
+        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績基本情報);
+        int 事業者番号の位置 = getサービス提供年月の位置(サービス提供年月リスト, サービス提供年月);
+        clear画面(div);
+        if (事業者番号の位置 < サービス提供年月リスト.size() - 1) {
+            今提供年月 = サービス提供年月リスト.get(事業者番号の位置 + 1);
+            KyufujissekiKihon 給付実績基本 = get給付実績基本情報(給付実績基本情報, 今提供年月,
+                    new JigyoshaNo(div.getCcdKyufuJissekiHeader().get事業者番号()),
+                    整理番号, 識別番号検索キー.value(), div.getCcdKyufuJissekiHeader().get実績区分コード());
+            getHandler(div).onClick_Zengetsu(今提供年月, 給付実績基本, 被保険者番号,
+                    整理番号, 識別番号検索キー, get事業所名称(給付実績基本, 今提供年月),
+                    get給付分類区分(給付実績基本, 今提供年月),
+                    給付実績基本情報, 給付実績ヘッダ情報2, サービス提供年月リスト);
+            ViewStateHolder.put(ViewStateKeys.サービス提供年月, 今提供年月);
         }
         return ResponseData.of(div).respond();
     }
@@ -175,25 +189,25 @@ public class KyufuJissekiKihonJouhouMain {
                 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         KyufuJissekiPrmBusiness 給付実績情報照会情報
                 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
+        FlexibleYearMonth 今提供年月;
         List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
         HihokenshaNo 被保険者番号 = 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2(サービス提供年月, 整理番号, 識別番号検索キー);
-        int 事業者番号の位置 = get事業者番号の位置(給付実績ヘッダ情報2, div, サービス提供年月);
-        if (事業者番号の位置 + INT_ITI < 給付実績ヘッダ情報2.size()) {
-            KyufuJissekiHedajyoho2 給付実績ヘッダ情報 = 給付実績ヘッダ情報2.get(事業者番号の位置 + INT_ITI);
-            FlexibleYearMonth サービス年月 = 給付実績ヘッダ情報.getサービス提供年月();
-            RString 給付実績区分コード = 給付実績ヘッダ情報.get給付実績区分コード();
-            RString 後整理番号 = 給付実績ヘッダ情報.get整理番号();
-            JigyoshaNo 事業所番号 = 給付実績ヘッダ情報.get事業所番号();
-            RString 識別番号 = 給付実績ヘッダ情報.get識別番号();
-            KyufujissekiKihon 給付実績基本 = get給付実績基本情報(給付実績基本情報, サービス年月,
-                    事業所番号, 後整理番号, 識別番号, 給付実績区分コード);
-            getHandler(div).onClick_Jigetsu(サービス年月, 給付実績基本, 被保険者番号,
-                    後整理番号, new NyuryokuShikibetsuNo(識別番号), get事業所名称(給付実績基本, サービス提供年月),
-                    get給付分類区分(給付実績基本, サービス提供年月), 給付実績基本情報, 給付実績ヘッダ情報2);
-            ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス年月);
+        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績基本情報);
+        int 事業者番号の位置 = getサービス提供年月の位置(サービス提供年月リスト, サービス提供年月);
+        clear画面(div);
+        if (INT_ZERO < 事業者番号の位置) {
+            今提供年月 = サービス提供年月リスト.get(事業者番号の位置 - 1);
+            KyufujissekiKihon 給付実績基本 = get給付実績基本情報(給付実績基本情報, 今提供年月,
+                    new JigyoshaNo(div.getCcdKyufuJissekiHeader().get事業者番号()),
+                    整理番号, 識別番号検索キー.value(), div.getCcdKyufuJissekiHeader().get実績区分コード());
+            getHandler(div).onClick_Jigetsu(今提供年月, 給付実績基本, 被保険者番号,
+                    整理番号, 識別番号検索キー, get事業所名称(給付実績基本, 今提供年月),
+                    get給付分類区分(給付実績基本, 今提供年月),
+                    給付実績基本情報, 給付実績ヘッダ情報2, サービス提供年月リスト);
+            ViewStateHolder.put(ViewStateKeys.サービス提供年月, 今提供年月);
         }
         return ResponseData.of(div).respond();
     }
@@ -308,5 +322,134 @@ public class KyufuJissekiKihonJouhouMain {
 
     private KyufuJissekiKihonJouhouMainHandler getHandler(KyufuJissekiKihonJouhouMainDiv div) {
         return new KyufuJissekiKihonJouhouMainHandler(div);
+    }
+
+    private List<FlexibleYearMonth> getサービス提供年月リスト(List<KyufujissekiKihon> 給付実績基本情報) {
+        List<FlexibleYearMonth> 提供年月リスト = new ArrayList<>();
+        for (KyufujissekiKihon 給付実績基本 : 給付実績基本情報) {
+            FlexibleYearMonth 提供年月 = 給付実績基本.getサービス提供年月();
+            if (!提供年月リスト.contains(提供年月)) {
+                提供年月リスト.add(提供年月);
+            }
+        }
+        return 提供年月リスト;
+    }
+
+    private int getサービス提供年月の位置(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
+        int index = INT_ZERO;
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
+            if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    private void clear画面(KyufuJissekiKihonJouhouMainDiv div) {
+        clear申請内容エリア(div);
+        clear合計内容エリア(div);
+    }
+
+    private void clear申請内容エリア(KyufuJissekiKihonJouhouMainDiv div) {
+        div.getTxtKyufuJissekiKihonSakuseiKubun().clearValue();
+        div.getTxtKyufuJissekiKihonYokaigodo().clearValue();
+        div.getTxtYukoKaishiYMD().clearValue();
+        div.getTxtYukoShuryoYMD().clearValue();
+        div.getTxtKyufuJissekiKihonShinsaYM().clearValue();
+        div.getTxtKyufuJissekiKihonKeikokuKubun().clearValue();
+        div.getTxtKyufuJissekiKihonKyusochiNyushoshaTokurei().clearValue();
+        div.getTxtServiceTankasu().clearValue();
+        div.getTxtHokenryoSeikyuGaku().clearValue();
+        div.getTxtRiyoshaFutanGaku().clearValue();
+        div.getTxtKyufuJissekiKihonRojinHokenShichosonNo().clearValue();
+        div.getTxtKyufuJissekiKihonRojinHokenJukyushaNo().clearValue();
+        div.getTxtKyufuJissekiKihonKokiKoreiHokenshaNo().clearValue();
+        div.getTxtKyufuJissekiKihonKokiKoreiHihokenshaNo().clearValue();
+        div.getTxtKyufuJissekiKihonKokuhoHokenshaNo().clearValue();
+        div.getTxtKyufuJissekiKihonKokuhoHihokenshashoNo().clearValue();
+        div.getTxtKyufuJissekiKihonKokuhoKojinNo().clearValue();
+        div.getTxtKyufuJissekiKihonKyotakuServiceKeikakuSakuseiKubun().clearValue();
+        div.getTxtKyufuJissekiKihonJigyoshoNo().clearValue();
+        div.getTxtKyufuJissekiKihonJigyoshoName().clearValue();
+        div.getTxtKyufuJissekiKihonKaishiYMD().clearValue();
+        div.getTxtKyufuJissekiKihonChushiYMD().clearValue();
+        div.getTxtKyufuJissekiKihonChushiRiyu().clearValue();
+        div.getTxtKyufuJissekiKihonNyushoYMD().clearValue();
+        div.getTxtKyufuJissekiKihonNyushoJitsuNissu().clearValue();
+        div.getTxtKyufuJissekiKihonTaishoYMD().clearValue();
+        div.getTxtKyufuJissekiKihonGaihakuNissu().clearValue();
+        div.getTxtKyufuJissekiKihonNyushoMaeJokyo().clearValue();
+        div.getTxtKyufuJissekiKihonNyushoAtoJokyo().clearValue();
+        div.getTxtKyufuJissekiKihonHokenKyufuRitsu().clearValue();
+        div.getTxtKyufuJissekiKihonKohi1KyufuRitsu().clearValue();
+        div.getTxtKyufuJissekiKihonKohi2KyufuRitsu().clearValue();
+        div.getTxtKyufuJissekiKihonKohi3KyufuRitsu().clearValue();
+        div.getTxtKyufuJissekiKihonKohiFutanshaNo1().clearValue();
+        div.getTxtKyufuJissekiKihonKohiJukyushaNo1().clearValue();
+        div.getTxtKyufuJissekiKihonKohiFutanshaNo2().clearValue();
+        div.getTxtKyufuJissekiKihonKohiJukyushaNo2().clearValue();
+        div.getTxtKyufuJissekiKihonKohiFutanshaNo3().clearValue();
+        div.getTxtKyufuJissekiKihonKohiJukyushaNo3().clearValue();
+    }
+
+    private void clear合計内容エリア(KyufuJissekiKihonJouhouMainDiv div) {
+        div.getTxtMaeHokenServiceTanisu().clearValue();
+        div.getTxtGoHokenServiceTanisu().clearValue();
+        div.getTxtMaeKohi1ServiceTanisu().clearValue();
+        div.getTxtGoKohi1ServiceTanisu().clearValue();
+        div.getTxtMaeKohi2ServiceTanisu().clearValue();
+        div.getTxtGoKohi2ServiceTanisu().clearValue();
+        div.getTxtMaeKohi3ServiceTanisu().clearValue();
+        div.getTxtGoKohi3ServiceTanisu().clearValue();
+        div.getTxtMaeHokenHokenSeikyugaku().clearValue();
+        div.getTxtGoHokenHokenSeikyugaku().clearValue();
+        div.getTxtMaeKohi1HokenSeikyugaku().clearValue();
+        div.getTxtGoKohi1HokenSeikyugaku().clearValue();
+        div.getTxtMaeKohi2HokenSeikyugaku().clearValue();
+        div.getTxtGoKohi2HokenSeikyugaku().clearValue();
+        div.getTxtMaeKohi3HokenSeikyugaku().clearValue();
+        div.getTxtGoKohi3HokenSeikyugaku().clearValue();
+        div.getTxtMaeHokenRiyoshaFutangaku().clearValue();
+        div.getTxtGoHokenRiyoshaFutangaku().clearValue();
+        div.getTxtMaeKohi1RiyoshaFutangaku().clearValue();
+        div.getTxtGoKohi1RiyoshaFutangaku().clearValue();
+        div.getTxtMaeKohi2RiyoshaFutangaku().clearValue();
+        div.getTxtGoKohi2RiyoshaFutangaku().clearValue();
+        div.getTxtMaeKohi3RiyoshaFutangaku().clearValue();
+        div.getTxtGoKohi3RiyoshaFutangaku().clearValue();
+        div.getTxtMaeHokenKinkyujiShisetsuRyoyohi().clearValue();
+        div.getTxtGoHokenKinkyujiShisetsuRyoyohi().clearValue();
+        div.getTxtMaeKohi1KinkyujiShisetsuRyoyohi().clearValue();
+        div.getTxtGoKohi1KinkyujiShisetsuRyoyohi().clearValue();
+        div.getTxtMaeKohi2KinkyujiShisetsuRyoyohi().clearValue();
+        div.getTxtGoKohi2KinkyujiShisetsuRyoyohi().clearValue();
+        div.getTxtMaeKohi3KinkyujiShisetsuRyoyohi().clearValue();
+        div.getTxtGoKohi3KinkyujiShisetsuRyoyohi().clearValue();
+        div.getTxtMaeHokenTokuteiShinryohi().clearValue();
+        div.getTxtGoHokenTokuteiShinryohi().clearValue();
+        div.getTxtMaeKohi1TokuteiShinryohi().clearValue();
+        div.getTxtGoKohi1TokuteiShinryohi().clearValue();
+        div.getTxtMaeKohi2TokuteiShinryohi().clearValue();
+        div.getTxtGoKohi2TokuteiShinryohi().clearValue();
+        div.getTxtMaeKohi3TokuteiShinryohi().clearValue();
+        div.getTxtGoKohi3TokuteiShinryohi().clearValue();
+        div.getTxtMaeHokenTokuteiNyushosha().clearValue();
+        div.getTxtGoHokenTokuteiNyushosha().clearValue();
+        div.getTxtMaeKohi1TokuteiNyushosha().clearValue();
+        div.getTxtGoKohi1TokuteiNyushosha().clearValue();
+        div.getTxtMaeKohi2TokuteiNyushosha().clearValue();
+        div.getTxtGoKohi2TokuteiNyushosha().clearValue();
+        div.getTxtMaeKohi3TokuteiNyushosha().clearValue();
+        div.getTxtGoKohi3TokuteiNyushosha().clearValue();
+    }
+
+    private static class DateComparatorServiceTeikyoYM implements Comparator<FlexibleYearMonth>, Serializable {
+
+        @Override
+        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
+            return o2.compareTo(o1);
+        }
     }
 }

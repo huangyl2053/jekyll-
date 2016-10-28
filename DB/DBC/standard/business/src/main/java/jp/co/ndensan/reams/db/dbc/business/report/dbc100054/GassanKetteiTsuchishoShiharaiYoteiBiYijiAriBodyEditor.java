@@ -96,6 +96,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
             GassanKetteiTsuchishoShiharaiYoteiBiYijiAriSource source) {
         editSource(source);
         source.hihokenshaNo = getColumnValue(entity.get被保険者番号());
+        source.shikibetuCode = entity.get識別コード();
         return source;
     }
 
