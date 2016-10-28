@@ -385,7 +385,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         }
         insertEntity.set認定有効期間開始年月日(受給者台帳.getNinteiYukoKikanKaishiYMD());
         //TODO
-        insertEntity.set認定有効期間終了年月日(受給者台帳.getNinteiYukoKikanShuryoYMD());
+//        insertEntity.set認定有効期間終了年月日(受給者台帳.getNinteiYukoKikanShuryoYMD());
         Decimal 訪問通所サービス支給限度基準額 = 受給者台帳.getShikyuGendoTanisu();
         if (訪問通所サービス支給限度基準額 != null) {
             insertEntity.set訪問通所サービス支給限度基準額(訪問通所サービス支給限度基準額.intValue());
@@ -395,7 +395,7 @@ public class InsIdomaiDataTempProcess extends BatchProcessBase<IdouTblEntity> {
         if (支給限度有効開始年月日 != null) {
             insertEntity.set訪問通所サービス上限管理適用期間終了年月日(new RString(支給限度有効開始年月日.toString()));
         }
-        insertEntity.set短期入所サービス支給限度基準額(new RString(受給者台帳.getTankiSikyuGendoNissu()));
+        insertEntity.set短期入所サービス支給限度基準額(受給者台帳.getTankiSikyuGendoNissu());
         insertEntity.set短期入所サービス上限管理適用期間開始年月日(受給者台帳.getTankiShikyuGendoKaishiYMD());
         insertEntity.set短期入所サービス上限管理適用期間終了年月日(受給者台帳.getTankiShikyuGendoShuryoYMD());
         insertEntity.setエラーフラグ(エラーなし);
