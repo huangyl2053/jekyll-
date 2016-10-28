@@ -445,6 +445,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
             handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
+            handler.保険者ドロップダウンリストを再セット(画面提供着工年月);
         }
         return ResponseData.of(div).respond();
     }
