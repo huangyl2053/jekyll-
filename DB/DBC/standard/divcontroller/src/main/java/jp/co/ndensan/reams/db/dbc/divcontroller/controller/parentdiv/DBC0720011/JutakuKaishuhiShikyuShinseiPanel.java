@@ -158,16 +158,16 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         }
         RDate 支給申請日開始 = div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getFromValue();
         RDate 支給申請日終了 = div.getSearchConditionToMishinsaShikyuShinseiPanel().getTxtShikyuShinseiDate().getToValue();
-        JutakukaishuSikyuShinseiIkkatuShinsaManager manager = JutakukaishuSikyuShinseiIkkatuShinsaManager.createInstance();
-        List<MiShinsaSikyuShinsei> resultList;
-        if (支給申請日開始 != null && 支給申請日終了 != null) {
-            resultList = manager.getMiShinasaShikyuShinseiList(new FlexibleDate(支給申請日開始.toDateString()),
-                    new FlexibleDate(支給申請日終了.toDateString()));
-        } else if (支給申請日終了 != null) {
-            resultList = manager.getMiShinasaShikyuShinseiList(null, new FlexibleDate(支給申請日終了.toDateString()));
-        } else {
-            resultList = new ArrayList<>();
+        FlexibleDate 支給申請日開始FlexibleDate = null;
+        if (支給申請日開始 != null) {
+            支給申請日開始FlexibleDate = new FlexibleDate(支給申請日開始.toDateString());
         }
+        FlexibleDate 支給申請日終了FlexibleDate = null;
+        if (支給申請日終了 != null) {
+            支給申請日終了FlexibleDate = new FlexibleDate(支給申請日終了.toDateString());
+        }
+        JutakukaishuSikyuShinseiIkkatuShinsaManager manager = JutakukaishuSikyuShinseiIkkatuShinsaManager.createInstance();
+        List<MiShinsaSikyuShinsei> resultList = manager.getMiShinasaShikyuShinseiList(支給申請日開始FlexibleDate, 支給申請日終了FlexibleDate);
         ViewStateHolder.put(ViewStateKeys.申請一覧, (Serializable) resultList);
         MishinsaShikyuShinseiListHandler handler = MishinsaShikyuShinseiListHandler.of(div.getMishinsaShikyuShinseiListPanel());
         handler.initializeDropDownList(resultList);
@@ -248,12 +248,8 @@ public class JutakuKaishuhiShikyuShinseiPanel {
                 } else {
                     row.setTxtShinsaResult(却下する);
                 }
-                if (改修住所重複判定) {
-                    row.setTxtTenkyoReset(Boolean.TRUE);
-                }
-                if (要介護状態３段階変更判定) {
-                    row.setTxt3DankaiReset(Boolean.TRUE);
-                }
+                row.setTxtTenkyoReset(!改修住所重複判定);
+                row.setTxt3DankaiReset(要介護状態３段階変更判定);
             }
         }
 
@@ -439,7 +435,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
                             .set住宅住所変更(row.getTxtTenkyoReset()).set要介護状態３段階変更(row.getTxt3DankaiReset())
                             .set審査結果(row.getTxtShinsaResult()).set支給申請審査区分(ShikyushinseiShinsaKubun.審査済.getコード())
                             .set要介護状態３段階変更(要介護状態３段階変更).set住宅住所変更(住宅住所変更)
-                            .set審査年月日(FlexibleDate.getNowDate()).set審査結果(審査結果).build();
+                            .set審査年月日(決定年月日).set審査結果(審査結果).build();
                     SaveIkkatuShinsaDate date = new SaveIkkatuShinsaDate(entity, 被保険者番号, サービス提供年月, 整理番号,
                             証記載保険者番号, 決定年月日, new ShikibetsuCode(row.getTxtSikibetsuCode()), 支給決定区分, 支払金額);
                     parameterList.add(date);

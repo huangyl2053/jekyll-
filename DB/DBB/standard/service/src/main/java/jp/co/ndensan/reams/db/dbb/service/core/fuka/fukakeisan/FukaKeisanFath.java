@@ -105,23 +105,6 @@ public class FukaKeisanFath {
     private static final RString 定数_10 = new RString("10");
     private static final RString 定数_11 = new RString("11");
     private static final RString 定数_12 = new RString("12");
-    private static final RString 定数_13 = new RString("13");
-    private static final RString 定数_14 = new RString("14");
-    private static final RString 重複させない = new RString("00");
-    private static final RString 重複させる_01期 = new RString("01");
-    private static final RString 重複させる_02期 = new RString("02");
-    private static final RString 重複させる_03期 = new RString("03");
-    private static final RString 重複させる_04期 = new RString("04");
-    private static final RString 重複させる_05期 = new RString("05");
-    private static final RString 重複させる_06期 = new RString("06");
-    private static final RString 重複させる_07期 = new RString("07");
-    private static final RString 重複させる_08期 = new RString("08");
-    private static final RString 重複させる_09期 = new RString("09");
-    private static final RString 重複させる_10期 = new RString("10");
-    private static final RString 重複させる_11期 = new RString("11");
-    private static final RString 重複させる_12期 = new RString("12");
-    private static final RString 重複させる_13期 = new RString("13");
-    private static final RString 重複させる_14期 = new RString("14");
     private static final RString 特別徴収_厚生労働省 = new RString("1");
     private static final RString 特別徴収_地共済 = new RString("2");
     private static final RString 連番_0001 = new RString("0001");
@@ -212,7 +195,8 @@ public class FukaKeisanFath {
             業務コンフィグ情報.set特徴開始前普徴区分(定数_2);
         }
 
-        set普徴切替時期別区分(業務コンフィグ情報, 適用基準日);
+        RString 普徴切替方法 = DbBusinessConfig.get(ConfigNameDBB.期割計算_普徴切替方法, 適用基準日, SubGyomuCode.DBB介護賦課);
+        業務コンフィグ情報.set普徴切替時期別区分(new RString(Integer.parseInt(普徴切替方法.toString())));
 
         業務コンフィグ情報.set増額時普調切替区分(定数_0);
         RString 捕捉計算区分 = RString.EMPTY;
@@ -261,7 +245,7 @@ public class FukaKeisanFath {
      * @return RString
      */
     protected RString get算定月(YMDHMS 調定日時) {
-        int 本算定第１期の期月 = new TokuchoKiUtil().get期月リスト().filtered本算定期間().get期の最初月(0).get月AsInt();
+        int 本算定第１期の期月 = new TokuchoKiUtil().get期月リスト().filtered本算定期間().toList().get(0).get月AsInt();
         KoseiTsukiHantei hantei = InstanceProvider.create(KoseiTsukiHantei.class);
         int 算定月 = hantei.find更正月_本算定期(調定日時.getDate()).get月AsInt();
         if (本算定第１期の期月 > 算定月) {
@@ -315,41 +299,6 @@ public class FukaKeisanFath {
             return 期月.get期AsInt() + INT_1;
         } else {
             return 期月.get期AsInt() + INT_2;
-        }
-    }
-
-    private void set普徴切替時期別区分(GyomuConfigJohoClass 業務コンフィグ情報, RDate 適用基準日) {
-        RString 普徴切替方法 = DbBusinessConfig.get(ConfigNameDBB.期割計算_普徴切替方法, 適用基準日, SubGyomuCode.DBB介護賦課);
-        if (重複させない.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_0);
-        } else if (重複させる_01期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_1);
-        } else if (重複させる_02期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_2);
-        } else if (重複させる_03期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_3);
-        } else if (重複させる_04期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_4);
-        } else if (重複させる_05期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_5);
-        } else if (重複させる_06期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_6);
-        } else if (重複させる_07期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_7);
-        } else if (重複させる_08期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_8);
-        } else if (重複させる_09期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_9);
-        } else if (重複させる_10期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_10);
-        } else if (重複させる_11期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_11);
-        } else if (重複させる_12期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_12);
-        } else if (重複させる_13期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_13);
-        } else if (重複させる_14期.equals(普徴切替方法)) {
-            業務コンフィグ情報.set普徴切替時期別区分(定数_14);
         }
     }
 
@@ -462,44 +411,7 @@ public class FukaKeisanFath {
         if (ChoteiJiyuCode.年金保険者からの通知.getコード().equals(param.get徴収方法の情報_更正前().get特別徴収停止事由コード())
                 || ChoteiJiyuCode.徴収方法修正.getコード().equals(param.get徴収方法の情報_更正前().get特別徴収停止事由コード())) {
             kiwariKeisanInput.set特徴開始停止区分(INT_9);
-            List<RString> 徴収方法リスト = new ArrayList<>();
-            徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法4月());
-            徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法5月());
-            徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法6月());
-            徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法7月());
-            徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法8月());
-            徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法9月());
-            徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法10月());
-            徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法11月());
-            徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法12月());
-            徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法1月());
-            徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法2月());
-            徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法3月());
-            Map<RString, RString> map = new HashMap<>();
-            map.put(定数_1, 定数_1);
-            map.put(定数_2, 定数_1);
-            map.put(定数_3, 定数_2);
-            map.put(定数_4, 定数_2);
-            map.put(定数_5, 定数_3);
-            map.put(定数_6, 定数_3);
-            map.put(定数_7, 定数_4);
-            map.put(定数_8, 定数_4);
-            map.put(定数_9, 定数_5);
-            map.put(定数_10, 定数_5);
-            map.put(定数_11, 定数_6);
-            map.put(定数_12, 定数_6);
-            for (int i = 0; i < 徴収方法リスト.size() - INT_2; i++) {
-                int 特徴開始停止期 = Integer.parseInt(map.get(new RString(i + INT_2)).toString());
-                Decimal 特徴期別金額 = param.get年度分賦課リスト_更正前().get現年度().get特徴期別金額(特徴開始停止期);
-                if (特徴期別金額 == null) {
-                    特徴期別金額 = Decimal.ZERO;
-                }
-                if ((定数_1.equals(徴収方法リスト.get(i)) || 定数_2.equals(徴収方法リスト.get(i)))
-                        && 定数_3.equals(徴収方法リスト.get(i + INT_1)) && Decimal.ZERO.compareTo(特徴期別金額) < 0) {
-                    kiwariKeisanInput.set特徴開始停止期(特徴開始停止期);
-                    break;
-                }
-            }
+            set特徴開始停止期(kiwariKeisanInput, param);
         } else if (param.get資格の情報().get資格喪失年月日() != null && !param.get資格の情報().get資格喪失年月日().isEmpty()) {
             set資格喪失した場合(kiwariKeisanInput, param);
         } else {
@@ -515,6 +427,55 @@ public class FukaKeisanFath {
                     || 特別徴収_地共済.equals(param.get徴収方法の情報_更正前().get徴収方法2月()))) {
                 kiwariKeisanInput.set特徴開始停止区分(INT_1);
                 kiwariKeisanInput.set特徴開始停止期(INT_6);
+            }
+        }
+    }
+
+    private void set特徴開始停止期(KiwariKeisanInput kiwariKeisanInput, CalculateChoteiParameter param) {
+        List<RString> 徴収方法リスト = new ArrayList<>();
+        徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法4月());
+        徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法5月());
+        徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法6月());
+        徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法7月());
+        徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法8月());
+        徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法9月());
+        徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法10月());
+        徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法11月());
+        徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法12月());
+        徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法1月());
+        徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法2月());
+        徴収方法リスト.add(param.get徴収方法の情報_更正前().get徴収方法3月());
+        Map<RString, RString> map = new HashMap<>();
+        map.put(定数_1, 定数_1);
+        map.put(定数_2, 定数_1);
+        map.put(定数_3, 定数_2);
+        map.put(定数_4, 定数_2);
+        map.put(定数_5, 定数_3);
+        map.put(定数_6, 定数_3);
+        map.put(定数_7, 定数_4);
+        map.put(定数_8, 定数_4);
+        map.put(定数_9, 定数_5);
+        map.put(定数_10, 定数_5);
+        map.put(定数_11, 定数_6);
+        map.put(定数_12, 定数_6);
+        boolean flag = false;
+        for (int i = 0; i < 徴収方法リスト.size(); i++) {
+            int 特徴開始停止期 = Integer.parseInt(map.get(new RString(i + INT_1)).toString());
+            Decimal 特徴期別金額 = param.get年度分賦課リスト_更正前().get現年度().get特徴期別金額(特徴開始停止期);
+            if (特徴期別金額 == null) {
+                特徴期別金額 = Decimal.ZERO;
+            }
+            if (Decimal.ZERO.compareTo(特徴期別金額) < 0) {
+                if (!flag && (定数_1.equals(徴収方法リスト.get(i)) || 定数_2.equals(徴収方法リスト.get(i)))) {
+                    flag = true;
+                } else if (flag && 定数_3.equals(徴収方法リスト.get(i))) {
+                    kiwariKeisanInput.set特徴開始停止期(特徴開始停止期);
+                    break;
+                } else if (i == 徴収方法リスト.size() - INT_1) {
+                    kiwariKeisanInput.set特徴開始停止期(0);
+                }
+            } else if (i == 徴収方法リスト.size() - INT_1) {
+                kiwariKeisanInput.set特徴開始停止期(0);
             }
         }
     }
@@ -1090,7 +1051,7 @@ public class FukaKeisanFath {
         DbT2013HokenryoDankaiEntity 段階 = 保険料段階List.get(0);
         段階List.add(段階);
         for (int i = INT_1; i < 保険料段階List.size(); i++) {
-            if (段階.getRankuKubun().equals(保険料段階List.get(i))) {
+            if (段階.getRankuKubun().equals(保険料段階List.get(i).getRankuKubun())) {
                 段階List.add(保険料段階List.get(i));
             } else {
                 RankBetsuKijunKingaku gagu = createRankBetsuKijunKingaku(段階List);
