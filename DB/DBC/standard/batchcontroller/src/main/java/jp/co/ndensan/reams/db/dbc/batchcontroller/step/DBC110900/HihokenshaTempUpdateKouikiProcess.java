@@ -74,6 +74,7 @@ public class HihokenshaTempUpdateKouikiProcess extends BatchProcessBase<Kakohore
 
     @Override
     protected void afterExecute() {
+        
         IKakohorenJyohoSakuseiCommonMapper mapper = getMapper(IKakohorenJyohoSakuseiCommonMapper.class);
         List<KakohorenJyohoSakuseiCommonEntity> 合併なし市町村情報リスト = mapper.select合併なし市町村情報();
         RDate 基準日 = RDate.getNowDate();
