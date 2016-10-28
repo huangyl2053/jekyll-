@@ -88,8 +88,8 @@ public class ShoriKekkaKakuninProcess extends BatchProcessBase<DbWT1801ShoriKekk
     @Override
     protected void afterExecute() {
         if (!開始flag) {
-            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
             csvWriter.close();
+            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
         }
     }
 

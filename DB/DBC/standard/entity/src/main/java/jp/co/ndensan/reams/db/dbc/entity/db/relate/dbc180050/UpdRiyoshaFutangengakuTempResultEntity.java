@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050;
 
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengakuEntity;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  * バッチ設計_DBCMNK4001_更正対象給付実績一覧( 利用者負担減額情報の取得ResultEntity)
@@ -18,6 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class UpdRiyoshaFutangengakuTempResultEntity {
 
-    private FlexibleYear 年度;
+    private FutanWariaiTempEntity 負担割合TempEntity;
     private DbT4014RiyoshaFutangakuGengakuEntity 利用者負担減額;
 }
