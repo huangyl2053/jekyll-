@@ -285,12 +285,12 @@
                     AND(
                         (被保険者台帳管理."koikinaiJushochiTokureiFlag" != '1'
                         AND
-                            被保険者台帳管理."shichosonCode" = #{shichosoncode}
+                            被保険者台帳管理."shichosonCode" = #{hokenshacode}
                         )
                     OR
                         (被保険者台帳管理."koikinaiJushochiTokureiFlag" = '1'
                         AND
-                            被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode" =  #{shichosoncode}
+                            被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode" =  #{hokenshacode}
                         )
                     )</if>
                     ) AS 再審査結果情報

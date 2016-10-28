@@ -28,8 +28,6 @@ public class SaishinsamoshitateProcessParameter implements IBatchProcessParamete
     private boolean renbanFuka;
     private boolean hitsukeHenshu;
     private LasdecCode hokenshacode;
-    private RString hokensyamei;
-    private RString shichosoncode;
     private RString kokuhorensouhunengetsufrom;
     private RString kokuhorensouhunengetsuto;
     private RString severteikyounengetsufrom;
@@ -52,8 +50,6 @@ public class SaishinsamoshitateProcessParameter implements IBatchProcessParamete
      * @param renbanFuka renbanFuka
      * @param hitsukeHenshu hitsukeHenshu
      * @param hokenshacode hokenshacode
-     * @param hokensyamei kokensyamei
-     * @param shichosoncode shichosoncode
      * @param kokuhorensouhunengetsufrom kokuhorensouhunengetsufrom
      * @param kokuhorensouhunengetsuto kokuhorensouhunengetsuto
      * @param severteikyounengetsufrom severteikyounengetsufrom
@@ -69,8 +65,6 @@ public class SaishinsamoshitateProcessParameter implements IBatchProcessParamete
             boolean renbanFuka,
             boolean hitsukeHenshu,
             LasdecCode hokenshacode,
-            RString hokensyamei,
-            RString shichosoncode,
             RString kokuhorensouhunengetsufrom,
             RString kokuhorensouhunengetsuto,
             RString severteikyounengetsufrom,
@@ -84,8 +78,6 @@ public class SaishinsamoshitateProcessParameter implements IBatchProcessParamete
         this.renbanFuka = renbanFuka;
         this.hitsukeHenshu = hitsukeHenshu;
         this.hokenshacode = hokenshacode;
-        this.hokensyamei = hokensyamei;
-        this.shichosoncode = shichosoncode;
         this.kokuhorensouhunengetsufrom = kokuhorensouhunengetsufrom;
         this.kokuhorensouhunengetsuto = kokuhorensouhunengetsuto;
         this.severteikyounengetsufrom = severteikyounengetsufrom;
@@ -98,13 +90,9 @@ public class SaishinsamoshitateProcessParameter implements IBatchProcessParamete
      * Mybatisのパラメータを作成します。
      *
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
-     * @param has出力順 has出力順
-     * @param 出力順 出力順
      * @return SaishinsamoshitateMybatisParameter
      */
-    public SaishinsamoshitateMybatisParameter toSaishinsamoshitateMybatisParameter(RString psmShikibetsuTaisho,
-            boolean has出力順,
-            RString 出力順) {
+    public SaishinsamoshitateMybatisParameter toSaishinsamoshitateMybatisParameter(RString psmShikibetsuTaisho) {
         return SaishinsamoshitateMybatisParameter.creatParameter(
                 chohyoId,
                 shutsuryokujunId,
@@ -113,8 +101,6 @@ public class SaishinsamoshitateProcessParameter implements IBatchProcessParamete
                 renbanFuka,
                 hitsukeHenshu,
                 hokenshacode,
-                hokensyamei,
-                shichosoncode,
                 kokuhorensouhunengetsufrom,
                 kokuhorensouhunengetsuto,
                 severteikyounengetsufrom,
@@ -127,8 +113,6 @@ public class SaishinsamoshitateProcessParameter implements IBatchProcessParamete
                 has事業者番号,
                 has保険者コード,
                 date,
-                has出力順,
-                出力順,
                 psmShikibetsuTaisho);
     }
 }

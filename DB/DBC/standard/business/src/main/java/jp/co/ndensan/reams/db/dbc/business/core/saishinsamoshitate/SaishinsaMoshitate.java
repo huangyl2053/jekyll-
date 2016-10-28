@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -302,9 +301,10 @@ public class SaishinsaMoshitate {
      * 出力条件の編集です。
      *
      * @param processParameter processParameter
+     * @param 市町村名 市町村名
      * @return List<RString>
      */
-    public List<RString> set出力条件(SaishinsamoshitateProcessParameter processParameter) {
+    public List<RString> set出力条件(SaishinsamoshitateProcessParameter processParameter, RString 市町村名) {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(抽出条件);
@@ -319,8 +319,8 @@ public class SaishinsaMoshitate {
             jokenBuilder.append(保険者);
             RStringBuilder 市町村名builder = new RStringBuilder();
             市町村名builder.append(processParameter.getHokenshacode().value());
-            市町村名builder.append(RString.HALF_SPACE);
-            市町村名builder.append(processParameter.getHokensyamei());
+            市町村名builder.append(new RString(" "));
+            市町村名builder.append(市町村名);
             jokenBuilder.append(市町村名builder.toRString());
         }
         出力条件List.add(jokenBuilder.toRString());
@@ -732,78 +732,6 @@ public class SaishinsaMoshitate {
             return RString.EMPTY;
         } else {
             return obj.value();
-        }
-    }
-
-    /**
-     * 帳票分類ID「DBC701011_HanyoListSaishinsaMoshitate」（汎用リスト 再審査申立情報）出力順設定可能項目です。
-     */
-    public enum ShutsuryokujunEnum implements IReportItems {
-
-        /**
-         * 行政区コード
-         */
-        行政区コード(new RString("0004"), new RString(""), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
-        /**
-         * 世帯コード
-         */
-        世帯コード(new RString("0008"), new RString(""), new RString("\"ShikibetsuTaisho_setaiCode\"")),
-        /**
-         * 識別コード
-         */
-        識別コード(new RString("0009"), new RString(""), new RString("\"ShikibetsuTaisho_shikibetsuCode\"")),
-        /**
-         * 氏名５０音カナ
-         */
-        氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"ShikibetsuTaisho_kanaShimei\"")),
-        /**
-         * 市町村コード
-         */
-        市町村コード(new RString("0016"), new RString(""), new RString("\"市町村コード\"")),
-        /**
-         * 証記載保険者番号
-         */
-        証記載保険者番号(new RString("0103"), new RString(""), new RString("\"証記載保険者番号\"")),
-        /**
-         * 被保険者番号
-         */
-        被保険者番号(new RString("0104"), new RString(""), new RString("\"被保険者番号\"")),
-        /**
-         * 被保険要介護度者番号
-         */
-        要介護度(new RString("0403"), new RString(""), new RString("\"要介護認定状態区分コード\"")),
-        /**
-         * 認定開始日
-         */
-        認定開始日(new RString("0411"), new RString(""), new RString("\"認定有効期間開始年月日\"")),
-        /**
-         * サービス年月
-         */
-        サービス年月(new RString("0301"), new RString(""), new RString("\"サービス提供年月\""));
-
-        private final RString 項目ID;
-        private final RString フォームフィールド名;
-        private final RString myBatis項目名;
-
-        private ShutsuryokujunEnum(RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
-            this.項目ID = 項目ID;
-            this.フォームフィールド名 = フォームフィールド名;
-            this.myBatis項目名 = myBatis項目名;
-        }
-
-        @Override
-        public RString get項目ID() {
-            return 項目ID;
-        }
-
-        @Override
-        public RString getフォームフィールド名() {
-            return フォームフィールド名;
-        }
-
-        @Override
-        public RString getMyBatis項目名() {
-            return myBatis項目名;
         }
     }
 }

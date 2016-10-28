@@ -28,8 +28,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
     private boolean renbanFuka;
     private boolean hitsukeHenshu;
     private LasdecCode hokenshacode;
-    private RString hokensyamei;
-    private RString shichosoncode;
     private RString kokuhorensouhunengetsufrom;
     private RString kokuhorensouhunengetsuto;
     private RString severteikyounengetsufrom;
@@ -42,8 +40,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
     private boolean has事業者番号;
     private boolean has保険者コード;
     private RDate date;
-    private boolean has出力順;
-    private RString 出力順;
     private final RString psmShikibetsuTaisho;
 
     /**
@@ -55,8 +51,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
      * @param renbanFuka renbanFuka
      * @param hitsukeHenshu hitsukeHenshu
      * @param hokenshacode hokenshacode
-     * @param hokensyamei kokensyamei
-     * @param shichosoncode shichosoncode
      * @param kokuhorensouhunengetsufrom kokuhorensouhunengetsufrom
      * @param kokuhorensouhunengetsuto kokuhorensouhunengetsuto
      * @param severteikyounengetsufrom severteikyounengetsufrom
@@ -69,8 +63,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
      * @param has事業者番号 has事業者番号
      * @param has保険者コード has保険者コード
      * @param date date
-     * @param has出力順 has出力順
-     * @param 出力順 出力順
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      */
     private SaishinsamoshitateMybatisParameter(
@@ -81,8 +73,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
             boolean renbanFuka,
             boolean hitsukeHenshu,
             LasdecCode hokenshacode,
-            RString hokensyamei,
-            RString shichosoncode,
             RString kokuhorensouhunengetsufrom,
             RString kokuhorensouhunengetsuto,
             RString severteikyounengetsufrom,
@@ -95,8 +85,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
             boolean has事業者番号,
             boolean has保険者コード,
             RDate date,
-            boolean has出力順,
-            RString 出力順,
             RString psmShikibetsuTaisho
     ) {
         this.chohyoId = chohyoId;
@@ -106,8 +94,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
         this.renbanFuka = renbanFuka;
         this.hitsukeHenshu = hitsukeHenshu;
         this.hokenshacode = hokenshacode;
-        this.hokensyamei = hokensyamei;
-        this.shichosoncode = shichosoncode;
         this.kokuhorensouhunengetsufrom = kokuhorensouhunengetsufrom;
         this.kokuhorensouhunengetsuto = kokuhorensouhunengetsuto;
         this.severteikyounengetsufrom = severteikyounengetsufrom;
@@ -120,8 +106,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
         this.has事業者番号 = has事業者番号;
         this.has保険者コード = has保険者コード;
         this.date = date;
-        this.has出力順 = has出力順;
-        this.出力順 = 出力順;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
 
     }
@@ -136,8 +120,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
      * @param renbanFuka renbanFuka
      * @param hitsukeHenshu hitsukeHenshu
      * @param hokenshacode hokenshacode
-     * @param hokensyamei kokensyamei
-     * @param shichosoncode shichosoncode
      * @param kokuhorensouhunengetsufrom kokuhorensouhunengetsufrom
      * @param kokuhorensouhunengetsuto kokuhorensouhunengetsuto
      * @param severteikyounengetsufrom severteikyounengetsufrom
@@ -150,8 +132,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
      * @param has事業者番号 has事業者番号
      * @param has保険者コード has保険者コード
      * @param date date
-     * @param has出力順 has出力順
-     * @param 出力順 出力順
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      * @return SaishinsamoshitateMybatisParameter
      */
@@ -163,8 +143,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
             boolean renbanFuka,
             boolean hitsukeHenshu,
             LasdecCode hokenshacode,
-            RString hokensyamei,
-            RString shichosoncode,
             RString kokuhorensouhunengetsufrom,
             RString kokuhorensouhunengetsuto,
             RString severteikyounengetsufrom,
@@ -177,8 +155,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
             boolean has事業者番号,
             boolean has保険者コード,
             RDate date,
-            boolean has出力順,
-            RString 出力順,
             RString psmShikibetsuTaisho) {
         has国保連送付年月From = true;
         has国保連送付年月To = true;
@@ -212,8 +188,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
                 renbanFuka,
                 hitsukeHenshu,
                 hokenshacode,
-                hokensyamei,
-                shichosoncode,
                 kokuhorensouhunengetsufrom,
                 kokuhorensouhunengetsuto,
                 severteikyounengetsufrom,
@@ -226,8 +200,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
                 has事業者番号,
                 has保険者コード,
                 date,
-                has出力順,
-                出力順,
                 psmShikibetsuTaisho
         );
     }

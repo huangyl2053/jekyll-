@@ -11,14 +11,11 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.saishinsamoshitate.SaishinsaMoshitate;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.saishinsamoshitate.SaishinsamoshitateProcessParameter;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitate.SaishinsaMoshitateRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.euc.saishinsamoshitate.HanyoListSaishinsaMoshitateAriEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
-import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
@@ -28,6 +25,7 @@ import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -36,8 +34,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -70,14 +68,16 @@ public class SaishinsaMoshitateAriProcess extends BatchProcessBase<SaishinsaMosh
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString FILENAME = new RString("HanyoList_SaishinsaMoshitate.csv");
     private static final RString BATCHCSV = new RString("汎用リスト 再審査申立情報CSV");
+    private static final RString 保険者コード_全市町村 = new RString("000000");
+    private static final RString 市町村名_全市町村 = new RString("全市町村");
     private static final RString 保険者コード_拡張情報 = new RString("0003");
     private static final RString 被保険者番号_拡張情報 = new RString("被保険者番号");
     private int 連番 = 1;
-    private ShutsuryokujunRelateEntity 出力順Entity;
     private FileSpoolManager manager;
     private RString eucFilePath;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
     private Association association;
+    private RString 市町村名;
     private List<PersonalData> personalDataList;
     private boolean flag;
     @BatchWriter
@@ -93,22 +93,16 @@ public class SaishinsaMoshitateAriProcess extends BatchProcessBase<SaishinsaMosh
             市町村名MasterMap.put(koseiShichosonMaster.get市町村コード().value(), koseiShichosonMaster);
         }
         personalDataList = new ArrayList<>();
-        出力順Entity = get出力順項目();
     }
 
     @Override
     protected IBatchReader createReader() {
-        boolean has出力順 = false;
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
-        if (!RString.isNullOrEmpty(出力順Entity.get出力順OrderBy())) {
-            has出力順 = true;
-        }
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toSaishinsamoshitateMybatisParameter(
-                psmShikibetsuTaisho, has出力順, 出力順Entity.get出力順OrderBy()));
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toSaishinsamoshitateMybatisParameter(psmShikibetsuTaisho));
     }
 
     @Override
@@ -148,13 +142,6 @@ public class SaishinsaMoshitateAriProcess extends BatchProcessBase<SaishinsaMosh
         outputJokenhyoFactory();
     }
 
-    private ShutsuryokujunRelateEntity get出力順項目() {
-        return ReportUtil.get出力順情報(SaishinsaMoshitate.ShutsuryokujunEnum.class,
-                SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC701011.getReportId(),
-                processParameter.getShutsuryokujunId());
-    }
-
     private void outputJokenhyoFactory() {
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 BATCHCSV,
@@ -164,13 +151,27 @@ public class SaishinsaMoshitateAriProcess extends BatchProcessBase<SaishinsaMosh
                 FILENAME,
                 EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
-                new SaishinsaMoshitate().set出力条件(processParameter));
+                new SaishinsaMoshitate().set出力条件(processParameter, 市町村名));
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
     private RString get出力件数(Decimal 出力件数) {
         if (!flag) {
             return new RString("0");
+        }
+        RString 保険者コード = processParameter.getHokenshacode().value();
+        if (保険者コード_全市町村.equals(保険者コード)) {
+            市町村名 = 市町村名_全市町村;
+        } else if (!RString.isNullOrEmpty(保険者コード)) {
+            IAssociationFinder finder = AssociationFinderFactory.createInstance();
+            try {
+                association = finder.getAssociation(new LasdecCode(保険者コード));
+                市町村名 = association.get市町村名();
+            } catch (IllegalArgumentException e) {
+                市町村名 = RString.EMPTY;
+            }
+        } else {
+            市町村名 = RString.EMPTY;
         }
         RStringBuilder builder = new RStringBuilder();
         builder.append(DecimalFormatter.toコンマ区切りRString(出力件数, 0));

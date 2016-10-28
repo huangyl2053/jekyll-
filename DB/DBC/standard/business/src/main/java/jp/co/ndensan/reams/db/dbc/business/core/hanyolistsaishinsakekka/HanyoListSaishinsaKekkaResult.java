@@ -349,9 +349,10 @@ public class HanyoListSaishinsaKekkaResult {
     /**
      * 出力条件の編集です。
      *
+     * @param 市町村名 市町村名
      * @return List<RString>
      */
-    public List<RString> set出力条件() {
+    public List<RString> set出力条件(RString 市町村名) {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(抽出条件);
@@ -367,7 +368,7 @@ public class HanyoListSaishinsaKekkaResult {
             RStringBuilder 市町村名builder = new RStringBuilder();
             市町村名builder.append(processParameter.getHokenshacode().value());
             市町村名builder.append(RString.HALF_SPACE);
-            市町村名builder.append(processParameter.getHokensyamei());
+            市町村名builder.append(市町村名);
             jokenBuilder.append(市町村名builder.toRString());
         }
         出力条件List.add(jokenBuilder.toRString());
@@ -606,8 +607,6 @@ public class HanyoListSaishinsaKekkaResult {
                 processParameter.isRenbanFuka(),
                 processParameter.isHitsukeHenshu(),
                 processParameter.getHokenshacode(),
-                processParameter.getHokensyamei(),
-                processParameter.getShichosoncode(),
                 processParameter.getKokuhorentoriatsukaiFrom(),
                 processParameter.getKokuhorentoriatsukaiNengetsuTo(),
                 processParameter.getHokenshaKubunList(),

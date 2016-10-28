@@ -279,12 +279,12 @@
                     AND(
                         (被保険者台帳管理."koikinaiJushochiTokureiFlag" != '1'
                         AND
-                            被保険者台帳管理."shichosonCode" = #{shichosoncode}
+                            被保険者台帳管理."shichosonCode" = #{hokenshacode}
                         )
                     OR
                         (被保険者台帳管理."koikinaiJushochiTokureiFlag" = '1'
                         AND
-                            被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode" =  #{shichosoncode}
+                            被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode" =  #{hokenshacode}
                         )
                     )</if>
                     ) AS 再審査申立情報
@@ -293,8 +293,6 @@
             AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
         ON
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 再審査申立情報."shikibetsuCode"
-        <if test="has出力順">
-             ${出力順}
-        </if> 
+                
     </select>
 </mapper>
