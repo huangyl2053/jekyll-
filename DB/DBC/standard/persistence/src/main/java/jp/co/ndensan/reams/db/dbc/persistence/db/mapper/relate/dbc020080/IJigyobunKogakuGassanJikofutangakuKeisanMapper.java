@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.TaishoshaChush
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.TaishoshaChushuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.UpdshafukuKeigenTempMyBatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.CalcKogakuShikyugakuRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080ShoriKekkaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc020080.DBC020080TaishoDataEntity;
@@ -103,6 +104,13 @@ public interface IJigyobunKogakuGassanJikofutangakuKeisanMapper {
      * @return List<JissekiFutangakuDataTempEntity>
      */
     List<JissekiFutangakuDataTempEntity> get帳票データ(DBC020080MyBatisParameter parameter);
+
+    /**
+     * getUpd高額合算申請書のメソッドです。
+     *
+     * @return List<DbT3068KogakuGassanShinseishoEntity>
+     */
+    List<DbT3068KogakuGassanShinseishoEntity> getUpd高額合算申請書();
 
     /**
      * テスト用のメソッドです。

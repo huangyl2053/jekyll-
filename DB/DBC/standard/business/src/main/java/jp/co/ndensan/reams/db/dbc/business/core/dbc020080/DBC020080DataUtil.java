@@ -266,6 +266,7 @@ public class DBC020080DataUtil {
         result.setHihokenshaShuryoYMD(被保険者期間終了);
         result.setShinseiYMD(nonullRStr(entity.getShinseiYMD()));
         result.setDataKubun(ONE);
+        result.setIchiranJuminShubetsuCode(entity.getJuminShubetsuCode());
         result.setIchiranShikibetsuCode(nonullRStr(entity.getShikibetsuCode()));
         result.setIchiranShichosonCode(nonullRStr(entity.getShichosonCode()));
         result.setIchiranYubinNo(nonullRStr(entity.getYubinNo()));
@@ -1030,7 +1031,7 @@ public class DBC020080DataUtil {
      * @param is更新処理 boolean
      * @return DbT3170JigyoKogakuGassanJikoFutanGakuEntity
      */
-    public DbT3070KogakuGassanJikoFutanGakuEntity getIns高額合算自己負担額(
+    public DbT3070KogakuGassanJikoFutanGakuEntity getInsOrUpd高額合算自己負担額(
             JissekiFutangakuDataTempEntity 実績負担額データ, DbT3070KogakuGassanJikoFutanGakuEntity entity, boolean is更新処理) {
         if (!is更新処理) {
             entity = new DbT3070KogakuGassanJikoFutanGakuEntity();
@@ -1095,7 +1096,7 @@ public class DBC020080DataUtil {
      * @param is更新処理 boolean
      * @return DbT3170JigyoKogakuGassanJikoFutanGakuEntity
      */
-    public DbT3170JigyoKogakuGassanJikoFutanGakuEntity getIns高額合算自己負担額事業分(
+    public DbT3170JigyoKogakuGassanJikoFutanGakuEntity getInsOrUpd高額合算自己負担額事業分(
             JissekiFutangakuDataTempEntity 実績負担額データ, DbT3170JigyoKogakuGassanJikoFutanGakuEntity entity, boolean is更新処理) {
         if (!is更新処理) {
             entity = new DbT3170JigyoKogakuGassanJikoFutanGakuEntity();
@@ -1183,11 +1184,10 @@ public class DBC020080DataUtil {
      * getIns高額合算自己負担額のメソッドです。
      *
      * @param 実績負担額データ JissekiFutangakuDataTempEntity
-     * @param suffixListIndex int
-     * @return DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity
+     * @return List<DbT3071KogakuGassanJikoFutanGakuMeisaiEntity>
      */
     public List<DbT3071KogakuGassanJikoFutanGakuMeisaiEntity> getIns高額合算自己負担額明細(
-            JissekiFutangakuDataTempEntity 実績負担額データ, int suffixListIndex) {
+            JissekiFutangakuDataTempEntity 実績負担額データ) {
         List<DbT3071KogakuGassanJikoFutanGakuMeisaiEntity> insertEntities = new ArrayList<>();
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity insertEntity = new DbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
         int startIndex;
@@ -1205,8 +1205,9 @@ public class DBC020080DataUtil {
             insertEntity.setHokenshaNo(new HokenshaNo(実績負担額データ.getHokenshaNo()));
             insertEntity.setShikyuShinseishoSeiriNo(実績負担額データ.getShikyuShinseishoSeiriNo());
             insertEntity.setRirekiNo(1);
-            insertEntity.setTaishoM(suffixList.get(index));
-            set高額合算自己負担額明細項目(insertEntity, 実績負担額データ, index);
+            RString 対象月 = suffixList.get(index);
+            insertEntity.setTaishoM(対象月);
+            set高額合算自己負担額明細項目(insertEntity, 実績負担額データ, 対象月);
         }
         return insertEntities;
     }
@@ -1215,11 +1216,10 @@ public class DBC020080DataUtil {
      * getIns高額合算自己負担額のメソッドです。
      *
      * @param 実績負担額データ JissekiFutangakuDataTempEntity
-     * @param suffixListIndex int
-     * @return DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity
+     * @return List<DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity>
      */
     public List<DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity> getIns高額合算自己負担額明細事業分(
-            JissekiFutangakuDataTempEntity 実績負担額データ, int suffixListIndex) {
+            JissekiFutangakuDataTempEntity 実績負担額データ) {
         List<DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity> insertEntities = new ArrayList<>();
         DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity insertEntity = new DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity();
         int startIndex;
@@ -1237,40 +1237,185 @@ public class DBC020080DataUtil {
             insertEntity.setHokenshaNo(new HokenshaNo(実績負担額データ.getHokenshaNo()));
             insertEntity.setShikyuShinseishoSeiriNo(実績負担額データ.getShikyuShinseishoSeiriNo());
             insertEntity.setRirekiNo(1);
-            insertEntity.setTaishoM(suffixList.get(index));
-            set高額合算自己負担額明細項目(insertEntity, 実績負担額データ, index);
+            RString 対象月 = suffixList.get(index);
+            insertEntity.setTaishoM(対象月);
+            set高額合算自己負担額明細項目(insertEntity, 実績負担額データ, 対象月);
         }
         return insertEntities;
     }
 
-    private void set高額合算自己負担額明細項目(
-            DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity, JissekiFutangakuDataTempEntity 実績負担額データ, int index) {
-        entity.setJikoFutanGaku(getDecimalFromToken(実績負担額データ, JIKOFUTANGAKU, suffixList.get(index)));
-        entity.setUchisu_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, UCHISU_70_74JIKOFUTANGAKU, suffixList.get(index)));
-        entity.setUnder_70KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, UNDER_70KOGAKUSHIKYUGAKU, suffixList.get(index)));
-        entity.setOver_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, OVER_70_74KOGAKUSHIKYUGAKU, suffixList.get(index)));
-        entity.setTekiyo(getRStringFromToken(実績負担額データ, TEKIYO, suffixList.get(index)));
-        entity.setSumi_JikoFutanGaku(getDecimalFromToken(実績負担額データ, SUMI_JIKOFUTANGAKU, suffixList.get(index)));
-        entity.setSumi_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74JIKOFUTANGAKU, suffixList.get(index)));
-        entity.setSumi_under_70KogakuShikyuGaku(
-                getDecimalFromToken(実績負担額データ, SUMI_UNDER_70KOGAKUSHIKYUGAKU, suffixList.get(index)));
-        entity.setSumi_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74KOGAKUSHIKYUGAKU, suffixList.get(index)));
-        entity.setSumi_Tekiyo(getRStringFromToken(実績負担額データ, SUMI_TEKIYO, suffixList.get(index)));
+    /**
+     * upd高額合算自己負担額明細のメソッドです。
+     *
+     * @param 実績負担額データ JissekiFutangakuDataTempEntity
+     * @param entity DbT3071KogakuGassanJikoFutanGakuMeisaiEntity
+     */
+    public void update高額合算自己負担額明細(JissekiFutangakuDataTempEntity 実績負担額データ,
+            DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity) {
+        if (entity == null) {
+            return;
+        }
+        set高額合算自己負担額明細項目(entity, 実績負担額データ, entity.getTaishoM());
+    }
+
+    /**
+     * upd高額合算自己負担額明細のメソッドです。
+     *
+     * @param 実績負担額データ JissekiFutangakuDataTempEntity
+     * @param entity DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity
+     */
+    public void update高額合算自己負担額明細(JissekiFutangakuDataTempEntity 実績負担額データ,
+            DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity entity) {
+        if (entity == null) {
+            return;
+        }
+        set高額合算自己負担額明細項目(entity, 実績負担額データ, entity.getTaishoM());
+    }
+
+    /**
+     * getKeyOf高額合算自己負担額のメソッドです。
+     *
+     * @param entity DbT3170JigyoKogakuGassanJikoFutanGakuEntity
+     * @return RString
+     */
+    public RString getKeyOf高額合算自己負担額(DbT3170JigyoKogakuGassanJikoFutanGakuEntity entity) {
+        if (entity == null) {
+            return RString.EMPTY;
+        }
+        return nonullRStr(entity.getHihokenshaNo()).concat(LINE).concat(nonullRStr(entity.getTaishoNendo())).concat(LINE)
+                .concat(nonullRStr(entity.getHokenshaNo())).concat(LINE).concat(nonullRStr(entity.getShikyuShinseishoSeiriNo()))
+                .concat(LINE).concat(new RString(String.valueOf(entity.getRirekiNo())));
+    }
+
+    /**
+     * toDbT3070KogakuGassanJikoFutanGakuEntityのメソッドです。
+     *
+     * @param entity DbT3170JigyoKogakuGassanJikoFutanGakuEntity
+     * @return DbT3070KogakuGassanJikoFutanGakuEntity
+     */
+    public DbT3070KogakuGassanJikoFutanGakuEntity toDbT3070KogakuGassanJikoFutanGakuEntity(DbT3170JigyoKogakuGassanJikoFutanGakuEntity entity) {
+        DbT3070KogakuGassanJikoFutanGakuEntity target = new DbT3070KogakuGassanJikoFutanGakuEntity();
+        target.setInsertDantaiCd(entity.getInsertDantaiCd());
+        target.setIsDeleted(entity.getIsDeleted());
+        target.setHihokenshaNo(entity.getHihokenshaNo());
+        target.setTaishoNendo(entity.getTaishoNendo());
+        target.setHokenshaNo(entity.getHokenshaNo());
+        target.setShikyuShinseishoSeiriNo(entity.getShikyuShinseishoSeiriNo());
+        target.setRirekiNo(entity.getRirekiNo());
+        target.setHokenSeidoCode(entity.getHokenSeidoCode());
+        target.setHokenshaMei(entity.getHokenshaMei());
+        target.setKokuho_HihokenshaShoKigo(entity.getKokuho_HihokenshaShoKigo());
+        target.setHihokenshaShimeiKana(entity.getHihokenshaShimeiKana());
+        target.setHihokenshaShimei(entity.getHihokenshaShimei());
+        target.setUmareYMD(entity.getUmareYMD());
+        target.setSeibetsuCode(entity.getSeibetsuCode());
+        target.setShotokuKubun(entity.getShotokuKubun());
+        target.setOver70_ShotokuKubun(entity.getOver70_ShotokuKubun());
+        target.setJikoFutanSeiriNo(entity.getJikoFutanSeiriNo());
+        target.setKoki_HokenshaNo(entity.getKoki_HokenshaNo());
+        target.setKoki_HihokenshaNo(entity.getKoki_HihokenshaNo());
+        target.setKokuho_HokenshaNo(entity.getKokuho_HokenshaNo());
+        target.setKokuho_HihokenshaShoNo(entity.getKokuho_HihokenshaShoNo());
+        target.setKokuho_KojinNo(entity.getKokuho_KojinNo());
+        target.setIdoKubun(entity.getIdoKubun());
+        target.setHoseiZumiSofuKubun(entity.getHoseiZumiSofuKubun());
+        target.setTaishoKeisanKaishiYMD(entity.getTaishoKeisanKaishiYMD());
+        target.setTaishoKeisanShuryoYMD(entity.getTaishoKeisanShuryoYMD());
+        target.setHihokenshaKaishiYMD(entity.getHihokenshaKaishiYMD());
+        target.setHihokenshaShuryoYMD(entity.getHihokenshaShuryoYMD());
+        target.setShinseiYMD(entity.getShinseiYMD());
+        target.setGokei_JikoFutanGaku(entity.getGokei_JikoFutanGaku());
+        target.setGokei_70_74JikoFutanGaku(entity.getGokei_70_74JikoFutanGaku());
+        target.setGokei_Under70KogakuShikyuGaku(entity.getGokei_Under70KogakuShikyuGaku());
+        target.setGokei_70_74KogakuShikyuGaku(entity.getGokei_70_74KogakuShikyuGaku());
+        target.setSumi_Gokei_JikoFutanGaku(entity.getSumi_Gokei_JikoFutanGaku());
+        target.setSumi_Gokei_70_74JikoFutanGaku(entity.getSumi_Gokei_70_74JikoFutanGaku());
+        target.setSumi_Gokei_Under70KogakuShikyuGaku(entity.getSumi_Gokei_Under70KogakuShikyuGaku());
+        target.setSumi_Gokei_70_74KogakuShikyuGaku(entity.getSumi_Gokei_70_74KogakuShikyuGaku());
+        target.setAtesakiShimei(entity.getAtesakiShimei());
+        target.setAtesakiYubinNo(entity.getAtesakiYubinNo());
+        target.setAtesakiJusho(entity.getAtesakiJusho());
+        target.setMadoguchi_TaishoshaHanteiCode(entity.getMadoguchi_TaishoshaHanteiCode());
+        target.setShiharaiBasho(entity.getShiharaiBasho());
+        target.setShikaraiKaishiYMD(entity.getShikaraiKaishiYMD());
+        target.setShiharaiShuryoYMD(entity.getShiharaiShuryoYMD());
+        target.setHeichoNaiyo(entity.getHeichoNaiyo());
+        target.setShiharaiKaishiTime(entity.getShiharaiKaishiTime());
+        target.setShiharaiShuryoTime(entity.getShiharaiShuryoTime());
+        target.setBiko(entity.getBiko());
+        target.setDataSakuseiKubun(entity.getDataSakuseiKubun());
+        target.setKakunin_UketoriYM(entity.getKakunin_UketoriYM());
+        target.setHoseiZumi_SofuYM(entity.getHoseiZumi_SofuYM());
+        target.setShomeisho_UketoriYM(entity.getShomeisho_UketoriYM());
+        target.setSaisoFlag(entity.getSaisoFlag());
+        target.setSofuTaishoGaiFlag(entity.getSofuTaishoGaiFlag());
+        target.setJikoFutanKeisanYMD(entity.getJikoFutanKeisanYMD());
+        target.setShomeiShoSakuseiYMD(entity.getShomeiShoSakuseiYMD());
+        target.setKoki_KokuhoShoriKubun(entity.getKoki_KokuhoShoriKubun());
+        target.setJikoFutangakuShomeishoRealHakkoFlag(entity.getJikoFutangakuShomeishoRealHakkoFlag());
+        target.setBatchHoseiJissiYMD(entity.getBatchHoseiJissiYMD());
+        target.setRealHoseiJissiYMD(entity.getRealHoseiJissiYMD());
+        return target;
+    }
+
+    /**
+     * toDbT3071KogakuGassanJikoFutanGakuMeisaiEntityのメソッドです。
+     *
+     * @param entity DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity
+     * @return DbT3071KogakuGassanJikoFutanGakuMeisaiEntity
+     */
+    public DbT3071KogakuGassanJikoFutanGakuMeisaiEntity toDbT3071KogakuGassanJikoFutanGakuMeisaiEntity(
+            DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity entity) {
+        DbT3071KogakuGassanJikoFutanGakuMeisaiEntity target = new DbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
+        target.setInsertDantaiCd(entity.getInsertDantaiCd());
+        target.setIsDeleted(entity.getIsDeleted());
+        target.setHihokenshaNo(entity.getHihokenshaNo());
+        target.setTaishoNendo(entity.getTaishoNendo());
+        target.setHokenshaNo(entity.getHokenshaNo());
+        target.setShikyuShinseishoSeiriNo(entity.getShikyuShinseishoSeiriNo());
+        target.setRirekiNo(entity.getRirekiNo());
+        target.setTaishoM(entity.getTaishoM());
+        target.setJikoFutanGaku(entity.getJikoFutanGaku());
+        target.setUchisu_70_74JikoFutanGaku(entity.getUchisu_70_74JikoFutanGaku());
+        target.setUnder_70KogakuShikyuGaku(entity.getUnder_70KogakuShikyuGaku());
+        target.setOver_70_74KogakuShikyuGaku(entity.getOver_70_74KogakuShikyuGaku());
+        target.setTekiyo(entity.getTekiyo());
+        target.setSumi_JikoFutanGaku(entity.getSumi_JikoFutanGaku());
+        target.setSumi_70_74JikoFutanGaku(entity.getSumi_70_74JikoFutanGaku());
+        target.setSumi_under_70KogakuShikyuGaku(entity.getSumi_under_70KogakuShikyuGaku());
+        target.setSumi_70_74KogakuShikyuGaku(entity.getSumi_70_74KogakuShikyuGaku());
+        target.setSumi_Tekiyo(entity.getSumi_Tekiyo());
+        return target;
     }
 
     private void set高額合算自己負担額明細項目(
-            DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity entity, JissekiFutangakuDataTempEntity 実績負担額データ, int index) {
-        entity.setJikoFutanGaku(getDecimalFromToken(実績負担額データ, JIKOFUTANGAKU, suffixList.get(index)));
-        entity.setUchisu_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, UCHISU_70_74JIKOFUTANGAKU, suffixList.get(index)));
-        entity.setUnder_70KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, UNDER_70KOGAKUSHIKYUGAKU, suffixList.get(index)));
-        entity.setOver_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, OVER_70_74KOGAKUSHIKYUGAKU, suffixList.get(index)));
-        entity.setTekiyo(getRStringFromToken(実績負担額データ, TEKIYO, suffixList.get(index)));
-        entity.setSumi_JikoFutanGaku(getDecimalFromToken(実績負担額データ, SUMI_JIKOFUTANGAKU, suffixList.get(index)));
-        entity.setSumi_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74JIKOFUTANGAKU, suffixList.get(index)));
+            DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity, JissekiFutangakuDataTempEntity 実績負担額データ, RString 対象月) {
+        entity.setJikoFutanGaku(getDecimalFromToken(実績負担額データ, JIKOFUTANGAKU, 対象月));
+        entity.setUchisu_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, UCHISU_70_74JIKOFUTANGAKU, 対象月));
+        entity.setUnder_70KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, UNDER_70KOGAKUSHIKYUGAKU, 対象月));
+        entity.setOver_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, OVER_70_74KOGAKUSHIKYUGAKU, 対象月));
+        entity.setTekiyo(getRStringFromToken(実績負担額データ, TEKIYO, 対象月));
+        entity.setSumi_JikoFutanGaku(getDecimalFromToken(実績負担額データ, SUMI_JIKOFUTANGAKU, 対象月));
+        entity.setSumi_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74JIKOFUTANGAKU, 対象月));
         entity.setSumi_under_70KogakuShikyuGaku(
-                getDecimalFromToken(実績負担額データ, SUMI_UNDER_70KOGAKUSHIKYUGAKU, suffixList.get(index)));
-        entity.setSumi_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74KOGAKUSHIKYUGAKU, suffixList.get(index)));
-        entity.setSumi_Tekiyo(getRStringFromToken(実績負担額データ, SUMI_TEKIYO, suffixList.get(index)));
+                getDecimalFromToken(実績負担額データ, SUMI_UNDER_70KOGAKUSHIKYUGAKU, 対象月));
+        entity.setSumi_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74KOGAKUSHIKYUGAKU, 対象月));
+        entity.setSumi_Tekiyo(getRStringFromToken(実績負担額データ, SUMI_TEKIYO, 対象月));
+    }
+
+    private void set高額合算自己負担額明細項目(
+            DbT3171JigyoKogakuGassanJikoFutanGakuMeisaiEntity entity, JissekiFutangakuDataTempEntity 実績負担額データ, RString 対象月) {
+        entity.setJikoFutanGaku(getDecimalFromToken(実績負担額データ, JIKOFUTANGAKU, 対象月));
+        entity.setUchisu_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, UCHISU_70_74JIKOFUTANGAKU, 対象月));
+        entity.setUnder_70KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, UNDER_70KOGAKUSHIKYUGAKU, 対象月));
+        entity.setOver_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, OVER_70_74KOGAKUSHIKYUGAKU, 対象月));
+        entity.setTekiyo(getRStringFromToken(実績負担額データ, TEKIYO, 対象月));
+        entity.setSumi_JikoFutanGaku(getDecimalFromToken(実績負担額データ, SUMI_JIKOFUTANGAKU, 対象月));
+        entity.setSumi_70_74JikoFutanGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74JIKOFUTANGAKU, 対象月));
+        entity.setSumi_under_70KogakuShikyuGaku(
+                getDecimalFromToken(実績負担額データ, SUMI_UNDER_70KOGAKUSHIKYUGAKU, 対象月));
+        entity.setSumi_70_74KogakuShikyuGaku(getDecimalFromToken(実績負担額データ, SUMI_70_74KOGAKUSHIKYUGAKU, 対象月));
+        entity.setSumi_Tekiyo(getRStringFromToken(実績負担額データ, SUMI_TEKIYO, 対象月));
     }
 
     private HihokenshaNo setHihokenshaNoDataFromRString(RString data) {
