@@ -76,29 +76,6 @@ public class HanyoListParamForKougaku {
     }
 
     /**
-     * 条件を保存するボタン押下です。
-     *
-     * @param div HanyoListParamDiv
-     * @return ResponseData<BatchParameterMap>
-     */
-    public ResponseData<BatchParameterMap> onClick_btnSeikatsuKogakuParamSave(HanyoListParamForKougakuDiv div) {
-        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
-        DBC710140_HanyoListKogakuGassanShinseishoJohoParameter parameter = getHandler(div).onClick_btnKogakuParamSave();
-        responseData.data = new BatchParameterMap(parameter);
-        return responseData;
-    }
-
-    /**
-     * 条件を復元するボタン押下です。
-     *
-     * @param div HanyoListParamDiv
-     * @return ResponseData<HanyoListParamDiv>
-     */
-    public ResponseData<HanyoListParamForKougakuDiv> onClick_tekiyoJyokenFukugen(HanyoListParamForKougakuDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * click事件「実行する」ボタンです。
      *
      * @param div HanyoListParamDiv
