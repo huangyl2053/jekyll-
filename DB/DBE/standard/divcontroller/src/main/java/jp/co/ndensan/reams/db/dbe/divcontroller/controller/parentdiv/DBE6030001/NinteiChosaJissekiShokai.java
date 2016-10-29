@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601003.DBE601003_Shinsa
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosahyojissekiichiran.ChosahyoJissekiIchiranMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001.NinteiChosaJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6030001.NinteiChosaJissekiShokaiHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6030001.NinteiChosaJissekiShokaiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosajissekishokai.NinteiChosaJissekiShokaiFindler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 認定調査実績照会の画面処理クラスです。
@@ -99,7 +101,21 @@ public class NinteiChosaJissekiShokai {
         getHandler(div).set初期状態();
         return ResponseData.of(div).respond();
     }
-
+    
+    /**
+     * データの必須選択チェックを実施します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<NinteiChosaJissekiShokaiDiv>
+     */
+    public ResponseData<NinteiChosaJissekiShokaiDiv> onClick_BatchButton(NinteiChosaJissekiShokaiDiv div) {
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForCheckedDataCount();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 「CSVを出力する」ボタンを押します。
      *
@@ -126,4 +142,7 @@ public class NinteiChosaJissekiShokai {
         return new NinteiChosaJissekiShokaiHandler(div);
     }
 
+    private NinteiChosaJissekiShokaiValidationHandler getValidationHandler(NinteiChosaJissekiShokaiDiv div) {
+        return new NinteiChosaJissekiShokaiValidationHandler(div);
+    }
 }
