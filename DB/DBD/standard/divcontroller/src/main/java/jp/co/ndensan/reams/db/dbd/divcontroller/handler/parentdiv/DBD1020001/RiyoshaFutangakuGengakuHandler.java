@@ -511,6 +511,8 @@ public class RiyoshaFutangakuGengakuHandler {
             div.getTxtKyufuRitsu().setDisabled(true);
             div.getBtnHiShoninRiyu().setDisabled(false);
             div.getTxtHiShoninRiyu().setDisabled(false);
+            div.getDdlKyusochiKubun().setSelectedValue(RString.EMPTY);
+            div.getTxtKyufuRitsu().clearValue();
         }
 
         if (isエリア活性) {
@@ -539,9 +541,19 @@ public class RiyoshaFutangakuGengakuHandler {
      */
     public void get有効期限By適用日() {
         RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
-
-        FlexibleDate 適用日 = div.getTxtTekiyoYmd().getValue();
-        if (適用日.isValid()) {
+        
+        FlexibleDate 適用日 ;
+        
+        List<ddlShinseiIchiran_Row> rowLis = div.getDdlShinseiIchiran().getDataSource();
+        if (rowLis.isEmpty() || rowLis.get(rowLis.size() - 1).getTxtTekiyoYMD() == null) {
+            適用日 = new FlexibleDate(RDate.getNowDate().getYearValue(), 
+                    RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue()); 
+        } else {
+            適用日 = new FlexibleDate(rowLis.get(rowLis.size() - 1).getTxtTekiyoYMD().
+                    getValue().toString());
+        }
+        
+        if (div.getTxtTekiyoYmd().getValue().isValid()) {
             FlexibleDate 有効期限 = service.estimate有効期限(適用日);
             div.getTxtYukoKigenYmd().setValue(有効期限);
         }

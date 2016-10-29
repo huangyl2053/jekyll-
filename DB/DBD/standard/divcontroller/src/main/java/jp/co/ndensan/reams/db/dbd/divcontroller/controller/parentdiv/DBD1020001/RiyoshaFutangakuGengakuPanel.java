@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IParentResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -64,6 +65,8 @@ public class RiyoshaFutangakuGengakuPanel {
     private final RString 文字列_申請一覧を表示する = new RString("申請一覧を表示する");
     private final RString 文字列_申請入力を表示する = new RString("申請入力を表示する");
     private final RString 文字列_承認入力を表示する = new RString("承認入力を表示する");
+    private static final RString 利用者負担額減額申請Title = new RString("利用者負担額減額申請");
+    private static final RString 利用者負担額減額申請承認Title = new RString("利用者負担額減額申請承認");
 
     /**
      * 利用者負担額減額申請の初期化。(オンロード)
@@ -72,6 +75,9 @@ public class RiyoshaFutangakuGengakuPanel {
      * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onLoad(RiyoshaFutangakuGengakuPanelDiv div) {
+        IParentResponse<RiyoshaFutangakuGengakuPanelDiv> response = ResponseData.of(div);
+        response.rootTitle(申請メニュー.equals(ResponseHolder.getMenuID()) ? 利用者負担額減額申請Title : 利用者負担額減額申請承認Title);
+        
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
@@ -86,10 +92,10 @@ public class RiyoshaFutangakuGengakuPanel {
             div.getDdlShinseiIchiran().setDisabled(true);
             InformationMessage message = new InformationMessage(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode(),
                     DbdInformationMessages.受給共通_被保データなし.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            return response.addMessage(message).respond();
         } else if (new RString(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())) {
-            return ResponseData.of(div).respond();
+            return response.respond();
         }
 
         List<RiyoshaFutangakuGengaku> 利用者負担額減額の情報List = getHandler(div).get利用者負担額減額の情報List(被保険者番号);
@@ -113,7 +119,8 @@ public class RiyoshaFutangakuGengakuPanel {
                 }
             }
         }
-        return ResponseData.of(div).setState(DBD1020001StateName.一覧);
+        response.setState(DBD1020001StateName.一覧);
+        return response.respond();
     }
 
     /**
