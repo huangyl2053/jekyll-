@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1350-040 wangxiaodong
  */
+@lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class DBE510001_ShinsakaiAutoWaritsukeParameter extends BatchParameterBase {
 
     private static final String SHINSAKAI_KAISAINO = "shinsakaiKaisaiNo";
@@ -32,7 +35,6 @@ public class DBE510001_ShinsakaiAutoWaritsukeParameter extends BatchParameterBas
      * コンストラクタです。
      */
     public DBE510001_ShinsakaiAutoWaritsukeParameter() {
-
     }
 
     /**
