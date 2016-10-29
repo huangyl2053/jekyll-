@@ -256,7 +256,8 @@ public class YoshikiYonnosan {
                     handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         } else if (内部処理モード_修正.equals(内部処理モード)) {
-            return handler.is修正データ有(handler.get修正データ(get引き継ぎデータ(div))) ? ResponseData.of(div).addMessage(message).respond() : null;
+            return handler.is修正データ有(handler.get修正データ(get引き継ぎデータ(div))) ? 
+                    ResponseData.of(div).addMessage(message).respond() : ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
         }
         return null;
     }

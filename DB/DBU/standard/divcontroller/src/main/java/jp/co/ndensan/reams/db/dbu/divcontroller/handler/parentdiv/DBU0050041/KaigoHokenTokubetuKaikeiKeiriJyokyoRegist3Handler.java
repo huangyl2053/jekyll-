@@ -768,7 +768,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
                 = new FlexibleYear(new RDate(div.getYoshikiYonnosanMeisai().getTxtShukeiYM().getText().toString()).getYear().toString());
         LasdecCode 市町村コード;
         if (!div.getYoshikiYonnosanMeisai().getDdlShicyoson().isDisplayNone()) {
-            市町村コード = new LasdecCode(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey());
+            市町村コード = new LasdecCode(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey().substring(0, 6));
         } else {
             市町村コード = insuranceInfEntity.get市町村コード();
         }

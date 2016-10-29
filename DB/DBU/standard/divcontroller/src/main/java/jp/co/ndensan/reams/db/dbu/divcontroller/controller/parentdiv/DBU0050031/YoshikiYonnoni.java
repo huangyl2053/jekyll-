@@ -404,11 +404,14 @@ public class YoshikiYonnoni {
                 Map<RString, Decimal> 詳細データエリア = new HashMap<>();
 
                 this.put詳細データエリア(詳細データエリア, div);
+                
+                FlexibleYear 報告年 = new FlexibleYear(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().substring(0, 4).toString()); 
+                FlexibleYear 集計対象年 = new FlexibleYear(div.getYoshikiYonnoniMeisai().getTxtShukeiYM().getText().substring(0, 4).toString());
 
                 KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo = new KaigoHokenJigyoHokokuNenpo(
-                        new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().toString()).toString()).getYear(),
+                        報告年,
                         new RString("00"),
-                        new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtShukeiYM().getText().toString()).toString()).getYear(),
+                        集計対象年,
                         new RString("00"),
                         insuranceInf.get統計対象区分(),
                         new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
