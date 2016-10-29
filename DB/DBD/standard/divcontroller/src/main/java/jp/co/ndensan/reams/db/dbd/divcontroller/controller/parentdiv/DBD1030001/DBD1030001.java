@@ -230,6 +230,17 @@ public class DBD1030001 {
         getHandler(div).onClick_radKetteiKubun();
         return ResponseData.of(div).respond();
     }
+    
+    /**
+     * 社会福祉法人等利用者負担軽減申請画面を「特例措置対象者」を押下する。<br/>
+     *
+     * @param div {@link DBD1030001Div 社会福祉法人等利用者負担軽減申請画面Div}
+     * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
+     */
+    public ResponseData<DBD1030001Div> onCLick_chkTokureiTaisho(DBD1030001Div div) {
+        getHandler(div).onCLick_chkTokureiTaisho();
+        return ResponseData.of(div).respond();
+    }
 
     /**
      * 社会福祉法人等利用者負担軽減申請画面を「承認しない理由」を押下する。<br/>

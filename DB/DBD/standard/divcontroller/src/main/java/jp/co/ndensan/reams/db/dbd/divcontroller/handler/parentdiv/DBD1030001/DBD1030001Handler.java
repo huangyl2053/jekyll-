@@ -1406,9 +1406,44 @@ public class DBD1030001Handler {
             div.getChkKyojuhiShokuhiGentei().setDisabled(true);
             div.getChkKyusochiUnitGataJunKoshitsu().setDisabled(true);
             div.getTxtKakuninNo().setDisabled(true);
+            
+            List<RString> selectedKeys = new ArrayList<>();
+            div.getDdlKeigenJiyu().setSelectedIndex(0);
+            div.getTxtKeigenRitsuBunshi().clearValue();
+            div.getTxtKeigenRitsuBunbo().clearValue();
+            div.getChkTokureiTaisho().setSelectedItemsByKey(selectedKeys);
+            div.getChkKyotakuServiceGentei().setSelectedItemsByKey(selectedKeys);
+            div.getChkKyojuhiShokuhiGentei().setSelectedItemsByKey(selectedKeys);
+            div.getChkKyusochiUnitGataJunKoshitsu().setSelectedItemsByKey(selectedKeys);
+            div.getTxtKakuninNo().clearValue();
+            
+            
         }
     }
-
+    
+    /**
+     * 社会福祉法人等利用者負担軽減申請画面を「特例措置対象者」を押下する。
+     *
+     */
+    public void onCLick_chkTokureiTaisho() {
+        List<RString> selectKeys = div.getChkTokureiTaisho().getSelectedKeys();
+        if (selectKeys.isEmpty() || selectKeys.size() != 1) {
+            div.getChkKyotakuServiceGentei().setDisabled(true);
+            div.getChkKyojuhiShokuhiGentei().setDisabled(true);
+            div.getChkKyusochiUnitGataJunKoshitsu().setDisabled(true);
+            List<RString> selectedKeys = new ArrayList<>();
+            div.getChkKyotakuServiceGentei().setSelectedItemsByKey(selectedKeys);
+            div.getChkKyojuhiShokuhiGentei().setSelectedItemsByKey(selectedKeys);
+            div.getChkKyusochiUnitGataJunKoshitsu().setSelectedItemsByKey(selectedKeys); 
+        } else {
+            div.getChkKyotakuServiceGentei().setDisabled(false);
+            div.getChkKyojuhiShokuhiGentei().setDisabled(false);
+            div.getChkKyusochiUnitGataJunKoshitsu().setDisabled(false);
+        } 
+    }
+    
+    
+    
     /**
      * 社会福祉法人等利用者負担軽減申請画面を適用日入力する。
      *
