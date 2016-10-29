@@ -116,7 +116,8 @@ public class HoshuMasutaKoshinValidationHandler {
                 }
                 if (div.getHoshuMasutaTab().getDdlKaigoNinteiShinsaIinShubetsu().getSelectedKey().equals(
                         row.getKaigoNinteiShinsaIinShubetsuCode())
-                        && is期間重複(開始年月.getDomain(), row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(),終了年月.getDomain(), 
+                                row.getKaishiYM().getValue().getYearMonth(),row.getShuryoYM().getValue().getYearMonth())) {
                     validationMessages.add(check期間が重複());
                 }
             }
@@ -154,7 +155,8 @@ public class HoshuMasutaKoshinValidationHandler {
                         row.getZaitakuShisetsuKubunCode())
                         && div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlIkenshoSakuseiKaisuKubun().getSelectedKey().equals(
                                 row.getIkenshoSakuseiKaisuKubunCode())
-                        && is期間重複(開始年月.getDomain(), row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(),終了年月.getDomain(), 
+                                row.getKaishiYM().getValue().getYearMonth(),row.getShuryoYM().getValue().getYearMonth())) {
                     validationMessages.add(check期間が重複());
                 }
             }
@@ -193,7 +195,8 @@ public class HoshuMasutaKoshinValidationHandler {
                         row.getChosaKubunCode())
                         && div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getDdlHomonShubetsu().getSelectedKey().equals(
                                 row.getHomonShubetsuCode())
-                        && is期間重複(開始年月.getDomain(), row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(),終了年月.getDomain(), 
+                                row.getKaishiYM().getValue().getYearMonth(),row.getShuryoYM().getValue().getYearMonth())) {
                     validationMessages.add(check期間が重複());
                 }
             }
@@ -227,7 +230,8 @@ public class HoshuMasutaKoshinValidationHandler {
                     validationMessages.add(checkデータが既に存在());
                 }
                 if (div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue().equals(row.getShinsakaiIinCode())
-                        && is期間重複(開始年月.getDomain(), row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(),終了年月.getDomain(), 
+                                row.getKaishiYM().getValue().getYearMonth(),row.getShuryoYM().getValue().getYearMonth())) {
                     validationMessages.add(check期間が重複());
                 }
             }
@@ -292,9 +296,12 @@ public class HoshuMasutaKoshinValidationHandler {
         return validationMessages;
     }
 
-    private boolean is期間重複(FlexibleYearMonth 新規作成開始年月, FlexibleYearMonth 既に存在終了年月) {
-        return 新規作成開始年月.isBeforeOrEquals(既に存在終了年月);
+    private boolean is期間重複(FlexibleYearMonth 新規作成開始年月, FlexibleYearMonth 新規作成終了年月, FlexibleYearMonth 既に存在開始年月,  FlexibleYearMonth 既に存在終了年月) {
+        
+        return 新規作成開始年月.isBeforeOrEquals(既に存在終了年月)&&既に存在開始年月.isBeforeOrEquals(新規作成開始年月)
+                || 新規作成終了年月.isBeforeOrEquals(既に存在終了年月)&&既に存在開始年月.isBeforeOrEquals(新規作成終了年月);
     }
+
 
     private static enum RRVMessages implements IValidationMessage {
 
