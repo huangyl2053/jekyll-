@@ -139,9 +139,9 @@ public class ImageDisplay {
         }
         if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).dialogOKClose();
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).dialogOKClose();
     }
 
     private ResponseData<ImageDisplayDiv> get_メッセージ(ImageDisplayDiv div, ValidationMessageControlPairs validPairs) {
