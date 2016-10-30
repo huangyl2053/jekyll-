@@ -1989,6 +1989,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             AtenaMeisho 作成事業者名称 = JutakuKaishuJizenShinsei.createInstance().getJigyoshaName(作成事業者);
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
                     .getTxtCreationJigyoshaName().setDomain(作成事業者名称);
+        } else {
+            div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
+                    .getTxtCreationJigyoshaName().setDomain(AtenaMeisho.EMPTY);
         }
     }
 

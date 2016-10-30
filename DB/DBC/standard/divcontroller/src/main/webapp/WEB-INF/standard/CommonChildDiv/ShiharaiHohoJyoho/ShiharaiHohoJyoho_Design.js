@@ -12,8 +12,16 @@ var DBC;
                 return "onBlur_txtStartYMD";
             };
 
+            Events.onBlur_txtStartHHMM = function () {
+                return "onBlur_txtStartHHMM";
+            };
+
             Events.onBlur_txtEndYMD = function () {
                 return "onBlur_txtEndYMD";
+            };
+
+            Events.onBlur_txtEndHHMM = function () {
+                return "onBlur_txtEndHHMM";
             };
 
             Events.onClick_radKoza = function () {
