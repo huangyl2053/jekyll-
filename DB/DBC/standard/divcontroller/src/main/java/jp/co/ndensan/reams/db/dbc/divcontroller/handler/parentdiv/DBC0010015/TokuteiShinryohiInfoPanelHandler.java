@@ -161,6 +161,8 @@ public class TokuteiShinryohiInfoPanelHandler {
         row_2.setTxtBtnTekiyoNayiyo(給付実績特定診療費_特別療養費.get摘要());
         dataSources.add(row_1);
         dataSources.add(row_2);
+        List<dgTokuteiShinryohiToH1503_Row> dataSources1503 = new ArrayList<>();
+        div.getDgTokuteiShinryohiToH1503().setDataSource(dataSources1503);
         div.getDgTokuteiShinryohiFromH1504().setDataSource(dataSources);
     }
 
@@ -300,6 +302,8 @@ public class TokuteiShinryohiInfoPanelHandler {
         給付実績特定診療費Sources.add(row_後_公費２);
         給付実績特定診療費Sources.add(row_公費３);
         給付実績特定診療費Sources.add(row_後_公費３);
+        List<dgTokuteiShinryohiFromH1504_Row> dataSources = new ArrayList<>();
+        div.getDgTokuteiShinryohiFromH1504().setDataSource(dataSources);
         div.getDgTokuteiShinryohiToH1503().setDataSource(給付実績特定診療費Sources);
     }
 
@@ -581,10 +585,10 @@ public class TokuteiShinryohiInfoPanelHandler {
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
         if (提供年月.isBeforeOrEquals(今提供年月)) {
             filt特別療養費リスト(給付実績特定診療費_特別療養費等);
-            this.set特別療養費前月と次月(給付実績特定診療費_特別療養費等, サービス提供年月);
+            this.set特別療養費前月と次月(給付実績特定診療費_特別療養費等, 今提供年月);
         } else {
             filt特定診療費リスト(給付実績特定診療費等);
-            set特定診療費前月と次月(給付実績特定診療費等, サービス提供年月);
+            set特定診療費前月と次月(給付実績特定診療費等, 今提供年月);
         }
     }
 
