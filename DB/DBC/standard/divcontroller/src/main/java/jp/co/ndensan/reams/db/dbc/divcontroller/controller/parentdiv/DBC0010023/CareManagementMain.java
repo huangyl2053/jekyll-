@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010023;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCareManagementHiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCareManagementHiJyohou;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiCommonHeader;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKihonJyohou;
@@ -17,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010023.Care
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010023.DBC0010023TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010023.CareManagementHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -55,7 +58,8 @@ public class CareManagementMain {
         }
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
-        getHandler(div).set給付実績ケアマネジメント費データ(getCsData_M(), サービス提供年月, 事業者番号リスト);
+        getHandler(div).setJigyoshaBtn(事業者番号リスト);
+        getHandler(div).set給付実績ケアマネジメント費データ(getCsData_M(), サービス提供年月);
         return createResponse(div);
     }
 
@@ -66,11 +70,21 @@ public class CareManagementMain {
      * @return ResponseData
      */
     public ResponseData<CareManagementMainDiv> onClick_btnZengetsu(CareManagementMainDiv div) {
-        List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
-                KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
-        getHandler(div).change年月(new RString("前月"), getCsData_M(), 事業者番号リスト);
+        List<KyufujissekiKihon> 給付実績基本情報 = getCsData_A();
+        RString 整理番号 = get整理番号(給付実績基本情報);
+        NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
+                .getKojinKakuteiKey().get被保険者番号();
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月()
+                .getYearMonth().toDateString());
+        getHandler(div).change年月(new RString("前月"), getCsData_M(), サービス提供年月,
+                整理番号, 被保険者番号, 識別番号検索キー);
         FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
+        get給付実績ヘッダ情報2(提供年月, 整理番号, 識別番号検索キー);
+        List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
+                KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
+        getHandler(div).setJigyoshaBtn(事業者番号リスト);
         return createResponse(div);
     }
 
@@ -81,11 +95,21 @@ public class CareManagementMain {
      * @return ResponseData
      */
     public ResponseData<CareManagementMainDiv> onClick_btnJigetsu(CareManagementMainDiv div) {
-        List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
-                KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
-        getHandler(div).change年月(new RString("次月"), getCsData_M(), 事業者番号リスト);
+        List<KyufujissekiKihon> 給付実績基本情報 = getCsData_A();
+        RString 整理番号 = get整理番号(給付実績基本情報);
+        NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
+                .getKojinKakuteiKey().get被保険者番号();
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月()
+                .getYearMonth().toDateString());
+        getHandler(div).change年月(new RString("次月"), getCsData_M(), サービス提供年月,
+                整理番号, 被保険者番号, 識別番号検索キー);
         FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
+        get給付実績ヘッダ情報2(提供年月, 整理番号, 識別番号検索キー);
+        List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
+                KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
+        getHandler(div).setJigyoshaBtn(事業者番号リスト);
         return createResponse(div);
     }
 
@@ -269,5 +293,19 @@ public class CareManagementMain {
     private List<KyufuJissekiCareManagementHiBusiness> getCsData_M() {
         return ViewStateHolder.get(ViewStateKeys.給付実績ケアマネジメント費情報,
                 KyufuJissekiCareManagementHiJyohou.class).getCsData_M();
+    }
+
+    private List<KyufuJissekiHedajyoho2> get給付実績ヘッダ情報2(FlexibleYearMonth サービス提供年月,
+            RString 整理番号, NyuryokuShikibetsuNo 識別番号検索キー) {
+        KyufuJissekiPrmBusiness 給付実績情報照会情報
+                = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
+        List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報 = new ArrayList<>();
+        KyufuJissekiCommonHeader commonHeader = new KyufuJissekiCommonHeader();
+        給付実績ヘッダ情報.addAll(KyufuJissekiShokaiFinder.createInstance().getKyufuJissekiHeaderJoho2(
+                給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(), サービス提供年月, 整理番号, 識別番号検索キー).records());
+        commonHeader.set給付実績ヘッダ情報2(給付実績ヘッダ情報);
+        給付実績情報照会情報.setCommonHeader(commonHeader);
+        ViewStateHolder.put(ViewStateKeys.給付実績情報照会情報, 給付実績情報照会情報);
+        return 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2();
     }
 }

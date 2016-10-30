@@ -59,13 +59,13 @@ public class PanelnlTotalHandler {
     public void onLoad(ShoriDateKanri shori, ChohyoBunruiKanri chohyo) {
         if (shori != null && shori.get対象開始年月日() != null) {
             div.getTxtZenkaiTaishobi().setFromValue(new RDate(shori.get対象開始年月日().toString()));
-            div.getTxtUketsukebi().setFromValue(new RDate(shori.get対象開始年月日().toString())
-                    .plusDay(1));
-            div.getTxtKeteibiJoken().setFromValue(new RDate(shori.get対象開始年月日().toString())
-                    .plusDay(1));
         }
         if (shori != null && shori.get対象終了年月日() != null) {
             div.getTxtZenkaiTaishobi().setToValue(new RDate(shori.get対象終了年月日().toString()));
+            div.getTxtUketsukebi().setFromValue(new RDate(shori.get対象終了年月日().toString())
+                    .plusDay(1));
+            div.getTxtKeteibiJoken().setFromValue(new RDate(shori.get対象終了年月日().toString())
+                    .plusDay(1));
         }
         div.getTxtZenkaiTaishobi().setReadOnly(true);
         div.getRadUketsukebi().setSelectedKey(キー);
