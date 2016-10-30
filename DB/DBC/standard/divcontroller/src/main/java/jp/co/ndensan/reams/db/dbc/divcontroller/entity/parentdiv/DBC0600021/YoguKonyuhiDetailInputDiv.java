@@ -9,10 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class YoguKonyuhiDetailInputDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,10 +34,12 @@ public class YoguKonyuhiDetailInputDiv extends Panel {
     private TextBoxDate txtBuyYMD;
     @JsonProperty("ddlShumoku")
     private DropDownList ddlShumoku;
-    @JsonProperty("txtShohinName")
-    private TextBox txtShohinName;
+    @JsonProperty("商品名")
+    private Label 商品名;
     @JsonProperty("btnShohinmei")
     private ButtonDialog btnShohinmei;
+    @JsonProperty("txtShohinName")
+    private TextBox txtShohinName;
     @JsonProperty("txtSeizoJigyosha")
     private TextBox txtSeizoJigyosha;
     @JsonProperty("txtHanbaiJigyosha")
@@ -45,7 +47,7 @@ public class YoguKonyuhiDetailInputDiv extends Panel {
     @JsonProperty("txtBuyAmount")
     private TextBoxNum txtBuyAmount;
     @JsonProperty("txtHinmokuCode")
-    private TextBoxCode txtHinmokuCode;
+    private TextBox txtHinmokuCode;
     @JsonProperty("radShinsaMethod")
     private RadioButton radShinsaMethod;
     @JsonProperty("btnClear")
@@ -96,21 +98,21 @@ public class YoguKonyuhiDetailInputDiv extends Panel {
     }
 
     /*
-     * gettxtShohinName
-     * @return txtShohinName
+     * get商品名
+     * @return 商品名
      */
-    @JsonProperty("txtShohinName")
-    public TextBox getTxtShohinName() {
-        return txtShohinName;
+    @JsonProperty("商品名")
+    public Label get商品名() {
+        return 商品名;
     }
 
     /*
-     * settxtShohinName
-     * @param txtShohinName txtShohinName
+     * set商品名
+     * @param 商品名 商品名
      */
-    @JsonProperty("txtShohinName")
-    public void setTxtShohinName(TextBox txtShohinName) {
-        this.txtShohinName = txtShohinName;
+    @JsonProperty("商品名")
+    public void set商品名(Label 商品名) {
+        this.商品名 = 商品名;
     }
 
     /*
@@ -129,6 +131,24 @@ public class YoguKonyuhiDetailInputDiv extends Panel {
     @JsonProperty("btnShohinmei")
     public void setBtnShohinmei(ButtonDialog btnShohinmei) {
         this.btnShohinmei = btnShohinmei;
+    }
+
+    /*
+     * gettxtShohinName
+     * @return txtShohinName
+     */
+    @JsonProperty("txtShohinName")
+    public TextBox getTxtShohinName() {
+        return txtShohinName;
+    }
+
+    /*
+     * settxtShohinName
+     * @param txtShohinName txtShohinName
+     */
+    @JsonProperty("txtShohinName")
+    public void setTxtShohinName(TextBox txtShohinName) {
+        this.txtShohinName = txtShohinName;
     }
 
     /*
@@ -190,7 +210,7 @@ public class YoguKonyuhiDetailInputDiv extends Panel {
      * @return txtHinmokuCode
      */
     @JsonProperty("txtHinmokuCode")
-    public TextBoxCode getTxtHinmokuCode() {
+    public TextBox getTxtHinmokuCode() {
         return txtHinmokuCode;
     }
 
@@ -199,7 +219,7 @@ public class YoguKonyuhiDetailInputDiv extends Panel {
      * @param txtHinmokuCode txtHinmokuCode
      */
     @JsonProperty("txtHinmokuCode")
-    public void setTxtHinmokuCode(TextBoxCode txtHinmokuCode) {
+    public void setTxtHinmokuCode(TextBox txtHinmokuCode) {
         this.txtHinmokuCode = txtHinmokuCode;
     }
 
