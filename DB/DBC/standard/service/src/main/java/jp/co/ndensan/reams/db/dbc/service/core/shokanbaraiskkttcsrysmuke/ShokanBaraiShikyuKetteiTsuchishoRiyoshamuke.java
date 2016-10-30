@@ -105,7 +105,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke}のインスタンス
      */
     public static ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke createInstance() {
         return InstanceProvider.create(ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke.class);
@@ -128,8 +129,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100005.getReportId(),
                 batchPram.getHakkoYMD(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-        RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100005.getReportId(), batchPram.getHakkoYMD());
 
         RString 通知文１ = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_1, ONE, batchPram.getHakkoYMD());
@@ -179,7 +178,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
                 item.setRiyu1(増減理由等.substring(ZERO, 文字数_38));
                 item.setRiyu2(増減理由等.substring(文字数_38));
             }
-            item.setBunshoNo(文書番号);
+            item.setBunshoNo(batchPram.get文書番号());
             item.setHihokenshaName(shoShiharai.get被保険者氏名());
             RString temp_被保険者番号 = shoShiharai.get被保険者番号().value();
             temp_被保険者番号 = temp_被保険者番号.padRight(TEN);
