@@ -455,17 +455,18 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * @param サービス提供年月 サービス提供年月
      */
     public void check前次月Btn(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-
-        if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
-            div.getBtnZengetsu().setDisabled(true);
-        } else {
-            div.getBtnZengetsu().setDisabled(false);
-        }
-        if (サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnJigetsu().setDisabled(true);
-        } else {
-            div.getBtnJigetsu().setDisabled(false);
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+            if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
+                div.getBtnZengetsu().setDisabled(true);
+            } else {
+                div.getBtnZengetsu().setDisabled(false);
+            }
+            if (サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
+                div.getBtnJigetsu().setDisabled(true);
+            } else {
+                div.getBtnJigetsu().setDisabled(false);
+            }
         }
     }
 
