@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -88,9 +90,11 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
      * 帳票データ作成します。
      *
      * @param entity 広域内住所地特例者一覧表情報Entity
+     * @param 出力順entity 出力順entity
      * @return 帳票用データ
      */
-    public static List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> createReportDate(KoikinaiJushochiTokureiItiranEntity entity) {
+    public static List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> createReportDate(KoikinaiJushochiTokureiItiranEntity entity,
+            ShutsuryokujunRelateEntity 出力順entity) {
         List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> データList = new ArrayList<>();
         RDateTime printdate = RDateTime.now();
         RStringBuilder printTimeStampSb = new RStringBuilder();
@@ -110,11 +114,16 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
         RString 印刷日時 = printTimeStampSb.toRString();
         RString 市町村コード = entity.get市町村コード();
         RString 市町村名 = entity.get市町村名();
-        RString 並び順1 = entity.get並び順();
-        RString 並び順2 = entity.get並び順();
-        RString 並び順3 = entity.get並び順();
-        RString 並び順4 = entity.get並び順();
-        RString 並び順5 = entity.get並び順();
+        RString 並び順1 = 出力順entity.get出力順1();
+        RString 並び順2 = 出力順entity.get出力順2();
+        RString 並び順3 = 出力順entity.get出力順3();
+        RString 並び順4 = 出力順entity.get出力順4();
+        RString 並び順5 = 出力順entity.get出力順5();
+        RString 改頁1 = 出力順entity.get改頁項目1();
+        RString 改頁2 = 出力順entity.get改頁項目2();
+        RString 改頁3 = 出力順entity.get改頁項目3();
+        RString 改頁4 = 出力順entity.get改頁項目4();
+        RString 改頁5 = 出力順entity.get改頁項目5();
         if (entity.get広域内住所地特例者List().isEmpty()) {
             KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei データ = new KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei();
             データ.set印刷日時(印刷日時);
@@ -126,11 +135,11 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
             データ.set並び順３(並び順3);
             データ.set並び順４(並び順4);
             データ.set並び順５(並び順5);
-            データ.set改頁１(RString.EMPTY);
-            データ.set改頁２(RString.EMPTY);
-            データ.set改頁３(RString.EMPTY);
-            データ.set改頁４(RString.EMPTY);
-            データ.set改頁５(RString.EMPTY);
+            データ.set改頁１(改頁1);
+            データ.set改頁２(改頁2);
+            データ.set改頁３(改頁3);
+            データ.set改頁４(改頁4);
+            データ.set改頁５(改頁5);
             データ.set氏名(氏名_データなし);
             データList.add(データ);
         } else {
@@ -146,11 +155,11 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
                 データ.set並び順３(並び順3);
                 データ.set並び順４(並び順4);
                 データ.set並び順５(並び順5);
-                データ.set改頁１(RString.EMPTY);
-                データ.set改頁２(RString.EMPTY);
-                データ.set改頁３(RString.EMPTY);
-                データ.set改頁４(RString.EMPTY);
-                データ.set改頁５(RString.EMPTY);
+                データ.set改頁１(改頁1);
+                データ.set改頁２(改頁2);
+                データ.set改頁３(改頁3);
+                データ.set改頁４(改頁4);
+                データ.set改頁５(改頁5);
                 データ.set氏名(氏名_データなし);
                 データ.set被保険者番号(該当データ.get被保険者番号());
                 データ.set氏名カナ(該当データ.get氏名カナ());
@@ -205,6 +214,82 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
         }
         return new RDate(time.toString()).wareki()
                 .separator(Separator.PERIOD).fillType(FillType.NONE).toDateString();
+    }
+
+    /**
+     * 帳票分類ID「DBU200005_KoikinaiJushochitokureishaIchiranhyo」（広域内住所地特例者一覧表）出力順設定可能項目です。
+     */
+    public enum ShutsuryokujunEnum implements IReportItems {
+
+        /**
+         * 町域コード
+         */
+        町域コード(new RString("0002"), new RString("list_choikiCode"), new RString("\"ShikibetsuTaisho_choikiCode\"")),
+        /**
+         * 行政区コード
+         */
+        行政区コード(new RString("0004"), new RString("listUpper_5"), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
+        /**
+         * 世帯コード
+         */
+        世帯コード(new RString("0008"), new RString("listLower_4"), new RString("\"ShikibetsuTaisho_setaiCode\"")),
+        /**
+         * 識別コード
+         */
+        識別コード(new RString("0009"), new RString("listLower_1"), new RString("\"dbT1001HihokenshaDaicho_shikibetsuCode\"")),
+        /**
+         * 氏名５０音カナ
+         */
+        氏名５０音カナ(new RString("0010"), new RString("listUpper_2"), new RString("\"ShikibetsuTaisho_kanaMeisho\"")),
+        /**
+         * 生年月日
+         */
+        生年月日(new RString("0010"), new RString("listUpper_3"), new RString("\"ShikibetsuTaisho_seinengappiYMD\"")),
+        /**
+         * 性別
+         */
+        性別(new RString("0012"), new RString("listLower_3"), new RString("\"ShikibetsuTaisho_seibetsuCode\"")),
+        /**
+         * 市町村コード
+         */
+        市町村コード(new RString("0013"), new RString("list_shichosonCode"), new RString("\"dbT1001HihokenshaDaicho_shichosonCode\"")),
+        /**
+         * 被保険者番号
+         */
+        被保険者番号(new RString("0104"), new RString("listUpper_1"), new RString("\"dbT1001HihokenshaDaicho_hihokenshaNo\"")),
+        /**
+         * 資格取得日
+         */
+        資格取得日(new RString("0105"), new RString("listUpper_7"), new RString("\"dbT1001HihokenshaDaicho_shikakuShutokuYMD\"")),
+        /**
+         * 資格喪失日
+         */
+        資格喪失日(new RString("0106"), new RString("listUpper_9"), new RString("\"dbT1001HihokenshaDaicho_shikakuSoshitsuYMD\""));
+
+        private final RString 項目ID;
+        private final RString フォームフィールド名;
+        private final RString myBatis項目名;
+
+        private ShutsuryokujunEnum(RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
+            this.項目ID = 項目ID;
+            this.フォームフィールド名 = フォームフィールド名;
+            this.myBatis項目名 = myBatis項目名;
+        }
+
+        @Override
+        public RString get項目ID() {
+            return 項目ID;
+        }
+
+        @Override
+        public RString getフォームフィールド名() {
+            return フォームフィールド名;
+        }
+
+        @Override
+        public RString getMyBatis項目名() {
+            return myBatis項目名;
+        }
     }
 
 }

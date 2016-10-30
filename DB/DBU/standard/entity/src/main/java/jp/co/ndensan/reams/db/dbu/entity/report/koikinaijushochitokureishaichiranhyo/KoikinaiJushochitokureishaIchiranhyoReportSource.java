@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.entity.report.koikinaijushochitokureishaichiranhyo;
+package jp.co.ndensan.reams.db.dbu.entity.report.koikinaijushochitokureishaichiranhyo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -84,6 +84,11 @@ public class KoikinaiJushochitokureishaIchiranhyoReportSource implements IReport
     public RString listLower_10;
     @ReportItem(name = "listLower_11", length = 7, order = 36)
     public RString listLower_11;
+    @ReportItem(name = "list_choikiCode", length = 7, order = 37)
+    public RString list_choikiCode;
+    @ReportItem(name = "list_shichosonCode", length = 7, order = 38)
+    public RString list_shichosonCode;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

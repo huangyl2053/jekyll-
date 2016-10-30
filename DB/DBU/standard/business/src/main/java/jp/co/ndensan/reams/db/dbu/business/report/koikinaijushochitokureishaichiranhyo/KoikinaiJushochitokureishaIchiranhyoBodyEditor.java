@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo;
+package jp.co.ndensan.reams.db.dbu.business.report.koikinaijushochitokureishaichiranhyo;
 
-import jp.co.ndensan.reams.db.dba.entity.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoReportSource;
 
 /**
  * 広域内住所地特例者一覧表ボディEditorです。

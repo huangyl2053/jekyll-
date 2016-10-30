@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo;
+package jp.co.ndensan.reams.db.dbu.business.report.koikinaijushochitokureishaichiranhyo;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -17,21 +16,21 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class KoikinaiJushochitokureishaIchiranhyoReport extends Report<KoikinaiJushochitokureishaIchiranhyoReportSource> {
 
-    private final List<KoikinaiJushochitokureishaIchiranhyoBody> bodyItemList;
+    private final KoikinaiJushochitokureishaIchiranhyoBody bodyItem;
     private final KoikinaiJushochitokureishaIchiranhyoHead headItem;
 
     /**
      * インスタンスを生成します。
      *
      * @param headItem 広域内住所地特例者一覧表ヘッダのITEM
-     * @param itemList 広域内住所地特例者一覧表のITEMリスト
+     * @param bodyItem 広域内住所地特例者一覧表のITEMリスト
      */
     public KoikinaiJushochitokureishaIchiranhyoReport(
             KoikinaiJushochitokureishaIchiranhyoHead headItem,
-            List<KoikinaiJushochitokureishaIchiranhyoBody> itemList) {
+            KoikinaiJushochitokureishaIchiranhyoBody bodyItem) {
 
         this.headItem = headItem;
-        this.bodyItemList = itemList;
+        this.bodyItem = bodyItem;
     }
 
     /**
@@ -40,11 +39,9 @@ public class KoikinaiJushochitokureishaIchiranhyoReport extends Report<KoikinaiJ
      */
     @Override
     public void writeBy(ReportSourceWriter<KoikinaiJushochitokureishaIchiranhyoReportSource> reportSourceWriter) {
-        for (KoikinaiJushochitokureishaIchiranhyoBody bodyItem : bodyItemList) {
-            IKoikinaiJushochitokureishaIchiranhyoEditor headerEditor = new KoikinaiJushochitokureishaIchiranhyoHeaderEditor(headItem);
-            IKoikinaiJushochitokureishaIchiranhyoEditor bodyEditor = new KoikinaiJushochitokureishaIchiranhyoBodyEditor(bodyItem);
-            IKoikinaiJushochitokureishaIchiranhyoBuilder builder = new KoikinaiJushochitokureishaIchiranhyoBuilderImpl(headerEditor, bodyEditor);
-            reportSourceWriter.writeLine(builder);
-        }
+        IKoikinaiJushochitokureishaIchiranhyoEditor headerEditor = new KoikinaiJushochitokureishaIchiranhyoHeaderEditor(headItem);
+        IKoikinaiJushochitokureishaIchiranhyoEditor bodyEditor = new KoikinaiJushochitokureishaIchiranhyoBodyEditor(bodyItem);
+        IKoikinaiJushochitokureishaIchiranhyoBuilder builder = new KoikinaiJushochitokureishaIchiranhyoBuilderImpl(headerEditor, bodyEditor);
+        reportSourceWriter.writeLine(builder);
     }
 }
