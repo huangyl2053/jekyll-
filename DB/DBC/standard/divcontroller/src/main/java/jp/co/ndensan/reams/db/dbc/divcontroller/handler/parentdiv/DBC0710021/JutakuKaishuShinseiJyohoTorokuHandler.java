@@ -1710,9 +1710,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     }
 
     private boolean is更新前と画面正常項目データが変更OK(Entry<RString, RString> entry, Entry<RString, RString> entry1) {
-        return (entry.getValue() == null && entry1.getValue() != null)
-                || (entry.getValue() != null && entry1.getValue() == null)
-                || (!entry.getValue().equals(entry1.getValue()));
+        return (RString.isNullOrEmpty(entry.getValue()) && !RString.isNullOrEmpty(entry1.getValue()))
+                || (!RString.isNullOrEmpty(entry.getValue()) && RString.isNullOrEmpty(entry1.getValue()))
+                || (entry.getValue() != null && entry1.getValue() != null && !entry.getValue().equals(entry1.getValue()));
     }
 
     /**
@@ -1909,9 +1909,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     }
 
     private boolean is住宅改修データ変更OK(RString 更新前, RString 更新後) {
-        if ((更新前 == null && 更新後 != null)
-                || (更新前 != null && 更新後 == null)
-                || (更新前 != null && 更新後 != null && !更新前.equals(更新後))) {
+        if ((RString.isNullOrEmpty(更新前) && !RString.isNullOrEmpty(更新後))
+                || (!RString.isNullOrEmpty(更新前) && RString.isNullOrEmpty(更新後))
+                || (!RString.isNullOrEmpty(更新前) && 更新後 != null && !更新前.equals(更新後))) {
             return true;
         }
         return false;
@@ -1953,7 +1953,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         List<dgGaisyuList_Row> gridList = div.getCcdJutakugaisyunaiyoList()
                 .get住宅改修内容一覧();
         RString 住宅住所 = RString.EMPTY;
-        if (!gridList.isEmpty()) {
+        if (gridList != null && !gridList.isEmpty()) {
             住宅住所 = gridList.get(0).getTxtJutakuAddress();
         }
         JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
@@ -2008,12 +2008,14 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 .get住宅改修内容一覧();
         List<JyutakuGaisyunaiyoListParameter> paramList = new ArrayList<>();
         JyutakuGaisyunaiyoListParameter param;
-        for (dgGaisyuList_Row row : gridList) {
-            RString 状態 = RString.EMPTY.equals(row.getTxtJyotai()) ? 住宅改修_状態 : row.getTxtJyotai();
-            param = JyutakuGaisyunaiyoListParameter.createSelectByKeyParam(
-                    状態, row.getTxtJutakuAddress(),
-                    new FlexibleDate(new RDate(row.getTxtChakkoYoteibi().toString()).toDateString()));
-            paramList.add(param);
+        if (gridList != null) {
+            for (dgGaisyuList_Row row : gridList) {
+                RString 状態 = RString.EMPTY.equals(row.getTxtJyotai()) ? 住宅改修_状態 : row.getTxtJyotai();
+                param = JyutakuGaisyunaiyoListParameter.createSelectByKeyParam(
+                        状態, row.getTxtJutakuAddress(),
+                        new FlexibleDate(new RDate(row.getTxtChakkoYoteibi().toString()).toDateString()));
+                paramList.add(param);
+            }
         }
         return JutakukaishuSikyuShinseiManager.createInstance().checkJyutakuGaisyunaiyoList(paramList,
                 new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth().toDateString()));

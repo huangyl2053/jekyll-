@@ -646,8 +646,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                 return ResponseData.of(div).addMessage(message).respond();
             }
             to限度額リセット対象(要介護状態区分３段階変更チェック, div, 限度額リセット対象);
-        } else if (!要介護状態３段階変更の判定 && (!要介護状態区分３段階変更チェック.isEmpty()
-                && 要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による))) {
+        } else if (is要介護状態３段階変更flag(要介護状態３段階変更の判定, 要介護状態区分３段階変更チェック)) {
             if (is限度額リセット対象(限度額リセット対象外, 改修住所_限度額リセット対象,
                     改修住所_限度額リセット対象外, 住宅改修限度額確認)) {
                 QuestionMessage message = new QuestionMessage(
@@ -657,11 +656,10 @@ public class JutakuKaishuShinseiJyohoToroku {
             }
             to限度額リセット対象外(要介護状態区分３段階変更チェック, div, 限度額リセット対象外);
         }
-        List<dgGaisyuList_Row> gridList = div.getCcdJutakugaisyunaiyoList()
-                .get住宅改修内容一覧();
+        RString 改修住宅住所 = editor改修住宅住所(div);
         JutakuKaishuJyusyoChofukuHanntei chofukuHanntei = JutakuKaishuJyusyoChofukuHanntei.createInstance();
         boolean is改修住所重複 = chofukuHanntei.checkKaishuJyusyoChofukuToroku(被保険者番号,
-                画面提供着工年月, gridList.get(0).getTxtJutakuAddress());
+                画面提供着工年月, 改修住宅住所);
         if (is改修住所変更(is改修住所重複, 要介護状態区分３段階変更チェック)) {
             if (is改修住所_限度額リセット対象(改修住所_限度額リセット対象, 住宅改修限度額確認)) {
                 QuestionMessage message = new QuestionMessage(
@@ -670,8 +668,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                 return ResponseData.of(div).addMessage(message).respond();
             }
             to改修住所_限度額リセット対象(要介護状態区分３段階変更チェック, div, 改修住所_限度額リセット対象);
-        } else if (is改修住所重複 && (!要介護状態区分３段階変更チェック.isEmpty()
-                && 要介護状態区分３段階変更チェック.contains(住宅住所変更による))) {
+        } else if (is要介護状態区分３段階変更flag(is改修住所重複, 要介護状態区分３段階変更チェック)) {
             if (is改修住所_限度額リセット対象(改修住所_限度額リセット対象外, 住宅改修限度額確認)) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().getCode(),
@@ -705,14 +702,36 @@ public class JutakuKaishuShinseiJyohoToroku {
         return ResponseData.of(div).respond();
     }
 
+    private boolean is要介護状態区分３段階変更flag(boolean is改修住所重複, List<RString> 要介護状態区分３段階変更チェック) {
+        return is改修住所重複 && (要介護状態区分３段階変更チェック != null && !要介護状態区分３段階変更チェック.isEmpty()
+                && 要介護状態区分３段階変更チェック.contains(住宅住所変更による));
+    }
+
+    private boolean is要介護状態３段階変更flag(boolean 要介護状態３段階変更の判定,
+            List<RString> 要介護状態区分３段階変更チェック) {
+        return !要介護状態３段階変更の判定 && (要介護状態区分３段階変更チェック != null
+                && !要介護状態区分３段階変更チェック.isEmpty()
+                && 要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による));
+    }
+
+    private RString editor改修住宅住所(JutakuKaishuShinseiJyohoTorokuDiv div) {
+        List<dgGaisyuList_Row> gridList = div.getCcdJutakugaisyunaiyoList()
+                .get住宅改修内容一覧();
+        RString 改修住宅住所 = null;
+        if (gridList != null && !gridList.isEmpty()) {
+            改修住宅住所 = gridList.get(0).getTxtJutakuAddress();
+        }
+        return 改修住宅住所;
+    }
+
     private boolean is改修住所変更(boolean is改修住所重複, List<RString> 要介護状態区分３段階変更チェック) {
-        return !is改修住所重複 && (要介護状態区分３段階変更チェック.isEmpty()
+        return !is改修住所重複 && (要介護状態区分３段階変更チェック == null || 要介護状態区分３段階変更チェック.isEmpty()
                 || !要介護状態区分３段階変更チェック.contains(住宅住所変更による));
     }
 
     private boolean is要介護状態３段階変更(boolean 要介護状態３段階変更の判定,
             List<RString> 要介護状態区分３段階変更チェック) {
-        return 要介護状態３段階変更の判定 && (要介護状態区分３段階変更チェック.isEmpty()
+        return 要介護状態３段階変更の判定 && (要介護状態区分３段階変更チェック == null || 要介護状態区分３段階変更チェック.isEmpty()
                 || !要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による));
     }
 
@@ -776,7 +795,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     private JutakuKaishuShinseiJyohoTorokuValidationHandler getJutakuKaishuShinseiJyohoTorokuValidationHandler(
             JutakuKaishuShinseiJyohoTorokuDiv div, RString 画面モード, RString 住宅改修内容チェックエラーメッセージ,
             boolean is給付率) {
-        if (画面モード != null || 住宅改修内容チェックエラーメッセージ != null) {
+        if (!RString.isNullOrEmpty(画面モード) || !RString.isNullOrEmpty(住宅改修内容チェックエラーメッセージ)) {
             return new JutakuKaishuShinseiJyohoTorokuValidationHandler(
                     画面モード, div, 住宅改修内容チェックエラーメッセージ, is給付率);
         } else {
