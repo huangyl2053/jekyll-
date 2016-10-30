@@ -340,7 +340,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         JigyoshaMode jigyoshaMode = DataPassingConverter.deserialize(div.getJigyoshaMode(), JigyoshaMode.class);
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaNo().setValue(
                 jigyoshaMode.getJigyoshaNo().value());
-        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseishaNameKana().setValue(
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaName().setPlaceHolder(
                 jigyoshaMode.getJigyoshaName().value());
         return ResponseData.of(div).respond();
     }

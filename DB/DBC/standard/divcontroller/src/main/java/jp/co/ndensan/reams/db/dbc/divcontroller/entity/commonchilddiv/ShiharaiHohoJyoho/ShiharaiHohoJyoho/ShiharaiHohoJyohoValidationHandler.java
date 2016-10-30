@@ -83,6 +83,8 @@ public class ShiharaiHohoJyohoValidationHandler {
         return !div.getRadMadoguti().getSelectedKey().isNullOrEmpty()
                 && div.getTxtStartYMD().getValue() != null
                 && div.getTxtEndYMD().getValue() != null
+                && div.getTxtStartHHMM().getValue() != null
+                && div.getTxtEndHHMM().getValue() != null
                 && (div.getTxtStartYMD().getValue().equals(div.getTxtEndYMD().getValue()))
                 && (div.getTxtStartHHMM().getValue().isAfter(div.getTxtEndHHMM().getValue()));
     }
