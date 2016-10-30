@@ -128,7 +128,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(), batchPram.getHakkoYMD(),
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-        RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(), batchPram.getHakkoYMD());
+        RString 文書番号 = batchPram.get文書番号();
 
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
         AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
@@ -222,20 +222,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         抽出条件.add(抽出条件Builder.toRString());
         List<Decimal> ページ数 = new ArrayList<>();
         ページ数.add(Decimal.ONE);
-        // TODO 出力順関連
-//        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().
-//                get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(),
-//                        Long.parseLong(batchPram.getSyutujunId().toString()));
-        List<RString> 出力順項目 = new ArrayList<>();
-        List<RString> 改ページ項目 = new ArrayList<>();
-//        if (outputOrder != null && outputOrder.get設定項目リスト() != null) {
-//            for (ISetSortItem sortItem : outputOrder.get設定項目リスト()) {
-//                出力順項目.add(sortItem.get項目ID());
-//                if (sortItem.is改頁項目()) {
-//                    改ページ項目.add(sortItem.get項目ID());
-//                }
-//            }
-//        }
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         DaikoPrintItem daikoPrintItem = new DaikoPrintItem(SubGyomuCode.DBC介護給付,
                 導入団体クラス.getLasdecCode_(), 導入団体クラス.get市町村名(),
@@ -243,7 +229,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 ReportIdDBC.DBC100004.getReportName(),
                 ReportId.代行プリント送付票チェックなし.value(),
                 帳票名, ページ数, 抽出条件,
-                出力順項目, 改ページ項目, Collections.<RString>emptyList());
+                Collections.<RString>emptyList(),
+                Collections.<RString>emptyList(), Collections.<RString>emptyList());
         IDaikoPrint daikoPrint = DaikoPrintFactory.createInstance(daikoPrintItem);
         return new TensoData(帳票ソースデータ, daikoPrint);
     }
