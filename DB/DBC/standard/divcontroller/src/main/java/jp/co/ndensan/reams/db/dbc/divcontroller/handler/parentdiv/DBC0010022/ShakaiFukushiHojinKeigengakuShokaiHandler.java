@@ -63,13 +63,12 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
                 = get給付実績のデータ(給付実績社会福祉法人軽減額リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月);
         for (KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績社会福祉法人軽減額 : 給付実績社会福祉法人軽減額データ) {
             rowList.add(setEmptyRowData(給付実績社会福祉法人軽減額));
-        }
-        for (KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績社会福祉法人軽減額 : 給付実績社会福祉法人軽減額データ) {
             rowListKo.add(setKoRowData(給付実績社会福祉法人軽減額));
         }
         rowList.addAll(rowListKo);
         div.getDgShakaiFukushiHojinKeigengaku().setDataSource(rowList);
-        setGetsuBtn(getサービス提供年月リスト(給付実績社会福祉法人軽減額リスト), new FlexibleYearMonth(サービス提供年月));
+        setGetsuBtn(getサービス提供年月リスト(get前次月のデータ(給付実績社会福祉法人軽減額リスト, 整理番号, 事業者番号, 様式番号)),
+                new FlexibleYearMonth(サービス提供年月));
     }
 
     private dgShakaiFukushiHojinKeigengaku_Row setEmptyRowData(
@@ -135,6 +134,20 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
                     && 整理番号.equals(給付実績社会福祉法人軽減額.get給付実績社会福祉法人軽減額情報().get整理番号())
                     && 様式番号.equals(給付実績社会福祉法人軽減額.get給付実績社会福祉法人軽減額情報().get入力識別番号().value())
                     && サービス提供年月.equals(給付実績社会福祉法人軽減額.get給付実績社会福祉法人軽減額情報().getサービス提供年月().toDateString())) {
+                給付実績社会福祉法人軽減額データ.add(給付実績社会福祉法人軽減額);
+            }
+        }
+        return 給付実績社会福祉法人軽減額データ;
+    }
+
+    private List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> get前次月のデータ(
+            List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績社会福祉法人軽減額リスト,
+            RString 整理番号, RString 事業者番号, RString 様式番号) {
+        List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績社会福祉法人軽減額データ = new ArrayList<>();
+        for (KyufuJissekiShakaiFukushiHojinKeigengakuBusiness 給付実績社会福祉法人軽減額 : 給付実績社会福祉法人軽減額リスト) {
+            if (事業者番号.equals(給付実績社会福祉法人軽減額.get給付実績社会福祉法人軽減額情報().get事業所番号().value())
+                    && 整理番号.equals(給付実績社会福祉法人軽減額.get給付実績社会福祉法人軽減額情報().get整理番号())
+                    && 様式番号.equals(給付実績社会福祉法人軽減額.get給付実績社会福祉法人軽減額情報().get入力識別番号().value())) {
                 給付実績社会福祉法人軽減額データ.add(給付実績社会福祉法人軽減額);
             }
         }
@@ -229,7 +242,6 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         div.getBtnAtoJigyosha().setDisabled(true);
         div.getBtnMaeJigyosha().setDisabled(true);
-        事業者番号リスト = get事業者番号リスト(事業者番号リスト, new FlexibleYearMonth(サービス提供年月));
         int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
         int i;
         if (前事業者.equals(date)) {
@@ -273,16 +285,6 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
         }
     }
 
-    private List<KyufuJissekiHedajyoho2> get事業者番号リスト(List<KyufuJissekiHedajyoho2> 事業者番号リスト, FlexibleYearMonth サービス提供年月) {
-        List<KyufuJissekiHedajyoho2> 今事業者番号リスト = new ArrayList<>();
-        for (KyufuJissekiHedajyoho2 事業者番号 : 事業者番号リスト) {
-            if (事業者番号.getサービス提供年月().equals(サービス提供年月)) {
-                今事業者番号リスト.add(事業者番号);
-            }
-        }
-        return 今事業者番号リスト;
-    }
-
     /**
      * change年月です。
      *
@@ -316,12 +318,10 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
             }
         }
         FlexibleYearMonth 今提供年月 = サービス提供年月;
-        if (INT_ZERO <= index && index <= サービス提供年月リスト.size() - 1) {
-            if (前月.equals(data) && index != サービス提供年月リスト.size() - 1) {
-                今提供年月 = サービス提供年月リスト.get(index + 1);
-            } else if (次月.equals(data) && INT_ZERO != index) {
-                今提供年月 = サービス提供年月リスト.get(index - 1);
-            }
+        if (前月.equals(data) && index < サービス提供年月リスト.size() - 1) {
+            今提供年月 = サービス提供年月リスト.get(index + 1);
+        } else if (次月.equals(data) && INT_ZERO < index) {
+            今提供年月 = サービス提供年月リスト.get(index - 1);
         }
         List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> 給付実績福祉用具販売費等データ取得リスト
                 = get給付実績のデータ(給付実績社会福祉法人軽減額リスト, div.getCcdKyufuJissekiHeader().get整理番号(),
@@ -338,7 +338,6 @@ public class ShakaiFukushiHojinKeigengakuShokaiHandler {
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
-        事業者番号リスト = get事業者番号リスト(事業者番号リスト, 今提供年月);
         setJigyoshaBtn(事業者番号リスト, div.getCcdKyufuJissekiHeader().get整理番号(),
                 事業者番号, 様式番号, 今提供年月.toDateString(), 実績区分コード);
     }

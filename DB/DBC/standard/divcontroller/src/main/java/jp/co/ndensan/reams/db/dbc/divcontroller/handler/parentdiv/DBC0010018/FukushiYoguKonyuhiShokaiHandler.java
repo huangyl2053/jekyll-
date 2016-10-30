@@ -62,7 +62,8 @@ public class FukushiYoguKonyuhiShokaiHandler {
             rowList.add(setRowData(給付実績福祉用具販売費));
         }
         div.getDgFukushiYoguKonyuhi().setDataSource(rowList);
-        setGetsuBtn(getサービス提供年月リスト(給付実績福祉用具販売費リスト), new FlexibleYearMonth(サービス提供年月));
+        setGetsuBtn(getサービス提供年月リスト(get前次月のデータ(給付実績福祉用具販売費リスト, 整理番号, 事業者番号, 様式番号)),
+                new FlexibleYearMonth(サービス提供年月));
     }
 
     private dgFukushiYoguKonyuhi_Row setRowData(KyufujissekiFukushiYoguHanbaihiBusiness 給付実績福祉用具販売費) {
@@ -106,6 +107,20 @@ public class FukushiYoguKonyuhiShokaiHandler {
                     && 整理番号.equals(給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get整理番号())
                     && 様式番号.equals(給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get入力識別番号().value())
                     && サービス提供年月.equals(給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().getサービス提供年月().toDateString())) {
+                給付実績福祉用具販売費データ.add(給付実績福祉用具販売費);
+            }
+        }
+        return 給付実績福祉用具販売費データ;
+    }
+
+    private List<KyufujissekiFukushiYoguHanbaihiBusiness> get前次月のデータ(
+            List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具販売費リスト,
+            RString 整理番号, RString 事業者番号, RString 様式番号) {
+        List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具販売費データ = new ArrayList<>();
+        for (KyufujissekiFukushiYoguHanbaihiBusiness 給付実績福祉用具販売費 : 給付実績福祉用具販売費リスト) {
+            if (事業者番号.equals(給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get事業所番号().value())
+                    && 整理番号.equals(給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get整理番号())
+                    && 様式番号.equals(給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get入力識別番号().value())) {
                 給付実績福祉用具販売費データ.add(給付実績福祉用具販売費);
             }
         }
@@ -238,7 +253,8 @@ public class FukushiYoguKonyuhiShokaiHandler {
      * @param 実績区分コード RString
      * @return index index
      */
-    public int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月, RString 実績区分コード) {
+    public int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト,
+            RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月, RString 実績区分コード) {
         for (int index = 0; index < 事業者番号リスト.size(); index++) {
             if (事業者番号.equals(事業者番号リスト.get(index).get事業所番号().value())
                     && 整理番号.equals(事業者番号リスト.get(index).get整理番号())
@@ -268,7 +284,6 @@ public class FukushiYoguKonyuhiShokaiHandler {
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         div.getBtnAtoJigyosha().setDisabled(true);
         div.getBtnMaeJigyosha().setDisabled(true);
-        事業者番号リスト = get事業者番号リスト(事業者番号リスト, new FlexibleYearMonth(サービス提供年月));
         int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
         int i;
         if (前事業者.equals(date)) {
@@ -343,7 +358,7 @@ public class FukushiYoguKonyuhiShokaiHandler {
                 break;
             }
         }
-        FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
+        FlexibleYearMonth 今提供年月 = サービス提供年月;
         if (前月.equals(data) && index < サービス提供年月リスト.size() - 1) {
             今提供年月 = サービス提供年月リスト.get(index + 1);
         } else if (INT_ZERO < index && !前月.equals(data)) {
@@ -363,19 +378,8 @@ public class FukushiYoguKonyuhiShokaiHandler {
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
-        事業者番号リスト = get事業者番号リスト(事業者番号リスト, 今提供年月);
         setJigyoshaBtn(事業者番号リスト, div.getCcdKyufuJissekiHeader().get整理番号(),
                 事業者番号, 様式番号, 今提供年月.toDateString(), 実績区分コード);
-    }
-
-    private List<KyufuJissekiHedajyoho2> get事業者番号リスト(List<KyufuJissekiHedajyoho2> 事業者番号リスト, FlexibleYearMonth サービス提供年月) {
-        List<KyufuJissekiHedajyoho2> 今事業者番号リスト = new ArrayList<>();
-        for (KyufuJissekiHedajyoho2 事業者番号 : 事業者番号リスト) {
-            if (事業者番号.getサービス提供年月().equals(サービス提供年月)) {
-                今事業者番号リスト.add(事業者番号);
-            }
-        }
-        return 今事業者番号リスト;
     }
 
     private RString kinngakuFormat(Decimal date) {
