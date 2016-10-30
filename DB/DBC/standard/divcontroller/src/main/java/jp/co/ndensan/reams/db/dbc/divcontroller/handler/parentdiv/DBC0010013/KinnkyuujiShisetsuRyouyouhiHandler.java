@@ -439,7 +439,7 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
         }
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 年月, 新整理番号, 新識別番号);
 
-        setDataGrid(dataToRepeat, 年月.toDateString());
+        setDataGrid(給付実績緊急時施設療養データ取得, 年月.toDateString());
 
     }
 

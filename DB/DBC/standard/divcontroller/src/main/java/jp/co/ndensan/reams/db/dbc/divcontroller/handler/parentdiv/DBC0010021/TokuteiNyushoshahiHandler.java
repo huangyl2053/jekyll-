@@ -329,7 +329,7 @@ public class TokuteiNyushoshahiHandler {
             div.getBtnZengetsu().setDisabled(false);
         }
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 年月, 新整理番号, 新識別番号);
-        setDataGrid(dataToRepeat);
+        setDataGrid(特定入所者費用);
 
     }
 
