@@ -103,7 +103,7 @@ public class ShotokuShokaihyoYokoSource implements IReportSource {
     public RString hihokenshaShimei;
     @ReportItem(name = "hihokenshaumareYMD", length = 11, order = 43)
     public RString hihokenshaumareYMD;
-    @ReportItem(name = "kazeiNendo", length = 6, order = 44)
+    @ReportItem(name = "kazeiNendo", length = 10, order = 44)
     public RString kazeiNendo;
     @ReportItem(name = "yubinBango", length = 8, order = 45)
     public RString yubinBango;
