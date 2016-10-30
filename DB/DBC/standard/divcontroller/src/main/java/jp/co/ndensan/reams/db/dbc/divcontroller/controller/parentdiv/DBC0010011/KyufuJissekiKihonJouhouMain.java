@@ -148,6 +148,11 @@ public class KyufuJissekiKihonJouhouMain {
         clear画面(div);
         if (事業者番号の位置 < サービス提供年月リスト.size() - 1) {
             今提供年月 = サービス提供年月リスト.get(事業者番号の位置 + 1);
+            div.getCcdKyufuJissekiHeader().initialize(
+                    被保険者番号,
+                    今提供年月,
+                    整理番号,
+                    識別番号検索キー);
             List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2(今提供年月, 整理番号, 識別番号検索キー);
             KyufujissekiKihon 給付実績基本 = get給付実績基本情報(給付実績基本情報, 今提供年月,
                     new JigyoshaNo(div.getCcdKyufuJissekiHeader().get事業者番号()),
@@ -182,6 +187,11 @@ public class KyufuJissekiKihonJouhouMain {
         clear画面(div);
         if (INT_ZERO < 事業者番号の位置) {
             今提供年月 = サービス提供年月リスト.get(事業者番号の位置 - 1);
+            div.getCcdKyufuJissekiHeader().initialize(
+                    被保険者番号,
+                    今提供年月,
+                    整理番号,
+                    識別番号検索キー);
             List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2(今提供年月, 整理番号, 識別番号検索キー);
             KyufujissekiKihon 給付実績基本 = get給付実績基本情報(給付実績基本情報, 今提供年月,
                     new JigyoshaNo(div.getCcdKyufuJissekiHeader().get事業者番号()),

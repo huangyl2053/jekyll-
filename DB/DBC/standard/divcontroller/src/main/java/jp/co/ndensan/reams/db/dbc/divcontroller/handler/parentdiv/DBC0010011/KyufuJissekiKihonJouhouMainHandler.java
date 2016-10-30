@@ -183,7 +183,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             RString 給付分類区分, List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報２,
             List<FlexibleYearMonth> サービス提供年月リスト) {
         div.getBtnJigetsu().setDisabled(false);
-        set給付実績基本情報(被保険者番号, サービス提供年月, 整理番号, 識別番号検索キー);
         if (給付実績基本 != null) {
             set申請内容エリア(給付実績基本, サービス提供年月, 事業所名称, 給付分類区分);
             set合計内容エリア(給付実績基本);
@@ -212,7 +211,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             RString 給付分類区分, List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報２,
             List<FlexibleYearMonth> サービス提供年月リスト) {
         div.getBtnZengetsu().setDisabled(false);
-        set給付実績基本情報(被保険者番号, サービス提供年月, 整理番号, 識別番号検索キー);
         if (給付実績基本 != null) {
             set申請内容エリア(給付実績基本, サービス提供年月, 事業所名称, 給付分類区分);
             set合計内容エリア(給付実績基本);
