@@ -174,11 +174,11 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         div.getMishinsaShikyuShinseiListPanel().getTxtKetteiYMD().setValue(RDate.getNowDate());
         if (resultList.isEmpty()) {
             div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.TRUE);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, Boolean.TRUE);
+//            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, Boolean.TRUE);
             return ResponseData.of(div).setState(申請審査);
         } else {
             div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.FALSE);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, Boolean.FALSE);
+//            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, Boolean.FALSE);
             return ResponseData.of(div).setState(申請審査);
         }
     }
