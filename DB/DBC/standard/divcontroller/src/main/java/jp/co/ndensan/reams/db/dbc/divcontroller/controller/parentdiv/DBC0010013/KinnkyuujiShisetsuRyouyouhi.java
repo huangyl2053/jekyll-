@@ -58,7 +58,7 @@ public class KinnkyuujiShisetsuRyouyouhi {
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = 引き継ぎ情報.getCommonHeader().get給付実績ヘッダ情報2();
         getHandler(div).check事業者btn(事業者番号リスト, 整理番号, 事業者番号, 識別番号.value(), サービス提供年月.toDateString(), 実績区分コード);
-        getHandler(div).setDataGrid(getCsData_C());
+        getHandler(div).setDataGrid(getCsData_C(), サービス提供年月.toDateString());
         div.getKyufuJissekiTekiyoPanel().setIsOpen(false);
         return createResponse(div);
     }

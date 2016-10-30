@@ -65,12 +65,12 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
      * 画面のデータを初期化する。
      *
      * @param 給付実績緊急時施設療養データ取得 List<KyufujissekiKinkyuShisetsuRyoyo>
+     * @param サービス提供年月 RString
      */
-    public void setDataGrid(List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得) {
+    public void setDataGrid(List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得, RString サービス提供年月) {
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
-        RString サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString();
         List<KyufujissekiKinkyuShisetsuRyoyo> 特定入所者介護サービス費用list = get給付実績データ(給付実績緊急時施設療養データ取得,
                 整理番号, 事業者番号, 様式番号, サービス提供年月);
         List<KyufujissekiKinkyuShisetsuRyoyo> dataToRepeat = getサービス提供年月list(給付実績緊急時施設療養データ取得);
@@ -439,7 +439,7 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
         }
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 年月, 新整理番号, 新識別番号);
 
-        setDataGrid(dataToRepeat);
+        setDataGrid(dataToRepeat, 年月.toDateString());
 
     }
 
@@ -482,7 +482,7 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
         div.getCcdKyufuJissekiHeader().set整理番号(事業者番号リスト.get(index + i).get整理番号());
         div.getCcdKyufuJissekiHeader().set識別番号名称(事業者番号リスト.get(index + i).get識別番号名称());
         div.getCcdKyufuJissekiHeader().set様式番号(事業者番号リスト.get(index + i).get識別番号());
-        setDataGrid(給付実績緊急時施設療養データ取得);
+        setDataGrid(給付実績緊急時施設療養データ取得, 事業者番号リスト.get(index + i).getサービス提供年月().toDateString());
         div.getBtnMaeJigyosha().setDisabled(true);
         div.getBtnAtoJigyosha().setDisabled(true);
         if (0 < index + i) {
