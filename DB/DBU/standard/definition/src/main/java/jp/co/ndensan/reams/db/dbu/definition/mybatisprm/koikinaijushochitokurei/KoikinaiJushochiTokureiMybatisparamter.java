@@ -26,19 +26,22 @@ public final class KoikinaiJushochiTokureiMybatisparamter implements IMyBatisPar
     private final RString shuryobi;
     private final RString psmShikibetsuTaisho;
     private final boolean isEmptyShichosonCode;
+    private final RString 出力順;
 
     private KoikinaiJushochiTokureiMybatisparamter(RString shichosonCode,
             RString idoYMD,
             RString kaishibi,
             RString shuryobi,
             RString psmShikibetsuTaisho,
-            boolean isEmptyShichosonCode) {
+            boolean isEmptyShichosonCode,
+            RString 出力順) {
         this.shichosonCode = shichosonCode;
         this.idoYMD = idoYMD;
         this.kaishibi = kaishibi;
         this.shuryobi = shuryobi;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.isEmptyShichosonCode = isEmptyShichosonCode;
+        this.出力順 = 出力順;
     }
 
     /**
@@ -49,19 +52,21 @@ public final class KoikinaiJushochiTokureiMybatisparamter implements IMyBatisPar
      * @param kaishibi 今回開始日
      * @param shuryob 今回終了日
      * @param psmShikibetsuTaisho 宛名識別対象PSM
+     * @param 出力順 出力順
      * @return 広域内住所地特例者一覧表のMyBatisパラメータ
      */
     public static KoikinaiJushochiTokureiMybatisparamter createParamter(RString shichosonCode,
             RString idoYMD,
             RString kaishibi,
             RString shuryob,
-            RString psmShikibetsuTaisho) {
+            RString psmShikibetsuTaisho,
+            RString 出力順) {
         boolean isEmptyShichosonCodeFlag = false;
         if (!RString.isNullOrEmpty(shichosonCode) && !市町村DDL1件目コード.equals(shichosonCode)) {
             isEmptyShichosonCodeFlag = true;
         }
         return new KoikinaiJushochiTokureiMybatisparamter(shichosonCode, idoYMD, kaishibi, shuryob,
-                psmShikibetsuTaisho, isEmptyShichosonCodeFlag);
+                psmShikibetsuTaisho, isEmptyShichosonCodeFlag, 出力順);
 
     }
 }

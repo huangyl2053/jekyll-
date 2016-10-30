@@ -16,10 +16,12 @@ import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.Fu
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraikettejoho.SyokanbaraiketteJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -37,6 +39,14 @@ public class PnlTotal {
     private static final RString 差止控除区分_20 = new RString("20");
     private static final RString 差止控除区分_21 = new RString("21");
     private static final RString 差止控除区分_10 = new RString("10");
+    private static final RString CODE_11 = new RString("11");
+    private static final RString CODE_12 = new RString("12");
+    private static final RString CODE_13 = new RString("13");
+    private static final RString CODE_21 = new RString("21");
+    private static final RString CODE_22 = new RString("22");
+    private static final RString CODE_23 = new RString("23");
+    private static final RString CODE_24 = new RString("24");
+    private static final RString CODE_25 = new RString("25");
 
     /**
      * 画面初期化
@@ -52,6 +62,23 @@ public class PnlTotal {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         div.getKaigoCommonPanel().getCcdAtenaInfo().initialize(識別コード);
         div.getKaigoCommonPanel().getCcdShikakuKihon().initialize(被保険者番号);
+        RString 要介護状態区分名称 = div.getKaigoCommonPanel().getCcdShikakuKihon().get要介護状態区分名称() == null
+                ? RString.EMPTY : div.getKaigoCommonPanel().getCcdShikakuKihon().get要介護状態区分名称();
+        RDate 認定開始年月日 = div.getKaigoCommonPanel().getCcdShikakuKihon().get認定開始年月日();
+        RDate 認定終了年月日 = div.getKaigoCommonPanel().getCcdShikakuKihon().get認定終了年月日();
+        if (RString.isNullOrEmpty(要介護状態区分名称)
+                || !(要介護状態区分名称.equals(YokaigoJotaiKubun.toValue(CODE_11).get略称())
+                || 要介護状態区分名称.equals(YokaigoJotaiKubun.toValue(CODE_12).get略称())
+                || 要介護状態区分名称.equals(YokaigoJotaiKubun.toValue(CODE_13).get略称())
+                || 要介護状態区分名称.equals(YokaigoJotaiKubun.toValue(CODE_21).get略称())
+                || 要介護状態区分名称.equals(YokaigoJotaiKubun.toValue(CODE_22).get略称())
+                || 要介護状態区分名称.equals(YokaigoJotaiKubun.toValue(CODE_23).get略称())
+                || 要介護状態区分名称.equals(YokaigoJotaiKubun.toValue(CODE_24).get略称())
+                || 要介護状態区分名称.equals(YokaigoJotaiKubun.toValue(CODE_25).get略称()))
+                || (認定開始年月日 != null && 認定終了年月日 != null && !(認定開始年月日.compareTo(RDate.getNowDate()) <= 0
+                && RDate.getNowDate().compareTo(認定終了年月日) <= 0))) {
+            div.getYoguKonyuhiShikyuShinseiList().getBtnAddShikyuShinsei().setDisabled(true);
+        }
         PnlTotalHandler handler = getHandler(div);
         List<FukushiyouguKonyuhiShikyuShinseiResult> list = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                 getShokanShikyuShinseiList(被保険者番号);

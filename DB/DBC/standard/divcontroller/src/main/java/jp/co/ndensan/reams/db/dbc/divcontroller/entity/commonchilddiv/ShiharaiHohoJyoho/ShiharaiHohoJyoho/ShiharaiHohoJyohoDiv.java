@@ -4,22 +4,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiH
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -29,7 +27,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxKinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxKinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ShiharaiHohoJyoho のクラスファイル
@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBC-0300-010 houtianpeng
  */
 public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
@@ -792,7 +793,7 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -807,11 +808,11 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
+        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
     }
 
-    public void setMode_DisplayMode( DisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
+    public void setMode_DisplayMode(DisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
     }
 
     public static enum PageMode implements ICommonChildDivMode {
@@ -832,7 +833,7 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
             PageMode[] enumArray = PageMode.values();
 
             for (PageMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -847,11 +848,11 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     public PageMode getMode_PageMode() {
-        return (PageMode) _CommonChildDivModeUtil.getMode( this.modes, PageMode.class );
+        return (PageMode) _CommonChildDivModeUtil.getMode(this.modes, PageMode.class);
     }
 
-    public void setMode_PageMode( PageMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, PageMode.class , value );
+    public void setMode_PageMode(PageMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, PageMode.class, value);
     }
 
     // </editor-fold>
@@ -944,6 +945,26 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     @Override
     public RString getKeiyakuNo() {
         return getHandler().getKeiyakuNo();
+    }
+
+    /**
+     * 契約事業者名を取得します。
+     *
+     * @param 契約事業者名 AtenaMeisho
+     */
+    @Override
+    public void set契約事業者名(AtenaMeisho 契約事業者名) {
+        getHandler().set契約事業者名(契約事業者名);
+    }
+
+    /**
+     * 契約番号を取得します。
+     *
+     * @param 契約事業者 RString
+     */
+    @Override
+    public void set契約事業者(RString 契約事業者) {
+        getHandler().set契約事業者(契約事業者);
     }
 
     /**

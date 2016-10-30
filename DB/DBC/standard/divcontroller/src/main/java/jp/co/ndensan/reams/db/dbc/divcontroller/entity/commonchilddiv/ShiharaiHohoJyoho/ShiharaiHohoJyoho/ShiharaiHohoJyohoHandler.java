@@ -100,7 +100,7 @@ public class ShiharaiHohoJyohoHandler {
                 div.getRadKoza().setSelectedKey(支払方法区分.getコード());
                 List<Koza> koza = ShiharaiHohoJyohoFinder.createInstance()
                         .getKozaJyoho(KozaParameter.createParam(支給申請情報.
-                                getKozaId(), null, null)).records();
+                                        getKozaId(), null, null)).records();
                 if (!koza.isEmpty()) {
 
                     口座払いエリアの初期化(koza.get(0), 支給申請情報.getKozaId());
@@ -893,6 +893,24 @@ public class ShiharaiHohoJyohoHandler {
     public RString getKeiyakuNo() {
 
         return div.getTxtKeiyakuNo().getValue();
+    }
+
+    /**
+     * 契約事業者名を取得します。
+     *
+     * @param 契約事業者名 AtenaMeisho
+     */
+    public void set契約事業者名(AtenaMeisho 契約事業者名) {
+        div.getTxtKeiyakuName().setDomain(契約事業者名);
+    }
+
+    /**
+     * 契約事業者を取得します。
+     *
+     * @param 契約事業者 RString
+     */
+    public void set契約事業者(RString 契約事業者) {
+        div.getTxtKeiyakuCode().setValue(契約事業者);
     }
 
     /**

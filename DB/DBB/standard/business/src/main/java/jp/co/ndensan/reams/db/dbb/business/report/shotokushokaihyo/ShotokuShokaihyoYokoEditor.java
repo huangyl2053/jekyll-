@@ -47,6 +47,7 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
     private static final RString 様 = new RString("様");
     private static final RString 転入日 = new RString("転入日");
     private static final RString 転出届出日 = new RString("転出届出日");
+    private static final RString 年度 = new RString("年度");
     private static final RString ハイフンつき = new RString("-");
     private CustomerBarCode barcode;
     private CustomerBarCodeResult result;
@@ -133,7 +134,7 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
         source.hihokenshaumareYMD = 生年月日のフォーマット(new RDate(所得照会票.get生年月日().toString()));
         if (所得照会票.get住民税課税年度() != null) {
             source.kazeiNendo = 所得照会票.get住民税課税年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
-                    .fillType(FillType.BLANK).toDateString();
+                    .fillType(FillType.BLANK).toDateString().concat(年度);
         }
         source.denshiKoin = sourceBuilder.denshiKoin;
         source.hakkoYMD = sourceBuilder.hakkoYMD;
