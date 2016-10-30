@@ -581,22 +581,24 @@ public class TokuteiShinryohiInfoPanelHandler {
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
         if (提供年月.isBeforeOrEquals(今提供年月)) {
             filt特別療養費リスト(給付実績特定診療費_特別療養費等);
+            this.set特別療養費前月と次月(給付実績特定診療費_特別療養費等, サービス提供年月);
         } else {
             filt特定診療費リスト(給付実績特定診療費等);
+            set特定診療費前月と次月(給付実績特定診療費等, サービス提供年月);
         }
     }
 
     private void set特別療養費前月と次月(List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 特別療養費リスト, FlexibleYearMonth サービス提供年月) {
         List<FlexibleYearMonth> サービス提供年月リスト = get特別療養費サービス提供年月リスト(特別療養費リスト);
-        div.getBtnJigetsu().setDisabled(false);
-        div.getBtnZengetsu().setDisabled(false);
-        if (!サービス提供年月リスト.isEmpty()) {
+        div.getBtnZengetsu().setDisabled(true);
+        div.getBtnJigetsu().setDisabled(true);
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
             Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-            if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
-                div.getBtnZengetsu().setDisabled(true);
+            if (!サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
+                div.getBtnZengetsu().setDisabled(false);
             }
-            if (サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
-                div.getBtnJigetsu().setDisabled(true);
+            if (!サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
+                div.getBtnJigetsu().setDisabled(false);
             }
         }
     }
@@ -623,10 +625,10 @@ public class TokuteiShinryohiInfoPanelHandler {
 
     private void set特定診療費前月と次月(List<KyufujissekiTokuteiSinryohi> 特定診療費リスト, FlexibleYearMonth サービス提供年月) {
         List<FlexibleYearMonth> サービス提供年月リスト = get特定診療費サービス提供年月リスト(特定診療費リスト);
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
         div.getBtnZengetsu().setDisabled(true);
         div.getBtnJigetsu().setDisabled(true);
         if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
             if (!サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
                 div.getBtnZengetsu().setDisabled(false);
             }
