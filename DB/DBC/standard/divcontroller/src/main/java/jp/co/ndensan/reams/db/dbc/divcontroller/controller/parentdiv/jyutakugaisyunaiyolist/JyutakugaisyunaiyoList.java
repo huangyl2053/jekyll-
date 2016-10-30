@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -41,6 +42,7 @@ public class JyutakugaisyunaiyoList {
     private static final RString モード_修正 = new RString("更新");
     private static final RString モード_削除 = new RString("削除");
     private static final RString モード_選択 = new RString("選択");
+    private static final RString CONMA = new RString(",");
 
     /**
      * 追加ボタンを押下した際に実行します。
@@ -247,7 +249,8 @@ public class JyutakugaisyunaiyoList {
             requestDiv.getTxtKanseyotebi().setValue(new RDate(dgGaisyuListRow.getTxtKanseiYoteibi().toString()));
         }
         if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtKaishuKingaku())) {
-            requestDiv.getTxtKaisyukingaku().setValue(new Decimal(dgGaisyuListRow.getTxtKaishuKingaku().toString().trim()));
+            requestDiv.getTxtKaisyukingaku().setValue(new Decimal(
+                    dgGaisyuListRow.getTxtKaishuKingaku().toString().replaceAll(CONMA.toString(), RString.EMPTY.toString()).trim()));
         }
     }
 
@@ -327,7 +330,7 @@ public class JyutakugaisyunaiyoList {
         if (requestDiv.getTxtKaisyukingaku().getValue() == null) {
             dgGaisyuListRow.setTxtKaishuKingaku(RString.EMPTY);
         } else {
-            dgGaisyuListRow.setTxtKaishuKingaku(new RString(requestDiv.getTxtKaisyukingaku().getValue().toString()));
+            dgGaisyuListRow.setTxtKaishuKingaku(DecimalFormatter.toコンマ区切りRString(requestDiv.getTxtKaisyukingaku().getValue(), 0));
         }
         dgGaisyuListRow.setTxtJigyosha(requestDiv.getTxtJigyosya().getValue());
         return dgGaisyuListRow;
