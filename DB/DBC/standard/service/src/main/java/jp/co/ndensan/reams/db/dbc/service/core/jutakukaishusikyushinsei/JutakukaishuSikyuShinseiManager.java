@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -454,7 +455,8 @@ public class JutakukaishuSikyuShinseiManager {
             dbt3036entity.setKetteiYMD(parameter.get決定年月日());
             dbt3036entity.setShikyuHushikyuKetteiKubun(parameter.get支給決定区分());
             dbt3036entity.setShiharaiKingaku(parameter.get支払金額());
-            dbt3036entity.setZenkaiShiharaiKingaku(parameter.get前回支払金額());
+            dbt3036entity.setShiharaiKingakuUchiwakeRiyoshabun(Decimal.ZERO);
+            dbt3036entity.setZenkaiShiharaiKingaku(Decimal.ZERO);
             dbt3036entity.setSagakuKingakuGokei(parameter.get差額金額合計());
             dbt3036entity.setState(EntityDataState.Added);
             償還払支給判定結果Dac.save(dbt3036entity);
