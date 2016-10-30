@@ -77,11 +77,9 @@ public class TokuteiShinryohiInfoPanelHandler {
         if (提供年月.isBeforeOrEquals(サービス提供年月)) {
             filt特別療養費リスト(給付実績特定診療費_特別療養費等);
             this.set特別療養費前月と次月(給付実績特定診療費_特別療養費等, サービス提供年月);
-            div.getDgTokuteiShinryohiToH1503().setDisplayNone(true);
         } else {
             filt特定診療費リスト(給付実績特定診療費等);
             set特定診療費前月と次月(給付実績特定診療費等, サービス提供年月);
-            div.getDgTokuteiShinryohiFromH1504().setDisplayNone(true);
         }
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2();
         setJigyoshaBtn(事業者番号リスト);
@@ -503,7 +501,12 @@ public class TokuteiShinryohiInfoPanelHandler {
         }
     }
 
-    private void setJigyoshaBtn(List<KyufuJissekiHedajyoho2> 事業者番号リスト) {
+    /**
+     * 事業者button
+     *
+     * @param 事業者番号リスト 事業者番号リスト
+     */
+    public void setJigyoshaBtn(List<KyufuJissekiHedajyoho2> 事業者番号リスト) {
         div.getBtnMaeJigyosha().setDisabled(true);
         div.getBtnAtoJigyosha().setDisabled(true);
         if (!事業者番号リスト.isEmpty()) {
@@ -575,9 +578,11 @@ public class TokuteiShinryohiInfoPanelHandler {
         } else if (INT_ZERO < index && !前月.equals(data)) {
             今提供年月 = サービス提供年月リスト.get(index - 1);
         }
-        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
-        this.onLoad(給付実績情報照会情報, 今提供年月,
-                給付実績特定診療費_特別療養費等, 給付実績特定診療費等);
+        if (提供年月.isBeforeOrEquals(今提供年月)) {
+            filt特別療養費リスト(給付実績特定診療費_特別療養費等);
+        } else {
+            filt特定診療費リスト(給付実績特定診療費等);
+        }
     }
 
     private void set特別療養費前月と次月(List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 特別療養費リスト, FlexibleYearMonth サービス提供年月) {

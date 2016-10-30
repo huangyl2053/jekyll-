@@ -83,6 +83,9 @@ public class TokuteiShinryohiMain {
         FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 提供年月, 整理番号, 識別番号検索キー);
         set給付実績ヘッダ情報2(提供年月, 整理番号, 識別番号検索キー);
+        List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
+                KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
+        getHandler(div).setJigyoshaBtn(事業者番号リスト);
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return createResponse(div);
     }
@@ -105,6 +108,9 @@ public class TokuteiShinryohiMain {
         FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 提供年月, 整理番号, 識別番号検索キー);
         set給付実績ヘッダ情報2(提供年月, 整理番号, 識別番号検索キー);
+        List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
+                KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
+        getHandler(div).setJigyoshaBtn(事業者番号リスト);
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return createResponse(div);
     }

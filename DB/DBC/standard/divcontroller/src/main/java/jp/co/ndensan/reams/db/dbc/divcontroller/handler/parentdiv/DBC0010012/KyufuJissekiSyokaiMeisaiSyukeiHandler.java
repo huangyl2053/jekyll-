@@ -239,6 +239,37 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
     }
 
     /**
+     * 今提供年月を取得。
+     *
+     * @param data RString
+     * @param 集計情報リスト List<KyufujissekiShukei>
+     * @param 明細情報リスト List<KyufujissekiMeisaiBusiness>
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return 今提供年月
+     */
+    public FlexibleYearMonth get今提供年月(RString data,
+            List<KyufujissekiShukei> 集計情報リスト,
+            List<KyufujissekiMeisaiBusiness> 明細情報リスト,
+            FlexibleYearMonth サービス提供年月) {
+        int index = INT_ZERO;
+        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(集計情報リスト, 明細情報リスト);
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
+            if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
+                index = i;
+                break;
+            }
+        }
+        FlexibleYearMonth 今提供年月 = サービス提供年月;
+        if (TEXT_前月.equals(data) && index < サービス提供年月リスト.size() - 1) {
+            今提供年月 = サービス提供年月リスト.get(index + 1);
+        } else if (INT_ZERO < index && !TEXT_前月.equals(data)) {
+            今提供年月 = サービス提供年月リスト.get(index - 1);
+        }
+        return 今提供年月;
+    }
+
+    /**
      * change年月です。
      *
      * @param data RString
@@ -256,7 +287,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
             List<KyufujissekiMeisaiBusiness> 明細情報リスト, List<KyufujissekiMeisaiJushochiTokureiBusiness> 明細情報特例リスト,
             List<KyufuJissekiHedajyoho2> 事業者番号リスト, FlexibleYearMonth サービス提供年月, RString 整理番号,
             NyuryokuShikibetsuNo 識別番号, List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
-
         int index = INT_ZERO;
         List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(集計情報リスト, 明細情報リスト);
         Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
@@ -308,8 +338,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         RString サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString();
         List<FlexibleYearMonth> サービス提供年月リスト = new ArrayList<>();
-        List<KyufujissekiShukei> 集計情報取得リスト = new ArrayList<>();
-        List<KyufujissekiMeisaiBusiness> 明細情報取得リスト = new ArrayList<>();
         set明細情報の表示制御(様式番号, new FlexibleYearMonth(サービス提供年月));
         set明細情報特例の表示制御(様式番号, new FlexibleYearMonth(サービス提供年月));
         int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
@@ -328,22 +356,12 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
             div.getCcdKyufuJissekiHeader().set識別番号名称(事業者番号リスト.get(index + i).get識別番号名称());
             div.getCcdKyufuJissekiHeader().set様式番号(事業者番号リスト.get(index + i).get識別番号());
             div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(事業者番号リスト.get(index + i).getサービス提供年月().toString()));
-            for (KyufujissekiShukei 集計情報取得 : 集計情報リスト) {
-                if (事業者番号リスト.get(index + i).get事業所番号().value().equals(集計情報取得.get事業所番号().value())) {
-                    集計情報取得リスト.add(集計情報取得);
-                }
-            }
-            for (KyufujissekiMeisaiBusiness 明細情報取得 : 明細情報リスト) {
-                if (事業者番号リスト.get(index + i).get事業所番号().value().equals(明細情報取得.get給付実績明細().get事業所番号().value())) {
-                    明細情報取得リスト.add(明細情報取得);
-                }
-            }
             setDataGrid総計(get給付実績集計情報(集計情報リスト, 整理番号, 事業者番号リスト.get(index + i).get事業所番号().value(), 様式番号, サービス提供年月),
                     get給付実績明細情報(明細情報リスト, 整理番号, 事業者番号リスト.get(index + i).get事業所番号().value(), 様式番号, サービス提供年月),
                     get給付実績明細情報特例(明細情報特例リスト, 整理番号, 事業者番号リスト.get(index + i).get事業所番号().value(), 様式番号, サービス提供年月),
                     保険者情報
             );
-            サービス提供年月リスト = getサービス提供年月リスト(集計情報取得リスト, 明細情報取得リスト);
+            サービス提供年月リスト = getサービス提供年月リスト(集計情報リスト, 明細情報リスト);
         }
         Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
         div.getBtnMaeJigyosha().setDisabled(true);
