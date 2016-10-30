@@ -1173,9 +1173,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                         .getTxtHokenKyufuAmountNow().getValue());
         Decimal 支払金額合計 = div.getJutakuKaishuShinseiResetInfo()
                 .getTxtHiyoTotalNow().getValue();
-        if (支払金額合計 != null) {
-            dbt3038Builder.setサービス単位数(支払金額合計.intValue());
-        }
+        dbt3038Builder.setサービス単位数(0);
         RString 理由書作成者 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
                 .getTxtCreatorName().getValue();
         RDate 理由書作成日 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreateYMD()
@@ -1494,11 +1492,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             dbt3038Builder.set利用者負担額(利用者負担額.intValue());
             dbt3053Builder.set利用者負担額(利用者負担額.intValue());
         }
-        Decimal 支払金額合計 = div.getJutakuKaishuShinseiResetInfo()
-                .getTxtHiyoTotalNow().getValue();
-        if (支払金額合計 != null) {
-            dbt3038Builder.setサービス単位数(支払金額合計.intValue());
-        }
+        dbt3038Builder.setサービス単位数(0);
         申請事業者理由書作成事業者番号設定(dbt3034Builder);
         if (画面モード_事前申請.equals(画面モード)) {
             dbt3034Builder.set事前申請サービス提供年月(償還払支給住宅改修事前申請情報.getサービス提供年月())
