@@ -578,7 +578,7 @@ public class TokuteiShinryohiInfoPanelHandler {
         } else if (INT_ZERO < index && !前月.equals(data)) {
             今提供年月 = サービス提供年月リスト.get(index - 1);
         }
-        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 提供年月, 整理番号, 識別番号);
+        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
         if (提供年月.isBeforeOrEquals(今提供年月)) {
             filt特別療養費リスト(給付実績特定診療費_特別療養費等);
         } else {
