@@ -70,6 +70,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -412,7 +413,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請, RString 画面モード,
             JutakuGaisuViewStateHolderParameter param, ShichosonSecurityJoho 導入形態) {
         div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード(), サービス提供年月.getNendo()).nextString().padZeroToLeft(前ゼロ付き10桁));
+                SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.getコード(),
+                new FlexibleYear(サービス提供年月.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
         ShokanJutakuKaishuJizenShinsei 申請情報 = 住宅改修費事前申請.getJutakuKaishuJizenShinseiJyoho(被保険者番号,
                 サービス提供年月, 整理番号);
         if (申請情報 == null) {
@@ -454,7 +456,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 FlexibleDate.getNowDate().getYearMonth().minusMonth(Integer.parseInt(month.toString())).toString());
         div.getTxtTeikyoYM().setValue(提供着工年月);
         div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード(), 提供着工年月.getYearValue()).nextString().padZeroToLeft(前ゼロ付き10桁));
+                SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.getコード(),
+                new FlexibleYear(提供着工年月.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
         JyutakugaisyunaiyoListDataPassModel model = new JyutakugaisyunaiyoListDataPassModel();
         model.set被保険者番号(被保険者番号);
         model.set状態(改修状態_登録);

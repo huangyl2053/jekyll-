@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -80,6 +81,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     private static final RString 給付実績連動_受託なし = new RString("1");
     private static final RString 給付実績緋連動_受託あり = new RString("2");
     private static final RString 償還払決定情報を登録 = new RString("償還払決定情報を登録して");
+    private static final int 前ゼロ付き10桁 = 10;
 
     /**
      * 画面ロードメソッドです。
@@ -519,7 +521,8 @@ public class JutakuKaishuShinseiJyohoToroku {
             if ((画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード))
                     && (!領収日.getYear().equals(画面提供着工年月.getYear()))) {
                 div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                        SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード(), 領収日.getYearValue()).nextString());
+                        SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.getコード(),
+                        new FlexibleYear(領収日.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
             }
         }
         return ResponseData.of(div).respond();
