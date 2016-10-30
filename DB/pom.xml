@@ -28,7 +28,7 @@
         <repository>
             <id>kibanJenkins</id>
             <name>r5 maven repository</name>
-            <url>http://10.0.21.16/mvn/repo/</url>
+            <url>http://zrtechwiki.ndensan.co.jp/mvn/repo/</url>
             <releases>
                 <updatePolicy>always</updatePolicy>
             </releases>
