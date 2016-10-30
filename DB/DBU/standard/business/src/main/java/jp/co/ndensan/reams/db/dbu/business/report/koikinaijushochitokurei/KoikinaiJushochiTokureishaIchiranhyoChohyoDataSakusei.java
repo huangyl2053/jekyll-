@@ -141,6 +141,8 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
             データ.set改頁４(改頁4);
             データ.set改頁５(改頁5);
             データ.set氏名(氏名_データなし);
+            データ.set識別コード(RString.EMPTY);
+            データ.set被保険者番号(RString.EMPTY);
             データList.add(データ);
         } else {
             for (int i = 0; i < entity.get広域内住所地特例者List().size(); i++) {

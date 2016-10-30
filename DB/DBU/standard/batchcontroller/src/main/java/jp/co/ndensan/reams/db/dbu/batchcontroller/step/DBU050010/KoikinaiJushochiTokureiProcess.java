@@ -38,10 +38,16 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -90,6 +96,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         get市町村コードと市町村名称();
         List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> 帳票データlist = is帳票データ作成(is広域内住所地特例者一覧表情報Entity作成(get広域内住所地特例者情報()));
         for (KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei 帳票データ : 帳票データlist) {
+            AccessLogger.log(AccessLogType.照会, toPersonalData(帳票データ.get識別コード(), 帳票データ.get被保険者番号()));
             KoikinaiJushochitokureishaIchiranhyoReport report = new KoikinaiJushochitokureishaIchiranhyoReport(
                     getHeadItem(帳票データ), getBodyItem(帳票データ));
             report.writeBy(retortWrite);
@@ -289,10 +296,6 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         }
     }
 
-    private void set並び順と改頁() {
-        // TODO　QA：#73393 董亜彬　出力順取得方針不明、課題提出中
-    }
-
     private void get市町村コードと市町村名称() {
         if (!市町村DDL1件目コード.equals(paramter.getShichosonCode())) {
             this.市町村コード = paramter.getShichosonCode();
@@ -310,11 +313,15 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     }
 
     private RString nullToEmtiy(Object obj) {
-
         return obj == null ? RString.EMPTY : new RString(obj.toString());
     }
 
     private List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> is帳票データ作成(KoikinaiJushochiTokureiItiranEntity entity) {
         return KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei.createReportDate(entity, 出力順entity);
+    }
+
+    private PersonalData toPersonalData(RString 識別コード, RString 被保険者番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号);
+        return PersonalData.of(new ShikibetsuCode(識別コード), expandedInfo);
     }
 }
