@@ -76,7 +76,7 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiListParameter extends BatchParamet
     @BatchParameter(key = "日付スラッシュ編集", name = "日付スラッシュ編集")
     private RString 日付スラッシュ編集;
     @BatchParameter(key = "出力順ID", name = "出力順ID")
-    private RString 出力順ID;
+    private Long 出力順ID;
 
     /**
      * コンストラクタです。
