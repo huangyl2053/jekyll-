@@ -904,10 +904,13 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
 
     private void set保険者初期化(List<IKoseiShichosonMaster> 保険者リスト) {
         List<KeyValueDataSource> 保険者ddl = new ArrayList<>();
+        List<RString> keys = new ArrayList<>();
         for (IKoseiShichosonMaster 保険者 : 保険者リスト) {
-            KeyValueDataSource data = new KeyValueDataSource(保険者.get証記載保険者番号().value(), 保険者.get市町村名称());
-            if (!保険者ddl.contains(data)) {
+            RString 証記載保険者番号 = 保険者.get証記載保険者番号().value();
+            if (!keys.contains(証記載保険者番号)) {
+                KeyValueDataSource data = new KeyValueDataSource(証記載保険者番号, 保険者.get市町村名称());
                 保険者ddl.add(data);
+                keys.add(証記載保険者番号);
             }
         }
         div.getJutakuKaishuShinseiContents().getDdlHokensha().setDataSource(保険者ddl);
