@@ -185,18 +185,11 @@ public class JigyoHokokuGeppoHokenkyufuKogakuGassanProcessParamter implements IB
     }
 
     /**
-     * 事業状況報告統計情報の取得処理mybatisのパラメータを生成します。
+     * 月報の場合、事業状況報告統計情報の取得処理mybatisのパラメータを生成します。
      *
      * @return JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter
      */
     public JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter toSelectDataMybitisParamter() {
-        RString 年月 = RString.EMPTY;
-        if (区分_1.equals(報告区分)) {
-            年月 = 決定年月;
-        }
-        if (区分_2.equals(報告区分)) {
-            年月 = 集計年度.concat(年報区分);
-        }
         List<RString> 市町村コードList = new ArrayList<>();
         市町村コードList.add(市町村コード.concat(区分_1));
         if (区分_1.equals(構成市町村区分)) {
@@ -209,7 +202,35 @@ public class JigyoHokokuGeppoHokenkyufuKogakuGassanProcessParamter implements IB
                 市町村コードList.add(list.concat(区分_3));
             }
         }
-        return JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter.createSelectDataParam(市町村コードList, 年月);
+        return JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter.createSelectDataParam(市町村コードList, 決定年月);
+    }
+
+    /**
+     * 年報の場合、事業状況報告統計情報の取得処理mybatisのパラメータを生成します。
+     *
+     * @return JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter
+     */
+    public JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter toNennpouDataMybitisParamter() {
+        RString 集計区分 = new RString("2");
+        List 集計番号List = new ArrayList<>();
+        集計番号List.add(ShukeiNo.現役並み所得者.getコード());
+        集計番号List.add(ShukeiNo.一般.getコード());
+        集計番号List.add(ShukeiNo.低所得者Ⅱ.getコード());
+        集計番号List.add(ShukeiNo.低所得者Ⅰ.getコード());
+        集計番号List.add(ShukeiNo.合計_08.getコード());
+        List 表番号List = new ArrayList<>();
+        表番号List.add(HyoNo.高額合算_保険給付決定状況.getコード());
+        表番号List.add(HyoNo.高額合算_保険給付決定状況_旧市町村.getコード());
+        List<RString> 市町村コードList = new ArrayList<>();
+        市町村コードList.add(市町村コード);
+        if (区分_1.equals(構成市町村区分)) {
+            市町村コードList.addAll(構成市町村コードリスト);
+        }
+        if (区分_1.equals(旧市町村区分)) {
+            市町村コードList.addAll(旧市町村コードリスト);
+        }
+        return JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter.createNennpouDataParam(集計区分,
+                集計開始年月, 集計終了年月, 市町村コードList, 集計番号List, 表番号List);
     }
 
     /**
