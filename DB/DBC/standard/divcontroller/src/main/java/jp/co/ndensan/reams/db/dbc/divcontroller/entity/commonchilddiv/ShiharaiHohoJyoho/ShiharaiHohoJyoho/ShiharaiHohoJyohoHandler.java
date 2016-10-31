@@ -793,6 +793,14 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtStartYobi().setReadOnly(true);
         div.getTxtStartHHMM().setReadOnly(true);
         div.getTxtEndHHMM().setReadOnly(true);
+
+        div.getTxtShiharaiBasho().clearValue();
+        div.getTxtStartYMD().clearValue();
+        div.getTxtStartYobi().clearValue();
+        div.getTxtStartHHMM().clearValue();
+        div.getTxtEndYMD().clearValue();
+        div.getTxtEndYobi().clearValue();
+        div.getTxtEndHHMM().clearValue();
     }
 
     /**
@@ -811,6 +819,16 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtMeigininKana().setReadOnly(true);
         div.getTtxtMeigininKanji().setReadOnly(true);
         div.getTxtTenban().setReadOnly(true);
+
+        div.getDdlKozaID().setSelectedKey(RString.EMPTY);
+        div.getTxtKinyuKikanCode().clearDomain();
+        div.getTxtKinyuKikanShitenCode().clearDomain();
+        div.getTxtTenban().clearValue();
+        div.getTxtYokinShubetsu().clearValue();
+        div.getTxtKozaNo().clearValue();
+        div.getTxtKinyuKikanName().clearValue();
+        div.getTxtMeigininKana().clearDomain();
+        div.getTtxtMeigininKanji().clearDomain();
     }
 
     /**
@@ -951,6 +969,18 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtMeigininKana1().setReadOnly(true);
         div.getTxtMeigininKanji1().setReadOnly(true);
         div.getTxtTenban1().setReadOnly(true);
+
+        div.getTxtKeiyakuNo().clearValue();
+        div.getTxtKeiyakuCode().clearValue();
+        div.getTxtKeiyakuName().clearDomain();
+        div.getTxtKinyuKikanCode1().clearDomain();
+        div.getTxtKinyuKikanShitenCode1().clearDomain();
+        div.getTxtTenban1().clearValue();
+        div.getTxtYokinShubetsu1().clearValue();
+        div.getTxtKozaNo1().clearValue();
+        div.getTxtKinyuKikanName1().clearValue();
+        div.getTxtMeigininKana1().clearDomain();
+        div.getTxtMeigininKanji1().clearDomain();
     }
 
     /**
