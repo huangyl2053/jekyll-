@@ -322,7 +322,6 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set支給区分コード(RString 支給区分コード) {
-        requireNonNull(支給区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支給区分コード"));
         entity.setShikyuKubunCode(支給区分コード);
         return this;
     }
