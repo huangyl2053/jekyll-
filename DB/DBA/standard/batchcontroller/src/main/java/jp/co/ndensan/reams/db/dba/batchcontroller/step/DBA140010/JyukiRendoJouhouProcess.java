@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA140010;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.jyukirendotorokushalist.JyukiRendoJouhouBusiness;
@@ -64,13 +63,14 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
     protected void beforeExecute() {
         super.beforeExecute();
         jyukiRendoJouhouMapper = getMapper(IJyukiRendoJouhouMapper.class);
-        page_break_keys = Collections.unmodifiableList(Arrays.asList(改ページ));
         business = new JyukiRendoJouhouBusiness();
+        List<RString> 出力順 = new ArrayList<>();
+        出力順.add(改ページ);
         出力順Entity = get出力順項目();
         if (出力順Entity.getPageBreakKeys() != null) {
-            List<RString> pageBreakKeys = Collections.unmodifiableList(出力順Entity.getPageBreakKeys());
-            page_break_keys.addAll(pageBreakKeys);
+            出力順.addAll(出力順Entity.getPageBreakKeys());
         }
+        page_break_keys = Collections.unmodifiableList(出力順);
     }
 
     @Override
