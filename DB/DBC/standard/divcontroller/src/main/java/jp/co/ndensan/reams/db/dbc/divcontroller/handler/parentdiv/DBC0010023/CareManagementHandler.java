@@ -190,9 +190,9 @@ public class CareManagementHandler {
      * @param 事業者番号リスト List<KyufuJissekiHedajyoho2>
      */
     public void setJigyoshaBtn(List<KyufuJissekiHedajyoho2> 事業者番号リスト) {
+        div.getBtnMaeJigyosha().setDisabled(true);
+        div.getBtnAtoJigyosha().setDisabled(true);
         if (!事業者番号リスト.isEmpty()) {
-            div.getBtnMaeJigyosha().setDisabled(true);
-            div.getBtnAtoJigyosha().setDisabled(true);
             int index = get事業者番号index(事業者番号リスト);
             if (0 < index) {
                 div.getBtnMaeJigyosha().setDisabled(false);
