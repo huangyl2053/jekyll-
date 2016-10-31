@@ -56,7 +56,7 @@ public class ShokujiHiyoShokai {
                 識別番号検索キー);
         List<ShikibetsuNoKanri> 識別番号管理データ取得 = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
                 サービス提供年月, 識別番号検索キー).records();
-        getHandler(div).setDataGrid(getCsData_E(), getCsData_B(), getCsData_E());
+        getHandler(div).setDataGrid(getCsData_E(), getCsData_B(), getCsData_E(), サービス提供年月);
         if (識別番号管理データ取得 != null && !識別番号管理データ取得.isEmpty()) {
             getHandler(div).setButton(識別番号管理データ取得.get(0));
         }
