@@ -514,6 +514,9 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
     }
 
     private void set明細情報の表示制御(RString 様式番号, FlexibleYearMonth サービス提供年月) {
+        if (RString.isNullOrEmpty(様式番号)) {
+            return;
+        }
         KyufuJissekiYoshikiKubun 基準様式番号 = KyufuJissekiYoshikiKubun.toValue(様式番号);
         if (KyufuJissekiYoshikiKubun._21C1_福祉用具販売費.equals(基準様式番号)
                 || KyufuJissekiYoshikiKubun._21C2_予防用具販売費.equals(基準様式番号)
@@ -538,6 +541,9 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
     }
 
     private void set明細情報特例の表示制御(RString 様式番号, FlexibleYearMonth サービス提供年月) {
+        if (RString.isNullOrEmpty(様式番号)) {
+            return;
+        }
         KyufuJissekiYoshikiKubun 基準様式番号 = KyufuJissekiYoshikiKubun.toValue(様式番号);
         if (平成27年4月.isBeforeOrEquals(サービス提供年月)) {
             if (KyufuJissekiYoshikiKubun._7131_様式第二.equals(基準様式番号)
