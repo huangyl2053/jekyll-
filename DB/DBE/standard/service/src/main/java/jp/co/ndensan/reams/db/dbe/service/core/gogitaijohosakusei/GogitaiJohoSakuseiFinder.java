@@ -90,18 +90,19 @@ public class GogitaiJohoSakuseiFinder {
      * 合議体情報一覧のデータを取得します。
      *
      * @param param 合議体情報作成のパラメータ
-     * @return SearchResult<GogitaiJohoSakuseiRsult>
+     * @return SearchResult<GogitaiJoho>
      */
-    public SearchResult<GogitaiJohoSakuseiRsult> getDateGridList(GogitaiJohoSakuseiParameter param) {
+    public SearchResult<GogitaiJoho> getDateGridList(GogitaiJohoSakuseiParameter param) {
 
-        List<GogitaiJohoSakuseiRsult> resultList = new ArrayList<>();
-        List<GogitaiJohoSakuseiRelateEntity> gogitaiRelateEntityList
-                = mapperProvider.create(IGogitaiJohoSakuseiMapper.class).getGogitaiJohoSakuseiGridList(param);
+        List<GogitaiJoho> resultList = new ArrayList<>();
+        List<GogitaiJohoRelateEntity> gogitaiRelateEntityList
+                = mapperProvider.create(IGogitaiJohoSakuseiMapper.class).selectGogitaiJohoSakusei(param);
         if (gogitaiRelateEntityList.isEmpty()) {
             return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
         }
-        for (GogitaiJohoSakuseiRelateEntity entity : gogitaiRelateEntityList) {
-            resultList.add(new GogitaiJohoSakuseiRsult(entity));
+        for (GogitaiJohoRelateEntity entity : gogitaiRelateEntityList) {
+            entity.initializeMd5ToEntities();
+            resultList.add(new GogitaiJoho(entity));
         }
         return SearchResult.of(resultList, 0, false);
     }

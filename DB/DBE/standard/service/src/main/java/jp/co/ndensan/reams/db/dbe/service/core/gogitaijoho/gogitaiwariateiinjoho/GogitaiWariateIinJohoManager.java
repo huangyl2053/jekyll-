@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaiiinjoho.ShinsakaiIinJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaiwariateiinjoho.IGogitaiWariateIinJohoMapper;
@@ -121,7 +120,6 @@ public class GogitaiWariateIinJohoManager {
             return false;
         }
         合議体割当委員情報 = 合議体割当委員情報.modifiedModel();
-        save介護認定審査会委員情報リスト(合議体割当委員情報.getShinsakaiIinJohoList());
         return 1 == 合議体割当委員情報Dac.save(合議体割当委員情報.toEntity());
     }
 
@@ -136,11 +134,5 @@ public class GogitaiWariateIinJohoManager {
     public boolean deletePhysical(GogitaiWariateIinJoho 合議体割当委員情報) {
         requireNonNull(合議体割当委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体割当委員情報"));
         return 1 == 合議体割当委員情報Dac.deletePhysical(合議体割当委員情報.toEntity());
-    }
-
-    private void save介護認定審査会委員情報リスト(List<ShinsakaiIinJoho> 介護認定審査会委員情報List) {
-        for (ShinsakaiIinJoho 介護認定審査会委員情報 : 介護認定審査会委員情報List) {
-            介護認定審査会委員情報Manager.save介護認定審査会委員情報(介護認定審査会委員情報);
-        }
     }
 }

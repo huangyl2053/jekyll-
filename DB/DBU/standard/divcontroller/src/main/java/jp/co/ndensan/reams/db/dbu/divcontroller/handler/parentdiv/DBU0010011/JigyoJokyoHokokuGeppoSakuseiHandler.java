@@ -1247,7 +1247,7 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         List<RString> バッチID = new ArrayList<>();
         List<RString> 出力区分List = new ArrayList<>();
         if (div.getCblOutputTaisho1().getSelectedKeys().contains(一般状況1_11)) {
-            バッチID.add(Syorimei.月報報告一般状況１２_１４現物分.getコード());
+            バッチID.add(Syorimei.月報報告一般状況１_１１.getコード());
             出力区分List.add(合併あり);
         } else {
             バッチID.add(RString.EMPTY);

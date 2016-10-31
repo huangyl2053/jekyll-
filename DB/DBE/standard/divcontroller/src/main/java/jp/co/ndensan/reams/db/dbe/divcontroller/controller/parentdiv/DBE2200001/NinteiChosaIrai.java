@@ -342,6 +342,7 @@ public class NinteiChosaIrai {
                 return ResponseData.of(div).respond();
             }
         }
+        getHandler(div).load(false);
         return ResponseData.of(div).setState(DBE2200001StateName.初期表示);
     }
 

@@ -47,7 +47,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJohoSakuseiCSVEntity> {
 
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final int GOGITAIMEI_LENGTH_200 = 200;
+    private static final int GOGITAIMEI_LENGTH_40 = 40;
     private static final int TEIIN_LENGTH_4 = 4;
     private static final RString SLASH = new RString("/");
     private static final RString POSITIVE_INTEGERS_REGEX = new RString("^[1-9]\\d*$");
@@ -192,7 +192,7 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
             eucCsvWriter.writeLine(entity);
             flag = true;
         } else {
-            if (GOGITAIMEI_LENGTH_200 < csvData.getGogitaiMei().length()) {
+            if (GOGITAIMEI_LENGTH_40 < csvData.getGogitaiMei().length()) {
                 RLogger.error(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体名称の桁数.getErrorMSG()));
                 entity.setErrJoho(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体名称の桁数.getErrorMSG()));
                 eucCsvWriter.writeLine(entity);
@@ -319,15 +319,17 @@ public class GogitaiJohoIkkatuSakuseiProcess extends BatchProcessBase<GogitaiJoh
             entity.setErrJoho(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体長区分コードが空.getErrorMSG()));
             eucCsvWriter.writeLine(entity);
             flag = true;
+        } else {
+            if (!(GogitaichoKubunCode.通常.getコード().equals(csvData.getGogitaichoKubunCode())
+                    || GogitaichoKubunCode.副合議体長.getコード().equals(csvData.getGogitaichoKubunCode())
+                    || GogitaichoKubunCode.合議体長.getコード().equals(csvData.getGogitaichoKubunCode()))) {
+                RLogger.error(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体長区分コードが012.getErrorMSG()));
+                entity.setErrJoho(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体長区分コードが012.getErrorMSG()));
+                eucCsvWriter.writeLine(entity);
+                flag = true;
+            }
         }
-        if (!(GogitaichoKubunCode.通常.getコード().equals(csvData.getGogitaichoKubunCode())
-                || GogitaichoKubunCode.副合議体長.getコード().equals(csvData.getGogitaichoKubunCode())
-                || GogitaichoKubunCode.合議体長.getコード().equals(csvData.getGogitaichoKubunCode()))) {
-            RLogger.error(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体長区分コードが012.getErrorMSG()));
-            entity.setErrJoho(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体長区分コードが012.getErrorMSG()));
-            eucCsvWriter.writeLine(entity);
-            flag = true;
-        }
+
         if (csvData.getSubstituteFlag().isEmpty()) {
             RLogger.error(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.補欠が空.getErrorMSG()));
             entity.setErrJoho(intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.補欠が空.getErrorMSG()));

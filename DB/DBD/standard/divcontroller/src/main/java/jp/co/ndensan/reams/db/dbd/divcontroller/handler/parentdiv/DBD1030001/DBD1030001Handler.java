@@ -329,6 +329,20 @@ public class DBD1030001Handler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(再検索する, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(検索結果一覧へ, false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存する, true);
+        
+        List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+        FlexibleDate 適用日 ;
+        if (rows.isEmpty()) {
+            適用日 = new FlexibleDate(RDate.getNowDate().getYearValue(), 
+                    RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue()); 
+        } else {
+            適用日 = new FlexibleDate(rows.get(0).getTxtYukoKigenYMD().
+                    getValue().plusDay(1).toString());
+        }
+        FlexibleDate 有効期限 = ShakaiFukushiHojinKeigenService.createIntance().estimate有効期限(適用日);
+        div.getTxtTekiyoYMD().setValue(適用日);
+        div.getTxtYukoKigenYMD().setValue(有効期限);
+        
     }
 
     private GemmenKubun get減免区分初期値(ShikibetsuCode 識別コード) {
