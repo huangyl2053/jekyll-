@@ -255,6 +255,8 @@ public final class ReportUtil {
         IOutputOrder outputOrder = finder.get出力順(サブ業務コード, 帳票ID, 出力順ID);
         ReportItemsMap reportItems = new ReportItemsMap(Arrays.<IReportItems>asList(clazz.getEnumConstants()));
         if (outputOrder == null) {
+            entity.setPageBreakKeys(new ArrayList<RString>());
+            entity.set出力順OrderBy(RString.EMPTY);
             return entity;
         }
         orderByClause = new RStringBuilder("order by");
