@@ -74,7 +74,6 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
     private static final int INT_1 = 1;
     private static final RString 国保連送付外字_変換区分_1 = new RString("1");
     private static final RString SJIS類似 = new RString("SjisRuiji");
-    private static final RString バックスラッシュ = new RString("\\");
 
     private KogakugassanProcessParameter processParameter;
     private int レコード件数合計 = 0;
@@ -295,7 +294,7 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
             file入力.delete();
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
-                FilesystemName.fromString(出力ファイルパス.substring(出力ファイルパス.lastIndexOf(バックスラッシュ) + INT_1)));
+                FilesystemName.fromString(出力ファイルパス.substring(出力ファイルパス.lastIndexOf(File.separator) + INT_1)));
         sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
         SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(出力ファイルパス), opts);
