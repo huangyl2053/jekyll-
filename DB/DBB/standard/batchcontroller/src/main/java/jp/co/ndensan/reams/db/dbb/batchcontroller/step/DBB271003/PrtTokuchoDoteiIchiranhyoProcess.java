@@ -85,6 +85,7 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
     private IOutputOrder 出力順;
     private List<RString> pageBreakKeys;
     private List<RString> 出力順項目リスト;
+    private List<RString> 改ページ項目リスト;
     @BatchWriter
     private CsvWriter<TokubetsuChoshuDoteiIchiranCSVEntity> eucCsvWriter;
 
@@ -96,6 +97,7 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
     protected void initialize() {
         pageBreakKeys = new ArrayList<>();
         出力順項目リスト = new ArrayList<>();
+        改ページ項目リスト = new ArrayList<>();
         導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         if (定数_10.equals(parameter.get特別徴収開始月())) {
             通知内容コード = TsuchiNaiyoCodeType.特別徴収対象者情報.get通知内容コード();
@@ -120,6 +122,7 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
             出力順項目リスト.add(item.get項目名());
             if (item.is改頁項目()) {
                 pageBreakKeys.add(item.get項目ID());
+                改ページ項目リスト.add(item.get項目名());
             }
         }
     }
@@ -226,7 +229,7 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
         target.setChiku3(entity.getChikuCode3() == null ? RString.EMPTY : entity.getChikuCode3().getColumnValue());
         target.setShichosonCode(entity.getGenLasdecCode().code市町村RString());
         TokubetsuChoshuDoteiIchiranReport report = new TokubetsuChoshuDoteiIchiranReport(
-                導入団体クラス, 出力順項目リスト, pageBreakKeys, target, parameter.get特別徴収開始月());
+                導入団体クラス, 出力順項目リスト, 改ページ項目リスト, target, parameter.get特別徴収開始月());
         report.writeBy(reportSourceWriter);
     }
 
