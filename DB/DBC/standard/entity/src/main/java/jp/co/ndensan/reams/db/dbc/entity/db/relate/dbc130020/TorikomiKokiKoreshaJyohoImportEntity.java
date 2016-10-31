@@ -27,7 +27,6 @@ public class TorikomiKokiKoreshaJyohoImportEntity extends DbTableEntityBase<Tori
     @PrimaryKey
     private RString 識別コード;
     @CsvField(order = 20, name = "履歴番号")
-    @PrimaryKey
     private RString 履歴番号;
     @CsvField(order = 30, name = "後期高齢保険者番号(市町村)")
     private RString 後期高齢保険者番号_市町村;
