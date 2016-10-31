@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.definition.processprm.dba140010;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter;
-
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,6 +45,9 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     private Code idouJiyu_tensyutu;
     private Code idouJiyu_sibou;
     private Code idouJiyu_tenkyo;
+    private RString psmShikibetsuTaisho;
+    private RString orderBy;
+    private boolean orderByFlag;
 
     /**
      * コンストラクタ。
@@ -103,7 +105,9 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
                 idouJiyu_tennyu,
                 idouJiyu_tensyutu,
                 idouJiyu_sibou,
-                idouJiyu_tenkyo
-        );
+                idouJiyu_tenkyo,
+                psmShikibetsuTaisho,
+                orderBy,
+                orderByFlag);
     }
 }

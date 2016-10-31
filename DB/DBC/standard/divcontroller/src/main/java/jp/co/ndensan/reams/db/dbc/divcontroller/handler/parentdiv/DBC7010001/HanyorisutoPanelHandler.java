@@ -119,7 +119,8 @@ public class HanyorisutoPanelHandler {
      */
     public DBC710010_HanyoListKyotakuServiceKeikakuParameter setBatchParameter(HanyorisutoPanelDiv div) {
         DBC710010_HanyoListKyotakuServiceKeikakuParameter bparam = new DBC710010_HanyoListKyotakuServiceKeikakuParameter();
-        if (div.getCcdHokensya().isVisible()) {
+        if (div.getCcdHokensya().isVisible()
+                && !div.getCcdHokensya().isDisplayNone()) {
             bparam.set構成市町村コード(div.getCcdHokensya().getSelectedItem().get市町村コード());
         }
         bparam.set作成区分(div.getRadSakuseiKubun().getSelectedKey());

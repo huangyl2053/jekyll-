@@ -61,7 +61,7 @@
         AND "B"."shinseiYMD"<![CDATA[<=]]>#{申請対象日終了}
         AND "B"."shinseiJokyoKubun" = '2'
         AND ("B"."shikyuShinseiKubun" ='1' or "B"."shikyuShinseiKubun"='2')
-        AND (("B"."jikoFutan_KeisanYM"= '' OR "B"."jikoFutan_KeisanYM" is NULL)  OR ("B"."jikoFutan_KeisanYM" <![CDATA[<>]]>'' AND "B"."saiKeisanKubun" = '1'))
+        AND (("B"."jikoFutan_KeisanYM"= '' OR "B"."jikoFutan_KeisanYM" is NULL)  OR ("B"."jikoFutan_KeisanYM" <![CDATA[<>]]>'' AND "B"."jikoFutan_KeisanYM" is NOT NULL AND "B"."saiKeisanKubun" = '1'))
         ORDER BY
         "B"."hihokenshaNo","B"."hokenshaNo","B"."taishoNendo","B"."seiriNo"
     </select>
@@ -210,7 +210,7 @@
         GROUP BY
         "hiHokenshaNo"
         ,"serviceTeikyoYM"
-        ) 
+        )
         UNION 
         (SELECT
         "hiHokenshaNo"
@@ -236,7 +236,7 @@
         GROUP BY
         "hiHokenshaNo"                      
         ,"serviceTeikyoYM"                       
-        ) 
+        )
         ) AS "riyoshaFutan"
         ON "temp"."hihokenshaNo"="riyoshaFutan"."hiHokenshaNo"
     </select>

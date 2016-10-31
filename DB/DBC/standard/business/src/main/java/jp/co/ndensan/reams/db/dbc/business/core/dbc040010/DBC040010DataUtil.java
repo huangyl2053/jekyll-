@@ -598,7 +598,7 @@ public class DBC040010DataUtil {
         }
         FlexibleYear 対象年度 = new FlexibleYear(実績負担額.getTaishoNendo());
         FlexibleYearMonth 算出した年月の翌月 = get70歳年齢到達日前日の翌月(実績負担額);
-        FlexibleYearMonth 被保険者期間終了 = new FlexibleYearMonth(実績負担額.getHihokenshaShuryoYMD());
+        FlexibleYearMonth 被保険者期間終了 = new FlexibleYearMonth(実績負担額.getHihokenshaShuryoYMD().substring(0, NUM_6));
         FlexibleYearMonth サービス提供年月;
         for (int index : indexs) {
             サービス提供年月 = getYMFromIndex(index, 対象年度);
@@ -651,8 +651,6 @@ public class DBC040010DataUtil {
         loopSetRString(実績負担額Set, SUMI_TEKIYO, 実績負担額Get, BIKO);
         実績負担額Set.setSumi_Gokei_JikoFutanGaku(sum1);
         実績負担額Set.setSumi_Gokei_70_74JikoFutanGaku(sum2);
-        loopAddDecimal(実績負担額Get, JIKOFUTANGAKUWORK);
-        loopAddDecimal(実績負担額Get, UCHISUJIKOFUTANGAKU);
         実績負担額Set.setDataSakuseiKubun(TWO);
         RString 処理日 = nonullRStr(getRDate(処理日時));
         実績負担額Set.setJikoFutanKeisanYMD2(処理日);
@@ -1578,6 +1576,7 @@ public class DBC040010DataUtil {
         result.set備考資格期間不正(entity.getIchiranBiko());
         result.set備考高額支給額確認データ(entity.getIchiranKakuninKubun());
         result.set識別コード(entity.getIchiranShikibetsuCode());
+        result.set住民種別コード(entity.getIchiranJuminShubetsuCode());
         result.set一覧用確認区分(entity.getIchiranKakuninKubun());
         result.set一覧用確認区分２(entity.getIchiranKakuninKubun2());
         result.setYubinNo(entity.getIchiranYubinNo());

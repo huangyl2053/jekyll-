@@ -5,14 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110010;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyotakuServiceKubun;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufukanrihyoout.KyufukanrihyoOutMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufukanrihyoout.KyufukanrihyoOutProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.KyotakuKeikakuJikosakuseiKanriTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout.ShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110010.IKyufukanrihyoOutMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -24,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -41,9 +46,14 @@ public class ShikyuGendoGakuJohoProcess3 extends BatchProcessBase<ShikyuGendoGak
     private KyufukanrihyoOutProcessParameter paramter;
     private KyufukanrihyoOutMybatisParameter mybatisparamter;
     private final int 値六 = 6;
+    private IKyufukanrihyoOutMapper mapper;
+    private int count = 0;
+    private static final RString 被保険者番号 = new RString("【被保険者番号】");
+    private static final RString 号 = new RString("：");
 
     @Override
     protected void initialize() {
+        mapper = getMapper(IKyufukanrihyoOutMapper.class);
         mybatisparamter = paramter.toKyufukanrihyoOutMybatisParameter();
         RString sakiEncodeKeitai = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_支給限度額一本化, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         mybatisparamter.set制度改正施行日支給限度額一本化の年月(sakiEncodeKeitai.substring(0, 値六));
@@ -64,6 +74,7 @@ public class ShikyuGendoGakuJohoProcess3 extends BatchProcessBase<ShikyuGendoGak
 
     @Override
     protected void process(ShikyuGendoGakuEntity entity) {
+        count++;
         DbT4001JukyushaDaichoEntity 受給者台帳Entity3 = entity.get受給者台帳Entity();
         KyotakuKeikakuJikosakuseiKanriTempEntity 居宅給付計画自己作成管理一時Entity3 = entity.get居宅給付計画自己作成管理一時Entity();
         居宅給付計画自己作成管理一時Entity3.setHyojiYokaigoJotaiKubunCode(getRString(受給者台帳Entity3.getYokaigoJotaiKubunCode()));
@@ -73,6 +84,22 @@ public class ShikyuGendoGakuJohoProcess3 extends BatchProcessBase<ShikyuGendoGak
         居宅給付計画自己作成管理一時Entity3.setTankiShikyuGendoKaishiYM(getFlexibleYearMonth(受給者台帳Entity3.getTankiShikyuGendoKaishiYMD()));
         居宅給付計画自己作成管理一時Entity3.setTankiShikyuGendoShuryoYM(getFlexibleYearMonth(受給者台帳Entity3.getTankiShikyuGendoShuryoYMD()));
         自己作成管理一時TBL.update(居宅給付計画自己作成管理一時Entity3);
+    }
+
+    @Override
+    protected void afterExecute() {
+        if (1 < count) {
+            List<RString> hihokenshaNo = mapper.get支給限度額情報の取得チェック();
+            RStringBuilder rb = new RStringBuilder();
+            rb.append(被保険者番号);
+            if (0 < hihokenshaNo.size() && !hihokenshaNo.isEmpty()) {
+                for (int i = 0; i < hihokenshaNo.size(); i++) {
+                    rb.append(hihokenshaNo.get(i));
+                    rb.append(号);
+                }
+                throw new BatchInterruptedException(DbcErrorMessages.受給者台帳_支給限度額情報不正.getMessage().replace(rb.toString()).toString());
+            }
+        }
     }
 
     private FlexibleYearMonth getFlexibleYearMonth(FlexibleDate fb) {

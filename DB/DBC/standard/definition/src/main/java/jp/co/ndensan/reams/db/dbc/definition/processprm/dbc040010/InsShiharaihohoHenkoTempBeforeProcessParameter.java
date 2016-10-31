@@ -41,6 +41,6 @@ public class InsShiharaihohoHenkoTempBeforeProcessParameter implements IBatchPro
      * @return InsShiharaihohoHenkoTempBeforeMyBatisParameter
      */
     public InsShiharaihohoHenkoTempBeforeMyBatisParameter toInsShiharaihohoHenkoTempBeforeMyBatisParameter() {
-        return new InsShiharaihohoHenkoTempBeforeMyBatisParameter(this.事業分フラグ);
+        return new InsShiharaihohoHenkoTempBeforeMyBatisParameter(事業分フラグ);
     }
 }

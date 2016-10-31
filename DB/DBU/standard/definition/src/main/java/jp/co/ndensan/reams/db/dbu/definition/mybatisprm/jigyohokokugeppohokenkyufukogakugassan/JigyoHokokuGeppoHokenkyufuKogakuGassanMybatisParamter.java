@@ -110,7 +110,7 @@ public final class JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter impleme
     }
 
     /**
-     * 事業状況報告統計情報処理mybatisのパラメータを生成します。
+     * 月報の場合、事業状況報告統計情報処理mybatisのパラメータを生成します。
      *
      * @param 市町村コードList 市町村コードList
      * @param 集計年月 集計年月
@@ -120,6 +120,25 @@ public final class JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter impleme
     public static JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter createSelectDataParam(List<RString> 市町村コードList, RString 集計年月) {
         return new JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter(RString.EMPTY, RString.EMPTY, null, RString.EMPTY,
                 RString.EMPTY, 市町村コードList, 集計年月, null, null, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                RString.EMPTY, RString.EMPTY, null);
+    }
+
+    /**
+     * 年報の場合、事業状況報告統計情報処理mybatisのパラメータを生成します。
+     *
+     * @param 集計区分 集計区分
+     * @param 集計開始年月 集計開始年月
+     * @param 集計終了年月 集計終了年月
+     * @param 市町村コードList 市町村コードList
+     * @param 集計番号List 集計番号List
+     * @param 表番号List 表番号List
+     *
+     * @return JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter
+     */
+    public static JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter createNennpouDataParam(RString 集計区分, RString 集計開始年月,
+            RString 集計終了年月, List<RString> 市町村コードList, List 集計番号List, List 表番号List) {
+        return new JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter(集計開始年月, 集計終了年月, null, RString.EMPTY,
+                RString.EMPTY, 市町村コードList, 集計区分, 集計番号List, 表番号List, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, null);
     }
 

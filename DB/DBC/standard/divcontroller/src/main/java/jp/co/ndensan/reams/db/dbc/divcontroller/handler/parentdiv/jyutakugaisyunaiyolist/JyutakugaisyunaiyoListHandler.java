@@ -94,7 +94,7 @@ public class JyutakugaisyunaiyoListHandler {
         div.getTxtJigyosya().setValue(RString.EMPTY);
         div.getTxtJigyosya().setDisabled(true);
         div.getBtnHonnijyusyoCopy().setDisabled(true);
-        div.getTxtJyusyo().clearDomain();
+        div.getTxtJyusyo().clearValue();
         div.getTxtJyusyo().setDisabled(true);
         div.getTxtTyakkoyotebi().clearValue();
         div.getTxtTyakkoyotebi().setDisabled(true);

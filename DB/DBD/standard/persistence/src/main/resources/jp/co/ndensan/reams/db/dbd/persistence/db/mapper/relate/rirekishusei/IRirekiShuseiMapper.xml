@@ -147,6 +147,7 @@
         SET
             "updateCount" = #{update回数Upd},
             "rirekiNo" = #{履歴番号Upd},
+            "remban" = #{履歴番号Upd},
             "lastUpdateTimestamp" = #{最終Update日時},
             "lastUpdateReamsLoginId" = #{ログインid}
         WHERE
