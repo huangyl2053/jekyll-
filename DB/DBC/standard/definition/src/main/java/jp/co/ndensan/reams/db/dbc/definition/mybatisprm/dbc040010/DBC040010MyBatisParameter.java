@@ -20,19 +20,22 @@ public class DBC040010MyBatisParameter implements IMyBatisParameter {
 
     private RString 出力順;
     private RString 処理名;
+    private RString 市町村コード;
 
     /**
      * DBC020080MyBatisParameterのコンストラクタです。
      *
      * @param 出力順 RString
      * @param 処理名 RString
-     *
+     * @param 市町村コード RString
      */
     public DBC040010MyBatisParameter(
             RString 出力順,
-            RString 処理名) {
+            RString 処理名,
+            RString 市町村コード) {
         this.出力順 = RString.isNullOrEmpty(出力順) ? null : 出力順;
         this.処理名 = 処理名;
+        this.市町村コード = 市町村コード;
     }
 
 }
