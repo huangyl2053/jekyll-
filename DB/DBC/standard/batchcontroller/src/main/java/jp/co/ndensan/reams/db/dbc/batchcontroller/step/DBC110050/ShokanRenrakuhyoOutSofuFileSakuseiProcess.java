@@ -198,12 +198,12 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             } else if (!beforeEntity.getHiHokenshaNo().equals(entity.getHiHokenshaNo())
                     || !beforeEntity.getServiceTeikyoYM().equals(entity.getServiceTeikyoYM())
                     || !beforeEntity.getSeiriNo().equals(entity.getSeiriNo())) {
-                addMeisaiEntityWriter(beforeEntity, lastFlag);
+                addEntityWriter(beforeEntity, lastFlag);
                 レコード番号 = レコード番号 + INDEX_1;
                 csvWriter.writeLine(getHeadEntity(entity));
                 総出力件数 = 総出力件数 + INDEX_1;
-            } else if (is償還明細キー(beforeEntity)) {
-                addMeisaiEntityWriter(beforeEntity, lastFlag);
+            } else {
+                addEntityWriter(beforeEntity, lastFlag);
             }
             beforeEntity = entity;
             被保険者番号 = entity.getHiHokenshaNo();
@@ -213,9 +213,9 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
             様式番号 = entity.getYoshikiNo();
             明細番号 = entity.getMeisaiNo();
         } else {
-            if (beforeEntity != null && entity.getDataKubun() != null && is償還明細キー(beforeEntity)) {
+            if (beforeEntity != null && entity.getDataKubun() != null) {
                 lastFlag = !entity.getDataKubun().equals(beforeEntity.getDataKubun());
-                addMeisaiEntityWriter(beforeEntity, lastFlag);
+                addEntityWriter(beforeEntity, lastFlag);
                 beforeEntity = entity;
             }
         }
@@ -224,7 +224,7 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
     @Override
     protected void afterExecute() {
         if (総出力件数 != INDEX_0) {
-            addMeisaiEntityWriter(beforeEntity, true);
+            addEntityWriter(beforeEntity, true);
             レコード番号 = レコード番号 + INDEX_1;
             csvWriter.writeLine(getEndEntity());
             csvWriter.close();
@@ -236,6 +236,12 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
         }
         outputCount.setValue(総出力件数);
         outputEntry.setValue(entryList);
+    }
+
+    private void addEntityWriter(DbWT2112ShokanMeisaiTempEntity entity, boolean lastFlag) {
+        if (is償還明細キー(beforeEntity)) {
+            addMeisaiEntityWriter(beforeEntity, lastFlag);
+        }
     }
 
     private boolean is償還明細キー(DbWT2112ShokanMeisaiTempEntity entity) {
