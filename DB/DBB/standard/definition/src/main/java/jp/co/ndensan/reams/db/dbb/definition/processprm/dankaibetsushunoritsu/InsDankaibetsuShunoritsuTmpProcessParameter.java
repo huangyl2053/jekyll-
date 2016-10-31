@@ -41,15 +41,15 @@ public class InsDankaibetsuShunoritsuTmpProcessParameter implements IBatchProces
     private List<RString> 選択対象リスト;
     private RString 市町村情報;
     private RString 旧市町村情報;
-    private List<RString> 完納出力区分;
+    private List<RString> 出力区分;
 
     /**
      * MYBATIS用パラメータを作成します。
      *
-     * @param psmEntity psmEntity
+     * @param 科目リスト 科目リスト
      * @return MYBATIS用パラメータ
      */
-    public InsDankaibetsuShunoritsuTmpMybatisParamter toMybatisParamter(RString psmEntity) {
+    public InsDankaibetsuShunoritsuTmpMybatisParamter toMybatisParamter(List<RString> 科目リスト) {
         return new InsDankaibetsuShunoritsuTmpMybatisParamter(開始調定年度,
                 終了調定年度,
                 開始賦課年度,
@@ -60,6 +60,6 @@ public class InsDankaibetsuShunoritsuTmpProcessParameter implements IBatchProces
                 広域判定区分,
                 選択対象区分,
                 選択対象リスト,
-                psmEntity);
+                科目リスト);
     }
 }
