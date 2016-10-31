@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001.DBD5
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001.NinteiShinseiTorokuUketsukeDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5120001.NinteiShinseiTorokuUketsukeHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
@@ -20,12 +19,10 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -49,23 +46,47 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onLoad(NinteiShinseiTorokuUketsukeDiv div) {
-
         HihokenshaNo 被保険者番号 = null;
         ShikibetsuCode 識別コード = null;
-        ShinseishoKanriNo 申請書管理番号 = null;
-
-        RString 表示パターン = getHandler(div).get表示パターン();
-        if (表示パターン_新規.equals(表示パターン)) {
-            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-            被保険者番号 = taishoshaKey.get被保険者番号();
-            識別コード = taishoshaKey.get識別コード();
-        } else {
-            申請書管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
-            識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-            被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class));
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        被保険者番号 = taishoshaKey.get被保険者番号();
+        識別コード = taishoshaKey.get識別コード();
+        getHandler(div).get表示パターン(被保険者番号, 識別コード);
+        RString nowState = ResponseHolder.getState();
+        nowState = this.getHandler(div).onLoad(被保険者番号, 識別コード);
+        if (DBD5120001StateName.申請追加.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.申請追加);
+        } else if (DBD5120001StateName.申請修正.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.申請修正);
+        } else if (DBD5120001StateName.申請取下.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.申請取下);
+        } else if (DBD5120001StateName.区分変更追加.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.区分変更追加);
+        } else if (DBD5120001StateName.区分変更修正.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.区分変更修正);
+        } else if (DBD5120001StateName.区分変更取下.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.区分変更取下);
+        } else if (DBD5120001StateName.サービス変更追加.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.サービス変更追加);
+        } else if (DBD5120001StateName.サービス変更修正.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.サービス変更修正);
+        } else if (DBD5120001StateName.サービス変更取下.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.サービス変更取下);
+        } else if (DBD5120001StateName.受給者転入追加.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.受給者転入追加);
+        } else if (DBD5120001StateName.特殊追加.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.特殊追加);
+        } else if (DBD5120001StateName.特殊修正.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.特殊修正);
+        } else if (DBD5120001StateName.特殊削除.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.特殊削除);
+        } else if (DBD5120001StateName.削除回復.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.削除回復);
+        } else if (DBD5120001StateName.職権記載.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.職権記載);
+        } else if (DBD5120001StateName.職権全喪失.getName().equals(nowState)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.職権全喪失);
         }
-
-        this.getHandler(div).onLoad(被保険者番号, 識別コード, 申請書管理番号);
         return ResponseData.of(div).respond();
     }
 
@@ -111,7 +132,7 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnNyuinAndShisetsuNyusho(NinteiShinseiTorokuUketsukeDiv div) {
-
+        
         div.setHdnMode(照会);
         return ResponseData.of(div).respond();
     }
@@ -234,17 +255,15 @@ public class NinteiShinseiTorokuUketsuke {
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onChange_TodokedeDaikoKubun(NinteiShinseiTorokuUketsukeDiv div) {
 
         if (ShinseiTodokedeDaikoKubunCode.本人.getCode().equals(div.getCcdShinseiTodokedesha().getDdlTodokledeDaikoKubun().getSelectedKey())) {
-
-            TextBox 氏名 = new TextBox();
-            氏名.setValue(div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名());
-            div.getCcdShinseiTodokedesha().setTxtShimei(氏名);
-            //カナ氏名TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
-            div.getCcdShinseiTodokedesha().getTxtTelNo().setDomain(new TelNo(div.getCcdKaigoNinteiAtenaInfo().get電話番号()));
+            div.getCcdShinseiTodokedesha().getTxtShimei().setValue(div.getCcdKaigoAtenaInfo().get氏名漢字());
+            div.getCcdShinseiTodokedesha().getTxtKanaShimei().setValue(div.getCcdKaigoAtenaInfo().get氏名カナ());
+            if (div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().canBe個人()) {
+                div.getCcdShinseiTodokedesha().getTxtTelNo().setDomain(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData()
+                        .getShikibetsuTaishoHisory().get直近().to個人().get連絡先１());
+            }
 
             if (SELECT_KEY0.equals(div.getCcdShinseiTodokedesha().getRadKannaiKangai().getSelectedKey())) {
-
-                YubinNo 郵便番号 = div.getCcdKaigoNinteiAtenaInfo().get郵便番号();
-                div.getCcdShinseiTodokedesha().getTxtYubinNo().setValue(郵便番号);
+                div.getCcdShinseiTodokedesha().getTxtYubinNo().setValue(div.getCcdKaigoAtenaInfo().get郵便番号());
 
                 //div.getCcdShinseiTodokedesha().getCcdChoikiInput().load(new ChoikiCode(div.getCcdKaigoNinteiAtenaInfo().get住所()));
             }
@@ -400,7 +419,7 @@ public class NinteiShinseiTorokuUketsuke {
         getHandler(div).edit状態_完了();
         div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
                 UrInformationMessages.正常終了.getMessage().replace(要介護認定申請情報登録.toString()).evaluate()));
-        RString 表示パターン = getHandler(div).get表示パターン();
+        RString 表示パターン = getHandler(div).get表示パターン(new HihokenshaNo(div.getHdnHihokenshaNo()), new ShikibetsuCode(div.getHdnShikibetsuCode()));
         if (表示パターン_新規.equals(表示パターン)) {
             return ResponseData.of(div).setState(DBD5120001StateName.新規完了);
         } else {
