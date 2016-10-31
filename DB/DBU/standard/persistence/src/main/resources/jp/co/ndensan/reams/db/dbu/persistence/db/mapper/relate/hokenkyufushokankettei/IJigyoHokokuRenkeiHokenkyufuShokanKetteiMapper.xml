@@ -161,7 +161,7 @@
         <include refid="shichosonCode" />
     </sql>
     <sql id="shichosonCode">
-        <if test ="構成市町村区分 == 1">
+        <if test ="構成市町村区分 == 1 or (構成市町村区分 == 0 and 旧市町村区分 == 0)">
             AND #{市町村コード} = "shichosonCode"
         </if>
         <if test ="旧市町村区分 == 1">

@@ -57,6 +57,20 @@ public class DvShokanbaraiJohoValidator {
     }
 
     /**
+     * 出力順未設定チェックです。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validate出力順未設定() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(DvShokanbaraiJohoSpec.出力順未設定)
+                .thenAdd(DvShokanbaraiJohoValidationMessage.出力順未設定)
+                .messages());
+        return messages;
+    }
+
+    /**
      * サービス提供年月From、サービス提供年月Toの大小関係チェックです。
      *
      * @return エラーメッセージ

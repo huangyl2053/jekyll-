@@ -320,9 +320,6 @@ public class SaishinsaMoshitateTourokuPanelHandler {
             div.getKagoMoshitatePanel().getDropDownList3().setReadOnly(false);
             div.getKagoMoshitatePanel().getDropDownList6().setReadOnly(true);
             div.getKagoMoshitatePanel().getDropDownList7().setReadOnly(true);
-            div.getKagoMoshitatePanel().getDropDownList2().setSelectedIndex(ZERO);
-            div.getKagoMoshitatePanel().getDropDownList4().setSelectedIndex(ZERO);
-            div.getKagoMoshitatePanel().getDropDownList5().setSelectedIndex(ZERO);
             div.getKagoMoshitatePanel().getTextBoxDate1().setValue(null);
             div.getKagoMoshitatePanel().getCheckBoxList1().setSelectedItemsByKey(new ArrayList());
             if (RString.isNullOrEmpty(div.getKagoMoshitatePanel().getTextBox6().getValue())) {
@@ -435,7 +432,9 @@ public class SaishinsaMoshitateTourokuPanelHandler {
             List<KyufuJissekiGaitoshaBusiness> 給付実績一覧) {
         SaishinsaMoshitateTourokuCollect collect = new SaishinsaMoshitateTourokuCollect();
         collect.set被保険者番号(div.getSearchToKyufujissekiPanel().getTxtHihoNo().getValue());
+        collect.set被保険者名称(div.getSearchToKyufujissekiPanel().getTxtHihoName().getValue());
         collect.set事業所番号(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo());
+        collect.set事業者名称(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuMeisho());
         collect.set保険者番号(get保険者リストの値());
         if (div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue() != null) {
             collect.set提供年月開始(div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue()
@@ -552,6 +551,10 @@ public class SaishinsaMoshitateTourokuPanelHandler {
         }
         div.getKagoMoshitatePanel().getDropDownList5().setDataSource(申立理由DateSource);
         div.getKagoMoshitatePanel().getDropDownList5().setIsBlankLine(true);
+        if (!申立理由DateSource.isEmpty()) {
+            div.getKagoMoshitatePanel().getDropDownList5().setSelectedIndex(ZERO);
+        }
+
     }
 
     private void set申立対象項目DDL() {
@@ -569,6 +572,9 @@ public class SaishinsaMoshitateTourokuPanelHandler {
         }
         div.getKagoMoshitatePanel().getDropDownList4().setDataSource(申立対象項目DateSource);
         div.getKagoMoshitatePanel().getDropDownList4().setIsBlankLine(true);
+        if (!申立対象項目DateSource.isEmpty()) {
+            div.getKagoMoshitatePanel().getDropDownList4().setSelectedIndex(ZERO);
+        }
     }
 
     private void set申立者区分DDL() {
@@ -582,6 +588,9 @@ public class SaishinsaMoshitateTourokuPanelHandler {
         }
         div.getKagoMoshitatePanel().getDropDownList2().setDataSource(申立者区分DateSource);
         div.getKagoMoshitatePanel().getDropDownList2().setIsBlankLine(true);
+        if (!申立者区分DateSource.isEmpty()) {
+            div.getKagoMoshitatePanel().getDropDownList2().setSelectedIndex(ZERO);
+        }
     }
 
     /**

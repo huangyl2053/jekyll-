@@ -29,6 +29,8 @@ public class HanyoListSogoJigyoHiProcessParameter implements IBatchProcessParame
     private final RString 事業者コード;
     private final RString サービス種類コード;
     private final RString 保険者コード;
+    private final RString 保険者名;
+    private final RString 市町村コード;
     private final RString 抽出方法;
     private final RString サービス提供年月開始年月;
     private final RString サービス提供年月終了年月;
@@ -51,6 +53,8 @@ public class HanyoListSogoJigyoHiProcessParameter implements IBatchProcessParame
      * @param 事業者コード 事業者コード
      * @param サービス種類コード サービス種類コード
      * @param 保険者コード 保険者コード
+     *  * @param 保険者名 保険者名
+     * @param 市町村コード 市町村コード
      * @param 抽出方法 抽出方法
      * @param サービス提供年月開始年月 サービス提供年月開始年月
      * @param サービス提供年月終了年月 サービス提供年月終了年月
@@ -70,6 +74,8 @@ public class HanyoListSogoJigyoHiProcessParameter implements IBatchProcessParame
             RString 事業者コード,
             RString サービス種類コード,
             RString 保険者コード,
+            RString 保険者名,
+            RString 市町村コード,
             RString 抽出方法,
             RString サービス提供年月開始年月,
             RString サービス提供年月終了年月,
@@ -88,6 +94,8 @@ public class HanyoListSogoJigyoHiProcessParameter implements IBatchProcessParame
         this.事業者コード = 事業者コード;
         this.サービス種類コード = サービス種類コード;
         this.保険者コード = 保険者コード;
+        this.保険者名 = 保険者名;
+        this.市町村コード = 市町村コード;
         this.抽出方法 = 抽出方法;
         this.サービス提供年月開始年月 = サービス提供年月開始年月;
         this.サービス提供年月終了年月 = サービス提供年月終了年月;

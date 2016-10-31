@@ -42,9 +42,9 @@ public class NijiyoboJohoTaishoshaTorokuPanelValidationHandler {
     private ValidationDictionary createDictionary() {
         return new ValidationDictionaryBuilder()
                 .add(NijiyoboJohoTaishoshaTorokuPanelValidationMassages.適用期間重複,
-                        div.getSoukoinfo().getTxtymfromto())
+                        div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD())
                 .add(NijiyoboJohoTaishoshaTorokuPanelValidationMassages.開始日と終了日の前後順,
-                        div.getSoukoinfo().getTxtymfromto())
+                        div.getNijiyoboJohoShosai().getTxtTekiyoKikanYMD())
                 .build();
     }
 }

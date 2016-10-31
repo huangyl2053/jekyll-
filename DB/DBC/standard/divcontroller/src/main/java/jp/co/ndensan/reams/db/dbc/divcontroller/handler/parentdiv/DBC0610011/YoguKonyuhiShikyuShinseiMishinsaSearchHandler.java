@@ -72,6 +72,11 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         setグリッド(resultList);
+        if (resultList.size() > 0) {
+            div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getBtnIkkatsuShinsa().setDisabled(false);
+        } else {
+            div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getBtnIkkatsuShinsa().setDisabled(true);
+        }
         div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setIsOpen(false);
         div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setIsOpen(true);
         return resultList;
@@ -82,7 +87,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
      */
     public void 審査決定処理() {
         List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> selectedMishinsaShikyuShinsei = div.getYoguKonyuhiShikyuShinseiMishinsaResultList()
-                .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getDataSource();
+                .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getSelectedItems();
         for (dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row : selectedMishinsaShikyuShinsei) {
             if (限度額チェック(row) && !品目チェック(row)) {
                 row.setTxtShinsaNo(ShinsaNaiyoKubun.承認する.getコード());
@@ -127,6 +132,9 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> selectedMishinsaShikyuShinsei = div.getYoguKonyuhiShikyuShinseiMishinsaResultList()
                 .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getSelectedItems();
         for (dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row : selectedMishinsaShikyuShinsei) {
+            if (row.getTxtShinsaNo() == null || row.getTxtShinsaNo().isEmpty()) {
+                return;
+            }
             ShokanShinseiEntityResult entity = entityList.get(row.getRowNum().getValue().intValue());
             entity.getEntity().get償還払請求基本Entity().setHiHokenshaNo(new HihokenshaNo(row.getTxtHihoNo().getValue()));
             entity.getEntity().get償還払請求基本Entity().setServiceTeikyoYM(
@@ -145,7 +153,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             entity.getEntity().set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
             updList.add(entity);
         }
-        //FukushiyoguKonyuhiShikyuIkkatuShinsa.createInstance().updShikyuShinsei(決定日, updList);
+        FukushiyoguKonyuhiShikyuIkkatuShinsa.createInstance().updShikyuShinsei(決定日, updList);
     }
 
     private void setグリッド(List<ShokanShinseiEntityResult> resultList) {
@@ -181,6 +189,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             if (識別コード != null) {
                 row.setShikibetsuCode(識別コード.getColumnValue());
             }
+            row.setSelected(Boolean.TRUE);
             row.getTxtHokenKyufuAmount().setValue(new Decimal(entity.getEntity().get償還払支給申請Entity().getHokenKyufugaku()));
             row.getTxtRiyoshaFutanAmount().setValue(new Decimal(entity.getEntity().get償還払支給申請Entity().getRiyoshaFutangaku()));
             row.getTxtHiyoTotal().setValue(entity.getEntity().get償還払支給申請Entity().getShiharaiKingakuTotal());

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710020;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -49,6 +50,7 @@ public class DBC710020_HanyoListShokanbaraiJokyoParameter extends BatchParameter
     private static final String KINYUKIKANNAME = "金融機関名称";
     private static final String SHIHARAIHOHO = "支払方法";
     private static final String KEY_REAMS_LOGIN_ID = "reamsLoginId";
+    private static final String KEY_KINYUKIKANSHITENCODE = "kinyuKikanShitenCode";
 
     @BatchParameter(key = HOKENSHACODE, name = "保険者コード")
     private RString 保険者コード;
@@ -102,6 +104,8 @@ public class DBC710020_HanyoListShokanbaraiJokyoParameter extends BatchParameter
     private ReportId 帳票ID;
     @BatchParameter(key = KEY_REAMS_LOGIN_ID, name = "reamsLoginId")
     private RString reamsLoginId;
+    @BatchParameter(key = KEY_KINYUKIKANSHITENCODE, name = "kinyuKikanShitenCode")
+    private KinyuKikanShitenCode kinyuKikanShitenCode;
 
     /**
      * mybatisのパラメータを生成します。

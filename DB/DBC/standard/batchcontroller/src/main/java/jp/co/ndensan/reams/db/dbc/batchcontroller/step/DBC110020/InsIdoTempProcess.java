@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.HihoNoTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -25,8 +27,16 @@ public class InsIdoTempProcess extends BatchProcessBase<HihoNoTempEntity> {
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select被保番");
     private static final RString 被保番一時_TABLE_NAME = new RString("HihoNoTemp");
 
+    private List<HihokenshaNo> 保番NoList;
+
     @BatchWriter
     BatchEntityCreatedTempTableWriter 異動対象一時tableWriter;
+
+    @Override
+    protected void initialize() {
+        保番NoList = new ArrayList<>();
+        super.initialize();
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -41,6 +51,10 @@ public class InsIdoTempProcess extends BatchProcessBase<HihoNoTempEntity> {
 
     @Override
     protected void process(HihoNoTempEntity entity) {
+        if (保番NoList.contains(entity.getHihokenshaNo())) {
+            return;
+        }
+        保番NoList.add(entity.getHihokenshaNo());
         if (entity.getHihokenshaNo().equals(new HihokenshaNo("2016092401"))) {
             異動対象一時tableWriter.insert(entity);
         }

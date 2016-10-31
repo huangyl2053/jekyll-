@@ -211,6 +211,7 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
             } else {
                 eucManager.spool(eucFilePath);
             }
+            batchReportWriter.close();
         }
         eucCsvWriter.close();
     }

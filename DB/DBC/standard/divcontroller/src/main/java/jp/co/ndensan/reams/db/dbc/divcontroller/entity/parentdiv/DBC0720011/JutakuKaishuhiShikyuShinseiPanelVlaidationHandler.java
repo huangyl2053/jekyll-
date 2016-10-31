@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
 
     private final JutakuKaishuhiShikyuShinseiPanelDiv div;
-    private static final RString メッセージ_申請日 = new RString("支給申請日（FROM)と支給申請日（TO)");
+    private static final RString メッセージ_申請日 = new RString("支給申請日（FROM)または支給申請日（TO)");
     private static final RString メッセージ_申請日FROM = new RString("支給申請日（FROM)");
     private static final RString メッセージ_申請日TO = new RString("支給申請日（TO)");
     private static final RString メッセージ_決定日 = new RString("決定日");

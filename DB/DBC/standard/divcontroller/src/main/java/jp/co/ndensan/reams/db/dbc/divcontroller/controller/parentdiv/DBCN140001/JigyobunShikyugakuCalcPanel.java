@@ -119,11 +119,12 @@ public class JigyobunShikyugakuCalcPanel {
      * @param div JukyushaIdoRenrakuhyoHenkoMainPanelDiv
      * @return ResponseData
      */
-    public ResponseData<JigyobunShikyugakuCalcPanelDiv> onBlur_TxtHihokenshaNo(
+    public ResponseData<JigyobunShikyugakuCalcPanelDiv> onBlur_txtHihokenshaNo(
             JigyobunShikyugakuCalcPanelDiv div) {
-        if (div.getChushutsuJoken().getHihokenshaNo() != null && !div.getChushutsuJoken().getHihokenshaNo().isEmpty()) {
+        if (div.getChushutsuJoken().getTxtHihokenshaNo().getValue() != null
+                && !div.getChushutsuJoken().getTxtHihokenshaNo().getValue().isEmpty()) {
             HihokenshaDaicho 被保険者台帳 = HihokenshaDaichoManager.createInstance().selectByHihokenshaNo(
-                    new HihokenshaNo(div.getChushutsuJoken().getHihokenshaNo()));
+                    new HihokenshaNo(div.getChushutsuJoken().getTxtHihokenshaNo().getValue()));
             if (被保険者台帳 == null) {
                 throw new ApplicationException(
                         UrErrorMessages.存在しない.getMessage().replace(被保険者台帳TXT.toString()));

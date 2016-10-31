@@ -126,6 +126,30 @@ public class JukyushaKyufuJissekiIchiranReportSource implements IReportSource {
     public RString listLower_11;
     @ReportItem(name = "listLower_12", length = 10, order = 55)
     public RString listLower_12;
+    @ReportItem(name = "list_choikiCode", length = 10, order = 56)
+    public RString list_choikiCode;
+    @ReportItem(name = "list_gyoseikuCode", length = 10, order = 57)
+    public RString list_gyoseikuCode;
+    @ReportItem(name = "list_setaiCode", length = 10, order = 58)
+    public RString list_setaiCode;
+    @ReportItem(name = "list_kanaMeisho", length = 10, order = 59)
+    public RString list_kanaMeisho;
+    @ReportItem(name = "list_shichosonCode", length = 10, order = 60)
+    public RString list_shichosonCode;
+    @ReportItem(name = "list_hiHokenshaNo", length = 10, order = 61)
+    public RString list_hiHokenshaNo;
+    @ReportItem(name = "list_serviceTeikyoYM", length = 10, order = 62)
+    public RString list_serviceTeikyoYM;
+    @ReportItem(name = "list_shinsaYM", length = 10, order = 63)
+    public RString list_shinsaYM;
+    @ReportItem(name = "list_jigyoshoNo", length = 10, order = 64)
+    public RString list_jigyoshoNo;
+    @ReportItem(name = "list_shoKisaiHokenshaNo", length = 10, order = 65)
+    public RString list_shoKisaiHokenshaNo;
+    @ReportItem(name = "list_inputShikibetsuNo", length = 10, order = 66)
+    public RString list_inputShikibetsuNo;
+    @ReportItem(name = "list_yoKaigoJotaiKubunCode", length = 10, order = 67)
+    public RString list_yoKaigoJotaiKubunCode;
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")

@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -80,6 +81,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     private static final RString 給付実績連動_受託なし = new RString("1");
     private static final RString 給付実績緋連動_受託あり = new RString("2");
     private static final RString 償還払決定情報を登録 = new RString("償還払決定情報を登録して");
+    private static final int 前ゼロ付き10桁 = 10;
 
     /**
      * 画面ロードメソッドです。
@@ -277,7 +279,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             handler.set画面遷移パラメータ(引き継ぎデータEntity.get識別コード(),
                     引き継ぎデータEntity.get被保険者番号(), 画面モード_修正, param);
             ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
-            return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報).respond();
+            return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報).parameter(画面モード_登録);
         }
         if (確認_汎用 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             set完了状態(div);
@@ -340,7 +342,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         JigyoshaMode jigyoshaMode = DataPassingConverter.deserialize(div.getJigyoshaMode(), JigyoshaMode.class);
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaNo().setValue(
                 jigyoshaMode.getJigyoshaNo().value());
-        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseishaNameKana().setValue(
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaName().setPlaceHolder(
                 jigyoshaMode.getJigyoshaName().value());
         return ResponseData.of(div).respond();
     }
@@ -406,37 +408,13 @@ public class JutakuKaishuShinseiJyohoToroku {
                 ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             if (画面モード_審査.equals(画面モード)) {
-                return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).
-                        parameter(画面モード_審査);
+                return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
             } else if (画面モード_照会.equals(画面モード)) {
-                return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).
-                        parameter(画面モード_照会);
+                return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).respond();
             } else {
                 return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to申請一覧).
                         parameter(画面モード_以外);
             }
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 個人検索へ戻るのメソッドです。
-     *
-     * @param div 住宅改修費支給申請_申請情報登録DIV
-     * @return ResponseData
-     */
-    public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnBackToSearch(
-            JutakuKaishuShinseiJyohoTorokuDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to個人検索).
-                    respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -469,6 +447,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
             handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
+            handler.保険者ドロップダウンリストを再セット(画面提供着工年月);
         }
         return ResponseData.of(div).respond();
     }
@@ -542,7 +521,8 @@ public class JutakuKaishuShinseiJyohoToroku {
             if ((画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード))
                     && (!領収日.getYear().equals(画面提供着工年月.getYear()))) {
                 div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                        SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード(), 領収日.getYearValue()).nextString());
+                        SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.償還整理番号.getコード(),
+                        new FlexibleYear(領収日.getYear().toDateString())).nextString().padZeroToLeft(前ゼロ付き10桁));
             }
         }
         return ResponseData.of(div).respond();
@@ -574,18 +554,18 @@ public class JutakuKaishuShinseiJyohoToroku {
                 handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード, param);
                 ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
                 return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
-                        .respond();
+                        .parameter(画面モード_登録);
             }
         } else if (画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード)) {
             handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード_修正, param);
             ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
-                    .respond();
+                    .parameter(画面モード_登録);
         } else {
             handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード, param);
             ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
-                    .respond();
+                    .parameter(画面モード_照会);
         }
         return ResponseData.of(div).respond();
     }
@@ -639,14 +619,13 @@ public class JutakuKaishuShinseiJyohoToroku {
             return ResponseData.of(div).addValidationMessages(valid2).respond();
         }
         Decimal 費用額合計 = handler.費用額合計の取得();
-        div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
-                .getTxtHiyoTotalNow().setValue(費用額合計);
+        div.getJutakuKaishuShinseiResetInfo().getTxtHiyoTotalNow().setValue(費用額合計);
         JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager manager
                 = JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager.createInstance();
         FlexibleYearMonth 画面提供着工年月 = new FlexibleYearMonth(
                 div.getTxtTeikyoYM().getValue().getYearMonth().toDateString());
         boolean 要介護状態３段階変更の判定 = manager.checkYaokaigoJyotaiSandannkai(被保険者番号, 画面提供着工年月);
-        List<RString> 要介護状態区分３段階変更チェック = div.getJutakuKaishuShinseiContents()
+        List<RString> 要介護状態区分３段階変更チェック = div
                 .getJutakuKaishuShinseiResetInfo().getChkResetInfo().getSelectedKeys();
         boolean 限度額リセット対象 = new RString(DbcQuestionMessages.要介護状態区分変更_限度額リセット対象.getMessage()
                 .getCode()).equals(ResponseHolder.getMessageCode());
@@ -667,8 +646,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                 return ResponseData.of(div).addMessage(message).respond();
             }
             to限度額リセット対象(要介護状態区分３段階変更チェック, div, 限度額リセット対象);
-        } else if (!要介護状態３段階変更の判定 && (!要介護状態区分３段階変更チェック.isEmpty()
-                && 要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による))) {
+        } else if (is要介護状態３段階変更flag(要介護状態３段階変更の判定, 要介護状態区分３段階変更チェック)) {
             if (is限度額リセット対象(限度額リセット対象外, 改修住所_限度額リセット対象,
                     改修住所_限度額リセット対象外, 住宅改修限度額確認)) {
                 QuestionMessage message = new QuestionMessage(
@@ -678,11 +656,10 @@ public class JutakuKaishuShinseiJyohoToroku {
             }
             to限度額リセット対象外(要介護状態区分３段階変更チェック, div, 限度額リセット対象外);
         }
-        List<dgGaisyuList_Row> gridList = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
-                .get住宅改修内容一覧();
+        RString 改修住宅住所 = editor改修住宅住所(div);
         JutakuKaishuJyusyoChofukuHanntei chofukuHanntei = JutakuKaishuJyusyoChofukuHanntei.createInstance();
         boolean is改修住所重複 = chofukuHanntei.checkKaishuJyusyoChofukuToroku(被保険者番号,
-                画面提供着工年月, gridList.get(0).getTxtJutakuAddress());
+                画面提供着工年月, 改修住宅住所);
         if (is改修住所変更(is改修住所重複, 要介護状態区分３段階変更チェック)) {
             if (is改修住所_限度額リセット対象(改修住所_限度額リセット対象, 住宅改修限度額確認)) {
                 QuestionMessage message = new QuestionMessage(
@@ -691,8 +668,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                 return ResponseData.of(div).addMessage(message).respond();
             }
             to改修住所_限度額リセット対象(要介護状態区分３段階変更チェック, div, 改修住所_限度額リセット対象);
-        } else if (is改修住所重複 && (!要介護状態区分３段階変更チェック.isEmpty()
-                && 要介護状態区分３段階変更チェック.contains(住宅住所変更による))) {
+        } else if (is要介護状態区分３段階変更flag(is改修住所重複, 要介護状態区分３段階変更チェック)) {
             if (is改修住所_限度額リセット対象(改修住所_限度額リセット対象外, 住宅改修限度額確認)) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().getCode(),
@@ -720,20 +696,42 @@ public class JutakuKaishuShinseiJyohoToroku {
         JutakuGaisuDataParameter 住宅改修データ = new JutakuGaisuDataParameter();
         住宅改修データ.set限度額リセット(要介護状態区分３段階変更チェック);
         住宅改修データ.set住宅改修データ(handler.get住宅改修内容一覧データ(
-                div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList().get住宅改修内容一覧()));
+                div.getCcdJutakugaisyunaiyoList().get住宅改修内容一覧()));
         param.set住宅改修データ(住宅改修データ);
         ViewStateHolder.put(ViewStateKeys.申請情報, param);
         return ResponseData.of(div).respond();
     }
 
+    private boolean is要介護状態区分３段階変更flag(boolean is改修住所重複, List<RString> 要介護状態区分３段階変更チェック) {
+        return is改修住所重複 && (要介護状態区分３段階変更チェック != null && !要介護状態区分３段階変更チェック.isEmpty()
+                && 要介護状態区分３段階変更チェック.contains(住宅住所変更による));
+    }
+
+    private boolean is要介護状態３段階変更flag(boolean 要介護状態３段階変更の判定,
+            List<RString> 要介護状態区分３段階変更チェック) {
+        return !要介護状態３段階変更の判定 && (要介護状態区分３段階変更チェック != null
+                && !要介護状態区分３段階変更チェック.isEmpty()
+                && 要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による));
+    }
+
+    private RString editor改修住宅住所(JutakuKaishuShinseiJyohoTorokuDiv div) {
+        List<dgGaisyuList_Row> gridList = div.getCcdJutakugaisyunaiyoList()
+                .get住宅改修内容一覧();
+        RString 改修住宅住所 = null;
+        if (gridList != null && !gridList.isEmpty()) {
+            改修住宅住所 = gridList.get(0).getTxtJutakuAddress();
+        }
+        return 改修住宅住所;
+    }
+
     private boolean is改修住所変更(boolean is改修住所重複, List<RString> 要介護状態区分３段階変更チェック) {
-        return !is改修住所重複 && (要介護状態区分３段階変更チェック.isEmpty()
+        return !is改修住所重複 && (要介護状態区分３段階変更チェック == null || 要介護状態区分３段階変更チェック.isEmpty()
                 || !要介護状態区分３段階変更チェック.contains(住宅住所変更による));
     }
 
     private boolean is要介護状態３段階変更(boolean 要介護状態３段階変更の判定,
             List<RString> 要介護状態区分３段階変更チェック) {
-        return 要介護状態３段階変更の判定 && (要介護状態区分３段階変更チェック.isEmpty()
+        return 要介護状態３段階変更の判定 && (要介護状態区分３段階変更チェック == null || 要介護状態区分３段階変更チェック.isEmpty()
                 || !要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による));
     }
 
@@ -755,7 +753,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             boolean 改修住所_限度額リセット対象外) {
         if (改修住所_限度額リセット対象外 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             要介護状態区分３段階変更チェック.remove(住宅住所変更による);
-            div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+            div.getJutakuKaishuShinseiResetInfo()
                     .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
         }
     }
@@ -765,7 +763,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             boolean 改修住所_限度額リセット対象) {
         if (改修住所_限度額リセット対象 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             要介護状態区分３段階変更チェック.add(住宅住所変更による);
-            div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+            div.getJutakuKaishuShinseiResetInfo()
                     .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
         }
     }
@@ -775,7 +773,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             boolean 限度額リセット対象外) {
         if (限度額リセット対象外 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             要介護状態区分３段階変更チェック.remove(要介護状態区分3段階変更による);
-            div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+            div.getJutakuKaishuShinseiResetInfo()
                     .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
         }
     }
@@ -785,7 +783,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             boolean 限度額リセット対象) {
         if (限度額リセット対象 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             要介護状態区分３段階変更チェック.add(要介護状態区分3段階変更による);
-            div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+            div.getJutakuKaishuShinseiResetInfo()
                     .getChkResetInfo().setSelectedItemsByKey(要介護状態区分３段階変更チェック);
         }
     }
@@ -797,7 +795,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     private JutakuKaishuShinseiJyohoTorokuValidationHandler getJutakuKaishuShinseiJyohoTorokuValidationHandler(
             JutakuKaishuShinseiJyohoTorokuDiv div, RString 画面モード, RString 住宅改修内容チェックエラーメッセージ,
             boolean is給付率) {
-        if (画面モード != null || 住宅改修内容チェックエラーメッセージ != null) {
+        if (!RString.isNullOrEmpty(画面モード) || !RString.isNullOrEmpty(住宅改修内容チェックエラーメッセージ)) {
             return new JutakuKaishuShinseiJyohoTorokuValidationHandler(
                     画面モード, div, 住宅改修内容チェックエラーメッセージ, is給付率);
         } else {

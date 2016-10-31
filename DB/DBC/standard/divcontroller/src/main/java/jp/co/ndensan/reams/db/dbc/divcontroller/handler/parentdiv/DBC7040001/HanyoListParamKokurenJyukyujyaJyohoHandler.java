@@ -13,11 +13,13 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710060.DBC710060_HanyoL
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710070.DBC710070_HanyoListKyodoJukyushaShokanParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_RiyoshaFutanKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_ServiceKubunCode;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7040001.HanyoListParamKokurenJyukyujyaJyohoDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -120,14 +122,24 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         parameter.setRenbanFuka(is連番付加);
         parameter.setHitsukeHenshu(is日付編集);
         RString 市町村コード = RString.EMPTY;
+        RString 保険者コード = RString.EMPTY;
+        RString 保険者名 = RString.EMPTY;
         if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
             if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
                 市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            }
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().isEmpty()) {
+                保険者コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
             } else {
-                市町村コード = 全市町村;
+                保険者コード = 全市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称())) {
+                保険者名 = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称();
             }
         }
-        parameter.setHokenshaKodo(市町村コード);
+        parameter.setHokenshaKodo(保険者コード);
+        parameter.setHokenshaName(保険者名);
+        parameter.setShichosonCode(市町村コード);
         parameter.setHitsukeChushutsuKubun(div.getRadChushutsuHaniSentaku().getSelectedKey());
         parameter.setShoriTaishoNengetsuFrom(rDateToRString(div.getTxtShoriTaishoNengetsu().getFromValue()));
         parameter.setShoriTaishoNengetsuTo(rDateToRString(div.getTxtShoriTaishoNengetsu().getToValue()));
@@ -183,14 +195,24 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         parameter.setRenbanFuka(is連番付加);
         parameter.setHitsukeHenshu(is日付編集);
         RString 市町村コード = RString.EMPTY;
+        RString 保険者コード = RString.EMPTY;
+        RString 保険者名 = RString.EMPTY;
         if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
             if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
                 市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            }
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().isEmpty()) {
+                保険者コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
             } else {
-                市町村コード = 全市町村;
+                保険者コード = 全市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称())) {
+                保険者名 = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称();
             }
         }
-        parameter.setHokenshaKodo(市町村コード);
+        parameter.setHokenshaKodo(保険者コード);
+        parameter.setHokenshaName(保険者名);
+        parameter.setShichosonCode(市町村コード);
         parameter.setHitsukeChushutsuKubun(div.getRadChushutsuHaniSentaku().getSelectedKey());
         parameter.setShoriTaishoNengetsuFrom(rDateToRString(div.getTxtShoriTaishoNengetsu().getFromValue()));
         parameter.setShoriTaishoNengetsuTo(rDateToRString(div.getTxtShoriTaishoNengetsu().getToValue()));
@@ -246,14 +268,24 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         parameter.setRenbanFuka(is連番付加);
         parameter.setHitsukeHenshu(is日付編集);
         RString 市町村コード = RString.EMPTY;
+        RString 保険者コード = RString.EMPTY;
+        RString 保険者名 = RString.EMPTY;
         if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
             if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
                 市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            }
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().isEmpty()) {
+                保険者コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
             } else {
-                市町村コード = 全市町村;
+                保険者コード = 全市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称())) {
+                保険者名 = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称();
             }
         }
-        parameter.setHokenshaKodo(市町村コード);
+        parameter.setHokenshaKodo(保険者コード);
+        parameter.setHokenshaName(保険者名);
+        parameter.setShichosonCode(市町村コード);
         parameter.setHitsukeChushutsuKubun(div.getRadChushutsuHaniSentaku().getSelectedKey());
         parameter.setShoriTaishoNengetsuFrom(rDateToRString(div.getTxtShoriTaishoNengetsu().getFromValue()));
         parameter.setShoriTaishoNengetsuTo(rDateToRString(div.getTxtShoriTaishoNengetsu().getToValue()));
@@ -333,14 +365,24 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         parameter.setRenbanFuka(is連番付加);
         parameter.setHitsukeHenshu(is日付編集);
         RString 市町村コード = RString.EMPTY;
+        RString 保険者コード = RString.EMPTY;
+        RString 保険者名 = RString.EMPTY;
         if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
             if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
                 市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            }
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().isEmpty()) {
+                保険者コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
             } else {
-                市町村コード = 全市町村;
+                保険者コード = 全市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称())) {
+                保険者名 = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称();
             }
         }
-        parameter.setHokenshaKodo(市町村コード);
+        parameter.setHokenshaKodo(保険者コード);
+        parameter.setHokenshaName(保険者名);
+        parameter.setShichosonCode(市町村コード);
         parameter.setHitsukeChushutsuKubun(div.getRadChushutsuHaniSentaku().getSelectedKey());
         parameter.setShoriTaishoNengetsuFrom(rDateToRString(div.getTxtShoriTaishoNengetsu().getFromValue()));
         parameter.setShoriTaishoNengetsuTo(rDateToRString(div.getTxtShoriTaishoNengetsu().getToValue()));
@@ -410,13 +452,15 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
                 div.getCcdHokenshaList().loadHokenshaList();
             } else {
                 div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
-                        new LasdecCode(honkenshaCode));
+                        new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("shichosonCode"))));
             }
         }
         List<RString> idoKubunList = new ArrayList<>();
         for (Object idokubun : restoreBatchParameterMap.getParameterValue(List.class, new RString("idoKubun"))) {
             idoKubunList.add(new RString(idokubun.toString()));
         }
+        Long 出力順ID = restoreBatchParameterMap.getParameterValue(Long.class, new RString("shutsuryokujunId"));
+        syutsuryokujunRestore(モード, 出力順ID);
         if (モード1.equals(モード) || モード2.equals(モード)) {
             div.getChkIdokubunKodo1().setSelectedItemsByKey(idoKubunList);
         } else if (モード3.equals(モード)) {
@@ -601,5 +645,19 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
             return RString.EMPTY;
         }
         return 日付.getYearMonth().toDateString();
+    }
+
+    private void syutsuryokujunRestore(RString モード, Long 出力順ID) {
+        if (出力順ID != null) {
+            if (モード1.equals(モード)) {
+                div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701005.getReportId(), 出力順ID);
+            } else if (モード2.equals(モード)) {
+                div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701007.getReportId(), 出力順ID);
+            } else if (モード3.equals(モード)) {
+                div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701006.getReportId(), 出力順ID);
+            } else if (モード4.equals(モード)) {
+                div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701004.getReportId(), 出力順ID);
+            }
+        }
     }
 }

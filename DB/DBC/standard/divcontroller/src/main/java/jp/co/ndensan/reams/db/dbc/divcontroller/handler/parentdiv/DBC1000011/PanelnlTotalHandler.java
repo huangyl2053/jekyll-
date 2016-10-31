@@ -59,13 +59,13 @@ public class PanelnlTotalHandler {
     public void onLoad(ShoriDateKanri shori, ChohyoBunruiKanri chohyo) {
         if (shori != null && shori.get対象開始年月日() != null) {
             div.getTxtZenkaiTaishobi().setFromValue(new RDate(shori.get対象開始年月日().toString()));
-            div.getTxtUketsukebi().setFromValue(new RDate(shori.get対象開始年月日().toString())
-                    .plusDay(1));
-            div.getTxtKeteibiJoken().setFromValue(new RDate(shori.get対象開始年月日().toString())
-                    .plusDay(1));
         }
         if (shori != null && shori.get対象終了年月日() != null) {
             div.getTxtZenkaiTaishobi().setToValue(new RDate(shori.get対象終了年月日().toString()));
+            div.getTxtUketsukebi().setFromValue(new RDate(shori.get対象終了年月日().toString())
+                    .plusDay(1));
+            div.getTxtKeteibiJoken().setFromValue(new RDate(shori.get対象終了年月日().toString())
+                    .plusDay(1));
         }
         div.getTxtZenkaiTaishobi().setReadOnly(true);
         div.getRadUketsukebi().setSelectedKey(キー);
@@ -217,7 +217,7 @@ public class PanelnlTotalHandler {
             paramter.set印書(抽出条件_3);
         }
         paramter.set発行日(div.getPnlShokanbaraiShikyuKeteiTuchisho().getTxtHakkobi().getValue());
-        paramter.set文書番号(div.getPnlShokanbaraiShikyuKeteiTuchisho().getTxtBunshoNo().getValue());
+        paramter.set文書番号(div.getBunshoBangoInput().get文書番号());
         if (div.getPnlShokanbaraiShikyuKeteiTuchisho().getChkTestShutsuryoku().getSelectedKeys().isEmpty()) {
             paramter.setテスト出力フラグ(フラグ_FALSE);
         } else {

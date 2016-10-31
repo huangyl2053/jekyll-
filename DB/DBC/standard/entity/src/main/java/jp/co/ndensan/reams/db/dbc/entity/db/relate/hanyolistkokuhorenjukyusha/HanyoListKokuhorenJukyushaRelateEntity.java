@@ -19,10 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class HanyoListKokuhorenJukyushaRelateEntity {
 
     private RString 市町村コード;
-    private RString 二次予防事業対象者_適用開始年月日;
-    private RString 二次予防事業対象者_適用終了年月日;
-    private RString 調査実施日;
-    private RString 決定年月日;
     private RString 送付年月;
     private RString 被保険者番号;
     private int 履歴番号;
@@ -94,5 +90,14 @@ public class HanyoListKokuhorenJukyushaRelateEntity {
     private RString 二次予防事業有効期間開始年月日;
     private RString 二次予防事業有効期間終了年月日;
     private RString 二次予防事業区分コード;
+    private RString 住所地特例対象者区分コード;
+    private RString 施設所在保険者番号;
+    private RString 住所地特例適用開始日;
+    private RString 住所地特例適用終了日;
+    private RString 居宅費新1負担限度額;
+    private RString 居宅費新2負担限度額;
+    private RString 居宅費新3負担限度額;
+    private RString 利用者負担割合有効開始日;
+    private RString 利用者負担割合有効終了日;
     private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
 }

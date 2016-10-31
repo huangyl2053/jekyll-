@@ -37,6 +37,9 @@ public class Yokaigoninteiimagekanri {
     private static final RString その他資料5 = new RString("E0");
     private static final RString その他資料6 = new RString("F0");
     private static final RString その他資料 = new RString("F1401");
+    private static final RString イメージ区分_調査票概況 = new RString("1");
+    private static final RString イメージ区分_意見書 = new RString("2");
+    private static final RString イメージ区分_その他資料 = new RString("3");
     private static final int その他資料MAX = 6;
     private final YokaigoninteiimagekanriFinder finder;
 
@@ -101,24 +104,13 @@ public class Yokaigoninteiimagekanri {
     }
 
     /**
-     * 調査票特記ボタンをクリックします。
-     *
-     * @param div 介護認定審査会委員情報
-     * @return ResponseData
-     */
-    public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnChosahyoTokuki(YokaigoninteiimagekanriDiv div) {
-
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 調査票概況ボタンをクリックします。
      *
      * @param div 介護認定審査会委員情報
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnChosahyoGaikyo(YokaigoninteiimagekanriDiv div) {
-//　TODO ダイアログ「画面ImageDisplayイメージ情報表示」を実装しない、2016/07/20　王暁冬
+        ViewStateHolder.put(ViewStateKeys.イメージ区分, イメージ区分_調査票概況);
         return ResponseData.of(div).respond();
     }
 
@@ -129,7 +121,7 @@ public class Yokaigoninteiimagekanri {
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnIkensho(YokaigoninteiimagekanriDiv div) {
-//　TODO ダイアログ「画面ImageDisplayイメージ情報表示」を実装しない、2016/07/20　王暁冬
+        ViewStateHolder.put(ViewStateKeys.イメージ区分, イメージ区分_意見書);
         return ResponseData.of(div).respond();
     }
 
@@ -140,7 +132,7 @@ public class Yokaigoninteiimagekanri {
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnSonota(YokaigoninteiimagekanriDiv div) {
-//　TODO ダイアログ「画面ImageDisplayイメージ情報表示」を実装しない、2016/07/20　王暁冬
+        ViewStateHolder.put(ViewStateKeys.イメージ区分, イメージ区分_その他資料);
         return ResponseData.of(div).respond();
     }
 

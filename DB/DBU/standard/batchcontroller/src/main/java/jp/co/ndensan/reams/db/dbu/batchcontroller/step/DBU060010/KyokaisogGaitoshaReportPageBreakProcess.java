@@ -62,12 +62,14 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<K
     private KyokaisoKanriMasterListChohyoDataSakuseiEntity sakuseiEntity;
     private List<RString> pageBreakKeys;
     private ShutsuryokujunRelateEntity 出力順Entity;
+    private boolean 出力;
     @BatchWriter
     private BatchReportWriter<KyokaisoKanriMasterListReportSource> batchReportWriter;
     private ReportSourceWriter<KyokaisoKanriMasterListReportSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
+        出力 = false;
         kyokaisokanrimasterList = new KyokaisogGaitoshaListEntity();
         dataSakusei = new KyokaisoKanriMasterListChohyoDataSakusei();
         business = new KyokaisoKanriMasterListBusiness();
@@ -77,7 +79,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<K
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, business.createMybatisParameter(出力順Entity.get出力順OrderBy().replace("order by", ""),
+        return new BatchDbReader(MYBATIS_SELECT_ID, business.createMybatisParameter(出力順Entity.get出力順OrderBy(),
                 parameter));
     }
 
@@ -104,6 +106,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<K
         sakuseiEntity = dataSakusei.getcreateNenreiToutatsuYoteishaCheckListChohyo(kyokaisokanrimasterList, entity);
         KyokaisoKanriMasterListReport report = new KyokaisoKanriMasterListReport(sakuseiEntity);
         report.writeBy(reportSourceWriter);
+        出力 = true;
         new NinteiChosaDataOutputResult().getアクセスログ(entity.getSeibetsuCode());
 
     }
@@ -147,6 +150,12 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchKeyBreakBase<K
 
     @Override
     protected void afterExecute() {
+        if (!出力) {
+            paramte();
+            sakuseiEntity = dataSakusei.getcreateNenreiToutatsuYoteishaCheckListChohyo(kyokaisokanrimasterList, null);
+            KyokaisoKanriMasterListReport report = new KyokaisoKanriMasterListReport(sakuseiEntity);
+            report.writeBy(reportSourceWriter);
+        }
         outputJokenhyoFactory();
     }
 

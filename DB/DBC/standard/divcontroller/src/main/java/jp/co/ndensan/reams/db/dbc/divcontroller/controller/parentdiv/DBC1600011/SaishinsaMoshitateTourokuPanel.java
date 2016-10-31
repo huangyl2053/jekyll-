@@ -82,6 +82,7 @@ public class SaishinsaMoshitateTourokuPanel {
     private static final RString MESSAGE = new RString("再審査申立テーブルを更新しました。");
     private static final RString 排他キー = new RString("DBCHihokenshaNo");
     private static final RString FOUR_SPACES = new RString("    ");
+    private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
     private static final int ONE = 1;
 
     /**
@@ -91,6 +92,8 @@ public class SaishinsaMoshitateTourokuPanel {
      * @return ResponseData<SaishinsaMoshitateTourokuPanelDiv>
      */
     public ResponseData<SaishinsaMoshitateTourokuPanelDiv> onLoad(SaishinsaMoshitateTourokuPanelDiv div) {
+        ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);
+        div.getCcdJigyoshaSentaku().initialize();
         SaishinsaMoshitateTourokuCollect collect = DataPassingConverter.deserialize(
                 div.getHdn一覧検索条件(),
                 SaishinsaMoshitateTourokuCollect.class);
@@ -120,6 +123,7 @@ public class SaishinsaMoshitateTourokuPanel {
                 div.getSearchToKyufujissekiPanel().getTxtHihoName().setValue(collect.get被保険者名称());
             }
             div.getCcdJigyoshaSentaku().setNyuryokuShisetsuKodo(collect.get事業所番号());
+            div.getCcdJigyoshaSentaku().setShisetsuMeisho(collect.get事業者名称());
             if (collect.get提供年月開始() != null) {
                 div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().setFromValue(
                         new RDate(collect.get提供年月開始().toString()));

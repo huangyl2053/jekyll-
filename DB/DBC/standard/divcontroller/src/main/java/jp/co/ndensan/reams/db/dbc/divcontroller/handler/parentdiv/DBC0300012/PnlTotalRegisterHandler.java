@@ -118,34 +118,22 @@ public final class PnlTotalRegisterHandler {
         KinyuKikan kinyuKikan = KinyuKikanManager.createInstance().get金融機関(金融機関検索条件);
         div.getCcdKinyukikan().set金融機関(kinyuKikan, record.get支店コード(), record.get開始年月日());
         List<YokinShubetsuPattern> 口座種別情報 = KinyuKikanManager.createInstance().get金融機関(金融機関検索条件).get預金種別リスト();
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
         List<KeyValueDataSource> keyValueDataSource = div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().getDataSource();
+        dataSource.addAll(keyValueDataSource);
         if (口座種別情報 != null && !口座種別情報.isEmpty()) {
             for (YokinShubetsuPattern code : 口座種別情報) {
-                keyValueDataSource.add(new KeyValueDataSource(code.get預金種別コード(), code.get預金種別名称()));
-            }
-            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
-            for (KeyValueDataSource source : keyValueDataSource) {
-                if (source.getKey().equals(record.get口座種別())) {
-                    div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setSelectedKey(record.get口座種別());
+                if (!isContainKey(dataSource, code.get預金種別コード())) {
+                    dataSource.add(new KeyValueDataSource(code.get預金種別コード(), code.get預金種別名称()));
                 }
+            }
+            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(dataSource);
+            if (isContainKey(dataSource, record.get口座種別())) {
+                div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setSelectedKey(record.get口座種別());
             }
         } else {
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
         }
-//        div.getPnlKeyakuJigyosya().getCcdKinyukikan().search(record.get金融機関コード(),
-//                record.get支店コード(), FlexibleDate.getNowDate());
-//        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
-//                new CodeShubetsu(預金種別コード), FlexibleDate.getNowDate());
-//        List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
-//        if (codeList != null && !codeList.isEmpty()) {
-//            for (UzT0007CodeEntity code : codeList) {
-//                keyValueDataSource.add(new KeyValueDataSource(code.getコード().getColumnValue(), code.getコード名称()));
-//            }
-//            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
-//            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setSelectedKey(record.get口座種別());
-//        } else {
-//            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
-//        }
         if (div.getPnlKeyakuJigyosya().getCcdKinyukikan().isゆうちょ銀行()) {
             div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setVisible(false);
         }
@@ -507,6 +495,7 @@ public final class PnlTotalRegisterHandler {
      * 送付先口座種別の取得
      */
     public void set送付先口座種別() {
+        div.getDdlSofusakiKouzasyubetu().getDataSource().clear();
         if (div.getPnlKeyakuJigyosya().getCcdKinyukikan().get金融機関() != null) {
             List<YokinShubetsuPattern> 口座種別情報 = div.getPnlKeyakuJigyosya().getCcdKinyukikan().get金融機関().get預金種別リスト();
             if (口座種別情報 != null) {
@@ -518,5 +507,16 @@ public final class PnlTotalRegisterHandler {
                 div.getDdlSofusakiKouzasyubetu().setDataSource(list);
             }
         }
+    }
+
+    private boolean isContainKey(List<KeyValueDataSource> dataSource, RString key) {
+        if (dataSource != null) {
+            for (KeyValueDataSource keyValue : dataSource) {
+                if (keyValue.getKey().equals(key)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

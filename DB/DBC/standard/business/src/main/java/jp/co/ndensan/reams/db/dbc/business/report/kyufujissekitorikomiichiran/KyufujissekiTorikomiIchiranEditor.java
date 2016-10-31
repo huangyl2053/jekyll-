@@ -207,6 +207,15 @@ public class KyufujissekiTorikomiIchiranEditor implements
         }
 
         source.shikibetsuCode = entity.get識別コード();
+        if (entity.get給付実績_保険者番号() != null) {
+            source.hokenshaNo = entity.get給付実績_保険者番号().getColumnValue();
+        }
+        source.yubinNo = entity.get被保険者_郵便番号();
+        source.choikiCode = entity.get被保険者_町域コード();
+        source.gyoseikuCode = entity.get被保険者_行政区コード();
+        source.shimei50onKana = entity.get被保険者_氏名50音カナ();
+        source.shichosonCode = entity.get被保険者_市町村コード();
+        source.kyufuJissekiKubun = entity.get給付実績_給付実績区分();
         return source;
 
     }

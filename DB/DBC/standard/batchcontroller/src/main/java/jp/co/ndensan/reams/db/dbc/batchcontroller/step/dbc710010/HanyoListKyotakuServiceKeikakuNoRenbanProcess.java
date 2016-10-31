@@ -7,11 +7,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710010;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.hanyolistshokanbaraijokyo.HanyoListKyotakuServiceKeikakuOutputOrders;
-import jp.co.ndensan.reams.db.dbc.business.core.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoOutputOrders;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.SakuseiKubun;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuKijunYMDParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity;
@@ -28,7 +25,6 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -130,23 +126,13 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
             outputOrder = fider.get出力順(SubGyomuCode.DBC介護給付, parameter.get帳票ID(),
                     Long.valueOf(parameter.get改頁出力順ID().toString()));
         }
-        RString 様式番号Order = RString.EMPTY;
         RString orderByClause = null;
         if (outputOrder != null) {
-            for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
-                if (HanyoListShokanbaraiJokyoOutputOrders.様式番号.get項目ID().equals(setSortItem.get項目ID())) {
-                    様式番号Order = new RString(setSortItem.get昇降順().getOrder());
-                } else {
-                    様式番号Order = RString.EMPTY;
-                }
-            }
             orderByClause = MyBatisOrderByClauseCreator.create(HanyoListKyotakuServiceKeikakuOutputOrders.class,
                     outputOrder);
         }
         HanyoListKyotakuServiceKeikakuMybatisParameter mabatisParam = parameter.toMybatisParameter();
         mabatisParam.setOrderByClause(orderByClause);
-        mabatisParam.set様式番号Order(様式番号Order);
-
         return new BatchDbReader(READ_DATA_ID, mabatisParam);
     }
 
@@ -165,22 +151,8 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
 
     @Override
     protected void process(HanyoListKyotakuServiceKeikakuEntity entity) {
-
-        if (parameter.get抽出区分().compareTo("2") == 0 && parameter.get基準年月日() != null && !parameter.get基準年月日().isEmpty()) {
-            HanyoListKyotakuServiceKeikakuKijunYMDParameter param
-                    = new HanyoListKyotakuServiceKeikakuKijunYMDParameter(
-                            entity.getDbT3005被保険者番号(), entity.getDbT3005対象年月(), parameter.get基準年月日());
-
-            int kijunYMDDate = mapper.getKijunYMDData(param);
-            if (kijunYMDDate == 0) {
-                eucCsvWriter.writeLine(csvEntityEditor.editor(entity, parameter));
-                personalDataList.add(toPersonalData(entity));
-            }
-        } else {
-            eucCsvWriter.writeLine(csvEntityEditor.editor(entity, parameter));
-            personalDataList.add(toPersonalData(entity));
-        }
-
+        eucCsvWriter.writeLine(csvEntityEditor.editor(entity, parameter));
+        personalDataList.add(toPersonalData(entity));
     }
 
     private PersonalData toPersonalData(HanyoListKyotakuServiceKeikakuEntity entity) {

@@ -77,13 +77,14 @@ public class KoseiTaishoJissekiIchiranEditor implements
         if (INDEX_1.equals(出力順)) {
             source.sort1 = 年度タイトル;
             source.sort2 = 被保険者番号タイトル;
+            source.sort3 = サービス提供年月タイトル;
         } else if (INDEX_2.equals(出力順)) {
             source.sort1 = 被保険者番号タイトル;
             source.sort2 = 年度タイトル;
+            source.sort3 = サービス提供年月タイトル;
         }
 
-        source.sort3 = サービス提供年月タイトル;
-        if (連番 == 0) {
+        if (連番 != 0) {
             source.listKyufuJisseki_1 = new RString(連番);
         }
 

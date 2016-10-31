@@ -227,6 +227,8 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
                 .seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString())).build();
         data = data.createBuilderForEdit().set申立事由コード(div.getTxtMeisaiKagoForm()
                 .getValue().substring(0, 2).concat(div.getDdlMeisaiKagoMoshitateRiyu().getSelectedKey())).build();
+        data = data.createBuilderForEdit().set同月審査有フラグ(div.getChkMeisaiForDogetsuShinsa().getSelectedKeys().contains(同月審査用_KEY)).build();
+        data = data.createBuilderForEdit().set国保連再送付有フラグ(div.getKokuhirenSaiSofu().getSelectedKeys().contains(国保連再送付_KEY)).build();
         return data;
     }
 

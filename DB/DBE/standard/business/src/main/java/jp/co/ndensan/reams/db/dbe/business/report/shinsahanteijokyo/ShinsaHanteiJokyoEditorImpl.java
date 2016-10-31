@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shinsahanteijokyo;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.shinsahanteijokyo.ShinsaHanteiJokyoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.ShinsaHanteiJokyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.shinsahanteijokyo.ShinsaHanteiJokyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -50,43 +50,19 @@ public class ShinsaHanteiJokyoEditorImpl implements IShinsaHanteiJokyoEditor {
     }
 
     private ShinsaHanteiJokyoReportSource editSource(ShinsaHanteiJokyoReportSource source) {
-        source.title = itemEntity.getTitle();
-        source.gogitaiName = itemEntity.getGogitaiName();
-        source.kaisaiKaishiYMD = RString.isNullOrEmpty(itemEntity.getKaisaiKaishiYMD())
-                ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(itemEntity.getKaisaiKaishiYMD()));
-        source.kaisaiShuryoYMD = RString.isNullOrEmpty(itemEntity.getKaisaiShuryoYMD())
-                ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(itemEntity.getKaisaiShuryoYMD()));
-        source.kaisaiCount = itemEntity.getKaisaiCount();
-        source.hokenshaNo = itemEntity.getHokenshaNo();
+        source.title = itemEntity.getタイトル();
+        source.gogitaiName = itemEntity.get合議体名称();
+        source.kaisaiKaishiYMD = RString.isNullOrEmpty(itemEntity.get開催開始年月日())
+                ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(itemEntity.get開催開始年月日()));
+        source.kaisaiShuryoYMD = RString.isNullOrEmpty(itemEntity.get開催終了年月日())
+                ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(itemEntity.get開催終了年月日()));
+        source.kaisaiCount = itemEntity.get開催回数();
+        source.hokenshaNo = itemEntity.get保険者番号();
         source.printTimeStamp = getNowDate();
-        source.hokenshaName = itemEntity.getHokenshaName();
-        source.listHanteiHeader_1 = itemEntity.getListHanteiHeader_1();
-        source.listHanteiHeader_2 = itemEntity.getListHanteiHeader_2();
-        source.listHanteiHeader_3 = itemEntity.getListHanteiHeader_3();
-        source.listHanteiHeader_4 = itemEntity.getListHanteiHeader_4();
-        source.listHanteiHeader_5 = itemEntity.getListHanteiHeader_5();
-        source.listHanteiHeader_6 = itemEntity.getListHanteiHeader_6();
-        source.listHanteiHeader_7 = itemEntity.getListHanteiHeader_7();
-        source.listHanteiHeader_8 = itemEntity.getListHanteiHeader_8();
-        source.listHanteiHeader_9 = itemEntity.getListHanteiHeader_9();
-        source.listHantei_1 = itemEntity.getListHantei_1();
-        source.listHantei_2 = itemEntity.getListHantei_2();
-        source.listHantei_3 = itemEntity.getListHantei_3();
-        source.listHantei_4 = itemEntity.getListHantei_4();
-        source.listHantei_5 = itemEntity.getListHantei_5();
-        source.listHantei_6 = itemEntity.getListHantei_6();
-        source.listHantei_7 = itemEntity.getListHantei_7();
-        source.listHantei_8 = itemEntity.getListHantei_8();
-        source.listHantei_9 = itemEntity.getListHantei_9();
-        source.listHantei_10 = itemEntity.getListHantei_10();
-        source.listHantei_11 = itemEntity.getListHantei_11();
-        source.listHantei_12 = itemEntity.getListHantei_12();
-        source.listHantei_13 = itemEntity.getListHantei_13();
-        source.listHantei_14 = itemEntity.getListHantei_14();
-        source.listHantei_15 = itemEntity.getListHantei_15();
-        source.listHanteiKensu_1 = itemEntity.getListHanteiKensu_1();
-        source.listHanteiKensu_2 = itemEntity.getListHanteiKensu_2();
-        source.listHanteiKensu_3 = itemEntity.getListHanteiKensu_3();
+        source.hokenshaName = itemEntity.get保険者番号();
+        source.listHanteiKensu_1 = itemEntity.get変更者();
+        source.listHanteiKensu_2 = itemEntity.get軽度();
+        source.listHanteiKensu_3 = itemEntity.get重度();
         return source;
     }
 

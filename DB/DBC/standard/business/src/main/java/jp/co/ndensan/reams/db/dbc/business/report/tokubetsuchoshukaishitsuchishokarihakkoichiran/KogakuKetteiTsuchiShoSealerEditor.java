@@ -44,6 +44,7 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
     private static final RString 口座払い値 = new RString("2");
     private static final RString 支給 = new RString("1");
     private static final RString 不支給 = new RString("2");
+    private static final RString 支払方法区分ONE = new RString("1");
     private static final RString 定量_円 = new RString("円");
     private static final int NUM_ONE = 1;
     private static final int NUM_TWO = 2;
@@ -143,7 +144,6 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
         }
 
         source.ketteiYMD = 年月日編集(帳票情報.get決定年月日());
-        source.shiharaiYoteiYMD = 年月日編集(帳票情報.get支払予定日());
         source.taishoYM1 = 年月編集(帳票情報.get対象年月1());
         source.taishoYM2 = RString.EMPTY;
         source.taishoYM3 = RString.EMPTY;
@@ -159,17 +159,38 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
         source.shikyuGaku3 = RString.EMPTY;
         source.shikyuGaku4 = RString.EMPTY;
 
-        source.bankName = 帳票情報.get金融機関上段();
-        source.branchBankName = 帳票情報.get金融機関下段();
+        set金融機関(source);
+        set情報(source);
 
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && !窓口払い値.equals(帳票情報.get支払方法区分())
+                && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
+
+            source.kouzaMeigi = 帳票情報.get口座名義人();
+            source.shiharaiYoteiYMD = 年月日編集(帳票情報.get支払予定日());
+
+            if (!帳票情報.isゆうちょ銀行フラグ()) {
+                source.kouzaShu = 帳票情報.get口座種別();
+                source.kouzaNo = 帳票情報.get口座番号();
+            } else {
+                source.kouzaShu = 帳票情報.get通帳記号();
+                source.kouzaNo = 帳票情報.get通帳番号();
+            }
+        }
+
+    }
+
+    private void set情報(KogakuKetteiTsuchiShoSealerSource source) {
         if (支給.equals(帳票情報.get支給不支給決定区分())) {
-            if (窓口払い値.equals(帳票情報.get支払方法区分())) {
+            if (窓口払い値.equals(帳票情報.get支払方法区分()) && 帳票情報.get支給金額() != null
+                    && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
                 source.shumokuTitle = 口座種別;
                 source.bangoTitle = 口座番号;
-            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && 金融機関コード.equals(帳票情報.get金融機関コード())) {
+            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && 金融機関コード.equals(帳票情報.get金融機関コード())
+                    && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
                 source.shumokuTitle = 通帳記号;
                 source.bangoTitle = 通帳番号;
-            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && !金融機関コード.equals(帳票情報.get金融機関コード())) {
+            } else if (口座払い値.equals(帳票情報.get支払方法区分()) && !金融機関コード.equals(帳票情報.get金融機関コード())
+                    && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
                 source.shumokuTitle = 口座種別;
                 source.bangoTitle = 口座番号;
             }
@@ -181,15 +202,14 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
 
         }
 
-        if (!帳票情報.isゆうちょ銀行フラグ()) {
-            source.kouzaShu = 帳票情報.get口座種別();
-            source.kouzaNo = 帳票情報.get口座番号();
-        } else {
-            source.kouzaShu = 帳票情報.get通帳記号();
-            source.kouzaNo = 帳票情報.get通帳番号();
-        }
-        source.kouzaMeigi = 帳票情報.get口座名義人();
+    }
 
+    private void set金融機関(KogakuKetteiTsuchiShoSealerSource source) {
+        if (支給.equals(帳票情報.get支給不支給決定区分()) && !支払方法区分ONE.equals(帳票情報.get支払方法区分())
+                && 帳票情報.get支給金額() != null && 0 < 帳票情報.get支給金額().compareTo(Decimal.ZERO)) {
+            source.bankName = 帳票情報.get金融機関上段();
+            source.branchBankName = 帳票情報.get金融機関下段();
+        }
     }
 
     private RString 金額編集(RString 金額, int length) {

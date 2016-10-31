@@ -63,6 +63,48 @@
      "eventName": "処理終了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0600021",
+     "layoutTitle": "福祉用具購入費支給申請登録",
+     "eventName": "契約事業者検索",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0300011",
+     "toLayoutTitle": "受領委任契約事業者登録・修正",
+     "toState": "sub検索"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0300011",
+     "layoutTitle": "受領委任契約事業者登録・修正",
+     "eventName": "事業者選択",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0600021",
+     "toLayoutTitle": "福祉用具購入費支給申請登録",
+     "toState": ""
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0300011",
+     "layoutTitle": "受領委任契約事業者登録・修正",
+     "eventName": "戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0600021",
+     "toLayoutTitle": "福祉用具購入費支給申請登録",
+     "toState": ""
     }
    ]
   }

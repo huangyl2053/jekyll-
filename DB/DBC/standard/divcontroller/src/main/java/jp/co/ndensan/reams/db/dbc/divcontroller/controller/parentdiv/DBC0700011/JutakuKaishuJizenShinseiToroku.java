@@ -9,13 +9,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.ShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0700011StateName.更新完了;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0700011StateName.照会;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0700011TransitionEventName;
@@ -39,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -68,6 +70,8 @@ public class JutakuKaishuJizenShinseiToroku {
     private static final RString 審査結果 = new RString("審査結果");
     private static final RString 事前申請情報 = new RString("事前申請情報");
     private static final RString 登録FLAG = new RString("登録");
+    private static final RString 参照 = new RString("参照");
+    private static final RString 事業者選択 = new RString("DBC0300011_事業者選択");
 
     /**
      * 初期化メソッドです
@@ -114,6 +118,24 @@ public class JutakuKaishuJizenShinseiToroku {
                 被保険者番号);
         if (照会モード.equals(state)) {
             return ResponseData.of(div).setState(照会);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 事業者契約番号と名称設定です。
+     *
+     * @param div JutakuKaishuJizenShinseiTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onActive(JutakuKaishuJizenShinseiTorokuDiv div) {
+        RString イベント名 = ResponseHolder.getBeforeEvent();
+        if (事業者選択.equals(イベント名)) {
+            JuryoininKeiyakuJigyosha tmp = ViewStateHolder.get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
+            if (tmp != null) {
+                div.getKaigoShikakuKihonShaPanel().getCcdJutakuKaishuJizenShinseiKoza().set契約事業者(tmp.get契約事業者番号());
+                div.getKaigoShikakuKihonShaPanel().getCcdJutakuKaishuJizenShinseiKoza().set契約事業者名(tmp.get契約事業者名称());
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -341,18 +363,19 @@ public class JutakuKaishuJizenShinseiToroku {
         boolean 限度額のチェック結果 = handler.限度額チェック(hihokenshaNo, seiriNo);
         if (!限度額のチェック結果) {
             if (!非表示用フラグ_TRUE.equals(div.getHidLimitNGMsgDisplayedFlg())) {
-                QuestionMessage message = new QuestionMessage(
-                        DbcErrorMessages.対象年月被保険者データなし.getMessage().getCode(),
-                        DbcErrorMessages.対象年月被保険者データなし.getMessage().evaluate());
+                WarningMessage message = new WarningMessage(
+                        DbcWarningMessages.住宅改修限度額確認.getMessage().getCode(),
+                        DbcWarningMessages.住宅改修限度額確認.getMessage().evaluate());
                 div.setHidLimitNGMsgDisplayedFlg(非表示用フラグ_TRUE);
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(DbcErrorMessages.対象年月被保険者データなし.getMessage().getCode())
+            if (new RString(DbcWarningMessages.住宅改修限度額確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 selectedItems.remove(住宅住所変更);
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                         .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().setSelectedItems(selectedItems);
+                div.setHidLimitNGMsgDisplayedFlg(RString.EMPTY);
             } else {
                 div.setHidLimitNGMsgDisplayedFlg(RString.EMPTY);
                 return ResponseData.of(div).respond();
@@ -606,6 +629,17 @@ public class JutakuKaishuJizenShinseiToroku {
         jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
         div.setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「参考」ボタンをクリックします。
+     *
+     * @param div 支払方法情報
+     * @return ResponseData
+     */
+    public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onClick_btnKeiyakuNo(JutakuKaishuJizenShinseiTorokuDiv div) {
+        ViewStateHolder.put(ViewStateKeys.状態, 参照);
+        return ResponseData.of(div).forwardWithEventName(DBC0700011TransitionEventName.契約事業者検索).respond();
     }
 
     /**

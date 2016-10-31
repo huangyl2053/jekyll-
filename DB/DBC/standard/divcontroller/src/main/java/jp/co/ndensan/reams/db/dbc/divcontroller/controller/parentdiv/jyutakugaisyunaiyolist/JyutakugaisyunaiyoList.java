@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListValidationHandler;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.business.core.jusho.JushoEditorBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
@@ -24,12 +23,11 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -44,6 +42,7 @@ public class JyutakugaisyunaiyoList {
     private static final RString モード_修正 = new RString("更新");
     private static final RString モード_削除 = new RString("削除");
     private static final RString モード_選択 = new RString("選択");
+    private static final RString CONMA = new RString(",");
 
     /**
      * 追加ボタンを押下した際に実行します。
@@ -146,11 +145,11 @@ public class JyutakugaisyunaiyoList {
         List<dgGaisyuList_Row> list = requestDiv.getDgGaisyuList().getDataSource();
         if ((モード_追加.equals(requestDiv.getPnlNyuryokuArea().getState()) || モード_修正.equals(requestDiv.getPnlNyuryokuArea().getState()))) {
             JyutakugaisyunaiyoListValidationHandler validationHandler = getValidationHandler(requestDiv);
-            FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_サービス年月, FlexibleYearMonth.class);
-            ValidationMessageControlPairs validPairs = validationHandler.validateFor着工日とサービス年月提供着工年月のチェック(サービス年月);
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
-            }
+//            FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_サービス年月, FlexibleYearMonth.class);
+//            ValidationMessageControlPairs validPairs = validationHandler.validateFor着工日とサービス年月提供着工年月のチェック(サービス年月);
+//            if (validPairs.iterator().hasNext()) {
+//                return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
+//            }
         }
         dgGaisyuList_Row dgGaisyuListRow;
         if (モード_追加.equals(requestDiv.getPnlNyuryokuArea().getState())) {
@@ -250,7 +249,8 @@ public class JyutakugaisyunaiyoList {
             requestDiv.getTxtKanseyotebi().setValue(new RDate(dgGaisyuListRow.getTxtKanseiYoteibi().toString()));
         }
         if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtKaishuKingaku())) {
-            requestDiv.getTxtKaisyukingaku().setValue(new Decimal(dgGaisyuListRow.getTxtKaishuKingaku().toString().trim()));
+            requestDiv.getTxtKaisyukingaku().setValue(new Decimal(
+                    dgGaisyuListRow.getTxtKaishuKingaku().toString().replaceAll(CONMA.toString(), RString.EMPTY.toString()).trim()));
         }
     }
 
@@ -330,7 +330,7 @@ public class JyutakugaisyunaiyoList {
         if (requestDiv.getTxtKaisyukingaku().getValue() == null) {
             dgGaisyuListRow.setTxtKaishuKingaku(RString.EMPTY);
         } else {
-            dgGaisyuListRow.setTxtKaishuKingaku(new RString(requestDiv.getTxtKaisyukingaku().getValue().toString()));
+            dgGaisyuListRow.setTxtKaishuKingaku(DecimalFormatter.toコンマ区切りRString(requestDiv.getTxtKaisyukingaku().getValue(), 0));
         }
         dgGaisyuListRow.setTxtJigyosha(requestDiv.getTxtJigyosya().getValue());
         return dgGaisyuListRow;

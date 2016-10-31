@@ -33,7 +33,7 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select利用者負担");
     private static final RString 異動一時_TABLE_NAME = new RString("IdouTemp");
-
+    private static final RString 区分_1 = new RString("1");
     private static final RString SPLIT = new RString(",");
     private static final RString RST_TRUE = new RString("TRUE");
     private static final RString RST_FALSE = new RString("FALSE");
@@ -64,6 +64,15 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
 
     @Override
     protected void process(IdouTempEntity entity) {
+        DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 利用者負担entity = entity.get利用者負担();
+        if (区分_1.equals(利用者負担entity.getKetteiKubun())
+                && (isDateEmpty(利用者負担entity.getTekiyoKaishiYMD()) || isDateEmpty(利用者負担entity.getTekiyoShuryoYMD()))) {
+            return;
+        }
+        if (RString.isNullOrEmpty(利用者負担entity.getKetteiKubun())
+                && (!isDateEmpty(利用者負担entity.getTekiyoKaishiYMD()) || !isDateEmpty(利用者負担entity.getTekiyoShuryoYMD()))) {
+            return;
+        }
         RString 全項目 = 利用者負担全項目(entity.get利用者負担());
         if (利用者負担.contains(全項目)) {
             return;
@@ -147,5 +156,12 @@ public class UpdRiyoshafutanGengakuTempProcess extends BatchProcessBase<IdouTemp
             return 全項目.concat(項目.getColumnValue().toString()).concat(SPLIT);
         }
         return 全項目.concat(RString.EMPTY).concat(SPLIT);
+    }
+
+    private boolean isDateEmpty(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 }

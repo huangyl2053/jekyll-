@@ -670,7 +670,8 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         List<CalculateFukaEntity> 賦課計算 = mapper.select賦課計算(param);
         HokenryoDankaiList 保険料段階List;
         SeigyoJoho 月別保険料制御情報;
-        NengakuSeigyoJoho 年額制御情報 = get年額制御情報();
+        NengakuSeigyoJoho 年額制御情報1 = get年額制御情報(調定年度.minusYear(INT_1));
+        NengakuSeigyoJoho 年額制御情報2 = get年額制御情報(調定年度.minusYear(INT_2));
         NengakuFukaKonkyoFactory nengakuFukaKonkyo = InstanceProvider.create(NengakuFukaKonkyoFactory.class);
         NengakuHokenryoKeisan keisan = InstanceProvider.create(NengakuHokenryoKeisan.class);
 
@@ -726,7 +727,11 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
                         月別ランク.getRankKubun1Gatsu(), 月別ランク.getRankKubun2Gatsu(), 月別ランク.getRankKubun3Gatsu());
             }
             年額保険料パラメータ.set年額賦課根拠(年額賦課根拠);
-            年額保険料パラメータ.set年額制御情報(年額制御情報);
+            if (調定年度.minusYear(INT_1).equals(賦課計算の情報.get賦課年度())) {
+                年額保険料パラメータ.set年額制御情報(年額制御情報1);
+            } else {
+                年額保険料パラメータ.set年額制御情報(年額制御情報2);
+            }
             NengakuHokenryo 年額保険料 = keisan.calculate年額保険料(年額保険料パラメータ);
             FukaKokyoBatchParameter fukaKokyoBatchParameter = new FukaKokyoBatchParameter();
             fukaKokyoBatchParameter.set賦課年度(賦課計算の情報.get賦課年度());

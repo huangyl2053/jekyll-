@@ -30,6 +30,8 @@ public class DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter extend
     private static final String KEY_RENBANFUKA = "is連番付加";
     private static final String KEY_ISDATEEDIT = "is日付編集";
     private static final String KEY_HONKENSHACODE = "保険者コード";
+    private static final String KEY_HONKENSHAMEI = "保険者名";
+    private static final String KEY_SHICHOSONCODE = "市町村コード";
     private static final String KEY_SHIKYUKUBUN = "支給区分List";
     private static final String KEY_SHIHARAIHOHOKUBUN = "支払方法区分List";
     private static final String KEY_KIKANCODE = "金融機関コード";
@@ -50,6 +52,10 @@ public class DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter extend
     private boolean is日付編集;
     @BatchParameter(key = KEY_HONKENSHACODE, name = "保険者コード")
     private RString 保険者コード;
+    @BatchParameter(key = KEY_HONKENSHAMEI, name = "保険者名")
+    private RString 保険者名;
+    @BatchParameter(key = KEY_SHICHOSONCODE, name = "市町村コード")
+    private RString 市町村コード;
     @BatchParameter(key = KEY_SHIKYUKUBUN, name = "支給区分")
     private List<RString> 支給区分List;
     @BatchParameter(key = KEY_SHIHARAIHOHOKUBUN, name = "支払方法区分")
@@ -76,6 +82,8 @@ public class DBC710210_HanyoListJigyoBunKogakuGassanShikyuKetteiParameter extend
                 is連番付加,
                 is日付編集,
                 保険者コード,
+                保険者名,
+                市町村コード,
                 支給区分List,
                 支払方法区分List,
                 金融機関コード,

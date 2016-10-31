@@ -119,19 +119,19 @@
             DbT1006Kyo."kyuufugakuGengakuKisaiKiajoFlag" = #{iskyuufugakuFlag}
         </if>
         <if test = "hyojunFutanFlag">
-           AND DbT1006Kyo."hyojunFutanGengakuGaitoFlag" = #{ishyojunFutanFlag}
+           OR DbT1006Kyo."hyojunFutanGengakuGaitoFlag" = #{ishyojunFutanFlag}
         </if>
         <if test = "kyojuhinadoFutangFlag">
-          AND  DbT1006Kyo."kyojuhinadoFutangakugengakuGaitoFlag" = #{iskyojuhinadoFutangFlag}
+          OR  DbT1006Kyo."kyojuhinadoFutangakugengakuGaitoFlag" = #{iskyojuhinadoFutangFlag}
         </if>
         <if test = "shokuhiKeiFlag">
-          AND  DbT1006Kyo."shokuhiKeigengoHutangakuGaitoFlag" = #{isshokuhiKeiFlag}
+          OR  DbT1006Kyo."shokuhiKeigengoHutangakuGaitoFlag" = #{isshokuhiKeiFlag}
         </if>
         <if test = "kogakuFlag">
-           AND DbT1006Kyo."kogakuServicehiJogengakuGengakuGaitoFlag" = #{iskogakuFlag}
+           OR DbT1006Kyo."kogakuServicehiJogengakuGengakuGaitoFlag" = #{iskogakuFlag}
         </if>
         <if test = "hokenFlag">
-           AND DbT1006Kyo."hokenryoNofuGengakuFlag" = #{ishokenFlag}
+           OR DbT1006Kyo."hokenryoNofuGengakuFlag" = #{ishokenFlag}
         </if>
         AND
         DbT1006Kyo."isDeleted" <![CDATA[<>]]> TRUE
@@ -171,11 +171,15 @@
             AND
             DbT1006Kyo."tekiyoShuryoYMD"  <![CDATA[<=]]> #{date_TO}
         </if>
-        <if test = "ismodenayi">
-        </if>
         </where>
-        ORDER BY
-        DbT1006Kyo."hihokenshaNo",${order_ID}
+         <if test = "order_ID">
+             ${order_ID},
+             DbT1006Kyo."hihokenshaNo"
+         </if>
+         <if test = "!order_ID">
+            ORDER BY
+             DbT1006Kyo."hihokenshaNo"
+         </if>
         ) DbT1006Kyokaiso
         WHERE
         rank_number1= 1

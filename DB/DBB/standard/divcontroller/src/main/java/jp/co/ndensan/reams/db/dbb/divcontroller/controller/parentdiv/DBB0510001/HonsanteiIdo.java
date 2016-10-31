@@ -35,6 +35,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class HonsanteiIdo {
 
     private static final RString 現年度異動賦課 = new RString("DBBMN44001");
+    private static final RString 現年度異動賦課1 = new RString("現年度異動賦課");
+    private static final RString 現年度異動賦課通知書作成 = new RString("現年度異動通知書作成");
 
     /**
      * コントロールdivが「生成」された際の処理です。
@@ -50,10 +52,15 @@ public class HonsanteiIdo {
         }
         boolean flag = getHandler(div).initialize(new FlexibleYear(調定年度.toString()));
         ViewStateHolder.put(ViewStateKeys.実行フラグ, flag);
+        ResponseData<HonsanteiIdoDiv> responseData;
         if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {
-            return ResponseData.of(div).setState(DBB0510001StateName.現年度異動賦課);
+            responseData = ResponseData.of(div).setState(DBB0510001StateName.現年度異動賦課);
+            responseData.setRootTitle(現年度異動賦課1);
+            return responseData;
         } else {
-            return ResponseData.of(div).setState(DBB0510001StateName.現年度異動賦課通知書作成);
+            responseData = ResponseData.of(div).setState(DBB0510001StateName.現年度異動賦課通知書作成);
+            responseData.setRootTitle(現年度異動賦課通知書作成);
+            return responseData;
         }
     }
 

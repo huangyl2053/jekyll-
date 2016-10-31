@@ -11,8 +11,8 @@ import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShik
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGaku.serviceShuruiCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGaku.shikyuGendoTaniSu;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGaku.tekiyoKaishiYM;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGaku.tekiyoShuryoYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGakuEntity;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGaku.tekiyoShuryoYM;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
@@ -165,7 +165,7 @@ public class DbT7112ShokanShuruiShikyuGendoGakuDac implements
                 where(and(
                                 eq(serviceShuruiCode, サービス種類コード),
                                 leq(tekiyoKaishiYM, サービス提供年月),
-                                leq(サービス提供年月, tekiyoShuryoYM))).
+                                or(eq(tekiyoShuryoYM, RString.EMPTY), isNULL(tekiyoShuryoYM), leq(サービス提供年月, tekiyoShuryoYM)))).
                 order(
                         by(tekiyoKaishiYM, Order.DESC),
                         by(rirekiNo, Order.DESC)).
@@ -191,7 +191,7 @@ public class DbT7112ShokanShuruiShikyuGendoGakuDac implements
                 where(and(
                                 eq(serviceShuruiCode, サービス種類コード),
                                 or(and(
-                                                isNULL(tekiyoShuryoYM),
+                                                or(isNULL(tekiyoShuryoYM), eq(tekiyoShuryoYM, RString.EMPTY)),
                                                 leq(tekiyoKaishiYM, サービス提供年月)),
                                         and(
                                                 leq(tekiyoKaishiYM, サービス提供年月),

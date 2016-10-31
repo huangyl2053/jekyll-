@@ -139,7 +139,7 @@ public class HanyoListKokuhorenJukyushaProcess extends BatchProcessBase<HanyoLis
                 FILENAME,
                 EUC_ENTITY_ID.toRString(),
                 get出力件数(new Decimal(eucCsvWriter.getCount())),
-                business.set出力条件(市町村名));
+                business.set出力条件());
         OutputJokenhyoFactory.createInstance(item).print();
     }
 

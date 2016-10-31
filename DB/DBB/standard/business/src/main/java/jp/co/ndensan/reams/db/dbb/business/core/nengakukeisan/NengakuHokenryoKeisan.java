@@ -95,7 +95,8 @@ public class NengakuHokenryoKeisan {
                 nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格取得日().getMonthValue(), 1);
         //shutokuYMD.add(Calendar.MONTH, 1);
 
-        if (nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日() != null) {
+        if (nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日() != null
+                && !nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日().isEmpty()) {
             //soshitsuYMD.setTime(input.get年額賦課根拠().get資格喪失日());
             soshitsuYMD.set(nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日().getYearValue(),
                     nengakuHokenryoKeisanParameter.get年額賦課根拠().get資格喪失日().getMonthValue(), 1);

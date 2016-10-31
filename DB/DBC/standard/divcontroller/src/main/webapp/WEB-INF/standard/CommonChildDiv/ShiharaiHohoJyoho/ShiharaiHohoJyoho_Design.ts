@@ -16,8 +16,16 @@ module DBC {
                 return "onBlur_txtStartYMD";
             }
 
+            public static onBlur_txtStartHHMM(): string {
+                return "onBlur_txtStartHHMM";
+            }
+
             public static onBlur_txtEndYMD(): string {
                 return "onBlur_txtEndYMD";
+            }
+
+            public static onBlur_txtEndHHMM(): string {
+                return "onBlur_txtEndHHMM";
             }
 
             public static onClick_radKoza(): string {

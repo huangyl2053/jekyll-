@@ -27,7 +27,7 @@
             ON "DbWT1001Hihokensha"."exHihokenshaNo" = DbT7026ShinKyuHihokenshaNoHenkan."dbT7026ShinKyuHihokenshaNoHenkan_shinNo"
          WHERE 
             ("DbWT1001Hihokensha"."exShoHokenshaNo" = '' OR "DbWT1001Hihokensha"."exShoHokenshaNo" IS NULL)
-          AND "DbWT1001Hihokensha"."henkanFlag" = '1'
+          OR "DbWT1001Hihokensha"."henkanFlag" = '1'
      </select>
      <select id="select合併市町村情報" resultOrdered="true" resultMap="resultMap_KakohorenJyohoSakuseiCommonEntity" 
              parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kakohorenjyohosakuseicommon.KakohorenJyohoSakuseiCommonParameter"  fetchSize="500">

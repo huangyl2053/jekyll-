@@ -98,16 +98,16 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     protected void process(UpdShiharaihohoHenkoTempResultEntity entity) {
         if (entity.get支払方法変更() != null) {
             if (開始Flag
-                    || (被保険者番号.equals(entity.get支払方法変更().getHihokenshaNo()) && 年度.equals(entity.get年度()))) {
+                    || (被保険者番号.equals(entity.get支払方法変更().getHihokenshaNo()) && 年度.equals(entity.get負担割合TempEntity().get年度()))) {
                 get負担割合情報一時表(entity);
             } else {
                 負担割合情報一時表Writer.update(負担割合情報一時表);
-                負担割合情報一時表 = new FutanWariaiTempEntity();
+                負担割合情報一時表 = entity.get負担割合TempEntity();
                 get負担割合情報一時表(entity);
             }
             開始Flag = false;
             被保険者番号 = entity.get支払方法変更().getHihokenshaNo();
-            年度 = entity.get年度();
+            年度 = entity.get負担割合TempEntity().get年度();
         }
     }
 
@@ -117,9 +117,10 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     private void get負担割合情報一時表(UpdShiharaihohoHenkoTempResultEntity entity) {
-        負担割合情報一時表.set被保険者番号(entity.get支払方法変更().getHihokenshaNo());
-        負担割合情報一時表.set年度(entity.get年度());
-        if (is全て該当する(entity.get年度(), entity)) {
+        if (開始Flag) {
+            負担割合情報一時表 = entity.get負担割合TempEntity();
+        }
+        if (is全て該当する(entity.get負担割合TempEntity().get年度(), entity)) {
             負担割合情報一時表.set給付率01(給付率);
             負担割合情報一時表.set給付率02(給付率);
             負担割合情報一時表.set給付率03(給付率);
@@ -153,7 +154,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     private void set給付率01(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
-        if (is期間(entity.get年度(), entity, 0)) {
+        if (is期間(entity.get負担割合TempEntity().get年度(), entity, 0)) {
             負担割合情報一時表.set給付率01(支払給付率);
             if (八月違い期間存在Flag) {
                 負担割合情報一時表.set給付率01(給付率);
@@ -163,7 +164,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     private void set給付率02(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
-        if (is期間(entity.get年度(), entity, 1)) {
+        if (is期間(entity.get負担割合TempEntity().get年度(), entity, 1)) {
             負担割合情報一時表.set給付率02(支払給付率);
             if (九月違い期間存在Flag) {
                 負担割合情報一時表.set給付率02(給付率);
@@ -173,7 +174,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     private void set給付率03(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
-        if (is期間(entity.get年度(), entity, 二)) {
+        if (is期間(entity.get負担割合TempEntity().get年度(), entity, 二)) {
             負担割合情報一時表.set給付率03(支払給付率);
             if (十月違い期間存在Flag) {
                 負担割合情報一時表.set給付率03(給付率);
@@ -183,7 +184,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     private void set給付率04(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
-        if (is期間(entity.get年度(), entity, 三)) {
+        if (is期間(entity.get負担割合TempEntity().get年度(), entity, 三)) {
             負担割合情報一時表.set給付率04(支払給付率);
             if (十一月違い期間存在Flag) {
                 負担割合情報一時表.set給付率04(給付率);
@@ -193,7 +194,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     private void set給付率05(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
-        if (is期間(entity.get年度(), entity, 四)) {
+        if (is期間(entity.get負担割合TempEntity().get年度(), entity, 四)) {
             負担割合情報一時表.set給付率05(支払給付率);
             if (十二月違い期間存在Flag) {
                 負担割合情報一時表.set給付率05(給付率);
@@ -203,7 +204,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     private void set給付率06(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
-        if (is期間(entity.get年度(), entity, 五)) {
+        if (is期間(entity.get負担割合TempEntity().get年度(), entity, 五)) {
             負担割合情報一時表.set給付率06(支払給付率);
             if (一月違い期間存在Flag) {
                 負担割合情報一時表.set給付率06(給付率);
@@ -213,7 +214,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     private void set給付率07(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
-        if (is期間(entity.get年度(), entity, 六)) {
+        if (is期間(entity.get負担割合TempEntity().get年度(), entity, 六)) {
             負担割合情報一時表.set給付率07(支払給付率);
             if (二月違い期間存在Flag) {
                 負担割合情報一時表.set給付率07(給付率);
@@ -223,7 +224,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     private void set給付率08(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
-        if (is期間(entity.get年度(), entity, 七)) {
+        if (is期間(entity.get負担割合TempEntity().get年度(), entity, 七)) {
             負担割合情報一時表.set給付率08(支払給付率);
             if (三月違い期間存在Flag) {
                 負担割合情報一時表.set給付率08(給付率);
@@ -233,7 +234,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     private void set給付率09(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
-        if (is期間(entity.get年度(), entity, 八)) {
+        if (is期間(entity.get負担割合TempEntity().get年度(), entity, 八)) {
             負担割合情報一時表.set給付率09(支払給付率);
             if (四月違い期間存在Flag) {
                 負担割合情報一時表.set給付率09(給付率);
@@ -243,7 +244,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     private void set給付率10(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
-        if (is期間(entity.get年度(), entity, 九)) {
+        if (is期間(entity.get負担割合TempEntity().get年度(), entity, 九)) {
             負担割合情報一時表.set給付率10(支払給付率);
             if (五月違い期間存在Flag) {
                 負担割合情報一時表.set給付率10(給付率);
@@ -253,7 +254,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     private void set給付率11(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
-        if (is期間(entity.get年度(), entity, 十)) {
+        if (is期間(entity.get負担割合TempEntity().get年度(), entity, 十)) {
             負担割合情報一時表.set給付率11(支払給付率);
             if (六月違い期間存在Flag) {
                 負担割合情報一時表.set給付率11(給付率);
@@ -263,7 +264,7 @@ public class UpdShiharaihohoHenkoTempProcess extends BatchProcessBase<UpdShihara
     }
 
     private void set給付率12(UpdShiharaihohoHenkoTempResultEntity entity, RString 支払給付率) {
-        if (is期間(entity.get年度(), entity, 十一)) {
+        if (is期間(entity.get負担割合TempEntity().get年度(), entity, 十一)) {
             負担割合情報一時表.set給付率12(支払給付率);
             if (七月違い期間存在Flag) {
                 負担割合情報一時表.set給付率12(給付率);

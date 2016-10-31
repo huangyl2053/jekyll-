@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020021.DBU0020021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020021.JigyoHokokuGeppoYoshikiIchiHoseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020021.tplFirstHihokensyaUtiwakeDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020021.tplFirstHihokensyasuDiv;
@@ -47,6 +46,7 @@ public class JigyoHokokuGeppoYoshikiIchiHoseiHandler {
     private static final Code 集計番号_0200 = new Code("0200");
     private static final Code 集計番号_0301 = new Code("0301");
     private static final Code 集計番号_0302 = new Code("0302");
+    private static final RString 削除 = new RString("削除");
 
     private static final RString KEY_第1号被保険者数情報 = new RString("第1号被保険者数情報");
     private static final RString KEY_第1号被保険者増減内訳情報_当月中増 = new RString("第1号被保険者増減内訳情報_当月中増");
@@ -70,7 +70,7 @@ public class JigyoHokokuGeppoYoshikiIchiHoseiHandler {
      * @param viewState 表示状態
      */
     public void setViewState(JigyoHokokuGeppoParameter 引き継ぎデータ, RString viewState) {
-        if (DBU0020021StateName.削除状態.getName().equals(viewState)) {
+        if (削除.equals(viewState)) {
             this.parentDiv.getFirstHihokensyasu().setDisabled(true);
             this.parentDiv.getFirstHihokensyaUtiwake().setDisabled(true);
         }

@@ -35,7 +35,7 @@ public class ShotokuShokaihyoTateSource implements IReportSource {
     public RString hihokenshaumareYMD;
     @ReportItem(name = "hihokenshaJusho", length = 33, order = 11)
     public RString hihokenshaJusho;
-    @ReportItem(name = "kazeiNendo", length = 6, order = 12)
+    @ReportItem(name = "kazeiNendo", length = 10, order = 12)
     public RString kazeiNendo;
     @ReportItem(name = "hihokenshaShimei", length = 28, order = 13)
     public RString hihokenshaShimei;

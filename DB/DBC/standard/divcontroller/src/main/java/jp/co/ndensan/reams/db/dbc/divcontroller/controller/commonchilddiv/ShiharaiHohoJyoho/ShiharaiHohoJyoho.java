@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoK
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -94,6 +95,10 @@ public class ShiharaiHohoJyoho {
         ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
 
         if (div.getTxtStartYMD().getValue() == null) {
+            ValidationMessageControlPairs pairs = div.validateCheck();
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
             div.getTxtStartYobi().setValue(RString.EMPTY);
         } else {
             RString 曜日 = new RString(div.getTxtStartYMD().getValue().getDayOfWeek().getMiddleTerm());
@@ -114,6 +119,10 @@ public class ShiharaiHohoJyoho {
         ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
 
         if (div.getTxtEndYMD().getValue() != null) {
+            ValidationMessageControlPairs pairs = div.validateCheck();
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
             RString 曜日 = new RString(div.getTxtEndYMD().getValue().getDayOfWeek().getMiddleTerm());
             getHandler(div).終了日_曜日の表示色(曜日);
             div.getTxtEndYobi().setValue(曜日);
@@ -122,6 +131,40 @@ public class ShiharaiHohoJyoho {
         }
         response.data = div;
         return response;
+    }
+
+    /**
+     * 「開始期間」テキストボックスがonBlur場合、合法性をチェックします。
+     *
+     * @param div 支払方法情報
+     * @return ResponseData
+     */
+    public ResponseData onBlur_txtStartHHMM(ShiharaiHohoJyohoDiv div) {
+        ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
+        ValidationMessageControlPairs pairs = div.validateCheck();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        response.data = div;
+        return response;
+
+    }
+
+    /**
+     * 「終了期間」テキストボックスがonBlur場合、合法性をチェックします。
+     *
+     * @param div 支払方法情報
+     * @return ResponseData
+     */
+    public ResponseData onBlur_txtEndHHMM(ShiharaiHohoJyohoDiv div) {
+        ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
+        ValidationMessageControlPairs pairs = div.validateCheck();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        response.data = div;
+        return response;
+
     }
 
     /**

@@ -129,9 +129,7 @@ public class HanyoListParamForKougakuHandler {
         if (日付スラッシュ付加) {
             csv編集方法リスト.add(THREE);
         }
-        if (!csv編集方法リスト.isEmpty()) {
-            div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
-        }
+        div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
         Long 出力順 = restoreBatchParameterMap.getParameterValue(Long.class, KEY_SHUTSURYOKUJU);
         if (出力順 != null) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701014.getReportId(), 出力順);
@@ -153,7 +151,7 @@ public class HanyoListParamForKougakuHandler {
         }
         RString 申請状況区分 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_KAIGOGASSAN_KUBUN);
         if (申請状況区分 != null && !申請状況区分.isEmpty()) {
-            div.getChushutsuJokenPanel().getDdlSinseiJokyoKubun().setSelectedKey(抽出区分);
+            div.getChushutsuJokenPanel().getDdlSinseiJokyoKubun().setSelectedKey(申請状況区分);
         }
         RString 対象年度 = restoreBatchParameterMap.getParameterValue(RString.class, KEY_FLEXIBLE_YEAR);
         if (対象年度 != null && !対象年度.isEmpty()) {
@@ -186,22 +184,6 @@ public class HanyoListParamForKougakuHandler {
         div.getChushutsuJokenPanel().getTxtSofuNengetsu().clearFromValue();
         div.getChushutsuJokenPanel().getTxtSofuNengetsu().clearToValue();
         div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
-    }
-
-    /**
-     * 条件を保存するボタンを押下する場合、画面項目の設定値をバッチパラメータに設定、更新する。
-     *
-     * @return parameter DBC710140_HanyoListKogakuGassanShinseishoJohoParameter
-     */
-    public DBC710140_HanyoListKogakuGassanShinseishoJohoParameter onClick_btnKogakuParamSave() {
-        return new DBC710140_HanyoListKogakuGassanShinseishoJohoParameter();
-    }
-
-    /**
-     * 条件を復元するボタンを押下する場合、バッチパラメータの設定値を画面に表示する。
-     */
-    public void onClick_btnKogakuParamRestore() {
-
     }
 
     /**

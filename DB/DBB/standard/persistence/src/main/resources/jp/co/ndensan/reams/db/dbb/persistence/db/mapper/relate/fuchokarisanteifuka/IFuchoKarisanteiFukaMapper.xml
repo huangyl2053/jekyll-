@@ -283,11 +283,12 @@
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.allColumns_DbT2015KeisangoJoho" />,
             <include refid="allColumns_UeT0511NenkinTokuchoKaifuJoho" />,
-            <include refid="allColumns_FukaZenNendoTemp" />
+            <include refid="allColumns_FukaZenNendoTemp" />,
+            "ShinkiShikakuTaishoTemp"."tsuchishoNo" as "shinkiShikakuTaishoTemp_tsuchishoNo"
         FROM
             rgdb."DbT2015KeisangoJoho"  AS "DbT2015KeisangoJoho"
         INNER JOIN
-            rgue."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
+            rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
         ON
             "DbT2015KeisangoJoho"."kariNenkinNo" = "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo"
             AND "DbT2015KeisangoJoho"."kariNenkinCode" = "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode"
@@ -296,6 +297,14 @@
             "FukaZenNendoTemp"  AS "FukaZenNendoTemp"
         ON
             "DbT2015KeisangoJoho"."hihokenshaNo" = "FukaZenNendoTemp"."hihokenshaNo"
+        LEFT JOIN
+            "ShinkiShikakuTaishoTemp" AS "ShinkiShikakuTaishoTemp"
+        ON
+            "ShinkiShikakuTaishoTemp"."tsuchishoNo" = "DbT2015KeisangoJoho"."tsuchishoNo"    
+        LEFT JOIN
+            "SortTemp" AS "SortTemp"
+        ON
+            "SortTemp"."tsuchishoNo" = "DbT2015KeisangoJoho"."tsuchishoNo"    
         WHERE
             "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}
             AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
@@ -328,11 +337,12 @@
     </select> 
     
     
-    <resultMap id="resultMap_FuchoKarisanteiKekkaIchiran" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FukaKeisanEntity" autoMapping="true">
+    <resultMap id="resultMap_FuchoKarisanteiKekkaIchiran" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.FuchoKarisanteiKekkaEntity" autoMapping="true">
         <id column="dbT2015KeisangoJoho_choteiNendo"/>
         <id column="dbT2015KeisangoJoho_fukaNendo"/>
         <id column="dbT2015KeisangoJoho_tsuchishoNo"/>
         <id column="dbT2015KeisangoJoho_koseiZengoKubun"/>
+        <result property="tsuchishoNo" column="shinkiShikakuTaishoTemp_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <association property="計算後情報"  resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.ResultMap_DbT2015KeisangoJohoEntity" />
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="介護継承"  resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity" />
@@ -358,7 +368,7 @@
         UPDATE
         rgdb."DbT7022ShoriDateKanri"
         SET
-        "lastUpdateTimestamp" = #{処理日付}
+        "lastUpdateTimestamp" = #{処理日時}
         WHERE 1=1
         AND "subGyomuCode" = 'DBB'
         AND "shoriName" = '普徴仮算定賦課'

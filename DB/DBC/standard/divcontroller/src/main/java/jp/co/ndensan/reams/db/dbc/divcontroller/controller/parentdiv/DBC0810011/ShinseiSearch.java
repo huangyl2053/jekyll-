@@ -41,6 +41,7 @@ public class ShinseiSearch {
      * @return ResponseData
      */
     public ResponseData<ShinseiSearchDiv> onLoad(ShinseiSearchDiv div) {
+        ViewStateHolder.put(ViewStateKeys.モード, 照会);
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().initialize(識別コード);

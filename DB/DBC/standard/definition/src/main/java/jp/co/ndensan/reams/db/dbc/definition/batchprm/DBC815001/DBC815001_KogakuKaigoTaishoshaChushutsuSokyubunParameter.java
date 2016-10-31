@@ -28,10 +28,10 @@ public class DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter extends Ba
     private static final String CHUUSHUTSUKIKANSHUURYOUNICHIJI = "抽出期間終了日時";
     private static final String CYOYHYOUID = "帳票ID";
     private static final String SHUTSURYOJYUNID = "出力順ID";
-    private static final String KAISHINENGABBI1 = "開始年月日１";
-    private static final String SHUURYOUNENGABBI1 = "終了年月日１";
-    private static final String KAISHINENGABBI2 = "開始年月日２";
-    private static final String SHUURYOUNENGABBI2 = "終了年月日２";
+    private static final String KAISHINENGAB1 = "開始年月１";
+    private static final String SHUURYOUNENGAB1 = "終了年月１";
+    private static final String KAISHINENGAB2 = "開始年月２";
+    private static final String SHUURYOUNENGAB2 = "終了年月２";
     private static final String TESTSHUTSURYOKU = "テスト出力";
 
     @BatchParameter(key = NENDO, name = "年度")
@@ -48,14 +48,14 @@ public class DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter extends Ba
     private RString 帳票ID;
     @BatchParameter(key = SHUTSURYOJYUNID, name = "出力順ID")
     private Long 出力順ID;
-    @BatchParameter(key = KAISHINENGABBI1, name = "開始年月日１")
-    private RString 開始年月日１;
-    @BatchParameter(key = SHUURYOUNENGABBI1, name = "終了年月日１")
-    private RString 終了年月日１;
-    @BatchParameter(key = KAISHINENGABBI2, name = "開始年月日２")
-    private RString 開始年月日２;
-    @BatchParameter(key = SHUURYOUNENGABBI2, name = "終了年月日２")
-    private RString 終了年月日２;
+    @BatchParameter(key = KAISHINENGAB1, name = "開始年月１")
+    private RString 開始年月１;
+    @BatchParameter(key = SHUURYOUNENGAB1, name = "終了年月１")
+    private RString 終了年月１;
+    @BatchParameter(key = KAISHINENGAB2, name = "開始年月２")
+    private RString 開始年月２;
+    @BatchParameter(key = SHUURYOUNENGAB2, name = "終了年月２")
+    private RString 終了年月２;
     @BatchParameter(key = TESTSHUTSURYOKU, name = "テスト出力")
     private boolean テスト出力;
 
@@ -75,10 +75,10 @@ public class DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter extends Ba
      * @param 抽出期間終了日時 抽出期間終了日時
      * @param 帳票ID 帳票ID
      * @param 出力順ID 出力順ID
-     * @param 開始年月日１ 開始年月日１
-     * @param 終了年月日１ 終了年月日１
-     * @param 開始年月日２ 開始年月日２
-     * @param 終了年月日２ 終了年月日２
+     * @param 開始年月１ 開始年月１
+     * @param 終了年月１ 終了年月１
+     * @param 開始年月２ 開始年月２
+     * @param 終了年月２ 終了年月２
      * @param テスト出力 テスト出力
      */
     public DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter(
@@ -89,10 +89,10 @@ public class DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter extends Ba
             RString 抽出期間終了日時,
             RString 帳票ID,
             Long 出力順ID,
-            RString 開始年月日１,
-            RString 終了年月日１,
-            RString 開始年月日２,
-            RString 終了年月日２,
+            RString 開始年月１,
+            RString 終了年月１,
+            RString 開始年月２,
+            RString 終了年月２,
             boolean テスト出力) {
         this.年度 = 年度;
         this.処理年月日 = 処理年月日;
@@ -101,10 +101,10 @@ public class DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter extends Ba
         this.抽出期間終了日時 = 抽出期間終了日時;
         this.帳票ID = 帳票ID;
         this.出力順ID = 出力順ID;
-        this.開始年月日１ = 開始年月日１;
-        this.終了年月日１ = 終了年月日１;
-        this.開始年月日２ = 開始年月日２;
-        this.終了年月日２ = 終了年月日２;
+        this.開始年月１ = 開始年月１;
+        this.終了年月１ = 終了年月１;
+        this.開始年月２ = 開始年月２;
+        this.終了年月２ = 終了年月２;
         this.テスト出力 = テスト出力;
     }
 }

@@ -150,6 +150,7 @@ public class CreateKyodoJukyushaKoshinkekkaIchiranProcess extends BatchKeyBreakB
     protected void createWriter() {
         outputOrder.get改頁項目IDリスト();
         List<RString> 帳票物理名List = new ArrayList<>();
+        帳票物理名List.add(new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.hokenshaNo.toString()));
         Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(outputOrder);
         for (Map.Entry<Integer, ISetSortItem> entry : 改頁Map.entrySet()) {
             if (entry.getValue() != null) {
