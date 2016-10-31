@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5520001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Sep 22 20:00:07 CST 2016 
+ * Wed Oct 26 15:39:20 CST 2016 
  */
 
 
@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridColumnCheckBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -24,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridColumnCheckBox;
  */
 
 public class dgRirekiIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     private ButtonDialog shusei;
     private ButtonDialog sakujo;
@@ -45,6 +46,7 @@ public class dgRirekiIchiran_Row extends DataRow {
     private RString shinseirirekiJoho;
     private RString maeGoKubun;
     private DataGridColumnCheckBox tsuikaKubun;
+    private TextBoxNum updateCount;
 
     public dgRirekiIchiran_Row() {
         super();
@@ -67,6 +69,7 @@ public class dgRirekiIchiran_Row extends DataRow {
         this.shinseirirekiJoho = RString.EMPTY;
         this.maeGoKubun = RString.EMPTY;
         this.tsuikaKubun = new DataGridColumnCheckBox();
+        this.updateCount = new TextBoxNum();
         this.setOriginalData("shusei", shusei);
         this.setOriginalData("sakujo", sakujo);
         this.setOriginalData("kaihuku", kaihuku);
@@ -86,9 +89,10 @@ public class dgRirekiIchiran_Row extends DataRow {
         this.setOriginalData("shinseirirekiJoho", shinseirirekiJoho);
         this.setOriginalData("maeGoKubun", maeGoKubun);
         this.setOriginalData("tsuikaKubun", tsuikaKubun);
+        this.setOriginalData("updateCount", updateCount);
     }
 
-    public dgRirekiIchiran_Row(ButtonDialog shusei, ButtonDialog sakujo, Button kaihuku, RString kubun, RString ninteiNaiyo, RString dataKubun, TextBoxDate niteiDay, RString yokaigodo, TextBoxDate yukoKaishi, TextBoxDate yukoShuryo, Boolean kyusochi, RString shinsakaiIken, RString shinseishoKanriNo, RString deserializedBusiness, RString dataPass, RString rirekiNo, RString shinseirirekiJoho, RString maeGoKubun, DataGridColumnCheckBox tsuikaKubun) {
+    public dgRirekiIchiran_Row(ButtonDialog shusei, ButtonDialog sakujo, Button kaihuku, RString kubun, RString ninteiNaiyo, RString dataKubun, TextBoxDate niteiDay, RString yokaigodo, TextBoxDate yukoKaishi, TextBoxDate yukoShuryo, Boolean kyusochi, RString shinsakaiIken, RString shinseishoKanriNo, RString deserializedBusiness, RString dataPass, RString rirekiNo, RString shinseirirekiJoho, RString maeGoKubun, DataGridColumnCheckBox tsuikaKubun, TextBoxNum updateCount) {
         super();
         this.setOriginalData("shusei", shusei);
         this.setOriginalData("sakujo", sakujo);
@@ -109,6 +113,7 @@ public class dgRirekiIchiran_Row extends DataRow {
         this.setOriginalData("shinseirirekiJoho", shinseirirekiJoho);
         this.setOriginalData("maeGoKubun", maeGoKubun);
         this.setOriginalData("tsuikaKubun", tsuikaKubun);
+        this.setOriginalData("updateCount", updateCount);
         this.shusei = shusei;
         this.sakujo = sakujo;
         this.kaihuku = kaihuku;
@@ -128,6 +133,7 @@ public class dgRirekiIchiran_Row extends DataRow {
         this.shinseirirekiJoho = shinseirirekiJoho;
         this.maeGoKubun = maeGoKubun;
         this.tsuikaKubun = tsuikaKubun;
+        this.updateCount = updateCount;
     }
 
     public dgRirekiIchiran_Row(DataGridSetting gridSetting) {
@@ -151,6 +157,7 @@ public class dgRirekiIchiran_Row extends DataRow {
         this.shinseirirekiJoho = RString.EMPTY;
         this.maeGoKubun = RString.EMPTY;
         this.tsuikaKubun = DataGridColumnCheckBox.createInstance(gridSetting.getColumn("tsuikaKubun").getCellDetails());
+        this.updateCount = new TextBoxNum();
         this.setOriginalData("shusei", shusei);
         this.setOriginalData("sakujo", sakujo);
         this.setOriginalData("kaihuku", kaihuku);
@@ -170,6 +177,7 @@ public class dgRirekiIchiran_Row extends DataRow {
         this.setOriginalData("shinseirirekiJoho", shinseirirekiJoho);
         this.setOriginalData("maeGoKubun", maeGoKubun);
         this.setOriginalData("tsuikaKubun", tsuikaKubun);
+        this.setOriginalData("updateCount", updateCount);
     }
 
     public ButtonDialog getShusei() {
@@ -246,6 +254,10 @@ public class dgRirekiIchiran_Row extends DataRow {
 
     public DataGridColumnCheckBox getTsuikaKubun() {
         return tsuikaKubun;
+    }
+
+    public TextBoxNum getUpdateCount() {
+        return updateCount;
     }
 
     public void setShusei(ButtonDialog shusei) {
@@ -341,6 +353,11 @@ public class dgRirekiIchiran_Row extends DataRow {
     public void setTsuikaKubun(DataGridColumnCheckBox tsuikaKubun) {
         this.setOriginalData("tsuikaKubun", tsuikaKubun);
         this.tsuikaKubun = tsuikaKubun;
+    }
+
+    public void setUpdateCount(TextBoxNum updateCount) {
+        this.setOriginalData("updateCount", updateCount);
+        this.updateCount = updateCount;
     }
 
     // </editor-fold>

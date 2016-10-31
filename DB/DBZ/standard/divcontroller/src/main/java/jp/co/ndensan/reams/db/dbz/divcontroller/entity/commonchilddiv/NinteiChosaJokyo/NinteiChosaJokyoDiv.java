@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -442,16 +442,6 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public TextBox getTxtNinteiChosaItakusakiName() {
-        return this.getNinteiChosa().getTxtNinteiChosaItakusakiName();
-    }
-
-    @JsonIgnore
-    public void  setTxtNinteiChosaItakusakiName(TextBox txtNinteiChosaItakusakiName) {
-        this.getNinteiChosa().setTxtNinteiChosaItakusakiName(txtNinteiChosaItakusakiName);
-    }
-
-    @JsonIgnore
     public ButtonDialog getBtnItakusakiGuide() {
         return this.getNinteiChosa().getBtnItakusakiGuide();
     }
@@ -459,6 +449,16 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     @JsonIgnore
     public void  setBtnItakusakiGuide(ButtonDialog btnItakusakiGuide) {
         this.getNinteiChosa().setBtnItakusakiGuide(btnItakusakiGuide);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtNinteiChosaItakusakiName() {
+        return this.getNinteiChosa().getTxtNinteiChosaItakusakiName();
+    }
+
+    @JsonIgnore
+    public void  setTxtNinteiChosaItakusakiName(TextBox txtNinteiChosaItakusakiName) {
+        this.getNinteiChosa().setTxtNinteiChosaItakusakiName(txtNinteiChosaItakusakiName);
     }
 
     @JsonIgnore
