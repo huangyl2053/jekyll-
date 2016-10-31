@@ -633,8 +633,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             YMDHMS 調定日時,
             RString 算定月) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
-        mapper.createDbT2002FukaJohoTemp();
-
         ShunoKamokuAuthority auth = InstanceProvider.create(ShunoKamokuAuthority.class);
         KozaSearchKeyBuilder kozaBuilder = new KozaSearchKeyBuilder();
         kozaBuilder.setサブ業務コード(SubGyomuCode.DBB介護賦課);

@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJo
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.DBB051001_GennendoIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt44001.GennendoIdoFukaProcessParameter;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.gennendohonsanteiidou.IGenNendoHonsanteiIdouMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
@@ -88,6 +89,8 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
         executeStep(通知書番号発番);
         executeStep(世帯員把握);
         executeStep(世帯員把握フロー);
+        IGenNendoHonsanteiIdouMapper mapper = getMapper(IGenNendoHonsanteiIdouMapper.class);
+        mapper.createDbT2002FukaJohoTemp();
         if (Tsuki._10月.getコード().equals(processParameter.get処理対象())
                 || Tsuki._12月.getコード().equals(parameter.get処理対象())) {
             executeStep(賦課計算);
