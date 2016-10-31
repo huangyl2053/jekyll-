@@ -176,7 +176,7 @@ public class HanyoListTaShichosonJushochiTokureishaRenbanProcess extends BatchPr
 
     @Override
     protected void afterExecute() {
-        if (eucCsvWriter.getCount() == 0) {
+        if (eucCsvWriter.getCount() == 0 && processParamter.isKomokumeiFuka()) {
             eucCsvWriter.writeLine(setBlank());
         }
         eucCsvWriter.close();

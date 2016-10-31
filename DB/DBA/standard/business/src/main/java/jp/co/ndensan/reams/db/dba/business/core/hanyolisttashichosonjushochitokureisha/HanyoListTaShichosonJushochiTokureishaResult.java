@@ -73,6 +73,7 @@ public class HanyoListTaShichosonJushochiTokureishaResult {
     private static final RString 右パーレン = new RString("）");
     private static final RString 生年月日 = new RString("生年月日：");
     private static final RString 地区区分 = new RString("地区区分：");
+    private static final RString 全市町村 = new RString("000000");
 
     /**
      * EucCsvEntityの設定メッソドです。
@@ -448,9 +449,13 @@ public class HanyoListTaShichosonJushochiTokureishaResult {
         if (kaigoDonyuKeitai.get(0).get導入形態コード().is広域()) {
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(new RString("保険者："));
-            jokenBuilder.append(processParameter.getShichoson_Code());
-            jokenBuilder.append(RString.HALF_SPACE);
-            jokenBuilder.append(processParameter.getShichoson_Name());
+            if (全市町村.equals(processParameter.getHokenshaCode())) {
+                jokenBuilder.append(new RString("000000 全市町村"));
+            } else {
+                jokenBuilder.append(processParameter.getHokenshaCode());
+                jokenBuilder.append(RString.HALF_SPACE);
+                jokenBuilder.append(processParameter.getShichoson_Name());
+            }
             出力条件List.add(jokenBuilder.toRString());
         }
         return 出力条件List;
