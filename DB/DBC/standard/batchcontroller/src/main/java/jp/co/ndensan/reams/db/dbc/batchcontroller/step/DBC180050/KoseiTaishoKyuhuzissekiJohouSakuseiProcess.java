@@ -48,7 +48,7 @@ public class KoseiTaishoKyuhuzissekiJohouSakuseiProcess extends BatchProcessBase
         if (給付実績情報作成区分_削除.equals(entity.get給付実績情報作成区分コード())) {
             get更正対象給付実績情報(entity);
         } else {
-            if (!entity.get保険給付率().value().toString().equals(entity.get給付率().toString())) {
+            if (entity.get給付率() != null && !entity.get保険給付率().value().toString().equals(entity.get給付率().toString())) {
                 get更正対象給付実績情報(entity);
             }
         }
@@ -79,7 +79,10 @@ public class KoseiTaishoKyuhuzissekiJohouSakuseiProcess extends BatchProcessBase
         if (tempEntity.get更正前請求額() != null && tempEntity.get更正前自己負担額() != null) {
             サービス費用額 = tempEntity.get更正前請求額().add(tempEntity.get更正前自己負担額());
         }
-        HokenKyufuRitsu 更正後保険給付率 = new HokenKyufuRitsu(new Decimal(entity.get給付率().toString()));
+        HokenKyufuRitsu 更正後保険給付率 = null;
+        if (entity.get給付率() != null) {
+            更正後保険給付率 = new HokenKyufuRitsu(new Decimal(entity.get給付率().toString()));
+        }
         Decimal 更正後請求額 = null;
         Decimal 軽減前自己負担額 = null;
         if (サービス費用額 != null && 更正後保険給付率.value() != null) {

@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShi
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -65,10 +64,9 @@ public class ShakaiFukushiHojinKeigengakuShokai {
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = get給付実績ヘッダ情報2(サービス提供年月, 整理番号, 識別番号検索キー);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        RDate サービス提供 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         getHandler(div).setJigyoshaBtn(事業者番号リスト, 整理番号,
-                事業者番号, 様式番号, サービス提供.getYearMonth().toDateString(), 実績区分コード);
+                事業者番号, 様式番号, サービス提供年月.toDateString(), 実績区分コード);
         return ResponseData.of(div).respond();
     }
 
