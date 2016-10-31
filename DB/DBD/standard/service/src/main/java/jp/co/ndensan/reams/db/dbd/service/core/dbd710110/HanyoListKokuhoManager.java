@@ -196,7 +196,7 @@ public class HanyoListKokuhoManager {
             hanyolistentity.set性別(entity.getPsmEntity().getSeibetsuCode());
         }
         hanyolistentity.set市町村コード(entity.get最新被保台帳_市町村コード());
-        hanyolistentity.set被保険者番号(entity.get国保資格情報_国保保険者番号());
+        hanyolistentity.set被保険者番号(entity.get最新被保台帳_被保険者番号());
         hanyolistentity.set資格区分(entity.get最新被保台帳_被保険者区分コード());
         hanyolistentity.set認定開始日(entity.get前回受給情報_認定年月日());
         hanyolistentity.set資格取得日(entity.get最新被保台帳_資格取得年月日());

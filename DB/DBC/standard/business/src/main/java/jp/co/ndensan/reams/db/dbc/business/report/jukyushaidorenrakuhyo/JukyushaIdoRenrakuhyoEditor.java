@@ -34,6 +34,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
     private static final RString CIRCLE = new RString("○");
     private static final RString DOT = new RString(".");
     private static final RString 半角アスタリスク = new RString("*");
+    private static final RString 半角アスタリスクSIX = new RString("******");
 
     /**
      * コンストラクタです
@@ -214,7 +215,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
 
     private RString commonRStringEra(RString 年月日) {
         if (年月日.contains(半角アスタリスク)) {
-            return 年月日;
+            return 半角アスタリスクSIX;
         }
         if (年月日 != null && !年月日.isEmpty()) {
             return new FlexibleDate(年月日).wareki()
