@@ -231,8 +231,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (補正状況 != null) {
             if (ONE.equals(補正状況)) {
                 div.getChushutsuJokenPanel().getRadHoseuJokyo().setSelectedKey(KEY1);
-            }
-            if (TWO.equals(補正状況)) {
+            } else if (TWO.equals(補正状況)) {
                 div.getChushutsuJokenPanel().getRadHoseuJokyo().setSelectedKey(KEY2);
             } else {
                 div.getChushutsuJokenPanel().getRadHoseuJokyo().setSelectedKey(KEY0);
