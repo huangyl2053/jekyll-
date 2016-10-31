@@ -63,14 +63,14 @@ public class TokuteiNyushoshahiHandler {
      * 画面のデータを初期化する。
      *
      * @param business List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness>
+     * @param サービス提供年月 サービス提供年月
      */
-    public void setDataGrid(List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> business) {
+    public void setDataGrid(List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> business, FlexibleYearMonth サービス提供年月) {
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        RDate サービス提供 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
         RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
         List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> 特定入所者介護サービス費用list = get給付実績データ(business,
-                整理番号, 事業者番号, 様式番号, サービス提供.getYearMonth().toDateString());
+                整理番号, 事業者番号, 様式番号, サービス提供年月.toDateString());
         List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> dataToRepeat = getサービス提供年月list(business);
         List<dgTokuteiNyushoshaKaigoServicehi_Row> rowList = new ArrayList<>();
         if (特定入所者介護サービス費用list != null && !特定入所者介護サービス費用list.isEmpty()) {
@@ -124,8 +124,7 @@ public class TokuteiNyushoshahiHandler {
             rowList.add(後_合計row);
         }
         div.getDgTokuteiNyushoshaKaigoServicehi().setDataSource(rowList);
-        setGetsuBtn(dataToRepeat, new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月()
-                .getYearMonth().toDateString()));
+        setGetsuBtn(dataToRepeat, サービス提供年月);
     }
 
     private void setGetsuBtn(List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> 特定入所者介護サービス費用list, FlexibleYearMonth サービス提供年月) {
@@ -329,7 +328,7 @@ public class TokuteiNyushoshahiHandler {
             div.getBtnZengetsu().setDisabled(false);
         }
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 年月, 新整理番号, 新識別番号);
-        setDataGrid(特定入所者費用);
+        setDataGrid(特定入所者費用, 年月);
 
     }
 
@@ -372,7 +371,7 @@ public class TokuteiNyushoshahiHandler {
         div.getCcdKyufuJissekiHeader().set整理番号(事業者番号リスト.get(index + i).get整理番号());
         div.getCcdKyufuJissekiHeader().set識別番号名称(事業者番号リスト.get(index + i).get識別番号名称());
         div.getCcdKyufuJissekiHeader().set様式番号(事業者番号リスト.get(index + i).get識別番号());
-        setDataGrid(給付実績特定入所者介護サービス費用list);
+        setDataGrid(給付実績特定入所者介護サービス費用list, new FlexibleYearMonth(サービス提供年月));
         div.getBtnMaeJigyosha().setDisabled(true);
         div.getBtnAtoJigyosha().setDisabled(true);
         if (0 < index + i) {
