@@ -944,6 +944,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
      * @return ResponseData
      */
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onClick_btnKeiyakuNo(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
+        ViewStateHolder.put(ViewStateKeys.状態, 参照);
         return ResponseData.of(div).forwardWithEventName(DBC0600021TransitionEventName.契約事業者検索).respond();
     }
 

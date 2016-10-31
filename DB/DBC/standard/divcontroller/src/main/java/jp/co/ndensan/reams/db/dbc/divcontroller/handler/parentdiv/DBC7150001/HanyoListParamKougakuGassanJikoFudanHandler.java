@@ -136,9 +136,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (日付スラッシュ付加) {
             csv編集方法リスト.add(THREE);
         }
-        if (!csv編集方法リスト.isEmpty()) {
-            div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
-        }
+        div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
         Long 出力順 = restoreBatchParameterMap.getParameterValue(Long.class, KEY_SHUTSURYOKUJU);
         if (出力順 != null) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701015.getReportId(), 出力順);
@@ -203,9 +201,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (送付対象外) {
             送付対象外リスト.add(KEY0);
         }
-        if (!送付対象外リスト.isEmpty()) {
-            div.getChushutsuJokenPanel().getChkSofuTaishogaiFukumu().setSelectedItemsByKey(送付対象外リスト);
-        }
+        div.getChushutsuJokenPanel().getChkSofuTaishogaiFukumu().setSelectedItemsByKey(送付対象外リスト);
     }
 
     private void pamaRestore2(BatchParameterMap restoreBatchParameterMap) {
@@ -245,7 +241,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     }
 
     private void restoreClear() {
-
+        div.getDdlDetaSakuseiKubun().setSelectedKey(KEY0);
         div.getChushutsuJokenPanel().getRadChushutsuKubun().clearSelectedItem();
         div.getChushutsuJokenPanel().getRadDataShurui().clearSelectedItem();
         div.getChushutsuJokenPanel().getRadHoseuJokyo().clearSelectedItem();

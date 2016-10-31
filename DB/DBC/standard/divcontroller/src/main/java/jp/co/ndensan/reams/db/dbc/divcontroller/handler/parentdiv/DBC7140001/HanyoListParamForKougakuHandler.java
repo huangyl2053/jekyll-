@@ -129,9 +129,7 @@ public class HanyoListParamForKougakuHandler {
         if (日付スラッシュ付加) {
             csv編集方法リスト.add(THREE);
         }
-        if (!csv編集方法リスト.isEmpty()) {
-            div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
-        }
+        div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
         Long 出力順 = restoreBatchParameterMap.getParameterValue(Long.class, KEY_SHUTSURYOKUJU);
         if (出力順 != null) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701014.getReportId(), 出力順);
