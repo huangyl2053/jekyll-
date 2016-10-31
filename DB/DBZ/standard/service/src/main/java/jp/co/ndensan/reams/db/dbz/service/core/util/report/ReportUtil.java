@@ -273,6 +273,8 @@ public final class ReportUtil {
             改頁List.add(RString.EMPTY);
         }
         if (outputOrder.get設定項目リスト().isEmpty()) {
+            entity.setPageBreakKeys(new ArrayList<RString>());
+            entity.set出力順OrderBy(RString.EMPTY);
             return entity;
         }
         for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
