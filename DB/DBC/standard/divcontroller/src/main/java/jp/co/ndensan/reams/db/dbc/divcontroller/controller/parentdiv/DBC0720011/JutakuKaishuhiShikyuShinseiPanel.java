@@ -174,11 +174,9 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         div.getMishinsaShikyuShinseiListPanel().getTxtKetteiYMD().setValue(RDate.getNowDate());
         if (resultList.isEmpty()) {
             div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.TRUE);
-//            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, Boolean.TRUE);
             return ResponseData.of(div).setState(申請審査);
         } else {
             div.getMishinsaShikyuShinseiListPanel().getShinsaButton().getBtnShinsa().setDisabled(Boolean.FALSE);
-//            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, Boolean.FALSE);
             return ResponseData.of(div).setState(申請審査);
         }
     }
@@ -330,6 +328,23 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         }
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, Boolean.FALSE);
         return ResponseData.of(div).setState(DBC0720011StateName.完了);
+    }
+
+    /**
+     * 保存パターン状態判断メソッド
+     *
+     * @param div JutakuKaishuhiShikyuShinseiPanelDiv
+     * @return ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv>
+     */
+    public ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv> onStateTransition(JutakuKaishuhiShikyuShinseiPanelDiv div) {
+        if (ResponseHolder.getState().equals(DBC0720011StateName.申請審査.getName())) {
+            if (div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei().getDataSource().isEmpty()) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, true);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存パターン, false);
+            }
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
