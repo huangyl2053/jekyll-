@@ -175,6 +175,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private static final RString 申請を保存ボタン = new RString("btnAddShikyuShinsei");
     private static final FlexibleYearMonth 平成21年03月 = new FlexibleYearMonth(new RString("200903"));
     private static final int 前ゼロ付き10桁 = 10;
+    private static final RString コンマ = new RString(",");
 
     private JutakuKaishuShinseiJyohoTorokuHandler(JutakuKaishuShinseiJyohoTorokuDiv div) {
         this.div = div;
@@ -1315,7 +1316,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                             new RDate(tmpRow.getTxtKanseiYoteibi().toString()).toDateString()));
                 }
                 shokanJutakuKaishuBuilder.set改修金額(RString.isNullOrEmpty(tmpRow.getTxtKaishuKingaku())
-                        ? 0 : Integer.parseInt(tmpRow.getTxtKaishuKingaku().toString()));
+                        ? 0 : Integer.parseInt(tmpRow.getTxtKaishuKingaku().replace(コンマ, RString.EMPTY).toString()));
                 EntityDataState state = EntityDataState.Unchanged;
                 if (!行状態_更新なし.equals(tmpRow.getTxtJyotai())) {
                     state = 行状態_更新.equals(tmpRow.getTxtJyotai())
@@ -1343,7 +1344,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 addDataBuilder.set住宅改修完成年月日(new FlexibleDate(
                         new RDate(tmpRow.getTxtKanseiYoteibi().toString()).toDateString()));
                 addDataBuilder.set改修金額(RString.isNullOrEmpty(tmpRow.getTxtKaishuKingaku())
-                        ? 0 : Integer.parseInt(tmpRow.getTxtKaishuKingaku().toString()));
+                        ? 0 : Integer.parseInt(tmpRow.getTxtKaishuKingaku().replace(コンマ, RString.EMPTY).toString()));
                 addDataBuilder.set差額金額(0);
                 addDataBuilder.setステータス(EntityDataState.Added);
                 if (サービス種類コード != null) {
@@ -1520,7 +1521,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             dbt3049Builder.set住宅改修住宅住所(row.getTxtJutakuAddress());
         }
         if (row.getTxtKaishuKingaku() != null) {
-            dbt3049Builder.set改修金額(Integer.parseInt(row.getTxtKaishuKingaku().toString()));
+            dbt3049Builder.set改修金額(Integer.parseInt(row.getTxtKaishuKingaku().replace(コンマ, RString.EMPTY).toString()));
         }
         if (row.getTxtKanseiYoteibi() != null) {
             dbt3049Builder.set住宅改修完成年月日(new FlexibleDate(
@@ -1682,11 +1683,13 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             if (RString.isNullOrEmpty(画面住宅住所非削除.getTxtRenban())) {
                 is住宅改修内容追加 = true;
                 画面住宅住所.add(画面住宅住所非削除);
-                画面費用額合計 = 画面費用額合計.add(new Decimal(画面住宅住所非削除.getTxtKaishuKingaku().toString()));
+                画面費用額合計 = 画面費用額合計.add(new Decimal(画面住宅住所非削除.getTxtKaishuKingaku().
+                        replace(コンマ, RString.EMPTY).toString()));
             } else if (!行状態_削除.equals(画面住宅住所非削除.getTxtJyotai())
                     && !RString.isNullOrEmpty(画面住宅住所非削除.getTxtRenban())) {
                 画面住宅住所.add(画面住宅住所非削除);
-                画面費用額合計 = 画面費用額合計.add(new Decimal(画面住宅住所非削除.getTxtKaishuKingaku().toString()));
+                画面費用額合計 = 画面費用額合計.add(new Decimal(画面住宅住所非削除.getTxtKaishuKingaku().
+                        replace(コンマ, RString.EMPTY).toString()));
             } else {
                 is住宅改修内容削除 = true;
             }
@@ -1720,7 +1723,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 .get住宅改修内容一覧();
         Decimal 費用額合計 = Decimal.ZERO;
         for (dgGaisyuList_Row tmpRow : gridList) {
-            RString 改修金額 = tmpRow.getTxtKaishuKingaku();
+            RString 改修金額 = tmpRow.getTxtKaishuKingaku().replace(コンマ, RString.EMPTY);
             if ((!行状態_削除.equals(tmpRow.getTxtJyotai())) && 改修金額 != null) {
                 費用額合計 = 費用額合計.add(new Decimal(改修金額.toString()));
             }
@@ -1857,7 +1860,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             for (dgGaisyuList_Row 住宅住所非削除 : 画面住宅改修データ) {
                 if (RString.isNullOrEmpty(住宅住所非削除.getTxtRenban()) || (!行状態_削除.equals(住宅住所非削除.getTxtJyotai())
                         && !RString.isNullOrEmpty(住宅住所非削除.getTxtRenban()))) {
-                    画面費用額合計 = 画面費用額合計.add(new Decimal(住宅住所非削除.getTxtKaishuKingaku().toString()));
+                    画面費用額合計 = 画面費用額合計.add(new Decimal(
+                            住宅住所非削除.getTxtKaishuKingaku().replace(コンマ, RString.EMPTY).toString()));
                 }
             }
             Decimal 今回の支払状況 = div.getJutakuKaishuShinseiResetInfo()
