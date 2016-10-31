@@ -108,11 +108,10 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
     private HokenshaNo 保険者番号;
     private KyuufuJisekiKoshinnKekkaEntity 一覧表entity;
 
+    private CsvWriter<HokenshaKyufujissekiReprotCsvEntity> eucCsvWriter;
     @BatchWriter
     private BatchReportWriter<KyufuJisekiJohoSofuIchiranSource> batchReportWriter;
     private ReportSourceWriter<KyufuJisekiJohoSofuIchiranSource> reportSourceWriter;
-    @BatchWriter
-    private CsvWriter<HokenshaKyufujissekiReprotCsvEntity> eucCsvWriter;
 
     @Override
     protected void initialize() {
