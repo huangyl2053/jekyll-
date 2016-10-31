@@ -35,24 +35,22 @@
         </if>
         <if test="is対象リスト_認定者リスト">
             <if test="is対象期間指定_対象年度">
-                AND ((介護保険負担限度額認定."ketteiKubun" = #{決定区分_承認する}
+                AND (介護保険負担限度額認定."ketteiKubun" = #{決定区分_承認する}
                 AND (#{対象年度の開始年月日} <![CDATA[<=]]> 介護保険負担限度額認定."tekiyoKaishiYMD"
-                AND 介護保険負担限度額認定."tekiyoShuryoYMD" <![CDATA[<=]]> #{対象年度の終了年月日})) 
-                OR 介護保険負担限度額認定."ketteiKubun" <![CDATA[!=]]> #{決定区分_承認する})
+                AND 介護保険負担限度額認定."tekiyoShuryoYMD" <![CDATA[<=]]> #{対象年度の終了年月日}))
             </if>
             <if test="is対象期間指定_基準日">
-                AND ((介護保険負担限度額認定."ketteiKubun" = #{決定区分_承認する}
+                AND (介護保険負担限度額認定."ketteiKubun" = #{決定区分_承認する}
                 AND (介護保険負担限度額認定."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準日}
                 AND #{基準日} <![CDATA[<=]]> 介護保険負担限度額認定."tekiyoShuryoYMD"))
-                OR 介護保険負担限度額認定."ketteiKubun" <![CDATA[!=]]> #{決定区分_承認する})
             </if>
         </if>
         <if test="is対象リスト_該当者リスト">
             <if test="is受給者区分_受給者">
-                AND (受給者台帳."ninteiYuKoKiKanKaishiYMD" <![CDATA[<=]]> #{課税判定等基準日}
-                AND #{課税判定等基準日} <![CDATA[<=]]> (受給者台帳."ninteiYuKoKiKanShuryoYMD"
+                AND 受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{課税判定等基準日}
+                AND #{課税判定等基準日} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanShuryoYMD"
                 AND 受給者台帳."logicalDeletedFlag" = false 
-                AND 受給者台帳."yukoMuKoKuBun" = #{有効無効区分_有効}
+                AND 受給者台帳."yukoMukoKubun" = #{有効無効区分_有効}
             </if>
         </if>
     </select>
@@ -304,7 +302,7 @@
                             </if>
                             )
                       )      
-        <if test="is対象リスト_認定者リスト">
+        <if test="is対象リスト_該当者リスト">
             <if test="利用者負担1から3段階is">
                 AND A.利用者負担段階 in (#{利用者負担1段階},#{利用者負担2段階},#{利用者負担3段階})
             </if>
