@@ -349,6 +349,19 @@ public class RiyoshaFutangakuGengakuHandler {
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
             div.getTxtKettaiYmd().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
             承認情報エリア状態(承認する_KEY, true, false, true);
+            RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
+            List<ddlShinseiIchiran_Row> rows = div.getDdlShinseiIchiran().getDataSource();
+            FlexibleDate 適用日 ;
+            if (rows.isEmpty()) {
+                適用日 = new FlexibleDate(RDate.getNowDate().getYearValue(), 
+                        RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue()); 
+            } else {
+                適用日 = new FlexibleDate(rows.get(0).getTxtYukoKigen().
+                        getValue().plusDay(1).toString());
+            }
+            FlexibleDate 有効期限 = service.estimate有効期限(適用日);
+            div.getTxtTekiyoYmd().setValue(適用日);
+            div.getTxtYukoKigenYmd().setValue(有効期限);
         }
     }
 
@@ -549,7 +562,7 @@ public class RiyoshaFutangakuGengakuHandler {
             適用日 = new FlexibleDate(RDate.getNowDate().getYearValue(), 
                     RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue()); 
         } else {
-            適用日 = new FlexibleDate(rowLis.get(rowLis.size() - 1).getTxtTekiyoYMD().
+            適用日 = new FlexibleDate(rowLis.get(0).getTxtTekiyoYMD().
                     getValue().toString());
         }
         
