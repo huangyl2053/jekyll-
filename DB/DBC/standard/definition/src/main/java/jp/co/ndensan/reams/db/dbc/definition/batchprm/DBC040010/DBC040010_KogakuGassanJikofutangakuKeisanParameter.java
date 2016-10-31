@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040010;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020080.*;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040010.DBC040010ProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
