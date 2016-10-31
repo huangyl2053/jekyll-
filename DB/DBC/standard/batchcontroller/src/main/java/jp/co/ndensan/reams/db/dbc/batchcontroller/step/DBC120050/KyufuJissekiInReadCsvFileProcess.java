@@ -6,8 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120050;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukyufuketteiin.KogakuKyufuKetteiReadCsvFileProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufujissekikoshinin.KyufuJissekiKoshinReadCsvFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kokuhorenkyotsu.KokuhorenkyoutsuControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120050.DbWT111AKyufuJissekiH11CsvEntity;
@@ -78,7 +77,7 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
      */
     public static final RString PARAMETER_OUT_FLOWENTITY;
 
-    private KogakuKyufuKetteiReadCsvFileProcessParameter parameter;
+    private KyufuJissekiKoshinReadCsvFileProcessParameter parameter;
 
     static {
         PARAMETER_OUT_FLOWENTITY = new RString("flowEntity");
@@ -121,13 +120,13 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
     private static final Integer INDEX_4 = 4;
     private static final int DATA_10 = 10;
     private static final int DATA_100 = 100;
-    private static final RString NUM = new RString("99");
     private static final RString 国保連受取 = new RString("0");
     private static final RString 事業所番号_0 = new RString("0000000000");
 
     private int endIndex;
     private int beginIndex;
     private int 連番;
+    private int データ件数;
     private int レコード番号h1;
     private int レコード番号d1;
     private int レコード番号dd;
@@ -208,7 +207,8 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
     protected void initialize() {
         returnEntity = new FlowEntity();
         controlCsvEntity = new KokuhorenkyoutsuControlCsvEntity();
-        連番 = INDEX_0;
+        連番 = parameter.get連番();
+        データ件数 = parameter.getデータ登録件数();
         レコード番号h1 = INDEX_0;
         レコード番号d1 = INDEX_0;
         レコード番号dd = INDEX_0;
@@ -291,12 +291,8 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
 
     @Override
     protected void afterExecute() {
-        if (連番 == INDEX_0) {
-            DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
-            errorTempentity.setエラー区分(NUM);
-            処理結果リスト一時tableWriter.insert(errorTempentity.toEntity());
-        }
-        returnEntity.set明細データ登録件数(連番);
+        returnEntity.set明細データ登録件数(データ件数);
+        returnEntity.set集計データ登録件数(連番);
         returnEntity.setCodeNum(Integer.valueOf(controlCsvEntity.getCodeNum().toString()));
         flowEntity.setValue(returnEntity);
     }
@@ -304,80 +300,96 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
     private void get一時TBL(List<RString> data) {
         if (帳票レコード種別_H1.equals(data.get(INDEX_4))) {
             連番 = 連番 + INT_1;
+            データ件数 = データ件数 + INT_1;
             レコード番号h1 = レコード番号h1 + INT_1;
             get交換情報識別番号h1(data, レコード番号h1);
         } else if (帳票レコード種別_D1.equals(data.get(INDEX_4))) {
             DbWT111BKyufuJissekiD1CsvEntity d1CsvEntity = ListToObjectMappingHelper.
                     toObject(DbWT111BKyufuJissekiD1CsvEntity.class, data);
+            データ件数 = データ件数 + INT_1;
             レコード番号d1 = レコード番号d1 + INT_1;
             d1一時TBLに登録する(d1CsvEntity, レコード番号d1);
         } else if (帳票レコード種別_D2.equals(data.get(INDEX_4))) {
             DbWT111CKyufuJissekiD2CsvEntity d2CsvEntity = ListToObjectMappingHelper.
                     toObject(DbWT111CKyufuJissekiD2CsvEntity.class, data);
+            データ件数 = データ件数 + INT_1;
             レコード番号d2 = レコード番号d2 + INT_1;
             d2一時TBLに登録する(d2CsvEntity, レコード番号d2);
         } else if (帳票レコード種別_D3.equals(data.get(INDEX_4))) {
+            データ件数 = データ件数 + INT_1;
             レコード番号d3 = レコード番号d3 + INT_1;
             get交換情報識別番号d3(data, レコード番号d3);
         } else if (帳票レコード種別_D4.equals(data.get(INDEX_4))) {
             DbWT111FKyufuJissekiD4CsvEntity d4CsvEntity = ListToObjectMappingHelper.
                     toObject(DbWT111FKyufuJissekiD4CsvEntity.class, data);
+            データ件数 = データ件数 + INT_1;
             レコード番号d4 = レコード番号d4 + INT_1;
             d4一時TBLに登録する(d4CsvEntity, レコード番号d4);
         } else if (帳票レコード種別_D5.equals(data.get(INDEX_4))) {
+            データ件数 = データ件数 + INT_1;
             レコード番号d5 = レコード番号d5 + INT_1;
             get交換情報識別番号d5(data, レコード番号d5);
         } else if (帳票レコード種別_D6.equals(data.get(INDEX_4))) {
             DbWT111HKyufuJissekiD6CsvEntity d6CsvEntity = ListToObjectMappingHelper.
                     toObject(DbWT111HKyufuJissekiD6CsvEntity.class, data);
+            データ件数 = データ件数 + INT_1;
             レコード番号d6 = レコード番号d6 + INT_1;
             d6一時TBLに登録する(d6CsvEntity, レコード番号d6);
         } else if (帳票レコード種別_D7.equals(data.get(INDEX_4))) {
             DbWT111IKyufuJissekiD7CsvEntity d7CsvEntity = ListToObjectMappingHelper.
                     toObject(DbWT111IKyufuJissekiD7CsvEntity.class, data);
+            データ件数 = データ件数 + INT_1;
             レコード番号d7 = レコード番号d7 + INT_1;
             d7一時TBLに登録する(d7CsvEntity, レコード番号d7);
         } else if (帳票レコード種別_D8.equals(data.get(INDEX_4))) {
-            連番 = 連番 + INT_1;
             DbWT111JKyufuJissekiD8CsvEntity d8CsvEntity = ListToObjectMappingHelper.
                     toObject(DbWT111JKyufuJissekiD8CsvEntity.class, data);
+            連番 = 連番 + INT_1;
+            データ件数 = データ件数 + INT_1;
             レコード番号d8 = レコード番号d8 + INT_1;
             d8一時TBLに登録する(d8CsvEntity, レコード番号d8);
         } else if (帳票レコード種別_DE.equals(data.get(INDEX_4))) {
-            連番 = 連番 + INT_1;
             DbWT111JKyufuJissekiD8CsvEntity d8CsvEntity = ListToObjectMappingHelper.
                     toObject(DbWT111JKyufuJissekiD8CsvEntity.class, data);
+            連番 = 連番 + INT_1;
+            データ件数 = データ件数 + INT_1;
             レコード番号de = レコード番号de + INT_1;
             d8一時TBLに登録する(d8CsvEntity, レコード番号de);
         } else if (帳票レコード種別_D9.equals(data.get(INDEX_4))) {
             DbWT111KKyufuJissekiD9CsvEntity d9CsvEntity = ListToObjectMappingHelper.
                     toObject(DbWT111KKyufuJissekiD9CsvEntity.class, data);
+            データ件数 = データ件数 + INT_1;
             レコード番号d9 = レコード番号d9 + INT_1;
             d9一時TBLに登録する(d9CsvEntity, レコード番号d9);
         } else if (帳票レコード種別_DA.equals(data.get(INDEX_4))) {
             DbWT111LKyufuJissekiDACsvEntity daCsvEntity = ListToObjectMappingHelper.
                     toObject(DbWT111LKyufuJissekiDACsvEntity.class, data);
+            データ件数 = データ件数 + INT_1;
             レコード番号da = レコード番号da + INT_1;
             da一時TBLに登録する(daCsvEntity, レコード番号da);
         } else if (帳票レコード種別_DB.equals(data.get(INDEX_4))) {
             DbWT111MKyufuJissekiDBCsvEntity dbCsvEntity = ListToObjectMappingHelper.
                     toObject(DbWT111MKyufuJissekiDBCsvEntity.class, data);
+            データ件数 = データ件数 + INT_1;
             レコード番号db = レコード番号db + INT_1;
             db一時TBLに登録する(dbCsvEntity, レコード番号db);
         } else if (帳票レコード種別_DC.equals(data.get(INDEX_4))) {
             DbWT111NKyufuJissekiDCCsvEntity dcCsvEntity = ListToObjectMappingHelper.
                     toObject(DbWT111NKyufuJissekiDCCsvEntity.class, data);
+            データ件数 = データ件数 + INT_1;
             レコード番号dc = レコード番号dc + INT_1;
             dc一時TBLに登録する(dcCsvEntity, レコード番号dc);
         } else if (帳票レコード種別_DD.equals(data.get(INDEX_4))) {
             DbWT111OKyufuJissekiDDCsvEntity ddCsvEntity = ListToObjectMappingHelper.
                     toObject(DbWT111OKyufuJissekiDDCsvEntity.class, data);
+            データ件数 = データ件数 + INT_1;
             レコード番号dd = レコード番号dd + INT_1;
             dd一時TBLに登録する(ddCsvEntity, レコード番号dd);
         } else if (帳票レコード種別_T1.equals(data.get(INDEX_4))) {
             t1CsvEntity = new DbWT111ZKyufuJissekiT1CsvEntity();
             t1CsvEntity = ListToObjectMappingHelper.
                     toObject(DbWT111ZKyufuJissekiT1CsvEntity.class, data);
+            データ件数 = データ件数 + INT_1;
             レコード番号t1 = レコード番号t1 + INT_1;
             t1一時TBLに登録する(t1CsvEntity, レコード番号t1);
         }
@@ -1045,8 +1057,11 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d6Entity.setToshiNo(RString.EMPTY);
         if (null != d6CsvEntity.getサービスコード()) {
             endIndex = d6CsvEntity.getサービスコード().getColumnValue().length();
-            beginIndex = endIndex - INDEX_4;
-            d6Entity.setMeisaiNo(d6CsvEntity.getサービスコード().getColumnValue().substring(beginIndex, endIndex));
+            if (INDEX_4 <= endIndex) {
+                beginIndex = endIndex - INDEX_4;
+                d6Entity.setMeisaiNo(d6CsvEntity.getサービスコード().getColumnValue()
+                        .substringReturnAsPossible(beginIndex, endIndex));
+            }
             d6Entity.setServiceCode(d6CsvEntity.getサービスコード());
         }
         d6Entity.setFukushiyoguHanbaiYMD(get非空年月日(d6CsvEntity.get福祉用具販売年月日()));
@@ -1076,8 +1091,11 @@ public class KyufuJissekiInReadCsvFileProcess extends BatchProcessBase<List<RStr
         d7Entity.setToshiNo(RString.EMPTY);
         if (null != d7CsvEntity.getサービスコード()) {
             endIndex = d7CsvEntity.getサービスコード().getColumnValue().length();
-            beginIndex = endIndex - INDEX_4;
-            d7Entity.setMeisaiNo(d7CsvEntity.getサービスコード().getColumnValue().substring(beginIndex, endIndex));
+            if (INDEX_4 <= endIndex) {
+                beginIndex = endIndex - INDEX_4;
+                d7Entity.setMeisaiNo(d7CsvEntity.getサービスコード().getColumnValue()
+                        .substringReturnAsPossible(beginIndex, endIndex));
+            }
             d7Entity.setServiceCode(d7CsvEntity.getサービスコード());
         }
         d7Entity.setJutakuKaishuchakkoYMD(get非空年月日(d7CsvEntity.get住宅改修着工年月日()));
