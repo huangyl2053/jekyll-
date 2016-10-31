@@ -67,7 +67,7 @@ public class JyutakugaisyunaiyoListValidationHandler {
         if (rowList != null && rowList.isEmpty()) {
             for (dgGaisyuList_Row row : rowList) {
                 if (!row.getRowState().equals(RowState.Deleted)
-                        && row.getTxtJutakuAddress().equals(div.getTxtJyusyo().getDomain().value())) {
+                        && row.getTxtJutakuAddress().equals(div.getTxtJyusyo().getValue())) {
                     validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                             DbcErrorMessages.対象住宅住所不一致), div.getTxtJyusyo()));
                 }
@@ -106,7 +106,7 @@ public class JyutakugaisyunaiyoListValidationHandler {
         if (RString.isNullOrEmpty(div.getTxtJigyosya().getValue())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, JIGYOSYA.toString()), div.getTxtJigyosya()));
         }
-        if (RString.isNullOrEmpty(div.getTxtJyusyo().getDomain().value())) {
+        if (RString.isNullOrEmpty(div.getTxtJyusyo().getValue())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須, JYUSHO.toString()), div.getTxtJyusyo()));
         }
         if (div.getTxtTyakkoyotebi().getValue() == null) {

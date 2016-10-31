@@ -26,13 +26,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -54,7 +48,7 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
     private static final RString ファイル名_後 = new RString(".csv");
     private static final RString コンマ = new RString(",");
     private static final RString 囲みの文字 = new RString("\"");
-    private static final RString 国保連送付外字_変換区分_1 = new RString("1");
+    private static final RString COPY = new RString("copy");
     private static final RString 不正MESSAGE = new RString("【入力識別番号：被保険者番号：サービス提供年月：事業者番号：通し番号】");
     private static final RString コロン = new RString(":");
     private static final RString 設定区分_0 = new RString("0");
@@ -87,23 +81,26 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
      */
     public static final RString PARAMETER_OUT_OUTPUTCOUNT;
     /**
-     * エントリ情報Listです。
+     * inputPathです。
      */
-    public static final RString PARAMETER_OUT_OUTPUTENTRY;
+    public static final RString INPUT_PATH;
+    /**
+     * outputPathです。
+     */
+    public static final RString OUTPUT_PATH;
 
     static {
         PARAMETER_OUT_OUTPUTCOUNT = new RString("outputCount");
-        PARAMETER_OUT_OUTPUTENTRY = new RString("outputEntry");
+        INPUT_PATH = new RString("inputPath");
+        OUTPUT_PATH = new RString("outputPath");
     }
 
     private HokenshaKyufujissekiProcessParameter processParameter;
     private DbWT1111KyufuJissekiTempTempEntity 給付実績;
-    private List<SharedFileDescriptor> entryList;
     private RString 出力ファイル名;
     private int 出力件数;
     private int 総出力件数;
     private RString csvFilePath;
-    private Encode 文字コード;
     private boolean configFlag;
     private int レコード件数;
     private int cnt01;
@@ -119,9 +116,11 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
     private int cnt11;
     private int cnt12;
     private int cnt14;
+    private RString 入力ファイルパス;
 
     private OutputParameter<Integer> outputCount;
-    private OutputParameter<List> outputEntry;
+    private OutputParameter<RString> inputPath;
+    private OutputParameter<RString> outputPath;
     private CsvListWriter csvListWriter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 給付実績一時tableWriter;
@@ -132,9 +131,9 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
         出力件数 = INT_0;
         総出力件数 = INT_0;
         給付実績 = null;
-        outputEntry = new OutputParameter<>();
+        inputPath = new OutputParameter<>();
+        outputPath = new OutputParameter<>();
         outputCount = new OutputParameter<>();
-        entryList = new ArrayList<>();
         configFlag = DBC業務コンフィグ_1.equals(processParameter.get国保連共同処理受託区分_償還())
                 && DBC業務コンフィグ_1.equals(processParameter.get国保連共同処理受託区分_高額());
         if (!configFlag) {
@@ -148,13 +147,6 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
             } else {
                 レコード件数 = 出力件数カウンター;
             }
-        }
-        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
-            // TODO QA90831 文字コードがありません。
-            文字コード = Encode.UTF_8withBOM;
-        } else {
-            文字コード = Encode.SJIS;
         }
     }
 
@@ -172,10 +164,15 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
             出力ファイル名 = ファイル名_前.concat(processParameter.get保険者番号().getColumnValue())
                     .concat(processParameter.getShoriYM().toDateString()).concat(ファイル名_後);
             csvFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-            csvListWriter = new CsvListWriter.InstanceBuilder(csvFilePath)
+            if (Encode.UTF_8.equals(processParameter.get文字コード())) {
+                入力ファイルパス = Path.combinePath(spoolWorkPath, COPY.concat(出力ファイル名));
+            } else {
+                入力ファイルパス = csvFilePath;
+            }
+            csvListWriter = new CsvListWriter.InstanceBuilder(入力ファイルパス)
                     .setDelimiter(コンマ)
                     .setEnclosure(RString.EMPTY)
-                    .setEncode(文字コード)
+                    .setEncode(processParameter.get文字コード())
                     .setNewLine(NewLine.CRLF)
                     .hasHeader(false)
                     .build();
@@ -226,15 +223,11 @@ public class InsDataRecordTempProcess extends BatchProcessBase<DbWT1111KyufuJiss
         if (!configFlag) {
             List<RString> csvList = getエンドレコードlist();
             csvListWriter.writeLine(csvList);
-            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
-            sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
-            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(csvFilePath), opts);
-            entryList.add(sfd);
             csvListWriter.close();
         }
-        outputEntry.setValue(entryList);
         outputCount.setValue(総出力件数);
+        outputPath.setValue(csvFilePath);
+        inputPath.setValue(入力ファイルパス);
     }
 
     private void write送付ファイル_基本(DbWT1111KyufuJissekiTempTempEntity entity) {

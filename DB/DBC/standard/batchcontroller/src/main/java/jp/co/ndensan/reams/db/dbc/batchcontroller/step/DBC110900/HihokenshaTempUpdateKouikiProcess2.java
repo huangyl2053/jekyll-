@@ -49,8 +49,6 @@ public class HihokenshaTempUpdateKouikiProcess2 extends BatchProcessBase<Kakohor
         DbT7051KoseiShichosonMasterEntity dbT7051Entity = commonEntity.getDbT7051Entity();
         hihokenshaTempEntity.setExShoHokenshaNo(dbT7051Entity.getShoKisaiHokenshaNo().value());
         hihokenshaTempEntity.setExHokenshaNo(保険者番号);
-        hihokenshaTempEntity.setShichosonCode(RString.EMPTY);
-        hihokenshaTempEntity.setOldShichosonCode(RString.EMPTY);
         被保険者一時TBL.update(hihokenshaTempEntity);
     }
 

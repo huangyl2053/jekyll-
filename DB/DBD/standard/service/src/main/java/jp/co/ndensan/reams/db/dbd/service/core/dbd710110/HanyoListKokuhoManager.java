@@ -279,7 +279,7 @@ public class HanyoListKokuhoManager {
                     ジョブ番号,
                     英数字ファイル名,
                     new RString("DBD701011"),
-                    出力ページ数,
+                    出力件数,
                     出力条件);
             EucFileOutputJokenhyoFactory.createInstance(item).print();
         }

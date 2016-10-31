@@ -66,31 +66,31 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_Kijunsy
 
     @Override
     protected void defineFlow() {
-        if (!ShinseishoTorokuChushutsuJoken.白紙印刷.getコード().equals(getParameter().get抽出条件())) {
-            executeStep(INS世帯員所得情報一時表1);
-            executeStep(世帯員把握バッチ);
-            executeStep(UPD世帯員所得情報一時表);
-            executeStep(世帯員所得情報一時テーブルに重複削除);
-            executeStep(対象世帯員クラスに登録);
-            executeStep(対象世帯員クラスに更新1);
-            executeStep(対象世帯員クラスに更新2);
-            executeStep(対象世帯員クラスに更新3);
-            executeStep(対象世帯員クラスに削除);
+        executeStep(INS世帯員所得情報一時表1);
+        executeStep(世帯員把握バッチ);
+        executeStep(UPD世帯員所得情報一時表);
+        executeStep(世帯員所得情報一時テーブルに重複削除);
+        executeStep(対象世帯員クラスに登録);
+        executeStep(対象世帯員クラスに更新1);
+        executeStep(対象世帯員クラスに更新2);
+        executeStep(対象世帯員クラスに更新3);
+        executeStep(対象世帯員クラスに削除);
 
-            executeStep(INS世帯員所得情報一時表2);
-            executeStep(世帯員把握バッチ);
-            executeStep(UPD世帯員所得情報一時表);
-            executeStep(世帯員所得情報一時テーブルに重複削除);
-            executeStep(対象世帯員クラスに登録2);
+        executeStep(INS世帯員所得情報一時表2);
+        executeStep(世帯員把握バッチ);
+        executeStep(UPD世帯員所得情報一時表);
+        executeStep(世帯員所得情報一時テーブルに重複削除);
+        executeStep(対象世帯員クラスに登録2);
+        if (!ShinseishoTorokuChushutsuJoken.白紙印刷.getコード().equals(getParameter().get抽出条件())) {
             executeStep(対象世帯員クラスに更新4);
             executeStep(対象世帯員クラスに更新5);
-            executeStep(帳票出力_CSV作成);
-            if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(getParameter().get抽出条件())) {
-                executeStep(処理結果確認リストの発行);
-            }
-            executeStep(基準収入額管理マスタに登録);
-            executeStep(処理日付管理マスタに更新);
         }
+        executeStep(帳票出力_CSV作成);
+        if (ShinseishoTorokuChushutsuJoken.異動分.getコード().equals(getParameter().get抽出条件())) {
+            executeStep(処理結果確認リストの発行);
+        }
+        executeStep(基準収入額管理マスタに登録);
+        executeStep(処理日付管理マスタに更新);
     }
 
     @Step(INS世帯員所得情報一時表1)
@@ -184,6 +184,7 @@ public class DBC190030_kijunsyunygetsuji extends BatchFlowBase<DBC190030_Kijunsy
         parameter.set処理年度(getParameter().get処理年度());
         parameter.setお知らせ通知書出力フラグ(getParameter().getお知らせ通知書出力フラグ());
         parameter.set一覧表CSV出力フラグ(getParameter().get一覧表CSV出力フラグ());
+        parameter.set申請書出力フラグ(getParameter().get申請書出力フラグ());
         parameter.set作成日(getParameter().get作成日());
         parameter.set世帯員把握基準日(getParameter().get世帯員把握基準日());
         parameter.set世帯員把握基準日2(getParameter().get世帯員把握基準日2());

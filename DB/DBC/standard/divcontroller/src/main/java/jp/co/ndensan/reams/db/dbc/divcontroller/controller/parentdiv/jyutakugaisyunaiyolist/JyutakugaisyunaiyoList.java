@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.JushoKannaiEdit
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -102,8 +101,7 @@ public class JyutakugaisyunaiyoList {
     public ResponseData<JyutakugaisyunaiyoListDiv> onClick_CopyButton(JyutakugaisyunaiyoListDiv requestDiv) {
         ShikibetsuCode shikibetsuCode = DataPassingConverter.deserialize(
                 requestDiv.getJushoData(), ShikibetsuCode.class);
-
-        requestDiv.getTxtJyusyo().setDomain(new AtenaJusho(get連結住所(shikibetsuCode)));
+        requestDiv.getTxtJyusyo().setValue(get連結住所(shikibetsuCode));
         requestDiv.getBtnClear().setDisabled(false);
         requestDiv.getBtnDetailConfirm().setDisabled(false);
         requestDiv.getBtnHonnijyusyoCopy().setDisabled(false);
@@ -242,8 +240,7 @@ public class JyutakugaisyunaiyoList {
         requestDiv.getTxtKaisyunaiyo().setValue(dgGaisyuListRow.getTxtKaishuNaiyo());
         requestDiv.getTxtJigyosya().setValue(dgGaisyuListRow.getTxtJigyosha());
         if (dgGaisyuListRow.getTxtJutakuAddress() != null) {
-            AtenaJusho domain = new AtenaJusho(dgGaisyuListRow.getTxtJutakuAddress());
-            requestDiv.getTxtJyusyo().setDomain(domain);
+            requestDiv.getTxtJyusyo().setValue(dgGaisyuListRow.getTxtJutakuAddress());
         }
         if (!RString.isNullOrEmpty(dgGaisyuListRow.getTxtChakkoYoteibi())) {
             requestDiv.getTxtTyakkoyotebi().setValue(new RDate(dgGaisyuListRow.getTxtChakkoYoteibi().toString()));
@@ -263,7 +260,7 @@ public class JyutakugaisyunaiyoList {
         div.getTxtJigyosya().setValue(RString.EMPTY);
         div.getTxtJigyosya().setDisabled(true);
         div.getBtnHonnijyusyoCopy().setDisabled(true);
-        div.getTxtJyusyo().clearDomain();
+        div.getTxtJyusyo().clearValue();
         div.getTxtJyusyo().setDisabled(true);
         div.getTxtTyakkoyotebi().clearValue();
         div.getTxtTyakkoyotebi().setDisabled(true);
@@ -310,7 +307,7 @@ public class JyutakugaisyunaiyoList {
     private JyutakugaisyunaiyoListDiv clear内容(JyutakugaisyunaiyoListDiv div) {
         div.getTxtKaisyunaiyo().setValue(RString.EMPTY);
         div.getTxtJigyosya().setValue(RString.EMPTY);
-        div.getTxtJyusyo().clearDomain();
+        div.getTxtJyusyo().clearValue();
         div.getTxtTyakkoyotebi().clearValue();
         div.getTxtKanseyotebi().clearValue();
         div.getTxtKaisyukingaku().clearValue();
@@ -318,7 +315,7 @@ public class JyutakugaisyunaiyoList {
     }
 
     private dgGaisyuList_Row listRowSet(dgGaisyuList_Row dgGaisyuListRow, JyutakugaisyunaiyoListDiv requestDiv) {
-        dgGaisyuListRow.setTxtJutakuAddress(requestDiv.getTxtJyusyo().getDomain().getColumnValue());
+        dgGaisyuListRow.setTxtJutakuAddress(requestDiv.getTxtJyusyo().getValue());
         dgGaisyuListRow.setTxtKaishuNaiyo(new RString(requestDiv.getTxtKaisyunaiyo().getValue().toString()));
         if (requestDiv.getTxtTyakkoyotebi().getValue() == null) {
             dgGaisyuListRow.setTxtChakkoYoteibi(RString.EMPTY);

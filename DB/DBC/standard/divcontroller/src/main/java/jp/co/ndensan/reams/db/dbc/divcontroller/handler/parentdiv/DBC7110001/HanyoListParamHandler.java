@@ -111,11 +111,25 @@ public class HanyoListParamHandler {
         } else {
             param.setHitsukeHenshu(false);
         }
-        if (単一.equals(導入形態)) {
-            param.setHokenshacode(LasdecCode.EMPTY);
-        } else {
-            param.setHokenshacode(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード());
+        RString 市町村コード = RString.EMPTY;
+        LasdecCode 保険者コード = LasdecCode.EMPTY;
+        RString 保険者名 = RString.EMPTY;
+        if (広域.equals(導入形態)) {
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
+                市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            }
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().isEmpty()) {
+                保険者コード = new LasdecCode(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value());
+            } else {
+                保険者コード = 保険者コード_全市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称())) {
+                保険者名 = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称();
+            }
         }
+        param.setHokenshacode(保険者コード);
+        param.setHokenshamei(保険者名);
+        param.setShichosoncode(市町村コード);
 
         param.setKokuhorensouhunengetsufrom(nullToEmpty(div.getTxtKokuhorenSofuNengetu().getFromValue()));
         param.setKokuhorensouhunengetsuto(nullToEmpty(div.getTxtKokuhorenSofuNengetu().getToValue()));
@@ -158,7 +172,7 @@ public class HanyoListParamHandler {
             if (restoreBatchParameterMap.getParameterValue(LasdecCode.class, 保険者コード).isEmpty()) {
                 div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
             } else {
-                div.getCcdHokenshaList().setSelectedShichosonIfExist(restoreBatchParameterMap.getParameterValue(LasdecCode.class, 保険者コード));
+                div.getCcdHokenshaList().setSelectedShichosonIfExist(restoreBatchParameterMap.getParameterValue(LasdecCode.class, new RString("shichosoncode")));
             }
         }
         div.getCcdJigyoshaBango().setNyuryokuShisetsuKodo(restoreBatchParameterMap.getParameterValue(RString.class, new RString("jigyoushabangou")));
@@ -190,11 +204,25 @@ public class HanyoListParamHandler {
         } else {
             param.setHitsukeHenshu(false);
         }
-        if (単一.equals(導入形態)) {
-            param.setHokenshacode(LasdecCode.EMPTY);
-        } else {
-            param.setHokenshacode(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード());
+        RString 市町村コード = RString.EMPTY;
+        LasdecCode 保険者コード = LasdecCode.EMPTY;
+        RString 保険者名 = RString.EMPTY;
+        if (広域.equals(導入形態)) {
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
+                市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            }
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().isEmpty()) {
+                保険者コード = new LasdecCode(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value());
+            } else {
+                保険者コード = 保険者コード_全市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称())) {
+                保険者名 = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称();
+            }
         }
+        param.setHokenshacode(保険者コード);
+        param.setHokenshamei(保険者名);
+        param.setShichosoncode(市町村コード);
         param.setKokuhorentoriatsukaifrom(nullToEmpty(div.getTxtKokuhorenToriatukaiNengetu().getFromValue()));
         param.setKokuhorentoriatsukainenetsuto(nullToEmpty(div.getTxtKokuhorenToriatukaiNengetu().getToValue()));
         param.setSeverteikyounengetsufrom(nullToEmpty(div.getTxtSabisuTeikyoNengetu().getFromValue()));
@@ -243,7 +271,7 @@ public class HanyoListParamHandler {
             if (restoreBatchParameterMap.getParameterValue(LasdecCode.class, 保険者コード).isEmpty()) {
                 div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
             } else {
-                div.getCcdHokenshaList().setSelectedShichosonIfExist(restoreBatchParameterMap.getParameterValue(LasdecCode.class, 保険者コード));
+                div.getCcdHokenshaList().setSelectedShichosonIfExist(restoreBatchParameterMap.getParameterValue(LasdecCode.class, new RString("shichosoncode")));
             }
         }
         div.getCcdJigyoshaBango().setNyuryokuShisetsuKodo(restoreBatchParameterMap.getParameterValue(RString.class, new RString("jigyoushabangou")));
