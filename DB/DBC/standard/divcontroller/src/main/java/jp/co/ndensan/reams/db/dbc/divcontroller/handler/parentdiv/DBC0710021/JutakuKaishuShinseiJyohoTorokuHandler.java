@@ -398,7 +398,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 住宅改修.setTxtJigyoshaNo(row.getTxtJigyoshaNo());
                 住宅改修.setTxtJutakuAddress(row.getTxtJutakuAddress());
                 住宅改修.setTxtJyotai(row.getTxtJyotai());
-                住宅改修.setTxtKaishuKingaku(row.getTxtKaishuKingaku());
+                住宅改修.setTxtKaishuKingaku(row.getTxtKaishuKingaku().replace(",", ""));
                 住宅改修.setTxtKaishuNaiyo(row.getTxtKaishuNaiyo());
                 住宅改修.setTxtKanseiYoteibi(row.getTxtKanseiYoteibi());
                 住宅改修.setTxtMeseiNo(row.getTxtMeseiNo());
@@ -1898,7 +1898,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     || is住宅改修データ変更OK(param.getTxtJigyoshaNo(), gridRow.getTxtJigyoshaNo())
                     || is住宅改修データ変更OK(param.getTxtKaishuNaiyo(), gridRow.getTxtKaishuNaiyo())
                     || is住宅改修データ変更OK(param.getTxtKanseiYoteibi(), gridRow.getTxtKanseiYoteibi())
-                    || is住宅改修データ変更OK(param.getTxtKaishuKingaku(), gridRow.getTxtKaishuKingaku())
+                    || is住宅改修データ変更OK(param.getTxtKaishuKingaku(), gridRow.getTxtKaishuKingaku().replace(",", ""))
                     || is住宅改修データ変更OK(param.getTxtMeseiNo(), gridRow.getTxtMeseiNo())
                     || is住宅改修データ変更OK(param.getTxtRenban(), gridRow.getTxtRenban())
                     || is住宅改修データ変更OK(param.getTxtSeiriNo(), gridRow.getTxtSeiriNo());
