@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1740011.dgNi
 import jp.co.ndensan.reams.db.dbc.service.core.basic.NijiYoboJigyoTaishoshaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,6 +32,9 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
     private static final RString 空白 = RString.EMPTY;
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
+    private static final RString 完了メッセージメイン = new RString("二次予防情報の登録が完了しました。");
+    private static final RString TRUE_排他失敗 = new RString("true");
+    private static final RString FALSE_排他失敗 = new RString("false");
     private final NijiyoboJohoTaishoshaTorokuPanelDiv div;
 
     /**
@@ -45,14 +47,26 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
     }
 
     /**
+     * 排他失敗flagを設定します。
+     *
+     * @param is排他失敗し boolean
+     */
+    public void 排他失敗flagを設定する(boolean is排他失敗し) {
+        div.set排他失敗flag(is排他失敗し ? TRUE_排他失敗 : FALSE_排他失敗);
+    }
+
+    /**
      * 初期化を処理します。
      *
      * @param 資格対象者 TaishoshaKey
      * @param 二次予防情報対象一覧List List<NijiYoboJigyoTaishosha>
      */
     public void onLoad(TaishoshaKey 資格対象者, List<NijiYoboJigyoTaishosha> 二次予防情報対象一覧List) {
+        div.getNijiyoboTaishosha().setDisabled(false);
+        div.getNijiyoboJohoTaishoIchiran().setDisabled(false);
         div.set被保険者番号(資格対象者.get被保険者番号().getColumnValue());
         div.set識別コード(資格対象者.get識別コード().getColumnValue());
+        div.set排他失敗flag(FALSE_排他失敗);
         initialize(資格対象者);
         二次予防情報対象一覧グリッドを表示する(二次予防情報対象一覧List);
     }
@@ -257,21 +271,12 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
                 changeItems.add(changeItem);
             }
         }
-        return 二次予防情報対象一覧のデータ更新する(changeItems);
-    }
-
-    private boolean 二次予防情報対象一覧のデータ更新する(List<NijiYoboJigyoTaishosha> changeItems) {
         boolean isSuccess = true;
-        if (null != changeItems && (!changeItems.isEmpty())) {
+        if (!changeItems.isEmpty()) {
             NijiYoboJigyoTaishoshaManager manager = new NijiYoboJigyoTaishoshaManager();
-            for (NijiYoboJigyoTaishosha changeItem : changeItems) {
-                if (!manager.saveOrDeletePhysicalBy二次予防事業対象者(changeItem)) {
-                    isSuccess = false;
-                    return isSuccess;
-                }
-            }
+            isSuccess = manager.saveOrDeletePhysicalBy二次予防事業対象者(changeItems);
         }
-        div.getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+        div.getCcdKanryoMessage().setMessage(完了メッセージメイン,
                 div.get被保険者番号(), div.getNijiyoboTaishosha().getCcdKaigoAtenaInfo().get氏名漢字(), isSuccess);
         return isSuccess;
     }
