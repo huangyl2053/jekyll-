@@ -264,7 +264,9 @@ public class NinteiChosaJokyoHandler {
         konkaiDataPass.set二次判定認定有効開始年月日(div.getTxtNinteiYukoKikanFrom().getValue());
         konkaiDataPass.set二次判定認定有効終了年月日(div.getTxtNinteiYukoKikanTo().getValue());
         konkaiDataPass.set延期通知発行年月日(div.getTxtEnkiTsuchiHakkoDay().getValue());
-        konkaiDataPass.set延期通知発行回数(div.getTxtEnkiTsuchiHakkoCount().getValue().intValue());
+        if (div.getTxtEnkiTsuchiHakkoCount().getValue() != null) {
+            konkaiDataPass.set延期通知発行回数(div.getTxtEnkiTsuchiHakkoCount().getValue().intValue());
+        }
         div.setHdnSerializedBusiness_Konkai(DataPassingConverter.serialize(konkaiDataPass));
     }
 
