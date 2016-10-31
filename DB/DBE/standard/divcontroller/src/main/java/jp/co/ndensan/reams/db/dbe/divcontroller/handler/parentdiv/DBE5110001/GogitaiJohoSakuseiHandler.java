@@ -11,13 +11,14 @@ import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJ
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoBuilder;
-import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohosakusei.GogitaiJohoSakuseiRsult;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaiiinjoho.ShinsakaiIinJoho;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.GogitaichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsGogitaiSeishinkaSonzai;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.GogitaiJohoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgGogitaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgHoketsuShinsainList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgShinsainList_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.gogitaijohosakusei.GogitaiJohoSakuseiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 合議体情報作成の抽象Handlerクラスです。
@@ -39,14 +41,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
  * @reamsid_L DBE-0090-010 chengsanyuan
  */
 public class GogitaiJohoSakuseiHandler {
-
-    private static final RString HYOJI_JOKEN_GENZAI_YUUKOU = new RString("key1");
-    private static final RString SEISHINKAI_SONZAI_SURU = new RString("key0");
-    private static final RString SEISHINKAI_SONZAI_SHINAI = new RString("key1");
-    private static final RString DUMMY_FLAG_TUUJOU = new RString("key0");
-    private static final RString DUMMY_FLAG_DAMI = new RString("key1");
+    private static final RString JYOTAI_NAME_ADD = new RString("追加");
+    private static final RString JYOTAI_NAME_UPD = new RString("修正");
+    private static final RString JYOTAI_NAME_DEL = new RString("削除");
+    private static final RString RAD_KEY_0 = new RString("key0");
+    private static final RString RAD_KEY_1 = new RString("key1");
     private static final RString KAISAI_BASHO_CODE_EMPTY = new RString("empty");
-
+    private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnupdate");
+    
     private int hoketsuCount = 0;
     private int shinsainCount = 0;
 
@@ -59,24 +61,22 @@ public class GogitaiJohoSakuseiHandler {
      */
     public GogitaiJohoSakuseiHandler(GogitaiJohoSakuseiDiv div) {
         this.div = div;
-
     }
 
     /**
      *
      * 合議体情報作成初期化の設定します。
      *
-     * @param resultList 開催場所コードドロップリスト
      */
-    public void load(List<KeyValueDataSource> resultList) {
-        div.getDdlkaisaibasho().setDataSource(resultList);
-        this.cleanGogitaiShosai();
-        div.getRadHyojiJoken().setSelectedKey(HYOJI_JOKEN_GENZAI_YUUKOU);
+    public void load() {
+        GogitaiJohoSakuseiFinder service = GogitaiJohoSakuseiFinder.createInstance();
+        SearchResult<KeyValueDataSource> resultList = service.getKaisaiBashoList();
+        div.getDdlkaisaibasho().setDataSource(resultList.records());
+        div.getRadHyojiJoken().setSelectedKey(RAD_KEY_1);
         div.getDgGogitaiIchiran().getDataSource().clear();
-        div.getRadSeishinkaiSonzai().setSelectedKey(SEISHINKAI_SONZAI_SHINAI);
-        div.getRadDummyFlag().setSelectedKey(DUMMY_FLAG_TUUJOU);
-        this.setDisableByAdd(true);
-
+        div.getRadSeishinkaiSonzai().setSelectedKey(RAD_KEY_1);
+        div.getRadDummyFlag().setSelectedKey(RAD_KEY_0);
+        this.合議体詳細情報初期状態設定();
     }
 
     /**
@@ -92,9 +92,9 @@ public class GogitaiJohoSakuseiHandler {
      *
      * @param resultList 合議体情報一覧のデータ
      */
-    public void setDgGogitaiIchiran(List<GogitaiJohoSakuseiRsult> resultList) {
+    public void 合議体情報一覧初期設定(List<GogitaiJoho> resultList) {
         List<dgGogitaiIchiran_Row> rowList = new ArrayList<>();
-        for (GogitaiJohoSakuseiRsult result : resultList) {
+        for (GogitaiJoho result : resultList) {
             dgGogitaiIchiran_Row row = new dgGogitaiIchiran_Row();
             row.setJyotai(RString.EMPTY);
             row.setGogitaiNumber(new RString(String.valueOf(result.get合議体番号())));
@@ -112,9 +112,7 @@ public class GogitaiJohoSakuseiHandler {
             rowList.add(row);
         }
         div.getDgGogitaiIchiran().setDataSource(rowList);
-        this.cleanGogitaiShosai();
-        this.setDisableByAdd(true);
-        div.getBtnTsuika().setDisabled(false);
+        合議体詳細情報初期状態設定();
     }
 
     /**
@@ -124,7 +122,7 @@ public class GogitaiJohoSakuseiHandler {
      * @param row 合議体情報Gridクリックの行
      * @param resultList 割当審査員一覧
      */
-    public void setGogitaiShosai(dgGogitaiIchiran_Row row, List<GogitaiJohoSakuseiRsult> resultList) {
+    public void 合議体詳細情報データ設定(dgGogitaiIchiran_Row row, List<GogitaiWariateIinJoho> resultList) {
         div.getTxtGogitaiNumber().setValue(row.getGogitaiNumber());
         div.getTxtGogitaiMeisho().setValue(row.getGogitaiName());
         div.getDdlkaisaibasho().setSelectedKey(KAISAI_BASHO_CODE_EMPTY);
@@ -142,55 +140,109 @@ public class GogitaiJohoSakuseiHandler {
         div.getTxtJidoWariateTeiin().setValue(row.getJidoWariateTeiin().getValue());
         div.getTxtIinTeiin().setValue(row.getIinTeiin().getValue());
         if (IsGogitaiSeishinkaSonzai.toValue(row.getSeishinkaiSonzai()).is合議体精神科医存在()) {
-            div.getRadSeishinkaiSonzai().setSelectedKey(SEISHINKAI_SONZAI_SURU);
+            div.getRadSeishinkaiSonzai().setSelectedKey(RAD_KEY_0);
         } else {
-            div.getRadSeishinkaiSonzai().setSelectedKey(SEISHINKAI_SONZAI_SHINAI);
+            div.getRadSeishinkaiSonzai().setSelectedKey(RAD_KEY_1);
         }
         if (IsGogitaiDummy.toValue(row.getGogitaiDummyFlag()).is合議体ダミーフラグTrue()) {
-            div.getRadDummyFlag().setSelectedKey(DUMMY_FLAG_DAMI);
+            div.getRadDummyFlag().setSelectedKey(RAD_KEY_1);
         } else {
-            div.getRadDummyFlag().setSelectedKey(DUMMY_FLAG_TUUJOU);
+            div.getRadDummyFlag().setSelectedKey(RAD_KEY_0);
         }
-        this.setShinsaiMeisai(resultList);
+        this.審査員一覧設定(resultList);
     }
-
+    
+    /**
+     * 合議体情報編集エリア各項目の活性・非活性の設定。
+     */
+    private void 合議体詳細情報項目状態設定(boolean disabledFlag) {
+        div.getTxtGogitaiNumber().setDisabled(disabledFlag);
+        div.getTxtGogitaiMeisho().setDisabled(disabledFlag);
+        div.getTxtYukoKaishiYMD().setDisabled(disabledFlag);
+        div.getTxtYukoShuryoYMD().setDisabled(disabledFlag);
+        div.getTxtKaishiYoteiTime().setDisabled(disabledFlag);
+        div.getTxtShuryoYoteiTime().setDisabled(disabledFlag);
+        div.getDdlkaisaibasho().setDisabled(disabledFlag);     
+        div.getTxtIinTeiin().setDisabled(disabledFlag);
+        div.getTxtYoteiTeiin().setDisabled(disabledFlag);
+        div.getTxtJidoWariateTeiin().setDisabled(disabledFlag);
+        div.getRadSeishinkaiSonzai().setDisabled(disabledFlag);
+        div.getRadDummyFlag().setDisabled(disabledFlag);
+        div.getBtnShinsainSelect().setDisabled(disabledFlag);
+        div.getDgShinsainList().setDisabled(disabledFlag);
+        div.getBtnSubShinsainSelect().setDisabled(disabledFlag);
+        div.getDgHoketsuShinsainList().setDisabled(disabledFlag);
+        div.getBtnback().setDisabled(disabledFlag);
+        div.getBtnKosin().setDisabled(disabledFlag);
+    }
+    
+    /**
+     * 合議体情報編集エリアをクリアします。
+     */
+    private void 合議体詳細情報項目初期値設定() {
+        div.getTxtGogitaiNumber().clearValue();
+        div.getTxtGogitaiMeisho().clearValue();
+        div.getTxtYukoKaishiYMD().clearValue();
+        div.getTxtYukoShuryoYMD().clearValue();
+        div.getTxtKaishiYoteiTime().clearValue();
+        div.getTxtShuryoYoteiTime().clearValue();
+        div.getDdlkaisaibasho().setSelectedKey(KAISAI_BASHO_CODE_EMPTY);
+        div.getTxtIinTeiin().clearValue();
+        div.getTxtYoteiTeiin().clearValue();
+        div.getTxtJidoWariateTeiin().clearValue();
+        div.getRadSeishinkaiSonzai().setSelectedKey(RAD_KEY_1);
+        div.getRadDummyFlag().setSelectedKey(RAD_KEY_0);
+        div.getDgHoketsuShinsainList().getDataSource().clear();
+        div.getDgShinsainList().getDataSource().clear();
+    }
+    
     /**
      *
      * 新規モードの場合、合議体詳細情報の設定します。
      *
      */
-    public void setGogitaiShosaiByAdd() {
-        div.getDdlkaisaibasho().setDisabled(false);
-        div.getTxtYukoShuryoYMD().setDisabled(false);
-        div.getTxtYukoKaishiYMD().setDisabled(false);
-        div.getTxtYoteiTeiin().setDisabled(false);
-        div.getTxtShuryoYoteiTime().setDisabled(false);
-        div.getTxtKaishiYoteiTime().setDisabled(false);
-        div.getTxtJidoWariateTeiin().setDisabled(false);
-        div.getTxtIinTeiin().setDisabled(false);
-        div.getTxtGogitaiNumber().setDisabled(false);
-        div.getTxtGogitaiMeisho().setDisabled(false);
-        div.getRadSeishinkaiSonzai().setDisabled(false);
-        div.getRadDummyFlag().setDisabled(false);
-        div.getDgShinsainList().setDisabled(false);
-        div.getDgHoketsuShinsainList().setDisabled(false);
-        div.getBtnShinsainSelect().setDisabled(false);
-        div.getBtnSubShinsainSelect().setDisabled(false);
-        div.getBtnback().setDisabled(false);
-        div.getBtnKosin().setDisabled(false);
+    public void 合議体詳細情報新規モード設定() {
+        合議体詳細情報項目状態設定(false);
+        合議体詳細情報項目初期値設定();
         div.getBtnTsuika().setDisabled(true);
-        this.cleanGogitaiShosai();
-
+        div.getDgGogitaiIchiran().setReadOnly(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
     }
-
+    
+    /**
+     *
+     * 修正モードの場合、合議体詳細情報の設定します。
+     *
+     */
+    public void 合議体詳細情報修正モード設定() {
+        合議体詳細情報項目状態設定(false);
+        div.getTxtYukoKaishiYMD().setDisabled(true);
+        div.getBtnTsuika().setDisabled(true);
+        div.getDgGogitaiIchiran().setReadOnly(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
+    }
+    
+    /**
+     *
+     * 合議体詳細情報の初期状態の設定します。
+     *
+     */
+    public void 合議体詳細情報初期状態設定() {
+        合議体詳細情報項目初期値設定();
+        合議体詳細情報項目状態設定(true);
+        div.getBtnTsuika().setDisabled(false);
+        div.getDgGogitaiIchiran().setReadOnly(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);
+    }
+   
     /**
      *
      * 新規モードの場合、合議体詳細情報の変更有りの判定します。
      *
-     * @return true:変更なし false:変更有り
+     * @return true:変更有り false:変更無し
      */
-    public boolean hasChangedByAdd() {
-        return div.getTxtGogitaiNumber().getValue().isEmpty()
+    public boolean 新規モード合議体詳細情報変更有無判定() {
+        return !(div.getTxtGogitaiNumber().getValue().isEmpty()
                && div.getTxtGogitaiMeisho().getValue().isEmpty()
                && div.getDdlkaisaibasho().getSelectedKey().equals(KAISAI_BASHO_CODE_EMPTY)
                && div.getTxtYukoShuryoYMD().getValue() == null
@@ -200,10 +252,10 @@ public class GogitaiJohoSakuseiHandler {
                && div.getTxtYoteiTeiin().getValue() == null
                && div.getTxtJidoWariateTeiin().getValue() == null
                && div.getTxtIinTeiin().getValue() == null
-               && div.getRadSeishinkaiSonzai().getSelectedKey().equals(SEISHINKAI_SONZAI_SHINAI)
-               && div.getRadDummyFlag().getSelectedKey().equals(DUMMY_FLAG_TUUJOU)
+               && div.getRadSeishinkaiSonzai().getSelectedKey().equals(RAD_KEY_1)
+               && div.getRadDummyFlag().getSelectedKey().equals(RAD_KEY_0)
                && div.getDgHoketsuShinsainList().getDataSource().isEmpty()
-               && div.getDgShinsainList().getDataSource().isEmpty();
+               && div.getDgShinsainList().getDataSource().isEmpty());
     }
 
     /**
@@ -211,11 +263,11 @@ public class GogitaiJohoSakuseiHandler {
      * 更新モードの場合、合議体詳細情報の変更有りの判定します。
      *
      * @param result 合議体情報
-     * @return true:変更なし false:変更有り
+     * @return true:変更有り false:変更無し
      */
-    public boolean hasChangedByUpd(GogitaiJoho result) {
+    public boolean 修正モード合議体詳細情報変更有無判定(GogitaiJoho result) {
 
-        boolean flg = result.get合議体番号() == Integer.parseInt(div.getTxtGogitaiNumber().getValue().toString())
+        boolean flg = !(result.get合議体番号() == Integer.parseInt(div.getTxtGogitaiNumber().getValue().toString())
                       && result.get合議体名称().equals(div.getTxtGogitaiMeisho().getValue())
                       && result.get介護認定審査会開催場所コード().equals(div.getDdlkaisaibasho().getSelectedKey())
                       && result.get合議体有効期間開始年月日().compareTo(new FlexibleDate(div.getTxtYukoKaishiYMD().getValue().toDateString())) == 0
@@ -223,12 +275,12 @@ public class GogitaiJohoSakuseiHandler {
                       && strToTime(result.get合議体開始予定時刻()).compareTo(div.getTxtKaishiYoteiTime().getValue()) == 0
                       && strToTime(result.get合議体終了予定時刻()).compareTo(div.getTxtShuryoYoteiTime().getValue()) == 0
                       && result.get介護認定審査会予定定員() == div.getTxtYoteiTeiin().getValue().intValue()
-                      && div.getTxtJidoWariateTeiin().getText().equals(result.get介護認定審査会自動割当定員())
+                      && div.getTxtJidoWariateTeiin().getText().equals(new RString(result.get介護認定審査会自動割当定員()))
                       && result.get介護認定審査会委員定員() == div.getTxtIinTeiin().getValue().intValue()
-                      && result.is合議体精神科医存在フラグ() == div.getRadSeishinkaiSonzai().getSelectedKey().equals(SEISHINKAI_SONZAI_SURU)
-                      && result.is合議体ダミーフラグ() == div.getRadDummyFlag().getSelectedKey().equals(DUMMY_FLAG_DAMI);
+                      && result.is合議体精神科医存在フラグ() == div.getRadSeishinkaiSonzai().getSelectedKey().equals(RAD_KEY_0)
+                      && result.is合議体ダミーフラグ() == div.getRadDummyFlag().getSelectedKey().equals(RAD_KEY_1));
 
-        if (!flg) {
+        if (flg) {
             return flg;
         }
         List<dgHoketsuShinsainList_Row> hoketsuShinsainList = div.getDgHoketsuShinsainList().getDataSource();
@@ -302,20 +354,20 @@ public class GogitaiJohoSakuseiHandler {
         return flg;
     }
 
-    private void setShinsaiMeisai(List<GogitaiJohoSakuseiRsult> resultList) {
+    private void 審査員一覧設定(List<GogitaiWariateIinJoho> resultList) {
 
         List<dgHoketsuShinsainList_Row> hoketsuShinsainList = new ArrayList<>();
         List<dgShinsainList_Row> shinsainList = new ArrayList<>();
-        for (GogitaiJohoSakuseiRsult result : resultList) {
+        for (GogitaiWariateIinJoho result : resultList) {
             if (result.is補欠()) {
                 dgHoketsuShinsainList_Row hoketsuShinsainRow = new dgHoketsuShinsainList_Row();
-                hoketsuShinsainRow.setHoketsuShinsakaiIinShimei(nullToEmpty(result.get審査会委員名称()));
+                hoketsuShinsainRow.setHoketsuShinsakaiIinShimei(nullToEmpty(result.getShinsakaiIinJohoList().get(0).get介護認定審査会委員氏名()));
                 hoketsuShinsainRow.setHoketsuShinsakaiIinCode(result.get介護認定審査会委員コード());
                 hoketsuShinsainList.add(hoketsuShinsainRow);
                 continue;
             }
             dgShinsainList_Row shinsainRow = new dgShinsainList_Row();
-            shinsainRow.setShinsakaiIinShimei(nullToEmpty(result.get審査会委員名称()));
+            shinsainRow.setShinsakaiIinShimei(nullToEmpty(result.getShinsakaiIinJohoList().get(0).get介護認定審査会委員氏名()));
             shinsainRow.setShinsakaiIinCode(result.get介護認定審査会委員コード());
             if (GogitaichoKubunCode.副合議体長.getコード().equals(nullToEmpty(result.get合議体長区分コード()))) {
                 shinsainRow.setFukuGogitaicho(Boolean.TRUE);
@@ -330,91 +382,16 @@ public class GogitaiJohoSakuseiHandler {
     }
 
     /**
-     * 合議体情報編集エリアをクリアします。
-     */
-    public void cleanGogitaiShosai() {
-        div.getTxtYukoShuryoYMD().clearValue();
-        div.getTxtYukoKaishiYMD().clearValue();
-        div.getTxtYoteiTeiin().clearValue();
-        div.getTxtShuryoYoteiTime().clearValue();
-        div.getTxtKaishiYoteiTime().clearValue();
-        div.getTxtJidoWariateTeiin().clearValue();
-        div.getTxtIinTeiin().clearValue();
-        div.getTxtGogitaiNumber().clearValue();
-        div.getTxtGogitaiMeisho().clearValue();
-        div.getDgHoketsuShinsainList().getDataSource().clear();
-        div.getDgShinsainList().getDataSource().clear();
-        div.getDdlkaisaibasho().setSelectedKey(KAISAI_BASHO_CODE_EMPTY);
-        div.getRadSeishinkaiSonzai().setSelectedKey(SEISHINKAI_SONZAI_SHINAI);
-        div.getRadDummyFlag().setSelectedKey(DUMMY_FLAG_TUUJOU);
-    }
-
-    /**
-     * 合議体情報編集エリアの表示制御を設定します。
+     * 合議体情報一覧を設定します。
      *
-     * @param flag 表示制御フラグ
+     * @param jyotai 状態
      */
-    public void setDisableByAdd(boolean flag) {
-        div.getDdlkaisaibasho().setDisabled(flag);
-        div.getTxtYukoShuryoYMD().setDisabled(flag);
-        div.getTxtYukoKaishiYMD().setDisabled(flag);
-        div.getTxtYoteiTeiin().setDisabled(flag);
-        div.getTxtShuryoYoteiTime().setDisabled(flag);
-        div.getTxtKaishiYoteiTime().setDisabled(flag);
-        div.getTxtJidoWariateTeiin().setDisabled(flag);
-        div.getTxtIinTeiin().setDisabled(flag);
-        div.getTxtGogitaiNumber().setDisabled(flag);
-        div.getTxtGogitaiMeisho().setDisabled(flag);
-        div.getRadSeishinkaiSonzai().setDisabled(flag);
-        div.getRadDummyFlag().setDisabled(flag);
-        div.getDgShinsainList().setDisabled(flag);
-        div.getDgHoketsuShinsainList().setDisabled(flag);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBatchRegister"), true);
-        div.getBtnShinsainSelect().setDisabled(flag);
-        div.getBtnSubShinsainSelect().setDisabled(flag);
-        div.getBtnback().setDisabled(flag);
-        div.getBtnKosin().setDisabled(flag);
-    }
+    public void 合議体情報一覧更新(RString jyotai) {
 
-    /**
-     * 合議体情報一覧の修正場合、部品活性状態を変化します。
-     *
-     */
-    public void setDisableByUpd(dgGogitaiIchiran_Row row) {
-        div.getBtnTsuika().setDisabled(false);
-        div.getDdlkaisaibasho().setDisabled(false);
-        if (!RString.EMPTY.equals(row.getJyotai())) {
-            div.getTxtYukoKaishiYMD().setDisabled(false);
+        dgGogitaiIchiran_Row row = new dgGogitaiIchiran_Row();
+        if (!JYOTAI_NAME_ADD.equals(jyotai)) {
+            row = div.getDgGogitaiIchiran().getActiveRow();
         }
-        div.getTxtYukoShuryoYMD().setDisabled(false);
-        div.getTxtYoteiTeiin().setDisabled(false);
-        div.getTxtShuryoYoteiTime().setDisabled(false);
-        div.getTxtKaishiYoteiTime().setDisabled(false);
-        div.getTxtJidoWariateTeiin().setDisabled(false);
-        div.getTxtIinTeiin().setDisabled(false);
-        div.getTxtGogitaiMeisho().setDisabled(false);
-        div.getRadSeishinkaiSonzai().setDisabled(false);
-        div.getRadDummyFlag().setDisabled(false);
-        div.getDgShinsainList().setDisabled(false);
-        div.getDgHoketsuShinsainList().setDisabled(false);
-        div.getDgShinsainList().getGridSetting().getColumn(new RString("gogitaicho")).getCellDetails().setDisabled(false);
-        div.getDgShinsainList().getGridSetting().getColumn(new RString("fukuGogitaicho")).getCellDetails().setDisabled(false);
-        div.getDgShinsainList().getGridSetting().getColumn(new RString("gogitaicho")).getCellDetails().setReadOnly(false);
-        div.getDgShinsainList().getGridSetting().getColumn(new RString("fukuGogitaicho")).getCellDetails().setReadOnly(false);
-        div.getBtnShinsainSelect().setDisabled(false);
-        div.getBtnSubShinsainSelect().setDisabled(false);
-        div.getBtnback().setDisabled(false);
-        div.getBtnKosin().setDisabled(false);
-    }
-
-    /**
-     * 合議体情報を設定します。
-     *
-     * @param gogitaiJohoBuilder 合議体情報ビルダー
-     * @param row 合議体情報一覧grid選択行
-     * @return GogitaiJohoBuilder
-     */
-    public GogitaiJohoBuilder getGogitaiJohoBuilder(GogitaiJohoBuilder gogitaiJohoBuilder, dgGogitaiIchiran_Row row) {
         row.setGogitaiNumber(div.getTxtGogitaiNumber().getValue());
         row.setGogitaiName(div.getTxtGogitaiMeisho().getValue());
         row.getGogitaiKaishiYoteiTime().setValue(div.getTxtKaishiYoteiTime().getValue());
@@ -425,64 +402,86 @@ public class GogitaiJohoSakuseiHandler {
         row.getYoteiTeiin().setValue(div.getTxtYoteiTeiin().getValue());
         row.getYukoKaishiYMD().setValue(div.getTxtYukoKaishiYMD().getValue());
         row.getYukoShuryoYMD().setValue(div.getTxtYukoShuryoYMD().getValue());
-        if (DUMMY_FLAG_DAMI.equals(div.getRadDummyFlag().getSelectedKey())) {
-            row.setGogitaiDummyFlag(true);
-            gogitaiJohoBuilder.set合議体ダミーフラグ(true);
+        row.setGogitaiDummyFlag(RAD_KEY_1.equals(div.getRadDummyFlag().getSelectedKey()));
+        row.setSeishinkaiSonzai(RAD_KEY_0.equals(div.getRadSeishinkaiSonzai().getSelectedKey()));
+        
+        int index = div.getDgGogitaiIchiran().getClickedRowId();
+        
+        if (JYOTAI_NAME_ADD.equals(jyotai)) {
+            row.setJyotai(JYOTAI_NAME_ADD);
+            div.getDgGogitaiIchiran().getDataSource().add(row);
+        } else if (JYOTAI_NAME_DEL.equals(jyotai) && JYOTAI_NAME_ADD.equals(row.getJyotai())) {
+            div.getDgGogitaiIchiran().getDataSource().remove(index);
+        } else if (JYOTAI_NAME_UPD.equals(jyotai) && JYOTAI_NAME_ADD.equals(row.getJyotai())) {
+            div.getDgGogitaiIchiran().getDataSource().set(index, row);
         } else {
-            row.setGogitaiDummyFlag(false);
-            gogitaiJohoBuilder.set合議体ダミーフラグ(false);
+            row.setJyotai(jyotai);
+            div.getDgGogitaiIchiran().getDataSource().set(index, row);
         }
-        if (SEISHINKAI_SONZAI_SURU.equals(div.getRadSeishinkaiSonzai().getSelectedKey())) {
-            row.setSeishinkaiSonzai(true);
-            gogitaiJohoBuilder.set合議体精神科医存在フラグ(true);
-        } else {
-            row.setSeishinkaiSonzai(false);
-            gogitaiJohoBuilder.set合議体精神科医存在フラグ(false);
-        }
+    }
+    
+    /**
+     * 合議体情報を編集します。
+     *
+     * @param gogitaiJoho 合議体情報
+     * @return gogitaiJoho 合議体情報
+     */
+    public GogitaiJoho 合議体情報編集(GogitaiJoho gogitaiJoho) {
+        GogitaiJohoBuilder gogitaiJohoBuilder = gogitaiJoho.createBuilderForEdit();
         gogitaiJohoBuilder.set合議体名称(div.getTxtGogitaiMeisho().getValue());
+        gogitaiJohoBuilder.set合議体有効期間終了年月日(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString()));
         gogitaiJohoBuilder.set合議体開始予定時刻(timeToStr(div.getTxtKaishiYoteiTime().getValue()));
         gogitaiJohoBuilder.set合議体終了予定時刻(timeToStr(div.getTxtShuryoYoteiTime().getValue()));
-        gogitaiJohoBuilder.set合議体有効期間終了年月日(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString()));
         gogitaiJohoBuilder.set介護認定審査会開催場所コード(div.getDdlkaisaibasho().getSelectedKey());
         gogitaiJohoBuilder.set介護認定審査会予定定員(div.getTxtYoteiTeiin().getValue().intValue());
         gogitaiJohoBuilder.set介護認定審査会自動割当定員(div.getTxtJidoWariateTeiin().getValue() == null
                                             ? 0 : div.getTxtJidoWariateTeiin().getValue().intValue());
         gogitaiJohoBuilder.set介護認定審査会委員定員(div.getTxtIinTeiin().getValue().intValue());
-        return gogitaiJohoBuilder;
+        gogitaiJohoBuilder.set合議体ダミーフラグ(RAD_KEY_1.equals(div.getRadDummyFlag().getSelectedKey()));
+        gogitaiJohoBuilder.set合議体精神科医存在フラグ(RAD_KEY_0.equals(div.getRadSeishinkaiSonzai().getSelectedKey()));
+        gogitaiJohoBuilder = 合議体割当審査員情報編集(gogitaiJohoBuilder);
+        return gogitaiJohoBuilder.build();
     }
-
-    /**
-     * 割当審査員を設定します。
-     *
-     * @param shinsainRow 割当審査員一覧選択行
-     * @param gogitaiWariateIinJohoBuilder 割当審査員ビルダー
-     * @return GogitaiWariateIinJoho
-     */
-    public GogitaiWariateIinJoho getGogitaiWariateIinJohoByShinsain(dgShinsainList_Row shinsainRow, GogitaiWariateIinJohoBuilder gogitaiWariateIinJohoBuilder) {
-        gogitaiWariateIinJohoBuilder.set補欠(false);
-        if (shinsainRow.getGogitaicho()) {
-            gogitaiWariateIinJohoBuilder.set合議体長区分コード(new Code(GogitaichoKubunCode.合議体長.getコード()));
-        } else if (shinsainRow.getFukuGogitaicho()) {
-            gogitaiWariateIinJohoBuilder.set合議体長区分コード(new Code(GogitaichoKubunCode.副合議体長.getコード()));
-        } else {
-            gogitaiWariateIinJohoBuilder.set合議体長区分コード(new Code(GogitaichoKubunCode.通常.getコード()));
+    
+    private GogitaiJohoBuilder 合議体割当審査員情報編集(GogitaiJohoBuilder gogitaiJohoBuilder) {
+        for (dgShinsainList_Row shinsainRow : div.getDgShinsainList().getDataSource()) {
+            GogitaiWariateIinJoho gogitaiWariateIinJoho = new GogitaiWariateIinJoho(
+                    Integer.parseInt(div.getTxtGogitaiNumber().getValue().toString()),
+                    new FlexibleDate(div.getTxtYukoKaishiYMD().getValue().toDateString()),
+                    shinsainRow.getShinsakaiIinCode());
+            GogitaiWariateIinJohoBuilder gogitaiWariateIinJohoBuilder = gogitaiWariateIinJoho.createBuilderForEdit();
+            gogitaiWariateIinJohoBuilder.set補欠(false);
+            if (shinsainRow.getGogitaicho()) {
+                gogitaiWariateIinJohoBuilder.set合議体長区分コード(new Code(GogitaichoKubunCode.合議体長.getコード()));
+            } else if (shinsainRow.getFukuGogitaicho()) {
+                gogitaiWariateIinJohoBuilder.set合議体長区分コード(new Code(GogitaichoKubunCode.副合議体長.getコード()));
+            } else {
+                gogitaiWariateIinJohoBuilder.set合議体長区分コード(new Code(GogitaichoKubunCode.通常.getコード()));
+            }
+            gogitaiWariateIinJohoBuilder.set合議体有効期間終了年月日(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString()));
+            ShinsakaiIinJoho shinsakaiIinJoho = new ShinsakaiIinJoho(shinsainRow.getShinsakaiIinCode());
+            shinsakaiIinJoho = shinsakaiIinJoho.createBuilderForEdit().set介護認定審査会委員氏名(new AtenaMeisho(shinsainRow.getShinsakaiIinShimei())).build();
+            gogitaiWariateIinJohoBuilder.setSeishinTechoNini(shinsakaiIinJoho);
+            gogitaiWariateIinJoho = gogitaiWariateIinJohoBuilder.build();
+            gogitaiJohoBuilder.setGogitaiWariateIinJoho(gogitaiWariateIinJoho);
         }
-        gogitaiWariateIinJohoBuilder.set合議体有効期間終了年月日(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString()));
-        return gogitaiWariateIinJohoBuilder.build();
-    }
-
-    /**
-     * 割当補欠審査員を設定します。
-     *
-     * @param hoketsuShinsainRow 割当補欠審査会委員情報一覧選択行
-     * @param gogitaiWariateIinJohoBuilder 割当審査員ビルダー
-     * @return GogitaiWariateIinJoho
-     */
-    public GogitaiWariateIinJoho getGogitaiWariateIinJohoByHoketsu(dgHoketsuShinsainList_Row hoketsuShinsainRow, GogitaiWariateIinJohoBuilder gogitaiWariateIinJohoBuilder) {
-        gogitaiWariateIinJohoBuilder.set補欠(true);
-        gogitaiWariateIinJohoBuilder.set合議体長区分コード(new Code(GogitaichoKubunCode.通常.getコード()));
-        gogitaiWariateIinJohoBuilder.set合議体有効期間終了年月日(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString()));
-        return gogitaiWariateIinJohoBuilder.build();
+        
+        for (dgHoketsuShinsainList_Row hoketsuShinsainRow : div.getDgHoketsuShinsainList().getDataSource()) {
+            GogitaiWariateIinJoho gogitaiWariateIinJoho = new GogitaiWariateIinJoho(
+                    Integer.parseInt(div.getTxtGogitaiNumber().getValue().toString()),
+                    new FlexibleDate(div.getTxtYukoKaishiYMD().getValue().toDateString()),
+                    hoketsuShinsainRow.getHoketsuShinsakaiIinCode());
+            GogitaiWariateIinJohoBuilder gogitaiWariateIinJohoBuilder = gogitaiWariateIinJoho.createBuilderForEdit();
+            gogitaiWariateIinJohoBuilder.set補欠(true);
+            gogitaiWariateIinJohoBuilder.set合議体長区分コード(new Code(GogitaichoKubunCode.通常.getコード()));
+            gogitaiWariateIinJohoBuilder.set合議体有効期間終了年月日(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString()));
+            ShinsakaiIinJoho shinsakaiIinJoho = new ShinsakaiIinJoho(hoketsuShinsainRow.getHoketsuShinsakaiIinCode());
+            shinsakaiIinJoho = shinsakaiIinJoho.createBuilderForEdit().set介護認定審査会委員氏名(new AtenaMeisho(hoketsuShinsainRow.getHoketsuShinsakaiIinShimei())).build();
+            gogitaiWariateIinJohoBuilder.setSeishinTechoNini(shinsakaiIinJoho);
+            gogitaiWariateIinJoho = gogitaiWariateIinJohoBuilder.build();
+            gogitaiJohoBuilder.setGogitaiWariateIinJoho(gogitaiWariateIinJoho);
+        }
+        return gogitaiJohoBuilder;
     }
 
     private RTime strToTime(RString str) {
