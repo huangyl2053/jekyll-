@@ -236,7 +236,9 @@
         SELECT
         *
         FROM
-        "futanWariaiTemp"
+        "futanWariaiTemp" AS F1
+        ORDER BY
+        F1."被保険者番号", F1."年度"
     </select>
     
     <select resultOrdered="true" id="get更正対象給付実績情報作成データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.KoseiTaishoKyuhuzissekiJohouSakuseiResultEntity" fetchSize="500">

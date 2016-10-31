@@ -85,7 +85,7 @@ public class KoseiTaishoKyuhuzissekiJohouSakuseiProcess extends BatchProcessBase
         }
         Decimal 更正後請求額 = null;
         Decimal 軽減前自己負担額 = null;
-        if (サービス費用額 != null && 更正後保険給付率.value() != null) {
+        if (サービス費用額 != null && 更正後保険給付率 != null) {
             更正後請求額 = サービス費用額.multiply(更正後保険給付率.value()).divide(一百).roundDownTo(0);
             軽減前自己負担額 = サービス費用額.subtract(更正後請求額);
         }

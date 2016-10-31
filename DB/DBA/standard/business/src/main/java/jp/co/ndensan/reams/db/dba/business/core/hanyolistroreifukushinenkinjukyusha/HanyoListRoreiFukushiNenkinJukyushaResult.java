@@ -59,6 +59,7 @@ public class HanyoListRoreiFukushiNenkinJukyushaResult {
     private static final RString 生年月日 = new RString("生年月日：");
     private static final RString 地区区分 = new RString("地区区分：");
     private static final RString フラグ = new RString("1");
+    private static final RString 全市町村 = new RString("000000");
 
     /**
      * EucCsvEntityの設定メッソドです。
@@ -405,9 +406,13 @@ public class HanyoListRoreiFukushiNenkinJukyushaResult {
         if (kaigoDonyuKeitai.get(0).get導入形態コード().is広域()) {
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(new RString("保険者："));
-            jokenBuilder.append(processParamter.getShichoson_Code());
-            jokenBuilder.append(RString.HALF_SPACE);
-            jokenBuilder.append(processParamter.getShichoson_Name());
+            if (全市町村.equals(processParamter.getHokenshaCode())) {
+                jokenBuilder.append(new RString("000000 全市町村"));
+            } else {
+                jokenBuilder.append(processParamter.getHokenshaCode());
+                jokenBuilder.append(RString.HALF_SPACE);
+                jokenBuilder.append(processParamter.getShichoson_Name());
+            }
             出力条件List.add(jokenBuilder.toRString());
         }
         return 出力条件List;
