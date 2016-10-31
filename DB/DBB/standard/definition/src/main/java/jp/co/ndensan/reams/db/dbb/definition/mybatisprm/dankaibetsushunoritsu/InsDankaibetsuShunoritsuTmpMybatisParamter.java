@@ -32,8 +32,9 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
     private RString 選択対象区分;
     private RString 広域判定区分;
     private List<RString> 選択対象リスト;
+    private List<RString> 科目コードリスト;
 
-    private RString psmTotalShunyu;
+    private RString schema;
 
     /**
      * コンストラクタです
@@ -48,7 +49,7 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
      * @param 広域判定区分 広域判定区分
      * @param 選択対象区分 選択対象区分
      * @param 選択対象リスト 選択対象リスト
-     * @param psmTotalShunyu psmTotalShunyu
+     * @param 科目コードリスト 科目コードリスト
      */
     public InsDankaibetsuShunoritsuTmpMybatisParamter(FlexibleYear 開始調定年度,
             FlexibleYear 終了調定年度,
@@ -60,7 +61,7 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
             RString 広域判定区分,
             RString 選択対象区分,
             List<RString> 選択対象リスト,
-            RString psmTotalShunyu) {
+            List<RString> 科目コードリスト) {
         this.開始調定年度 = 開始調定年度;
         this.終了調定年度 = 終了調定年度;
         this.開始賦課年度 = 開始賦課年度;
@@ -71,6 +72,6 @@ public class InsDankaibetsuShunoritsuTmpMybatisParamter implements IMyBatisParam
         this.広域判定区分 = 広域判定区分;
         this.選択対象区分 = 選択対象区分;
         this.選択対象リスト = 選択対象リスト;
-        this.psmTotalShunyu = psmTotalShunyu;
+        this.科目コードリスト = 科目コードリスト;
     }
 }
