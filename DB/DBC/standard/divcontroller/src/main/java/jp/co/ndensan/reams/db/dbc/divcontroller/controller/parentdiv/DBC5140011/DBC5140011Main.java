@@ -38,9 +38,8 @@ public class DBC5140011Main {
      * @return ResponseData
      */
     public ResponseData<DBC5140011MainDiv> onLoad(DBC5140011MainDiv div) {
-
-        getHandler(div).initialize();
         ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示有り);
+        getHandler(div).initialize();
         return ResponseData.of(div).respond();
     }
 
