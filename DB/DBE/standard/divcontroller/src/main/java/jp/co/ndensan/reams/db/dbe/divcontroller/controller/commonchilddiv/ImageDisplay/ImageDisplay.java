@@ -141,7 +141,7 @@ public class ImageDisplay {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).dialogOKClose();
         }
-        return ResponseData.of(div).dialogOKClose();
+        return ResponseData.of(div).respond();
     }
 
     private ResponseData<ImageDisplayDiv> get_メッセージ(ImageDisplayDiv div, ValidationMessageControlPairs validPairs) {
