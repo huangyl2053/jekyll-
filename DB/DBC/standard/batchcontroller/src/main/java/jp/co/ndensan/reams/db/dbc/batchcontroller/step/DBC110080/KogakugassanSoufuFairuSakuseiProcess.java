@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110080;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_JikofutangakuMeisaiTaishoTsuki;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenSofuKokanJohoShikibetsuBango;
@@ -35,14 +33,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -68,10 +60,9 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
             + "IKogakugassanHoseisumiJikofutangakuOutMapper.get出力対象データ");
     private static final RString 処理結果リスト一時NAME = new RString("DbWT1002KokuhorenSakuseiError");
     private static final RString コンマ = new RString(",");
-    private static final RString ダブル引用符 = new RString("\"");
     private static final RString ファイル名_前 = new RString("10_37K");
     private static final RString ファイル名_後 = new RString(".csv");
-    private static final RString 国保連送付外字_変換区分_1 = new RString("1");
+    private static final RString COPY = new RString("copy");
     private static final int INT_0 = 0;
     private static final int INT_25 = 25;
     private static final int INT_40 = 40;
@@ -83,26 +74,31 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
      */
     public static final RString PARAMETER_OUT_OUTPUTCOUNT;
     /**
-     * エントリ情報Listです。
+     * inputPathです。
      */
-    public static final RString PARAMETER_OUT_OUTPUTENTRY;
+    public static final RString INPUT_PATH;
+    /**
+     * outputPathです。
+     */
+    public static final RString OUTPUT_PATH;
 
     static {
         PARAMETER_OUT_OUTPUTCOUNT = new RString("outputCount");
-        PARAMETER_OUT_OUTPUTENTRY = new RString("outputEntry");
+        INPUT_PATH = new RString("inputPath");
+        OUTPUT_PATH = new RString("outputPath");
     }
 
     private OutputParameter<Integer> outputCount;
-    private OutputParameter<List> outputEntry;
-    private List<SharedFileDescriptor> entryList;
+    private OutputParameter<RString> inputPath;
+    private OutputParameter<RString> outputPath;
     private KogakugassanProcessParameter processParameter;
     private int 総出力件数;
     private int レコード番号;
-    private Encode 文字コード;
     private RString eucFilePath;
     private RString 出力ファイル名;
     private int レコード件数;
     private int renben;
+    private RString 入力ファイルパス;
     private KogakugassanSoufuFairuSakuseiMeisaiEntity meisEntity;
 
     private CsvWriter eucCsvWriter;
@@ -113,18 +109,12 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
     protected void initialize() {
         レコード件数 = KogakugassanFinder.createInstance().get出力対象データ().size();
         outputCount = new OutputParameter<>();
-        outputEntry = new OutputParameter<>();
-        entryList = new ArrayList<>();
+        inputPath = new OutputParameter<>();
+        outputPath = new OutputParameter<>();
+        入力ファイルパス = RString.EMPTY;
         meisEntity = new KogakugassanSoufuFairuSakuseiMeisaiEntity();
         総出力件数 = INT_0;
         レコード番号 = INT_0;
-        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
-            // TODO QA90831 文字コードがありません。
-            文字コード = Encode.UTF_8withBOM;
-        } else {
-            文字コード = Encode.SJIS;
-        }
     }
 
     @Override
@@ -138,6 +128,11 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         出力ファイル名 = ファイル名_前.concat(processParameter.getShoriKunbun())
                 .concat(processParameter.get保険者情報_保険者番号()).concat(processParameter.getShoriYM().toDateString()).concat(ファイル名_後);
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
+        if (Encode.UTF_8.equals(processParameter.get文字コード())) {
+            入力ファイルパス = Path.combinePath(spoolWorkPath, COPY.concat(出力ファイル名));
+        } else {
+            入力ファイルパス = eucFilePath;
+        }
         処理結果リスト一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(処理結果リスト一時NAME, DbWT1002KokuhorenSakuseiErrorTempEntity.class);
     }
@@ -145,10 +140,10 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
     @Override
     protected void process(SyuturyokuEntity entity) {
         if (レコード番号 == INT_0) {
-            eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+            eucCsvWriter = new CsvWriter.InstanceBuilder(入力ファイルパス)
                     .setDelimiter(コンマ)
-                    .setEnclosure(ダブル引用符)
-                    .setEncode(文字コード)
+                    .setEnclosure(RString.EMPTY)
+                    .setEncode(processParameter.get文字コード())
                     .setNewLine(NewLine.CRLF)
                     .hasHeader(false)
                     .build();
@@ -176,18 +171,14 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
             レコード番号 = レコード番号 + 1;
             KogakugassanSoufuFairuSakuseiEndEntity endEntity = getEndEntity();
             eucCsvWriter.writeLine(endEntity);
-            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
-            sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
-            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
-            entryList.add(sfd);
             eucCsvWriter.close();
         } else {
             DbWT1002KokuhorenSakuseiErrorTempEntity dbWT1002Entity = get処理結果リスト一時Entity();
             処理結果リスト一時tableWriter.insert(dbWT1002Entity);
         }
         outputCount.setValue(総出力件数);
-        outputEntry.setValue(entryList);
+        outputPath.setValue(eucFilePath);
+        inputPath.setValue(入力ファイルパス);
     }
 
     private DbWT1002KokuhorenSakuseiErrorTempEntity get処理結果リスト一時Entity() {
