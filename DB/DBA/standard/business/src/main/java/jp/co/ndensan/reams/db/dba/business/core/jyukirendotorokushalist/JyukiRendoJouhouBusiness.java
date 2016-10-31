@@ -424,7 +424,7 @@ public class JyukiRendoJouhouBusiness {
         /**
          * 番地コード
          */
-        番地コード(new RString("0003"), new RString("banchiCode"), new RString("番地コード")),
+        番地コード(new RString("0003"), new RString("banchiCode"), new RString("\"banchiCode1\",\"banchiCode2\",\"banchiCode3\",\"banchiCode4\"")),
         /**
          * 行政区コード
          */

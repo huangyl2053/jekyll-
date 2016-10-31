@@ -580,9 +580,11 @@ public class RiyoshaFutanWariaiHantei {
             if (beforeNo != null && !beforeNo.equals(明細情報.getHihokenshaNo())) {
                 edaNo = 1;
             }
-            for (RiyoshaFutanWariaiKonkyoTempEntity entity : 根拠情報map.get(getKeyOf明細根拠情報(明細情報))) {
-                entity.setEdaNo(edaNo);
-                根拠情報temp.add(entity);
+            if (根拠情報map.containsKey(getKeyOf明細根拠情報(明細情報))) {
+                for (RiyoshaFutanWariaiKonkyoTempEntity entity : 根拠情報map.get(getKeyOf明細根拠情報(明細情報))) {
+                    entity.setEdaNo(edaNo);
+                    根拠情報temp.add(entity);
+                }
             }
             明細情報.setEdaNo(edaNo);
             明細情報temp.add(明細情報);

@@ -78,7 +78,7 @@ public class KyufuGengakuHaakuListTaishoTokuteiMybatisParameter implements IMyBa
         this.is受給認定申請中者チェックオン = new RString("0").equals(受給認定申請中者);
         this.is受給認定日抽出チェックオン = new RString("0").equals(受給認定日抽出);
         this.is認定有効終了日抽出チェックオン = new RString("0").equals(認定有効終日抽出);
-        this.is保険料完納者も出力チェックオン = new RString("0").equals(保険料完納者も出力);
+        this.is保険料完納者も出力チェックオン = new RString("1").equals(保険料完納者も出力);
 
         this.被保険者選択 = 被保険者選択;
         this.受給者全員 = 受給者全員;

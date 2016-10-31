@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaSearchHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -88,6 +90,10 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
      */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnIkkatsuShinsa(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
+        ValidationMessageControlPairs validationMessages = new YoguKonyuhiShikyuShinseiMishinsaValidationHandler(div).validateデータ選択と決定日();
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         getHandler(div).審査決定処理();
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, false);
         return ResponseData.of(div).respond();
@@ -129,9 +135,11 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
      */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnSave(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
+        ValidationMessageControlPairs validationMessages = new YoguKonyuhiShikyuShinseiMishinsaValidationHandler(div).validateデータ選択と決定日();
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         RDate 決定日R = div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().getValue();
-        getHandler(div).決定日入力チェック(決定日R);
-        getHandler(div).選択チェック();
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());

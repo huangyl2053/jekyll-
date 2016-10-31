@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC5100011;
 
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150010.DBC150010_RiyojokyoTokeihyoMeisaiListParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5100011.DBC5100011MainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5100011.DBC5100011MainHandler;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5100011.DBC5100011StateName.標準;
@@ -40,12 +41,13 @@ public class DBC5100011Main {
      * @throws InstantiationException
      * @throws IllegalAccessException
      */
-    public ResponseData<DBC5100011MainDiv> onClick_btnBatchRegister(DBC5100011MainDiv div) throws InstantiationException,
-            IllegalAccessException {
+    public ResponseData<DBC150010_RiyojokyoTokeihyoMeisaiListParameter> onClick_btnBatchRegister(DBC5100011MainDiv div)
+            throws InstantiationException, IllegalAccessException {
         IOutputOrder 出力順 = div.getCcdChohyoShutsuryokujun().getSelected出力順();
         IChohyoShutsuryokujunManager manger = new _ChohyoShutsuryokujunManager();
         manger.save前回出力順(出力順);
-        return ResponseData.of(div).respond();
+        DBC150010_RiyojokyoTokeihyoMeisaiListParameter param = this.getHandler(div).getTempData();
+        return ResponseData.of(param).respond();
     }
 
     /**

@@ -95,7 +95,7 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
         key.set住民状態(住名状態);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(
                 key.getPSM検索キー());
-        if (出力順Entity.get出力順OrderBy() == null) {
+        if (RString.isNullOrEmpty(出力順Entity.get出力順OrderBy())) {
             processParameter.setOrderByFlag(false);
         } else {
             processParameter.setOrderByFlag(true);

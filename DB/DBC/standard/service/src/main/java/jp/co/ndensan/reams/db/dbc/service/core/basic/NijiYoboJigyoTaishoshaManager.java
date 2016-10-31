@@ -122,17 +122,21 @@ public class NijiYoboJigyoTaishoshaManager {
     }
 
     /**
-     * 二次予防事業対象者{@link NijiYoboJigyoTaishosha}を保存します。
+     * 二次予防事業対象者のリスト{@link NijiYoboJigyoTaishosha}を保存します。
      *
-     * @param 二次予防事業対象者 {@link NijiYoboJigyoTaishosha}
+     * @param 二次予防事業対象者List List<NijiYoboJigyoTaishosha>
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean saveOrDeletePhysicalBy二次予防事業対象者(NijiYoboJigyoTaishosha 二次予防事業対象者) {
-        requireNonNull(二次予防事業対象者, UrSystemErrorMessages.値がnull.getReplacedMessage("二次予防事業対象者"));
-        if (!二次予防事業対象者.hasChanged()) {
-            return false;
+    public boolean saveOrDeletePhysicalBy二次予防事業対象者(List<NijiYoboJigyoTaishosha> 二次予防事業対象者List) {
+        requireNonNull(二次予防事業対象者List, UrSystemErrorMessages.値がnull.getReplacedMessage("二次予防事業対象者のリスト"));
+        int count = 0;
+        for (NijiYoboJigyoTaishosha 二次予防事業対象者 : 二次予防事業対象者List) {
+            if (二次予防事業対象者.hasChanged()) {
+                dac.saveOrDeletePhysicalBy(二次予防事業対象者.toEntity());
+                count++;
+            }
         }
-        return 1 == dac.saveOrDeletePhysicalBy(二次予防事業対象者.toEntity());
+        return 0 < count;
     }
 }
