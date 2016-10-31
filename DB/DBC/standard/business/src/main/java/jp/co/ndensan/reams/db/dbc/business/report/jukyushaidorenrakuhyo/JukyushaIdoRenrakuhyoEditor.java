@@ -33,6 +33,7 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
     private static final RString THREE = new RString("3");
     private static final RString CIRCLE = new RString("○");
     private static final RString DOT = new RString(".");
+    private static final RString 半角アスタリスク = new RString("*");
 
     /**
      * コンストラクタです
@@ -104,15 +105,15 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.yoKaigoJotaiKbn = entity.get要介護状態区分();
             source.yukoKikanSTNengo = commonEra(entity.get有効期間開始年月日());
             source.yukoKikanSTYMD = commonYMD(entity.get有効期間開始年月日());
-            source.yukoKikanEDNengo = commonEra(new FlexibleDate(entity.get有効期間終了年月日()));
-            source.yukoKikanEDYMD = commonYMD(new FlexibleDate(entity.get有効期間終了年月日()));
+            source.yukoKikanEDNengo = commonRStringEra(entity.get有効期間終了年月日());
+            source.yukoKikanEDYMD = commonRStringYMD(entity.get有効期間終了年月日());
             Boolean 公費負担限額減額 = entity.get公費負担上限額減額();
             source.kohiFutanJogenGaku = new RString(公費負担限額減額.toString());
             source.sikyuGendoKijunGaKu1 = entity.get支給限度基準額1();
             source.jogenTekiyoSTNengo1 = commonEra(entity.get上限管理適用開始年月日１());
             source.jogenKaTekiyoSTYMD1 = commonYMD(entity.get上限管理適用開始年月日１());
-            source.jogenTekiyoEDNengo1 = commonEra(new FlexibleDate(entity.get上限管理終了年月日１()));
-            source.jogenTekiyoEDYMD1 = commonYMD(new FlexibleDate(entity.get上限管理終了年月日１()));
+            source.jogenTekiyoEDNengo1 = commonRStringEra(entity.get上限管理終了年月日１());
+            source.jogenTekiyoEDYMD1 = commonRStringYMD(entity.get上限管理終了年月日１());
             source.Hyodai2_2 = 旧訪問通所;
             source.Hyodai3_1 = 支給限度基準額;
             source.sikyuGendoKijunGaKu2 = entity.get支給限度基準額２();
@@ -123,31 +124,31 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.Hyodai3_2 = 旧短期入所;
             source.keikakuSakuseiKbn = entity.get計画作成区分();
             source.kyotakuShienJigyoshaNO = entity.get居宅支援事業者番号();
-            source.kyoTekiyoSTNengo = commonEra(new FlexibleDate(entity.get居宅適用開始年月日()));
-            source.kyoTekiyoSTYMD = commonYMD(new FlexibleDate(entity.get居宅適用開始年月日()));
-            source.kyoTekiyoEDNengo = commonEra(new FlexibleDate(entity.get居宅適用終了年月日()));
-            source.kyoTekiyoEDYMD = commonYMD(new FlexibleDate(entity.get居宅適用終了年月日()));
+            source.kyoTekiyoSTNengo = commonRStringEra(entity.get居宅適用開始年月日());
+            source.kyoTekiyoSTYMD = commonRStringYMD(entity.get居宅適用開始年月日());
+            source.kyoTekiyoEDNengo = commonRStringEra(entity.get居宅適用終了年月日());
+            source.kyoTekiyoEDYMD = commonRStringYMD(entity.get居宅適用終了年月日());
             source.genShinseichuKbn = entity.get減免申請中区分();
             source.riyoshaFutanKbn = entity.get利用者負担区分();
             source.riyoKyufuRitsu = entity.get利用給付率();
-            source.riyoTekiyoSTNengo = commonEra(new FlexibleDate(entity.get利用適用開始年月日()));
-            source.riyoTekiyoSTYMD = commonYMD(new FlexibleDate(entity.get利用適用開始年月日()));
-            source.riyoTekiyoEDNengo = commonEra(new FlexibleDate(entity.get利用適用終了年月日()));
-            source.riyoTekiyoEDYMD = commonYMD(new FlexibleDate(entity.get利用適用終了年月日()));
+            source.riyoTekiyoSTNengo = commonRStringEra(entity.get利用適用開始年月日());
+            source.riyoTekiyoSTYMD = commonRStringYMD(entity.get利用適用開始年月日());
+            source.riyoTekiyoEDNengo = commonRStringEra(entity.get利用適用終了年月日());
+            source.riyoTekiyoEDYMD = commonRStringYMD(entity.get利用適用終了年月日());
             source.hyojunFutanKBN = entity.get標準負担区分();
             source.hyojunFutanGaku = entity.get標準負担額();
-            source.hyojunTekiyoSTNengo = commonEra(new FlexibleDate(entity.get標準適用開始年月日()));
-            source.hyojunTekiyoSTYMD = commonYMD(new FlexibleDate(entity.get標準適用開始年月日()));
-            source.hyojunTekiyoEDNengo = commonEra(new FlexibleDate(entity.get標準適用終了年月日()));
-            source.hyojunTekiyoEDYMD = commonYMD(new FlexibleDate(entity.get標準適用終了年月日()));
-            source.shoTekiyoSTNengo = commonEra(new FlexibleDate(entity.get償還払化適用開始年月日()));
-            source.shoTekiyoSTYMD = commonYMD(new FlexibleDate(entity.get償還払化適用開始年月日()));
-            source.shoTekiyoEDNengo = commonEra(new FlexibleDate(entity.get償還払化適用終了年月日()));
-            source.shoTekiyoEDYMD = commonYMD(new FlexibleDate(entity.get償還払化適用終了年月日()));
-            source.kyuTekiyoSTNengo = commonEra(new FlexibleDate(entity.get給付率引下げ適用開始年月日()));
-            source.kyuTekiyoSTYMD = commonYMD(new FlexibleDate(entity.get給付率引下げ適用開始年月日()));
-            source.kyuTekiyoEDNengo = commonEra(new FlexibleDate(entity.get給付率引下げ適用終了年月日()));
-            source.kyuTekiyoEDYMD = commonYMD(new FlexibleDate(entity.get給付率引下げ適用終了年月日()));
+            source.hyojunTekiyoSTNengo = commonRStringEra(entity.get標準適用開始年月日());
+            source.hyojunTekiyoSTYMD = commonRStringYMD(entity.get標準適用開始年月日());
+            source.hyojunTekiyoEDNengo = commonRStringEra(entity.get標準適用終了年月日());
+            source.hyojunTekiyoEDYMD = commonRStringYMD(entity.get標準適用終了年月日());
+            source.shoTekiyoSTNengo = commonRStringEra(entity.get償還払化適用開始年月日());
+            source.shoTekiyoSTYMD = commonRStringYMD(entity.get償還払化適用開始年月日());
+            source.shoTekiyoEDNengo = commonRStringEra(entity.get償還払化適用終了年月日());
+            source.shoTekiyoEDYMD = commonRStringYMD(entity.get償還払化適用終了年月日());
+            source.kyuTekiyoSTNengo = commonRStringEra(entity.get給付率引下げ適用開始年月日());
+            source.kyuTekiyoSTYMD = commonRStringYMD(entity.get給付率引下げ適用開始年月日());
+            source.kyuTekiyoEDNengo = commonRStringEra(entity.get給付率引下げ適用終了年月日());
+            source.kyuTekiyoEDYMD = commonRStringYMD(entity.get給付率引下げ適用終了年月日());
             source.ninteiShinseiKbn = entity.get認定申請中区分();
             source.serviceKbn = entity.getｻｰﾋﾞｽ区分();
             source.tokuGenTaisho = entity.get特例減額措置対象();
@@ -160,18 +161,18 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.shin1 = entity.get新１();
             source.shin2 = entity.get新２();
             source.shin3 = entity.get新３();
-            source.tokuTekiyoSTNengo = commonEra(new FlexibleDate(entity.get特定入所者適用開始年月日()));
-            source.tokuTekiyoSTYMD = commonYMD(new FlexibleDate(entity.get特定入所者適用開始年月日()));
-            source.tokuTekiyoEDNengo = commonEra(new FlexibleDate(entity.get特定入所者適用終了年月日()));
-            source.tokuTekiyoEDYMD = commonYMD(new FlexibleDate(entity.get特定入所者適用終了年月日()));
+            source.tokuTekiyoSTNengo = commonRStringEra(entity.get特定入所者適用開始年月日());
+            source.tokuTekiyoSTYMD = commonRStringYMD(entity.get特定入所者適用開始年月日());
+            source.tokuTekiyoEDNengo = commonRStringEra(entity.get特定入所者適用終了年月日());
+            source.tokuTekiyoEDYMD = commonRStringYMD(entity.get特定入所者適用終了年月日());
             source.koikiHokenshaNO = entity.get広域保険者番号();
             source.rokenShichosonNo = entity.get老人保健市町村番号();
             source.rokenJukyushaNO = entity.get老人保健受給者番号();
             source.shaKyufuritsu = entity.get軽減率();
-            source.shaTekiyoSTNengo = commonEra(new FlexibleDate(entity.get軽減率適用開始年月日()));
-            source.shaTekiyoSTYMD = commonYMD(new FlexibleDate(entity.get軽減率適用開始年月日()));
-            source.shaTekiyoEDNengo = commonEra(new FlexibleDate(entity.get軽減率適用終了年月日()));
-            source.shaTekiyoEDYMD = commonYMD(new FlexibleDate(entity.get軽減率適用終了年月日()));
+            source.shaTekiyoSTNengo = commonRStringEra(entity.get軽減率適用開始年月日());
+            source.shaTekiyoSTYMD = commonRStringYMD(entity.get軽減率適用開始年月日());
+            source.shaTekiyoEDNengo = commonRStringEra(entity.get軽減率適用終了年月日());
+            source.shaTekiyoEDYMD = commonRStringYMD(entity.get軽減率適用終了年月日());
             Boolean 小規模居宅ｻｰﾋﾞｽ = entity.get小規模居宅ｻｰﾋﾞｽ利用();
             source.shokiboKyotakuUmu = new RString(小規模居宅ｻｰﾋﾞｽ.toString());
             source.nijiYoboTaishoKbn = entity.get二次予防事業区分();
@@ -190,14 +191,14 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.kokiHihokenshaNo = entity.get後期高齢被保険者番号();
             source.jutokuTaishoKbn = entity.get住特対象者区分();
             source.jutokuHokenshaNo = entity.get住特施設所在保険者番号();
-            source.jutokuTekiyoSTNengo = commonEra(new FlexibleDate(entity.get住特適用開始年月日()));
-            source.jutokuTekiyoSTYMD = commonYMD(new FlexibleDate(entity.get住特適用開始年月日()));
-            source.jutokuTekiyoEDNengo = commonEra(new FlexibleDate(entity.get住特適用終了年月日()));
-            source.jutokuTekiyoEDYMD = commonYMD(new FlexibleDate(entity.get住特適用終了年月日()));
-            source.niFuTekiyoSTNengo = commonEra(new FlexibleDate(entity.get二割負担適用開始年月日()));
-            source.niFuTekiyoSTYMD = commonYMD(new FlexibleDate(entity.get二割負担適用開始年月日()));
-            source.niFuTekiyoEDNengo = commonEra(new FlexibleDate(entity.get二割負担適用終了年月日()));
-            source.niFuTekiyoEDYMD = commonYMD(new FlexibleDate(entity.get二割負担適用終了年月日()));
+            source.jutokuTekiyoSTNengo = commonRStringEra(entity.get住特適用開始年月日());
+            source.jutokuTekiyoSTYMD = commonRStringYMD(entity.get住特適用開始年月日());
+            source.jutokuTekiyoEDNengo = commonRStringEra(entity.get住特適用終了年月日());
+            source.jutokuTekiyoEDYMD = commonRStringYMD(entity.get住特適用終了年月日());
+            source.niFuTekiyoSTNengo = commonRStringEra(entity.get二割負担適用開始年月日());
+            source.niFuTekiyoSTYMD = commonRStringYMD(entity.get二割負担適用開始年月日());
+            source.niFuTekiyoEDNengo = commonRStringEra(entity.get二割負担適用終了年月日());
+            source.niFuTekiyoEDYMD = commonRStringYMD(entity.get二割負担適用終了年月日());
         }
         return source;
     }
@@ -211,9 +212,34 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
         return RString.EMPTY;
     }
 
+    private RString commonRStringEra(RString 年月日) {
+        if (年月日.contains(半角アスタリスク)) {
+            return 年月日;
+        }
+        if (年月日 != null && !年月日.isEmpty()) {
+            return new FlexibleDate(年月日).wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).fillType(FillType.ZERO).getEra();
+        }
+        return RString.EMPTY;
+    }
+
     private RString commonYMD(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
             return 年月日.wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).fillType(FillType.ZERO)
+                    .toDateString().substring(2).replace(DOT, RString.EMPTY);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString commonRStringYMD(RString 年月日) {
+        if (年月日.contains(半角アスタリスク)) {
+            return 年月日;
+        }
+        if (年月日 != null && !年月日.isEmpty()) {
+            return new FlexibleDate(年月日).wareki()
                     .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.PERIOD).fillType(FillType.ZERO)
                     .toDateString().substring(2).replace(DOT, RString.EMPTY);
