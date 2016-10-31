@@ -218,7 +218,7 @@ public class ServiceRiyohyoInfoDivHandler {
             rst.append(利用年月).append(定値_01);
             div.getTxtRiyoYM().setValue(new RDate(rst.toString()));
             set区分支給限度額(被保険者番号, 居宅総合事業区分, 利用年月);
-            set暫定区分制御(被保険者番号, 居宅総合事業区分, 対象年月, 履歴番号, 利用年月);
+            set暫定区分制御(被保険者番号, 居宅総合事業区分, 対象年月, 履歴番号, 利用年月, 表示モード);
             setサービス利用票(被保険者番号, 対象年月, 履歴番号, 利用年月);
         } else {
             div.getTxtRiyoYM().setDisabled(false);
@@ -451,7 +451,7 @@ public class ServiceRiyohyoInfoDivHandler {
     }
 
     private void set暫定区分制御(HihokenshaNo 被保険者番号, RString 居宅総合事業区分, FlexibleYearMonth 対象年月,
-            int 履歴番号, FlexibleYearMonth 利用年月) {
+            int 履歴番号, FlexibleYearMonth 利用年月, RString 表示モード) {
         JigoSakuseiMeisaiTouroku jigoSakusei = JigoSakuseiMeisaiTouroku.createInstance();
         TankiNyushoResult 短期入所情報 = jigoSakusei.getTankiNyuryo(被保険者番号, 対象年月, 履歴番号, 利用年月);
         if (短期入所情報 != null) {
@@ -475,6 +475,9 @@ public class ServiceRiyohyoInfoDivHandler {
                 div.getChkZanteiKubun().setSelectedItemsByKey(list);
             } else {
                 div.getChkZanteiKubun().setDisabled(false);
+            }
+            if (照会.equals(表示モード)) {
+                div.getChkZanteiKubun().setDisabled(true);
             }
         }
     }

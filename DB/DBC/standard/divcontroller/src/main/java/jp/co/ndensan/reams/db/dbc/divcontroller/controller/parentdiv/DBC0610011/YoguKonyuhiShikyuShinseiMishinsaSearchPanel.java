@@ -59,6 +59,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
             div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().setValue(ViewStateHolder.get(ViewStateKeys.決定日, RDate.class));
             return ResponseData.of(div).setState(DBC0610011StateName.審査);
         }
+        div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().setValue(RDate.getNowDate());
         return ResponseData.of(div).respond();
     }
 

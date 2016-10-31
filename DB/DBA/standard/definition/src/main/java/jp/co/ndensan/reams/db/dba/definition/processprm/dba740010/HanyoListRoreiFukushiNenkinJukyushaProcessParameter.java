@@ -40,6 +40,7 @@ public class HanyoListRoreiFukushiNenkinJukyushaProcessParameter implements IBat
     private RDate psmSeinengappiYMD_Start;
     private RDate psmSeinengappiYMD_End;
     private RDate psmAgeKijunni;
+    private RString hokenshaCode;
     private RString shichoson_Code;
     private RString shichoson_Name;
     private RString psmChiku_Kubun;
@@ -84,6 +85,7 @@ public class HanyoListRoreiFukushiNenkinJukyushaProcessParameter implements IBat
      * @param psmSeinengappiYMD_Start 宛名抽出生年月日開始
      * @param psmSeinengappiYMD_End 宛名抽出生年月日終了
      * @param psmAgeKijunni 年齢基準日
+     * @param hokenshaCode 保険者コード
      * @param shichoson_Code 市町村コード
      * @param shichoson_Name 市町村名称
      * @param psmChiku_Kubun 地区区分
@@ -126,6 +128,7 @@ public class HanyoListRoreiFukushiNenkinJukyushaProcessParameter implements IBat
             RDate psmSeinengappiYMD_Start,
             RDate psmSeinengappiYMD_End,
             RDate psmAgeKijunni,
+            RString hokenshaCode,
             RString shichoson_Code,
             RString shichoson_Name,
             RString psmChiku_Kubun,
@@ -166,6 +169,7 @@ public class HanyoListRoreiFukushiNenkinJukyushaProcessParameter implements IBat
         this.psmSeinengappiYMD_Start = psmSeinengappiYMD_Start;
         this.psmSeinengappiYMD_End = psmSeinengappiYMD_End;
         this.psmAgeKijunni = psmAgeKijunni;
+        this.hokenshaCode = hokenshaCode;
         this.shichoson_Code = shichoson_Code;
         this.shichoson_Name = shichoson_Name;
         this.psmChiku_Kubun = psmChiku_Kubun;
