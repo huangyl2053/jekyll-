@@ -186,7 +186,11 @@ public class IchiranServicecodeTaniMeisaiProcess
         csvEntity.set生年月日(doパターン4(entity.getSeinengappiYMD()));
         csvEntity.set年齢(entity.getAge());
         csvEntity.set性別(entity.getSeibetsu());
-        csvEntity.set性別名称(Seibetsu.toValue(entity.getSeibetsu()).get名称());
+        if (!RString.isNullOrEmpty(entity.getSeibetsu())) {
+            csvEntity.set性別名称(Seibetsu.toValue(entity.getSeibetsu()).get名称());
+        } else {
+            csvEntity.set性別名称(RString.EMPTY);
+        }
         csvEntity.set続柄コード(getColumnValue(entity.getTsuzukigaraCode()));
         csvEntity.set世帯コード(getColumnValue(entity.getSetaiCode()));
         csvEntity.set世帯主名(getColumnValue(entity.getSetainushiMei()));
