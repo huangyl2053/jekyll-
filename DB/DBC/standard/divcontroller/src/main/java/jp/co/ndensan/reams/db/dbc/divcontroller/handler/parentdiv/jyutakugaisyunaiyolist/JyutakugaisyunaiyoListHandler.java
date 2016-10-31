@@ -17,9 +17,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -75,7 +77,7 @@ public class JyutakugaisyunaiyoListHandler {
                 if (jyutaku.get住宅改修完成年月日() != null) {
                     listRow.setTxtKanseiYoteibi(jyutaku.get住宅改修完成年月日().wareki().toDateString());
                 }
-                listRow.setTxtKaishuKingaku(new RString(String.valueOf(jyutaku.get改修金額())));
+                listRow.setTxtKaishuKingaku(DecimalFormatter.toコンマ区切りRString(new Decimal(jyutaku.get改修金額()), 0));
                 listRow.setTxtJigyosha(jyutaku.get住宅改修事業者名());
                 listRow.setTxtJyotai(RString.EMPTY);
                 listRow.setTxtJutakuAddress(jyutaku.get住宅改修住宅住所());

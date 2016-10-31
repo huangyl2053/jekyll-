@@ -177,9 +177,9 @@ public class DbT2013HokenryoDankaiDac implements ISaveable<DbT2013HokenryoDankai
         return accessor.select().
                 table(DbT2013HokenryoDankai.class).
                 where((eq(fukaNendo, 賦課年度))).
-                order(by(fukaNendo, Order.DESC),
-                        by(rankuKubun, Order.DESC),
-                        by(dankaiIndex, Order.DESC)).
+                order(by(fukaNendo, Order.ASC),
+                        by(rankuKubun, Order.ASC),
+                        by(dankaiIndex, Order.ASC)).
                 toList(DbT2013HokenryoDankaiEntity.class);
     }
 }

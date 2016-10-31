@@ -13,9 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.KaigoNinteiShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100001.KaigoNinteiShinsakaiValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisaiMode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -141,12 +139,6 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        FlexibleDate 開催年月日 = ViewStateHolder.get(ViewStateKeys.選択審査会一覧, ShinsakaiKaisaiMode.class).get審査会一覧Grid().get(数字_0).get介護認定審査会開催予定年月日();
-        if (開催年月日 == null || 開催年月日.isEmpty()) {
-            開催年月日 = FlexibleDate.EMPTY;
-        }
-        ViewStateHolder.get(ViewStateKeys.選択審査会一覧, ShinsakaiKaisaiMode.class).get審査会一覧Grid().get(数字_0).get介護認定審査会開催予定年月日().toString();
-        ViewStateHolder.put(ViewStateKeys.開催年月日, new RString(開催年月日.toString()));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 

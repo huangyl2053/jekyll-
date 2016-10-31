@@ -39,10 +39,10 @@ public class DBC710140_HanyoListKogakuGassanShinseishoJoho
         processParam.set出力順(getParameter().getShutsuryokuju());
         if (getParameter().isRebanFuka()) {
             return loopBatch(HanyoListKogakuGassanShinseishoProcess.class)
-                    .arguments(getParameter().toProcessParam()).define();
+                    .arguments(processParam).define();
         }
         return loopBatch(HanyoListKogakuGassanShinseishoNoRenbanProcess.class)
-                .arguments(getParameter().toProcessParam()).define();
+                .arguments(processParam).define();
 
     }
 }

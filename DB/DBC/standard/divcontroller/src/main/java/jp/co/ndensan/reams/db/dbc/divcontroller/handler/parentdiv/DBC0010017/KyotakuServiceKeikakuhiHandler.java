@@ -77,23 +77,23 @@ public class KyotakuServiceKeikakuhiHandler {
         List<KyufujissekiKyotakuServiceBusiness> 特定入所者介護サービス費用list = get給付実績データ(business,
                 整理番号, 事業者番号, 様式番号, サービス提供年月.toDateString());
         List<KyufujissekiKyotakuServiceBusiness> dataToRepeat = getサービス提供年月list(business);
+        List<dgServiceKeikakuhiToH2103_Row> to2013rowList = new ArrayList<>();
+        List<dgServiceKeikakuhiFromH2104_Row> from2014rowList = new ArrayList<>();
         if (サービス提供年月.isBeforeOrEquals(平成21年3月)) {
-            List<dgServiceKeikakuhiToH2103_Row> to2013rowList = new ArrayList<>();
             for (KyufujissekiKyotakuServiceBusiness 居宅サービス計画費 : 特定入所者介護サービス費用list) {
 
                 to2013rowList.add(get2013データ(居宅サービス計画費));
                 to2013rowList.add(get2013後のデータ(居宅サービス計画費));
             }
-            div.getDgServiceKeikakuhiToH2103().setDataSource(to2013rowList);
         } else {
-            List<dgServiceKeikakuhiFromH2104_Row> from2014rowList = new ArrayList<>();
             for (KyufujissekiKyotakuServiceBusiness 居宅サービス計画費 : 特定入所者介護サービス費用list) {
 
                 from2014rowList.add(get2014データ(居宅サービス計画費));
                 from2014rowList.add(get2014後のデータ(居宅サービス計画費));
             }
-            div.getDgServiceKeikakuhiFromH2104().setDataSource(from2014rowList);
         }
+        div.getDgServiceKeikakuhiFromH2104().setDataSource(from2014rowList);
+        div.getDgServiceKeikakuhiToH2103().setDataSource(to2013rowList);
         this.setGetsuBtn(dataToRepeat, サービス提供年月);
 
     }
@@ -358,7 +358,7 @@ public class KyotakuServiceKeikakuhiHandler {
         }
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 年月, 新整理番号, 新識別番号);
 
-        setDataGrid(dataToRepeat, 年月);
+        setDataGrid(給付実績居宅サービス計画費list, 年月);
 
     }
 

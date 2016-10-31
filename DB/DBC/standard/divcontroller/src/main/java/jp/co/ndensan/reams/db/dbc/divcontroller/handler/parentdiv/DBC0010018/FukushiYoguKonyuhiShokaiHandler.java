@@ -62,7 +62,8 @@ public class FukushiYoguKonyuhiShokaiHandler {
             rowList.add(setRowData(給付実績福祉用具販売費));
         }
         div.getDgFukushiYoguKonyuhi().setDataSource(rowList);
-        setGetsuBtn(getサービス提供年月リスト(給付実績福祉用具販売費リスト), new FlexibleYearMonth(サービス提供年月));
+        setGetsuBtn(getサービス提供年月リスト(給付実績福祉用具販売費リスト),
+                new FlexibleYearMonth(サービス提供年月));
     }
 
     private dgFukushiYoguKonyuhi_Row setRowData(KyufujissekiFukushiYoguHanbaihiBusiness 給付実績福祉用具販売費) {
@@ -144,10 +145,10 @@ public class FukushiYoguKonyuhiShokaiHandler {
      * @param サービス提供年月 サービス提供年月
      */
     public void setGetsuBtn(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
         div.getBtnZengetsu().setDisabled(true);
         div.getBtnJigetsu().setDisabled(true);
         if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
             if (!サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
                 div.getBtnZengetsu().setDisabled(false);
             }
@@ -238,7 +239,8 @@ public class FukushiYoguKonyuhiShokaiHandler {
      * @param 実績区分コード RString
      * @return index index
      */
-    public int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月, RString 実績区分コード) {
+    public int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト,
+            RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月, RString 実績区分コード) {
         for (int index = 0; index < 事業者番号リスト.size(); index++) {
             if (事業者番号.equals(事業者番号リスト.get(index).get事業所番号().value())
                     && 整理番号.equals(事業者番号リスト.get(index).get整理番号())
@@ -268,7 +270,6 @@ public class FukushiYoguKonyuhiShokaiHandler {
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         div.getBtnAtoJigyosha().setDisabled(true);
         div.getBtnMaeJigyosha().setDisabled(true);
-        事業者番号リスト = get事業者番号リスト(事業者番号リスト, new FlexibleYearMonth(サービス提供年月));
         int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
         int i;
         if (前事業者.equals(date)) {
@@ -283,15 +284,7 @@ public class FukushiYoguKonyuhiShokaiHandler {
             div.getCcdKyufuJissekiHeader().set識別番号名称(事業者番号リスト.get(index + i).get識別番号名称());
             div.getCcdKyufuJissekiHeader().set事業者番号(事業者番号リスト.get(index + i).get事業所番号().value());
             div.getCcdKyufuJissekiHeader().set様式番号(事業者番号リスト.get(index + i).get識別番号());
-            List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具販売データ取得リスト
-                    = new ArrayList<>();
-            for (KyufujissekiFukushiYoguHanbaihiBusiness 給付実績福祉用具販売費 : 給付実績福祉用具販売費リスト) {
-                if (div.getCcdKyufuJissekiHeader().get事業者番号()
-                        .equals(給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get事業所番号().value())) {
-                    給付実績福祉用具販売データ取得リスト.add(給付実績福祉用具販売費);
-                }
-            }
-            List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績福祉用具販売データ取得リスト);
+            List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績福祉用具販売費リスト);
             setGetsuBtn(サービス提供年月リスト, new FlexibleYearMonth(サービス提供年月));
             List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具販売費等データ取得リスト
                     = get給付実績のデータ(給付実績福祉用具販売費リスト, 事業者番号リスト.get(index + i).get整理番号(),
@@ -327,34 +320,28 @@ public class FukushiYoguKonyuhiShokaiHandler {
             FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
         List<dgFukushiYoguKonyuhi_Row> rowList = new ArrayList<>();
         int index = INT_ZERO;
-        List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具販売データ取得リスト
-                = new ArrayList<>();
-        for (KyufujissekiFukushiYoguHanbaihiBusiness 給付実績福祉用具販売費 : 給付実績福祉用具販売費リスト) {
-            if (div.getCcdKyufuJissekiHeader().get事業者番号()
-                    .equals(給付実績福祉用具販売費.get給付実績福祉用具販売費基本情報().get事業所番号().value())) {
-                給付実績福祉用具販売データ取得リスト.add(給付実績福祉用具販売費);
+        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績福祉用具販売費リスト);
+        FlexibleYearMonth 今提供年月 = サービス提供年月;
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+            for (int i = 0; i < サービス提供年月リスト.size(); i++) {
+                if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
+                    index = i;
+                    break;
+                }
+            }
+            if (前月.equals(data) && index < サービス提供年月リスト.size() - 1) {
+                今提供年月 = サービス提供年月リスト.get(index + 1);
+            } else if (INT_ZERO < index && !前月.equals(data)) {
+                今提供年月 = サービス提供年月リスト.get(index - 1);
             }
         }
-        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績福祉用具販売データ取得リスト);
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
-            if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
-                index = i;
-                break;
-            }
-        }
-        FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
-        if (前月.equals(data) && index < サービス提供年月リスト.size() - 1) {
-            今提供年月 = サービス提供年月リスト.get(index + 1);
-        } else if (INT_ZERO < index && !前月.equals(data)) {
-            今提供年月 = サービス提供年月リスト.get(index - 1);
-        }
+        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
         List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具販売費等データ取得リスト
                 = get給付実績のデータ(給付実績福祉用具販売費リスト, div.getCcdKyufuJissekiHeader().get整理番号(),
                         div.getCcdKyufuJissekiHeader().get事業者番号(),
                         div.getCcdKyufuJissekiHeader().get様式番号(),
                         今提供年月.toDateString());
-        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
         for (KyufujissekiFukushiYoguHanbaihiBusiness 給付実績福祉用具販売費等データ取得 : 給付実績福祉用具販売費等データ取得リスト) {
             rowList.add(setRowData(給付実績福祉用具販売費等データ取得));
         }
@@ -363,19 +350,39 @@ public class FukushiYoguKonyuhiShokaiHandler {
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
-        事業者番号リスト = get事業者番号リスト(事業者番号リスト, 今提供年月);
         setJigyoshaBtn(事業者番号リスト, div.getCcdKyufuJissekiHeader().get整理番号(),
                 事業者番号, 様式番号, 今提供年月.toDateString(), 実績区分コード);
     }
 
-    private List<KyufuJissekiHedajyoho2> get事業者番号リスト(List<KyufuJissekiHedajyoho2> 事業者番号リスト, FlexibleYearMonth サービス提供年月) {
-        List<KyufuJissekiHedajyoho2> 今事業者番号リスト = new ArrayList<>();
-        for (KyufuJissekiHedajyoho2 事業者番号 : 事業者番号リスト) {
-            if (事業者番号.getサービス提供年月().equals(サービス提供年月)) {
-                今事業者番号リスト.add(事業者番号);
+    /**
+     * 今提供年月を取得。
+     *
+     * @param data RString
+     * @param 給付実績福祉用具販売費リスト List<KyufujissekiFukushiYoguHanbaihiBusiness>
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return 今提供年月
+     */
+    public FlexibleYearMonth get今提供年月(RString data,
+            List<KyufujissekiFukushiYoguHanbaihiBusiness> 給付実績福祉用具販売費リスト,
+            FlexibleYearMonth サービス提供年月) {
+        int index = INT_ZERO;
+        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(給付実績福祉用具販売費リスト);
+        FlexibleYearMonth 今提供年月 = サービス提供年月;
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+            for (int i = 0; i < サービス提供年月リスト.size(); i++) {
+                if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
+                    index = i;
+                    break;
+                }
+            }
+            if (前月.equals(data) && index < サービス提供年月リスト.size() - 1) {
+                今提供年月 = サービス提供年月リスト.get(index + 1);
+            } else if (INT_ZERO < index && !前月.equals(data)) {
+                今提供年月 = サービス提供年月リスト.get(index - 1);
             }
         }
-        return 今事業者番号リスト;
+        return 今提供年月;
     }
 
     private RString kinngakuFormat(Decimal date) {

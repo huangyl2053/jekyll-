@@ -32,12 +32,15 @@ public class DBC710120_HanyoListSaishinsaKekkaParameter extends BatchParameterBa
     private static final String RENBANFUKA = "renbanFuka";
     private static final String HITSUKEHENSHU = "hitsukeHenshu";
     private static final String HOKENSHACODE = "hokenshacode";
+    private static final String HOKENSHAMEI = "hokenshamei";
+    private static final String SHICHOSONCODE = "shichosoncode";
     private static final String KOKUHORENTORIATSUKAIFROM = "kokuhorentoriatsukaifrom";
     private static final String KOKUHORENTORIATSUKAINENETSUTO = "kokuhorentoriatsukainenetsuto";
     private static final String HOKENSHAKUBUN = "hokenshakubun";
     private static final String SEVERTEIKYOUNENGETSUFROM = "severteikyounengetsufrom";
     private static final String SEVERTEIKYOUNENGETSUTO = "severteikyounengetsuto";
     private static final String JIGYOUSHABANGOU = "jigyoushabangou";
+    private static final long serialVersionUID = 1L;
     @BatchParameter(key = CHOHYOID, name = "帳票ID")
     private RString chohyoId;
     @BatchParameter(key = SHUTSURYOKUJUNID, name = "出力順ID")
@@ -52,6 +55,10 @@ public class DBC710120_HanyoListSaishinsaKekkaParameter extends BatchParameterBa
     private boolean hitsukeHenshu;
     @BatchParameter(key = HOKENSHACODE, name = "保険者コード")
     private LasdecCode hokenshacode;
+    @BatchParameter(key = HOKENSHAMEI, name = "保険者名")
+    private RString hokenshamei;
+    @BatchParameter(key = SHICHOSONCODE, name = "市町村コッド")
+    private RString shichosoncode;
     @BatchParameter(key = KOKUHORENTORIATSUKAIFROM, name = "国保連取扱年月From")
     private RString kokuhorentoriatsukaifrom;
     @BatchParameter(key = KOKUHORENTORIATSUKAINENETSUTO, name = "国保連取扱年月To")
@@ -81,6 +88,8 @@ public class DBC710120_HanyoListSaishinsaKekkaParameter extends BatchParameterBa
      * @param renbanFuka boolean
      * @param hitsukeHenshu boolean
      * @param hokenshacode LasdecCode
+     *   * @param hokenshamei RString
+     * @param shichosoncode RString
      * @param kokuhorentoriatsukaifrom RString
      * @param kokuhorentoriatsukainenetsuto RString
      * @param hokenshakubun List<RString>
@@ -96,6 +105,8 @@ public class DBC710120_HanyoListSaishinsaKekkaParameter extends BatchParameterBa
             boolean renbanFuka,
             boolean hitsukeHenshu,
             LasdecCode hokenshacode,
+            RString hokenshamei,
+            RString shichosoncode,
             RString kokuhorentoriatsukaifrom,
             RString kokuhorentoriatsukainenetsuto,
             List<RString> hokenshakubun,
@@ -109,6 +120,8 @@ public class DBC710120_HanyoListSaishinsaKekkaParameter extends BatchParameterBa
         this.renbanFuka = renbanFuka;
         this.hitsukeHenshu = hitsukeHenshu;
         this.hokenshacode = hokenshacode;
+        this.hokenshamei = hokenshamei;
+        this.shichosoncode = shichosoncode;
         this.kokuhorentoriatsukaifrom = kokuhorentoriatsukaifrom;
         this.kokuhorentoriatsukainenetsuto = kokuhorentoriatsukainenetsuto;
         this.hokenshakubun = hokenshakubun;
@@ -132,6 +145,8 @@ public class DBC710120_HanyoListSaishinsaKekkaParameter extends BatchParameterBa
                 renbanFuka,
                 hitsukeHenshu,
                 hokenshacode,
+                hokenshamei,
+                shichosoncode,
                 kokuhorentoriatsukaifrom,
                 kokuhorentoriatsukainenetsuto,
                 hokenshakubun,

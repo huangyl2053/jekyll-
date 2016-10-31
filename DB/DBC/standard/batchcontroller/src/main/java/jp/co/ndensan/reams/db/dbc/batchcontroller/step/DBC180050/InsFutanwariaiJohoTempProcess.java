@@ -263,7 +263,7 @@ public class InsFutanwariaiJohoTempProcess extends BatchProcessBase<InsFutanwari
     private boolean is期間中(InsFutanwariaiJohoTempResultEntity entity, FlexibleYearMonth 年月) {
         FlexibleDate 有効開始日 = entity.get利用者負担割合明細最新Entity().getYukoKaishiYMD();
         FlexibleDate 有効終了日 = entity.get利用者負担割合明細最新Entity().getYukoShuryoYMD();
-        if (有効開始日 != null && 有効終了日 != null) {
+        if (有効開始日 != null && !有効開始日.isEmpty() && 有効終了日 != null && !有効終了日.isEmpty()) {
             return 年月.isBeforeOrEquals(有効終了日.getYearMonth()) && 有効開始日.getYearMonth().isBeforeOrEquals(年月);
         }
         return false;

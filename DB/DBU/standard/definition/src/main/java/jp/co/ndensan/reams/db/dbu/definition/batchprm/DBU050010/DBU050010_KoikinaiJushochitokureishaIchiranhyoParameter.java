@@ -45,7 +45,7 @@ public class DBU050010_KoikinaiJushochitokureishaIchiranhyoParameter extends Bat
     @BatchParameter(key = SHURYOBI, name = "今回終了日")
     private RString shuryobi;
     @BatchParameter(key = NARABI_ID, name = "出力順ID")
-    private RString narabiId;
+    private long narabiId;
 
     /**
      * 域内住所地特例者一覧表のProcessParamterパラメータ作成です。

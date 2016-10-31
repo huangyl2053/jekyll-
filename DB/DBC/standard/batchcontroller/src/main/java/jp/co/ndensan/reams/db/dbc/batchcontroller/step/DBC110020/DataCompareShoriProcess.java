@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.DataCompareShoriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdoTblTmpEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -36,9 +37,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  *
  * @reamsid_L DBC-2720-070 chenhui
  */
-public class DataCompareShoriProcess extends BatchKeyBreakBase<IdoTblTmpEntity> {
+public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriEntity> {
 
-    private static final RString READ_DATA_ID = new RString("");
+    private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
+            + "jukyushaidorenrakuhyoout.IJukyushaIdoRenrakuhyoOutMapper.select比較処理データ");
     private static final RString CSV_FILENAME = new RString("JukyusyaIdouJohoRirekilist.csv");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200074");
     private static final int COUNT_0 = 0;
@@ -131,13 +133,13 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<IdoTblTmpEntity> 
     }
 
     @Override
-    protected void keyBreakProcess(IdoTblTmpEntity entity) {
+    protected void keyBreakProcess(DataCompareShoriEntity entity) {
     }
 
     @Override
-    protected void usualProcess(IdoTblTmpEntity entity) {
+    protected void usualProcess(DataCompareShoriEntity entity) {
 
-        csvListWriter.writeLine(getBodyList(entity));
+        csvListWriter.writeLine(getBodyList(entity.get異動一時2()));
     }
 
     @Override
@@ -231,7 +233,7 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<IdoTblTmpEntity> 
         bodyList.add(entity.getみなし要介護状態区分コード());
         bodyList.add(entity.get要介護状態区分コード());
         bodyList.add(dateChangeToRString(entity.get認定有効期間開始年月日()));
-        bodyList.add(dateChangeToRString(entity.get認定有効期間終了年月日()));
+        bodyList.add(entity.get認定有効期間終了年月日());
         bodyList.add(entity.get居宅サービス計画作成区分コード());
         bodyList.add(RString.EMPTY);
         bodyList.add(RString.EMPTY);

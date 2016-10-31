@@ -87,9 +87,9 @@
         WHERE
         JukyushaDaicho."hihokenshaNo" = #{被保険者番号}
         AND
-        JukyushaDaicho."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{サービス提供年月}
+        SUBSTRING(JukyushaDaicho."ninteiYukoKikanKaishiYMD", 1, 6) <![CDATA[<=]]> #{サービス提供年月}
         AND
-        JukyushaDaicho."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{サービス提供年月}
+        SUBSTRING(JukyushaDaicho."ninteiYukoKikanShuryoYMD", 1, 6) <![CDATA[>=]]> #{サービス提供年月}
         AND
         JukyushaDaicho."logicalDeletedFlag" <![CDATA[<>]]> true
         ORDER BY

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020080;
 
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020080.DBC020080ProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -44,13 +43,4 @@ public class DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter extends 
     @BatchParameter(key = KEY_DANTAICD, name = "市町村コード")
     private LasdecCode dantaiCd;
 
-    /**
-     * toDBC020080ProcessParameter のメソッドです。
-     *
-     * @return DBC020080ProcessParameter
-     */
-    public DBC020080ProcessParameter toDBC020080ProcessParameter() {
-        return new DBC020080ProcessParameter(
-                shoriTimestamp, taishoKaishiDay, taishoShuryoDay, shuturyokuFlg, shutsuryokujunId, dantaiCd);
-    }
 }

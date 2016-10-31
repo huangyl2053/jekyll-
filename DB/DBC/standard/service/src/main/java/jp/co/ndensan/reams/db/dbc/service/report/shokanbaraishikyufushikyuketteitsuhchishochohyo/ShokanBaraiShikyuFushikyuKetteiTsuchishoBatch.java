@@ -117,7 +117,6 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(), batchPram.getHakkoYMD(),
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-        RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(), batchPram.getHakkoYMD());
 
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
         AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
@@ -147,7 +146,7 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
             }
             key = getJufukuKey(shiharai);
             serviceCode = shiharai.getサービス種類コード();
-            item.setBunshoNo(文書番号);
+            item.setBunshoNo(batchPram.get文書番号());
             if (kyufuShu.length() <= 文字数_38) {
                 item.setKyufuShu1(kyufuShu);
             } else if (kyufuShu.length() <= 文字数_76) {

@@ -612,11 +612,7 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtYokinShubetsu().setDisplayNone(false);
             div.getTxtTenban().setDisplayNone(true);
         }
-        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する名称(nullToEmpty(口座情報.get預金種別().get預金種別コード()));
-        if (uzT0007CodeBusiness != null) {
-
-            div.getTxtYokinShubetsu().setValue(uzT0007CodeBusiness.getコード名称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード名称());
-        }
+        div.getTxtYokinShubetsu().setValue(口座情報.get預金種別名称() == null ? RString.EMPTY : 口座情報.get預金種別名称());
         div.getTxtKozaNo().setValue(口座情報.get口座番号());
         div.getTxtMeigininKana().setDomain(口座情報.get口座名義人());
         div.getTtxtMeigininKanji().setDomain(口座情報.get口座名義人漢字());
@@ -897,6 +893,24 @@ public class ShiharaiHohoJyohoHandler {
     public RString getKeiyakuNo() {
 
         return div.getTxtKeiyakuNo().getValue();
+    }
+
+    /**
+     * 契約事業者名を取得します。
+     *
+     * @param 契約事業者名 AtenaMeisho
+     */
+    public void set契約事業者名(AtenaMeisho 契約事業者名) {
+        div.getTxtKeiyakuName().setDomain(契約事業者名);
+    }
+
+    /**
+     * 契約事業者を取得します。
+     *
+     * @param 契約事業者 RString
+     */
+    public void set契約事業者(RString 契約事業者) {
+        div.getTxtKeiyakuCode().setValue(契約事業者);
     }
 
     /**

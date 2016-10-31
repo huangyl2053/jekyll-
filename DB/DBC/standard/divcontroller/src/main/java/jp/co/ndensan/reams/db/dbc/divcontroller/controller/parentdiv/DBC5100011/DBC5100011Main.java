@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC5100011
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5100011.DBC5100011MainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5100011.DBC5100011MainHandler;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5100011.DBC5100011StateName.標準;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunManager;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
@@ -27,6 +30,22 @@ public class DBC5100011Main {
     public ResponseData<DBC5100011MainDiv> onLoad(DBC5100011MainDiv div) {
         this.getHandler(div).onLoad();
         return ResponseData.of(div).setState(標準);
+    }
+
+    /**
+     * バッチ起動処理を実施します。
+     *
+     * @param div DBC5100011MainDiv
+     * @return DBC5100011MainDiv
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
+    public ResponseData<DBC5100011MainDiv> onClick_btnBatchRegister(DBC5100011MainDiv div) throws InstantiationException,
+            IllegalAccessException {
+        IOutputOrder 出力順 = div.getCcdChohyoShutsuryokujun().getSelected出力順();
+        IChohyoShutsuryokujunManager manger = new _ChohyoShutsuryokujunManager();
+        manger.save前回出力順(出力順);
+        return ResponseData.of(div).respond();
     }
 
     /**
