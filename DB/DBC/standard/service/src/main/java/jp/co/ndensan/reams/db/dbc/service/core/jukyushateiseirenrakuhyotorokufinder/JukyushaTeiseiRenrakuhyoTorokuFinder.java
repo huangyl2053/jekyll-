@@ -154,8 +154,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
                         get受給者異動送付entity().createBuilderForEdit()
                         .set訂正区分コード(TWO)
                         .set訂正年月日(FlexibleDate.getNowDate()).build();
-                出力用受給者訂正情報Entity.set受給者異動送付entity(get変更後受給者訂正情報修正Entity(
-                        変更前受給者訂正情報Entity.get受給者異動送付entity(), 変更後Entity));
+                出力用受給者訂正情報Entity.set受給者異動送付entity(変更後Entity);
                 setFlag(出力用受給者訂正情報Entity, 変更後Entity, 変更前受給者訂正情報Entity);
                 出力用受給者訂正情報Entity.set氏名_性別_生年月日を印字する(
                         変更後受給者訂正情報Entity.get氏名_性別_生年月日を印字する());
