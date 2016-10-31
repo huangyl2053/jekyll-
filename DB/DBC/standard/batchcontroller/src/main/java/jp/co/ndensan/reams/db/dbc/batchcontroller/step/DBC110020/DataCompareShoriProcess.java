@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110020;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.DataCompareShoriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.IdoTblTmpEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
@@ -75,11 +76,11 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString CSV_訂正情報_送付済内容５ = new RString("訂正情報　送付済内容５");
     private static final RString CSV_訂正情報_送付済内容６ = new RString("訂正情報　送付済内容６");
     private static final RString CSV_訂正情報_送付済内容７ = new RString("訂正情報　送付済内容７");
-    private static final RString CSV_訂正情報_訂正内容８ = new RString("訂正情報　訂正内容８");
-    private static final RString CSV_訂正情報_訂正内容９ = new RString("訂正情報　訂正内容９");
-    private static final RString CSV_訂正情報_訂正内容１０ = new RString("訂正情報　訂正内容１０");
-    private static final RString CSV_訂正情報_訂正内容１１ = new RString("訂正情報　訂正内容１１");
-    private static final RString CSV_訂正情報_訂正内容１２ = new RString("訂正情報_訂正内容１２");
+    private static final RString CSV_訂正情報_送付済内容８ = new RString("訂正情報　送付済内容７");
+    private static final RString CSV_訂正情報_送付済内容９ = new RString("証保険番号");
+    private static final RString CSV_訂正情報_送付済内容１０ = new RString("証保険番号");
+    private static final RString CSV_訂正情報_送付済内容１１ = new RString("証保険番号");
+    private static final RString CSV_訂正情報_送付済内容１２ = new RString("証保険番号");
     private static final RString 証保険番号 = new RString("証保険番号");
     private static final RString 資格取得日 = new RString("資格取得日");
     private static final RString 資格喪失日 = new RString("資格喪失日");
@@ -91,6 +92,22 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     private static final RString 認定終了日 = new RString("認定終了日");
     private static final RString 計作成区分 = new RString("計作成区分");
     private static final RString 記号 = new RString("*");
+    private static final RString エラーあり = new RString("1");
+    private static final RString CSV_被保険者番号3 = new RString("証保険番号");
+    private static final RString CSV_氏名３ = new RString("証保険番号");
+    private static final RString CSV_異動年月日３ = new RString("証保険番号");
+    private static final RString CSV_訂正情報_訂正内容1 = new RString("証保険番号");
+    private static final RString CSV_訂正情報_訂正内容2 = new RString("証保険番号");
+    private static final RString CSV_訂正情報_訂正内容3 = new RString("証保険番号");
+    private static final RString CSV_訂正情報_訂正内容4 = new RString("証保険番号");
+    private static final RString CSV_訂正情報_訂正内容5 = new RString("証保険番号");
+    private static final RString CSV_訂正情報_訂正内容6 = new RString("証保険番号");
+    private static final RString CSV_訂正情報_訂正内容7 = new RString("証保険番号");
+    private static final RString CSV_訂正情報_訂正内容8 = new RString("証保険番号");
+    private static final RString CSV_訂正情報_訂正内容9 = new RString("証保険番号");
+    private static final RString CSV_訂正情報_訂正内容10 = new RString("証保険番号");
+    private static final RString CSV_訂正情報_訂正内容11 = new RString("証保険番号");
+    private static final RString CSV_訂正情報_訂正内容12 = new RString("証保険番号");
 
     private RString eucFilePath;
     private int 連番;
@@ -138,14 +155,41 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
 
     @Override
     protected void usualProcess(DataCompareShoriEntity entity) {
-
-        csvListWriter.writeLine(getBodyList(entity.get異動一時2()));
+        IdoTblTmpEntity 異動一時2entity = entity.get異動一時2();
+        DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付 = entity.get受給者異動送付();
+        if (異動一時2entity == null || 異動一時2entity.get被保険者番号() == null) {
+            国保連受給者異動情報履歴削除(受給者異動送付);
+            return;
+        }
+        if (受給者異動送付 == null || 受給者異動送付.getHiHokenshaNo() == null) {
+            受給者異動連絡票Entity出力処理(異動一時2entity);
+            return;
+        }
+        国保連受給者異動情報履歴訂正(異動一時2entity, 受給者異動送付);
+        RString aa = null;
+//        csvListWriter.writeLine(getBodyList(entity.get異動一時2()));
     }
 
     @Override
     protected void afterExecute() {
         csvListWriter.close();
         spoolManager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+    }
+
+    private void 受給者異動連絡票Entity出力処理(IdoTblTmpEntity 異動一時2entity) {
+        if (異動一時2entity == null) {
+            return;
+        }
+        if (エラーあり.equals(異動一時2entity.getエラーフラグ())) {
+            return;
+        }
+
+    }
+
+    private void 国保連受給者異動情報履歴削除(DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付) {
+    }
+
+    private void 国保連受給者異動情報履歴訂正(IdoTblTmpEntity 異動一時2entity, DbT3001JukyushaIdoRenrakuhyoEntity 受給者異動送付) {
     }
 
     /**
@@ -156,7 +200,6 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
     public List<RString> getHeaderList() {
         List<RString> headerList = new ArrayList<>();
         headerList.add(CSV_作成年月日);
-        headerList.add(CSV_ページ数);
         headerList.add(CSV_市町村コード);
         headerList.add(CSV_市町村名称);
         headerList.add(CSV_被保険者番号1);
@@ -184,11 +227,27 @@ public class DataCompareShoriProcess extends BatchKeyBreakBase<DataCompareShoriE
         headerList.add(CSV_訂正情報_送付済内容５);
         headerList.add(CSV_訂正情報_送付済内容６);
         headerList.add(CSV_訂正情報_送付済内容７);
-        headerList.add(CSV_訂正情報_訂正内容８);
-        headerList.add(CSV_訂正情報_訂正内容９);
-        headerList.add(CSV_訂正情報_訂正内容１０);
-        headerList.add(CSV_訂正情報_訂正内容１１);
-        headerList.add(CSV_訂正情報_訂正内容１２);
+        headerList.add(CSV_訂正情報_送付済内容８);
+        headerList.add(CSV_訂正情報_送付済内容９);
+        headerList.add(CSV_訂正情報_送付済内容１０);
+        headerList.add(CSV_訂正情報_送付済内容１１);
+        headerList.add(CSV_訂正情報_送付済内容１２);
+
+        headerList.add(CSV_被保険者番号3);
+        headerList.add(CSV_氏名３);
+        headerList.add(CSV_異動年月日３);
+        headerList.add(CSV_訂正情報_訂正内容1);
+        headerList.add(CSV_訂正情報_訂正内容2);
+        headerList.add(CSV_訂正情報_訂正内容3);
+        headerList.add(CSV_訂正情報_訂正内容4);
+        headerList.add(CSV_訂正情報_訂正内容5);
+        headerList.add(CSV_訂正情報_訂正内容6);
+        headerList.add(CSV_訂正情報_訂正内容7);
+        headerList.add(CSV_訂正情報_訂正内容8);
+        headerList.add(CSV_訂正情報_訂正内容9);
+        headerList.add(CSV_訂正情報_訂正内容10);
+        headerList.add(CSV_訂正情報_訂正内容11);
+        headerList.add(CSV_訂正情報_訂正内容12);
         return headerList;
     }
 

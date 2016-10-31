@@ -587,8 +587,8 @@
          <include refid="allColumns_JukyushaIdoRenrakuhyoTemp"/>,
          <include refid="allColumns_IdouTemp2" />
          FROM "IdouTemp2"
-         FULL OUTER JOIN  "JukyushaIdoRenrakuhyoTemp"
-         ON "IdouTemp2"."被保険者番号" = "JukyushaIdoRenrakuhyoTemp"."hihokenshaNo"
+         FULL JOIN "JukyushaIdoRenrakuhyoTemp"
+         ON "IdouTemp2"."被保険者番号" = "JukyushaIdoRenrakuhyoTemp"."hiHokenshaNo"
          ORDER BY "IdouTemp2". "被保険者番号" DESC
     </select>
     <resultMap id="resultMap_比較処理データ" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushaidorenrakuhyoout.DataCompareShoriEntity" autoMapping="false">

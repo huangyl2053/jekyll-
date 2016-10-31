@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.dbd205010;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.KakuninListCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.NinteishaListSakuseiEntity;
@@ -37,9 +38,10 @@ public class NinteishaListSakuseiBusiness {
      * @param has世帯員以外情報 has世帯員以外情報
      * @param has世帯員情報 has世帯員情報
      * @param 世帯員情報Index 世帯員情報Index
+     * @param 世帯表示 SetaiHyoji
      */
     public void setEucCsvEntity(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, int 連番, boolean is日付スラッシュ編集,
-            boolean has世帯員以外情報, boolean has世帯員情報, int 世帯員情報Index) {
+            boolean has世帯員以外情報, boolean has世帯員情報, int 世帯員情報Index, SetaiHyoji 世帯表示) {
         if (has世帯員以外情報) {
             eucCsvEntity.set連番(new RString(連番));
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.getPsmEntity());
@@ -93,12 +95,13 @@ public class NinteishaListSakuseiBusiness {
 
         }
 
-        setEucCsvEntity_2(eucCsvEntity, t, has世帯員情報, 世帯員情報Index);
+        setEucCsvEntity_2(eucCsvEntity, t, has世帯員情報, 世帯員情報Index, 世帯表示);
 
     }
 
-    private void setEucCsvEntity_2(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, boolean has世帯員情報, int 世帯員情報Index) {
-        if (has世帯員情報) {
+    private void setEucCsvEntity_2(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t,
+            boolean has世帯員情報, int 世帯員情報Index, SetaiHyoji 世帯表示) {
+        if (has世帯員情報 && SetaiHyoji.表示する.equals(世帯表示)) {
             SetaiInRisutoEntity setaEntity = t.get世帯員リスト().get(世帯員情報Index);
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get世帯員リスト().get(世帯員情報Index).get世帯員宛名());
             eucCsvEntity.set世帯員氏名(kojin.get名称().getName().value());
@@ -114,7 +117,6 @@ public class NinteishaListSakuseiBusiness {
                 eucCsvEntity.set世帯員所得税課税区分(RString.EMPTY);
             }
         }
-
     }
 
     private void edit出力情報_介護保険負担限度額認定(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, boolean is日付スラッシュ編集) {

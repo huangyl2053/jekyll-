@@ -137,250 +137,104 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource implements IRep
     public RString shiharaiEndHMS;
     @ReportItem(name = "shiharaiStartHMS", length = 12, order = 59)
     public RString shiharaiStartHMS;
-    @ReportItem(name = "tsuchibun3", length = 62, order = 60)
-    public RString tsuchibun3;
-    @ReportItem(name = "tsuchibun4", length = 62, order = 61)
-    public RString tsuchibun4;
-    @ReportItem(name = "tsuchibun5", length = 62, order = 62)
-    public RString tsuchibun5;
-    @ReportItem(name = "tsuchibun6", length = 62, order = 63)
-    public RString tsuchibun6;
-    @ReportItem(name = "tsuchibun7", length = 62, order = 64)
-    public RString tsuchibun7;
-    @ReportItem(name = "tsuchibun8", length = 62, order = 65)
-    public RString tsuchibun8;
-    @ReportItem(name = "tsuchibun9", length = 62, order = 66)
-    public RString tsuchibun9;
-    @ReportItem(name = "tsuchibun10", length = 62, order = 67)
-    public RString tsuchibun10;
-    @ReportItem(name = "tsuchibun11", length = 62, order = 68)
-    public RString tsuchibun11;
-    @ReportItem(name = "tsuchibun12", length = 62, order = 69)
-    public RString tsuchibun12;
-    @ReportItem(name = "tsuchibun13", length = 62, order = 70)
-    public RString tsuchibun13;
-    @ReportItem(name = "tsuchibun14", length = 62, order = 71)
-    public RString tsuchibun14;
-    @ReportItem(name = "tsuchibun15", length = 62, order = 72)
-    public RString tsuchibun15;
-    @ReportItem(name = "tsuchibun16", length = 62, order = 73)
-    public RString tsuchibun16;
-    @ReportItem(name = "tsuchibun17", length = 62, order = 74)
-    public RString tsuchibun17;
-    @ReportItem(name = "tsuchibun18", length = 62, order = 75)
-    public RString tsuchibun18;
-    @ReportItem(name = "tsuchibun19", length = 62, order = 76)
-    public RString tsuchibun19;
-    @ReportItem(name = "tsuchibun20", length = 62, order = 77)
-    public RString tsuchibun20;
-    @ReportItem(name = "tsuchibun21", length = 62, order = 78)
-    public RString tsuchibun21;
-    @ReportItem(name = "tsuchibun22", length = 62, order = 79)
-    public RString tsuchibun22;
-    @ReportItem(name = "tsuchibun23", length = 62, order = 80)
-    public RString tsuchibun23;
-    @ReportItem(name = "tsuchibun24", length = 62, order = 81)
-    public RString tsuchibun24;
-    @ReportItem(name = "tsuchino", length = 6, order = 82)
+    @ReportItem(name = "toiawasesaki", order = 60)
+    public RString toiawasesaki;
+    @ReportItem(name = "tsuchino", length = 6, order = 61)
     public RString tsuchino;
-    @ReportItem(name = "tsuban", length = 4, order = 83)
+    @ReportItem(name = "tsuban", length = 4, order = 62)
     public RString tsuban;
-    @ReportItem(name = "tsuchibunLarge3", length = 45, order = 84)
-    public RString tsuchibunLarge3;
-    @ReportItem(name = "tsuchibunLarge4", length = 45, order = 85)
-    public RString tsuchibunLarge4;
-    @ReportItem(name = "tsuchibunLarge5", length = 45, order = 86)
-    public RString tsuchibunLarge5;
-    @ReportItem(name = "tsuchibunLarge6", length = 45, order = 87)
-    public RString tsuchibunLarge6;
-    @ReportItem(name = "tsuchibunLarge7", length = 45, order = 88)
-    public RString tsuchibunLarge7;
-    @ReportItem(name = "tsuchibunLarge8", length = 45, order = 89)
-    public RString tsuchibunLarge8;
-    @ReportItem(name = "tsuchibunLarge9", length = 45, order = 90)
-    public RString tsuchibunLarge9;
-    @ReportItem(name = "tsuchibunLarge10", length = 45, order = 91)
-    public RString tsuchibunLarge10;
-    @ReportItem(name = "tsuchibunLarge11", length = 45, order = 92)
-    public RString tsuchibunLarge11;
-    @ReportItem(name = "tsuchibunLarge12", length = 45, order = 93)
-    public RString tsuchibunLarge12;
-    @ReportItem(name = "tsuchibunLarge13", length = 45, order = 94)
-    public RString tsuchibunLarge13;
-    @ReportItem(name = "tsuchibunLarge14", length = 45, order = 95)
-    public RString tsuchibunLarge14;
-    @ReportItem(name = "tsuchibunLarge15", length = 45, order = 96)
-    public RString tsuchibunLarge15;
-    @ReportItem(name = "tsuchibunLarge16", length = 45, order = 97)
-    public RString tsuchibunLarge16;
-    @ReportItem(name = "tsuchibunLarge17", length = 45, order = 98)
-    public RString tsuchibunLarge17;
-    @ReportItem(name = "tsuchibunLarge18", length = 45, order = 99)
-    public RString tsuchibunLarge18;
-    @ReportItem(name = "tsuchibunLarge19", length = 45, order = 100)
-    public RString tsuchibunLarge19;
-    @ReportItem(name = "tsuchibunMix3", length = 62, order = 101)
-    public RString tsuchibunMix3;
-    @ReportItem(name = "tsuchibunMix4", length = 62, order = 102)
-    public RString tsuchibunMix4;
-    @ReportItem(name = "tsuchibunMix5", length = 62, order = 103)
-    public RString tsuchibunMix5;
-    @ReportItem(name = "tsuchibunMix6", length = 62, order = 104)
-    public RString tsuchibunMix6;
-    @ReportItem(name = "tsuchibunMix7", length = 62, order = 105)
-    public RString tsuchibunMix7;
-    @ReportItem(name = "tsuchibunMix8", length = 62, order = 106)
-    public RString tsuchibunMix8;
-    @ReportItem(name = "tsuchibunMix9", length = 62, order = 107)
-    public RString tsuchibunMix9;
-    @ReportItem(name = "tsuchibunMix10", length = 62, order = 108)
-    public RString tsuchibunMix10;
-    @ReportItem(name = "tsuchibunMix11", length = 62, order = 109)
-    public RString tsuchibunMix11;
-    @ReportItem(name = "tsuchibunMix12", length = 62, order = 110)
-    public RString tsuchibunMix12;
-    @ReportItem(name = "tsuchibunMix13", length = 62, order = 111)
-    public RString tsuchibunMix13;
-    @ReportItem(name = "tsuchibunMix14", length = 62, order = 112)
-    public RString tsuchibunMix14;
-    @ReportItem(name = "tsuchibunMix15", length = 62, order = 113)
-    public RString tsuchibunMix15;
-    @ReportItem(name = "tsuchibunMix16", length = 45, order = 114)
-    public RString tsuchibunMix16;
-    @ReportItem(name = "tsuchibunMix17", length = 45, order = 115)
-    public RString tsuchibunMix17;
-    @ReportItem(name = "tsuchibunMix18", length = 45, order = 116)
-    public RString tsuchibunMix18;
-    @ReportItem(name = "tsuchibunMix19", length = 45, order = 117)
-    public RString tsuchibunMix19;
-    @ReportItem(name = "tsuchibunMix20", length = 45, order = 118)
-    public RString tsuchibunMix20;
-    @ReportItem(name = "tsuchibunMix21", length = 45, order = 119)
-    public RString tsuchibunMix21;
-    @ReportItem(name = "tsuchibunMix22", length = 45, order = 120)
-    public RString tsuchibunMix22;
-    @ReportItem(name = "tsuchibunMixtwo3", length = 45, order = 121)
-    public RString tsuchibunMixtwo3;
-    @ReportItem(name = "tsuchibunMixtwo4", length = 45, order = 122)
-    public RString tsuchibunMixtwo4;
-    @ReportItem(name = "tsuchibunMixtwo5", length = 45, order = 123)
-    public RString tsuchibunMixtwo5;
-    @ReportItem(name = "tsuchibunMixtwo6", length = 45, order = 124)
-    public RString tsuchibunMixtwo6;
-    @ReportItem(name = "tsuchibunMixtwo7", length = 45, order = 125)
-    public RString tsuchibunMixtwo7;
-    @ReportItem(name = "tsuchibunMixtwo8", length = 45, order = 126)
-    public RString tsuchibunMixtwo8;
-    @ReportItem(name = "tsuchibunMixtwo9", length = 45, order = 127)
-    public RString tsuchibunMixtwo9;
-    @ReportItem(name = "tsuchibunMixtwo10", length = 62, order = 128)
-    public RString tsuchibunMixtwo10;
-    @ReportItem(name = "tsuchibunMixtwo11", length = 62, order = 129)
-    public RString tsuchibunMixtwo11;
-    @ReportItem(name = "tsuchibunMixtwo12", length = 62, order = 130)
-    public RString tsuchibunMixtwo12;
-    @ReportItem(name = "tsuchibunMixtwo13", length = 62, order = 131)
-    public RString tsuchibunMixtwo13;
-    @ReportItem(name = "tsuchibunMixtwo14", length = 62, order = 132)
-    public RString tsuchibunMixtwo14;
-    @ReportItem(name = "tsuchibunMixtwo15", length = 62, order = 133)
-    public RString tsuchibunMixtwo15;
-    @ReportItem(name = "tsuchibunMixtwo16", length = 62, order = 134)
-    public RString tsuchibunMixtwo16;
-    @ReportItem(name = "tsuchibunMixtwo17", length = 62, order = 135)
-    public RString tsuchibunMixtwo17;
-    @ReportItem(name = "tsuchibunMixtwo18", length = 62, order = 136)
-    public RString tsuchibunMixtwo18;
-    @ReportItem(name = "tsuchibunMixtwo19", length = 62, order = 137)
-    public RString tsuchibunMixtwo19;
-    @ReportItem(name = "tsuchibunMixtwo20", length = 62, order = 138)
-    public RString tsuchibunMixtwo20;
-    @ReportItem(name = "tsuchibunMixtwo21", length = 62, order = 139)
-    public RString tsuchibunMixtwo21;
-    @ReportItem(name = "tsuchibunMixtwo22", length = 62, order = 140)
-    public RString tsuchibunMixtwo22;
-    @ReportItem(name = "yubinNo", length = 8, order = 141)
+    @ReportItem(name = "tsuchibunLarge", order = 63)
+    public RString tsuchibunLarge;
+    @ReportItem(name = "tsuchibunMix1", order = 64)
+    public RString tsuchibunMix1;
+    @ReportItem(name = "tsuchibunMix2", order = 65)
+    public RString tsuchibunMix2;
+    @ReportItem(name = "tsuchibunMixTwo1", order = 66)
+    public RString tsuchibunMixTwo1;
+    @ReportItem(name = "tsuchibunMixTwo2", order = 67)
+    public RString tsuchibunMixTwo2;
+    @ReportItem(name = "yubinNo", length = 8, order = 68)
     public RString yubinNo;
-    @ReportItem(name = "gyoseiku2", length = 14, order = 142)
+    @ReportItem(name = "gyoseiku2", length = 14, order = 69)
     public RString gyoseiku2;
-    @ReportItem(name = "jusho4", length = 20, order = 143)
+    @ReportItem(name = "jusho4", length = 20, order = 70)
     public RString jusho4;
-    @ReportItem(name = "jushoText", order = 144)
+    @ReportItem(name = "jushoText", order = 71)
     public RString jushoText;
-    @ReportItem(name = "jusho5", length = 20, order = 145)
+    @ReportItem(name = "jusho5", length = 20, order = 72)
     public RString jusho5;
-    @ReportItem(name = "jusho6", length = 20, order = 146)
+    @ReportItem(name = "jusho6", length = 20, order = 73)
     public RString jusho6;
-    @ReportItem(name = "katagakiText", order = 147)
+    @ReportItem(name = "katagakiText", order = 74)
     public RString katagakiText;
-    @ReportItem(name = "katagaki3", length = 20, order = 148)
+    @ReportItem(name = "katagaki3", length = 20, order = 75)
     public RString katagaki3;
-    @ReportItem(name = "katagakiSmall2", length = 30, order = 149)
+    @ReportItem(name = "katagakiSmall2", length = 30, order = 76)
     public RString katagakiSmall2;
-    @ReportItem(name = "katagaki4", length = 20, order = 150)
+    @ReportItem(name = "katagaki4", length = 20, order = 77)
     public RString katagaki4;
-    @ReportItem(name = "katagakiSmall1", length = 30, order = 151)
+    @ReportItem(name = "katagakiSmall1", length = 30, order = 78)
     public RString katagakiSmall1;
-    @ReportItem(name = "shimei5", length = 20, order = 152)
+    @ReportItem(name = "shimei5", length = 20, order = 79)
     public RString shimei5;
-    @ReportItem(name = "shimeiSmall2", length = 40, order = 153)
+    @ReportItem(name = "shimeiSmall2", length = 40, order = 80)
     public RString shimeiSmall2;
-    @ReportItem(name = "shimeiText", order = 154)
+    @ReportItem(name = "shimeiText", order = 81)
     public RString shimeiText;
-    @ReportItem(name = "meishoFuyo2", length = 3, order = 155)
+    @ReportItem(name = "meishoFuyo2", length = 3, order = 82)
     public RString meishoFuyo2;
-    @ReportItem(name = "shimeiSmall1", length = 40, order = 156)
+    @ReportItem(name = "shimeiSmall1", length = 40, order = 83)
     public RString shimeiSmall1;
-    @ReportItem(name = "dainoKubunMei", length = 8, order = 157)
+    @ReportItem(name = "dainoKubunMei", length = 8, order = 84)
     public RString dainoKubunMei;
-    @ReportItem(name = "shimei6", length = 20, order = 158)
+    @ReportItem(name = "shimei6", length = 20, order = 85)
     public RString shimei6;
-    @ReportItem(name = "meishoFuyo1", length = 3, order = 159)
+    @ReportItem(name = "meishoFuyo1", length = 3, order = 86)
     public RString meishoFuyo1;
-    @ReportItem(name = "samabunShimeiText", order = 160)
+    @ReportItem(name = "samabunShimeiText", order = 87)
     public RString samabunShimeiText;
-    @ReportItem(name = "samaBun2", length = 3, order = 161)
+    @ReportItem(name = "samaBun2", length = 3, order = 88)
     public RString samaBun2;
-    @ReportItem(name = "samabunShimeiSmall2", length = 40, order = 162)
+    @ReportItem(name = "samabunShimeiSmall2", length = 40, order = 89)
     public RString samabunShimeiSmall2;
-    @ReportItem(name = "kakkoRight2", length = 1, order = 163)
+    @ReportItem(name = "kakkoRight2", length = 1, order = 90)
     public RString kakkoRight2;
-    @ReportItem(name = "kakkoLeft2", length = 1, order = 164)
+    @ReportItem(name = "kakkoLeft2", length = 1, order = 91)
     public RString kakkoLeft2;
-    @ReportItem(name = "samabunShimei2", length = 20, order = 165)
+    @ReportItem(name = "samabunShimei2", length = 20, order = 92)
     public RString samabunShimei2;
-    @ReportItem(name = "kakkoRight1", length = 1, order = 166)
+    @ReportItem(name = "kakkoRight1", length = 1, order = 93)
     public RString kakkoRight1;
-    @ReportItem(name = "kakkoLeft1", length = 1, order = 167)
+    @ReportItem(name = "kakkoLeft1", length = 1, order = 94)
     public RString kakkoLeft1;
-    @ReportItem(name = "samabunShimei1", length = 20, order = 168)
+    @ReportItem(name = "samabunShimei1", length = 20, order = 95)
     public RString samabunShimei1;
-    @ReportItem(name = "samaBun1", length = 3, order = 169)
+    @ReportItem(name = "samaBun1", length = 3, order = 96)
     public RString samaBun1;
-    @ReportItem(name = "samabunShimeiSmall1", length = 40, order = 170)
+    @ReportItem(name = "samabunShimeiSmall1", length = 40, order = 97)
     public RString samabunShimeiSmall1;
-    @ReportItem(name = "customerBarCode", order = 171)
+    @ReportItem(name = "customerBarCode", order = 98)
     public RString customerBarCode;
-    @ReportItem(name = "denshiKoin", order = 172)
+    @ReportItem(name = "denshiKoin", order = 99)
     public RString denshiKoin;
-    @ReportItem(name = "hakkoYMD", length = 12, order = 173)
+    @ReportItem(name = "hakkoYMD", length = 12, order = 100)
     public RString hakkoYMD;
-    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 174)
+    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 101)
     public RString ninshoshaYakushokuMei;
-    @ReportItem(name = "ninshoshaYakushokuMei1", order = 175)
+    @ReportItem(name = "ninshoshaYakushokuMei1", order = 102)
     public RString ninshoshaYakushokuMei1;
-    @ReportItem(name = "koinMojiretsu", length = 4, order = 176)
+    @ReportItem(name = "koinMojiretsu", length = 4, order = 103)
     public RString koinMojiretsu;
-    @ReportItem(name = "ninshoshaYakushokuMei2", order = 177)
+    @ReportItem(name = "ninshoshaYakushokuMei2", order = 104)
     public RString ninshoshaYakushokuMei2;
-    @ReportItem(name = "ninshoshaShimeiKakenai", order = 178)
+    @ReportItem(name = "ninshoshaShimeiKakenai", order = 105)
     public RString ninshoshaShimeiKakenai;
-    @ReportItem(name = "ninshoshaShimeiKakeru", order = 179)
+    @ReportItem(name = "ninshoshaShimeiKakeru", order = 106)
     public RString ninshoshaShimeiKakeru;
-    @ReportItem(name = "koinShoryaku", length = 15, order = 180)
+    @ReportItem(name = "koinShoryaku", length = 15, order = 107)
     public RString koinShoryaku;
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
-    @ReportItem(name = "hihokenshaNo", length = 10, order = 181)
+    @ReportItem(name = "hihokenshaNo", length = 10, order = 108)
     public RString hihokenshaNo;
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
