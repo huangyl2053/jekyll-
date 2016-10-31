@@ -121,12 +121,12 @@ module DBZ {
                 return new UZA.TextBoxCode(this.convFiledName("txtNinteiChosaItakusakiCode"));
             }
 
-            public txtNinteiChosaItakusakiName(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtNinteiChosaItakusakiName"));
-            }
-
             public btnItakusakiGuide(): UZA.ButtonDialog {
                 return new UZA.ButtonDialog(this.convFiledName("btnItakusakiGuide"));
+            }
+
+            public txtNinteiChosaItakusakiName(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtNinteiChosaItakusakiName"));
             }
 
             public btnChosainJohoClear(): UZA.Button {

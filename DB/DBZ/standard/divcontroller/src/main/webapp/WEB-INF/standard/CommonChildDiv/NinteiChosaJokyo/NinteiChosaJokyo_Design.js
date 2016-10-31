@@ -115,12 +115,12 @@ var DBZ;
                 return new UZA.TextBoxCode(this.convFiledName("txtNinteiChosaItakusakiCode"));
             };
 
-            Controls.prototype.txtNinteiChosaItakusakiName = function () {
-                return new UZA.TextBox(this.convFiledName("txtNinteiChosaItakusakiName"));
-            };
-
             Controls.prototype.btnItakusakiGuide = function () {
                 return new UZA.ButtonDialog(this.convFiledName("btnItakusakiGuide"));
+            };
+
+            Controls.prototype.txtNinteiChosaItakusakiName = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiChosaItakusakiName"));
             };
 
             Controls.prototype.btnChosainJohoClear = function () {

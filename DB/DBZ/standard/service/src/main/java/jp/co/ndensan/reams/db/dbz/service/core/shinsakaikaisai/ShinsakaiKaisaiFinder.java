@@ -80,6 +80,13 @@ public class ShinsakaiKaisaiFinder {
         if (表示期間From != null && 表示期間To != null) {
             期間From = 表示期間From.toDateString();
             期間To = 表示期間To.toDateString();
+        } else if (表示期間From != null && 表示期間To == null) {
+            期間From = 表示期間From.toDateString();
+            期間To = RDate.MAX.toDateString();
+
+        } else if (表示期間From == null && 表示期間To != null) {
+            期間From = RDate.MIN.toDateString();
+            期間To = 表示期間To.toDateString();
         } else {
             期間From = RDate.MIN.toDateString();
             期間To = RDate.MAX.toDateString();
