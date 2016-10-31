@@ -74,13 +74,15 @@ public class TokuteiShinryohiMain {
     public ResponseData<TokuteiShinryohiMainDiv> onClick_Zengatsu(TokuteiShinryohiMainDiv div) {
         this.close摘要(div);
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         List<KyufujissekiKihon> 給付実績基本情報 = getCsData_A();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
                 .getKojinKakuteiKey().get被保険者番号();
-        getHandler(div).change年月(new RString("前月"), 給付実績情報照会情報, getCsData_J(), getCsData_D(), 整理番号, 被保険者番号, 識別番号検索キー);
-        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        getHandler(div).change年月(new RString("前月"), 給付実績情報照会情報, getCsData_J(), getCsData_D(),
+                整理番号, 被保険者番号, 識別番号検索キー, サービス提供年月);
+        FlexibleYearMonth 提供年月 = getHandler(div).get今提供年月(new RString("前月"), サービス提供年月, getCsData_J(), getCsData_D());
         set給付実績ヘッダ情報2(提供年月, 整理番号, 識別番号検索キー);
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
@@ -98,13 +100,15 @@ public class TokuteiShinryohiMain {
     public ResponseData<TokuteiShinryohiMainDiv> onClick_Jigetsu(TokuteiShinryohiMainDiv div) {
         this.close摘要(div);
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         List<KyufujissekiKihon> 給付実績基本情報 = getCsData_A();
         RString 整理番号 = get整理番号(給付実績基本情報);
         NyuryokuShikibetsuNo 識別番号検索キー = get識別番号(給付実績基本情報);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class)
                 .getKojinKakuteiKey().get被保険者番号();
-        getHandler(div).change年月(new RString("次月"), 給付実績情報照会情報, getCsData_J(), getCsData_D(), 整理番号, 被保険者番号, 識別番号検索キー);
-        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        getHandler(div).change年月(new RString("次月"), 給付実績情報照会情報, getCsData_J(), getCsData_D(),
+                整理番号, 被保険者番号, 識別番号検索キー, サービス提供年月);
+        FlexibleYearMonth 提供年月 = getHandler(div).get今提供年月(new RString("次月"), サービス提供年月, getCsData_J(), getCsData_D());
         set給付実績ヘッダ情報2(提供年月, 整理番号, 識別番号検索キー);
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();

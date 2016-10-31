@@ -691,38 +691,34 @@ public class ShokujiHiyoShokaiHandler {
             NyuryokuShikibetsuNo 識別番号, List<KyufujissekiShokujiHiyo> 給付実績食事費用1504,
             List<KyufujissekiMeisaiBusiness> 給付実績明細,
             List<KyufujissekiShokujiHiyo> 給付実績食事費用1503) {
-        int index = INT_ZERO;
         List<KyufujissekiShokujiHiyo> サービス提供年月リスト = get食費1504サービス提供年月リスト(給付実績食事費用1504);
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
-            if (サービス提供年月.equals(サービス提供年月リスト.get(i).getサービス提供年月())) {
-                index = i;
-                break;
+        FlexibleYearMonth 今提供年月;
+        if (前月.equals(date)) {
+            今提供年月 = get前月サービス提供年月(サービス提供年月リスト, サービス提供年月);
+        } else {
+            今提供年月 = get次月サービス提供年月(サービス提供年月リスト, サービス提供年月);
+        }
+        if (!今提供年月.isEmpty()) {
+            div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
+            setDataGrid(給付実績食事費用1504, 給付実績明細, 給付実績食事費用1503, 今提供年月);
+            check前次月Btn(給付実績食事費用1504, 今提供年月);
+        }
+    }
+
+    private void check前次月Btn(List<KyufujissekiShokujiHiyo> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+            if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1).getサービス提供年月())) {
+                div.getBtnZengetsu().setDisabled(true);
+            } else {
+                div.getBtnZengetsu().setDisabled(false);
+            }
+            if (サービス提供年月リスト.get(INT_ZERO).getサービス提供年月().isBeforeOrEquals(サービス提供年月)) {
+                div.getBtnJigetsu().setDisabled(true);
+            } else {
+                div.getBtnJigetsu().setDisabled(false);
             }
         }
-        FlexibleYearMonth 今提供年月;
-        RString 新整理番号;
-        NyuryokuShikibetsuNo 新識別番号;
-        RString 事業者番号;
-        if (前月.equals(date)) {
-            今提供年月 = サービス提供年月リスト.get(index + 1).getサービス提供年月();
-            新整理番号 = サービス提供年月リスト.get(index + 1).get整理番号();
-            新識別番号 = サービス提供年月リスト.get(index + 1).get入力識別番号();
-            事業者番号 = サービス提供年月リスト.get(index + 1).get事業所番号().value();
-            div.getBtnJigetsu().setDisabled(false);
-        } else {
-            今提供年月 = サービス提供年月リスト.get(index - 1).getサービス提供年月();
-            新整理番号 = サービス提供年月リスト.get(index - 1).get整理番号();
-            新識別番号 = サービス提供年月リスト.get(index - 1).get入力識別番号();
-            事業者番号 = サービス提供年月リスト.get(index - 1).get事業所番号().value();
-            div.getBtnZengetsu().setDisabled(false);
-        }
-        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 新整理番号, 新識別番号);
-        div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(今提供年月.toString()));
-        div.getCcdKyufuJissekiHeader().set整理番号(新整理番号);
-        div.getCcdKyufuJissekiHeader().set様式番号(新識別番号.value());
-        div.getCcdKyufuJissekiHeader().set事業者番号(事業者番号);
-        setDataGrid(給付実績食事費用1504, 給付実績明細, 給付実績食事費用1503, 今提供年月);
     }
 
     /**
@@ -847,5 +843,48 @@ public class ShokujiHiyoShokaiHandler {
             return 単価;
         }
         return 0;
+    }
+
+    private static class DateComparatorServiceYM implements Comparator<KyufujissekiShokujiHiyo>, Serializable {
+
+        @Override
+        public int compare(KyufujissekiShokujiHiyo o1, KyufujissekiShokujiHiyo o2) {
+            return o1.getサービス提供年月().compareTo(o2.getサービス提供年月());
+        }
+    }
+
+    /**
+     * サービス提供年月の前月を取得します。
+     *
+     * @param サービス提供年月リスト サービス提供年月リスト
+     * @param サービス提供年月 サービス提供年月
+     * @return FlexibleYearMonth 前月サービス提供年月
+     */
+    public FlexibleYearMonth get前月サービス提供年月(List<KyufujissekiShokujiHiyo> サービス提供年月リスト,
+            FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+        for (KyufujissekiShokujiHiyo サービス年月 : サービス提供年月リスト) {
+            if (サービス年月.getサービス提供年月().isBefore(サービス提供年月)) {
+                return サービス年月.getサービス提供年月();
+            }
+        }
+        return FlexibleYearMonth.EMPTY;
+    }
+
+    /**
+     * サービス提供年月の前月を取得します。
+     *
+     * @param サービス提供年月リスト サービス提供年月リスト
+     * @param サービス提供年月 サービス提供年月
+     * @return FlexibleYearMonth 次月サービス提供年月
+     */
+    public FlexibleYearMonth get次月サービス提供年月(List<KyufujissekiShokujiHiyo> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceYM());
+        for (KyufujissekiShokujiHiyo サービス年月 : サービス提供年月リスト) {
+            if (サービス提供年月.isBefore(サービス年月.getサービス提供年月())) {
+                return サービス年月.getサービス提供年月();
+            }
+        }
+        return FlexibleYearMonth.EMPTY;
     }
 }

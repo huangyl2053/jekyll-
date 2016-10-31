@@ -35,6 +35,7 @@ public class TokuteiNyushoshahiHandler {
     private static final RString 前事業者 = new RString("前事業者");
     private final TokuteiNyushoshahiDiv div;
     private static final RString DISABLED = new RString("0");
+    private static final int INT_ZERO = 0;
 
     /**
      * 画面の初期化です。
@@ -304,32 +305,34 @@ public class TokuteiNyushoshahiHandler {
      */
     public void change年月(RString change月, List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> 特定入所者費用,
             FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
-        int index = 0;
-        List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> dataToRepeat = getサービス提供年月list(特定入所者費用);
-        Collections.sort(dataToRepeat, new TokuteiNyushoshahiHandler.DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < dataToRepeat.size(); i++) {
-            if (サービス提供年月.equals(dataToRepeat.get(i).get特定入所者費用().getサービス提供年月())) {
-                index = i;
-                break;
+        FlexibleYearMonth 年月;
+        if (前月.equals(change月)) {
+            年月 = get前月サービス提供年月(特定入所者費用, サービス提供年月);
+        } else {
+            年月 = get次月サービス提供年月(特定入所者費用, サービス提供年月);
+        }
+        if (!年月.isEmpty()) {
+            div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 年月, 整理番号, 識別番号);
+            setDataGrid(特定入所者費用, 年月);
+            check前次月Btn(特定入所者費用, 年月);
+        }
+
+    }
+
+    private void check前次月Btn(List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+            if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1).get特定入所者費用().getサービス提供年月())) {
+                div.getBtnZengetsu().setDisabled(true);
+            } else {
+                div.getBtnZengetsu().setDisabled(false);
+            }
+            if (サービス提供年月リスト.get(INT_ZERO).get特定入所者費用().getサービス提供年月().isBeforeOrEquals(サービス提供年月)) {
+                div.getBtnJigetsu().setDisabled(true);
+            } else {
+                div.getBtnJigetsu().setDisabled(false);
             }
         }
-        FlexibleYearMonth 年月;
-        RString 新整理番号;
-        NyuryokuShikibetsuNo 新識別番号;
-        if (前月.equals(change月)) {
-            年月 = dataToRepeat.get(index + 1).get特定入所者費用().getサービス提供年月();
-            新整理番号 = dataToRepeat.get(index + 1).get特定入所者費用().get整理番号();
-            新識別番号 = dataToRepeat.get(index + 1).get特定入所者費用().get入力識別番号();
-            div.getBtnJigetsu().setDisabled(false);
-        } else {
-            年月 = dataToRepeat.get(index - 1).get特定入所者費用().getサービス提供年月();
-            新整理番号 = dataToRepeat.get(index - 1).get特定入所者費用().get整理番号();
-            新識別番号 = dataToRepeat.get(index - 1).get特定入所者費用().get入力識別番号();
-            div.getBtnZengetsu().setDisabled(false);
-        }
-        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 年月, 新整理番号, 新識別番号);
-        setDataGrid(特定入所者費用, 年月);
-
     }
 
     private List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> getサービス提供年月list(List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> 給付実績居宅サービス計画費list) {
@@ -441,5 +444,49 @@ public class TokuteiNyushoshahiHandler {
         public int compare(KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness o1, KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness o2) {
             return o2.get特定入所者費用().getサービス提供年月().compareTo(o1.get特定入所者費用().getサービス提供年月());
         }
+    }
+
+    private static class DateComparatorServiceYM implements Comparator<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness>, Serializable {
+
+        @Override
+        public int compare(KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness o1, KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness o2) {
+            return o1.get特定入所者費用().getサービス提供年月().compareTo(o2.get特定入所者費用().getサービス提供年月());
+        }
+    }
+
+    /**
+     * サービス提供年月の前月を取得します。
+     *
+     * @param サービス提供年月リスト サービス提供年月リスト
+     * @param サービス提供年月 サービス提供年月
+     * @return FlexibleYearMonth 前月サービス提供年月
+     */
+    public FlexibleYearMonth get前月サービス提供年月(List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> サービス提供年月リスト,
+            FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+        for (KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness サービス年月 : サービス提供年月リスト) {
+            if (サービス年月.get特定入所者費用().getサービス提供年月().isBefore(サービス提供年月)) {
+                return サービス年月.get特定入所者費用().getサービス提供年月();
+            }
+        }
+        return FlexibleYearMonth.EMPTY;
+    }
+
+    /**
+     * サービス提供年月の前月を取得します。
+     *
+     * @param サービス提供年月リスト サービス提供年月リスト
+     * @param サービス提供年月 サービス提供年月
+     * @return FlexibleYearMonth 次月サービス提供年月
+     */
+    public FlexibleYearMonth get次月サービス提供年月(List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> サービス提供年月リスト,
+            FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceYM());
+        for (KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness サービス年月 : サービス提供年月リスト) {
+            if (サービス提供年月.isBefore(サービス年月.get特定入所者費用().getサービス提供年月())) {
+                return サービス年月.get特定入所者費用().getサービス提供年月();
+            }
+        }
+        return FlexibleYearMonth.EMPTY;
     }
 }
