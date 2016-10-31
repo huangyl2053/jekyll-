@@ -57,7 +57,7 @@ public enum HanyoListKogakuGassanShinseishoOutPutOrder implements IReportItems {
      * 整理番号
      *
      */
-    整理番号(new RString("0337"), new RString(""), new RString("高額合算申請書_整理番号\"")),
+    整理番号(new RString("0337"), new RString(""), new RString("\"高額合算申請書_整理番号\"")),
     /**
      * 支払方法
      */
