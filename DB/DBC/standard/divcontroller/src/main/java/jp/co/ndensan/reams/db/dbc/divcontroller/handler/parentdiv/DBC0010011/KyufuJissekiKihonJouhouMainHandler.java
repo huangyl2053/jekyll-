@@ -519,15 +519,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
         }
     }
 
-    private void set給付実績基本情報(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
-            RString 整理番号, NyuryokuShikibetsuNo 識別番号検索キー) {
-        div.getCcdKyufuJissekiHeader().initialize(
-                被保険者番号,
-                サービス提供年月,
-                整理番号,
-                識別番号検索キー);
-    }
-
     private int get事業者番号の位置(List<KyufuJissekiHedajyoho2> 事業者番号リスト,
             RString 整理番号, RString 事業者番号, RString 様式番号, FlexibleYearMonth サービス提供年月, RString 実績区分コード) {
         for (int index = 0; index < 事業者番号リスト.size(); index++) {

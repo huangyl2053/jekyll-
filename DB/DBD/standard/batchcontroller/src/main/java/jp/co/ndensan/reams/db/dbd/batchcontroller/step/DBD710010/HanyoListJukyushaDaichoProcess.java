@@ -296,10 +296,10 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
             set出力条件_地区();
         }
         EucFileOutputJokenhyoItem reportOutputJokenhyoItem = new EucFileOutputJokenhyoItem(
+                日本語ファイル名,
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
-                日本語ファイル名,
                 ファイル名,
                 new RString("DBD701001"),
                 出力ページ数,

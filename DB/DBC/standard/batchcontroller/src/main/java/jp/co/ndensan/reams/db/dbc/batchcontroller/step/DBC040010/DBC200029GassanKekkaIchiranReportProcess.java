@@ -116,7 +116,6 @@ public class DBC200029GassanKekkaIchiranReportProcess extends BatchKeyBreakBase<
 
     @Override
     protected void afterExecute() {
-        batchReportWriter.close();
     }
 
     private IOutputOrder get出力順ID(

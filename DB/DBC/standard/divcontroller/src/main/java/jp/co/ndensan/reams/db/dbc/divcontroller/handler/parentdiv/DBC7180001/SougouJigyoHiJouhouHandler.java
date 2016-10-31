@@ -130,17 +130,26 @@ public class SougouJigyoHiJouhouHandler {
         parameter.set事業者名(div.getCcdJigyoshaBango().getNyuryokuShisetsuMeisho());
         parameter.setサービス種類コード(div.getDdlSabisuSyurui().getSelectedKey());
         parameter.setサービス名称(div.getDdlSabisuSyurui().getSelectedValue());
+
         RString 市町村コード = RString.EMPTY;
-        if (導入形態_広域.equals(div.getHdnDonyuKeitai())
-                && !div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value().equals(全て市町村)) {
-            市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+        RString 保険者コード = RString.EMPTY;
+        RString 保険者名 = RString.EMPTY;
+        if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
             if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
                 市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            }
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().isEmpty()) {
+                保険者コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
             } else {
-                市町村コード = 全て市町村;
+                保険者コード = 全て市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称())) {
+                保険者名 = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村名称();
             }
         }
-        parameter.set保険者コード(市町村コード);
+        parameter.set保険者コード(保険者コード);
+        parameter.set保険者名(保険者名);
+        parameter.set市町村コード(市町村コード);
         parameter.set抽出方法(div.getRadSakuseiKubun().getSelectedValue());
         if (div.getTxtSabisuTeikyoNengetsu().getFromValue() != null) {
             parameter.setサービス提供年月開始年月(rDateToRString(div.getTxtSabisuTeikyoNengetsu().getFromValue()));
@@ -189,7 +198,7 @@ public class SougouJigyoHiJouhouHandler {
                 div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
             } else {
                 div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
-                        new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
+                        new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("市町村コード"))));
             }
         }
         RString 抽出方法 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("抽出方法"));

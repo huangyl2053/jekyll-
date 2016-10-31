@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5520001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.rirekishusei.RirekiShuseiBusiness;
+import jp.co.ndensan.reams.db.dbd.business.core.rirekishusei.RirekiShuseiJukyushaBusiness;
 import jp.co.ndensan.reams.db.dbd.business.core.rirekishusei.RirekiShuseiUpdBusiness;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5520001.DBD5520001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5520001.RirekiShuseiDiv;
@@ -198,7 +199,13 @@ public class RirekiShusei {
     public ResponseData<RirekiShuseiDiv> onBefore_btnBeforeRirekiTsuika(RirekiShuseiDiv div) {
         dgRirekiIchiran_Row row = div.getDgRirekiIchiran().getSelectedItems().get(0);
         if (RString.isNullOrEmpty(row.getDeserializedBusiness())) {
-            div.setHdnReceiveSerializeBusiness(row.getDataPass());
+            RirekiShuseiDataPass business = DataPassingConverter.deserialize(row.getDataPass(), RirekiShuseiDataPass.class).clone();
+            business.setデータ区分(Code.EMPTY);
+            business.set要介護認定一次判定結果コード(Code.EMPTY);
+            business.set要介護認定一次判定結果コード_認知症加算(Code.EMPTY);
+            business.set二次判定要介護状態区分コード(Code.EMPTY);
+            business.set要介護状態区分コード(Code.EMPTY);
+            div.setHdnReceiveSerializeBusiness(DataPassingConverter.serialize(business));
         } else {
             RirekiShuseiBusiness business = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
             div.setHdnReceiveSerializeBusiness(DataPassingConverter.serialize(business.get履歴修正情報(
@@ -218,7 +225,13 @@ public class RirekiShusei {
     public ResponseData<RirekiShuseiDiv> onBefore_btnAfterRirekiTsuika(RirekiShuseiDiv div) {
         dgRirekiIchiran_Row row = div.getDgRirekiIchiran().getSelectedItems().get(0);
         if (RString.isNullOrEmpty(row.getDeserializedBusiness())) {
-            div.setHdnReceiveSerializeBusiness(row.getDataPass());
+            RirekiShuseiDataPass business = DataPassingConverter.deserialize(row.getDataPass(), RirekiShuseiDataPass.class).clone();
+            business.setデータ区分(Code.EMPTY);
+            business.set要介護認定一次判定結果コード(Code.EMPTY);
+            business.set要介護認定一次判定結果コード_認知症加算(Code.EMPTY);
+            business.set二次判定要介護状態区分コード(Code.EMPTY);
+            business.set要介護状態区分コード(Code.EMPTY);
+            div.setHdnReceiveSerializeBusiness(DataPassingConverter.serialize(business));
         } else {
             RirekiShuseiBusiness business = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
             div.setHdnReceiveSerializeBusiness(DataPassingConverter.serialize(business.get履歴修正情報(
@@ -244,9 +257,13 @@ public class RirekiShusei {
         if (KU_BUN_追.equals(row.getKubun())) {
             addRow.setRirekiNo(row.getRirekiNo());
         } else {
-            RirekiShuseiBusiness rirekiShusei
-                    = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
-            addRow.setRirekiNo(rirekiShusei.get受給者台帳().get履歴番号());
+            if (!RString.isNullOrEmpty(row.getRirekiNo())) {
+                addRow.setRirekiNo(row.getRirekiNo());
+            } else {
+                RirekiShuseiBusiness rirekiShusei
+                        = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
+                addRow.setRirekiNo(rirekiShusei.get受給者台帳().get履歴番号());
+            }
         }
         div.getDgRirekiIchiran().getDataSource().add(rowId, addRow);
         set申請履歴情報For履歴追加(addRow, row, true, div);
@@ -269,9 +286,14 @@ public class RirekiShusei {
         if (KU_BUN_追.equals(row.getKubun())) {
             addRow.setRirekiNo(row.getRirekiNo());
         } else {
-            RirekiShuseiBusiness rirekiShusei
-                    = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
-            addRow.setRirekiNo(rirekiShusei.get受給者台帳().get履歴番号());
+            if (!RString.isNullOrEmpty(row.getRirekiNo())) {
+                addRow.setRirekiNo(row.getRirekiNo());
+            } else {
+                RirekiShuseiBusiness rirekiShusei
+                        = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
+                addRow.setRirekiNo(rirekiShusei.get受給者台帳().get履歴番号());
+            }
+
         }
         div.getDgRirekiIchiran().getDataSource().add(rowId + 1, addRow);
         set申請履歴情報For履歴追加(addRow, row, false, div);
@@ -307,6 +329,7 @@ public class RirekiShusei {
         dgRirekiIchiran_Row row = div.getDgRirekiIchiran().getSelectedItems().get(0);
         if (div.getDgRirekiIchiran().getClickedItem().getTsuikaKubun().isValue()) {
             div.getDgRirekiIchiran().getClickedItem().setKubun(KU_BUN_追);
+            div.getDgRirekiIchiran().getClickedItem().getTsuikaKubun().setValue(false);
         } else if (!SAKUJO_KUBUN.equals(div.getDgRirekiIchiran().getClickedItem().getMaeGoKubun())) {
             div.getDgRirekiIchiran().getClickedItem().setKubun(RString.EMPTY);
         } else {
@@ -355,7 +378,7 @@ public class RirekiShusei {
         }
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         for (dgRirekiIchiran_Row row : div.getDgRirekiIchiran().getDataSource()) {
-            if (KU_BUN_追.equals(row.getKubun()) || row.getTsuikaKubun().isValue()) {
+            if (!(KU_BUN_削.equals(row.getKubun()) && !row.getTsuikaKubun().isValue())) {
                 validationMessages.add(getValidationHandler(div).重複チェック(row));
             }
             if (validationMessages.iterator().hasNext()) {
@@ -367,13 +390,17 @@ public class RirekiShusei {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         List<RirekiShuseiUpdBusiness> updDataList = new ArrayList<>();
+        List<RirekiShuseiJukyushaBusiness> jukyushaBusList = new ArrayList<>();
+        boolean flag = false;
         for (dgRirekiIchiran_Row row : div.getDgRirekiIchiran().getDataSource()) {
             dgRirekiIchiran_Row previousRow = getHandler(div).getPreviousRow(div.getDgRirekiIchiran().getDataSource().indexOf(row));
             dgRirekiIchiran_Row nextRow = getHandler(div).getNextRow(div.getDgRirekiIchiran().getDataSource().indexOf(row));
             DbT4121ShinseiRirekiJoho 申請履歴情報 = DataPassingConverter.deserialize(row.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
             ShinseishoKanriNo 申請書管理番号 = 申請履歴情報.get申請管理番号();
             RirekiShuseiUpdBusiness updData = new RirekiShuseiUpdBusiness();
+            setJukyushaUpd(row, jukyushaBusList, flag);
             if (KU_BUN_追.equals(row.getKubun()) || row.getTsuikaKubun().isValue()) {
+                flag = true;
                 updData.set受給者台帳(getHandler(div).set受給者台帳For履歴追加(申請書管理番号, row));
                 updData.set要介護認定申請情報(getHandler(div).set認定申請For履歴追加(申請書管理番号, row));
                 if (!row.getTsuikaKubun().isValue()) {
@@ -397,7 +424,7 @@ public class RirekiShusei {
                 updData.set受給者台帳(getHandler(div).set受給者台帳For履歴削除(row));
                 updData.set要介護認定申請情報(getHandler(div).set認定申請For履歴削除(row));
                 if (!SAKUJO_KUBUN.equals(row.getMaeGoKubun())) {
-                    updData.set申請履歴情報更新行(getHandler(div).set申請履歴情報For履歴削除(previousRow, nextRow));
+                    updData.set申請履歴情報更新行(getHandler(div).set申請履歴情報For履歴削除(previousRow, nextRow, 申請履歴情報));
                     updData.set申請履歴情報次回行(申請履歴情報);
                 }
             } else if (KU_BUN_修.equals(row.getKubun())) {
@@ -417,8 +444,45 @@ public class RirekiShusei {
             updData.setMaeGoKubun(row.getMaeGoKubun());
             updDataList.add(updData);
         }
-        manager.save受給履歴(updDataList, set認定申請For履歴追加Upd(div.getDgRirekiIchiran().getDataSource()));
+        manager.save受給履歴(updDataList, set認定申請For履歴追加Upd(div.getDgRirekiIchiran().getDataSource()),
+                jukyushaBusList, setRirekiJohoUpd(div));
         return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(MSG_履歴修正.toString())).respond();
+    }
+
+    private void setJukyushaUpd(dgRirekiIchiran_Row row, List<RirekiShuseiJukyushaBusiness> jukyushaBusList, boolean flag) {
+        if (flag && !KU_BUN_追.equals(row.getKubun()) && !row.getTsuikaKubun().isValue()) {
+            RirekiShuseiJukyushaBusiness updBus = new RirekiShuseiJukyushaBusiness();
+            RirekiShuseiBusiness business = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
+            updBus.setKubun(row.getKubun());
+            updBus.setRirekiNo(row.getRirekiNo());
+            updBus.setUpdateCount(row.getUpdateCount().getValue().intValue());
+            updBus.set受給者台帳(business.get受給者台帳());
+            jukyushaBusList.add(updBus);
+        }
+    }
+
+    private List<DbT4121ShinseiRirekiJoho> setRirekiJohoUpd(RirekiShuseiDiv div) {
+        List<DbT4121ShinseiRirekiJoho> resList = new ArrayList<>();
+        dgRirekiIchiran_Row nextRow = null;
+        for (dgRirekiIchiran_Row row : div.getDgRirekiIchiran().getDataSource()) {
+            DbT4121ShinseiRirekiJoho 申請履歴情報 = DataPassingConverter.deserialize(row.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
+            ShinseishoKanriNo 申請書管理番号 = 申請履歴情報.get申請管理番号();
+            if (KU_BUN_削.equals(row.getKubun()) && !row.getTsuikaKubun().isValue() && !SAKUJO_KUBUN.equals(row.getMaeGoKubun())) {
+                nextRow = getHandler(div).getNextRow(div.getDgRirekiIchiran().getDataSource().indexOf(row));
+            }
+            if (nextRow != null) {
+                DbT4121ShinseiRirekiJoho 申請履歴情報次回 = DataPassingConverter.deserialize(nextRow.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
+                ShinseishoKanriNo 申請書管理番号次回 = 申請履歴情報次回.get申請管理番号();
+                if (申請書管理番号.equals(申請書管理番号次回)) {
+                    continue;
+                }
+            }
+            if (!KU_BUN_削.equals(row.getKubun()) && !KU_BUN_追.equals(row.getKubun())) {
+                resList.add(申請履歴情報);
+            }
+        }
+
+        return resList;
     }
 
     private RirekiShuseiHandler getHandler(RirekiShuseiDiv div) {
@@ -442,7 +506,7 @@ public class RirekiShusei {
         dgRirekiIchiran_Row nextRow = getHandler(div).getNextRow(rowId);
         if (nextRow != null) {
             if (RString.isNullOrEmpty(nextRow.getDeserializedBusiness())) {
-                div.setHdnZenkaiSerializeBusiness(nextRow.getDataPass());
+                div.setHdnJikaiSerializeBusiness(nextRow.getDataPass());
             } else {
                 RirekiShuseiBusiness business = DataPassingConverter.deserialize(nextRow.getDeserializedBusiness(), RirekiShuseiBusiness.class);
                 div.setHdnJikaiSerializeBusiness(DataPassingConverter.serialize(business.get履歴修正情報()));
@@ -463,6 +527,10 @@ public class RirekiShusei {
     private void set受給者台帳For履歴追加Upd(int rowId, List<dgRirekiIchiran_Row> rowList) {
         for (rowId = rowId + 1; rowId < rowList.size(); rowId++) {
             dgRirekiIchiran_Row row = rowList.get(rowId);
+            if (!RString.isNullOrEmpty(row.getRirekiNo())) {
+                row.setRirekiNo(set履歴番号(row.getRirekiNo()));
+                continue;
+            }
             if (RString.isNullOrEmpty(row.getDeserializedBusiness())) {
                 row.setRirekiNo(set履歴番号(row.getRirekiNo()));
             } else {
@@ -499,9 +567,11 @@ public class RirekiShusei {
         }
     }
 
-    private boolean set次の申請履歴情報(dgRirekiIchiran_Row row, DbT4121ShinseiRirekiJoho 選択行申請履歴情報, dgRirekiIchiran_Row selRow, ShinseishoKanriNo 申請書管理番号) {
+    private boolean set次の申請履歴情報(dgRirekiIchiran_Row row, DbT4121ShinseiRirekiJoho 選択行申請履歴情報,
+            dgRirekiIchiran_Row selRow, ShinseishoKanriNo 申請書管理番号) {
         DbT4121ShinseiRirekiJoho 次の申請履歴情報 = DataPassingConverter.deserialize(row.getShinseirirekiJoho(), DbT4121ShinseiRirekiJoho.class);
-        if (選択行申請履歴情報.get申請管理番号().equals(次の申請履歴情報.get前回申請管理番号())) {
+        if (選択行申請履歴情報.get申請管理番号().equals(次の申請履歴情報.get前回申請管理番号())
+                && !次の申請履歴情報.get申請管理番号().equals(申請書管理番号)) {
             DbT4121ShinseiRirekiJohoBuilder beBuilder = 次の申請履歴情報.createBuilderForEdit();
             beBuilder.set前回申請管理番号(申請書管理番号);
             if (KU_BUN_追.equals(selRow.getKubun())) {
@@ -516,7 +586,7 @@ public class RirekiShusei {
 
     private RString set履歴番号(RString 履歴番号) {
         if (!RString.isNullOrEmpty(履歴番号)) {
-            return new RString(Integer.parseInt(履歴番号.toString()) + 1);
+            return new RString(Integer.parseInt(履歴番号.toString()) + 1).padZeroToLeft(履歴番号.length());
         }
         return RString.EMPTY;
     }

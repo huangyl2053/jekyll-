@@ -36,6 +36,9 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
     private final Code idouJiyu_tensyutu;
     private final Code idouJiyu_sibou;
     private final Code idouJiyu_tenkyo;
+    private final RString psmShikibetsuTaisho;
+    private final RString orderBy;
+    private final boolean orderByFlag;
 
     /**
      * コンストラクタ。
@@ -56,6 +59,9 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
      * @param idouJiyu_tensyutu 異動事由（転出）
      * @param idouJiyu_sibou 異動事由（死亡）
      * @param idouJiyu_tenkyo 異動事由（転居）
+     * @param psmShikibetsuTaisho 宛名PSM
+     * @param orderBy orderBy
+     * @param orderByFlag orderByFlag
      */
     public JyukiRendoTorokushaListBatchMybatisParameter(
             RString konkaikaishiYMDHMS,
@@ -73,7 +79,10 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
             Code idouJiyu_tennyu,
             Code idouJiyu_tensyutu,
             Code idouJiyu_sibou,
-            Code idouJiyu_tenkyo) {
+            Code idouJiyu_tenkyo,
+            RString psmShikibetsuTaisho,
+            RString orderBy,
+            boolean orderByFlag) {
 
         this.konkaikaishiYMDHMS = konkaikaishiYMDHMS;
         this.konkaishuryoYMDHMS = konkaishuryoYMDHMS;
@@ -91,5 +100,8 @@ public class JyukiRendoTorokushaListBatchMybatisParameter implements IMyBatisPar
         this.idouJiyu_tensyutu = idouJiyu_tensyutu;
         this.idouJiyu_sibou = idouJiyu_sibou;
         this.idouJiyu_tenkyo = idouJiyu_tenkyo;
+        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+        this.orderBy = orderBy;
+        this.orderByFlag = orderByFlag;
     }
 }

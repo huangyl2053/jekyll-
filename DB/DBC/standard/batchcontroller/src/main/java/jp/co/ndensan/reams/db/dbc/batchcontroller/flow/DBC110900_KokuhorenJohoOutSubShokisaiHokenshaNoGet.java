@@ -66,7 +66,7 @@ public class DBC110900_KokuhorenJohoOutSubShokisaiHokenshaNoGet
         List<GappeiCityJyoho> gappeiCityJyohoList;
         DonyuKeitaiCode 導入形態コード = shichosonSecurityJoho.get導入形態コード();
         if (介護導入区分 != null && 介護導入区分.equals(KaigoDonyuKubun.未導入)) {
-            throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage().evaluate());
+            throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage().replace("導入形態コード").evaluate());
         } else {
             gappeiCityJyohoList = GappeiCityJohoBFinder.createInstance().getSaishintannitsugappeijoho(表示有無区分).records();
         }

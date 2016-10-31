@@ -328,9 +328,11 @@ public class NinteiChosaJokyoHandler {
             selectKey.add(new RString("key0"));
             div.getChkShujiiKubun().setSelectedItemsByKey(selectKey);
         }
+        div.getDdlYokaigodo().setIsBlankLine(true);
         if (konkaiDataPass.get要介護認定一次判定結果コード() != null && !konkaiDataPass.get要介護認定一次判定結果コード().isEmpty()) {
             div.getDdlYokaigodo().setSelectedKey(konkaiDataPass.get要介護認定一次判定結果コード().value());
         }
+        div.getDdlNinchishoKasangoYokaigodo().setIsBlankLine(true);
         div.getTxtIchijiHanteiDate().setValue(konkaiDataPass.get要介護認定一次判定年月日());
         if (konkaiDataPass.get要介護認定一次判定結果コード_認知症加算() != null
                 && !konkaiDataPass.get要介護認定一次判定結果コード_認知症加算().isEmpty()) {
@@ -339,6 +341,7 @@ public class NinteiChosaJokyoHandler {
         div.getTxtShinsakaiShiryoSakuseiDate().setValue(konkaiDataPass.get介護認定審査会資料作成年月日());
         div.getTxtShinsakaiKaisaiYoteiDate().setValue(konkaiDataPass.get認定審査会予定年月日());
         div.getTxtNijiHanteiDate().setValue(konkaiDataPass.get二次判定年月日());
+        div.getDdlNijiHanteiKekka().setIsBlankLine(true);
         if (konkaiDataPass.get二次判定要介護状態区分コード() != null
                 && !konkaiDataPass.get二次判定要介護状態区分コード().isEmpty()) {
             div.getDdlNijiHanteiKekka().setSelectedKey(konkaiDataPass.get二次判定要介護状態区分コード().value());
