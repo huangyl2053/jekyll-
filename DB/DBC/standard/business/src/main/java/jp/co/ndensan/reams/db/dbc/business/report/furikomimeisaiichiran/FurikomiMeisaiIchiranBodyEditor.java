@@ -94,7 +94,7 @@ public class FurikomiMeisaiIchiranBodyEditor implements IFurikomiMeisaiIchiranEd
         source.ｌist3_1 = new RString(番号);
 
         if (振込明細一覧Entity.get支払区分方法コード() != null) {
-            source.list4_1 = ShiharaiHohoKubun.toValue(振込明細一覧Entity.get支払区分方法コード()).get名称();
+            source.list4_1 = ShiharaiHohoKubun.toValue(振込明細一覧Entity.get支払区分方法コード()).get略称();
         }
 
         if (件数値TWO <= 振込明細一覧Entity.get名寄せ件数()) {
