@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030010;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010100.DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030030.DBU030030_JigyoHokokuNenpo_IppanParameter;
@@ -28,6 +29,9 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
 
     private static final int INDEX_7 = 7;
     private static final int INDEX_8 = 8;
+    private static final RString 市町村分 = new RString("1");
+    private static final RString 構成市町村分 = new RString("2");
+    private static final RString 旧市町村分 = new RString("3");
     private static final String PRINTCONTROLKBN = "printControlKbn";
     private static final String HOKOKUNENDO = "hokokuNendo";
     private static final String HOKOKUKAISHIYM = "hokokuKaishiYm";
@@ -103,11 +107,11 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
         parameter.set集計終了年月(集計終了年月.get(2));
         parameter.set作成日時(作成日時.get(2));
         parameter.set処理日時(処理日時);
-        parameter.set市町村コード(市町村コード);
+        parameter.set市町村コード(市町村コード.concat(市町村分));
         parameter.set構成市町村区分(構成市町村区分);
         parameter.set旧市町村区分(旧市町村区分);
-        parameter.set構成市町村コードリスト(構成市町村コードリスト);
-        parameter.set旧市町村コードリスト(旧市町村コードリスト);
+        parameter.set構成市町村コードリスト(addCode_kosei(構成市町村コードリスト));
+        parameter.set旧市町村コードリスト(addCode_kyu(旧市町村コードリスト));
         parameter.set過去集計分市町村コードリスト(過去集計分市町村コードリスト);
         parameter.set過去集計分旧市町村区分(過去集計分旧市町村区分);
         return parameter;
@@ -135,11 +139,11 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
         parameter.set集計終了年月(集計終了年月);
         parameter.set作成日時(作成日時);
         parameter.set処理日時(処理日時);
-        parameter.set市町村コード(市町村コード);
+        parameter.set市町村コード(市町村コード.concat(市町村分));
         parameter.set構成市町村区分(構成市町村区分);
         parameter.set旧市町村区分(旧市町村区分);
-        parameter.set構成市町村コードリスト(構成市町村コードリスト);
-        parameter.set旧市町村コードリスト(旧市町村コードリスト);
+        parameter.set構成市町村コードリスト(addCode_kosei(構成市町村コードリスト));
+        parameter.set旧市町村コードリスト(addCode_kyu(旧市町村コードリスト));
         parameter.set過去集計分市町村コードリスト(過去集計分市町村コードリスト);
         parameter.set給付集計区分(給付集計区分);
         parameter.set過去集計分旧市町村区分(過去集計分旧市町村区分);
@@ -168,11 +172,11 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
         parameter.set集計終了年月(集計終了年月);
         parameter.set作成日時(作成日時);
         parameter.set処理日時(処理日時);
-        parameter.set市町村コード(市町村コード);
+        parameter.set市町村コード(市町村コード.concat(市町村分));
         parameter.set構成市町村区分(構成市町村区分);
         parameter.set旧市町村区分(旧市町村区分);
-        parameter.set構成市町村コードリスト(構成市町村コードリスト);
-        parameter.set旧市町村コードリスト(旧市町村コードリスト);
+        parameter.set構成市町村コードリスト(addCode_kosei(構成市町村コードリスト));
+        parameter.set旧市町村コードリスト(addCode_kyu(旧市町村コードリスト));
         parameter.set過去集計分市町村コードリスト(過去集計分市町村コードリスト);
         parameter.set給付集計区分(給付集計区分);
         parameter.set過去集計分旧市町村区分(過去集計分旧市町村区分);
@@ -195,11 +199,11 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
         parameter.set集計終了年月(集計終了年月.get(INDEX_7));
         parameter.set作成日時(作成日時.get(INDEX_7));
         parameter.set処理日時(処理日時);
-        parameter.set市町村コード(市町村コード);
+        parameter.set市町村コード(市町村コード.concat(市町村分));
         parameter.set構成市町村区分(構成市町村区分);
         parameter.set旧市町村区分(旧市町村区分);
-        parameter.set構成市町村コードリスト(構成市町村コードリスト);
-        parameter.set旧市町村コードリスト(旧市町村コードリスト);
+        parameter.set構成市町村コードリスト(addCode_kosei(構成市町村コードリスト));
+        parameter.set旧市町村コードリスト(addCode_kyu(旧市町村コードリスト));
         parameter.set過去集計分市町村コードリスト(過去集計分市町村コードリスト);
         parameter.set過去集計分旧市町村区分(過去集計分旧市町村区分);
         return parameter;
@@ -222,7 +226,7 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
                 concat(getDate(作成日時.get(INDEX_8).getMinute())).concat(getDate(作成日時.get(INDEX_8).getSecond())));
         parameter.set処理日時(処理日時.getDate().toDateString().concat(getDate(処理日時.getHour())).
                 concat(getDate(処理日時.getMinute())).concat(getDate(処理日時.getSecond())));
-        parameter.set市町村コード(市町村コード);
+        parameter.set市町村コード(市町村コード.concat(市町村分));
         parameter.set構成市町村区分(構成市町村区分);
         parameter.set旧市町村区分(旧市町村区分);
         parameter.set構成市町村コードリスト(構成市町村コードリスト);
@@ -235,5 +239,21 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
 
     private static RString getDate(int 時間) {
         return new RString(時間).padZeroToLeft(2);
+    }
+
+    private List<RString> addCode_kosei(List<RString> コードリスト) {
+        List<RString> codelist = new ArrayList();
+        for (RString code : コードリスト) {
+            codelist.add(code.concat(構成市町村分));
+        }
+        return codelist;
+    }
+    
+    private List<RString> addCode_kyu(List<RString> コードリスト) {
+        List<RString> codelist = new ArrayList();
+        for (RString code : コードリスト) {
+            codelist.add(code.concat(旧市町村分));
+        }
+        return codelist;
     }
 }
