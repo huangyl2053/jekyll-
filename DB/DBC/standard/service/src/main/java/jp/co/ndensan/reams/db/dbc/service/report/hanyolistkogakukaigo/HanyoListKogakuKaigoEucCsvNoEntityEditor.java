@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -26,6 +28,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiKoshinNintei;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
@@ -242,7 +245,7 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
         csvEntity.set施設退所日(get日付項目(施設退所日, parameter));
 
         csvEntity.set受給申請事由(entity.get受給申請事由() != null
-                ? entity.get受給申請事由().getColumnValue()
+                ? JukyuShinseiJiyu.toValue(entity.get受給申請事由().getColumnValue()).get名称()
                 : RString.EMPTY);
         csvEntity.set受給申請日(get日付項目(entity.get受給申請年月日(), parameter));
         if (entity.get要介護認定状態区分コード() == null) {
@@ -256,10 +259,10 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
         csvEntity.set受給認定日(get日付項目(entity.get受給認定日(), parameter));
         csvEntity.set受給旧措置(entity.get旧措置フラグ());
         csvEntity.set受給みなし更新認定(entity.getみなし要介護区分コード() != null
-                ? entity.getみなし要介護区分コード().getColumnValue()
+                ? MinashiKoshinNintei.toValue(entity.getみなし要介護区分コード().getColumnValue()).get名称()
                 : RString.EMPTY);
         csvEntity.set受給直近事由(entity.get直近異動事由コード() != null
-                ? entity.get直近異動事由コード().getColumnValue()
+                ? ChokkinIdoJiyuCode.toValue(entity.get直近異動事由コード().getColumnValue()).get名称()
                 : RString.EMPTY);
     }
 
@@ -562,7 +565,7 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
                     : entity.get事業者名称カナ_05().getColumnValue());
             csvEntity.set指定事業者郵便番号(entity.get郵便番号_05().isEmpty()
                     ? RString.EMPTY
-                    : entity.get郵便番号_05().getColumnValue());
+                    : entity.get郵便番号_05().getEditedYubinNo());
             csvEntity.set指定事業者住所(entity.get事業者住所_05().isEmpty()
                     ? RString.EMPTY
                     : entity.get事業者住所_05().getColumnValue());
@@ -599,7 +602,7 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
                 : entity.get事業者名称カナ_60().getColumnValue());
         csvEntity.set指定事業者郵便番号(entity.get郵便番号_60().isEmpty()
                 ? RString.EMPTY
-                : entity.get郵便番号_60().getColumnValue());
+                : entity.get郵便番号_60().getEditedYubinNo());
         csvEntity.set指定事業者住所(entity.get事業者住所_60().isEmpty()
                 ? RString.EMPTY
                 : entity.get事業者住所_60().getColumnValue());
@@ -679,8 +682,8 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
     private RString convertDayOfWeek(FlexibleDate targetDate) {
         return targetDate != null
                 && targetDate.isValid()
-                ? new RString(targetDate.getDayOfWeek().toString())
-                : RString.EMPTY;
+                        ? new RString(targetDate.getDayOfWeek().toString())
+                        : RString.EMPTY;
     }
 
     private void set給付対象者合計(HanyouRisutoSyuturyokuEntity entity,
@@ -844,18 +847,16 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
 
             if (RST_生.equals(本人の所得区分コード)) {
                 return RST_第１;
+            } else if (RST_市.equals(世帯の所得区分コード)) {
+                return get市(老齢福祉年金受給の有無);
+            } else if (RST_低.equals(世帯の所得区分コード)) {
+                return get低(老齢福祉年金受給の有無);
+            } else if (RST_般.equals(世帯の所得区分コード)) {
+                return RST_第４;
+            } else if (RST_現.equals(世帯の所得区分コード)) {
+                return RST_第５;
             } else {
-                if (RST_市.equals(世帯の所得区分コード)) {
-                    return get市(老齢福祉年金受給の有無);
-                } else if (RST_低.equals(世帯の所得区分コード)) {
-                    return get低(老齢福祉年金受給の有無);
-                } else if (RST_般.equals(世帯の所得区分コード)) {
-                    return RST_第４;
-                } else if (RST_現.equals(世帯の所得区分コード)) {
-                    return RST_第５;
-                } else {
-                    return RString.EMPTY;
-                }
+                return RString.EMPTY;
             }
         }
     }
