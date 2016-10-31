@@ -156,18 +156,17 @@ public class TaishouWaritsuke {
      * @return ResponseData<TaishouWaritsukeDiv>
      */
     public ResponseData<TaishouWaritsukeDiv> onClick_BtnDetermineToShinsakaiOrder(TaishouWaritsukeDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        対象者一覧データ空チェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            対象者一覧データ空チェック(pairs, div);
-
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
             getHandler(div).審査会順序確定();
         }
         return ResponseData.of(div).respond();
@@ -180,17 +179,17 @@ public class TaishouWaritsuke {
      * @return ResponseData<TaishouWaritsukeDiv>
      */
     public ResponseData<TaishouWaritsukeDiv> onClick_BtnRegister(TaishouWaritsukeDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        対象者一覧データ空チェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            対象者一覧データ空チェック(pairs, div);
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
             TaishouWaritsukeHandler handler = getHandler(div);
             handler.介護認定審査会割付情報更新();
             handler.対象者一覧検索();
