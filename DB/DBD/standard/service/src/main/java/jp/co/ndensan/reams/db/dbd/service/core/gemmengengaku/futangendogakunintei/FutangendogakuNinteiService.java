@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakuni
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4037HikazeNenkinTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4037HikazeNenkinTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.futangendogakunintei.IFutanGendogakuNinteiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -181,8 +183,15 @@ public class FutangendogakuNinteiService {
         Decimal 合計所得金額 = null == 世帯員所得情報.get合計所得金額() ? Decimal.ZERO : 世帯員所得情報.get合計所得金額();
         Decimal 年金収入額 = null == 世帯員所得情報.get年金収入額() ? Decimal.ZERO : 世帯員所得情報.get年金収入額();
 
-        IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
-        RString result金額 = mapper.get非課税年金勘案額(被保険者番号, 処理日.getYear().minusYear(1).toDateString());
+//        IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
+        
+        IDbT4037HikazeNenkinTaishoshaMapper mapper = mapperProvider.create(IDbT4037HikazeNenkinTaishoshaMapper.class);
+        List<DbT4037HikazeNenkinTaishoshaEntity> results = mapper.select同一年金単位最新履歴(被保険者番号.getColumnValue(), 処理日.getYear().minusYear(1).toDateString());
+         RString result金額 = RString.EMPTY;
+        if (!results.isEmpty()) {
+            result金額 = results.get(0).getDtkingaku1();
+        }
+        
         Decimal 非課税年金勘案額 = (null == result金額 || RString.isNullOrEmpty(result金額)) ? Decimal.ZERO : new Decimal(result金額.toString());
         int result = 合計所得金額.add(年金収入額).add(非課税年金勘案額).compareTo(Decimal.valueOf(LONG_80000));
         if (result <= 0) {

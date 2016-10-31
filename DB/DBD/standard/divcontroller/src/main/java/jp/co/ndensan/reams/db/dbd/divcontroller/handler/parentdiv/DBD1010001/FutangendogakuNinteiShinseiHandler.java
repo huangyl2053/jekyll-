@@ -259,39 +259,45 @@ public class FutangendogakuNinteiShinseiHandler {
                 div.getDdlKyusochisha().setSelectedKey(SELECT_EMPTYKEY);
             }
         } else {
-            List<KeyValueDataSource> dataSources = new ArrayList<>();
-            dataSources.add(new KeyValueDataSource());
-            div.getTxtTekiyoYMD().setDisabled(false);
-            div.getTxtTekiyoYMD().clearValue();
-            div.getTxtYukoKigenYMD().setDisabled(false);
-            div.getTxtYukoKigenYMD().clearValue();
-            div.getDdlKyusochisha().setDisabled(true);
-            div.getDdlKyusochisha().setIsBlankLine(true);
-            div.getDdlKyusochisha().setDataSource(dataSources);
-            div.getDdlRiyoshaFutanDankai().setDisabled(true);
-            div.getDdlRiyoshaFutanDankai().setDataSource(dataSources);
-            div.getDdlKyoshitsuShubetsu().setDisabled(true);
-            div.getDdlKyoshitsuShubetsu().setDataSource(dataSources);
-            div.getChkKyokaiso().setDisabled(true);
-            div.getChkKyokaiso().setSelectedItemsByKey(new ArrayList<RString>());
-            div.getChkGekihenKanwa().setDisabled(true);
-            div.getChkGekihenKanwa().setSelectedItemsByKey(new ArrayList<RString>());
-            div.getDdlShokuhi().setDisabled(true);
-            div.getDdlShokuhi().setDataSource(dataSources);
-            div.getDdlUnitGataKoshitsu().setDisabled(true);
-            div.getDdlUnitGataKoshitsu().setDataSource(dataSources);
-            div.getDdlUnitGataJunKoshitsu().setDisabled(true);
-            div.getDdlUnitGataJunKoshitsu().setDataSource(dataSources);
-            div.getDdlJuraiGataKoshitsuTokuyo().setDisabled(true);
-            div.getDdlJuraiGataKoshitsuTokuyo().setDataSource(dataSources);
-            div.getDdlJuraiGataKoshitsuRoken().setDisabled(true);
-            div.getDdlJuraiGataKoshitsuRoken().setDataSource(dataSources);
-            div.getDdlTashoshitsu().setDisabled(true);
-            div.getDdlTashoshitsu().setDataSource(dataSources);
-            div.getBtnHiShoninRiyu().setDisabled(false);
-            div.getTxtHiShoninRiyu().setDisabled(false);
+           承認しない時関連項目処理();
         }
     }
+    
+    private void 承認しない時関連項目処理() {
+        List<KeyValueDataSource> dataSources = new ArrayList<>();
+        dataSources.add(new KeyValueDataSource());
+        div.getTxtTekiyoYMD().setDisabled(false);
+        div.getTxtTekiyoYMD().clearValue();
+        div.getTxtYukoKigenYMD().setDisabled(false);
+        div.getTxtYukoKigenYMD().clearValue();
+        div.getDdlKyusochisha().setDisabled(true);
+        div.getDdlKyusochisha().setIsBlankLine(true);
+        div.getDdlKyusochisha().setDataSource(dataSources);
+        div.getDdlRiyoshaFutanDankai().setDisabled(true);
+        div.getDdlRiyoshaFutanDankai().setDataSource(dataSources);
+        div.getDdlKyoshitsuShubetsu().setDisabled(true);
+        div.getDdlKyoshitsuShubetsu().setDataSource(dataSources);
+        div.getChkKyokaiso().setDisabled(true);
+        div.getChkKyokaiso().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getChkGekihenKanwa().setDisabled(true);
+        div.getChkGekihenKanwa().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getDdlShokuhi().setDisabled(true);
+        div.getDdlShokuhi().setDataSource(dataSources);
+        div.getDdlUnitGataKoshitsu().setDisabled(true);
+        div.getDdlUnitGataKoshitsu().setDataSource(dataSources);
+        div.getDdlUnitGataJunKoshitsu().setDisabled(true);
+        div.getDdlUnitGataJunKoshitsu().setDataSource(dataSources);
+        div.getDdlJuraiGataKoshitsuTokuyo().setDisabled(true);
+        div.getDdlJuraiGataKoshitsuTokuyo().setDataSource(dataSources);
+        div.getDdlJuraiGataKoshitsuRoken().setDisabled(true);
+        div.getDdlJuraiGataKoshitsuRoken().setDataSource(dataSources);
+        div.getDdlTashoshitsu().setDisabled(true);
+        div.getDdlTashoshitsu().setDataSource(dataSources);
+        div.getBtnHiShoninRiyu().setDisabled(false);
+        div.getTxtHiShoninRiyu().setDisabled(false);
+    }
+    
+    
 
     /**
      * 「申請情報を確定する」ボタンの処理
@@ -370,7 +376,6 @@ public class FutangendogakuNinteiShinseiHandler {
         HaiguuJohoEntity 配偶者Entity = FutangendogakuNinteiService.createInstance().find配偶者(
                 div.getCcdAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近());
         if (配偶者Entity == null || !配偶者Entity.isExists()) {
-            div.getRadHaigushaUmu().setSelectedKey(SELECT_KEY1);
             div.getTxtHaigushaShikibetsuCode().clearDomain();
             div.getTxtHaigushaShimeiKana().clearDomain();
             div.getTxtHaigushaShimei().clearDomain();
@@ -378,17 +383,8 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getTxtHaigushaRenrakusaki().clearDomain();
             div.getTxtHaigushaJusho1().clearDomain();
             div.getTxtHaigushaJusho2().clearDomain();
-            div.getRadHaigushaUmu().setDisabled(true);
-            div.getTxtHaigushaShikibetsuCode().setDisabled(true);
-            div.getTxtHaigushaShimeiKana().setDisabled(true);
-            div.getTxtHaigushaShimei().setDisabled(true);
-            div.getTxtHaigushaUmareYMD().setDisabled(true);
-            div.getTxtHaigushaRenrakusaki().setDisabled(true);
-            div.getTxtHaigushaJusho1().setDisabled(true);
-            div.getTxtHaigushaJusho2().setDisabled(true);
             return ResponseData.of(div).addMessage(DbdInformationMessages.配偶者_取得失敗.getMessage()).respond();
         } else if (HaigushaKazeiKubun.空白.getコード().equals(配偶者Entity.get課税区分())) {
-            div.getRadHaigushaUmu().setSelectedKey(SELECT_KEY0);
             div.getTxtHaigushaShikibetsuCode().setDomain(配偶者Entity.get個人().get識別コード());
             div.getTxtHaigushaShimeiKana().setDomain(配偶者Entity.get個人().get名称().getKana());
             div.getTxtHaigushaShimei().setDomain(配偶者Entity.get個人().get名称().getName());
@@ -408,7 +404,6 @@ public class FutangendogakuNinteiShinseiHandler {
             AccessLogger.log(AccessLogType.照会, PersonalData.of(配偶者Entity.get個人().get識別コード()));
             return ResponseData.of(div).addMessage(DbdInformationMessages.配偶者_所得_取得失敗.getMessage()).respond();
         } else {
-            div.getRadHaigushaUmu().setSelectedKey(SELECT_KEY0);
             div.getTxtHaigushaShikibetsuCode().setDomain(配偶者Entity.get個人().get識別コード());
             div.getTxtHaigushaShimeiKana().setDomain(配偶者Entity.get個人().get名称().getKana());
             div.getTxtHaigushaShimei().setDomain(配偶者Entity.get個人().get名称().getName());
@@ -416,7 +411,7 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getTxtHaigushaRenrakusaki().setDomain(配偶者Entity.get個人().get連絡先１());
             div.getTxtHaigushaJusho1().setDomain(new AtenaJusho(配偶者Entity.get個人().get住所().get住所()));
             div.getTxtHaigushaJusho2().setDomain(new AtenaJusho(配偶者Entity.get現住所と異なる本年1月1日住所()));
-            div.getRadHaigushaKazeiKubun().setSelectedKey(配偶者Entity.get課税区分());
+            div.getRadHaigushaKazeiKubun().setSelectedKey(HaigushaKazeiKubun.課税.getコード().equals(配偶者Entity.get課税区分()) ? SELECT_KEY0 : SELECT_KEY1);
             div.getRadHaigushaUmu().setDisabled(false);
             div.getTxtHaigushaShikibetsuCode().setDisabled(false);
             div.getTxtHaigushaShimeiKana().setDisabled(false);
@@ -475,8 +470,11 @@ public class FutangendogakuNinteiShinseiHandler {
             set負担段階();
             set旧措置();
             set居室種類();
-
             set負担限度額();
+        }
+        
+        if (SELECT_KEY1.equals(div.getRadKetteiKubun().getSelectedKey())) {
+            承認しない時関連項目処理();
         }
     }
 
