@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinteiChosaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,10 +30,10 @@ public class NinteiChosaDiv extends Panel {
     private TextBox txtNinteiChosainName;
     @JsonProperty("txtNinteiChosaItakusakiCode")
     private TextBoxCode txtNinteiChosaItakusakiCode;
-    @JsonProperty("txtNinteiChosaItakusakiName")
-    private TextBox txtNinteiChosaItakusakiName;
     @JsonProperty("btnItakusakiGuide")
     private ButtonDialog btnItakusakiGuide;
+    @JsonProperty("txtNinteiChosaItakusakiName")
+    private TextBox txtNinteiChosaItakusakiName;
     @JsonProperty("btnChosainJohoClear")
     private Button btnChosainJohoClear;
     @JsonProperty("txtNinteiChosaYubinNo")
@@ -130,24 +130,6 @@ public class NinteiChosaDiv extends Panel {
     }
 
     /*
-     * gettxtNinteiChosaItakusakiName
-     * @return txtNinteiChosaItakusakiName
-     */
-    @JsonProperty("txtNinteiChosaItakusakiName")
-    public TextBox getTxtNinteiChosaItakusakiName() {
-        return txtNinteiChosaItakusakiName;
-    }
-
-    /*
-     * settxtNinteiChosaItakusakiName
-     * @param txtNinteiChosaItakusakiName txtNinteiChosaItakusakiName
-     */
-    @JsonProperty("txtNinteiChosaItakusakiName")
-    public void setTxtNinteiChosaItakusakiName(TextBox txtNinteiChosaItakusakiName) {
-        this.txtNinteiChosaItakusakiName = txtNinteiChosaItakusakiName;
-    }
-
-    /*
      * getbtnItakusakiGuide
      * @return btnItakusakiGuide
      */
@@ -163,6 +145,24 @@ public class NinteiChosaDiv extends Panel {
     @JsonProperty("btnItakusakiGuide")
     public void setBtnItakusakiGuide(ButtonDialog btnItakusakiGuide) {
         this.btnItakusakiGuide = btnItakusakiGuide;
+    }
+
+    /*
+     * gettxtNinteiChosaItakusakiName
+     * @return txtNinteiChosaItakusakiName
+     */
+    @JsonProperty("txtNinteiChosaItakusakiName")
+    public TextBox getTxtNinteiChosaItakusakiName() {
+        return txtNinteiChosaItakusakiName;
+    }
+
+    /*
+     * settxtNinteiChosaItakusakiName
+     * @param txtNinteiChosaItakusakiName txtNinteiChosaItakusakiName
+     */
+    @JsonProperty("txtNinteiChosaItakusakiName")
+    public void setTxtNinteiChosaItakusakiName(TextBox txtNinteiChosaItakusakiName) {
+        this.txtNinteiChosaItakusakiName = txtNinteiChosaItakusakiName;
     }
 
     /*

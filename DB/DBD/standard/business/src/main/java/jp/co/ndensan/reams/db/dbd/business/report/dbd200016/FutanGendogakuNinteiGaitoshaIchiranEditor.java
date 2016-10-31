@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd200016;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
@@ -73,6 +74,7 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
     private static final RString 星 = new RString("＊");
     private static final RString 有 = new RString("有");
     private static final RString 被保険者番号 = new RString("被保険者番号");
+    private final SetaiHyoji 世帯表示;
 
     /**
      * インスタンスを生成します。
@@ -83,15 +85,17 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
      * @param 導入団体 Association
      * @param 出力順 IOutputOrder
      * @param index int
+     * @param 世帯表示 SetaiHyoji
      */
     public FutanGendogakuNinteiGaitoshaIchiranEditor(RDateTime 作成日時, TargetList 対象リスト,
-            NinteishaListSakuseiEntity 負担限度額認定者リストEntity, Association 導入団体, IOutputOrder 出力順, int index) {
+            NinteishaListSakuseiEntity 負担限度額認定者リストEntity, Association 導入団体, IOutputOrder 出力順, int index, SetaiHyoji 世帯表示) {
         this.作成日時 = 作成日時;
         this.対象リスト = 対象リスト;
         this.負担限度額認定者リストEntity = 負担限度額認定者リストEntity;
         this.導入団体 = 導入団体;
         this.出力順 = 出力順;
         this.index = index;
+        this.世帯表示 = 世帯表示;
     }
 
     @Override
@@ -101,9 +105,13 @@ public class FutanGendogakuNinteiGaitoshaIchiranEditor implements IFutanGendogak
             edit被保険者情報Upper(source);
             edit被保険者情報Center(source);
             edit被保険者情報Lower(source);
-            edit世帯員(source);
+            if (SetaiHyoji.表示する.equals(世帯表示)) {
+                edit世帯員(source);
+            }
         } else {
-            edit世帯員(source);
+            if (SetaiHyoji.表示する.equals(世帯表示)) {
+                edit世帯員(source);
+            }
         }
         setAccessLogEditor(source);
 

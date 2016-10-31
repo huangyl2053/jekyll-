@@ -245,13 +245,16 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGenga
                 出力条件.add(通知書未発行者);
             }
             if (processParameter.is減額適用中者抽出()) {
-                出力条件.add(減額適用中者.concat(processParameter.get減額適用中者抽出基準日().toString())
+                出力条件.add(減額適用中者.concat(processParameter.get減額適用中者抽出基準日().wareki()
+                        .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
                         .concat(時点で減額適用中の被保険者));
             }
             if (processParameter.is減額終了日抽出()) {
-                出力条件.add(減額終了日抽出.concat(processParameter.get減額終了日範囲From().toString())
+                出力条件.add(減額終了日抽出.concat(processParameter.get減額終了日範囲From().wareki()
+                        .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
                         .concat(終了)
-                        .concat(processParameter.get減額終了日範囲To().toString()));
+                        .concat(processParameter.get減額終了日範囲To().wareki().eraType(EraType.KANJI)
+                                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()));
             }
         }
         if (processParameter.is保険料完納者出力()) {

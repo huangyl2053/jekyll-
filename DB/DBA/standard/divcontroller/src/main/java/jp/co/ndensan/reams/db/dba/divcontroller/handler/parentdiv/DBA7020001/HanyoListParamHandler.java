@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -51,6 +52,7 @@ public class HanyoListParamHandler {
     private static final RString モード3 = new RString("他市町村住所地特例者");
     private static final RString モード4 = new RString("老齢福祉年金受給者");
     private static final RString モード5 = new RString("生活保護受給者");
+    private static final RString 全市町村 = new RString("000000");
 
     private final HanyoListParamDiv div;
 
@@ -408,11 +410,21 @@ public class HanyoListParamHandler {
         生活保護受給者保存(parameter);
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
-        if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
-                && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
-            市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
-            市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
+        RString 保険者コード = RString.EMPTY;
+        if (div.getCcdHanyoListAtenaSelect().get保険者() != null) {
+            if (!div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
+                市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
+            }
+            if (!div.getCcdHanyoListAtenaSelect().get保険者().get証記載保険者番号().isEmpty()) {
+                保険者コード = div.getCcdHanyoListAtenaSelect().get保険者().get証記載保険者番号().value();
+            } else {
+                保険者コード = 全市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称())) {
+                市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
+            }
         }
+        parameter.setHokenshaCode(保険者コード);
         parameter.setShichoson_Code(市町村コード);
         parameter.setShichoson_Name(市町村名称);
         AtenaSelectBatchParameter 宛名抽出条件 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件();
@@ -449,11 +461,21 @@ public class HanyoListParamHandler {
         老齢福祉年金受給者保存(parameter);
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
-        if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
-                && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
-            市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
-            市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
+        RString 保険者コード = RString.EMPTY;
+        if (div.getCcdHanyoListAtenaSelect().get保険者() != null) {
+            if (!div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
+                市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
+            }
+            if (!div.getCcdHanyoListAtenaSelect().get保険者().get証記載保険者番号().isEmpty()) {
+                保険者コード = div.getCcdHanyoListAtenaSelect().get保険者().get証記載保険者番号().value();
+            } else {
+                保険者コード = 全市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称())) {
+                市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
+            }
         }
+        parameter.setHokenshaCode(保険者コード);
         parameter.setShichoson_Code(市町村コード);
         parameter.setShichoson_Name(市町村名称);
         AtenaSelectBatchParameter 宛名抽出条件 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件();
@@ -490,11 +512,21 @@ public class HanyoListParamHandler {
         他市町村住所地特例者保存(parameter);
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
-        if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
-                && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
-            市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
-            市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
+        RString 保険者コード = RString.EMPTY;
+        if (div.getCcdHanyoListAtenaSelect().get保険者() != null) {
+            if (!div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
+                市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
+            }
+            if (!div.getCcdHanyoListAtenaSelect().get保険者().get証記載保険者番号().isEmpty()) {
+                保険者コード = div.getCcdHanyoListAtenaSelect().get保険者().get証記載保険者番号().value();
+            } else {
+                保険者コード = 全市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称())) {
+                市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
+            }
         }
+        parameter.setHokenshaCode(保険者コード);
         parameter.setShichoson_Code(市町村コード);
         parameter.setShichoson_Name(市町村名称);
         AtenaSelectBatchParameter 宛名抽出条件 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件();
@@ -531,11 +563,21 @@ public class HanyoListParamHandler {
         適用除外者保存(parameter);
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
-        if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
-                && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
-            市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
-            市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
+        RString 保険者コード = RString.EMPTY;
+        if (div.getCcdHanyoListAtenaSelect().get保険者() != null) {
+            if (!div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
+                市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
+            }
+            if (!div.getCcdHanyoListAtenaSelect().get保険者().get証記載保険者番号().isEmpty()) {
+                保険者コード = div.getCcdHanyoListAtenaSelect().get保険者().get証記載保険者番号().value();
+            } else {
+                保険者コード = 全市町村;
+            }
+            if (!RString.isNullOrEmpty(div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称())) {
+                市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
+            }
         }
+        parameter.setHokenshaCode(保険者コード);
         parameter.setShichoson_Code(市町村コード);
         parameter.setShichoson_Name(市町村名称);
         AtenaSelectBatchParameter 宛名抽出条件 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件();
@@ -934,7 +976,15 @@ public class HanyoListParamHandler {
         if (年齢基準日 != null) {
             div.getCcdHanyoListAtenaSelect().set年齢基準日(年齢基準日);
         }
-        div.getCcdHanyoListAtenaSelect().set保険者();
+        RString 保険者コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hokenshaCode"));
+        RString 市町村コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("shichoson_Code"));
+        if (div.getCcdHanyoListAtenaSelect().get保険者() != null) {
+            if (全市町村.equals(保険者コード)) {
+                div.getCcdHanyoListAtenaSelect().set保険者();
+            } else {
+                div.getCcdHanyoListAtenaSelect().set保険者(new LasdecCode(市町村コード));
+            }
+        }
         RString 地区区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku_Kubun"));
         div.getCcdHanyoListAtenaSelect().set地区(地区区分);
         div.getCcdHanyoListAtenaSelect().onChange_SelectChiku();

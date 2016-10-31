@@ -279,7 +279,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         TaishoSetaiinEntity 対象世帯員 = entity.get対象世帯員();
         対象世帯員.setAtenaInnjiKubun(null == 宛先 ? RString.EMPTY : RSTRING_1);
         IJusho 住所 = 宛名.get住所();
-        int 文字列長 = 住所.get住所().length() + 住所.get方書().getColumnValue().length() + 住所.get番地().toString().length();
+        int 文字列長 = 住所.get住所().length() + 住所.get方書().getColumnValue().length() + 住所.get番地().getBanchi().getColumnValue().length();
         if (INT_80 < 文字列長) {
             文字切れflag = true;
             対象世帯員.setInnjiGirisiamojiKubun(true);
@@ -404,43 +404,43 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     }
 
     private void write帳票(List<CreateTaishoSetaiyinEntity> taishoSetaiyinList) {
+        if (RSTRING_1.equals(taishoSetaiyinList.get(INT_0).get対象世帯員().getShuturyokuUmu())) {
+            KijunShunyugakuTekiyoShinseishoEntity kijunEntity = new KijunShunyugakuTekiyoShinseishoEntity();
+            KijunShunyugakuTekiyoShinseishoEntity kijunEntity1 = new KijunShunyugakuTekiyoShinseishoEntity();
 
-        KijunShunyugakuTekiyoShinseishoEntity kijunEntity = new KijunShunyugakuTekiyoShinseishoEntity();
-        KijunShunyugakuTekiyoShinseishoEntity kijunEntity1 = new KijunShunyugakuTekiyoShinseishoEntity();
-
-        for (CreateTaishoSetaiyinEntity taiEntity : taishoSetaiyinList) {
-            IAtesaki 宛先 = AtesakiFactory.createInstance(taiEntity.get宛先());
-            IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createKojin(taiEntity.get宛名());
-            this.基準収入額適用お知ら(taiEntity, kijunEntity, 宛先, taishoSetaiyinList.size());
-            this.基準収入額適用申請書(taiEntity, kijunEntity1, 宛名);
-            if (INT_3 < taishoSetaiyinList.size() && index164 == INT_3) {
-                this.write申請書出力帳票(taishoSetaiyinList.get(0).get対象世帯員(), kijunEntity1);
-                kijunEntity1 = new KijunShunyugakuTekiyoShinseishoEntity();
-                index164 = INT_0;
+            for (CreateTaishoSetaiyinEntity taiEntity : taishoSetaiyinList) {
+                IAtesaki 宛先 = AtesakiFactory.createInstance(taiEntity.get宛先());
+                IShikibetsuTaisho 宛名 = ShikibetsuTaishoFactory.createKojin(taiEntity.get宛名());
+                this.基準収入額適用お知ら(taiEntity, kijunEntity, 宛先, taishoSetaiyinList.size());
+                this.基準収入額適用申請書(taiEntity, kijunEntity1, 宛名);
+                if (INT_3 < taishoSetaiyinList.size() && index164 == INT_3) {
+                    this.write申請書出力帳票(taishoSetaiyinList.get(INT_0).get対象世帯員(), kijunEntity1);
+                    kijunEntity1 = new KijunShunyugakuTekiyoShinseishoEntity();
+                    index164 = INT_0;
+                }
+                index++;
+                index164++;
             }
-            index++;
-            index164++;
+            if (index164 != INT_1) {
+                this.write申請書出力帳票(taishoSetaiyinList.get(INT_0).get対象世帯員(), kijunEntity1);
+            }
+            this.writeお知らせ通知書帳票(taishoSetaiyinList.get(INT_0).get対象世帯員(), kijunEntity);
+            index = 1;
+            index164 = 1;
         }
-        if (index164 != INT_3) {
-            this.write申請書出力帳票(taishoSetaiyinList.get(0).get対象世帯員(), kijunEntity1);
-        }
-        this.writeお知らせ通知書帳票(taishoSetaiyinList.get(0).get対象世帯員(), kijunEntity);
-        index = 1;
-        index164 = 1;
-
     }
 
     private void writeお知らせ通知書帳票(TaishoSetaiinEntity 対象世帯員,
             KijunShunyugakuTekiyoShinseishoEntity kijunEntity) {
         if (文字切れflag) {
-            if (this.parameter.getお知らせ通知書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
+            if (this.parameter.getお知らせ通知書出力フラグ()) {
                 KijunShunyugakuTekiyoOshiraseTsuchishoReport kijunReport
                         = new KijunShunyugakuTekiyoOshiraseTsuchishoReport(kijunEntity);
                 kijunReport.writeBy(dBC100063SourceWriter1);
                 index++;
             }
         } else {
-            if (this.parameter.getお知らせ通知書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
+            if (this.parameter.getお知らせ通知書出力フラグ()) {
                 KijunShunyugakuTekiyoOshiraseTsuchishoReport kijunReport
                         = new KijunShunyugakuTekiyoOshiraseTsuchishoReport(kijunEntity);
                 kijunReport.writeBy(dBC100063SourceWriter0);
@@ -454,13 +454,11 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     private void write申請書出力帳票(TaishoSetaiinEntity 対象世帯員,
             KijunShunyugakuTekiyoShinseishoEntity kijunEntity1) {
         if (文字切れflag) {
-            if (this.parameter.get申請書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
+            if (this.parameter.get申請書出力フラグ()) {
                 KijunShunyugakuTekiyoShinseishoReport dbc64Report = new KijunShunyugakuTekiyoShinseishoReport(kijunEntity1);
                 dbc64Report.writeBy(dBC100064SourceWriter1);
             }
-
         } else {
-            対象世帯員.setInnjiGirisiamojiKubun(false);
             if (this.parameter.get申請書出力フラグ() && RSTRING_1.equals(対象世帯員.getShuturyokuUmu())) {
                 KijunShunyugakuTekiyoShinseishoReport dbc64Report = new KijunShunyugakuTekiyoShinseishoReport(kijunEntity1);
                 dbc64Report.writeBy(dBC100064SourceWriter0);
@@ -546,7 +544,7 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             kijunEntity1.set被保険者性別１(taiEntity.get対象世帯員().getSex());
             IJusho 宛名住所 = 宛名.get住所();
             RString 住所 = 宛名住所.get住所()
-                    .concat(宛名住所.get方書().getColumnValue()).concat(宛名住所.get番地().toString());
+                    .concat(宛名住所.get方書().getColumnValue()).concat(宛名住所.get番地().getBanchi().getColumnValue());
             kijunEntity1.set住所１(住所.substringReturnAsPossible(INT_0, INT_50));
             kijunEntity1.set住所２(住所.substringReturnAsPossible(INT_50));
             kijunEntity1.set連絡先(taiEntity.get対象世帯員().getRennrakusaki());

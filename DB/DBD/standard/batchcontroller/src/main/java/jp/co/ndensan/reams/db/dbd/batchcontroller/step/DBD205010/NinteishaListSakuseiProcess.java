@@ -195,7 +195,7 @@ public class NinteishaListSakuseiProcess extends BatchKeyBreakBase<NinteishaList
         i++;
         FutanGendogakuNinteiGaitoshaIchiranReport find
                 = new FutanGendogakuNinteiGaitoshaIchiranReport(parameter.get帳票作成日時(),
-                        parameter.get対象リスト(), t, association, outputOrder);
+                        parameter.get対象リスト(), t, association, outputOrder, parameter.get世帯表示());
         find.writeBy(reportSourceWriter);
 
         personalDataList.add(toPersonalData(t));
@@ -226,19 +226,19 @@ public class NinteishaListSakuseiProcess extends BatchKeyBreakBase<NinteishaList
                 if (0 == index) {
                     KakuninListCsvEntity eucCsvEntity = new KakuninListCsvEntity();
                     NinteishaListSakuseiManager.createInstance().連番ありCSV情報設定(eucCsvEntity, t, i,
-                            parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), true, true, index);
+                            parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), true, true, index, parameter.get世帯表示());
                     eucCsvWriter.writeLine(eucCsvEntity);
                 } else {
                     KakuninListCsvEntity eucCsvEntity = new KakuninListCsvEntity();
                     NinteishaListSakuseiManager.createInstance().連番ありCSV情報設定(eucCsvEntity, t, i,
-                            parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), false, true, index);
+                            parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), false, true, index, parameter.get世帯表示());
                     eucCsvWriter.writeLine(eucCsvEntity);
                 }
             }
         } else {
             KakuninListCsvEntity eucCsvEntity = new KakuninListCsvEntity();
             NinteishaListSakuseiManager.createInstance().連番ありCSV情報設定(eucCsvEntity, t, i,
-                    parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), true, false, 0);
+                    parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), true, false, 0, parameter.get世帯表示());
             eucCsvWriter.writeLine(eucCsvEntity);
         }
     }
@@ -249,20 +249,20 @@ public class NinteishaListSakuseiProcess extends BatchKeyBreakBase<NinteishaList
                 if (0 == index) {
                     KakuninListNoRenbanCsvEntity eucCsvEntity = new KakuninListNoRenbanCsvEntity();
                     NinteishaListSakuseiManager.createInstance().連番なしCSV情報設定(eucCsvEntity, t,
-                            parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), true, true, index);
+                            parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), true, true, index, parameter.get世帯表示());
                     eucNoRenbanCsvWriter.writeLine(eucCsvEntity);
 
                 } else {
                     KakuninListNoRenbanCsvEntity eucCsvEntity = new KakuninListNoRenbanCsvEntity();
                     NinteishaListSakuseiManager.createInstance().連番なしCSV情報設定(eucCsvEntity, t,
-                            parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), false, true, index);
+                            parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), false, true, index, parameter.get世帯表示());
                     eucNoRenbanCsvWriter.writeLine(eucCsvEntity);
                 }
             }
         } else {
             KakuninListNoRenbanCsvEntity eucCsvEntity = new KakuninListNoRenbanCsvEntity();
             NinteishaListSakuseiManager.createInstance().連番なしCSV情報設定(eucCsvEntity, t,
-                    parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), true, false, 0);
+                    parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), true, false, 0, parameter.get世帯表示());
         }
     }
 
