@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1140011;
 
 import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDateKanriBusiness;
-import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA140010.DBA140010_JukiRendoTorokushaListParameter;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.BatchParamterInfoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.DBA1140011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.JukiNendoTorokushaListDiv;
@@ -31,9 +31,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class JukiNendoTorokushaList {
 
     private final JukiRendoTorokushaListFinder finder;
-    // TODO 帳票出力順の初期化(技術点に提出しました※QA#73393)
-//    private static final SubGyomuCode サブ業務コード = new SubGyomuCode("DBA");
-//    private static final ReportId 帳票ID = new ReportId("DBA200007_JukiRendoTorokuList");
 
     /**
      * コンストラクタです。
@@ -53,7 +50,7 @@ public class JukiNendoTorokushaList {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
         DbT7022ShoriDateKanriBusiness business = finder.getKaishiShuryobi();
         if (business == null || (business.getTaishoKaishiYMD() == null
-                                 && business.getTaishoShuryoYMD() == null)) {
+                && business.getTaishoShuryoYMD() == null)) {
             div.getBatchParamterInfo().getTxtkonkaikaishi().setValue(nowDate);
             div.getBatchParamterInfo().getTxtkonkaishuryo().setValue(nowDate);
 
@@ -79,8 +76,6 @@ public class JukiNendoTorokushaList {
                         .setValue(nowDate);
             }
         }
-        // TODO 帳票出力順の初期化(技術点に提出しました※QA#73393)
-//        loadChohyoMode(サブ業務コード, 帳票ID);
         div.getBatchParamterInfo().getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA200007.getReportId());
         return ResponseData.of(div).respond();
     }

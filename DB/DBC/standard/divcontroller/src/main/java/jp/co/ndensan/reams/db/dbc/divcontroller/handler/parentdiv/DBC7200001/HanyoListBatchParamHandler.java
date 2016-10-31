@@ -179,7 +179,7 @@ public class HanyoListBatchParamHandler {
                 div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
             } else {
                 div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
-                        new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
+                        new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("市町村コード"))));
             }
         }
         div.getChushutsuJokenPanel().getDdlTaishoNendo().setSelectedValue(

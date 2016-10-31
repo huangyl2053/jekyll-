@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShi
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -63,19 +62,21 @@ public class JyutakuKayisyuHi {
      * @return 住宅改修費表示画面
      */
     public ResponseData<JyutakuKayisyuHiDiv> onClick_BtnZengetsu(JyutakuKayisyuHiDiv div) {
-        RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
-        RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
-        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        KyufuJissekiPrmBusiness 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         KyufujissekiKihon 給付実績基本情報 = getCsData_A();
+        RString 整理番号 = 給付実績基本情報.get整理番号();
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
+        NyuryokuShikibetsuNo 様式番号 = 給付実績基本情報.get入力識別番号();
+        KyufuJissekiPrmBusiness 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         FlexibleYearMonth 直近サービス提供年月 = getHandler(div).get直近サービス提供年月(new RString("1"),
                 サービス提供年月, 引き継ぎ情報, getCsData_H());
-        getHandler(div).load共有子Div(引き継ぎ情報, 整理番号, 直近サービス提供年月, new NyuryokuShikibetsuNo(様式番号));
+        getHandler(div).load共有子Div(引き継ぎ情報, 整理番号, 直近サービス提供年月, 様式番号);
         getHandler(div).setデータグリッド(引き継ぎ情報, getCsData_H(),
                 直近サービス提供年月, get給付実績ヘッダ情報2(直近サービス提供年月, 整理番号,
                         給付実績基本情報.get入力識別番号()));
-        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
-        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
+        if (div.getCcdKyufuJissekiHeader().getサービス提供年月() != null) {
+            FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+            ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -86,19 +87,21 @@ public class JyutakuKayisyuHi {
      * @return 住宅改修費表示画面
      */
     public ResponseData<JyutakuKayisyuHiDiv> onClick_BtnJigetsu(JyutakuKayisyuHiDiv div) {
-        RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
-        RDate サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月();
-        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        KyufuJissekiPrmBusiness 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         KyufujissekiKihon 給付実績基本情報 = getCsData_A();
+        RString 整理番号 = 給付実績基本情報.get整理番号();
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
+        NyuryokuShikibetsuNo 様式番号 = 給付実績基本情報.get入力識別番号();
+        KyufuJissekiPrmBusiness 引き継ぎ情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         FlexibleYearMonth 直近サービス提供年月 = getHandler(div).get直近サービス提供年月(new RString("0"),
                 サービス提供年月, 引き継ぎ情報, getCsData_H());
-        getHandler(div).load共有子Div(引き継ぎ情報, 整理番号, 直近サービス提供年月, new NyuryokuShikibetsuNo(様式番号));
+        getHandler(div).load共有子Div(引き継ぎ情報, 整理番号, 直近サービス提供年月, 様式番号);
         getHandler(div).setデータグリッド(引き継ぎ情報, getCsData_H(),
                 直近サービス提供年月, get給付実績ヘッダ情報2(直近サービス提供年月,
                         整理番号, 給付実績基本情報.get入力識別番号()));
-        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
-        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
+        if (div.getCcdKyufuJissekiHeader().getサービス提供年月() != null) {
+            FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+            ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
+        }
         return ResponseData.of(div).respond();
     }
 

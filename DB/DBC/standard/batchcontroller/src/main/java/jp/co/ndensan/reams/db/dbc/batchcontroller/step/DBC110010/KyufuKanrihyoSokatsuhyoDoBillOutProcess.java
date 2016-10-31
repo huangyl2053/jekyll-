@@ -386,7 +386,6 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
             SofuFileSakuseiEntity sofuFileSakuseiEntity = 送付ファイル用EntityList.get(i);
             List<KyufukanrihyoOutDoBillOutEntity> 給付管理票送付用 = sofuFileSakuseiEntity.get給付管理票送付用EntityList();
             RString spoolWorkPath = Path.getTmpDirectoryPath();
-
             csvFileName = ファイル名_前.concat(sofuFileSakuseiEntity.get保険者番号()).
                     concat(parameter.get処理年月().toDateString()).concat(拡張子_TEMP).concat(ファイル名_後);
             eucFilePath = Path.combinePath(spoolWorkPath, csvFileName);
@@ -399,7 +398,7 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
                     build();
             KyufukanrihyoOutSofuFairucontrolcsvEntity controlEntity = getControlEntity(レコード番号カウンター, sofuFileSakuseiEntity);
             eucCsvWriter.writeLine(controlEntity);
-            if (給付管理票送付用.size() < 1) {
+            if (0 < 給付管理票送付用.size()) {
                 RString 給付管理票送付用_保険者番号 = 給付管理票送付用.get(0).get自己作成管理一時Entity().getHokenshaNo();
                 RString 給付管理票送付用_利用年月 = new RString(給付管理票送付用.get(0).get自己作成管理一時Entity().getRiyoYM().toString());
                 RString 給付管理票送付用_被保険者番号 = 給付管理票送付用.get(0).get自己作成管理一時Entity().getHihokenshaNo().getColumnValue();
@@ -544,8 +543,8 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
         controlEntity.set事業所番号(RSTRING_0);
         controlEntity.set都道府県番号(RSTRING_0);
         controlEntity.set媒体区分(DbBusinessConfig
-                .get(ConfigNameDBC.国保連取込媒体_給付管理Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付));
-        controlEntity.set処理対象年月(parameter.get処理年月().seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
+                .get(ConfigNameDBC.国保連送付媒体_給付管理票Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+        controlEntity.set処理対象年月(parameter.get処理年月().seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString());
         controlEntity.setファイル管理番号(RSTRING_0);
         return controlEntity;
     }
@@ -598,20 +597,27 @@ public class KyufuKanrihyoSokatsuhyoDoBillOutProcess extends BatchKeyBreakBase<K
         FlexibleYearMonth 市町村脱退年月日 = getFlexibleYearMonth(被保険者一時Entity.getShichosonDattaiYmd());
 
         if (認定有効期間_編集区分_1.equals(DbBusinessConfig.get(ConfigNameDBU.保険者発足情報_認定有効期間_編集区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
-            meisaiEntity.set限度額適用期間_開始(trimRString(new RString(自己作成管理一時Entity.getShikyuGendoKaishiYM().toString())));
+            meisaiEntity.set限度額適用期間_開始(trimRString(doパターン54(支給限度有効開始年月)));
         } else if (認定有効期間_編集区分_2.equals(DbBusinessConfig.get(ConfigNameDBU.保険者発足情報_認定有効期間_編集区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             if (!支給限度有効終了年月.isEmpty() && !市町村加入年月日.isEmpty() && !支給限度有効開始年月.isEmpty() && !市町村加入年月日.isEmpty()
                     && 支給限度有効開始年月.isBefore(市町村加入年月日) && 市町村加入年月日.isBeforeOrEquals(支給限度有効終了年月)
                     && 市町村脱退年月日.isEmpty()) {
-                meisaiEntity.set限度額適用期間_開始(trimRString(new RString(市町村加入年月日.toString())));
+                meisaiEntity.set限度額適用期間_開始(trimRString(doパターン54(市町村加入年月日)));
             } else if (!市町村加入年月日.isEmpty() && !支給限度有効開始年月.isEmpty() && !支給限度有効終了年月.isEmpty()
                     && 支給限度有効開始年月.isBefore(市町村加入年月日) && 市町村加入年月日.isBeforeOrEquals(支給限度有効終了年月)
                     && !市町村脱退年月日.isEmpty() && 支給限度有効終了年月.isBeforeOrEquals(市町村脱退年月日)) {
-                meisaiEntity.set限度額適用期間_開始(trimRString(new RString(市町村加入年月日.toString())));
+                meisaiEntity.set限度額適用期間_開始(trimRString(doパターン54(市町村加入年月日)));
             } else {
-                meisaiEntity.set限度額適用期間_開始(trimRString(new RString(支給限度有効開始年月.toString())));
+                meisaiEntity.set限度額適用期間_開始(trimRString(doパターン54(支給限度有効開始年月)));
             }
         }
+    }
+
+    private RString doパターン54(FlexibleYearMonth 年月) {
+        if (null == 年月 || 年月.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
     private FlexibleYearMonth getFlexibleYearMonth(FlexibleDate fb) {
