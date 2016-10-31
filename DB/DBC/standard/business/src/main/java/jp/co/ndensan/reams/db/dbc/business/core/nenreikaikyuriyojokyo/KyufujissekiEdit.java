@@ -156,6 +156,7 @@ public class KyufujissekiEdit {
     }
 
     private void set集計番号(RString serviceSyuruiCode, TmpKyufujissekiRelateEntity tmpEntity) {
+        tmpEntity.setShuukeibangou(RSTRING_43);
         set集計番号1(serviceSyuruiCode, tmpEntity);
         set集計番号2(serviceSyuruiCode, tmpEntity);
         set集計番号3(serviceSyuruiCode, tmpEntity);
@@ -239,8 +240,6 @@ public class KyufujissekiEdit {
             tmpEntity.setShuukeibangou(RSTRING_41);
         } else if (ServiceCategoryShurui.医療施設.getコード().equals(serviceSyuruiCode)) {
             tmpEntity.setShuukeibangou(RSTRING_42);
-        } else {
-            tmpEntity.setShuukeibangou(RSTRING_43);
         }
     }
 
