@@ -147,6 +147,10 @@ public class HanyoListParamKyoufuKannrihyouHandler {
         BatchParameterMap restoreBatchParameterMap = div.getJokenFukugenHozonl().getBtnBatchParameterRestore()
                 .getRestoreBatchParameterMap();
         RDate 給付対象年月From = restoreBatchParameterMap.getParameterValue(RDate.class, KEY_給付対象年月FROM);
+        div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().clearFromValue();
+        div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().clearToValue();
+        div.getChushutsuJokenPanel().getＣｃｄKyotakuSienJigyoshaBango().clear();
+        div.getChushutsuJokenPanel().getCcdItakusakiSienJigyoshaBango().clear();
         if (給付対象年月From != null) {
             div.getChushutsuJokenPanel().getTxtKyufuTaishoNengetu().setFromValue(給付対象年月From);
         }
