@@ -17,7 +17,8 @@ import lombok.Setter;
  * 住基連動登録者リストのバッチ処理クラスのパラメータ。
  *
  * @reamsid_L DBA-0560-020 xuyannan
- * @deprecated 削除予定. {@link jp.co.ndensan.reams.db.dba.definition.processprm.dba140010.JyukiRendoTorokushaListBatchProcessParameter}を利用してください。
+ * @deprecated 削除予定.
+ * {@link jp.co.ndensan.reams.db.dba.definition.processprm.dba140010.JyukiRendoTorokushaListBatchProcessParameter}を利用してください。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
@@ -46,6 +47,9 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
     private Code idouJiyu_tensyutu;
     private Code idouJiyu_sibou;
     private Code idouJiyu_tenkyo;
+    private RString psmShikibetsuTaisho;
+    private RString orderBy;
+    private boolean orderByFlag;
 
     /**
      * コンストラクタ。
@@ -103,7 +107,10 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
                 idouJiyu_tennyu,
                 idouJiyu_tensyutu,
                 idouJiyu_sibou,
-                idouJiyu_tenkyo
+                idouJiyu_tenkyo,
+                psmShikibetsuTaisho,
+                orderBy,
+                orderByFlag
         );
     }
 }
