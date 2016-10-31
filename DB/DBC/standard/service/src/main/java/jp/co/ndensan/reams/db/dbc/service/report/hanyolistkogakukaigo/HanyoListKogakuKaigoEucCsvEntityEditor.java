@@ -272,7 +272,8 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             csvEntity.set識別コード(識別コード != null
                     ? 識別コード.getColumnValue()
                     : RString.EMPTY);
-            csvEntity.set住民種別(entity.get宛名().getJuminShubetsuCode());
+            IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
+            csvEntity.set住民種別(宛名 != null && 宛名.get住民状態() != null ? 宛名.get住民状態().住民状態略称() : RString.EMPTY);
             AtenaMeisho 漢字氏名 = entity.get宛名().getKanjiShimei();
             csvEntity.set氏名(漢字氏名 != null
                     ? 漢字氏名.getColumnValue()
@@ -283,7 +284,6 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
                     : RString.EMPTY);
             FlexibleDate 生年月日 = entity.get宛名().getSeinengappiYMD();
             csvEntity.set生年月日(get日付項目(生年月日, parameter));
-            IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
             AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(),
                     宛名.get消除異動年月日());
             csvEntity.set年齢(ageCalculator.get年齢());
