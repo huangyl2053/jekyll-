@@ -479,11 +479,11 @@
         <id column="temp_taishoNendo" />
         <id column="temp_hokenshaNo" />
         <id column="temp_shikyuShinseishoSeiriNo" />
-        <association property="実績負担額データ"   resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
+        <association property="実績負担額データEntity"   resultMap="ResultMap_JissekiFutangakuDataTempEntity" />
         <association property="支給申請Entity"   resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.ResultMap_DbT3056KogakuShikyuShinseiEntity" />
         <association property="支給判定結果Entity"   resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity" />
         <association property="支給審査決定Entity"   resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3058KogakuShikyuShinsaKetteiEntity" />
-        <association property="給付対象者合計"   resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3055KogakuKyufuTaishoshaGokeiEntity" />
+        <association property="給付対象者合計Entity"   resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3055KogakuKyufuTaishoshaGokeiEntity" />
     </resultMap>
 
     <resultMap id="ResultMap_DbT3017MatchingEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.DbT3017MatchingEntity" autoMapping="true" >
