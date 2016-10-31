@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.rirekishusei;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.rirekishusei.RirekiShuseiMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.rirekishusei.RirekiShuseiRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -23,4 +24,12 @@ public interface IRirekiShuseiMapper {
      * @return 受給履歴
      */
     List<RirekiShuseiRelateEntity> getDataForLoad(RString 被保険者番号);
+
+    /**
+     * 受給者台帳の履歴番号を更新する。
+     *
+     * @param param 受給者台帳更新の項目
+     * @return 更新件数
+     */
+    int upd履歴番号(RirekiShuseiMapperParameter param);
 }
