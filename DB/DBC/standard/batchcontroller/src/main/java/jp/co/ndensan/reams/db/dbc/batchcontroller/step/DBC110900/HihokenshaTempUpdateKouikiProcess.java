@@ -26,7 +26,6 @@ public class HihokenshaTempUpdateKouikiProcess extends BatchProcessBase<Kakohore
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kakohorenjyohosakuseicommon.IKakohorenJyohoSakuseiCommonMapper."
             + "select被保険者台帳");
     private static final RString 被保険者一時TBL_NAME = new RString("DbWT1001Hihokensha");
-    private static final RString 処理結果リスト一時TBL_NAME = new RString("DbWT1002KokuhorenSakuseiError");
     private static final RString 広域内住所地特例フラグ_TRUE = new RString("1");
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 被保険者一時TBL;

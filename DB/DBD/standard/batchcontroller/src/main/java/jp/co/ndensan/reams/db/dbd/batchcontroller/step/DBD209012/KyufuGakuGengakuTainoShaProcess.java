@@ -85,8 +85,8 @@ public class KyufuGakuGengakuTainoShaProcess extends BatchProcessBase<KyufuGenga
     private static final RString 終了 = new RString("　～　終了：");
     private static final RString 保険料完納者出力 = new RString("【保険料完納者も出力】  ");
     private static final RString 帳票作成日時 = new RString("【作成日時】 ");
-    private static final RString TRUE = new RString("true");
-    private static final RString FALSE = new RString("false");
+    private static final RString TRUE = new RString("する");
+    private static final RString FALSE = new RString("しない");
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
