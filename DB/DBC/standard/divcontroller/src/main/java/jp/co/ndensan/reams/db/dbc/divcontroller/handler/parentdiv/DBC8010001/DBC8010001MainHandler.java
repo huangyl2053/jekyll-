@@ -50,8 +50,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class DBC8010001MainHandler {
 
     private final DBC8010001MainDiv div;
-    private KinyuKikanCode 代表金融機関コード;
-    private RString 振込グループコード;
     private static final int INDEXSTART = 0;
     private static final int INDEXEND = 6;
     private static final int INDEX_4 = 4;
@@ -101,8 +99,6 @@ public class DBC8010001MainHandler {
     private void init画面表示内容(RString メニューID, RString 振込単位, DBC8010001 dbc) {
         DBC8010001MainManager manager = new DBC8010001MainManager();
         DBC8010001 entity = manager.getFurikomiGroupItakushaRelateEntity(メニューID, 振込単位);
-        this.代表金融機関コード = entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getKinyuKikanCode();
-        this.振込グループコード = entity.getFurikomiGroupItakushaRelateEntity().get振込グループEntity().getFurikomiGroupCode();
         div.getItakusha().getTxtItakushaCode().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaCode());
         div.getItakusha().getTxtItakushamei().setValue(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushamei());
         div.getItakusha().setItakushaId(new RString(entity.getFurikomiGroupItakushaRelateEntity().get振込委託者RelateEntity().get(0).get振込委託者Entity().getItakushaId().toString()));
