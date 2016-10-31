@@ -37,6 +37,7 @@ public class ShinsakaiIinJohoTorokuHandler {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 廃止 = new RString("廃止");
+    private static final RString 有効 = new RString("有効");
     private static final RString KEY_廃止 = new RString("key0");
     private static final RString KEY_有効 = new RString("key1");
     private final ShinsakaiIinJohoTorokuDiv div;
@@ -107,7 +108,7 @@ public class ShinsakaiIinJohoTorokuHandler {
             if (IsHaishi.廃止.equals(IsHaishi.toValue(shinsakaiIinJoho.is廃止フラグ()))) {
                 row.setJokyo(廃止);
             } else {
-                row.setJokyo(RString.EMPTY);
+                row.setJokyo(有効);
             }
             if (shinsakaiIinJoho.get担当地区コード() != null) {
                 row.setShinsakaiChikuCode(shinsakaiIinJoho.get担当地区コード().value());
@@ -413,6 +414,8 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.setBiko(div.getTxtBiko().getValue());
         if (KEY_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
             row.setJokyo(廃止);
+        } else {
+            row.setJokyo(有効);
         }
         row.setYubinNo(div.getTxtYubinNo().getValue().value());
         row.setYusoKubun(div.getDdlYusoKubun().getSelectedKey());
@@ -450,6 +453,8 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.setBiko(div.getTxtBiko().getValue());
         if (KEY_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
             row.setJokyo(廃止);
+        } else {
+            row.setJokyo(有効);
         }
         row.setYubinNo(div.getTxtYubinNo().getValue().value());
         row.setYusoKubun(div.getDdlYusoKubun().getSelectedKey());
