@@ -330,6 +330,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (画面モード_審査.equals(画面モード)) {
             div.getBtnShokanKetteiJyoho().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setVisible(false);
+            div.getTabShinseiJyoho().getDdlShinseiTorikesuJiyu().setDisabled(true);
             div.getCcdShiharaiHohoJyoho().initialize(
                     支給申請情報, 支払方法状態_修正);
         } else if (画面モード_照会.equals(画面モード)) {
