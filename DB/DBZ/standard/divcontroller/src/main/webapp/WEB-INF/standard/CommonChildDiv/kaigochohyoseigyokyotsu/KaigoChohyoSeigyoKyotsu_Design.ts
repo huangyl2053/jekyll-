@@ -1,8 +1,8 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-/// <reference path="./../kaigoatesakijushosettei/KaigoAtesakiJushoSettei.ts" />
-/// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
+// <reference path="./../kaigoatesakijushosettei/KaigoAtesakiJushoSettei.ts" />
+// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBZ {
 
@@ -39,9 +39,9 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("AtesakiJusho"));
             }
 
-            public ccdKaigoAtesakiJushoSettei(): DBZ.KaigoAtesakiJushoSettei.ModeController {
-                return new DBZ.KaigoAtesakiJushoSettei.ModeController(this.convFiledName("ccdKaigoAtesakiJushoSettei"));
-            }
+            //public ccdKaigoAtesakiJushoSettei(): DBZ.KaigoAtesakiJushoSettei.ModeController {
+            //    return new DBZ.KaigoAtesakiJushoSettei.ModeController(this.convFiledName("ccdKaigoAtesakiJushoSettei"));
+            //}
 
             public ConfigInfo1(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ConfigInfo1"));
@@ -147,9 +147,9 @@ module DBZ {
                 return new UZA.ButtonDialog(this.convFiledName("btnKaigoToiawasesaki"));
             }
 
-            public ccdChohyoShutsuryokujun(): URZ.ChohyoShutsuryokujun.ModeController {
-                return new URZ.ChohyoShutsuryokujun.ModeController(this.convFiledName("ccdChohyoShutsuryokujun"));
-            }
+            //public ccdChohyoShutsuryokujun(): URZ.ChohyoShutsuryokujun.ModeController {
+            //    return new URZ.ChohyoShutsuryokujun.ModeController(this.convFiledName("ccdChohyoShutsuryokujun"));
+            //}
 
         }
 
