@@ -108,11 +108,10 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
     private HokenshaNo 保険者番号;
     private KyuufuJisekiKoshinnKekkaEntity 一覧表entity;
 
+    private CsvWriter<HokenshaKyufujissekiReprotCsvEntity> eucCsvWriter;
     @BatchWriter
     private BatchReportWriter<KyufuJisekiJohoSofuIchiranSource> batchReportWriter;
     private ReportSourceWriter<KyufuJisekiJohoSofuIchiranSource> reportSourceWriter;
-    @BatchWriter
-    private CsvWriter<HokenshaKyufujissekiReprotCsvEntity> eucCsvWriter;
 
     @Override
     protected void initialize() {
@@ -198,9 +197,7 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
 
     @Override
     protected void afterExecute() {
-        eucCsvWriter.close();
         if (index != INT_1) {
-            batchReportWriter.close();
             HokenshaKyufujissekiReprotCsvEntity csvEntity = getCsvGoukiiEntity();
             eucCsvWriter.writeLine(csvEntity);
             KyufuJisekiJohoSofuIchiranReport report = new KyufuJisekiJohoSofuIchiranReport(
@@ -213,7 +210,9 @@ public class HokenshaKyufujissekiReprotProcess extends BatchKeyBreakBase<KyuufuJ
             } else {
                 eucManager.spool(eucFilePath);
             }
+            batchReportWriter.close();
         }
+        eucCsvWriter.close();
     }
 
     private void アクセスログ対象追加(KyuufuJisekiKoshinnKekkaEntity entity) {

@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho;
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -71,6 +72,20 @@ public interface IShiharaiHohoJyohoDiv extends ICommonChildDivBaseProperties {
      * @return RString
      */
     public RString getKeiyakuNo();
+
+    /**
+     * 契約事業者名を取得します。
+     *
+     * @param 契約事業者名 AtenaMeisho
+     */
+    public void set契約事業者名(AtenaMeisho 契約事業者名);
+
+    /**
+     * 契約事業者を取得します。
+     *
+     * @param 契約事業者 RString
+     */
+    public void set契約事業者(RString 契約事業者);
 
     /**
      * 口座IDを取得します。

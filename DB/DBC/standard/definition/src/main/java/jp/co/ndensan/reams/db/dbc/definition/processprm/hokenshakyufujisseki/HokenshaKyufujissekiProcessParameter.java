@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hokenshakyufujisseki.Hok
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -30,6 +31,7 @@ public class HokenshaKyufujissekiProcessParameter implements IBatchProcessParame
     private int 基本件数;
     private YMDHMS now;
     private HokenshaNo 保険者番号;
+    private Encode 文字コード;
 
     /**
      * コンストラクタです。

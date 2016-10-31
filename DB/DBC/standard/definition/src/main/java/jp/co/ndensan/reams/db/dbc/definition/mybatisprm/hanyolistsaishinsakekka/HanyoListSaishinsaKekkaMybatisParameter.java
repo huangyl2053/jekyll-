@@ -26,6 +26,8 @@ public final class HanyoListSaishinsaKekkaMybatisParameter implements IMyBatisPa
     private final boolean renbanFuka;
     private final boolean hitsukeHenshu;
     private final LasdecCode hokenshacode;
+    private final RString hokenshamei;
+    private final RString shichosoncode;
     private final RString 国保連取扱年月From;
     private final RString 国保連取扱年月To;
     private final List<RString> hokenshaKubunList;
@@ -50,6 +52,8 @@ public final class HanyoListSaishinsaKekkaMybatisParameter implements IMyBatisPa
             boolean renbanFuka,
             boolean hitsukeHenshu,
             LasdecCode hokenshacode,
+            RString hokenshamei,
+            RString shichosoncode,
             RString 国保連取扱年月From,
             RString 国保連取扱年月To,
             List<RString> hokenshaKubunList,
@@ -70,6 +74,8 @@ public final class HanyoListSaishinsaKekkaMybatisParameter implements IMyBatisPa
         this.renbanFuka = renbanFuka;
         this.hitsukeHenshu = hitsukeHenshu;
         this.hokenshacode = hokenshacode;
+        this.hokenshamei = hokenshamei;
+        this.shichosoncode = shichosoncode;
         this.国保連取扱年月From = 国保連取扱年月From;
         this.国保連取扱年月To = 国保連取扱年月To;
         this.hokenshaKubunList = hokenshaKubunList;
@@ -95,6 +101,8 @@ public final class HanyoListSaishinsaKekkaMybatisParameter implements IMyBatisPa
      * @param renbanFuka renbanFuka
      * @param hitsukeHenshu hitsukeHenshu
      * @param hokenshacode hokenshacode
+     * @param hokenshamei hokenshamei
+     * @param shichosoncode shichosoncode
      * @param 国保連取扱年月From 国保連取扱年月From
      * @param 国保連取扱年月To 国保連取扱年月To
      * @param hokenshaKubunList hokenshaKubunList
@@ -110,6 +118,8 @@ public final class HanyoListSaishinsaKekkaMybatisParameter implements IMyBatisPa
             boolean renbanFuka,
             boolean hitsukeHenshu,
             LasdecCode hokenshacode,
+            RString hokenshamei,
+            RString shichosoncode,
             RString 国保連取扱年月From,
             RString 国保連取扱年月To,
             List<RString> hokenshaKubunList,
@@ -136,6 +146,8 @@ public final class HanyoListSaishinsaKekkaMybatisParameter implements IMyBatisPa
                 renbanFuka,
                 hitsukeHenshu,
                 hokenshacode,
+                hokenshamei,
+                shichosoncode,
                 国保連取扱年月From,
                 国保連取扱年月To,
                 hokenshaKubunList,

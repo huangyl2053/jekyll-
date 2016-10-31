@@ -156,11 +156,11 @@ public class TokuteiKojinJohoTeikyoSetParameterProcess extends SimpleBatchProces
     private void setParameter_対象開始日時() {
         RDate システム日付 = システム日時.getDate();
         if (ワークフローＩＤ_特定個人情報提供.equals(ワークフローID)) {
-            if (年開始の月 <= システム日付.getMonthValue() || システム日付.getMonthValue() <= 西暦年最後の月) {
-                taishoKaishiTimestamp.setValue(RDateTime.of(new RDate(システム日付.getMonthValue() + 1, 年最後の月, 年最後の日)
+            if (年開始の月 <= システム日付.getMonthValue() && システム日付.getMonthValue() <= 西暦年最後の月) {
+                taishoKaishiTimestamp.setValue(RDateTime.of(new RDate(システム日付.getYearValue() + 1, 年最後の月, 年最後の日)
                         .minusYear(五年).toDateString(), 時00分00秒00));
             } else {
-                taishoKaishiTimestamp.setValue(RDateTime.of(new RDate(システム日付.getMonthValue(), 年最後の月, 年最後の日)
+                taishoKaishiTimestamp.setValue(RDateTime.of(new RDate(システム日付.getYearValue(), 年最後の月, 年最後の日)
                         .minusYear(五年).toDateString(), 時00分00秒00));
             }
         } else if (ワークフローＩＤ_特定個人情報変更.equals(ワークフローID)) {

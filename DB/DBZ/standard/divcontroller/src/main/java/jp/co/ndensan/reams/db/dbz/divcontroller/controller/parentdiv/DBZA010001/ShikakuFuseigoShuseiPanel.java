@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -76,6 +77,7 @@ public class ShikakuFuseigoShuseiPanel {
         business.setBusinessList(resultList.records());
         ViewStateHolder.put(ViewStateKeys.整合性チェックの情報_宛名, business);
         getHandler(div).load(resultList.records());
+        set完了非活性(false);
         return ResponseData.of(div).setState(DBZA010001StateName.不整合一覧);
     }
 
@@ -149,12 +151,14 @@ public class ShikakuFuseigoShuseiPanel {
                 HihokenshaDaicho 修正後の資格の情報 = ViewStateHolder.get(ViewStateKeys.修正後の資格の情報, HihokenshaDaicho.class);
                 ShikakuShutokuJogaisha 資格取得除外の情報 = ViewStateHolder.get(ViewStateKeys.取得除外の情報, ShikakuShutokuJogaisha.class);
                 getHandler(div).setHihokenshaMeisai(不整合理由, 個人情報, 現在の資格の情報, 修正後の資格の情報, 資格取得除外の情報);
+                set完了非活性(true);
                 return ResponseData.of(div).setState(DBZA010001StateName.資格修正);
             }
             if (台帳種別.equals(DaichoType.適用除外者.getコード())) {
                 TekiyoJogaisha 現在の他特の情報 = ViewStateHolder.get(ViewStateKeys.現在の除外の情報, TekiyoJogaisha.class);
                 TekiyoJogaisha 修正後の他特の情報 = ViewStateHolder.get(ViewStateKeys.修正後の除外の情報, TekiyoJogaisha.class);
                 getHandler(div).setTekiyoMeisai(不整合理由, 個人情報, 現在の他特の情報, 修正後の他特の情報);
+                set完了非活性(true);
                 return ResponseData.of(div).setState(DBZA010001StateName.除外者修正);
             }
             if (台帳種別.equals(DaichoType.他市町村住所地特例者.getコード())) {
@@ -163,6 +167,7 @@ public class ShikakuFuseigoShuseiPanel {
                 TashichosonJushochiTokurei 修正後の他特の情報 = ViewStateHolder.get(ViewStateKeys.修正後の他特の情報,
                         TashichosonJushochiTokurei.class);
                 getHandler(div).setTashichosonMeisai(不整合理由, 個人情報, 現在の他特の情報, 修正後の他特の情報);
+                set完了非活性(true);
                 return ResponseData.of(div).setState(DBZA010001StateName.他特修正);
             }
         }
@@ -293,6 +298,7 @@ public class ShikakuFuseigoShuseiPanel {
                     shikakuFusei.get整合性チェック情報());
         }
         div.getShikakuFuseigoIchiran().setDisabled(false);
+        set完了非活性(false);
         return onLoad(div);
     }
 
@@ -386,5 +392,9 @@ public class ShikakuFuseigoShuseiPanel {
     private void setアクセスログ(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, AccessLogType type) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_0003), STRING_被保険者番号, 被保険者番号.value());
         AccessLogger.log(type, PersonalData.of(識別コード, expandedInfo));
+    }
+
+    private void set完了非活性(boolean jyotai) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnComplete"), jyotai);
     }
 }

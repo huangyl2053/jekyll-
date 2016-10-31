@@ -115,7 +115,7 @@ public class KaishuriyushoSeikyushoShinseishoDBC200064Process extends BatchKeyBr
         JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReport report = new JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReport(data);
         report.writeBy(reportSourceWriter);
         index++;
-        if (!jigyoshaMeisho.equals(entity.get介護住宅改修事業者名称())
+        if (entity.get介護住宅改修事業者名称() != null && !jigyoshaMeisho.equals(entity.get介護住宅改修事業者名称())
                 || index % INDEX_20 == 1) {
             index = 1;
             jigyoshaMeisho = entity.get介護住宅改修事業者名称();

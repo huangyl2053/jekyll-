@@ -106,11 +106,11 @@ public enum JukyushaDaichoPanelSpec implements IPredicate<JukyushaDaichoDiv> {
         }
 
         static boolean is年齢From入力(JukyushaDaichoDiv div) {
-            return div.getCcdAtenaJoken().get年齢開始() != null;
+            return div.getCcdAtenaJoken().get宛名抽出条件子Div().getTxtNenrei().getFromValue() != null;
         }
 
         static boolean is年齢To入力(JukyushaDaichoDiv div) {
-            return div.getCcdAtenaJoken().get年齢終了() != null;
+            return div.getCcdAtenaJoken().get宛名抽出条件子Div().getTxtNenrei().getToValue() != null;
         }
 
         static boolean is生年月日が選択されている(JukyushaDaichoDiv div) {

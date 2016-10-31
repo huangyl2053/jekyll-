@@ -236,7 +236,9 @@
         SELECT
         *
         FROM
-        "futanWariaiTemp"
+        "futanWariaiTemp" AS F1
+        ORDER BY
+        F1."被保険者番号", F1."年度"
     </select>
     
     <select resultOrdered="true" id="get更正対象給付実績情報作成データ" resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.KoseiTaishoKyuhuzissekiJohouSakuseiResultEntity" fetchSize="500">
@@ -273,7 +275,7 @@
         ON 給付実績情報Temp."サービス種類コード" = 介護サービス種類."serviceShuruiCd"
         WHERE
         給付実績情報Temp."サービス種類コード" = 介護サービス種類."serviceShuruiCd" AND
-        給付実績情報Temp."サービス提供年月" <![CDATA[<=]]> 介護サービス種類."teikyoKaishiYM" AND
+        介護サービス種類."teikyoKaishiYM" <![CDATA[<=]]> 給付実績情報Temp."サービス提供年月" AND
         給付実績情報Temp."サービス提供年月" <![CDATA[<=]]> 介護サービス種類."teikyoshuryoYM" AND
         負担割合情報年月Temp."被保険者番号" = 給付実績情報Temp."被保険者番号" AND
         給付実績情報Temp."サービス提供年月" = 負担割合情報年月Temp."年月")

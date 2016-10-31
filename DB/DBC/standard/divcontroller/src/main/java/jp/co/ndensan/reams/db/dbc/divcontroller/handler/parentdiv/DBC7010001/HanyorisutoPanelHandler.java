@@ -75,7 +75,7 @@ public class HanyorisutoPanelHandler {
             div.getCcdHokensya().setDisabled(false);
             div.getCcdHokensya().loadHokenshaList();
         } else {
-            div.getCcdHokensya().setVisible(false);
+            div.getCcdHokensya().setDisplayNone(true);
             div.getCcdHokensya().setDisabled(true);
         }
         List<KeyValueDataSource> sakuseikubunlist = new ArrayList();
@@ -104,8 +104,10 @@ public class HanyorisutoPanelHandler {
         if (ChushutsuKubun.直近有効データ.getコード().equals(div.getRadChusyutuKubun().getSelectedKey())
                 || ChushutsuKubun.全データ.getコード().equals(div.getRadChusyutuKubun().getSelectedKey())) {
             div.getTxtKijunYMD().setDisabled(true);
+            div.getTxtKijunYMD().clearValue();
         } else if (ChushutsuKubun.全有効データ.getコード().equals(div.getRadChusyutuKubun().getSelectedKey())) {
             div.getTxtKijunYMD().setDisabled(false);
+            div.getTxtKijunYMD().setValue(RDate.getNowDate());
         }
     }
 
@@ -117,7 +119,8 @@ public class HanyorisutoPanelHandler {
      */
     public DBC710010_HanyoListKyotakuServiceKeikakuParameter setBatchParameter(HanyorisutoPanelDiv div) {
         DBC710010_HanyoListKyotakuServiceKeikakuParameter bparam = new DBC710010_HanyoListKyotakuServiceKeikakuParameter();
-        if (div.getCcdHokensya().isVisible()) {
+        if (div.getCcdHokensya().isVisible()
+                && !div.getCcdHokensya().isDisplayNone()) {
             bparam.set構成市町村コード(div.getCcdHokensya().getSelectedItem().get市町村コード());
         }
         bparam.set作成区分(div.getRadSakuseiKubun().getSelectedKey());

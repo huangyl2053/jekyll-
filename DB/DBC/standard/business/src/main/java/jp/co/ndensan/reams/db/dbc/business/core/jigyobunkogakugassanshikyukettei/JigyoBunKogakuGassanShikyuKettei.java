@@ -918,16 +918,21 @@ public class JigyoBunKogakuGassanShikyuKettei {
         /**
          * 整理番号
          */
-        整理番号(new RString("0305"), new RString(""), new RString("shikyuSeiriNo\"")),
+        整理番号(new RString("0337"), new RString(""), new RString("\"shikyuSeiriNo\"")),
         /**
          * 支払方法
          */
-        支払方法(new RString("0312"), new RString(""), new RString("shiharaiHohoKubun\"")),
+        支払方法(new RString("0312"), new RString(""), new RString("\"shiharaiHohoKubun\"")),
         /**
          * 通知書作成日
          *
          */
-        通知書作成日(new RString("0410"), new RString(""), new RString("ketteiTsuchiSakuseiYMD\""));
+        通知書作成日(new RString("0410"), new RString(""), new RString("\"ketteiTsuchiSakuseiYMD\"")),
+        /**
+         * 対象年度
+         *
+         */
+        対象年度(new RString("0334"), new RString(""), new RString("\"taishoNendo\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

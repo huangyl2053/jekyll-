@@ -9,18 +9,21 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanri;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanri.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanri.shikibetsuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanri.shoriTimeStamp;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanri.shotokuNendo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -172,4 +175,29 @@ public class DbT2008ShotokuKanriDac implements ISaveable<DbT2008ShotokuKanriEnti
                                 eq(shikibetsuCode, 識別コード))).
                 toObject(DbT2008ShotokuKanriEntity.class);
     }
+
+    /**
+     * selectBySomeKey
+     *
+     * @param 抽出期間開始日時 RString
+     * @param 抽出期間終了日時 RString
+     * @return DbT2008ShotokuKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT2008ShotokuKanriEntity> select介護所得管理(
+            RDateTime 抽出期間開始日時,
+            RDateTime 抽出期間終了日時) throws NullPointerException {
+        requireNonNull(抽出期間開始日時, UrSystemErrorMessages.値がnull.getReplacedMessage("抽出期間開始日時"));
+        requireNonNull(抽出期間終了日時, UrSystemErrorMessages.値がnull.getReplacedMessage("抽出期間終了日時"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select()
+                .table(DbT2008ShotokuKanri.class)
+                .where(and(
+                                leq(抽出期間開始日時, shoriTimeStamp),
+                                leq(shoriTimeStamp, 抽出期間終了日時)))
+                .toList(DbT2008ShotokuKanriEntity.class);
+    }
+
 }

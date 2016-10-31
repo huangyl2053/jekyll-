@@ -79,7 +79,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
     private RString 計画作成事業者番号;
     private RString 給付率区分;
     private RString 給付率;
-    private RString 出力順ID;
+    private long 出力順ID;
     private RString psmShikibetsuTaisho;
 
     /**
@@ -207,7 +207,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
             RString 計画作成事業者番号,
             RString 給付率区分,
             RString 給付率,
-            RString 出力順ID) {
+            long 出力順ID) {
         this.対象年月 = 対象年月;
         this.年月範囲_開始 = 年月範囲_開始;
         this.年月範囲_終了 = 年月範囲_終了;
@@ -398,7 +398,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
             RString 計画作成事業者番号,
             RString 給付率区分,
             RString 給付率,
-            RString 出力順ID) {
+            long 出力順ID) {
         return new JukyushaKyufujissekiIchiranProcessParameter(対象年月,
                 年月範囲_開始,
                 年月範囲_終了,
@@ -465,9 +465,10 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
     /**
      * 受給者給付実績一覧表のMybaticParameter作成する。
      *
+     * @param 出力順 出力順
      * @return JukyushaKyufujissekiIchiranMybatisParameter
      */
-    public JukyushaKyufujissekiIchiranMybatisParameter toJukyushaKyufujissekiIchiranMybatisParameter() {
+    public JukyushaKyufujissekiIchiranMybatisParameter toJukyushaKyufujissekiIchiranMybatisParameter(RString 出力順) {
         return JukyushaKyufujissekiIchiranMybatisParameter.createSelectByKeyParam(対象年月,
                 年月範囲_開始,
                 年月範囲_終了,
@@ -528,7 +529,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
                 計画作成事業者番号,
                 給付率区分,
                 給付率,
-                出力順ID,
+                出力順,
                 psmShikibetsuTaisho);
     }
 }

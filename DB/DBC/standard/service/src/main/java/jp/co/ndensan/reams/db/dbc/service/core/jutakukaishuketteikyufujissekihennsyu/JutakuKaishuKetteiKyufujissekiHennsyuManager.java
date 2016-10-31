@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuketteikyufujissekihennsyu;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.keikoku.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraishikyukettekyufujssekihensyu.SyokanbaraiShikyuKetteKyufuJssekiHensyuParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3027KyufujissekiJutakuKaishuhiEntity;
@@ -21,6 +22,8 @@ import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
@@ -81,8 +84,10 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
     private static final RString DATA_1136 = new RString("1136");
     private static final RString DATA_1137 = new RString("1137");
     private static final RString DATA_1138 = new RString("1138");
+    private static final RString 独自作成 = new RString("1");
 
     private static final int 通し番号_LEN = 10;
+    private static final int 証記載保険者番号_LEN = 8;
 
     JutakuKaishuKetteiKyufujissekiHennsyuManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
@@ -146,7 +151,11 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         }
         給付実績基本entity.setRecodeShubetsuCode(DATA_01);
         給付実績基本entity.setKyufuSakuseiKubunCode(給付実績編集汎用Entity.getKyufuSakuseiKubunCode());
-        給付実績基本entity.setShokisaiHokenshaNo(給付実績編集汎用Entity.getShoKisaiHokenshaNo());
+        HokenshaNo shoKisaiHokenshaNo = 給付実績編集汎用Entity.getShoKisaiHokenshaNo();
+        if (shoKisaiHokenshaNo != null && !shoKisaiHokenshaNo.isEmpty()) {
+            給付実績基本entity.setShokisaiHokenshaNo(
+                    new HokenshaNo(給付実績編集汎用Entity.getShoKisaiHokenshaNo().getColumnValue().padLeft("0", 証記載保険者番号_LEN)));
+        }
         給付実績基本entity.setHiHokenshaNo(償還払請求基本Entity.getHiHokenshaNo());
         給付実績基本entity.setServiceTeikyoYM(償還払請求基本Entity.getServiceTeikyoYM());
         給付実績基本entity.setKyufuJissekiKubunCode(DATA_2);
@@ -167,6 +176,7 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         給付実績基本entity.setShinsaYM(給付実績編集汎用Entity.getShinsaYM());
         給付実績基本entity.setSeiriNo(償還払請求基本Entity.getSeiriNo());
         給付実績基本entity.setHokenshaHoyuKyufujissekiJohoSakujoFlag(false);
+        edit給付実績基本entity(給付実績基本entity, 償還払請求基本Entity);
         給付実績基本entity.setState(EntityDataState.Added);
         給付実績基本Dac.save(給付実績基本entity);
 
@@ -233,8 +243,102 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         給付実績集計entity.setHokenRiyoshaFutangaku(new Decimal(償還払請求集計Entity.getRiyoshaFutangaku()));
         給付実績集計entity.setShinsaYM(給付実績基本entity.getShinsaYM());
         給付実績集計entity.setSeiriNo(給付実績基本entity.getSeiriNo());
+        edit給付実績集計entity(給付実績集計entity, 償還払請求集計Entity);
         給付実績集計entity.setState(EntityDataState.Added);
         給付実績集計Dac.save(給付実績集計entity);
+    }
+
+    private void edit給付実績集計entity(DbT3033KyufujissekiShukeiEntity 給付実績集計entity, DbT3053ShokanShukeiEntity 償還払請求集計Entity) {
+        給付実績集計entity.setServiceJitsunissu(0);
+        給付実績集計entity.setAtoKohi1TanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setAtoKohi2TanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setAtoKohi3TanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setKohi1Seikyugaku(Decimal.ZERO);
+        給付実績集計entity.setKohi2Seikyugaku(Decimal.ZERO);
+        給付実績集計entity.setKohi3Seikyugaku(Decimal.ZERO);
+        給付実績集計entity.setKohi1HonninFutangaku(Decimal.ZERO);
+        給付実績集計entity.setKohi2HonninFutangaku(Decimal.ZERO);
+        給付実績集計entity.setKohi3HonninFutangaku(Decimal.ZERO);
+        給付実績集計entity.setHokenDekidakaTanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setHokenDekidakaSeikyugaku(Decimal.ZERO);
+        給付実績集計entity.setHokenDekidakaIryohiRiyoshaFutangaku(Decimal.ZERO);
+        給付実績集計entity.setKohi1DekidakaTanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setKohi2DekidakaTanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setKohi3DekidakaTanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setKohi1DekidakaSeikyugaku(Decimal.ZERO);
+        給付実績集計entity.setKohi2DekidakaSeikyugaku(Decimal.ZERO);
+        給付実績集計entity.setKohi3DekidakaSeikyugaku(Decimal.ZERO);
+        給付実績集計entity.setKohi1DekidakaIryohiRiyoshaFutangaku(Decimal.ZERO);
+        給付実績集計entity.setKohi2DekidakaIryohiRiyoshaFutangaku(Decimal.ZERO);
+        給付実績集計entity.setKohi3DekidakaIryohiRiyoshaFutangaku(Decimal.ZERO);
+        給付実績集計entity.setAtoTankiNyushoJitsunissu(0);
+        給付実績集計entity.setAtoHokenTanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setAtoHokenSeikyugaku(償還払請求集計Entity.getSeikyugaku());
+        給付実績集計entity.setAtoKohi1TanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setAtoKohi1Seikyugaku(Decimal.ZERO);
+        給付実績集計entity.setAtoKohi2TanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setAtoKohi2Seikyugaku(Decimal.ZERO);
+        給付実績集計entity.setAtoKohi3TanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setAtoKohi3Seikyugaku(Decimal.ZERO);
+        給付実績集計entity.setAtoHokenDekidakaTanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setAtoHokenDekidakaSeikyugaku(Decimal.ZERO);
+        給付実績集計entity.setAtoKohi1DekidakaTanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setAtoKohi1DekidakaSeikyugaku(Decimal.ZERO);
+        給付実績集計entity.setAtoKohi2DekidakaTanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setAtoKohi2DekidakaSeikyugaku(Decimal.ZERO);
+        給付実績集計entity.setAtoKohi3DekidakaTanisuTotal(Decimal.ZERO);
+        給付実績集計entity.setAtoKohi3DekidakaSeikyugaku(Decimal.ZERO);
+        給付実績集計entity.setSaishinsaKaisu(0);
+        給付実績集計entity.setKagoKaisu(0);
+    }
+
+    private void edit給付実績基本entity(DbT3017KyufujissekiKihonEntity 給付実績基本entity, DbT3038ShokanKihonEntity 償還払請求基本Entity) {
+        給付実績基本entity.setKohi1Kyufuritsu(HokenKyufuRitsu.ZERO);
+        給付実績基本entity.setKohi2Kyufuritsu(HokenKyufuRitsu.ZERO);
+        給付実績基本entity.setKohi3Kyufuritsu(HokenKyufuRitsu.ZERO);
+        給付実績基本entity.setMaeHokenServiceTanisu(0);
+        給付実績基本entity.setMaeHokenKinkyuShisetsuRyoyoSeikyugaku(Decimal.ZERO);
+        給付実績基本entity.setMaeHokenTokuteiShinryohiSeikyugaku(Decimal.ZERO);
+        給付実績基本entity.setMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(0);
+        給付実績基本entity.setMaeKohi1ServiceTanisu(0);
+        給付実績基本entity.setMaeKohi1Seikyugaku(0);
+        給付実績基本entity.setMaeKohi1RiyoshaFutangaku(0);
+        給付実績基本entity.setMaeKohi1KinkyuShisetsuRyoyoSeikyugaku(0);
+        給付実績基本entity.setMaeKohi1TokuteiShinryohiSeikyugaku(0);
+        給付実績基本entity.setMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(0);
+        給付実績基本entity.setMaeKohi2TokuteiShinryohiSeikyugaku(0);
+        給付実績基本entity.setMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(0);
+        給付実績基本entity.setMaeKohi3ServiceTanisu(0);
+        給付実績基本entity.setMaeKohi3Seikyugaku(0);
+        給付実績基本entity.setMaeKohi3RiyoshaFutangaku(0);
+        給付実績基本entity.setMaeKohi3KinkyuShisetsuRyoyoSeikyugaku(0);
+        給付実績基本entity.setMaeKohi3TokuteiShinryohiSeikyugaku(0);
+        給付実績基本entity.setMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(0);
+        給付実績基本entity.setAtoHokenServiceTanisu(0);
+        給付実績基本entity.setAtoHokenSeikyugaku(償還払請求基本Entity.getHokenSeikyugaku());
+        給付実績基本entity.setAtoHokenRiyoshaFutangaku(償還払請求基本Entity.getRiyoshaFutangaku());
+        給付実績基本entity.setAtoHokenKinkyuShisetsuRyoyoSeikyugaku(Decimal.ZERO);
+        給付実績基本entity.setAtoHokenTokuteiShinryohiSeikyugaku(Decimal.ZERO);
+        給付実績基本entity.setAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(0);
+        給付実績基本entity.setAtoKohi1ServiceTanisu(0);
+        給付実績基本entity.setAtoKohi1Seikyugaku(0);
+        給付実績基本entity.setAtoKohi1RiyoshaFutangaku(0);
+        給付実績基本entity.setAtoKohi1KinkyuShisetsuRyoyoSeikyugaku(0);
+        給付実績基本entity.setAtoKohi1TokuteiShinryohiSeikyugaku(0);
+        給付実績基本entity.setAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(0);
+        給付実績基本entity.setAtoKohi2Seikyugaku(0);
+        給付実績基本entity.setAtoKohi2RiyoshaFutangaku(0);
+        給付実績基本entity.setAtoKohi2KinkyuShisetsuRyoyoSeikyugaku(0);
+        給付実績基本entity.setAtoKohi2TokuteiShinryohiSeikyugaku(0);
+        給付実績基本entity.setAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(0);
+        給付実績基本entity.setAtoKohi3ServiceTanisu(0);
+        給付実績基本entity.setAtoKohi3Seikyugaku(0);
+        給付実績基本entity.setAtoKohi3RiyoshaFutangaku(0);
+        給付実績基本entity.setAtoKohi3KinkyuShisetsuRyoyoSeikyugaku(0);
+        給付実績基本entity.setAtoKohi3TokuteiShinryohiSeikyugaku(0);
+        給付実績基本entity.setAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(0);
+        給付実績基本entity.setKeikaiKubunCode(KeikokuKubun.警告なし.getコード());
+        給付実績基本entity.setDokujiSakuseiKubun(独自作成);
     }
 
     private KokanShikibetsuNo getKokanShikibetsuNo(

@@ -136,9 +136,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (日付スラッシュ付加) {
             csv編集方法リスト.add(THREE);
         }
-        if (!csv編集方法リスト.isEmpty()) {
-            div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
-        }
+        div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(csv編集方法リスト);
         Long 出力順 = restoreBatchParameterMap.getParameterValue(Long.class, KEY_SHUTSURYOKUJU);
         if (出力順 != null) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701015.getReportId(), 出力順);
@@ -203,9 +201,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (送付対象外) {
             送付対象外リスト.add(KEY0);
         }
-        if (!送付対象外リスト.isEmpty()) {
-            div.getChushutsuJokenPanel().getChkSofuTaishogaiFukumu().setSelectedItemsByKey(送付対象外リスト);
-        }
+        div.getChushutsuJokenPanel().getChkSofuTaishogaiFukumu().setSelectedItemsByKey(送付対象外リスト);
     }
 
     private void pamaRestore2(BatchParameterMap restoreBatchParameterMap) {
@@ -235,8 +231,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (補正状況 != null) {
             if (ONE.equals(補正状況)) {
                 div.getChushutsuJokenPanel().getRadHoseuJokyo().setSelectedKey(KEY1);
-            }
-            if (TWO.equals(補正状況)) {
+            } else if (TWO.equals(補正状況)) {
                 div.getChushutsuJokenPanel().getRadHoseuJokyo().setSelectedKey(KEY2);
             } else {
                 div.getChushutsuJokenPanel().getRadHoseuJokyo().setSelectedKey(KEY0);
@@ -245,7 +240,8 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     }
 
     private void restoreClear() {
-
+        div.getChushutsuJokenPanel().getDdlTaishoNendo().setSelectedKey(BLANK);
+        div.getDdlDetaSakuseiKubun().setSelectedValue(すべて);
         div.getChushutsuJokenPanel().getRadChushutsuKubun().clearSelectedItem();
         div.getChushutsuJokenPanel().getRadDataShurui().clearSelectedItem();
         div.getChushutsuJokenPanel().getRadHoseuJokyo().clearSelectedItem();

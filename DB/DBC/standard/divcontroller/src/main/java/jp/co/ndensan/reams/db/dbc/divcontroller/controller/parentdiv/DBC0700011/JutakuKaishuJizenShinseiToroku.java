@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuJizenShinsei;
@@ -69,6 +70,8 @@ public class JutakuKaishuJizenShinseiToroku {
     private static final RString 審査結果 = new RString("審査結果");
     private static final RString 事前申請情報 = new RString("事前申請情報");
     private static final RString 登録FLAG = new RString("登録");
+    private static final RString 参照 = new RString("参照");
+    private static final RString 事業者選択 = new RString("DBC0300011_事業者選択");
 
     /**
      * 初期化メソッドです
@@ -115,6 +118,24 @@ public class JutakuKaishuJizenShinseiToroku {
                 被保険者番号);
         if (照会モード.equals(state)) {
             return ResponseData.of(div).setState(照会);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 事業者契約番号と名称設定です。
+     *
+     * @param div JutakuKaishuJizenShinseiTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onActive(JutakuKaishuJizenShinseiTorokuDiv div) {
+        RString イベント名 = ResponseHolder.getBeforeEvent();
+        if (事業者選択.equals(イベント名)) {
+            JuryoininKeiyakuJigyosha tmp = ViewStateHolder.get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
+            if (tmp != null) {
+                div.getKaigoShikakuKihonShaPanel().getCcdJutakuKaishuJizenShinseiKoza().set契約事業者(tmp.get契約事業者番号());
+                div.getKaigoShikakuKihonShaPanel().getCcdJutakuKaishuJizenShinseiKoza().set契約事業者名(tmp.get契約事業者名称());
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -617,6 +638,7 @@ public class JutakuKaishuJizenShinseiToroku {
      * @return ResponseData
      */
     public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onClick_btnKeiyakuNo(JutakuKaishuJizenShinseiTorokuDiv div) {
+        ViewStateHolder.put(ViewStateKeys.状態, 参照);
         return ResponseData.of(div).forwardWithEventName(DBC0700011TransitionEventName.契約事業者検索).respond();
     }
 

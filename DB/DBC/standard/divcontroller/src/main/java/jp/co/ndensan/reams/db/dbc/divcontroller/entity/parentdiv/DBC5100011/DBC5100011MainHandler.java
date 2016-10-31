@@ -8,12 +8,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5100011;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150010.DBC150010_RiyojokyoTokeihyoMeisaiListParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.tokeihyo.RiyojokyoTokeihyo_ShutsuryokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.tokeihyo.Tokeihyo_CSVEditKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -34,6 +35,7 @@ public class DBC5100011MainHandler {
     private static final RString 対象選択_0 = new RString("0");
     private static final int ENDINDEX = 10;
     private static final RString 被保険者 = new RString("被保険者");
+    private IOutputOrder order;
 
     /**
      * コンストラクタです。
@@ -46,9 +48,6 @@ public class DBC5100011MainHandler {
 
     /**
      * 画面初期化処理です。
-     *
-     * @param div DBC5100011MainDiv
-     * @return ResponseData<DBC5100011MainDiv>
      */
     public void onLoad() {
         ViewStateHolder.put(ViewStateKeys.台帳種別表示, 被保険者);
@@ -69,7 +68,8 @@ public class DBC5100011MainHandler {
      */
     public DBC150010_RiyojokyoTokeihyoMeisaiListParameter getTempData() {
         DBC150010_RiyojokyoTokeihyoMeisaiListParameter tempData = new DBC150010_RiyojokyoTokeihyoMeisaiListParameter();
-        if (!div.getCcdJigyoshaNo().getNyuryokuShisetsuKodo().isNullOrEmpty()) {
+
+        if (!div.getCcdJigyoshaNo().getNyuryokuShisetsuKodo().isNull()) {
             tempData.set事業者番号(div.getCcdJigyoshaNo().getNyuryokuShisetsuKodo());
         }
         tempData.set利用実績区分(div.getRadRiyoJisseki().getSelectedKey());
@@ -84,22 +84,22 @@ public class DBC5100011MainHandler {
         tempData.set導入形態コード(DonyuKeitaiCode.toValue(div.getCcdChikuShichosonSelect().get導入形態コード()).getCode());
         tempData.set対象年月(div.getRadTaishoYM().getSelectedKey());
         tempData.set居宅利用率指定(div.getRadKyotakuRiyoritsu().getSelectedKey());
-        if (div.getChkMeisaiCsvEdit().getSelectedKeys().get(2).isNullOrEmpty()) {
+        if (div.getChkMeisaiCsvEdit().getSelectedKeys().get(2).isNull()) {
             tempData.set日付スラッシュ編集(Tokeihyo_CSVEditKubun.しない.getコード());
         } else {
             tempData.set日付スラッシュ編集(Tokeihyo_CSVEditKubun.する.getコード());
         }
-        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(2).isNullOrEmpty()) {
+        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(2).isNull()) {
             tempData.set明細CSV出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力しない.getコード());
         } else {
             tempData.set明細CSV出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード());
         }
-        if (div.getChkMeisaiCsvEdit().getSelectedKeys().get(1).isNullOrEmpty()) {
+        if (div.getChkMeisaiCsvEdit().getSelectedKeys().get(1).isNull()) {
             tempData.set連番付加(Tokeihyo_CSVEditKubun.しない.getコード());
         } else {
             tempData.set連番付加(Tokeihyo_CSVEditKubun.する.getコード());
         }
-        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(1).isNullOrEmpty()) {
+        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(1).isNull()) {
             tempData.set明細リスト出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力しない.getコード());
         } else {
             tempData.set明細リスト出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード());
@@ -113,7 +113,7 @@ public class DBC5100011MainHandler {
         if (div.getTxtHomonRiyoritsuRange().getToValue() != null) {
             tempData.set終了訪問居宅利用率(new RString(div.getTxtHomonRiyoritsuRange().getToValue().toString()));
         }
-        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(0).isNullOrEmpty()) {
+        if (div.getChkShutsuryokuTaisho().getSelectedKeys().get(0).isNull()) {
             tempData.set統計表出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力しない.getコード());
         } else {
             tempData.set統計表出力区分(RiyojokyoTokeihyo_ShutsuryokuKubun.出力する.getコード());
@@ -131,11 +131,12 @@ public class DBC5100011MainHandler {
         if (div.getTxtHomonRiyoritsuRange().getFromValue() != null) {
             tempData.set開始訪問居宅利用率(new RString(div.getTxtHomonRiyoritsuRange().getFromValue().toString()));
         }
-        if (div.getChkMeisaiCsvEdit().getSelectedKeys().get(0).isNullOrEmpty()) {
+        if (div.getChkMeisaiCsvEdit().getSelectedKeys().get(0).isNull()) {
             tempData.set項目名付加(Tokeihyo_CSVEditKubun.しない.getコード());
         } else {
             tempData.set項目名付加(Tokeihyo_CSVEditKubun.する.getコード());
         }
+        tempData.set出力順ID(div.getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID());
         tempData.set明細合計出力区分(div.getRadMeisaiGokeiOut().getSelectedKey());
         return tempData;
     }
@@ -252,6 +253,7 @@ public class DBC5100011MainHandler {
         RString 日付スラッシュ編集 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("日付スラッシュ編集"));
         項目名list.add(日付スラッシュ編集);
         div.getChkMeisaiCsvEdit().setSelectedItemsByKey(項目名list);
-        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200004.getReportId());
+        Long 出力順ID = restoreBatchParameterMap.getParameterValue(Long.class, new RString("出力順ID"));
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200004.getReportId(), 出力順ID);
     }
 }

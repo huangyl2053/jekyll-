@@ -52,7 +52,6 @@ public class HokenshaSofuListHandler {
     private final JyusinDataBaitaiTorikomuDiv div;
     private final RString searchSharedFile = new RString("1\\_%");
     private static final int ゼロ = 0;
-    private static final int 一1 = 1;
     private static final int 二2 = 2;
     private static final int 三 = 3;
     private static final int 四 = 4;
@@ -117,7 +116,7 @@ public class HokenshaSofuListHandler {
     private static final RString 一 = new RString("1");
     private static final RString ゼロゼロ = new RString("0");
     private static final RString 二 = new RString("2");
-    private static final RString 九 = new RString("2");
+    private static final RString 九 = new RString("9");
     private static final RString H1 = new RString("H1");
     private static final RString D8 = new RString("D8");
     private static RString 保険者番号;
@@ -147,6 +146,7 @@ public class HokenshaSofuListHandler {
      */
     public void setDatasource(List<UzT0885SharedFileEntryEntity> uzt0885EntityList) {
         List<HokenshaSofuResult> hokenshaSofuList1 = new ArrayList();
+        List<JyusinDataList_Row> rowList = div.getJyusinDataList().getDataSource();
         if (uzt0885EntityList != null && !uzt0885EntityList.isEmpty()) {
             for (UzT0885SharedFileEntryEntity uzt0885Entity : uzt0885EntityList) {
                 hokenshaSofuList1.add(getHokenshaSofuList(uzt0885Entity));
@@ -163,7 +163,6 @@ public class HokenshaSofuListHandler {
                     return flag;
                 }
             });
-            List<JyusinDataList_Row> rowList = div.getJyusinDataList().getDataSource();
             div.getJyusinDataList().getDataSource().clear();
             for (HokenshaSofuResult entity : hokenshaSofuList1) {
                 JyusinDataList_Row row = new JyusinDataList_Row();
@@ -178,8 +177,8 @@ public class HokenshaSofuListHandler {
                 row.setTxtItiranHyoujiJyun(entity.getH一覧表示順());
                 rowList.add(row);
             }
-            div.getJyusinDataList().setDataSource(rowList);
         }
+        div.getJyusinDataList().setDataSource(rowList);
     }
 
     private HokenshaSofuResult getHokenshaSofuList(UzT0885SharedFileEntryEntity uzt0885Entity) {

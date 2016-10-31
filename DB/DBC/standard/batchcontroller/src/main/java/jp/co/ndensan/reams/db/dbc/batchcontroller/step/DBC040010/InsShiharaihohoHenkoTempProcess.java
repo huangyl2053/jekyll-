@@ -70,7 +70,9 @@ public class InsShiharaihohoHenkoTempProcess extends BatchKeyBreakBase<DbT3017Ma
             loopHandle(entity);
             return;
         }
-        実績負担額2Writer.insert(insertEntity);
+        if (insertEntity != null) {
+            実績負担額2Writer.insert(insertEntity);
+        }
         insertEntity = 実績負担額;
         initHandle();
         loopHandle(entity);

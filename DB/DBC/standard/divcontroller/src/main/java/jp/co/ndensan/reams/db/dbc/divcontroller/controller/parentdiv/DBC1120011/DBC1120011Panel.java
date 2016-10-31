@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1120011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020080.DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040010.DBC040010_KogakuGassanJikofutangakuKeisanParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1120011.DBC1120011PanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1120011.DBC1120011PanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1120011.DBC1120011PanelValidationHandler;
@@ -65,15 +65,15 @@ public class DBC1120011Panel {
      * @param div DBC1120011PanelDiv
      * @return ResponseData
      */
-    public ResponseData<DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter> onClick_JikoFutangakuKeisanIkkatsuPanel(DBC1120011PanelDiv div) {
+    public ResponseData<DBC040010_KogakuGassanJikofutangakuKeisanParameter> onClick_JikoFutangakuKeisanIkkatsuPanel(DBC1120011PanelDiv div) {
         LockingKey 排他キー = new LockingKey(ResponseHolder.getMenuID());
         RealInitialLocker.release(排他キー);
-        DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter param = setBatchParameter(div);
+        DBC040010_KogakuGassanJikofutangakuKeisanParameter param = setBatchParameter(div);
         return ResponseData.of(param).respond();
     }
 
-    private DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter setBatchParameter(DBC1120011PanelDiv div) {
-        DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter parameter = new DBC020080_JigyobunKogakuGassanJikofutangakuKeisanParameter();
+    private DBC040010_KogakuGassanJikofutangakuKeisanParameter setBatchParameter(DBC1120011PanelDiv div) {
+        DBC040010_KogakuGassanJikofutangakuKeisanParameter parameter = new DBC040010_KogakuGassanJikofutangakuKeisanParameter();
         parameter.setShoriTimestamp(RDate.getNowDateTime());
         if (div.getTxtShinseiTaishoYMD().getFromValue() == null || div.getTxtShinseiTaishoYMD().getFromValue().toString().isEmpty()) {
             parameter.setTaishoKaishiDay(FlexibleDate.MIN);

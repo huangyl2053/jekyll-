@@ -123,7 +123,8 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
-     * requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(処理日付管理マスタエンティティ.toString()));
+     * requireNonNull(entity,
+     * UrSystemErrorMessages.値がnull.getReplacedMessage(処理日付管理マスタエンティティ.toString()));
      *
      * DbT7022ShoriDateKanriEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
@@ -955,7 +956,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shoriName, 処理名),
                                 eq(nendo, RDate.getNowDate().getNendo())))
                 .order(new OrderBy(shoriEdaban, Order.DESC, NullsOrder.LAST),
-                        new OrderBy(nendoNaiRenban, Order.DESC, NullsOrder.LAST)).
+                        new OrderBy(nendoNaiRenban, Order.DESC, NullsOrder.LAST)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
 
     }

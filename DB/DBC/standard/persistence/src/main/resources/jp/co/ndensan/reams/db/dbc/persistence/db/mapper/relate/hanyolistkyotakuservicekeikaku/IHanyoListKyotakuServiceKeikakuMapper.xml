@@ -243,7 +243,7 @@
             AND DbV4001."rirekiNo"||DbV4001."edaban" =
             (
             SELECT
-             DbT4001sub."rirekiNo"||DbT4001sub."edaban"
+            DbT4001sub."rirekiNo"||DbT4001sub."edaban"
             FROM
             rgdb."DbT4001JukyushaDaicho" AS DbT4001sub
             WHERE
@@ -315,64 +315,64 @@
             </if>
             <if test="基準年月日 != null and !基準年月日.isEmpty()">
                 AND (
-                    (DbT3005. "hihokenshaNo",DbT3005. "taishoYM",DbT3005. "rirekiNo") IN
-                        (
-                        SELECT
-                            *
-                        FROM
-                            (
-                            SELECT
-                                B. "hihokenshaNo",
-                                B. "taishoYM",
-                                B. "rirekiNo"
-                            FROM
-                                rgdb."DbT3005KyotakuKeikakuTodokede" AS B
-                                INNER JOIN
-                                (
-                                SELECT
-                                    "hihokenshaNo",
-                                    MAX ("taishoYM" || "rirekiNo") AS "max1"
-                                FROM
-                                    rgdb."DbT3005KyotakuKeikakuTodokede"
-                                GROUP BY
-                                    "hihokenshaNo",
-                                    "taishoYM"
-                                ) AS A ON
-                                A."hihokenshaNo" = B."hihokenshaNo" AND
-                                A."max1" = (B."taishoYM" || B."rirekiNo")
-                                LEFT JOIN
-                                rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" C ON
-                                B."hihokenshaNo" = C."hihokenshaNo" AND
-                                B."taishoYM" = C."taishoYM" AND
-                                B."rirekiNo" = C."rirekiNo"
-                                LEFT JOIN
-                                rgdb."DbT3007KyotakuKeikakuJikoSakusei" D ON
-                                B."hihokenshaNo" = D."hihokenshaNo" AND
-                                B."taishoYM" = D."taishoYM" AND
-                                B."rirekiNo" = D."rirekiNo"
-                            WHERE
-                                (C."tekiyoKaishiYMD" <![CDATA[<=]]> '20161024' AND 
-                                (C."tekiyoShuryoYMD" <![CDATA[>=]]> '20161024' OR
-                                 C."tekiyoShuryoYMD" IS NULL OR
-                                 C."tekiyoShuryoYMD" = '')) OR
-                                (D."tekiyoKaishiYMD" <![CDATA[<=]]> '20161024' AND
-                                (D."tekiyoShuryoYMD" <![CDATA[>=]]> '20161024' OR
-                                 D."tekiyoShuryoYMD" IS NULL OR
-                                 D."tekiyoShuryoYMD" = ''))
-                            ) AS 基準日時点
-                        WHERE
-                            NOT EXISTS
-                                (
-                                SELECT
-                                    1
-                                FROM
-                                    rgdb. "DbT3005KyotakuKeikakuTodokede" AS B
-                                WHERE
-                                    基準日時点."hihokenshaNo" = B."hihokenshaNo" AND
-                                    基準日時点."taishoYM" <![CDATA[<]]> B."taishoYM"
-                                )
-                        )
-                    )
+                (DbT3005. "hihokenshaNo",DbT3005. "taishoYM",DbT3005. "rirekiNo") IN
+                (
+                SELECT
+                *
+                FROM
+                (
+                SELECT
+                B. "hihokenshaNo",
+                B. "taishoYM",
+                B. "rirekiNo"
+                FROM
+                rgdb."DbT3005KyotakuKeikakuTodokede" AS B
+                INNER JOIN
+                (
+                SELECT
+                "hihokenshaNo",
+                MAX ("taishoYM" || "rirekiNo") AS "max1"
+                FROM
+                rgdb."DbT3005KyotakuKeikakuTodokede"
+                GROUP BY
+                "hihokenshaNo",
+                "taishoYM"
+                ) AS A ON
+                A."hihokenshaNo" = B."hihokenshaNo" AND
+                A."max1" = (B."taishoYM" || B."rirekiNo")
+                LEFT JOIN
+                rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" C ON
+                B."hihokenshaNo" = C."hihokenshaNo" AND
+                B."taishoYM" = C."taishoYM" AND
+                B."rirekiNo" = C."rirekiNo"
+                LEFT JOIN
+                rgdb."DbT3007KyotakuKeikakuJikoSakusei" D ON
+                B."hihokenshaNo" = D."hihokenshaNo" AND
+                B."taishoYM" = D."taishoYM" AND
+                B."rirekiNo" = D."rirekiNo"
+                WHERE
+                (C."tekiyoKaishiYMD" <![CDATA[<=]]> '20161024' AND
+                (C."tekiyoShuryoYMD" <![CDATA[>=]]> '20161024' OR
+                C."tekiyoShuryoYMD" IS NULL OR
+                C."tekiyoShuryoYMD" = '')) OR
+                (D."tekiyoKaishiYMD" <![CDATA[<=]]> '20161024' AND
+                (D."tekiyoShuryoYMD" <![CDATA[>=]]> '20161024' OR
+                D."tekiyoShuryoYMD" IS NULL OR
+                D."tekiyoShuryoYMD" = ''))
+                ) AS 基準日時点
+                WHERE
+                NOT EXISTS
+                (
+                SELECT
+                1
+                FROM
+                rgdb. "DbT3005KyotakuKeikakuTodokede" AS B
+                WHERE
+                基準日時点."hihokenshaNo" = B."hihokenshaNo" AND
+                基準日時点."taishoYM" <![CDATA[<]]> B."taishoYM"
+                )
+                )
+                )
             </if>
         </if>
 
@@ -461,7 +461,7 @@
         <result property="dbT3006計画事業者番号" column="dbT3006計画事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="dbT7063_Keikaku事業者名称" column="dbT7063_Keikaku事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="dbT7063_Keikaku事業者カナ名称" column="dbT7063_Keikaku事業者カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
-        <result property="dbT7063_Keikaku管理者氏名" column="dbT7063_Keikaku管理者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="dbT7063_Keikaku管理者氏名" column="dbT7063_Keikaku管理者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="dbT7063_Keikaku管理者氏名カナ" column="dbT7063_Keikaku管理者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="dbT3006委託先事業者番号" column="dbT3006委託先事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="dbT7063_Itaku事業者名称" column="dbT7063_Itaku事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
