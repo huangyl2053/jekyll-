@@ -80,6 +80,9 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
         div.getShujiiKensakuJoken().getTxtKensakuNendo().clearFromValue();
         div.getShujiiKensakuJoken().getTxtKensakuNendo().clearToValue();
         div.getShujiiKensakuJoken().getTxtMaxCount().clearValue();
+        div.getShujiiKensakuJoken().getTxtMaxCount().setValue(
+                new Decimal(DbBusinessConfig.get(
+                                ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**
