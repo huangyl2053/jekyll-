@@ -695,7 +695,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).respond();
         }
-        handler.支払結果の設定(被保険者番号);
+        handler.支払結果の設定(被保険者番号, 限度額チェック);
         JutakuGaisuViewStateHolderParameter param = ViewStateHolder.get(ViewStateKeys.申請情報,
                 JutakuGaisuViewStateHolderParameter.class);
         JutakuGaisuDataParameter 住宅改修データ = new JutakuGaisuDataParameter();
