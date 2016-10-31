@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoToro
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoTorokuChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000065.ShinseishoTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kijunshunyugaku.TekiyoShinseishoManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -171,10 +170,7 @@ public class ShinseishoTorokuHandler {
             parameter.set抽出対象(div.getRadChushutsuTaisho().getSelectedKey());
         }
         parameter.set処理年度(new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4)));
-        if (div.getTxtHihokenshaNo().getValue() != null) {
-            HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHihokenshaNo().getValue().toString());
-            parameter.set被保険者番号(被保険者番号);
-        }
+        parameter.set被保険者番号(div.getTxtHihokenshaNo().getValue());
         parameter.set世帯員把握基準日(div.getTxtSetaiinHaakuKijunYMD().getValue());
         parameter.set世帯員把握基準日2(世帯員把握基準日2);
         parameter.set提出期限(div.getTxtTeishutsuKigen().getValue());
