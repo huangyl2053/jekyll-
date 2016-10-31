@@ -257,7 +257,6 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
         RString 市町村名 = 地方公共団体.get市町村名();
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         RString 日本語ファイル名 = new RString("汎用リスト　受給者台帳CSV");
-        RString 英数字ファイル名 = ファイル名;
         RString 出力ページ数;
         if ((csvWriter == null || csvWriter.getCount() == 0) && (csv2Writer == null || csv2Writer.getCount() == 0)) {
             出力ページ数 = new RString("0");
@@ -267,13 +266,10 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
             出力ページ数 = new RString(String.valueOf(csvWriter.getCount()));
         }
         出力条件 = new ArrayList<>();
-
         出力条件.add(抽出対象者);
-
         if (parameter.get宛名抽出条件().getShichoson_Code() != null && !parameter.get宛名抽出条件().getShichoson_Code().isEmpty()) {
             出力条件.add(保険者.concat(parameter.get宛名抽出条件().getShichoson_Mesho()));
         }
-
         if (ChushutsuHohoKubun.直近.equals(parameter.get抽出方法区分())) {
             if (parameter.is有効データ内最新()) {
                 出力条件.add(対象データ最新);
@@ -281,7 +277,6 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
                 出力条件.add(対象データ直近);
             }
         }
-
         if (parameter.getKijunYMD() != null && !parameter.getKijunYMD().isEmpty()) {
             出力条件.add(基準日.concat(parameter.getKijunYMD().wareki()
                     .eraType(EraType.KANJI)
@@ -290,27 +285,23 @@ public class HanyoListJukyushaDaichoProcess extends BatchProcessBase<HanyoRisuto
                     .fillType(FillType.ZERO)
                     .toDateString()));
         }
-
         set出力条件1();
         set出力条件2();
-
         set出力条件();
         set出力条件3();
         set出力条件4();
-
         if (parameter.get宛名抽出条件().getChiku_Kubun() != null && !全てNAME.equals(parameter.get宛名抽出条件().getChiku_Kubun())) {
             set出力条件_住所();
             set出力条件_行政区();
             set出力条件_地区();
         }
-
         EucFileOutputJokenhyoItem reportOutputJokenhyoItem = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
                 日本語ファイル名,
-                英数字ファイル名,
+                ファイル名,
+                new RString("DBD701001"),
                 出力ページ数,
                 出力条件);
         EucFileOutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem).print();
