@@ -49,4 +49,5 @@ public class SanteiIdoGennen {
     private boolean 随時フラグ;
     private RString 算定期;
     private boolean 画面移動フラグ;
+    private boolean 通常異動分の依頼金額計算;
 }
