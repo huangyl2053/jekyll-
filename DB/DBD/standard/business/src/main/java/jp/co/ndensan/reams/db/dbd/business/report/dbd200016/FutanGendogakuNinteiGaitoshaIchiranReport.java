@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200016;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.SetaiHyoji;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.NinteishaListSakuseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200001.FutanGendogakuNinteiGaitoshaIchiranReportSource;
@@ -28,6 +29,7 @@ public class FutanGendogakuNinteiGaitoshaIchiranReport extends Report<FutanGendo
     private final IOutputOrder 出力順;
     private static final int NUM_0 = 0;
     private static final int NUM_3 = 3;
+    private final SetaiHyoji 世帯表示;
 
     /**
      * インスタンスを生成します
@@ -37,14 +39,17 @@ public class FutanGendogakuNinteiGaitoshaIchiranReport extends Report<FutanGendo
      * @param 負担限度額認定者リストEntity NinteishaListSakuseiEntity
      * @param 導入団体 Association
      * @param 出力順 IOutputOrder
+     * @param 世帯表示 SetaiHyoji
      */
     public FutanGendogakuNinteiGaitoshaIchiranReport(RDateTime 作成日時, TargetList 対象リスト,
-            jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.NinteishaListSakuseiEntity 負担限度額認定者リストEntity, Association 導入団体, IOutputOrder 出力順) {
+            jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbz00001.NinteishaListSakuseiEntity 負担限度額認定者リストEntity,
+            Association 導入団体, IOutputOrder 出力順, SetaiHyoji 世帯表示) {
         this.作成日時 = 作成日時;
         this.対象リスト = 対象リスト;
         this.負担限度額認定者リストEntity = 負担限度額認定者リストEntity;
         this.導入団体 = 導入団体;
         this.出力順 = 出力順;
+        this.世帯表示 = 世帯表示;
     }
 
     /**
@@ -57,7 +62,7 @@ public class FutanGendogakuNinteiGaitoshaIchiranReport extends Report<FutanGendo
         int index = 1;
         for (int i = NUM_0; i < 負担限度額認定者リストEntity.get世帯員リスト().size(); i += NUM_3) {
             FutanGendogakuNinteiGaitoshaIchiranEditor editor
-                    = new FutanGendogakuNinteiGaitoshaIchiranEditor(作成日時, 対象リスト, 負担限度額認定者リストEntity, 導入団体, 出力順, index);
+                    = new FutanGendogakuNinteiGaitoshaIchiranEditor(作成日時, 対象リスト, 負担限度額認定者リストEntity, 導入団体, 出力順, index, 世帯表示);
             IFutanGendogakuNinteiGaitoshaIchiranBuilder builder
                     = new FutanGendogakuNinteiGaitoshaIchiranBuilder(editor);
             writer.writeLine(builder);
