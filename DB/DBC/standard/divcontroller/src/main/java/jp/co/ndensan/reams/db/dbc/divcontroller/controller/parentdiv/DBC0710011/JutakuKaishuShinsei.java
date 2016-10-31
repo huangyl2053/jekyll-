@@ -41,6 +41,7 @@ public class JutakuKaishuShinsei {
     private final RString 処理モード_取消 = new RString("取消");
     private final RString 処理モード_削除 = new RString("削除");
     private final RString 処理モード_照会 = new RString("照会");
+    private static final int INDEX_6 = 6;
 
     /**
      * 画面ロードメソッド
@@ -147,6 +148,22 @@ public class JutakuKaishuShinsei {
      */
     public ResponseData<JutakuKaishuShinseiDiv> onClick_btnBackResult(JutakuKaishuShinseiDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.該当者一覧).respond();
+    }
+
+    /**
+     * サービス年月変更メソッド
+     *
+     * @param div JutakuKaishuShinseiDiv
+     * @return ResponseData<JutakuKaishuShinseiDiv>
+     */
+    public ResponseData<JutakuKaishuShinseiDiv> onBlur_txtServiceYM(JutakuKaishuShinseiDiv div) {
+        if (div.getJutakuKaishuShinseiList().getTxtServiceYM().getValue() != null) {
+            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月,
+                    new FlexibleYearMonth(div.getJutakuKaishuShinseiList().getTxtServiceYM().getValue().toDateString().substring(0, INDEX_6)));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.住宅改修内容一覧_サービス年月, null);
+        }
+        return ResponseData.of(div).respond();
     }
 
     private void setModifyMode(RString 画面モード, JutakuKaishuShinseiDiv div) {
