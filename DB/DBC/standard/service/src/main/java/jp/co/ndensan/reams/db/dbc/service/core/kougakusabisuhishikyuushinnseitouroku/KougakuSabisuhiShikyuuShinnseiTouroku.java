@@ -428,7 +428,7 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
      * @param サービス提供年月 FlexibleYearMonth
      * @return int
      */
-    public int get事業高額高額介護支給申請履歴番号(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+    public int get事業高額介護支給申請履歴番号(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
         int 履歴番号 = 0;
         List<DbT3110JigyoKogakuShikyuShinseiEntity> 支給申請list
                 = 事業高額サービス費支給申請Dac.selectAllByKey(被保険者番号, サービス提供年月);
