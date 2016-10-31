@@ -97,7 +97,7 @@ public class DBC110020_JukyushaIdoRenrakuhyoOut extends BatchFlowBase<DBC110020_
             executeStep(受給者異動送付削除産);
         }
         executeStep(受給者異動の抽出);
-//        executeStep(データ比較処理);
+        executeStep(データ比較処理);
         executeStep(国保連インタフェース管理更新);
 
     }
