@@ -35,6 +35,7 @@ public class GemmenJuminKihonValidationHandler {
     private static final RString 決定日MESSAGE = new RString("決定日");
     private static final RString 計算処理MESSAGE = new RString("計算処理");
     private static final RString 減免前MESSAGE = new RString("減免前の合計額を超えています。");
+    private static final RString コンマ = new RString(",");
 
     /**
      * コンストラクタです。
@@ -318,9 +319,22 @@ public class GemmenJuminKihonValidationHandler {
          */
         public IValidationMessages validate減免額の整合性２(GemmenJoho 最新減免の情報) {
             Decimal 減免額 = div.getGemmenMain().getKiwarigaku().getTxtGemmengaku().getValue();
-            Decimal 減免前介護保険料額_年額 = 最新減免の情報.get減免前介護保険料_年額();
-            boolean flag = (減免額 != null && 減免前介護保険料額_年額 == null)
-                    || (減免額 != null && 減免前介護保険料額_年額 != null && 減免額.compareTo(減免前介護保険料額_年額) > 0);
+            RString 普徴_減免前_合計R = div.getGemmenMain().getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemMaeTotal().getText();
+            RString 特徴_減免前_合計R = div.getGemmenMain().getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemMaeTotal().getText();
+            Decimal 普徴_減免前_合計;
+            Decimal 特徴_減免前_合計;
+            if (普徴_減免前_合計R == null || 普徴_減免前_合計R.isEmpty()) {
+                普徴_減免前_合計 = Decimal.ZERO;
+            } else {
+                普徴_減免前_合計 = new Decimal(普徴_減免前_合計R.replace(コンマ, RString.EMPTY).toString());
+            }
+            if (特徴_減免前_合計R == null || 特徴_減免前_合計R.isEmpty()) {
+                特徴_減免前_合計 = Decimal.ZERO;
+            } else {
+                特徴_減免前_合計 = new Decimal(特徴_減免前_合計R.replace(コンマ, RString.EMPTY).toString());
+            }
+            Decimal 合計 = 特徴_減免前_合計.add(普徴_減免前_合計);
+            boolean flag = (減免額 != null && 減免額.compareTo(合計) > 0);
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             messages.add(ValidateChain.validateStart(div)
                     .ifNot(flag ? GemmenJuminKihonSpec.賦課情報の存在チェック : GemmenJuminKihonSpec.計算処理の未実行チェック)
