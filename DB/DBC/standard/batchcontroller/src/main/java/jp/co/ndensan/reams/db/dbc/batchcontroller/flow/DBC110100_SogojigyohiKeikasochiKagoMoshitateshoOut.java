@@ -525,11 +525,11 @@ public class DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOut extends BatchFlo
         if (Encode.UTF_8.equals(soufuFairuParameter.get文字コード()) && レコード件数合計 != INT_0) {
             入力ファイルパス = getResult(
                     RString.class, new RString(送付ファイル作成), KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess.INPUT_PATH);
-            File file出力 = new File(出力ファイルパス.toString());
-            file出力.delete();
-            executeStep(文字コード変換);
-            File file入力 = new File(入力ファイルパス.toString());
-            file入力.delete();
+            File file = new File(出力ファイルパス.toString());
+            if ((file.exists() && file.delete()) || !file.exists()) {
+                executeStep(文字コード変換);
+            }
+            deleteFile(入力ファイルパス);
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
                 FilesystemName.fromString(出力ファイルパス.substring(出力ファイルパス.lastIndexOf(バックスラッシュ) + INT_1)));
@@ -537,6 +537,16 @@ public class DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOut extends BatchFlo
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
         SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(出力ファイルパス), opts);
         エントリ情報List.add(sfd);
+    }
+
+    private void deleteFile(RString filePath) {
+        if (RString.isNullOrEmpty(filePath)) {
+            return;
+        }
+        File file = new File(filePath.toString());
+        if (file.exists()) {
+            file.getAbsoluteFile().deleteOnExit();
+        }
     }
 
 }
