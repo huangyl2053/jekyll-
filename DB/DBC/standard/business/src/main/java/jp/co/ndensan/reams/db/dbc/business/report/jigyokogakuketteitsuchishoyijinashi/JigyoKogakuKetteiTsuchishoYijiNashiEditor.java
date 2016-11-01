@@ -169,8 +169,8 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiEditor implements IJigyoKogakuKe
 
         set窓口払と口座払(source);
 
-        if (支給.equals(帳票情報.get支給不支給決定区分()) && 窓口払い値.equals(帳票情報.get支払方法区分())
-                && 帳票情報.get支給金額() != null && 帳票情報.get支給金額().compareTo(Decimal.ZERO) <= 0) {
+        if (!(支給.equals(帳票情報.get支給不支給決定区分()) && 窓口払い値.equals(帳票情報.get支払方法区分())
+                && 帳票情報.get支給金額() != null && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0)) {
             source.torikeshiMochimono1 = 半角アスタリスク;
             source.torikeshiMochimono2 = 半角アスタリスク;
             source.torikeshiShiharaibasho = 半角アスタリスク;

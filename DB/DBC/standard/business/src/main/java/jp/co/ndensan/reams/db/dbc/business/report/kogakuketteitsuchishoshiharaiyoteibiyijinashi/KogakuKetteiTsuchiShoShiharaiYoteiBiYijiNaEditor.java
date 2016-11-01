@@ -344,8 +344,8 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
                 source.torikeshi2 = 半角アスタリスク2;
             }
         }
-        if (帳票情報.get支給_不支給決定区分() != null && 支給.equals(帳票情報.get支給_不支給決定区分())
-                && !(Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0)) {
+        if (!(帳票情報.get支給_不支給決定区分() != null && 支給.equals(帳票情報.get支給_不支給決定区分())
+                && Decimal.ZERO.compareTo(帳票情報.get支給金額()) < 0)) {
             source.torikeshiMochimono1 = 半角アスタリスク;
             source.torikeshiMochimono2 = 半角アスタリスク;
             source.torikeshiShiharaibasho = 半角アスタリスク;
