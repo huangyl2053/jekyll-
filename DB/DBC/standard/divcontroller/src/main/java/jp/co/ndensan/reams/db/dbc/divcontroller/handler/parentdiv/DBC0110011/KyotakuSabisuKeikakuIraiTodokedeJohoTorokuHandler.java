@@ -256,6 +256,7 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         div.getTxtTodokedeshaTelNo().clearDomain();
         div.getDdlTodokedeshaKankeiKubun().setDataSource(get届出者関係区分DataSource());
         div.getServiceAddAndServicePlanCreate().setReadOnly(false);
+        div.getTxtTodokedeYM().setValue(RDate.getNowDate());
     }
 
     /**
@@ -561,7 +562,9 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuHandler {
         div.getTxtTodokedeshaTelNo().setDomain(居宅給付計画届出.get届出者電話番号() == null ? TelNo.EMPTY
                 : 居宅給付計画届出.get届出者電話番号());
         div.getDdlTodokedeshaKankeiKubun().setDataSource(get届出者関係区分DataSource());
-        div.getDdlTodokedeshaKankeiKubun().setSelectedKey(居宅給付計画届出.get届出者関係区分());
+        if (!RString.isNullOrEmpty(居宅給付計画届出.get届出者関係区分())) {
+            div.getDdlTodokedeshaKankeiKubun().setSelectedKey(居宅給付計画届出.get届出者関係区分());
+        }
     }
 
     private void set計画事業者エリア照会(KyotakuKeikakuTodokede 居宅給付計画届出) {
