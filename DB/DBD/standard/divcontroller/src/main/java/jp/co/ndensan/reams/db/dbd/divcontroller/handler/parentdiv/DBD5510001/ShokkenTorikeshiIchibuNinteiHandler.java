@@ -1239,11 +1239,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
     private int set有効期間(KekkaShosaiJohoOutModel outModel) {
         if (outModel != null && outModel.get認定内容().get有効開始年月日() != null && !outModel.get認定内容().get有効開始年月日().isEmpty()
                 && outModel.get認定内容().get有効終了年月日() != null && !outModel.get認定内容().get有効終了年月日().isEmpty()) {
-            if (outModel.get認定内容().get有効開始年月日().getDayValue() == 1) {
-                return outModel.get認定内容().get有効終了年月日().getMonthValue() - outModel.get認定内容().get有効開始年月日().getMonthValue();
-            } else {
-                return outModel.get認定内容().get有効終了年月日().getMonthValue() - outModel.get認定内容().get有効開始年月日().getMonthValue() - 1;
-            }
+            return outModel.get認定内容().get有効終了年月日().getMonthValue() - outModel.get認定内容().get有効開始年月日().getMonthValue() + 1;
         }
         return 0;
     }
