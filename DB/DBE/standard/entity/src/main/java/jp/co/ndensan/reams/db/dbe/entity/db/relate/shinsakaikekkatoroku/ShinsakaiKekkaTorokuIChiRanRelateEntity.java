@@ -50,4 +50,5 @@ public class ShinsakaiKekkaTorokuIChiRanRelateEntity {
     private RString 一次判定結果変更理由;
     private RString 審査会意見種類;
     private ShinseishoKanriNo 申請書管理番号;
+    private Code 厚労省IF識別コード;
 }
