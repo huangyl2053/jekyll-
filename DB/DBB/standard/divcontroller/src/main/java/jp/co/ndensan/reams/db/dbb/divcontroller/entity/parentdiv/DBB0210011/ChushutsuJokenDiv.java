@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChushutsuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -38,8 +38,8 @@ public class ChushutsuJokenDiv extends Panel {
     private UmareYMDDiv UmareYMD;
     @JsonProperty("lin2")
     private HorizontalLine lin2;
-    @JsonProperty("ccdChikuShichosonSelect")
-    private ChikuShichosonSelectDiv ccdChikuShichosonSelect;
+    @JsonProperty("ChikuShichoson")
+    private ChikuShichosonDiv ChikuShichoson;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -174,12 +174,21 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     /*
-     * getccdChikuShichosonSelect
-     * @return ccdChikuShichosonSelect
+     * getChikuShichoson
+     * @return ChikuShichoson
      */
-    @JsonProperty("ccdChikuShichosonSelect")
-    public IChikuShichosonSelectDiv getCcdChikuShichosonSelect() {
-        return ccdChikuShichosonSelect;
+    @JsonProperty("ChikuShichoson")
+    public ChikuShichosonDiv getChikuShichoson() {
+        return ChikuShichoson;
+    }
+
+    /*
+     * setChikuShichoson
+     * @param ChikuShichoson ChikuShichoson
+     */
+    @JsonProperty("ChikuShichoson")
+    public void setChikuShichoson(ChikuShichosonDiv ChikuShichoson) {
+        this.ChikuShichoson = ChikuShichoson;
     }
 
     /*
@@ -253,6 +262,11 @@ public class ChushutsuJokenDiv extends Panel {
     @JsonIgnore
     public void  setTxtUmareEd(TextBoxDate txtUmareEd) {
         this.getUmareYMD().setTxtUmareEd(txtUmareEd);
+    }
+
+    @JsonIgnore
+    public IChikuShichosonSelectDiv getCcdChikuShichosonSelect() {
+        return this.getChikuShichoson().getCcdChikuShichosonSelect();
     }
 
     // </editor-fold>

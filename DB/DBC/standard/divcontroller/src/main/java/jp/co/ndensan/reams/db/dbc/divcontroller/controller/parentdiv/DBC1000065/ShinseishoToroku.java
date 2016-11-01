@@ -108,6 +108,14 @@ public class ShinseishoToroku {
                 return ResponseData.of(div).addValidationMessages(valid1).respond();
             }
         }
+        if ((div.getChkIchiranhyoCsv().isAllSelected() && !div.getChkTsuchisho().isAllSelected()
+                && !div.getChkShinseisho().isAllSelected()) || (!div.getChkIchiranhyoCsv().isAllSelected()
+                && !div.getChkTsuchisho().isAllSelected() && !div.getChkShinseisho().isAllSelected())) {
+            ValidationMessageControlPairs valid2 = getValidationHandler(div).出力対象チェックValidate();
+            if (valid2.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(valid2).respond();
+            }
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(
                     new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),

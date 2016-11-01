@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Aug 25 19:15:53 CST 2016 
+ * Wed Oct 26 16:10:51 CST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgTanitsuTaishoShoriItchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
     private RString txtTuki;
     private RString txtShori;
@@ -28,6 +28,7 @@ public class dgTanitsuTaishoShoriItchiran_Row extends DataRow {
     private RString txtShoriNichiji;
     private RString hdnTukiCode;
     private RString hdnShoriCode;
+    private RString hdnShoriNichiji;
 
     public dgTanitsuTaishoShoriItchiran_Row() {
         super();
@@ -38,6 +39,7 @@ public class dgTanitsuTaishoShoriItchiran_Row extends DataRow {
         this.txtShoriNichiji = RString.EMPTY;
         this.hdnTukiCode = RString.EMPTY;
         this.hdnShoriCode = RString.EMPTY;
+        this.hdnShoriNichiji = RString.EMPTY;
         this.setOriginalData("txtTuki", txtTuki);
         this.setOriginalData("txtShori", txtShori);
         this.setOriginalData("txtTaishoFuairu", txtTaishoFuairu);
@@ -45,9 +47,10 @@ public class dgTanitsuTaishoShoriItchiran_Row extends DataRow {
         this.setOriginalData("txtShoriNichiji", txtShoriNichiji);
         this.setOriginalData("hdnTukiCode", hdnTukiCode);
         this.setOriginalData("hdnShoriCode", hdnShoriCode);
+        this.setOriginalData("hdnShoriNichiji", hdnShoriNichiji);
     }
 
-    public dgTanitsuTaishoShoriItchiran_Row(RString txtTuki, RString txtShori, RString txtTaishoFuairu, RString txtShoriJotai, RString txtShoriNichiji, RString hdnTukiCode, RString hdnShoriCode) {
+    public dgTanitsuTaishoShoriItchiran_Row(RString txtTuki, RString txtShori, RString txtTaishoFuairu, RString txtShoriJotai, RString txtShoriNichiji, RString hdnTukiCode, RString hdnShoriCode, RString hdnShoriNichiji) {
         super();
         this.setOriginalData("txtTuki", txtTuki);
         this.setOriginalData("txtShori", txtShori);
@@ -56,6 +59,7 @@ public class dgTanitsuTaishoShoriItchiran_Row extends DataRow {
         this.setOriginalData("txtShoriNichiji", txtShoriNichiji);
         this.setOriginalData("hdnTukiCode", hdnTukiCode);
         this.setOriginalData("hdnShoriCode", hdnShoriCode);
+        this.setOriginalData("hdnShoriNichiji", hdnShoriNichiji);
         this.txtTuki = txtTuki;
         this.txtShori = txtShori;
         this.txtTaishoFuairu = txtTaishoFuairu;
@@ -63,6 +67,7 @@ public class dgTanitsuTaishoShoriItchiran_Row extends DataRow {
         this.txtShoriNichiji = txtShoriNichiji;
         this.hdnTukiCode = hdnTukiCode;
         this.hdnShoriCode = hdnShoriCode;
+        this.hdnShoriNichiji = hdnShoriNichiji;
     }
 
     public RString getTxtTuki() {
@@ -91,6 +96,10 @@ public class dgTanitsuTaishoShoriItchiran_Row extends DataRow {
 
     public RString getHdnShoriCode() {
         return hdnShoriCode;
+    }
+
+    public RString getHdnShoriNichiji() {
+        return hdnShoriNichiji;
     }
 
     public void setTxtTuki(RString txtTuki) {
@@ -126,6 +135,11 @@ public class dgTanitsuTaishoShoriItchiran_Row extends DataRow {
     public void setHdnShoriCode(RString hdnShoriCode) {
         this.setOriginalData("hdnShoriCode", hdnShoriCode);
         this.hdnShoriCode = hdnShoriCode;
+    }
+
+    public void setHdnShoriNichiji(RString hdnShoriNichiji) {
+        this.setOriginalData("hdnShoriNichiji", hdnShoriNichiji);
+        this.hdnShoriNichiji = hdnShoriNichiji;
     }
 
     // </editor-fold>

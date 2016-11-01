@@ -73,7 +73,7 @@ public class ShichosonTokubetuKyufuServiceFinder {
      * @param serviceCode serviceCode
      * @return 最大履歴番号
      */
-    public int get最大履歴番号(RString serviceCode) {
+    public Integer get最大履歴番号(RString serviceCode) {
         IShichosonTokubetuKyufuServiceMapper mapper = mapperProvider.create(IShichosonTokubetuKyufuServiceMapper.class);
         return mapper.get最大履歴番号(serviceCode);
     }

@@ -3503,7 +3503,7 @@
             AND(A."yukoMukoKubun"='1' 
             OR (A."yukoMukoKubun"='2'
             AND A."yokaigoJotaiKubunCode"='01'
-            AND A."shikakuSoshitsuYMD" IS NULL)))
+            AND A."shikakuSoshitsuYMD" IS NULL))
     </sql>
     <sql id="条件E">
         AND (A."dataKubun" = '00'
@@ -3584,7 +3584,7 @@
     </sql>
     <sql id="転入旧措置のデータ取得2">
         AND A."jukyuShinseiJiyu"='7'
-        AND A."dataKubun" == '00'
+        AND A."dataKubun" = '00'
         AND A."kyuSochishaFlag" = TRUE
     </sql>
     <sql id="職権他のデータ取得2">

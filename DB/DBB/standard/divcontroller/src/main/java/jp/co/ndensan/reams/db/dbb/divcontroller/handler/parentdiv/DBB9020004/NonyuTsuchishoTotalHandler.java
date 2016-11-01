@@ -177,22 +177,22 @@ public final class NonyuTsuchishoTotalHandler {
         div.getNotsuInfo().getRadSokujiHakkoKeishiki().setDataSource(出力形式);
 
         List<KeyValueDataSource> 納付額欄 = new ArrayList<>();
-        納付額欄.add(new KeyValueDataSource(NofugakuranHyojiKubun.__を印字する.getコード(),
-                NofugakuranHyojiKubun.__を印字する.get略称()));
-        納付額欄.add(new KeyValueDataSource(NofugakuranHyojiKubun._口座振替_を印字する.getコード(),
-                NofugakuranHyojiKubun._口座振替_を印字する.get略称()));
-        納付額欄.add(new KeyValueDataSource(NofugakuranHyojiKubun.星印を印字する.getコード(),
-                NofugakuranHyojiKubun.星印を印字する.get略称()));
+        納付額欄.add(new KeyValueDataSource(NofugakuranHyojiKubun.空白を印字する.getコード(),
+                NofugakuranHyojiKubun.空白を印字する.get名称()));
+        納付額欄.add(new KeyValueDataSource(NofugakuranHyojiKubun.口座振替を印字する.getコード(),
+                NofugakuranHyojiKubun.口座振替を印字する.get名称()));
+        納付額欄.add(new KeyValueDataSource(NofugakuranHyojiKubun.マスクを印字する.getコード(),
+                NofugakuranHyojiKubun.マスクを印字する.get名称()));
         納付額欄.add(new KeyValueDataSource(NofugakuranHyojiKubun.金額出力.getコード(),
-                NofugakuranHyojiKubun.金額出力.get略称()));
+                NofugakuranHyojiKubun.金額出力.get名称()));
         div.getNotsuInfo().getDdlKozaMongonRyoshushoNofugaku().setDataSource(納付額欄);
         div.getNotsuInfo().getDdlKozaMongonNofushoNofugaku().setDataSource(納付額欄);
 
         List<KeyValueDataSource> 領収印欄 = new ArrayList<>();
-        領収印欄.add(new KeyValueDataSource(RyoshuinranHyojiKubun.__を印字する.getコード(),
-                RyoshuinranHyojiKubun.__を印字する.get略称()));
-        領収印欄.add(new KeyValueDataSource(RyoshuinranHyojiKubun._口座振替_を印字する.getコード(),
-                RyoshuinranHyojiKubun._口座振替_を印字する.get略称()));
+        領収印欄.add(new KeyValueDataSource(RyoshuinranHyojiKubun.空白を印字する.getコード(),
+                RyoshuinranHyojiKubun.空白を印字する.get名称()));
+        領収印欄.add(new KeyValueDataSource(RyoshuinranHyojiKubun.口座振替を印字する.getコード(),
+                RyoshuinranHyojiKubun.口座振替を印字する.get名称()));
         div.getNotsuInfo().getDdlKozaMongonRyoshushoRyoshuin().setDataSource(領収印欄);
         div.getNotsuInfo().getDdlKozaMongonNofushoRyoshuin().setDataSource(領収印欄);
 
@@ -221,20 +221,20 @@ public final class NonyuTsuchishoTotalHandler {
         div.getNotsuInfo().getDdlNofushoShichosonNameUmu().setDataSource(納付書市町村名);
 
         List<KeyValueDataSource> 納期限出力方法 = new ArrayList<>();
-        納期限出力方法.add(new KeyValueDataSource(NokigenShutsuryokuHoho.全ての期分を印字する.getコード(),
-                NokigenShutsuryokuHoho.全ての期分を印字する.get略称()));
+        納期限出力方法.add(new KeyValueDataSource(NokigenShutsuryokuHoho.全ての期.getコード(),
+                NokigenShutsuryokuHoho.全ての期.get名称()));
         納期限出力方法.add(new KeyValueDataSource(
-                NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.getコード(),
-                NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.get略称()));
+                NokigenShutsuryokuHoho.対象の期.getコード(),
+                NokigenShutsuryokuHoho.対象の期.get名称()));
         div.getNotsuInfo().getDdlNokigenShutsuryokuHoho().setDataSource(納期限出力方法);
 
         List<KeyValueDataSource> 口座振替のOCR出力方法 = new ArrayList<>();
-        口座振替のOCR出力方法.add(new KeyValueDataSource(OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす.getコード(),
-                OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす.get略称()));
-        口座振替のOCR出力方法.add(new KeyValueDataSource(OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない.getコード(),
-                OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない.get略称()));
-        口座振替のOCR出力方法.add(new KeyValueDataSource(OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する.getコード(),
-                OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する.get略称()));
+        口座振替のOCR出力方法.add(new KeyValueDataSource(OCRShutsuryokuHoho.マスクでつぶす.getコード(),
+                OCRShutsuryokuHoho.マスクでつぶす.get名称()));
+        口座振替のOCR出力方法.add(new KeyValueDataSource(OCRShutsuryokuHoho.印字しない.getコード(),
+                OCRShutsuryokuHoho.印字しない.get名称()));
+        口座振替のOCR出力方法.add(new KeyValueDataSource(OCRShutsuryokuHoho.印字する.getコード(),
+                OCRShutsuryokuHoho.印字する.get名称()));
         div.getNotsuInfo().getDdlOCRShutsuryokuHoho().setDataSource(口座振替のOCR出力方法);
 
         List<KeyValueDataSource> 差額令書発行指示区分 = new ArrayList<>();
@@ -258,10 +258,10 @@ public final class NonyuTsuchishoTotalHandler {
         div.getNotsuInfo().getRadNofishoToriatsukaiKigenHyojiH().setDataSource(コンビニ表示);
 
         List<KeyValueDataSource> 当初出力方法 = new ArrayList<>();
-        当初出力方法.add(new KeyValueDataSource(ToshoShutsuryokuHoho.前期_中期_後期を全件出力.getコード(),
-                ToshoShutsuryokuHoho.前期_中期_後期を全件出力.get略称()));
-        当初出力方法.add(new KeyValueDataSource(ToshoShutsuryokuHoho.前期_中期_後期を別々に出力.getコード(),
-                ToshoShutsuryokuHoho.前期_中期_後期を別々に出力.get略称()));
+        当初出力方法.add(new KeyValueDataSource(ToshoShutsuryokuHoho.全件出力.getコード(),
+                ToshoShutsuryokuHoho.全件出力.get名称()));
+        当初出力方法.add(new KeyValueDataSource(ToshoShutsuryokuHoho.別々出力.getコード(),
+                ToshoShutsuryokuHoho.別々出力.get名称()));
         div.getNotsuInfo().getRadToshoShutsuryokuK().setDataSource(当初出力方法);
         div.getNotsuInfo().getRadToshoShutsuryokuH().setDataSource(当初出力方法);
 
@@ -285,11 +285,11 @@ public final class NonyuTsuchishoTotalHandler {
         div.getNotsuInfo().getDdlKokiKaishiKiH().setDataSource(開始期);
 
         List<KeyValueDataSource> 算定の基礎 = new ArrayList<>();
-        算定の基礎.add(new KeyValueDataSource(SanteiKiso.空白.getコード(), SanteiKiso.空白.get略称()));
-        算定の基礎.add(new KeyValueDataSource(SanteiKiso.保険料率.getコード(), SanteiKiso.保険料率.get略称()));
-        算定の基礎.add(new KeyValueDataSource(SanteiKiso.年額保険料.getコード(), SanteiKiso.年額保険料.get略称()));
-        算定の基礎.add(new KeyValueDataSource(SanteiKiso.最終期保険料額.getコード(), SanteiKiso.最終期保険料額.get略称()));
-        算定の基礎.add(new KeyValueDataSource(SanteiKiso.保険料率_今年度.getコード(), SanteiKiso.保険料率_今年度.get略称()));
+        算定の基礎.add(new KeyValueDataSource(SanteiKiso.空白.getコード(), SanteiKiso.空白.get名称()));
+        算定の基礎.add(new KeyValueDataSource(SanteiKiso.保険料率.getコード(), SanteiKiso.保険料率.get名称()));
+        算定の基礎.add(new KeyValueDataSource(SanteiKiso.年額保険料.getコード(), SanteiKiso.年額保険料.get名称()));
+        算定の基礎.add(new KeyValueDataSource(SanteiKiso.最終期保険料額.getコード(), SanteiKiso.最終期保険料額.get名称()));
+        算定の基礎.add(new KeyValueDataSource(SanteiKiso.保険料率_今年度.getコード(), SanteiKiso.保険料率_今年度.get名称()));
         div.getNotsuInfo().getDdlKiso1().setDataSource(算定の基礎);
         div.getNotsuInfo().getDdlKiso2().setDataSource(算定の基礎);
         div.getNotsuInfo().getDdlKiso3().setDataSource(算定の基礎);

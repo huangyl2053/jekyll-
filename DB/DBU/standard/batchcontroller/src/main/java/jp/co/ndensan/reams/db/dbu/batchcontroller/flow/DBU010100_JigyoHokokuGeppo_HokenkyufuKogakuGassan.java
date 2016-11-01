@@ -44,6 +44,7 @@ public class DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassan extends BatchFlow
     private static final String 事業報告統計データ = "事業報告統計データ";
     private static final String 帳票出力_保険給付決定状況_高額合算分 = "帳票出力_保険給付決定状況_高額合算分";
     private static final RString EUCエンティティID = new RString("DBU070801");
+    private static final RString 区分_1 = new RString("1");
     private DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter parameter;
     private FileSpoolManager manager;
 
@@ -59,11 +60,13 @@ public class DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassan extends BatchFlow
                 || PrintControlKubun.集計後印刷.getコード().equals(getParameter().getプリントコントロール区分())) {
             executeStep(事業状況報告統計元データ作成);
             executeStep(帳票出力_処理結果確認リスト);
-            executeStep(CSV作成_ファイル出力_01);
-            executeStep(CSV作成_ファイル出力_02);
-            executeStep(CSV作成_ファイル出力_03);
-            executeStep(CSV作成_ファイル出力_04);
-            executeStep(CSV作成_ファイル出力_05);
+            if (区分_1.equals(getParameter().get報告区分())) {
+                executeStep(CSV作成_ファイル出力_01);
+                executeStep(CSV作成_ファイル出力_02);
+                executeStep(CSV作成_ファイル出力_03);
+                executeStep(CSV作成_ファイル出力_04);
+                executeStep(CSV作成_ファイル出力_05);
+            }
             executeStep(事業報告統計データ);
             if (PrintControlKubun.集計後印刷.getコード().equals(getParameter().getプリントコントロール区分())) {
                 executeStep(帳票出力_保険給付決定状況_高額合算分);

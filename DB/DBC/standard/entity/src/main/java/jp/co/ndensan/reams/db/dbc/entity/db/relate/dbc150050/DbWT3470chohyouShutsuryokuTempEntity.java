@@ -44,7 +44,6 @@ public class DbWT3470chohyouShutsuryokuTempEntity
     @PrimaryKey
     @TempTableColumnOrder(1)
     private int renban;
-    @PrimaryKey
     @TempTableColumnOrder(2)
     private ShikibetsuCode shikibetsuCode;
     @TempTableColumnOrder(3)
@@ -163,7 +162,6 @@ public class DbWT3470chohyouShutsuryokuTempEntity
     private ServiceShuruiCode serviceShuruiCode;
     @TempTableColumnOrder(60)
     private ServiceKomokuCode serviceKomokuCode;
-    //TODO serviceCode
     @TempTableColumnOrder(61)
     private RString serviceCode;
     @TempTableColumnOrder(62)

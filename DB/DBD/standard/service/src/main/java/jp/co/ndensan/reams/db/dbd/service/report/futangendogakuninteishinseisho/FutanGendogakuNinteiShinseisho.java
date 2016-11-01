@@ -120,10 +120,10 @@ public class FutanGendogakuNinteiShinseisho {
         FlexibleDate 生年月日 = business.get生年月日();
         if (生年月日 != null && !生年月日.isEmpty()) {
             if (JuminShubetsu.日本人.getCode().equals(住民種別コード)
-                || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
+                    || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日_日本人(生年月日);
             } else if (JuminShubetsu.外国人.getCode().equals(住民種別コード)
-                       || JuminShubetsu.住登外個人_外国人.getCode().equals(住民種別コード)) {
+                    || JuminShubetsu.住登外個人_外国人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日(生年月日, business.get生年月日不詳区分());
             }
         }
@@ -144,7 +144,11 @@ public class FutanGendogakuNinteiShinseisho {
                 郵便番号,
                 business.get住所(),
                 注意文,
-                ninshoshaYakushokuMei
+                ninshoshaYakushokuMei,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY
         );
         list.add(FutangendogakuNinteiShinseishoReport.createReport(item));
         return list;

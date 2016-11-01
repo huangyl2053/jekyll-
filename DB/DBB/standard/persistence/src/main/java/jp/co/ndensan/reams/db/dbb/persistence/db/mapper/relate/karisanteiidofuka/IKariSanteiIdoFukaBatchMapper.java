@@ -225,4 +225,14 @@ public interface IKariSanteiIdoFukaBatchMapper {
      * 賦課の情報一時テーブルを削除します。
      */
     void delete賦課の情報一時テーブル();
+
+    /**
+     * UrT0700ShunoKanri_workを削除します。
+     */
+    void deleteUrT0700ShunoKanri_work();
+
+    /**
+     * UrT0705ChoteiKyotsu_workを削除します。
+     */
+    void deleteUrT0705ChoteiKyotsu_work();
 }

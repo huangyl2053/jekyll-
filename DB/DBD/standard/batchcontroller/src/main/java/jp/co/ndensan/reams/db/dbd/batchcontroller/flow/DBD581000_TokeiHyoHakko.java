@@ -23,8 +23,8 @@ public class DBD581000_TokeiHyoHakko extends BatchFlowBase<DBD581000_TokeiHyoHak
     private static final String 受給者数状況表の発行 = "ukeishaJyokyohyoHakkou";
     private static final RString 要介護認定実施状況表 = new RString("要介護認定実施状況表（その月に申請・認定を受けた受給者の統計）");
     private static final RString 要介護認定月別受給者数状況表 = new RString("要介護認定月別受給者認定者数状況表（その月に基準日時点の受給者の統計）");
-    private static final RString BATCH_ID_DBD581001 = new RString("DBD581001");
-    private static final RString BATCH_ID_DBD582001 = new RString("DBD582001");
+    private static final RString BATCH_ID_DBD581001 = new RString("DBD581001_YokaigoNinteiJisshiJokyoHyo");
+    private static final RString BATCH_ID_DBD582001 = new RString("DBD582001_YokaigoNinteiTsukibetsuJukyushaSuJokyoHyo");
 
     @Override
     protected void defineFlow() {

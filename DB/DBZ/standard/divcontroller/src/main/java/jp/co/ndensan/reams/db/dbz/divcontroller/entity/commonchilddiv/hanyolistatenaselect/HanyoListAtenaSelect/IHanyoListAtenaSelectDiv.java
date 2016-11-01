@@ -304,4 +304,14 @@ public interface IHanyoListAtenaSelectDiv extends ICommonChildDivBaseProperties 
      */
     public HanyoListAtenaSelectDiv get宛名抽出条件子Div();
 
+    /**
+     * 「宛名検索条件」ラジオボタン連動処理をします。
+     */
+    public void onChange_SelectKijun();
+
+    /**
+     * 「地区」DDL連動処理をします。
+     */
+    public void onChange_SelectChiku();
+
 }

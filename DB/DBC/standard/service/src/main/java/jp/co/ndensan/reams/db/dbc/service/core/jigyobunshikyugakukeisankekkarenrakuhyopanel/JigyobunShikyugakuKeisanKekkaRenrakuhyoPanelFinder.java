@@ -7,16 +7,15 @@ package jp.co.ndensan.reams.db.dbc.service.core.jigyobunshikyugakukeisankekkaren
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel
-        .JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter;
+import jp.co.ndensan.reams.db.dbc.business.core.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanResultEntity;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuPanelListParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jigyobunshikyugakukeisankkarenrakuhyopanel.JigyobunShikyugakuKeisanPanelEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigyobunshikyugakukeisankekkarenrakuhyo
-        .IJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jigyobunshikyugakukeisankekkarenrakuhyo.IJigyobunShikyugakuKeisanPanelMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -64,22 +63,74 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelFinder {
      * @param parameter
      * JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter
      *
-     * @return List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult>
+     * @return List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity>
      */
-    public List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult> getJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelList(
-            JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter parameter) {
+    public List<JigyobunShikyugakuKeisanResultEntity> getJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelList(
+            JigyobunShikyugakuPanelListParameter parameter) {
 
-        List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult> renrakuhyoPanelList = new ArrayList();
-        IJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelMapper mapper = mapperProvider.create(
-                IJigyobunShikyugakuKeisanKekkaRenrakuhyoPanelMapper.class);
-        List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity> panelentity = mapper.get対象データ(parameter);
-        if (panelentity.isEmpty()) {
-            return renrakuhyoPanelList;
-        } else {
-            for (JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelEntity entity : panelentity) {
-                renrakuhyoPanelList.add(new JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult(entity));
+        IJigyobunShikyugakuKeisanPanelMapper mapper = mapperProvider.create(
+                IJigyobunShikyugakuKeisanPanelMapper.class);
+        List<JigyobunShikyugakuKeisanPanelEntity> list = mapper.get対象データ(parameter);
+        List<JigyobunShikyugakuKeisanResultEntity> resultList = new ArrayList<>();
+        if (list != null) {
+            for (JigyobunShikyugakuKeisanPanelEntity entity : list) {
+                JigyobunShikyugakuKeisanResultEntity resultEntity = new JigyobunShikyugakuKeisanResultEntity();
+                resultEntity.setTaishoNendo(entity.getTaishoNendo());
+                resultEntity.setSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD(entity.getSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD());
+                resultEntity.setShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo());
+                resultEntity.setShikyuShinseishoSeiriNo(entity.getShikyuShinseishoSeiriNo());
+                resultEntity.setRirekiNo(entity.getRirekiNo());
+                resultEntity.setHokenSeidoCode(entity.getHokenSeidoCode());
+                resultEntity.setHihokenshaNo(entity.getHihokenshaNo());
+                resultEntity.setDbt3173Entity(entity.getDbt3173Entity());
+                resultEntity.setDbt3172Entity(entity.getDbt3172Entity());
+                resultList.add(resultEntity);
             }
         }
-        return renrakuhyoPanelList;
+        return resultList;
+    }
+
+    /**
+     * 事業高額合算支給額計算結果情報を取得します
+     *
+     * @param parameter
+     * JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelListParameter
+     *
+     * @return List<JigyobunShikyugakuKeisanKekkaRenrakuhyoPanelResult>
+     */
+    public List<JigyobunShikyugakuKeisanResultEntity> getJigyobunShikyugakuKeisanKekkaRenrakuhyoPanel(
+            JigyobunShikyugakuPanelListParameter parameter) {
+
+        IJigyobunShikyugakuKeisanPanelMapper mapper = mapperProvider.create(
+                IJigyobunShikyugakuKeisanPanelMapper.class);
+        List<JigyobunShikyugakuKeisanPanelEntity> list = mapper.get処理対象データ(parameter);
+        List<JigyobunShikyugakuKeisanResultEntity> resultList = new ArrayList<>();
+        if (list != null) {
+            for (JigyobunShikyugakuKeisanPanelEntity entity : list) {
+                JigyobunShikyugakuKeisanResultEntity resultEntity = new JigyobunShikyugakuKeisanResultEntity();
+                resultEntity.setTaishoNendo(entity.getTaishoNendo());
+                resultEntity.setSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD(entity.getSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD());
+                resultEntity.setShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo());
+                resultEntity.setShikyuShinseishoSeiriNo(entity.getShikyuShinseishoSeiriNo());
+                resultEntity.setRirekiNo(entity.getRirekiNo());
+                resultEntity.setHokenSeidoCode(entity.getHokenSeidoCode());
+                resultEntity.setHihokenshaNo(entity.getHihokenshaNo());
+                resultEntity.setDbt3173Entity(entity.getDbt3173Entity());
+                resultEntity.setDbt3172Entity(entity.getDbt3172Entity());
+                resultList.add(resultEntity);
+            }
+        }
+        return resultList;
+    }
+
+    /**
+     * entityを保存します。
+     *
+     * @param entity DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity
+     * @return int
+     */
+    public int saveEntity(DbT3172JigyoKogakuGassanShikyuGakuKeisanKekkaEntity entity) {
+        entity.setState(EntityDataState.Modified);
+        return 事業高額合算支給額計算Dac.save(entity);
     }
 }

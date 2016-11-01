@@ -76,8 +76,8 @@ module DBZ {
 
                     gridSetting.columns[0].visible = false;
                     gridSetting.columns[8].visible = true;
-                    gridSetting.isShowModifyButtonColumn = false;
-                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
 
                     this.controls.dgHenko().gridSetting = gridSetting;
 

@@ -40,12 +40,12 @@ public class EditedKojin {
      *
      * @param 個人 個人
      * @param 帳票制御共通 帳票制御共通
-     * @param 地方公共団体 地方公共団体
+     * @param 地方公共団体_住登内の場合のみ必要 地方公共団体
      */
-    public EditedKojin(IKojin 個人, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体) {
+    public EditedKojin(IKojin 個人, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体_住登内の場合のみ必要) {
         this.個人 = requireNonNull(個人, UrSystemErrorMessages.値がnull.getReplacedMessage("個人"));
         this.帳票制御共通 = requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通"));
-        this.地方公共団体 = 地方公共団体;
+        this.地方公共団体 = 地方公共団体_住登内の場合のみ必要;
     }
 
     /**

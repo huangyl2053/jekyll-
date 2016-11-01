@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,8 +26,8 @@ import lombok.Setter;
 public class KogakukaigoKetteiTsuchishoInfoTempParameter implements IMyBatisParameter {
 
     private RString 抽出モード;
-    private RDate 抽出条件日付From;
-    private RDate 抽出条件日付To;
+    private FlexibleDate 抽出条件日付From;
+    private FlexibleDate 抽出条件日付To;
     private FlexibleYearMonth 決定者受付年月;
     private RString 印書;
     private RString 高額自動償還;
@@ -49,8 +50,8 @@ public class KogakukaigoKetteiTsuchishoInfoTempParameter implements IMyBatisPara
      * コンストラクタ
      *
      * @param 抽出モード RString
-     * @param 抽出条件日付From RDate
-     * @param 抽出条件日付To RDate
+     * @param 抽出条件日付From FlexibleDate
+     * @param 抽出条件日付To FlexibleDate
      * @param 決定者受付年月 FlexibleYearMonth
      * @param 印書 RString
      * @param 高額自動償還 RString
@@ -70,8 +71,8 @@ public class KogakukaigoKetteiTsuchishoInfoTempParameter implements IMyBatisPara
      * @param 出力順ID long
      */
     public KogakukaigoKetteiTsuchishoInfoTempParameter(RString 抽出モード,
-            RDate 抽出条件日付From,
-            RDate 抽出条件日付To,
+            FlexibleDate 抽出条件日付From,
+            FlexibleDate 抽出条件日付To,
             FlexibleYearMonth 決定者受付年月,
             RString 印書,
             RString 高額自動償還,

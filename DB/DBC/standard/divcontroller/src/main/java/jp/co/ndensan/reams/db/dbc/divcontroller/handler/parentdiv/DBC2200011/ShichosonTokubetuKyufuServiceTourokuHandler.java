@@ -183,8 +183,11 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
         ShichosonTokubetuKyufuServiceManager manager = new ShichosonTokubetuKyufuServiceManager();
         ShichosonTokubetuKyufuServiceFinder finder = ShichosonTokubetuKyufuServiceFinder.createInstance();
         RString serviceCode = サービスコード固定値.concat(div.getKubunShikyuGendogakuShosai().getTxtServiceCode2().getValue());
-        FlexibleDate 有効期間開始年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue().toFlexibleDate();
-        int 履歴番号 = Integer.parseInt(div.getKubunShikyuGendogakuShosai().getHdnRirekiNo().getValue().toString());
+        FlexibleDate 有効期間開始年月日 = div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue() != null
+                ? new FlexibleDate(div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue().toDateString()) : FlexibleDate.EMPTY;
+        int 履歴番号 = div.getKubunShikyuGendogakuShosai().getHdnRirekiNo().getValue().isNullOrEmpty()
+                ? 0 : Integer.parseInt(div.getKubunShikyuGendogakuShosai().getHdnRirekiNo().getValue().toString());
+
         if (!CommonButtonHolder.isDisplayNone(追加やめる)) {
             dgServiceNaiyo_Row 直近データ = null;
             for (dgServiceNaiyo_Row row : div.getDgServiceNaiyo().getDataSource()) {
@@ -193,33 +196,37 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
                     break;
                 }
             }
+            Integer 最大履歴番号 = finder.get最大履歴番号(serviceCode);
+            if (null == 最大履歴番号) {
+                最大履歴番号 = 0;
+            }
+            ShichosonTokubetuKyufuService entity = new ShichosonTokubetuKyufuService(serviceCode,
+                    有効期間開始年月日,
+                    最大履歴番号.intValue() + 1);
+            ShichosonTokubetuKyufuServiceBuilder builder = entity.createBuilderForEdit();
+            builder.set市町村特別給付用サービスコード(serviceCode);
+            builder.set市町村特別給付用サービス名_正式名称(div.getKubunShikyuGendogakuShosai().getTxtServiceMeisho().getValue());
+            builder.set市町村特別給付用サービス名_略称(div.getKubunShikyuGendogakuShosai().getTxtServiceRyakusho().getValue());
+            builder.set市町村特別給付用サービス有効期間開始年月日(有効期間開始年月日);
+            builder.set市町村特別給付用サービス有効期間終了年月日(div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue() != null
+                    ? new FlexibleDate(div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue().toDateString()) : FlexibleDate.EMPTY);
+            builder.set市町村特別給付用サービス区分(div.getKubunShikyuGendogakuShosai().getRadKubun().getSelectedKey());
+            builder.set市町村特別給付用単位_日数(div.getKubunShikyuGendogakuShosai().getTxtTanni().getValue());
+            builder.set市町村特別給付用支給限度基準額(div.getKubunShikyuGendogakuShosai().getTxtShikyuGendogaku().getValue());
+            builder.set履歴番号(最大履歴番号 + 1);
+            builder.set市町村特別給付用給付率引下有フラグ(false);
+            builder.set登録年月日(FlexibleDate.getNowDate());
+            builder.set変更年月日(FlexibleDate.getNowDate());
+            builder.set論理削除フラグ(false);
+            manager.save市町村特別給付サービス内容(builder.build());
             if (直近データ != null && 直近データ.getServiceYukoKikanShuryoYMD().isNullOrEmpty()) {
                 ShichosonTokubetuKyufuService 市町村特別給付サービス内容 = manager.get市町村特別給付サービス内容(直近データ.getServiceCode(),
-                        直近データ.getServiceYukoKikanKaishiYMDSeireki().getValue().toFlexibleDate(),
+                        new FlexibleDate(直近データ.getServiceYukoKikanKaishiYMDSeireki().getValue().toDateString()),
                         Integer.parseInt(直近データ.getRirekiNo().toString()));
-                ShichosonTokubetuKyufuServiceBuilder builder = 市町村特別給付サービス内容.createBuilderForEdit();
-                builder.set市町村特別給付用サービス有効期間終了年月日(div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue().toFlexibleDate().minusDay(1));
-                manager.save市町村特別給付サービス内容(builder.build());
-            } else {
-                int 最大履歴番号 = finder.get最大履歴番号(serviceCode);
-                ShichosonTokubetuKyufuService entity = new ShichosonTokubetuKyufuService(serviceCode,
-                        div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().getValue().toFlexibleDate(),
-                        最大履歴番号 + 1);
-                ShichosonTokubetuKyufuServiceBuilder builder = entity.createBuilderForEdit();
-                builder.set市町村特別給付用サービスコード(serviceCode);
-                builder.set市町村特別給付用サービス名_正式名称(div.getKubunShikyuGendogakuShosai().getTxtServiceMeisho().getValue());
-                builder.set市町村特別給付用サービス名_略称(div.getKubunShikyuGendogakuShosai().getTxtServiceRyakusho().getValue());
-                builder.set市町村特別給付用サービス有効期間開始年月日(有効期間開始年月日);
-                builder.set市町村特別給付用サービス有効期間終了年月日(div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue().toFlexibleDate());
-                builder.set市町村特別給付用サービス区分(div.getKubunShikyuGendogakuShosai().getRadKubun().getSelectedKey());
-                builder.set市町村特別給付用単位_日数(div.getKubunShikyuGendogakuShosai().getTxtTanni().getValue());
-                builder.set市町村特別給付用支給限度基準額(div.getKubunShikyuGendogakuShosai().getTxtShikyuGendogaku().getValue());
-                builder.set履歴番号(最大履歴番号 + 1);
-                builder.set市町村特別給付用給付率引下有フラグ(false);
-                builder.set登録年月日(FlexibleDate.getNowDate());
-                builder.set変更年月日(FlexibleDate.getNowDate());
-                builder.set論理削除フラグ(false);
-                manager.save市町村特別給付サービス内容(builder.build());
+                ShichosonTokubetuKyufuServiceBuilder updBuilder = 市町村特別給付サービス内容.createBuilderForEdit();
+                updBuilder.set市町村特別給付用サービス有効期間終了年月日(有効期間開始年月日.minusDay(1));
+                updBuilder.set変更年月日(FlexibleDate.getNowDate());
+                manager.save市町村特別給付サービス内容(updBuilder.build());
             }
         } else if (!CommonButtonHolder.isDisplayNone(修正やめる)) {
             ShichosonTokubetuKyufuService 市町村特別給付サービス内容 = manager.get市町村特別給付サービス内容(serviceCode,
@@ -228,7 +235,8 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
             ShichosonTokubetuKyufuServiceBuilder builder = 市町村特別給付サービス内容.createBuilderForEdit();
             builder.set市町村特別給付用サービス名_正式名称(div.getKubunShikyuGendogakuShosai().getTxtServiceMeisho().getValue());
             builder.set市町村特別給付用サービス名_略称(div.getKubunShikyuGendogakuShosai().getTxtServiceRyakusho().getValue());
-            builder.set市町村特別給付用サービス有効期間終了年月日(div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue().toFlexibleDate());
+            builder.set市町村特別給付用サービス有効期間終了年月日(div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue() != null
+                    ? new FlexibleDate(div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().getValue().toDateString()) : FlexibleDate.EMPTY);
             builder.set市町村特別給付用単位_日数(div.getKubunShikyuGendogakuShosai().getTxtTanni().getValue());
             builder.set市町村特別給付用支給限度基準額(div.getKubunShikyuGendogakuShosai().getTxtShikyuGendogaku().getValue());
             builder.set変更年月日(FlexibleDate.getNowDate());
@@ -313,16 +321,18 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
         dgServiceNaiyo_Row row = div.getDgServiceNaiyo().getClickedItem();
         ShichosonTokubetuKyufuServiceEntityResult entity = new ShichosonTokubetuKyufuServiceEntityResult();
         entity.setサービスコード(row.getServiceCode());
-        entity.set有効期間開始年月日(new FlexibleDate(row.getServiceYukoKikanKaishiYMDSeireki().getValue().toString()));
-        entity.set有効期間終了年月日(new FlexibleDate(row.getServiceYukoKikanShuryoYMDSeireki().getValue().toString()));
+        entity.set有効期間開始年月日(row.getServiceYukoKikanKaishiYMDSeireki().getValue() != null
+                ? new FlexibleDate(row.getServiceYukoKikanKaishiYMDSeireki().getValue().toString()) : FlexibleDate.EMPTY);
+        entity.set有効期間終了年月日(row.getServiceYukoKikanShuryoYMDSeireki().getValue() != null
+                ? new FlexibleDate(row.getServiceYukoKikanShuryoYMDSeireki().getValue().toString()) : FlexibleDate.EMPTY);
         entity.set正式名称(row.getServiceSeishikiName());
         if (単位.equals(row.getServiceKubun())) {
             entity.setサービス区分(単位コード);
         } else if (日数.equals(row.getServiceKubun())) {
             entity.setサービス区分(日数コード);
         }
-        entity.set単位(new Decimal(row.getTanisuNissu().toString()));
-        entity.set支給限度基準額(new Decimal(row.getShikyuGendogaku().toString()));
+        entity.set単位(row.getTanisuNissu().getValue());
+        entity.set支給限度基準額(row.getShikyuGendogaku().getValue());
         entity.set略称(row.getServiceRyakushoName());
         entity.set履歴番号(Integer.parseInt(row.getRirekiNo().toString()));
         entity.set直近フラグ(row.getChokkinFlag());
@@ -339,16 +349,18 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
         }
         ShichosonTokubetuKyufuServiceEntityResult entity = new ShichosonTokubetuKyufuServiceEntityResult();
         entity.setサービスコード(row.getServiceCode());
-        entity.set有効期間開始年月日(new FlexibleDate(row.getServiceYukoKikanKaishiYMDSeireki().getValue().toString()));
-        entity.set有効期間終了年月日(new FlexibleDate(row.getServiceYukoKikanShuryoYMDSeireki().getValue().toString()));
+        entity.set有効期間開始年月日(row.getServiceYukoKikanKaishiYMDSeireki().getValue() != null
+                ? new FlexibleDate(row.getServiceYukoKikanKaishiYMDSeireki().getValue().toString()) : FlexibleDate.EMPTY);
+        entity.set有効期間終了年月日(row.getServiceYukoKikanShuryoYMDSeireki().getValue() != null
+                ? new FlexibleDate(row.getServiceYukoKikanShuryoYMDSeireki().getValue().toString()) : FlexibleDate.EMPTY);
         entity.set正式名称(row.getServiceSeishikiName());
         if (単位.equals(row.getServiceKubun())) {
             entity.setサービス区分(単位コード);
         } else if (日数.equals(row.getServiceKubun())) {
             entity.setサービス区分(日数コード);
         }
-        entity.set単位(new Decimal(row.getTanisuNissu().toString()));
-        entity.set支給限度基準額(new Decimal(row.getShikyuGendogaku().toString()));
+        entity.set単位(row.getTanisuNissu().getValue());
+        entity.set支給限度基準額(row.getShikyuGendogaku().getValue());
         entity.set略称(row.getServiceRyakushoName());
         entity.set履歴番号(Integer.parseInt(row.getRirekiNo().toString()));
         entity.set直近フラグ(row.getChokkinFlag());
@@ -364,8 +376,12 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
         div.getKubunShikyuGendogakuShosai().getTxtServiceCode2().setValue(明細Entity.getサービスコード().substring(2));
         div.getKubunShikyuGendogakuShosai().getTxtServiceMeisho().setValue(明細Entity.get正式名称());
         div.getKubunShikyuGendogakuShosai().getTxtServiceRyakusho().setValue(明細Entity.get略称());
-        div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM().setValue(明細Entity.get有効期間開始年月日().toRDate());
-        div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM().setValue(明細Entity.get有効期間終了年月日().toRDate());
+        div.getKubunShikyuGendogakuShosai().getTxtYukoKaishiYM()
+                .setValue(明細Entity.get有効期間開始年月日() != null && !明細Entity.get有効期間開始年月日().isEmpty()
+                        ? new RDate(明細Entity.get有効期間開始年月日().toString()) : null);
+        div.getKubunShikyuGendogakuShosai().getTxtYukoShuryoYM()
+                .setValue(明細Entity.get有効期間終了年月日() != null && !明細Entity.get有効期間終了年月日().isEmpty()
+                        ? new RDate(明細Entity.get有効期間終了年月日().toString()) : null);
         div.getKubunShikyuGendogakuShosai().getRadKubun().setSelectedKey(明細Entity.getサービス区分());
         div.getKubunShikyuGendogakuShosai().getTxtTanni().setValue(明細Entity.get単位());
         div.getKubunShikyuGendogakuShosai().getTxtShikyuGendogaku().setValue(明細Entity.get支給限度基準額());
@@ -377,21 +393,25 @@ public class ShichosonTokubetuKyufuServiceTourokuHandler {
         for (ShichosonTokubetuKyufuServiceEntityResult entity : 市町村特別給付サービス内容一覧情報) {
             dgServiceNaiyo_Row row = new dgServiceNaiyo_Row();
             row.setServiceCode(entity.getサービスコード());
-            row.setServiceYukoKikanKaishiYMD(entity.get有効期間開始年月日().wareki().toDateString());
-            row.setServiceYukoKikanShuryoYMD(entity.get有効期間終了年月日().wareki().toDateString());
+            row.setServiceYukoKikanKaishiYMD(entity.get有効期間開始年月日() != null && !entity.get有効期間開始年月日().isEmpty()
+                    ? entity.get有効期間開始年月日().wareki().toDateString() : RString.EMPTY);
+            row.setServiceYukoKikanShuryoYMD(entity.get有効期間終了年月日() != null && !entity.get有効期間終了年月日().isEmpty()
+                    ? entity.get有効期間終了年月日().wareki().toDateString() : RString.EMPTY);
             row.setServiceSeishikiName(entity.get正式名称());
             if (単位コード.equals(entity.getサービス区分())) {
                 row.setServiceKubun(単位);
             } else if (日数コード.equals(entity.getサービス区分())) {
                 row.setServiceKubun(日数);
             }
-            row.setTanisuNissu(new RString(entity.get単位().toString()));
-            row.setShikyuGendogaku(new RString(entity.get支給限度基準額().toString()));
+            row.getTanisuNissu().setValue(entity.get単位());
+            row.getShikyuGendogaku().setValue(entity.get支給限度基準額());
             row.setServiceRyakushoName(entity.get略称());
             row.setRirekiNo(new RString(entity.get履歴番号()));
             row.setChokkinFlag(entity.get直近フラグ());
-            row.getServiceYukoKikanKaishiYMDSeireki().setValue(entity.get有効期間開始年月日().toRDate());
-            row.getServiceYukoKikanShuryoYMDSeireki().setValue(entity.get有効期間終了年月日().toRDate());
+            row.getServiceYukoKikanKaishiYMDSeireki().setValue(entity.get有効期間開始年月日() != null && !entity.get有効期間開始年月日().isEmpty()
+                    ? new RDate(entity.get有効期間開始年月日().toString()) : null);
+            row.getServiceYukoKikanShuryoYMDSeireki().setValue(entity.get有効期間終了年月日() != null && !entity.get有効期間終了年月日().isEmpty()
+                    ? new RDate(entity.get有効期間終了年月日().toString()) : null);
             dataSource.add(row);
         }
         div.getDgServiceNaiyo().setDataSource(dataSource);

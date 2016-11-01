@@ -53,6 +53,7 @@ public class AtenaSealCreateHandler {
     private static final RString 定数_12 = new RString("12");
     private static final int NUM_0 = 0;
     private static final int NUM_6 = 6;
+    private static final RString ALL = new RString("all");
     private static final RString 普通徴収 = new RString("普通徴収");
     private static final RString 特別徴収 = new RString("特別徴収");
     private static final RString 現住所 = new RString("現住所");
@@ -63,8 +64,7 @@ public class AtenaSealCreateHandler {
     private static final RString 郡 = new RString(" 郡 ");
     private static final RString 都道府県 = new RString(" 都道府県 ");
     private static final RString 方書 = new RString(" 方書 ");
-    //TODO QA1505
-    private static final ReportId 帳票分類ID = ReportIdDBZ.DBZ100001.getReportId();
+    private static final ReportId 帳票ID = ReportIdDBZ.DBZ100001.getReportId();
 
     /**
      * コンストラクタです。
@@ -102,21 +102,19 @@ public class AtenaSealCreateHandler {
                 KeyValueDataSource dataSourcetwo = new KeyValueDataSource(定数_000001, 市町村情報.get市町村名称());
                 dataSourceList.add(dataSourcetwo);
                 div.getDdlShicyouson().setDataSource(dataSourceList);
+                div.getDdlShicyouson().setSelectedKey(定数_000000);
             }
             if (!(市町村情報.get市町村識別ID().equals(定数_00)) && (構成市町村リスト != null)) {
-                List<KeyValueDataSource> dataSourceList = getdataSource(構成市町村リスト);
-                div.getDdlShicyouson().setDataSource(dataSourceList);
-                div.getDdlShicyouson().setDisabled(true);
+                getdataSource(構成市町村リスト);
             }
         }
         if (導入形態コード.getColumnValue().equals(定数_120)) {
             div.getDdlShicyouson().setDisplayNone(true);
         }
         div.getTxtKijyunnengatu().setYmdKubunEnum(YmdKubun.年月);
-        div.getCcdJushoSettei().initialize(SubGyomuCode.DBZ介護共通.getColumnValue(), 帳票分類ID.getColumnValue());
-        //TODO QA1568
+        div.getCcdJushoSettei().initialize(SubGyomuCode.DBZ介護共通.getColumnValue(), 帳票ID.getColumnValue());
         div.getCcdAtenaSealPosition().load(定数_12);
-        div.getCcdShutsuryokuJun().load(SubGyomuCode.DBB介護賦課, 帳票分類ID);
+        div.getCcdShutsuryokuJun().load(SubGyomuCode.DBZ介護共通, 帳票ID);
     }
 
     /**
@@ -142,7 +140,12 @@ public class AtenaSealCreateHandler {
         RString 画面の基準年月 = new RString(div.getTxtKijyunnengatu().getValue().toString());
         FlexibleYearMonth 基準年月 = new FlexibleYearMonth(画面の基準年月.substring(NUM_0, NUM_6));
         RString 資格区分 = get資格区分(div.getDdlShikakuKubun().getSelectedKey());
-        RString 市町村指定 = div.getDdlShicyouson().getSelectedValue();
+        RString 市町村指定のkey = div.getDdlShicyouson().getSelectedKey();
+        RString 市町村指定のvalue = div.getDdlShicyouson().getSelectedValue();
+        RString 市町村指定 = null;
+        if (市町村指定のkey != null && !市町村指定のkey.isEmpty()) {
+            市町村指定 = 市町村指定のkey.concat(RString.HALF_SPACE).concat(市町村指定のvalue);
+        }
         RString 最優先住所 = div.getDdlSaiyusenJusho().getSelectedValue();
         RString 敬称 = div.getDdlKeisho().getSelectedValue();
         RString 被保番号表示 = div.getRadIsPrintHihokenshaNo().getSelectedValue();
@@ -187,7 +190,23 @@ public class AtenaSealCreateHandler {
         return parameter;
     }
 
-    private List<KeyValueDataSource> getdataSource(List<KoseiShichoson> 構成市町村リスト) {
+    /**
+     * onChangeのメソッドます。
+     *
+     */
+    public void onChange() {
+        List<RString> 抽出対象list = div.getChkTaishosha().getSelectedValues();
+        if (抽出対象list != null) {
+            if (抽出対象list.size() == 2) {
+                div.getDdlShikakuKubun().setSelectedKey(ALL);
+                div.getDdlShikakuKubun().setDisabled(true);
+            } else {
+                div.getDdlShikakuKubun().setDisabled(false);
+            }
+        }
+    }
+
+    private void getdataSource(List<KoseiShichoson> 構成市町村リスト) {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (int i = 0; i < 構成市町村リスト.size(); i++) {
             RString key = null;
@@ -198,7 +217,9 @@ public class AtenaSealCreateHandler {
             KeyValueDataSource dataSource = new KeyValueDataSource(key, value);
             dataSourceList.add(dataSource);
         }
-        return dataSourceList;
+        div.getDdlShicyouson().setDataSource(dataSourceList);
+        div.getDdlShicyouson().setSelectedKey(dataSourceList.get(NUM_0).getKey());
+        div.getDdlShicyouson().setDisabled(true);
     }
 
     private RString get資格区分(RString 資格区分のkey) {

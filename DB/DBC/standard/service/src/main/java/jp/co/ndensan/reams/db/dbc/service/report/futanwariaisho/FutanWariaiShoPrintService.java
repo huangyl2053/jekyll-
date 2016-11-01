@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoP
 import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.futanwariaisho.FutanWariaiShoSource;
-import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
-import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
+import jp.co.ndensan.reams.db.dbc.service.core.futanwariaisho.FutanWariaisho;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -26,11 +26,21 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiEditorBuilder;
+import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSourceBuilder;
+import jp.co.ndensan.reams.ua.uax.business.report.parts.util.atesaki.ReportAtesakiEditor;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.kojin.IKojinFinder;
@@ -39,6 +49,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -68,8 +79,6 @@ public class FutanWariaiShoPrintService {
 
     private final DbV1001HihokenshaDaichoAliveDac dac;
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
-    private static final RString 定数_事務広域 = new RString("事務広域");
-    private static final RString 定数_認定広域 = new RString("認定広域");
     private static final int ZERO_INDEX = 0;
 
     /**
@@ -89,34 +98,45 @@ public class FutanWariaiShoPrintService {
     }
 
     /**
-     * printSingle
+     * createInstance
      *
-     * @param 識別コード ShikibetsuCode
-     * @param 被保険者番号 HihokenshaNo
-     * @param entity FutanWariaiShoDivParameter
-     * @param flag RString
-     * @return SourceDataCollection
+     * @return FutanWariaisho
      */
-    public SourceDataCollection printSingle(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoDivParameter entity, RString flag) {
-        SourceDataCollection collection;
-        try (ReportManager reportManager = new ReportManager()) {
-            print(識別コード, 被保険者番号, entity, flag, reportManager);
-            collection = reportManager.publish();
-        }
-        return collection;
-
+    public static FutanWariaisho createInstance() {
+        return InstanceProvider.create(FutanWariaisho.class);
     }
 
     /**
-     * print
+     * ソースデータ取得By画面
      *
      * @param 識別コード ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
      * @param entity FutanWariaiShoDivParameter
-     * @param flag RString
+     * @return SourceDataCollection
+     */
+    public SourceDataCollection getSourceDataSinger(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号,
+            FutanWariaiShoDivParameter entity) {
+        SourceDataCollection collection;
+        try (ReportManager reportManager = new ReportManager()) {
+            getSourceData(識別コード, 被保険者番号, entity, reportManager);
+            collection = reportManager.publish();
+        }
+        return collection;
+    }
+
+    /**
+     * ソースデータ取得
+     *
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
+     * @param entity FutanWariaiShoDivParameter
      * @param reportManager ReportManager
      */
-    public void print(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoDivParameter entity, RString flag, ReportManager reportManager) {
+    public void getSourceData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FutanWariaiShoDivParameter entity,
+            ReportManager reportManager) {
+        if (識別コード == null || 被保険者番号 == null || entity == null) {
+            throw new NullPointerException();
+        }
         FutanWariaiShoProperty property = new FutanWariaiShoProperty();
         try (ReportAssembler<FutanWariaiShoSource> assembler = createAssembler(property, reportManager)) {
             Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード,
@@ -131,22 +151,7 @@ public class FutanWariaiShoPrintService {
                     false,
                     false,
                     KenmeiFuyoKubunType.付与なし).buildSource();
-            //TODO QA#1176
-//            GyomuKoyuKeyRiyoKubun 業務固有キー利用区分 = GyomuKoyuKeyRiyoKubun.利用しない;
-//            SofusakiRiyoKubun 送付先利用区分 = SofusakiRiyoKubun.利用する;
-//            IAtesakiGyomuHanteiKey 宛先業務判定キー
-//                    = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
-//            IAtesakiPSMSearchKey searchKey = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー)
-//                    .set識別コード(識別コード)
-//                    .set業務固有キー利用区分(業務固有キー利用区分)
-//                    .set送付先利用区分(送付先利用区分)
-//                    .build();
-//                SofubutsuAtesakiSource 送付物宛先ソースデータ = null;
-//                IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(searchKey);
-//                if (宛先 != null) {
-//                    ReportAtesakiEditor reportAtesakiEditor = new SofubutsuAtesakiEditorBuilder(宛先).build();
-//                    送付物宛先ソースデータ = new SofubutsuAtesakiSourceBuilder(reportAtesakiEditor).buildSource();
-//                }
+            SofubutsuAtesakiSource 送付物宛先ソースデータ = get送付物宛先ソースデータ(識別コード);
             IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory.
                     createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
             ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー);
@@ -158,17 +163,34 @@ public class FutanWariaiShoPrintService {
                     ReportIdDBC.DBC100065.getReportId());
             EditedKojin 編集後個人 = null;
             if (kojinList != null && !kojinList.isEmpty()) {
-                //TODO QA#1173
-                編集後個人 = new EditedKojin(kojinList.get(ZERO_INDEX), 帳票共通情報, null);
+                編集後個人 = new EditedKojin(kojinList.get(ZERO_INDEX), 帳票共通情報, 地方公共団体);
             }
             HokenshaNo 保険者コード取得 = getHokenshaCode(被保険者番号);
-            RiyoshaFutanWariaiHantei riyoshaFutanWariaiHantei = RiyoshaFutanWariaiHantei.createInstance();
-            List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細List
-                    = riyoshaFutanWariaiHantei.riyoshaFutanWariaiMeisaiMergeGamen(entity.get利用者負担割合明細());
             FutanWariaiShoReport report = new FutanWariaiShoReport(entity, 認証者ソースデータ, 被保険者番号, 編集後個人,
-                    利用者負担割合明細List, 保険者コード取得, flag, kojinList);
+                    保険者コード取得, kojinList, 送付物宛先ソースデータ);
             report.writeBy(reportSourceWriter);
+
         }
+
+    }
+
+    private SofubutsuAtesakiSource get送付物宛先ソースデータ(ShikibetsuCode 識別コード) {
+        SofubutsuAtesakiSource 送付物宛先ソースデータ = null;
+        GyomuKoyuKeyRiyoKubun 業務固有キー利用区分 = GyomuKoyuKeyRiyoKubun.利用しない;
+        SofusakiRiyoKubun 送付先利用区分 = SofusakiRiyoKubun.利用する;
+        IAtesakiGyomuHanteiKey 宛先業務判定キー
+                = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
+        IAtesakiPSMSearchKey searchKey = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー)
+                .set識別コード(識別コード)
+                .set業務固有キー利用区分(業務固有キー利用区分)
+                .set送付先利用区分(送付先利用区分)
+                .build();
+        IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(searchKey);
+        if (宛先 != null) {
+            ReportAtesakiEditor reportAtesakiEditor = new SofubutsuAtesakiEditorBuilder(宛先).build();
+            送付物宛先ソースデータ = new SofubutsuAtesakiSourceBuilder(reportAtesakiEditor).buildSource();
+        }
+        return 送付物宛先ソースデータ;
     }
 
     /**
@@ -178,25 +200,32 @@ public class FutanWariaiShoPrintService {
      * @return RString
      */
     private HokenshaNo getHokenshaCode(HihokenshaNo 被保険者番号) {
-        HokenshaNo 証記載保険者番号;
+        HokenshaNo 証記載保険者番号 = null;
         if (被保険者番号 == null) {
             throw new NullPointerException();
         }
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().value();
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
-        if (定数_事務広域.equals(導入形態コード) || 定数_認定広域.equals(導入形態コード)) {
-            DbV1001HihokenshaDaichoEntity entity = dac.get最新の被保険者台帳情報(被保険者番号);
+        if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)
+                || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード)) {
+            DbV1001HihokenshaDaichoEntity entity = dac.get被保険者台帳(被保険者番号);
             SearchResult<ShichosonCodeYoriShichoson> shichoson = null;
             if (entity.getKoikinaiTokureiSochimotoShichosonCode() == null) {
                 shichoson = finder.shichosonCodeYoriShichosonJoho(entity.getShichosonCode());
             } else {
                 shichoson = finder.shichosonCodeYoriShichosonJoho(entity.getKoikinaiTokureiSochimotoShichosonCode());
             }
-            証記載保険者番号 = new HokenshaNo(shichoson.records().get(ZERO_INDEX).get証記載保険者番号().value());
+            if (shichoson != null && shichoson.records() != null && shichoson.records().size() > ZERO_INDEX
+                    && shichoson.records().get(ZERO_INDEX).get証記載保険者番号() != null) {
+                証記載保険者番号 = new HokenshaNo(shichoson.records().get(ZERO_INDEX).get証記載保険者番号().value());
+            }
         } else {
             SearchResult<KoikiZenShichosonJoho> shichosonjoho = finder.koseiShichosonJoho();
-            証記載保険者番号 = new HokenshaNo(shichosonjoho.records().get(ZERO_INDEX).get証記載保険者番号().value());
+            if (shichosonjoho != null && shichosonjoho.records() != null && shichosonjoho.records().size() > ZERO_INDEX
+                    && shichosonjoho.records().get(ZERO_INDEX).get証記載保険者番号() != null) {
+                証記載保険者番号 = new HokenshaNo(shichosonjoho.records().get(ZERO_INDEX).get証記載保険者番号().value());
+            }
         }
         return 証記載保険者番号;
     }

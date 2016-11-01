@@ -28,15 +28,13 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameter;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameterBuilder;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterAttribute;
@@ -52,8 +50,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -70,7 +66,6 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("");
     private static final RString DOUBLE_QUOTATION = new RString("\"");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC110810"));
     private static final RString TABLE_処理結果リスト一時TBL = new RString("DbWT1002KokuhorenSakuseiError");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushatotsugoiraiout"
             + ".IJukyushaTotsugoIraiOutMapper.");
@@ -82,8 +77,6 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
     private static final RString 拡張子 = new RString("\r\n");
     private RString myBatisSelsectId;
     private RString eucFilePath;
-    private FileSpoolManager manager;
-    private RString spoolWorkPath;
     private RString csvFileName;
     private boolean existingFlag;
     private JukyushaTotsugoIraiOutProcessParameter processParameter;
@@ -125,9 +118,13 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
         record1Entity = new SouhuFilesakuseiEntity();
         record2Entity = new SouhuFilesakuseiEntity();
         record3Entity = new SouhuFilesakuseiEntity();
-        csvFileName = new RString("10_536" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告) + ".csv");
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        spoolWorkPath = manager.getEucOutputDirectry();
+        RString ninteiNengetu = RString.EMPTY;
+        if (processParameter.getNinteiNengetu() != null && !processParameter.getNinteiNengetu().isEmpty()) {
+            ninteiNengetu = new RString(processParameter.getNinteiNengetu().toString());
+        }
+        csvFileName = new RString("10_536" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告)
+                + ninteiNengetu + 拡張子_TEMP + ".csv");
+        RString spoolWorkPath = Path.getTmpDirectoryPath();
         eucFilePath = Path.combinePath(spoolWorkPath, csvFileName);
     }
 
@@ -175,10 +172,11 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
             getEndCSV出力();
             eucCsvWriter.close();
             do外字類似変換();
-            SharedFileDescriptor sfd = new ReadOnlySharedFileDescriptor(new FilesystemName(csvFileName));
+            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
+                    FilesystemName.fromString(csvFileName.replace(拡張子_TEMP, RString.EMPTY)));
             sfd = SharedFile.defineSharedFile(sfd, 世代管理する, SharedFile.GROUP_ALL, null, true, null);
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
+            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath.replace(拡張子_TEMP, RString.EMPTY)), opts);
         } else {
             処理結果リスト一時TBL.insert(getErrorEntity());
             hasError.setValue(!existingFlag);
@@ -284,6 +282,23 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
         record2Entity.set軽減率適用開始年月日(trim(entity.getKeigenritsuTekiyoKaishiYMD()));
         record2Entity.set軽減率適用終了年月日(trim(entity.getKeigenritsuTekiyoShuryoYMD()));
         record2Entity.set小規模多機能型居宅介護(entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag());
+        record2Entity.set保険者番号後期(trim(entity.getKokiKoureiIryoHokenshaNo()));
+        record2Entity.set被保険者番号後期(trim(entity.getKokikoureiIryoHiHokenshaNo()));
+        record2Entity.set保険者番号国保(trim(entity.getKokuhoHokenshaNo()));
+        record2Entity.set被保険者番号国保(trim(entity.getKokuhoHiHokenshaNo()));
+        record2Entity.set個人番号国保(trim(entity.getKokuhoKojinNo()));
+        record2Entity.set二次予防事業区分コード(trim(entity.getNijiyoboJigyoKubunCode()));
+        record2Entity.set二次予防事業開始年月日(change(entity.getNijiyoboJigyoYukoKikanKaishiYMD()));
+        record2Entity.set二次予防事業終了年月日(change(entity.getNijiyoboJigyoYukoKikanShuryoYMD()));
+        record2Entity.set住所地特例対象者区分コード(trim(entity.getJushochiTokureiTaishoshaKubunCode()));
+        record2Entity.set施設所在保険者番号(trim(entity.getShisetsuShozaiHokenjaNo()));
+        record2Entity.set住所地特例適用開始日(trim(entity.getJushochiTokureiTekiyoKaishiYMD()));
+        record2Entity.set住所地特例適用終了日(trim(entity.getJushochiTokureiTekiyoShuryoYMD()));
+        record2Entity.set居宅費新1負担限度額(trim(entity.getKyotakuhiShin1FutanGendogaku()));
+        record2Entity.set居宅費新2負担限度額(trim(entity.getKyotakuhiShin2FutanGendogaku()));
+        record2Entity.set居宅費新3負担限度額(trim(entity.getKyotakuhiShin3FutanGendogaku()));
+        record2Entity.set二割負担適用開始年月日(trim(entity.getRiyosyaFutanWariaiYukoKaishiYMD()));
+        record2Entity.set二割負担適用終了年月日(trim(entity.getRiyosyaFutanWariaiYukoShuryoYMD()));
         return record2Entity;
 
     }
@@ -401,7 +416,25 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
                         record2Entity.get軽減率(),
                         record2Entity.get軽減率適用開始年月日(),
                         record2Entity.get軽減率適用終了年月日(),
-                        record2Entity.is小規模多機能型居宅介護()));
+                        record2Entity.is小規模多機能型居宅介護(),
+                        record2Entity.get保険者番号後期(),
+                        record2Entity.get被保険者番号後期(),
+                        record2Entity.get保険者番号国保(),
+                        record2Entity.get被保険者番号国保(),
+                        record2Entity.get個人番号国保(),
+                        record2Entity.get二次予防事業区分コード(),
+                        record2Entity.get二次予防事業開始年月日(),
+                        record2Entity.get二次予防事業終了年月日(),
+                        record2Entity.get住所地特例対象者区分コード(),
+                        record2Entity.get施設所在保険者番号(),
+                        record2Entity.get住所地特例適用開始日(),
+                        record2Entity.get住所地特例適用終了日(),
+                        record2Entity.get居宅費新1負担限度額(),
+                        record2Entity.get居宅費新2負担限度額(),
+                        record2Entity.get居宅費新3負担限度額(),
+                        record2Entity.get二割負担適用開始年月日(),
+                        record2Entity.get二割負担適用終了年月日()
+                ));
     }
 
     private void getEndCSV出力() {

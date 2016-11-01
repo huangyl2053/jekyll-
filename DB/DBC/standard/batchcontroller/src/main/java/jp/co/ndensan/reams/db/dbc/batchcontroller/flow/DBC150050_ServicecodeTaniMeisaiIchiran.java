@@ -54,7 +54,6 @@ public class DBC150050_ServicecodeTaniMeisaiIchiran
 
     private FlowEntity flowEntity;
     private int 明細件数;
-    private static final RString アンダーライン = new RString("_");
     private static final RString RSTRING_1 = new RString("1");
     private static final RString RSTRING_2 = new RString("2");
     private RString 種別;
@@ -219,9 +218,6 @@ public class DBC150050_ServicecodeTaniMeisaiIchiran
         kyufuJissekiParameter.set認定結果リスト(getParameter().get認定結果リスト());
         kyufuJissekiParameter.setサービス種類コードリスト(getParameter().getサービス種類コードリスト());
         RString サービス項目コード指定 = getParameter().getサービス項目コード();
-        if (!RString.isNullOrEmpty(サービス項目コード指定)) {
-            サービス項目コード指定 = サービス項目コード指定.replace(アンダーライン, RString.HALF_SPACE);
-        }
         kyufuJissekiParameter.setサービス項目コード(サービス項目コード指定);
         return loopBatch(ChohyouShutsuryokuyouGetProcess.class).arguments(kyufuJissekiParameter).define();
     }
@@ -236,6 +232,7 @@ public class DBC150050_ServicecodeTaniMeisaiIchiran
         KyufuJissekiProcessParameter kyufuJissekiParameter = new KyufuJissekiProcessParameter();
         kyufuJissekiParameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
         kyufuJissekiParameter.set帳票ID(new ReportId(ReportIdDBC.DBC200005.getReportId().getColumnValue()));
+        kyufuJissekiParameter.set開始年月(getParameter().get開始年月());
         if (getParameter().get出力順ID() != null) {
             kyufuJissekiParameter.set出力順ID(getParameter().get出力順ID());
         }

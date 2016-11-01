@@ -199,6 +199,7 @@ public class IdoRenrakuhyoSofuFileSakuseiProcess extends BatchProcessBase<SogoJi
         エンドレコード出力();
         eucCsvWriter.close();
         eucCsvWriter２.close();
+        manager.spool(eucCsvFilePath);
         do外字類似変換();
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
                 FilesystemName.fromString(出力ファイル名.replace(拡張子_TEMP, RString.EMPTY)));

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class YogaigoNinteiKekkaRenkeiDataTorikomiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-21_20-30-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,8 +27,12 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiDiv extends Panel {
      */
     @JsonProperty("YogaigoNinteiKekkaRenkeiDataTorikomiBatchParameter")
     private YogaigoNinteiKekkaRenkeiDataTorikomiBatchParameterDiv YogaigoNinteiKekkaRenkeiDataTorikomiBatchParameter;
+    @JsonProperty("uploadArea")
+    private uploadAreaDiv uploadArea;
     @JsonProperty("torikomiichiran")
     private torikomiichiranDiv torikomiichiran;
+    @JsonProperty("num")
+    private RString num;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,6 +59,24 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiDiv extends Panel {
     }
 
     /*
+     * getuploadArea
+     * @return uploadArea
+     */
+    @JsonProperty("uploadArea")
+    public uploadAreaDiv getUploadArea() {
+        return uploadArea;
+    }
+
+    /*
+     * setuploadArea
+     * @param uploadArea uploadArea
+     */
+    @JsonProperty("uploadArea")
+    public void setUploadArea(uploadAreaDiv uploadArea) {
+        this.uploadArea = uploadArea;
+    }
+
+    /*
      * gettorikomiichiran
      * @return torikomiichiran
      */
@@ -69,6 +92,24 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiDiv extends Panel {
     @JsonProperty("torikomiichiran")
     public void setTorikomiichiran(torikomiichiranDiv torikomiichiran) {
         this.torikomiichiran = torikomiichiran;
+    }
+
+    /*
+     * getnum
+     * @return num
+     */
+    @JsonProperty("num")
+    public RString getNum() {
+        return num;
+    }
+
+    /*
+     * setnum
+     * @param num num
+     */
+    @JsonProperty("num")
+    public void setNum(RString num) {
+        this.num = num;
     }
 
     /*
@@ -95,6 +136,16 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBox getHdNum() {
+        return this.getYogaigoNinteiKekkaRenkeiDataTorikomiBatchParameter().getHdNum();
+    }
+
+    @JsonIgnore
+    public void  setHdNum(TextBox hdNum) {
+        this.getYogaigoNinteiKekkaRenkeiDataTorikomiBatchParameter().setHdNum(hdNum);
+    }
+
+    @JsonIgnore
     public DataGrid<DataGridFile_Row> getDataGridFile() {
         return this.getYogaigoNinteiKekkaRenkeiDataTorikomiBatchParameter().getDataGridFile();
     }
@@ -105,18 +156,28 @@ public class YogaigoNinteiKekkaRenkeiDataTorikomiDiv extends Panel {
     }
 
     @JsonIgnore
+    public IHokenshaListDiv getHokenshaList() {
+        return this.getYogaigoNinteiKekkaRenkeiDataTorikomiBatchParameter().getHokenshaList();
+    }
+
+    @JsonIgnore
+    public UploadPanel getUploadTool() {
+        return this.getUploadArea().getUploadTool();
+    }
+
+    @JsonIgnore
+    public void  setUploadTool(UploadPanel UploadTool) {
+        this.getUploadArea().setUploadTool(UploadTool);
+    }
+
+    @JsonIgnore
     public Button getBtnDataInput() {
-        return this.getYogaigoNinteiKekkaRenkeiDataTorikomiBatchParameter().getBtnDataInput();
+        return this.getUploadArea().getBtnDataInput();
     }
 
     @JsonIgnore
     public void  setBtnDataInput(Button BtnDataInput) {
-        this.getYogaigoNinteiKekkaRenkeiDataTorikomiBatchParameter().setBtnDataInput(BtnDataInput);
-    }
-
-    @JsonIgnore
-    public IHokenshaListDiv getHokenshaList() {
-        return this.getYogaigoNinteiKekkaRenkeiDataTorikomiBatchParameter().getHokenshaList();
+        this.getUploadArea().setBtnDataInput(BtnDataInput);
     }
 
     @JsonIgnore

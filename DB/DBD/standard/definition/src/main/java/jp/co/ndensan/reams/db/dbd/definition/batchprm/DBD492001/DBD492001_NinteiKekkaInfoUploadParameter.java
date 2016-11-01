@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD492001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd492001.RendingJieguoLianxieProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -26,27 +27,43 @@ public class DBD492001_NinteiKekkaInfoUploadParameter extends BatchParameterBase
     private static final String TORIKOMIDETAKUBUN = "torikomidetakubun";
     private static final String GAIBUBAITAIKAKUNOPASU = "gaibubaitaikakunopasu";
     private static final String DETARISUTO = "detarisuto";
-    private static final String HOKENSHA = "hokensha";
 
     @BatchParameter(key = TORIKOMIDETAKUBUN, name = "取込みデータ区分")
     private RString 取込みデータ区分;
-    @BatchParameter(key = GAIBUBAITAIKAKUNOPASU, name = "外部媒体格納パス")
-    private RString 外部媒体格納パス;
-    @BatchParameter(key = DETARISUTO, name = "データリスト")
-    private List<RString> データリスト;
-    @BatchParameter(key = HOKENSHA, name = "保険者")
-    private RString 保険者;
+    @BatchParameter(key = GAIBUBAITAIKAKUNOPASU, name = "格納パス")
+    private RString 格納パス;
+    @BatchParameter(key = DETARISUTO, name = "保険者番号リスト")
+    private List<RString> 保険者番号リスト;
+    @BatchParameter(key = "被保番号リスト", name = "被保番号リスト")
+    private List<RString> 被保番号リスト;
+    @BatchParameter(key = "認定申請日リスト", name = "認定申請日リスト")
+    private List<RString> 認定申請日リスト;
+    @BatchParameter(key = "申請区分_申請時_コードリスト", name = "申請区分_申請時_コードリスト")
+    private List<RString> 申請区分_申請時_コードリスト;
+    @BatchParameter(key = "市町村コード", name = "市町村コード")
+    private RString 市町村コード;
+    @BatchParameter(key = "市町村名称", name = "市町村名称")
+    private RString 市町村名称;
+    @BatchParameter(key = "証記載保険者番号", name = "証記載保険者番号")
+    private RString 証記載保険者番号;
+    @BatchParameter(key = "保険者区分", name = "保険者区分")
+    private RString 保険者区分;
 
     /**
-     * 対象者管理情報登録_process処理のパラメターを取得します。
+     * toProcessバッチパラメータ。
      *
-     * @return TaishoShaKanriJohoProcessParameter
+     * @param index int
+     * @param islist boolean
+     * @return RendingJieguoLianxieProcessParameter
      */
-    public RendingJieguoLianxieProcessParameter toRendingJieguoLianxieProcessParameter() {
-        return new RendingJieguoLianxieProcessParameter(
-                取込みデータ区分,
-                外部媒体格納パス,
-                データリスト,
-                保険者);
+    public RendingJieguoLianxieProcessParameter toRendingJieguoLianxieProcessParameter(int index, boolean islist) {
+        ArrayList<RString> リスト = new ArrayList<>();
+        if (islist) {
+            リスト.add(保険者番号リスト.get(index));
+            リスト.add(被保番号リスト.get(index));
+            リスト.add(認定申請日リスト.get(index));
+            リスト.add(申請区分_申請時_コードリスト.get(index));
+        }
+        return new RendingJieguoLianxieProcessParameter(取込みデータ区分, 格納パス, リスト, 市町村コード, 市町村名称, 証記載保険者番号, 保険者区分);
     }
 }

@@ -17,13 +17,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class GemmenGengakuShoIkkatsuMainDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ShafukuParameterControl")
+    private ShafukuParameterControlDiv ShafukuParameterControl;
+    @JsonProperty("FutanGendogakuParameterControl")
+    private FutanGendogakuParameterControlDiv FutanGendogakuParameterControl;
     @JsonProperty("SakuseiTaisho")
     private SakuseiTaishoDiv SakuseiTaisho;
     @JsonProperty("FutanGendogaku")
@@ -37,6 +41,42 @@ public class GemmenGengakuShoIkkatsuMainDiv extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getShafukuParameterControl
+     * @return ShafukuParameterControl
+     */
+    @JsonProperty("ShafukuParameterControl")
+    public ShafukuParameterControlDiv getShafukuParameterControl() {
+        return ShafukuParameterControl;
+    }
+
+    /*
+     * setShafukuParameterControl
+     * @param ShafukuParameterControl ShafukuParameterControl
+     */
+    @JsonProperty("ShafukuParameterControl")
+    public void setShafukuParameterControl(ShafukuParameterControlDiv ShafukuParameterControl) {
+        this.ShafukuParameterControl = ShafukuParameterControl;
+    }
+
+    /*
+     * getFutanGendogakuParameterControl
+     * @return FutanGendogakuParameterControl
+     */
+    @JsonProperty("FutanGendogakuParameterControl")
+    public FutanGendogakuParameterControlDiv getFutanGendogakuParameterControl() {
+        return FutanGendogakuParameterControl;
+    }
+
+    /*
+     * setFutanGendogakuParameterControl
+     * @param FutanGendogakuParameterControl FutanGendogakuParameterControl
+     */
+    @JsonProperty("FutanGendogakuParameterControl")
+    public void setFutanGendogakuParameterControl(FutanGendogakuParameterControlDiv FutanGendogakuParameterControl) {
+        this.FutanGendogakuParameterControl = FutanGendogakuParameterControl;
+    }
+
     /*
      * getSakuseiTaisho
      * @return SakuseiTaisho
@@ -94,6 +134,46 @@ public class GemmenGengakuShoIkkatsuMainDiv extends PanelBatchParameter {
     /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public ButtonBatchParameterRestore getBtnShafukuParameterRestore() {
+        return this.getShafukuParameterControl().getBtnShafukuParameterRestore();
+    }
+
+    @JsonIgnore
+    public void  setBtnShafukuParameterRestore(ButtonBatchParameterRestore btnShafukuParameterRestore) {
+        this.getShafukuParameterControl().setBtnShafukuParameterRestore(btnShafukuParameterRestore);
+    }
+
+    @JsonIgnore
+    public ButtonBatchParameterSave getBtnShafukuParameterSave() {
+        return this.getShafukuParameterControl().getBtnShafukuParameterSave();
+    }
+
+    @JsonIgnore
+    public void  setBtnShafukuParameterSave(ButtonBatchParameterSave btnShafukuParameterSave) {
+        this.getShafukuParameterControl().setBtnShafukuParameterSave(btnShafukuParameterSave);
+    }
+
+    @JsonIgnore
+    public ButtonBatchParameterRestore getBtnFutanGendogakuParameterRestore() {
+        return this.getFutanGendogakuParameterControl().getBtnFutanGendogakuParameterRestore();
+    }
+
+    @JsonIgnore
+    public void  setBtnFutanGendogakuParameterRestore(ButtonBatchParameterRestore btnFutanGendogakuParameterRestore) {
+        this.getFutanGendogakuParameterControl().setBtnFutanGendogakuParameterRestore(btnFutanGendogakuParameterRestore);
+    }
+
+    @JsonIgnore
+    public ButtonBatchParameterSave getBtnFutanGendogakuParameterSave() {
+        return this.getFutanGendogakuParameterControl().getBtnFutanGendogakuParameterSave();
+    }
+
+    @JsonIgnore
+    public void  setBtnFutanGendogakuParameterSave(ButtonBatchParameterSave btnFutanGendogakuParameterSave) {
+        this.getFutanGendogakuParameterControl().setBtnFutanGendogakuParameterSave(btnFutanGendogakuParameterSave);
+    }
+
     @JsonIgnore
     public DropDownList getDdlGemmenGengakuShurui() {
         return this.getSakuseiTaisho().getDdlGemmenGengakuShurui();

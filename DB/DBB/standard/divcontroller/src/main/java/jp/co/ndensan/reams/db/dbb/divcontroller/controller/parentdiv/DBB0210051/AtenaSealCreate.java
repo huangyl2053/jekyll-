@@ -39,6 +39,17 @@ public class AtenaSealCreate {
         return ResponseData.of(parameter).respond();
     }
 
+    /**
+     * onChangeのメソッドます。
+     *
+     * @param div AtenaSealCreateDiv
+     * @return ResponseData AtenaSealCreateDiv
+     */
+    public ResponseData<AtenaSealCreateDiv> onChange(AtenaSealCreateDiv div) {
+        getHandler(div).onChange();
+        return ResponseData.of(div).respond();
+    }
+
     private AtenaSealCreateHandler getHandler(AtenaSealCreateDiv div) {
         return AtenaSealCreateHandler.of(div);
     }

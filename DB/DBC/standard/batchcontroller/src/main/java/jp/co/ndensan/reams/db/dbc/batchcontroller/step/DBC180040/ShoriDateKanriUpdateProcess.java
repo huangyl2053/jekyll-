@@ -78,18 +78,20 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<DbT7022ShoriDa
         item.setShoriName(処理名);
         if (定数_ZERO.equals(parameter.get出力対象())) {
             item.setShoriEdaban(処理枝番_0000);
+            item.setKijunTimestamp(new YMDHMS(parameter.getバッチ起動時処理日時()));
         } else if (定数_ONE.equals(parameter.get出力対象())) {
             item.setShoriEdaban(処理枝番_0001);
             item.setTaishoKaishiTimestamp(new YMDHMS(parameter.get抽出期間開始日時()));
             item.setTaishoShuryoTimestamp(new YMDHMS(parameter.get抽出期間終了日時()));
+            item.setKijunTimestamp(new YMDHMS(parameter.get抽出期間終了日時()));
         } else if (定数_TWO.equals(parameter.get出力対象())) {
             item.setShoriEdaban(処理枝番_0002);
             item.setTaishoKaishiTimestamp(new YMDHMS(parameter.get抽出期間開始日時()));
             item.setTaishoShuryoTimestamp(new YMDHMS(parameter.get抽出期間終了日時()));
+            item.setKijunTimestamp(new YMDHMS(parameter.get抽出期間終了日時()));
         }
         item.setNendo(parameter.get年度());
         item.setNendoNaiRenban(年度内連番_0001);
-        item.setKijunTimestamp(new YMDHMS(parameter.getバッチ起動時処理日時()));
         return item;
     }
 

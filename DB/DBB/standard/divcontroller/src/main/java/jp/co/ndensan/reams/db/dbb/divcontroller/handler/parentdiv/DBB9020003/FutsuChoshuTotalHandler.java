@@ -1480,14 +1480,14 @@ public final class FutsuChoshuTotalHandler {
         List<KeyValueDataSource> 納付書出力条件 = new ArrayList<>();
         納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.なし.getコード(),
                 TsuchishoPrintConditions.なし.get名称()));
-        納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.全被保険者_異動時は異動分全件.getコード(),
-                TsuchishoPrintConditions.全被保険者_異動時は異動分全件.get名称()));
-        納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.差引き保険料１円以上の被保険者.getコード(),
-                TsuchishoPrintConditions.差引き保険料１円以上の被保険者.get名称()));
-        納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.保険料変更有りで差引き保険料１円以上の被保険者_異動分のみ.getコード(),
-                TsuchishoPrintConditions.保険料変更有りで差引き保険料１円以上の被保険者_異動分のみ.get名称()));
-        納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.差引き保険料０円以外で確定保険料がある被保険者_当初のみ.getコード(),
-                TsuchishoPrintConditions.差引き保険料０円以外で確定保険料がある被保険者_当初のみ.get名称()));
+        納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.全被保険者.getコード(),
+                TsuchishoPrintConditions.全被保険者.get名称()));
+        納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.差引き保険料1円以上の被保険者.getコード(),
+                TsuchishoPrintConditions.差引き保険料1円以上の被保険者.get名称()));
+        納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.保険料変更有りで差引き保険料１円以上の被保険者.getコード(),
+                TsuchishoPrintConditions.保険料変更有りで差引き保険料１円以上の被保険者.get名称()));
+        納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.差引き保険料0円以外で確定保険料がある被保険者.getコード(),
+                TsuchishoPrintConditions.差引き保険料0円以外で確定保険料がある被保険者.get名称()));
         return 納付書出力条件;
     }
 

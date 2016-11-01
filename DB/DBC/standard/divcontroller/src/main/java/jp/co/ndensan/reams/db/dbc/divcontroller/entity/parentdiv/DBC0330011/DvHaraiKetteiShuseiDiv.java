@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0330011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -33,9 +33,9 @@ public class DvHaraiKetteiShuseiDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnShuseiSeitaiIchiran")
-    private ButtonDialog btnShuseiSeitaiIchiran;
-    @JsonProperty("rirekiNo")
-    private TextBox rirekiNo;
+    private Button btnShuseiSeitaiIchiran;
+    @JsonProperty("txtRirekiNo")
+    private TextBox txtRirekiNo;
     @JsonProperty("linLine3")
     private HorizontalLine linLine3;
     @JsonProperty("btnShinseiDate")
@@ -70,7 +70,7 @@ public class DvHaraiKetteiShuseiDiv extends Panel {
      * @return btnShuseiSeitaiIchiran
      */
     @JsonProperty("btnShuseiSeitaiIchiran")
-    public ButtonDialog getBtnShuseiSeitaiIchiran() {
+    public Button getBtnShuseiSeitaiIchiran() {
         return btnShuseiSeitaiIchiran;
     }
 
@@ -79,26 +79,26 @@ public class DvHaraiKetteiShuseiDiv extends Panel {
      * @param btnShuseiSeitaiIchiran btnShuseiSeitaiIchiran
      */
     @JsonProperty("btnShuseiSeitaiIchiran")
-    public void setBtnShuseiSeitaiIchiran(ButtonDialog btnShuseiSeitaiIchiran) {
+    public void setBtnShuseiSeitaiIchiran(Button btnShuseiSeitaiIchiran) {
         this.btnShuseiSeitaiIchiran = btnShuseiSeitaiIchiran;
     }
 
     /*
-     * getrirekiNo
-     * @return rirekiNo
+     * gettxtRirekiNo
+     * @return txtRirekiNo
      */
-    @JsonProperty("rirekiNo")
-    public TextBox getRirekiNo() {
-        return rirekiNo;
+    @JsonProperty("txtRirekiNo")
+    public TextBox getTxtRirekiNo() {
+        return txtRirekiNo;
     }
 
     /*
-     * setrirekiNo
-     * @param rirekiNo rirekiNo
+     * settxtRirekiNo
+     * @param txtRirekiNo txtRirekiNo
      */
-    @JsonProperty("rirekiNo")
-    public void setRirekiNo(TextBox rirekiNo) {
-        this.rirekiNo = rirekiNo;
+    @JsonProperty("txtRirekiNo")
+    public void setTxtRirekiNo(TextBox txtRirekiNo) {
+        this.txtRirekiNo = txtRirekiNo;
     }
 
     /*

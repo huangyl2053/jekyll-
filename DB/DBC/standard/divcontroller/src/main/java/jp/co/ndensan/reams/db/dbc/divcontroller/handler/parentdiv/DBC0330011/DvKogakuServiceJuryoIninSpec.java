@@ -60,9 +60,11 @@ public enum DvKogakuServiceJuryoIninSpec implements IPredicate<DvKogakuServiceJu
 
         private static final RString KEY_決定区分_承認する = new RString("key0");
         private static final RString KEY_決定区分_承認しない = new RString("key1");
+        private static final RString 文書番号_EMPTY = new RString("第号");
 
         public static boolean is文書番号必須(DvKogakuServiceJuryoIninDiv div) {
-            return RString.isNullOrEmpty(div.getDvKakuninsho().getCcdBunshoBango().get文書番号());
+            return RString.isNullOrEmpty(div.getDvKakuninsho().getCcdBunshoBango().get文書番号())
+                    || 文書番号_EMPTY.equals(div.getDvKakuninsho().getCcdBunshoBango().get文書番号());
         }
 
         public static boolean is承認しない理由必須(DvKogakuServiceJuryoIninDiv div) {

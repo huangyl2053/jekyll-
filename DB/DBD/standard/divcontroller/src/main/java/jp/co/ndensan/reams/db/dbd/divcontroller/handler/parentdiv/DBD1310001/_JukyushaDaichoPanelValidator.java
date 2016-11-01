@@ -37,8 +37,6 @@ public class _JukyushaDaichoPanelValidator implements IValidatable {
                 .thenAdd(JukyushaDaichoPanelValidationMessage.実行するボタンクリック1)
                 .ifNot(JukyushaDaichoPanelSpec.実行するボタンクリック2)
                 .thenAdd(JukyushaDaichoPanelValidationMessage.実行するボタンクリック2)
-                .ifNot(JukyushaDaichoPanelSpec.実行するボタンクリック3)
-                .thenAdd(JukyushaDaichoPanelValidationMessage.実行するボタンクリック3)
                 .ifNot(JukyushaDaichoPanelSpec.実行するボタンクリック4)
                 .thenAdd(JukyushaDaichoPanelValidationMessage.実行するボタンクリック4)
                 .ifNot(JukyushaDaichoPanelSpec.実行するボタンクリック5)
@@ -47,8 +45,6 @@ public class _JukyushaDaichoPanelValidator implements IValidatable {
                 .thenAdd(JukyushaDaichoPanelValidationMessage.実行するボタンクリック6)
                 .ifNot(JukyushaDaichoPanelSpec.実行するボタンクリック7)
                 .thenAdd(JukyushaDaichoPanelValidationMessage.実行するボタンクリック7)
-                .ifNot(JukyushaDaichoPanelSpec.実行するボタンクリック8)
-                .thenAdd(JukyushaDaichoPanelValidationMessage.実行するボタンクリック8)
                 .messages());
         return messages;
     }

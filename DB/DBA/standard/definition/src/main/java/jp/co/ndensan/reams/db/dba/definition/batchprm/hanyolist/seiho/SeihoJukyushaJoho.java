@@ -11,20 +11,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum SeihoJukyushaJoho {
 
     /**
-     * コード:1 名称:日本人 略称:定義なし
+     * コード:1 名称:日本人 略称:日本人
      */
-    日本人("1", "日本人"),
+    日本人("1", "日本人", "日本人"),
     /**
-     * コード:2 名称:外国人 略称:定義なし
+     * コード:2 名称:外国人 略称:外国人
      */
-    外国人("2", "外国人");
+    外国人("2", "外国人", "外国人");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private SeihoJukyushaJoho(String code, String fullname) {
+    private SeihoJukyushaJoho(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -43,6 +45,15 @@ public enum SeihoJukyushaJoho {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 生保受給者情報の略称を返します。
+     *
+     * @return 生保受給者情報の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

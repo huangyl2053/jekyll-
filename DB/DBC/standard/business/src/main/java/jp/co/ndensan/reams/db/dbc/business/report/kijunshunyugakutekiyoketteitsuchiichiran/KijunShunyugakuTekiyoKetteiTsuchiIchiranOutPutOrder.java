@@ -16,25 +16,25 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KijunShunyugakuTekiyoKetteiTsuchiIchiranOutPutOrder implements IReportItems {
 
     /**
-     * 事業者番号
+     * 郵便番号
      */
-    年度("3001", "年度", "\"DbT3116KijunShunyugakuTekiyoKanri\".\"nendo\""),
+    郵便番号("0001", "郵便番号", "yubinNo"),
     /**
-     * 被保険者番号
+     * 町域コード
      */
-    申請年月日("3002", "申請年月日", "\"DbT3116KijunShunyugakuTekiyoKanri\".\"shinseiYMD\""),
+    町域コード("0002", "町域コード", "choikiCode"),
     /**
-     * 被保険者番号
+     * 行政区コード
      */
-    決定年月日("3003", "決定年月日", "\"DbT3116KijunShunyugakuTekiyoKanri\".\"ketteiYMD\""),
+    行政区コード("0004", "行政区コード", "gyoseikuCode"),
     /**
-     * 被保険者番号
+     * 世帯コード
      */
-    適用開始年月("3004", "適用開始年月", "\"DbT3116KijunShunyugakuTekiyoKanri\".\"tekiyoKaishiYMD\""),
+    世帯コード("0008", "世帯コード", "setaiCode"),
     /**
-     * 被保険者番号
+     * 市町村コード
      */
-    算定基準額("3005", "算定基準額", "\"DbT3116KijunShunyugakuTekiyoKanri\".\"santeiKijungaku\"");
+    市町村コード("0016", "市町村コード", "shichosonCode");
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

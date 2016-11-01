@@ -25,42 +25,32 @@ public class TokuchoKaishiMaeFucho10GatsuTest extends DbbTestBase {
 
     @Test
     public void 引数に0を指定した場合_toValueは_年度前半の本算定納期で普通徴収しないを返す() {
-        assertThat(TokuchoKaishiMaeFucho10Gatsu.toValue(new RString("0")), is(TokuchoKaishiMaeFucho10Gatsu.年度前半の本算定納期で普通徴収しない));
+        assertThat(TokuchoKaishiMaeFucho10Gatsu.toValue(new RString("0")), is(TokuchoKaishiMaeFucho10Gatsu.なし));
     }
 
     @Test
     public void 引数に1を指定した場合_toValueは_年度前半の本算定納期で普通徴収するを返す() {
-        assertThat(TokuchoKaishiMaeFucho10Gatsu.toValue(new RString("1")), is(TokuchoKaishiMaeFucho10Gatsu.年度前半の本算定納期で普通徴収する));
+        assertThat(TokuchoKaishiMaeFucho10Gatsu.toValue(new RString("1")), is(TokuchoKaishiMaeFucho10Gatsu.あり));
     }
 
     @Test
     public void 年度前半の本算定納期で普通徴収しないを指定した場合_getコードは_0を返す() {
-        assertThat(TokuchoKaishiMaeFucho10Gatsu.年度前半の本算定納期で普通徴収しない.getコード(), is(new RString("0")));
+        assertThat(TokuchoKaishiMaeFucho10Gatsu.なし.getコード(), is(new RString("0")));
     }
 
     @Test
     public void 年度前半の本算定納期で普通徴収するを指定した場合_getコードは_1を返す() {
-        assertThat(TokuchoKaishiMaeFucho10Gatsu.年度前半の本算定納期で普通徴収する.getコード(), is(new RString("1")));
+        assertThat(TokuchoKaishiMaeFucho10Gatsu.あり.getコード(), is(new RString("1")));
     }
 
     @Test
     public void 年度前半の本算定納期で普通徴収しないを指定した場合_get名称は_なしを返す() {
-        assertThat(TokuchoKaishiMaeFucho10Gatsu.年度前半の本算定納期で普通徴収しない.get名称(), is(new RString("なし")));
+        assertThat(TokuchoKaishiMaeFucho10Gatsu.なし.get名称(), is(new RString("年度前半の本算定納期で普通徴収しない")));
     }
 
     @Test
     public void 年度前半の本算定納期で普通徴収するを指定した場合_get名称は_ありを返す() {
-        assertThat(TokuchoKaishiMaeFucho10Gatsu.年度前半の本算定納期で普通徴収する.get名称(), is(new RString("あり")));
-    }
-
-    @Test
-    public void 年度前半の本算定納期で普通徴収しないを指定した場合_get略称は_年度前半の本算定納期で普通徴収しないを返す() {
-        assertThat(TokuchoKaishiMaeFucho10Gatsu.年度前半の本算定納期で普通徴収しない.get略称(), is(new RString("年度前半の本算定納期で普通徴収しない")));
-    }
-
-    @Test
-    public void 年度前半の本算定納期で普通徴収するを指定した場合_get略称は_年度前半の本算定納期で普通徴収するを返す() {
-        assertThat(TokuchoKaishiMaeFucho10Gatsu.年度前半の本算定納期で普通徴収する.get略称(), is(new RString("年度前半の本算定納期で普通徴収する")));
+        assertThat(TokuchoKaishiMaeFucho10Gatsu.あり.get名称(), is(new RString("年度前半の本算定納期で普通徴収する")));
     }
 
 }

@@ -119,12 +119,30 @@ public class IryohiKojo extends ModelBase<IryohiKojoIdentifier, DbT4401IryohiKoj
     }
 
     /**
+     * 登録年月日を返します。
+     *
+     * @return 登録年月日
+     */
+    public FlexibleDate get登録年月日() {
+        return entity.getTorokuYMD();
+    }
+
+    /**
      * 発行年月日を返します。
      *
      * @return 発行年月日
      */
     public FlexibleDate get発行年月日() {
         return entity.getHakkoYMD();
+    }
+
+    /**
+     * 主治医意見書受領年月日を返します。
+     *
+     * @return 主治医意見書受領年月日
+     */
+    public FlexibleDate get主治医意見書受領年月日() {
+        return entity.getShujiiIkenshoJuryoYMD();
     }
 
     /**
@@ -143,6 +161,24 @@ public class IryohiKojo extends ModelBase<IryohiKojoIdentifier, DbT4401IryohiKoj
      */
     public FlexibleDate get認定有効期間終了年月日() {
         return entity.getNinteiYukoKikanShuryoYMD();
+    }
+
+    /**
+     * 日常生活自立度を返します。
+     *
+     * @return 日常生活自立度
+     */
+    public RString get日常生活自立度() {
+        return entity.getNichijoSeikatsuJiritsudo();
+    }
+
+    /**
+     * 尿失禁の有無を返します。
+     *
+     * @return 尿失禁の有無
+     */
+    public boolean is尿失禁の有無() {
+        return entity.getNyoshikkinHassei();
     }
 
     /**

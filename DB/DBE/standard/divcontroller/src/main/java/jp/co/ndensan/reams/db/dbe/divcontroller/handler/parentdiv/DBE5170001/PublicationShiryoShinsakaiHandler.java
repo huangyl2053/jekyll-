@@ -9,7 +9,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5170001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.KaisaiYoteiJohoBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai.ShiryoShinsakaiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000.DBE517000_ShinsakaiShiryoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5170001.PublicationShiryoShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -220,7 +220,7 @@ public class PublicationShiryoShinsakaiHandler {
      *
      * @return ShiryoShinsakaiBatchParameter
      */
-    public ShiryoShinsakaiBatchParameter onClick_btnKogakuParamSave() {
+    public DBE517000_ShinsakaiShiryoParameter onClick_btnKogakuParamSave() {
 
         RString 事務局審査会対象者一覧フラグ = new RString("0");
         RString 事務局特記事項フラグ = new RString("0");
@@ -315,7 +315,7 @@ public class PublicationShiryoShinsakaiHandler {
                 委員用予備判定記入表フラグ);
     }
 
-    private ShiryoShinsakaiBatchParameter set項目(
+    private DBE517000_ShinsakaiShiryoParameter set項目(
             RString 事務局審査会対象者一覧フラグ,
             RString 事務局特記事項フラグ,
             RString 事務局一次判定結果票フラグ,
@@ -333,7 +333,7 @@ public class PublicationShiryoShinsakaiHandler {
             RString 委員用その他資料フラグ,
             RString 委員用審査会開催通知書フラグ,
             RString 委員用予備判定記入表フラグ) {
-        return new ShiryoShinsakaiBatchParameter(
+        return new DBE517000_ShinsakaiShiryoParameter(
                 div.getTxtShinsakaiKaisaiNo().getValue(),
                 div.getTxtShinsakaiYoteiDate().getValue(),
                 new RString(div.getTxtShinsakaiKaishiYoteiTime().getValue().toString()),

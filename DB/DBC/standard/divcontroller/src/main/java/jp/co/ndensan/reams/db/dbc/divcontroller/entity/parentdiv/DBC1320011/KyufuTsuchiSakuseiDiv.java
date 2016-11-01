@@ -29,8 +29,6 @@ public class KyufuTsuchiSakuseiDiv extends Panel {
     private TextBoxDateRange tdrServiceYM;
     @JsonProperty("chkServiceSyuruiSyuyaku")
     private CheckBoxList chkServiceSyuruiSyuyaku;
-    @JsonProperty("ccdHokenshaList")
-    private HokenshaListDiv ccdHokenshaList;
     @JsonProperty("holLine1")
     private HorizontalLine holLine1;
     @JsonProperty("chkYokaigodo")
@@ -39,6 +37,8 @@ public class KyufuTsuchiSakuseiDiv extends Panel {
     private KyufuTsuchiSakusei1Div KyufuTsuchiSakusei1;
     @JsonProperty("KyufuTsuchiSakusei2")
     private KyufuTsuchiSakusei2Div KyufuTsuchiSakusei2;
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
     @JsonProperty("hdn市町村コード")
     private RString hdn市町村コード;
     @JsonProperty("hdn保険者構成key")
@@ -86,15 +86,6 @@ public class KyufuTsuchiSakuseiDiv extends Panel {
     @JsonProperty("chkServiceSyuruiSyuyaku")
     public void setChkServiceSyuruiSyuyaku(CheckBoxList chkServiceSyuruiSyuyaku) {
         this.chkServiceSyuruiSyuyaku = chkServiceSyuruiSyuyaku;
-    }
-
-    /*
-     * getccdHokenshaList
-     * @return ccdHokenshaList
-     */
-    @JsonProperty("ccdHokenshaList")
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return ccdHokenshaList;
     }
 
     /*
@@ -167,6 +158,15 @@ public class KyufuTsuchiSakuseiDiv extends Panel {
     @JsonProperty("KyufuTsuchiSakusei2")
     public void setKyufuTsuchiSakusei2(KyufuTsuchiSakusei2Div KyufuTsuchiSakusei2) {
         this.KyufuTsuchiSakusei2 = KyufuTsuchiSakusei2;
+    }
+
+    /*
+     * getccdHokenshaList
+     * @return ccdHokenshaList
+     */
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
     }
 
     /*
@@ -267,12 +267,12 @@ public class KyufuTsuchiSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtHihokenshaNo() {
+    public TextBoxCode getTxtHihokenshaNo() {
         return this.getKyufuTsuchiSakusei1().getTxtHihokenshaNo();
     }
 
     @JsonIgnore
-    public void  setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+    public void  setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
         this.getKyufuTsuchiSakusei1().setTxtHihokenshaNo(txtHihokenshaNo);
     }
 

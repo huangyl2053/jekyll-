@@ -98,6 +98,7 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
     private static final RString CODE = new RString("0003");
     private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final RString 固定改頁項目ID = new RString("0365");
@@ -111,7 +112,7 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
         改頁リスト = new ArrayList<>();
         改頁リスト.add(固定改頁項目ID);
         並び順 = get並び順();
-        
+
         if (null == 並び順) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
@@ -123,15 +124,15 @@ public class KyufuJissekiKoshinDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
                     改頁項目リスト.add(item.get項目名());
                     改頁リスト.add(item.get項目ID());
                 }
-                if (i == 0) {
+                if (i == INDEX_1) {
                     並び順の１件目 = item.get項目名();
-                } else if (i == INDEX_1) {
-                    並び順の２件目 = item.get項目名();
                 } else if (i == INDEX_2) {
-                    並び順の３件目 = item.get項目名();
+                    並び順の２件目 = item.get項目名();
                 } else if (i == INDEX_3) {
-                    並び順の４件目 = item.get項目名();
+                    並び順の３件目 = item.get項目名();
                 } else if (i == INDEX_4) {
+                    並び順の４件目 = item.get項目名();
+                } else if (i == INDEX_5) {
                     並び順の５件目 = item.get項目名();
                 }
                 i = i + 1;

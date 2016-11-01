@@ -56,7 +56,9 @@ public class TokubetsuChoshuIraiJohoKensuhyoEditor implements ITokubetsuChoshuIr
             source.nenkinHokenshaName = parameter.getEntity().get年金保険者名称();
             source.shichosonCode = parameter.getEntity().get構成市町村コード();
             source.shichosonName = parameter.getEntity().get市町村名称();
-            source.listLeftUpper_3 = new RString(parameter.getEntity().getLeft件数());
+            if (parameter.getEntity().getLeft件数() != null) {
+                source.listLeftUpper_3 = new RString(parameter.getEntity().getLeft件数());
+            }
             if (parameter.getEntity().getLeft金額1() != null) {
                 source.listLeftUpper_4 = doカンマ編集(new Decimal(parameter.getEntity().getLeft金額1().toString()));
             }
@@ -69,7 +71,9 @@ public class TokubetsuChoshuIraiJohoKensuhyoEditor implements ITokubetsuChoshuIr
                         parameter.getEntity().getLeft特別徴収義務者コード());
                 source.listLeftUpper_1 = parameter.getEntity().getLeft特別徴収義務者コード().getColumnValue();
             }
-            source.listRightUpper_3 = new RString(parameter.getEntity().getRight件数());
+            if (parameter.getEntity().getRight件数() != null) {
+                source.listRightUpper_3 = new RString(parameter.getEntity().getRight件数());
+            }
             if (parameter.getEntity().getRight金額1() != null) {
                 source.listRightUpper_4 = doカンマ編集(new Decimal(parameter.getEntity().getRight金額1().toString()));
             }

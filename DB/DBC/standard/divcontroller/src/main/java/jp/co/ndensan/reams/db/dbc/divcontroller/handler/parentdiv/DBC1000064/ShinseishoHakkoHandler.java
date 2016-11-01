@@ -10,12 +10,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kijunshunyugaku.ShinseishoHakkoChushutsuJoken;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000064.ShinseishoHakkoDiv;
+import jp.co.ndensan.reams.db.dbc.service.core.kijunshunyugaku.TekiyoShinseishoManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -35,7 +37,7 @@ public class ShinseishoHakkoHandler {
     private static final int INDEX_731 = 731;
     private static final int INDEX_801 = 801;
     private static final int INDEX_1231 = 1231;
-    private static final RString 日 = new RString("01");
+    private static final RString 日 = new RString("0801");
     private static final RString 本年７月中 = new RString("本年７月中");
 
     /**
@@ -63,7 +65,7 @@ public class ShinseishoHakkoHandler {
             div.getTxtShoriNendo().setValue(FlexibleDate.getNowDate());
         }
         FlexibleDate 世帯員把握基準日基準日 = new FlexibleDate(YMDHMS.now().getYear()
-                .toDateString().concat(new RString(YMDHMS.now().getMonthValue()).padZeroToLeft(2).concat(日)));
+                .toDateString().concat(日));
         div.getTxtSetaiinHaakuKijunYMD().setValue(世帯員把握基準日基準日);
         div.getTxtTeishutsuKigen().setValue(本年７月中);
         FlexibleDate 作成日 = new FlexibleDate(YMDHMS.now().getDate().toDateString());
@@ -131,6 +133,24 @@ public class ShinseishoHakkoHandler {
             div.getTxtSetaiinHaakuKijunYMD().setDisabled(true);
         }
     }
-    //        TODO異動処理が実行済みか確認   「ビジネス設計_DBC110064_基準収入額適用申請書_年次分作成」
 
+    /**
+     * 異動処理が実施済みか判定
+     *
+     * @return boolean
+     */
+    public boolean is異動処理が実施済みか判定() {
+        if (ShinseishoHakkoChushutsuJoken.処理年度.getコード().equals(
+                div.getRadChushutsuJoken().getSelectedKey())) {
+            return TekiyoShinseishoManager.createInstance().isIdoExecute(
+                    new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4)));
+        }
+        if (ShinseishoHakkoChushutsuJoken.被保険者番号.getコード().equals(div.getRadChushutsuJoken().getSelectedKey())) {
+            return TekiyoShinseishoManager.createInstance().isIdoExecute(
+                    new FlexibleYear(div.getTxtShoriNendo().getValue().toString().substring(0, INDEX_4)));
+        } else {
+            return false;
+        }
+
+    }
 }

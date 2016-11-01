@@ -5,16 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dba.service.core.juminidorendoshikakusoshitsu;
 
-import java.util.ArrayList;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.definition.core.juminidorendoshikakusoshitsu.NaiBushoRyouParamter;
 import jp.co.ndensan.reams.db.dba.definition.core.juminidorendoshikakusoshitsu.StoreConfigParamter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.juminidorendoshikakutoroku.JuminIdoRendoShikakuTorokuEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -29,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class JuminIdoRendoShikakuSoshitsuShibo {
 
     private final RString 直近 = new RString("1");
-    private final RString 転出 = new RString("2");
     private final RString 不整合コード_9999 = new RString("9999");
 
     /**
@@ -100,7 +95,7 @@ public class JuminIdoRendoShikakuSoshitsuShibo {
         RString 年齢 = RString.EMPTY;
         NaiBushoRyouParamter naiBushoRyouParamter = 被保険者死亡処理_内部処理用パラメータの編集(住民異動情報, storeConfigParamter, 到達日_65,
                 介護保険法施行日, 消除異動日翌日, 補正後65歳到達日, 補正後消除異動日翌日);
-        searchHihodaicho(entity, 直近);
+        JuminIdoRendoShikakuSoshitsu.createInstance().getSearchHihodaicho(entity, 直近);
         if (被保険者死亡処理_被保険者処理要否判定(entity, storeConfigParamter, 年齢)) {
             return;
         }
@@ -131,32 +126,6 @@ public class JuminIdoRendoShikakuSoshitsuShibo {
             RString 不整合コード, RString 転出保留作成事由コード) {
         entity.set不整合コード(不整合コード);
         entity.set転出保留作成事由コード(転出保留作成事由コード);
-    }
-
-    private void searchHihodaicho(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
-
-        List<DbT1001HihokenshaDaichoEntity> dbT1001List = entity.get被保険者台帳EntityList();
-        List<DbT1001HihokenshaDaichoEntity> list = new ArrayList<>();
-        HihokenshaNo 被保険者 = HihokenshaNo.EMPTY;
-
-        if (直近.equals(データ抽出ＰＴＮ)) {
-            for (DbT1001HihokenshaDaichoEntity dbT1001Entity : dbT1001List) {
-                if (!被保険者.equals(dbT1001Entity.getHihokenshaNo())) {
-                    list.add(dbT1001Entity);
-                    被保険者 = dbT1001Entity.getHihokenshaNo();
-                }
-            }
-        }
-        if (転出.equals(データ抽出ＰＴＮ)) {
-            for (DbT1001HihokenshaDaichoEntity dbT1001Entity : dbT1001List) {
-                if (!ShikakuSoshitsuJiyu.転出.getコード().equals(dbT1001Entity.getIdoJiyuCode())
-                        && !被保険者.equals(dbT1001Entity.getHihokenshaNo())) {
-                    list.add(dbT1001Entity);
-                    被保険者 = dbT1001Entity.getHihokenshaNo();
-                }
-            }
-        }
-        entity.set被保険者台帳EntityList(list);
     }
 
     private NaiBushoRyouParamter 被保険者死亡処理_内部処理用パラメータの編集(

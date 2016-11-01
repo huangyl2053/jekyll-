@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd492001.ichijiteburu;
 
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -80,11 +78,11 @@ public class JinbunoQurirumirisutofairuYishiteburuEntity extends
     @TempTableColumnOrder(22)
     private RString hihokenjakanjishimei;
     @TempTableColumnOrder(23)
-    private YubinNo yubenbango;
+    private RString yubenbango;
     @TempTableColumnOrder(24)
     private RString jusho;
     @TempTableColumnOrder(25)
-    private TelNo tenwabango;
+    private RString tenwabango;
     @TempTableColumnOrder(26)
     private RString byoinshisetsutonomeisho;
     @TempTableColumnOrder(27)

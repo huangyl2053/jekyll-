@@ -57,8 +57,8 @@ public class ServiceCodeCommonChildDiv {
         FlexibleYearMonth kijunYmFlex;
         List<KaigoServiceNaiyou> list;
         if (!RString.isNullOrEmpty(div.getTxtServiceCode().getValue())
-                && !RString.isNullOrEmpty(div.getTxtKomokuCode().getValue())
-                && div.getTxtKijunYM().getValue() != null) {
+                || !RString.isNullOrEmpty(div.getTxtKomokuCode().getValue())
+                || div.getTxtKijunYM().getValue() != null) {
             if (div.getTxtKijunYM().getValue() == null) {
                 kijunYmFlex = FlexibleYearMonth.EMPTY;
             } else {

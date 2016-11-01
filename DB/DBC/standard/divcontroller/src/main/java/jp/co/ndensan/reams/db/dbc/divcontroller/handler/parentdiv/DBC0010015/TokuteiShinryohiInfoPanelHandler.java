@@ -67,15 +67,17 @@ public class TokuteiShinryohiInfoPanelHandler {
      *
      * @param 給付実績情報照会情報 給付実績情報照会情報
      * @param サービス提供年月 サービス提供年月
+     * @param 給付実績特定診療費_特別療養費等 給付実績特定診療費_特別療養費等
+     * @param 給付実績特定診療費等 給付実績特定診療費等
      */
-    public void onLoad(KyufuJissekiPrmBusiness 給付実績情報照会情報, FlexibleYearMonth サービス提供年月) {
+    public void onLoad(KyufuJissekiPrmBusiness 給付実績情報照会情報, FlexibleYearMonth サービス提供年月,
+            List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等,
+            List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等) {
         if (提供年月.isBeforeOrEquals(サービス提供年月)) {
-            List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等 = 給付実績情報照会情報.getCsData_J();
             filt特別療養費リスト(給付実績特定診療費_特別療養費等);
             this.set特別療養費前月と次月(給付実績特定診療費_特別療養費等, サービス提供年月);
             div.getDgTokuteiShinryohiToH1503().setDisplayNone(true);
         } else {
-            List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等 = 給付実績情報照会情報.getCsData_D();
             filt特定診療費リスト(給付実績特定診療費等);
             set特定診療費前月と次月(給付実績特定診療費等, サービス提供年月);
             div.getDgTokuteiShinryohiFromH1504().setDisplayNone(true);
@@ -462,8 +464,12 @@ public class TokuteiShinryohiInfoPanelHandler {
      *
      * @param 事業者 事業者
      * @param 給付実績情報照会情報 給付実績情報照会情報
+     * @param 給付実績特定診療費_特別療養費等 給付実績特定診療費_特別療養費等
+     * @param 給付実績特定診療費等 給付実績特定診療費等
      */
-    public void change事業者(RString 事業者, KyufuJissekiPrmBusiness 給付実績情報照会情報) {
+    public void change事業者(RString 事業者, KyufuJissekiPrmBusiness 給付実績情報照会情報,
+            List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等,
+            List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等) {
         RString サービス提供年月 = to日期変換(div.getCcdKyufuJissekiHeader().getサービス提供年月());
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2();
         if (事業者番号リスト.isEmpty()) {
@@ -483,7 +489,8 @@ public class TokuteiShinryohiInfoPanelHandler {
             div.getCcdKyufuJissekiHeader().set識別番号名称(事業者番号リスト.get(index + i).get識別番号名称());
             div.getCcdKyufuJissekiHeader().set様式番号(事業者番号リスト.get(index + i).get識別番号());
             div.getCcdKyufuJissekiHeader().set事業者番号(to事業所番号(事業者番号リスト.get(index + i).get事業所番号()));
-            this.onLoad(給付実績情報照会情報, new FlexibleYearMonth(サービス提供年月));
+            this.onLoad(給付実績情報照会情報, new FlexibleYearMonth(サービス提供年月),
+                    給付実績特定診療費_特別療養費等, 給付実績特定診療費等);
             div.getBtnMaeJigyosha().setDisabled(true);
             div.getBtnAtoJigyosha().setDisabled(true);
             if (index + i - 1 > 0) {
@@ -533,15 +540,19 @@ public class TokuteiShinryohiInfoPanelHandler {
      *
      * @param data RString
      * @param 給付実績情報照会情報 給付実績情報照会情報
+     * @param 給付実績特定診療費_特別療養費等 給付実績特定診療費_特別療養費等
+     * @param 給付実績特定診療費等 給付実績特定診療費等
      */
-    public void change年月(RString data, KyufuJissekiPrmBusiness 給付実績情報照会情報) {
+    public void change年月(RString data, KyufuJissekiPrmBusiness 給付実績情報照会情報,
+            List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等,
+            List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等) {
         int index = INT_ZERO;
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(to日期変換(div.getCcdKyufuJissekiHeader().getサービス提供年月()));
         List<FlexibleYearMonth> サービス提供年月リスト = new ArrayList<>();
         if (提供年月.isBeforeOrEquals(サービス提供年月)) {
-            サービス提供年月リスト = this.get特別療養費サービス提供年月リスト(給付実績情報照会情報.getCsData_J());
+            サービス提供年月リスト = this.get特別療養費サービス提供年月リスト(給付実績特定診療費_特別療養費等);
         } else {
-            this.get特定診療費サービス提供年月リスト(給付実績情報照会情報.getCsData_D());
+            this.get特定診療費サービス提供年月リスト(給付実績特定診療費等);
         }
         if (サービス提供年月リスト.isEmpty()) {
             return;
@@ -560,7 +571,8 @@ public class TokuteiShinryohiInfoPanelHandler {
             今提供年月 = サービス提供年月リスト.get(index - 1);
         }
         div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(to日期変換(今提供年月).toString()));
-        this.onLoad(給付実績情報照会情報, 今提供年月);
+        this.onLoad(給付実績情報照会情報, 今提供年月,
+                給付実績特定診療費_特別療養費等, 給付実績特定診療費等);
     }
 
     private void set特別療養費前月と次月(List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 特別療養費リスト, FlexibleYearMonth サービス提供年月) {

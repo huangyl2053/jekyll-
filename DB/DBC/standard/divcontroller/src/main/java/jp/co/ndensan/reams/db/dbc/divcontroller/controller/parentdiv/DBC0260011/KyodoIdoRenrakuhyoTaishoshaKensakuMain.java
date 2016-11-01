@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0260011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0260011.KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0260011.KyodoIdoRenrakuhyoTaishoshaKensakuMainHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0260011.KyodoIdoRenrakuhyoTaishoshaKensakuMainValidationHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.taishoshaichiran.TaishoshaIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.kyodojukyushataishosha.KyodoJukyushaTaishoshaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -52,7 +53,10 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuMain {
     public ResponseData<KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv> onLoad(
             KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv div) {
         RString イベント名 = ResponseHolder.getBeforeEvent();
+        getHandler(div).click条件をクリア();
         if (イベント_対象者特定.equals(イベント名) || イベント_終了.equals(イベント名)) {
+            TaishoshaIchiranParameter parameter = ViewStateHolder.get(ViewStateKeys.退避用データ, TaishoshaIchiranParameter.class);
+            getHandler(div).set検索条件(parameter);
             TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             HihokenshaNo 被保番号 = 資格対象者.get被保険者番号();
             if (被保番号 != null && !被保番号.isEmpty()) {
@@ -127,6 +131,8 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuMain {
      */
     public ResponseData<KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv> onClick_btnSearchHihokensha(
             KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv div) {
+        TaishoshaIchiranParameter parameter = getHandler(div).set登録退避用検索キー();
+        ViewStateHolder.put(ViewStateKeys.退避用データ, parameter);
         return ResponseData.of(div).forwardWithEventName(DBC0260011TransitionEventName.該当者検索).respond();
     }
 

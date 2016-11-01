@@ -35,6 +35,7 @@
         <result property="住所" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
         <result property="行政区コード" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
         <result property="行政区名" column="gyoseikuName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         
         
     </resultMap>
@@ -60,6 +61,7 @@
             DbV4001."yokaigoJotaiKubunCode",
             DbT4001."isDeleted",
             DbT4001."updateCount",
+            DbT4001."shinseishoKanriNo",
             B."seinengappiYMD",
             B."meisho",
             B."kanaMeisho",

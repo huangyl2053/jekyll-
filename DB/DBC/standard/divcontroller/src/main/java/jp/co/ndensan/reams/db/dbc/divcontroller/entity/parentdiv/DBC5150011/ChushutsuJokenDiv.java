@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5150011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDiv.IServiceTypeInputCommonChildDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
@@ -34,12 +34,12 @@ public class ChushutsuJokenDiv extends Panel {
     private RadioButton radChushutsuJokenAll;
     @JsonProperty("radChushutsuJokenServiceCode")
     private RadioButton radChushutsuJokenServiceCode;
+    @JsonProperty("ServiceCodeChushutsuJoken")
+    private ServiceCodeChushutsuJokenDiv ServiceCodeChushutsuJoken;
     @JsonProperty("radChushutsuJokenServiceBunrui")
     private RadioButton radChushutsuJokenServiceBunrui;
     @JsonProperty("panServiceSyurui")
     private panServiceSyuruiDiv panServiceSyurui;
-    @JsonProperty("ccdServiceCodeInput")
-    private ServiceCodeInputCommonChildDivDiv ccdServiceCodeInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -102,6 +102,24 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     /*
+     * getServiceCodeChushutsuJoken
+     * @return ServiceCodeChushutsuJoken
+     */
+    @JsonProperty("ServiceCodeChushutsuJoken")
+    public ServiceCodeChushutsuJokenDiv getServiceCodeChushutsuJoken() {
+        return ServiceCodeChushutsuJoken;
+    }
+
+    /*
+     * setServiceCodeChushutsuJoken
+     * @param ServiceCodeChushutsuJoken ServiceCodeChushutsuJoken
+     */
+    @JsonProperty("ServiceCodeChushutsuJoken")
+    public void setServiceCodeChushutsuJoken(ServiceCodeChushutsuJokenDiv ServiceCodeChushutsuJoken) {
+        this.ServiceCodeChushutsuJoken = ServiceCodeChushutsuJoken;
+    }
+
+    /*
      * getradChushutsuJokenServiceBunrui
      * @return radChushutsuJokenServiceBunrui
      */
@@ -138,17 +156,23 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     /*
-     * getccdServiceCodeInput
-     * @return ccdServiceCodeInput
-     */
-    @JsonProperty("ccdServiceCodeInput")
-    public IServiceCodeInputCommonChildDiv getCcdServiceCodeInput() {
-        return ccdServiceCodeInput;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public TextBox get項目() {
+        return this.getServiceCodeChushutsuJoken().get項目();
+    }
+
+    @JsonIgnore
+    public void set項目(TextBox 項目) {
+        this.getServiceCodeChushutsuJoken().set項目(項目);
+    }
+
+    @JsonIgnore
+    public IServiceTypeInputCommonChildDiv getCcdServiceShurui() {
+        return this.getServiceCodeChushutsuJoken().getCcdServiceShurui();
+    }
+
     @JsonIgnore
     public DataGrid<dgServiceBunruiList_Row> getDgServiceBunruiList() {
         return this.getPanServiceSyurui().getDgServiceBunruiList();

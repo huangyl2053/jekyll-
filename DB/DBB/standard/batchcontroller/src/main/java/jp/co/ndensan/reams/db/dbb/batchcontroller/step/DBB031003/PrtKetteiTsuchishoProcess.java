@@ -373,7 +373,7 @@ public class PrtKetteiTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchis
             dbb100039reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100039.getReportId().value()).create();
             dbb100039ReportSourceWriter = new ReportSourceWriter<>(dbb100039reportWriter);
             dbb100039NinshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課,
-                    ReportIdDBB.DBB100039.getReportId(),
+                    決定変更通知書_帳票分類ID,
                     new FlexibleDate(processParameter.get決定変更_発行日().toDateString()),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                     KenmeiFuyoKubunType.付与なし,
@@ -382,7 +382,7 @@ public class PrtKetteiTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchis
             dbb100040reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100040.getReportId().value()).create();
             dbb100040ReportSourceWriter = new ReportSourceWriter<>(dbb100040reportWriter);
             dbb100040NinshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課,
-                    ReportIdDBB.DBB100040.getReportId(),
+                    決定変更通知書_帳票分類ID,
                     new FlexibleDate(processParameter.get決定変更_発行日().toDateString()),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                     KenmeiFuyoKubunType.付与なし,

@@ -53,6 +53,8 @@ public class KogakugassanShikyushinseishoOutInsertKozaProcess extends BatchProce
 
     private SofuFileSakuseiMybatisParameter mybatisParameter;
 
+    private KogakuGassanShinseishoInsertKozaEntity beforeEntity;
+
     @Override
     protected void initialize() {
         IKogakugassanShikyushinseishoOutMapper mapper = getMapper(IKogakugassanShikyushinseishoOutMapper.class);
@@ -95,9 +97,15 @@ public class KogakugassanShikyushinseishoOutInsertKozaProcess extends BatchProce
             tempEntity.setSofuJogaiFlag(true);
             高額合算申請書一時tableWriter.update(tempEntity);
         }
-        処理結果リスト一時tableWriter.insert(setKokuhorenSakuseiError(entity.get高額合算申請書一時Entity(),
-                entity.get被保険者一時Entity()));
-
+        if (beforeEntity == null
+                || !beforeEntity.get高額合算申請書一時Entity().getShoKisaiHokenshaNo().equals(tempEntity.getShoKisaiHokenshaNo())
+                || !beforeEntity.get高額合算申請書一時Entity().getHihokenshaNo().equals(tempEntity.getHihokenshaNo())
+                || !beforeEntity.get高額合算申請書一時Entity().getShikyuShinseishoSeiriNo().equals(tempEntity.getShikyuShinseishoSeiriNo())
+                || beforeEntity.get高額合算申請書一時Entity().getKozaID() != tempEntity.getKozaID()) {
+            処理結果リスト一時tableWriter.insert(setKokuhorenSakuseiError(entity.get高額合算申請書一時Entity(),
+                    entity.get被保険者一時Entity()));
+        }
+        beforeEntity = entity;
     }
 
     private DbWT1002KokuhorenSakuseiErrorTempEntity setKokuhorenSakuseiError(DbWT3711KogakuGassanShinseishoTempEntity entity,

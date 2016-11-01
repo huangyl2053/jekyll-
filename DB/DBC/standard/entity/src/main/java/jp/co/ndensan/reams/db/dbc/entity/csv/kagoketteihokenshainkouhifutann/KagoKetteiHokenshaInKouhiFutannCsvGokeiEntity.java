@@ -32,20 +32,20 @@ public class KagoKetteiHokenshaInKouhiFutannCsvGokeiEntity {
     private RString 介護給付費総合事業費件数;
     @CsvField(order = 60, name = "介護給付費／総合事業費・単位数")
     private RString 介護給付費総合事業費単位数;
-    @CsvField(order = 70, name = "介護給付費／総合事業費・保険者負担額")
-    private RString 介護給付費総合事業費保険者負担額;
+    @CsvField(order = 70, name = "介護給付費／総合事業費・公費負担額")
+    private RString 介護給付費総合事業費公費負担額;
     @CsvField(order = 80, name = "高額介護サービス費・件数")
     private RString 高額介護サービス費件数;
     @CsvField(order = 90, name = "高額介護サービス費・単位数")
     private RString 高額介護サービス費単位数;
-    @CsvField(order = 100, name = "高額介護サービス費・保険者負担額")
-    private RString 高額介護サービス費保険者負担額;
+    @CsvField(order = 100, name = "高額介護サービス費・公費負担額")
+    private RString 高額介護サービス費公費負担額;
     @CsvField(order = 110, name = "特定入所者介護サービス費等・件数")
     private RString 特定入所者介護サービス費等件数;
     @CsvField(order = 120, name = "特定入所者介護サービス費等・単位数")
     private RString 特定入所者介護サービス費等単位数;
-    @CsvField(order = 130, name = "特定入所者介護サービス費等・保険者負担額")
-    private RString 特定入所者介護サービス費等保険者負担額;
+    @CsvField(order = 130, name = "特定入所者介護サービス費等・公費負担額")
+    private RString 特定入所者介護サービス費等公費負担額;
     @CsvField(order = 140, name = "ブランク")
     private RString ブランク;
 }

@@ -52,6 +52,7 @@ public class HousholdFinder {
     private static final int 桁_3 = 3;
     private static final int 桁_4 = 4;
     private static final int 桁_10 = 10;
+    private static final int INT_5 = 5;
 
     /**
      * コンストラクタです。
@@ -304,7 +305,7 @@ public class HousholdFinder {
         if (null == entity || null == entity.getShichosonCode()) {
             return RString.EMPTY;
         }
-        return entity.getShichosonCode().getColumnValue();
+        return entity.getShichosonCode().getColumnValue().substring(0, INT_5);
     }
 
     /**

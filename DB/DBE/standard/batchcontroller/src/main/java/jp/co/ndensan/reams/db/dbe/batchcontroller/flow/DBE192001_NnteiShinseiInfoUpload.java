@@ -51,6 +51,12 @@ import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -70,53 +76,60 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     private static final RString IF種類_電算 = new RString("3");
     private static final RString IF種類_厚労省 = new RString("4");
     private static final RString IF種類_東芝版 = new RString("5");
+    private static final RString 共有ファイル名 = new RString("要介護認定申請連携データ取込");
+    private RString path;
     private RString 認定申請ファイル;
     private RString 主治医情報ファイル;
     private RString 医療機関ファイル;
     private RString 認定調査員ファイル;
     private RString 調査委託先ファイル;
+    private RString 認定申請ファイル名;
+    private RString 主治医情報ファイル名;
+    private RString 医療機関ファイル名;
+    private RString 認定調査員ファイル名;
+    private RString 調査委託先ファイル名;
 
     @Override
     protected void defineFlow() {
         RDate 基準日 = RDate.getNowDate();
+        path = Directory.createTmpDirectory();
         List<RString> 取込み対象ファイルリスト = getParameter().get取込み対象ファイルリスト();
         if (取込み対象ファイルリスト != null && !取込み対象ファイルリスト.isEmpty()) {
             RString 認定申請IF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, 基準日, SubGyomuCode.DBE認定支援);
             RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, 基準日, SubGyomuCode.DBE認定支援);
-            主治医情報ファイル = new RString(getParameter().get格納パス().toString()
-                    + DbBusinessConfig.get(ConfigNameDBE.主治医データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援).toString());
-            医療機関ファイル = new RString(getParameter().get格納パス().toString()
-                    + DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援).toString());
-            認定調査員ファイル = new RString(getParameter().get格納パス().toString()
-                    + DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援).toString());
-            調査委託先ファイル = new RString(getParameter().get格納パス().toString()
-                    + DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援).toString());
-            認定申請ファイル = new RString(getParameter().get格納パス().toString()
-                    + DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援).toString());
+            認定申請ファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+            主治医情報ファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+            医療機関ファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+            認定調査員ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+            調査委託先ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+            主治医情報ファイル = Path.combinePath(path, 主治医情報ファイル名);
+            医療機関ファイル = Path.combinePath(path, 医療機関ファイル名);
+            認定調査員ファイル = Path.combinePath(path, 認定調査員ファイル名);
+            調査委託先ファイル = Path.combinePath(path, 調査委託先ファイル名);
+            認定申請ファイル = Path.combinePath(path, 認定申請ファイル名);
             if (IF種類_電算.equals(認定申請IF種類)) {
-                call電算標準版_認定申請IF種類(取込み対象ファイルリスト, 基準日);
+                call電算標準版_認定申請IF種類(取込み対象ファイルリスト);
             }
             if (IF種類_電算.equals(マスタIF種類)) {
-                call電算標準版_4マスタIF種類(取込み対象ファイルリスト, 基準日);
+                call電算標準版_4マスタIF種類(取込み対象ファイルリスト);
             }
             if (IF種類_厚労省.equals(認定申請IF種類)) {
                 getParameter().set厚労省フラグ(true);
-                call厚労省版_認定申請IF種類(取込み対象ファイルリスト, 基準日);
+                call厚労省版_認定申請IF種類(取込み対象ファイルリスト);
             }
             if (IF種類_厚労省.equals(マスタIF種類)) {
                 getParameter().set厚労省フラグ(true);
-                call厚労省版_4マスタIF種類(取込み対象ファイルリスト, 基準日);
+                call厚労省版_4マスタIF種類(取込み対象ファイルリスト);
             }
             if (IF種類_東芝版.equals(認定申請IF種類)) {
                 getParameter().set東芝版フラグ(true);
-                call東芝版(取込み対象ファイルリスト, 基準日);
+                call東芝版(取込み対象ファイルリスト);
             }
         }
     }
 
-    private void call東芝版(List<RString> 取込み対象ファイルリスト, RDate 基準日) {
-        if (取込み対象ファイルリスト.contains(DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名,
-                基準日, SubGyomuCode.DBE認定支援))) {
+    private void call東芝版(List<RString> 取込み対象ファイルリスト) {
+        if (取込み対象ファイルリスト.contains(認定申請ファイル名)) {
             call要介護認定申請情報_東芝版();
         }
     }
@@ -151,8 +164,9 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT申請中間一時TBL_東芝版)
     protected IBatchFlowCommand insert要介護認定申請一時テーブル_東芝版() {
-        return importCsv(認定申請ファイル,
-                認定申請一時テーブルNAME, DbTableType.TEMPORARY).define();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                getParameter().get共有ファイルID()), new FilesystemPath(path));
+        return importCsv(認定申請ファイル, 認定申請一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -177,28 +191,23 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
                 .arguments(getParameter().toRenkeiDataTorikomiProcessParamter()).define();
     }
 
-    private void call厚労省版_認定申請IF種類(List<RString> 取込み対象ファイルリスト, RDate 基準日) {
-        if (取込み対象ファイルリスト.contains(DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名,
-                基準日, SubGyomuCode.DBE認定支援))) {
+    private void call厚労省版_認定申請IF種類(List<RString> 取込み対象ファイルリスト) {
+        if (取込み対象ファイルリスト.contains(認定申請ファイル名)) {
             call要介護認定申請情報_厚労省();
         }
     }
 
-    private void call厚労省版_4マスタIF種類(List<RString> 取込み対象ファイルリスト, RDate 基準日) {
-        if (取込み対象ファイルリスト.contains(DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名,
-                基準日, SubGyomuCode.DBE認定支援))) {
+    private void call厚労省版_4マスタIF種類(List<RString> 取込み対象ファイルリスト) {
+        if (取込み対象ファイルリスト.contains(調査委託先ファイル名)) {
             call認定調査委託先情報_厚労省();
         }
-        if (取込み対象ファイルリスト.contains(DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名,
-                基準日, SubGyomuCode.DBE認定支援))) {
+        if (取込み対象ファイルリスト.contains(認定調査員ファイル名)) {
             call認定調査員情報_厚労省();
         }
-        if (取込み対象ファイルリスト.contains(DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名,
-                基準日, SubGyomuCode.DBE認定支援))) {
+        if (取込み対象ファイルリスト.contains(医療機関ファイル名)) {
             call主治医医療機関情報_厚労省();
         }
-        if (取込み対象ファイルリスト.contains(DbBusinessConfig.get(ConfigNameDBE.主治医データ取込みファイル名,
-                基準日, SubGyomuCode.DBE認定支援))) {
+        if (取込み対象ファイルリスト.contains(主治医情報ファイル名)) {
             call主治医情報_厚労省();
         }
     }
@@ -234,7 +243,9 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT主治医一時TBL_厚労省)
     protected IBatchFlowCommand insert主治医情報一時TBL_厚労省() {
-        return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).define();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                getParameter().get共有ファイルID()), new FilesystemPath(path));
+        return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -290,7 +301,9 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT医療機関一時TBL_厚労省)
     protected IBatchFlowCommand insert主治医医療機関一時TBL_厚労省() {
-        return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).define();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                getParameter().get共有ファイルID()), new FilesystemPath(path));
+        return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -346,7 +359,9 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT調査員一時TBL_厚労省)
     protected IBatchFlowCommand insert認定調査員一時TBL_厚労省() {
-        return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).define();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                getParameter().get共有ファイルID()), new FilesystemPath(path));
+        return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -402,7 +417,9 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT委託先一時TBL_厚労)
     protected IBatchFlowCommand insert認定調査委託先一時TBL_厚労() {
-        return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).define();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                getParameter().get共有ファイルID()), new FilesystemPath(path));
+        return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -457,31 +474,28 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT申請一時TBL_厚労省)
     protected IBatchFlowCommand insert認定申請一時中間テーブル_厚労省() {
-        return importCsv(認定申請ファイル, 認定申請一時テーブルNAME, DbTableType.TEMPORARY).define();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                getParameter().get共有ファイルID()), new FilesystemPath(path));
+        return importCsv(認定申請ファイル, 認定申請一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
-    private void call電算標準版_認定申請IF種類(List<RString> 取込み対象ファイルリスト, RDate 基準日) {
-        if (取込み対象ファイルリスト.contains(DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名,
-                基準日, SubGyomuCode.DBE認定支援))) {
+    private void call電算標準版_認定申請IF種類(List<RString> 取込み対象ファイルリスト) {
+        if (取込み対象ファイルリスト.contains(認定申請ファイル名)) {
             call要介護認定申請情報();
         }
     }
 
-    private void call電算標準版_4マスタIF種類(List<RString> 取込み対象ファイルリスト, RDate 基準日) {
-        if (取込み対象ファイルリスト.contains(DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名,
-                基準日, SubGyomuCode.DBE認定支援))) {
+    private void call電算標準版_4マスタIF種類(List<RString> 取込み対象ファイルリスト) {
+        if (取込み対象ファイルリスト.contains(調査委託先ファイル名)) {
             call認定調査委託先情報();
         }
-        if (取込み対象ファイルリスト.contains(DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名,
-                基準日, SubGyomuCode.DBE認定支援))) {
+        if (取込み対象ファイルリスト.contains(認定調査員ファイル名)) {
             call認定調査員情報();
         }
-        if (取込み対象ファイルリスト.contains(DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名,
-                基準日, SubGyomuCode.DBE認定支援))) {
+        if (取込み対象ファイルリスト.contains(医療機関ファイル名)) {
             call主治医医療機関情報();
         }
-        if (取込み対象ファイルリスト.contains(DbBusinessConfig.get(ConfigNameDBE.主治医データ取込みファイル名,
-                基準日, SubGyomuCode.DBE認定支援))) {
+        if (取込み対象ファイルリスト.contains(主治医情報ファイル名)) {
             call主治医情報();
         }
     }
@@ -518,7 +532,9 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT主治医一時TBL_電算)
     protected IBatchFlowCommand insert主治医情報一時TBL_電算() {
-        return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).define();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                getParameter().get共有ファイルID()), new FilesystemPath(path));
+        return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -586,7 +602,9 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT医療機関一時TBL_電算)
     protected IBatchFlowCommand insert主治医医療機関一時TBL_電算() {
-        return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).define();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                getParameter().get共有ファイルID()), new FilesystemPath(path));
+        return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -654,7 +672,9 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT調査員一時TBL_電算)
     protected IBatchFlowCommand insert認定調査員一時TBL_電算() {
-        return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).define();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                getParameter().get共有ファイルID()), new FilesystemPath(path));
+        return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -722,7 +742,9 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT委託先一時TBL_電算)
     protected IBatchFlowCommand insert認定調査委託先一時TBL_電算() {
-        return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).define();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                getParameter().get共有ファイルID()), new FilesystemPath(path));
+        return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**
@@ -794,7 +816,9 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT申請中間一時TBL_電算)
     protected IBatchFlowCommand insert認定申請一時中間テーブル_電算標準版() {
-        return importCsv(認定申請ファイル, 認定申請中間一時テーブルNAME, DbTableType.TEMPORARY).define();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                getParameter().get共有ファイルID()), new FilesystemPath(path));
+        return importCsv(認定申請ファイル, 認定申請中間一時テーブルNAME, DbTableType.TEMPORARY).hasHeader(true).define();
     }
 
     /**

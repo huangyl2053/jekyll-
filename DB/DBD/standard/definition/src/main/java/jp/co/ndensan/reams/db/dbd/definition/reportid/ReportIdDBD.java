@@ -164,7 +164,7 @@ public enum ReportIdDBD {
      */
     DBD100029(new ReportId("DBD100029_OmutsuShoumeisho"), new RString("おむつ証明書")),
     /**
-     *  主治医意見書確認書の帳票ＩＤです。
+     * 主治医意見書確認書の帳票ＩＤです。
      */
     DBD100030(new ReportId("DBD100030_ShujiiIkenshoKakuninsho"), new RString(" 主治医意見書確認書")),
     /**
@@ -248,6 +248,10 @@ public enum ReportIdDBD {
      */
     DBD200012(new ReportId("DBD200012_TokubetsuChiikiKasanKeigenJissekiKanriIchiran"), new RString("特別地域加算軽減実績管理リスト")),
     /**
+     * 利用者負担額減免認定者リストの帳票ＩＤです。
+     */
+    DBD200013(new ReportId("DBD200013_RiyoshaFutangakuGemmenNinteishaIchiran"), new RString("利用者負担額減免認定者リスト")),
+    /**
      * 訪問介護利用者負担額減額認定者リストの帳票ＩＤです。
      */
     DBD200014(new ReportId("DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran"), new RString("訪問介護利用者負担額減額認定者リスト")),
@@ -320,6 +324,10 @@ public enum ReportIdDBD {
      * 非課税年金対象者情報遡及不一致チェックリストの帳票ＩＤです。
      */
     DBD900007(new ReportId("DBD900007_HikazeiNenkinSokyuFuicchiCheckList"), new RString("非課税年金対象者情報遡及不一致チェックリスト")),
+    /**
+     * 汎用リスト出力(特別地域加算減免)の帳票ＩＤです。
+     */
+    DBD701007(new ReportId("DBD701007_HanyoListTokubetsuChiikiKasanGemmen"), new RString("汎用リスト　特別地域加算減免")),
     /**
      * 汎用リスト出力(非課税年金対象者)の帳票ＩＤです。
      */

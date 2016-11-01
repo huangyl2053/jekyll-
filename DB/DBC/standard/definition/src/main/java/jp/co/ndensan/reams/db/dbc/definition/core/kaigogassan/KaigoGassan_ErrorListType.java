@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan;
 
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -50,8 +51,21 @@ public enum KaigoGassan_ErrorListType {
         this.表示名称 = getNotNull(表示名称);
     }
 
-    private RString getNotNull(String キー) {
-        return (null == キー) ? RString.EMPTY : new RString(キー);
+    /**
+     * toValueのメソッドです。
+     *
+     * @param code RString
+     * @return KaigoGassan_ErrorListType
+     */
+    public static KaigoGassan_ErrorListType toValue(RString code) {
+
+        for (KaigoGassan_ErrorListType type : KaigoGassan_ErrorListType.values()) {
+            if (type.code.equals(code)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("介護合算_エラーリストタイプ"));
+
     }
 
     /**
@@ -115,6 +129,10 @@ public enum KaigoGassan_ErrorListType {
      */
     public RString get表示名称() {
         return 表示名称;
+    }
+
+    private RString getNotNull(String キー) {
+        return (null == キー) ? RString.EMPTY : new RString(キー);
     }
 
 }

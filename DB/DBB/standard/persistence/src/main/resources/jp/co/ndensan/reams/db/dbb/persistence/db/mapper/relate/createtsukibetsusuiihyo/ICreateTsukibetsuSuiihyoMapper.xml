@@ -602,8 +602,7 @@
                         AND T."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
                     GROUP BY T."choteiNendo", T."fukaNendo", T."tsuchishoNo", T."hihokenshaNo") AS fukaT
             ON fukaT."choteiNendo" = fuka."choteiNendo"
-            AND (fukaT."fukaNendo" = (CAST(CAST(fuka."choteiNendo" AS integer ) -1 AS character(4)))
-                OR fukaT."fukaNendo" = (CAST(CAST(fuka."choteiNendo" AS integer ) -2 AS character(4))))
+            AND (fukaT."fukaNendo" = fuka."fukaNendo")
             AND fukaT."tsuchishoNo" = fuka."tsuchishoNo"
             AND fukaT."rirekiNo" = fuka."rirekiNo"
             AND fukaT."hihokenshaNo" = fuka."hihokenshaNo"
@@ -686,9 +685,7 @@
                         AND T."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
                     GROUP BY T."choteiNendo", T."fukaNendo", T."tsuchishoNo", T."hihokenshaNo") AS fukaT
             ON fukaT."choteiNendo" = fuka."choteiNendo"
-            AND (fukaT."fukaNendo" = #{choteiNendo}
-                OR fukaT."fukaNendo" = (CAST(CAST(fuka."choteiNendo" AS integer ) -1 AS character(4))) 
-                OR fukaT."fukaNendo" = (CAST(CAST(fuka."choteiNendo" AS integer ) -2 AS character(4))))
+            AND (fukaT."fukaNendo" = fuka."fukaNendo")
             AND fukaT."tsuchishoNo" = fuka."tsuchishoNo"
             AND fukaT."rirekiNo" = fuka."rirekiNo"
             AND fukaT."hihokenshaNo" = fuka."hihokenshaNo"

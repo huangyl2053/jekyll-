@@ -11,9 +11,12 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1060001.Gemm
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1060001.GemmenGengakuShoIkkatsuMainHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1060001.GemmenGengakuShoIkkatsuMainValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 減免減額帳票一括のDivControllerです。
@@ -22,8 +25,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class GemmenGengakuShoIkkatsuMain {
 
-//    private final RString 負担帳票のID = new RString("DBD100013_FutanGendogakuKetteiTsuchisho");
-//    private final RString 社会福祉のBATCH_ID = new RString("DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakko"); todo
+    private static final RString FUTANBATCH_ID = new RString("DBD103010_FutanGendoGakuNinteiIkkatsuHakko");
+    private static final RString SHAKAIBATCH_ID = new RString("DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakko");
+    private static final RString BATCH_ID = new RString("BatchID");
+
     /**
      * 画面の初期化。
      *
@@ -33,6 +38,52 @@ public class GemmenGengakuShoIkkatsuMain {
      */
     public ResponseData<GemmenGengakuShoIkkatsuMainDiv> onLoad(GemmenGengakuShoIkkatsuMainDiv div) {
         getHandler(div).初期化画面の表示();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「負担条件を保存する」ボタンのonClickイベント処理です。
+     *
+     * @param div GemmenGengakuShoIkkatsuMainDiv
+     * @return ResponseData
+     */
+    public ResponseData<BatchParameterMap> onClick_btnFutanBatchParameterSave(GemmenGengakuShoIkkatsuMainDiv div) {
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        responseData.data = getHandler(div).onClick_btnBatchFutanParameterSave();
+        return responseData;
+    }
+
+    /**
+     * 「社会条件を保存する」ボタンのonClickイベント処理です。
+     *
+     * @param div GemmenGengakuShoIkkatsuMainDiv
+     * @return ResponseData
+     */
+    public ResponseData<BatchParameterMap> onClick_btnBatchShakaiParameterSave(GemmenGengakuShoIkkatsuMainDiv div) {
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        responseData.data = getHandler(div).onClick_btnBatchShakaiParameterSave();
+        return responseData;
+    }
+
+    /**
+     * 「負担条件を復元する」ボタンのonClickイベント処理です。
+     *
+     * @param div MemoListOutputDiv
+     * @return ResponseData
+     */
+    public ResponseData<GemmenGengakuShoIkkatsuMainDiv> onClick_btnBatchFutanParameterRestore(GemmenGengakuShoIkkatsuMainDiv div) {
+        getHandler(div).onClick_btnBatchFutanParameterRestore();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「社会条件を復元する」ボタンのonClickイベント処理です。
+     *
+     * @param div MemoListOutputDiv
+     * @return ResponseData
+     */
+    public ResponseData<GemmenGengakuShoIkkatsuMainDiv> onClick_btnBatchShakaiParameterRestore(GemmenGengakuShoIkkatsuMainDiv div) {
+        getHandler(div).onClick_btnBatchShakaiParameterRestore();
         return ResponseData.of(div).respond();
     }
 
@@ -112,10 +163,8 @@ public class GemmenGengakuShoIkkatsuMain {
      * @return ResponseData<BatchParameterMap>
      */
     public ResponseData<DBD103010_FutanGendoGakuNinteiIkkatsuHakkoParameter> onClick_btnfutanKogakuParamSave(GemmenGengakuShoIkkatsuMainDiv div) {
-//        BatchParameterManager manager = new BatchParameterManager(SubGyomuCode.DBD介護受給, 負担帳票のID);
-//        BatchParameterMap data = new BatchParameterMap(getHandler(div).onClick_btnJikkouFtanSave());
-//        manager.setParameterByBatch(data); //todo QA
-        //FutanGendogakuIkkatsuHakkoBatchParameter futanParameer = getHandler(div).onClick_btnJikkouFtanSave();
+        FlowParameters fp = FlowParameters.of(BATCH_ID, FUTANBATCH_ID);
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(getHandler(div).onClick_btnJikkouFtanSave()).respond();
     }
 
@@ -126,9 +175,8 @@ public class GemmenGengakuShoIkkatsuMain {
      * @return ResponseData<BatchParameterMap>
      */
     public ResponseData<DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakkoParameter> onClick_btnshakaiKogakuParamSave(GemmenGengakuShoIkkatsuMainDiv div) {
-//        BatchParameterManager manager = new BatchParameterManager(SubGyomuCode.DBD介護受給, 社会福祉のBATCH_ID);
-//        BatchParameterMap data = new BatchParameterMap(getHandler(div).onClick_btnJikkouSkaiSave());
-//        manager.setParameterByBatch(data); //toda QA
+        FlowParameters fp = FlowParameters.of(BATCH_ID, SHAKAIBATCH_ID);
+        FlowParameterAccessor.merge(fp);
         return ResponseData.of(getHandler(div).onClick_btnJikkouSkaiSave()).respond();
     }
 

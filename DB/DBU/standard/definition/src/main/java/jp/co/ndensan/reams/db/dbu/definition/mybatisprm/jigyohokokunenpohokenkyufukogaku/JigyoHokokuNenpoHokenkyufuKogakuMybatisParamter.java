@@ -109,10 +109,10 @@ public final class JigyoHokokuNenpoHokenkyufuKogakuMybatisParamter implements IM
             List<RString> 旧市町村コードリスト) {
         List<RString> 市町村コードリスト = new ArrayList<>();
         市町村コードリスト.add(市町村コード);
-        if (市町村区分_構成市町村.equals(構成市町村区分)) {
+        if (市町村区分_構成市町村.equals(構成市町村区分) && 構成市町村コードリスト != null && !構成市町村コードリスト.isEmpty()) {
             市町村コードリスト.addAll(構成市町村コードリスト);
         }
-        if (市町村区分_旧市町村.equals(旧市町村区分)) {
+        if (市町村区分_旧市町村.equals(旧市町村区分) && 旧市町村コードリスト != null && !旧市町村コードリスト.isEmpty()) {
             市町村コードリスト.addAll(旧市町村コードリスト);
         }
         return new JigyoHokokuNenpoHokenkyufuKogakuMybatisParamter(
@@ -144,15 +144,15 @@ public final class JigyoHokokuNenpoHokenkyufuKogakuMybatisParamter implements IM
             List<RString> 旧市町村コードリスト) {
         List<RString> 市町村コードリスト = new ArrayList<>();
         市町村コードリスト.add(市町村コード);
-        if (市町村区分_構成市町村.equals(構成市町村区分)) {
+        if (市町村区分_構成市町村.equals(構成市町村区分) && 構成市町村コードリスト != null && !構成市町村コードリスト.isEmpty()) {
             市町村コードリスト.addAll(構成市町村コードリスト);
         }
-        if (市町村区分_旧市町村.equals(旧市町村区分)) {
+        if (市町村区分_旧市町村.equals(旧市町村区分) && 旧市町村コードリスト != null && !旧市町村コードリスト.isEmpty()) {
             市町村コードリスト.addAll(旧市町村コードリスト);
         }
         return new JigyoHokokuNenpoHokenkyufuKogakuMybatisParamter(
                 市町村コードリスト, RString.EMPTY, get集計番号List(), get表番号List(),
-                new RString("1"), 集計開始年月, 集計終了年月, RString.EMPTY, RString.EMPTY,
+                new RString("2"), 集計開始年月, 集計終了年月, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
@@ -183,10 +183,10 @@ public final class JigyoHokokuNenpoHokenkyufuKogakuMybatisParamter implements IM
             RDateTime 処理日時) {
         List<RString> 市町村コードリスト = new ArrayList<>();
         市町村コードリスト.add(市町村コード);
-        if (市町村区分_構成市町村.equals(構成市町村区分)) {
+        if (市町村区分_構成市町村.equals(構成市町村区分) && 構成市町村コードリスト != null && !構成市町村コードリスト.isEmpty()) {
             市町村コードリスト.addAll(構成市町村コードリスト);
         }
-        if (市町村区分_旧市町村.equals(旧市町村区分)) {
+        if (市町村区分_旧市町村.equals(旧市町村区分) && 旧市町村コードリスト != null && !旧市町村コードリスト.isEmpty()) {
             市町村コードリスト.addAll(旧市町村コードリスト);
         }
         RString 基準年月日 = RString.EMPTY;

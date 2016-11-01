@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.nofugakuichirancodefumei;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.source.nofugakuichirancodefumei.NofugakuIchiranCodeFumeiSource;
+import jp.co.ndensan.reams.db.dbb.business.report.nofugakuichirandaihyo.NofugakuIchiranSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -28,8 +28,8 @@ public class NofugakuIchiranCodeFumeiBuilder implements INofugakuIchiranCodeFume
     }
 
     @Override
-    public NofugakuIchiranCodeFumeiSource build() {
-        return ReportEditorJoiner.from(new NofugakuIchiranCodeFumeiSource())
+    public NofugakuIchiranSource build() {
+        return ReportEditorJoiner.from(new NofugakuIchiranSource())
                 .join(editor).buildSource();
     }
 }

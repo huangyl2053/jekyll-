@@ -250,6 +250,17 @@ public class KyotakuServiceRiyohyoMain {
         return ResponseData.of(div).setState(DBC0120011StateName.完了);
     }
 
+    /**
+     * 「登録処理を続ける」ボタンクリック時の事件です。
+     *
+     * @param div JikoFutangakuHoseiDiv
+     * @return ResponseData
+     */
+    public ResponseData<KyotakuServiceRiyohyoMainDiv> onClick_btnContinue(
+            KyotakuServiceRiyohyoMainDiv div) {
+        return onLoad(div);
+    }
+
     private ResponseData<KyotakuServiceRiyohyoMainDiv> 削除処理(KyotakuServiceRiyohyoMainDiv div, RString 居宅総合事業区分,
             TankiNyushoResult 短期入所情報, LockingKey key) {
         if (div.getCcdServiceRiyohyoInfo().getSofuYM() != null

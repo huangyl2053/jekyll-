@@ -44,7 +44,6 @@ public class DbWT3470ServiceMeisaichukanTempEntity
     @PrimaryKey
     @TempTableColumnOrder(1)
     private int renban;
-    @PrimaryKey
     @TempTableColumnOrder(2)
     private ShikibetsuCode shikibetsuCode;
     @TempTableColumnOrder(3)

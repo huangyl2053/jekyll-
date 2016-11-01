@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200018;
 
-import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shakaifukushihojinkeigenhakkoichiran.ShakaiFukushiHojinKeigenHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200018.ShakaiFukushiHojinKeigenHakkoIchiranReportSource;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -30,11 +31,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukushiHojinKeigenHakkoIchiranEditor {
 
-    private static final int LISTINDEX_0 = 0;
+    private static final RString 承認 = new RString("承認");
+    private static final RString 却下 = new RString("却下");
+    private static final RString 作成 = new RString("作成");
+    private static final RString 丸 = new RString("○");
+    private static final RString 記号 = new RString("~");
+    private static final RString 宅 = new RString("宅");
+    private static final RString 住 = new RString("住");
+    private static final RString ユ = new RString("ユ");
+    private static final RString ホシ = new RString("*");
+
     private static final int LISTINDEX_1 = 1;
     private static final int LISTINDEX_2 = 2;
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
+    private static final int LISTINDEX_5 = 5;
 
     private final ShakaiFukushiHojinKeigenHakkoIchiranEntity 帳票情報;
     private final Association association;
@@ -77,22 +88,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
             source.hokenshaName = this.association.get市町村名();
         }
         if (null != iOutputOrder) {
-            List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
-            if (設定項目リスト.size() > LISTINDEX_0) {
-                source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-            }
-            if (設定項目リスト.size() > LISTINDEX_1) {
-                source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-            }
-            if (設定項目リスト.size() > LISTINDEX_2) {
-                source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-            }
-            if (設定項目リスト.size() > LISTINDEX_3) {
-                source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-            }
-            if (設定項目リスト.size() > LISTINDEX_4) {
-                source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-            }
+            setiOutputOrder(source);
         }
         source.list_1 = new RString(String.valueOf(index + 1));
     }
@@ -109,7 +105,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
             }
             FlexibleDate 喪失年月日 = this.帳票情報.get喪失年月日();
             if (null != 喪失年月日 && !喪失年月日.isEmpty()) {
-                source.list_3 = new RString("*");
+                source.list_3 = ホシ;
             }
             source.list_4 = this.帳票情報.get被保険者番号().getColumnValue();
             if (null != 個人情報.get名称()) {
@@ -126,9 +122,9 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
             }
             source.list_9 = get適用日有効期限();
             if (決定.equals(決定区分承認)) {
-                source.list_10 = new RString("承認");
+                source.list_10 = 承認;
             } else if (決定.equals(決定区分承認しない)) {
-                source.list_10 = new RString("却下");
+                source.list_10 = 却下;
             }
             if (決定.equals(決定区分承認)) {
                 source.list_11 = this.帳票情報.get軽減().get名称();
@@ -156,15 +152,15 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
             RString 居宅 = RString.EMPTY;
             boolean 居宅サービス限定 = this.帳票情報.is居宅サービス限定();
             if (決定.equals(決定区分承認) && 居宅サービス限定) {
-                居宅 = new RString("宅");
+                居宅 = 宅;
             }
             boolean 居住費食費のみ = this.帳票情報.is居住費食費のみ();
             if (決定.equals(決定区分承認) && 居住費食費のみ) {
-                居宅 = 居宅.concat(new RString("住"));
+                居宅 = 居宅.concat(住);
             }
             boolean 旧措置者ユニット型個室のみ = this.帳票情報.is旧措置者ユニット型個室のみ();
             if (決定.equals(決定区分承認) && 旧措置者ユニット型個室のみ) {
-                居宅 = 居宅.concat(new RString("ユ"));
+                居宅 = 居宅.concat(ユ);
             }
             source.list_13 = 居宅;
             if (決定.equals(決定区分承認しない)) {
@@ -176,16 +172,16 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
     private void setLayer1Step4(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
         if (null != 帳票情報) {
             if (this.帳票情報.is認定証発行フラグ() && this.帳票情報.is認定証発行済み()) {
-                source.list_14 = new RString("○");
+                source.list_14 = 丸;
             }
             if (this.帳票情報.is認定証発行フラグ() && !this.帳票情報.is認定証発行済み()) {
-                source.list_14 = new RString("却下");
+                source.list_14 = 却下;
             }
             if (!this.帳票情報.is認定証発行フラグ() && !this.帳票情報.is認定証発行済み()) {
                 source.list_14 = RString.EMPTY;
             }
             if (this.帳票情報.is通知書発行フラグ()) {
-                source.list_15 = new RString("○");
+                source.list_15 = 丸;
             }
         }
     }
@@ -200,7 +196,7 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        return 年月日.concat(" ").concat(時分秒).concat(" ").concat("作成");
+        return 年月日.concat(RString.HALF_SPACE).concat(時分秒).concat(RString.HALF_SPACE).concat(作成);
     }
 
     private RString get適用日有効期限() {
@@ -213,6 +209,27 @@ public class ShakaiFukushiHojinKeigenHakkoIchiranEditor implements IShakaiFukush
         if (this.帳票情報.get有効期限() != null) {
             有効期限 = this.帳票情報.get有効期限().wareki().toDateString();
         }
-        return 適用日.concat(new RString("~")).concat(有効期限);
+        return 適用日.concat(記号).concat(有効期限);
+    }
+
+    private void setiOutputOrder(ShakaiFukushiHojinKeigenHakkoIchiranReportSource source) {
+
+        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(iOutputOrder);
+        if (出力順Map.get(LISTINDEX_1) != null) {
+            source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_1).get項目名();
+
+        }
+        if (出力順Map.get(LISTINDEX_2) != null) {
+            source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_2).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_3) != null) {
+            source.shutsuryokujun3 = 出力順Map.get(LISTINDEX_3).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_4) != null) {
+            source.shutsuryokujun4 = 出力順Map.get(LISTINDEX_4).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_5) != null) {
+            source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_5).get項目名();
+        }
     }
 }

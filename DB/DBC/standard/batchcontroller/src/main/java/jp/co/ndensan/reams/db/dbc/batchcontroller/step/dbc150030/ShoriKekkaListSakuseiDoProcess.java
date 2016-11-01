@@ -123,7 +123,7 @@ public class ShoriKekkaListSakuseiDoProcess
         output.setキー3(entity.getKey3());
         output.setキー4(entity.getKey4());
         output.setキー5(entity.getKey5());
-        if (NUM != entity.getErrorKubun()) {
+        if (!NUM.equals(entity.getErrorKubun())) {
             output.setエラー内容(entity.getErrorKubun());
         } else {
             output.setエラー内容(ERROR);
@@ -155,7 +155,7 @@ public class ShoriKekkaListSakuseiDoProcess
         if (entity.getKey5() != null) {
             output.setキー5(entity.getKey5());
         }
-        if (NUM != entity.getErrorKubun()) {
+        if (!NUM.equals(entity.getErrorKubun())) {
             output.setエラー内容(entity.getErrorKubun());
         } else {
             output.setエラー内容(ERROR);

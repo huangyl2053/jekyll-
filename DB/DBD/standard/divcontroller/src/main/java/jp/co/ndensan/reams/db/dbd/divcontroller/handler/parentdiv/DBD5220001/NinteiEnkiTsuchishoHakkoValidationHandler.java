@@ -222,6 +222,22 @@ public class NinteiEnkiTsuchishoHakkoValidationHandler {
         return pairs;
     }
 
+    /**
+     * 変更内容保存チェック
+     *
+     * @param pairs バリデーションコントロール
+     * @param div NinteiEnkiTsuchishoHakkoDiv
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 変更内容保存チェック(ValidationMessageControlPairs pairs, NinteiEnkiTsuchishoHakkoDiv div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(NinteiEnkiTsuchishoHakkoDivSpec.変更内容保存チェック)
+                .thenAdd(NoInputMessages.変更内容保存チェック).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.変更内容保存チェック, div.getDgHakkotaishosha()).build().check(messages));
+        return pairs;
+    }
+
     private static enum NoInputMessages implements IValidationMessage {
 
         申請区分の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "申請区分"),
@@ -234,7 +250,8 @@ public class NinteiEnkiTsuchishoHakkoValidationHandler {
         終了日が開始日以前チェック(UrErrorMessages.終了日が開始日以前.getMessage()),
         対象行を選択チェック(UrErrorMessages.対象行を選択.getMessage()),
         更新対象のデータがないチェック(UrErrorMessages.更新対象のデータがない.getMessage()),
-        整合性チェック(UrErrorMessages.更新不可_汎用.getMessage(), "延期理由、処理見込み日（開始）、見込処理期間（終了）、延期決定日いずれか空白");
+        整合性チェック(UrErrorMessages.更新不可_汎用.getMessage(), "延期理由、処理見込み日（開始）、見込処理期間（終了）、延期決定日いずれか空白"),
+        変更内容保存チェック(UrErrorMessages.実行不可.getMessage(), "変更内容は既に保存されていないため、通知書発行");
         private final Message message;
 
         private NoInputMessages(Message message, String... replacements) {

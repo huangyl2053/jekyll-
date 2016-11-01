@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoJyohoTorikomiKakuNinCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.TorikomiKokuhoJyohoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.TorikomiKokuhoJyohoResultEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -26,18 +28,18 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBC-3020-030 dengwei
  */
-public class KokuhoCsvFyiiruSyutuRyokuProcess extends BatchProcessBase<TorikomiKokuhoJyohoEntity> {
+public class KokuhoCsvFyiiruSyutuRyokuProcess extends BatchProcessBase<TorikomiKokuhoJyohoResultEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper.get取込国保情報Temp");
     @BatchWriter
     private CsvWriter<KokuhoJyohoTorikomiKakuNinCsvEntity> csvWriter;
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC130010"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBZ000001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
     private FileSpoolManager manager;
-    private static final RString CSVファイル名 = new RString("torikomikakuninkekka.csv");
+    private static final RString CSVファイル名 = new RString("ShoriKekkaKakuninList.csv");
 
     @Override
     protected IBatchReader createReader() {
@@ -59,13 +61,14 @@ public class KokuhoCsvFyiiruSyutuRyokuProcess extends BatchProcessBase<TorikomiK
     }
 
     @Override
-    protected void process(TorikomiKokuhoJyohoEntity entity) {
-        csvWriter.writeLine(getCsvEntity(entity));
+    protected void process(TorikomiKokuhoJyohoResultEntity entity) {
+        csvWriter.writeLine(getCsvEntity(entity.get取込国保情報Entity()));
     }
 
     @Override
     protected void afterExecute() {
         csvWriter.close();
+        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
     }
 
     private KokuhoJyohoTorikomiKakuNinCsvEntity getCsvEntity(TorikomiKokuhoJyohoEntity entity) {

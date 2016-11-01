@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoMasterTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.kagoketteihokenshainmasterinsert.KagoKetteiHokenshaInMasterInsert;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * マスタ登録を実行する。
@@ -21,7 +22,11 @@ public class KohifutanshaDoMasterTorokuProcess extends SimpleBatchProcessBase {
     @Override
     protected void process() {
         KagoKetteiHokenshaInMasterInsert マスタ登録Manager = KagoKetteiHokenshaInMasterInsert.createInstance();
-        マスタ登録Manager.再処理準備と登録(parameter.get処理年月(), parameter.get再処理区分().getコード(),
+        RString 再処理区分 = RString.EMPTY;
+        if (null != parameter.get再処理区分()) {
+            再処理区分 = parameter.get再処理区分().getコード();
+        }
+        マスタ登録Manager.再処理準備と登録(parameter.get処理年月(), 再処理区分,
                 parameter.get交換情報識別番号());
     }
 

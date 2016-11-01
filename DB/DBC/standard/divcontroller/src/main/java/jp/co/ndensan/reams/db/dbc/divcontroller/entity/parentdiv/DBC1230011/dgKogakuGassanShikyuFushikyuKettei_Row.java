@@ -3,12 +3,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Sep 21 11:21:58 CST 2016
+ * Fri Oct 21 15:56:14 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * dgKogakuGassanShikyuFushikyuKettei_Row のクラスファイル
@@ -16,15 +18,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @reamsid_L DBC-2290-010 quxiaodong
  */
 public class dgKogakuGassanShikyuFushikyuKettei_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
 
-    private TextBoxFlexibleDate txtTaishoNendo;
+    private TextBoxDate txtTaishoNendo;
     private RString txtShokisaiNo;
     private RString txtRenrakuhyoSeiriNo;
     private RString txtRirekiNo;
-    private RString txtJikoFutangaku;
+    private TextBoxNum txtJikoFutangaku;
     private RString txtShikyuKubun;
-    private RString txtShikyugaku;
+    private TextBoxNum txtShikyugaku;
     private TextBoxFlexibleDate txtUketoriNengetsu;
     private RString chkisDeleted;
     private RString kozaID;
@@ -39,16 +41,17 @@ public class dgKogakuGassanShikyuFushikyuKettei_Row extends DataRow {
     private TextBoxFlexibleDate ketteiTsuchiSakuseiYMD;
     private TextBoxFlexibleDate furikomiTsuchiSakuseiYMD;
     private RString hihokenshaNo;
+    private RString shiharaiHohoKubun;
 
     public dgKogakuGassanShikyuFushikyuKettei_Row() {
         super();
-        this.txtTaishoNendo = new TextBoxFlexibleDate();
+        this.txtTaishoNendo = new TextBoxDate();
         this.txtShokisaiNo = RString.EMPTY;
         this.txtRenrakuhyoSeiriNo = RString.EMPTY;
         this.txtRirekiNo = RString.EMPTY;
-        this.txtJikoFutangaku = RString.EMPTY;
+        this.txtJikoFutangaku = new TextBoxNum();
         this.txtShikyuKubun = RString.EMPTY;
-        this.txtShikyugaku = RString.EMPTY;
+        this.txtShikyugaku = new TextBoxNum();
         this.txtUketoriNengetsu = new TextBoxFlexibleDate();
         this.chkisDeleted = RString.EMPTY;
         this.kozaID = RString.EMPTY;
@@ -63,6 +66,7 @@ public class dgKogakuGassanShikyuFushikyuKettei_Row extends DataRow {
         this.ketteiTsuchiSakuseiYMD = new TextBoxFlexibleDate();
         this.furikomiTsuchiSakuseiYMD = new TextBoxFlexibleDate();
         this.hihokenshaNo = RString.EMPTY;
+        this.shiharaiHohoKubun = RString.EMPTY;
         this.setOriginalData("txtTaishoNendo", txtTaishoNendo);
         this.setOriginalData("txtShokisaiNo", txtShokisaiNo);
         this.setOriginalData("txtRenrakuhyoSeiriNo", txtRenrakuhyoSeiriNo);
@@ -84,9 +88,10 @@ public class dgKogakuGassanShikyuFushikyuKettei_Row extends DataRow {
         this.setOriginalData("ketteiTsuchiSakuseiYMD", ketteiTsuchiSakuseiYMD);
         this.setOriginalData("furikomiTsuchiSakuseiYMD", furikomiTsuchiSakuseiYMD);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.setOriginalData("shiharaiHohoKubun", shiharaiHohoKubun);
     }
 
-    public dgKogakuGassanShikyuFushikyuKettei_Row(TextBoxFlexibleDate txtTaishoNendo, RString txtShokisaiNo, RString txtRenrakuhyoSeiriNo, RString txtRirekiNo, RString txtJikoFutangaku, RString txtShikyuKubun, RString txtShikyugaku, TextBoxFlexibleDate txtUketoriNengetsu, RString chkisDeleted, RString kozaID, TextBoxFlexibleDate keisanKaishiYMD, TextBoxFlexibleDate keisanShuryoYMD, RString jikoFutanSeiriNo, TextBoxFlexibleDate shinseiYMD, TextBoxFlexibleDate ketteiYMD, RString kyufuShurui, RString biko, RString fushikyuRiyu, TextBoxFlexibleDate ketteiTsuchiSakuseiYMD, TextBoxFlexibleDate furikomiTsuchiSakuseiYMD, RString hihokenshaNo) {
+    public dgKogakuGassanShikyuFushikyuKettei_Row(TextBoxDate txtTaishoNendo, RString txtShokisaiNo, RString txtRenrakuhyoSeiriNo, RString txtRirekiNo, TextBoxNum txtJikoFutangaku, RString txtShikyuKubun, TextBoxNum txtShikyugaku, TextBoxFlexibleDate txtUketoriNengetsu, RString chkisDeleted, RString kozaID, TextBoxFlexibleDate keisanKaishiYMD, TextBoxFlexibleDate keisanShuryoYMD, RString jikoFutanSeiriNo, TextBoxFlexibleDate shinseiYMD, TextBoxFlexibleDate ketteiYMD, RString kyufuShurui, RString biko, RString fushikyuRiyu, TextBoxFlexibleDate ketteiTsuchiSakuseiYMD, TextBoxFlexibleDate furikomiTsuchiSakuseiYMD, RString hihokenshaNo, RString shiharaiHohoKubun) {
         super();
         this.setOriginalData("txtTaishoNendo", txtTaishoNendo);
         this.setOriginalData("txtShokisaiNo", txtShokisaiNo);
@@ -109,6 +114,7 @@ public class dgKogakuGassanShikyuFushikyuKettei_Row extends DataRow {
         this.setOriginalData("ketteiTsuchiSakuseiYMD", ketteiTsuchiSakuseiYMD);
         this.setOriginalData("furikomiTsuchiSakuseiYMD", furikomiTsuchiSakuseiYMD);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.setOriginalData("shiharaiHohoKubun", shiharaiHohoKubun);
         this.txtTaishoNendo = txtTaishoNendo;
         this.txtShokisaiNo = txtShokisaiNo;
         this.txtRenrakuhyoSeiriNo = txtRenrakuhyoSeiriNo;
@@ -130,9 +136,10 @@ public class dgKogakuGassanShikyuFushikyuKettei_Row extends DataRow {
         this.ketteiTsuchiSakuseiYMD = ketteiTsuchiSakuseiYMD;
         this.furikomiTsuchiSakuseiYMD = furikomiTsuchiSakuseiYMD;
         this.hihokenshaNo = hihokenshaNo;
+        this.shiharaiHohoKubun = shiharaiHohoKubun;
     }
 
-    public TextBoxFlexibleDate getTxtTaishoNendo() {
+    public TextBoxDate getTxtTaishoNendo() {
         return txtTaishoNendo;
     }
 
@@ -148,7 +155,7 @@ public class dgKogakuGassanShikyuFushikyuKettei_Row extends DataRow {
         return txtRirekiNo;
     }
 
-    public RString getTxtJikoFutangaku() {
+    public TextBoxNum getTxtJikoFutangaku() {
         return txtJikoFutangaku;
     }
 
@@ -156,7 +163,7 @@ public class dgKogakuGassanShikyuFushikyuKettei_Row extends DataRow {
         return txtShikyuKubun;
     }
 
-    public RString getTxtShikyugaku() {
+    public TextBoxNum getTxtShikyugaku() {
         return txtShikyugaku;
     }
 
@@ -216,7 +223,11 @@ public class dgKogakuGassanShikyuFushikyuKettei_Row extends DataRow {
         return hihokenshaNo;
     }
 
-    public void setTxtTaishoNendo(TextBoxFlexibleDate txtTaishoNendo) {
+    public RString getShiharaiHohoKubun() {
+        return shiharaiHohoKubun;
+    }
+
+    public void setTxtTaishoNendo(TextBoxDate txtTaishoNendo) {
         this.setOriginalData("txtTaishoNendo", txtTaishoNendo);
         this.txtTaishoNendo = txtTaishoNendo;
     }
@@ -236,7 +247,7 @@ public class dgKogakuGassanShikyuFushikyuKettei_Row extends DataRow {
         this.txtRirekiNo = txtRirekiNo;
     }
 
-    public void setTxtJikoFutangaku(RString txtJikoFutangaku) {
+    public void setTxtJikoFutangaku(TextBoxNum txtJikoFutangaku) {
         this.setOriginalData("txtJikoFutangaku", txtJikoFutangaku);
         this.txtJikoFutangaku = txtJikoFutangaku;
     }
@@ -246,7 +257,7 @@ public class dgKogakuGassanShikyuFushikyuKettei_Row extends DataRow {
         this.txtShikyuKubun = txtShikyuKubun;
     }
 
-    public void setTxtShikyugaku(RString txtShikyugaku) {
+    public void setTxtShikyugaku(TextBoxNum txtShikyugaku) {
         this.setOriginalData("txtShikyugaku", txtShikyugaku);
         this.txtShikyugaku = txtShikyugaku;
     }
@@ -319,6 +330,11 @@ public class dgKogakuGassanShikyuFushikyuKettei_Row extends DataRow {
     public void setHihokenshaNo(RString hihokenshaNo) {
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.hihokenshaNo = hihokenshaNo;
+    }
+
+    public void setShiharaiHohoKubun(RString shiharaiHohoKubun) {
+        this.setOriginalData("shiharaiHohoKubun", shiharaiHohoKubun);
+        this.shiharaiHohoKubun = shiharaiHohoKubun;
     }
 
     // </editor-fold>

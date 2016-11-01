@@ -23,31 +23,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @SuppressWarnings ("PMD.UnusedPrivateField")
 public class SetaiHakuEntity implements IDbAccessable {
 
-    private static final RString 本人区分 = new RString("1");
-
     private HihokenshaNo hihokenshaNo;
     private ShikibetsuCode shikibetsuCode;
     private FlexibleDate kijunYMD;
     private FlexibleYear shotokuNendo;
     private RString jushochiTokureiFlag;
     private SetaiCode setaiCode;
-
-    /**
-     * create世帯員所得情報
-     *
-     * @param entity SetaiHaakuEntity
-     * @return 世帯員所得情報
-     */
-    public SetaiShotokuEntity to世帯員所得情報(SetaiHakuEntity entity) {
-        SetaiShotokuEntity 世帯員所得情報 = new SetaiShotokuEntity();
-        世帯員所得情報.setHihokenshaNo(entity.getHihokenshaNo());
-        世帯員所得情報.setShikibetsuCode(entity.getShikibetsuCode());
-        世帯員所得情報.setShotokuNendo(entity.getShotokuNendo());
-        世帯員所得情報.setKijunYMD(entity.getKijunYMD());
-        世帯員所得情報.setJushochiTokureiFlag(entity.getJushochiTokureiFlag());
-        世帯員所得情報.setSetaiCode(entity.getSetaiCode());
-        世帯員所得情報.setHonninKubun(本人区分);
-        return 世帯員所得情報;
-    }
 
 }

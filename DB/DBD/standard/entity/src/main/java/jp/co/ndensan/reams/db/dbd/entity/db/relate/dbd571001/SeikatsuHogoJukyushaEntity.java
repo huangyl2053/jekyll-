@@ -22,6 +22,7 @@ import lombok.Setter;
 public class SeikatsuHogoJukyushaEntity {
 
     private ShikibetsuCode 生活保護情報_識別コード;
+    private RString 生活保護情報_業務コード;
     private FlexibleDate 生活保護情報_受給開始日;
     private FlexibleDate 生活保護情報_受給廃止日;
     private RString 生活保護情報_扶助種類コード;

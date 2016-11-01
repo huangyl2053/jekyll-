@@ -71,6 +71,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
@@ -79,18 +80,20 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
+import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.GyomuConfigJohoClass;
+import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwari;
+import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariInput;
+import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariOutput;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.KozaYotoKubunType;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
-import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.GyomuConfigJohoClass;
-import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwari;
-import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariInput;
-import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariOutput;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -106,14 +109,15 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -142,6 +146,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     private final DbT1001HihokenshaDaichoDac 被保険者台帳管理dac;
     private final DbV2001ChoshuHohoAliveDac 徴収方法dac;
     private final DbT2010FukaErrorListDac 賦課エラーdac;
+    private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
     private final IKariSanteiIdoFukaBatchMapper mapper;
     private static final RString RSTRING_0 = new RString("0");
     private static final RString RSTRING_1 = new RString("1");
@@ -152,6 +157,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     private static final RString RSTRING_11 = new RString("11");
     private static final RString RSTRING_12 = new RString("12");
     private static final RString RSTRING_100 = new RString("100");
+    private static final RString RSTRING_0401 = new RString("0401");
     private static final RString ZERO = new RString("0000");
     private static final RString 内部帳票ID = new RString("DBB400001_FukaErrorIchitan");
     private static final RString バッチID = new RString("DBBBT44001");
@@ -190,7 +196,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
 
     private FileSpoolManager manager;
     private RString eucFilePath;
-    private EucCsvWriter<KarisanteiIdoKekkaIchiranCSVEntity> eucCsvWriter;
+    private CsvWriter<KarisanteiIdoKekkaIchiranCSVEntity> eucCsvWriter;
 
     /**
      * コンストラクタ
@@ -200,6 +206,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         被保険者台帳管理dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
         徴収方法dac = InstanceProvider.create(DbV2001ChoshuHohoAliveDac.class);
         賦課エラーdac = InstanceProvider.create(DbT2010FukaErrorListDac.class);
+        帳票制御共通Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
         mapper = mapperProvider.create(IKariSanteiIdoFukaBatchMapper.class);
     }
 
@@ -474,7 +481,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             int 普徴仮算定の最終期 = 月期対応取得_普徴.get期月リスト().filtered仮算定期間().getLast().get期AsInt();
             HihokenshaDaicho 資格情報 = new HihokenshaDaicho(資格喪失情報Entity.get資格喪失Entity());
             int 資格喪失月 = 0;
-            if (資格情報 != null && 資格情報.get資格喪失年月日() != null) {
+            if (資格情報.get資格喪失年月日() != null) {
                 資格喪失月 = 資格情報.get資格喪失年月日().getMonthValue();
             }
             FukaJoho 更正後賦課情報 = new FukaJoho(資格喪失情報Entity.get賦課情報Entity());
@@ -806,16 +813,22 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                 FukaJoho 新しい賦課の情報 = new FukaJoho(調定年度, 調定年度, TsuchishoNo.EMPTY, NUM_0);
                 編集後賦課の情報 = editFukaJokyoKyotsu(RSTRING_0, 調定日時, 特徴仮算定Entity, 新しい賦課の情報, 調定年度,
                         資格情報, 徴収方法情報, 生保の情報のリスト,
-                        老齢の情報のリスト, 特徴仮算定Entity.get前年度保険料段階(),
-                        特徴仮算定Entity.get前年度合計所得金額(), 特徴仮算定Entity.get前年度公的年金収入額(), 枝番号);
+                        老齢の情報のリスト,
+                        特徴仮算定Entity.get前年度合計所得金額(), 特徴仮算定Entity.get前年度公的年金収入額(),
+                        枝番号, 特徴仮算定Entity.get生保開始日(), 特徴仮算定Entity.get生保廃止日(),
+                        特徴仮算定Entity.get老年開始日(), 特徴仮算定Entity.get老年廃止日(),
+                        特徴仮算定Entity.get課税区分(), 特徴仮算定Entity.get世帯課税区分());
                 枝番号 = 枝番号.add(Decimal.ONE);
                 賦課Flag = true;
             } else {
                 FukaJoho 更正後賦課の情報 = new FukaJoho(特徴仮算定Entity.get賦課情報Entity());
                 編集後賦課の情報 = editFukaJokyoKyotsu(RSTRING_1, 調定日時, 特徴仮算定Entity, 更正後賦課の情報, 調定年度,
                         資格情報, 徴収方法情報, 生保の情報のリスト,
-                        老齢の情報のリスト, 特徴仮算定Entity.get前年度保険料段階(),
-                        特徴仮算定Entity.get前年度合計所得金額(), 特徴仮算定Entity.get前年度公的年金収入額(), Decimal.ZERO);
+                        老齢の情報のリスト,
+                        特徴仮算定Entity.get前年度合計所得金額(), 特徴仮算定Entity.get前年度公的年金収入額(), Decimal.ZERO,
+                        特徴仮算定Entity.get生保開始日(), 特徴仮算定Entity.get生保廃止日(),
+                        特徴仮算定Entity.get老年開始日(), 特徴仮算定Entity.get老年廃止日(),
+                        特徴仮算定Entity.get課税区分(), 特徴仮算定Entity.get世帯課税区分());
             }
             RString 特別徴収_年額基準年度_8月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_8月開始,
                     new RDate(調定年度.minusYear(NUM_1).toString()), SubGyomuCode.DBB介護賦課);
@@ -824,11 +837,15 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             if (TokuchoNengakuKijunNendo8Gatsu.当年度.getコード().equals(特別徴収_年額基準年度_8月開始)) {
                 前年度の保険料段階リスト = HokenryoDankaiSettings.createInstance()
                         .get保険料段階ListIn(調定年度.minusYear(NUM_1));
-                保険料率 = 前年度の保険料段階リスト.getBy段階区分(特徴仮算定Entity.get前年度保険料段階()).get保険料率();
+                if (前年度の保険料段階リスト != null && !RString.isNullOrEmpty(特徴仮算定Entity.get前年度保険料段階())) {
+                    保険料率 = 前年度の保険料段階リスト.getBy段階区分(特徴仮算定Entity.get前年度保険料段階()).get保険料率();
+                }
             } else if (TokuchoNengakuKijunNendo8Gatsu.翌年度.getコード().equals(特別徴収_年額基準年度_8月開始)) {
                 前年度の保険料段階リスト = HokenryoDankaiSettings.createInstance()
                         .get保険料段階ListIn(調定年度);
-                保険料率 = 前年度の保険料段階リスト.getBy段階区分(編集後賦課の情報.get保険料段階_仮算定時()).get保険料率();
+                if (前年度の保険料段階リスト != null && !RString.isNullOrEmpty(編集後賦課の情報.get保険料段階_仮算定時())) {
+                    保険料率 = 前年度の保険料段階リスト.getBy段階区分(編集後賦課の情報.get保険料段階_仮算定時()).get保険料率();
+                }
             }
             TokuchoKarisanteiKiwariOutput 特徴仮算定期割 = get特徴仮算定期割(調定年度, 保険料率);
             Decimal 特徴期別額 = Decimal.ZERO;
@@ -909,10 +926,15 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
      * @param 徴収方法情報 ChoshuHoho
      * @param 生保の情報のリスト List<SeikatsuHogoJukyusha>
      * @param 老齢の情報のリスト List<RoreiFukushiNenkinJukyusha>
-     * @param 前年度保険料段階 RString
      * @param 前年度合計所得金額 Decimal
      * @param 前年度公的年金収入額 Decimal
      * @param 枝番号 Decimal
+     * @param 生保開始日 FlexibleDate
+     * @param 生保廃止日 FlexibleDate
+     * @param 老年開始日 FlexibleDate
+     * @param 老年廃止日 FlexibleDate
+     * @param 課税区分 RString
+     * @param 世帯課税区分 RString
      * @return 編集後賦課の情報
      */
     public FukaJoho editFukaJokyoKyotsu(RString 処理区分, YMDHMS 調定日時,
@@ -920,8 +942,10 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             FukaJoho 設定前賦課の情報, FlexibleYear 調定年度,
             HihokenshaDaicho 資格情報, ChoshuHoho 徴収方法情報,
             List<SeikatsuHogoJukyusha> 生保の情報のリスト,
-            List<RoreiFukushiNenkinJukyusha> 老齢の情報のリスト, RString 前年度保険料段階,
-            Decimal 前年度合計所得金額, Decimal 前年度公的年金収入額, Decimal 枝番号) {
+            List<RoreiFukushiNenkinJukyusha> 老齢の情報のリスト,
+            Decimal 前年度合計所得金額, Decimal 前年度公的年金収入額, Decimal 枝番号,
+            FlexibleDate 生保開始日, FlexibleDate 生保廃止日, FlexibleDate 老年開始日,
+            FlexibleDate 老年廃止日, RString 課税区分, RString 世帯課税区分) {
         TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
         if (RSTRING_0.equals(処理区分)) {
             RString 枝番 = new RString(枝番号.toString()).padZeroToLeft(2);
@@ -937,8 +961,55 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         builder.set資格喪失事由(資格情報.get資格喪失事由コード());
         FlexibleDate 賦課期日 = FukaKeisan.createInstance().findOut賦課基準日(調定年度, 資格情報);
         builder.set賦課期日(賦課期日);
+        SeigyoJoho 月別保険料制御情報 = new SeigyoJoho();
+        HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(調定年度);
+        月別保険料制御情報セット(月別保険料制御情報, 保険料段階List);
+        FukaKonkyo 賦課根拠 = new FukaKonkyo();
+        賦課根拠.setFukakijunYMD(new FlexibleDate(調定年度.toDateString().concat(RSTRING_0401).toString()));
+        FlexibleDate 開始日 = new FlexibleDate(調定年度.toDateString().concat(RSTRING_0401).toString());
+        if (生保開始日 == null || 生保開始日.isEmpty()) {
+            賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
+        } else {
+            if (生保廃止日 == null || 生保廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
+                賦課根拠.setSeihoStartYMD(開始日);
+            } else {
+                賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
+            }
+        }
+        賦課根拠.setSeihoEndYMD(FlexibleDate.EMPTY);
+        if (老年開始日 == null || 老年開始日.isEmpty()) {
+            賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
+        } else {
+            if (老年廃止日 == null || 老年廃止日.isEmpty() || 開始日.isBeforeOrEquals(生保廃止日)) {
+                賦課根拠.setRoreiNenkinStartYMD(開始日);
+            } else {
+                賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
+            }
+        }
+        賦課根拠.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
+        // TODO
+        List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
+        if (!RString.isNullOrEmpty(課税区分)) {
+            setaiinKazeiKubunList.add(KazeiKubun.toValue(課税区分));
+        }
+        if (!RString.isNullOrEmpty(世帯課税区分)) {
+            setaiinKazeiKubunList.add(KazeiKubun.toValue(世帯課税区分));
+        }
+        賦課根拠.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
+        賦課根拠.setGokeiShotoku(前年度合計所得金額);
+        賦課根拠.setKotekiNenkinShunyu(前年度公的年金収入額);
+        HokenryoDankaiHanteiParameter parameter = new HokenryoDankaiHanteiParameter();
+        parameter.setFukaNendo(調定年度);
+        parameter.setFukaKonkyo(賦課根拠);
+        parameter.setSeigyoJoho(月別保険料制御情報);
+        HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
+        TsukibetsuHokenryoDankai 月別保険料段階 = hantei.determine月別保険料段階(parameter);
+        RString 保険料段階 = RString.EMPTY;
+        if (月別保険料段階 != null && 月別保険料段階.get保険料段階04月() != null) {
+            保険料段階 = 月別保険料段階.get保険料段階04月().getHokenryoDankai();
+        }
+        builder.set保険料段階_仮算定時(保険料段階);
         builder.set賦課市町村コード(get賦課市町村コード(資格情報));
-        //TODO 仕様変更1.08仕様変更
         builder.set調定事由1(ChoteiJiyuCode.仮算定賦課.getコード());
         builder.set口座区分(get口座区分_特徴仮算定(設定前賦課の情報, 特徴仮算定Entity));
         builder.set被保険者番号(資格情報.get被保険者番号());
@@ -1045,13 +1116,13 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID_仮算定異動一括結果一覧表CSV, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名称);
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID_仮算定異動一括結果一覧表CSV)
-                .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setEncode(Encode.UTF_8withBOM)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(true)
-                .build();
+        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build();
         List<Integer> 月List = set普徴期();
         for (KeisanjohoAtenaKozaKouseizengoEntity 更正前後Entity : 更正前後EntityList) {
             eucCsvWriter.writeLine(setCSVEntity(更正前後Entity, 調定日時, 賦課年度, 月List));
@@ -1492,7 +1563,6 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                     return 1;
                 }
             });
-            // TODO QAのNo.950(Redmine#91760)
             builder.set生活保護扶助種類(get生活保護扶助種類(生活保護の情報のリスト.get(0).getSeikatsuHogoFujoShuruiList()));
             builder.set生保開始日(生活保護の情報のリスト.get(0).get受給開始日());
             builder.set生保廃止日(生活保護の情報のリスト.get(0).get受給廃止日());
@@ -1624,6 +1694,21 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         dbT7022Entity.setTaishoShuryoTimestamp(new YMDHMS(抽出終了日時));
         dbT7022Entity.setState(EntityDataState.Added);
         処理日付管理Dac.save(dbT7022Entity);
+    }
+
+    /**
+     * 帳票制御共通情報取得メソッドです。
+     *
+     * @param 帳票分類ID ReportId
+     * @return ChohyoSeigyoKyotsu 帳票制御共通情報
+     */
+    public ChohyoSeigyoKyotsu load帳票制御共通(ReportId 帳票分類ID) {
+
+        DbT7065ChohyoSeigyoKyotsuEntity entity = 帳票制御共通Dac.selectByKey(SubGyomuCode.DBB介護賦課, 帳票分類ID);
+        if (entity == null) {
+            return null;
+        }
+        return new ChohyoSeigyoKyotsu(entity);
     }
 
     /**

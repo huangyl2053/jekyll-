@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd206010;
 
-import jp.co.ndensan.reams.db.dbd.definition.core.shafugemmentaisyousyalist.ShikakuSoshitsushaSentaku;
 import jp.co.ndensan.reams.db.dbd.definition.core.shafugemmentaisyousyalist.JigyoshaSentaku;
+import jp.co.ndensan.reams.db.dbd.definition.core.shafugemmentaisyousyalist.ShikakuSoshitsushaSentaku;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -34,7 +34,6 @@ public class DBD206010MybatisParameter implements IMyBatisParameter {
     private RString 事業者選択;
     private RString 事業者番号;
     private RString 事業者名;
-    private RString 出力順;
     private YMDHMS 処理日時;
     private static final RString CODE_出力しない = ShikakuSoshitsushaSentaku.出力しない.getコード();
     private static final RString CODE_事業者選択3 = JigyoshaSentaku.計画事業者とサービス事業者.getコード();
@@ -46,11 +45,10 @@ public class DBD206010MybatisParameter implements IMyBatisParameter {
      * @param 事業者選択 RString
      * @param 事業者番号 RString
      * @param 事業者名 RString
-     * @param orderBy RString
      * @param 処理日時 YMDHMS
      */
     public DBD206010MybatisParameter(FlexibleDate 基準日, RString 資格喪失者選択, RString 事業者選択, RString 事業者番号, RString 事業者名,
-            RString orderBy, YMDHMS 処理日時) {
+            YMDHMS 処理日時) {
         this.基準日 = 基準日;
         this.資格喪失者選択 = 資格喪失者選択;
         this.事業者選択 = 事業者選択;
@@ -60,7 +58,6 @@ public class DBD206010MybatisParameter implements IMyBatisParameter {
         set資格喪失者出力(資格喪失者選択);
         setlast基準日(基準日);
         set事業者番号3(事業者選択);
-        this.出力順 = orderBy;
         this.処理日時 = 処理日時;
     }
 

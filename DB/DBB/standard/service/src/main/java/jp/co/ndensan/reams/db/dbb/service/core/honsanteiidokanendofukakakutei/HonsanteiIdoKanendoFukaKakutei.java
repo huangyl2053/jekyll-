@@ -90,7 +90,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
      */
     public ShoriDateKanri getKakuteiKijunbi(FlexibleYear 調定年度) {
         List<RString> 処理名リスト = new ArrayList<>();
-        処理名リスト.add(ShoriName.過年度賦課.get名称());
+        処理名リスト.add(ShoriName.過年度賦課確定.get名称());
         DbT7022ShoriDateKanriEntity shoriDateKanri = shoriDateKanriDac.select最新の基準日(調定年度, 処理名リスト);
         if (shoriDateKanri == null) {
             return null;

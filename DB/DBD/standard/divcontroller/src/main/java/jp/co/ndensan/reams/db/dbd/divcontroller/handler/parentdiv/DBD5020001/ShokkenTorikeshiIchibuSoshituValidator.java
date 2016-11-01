@@ -50,8 +50,6 @@ public class ShokkenTorikeshiIchibuSoshituValidator implements IValidatable {
                 .thenAdd(ShokkenTorikeshiIchibuSoshituValidationMessage.有効開始日と有効終了日の関連チェック)
                 .ifNot(ShokkenTorikeshiIchibuSoshituSpec.前回有効終了日と今回有効開始日の関連チェック)
                 .thenAdd(ShokkenTorikeshiIchibuSoshituValidationMessage.前回有効終了日と今回有効開始日の関連チェック)
-                .ifNot(ShokkenTorikeshiIchibuSoshituSpec.新予防給付適用の60日前のみなし更新チェック)
-                .thenAdd(ShokkenTorikeshiIchibuSoshituValidationMessage.新予防給付適用の60日前のみなし更新チェック)
                 .messages());
         return messages;
     }

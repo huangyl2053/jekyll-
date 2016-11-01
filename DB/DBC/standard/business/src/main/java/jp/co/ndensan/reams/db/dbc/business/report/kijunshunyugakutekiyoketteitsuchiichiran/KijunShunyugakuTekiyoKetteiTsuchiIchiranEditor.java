@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -50,11 +49,13 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranEditor implements IKijunShu
         source.kaipage3 = 基準収入額決定通知一覧表パラメータ.get改頁３();
         source.kaipage4 = 基準収入額決定通知一覧表パラメータ.get改頁４();
         source.kaipage5 = 基準収入額決定通知一覧表パラメータ.get改頁５();
-        source.listHakkoTaishosha_1 = new RString(String.valueOf(基準収入額決定通知一覧表パラメータ.get通番()));
-        if (基準収入額決定通知一覧表パラメータ.get世帯コード() != null) {
-            source.listHakkoTaishosha_2 = 基準収入額決定通知一覧表パラメータ.get世帯コード().value();
+        source.listHakkoTaishosha_1 = 基準収入額決定通知一覧表パラメータ.get通番();
+        if (基準収入額決定通知一覧表パラメータ.get出力世帯コード() != null) {
+            source.listHakkoTaishosha_2 = 基準収入額決定通知一覧表パラメータ.get出力世帯コード().value();
         }
-        source.listHakkoTaishosha_3 = 基準収入額決定通知一覧表パラメータ.get年度().wareki().toDateString();
+        if (基準収入額決定通知一覧表パラメータ.get年度() != null) {
+            source.listHakkoTaishosha_3 = 基準収入額決定通知一覧表パラメータ.get年度().wareki().toDateString();
+        }
         if (基準収入額決定通知一覧表パラメータ.get被保険者番号() != null) {
             source.listHakkoTaishosha_4 = 基準収入額決定通知一覧表パラメータ.get被保険者番号().value();
         }
@@ -80,6 +81,11 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiranEditor implements IKijunShu
         if (基準収入額決定通知一覧表パラメータ.get識別コード() != null) {
             source.listHakkoTaishosha_11 = 基準収入額決定通知一覧表パラメータ.get識別コード().value();
         }
+        source.yubinNo = 基準収入額決定通知一覧表パラメータ.get郵便番号();
+        source.choikiCode = 基準収入額決定通知一覧表パラメータ.get町域コード();
+        source.gyoseikuCode = 基準収入額決定通知一覧表パラメータ.get行政区コード();
+        source.shichosonCode = 基準収入額決定通知一覧表パラメータ.get市町村コード();
+
         return source;
     }
 

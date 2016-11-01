@@ -114,4 +114,18 @@ public class DbT7202KaigoNinteiHokaiseiKanriDac implements ISaveable<DbT7202Kaig
                 order(by(hokaiseiShikoYMD, Order.ASC)).limit(1).
                 toObject(DbT7202KaigoNinteiHokaiseiKanriEntity.class);
     }
+
+    /**
+     * すべての介護認定法改正管理情報取得
+     *
+     * @return すべての介護認定法改正管理情報
+     */
+    @Transaction
+    public List<DbT7202KaigoNinteiHokaiseiKanriEntity> get介護認定法改正管理情報() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7202KaigoNinteiHokaiseiKanri.class).
+                order(by(hokaiseiShikoYMD, Order.DESC)).
+                toList(DbT7202KaigoNinteiHokaiseiKanriEntity.class);
+    }
 }

@@ -78,9 +78,9 @@ public class JigyouHoukokuTokeiProcess extends BatchProcessBase<IppanJokyoJigyou
     protected void process(IppanJokyoJigyouHoukokuTokeiEntity entity) {
         DbT7021JigyoHokokuTokeiDataEntity tokeiEntity = new DbT7021JigyoHokokuTokeiDataEntity();
         tokeiEntity.setHokokuYSeireki(processParameter.get報告年月().getYear());
-        tokeiEntity.setHokokuM(new RString(processParameter.get報告年月().getMonthValue()));
+        tokeiEntity.setHokokuM(new RString(processParameter.get報告年月().getMonthValue()).padZeroToLeft(2));
         tokeiEntity.setShukeiTaishoYSeireki(processParameter.get年度());
-        tokeiEntity.setShukeiTaishoM(new RString(processParameter.get集計年月().getMonthValue()));
+        tokeiEntity.setShukeiTaishoM(new RString(processParameter.get集計年月().getMonthValue()).padZeroToLeft(2));
         tokeiEntity.setToukeiTaishoKubun(entity.getToukeiTaishoKubun());
         tokeiEntity.setShichosonCode(entity.getShichosonCode());
         tokeiEntity.setHyoNo(entity.getHyoNo());
@@ -88,6 +88,7 @@ public class JigyouHoukokuTokeiProcess extends BatchProcessBase<IppanJokyoJigyou
         tokeiEntity.setShukeiTani(entity.getShukeiTani());
         tokeiEntity.setTateNo(entity.getTateNo());
         tokeiEntity.setYokoNo(entity.getYokoNo());
+        tokeiEntity.setShukeiKekkaAtai(entity.getShukeiKekkaAtai());
         tokeiEntity.setTateKomokuCode(Code.EMPTY);
         tokeiEntity.setShukeiKomokuMeisho(RString.EMPTY);
         tokeiEntity.setYokoKomokuCode(Code.EMPTY);

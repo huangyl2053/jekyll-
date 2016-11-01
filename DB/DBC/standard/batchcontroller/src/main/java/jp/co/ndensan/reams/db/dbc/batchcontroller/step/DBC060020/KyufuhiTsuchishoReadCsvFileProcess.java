@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuCsvFileReadProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakkoichiran.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoIchiranRelateEntity;
@@ -18,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -42,10 +41,10 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
     private KokuhorenkyotsuCsvFileReadProcessParameter parameter;
 
     static {
-        PARAMETER_OUT_FLOWENTITY = new RString("flowEntity");
+        PARAMETER_OUT_FLOWENTITY = new RString("flag");
     }
-    OutputParameter<FlowEntity> flowEntity;
-    Boolean flag;
+    private OutputParameter<Boolean> flag;
+    private boolean tempFlag;
     private final RString 区切り文字 = new RString(",");
     private KyufuhiTuchiHakkoCsvEntity hakkoCsvEntity;
     @BatchWriter
@@ -55,7 +54,8 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
 
     @Override
     protected void initialize() {
-        flag = false;
+        flag = new OutputParameter<>();
+        tempFlag = false;
         hakkoCsvEntity = new KyufuhiTuchiHakkoCsvEntity();
     }
 
@@ -68,7 +68,7 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
     protected void createWriter() {
         介護給付費福祉用具貸与品目一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(介護給付費福祉用具貸与品目一時_TABLE_NAME,
-                        KyufuhiTuchiHakkoCsvEntity.class);
+                        KyufuhiTuchiHakkoIchiranRelateEntity.class);
         処理結果リスト一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(処理結果リスト一時_TABLE_NAME,
                         DbWT0002KokuhorenTorikomiErrorEntity.class);
@@ -76,18 +76,19 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
 
     @Override
     protected void process(RString line) {
-        flag = true;
         List<RString> data = line.split(区切り文字.toString());
         hakkoCsvEntity = ListToObjectMappingHelper.
                 toObject(KyufuhiTuchiHakkoCsvEntity.class, data);
-        if (new RString("2").equals(hakkoCsvEntity.getレコード番号()) && (種別).equals(hakkoCsvEntity.get帳票レコード種別())) {
+        if (new RString("2").equals(hakkoCsvEntity.getレコード種別()) && (種別).equals(hakkoCsvEntity.get帳票レコード種別())) {
+            tempFlag = true;
+            flag.setValue(tempFlag);
             前データを一時TBLに登録する(hakkoCsvEntity);
         }
     }
 
     @Override
     protected void afterExecute() {
-        if (!flag) {
+        if (!tempFlag) {
             DbWT0002KokuhorenTorikomiErrorEntity errorEntity = new DbWT0002KokuhorenTorikomiErrorEntity();
             errorEntity.setエラー区分(new RString("99"));
             errorEntity.set証記載保険者番号(RString.EMPTY);
@@ -182,11 +183,11 @@ public class KyufuhiTsuchishoReadCsvFileProcess extends BatchProcessBase<RString
         介護給付費福祉用具貸与品目一時tableWriter.insert(登録Entity);
     }
 
-    private FlexibleDate get年月日(RString 年月日str) {
+    private FlexibleYearMonth get年月日(RString 年月日str) {
         if (RString.isNullOrEmpty(年月日str)) {
             return null;
         }
-        return new FlexibleDate(年月日str);
+        return new FlexibleYearMonth(年月日str);
     }
 
     private Decimal getDecimal(RString decimalStr) {

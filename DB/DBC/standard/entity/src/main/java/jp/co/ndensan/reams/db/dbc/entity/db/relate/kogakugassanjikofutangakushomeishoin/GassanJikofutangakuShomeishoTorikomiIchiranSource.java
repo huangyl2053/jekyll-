@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakusho
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBC200034_高額合算自己負担額証明書情報取込一覧表のReportSourceクラスです。
@@ -53,6 +55,7 @@ public class GassanJikofutangakuShomeishoTorikomiIchiranSource implements IRepor
     public RString list_1;
     @ReportItem(name = "list_2", length = 3, order = 18)
     public RString list_2;
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "list_3", length = 10, order = 19)
     public RString list_3;
     @ReportItem(name = "list_4", length = 18, order = 20)
@@ -77,6 +80,17 @@ public class GassanJikofutangakuShomeishoTorikomiIchiranSource implements IRepor
     public RString list_13;
     @ReportItem(name = "list_14", length = 4, order = 30)
     public RString list_14;
+    @ReportItem(name = "yubinNo", length = 4, order = 31)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 4, order = 32)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 4, order = 33)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 4, order = 34)
+    public RString shimei50onKana;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shichosonCode", length = 4, order = 35)
+    public RString shichosonCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -118,6 +132,11 @@ public class GassanJikofutangakuShomeishoTorikomiIchiranSource implements IRepor
         list_11,
         list_12,
         list_13,
-        list_14
+        list_14,
+        yubinNo,
+        choikiCode,
+        gyoseikuCode,
+        shimei50onKana,
+        shichosonCode
     }
 }

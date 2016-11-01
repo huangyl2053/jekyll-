@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nenreikaikyuriyo
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.nenreikaikyuriyojokyo.NenreikaikyuRiyojokyoMybatisParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.NenreikaikyuRiyojokyoRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.SyorikekkatempTblEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.TmpKyufujissekiRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.TmpSyuturyokuYoRelateEntity;
@@ -22,20 +21,12 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenreikaikyuriyojokyo.UpdateP
 public interface INenreikaikyuRiyojokyoMapper {
 
     /**
-     * 給付実績居宅サービス計画費データ取得
+     * データの取得
      *
      * @param parameter NenreikaikyuRiyojokyoMybatisParameter
      * @return List<NenreikaikyuRiyojokyoRelateEntity>
      */
-    List<NenreikaikyuRiyojokyoRelateEntity> getKyufujissekiKyotaku(NenreikaikyuRiyojokyoMybatisParameter parameter);
-
-    /**
-     * 給付実績集計データ取得
-     *
-     * @param parameter NenreikaikyuRiyojokyoMybatisParameter
-     * @return List<NenreikaikyuRiyojokyoRelateEntity>
-     */
-    List<NenreikaikyuRiyojokyoRelateEntity> getKyufujissekiShukei(NenreikaikyuRiyojokyoMybatisParameter parameter);
+    List<TmpKyufujissekiRelateEntity> get給付実績データ一時(NenreikaikyuRiyojokyoMybatisParameter parameter);
 
     /**
      * 給付実績データ取得処理

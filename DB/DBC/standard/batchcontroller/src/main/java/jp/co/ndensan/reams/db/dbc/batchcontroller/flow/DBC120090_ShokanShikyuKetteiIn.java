@@ -141,7 +141,11 @@ public class DBC120090_ShokanShikyuKetteiIn extends BatchFlowBase<DBC120090_Shok
         KogakuKyufuKetteiDoDBTorokuProcessParameter parameter = new KogakuKyufuKetteiDoDBTorokuProcessParameter();
         RString 処理年月 = getParameter().getShoriYearMonth().getYearMonth().toDateString();
         parameter.set処理年月(new FlexibleYearMonth(処理年月));
-        parameter.set再処理区分(SaiShoriKubun.valueOf(getParameter().getSaishoriKubun().toString()));
+        if (null != getParameter().getSaishoriKubun()) {
+            parameter.set再処理区分(SaiShoriKubun.valueOf(getParameter().getSaishoriKubun().toString()));
+        } else {
+            parameter.set再処理区分(SaiShoriKubun.空白);
+        }
         return simpleBatch(ShokanShikyuKetteiDoDBTorokuProcess.class).arguments(parameter).define();
     }
 
@@ -191,7 +195,7 @@ public class DBC120090_ShokanShikyuKetteiIn extends BatchFlowBase<DBC120090_Shok
     protected IBatchFlowCommand callDoShoriKekkaListSakuseiProcess() {
         KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter parameter
                 = new KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter();
-        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ1);
+        parameter.setエラーリストタイプ(KokuhorenJoho_TorikomiErrorListType.リストタイプ2);
         return simpleBatch(KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess.class).arguments(parameter).define();
     }
 

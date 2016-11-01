@@ -70,8 +70,6 @@ public class NenreiKeikyuBetsuRiyoJyokyoReportSource implements IReportSource {
     public RString list2_10;
     @ReportItem(name = "List2_11", length = 11, order = 29)
     public RString list2_11;
-    @ReportItem(name = "pageCount1", length = 6, order = 30)
-    public RString pageCount1;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

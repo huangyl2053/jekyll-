@@ -118,7 +118,6 @@ public class JigyohokokuCompYoshiki300103Data {
     private RString 利用者負担減額_免除認定表の利用者負担_3;
     private RString 利用者負担減額_免除認定表の利用者負担_4;
     private RString 利用者負担減額_免除認定表の利用者負担_5;
-    private RString 利用者負担減額_免除認定表の利用者負担_6;
     private RString 減免認定表の特定負担限度額_食費_1;
     private RString 減免認定表の特定負担限度額_食費_2;
     private RString 減免認定表の特定負担限度額_食費_3;
@@ -136,6 +135,4 @@ public class JigyohokokuCompYoshiki300103Data {
     private RString 免除認定表の利用者負担_3;
     private RString 免除認定表の利用者負担_4;
     private RString 免除認定表の利用者負担_5;
-    private RString 免除認定表の利用者負担_6;
-
 }

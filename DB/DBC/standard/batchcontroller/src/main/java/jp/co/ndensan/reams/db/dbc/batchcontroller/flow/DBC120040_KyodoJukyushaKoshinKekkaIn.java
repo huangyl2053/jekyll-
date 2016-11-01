@@ -106,7 +106,8 @@ public class DBC120040_KyodoJukyushaKoshinKekkaIn extends BatchFlowBase<DBC12004
      */
     @Step(共同処理用受給者情報一覧表)
     protected IBatchFlowCommand create共同処理用受給者情報一覧表() {
-        return loopBatch(CreateKyodoJukyushaKoshinkekkaIchiranProcess.class).define();
+        return loopBatch(CreateKyodoJukyushaKoshinkekkaIchiranProcess.class)
+                .arguments(getParameter().toKyufuJissekiInProcessParameter(保存先フォルダのパス, ファイル名)).define();
     }
 
     private void getファイル(RString 交換情報識別番号) {

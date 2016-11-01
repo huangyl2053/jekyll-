@@ -30,6 +30,7 @@
         <result property="setaiCode" column="PSM_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <result property="juminShubetsuCode"    column="PSM_juminShubetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="juminJotaiCode"   column="PSM_juminJotaiCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choikiCode"   column="PSM_choikiCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>   
     </resultMap>
     <select id="getKyokaisoKanriMasterList" resultMap="resultMap_KoseiShichosonMasterEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaMybatisParameter"  fetchSize="500" resultOrdered="true">
@@ -58,7 +59,8 @@
         DbT1006Kyokaiso."PSM_seibetsuCode" as "PSM_seibetsuCode",
         DbT1006Kyokaiso."PSM_setaiCode" as "PSM_setaiCode",
         DbT1006Kyokaiso."PSM_juminShubetsuCode" as "PSM_juminShubetsuCode",
-        DbT1006Kyokaiso."PSM_juminJotaiCode" as "PSM_juminJotaiCode"
+        DbT1006Kyokaiso."PSM_juminJotaiCode" as "PSM_juminJotaiCode",
+        DbT1006Kyokaiso."PSM_choikiCode" as "PSM_choikiCode"
 
         FROM
         ( SELECT
@@ -87,6 +89,7 @@
         PSM."setaiCode" as "PSM_setaiCode",
         PSM."juminShubetsuCode" as "PSM_juminShubetsuCode",
         PSM."juminJotaiCode" as "PSM_juminJotaiCode",
+        PSM."choikiCode" as "PSM_choikiCode",
         row_number() over(partition by (DbT1001Hiho."hihokenshaNo") order by DbT1001Hiho."idoYMD" desc,DbT1001Hiho."edaNo" desc) as rank_number1,
         row_number() over(partition by (DbT1007Kyo."hihokenshaNo") order by DbT1007Kyo."tekiyoKaishiYM" desc) as rank_number2
         FROM
@@ -111,35 +114,25 @@
         rgua.${psmShikibetsuTaisho} AS PSM
         ON
         DbT1001Hiho."shikibetsuCode" = PSM."shikibetsuCode"
-
-        WHERE
-        (
+        <where>
         <if test = "kyuufugakuFlag">
             DbT1006Kyo."kyuufugakuGengakuKisaiKiajoFlag" = #{iskyuufugakuFlag}
-
-            OR
         </if>
         <if test = "hyojunFutanFlag">
-            DbT1006Kyo."hyojunFutanGengakuGaitoFlag" = #{ishyojunFutanFlag}
-            OR
+           AND DbT1006Kyo."hyojunFutanGengakuGaitoFlag" = #{ishyojunFutanFlag}
         </if>
         <if test = "kyojuhinadoFutangFlag">
-            DbT1006Kyo."kyojuhinadoFutangakugengakuGaitoFlag" = #{iskyojuhinadoFutangFlag}
-            OR
+          AND  DbT1006Kyo."kyojuhinadoFutangakugengakuGaitoFlag" = #{iskyojuhinadoFutangFlag}
         </if>
         <if test = "shokuhiKeiFlag">
-            DbT1006Kyo."shokuhiKeigengoHutangakuGaitoFlag" = #{isshokuhiKeiFlag}
-            OR
+          AND  DbT1006Kyo."shokuhiKeigengoHutangakuGaitoFlag" = #{isshokuhiKeiFlag}
         </if>
         <if test = "kogakuFlag">
-            DbT1006Kyo."kogakuServicehiJogengakuGengakuGaitoFlag" = #{iskogakuFlag}
-            OR
+           AND DbT1006Kyo."kogakuServicehiJogengakuGengakuGaitoFlag" = #{iskogakuFlag}
         </if>
         <if test = "hokenFlag">
-            DbT1006Kyo."hokenryoNofuGengakuFlag" = #{ishokenFlag}
-            OR
+           AND DbT1006Kyo."hokenryoNofuGengakuFlag" = #{ishokenFlag}
         </if>
-        1 = 1)
         AND
         DbT1006Kyo."isDeleted" <![CDATA[<>]]> TRUE
         AND
@@ -148,14 +141,12 @@
         DbT1007Kyo."isDeleted" <![CDATA[<>]]> TRUE
         AND
         DbT1013Kyo."isDeleted" <![CDATA[<>]]> TRUE
-
         <if test = "ismodekjunhe">
             AND
             (DbT1006Kyo."tekiyoKaishiYMD" <![CDATA[<=]]> #{date_FROM} OR
             (DbT1006Kyo."tekiyoKaishiYMD" <![CDATA[<=]]> #{date_FROM}
             AND DbT1006Kyo."tekiyoShuryoYMD" IS NOT NULL AND #{date_FROM} <![CDATA[<=]]> DbT1006Kyo."tekiyoShuryoYMD"))
         </if>
-
         <if test = "ismoderange and isRangeApplication and isDateFlag">
             AND
             #{date_FROM} <![CDATA[<=]]> DbT1013Kyo."shinseiYMD"
@@ -164,7 +155,6 @@
             AND
             DbT1013Kyo."shinseiYMD" <![CDATA[<=]]> #{date_TO}
         </if>
-
         <if test = "ismoderange and isRangeStart and isDateFlag">
             AND
             #{date_FROM} <![CDATA[<=]]> DbT1006Kyo."tekiyoKaishiYMD"
@@ -182,10 +172,10 @@
             DbT1006Kyo."tekiyoShuryoYMD"  <![CDATA[<=]]> #{date_TO}
         </if>
         <if test = "ismodenayi">
-
         </if>
+        </where>
         ORDER BY
-        DbT1006Kyo."hihokenshaNo"
+        DbT1006Kyo."hihokenshaNo",${order_ID}
         ) DbT1006Kyokaiso
         WHERE
         rank_number1= 1

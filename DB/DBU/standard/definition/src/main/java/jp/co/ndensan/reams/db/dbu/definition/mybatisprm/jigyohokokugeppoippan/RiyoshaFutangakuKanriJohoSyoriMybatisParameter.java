@@ -25,15 +25,4 @@ public class RiyoshaFutangakuKanriJohoSyoriMybatisParameter implements IMyBatisP
     private FlexibleYearMonth syukeiYM;
     private FlexibleDate kyuSochishaYMD;
     private Code shukeiNo;
-
-    /**
-     * コンストラクタです。
-     *
-     * @param 集計年月 FlexibleYearMonth
-     * @param 集計番号 Code
-     */
-    public RiyoshaFutangakuKanriJohoSyoriMybatisParameter(FlexibleYearMonth 集計年月, Code 集計番号) {
-        this.syukeiYM = 集計年月;
-        this.shukeiNo = 集計番号;
-    }
 }

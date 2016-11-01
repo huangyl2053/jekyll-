@@ -34,7 +34,7 @@ public enum TyohyoShutuyukuOrderKey implements IReportItems {
     /**
      * 項目ID:0016 フォームフィールド名:市町村コード MyBatis項目名:定義なし
      */
-    市町村コード("0016", "市町村コード", "\"shichosonCode\""),
+    市町村コード("0016", "市町村コード", "\"shichosoncode\""),
     /**
      * 項目ID:0103 フォームフィールド名:証記載保険者番号 MyBatis項目名:定義なし
      */
@@ -46,7 +46,7 @@ public enum TyohyoShutuyukuOrderKey implements IReportItems {
     /**
      * 項目ID:0403 フォームフィールド名:要介護度 MyBatis項目名:定義なし
      */
-    要介護度("0403", "要介護度", "");
+    要介護度("0403", "要介護度", "\"yokaigoJotaiKubunCode\"");
 
     private final RString 項目ID;
 

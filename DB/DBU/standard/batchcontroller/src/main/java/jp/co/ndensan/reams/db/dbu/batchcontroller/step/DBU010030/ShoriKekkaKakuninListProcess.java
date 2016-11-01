@@ -56,7 +56,7 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<JigyoHokokuIp
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toDataMybitisParamter());
+        return new BatchDbReader(MYBATIS_SELECT_ID);
     }
 
     @Override

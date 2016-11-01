@@ -79,12 +79,16 @@ public class RenkeiDataTorikomiValidationHandler {
      */
     public ValidationMessageControlPairs checkSelected() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getTorikomiichiran().getDgtorikomidataichiran().getSelectedItems().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(
-                    FilecheckMessages.Validate未選択, div.getTorikomiichiran().getDgtorikomidataichiran()));
-        } else if (div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getSelectedItems().isEmpty()) {
+        RString 要介護認定申請 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        if (div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getSelectedItems().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(
                     FilecheckMessages.Validate未選択, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+        } else {
+            if (要介護認定申請.equals(div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getSelectedItems().get(0).getFileName())
+                    && div.getTorikomiichiran().getDgtorikomidataichiran().getSelectedItems().isEmpty()) {
+                validPairs.add(new ValidationMessageControlPair(
+                        FilecheckMessages.Validate未選択, div.getTorikomiichiran().getDgtorikomidataichiran()));
+            }
         }
         return validPairs;
     }

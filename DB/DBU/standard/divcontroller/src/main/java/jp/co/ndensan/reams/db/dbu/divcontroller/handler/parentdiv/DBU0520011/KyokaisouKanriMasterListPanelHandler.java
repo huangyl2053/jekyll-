@@ -56,13 +56,12 @@ public class KyokaisouKanriMasterListPanelHandler {
      * @param chohyoBunruiKanri chohyoBunruiKanri
      */
     public void initialize(ChohyoBunruiKanri chohyoBunruiKanri) {
-        //TODO 出力顺ID获取已提技术点待解决。
-        //div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, chohyoBunruiKanri.get帳票分類ID());
         div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBU介護統計報告, ReportIdDBU.DBA200005.getReportId());
         div.getKyokaisoKariParam().getRadKijunbi().setSelectedKey(KY1);
         div.getKyokaisoKariParam().getTxtKijumbi().setDisabled(false);
         div.getKyokaisoKariParam().getTxtKijumbi().setValue(RDate.getNowDate());
         div.getKyokaisoKariParam().getRadHaniRadio().setDisabled(true);
+        div.getKyokaisoKariParam().getRadHaniRadio().setSelectedKey(KY1);
         div.getKyokaisoKariParam().getTxtHaniChushutsu().setDisabled(true);
         div.getShiteiNaiyoKubun().getChkShiteiNaiyoKubun().setDisplayNone(false);
         div.getShiteiNaiyoKubun().getCcdChohyoShutsuryokujun().setVisible(true);
@@ -168,8 +167,7 @@ public class KyokaisouKanriMasterListPanelHandler {
         if (!iskogakuServicehiFlag) {
             batchPara.setIsshokuhiKeiFlag(該当内容区分ない);
         }
-        // TODO出力顺 取得方法不明
-//        batchPara.setOrder_ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));
+        batchPara.setOrder_ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));
         return batchPara;
     }
 

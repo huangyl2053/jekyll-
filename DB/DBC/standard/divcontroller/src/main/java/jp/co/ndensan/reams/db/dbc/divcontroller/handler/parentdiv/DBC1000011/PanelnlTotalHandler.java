@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000011;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuParamter;
-import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihohokinokubun.ShiharaiHohoKinoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufubunruikubun.ShiharaiHohoKinoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000011.PanelnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraishikyu.ShokanbaraiShikyuFinder;
 import jp.co.ndensan.reams.db.dbc.service.report.shoukanbaraisuuchishoikkatsusakusei.ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei;
@@ -247,8 +247,11 @@ public class PanelnlTotalHandler {
         paramter.set支払期間To(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get支払期間TO());
         paramter.set開始時間(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get開始時間());
         paramter.set終了時間(div.getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().get終了時間());
-        paramter.set出力順ID(キー);
-        shokanbarai.getShokanbaraiShikyuFushikyuKetteiTsuchishoBatchParameter(paramter);
+        if (div.getCcdChohyoShutsuryokujun().get出力順ID() != null) {
+            paramter.set出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID()));
+        } else {
+            paramter.set出力順ID(RString.EMPTY);
+        }
         return shokanbarai.getShokanbaraiShikyuFushikyuKetteiTsuchishoBatchParameter(paramter);
     }
 

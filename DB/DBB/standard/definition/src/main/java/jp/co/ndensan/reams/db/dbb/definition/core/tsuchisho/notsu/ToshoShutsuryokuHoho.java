@@ -11,22 +11,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ToshoShutsuryokuHoho {
 
     /**
-     * コード:0 名称:別々出力 略称:前期・中期・後期を別々に出力
+     * コード:0 名称:前期・中期・後期を別々に出力 略称:定義なし
      */
-    前期_中期_後期を別々に出力("0", "別々出力", "前期・中期・後期を別々に出力"),
+    別々出力("0", "前期・中期・後期を別々に出力"),
     /**
-     * コード:1 名称:全件出力 略称:前期・中期・後期を全件出力
+     * コード:1 名称:前期・中期・後期を全件出力 略称:定義なし
      */
-    前期_中期_後期を全件出力("1", "全件出力", "前期・中期・後期を全件出力");
+    全件出力("1", "前期・中期・後期を全件出力");
 
     private final RString code;
     private final RString fullName;
-    private final RString shortName;
 
-    private ToshoShutsuryokuHoho(String code, String fullname, String shortName) {
+    private ToshoShutsuryokuHoho(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
-        this.shortName = new RString(shortName);
     }
 
     /**
@@ -45,15 +43,6 @@ public enum ToshoShutsuryokuHoho {
      */
     public RString get名称() {
         return fullName;
-    }
-
-    /**
-     * 当初出力方法の略称を返します。
-     *
-     * @return 当初出力方法の略称
-     */
-    public RString get略称() {
-        return shortName;
     }
 
     /**

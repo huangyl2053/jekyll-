@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranCsvProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranReportProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601001.ShinsaiinJissekiIchiranCsvProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601001.ShinsaiinJissekiIchiranReportProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601001.DBE601001_IkenshoSakuseiJIssekiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

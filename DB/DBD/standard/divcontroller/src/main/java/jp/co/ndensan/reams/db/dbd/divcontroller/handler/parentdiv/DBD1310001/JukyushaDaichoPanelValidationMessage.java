@@ -26,10 +26,6 @@ public enum JukyushaDaichoPanelValidationMessage implements IValidationMessage {
      */
     実行するボタンクリック2(UrErrorMessages.期間が不正),
     /**
-     * 基準日RbGr・範囲Rbが選択されている場合、範囲From、範囲Toが共に入力されている場合、From-Toの大小関係をチェックする。 範囲From > 範囲Toの場合、エラーとする。
-     */
-    実行するボタンクリック3(UrErrorMessages.期間が不正_追加メッセージあり１, "範囲To", "範囲From"),
-    /**
      * 宛名抽出項目区分RDB・年齢が選択されている場合、年齢From、年齢Toが共に入力されていなければエラーとする。
      */
     実行するボタンクリック4(UrErrorMessages.入力値が不正),
@@ -44,11 +40,7 @@ public enum JukyushaDaichoPanelValidationMessage implements IValidationMessage {
     /**
      * 宛名抽出項目区分RDB・生年月日が選択されている場合、生年月日From、生年月日Toが共に入力されていなければエラーとする。
      */
-    実行するボタンクリック7(UrErrorMessages.期間が不正),
-    /**
-     * 宛名抽出項目区分RDB・生年月日が選択されている場合、生年月日From、生年月日Toが共に入力されている場合、From-Toの大小関係をチェックする。 生年月日From > 生年月日Toの場合、エラーとする。
-     */
-    実行するボタンクリック8(UrErrorMessages.期間が不正_追加メッセージあり１, "日付範囲From", "日付範囲To");
+    実行するボタンクリック7(UrErrorMessages.期間が不正);
 
     private final Message message;
 

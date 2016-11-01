@@ -35,6 +35,7 @@ public class SyoriHidukeKanriMasterUpdateProcess extends BatchProcessBase<DbT702
     private BatchPermanentTableWriter<DbT7022ShoriDateKanriEntity> hikazeNenkinTableEntity;
     private RString 保険者情報_保険者番号;
     private RString 処理名;
+    private int count = 0;
 
     @Override
     protected void initialize() {
@@ -54,13 +55,19 @@ public class SyoriHidukeKanriMasterUpdateProcess extends BatchProcessBase<DbT702
 
     @Override
     protected void process(DbT7022ShoriDateKanriEntity t) {
-        if (hikazeNenkinTableEntity.getUpdateCount() != 0) {
-            edit処理日付管理マスタ更新データ(t);
-            hikazeNenkinTableEntity.update(t);
-        } else if (hikazeNenkinTableEntity.getUpdateCount() == 0) {
+        count++;
+        edit処理日付管理マスタ更新データ(t);
+        hikazeNenkinTableEntity.update(t);
+    }
+
+    @Override
+    protected void afterExecute() {
+        if (0 == count) {
+            DbT7022ShoriDateKanriEntity t = new DbT7022ShoriDateKanriEntity();
             edit処理日付管理マスタ挿入データ(t);
             hikazeNenkinTableEntity.insert(t);
         }
+
     }
 
     private void edit処理日付管理マスタ更新データ(DbT7022ShoriDateKanriEntity t) {
@@ -75,8 +82,7 @@ public class SyoriHidukeKanriMasterUpdateProcess extends BatchProcessBase<DbT702
         t.setShoriName(処理名);
         t.setShoriEdaban(new RString("2"));
         t.setNendo(processParameter.get処理年度());
-        t.setNendoNaiRenban(processParameter.get処理区分());
-        t.setNendoNaiRenban(processParameter.get対象月());
+        t.setNendoNaiRenban(processParameter.get処理区分().concat(processParameter.get対象月()));
         t.setKijunYMD(processParameter.get処理年月日());
         t.setKijunTimestamp(processParameter.get処理日時());
     }

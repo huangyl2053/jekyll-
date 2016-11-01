@@ -24,7 +24,7 @@ public class KyufuTsuchiGenmenHoseiProcessParameter implements IBatchProcessPara
     private FlexibleYearMonth サービス開始年月;
     private FlexibleYearMonth サービス終了年月;
     private List<RString> 市町村コードList;
-    private RString 帳票出力順ID;
+    private long 帳票出力順ID;
 
     /**
      * コンストラクタ
@@ -32,11 +32,11 @@ public class KyufuTsuchiGenmenHoseiProcessParameter implements IBatchProcessPara
      * @param サービス開始年月 FlexibleYearMonth
      * @param サービス終了年月 FlexibleYearMonth
      * @param 市町村コードList List<HokenshaNo>
-     * @param 帳票出力順ID RString
+     * @param 帳票出力順ID long
      */
     public KyufuTsuchiGenmenHoseiProcessParameter(
             FlexibleYearMonth サービス開始年月, FlexibleYearMonth サービス終了年月,
-            List<RString> 市町村コードList, RString 帳票出力順ID) {
+            List<RString> 市町村コードList, long 帳票出力順ID) {
         this.サービス開始年月 = サービス開始年月;
         this.サービス終了年月 = サービス終了年月;
         this.市町村コードList = 市町村コードList;
@@ -46,10 +46,11 @@ public class KyufuTsuchiGenmenHoseiProcessParameter implements IBatchProcessPara
     /**
      * プロセスパラメータを作成します。
      *
+     * @param 出力順 出力順
      * @return プロセスパラメータ
      */
-    public KyufuTsuchiGenmenHoseiMapperParameter toMapperParameter() {
-        return new KyufuTsuchiGenmenHoseiMapperParameter(サービス開始年月, サービス終了年月, 市町村コードList);
+    public KyufuTsuchiGenmenHoseiMapperParameter toMapperParameter(RString 出力順) {
+        return new KyufuTsuchiGenmenHoseiMapperParameter(サービス開始年月, サービス終了年月, 市町村コードList, 出力順);
     }
 
 }

@@ -22,8 +22,9 @@ import lombok.Setter;
 public class KokuhorenDataTorikomiViewStateClass implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private final RYearMonth 処理年月;
-    private final RString 再処理区分;
+    private RYearMonth 処理年月;
+    private RString 再処理区分;
+    private RString 交換情報識別番号;
 
     /**
      * KokuhorenDataTorikomiViewStateClass
@@ -34,5 +35,6 @@ public class KokuhorenDataTorikomiViewStateClass implements Serializable {
     public KokuhorenDataTorikomiViewStateClass(RYearMonth 処理年月, RString 再処理区分) {
         this.処理年月 = 処理年月;
         this.再処理区分 = 再処理区分;
+        this.交換情報識別番号 = RString.EMPTY;
     }
 }

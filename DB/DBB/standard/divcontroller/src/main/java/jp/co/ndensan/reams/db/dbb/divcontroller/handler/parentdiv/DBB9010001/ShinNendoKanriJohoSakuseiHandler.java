@@ -80,7 +80,6 @@ public class ShinNendoKanriJohoSakuseiHandler {
         ShinNendoKanriJohoSakuseiManager imanager = InstanceProvider.create(ShinNendoKanriJohoSakuseiManager.class);
         List<ChohyoSeigyoHanyo> 新帳票制御汎用List = 帳票制御汎用の追加();
         ShoriDateKanri 処理日付管理 = 処理日付管理の追加();
-        //TODO QA.1013
         HashMap<String, Object> param = カスタムコンフィグの追加();
         imanager.追加(本年度, 処理日付管理, 新帳票制御汎用List, param);
     }

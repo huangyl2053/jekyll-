@@ -221,6 +221,7 @@ public class NinteiEnkiTsuchishoHakko {
         NinteiEnkiTsuchishoHakkoValidationHandler validationHandler = getValidationHandler();
         if (通知書.getName().equals(ResponseHolder.getState())) {
             validationHandler.対象行を選択チェック(pairs, div);
+            validationHandler.変更内容保存チェック(pairs, div);
         } else if (検索.getName().equals(ResponseHolder.getState())) {
             validationHandler.発行一覧表_終了日が開始日以前チェック(pairs, div);
         }

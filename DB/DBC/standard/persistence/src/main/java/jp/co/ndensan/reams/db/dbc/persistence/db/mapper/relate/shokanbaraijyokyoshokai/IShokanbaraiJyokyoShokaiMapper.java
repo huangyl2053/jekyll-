@@ -43,6 +43,14 @@ public interface IShokanbaraiJyokyoShokaiMapper {
     List<ShokanMeisaiEntity> get償還払請求明細一覧(ShokanbaraiJyokyoShokaiParameter parameter);
 
     /**
+     * 償還払請求明細一覧取得（指定サービス種類以外）
+     *
+     * @param parameter ShokanbaraiJyokyoShokaiParameter
+     * @return List<ShokanMeisaiEntity>
+     */
+    List<ShokanMeisaiEntity> get償還払請求明細一覧_指定サービス種類以外(ShokanbaraiJyokyoShokaiParameter parameter);
+
+    /**
      * 償還払請求明細住特一覧
      *
      * @param parameter ShokanbaraiJyokyoShokaiParameter

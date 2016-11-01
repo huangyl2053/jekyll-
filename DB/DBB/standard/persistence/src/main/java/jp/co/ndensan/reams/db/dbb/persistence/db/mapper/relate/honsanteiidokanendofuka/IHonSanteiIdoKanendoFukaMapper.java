@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRel
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.CalculateFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.CalculateFukaTmpEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.DbT1001AndFukaJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.HonsanteiShotokuTmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.IdoTmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.KeisangojohoToKozaEntity;
@@ -298,4 +299,12 @@ public interface IHonSanteiIdoKanendoFukaMapper {
      * @return 計算後情報と宛名識別対象PSM、口座情報取得PSM
      */
     List<KeisangojohoToKozaEntity> select計算後情報と宛名と口座(KeisangojohoToKozaParameter param);
+
+    /**
+     * 被保険者台帳管理と賦課を取得する。
+     *
+     * @param param KanendoFukaParameter
+     * @return 被保険者台帳管理と賦課
+     */
+    List<DbT1001AndFukaJohoEntity> select被保険者台帳管理と賦課(KanendoFukaParameter param);
 }

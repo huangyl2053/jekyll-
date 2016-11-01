@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 異動賦課情報一時テーブルInsertパラメータ
  *
- * @reamsid_L DBB-0710-040 yebangqiang
+ * @reamsid_L DBB-0710-030 yebangqiang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class FuchokaritsuchishoikkatsuhakkoParameter implements IMyBatisParameter {

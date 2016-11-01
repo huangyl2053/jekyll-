@@ -132,6 +132,23 @@ public class GemmenJuminKihonValidationHandler {
     }
 
     /**
+     * 「保存する」ボタン押下場合 決定日が入力されている and 決定区分=承認する のとき、減免額が未入力の場合、エラーとする。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs 減免額の必須入力チェック1() {
+        IValidationMessages messages = new ControlValidator(div).validate減免額の必須入力1();
+        return createDictionary減免額の必須入力チェック1().check(messages);
+    }
+
+    private ValidationDictionary createDictionary減免額の必須入力チェック1() {
+        return new ValidationDictionaryBuilder()
+                .add(GemmenJuminKihonValidationHandler.GemmenJuminKihonValidationMessages.減免額の必須入力チェック1,
+                        div.getGemmenMain().getKiwarigaku().getTxtGemmengaku())
+                .build();
+    }
+
+    /**
      * 「保存する」ボタン押下場合 減免額が入力されている and 「計算する」ボタンが押下されていない場合、エラーとする。
      *
      * @param 最新減免の情報 GemmenJoho
@@ -265,6 +282,20 @@ public class GemmenJuminKihonValidationHandler {
         }
 
         /**
+         * 「保存する」ボタン押下場合 決定日が入力されている and 決定区分=承認しない のとき、減免額が入力の場合、エラーとする。
+         *
+         * @return バリデーション突合結果
+         */
+        public IValidationMessages validate減免額の必須入力1() {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div)
+                    .ifNot(GemmenJuminKihonSpec.減免額の必須入力チェック1)
+                    .thenAdd(GemmenJuminKihonValidationMessages.減免額の必須入力チェック1)
+                    .messages());
+            return messages;
+        }
+
+        /**
          * 「保存する」ボタン押下場合 減免額が入力されている and 「計算する」ボタンが押下されていない場合、エラーとする。
          *
          * @return バリデーション突合結果
@@ -317,10 +348,11 @@ public class GemmenJuminKihonValidationHandler {
     private static enum GemmenJuminKihonValidationMessages implements IValidationMessage {
 
         未指定チェック(UrErrorMessages.未指定, 出力対象チェックMESSAGE.toString()),
-        賦課情報の存在チェック(DbbErrorMessages.賦課情報なし, 減免額MESSAGE.toString()),
+        賦課情報の存在チェック(DbbErrorMessages.賦課情報なし, RString.EMPTY.toString()),
         減免額の整合性チェック(DbbErrorMessages.減免額_合計不一致),
         決定日の必須入力チェック(DbzErrorMessages.複数必須項目相関チェックエラー, 減免額MESSAGE.toString(), 決定日MESSAGE.toString()),
-        減免額の必須入力チェック(UrErrorMessages.必須項目_追加メッセージあり, 減免額MESSAGE.toString()),
+        減免額の必須入力チェック(DbbErrorMessages.承認時減免額なし),
+        減免額の必須入力チェック1(DbbErrorMessages.不承認時減免額あり),
         計算処理の未実行チェック(DbzErrorMessages.未実行, 計算処理MESSAGE.toString()),
         減免額の整合性チェック２(UrErrorMessages.入力値が不正_追加メッセージあり, 減免前MESSAGE.toString()),
         決定日の必須入力チェック２(UrErrorMessages.必須項目_追加メッセージあり, 決定日MESSAGE.toString());

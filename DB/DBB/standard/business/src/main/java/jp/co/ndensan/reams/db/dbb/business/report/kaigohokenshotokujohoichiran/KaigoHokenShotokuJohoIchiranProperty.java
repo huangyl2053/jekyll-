@@ -101,8 +101,6 @@ public class KaigoHokenShotokuJohoIchiranProperty extends ReportPropertyBase<Kai
         return breakers.add(catalog.new SimplePageBreaker(
 
 
-
-
             pageBreakKeys) {
             @Override
             public ReportLineRecord<KaigoHokenShotokuJohoIchiranSource> occuredBreak(
@@ -138,17 +136,13 @@ public class KaigoHokenShotokuJohoIchiranProperty extends ReportPropertyBase<Kai
     public enum DBB200008ShutsuryokujunEnum implements IReportItems {
 
         /**
-         * 世帯コード
-         */
-        世帯コード(new RString("0008"), new RString("世帯コード"), FORMAT.concat(new RString("setaiCode")).concat(FORMAT)),
-        /**
          * 識別コード
          */
         識別コード(new RString("0009"), new RString("識別コード"), FORMAT.concat(new RString("shikibetsuCode")).concat(FORMAT)),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("")),
+        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), FORMAT.concat(new RString("meisho")).concat(FORMAT)),
         /**
          * 被保険者番号
          */

@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KogakuHantei_Roreifukushinenkin {
 
     /**
-     * コード:1 名称:老齢福祉年金受給あり 略称:定義なし 表示名称:老
+     * コード:1 名称:老齢福祉年金受給あり 略称:老
      */
     老齢福祉年金受給あり("1", "老齢福祉年金受給あり", "老"),
     /**
-     * コード:2 名称:老齢福祉年金受給なし 略称:定義なし 表示名称:"　"
+     * コード:2 名称:老齢福祉年金受給なし 略称:"　"
      */
     老齢福祉年金受給なし("2", "老齢福祉年金受給なし", "　");
 
@@ -48,11 +48,11 @@ public enum KogakuHantei_Roreifukushinenkin {
     }
 
     /**
-     * 高額判定根拠_老齢福祉年金の表示名称を返します。
+     * 高額判定根拠_老齢福祉年金の略称を返します。
      *
-     * @return 高額判定根拠_老齢福祉年金の表示名称
+     * @return 高額判定根拠_老齢福祉年金の略称
      */
-    public RString get表示名称() {
+    public RString get略称() {
         return hyojiName;
     }
 

@@ -2,7 +2,9 @@ package jp.co.ndensan.reams.db.dbc.entity.report.dbc200017;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBC200017_高額介護サービス費支給申請書発行一覧表のsource
@@ -38,6 +40,7 @@ public class KogakuShikyuShinseishoHakkoIchiranSource implements IReportSource {
     public RString kaipage4;
     @ReportItem(name = "kaipage5", length = 20, order = 13)
     public RString kaipage5;
+    @ReportExpandedInfo(id = "A")
     @ReportItem(name = "listHakkoTaishosha_1", length = 4, order = 14)
     public RString listHakkoTaishosha_1;
     @ReportItem(name = "listHakkoTaishosha_2", length = 10, order = 15)
@@ -84,6 +87,10 @@ public class KogakuShikyuShinseishoHakkoIchiranSource implements IReportSource {
     @ReportItem(name = "氏名カナ", length = 20, order = 33)
     public RString 氏名カナ;
 // </editor-fold>
+
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 15)
+    public RString shikibetsuCode;
 
     /**
      * KogakuShikyuShinseishoHakkoIchiranSourceのENUM

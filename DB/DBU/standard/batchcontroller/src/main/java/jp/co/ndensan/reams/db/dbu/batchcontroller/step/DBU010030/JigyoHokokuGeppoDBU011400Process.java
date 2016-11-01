@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JigyoHokokuGeppoDBU011400Process extends BatchProcessBase<KyufuJissekiKonkyoRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippangenbutsu."
-            + "IJigyoHokokuGeppoIppanGenbutsuMapper.getResultKyufuJisseki");
+            + "IJigyoHokokuGeppoIppanGenbutsuMapper.getKyufuJissekiKonkyo");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private JigyoHokokuGeppoIppanGenbutsuProcessParamter processParameter;
@@ -44,7 +44,7 @@ public class JigyoHokokuGeppoDBU011400Process extends BatchProcessBase<KyufuJiss
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID);
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toSelectDataMybitisParamter());
     }
 
     @Override

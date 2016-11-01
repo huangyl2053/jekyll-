@@ -128,10 +128,7 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
                     UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                     new Code(特別徴収業務者コード), FlexibleDate.getNowDate());
         }
-
-        source.listUpper_6 = new RString(item.get変更前特徴額_１期().toString());
-        source.listUpper_7 = new RString(item.get変更前特徴額_２期().toString());
-        source.listUpper_8 = new RString(item.get変更前特徴額_３期().toString());
+        set変更前特徴額(source, item);
 
         if (item.get普徴期期別金額01() != null) {
             source.listUpper_9 = doカンマ編集(item.get普徴期期別金額01());
@@ -178,6 +175,19 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
 
         set変更後特徴額と普通仮徴収額(item, source);
 
+    }
+
+    private void set変更前特徴額(TokubetsuChoshuHeijunkaKeisanIchiranSource source, TokuchoHeijyunkaTaishoshaEntity item) {
+
+        if (item.get変更前特徴額_１期() != null) {
+            source.listUpper_6 = new RString(item.get変更前特徴額_１期().toString());
+        }
+        if (item.get変更前特徴額_２期() != null) {
+            source.listUpper_7 = new RString(item.get変更前特徴額_２期().toString());
+        }
+        if (item.get変更前特徴額_３期() != null) {
+            source.listUpper_8 = new RString(item.get変更前特徴額_３期().toString());
+        }
     }
 
     private void 備考を編集(TokuchoHeijyunkaTaishoshaEntity item, TokubetsuChoshuHeijunkaKeisanIchiranSource source) {
@@ -241,30 +251,20 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         source.listUpper_7 = RString.EMPTY;
         source.listUpper_8 = RString.EMPTY;
 
-        if (item.get普徴期期別金額01() != null) {
-            source.listUpper_9 = doカンマ編集(item.get普徴期期別金額01());
-        }
-        if (item.get普徴期期別金額02() != null) {
-            source.listUpper_10 = doカンマ編集(item.get普徴期期別金額02());
-        }
-        if (item.get普徴期期別金額03() != null) {
-            source.listUpper_11 = doカンマ編集(item.get普徴期期別金額03());
-        }
-        if (item.get普徴期期別金額04() != null) {
-            source.listUpper_12 = doカンマ編集(item.get普徴期期別金額04());
-        }
+        source.listUpper_9 = doカンマ編集(item.get普徴期期別金額01());
+        source.listUpper_10 = doカンマ編集(item.get普徴期期別金額02());
+        source.listUpper_11 = doカンマ編集(item.get普徴期期別金額03());
+        source.listUpper_12 = doカンマ編集(item.get普徴期期別金額04());
 
         if (item.get保険料算定段階2() == null) {
             source.listCenter_1 = item.get保険料算定段階1();
         } else {
             source.listCenter_1 = item.get保険料算定段階2();
         }
-        if (特徴平準化結果対象外.get今年度保険料率() != null) {
-            source.listCenter_2 = doカンマ編集(特徴平準化結果対象外.get今年度保険料率());
-        }
-        if (特徴平準化結果対象外.get調整金額() != null) {
-            source.listCenter_3 = doカンマ編集(特徴平準化結果対象外.get調整金額());
-        }
+
+        source.listCenter_2 = doカンマ編集(特徴平準化結果対象外.get今年度保険料率());
+        source.listCenter_3 = doカンマ編集(特徴平準化結果対象外.get調整金額());
+
         RString 編集備考 = 備考名を転換(item.get備考コード());
         source.listCenter_4 = 編集備考;
 
@@ -312,24 +312,13 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
     }
 
     private void set変更後特徴額と普通仮徴収額外(TokuchoHeijyunkaTaishogaiEntity item, TokubetsuChoshuHeijunkaKeisanIchiranSource source) {
-        if (item.get特徴期期別金額01() != null) {
-            source.listLower_6 = doカンマ編集(item.get特徴期期別金額01());
-        }
-        if (item.get特徴期期別金額02() != null) {
-            source.listLower_7 = doカンマ編集(item.get特徴期期別金額02());
-        }
-        if (item.get特徴期期別金額03() != null) {
-            source.listLower_8 = doカンマ編集(item.get特徴期期別金額03());
-        }
-        if (item.get普徴期期別金額05() != null) {
-            source.listLower_9 = doカンマ編集(item.get普徴期期別金額05());
-        }
-        if (item.get普徴期期別金額06() != null) {
-            source.listLower_10 = doカンマ編集(item.get普徴期期別金額06());
-        }
 
+        source.listLower_6 = doカンマ編集(item.get特徴期期別金額01());
+        source.listLower_7 = doカンマ編集(item.get特徴期期別金額02());
+        source.listLower_8 = doカンマ編集(item.get特徴期期別金額03());
+        source.listLower_9 = doカンマ編集(item.get普徴期期別金額05());
+        source.listLower_10 = doカンマ編集(item.get普徴期期別金額06());
         source.listLower_11 = RString.EMPTY;
-
         source.listLower_12 = RString.EMPTY;
 
     }

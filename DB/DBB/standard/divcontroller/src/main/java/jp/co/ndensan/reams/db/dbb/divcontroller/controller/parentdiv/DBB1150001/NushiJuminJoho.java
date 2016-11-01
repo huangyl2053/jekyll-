@@ -12,8 +12,10 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.ShotokuKanri;
 import jp.co.ndensan.reams.db.dbb.business.core.nushijuminjoho.NushiJuminJohoMessage;
 import jp.co.ndensan.reams.db.dbb.business.core.nushijuminjoho.NushiJuminJohoResult;
 import jp.co.ndensan.reams.db.dbb.business.core.shotokushokaihyo.ShotokushokaihyoTaishoSetaiin;
+import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001.DBB1150001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001.NushiJuminJohoDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001.dgShotokuShokaiHyoHakko_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1150001.NushiJuminJohoHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1150001.NushiJuminJohoHandlerValidationHandler;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoDataHenshu;
@@ -35,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -119,7 +122,7 @@ public class NushiJuminJoho {
                 .getDgShotokuShokaiHyoHakko(), MemoShikibetsuTaisho.識別コード.get識別対象(), 文字列_識別対象コード,
                 RString.EMPTY, RString.EMPTY, メモボタン);
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード, 被保険者番号));
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBB1150001StateName.所得照会票個別発行個人一覧);
 
     }
 
@@ -130,6 +133,10 @@ public class NushiJuminJoho {
      * @return NushiJuminJohoDiv
      */
     public ResponseData<NushiJuminJohoDiv> onClick_btnSentakuShusei(NushiJuminJohoDiv div) {
+        List<dgShotokuShokaiHyoHakko_Row> rowList = div.getShotokuShokaiHyoHakkoIchiranPanel().getDgShotokuShokaiHyoHakko().getSelectedItems();
+        if (rowList == null || rowList.isEmpty()) {
+            throw new ApplicationException(DbbErrorMessages.世帯員未選択.getMessage());
+        }
         getHandler(div).set世帯員の所得照会票印字内容の修正エリア();
         List<ShotokushokaihyoTaishoSetaiin> 所得照会票発行対象世帯員リスト = ViewStateHolder
                 .get(ViewStateKeys.所得照会票発行対象世帯員, List.class);

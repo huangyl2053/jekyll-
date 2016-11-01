@@ -5,13 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD519003;
 
-import java.util.ArrayList;
-import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.dbd519003.ShinsaHanteiIraiIchiranhyoCsvProcessCore;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd503001.ShinsaHanteiIraiIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5190003.RenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.chohyoshuchiryokuyoshiseijyoho.ChohyoShuchiryokuyoShiseiJyohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd503001.ShinsaHanteiIraiIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
@@ -19,13 +19,13 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,13 +42,10 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
             + ".db.mapper.relate.shikakusoushitsudata.IShikakuSoushitsuDataMapper.getShikakuSoshitsuEntity");
     private RenkeiDataShutsuryokuSikakuSakuseiSoshitsuProcessParameter para;
     private static final ReportId REPORT_DBD503001 = ReportIdDBD.DBD503001.getReportId();
-    private static final RString 今回開始日時 = new RString("【今回開始日時】");
-    private static final RString 今回終了日時 = new RString("【今回終了日時】");
     private int 连番;
     private static final int 连番_INITIALIZE = 1;
-    private static final int 先頭9桁 = 9;
-    private static final int PAGE_MAXNUMBER = 15;
     private IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey;
+    private ShinsaHanteiIraiIchiranhyoCsvProcessCore core;
 
     @BatchWriter
     private BatchReportWriter<ShinsaHanteiIraiIchiranhyoReportSource> batchReportWriter;
@@ -59,6 +56,7 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
         连番 = 连番_INITIALIZE;
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
         shikibetsuTaishoPSMSearchKey = key.build();
+        core = new ShinsaHanteiIraiIchiranhyoCsvProcessCore();
     }
 
     @Override
@@ -76,6 +74,8 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
     @Override
     protected void process(ChohyoShuchiryokuyoShiseiJyohoEntity entity) {
         entity.setIndex(连番);
+        entity.set出力CSV状況申請(RString.EMPTY);
+        entity.set認定申請区分_申請時コード(new Code(String.valueOf(NinteiShinseiKubunShinsei.資格喪失_死亡.コード())));
         ShinsaHanteiIraiIchiranhyoReport report = new ShinsaHanteiIraiIchiranhyoReport(entity);
         report.writeBy(reportSourceWriter);
         连番++;
@@ -83,30 +83,8 @@ public class ShinsaHanteiIraiIchiranhyoProcess extends BatchProcessBase<ChohyoSh
 
     @Override
     protected void afterExecute() {
-        int pageNumber = 连番 % PAGE_MAXNUMBER == 0 ? (连番 / PAGE_MAXNUMBER) : (连番 / PAGE_MAXNUMBER + 1);
         Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                REPORT_DBD503001.getColumnValue().substring(0, 先頭9桁),
-                association.getLasdecCode_().getColumnValue(),
-                association.get市町村名(),
-                new RString(String.valueOf(JobContextHolder.getJobId())),
-                ReportIdDBD.DBD503001.getReportName(),
-                new RString(pageNumber),
-                new RString("なし"),
-                new RString("なし"),
-                contribute());
+        ReportOutputJokenhyoItem item = core.資格喪失帳票出力(batchReportWriter, para, association);
         OutputJokenhyoFactory.createInstance(item).print();
     }
-
-    private List<RString> contribute() {
-        List<RString> 出力条件 = new ArrayList<>();
-        if (para.getKonkaikaishidatetime() != null && para.getKonkaikaishidatetime().getDate().isWareki()) {
-            出力条件.add(今回開始日時.concat(para.getKonkaikaishidatetime().getDate().wareki().toDateString()));
-        }
-        if (para.getKonkaishoridatetime() != null && para.getKonkaishoridatetime().getDate().isWareki()) {
-            出力条件.add(今回終了日時.concat(para.getKonkaishoridatetime().getDate().wareki().toDateString()));
-        }
-        return 出力条件;
-    }
-
 }

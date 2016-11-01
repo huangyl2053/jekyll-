@@ -40,16 +40,10 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     private DvHaraiKetteiShuseiDiv DvHaraiKetteiShusei;
     @JsonProperty("DvHakko")
     private DvHakkoDiv DvHakko;
-    @JsonProperty("識別コード")
-    private RString 識別コード;
-    @JsonProperty("世帯基準年月日")
-    private RString 世帯基準年月日;
-    @JsonProperty("所得年度")
-    private RString 所得年度;
-    @JsonProperty("所得基準日時")
-    private RString 所得基準日時;
     @JsonProperty("operateState")
     private RString operateState;
+    @JsonProperty("rootTitle")
+    private RString rootTitle;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -148,78 +142,6 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     /*
-     * get識別コード
-     * @return 識別コード
-     */
-    @JsonProperty("識別コード")
-    public RString get識別コード() {
-        return 識別コード;
-    }
-
-    /*
-     * set識別コード
-     * @param 識別コード 識別コード
-     */
-    @JsonProperty("識別コード")
-    public void set識別コード(RString 識別コード) {
-        this.識別コード = 識別コード;
-    }
-
-    /*
-     * get世帯基準年月日
-     * @return 世帯基準年月日
-     */
-    @JsonProperty("世帯基準年月日")
-    public RString get世帯基準年月日() {
-        return 世帯基準年月日;
-    }
-
-    /*
-     * set世帯基準年月日
-     * @param 世帯基準年月日 世帯基準年月日
-     */
-    @JsonProperty("世帯基準年月日")
-    public void set世帯基準年月日(RString 世帯基準年月日) {
-        this.世帯基準年月日 = 世帯基準年月日;
-    }
-
-    /*
-     * get所得年度
-     * @return 所得年度
-     */
-    @JsonProperty("所得年度")
-    public RString get所得年度() {
-        return 所得年度;
-    }
-
-    /*
-     * set所得年度
-     * @param 所得年度 所得年度
-     */
-    @JsonProperty("所得年度")
-    public void set所得年度(RString 所得年度) {
-        this.所得年度 = 所得年度;
-    }
-
-    /*
-     * get所得基準日時
-     * @return 所得基準日時
-     */
-    @JsonProperty("所得基準日時")
-    public RString get所得基準日時() {
-        return 所得基準日時;
-    }
-
-    /*
-     * set所得基準日時
-     * @param 所得基準日時 所得基準日時
-     */
-    @JsonProperty("所得基準日時")
-    public void set所得基準日時(RString 所得基準日時) {
-        this.所得基準日時 = 所得基準日時;
-    }
-
-    /*
      * getoperateState
      * @return operateState
      */
@@ -238,25 +160,43 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     /*
-     * [ ショートカットの作成 ]
+     * getrootTitle
+     * @return rootTitle
      */
-    @JsonIgnore
-    public IKaigoAtenaInfoDiv getCddAtenaInfo() {
-        return this.getDvKyotsuJoho().getCddAtenaInfo();
+    @JsonProperty("rootTitle")
+    public RString getRootTitle() {
+        return rootTitle;
     }
 
+    /*
+     * setrootTitle
+     * @param rootTitle rootTitle
+     */
+    @JsonProperty("rootTitle")
+    public void setRootTitle(RString rootTitle) {
+        this.rootTitle = rootTitle;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
     @JsonIgnore
     public IKaigoShikakuKihonDiv getCddShikakuKihon() {
         return this.getDvKyotsuJoho().getCddShikakuKihon();
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnTorokuSeitaiIchiran() {
+    public IKaigoAtenaInfoDiv getCddAtenaInfo() {
+        return this.getDvKyotsuJoho().getCddAtenaInfo();
+    }
+
+    @JsonIgnore
+    public Button getBtnTorokuSeitaiIchiran() {
         return this.getDvHaraiKetteiToroku().getBtnTorokuSeitaiIchiran();
     }
 
     @JsonIgnore
-    public void setBtnTorokuSeitaiIchiran(ButtonDialog btnTorokuSeitaiIchiran) {
+    public void setBtnTorokuSeitaiIchiran(Button btnTorokuSeitaiIchiran) {
         this.getDvHaraiKetteiToroku().setBtnTorokuSeitaiIchiran(btnTorokuSeitaiIchiran);
     }
 
@@ -281,23 +221,23 @@ public class DvKogakuServiceJuryoIninDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnShuseiSeitaiIchiran() {
+    public Button getBtnShuseiSeitaiIchiran() {
         return this.getDvHaraiKetteiShusei().getBtnShuseiSeitaiIchiran();
     }
 
     @JsonIgnore
-    public void setBtnShuseiSeitaiIchiran(ButtonDialog btnShuseiSeitaiIchiran) {
+    public void setBtnShuseiSeitaiIchiran(Button btnShuseiSeitaiIchiran) {
         this.getDvHaraiKetteiShusei().setBtnShuseiSeitaiIchiran(btnShuseiSeitaiIchiran);
     }
 
     @JsonIgnore
-    public TextBox getRirekiNo() {
-        return this.getDvHaraiKetteiShusei().getRirekiNo();
+    public TextBox getTxtRirekiNo() {
+        return this.getDvHaraiKetteiShusei().getTxtRirekiNo();
     }
 
     @JsonIgnore
-    public void setRirekiNo(TextBox rirekiNo) {
-        this.getDvHaraiKetteiShusei().setRirekiNo(rirekiNo);
+    public void setTxtRirekiNo(TextBox txtRirekiNo) {
+        this.getDvHaraiKetteiShusei().setTxtRirekiNo(txtRirekiNo);
     }
 
     @JsonIgnore

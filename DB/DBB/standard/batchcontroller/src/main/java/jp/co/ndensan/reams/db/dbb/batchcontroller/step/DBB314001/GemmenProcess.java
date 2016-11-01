@@ -54,8 +54,7 @@ public class GemmenProcess extends BatchProcessBase<GemmenEntity> {
             + "gemmen.IGemmenMapper.getData");
     private static final RString 賦課の情報一時_TABLE_NAME = new RString("DbT2002FukaJohoTemp");
     private static final RString 出力ファイル名 = new RString("GENMENKEKKA.csv");
-    //TODO QA#1590
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200001"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB300021"));
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final int INDEX_ONE = 1;

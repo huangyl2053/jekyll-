@@ -51,4 +51,9 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoEntity {
     private RString 支給総件数;
     private RString 本人支給額合計;
     private RString 支給額給額合計;
+    private RString 町域コード;
+    private RString 行政区コード;
+    private RString 氏名５０音カナ;
+    private RString 証記載保険者番号;
+    private RString 資格状態区分;
 }

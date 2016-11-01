@@ -1,27 +1,28 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import java.util.Objects;
+import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 事業高額合算支給不支給決定テーブルのエンティティクラスです。
  */
 public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableEntityBase<DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3174JigyoKogakuGassanShikyuFushikyuKettei");
 
@@ -68,10 +69,11 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
     private FlexibleYearMonth uketoriYM;
     private long kozaid;
     private RString dataSakuseiKubun;
+    private RString ketteiTsuchiRealHakkoFlag;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -80,7 +82,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -89,7 +91,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -98,17 +100,16 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -117,7 +118,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -126,7 +127,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
@@ -135,7 +136,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 対象年度のgetメソッドです。
-     * 
+     *
      * @return 対象年度
      */
     public FlexibleYear getTaishoNendo() {
@@ -144,7 +145,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 対象年度のsetメソッドです。
-     * 
+     *
      * @param taishoNendo 対象年度
      */
     public void setTaishoNendo(@Nonnull FlexibleYear taishoNendo) {
@@ -153,7 +154,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 保険者番号のgetメソッドです。
-     * 
+     *
      * @return 保険者番号
      */
     public HokenshaNo getHokenshaNo() {
@@ -162,7 +163,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 保険者番号のsetメソッドです。
-     * 
+     *
      * @param hokenshaNo 保険者番号
      */
     public void setHokenshaNo(@Nonnull HokenshaNo hokenshaNo) {
@@ -173,7 +174,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
      * 支給申請書整理番号のgetメソッドです。
      * <br/>
      * <br/>IF上は「連絡票整理番号」
-     * 
+     *
      * @return 支給申請書整理番号
      */
     public RString getShikyuSeiriNo() {
@@ -184,7 +185,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
      * 支給申請書整理番号のsetメソッドです。
      * <br/>
      * <br/>IF上は「連絡票整理番号」
-     * 
+     *
      * @param shikyuSeiriNo 支給申請書整理番号
      */
     public void setShikyuSeiriNo(@Nonnull RString shikyuSeiriNo) {
@@ -193,7 +194,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -202,7 +203,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(@Nonnull int rirekiNo) {
@@ -211,7 +212,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 自己負担額証明書整理番号のgetメソッドです。
-     * 
+     *
      * @return 自己負担額証明書整理番号
      */
     @CheckForNull
@@ -221,7 +222,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 自己負担額証明書整理番号のsetメソッドです。
-     * 
+     *
      * @param jikoFutanSeiriNo 自己負担額証明書整理番号
      */
     public void setJikoFutanSeiriNo(RString jikoFutanSeiriNo) {
@@ -230,7 +231,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 保険制度コードのgetメソッドです。
-     * 
+     *
      * @return 保険制度コード
      */
     @CheckForNull
@@ -240,7 +241,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 保険制度コードのsetメソッドです。
-     * 
+     *
      * @param hokenSeidoCode 保険制度コード
      */
     public void setHokenSeidoCode(RString hokenSeidoCode) {
@@ -249,7 +250,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 国保 被保険者証記号のgetメソッドです。
-     * 
+     *
      * @return 国保 被保険者証記号
      */
     @CheckForNull
@@ -259,7 +260,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 国保 被保険者証記号のsetメソッドです。
-     * 
+     *
      * @param kokuho_HihokenshaShoKigo 国保 被保険者証記号
      */
     public void setKokuho_HihokenshaShoKigo(RString kokuho_HihokenshaShoKigo) {
@@ -268,7 +269,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 対象計算期間開始年月日のgetメソッドです。
-     * 
+     *
      * @return 対象計算期間開始年月日
      */
     @CheckForNull
@@ -278,7 +279,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 対象計算期間開始年月日のsetメソッドです。
-     * 
+     *
      * @param keisanKaishiYMD 対象計算期間開始年月日
      */
     public void setKeisanKaishiYMD(FlexibleDate keisanKaishiYMD) {
@@ -287,7 +288,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 対象計算期間終了年月日のgetメソッドです。
-     * 
+     *
      * @return 対象計算期間終了年月日
      */
     @CheckForNull
@@ -297,7 +298,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 対象計算期間終了年月日のsetメソッドです。
-     * 
+     *
      * @param keisanShuryoYMD 対象計算期間終了年月日
      */
     public void setKeisanShuryoYMD(FlexibleDate keisanShuryoYMD) {
@@ -306,7 +307,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 申請年月日のgetメソッドです。
-     * 
+     *
      * @return 申請年月日
      */
     @CheckForNull
@@ -316,7 +317,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 申請年月日のsetメソッドです。
-     * 
+     *
      * @param shinseiYMD 申請年月日
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -325,7 +326,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 決定年月日のgetメソッドです。
-     * 
+     *
      * @return 決定年月日
      */
     @CheckForNull
@@ -335,7 +336,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 決定年月日のsetメソッドです。
-     * 
+     *
      * @param ketteiYMD 決定年月日
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -344,7 +345,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 自己負担総額のgetメソッドです。
-     * 
+     *
      * @return 自己負担総額
      */
     @CheckForNull
@@ -354,7 +355,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 自己負担総額のsetメソッドです。
-     * 
+     *
      * @param jikoFutanSogaku 自己負担総額
      */
     public void setJikoFutanSogaku(Decimal jikoFutanSogaku) {
@@ -363,7 +364,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支給区分コードのgetメソッドです。
-     * 
+     *
      * @return 支給区分コード
      */
     @CheckForNull
@@ -373,7 +374,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支給区分コードのsetメソッドです。
-     * 
+     *
      * @param shikyuKubunCode 支給区分コード
      */
     public void setShikyuKubunCode(RString shikyuKubunCode) {
@@ -382,7 +383,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支給額のgetメソッドです。
-     * 
+     *
      * @return 支給額
      */
     @CheckForNull
@@ -392,7 +393,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支給額のsetメソッドです。
-     * 
+     *
      * @param shikyugaku 支給額
      */
     public void setShikyugaku(Decimal shikyugaku) {
@@ -401,7 +402,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 給付の種類のgetメソッドです。
-     * 
+     *
      * @return 給付の種類
      */
     @CheckForNull
@@ -411,7 +412,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 給付の種類のsetメソッドです。
-     * 
+     *
      * @param kyufuShurui 給付の種類
      */
     public void setKyufuShurui(RString kyufuShurui) {
@@ -420,7 +421,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 不支給理由のgetメソッドです。
-     * 
+     *
      * @return 不支給理由
      */
     @CheckForNull
@@ -430,7 +431,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 不支給理由のsetメソッドです。
-     * 
+     *
      * @param fushikyuRiyu 不支給理由
      */
     public void setFushikyuRiyu(RString fushikyuRiyu) {
@@ -439,7 +440,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 備考のgetメソッドです。
-     * 
+     *
      * @return 備考
      */
     @CheckForNull
@@ -449,7 +450,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 備考のsetメソッドです。
-     * 
+     *
      * @param biko 備考
      */
     public void setBiko(RString biko) {
@@ -458,7 +459,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支払方法区分のgetメソッドです。
-     * 
+     *
      * @return 支払方法区分
      */
     @CheckForNull
@@ -468,7 +469,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支払方法区分のsetメソッドです。
-     * 
+     *
      * @param shiharaiHohoKubun 支払方法区分
      */
     public void setShiharaiHohoKubun(RString shiharaiHohoKubun) {
@@ -477,7 +478,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支払場所のgetメソッドです。
-     * 
+     *
      * @return 支払場所
      */
     @CheckForNull
@@ -487,7 +488,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支払場所のsetメソッドです。
-     * 
+     *
      * @param shiharaiBasho 支払場所
      */
     public void setShiharaiBasho(RString shiharaiBasho) {
@@ -496,7 +497,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支払期間開始年月日のgetメソッドです。
-     * 
+     *
      * @return 支払期間開始年月日
      */
     @CheckForNull
@@ -506,7 +507,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支払期間開始年月日のsetメソッドです。
-     * 
+     *
      * @param shiharaiKaishiYMD 支払期間開始年月日
      */
     public void setShiharaiKaishiYMD(FlexibleDate shiharaiKaishiYMD) {
@@ -515,7 +516,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支払期間終了年月日のgetメソッドです。
-     * 
+     *
      * @return 支払期間終了年月日
      */
     @CheckForNull
@@ -525,7 +526,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支払期間終了年月日のsetメソッドです。
-     * 
+     *
      * @param shiharaiShuryoYMD 支払期間終了年月日
      */
     public void setShiharaiShuryoYMD(FlexibleDate shiharaiShuryoYMD) {
@@ -534,7 +535,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 閉庁内容のgetメソッドです。
-     * 
+     *
      * @return 閉庁内容
      */
     @CheckForNull
@@ -544,7 +545,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 閉庁内容のsetメソッドです。
-     * 
+     *
      * @param heichoNaiyo 閉庁内容
      */
     public void setHeichoNaiyo(RString heichoNaiyo) {
@@ -553,7 +554,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支払期間開始時間のgetメソッドです。
-     * 
+     *
      * @return 支払期間開始時間
      */
     @CheckForNull
@@ -563,7 +564,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支払期間開始時間のsetメソッドです。
-     * 
+     *
      * @param shiharaiKaishiTime 支払期間開始時間
      */
     public void setShiharaiKaishiTime(RString shiharaiKaishiTime) {
@@ -572,7 +573,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支払期間終了時間のgetメソッドです。
-     * 
+     *
      * @return 支払期間終了時間
      */
     @CheckForNull
@@ -582,7 +583,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 支払期間終了時間のsetメソッドです。
-     * 
+     *
      * @param shiharaiShuryoTime 支払期間終了時間
      */
     public void setShiharaiShuryoTime(RString shiharaiShuryoTime) {
@@ -591,7 +592,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 決定通知書作成年月日のgetメソッドです。
-     * 
+     *
      * @return 決定通知書作成年月日
      */
     @CheckForNull
@@ -601,7 +602,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 決定通知書作成年月日のsetメソッドです。
-     * 
+     *
      * @param ketteiTsuchiSakuseiYMD 決定通知書作成年月日
      */
     public void setKetteiTsuchiSakuseiYMD(FlexibleDate ketteiTsuchiSakuseiYMD) {
@@ -610,7 +611,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 振込通知書作成年月日のgetメソッドです。
-     * 
+     *
      * @return 振込通知書作成年月日
      */
     @CheckForNull
@@ -620,7 +621,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 振込通知書作成年月日のsetメソッドです。
-     * 
+     *
      * @param furikomiTsuchiSakuseiYMD 振込通知書作成年月日
      */
     public void setFurikomiTsuchiSakuseiYMD(FlexibleDate furikomiTsuchiSakuseiYMD) {
@@ -629,7 +630,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 受取年月のgetメソッドです。
-     * 
+     *
      * @return 受取年月
      */
     @CheckForNull
@@ -639,7 +640,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 受取年月のsetメソッドです。
-     * 
+     *
      * @param uketoriYM 受取年月
      */
     public void setUketoriYM(FlexibleYearMonth uketoriYM) {
@@ -648,7 +649,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 口座IDのgetメソッドです。
-     * 
+     *
      * @return 口座ID
      */
     @CheckForNull
@@ -658,7 +659,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * 口座IDのsetメソッドです。
-     * 
+     *
      * @param kozaid 口座ID
      */
     public void setKozaid(long kozaid) {
@@ -667,7 +668,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * データ作成区分のgetメソッドです。
-     * 
+     *
      * @return データ作成区分
      */
     @CheckForNull
@@ -677,7 +678,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * データ作成区分のsetメソッドです。
-     * 
+     *
      * @param dataSakuseiKubun データ作成区分
      */
     public void setDataSakuseiKubun(RString dataSakuseiKubun) {
@@ -685,10 +686,29 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
     }
 
     /**
+     * 決定通知リアル発行フラグのgetメソッドです。
+     *
+     * @return 決定通知リアル発行フラグ
+     */
+    @CheckForNull
+    public RString getKetteiTsuchiRealHakkoFlag() {
+        return ketteiTsuchiRealHakkoFlag;
+    }
+
+    /**
+     * 決定通知リアル発行フラグのsetメソッドです。
+     *
+     * @param ketteiTsuchiRealHakkoFlag 決定通知リアル発行フラグ
+     */
+    public void setKetteiTsuchiRealHakkoFlag(RString ketteiTsuchiRealHakkoFlag) {
+        this.ketteiTsuchiRealHakkoFlag = ketteiTsuchiRealHakkoFlag;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -753,6 +773,7 @@ public class DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity extends DbTableE
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

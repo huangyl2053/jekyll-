@@ -151,7 +151,7 @@ public class TempKyufujissekiTyukannEntity extends DbTableEntityBase<TempKyufuji
     private RString shotokuHantei_honninKazeiKubun;
     private RString shotokuHantei_setaiKazeiKubun;
     private FlexibleYear shotokuHantei_tsuzukigaraCodeNen;
-    private boolean kogakuServicehiJogengakuGengakuGaitoFlag;
+    private RString kogakuServicehiJogengakuGengakuGaitoFlag;
     private Decimal kogakuServicehiJogengakuGengakugoJogengaku;
 
     private ServiceShuruiCode serviceSyuruiCode;

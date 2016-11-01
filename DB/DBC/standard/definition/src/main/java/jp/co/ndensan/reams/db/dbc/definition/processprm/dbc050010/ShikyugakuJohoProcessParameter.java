@@ -21,8 +21,21 @@ import lombok.Setter;
 @Setter
 public class ShikyugakuJohoProcessParameter implements IBatchProcessParameter {
 
-    private long 出力順ID;
+    private Long 出力順ID;
     private Furikomi_ShoriKubun 処理区分;
     private Furikomi_ShihraiHohoShitei 支払方法;
+
+    /**
+     * コンストラクタ
+     *
+     * @param 出力順ID 出力順ID
+     * @param 処理区分 処理区分
+     * @param 支払方法 支払方法
+     */
+    public ShikyugakuJohoProcessParameter(Long 出力順ID, Furikomi_ShoriKubun 処理区分, Furikomi_ShihraiHohoShitei 支払方法) {
+        this.出力順ID = 出力順ID;
+        this.処理区分 = 処理区分;
+        this.支払方法 = 支払方法;
+    }
 
 }

@@ -13,7 +13,7 @@ import lombok.Setter;
 /**
  * 介護給付費過誤申立書作成のデータレコードです。
  *
- * @reamsid_L DBC-2660-030 gongliang
+ * @reamsid_L DBC-2530-030 jiangwenkai
  */
 @Getter
 @Setter

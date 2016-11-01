@@ -22,7 +22,9 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShakaiFukushiHojinRiyoshaFutanKeigenEntity {
 
+    private RString 社福法人軽減_証記載保険者番号;
     private HihokenshaNo 社福法人軽減_被保険者番号;
+    private int 社福法人軽減_履歴番号;
     private FlexibleDate 社福法人軽減_申請年月日;
     private FlexibleDate 社福法人軽減_決定年月日;
     private FlexibleDate 社福法人軽減_適用開始年月日;

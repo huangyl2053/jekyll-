@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB022001.DBB022001_FukaDa
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0220001.HanyoListFukaDaichoParamDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220001.HanyoListFukaDaichoParamHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220001.HanyoListFukaDaichoParamValidationHandler;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -27,6 +28,29 @@ public class HanyoListFukaDaichoParam {
      */
     public ResponseData<HanyoListFukaDaichoParamDiv> onLoad(HanyoListFukaDaichoParamDiv div) {
         getHandler(div).onLoad();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 条件を保存するボタンのメソッドです。
+     *
+     * @param div HanyoListFukaDaichoParamDiv
+     * @return ResponseData
+     */
+    public ResponseData<BatchParameterMap> onClick_btnBatchParameterSave(HanyoListFukaDaichoParamDiv div) {
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        responseData.data = new BatchParameterMap(getHandler(div).onClick_btnExecute());
+        return responseData;
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     *
+     * @param div HanyoListFukaDaichoParamDiv
+     * @return ResponseData
+     */
+    public ResponseData<HanyoListFukaDaichoParamDiv> onClick_btnBatchParameterRestore(HanyoListFukaDaichoParamDiv div) {
+        getHandler(div).pamaRestore();
         return ResponseData.of(div).respond();
     }
 

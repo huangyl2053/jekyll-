@@ -5,13 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho;
 
-import java.util.List;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,11 +21,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class InsertKetteiTsuchishoInfoTempMybatisParameter extends KozaSearchParameter implements IMyBatisParameter {
+public class InsertKetteiTsuchishoInfoTempMybatisParameter implements IMyBatisParameter {
 
     private RString 抽出モード;
-    private RDate 抽出条件日付From;
-    private RDate 抽出条件日付To;
+    private FlexibleDate 抽出条件日付From;
+    private FlexibleDate 抽出条件日付To;
     private FlexibleYearMonth 決定者受付年月;
     private RString 印書;
     private RString 高額自動償還;
@@ -38,23 +34,18 @@ public class InsertKetteiTsuchishoInfoTempMybatisParameter extends KozaSearchPar
      * コンストラクタです。
      *
      * @param 抽出モード RString
-     * @param 抽出条件日付From RDate
-     * @param 抽出条件日付To RDate
+     * @param 抽出条件日付From FlexibleDate
+     * @param 抽出条件日付To FlexibleDate
      * @param 決定者受付年月 FlexibleYearMonth
      * @param 印書 RString
      * @param 高額自動償還 RString
-     * @param key 口座検索用の検索キークラス
-     * @param list 科目コードリスト
      */
     public InsertKetteiTsuchishoInfoTempMybatisParameter(RString 抽出モード,
-            RDate 抽出条件日付From,
-            RDate 抽出条件日付To,
+            FlexibleDate 抽出条件日付From,
+            FlexibleDate 抽出条件日付To,
             FlexibleYearMonth 決定者受付年月,
             RString 印書,
-            RString 高額自動償還,
-            IKozaSearchKey key,
-            List<KamokuCode> list) {
-        super(key, list);
+            RString 高額自動償還) {
         this.抽出モード = 抽出モード;
         this.抽出条件日付From = 抽出条件日付From;
         this.抽出条件日付To = 抽出条件日付To;

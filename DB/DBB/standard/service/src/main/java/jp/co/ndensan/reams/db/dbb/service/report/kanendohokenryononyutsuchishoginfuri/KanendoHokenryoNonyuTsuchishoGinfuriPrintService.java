@@ -169,6 +169,50 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriPrintService {
         }
     }
 
+    /**
+     * 帳票を出力します。
+     *
+     * @param 本算定納入通知書情報List List<HonSanteiNonyuTsuchiShoJoho>
+     * @param reportManager 帳票発行処理の制御機能
+     */
+    public void print全てページDBB100069_修正(List<HonSanteiNonyuTsuchiShoJoho> 本算定納入通知書情報List, ReportManager reportManager) {
+        KanendoHokenryoNonyuTsuchishoGinfuriFourKiProperty property = new KanendoHokenryoNonyuTsuchishoGinfuriFourKiProperty();
+        try (ReportAssembler<KanendoHokenryoNonyuTsuchishoGinfuriFourKiSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KanendoHokenryoNonyuTsuchishoGinfuriFourKiSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+            for (HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 : 本算定納入通知書情報List) {
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
+                        new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+                KanendoHokenryoNonyuTsuchishoGinfuriFourKiReport report
+                        = new KanendoHokenryoNonyuTsuchishoGinfuriFourKiReport(本算定納入通知書情報, ninshoshaSource);
+                report.writeBy(reportSourceWriter);
+            }
+        }
+    }
+
+    /**
+     * 帳票を出力します。
+     *
+     * @param 本算定納入通知書情報List List<HonSanteiNonyuTsuchiShoJoho>
+     * @param reportManager 帳票発行処理の制御機能
+     */
+    public void print全てページDBB100070_修正(List<HonSanteiNonyuTsuchiShoJoho> 本算定納入通知書情報List, ReportManager reportManager) {
+        KanendoHokenryoNonyuTsuchishoGinfuriFiveKiProperty property = new KanendoHokenryoNonyuTsuchishoGinfuriFiveKiProperty();
+        try (ReportAssembler<KanendoHokenryoNonyuTsuchishoGinfuriFiveKiSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KanendoHokenryoNonyuTsuchishoGinfuriFiveKiSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+            for (HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 : 本算定納入通知書情報List) {
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
+                        new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+                KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport report
+                        = new KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport(本算定納入通知書情報, ninshoshaSource);
+                report.writeBy(reportSourceWriter);
+            }
+        }
+    }
+
     private SourceDataCollection print全てページDBB100070(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報) {
         KanendoHokenryoNonyuTsuchishoGinfuriFiveKiProperty property = new KanendoHokenryoNonyuTsuchishoGinfuriFiveKiProperty();
         try (ReportManager reportManager = new ReportManager()) {

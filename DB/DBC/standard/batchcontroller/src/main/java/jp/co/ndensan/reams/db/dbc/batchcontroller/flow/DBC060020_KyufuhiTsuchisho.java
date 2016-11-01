@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020.KyufuhiTsuchishoInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020.KyufuhiTsuchishoKouikiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020.KyufuhiTsuchishoReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC060020.KyufuhiTsuchishoReportDBC100041Process;
@@ -24,12 +23,16 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -44,15 +47,19 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
     private static final String CSVファイル取込 = "readCsvFile";
     private static final String 処理結果リスト作成 = "doShoriKekkaListSakusei";
     private static final String 取込済ファイル削除 = "deleteReveicedFile";
-    private static final String 介護給付費福祉用具貸与品目一時TBL作成 = "doShoriKekkaListSakusei";
     private static final String 介護保険給付費通知書作成 = "dbc100041";
     private static final String 被保険者番号変換単一 = "hiHokenshaNoHenkan";
     private static final String 被保険者番号変換広域 = "hiHokenshaNoKouiki";
     private static final String 介護保険給付費通知書_ｼｰﾗﾀｲﾌﾟ = "dbc100042";
     private static final String 介護保険給付費通知書_福祉用具貸与品目 = "dbc100043";
     private static final String 給付費通知発行一覧表 = "dbc200044";
+    private static final RString 帳票制御汎用キー_帳票タイプ = new RString("帳票タイプ");
+    private static final RString 帳票タイプ_A4 = new RString("1");
+    private static final RString 帳票タイプ_シーラ = new RString("2");
+    private static final RString 給付費通知情報が取り込む = new RString("1");
 
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
+    private boolean flag = true;
     private RString csvFullPath;
     private boolean isFirst;
     private boolean isLast;
@@ -73,21 +80,40 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
             isFirst = (0 == i);
             isLast = ((returnEntity.getFileNameList().size() - 1) == i);
             executeStep(CSVファイル取込);
-        }
-        if (!getResult(Boolean.class, new RString(CSVファイル取込), KyufuhiTsuchishoReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY)) {
-            executeStep(処理結果リスト作成);
-        } else {
-            if (new RString("1").equals(DbBusinessConfig
-                    .get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
-                保険者構成();
+            if (flag) {
+                flag = getResult(Boolean.class, new RString(CSVファイル取込),
+                        KyufuhiTsuchishoReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
+            } else {
+                executeStep(処理結果リスト作成);
+                executeStep(取込済ファイル削除);
             }
-            executeStep(処理結果リスト作成);
-            executeStep(介護給付費福祉用具貸与品目一時TBL作成);
+        }
+        RDate now = RDate.getNowDate();
+        if (new RString("1").equals(DbBusinessConfig
+                .get(ConfigNameDBU.合併情報管理_合併情報区分, now, SubGyomuCode.DBU介護統計報告))) {
+            保険者構成();
+        }
+
+        ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
+        RString 帳票タイプ = RString.EMPTY;
+        ChohyoSeigyoHanyo 帳票制御汎帳票タイプ = 帳票制御汎用Manager.get帳票制御汎用(
+                SubGyomuCode.DBC介護給付,
+                ReportIdDBC.DBC100042.getReportId(),
+                FlexibleYear.MIN,
+                帳票制御汎用キー_帳票タイプ);
+        if (帳票制御汎帳票タイプ != null) {
+            帳票タイプ = 帳票制御汎帳票タイプ.get設定値();
+        }
+        if (帳票タイプ_A4.equals(帳票タイプ)) {
             executeStep(介護保険給付費通知書作成);
         }
-        if (null != returnEntity) {
-            executeStep(取込済ファイル削除);
+        if (帳票タイプ_シーラ.equals(帳票タイプ)) {
+            executeStep(介護保険給付費通知書_ｼｰﾗﾀｲﾌﾟ);
         }
+        if (給付費通知情報が取り込む.equals(getParameter().get福祉用具貸与ページ出力区分())) {
+            executeStep(介護保険給付費通知書_福祉用具貸与品目);
+        }
+        executeStep(給付費通知発行一覧表);
     }
 
     private void 保険者構成() {
@@ -114,7 +140,7 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
     /**
      * CSVファイル取込です。
      *
-     * @return KyufuhiTsuchishoReadCsvFileProcess
+     * @return KyufukanrihyoReadCsvFileProcess
      */
     @Step(CSVファイル取込)
     protected IBatchFlowCommand callReadCsvFileProcess() {
@@ -165,21 +191,11 @@ public class DBC060020_KyufuhiTsuchisho extends BatchFlowBase<DBC060020_KyufuhiT
     /**
      * 被保険者番号変換です。
      *
-     * @return KyufuhiTsuchishoTanitsuProcess
+     * @return KyufuhiTsuchishoKouikiProcess
      */
     @Step(被保険者番号変換広域)
     protected IBatchFlowCommand call広域Process() {
         return loopBatch(KyufuhiTsuchishoKouikiProcess.class).define();
-    }
-
-    /**
-     * 介護給付費福祉用具貸与品目一時TBL作成です。
-     *
-     * @return KyufuhiTsuchishoInsertProcess
-     */
-    @Step(介護給付費福祉用具貸与品目一時TBL作成)
-    protected IBatchFlowCommand 一時TBLProcess() {
-        return loopBatch(KyufuhiTsuchishoInsertProcess.class).define();
     }
 
     /**

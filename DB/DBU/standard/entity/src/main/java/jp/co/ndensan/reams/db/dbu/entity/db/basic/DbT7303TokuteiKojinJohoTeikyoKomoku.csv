@@ -1,0 +1,6 @@
+﻿tokuteiKojinJohoMeiCode,varchar,RString,,,,,特定個人情報名コード,A
+dataSetNo,varchar,RString,,,,,データセット番号,A
+hanNo,varchar,RString,,,,,版番号,A
+tokuteiKojinJohoKomokuCode,varchar,RString,,,,,特定個人情報項目コード,A
+tokuteiKojinJohoKomokuKubun,varchar,RString,,,,,特定個人情報項目区分,A
+teikyoNaiyoKomokuNo,varchar,RString,,,,,提供内容項目番号,A

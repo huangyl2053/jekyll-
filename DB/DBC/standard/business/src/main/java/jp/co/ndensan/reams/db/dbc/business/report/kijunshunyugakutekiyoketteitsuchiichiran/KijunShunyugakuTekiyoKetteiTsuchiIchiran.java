@@ -40,8 +40,8 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiran {
     private RString 改頁３;
     private RString 改頁４;
     private RString 改頁５;
-    private int 通番;
-    private SetaiCode 世帯コード;
+    private RString 通番;
+    private SetaiCode 出力世帯コード;
     private FlexibleYear 年度;
     private HihokenshaNo 被保険者番号;
     private AtenaMeisho 氏名;
@@ -51,4 +51,10 @@ public class KijunShunyugakuTekiyoKetteiTsuchiIchiran {
     private FlexibleYearMonth 適用開始年月;
     private Decimal 算定基準額;
     private RString 備考;
+    private RString 郵便番号;
+    private RString 町域コード;
+    private RString 行政区コード;
+    private SetaiCode 世帯コード;
+    private RString 市町村コード;
+    private RString 出力順情報;
 }

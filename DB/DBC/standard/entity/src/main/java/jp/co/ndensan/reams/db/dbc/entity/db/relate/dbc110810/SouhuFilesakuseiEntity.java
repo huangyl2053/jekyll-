@@ -95,5 +95,22 @@ public class SouhuFilesakuseiEntity {
     private RString 軽減率適用開始年月日;
     private RString 軽減率適用終了年月日;
     private boolean 小規模多機能型居宅介護;
+    private RString 保険者番号後期;
+    private RString 被保険者番号後期;
+    private RString 保険者番号国保;
+    private RString 被保険者番号国保;
+    private RString 個人番号国保;
+    private RString 二次予防事業区分コード;
+    private RString 二次予防事業開始年月日;
+    private RString 二次予防事業終了年月日;
+    private RString 住所地特例対象者区分コード;
+    private RString 施設所在保険者番号;
+    private RString 住所地特例適用開始日;
+    private RString 住所地特例適用終了日;
+    private RString 居宅費新1負担限度額;
+    private RString 居宅費新2負担限度額;
+    private RString 居宅費新3負担限度額;
+    private RString 二割負担適用開始年月日;
+    private RString 二割負担適用終了年月日;
 
 }

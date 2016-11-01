@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000022;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.FutanWariaiSokujiKouseiHolder;
 import jp.co.ndensan.reams.db.dbc.business.core.futanwariai.FutanWariaiSokujiKouseiResult;
@@ -22,6 +24,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000022.dgFu
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariai.RiyoshaFutanWariaiSokujiKouseiFinder;
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariai.RiyoshaFutanWariaiSokujiKouseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.futanwariaisho.FutanWariaisho;
+import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariai;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiKonkyo;
@@ -76,6 +79,8 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     private final RiyoshaFutanWariaiSokujiKouseiFinder finder;
 
     private static final int INT_2 = 2;
+    private static final int INT_1 = 1;
+    private static final int INDEX_ZERO = 0;
     private static final RString RSTZERO = new RString("0");
     private static final RString RSTONE = new RString("1");
     private static final RString RSTTWO = new RString("2");
@@ -191,6 +196,9 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
                     年度.wareki().toDateString()));
         } else {
             List<RiyoshaFutanWariai> 利用者負担割合list = manager.select年度By被保険者番号(資格対象者.get被保険者番号());
+            if (null == 利用者負担割合list || 利用者負担割合list.isEmpty()) {
+                throw new ApplicationException(DbcErrorMessages.該当年度負担割合情報なし.getMessage());
+            }
             for (RiyoshaFutanWariai result : 利用者負担割合list) {
                 if (!dataSourceList.contains(new KeyValueDataSource(new RString(result.get年度().getYearValue()),
                         result.get年度().wareki().toDateString()))) {
@@ -205,6 +213,9 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             List<RiyoshaFutanWariaiMeisai> 履歴番号list = manager.select履歴番号BY年度と被保険者番号(
                     new FlexibleYear(div.getDdlNendo().getSelectedKey()),
                     資格対象者.get被保険者番号());
+            if (null == 履歴番号list || 履歴番号list.isEmpty()) {
+                throw new ApplicationException(DbcErrorMessages.該当年度負担割合情報なし.getMessage());
+            }
             div.getDdlRirekiNo().setDataSource(get履歴番号list(履歴番号list));
             div.getDdlRirekiNo().setSelectedIndex(0);
         }
@@ -497,7 +508,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
         if (rowIndex == div.getDgFutanWariai().getDataSource().size() - 1) {
             rowsData.add(newRowData);
         } else {
-            rowsData.add(rowIndex, newRowData);
+            rowsData.add(rowIndex + 1, newRowData);
         }
         div.getDgFutanWariai().setDataSource(rowsData);
     }
@@ -592,15 +603,52 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
      * @return SourceDataCollection
      */
     public SourceDataCollection onClick_btnPrint(TaishoshaKey 資格対象者, List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細) {
+
         FutanWariaisho futanWariaisho = FutanWariaisho.createInstance();
         FutanWariaiShoDivParameter parameter = new FutanWariaiShoDivParameter();
+        parameter.set交付年月日(new FlexibleDate(div.getPanelHosokuItem().getTxtKofubi().getValue().toDateString()));
         parameter.setカナ氏名(div.getCcdKaigoAtenaInfo().get氏名カナ());
         parameter.set住所(div.getCcdKaigoAtenaInfo().get住所().getColumnValue());
         parameter.set氏名(div.getCcdKaigoAtenaInfo().get氏名漢字());
         parameter.set生年月日(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeinengappiYMD().getValue());
         parameter.set性別(div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getShokaiData().getTxtSeibetsu().getValue());
-        parameter.set利用者負担割合明細(利用者負担割合明細);
-        return futanWariaisho.getSourceDataSinger(資格対象者.get識別コード(), 資格対象者.get被保険者番号(), parameter, RSTONE);
+        parameter.set呼出し元画面区分(RSTONE);
+        RiyoshaFutanWariaiHantei source = new RiyoshaFutanWariaiHantei();
+        List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細後list = source.riyoshaFutanWariaiMeisaiMergeGamen(利用者負担割合明細);
+        編集昇順List(利用者負担割合明細後list);
+        int size = 利用者負担割合明細後list.size();
+        if (INT_1 == size) {
+            parameter.set負担割合1(fetch負担割合(利用者負担割合明細後list, INDEX_ZERO));
+            parameter.set適用期間開始日1(利用者負担割合明細後list.get(INDEX_ZERO).get有効開始日());
+            parameter.set適用期間終了日1(利用者負担割合明細後list.get(INDEX_ZERO).get有効終了日());
+            parameter.set負担割合2(RString.EMPTY);
+            parameter.set適用期間開始日2(FlexibleDate.EMPTY);
+            parameter.set適用期間終了日2(FlexibleDate.EMPTY);
+        } else if (INT_2 <= size) {
+            parameter.set負担割合1(fetch負担割合(利用者負担割合明細後list, size - INT_2));
+            parameter.set適用期間開始日1(利用者負担割合明細後list.get(size - INT_2).get有効開始日());
+            parameter.set適用期間終了日1(利用者負担割合明細後list.get(size - INT_2).get有効終了日());
+            parameter.set負担割合2(fetch負担割合(利用者負担割合明細後list, size - INT_1));
+            parameter.set適用期間開始日2(利用者負担割合明細後list.get(size - INT_1).get有効開始日());
+            parameter.set適用期間終了日2(利用者負担割合明細後list.get(size - INT_1).get有効終了日());
+        }
+        return futanWariaisho.getSourceDataSinger(資格対象者.get識別コード(), 資格対象者.get被保険者番号(), parameter);
+    }
+
+    private void 編集昇順List(List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細後list) {
+        Collections.sort(利用者負担割合明細後list, new Comparator<RiyoshaFutanWariaiMeisai>() {
+            @Override
+            public int compare(RiyoshaFutanWariaiMeisai i1, RiyoshaFutanWariaiMeisai i2) {
+                if (i1.get有効開始日().isBefore(i2.get有効開始日())) {
+                    return -1;
+                }
+                return 1;
+            }
+        });
+    }
+
+    private RString fetch負担割合(List<RiyoshaFutanWariaiMeisai> 利用者負担割合明細後list, int index) {
+        return FutanwariaiKubun.toValue(利用者負担割合明細後list.get(index).get負担割合区分()).get名称();
     }
 
     /**
@@ -831,13 +879,13 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
             set証発行不要(利用者負担割合.is発行不要フラグ());
             div.getDdlHakkoKubun().setSelectedKey(利用者負担割合.get発行区分());
             FlexibleDate 発行日 = 利用者負担割合.get発行日();
-            if (発行日 != null) {
+            if (発行日 != null && !発行日.isEmpty()) {
                 div.getTxtHakkobi().setValue(new RDate(発行日.toString()));
             } else {
                 div.getTxtHakkobi().setValue(RDate.getNowDate());
             }
             FlexibleDate 交付日 = 利用者負担割合.get交付日();
-            if (交付日 != null) {
+            if (交付日 != null && !交付日.isEmpty()) {
                 div.getTxtKofubi().setValue(new RDate(交付日.toString()));
             } else {
                 div.getTxtKofubi().setValue(RDate.getNowDate());

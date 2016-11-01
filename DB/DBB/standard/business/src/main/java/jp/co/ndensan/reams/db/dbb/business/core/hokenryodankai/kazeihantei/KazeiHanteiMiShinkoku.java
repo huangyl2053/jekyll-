@@ -29,7 +29,8 @@ public class KazeiHanteiMiShinkoku implements IKazeiHantei {
 
     @Override
     public void hokenryoDankaiShiyoShinai(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
-        if (hokenryoDankaiHanteiParameter.getSeigyoJoho().getMishinkokuKazeiKubun() != null) {
+        if (hokenryoDankaiHanteiParameter.getSeigyoJoho().getMishinkokuKazeiKubun() != null
+                && hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList().contains(KazeiKubun.未申告)) {
             List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
             setaiinKazeiKubunList.add(hokenryoDankaiHanteiParameter.getSeigyoJoho().getShotokuChosachuKazeiKubun());
             hokenryoDankaiHanteiParameter.getFukaKonkyo().setSetaiinKazeiKubunList(setaiinKazeiKubunList);

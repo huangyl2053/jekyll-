@@ -11,26 +11,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum OCRShutsuryokuHoho {
 
     /**
-     * コード:0 名称:印字しない 略称:「口座振替」ならOCR欄を印字しない
+     * コード:0 名称:「口座振替」ならOCR欄を印字しない 略称:定義なし
      */
-    _口座振替_ならOCR欄を印字しない("0", "印字しない", "「口座振替」ならOCR欄を印字しない"),
+    印字しない("0", "「口座振替」ならOCR欄を印字しない"),
     /**
-     * コード:1 名称:マスクでつぶす 略称:「口座振替」ならOCR欄を「＊」でつぶす
+     * コード:1 名称:「口座振替」ならOCR欄を「＊」でつぶす 略称:定義なし
      */
-    _口座振替_ならOCR欄を_星印_でつぶす("1", "マスクでつぶす", "「口座振替」ならOCR欄を「＊」でつぶす"),
+    マスクでつぶす("1", "「口座振替」ならOCR欄を「＊」でつぶす"),
     /**
-     * コード:2 名称:印字する 略称:「口座振替」ならOCR欄を印字する
+     * コード:2 名称:「口座振替」ならOCR欄を印字する 略称:定義なし
      */
-    _口座振替_ならOCR欄を印字する("2", "印字する", "「口座振替」ならOCR欄を印字する");
+    印字する("2", "「口座振替」ならOCR欄を印字する");
 
     private final RString code;
     private final RString fullName;
-    private final RString shortName;
 
-    private OCRShutsuryokuHoho(String code, String fullname, String shortName) {
+    private OCRShutsuryokuHoho(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
-        this.shortName = new RString(shortName);
     }
 
     /**
@@ -49,15 +47,6 @@ public enum OCRShutsuryokuHoho {
      */
     public RString get名称() {
         return fullName;
-    }
-
-    /**
-     * 口座振替のOCR出力方法の略称を返します。
-     *
-     * @return 口座振替のOCR出力方法の略称
-     */
-    public RString get略称() {
-        return shortName;
     }
 
     /**

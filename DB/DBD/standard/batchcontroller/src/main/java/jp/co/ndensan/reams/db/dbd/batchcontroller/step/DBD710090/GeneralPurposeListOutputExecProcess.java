@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710090;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.dbd710090.HanyoListShisetsuNyutaishoOrderKey;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt13011.GeneralPurposeListOutputProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEntity;
@@ -18,21 +19,23 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.config.jushoinput.IJushoNyuryokuConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.jushoinput.JushoNyuryokuConfigFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.config.jushoinput.ConfigKeysCodeName;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -42,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -92,10 +96,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private static final RString 出力条件表_抽出対象者 = new RString("【抽出対象者】");
 
     private static final RString 資格判定なし = new RString("資格判定なし");
-    private static final RString 年齢 = new RString("年齢");
-    private static final RString 生年月日 = new RString("生年月日");
     private static final RString 全て = new RString("全て");
-    private static final RString すべて = new RString("すべて");
 
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBD701010");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
@@ -111,6 +112,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
     private Association 地方公共団体情報;
     private IAssociationFinder finder;
+    private RString 出力順;
     private HokenshaList 保険者リスト;
     private FileSpoolManager manager;
     private RString eucFilePath;
@@ -122,30 +124,22 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         finder = AssociationFinderFactory.createInstance();
         保険者リスト = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         personalDataList = new ArrayList<>();
-    }
 
-    @Override
-    protected void beforeExecute() {
-//        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
-//                new ReportId("帳票ID"), processParamter.get出力順());
-//        outputOrder.getFormated改頁項目();
-//
-//        RString 出力順 = MyBatisOrderByClauseCreator.create(ShiharaiHohoHenkoHaakuIchiranOrderKey.class, outputOrder);
-
+        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
+                new ReportId(processParamter.get帳票ID()), processParamter.get出力順());
+        出力順 = get出力順(outputOrder);
     }
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
+        IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho = key.build();
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toGeneralPurposeListOutputMybatisParameter(psmShikibetsuTaisho, psmAtesaki));
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toGeneralPurposeListOutputMybatisParameter(psmShikibetsuTaisho, psmAtesaki, 出力順));
     }
 
     int csvcount = 0;
@@ -173,6 +167,14 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
         csvcount++;
         personalDataList.add(toPersonalData(entity));
+    }
+
+    private RString get出力順(IOutputOrder order) {
+        if (order != null) {
+            RString 出力順 = MyBatisOrderByClauseCreator.create(HanyoListShisetsuNyutaishoOrderKey.class, order);
+            return 出力順.concat(",施設入所_識別コード,施設入所_履歴番号");
+        }
+        return RString.EMPTY;
     }
 
     @Override
@@ -265,9 +267,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         NenreiSoChushutsuHoho nenreiSoChushutsuHoho = atenaSelectBatchParameter.getAgeSelectKijun();
 
         list.add(出力条件表_抽出対象者);
-        if (!atenaSelectBatchParameter.getShichoson_Code().getColumnValue().isNullOrEmpty()
-                && !すべて.equals(atenaSelectBatchParameter.getShichoson_Code().getColumnValue())) {
-
+        if (atenaSelectBatchParameter.getShichoson_Code() != null && !atenaSelectBatchParameter.getShichoson_Code().isEmpty()) {
             list.add(出力条件表_保険者.concat(edit市町村(atenaSelectBatchParameter.getShichoson_Code())));
         }
 
@@ -326,7 +326,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private void set出力条件表_年齢(AtenaSelectBatchParameter atenaSelectBatchParameter,
             NenreiSoChushutsuHoho nenreiSoChushutsuHoho,
             List<RString> list) {
-        if (年齢.equals(nenreiSoChushutsuHoho.get名称())) {
+        if (NenreiSoChushutsuHoho.年齢範囲.equals(nenreiSoChushutsuHoho)) {
             Range<Decimal> ageRange = atenaSelectBatchParameter.getNenreiRange();
             Decimal startAge = ageRange.getFrom();
             Decimal endAge = ageRange.getTo();
@@ -376,7 +376,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     private void set出力条件表_生年月日(AtenaSelectBatchParameter atenaSelectBatchParameter,
             NenreiSoChushutsuHoho nenreiSoChushutsuHoho,
             List<RString> list) {
-        if (生年月日.equals(nenreiSoChushutsuHoho.get名称())) {
+        if (NenreiSoChushutsuHoho.生年月日範囲.equals(nenreiSoChushutsuHoho)) {
             Range<RDate> seinengappiRange = atenaSelectBatchParameter.getSeinengappiRange();
             RDate startSeinengappiRange = seinengappiRange.getFrom();
             RDate endSeinengappiRange = seinengappiRange.getTo();

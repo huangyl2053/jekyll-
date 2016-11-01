@@ -32,7 +32,7 @@ public class KoseitaishoKyuhuzissekiJohoTempEntity extends DbTableEntityBase<Kos
     private RString 氏名;
     private NyuryokuShikibetsuNo 入力識別番号;
     private FlexibleYearMonth サービス提供年月;
-    private RString 事業者番号;
+    private RString 事業所番号;
     private RString 整理番号;
     private RString サービス種類コード;
     private RString 給付実績情報作成区分コード;

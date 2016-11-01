@@ -240,11 +240,19 @@ public class HanyoListShiharaiNotContainNoBusiness {
 
         eucCsvEntity.set住所地特例状態(edit住所地特例フラグ(entity.get被保険者台帳管理_住所地特例フラグ()));
         if (住所地特例フラグ_TRUE.equals(entity.get被保険者台帳管理_広域内住所地特例フラグ())) {
-            eucCsvEntity.set資格_証記載保険者番号(保険者リスト.get(new LasdecCode(entity.get被保険者台帳管理_広住特措置元市町村コード()))
-                    .get証記載保険者番号().getColumnValue());
+            if (entity.get被保険者台帳管理_広住特措置元市町村コード() != null && !entity.get被保険者台帳管理_広住特措置元市町村コード().isEmpty()) {
+                eucCsvEntity.set資格_証記載保険者番号(保険者リスト.get(new LasdecCode(entity.get被保険者台帳管理_広住特措置元市町村コード()))
+                        .get証記載保険者番号().getColumnValue());
+            } else {
+                eucCsvEntity.set資格_証記載保険者番号(RString.EMPTY);
+            }
         } else {
-            eucCsvEntity.set資格_証記載保険者番号(保険者リスト.get(new LasdecCode(entity.get被保険者台帳管理_市町村コード()))
-                    .get証記載保険者番号().getColumnValue());
+            if (entity.get被保険者台帳管理_市町村コード() != null && !entity.get被保険者台帳管理_市町村コード().isEmpty()) {
+                eucCsvEntity.set資格_証記載保険者番号(保険者リスト.get(new LasdecCode(entity.get被保険者台帳管理_市町村コード()))
+                        .get証記載保険者番号().getColumnValue());
+            } else {
+                eucCsvEntity.set資格_証記載保険者番号(RString.EMPTY);
+            }
         }
     }
 
@@ -630,7 +638,7 @@ public class HanyoListShiharaiNotContainNoBusiness {
         }
 
         if (!日付スラッシュ付加) {
-            return date.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+            return date.seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString();
         }
         return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }

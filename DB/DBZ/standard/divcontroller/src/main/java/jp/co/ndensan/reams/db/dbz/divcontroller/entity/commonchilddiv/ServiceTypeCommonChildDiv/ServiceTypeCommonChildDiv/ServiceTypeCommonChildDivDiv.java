@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  * @reamsid_L DBA-0070-010 chengsanyuan
  */
 public class ServiceTypeCommonChildDivDiv extends Panel implements IServiceTypeCommonChildDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,6 +36,8 @@ public class ServiceTypeCommonChildDivDiv extends Panel implements IServiceTypeC
     private RString hdnServiceTypeName;
     @JsonProperty("hdnServiceRyakusho")
     private RString hdnServiceRyakusho;
+    @JsonProperty("hdnServiceModel")
+    private RString hdnServiceModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -149,6 +151,24 @@ public class ServiceTypeCommonChildDivDiv extends Panel implements IServiceTypeC
     @JsonProperty("hdnServiceRyakusho")
     public void setHdnServiceRyakusho(RString hdnServiceRyakusho) {
         this.hdnServiceRyakusho = hdnServiceRyakusho;
+    }
+
+    /*
+     * gethdnServiceModel
+     * @return hdnServiceModel
+     */
+    @JsonProperty("hdnServiceModel")
+    public RString getHdnServiceModel() {
+        return hdnServiceModel;
+    }
+
+    /*
+     * sethdnServiceModel
+     * @param hdnServiceModel hdnServiceModel
+     */
+    @JsonProperty("hdnServiceModel")
+    public void setHdnServiceModel(RString hdnServiceModel) {
+        this.hdnServiceModel = hdnServiceModel;
     }
 
     // </editor-fold>

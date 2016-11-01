@@ -27,7 +27,6 @@ import lombok.Setter;
 public class JigyoHokokuIppanGenbutsuBusiness {
 
     private JigyoHokokuGeppoIppanGenbutsuProcessParamter processParameter;
-    private static final int INDEX = 8;
 
     /**
      * コンストラクタです。
@@ -85,7 +84,7 @@ public class JigyoHokokuIppanGenbutsuBusiness {
      */
     public ShoriKekkaKakuninListEntity set処理結果確認リストEntity(JigyoHokokuIppanGenbutsuRelateEntity entity, RString 保険者番号, RString 保険者名) {
         ShoriKekkaKakuninListEntity eucEntity = new ShoriKekkaKakuninListEntity();
-        eucEntity.set作成日時(processParameter.get処理日時());
+        eucEntity.set作成日時(processParameter.get処理日時().getRDateTime());
         eucEntity.set保険者番号(保険者番号);
         eucEntity.set保険者名(保険者名);
         eucEntity.set項目コード1(new RString("被保険者番号"));
@@ -102,9 +101,9 @@ public class JigyoHokokuIppanGenbutsuBusiness {
         eucEntity.set内容1(processParameter.get集計年月());
         eucEntity.set処理名称(BatchInfo.getBatchName(SubGyomuCode.DBU介護統計報告, processParameter.getバッチID()));
         RString 内容2 = RString.EMPTY;
-        if (new RString("DBUI00010").equals(entity.getErrorCode()) && !RString.isNullOrEmpty(processParameter.get処理日時())) {
+        if (new RString("DBUI00010").equals(entity.getErrorCode()) && processParameter.get処理日時() != null) {
             内容2 = new RString(DbuInformationMessages.対象旧市町村不明_集計年月月末.getMessage().replace(processParameter.get処理日時().
-                    substring(0, INDEX).toString()).toString());
+                    getDate().toString()).toString());
         } else if (new RString("DBUI00002").equals(entity.getErrorCode())) {
             内容2 = new RString(DbuInformationMessages.年齢算出失敗_65to75集計.getMessage().toString());
         }

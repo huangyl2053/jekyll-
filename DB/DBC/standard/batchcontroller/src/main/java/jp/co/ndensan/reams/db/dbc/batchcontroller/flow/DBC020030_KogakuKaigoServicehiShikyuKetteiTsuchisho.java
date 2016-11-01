@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.InsertKogakuKaigoKetteiTsuchishoInfoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.KogakuKaigoServicehiDoChohyoHakkoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.UpdateKogakuKaigoKetteiTsuchishoInfoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.UpdateKogakuShikyuHanteiKekkaProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.JigyoKogakuShoriKekkaKakuninListSakuseiProcess;
@@ -32,18 +31,20 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho
     private static final String 高額サービス一時テーブルの設定 = "updateKogakuKaigoKetteiTsuchishoInfoTempProcess";
     private static final String 高額介護サービス費支給判定結果の更新 = "updateKogakuShikyuHanteiKekkaProcess";
     private static final String 帳票発行 = "doChohyoHakko";
-    private static final String 帳票発行_一覧表 = "doIchiranChohyoHakko";
     private static final String 処理結果確認リスト発行処理 = "doListSakuseiProcess";
     private static final int INDEX_0 = 0;
     private static final int INDEX_6 = 6;
+    private static final RString 決定日一括更新区分_2 = new RString("2");
 
     @Override
     protected void defineFlow() {
         executeStep(高額サービス一時テーブルの登録);
         executeStep(高額サービス一時テーブルの設定);
-        executeStep(高額介護サービス費支給判定結果の更新);
+        if (決定日一括更新区分_2.equals(getParameter().get決定日一括更新区分()) && getParameter().get決定日() != null
+                && !getParameter().get決定日().toDateString().isEmpty()) {
+            executeStep(高額介護サービス費支給判定結果の更新);
+        }
         executeStep(帳票発行);
-        executeStep(帳票発行_一覧表);
         executeStep(処理結果確認リスト発行処理);
     }
 
@@ -88,16 +89,6 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho
     }
 
     /**
-     * 帳票発行_一覧表です。
-     *
-     * @return KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess
-     */
-    @Step(帳票発行_一覧表)
-    protected IBatchFlowCommand doIchiranChohyoHakko() {
-        return loopBatch(KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess.class).arguments(creatParameter()).define();
-    }
-
-    /**
      * 処理結果確認リスト発行処理です。
      *
      * @return JigyoKogakuShoriKekkaKakuninListSakuseiProcess
@@ -111,7 +102,7 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho
         DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter parameter = getParameter();
         FlexibleYearMonth 決定者受付年月;
         if (parameter.get決定者受付年月() == null || parameter.get決定者受付年月().toDateString().isEmpty()) {
-            決定者受付年月 = new FlexibleYearMonth(RString.EMPTY);
+            決定者受付年月 = FlexibleYearMonth.EMPTY;
         } else {
             決定者受付年月 = new FlexibleYearMonth(parameter.get決定者受付年月().toDateString().substring(INDEX_0, INDEX_6));
         }

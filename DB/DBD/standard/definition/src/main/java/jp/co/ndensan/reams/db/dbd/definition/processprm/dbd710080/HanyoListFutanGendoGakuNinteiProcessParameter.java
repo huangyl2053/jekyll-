@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710080;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyolistfutangendogakunintei.FutanGendoGakuNinteiMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -125,11 +126,13 @@ public class HanyoListFutanGendoGakuNinteiProcessParameter implements IBatchProc
      *
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛先PSM
+     * @param 出力順 出力順
      * @return TokubetsuChiikiKasanGemmenMybatisParameter
      */
     public FutanGendoGakuNinteiMybatisParameter toFutanGendoGakuNinteiMybatisParameter(
-            RString psmShikibetsuTaisho,
-            RString psmAtesaki) {
+            IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
+            RString psmAtesaki,
+            RString 出力順) {
         return new FutanGendoGakuNinteiMybatisParameter(
                 cyusyutsuhohokubun,
                 cyusyutsukomokukubun,
@@ -149,6 +152,7 @@ public class HanyoListFutanGendoGakuNinteiProcessParameter implements IBatchProc
                 kyakasha,
                 atenacyusyutsujyoken,
                 psmShikibetsuTaisho,
-                psmAtesaki);
+                psmAtesaki,
+                出力順);
     }
 }

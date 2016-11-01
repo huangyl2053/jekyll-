@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1002KokuhorenSakuseiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.DbWT1731KagoMoshitateTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutDoErrorEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -23,26 +23,33 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2530-030 jiangwenkai
  */
-public class KaigokyufuhiKagoMoshitateshoOutDoErrorProcess extends BatchProcessBase<DbWT1731KagoMoshitateTempEntity> {
+public class KaigokyufuhiKagoMoshitateshoOutDoErrorProcess extends BatchProcessBase<KaigokyufuhiKagoMoshitateshoOutDoErrorEntity> {
 
     /**
      * 保険者番号Errorの返したエンティティ
      */
     public static final RString PARAMETER_OUT_FLOWENTITY;
     /**
-     * 保険者番号Errorの dbWT1731List 返したエンティティ
+     * エントリ情報Listです。
      */
     public static final RString PARAMETER_OUT_OUTPUTENTRY;
+    /**
+     * レコード件数です。
+     */
+    public static final RString PARAMETER_OUT_OUTPUTCOUNT;
 
     static {
         PARAMETER_OUT_FLOWENTITY = new RString("flowEntity");
-        PARAMETER_OUT_OUTPUTENTRY = new RString("outputEntity");
+        PARAMETER_OUT_OUTPUTENTRY = new RString("outputEntry");
+        PARAMETER_OUT_OUTPUTCOUNT = new RString("outputCount");
     }
 
     private OutputParameter<FlowEntity> flowEntity;
-    private OutputParameter<List> outputEntity;
-    private List<DbWT1731KagoMoshitateTempEntity> dbWT1731List;
-    FlowEntity returnEntity;
+    private OutputParameter<List> outputEntry;
+    private OutputParameter<List> outputCount;
+    private List<RString> hokenshaNoList;
+    private List<Integer> レコード件数List;
+    private FlowEntity returnEntity;
 
     private static final RString TABLE_NAME = new RString("DbWT1002KokuhorenSakuseiError");
     private static final RString 送付対象データなし = new RString("01");
@@ -56,9 +63,12 @@ public class KaigokyufuhiKagoMoshitateshoOutDoErrorProcess extends BatchProcessB
     protected void initialize() {
         super.initialize();
         flowEntity = new OutputParameter<>();
-        outputEntity = new OutputParameter<>();
         returnEntity = new FlowEntity();
-        dbWT1731List = new ArrayList();
+        outputEntry = new OutputParameter<>();
+        outputCount = new OutputParameter<>();
+        hokenshaNoList = new ArrayList<>();
+        レコード件数List = new ArrayList<>();
+
     }
 
     @Override
@@ -72,8 +82,9 @@ public class KaigokyufuhiKagoMoshitateshoOutDoErrorProcess extends BatchProcessB
     }
 
     @Override
-    protected void process(DbWT1731KagoMoshitateTempEntity entity) {
-        dbWT1731List.add(entity);
+    protected void process(KaigokyufuhiKagoMoshitateshoOutDoErrorEntity entity) {
+        hokenshaNoList.add(entity.get保険者番号().getColumnValue());
+        レコード件数List.add(entity.getレコード件数());
         numble++;
 
     }
@@ -87,7 +98,8 @@ public class KaigokyufuhiKagoMoshitateshoOutDoErrorProcess extends BatchProcessB
         }
         returnEntity.setCodeNum(numble);
         flowEntity.setValue(returnEntity);
-        outputEntity.setValue(dbWT1731List);
+        outputEntry.setValue(hokenshaNoList);
+        outputCount.setValue(レコード件数List);
 
     }
 

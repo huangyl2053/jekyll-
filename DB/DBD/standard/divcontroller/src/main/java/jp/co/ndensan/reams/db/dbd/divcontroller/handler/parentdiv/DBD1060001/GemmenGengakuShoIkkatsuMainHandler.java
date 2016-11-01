@@ -101,6 +101,24 @@ public class GemmenGengakuShoIkkatsuMainHandler {
     }
 
     /**
+     * 「負担条件を保存する」ボタンの押下処理です。
+     *
+     * @return BatchParameterMap
+     */
+    public BatchParameterMap onClick_btnBatchFutanParameterSave() {
+        return new BatchParameterMap(onClick_btnJikkouFtanSave());
+    }
+
+    /**
+     * 「社会条件を保存する」ボタンの押下処理です。
+     *
+     * @return BatchParameterMap
+     */
+    public BatchParameterMap onClick_btnBatchShakaiParameterSave() {
+        return new BatchParameterMap(onClick_btnJikkouSkaiSave());
+    }
+
+    /**
      * バッチパラメータの復元と負担画面の表示。
      *
      * @param div GemmenGengakuShoIkkatsuMainDiv
@@ -217,14 +235,10 @@ public class GemmenGengakuShoIkkatsuMainHandler {
                 .getFutanGendogakuKetteiTsuchisho().getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().getValue();
         RString 通知書の文書番号 = div.getFutanGendogaku()
                 .getFutanGendogakuKetteiTsuchisho().getCcdFutanGendogakuKetteiTsuchishoBunshoNo().get文書番号();
-        RString 改頁出力順ID = new RString("");
         DBD103010_FutanGendoGakuNinteiIkkatsuHakkoParameter futanParameter = new DBD103010_FutanGendoGakuNinteiIkkatsuHakkoParameter();
         futanParameter.set単票発行区分(TanpyoHakkoKubun.出力しない);
         futanParameter.set旧措置者区分(KyusochishaKubun.旧措置者以外);
-        Long 改頁ID = Long.valueOf("0");
-        if (div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().isSelected()) {
-            改頁出力順ID = div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().getSelected出力順().get改頁項目ID();
-        }
+        Long 改頁ID = div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().get出力順ID();
         if (単票発行区分.equals(TanpyoHakkoKubun.出力する.get名称())) {
             futanParameter.set単票発行区分(TanpyoHakkoKubun.出力する);
         }
@@ -236,9 +250,6 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         }
         if (対象区分.equals(TaishoKubun.申請日.get名称())) {
             futanParameter.set対象区分(TaishoKubun.申請日);
-        }
-        if (!改頁出力順ID.isEmpty()) {
-            改頁ID = Long.valueOf(改頁出力順ID.toString());
         }
         futanParameter.set年度開始日(nendoYMDFrom);
         futanParameter.set年度終了日(nendoYMDTo);
@@ -270,18 +281,12 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         FlexibleDate tsuchishoHakkoYMD = div.getShafukuKeigen()
                 .getShafukuKeigenKetteiTsuchisho().getTxtShafukuKeigenKetteiTsuchishoHakkoYmd().getValue();
         RString 通知書の文書番号 = div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().getCcdShafukuKeigenKetteiTsuchishoBunshoNo().get文書番号();
-        RString 改頁出力順ID = new RString("");
-        Long 改頁ID = Long.valueOf("0");
+        Long 改頁ID = div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().get出力順ID();
         DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakkoParameter shaParameter = new DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakkoParameter();
         shaParameter.set単票発行区分(TanpyoHakkoKubun.出力しない);
-        if (div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().isSelected()) {
-            改頁出力順ID = div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().getSelected出力順().get改頁項目ID();
-        }
+
         if (単票発行区分.equals(TanpyoHakkoKubun.出力する.get名称())) {
             shaParameter.set単票発行区分(TanpyoHakkoKubun.出力する);
-        }
-        if (!改頁出力順ID.isEmpty()) {
-            改頁ID = Long.valueOf(改頁出力順ID.toString());
         }
         shaParameter.set年度開始日(nendoYMDFrom);
         shaParameter.set年度終了日(nendoYMDTo);
@@ -294,6 +299,90 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         shaParameter.set通知書の文書番号(通知書の文書番号);
         shaParameter.set改頁出力順ID(改頁ID);
         return shaParameter;
+    }
+
+    /**
+     * 「負担条件を復元する」ボタンの押下処理です。
+     *
+     * @return MemoListOutputDiv
+     */
+    public GemmenGengakuShoIkkatsuMainDiv onClick_btnBatchFutanParameterRestore() {
+        BatchParameterMap map = div.getBtnFutanGendogakuParameterRestore().getRestoreBatchParameterMap();
+        div.getFutanGendogaku().getFutanGendogakuChushutsuJoken()
+                .getRadFutanGendogakuTanpyoHakkoKubun().setSelectedValue(map.getParameterValue(RString.class, new RString("単票発行区分")));
+        div.getFutanGendogaku().getFutanGendogakuChushutsuJoken()
+                .getRadFutanGendogakuKyusochishaKubun().setSelectedValue(map.getParameterValue(RString.class, new RString("旧措置者区分")));
+        div.getFutanGendogaku().getFutanGendogakuChushutsuJoken()
+                .getTxtFutanGendogakuNendoFrom().setValue(map.getParameterValue(FlexibleDate.class, new RString("年度開始日")));
+        div.getFutanGendogaku().getFutanGendogakuChushutsuJoken()
+                .getTxtFutanGendogakuNendoTo().setValue(map.getParameterValue(FlexibleDate.class, new RString("年度終了日")));
+        div.getFutanGendogaku().getFutanGendogakuChushutsuJoken()
+                .getRadFutanGendogakuJoken().setSelectedValue(map.getParameterValue(RString.class, new RString("対象区分")));
+        div.getFutanGendogaku().getFutanGendogakuChushutsuJoken()
+                .getTxtFutanGendogakuKonkaiTaishoYmdFrom().setValue(map.getParameterValue(FlexibleDate.class, new RString("対象日FROM")));
+        div.getFutanGendogaku().getFutanGendogakuChushutsuJoken()
+                .getTxtFutanGendogakuKonkaiTaishoYmdTo().setValue(map.getParameterValue(FlexibleDate.class, new RString("対象日TO")));
+        boolean ninteihakoFlag = map.getParameterValue(boolean.class, new RString("認定証発行フラグ"));
+        boolean tsuchishohakoFlag = map.getParameterValue(boolean.class, new RString("通知書発行フラグ"));
+        if (ninteihakoFlag) {
+            div.getFutanGendogaku().getFutanGendogakuNinteisho().setIsPublish(true);
+            div.getFutanGendogaku().getFutanGendogakuNinteisho().setIsOpen(true);
+        } else {
+            div.getFutanGendogaku().getFutanGendogakuNinteisho().setIsPublish(false);
+            div.getFutanGendogaku().getFutanGendogakuNinteisho().setIsOpen(false);
+        }
+        div.getFutanGendogaku().getFutanGendogakuNinteisho()
+                .getTxtFutanGendogakuNinteishoKofuYmd().setValue(map.getParameterValue(FlexibleDate.class, new RString("認定証の交付日")));
+        if (tsuchishohakoFlag) {
+            div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().setIsPublish(true);
+            div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().setIsOpen(true);
+        } else {
+            div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().setIsPublish(false);
+            div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho().setIsOpen(false);
+        }
+        div.getFutanGendogaku().getFutanGendogakuKetteiTsuchisho()
+                .getTxtFutanGendogakuKetteiTsuchishoHakkoYmd().setValue(map.getParameterValue(FlexibleDate.class, new RString("通知書の交付日")));
+        return div;
+    }
+
+    /**
+     * 「社会条件を復元する」ボタンの押下処理です。
+     *
+     * @return MemoListOutputDiv
+     */
+    public GemmenGengakuShoIkkatsuMainDiv onClick_btnBatchShakaiParameterRestore() {
+        BatchParameterMap map = div.getBtnShafukuParameterRestore().getRestoreBatchParameterMap();
+        div.getShafukuKeigen().getShafukuKeigenChushutsuJoken()
+                .getRadShafukuKeigenTanpyoHakkoKubun().setSelectedValue(map.getParameterValue(RString.class, new RString("単票発行区分")));
+        div.getShafukuKeigen().getShafukuKeigenChushutsuJoken()
+                .getTxtShafukuKeigenNendoFrom().setValue(map.getParameterValue(FlexibleDate.class, new RString("年度開始日")));
+        div.getShafukuKeigen().getShafukuKeigenChushutsuJoken()
+                .getTxtShafukuKeigenNendoTo().setValue(map.getParameterValue(FlexibleDate.class, new RString("年度終了日")));
+        div.getShafukuKeigen().getShafukuKeigenChushutsuJoken()
+                .getTxtShafukuKeigenKonkaiTaishoYmdFrom().setValue(map.getParameterValue(FlexibleDate.class, new RString("対象日FROM")));
+        div.getShafukuKeigen().getShafukuKeigenChushutsuJoken()
+                .getTxtShafukuKeigenKonkaiTaishoYmdTo().setValue(map.getParameterValue(FlexibleDate.class, new RString("対象日TO")));
+        boolean ninteihakoFlag = map.getParameterValue(boolean.class, new RString("認定証発行フラグ"));
+        boolean tsuchishohakoFlag = map.getParameterValue(boolean.class, new RString("通知書発行フラグ"));
+        if (ninteihakoFlag) {
+            div.getShafukuKeigen().getShafukuKeigenKakuninSho().setIsPublish(true);
+            div.getShafukuKeigen().getShafukuKeigenKakuninSho().setIsOpen(true);
+        } else {
+            div.getShafukuKeigen().getShafukuKeigenKakuninSho().setIsPublish(false);
+            div.getShafukuKeigen().getShafukuKeigenKakuninSho().setIsOpen(false);
+        }
+        div.getShafukuKeigen().getShafukuKeigenKakuninSho()
+                .getTxtShafukuKeigenKakuninShoKofuYmd().setValue(map.getParameterValue(FlexibleDate.class, new RString("認定証の交付日")));
+        if (tsuchishohakoFlag) {
+            div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().setIsPublish(true);
+            div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().setIsOpen(true);
+        } else {
+            div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().setIsPublish(false);
+            div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho().setIsOpen(false);
+        }
+        div.getShafukuKeigen().getShafukuKeigenKetteiTsuchisho()
+                .getTxtShafukuKeigenKetteiTsuchishoHakkoYmd().setValue(map.getParameterValue(FlexibleDate.class, new RString("通知書の発行日")));
+        return div;
     }
 
     /**

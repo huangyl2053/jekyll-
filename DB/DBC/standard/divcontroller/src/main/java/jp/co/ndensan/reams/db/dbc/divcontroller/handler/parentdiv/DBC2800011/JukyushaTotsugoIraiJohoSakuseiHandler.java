@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110810.DBC110810_Jukyus
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JyukyusyaIF_TotugoIraiJyohoTyusyutuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2800011.JukyushaTotsugoIraiJohoSakuseiDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -25,6 +26,7 @@ public class JukyushaTotsugoIraiJohoSakuseiHandler {
     private static final RString RSTRING_2 = new RString("2");
     private static final RString RSTRING_3 = new RString("3");
     private static final RString RSTRING_4 = new RString("4");
+    private static final int NUM_6 = 6;
     private final JukyushaTotsugoIraiJohoSakuseiDiv div;
 
     /**
@@ -48,7 +50,7 @@ public class JukyushaTotsugoIraiJohoSakuseiHandler {
         div.getDdlChushutsuKubun().setSelectedKey(RSTRING_1);
         div.getTxtTaishoYM().clearFromValue();
         div.getTxtTaishoYM().clearToValue();
-        div.getTxtNinteiYM().clearValue();
+        div.getTxtNinteiYM().setValue(RDate.getNowDate());
         div.getTxtTaishoYM().setDisabled(true);
         div.getTxtNinteiYM().setDisabled(false);
     }
@@ -85,18 +87,18 @@ public class JukyushaTotsugoIraiJohoSakuseiHandler {
             if (null == div.getTxtTaishoYM().getFromValue()) {
                 batchParameter.setTaishouKaishiNengetu(FlexibleDate.EMPTY);
             } else {
-                batchParameter.setTaishouKaishiNengetu(new FlexibleDate(div.getTxtTaishoYM().getFromValue().toDateString()));
+                batchParameter.setTaishouKaishiNengetu(new FlexibleDate(div.getTxtTaishoYM().getFromValue().toDateString().substring(0, NUM_6)));
             }
             if (null == div.getTxtTaishoYM().getToValue()) {
                 batchParameter.setTaishouShuuryouNengetu(FlexibleDate.EMPTY);
             } else {
-                batchParameter.setTaishouShuuryouNengetu(new FlexibleDate(div.getTxtTaishoYM().getToValue().toDateString()));
+                batchParameter.setTaishouShuuryouNengetu(new FlexibleDate(div.getTxtTaishoYM().getToValue().toDateString().substring(0, NUM_6)));
             }
         } else if (RSTRING_1.equals(index) || RSTRING_2.equals(index)) {
             if (null == div.getTxtNinteiYM().getValue()) {
                 batchParameter.setNinteiNengetu(FlexibleDate.EMPTY);
             } else {
-                batchParameter.setNinteiNengetu(new FlexibleDate(div.getTxtNinteiYM().getValue().toDateString()));
+                batchParameter.setNinteiNengetu(new FlexibleDate(div.getTxtNinteiYM().getValue().toDateString().substring(0, NUM_6)));
             }
             batchParameter.setTaishouKaishiNengetu(FlexibleDate.EMPTY);
             batchParameter.setTaishouShuuryouNengetu(FlexibleDate.EMPTY);

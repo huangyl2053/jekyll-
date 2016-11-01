@@ -48,7 +48,6 @@ public class HokenryoGenmenChoshuYoyuShinseishoEditorImpl implements IHokenryoGe
         source.hihokenshaYubinNo = item.getHihokenshaYubinNo();
         source.hihokenJusho = item.getHihokenJusho();
         source.hihokenshaTelNo = item.getHihokenshaTelNo();
-        // TODO 内部QA：635 (連番の設定不明です)
         source.remban = new RString(String.valueOf(1));
         return source;
     }

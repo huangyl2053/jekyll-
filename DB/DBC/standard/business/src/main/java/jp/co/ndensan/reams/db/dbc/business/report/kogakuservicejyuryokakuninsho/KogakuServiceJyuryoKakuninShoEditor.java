@@ -33,67 +33,77 @@ public class KogakuServiceJyuryoKakuninShoEditor implements
     @Override
     public KogakuServiceJyuryoKakuninShoSource edit(KogakuServiceJyuryoKakuninShoSource source) {
         source.bunshoNo = entity.get文書番号();
-//        source.tsuchiBun1 = entity.get通知文１();
-//        source.hihokenshaNameKana = entity.get被保険者氏名フリガナ();
-//        source.hihokenshaName = entity.get被保険者氏名();
-//        source.hihokenshaNo = entity.get被保険者番号();
-//        source.uketsukeYMD = entity.get受付年月日();
-//        source.shonin = entity.get承認不承認();
-//        source.shoninYMD = entity.get承認年月日();
-//        source.fushikyuRiyu = entity.get不承認の理由();
-//        source.kyufuShurui = entity.get給付の種類();
-//        source.jigyoshaName = entity
-//                source.daihyoshaName = entity
-//                source.jigyoshaYubinNo = entity
-//                source.jigyoshaTelNo = entity
-//                        source.jigyoshaAddress = entity
-//                source.hiyogakuGokei = entity
-//                source.hokentaishoHiyogaku = entity
-//                source.riryoshaFutangaku = entity
-//                source.hokenkyufuhiGaku = entity
-//                source.tsuchiBun2 = entity
-//                source.yubinNo = entity
-//                source.gyoseiku = entity
-//                source.jusho3 = entity
-//                source.jushoText = entity
-//                source.jusho1 = entity
-//                source.jusho2 = entity
-//                source.katagakiText = entity
-//                source.katagaki2 = entity
-//                        source.katagakiSmall2 = entity
-//                source.katagaki1 = entity
-//                source.katagakiSmall1 = entity
-//                source.shimei2 = entity
-//                        source.shimeiSmall2 = entity
-//                source.shimeiText = entity
-//                source.meishoFuyo2 = entity
-//                source.shimeiSmall1 = entity
-//                source.dainoKubunMei = entity
-//                source.shimei1 = entity
-//                        source.meishoFuyo1 = entity
-//                source.samabunShimeiText = entity
-//                source.kakkoLeft2 = entity
-//                source.samabunShimei2 = entity
-//                source.samabunShimeiSmall2 = entity
-//                source.samaBun2 = entity
-//                        source.kakkoRight2 = entity
-//                source.kakkoLeft1 = entity
-//                source.samabunShimei1 = entity
-//                source.samaBun1 = entity
-//                source.kakkoRight1 = entity
-//                source.samabunShimeiSmall1 = entity
-//                source.customerBarCode = entity
-//                source.hakkoYMD = entity
-//                        source.ninshoshaYakushokuMei = entity
-//                source.denshiKoin = entity
-//                source.ninshoshaYakushokuMei = entity
-//                source.koinMojiretsu = entity
-//                source.ninshoshaYakushokuMei = entity
-//                source.ninshoshaShimeiKakenai = entity
-//                source.ninshoshaShimeiKakeru = entity
-//                source.koinShoryaku = entity
-
+        source.shonin = entity.get承認不承認();
+        source.fushoninRiyu = entity.get不承認理由();
+        source.riyoFutanJyogengaku = entity.get利用者負担上限額();
+        edit送付物宛先(source);
+        edit認証者(source);
+        edit確認書(source);
         return source;
 
+    }
+
+    private void edit送付物宛先(KogakuServiceJyuryoKakuninShoSource source) {
+        source.yubinNo = entity.get郵便番号();
+        source.gyoseiku = entity.get行政区();
+        source.jushoText = entity.get住所Text();
+        source.jusho1 = entity.get住所1();
+        source.jusho2 = entity.get住所2();
+        source.jusho3 = entity.get住所3();
+        source.katagakiText = entity.get方書Text();
+        source.katagaki1 = entity.get方書1();
+        source.katagaki2 = entity.get方書2();
+        source.katagakiSmall1 = entity.get方書Small1();
+        source.katagakiSmall2 = entity.get方書Small2();
+        source.dainoKubunMei = entity.get代納人区分();
+        source.shimeiText = entity.get氏名Text();
+        source.shimei1 = entity.get氏名1();
+        source.shimei2 = entity.get氏名2();
+        source.shimeiSmall1 = entity.get氏名Small1();
+        source.shimeiSmall2 = entity.get氏名Small2();
+        source.samabunShimeiText = entity.get氏名samabunText();
+        source.samabunShimei1 = entity.get氏名samabun1();
+        source.samabunShimei2 = entity.get氏名samabun2();
+        source.samabunShimeiSmall1 = entity.get氏名samabunSmall1();
+        source.samabunShimeiSmall2 = entity.get氏名samabunSmall2();
+        source.meishoFuyo1 = entity.get名称付与1();
+        source.meishoFuyo2 = entity.get名称付与2();
+        source.samaBun1 = entity.get様文1();
+        source.samaBun2 = entity.get様文2();
+        source.kakkoLeft1 = entity.get括弧Left1();
+        source.kakkoLeft2 = entity.get括弧Left2();
+        source.kakkoRight1 = entity.get括弧Right1();
+        source.kakkoRight2 = entity.get括弧Right2();
+        source.customerBarCode = entity.getカスタマバーコード();
+    }
+
+    private void edit認証者(KogakuServiceJyuryoKakuninShoSource source) {
+        source.denshiKoin = entity.get電子公印();
+        source.hakkoYMD = entity.get発行日();
+        source.ninshoshaYakushokuMei = entity.get認証者役職名();
+        source.ninshoshaYakushokuMei1 = entity.get認証者役職名1();
+        source.ninshoshaYakushokuMei2 = entity.get認証者役職名2();
+        source.ninshoshaShimeiKakenai = entity.get認証者氏名掛けない();
+        source.ninshoshaShimeiKakeru = entity.get認証者氏名掛ける();
+        source.koinShoryaku = entity.get公印省略();
+        source.koinMojiretsu = entity.get公印文字列();
+    }
+
+    private void edit確認書(KogakuServiceJyuryoKakuninShoSource source) {
+        source.tsuchiBun1 = entity.get通知文1();
+        source.hihokenshaNameKana = entity.get被保険者氏名フリガナ();
+        source.hihokenshaName = entity.get被保険者氏名();
+        source.hihokenshaNo = entity.get被保険者番号();
+        source.uketsukeYMD = entity.get受付年月日();
+        source.shonin = entity.get承認不承認();
+        source.shoninYMD = entity.get承認年月日();
+        source.fushoninRiyu = entity.get不承認理由();
+        source.jigyoshaName = entity.get事業所名();
+        source.daihyoshaName = entity.get代表者名();
+        source.jigyoshaYubinNo = entity.get事業所郵便番号();
+        source.jigyoshaAddress = entity.get事業所所在地();
+        source.jigyoshaTelNo = entity.get事業所電話番号();
+        source.riyoFutanJyogengaku = entity.get利用者負担上限額();
+        source.tsuchiBun2 = entity.get通知文2();
     }
 }

@@ -77,8 +77,9 @@ public class DBC060020_KyufuhiTsuchishoParameter extends BatchParameterBase {
      * @return プロセスパラメータ
      */
     public KyufuhiTsuchishoProcessParameter toProcessParameter() {
-        return new KyufuhiTsuchishoProcessParameter(集約区分, サービス種類区分, サービス種類区分, サービス種類区分, 福祉用具貸与ページ出力区分, 集約区分,
-                保険者構成, 証記載保険者番号, 要介護度, 死亡者分を対象としない, ゼロ査定実績を対象としない, 再審査分を対象としない, 過誤分を対象としない,
-                施設分を対象としない, 特定入所者介護を対象としない, 償還分を対象としない, サービス種類区分, 出力順ID, 文書番号);
+        return new KyufuhiTsuchishoProcessParameter(new RString(処理年月日.toString()), サービス種類区分, new RString(サービス開始年月.toString()),
+                new RString(サービス終了年月.toString()), 福祉用具貸与ページ出力区分, 集約区分, 保険者構成, 証記載保険者番号, 要介護度, 死亡者分を対象としない,
+                ゼロ査定実績を対象としない, 再審査分を対象としない, 過誤分を対象としない, 施設分を対象としない, 特定入所者介護を対象としない,
+                償還分を対象としない, 出力順ID, 文書番号);
     }
 }

@@ -39,7 +39,7 @@ public class SetaiShotokuKazeiHantei {
 
     private final MapperProvider mapperProvider;
     private static final RString メニューID_高額介護サービス = new RString("DBCMN41002");
-    private static final RString メニューID_事業高額介護サービス = new RString("DBCMN41004");
+    private static final RString メニューID_事業高額介護サービス = new RString("DBCMNL1002");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString 管理区分 = new RString("管理識別区分");
@@ -178,7 +178,7 @@ public class SetaiShotokuKazeiHantei {
     }
 
     /**
-     * 合併内住特者番号変換処理取得します。
+     * 各住民の所得情報の取得します。
      *
      * @param メニューID RString
      */

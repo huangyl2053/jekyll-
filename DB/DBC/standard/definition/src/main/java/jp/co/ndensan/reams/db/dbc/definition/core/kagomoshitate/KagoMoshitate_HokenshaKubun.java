@@ -16,26 +16,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KagoMoshitate_HokenshaKubun {
 
     /**
-     * コード:1 名称:介護給付費 略称:介護（予防）給付費情報
+     * コード:1 名称:介護（予防）給付費情報 略称:定義なし
      */
-    介護給付費("1", "介護給付費", "介護（予防）給付費情報"),
+    介護給付費("1", "介護（予防）給付費情報"),
     /**
-     * コード:2 名称:総合事業費_経過措置　略称:総合事業費（経過措置）情報
+     * コード:2 名称:総合事業費（経過措置）情報　略称:定義なし
      */
-    総合事業費_経過措置("2", "総合事業費_経過措置", "総合事業費（経過措置）情報"),
+    総合事業費_経過措置("2", "総合事業費（経過措置）情報"),
     /**
-     * コード:3 名称:総合事業費 略称:総合事業費情報
+     * コード:3 名称:総合事業費情報 略称:定義なし
      */
-    総合事業費("3", "総合事業費", "総合事業費情報");
+    総合事業費("3", "総合事業費情報");
 
     private final RString code;
     private final RString fullName;
-    private final RString shortName;
 
-    private KagoMoshitate_HokenshaKubun(String code, String fullname, String shortName) {
+    private KagoMoshitate_HokenshaKubun(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
-        this.shortName = new RString(shortName);
     }
 
     /**
@@ -54,15 +52,6 @@ public enum KagoMoshitate_HokenshaKubun {
      */
     public RString get名称() {
         return fullName;
-    }
-
-    /**
-     * 過誤申立_保険者区分の略称を返します。
-     *
-     * @return 過誤申立_保険者区分の略称
-     */
-    public RString get略称() {
-        return shortName;
     }
 
     /**

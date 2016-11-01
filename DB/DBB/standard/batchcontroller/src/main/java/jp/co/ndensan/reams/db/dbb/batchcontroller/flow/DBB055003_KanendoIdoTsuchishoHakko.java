@@ -94,7 +94,7 @@ public class DBB055003_KanendoIdoTsuchishoHakko extends BatchFlowBase<DBB055003_
                     || ReportIdDBB.DBB100040.getReportId().getColumnValue().equals(出力帳票.get帳票ID()))) {
                 バッチフロー_帳票分類ID = 介護保険料額決定通知書_帳票分類ID.getColumnValue();
                 executeStep(異動賦課情報一時テーブルクリア);
-                if (parameter.is一括発行起動フラグ()) {
+                if (!parameter.is一括発行起動フラグ()) {
                     executeStep(計算後情報作成_ONE);
                     executeStep(INSERT_FLGTRUE_ONEPROCESS);
                     executeStep(計算後情報作成_TWO);
@@ -112,7 +112,7 @@ public class DBB055003_KanendoIdoTsuchishoHakko extends BatchFlowBase<DBB055003_
                     || ReportIdDBB.DBB100043.getReportId().getColumnValue().equals(出力帳票.get帳票ID()))) {
                 バッチフロー_帳票分類ID = 介護保険料額決定通知書_帳票分類ID.getColumnValue();
                 executeStep(異動賦課情報一時テーブルクリア);
-                if (parameter.is一括発行起動フラグ()) {
+                if (!parameter.is一括発行起動フラグ()) {
                     executeStep(計算後情報作成_ONE);
                     executeStep(INSERT_FLGTRUE_ONEPROCESS);
                     executeStep(計算後情報作成_TWO);
@@ -127,7 +127,7 @@ public class DBB055003_KanendoIdoTsuchishoHakko extends BatchFlowBase<DBB055003_
             } else if (納入通知書本算定_帳票分類ID.equals(出力帳票.get帳票分類ID())) {
                 バッチフロー_帳票分類ID = 納入通知書本算定_帳票分類ID.getColumnValue();
                 executeStep(異動賦課情報一時テーブルクリア);
-                if (parameter.is一括発行起動フラグ()) {
+                if (!parameter.is一括発行起動フラグ()) {
                     executeStep(計算後情報作成_ONE);
                     executeStep(INSERT_FLGTRUE_ONEPROCESS);
                     executeStep(計算後情報作成_TWO);

@@ -25,7 +25,7 @@ public class TokuchoIraikingakuKeisanHoho6GatsuTest extends DbbTestBase {
 
     @Test
     public void 引数に1を指定した場合_toValueは_年額除12乗仮徴収月数除年金支給回数を返す() {
-        assertThat(TokuchoIraikingakuKeisanHoho6Gatsu.toValue(new RString("1")), is(TokuchoIraikingakuKeisanHoho6Gatsu.年額除12乗仮徴収月数除年金支給回数
+        assertThat(TokuchoIraikingakuKeisanHoho6Gatsu.toValue(new RString("1")), is(TokuchoIraikingakuKeisanHoho6Gatsu.法定計算方法_6で割る
         ));
     }
 
@@ -36,7 +36,7 @@ public class TokuchoIraikingakuKeisanHoho6GatsuTest extends DbbTestBase {
 
     @Test
     public void 年額除12乗仮徴収月数除年金支給回数を指定した場合_getコードは_1を返す() {
-        assertThat(TokuchoIraikingakuKeisanHoho6Gatsu.年額除12乗仮徴収月数除年金支給回数.getコード(), is(new RString("1"))
+        assertThat(TokuchoIraikingakuKeisanHoho6Gatsu.法定計算方法_6で割る.getコード(), is(new RString("1"))
         );
     }
 
@@ -47,24 +47,13 @@ public class TokuchoIraikingakuKeisanHoho6GatsuTest extends DbbTestBase {
 
     @Test
     public void 年額除12乗仮徴収月数除年金支給回数を指定した場合_get名称は_法定計算方法_6で割るを返す() {
-        assertThat(TokuchoIraikingakuKeisanHoho6Gatsu.年額除12乗仮徴収月数除年金支給回数.get名称(), is(new RString("法定計算方法_6で割る"))
+        assertThat(TokuchoIraikingakuKeisanHoho6Gatsu.法定計算方法_6で割る.get名称(), is(new RString("年額÷12Ｘ仮徴収月数÷年金支給回数"))
         );
     }
 
     @Test
     public void 年額を納期数_5期_で割るを指定した場合_get名称は_年額を納期数_5期_で割るを返す() {
-        assertThat(TokuchoIraikingakuKeisanHoho6Gatsu.年額を納期数_5期_で割る.get名称(), is(new RString("年額を納期数_5期_で割る")));
-    }
-
-    @Test
-    public void 年額除12乗仮徴収月数除年金支給回数を指定した場合_get略称は_年額除12乗仮徴収月数除年金支給回数を返す() {
-        assertThat(TokuchoIraikingakuKeisanHoho6Gatsu.年額除12乗仮徴収月数除年金支給回数.get略称(), is(new RString("年額除12乗仮徴収月数除年金支給回数"))
-        );
-    }
-
-    @Test
-    public void 年額を納期数_5期_で割るを指定した場合_get略称は_年額を納期数_5期_で割るを返す() {
-        assertThat(TokuchoIraikingakuKeisanHoho6Gatsu.年額を納期数_5期_で割る.get略称(), is(new RString("年額を納期数（5期）で割る")));
+        assertThat(TokuchoIraikingakuKeisanHoho6Gatsu.年額を納期数_5期_で割る.get名称(), is(new RString("年額を納期数（5期）で割る")));
     }
 
 }

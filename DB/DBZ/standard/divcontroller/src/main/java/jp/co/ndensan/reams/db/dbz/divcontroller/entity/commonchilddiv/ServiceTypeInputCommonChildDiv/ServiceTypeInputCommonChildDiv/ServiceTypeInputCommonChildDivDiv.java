@@ -187,6 +187,15 @@ public class ServiceTypeInputCommonChildDivDiv extends Panel implements IService
         return this.getHdnServiceRyakusho();
     }
 
+    /**
+     *
+     * @param flag
+     */
+    @Override
+    public void setRequired(boolean flag) {
+        this.getTxtServiceType().setRequired(flag);
+    }
+
     @JsonIgnore
     private ServiceTypeInputCommonChildHandler getHandler() {
         return new ServiceTypeInputCommonChildHandler(this);

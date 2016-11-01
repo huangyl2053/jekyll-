@@ -37,9 +37,11 @@ public class KyufuhiTsuchisho {
             NinshoshaSource ninshoshaSource, SofubutsuAtesakiSource atesakiSource, IToiawasesakiSourceBuilder sourceBuilder) {
         KyufuhiTsuchishoCoverEntity coverEntity = new KyufuhiTsuchishoCoverEntity();
         coverEntity.setHokenshaNo(hakkoEntity.get被保険者番号());
-        AtenaMeisho meisho = hakkoEntity.getAtesakiEntity().getKanjiShimei();
-        if (meisho != null && !meisho.isEmpty()) {
-            coverEntity.setHihokenshaName(meisho.value());
+        if (hakkoEntity.getAtesakiEntity() != null && hakkoEntity.getAtesakiEntity().getKanjiShimei() != null) {
+            AtenaMeisho meisho = hakkoEntity.getAtesakiEntity().getKanjiShimei();
+            if (meisho != null && !meisho.isEmpty()) {
+                coverEntity.setHihokenshaName(meisho.value());
+            }
         }
         coverEntity.setShukeiserviceSTYM(processParameter.getサービス年月開始());
         coverEntity.setShukeiserviceEDYM(processParameter.getサービス年月終了());
@@ -48,56 +50,74 @@ public class KyufuhiTsuchisho {
         coverEntity.setListServiceIchiranUpper_2(hakkoEntity.get事業者名称());
         coverEntity.setListServiceIchiranUpper_3(hakkoEntity.getサービス名称());
         coverEntity.setListServiceIchiranUpper_4(hakkoEntity.get日数_回数());
-        coverEntity.setListServiceIchiranUpper_5(new RString(hakkoEntity.get利用者負担額().toString()));
-        coverEntity.setListServiceIchiranUpper_6(new RString(hakkoEntity.getサービス費用合計額().toString()));
+        if (hakkoEntity.get利用者負担額() != null) {
+            coverEntity.setListServiceIchiranUpper_5(new RString(hakkoEntity.get利用者負担額().toString()));
+        }
+        if (hakkoEntity.getサービス費用合計額() != null) {
+            coverEntity.setListServiceIchiranUpper_6(new RString(hakkoEntity.getサービス費用合計額().toString()));
+        }
         coverEntity.setListServiceIchiranLower_1(hakkoEntity.get事業者名称());
         coverEntity.setListServiceIchiranLower_2(hakkoEntity.getサービス名称());
-        coverEntity.setDenshiKoin(ninshoshaSource.hakkoYMD);
-        coverEntity.setHakkoYMD(ninshoshaSource.denshiKoin);
-        coverEntity.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
-        coverEntity.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
-        coverEntity.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
-        coverEntity.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);
-        coverEntity.setNinshoshaShimeiKakeru(ninshoshaSource.ninshoshaShimeiKakeru);
-        coverEntity.setKoinShoryaku(ninshoshaSource.koinShoryaku);
-        coverEntity.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
-        coverEntity.setYubinNo(atesakiSource.yubinNo);
-        coverEntity.setGyoseiku(atesakiSource.gyoseiku);
-        coverEntity.setJusho4(atesakiSource.jusho1);
-        coverEntity.setJushoText(atesakiSource.jushoText);
-        coverEntity.setJusho5(atesakiSource.jusho2);
-        coverEntity.setJusho6(atesakiSource.jusho3);
-        coverEntity.setKatagakiText(atesakiSource.katagakiText);
-        coverEntity.setKatagaki3(atesakiSource.katagaki1);
-        coverEntity.setKatagakiSmall2(atesakiSource.katagakiSmall2);
-        coverEntity.setKatagaki4(atesakiSource.katagaki2);
-        coverEntity.setKatagakiSmall1(atesakiSource.katagakiSmall1);
-        coverEntity.setShimei5(atesakiSource.shimei1);
-        coverEntity.setShimeiSmall2(atesakiSource.shimeiSmall2);
-        coverEntity.setShimeiText(atesakiSource.shimeiText);
-        coverEntity.setMeishoFuyo2(atesakiSource.meishoFuyo2);
-        coverEntity.setShimeiSmall1(atesakiSource.shimeiSmall1);
-        coverEntity.setDainoKubunMei(atesakiSource.dainoKubunMei);
-        coverEntity.setShimei6(atesakiSource.shimei2);
-        coverEntity.setMeishoFuyo1(atesakiSource.meishoFuyo1);
-        coverEntity.setSamabunShimeiText(atesakiSource.samabunShimeiText);
-        coverEntity.setSamaBun2(atesakiSource.samaBun2);
-        coverEntity.setKakkoLeft2(atesakiSource.kakkoLeft2);
-        coverEntity.setSamabunShimei2(atesakiSource.samabunShimei2);
-        coverEntity.setSamabunShimeiSmall2(atesakiSource.samabunShimeiSmall2);
-        coverEntity.setKakkoRight2(atesakiSource.kakkoRight2);
-        coverEntity.setKakkoLeft1(atesakiSource.kakkoLeft1);
-        coverEntity.setSamabunShimei1(atesakiSource.samabunShimei1);
-        coverEntity.setSamaBun1(atesakiSource.samaBun1);
-        coverEntity.setSamabunShimeiSmall1(atesakiSource.samabunShimeiSmall1);
-        coverEntity.setCustomerBarCode(ReportUtil.getCustomerBarCode(hakkoEntity.get住所(), hakkoEntity.get郵便番号()));
-        coverEntity.setYubinBango(sourceBuilder.buildSource().yubinBango);
-        coverEntity.setShozaichi(sourceBuilder.buildSource().shozaichi);
-        coverEntity.setChoshaBushoName(sourceBuilder.buildSource().choshaBushoName);
-        coverEntity.setTantoName(sourceBuilder.buildSource().tantoName);
-        coverEntity.setTelNo(sourceBuilder.buildSource().telNo);
-        coverEntity.setNaisenLabel(sourceBuilder.buildSource().naisenLabel);
-        coverEntity.setNaisenNo(sourceBuilder.buildSource().naisenNo);
+        if (ninshoshaSource != null) {
+            coverEntity.setDenshiKoin(ninshoshaSource.denshiKoin);
+            coverEntity.setHakkoYMD(ninshoshaSource.hakkoYMD);
+            coverEntity.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
+            coverEntity.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
+            coverEntity.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
+            coverEntity.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);
+            coverEntity.setNinshoshaShimeiKakeru(ninshoshaSource.ninshoshaShimeiKakeru);
+            coverEntity.setKoinShoryaku(ninshoshaSource.koinShoryaku);
+            coverEntity.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
+        }
+        if (atesakiSource != null) {
+            coverEntity.setYubinNo(atesakiSource.yubinNo);
+            coverEntity.setGyoseiku(atesakiSource.gyoseiku);
+            coverEntity.setJusho4(atesakiSource.jusho1);
+            coverEntity.setJushoText(atesakiSource.jushoText);
+            coverEntity.setJusho5(atesakiSource.jusho2);
+            coverEntity.setJusho6(atesakiSource.jusho3);
+            coverEntity.setKatagakiText(atesakiSource.katagakiText);
+            coverEntity.setKatagaki3(atesakiSource.katagaki1);
+            coverEntity.setKatagakiSmall2(atesakiSource.katagakiSmall2);
+            coverEntity.setKatagaki4(atesakiSource.katagaki2);
+            coverEntity.setKatagakiSmall1(atesakiSource.katagakiSmall1);
+            coverEntity.setShimei5(atesakiSource.shimei1);
+            coverEntity.setShimeiSmall2(atesakiSource.shimeiSmall2);
+            coverEntity.setShimeiText(atesakiSource.shimeiText);
+            coverEntity.setMeishoFuyo2(atesakiSource.meishoFuyo2);
+            coverEntity.setShimeiSmall1(atesakiSource.shimeiSmall1);
+            coverEntity.setDainoKubunMei(atesakiSource.dainoKubunMei);
+            coverEntity.setShimei6(atesakiSource.shimei2);
+            coverEntity.setMeishoFuyo1(atesakiSource.meishoFuyo1);
+            coverEntity.setSamabunShimeiText(atesakiSource.samabunShimeiText);
+            coverEntity.setSamaBun2(atesakiSource.samaBun2);
+            coverEntity.setKakkoLeft2(atesakiSource.kakkoLeft2);
+            coverEntity.setSamabunShimei2(atesakiSource.samabunShimei2);
+            coverEntity.setSamabunShimeiSmall2(atesakiSource.samabunShimeiSmall2);
+            coverEntity.setKakkoRight2(atesakiSource.kakkoRight2);
+            coverEntity.setKakkoLeft1(atesakiSource.kakkoLeft1);
+            coverEntity.setSamabunShimei1(atesakiSource.samabunShimei1);
+            coverEntity.setSamaBun1(atesakiSource.samaBun1);
+            coverEntity.setSamabunShimeiSmall1(atesakiSource.samabunShimeiSmall1);
+        }
+        RString 住所 = hakkoEntity.get住所();
+        if (RString.isNullOrEmpty(住所)) {
+            住所 = RString.EMPTY;
+        }
+        RString 郵便番号 = hakkoEntity.get郵便番号();
+        if (RString.isNullOrEmpty(郵便番号)) {
+            郵便番号 = RString.EMPTY;
+        }
+        coverEntity.setCustomerBarCode(ReportUtil.getCustomerBarCode(住所, 郵便番号));
+        if (sourceBuilder != null) {
+            coverEntity.setYubinBango(sourceBuilder.buildSource().yubinBango);
+            coverEntity.setShozaichi(sourceBuilder.buildSource().shozaichi);
+            coverEntity.setChoshaBushoName(sourceBuilder.buildSource().choshaBushoName);
+            coverEntity.setTantoName(sourceBuilder.buildSource().tantoName);
+            coverEntity.setTelNo(sourceBuilder.buildSource().telNo);
+            coverEntity.setNaisenLabel(sourceBuilder.buildSource().naisenLabel);
+            coverEntity.setNaisenNo(sourceBuilder.buildSource().naisenNo);
+        }
         return coverEntity;
     }
 }

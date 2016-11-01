@@ -13,9 +13,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshikyuketteitsuch
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200040.GassanShikyuFushikyuKetteishaIchiranSource;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshikyuketteitsuchisho.IKogakugassanShikyuKetteitsuchishoMapper;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -25,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -53,26 +49,12 @@ public class GetTaishoshaChushutsuProcess extends BatchProcessBase<KogakuGassanS
 
     private KogakugassanShikyuKetteitsuchishoProcessParameter processParameter;
     private int 対象者抽出件数;
-    private static final ReportId 帳票ID = new ReportId("DBC100053_GassanKetteiTsuchisho");
     private static final RString TABLE_NAME = new RString("KogakugassanShikyuKetteitsuchishoTemp");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
-    private static final int INT_2 = 2;
-    private static final int INT_3 = 3;
-    private static final int INT_4 = 4;
     private static final RString データ区分_国保連作成 = new RString("1");
     private static final RString データ区分_国保連作成返却 = new RString("3");
     private static final YubinNo 最大郵便番号 = new YubinNo("9999999");
-    private RString 並び順1 = RString.EMPTY;
-    private RString 並び順2 = RString.EMPTY;
-    private RString 並び順3 = RString.EMPTY;
-    private RString 並び順4 = RString.EMPTY;
-    private RString 並び順5 = RString.EMPTY;
-    private RString 改頁1 = RString.EMPTY;
-    private RString 改頁2 = RString.EMPTY;
-    private RString 改頁3 = RString.EMPTY;
-    private RString 改頁4 = RString.EMPTY;
-    private RString 改頁5 = RString.EMPTY;
 
     private BatchReportWriter<GassanShikyuFushikyuKetteishaIchiranSource> batchReportWriter_一覧表;
     private ReportSourceWriter<GassanShikyuFushikyuKetteishaIchiranSource> reportSourceWriter_一覧表;
@@ -89,40 +71,6 @@ public class GetTaishoshaChushutsuProcess extends BatchProcessBase<KogakuGassanS
 
     @Override
     protected void beforeExecute() {
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBC介護給付, 帳票ID, Long.parseLong(processParameter.get改頁出力順ID().toString()));
-        if (並び順 != null) {
-            int i = INT_0;
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                if (i == INT_0) {
-                    並び順1 = item.get項目名();
-                } else if (i == INT_1) {
-                    並び順2 = item.get項目名();
-                } else if (i == INT_2) {
-                    並び順3 = item.get項目名();
-                } else if (i == INT_3) {
-                    並び順4 = item.get項目名();
-                } else if (i == INT_4) {
-                    並び順5 = item.get項目名();
-                }
-                i = i + 1;
-            }
-            int j = INT_0;
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                if (j == INT_0 && item.is改頁項目()) {
-                    改頁1 = item.get項目名();
-                } else if (j == INT_1 && item.is改頁項目()) {
-                    改頁2 = item.get項目名();
-                } else if (j == INT_2 && item.is改頁項目()) {
-                    改頁3 = item.get項目名();
-                } else if (j == INT_3 && item.is改頁項目()) {
-                    改頁4 = item.get項目名();
-                } else if (j == INT_4 && item.is改頁項目()) {
-                    改頁5 = item.get項目名();
-                }
-                j = j + 1;
-            }
-        }
         getMapper(IKogakugassanShikyuKetteitsuchishoMapper.class).delete高額合算支給決定通知書データ();
     }
 
@@ -153,17 +101,6 @@ public class GetTaishoshaChushutsuProcess extends BatchProcessBase<KogakuGassanS
         if ((データ区分_国保連作成.equals(entity.getデータ区分()) || データ区分_国保連作成返却.equals(entity.getデータ区分()))
                 && !最大郵便番号.equals(entity.get支給額計算結果連絡先郵便番号())) {
             KogakugassanShikyuKetteitsuchishoTempEntity データEntity = new KogakugassanShikyuKetteitsuchishoTempEntity();
-            データEntity.setShikyuKubun(entity.getShikyuKubunCode());
-            データEntity.setShutsuryokujunMei1(並び順1);
-            データEntity.setShutsuryokujunMei2(並び順2);
-            データEntity.setShutsuryokujunMei3(並び順3);
-            データEntity.setShutsuryokujunMei4(並び順4);
-            データEntity.setShutsuryokujunMei5(並び順5);
-            データEntity.setKaiPeiji1(改頁1);
-            データEntity.setKaiPeiji2(改頁2);
-            データEntity.setKaiPeiji3(改頁3);
-            データEntity.setKaiPeiji4(改頁4);
-            データEntity.setKaiPeiji5(改頁5);
             データEntity.setHihokenshaNo(entity.getHihokenshaNo());
             データEntity.setTaishoNendo(entity.getTaishoNendo());
             データEntity.setHokenshaNo(entity.getHokenshaNo());

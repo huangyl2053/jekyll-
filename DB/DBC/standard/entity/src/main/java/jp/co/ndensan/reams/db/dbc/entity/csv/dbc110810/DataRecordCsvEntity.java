@@ -152,6 +152,40 @@ public class DataRecordCsvEntity implements IJukyushaTotsugoIraiOutCsvEntity {
     private final RString 軽減率適用終了年月日;
     @CsvField(order = 67, name = "小規模多機能型居宅介護")
     private final boolean 小規模多機能型居宅介護;
+    @CsvField(order = 68, name = "保険者番号後期")
+    private final RString 保険者番号後期;
+    @CsvField(order = 69, name = "被保険者番号後期")
+    private final RString 被保険者番号後期;
+    @CsvField(order = 70, name = "保険者番号国保")
+    private final RString 保険者番号国保;
+    @CsvField(order = 71, name = "被保険者番号国保")
+    private final RString 被保険者番号国保;
+    @CsvField(order = 72, name = "個人番号国保")
+    private final RString 個人番号国保;
+    @CsvField(order = 73, name = "二次予防事業区分コード")
+    private final RString 二次予防事業区分コード;
+    @CsvField(order = 74, name = "二次予防事業開始年月日")
+    private final RString 二次予防事業開始年月日;
+    @CsvField(order = 75, name = "二次予防事業終了年月日")
+    private final RString 二次予防事業終了年月日;
+    @CsvField(order = 76, name = "住所地特例対象者区分コード")
+    private final RString 住所地特例対象者区分コード;
+    @CsvField(order = 77, name = "施設所在保険者番号")
+    private final RString 施設所在保険者番号;
+    @CsvField(order = 78, name = "住所地特例適用開始日")
+    private final RString 住所地特例適用開始日;
+    @CsvField(order = 79, name = "住所地特例適用終了日")
+    private final RString 住所地特例適用終了日;
+    @CsvField(order = 80, name = "居宅費新1負担限度額")
+    private final RString 居宅費新1負担限度額;
+    @CsvField(order = 81, name = "居宅費新2負担限度額")
+    private final RString 居宅費新2負担限度額;
+    @CsvField(order = 82, name = "居宅費新3負担限度額")
+    private final RString 居宅費新3負担限度額;
+    @CsvField(order = 83, name = "二割負担適用開始年月日")
+    private final RString 二割負担適用開始年月日;
+    @CsvField(order = 84, name = "二割負担適用終了年月日")
+    private final RString 二割負担適用終了年月日;
 
     /**
      * コンストラクタ
@@ -223,6 +257,23 @@ public class DataRecordCsvEntity implements IJukyushaTotsugoIraiOutCsvEntity {
      * @param 居住費従来型個室負担限度額 居住費従来型個室負担限度額
      * @param 軽減率適用終了年月日 軽減率適用終了年月日
      * @param 軽減率適用開始年月日 軽減率適用開始年月日
+     * @param 保険者番号後期 保険者番号後期
+     * @param 被保険者番号後期 被保険者番号後期
+     * @param 保険者番号国保 保険者番号国保
+     * @param 被保険者番号国保 被保険者番号国保
+     * @param 個人番号国保 個人番号国保
+     * @param 二次予防事業区分コード 二次予防事業区分コード
+     * @param 二次予防事業開始年月日 二次予防事業開始年月日
+     * @param 二次予防事業終了年月日 二次予防事業終了年月日
+     * @param 住所地特例対象者区分コード 住所地特例対象者区分コード
+     * @param 施設所在保険者番号 施設所在保険者番号
+     * @param 住所地特例適用開始日 住所地特例適用開始日
+     * @param 住所地特例適用終了日 住所地特例適用終了日
+     * @param 居宅費新1負担限度額 居宅費新1負担限度額
+     * @param 居宅費新2負担限度額 居宅費新2負担限度額
+     * @param 居宅費新3負担限度額 居宅費新3負担限度額
+     * @param 二割負担適用開始年月日 二割負担適用開始年月日
+     * @param 二割負担適用終了年月日 二割負担適用終了年月日
      *
      */
     public DataRecordCsvEntity(RString 種別,
@@ -291,7 +342,25 @@ public class DataRecordCsvEntity implements IJukyushaTotsugoIraiOutCsvEntity {
             RString 軽減率,
             RString 軽減率適用開始年月日,
             RString 軽減率適用終了年月日,
-            boolean 小規模多機能型居宅介護) {
+            boolean 小規模多機能型居宅介護,
+            RString 保険者番号後期,
+            RString 被保険者番号後期,
+            RString 保険者番号国保,
+            RString 被保険者番号国保,
+            RString 個人番号国保,
+            RString 二次予防事業区分コード,
+            RString 二次予防事業開始年月日,
+            RString 二次予防事業終了年月日,
+            RString 住所地特例対象者区分コード,
+            RString 施設所在保険者番号,
+            RString 住所地特例適用開始日,
+            RString 住所地特例適用終了日,
+            RString 居宅費新1負担限度額,
+            RString 居宅費新2負担限度額,
+            RString 居宅費新3負担限度額,
+            RString 二割負担適用開始年月日,
+            RString 二割負担適用終了年月日
+    ) {
 
         this.種別 = 種別;
         this.番号連番 = 番号連番;
@@ -360,5 +429,22 @@ public class DataRecordCsvEntity implements IJukyushaTotsugoIraiOutCsvEntity {
         this.軽減率適用開始年月日 = 軽減率適用開始年月日;
         this.軽減率適用終了年月日 = 軽減率適用終了年月日;
         this.小規模多機能型居宅介護 = 小規模多機能型居宅介護;
+        this.保険者番号後期 = 保険者番号後期;
+        this.被保険者番号後期 = 被保険者番号後期;
+        this.保険者番号国保 = 保険者番号国保;
+        this.被保険者番号国保 = 被保険者番号国保;
+        this.個人番号国保 = 個人番号国保;
+        this.二次予防事業区分コード = 二次予防事業区分コード;
+        this.二次予防事業開始年月日 = 二次予防事業開始年月日;
+        this.二次予防事業終了年月日 = 二次予防事業終了年月日;
+        this.住所地特例対象者区分コード = 住所地特例対象者区分コード;
+        this.施設所在保険者番号 = 施設所在保険者番号;
+        this.住所地特例適用開始日 = 住所地特例適用開始日;
+        this.住所地特例適用終了日 = 住所地特例適用終了日;
+        this.居宅費新1負担限度額 = 居宅費新1負担限度額;
+        this.居宅費新2負担限度額 = 居宅費新2負担限度額;
+        this.居宅費新3負担限度額 = 居宅費新3負担限度額;
+        this.二割負担適用開始年月日 = 二割負担適用開始年月日;
+        this.二割負担適用終了年月日 = 二割負担適用終了年月日;
     }
 }

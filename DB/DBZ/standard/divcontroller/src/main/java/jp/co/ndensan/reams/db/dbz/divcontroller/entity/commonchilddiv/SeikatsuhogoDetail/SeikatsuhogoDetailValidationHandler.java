@@ -84,7 +84,8 @@ public class SeikatsuhogoDetailValidationHandler {
      */
     public ValidationMessageControlPairs validateForDetailKakutei() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getTxtJukyuHaishiYMD().getValue().isBefore(div.getTxtJukyuKaishiYMD().getValue())) {
+        if (div.getTxtJukyuHaishiYMD().getValue() != null
+                && div.getTxtJukyuHaishiYMD().getValue().isBefore(div.getTxtJukyuKaishiYMD().getValue())) {
             validPairs.add(new ValidationMessageControlPair(
                     IdocheckMessages.Validate受給期間が不正_追加メッセージあり, div.getTxtJukyuKaishiYMD(), div.getTxtJukyuHaishiYMD()));
         }
@@ -108,18 +109,21 @@ public class SeikatsuhogoDetailValidationHandler {
                 return r1.compareTo(r2);
             }
         });
-        if (停止開始日List.get(0).compareTo(div.getTxtJukyuKaishiYMD().getValue().toDateString()) < 0) {
+        if (!停止開始日List.isEmpty()
+                && 停止開始日List.get(0).compareTo(div.getTxtJukyuKaishiYMD().getValue().toDateString()) < 0) {
             validPairs.add(new ValidationMessageControlPair(
                     IdocheckMessages.Validate期間が不正, div.getTxtJukyuKaishiYMD(), div.getDgTeishiRireki()));
         }
-        if (div.getTxtJukyuHaishiYMD().getValue() != null
+        if (!停止終了日List.isEmpty()
+                && div.getTxtJukyuHaishiYMD().getValue() != null
                 && 停止終了日List.get(停止終了日List.size() - 1).compareTo(div.getTxtJukyuHaishiYMD().getValue().toDateString()) >= 0) {
             validPairs.add(new ValidationMessageControlPair(
                     IdocheckMessages.Validate期間が不正, div.getTxtJukyuHaishiYMD(), div.getDgTeishiRireki()));
         }
-        if (div.getTxtTeishiShuryoYMD().getValue() != null
-                && !RString.isNullOrEmpty(停止開始日List.get(停止開始日List.size() - 1))
-                && RString.isNullOrEmpty(停止終了日List.get(0))) {
+        if (!停止開始日List.isEmpty() && !停止終了日List.isEmpty()
+                && div.getTxtTeishiShuryoYMD().getValue() != null
+                && RString.isNullOrEmpty(停止終了日List.get(0))
+                && !RString.isNullOrEmpty(停止開始日List.get(停止開始日List.size() - 1))) {
             validPairs.add(new ValidationMessageControlPair(
                     IdocheckMessages.Validate期間が不正, div.getTxtJukyuHaishiYMD(), div.getDgTeishiRireki()));
         }

@@ -62,10 +62,10 @@ public class DbT4010GemmenGengakuShinseiDac implements ISaveable<DbT4010GemmenGe
         return accessor.select().
                 table(DbT4010GemmenGengakuShinsei.class).
                 where(and(
-                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(gemmenGengakuShurui, 減免減額種類),
-                                eq(shinseiRirekiNo, 履歴番号))).
+                        eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(gemmenGengakuShurui, 減免減額種類),
+                        eq(shinseiRirekiNo, 履歴番号))).
                 toObject(DbT4010GemmenGengakuShinseiEntity.class);
     }
 

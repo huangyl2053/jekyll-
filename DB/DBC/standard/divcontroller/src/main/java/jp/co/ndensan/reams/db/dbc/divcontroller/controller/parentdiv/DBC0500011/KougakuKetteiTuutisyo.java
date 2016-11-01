@@ -105,6 +105,7 @@ public class KougakuKetteiTuutisyo {
         key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         div.getDdlKanliBanngou().setDataSource(getHandler().onLoad_ddlKanliBanngou(div, key.get被保険者番号()));
         div.getDdlKanliBanngou().setSelectedIndex(0);
+        getHandler().onLoad_txtZennkaiHakkoubi(div, key.get被保険者番号());
         return ResponseData.of(div).respond();
     }
 

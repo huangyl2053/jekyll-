@@ -38,11 +38,7 @@ public class NinshiuUpdateProperty {
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho_kanaShimei\"")),
-        /**
-         * 氏名50音ｶﾅ(送付先)
-         */
-        //        氏名50音ｶﾅ_送付先(new RString("0015"), new RString("氏名50音ｶﾅ(送付先)"), new RString("")), // QA #101093
+        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho_kanaMeisho\"")),
         /**
          * 市町村コード
          */
@@ -50,15 +46,15 @@ public class NinshiuUpdateProperty {
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"dbT4101NinteiShinseiJoho_hihokenshaNo\""));
+        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"dbT4101NinteiShinseiJoho_hihokenshaNo\"")),
         /**
          * 指定事業者番号
          */
-//        指定事業者番号(new RString("0303"), new RString("指定事業者番号"), new RString("")), // QA #101093
+        指定事業者番号(new RString("0303"), new RString("指定事業者番号"), new RString("入所施設コード")),
         /**
          * 計画事業者番号
          */
-//        計画事業者番号(new RString("0311"), new RString("計画事業者番号"), new RString("")); // QA #101093
+        計画事業者番号(new RString("0311"), new RString("計画事業者番号"), new RString("\"keikakuJigyoshaNo\""));
         private final RString 項目ID;
         private final RString フォームフィールド名;
         private final RString myBatis項目名;

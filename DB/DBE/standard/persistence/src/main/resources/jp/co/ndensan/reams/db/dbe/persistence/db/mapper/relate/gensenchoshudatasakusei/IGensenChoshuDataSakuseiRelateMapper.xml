@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gensenchoshudatasakusei.IGensenChoshuDataSakuseiRelateMapper">
 
     <select id="getデータ情報" resultMap="resultMap_GensenChoshuRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.gensenchoshudatasakusei.GensenChoshuMapperParameter" fetchSize="500" resultOrdered="true">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE631001.GensenChoshuMapperParameter" fetchSize="500" resultOrdered="true">
         SELECT          T5603."shinsakaiIinCode",
         T5594."shinsakaiIinShimei",
         T5594."shinsakaiIinShikakuCode",

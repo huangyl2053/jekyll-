@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.business.report.jutariyutesuseikenshinichiran
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutariyutesuseikenshinichiran.JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranData;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jutariyutesuseikenshinichiran.JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -45,7 +44,6 @@ public class JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranEditor implemen
 
     private JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReportSource editSource(
             JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReportSource source) {
-        source.pageAll = data.get総ページ();
         source.printTimeStamp = set平成年月日(data.get作成年月日());
         source.jigyoshaMeisho = data.get事業者名();
         source.kaishiYM = set平成年月日(data.get集計期間開始());
@@ -58,14 +56,10 @@ public class JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranEditor implemen
         source.list1_6 = data.get工事の種類();
         source.list1_7 = data.get理由書作成者();
         source.list1_8 = data.get備考();
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.shikibetuCode = data.get識別コード();
         if (data.get被保険者番号() != null) {
             source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), data.get被保険者番号());
         }
-        if (data.get被保険者氏名() != null) {
-            source.hihokenshaName = new ExpandedInformation(new Code("0003"), new RString("被保険者氏名"), data.get被保険者氏名());
-        }
-
         return source;
     }
 

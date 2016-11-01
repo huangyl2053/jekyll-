@@ -158,7 +158,6 @@ class FukaDaichoBodyEditor implements IFukaDaichoEditor {
         source.listHonin1_2 = item.getListHonin1_2();
         source.listHonin1_3 = item.getListHonin1_3();
         source.listHonin1_4 = item.getListHonin1_4();
-        source.listHonin1_5 = item.getListHonin1_5();
         source.listHonin1_6 = item.getListHonin1_6();
         source.listHonin1_7 = item.getListHonin1_7();
         source.listHonin1_8 = item.getListHonin1_8();

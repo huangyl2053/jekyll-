@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.Ko
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.ShoriModeHanteiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuGakuKeisanKekkaParameter;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteihosei.ShoriModeHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiEntity;
@@ -71,7 +70,6 @@ public class KogakuGassanShikyuKetteiHosei {
     private final DbT3105SogoJigyoTaishoshaDac 総合事業対象者dac;
     private final DbT3074KogakuGassanShikyuFushikyuKetteiDac 高額合算支給不支給決定dac;
     private final DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac 事業高額合算支給不支給決定dac;
-    private static final Decimal ZERO = new Decimal(0);
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
@@ -116,6 +114,7 @@ public class KogakuGassanShikyuKetteiHosei {
     /**
      * 高額合算支給額計算結果テーブルから取得する。
      *
+     * @param 被保険者番号 HihokenshaNo
      * @param 対象年度 FlexibleYear
      * @param 証記載保険者番号 HokenshaNo
      * @param 支給申請書整理番号 RString
@@ -123,17 +122,15 @@ public class KogakuGassanShikyuKetteiHosei {
      * @return List<KogakuGassanShikyuKetteiHoseiResult>
      */
     public List<KogakuGassanShikyuKetteiHoseiResult> selectShikyuKetteiHoseiList(
+            HihokenshaNo 被保険者番号,
             FlexibleYear 対象年度,
             HokenshaNo 証記載保険者番号,
             RString 支給申請書整理番号,
             boolean 事業分フラグ) {
         List<KogakuGassanShikyuKetteiHoseiResult> result = new ArrayList<>();
-        IKogakuGassanShikyuKetteiHoseiMapper mapper = mapperProvider.create(IKogakuGassanShikyuKetteiHoseiMapper.class);
-        KogakuGassanShikyuKetteiHoseiParameter parameter
-                = new KogakuGassanShikyuKetteiHoseiParameter(対象年度, 証記載保険者番号, 支給申請書整理番号);
         if (事業分フラグ) {
             List<DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity> 事業高額合算list
-                    = mapper.get事業高額合算list(parameter);
+                    = 事業高額合算支給不支給決定dac.getAllByKey(被保険者番号, 対象年度, 証記載保険者番号, 支給申請書整理番号);
             if (事業高額合算list == null || 事業高額合算list.isEmpty()) {
                 return result;
             } else {
@@ -146,7 +143,7 @@ public class KogakuGassanShikyuKetteiHosei {
             return result;
         }
         List<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> 高額合算list
-                = mapper.get高額合算list(parameter);
+                = 高額合算支給不支給決定dac.getAllByKey(被保険者番号, 対象年度, 証記載保険者番号, 支給申請書整理番号);
         if (高額合算list == null || 高額合算list.isEmpty()) {
             return result;
         } else {
@@ -170,14 +167,15 @@ public class KogakuGassanShikyuKetteiHosei {
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
         }
-        DbV1001HihokenshaDaichoEntity 被保険者台帳管理entity = 被保険者台帳管理dac.get被保険者台帳情報(被保険者番号);
+        DbV1001HihokenshaDaichoEntity 被保険者台帳管理entity = 被保険者台帳管理dac.select被保険者台帳情報(被保険者番号);
         if (被保険者台帳管理entity == null) {
             return null;
         }
-        if (被保険者台帳管理entity.getShikakuSoshitsuYMD() != null) {
+        if (被保険者台帳管理entity.getShikakuSoshitsuYMD() != null
+                && !被保険者台帳管理entity.getShikakuSoshitsuYMD().isEmpty()) {
             result.set資格喪失年月日(new RDate(被保険者台帳管理entity.getShikakuSoshitsuYMD().toString()));
         }
-        result.set喪失事由コード(被保険者台帳管理entity.getShikakuShutokuJiyuCode());
+        result.set喪失事由コード(被保険者台帳管理entity.getShikakuSoshitsuJiyuCode());
         return result;
     }
 
@@ -197,7 +195,7 @@ public class KogakuGassanShikyuKetteiHosei {
             boolean 事業分フラグ) {
         RString 給付の種類 = null;
         if (事業分フラグ) {
-            給付の種類 = DbBusinessConfig.get(ConfigNameDBC.事業分高額合算支給額計算_給付の種類,
+            給付の種類 = DbBusinessConfig.get(ConfigNameDBC.支給決定情報補正_給付の種類_事業分,
                     RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             return 給付の種類;
         }
@@ -251,12 +249,14 @@ public class KogakuGassanShikyuKetteiHosei {
                 被保険者番号, 証記載保険者番号, 支給申請書整理番号);
         KogakuGassanShikyuGakuKeisanKekka 高額合算支給額情報 = getshoriModeHantei_Three(
                 被保険者番号, 対象年度, 証記載保険者番号, 支給申請書整理番号);
-        boolean flag = ((高額合算決定情報 != null && !高額合算決定情報.isEmpty())
+        boolean flag1 = ((高額合算決定情報 != null && !高額合算決定情報.isEmpty())
                 && ((高額合算決定情報.get(0).get受取年月() != null && !高額合算決定情報.get(0).get受取年月().isEmpty())
                 || ((高額合算決定情報.get(0).get受取年月() == null || 高額合算決定情報.get(0).get受取年月().isEmpty())
                 && ONE.equals(高額合算決定情報.get(0).get支給区分コード()))));
+        boolean flag2 = (受取年月 != null && !受取年月.isEmpty() || ((受取年月 == null || 受取年月.isEmpty())
+                && ONE.equals(支給区分)));
         if (給付実績基本情報 == null) {
-            get給付実績基本情報のデータが存在しない場合(処理区分, 高額合算支給額情報, 高額合算決定情報, result, flag);
+            get給付実績基本情報のデータが存在しない場合(処理区分, 高額合算支給額情報, 高額合算決定情報, result, flag1, flag2);
             return result;
         }
         boolean 支給額フラグ = get支給額フラグ(高額合算決定情報, 給付実績基本情報);
@@ -297,6 +297,20 @@ public class KogakuGassanShikyuKetteiHosei {
     }
 
     /**
+     * 更新高額合算給付実績
+     *
+     * @param 処理モード 処理モード
+     * @param 画面DIV KoshinShoriResult
+     */
+    public void get更新高額合算給付実績(RString 処理モード, KoshinShoriResult 画面DIV) {
+        IKogakuGassanShikyuKetteiHoseiMapper mapper = mapperProvider.create(IKogakuGassanShikyuKetteiHoseiMapper.class);
+        if (THREE.equals(処理モード)) {
+            mapper.logicalDelete高額合算給付実績();
+            return;
+        }
+    }
+
+    /**
      * 画面のデータをＤＢに追加する。　（事業高額合算支給不支給決定TBL）
      *
      * @param 画面DIV KoshinShoriResult
@@ -311,7 +325,7 @@ public class KogakuGassanShikyuKetteiHosei {
             事業高額合算支給不支給決定dac.save(画面DIV.toEntity());
         } else if (画面DIV != null && THREE.equals(処理モード)
                 && EntityDataState.Deleted.equals(画面DIV.toEntity().getState())) {
-            事業高額合算支給不支給決定dac.delete(画面DIV.toEntity());
+            事業高額合算支給不支給決定dac.save(画面DIV.toEntity());
         }
         return true;
     }
@@ -381,6 +395,50 @@ public class KogakuGassanShikyuKetteiHosei {
         return result;
     }
 
+    /**
+     * 高額決定履歴番取得です。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 FlexibleYear
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 RString
+     * @return int
+     */
+    public int get高額決定Max履歴番号(HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号) {
+        int 履歴番号 = 1;
+        DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity = 高額合算支給不支給決定dac.getMax履歴番号のentity(
+                被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
+        if (entity != null) {
+            履歴番号 = entity.getRirekiNo() + 1;
+        }
+        return 履歴番号;
+    }
+
+    /**
+     * 事業高額決定履歴番取得です。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 FlexibleYear
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 RString
+     * @return int
+     */
+    public int get事業高額決定Max履歴番号(HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号) {
+        int 履歴番号 = 1;
+        DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity entity = 事業高額合算支給不支給決定dac.getMax履歴番号のentity(
+                被保険者番号, 対象年度, 保険者番号, 支給申請書整理番号);
+        if (entity != null) {
+            履歴番号 = entity.getRirekiNo() + 1;
+        }
+        return 履歴番号;
+    }
+
     private void get更新高額合算支給不支給決定(
             KogakuGassanShikyuFushikyuKettei 高額合算Entity,
             RString 処理モード) {
@@ -389,7 +447,7 @@ public class KogakuGassanShikyuKetteiHosei {
             高額合算支給不支給決定dac.save(高額合算Entity.toEntity());
         } else if (高額合算Entity != null && THREE.equals(処理モード)
                 && EntityDataState.Deleted.equals(高額合算Entity.toEntity().getState())) {
-            高額合算支給不支給決定dac.delete(高額合算Entity.toEntity());
+            高額合算支給不支給決定dac.save(高額合算Entity.toEntity());
         }
     }
 
@@ -398,20 +456,21 @@ public class KogakuGassanShikyuKetteiHosei {
             KogakuGassanShikyuGakuKeisanKekka 高額合算支給額情報,
             List<KogakuGassanShikyuFushikyuKettei> 高額合算決定情報,
             ShoriModeHanteiResult result,
-            boolean flag) {
+            boolean flag1,
+            boolean flag2) {
         if (ONE.equals(処理区分) && (高額合算決定情報 == null
                 || 高額合算決定情報.isEmpty()) && 高額合算支給額情報 != null) {
             result.setWkモード(処理不可);
             result.setWkメッセージ(支給決定情報補正判定MSG1);
 
         } else if (ONE.equals(処理区分) && (高額合算決定情報 != null && !高額合算決定情報.isEmpty())
-                && flag) {
+                && flag1) {
             result.setWkモード(処理不可);
             result.setWkメッセージ(支給決定情報補正判定MSG1);
-        } else if (TWO.equals(処理区分) && (高額合算決定情報 != null && !高額合算決定情報.isEmpty()) && flag) {
+        } else if (TWO.equals(処理区分) && flag2) {
             result.setWkモード(口座修正モード);
             result.setWkメッセージ(支給決定情報補正判定MSG2);
-        } else if (THREE.equals(処理区分) && (高額合算決定情報 != null && !高額合算決定情報.isEmpty()) && flag) {
+        } else if (THREE.equals(処理区分) && flag2) {
             result.setWkモード(削除照会モード);
             result.setWkメッセージ(支給決定情報補正判定MSG3);
         }
@@ -470,13 +529,24 @@ public class KogakuGassanShikyuKetteiHosei {
         if (ONE.equals(処理区分) && (!支給額フラグ || get受取年月フラグ(高額合算決定情報, 支給額フラグ))) {
             result.setWkモード(処理不可);
             result.setWkメッセージ(支給決定情報補正判定MSG4);
-        } else if (TWO.equals(処理区分) && (!支給額フラグ || get受取年月フラグ(高額合算決定情報, 支給額フラグ))) {
+        } else if (TWO.equals(処理区分) && (!支給額フラグ || is受取年月フラ(高額合算決定情報))) {
             result.setWkモード(口座修正モード);
             result.setWkメッセージ(支給決定情報補正判定MSG5);
-        } else if (THREE.equals(処理区分) && (!支給額フラグ || get受取年月フラグ(高額合算決定情報, 支給額フラグ))) {
+        } else if (THREE.equals(処理区分) && (!支給額フラグ || is受取年月フラ(高額合算決定情報))) {
             result.setWkモード(削除照会モード);
             result.setWkメッセージ(支給決定情報補正判定MSG6);
         }
+    }
+
+    private boolean is受取年月フラ(List<KogakuGassanShikyuFushikyuKettei> 高額合算決定情報) {
+        boolean flag = true;
+        for (KogakuGassanShikyuFushikyuKettei entity : 高額合算決定情報) {
+            if (entity.get受取年月() == null || entity.get受取年月().isEmpty()) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
     }
 
     private boolean get受取年月フラグ(
@@ -496,7 +566,7 @@ public class KogakuGassanShikyuKetteiHosei {
             KogakuGassanKyufuJisseki 給付実績基本情報) {
         boolean flag = false;
         if (高額合算決定情報 != null && !高額合算決定情報.isEmpty()) {
-            Decimal 支給額 = ZERO;
+            Decimal 支給額 = Decimal.ZERO;
             for (KogakuGassanShikyuFushikyuKettei entity : 高額合算決定情報) {
                 if (ONE.equals(entity.get支給区分コード())) {
                     支給額 = 支給額.add(entity.get支給額());
@@ -533,11 +603,24 @@ public class KogakuGassanShikyuKetteiHosei {
         IKogakuGassanShikyuKetteiHoseiMapper mapper = mapperProvider.create(IKogakuGassanShikyuKetteiHoseiMapper.class);
         ShoriModeHanteiParameter parameter = new ShoriModeHanteiParameter(
                 被保険者番号, 証記載保険者番号, 支給申請書整理番号);
-        DbT3075KogakuGassanKyufuJissekiEntity 高額合算給付実績entity = mapper.get高額合算給付実績(parameter);
-        if (高額合算給付実績entity == null) {
+        List<DbT3075KogakuGassanKyufuJissekiEntity> 高額合算給付実績list = mapper.get高額合算給付実績(parameter);
+        if (高額合算給付実績list == null || 高額合算給付実績list.isEmpty()) {
             return null;
         }
-        return new KogakuGassanKyufuJisseki(高額合算給付実績entity);
+        if (高額合算給付実績list.size() == 1) {
+            return new KogakuGassanKyufuJisseki(高額合算給付実績list.get(0));
+        }
+        if (高額合算給付実績list.get(0).getShoriYM() == null
+                || 高額合算給付実績list.get(0).getShoriYM().isEmpty()) {
+            return new KogakuGassanKyufuJisseki(高額合算給付実績list.get(0));
+        } else {
+            if (高額合算給付実績list.get(高額合算給付実績list.size() - 1).getShoriYM() == null
+                    || 高額合算給付実績list.get(高額合算給付実績list.size() - 1).getShoriYM().isEmpty()) {
+                return new KogakuGassanKyufuJisseki(高額合算給付実績list.get(高額合算給付実績list.size() - 1));
+            } else {
+                return new KogakuGassanKyufuJisseki(高額合算給付実績list.get(0));
+            }
+        }
     }
 
     private KogakuGassanShikyuGakuKeisanKekka getshoriModeHantei_Three(

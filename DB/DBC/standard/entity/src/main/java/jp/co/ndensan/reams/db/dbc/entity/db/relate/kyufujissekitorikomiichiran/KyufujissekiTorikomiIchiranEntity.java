@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KyufujissekiTorikomiIchiranEntity {
 
+    private int 連番;
     private HihokenshaNo 被保険者_登録被保険者番号;
     private RString 被保険者_宛名カナ名称;
     private RString 被保険者_宛名名称;
@@ -56,4 +57,9 @@ public class KyufujissekiTorikomiIchiranEntity {
     private RString 給付実績_警告区分コード;
     private RString 給付実績_事業者名称;
     private Decimal 給付実績_出力データ件数;
+    private RString 被保険者_郵便番号;
+    private RString 被保険者_町域コード;
+    private RString 被保険者_行政区コード;
+    private RString 被保険者_氏名50音カナ;
+    private RString 被保険者_市町村コード;
 }

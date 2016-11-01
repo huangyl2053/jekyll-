@@ -176,19 +176,19 @@ public class ShutsuryokuKiKohoFactory {
             KitsukiList 期月リスト,
             ShutsuryokuKiKoho 出力期候補,
             Kitsuki kitsuki) {
-        if (ToshoShutsuryokuHoho.前期_中期_後期を別々に出力 == 当初出力_出力方法) {
+        if (ToshoShutsuryokuHoho.別々出力 == 当初出力_出力方法) {
             出力期候補.set出力期リスト(Arrays.asList(kitsuki));
-        } else if (ToshoShutsuryokuHoho.前期_中期_後期を全件出力 == 当初出力_出力方法) {
+        } else if (ToshoShutsuryokuHoho.全件出力 == 当初出力_出力方法) {
             出力期候補.set出力期リスト(期月リスト.filteredLater期(kitsuki.get期AsInt()).toList());
         }
     }
 
     private RString get表示文字By期毎タイプ(ToshoShutsuryokuHoho 当初出力_出力方法, Kitsuki kitsuki) {
-        if (ToshoShutsuryokuHoho.前期_中期_後期を別々に出力 == 当初出力_出力方法) {
+        if (ToshoShutsuryokuHoho.別々出力 == 当初出力_出力方法) {
             return new RStringBuilder().append(kitsuki.get期()).append(文字列_期)
                     .append(kitsuki.get月().getコード()).append(文字列_月分).toRString();
         }
-        if (ToshoShutsuryokuHoho.前期_中期_後期を全件出力 == 当初出力_出力方法) {
+        if (ToshoShutsuryokuHoho.全件出力 == 当初出力_出力方法) {
             return new RStringBuilder().append(kitsuki.get期()).append(文字列_期)
                     .append(kitsuki.get月().getコード()).append(文字列_月全件).toRString();
         }
@@ -198,10 +198,10 @@ public class ShutsuryokuKiKohoFactory {
     private RString get表示文字By非期毎タイプ(ToshoShutsuryokuHoho 当初出力_出力方法,
             NonyuTsuchiShoSeigyoJoho 納入通知書制御情報,
             Kitsuki kitsuki) {
-        if (ToshoShutsuryokuHoho.前期_中期_後期を別々に出力 == 当初出力_出力方法) {
+        if (ToshoShutsuryokuHoho.別々出力 == 当初出力_出力方法) {
             return get表示文字By非期毎タイプ別々に出力(納入通知書制御情報, kitsuki);
         }
-        if (ToshoShutsuryokuHoho.前期_中期_後期を全件出力 == 当初出力_出力方法) {
+        if (ToshoShutsuryokuHoho.全件出力 == 当初出力_出力方法) {
             return get表示文字By非期毎タイプ全件出力(納入通知書制御情報, kitsuki);
         }
         return RString.EMPTY;

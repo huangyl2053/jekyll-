@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.ShoukanFurikomi
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC050010.SyoriResultKakuninListCreateProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC050010.DBC050010_FurikomimeisaiFurikomiDataParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiGyomunaiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
+import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShoriTaisho;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.KozaFurikomiTempTableEntity;
@@ -58,14 +60,13 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
     private static final RString 処理対象_高額_3 = new RString("3");
     private static final RString 登録区分_通常 = new RString("1");
     private static final RString 登録区分_差分 = new RString("2");
-    private static final RString 処理区分_明細一覧表作成 = new RString("3");
-    private static final RString 支払方法_窓口 = new RString("2");
 
     private FurikomiGyomunaiKubun 振込業務内区分;
     private static RString 振込単位;
     private static ShoriName 処理名;
     private int レコード件数 = 0;
     private int 振込明細レコード件数 = 0;
+    private int 被保険者台帳_宛名情報レコード件数 = 0;
 
     private static final String 口座振込データの登録処理 = "kouzaFurikomiDataInsert";
     private static final String 一時テーブル作成_振込明細 = "tempTableCreateMaisai";
@@ -102,8 +103,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
         振込単位 = DbBusinessConfig.get(ConfigNameDBC.振込単位, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         DBC050010_FurikomimeisaiFurikomiDataParameter parameter = getParameter();
 
-        if (Furikomi_ShoriTaisho.償還高額.equals(parameter.get処理対象())
-                && (振込単位 == null || 振込単位.isEmpty())) {
+        if (Furikomi_ShoriTaisho.償還高額.equals(parameter.get処理対象())) {
             振込業務内区分 = FurikomiGyomunaiKubun.償還高額;
             処理名 = ShoriName.給付振込データ作成_償還高額;
         }
@@ -150,17 +150,18 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
 
         if (0 != 振込明細レコード件数) {
             executeStep(被保険者台帳_宛名情報);
-            executeStep(被保険者台帳_宛名情報_エラー登録);
+            被保険者台帳_宛名情報レコード件数 = getResult(
+                    Integer.class, new RString(被保険者台帳_宛名情報),
+                    HihokenshaAtenaJohoProcess.PARAMETER_OUT_COUNT);
+
+            if (0 == 被保険者台帳_宛名情報レコード件数) {
+                executeStep(被保険者台帳_宛名情報_エラー登録);
+            }
             executeStep(還口座払の口座情報);
             executeStep(高額の口座情報);
             executeStep(償還受領委任払の口座情報);
-            executeStep(振込データ作成);
-            executeStep(振込データ登録_口座振込一時処理);
-            レコード件数 = getResult(
-                    Integer.class, new RString(振込データ登録_口座振込一時処理),
-                    FurikomiDataTourokuProcess.PARAMETER_OUT_COUNT);
-
-            if (0 != レコード件数) {
+            振込データ登録処理();
+            if (0 != レコード件数 || Furikomi_ShoriKubun.明細一覧表作成.equals(getParameter().get処理区分())) {
                 振込データ登録_口座振込一時0件以外処理();
             }
         }
@@ -310,7 +311,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
      */
     @Step(口座振込データの登録処理)
     protected IBatchFlowCommand callGetKouzaFurikomiProcess() {
-        return otherBatchFlow(口座振込データの登録処理BATCH_ID, SubGyomuCode.DBC介護給付, createKozaFurikomiRegisterParameter()).define();
+        return otherBatchFlow(口座振込データの登録処理BATCH_ID, SubGyomuCode.UXX公開共通, createKozaFurikomiRegisterParameter()).define();
     }
 
     /**
@@ -380,7 +381,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
      */
     @Step(振込明細一覧表作成)
     protected IBatchFlowCommand shikyugakuJoho() {
-        return loopBatch(ShikyugakuJohoProcess.class).define();
+        return loopBatch(ShikyugakuJohoProcess.class).arguments(getParameter().toShikyugakuJohoProcessParameter()).define();
     }
 
     /**
@@ -417,7 +418,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
     private UXX000A10_KozaFurikomiRegisterParameter createKozaFurikomiRegisterParameter() {
         UXX000A10_KozaFurikomiRegisterParameter parameter = new UXX000A10_KozaFurikomiRegisterParameter();
         parameter.setTempTableName(口座振込一時名称);
-        parameter.setDaihyoKinyukikanCode(getParameter().get代表金融機関コード());
+        parameter.setDaihyoKinyuKikanCode(getParameter().get代表金融機関コード());
         parameter.setFurikomiGroupCode(getParameter().get振込グループコード());
         parameter.setFurikomiYMD(getParameter().get振込指定年月日());
         if (getParameter().is再処理フラグ()) {
@@ -430,26 +431,39 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
 
     private void 振込データ登録_口座振込一時0件以外処理() {
 
-        executeStep(口座振込データの登録処理);
-
-        if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
-                || 処理対象_償還_2.equals(getParameter().get処理対象().getコード())) {
-
-            executeStep(依頼済登録_償還);
-            executeStep(依頼済取消_償還);
-        }
-        if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
-                || 処理対象_高額_3.equals(getParameter().get処理対象().getコード())) {
-            executeStep(依頼済登録_高額介護);
-            executeStep(依頼済取消_高額介護);
-        }
         executeStep(振込明細一覧表作成_受給取得状況);
         executeStep(振込明細一覧表作成_申請データ有無確認);
         executeStep(振込明細一覧表作成);
 
-        if (!(処理区分_明細一覧表作成.equals(getParameter().get処理区分().getコード())
-                && 支払方法_窓口.equals(getParameter().get支払方法().getコード()))) {
+        if (!(Furikomi_ShoriKubun.明細一覧表作成.equals(getParameter().get処理区分())
+                && Furikomi_ShihraiHohoShitei.窓口.equals(getParameter().get支払方法()))) {
             executeStep(振込エラーリスト作成);
+        }
+    }
+
+    private void 振込データ登録処理() {
+        if (!(Furikomi_ShoriKubun.明細一覧表作成.equals(getParameter().get処理区分()))) {
+            executeStep(振込データ作成);
+            executeStep(振込データ登録_口座振込一時処理);
+
+            レコード件数 = getResult(
+                    Integer.class, new RString(振込データ登録_口座振込一時処理),
+                    FurikomiDataTourokuProcess.PARAMETER_OUT_COUNT);
+            if (0 != レコード件数) {
+                executeStep(口座振込データの登録処理);
+            }
+
+            if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
+                    || 処理対象_償還_2.equals(getParameter().get処理対象().getコード())) {
+
+                executeStep(依頼済登録_償還);
+                executeStep(依頼済取消_償還);
+            }
+            if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
+                    || 処理対象_高額_3.equals(getParameter().get処理対象().getコード())) {
+                executeStep(依頼済登録_高額介護);
+                executeStep(依頼済取消_高額介護);
+            }
         }
     }
 }

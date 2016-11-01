@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190020;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -58,7 +57,7 @@ public class DBC190020_kijunsyunyunenjiParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_処理年度, name = NAME_処理年度)
     private FlexibleYear 処理年度;
     @BatchParameter(key = KEY_被保険者番号, name = NAME_被保険者番号)
-    private HihokenshaNo 被保険者番号;
+    private RString 被保険者番号;
     @BatchParameter(key = KEY_世帯員把握基準日, name = NAME_世帯員把握基準日)
     private FlexibleDate 世帯員把握基準日;
     @BatchParameter(key = KEY_世帯員把握基準日2, name = NAME_世帯員把握基準日2)

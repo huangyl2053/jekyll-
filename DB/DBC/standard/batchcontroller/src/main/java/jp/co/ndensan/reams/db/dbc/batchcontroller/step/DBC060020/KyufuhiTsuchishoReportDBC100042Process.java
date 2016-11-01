@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.BushoCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -68,6 +69,7 @@ public class KyufuhiTsuchishoReportDBC100042Process extends BatchProcessBase<Kyu
     private KyufuhiTsuchishoProcessParameter processParameter;
     private AtesakiPSMSearchKeyBuilder 宛先builder;
     private static final ReportId REPORT_DBC100042 = ReportIdDBC.DBC100042.getReportId();
+    @BatchWriter
     private BatchReportWriter<KyufuhiTsuchishoSealerReportSource> batchWrite;
     private ReportSourceWriter<KyufuhiTsuchishoSealerReportSource> reportSourceWriter;
 
@@ -80,7 +82,9 @@ public class KyufuhiTsuchishoReportDBC100042Process extends BatchProcessBase<Kyu
     }
 
     @Override
-    protected void beforeExecute() {
+    protected IBatchReader createReader() {
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBC100042.value()).create();
+        reportSourceWriter = new ReportSourceWriter(batchWrite);
         ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100042.getReportId(), new FlexibleDate(processParameter.get処理年月日()),
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
@@ -99,12 +103,6 @@ public class KyufuhiTsuchishoReportDBC100042Process extends BatchProcessBase<Kyu
                 new RDate(processParameter.get処理年月日().toString()));
         通知文 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC100042.getReportId(), KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate());
-    }
-
-    @Override
-    protected IBatchReader createReader() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBC100042.value()).create();
-        reportSourceWriter = new ReportSourceWriter(batchWrite);
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(宛先builder.build());
         KyufuhiTsuchishoBatchMybitisParameter mybatisParam = processParameter.
                 toKyufuhiTsuchishoBatchMybitisParameter(new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString()));
@@ -122,9 +120,9 @@ public class KyufuhiTsuchishoReportDBC100042Process extends BatchProcessBase<Kyu
         coverEntity.setTsuchibun1(通知文);
         coverEntity.setPageBunshi(分子);
         coverEntity.setPageBunbo(entity.getCount());
-        boolean isBreak = isBreak(被保険者番号, サービス年月, entity);
-        if (isBreak || index % 数値_15 == 0) {
-            coverEntity.setListServiceIchiran_1(サービス年月);
+        boolean isBreak = isBreak(entity);
+        if (!isBreak || index % 数値_15 == 0) {
+            coverEntity.setListServiceIchiran_1(entity.getサービス提供年月());
         } else if (!isBreak) {
             coverEntity.setListServiceIchiran_1(RString.EMPTY);
         }
@@ -135,7 +133,7 @@ public class KyufuhiTsuchishoReportDBC100042Process extends BatchProcessBase<Kyu
         report.writeBy(reportSourceWriter);
     }
 
-    private boolean isBreak(RString 被保険者番号, RString サービス年月, KyufuhiTuchiHakkoEntity entity) {
+    private boolean isBreak(KyufuhiTuchiHakkoEntity entity) {
         return 被保険者番号.equals(entity.get被保険者番号()) && サービス年月.equals(entity.getサービス提供年月());
     }
 }

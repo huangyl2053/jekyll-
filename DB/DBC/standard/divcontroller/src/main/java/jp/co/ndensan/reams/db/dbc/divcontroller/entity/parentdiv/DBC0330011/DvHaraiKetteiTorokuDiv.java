@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0330011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -26,7 +26,7 @@ public class DvHaraiKetteiTorokuDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnTorokuSeitaiIchiran")
-    private ButtonDialog btnTorokuSeitaiIchiran;
+    private Button btnTorokuSeitaiIchiran;
     @JsonProperty("linLine2")
     private HorizontalLine linLine2;
     @JsonProperty("dgHaraiKettei")
@@ -43,7 +43,7 @@ public class DvHaraiKetteiTorokuDiv extends Panel {
      * @return btnTorokuSeitaiIchiran
      */
     @JsonProperty("btnTorokuSeitaiIchiran")
-    public ButtonDialog getBtnTorokuSeitaiIchiran() {
+    public Button getBtnTorokuSeitaiIchiran() {
         return btnTorokuSeitaiIchiran;
     }
 
@@ -52,7 +52,7 @@ public class DvHaraiKetteiTorokuDiv extends Panel {
      * @param btnTorokuSeitaiIchiran btnTorokuSeitaiIchiran
      */
     @JsonProperty("btnTorokuSeitaiIchiran")
-    public void setBtnTorokuSeitaiIchiran(ButtonDialog btnTorokuSeitaiIchiran) {
+    public void setBtnTorokuSeitaiIchiran(Button btnTorokuSeitaiIchiran) {
         this.btnTorokuSeitaiIchiran = btnTorokuSeitaiIchiran;
     }
 

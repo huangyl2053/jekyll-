@@ -16,18 +16,18 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * @reamsid_L DBD-5790-030 x_zhaowen
  */
 public class ShujiiIkenshoKakuninshoReport extends Report<ShujiiIkenshoKakuninshoReportSource> {
-    
+
     private final ShugiiIkenshoKakuninshoEntity 主治医意見書確認書Entity;
 
     /**
      * インスタンスを生成します。
-     * 
+     *
      * @param 主治医意見書確認書Entity ShugiiIkenshoKakuninshoEntity
      */
     public ShujiiIkenshoKakuninshoReport(ShugiiIkenshoKakuninshoEntity 主治医意見書確認書Entity) {
         this.主治医意見書確認書Entity = 主治医意見書確認書Entity;
     }
-    
+
     @Override
     public void writeBy(ReportSourceWriter<ShujiiIkenshoKakuninshoReportSource> writer) {
         IShugiiIkenshoKakuninshoEditor editor = new ShujiiIkenshoKakuninshoEditor(主治医意見書確認書Entity);

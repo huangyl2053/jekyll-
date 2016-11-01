@@ -52,6 +52,7 @@ public final class FurikomiMeisaiIchiranDetailReport extends Report<FurikomiMeis
      */
     @Override
     public void writeBy(ReportSourceWriter<FurikomiMeisaiIchiranDetailReportSource> writer) {
+
         IFurikomiMeisaiIchiranDetailEditor bodyEditor
                 = new FurikomiMeisaiIchiranDetailEditor(一覧表用データ, 出力順, 支払方法, 作成日時, 設定値);
         IFurikomiMeisaiIchiranDetailBuilder builder = new FurikomiMeisaiIchiranDetailBuilder(bodyEditor);

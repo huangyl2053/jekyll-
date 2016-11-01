@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5190001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.NinteiShinseiJohoBusiness;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519001.DBD519001_NinteishinseiInfoIfParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.Datakubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190001.RenkeiDataSakuseiShinseiJohoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5190001.RenkeiDataSakuseiShinseiJohoHandler;
@@ -14,15 +15,12 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5190001.Ren
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -63,7 +61,7 @@ public class RenkeiDataSakuseiShinseiJoho {
     }
 
     /**
-     * 対象者一覧情報初期化のチェック。 対象者一覧情報初期化
+     * 対象者一覧情報初期化のチェック。 対象者一覧情報初期化。
      *
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      *
@@ -133,7 +131,7 @@ public class RenkeiDataSakuseiShinseiJoho {
     }
 
     /**
-     * 被保険者番号を取り、前の状態に戻します.
+     * 被保険者番号を取り、前の状態に戻します。
      *
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      *
@@ -147,7 +145,7 @@ public class RenkeiDataSakuseiShinseiJoho {
     }
 
     /**
-     * 検索条件入力項目をクリアする
+     * 検索条件入力項目をクリアする。
      *
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      *
@@ -159,7 +157,7 @@ public class RenkeiDataSakuseiShinseiJoho {
     }
 
     /**
-     * radio保険者番号と対象期間の状態定義
+     * radio保険者番号と対象期間の状態定義。
      *
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      *
@@ -171,74 +169,37 @@ public class RenkeiDataSakuseiShinseiJoho {
     }
 
     /**
-     * 実行確認ダイアログのチェック事件
+     * 実行確認ダイアログのチェック事件。
      *
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      *
      * @return ResponseData<RenkeiDataSakuseiShinseiJohoDiv>
      */
     public ResponseData<RenkeiDataSakuseiShinseiJohoDiv> validate_check(RenkeiDataSakuseiShinseiJohoDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        getValidationHandler().validateFor被保険者番号の非空チェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            getValidationHandler().validateFor被保険者番号の非空チェック(pairs, div);
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
-            getValidationHandler().validateFor対象者一覧選択チェック(pairs, div);
-            if (pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }
+        getValidationHandler().validateFor対象者一覧選択チェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         return ResponseData.of(div).respond();
     }
 
     /**
-     * バッチパラメータの設定について
+     * バッチパラメータの設定について。
      *
      * @param div RenkeiDataSakuseiShinseiJohoDiv
      *
      * @return ResponseData<DBD519001_NinteishinseiInfoIfParameter>
      */
-//    public ResponseData<DBD519001_NinteishinseiInfoIfParameter> batch_paramter(RenkeiDataSakuseiShinseiJohoDiv div) {
-//        DBD519001_NinteishinseiInfoIfParameter parameters = new DBD519001_NinteishinseiInfoIfParameter();
-//        RDate fromdate = RDate.getNowDate();
-//        RDate todate = RDate.getNowDate().plusDay(1);
-//        RTime fromtime = RTime.of(0, 0, 0);
-//        RTime totime = RTime.of(0, 0, 0);
-//        if (div.getTxtKonkaiKaishiDay().getValue() != null) {
-//            fromdate = div.getTxtKonkaiKaishiDay().getValue();
-//        }
-//        if (div.getTxtKonkaiShuryoDay().getValue() != null) {
-//            todate = div.getTxtKonkaiShuryoDay().getValue();
-//        }
-//        if (div.getTxtKonkaiKaishiTime().getValue() != null) {
-//            fromtime = div.getTxtKonkaiKaishiTime().getValue();
-//        }
-//        if (div.getTxtKonkaiShuryoTime().getValue() != null) {
-//            totime = div.getTxtKonkaiShuryoTime().getValue();
-//        }
-//        RString insatsukikan = div.getTxtInsatsuDay().getValue();
-//        RDateTime konkaikaishiFrom = RDateTime.of(fromdate.getYearValue(), fromdate.getMonthValue(), fromdate.getDayValue(),
-//                fromtime.getHour(), fromtime.getMinute(), fromtime.getSecond());
-//        RDateTime konkaikaishiTo = RDateTime.of(todate.getYearValue(), todate.getMonthValue(), todate.getDayValue(),
-//                totime.getHour(), totime.getMinute(), totime.getSecond());
-//        FlexibleDate insatsukikanDate = new FlexibleDate(insatsukikan);
-//        parameters.setShokisaihokenshano(div.getCommonChildDiv1().getSelectedItem().get証記載保険者番号().value());
-//        parameters.setShichosoncode(div.getCommonChildDiv1().getSelectedItem().get市町村コード());
-//        parameters.setHihokenshaNo(new HihokenshaNo(div.getTxtHihokenshaNo().getValue()));
-//        parameters.setKonkaikaishikikanfrom(konkaikaishiFrom);
-//        parameters.setKonkaikaishikikanto(konkaikaishiTo);
-//        parameters.setAtarashifairunamee(div.getTxtNewFileName().getValue());
-//        List<HihokenshaNo> hihokenshaNoList = getHandler(div).getHihokenshaNoList(div);
-//        parameters.setTaishohihokenshabangoulist(hihokenshaNoList);
-//        parameters.setInsatsukikan(insatsukikanDate);
-//        return ResponseData.of(parameters).respond();
-//    }
-    //TODO  バッチ完了を待って　います
+    public ResponseData<DBD519001_NinteishinseiInfoIfParameter> onClick_btnBatch(RenkeiDataSakuseiShinseiJohoDiv div) {
+        DBD519001_NinteishinseiInfoIfParameter parameter = getHandler(div).batchParameterSave();
+        return ResponseData.of(parameter).respond();
+    }
+
     private RenkeiDataSakuseiShinseiJohoHandler getHandler(RenkeiDataSakuseiShinseiJohoDiv div) {
         return new RenkeiDataSakuseiShinseiJohoHandler(div);
     }

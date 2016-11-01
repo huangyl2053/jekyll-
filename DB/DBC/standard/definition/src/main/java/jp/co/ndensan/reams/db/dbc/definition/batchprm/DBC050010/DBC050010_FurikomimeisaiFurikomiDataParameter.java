@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.Gdaekomimeisai
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.HihokenshaAtenaProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.KanendoUpdateFutanwariaiHanteProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.KozaJohoProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.ShikyugakuJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.ShoukanFurikomiProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -172,5 +173,14 @@ public class DBC050010_FurikomimeisaiFurikomiDataParameter extends BatchParamete
      */
     public FurikomiDataProcessParameter toFurikomiDataProcessParameter(FurikomiGyomunaiKubun 振込業務内区分) {
         return new FurikomiDataProcessParameter(振込指定年月日, 振込業務内区分);
+    }
+
+    /**
+     * 振込明細一覧表作成パラメターを取得します．
+     *
+     * @return 振込明細一覧表作成パラメター
+     */
+    public ShikyugakuJohoProcessParameter toShikyugakuJohoProcessParameter() {
+        return new ShikyugakuJohoProcessParameter(出力順ID, 処理区分, 支払方法);
     }
 }

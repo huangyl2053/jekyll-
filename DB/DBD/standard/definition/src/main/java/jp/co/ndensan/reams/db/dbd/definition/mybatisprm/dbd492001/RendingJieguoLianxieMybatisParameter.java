@@ -19,30 +19,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class RendingJieguoLianxieMybatisParameter implements IMyBatisParameter {
 
-    private List<RString> データリスト;
-    private boolean is一時デーブル_日次進捗 = false;
-    private boolean is一時デーブル_認定結果 = false;
-    private static final RString 一時デーブル_日次進捗 = new RString("1");
-    private static final RString 一時デーブル_認定結果 = new RString("2");
+    private final RString 被保番号;
+    private final RString 保険者番号;
+    private final RString 認定申請日;
+    private final RString 申請区分_申請時;
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
 
     /**
      * コンストラクタです。
      *
      * @param データリストList データリスト
-     * @param 一時デーブル決意 一時デーブル決意
      */
-    public RendingJieguoLianxieMybatisParameter(
-            List<RString> データリストList,
-            RString 一時デーブル決意) {
-        this.データリスト = データリストList;
-        一時デーブル(一時デーブル決意);
-    }
-
-    private void 一時デーブル(RString 一時デーブル決意) {
-        if (一時デーブル_日次進捗.equals(一時デーブル決意)) {
-            is一時デーブル_日次進捗 = true;
-        } else if (一時デーブル_認定結果.equals(一時デーブル決意)) {
-            is一時デーブル_認定結果 = true;
-        }
+    public RendingJieguoLianxieMybatisParameter(List<RString> データリストList) {
+        this.保険者番号 = データリストList.get(INDEX_0);
+        this.被保番号 = データリストList.get(INDEX_1);
+        this.認定申請日 = データリストList.get(INDEX_2);
+        this.申請区分_申請時 = データリストList.get(INDEX_3);
     }
 }

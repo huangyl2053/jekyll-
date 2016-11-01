@@ -72,6 +72,20 @@ public class GassanJikofutangakuHoseiIchiranSource implements IReportSource {
     public RString listList1_16;
     @ReportItem(name = "listList1_17", length = 1, order = 30)
     public RString listList1_17;
+    @ReportItem(name = "add_hokenshaNo")
+    public RString add_hokenshaNo;
+    @ReportItem(name = "add_shichosonCode")
+    public RString add_shichosonCode;
+    @ReportItem(name = "add_kanaMeisho")
+    public RString add_kanaMeisho;
+    @ReportItem(name = "add_choikiCode")
+    public RString add_choikiCode;
+    @ReportItem(name = "add_gyoseikuCode")
+    public RString add_gyoseikuCode;
+    @ReportItem(name = "add_yubinNo")
+    public RString add_yubinNo;
+    @ReportItem(name = "add_shinnseiYMD")
+    public RString add_shinnseiYMD;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

@@ -95,10 +95,12 @@ public class ZigyoubunkougakugassanshikyuuketteJouhou {
         }
         div.getChkCsvHenshuHoho().setSelectedItems(dataSource);
         RString 保険者コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"));
-        if (保険者コード.equals(new RString("000000"))) {
-            div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
-        } else {
-            div.getCcdHokenshaList().setSelectedShichosonIfExist(new LasdecCode(保険者コード));
+        if (!RString.isNullOrEmpty(保険者コード)) {
+            if (new RString("000000").equals(保険者コード)) {
+                div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務);
+            } else {
+                div.getCcdHokenshaList().setSelectedShichosonIfExist(new LasdecCode(保険者コード));
+            }
         }
         List<Object> 支給区分List = restoreBatchParameterMap.getParameterValue(List.class, new RString("支給区分List"));
         if (支給区分List.size() < 2) {

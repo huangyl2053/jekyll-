@@ -1,8 +1,12 @@
 package jp.co.ndensan.reams.db.dbd.entity.report.dbd200037;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 受給者台帳異動チェックリストReportSourceです。
@@ -91,8 +95,12 @@ public class JukyushaIdoCheckListReportSource implements IReportSource {
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
-// </editor-fold>
+    @ReportPerson(id = "001")
+    public ShikibetsuCode shikibetsuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation shinseishoKanriNo;
 
+// </editor-fold>
     /**
      * 改ページ条件のキーです。
      */

@@ -74,8 +74,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     private static final RString 画面モード_以外 = new RString("以外");
     private static final RString 要介護状態区分3段階変更による = new RString("threeUp");
     private static final RString 住宅住所変更による = new RString("changeAddress");
-    private static final RString エラー_RPLC_MSG_1 = new RString("受給認定有効期間外の");
-    private static final RString エラー_RPLC_MSG_2 = new RString("入力");
+    private static final RString エラー_RPLC_MSG = new RString("受給認定有効期間外のため入力");
     private static final RString 領収日_RPLC_MSG = new RString("領収日");
     private static final RString サービス提供年月_RPLC_MSG = new RString("サービス提供年月");
     private static final RString 給付実績連動_受託なし = new RString("1");
@@ -493,7 +492,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                     被保険者番号, サービス提供年月);
             if (要介護認定情報 == null) {
                 throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(
-                        エラー_RPLC_MSG_1.toString(), エラー_RPLC_MSG_2.toString()));
+                        エラー_RPLC_MSG.toString()));
             }
             List<RString> 要介護認定状態区分コードリスト = new ArrayList<>();
             Code 要介護認定状態区分コード = 要介護認定情報.get要介護認定状態区分コード();
@@ -508,12 +507,12 @@ public class JutakuKaishuShinseiJyohoToroku {
             要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護5.getCode());
             if (!要介護認定状態区分コードリスト.contains(要介護認定状態区分コード.getKey())) {
                 throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(
-                        エラー_RPLC_MSG_1.toString(), エラー_RPLC_MSG_2.toString()));
+                        エラー_RPLC_MSG.toString()));
             }
             if (YoKaigoJotaiKubun.非該当.getCode().equals(要介護認定状態区分コード.getKey())
                     && !要介護認定情報.is旧措置者フラグ()) {
                 throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(
-                        エラー_RPLC_MSG_1.toString(), エラー_RPLC_MSG_2.toString()));
+                        エラー_RPLC_MSG.toString()));
             }
             if (領収日.getYearMonth().equals(画面提供着工年月.getYearMonth())) {
                 return ResponseData.of(div).respond();
@@ -540,9 +539,10 @@ public class JutakuKaishuShinseiJyohoToroku {
             JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
             handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
-            if (画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード)) {
+            if ((画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード))
+                    && (!領収日.getYear().equals(画面提供着工年月.getYear()))) {
                 div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
-                        SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード(), 画面提供着工年月.getYearValue()).nextString());
+                        SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード(), 領収日.getYearValue()).nextString());
             }
         }
         return ResponseData.of(div).respond();

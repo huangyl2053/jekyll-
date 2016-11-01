@@ -35,10 +35,12 @@ public class DBD301010_HikazeiNenkinTaishoshaJohoTorikomi extends BatchFlowBase<
     /**
      * 非課税年金対象者同定フロー
      */
-    private static final RString HIKAIFLOW = new RString("HikazeNenkinTaishoshaDouteiFlow");
+    private static final RString HIKAIFLOW = new RString("DBD301030_HikazeiNenkinTaishoshaDotei");
 
     private static final RString 処理区_1 = new RString("1");
     private static final RString 処理区_9 = new RString("9");
+    private static final RString 出力しない = new RString("0");
+
     private static final String ファイル取込 = "ファイル取込";
     private static final String 取込データ一時作成 = "取込データ一時作成";
     private static final String 非課税年金対象者同定 = "非課税年金対象者同定";
@@ -66,17 +68,22 @@ public class DBD301010_HikazeiNenkinTaishoshaJohoTorikomi extends BatchFlowBase<
         }
         executeStep(非課税年金対象者情報一覧CSV作成);
         executeStep(非課税年金対象者同定);
-        executeStep(非課税年金対象者情報_該当一覧CSV);
-        executeStep(非課税年金対象者情報_不一致CSV);
-        executeStep(非課税年金対象者情報_生年月日CSV);
-        if (!処理区_1.equals(getParameter().get処理区分()) && !処理区_9.equals(getParameter().get処理区分())) {
-            executeStep(非課税年金対象者情報_年金番号CSV);
+        if (!出力しない.equals(getParameter().get出力区分())) {
+            executeStep(非課税年金対象者情報_該当一覧CSV);
+            executeStep(非課税年金対象者情報_不一致CSV);
+            executeStep(非課税年金対象者情報_生年月日CSV);
+            if (!処理区_1.equals(getParameter().get処理区分()) && !処理区_9.equals(getParameter().get処理区分())) {
+                executeStep(非課税年金対象者情報_年金番号CSV);
+            }
         }
-        if (処理状態.equals(getParameter().get処理状態())) {
-            executeStep(削除非課税年金対象者);
+
+        if (!処理区_1.equals(getParameter().getテスト処理())) {
+            if (処理状態.equals(getParameter().get処理状態())) {
+                executeStep(削除非課税年金対象者);
+            }
+            executeStep(更新非課税年金対象者);
+            executeStep(処理日付管理マスタ更新);
         }
-        executeStep(更新非課税年金対象者);
-        executeStep(処理日付管理マスタ更新);
     }
 
     /**

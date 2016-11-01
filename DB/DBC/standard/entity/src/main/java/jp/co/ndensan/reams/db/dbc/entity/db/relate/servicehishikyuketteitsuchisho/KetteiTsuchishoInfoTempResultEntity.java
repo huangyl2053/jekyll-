@@ -9,11 +9,8 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -41,36 +38,28 @@ public class KetteiTsuchishoInfoTempResultEntity implements Serializable {
     private FlexibleDate 支払期間終了年月日;
     private RString 支払窓口開始時間;
     private RString 支払窓口終了期間;
+    private long 口座ID;
     private FlexibleDate 決定年月日;
     private RString 決定通知No;
     private RString 不支給理由;
-    private RString 支給結果;
-    private Decimal 支払金額;
+    private RString 判定支給区分コード;
+    private Decimal 支給金額;
     private RString 審査方法区分;
     private Decimal 本人支払額;
     private boolean 自動償還対象フラグ;
     private RString 支給区分コード;
     private Decimal 高額支給額;
-
-    private KinyuKikanCode 金融機関コード;
-    private RString 金融機関名称;
-    private KinyuKikanShitenCode 支店コード;
-    private RString 支店名称;
-    private RString 預金種別;
-    private RString 預金種別名称;
-    private RString 口座番号;
-    private AtenaMeisho 口座名義人漢字;
-    private FlexibleDate 口座終了年月日;
-    private RString 通帳番号;
+    private int 給付対象者合計履歴番号;
+    private Decimal 利用者負担額;
 
     private FlexibleDate 資格喪失年月日;
     private ShikibetsuCode 識別コード;
     private RString 資格喪失事由コード;
+    private LasdecCode 市町村コード;
 
     private Code 要介護認定状態区分コード;
     private FlexibleDate 認定有効期間開始年月日;
     private FlexibleDate 認定有効期間終了年月日;
 
     private UaFt200FindShikibetsuTaishoEntity 宛名;
-    private UaFt250FindAtesakiEntity 宛先;
 }

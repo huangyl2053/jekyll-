@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd200014;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity;
@@ -15,9 +16,9 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.SetaiInRisutoEntit
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200014.HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
-import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -49,10 +50,12 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private static final int LISTINDEX_2 = 2;
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
+    private static final int LISTINDEX_5 = 5;
     private static final RString 作成 = new RString("作成");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString 星 = new RString("＊");
+    private static final RString 記号 = new RString("※");
     private static final RString 課 = new RString("課");
     private static final RString 承認 = new RString("承認");
     private static final RString 却下 = new RString("却下");
@@ -104,10 +107,8 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         source.printTimeStamp = new RStringBuilder()
                 .append(作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString())
-                .append(RString.FULL_SPACE)
                 .append(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒))
-                .append(RString.FULL_SPACE)
-                .append(作成).toRString();
+                .append(RString.FULL_SPACE).append(作成).toRString();
         if (null != this.対象リスト && this.対象リスト.getコード().equals(ONE)) {
             source.title = 認定者リスト;
         }
@@ -117,16 +118,20 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (null != this.導入団体.get地方公共団体コード()) {
             source.hokenshaNo = this.導入団体.get地方公共団体コード().value();
         }
-        if (null != this.導入団体.getShichosonName_()) {
-            source.hokenshaName = this.導入団体.getShichosonName_();
+        if (null != this.導入団体.get市町村名()) {
+            source.hokenshaName = this.導入団体.get市町村名();
         }
-        set出力順改頁(source);
+        if (null != 出力順) {
+            setiOutputOrder(source);
+            setBreakIoutputOrder(source);
+        }
     }
 
     private void edit被保険者情報Upper1(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
 
         if (null != this.訪問介護利用者負担額減額認定者Entity.get被保険者番号()) {
             source.listUpper_1 = this.訪問介護利用者負担額減額認定者Entity.get被保険者番号().value();
+            source.hihokenshaNo = this.訪問介護利用者負担額減額認定者Entity.get被保険者番号().value();
         }
         if (null != this.訪問介護利用者負担額減額認定者Entity.getPsmEntity()) {
             UaFt200FindShikibetsuTaishoEntity 宛名 = this.訪問介護利用者負担額減額認定者Entity.getPsmEntity();
@@ -170,8 +175,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null
                 && this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定年月日() != null) {
             source.listUpper_12 = this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定年月日().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    wareki().toDateString();
         }
     }
 
@@ -214,8 +218,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null
                 && this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間開始年月日() != null) {
             source.listCenter_10 = this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間開始年月日().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    wareki().toDateString();
         }
     }
 
@@ -247,17 +250,13 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
             }
         }
         if (null != this.訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_2号特定疾病コード()) {
-            source.listLower_7 = RString.isNullOrEmpty(this.訪問介護利用者負担額減額認定者Entity.
-                    get要介護認定申請情報_2号特定疾病コード()) ? RString.EMPTY
-                    : TokuteiShippei.toValue(this.訪問介護利用者負担額減額認定者Entity.
-                            get要介護認定申請情報_2号特定疾病コード()).get名称();
+            source.listLower_7 = 記号;
         }
         source.listLower_8 = RString.EMPTY;
         if (訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null
                 && null != this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間終了年月日()) {
             source.listLower_9 = this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間終了年月日().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    wareki().toDateString();
         }
     }
 
@@ -351,50 +350,54 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         source.listLower_14 = RString.EMPTY;
     }
 
-    private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource
-            set出力順改頁(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
-        List<ISetSortItem> list = new ArrayList<>();
-        if (出力順 != null && 出力順.get設定項目リスト() != null && !出力順.get設定項目リスト().isEmpty()) {
-            list = 出力順.get設定項目リスト();
+    private void setiOutputOrder(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
+
+        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(出力順);
+        if (出力順Map.get(LISTINDEX_1) != null) {
+            source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_1).get項目名();
+
         }
-        if (list.size() > LISTINDEX_0) {
-            source.shutsuryokujun1 = list.get(LISTINDEX_0).get項目名();
+        if (出力順Map.get(LISTINDEX_2) != null) {
+            source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_2).get項目名();
         }
-        if (list.size() > LISTINDEX_1) {
-            source.shutsuryokujun2 = list.get(LISTINDEX_1).get項目名();
+        if (出力順Map.get(LISTINDEX_3) != null) {
+            source.shutsuryokujun3 = 出力順Map.get(LISTINDEX_3).get項目名();
         }
-        if (list.size() > LISTINDEX_2) {
-            source.shutsuryokujun3 = list.get(LISTINDEX_2).get項目名();
+        if (出力順Map.get(LISTINDEX_4) != null) {
+            source.shutsuryokujun4 = 出力順Map.get(LISTINDEX_4).get項目名();
         }
-        if (list.size() > LISTINDEX_3) {
-            source.shutsuryokujun4 = list.get(LISTINDEX_3).get項目名();
+        if (出力順Map.get(LISTINDEX_5) != null) {
+            source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_5).get項目名();
         }
-        if (list.size() > LISTINDEX_4) {
-            source.shutsuryokujun5 = list.get(LISTINDEX_4).get項目名();
+    }
+
+    private void setBreakIoutputOrder(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
+        int index1 = 0;
+        List<RString> 改頁list = new ArrayList<>();
+        List<ISetSortItem> list = 出力順.get設定項目リスト();
+        if (list == null) {
+            list = new ArrayList<>();
         }
-        if (list.size() > LISTINDEX_0 && list.get(LISTINDEX_0).is改頁項目()) {
-            source.kaiPege1 = list.get(0).get項目名();
+        for (int i = 0; i < LISTINDEX_5; i++) {
+            if (list.size() > i && list.get(i).is改頁項目()) {
+                改頁list.add(list.get(i).get項目名());
+                index1++;
+            }
         }
-        if (list.size() > LISTINDEX_1 && list.get(LISTINDEX_1).is改頁項目()) {
-            source.kaiPege2 = list.get(LISTINDEX_1).get項目名();
+        for (int i = index1; i < LISTINDEX_5; i++) {
+            改頁list.add(RString.EMPTY);
         }
-        if (list.size() > LISTINDEX_2 && list.get(LISTINDEX_2).is改頁項目()) {
-            source.kaiPege3 = list.get(LISTINDEX_2).get項目名();
-        }
-        if (list.size() > LISTINDEX_3 && list.get(LISTINDEX_3).is改頁項目()) {
-            source.kaiPege4 = list.get(LISTINDEX_3).get項目名();
-        }
-        if (list.size() > LISTINDEX_4 && list.get(LISTINDEX_4).is改頁項目()) {
-            source.kaiPege5 = list.get(LISTINDEX_4).get項目名();
-        }
-        return source;
+        source.kaiPege1 = 改頁list.get(LISTINDEX_0);
+        source.kaiPege2 = 改頁list.get(LISTINDEX_1);
+        source.kaiPege3 = 改頁list.get(LISTINDEX_2);
+        source.kaiPege4 = 改頁list.get(LISTINDEX_3);
+        source.kaiPege5 = 改頁list.get(LISTINDEX_4);
     }
 
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource get申請日(
             HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source, FlexibleDate shinseiYMD) {
         if (null != shinseiYMD) {
-            source.listUpper_5 = shinseiYMD.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.listUpper_5 = shinseiYMD.wareki().toDateString();
         }
         return source;
     }
@@ -402,8 +405,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource get決定日(
             HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source, FlexibleDate ketteiYMD) {
         if (null != ketteiYMD) {
-            source.listUpper_6 = ketteiYMD.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.listUpper_6 = ketteiYMD.wareki().toDateString();
         }
         return source;
     }
@@ -411,8 +413,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource get適用開始日(
             HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source, FlexibleDate tekiyoKaishiYMD) {
         if (null != tekiyoKaishiYMD) {
-            source.listCenter_5 = tekiyoKaishiYMD.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.listCenter_5 = tekiyoKaishiYMD.wareki().toDateString();
         }
         return source;
     }
@@ -420,8 +421,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource get適用終了日(
             HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source, FlexibleDate tekiyoShuryoYMD) {
         if (null != tekiyoShuryoYMD) {
-            source.listCenter_6 = tekiyoShuryoYMD.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.listCenter_6 = tekiyoShuryoYMD.wareki().toDateString();
         }
         return source;
     }

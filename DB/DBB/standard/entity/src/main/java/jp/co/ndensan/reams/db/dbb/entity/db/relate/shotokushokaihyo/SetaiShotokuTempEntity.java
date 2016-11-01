@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 世帯員所得情報Temp1と　年度内有資格者Tempを外部結合して、世帯員所得情報Tempへ出力する
@@ -21,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SetaiShotokuTempEntity {
+public class SetaiShotokuTempEntity implements IDbAccessable {
 
     private HihokenshaNo hihokenshaNo;
     private ShikibetsuCode shikibetsuCode;

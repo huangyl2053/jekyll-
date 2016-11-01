@@ -405,6 +405,18 @@ public class JigyoKogakuGassanShikyuFushikyuKetteiBuilder {
     }
 
     /**
+     * 決定通知リアル発行フラグを設定します。
+     *
+     * @param 決定通知リアル発行フラグ RString
+     * @return {@link JigyoKogakuGassanShikyuFushikyuKetteiBuilder}
+     */
+    public JigyoKogakuGassanShikyuFushikyuKetteiBuilder set決定通知リアル発行フラグ(RString 決定通知リアル発行フラグ) {
+        requireNonNull(決定通知リアル発行フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("決定通知リアル発行フラグ"));
+        entity.setKetteiTsuchiRealHakkoFlag(決定通知リアル発行フラグ);
+        return this;
+    }
+
+    /**
      * {@link JigyoKogakuGassanShikyuFushikyuKettei}のインスタンスを生成します。
      *
      * @return {@link JigyoKogakuGassanShikyuFushikyuKettei}のインスタンス

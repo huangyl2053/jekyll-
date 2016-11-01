@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshu
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakuoshirasetsuchiteshutsukigennashi.KogakuOshiraseTsuchiTeshutsuKigenNashiSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 高額サービス給付のお知らせ通知書（提出期限なし）帳票Editor。
@@ -19,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KogakuOshiraseTsuchiTeshutsuKigenNashiEditor implements IKogakuOshiraseTsuchiTeshutsuKigenNashiEditor {
 
     private final KogakuOshiraseTsuchiTeshutsuKigenNashiEntity target;
+    private static final RString 調整予定金額 = new RString("調整（予定）金額");
+    private static final RString 支給予定金額 = new RString("支給（予定）金額");
 
     /**
      * コンストラクタです。
@@ -45,11 +49,8 @@ public class KogakuOshiraseTsuchiTeshutsuKigenNashiEditor implements IKogakuOshi
                 source.hihokenshaNo = ReportKomokuEditorUtil.get被保険者番号(target.get申請情報帳票発行一時().getHihokenshaNoChohyo());
                 source.taishoYM = ReportKomokuEditorUtil.パターン62(target.get申請情報帳票発行一時().getServiceTeikyoYMChohyo());
                 source.識別コード = target.get申請情報帳票発行一時().getShikibetsuCodeChohyo();
+                金額設定(source);
             }
-            // TODO QA.1189あり 利用者負担額と高額支給額は、一時表に存在しない
-//        source.zikoFutanGaku = ReportKomokuEditorUtil.金額1(target.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo());
-//        source.ketteiGaku = 
-//        source.shikyuGaku = 
             source.remban = target.get連番();
 
             if (target.get認証者() != null) {
@@ -106,4 +107,20 @@ public class KogakuOshiraseTsuchiTeshutsuKigenNashiEditor implements IKogakuOshi
         return Seibetsu.toValue(code).get名称();
     }
 
+    private void 金額設定(KogakuOshiraseTsuchiTeshutsuKigenNashiSource source) {
+        source.zikoFutanGaku = doカンマ編集(target.get申請情報帳票発行一時().getRiyoshaFutanGakuGokeiChohyo());
+        if (target.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo().compareTo(Decimal.ONE) < 0) {
+            source.ketteiGaku = 調整予定金額;
+        } else {
+            source.ketteiGaku = 支給予定金額;
+        }
+        source.shikyuGaku = doカンマ編集(target.get申請情報帳票発行一時().getGokeiKogakuShikyuGakuChohyo());
+    }
+
+    private RString doカンマ編集(Decimal decimal) {
+        if (null != decimal) {
+            return DecimalFormatter.toコンマ区切りRString(decimal, 0);
+        }
+        return RString.EMPTY;
+    }
 }

@@ -66,6 +66,15 @@ public enum GemmenJuminKihonSpec implements IPredicate<GemmenJuminKihonDiv> {
                 }
             },
     /**
+     * 減免額の必須入力チェック
+     */
+    減免額の必須入力チェック1 {
+                @Override
+                public boolean apply(GemmenJuminKihonDiv div) {
+                    return SpecHelper.減免額の必須入力チェック1(div);
+                }
+            },
+    /**
      * validate計算処理の未実行
      */
     計算処理の未実行チェック {
@@ -89,6 +98,7 @@ public enum GemmenJuminKihonSpec implements IPredicate<GemmenJuminKihonDiv> {
         private static final RString 減免決定通知書 = new RString("保険料減免決定通知書");
         private static final RString カンマ = new RString(",");
         private static final RString 定値_ゼロ = new RString("0");
+        private static final RString 定値_イチ = new RString("1");
         private static final RString 状況_決定済 = new RString("決定済");
 
         public static boolean is未指定(GemmenJuminKihonDiv div) {
@@ -147,9 +157,17 @@ public enum GemmenJuminKihonSpec implements IPredicate<GemmenJuminKihonDiv> {
         }
 
         public static boolean 減免額の必須入力チェック(GemmenJuminKihonDiv div) {
-            return !(div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD() != null
+            return !(div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD().getValue() != null
+                    && !div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD().getValue().isEmpty()
                     && 定値_ゼロ.equals(div.getGemmenMain().getKeteiinfo().getRadKetteiKubun().getSelectedKey())
                     && div.getGemmenMain().getKiwarigaku().getTxtGemmengaku().getValue() == null);
+        }
+
+        public static boolean 減免額の必須入力チェック1(GemmenJuminKihonDiv div) {
+            return !(div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD().getValue() != null
+                    && !div.getGemmenMain().getKeteiinfo().getTxtKetteiYMD().getValue().isEmpty()
+                    && 定値_イチ.equals(div.getGemmenMain().getKeteiinfo().getRadKetteiKubun().getSelectedKey())
+                    && div.getGemmenMain().getKiwarigaku().getTxtGemmengaku().getValue() != null);
         }
 
         public static boolean 決定日の必須入力チェック２(GemmenJuminKihonDiv div) {

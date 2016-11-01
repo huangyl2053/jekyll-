@@ -102,6 +102,11 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranProperty
         return breakers.add(catalog.new SimplePageBreaker(
 
 
+
+
+
+
+
             pageBreakKeys) {
             @Override
             public ReportLineRecord<TokubetsuChoshuIraikingakuMeisaiIchiranSource> occuredBreak(
@@ -120,13 +125,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranProperty
 
         RString 帳票物理名 = RString.EMPTY;
 
-        if (BreakerFieldsEnum.住所コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(ReportSourceFields.listLower_3.name());
-        } else if (BreakerFieldsEnum.行政区コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(ReportSourceFields.listUpper_3.name());
-        } else if (BreakerFieldsEnum.世帯コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(ReportSourceFields.listLower_2.name());
-        } else if (BreakerFieldsEnum.住民コード.get項目ID().equals(項目ID)) {
+        if (BreakerFieldsEnum.住民コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.listUpper_6.name());
         } else if (BreakerFieldsEnum.市町村コード.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.hokenshaNo.name());
@@ -143,29 +142,20 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranProperty
     public enum BreakerFieldsEnum implements IReportItems {
 
         /**
-         * 住所コード
-         */
-        住所コード(new RString("0002"), new RString(""), FORMAT.concat(new RString("")).concat(FORMAT)),
-        /**
-         * 行政区コード
-         */
-        行政区コード(new RString("0004"), new RString(""), FORMAT.concat(new RString("")).concat(FORMAT)),
-        /**
-         * 世帯コード
-         */
-        世帯コード(new RString("0008"), new RString(""), FORMAT.concat(new RString("")).concat(FORMAT)),
-        /**
          * 住民コード
          */
-        住民コード(new RString("0009"), new RString(""), FORMAT.concat(new RString("")).concat(FORMAT)),
+        住民コード(new RString("0009"), new RString("住民コード"),
+                FORMAT.concat(new RString("ShikibetsuTaisho_zenkokuJushoCode")).concat(FORMAT)),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0021"), new RString(""), FORMAT.concat(new RString("")).concat(FORMAT)),
+        市町村コード(new RString("0021"), new RString("市町村コード"),
+                FORMAT.concat(new RString("ShikibetsuTaisho_genLasdecCode")).concat(FORMAT)),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0031"), new RString(""), FORMAT.concat(new RString("")).concat(FORMAT));
+        被保険者番号(new RString("0031"), new RString("被保険者番号"),
+                FORMAT.concat(new RString("dbT2002Fuka_hihokenshaNo")).concat(FORMAT));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

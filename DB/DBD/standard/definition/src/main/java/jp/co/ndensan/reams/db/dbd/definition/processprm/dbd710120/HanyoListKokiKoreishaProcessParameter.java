@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd710120;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutokokikoreisha.HanyoRisutoKokiKoreishaMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,12 +24,14 @@ import lombok.Setter;
 @Setter
 public class HanyoListKokiKoreishaProcessParameter implements IBatchProcessParameter {
 
+    private RString hyoudai;
+    private RString detasyubetsumesyo;
+    private RString syutsuryoku;
     private RString cyusyutsuhohokubun;
     private RString cyusyutsukomokukubun;
     private FlexibleDate kizyunnichi;
     private FlexibleDate hitsukehanifrom;
     private FlexibleDate hitsukehanito;
-    private boolean chokindatacyusyutsu;
     private RString soshitsukubun;
     private boolean isCsvkomokumeifuka;
     private boolean isCsvrenbanfuka;
@@ -41,12 +44,14 @@ public class HanyoListKokiKoreishaProcessParameter implements IBatchProcessParam
     /**
      * コンストラクタです。
      *
+     * @param hyoudai 表題
+     * @param detasyubetsumesyo データ種別名
+     * @param syutsuryoku 出力方法
      * @param cyusyutsuhohokubun 抽出方法区分
      * @param cyusyutsukomokukubun 抽出項目区分
      * @param kizyunnichi 基準日
      * @param hitsukehanifrom 日付範囲From
      * @param hitsukehanito 日付範囲To
-     * @param chokindatacyusyutsu 直近データ抽出
      * @param soshitsukubun 喪失区分
      * @param isCsvkomokumeifuka CSV項目名付加
      * @param isCsvrenbanfuka CSV連番付加
@@ -56,16 +61,19 @@ public class HanyoListKokiKoreishaProcessParameter implements IBatchProcessParam
      * @param syutsuryokujun 出力順
      * @param syutsuryokukomoku 出力項目
      */
-    public HanyoListKokiKoreishaProcessParameter(RString cyusyutsuhohokubun, RString cyusyutsukomokukubun,
-            FlexibleDate kizyunnichi, FlexibleDate hitsukehanifrom, FlexibleDate hitsukehanito, boolean chokindatacyusyutsu,
+    public HanyoListKokiKoreishaProcessParameter(RString hyoudai, RString detasyubetsumesyo,
+            RString syutsuryoku, RString cyusyutsuhohokubun, RString cyusyutsukomokukubun,
+            FlexibleDate kizyunnichi, FlexibleDate hitsukehanifrom, FlexibleDate hitsukehanito,
             RString soshitsukubun, boolean isCsvkomokumeifuka, boolean isCsvrenbanfuka, boolean isCsvhitsukesurasyuhensyu,
             AtenaSelectBatchParameter atenacyusyutsujyoken, RString cyohyoid, Long syutsuryokujun, RString syutsuryokukomoku) {
+        this.hyoudai = hyoudai;
+        this.detasyubetsumesyo = detasyubetsumesyo;
+        this.syutsuryoku = syutsuryoku;
         this.cyusyutsuhohokubun = cyusyutsuhohokubun;
         this.cyusyutsukomokukubun = cyusyutsukomokukubun;
         this.kizyunnichi = kizyunnichi;
         this.hitsukehanifrom = hitsukehanifrom;
         this.hitsukehanito = hitsukehanito;
-        this.chokindatacyusyutsu = chokindatacyusyutsu;
         this.soshitsukubun = soshitsukubun;
         this.isCsvkomokumeifuka = isCsvkomokumeifuka;
         this.isCsvrenbanfuka = isCsvrenbanfuka;
@@ -84,14 +92,13 @@ public class HanyoListKokiKoreishaProcessParameter implements IBatchProcessParam
      * @param syutsuryokujun 出力順
      * @return HanyoRisutoKokiKoreishaMybatisParameter
      */
-    public HanyoRisutoKokiKoreishaMybatisParameter toHanyoRisutoKokiKoreishaMybatisParameter(RString psmShikibetsuTaisho,
+    public HanyoRisutoKokiKoreishaMybatisParameter toHanyoRisutoKokiKoreishaMybatisParameter(IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
             RString psmAtesaki, RString syutsuryokujun) {
         return new HanyoRisutoKokiKoreishaMybatisParameter(cyusyutsuhohokubun,
                 cyusyutsukomokukubun,
                 kizyunnichi,
                 hitsukehanifrom,
                 hitsukehanito,
-                chokindatacyusyutsu,
                 soshitsukubun,
                 atenacyusyutsujyoken,
                 syutsuryokujun,

@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class JukyushaKyufuJissekiIchiranEditor implements IJukyushaKyufuJissekiIchiranEditor {
 
     private final JukyushaKyufuJissekiIchiranData data;
-    private static final RString 三角 = new RString("△");
+    private static final RString 三角 = RString.HALF_SPACE;
 
     /**
      * インスタンスを生成します。
@@ -115,7 +115,6 @@ public class JukyushaKyufuJissekiIchiranEditor implements IJukyushaKyufuJissekiI
                     separator(Separator.JAPANESE).
                     fillType(FillType.ZERO).toDateString());
             hakkoYMD.append(三角);
-            hakkoYMD.append(RString.HALF_SPACE);
             hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
             hakkoYMD.append(三角);
             hakkoYMD.append("作成");
@@ -126,8 +125,7 @@ public class JukyushaKyufuJissekiIchiranEditor implements IJukyushaKyufuJissekiI
     private RString set年月(FlexibleYearMonth dateTime) {
         RStringBuilder hakkoYMD = new RStringBuilder();
         if (dateTime != null) {
-            hakkoYMD.append(dateTime.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString());
+            hakkoYMD.append(dateTime.wareki().toDateString());
         }
         return hakkoYMD.toRString();
     }

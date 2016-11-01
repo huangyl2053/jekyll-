@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyoRisutoJigyoTaishoshaEntity {
 
+    private RString 被保険者台帳管理_識別コード;
     private RString 被保険者台帳管理_市町村コード;
     private RString 二次予防事業対象者_被保険者番号;
     private int 二次予防事業対象者_履歴番号;

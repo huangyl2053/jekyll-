@@ -267,6 +267,12 @@ public class NinteiChosaJokyoHandler {
         if (div.getTxtEnkiTsuchiHakkoCount().getValue() != null) {
             konkaiDataPass.set延期通知発行回数(div.getTxtEnkiTsuchiHakkoCount().getValue().intValue());
         }
+        konkaiDataPass.set延期通知発行回数(div.getTxtEnkiTsuchiHakkoCount().getValue().intValue());
+        NinteiChosaJokyoDataPass dataPass = DataPassingConverter.deserialize(div.getHdnSerializedBusiness_Konkai(),
+                NinteiChosaJokyoDataPass.class);
+        konkaiDataPass.set市町村コード(dataPass.get市町村コード());
+        konkaiDataPass.set厚労省IF識別コード(dataPass.get厚労省IF識別コード());
+        konkaiDataPass.set申請書管理番号(dataPass.get申請書管理番号());
         div.setHdnSerializedBusiness_Konkai(DataPassingConverter.serialize(konkaiDataPass));
     }
 
@@ -329,13 +335,21 @@ public class NinteiChosaJokyoHandler {
             selectKey.add(new RString("key0"));
             div.getChkShujiiKubun().setSelectedItemsByKey(selectKey);
         }
-        div.getDdlYokaigodo().setSelectedKey(konkaiDataPass.get要介護認定一次判定結果コード().value());
+        if (konkaiDataPass.get要介護認定一次判定結果コード() != null && !konkaiDataPass.get要介護認定一次判定結果コード().isEmpty()) {
+            div.getDdlYokaigodo().setSelectedKey(konkaiDataPass.get要介護認定一次判定結果コード().value());
+        }
         div.getTxtIchijiHanteiDate().setValue(konkaiDataPass.get要介護認定一次判定年月日());
-        div.getDdlNinchishoKasangoYokaigodo().setSelectedKey(konkaiDataPass.get要介護認定一次判定結果コード_認知症加算().value());
+        if (konkaiDataPass.get要介護認定一次判定結果コード_認知症加算() != null
+                && !konkaiDataPass.get要介護認定一次判定結果コード_認知症加算().isEmpty()) {
+            div.getDdlNinchishoKasangoYokaigodo().setSelectedKey(konkaiDataPass.get要介護認定一次判定結果コード_認知症加算().value());
+        }
         div.getTxtShinsakaiShiryoSakuseiDate().setValue(konkaiDataPass.get介護認定審査会資料作成年月日());
         div.getTxtShinsakaiKaisaiYoteiDate().setValue(konkaiDataPass.get認定審査会予定年月日());
         div.getTxtNijiHanteiDate().setValue(konkaiDataPass.get二次判定年月日());
-        div.getDdlNijiHanteiKekka().setSelectedKey(konkaiDataPass.get二次判定要介護状態区分コード().value());
+        if (konkaiDataPass.get二次判定要介護状態区分コード() != null
+                && !konkaiDataPass.get二次判定要介護状態区分コード().isEmpty()) {
+            div.getDdlNijiHanteiKekka().setSelectedKey(konkaiDataPass.get二次判定要介護状態区分コード().value());
+        }
         div.getTxtNijiHanteiYukoKikan().setValue(new RString(konkaiDataPass.get二次判定認定有効期間()));
         div.getTxtNinteiYukoKikanFrom().setValue(konkaiDataPass.get二次判定認定有効開始年月日());
         div.getTxtNinteiYukoKikanTo().setValue(konkaiDataPass.get二次判定認定有効終了年月日());

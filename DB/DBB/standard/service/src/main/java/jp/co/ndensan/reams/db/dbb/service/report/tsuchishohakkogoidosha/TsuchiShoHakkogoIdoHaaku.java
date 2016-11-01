@@ -412,9 +412,9 @@ public class TsuchiShoHakkogoIdoHaaku {
             boolean 氏名変更flag) {
         dbt2017Entity.setIdoYMD(new FlexibleDate(異動後PSM結果.get異動処理日時().getDate().toString()));
         if (氏名変更flag) {
-            dbt2017Entity.setIdoNaiyo(IdoNaiyo.氏名の変更.getコード());
+            dbt2017Entity.setIdoNaiyo(IdoNaiyo.氏名変更.getコード());
         } else {
-            dbt2017Entity.setIdoNaiyo(IdoNaiyo.本人住所の変更.getコード());
+            dbt2017Entity.setIdoNaiyo(IdoNaiyo.本人住所変更.getコード());
         }
         dbt2017Entity.setIdoAriFlag(true);
         dbt2017Entity.setState(EntityDataState.Modified);
@@ -427,7 +427,7 @@ public class TsuchiShoHakkogoIdoHaaku {
         if (time != null && time.getDate() != null) {
             dbt2017Entity.setIdoYMD(new FlexibleDate(time.getDate().toString()));
         }
-        dbt2017Entity.setIdoNaiyo(IdoNaiyo.資格の異動.getコード());
+        dbt2017Entity.setIdoNaiyo(IdoNaiyo.資格異動.getコード());
         dbt2017Entity.setIdoAriFlag(true);
         dbt2017Entity.setState(EntityDataState.Modified);
         return dbt2017Entity;

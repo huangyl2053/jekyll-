@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanjiko
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc120110.KogakuGassanJikofutangakuDoMasterTorokuParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120130.KogakuGassanJSaiSyoriJyunbiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoDateEntity;
@@ -42,7 +43,8 @@ public interface IKogakuGassanJSaiSyoriJyunbiMapper {
     /**
      * 高額合算自己負担額のget帳票出力対象データです。
      *
+     * @param parameter KokuhorenIchiranhyoMybatisParameter
      * @return List<KogakuGassanJikofutangakuShomeishoDateEntity>
      */
-    List<KogakuGassanJikofutangakuShomeishoDateEntity> get帳票出力対象データ();
+    List<KogakuGassanJikofutangakuShomeishoDateEntity> get帳票出力対象データ(KokuhorenIchiranhyoMybatisParameter parameter);
 }

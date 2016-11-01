@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -61,6 +64,11 @@ public class NinteiShinseiTorokuTorikeshiShosai {
 
         YokaigoNinteiJoho 画面更新用情報 = getHandler(div).onLoad(被保険者番号);
         ViewStateHolder.put(要介護認定取消画面キー.画面更新用情報, 画面更新用情報);
+
+        boolean gotLock = 前排他キーのセット();
+        if (!gotLock) {
+            throw new PessimisticLockingException();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -166,6 +174,7 @@ public class NinteiShinseiTorokuTorikeshiShosai {
      * @return ResponseData<ShokkenTorikeshiIchibuSoshituDiv>
      */
     public ResponseData<NinteiShinseiTorokuTorikeshiShosaiDiv> onClick_btnBack(NinteiShinseiTorokuTorikeshiShosaiDiv div) {
+        前排他キーの解除();
         return ResponseData.of(div).forwardWithEventName(DBD4940001TransitionEventName.一覧へ戻る).respond();
     }
 
@@ -197,6 +206,7 @@ public class NinteiShinseiTorokuTorikeshiShosai {
                 return ResponseData.of(div).forwardWithEventName(DBD4940001TransitionEventName.完了).respond();
             }
         }
+        前排他キーの解除();
         return ResponseData.of(div).respond();
     }
 
@@ -206,5 +216,15 @@ public class NinteiShinseiTorokuTorikeshiShosai {
 
     private NinteiShinseiTorokuTorikeshiShosaiValidationHandler getValidationHandler(NinteiShinseiTorokuTorikeshiShosaiDiv div) {
         return new NinteiShinseiTorokuTorikeshiShosaiValidationHandler(div);
+    }
+
+    private boolean 前排他キーのセット() {
+        LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
+        return RealInitialLocker.tryGetLock(排他キー);
+    }
+
+    private void 前排他キーの解除() {
+        LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
+        RealInitialLocker.release(排他キー);
     }
 }

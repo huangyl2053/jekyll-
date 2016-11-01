@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003;
 
-import java.util.List;
+import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -26,7 +26,7 @@ public class DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter extends Bat
 
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;
-    private List<OutputChohyoIchiran> 出力帳票一覧List;
+    private ArrayList<OutputChohyoIchiran> 出力帳票一覧List;
     private FlexibleDate 発行日;
     private RString 出力対象;
     private boolean 一括発行フラグ;

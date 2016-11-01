@@ -19,23 +19,26 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiReport extends Report<JigyoKoga
 
     private final JigyoKogakuShikyuFushikyuKetteTsuchiEntity entity;
     private final int 連番;
+    private final boolean flag;
 
     /**
      * コンストラクタです
      *
      * @param entity JigyoKogakuShikyuFushikyuKetteTsuchiEntity
      * @param 連番 int
+     * @param flag boolean
      */
     public JigyoKogakuShikyuFushikyuKetteTsuchiReport(JigyoKogakuShikyuFushikyuKetteTsuchiEntity entity,
-            int 連番) {
+            int 連番, boolean flag) {
         this.entity = entity;
         this.連番 = 連番;
+        this.flag = flag;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<JigyoKogakuShikyuFushikyuKetteTsuchiSource> writer) {
         IJigyoKogakuShikyuFushikyuKetteTsuchiEditor headerEditor = new JigyoKogakuShikyuFushikyuKetteTsuchiHeaderEditor(entity);
-        IJigyoKogakuShikyuFushikyuKetteTsuchiEditor bodyEditor = new JigyoKogakuShikyuFushikyuKetteTsuchiBodyEditor(entity, 連番);
+        IJigyoKogakuShikyuFushikyuKetteTsuchiEditor bodyEditor = new JigyoKogakuShikyuFushikyuKetteTsuchiBodyEditor(entity, 連番, flag);
         IJigyoKogakuShikyuFushikyuKetteTsuchiBuilder builder = new JigyoKogakuShikyuFushikyuKetteTsuchiBuidler(headerEditor, bodyEditor);
         writer.writeLine(builder);
     }

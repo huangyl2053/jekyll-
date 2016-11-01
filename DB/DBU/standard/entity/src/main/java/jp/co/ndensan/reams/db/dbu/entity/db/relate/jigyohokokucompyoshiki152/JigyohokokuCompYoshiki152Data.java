@@ -19,6 +19,8 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyohokokuCompYoshiki152Data {
 
+    private RString 保険者番号;
+    private RString 保険者名;
     private RString 集計区分;
     private RString 処理日時;
     private RString 集計範囲;
@@ -61,9 +63,6 @@ public class JigyohokokuCompYoshiki152Data {
     private RString 居宅介護_サービス受給者数合計_1;
     private RString 居宅介護_サービス受給者数合計_2;
     private RString 居宅介護_サービス受給者数合計_3;
-    private RString 予備_1;
-    private RString 予備_2;
-    private RString 予備_3;
     private RString 予防給付_地域密着型_要支援1_1;
     private RString 予防給付_地域密着型_要支援1_2;
     private RString 予防給付_地域密着型_要支援1_3;

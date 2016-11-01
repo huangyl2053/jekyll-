@@ -76,6 +76,13 @@ public class InsHeinjunkaFukaTmpProcess extends BatchProcessBase<FukaJohoTmpEnti
         }
     }
 
+    @Override
+    protected void afterExecute() {
+        if (this.fukaTmpEntity != null) {
+            仮算定一括発行一時tableWriter.insert(this.fukaTmpEntity);
+        }
+    }
+
     private void 金額設定(FukaJohoTmpEntity fukaTmpEntity) {
         if (徴収方法_特別.equals(fukaTmpEntity.getChoshuHouhou())) {
             特別徴収金額設定(this.fukaTmpEntity, fukaTmpEntity.getKi());

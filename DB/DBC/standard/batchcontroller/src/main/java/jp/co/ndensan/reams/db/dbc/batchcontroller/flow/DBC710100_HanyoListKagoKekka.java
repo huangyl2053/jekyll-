@@ -70,6 +70,7 @@ public class DBC710100_HanyoListKagoKekka extends BatchFlowBase<DBC710100_HanyoL
         param.set保険者コード(getParameter().get保険者コード());
         param.setシステム日時(システム日時);
         param.setシステム日付(new FlexibleDate(システム日時.getDate().toDateString()));
+        param.set出力順(getParameter().get出力順());
         param.setSearchKey(new ShikibetsuTaishoPSMSearchKeyBuilder(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).setデータ取得区分(DataShutokuKubun.直近レコード).build());
         return param;

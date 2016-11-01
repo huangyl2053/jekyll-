@@ -47,9 +47,9 @@ public class PanelAllHandler {
     private static final RString NUM_0001 = new RString("0001");
     private static final RString NUM_0002 = new RString("0002");
     private static final RString NUM_0003 = new RString("0003");
-    private static final RString 個人番号_利用有無名称 = new RString("個人番号 利用有無");
-    private static final RString 法人番号_利用有無名称 = new RString("法人番号 利用有無");
-    private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
+    private static final RString 個人番号_利用有無名称 = new RString("個人番号利用有無");
+    private static final RString 法人番号_利用有無名称 = new RString("法人番号利用有無");
+    private static final RString 被保険者番号名称 = new RString("被保険者番号");
     private static final RString 無し = new RString("無し");
     private static final RString 有し = new RString("有し");
     private static final RString 年次利用者負担割合判定を実行してください = new RString("年次利用者負担割合判定");
@@ -169,7 +169,7 @@ public class PanelAllHandler {
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, RString 被保険者番号) {
         ExpandedInformation expandedInfo1 = new ExpandedInformation(new Code(NUM_0001), 個人番号_利用有無名称, 有し);
         ExpandedInformation expandedInfo2 = new ExpandedInformation(new Code(NUM_0002), 法人番号_利用有無名称, 無し);
-        ExpandedInformation expandedInfo3 = new ExpandedInformation(new Code(NUM_0003), 業務固有の識別情報名称, 被保険者番号);
+        ExpandedInformation expandedInfo3 = new ExpandedInformation(new Code(NUM_0003), 被保険者番号名称, 被保険者番号);
         return PersonalData.of(識別コード, expandedInfo1, expandedInfo2, expandedInfo3);
     }
 

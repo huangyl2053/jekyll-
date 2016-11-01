@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki151.JigyohokokuCompYoshiki151Change;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki151.JigyohokokuCompYoshiki151Data;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki151.JigyohokokuCompYoshiki151ReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -116,31 +117,31 @@ public class JigyohokokuCompYoshiki151Report extends Report<JigyohokokuCompYoshi
         list.add(new JigyohokokuCompYoshiki151Change(data.get食費居住費の特例減額措置_第1号被保険者_6(),
                 data.get食費居住費の特例減額措置_第2号被保険者_6(),
                 data.get食費居住費の特例減額措置_合計_6(),
-                data.get要支援認定者数_要支援1_6(),
-                data.get要支援認定者数_要支援2_6(),
-                data.get要支援認定者数_計_6(),
-                data.get要介護認定者数_経過的要介護_6(),
-                data.get要介護認定者数_要介護1_6(),
-                data.get要介護認定者数_要介護2_6(),
-                data.get要介護認定者数_要介護3_6(),
-                data.get要介護認定者数_要介護4_6(),
-                data.get要介護認定者数_要介護5_6(),
-                data.get要介護認定者数_計_6(),
-                data.get要介護認定者数_合計_6()));
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY));
         list.add(new JigyohokokuCompYoshiki151Change(data.get食費居住費の特例減額措置_第1号被保険者_7(),
                 data.get食費居住費の特例減額措置_第2号被保険者_7(),
                 data.get食費居住費の特例減額措置_合計_7(),
-                data.get要支援認定者数_要支援1_7(),
-                data.get要支援認定者数_要支援2_7(),
-                data.get要支援認定者数_計_7(),
-                data.get要介護認定者数_経過的要介護_7(),
-                data.get要介護認定者数_要介護1_7(),
-                data.get要介護認定者数_要介護2_7(),
-                data.get要介護認定者数_要介護3_7(),
-                data.get要介護認定者数_要介護4_7(),
-                data.get要介護認定者数_要介護5_7(),
-                data.get要介護認定者数_計_7(),
-                data.get要介護認定者数_合計_7()));
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY));
         return list;
     }
 }

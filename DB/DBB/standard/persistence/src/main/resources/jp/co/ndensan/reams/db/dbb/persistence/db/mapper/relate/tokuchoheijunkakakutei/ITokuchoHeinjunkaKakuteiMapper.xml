@@ -886,39 +886,6 @@
         WHERE A."choteiId" = B."choteiId"
     </update>
     
-    
-    <delete id="delete調定額内訳_介護継承" parameterType="java.util.Map">
-        delete from rgdb."UrT0706ChoteigakuUchiwake"
-        where "UrT0706ChoteigakuUchiwake"."choteiId" IN
-        <foreach item="choteiId" index="index" collection="choteiId" open="(" separator="," close=")">
-            #{choteiId}
-        </foreach>
-    </delete>
-    
-    <delete id="delete調定状況_介護継承" parameterType="java.util.Map">
-        delete from rgdb."UrT0707ChoteiJokyo"
-        where "UrT0707ChoteiJokyo"."choteiJokyoId" IN
-        <foreach item="shunoId" index="index" collection="shunoId" open="(" separator="," close=")">
-            #{shunoId}
-        </foreach>
-    </delete>
-    
-    <delete id="delete収納管理マスタ_介護継承" parameterType="java.util.Map">
-        delete from rgdb."UrT0700ShunoKanri"
-        where "UrT0700ShunoKanri"."shunoId" IN
-        <foreach item="shunoId" index="index" collection="shunoId" open="(" separator="," close=")">
-            #{shunoId}
-        </foreach>
-    </delete>
-    
-    <delete id="delete調定共通_介護継承" parameterType="java.util.Map">
-        delete from rgdb."UrT0705ChoteiKyotsu"
-        where "UrT0705ChoteiKyotsu"."choteiId" IN
-        <foreach item="choteiId" index="index" collection="choteiId" open="(" separator="," close=")">
-            #{choteiId}
-        </foreach>
-    </delete>
-    
     <resultMap id="resultMap_FukaTempEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.FukaTempEntity">
         <result property="平準化前調定年度" column="choteiNendoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="平準化前賦課年度" column="fukaNendoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -1140,7 +1107,7 @@
         <id property="年金特徴回付情報_介護継承.renban" column="renban" />
         <association property="fukeEntity" resultMap="resultMap_FukaTempEntity"/>
         <association property="徴収方法Newest" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity"/>
-        <association property="年金特徴回付情報_介護継承" resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
+        <association property="年金特徴回付情報_介護継承" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="selest特徴平準化確定一覧"
@@ -1151,7 +1118,7 @@
     <sql id="selectTokuchoHeinjunkaKakuteiItirannEntity" >
         SELECT TEMP.*,
                <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
-               "UeT0511NenkinTokuchoKaifuJoho".*,
+               <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />,
                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
         FROM "TEMP_TABLE_FukaTemp" AS TEMP
         INNER JOIN 
@@ -1163,7 +1130,7 @@
         INNER JOIN rgdb."DbV2001ChoshuHoho" AS "DbV2001ChoshuHoho"
         ON  "DbV2001ChoshuHoho"."fukaNendo" = TEMP."fukaNendo"
         AND "DbV2001ChoshuHoho"."hihokenshaNo" = TEMP."hihokenshaNoAfter"
-        INNER JOIN rgue."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
+        INNER JOIN rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
         ON "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
         AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" =#{調定年度}
         AND "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" IN ('00', '30')

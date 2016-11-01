@@ -12,13 +12,16 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKo
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7020001.DvKogakuServiceJohoHandler;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -36,6 +39,8 @@ public class DvKogakuServiceJoho {
     private static final RString モード２ = new RString("DBCMN13019");
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
+    private static final RString BTNEXECUTE = new RString("btnExecute");
+    private static final RString BTNELEMENT = new RString("btnExecuteJigyobun");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -44,15 +49,14 @@ public class DvKogakuServiceJoho {
      * @return ResponseData
      */
     public ResponseData<DvKogakuServiceJohoDiv> onLoad(DvKogakuServiceJohoDiv div) {
-        //TODO QA.1578
         RString state = ResponseHolder.getMenuID();
         DvKogakuServiceJohoHandler handler = getHandler(div);
         handler.initialize(state);
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJohoFinder.createInstance()
                 .getShichosonSecurityJoho(GyomuBunrui.介護事務);
         DvKogakuChushutsuJokenDiv panel = div.getDvKogakuServiceParam().getDvKogakuChushutsuJoken();
-        if (市町村セキュリティ情報 == null) {
-            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+        if (市町村セキュリティ情報 == null || KaigoDonyuKubun.未導入.code().equals(市町村セキュリティ情報.get介護導入区分().code())) {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
         if (市町村セキュリティ情報.get導入形態コード() != null
                 && 市町村セキュリティ情報.get導入形態コード().is広域()) {
@@ -72,6 +76,7 @@ public class DvKogakuServiceJoho {
             div.getCcdKogakuShutsuryokuKomoku().load(new RString(ReportIdDBC.DBC701003.getReportId().toString()),
                     SubGyomuCode.DBC介護給付);
             ViewStateHolder.put(ViewStateKeys.モード, NUM_1);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNEXECUTE, false);
         }
         if (state.equals(モード２)) {
             div.getDdlKogakuShinsaHoho().setDisplayNone(true);
@@ -88,11 +93,37 @@ public class DvKogakuServiceJoho {
             div.getCcdKogakuShutsuryokuKomoku().load(new RString(ReportIdDBC.DBC701019.getReportId().toString()),
                     SubGyomuCode.DBC介護給付);
             ViewStateHolder.put(ViewStateKeys.モード, NUM_2);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNELEMENT, false);
         }
         div.getCcdKogakuShutsuryokuKomoku().setVisible(false);
         div.getCcdKogakuShutsuryokuKomoku().setDisabled(true);
         div.getDvCsvHenshuHoho().setVisible(true);
         return createResponse(div);
+    }
+
+    /**
+     * 条件を保存するボタンのメソッドです。
+     *
+     * @param div DvKogakuServiceJohoDiv
+     * @return ResponseData
+     */
+    public ResponseData<BatchParameterMap> onClick_btnKogakuParamSave(DvKogakuServiceJohoDiv div) {
+        RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        responseData.data = new BatchParameterMap(getHandler(div).getBatchParamter(市町村判定));
+        return responseData;
+    }
+
+    /**
+     * 条件を復元するボタンのメソッドです。
+     *
+     * @param div DvKogakuServiceJohoDiv
+     * @return ResponseData
+     */
+    public ResponseData<DvKogakuServiceJohoDiv> onClick_btnKogakuParamRestore(DvKogakuServiceJohoDiv div) {
+        RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
+        getHandler(div).pamaRestore(市町村判定);
+        return ResponseData.of(div).respond();
     }
 
     /**

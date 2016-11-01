@@ -11,32 +11,34 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KoseiJiyu {
 
     /**
-     * コード:00 名称:当初
+     * コード:00 名称:当初（継続、新規認定） 略称:当初
      */
-    当初_継続_新規認定("00", "当初"),
+    当初_継続_新規認定("00", "当初（継続、新規認定）", "当初"),
     /**
-     * コード:10 名称:本人所得
+     * コード:10 名称:本人所得更正 略称:本人所得
      */
-    本人所得更正("10", "本人所得"),
+    本人所得更正("10", "本人所得更正", "本人所得"),
     /**
-     * コード:20 名称:世帯員所得
+     * コード:20 名称:世帯員所得更正 略称:世帯員所得
      */
-    世帯員所得更正("20", "世帯員所得"),
+    世帯員所得更正("20", "世帯員所得更正", "世帯員所得"),
     /**
-     * コード:40 名称:その他
+     * コード:40 名称:その他 略称:その他
      */
-    その他("40", "その他"),
+    その他("40", "その他", "その他"),
     /**
-     * コード:30 名称:世帯変更
+     * コード:30 名称:世帯構成変更 略称:世帯変更
      */
-    世帯構成変更("30", "世帯変更");
+    世帯構成変更("30", "世帯構成変更", "世帯変更");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private KoseiJiyu(String code, String fullname) {
+    private KoseiJiyu(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -55,6 +57,15 @@ public enum KoseiJiyu {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 負担割合更正事由の略称を返します。
+     *
+     * @return 負担割合更正事由の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

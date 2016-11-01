@@ -85,7 +85,7 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
     private static final RString DATANAME_被保険者番号 = new RString("被保険者番号");
     private static final RString 定数_ORDERBY = new RString("order by");
     private static final RString コンマ = new RString(",");
-    private static final RString 項目名_履歴番号 = new RString("\"3061KagoKetteiMeisai_rirekiNo\"");
+    private static final RString 項目名_事業所番号 = new RString("\"dbT3061KagoKetteiMeisai_jigyoshoNo\"");
     private IOutputOrder 出力順;
     private HanyoListKagoKekkaProcessParameter parameter;
     private Association 地方公共団体情報;
@@ -108,12 +108,12 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
                 parameter.set出力項目(MyBatisOrderByClauseCreator.create(HanyoListKagoKekkaOutputOrder.class, 出力順).
                         concat(コンマ).concat(HanyoListKagoKekkaOutputOrder.被保険者番号.getMyBatis項目名()).
                         concat(コンマ).concat(HanyoListKagoKekkaOutputOrder.サービス年月.getMyBatis項目名()).
-                        concat(コンマ).concat(項目名_履歴番号));
+                        concat(コンマ).concat(項目名_事業所番号));
             }
         } else {
             parameter.set出力項目(定数_ORDERBY.concat(HanyoListKagoKekkaOutputOrder.被保険者番号.getMyBatis項目名()).
                     concat(コンマ).concat(HanyoListKagoKekkaOutputOrder.サービス年月.getMyBatis項目名()).
-                    concat(コンマ).concat(項目名_履歴番号));
+                    concat(コンマ).concat(項目名_事業所番号));
         }
         構成市町村マスタ = new HashMap<>();
         連番 = 0;
@@ -165,13 +165,13 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
 
     @Override
     protected void afterExecute() {
+        csvWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             spoolManager.spool(eucFilePath, accessLogUUID);
         } else {
             spoolManager.spool(eucFilePath);
         }
-        csvWriter.close();
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 地方公共団体情報.getLasdecCode_().value(),
@@ -213,7 +213,7 @@ public class HanyoListKagoKekkaOutputProcess extends BatchProcessBase<HanyoListK
 
     private void get抽出条件Part2(List<RString> 抽出条件) {
         if (!RString.isNullOrEmpty(parameter.get保険者区分())) {
-            抽出条件.add(TITLE_保険者区分.concat(KagoMoshitateKekka_HokenshaKubun.toValue(parameter.get保険者区分()).get略称()));
+            抽出条件.add(TITLE_保険者区分.concat(KagoMoshitateKekka_HokenshaKubun.toValue(parameter.get保険者区分()).get名称()));
         }
         if ((parameter.getサービス提供年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月From()))
                 || (parameter.getサービス提供年月To() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月To()))) {

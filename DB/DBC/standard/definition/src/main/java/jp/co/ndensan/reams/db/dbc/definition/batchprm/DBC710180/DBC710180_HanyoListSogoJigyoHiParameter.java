@@ -38,6 +38,8 @@ public class DBC710180_HanyoListSogoJigyoHiParameter extends BatchParameterBase 
     private static final String KEY_SHINSAYMTO = "審査年月終了年月";
     private static final String KEY_TORIKOMIFROM = "取込年月開始年月";
     private static final String KEY_TORIKOMITO = "取込年月終了年月";
+    private static final String KEY_JIGYOSYAMEI = "事業者名";
+    private static final String KEY_SABISUMESYU = "サービス名称";
 
     @BatchParameter(key = KEY_REPORTID, name = "帳票ID")
     private RString 帳票ID;
@@ -71,6 +73,10 @@ public class DBC710180_HanyoListSogoJigyoHiParameter extends BatchParameterBase 
     private RString 取込年月開始年月;
     @BatchParameter(key = KEY_TORIKOMITO, name = "取込年月終了年月")
     private RString 取込年月終了年月;
+    @BatchParameter(key = KEY_JIGYOSYAMEI, name = "事業者名")
+    private RString 事業者名;
+    @BatchParameter(key = KEY_SABISUMESYU, name = "サービス名称")
+    private RString サービス名称;
 
     /**
      * プロセスパラメータを作成します。
@@ -93,7 +99,9 @@ public class DBC710180_HanyoListSogoJigyoHiParameter extends BatchParameterBase 
                 審査年月開始年月,
                 審査年月終了年月,
                 取込年月開始年月,
-                取込年月終了年月);
+                取込年月終了年月,
+                事業者名,
+                サービス名称);
     }
 
 }

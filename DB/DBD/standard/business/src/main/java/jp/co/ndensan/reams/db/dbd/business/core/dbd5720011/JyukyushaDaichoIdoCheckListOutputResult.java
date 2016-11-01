@@ -136,6 +136,9 @@ public class JyukyushaDaichoIdoCheckListOutputResult {
         if (entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty()) {
             upper.set被保険者番号(entity.get被保険者番号());
         }
+        if (entity.get申請書管理番号() != null && !entity.get申請書管理番号().isEmpty()) {
+            upper.set申請書管理番号(entity.get申請書管理番号());
+        }
         return upper;
     }
 

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.Soshit
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -38,7 +40,6 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
     private final FlexibleDate kizyunnichi;
     private final FlexibleDate hitsukehanifrom;
     private final FlexibleDate hitsukehanito;
-    private final boolean chokindatacyusyutsu;
     private final RString soshitsukubun;
     private final AtenaSelectBatchParameter atenacyusyutsujyoken;
     private final RString syutsuryokujun;
@@ -78,8 +79,9 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
     private boolean has地区2To;
     private boolean has地区3From;
     private boolean has地区3To;
-    private final RString psmShikibetsuTaisho;
+    private final IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho;
     private final RString psmAtesaki;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタです。
@@ -89,7 +91,6 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
      * @param kizyunnichi 基準日
      * @param hitsukehanifrom 日付範囲From
      * @param hitsukehanito 日付範囲To
-     * @param chokindatacyusyutsu 直近データ抽出
      * @param soshitsukubun 喪失区分
      * @param atenacyusyutsujyoken 宛名抽出条件
      * @param syutsuryokujun 出力順
@@ -103,25 +104,24 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
             FlexibleDate kizyunnichi,
             FlexibleDate hitsukehanifrom,
             FlexibleDate hitsukehanito,
-            boolean chokindatacyusyutsu,
             RString soshitsukubun,
             AtenaSelectBatchParameter atenacyusyutsujyoken,
             RString syutsuryokujun,
             RString syutsuryokukomoku,
-            RString psmShikibetsuTaisho,
+            IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho,
             RString psmAtesaki) {
         this.cyusyutsuhohokubun = cyusyutsuhohokubun;
         this.cyusyutsukomokukubun = cyusyutsukomokukubun;
         this.kizyunnichi = kizyunnichi;
         this.hitsukehanifrom = hitsukehanifrom;
         this.hitsukehanito = hitsukehanito;
-        this.chokindatacyusyutsu = chokindatacyusyutsu;
         this.soshitsukubun = soshitsukubun;
         this.atenacyusyutsujyoken = atenacyusyutsujyoken;
         this.syutsuryokujun = syutsuryokujun;
         this.syutsuryokukomoku = syutsuryokukomoku;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
+        shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(psmShikibetsuTaisho);
         set抽出方法区分(cyusyutsuhohokubun);
         set年齢層抽出方法(atenacyusyutsujyoken);
         set地区区分(atenacyusyutsujyoken);

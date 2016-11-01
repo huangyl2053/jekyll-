@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2700011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
@@ -15,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class TorikomiFuairuDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-21_20-30-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,10 +33,8 @@ public class TorikomiFuairuDiv extends PanelBatchParameter {
     private TextBox txtKoshinNichiji;
     @JsonProperty("txtFuairuRekodoSu")
     private TextBoxNum txtFuairuRekodoSu;
-    @JsonProperty("hdnFilePath")
-    private RString hdnFilePath;
-    @JsonProperty("hdnLine")
-    private RString hdnLine;
+    @JsonProperty("hdNumber")
+    private TextBox hdNumber;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -154,39 +151,21 @@ public class TorikomiFuairuDiv extends PanelBatchParameter {
     }
 
     /*
-     * gethdnFilePath
-     * @return hdnFilePath
+     * gethdNumber
+     * @return hdNumber
      */
-    @JsonProperty("hdnFilePath")
-    public RString getHdnFilePath() {
-        return hdnFilePath;
+    @JsonProperty("hdNumber")
+    public TextBox getHdNumber() {
+        return hdNumber;
     }
 
     /*
-     * sethdnFilePath
-     * @param hdnFilePath hdnFilePath
+     * sethdNumber
+     * @param hdNumber hdNumber
      */
-    @JsonProperty("hdnFilePath")
-    public void setHdnFilePath(RString hdnFilePath) {
-        this.hdnFilePath = hdnFilePath;
-    }
-
-    /*
-     * gethdnLine
-     * @return hdnLine
-     */
-    @JsonProperty("hdnLine")
-    public RString getHdnLine() {
-        return hdnLine;
-    }
-
-    /*
-     * sethdnLine
-     * @param hdnLine hdnLine
-     */
-    @JsonProperty("hdnLine")
-    public void setHdnLine(RString hdnLine) {
-        this.hdnLine = hdnLine;
+    @JsonProperty("hdNumber")
+    public void setHdNumber(TextBox hdNumber) {
+        this.hdNumber = hdNumber;
     }
 
     // </editor-fold>

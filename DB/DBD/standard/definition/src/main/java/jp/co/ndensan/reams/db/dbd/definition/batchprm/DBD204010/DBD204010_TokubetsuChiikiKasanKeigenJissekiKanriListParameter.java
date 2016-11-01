@@ -21,7 +21,7 @@ import lombok.Setter;
 /**
  * バッチ設計_DBDBT00005_特別地域加算軽減実績管理リスト作成バッチパラメタークラスです．
  *
- * @reamsid_L DBD-3880-030 jinge TokuchiJissekiKanriListSakusei
+ * @reamsid_L DBD-3880-030 jinge
  */
 @Getter
 @Setter

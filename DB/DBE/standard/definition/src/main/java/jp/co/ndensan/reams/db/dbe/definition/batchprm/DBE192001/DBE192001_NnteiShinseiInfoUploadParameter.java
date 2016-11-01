@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,6 +26,7 @@ public class DBE192001_NnteiShinseiInfoUploadParameter extends BatchParameterBas
     private static final String TORIKOMIFILELIST = "torikomifilelist";
     private static final String SHINSEIJOHODATALIST = "shinseiJohoDataList";
     private static final String PATH = "path";
+    private static final String FILEID = "fileId";
 
     private boolean 厚労省フラグ;
     private boolean 東芝版フラグ;
@@ -37,6 +39,8 @@ public class DBE192001_NnteiShinseiInfoUploadParameter extends BatchParameterBas
     private List<ShiseiDataParameter> 申請情報データリスト;
     @BatchParameter(key = PATH, name = "格納パス")
     private RString 格納パス;
+    @BatchParameter(key = FILEID, name = "共有ファイルID")
+    private RDateTime 共有ファイルID;
 
     /**
      * mybatisのパラメータを生成します。

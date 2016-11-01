@@ -44,7 +44,6 @@ import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIke
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
-import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.IkenshokinyuyoshiReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoReportSource;
@@ -223,6 +222,17 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
                 }
             }
         }
+    }
+    public void print主治医意見書記入用紙(List<IkenshokinyuyoshiBusiness> 主治医意見書記入用紙List, ReportManager reportManager) {
+//        List<IkenshokinyuyoshiReport> list = new ArrayList<>();
+//        IkenshokinyuyoshiProperty property = new IkenshokinyuyoshiProperty();
+//        list.add(new IkenshokinyuyoshiReport(主治医意見書記入用紙List));
+//        try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
+//            for (IkenshokinyuyoshiReport report : list) {
+//                ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+//                report.writeBy(reportSourceWriter);
+//            }
+//        }
     }
     
     /**

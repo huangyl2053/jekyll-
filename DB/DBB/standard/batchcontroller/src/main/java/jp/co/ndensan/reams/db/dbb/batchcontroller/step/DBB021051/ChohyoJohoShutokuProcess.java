@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.db.dbb.business.report.dbb021051.DBZ100001AtenaSealEn
 import jp.co.ndensan.reams.db.dbb.business.report.dbb021051.DBZ100001AtenaSealParameterEntity;
 import jp.co.ndensan.reams.db.dbb.business.report.dbz100001.AtenaSealReport;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb021051.DBB021051ProcessParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb021051.DBB021051TableJohoTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.atenaseal.DBZ100001AtenaSealSource;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
-import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.IBatchReportWriterWithCheckList;
@@ -82,8 +82,8 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
         dataUtil = new DBB021051DataUtil();
         entityList = new ArrayList<>();
         システム日付 = DateConverter.getDate4(RDate.getNowDate());
-        出力順情報 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBZ介護共通,
-                ReportIdDBZ.DBZ100001.getReportId(), Long.parseLong(parameter.get出力順ID().toString()));
+        出力順情報 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBB介護賦課,
+                ReportIdDBB.DBB100087.getReportId(), Long.parseLong(parameter.get出力順ID().toString()));
         if (出力順情報 == null) {
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(ERROR_出力順.toString()));
         }
@@ -112,14 +112,13 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
         CheckListLineItemSet pairs = CheckListLineItemSet.
                 of(ChohyoJohoShutokuProcess.特定項目.class,
                         ChohyoJohoShutokuProcess.チェック項目.class);
-//        TODO QA Redmine#100667
         ICheckListInfo info = CheckListInfoFactory.createInstance(SubGyomuCode.DBB介護賦課,
                 地方公共団体情報.get地方公共団体コード(), 地方公共団体情報.get市町村名());
         this.checkWriter = BatchWriters
                 .batchReportWriterWithCheckList(DBZ100001AtenaSealSource.class)
                 .checkListInfo(info)
                 .checkListLineItemSet(pairs)
-                .reportId(ReportIdDBZ.DBZ100001.getReportId())
+                .reportId(ReportIdDBB.DBB100087.getReportId())
                 .build();
         this.reportSourceWriter = new ReportSourceWriter<>(this.checkWriter);
     }
@@ -181,18 +180,18 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
 
     private enum 特定項目 implements ISpecificKey {
 
-        key1("jushoText", "住所TXT1枚目"),
-        key2("jushoText1", "住所TXT2枚目"),
-        key3("jushoText2", "住所TXT3枚目"),
-        key4("jushoText3", "住所TXT4枚目"),
-        key5("jushoText4", "住所TXT5枚目"),
-        key6("jushoText5", "住所TXT6枚目"),
-        key7("jushoText6", "住所TXT7枚目"),
-        key8("jushoText7", "住所TXT8枚目"),
-        key9("jushoText8", "住所TXT9枚目"),
-        key10("jushoText9", "住所TXT10枚目"),
-        key11("jushoText10", "住所TXT11枚目"),
-        key12("jushoText11", "住所TXT12枚目");
+        key1("shikibetsuCode", "識別コード1枚目"),
+        key2("shikibetsuCode1", "識別コード2枚目"),
+        key3("shikibetsuCode2", "識別コード3枚目"),
+        key4("shikibetsuCode3", "識別コード4枚目"),
+        key5("shikibetsuCode4", "識別コード5枚目"),
+        key6("shikibetsuCode5", "識別コード6枚目"),
+        key7("shikibetsuCode6", "識別コード7枚目"),
+        key8("shikibetsuCode7", "識別コード8枚目"),
+        key9("shikibetsuCode8", "識別コード9枚目"),
+        key10("shikibetsuCode9", "識別コード10枚目"),
+        key11("shikibetsuCode10", "識別コード11枚目"),
+        key12("shikibetsuCode11", "識別コード12枚目");
 
         private final RString itemName;
         private final RString printName;
@@ -215,31 +214,54 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
 
     private enum チェック項目 implements ICheckTarget {
 
-        target1("jushoText", "住所TXT1枚目", CheckShubetsu.文字切れ),
-        target2("jushoText1", "住所TXT2枚目", CheckShubetsu.文字切れ),
-        target3("jushoText2", "住所TXT3枚目", CheckShubetsu.文字切れ),
-        target4("jushoText3", "住所TXT4枚目", CheckShubetsu.文字切れ),
-        target5("jushoText4", "住所TXT5枚目", CheckShubetsu.文字切れ),
-        target6("jushoText5", "住所TXT6枚目", CheckShubetsu.文字切れ),
-        target7("jushoText6", "住所TXT7枚目", CheckShubetsu.文字切れ),
-        target8("jushoText7", "住所TXT8枚目", CheckShubetsu.文字切れ),
-        target9("jushoText8", "住所TXT9枚目", CheckShubetsu.文字切れ),
-        target10("jushoText9", "住所TXT10枚目", CheckShubetsu.文字切れ),
-        target11("jushoText10", "住所TXT11枚目", CheckShubetsu.文字切れ),
-        target12("jushoText11", "住所TXT12枚目", CheckShubetsu.文字切れ),
-        target13("jushoText", "住所TXT1枚目", CheckShubetsu.仮登録外字),
-        target14("jushoText1", "住所TXT2枚目", CheckShubetsu.仮登録外字),
-        target15("jushoText2", "住所TXT3枚目", CheckShubetsu.仮登録外字),
-        target16("jushoText3", "住所TXT4枚目", CheckShubetsu.仮登録外字),
-        target17("jushoText4", "住所TXT5枚目", CheckShubetsu.仮登録外字),
-        target18("jushoText5", "住所TXT6枚目", CheckShubetsu.仮登録外字),
-        target19("jushoText6", "住所TXT7枚目", CheckShubetsu.仮登録外字),
-        target20("jushoText7", "住所TXT8枚目", CheckShubetsu.仮登録外字),
-        target21("jushoText8", "住所TXT9枚目", CheckShubetsu.仮登録外字),
-        target22("jushoText9", "住所TXT10枚目", CheckShubetsu.仮登録外字),
-        target23("jushoText10", "住所TXT11枚目", CheckShubetsu.仮登録外字),
-        target24("jushoText11", "住所TXT12枚目", CheckShubetsu.仮登録外字);
-
+        target1("chkJusho", "住所1枚目", CheckShubetsu.仮登録外字),
+        target2("chkJusho1", "住所2枚目", CheckShubetsu.仮登録外字),
+        target3("chkJusho2", "住所3枚目", CheckShubetsu.仮登録外字),
+        target4("chkJusho3", "住所4枚目", CheckShubetsu.仮登録外字),
+        target5("chkJusho4", "住所5枚目", CheckShubetsu.仮登録外字),
+        target6("chkJusho5", "住所6枚目", CheckShubetsu.仮登録外字),
+        target7("chkJusho6", "住所7枚目", CheckShubetsu.仮登録外字),
+        target8("chkJusho7", "住所8枚目", CheckShubetsu.仮登録外字),
+        target9("chkJusho8", "住所9枚目", CheckShubetsu.仮登録外字),
+        target10("chkJusho9", "住所10枚目", CheckShubetsu.仮登録外字),
+        target11("chkJusho10", "住所11枚目", CheckShubetsu.仮登録外字),
+        target12("chkJusho11", "住所12枚目", CheckShubetsu.仮登録外字),
+        target13("chkShimei", "氏名1枚目", CheckShubetsu.仮登録外字),
+        target14("chkShimei1", "氏名2枚目", CheckShubetsu.仮登録外字),
+        target15("chkShimei2", "氏名3枚目", CheckShubetsu.仮登録外字),
+        target16("chkShimei3", "氏名4枚目", CheckShubetsu.仮登録外字),
+        target17("chkShimei4", "氏名5枚目", CheckShubetsu.仮登録外字),
+        target18("chkShimei5", "氏名6枚目", CheckShubetsu.仮登録外字),
+        target19("chkShimei6", "氏名7枚目", CheckShubetsu.仮登録外字),
+        target20("chkShimei7", "氏名8枚目", CheckShubetsu.仮登録外字),
+        target21("chkShimei8", "氏名9枚目", CheckShubetsu.仮登録外字),
+        target22("chkShimei9", "氏名10枚目", CheckShubetsu.仮登録外字),
+        target23("chkShimei10", "氏名11枚目", CheckShubetsu.仮登録外字),
+        target24("chkShimei11", "氏名12枚目", CheckShubetsu.仮登録外字),
+        target25("chkKatagaki", "方書1枚目", CheckShubetsu.仮登録外字),
+        target26("chkKatagaki1", "方書2枚目", CheckShubetsu.仮登録外字),
+        target27("chkKatagaki2", "方書3枚目", CheckShubetsu.仮登録外字),
+        target28("chkKatagaki3", "方書4枚目", CheckShubetsu.仮登録外字),
+        target29("chkKatagaki4", "方書5枚目", CheckShubetsu.仮登録外字),
+        target30("chkKatagaki5", "方書6枚目", CheckShubetsu.仮登録外字),
+        target31("chkKatagaki6", "方書7枚目", CheckShubetsu.仮登録外字),
+        target32("chkKatagaki7", "方書8枚目", CheckShubetsu.仮登録外字),
+        target33("chkKatagaki8", "方書9枚目", CheckShubetsu.仮登録外字),
+        target34("chkKatagaki9", "方書10枚目", CheckShubetsu.仮登録外字),
+        target35("chkKatagaki10", "方書11枚目", CheckShubetsu.仮登録外字),
+        target36("chkKatagaki11", "方書12枚目", CheckShubetsu.仮登録外字),
+        target37("samabunShimei1", "様分氏名1枚目", CheckShubetsu.仮登録外字),
+        target38("samabunShimei3", "様分氏名2枚目", CheckShubetsu.仮登録外字),
+        target39("samabunShimei5", "様分氏名3枚目", CheckShubetsu.仮登録外字),
+        target40("samabunShimei7", "様分氏名4枚目", CheckShubetsu.仮登録外字),
+        target41("samabunShimei9", "様分氏名5枚目", CheckShubetsu.仮登録外字),
+        target42("samabunShimei11", "様分氏名6枚目", CheckShubetsu.仮登録外字),
+        target43("samabunShimei13", "様分氏名7枚目", CheckShubetsu.仮登録外字),
+        target44("samabunShimei15", "様分氏名8枚目", CheckShubetsu.仮登録外字),
+        target45("samabunShimei17", "様分氏名9枚目", CheckShubetsu.仮登録外字),
+        target46("samabunShimei19", "様分氏名10枚目", CheckShubetsu.仮登録外字),
+        target47("samabunShimei21", "様分氏名11枚目", CheckShubetsu.仮登録外字),
+        target48("samabunShimei23", "様分氏名12枚目", CheckShubetsu.仮登録外字);
         private final RString itemName;
         private final RString printName;
         private final CheckShubetsu checkShubetsu;

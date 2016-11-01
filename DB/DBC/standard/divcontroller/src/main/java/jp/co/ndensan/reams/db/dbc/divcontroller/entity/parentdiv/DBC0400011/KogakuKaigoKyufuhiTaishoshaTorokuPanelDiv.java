@@ -4,19 +4,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0400011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
- * KogakuKaigoKyufuhiTaishoshaTorokuPanel のクラスファイル
- *
- * @reamsid_L DBC-2010-030 huzongcheng
+ * KogakuKaigoKyufuhiTaishoshaTorokuPanel のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class KogakuKaigoKyufuhiTaishoshaTorokuPanelDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,7 +22,7 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuPanelDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtShinsaYM")
-    private TextBoxDateRange txtShinsaYM;
+    private TextBoxDate txtShinsaYM;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +35,7 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuPanelDiv extends Panel {
      * @return txtShinsaYM
      */
     @JsonProperty("txtShinsaYM")
-    public TextBoxDateRange getTxtShinsaYM() {
+    public TextBoxDate getTxtShinsaYM() {
         return txtShinsaYM;
     }
 
@@ -46,7 +44,7 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuPanelDiv extends Panel {
      * @param txtShinsaYM txtShinsaYM
      */
     @JsonProperty("txtShinsaYM")
-    public void setTxtShinsaYM(TextBoxDateRange txtShinsaYM) {
+    public void setTxtShinsaYM(TextBoxDate txtShinsaYM) {
         this.txtShinsaYM = txtShinsaYM;
     }
 

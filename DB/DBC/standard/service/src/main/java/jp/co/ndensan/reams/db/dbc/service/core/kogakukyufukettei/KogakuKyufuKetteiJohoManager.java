@@ -14,7 +14,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3058KogakuShikyuShinsaKetteiTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3511KogakuShikyuShinsaKetteiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufukettei.KogakuKyufuKetteiJohoControlCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufukettei.KogakuKyufuKetteiJohoCsvHeadEntity;
@@ -173,7 +173,7 @@ public class KogakuKyufuKetteiJohoManager {
 
     private void insert高額介護サービス費支給審査決定一時TBL(int 連番, KogakuKyufuKetteiJohoCsvHeadEntity headerEntity,
             KogakuKyufuKetteiJohoCsvMeisaiEntity meisaiEntity, IKogakuKyufuKetteiJohoMapper mapper) {
-        DbWT3058KogakuShikyuShinsaKetteiTempEntity temp = new DbWT3058KogakuShikyuShinsaKetteiTempEntity();
+        DbWT3511KogakuShikyuShinsaKetteiTempEntity temp = new DbWT3511KogakuShikyuShinsaKetteiTempEntity();
         temp.set連番(連番);
         if (!RString.isNullOrEmpty(headerEntity.get証記載保険者番号())) {
             temp.set証記載保険者番号(new ShoKisaiHokenshaNo(headerEntity.get証記載保険者番号()));
@@ -331,7 +331,7 @@ public class KogakuKyufuKetteiJohoManager {
         if (null == entity) {
             return;
         }
-        DbWT3058KogakuShikyuShinsaKetteiTempEntity ketteiTemp = entity.getKetteiTemp();
+        DbWT3511KogakuShikyuShinsaKetteiTempEntity ketteiTemp = entity.getKetteiTemp();
         DbT3058KogakuShikyuShinsaKetteiEntity shinsaKettei = entity.getShinsaKettei();
         DbT3057KogakuShikyuHanteiKekkaEntity hanteiKekka = entity.getHanteiKekka();
         Map<String, Object> parameter = new HashMap<>();
@@ -394,7 +394,7 @@ public class KogakuKyufuKetteiJohoManager {
 
     private void do審査決定情報の登録(KogakuKyufuKetteiHanteiEntity hanteiEntity, FlexibleYearMonth 処理年月) {
         DbWT0001HihokenshaTempEntity hihokenshaTemp = hanteiEntity.getHihokenshaTemp();
-        DbWT3058KogakuShikyuShinsaKetteiTempEntity ketteiTemp = hanteiEntity.getKetteiTemp();
+        DbWT3511KogakuShikyuShinsaKetteiTempEntity ketteiTemp = hanteiEntity.getKetteiTemp();
         List<DbT3057KogakuShikyuHanteiKekkaEntity> kekkaList = hanteiEntity.getKekkaList();
         DbT3058KogakuShikyuShinsaKetteiEntity newKetteiEntity = new DbT3058KogakuShikyuShinsaKetteiEntity();
         newKetteiEntity.setHihokenshaNo(hihokenshaTemp.get被保険者番号());

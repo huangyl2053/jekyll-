@@ -46,7 +46,7 @@ public class GassanKyufujissekiTorikomiIchiranBodyEditor implements IGassanKyufu
             source.list_2 = target.get被保険者一時().get登録被保険者番号().getColumnValue();
         }
         source.list_3 = target.get被保険者一時().get宛名名称();
-        source.list_4 = target.get高額合算給付実績一時().getShikyuShinseiSeiriNo();
+        source.list_4 = target.get高額合算給付実績一時().getShikyuShinseishoSeiriNo();
         source.list_5 = target.get高額合算給付実績一時().getJikoFutanSeiriNo();
         source.list_6 = KaigoGassan_KyufuJissekiSakuseiKubun
                 .toValue(target.get高額合算給付実績一時().getKyufuJissekiSakuseiKubunCode()).get名称();
@@ -69,7 +69,7 @@ public class GassanKyufujissekiTorikomiIchiranBodyEditor implements IGassanKyufu
             source.shichosonCode = target.get被保険者一時().get市町村コード().getColumnValue();
         }
         source.shimei50onKana = target.get被保険者一時().get氏名50音カナ();
-        source.shikyuShinseishoSeiriNo = target.get高額合算給付実績一時().getShikyuShinseiSeiriNo();
+        source.shikyuShinseishoSeiriNo = target.get高額合算給付実績一時().getShikyuShinseishoSeiriNo();
         source.shikibetsuCode = target.get被保険者一時().get識別コード();
         return source;
     }

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.-->
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-4300-030 liuwei2 -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyufuseigentaishoichiran.IKyufuSeikentaishoshaMapper">
+    <select id="get給付制限対象者一覧CSV情報"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd210010.DBD210010MybatisParameter"
+            resultMap="ResultMap_KyufuSeikentaishoshaEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        "shiharaiHouhouKanriHitotokiTemp".*,
+        滞納一時DB.集計滞納額,
+        収納一時DB.未納額
+        FROM "shiharaiHouhouKanriHitotokiTemp"
+
+        LEFT JOIN(
+        SELECT
+        "tainouJokyoTemp"."hihokenshaNo",
+        "tainouJokyoTemp"."kanriKubun",
+        "tainouJokyoTemp"."rirekiNo",
+        SUM("tainouJokyoTemp"."shukeiainougaku") AS 集計滞納額
+        FROM "tainouJokyoTemp"
+        GROUP BY
+        "tainouJokyoTemp"."hihokenshaNo",
+        "tainouJokyoTemp"."kanriKubun",
+        "tainouJokyoTemp"."rirekiNo"
+        ) AS 滞納一時DB
+        ON 滞納一時DB."hihokenshaNo" =  "shiharaiHouhouKanriHitotokiTemp"."hihokenshaNo"
+        AND 滞納一時DB."kanriKubun" = "shiharaiHouhouKanriHitotokiTemp"."kanriKubun"
+        AND 滞納一時DB."rirekiNo" = "shiharaiHouhouKanriHitotokiTemp"."rirekiNo"
+
+        LEFT JOIN(
+        SELECT
+        滞納一時."hihokenshaNo",
+        滞納一時."kanriKubun",
+        滞納一時."rirekiNo",
+        SUM("ShunoJokyoTemp"."tmp_minogaku") AS 未納額
+        FROM "ShunoJokyoTemp"
+        INNER JOIN
+        "tainouJokyoTemp" AS 滞納一時
+        ON "ShunoJokyoTemp"."tmp_tsuchishoNo" = 滞納一時."tsuchishoNo"
+        WHERE "ShunoJokyoTemp"."tmp_minoKannoKubun" = '3'
+        AND "ShunoJokyoTemp"."tmp_nokigen" = #{システム日付の2年前}
+        GROUP BY
+        滞納一時."hihokenshaNo",
+        滞納一時."kanriKubun",
+        滞納一時."rirekiNo"
+        )AS 収納一時DB
+        ON "shiharaiHouhouKanriHitotokiTemp"."hihokenshaNo" = 収納一時DB."hihokenshaNo"
+        AND "shiharaiHouhouKanriHitotokiTemp"."kanriKubun" = 収納一時DB."kanriKubun"
+        AND "shiharaiHouhouKanriHitotokiTemp"."rirekiNo" = 収納一時DB."rirekiNo"
+        ${出力順}
+    </select>
+    <resultMap id="ResultMap_KyufuSeikentaishoshaEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd210010.KyufuSeikentaishoshaEntity" autoMapping="true">
+
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="氏名" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="カナ氏名" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="生年月日" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="性別コード" column="seibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="郵便番号" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所コード" column="zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler" />
+        <result property="行政区コード" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler" />
+        <result property="世帯コード" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格取得日" column="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格喪失日" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定申請日" column="ninteiShinseihi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="要介護状態区分" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="認定有効開始年月日" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定有効終了年月日" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定日" column="ninteiihi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="管理区分" column="kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="登録区分" column="torokuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="適用開始日" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="適用終了日" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="終了区分" column="shuryoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="予告登録日" column="yokoku_TorokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="差止依頼書受理日" column="sashitome_IraiJuriYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="予告通知書発行日" column="yokoku_TsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="弁明書提出期限" column="bemmei_TeishutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="弁明書受付日" column="bemmei_UketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="弁明理由" column="bemmei_RiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="弁明内容決定日" column="bemmei_ShinsaKetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="弁明審査結果" column="bemmei_ShinsaKekkaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="償還払化決定日" column="shokan_KetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="償還払化通知書発行日" column="shokan_TsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="被保険者証提出期限" column="hihokenshaShoTeishutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="差止対象フラグ" column="sashitomeFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="差止決定日" column="sashitome_KetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="差止解除日" column="sashitome_KaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="控除決定日" column="kojo_KetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="減額決定日" column="gemmen_KetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="減額通知書発行日" column="gemmen_TsuchiHakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="給付率" column="kyufuRitsu" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenKyufuRitsuTypeHandler" />
+        <result property="終了申請書受付日" column="shuryoShinsei_UketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="終了申請年月日" column="shuryoShinsei_YMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="終了申請理由" column="shuryoShinsei_RiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="終了申請内容決定日" column="shuryoShinsei_ShinsaKetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="終了申請審査結果" column="shuryoShinsei_ShinsaKekkaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="徴収権消滅期間" column="choshukenShometsuKikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="納付済期間" column="nofusumiKikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="納付済減額期間" column="nofusumiGengakuKikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="確定給付額減額期間開始日" column="kakutei_GengakuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="確定給付額減額期間終了日" column="kakutei_GengakuShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+
+        <result property="広住特措置元市町村コード" column="koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="広域内住所地特例フラグ" column="koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+
+        <result property="通知時滞納額合計" column="集計滞納額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="現在滞納額合計" column="未納額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+    </resultMap>
+</mapper>

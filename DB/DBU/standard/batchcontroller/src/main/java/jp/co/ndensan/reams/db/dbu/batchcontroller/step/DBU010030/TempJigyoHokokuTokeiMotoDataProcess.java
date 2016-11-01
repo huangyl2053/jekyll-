@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.ippangenbutsu.JigyoHokokuGeppoIppanGenbutsuProcessParamter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.JigyoHokokuIppanGenbutsuRelateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.JigyouHoukokuTokTyhyouEUCEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippangenbutsu.IJigyoHokokuGeppoIppanGenbutsuMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -34,7 +35,6 @@ public class TempJigyoHokokuTokeiMotoDataProcess extends BatchProcessBase<JigyoH
     @Override
     protected void initialize() {
         mapper = getMapper(IJigyoHokokuGeppoIppanGenbutsuMapper.class);
-        //  mapper.createtempJigyoHokokuTokeiMotoData();
     }
 
     @Override
@@ -44,12 +44,30 @@ public class TempJigyoHokokuTokeiMotoDataProcess extends BatchProcessBase<JigyoH
 
     @Override
     protected void createWriter() {
-      //  事業報告統計元データ一時ファイルB = new BatchEntityCreatedTempTableWriter(JigyoHokokuIppanGenbutsuRelateEntity.TABLE_NAME,
-        //          JigyoHokokuIppanGenbutsuRelateEntity.class);
+        事業報告統計元データ一時ファイルB = new BatchEntityCreatedTempTableWriter(JigyouHoukokuTokTyhyouEUCEntity.TABLE_NAME,
+                JigyouHoukokuTokTyhyouEUCEntity.class);
     }
 
     @Override
     protected void process(JigyoHokokuIppanGenbutsuRelateEntity entity) {
-        事業報告統計元データ一時ファイルB.insert(entity);
+        JigyouHoukokuTokTyhyouEUCEntity eucentity = new JigyouHoukokuTokTyhyouEUCEntity();
+        eucentity.setRowNumber(entity.getRowNumber());
+        eucentity.setHihokenshaNo(entity.getHihokenshaNo());
+        eucentity.setYoKaigoJotaiKubunCode(entity.getYoKaigoJotaiKubunCode());
+        eucentity.setServiceSyuruiCode(entity.getServiceSyuruiCode());
+        eucentity.setInputShikibetsuNo(entity.getInputShikibetsuNo());
+        eucentity.setServiceTeikyoYM(entity.getServiceTeikyoYM());
+        eucentity.setTeikyoKaishiYM(entity.getTeikyoKaishiYM());
+        eucentity.setTeikyoShuryoYM(entity.getTeikyoShuryoYM());
+        eucentity.setKyufuJissekiKubunCode(entity.getKyufuJissekiKubunCode());
+        eucentity.setSeiriNo(entity.getSeiriNo());
+        eucentity.setBirthDate(entity.getBirthDate());
+        eucentity.setServiceBunruiCode(entity.getServiceBunruiCode());
+        eucentity.setShichosonCode(entity.getShichosonCode());
+        eucentity.setKyuShichosonCode(entity.getKyuShichosonCode());
+        eucentity.setHihokenshaKubunCode(entity.getHihokenshaKubunCode());
+        eucentity.setErrorCode(entity.getErrorCode());
+        eucentity.setErrorFlag(entity.isErrorFlag());
+        事業報告統計元データ一時ファイルB.insert(eucentity);
     }
 }

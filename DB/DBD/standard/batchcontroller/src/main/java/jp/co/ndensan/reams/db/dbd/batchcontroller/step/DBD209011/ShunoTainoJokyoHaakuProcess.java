@@ -5,29 +5,36 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD209011;
 
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003.ShunoTainoJokyoHaakuProcessParameter;
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.dbd209011.ShunoTainoJokyoHaakuBusiness;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd209011.ShunoTainoJokyoHaakuProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.ShunoTainoJokyoHaakuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.ShunoTainoJokyoTempTableEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.taino.MinoKannoKubun;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriterBuilders;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 収納滞納状況把握情報の取得_Process処理クラスです．
  *
- * @reamsid_L DBD-3610-050 x_lilh
+ * @reamsid_L DBD-3610-030 x_lilh
  */
 public class ShunoTainoJokyoHaakuProcess extends BatchProcessBase<ShunoTainoJokyoHaakuEntity> {
 
     private ShunoTainoJokyoHaakuProcessParameter parameter;
-    private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyufugengakulist."
-                    + "IShunoJokyoHaakuMapper.get対象者把握情報");
+    private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyufugengakulist."
+            + "IShunoJokyoHaakuMapper.get収納滞納状況把握情報");
+    private List<ShunoTainoJokyoHaakuEntity> 滞納状況把握情報List;
+    private HihokenshaNo 当該被保険者番号;
+    private RDate 最古の滞納納期限;
 
     @Override
     protected IBatchReader createReader() {
@@ -37,67 +44,61 @@ public class ShunoTainoJokyoHaakuProcess extends BatchProcessBase<ShunoTainoJoky
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
 
     @Override
+    protected void initialize() {
+        滞納状況把握情報List = new ArrayList<>();
+    }
+
+    @Override
     protected void createWriter() {
         tmpTableWriter = BatchEntityCreatedTempTableWriterBuilders.createBuilder(ShunoTainoJokyoTempTableEntity.class)
                 .tempTableName(ShunoTainoJokyoTempTableEntity.TABLE_NAME).build();
     }
 
     @Override
-
     protected void process(ShunoTainoJokyoHaakuEntity entity) {
-        tmpTableWriter.insert(create重複処理(entity));
+        if (!entity.get対象者TmpTblEntity().getHihokenshaNo2().equals(当該被保険者番号)) {
+            if (当該被保険者番号 != null) {
+                edit最古の滞納納期限();
+                一時テーブル登録(滞納状況把握情報List, 最古の滞納納期限);
+                滞納状況把握情報List = new ArrayList<>();
+                最古の滞納納期限 = null;
+            }
+            当該被保険者番号 = entity.get対象者TmpTblEntity().getHihokenshaNo2();
+        }
+        滞納状況把握情報List.add(entity);
     }
 
-    private ShunoTainoJokyoTempTableEntity create重複処理(ShunoTainoJokyoHaakuEntity entity) {
-        ShunoTainoJokyoTempTableEntity daTableEntity = new ShunoTainoJokyoTempTableEntity();
-        daTableEntity.setHihokenshaNo(entity.getHihokenshaNo());
-        daTableEntity.setShikibetsuCode(entity.getShikibetsuCode());
-        daTableEntity.setHihokenshaShimeiKana(entity.getHihokenshaShimeiKana());
-        daTableEntity.setSetaiCode(entity.getSetaiCode());
-        daTableEntity.setGyoseikuCode(entity.getGyoseikuCode());
-        daTableEntity.setGyoseikuName(entity.getGyoseikuName());
-        daTableEntity.setJushoCode(entity.getJushoCode());
-        daTableEntity.setYubinNo(entity.getYubinNo());
-        daTableEntity.setJusho(entity.getJusho().getColumnValue());
-        daTableEntity.setShikakuShutokuYMD(entity.getShikakuShutokuYMD());
-        daTableEntity.setShikakuSoshitsuYMD(entity.getShikakuSoshitsuYMD());
-        daTableEntity.setShikakuSoshitsuJiyuCode(entity.getShikakuSoshitsuJiyuCode());
-        daTableEntity.set資格区分(entity.getHihokennshaKubunCode());
-        daTableEntity.setKoikinaiJushochiTokureiFlag(entity.getKoikinaiJushochiTokureiFlag());
-        daTableEntity.setSeihoFlag(entity.isSeihoFlag());
-        daTableEntity.setKoroshoIfShikibetsuCode(entity.getKoroshoIfShikibetsuCode());
-        daTableEntity.setYokaigoJotaiKubunCode(entity.getYokaigoJotaiKubunCode());
-        daTableEntity.setNinteiYukoKikanKaishiYMD(entity.getNinteiYukoKikanKaishiYMD());
-        daTableEntity.setNinteiYukoKikanShuryoYMD(entity.getNinteiYukoKikanShuryoYMD());
-        daTableEntity.setNinteiYMD(entity.getNinteiYMD());
-        daTableEntity.setShiseityuFlag(entity.isShiseityuFlag());
-        daTableEntity.setJukyuShinseiYMD(entity.getJukyuShinseiYMD());
-        daTableEntity.setChoteiNendo(entity.getChoteiNendo());
-        daTableEntity.setFukaNendo(entity.getFukaNendo());
-        daTableEntity.setTokucho_FuchoKubun(entity.getTokucho_FuchoKubun());
-        daTableEntity.setTsuchishoNo(entity.getTsuchishoNo());
-        daTableEntity.setKibetsu(entity.getKibetsu());
-        daTableEntity.setChoteigaku(entity.getChoteigaku());
-        daTableEntity.setShunyugaku(entity.getShunyugaku());
-        daTableEntity.setMinogaku(entity.getMinogaku());
-        daTableEntity.setShunyuYMD(entity.getShunyuYMD());
-        daTableEntity.setTokusokujoHakkoYMD(entity.getTokusokujoHakkoYMD());
-        daTableEntity.setJikoKisanYMD(entity.getJikoKisanYMD());
-        daTableEntity.setJikoKisanJiyu(entity.getJikoKisanJiyu());
-        daTableEntity.setMinoKannoKubun(entity.getMinoKannoKubun());
-        daTableEntity.setJikoKubun(entity.getJikoKubun());
-        RString 滞納区分 = RString.EMPTY;
-        if (JikoKubun.時効到来.getコード().equals(entity.getJikoKubun())) {
-            滞納区分 = new RString("1");
-        } else if (JikoKubun.時効未到来.getコード().equals(entity.getJikoKubun())
-                && JikoKubun.時効到来.getコード().equals(entity.getJikoKubun())) {
-            滞納区分 = new RString("2");
-        } else if (JikoKubun.空.getコード().equals(entity.getJikoKubun())) {
-            滞納区分 = new RString("3");
-        } else if (entity.getNinteiYMD().isBeforeOrEquals(parameter.get基準日())) {
-            滞納区分 = new RString("4");
+    @Override
+    protected void afterExecute() {
+        if (当該被保険者番号 != null) {
+            RDate 納期限;
+            for (ShunoTainoJokyoHaakuEntity haakuEntity : 滞納状況把握情報List) {
+                納期限 = haakuEntity.get収納状況TmpTblEntity().getTmp_nokigen();
+                if ((最古の滞納納期限 == null || (納期限 != null && 納期限.isBefore(最古の滞納納期限)))
+                        && MinoKannoKubun.未納あり.getコード().equals(haakuEntity.get収納状況TmpTblEntity().getTmp_minoKannoKubun())) {
+                    最古の滞納納期限 = 納期限;
+                }
+            }
+            一時テーブル登録(滞納状況把握情報List, 最古の滞納納期限);
         }
-        daTableEntity.setTainoKubun(滞納区分);
-        return daTableEntity;
     }
+
+    private void edit最古の滞納納期限() {
+        RDate 納期限;
+        for (ShunoTainoJokyoHaakuEntity haakuEntity : 滞納状況把握情報List) {
+            納期限 = haakuEntity.get収納状況TmpTblEntity().getTmp_nokigen();
+            if ((最古の滞納納期限 == null || (納期限 != null && 納期限.isBefore(最古の滞納納期限)))
+                    && MinoKannoKubun.未納あり.getコード().equals(haakuEntity.get収納状況TmpTblEntity().getTmp_minoKannoKubun())) {
+                最古の滞納納期限 = 納期限;
+            }
+        }
+    }
+
+    private void 一時テーブル登録(List<ShunoTainoJokyoHaakuEntity> 滞納状況把握情報List, RDate 最古の滞納納期限) {
+        ShunoTainoJokyoHaakuBusiness business = new ShunoTainoJokyoHaakuBusiness();
+        for (ShunoTainoJokyoHaakuEntity entity : 滞納状況把握情報List) {
+            tmpTableWriter.insert(business.edit収納滞納状況把握情報(entity, parameter.get基準日(), 最古の滞納納期限));
+        }
+    }
+
 }

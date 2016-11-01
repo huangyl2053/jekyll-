@@ -103,8 +103,7 @@ public class JissiJyokyohyoHandler {
      * @param div JissiJyokyohyoDiv
      */
     public void onChange_ddlChiku(JissiJyokyohyoDiv div) {
-        if (div.getCyouhyouPanel().getRdoCyouhyou().getSelectedKey().equals(帳票キー0)
-                && div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー1)) {
+        if (div.getJokenPanel().getDdlChiku().getSelectedKey().equals(地区キー1)) {
             div.getJokenPanel().getCcdJyuusyoStart().setReadOnly(false);
             div.getJokenPanel().getCcdJyuusyoEnd().setReadOnly(false);
             ddlChiku(div, true, true, true, false, false, false, false, false, false);

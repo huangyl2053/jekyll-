@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushainsub.KyoudouSho
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0001HihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -92,6 +93,7 @@ public class IchiTmpTableTorokuProcess extends BatchProcessBase<KyoudouShoriRela
         entity.setOrgHihokenshaNo(toHihokenshaNo(relateEntity.get集約被保険者番号()));
         entity.setServiceTeikyoYmd(toFlexibleDate(relateEntity.get集約異動年月日()));
         entity.setHihokenshaNo(toHihokenshaNo(relateEntity.get集約被保険者番号()));
+        entity.setShoHokenshaNo(toShoKisaiHokenshaNo(relateEntity.get集約証記載保険者番号()));
         return entity;
     }
 
@@ -163,5 +165,12 @@ public class IchiTmpTableTorokuProcess extends BatchProcessBase<KyoudouShoriRela
             return new HihokenshaNo(被保険者番号);
         }
         return HihokenshaNo.EMPTY;
+    }
+
+    private ShoKisaiHokenshaNo toShoKisaiHokenshaNo(RString 証記載保険者番号) {
+        if (!RString.isNullOrEmpty(証記載保険者番号)) {
+            return new ShoKisaiHokenshaNo(証記載保険者番号);
+        }
+        return ShoKisaiHokenshaNo.EMPTY;
     }
 }

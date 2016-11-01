@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020070;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc020070.JigyobunShikyugakuKeisanProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -60,5 +61,15 @@ public class DBC020070_JigyobunShikyugakuKeisanParameter extends BatchParameterB
     private RTime 窓口払終了時刻;
     @BatchParameter(key = KEY_出力順ID, name = "出力順ID")
     private Long 出力順ID;
+
+    /**
+     * プロセスパラメータを作成します。
+     *
+     * @return プロセスパラメータ
+     */
+    public JigyobunShikyugakuKeisanProcessParameter toProcessParameter() {
+        return new JigyobunShikyugakuKeisanProcessParameter(年度, 出力対象区分, 被保険者番号, 受取年月, 処理日, 処理時間, 決定年月日,
+                窓口払開始年月日, 窓口払開始時刻, 窓口払終了年月日, 窓口払終了時刻, 出力順ID);
+    }
 
 }

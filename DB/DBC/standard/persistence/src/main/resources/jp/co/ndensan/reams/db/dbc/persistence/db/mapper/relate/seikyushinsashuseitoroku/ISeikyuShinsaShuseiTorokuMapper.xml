@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 広域内転居のマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-1660-010 xuyongchao -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.seikyushinsashuseitoroku.ISeikyuShinsaShuseiTorokuMapper">
+    <resultMap id="resultMap_SeikyuShinsaShuseiTorokuRelateEntity" 
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.seikyushinsashuseitoroku.SeikyuShinsaShuseiTorokuRelateEntity" autoMapping="true">
+        <id property="dbT3094.riyushoSakuseiJigyoshaNo" column="dbT3094_riyushoSakuseiJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="dbT3094.ketteiYMD" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="dbT3094.rirekiNo" column="dbT3094JutakuKaishuRiyushoTesuryoKettei_rirekiNo" />
+        <id property="dbT3095.shoKisaiHokenshaNo" column="dbT3095JutakuKaishuRiyushoTesuryoMeisai_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="dbT3095.hihokenshaNo" column="dbT3095JutakuKaishuRiyushoTesuryoMeisai_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="dbT3095.rirekiNo" column="dbT3095JutakuKaishuRiyushoTesuryoMeisai_rirekiNo" />
+        <id property="dbT3096.shoKisaiHokenshaNo" column="dbT3096JutakuKaishuRiyushoTesuryoShukei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="dbT3096.riyushoSakuseiJigyoshaNo" column="dbT3096_riyushoSakuseiJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="dbT3096.shukeiNo" column="dbT3096JutakuKaishuRiyushoTesuryoShukei_shukeiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dbT3096.rirekiNo" column="dbT3096JutakuKaishuRiyushoTesuryoShukei_rirekiNo" />
+        
+        <association property="dbT3094" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3094JutakuKaishuRiyushoTesuryoKetteiMapper.ResultMap_DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity"/>
+        <association property="dbT3095" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3095JutakuKaishuRiyushoTesuryoMeisaiMapper.ResultMap_DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity"/>
+        <association property="dbT3096" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3096JutakuKaishuRiyushoTesuryoShukeiMapper.ResultMap_DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity"/>
+    </resultMap>
+
+    <select id="selectSeikyuShinsaShuseiTorokuList" resultMap="resultMap_SeikyuShinsaShuseiTorokuRelateEntity" 
+        resultOrdered="true"  parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.seikyushinsashuseitoroku.SeikyuShinsaShuseiTorokuMapperParameter" 
+             fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3094JutakuKaishuRiyushoTesuryoKetteiMapper.allColumns_DbT3094JutakuKaishuRiyushoTesuryoKettei" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3095JutakuKaishuRiyushoTesuryoMeisaiMapper.allColumns_DbT3095JutakuKaishuRiyushoTesuryoMeisai" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3096JutakuKaishuRiyushoTesuryoShukeiMapper.allColumns_DbT3096JutakuKaishuRiyushoTesuryoShukei" />  
+          FROM
+  rgdb."DbT3096JutakuKaishuRiyushoTesuryoShukei" AS "DbT3096JutakuKaishuRiyushoTesuryoShukei"
+  JOIN rgdb."DbT3095JutakuKaishuRiyushoTesuryoMeisai"
+   AS "DbT3095JutakuKaishuRiyushoTesuryoMeisai" 
+    ON "DbT3096JutakuKaishuRiyushoTesuryoShukei"."riyushoSakuseiJigyoshaNo" = "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."riyushoSakuseiJigyoshaNo" 
+    AND "DbT3096JutakuKaishuRiyushoTesuryoShukei"."shukeiNo" = "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."shukeiNo" 
+    JOIN rgdb."DbT3094JutakuKaishuRiyushoTesuryoKettei" AS "DbT3094JutakuKaishuRiyushoTesuryoKettei"
+    ON "DbT3096JutakuKaishuRiyushoTesuryoShukei"."riyushoSakuseiJigyoshaNo" = "DbT3094JutakuKaishuRiyushoTesuryoKettei"."riyushoSakuseiJigyoshaNo" 
+    AND "DbT3096JutakuKaishuRiyushoTesuryoShukei"."shukeiNo" = "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shukeiNo" 
+          WHERE
+            1 = 1 
+            AND "DbT3096JutakuKaishuRiyushoTesuryoShukei"."isDeleted" = FALSE                 
+            <if test="事業者番号フラグ">
+                AND "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."riyushoSakuseiJigyoshaNo" = #{事業者番号}    
+            </if>
+            <if test="理由書作成年月フラグ">
+                AND "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."riyushoSakuseiJigyoshaNo" = #{理由書作成年月}    
+            </if>
+            <if test="チェックオンフラグ">
+                AND "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD" IS NULL 
+            </if>
+            <if test="チェックオフフラグ">
+                AND "DbT3094JutakuKaishuRiyushoTesuryoKettei"."shikyu_FushikyuKetteiYMD" IS NOT NULL 
+            </if>
+          ORDER BY
+            "DbT3095JutakuKaishuRiyushoTesuryoMeisai"."riyushoSakuseiJigyoshaNo" ASC
+    </select>
+</mapper>

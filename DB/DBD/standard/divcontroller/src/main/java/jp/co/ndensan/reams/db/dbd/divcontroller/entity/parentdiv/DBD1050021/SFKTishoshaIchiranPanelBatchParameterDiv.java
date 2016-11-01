@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1050021;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
@@ -13,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class SFKTishoshaIchiranPanelBatchParameterDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,6 +25,10 @@ public class SFKTishoshaIchiranPanelBatchParameterDiv extends PanelBatchParamete
     private ChutsutsuJokenDiv ChutsutsuJoken;
     @JsonProperty("ChushutsuSetsumei")
     private ChushutsuSetsumeiDiv ChushutsuSetsumei;
+    @JsonProperty("jigyoshaCode")
+    private RString jigyoshaCode;
+    @JsonProperty("jigyoshaMeisho")
+    private RString jigyoshaMeisho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -65,6 +70,42 @@ public class SFKTishoshaIchiranPanelBatchParameterDiv extends PanelBatchParamete
     @JsonProperty("ChushutsuSetsumei")
     public void setChushutsuSetsumei(ChushutsuSetsumeiDiv ChushutsuSetsumei) {
         this.ChushutsuSetsumei = ChushutsuSetsumei;
+    }
+
+    /*
+     * getjigyoshaCode
+     * @return jigyoshaCode
+     */
+    @JsonProperty("jigyoshaCode")
+    public RString getJigyoshaCode() {
+        return jigyoshaCode;
+    }
+
+    /*
+     * setjigyoshaCode
+     * @param jigyoshaCode jigyoshaCode
+     */
+    @JsonProperty("jigyoshaCode")
+    public void setJigyoshaCode(RString jigyoshaCode) {
+        this.jigyoshaCode = jigyoshaCode;
+    }
+
+    /*
+     * getjigyoshaMeisho
+     * @return jigyoshaMeisho
+     */
+    @JsonProperty("jigyoshaMeisho")
+    public RString getJigyoshaMeisho() {
+        return jigyoshaMeisho;
+    }
+
+    /*
+     * setjigyoshaMeisho
+     * @param jigyoshaMeisho jigyoshaMeisho
+     */
+    @JsonProperty("jigyoshaMeisho")
+    public void setJigyoshaMeisho(RString jigyoshaMeisho) {
+        this.jigyoshaMeisho = jigyoshaMeisho;
     }
 
     // </editor-fold>

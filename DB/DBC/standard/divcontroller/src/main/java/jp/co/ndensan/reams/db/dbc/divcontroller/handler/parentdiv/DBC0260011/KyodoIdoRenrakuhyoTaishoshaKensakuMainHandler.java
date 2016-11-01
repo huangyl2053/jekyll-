@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0260011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0260011.KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.taishoshaichiran.TaishoshaIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.kyodojukyushataishosha.KyodoJukyushaTaishoshaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
@@ -20,6 +21,8 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -30,6 +33,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyodoIdoRenrakuhyoTaishoshaKensakuMainHandler {
 
     private final KyodoIdoRenrakuhyoTaishoshaKensakuMainDiv div;
+
+    private static final RString KEY_ZERO = new RString("key0");
+    private static final int NUM_ZERO = 0;
 
     /**
      * コンストラクタです。
@@ -54,8 +60,8 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuMainHandler {
      * 初期化状態設定のメソッドです。
      */
     public void click条件をクリア() {
-        div.getTxtSearchHihokenshaNo().clearValue();
-        div.getTxtHihokenshaMei().clearDomain();
+        div.getTxtSearchHihokenshaNo().setValue(RString.EMPTY);
+        div.getTxtHihokenshaMei().setDomain(AtenaMeisho.EMPTY);
         div.getTxtSearchIdoYMD().clearFromValue();
         div.getTxtSearchIdoYMD().clearToValue();
         List<RString> keyList = new ArrayList<>();
@@ -91,5 +97,54 @@ public class KyodoIdoRenrakuhyoTaishoshaKensakuMainHandler {
         } else {
             div.getTxtHihokenshaMei().setDomain(名称.getName());
         }
+    }
+
+    /**
+     * 検索条件の（退避用）のメソッドです。
+     *
+     * @return TaishoshaIchiranParameter
+     */
+    public TaishoshaIchiranParameter set登録退避用検索キー() {
+        RString 削除データ = RString.EMPTY;
+        FlexibleDate 異動日From = null;
+        FlexibleDate 異動日To = null;
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtSearchHihokenshaNo().getValue());
+        RDate dateFrom = div.getTxtSearchIdoYMD().getFromValue();
+        if (dateFrom != null) {
+            異動日From = new FlexibleDate(dateFrom.toDateString());
+        }
+        RDate dateTo = div.getTxtSearchIdoYMD().getToValue();
+        if (dateTo != null) {
+            異動日To = new FlexibleDate(dateTo.toDateString());
+        }
+        List<RString> 削除データ検索 = div.getChkSearchDeleteData().getSelectedKeys();
+        if (!削除データ検索.isEmpty() && KEY_ZERO.equals(削除データ検索.get(NUM_ZERO))) {
+            削除データ = 削除データ検索.get(NUM_ZERO);
+        }
+        TaishoshaIchiranParameter parameter = new TaishoshaIchiranParameter(異動日From, 異動日To,
+                被保険者番号, 削除データ);
+        return parameter;
+    }
+
+    /**
+     * 検索条件設定のメソッドです。
+     *
+     * @param param TaishoshaIchiranParameter
+     */
+    public void set検索条件(TaishoshaIchiranParameter param) {
+        RString 削除データ = param.get削除データ検索();
+        FlexibleDate 異動日From = param.get異動日From();
+        FlexibleDate 異動日To = param.get異動日To();
+        if (異動日From != null && !異動日From.isEmpty()) {
+            div.getTxtSearchIdoYMD().setFromValue(new RDate(異動日From.toString()));
+        }
+        if (異動日To != null && !異動日To.isEmpty()) {
+            div.getTxtSearchIdoYMD().setToValue(new RDate(異動日To.toString()));
+        }
+        List<RString> keyList = new ArrayList<>();
+        if (削除データ != null && !削除データ.isEmpty()) {
+            keyList.add(削除データ);
+        }
+        div.getChkSearchDeleteData().setSelectedItemsByKey(keyList);
     }
 }

@@ -6,9 +6,10 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteijoho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoRirekiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,17 +24,27 @@ public interface IYokaigoNinteiJohoMapper {
      * 今回認定情報の取得します。
      *
      * @param 申請書管理番号 申請書管理番号
+     * @param psmShikibetsuTaisho RString
+     * @param システム日付 FlexibleDate
      * @return 今回認定情報 List<YokaigoNinteiJohoEntity>
      */
-    List<YokaigoNinteiJohoEntity> get今回認定情報WITHOUT結果情報(@Param("申請書管理番号") RString 申請書管理番号);
+    List<YokaigoNinteiJohoEntity> get今回認定情報WITHOUT結果情報(
+            @Param("申請書管理番号") RString 申請書管理番号,
+            @Param("psmShikibetsuTaisho") RString psmShikibetsuTaisho,
+            @Param("システム日付") FlexibleDate システム日付);
 
     /**
      * 今回認定情報の取得します。
      *
      * @param 申請書管理番号 申請書管理番号
+     * @param psmShikibetsuTaisho RString
+     * @param システム日付 FlexibleDate
      * @return 今回認定情報 List<YokaigoNinteiJohoEntity>
      */
-    List<YokaigoNinteiJohoEntity> get今回認定情報WITH結果情報(@Param("申請書管理番号WITH結果情報") RString 申請書管理番号);
+    List<YokaigoNinteiJohoEntity> get今回認定情報WITH結果情報(
+            @Param("申請書管理番号WITH結果情報") RString 申請書管理番号,
+            @Param("psmShikibetsuTaisho") RString psmShikibetsuTaisho,
+            @Param("システム日付") FlexibleDate システム日付);
 
     /**
      * 前回認定情報の取得します。

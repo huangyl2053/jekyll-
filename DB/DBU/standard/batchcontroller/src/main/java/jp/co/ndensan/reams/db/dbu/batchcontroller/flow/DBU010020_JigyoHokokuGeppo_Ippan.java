@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbu.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.CreateTempJigyoHokokuHihokenshaTokeiMotoDataProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.HihokenshaDaichoBirthYMDProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.HihokenshaDaichoBirthYMD0200Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.HihokenshaDaichoBirthYMD0301Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.HihokenshaDaichoBirthYMD0302Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.HihokenshaDaichoKekkaKakuninProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiReportDBU300001Process;
@@ -16,11 +18,19 @@ import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTo
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiReportDBU300005Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiReportDBU300008Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.RiyoshaFutangakuKanriJohoKekkaKakuninProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.RiyoshaFutangakuKanriJohoSyoriProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.RiyoshaFutangakuKanriJohoSyori0600Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.RiyoshaFutangakuKanriJohoSyori0702Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.RiyoshaFutangakuKanriJohoSyori0900Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.RiyoshaFutangakuKanriJohoSyori1002Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.SyotaiJohoSyoriKekkaKakuninProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.SyotaiJohoSyoriProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.TokuteiNyushoshaJohoKekkaKakuninProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.TokuteiNyushoshaJohoSyoriProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.TokuteiNyushoshaJohoSyori0710Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.TokuteiNyushoshaJohoSyori0720Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.TokuteiNyushoshaJohoSyori1010Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.TokuteiNyushoshaJohoSyori1020Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.TokuteiNyushoshaJohoSyori1030Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.TokuteiNyushoshaJohoSyori1040Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.YokaigoNinteishaJohoKekkaKakuninProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.YokaigoNinteishaJohoSyoriProcess;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010020.DBU010020_JigyoHokokuGeppo_IppanParameter;
@@ -45,9 +55,19 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
     private static final FlexibleYearMonth 制度改正月 = new FlexibleYearMonth("200510");
     private static final String CREATE事業報告世帯情報TEMPテーブル = "CreateTempTable";
     private static final String 世帯情報処理 = "SyotaiJohoSyori";
-    private static final String 被保台帳生年月日情報処理 = "HihokenshaDaichoBirthYMDSyori";
-    private static final String 利用者負担減額管理情報処理 = "RiyoshaFutangakuGemmenJohoSyori";
-    private static final String 特定入所者管理情報処理 = "TokuteiNyushoshaJohoSyori";
+    private static final String 被保台帳生年月日情報処理_0200 = "HihokenshaDaichoBirthYMDSyori_0200";
+    private static final String 被保台帳生年月日情報処理_0301 = "HihokenshaDaichoBirthYMDSyori_0301";
+    private static final String 被保台帳生年月日情報処理_0302 = "HihokenshaDaichoBirthYMDSyori_0302";
+    private static final String 利用者負担減額管理情報処理_0600 = "RiyoshaFutangakuGemmenJohoSyori_0600";
+    private static final String 利用者負担減額管理情報処理_0702 = "RiyoshaFutangakuGemmenJohoSyori_0702";
+    private static final String 利用者負担減額管理情報処理_0900 = "RiyoshaFutangakuGemmenJohoSyori_0900";
+    private static final String 利用者負担減額管理情報処理_1002 = "RiyoshaFutangakuGemmenJohoSyori_1002";
+    private static final String 特定入所者管理情報処理_0710 = "TokuteiNyushoshaJohoSyori_0710";
+    private static final String 特定入所者管理情報処理_0720 = "TokuteiNyushoshaJohoSyori_0720";
+    private static final String 特定入所者管理情報処理_1010 = "TokuteiNyushoshaJohoSyori_1010";
+    private static final String 特定入所者管理情報処理_1020 = "TokuteiNyushoshaJohoSyori_1020";
+    private static final String 特定入所者管理情報処理_1030 = "TokuteiNyushoshaJohoSyori_1030";
+    private static final String 特定入所者管理情報処理_1040 = "TokuteiNyushoshaJohoSyori_1040";
     private static final String 受給者台帳情報処理 = "YokaigoNinteishaJohoSyori";
     private static final String 事業報告統計データへ登録 = "JigyouHoukokuTokeiDataToroku";
     private static final String 介護事業状況報告月報一般状況_別紙 = "JigyoHokokuGeppo_IppanSyuturyoku_DBU300008";
@@ -82,10 +102,20 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
         } else if (PrintControlKubun.集計のみ.getコード().equals(parameter.getPrintControlKbn())) {
             executeStep(CREATE事業報告世帯情報TEMPテーブル);
             executeStep(世帯情報処理);
-            executeStep(被保台帳生年月日情報処理);
-            executeStep(利用者負担減額管理情報処理);
+            executeStep(被保台帳生年月日情報処理_0200);
+            executeStep(被保台帳生年月日情報処理_0301);
+            executeStep(被保台帳生年月日情報処理_0302);
+            executeStep(利用者負担減額管理情報処理_0600);
+            executeStep(利用者負担減額管理情報処理_0702);
+            executeStep(利用者負担減額管理情報処理_0900);
+            executeStep(利用者負担減額管理情報処理_1002);
             if (制度改正月.isBeforeOrEquals(parameter.getSyukeiYM())) {
-                executeStep(特定入所者管理情報処理);
+                executeStep(特定入所者管理情報処理_0710);
+                executeStep(特定入所者管理情報処理_0720);
+                executeStep(特定入所者管理情報処理_1010);
+                executeStep(特定入所者管理情報処理_1020);
+                executeStep(特定入所者管理情報処理_1030);
+                executeStep(特定入所者管理情報処理_1040);
             }
             executeStep(受給者台帳情報処理);
             executeStep(事業報告統計データへ登録);
@@ -97,10 +127,20 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
         } else if (PrintControlKubun.集計後印刷.getコード().equals(parameter.getPrintControlKbn())) {
             executeStep(CREATE事業報告世帯情報TEMPテーブル);
             executeStep(世帯情報処理);
-            executeStep(被保台帳生年月日情報処理);
-            executeStep(利用者負担減額管理情報処理);
+            executeStep(被保台帳生年月日情報処理_0200);
+            executeStep(被保台帳生年月日情報処理_0301);
+            executeStep(被保台帳生年月日情報処理_0302);
+            executeStep(利用者負担減額管理情報処理_0600);
+            executeStep(利用者負担減額管理情報処理_0702);
+            executeStep(利用者負担減額管理情報処理_0900);
+            executeStep(利用者負担減額管理情報処理_1002);
             if (制度改正月.isBeforeOrEquals(parameter.getSyukeiYM())) {
-                executeStep(特定入所者管理情報処理);
+                executeStep(特定入所者管理情報処理_0710);
+                executeStep(特定入所者管理情報処理_0720);
+                executeStep(特定入所者管理情報処理_1010);
+                executeStep(特定入所者管理情報処理_1020);
+                executeStep(特定入所者管理情報処理_1030);
+                executeStep(特定入所者管理情報処理_1040);
             }
             executeStep(受給者台帳情報処理);
             executeStep(事業報告統計データへ登録);
@@ -146,9 +186,31 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
      *
      * @return IBatchFlowCommand
      */
-    @Step(被保台帳生年月日情報処理)
-    protected IBatchFlowCommand exeHihokenshaDaichoBirthYMDSyori() {
-        return loopBatch(HihokenshaDaichoBirthYMDProcess.class)
+    @Step(被保台帳生年月日情報処理_0200)
+    protected IBatchFlowCommand exeHihokenshaDaichoBirthYMDSyori_0200() {
+        return loopBatch(HihokenshaDaichoBirthYMD0200Process.class)
+                .arguments(parameter.toHihokenshaDaichoBirthYMDProcessParameter()).define();
+    }
+
+    /**
+     * 被保台帳生年月日情報処理です。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(被保台帳生年月日情報処理_0301)
+    protected IBatchFlowCommand exeHihokenshaDaichoBirthYMDSyori_0301() {
+        return loopBatch(HihokenshaDaichoBirthYMD0301Process.class)
+                .arguments(parameter.toHihokenshaDaichoBirthYMDProcessParameter()).define();
+    }
+
+    /**
+     * 被保台帳生年月日情報処理です。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(被保台帳生年月日情報処理_0302)
+    protected IBatchFlowCommand exeHihokenshaDaichoBirthYMDSyori_0302() {
+        return loopBatch(HihokenshaDaichoBirthYMD0302Process.class)
                 .arguments(parameter.toHihokenshaDaichoBirthYMDProcessParameter()).define();
     }
 
@@ -157,9 +219,42 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
      *
      * @return IBatchFlowCommand
      */
-    @Step(利用者負担減額管理情報処理)
-    protected IBatchFlowCommand exeRiyoshaFutangakuKanriJohoSyori() {
-        return loopBatch(RiyoshaFutangakuKanriJohoSyoriProcess.class)
+    @Step(利用者負担減額管理情報処理_0600)
+    protected IBatchFlowCommand exeRiyoshaFutangakuKanriJohoSyori_0600() {
+        return loopBatch(RiyoshaFutangakuKanriJohoSyori0600Process.class)
+                .arguments(parameter.toRiyoshaFutangakuKanriJohoSyoriProcessParameter()).define();
+    }
+
+    /**
+     * 利用者負担減額管理情報処理です。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(利用者負担減額管理情報処理_0702)
+    protected IBatchFlowCommand exeRiyoshaFutangakuKanriJohoSyori_0702() {
+        return loopBatch(RiyoshaFutangakuKanriJohoSyori0702Process.class)
+                .arguments(parameter.toRiyoshaFutangakuKanriJohoSyoriProcessParameter()).define();
+    }
+
+    /**
+     * 利用者負担減額管理情報処理です。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(利用者負担減額管理情報処理_0900)
+    protected IBatchFlowCommand exeRiyoshaFutangakuKanriJohoSyori_0900() {
+        return loopBatch(RiyoshaFutangakuKanriJohoSyori0900Process.class)
+                .arguments(parameter.toRiyoshaFutangakuKanriJohoSyoriProcessParameter()).define();
+    }
+
+    /**
+     * 利用者負担減額管理情報処理です。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(利用者負担減額管理情報処理_1002)
+    protected IBatchFlowCommand exeRiyoshaFutangakuKanriJohoSyori_1002() {
+        return loopBatch(RiyoshaFutangakuKanriJohoSyori1002Process.class)
                 .arguments(parameter.toRiyoshaFutangakuKanriJohoSyoriProcessParameter()).define();
     }
 
@@ -168,9 +263,64 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
      *
      * @return IBatchFlowCommand
      */
-    @Step(特定入所者管理情報処理)
-    protected IBatchFlowCommand exeTokuteiNyushoshaJohoSyori() {
-        return loopBatch(TokuteiNyushoshaJohoSyoriProcess.class)
+    @Step(特定入所者管理情報処理_0710)
+    protected IBatchFlowCommand exeTokuteiNyushoshaJohoSyori_0710() {
+        return loopBatch(TokuteiNyushoshaJohoSyori0710Process.class)
+                .arguments(parameter.toTokuteiNyushoshaJohoSyoriProcessParameter()).define();
+    }
+
+    /**
+     * 特定入所者管理情報処理です。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(特定入所者管理情報処理_0720)
+    protected IBatchFlowCommand exeTokuteiNyushoshaJohoSyori_0720() {
+        return loopBatch(TokuteiNyushoshaJohoSyori0720Process.class)
+                .arguments(parameter.toTokuteiNyushoshaJohoSyoriProcessParameter()).define();
+    }
+
+    /**
+     * 特定入所者管理情報処理です。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(特定入所者管理情報処理_1010)
+    protected IBatchFlowCommand exeTokuteiNyushoshaJohoSyori_1010() {
+        return loopBatch(TokuteiNyushoshaJohoSyori1010Process.class)
+                .arguments(parameter.toTokuteiNyushoshaJohoSyoriProcessParameter()).define();
+    }
+
+    /**
+     * 特定入所者管理情報処理です。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(特定入所者管理情報処理_1020)
+    protected IBatchFlowCommand exeTokuteiNyushoshaJohoSyori_1020() {
+        return loopBatch(TokuteiNyushoshaJohoSyori1020Process.class)
+                .arguments(parameter.toTokuteiNyushoshaJohoSyoriProcessParameter()).define();
+    }
+
+    /**
+     * 特定入所者管理情報処理です。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(特定入所者管理情報処理_1030)
+    protected IBatchFlowCommand exeTokuteiNyushoshaJohoSyori_1030() {
+        return loopBatch(TokuteiNyushoshaJohoSyori1030Process.class)
+                .arguments(parameter.toTokuteiNyushoshaJohoSyoriProcessParameter()).define();
+    }
+
+    /**
+     * 特定入所者管理情報処理です。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(特定入所者管理情報処理_1040)
+    protected IBatchFlowCommand exeTokuteiNyushoshaJohoSyori_1040() {
+        return loopBatch(TokuteiNyushoshaJohoSyori1040Process.class)
                 .arguments(parameter.toTokuteiNyushoshaJohoSyoriProcessParameter()).define();
     }
 

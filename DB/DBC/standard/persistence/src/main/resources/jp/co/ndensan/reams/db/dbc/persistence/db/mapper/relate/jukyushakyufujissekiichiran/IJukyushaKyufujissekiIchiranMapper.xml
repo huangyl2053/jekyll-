@@ -78,6 +78,7 @@
         <result property="町域コード" column="PSM_choikiCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="行政区コード" column="PSM_gyoseikuCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="世帯コード" column="PSM_setaiCode_2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="様式" column="DbT3118_meisho2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
      
     <select resultOrdered="true" id="get受給者給付実績" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranMybatisParameter" 
@@ -129,9 +130,10 @@ SELECT
 	PSM."choikiCode" AS PSM_choikiCode,	
 	PSM."gyoseikuCode" AS PSM_gyoseikuCode,																											
 	PSM."setaiCode" AS PSM_setaiCode,																											
-	DbT7060A."jigyoshaName" AS DbT7060A_jigyoshaName,																										
+	DbT7060A."jigyoshaName" AS T2_jigyoshaName,																										
 	'',																	
-	''															
+	'',
+        DbT3118."meisho2" AS DbT3118_meisho2															
 FROM																												
 	rgdb."DbT3017KyufujissekiKihon" AS DbT3017																											
 LEFT JOIN 
@@ -154,13 +156,21 @@ LEFT JOIN (
         FROM
           rgdb."DbT1001HihokenshaDaicho" AS DbT1001
       ) AS T4 
-       ON  DbT3017."hiHokenshaNo" = T4."DbT1001_hihokenshaNo"																										
+       ON  DbT3017."hiHokenshaNo" = T4."DbT1001_hihokenshaNo"
+LEFT JOIN 
+      rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+     ON DbT3118."shikibetsuNo" = DbT3017."inputShikibetsuNo"
+     AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
+     AND (DbT3017."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
+     or DbT3118."tekiyoShuryoYM" = '')																										
 LEFT JOIN 																												
 	rgua.${psmShikibetsuTaisho} AS PSM
         ON
         T4."DbT1001_shikibetsuCode" = PSM."shikibetsuCode"
         <where>
+            1 = 1
             <if test="対象年月flag">
+                AND
                 #{年月範囲_開始} <![CDATA[<=]]> DbT3017."serviceTeikyoYM"
                 AND 
                 DbT3017."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲_終了} 
@@ -212,6 +222,10 @@ LEFT JOIN
             <if test="要支援2flag">
                 AND
                DbT3017."yoKaigoJotaiKubunCode" IN ('13')
+            </if>
+            <if test="事業対象者flag">
+                AND
+               DbT3017."yoKaigoJotaiKubunCode" IN ('06')
             </if>
             <if test="経過的要介護flag">
                 AND
@@ -337,10 +351,6 @@ LEFT JOIN
                 AND
                 DbT3017."inputShikibetsuNo" IN ('8171')
             </if>
-            <if test="flag">
-                AND
-                DbT3017."inputShikibetsuNo" IN ('7131','2131','7141','7142','7143','2141','2142','2143')
-            </if>
             <if test="旧措置特定有無flag">
                 AND
                 DbT3017."kyuSochiNyushoshaTokureiCode" = '0'
@@ -392,6 +402,7 @@ LEFT JOIN
                 DbT3017."kyotakuKaigoShienJigyoshoNo" = #{計画作成事業者番号}
             </if>
             <if test="!給付率flag">
+                AND
                 <if test="給付率区分flag1">
                     DbT3017."hokenKyufuritsu" = #{給付率}
                 </if>
@@ -456,7 +467,8 @@ LEFT JOIN
 	PSM."setaiCode" AS PSM_setaiCode_2,																		
 	'',								
 	'',									
-	''									
+	'',
+        DbT3118."meisho2" AS DbT3118_meisho2							
 FROM																			
 	rgdb."DbT3028KyufujissekiKogakuKaigoServicehi" AS T1																		
 LEFT JOIN 																			
@@ -464,13 +476,21 @@ LEFT JOIN
 	DbT1001."shikibetsuCode" AS "DbT1001_shikibetsuCode",																		
 	DbT1001."hihokenshaNo" AS "DbT1001_hihokenshaNo"																
 	FROM rgdb."DbT1001HihokenshaDaicho" AS DbT1001 ) AS T4																		
-	ON T1."hiHokenshaNo" = T4."DbT1001_hihokenshaNo"																		
+	ON T1."hiHokenshaNo" = T4."DbT1001_hihokenshaNo"
+LEFT JOIN 
+       rgdb."DbT3118ShikibetsuNoKanri" AS DbT3118
+       ON DbT3118."shikibetsuNo" = T1."inputShikibetsuNo"
+       AND DbT3118."tekiyoKaishiYM" <![CDATA[<=]]> T1."serviceTeikyoYM"
+       AND (T1."serviceTeikyoYM" <![CDATA[<=]]> DbT3118."tekiyoShuryoYM"
+       OR DbT3118."tekiyoShuryoYM" = '')																		
 LEFT JOIN 																			
-	rgua.${psmShikibetsuTaisho} AS PSM
+	rgua.${psmShikibetsuTaisho} AS PSM 
         ON
         T4."DbT1001_shikibetsuCode" = PSM."shikibetsuCode"	
          <where>
+             1 = 1
             <if test="対象年月flag">
+                AND
                 #{年月範囲_開始} <![CDATA[<=]]> T1."serviceTeikyoYM"
                 AND 
                 T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲_終了} 
@@ -611,10 +631,6 @@ LEFT JOIN
                 AND
                 T1."inputShikibetsuNo" IN ('8171')
             </if>
-            <if test="flag">
-                AND
-                T1."inputShikibetsuNo" IN ('7131','2131','7141','7142','7143','2141','2142','2143')
-            </if>
             <if test="!公費負担者番号flag">
                 AND
                 T1."kohi1FutanNo" = #{公費負担者番号} or T1."kohi2FutanNo" = #{公費負担者番号} or T1."kohi3FutanNo" = #{公費負担者番号}
@@ -673,7 +689,8 @@ LEFT JOIN
     JKJITable.世帯コード,
     JKJITable.事業者名称,
     JKJITable.要介護状態区分名称,
-    JKJITable.給付実績区分名称	
+    JKJITable.給付実績区分名称,
+    JKJITable.様式
         FROM																			
         "JukyusyaKyufuJiqsekiIchiranhyouTable"	AS JKJITable																	
     </select>

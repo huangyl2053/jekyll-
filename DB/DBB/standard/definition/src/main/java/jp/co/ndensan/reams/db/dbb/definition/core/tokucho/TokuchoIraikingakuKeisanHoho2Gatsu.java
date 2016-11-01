@@ -11,22 +11,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum TokuchoIraikingakuKeisanHoho2Gatsu {
 
     /**
-     * コード:1 名称:特徴開始月以降の普通徴収額 略称:特徴開始月以降の普通徴収額
+     * コード:1 名称:特徴開始月以降の普通徴収額 略称:定義なし
      */
-    特徴開始月以降の普通徴収額("1", "特徴開始月以降の普通徴収額", "特徴開始月以降の普通徴収額"),
+    特徴開始月以降の普通徴収額("1", "特徴開始月以降の普通徴収額"),
     /**
-     * コード:3 名称:法定計算方法_6で割る 略称:年額÷12Ｘ本徴収月数÷年金支給回数
+     * コード:3 名称:年額÷12Ｘ本徴収月数÷年金支給回数 略称:定義なし
      */
-    年額除12乗本徴収月数除年金支給回数("3", "法定計算方法_6で割る", "年額÷12Ｘ本徴収月数÷年金支給回数");
+    法定計算方法_6で割る("3", "年額÷12Ｘ本徴収月数÷年金支給回数");
 
     private final RString code;
     private final RString fullName;
-    private final RString shortName;
 
-    private TokuchoIraikingakuKeisanHoho2Gatsu(String code, String fullname, String shortName) {
+    private TokuchoIraikingakuKeisanHoho2Gatsu(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
-        this.shortName = new RString(shortName);
     }
 
     /**
@@ -45,15 +43,6 @@ public enum TokuchoIraikingakuKeisanHoho2Gatsu {
      */
     public RString get名称() {
         return fullName;
-    }
-
-    /**
-     * 特徴依頼金額計算方法2月の略称を返します。
-     *
-     * @return 特徴依頼金額計算方法2月の略称
-     */
-    public RString get略称() {
-        return shortName;
     }
 
     /**

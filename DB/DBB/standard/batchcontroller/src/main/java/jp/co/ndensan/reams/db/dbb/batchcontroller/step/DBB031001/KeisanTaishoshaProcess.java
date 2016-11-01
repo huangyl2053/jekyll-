@@ -198,7 +198,7 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
             tempEntity.setChoteiNendo(entity.get賦課の情報().getChoteiNendo());
             tempEntity.setChoteiNendo(entity.get賦課の情報().getChoteiNendo());
             tempEntity.setFukaNendo(entity.get賦課の情報().getFukaNendo());
-            int 番号 = Integer.parseInt(通知書番号.getColumnValue().substring(INDEX_14, INDEX_16).toString()) + 1;
+            int 番号 = Integer.parseInt(通知書番号.getColumnValue().substringReturnAsPossible(INDEX_14, INDEX_16).toString()) + 1;
             tempEntity.setTsuchishoNo(create通知書番号(entity.get賦課の情報().getHihokenshaNo().getColumnValue(), 番号));
             本算定抽出writer.insert(tempEntity);
             資格の情報List.add(entity.get資格の情報());
@@ -279,9 +279,10 @@ public class KeisanTaishoshaProcess extends BatchProcessBase<KeisanTaishoshaEnti
         entity.setKyuShichosonCode(daichoEntity.getKyuShichosonCode());
         entity.setLogicalDeletedFlag(daichoEntity.getLogicalDeletedFlag());
         FlexibleDate fukaDate = new FlexibleDate(param.get賦課年度().getYearValue(), 四月, INDEX_1);
-        if (daichoEntity.getIchigoShikakuShutokuYMD() != null
-                && fukaDate.isBeforeOrEquals(daichoEntity.getIchigoShikakuShutokuYMD())) {
-            entity.setKijunYMD(daichoEntity.getIchigoShikakuShutokuYMD());
+        FlexibleDate ichigoShikakuShutokuYMD = daichoEntity.getIchigoShikakuShutokuYMD();
+        if (ichigoShikakuShutokuYMD != null && !ichigoShikakuShutokuYMD.isEmpty()
+                && fukaDate.isBeforeOrEquals(ichigoShikakuShutokuYMD)) {
+            entity.setKijunYMD(ichigoShikakuShutokuYMD);
         } else {
             entity.setKijunYMD(fukaDate);
         }

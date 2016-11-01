@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanFukushiYoguHanbaihi;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiYoguKonyuhiShikyuShiseiKetteDivEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiYoguKonyuhiShikyuShiseiMeisaiDivEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinseiResult;
@@ -20,33 +16,36 @@ import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.S
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.nyuryokushikibetsuno.NyuryokuShikibetsuNoShokan3Keta;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikibetsunokubon.ShikibetsuNoKubon;
-import jp.co.ndensan.reams.db.dbc.definition.core.shinnsanaiyo.ShinsaNaiyoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ServiceShuruiCodeParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShibaraiKekkaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShokanShikyuShinseiParameter;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.ShichosonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekka;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3034ShokanShinseiDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3038ShokanKihonDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3048ShokanFukushiYoguHanbaihiDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3118ShikibetsuNoKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7112ShokanShuruiShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.konyuhishikyushisei.IFukushiyoguKonyuhiShikyuGendogakuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3034ShokanShinseiDac;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3038ShokanKihonDac;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -60,7 +59,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -89,7 +87,6 @@ public class FukushiyoguKonyuhiShikyuShinsei {
 
     private static final RString 状態_登録 = new RString("登録");
     private static final RString 状態_削除 = new RString("削除");
-    private static final RString 支給区分_支給 = new RString("1");
     private static final RString 支給区分_不支給 = new RString("0");
     private static final RString メッセージ_集計 = new RString("償還払請求集計");
     private static final RString メッセージ_販売費 = new RString("償還払請求福祉用具販売費");
@@ -121,8 +118,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
     /**
      * {@link InstanceProvider#create}により生成されたインタフェースを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuShinsei}
+     * @return {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuShinsei}
      */
     public static FukushiyoguKonyuhiShikyuShinsei createInstance() {
         return InstanceProvider.create(FukushiyoguKonyuhiShikyuShinsei.class);
@@ -601,7 +597,6 @@ public class FukushiyoguKonyuhiShikyuShinsei {
         DbT3038ShokanKihonEntity dbT3038Entity = 福祉用具購入費支給申請明細登録画面.get償還払請求基本().toEntity();
         dbT3038Entity.setState(EntityDataState.Modified);
         償還払請求基本Dac.save(dbT3038Entity);
-        List<DbT3048ShokanFukushiYoguHanbaihiEntity> dbT3048EntityList = new ArrayList<>();
         DbT3048ShokanFukushiYoguHanbaihiEntity max連番 = 償還払請求福祉用具販売費Dac.getMAX連番(
                 福祉用具購入費支給申請明細登録画面.get被保険者番号(),
                 福祉用具購入費支給申請明細登録画面.get提供_購入_年月(),
@@ -620,67 +615,29 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                     = 登録福祉用具販売費.createBuilderForEdit().set連番(
                             new RString(String.format("%02d", 最大枝番 + 登録数))).build().toEntity();
             dbT3048Entity.setState(EntityDataState.Added);
-            dbT3048EntityList.add(dbT3048Entity);
             償還払請求福祉用具販売費Dac.save(dbT3048Entity);
         }
         for (ShokanFukushiYoguHanbaihi 償還払請求福祉用具販売費
                 : 福祉用具購入費支給申請明細登録画面.get修正福祉用具販売費リスト()) {
             DbT3048ShokanFukushiYoguHanbaihiEntity dbT3048Entity = 償還払請求福祉用具販売費.toEntity();
             dbT3048Entity.setState(EntityDataState.Modified);
-            dbT3048EntityList.add(dbT3048Entity);
             償還払請求福祉用具販売費Dac.save(dbT3048Entity);
         }
         for (ShokanFukushiYoguHanbaihi 償還払請求福祉用具販売費
                 : 福祉用具購入費支給申請明細登録画面.get削除福祉用具販売費リスト()) {
             DbT3048ShokanFukushiYoguHanbaihiEntity dbT3048Entity = 償還払請求福祉用具販売費.toEntity();
             dbT3048Entity.setState(EntityDataState.Deleted);
-            dbT3048EntityList.add(dbT3048Entity);
             償還払請求福祉用具販売費Dac.delete(dbT3048Entity);
         }
 
         DbT3034ShokanShinseiEntity dbT3034Entity = 福祉用具購入費支給申請明細登録画面.get償還払支給申請().toEntity();
         dbT3034Entity.setState(EntityDataState.Modified);
         償還払支給申請Dac.save(dbT3034Entity);
-        ShokanHanteiKekka 償還払支給判定結果 = 福祉用具購入費支給申請明細登録画面.get償還払支給判定結果();
-        if (null != 償還払支給判定結果) {
-            DbT3036ShokanHanteiKekkaEntity dbT3036Entity = 償還払支給判定結果.toEntity();
-            if (ShinsaNaiyoKubun.承認する.getコード().equals(福祉用具購入費支給申請明細登録画面.get審査結果())) {
-                dbT3036Entity = 償還払支給判定結果.createBuilderForEdit().
-                        set支給_不支給決定区分(支給区分_支給).
-                        set決定年月日(FlexibleDate.getNowDate()).
-                        build().toEntity();
-            } else if (ShinsaNaiyoKubun.却下する.getコード().equals(福祉用具購入費支給申請明細登録画面.get審査結果())) {
-                dbT3036Entity = 償還払支給判定結果.createBuilderForEdit().
-                        set支給_不支給決定区分(支給区分_不支給).
-                        set決定年月日(FlexibleDate.getNowDate()).
-                        build().toEntity();
-            }
-            int データ数 = 償還払支給判定結果Dac.getCountByKey(
-                    償還払支給判定結果.get被保険者番号(),
-                    償還払支給判定結果.getサービス提供年月(),
-                    償還払支給判定結果.get整理番号());
-            if (0 == データ数) {
-                dbT3036Entity.setState(EntityDataState.Added);
-            } else {
-                dbT3036Entity.setState(EntityDataState.Modified);
-            }
-            償還払支給判定結果Dac.save(dbT3036Entity);
-        }
 
         DbT3053ShokanShukeiEntity dbT3053Entity = 福祉用具購入費支給申請明細登録画面.get償還払集計().toEntity();
         dbT3053Entity.setState(EntityDataState.Modified);
         償還払請求集計Dac.save(dbT3053Entity);
-        if (null != 償還払支給判定結果) {
-            福祉用具購入費支給決定給付実績編集Mgr.dealKyufujisseki(
-                    状態_登録,
-                    福祉用具購入費支給申請明細登録画面.get識別コード(),
-                    dbT3038Entity,
-                    dbT3048EntityList,
-                    dbT3034Entity,
-                    償還払支給判定結果.toEntity(),
-                    dbT3053Entity,
-                    null);
-        }
+
     }
 
     /**

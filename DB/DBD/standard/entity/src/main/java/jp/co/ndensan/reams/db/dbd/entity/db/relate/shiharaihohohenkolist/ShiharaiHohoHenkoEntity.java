@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -33,9 +32,11 @@ public class ShiharaiHohoHenkoEntity {
     private RString 被保険者氏名カナ;
     private RString 被保険者氏名;
     private Code 世帯番号;
-    private RString 行政区ｺｰﾄﾞ;
+    private RString 行政区コード;
     private RString 行政区;
     private RString 住所コード;
+    private RString 町域コード;
+    private RString 市町村コード;
     private YubinNo 郵便番号;
     private RString 住所;
 
@@ -44,7 +45,7 @@ public class ShiharaiHohoHenkoEntity {
     private ShikakuSoshitsuJiyu 喪失事由;
     private ShikakuKubun 資格区分;
     private RString 住特フラグ;
-    private RString 生保;
+    private boolean 生保;
 
     private RString 要介護度;
     private RString 認定有効期間;
@@ -85,6 +86,4 @@ public class ShiharaiHohoHenkoEntity {
 
     private List<ShunoNendoEntity> 収納情報List;
     private RString 収納情報なし;
-
-    private FlexibleYear 賦課年度;
 }

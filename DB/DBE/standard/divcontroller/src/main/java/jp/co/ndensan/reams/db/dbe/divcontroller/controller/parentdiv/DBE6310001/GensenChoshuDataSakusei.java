@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE6310001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.gensenchoshudatasakusei.GensenChoshuDataSakuseiFlowParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE631001.DBE631001_GensendataSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6310001.GensenChoshuDataSakuseiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6310001.GensenChoshuDataSakuseiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6310001.GensenChoshuDataSakuseiValidationHandler;
@@ -51,8 +51,8 @@ public class GensenChoshuDataSakusei {
      * @param div NinteiChosaHoshuShokaiDiv
      * @return ResponseData<NinteiChosaHoshuShokaiFlowParameter>
      */
-    public ResponseData<GensenChoshuDataSakuseiFlowParameter> getParameter(GensenChoshuDataSakuseiDiv div) {
-        GensenChoshuDataSakuseiFlowParameter tempData = getHandler(div).getTempData();
+    public ResponseData<DBE631001_GensendataSakuseiParameter> getParameter(GensenChoshuDataSakuseiDiv div) {
+        DBE631001_GensendataSakuseiParameter tempData = getHandler(div).getTempData();
         return ResponseData.of(tempData).respond();
     }
 

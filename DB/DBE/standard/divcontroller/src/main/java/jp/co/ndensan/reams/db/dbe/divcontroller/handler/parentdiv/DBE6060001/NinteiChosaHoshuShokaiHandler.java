@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6060001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshushokai.NinteichosahoshushokaiBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosahoshushokai.NinteiChosaHoshuShokaiFlowBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosahoshushokai.NinteiChosaHoshuShokaiFlowParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601005.NinteiChosaHoshuShokaiFlowBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601005.DBE601005_NinteichosaHoshuParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6060001.NinteiChosaHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6060001.dgNinteiChosaHoshu_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
@@ -138,8 +138,8 @@ public class NinteiChosaHoshuShokaiHandler {
      * @param 出力区分 RString
      * @return NinteiChosaHoshuShokaiFlowParameter
      */
-    public NinteiChosaHoshuShokaiFlowParameter getTempData(RString 出力区分) {
-        NinteiChosaHoshuShokaiFlowParameter tempData = new NinteiChosaHoshuShokaiFlowParameter();
+    public DBE601005_NinteichosaHoshuParameter getTempData(RString 出力区分) {
+        DBE601005_NinteichosaHoshuParameter tempData = new DBE601005_NinteichosaHoshuParameter();
         FlexibleDate 依頼日開始 = new FlexibleDate(div.getTxtChosaIraibi().getFromValue().toDateString());
         FlexibleDate 依頼日終了 = new FlexibleDate(div.getTxtChosaIraibi().getToValue().toDateString());
         List<NinteiChosaHoshuShokaiFlowBusiness> 情報 = new ArrayList<>();

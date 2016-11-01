@@ -70,7 +70,7 @@
          "DbT3040ShokanKinkyuShisetsuRyoyo"."tekiyo18" as "dbT3040ShokanKinkyuShisetsuRyoyo_tekiyo18",
          "DbT3040ShokanKinkyuShisetsuRyoyo"."tekiyo19" as "dbT3040ShokanKinkyuShisetsuRyoyo_tekiyo19",
          "DbT3040ShokanKinkyuShisetsuRyoyo"."tekiyo20" as "dbT3040ShokanKinkyuShisetsuRyoyo_tekiyo20",
-         "DbT3040ShokanKinkyuShisetsuRyoyo"."kinkyuShisetsuRyoyohiTotalTanisu" as "dbT3040ShokanKinkyuShisetsuRyoyo_kinkyuShisetsuRyoyohiTotalTanisu"
+         "DbT3040ShokanKinkyuShisetsuRyoyo"."kinkyuShisetsuRyoyohiTotalTanisu" as "dbT3040_kinkyuShisetsuRyoyohiTotalTanisu"
     </sql>
 
 
@@ -129,7 +129,7 @@
         <result property="tekiyo18" column="dbT3040ShokanKinkyuShisetsuRyoyo_tekiyo18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tekiyo19" column="dbT3040ShokanKinkyuShisetsuRyoyo_tekiyo19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tekiyo20" column="dbT3040ShokanKinkyuShisetsuRyoyo_tekiyo20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kinkyuShisetsuRyoyohiTotalTanisu" column="dbT3040ShokanKinkyuShisetsuRyoyo_kinkyuShisetsuRyoyohiTotalTanisu" />
+        <result property="kinkyuShisetsuRyoyohiTotalTanisu" column="dbT3040_kinkyuShisetsuRyoyohiTotalTanisu" />
     </resultMap>
 
 </mapper>

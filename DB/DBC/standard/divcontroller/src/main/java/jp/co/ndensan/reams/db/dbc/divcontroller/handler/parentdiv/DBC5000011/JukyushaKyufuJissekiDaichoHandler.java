@@ -242,6 +242,11 @@ public class JukyushaKyufuJissekiDaichoHandler {
         } else {
             batchParameter.set要支援2(ゼロ);
         }
+        if (すべて選択.contains(new RString("事業対象者"))) {
+            batchParameter.set事業対象者(いち);
+        } else {
+            batchParameter.set事業対象者(ゼロ);
+        }
         if (すべて選択.contains(new RString("経過的要介護"))) {
             batchParameter.set経過的要介護(いち);
         } else {

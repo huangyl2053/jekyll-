@@ -132,13 +132,13 @@ public class SaishinsaMoshitateNashiProcess extends BatchProcessBase<SaishinsaMo
     protected void afterExecute() {
         if (!flag) {
             eucCsvWriter.writeLine(new SaishinsaMoshitate().setRenbanashiEUCEntity());
+            eucCsvWriter.close();
             manager.spool(eucFilePath);
         } else {
             AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+            eucCsvWriter.close();
             manager.spool(eucFilePath, log);
         }
-        eucCsvWriter.close();
-
         outputJokenhyoFactory();
     }
 

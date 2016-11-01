@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo;
 
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoProcessParameter;
@@ -13,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.HanyouRisutoSyuturyokuEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -80,8 +82,11 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     private static final RString RST_低 = new RString("低");
     private static final RString RST_老 = new RString("老");
     private static final RString RST_2 = new RString("2");
+    private static final RString 全角_2 = new RString("２");
     private static final RString RST_緩１ = new RString("緩１");
     private static final RString RST_緩２ = new RString("緩２");
+    private static final RString 第３_緩 = new RString("第３・緩");
+    private static final RString 第２_緩 = new RString("第２・緩");
     private static final RString RST_般 = new RString("般");
     private static final RString RST_現 = new RString("現");
     private static final RString RST_第１ = new RString("第１");
@@ -118,11 +123,13 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
      * @param parameter HanyouRisutoSyuturyokuProcessParameter
      * @param 連番 Decimal
      * <p>
+     * @param 構成市町村Map Map<LasdecCode, KoseiShichosonMaster>
      * @return HanyouRisutoSyuturyokuEucCsvEntity
      */
     public HanyouRisutoSyuturyokuEucCsvEntity edit(HanyouRisutoSyuturyokuEntity entity,
             HanyoListKogakuKaigoProcessParameter parameter,
-            Decimal 連番) {
+            Decimal 連番,
+            Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map) {
         HanyouRisutoSyuturyokuEucCsvEntity csvEntity = new HanyouRisutoSyuturyokuEucCsvEntity();
         csvEntity.set連番(numToRString(連番));
         set宛名(entity, csvEntity, parameter);
@@ -138,11 +145,8 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set市町村コード(entity.get市町村コード() != null
                 ? entity.get市町村コード().getColumnValue()
                 : RString.EMPTY);
-
-        Association association = AssociationFinderFactory.createInstance().getAssociation(entity
-                .get市町村コード());
+        set市町村名(構成市町村Map, entity, csvEntity);
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        csvEntity.set市町村名(association.get市町村名());
         csvEntity.set保険者コード(地方公共団体.get地方公共団体コード().getColumnValue());
         csvEntity.set保険者名(地方公共団体.get市町村名());
 
@@ -177,12 +181,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set資格喪失日(get日付項目(資格喪失日, parameter));
         FlexibleDate 資格喪失届日 = entity.get資格喪失届出年月日();
         csvEntity.set資格取得届出日(get日付項目(資格喪失届日, parameter));
-        if (entity.get被保険者区分コード() != null && !entity.get被保険者区分コード().isEmpty()) {
-            HihokenshaKubunCode 被保険者区分コード = HihokenshaKubunCode.toValue(entity.get被保険者区分コード());
-            csvEntity.set資格区分(被保険者区分コード != null
-                    ? 被保険者区分コード.get名称()
-                    : RString.EMPTY);
-        }
+        set資格区分(entity, csvEntity);
         boolean 住所地特例フラグ = entity.is住所地特例フラグ();
         csvEntity.set住所地特例状態(住所地特例フラグ
                 ? 住所地特例状態_住特
@@ -193,17 +192,40 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         HokenshaList hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(
                 GyomuBunrui.介護事務);
         HokenshaSummary hokenshaSummary;
-        if (広域内住所地特例フラグ) {
-            hokenshaSummary = hokenshaList.get(広住特措置元市町村コード);
-        } else {
-            hokenshaSummary = hokenshaList.get(市町村コード);
+        ShoKisaiHokenshaNo 証記載保険者番号 = null;
+        if (null != 広住特措置元市町村コード && !広住特措置元市町村コード.isEmpty()) {
+            if (広域内住所地特例フラグ) {
+                hokenshaSummary = hokenshaList.get(広住特措置元市町村コード);
+                証記載保険者番号 = hokenshaSummary.get証記載保険者番号();
+            } else if (null != 市町村コード && 市町村コード.isEmpty()) {
+                hokenshaSummary = hokenshaList.get(市町村コード);
+                証記載保険者番号 = hokenshaSummary.get証記載保険者番号();
+
+            }
+
+            csvEntity.set資格証記載保険者番号(証記載保険者番号 != null && !証記載保険者番号.isEmpty()
+                    ? 証記載保険者番号.getColumnValue()
+                    : RString.EMPTY);
         }
-        ShoKisaiHokenshaNo 証記載保険者番号 = hokenshaSummary.get証記載保険者番号();
-        csvEntity.set資格証記載保険者番号(証記載保険者番号 != null && !証記載保険者番号.isEmpty()
-                ? 証記載保険者番号.getColumnValue()
-                : RString.EMPTY);
 
         return csvEntity;
+    }
+
+    private void set資格区分(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
+        if (entity.get被保険者区分コード() != null && !entity.get被保険者区分コード().isEmpty()) {
+            HihokenshaKubunCode 被保険者区分コード = HihokenshaKubunCode.toValue(entity.get被保険者区分コード());
+            csvEntity.set資格区分(被保険者区分コード != null
+                    ? 被保険者区分コード.get名称()
+                    : RString.EMPTY);
+        }
+    }
+
+    private void set市町村名(Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map, HanyouRisutoSyuturyokuEntity entity,
+            HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
+        KoseiShichosonMaster 構成市町村マスタ = 構成市町村Map.get(entity.get市町村コード());
+        if (構成市町村マスタ != null) {
+            csvEntity.set市町村名(構成市町村マスタ.get市町村名称());
+        }
     }
 
     private void set受給者台帳(HanyouRisutoSyuturyokuEntity entity,
@@ -474,6 +496,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
                 && (entity.get口座情報().getUrT0700ShunoKanriEntity() != null || !entity.get口座情報()
                 .getUrT0700ShunoKanriEntity().isEmpty())) {
             KozaRelateEntity releteEntity = entity.get口座情報();
+
             IKoza 口座 = new Koza(releteEntity);
             if (口座.isゆうちょ銀行()) {
                 csvEntity.set銀行郵便区分(RST_2);
@@ -685,7 +708,11 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             csvEntity.set保決定利用負担額(保決定利用負担額 != null
                     ? numToRString(保決定利用負担額)
                     : RString.EMPTY);
-            csvEntity.set保決定支給区分(entity.get判定_支給区分コード());
+            csvEntity.set保決定支給区分(
+                    entity.get決定_支給区分コード() != null
+                    && entity.get決定_支給区分コード().toString().equals("1")
+                    ? ShikyuKubun.支給.get名称()
+                    : RString.EMPTY);
             Decimal 保決定高額支給額 = entity.get支給金額();
             csvEntity.set保決定高額支給額(保決定高額支給額 != null
                     ? numToRString(保決定高額支給額)
@@ -754,7 +781,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             return RString.EMPTY;
         }
         if (!parameter.isHizukeHeshu()) {
-            return 生年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+            return new RString(生年月日.toString());
         } else {
             return 生年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
@@ -765,7 +792,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             return RString.EMPTY;
         }
         if (!parameter.isHizukeHeshu()) {
-            return 年月.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+            return new RString(年月.toString());
         } else {
             return 年月.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
@@ -786,10 +813,9 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         if (高額給付根拠 == null || 高額給付根拠.trim().isEmpty()) {
             return RString.EMPTY;
         } else {
-            List<RString> list = 高額給付根拠.toRStringList();
-
+            List<RString> list = 高額給付根拠.split("、");
             if (list.size() >= INDEX_1 && (list.get(INDEX_0).equals(RST_月)
-                    || list.get(INDEX_0).equals(RString.EMPTY))) {
+                    || list.get(INDEX_0).equals(RString.HALF_SPACE))) {
                 世帯の所得区分コード = list.size() >= INDEX_2
                         ? list.get(INDEX_1)
                         : RString.EMPTY;
@@ -833,7 +859,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
 
         if (RST_老.equals(老齢福祉年金受給の有無)) {
             return RST_第１;
-        } else if (RST_2.equals(老齢福祉年金受給の有無)) {
+        } else if (全角_2.equals(老齢福祉年金受給の有無)) {
             return RST_第２;
         } else {
             return RST_第３;
@@ -843,9 +869,9 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     private RString get低(RString 老齢福祉年金受給の有無) {
 
         if (RST_緩１.equals(老齢福祉年金受給の有無)) {
-            return RST_第２;
+            return 第２_緩;
         } else if (RST_緩２.equals(老齢福祉年金受給の有無)) {
-            return RST_第３;
+            return 第３_緩;
         } else {
             return RST_第４;
         }

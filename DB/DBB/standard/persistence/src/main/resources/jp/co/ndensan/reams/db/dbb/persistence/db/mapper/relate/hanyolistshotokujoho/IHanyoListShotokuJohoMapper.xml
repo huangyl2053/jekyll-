@@ -8,7 +8,7 @@
         <include refid="selectHanyoListShotokuJohoEntity" />
     </select>
     <sql id="selectHanyoListShotokuJohoEntity">
-        select ROW_NUMBER() over(order by D."所得年度")as row ,* from (
+        select ROW_NUMBER() over()as row ,* from (
         SELECT
         DbV2502."shotokuNendo"                                              AS 所得年度,
 	DbV2502."shikibetsuCode"                                            AS 識別コード,
@@ -62,6 +62,22 @@
                 ON DbV1001."shikibetsuCode" = DbV2502."shikibetsuCode"
                 INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
                 ON "ShikibetsuTaisho"."shikibetsuCode"=DbV2502."shikibetsuCode"
+                <if test="年齢層抽出方法== 1">
+                    <if test="年齢範囲開始 !=null and 生年月日範囲終了 !=null">
+                        AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
+                    </if>
+                    <if test="年齢範囲終了 !=null and 生年月日範囲開始 !=null">
+                        AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[>=]]> #{生年月日範囲開始}
+                    </if>
+                </if>
+                <if test="年齢層抽出方法== 2">
+                    <if test="生年月日範囲開始1 !=null and 生年月日範囲開始 !=null">
+                        AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[>=]]> #{生年月日範囲開始}
+                    </if>
+                    <if test="生年月日範囲終了1 !=null and 生年月日範囲終了 !=null">
+                        AND "ShikibetsuTaisho"."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
+                    </if>
+                </if>
                 INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
                 ON "Atesaki"."shikibetsuCode"=DbV2502."shikibetsuCode"
                 INNER JOIN (
@@ -89,6 +105,19 @@
                 AND B."hihokenshaNo" = DbV1001."hihokenshaNo"
         WHERE
                 1=1
+                <if test="保険者コード !=null and !保険者コード.isEmpty() and 保険者コード !='000000'">
+                    AND (
+                        (
+                            DbV1001."koikinaiJushochiTokureiFlag" <![CDATA[<>]]> '1'
+                            AND DbV1001."shichosonCode" = #{保険者コード}
+                        )
+                        OR
+                        (
+                            DbV1001."koikinaiJushochiTokureiFlag" = '1'
+                            AND DbV1001."koikinaiTokureiSochimotoShichosonCode" = #{保険者コード}
+                        )
+                    )
+                </if>
                 AND DbV2502."shotokuNendo" = #{賦課年度}
                 <if test="課税区分減免前s != null and !課税区分減免前s.isEmpty()">
                 AND DbV2502."kazeiKubun" IN 
@@ -108,6 +137,7 @@
                 <if test="抽出期間To !=null and !抽出期間To.isEmpty()">
                 AND DbV2502."shoriTimeStamp" <![CDATA[<=]]> #{抽出期間To}
                 </if>
+                ${出力順}
                 ) as D
     </sql>
     

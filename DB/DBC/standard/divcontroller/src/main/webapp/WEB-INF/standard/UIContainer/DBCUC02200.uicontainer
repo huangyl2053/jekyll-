@@ -47,7 +47,7 @@
      "layoutName": "DBC0220011",
      "layoutTitle": "受給者異動連絡票変更登録",
      "eventName": "該当者検索",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
@@ -61,12 +61,12 @@
      "layoutName": "DBZ0200001",
      "layoutTitle": "対象者検索",
      "eventName": "対象者特定",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0220011",
      "toLayoutTitle": "受給者異動連絡票変更登録",
-     "toState": ""
+     "toState": "対象者検索"
     },
     {
      "id": "6",

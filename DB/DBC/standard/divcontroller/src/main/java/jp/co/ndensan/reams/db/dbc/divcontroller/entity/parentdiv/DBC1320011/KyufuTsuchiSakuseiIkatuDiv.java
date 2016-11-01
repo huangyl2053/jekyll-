@@ -8,19 +8,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1320011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.PrintContentsSetting.IPrintContentsSettingDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting.PrintContentsSettingDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KyufuTsuchiSakuseiIkatu のクラスファイル
- *
+ * KyufuTsuchiSakuseiIkatu のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -32,6 +35,8 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     private KyufuTsuchiSakuseiDiv KyufuTsuchiSakusei;
     @JsonProperty("KyufuTsuchiSakuseiPrint")
     private KyufuTsuchiSakuseiPrintDiv KyufuTsuchiSakuseiPrint;
+    @JsonProperty("ccdChohyoShutsuryokujun")
+    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -76,6 +81,15 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     /*
+     * getccdChohyoShutsuryokujun
+     * @return ccdChohyoShutsuryokujun
+     */
+    @JsonProperty("ccdChohyoShutsuryokujun")
+    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
+        return ccdChohyoShutsuryokujun;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -84,7 +98,7 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTdrServiceYM(TextBoxDateRange tdrServiceYM) {
+    public void  setTdrServiceYM(TextBoxDateRange tdrServiceYM) {
         this.getKyufuTsuchiSakusei().setTdrServiceYM(tdrServiceYM);
     }
 
@@ -94,13 +108,8 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkServiceSyuruiSyuyaku(CheckBoxList chkServiceSyuruiSyuyaku) {
+    public void  setChkServiceSyuruiSyuyaku(CheckBoxList chkServiceSyuruiSyuyaku) {
         this.getKyufuTsuchiSakusei().setChkServiceSyuruiSyuyaku(chkServiceSyuruiSyuyaku);
-    }
-
-    @JsonIgnore
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return this.getKyufuTsuchiSakusei().getCcdHokenshaList();
     }
 
     @JsonIgnore
@@ -109,7 +118,7 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setHolLine1(HorizontalLine holLine1) {
+    public void  setHolLine1(HorizontalLine holLine1) {
         this.getKyufuTsuchiSakusei().setHolLine1(holLine1);
     }
 
@@ -119,7 +128,7 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkYokaigodo(CheckBoxList chkYokaigodo) {
+    public void  setChkYokaigodo(CheckBoxList chkYokaigodo) {
         this.getKyufuTsuchiSakusei().setChkYokaigodo(chkYokaigodo);
     }
 
@@ -129,7 +138,7 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setKyufuTsuchiSakusei1(KyufuTsuchiSakusei1Div KyufuTsuchiSakusei1) {
+    public void  setKyufuTsuchiSakusei1(KyufuTsuchiSakusei1Div KyufuTsuchiSakusei1) {
         this.getKyufuTsuchiSakusei().setKyufuTsuchiSakusei1(KyufuTsuchiSakusei1);
     }
 
@@ -139,7 +148,7 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setOptServiceType(RadioButton optServiceType) {
+    public void  setOptServiceType(RadioButton optServiceType) {
         this.getKyufuTsuchiSakusei().getKyufuTsuchiSakusei1().setOptServiceType(optServiceType);
     }
 
@@ -149,7 +158,7 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblServiceType(Label lblServiceType) {
+    public void  setLblServiceType(Label lblServiceType) {
         this.getKyufuTsuchiSakusei().getKyufuTsuchiSakusei1().setLblServiceType(lblServiceType);
     }
 
@@ -159,7 +168,7 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkTyusyutuJoken(CheckBoxList chkTyusyutuJoken) {
+    public void  setChkTyusyutuJoken(CheckBoxList chkTyusyutuJoken) {
         this.getKyufuTsuchiSakusei().getKyufuTsuchiSakusei1().setChkTyusyutuJoken(chkTyusyutuJoken);
     }
 
@@ -169,17 +178,17 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setHolLine2(HorizontalLine holLine2) {
+    public void  setHolLine2(HorizontalLine holLine2) {
         this.getKyufuTsuchiSakusei().getKyufuTsuchiSakusei1().setHolLine2(holLine2);
     }
 
     @JsonIgnore
-    public TextBox getTxtHihokenshaNo() {
+    public TextBoxCode getTxtHihokenshaNo() {
         return this.getKyufuTsuchiSakusei().getKyufuTsuchiSakusei1().getTxtHihokenshaNo();
     }
 
     @JsonIgnore
-    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+    public void  setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
         this.getKyufuTsuchiSakusei().getKyufuTsuchiSakusei1().setTxtHihokenshaNo(txtHihokenshaNo);
     }
 
@@ -189,7 +198,7 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnHihokenshaJoho(ButtonDialog btnHihokenshaJoho) {
+    public void  setBtnHihokenshaJoho(ButtonDialog btnHihokenshaJoho) {
         this.getKyufuTsuchiSakusei().getKyufuTsuchiSakusei1().setBtnHihokenshaJoho(btnHihokenshaJoho);
     }
 
@@ -199,7 +208,7 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHihokenshaName(TextBox txtHihokenshaName) {
+    public void  setTxtHihokenshaName(TextBox txtHihokenshaName) {
         this.getKyufuTsuchiSakusei().getKyufuTsuchiSakusei1().setTxtHihokenshaName(txtHihokenshaName);
     }
 
@@ -209,7 +218,7 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setKyufuTsuchiSakusei2(KyufuTsuchiSakusei2Div KyufuTsuchiSakusei2) {
+    public void  setKyufuTsuchiSakusei2(KyufuTsuchiSakusei2Div KyufuTsuchiSakusei2) {
         this.getKyufuTsuchiSakusei().setKyufuTsuchiSakusei2(KyufuTsuchiSakusei2);
     }
 
@@ -219,7 +228,7 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnTuuchiJoho(Button btnTuuchiJoho) {
+    public void  setBtnTuuchiJoho(Button btnTuuchiJoho) {
         this.getKyufuTsuchiSakusei().getKyufuTsuchiSakusei2().setBtnTuuchiJoho(btnTuuchiJoho);
     }
 
@@ -229,7 +238,7 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setGrdTuuchiJoho(DataGrid<grdTuuchiJoho_Row> grdTuuchiJoho) {
+    public void  setGrdTuuchiJoho(DataGrid<grdTuuchiJoho_Row> grdTuuchiJoho) {
         this.getKyufuTsuchiSakusei().getKyufuTsuchiSakusei2().setGrdTuuchiJoho(grdTuuchiJoho);
     }
 
@@ -239,13 +248,13 @@ public class KyufuTsuchiSakuseiIkatuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblTyuibun1(Label lblTyuibun1) {
+    public void  setLblTyuibun1(Label lblTyuibun1) {
         this.getKyufuTsuchiSakusei().getKyufuTsuchiSakusei2().setLblTyuibun1(lblTyuibun1);
     }
 
     @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
-        return this.getKyufuTsuchiSakuseiPrint().getCcdChohyoShutsuryokujun();
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getKyufuTsuchiSakusei().getCcdHokenshaList();
     }
 
     @JsonIgnore

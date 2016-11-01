@@ -30,17 +30,11 @@
     <select resultOrdered="true" id="select介護保険所得情報一覧データ" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiParameter" 
             resultMap="resultMap_KaigoHokenShotokuTempEntity" fetchSize="500">
+      WITH master AS (
       SELECT
         A."shikibetsuCode",
         C."hihokenshaNo",
-        B."kanaMeisho",
-        B."meisho",
         A."shotokuNendo",
-        B."seinengappiYMD",
-        B."shojoJiyuCode",
-        B."shojoIdoYMD",
-        B."seibetsuCode",
-        B."juminShubetsuCode",
         A."kazeiKubun",
         A."kazeiKubunGemmenGo",
         A."gokeiShotokuGaku",
@@ -93,73 +87,42 @@
         <if test="チックボックス == 3">
             AND cast(F."torokuGyomu" as varchar(1)) = '2'
         </if>
-        ORDER BY F."shotokuNendo" ASC, F."shikibetsuCode" ASC
         ) AS A
+        LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho" AS C
+        ON C."shikibetsuCode"=A."shikibetsuCode"
+        AND (C."hihokennshaKubunCode"='1' OR C."hihokennshaKubunCode"='2'))
+        SELECT master.*,
+        B."kanaMeisho",
+        B."meisho",
+        B."seinengappiYMD",
+        B."shojoJiyuCode",
+        B."shojoIdoYMD",
+        B."seibetsuCode",
+        B."juminShubetsuCode"
+        FROM master
         LEFT OUTER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','','','','','','','','','','','0','0','','','','','',
         '','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','',
-        '0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }' ) AS B
-        ON A."shikibetsuCode"=B."shikibetsuCode"
-        LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho" AS C
-        ON C."shikibetsuCode"=A."shikibetsuCode"
-        AND (C."hihokennshaKubunCode"='1' OR C."hihokennshaKubunCode"='2')
-        ${出力順}
+        '0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                   )) AS B
+        ON master."shikibetsuCode"=B."shikibetsuCode"
+        ${出力順} , master."shotokuNendo" ASC, master."shikibetsuCode" ASC
     </select>
     
     <!--広域市町村の所得情報一覧を取得します。-->
     <select resultOrdered="true" id="select対象データ" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shotokujohoichiranhyosakusei.ShotokuJohoIchiranhyoSakuseiGParameter" 
             resultMap="resultMap_KaigoHokenShotokuTempEntity" fetchSize="500">
-      SELECT
-        A."shikibetsuCode",
-        B."hihokenshaNo",
-        A."kanaMeisho",
-        A."meisho",
-        A."shotokuNendo",
-        A."seinengappiYMD",
-        A. "shojoJiyuCode",
-        A. "shojoIdoYMD",
-        A."seibetsuCode",
-        A."juminShubetsuCode",
-        A."kazeiKubun",
-        A."kazeiKubunGemmenGo",
-        A."gokeiShotokuGaku",
-        A."nenkiniShunyuGaku",
-        A."nenkiniShotokuGaku",
-        A."kazeiShotokuGaku",
-        A."torokuGyomu"
-      FROM
-        (
+        WITH leader AS (
+        WITH master AS (
         SELECT
-        TEMP."shikibetsuCode",
-        TEMP."kanaMeisho",
-        TEMP."meisho",
-        TEMP."shotokuNendo",
-        TEMP."seinengappiYMD",
-        TEMP. "shojoJiyuCode",
-        TEMP. "shojoIdoYMD",
-        TEMP."seibetsuCode",
-        TEMP."juminShubetsuCode",
-        TEMP."kazeiKubun",
-        TEMP."kazeiKubunGemmenGo",
-        TEMP."gokeiShotokuGaku",
-        TEMP."nenkiniShunyuGaku",
-        TEMP."nenkiniShotokuGaku",
-        TEMP."kazeiShotokuGaku",
-        TEMP."torokuGyomu",
-        TEMP."shoriTimeStamp"
-        FROM  (
-	SELECT
         M."shikibetsuCode",
         M."rirekiNo",
-        N."kanaMeisho",
-        N."meisho",
         M."shotokuNendo",
-        N."seinengappiYMD",
-        N."shojoJiyuCode",
-        N."shojoIdoYMD",
-        N."seibetsuCode",
-        N."juminShubetsuCode",
         M."kazeiKubun",
         M."kazeiKubunGemmenGo",
         M."gokeiShotokuGaku",
@@ -167,8 +130,7 @@
         M."nenkiniShotokuGaku",
         M."kazeiShotokuGaku",
         M."torokuGyomu",
-        M."shoriTimeStamp",
-        N."genLasdecCode"
+        M."shoriTimeStamp"
       FROM
         (
         SELECT
@@ -205,33 +167,86 @@
         AND Y."shikibetsuCode"= F."shikibetsuCode"
         WHERE
         F."shotokuNendo"=#{処理年度}
-        ORDER BY F."shotokuNendo" ASC, F."shikibetsuCode" ASC
-        )AS M
+        )AS M)
+        SELECT
+        master.*,
+        N."kanaMeisho",
+        N."meisho",
+        N."seinengappiYMD",
+        N."shojoJiyuCode",
+        N."shojoIdoYMD",
+        N."seibetsuCode",
+        N."juminShubetsuCode",
+        N."genLasdecCode"
+        FROM master
         LEFT OUTER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','','','','','','','','','','','0','0','','','','','',
         '','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','',
-        '0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }' ) AS N
-        ON M."shikibetsuCode"=N."shikibetsuCode"  
-        ) AS TEMP
+        '0','0','','','0','0','0','','','','','','','','','','','','','','','','','','',                    (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                   )) AS N
+        ON master."shikibetsuCode"=N."shikibetsuCode"
+        ORDER BY master."shotokuNendo" ASC, master."rirekiNo" DESC)
+      SELECT
+        A."shikibetsuCode",
+        B."hihokenshaNo",
+        A."kanaMeisho",
+        A."meisho",
+        A."shotokuNendo",
+        A."seinengappiYMD",
+        A. "shojoJiyuCode",
+        A. "shojoIdoYMD",
+        A."seibetsuCode",
+        A."juminShubetsuCode",
+        A."kazeiKubun",
+        A."kazeiKubunGemmenGo",
+        A."gokeiShotokuGaku",
+        A."nenkiniShunyuGaku",
+        A."nenkiniShotokuGaku",
+        A."kazeiShotokuGaku",
+        A."torokuGyomu"
+      FROM
+        (
+        SELECT
+        leader."shikibetsuCode",
+        leader."kanaMeisho",
+        leader."meisho",
+        leader."shotokuNendo",
+        leader."seinengappiYMD",
+        leader. "shojoJiyuCode",
+        leader. "shojoIdoYMD",
+        leader."seibetsuCode",
+        leader."juminShubetsuCode",
+        leader."kazeiKubun",
+        leader."kazeiKubunGemmenGo",
+        leader."gokeiShotokuGaku",
+        leader."nenkiniShunyuGaku",
+        leader."nenkiniShotokuGaku",
+        leader."kazeiShotokuGaku",
+        leader."torokuGyomu",
+        leader."shoriTimeStamp"
+        FROM leader
         WHERE
-        #{開始日時}<![CDATA[<=]]>TEMP."shoriTimeStamp"
-        AND TEMP."shoriTimeStamp"<![CDATA[<=]]>#{終了日時}
-        AND TEMP."genLasdecCode"=#{市町村コード}
+        #{開始日時}<![CDATA[<=]]>leader."shoriTimeStamp"
+        AND leader."shoriTimeStamp"<![CDATA[<=]]>#{終了日時}
+        AND leader."genLasdecCode"=#{市町村コード}
         <if test="チックボックス == 1">
-            AND (cast(TEMP. "torokuGyomu" as varchar(1)) = '1' OR cast(TEMP. "torokuGyomu" as varchar(1)) = '2')
+            AND (cast(leader. "torokuGyomu" as varchar(1)) = '1' OR cast(leader. "torokuGyomu" as varchar(1)) = '2')
         </if>
         <if test="チックボックス == 2">
-            AND cast(TEMP. "torokuGyomu" as varchar(1)) = '1'
+            AND cast(leader. "torokuGyomu" as varchar(1)) = '1'
         </if>
         <if test="チックボックス == 3">
-            AND cast(TEMP. "torokuGyomu" as varchar(1)) = '2'
-        </if>
-        ORDER BY TEMP."shotokuNendo" ASC, TEMP."shikibetsuCode" ASC, TEMP."rirekiNo" DESC) AS A
+            AND cast(leader. "torokuGyomu" as varchar(1)) = '2'
+        </if> ) AS A
         LEFT OUTER JOIN
         rgdb."DbV1001HihokenshaDaicho" AS B
         ON A."shikibetsuCode"=B."shikibetsuCode"
         AND(B."hihokennshaKubunCode"='1' OR B."hihokennshaKubunCode"='2')
-        ${出力順}
+        ${出力順}, "shotokuNendo" ASC, "shikibetsuCode" ASC
     </select>
     
     <!--select所得情報一覧データ-->

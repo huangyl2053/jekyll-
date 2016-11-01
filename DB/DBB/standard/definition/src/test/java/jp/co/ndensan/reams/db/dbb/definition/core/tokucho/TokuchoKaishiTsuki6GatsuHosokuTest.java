@@ -30,12 +30,12 @@ public class TokuchoKaishiTsuki6GatsuHosokuTest extends DbbTestBase {
 
     @Test
     public void 引数に12を指定した場合_toValueは_12月を返す() {
-        assertThat(TokuchoKaishiTsuki6GatsuHosoku.toValue(new RString("12")), is(TokuchoKaishiTsuki6GatsuHosoku._12月));
+        assertThat(TokuchoKaishiTsuki6GatsuHosoku.toValue(new RString("12")), is(TokuchoKaishiTsuki6GatsuHosoku._12月開始));
     }
 
     @Test
     public void 引数に04を指定した場合_toValueは_04月を返す() {
-        assertThat(TokuchoKaishiTsuki6GatsuHosoku.toValue(new RString("04")), is(TokuchoKaishiTsuki6GatsuHosoku._04月));
+        assertThat(TokuchoKaishiTsuki6GatsuHosoku.toValue(new RString("04")), is(TokuchoKaishiTsuki6GatsuHosoku._4月開始_待機));
     }
 
     @Test
@@ -45,12 +45,12 @@ public class TokuchoKaishiTsuki6GatsuHosokuTest extends DbbTestBase {
 
     @Test
     public void _12月を指定した場合_getコードは_12を返す() {
-        assertThat(TokuchoKaishiTsuki6GatsuHosoku._12月.getコード(), is(new RString("12")));
+        assertThat(TokuchoKaishiTsuki6GatsuHosoku._12月開始.getコード(), is(new RString("12")));
     }
 
     @Test
     public void _04月を指定した場合_getコードは_04を返す() {
-        assertThat(TokuchoKaishiTsuki6GatsuHosoku._04月.getコード(), is(new RString("04")));
+        assertThat(TokuchoKaishiTsuki6GatsuHosoku._4月開始_待機.getコード(), is(new RString("04")));
     }
 
     @Test
@@ -60,12 +60,12 @@ public class TokuchoKaishiTsuki6GatsuHosokuTest extends DbbTestBase {
 
     @Test
     public void _12月を指定した場合_get名称は__12月開始を返す() {
-        assertThat(TokuchoKaishiTsuki6GatsuHosoku._12月.get名称(), is(new RString("_12月開始")));
+        assertThat(TokuchoKaishiTsuki6GatsuHosoku._12月開始.get名称(), is(new RString("12月開始")));
     }
 
     @Test
     public void _04月を指定した場合_get名称は__4月開始_待機を返す() {
-        assertThat(TokuchoKaishiTsuki6GatsuHosoku._04月.get名称(), is(new RString("_4月開始_待機")));
+        assertThat(TokuchoKaishiTsuki6GatsuHosoku._4月開始_待機.get名称(), is(new RString("4月開始_待機")));
     }
 
     @Test
@@ -75,12 +75,12 @@ public class TokuchoKaishiTsuki6GatsuHosokuTest extends DbbTestBase {
 
     @Test
     public void _12月を指定した場合_get略称は_12月を返す() {
-        assertThat(TokuchoKaishiTsuki6GatsuHosoku._12月.get略称(), is(new RString("12月")));
+        assertThat(TokuchoKaishiTsuki6GatsuHosoku._12月開始.get略称(), is(new RString("12月")));
     }
 
     @Test
     public void _04月を指定した場合_get略称は_04月を返す() {
-        assertThat(TokuchoKaishiTsuki6GatsuHosoku._04月.get略称(), is(new RString("04月")));
+        assertThat(TokuchoKaishiTsuki6GatsuHosoku._4月開始_待機.get略称(), is(new RString("04月")));
     }
 
 }

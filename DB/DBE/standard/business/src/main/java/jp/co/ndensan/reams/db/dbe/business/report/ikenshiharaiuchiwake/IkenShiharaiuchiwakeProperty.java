@@ -5,13 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ikenshiharaiuchiwake;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshiharaiuchiwake.IkenShiharaiuchiwakeReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.Breakers;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
@@ -25,9 +21,6 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class IkenShiharaiuchiwakeProperty extends ReportPropertyBase<IkenShiharaiuchiwakeReportSource> {
 
-    private static final List<RString> LAYOUT_BREAK_KEYS = Collections.
-            unmodifiableList(Arrays.asList(IkenShiharaiuchiwakeReportSource.LAYOUTBREAKITEM));
-
     /**
      * インスタンスを生成します。
      */
@@ -40,18 +33,25 @@ public class IkenShiharaiuchiwakeProperty extends ReportPropertyBase<IkenShihara
             Breakers<IkenShiharaiuchiwakeReportSource> breakers,
             BreakerCatalog<IkenShiharaiuchiwakeReportSource> catalog) {
 
-        return breakers.add(catalog.new SimplePageBreaker(
+        return breakers.add(catalog.new SimpleLayoutBreaker(
 
-            LAYOUT_BREAK_KEYS) {
+
+
+
+
+
+
+
+            IkenShiharaiuchiwakeReportSource.LAYOUT_BREAK_KEYS) {
             @Override
             public ReportLineRecord<IkenShiharaiuchiwakeReportSource> occuredBreak(
                     ReportLineRecord<IkenShiharaiuchiwakeReportSource> currentRecord,
                     ReportLineRecord<IkenShiharaiuchiwakeReportSource> nextRecord,
                     ReportDynamicChart dynamicChart) {
-                int layout = currentRecord.getSource().layoutBreakItem;
+                int layout = currentRecord.getSource().layout.index();
                 currentRecord.setFormGroupIndex(layout);
                 if (nextRecord != null && nextRecord.getSource() != null) {
-                    layout = nextRecord.getSource().layoutBreakItem;
+                    layout = nextRecord.getSource().layout.index();
                     nextRecord.setFormGroupIndex(layout);
                 }
                 return currentRecord;

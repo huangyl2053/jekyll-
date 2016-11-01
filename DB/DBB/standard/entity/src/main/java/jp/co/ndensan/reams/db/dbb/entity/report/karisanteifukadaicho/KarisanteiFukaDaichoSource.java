@@ -108,6 +108,7 @@ public class KarisanteiFukaDaichoSource implements IReportSource {
     @ReportItem(name = "kozaShurui", length = 3, order = 47)
     public RString kozaShurui;
     @ReportPerson(id = "listHonin2_1")
+    @ReportItem(name = "listHonin2_1", length = 35, order = 48)
     public RString listHonin2_1;
     @ReportItem(name = "listHonin2_2", length = 35, order = 49)
     public RString listHonin2_2;
@@ -126,6 +127,7 @@ public class KarisanteiFukaDaichoSource implements IReportSource {
     @ReportItem(name = "kozaNo", length = 14, order = 56)
     public RString kozaNo;
     @ReportPerson(id = "listSetaiin_1")
+    @ReportItem(name = "listSetaiin_1", length = 12, order = 57)
     public RString listSetaiin_1;
     @ReportItem(name = "listSetaiin_2", length = 12, order = 58)
     public RString listSetaiin_2;

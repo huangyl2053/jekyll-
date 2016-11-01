@@ -160,7 +160,6 @@ and open the template in the editor.-->
             WHERE A."hihokenshaNo" = 社福軽減."hihokenshaNo"
             )
         </if>
-        ${出力順}
     </select>
     <sql id="selectKyufujissekiEntity">
         SELECT

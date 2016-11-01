@@ -2,6 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT4116IchijiHanteiKekkaJohoマスタとエンティティのマッピング用XMLです。 -->
 <!-- 作者： n1070 久保裕是 -->
+<!-- @reamsid_L DBZ-9999-021 chengsanyuan -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4116IchijiHanteiKekkaJohoMapper">
@@ -29,7 +30,7 @@
          "DbT4116IchijiHanteiKekkaJoho"."kariIchijiHanteiKubun" as "dbT4116IchijiHanteiKekkaJoho_kariIchijiHanteiKubun",
          "DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" as "dbT4116IchijiHanteiKekkaJoho_ichijiHanteiYMD",
          "DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaCode" as "dbT4116IchijiHanteiKekkaJoho_ichijiHanteiKekkaCode",
-         "DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaNinchishoKasanCode" as "dbT4116IchijiHanteiKekkaJoho_ichijiHanteiKekkaNinchishoKasanCode",
+         "DbT4116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaNinchishoKasanCode" as "dbT4116_ichijiHanteiKekkaNinchishoKasanCode",
          "DbT4116IchijiHanteiKekkaJoho"."kijunJikan" as "dbT4116IchijiHanteiKekkaJoho_kijunJikan",
          "DbT4116IchijiHanteiKekkaJoho"."kijunJikanShokuji" as "dbT4116IchijiHanteiKekkaJoho_kijunJikanShokuji",
          "DbT4116IchijiHanteiKekkaJoho"."kijunJikanHaisetsu" as "dbT4116IchijiHanteiKekkaJoho_kijunJikanHaisetsu",
@@ -82,7 +83,7 @@
         <result property="kariIchijiHanteiKubun" column="dbT4116IchijiHanteiKekkaJoho_kariIchijiHanteiKubun" />
         <result property="ichijiHanteiYMD" column="dbT4116IchijiHanteiKekkaJoho_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ichijiHanteiKekkaCode" column="dbT4116IchijiHanteiKekkaJoho_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="ichijiHanteiKekkaNinchishoKasanCode" column="dbT4116IchijiHanteiKekkaJoho_ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ichijiHanteiKekkaNinchishoKasanCode" column="dbT4116_ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="kijunJikan" column="dbT4116IchijiHanteiKekkaJoho_kijunJikan" />
         <result property="kijunJikanShokuji" column="dbT4116IchijiHanteiKekkaJoho_kijunJikanShokuji" />
         <result property="kijunJikanHaisetsu" column="dbT4116IchijiHanteiKekkaJoho_kijunJikanHaisetsu" />

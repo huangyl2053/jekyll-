@@ -136,24 +136,24 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
         if (new RString("0").equals(paramter.getFayirukuben())) {
             RString 日次進捗データ送信ファイル名 = DbBusinessConfig.get(ConfigNameDBE.日次進捗データ送信ファイル名_新, RDate.getNowDate());
             EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                    EUC_ENTITY_ID.toRString(),
+                    new RString("日次進捗データ送信ファイル"),
                     association.getLasdecCode_().value(),
                     association.get市町村名(),
                     new RString(String.valueOf(JobContextHolder.getJobId())),
-                    new RString("日次進捗データ送信ファイル.csv"),
                     日次進捗データ送信ファイル名,
+                    EUC_ENTITY_ID.toRString(),
                     business.get出力件数(new Decimal(eucCsvWriterJunitoJugo.getCount())),
                     business.get出力条件(paramter));
             OutputJokenhyoFactory.createInstance(item).print();
         } else if (new RString("1").equals(paramter.getFayirukuben())) {
             RString 連携データ送信ファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果連携データ送信ファイル名_新, RDate.getNowDate());
             EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                    EUC_ENTITY_ID.toRString(),
+                    new RString("要介護認定結果連携データ送信ファイル"),
                     association.getLasdecCode_().value(),
                     association.get市町村名(),
                     new RString(String.valueOf(JobContextHolder.getJobId())),
-                    new RString("要介護認定結果連携データ送信ファイル.csv"),
                     連携データ送信ファイル名,
+                    EUC_ENTITY_ID.toRString(),
                     business.get出力件数(new Decimal(eucCsvWriterJunitoJugo.getCount())),
                     business.get出力条件(paramter));
             OutputJokenhyoFactory.createInstance(item).print();

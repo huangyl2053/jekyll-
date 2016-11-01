@@ -49,13 +49,13 @@ public class DBC8030001MainHandler {
             if (振込単位.equals(new RString("1"))) {
                 業務内区分 = FurikomiGyomunaiKubun.償還高額.getコード();
             } else {
-                業務内区分 = FurikomiGyomunaiKubun.償還.getコード();
+                業務内区分 = FurikomiGyomunaiKubun.高額.getコード();
             }
         } else if (メニューID.equals(new RString("DBCMN54003"))) {
             if (振込単位.equals(new RString("1"))) {
                 業務内区分 = FurikomiGyomunaiKubun.償還高額.getコード();
             } else {
-                業務内区分 = FurikomiGyomunaiKubun.高額.getコード();
+                業務内区分 = FurikomiGyomunaiKubun.償還.getコード();
             }
         } else if (メニューID.equals(new RString("DBCMN63006"))) {
             業務内区分 = FurikomiGyomunaiKubun.高額合算.getコード();
@@ -64,6 +64,7 @@ public class DBC8030001MainHandler {
         } else if (メニューID.equals(new RString("DBCMNN2005"))) {
             業務内区分 = FurikomiGyomunaiKubun.事業高額合算.getコード();
         }
+        div.getTxtShoriTaisho().setValue(FurikomiGyomunaiKubun.toValue(業務内区分).get名称());
         List<RString> list = new ArrayList<>();
         list.add(RString.EMPTY);
         div.getCcdFurikomiBaitaiSakusei().initialize(SubGyomuCode.DBC介護給付, 業務内区分, list, IFurikomiBaitaiSakuseiDiv.UnyoHohoShokiHyoji.媒体, GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), RString.EMPTY);

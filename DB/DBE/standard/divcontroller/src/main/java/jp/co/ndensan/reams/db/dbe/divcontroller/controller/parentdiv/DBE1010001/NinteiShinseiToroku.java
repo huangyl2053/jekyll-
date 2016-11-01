@@ -90,6 +90,7 @@ public class NinteiShinseiToroku {
     private static final RString MENUID_DBEMN31003 = new RString("DBEMN31003");
     private static final int ZERO_17 = 17;
     private static final int ZERO_5 = 5;
+    private static final RString ZERO_6 = new RString("000000");
 
     /**
      * コンストラクタです。
@@ -306,7 +307,7 @@ public class NinteiShinseiToroku {
      */
     public ResponseData<NinteiShinseiTorokuDiv> onClick_btnUpdate(NinteiShinseiTorokuDiv div) {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-            && new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+                && new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).forwardWithEventName(DBE1010001TransitionEventName.完了).respond();
         }
         RString menuID = ResponseHolder.getMenuID();
@@ -344,7 +345,7 @@ public class NinteiShinseiToroku {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())
-                || NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
+                    || NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
                 NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
                 shinseiJohoBuilder.set認定申請区分_申請時_コード(new Code(kihonJohoInputDiv
                         .getDdlShinseiKubunShinseiji().getSelectedKey()));
@@ -617,7 +618,11 @@ public class NinteiShinseiToroku {
         KaigoHokensha hokensha = dbt7050Manager.get介護保険者By広域保険者番号(new ShoKisaiHokenshaNo(div.getCcdShikakuInfo().getHookenshaCode()));
         RString 連番 = Saiban.get(SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.市町村コード_西暦_月.getコード()).nextString();
         RStringBuilder rsb = new RStringBuilder();
-        rsb.append(hokensha.get広域保険者市町村コード().value());
+        if (ZERO_6.equals(div.getCcdShikakuInfo().getHookenshaCode())) {
+            rsb.append(ZERO_6);
+        } else {
+            rsb.append(hokensha.get広域保険者市町村コード().value());
+        }
         rsb.append(RDate.getNowDate().getYearMonth().toDateString());
         rsb.append(連番.padZeroToLeft(ZERO_5));
         return new ShinseishoKanriNo(rsb.toRString());

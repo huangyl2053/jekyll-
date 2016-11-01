@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE621001;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.iinhoshushiharai.Iinhoshushiharai;
 import jp.co.ndensan.reams.db.dbe.business.core.iinhoshushiharai.IinhoshushiharaiEdit;
@@ -26,15 +28,13 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -43,10 +43,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -54,12 +51,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-1980-020 suguangjun
  */
-public class IinhoshushiharaiProcess extends BatchProcessBase<HoshuShiharaiJunbiRelateEntity> {
+public class IinhoshushiharaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunbiRelateEntity> {
 
     private static final ReportId REPORT_ID = ReportIdDBE.DBE621001.getReportId();
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbi."
             + "IHoshuShiharaiJunbiMapper.get介護認定審査会委員報酬支払通知書");
+    private static final List<RString> PAGE_BREAK_KEYS = Collections
+            .unmodifiableList(Arrays.asList(new RString(IinhoshushiharaiReportSource.ReportSourceFields.shinsakaiIinCode.name())));
     private HoshuShiharaiJunbiProcessParameter processParameter;
     private static final RString MIDDLELINE = new RString("なし");
     private static final RString なし = new RString("なし");
@@ -85,7 +84,9 @@ public class IinhoshushiharaiProcess extends BatchProcessBase<HoshuShiharaiJunbi
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).
+                addBreak(new BreakerCatalog<IinhoshushiharaiReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
@@ -95,8 +96,11 @@ public class IinhoshushiharaiProcess extends BatchProcessBase<HoshuShiharaiJunbi
     }
 
     @Override
-    protected void process(HoshuShiharaiJunbiRelateEntity entity) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
+    protected void keyBreakProcess(HoshuShiharaiJunbiRelateEntity entity) {
+    }
+
+    @Override
+    protected void usualProcess(HoshuShiharaiJunbiRelateEntity entity) {
         IinhoshushiharaiEdit edit = new IinhoshushiharaiEdit();
         Iinhoshushiharai iinhoshushiharai = edit.getIinhoshushiharai(entity, get認証者(), ChosaHoshuShiharaiProcess.get通知文(), getKoza(entity));
         RStringBuilder builder = new RStringBuilder();
@@ -107,16 +111,6 @@ public class IinhoshushiharaiProcess extends BatchProcessBase<HoshuShiharaiJunbi
         iinhoshushiharai.set振込予定日(dateFormat9(processParameter.getFurikomishiteiday()));
         IinhoshushiharaiReport report = new IinhoshushiharaiReport(iinhoshushiharai);
         report.writeBy(reportSourceWriter);
-    }
-
-    private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
-        RString hihokenshaNo = RString.EMPTY;
-        if (entity.getHihokenshaNo() != null) {
-            hihokenshaNo = entity.getHihokenshaNo();
-        }
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                hihokenshaNo);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     private void バッチ出力条件リストの出力() {

@@ -34,7 +34,7 @@ public enum GassanShikyuFushikyuKetteishaIchiranOutPutOrder implements IReportIt
     /**
      * 証記載保険者番号
      */
-    証記載保険者番号("0103", "証記載保険者番号", ""),
+    証記載保険者番号("0103", "証記載保険者番号", "\"KogakugassanShikyuKetteitsuchishoTemp\".\"hokenshaNo\""),
     /**
      * 市町村コード
      */
@@ -42,19 +42,19 @@ public enum GassanShikyuFushikyuKetteishaIchiranOutPutOrder implements IReportIt
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ("0010", "氏名５０音カナ", ""),
+    氏名５０音カナ("0010", "氏名５０音カナ", "\"ShikibetsuTaisho_kanaMeisho\""),
     /**
      * 町域コード
      */
-    町域コード("0002", "町域コード", ""),
+    町域コード("0002", "町域コード", "\"ShikibetsuTaisho_choikiCode\""),
     /**
      * 行政区コード
      */
-    行政区コード("0004", "行政区コード", "\"DbV1001_gyoseikuCode\""),
+    行政区コード("0004", "行政区コード", "\"ShikibetsuTaisho_gyoseikuCode\""),
     /**
      * 郵便番号
      */
-    郵便番号("0001", "郵便番号", "\"DbV1001_yubinNo\"");
+    郵便番号("0001", "郵便番号", "\"ShikibetsuTaisho_yubinNo\"");
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

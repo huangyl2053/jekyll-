@@ -73,6 +73,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -241,7 +242,6 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         出力帳票一覧 = processParameter.get出力帳票一覧();
         帳票名 = manager.get帳票名_納入(出力帳票一覧.get帳票ID().getColumnValue());
         通知書共通情報entity = manager.get通知書共通情報(processParameter.get調定年度(), processParameter.get納入_出力期());
-        出力帳票一覧 = processParameter.get出力帳票一覧();
 
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
@@ -271,10 +271,10 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         NonyuTsuchiShoSeigyoJohoLoaderFinder finder = NonyuTsuchiShoSeigyoJohoLoaderFinder.createInstance(processParameter.get調定年度());
         本算定納入通知書制御情報 = finder.get本算定納入通知書制御情報();
 
+        帳票タイプ = manager.get帳票タイプ(出力帳票一覧.get帳票ID());
+
         出力期リスト = manager.get出力期リスト(processParameter.get調定年度(), processParameter.get納入_出力方法(),
                 帳票タイプ, 期月リスト_普徴, 本算定期間, 出力期AsInt);
-
-        帳票タイプ = manager.get帳票タイプ(出力帳票一覧.get帳票ID());
 
         List<NokiJoho> 期月List = manager.get期月リスト(processParameter.get調定年度(), processParameter.get納入_出力方法(),
                 帳票タイプ, 期月リスト_普徴, 本算定期間, 出力期AsInt);
@@ -353,7 +353,8 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         本算定通知書情報.set収入情報(tmpResult.get収入情報());
         本算定通知書情報.set帳票制御共通(帳票制御共通);
 
-        IName 代納人氏名 = tmpResult.get宛先代納() != null ? tmpResult.get宛先代納().get宛先名称() : null;
+        IName 代納人氏名 = tmpResult.get宛先情報() != null && AtesakiShubetsu.代納人.equals(tmpResult.get宛先情報().get宛先種別())
+                ? tmpResult.get宛先情報().get宛先名称() : null;
         HonSanteiNonyuTsuchiShoJoho 編集後本算定通知書共通情報
                 = nonyuTsuchiShoJohoFactory.create本算定納入通知書情報(本算定通知書情報, 本算定納入通知書制御情報, 出力期リスト, 代納人氏名);
 

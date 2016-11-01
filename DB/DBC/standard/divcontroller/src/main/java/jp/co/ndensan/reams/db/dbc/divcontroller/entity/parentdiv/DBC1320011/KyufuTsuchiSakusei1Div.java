@@ -30,7 +30,7 @@ public class KyufuTsuchiSakusei1Div extends Panel {
     @JsonProperty("holLine2")
     private HorizontalLine holLine2;
     @JsonProperty("txtHihokenshaNo")
-    private TextBox txtHihokenshaNo;
+    private TextBoxCode txtHihokenshaNo;
     @JsonProperty("btnHihokenshaJoho")
     private ButtonDialog btnHihokenshaJoho;
     @JsonProperty("txtHihokenshaName")
@@ -119,7 +119,7 @@ public class KyufuTsuchiSakusei1Div extends Panel {
      * @return txtHihokenshaNo
      */
     @JsonProperty("txtHihokenshaNo")
-    public TextBox getTxtHihokenshaNo() {
+    public TextBoxCode getTxtHihokenshaNo() {
         return txtHihokenshaNo;
     }
 
@@ -128,7 +128,7 @@ public class KyufuTsuchiSakusei1Div extends Panel {
      * @param txtHihokenshaNo txtHihokenshaNo
      */
     @JsonProperty("txtHihokenshaNo")
-    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+    public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
         this.txtHihokenshaNo = txtHihokenshaNo;
     }
 

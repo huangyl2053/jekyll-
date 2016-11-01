@@ -21,8 +21,6 @@ import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -31,10 +29,6 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -55,8 +49,6 @@ public class ShujiiIryokikanDataCsvProcess extends BatchProcessBase<ShujiiIryoki
     private static final RString 出力件数_状況フラグ = new RString("【状況フラグ】 TRUE");
     private static final RString 出力件数_今回処理日時開始日時 = new RString("【今回処理日時開始日時】 ");
     private static final RString 出力件数_今回処理日時終了日時 = new RString("【今回処理日時終了日時】 ");
-    private static final RString 申請書管理番号 = new RString("申請書管理番号");
-    private static final Code ログコード = new Code("0001");
     private Association association;
     private FileSpoolManager fileSpoolmanager;
     private RString csvFilePath;
@@ -119,8 +111,6 @@ public class ShujiiIryokikanDataCsvProcess extends BatchProcessBase<ShujiiIryoki
             csvWriter.close();
         }
         バッチ出力条件リストの出力();
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(ログコード, 申請書管理番号, 申請書管理番号));
-        AccessLogger.log(AccessLogType.照会, personalData);
         fileSpoolmanager.spool(SubGyomuCode.DBD介護受給, csvFilePath);
     }
 

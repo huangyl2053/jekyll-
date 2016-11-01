@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -31,7 +32,7 @@ public class KouhoshaTenyuEntity {
     private RString 管内管外区分;
     private YubinNo 郵便番号;
     private RString 町域コード;
-    private RString 全国住所コード;
+    private ZenkokuJushoCode 全国住所コード;
     private RString 住所;
     private RString 番地;
     private RString 方書;
@@ -43,7 +44,7 @@ public class KouhoshaTenyuEntity {
     private SetaiCode 世帯コード;
     private FlexibleDate 生年月日;
     private FlexibleDate 登録異動年月日;
-    private RString 転入前全国住所コード;
+    private ZenkokuJushoCode 転入前全国住所コード;
     private RString 転入前住所;
     private RString 転入前番地;
     private RString 転入前方書;

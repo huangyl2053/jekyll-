@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5110011;
 
+import java.util.HashMap;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150020.DBC150020_NenreikaikyuRiyojokyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5110011.RiyojokyoTokeihyoDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -52,7 +54,7 @@ public class RiyojokyoTokeihyoHandler {
         DBC150020_NenreikaikyuRiyojokyoParameter batchParamter = new DBC150020_NenreikaikyuRiyojokyoParameter();
         FlexibleDate tmpFlexibleDate = FlexibleDate.EMPTY;
         if (null != div.getTasyoNengetu().getValue()) {
-            tmpFlexibleDate = new FlexibleDate(div.getTasyoNengetu().getValue().toDateString());
+            tmpFlexibleDate = new FlexibleDate(div.getTasyoNengetu().getValue().toDateString().substring(桁_0, 桁_6));
         }
         if (div.getRadTaishoYM().getSelectedKey().equals(SELECT_KEY0)) {
             batchParamter.setServiceTeikyoYM(tmpFlexibleDate);
@@ -73,10 +75,18 @@ public class RiyojokyoTokeihyoHandler {
 
         if (DonyuKeitaiCode.事務単一.getCode().equals(div.getChikushichosonSelect().get導入形態コード())) {
             batchParamter.setSentakuTaisyoKubun(div.getChikushichosonSelect().get選択対象());
-            batchParamter.setSentakuTaisyoList(div.getChikushichosonSelect().get選択結果());
+            batchParamter.setSentakuTaisyoMap(div.getChikushichosonSelect().get選択結果());
+            batchParamter.setShichosonCode(Code.EMPTY);
+            batchParamter.setShichosonMeisho(RString.EMPTY);
+            batchParamter.setKyoShichosonCode(Code.EMPTY);
+            batchParamter.setKyoShichosonMeisho(RString.EMPTY);
         }
         if (DonyuKeitaiCode.事務広域.getCode().equals(div.getChikushichosonSelect().get導入形態コード())
                 || DonyuKeitaiCode.事務構成市町村.getCode().equals(div.getChikushichosonSelect().get導入形態コード())) {
+            batchParamter.setSentakuTaisyoKubun(RString.EMPTY);
+            Map<RString, RString> map = new HashMap<>();
+            map.put(RString.EMPTY, RString.EMPTY);
+            batchParamter.setSentakuTaisyoMap(map);
             batchParamter.setShichosonCode(new Code(div.getChikushichosonSelect().get市町村コード()));
             batchParamter.setShichosonMeisho(div.getChikushichosonSelect().get市町村名称());
             batchParamter.setKyoShichosonCode(new Code(div.getChikushichosonSelect().get旧市町村コード()));

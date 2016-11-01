@@ -30,10 +30,6 @@ public class KyufujissekiKoshinkekkaIchiranProperty extends ReportPropertyBase<K
 
     private final List<RString> pageBreakKeys;
     private static final int INDEX_0 = 0;
-    private static final int INDEX_1 = 1;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
 
     /**
      * インスタンスを生成します。
@@ -43,54 +39,26 @@ public class KyufujissekiKoshinkekkaIchiranProperty extends ReportPropertyBase<K
     public KyufujissekiKoshinkekkaIchiranProperty(IOutputOrder 並び順) {
         super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200054.getReportId());
         pageBreakKeys = new ArrayList<>();
-
-        RString 改頁１ = RString.EMPTY;
-        RString 改頁２ = RString.EMPTY;
-        RString 改頁３ = RString.EMPTY;
-        RString 改頁４ = RString.EMPTY;
-        RString 改頁５ = RString.EMPTY;
-
         List<ISetSortItem> list = 並び順.get設定項目リスト();
         if (list == null) {
             list = new ArrayList<>();
         }
-
-        if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
-            改頁１ = get帳票物理名(list.get(0).get項目ID());
-        }
-        if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
-            改頁２ = get帳票物理名(list.get(INDEX_1).get項目ID());
-        }
-        if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
-            改頁３ = get帳票物理名(list.get(INDEX_2).get項目ID());
-        }
-        if (list.size() > INDEX_3 && list.get(INDEX_3).is改頁項目()) {
-            改頁４ = get帳票物理名(list.get(INDEX_3).get項目ID());
-        }
-        if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
-            改頁５ = get帳票物理名(list.get(INDEX_4).get項目ID());
-        }
-
-        if (!改頁１.isEmpty()) {
-            pageBreakKeys.add(改頁１);
-        }
-        if (!改頁２.isEmpty()) {
-            pageBreakKeys.add(改頁２);
-        }
-        if (!改頁３.isEmpty()) {
-            pageBreakKeys.add(改頁３);
-        }
-        if (!改頁４.isEmpty()) {
-            pageBreakKeys.add(改頁４);
-        }
-        if (!改頁５.isEmpty()) {
-            pageBreakKeys.add(改頁５);
+        for (int i = INDEX_0; i < list.size(); i++) {
+            if (list.size() > i && list.get(i).is改頁項目()) {
+                RString 改頁 = get帳票物理名(list.get(i).get項目ID());
+                if (!改頁.isEmpty()) {
+                    pageBreakKeys.add(改頁);
+                }
+            }
         }
 
     }
 
     private RString get帳票物理名(RString 項目ID) {
-        RString 帳票物理名 = new RString(ReportSourceFields.hokenshaNo.name());
+        RString 帳票物理名 = RString.EMPTY;
+        if (DBC200054_KyufujissekiKoshinkekkaIchiran.保険者番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.hokenshaNo.name());
+        }
         if (DBC200054_KyufujissekiKoshinkekkaIchiran.被保険者番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.listUpper_5.name());
         } else if (DBC200054_KyufujissekiKoshinkekkaIchiran.サービス提供年月.get項目ID().equals(項目ID)) {
@@ -101,6 +69,16 @@ public class KyufujissekiKoshinkekkaIchiranProperty extends ReportPropertyBase<K
             帳票物理名 = new RString(ReportSourceFields.listUpper_2.name());
         } else if (DBC200054_KyufujissekiKoshinkekkaIchiran.整理番号.get項目ID().equals(項目ID)) {
             帳票物理名 = new RString(ReportSourceFields.listUpper_10.name());
+        } else if (DBC200054_KyufujissekiKoshinkekkaIchiran.郵便番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.yubinNo.name());
+        } else if (DBC200054_KyufujissekiKoshinkekkaIchiran.町域コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.choikiCode.name());
+        } else if (DBC200054_KyufujissekiKoshinkekkaIchiran.行政区コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.gyoseikuCode.name());
+        } else if (DBC200054_KyufujissekiKoshinkekkaIchiran.氏名５０音カナ.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.shimei50onKana.name());
+        } else if (DBC200054_KyufujissekiKoshinkekkaIchiran.市町村コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.shichosonCode.name());
         }
         return 帳票物理名;
     }

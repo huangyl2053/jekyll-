@@ -64,18 +64,11 @@
         <result property="dtTeishiYM" column="ueT0511NenkinTokuchoKaifuJoho_dtTeishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dtYobi4Juminzei" column="ueT0511NenkinTokuchoKaifuJoho_dtYobi4Juminzei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dtKojinNo" column="ueT0511NenkinTokuchoKaifuJoho_dtKojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokuhoYoteiSoshitsuKubun" column="ueT0511NenkinTokuchoKaifuJoho_kokuhoYoteiSoshitsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <sql id="table_UeT0511NenkinTokuchoKaifuJoho">
-        rgue."UeT0511NenkinTokuchoKaifuJoho"
-    </sql>
-
-    <sql id="table_UeV0511NenkinTokuchoKaifuJoho">
-        rgue."UeV0511NenkinTokuchoKaifuJoho"
-    </sql>
-
-    <sql id="table_UeV0511NenkinTokuchoKaifuJohoLatest">
-        rgue."UeV0511NenkinTokuchoKaifuJohoLatest"
+        rgdb."UeT0511NenkinTokuchoKaifuJoho"
     </sql>
 
     <sql id="as_UeT0511NenkinTokuchoKaifuJoho">
@@ -134,7 +127,8 @@
         "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku8" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku8",
         "UeT0511NenkinTokuchoKaifuJoho"."dtTeishiYM" AS "ueT0511NenkinTokuchoKaifuJoho_dtTeishiYM",
         "UeT0511NenkinTokuchoKaifuJoho"."dtYobi4Juminzei" AS "ueT0511NenkinTokuchoKaifuJoho_dtYobi4Juminzei",
-        "UeT0511NenkinTokuchoKaifuJoho"."dtKojinNo" AS "ueT0511NenkinTokuchoKaifuJoho_dtKojinNo"
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKojinNo" AS "ueT0511NenkinTokuchoKaifuJoho_dtKojinNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."kokuhoYoteiSoshitsuKubun" as "ueT0511NenkinTokuchoKaifuJoho_kokuhoYoteiSoshitsuKubun"
     </sql>
     <sql id="allColumn">
         "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode",
@@ -188,7 +182,8 @@
         "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku8",
         "UeT0511NenkinTokuchoKaifuJoho"."dtTeishiYM",
         "UeT0511NenkinTokuchoKaifuJoho"."dtYobi4Juminzei",
-        "UeT0511NenkinTokuchoKaifuJoho"."dtKojinNo"
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKojinNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."kokuhoYoteiSoshitsuKubun"
     </sql>
     <select resultOrdered="true" id="select" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
         SELECT
@@ -196,10 +191,19 @@
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
-                AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" =#{tsuchiNaiyoCode}
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" =#{hosokuTsuki}
+            "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+            AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" =#{tsuchiNaiyoCode}
+            <choose>
+                <when test="hosokuTsuki=='10' and 四月待機フラグ==true ">
+                    AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" ='06'
+                    AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" ='08'
+                    AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" ='10'
+                </when>
+                <otherwise>
+                    AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" =#{hosokuTsuki}
+                </otherwise>
+            </choose>
         </where>
     </select>
     <select resultOrdered="true" id="selectApr" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
@@ -208,62 +212,62 @@
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+            "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
             AND(
             (
-                "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '10'
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '10'
             )
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '08'
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '08'
             )
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" ='30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" ='30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
             )
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
             ))
         </where>
     </select>
-<select resultOrdered="true" id="selectJun" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+    <select resultOrdered="true" id="selectJun" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
         SELECT
         <include refid="allColumn_UeT0511NenkinTokuchoKaifuJoho" />
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+            "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
             AND(
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '12'
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '12'
             )
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '10'
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '10'
             )
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '08'
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '08'
             )
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" ='30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" ='30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
             )
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
             ))
         </where>
     </select>
@@ -273,41 +277,41 @@
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
             AND((
-                "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
-                AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '02'
+            "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+            AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '02'
             )   
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '12'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '12'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
             )
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '10'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '10'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
             )
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '08'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '08'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
             )
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" ='30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" ='30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
             )
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
             ))
         </where>
     </select>
@@ -317,8 +321,8 @@
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+            "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
                 AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
         </where>
@@ -329,16 +333,16 @@
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
-           AND((                
-                  "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
+            "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+            AND((                
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
             )   
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
             ))
         </where>
     </select>
@@ -348,22 +352,22 @@
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+            "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
             AND(                
             (
-                "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '08'
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '08'
             )   
             OR
             (                
-                "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
             )   
             OR
             (
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
-                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
+            "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
+            AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
             ))
         </where>
     </select>    

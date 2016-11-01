@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc710070.HanyoListKyodoJukyushaShokanMybatisParameter;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -33,7 +32,7 @@ public class HanyoListKyodoJukyushaShokanProcessParameter implements IBatchProce
     private boolean 項目名付加;
     private boolean 連番付加;
     private boolean 日付編集;
-    private LasdecCode 保険者コード;
+    private RString 保険者コード;
     private RString 日付抽出区分;
     private FlexibleYearMonth 処理対象年月FROM;
     private FlexibleYearMonth 処理対象年月TO;
@@ -57,7 +56,7 @@ public class HanyoListKyodoJukyushaShokanProcessParameter implements IBatchProce
      * @param 項目名付加 boolean
      * @param 連番付加 boolean
      * @param 日付編集 boolean
-     * @param 保険者コード LasdecCode
+     * @param 保険者コード RString
      * @param 日付抽出区分 RString
      * @param 処理対象年月FROM FlexibleYearMonth
      * @param 処理対象年月TO FlexibleYearMonth
@@ -69,7 +68,7 @@ public class HanyoListKyodoJukyushaShokanProcessParameter implements IBatchProce
      */
     public HanyoListKyodoJukyushaShokanProcessParameter(
             RString 帳票ID, RString 出力順ID, RString 出力項目ID, boolean 項目名付加, boolean 連番付加, boolean 日付編集,
-            LasdecCode 保険者コード, RString 日付抽出区分, FlexibleYearMonth 処理対象年月FROM, FlexibleYearMonth 処理対象年月TO,
+            RString 保険者コード, RString 日付抽出区分, FlexibleYearMonth 処理対象年月FROM, FlexibleYearMonth 処理対象年月TO,
             FlexibleYearMonth 異動年月FROM, FlexibleYearMonth 異動年月TO, boolean 各異動月の最新のみ, List<RString> 異動区分S,
             boolean 削除含める) {
         this.帳票ID = 帳票ID;
@@ -95,7 +94,7 @@ public class HanyoListKyodoJukyushaShokanProcessParameter implements IBatchProce
      * @return {@link HanyoListKyodoJukyushaShokanMybatisParameter}
      */
     public HanyoListKyodoJukyushaShokanMybatisParameter tomMybatisParameter() {
-        return new HanyoListKyodoJukyushaShokanMybatisParameter(処理対象年月FROM, 処理対象年月TO, 日付抽出区分,
+        return new HanyoListKyodoJukyushaShokanMybatisParameter(処理対象年月FROM, 処理対象年月TO, 保険者コード, 日付抽出区分,
                 異動年月FROM, 異動年月TO, 削除含める, 各異動月の最新のみ, searchKey, 異動区分S);
     }
 }

@@ -406,7 +406,7 @@ public class GemmenGengakuShoHakkoMainHandler {
                         ? RString.EMPTY : RiyoshaFutanDankai.toValue(futanGendogakuNintei.get利用者負担段階()).get名称());
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiKyuSochi().setValue(
                 futanGendogakuNintei.get旧措置者区分() == null || futanGendogakuNintei.get旧措置者区分().isEmpty()
-                        ? RString.EMPTY : KyuSochishaKubun.toValue(futanGendogakuNintei.get旧措置者区分()).get名称());
+                        ? RString.EMPTY : KyuSochishaKubun.toValue(futanGendogakuNintei.get旧措置者区分()).get略称());
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiKyokaiso().setValue(futanGendogakuNintei.is境界層該当者区分() ? 該当 : 非該当);
         div.getFutanGendogakuNintei().getFutanGendogakuNinteiGekihenKanwa().setValue(futanGendogakuNintei.is激変緩和措置対象者区分() ? 対象者 : 対象者以外);
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiShokuhi().setValue(futanGendogakuNintei.get食費負担限度額());

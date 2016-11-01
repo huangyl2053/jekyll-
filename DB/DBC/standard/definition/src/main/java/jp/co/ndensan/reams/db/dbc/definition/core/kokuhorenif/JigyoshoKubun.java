@@ -16,27 +16,31 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum JigyoshoKubun {
 
     /**
-     * コード:7 名称:指定
+     * コード:7 名称:指定事業所 略称:指定 国保連送付コード:1
      */
-    指定事業所("7", "指定"),
+    指定事業所("7", "指定事業所", "指定", "1"),
     /**
-     * コード:8 名称:基準該当
+     * コード:8 名称:基準該当事業所 略称:基準該当 国保連送付コード;2
      */
-    基準該当事業所("8", "基準該当"),
+    基準該当事業所("8", "基準該当事業所", "基準該当", "2"),
     /**
-     * コード:9 名称:地域密着
+     * コード:9 名称:地域密着型サービス事業所 略称:地域密着 国保連送付コード;5
      */
-    地域密着型サービス事業所("9", "地域密着"),
+    地域密着型サービス事業所("9", "地域密着型サービス事業所", "地域密着", "5"),
     /**
-     * コード:A 名称:総合事業
+     * コード:A 名称:介護予防日常生活支援総合事業事業所 略称:総合事業 国保連送付コード;9
      */
-    介護予防日常生活支援総合事業事業所("A", "総合事業");
+    介護予防日常生活支援総合事業事業所("A", "介護予防日常生活支援総合事業事業所", "総合事業", "9");
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
+    private final RString kokuhorenSofuCode;
 
-    private JigyoshoKubun(String code, String fullname) {
+    private JigyoshoKubun(String code, String fullname, String shortName, String kokuhorenSofuCode) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
+        this.kokuhorenSofuCode = new RString(kokuhorenSofuCode);
     }
 
     /**
@@ -55,6 +59,24 @@ public enum JigyoshoKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 事業所区分の略称を返します。
+     *
+     * @return 事業所区分の略称
+     */
+    public RString get略称() {
+        return shortName;
+    }
+
+    /**
+     * 国保連送付コードを返します。
+     *
+     * @return 国保連送付コード
+     */
+    public RString get国保連送付コード() {
+        return kokuhorenSofuCode;
     }
 
     /**

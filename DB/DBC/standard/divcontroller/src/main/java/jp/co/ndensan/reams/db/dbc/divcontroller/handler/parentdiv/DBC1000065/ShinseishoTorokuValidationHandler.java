@@ -29,6 +29,7 @@ public class ShinseishoTorokuValidationHandler {
     private static final RString 異動分の処理年度 = new RString("異動分の処理年度");
     private static final RString 世帯員把握基準日 = new RString("世帯員把握基準日");
     private static final RString 平成27年度以降 = new RString("平成27年度以降");
+    private static final RString 出力対象 = new RString("出力対象");
     private static final RString 処理年度の範囲 = new RString("処理年度xx8月1日から処理年度aaa7月31日の範囲");
     private static final RString 引数_XX = new RString("xx");
     private static final RString 引数_AAA = new RString("aaa");
@@ -70,6 +71,19 @@ public class ShinseishoTorokuValidationHandler {
                         .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).toDateString())
                 .replace(引数_AAA, 処理年度.plusYear(INDEX_1).wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).toDateString())), div.getTxtSetaiinHaakuKijunYMD()));
+        return validPairs;
+    }
+
+    /**
+     * 出力対象基準日のバリデーションチェック。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs 出力対象チェックValidate() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(
+                new ShinseishoTorokuValidationMessages(
+                        UrErrorMessages.未入力, 出力対象.toString()), div.getChkIchiranhyoCsv()));
         return validPairs;
     }
 

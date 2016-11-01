@@ -45,7 +45,7 @@ public class HihokenshaNoFubanHohoTest extends DbaTestBase {
 
     @Test
     public void 引数に5を指定した場合_toValueは_自動連番MCD10付番を返す() {
-        assertThat(HihokenshaNoFubanHoho.toValue(new RString("5")), is(HihokenshaNoFubanHoho.自動連番MCD10付番
+        assertThat(HihokenshaNoFubanHoho.toValue(new RString("5")), is(HihokenshaNoFubanHoho.自動連番_MCD10付番
         ));
     }
 
@@ -71,7 +71,7 @@ public class HihokenshaNoFubanHohoTest extends DbaTestBase {
 
     @Test
     public void 自動連番MCD10付番を指定した場合_getコードは_5を返す() {
-        assertThat(HihokenshaNoFubanHoho.自動連番MCD10付番.getコード(), is(new RString("5"))
+        assertThat(HihokenshaNoFubanHoho.自動連番_MCD10付番.getコード(), is(new RString("5"))
         );
     }
 
@@ -97,7 +97,7 @@ public class HihokenshaNoFubanHohoTest extends DbaTestBase {
 
     @Test
     public void 自動連番MCD10付番を指定した場合_get名称は_自動連番_MCD10付番を返す() {
-        assertThat(HihokenshaNoFubanHoho.自動連番MCD10付番.get名称(), is(new RString("自動連番_MCD10付番"))
+        assertThat(HihokenshaNoFubanHoho.自動連番_MCD10付番.get名称(), is(new RString("自動連番_MCD10付番"))
         );
     }
 
@@ -123,7 +123,7 @@ public class HihokenshaNoFubanHohoTest extends DbaTestBase {
 
     @Test
     public void 自動連番MCD10付番を指定した場合_get略称は_自動連番MCD10付番を返す() {
-        assertThat(HihokenshaNoFubanHoho.自動連番MCD10付番.get略称(), is(new RString("自動連番＋MCD10付番"))
+        assertThat(HihokenshaNoFubanHoho.自動連番_MCD10付番.get略称(), is(new RString("自動連番＋MCD10付番"))
         );
     }
 

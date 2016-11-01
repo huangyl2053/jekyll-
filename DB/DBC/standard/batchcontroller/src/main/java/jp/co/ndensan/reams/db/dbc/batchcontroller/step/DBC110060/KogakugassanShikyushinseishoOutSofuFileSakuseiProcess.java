@@ -223,10 +223,11 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
         }
         csvWriter.close();
         do外字類似変換();
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(csvFileName));
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
+                FilesystemName.fromString(csvFileName.replace(拡張子_TEMP, RString.EMPTY)));
         sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(csvFilePath), opts);
+        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(csvFilePath.replace(拡張子_TEMP, RString.EMPTY)), opts);
         returnEntity.set総出力件数(総出力件数);
         returnEntity.setエントリ情報(sfd);
         outReturnEntity.setValue(returnEntity);

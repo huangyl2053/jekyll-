@@ -141,6 +141,7 @@ public class DBC4000011Main {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (削除.equals(状態)) {
             getHandler(div).入力をやめる();
+            ViewStateHolder.put(ViewStateKeys.状態, 検索);
             return ResponseData.of(div).setState(DBC4000011StateName.検索結果表示状態);
         }
         if (!ResponseHolder.isReRequest()) {
@@ -148,6 +149,7 @@ public class DBC4000011Main {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).入力をやめる();
+            ViewStateHolder.put(ViewStateKeys.状態, 検索);
             return ResponseData.of(div).setState(DBC4000011StateName.検索結果表示状態);
         }
         return ResponseData.of(div).respond();

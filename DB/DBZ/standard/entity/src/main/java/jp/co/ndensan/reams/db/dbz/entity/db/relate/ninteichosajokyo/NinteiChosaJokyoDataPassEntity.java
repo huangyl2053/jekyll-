@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * データパッシング用認定調査状況のentityクラスです
  *
- * @reamsid_L DBD-1300-020 huangh
+ * @reamsid_L DBD-1300-010 huangh
  */
 @lombok.Getter
 @lombok.Setter

@@ -109,6 +109,31 @@
         )AS temp
         WHERE temp.rank_number = 1
     </select>
+    <update id="upDate受給者台帳"  parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity">
+        UPDATE rgdb."DbT4001JukyushaDaicho"
+        SET
+        "updateCount" = "updateCount"+1,
+        "rirekiNo" = #{rirekiNo},
+        "shinseiJokyoKubun" = #{shinseiJokyoKubun},
+        "chokkinFlag" = #{chokkinFlag},
+        "shinsakaiIraiYMD" = #{shinsakaiIraiYMD},
+        "yokaigoJotaiKubunCode" = #{yokaigoJotaiKubunCode},
+        "ninteiYukoKikanKaishiYMD" = #{ninteiYukoKikanKaishiYMD},
+        "ninteiYukoKikanShuryoYMD" = #{ninteiYukoKikanShuryoYMD},
+        "ninteiYMD" = #{ninteiYMD},
+        "minashiCode" = #{minashiCode},
+        "chokkinIdoYMD" = #{chokkinIdoYMD},
+        "chokkinIdoJiyuCode" = #{chokkinIdoJiyuCode},
+        "yukoMukoKubun" = #{yukoMukoKubun},
+        "dataKubun" = #{dataKubun},
+        "remban" = #{remban}
+        WHERE
+        "shichosonCode" = #{shichosonCode}
+        AND "hihokenshaNo" = #{hihokenshaNo}
+        AND  "rirekiNo" = cast((cast(#{rirekiNo} as integer) - 1) as character)
+        AND "edaban" = #{edaban}
+        AND "jukyuShinseiJiyu" = #{jukyuShinseiJiyu}
+    </update>
     <resultMap id="resultMap_YokaigoNinteiInterfaceEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd560001.YokaigoNinteiInterfaceEntity" autoMapping="true">
         <id property="受給者台帳Entity.shichosonCode" column="dbT4001JukyushaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <id property="受給者台帳Entity.hihokenshaNo" column="dbT4001JukyushaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>

@@ -66,4 +66,5 @@ public class SogojigyohiSaishinsaKetteiHokenshaInItem {
     private RString 総合事業費_調整_件数;
     private RString 総合事業費_調整_単位数;
     private RString 総合事業費_調整_負担額;
+    private RString 識別コード;
 }

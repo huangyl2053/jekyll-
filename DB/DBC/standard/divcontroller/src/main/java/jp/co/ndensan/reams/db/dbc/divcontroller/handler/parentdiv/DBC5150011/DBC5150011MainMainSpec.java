@@ -49,7 +49,7 @@ public enum DBC5150011MainMainSpec implements IPredicate<DBC5150011MainDiv> {
         public static boolean isサービス種類コード_桁数チェック(DBC5150011MainDiv div) {
             if (div.getRadChushutsuJokenServiceCode().getSelectedKey() != null
                     && !div.getRadChushutsuJokenServiceCode().getSelectedKey().isEmpty()) {
-                return div.getCcdServiceCodeInput().getサービスコード1().length() == 整数_TWO;
+                return div.getCcdServiceShurui().getサービス種類コード().length() == 整数_TWO;
             }
             return true;
         }

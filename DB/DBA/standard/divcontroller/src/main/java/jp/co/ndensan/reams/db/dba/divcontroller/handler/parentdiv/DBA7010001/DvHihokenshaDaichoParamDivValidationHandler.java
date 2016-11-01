@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7010001;
 
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.common.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010001.DvHihokenshaDaichoParamDiv;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -47,40 +47,50 @@ public class DvHihokenshaDaichoParamDivValidationHandler {
     public ValidationMessageControlPairs validateForAction() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (HizukeChushutsuKubun.基準日.getコード().equals(div.getRadChushutsuKijunBi().getSelectedKey())
-            && div.getTxtKijunDate().getValue() == null) {
+                && div.getTxtKijunDate().getValue() == null) {
             validPairs.add(new ValidationMessageControlPair(IdocheckMessages.Validate日付必須, div.getTxtKijunDate()));
         }
         if (HizukeChushutsuKubun.範囲.getコード().equals(div.getRadChushutsuHani().getSelectedKey())
-            && div.getTxtChushutsuHani() != null
-            && div.getTxtChushutsuHani().getFromValue() != null
-            && div.getTxtChushutsuHani().getToValue() != null
-            && div.getTxtChushutsuHani().getToValue().isBefore(div.getTxtChushutsuHani().getFromValue())) {
+                && div.getTxtChushutsuHani() != null
+                && div.getTxtChushutsuHani().getFromValue() != null
+                && div.getTxtChushutsuHani().getToValue() != null
+                && div.getTxtChushutsuHani().getToValue().isBefore(div.getTxtChushutsuHani().getFromValue())) {
             validPairs.add(new ValidationMessageControlPair(IdocheckMessages.Validate日付不正, div.getTxtChushutsuHani()));
         }
 
-        /** 宛名の住所Check */
+        /**
+         * 宛名の住所Check
+         */
         if (Chiku.住所.getコード().equals(div.getCcdHanyoListAtenaSelect().get地区().getコード())
-            && canBeUsedコード範囲(div.getCcdHanyoListAtenaSelect().get住所開始(), div.getCcdHanyoListAtenaSelect().get住所終了())) {
+                && canBeUsedコード範囲(div.getCcdHanyoListAtenaSelect().get住所開始(), div.getCcdHanyoListAtenaSelect().get住所終了())) {
             validPairs.add(new ValidationMessageControlPair(IdocheckMessages.Validate大小関係不正住所, div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div()));
         }
-        /** 宛名の行政区Check */
+        /**
+         * 宛名の行政区Check
+         */
         if (Chiku.行政区.getコード().equals(div.getCcdHanyoListAtenaSelect().get地区().getコード())
-            && canBeUsedコード範囲(div.getCcdHanyoListAtenaSelect().get行政区開始(), div.getCcdHanyoListAtenaSelect().get行政区終了())) {
+                && canBeUsedコード範囲(div.getCcdHanyoListAtenaSelect().get行政区開始(), div.getCcdHanyoListAtenaSelect().get行政区終了())) {
             validPairs.add(new ValidationMessageControlPair(IdocheckMessages.Validate大小関係不正行政区, div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div()));
         }
-        /** 宛名の地区１Check */
+        /**
+         * 宛名の地区１Check
+         */
         if (Chiku.地区.getコード().equals(div.getCcdHanyoListAtenaSelect().get地区().getコード())
-            && canBeUsedコード範囲(div.getCcdHanyoListAtenaSelect().get地区１開始(), div.getCcdHanyoListAtenaSelect().get地区１終了())) {
+                && canBeUsedコード範囲(div.getCcdHanyoListAtenaSelect().get地区１開始(), div.getCcdHanyoListAtenaSelect().get地区１終了())) {
             validPairs.add(new ValidationMessageControlPair(IdocheckMessages.Validate大小関係不正地区１, div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div()));
         }
-        /** 宛名の地区２Check */
+        /**
+         * 宛名の地区２Check
+         */
         if (Chiku.地区.getコード().equals(div.getCcdHanyoListAtenaSelect().get地区().getコード())
-            && canBeUsedコード範囲(div.getCcdHanyoListAtenaSelect().get地区２開始(), div.getCcdHanyoListAtenaSelect().get地区２終了())) {
+                && canBeUsedコード範囲(div.getCcdHanyoListAtenaSelect().get地区２開始(), div.getCcdHanyoListAtenaSelect().get地区２終了())) {
             validPairs.add(new ValidationMessageControlPair(IdocheckMessages.Validate大小関係不正地区２, div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div()));
         }
-        /** 宛名の地区３Check */
+        /**
+         * 宛名の地区３Check
+         */
         if (Chiku.地区.getコード().equals(div.getCcdHanyoListAtenaSelect().get地区().getコード())
-            && canBeUsedコード範囲(div.getCcdHanyoListAtenaSelect().get地区３開始(), div.getCcdHanyoListAtenaSelect().get地区３終了())) {
+                && canBeUsedコード範囲(div.getCcdHanyoListAtenaSelect().get地区３開始(), div.getCcdHanyoListAtenaSelect().get地区３終了())) {
             validPairs.add(new ValidationMessageControlPair(IdocheckMessages.Validate大小関係不正地区３, div.getCcdHanyoListAtenaSelect().get宛名抽出条件子Div()));
         }
         return validPairs;

@@ -9,9 +9,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -25,9 +22,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HenKouData {
 
+    private RString 申請情報_証記載保険者番号;
+    private RString 申請情報_申請書管理番号;
+    private RString 申請情報_被保険者番号;
+    private AtenaKanaMeisho 申請情報_被保険者ｶﾅ氏名;
+    private AtenaMeisho 申請情報_被保険者漢字氏名;
+    private FlexibleDate 申請情報_認定申請年月日;
+    private Code 申請情報_申請区分_申請時コード;
     private RString 項番;
     private RString ステータス;
-    private ShikibetsuCode 識別コード;
+    private RString 識別コード;
     private RString 保険者番号;
     private RString 被保険者番号;
     private FlexibleDate 認定申請日;
@@ -42,9 +46,9 @@ public class HenKouData {
     private Code 性別コード;
     private AtenaKanaMeisho 被保険者ｶﾅ氏名;
     private AtenaMeisho 被保険者漢字氏名;
-    private YubinNo 郵便番号;
+    private RString 郵便番号;
     private AtenaJusho 住所;
-    private TelNo 電話番号;
+    private RString 電話番号;
     private RString 病院施設等の名称;
     private RString 病院施設等の所在地;
     private RString 前回の認定審査会結果;
@@ -59,7 +63,7 @@ public class HenKouData {
     private RString 意見書_伝達能力;
     private RString 意見書_食事行為;
     private RString 意見書_認知症高齢者の日常生活自立度;
-   private FlexibleDate 調査依頼日;
+    private FlexibleDate 調査依頼日;
     private FlexibleDate 調査実施日;
     private RString 指定居宅介護支援事業者等番号;
     private RString 委託区分;
@@ -353,5 +357,4 @@ public class HenKouData {
     private Code 前回識別コード;
     private RString 認定審査会意見等;
     private RString コメント等;
-
 }

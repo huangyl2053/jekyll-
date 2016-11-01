@@ -240,7 +240,7 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
         RString 訂正区分 = div.getRadTeiseiKubunCode().getSelectedKey();
         if ((KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
                 && 訂正区分_修正.equals(訂正区分) && 基本送付情報追加チェック)
-                || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
+                || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
                 && 訂正区分_削除.equals(訂正区分) && 基本送付情報削除チェック)
                 || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
                 && 基本送付情報追加チェック)) {
@@ -274,7 +274,7 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
         RString 訂正区分 = div.getRadTeiseiKubunCode().getSelectedKey();
         if ((KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
                 && 訂正区分_修正.equals(訂正区分) && 償還送付情報追加チェック)
-                || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
+                || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
                 && 訂正区分_削除.equals(訂正区分) && 償還送付情報削除チェック)
                 || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
                 && 償還送付情報追加チェック)) {
@@ -301,13 +301,13 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
         List<RString> 高額送付情報追加チェックボックス = div.getChkKogakuSofuAdd().getSelectedKeys();
         boolean 高額送付情報追加チェック = (!高額送付情報追加チェックボックス.isEmpty()
                 && チェックボックス_KEY.equals(高額送付情報追加チェックボックス.get(NUM_ZERO)));
-        List<RString> 高額送付情報削除チェックボックス = div.getChkShokanSofuDelete().getSelectedKeys();
+        List<RString> 高額送付情報削除チェックボックス = div.getChkKogakuSofuDelete().getSelectedKeys();
         boolean 高額送付情報削除チェック = (!高額送付情報削除チェックボックス.isEmpty()
                 && チェックボックス_KEY.equals(高額送付情報削除チェックボックス.get(NUM_ZERO)));
         RString 訂正区分 = div.getRadTeiseiKubunCode().getSelectedKey();
         if ((KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
                 && 訂正区分_修正.equals(訂正区分) && 高額送付情報追加チェック)
-                || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
+                || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
                 && 訂正区分_削除.equals(訂正区分) && 高額送付情報削除チェック)
                 || (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.sakujyo.equals(div.getMode_DisplayMode())
                 && 高額送付情報追加チェック)) {
@@ -340,9 +340,18 @@ public class KyodoJukyushaIdoRenrakuhyoDivValidationHandler {
         if (KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei.equals(div.getMode_DisplayMode())
                 && 修正.equals(div.getKyodoJukyushaIdoRenrakuhyoTeisei().getRadTeiseiKubunCode().getSelectedValue())) {
             KyodoJukyushaIdoRenrakuhyoHandler hander = new KyodoJukyushaIdoRenrakuhyoHandler();
-            if (!((hander.is高額送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 高額送付情報Flag))
-                    || (hander.is基本送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 基本送付情報Flag))
-                    || (hander.is償還送付情報変更あり(初期化異動情報Entity, 画面項目異動情報Entity, 償還送付情報変Flag)))) {
+            if (!((初期化異動情報Entity.get高額情報Entity() != null
+                    && hander.is高額送付情報変更あり(初期化異動情報Entity.get高額情報Entity().get被保険者番号(),
+                            初期化異動情報Entity.get高額情報Entity().get異動年月日(),
+                            初期化異動情報Entity.get高額情報Entity().get履歴番号(), 画面項目異動情報Entity, 高額送付情報Flag))
+                    || (初期化異動情報Entity.get基本情報Entity() != null
+                    && hander.is基本送付情報変更あり(初期化異動情報Entity.get基本情報Entity().get被保険者番号(),
+                            初期化異動情報Entity.get基本情報Entity().get異動年月日(),
+                            初期化異動情報Entity.get基本情報Entity().get履歴番号(), 画面項目異動情報Entity, 基本送付情報Flag))
+                    || (初期化異動情報Entity.get償還情報Entity() != null
+                    && hander.is償還送付情報変更あり(初期化異動情報Entity.get償還情報Entity().get被保険者番号(),
+                            初期化異動情報Entity.get償還情報Entity().get異動年月日(),
+                            初期化異動情報Entity.get償還情報Entity().get履歴番号(), 画面項目異動情報Entity, 償還送付情報変Flag)))) {
                 validPairs.add(new ValidationMessageControlPair(ValidationMessages.修正有無チェック));
             }
         }

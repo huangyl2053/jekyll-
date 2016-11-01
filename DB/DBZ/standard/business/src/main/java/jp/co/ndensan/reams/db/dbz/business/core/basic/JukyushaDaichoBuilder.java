@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link JukyushaDaicho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBZ-9999-011 chengsanyuan
  */
 public class JukyushaDaichoBuilder {
 
@@ -303,7 +305,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類01(ServiceShuruiCode 指定サービス種類01) {
-        requireNonNull(指定サービス種類01, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類01"));
         entity.setShiteiServiceShurui01(指定サービス種類01);
         return this;
     }
@@ -315,7 +316,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類02(ServiceShuruiCode 指定サービス種類02) {
-        requireNonNull(指定サービス種類02, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類02"));
         entity.setShiteiServiceShurui02(指定サービス種類02);
         return this;
     }
@@ -327,7 +327,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類03(ServiceShuruiCode 指定サービス種類03) {
-        requireNonNull(指定サービス種類03, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類03"));
         entity.setShiteiServiceShurui03(指定サービス種類03);
         return this;
     }
@@ -339,7 +338,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類04(ServiceShuruiCode 指定サービス種類04) {
-        requireNonNull(指定サービス種類04, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類04"));
         entity.setShiteiServiceShurui04(指定サービス種類04);
         return this;
     }
@@ -351,7 +349,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類05(ServiceShuruiCode 指定サービス種類05) {
-        requireNonNull(指定サービス種類05, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類05"));
         entity.setShiteiServiceShurui05(指定サービス種類05);
         return this;
     }
@@ -363,7 +360,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類06(ServiceShuruiCode 指定サービス種類06) {
-        requireNonNull(指定サービス種類06, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類06"));
         entity.setShiteiServiceShurui06(指定サービス種類06);
         return this;
     }
@@ -375,7 +371,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類07(ServiceShuruiCode 指定サービス種類07) {
-        requireNonNull(指定サービス種類07, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類07"));
         entity.setShiteiServiceShurui07(指定サービス種類07);
         return this;
     }
@@ -387,7 +382,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類08(ServiceShuruiCode 指定サービス種類08) {
-        requireNonNull(指定サービス種類08, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類08"));
         entity.setShiteiServiceShurui08(指定サービス種類08);
         return this;
     }
@@ -399,7 +393,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類09(ServiceShuruiCode 指定サービス種類09) {
-        requireNonNull(指定サービス種類09, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類09"));
         entity.setShiteiServiceShurui09(指定サービス種類09);
         return this;
     }
@@ -411,7 +404,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類10(ServiceShuruiCode 指定サービス種類10) {
-        requireNonNull(指定サービス種類10, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類10"));
         entity.setShiteiServiceShurui10(指定サービス種類10);
         return this;
     }
@@ -423,7 +415,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類11(ServiceShuruiCode 指定サービス種類11) {
-        requireNonNull(指定サービス種類11, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類11"));
         entity.setShiteiServiceShurui11(指定サービス種類11);
         return this;
     }
@@ -435,7 +426,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類12(ServiceShuruiCode 指定サービス種類12) {
-        requireNonNull(指定サービス種類12, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類12"));
         entity.setShiteiServiceShurui12(指定サービス種類12);
         return this;
     }
@@ -447,7 +437,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類13(ServiceShuruiCode 指定サービス種類13) {
-        requireNonNull(指定サービス種類13, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類13"));
         entity.setShiteiServiceShurui13(指定サービス種類13);
         return this;
     }
@@ -459,7 +448,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類14(ServiceShuruiCode 指定サービス種類14) {
-        requireNonNull(指定サービス種類14, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類14"));
         entity.setShiteiServiceShurui14(指定サービス種類14);
         return this;
     }
@@ -471,7 +459,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類15(ServiceShuruiCode 指定サービス種類15) {
-        requireNonNull(指定サービス種類15, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類15"));
         entity.setShiteiServiceShurui15(指定サービス種類15);
         return this;
     }
@@ -483,7 +470,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類16(ServiceShuruiCode 指定サービス種類16) {
-        requireNonNull(指定サービス種類16, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類16"));
         entity.setShiteiServiceShurui16(指定サービス種類16);
         return this;
     }
@@ -495,7 +481,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類17(ServiceShuruiCode 指定サービス種類17) {
-        requireNonNull(指定サービス種類17, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類17"));
         entity.setShiteiServiceShurui17(指定サービス種類17);
         return this;
     }
@@ -507,7 +492,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類18(ServiceShuruiCode 指定サービス種類18) {
-        requireNonNull(指定サービス種類18, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類18"));
         entity.setShiteiServiceShurui18(指定サービス種類18);
         return this;
     }
@@ -519,7 +503,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類19(ServiceShuruiCode 指定サービス種類19) {
-        requireNonNull(指定サービス種類19, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類19"));
         entity.setShiteiServiceShurui19(指定サービス種類19);
         return this;
     }
@@ -531,7 +514,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類20(ServiceShuruiCode 指定サービス種類20) {
-        requireNonNull(指定サービス種類20, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類20"));
         entity.setShiteiServiceShurui20(指定サービス種類20);
         return this;
     }
@@ -543,7 +525,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類21(ServiceShuruiCode 指定サービス種類21) {
-        requireNonNull(指定サービス種類21, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類21"));
         entity.setShiteiServiceShurui21(指定サービス種類21);
         return this;
     }
@@ -555,7 +536,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類22(ServiceShuruiCode 指定サービス種類22) {
-        requireNonNull(指定サービス種類22, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類22"));
         entity.setShiteiServiceShurui22(指定サービス種類22);
         return this;
     }
@@ -567,7 +547,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類23(ServiceShuruiCode 指定サービス種類23) {
-        requireNonNull(指定サービス種類23, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類23"));
         entity.setShiteiServiceShurui23(指定サービス種類23);
         return this;
     }
@@ -579,7 +558,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類24(ServiceShuruiCode 指定サービス種類24) {
-        requireNonNull(指定サービス種類24, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類24"));
         entity.setShiteiServiceShurui24(指定サービス種類24);
         return this;
     }
@@ -591,7 +569,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類25(ServiceShuruiCode 指定サービス種類25) {
-        requireNonNull(指定サービス種類25, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類25"));
         entity.setShiteiServiceShurui25(指定サービス種類25);
         return this;
     }
@@ -603,7 +580,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類26(ServiceShuruiCode 指定サービス種類26) {
-        requireNonNull(指定サービス種類26, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類26"));
         entity.setShiteiServiceShurui26(指定サービス種類26);
         return this;
     }
@@ -615,7 +591,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類27(ServiceShuruiCode 指定サービス種類27) {
-        requireNonNull(指定サービス種類27, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類27"));
         entity.setShiteiServiceShurui27(指定サービス種類27);
         return this;
     }
@@ -627,7 +602,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類28(ServiceShuruiCode 指定サービス種類28) {
-        requireNonNull(指定サービス種類28, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類28"));
         entity.setShiteiServiceShurui28(指定サービス種類28);
         return this;
     }
@@ -639,7 +613,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類29(ServiceShuruiCode 指定サービス種類29) {
-        requireNonNull(指定サービス種類29, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類29"));
         entity.setShiteiServiceShurui29(指定サービス種類29);
         return this;
     }
@@ -651,7 +624,6 @@ public class JukyushaDaichoBuilder {
      * @return {@link JukyushaDaichoBuilder}
      */
     public JukyushaDaichoBuilder set指定サービス種類30(ServiceShuruiCode 指定サービス種類30) {
-        requireNonNull(指定サービス種類30, UrSystemErrorMessages.値がnull.getReplacedMessage("指定サービス種類30"));
         entity.setShiteiServiceShurui30(指定サービス種類30);
         return this;
     }

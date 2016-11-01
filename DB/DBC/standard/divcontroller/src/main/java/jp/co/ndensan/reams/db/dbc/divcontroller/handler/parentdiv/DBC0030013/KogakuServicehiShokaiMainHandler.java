@@ -65,8 +65,8 @@ public class KogakuServicehiShokaiMainHandler {
      */
     public void load共有子Div(KogakuServiceData 引き継ぎ情報) {
         // TODO 上の画面の識別コードの取得は問題があります。Redmine#89690
-//        ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+        ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
+//        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
 
         HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保険者番号();
         FlexibleYearMonth サービス提供年月 = 引き継ぎ情報.getサービス提供年月();

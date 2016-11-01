@@ -9,16 +9,18 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinseiResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.DBC0600011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.PnlTotalDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.dgShikyuShinseiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600011.PnlTotalHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
+import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraikettejoho.SyokanbaraiketteJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -29,10 +31,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class PnlTotal {
 
     private static final RString 登録 = new RString("登録");
-    private static final RString 差額登録 = new RString("差額登録");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 参照 = new RString("参照");
+    private static final RString 差止控除区分_20 = new RString("20");
+    private static final RString 差止控除区分_21 = new RString("21");
+    private static final RString 差止控除区分_10 = new RString("10");
 
     /**
      * 画面初期化
@@ -52,12 +56,6 @@ public class PnlTotal {
         List<FukushiyouguKonyuhiShikyuShinseiResult> list = FukushiyoguKonyuhiShikyuShinsei.createInstance().
                 getShokanShikyuShinseiList(被保険者番号);
         handler.initializedgShikyuShinseiList(list);
-        if (差額登録.equals(ResponseHolder.getState())) {
-            div.getYoguKonyuhiShikyuShinseiList().getBtnAddShikyuShinsei().setDisabled(true);
-            div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getGridSetting().setIsShowSelectButtonColumn(false);
-            div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getGridSetting().setIsShowDeleteButtonColumn(false);
-            div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getGridSetting().setIsShowModifyButtonColumn(true);
-        }
         return ResponseData.of(div).respond();
     }
 
@@ -90,10 +88,16 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請_登録画面へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_dgShikyuShinseiList_modify(PnlTotalDiv div) {
-        RString 登録状態 = ResponseHolder.getState();
-
-        if (登録状態.equals(差額登録)) {
-            putViewStateHolder(div, 差額登録);
+        SyokanbaraiketteJohoManager manager = SyokanbaraiketteJohoManager.createInstance();
+        HihokenshaNo hihokenshaNo = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        dgShikyuShinseiList_Row 選択行 = div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getActiveRow();
+        FlexibleYearMonth serviceTekyoYM = new FlexibleYearMonth(選択行.getServiceDate());
+        RString seiriNo = 選択行.getTxtSerialNo();
+        RString 差止控除区分 = manager.getShashitomeKojyoKubun(修正, hihokenshaNo, serviceTekyoYM, seiriNo);
+        if (差止控除区分_20.equals(差止控除区分) || 差止控除区分_21.equals(差止控除区分)) {
+            putViewStateHolder(div, 登録);
+        } else if (差止控除区分_10.equals(差止控除区分)) {
+            putViewStateHolder(div, 参照);
         } else {
             putViewStateHolder(div, 修正);
         }

@@ -28,14 +28,19 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.FileReader;
+import jp.co.ndensan.reams.uz.uza.io.ITextReadable;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -63,11 +68,12 @@ public class RenkeiDataTorikomiHandler {
     private static final RString フォーマット_主治医医療機関 = new RString("NCI121");
     private static final RString フォーマット_主治医 = new RString("NCI131");
     private static final RString なし = new RString("0");
-    private static final RString あり = new RString("1");
     private static final RString SJIS = new RString("1");
     private static final RString UTF8 = new RString("2");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString 共有ファイル名 = new RString("要介護認定申請連携データ取込");
+    private static final int 無 = 0;
+    private static final int タイトルINDEX = 1;
     private final RenkeiDataTorikomiDiv div;
     private final RDate 基準日;
 
@@ -124,15 +130,13 @@ public class RenkeiDataTorikomiHandler {
      * 取込みファイルデータを取得します。
      */
     public void getFileData() {
-        if (あり.equals(div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource().get(0).getTotal())) {
-            RString 文字コード = DbBusinessConfig.get(ConfigNameDBE.連携文字コード, 基準日, SubGyomuCode.DBE認定支援);
-            Encode コード = null;
-            if (SJIS.equals(文字コード)) {
-                コード = Encode.SJIS;
-            } else if (UTF8.equals(文字コード)) {
-                コード = Encode.UTF_8;
-            }
-            setRowFileData(コード);
+        RString path = Directory.createTmpDirectory();
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                RDateTime.parse(div.getHiddenFileId().toString())), new FilesystemPath(path));
+        RString filePath = Path.combinePath(path, 要介護認定申請連携データ取込みファイル名);
+        File file = new File(filePath.toString());
+        if (file.exists() && !なし.equals(div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource().get(0).getTotal())) {
+            setRowFileData(set文字コード(), path, filePath);
         }
     }
 
@@ -148,6 +152,7 @@ public class RenkeiDataTorikomiHandler {
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
         SharedFileEntryDescriptor entity = SharedFile.copyToSharedFile(sfd, path, opts);
         div.setPath(entity.getDirectAccessPath());
+        div.setHiddenFileId(new RString(entity.getSharedFileId().toString()));
         return entity;
     }
 
@@ -160,7 +165,12 @@ public class RenkeiDataTorikomiHandler {
         DBE192001_NnteiShinseiInfoUploadParameter batchParameter = new DBE192001_NnteiShinseiInfoUploadParameter();
         List<RString> list = new ArrayList<>();
         List<ShiseiDataParameter> parameterList = new ArrayList<>();
-        batchParameter.set市町村コード(div.getRenkeiDataTorikomiBatchParameter().getListHokennsha().getSelectedItem().get市町村コード().value());
+        RString 市町村コード = div.getRenkeiDataTorikomiBatchParameter().getListHokennsha().getSelectedItem().get市町村コード().value();
+        if (RString.isNullOrEmpty(市町村コード)) {
+            batchParameter.set市町村コード(new RString("000000"));
+        } else {
+            batchParameter.set市町村コード(市町村コード);
+        }
         for (dgTorikomiTaisho_Row row : div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getSelectedItems()) {
             list.add(row.getFileName());
         }
@@ -170,18 +180,17 @@ public class RenkeiDataTorikomiHandler {
             dataParameter.set保険者番号(row.getHokenshano());
             dataParameter.set被保険者番号(row.getHihono());
             dataParameter.set認定申請日(row.getNinteishinseiymd().getValue().toDateString());
-            dataParameter.set申請種別コード(row.getShinseikubunshinseiji());
+            dataParameter.set申請種別コード(NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseikubunshinseiji().toString()).getコード());
             parameterList.add(dataParameter);
         }
         batchParameter.set申請情報データリスト(parameterList);
         batchParameter.set格納パス(div.getPath());
+        batchParameter.set共有ファイルID(RDateTime.parse(div.getHiddenFileId().toString()));
         return batchParameter;
     }
 
-    private void setRowFileData(Encode コード) {
+    private void setRowFileData(Encode コード, RString path, RString filePath) {
         List<dgtorikomidataichiran_Row> list = new ArrayList<>();
-        RString path = DbBusinessConfig.get(ConfigNameDBE.認定申請連携データ出力先, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString filePath = Path.combinePath(path, 要介護認定申請連携データ取込みファイル名);
         try (CsvListReader read = new CsvListReader.InstanceBuilder(Path.combinePath(path, 要介護認定申請連携データ取込みファイル名)).build()) {
             int size = read.readLine().size();
             if (電算標準版_197 == size) {
@@ -308,7 +317,22 @@ public class RenkeiDataTorikomiHandler {
         builder.append(path).append(File.separator).append(ファイル);
         File file = new File(builder.toString());
         if (file.exists()) {
-            row.setTotal(あり);
+            List<RString> list = new ArrayList<>();
+            ITextReadable reader = new FileReader(builder.toRString(), set文字コード());
+            RString stemp;
+            while (true) {
+                stemp = reader.readLine();
+                if (!RString.isNullOrEmpty(stemp)) {
+                    list.add(stemp);
+                } else {
+                    break;
+                }
+            }
+            if (list.size() == 無) {
+                row.setTotal(new RString(list.size()));
+            } else {
+                row.setTotal(new RString(list.size() - タイトルINDEX));
+            }
         } else {
             row.setTotal(なし);
         }
@@ -322,5 +346,16 @@ public class RenkeiDataTorikomiHandler {
         row.setFileName(ファイル名);
         getFileCount(path, ファイル名, row);
         return row;
+    }
+
+    private Encode set文字コード() {
+        RString 文字コード = DbBusinessConfig.get(ConfigNameDBE.連携文字コード, 基準日, SubGyomuCode.DBE認定支援);
+        Encode コード = null;
+        if (SJIS.equals(文字コード)) {
+            コード = Encode.SJIS;
+        } else if (UTF8.equals(文字コード)) {
+            コード = Encode.UTF_8;
+        }
+        return コード;
     }
 }

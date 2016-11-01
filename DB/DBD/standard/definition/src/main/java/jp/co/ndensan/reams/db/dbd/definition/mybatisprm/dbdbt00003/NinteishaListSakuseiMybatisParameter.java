@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.Taisho
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.homon.HobetsuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
@@ -38,7 +39,7 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     private static final RString 法別区分_全て_コード = new RString("0");
     private static final RString 法別区分_施行時_いち = new RString("1");
     private static final RString 法別区分_障害時_に = new RString("2");
-    private static final RString 法別区分_障害時_さん = new RString("3");
+    private static final RString 法別区分_障害時_全額免除 = new RString("3");
     private static final RString 対象期間指定_対象年度_いち = new RString("1");
     private static final RString 対象期間指定_基準日_に = new RString("2");
     private static final RString 対象リスト_認定者リスト_いち = new RString("1");
@@ -62,7 +63,7 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     private boolean is世帯非課税等_市町村民税本人非課税者;
     private boolean is世帯非課税等_老齢福祉年金受給者;
     private boolean is世帯非課税等_生活保護受給者;
-    private RString 世帯表示_表示しない;
+    private boolean 世帯表示_表示しない;
     private RString 減免減額種類_訪問介護利用者負担額減額;
     private RString 有効無効区分_有効;
     private RString 決定区分_承認する;
@@ -86,6 +87,7 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     private ReportId 帳票ID;
     private RDateTime 帳票作成日時;
 
+    private RString 課税区分_非課税;
     private RString psmShikibetsuTaisho;
     private RString 出力順;
 
@@ -131,9 +133,10 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
             RDateTime 帳票作成日時,
             RString psmShikibetsuTaisho,
             RString 出力順) {
-        法別区分障害時 = RString.EMPTY;
-        法別区分施行時 = RString.EMPTY;
-        法別区分障害全額免除 = RString.EMPTY;
+        課税区分_非課税 = KazeiKubun.非課税.getコード();
+        法別区分障害時 = HobetsuKubun.障害時ホームヘルプ.getコード();
+        法別区分施行時 = HobetsuKubun.施行時ホームヘルプ.getコード();
+        法別区分障害全額免除 = HobetsuKubun.障害ヘルプ全額免除.getコード();
         this.対象年度 = 対象年度;
         this.対象年度の開始年月日 = 対象年度の開始年月日;
         this.対象年度の終了年月日 = 対象年度の終了年月日;
@@ -152,14 +155,18 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
         edit対象リスト(対象リスト);
         edit法別区分(法別区分);
         edit世帯非課税等(世帯非課税等);
+        edit世帯表示_表示しない(世帯表示);
         this.世帯課税区分_非課税 = SetaiKazeiKubun.非課税.getコード();
         this.決定区分_承認する = KetteiKubun.承認する.getコード();
         this.減免減額種類_訪問介護利用者負担額減額 = GemmenGengakuShurui.訪問介護利用者負担額減額.getコード();
         this.有効無効区分_有効 = YukoMukoKubun.有効.getコード();
-        this.世帯表示_表示しない = SetaiHyoji.表示しない.getコード();
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.出力順 = 出力順;
 
+    }
+
+    private void edit世帯表示_表示しない(SetaiHyoji 世帯表示) {
+        世帯表示_表示しない = SetaiHyoji.表示しない.equals(世帯表示);
     }
 
     private void edit対象期間指定(TaishoKikan 対象期間指定) {
@@ -186,15 +193,12 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
                 is法別区分_全て = true;
             }
             if (法別区分_施行時_いち.equals(法別区分.getコード())) {
-                法別区分施行時 = 法別区分_施行時_いち;
                 is法別区分_施行時 = true;
             }
             if (法別区分_障害時_に.equals(法別区分.getコード())) {
-                法別区分障害時 = 法別区分_障害時_に;
                 is法別区分_障害時 = true;
             }
-            if (法別区分_障害時_さん.equals(法別区分.getコード())) {
-                法別区分障害全額免除 = 法別区分_障害時_さん;
+            if (法別区分_障害時_全額免除.equals(法別区分.getコード())) {
                 is法別区分_障害ヘルプ全額免除 = true;
             }
 

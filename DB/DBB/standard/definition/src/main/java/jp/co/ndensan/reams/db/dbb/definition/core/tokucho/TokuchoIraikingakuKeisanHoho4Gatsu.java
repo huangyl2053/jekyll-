@@ -11,18 +11,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum TokuchoIraikingakuKeisanHoho4Gatsu {
 
     /**
-     * コード:1 名称:法定計算方法_6で割る 略称:年額÷12Ｘ仮徴収月数÷年金支給回数
+     * コード:1 名称:年額÷12Ｘ仮徴収月数÷年金支給回数 略称:定義なし
      */
-    年額除12乗仮徴収月数除年金支給回数("1", "法定計算方法_6で割る", "年額÷12Ｘ仮徴収月数÷年金支給回数");
+    法定計算方法_6で割る("1", "年額÷12Ｘ仮徴収月数÷年金支給回数");
 
     private final RString code;
     private final RString fullName;
-    private final RString shortName;
 
-    private TokuchoIraikingakuKeisanHoho4Gatsu(String code, String fullname, String shortName) {
+    private TokuchoIraikingakuKeisanHoho4Gatsu(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
-        this.shortName = new RString(shortName);
     }
 
     /**
@@ -41,15 +39,6 @@ public enum TokuchoIraikingakuKeisanHoho4Gatsu {
      */
     public RString get名称() {
         return fullName;
-    }
-
-    /**
-     * 特徴依頼金額計算方法4月の略称を返します。
-     *
-     * @return 特徴依頼金額計算方法4月の略称
-     */
-    public RString get略称() {
-        return shortName;
     }
 
     /**

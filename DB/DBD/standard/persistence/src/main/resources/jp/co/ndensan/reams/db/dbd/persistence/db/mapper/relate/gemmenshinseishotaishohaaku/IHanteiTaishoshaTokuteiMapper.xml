@@ -97,7 +97,7 @@ and open the template in the editor.
             FROM rgdb."DbT1004ShisetsuNyutaisho"
             WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  A."shikibetsuCode"
             AND "DbT1004ShisetsuNyutaisho"."nyushoYMD"  <![CDATA[<=]]> #{基準日}
-            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" = ''))
             )
         </if>
         <if test="is施設入所区分_入所者以外">
@@ -107,7 +107,7 @@ and open the template in the editor.
             FROM rgdb."DbT1004ShisetsuNyutaisho"
             WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  A."shikibetsuCode"
             AND "DbT1004ShisetsuNyutaisho"."nyushoYMD"  <![CDATA[<=]]> #{基準日}
-            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" = ''))
             )
         </if>
     </select>
@@ -201,7 +201,7 @@ and open the template in the editor.
             FROM rgdb."DbT1004ShisetsuNyutaisho"
             WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  A."shikibetsuCode"
             AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<=]]> #{基準日}
-            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" = ''))
             )
         </if>
         <if test="is施設入所区分_入所者以外">
@@ -211,7 +211,7 @@ and open the template in the editor.
             FROM rgdb."DbT1004ShisetsuNyutaisho"
             WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  A."shikibetsuCode"
             AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<=]]> #{基準日}
-            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" = ''))
             )
         </if>
     </select>
@@ -302,7 +302,7 @@ and open the template in the editor.
             FROM rgdb."DbT1004ShisetsuNyutaisho"
             WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  A."shikibetsuCode"
             AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<=]]> #{基準日}
-            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" = ''))
             )
         </if>
         <if test="is施設入所区分_入所者以外">
@@ -312,7 +312,7 @@ and open the template in the editor.
             FROM rgdb."DbT1004ShisetsuNyutaisho"
             WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  A."shikibetsuCode"
             AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<=]]> #{基準日}
-            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" = ''))
             )
         </if>
     </select>
@@ -403,7 +403,7 @@ and open the template in the editor.
             FROM rgdb."DbT1004ShisetsuNyutaisho"
             WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  A."shikibetsuCode"
             AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<=]]> #{基準日}
-            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" = ''))
             )
         </if>
         <if test="is施設入所区分_入所者以外">
@@ -413,7 +413,7 @@ and open the template in the editor.
             FROM rgdb."DbT1004ShisetsuNyutaisho"
             WHERE "DbT1004ShisetsuNyutaisho"."shikibetsuCode" =  A."shikibetsuCode"
             AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<=]]> #{基準日}
-            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoShoriYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoShoriYMD" = ''))
+            AND ((#{基準日}  <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoYMD") OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL) OR ("DbT1004ShisetsuNyutaisho"."taishoYMD" = ''))
             )
         </if>
     </select>

@@ -212,7 +212,7 @@ public class SokujiFukaKouseiMainHandler {
      * @return is入力があれ
      */
     public boolean is入力があれ() {
-        return !div.getInitData().equals(getPaneItem()) || FLAG_CHANGE.equals(div.getIsDataChange());
+        return !getPaneItem().equals(div.getInitData()) || FLAG_CHANGE.equals(div.getIsDataChange());
     }
 
     private FukaJoho get賦課の情報履歴番号採番(FukaJoho 賦課の情報) {
@@ -660,22 +660,22 @@ public class SokujiFukaKouseiMainHandler {
         if (更正前賦課リスト != null) {
             FukaJoho 更正前最新賦課の情報 = 更正前賦課リスト.get最新賦課の情報();
             FukakonkyoMaeDiv fukakonkyoMaeDiv = div.getTabSokujiKousei().getSokujiKoseiTab1().getSokujikouseiFukakonkyo().getFukakonkyoMae();
-            if (更正前最新賦課の情報.get資格取得日() != null) {
+            if (更正前最新賦課の情報.get資格取得日() != null && !更正前最新賦課の情報.get資格取得日().isEmpty()) {
                 fukakonkyoMaeDiv.getTxtShikakushutokuYMD1().setValue(更正前最新賦課の情報.get資格取得日());
             }
-            if (更正前最新賦課の情報.get資格喪失日() != null) {
+            if (更正前最新賦課の情報.get資格喪失日() != null && !更正前最新賦課の情報.get資格喪失日().isEmpty()) {
                 fukakonkyoMaeDiv.getTxtShikakusoshitsuYMD1().setValue(更正前最新賦課の情報.get資格喪失日().wareki().toDateString());
             }
-            if (更正前最新賦課の情報.get生保開始日() != null) {
+            if (更正前最新賦課の情報.get生保開始日() != null && !更正前最新賦課の情報.get生保開始日().isEmpty()) {
                 fukakonkyoMaeDiv.getTxtSeihoKaishiYMD1().setValue(更正前最新賦課の情報.get生保開始日());
             }
-            if (更正前最新賦課の情報.get生保廃止日() != null) {
+            if (更正前最新賦課の情報.get生保廃止日() != null && !更正前最新賦課の情報.get生保廃止日().isEmpty()) {
                 fukakonkyoMaeDiv.getTxtSeihoShuryoYMD1().setValue(更正前最新賦課の情報.get生保廃止日());
             }
-            if (更正前最新賦課の情報.get老年開始日() != null) {
+            if (更正前最新賦課の情報.get老年開始日() != null && !更正前最新賦課の情報.get老年開始日().isEmpty()) {
                 fukakonkyoMaeDiv.getTxtRonenKaishiYMD1().setValue(更正前最新賦課の情報.get老年開始日());
             }
-            if (更正前最新賦課の情報.get老年廃止日() != null) {
+            if (更正前最新賦課の情報.get老年廃止日() != null && !更正前最新賦課の情報.get老年廃止日().isEmpty()) {
                 fukakonkyoMaeDiv.getTxtRonenShuryoYMD1().setValue(更正前最新賦課の情報.get老年廃止日());
             }
             if (!RString.isNullOrEmpty(更正前最新賦課の情報.get課税区分())) {
@@ -701,23 +701,22 @@ public class SokujiFukaKouseiMainHandler {
         }
         FukaJoho 更正後賦課リストの情報 = 更正後賦課リスト.get最新賦課の情報();
         FukakonkyoAtoDiv fukakonkyoAtoDiv = div.getTabSokujiKousei().getSokujiKoseiTab1().getSokujikouseiFukakonkyo().getFukakonkyoAto();
-        if (更正後賦課リストの情報.get資格取得日() != null) {
-            fukakonkyoAtoDiv.getTxtShikakushutokuYMD2().setValue(更正後賦課リストの情報.get資格取得日());
+        if (更正後賦課リストの情報.get資格取得日() != null && !更正後賦課リストの情報.get資格取得日().isEmpty()) {
             fukakonkyoAtoDiv.getTxtShikakushutokuYMD2().setValue(更正後賦課リストの情報.get資格取得日());
         }
-        if (更正後賦課リストの情報.get資格喪失日() != null) {
+        if (更正後賦課リストの情報.get資格喪失日() != null && !更正後賦課リストの情報.get資格喪失日().isEmpty()) {
             fukakonkyoAtoDiv.getTxtShikakusoshitsuYMD2().setValue(更正後賦課リストの情報.get資格喪失日().wareki().toDateString());
         }
-        if (更正後賦課リストの情報.get生保開始日() != null) {
+        if (更正後賦課リストの情報.get生保開始日() != null && !更正後賦課リストの情報.get生保開始日().isEmpty()) {
             fukakonkyoAtoDiv.getTxtSeihoKaishiYMD2().setValue(更正後賦課リストの情報.get生保開始日());
         }
-        if (更正後賦課リストの情報.get生保廃止日() != null) {
+        if (更正後賦課リストの情報.get生保廃止日() != null && !更正後賦課リストの情報.get生保廃止日().isEmpty()) {
             fukakonkyoAtoDiv.getTxtSeihoShuryoYMD2().setValue(更正後賦課リストの情報.get生保廃止日());
         }
-        if (更正後賦課リストの情報.get老年開始日() != null) {
+        if (更正後賦課リストの情報.get老年開始日() != null && !更正後賦課リストの情報.get老年開始日().isEmpty()) {
             fukakonkyoAtoDiv.getTxtRonenKaishiYMD2().setValue(更正後賦課リストの情報.get老年開始日());
         }
-        if (更正後賦課リストの情報.get老年廃止日() != null) {
+        if (更正後賦課リストの情報.get老年廃止日() != null && !更正後賦課リストの情報.get老年廃止日().isEmpty()) {
             fukakonkyoAtoDiv.getTxtRonenShuryoYMD2().setValue(更正後賦課リストの情報.get老年廃止日());
         }
         if (!RString.isNullOrEmpty(更正後賦課リストの情報.get課税区分())) {
@@ -1342,12 +1341,18 @@ public class SokujiFukaKouseiMainHandler {
         boolean is5期入力可 = Boolean.TRUE;
         boolean is6期入力可 = Boolean.TRUE;
         if (更正前後徴収方法.get更正後() != null) {
-            is2期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法6月());
-            is3期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法8月());
-            is4期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法10月())
-                    || is特徴開始者(更正前後徴収方法.get更正後().get徴収方法12月());
-            is5期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法12月());
-            is6期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法2月());
+            is2期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法4月(),
+                    更正前後徴収方法.get更正後().get徴収方法6月());
+            is3期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法6月(),
+                    更正前後徴収方法.get更正後().get徴収方法8月());
+            is4期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法8月(),
+                    更正前後徴収方法.get更正後().get徴収方法10月())
+                    || is特徴開始者(更正前後徴収方法.get更正後().get徴収方法10月(),
+                            更正前後徴収方法.get更正後().get徴収方法12月());
+            is5期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法10月(),
+                    更正前後徴収方法.get更正後().get徴収方法12月());
+            is6期入力可 = is特徴開始者(更正前後徴収方法.get更正後().get徴収方法12月(),
+                    更正前後徴収方法.get更正後().get徴収方法2月());
         }
         if (is本算定処理済フラグ) {
             boolean is両方とも未処理 = is特徴異動情報作成前であれば(特徴依頼情報作成状況, TokuchoHosokuMonth.特徴10月捕捉)
@@ -1378,9 +1383,10 @@ public class SokujiFukaKouseiMainHandler {
         tablePanel.getTxtTokuchoKoseiGo02().setReadOnly(!is6期入力可 || tablePanel.getTxtTokuchoKoseiGo02().isReadOnly());
     }
 
-    private boolean is特徴開始者(RString 徴収方法) {
-        // TODO 特徴開始者の判定、QA#94818確認中
-        return ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法) || ChoshuHoho.特別徴収_厚生労働省.getコード().equals(徴収方法);
+    private boolean is特徴開始者(RString 徴収方法前月, RString 徴収方法) {
+        return ChoshuHoho.普通徴収.getコード().equals(徴収方法前月)
+                && (ChoshuHoho.特別徴収_地共済.getコード().equals(徴収方法)
+                || ChoshuHoho.特別徴収_厚生労働省.getコード().equals(徴収方法));
     }
 
     private boolean is特徴異動情報作成前であれば(TokuchoIraiJohoSakuseiJokyo 特徴依頼情報作成状況, TokuchoHosokuMonth month) {
@@ -1459,16 +1465,16 @@ public class SokujiFukaKouseiMainHandler {
             div.getSokujikouseiJiyu().setDisplayNone(true);
             return;
         }
-        if (更正後現年度.get調定事由1() != null) {
+        if (!RString.isNullOrEmpty(更正後現年度.get調定事由1())) {
             div.getSokujikouseiJiyu().getTxtChoteiJiyu1().setValue(ChoteiJiyuCode.toValue(更正後現年度.get調定事由1()).get名称());
         }
-        if (更正後現年度.get調定事由2() != null) {
+        if (!RString.isNullOrEmpty(更正後現年度.get調定事由2())) {
             div.getSokujikouseiJiyu().getTxtChoteiJiyu2().setValue(ChoteiJiyuCode.toValue(更正後現年度.get調定事由2()).get名称());
         }
-        if (更正後現年度.get調定事由3() != null) {
+        if (!RString.isNullOrEmpty(更正後現年度.get調定事由3())) {
             div.getSokujikouseiJiyu().getTxtChoteiJiyu3().setValue(ChoteiJiyuCode.toValue(更正後現年度.get調定事由3()).get名称());
         }
-        if (更正後現年度.get調定事由4() != null) {
+        if (!RString.isNullOrEmpty(更正後現年度.get調定事由4())) {
             div.getSokujikouseiJiyu().getTxtChoteiJiyu4().setValue(ChoteiJiyuCode.toValue(更正後現年度.get調定事由4()).get名称());
         }
     }
@@ -1480,52 +1486,51 @@ public class SokujiFukaKouseiMainHandler {
         tblSanteinokisoMaeDiv tablePanel1 = div.getSokujikouseiSanteinoKiso().getTblSanteinokisoMae();
         FukaJoho 更正前現年度 = 更正前賦課リスト.get現年度();
         RString 期間1 = RString.EMPTY;
-        if (更正前現年度.get月割開始年月1() != null) {
+        if (!isYMNullOrEmpty(更正前現年度.get月割開始年月1())) {
             期間1 = 期間1.concat(更正前現年度.get月割開始年月1().wareki().toDateString());
         }
         期間1 = 期間1.concat(カラ);
-        if (更正前現年度.get月割終了年月1() != null) {
+        if (!isYMNullOrEmpty(更正前現年度.get月割終了年月1())) {
             期間1 = 期間1.concat(更正前現年度.get月割終了年月1().wareki().toDateString());
         }
         tablePanel1.getLblKikanMae1().setText(期間1);
-        if (更正前現年度.get月割終了年月1() != null && 更正前現年度.get月割開始年月1() != null) {
-            tablePanel1.getLblTsukisuMae1().setText(new RString(更正前現年度.get月割終了年月1().
-                    getBetweenMonths(更正前現年度.get月割開始年月1())));
+        if (!isYMNullOrEmpty(更正前現年度.get月割終了年月1()) && !isYMNullOrEmpty(更正前現年度.get月割開始年月1())) {
+            tablePanel1.getLblTsukisuMae1().setText(new RString(get期間の月数(更正前現年度.get月割開始年月1(),
+                    更正前現年度.get月割終了年月1())));
         }
-
-        if (更正前現年度.get保険料算定段階1() != null && !RString.isNullOrEmpty(更正前現年度.get保険料算定段階1())) {
+        if (!RString.isNullOrEmpty(更正前現年度.get保険料算定段階1())) {
             HokenryoDankai 更正前保険料段階1 = 保険料段階List.getBy段階区分(更正前現年度.get保険料算定段階1());
             tablePanel1.getLblHokenryoDankaiMae1().setText(更正前保険料段階1.get表記());
             tablePanel1.getLblHokenryoritsuMae1().setText(get金額のカンマ編集(更正前保険料段階1.get保険料率()));
-            if (更正前現年度.get月割終了年月1() != null && 更正前現年度.get月割開始年月1() != null) {
+            if (!isYMNullOrEmpty(更正前現年度.get月割終了年月1()) && !isYMNullOrEmpty(更正前現年度.get月割開始年月1())) {
                 tablePanel1.getLblHokenryoSanshutsuGakuMae1().setText(get金額のカンマ編集(更正前保険料段階1.get保険料率().
-                        multiply(更正前現年度.get月割終了年月1().
-                                getBetweenMonths(更正前現年度.get月割開始年月1())).divide(DECIMAL_12)));
+                        multiply(get期間の月数(更正前現年度.get月割開始年月1(), 更正前現年度.get月割終了年月1())).
+                        divide(DECIMAL_12)));
             }
         }
         tablePanel1.getLblHokenryoGakuMae1().setText(get金額のカンマ編集(更正前現年度.get算定年額保険料1()));
 
         RString 期間2 = RString.EMPTY;
-        if (更正前現年度.get月割開始年月2() != null) {
+        if (!isYMNullOrEmpty(更正前現年度.get月割開始年月2())) {
             期間2 = 期間2.concat(更正前現年度.get月割開始年月2().wareki().toDateString());
         }
         期間2 = 期間2.concat(カラ);
-        if (更正前現年度.get月割終了年月2() != null) {
+        if (!isYMNullOrEmpty(更正前現年度.get月割終了年月2())) {
             期間2 = 期間2.concat(更正前現年度.get月割終了年月2().wareki().toDateString());
         }
         tablePanel1.getLblKikanMae2().setText(期間2);
-        if (更正前現年度.get月割終了年月2() != null && 更正前現年度.get月割開始年月2() != null) {
-            tablePanel1.getLblTsukisuMae2().setText(new RString(更正前現年度.get月割終了年月2().
-                    getBetweenMonths(更正前現年度.get月割開始年月2())));
+        if (!isYMNullOrEmpty(更正前現年度.get月割終了年月2()) && !isYMNullOrEmpty(更正前現年度.get月割開始年月2())) {
+            tablePanel1.getLblTsukisuMae2().setText(new RString(get期間の月数(更正前現年度.get月割開始年月2(),
+                    更正前現年度.get月割終了年月2())));
         }
-        if (更正前現年度.get保険料算定段階2() != null && !RString.isNullOrEmpty(更正前現年度.get保険料算定段階2())) {
+        if (!RString.isNullOrEmpty(更正前現年度.get保険料算定段階2())) {
             HokenryoDankai 更正前保険料段階2 = 保険料段階List.getBy段階区分(更正前現年度.get保険料算定段階2());
             tablePanel1.getLblHokenryoDankaiMae2().setText(更正前保険料段階2.get表記());
             tablePanel1.getLblHokenryoritsuMae2().setText(get金額のカンマ編集(更正前保険料段階2.get保険料率()));
-            if (更正前現年度.get月割終了年月2() != null && 更正前現年度.get月割開始年月2() != null) {
+            if (!isYMNullOrEmpty(更正前現年度.get月割終了年月2()) && !isYMNullOrEmpty(更正前現年度.get月割開始年月2())) {
                 tablePanel1.getLblHokenryoSanshutsuGakuMae2().setText(get金額のカンマ編集(更正前保険料段階2.get保険料率().
-                        multiply(更正前現年度.get月割終了年月2().
-                                getBetweenMonths(更正前現年度.get月割開始年月2())).divide(DECIMAL_12)));
+                        multiply(get期間の月数(更正前現年度.get月割開始年月2(), 更正前現年度.get月割終了年月2())).
+                        divide(DECIMAL_12)));
             }
         }
         tablePanel1.getLblHokenryoGakuMae2().setText(get金額のカンマ編集(更正前現年度.get算定年額保険料2()));
@@ -1535,51 +1540,51 @@ public class SokujiFukaKouseiMainHandler {
         tblSanteinokisoAtoDiv tablePanel2 = div.getSokujikouseiSanteinoKiso().getTblSanteinokisoAto();
         FukaJoho 更正後現年度 = 更正後賦課リスト.get現年度();
         RString 期間1 = RString.EMPTY;
-        if (更正後現年度.get月割開始年月1() != null) {
+        if (!isYMNullOrEmpty(更正後現年度.get月割開始年月1())) {
             期間1 = 期間1.concat(更正後現年度.get月割開始年月1().wareki().toDateString());
         }
         期間1 = 期間1.concat(カラ);
-        if (更正後現年度.get月割終了年月1() != null) {
+        if (!isYMNullOrEmpty(更正後現年度.get月割終了年月1())) {
             期間1 = 期間1.concat(更正後現年度.get月割終了年月1().wareki().toDateString());
         }
         tablePanel2.getLblKikanAto1().setText(期間1);
-        if (更正後現年度.get月割終了年月1() != null && 更正後現年度.get月割開始年月1() != null) {
-            tablePanel2.getLblTsukisuAto1().setText(new RString(更正後現年度.get月割終了年月1().
-                    getBetweenMonths(更正後現年度.get月割開始年月1())));
+        if (!isYMNullOrEmpty(更正後現年度.get月割終了年月1()) && !isYMNullOrEmpty(更正後現年度.get月割開始年月1())) {
+            tablePanel2.getLblTsukisuAto1().setText(new RString(get期間の月数(更正後現年度.get月割開始年月1(),
+                    更正後現年度.get月割終了年月1())));
         }
-        if (更正後現年度.get保険料算定段階1() != null && !RString.isNullOrEmpty(更正後現年度.get保険料算定段階1())) {
+        if (!RString.isNullOrEmpty(更正後現年度.get保険料算定段階1())) {
             HokenryoDankai 更正後保険料段階1 = 保険料段階List.getBy段階区分(更正後現年度.get保険料算定段階1());
             tablePanel2.getLblHokenryoDankaiAto1().setText(更正後保険料段階1.get表記());
             tablePanel2.getLblHokenryoritsuAto1().setText(get金額のカンマ編集(更正後保険料段階1.get保険料率()));
-            if (更正後現年度.get月割終了年月1() != null && 更正後現年度.get月割開始年月1() != null) {
+            if (!isYMNullOrEmpty(更正後現年度.get月割終了年月1()) && !isYMNullOrEmpty(更正後現年度.get月割開始年月1())) {
                 tablePanel2.getLblHokenryoSanshutsuGakuAto1().setText(get金額のカンマ編集(更正後保険料段階1.get保険料率().
-                        multiply(更正後現年度.get月割終了年月1().
-                                getBetweenMonths(更正後現年度.get月割開始年月1())).divide(DECIMAL_12)));
+                        multiply(get期間の月数(更正後現年度.get月割開始年月1(), 更正後現年度.get月割終了年月1())).
+                        divide(DECIMAL_12)));
             }
         }
         tablePanel2.getLblHokenryoGakuAto1().setText(get金額のカンマ編集(更正後現年度.get算定年額保険料1()));
 
         RString 期間2 = RString.EMPTY;
-        if (更正後現年度.get月割開始年月2() != null) {
+        if (!isYMNullOrEmpty(更正後現年度.get月割開始年月2())) {
             期間2 = 期間2.concat(更正後現年度.get月割開始年月2().wareki().toDateString());
         }
         期間2 = 期間2.concat(カラ);
-        if (更正後現年度.get月割終了年月2() != null) {
+        if (!isYMNullOrEmpty(更正後現年度.get月割終了年月2())) {
             期間2 = 期間2.concat(更正後現年度.get月割終了年月2().wareki().toDateString());
         }
         tablePanel2.getLblKikanAto2().setText(期間2);
-        if (更正後現年度.get月割終了年月2() != null && 更正後現年度.get月割開始年月2() != null) {
-            tablePanel2.getLblTsukisuAto2().setText(new RString(更正後現年度.get月割終了年月2().
-                    getBetweenMonths(更正後現年度.get月割開始年月2())));
+        if (!isYMNullOrEmpty(更正後現年度.get月割終了年月2()) && !isYMNullOrEmpty(更正後現年度.get月割開始年月2())) {
+            tablePanel2.getLblTsukisuAto2().setText(new RString(get期間の月数(更正後現年度.get月割開始年月2(),
+                    更正後現年度.get月割終了年月2())));
         }
-        if (更正後現年度.get保険料算定段階2() != null && !RString.isNullOrEmpty(更正後現年度.get保険料算定段階2())) {
+        if (!RString.isNullOrEmpty(更正後現年度.get保険料算定段階2())) {
             HokenryoDankai 更正後保険料段階2 = 保険料段階List.getBy段階区分(更正後現年度.get保険料算定段階2());
             tablePanel2.getLblHokenryoDankaiAto2().setText(更正後保険料段階2.get表記());
             tablePanel2.getLblHokenryoritsuAto2().setText(get金額のカンマ編集(更正後保険料段階2.get保険料率()));
-            if (更正後現年度.get月割終了年月2() != null && 更正後現年度.get月割開始年月2() != null) {
+            if (!isYMNullOrEmpty(更正後現年度.get月割終了年月2()) && !isYMNullOrEmpty(更正後現年度.get月割開始年月2())) {
                 tablePanel2.getLblHokenryoSanshutsuGakuAto2().setText(get金額のカンマ編集(更正後保険料段階2.get保険料率().
-                        multiply(更正後現年度.get月割終了年月2().
-                                getBetweenMonths(更正後現年度.get月割開始年月2())).divide(DECIMAL_12)));
+                        multiply(get期間の月数(更正後現年度.get月割開始年月2(), 更正後現年度.get月割終了年月2())).
+                        divide(DECIMAL_12)));
             }
         }
         tablePanel2.getLblHokenryoGakuAto2().setText(get金額のカンマ編集(更正後現年度.get算定年額保険料2()));
@@ -1640,7 +1645,12 @@ public class SokujiFukaKouseiMainHandler {
         return get金額のカンマ編集(普通徴収の更正前合計);
     }
 
-    private RString get特別徴収の更正後合計() {
+    /**
+     * 特別徴収の更正後合計のメッセージです。
+     *
+     * @return 更正後合計
+     */
+    public RString get特別徴収の更正後合計() {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         Decimal 特別徴収の更正後合計 = getDecimalNull(tablePanel.getTxtTokuchoKoseiGo04().getValue()).add(getDecimalNull(tablePanel.getTxtTokuchoKoseiGo06().getValue())).
                 add(getDecimalNull(tablePanel.getTxtTokuchoKoseiGo08().getValue())).add(getDecimalNull(tablePanel.getTxtTokuchoKoseiGo10().getValue())).
@@ -1648,7 +1658,12 @@ public class SokujiFukaKouseiMainHandler {
         return get金額のカンマ編集(特別徴収の更正後合計);
     }
 
-    private RString get普通徴収の更正後合計() {
+    /**
+     * 普通徴収の更正後合計のメッセージです。
+     *
+     * @return 更正後合計
+     */
+    public RString get普通徴収の更正後合計() {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         Decimal 普通徴収の更正後合計 = getDecimalNull(tablePanel.getTxtFuchoKoseiGo04().getValue()).add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo05().getValue())).
                 add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo06().getValue())).add(getDecimalNull(tablePanel.getTxtFuchoKoseiGo07().getValue())).
@@ -1664,7 +1679,12 @@ public class SokujiFukaKouseiMainHandler {
         return num == null ? Decimal.ZERO : num;
     }
 
-    private RString get特別徴収の増減合計() {
+    /**
+     * 特別徴収の増減合計のメッセージです。
+     *
+     * @return 特別徴収の増減合計
+     */
+    public RString get特別徴収の増減合計() {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         Decimal 特別徴収の増減合計 = getFormat金額(tablePanel.getLblTokuchoZogenValue04().getText()).
                 add(getFormat金額(tablePanel.getLblTokuchoZogenValue06().getText())).
@@ -1675,7 +1695,12 @@ public class SokujiFukaKouseiMainHandler {
         return get金額のカンマ編集(特別徴収の増減合計);
     }
 
-    private RString get普通徴収の増減合計() {
+    /**
+     * 普通徴収の増減のメッセージです。
+     *
+     * @return 普通徴収の増減
+     */
+    public RString get普通徴収の増減合計() {
         SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         Decimal 普通徴収の増減合計 = getFormat金額(tablePanel.getLblFuchoZogenValue04().getText()).
                 add(getFormat金額(tablePanel.getLblFuchoZogenValue05().getText())).
@@ -1951,5 +1976,16 @@ public class SokujiFukaKouseiMainHandler {
         } catch (SystemException | ApplicationException e) {
             return null;
         }
+    }
+
+    private int get期間の月数(FlexibleYearMonth 開始年月, FlexibleYearMonth 終了年月) {
+        if (開始年月.equals(終了年月)) {
+            return NUM_1;
+        }
+        return 終了年月.getBetweenMonths(開始年月) + NUM_1;
+    }
+
+    private boolean isYMNullOrEmpty(FlexibleYearMonth 年月) {
+        return 年月 == null || 年月.isEmpty();
     }
 }

@@ -46,6 +46,7 @@ public class TokuChoHeijunkaKeisanJuneKekkaIchiranSource implements IReportSourc
     public RString kaipage5;
     @ReportItem(name = "listUpper_1", length = 20, order = 16)
     public RString listUpper_1;
+    @ReportPerson(id = "A")
     @ReportItem(name = "listUpper_2", length = 15, order = 17)
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 9, order = 18)
@@ -74,7 +75,7 @@ public class TokuChoHeijunkaKeisanJuneKekkaIchiranSource implements IReportSourc
     public RString listCenter_3;
     @ReportItem(name = "listCenter_4", length = 12, order = 30)
     public RString listCenter_4;
-    @ReportExpandedInfo(id = "A")
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listLower_1", length = 10, order = 31)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 15, order = 32)

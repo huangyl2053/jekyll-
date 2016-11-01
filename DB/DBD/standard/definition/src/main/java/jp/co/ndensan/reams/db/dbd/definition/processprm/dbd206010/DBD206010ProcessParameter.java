@@ -33,11 +33,10 @@ public class DBD206010ProcessParameter implements IBatchProcessParameter {
 
     /**
      *
-     * @param orderBy RString
      * @return DBD206010MybatisParameter
      */
-    public DBD206010MybatisParameter toDBD206010MybatisParameter(RString orderBy) {
+    public DBD206010MybatisParameter toDBD206010MybatisParameter() {
         return new DBD206010MybatisParameter(基準日, 資格喪失者選択, 事業者選択, 事業者番号, 事業者名,
-                orderBy, 処理日時);
+                処理日時);
     }
 }

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7010001;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.CheckForNull;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.common.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoBatchParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
@@ -94,6 +94,7 @@ public class DvHihokenshaDaichoParamDivHandler {
 
     /**
      * 現在選択中の日付抽出区分(直近・基準日・範囲)のコードを返します。
+     *
      * 例外的に、選択されている項目が無い場合、{@link RString#EMPTY}を返却します。
      *
      * @return 日付抽出区分(直近・基準日・範囲)のコード. もしくは、 {@link RString#EMPTY}
@@ -223,7 +224,7 @@ public class DvHihokenshaDaichoParamDivHandler {
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
         if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
-            && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
+                && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
             市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
             市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
         }
