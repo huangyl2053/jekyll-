@@ -121,7 +121,9 @@ public class JukyushaIdoRenrakuhyoEditor implements IJukyushaIdoRenrakuhyoEditor
             source.yukoKikanEDNengo = commonRStringEra(entity.get有効期間終了年月日());
             source.yukoKikanEDYMD = commonRStringYMD(entity.get有効期間終了年月日());
             Boolean 公費負担限額減額 = entity.get公費負担上限額減額();
-            source.kohiFutanJogenGaku = new RString(公費負担限額減額.toString());
+            if (公費負担限額減額 != null) {
+                source.kohiFutanJogenGaku = new RString(公費負担限額減額.toString());
+            }
             source.sikyuGendoKijunGaKu1 = entity.get支給限度基準額1().padRight(RString.HALF_SPACE, SIX);
             source.jogenTekiyoSTNengo1 = commonEra(entity.get上限管理適用開始年月日１());
             source.jogenKaTekiyoSTYMD1 = commonYMD(entity.get上限管理適用開始年月日１());
