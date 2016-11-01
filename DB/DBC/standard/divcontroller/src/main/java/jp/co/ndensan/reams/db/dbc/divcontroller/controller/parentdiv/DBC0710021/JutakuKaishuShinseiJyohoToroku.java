@@ -66,6 +66,7 @@ public class JutakuKaishuShinseiJyohoToroku {
 
     private static final RString 画面モード_審査 = new RString("審査モード");
     private static final RString 画面モード_照会 = new RString("照会モード");
+    private static final RString 参照 = new RString("参照");
     private static final RString モード_照会 = new RString("照会");
     private static final RString 画面モード_削除 = new RString("削除モード");
     private static final RString 画面モード_取消 = new RString("取消モード");
@@ -714,6 +715,17 @@ public class JutakuKaishuShinseiJyohoToroku {
         param.set住宅改修データ(住宅改修データ);
         ViewStateHolder.put(ViewStateKeys.申請情報, param);
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「参考」ボタンをクリックします。
+     *
+     * @param div JutakuKaishuShinseiJyohoTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnKeiyakuNo(JutakuKaishuShinseiJyohoTorokuDiv div) {
+        ViewStateHolder.put(ViewStateKeys.状態, 参照);
+        return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to受領委任契約番号検索).respond();
     }
 
     private boolean is要介護状態区分３段階変更flag(boolean is改修住所重複, List<RString> 要介護状態区分３段階変更チェック) {
