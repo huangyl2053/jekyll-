@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -24,5 +25,6 @@ public class KaigokyufuhiKagoMoshitateshoSoufuFairuSakuseiProcessParameter imple
     private RString コード;
     private FlexibleYearMonth 処理年月;
     private int 件数;
+    private Encode 文字コード;
 
 }

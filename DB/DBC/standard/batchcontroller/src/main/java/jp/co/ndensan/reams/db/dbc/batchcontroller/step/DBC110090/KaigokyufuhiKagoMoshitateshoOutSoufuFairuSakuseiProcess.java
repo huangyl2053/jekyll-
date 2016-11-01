@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110090;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090.KaigokyufuhiKagoMoshitateshoSoufuFairuSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenSofuKokanJohoShikibetsuBango;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.RecordShubetsu;
@@ -25,22 +22,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameter;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameterBuilder;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterAttribute;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterConvertTable;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.ReamsUnicodeToBinaryConverter;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.RecordConvertMaterial;
-import jp.co.ndensan.reams.uz.uza.io.ByteWriter;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.FileReader;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
@@ -62,33 +45,34 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString ファイル名_前 = new RString("10_");
     private static final RString ファイル名_後 = new RString(".csv");
-    private static final RString 国保連送付外字_変換区分_1 = new RString("1");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final RString RSTRING_00 = new RString("00");
     private static final RString RSTRING_000 = new RString("000");
     private static final RString RSTRING_0000000000 = new RString("0000000000");
     private static final RString RSTRING_000001 = new RString("000001");
-    private static final RString 拡張子_TEMP = new RString("temp");
-    private static final RString 拡張子 = new RString("\r\n");
+    private static final RString COPY = new RString("copy");
 
     /**
      * 総出力件数カウンターです。
      */
     public static final RString PARAMETER_OUT_OUTPUTCOUNT;
     /**
-     * エントリ情報Listです。
+     * inputPathです。
      */
-    public static final RString PARAMETER_OUT_OUTPUTENTRY;
+    public static final RString INPUT_PATH;
+    /**
+     * outputPathです。
+     */
+    public static final RString OUTPUT_PATH;
 
     static {
         PARAMETER_OUT_OUTPUTCOUNT = new RString("outputCount");
-        PARAMETER_OUT_OUTPUTENTRY = new RString("outputEntry");
+        INPUT_PATH = new RString("inputPath");
+        OUTPUT_PATH = new RString("outputPath");
     }
 
     private OutputParameter<Integer> outputCount;
-    private OutputParameter<List> outputEntry;
-    private List<SharedFileDescriptor> entryList;
     private KaigokyufuhiKagoMoshitateshoSoufuFairuSakuseiProcessParameter processParameter;
     private SoufuFairuSakuseiMybatisParameter mybatisParameter;
     private int 総出力件数;
@@ -105,12 +89,16 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
     private final RString コード_179 = new RString("179");
 
     private CsvWriter eucCsvWriter;
+    private OutputParameter<RString> inputPath;
+    private OutputParameter<RString> outputPath;
+    private RString 入力ファイルパス;
 
     @Override
     protected void initialize() {
         outputCount = new OutputParameter<>();
-        outputEntry = new OutputParameter<>();
-        entryList = new ArrayList<>();
+        inputPath = new OutputParameter<>();
+        outputPath = new OutputParameter<>();
+        入力ファイルパス = RString.EMPTY;
         mybatisParameter = new SoufuFairuSakuseiMybatisParameter();
         mybatisParameter.set保険者番号(processParameter.get保険者番号());
 
@@ -119,14 +107,14 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
 
         if (コード_173.equals(processParameter.getコード())) {
             出力ファイル名 = ファイル名_前.concat(コード_173).concat(processParameter.get保険者番号().getColumnValue())
-                    .concat(processParameter.get処理年月().toDateString()).concat(拡張子_TEMP).concat(ファイル名_後);
+                    .concat(processParameter.get処理年月().toDateString()).concat(ファイル名_後);
             this.データ種別 = ConfigKeysKokuhorenSofu.過誤申立書情報.getコード();
             this.媒体区分 = DbBusinessConfig
                     .get(ConfigNameDBC.国保連送付媒体_過誤申立Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             this.交換情報識別番号 = KokuhorenSofuKokanJohoShikibetsuBango.介護給付過誤申立書情報.getコード();
         } else if (コード_176.equals(processParameter.getコード())) {
             出力ファイル名 = ファイル名_前.concat(コード_176).concat(processParameter.get保険者番号().getColumnValue())
-                    .concat(processParameter.get処理年月().toDateString()).concat(拡張子_TEMP).concat(ファイル名_後);
+                    .concat(processParameter.get処理年月().toDateString()).concat(ファイル名_後);
             データ種別 = ConfigKeysKokuhorenSofu.総合事業費経過措置過誤申立書情報.getコード();
             this.媒体区分 = DbBusinessConfig
                     .get(ConfigNameDBC.国保連送付媒体_過誤申立総合経措Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
@@ -134,28 +122,36 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
         }
         if (コード_179.equals(processParameter.getコード())) {
             出力ファイル名 = ファイル名_前.concat(コード_179).concat(processParameter.get保険者番号().getColumnValue())
-                    .concat(processParameter.get処理年月().toDateString()).concat(拡張子_TEMP).concat(ファイル名_後);
+                    .concat(processParameter.get処理年月().toDateString()).concat(ファイル名_後);
             データ種別 = ConfigKeysKokuhorenSofu.総合事業費過誤申立書情報.getコード();
             this.媒体区分 = DbBusinessConfig
                     .get(ConfigNameDBC.国保連送付媒体_過誤申立総合Ｆ_媒体区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             this.交換情報識別番号 = KokuhorenSofuKokanJohoShikibetsuBango.総合事業費過誤申立書情報.getコード();
         }
+
+        if (Encode.UTF_8.equals(processParameter.get文字コード())) {
+            RString spoolWorkPath = Path.getTmpDirectoryPath();
+            eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
+            入力ファイルパス = Path.combinePath(spoolWorkPath, COPY.concat(出力ファイル名));
+        } else {
+            入力ファイルパス = eucFilePath;
+        }
+
     }
 
     @Override
     protected IBatchReader createReader() {
+
         reader = new BatchDbReader(READ_DATA_ID, mybatisParameter);
         return reader;
     }
 
     @Override
     protected void createWriter() {
-        RString spoolWorkPath = Path.getTmpDirectoryPath();
-        eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+        eucCsvWriter = new CsvWriter.InstanceBuilder(入力ファイルパス)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8)
+                .setEncode(processParameter.get文字コード())
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(false)
                 .build();
@@ -179,14 +175,10 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
         KogakugassanSoufuFairuSakuseiEndEntity endEntity = this.getEndEntity();
         eucCsvWriter.writeLine(endEntity);
         eucCsvWriter.close();
-        do外字類似変換();
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名.replace(拡張子_TEMP, RString.EMPTY)));
-        sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
+
         outputCount.setValue(総出力件数);
-        entryList.add(sfd);
-        outputEntry.setValue(entryList);
+        outputPath.setValue(eucFilePath);
+        inputPath.setValue(入力ファイルパス);
 
     }
 
@@ -243,39 +235,4 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
         return controlEntity;
     }
 
-    private static CharacterConvertTable getCharacterConvertTable() {
-        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (!国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
-            return CharacterConvertTable.Sjis;
-        } else {
-            return CharacterConvertTable.SjisRuiji;
-        }
-    }
-
-    private void do外字類似変換() {
-        try (FileReader reader = new FileReader(eucFilePath, Encode.UTF_8);
-                ByteWriter writer = new ByteWriter(eucFilePath.replace(拡張子_TEMP, RString.EMPTY))) {
-            for (RString record = reader.readLine(); record != null; record = reader.readLine()) {
-                BinaryCharacterConvertParameter convertParameter = new BinaryCharacterConvertParameterBuilder(
-                        new RecordConvertMaterial(getCharacterConvertTable(), CharacterAttribute.混在))
-                        .enabledConvertError(true)
-                        .build();
-                ReamsUnicodeToBinaryConverter converter = new ReamsUnicodeToBinaryConverter(convertParameter);
-                writer.write(converter.convert(record.concat(拡張子)));
-            }
-            writer.close();
-            reader.close();
-        }
-        deleteEmptyFile(eucFilePath);
-    }
-
-    private void deleteEmptyFile(RString filePath) {
-        if (RString.isNullOrEmpty(filePath)) {
-            return;
-        }
-        File file = new File(filePath.toString());
-        if (file.exists()) {
-            file.getAbsoluteFile().deleteOnExit();
-        }
-    }
 }
