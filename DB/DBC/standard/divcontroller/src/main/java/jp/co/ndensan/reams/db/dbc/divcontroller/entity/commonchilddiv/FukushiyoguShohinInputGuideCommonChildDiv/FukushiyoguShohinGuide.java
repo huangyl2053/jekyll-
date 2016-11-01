@@ -233,7 +233,7 @@ public class FukushiyoguShohinGuide {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             }
         }
-        return ResponseData.of(fukuDiv).respond();
+        return ResponseData.of(fukuDiv).dialogOKClose();
     }
 
     private FukushiyoguShohinInputGuideHandler createHandlerOf(FukushiyoguShohinGuideDiv fukuDiv) {
