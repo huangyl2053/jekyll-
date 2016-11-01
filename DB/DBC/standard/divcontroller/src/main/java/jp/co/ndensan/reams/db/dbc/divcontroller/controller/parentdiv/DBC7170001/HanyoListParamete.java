@@ -71,6 +71,8 @@ public class HanyoListParamete {
      */
     public ResponseData<HanyoListParameteDiv> onClick_btnBatchParameterRestore(HanyoListParameteDiv div) {
         getHandler(div).条件を復元();
+        onChange_Chushutsukikan(div);
+        onClick_btnBatchParameterSave(div);
         return ResponseData.of(div).respond();
     }
 
