@@ -47,18 +47,28 @@ public class TokubetsuChoshuIraiJohoIchiranBodyEditor implements ITokubetsuChosh
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.get被保険者番号())) {
             source.listUpper_1 = 帳票出力対象データ.get被保険者番号();
+        } else {
+            source.listUpper_1 = RString.EMPTY;
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.get年金番号())) {
             source.listUpper_2 = 帳票出力対象データ.get年金番号();
+        } else {
+            source.listUpper_2 = RString.EMPTY;
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.getカナ氏名())) {
             source.listUpper_3 = 帳票出力対象データ.getカナ氏名();
+        } else {
+            source.listUpper_3 = RString.EMPTY;
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.get生年月日())) {
             source.listUpper_4 = DateConverter.toWarekiHalf_Zero(new RDate(帳票出力対象データ.get生年月日().toString()));
+        } else {
+            source.listUpper_4 = RString.EMPTY;
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.get行政区コード())) {
             source.listUpper_5 = 帳票出力対象データ.get行政区コード();
+        } else {
+            source.listUpper_5 = RString.EMPTY;
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.get表示コード1())) {
             source.listUpper_6 = 帳票出力対象データ.get表示コード1();
@@ -72,15 +82,25 @@ public class TokubetsuChoshuIraiJohoIchiranBodyEditor implements ITokubetsuChosh
         set金額(source);
         if (!RString.isNullOrEmpty(帳票出力対象データ.get識別コード())) {
             source.listLower_1 = 帳票出力対象データ.get識別コード();
+        } else {
+            source.listLower_1 = RString.EMPTY;
         }
+        return editNew(source);
+    }
+
+    private TokubetsuChoshuIraiJohoIchiranSource editNew(TokubetsuChoshuIraiJohoIchiranSource source) {
         if (!RString.isNullOrEmpty(帳票出力対象データ.get年金コード())) {
             source.listLower_2 = 帳票出力対象データ.get年金コード();
+        } else {
+            source.listLower_2 = RString.EMPTY;
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.get漢字氏名())) {
             source.listLower_3 = 帳票出力対象データ.get漢字氏名();
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.get性別())) {
             source.listLower_4 = 帳票出力対象データ.get性別();
+        } else {
+            source.listLower_4 = RString.EMPTY;
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.get郵便番号())) {
             source.listLower_5 = 帳票出力対象データ.get郵便番号();
@@ -88,6 +108,7 @@ public class TokubetsuChoshuIraiJohoIchiranBodyEditor implements ITokubetsuChosh
         if (!RString.isNullOrEmpty(帳票出力対象データ.get住所())) {
             source.listLower_6 = 帳票出力対象データ.get住所();
         }
+        source.shichosonCode = RString.EMPTY;
         return source;
     }
 

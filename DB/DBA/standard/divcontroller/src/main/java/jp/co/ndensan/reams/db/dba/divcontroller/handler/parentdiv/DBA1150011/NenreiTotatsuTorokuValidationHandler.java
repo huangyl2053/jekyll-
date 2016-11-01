@@ -57,7 +57,6 @@ public class NenreiTotatsuTorokuValidationHandler {
         } else {
             if (!div.getBatchParamterInfo().getTxtkonkaikaishi().getValue().isValid()
                     || !div.getBatchParamterInfo().getTxtkonkaishuryo().getValue().isValid()) {
-                // TODO QA415
                 if (!div.getBatchParamterInfo().getTxtkonkaikaishi().getValue().isValid()) {
                     validPairs.add(new ValidationMessageControlPair(
                             IdocheckMessages.Validate日付不正,
