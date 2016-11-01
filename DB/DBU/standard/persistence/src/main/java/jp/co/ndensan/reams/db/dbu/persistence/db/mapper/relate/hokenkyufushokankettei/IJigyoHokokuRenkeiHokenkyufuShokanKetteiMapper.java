@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hokenkyufushokankettei.J
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.JigyoHokokuShiryouRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.TempDwbTKyufujissekiShukeiKonkyo1Entity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hokenkyufushokankettei.TempDwbTKyufujissekiShukeiKonkyo2Entity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -74,9 +75,18 @@ public interface IJigyoHokokuRenkeiHokenkyufuShokanKetteiMapper {
     void update市町村コードと旧市町村コード();
 
     /**
-     * 一時テーブルより、負担割合区分と負担割合エラーフラグの更新です。
+     * 利用者負担割合明細により、負担割合区分を取得します。
+     *
+     * @return 負担割合区分
      */
-    void update負担割合区分と負担割合エラーフラグ_一回目();
+    RString getFutanWariaiKubun();
+
+    /**
+     * 一時テーブルより、負担割合区分と負担割合エラーフラグの更新です。
+     *
+     * @param futanWariaiKubun 負担割合区分
+     */
+    void update負担割合区分と負担割合エラーフラグ_一回目(RString futanWariaiKubun);
 
     /**
      * 一時テーブルより、負担割合区分と負担割合エラーフラグの更新です。

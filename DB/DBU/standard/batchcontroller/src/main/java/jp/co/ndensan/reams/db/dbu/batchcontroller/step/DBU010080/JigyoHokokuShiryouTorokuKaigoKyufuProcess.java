@@ -191,7 +191,10 @@ public class JigyoHokokuShiryouTorokuKaigoKyufuProcess extends BatchProcessBase<
         mapper.update市町村コードと旧市町村コード();
         mapper.update負担割合年度_1();
         mapper.update負担割合年度_2();
-        mapper.update負担割合区分と負担割合エラーフラグ_一回目();
+        RString 負担割合区分 = mapper.getFutanWariaiKubun();
+        if (!RString.isNullOrEmpty(負担割合区分)) {
+            mapper.update負担割合区分と負担割合エラーフラグ_一回目(負担割合区分);
+        }
         mapper.update負担割合区分と負担割合エラーフラグ_二回目();
         mapper.update利用者負担減免被保険者番号();
         mapper.update0x02と0x03_集計1();
