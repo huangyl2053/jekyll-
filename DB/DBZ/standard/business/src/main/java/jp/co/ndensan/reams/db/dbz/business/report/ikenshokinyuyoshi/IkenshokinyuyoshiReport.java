@@ -22,7 +22,16 @@ public class IkenshokinyuyoshiReport extends Report<IkenshokinyuyoshiReportSourc
 
     private IkenshokinyuyoshiBusiness business;
     private List<IkenshokinyuyoshiBusiness> businessList;
-    private final ReportId id;
+    private ReportId id;
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param businessList 要介護認定主治医意見書記入用紙のBusinessList
+     */
+    public IkenshokinyuyoshiReport(List<IkenshokinyuyoshiBusiness> businessList) {
+        this.businessList = businessList;
+    }
 
     /**
      * インスタンスを生成します。

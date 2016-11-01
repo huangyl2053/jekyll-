@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi;
 
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
@@ -21,7 +20,7 @@ public class IkenshokinyuyoshiKatamenMonoProperty extends ReportPropertyBase<Ike
      * インスタンスを生成します。
      */
     public IkenshokinyuyoshiKatamenMonoProperty() {
-        super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE231001KatamenMono.getReportId());
+        super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE231001_Katamen_Mono.getReportId());
     }
 
 }

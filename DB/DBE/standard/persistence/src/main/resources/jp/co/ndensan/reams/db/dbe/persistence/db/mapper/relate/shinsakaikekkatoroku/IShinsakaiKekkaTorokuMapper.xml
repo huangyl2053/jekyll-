@@ -76,6 +76,7 @@
         ,DbT5102NinteiKekkaJoho."ichijiHanteiKekkaHenkoRiyu"  AS "ichijiHanteiKekkaHenkoRiyu"
         ,DbT5102NinteiKekkaJoho."ninteishinsakaiIkenShurui"  AS "ninteishinsakaiIkenShurui"
         ,DbT5101NinteiShinseiJoho."shinseishoKanriNo"  AS "shinseishoKanriNo"
+        ,DbT5101NinteiShinseiJoho."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode"
         FROM
         rgdb."DbT5502ShinsakaiWariateJoho" DbT5502ShinsakaiWariateJoho
         INNER JOIN
@@ -167,6 +168,7 @@
         <result property="一次判定結果変更理由" column="ichijiHanteiKekkaHenkoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="審査会意見種類" column="ninteishinsakaiIkenShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="厚労省IF識別コード" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
 
     <select resultOrdered="true" id="get介護認定審査会割当情報"

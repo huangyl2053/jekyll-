@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIke
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
+import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.IkenshokinyuyoshiReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoReportSource;
@@ -64,6 +65,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 /**
  * 主治医意見書作成依頼情報の帳票出力管理クラスです。
  *
@@ -82,7 +84,8 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoSakuseiIraiReportOutputService}のインスタンス
      */
     public static ShujiiIkenshoSakuseiIraiReportOutputService createInstance() {
         return InstanceProvider.create(ShujiiIkenshoSakuseiIraiReportOutputService.class);
@@ -223,6 +226,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             }
         }
     }
+
     public void print主治医意見書記入用紙(List<IkenshokinyuyoshiBusiness> 主治医意見書記入用紙List, ReportManager reportManager) {
 //        List<IkenshokinyuyoshiReport> list = new ArrayList<>();
 //        IkenshokinyuyoshiProperty property = new IkenshokinyuyoshiProperty();
@@ -234,7 +238,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
 //            }
 //        }
     }
-    
+
     /**
      * 主治医意見書記入用紙OCRを出力します。
      *
@@ -267,7 +271,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             }
         }
     }
-    
+
     /**
      * 主治医意見書記入用紙を出力します。
      *
@@ -309,7 +313,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             }
         }
     }
-    
+
     /**
      * 主治医意見書作成依頼発行一覧表を出力します。
      *

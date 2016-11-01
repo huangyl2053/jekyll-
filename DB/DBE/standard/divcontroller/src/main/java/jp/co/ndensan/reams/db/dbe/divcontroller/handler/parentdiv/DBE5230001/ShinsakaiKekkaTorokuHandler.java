@@ -185,7 +185,8 @@ public class ShinsakaiKekkaTorokuHandler {
                     business.get一次判定結果変更理由(),
                     RString.EMPTY,
                     business.get申請書管理番号(),
-                    business.get一次判定()
+                    business.get一次判定(),
+                    business.厚労省IF識別コード()
             );
             dataSource.add(row);
             メモフラグ = false;
@@ -426,7 +427,7 @@ public class ShinsakaiKekkaTorokuHandler {
         div.getKobetsuHyojiArea().getDdlNijiHantei();
         div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().clearValue();
         div.getKobetsuHyojiArea().getTxtNinteiKikanTo().clearValue();
-        div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(new RString("key0"));
+        div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedKey(RString.EMPTY);
         div.getKobetsuHyojiArea().getTxtShinsakaiMemo().clearValue();
         div.getKobetsuHyojiArea().getTxtShinsakaiIken().clearValue();
         div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().setSelectedKey(RString.EMPTY);
@@ -465,7 +466,7 @@ public class ShinsakaiKekkaTorokuHandler {
                 .append(row.getHidIchiHenKou());
         return rsb.toRString();
     }
-    
+
     private RString getInputItem() {
         RStringBuilder rsb = new RStringBuilder();
         TextBoxDate kikanFrom = div.getKobetsuHyojiArea().getTxtNinteiKikanFrom();
