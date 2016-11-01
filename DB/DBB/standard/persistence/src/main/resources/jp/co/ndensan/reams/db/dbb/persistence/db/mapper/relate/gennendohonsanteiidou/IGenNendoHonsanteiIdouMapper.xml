@@ -457,7 +457,7 @@
         FROM
             rgdb."DbT1001HihokenshaDaicho" AS A
         INNER JOIN
-            rgdb."DbV2502KaigoShotoku" AS B
+            rgdb."TmpShotoku" AS B
         ON  
             A."shikibetsuCode" = B."shikibetsuCode"
     </select>
