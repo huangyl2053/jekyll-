@@ -40,8 +40,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class JyutakugaisyunaiyoList {
 
-    private static final RString モード_追加 = new RString("登録");
-    private static final RString モード_修正 = new RString("更新");
+    private static final RString モード_追加 = new RString("追加");
+    private static final RString モード_修正 = new RString("修正");
     private static final RString モード_削除 = new RString("削除");
     private static final RString モード_選択 = new RString("選択");
     private static final RString CONMA = new RString(",");
