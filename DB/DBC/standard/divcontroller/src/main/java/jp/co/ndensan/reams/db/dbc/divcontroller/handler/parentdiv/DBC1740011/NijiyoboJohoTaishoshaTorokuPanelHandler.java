@@ -220,10 +220,8 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
      * @param rowList List<dgNijiyoboJohoTaishoIchiran_Row>
      * @param 被保険者番号 HihokenshaNo
      * @param holder NijiYoboJigyoTaishoshaHolder
-     *
-     * @return boolean
      */
-    public boolean 二次予防情報対象一覧のデータを保存する(List<dgNijiyoboJohoTaishoIchiran_Row> rowList,
+    public void 二次予防情報対象一覧のデータを保存する(List<dgNijiyoboJohoTaishoIchiran_Row> rowList,
             HihokenshaNo 被保険者番号, NijiYoboJigyoTaishoshaHolder holder) {
         int 履歴番号MAX = 0;
         for (dgNijiyoboJohoTaishoIchiran_Row row : rowList) {
@@ -271,13 +269,11 @@ public class NijiyoboJohoTaishoshaTorokuPanelHandler {
                 changeItems.add(changeItem);
             }
         }
-        boolean isSuccess = true;
         if (!changeItems.isEmpty()) {
             NijiYoboJigyoTaishoshaManager manager = new NijiYoboJigyoTaishoshaManager();
-            isSuccess = manager.saveOrDeletePhysicalBy二次予防事業対象者(changeItems);
+            manager.saveOrDeletePhysicalBy二次予防事業対象者(changeItems);
         }
         div.getCcdKanryoMessage().setMessage(完了メッセージメイン,
-                div.get被保険者番号(), div.getNijiyoboTaishosha().getCcdKaigoAtenaInfo().get氏名漢字(), isSuccess);
-        return isSuccess;
+                div.get被保険者番号(), div.getNijiyoboTaishosha().getCcdKaigoAtenaInfo().get氏名漢字(), true);
     }
 }
