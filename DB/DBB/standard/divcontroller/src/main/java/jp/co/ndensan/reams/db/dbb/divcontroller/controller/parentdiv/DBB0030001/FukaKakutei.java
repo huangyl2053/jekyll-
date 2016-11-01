@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  *
@@ -35,6 +36,7 @@ public class FukaKakutei {
     private static final RString 異動賦課確定 = new RString("異動賦課確定");
     private static final RString 共通ボタン = new RString("btnFukaKakutei");
     private static final RString 現年度異動賦課確定 = new RString("現年度異動賦課確定");
+    private static final RString MenuID_DBBMN33003 = new RString("DBBMN33003");
 
     /**
      * コンストラクタです。
@@ -50,9 +52,11 @@ public class FukaKakutei {
      * @return ResponseData
      */
     public ResponseData<FukaKakuteiDiv> onLoad(FukaKakuteiDiv div) {
+        RString menuID = ResponseHolder.getMenuID();
         CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
         getHandler(div).賦課年度の設定();
-        if (getHandler(div).処理名_特徴仮算定賦課(基準日時取得(div, 特徴仮算定賦課), 基準日時取得(div, 特徴仮算定賦課確定))) {
+        if (MenuID_DBBMN33003.equals(menuID)
+                && getHandler(div).処理名_特徴仮算定賦課(基準日時取得(div, 特徴仮算定賦課), 基準日時取得(div, 特徴仮算定賦課確定))) {
             return ResponseData.of(div).rootTitle(特徴仮算定賦課確定).respond();
         }
         if (getHandler(div).処理名_普徴仮算定賦課(基準日時取得(div, 普徴仮算定賦課), 基準日時取得(div, 普徴仮算定賦課確定))) {
