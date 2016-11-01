@@ -124,7 +124,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
             ViewStateHolder.put(ViewStateKeys.調定日時リスト, 調定日時List);
             Map<RString, FlexibleYear> 年度Map = getHandler(div).set調定パネル(賦課の情報List, 調定日時List);
             FukaJoho 賦課の情報 = 賦課の情報List.get(0);
-            set発行する帳票(賦課の情報, div, 年度Map.get(調定年度_KEY), 年度Map.get(賦課年度_KEY), 調定日時List);
+            set発行する帳票(賦課の情報, div, 年度Map.get(調定年度_KEY), 年度Map.get(賦課年度_KEY), 調定日時List, true);
         } else {
             getHandler(div).set初期化();
         }
@@ -137,11 +137,12 @@ public class KakushuTsuchishoSakuseiKobetsu {
             KakushuTsuchishoSakuseiKobetsuDiv div,
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
-            List<YMDHMS> 調定日時List) {
+            List<YMDHMS> 調定日時List,
+            boolean is初期状態) {
         List<RString> 発行する帳票リスト = KakushuTsuchishoSakusei.createInstance().get帳票リスト(賦課の情報);
         if (発行する帳票リスト != null && !発行する帳票リスト.isEmpty()) {
             Map<RString, RString> 帳票略称Map = getHandler(div).put発行する帳票リスト(
-                    賦課の情報, 調定年度, 賦課年度, 発行する帳票リスト, 調定日時List);
+                    賦課の情報, 調定年度, 賦課年度, 発行する帳票リスト, 調定日時List, is初期状態);
             ViewStateHolder.put(ViewStateKeys.変更通知書帳票略称, 帳票略称Map.get(変更通知書帳票_略称));
             ViewStateHolder.put(ViewStateKeys.減免通知書帳票略称, 帳票略称Map.get(減免通知書帳票_略称));
             ViewStateHolder.put(ViewStateKeys.徴収猶予通知書帳票略称, 帳票略称Map.get(徴収猶予通知書帳票_略称));
@@ -187,7 +188,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
         Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
         List<YMDHMS> 調定日時List = ViewStateHolder.get(ViewStateKeys.調定日時リスト, List.class);
         FukaJoho 賦課の情報 = getHandler(div).onChange更正後(map, 調定日時List);
-        set発行する帳票(賦課の情報, div, 賦課の情報.get調定年度(), 賦課の情報.get賦課年度(), 調定日時List);
+        set発行する帳票(賦課の情報, div, 賦課の情報.get調定年度(), 賦課の情報.get賦課年度(), 調定日時List, false);
         return ResponseData.of(div).respond();
     }
 

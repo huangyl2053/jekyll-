@@ -96,7 +96,7 @@
         SUBSTRING(DbT3049ShokanJutakuKaishu."serviceCode", 1, 2) = DbT7130KaigoServiceShurui."serviceShuruiCd"
         AND DbT7130KaigoServiceShurui."teikyoKaishiYM" <![CDATA[<=]]> DbT3049ShokanJutakuKaishu."serviceTeikyoYM"
         AND DbT7130KaigoServiceShurui."teikyoshuryoYM" <![CDATA[>=]]> DbT3049ShokanJutakuKaishu."serviceTeikyoYM"
-        LEFT JOIN
+        INNER JOIN
         rgdb."DbT3038ShokanKihon" AS DbT3038ShokanKihon
         ON
         DbT3049ShokanJutakuKaishu."hiHokenshaNo" = DbT3038ShokanKihon."hiHokenshaNo"

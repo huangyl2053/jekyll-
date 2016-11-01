@@ -34,4 +34,5 @@ public class SyokanbaraiketeJohoEntity implements Cloneable, Serializable {
     private RString tableKbn;
     private RString dekidakaKbn;
     private int updateCount;
+    private Decimal hokenKyufuritsu;
 }
