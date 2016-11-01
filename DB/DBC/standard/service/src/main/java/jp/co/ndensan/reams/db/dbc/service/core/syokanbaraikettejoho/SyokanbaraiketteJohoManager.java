@@ -12,23 +12,26 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.SyokanbaraiketteJoho;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.KetteJohoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.SyokanbaraiketeJohoDekidakaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.SyokanbaraiketeJohoEntity;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3045ShokanServicePlan200004Dac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3046ShokanServicePlan200604Dac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3047ShokanServicePlan200904Dac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraikettejoho.ISyokanbaraiketteJohoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitomeEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3034ShokanShinseiDac;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4024ShiharaiHohoHenkoSashitomeDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
@@ -54,6 +57,7 @@ public class SyokanbaraiketteJohoManager {
     private final DbT3046ShokanServicePlan200604Dac 償還払請求サービス計画200604Dac;
     private final DbT3045ShokanServicePlan200004Dac 償還払請求サービス計画200004Dac;
     private final DbT4024ShiharaiHohoHenkoSashitomeDac 支払方法変更差止Dac;
+    private final DbT3034ShokanShinseiDac 償還払支給申請Dac;
     private static final RString モード_登録 = new RString("登録");
     private static final RString テーブル区分_償還払請求集計 = new RString("3");
     private static final RString 出来高区分_非出来高 = new RString("0");
@@ -75,6 +79,7 @@ public class SyokanbaraiketteJohoManager {
         償還払請求サービス計画200604Dac = InstanceProvider.create(DbT3046ShokanServicePlan200604Dac.class);
         償還払請求サービス計画200004Dac = InstanceProvider.create(DbT3045ShokanServicePlan200004Dac.class);
         支払方法変更差止Dac = InstanceProvider.create(DbT4024ShiharaiHohoHenkoSashitomeDac.class);
+        償還払支給申請Dac = InstanceProvider.create(DbT3034ShokanShinseiDac.class);
     }
 
     /**
@@ -87,11 +92,12 @@ public class SyokanbaraiketteJohoManager {
      * @param 償還払請求サービス計画200604Dac 償還払請求サービス計画200604Dac
      * @param 償還払請求サービス計画200004Dac 償還払請求サービス計画200004Dac
      * @param 支払方法変更差止Dac 支払方法変更差止Dac
+     * @param 償還払支給申請Dac 償還払支給申請Dac
      */
     public SyokanbaraiketteJohoManager(MapperProvider mapperProvider, DbT3036ShokanHanteiKekkaDac 償還払支給判定結果Dac,
             DbT3053ShokanShukeiDac 償還払請求集計Dac, DbT3047ShokanServicePlan200904Dac 償還払請求サービス計画200904Dac,
             DbT3046ShokanServicePlan200604Dac 償還払請求サービス計画200604Dac, DbT3045ShokanServicePlan200004Dac 償還払請求サービス計画200004Dac,
-            DbT4024ShiharaiHohoHenkoSashitomeDac 支払方法変更差止Dac) {
+            DbT4024ShiharaiHohoHenkoSashitomeDac 支払方法変更差止Dac, DbT3034ShokanShinseiDac 償還払支給申請Dac) {
         this.mapperProvider = mapperProvider;
         this.償還払支給判定結果Dac = 償還払支給判定結果Dac;
         this.償還払請求集計Dac = 償還払請求集計Dac;
@@ -99,12 +105,14 @@ public class SyokanbaraiketteJohoManager {
         this.償還払請求サービス計画200604Dac = 償還払請求サービス計画200604Dac;
         this.償還払請求サービス計画200004Dac = 償還払請求サービス計画200004Dac;
         this.支払方法変更差止Dac = 支払方法変更差止Dac;
+        this.償還払支給申請Dac = 償還払支給申請Dac;
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link SyokanbaraiketteJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link SyokanbaraiketteJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link SyokanbaraiketteJohoManager}のインスタンス
      */
     public static SyokanbaraiketteJohoManager createInstance() {
         return InstanceProvider.create(SyokanbaraiketteJohoManager.class);
@@ -241,6 +249,24 @@ public class SyokanbaraiketteJohoManager {
             shashitomeKojyoKubun = rsb.toRString();
         }
         return shashitomeKojyoKubun;
+    }
+
+    /**
+     * 償還払支給申請情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @return 償還払支給申請情報
+     */
+    public ShokanShinsei getShokanShinsei(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号) {
+        DbT3034ShokanShinseiEntity entity = 償還払支給申請Dac.selectByKey(被保険者番号, サービス提供年月, 整理番号);
+        if (entity == null) {
+            return null;
+        }
+        return new ShokanShinsei(entity);
     }
 
     private KetteJohoEntity getKetteJohoEntity(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM, RString seiriNo, RString gyomuKbn) {

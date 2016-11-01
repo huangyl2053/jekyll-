@@ -145,4 +145,13 @@ public class SyokanbaraiketteJoho {
     public int getUpdateCount() {
         return entity.getUpdateCount();
     }
+
+    /**
+     * 給付率を取得します。
+     *
+     * @return 給付率
+     */
+    public Decimal get給付率() {
+        return entity.getHokenKyufuritsu();
+    }
 }
