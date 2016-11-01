@@ -30,9 +30,12 @@ public class PrtKaigoFukaTokuchoHeijunkaCore {
      * @return 導入団体クラス
      */
     public IOutputOrder beforeExecuteCore(RString 出力順ID) {
-        return ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
-                SubGyomuCode.DBB介護賦課, 帳票ID,
-                Long.parseLong(出力順ID.toString()));
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            return ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
+                    SubGyomuCode.DBB介護賦課, 帳票ID,
+                    Long.parseLong(出力順ID.toString()));
+        }
+        return null;
     }
 
     /**
