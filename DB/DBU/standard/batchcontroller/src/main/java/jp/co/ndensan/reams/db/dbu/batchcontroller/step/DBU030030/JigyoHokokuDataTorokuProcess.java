@@ -59,9 +59,9 @@ public class JigyoHokokuDataTorokuProcess extends BatchProcessBase<JigyoHokokuDa
     protected void process(JigyoHokokuDataRelateEntity entity) {
         DbT7021JigyoHokokuTokeiDataEntity dbT7021Entity = new DbT7021JigyoHokokuTokeiDataEntity();
         dbT7021Entity.setHokokuYSeireki(new FlexibleYear(processParameter.get報告年度()));
-        dbT7021Entity.setHokokuM(new RString("99"));
+        dbT7021Entity.setHokokuM(new RString("00"));
         dbT7021Entity.setShukeiTaishoYSeireki(new FlexibleYear(processParameter.get集計年度()));
-        dbT7021Entity.setShukeiTaishoM(new RString("99"));
+        dbT7021Entity.setShukeiTaishoM(new RString("00"));
         dbT7021Entity.setToukeiTaishoKubun(entity.getToukeiTaishoKubun());
         dbT7021Entity.setShichosonCode(entity.getShichosonCode());
         dbT7021Entity.setHyoNo(entity.getHyoNo());

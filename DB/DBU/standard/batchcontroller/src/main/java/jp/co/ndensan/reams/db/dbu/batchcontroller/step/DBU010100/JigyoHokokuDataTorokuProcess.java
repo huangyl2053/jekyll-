@@ -32,7 +32,7 @@ public class JigyoHokokuDataTorokuProcess extends BatchProcessBase<JigyoJoukyouH
     private JigyoHokokuGeppoHokenkyufuKogakuGassanProcessParamter processParameter;
     private IJigyoHokokuGeppoHokenkyufuKogakuGassanMapper mapper;
     private static final RString 区分_1 = new RString("1");
-    private static final RString 年報月 = new RString("99");
+    private static final RString 年報月 = new RString("00");
     private static final int 連番_4 = 4;
     @BatchWriter
     private BatchPermanentTableWriter<DbT7021JigyoHokokuTokeiDataEntity> dbT7021EntityWriter;
