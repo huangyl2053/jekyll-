@@ -283,7 +283,7 @@
            収納情報."tsuchishoNo",
            収納情報."k_ki" ASC,
            収納情報.収納ID ASC,
-           収入."shunoId" ASC
+           収入."shunyuYMD" ASC
     </select>
 
     <!--償還未払い情報を取得して、償還未払い情報一時テーブルに登録する-->
